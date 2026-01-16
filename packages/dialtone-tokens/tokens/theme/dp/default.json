@@ -2680,7 +2680,7 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Base default medium text style for main content."
+        "description": "(DEPRECATED) Base default medium text style for main content."
       },
       "md-compact": {
         "value": {
@@ -2691,7 +2691,7 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A tighter-spaced version of medium body style."
+        "description": "(DEPRECATED) A tighter-spaced version of medium body style."
       },
       "sm": {
         "value": {
@@ -2702,7 +2702,7 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Reduced small text style for less prominent or adjacent content."
+        "description": "(DEPRECATED) Reduced small text style for less prominent or adjacent content."
       },
       "sm-compact": {
         "value": {
@@ -2713,7 +2713,7 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A tighter-spaced version of small body style."
+        "description": "(DEPRECATED) A tighter-spaced version of small body style."
       }
     },
     "headline": {
@@ -2726,7 +2726,7 @@
           "textCase": "{font.text-case.uppercase}"
         },
         "type": "typography",
-        "description": "Visually concise and uppercase title text used above a paired headline. Also known as a kicker or overline."
+        "description": "(DEPRECATED) Visually concise and uppercase title text used above a paired headline. Also known as a kicker or overline."
       },
       "sm": {
         "value": {
@@ -2737,7 +2737,7 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Smaller text size for secondary information or subheadings."
+        "description": "(DEPRECATED) Smaller text size for secondary information or subheadings."
       },
       "sm-compact": {
         "value": {
@@ -2748,7 +2748,7 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A tighter-spaced version of small headline style."
+        "description": "(DEPRECATED) A tighter-spaced version of small headline style."
       },
       "sm-soft": {
         "value": {
@@ -2759,7 +2759,7 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A softer font weight version of small headline style."
+        "description": "(DEPRECATED) A softer font weight version of small headline style."
       },
       "sm-soft-compact": {
         "value": {
@@ -2770,7 +2770,7 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A softer font weight, tighter-spaced version of small headline style."
+        "description": "(DEPRECATED) A softer font weight, tighter-spaced version of small headline style."
       },
       "md": {
         "value": {
@@ -2781,7 +2781,7 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Medium-sized base text style for headlines."
+        "description": "(DEPRECATED) Medium-sized base text style for headlines."
       },
       "md-compact": {
         "value": {
@@ -2792,7 +2792,7 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A tighter-spaced version of medium headline style."
+        "description": "(DEPRECATED) A tighter-spaced version of medium headline style."
       },
       "lg": {
         "value": {
@@ -2803,7 +2803,7 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Large text style for headlines to attract attention."
+        "description": "(DEPRECATED) Large text style for headlines to attract attention."
       },
       "lg-soft": {
         "value": {
@@ -2814,7 +2814,7 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A softer font weight version of large headline style."
+        "description": "(DEPRECATED) A softer font weight version of large headline style."
       },
       "lg-compact": {
         "value": {
@@ -2825,7 +2825,7 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A tighter-spaced version of large body style."
+        "description": "(DEPRECATED) A tighter-spaced version of large body style."
       },
       "lg-soft-compact": {
         "value": {
@@ -2836,7 +2836,7 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A softer font weight, tighter spaced version of large headline style."
+        "description": "(DEPRECATED) A softer font weight, tighter spaced version of large headline style."
       },
       "xl": {
         "value": {
@@ -2847,7 +2847,7 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Extra large text style for high importance headlines."
+        "description": "(DEPRECATED) Extra large text style for high importance headlines."
       },
       "xl-compact": {
         "value": {
@@ -2858,7 +2858,7 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A tighter-spaced version of extra large headline style."
+        "description": "(DEPRECATED) A tighter-spaced version of extra large headline style."
       },
       "xxl": {
         "value": {
@@ -2869,7 +2869,7 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Largest text style for extra extra large content."
+        "description": "(DEPRECATED) Largest text style for extra extra large content."
       },
       "xxl-compact": {
         "value": {
@@ -2880,7 +2880,7 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A tighter-spaced version of extra extra large headline style."
+        "description": "(DEPRECATED) A tighter-spaced version of extra extra large headline style."
       }
     },
     "label": {
@@ -3083,7 +3083,8 @@
           "fontSize": "{font.size.500}",
           "lineHeight": "{font.lineHeight.200}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "XXXL headline style"
       },
       "2xl": {
         "value": {
@@ -3092,7 +3093,8 @@
           "fontSize": "{font.size.400}",
           "lineHeight": "{font.lineHeight.200}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "XXL headline style"
       },
       "xl": {
         "value": {
@@ -3101,7 +3103,8 @@
           "fontSize": "{font.size.300}",
           "lineHeight": "{font.lineHeight.400}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "XL headline style"
       },
       "lg": {
         "value": {
@@ -3110,7 +3113,8 @@
           "fontSize": "{font.size.250}",
           "lineHeight": "{font.lineHeight.300}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "Large headline style"
       },
       "md": {
         "value": {
@@ -3119,7 +3123,8 @@
           "fontSize": "{font.size.200}",
           "lineHeight": "{font.lineHeight.400}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "Medium headline style"
       },
       "sm": {
         "value": {
@@ -3128,7 +3133,8 @@
           "fontSize": "{font.size.150}",
           "lineHeight": "{font.lineHeight.300}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "Small headline style"
       },
       "xs": {
         "value": {
@@ -3137,7 +3143,8 @@
           "fontSize": "{font.size.100}",
           "lineHeight": "{font.lineHeight.300}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "Extra small headline style"
       }
     },
     "body": {
@@ -3148,7 +3155,8 @@
           "fontSize": "{font.size.250}",
           "lineHeight": "{font.lineHeight.400}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "Large body style"
       },
       "md": {
         "value": {
@@ -3157,7 +3165,8 @@
           "fontSize": "{font.size.200}",
           "lineHeight": "{font.lineHeight.400}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "Medium (default) body style"
       },
       "sm": {
         "value": {
@@ -3166,7 +3175,8 @@
           "fontSize": "{font.size.150}",
           "lineHeight": "{font.lineHeight.300}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "Small body style"
       },
       "xs": {
         "value": {
@@ -3175,7 +3185,8 @@
           "fontSize": "{font.size.100}",
           "lineHeight": "{font.lineHeight.300}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "Extra small body style"
       }
     },
     "label": {
@@ -3186,7 +3197,8 @@
           "fontSize": "{font.size.250}",
           "lineHeight": "{font.lineHeight.300}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "Large label style"
       },
       "md": {
         "value": {
@@ -3195,7 +3207,8 @@
           "fontSize": "{font.size.200}",
           "lineHeight": "{font.lineHeight.400}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "Medium (default) label style"
       },
       "sm": {
         "value": {
@@ -3204,7 +3217,8 @@
           "fontSize": "{font.size.150}",
           "lineHeight": "{font.lineHeight.400}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "Small label style"
       },
       "xs": {
         "value": {
@@ -3213,7 +3227,8 @@
           "fontSize": "{font.size.100}",
           "lineHeight": "{font.lineHeight.300}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "Extra small label style"
       }
     },
     "code": {
@@ -3224,7 +3239,8 @@
           "fontSize": "{font.size.250}",
           "lineHeight": "{font.lineHeight.200}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "Large code style"
       },
       "md": {
         "value": {
@@ -3233,7 +3249,8 @@
           "fontSize": "{font.size.200}",
           "lineHeight": "{font.lineHeight.200}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "Medium (default) code style"
       },
       "sm": {
         "value": {
@@ -3242,7 +3259,8 @@
           "fontSize": "{font.size.150}",
           "lineHeight": "{font.lineHeight.200}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "Small code style"
       },
       "xs": {
         "value": {
@@ -3251,7 +3269,8 @@
           "fontSize": "{font.size.100}",
           "lineHeight": "{font.lineHeight.200}"
         },
-        "type": "typography"
+        "type": "typography",
+        "description": "Extra small code style"
       }
     }
   },
