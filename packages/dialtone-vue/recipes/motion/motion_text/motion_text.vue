@@ -251,7 +251,11 @@ export default {
         'dt-recipe-motion-text',
         `dt-recipe-motion-text--${this.animationMode}`,
         {
-          'dt-recipe-motion-text--animating': this.isAnimating,
+          // For gradient-in mode, keep animating class until animation is complete
+          // to maintain CSS animations even after isAnimating becomes false
+          'dt-recipe-motion-text--animating': this.isAnimating ||
+            (this.animationMode === 'gradient-in' && !this.animationComplete),
+
           'dt-recipe-motion-text--paused': this.isPaused,
           'dt-recipe-motion-text--looped': this.isLooped,
         },
@@ -441,7 +445,10 @@ export default {
     showNextWord () {
       if (this.isPaused || this.visibleWordCount >= this.words.length) {
         if (this.visibleWordCount >= this.words.length) {
-          this.completeAnimation();
+          // For gradient-in mode, completion is handled by onGradientAnimationEnd
+          if (this.animationMode !== 'gradient-in') {
+            this.completeAnimation();
+          }
         }
         return;
       }
@@ -502,36 +509,17 @@ export default {
       // Only complete when the last word's gradient animation ends
       if (wordIdx !== this.words.length - 1) return;
 
-      // Mark animation as complete
+      // Mark animation as complete and delegate to completeAnimation for loop handling
       this.animationComplete = true;
-      this.isAnimating = false;
-      this.$emit('complete');
-
-      // Handle loop mode
-      if (this.loop) {
-        const timeout = setTimeout(() => {
-          this.reset();
-          this.$nextTick(() => {
-            this.start();
-          });
-        }, 500);
-        this.animationTimeouts.push(timeout);
-      }
+      this.completeAnimation();
     },
 
     /**
      * Complete the animation
      */
     completeAnimation () {
-      // For gradient-in mode, completion is handled by the onGradientAnimationEnd
-      // listener responding to the animationend event, so we don't need to do anything here
-      if (this.animationMode === 'gradient-in' && !this.loop) {
-        return;
-      }
-
       this.isAnimating = false;
       this.clearTimeouts();
-
       this.$emit('complete');
 
       if (this.loop) {
