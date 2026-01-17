@@ -65,7 +65,7 @@
               v-if="animationMode === 'gradient-in' && !animationComplete"
               class="dt-recipe-motion-text__gradient"
               aria-hidden="true"
-              @animationend="onGradientAnimationEnd(wordIdx)"
+              @animationend="onGradientAnimationEnd(wordIdx, $event)"
             >
               <template
                 v-for="(char, charIdx) in word.chars"
@@ -486,20 +486,23 @@ export default {
     },
 
     /**
-     * Detect when gradient-in animation completes to enable removing extra DOM layer (span)
-     * The timing differs from completeAnimation() and this prevents the gradient from being removed too early
+     * Handle gradient animation completion
+     * Filters out child animation events and only responds to the last word's gradient mask animation
      */
-    onGradientAnimationEnd (wordIdx) {
-      if (this.animationMode !== 'gradient-in' || this.animationComplete) {
-        return;
-      }
+    onGradientAnimationEnd (wordIdx, event) {
+      // Early exit: wrong mode or already complete
+      if (this.animationMode !== 'gradient-in' || this.animationComplete) return;
 
-      // Only mark as complete when the last word's gradient animation ends
-      const isLastWord = wordIdx === this.words.length - 1;
-      if (!isLastWord) {
-        return;
-      }
+      // Filter: Only respond to the gradient mask animation, not character animations
+      if (event.animationName !== 'dt-recipe-motion-text-gradient-in-word-reveal') return;
 
+      // Filter: Ignore bubbled events from child elements
+      if (event.target !== event.currentTarget) return;
+
+      // Only complete when the last word's gradient animation ends
+      if (wordIdx !== this.words.length - 1) return;
+
+      // Mark animation as complete
       this.animationComplete = true;
       this.isAnimating = false;
       this.$emit('complete');
@@ -512,7 +515,6 @@ export default {
             this.start();
           });
         }, 500);
-
         this.animationTimeouts.push(timeout);
       }
     },

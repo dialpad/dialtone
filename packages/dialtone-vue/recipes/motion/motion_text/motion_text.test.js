@@ -365,7 +365,12 @@ describe('DtRecipeMotionText Tests', () => {
       // Manually trigger the animationend event on the last gradient layer
       // (simulating CSS animation completion - only last word triggers complete)
       const lastGradientLayer = gradientLayerWords[gradientLayerWords.length - 1];
-      lastGradientLayer.element.dispatchEvent(new Event('animationend'));
+      const animationEndEvent = new Event('animationend', { bubbles: true });
+      // Add animationName property to match what the browser provides
+      Object.defineProperty(animationEndEvent, 'animationName', {
+        value: 'dt-recipe-motion-text-gradient-in-word-reveal',
+      });
+      lastGradientLayer.element.dispatchEvent(animationEndEvent);
       await wrapper.vm.$nextTick();
 
       expect(wrapper.emitted('complete')).toBeTruthy();
