@@ -284,7 +284,7 @@ vueCode='
 <code-well-header class="d-pb32">
   <dt-stack gap="500">
     <dt-stack>
-      <dt-text as="h2" kind="headline" size="xxl">AI that works for you</dt-text>
+      <dt-text as="h2" kind="headline" size="2xl">AI that works for you</dt-text>
       <dt-text kind="body" size="lg">Support customers, drive sales, and collaborate with your team—all in one, beautiful AI-powered app.</dt-text>
     </dt-stack>
     <dt-stack :direction="{ 'default': 'column', 'md': 'row' }" gap="500" align="start">
@@ -308,7 +308,7 @@ vueCode='
 vueCode='
 <dt-stack gap="500">
   <dt-stack>
-    <dt-text as="h2" kind="headline" size="xxl">AI that works for you</dt-text>
+    <dt-text as="h2" kind="headline" size="2xl">AI that works for you</dt-text>
     <dt-text kind="body" size="lg">Support customers, drive sales, and collaborate with your team—all in one, beautiful AI-powered app.</dt-text>
   </dt-stack>
   <dt-stack direction="row" gap="500" align="start">
@@ -379,7 +379,7 @@ Each typography style is expressed through a shorthand `font` property, and its 
     if (!item) return { fontSize: '', lineHeight: '', fontWeight: '', fontWeightName: '' };
 
     // Convert class name to CSS variable prefix
-    // d-text-headline--xxxl → --dt-text-headline-xxxl
+    // d-text-headline--3xl → --dt-text-headline-3xl
     const cssVarPrefix = '--dt-' + item.var.slice(2).replace('--', '-');
 
     const root = document.documentElement;

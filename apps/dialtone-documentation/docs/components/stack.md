@@ -939,7 +939,7 @@ Align items along their text baselines.
       <dt-text kind="body" size="md">Medium body</dt-text>
     </div>
     <div class="d-bgc-moderate-opaque d-p16 d-bar8">
-      <dt-text kind="headline" size="xxl">Large headline</dt-text>
+      <dt-text kind="headline" size="2xl">Large headline</dt-text>
     </div>
   </dt-stack>
 </code-well-header>
@@ -954,7 +954,7 @@ vueCode='
 >
   <dt-text kind="body" size="xs">Small body</dt-text>
   <dt-text kind="body" size="md">Medium body</dt-text>
-  <dt-text kind="headline" size="xxl">Large headline</dt-text>
+  <dt-text kind="headline" size="2xl">Large headline</dt-text>
 </dt-stack>
 '
 showHtmlWarning />

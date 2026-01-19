@@ -10,7 +10,7 @@
         <dt-text
           as="h2"
           kind="headline"
-          size="xxl"
+          size="2xl"
         >
           Kind Examples
         </dt-text>
@@ -126,7 +126,7 @@
         <dt-text
           as="h2"
           kind="headline"
-          size="xxl"
+          size="2xl"
         >
           Strength Examples
         </dt-text>
@@ -149,7 +149,7 @@
                   v-for="item in strengthExamples"
                   :key="item.strength"
                   kind="headline"
-                  size="xxl"
+                  size="2xl"
                   :strength="item.strength"
                 >
                   {{ item.copy }}
@@ -165,7 +165,7 @@
         <dt-text
           as="h2"
           kind="headline"
-          size="xxl"
+          size="2xl"
         >
           Density Examples
         </dt-text>
@@ -206,7 +206,7 @@
         <dt-text
           as="h2"
           kind="headline"
-          size="xxl"
+          size="2xl"
         >
           Tone Examples
         </dt-text>
@@ -254,7 +254,7 @@
         <dt-text
           as="h2"
           kind="headline"
-          size="xxl"
+          size="2xl"
         >
           Alignment Examples
         </dt-text>
@@ -287,7 +287,7 @@
         <dt-text
           as="h2"
           kind="headline"
-          size="xxl"
+          size="2xl"
         >
           Truncation Examples
         </dt-text>
@@ -384,7 +384,7 @@
         <dt-text
           as="h2"
           kind="headline"
-          size="xxl"
+          size="2xl"
         >
           Wrap Examples
         </dt-text>
@@ -418,7 +418,7 @@
         <dt-text
           as="h2"
           kind="headline"
-          size="xxl"
+          size="2xl"
         >
           Trim Examples
         </dt-text>
@@ -440,7 +440,7 @@
           >
             <dt-text
               kind="headline"
-              size="xxxl"
+              size="3xl"
               :text-box-trim="item.textBoxTrim"
               class="d-bgc-moderate-opaque"
             >
@@ -455,7 +455,7 @@
         <dt-text
           as="h2"
           kind="headline"
-          size="xxl"
+          size="2xl"
         >
           Numeric Examples
         </dt-text>

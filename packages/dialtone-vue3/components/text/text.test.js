@@ -66,8 +66,8 @@ describe('DtText', () => {
   });
 
   it.each([
-    ['body', 'xxxl'],
-    ['label', 'xxl'],
+    ['body', '3xl'],
+    ['label', '2xl'],
     ['code', 'xl'],
   ])('throws error for kind="%s" with headline-only size="%s"', (kind, size) => {
     expect(() => mountComponent({ kind, size }))
@@ -75,9 +75,9 @@ describe('DtText', () => {
   });
 
   it('allows headline-only sizes with headline kind', () => {
-    const wrapper = mountComponent({ kind: 'headline', size: 'xxxl' });
+    const wrapper = mountComponent({ kind: 'headline', size: '3xl' });
 
-    expect(wrapper.classes()).toContain('d-text-headline--xxxl');
+    expect(wrapper.classes()).toContain('d-text-headline--3xl');
   });
 
   it('applies truncate class when truncate prop is true', () => {
