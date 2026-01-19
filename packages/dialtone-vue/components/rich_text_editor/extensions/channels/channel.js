@@ -32,6 +32,9 @@ export const ChannelPlugin = Mention.extend({
       locked: {
         default: false,
       },
+      channelKey: {
+        default: '',
+      },
     };
   },
 

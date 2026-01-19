@@ -265,7 +265,7 @@ export default {
      * The only required key is the items function which is used to query the channels for suggestion.
      * items({ query }) => { return [ChannelObject]; }
      * ChannelObject format:
-     * { name: string, id: string, locked: boolean }
+     * { name: string, id: string, locked: boolean, channelKey?: string }
      *
      * When null, it does not add the plugin. Setting locked to true will display a lock rather than hash.
      */
@@ -611,7 +611,8 @@ export default {
           const channelName = node.attrs?.name || '';
           const channelId = node.attrs?.id || '';
           const locked = node.attrs?.locked.toString() || '';
-          return `<!-- @channel: {"id": "${channelId}", "name": "${channelName}", "locked": "${locked}"} -->`;
+          const channelKey = node.attrs?.channelKey || '';
+          return `<!-- @channel: {"id": "${channelId}", "channelKey": "${channelKey}", "name": "${channelName}", "locked": "${locked}"} -->`;
         },
 
         processSlashCommandsNode (node) {
