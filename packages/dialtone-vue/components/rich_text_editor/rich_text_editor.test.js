@@ -352,7 +352,7 @@ describe('DtRichTextEditor tests', () => {
               { type: 'text', text: ' channel' },
             ]);
             const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
-            expect(output).toBe('Check out <!-- @channel: {"id": "general", "name": "general", "locked": "false"} --> channel\n');
+            expect(output).toBe('Check out <!-- @channel: {"id": "general", "channelKey": "", "name": "general", "locked": "false"} --> channel\n');
           });
 
           it('should convert locked channels to markdown comments correctly', async () => {
@@ -369,7 +369,25 @@ describe('DtRichTextEditor tests', () => {
               { type: 'text', text: ' channel' },
             ]);
             const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
-            expect(output).toBe('Check out <!-- @channel: {"id": "dialtone-internal", "name": "dialtone-internal", "locked": "true"} --> channel\n');
+            expect(output).toBe('Check out <!-- @channel: {"id": "dialtone-internal", "channelKey": "", "name": "dialtone-internal", "locked": "true"} --> channel\n');
+          });
+
+          it('should convert channels with channelKey to markdown comments correctly', async () => {
+            const jsonInput = jsonInputBase([
+              { type: 'text', text: 'Check out ' },
+              {
+                type: 'channel',
+                attrs: {
+                  id: 'general',
+                  name: 'general',
+                  locked: false,
+                  channelKey: 'channel-456',
+                },
+              },
+              { type: 'text', text: ' channel' },
+            ]);
+            const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
+            expect(output).toBe('Check out <!-- @channel: {"id": "general", "channelKey": "channel-456", "name": "general", "locked": "false"} --> channel\n');
           });
         });
       });
@@ -639,6 +657,7 @@ describe('DtRichTextEditor tests', () => {
             id: 'general',
             name: 'general',
             locked: false,
+            channelKey: 'ch-123',
           };
 
           await wrapper.setProps({

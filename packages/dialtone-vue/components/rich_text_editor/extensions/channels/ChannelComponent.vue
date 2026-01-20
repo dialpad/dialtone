@@ -55,6 +55,7 @@ export default {
         name: this.$props.node.attrs.name,
         id: this.$props.node.attrs.id,
         locked: this.$props.node.attrs.locked,
+        channelKey: this.$props.node.attrs.channelKey,
       };
       this.$props.editor.emit('channel-click', channelData);
     },

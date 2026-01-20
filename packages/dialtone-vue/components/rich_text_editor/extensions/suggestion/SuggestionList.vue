@@ -128,7 +128,7 @@ export default {
           this.command({ name: item.name, id: item.id, avatarSrc: item.avatarSrc, contactKey: item.contactKey });
           break;
         case 'channel':
-          this.command({ name: item.name, id: item.id, locked: item.locked });
+          this.command({ name: item.name, id: item.id, locked: item.locked, channelKey: item.channelKey });
           break;
         case 'slash-command':
           this.command({ command: item.command });
