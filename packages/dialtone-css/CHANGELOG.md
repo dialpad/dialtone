@@ -1,3 +1,10 @@
+## [8.71.6](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.71.5...dialtone-css/v8.71.6) (2026-01-20)
+
+
+### Bug Fixes
+
+* **Motion Text:** DLT-2885 fix gradient-in character animation ([#1030](https://github.com/dialpad/dialtone/issues/1030)) ([944d4a5](https://github.com/dialpad/dialtone/commit/944d4a5e9706815a62f84c4c55a53da945b685bf))
+
 ## [8.71.5](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.71.4...dialtone-css/v8.71.5) (2026-01-15)
 
 
