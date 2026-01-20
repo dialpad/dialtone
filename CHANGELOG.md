@@ -1,3 +1,10 @@
+## [9.155.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.155.1...dialtone/v9.155.2) (2026-01-20)
+
+
+### Bug Fixes
+
+* **Motion Text:** DLT-2885 fix gradient-in character animation ([#1030](https://github.com/dialpad/dialtone/issues/1030)) ([944d4a5](https://github.com/dialpad/dialtone/commit/944d4a5e9706815a62f84c4c55a53da945b685bf))
+
 ## [9.155.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.155.0...dialtone/v9.155.1) (2026-01-20)
 
 
