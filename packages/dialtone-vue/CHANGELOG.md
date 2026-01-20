@@ -1,3 +1,10 @@
+# 1.0.0 (2026-01-20)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** NO-JIRA add channelKey ([#1031](https://github.com/dialpad/dialtone/issues/1031)) ([c0c3c1e](https://github.com/dialpad/dialtone/commit/c0c3c1eeed46d0d5e3eed5e1091ccd45a06e6ac4))
+
 # [3.199.0](https://github.com/dialpad/dialtone/compare/dialtone-vue3/v3.198.1...dialtone-vue3/v3.199.0) (2026-01-13)
 
 
