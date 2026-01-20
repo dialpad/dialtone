@@ -1,3 +1,10 @@
+## [9.155.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.155.0...dialtone/v9.155.1) (2026-01-20)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** NO-JIRA add channelKey ([#1031](https://github.com/dialpad/dialtone/issues/1031)) ([c0c3c1e](https://github.com/dialpad/dialtone/commit/c0c3c1eeed46d0d5e3eed5e1091ccd45a06e6ac4))
+
 # [9.155.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.154.0...dialtone/v9.155.0) (2026-01-15)
 
 
