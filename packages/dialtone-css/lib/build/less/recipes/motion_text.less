@@ -10,6 +10,7 @@
 //  • TRANSITION CLASSES - GRADIENT IN
 //  • TRANSITION CLASSES - FADE IN
 //  • TRANSITION CLASSES - SLIDE IN
+//  • GRADIENT IN
 //  • GRADIENT SWEEP & SHIMMER
 //  • MODIFIERS
 //  • ACCESSIBILITY
@@ -97,6 +98,16 @@
 
   to {
     opacity: 1;
+  }
+}
+
+@keyframes dt-recipe-motion-text-gradient-in-char-reveal {
+  from {
+    color: var(--dt-color-neutral-transparent);
+  }
+
+  to {
+    color: inherit;
   }
 }
 
@@ -211,6 +222,14 @@
 
 .dt-recipe-motion-text-word-slide-in-leave-active {
   animation: dt-recipe-motion-text-slide-in-word-appear calc(var(--dt-recipe-motion-text-word-duration) * 0.5) var(--ttf-out-quint) reverse;
+}
+
+//  ============================================================================
+//  $   GRADIENT IN
+//  ----------------------------------------------------------------------------
+//  Delay reveal of character text color to prevent a flash on the first letter
+.dt-recipe-motion-text--gradient-in .dt-recipe-motion-text__char {
+  animation: dt-recipe-motion-text-gradient-in-char-reveal var(--dt-recipe-motion-text-char-duration) var(--ttf-in-out);
 }
 
 //  ============================================================================
