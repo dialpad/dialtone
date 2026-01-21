@@ -1,3 +1,10 @@
+## [9.155.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.155.2...dialtone/v9.155.3) (2026-01-21)
+
+
+### Bug Fixes
+
+* NO-JIRA dialtone-vue version ([d385372](https://github.com/dialpad/dialtone/commit/d385372f845d22a6d852d733785bd18a500d9398))
+
 ## [9.155.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.155.1...dialtone/v9.155.2) (2026-01-20)
 
 
