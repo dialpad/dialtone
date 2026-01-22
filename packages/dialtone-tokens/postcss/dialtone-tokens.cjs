@@ -52,8 +52,9 @@ function boxShadows (shadowDeclarations, Declaration) {
     .reduce((shadows, shadow) => {
       const [name, index] = shadow
         .split(shadowSegmentsRegex).slice(1, -1);
-      // if not a number that means it's only a single shadow so set to 1.
-      shadows[name] = Number.isNaN(Number.parseInt(index)) ? 1 : Number.parseInt(index);
+      // Track the maximum layer index for multi-layer shadows
+      const layerIndex = Number.isNaN(Number.parseInt(index)) ? 1 : Number.parseInt(index);
+      shadows[name] = Math.max(shadows[name] || 0, layerIndex);
       return shadows;
     }, {});
 
