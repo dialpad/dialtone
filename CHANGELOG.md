@@ -1,3 +1,10 @@
+## [9.155.4](https://github.com/dialpad/dialtone/compare/dialtone/v9.155.3...dialtone/v9.155.4) (2026-01-22)
+
+
+### Bug Fixes
+
+* **Tokens:** NO-JIRA multi-layer box shadows processing ([#1033](https://github.com/dialpad/dialtone/issues/1033)) ([42d27bc](https://github.com/dialpad/dialtone/commit/42d27bcb42e29e995074ca94ffefef1256a4d931))
+
 ## [9.155.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.155.2...dialtone/v9.155.3) (2026-01-21)
 
 
