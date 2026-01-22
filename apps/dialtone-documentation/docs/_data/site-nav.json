@@ -91,6 +91,10 @@
           "link": "/guides/accessibility/"
         },
         {
+          "text": "MCP Server",
+          "link": "/guides/mcp-server/"
+        },
+        {
           "text": "Brand",
           "link": "/guides/brand/",
           "planned": true
