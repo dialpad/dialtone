@@ -48,6 +48,10 @@
           "link": "/guides/getting-started/"
         },
         {
+          "text": "Dialtone MCP Server",
+          "link": "/guides/mcp-server/"
+        },
+        {
           "text": "Contributing",
           "link": "/guides/contributing/"
         },
@@ -89,10 +93,6 @@
         {
           "text": "Accessibility",
           "link": "/guides/accessibility/"
-        },
-        {
-          "text": "MCP Server",
-          "link": "/guides/mcp-server/"
         },
         {
           "text": "Brand",

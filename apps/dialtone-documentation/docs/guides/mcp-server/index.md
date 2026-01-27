@@ -3,8 +3,6 @@ title: Dialtone MCP Server
 description: Search Dialtone's design system with AI assistants using the Model Context Protocol
 ---
 
-# Dialtone MCP Server
-
 Search and discover Dialtone design system components, tokens, utilities, and icons through AI assistants using the [Model Context Protocol (MCP)](https://modelcontextprotocol.io).
 
 ## What It Does
