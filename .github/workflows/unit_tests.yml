@@ -28,8 +28,6 @@ jobs:
 
       - name: Setup Environment
         uses: ./.github/actions/setup-environment
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run dialtone-vue tests with coverage
         run: pnpm nx run dialtone-vue:test:coverage
