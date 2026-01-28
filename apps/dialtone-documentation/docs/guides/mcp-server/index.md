@@ -3,8 +3,6 @@ title: Dialtone MCP Server
 description: Search Dialtone's design system with AI assistants using the Model Context Protocol
 ---
 
-Search and discover Dialtone design system components, tokens, utilities, and icons through AI assistants using the [Model Context Protocol (MCP)](https://modelcontextprotocol.io).
-
 ## What It Does
 
 The Dialtone MCP Server provides AI assistants with real-time search access to:
@@ -47,9 +45,11 @@ Create or update `.mcp.json` in your project root:
 
 Commit `.mcp.json` to version control. Restart Claude Code to connect.
 
-::: tip Priority
+<DtNotice kind="info" title="Priority" :hideClose="true">
+
 Project-scoped configuration overrides user-scoped. The `dialtone-mcp-server` command resolves from `node_modules/.bin/` first.
-:::
+
+</DtNotice>
 
 ### User-Scoped (Personal Use)
 
@@ -90,9 +90,11 @@ Remote server deployment for enterprise use.
 claude mcp add dialtone-http --transport http --scope user https://mcp.dialtone.dialpad.com
 ```
 
-::: tip Version Checking
+<DtNotice kind="info" title="Version Checking" :hideClose="true">
+
 When the server starts, you'll see the current version. If outdated, follow the instructions shown to update.
-:::
+
+</DtNotice>
 
 ## Search Tools
 
@@ -356,9 +358,11 @@ Restart Claude Desktop and look for the 🔌 icon to confirm connection.
    cat ~/.claude/mcp.json
    ```
 
-::: warning Important
+<DtNotice kind="warning" title="Important" :hideClose="true">
+
 Project-scoped configuration overrides user-scoped. If you have both, the project-level `.mcp.json` takes precedence.
-:::
+
+</DtNotice>
 
 ### Version Shows Old After Updating
 
@@ -400,6 +404,8 @@ Now that you have the MCP server installed, explore these resources:
 
 ---
 
-::: tip Developer Tip
+<DtNotice kind="info" title="Developer Tip" :hideClose="true">
+
 The MCP server is perfect for discovering Dialtone patterns while coding. Instead of searching documentation manually, simply ask your AI assistant about components, tokens, or utilities, and it will search for you in real-time.
-:::
+
+</DtNotice>
