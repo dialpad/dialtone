@@ -12,7 +12,7 @@ jobs:
     defaults:
       run:
         shell: bash -o pipefail {0}
-        working-directory: ./packages/dialtone-vue2
+        working-directory: ./packages/dialtone-vue
 
     env:
       SMARTLING_BASE_URL: "https://api.smartling.com"

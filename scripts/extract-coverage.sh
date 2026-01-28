@@ -4,8 +4,8 @@
 set -e
 
 # Check if the coverage file exists
-if [ ! -f "packages/dialtone-vue3/coverage/index.html" ]; then
-  echo "Error: Coverage file not found. Run 'pnpm nx run dialtone-vue3:test:coverage' first."
+if [ ! -f "packages/dialtone-vue/coverage/index.html" ]; then
+  echo "Error: Coverage file not found. Run 'pnpm nx run dialtone-vue:test:coverage' first."
   exit 1
 fi
 
@@ -16,16 +16,16 @@ echo '{' > coverage-stats.json
 echo '  "vue3": {' >> coverage-stats.json
 
 # Extract statement coverage
-STATEMENTS=$(grep -B 1 "Statements" packages/dialtone-vue3/coverage/index.html | grep "strong" | sed 's/.*>\([0-9.]*\)%.*/\1/')
+STATEMENTS=$(grep -B 1 "Statements" packages/dialtone-vue/coverage/index.html | grep "strong" | sed 's/.*>\([0-9.]*\)%.*/\1/')
 
 # Extract branch coverage
-BRANCHES=$(grep -B 1 "Branches" packages/dialtone-vue3/coverage/index.html | grep "strong" | sed 's/.*>\([0-9.]*\)%.*/\1/')
+BRANCHES=$(grep -B 1 "Branches" packages/dialtone-vue/coverage/index.html | grep "strong" | sed 's/.*>\([0-9.]*\)%.*/\1/')
 
 # Extract function coverage
-FUNCTIONS=$(grep -B 1 "Functions" packages/dialtone-vue3/coverage/index.html | grep "strong" | sed 's/.*>\([0-9.]*\)%.*/\1/')
+FUNCTIONS=$(grep -B 1 "Functions" packages/dialtone-vue/coverage/index.html | grep "strong" | sed 's/.*>\([0-9.]*\)%.*/\1/')
 
 # Extract line coverage
-LINES=$(grep -B 1 "Lines" packages/dialtone-vue3/coverage/index.html | grep "strong" | sed 's/.*>\([0-9.]*\)%.*/\1/')
+LINES=$(grep -B 1 "Lines" packages/dialtone-vue/coverage/index.html | grep "strong" | sed 's/.*>\([0-9.]*\)%.*/\1/')
 
 # Write to JSON
 echo '    "statements": {' >> coverage-stats.json

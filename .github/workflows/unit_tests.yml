@@ -3,14 +3,12 @@ name: Unit Tests
 on:
   pull_request:
     paths:
-      - 'packages/dialtone-vue3/**'
-      - 'packages/dialtone-vue2/**'
+      - 'packages/dialtone-vue/**'
   push:
     branches:
       - staging
     paths:
-      - 'packages/dialtone-vue3/**'
-      - 'packages/dialtone-vue2/**'
+      - 'packages/dialtone-vue/**'
 
 env:
   HUSKY: 0
@@ -31,8 +29,5 @@ jobs:
       - name: Setup Environment
         uses: ./.github/actions/setup-environment
 
-      - name: Run dialtone-vue2 tests with coverage
-        run: pnpm nx run dialtone-vue2:test:coverage
-
-      - name: Run dialtone-vue3 tests with coverage
-        run: pnpm nx run dialtone-vue3:test:coverage
+      - name: Run dialtone-vue tests with coverage
+        run: pnpm nx run dialtone-vue:test:coverage
