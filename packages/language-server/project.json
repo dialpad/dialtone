@@ -4,7 +4,7 @@
     "build": {
       "executor": "nx:run-commands",
       "dependsOn": [
-        "dialtone-vue3:build",
+        "dialtone-vue:build",
         "dialtone-tokens:build",
         "dialtone-css:build"
       ],

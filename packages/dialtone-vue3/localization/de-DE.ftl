@@ -1,1 +1,0 @@
-../../dialtone-vue2/localization/de-DE.ftl

@@ -1,5 +1,4 @@
-# [9.154.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.154.0-next.1...dialtone/v9.154.0-next.2) (2026-01-14)
-
+## [9.155.4](https://github.com/dialpad/dialtone/compare/dialtone/v9.155.3...dialtone/v9.155.4) (2026-01-22)
 
 ### Bug Fixes
 
@@ -18,6 +17,48 @@
 * **Tokens:** DLT-2884 deprecate space tokens in favor of size tokens ([#1013](https://github.com/dialpad/dialtone/issues/1013)) ([63f6d2f](https://github.com/dialpad/dialtone/commit/63f6d2f67ede34d10358d1903f281400015fd426))
 
 # [9.154.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.153.4...dialtone/v9.154.0-next.1) (2026-01-08)
+* **Tokens:** NO-JIRA multi-layer box shadows processing ([#1033](https://github.com/dialpad/dialtone/issues/1033)) ([42d27bc](https://github.com/dialpad/dialtone/commit/42d27bcb42e29e995074ca94ffefef1256a4d931))
+
+## [9.155.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.155.2...dialtone/v9.155.3) (2026-01-21)
+
+
+### Bug Fixes
+
+* NO-JIRA dialtone-vue version ([d385372](https://github.com/dialpad/dialtone/commit/d385372f845d22a6d852d733785bd18a500d9398))
+
+## [9.155.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.155.1...dialtone/v9.155.2) (2026-01-20)
+
+
+### Bug Fixes
+
+* **Motion Text:** DLT-2885 fix gradient-in character animation ([#1030](https://github.com/dialpad/dialtone/issues/1030)) ([944d4a5](https://github.com/dialpad/dialtone/commit/944d4a5e9706815a62f84c4c55a53da945b685bf))
+
+## [9.155.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.155.0...dialtone/v9.155.1) (2026-01-20)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** NO-JIRA add channelKey ([#1031](https://github.com/dialpad/dialtone/issues/1031)) ([c0c3c1e](https://github.com/dialpad/dialtone/commit/c0c3c1eeed46d0d5e3eed5e1091ccd45a06e6ac4))
+
+# [9.155.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.154.0...dialtone/v9.155.0) (2026-01-15)
+
+
+### Bug Fixes
+
+* **Feed Item Row:** DLT-2810 avoid rendering attanchment if slot is empty ([#1021](https://github.com/dialpad/dialtone/issues/1021)) ([5e6dffb](https://github.com/dialpad/dialtone/commit/5e6dffb2525f412992aa0005bdb1a8df32f690b8))
+* **Rich Text Editor:** DLT-2770 spacing issue on copy ([#1017](https://github.com/dialpad/dialtone/issues/1017)) ([a62233b](https://github.com/dialpad/dialtone/commit/a62233b35bbbb7e45bb09b34695d64d8a44488ee))
+* **Split Button:** NO-JIRA fix label padding ([#1019](https://github.com/dialpad/dialtone/issues/1019)) ([ba54d8f](https://github.com/dialpad/dialtone/commit/ba54d8f08db4a28dd629dff438a6125a76013dda))
+
+
+### Documentation
+
+* DLT-2893 make vue3 latest, update docs ([#1026](https://github.com/dialpad/dialtone/issues/1026)) ([52bce55](https://github.com/dialpad/dialtone/commit/52bce555012eddb5a4c64faddf5ca906659ea1f6))
+
+
+### Features
+
+* **Split Button:** DLT-2869 add alpha and omega disabled attributes ([#1025](https://github.com/dialpad/dialtone/issues/1025)) ([9a27fa9](https://github.com/dialpad/dialtone/commit/9a27fa96c8af603434a1029e5b7c5ee531a2fa8d))
+
 # [9.154.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.153.9...dialtone/v9.154.0) (2026-01-13)
 
 

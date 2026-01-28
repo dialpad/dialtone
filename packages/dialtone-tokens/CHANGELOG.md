@@ -1,12 +1,10 @@
 # [1.48.0-next.6](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.5...dialtone-tokens/v1.48.0-next.6) (2026-01-14)
 
-
 ### Code Refactoring
 
 * **Tokens:** DLT-2884 deprecate space tokens in favor of size tokens ([#1013](https://github.com/dialpad/dialtone/issues/1013)) ([63f6d2f](https://github.com/dialpad/dialtone/commit/63f6d2f67ede34d10358d1903f281400015fd426))
 
 # [1.48.0-next.5](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.4...dialtone-tokens/v1.48.0-next.5) (2025-12-23)
-
 
 ### Features
 
@@ -15,6 +13,7 @@
 
 # [1.48.0-next.4](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.3...dialtone-tokens/v1.48.0-next.4) (2025-11-10)
 
+## [1.47.2](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.47.1...dialtone-tokens/v1.47.2) (2026-01-22)
 
 ### Bug Fixes
 
@@ -22,13 +21,11 @@
 
 # [1.48.0-next.3](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.2...dialtone-tokens/v1.48.0-next.3) (2025-11-07)
 
-
 ### Features
 
 * **Tokens:** DLT-2802 DLT-2563 layered theming system and mode island component ([#945](https://github.com/dialpad/dialtone/issues/945)) ([5c72c6c](https://github.com/dialpad/dialtone/commit/5c72c6cab4f08122dcb03e2e2f0cc8a490fe1c9b))
 
 # [1.48.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.1...dialtone-tokens/v1.48.0-next.2) (2025-10-15)
-
 
 ### Features
 
@@ -36,14 +33,14 @@
 
 # [1.48.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.47.1...dialtone-tokens/v1.48.0-next.1) (2025-10-08)
 
-
 ### Features
 
 * **Tokens:** DLT-2767 exploratory shell themes ([#909](https://github.com/dialpad/dialtone/issues/909)) ([3afcf63](https://github.com/dialpad/dialtone/commit/3afcf637d136733ff2f981a9ebbb63a3c4a37c99))
 * **Tokens:** DLT-2781 create color-assistive themes ([#921](https://github.com/dialpad/dialtone/issues/921)) ([a6cc397](https://github.com/dialpad/dialtone/commit/a6cc397bec52987f9ac2c3efca9b16f61c406807))
 
-## [1.47.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.47.0...dialtone-tokens/v1.47.1) (2025-10-06)
+* **Tokens:** NO-JIRA multi-layer box shadows processing ([#1033](https://github.com/dialpad/dialtone/issues/1033)) ([42d27bc](https://github.com/dialpad/dialtone/commit/42d27bcb42e29e995074ca94ffefef1256a4d931))
 
+## [1.47.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.47.0...dialtone-tokens/v1.47.1) (2025-10-06)
 
 ### Bug Fixes
 
@@ -52,13 +49,11 @@
 
 # [1.47.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.46.1...dialtone-tokens/v1.47.0) (2025-09-24)
 
-
 ### Features
 
 * **Rich Text Editor:** DP-150640 implement markdown output ([#848](https://github.com/dialpad/dialtone/issues/848)) ([ff2110e](https://github.com/dialpad/dialtone/commit/ff2110ef949240c8796cb766ce6dd8ad07007519))
 
 ## [1.46.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.46.0...dialtone-tokens/v1.46.1) (2025-09-10)
-
 
 ### Bug Fixes
 
@@ -66,13 +61,11 @@
 
 # [1.46.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.45.0...dialtone-tokens/v1.46.0) (2025-09-09)
 
-
 ### Features
 
 * **Tokens:** DLT-2758 DLT-2759 DLT-2760 refactor sequential and add categorical ([#905](https://github.com/dialpad/dialtone/issues/905)) ([79717b1](https://github.com/dialpad/dialtone/commit/79717b1cb200e0f0f60eaf41184b1720cce864a6))
 
 # [1.45.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.44.1...dialtone-tokens/v1.45.0) (2025-08-26)
-
 
 ### Features
 
@@ -80,13 +73,11 @@
 
 ## [1.44.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.44.0...dialtone-tokens/v1.44.1) (2025-08-12)
 
-
 ### Bug Fixes
 
 * **Tokens:** DLT-2712 remove prepended `color` from `inputs`, `action`, `theme` groups ([#869](https://github.com/dialpad/dialtone/issues/869)) ([4392bcb](https://github.com/dialpad/dialtone/commit/4392bcb63e81cd1c1a9c28f707a1a19a6dbae842))
 
 # [1.44.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.43.3...dialtone-tokens/v1.44.0) (2025-08-11)
-
 
 ### Features
 
@@ -95,13 +86,11 @@
 
 ## [1.43.3](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.43.2...dialtone-tokens/v1.43.3) (2025-07-15)
 
-
 ### Bug Fixes
 
 * **Tokens:** DLT-2629 corrected tmo inverted surface colors ([#821](https://github.com/dialpad/dialtone/issues/821)) ([a1ea98f](https://github.com/dialpad/dialtone/commit/a1ea98fc147b184776b41a26c59e7c479b5135b9))
 
 ## [1.43.2](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.43.1...dialtone-tokens/v1.43.2) (2025-05-12)
-
 
 ### Bug Fixes
 
@@ -109,13 +98,11 @@
 
 ## [1.43.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.43.0...dialtone-tokens/v1.43.1) (2025-05-07)
 
-
 ### Bug Fixes
 
 * NO-JIRA dependency issues and warnings ([#746](https://github.com/dialpad/dialtone/issues/746)) ([3e6d9eb](https://github.com/dialpad/dialtone/commit/3e6d9ebb940ec302a7323c39fbfc63950b5bb1c2))
 
 # [1.43.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.42.1...dialtone-tokens/v1.43.0) (2025-05-06)
-
 
 ### Features
 
@@ -123,13 +110,11 @@
 
 ## [1.42.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.42.0...dialtone-tokens/v1.42.1) (2025-05-05)
 
-
 ### Bug Fixes
 
 * **Design Tokens:** NO-JIRA update color.surface.warning reference in dark mode ([#740](https://github.com/dialpad/dialtone/issues/740)) ([b20558a](https://github.com/dialpad/dialtone/commit/b20558a28b5af91f885d48ea60b204fd1f6e6c29))
 
 # [1.42.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.41.2...dialtone-tokens/v1.42.0) (2025-04-25)
-
 
 ### Features
 
@@ -137,18 +122,15 @@
 
 # [1.42.0-rebrand-2025-beta.3](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.42.0-rebrand-2025-beta.2...dialtone-tokens/v1.42.0-rebrand-2025-beta.3) (2025-04-07)
 
-
 ### Features
 
 * **Design Tokens:** DLT-2458 wfm extended base colors ([#694](https://github.com/dialpad/dialtone/issues/694)) ([2905279](https://github.com/dialpad/dialtone/commit/2905279609c8abcb0ac2168328b912fc950d3dfc))
 
 # [1.42.0-rebrand-2025-beta.2](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.42.0-rebrand-2025-beta.1...dialtone-tokens/v1.42.0-rebrand-2025-beta.2) (2025-04-03)
 
-
 ### Bug Fixes
 
 * **Ci:** NO-JIRA changelog release order ([#689](https://github.com/dialpad/dialtone/issues/689)) ([bd4c080](https://github.com/dialpad/dialtone/commit/bd4c0802a59be6fdafb8f661a9c12c64ef764656))
-
 
 ### Features
 
@@ -158,13 +140,11 @@
 
 ## [1.41.2](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.41.1...dialtone-tokens/v1.41.2) (2025-04-02)
 
-
 ### Bug Fixes
 
 * **Ci:** NO-JIRA changelog release order ([#689](https://github.com/dialpad/dialtone/issues/689)) ([bd4c080](https://github.com/dialpad/dialtone/commit/bd4c0802a59be6fdafb8f661a9c12c64ef764656))
 
 ## [1.41.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.41.0...dialtone-tokens/v1.41.1) (2025-02-19)
-
 
 ### Bug Fixes
 
@@ -173,18 +153,15 @@
 
 # [1.41.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.40.0...dialtone-tokens/v1.41.0) (2025-02-17)
 
-
 ### Features
 
 * **Design Tokens:** NO-JIRA experimental deca token set updates again ([#632](https://github.com/dialpad/dialtone/issues/632)) ([c7ad513](https://github.com/dialpad/dialtone/commit/c7ad513f49215728dae86bf3305dd54f44df1251))
 
 # [1.40.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.39.0...dialtone-tokens/v1.40.0) (2025-01-31)
 
-
 ### Bug Fixes
 
 * **Tokens:** DLT-2233 correct math on android tokens ([#618](https://github.com/dialpad/dialtone/issues/618)) ([533fea1](https://github.com/dialpad/dialtone/commit/533fea19d2886deeb00bd2ee1c4822bd75c404c6))
-
 
 ### Features
 
@@ -193,13 +170,11 @@
 
 # [1.39.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.38.0...dialtone-tokens/v1.39.0) (2025-01-21)
 
-
 ### Features
 
 * DLT-1890 vscode-plugin: utility class autocompletion and hover ([#609](https://github.com/dialpad/dialtone/issues/609)) ([d67e226](https://github.com/dialpad/dialtone/commit/d67e226ab6d30faac2b6a2d9b4b30d44037cf086))
 
 # [1.38.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.37.2...dialtone-tokens/v1.38.0) (2024-12-12)
-
 
 ### Features
 
@@ -207,13 +182,11 @@
 
 ## [1.37.2](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.37.1...dialtone-tokens/v1.37.2) (2024-12-03)
 
-
 ### Bug Fixes
 
 * **Tokens:** DLT-1961 output font related tokens as rem instead of px ([#576](https://github.com/dialpad/dialtone/issues/576)) ([7241f65](https://github.com/dialpad/dialtone/commit/7241f65f7e7538dea1fd21fc5c4c2a96297f5514))
 
 ## [1.37.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.37.0...dialtone-tokens/v1.37.1) (2024-11-26)
-
 
 ### Bug Fixes
 
@@ -221,11 +194,9 @@
 
 # [1.37.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.36.8...dialtone-tokens/v1.37.0) (2024-10-24)
 
-
 ### Bug Fixes
 
 * **Tokens:** NO-JIRA resolveMath for android ([#540](https://github.com/dialpad/dialtone/issues/540)) ([e274816](https://github.com/dialpad/dialtone/commit/e27481611785f3147bfacce5ae5cddf0e30aaec2))
-
 
 ### Features
 
@@ -233,13 +204,11 @@
 
 ## [1.36.8](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.36.7...dialtone-tokens/v1.36.8) (2024-10-23)
 
-
 ### Bug Fixes
 
 * **Tokens:** DLT-2135 fix remaining iOS issues ([#535](https://github.com/dialpad/dialtone/issues/535)) ([8dd82d1](https://github.com/dialpad/dialtone/commit/8dd82d1324330663c0e7a4f3390b674e4d9a6a11))
 
 ## [1.36.7](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.36.6...dialtone-tokens/v1.36.7) (2024-10-22)
-
 
 ### Bug Fixes
 
@@ -247,13 +216,11 @@
 
 ## [1.36.6](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.36.5...dialtone-tokens/v1.36.6) (2024-10-11)
 
-
 ### Bug Fixes
 
 * DLT-1548 fix opacity classes selectors ([#520](https://github.com/dialpad/dialtone/issues/520)) ([1e6ef93](https://github.com/dialpad/dialtone/commit/1e6ef93933ee3dad7fa0c0cea5ab79ef7c9787eb))
 
 ## [1.36.5](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.36.4...dialtone-tokens/v1.36.5) (2024-10-07)
-
 
 ### Bug Fixes
 
@@ -261,13 +228,11 @@
 
 ## [1.36.4](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.36.3...dialtone-tokens/v1.36.4) (2024-09-26)
 
-
 ### Bug Fixes
 
 * **Tokens:** DLT-2054 support shadow dom ([#508](https://github.com/dialpad/dialtone/issues/508)) ([edd639f](https://github.com/dialpad/dialtone/commit/edd639f213795662c20c0114c0c1a2178af24736))
 
 ## [1.36.3](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.36.2...dialtone-tokens/v1.36.3) (2024-09-24)
-
 
 ### Bug Fixes
 
@@ -275,13 +240,11 @@
 
 ## [1.36.2](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.36.1...dialtone-tokens/v1.36.2) (2024-09-19)
 
-
 ### Bug Fixes
 
 * **Tokens:** DLT-2058 fix uncalced focus ring token ([#502](https://github.com/dialpad/dialtone/issues/502)) ([9733452](https://github.com/dialpad/dialtone/commit/9733452f935a524a88dfd3bfb0ee8844e0444113))
 
 ## [1.36.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.36.0...dialtone-tokens/v1.36.1) (2024-09-11)
-
 
 ### Bug Fixes
 
@@ -289,18 +252,15 @@
 
 # [1.36.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.35.0...dialtone-tokens/v1.36.0) (2024-09-03)
 
-
 ### Features
 
 * **Design Tokens:** DLT-2004 typography and radius design tokens for button, input, select, tabs ([#467](https://github.com/dialpad/dialtone/issues/467)) ([a0c10a2](https://github.com/dialpad/dialtone/commit/a0c10a2390c68e8185d2d78edfefa02d4e889a12))
 
 # [1.35.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.34.3...dialtone-tokens/v1.35.0) (2024-08-29)
 
-
 ### Bug Fixes
 
 * NO-JIRA tree-shaking ([#480](https://github.com/dialpad/dialtone/issues/480)) ([f24eb29](https://github.com/dialpad/dialtone/commit/f24eb29397918238cf12f5882e12f30745947a3c))
-
 
 ### Features
 
@@ -308,13 +268,11 @@
 
 ## [1.34.3](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.34.2...dialtone-tokens/v1.34.3) (2024-08-27)
 
-
 ### Bug Fixes
 
 * **Tokens:** DLT-1951 corrected muted outlined border color ([#477](https://github.com/dialpad/dialtone/issues/477)) ([0ab6b6c](https://github.com/dialpad/dialtone/commit/0ab6b6c9c953fb310729aa43a23ef4521648c152))
 
 ## [1.34.2](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.34.1...dialtone-tokens/v1.34.2) (2024-08-26)
-
 
 ### Bug Fixes
 
@@ -322,13 +280,11 @@
 
 ## [1.34.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.34.0...dialtone-tokens/v1.34.1) (2024-08-15)
 
-
 ### Bug Fixes
 
 * **Tokens:** DLT-1961 make typography tokens rem instead of px ([#450](https://github.com/dialpad/dialtone/issues/450)) ([385aa0a](https://github.com/dialpad/dialtone/commit/385aa0a7d49a4626b2077c87c6acce01d730db18))
 
 # [1.34.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.33.0...dialtone-tokens/v1.34.0) (2024-08-13)
-
 
 ### Features
 
@@ -336,13 +292,11 @@
 
 # [1.33.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.32.0...dialtone-tokens/v1.33.0) (2024-08-01)
 
-
 ### Features
 
 * **Tokens:** DLT-1696 theme and brand tokens ([#416](https://github.com/dialpad/dialtone/issues/416)) ([11085dc](https://github.com/dialpad/dialtone/commit/11085dc9aeb0698f8f9f277c9b66b9f5869bec71))
 
 # [1.32.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.31.1...dialtone-tokens/v1.32.0) (2024-07-12)
-
 
 ### Features
 
@@ -351,18 +305,15 @@
 
 ## [1.31.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.31.0...dialtone-tokens/v1.31.1) (2024-07-01)
 
-
 ### Bug Fixes
 
 * **Expressive Theme:** NO-JIRA corrected figma and tokens studio connection ([#384](https://github.com/dialpad/dialtone/issues/384)) ([255936f](https://github.com/dialpad/dialtone/commit/255936f7956473167358a06631187b4384a0dc2d))
 
 # [1.31.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.30.1...dialtone-tokens/v1.31.0) (2024-06-11)
 
-
 ### Documentation
 
 * NO-JIRA github doc update ([#298](https://github.com/dialpad/dialtone/issues/298)) ([99d24b3](https://github.com/dialpad/dialtone/commit/99d24b3bf8d6802afd418dfaba3290b164be6c03))
-
 
 ### Features
 
@@ -370,13 +321,11 @@
 
 ## [1.30.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.30.0...dialtone-tokens/v1.30.1) (2024-04-26)
 
-
 ### Bug Fixes
 
 * NO-JIRA icons build process ([#288](https://github.com/dialpad/dialtone/issues/288)) ([5761af1](https://github.com/dialpad/dialtone/commit/5761af1a665699d4e96a1328e36c265fca1fb6f6))
 
 # [1.30.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.29.0...dialtone-tokens/v1.30.0) (2024-04-12)
-
 
 ### Features
 
@@ -384,13 +333,11 @@
 
 # [1.29.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.28.0...dialtone-tokens/v1.29.0) (2024-04-09)
 
-
 ### Features
 
 * DLT-1678 build all themes ([#253](https://github.com/dialpad/dialtone/issues/253)) ([fe9c373](https://github.com/dialpad/dialtone/commit/fe9c373212f74a56afac3c7e9efe0d15bdeb7a7b))
 
 # [1.28.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.27.2...dialtone-tokens/v1.28.0) (2024-04-07)
-
 
 ### Features
 
@@ -398,11 +345,9 @@
 
 ## [1.27.2](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.27.1...dialtone-tokens/v1.27.2) (2024-03-26)
 
-
 ### Bug Fixes
 
 * NO-JIRA release not working with new commit convention ([#235](https://github.com/dialpad/dialtone/issues/235)) ([28ff27c](https://github.com/dialpad/dialtone/commit/28ff27cffac5e751eaf8496b7c716710a0153a61))
-
 
 ### Documentation
 
@@ -410,11 +355,9 @@
 
 ## [1.27.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.27.0...dialtone-tokens/v1.27.1) (2024-03-18)
 
-
 ### Bug Fixes
 
 * **Tokens:** fix android tokens package name ([538a09d](https://github.com/dialpad/dialtone/commit/538a09de08883f7707086e6c541a1cd3672e18ca))
-
 
 ### Documentation
 
@@ -422,13 +365,11 @@
 
 # [1.27.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.26.0...dialtone-tokens/v1.27.0) (2024-03-14)
 
-
 ### Features
 
 * **Typography:** refactor text styles ([#198](https://github.com/dialpad/dialtone/issues/198)) ([622c0f6](https://github.com/dialpad/dialtone/commit/622c0f65611010215b94624ccff6e82f62b32056))
 
 # [1.26.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.25.0...dialtone-tokens/v1.26.0) (2024-03-09)
-
 
 ### Features
 
@@ -436,13 +377,11 @@
 
 # [1.25.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.24.0...dialtone-tokens/v1.25.0) (2024-02-27)
 
-
 ### Features
 
 * transform Figma variables to sd format ([#154](https://github.com/dialpad/dialtone/issues/154)) ([3cb3581](https://github.com/dialpad/dialtone/commit/3cb3581dcbd87ada48e76032094c38faf07a663a))
 
 # [1.24.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.8...dialtone-tokens/v1.24.0) (2024-02-16)
-
 
 ### Features
 
@@ -450,13 +389,11 @@
 
 ## [1.23.8](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.7...dialtone-tokens/v1.23.8) (2024-02-13)
 
-
 ### Bug Fixes
 
 * android repository ref ([dc47df4](https://github.com/dialpad/dialtone/commit/dc47df4e7d44e4fa4f8d2a18bca6ff457d1dbe02))
 
 ## [1.23.7](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.6...dialtone-tokens/v1.23.7) (2024-02-13)
-
 
 ### Bug Fixes
 
@@ -464,18 +401,15 @@
 
 ## [1.23.6](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.5...dialtone-tokens/v1.23.6) (2024-02-13)
 
-
 ### Bug Fixes
 
 * extra quotes on font tokens ([#151](https://github.com/dialpad/dialtone/issues/151)) ([ec96822](https://github.com/dialpad/dialtone/commit/ec96822c633dd52b2b544d500de77cc3097f6edb))
 
 ## [1.23.5](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.4...dialtone-tokens/v1.23.5) (2024-01-16)
 
-
 ### Bug Fixes
 
 * nx affected dependencies ([#104](https://github.com/dialpad/dialtone/issues/104)) ([09ea0bb](https://github.com/dialpad/dialtone/commit/09ea0bb8c9756dea12e0a03b454df7b942a6e340))
-
 
 ### Documentation
 
@@ -483,11 +417,9 @@
 
 ## [1.23.4](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.3...dialtone-tokens/v1.23.4) (2023-12-19)
 
-
 ### Code Refactoring
 
 * dialtone tokens release process ([#53](https://github.com/dialpad/dialtone/issues/53)) ([d523f49](https://github.com/dialpad/dialtone/commit/d523f499d53f04053d2ab28b5018cefbb1edd94a))
-
 
 ### Documentation
 
@@ -495,11 +427,9 @@
 
 ## [1.23.4](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.3...dialtone-tokens/v1.23.4) (2023-12-19)
 
-
 ### Code Refactoring
 
 * dialtone tokens release process ([#53](https://github.com/dialpad/dialtone/issues/53)) ([d523f49](https://github.com/dialpad/dialtone/commit/d523f499d53f04053d2ab28b5018cefbb1edd94a))
-
 
 ### Documentation
 
@@ -507,11 +437,9 @@
 
 ## [1.23.4](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.3...dialtone-tokens/v1.23.4) (2023-12-19)
 
-
 ### Code Refactoring
 
 * dialtone tokens release process ([#53](https://github.com/dialpad/dialtone/issues/53)) ([d523f49](https://github.com/dialpad/dialtone/commit/d523f499d53f04053d2ab28b5018cefbb1edd94a))
-
 
 ### Documentation
 
@@ -519,11 +447,9 @@
 
 ## [1.23.4](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.3...dialtone-tokens/v1.23.4) (2023-12-19)
 
-
 ### Code Refactoring
 
 * dialtone tokens release process ([#53](https://github.com/dialpad/dialtone/issues/53)) ([d523f49](https://github.com/dialpad/dialtone/commit/d523f499d53f04053d2ab28b5018cefbb1edd94a))
-
 
 ### Documentation
 
@@ -531,11 +457,9 @@
 
 ## [1.23.3](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.2...dialtone-tokens/v1.23.3) (2023-12-13)
 
-
 ### Bug Fixes
 
 * global lint ([#47](https://github.com/dialpad/dialtone/issues/47)) ([8148de3](https://github.com/dialpad/dialtone/commit/8148de3341973a5c5ed46cf1367302b8a4b11021))
-
 
 ### Documentation
 
@@ -544,11 +468,9 @@
 
 ## [1.23.3](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.23.2...dialtone-tokens/v1.23.3) (2023-12-13)
 
-
 ### Bug Fixes
 
 * global lint ([#47](https://github.com/dialpad/dialtone/issues/47)) ([8148de3](https://github.com/dialpad/dialtone/commit/8148de3341973a5c5ed46cf1367302b8a4b11021))
-
 
 ### Documentation
 
@@ -557,7 +479,6 @@
 
 ## [1.23.2](https://github.com/dialpad/dialtone-tokens/compare/v1.23.1...v1.23.2) (2023-09-27)
 
-
 ### Bug Fixes
 
 * **color:** critical action bgcolor ([00902eb](https://github.com/dialpad/dialtone-tokens/commit/00902ebc7a0d2fe57d847906c635cfe26ee21f46))
@@ -565,13 +486,11 @@
 
 ## [1.23.1](https://github.com/dialpad/dialtone-tokens/compare/v1.23.0...v1.23.1) (2023-09-08)
 
-
 ### Bug Fixes
 
 * run token-transformer on pnpm run build ([0cb84fa](https://github.com/dialpad/dialtone-tokens/commit/0cb84fa2f09f13df84d2f6958549b9e1665ecf7f))
 
 # [1.23.0](https://github.com/dialpad/dialtone-tokens/compare/v1.22.0...v1.23.0) (2023-09-08)
-
 
 ### Bug Fixes
 
@@ -582,7 +501,6 @@
 * **color:** corrected mixed reference for primary critical button ([03916f7](https://github.com/dialpad/dialtone-tokens/commit/03916f7c3c4acfee19716a3533f469cbcde0f6fa))
 * **color:** corrected mixed reference for primary critical button ([21419ac](https://github.com/dialpad/dialtone-tokens/commit/21419acfae7be732c55013d975d80763827a143c))
 
-
 ### Features
 
 * changed file path to enable Multi-file Sync, in the service of newer SD Transforms ([bade45a](https://github.com/dialpad/dialtone-tokens/commit/bade45afc8e9c8da870f277f24fcd09b9dbbaa7f))
@@ -591,11 +509,9 @@
 
 # [1.22.0](https://github.com/dialpad/dialtone-tokens/compare/v1.21.0...v1.22.0) (2023-08-04)
 
-
 ### Bug Fixes
 
 * **link:** correctedly map muted link to secondary foreground color" ([e7ba1ce](https://github.com/dialpad/dialtone-tokens/commit/e7ba1ceab487db3216d0ac7952216b878c096ccb))
-
 
 ### Features
 
@@ -603,7 +519,6 @@
 * **color:** stronger contrast between unread and read sidebar labels ([0f1ed60](https://github.com/dialpad/dialtone-tokens/commit/0f1ed60cb305d9e5afb6615da761f5c8e5bc6c04))
 
 # [1.21.0](https://github.com/dialpad/dialtone-tokens/compare/v1.20.0...v1.21.0) (2023-07-24)
-
 
 ### Features
 
@@ -613,12 +528,10 @@
 
 # [1.20.0](https://github.com/dialpad/dialtone-tokens/compare/v1.19.0...v1.20.0) (2023-06-15)
 
-
 ### Bug Fixes
 
 * add platform, weight to monospace font ([4b1670e](https://github.com/dialpad/dialtone-tokens/commit/4b1670e1e5946d142fdd64ed98c4ec55dc5386b5))
 * updated iOS source destination ([#8](https://github.com/dialpad/dialtone-tokens/issues/8)) ([38f8a5c](https://github.com/dialpad/dialtone-tokens/commit/38f8a5c1e393798896c5d5fe067cab409cdada84))
-
 
 ### Features
 
@@ -626,11 +539,9 @@
 
 # [1.19.0](https://github.com/dialpad/dialtone-tokens/compare/v1.18.0...v1.19.0) (2023-06-01)
 
-
 ### Bug Fixes
 
 * radius percent output in % ([52057f0](https://github.com/dialpad/dialtone-tokens/commit/52057f03310c66910fd5d4a91298137945403414))
-
 
 ### Features
 
@@ -638,13 +549,11 @@
 
 # [1.18.0](https://github.com/dialpad/dialtone-tokens/compare/v1.17.0...v1.18.0) (2023-05-30)
 
-
 ### Features
 
 * **theme:** profile menu ([dea487f](https://github.com/dialpad/dialtone-tokens/commit/dea487f7916cb563dc2cdb87178bac311dda3b52))
 
 # [1.18.0](https://github.com/dialpad/dialtone-tokens/compare/v1.17.0...v1.18.0) (2023-05-30)
-
 
 ### Features
 
@@ -652,12 +561,10 @@
 
 # [1.17.0](https://github.com/dialpad/dialtone-tokens/compare/v1.16.0...v1.17.0) (2023-05-29)
 
-
 ### Bug Fixes
 
 * line-heights unitless instead of % ([8b44e04](https://github.com/dialpad/dialtone-tokens/commit/8b44e0418cab55f4f95837f6a3121b789cfc7dae))
 * pxToRem for spacing ([366b81d](https://github.com/dialpad/dialtone-tokens/commit/366b81dad70b04ba88689f21910ec9514b911a6b))
-
 
 ### Features
 
@@ -684,20 +591,17 @@
 
 # [1.16.0](https://github.com/dialpad/dialtone-tokens/compare/v1.15.0...v1.16.0) (2023-05-11)
 
-
 ### Features
 
 * add theming ([204be4e](https://github.com/dialpad/dialtone-tokens/commit/204be4ea4cfbfd9ecae5a964bb359ea906afeabb))
 
 # [1.15.0](https://github.com/dialpad/dialtone-tokens/compare/v1.14.0...v1.15.0) (2023-05-10)
 
-
 ### Features
 
 * **semantic-colors:** added descriptions ([5c1622d](https://github.com/dialpad/dialtone-tokens/commit/5c1622dbe53fa3813fdcf11882919497583062b3))
 
 # [1.14.0](https://github.com/dialpad/dialtone-tokens/compare/v1.13.0...v1.14.0) (2023-05-08)
-
 
 ### Features
 
@@ -709,11 +613,9 @@
 
 # [1.13.0](https://github.com/dialpad/dialtone-tokens/compare/v1.12.0...v1.13.0) (2023-05-08)
 
-
 ### Bug Fixes
 
 * correct spacing 770 ([9458ef6](https://github.com/dialpad/dialtone-tokens/commit/9458ef61c5bc4a630c3c6ae91845653989fe267b))
-
 
 ### Features
 
@@ -723,18 +625,15 @@
 
 # [1.12.0](https://github.com/dialpad/dialtone-tokens/compare/v1.11.0...v1.12.0) (2023-05-03)
 
-
 ### Bug Fixes
 
 * stringified font family ([ae391ff](https://github.com/dialpad/dialtone-tokens/commit/ae391fffa61e4635c112e896f3898fa5fe2ced1a))
-
 
 ### Features
 
 * **size-and-space:** fixed 112 to 114 ([95676f9](https://github.com/dialpad/dialtone-tokens/commit/95676f91894838f0c1dd634c7c4feb6b0bbb7f3e))
 
 # [1.11.0](https://github.com/dialpad/dialtone-tokens/compare/v1.10.0...v1.11.0) (2023-05-02)
-
 
 ### Features
 
@@ -749,11 +648,9 @@
 
 # [1.10.0](https://github.com/dialpad/dialtone-tokens/compare/v1.9.0...v1.10.0) (2023-04-18)
 
-
 ### Bug Fixes
 
 * specify additional token sets ([8358e07](https://github.com/dialpad/dialtone-tokens/commit/8358e07153284466136c566a354119b7f5689944))
-
 
 ### Features
 
@@ -763,18 +660,15 @@
 
 # [1.9.0](https://github.com/dialpad/dialtone-tokens/compare/v1.8.0...v1.9.0) (2023-04-14)
 
-
 ### Features
 
 * add descriptions to doc.json ([50e54df](https://github.com/dialpad/dialtone-tokens/commit/50e54dff313ddf7341c9a5955dad0a81d11d8b9a))
 
 # [1.8.0](https://github.com/dialpad/dialtone-tokens/compare/v1.7.0...v1.8.0) (2023-04-14)
 
-
 ### Bug Fixes
 
 * add var(--) usage to documentation file for css ([2ca25f2](https://github.com/dialpad/dialtone-tokens/commit/2ca25f2c76190db6ae7127061a40412567014eae))
-
 
 ### Features
 
@@ -785,11 +679,9 @@
 
 # [1.7.0](https://github.com/dialpad/dialtone-tokens/compare/v1.6.5...v1.7.0) (2023-04-12)
 
-
 ### Bug Fixes
 
 * update deps and fix error on build ([4270283](https://github.com/dialpad/dialtone-tokens/commit/427028378129d0fc235d178a89edb1e71a5961c5))
-
 
 ### Features
 
@@ -888,7 +780,6 @@
 
 ## [1.6.5](https://github.com/dialpad/dialtone-tokens/compare/v1.6.4...v1.6.5) (2023-01-31)
 
-
 ### Bug Fixes
 
 * add text case to typography tokens ([a2594cd](https://github.com/dialpad/dialtone-tokens/commit/a2594cdb3085d814e3270b02de71e3fd2dbf417b))
@@ -896,13 +787,11 @@
 
 ## [1.6.4](https://github.com/dialpad/dialtone-tokens/compare/v1.6.3...v1.6.4) (2023-01-30)
 
-
 ### Bug Fixes
 
 * **android:** fix bad filtering for fontFamily ([10552b5](https://github.com/dialpad/dialtone-tokens/commit/10552b5cf0aae2fc9fca65c81f16244eeef4eb7b))
 
 ## [1.6.3](https://github.com/dialpad/dialtone-tokens/compare/v1.6.2...v1.6.3) (2023-01-30)
-
 
 ### Bug Fixes
 
@@ -910,13 +799,11 @@
 
 ## [1.6.2](https://github.com/dialpad/dialtone-tokens/compare/v1.6.1...v1.6.2) (2023-01-28)
 
-
 ### Bug Fixes
 
 * **android:** fonts ([f881bc1](https://github.com/dialpad/dialtone-tokens/commit/f881bc1476edd534e2fac3fa6e1e870b8d09ae56))
 
 ## [1.6.1](https://github.com/dialpad/dialtone-tokens/compare/v1.6.0...v1.6.1) (2023-01-28)
-
 
 ### Bug Fixes
 
@@ -924,11 +811,9 @@
 
 # [1.6.0](https://github.com/dialpad/dialtone-tokens/compare/v1.5.0...v1.6.0) (2023-01-27)
 
-
 ### Bug Fixes
 
 * correct android dp values ([3eb43ac](https://github.com/dialpad/dialtone-tokens/commit/3eb43ac1e4afc421075cc420e00e5fd384a04393))
-
 
 ### Features
 
@@ -937,7 +822,6 @@
 * **theme:** reassigned some base values and poc dark theme ([#7](https://github.com/dialpad/dialtone-tokens/issues/7)) ([84514de](https://github.com/dialpad/dialtone-tokens/commit/84514de3ccb0c418282783891a646b0d09ded206))
 
 # [1.5.0](https://github.com/dialpad/dialtone-tokens/compare/v1.4.4...v1.5.0) (2023-01-24)
-
 
 ### Features
 
@@ -948,13 +832,11 @@
 
 ## [1.4.4](https://github.com/dialpad/dialtone-tokens/compare/v1.4.3...v1.4.4) (2022-11-23)
 
-
 ### Bug Fixes
 
 * add version to gitignore ([cc47079](https://github.com/dialpad/dialtone-tokens/commit/cc47079ccbe9f5f36082b5ea0c70c02de42caced))
 
 ## [1.4.3](https://github.com/dialpad/dialtone-tokens/compare/v1.4.2...v1.4.3) (2022-11-23)
-
 
 ### Bug Fixes
 
@@ -963,13 +845,11 @@
 
 ## [1.4.2](https://github.com/dialpad/dialtone-tokens/compare/v1.4.1...v1.4.2) (2022-11-22)
 
-
 ### Bug Fixes
 
 * add creds ([018d241](https://github.com/dialpad/dialtone-tokens/commit/018d241990a07cfc4796e7caa29a04173cd340f3))
 
 ## [1.4.1](https://github.com/dialpad/dialtone-tokens/compare/v1.4.0...v1.4.1) (2022-11-22)
-
 
 ### Bug Fixes
 
@@ -977,13 +857,11 @@
 
 # [1.4.0](https://github.com/dialpad/dialtone-tokens/compare/v1.3.4...v1.4.0) (2022-11-22)
 
-
 ### Features
 
 * add gradle for android release ([95f9090](https://github.com/dialpad/dialtone-tokens/commit/95f909059f571680f3f3acd1751c60a8c16581c4))
 
 ## [1.3.4](https://github.com/dialpad/dialtone-tokens/compare/v1.3.3...v1.3.4) (2022-10-24)
-
 
 ### Bug Fixes
 
@@ -991,13 +869,11 @@
 
 ## [1.3.3](https://github.com/dialpad/dialtone-tokens/compare/v1.3.2...v1.3.3) (2022-10-14)
 
-
 ### Bug Fixes
 
 * change CGFloat to not divide by base ([636a5ad](https://github.com/dialpad/dialtone-tokens/commit/636a5ada73015128c9e9c3a17f2d9b3012e312c9))
 
 ## [1.3.2](https://github.com/dialpad/dialtone-tokens/compare/v1.3.1...v1.3.2) (2022-09-29)
-
 
 ### Bug Fixes
 
@@ -1005,13 +881,11 @@
 
 ## [1.3.1](https://github.com/dialpad/dialtone-tokens/compare/v1.3.0...v1.3.1) (2022-09-29)
 
-
 ### Bug Fixes
 
 * continue on error true ([d750fef](https://github.com/dialpad/dialtone-tokens/commit/d750fef56f343a87419787290744f4bf51549eb0))
 
 # [1.3.0](https://github.com/dialpad/dialtone-tokens/compare/v1.2.0...v1.3.0) (2022-09-29)
-
 
 ### Features
 
@@ -1019,11 +893,9 @@
 
 # [1.2.0](https://github.com/dialpad/dialtone-tokens/compare/v1.1.2...v1.2.0) (2022-09-26)
 
-
 ### Bug Fixes
 
 * contents permissions to write ([fb2fa4c](https://github.com/dialpad/dialtone-tokens/commit/fb2fa4c62d93b3340694ff3e747f8e927736ead1))
-
 
 ### Features
 
@@ -1031,20 +903,17 @@
 
 ## [1.1.2](https://github.com/dialpad/dialtone-tokens/compare/v1.1.1...v1.1.2) (2022-09-22)
 
-
 ### Bug Fixes
 
 * fix commit message syntax ([36bf269](https://github.com/dialpad/dialtone-tokens/commit/36bf269a2c8d22ce36aa7b9174d24f98479ba42e))
 
 ## [1.1.1](https://github.com/dialpad/dialtone-tokens/compare/v1.1.0...v1.1.1) (2022-09-22)
 
-
 ### Bug Fixes
 
 * npm build before deploying to maven ([5abba9b](https://github.com/dialpad/dialtone-tokens/commit/5abba9bde0274f83fa0ca2ae19a5c954dc82d434))
 
 # [1.1.0](https://github.com/dialpad/dialtone-tokens/compare/v1.0.1...v1.1.0) (2022-09-22)
-
 
 ### Features
 
@@ -1055,13 +924,11 @@
 
 ## [1.0.1](https://github.com/dialpad/dialtone-tokens/compare/v1.0.0...v1.0.1) (2022-08-11)
 
-
 ### Bug Fixes
 
 * remove paths from release for now ([216dac3](https://github.com/dialpad/dialtone-tokens/commit/216dac31880dec886fcbcac8c0b47966dffae88a))
 
 # 1.0.0 (2022-08-11)
-
 
 ### Features
 
