@@ -1,3 +1,15 @@
+# [9.156.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.155.4...dialtone/v9.156.0) (2026-01-29)
+
+
+### Documentation
+
+* DLT-2854 add MCP Server guide to documentation ([#1035](https://github.com/dialpad/dialtone/issues/1035)) ([dd4ebb6](https://github.com/dialpad/dialtone/commit/dd4ebb6fe9c975494ee6a44742af748eecbd2432))
+
+
+### Features
+
+* NO-JIRA export everything from utils/constants ([#1038](https://github.com/dialpad/dialtone/issues/1038)) ([1aa0814](https://github.com/dialpad/dialtone/commit/1aa0814903d5a7417c52919aaac7959bf5b39456))
+
 ## [9.155.4](https://github.com/dialpad/dialtone/compare/dialtone/v9.155.3...dialtone/v9.155.4) (2026-01-22)
 
 
