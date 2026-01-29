@@ -37,14 +37,12 @@ const paths = {
       '!./packages/dialtone-tokens/dist/android/**',
       '!./packages/dialtone-tokens/dist/ios/**',
     ],
-    vue2: './packages/dialtone-vue2/dist/**',
-    vue3: './packages/dialtone-vue3/dist/**',
+    vue3: './packages/dialtone-vue/dist/**',
   },
   output: {
     css: './dist/css',
     js: './dist/js',
     tokens: './dist/tokens',
-    vue2: './dist/vue2',
     vue3: './dist/vue3',
   },
 };

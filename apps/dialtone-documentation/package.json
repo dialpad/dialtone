@@ -46,7 +46,7 @@
     "@dialpad/dialtone-icons": "workspace:*",
     "@dialpad/dialtone-tokens": "workspace:*",
     "@dialpad/dialtone-vue": "workspace:vue3-next",
-    "@dialpad/i18n": "1.20.1",
+    "@dialpad/i18n": "1.22.3",
     "@dialpad/postcss-responsive-variations": "workspace:*",
     "@docsearch/js": "^4.0.1",
     "@docsearch/css": "^4.0.1",

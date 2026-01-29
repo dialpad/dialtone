@@ -1085,7 +1085,7 @@ function detectImportPattern(content) {
 
   // Check for external package imports
   if (content.includes('from \'@dialpad/dialtone-vue') || content.includes('from \'@dialpad/dialtone-icons')) {
-    return '@dialpad/dialtone-vue3';
+    return '@dialpad/dialtone-vue';
   }
 
   // Default suggestion

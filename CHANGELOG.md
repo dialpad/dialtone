@@ -1,23 +1,50 @@
-# [9.154.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.154.0-next.1...dialtone/v9.154.0-next.2) (2026-01-14)
+## [9.155.4](https://github.com/dialpad/dialtone/compare/dialtone/v9.155.3...dialtone/v9.155.4) (2026-01-22)
 
 
 ### Bug Fixes
 
-* **Doc:** NO-JIRA correct font size utility json ([#1015](https://github.com/dialpad/dialtone/issues/1015)) ([76cf0fa](https://github.com/dialpad/dialtone/commit/76cf0faa38f9980756346514ac7e8b4873389c8d))
-* NO-JIRA configure npm registry without GitHub Packages scope override ([c559455](https://github.com/dialpad/dialtone/commit/c559455e8464b06b75fce3c4d6c972617ba4f5e7))
-* NO-JIRA node 24 issues ([1abd97c](https://github.com/dialpad/dialtone/commit/1abd97cc4b7ad582a6d67bd97ca7ae11c65cada1))
-* NO-JIRA remove npmrc deletion ([dc57b60](https://github.com/dialpad/dialtone/commit/dc57b60db24bc37356508d7f6fa533f78febf859))
-* NO-JIRA revert lockfile ([5ffe793](https://github.com/dialpad/dialtone/commit/5ffe793346c3534ebef012a76ed9f363cda3ab7b))
-* NO-JIRA revert pnpm-lock.yaml to restore GitHub Packages tarball URLs ([4047c63](https://github.com/dialpad/dialtone/commit/4047c635c960dd36f2b64a32983b29663389ccda))
-* NO-JIRA update to node 24 ([e825521](https://github.com/dialpad/dialtone/commit/e8255214fa60e4bd84fb6801f6aac6503944ce4d))
-* NO-JIRA use lockfile with correct overrides and GitHub Packages tarball URLs ([4aca7c8](https://github.com/dialpad/dialtone/commit/4aca7c8dab63e7c7342c0789a24eaf337aee087c))
+* **Tokens:** NO-JIRA multi-layer box shadows processing ([#1033](https://github.com/dialpad/dialtone/issues/1033)) ([42d27bc](https://github.com/dialpad/dialtone/commit/42d27bcb42e29e995074ca94ffefef1256a4d931))
+
+## [9.155.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.155.2...dialtone/v9.155.3) (2026-01-21)
 
 
-### Code Refactoring
+### Bug Fixes
 
-* **Tokens:** DLT-2884 deprecate space tokens in favor of size tokens ([#1013](https://github.com/dialpad/dialtone/issues/1013)) ([63f6d2f](https://github.com/dialpad/dialtone/commit/63f6d2f67ede34d10358d1903f281400015fd426))
+* NO-JIRA dialtone-vue version ([d385372](https://github.com/dialpad/dialtone/commit/d385372f845d22a6d852d733785bd18a500d9398))
 
-# [9.154.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.153.4...dialtone/v9.154.0-next.1) (2026-01-08)
+## [9.155.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.155.1...dialtone/v9.155.2) (2026-01-20)
+
+
+### Bug Fixes
+
+* **Motion Text:** DLT-2885 fix gradient-in character animation ([#1030](https://github.com/dialpad/dialtone/issues/1030)) ([944d4a5](https://github.com/dialpad/dialtone/commit/944d4a5e9706815a62f84c4c55a53da945b685bf))
+
+## [9.155.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.155.0...dialtone/v9.155.1) (2026-01-20)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** NO-JIRA add channelKey ([#1031](https://github.com/dialpad/dialtone/issues/1031)) ([c0c3c1e](https://github.com/dialpad/dialtone/commit/c0c3c1eeed46d0d5e3eed5e1091ccd45a06e6ac4))
+
+# [9.155.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.154.0...dialtone/v9.155.0) (2026-01-15)
+
+
+### Bug Fixes
+
+* **Feed Item Row:** DLT-2810 avoid rendering attanchment if slot is empty ([#1021](https://github.com/dialpad/dialtone/issues/1021)) ([5e6dffb](https://github.com/dialpad/dialtone/commit/5e6dffb2525f412992aa0005bdb1a8df32f690b8))
+* **Rich Text Editor:** DLT-2770 spacing issue on copy ([#1017](https://github.com/dialpad/dialtone/issues/1017)) ([a62233b](https://github.com/dialpad/dialtone/commit/a62233b35bbbb7e45bb09b34695d64d8a44488ee))
+* **Split Button:** NO-JIRA fix label padding ([#1019](https://github.com/dialpad/dialtone/issues/1019)) ([ba54d8f](https://github.com/dialpad/dialtone/commit/ba54d8f08db4a28dd629dff438a6125a76013dda))
+
+
+### Documentation
+
+* DLT-2893 make vue3 latest, update docs ([#1026](https://github.com/dialpad/dialtone/issues/1026)) ([52bce55](https://github.com/dialpad/dialtone/commit/52bce555012eddb5a4c64faddf5ca906659ea1f6))
+
+
+### Features
+
+* **Split Button:** DLT-2869 add alpha and omega disabled attributes ([#1025](https://github.com/dialpad/dialtone/issues/1025)) ([9a27fa9](https://github.com/dialpad/dialtone/commit/9a27fa96c8af603434a1029e5b7c5ee531a2fa8d))
+
 # [9.154.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.153.9...dialtone/v9.154.0) (2026-01-13)
 
 
@@ -40,25 +67,6 @@
 
 ### Bug Fixes
 
-* **Tokens:** wrap css math expressions with calc() in layered build ([#966](https://github.com/dialpad/dialtone/issues/966)) ([1635f61](https://github.com/dialpad/dialtone/commit/1635f61280c9379355c9a2ea295cbf23a78c888f))
-* update @dialpad/i18n dependencies to latest versions ([7a4b777](https://github.com/dialpad/dialtone/commit/7a4b77705d93aa0b3f94748c86afc5e147da3d20))
-
-
-### Code Refactoring
-
-* **Css:** DLT-1876 css logical properties ([#872](https://github.com/dialpad/dialtone/issues/872)) ([1acd6c9](https://github.com/dialpad/dialtone/commit/1acd6c900053b0c820309faa4a870ff1dceced04))
-
-
-### Features
-
-* **Css Utility:** DLT-2715 add default color for border css utilities ([#874](https://github.com/dialpad/dialtone/issues/874)) ([71310ab](https://github.com/dialpad/dialtone/commit/71310ab483fde976d56c69e0456bce70cb6d372d))
-* **Filter Pill:** DLT-2704 create component ([#473](https://github.com/dialpad/dialtone/issues/473)) ([6267445](https://github.com/dialpad/dialtone/commit/626744501640f18211ca9d41e4a68e099af3b6dd))
-* **Text:** new vue component DLT-2864 DLT-2863 DLT-2862 ([#995](https://github.com/dialpad/dialtone/issues/995)) ([196ef8a](https://github.com/dialpad/dialtone/commit/196ef8aadbcf2e13c09073b544552ef05b095e8a))
-* **Tokens:** DLT-1977 add high contrast design tokens and theme ([#938](https://github.com/dialpad/dialtone/issues/938)) ([a1c0457](https://github.com/dialpad/dialtone/commit/a1c0457e3b6b445e3f54d76b9ce3b847abc31ac5))
-* **Tokens:** DLT-2767 exploratory shell themes ([#909](https://github.com/dialpad/dialtone/issues/909)) ([3afcf63](https://github.com/dialpad/dialtone/commit/3afcf637d136733ff2f981a9ebbb63a3c4a37c99))
-* **Tokens:** DLT-2781 create color-assistive themes ([#921](https://github.com/dialpad/dialtone/issues/921)) ([a6cc397](https://github.com/dialpad/dialtone/commit/a6cc397bec52987f9ac2c3efca9b16f61c406807))
-* **Tokens:** DLT-2802 DLT-2563 layered theming system and mode island component ([#945](https://github.com/dialpad/dialtone/issues/945)) ([5c72c6c](https://github.com/dialpad/dialtone/commit/5c72c6cab4f08122dcb03e2e2f0cc8a490fe1c9b))
-* **Typography, Tokens:** DLT-2856 DLT-2857 next typography system ([#994](https://github.com/dialpad/dialtone/issues/994)) ([d744e97](https://github.com/dialpad/dialtone/commit/d744e97e86796a4de2153e43fa521384da8e8848))
 * NO-JIRA configure npm registry without GitHub Packages scope override ([c559455](https://github.com/dialpad/dialtone/commit/c559455e8464b06b75fce3c4d6c972617ba4f5e7))
 
 ## [9.153.8](https://github.com/dialpad/dialtone/compare/dialtone/v9.153.7...dialtone/v9.153.8) (2026-01-08)
