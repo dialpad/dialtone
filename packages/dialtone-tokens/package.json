@@ -36,7 +36,7 @@
   },
   "homepage": "https://dialtone.dialpad.com/",
   "devDependencies": {
-    "@tokens-studio/sd-transforms": "^1.2.3",
+    "@tokens-studio/sd-transforms": "1.2.3",
     "@types/node": "^22.8.4",
     "@typescript-eslint/eslint-plugin": "^8.44.1",
     "@typescript-eslint/parser": "^8.44.1",
@@ -45,7 +45,7 @@
     "maven": "^5.0.0",
     "postcss": "8.4.39",
     "postcss-cli": "11.0.0",
-    "style-dictionary": "^4.1.0",
+    "style-dictionary": "4.1.0",
     "tsx": "^4.19.0"
   },
   "peerDependencies": {
