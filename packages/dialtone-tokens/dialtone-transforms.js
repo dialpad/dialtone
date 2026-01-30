@@ -74,7 +74,7 @@ export function registerDialtoneTransforms (styleDictionary) {
     transform: (token) => {
       // replace unmathable characters with empty string
       const mathString = token.value.replace(/dp|sp|em|px|%/g, '');
-      // eslint-disable-next-line no-eval
+       
       const result = eval(mathString).toFixed(2);
       return `${result}dp`;
     },
@@ -167,6 +167,8 @@ export function registerDialtoneTransforms (styleDictionary) {
     type: 'value',
     transitive: true,
     filter: function (token) {
+      // Exclude lineHeight dimension tokens - they're handled by lineHeight transform
+      if (token.type === 'dimension' && token.path?.includes('lineHeight')) return false;
       return [...SPACING_IDENTIFIERS, ...SIZE_IDENTIFIERS].includes(token.type) &&
         // The fontSize token in typography tokens is a 'dimension' type for some reason,
         // so have this special case to exclude it from this transform.
@@ -219,7 +221,7 @@ export function registerDialtoneTransforms (styleDictionary) {
       if (token.value.includes('.sp')) unit = 'sp';
       if (token.value.includes('.em')) unit = 'em';
       const mathString = token.value.replace(/\.dp|\.sp|\.em|px|%/g, '');
-      // eslint-disable-next-line no-eval
+       
       const result = eval(mathString);
       return `${result}.${unit}`;
     },
@@ -229,7 +231,9 @@ export function registerDialtoneTransforms (styleDictionary) {
     name: 'dt/android/compose/lineHeight/percentToDecimal',
     type: 'value',
     filter: function (token) {
-      return LINE_HEIGHT_IDENTIFIERS.includes(token.type);
+      // Match by type (legacy tokens) or path (DTCG-compliant tokens with type: dimension)
+      return LINE_HEIGHT_IDENTIFIERS.includes(token.type) ||
+        (token.type === 'dimension' && token.path?.includes('lineHeight'));
     },
     transform: (token) => {
       const floatVal = parseFloat(token.value);
@@ -313,6 +317,8 @@ export function registerDialtoneTransforms (styleDictionary) {
     name: 'dt/ios/size/pxToCGFloat',
     type: 'value',
     filter: function (token) {
+      // Exclude lineHeight dimension tokens - they're handled by dt/ios/lineHeight/percentToDecimal
+      if (token.type === 'dimension' && token.path?.includes('lineHeight')) return false;
       return [...SPACING_IDENTIFIERS, ...SIZE_IDENTIFIERS].includes(token.type);
     },
     transform: (token) => {
@@ -330,7 +336,11 @@ export function registerDialtoneTransforms (styleDictionary) {
     name: 'dt/ios/lineHeight/percentToDecimal',
     type: 'value',
     filter: function (token) {
-      return ['opacity', ...LINE_HEIGHT_IDENTIFIERS].includes(token.type);
+      // Skip if already transformed to CGFloat
+      if (typeof token.value === 'string' && token.value.includes('CGFloat')) return false;
+      // Match by type (legacy tokens) or path (DTCG-compliant tokens with type: dimension)
+      return ['opacity', ...LINE_HEIGHT_IDENTIFIERS].includes(token.type) ||
+        (token.type === 'dimension' && token.path?.includes('lineHeight'));
     },
     transform: (token) => {
       const floatVal = parseFloat(token.value);
@@ -347,7 +357,9 @@ export function registerDialtoneTransforms (styleDictionary) {
     name: 'dt/lineHeight/percentToDecimal',
     type: 'value',
     filter: function (token) {
-      return LINE_HEIGHT_IDENTIFIERS.includes(token.type);
+      // Match by type (legacy tokens) or path (DTCG-compliant tokens with type: dimension)
+      return LINE_HEIGHT_IDENTIFIERS.includes(token.type) ||
+        (token.type === 'dimension' && token.path?.includes('lineHeight'));
     },
     transform: (token) => {
       const floatVal = parseFloat(token.value);
@@ -380,24 +392,4 @@ export function registerDialtoneTransforms (styleDictionary) {
     },
   });
 
-  styleDictionary.registerTransform({
-    name: 'dt/lineHeight/percentToDecimal',
-    type: 'value',
-    filter: function (token) {
-      return LINE_HEIGHT_IDENTIFIERS.includes(token.type);
-    },
-    transform: (token) => {
-      const floatVal = parseFloat(token.value);
-
-      if (isNaN(floatVal)) {
-        throwSizeError(token.path, token.value, '%');
-      }
-
-      if (floatVal === 0) {
-        return '0';
-      }
-
-      return `${floatVal / 100}`;
-    },
-  });
 }
