@@ -1,3 +1,10 @@
+## [1.47.3](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.47.2...dialtone-tokens/v1.47.3) (2026-01-30)
+
+
+### Bug Fixes
+
+* **Tokens:** DP-173715 downgrade sd-transforms/colorjs.io ([#1039](https://github.com/dialpad/dialtone/issues/1039)) ([b0fbcd0](https://github.com/dialpad/dialtone/commit/b0fbcd0bc75478618a441b143b3a781761a6bd22))
+
 ## [1.47.2](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.47.1...dialtone-tokens/v1.47.2) (2026-01-22)
 
 
