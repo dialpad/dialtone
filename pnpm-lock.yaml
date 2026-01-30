@@ -231,8 +231,8 @@ importers:
         specifier: ^8.0.0
         version: 8.0.1
       colorjs.io:
-        specifier: 0.5.2
-        version: 0.5.2
+        specifier: 0.4.5
+        version: 0.4.5
       concurrently:
         specifier: ^8.2.2
         version: 8.2.2
@@ -660,8 +660,8 @@ importers:
         version: 9.39.2(jiti@1.21.7)
     devDependencies:
       '@tokens-studio/sd-transforms':
-        specifier: ^1.2.3
-        version: 1.3.0(style-dictionary@4.4.0)
+        specifier: 1.2.3
+        version: 1.2.3(style-dictionary@4.1.0)
       '@types/node':
         specifier: ^22.8.4
         version: 22.19.6
@@ -687,8 +687,8 @@ importers:
         specifier: 11.0.0
         version: 11.0.0(jiti@1.21.7)(postcss@8.4.39)(tsx@4.21.0)
       style-dictionary:
-        specifier: ^4.1.0
-        version: 4.4.0
+        specifier: 4.1.0
+        version: 4.1.0
       tsx:
         specifier: ^4.19.0
         version: 4.21.0
@@ -5282,11 +5282,11 @@ packages:
   '@tokenizer/token@0.3.0':
     resolution: {integrity: sha512-OvjF+z51L3ov0OyAU0duzsYuvO01PH7x4t6DJx+guahgTnBHkhJdG7soQeTSFLWN3efnHyibZ4Z8l2EuWwJN3A==}
 
-  '@tokens-studio/sd-transforms@1.3.0':
-    resolution: {integrity: sha512-zVbiYjTGWpSuwzZwiuvcWf79CQEcTMKSxrOaQJ0zHXFxEmrpETWeIRxv2IO8rtMos/cS8mvnDwPngoHQOMs1SA==}
+  '@tokens-studio/sd-transforms@1.2.3':
+    resolution: {integrity: sha512-4F/Nl0oWwmukNLkOehrvosAFKvWUVieWqlKDua80NU1jNWgpax4EQjbHDQgfCF9nCthdcdcImzhItqbaLcmlvg==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
-      style-dictionary: ^4.3.0 || ^5.0.0-rc.0
+      style-dictionary: ^4.0.1
 
   '@tokens-studio/types@0.5.2':
     resolution: {integrity: sha512-rzMcZP0bj2E5jaa7Fj0LGgYHysoCrbrxILVbT0ohsCUH5uCHY/u6J7Qw/TE0n6gR9Js/c9ZO9T8mOoz0HdLMbA==}
@@ -7276,8 +7276,8 @@ packages:
   colorette@2.0.20:
     resolution: {integrity: sha512-IfEDxwoWIjkeXL1eXcDiow4UbKjhLdq6/EuSVR9GMN7KVH3r9gQ83e73hsz1Nd1T3ijd5xv1wcWRYO+D6kCI2w==}
 
-  colorjs.io@0.5.2:
-    resolution: {integrity: sha512-twmVoizEW7ylZSN32OgKdXRmo1qg+wT5/6C3xu5b9QsWzSFAhHLn2xd8ro0diCsKfCj1RdaTP/nrcW+vAoQPIw==}
+  colorjs.io@0.4.5:
+    resolution: {integrity: sha512-yCtUNCmge7llyfd/Wou19PMAcf5yC3XXhgFoAh6zsO2pGswhUPBaaUh8jzgHnXtXuZyFKzXZNAnyF5i+apICow==}
 
   colors@1.0.3:
     resolution: {integrity: sha512-pFGrxThWcWQ2MsAz6RtgeWe4NK2kUE1WfsrvvlctdII745EW9I0yflqhe7++M5LEc7bV2c/9/5zc8sFcpL0Drw==}
@@ -13051,8 +13051,8 @@ packages:
     resolution: {integrity: sha512-Vj7sf++t5pBD637NSfkxpHSMfWaeig5+DKWLhcqIYx6mWQz5hdJTGDVMQiJcw1ZYkhs7AazKDGpRVji1LJCZUQ==}
     engines: {node: '>=18'}
 
-  path-unified@0.2.0:
-    resolution: {integrity: sha512-MNKqvrKbbbb5p7XHXV6ZAsf/1f/yJQa13S/fcX0uua8ew58Tgc6jXV+16JyAbnR/clgCH+euKDxrF2STxMHdrg==}
+  path-unified@0.1.0:
+    resolution: {integrity: sha512-/Oaz9ZJforrkmFrwkR/AcvjVsCAwGSJHO0X6O6ISj8YeFbATjIEBXLDcZfnK3MO4uvCBrJTdVIxdOc79PMqSdg==}
 
   path@0.12.7:
     resolution: {integrity: sha512-aXXC6s+1w7otVF9UletFkFcDsJeO7lSZBPUQhtb5O0xJe8LtYhj/GxldoL09bBj9+ZmE2hNoHqQSFMN5fikh4Q==}
@@ -13681,11 +13681,6 @@ packages:
 
   prettier@3.3.2:
     resolution: {integrity: sha512-rAVeHYMcv8ATV5d508CFdn+8/pHPpXeIid1DdrPwXnaAdH7cqjVbpJaT5eq4yRAFU/lsbwYwSF/n5iNrdJHPQA==}
-    engines: {node: '>=14'}
-    hasBin: true
-
-  prettier@3.7.4:
-    resolution: {integrity: sha512-v6UNi1+3hSlVvv8fSaoUbggEM5VErKmmpGA7Pl3HF8V6uKY7rvClBOJlH6yNwQtfTueNkGVpOv/mtWL9L4bgRA==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -15124,8 +15119,8 @@ packages:
     resolution: {integrity: sha512-fZtbhtvI9I48xDSywd/somNqgUHl2L2cstmXCCif0itOf96jeW18MBSyrLuNicYQVkvpOxkZtkzujiTJ9LW5Jw==}
     engines: {node: '>=10'}
 
-  style-dictionary@4.4.0:
-    resolution: {integrity: sha512-+xU0IA1StzqAqFs/QtXkK+XJa7wpS4X5H+JQccRKsRCElgeLGocFU1U/UMvMUylKFw6vwGV+Y/a2wb2pm5rFFQ==}
+  style-dictionary@4.1.0:
+    resolution: {integrity: sha512-DfY64t/XsL0bycnabIcIna/H1GyjK4sKLui2t0q6flr2uM+VpRNoSNCPOpi5YSouhKEFjoiC6ediyrMzraTz8A==}
     engines: {node: '>=18.0.0'}
     hasBin: true
 
@@ -16276,8 +16271,8 @@ packages:
   vue-component-type-helpers@2.2.12:
     resolution: {integrity: sha512-YbGqHZ5/eW4SnkPNR44mKVc6ZKQoRs/Rux1sxC6rdwXb4qpbOSYfDr9DsTHolOTGmIKgM9j141mZbBeg05R1pw==}
 
-  vue-component-type-helpers@3.2.2:
-    resolution: {integrity: sha512-x8C2nx5XlUNM0WirgfTkHjJGO/ABBxlANZDtHw2HclHtQnn+RFPTnbjMJn8jHZW4TlUam0asHcA14lf1C6Jb+A==}
+  vue-component-type-helpers@3.2.4:
+    resolution: {integrity: sha512-05lR16HeZDcDpB23ku5b5f1fBOoHqFnMiKRr2CiEvbG5Ux4Yi0McmQBOET0dR0nxDXosxyVqv67q6CzS3AK8rw==}
 
   vue-demi@0.14.10:
     resolution: {integrity: sha512-nMZBOwuzabUO0nLgIcc6rycZEebF6eeUfaiQx9+WSk8e29IbLvPU9feI6tqW4kTo3hvoYAJkMh8n8D0fuISphg==}
@@ -22015,7 +22010,7 @@ snapshots:
       ts-dedent: 2.2.0
       type-fest: 2.19.0
       vue: 3.5.26(typescript@5.9.3)
-      vue-component-type-helpers: 3.2.2
+      vue-component-type-helpers: 3.2.4
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -22240,15 +22235,15 @@ snapshots:
 
   '@tokenizer/token@0.3.0': {}
 
-  '@tokens-studio/sd-transforms@1.3.0(style-dictionary@4.4.0)':
+  '@tokens-studio/sd-transforms@1.2.3(style-dictionary@4.1.0)':
     dependencies:
       '@bundled-es-modules/deepmerge': 4.3.1
       '@bundled-es-modules/postcss-calc-ast-parser': 0.1.6
       '@tokens-studio/types': 0.5.2
-      colorjs.io: 0.5.2
+      colorjs.io: 0.4.5
       expr-eval-fork: 2.0.2
       is-mergeable-object: 1.1.1
-      style-dictionary: 4.4.0
+      style-dictionary: 4.1.0
 
   '@tokens-studio/types@0.5.2': {}
 
@@ -24892,7 +24887,7 @@ snapshots:
 
   colorette@2.0.20: {}
 
-  colorjs.io@0.5.2: {}
+  colorjs.io@0.4.5: {}
 
   colors@1.0.3: {}
 
@@ -31675,7 +31670,7 @@ snapshots:
 
   path-type@6.0.0: {}
 
-  path-unified@0.2.0: {}
+  path-unified@0.1.0: {}
 
   path@0.12.7:
     dependencies:
@@ -32261,8 +32256,6 @@ snapshots:
   prettier@2.8.8: {}
 
   prettier@3.3.2: {}
-
-  prettier@3.7.4: {}
 
   pretty-bytes@6.1.1: {}
 
@@ -34047,7 +34040,7 @@ snapshots:
       '@tokenizer/token': 0.3.0
       peek-readable: 4.1.0
 
-  style-dictionary@4.4.0:
+  style-dictionary@4.1.0:
     dependencies:
       '@bundled-es-modules/deepmerge': 4.3.1
       '@bundled-es-modules/glob': 10.4.2
@@ -34055,12 +34048,11 @@ snapshots:
       '@zip.js/zip.js': 2.8.15
       chalk: 5.6.2
       change-case: 5.4.4
-      commander: 12.1.0
+      commander: 8.3.0
       is-plain-obj: 4.1.0
       json5: 2.2.3
       patch-package: 8.0.1
-      path-unified: 0.2.0
-      prettier: 3.7.4
+      path-unified: 0.1.0
       tinycolor2: 1.6.0
 
   stylehacks@5.1.1(postcss@8.4.39):
@@ -35352,7 +35344,7 @@ snapshots:
 
   vue-component-type-helpers@2.2.12: {}
 
-  vue-component-type-helpers@3.2.2: {}
+  vue-component-type-helpers@3.2.4: {}
 
   vue-demi@0.14.10(vue@3.5.26(typescript@5.9.3)):
     dependencies:
