@@ -1,3 +1,10 @@
+## [8.71.7](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.71.6...dialtone-css/v8.71.7) (2026-01-30)
+
+
+### Bug Fixes
+
+* **Contact Info:** DLT-2904 remove min-width from left section ([#1032](https://github.com/dialpad/dialtone/issues/1032)) ([7dbc88d](https://github.com/dialpad/dialtone/commit/7dbc88d699e8adee9f86ace3cb31fab5930f5238))
+
 ## [8.71.6](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.71.5...dialtone-css/v8.71.6) (2026-01-20)
 
 
