@@ -1,3 +1,11 @@
+## [9.156.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.156.0...dialtone/v9.156.1) (2026-01-30)
+
+
+### Bug Fixes
+
+* **Contact Info:** DLT-2904 remove min-width from left section ([#1032](https://github.com/dialpad/dialtone/issues/1032)) ([7dbc88d](https://github.com/dialpad/dialtone/commit/7dbc88d699e8adee9f86ace3cb31fab5930f5238))
+* **Tokens:** DP-173715 downgrade sd-transforms/colorjs.io ([#1039](https://github.com/dialpad/dialtone/issues/1039)) ([b0fbcd0](https://github.com/dialpad/dialtone/commit/b0fbcd0bc75478618a441b143b3a781761a6bd22))
+
 # [9.156.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.155.4...dialtone/v9.156.0) (2026-01-29)
 
 
