@@ -1,3 +1,10 @@
+# [8.72.0-next.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.72.0-next.2...dialtone-css/v8.72.0-next.3) (2026-01-30)
+
+
+### Code Refactoring
+
+* **Text:** DLT-2883 rename headline sizes from xxl => 2xl, etc ([#1029](https://github.com/dialpad/dialtone/issues/1029)) ([0ac86f3](https://github.com/dialpad/dialtone/commit/0ac86f30fb59298942a633d0fc42e68ee3ff348f))
+
 ## [8.71.6](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.71.5...dialtone-css/v8.71.6) (2026-01-20)
 
 
