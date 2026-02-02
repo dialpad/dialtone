@@ -413,7 +413,7 @@ export default {
     },
 
     /**
-     * Allow Tables to be copied in to the editor
+     * Allow Tables to be used in to the editor
      */
     allowTables: {
       type: Boolean,
