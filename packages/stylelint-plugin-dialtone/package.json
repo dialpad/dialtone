@@ -39,8 +39,12 @@
     "directory": "packages/stylelint-plugin-dialtone"
   },
   "main": "./lib/index.js",
+  "bin": {
+    "fix-logical-properties": "./bin/fix-logical-properties.js"
+  },
   "files": [
-    "lib"
+    "lib",
+    "bin"
   ],
   "exports": "./lib/index.js",
   "scripts": {
@@ -48,6 +52,9 @@
     "lint:code": "eslint '**/*.js'",
     "lint:docs": "markdownlint 'docs/**/*.md'",
     "test": "node --test ./tests/lib/rules/*.mjs"
+  },
+  "dependencies": {
+    "stylelint-use-logical": "^2.1.2"
   },
   "devDependencies": {
     "eslint-plugin-n": "^17.0.0",
