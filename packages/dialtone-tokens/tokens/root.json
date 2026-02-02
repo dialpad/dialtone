@@ -3,20 +3,26 @@
     "size": {
       "root": {
         "value": "10px",
-        "type": "dimension"
+        "type": "fontSizes"
       }
     }
   },
   "size": {
     "base": {
       "value": "{font.size.root} * 0.8",
-      "type": "dimension"
+      "type": "sizing"
     }
   },
-  "space": {
+  "spacing": {
     "base": {
-      "value": "{size.base}",
-      "type": "dimension"
+      "value": "8px",
+      "type": "spacing"
+    }
+  },
+  "layout": {
+    "base": {
+      "value": "128px",
+      "type": "sizing"
     }
   }
 }
