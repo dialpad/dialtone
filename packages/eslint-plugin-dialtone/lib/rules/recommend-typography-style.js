@@ -30,6 +30,8 @@ module.exports = {
       discouraged in favor of composed typography utilities. Checkout the available classes here:
       https://dialtone.dialpad.com/design/typography/#api. There can be cases where using these utilities is intentional and valid,
       in which case you can ignore this lint warning.`,
+      conflictingTypographyUtilities: `Conflicting typography utilities detected: multiple {{category}} classes found ({{classes}}).
+      Only one will be applied. Remove the conflicting classes.`,
     }, // Add messageId and message
   },
 
@@ -41,22 +43,41 @@ module.exports = {
         if (node.key.name === 'class') {
           const classes = node.value.value.split(' ');
 
-          // For each class, determine which category it belongs to
-          const categoriesFound = new Set();
+          // For each class, determine which category it belongs to and track all matches
+          const categoryCounts = {};
           classes.forEach((className) => {
             for (const [category, patterns] of Object.entries(typographyCategories)) {
               if (patterns.some((pattern) => className.startsWith(pattern))) {
-                categoriesFound.add(category);
+                if (!categoryCounts[category]) {
+                  categoryCounts[category] = [];
+                }
+                categoryCounts[category].push(className);
               }
             }
           });
 
-          // Only report if 2+ different categories are present
-          if (categoriesFound.size >= 2) {
+          const categoriesFound = Object.keys(categoryCounts);
+
+          // Report if 2+ different categories are present
+          if (categoriesFound.length >= 2) {
             context.report({
               node,
               messageId: 'recommendTypographyStyle',
             });
+          }
+
+          // Report conflicting utilities within the same category
+          for (const [category, matchedClasses] of Object.entries(categoryCounts)) {
+            if (matchedClasses.length >= 2) {
+              context.report({
+                node,
+                messageId: 'conflictingTypographyUtilities',
+                data: {
+                  category,
+                  classes: matchedClasses.join(', '),
+                },
+              });
+            }
           }
         }
       },

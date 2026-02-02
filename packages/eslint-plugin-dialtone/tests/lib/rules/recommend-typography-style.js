@@ -41,13 +41,6 @@ ruleTester.run("recommend-typography-style", rule, {
     {
       code: "<template><div class=\"d-ff-mono\" /></template>",
     },
-    // Same category combinations are valid
-    {
-      code: "<template><div class=\"d-fw-bold d-fw-medium\" /></template>",
-    },
-    {
-      code: "<template><div class=\"d-fs-100 d-fs-200\" /></template>",
-    },
     // Mixed with non-typography classes is valid (single category)
     {
       code: "<template><div class=\"d-fw-bold d-mt-4 d-p-8\" /></template>",
@@ -84,6 +77,34 @@ ruleTester.run("recommend-typography-style", rule, {
     {
       code: "<template><div class=\"d-fw-bold d-fs-200 d-mt-4\" /></template>",
       errors: [{ messageId: 'recommendTypographyStyle' }],
+    },
+    // Conflicting utilities within same category: font-weight
+    {
+      code: "<template><div class=\"d-fw-bold d-fw-medium\" /></template>",
+      errors: [{ messageId: 'conflictingTypographyUtilities' }],
+    },
+    // Conflicting utilities within same category: font-size
+    {
+      code: "<template><div class=\"d-fs-100 d-fs-200\" /></template>",
+      errors: [{ messageId: 'conflictingTypographyUtilities' }],
+    },
+    // Conflicting utilities within same category: line-height
+    {
+      code: "<template><div class=\"d-lh-300 d-lh-400\" /></template>",
+      errors: [{ messageId: 'conflictingTypographyUtilities' }],
+    },
+    // Conflicting utilities within same category: font-family
+    {
+      code: "<template><div class=\"d-ff-mono d-ff-sans\" /></template>",
+      errors: [{ messageId: 'conflictingTypographyUtilities' }],
+    },
+    // Both errors: 2+ categories AND conflicting within a category
+    {
+      code: "<template><div class=\"d-fw-bold d-fw-medium d-fs-200\" /></template>",
+      errors: [
+        { messageId: 'recommendTypographyStyle' },
+        { messageId: 'conflictingTypographyUtilities' },
+      ],
     },
   ],
 });

@@ -4,9 +4,13 @@ Before combining multiple typography utilities from different categories, first 
 
 ## Rule Details
 
-This rule flags when **two or more different categories** of typography utilities are combined in the same class attribute. Single typography utilities are acceptable for overrides.
+This rule flags two issues:
+
+1. **Multiple categories**: When two or more different categories of typography utilities are combined in the same class attribute. Single typography utilities are acceptable for overrides.
+2. **Conflicting utilities**: When multiple utilities from the same category are used together (e.g., `d-fw-bold d-fw-medium`), which likely indicates a mistake since only one will be applied.
 
 The typography categories are:
+
 - **font-weight**: `d-fw-normal`, `d-fw-medium`, `d-fw-semibold`, `d-fw-bold`
 - **font-size**: `d-fs-*` (e.g., `d-fs-200`, `d-fs-300`)
 - **line-height**: `d-lh-*` (e.g., `d-lh-300`, `d-lh-400`)
@@ -23,6 +27,12 @@ Examples of **incorrect** code for this rule:
 
 <!-- Combining font-family + font-weight (2 categories) -->
 <span class="d-ff-mono d-fw-semibold">
+
+<!-- Conflicting utilities: multiple font-weights -->
+<span class="d-fw-bold d-fw-medium">
+
+<!-- Conflicting utilities: multiple font-sizes -->
+<span class="d-fs-100 d-fs-200">
 ```
 
 Examples of **correct** code for this rule:
@@ -33,9 +43,6 @@ Examples of **correct** code for this rule:
 
 <!-- Single typography utility (acceptable for overrides) -->
 <span class="d-fw-bold">
-
-<!-- Single category (same category multiple times is fine) -->
-<span class="d-fw-bold d-fw-medium">
 
 <!-- Single typography utility mixed with non-typography utilities -->
 <span class="d-fw-bold d-mt-4 d-p-8">
