@@ -13,10 +13,16 @@
       "type": "sizing"
     }
   },
-  "space": {
+  "spacing": {
     "base": {
-      "value": "{size.base}",
+      "value": "8px",
       "type": "spacing"
+    }
+  },
+  "layout": {
+    "base": {
+      "value": "128px",
+      "type": "sizing"
     }
   }
 }
