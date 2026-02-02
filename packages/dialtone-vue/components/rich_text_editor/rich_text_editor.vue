@@ -61,6 +61,7 @@ import Blockquote from '@tiptap/extension-blockquote';
 import CodeBlock from '@tiptap/extension-code-block';
 import Code from '@tiptap/extension-code';
 import Document from '@tiptap/extension-document';
+import Gapcursor from '@tiptap/extension-gapcursor';
 import HardBreak from '@tiptap/extension-hard-break';
 import Paragraph from '@tiptap/extension-paragraph';
 import Placeholder from '@tiptap/extension-placeholder';
@@ -75,6 +76,10 @@ import Underline from '@tiptap/extension-underline';
 import Text from '@tiptap/extension-text';
 import TextAlign from '@tiptap/extension-text-align';
 import History from '@tiptap/extension-history';
+import Table from '@tiptap/extension-table';
+import TableCell from '@tiptap/extension-table-cell';
+import TableHeader from '@tiptap/extension-table-header';
+import TableRow from '@tiptap/extension-table-row';
 import TextStyle from '@tiptap/extension-text-style';
 import Color from '@tiptap/extension-color';
 import FontFamily from '@tiptap/extension-font-family';
@@ -403,6 +408,14 @@ export default {
      * Show text in HTML div tags instead of paragraph tags
      */
     useDivTags: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Allow Tables to be used in to the editor
+     */
+    allowTables: {
       type: Boolean,
       default: false,
     },
@@ -839,6 +852,10 @@ export default {
         extensions.push(...this.additionalExtensions);
       }
 
+      if (this.allowTables) {
+        extensions.push(Table.configure({ resizable: true }), TableRow, TableHeader, TableCell, Gapcursor)
+      }
+
       return extensions;
     },
 
@@ -1251,6 +1268,7 @@ export default {
     focusEditor () {
       this.editor.commands.focus();
     },
+
   },
 };
 </script>
