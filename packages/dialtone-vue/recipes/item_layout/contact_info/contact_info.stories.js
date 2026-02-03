@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 import DtRecipeContactInfo from './contact_info.vue';
 

@@ -1,5 +1,5 @@
  
-// import { action } from '@storybook/addon-actions';
+// import { action } from 'storybook/actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import {
   ROOT_LAYOUT_RESPONSIVE_BREAKPOINTS,

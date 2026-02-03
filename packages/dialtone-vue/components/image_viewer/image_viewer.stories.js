@@ -3,7 +3,7 @@ import DtImageViewer from './image_viewer.vue';
 
 import DtImageViewerDefaultTemplate from './image_viewer_default.story.vue';
 import DtImageViewerVariantsTemplate from './image_viewer_variants.story.vue';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 import defaultImage from '@/common/assets/test.jpg?url';
 

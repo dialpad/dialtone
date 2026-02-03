@@ -1,4 +1,4 @@
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeContactCentersRow from './contact_centers_row.vue';
 import DtRecipeContactCentersRowDefaultTemplate from './contact_centers_row_default.story.vue';

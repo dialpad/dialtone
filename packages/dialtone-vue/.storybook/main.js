@@ -1,4 +1,8 @@
+import { createRequire } from 'node:module';
+import { dirname, join } from 'node:path';
 import { mergeConfig } from 'vite';
+
+const require = createRequire(import.meta.url);
 
 /** @type { import('@storybook/vue3-vite').StorybookConfig } */
 const config = {
@@ -7,17 +11,39 @@ const config = {
     '../@(components|directives|docs|recipes|localization)/**/*.mdx',
     '../functions/*.mdx',
   ],
-  addons: ['@storybook/addon-links', '@storybook/addon-essentials', '@storybook/addon-a11y', 'storybook-dark-mode'],
+
+  addons: [
+    getAbsolutePath('@storybook/addon-links'),
+    getAbsolutePath('@storybook/addon-a11y'),
+    getAbsolutePath('@vueless/storybook-dark-mode'),
+    getAbsolutePath('@storybook/addon-docs'),
+  ],
+
   framework: {
-    name: '@storybook/vue3-vite',
+    name: getAbsolutePath('@storybook/vue3-vite'),
     options: {},
   },
-  docs: {
-    autodocs: true,
-  },
+
   async viteFinal (config) {
     // Merge custom configuration into the default config
     return mergeConfig(config, {
+      // [Bug]: MDX not loading on Storybook 10
+      // https://github.com/storybookjs/storybook/issues/33118
+      plugins: [
+        {
+          name: 'fix-mdx-react-shim',
+          enforce: 'pre',
+          resolveId(source) {
+            if (
+              source.startsWith('file://') &&
+              source.includes('mdx-react-shim.js')
+            ) {
+              return new URL(source).pathname;
+            }
+            return null;
+          },
+        },
+      ],
       build: {
         sourcemap: true,
       },
@@ -26,6 +52,11 @@ const config = {
       },
     });
   },
+
   staticDirs: ['../common/assets/'],
 };
 export default config;
+
+function getAbsolutePath(value) {
+  return dirname(require.resolve(join(value, 'package.json')));
+}
