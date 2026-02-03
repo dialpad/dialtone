@@ -1,3 +1,10 @@
+# [1.48.0-next.9](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.8...dialtone-tokens/v1.48.0-next.9) (2026-02-03)
+
+
+### Bug Fixes
+
+* **Tokens:** handle multi-layer box shadows correctly in postcss plugin ([feea7f1](https://github.com/dialpad/dialtone/commit/feea7f19f8f5380460db28eae0d51fab73413c24))
+
 # [1.48.0-next.8](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.7...dialtone-tokens/v1.48.0-next.8) (2026-02-03)
 
 
