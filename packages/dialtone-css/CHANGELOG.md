@@ -1,3 +1,10 @@
+# [8.72.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.71.7...dialtone-css/v8.72.0) (2026-02-03)
+
+
+### Features
+
+* DP-159552 editor table support when pasting ([#1034](https://github.com/dialpad/dialtone/issues/1034)) ([8ec5592](https://github.com/dialpad/dialtone/commit/8ec559290b2674eb3666e2f74627d91c23d8d257))
+
 ## [8.71.7](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.71.6...dialtone-css/v8.71.7) (2026-01-30)
 
 
