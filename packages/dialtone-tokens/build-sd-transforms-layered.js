@@ -120,7 +120,7 @@ StyleDictionary.registerAction({
 
 StyleDictionary.registerTransformGroup({
   name: 'custom/css/tokens-studio',
-  transforms: [...getTransforms({ platform: 'css' }), 'name/kebab', 'dt/size/pxToRem', 'dt/space/pxToRem']
+  transforms: [...getTransforms({ platform: 'css' }), 'name/kebab', 'dt/size/pxToRem', 'dt/space/pxToRem', 'dt/lineHeight/percentToDecimal']
     .filter(transform => !['name/camel', 'ts/size/px', 'ts/typography/css/fontFamily'].includes(transform)),
 });
 
