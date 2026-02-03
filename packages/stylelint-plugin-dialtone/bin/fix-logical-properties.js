@@ -117,8 +117,88 @@ function fixLogicalProperties(content) {
   return fixedLines.join('\n');
 }
 
+function processStyleBlocks(content) {
+  // Match all <style> blocks (with any attributes like lang, scoped, etc.)
+  const styleRegex = /(<style[^>]*>)([\s\S]*?)(<\/style>)/gi;
+  let hasChanges = false;
+
+  const fixed = content.replace(styleRegex, (_match, openTag, styleContent, closeTag) => {
+    const fixedStyle = fixLogicalProperties(styleContent);
+    if (fixedStyle !== styleContent) {
+      hasChanges = true;
+    }
+    return openTag + fixedStyle + closeTag;
+  });
+
+  return { fixed, hasChanges };
+}
+
+function processMarkdownFile(filePath) {
+  try {
+    const content = fs.readFileSync(filePath, 'utf8');
+
+    // Split by fenced code blocks to avoid processing code examples
+    // Match ``` with optional language identifier and content until closing ```
+    const fencedCodeRegex = /(```[\s\S]*?```)/g;
+    const parts = content.split(fencedCodeRegex);
+    let hasChanges = false;
+
+    // Process only non-code-block parts
+    const fixedParts = parts.map((part, index) => {
+      // Odd indices are the fenced code blocks (captured groups)
+      if (index % 2 === 1) {
+        return part; // Keep code blocks unchanged
+      }
+      // Process style blocks in non-code parts
+      const result = processStyleBlocks(part);
+      if (result.hasChanges) {
+        hasChanges = true;
+      }
+      return result.fixed;
+    });
+
+    if (hasChanges) {
+      fs.writeFileSync(filePath, fixedParts.join(''), 'utf8');
+      console.log(`Fixed: ${filePath}`);
+      return true;
+    }
+    return false;
+  } catch (error) {
+    console.error(`Error processing ${filePath}:`, error.message);
+    return false;
+  }
+}
+
+function processFileWithStyleBlocks(filePath) {
+  try {
+    const content = fs.readFileSync(filePath, 'utf8');
+    const result = processStyleBlocks(content);
+
+    if (result.hasChanges) {
+      fs.writeFileSync(filePath, result.fixed, 'utf8');
+      console.log(`Fixed: ${filePath}`);
+      return true;
+    }
+    return false;
+  } catch (error) {
+    console.error(`Error processing ${filePath}:`, error.message);
+    return false;
+  }
+}
+
 function processFile(filePath) {
   try {
+    // Markdown: skip fenced code blocks, only process <style> tags
+    if (filePath.endsWith('.md')) {
+      return processMarkdownFile(filePath);
+    }
+
+    // Vue/HTML: only process <style> blocks
+    if (filePath.endsWith('.vue') || filePath.endsWith('.html')) {
+      return processFileWithStyleBlocks(filePath);
+    }
+
+    // CSS/LESS: process entire file
     const content = fs.readFileSync(filePath, 'utf8');
     const fixed = fixLogicalProperties(content);
 
