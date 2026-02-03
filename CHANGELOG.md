@@ -1,3 +1,10 @@
+# [9.154.0-next.5](https://github.com/dialpad/dialtone/compare/dialtone/v9.154.0-next.4...dialtone/v9.154.0-next.5) (2026-02-03)
+
+
+### Bug Fixes
+
+* **Tokens:** handle multi-layer box shadows correctly in postcss plugin ([feea7f1](https://github.com/dialpad/dialtone/commit/feea7f19f8f5380460db28eae0d51fab73413c24))
+
 # [9.154.0-next.4](https://github.com/dialpad/dialtone/compare/dialtone/v9.154.0-next.3...dialtone/v9.154.0-next.4) (2026-02-03)
 
 
