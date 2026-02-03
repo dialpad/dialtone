@@ -9,7 +9,10 @@ module.exports = {
   '*.json': [
     'eslint --fix',
   ],
-  '*.less': [
+  '*.{less,css}': [
+    `node ${fixLogicalProperties}`,
+  ],
+  '*.{vue,md,html}': [
     `node ${fixLogicalProperties}`,
   ],
 };
