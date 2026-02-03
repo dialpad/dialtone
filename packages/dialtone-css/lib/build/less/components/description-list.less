@@ -5,10 +5,10 @@
   align-items: flex-start;
   font: var(--dt-typography-body-sm);
 
-  --description-list-gap: var(--dt-space-400);
+  --description-list-gap: var(--dt-spacing-100);
   each(range(0, 600, 100), {
     &--gap-@{value} {
-     --description-list-gap: ~"var(--dt-space-@{value})";
+     --description-list-gap: ~"var(--dt-spacing-@{value})";
     }
   });
 

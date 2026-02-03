@@ -1,12 +1,12 @@
 .d-rich-text-editor {
   &__code-block {
-    padding: var(--dt-space-400);
+    padding: var(--dt-spacing-100);
     font: var(--dt-typography-code-md);
     background: var(--dt-color-surface-secondary);
   }
 
   code:not(.d-rich-text-editor__code-block > code) {
-    padding: var(--dt-space-200);
+    padding: var(--dt-spacing-25);
     color: var(--dt-color-foreground-warning);
     font: var(--dt-typography-code-md);
     background-color: var(--dt-color-surface-secondary-opaque);
@@ -26,7 +26,7 @@
     }
 
     ul, ol {
-      padding-left: var(--dt-space-525);
+      padding-left: var(--dt-spacing-250);
     }
 
     ul > li {
@@ -39,14 +39,14 @@
 
     blockquote {
       margin-left: 0;
-      padding-left: var(--dt-space-400);
+      padding-left: var(--dt-spacing-100);
       border-left: var(--dt-size-border-300) solid var(--dt-color-border-subtle);
     }
   }
 }
 
 .d-rich-text-editor-bubble-menu__button-stack {
-  padding: var(--dt-space-300);
+  padding: var(--dt-spacing-50);
 }
 
 .d-suggestion-list__container {
@@ -80,11 +80,11 @@
 
 .d-mention-suggestion__presence {
   min-width: fit-content;
-  margin-left: var(--dt-space-200);
+  margin-left: var(--dt-spacing-25);
 }
 
 .d-mention-suggestion__status {
-  margin-left: var(--dt-space-100);
+  margin-left: var(--dt-spacing-1);
   overflow: hidden;
   color: var(--dt-color-foreground-tertiary);
   white-space: nowrap;

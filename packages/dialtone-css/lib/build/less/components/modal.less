@@ -26,7 +26,7 @@
     //  Component CSS Vars
     //  ------------------------------------------------------------------------
     --modal-backdrop-color-background: var(--dt-color-surface-backdrop);
-    --modal-dialog-padding: var(--dt-space-600);
+    --modal-dialog-padding: var(--dt-spacing-400);
     --modal-dialog-color-background: var(--dt-color-surface-primary);
     --modal-dialog-color-border: var(--dt-color-border-subtle);
     --modal-dialog-color-text: var(--dt-color-foreground-primary);
@@ -42,7 +42,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: var(--dt-space-600); // 32
+    padding: var(--dt-spacing-400); // 32
     background-color: var(--modal-backdrop-color-background);
     backface-visibility: hidden;
     visibility: hidden;
@@ -72,7 +72,7 @@
   z-index: var(--zi-hide);
   display: flex;
   flex-direction: column;
-  gap: var(--dt-space-500); //
+  gap: var(--dt-spacing-200); //
   box-sizing: border-box;
   width: 100%;
   max-width: var(--dt-size-1020); // 628
@@ -115,11 +115,11 @@
 //  $   MODAL AREAS
 //  ----------------------------------------------------------------------------
 .d-modal__footer {
-  --modal-footer-padding: var(--dt-space-550); // 24
+  --modal-footer-padding: var(--dt-spacing-300); // 24
 
   display: flex;
   flex-direction: row-reverse;
-  gap: var(--dt-space-400);
+  gap: var(--dt-spacing-100);
   align-items: center;
 }
 
@@ -130,7 +130,7 @@
 //  $$  HEADER
 //  ----------------------------------------------------------------------------
 .d-modal__header {
-  --modal-header-padding: var(--dt-space-550); // 24
+  --modal-header-padding: var(--dt-spacing-300); // 24
 
   margin: 0 !important;
   padding-right: var(--modal-header-padding);
@@ -152,8 +152,8 @@
 //  ----------------------------------------------------------------------------
 .d-modal__close {
   position: absolute;
-  inset-block-start: var(--dt-space-400);
-  inset-inline-end: var(--dt-space-400);
+  inset-block-start: var(--dt-spacing-100);
+  inset-inline-end: var(--dt-spacing-100);
   margin: 0 !important;
 }
 
@@ -162,8 +162,8 @@
 //  $   BANNERS
 //  ----------------------------------------------------------------------------
 .d-modal__banner {
-  --modal-banner-padding-y: var(--dt-space-500);
-  --modal-banner-padding-x: var(--dt-space-600);
+  --modal-banner-padding-y: var(--dt-spacing-200);
+  --modal-banner-padding-x: var(--dt-spacing-400);
   --modal-banner-color-background: var(--dt-color-surface-warning);
 
   position: relative;
@@ -242,22 +242,22 @@
   }
 
   .d-modal__header {
-    padding: var(--dt-space-600) var(--dt-space-600) 0; // 32
+    padding: var(--dt-spacing-400) var(--dt-spacing-400) 0; // 32
   }
 
   .d-modal__content {
     padding-right: 0;
-    padding-left: var(--dt-space-600); // 32
+    padding-left: var(--dt-spacing-400); // 32
   }
 
   .d-modal__footer {
     margin-top: auto !important;
-    padding: 0 var(--dt-space-550) var(--dt-space-600) var(--dt-space-600); // 0 24 32 32
+    padding: 0 var(--dt-spacing-300) var(--dt-spacing-400) var(--dt-spacing-400); // 0 24 32 32
   }
 
   .d-modal__banner {
     max-width: unset;
-    padding: var(--dt-space-450) var(--dt-space-600); // 12 32
+    padding: var(--dt-spacing-150) var(--dt-spacing-400); // 12 32
     border-radius: 0;
   }
 }

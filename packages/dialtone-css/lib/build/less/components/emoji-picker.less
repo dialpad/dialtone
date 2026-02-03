@@ -21,7 +21,7 @@
 
   &--header {
     position: relative;
-    padding: var(--dt-space-300) var(--dt-space-300) 0;
+    padding: var(--dt-spacing-50) var(--dt-spacing-50) 0;
 
     &::after {
       position: absolute;
@@ -39,7 +39,7 @@
     box-sizing: content-box !important;
     width: auto;
     max-width: calc(var(--dt-size-925) + var(--dt-size-400));
-    margin: 0 var(--dt-space-500);
+    margin: 0 var(--dt-spacing-200);
   }
 
   &--footer {
@@ -48,7 +48,7 @@
     align-items: center;
     justify-content: space-between;
     height: calc(var(--dt-size-650) + var(--dt-size-400) + var(--dt-size-200));
-    padding: 0 var(--dt-space-500);
+    padding: 0 var(--dt-spacing-200);
     background: var(--dt-color-surface-secondary);
     border-top: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
   }
@@ -59,7 +59,7 @@
   }
 
   &__tabset-list {
-      gap: var(--dt-space-0);
+      gap: var(--dt-spacing-0);
       justify-content: space-between;
 
       &::after {
@@ -67,8 +67,8 @@
       }
 
       .d-tab {
-        --tab-padding-y: var(--dt-space-400);
-        --tab-padding-x: var(--dt-space-300);
+        --tab-padding-y: var(--dt-spacing-100);
+        --tab-padding-x: var(--dt-spacing-50);
 
         flex-grow: 1;
 
@@ -83,9 +83,9 @@
   &__skin-list {
     display: inline-flex;
     flex-direction: row;
-    gap: var(--dt-space-300);
+    gap: var(--dt-spacing-50);
     align-items: flex-start;
-    padding: var(--dt-space-300);
+    padding: var(--dt-spacing-50);
     background: var(--dt-color-surface-moderate-opaque);
     border-radius: var(--dt-size-radius-pill);
 
@@ -117,7 +117,7 @@
       width: var(--dt-size-625);
       height: var(--dt-size-625);
       margin: 0;
-      padding: calc(var(--dt-space-350) + var(--dt-space-100));
+      padding: calc(var(--dt-spacing-75) + var(--dt-spacing-1));
       background: var(--dt-color-surface-moderate-opaque);
       border: none;
       border-radius: var(--dt-size-radius-circle);
@@ -134,7 +134,7 @@
     min-height: calc(var(--dt-size-905) + var(--dt-size-600) + var(--dt-size-100));
 
     p {
-      padding-bottom: var(--dt-space-300);
+      padding-bottom: var(--dt-spacing-50);
       color: var(--dt-color-foreground-secondary);
       font: var(--dt-typography-headline-eyebrow);
       text-transform: var(--dt-typography-headline-eyebrow-text-case);
@@ -146,7 +146,7 @@
     top: 0;
     width: 100%;
     margin: 0;
-    padding: var(--dt-space-500) var(--dt-space-500) 0 var(--dt-space-500);
+    padding: var(--dt-spacing-200) var(--dt-spacing-200) 0 var(--dt-spacing-200);
     background: var(--dt-color-surface-primary);
   }
 
@@ -154,33 +154,33 @@
     position: relative;
     height: 100%;
     max-height: calc(var(--dt-size-905) + var(--dt-size-600) + var(--dt-size-100));
-    padding-bottom: calc(var(--dt-space-300) + var(--dt-space-100));
+    padding-bottom: calc(var(--dt-spacing-50) + var(--dt-spacing-1));
     overflow: hidden auto;
 
     div:not(:first-child) {
       p {
-        margin-top: var(--dt-space-500);
+        margin-top: var(--dt-spacing-200);
       }
     }
   }
 
   &__search-label {
-    padding-top: var(--dt-space-500);
+    padding-top: var(--dt-spacing-200);
   }
 
   &__search-x-button {
-    margin-right: var(--dt-space-300-negative);
+    margin-right: var(--dt-spacing-50-negative);
   }
 
   &__tab {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--dt-space-200);
+    gap: var(--dt-spacing-25);
     width: calc(100% + calc(var(--dt-size-500) - var(--dt-size-100)));
     max-width: calc(var(--dt-size-925) + var(--dt-size-400));
     // We use this margin left to align the emoji list with the tabset label
-    margin-left: var(--dt-space-350-negative);
-    padding-top: var(--dt-space-300);
+    margin-left: var(--dt-spacing-75-negative);
+    padding-top: var(--dt-spacing-50);
 
     button {
       display: flex;
@@ -214,7 +214,7 @@
   &__search {
     position: relative;
     z-index: 1;
-    padding: var(--dt-space-500) 0 0 0;
+    padding: var(--dt-spacing-200) 0 0 0;
   }
 
   &__search-button {
@@ -229,7 +229,7 @@
 
   &__data {
     display: flex;
-    gap: var(--dt-space-400);
+    gap: var(--dt-spacing-100);
     align-items: center;
     width: 100%;
     max-width: calc(var(--dt-size-905) + var(--dt-size-550) + var(--dt-size-200));

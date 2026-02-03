@@ -286,7 +286,7 @@ function flexColumnsUtilities (clonedSource, declaration) {
       source: clonedSource,
       selector: `.d-fl-col${i} > *`,
       nodes: [
-        declaration.clone({ prop: '--fl-gap', value: 'var(--dt-space-0)' }),
+        declaration.clone({ prop: '--fl-gap', value: 'var(--dt-spacing-0)' }),
         declaration.clone({ prop: '--fl-basis', value: `calc(100% / ${i})` }),
         declaration.clone({ prop: 'display', value: 'inline-flex' }),
         declaration.clone({ prop: 'margin', value: 'var(--fl-gap)' }),
@@ -297,7 +297,7 @@ function flexColumnsUtilities (clonedSource, declaration) {
       source: clonedSource,
       selector: `.d-fl-col${i} > *:nth-child(-n + ${i})`,
       nodes: [
-        declaration.clone({ prop: 'margin-top', value: 'var(--dt-space-0)' }),
+        declaration.clone({ prop: 'margin-top', value: 'var(--dt-spacing-0)' }),
       ],
     }));
     generatedRules.flexDirectionColumn.push(new Rule({
@@ -438,28 +438,28 @@ function gapUtilities (clonedSource, declaration) {
         source: clonedSource,
         selector: `.d-g${stop}`,
         nodes: [
-          declaration.clone({ prop: 'gap', value: `var(--dt-space-${GAP_SPACES[stop]}) !important` }),
+          declaration.clone({ prop: 'gap', value: `var(--dt-spacing-${GAP_SPACES[stop]}) !important` }),
         ],
       }));
       generatedRules.rowGap.push(new Rule({
         source: clonedSource,
         selector: `.d-rg${stop}`,
         nodes: [
-          declaration.clone({ prop: 'row-gap', value: `var(--dt-space-${GAP_SPACES[stop]}) !important` }),
+          declaration.clone({ prop: 'row-gap', value: `var(--dt-spacing-${GAP_SPACES[stop]}) !important` }),
         ],
       }));
       generatedRules.columnGap.push(new Rule({
         source: clonedSource,
         selector: `.d-cg${stop}`,
         nodes: [
-          declaration.clone({ prop: 'column-gap', value: `var(--dt-space-${GAP_SPACES[stop]}) !important` }),
+          declaration.clone({ prop: 'column-gap', value: `var(--dt-spacing-${GAP_SPACES[stop]}) !important` }),
         ],
       }));
       generatedRules.gapEveryChild.push(new Rule({
         source: clonedSource,
         selector: `.d-g${stop} > *`,
         nodes: [
-          declaration.clone({ prop: '--fl-gap', value: `var(--dt-space-${GAP_SPACES[stop]})` }),
+          declaration.clone({ prop: '--fl-gap', value: `var(--dt-spacing-${GAP_SPACES[stop]})` }),
           declaration.clone({ prop: 'margin', value: 'unset' }),
         ],
       }));
@@ -467,7 +467,7 @@ function gapUtilities (clonedSource, declaration) {
         source: clonedSource,
         selector: `.d-cg${stop} > *`,
         nodes: [
-          declaration.clone({ prop: '--fl-gap', value: `var(--dt-space-${GAP_SPACES[stop]})` }),
+          declaration.clone({ prop: '--fl-gap', value: `var(--dt-spacing-${GAP_SPACES[stop]})` }),
           declaration.clone({ prop: 'margin', value: 'unset' }),
         ],
       }));
@@ -477,21 +477,21 @@ function gapUtilities (clonedSource, declaration) {
         source: clonedSource,
         selector: `.d-gg${stop}`,
         nodes: [
-          declaration.clone({ prop: 'grid-gap', value: `var(--dt-space-${GAP_SPACES[stop]}) !important` }),
+          declaration.clone({ prop: 'grid-gap', value: `var(--dt-spacing-${GAP_SPACES[stop]}) !important` }),
         ],
       }));
       generatedRules.gridRowGap.push(new Rule({
         source: clonedSource,
         selector: `.d-grg${stop}`,
         nodes: [
-          declaration.clone({ prop: 'grid-row-gap', value: `var(--dt-space-${GAP_SPACES[stop]}) !important` }),
+          declaration.clone({ prop: 'grid-row-gap', value: `var(--dt-spacing-${GAP_SPACES[stop]}) !important` }),
         ],
       }));
       generatedRules.gridColumnGap.push(new Rule({
         source: clonedSource,
         selector: `.d-gcg${stop}`,
         nodes: [
-          declaration.clone({ prop: 'grid-column-gap', value: `var(--dt-space-${GAP_SPACES[stop]}) !important` }),
+          declaration.clone({ prop: 'grid-column-gap', value: `var(--dt-spacing-${GAP_SPACES[stop]}) !important` }),
         ],
       }));
     });
@@ -509,54 +509,54 @@ function layoutUtilities (clonedSource, declaration) {
         source: clonedSource,
         selector: `.d-t${size}`,
         nodes: [
-          declaration.clone({ prop: 'top', value: `var(--dt-space-${LAYOUT_SIZES[size]}) !important` }),
+          declaration.clone({ prop: 'top', value: `var(--dt-spacing-${LAYOUT_SIZES[size]}) !important` }),
         ],
       }));
       generatedRules.positionRight.push(new Rule({
         source: clonedSource,
         selector: `.d-r${size}`,
         nodes: [
-          declaration.clone({ prop: 'right', value: `var(--dt-space-${LAYOUT_SIZES[size]}) !important` }),
+          declaration.clone({ prop: 'right', value: `var(--dt-spacing-${LAYOUT_SIZES[size]}) !important` }),
         ],
       }));
       generatedRules.positionBottom.push(new Rule({
         source: clonedSource,
         selector: `.d-b${size}`,
         nodes: [
-          declaration.clone({ prop: 'bottom', value: `var(--dt-space-${LAYOUT_SIZES[size]}) !important` }),
+          declaration.clone({ prop: 'bottom', value: `var(--dt-spacing-${LAYOUT_SIZES[size]}) !important` }),
         ],
       }));
       generatedRules.positionLeft.push(new Rule({
         source: clonedSource,
         selector: `.d-l${size}`,
         nodes: [
-          declaration.clone({ prop: 'left', value: `var(--dt-space-${LAYOUT_SIZES[size]}) !important` }),
+          declaration.clone({ prop: 'left', value: `var(--dt-spacing-${LAYOUT_SIZES[size]}) !important` }),
         ],
       }));
       generatedRules.positionVertical.push(new Rule({
         source: clonedSource,
         selector: `.d-y${size}`,
         nodes: [
-          declaration.clone({ prop: 'top', value: `var(--dt-space-${LAYOUT_SIZES[size]}) !important` }),
-          declaration.clone({ prop: 'bottom', value: `var(--dt-space-${LAYOUT_SIZES[size]}) !important` }),
+          declaration.clone({ prop: 'top', value: `var(--dt-spacing-${LAYOUT_SIZES[size]}) !important` }),
+          declaration.clone({ prop: 'bottom', value: `var(--dt-spacing-${LAYOUT_SIZES[size]}) !important` }),
         ],
       }));
       generatedRules.positionHorizontal.push(new Rule({
         source: clonedSource,
         selector: `.d-x${size}`,
         nodes: [
-          declaration.clone({ prop: 'right', value: `var(--dt-space-${LAYOUT_SIZES[size]}) !important` }),
-          declaration.clone({ prop: 'left', value: `var(--dt-space-${LAYOUT_SIZES[size]}) !important` }),
+          declaration.clone({ prop: 'right', value: `var(--dt-spacing-${LAYOUT_SIZES[size]}) !important` }),
+          declaration.clone({ prop: 'left', value: `var(--dt-spacing-${LAYOUT_SIZES[size]}) !important` }),
         ],
       }));
       generatedRules.positionAll.push(new Rule({
         source: clonedSource,
         selector: `.d-all${size}`,
         nodes: [
-          declaration.clone({ prop: 'top', value: `var(--dt-space-${LAYOUT_SIZES[size]}) !important` }),
-          declaration.clone({ prop: 'right', value: `var(--dt-space-${LAYOUT_SIZES[size]}) !important` }),
-          declaration.clone({ prop: 'bottom', value: `var(--dt-space-${LAYOUT_SIZES[size]}) !important` }),
-          declaration.clone({ prop: 'left', value: `var(--dt-space-${LAYOUT_SIZES[size]}) !important` }),
+          declaration.clone({ prop: 'top', value: `var(--dt-spacing-${LAYOUT_SIZES[size]}) !important` }),
+          declaration.clone({ prop: 'right', value: `var(--dt-spacing-${LAYOUT_SIZES[size]}) !important` }),
+          declaration.clone({ prop: 'bottom', value: `var(--dt-spacing-${LAYOUT_SIZES[size]}) !important` }),
+          declaration.clone({ prop: 'left', value: `var(--dt-spacing-${LAYOUT_SIZES[size]}) !important` }),
         ],
       }));
     });
@@ -616,126 +616,200 @@ function sizingUtilities (clonedSource, declaration) {
 }
 
 /**
- * Generate Margin utility classes.
+ * Generate Margin utility classes combining legacy pixel-based names with new token-based names.
+ * Both class sets use CSS logical properties and reference the same tokens.
+ * Example output: .d-mt8, .d-mbs-100 { margin-block-start: var(--dt-spacing-100) !important; }
  * @param { Source } clonedSource
  * @param { Declaration } declaration
  */
 function marginUtilities (clonedSource, declaration) {
   Object.keys(MARGIN_SIZES).forEach(size => {
-    generatedRules.marginTop.push(new Rule({
-      source: clonedSource,
-      selector: `.d-mt${size}`,
-      nodes: [
-        declaration.clone({ prop: 'margin-top', value: `var(--dt-space-${MARGIN_SIZES[size]}) !important` }),
-      ],
-    }));
-    generatedRules.marginRight.push(new Rule({
-      source: clonedSource,
-      selector: `.d-mr${size}`,
-      nodes: [
-        declaration.clone({ prop: 'margin-right', value: `var(--dt-space-${MARGIN_SIZES[size]}) !important` }),
-      ],
-    }));
-    generatedRules.marginBottom.push(new Rule({
-      source: clonedSource,
-      selector: `.d-mb${size}`,
-      nodes: [
-        declaration.clone({ prop: 'margin-bottom', value: `var(--dt-space-${MARGIN_SIZES[size]}) !important` }),
-      ],
-    }));
-    generatedRules.marginLeft.push(new Rule({
-      source: clonedSource,
-      selector: `.d-ml${size}`,
-      nodes: [
-        declaration.clone({ prop: 'margin-left', value: `var(--dt-space-${MARGIN_SIZES[size]}) !important` }),
-      ],
-    }));
-    generatedRules.marginHorizontal.push(new Rule({
-      source: clonedSource,
-      selector: `.d-mx${size}`,
-      nodes: [
-        declaration.clone({ prop: 'margin-left', value: `var(--dt-space-${MARGIN_SIZES[size]}) !important` }),
-        declaration.clone({ prop: 'margin-right', value: `var(--dt-space-${MARGIN_SIZES[size]}) !important` }),
-      ],
-    }));
-    generatedRules.marginVertical.push(new Rule({
-      source: clonedSource,
-      selector: `.d-my${size}`,
-      nodes: [
-        declaration.clone({ prop: 'margin-top', value: `var(--dt-space-${MARGIN_SIZES[size]}) !important` }),
-        declaration.clone({ prop: 'margin-bottom', value: `var(--dt-space-${MARGIN_SIZES[size]}) !important` }),
-      ],
-    }));
-    generatedRules.marginAll.push(new Rule({
-      source: clonedSource,
-      selector: `.d-m${size}`,
-      nodes: [
-        declaration.clone({ prop: 'margin', value: `var(--dt-space-${MARGIN_SIZES[size]}) !important` }),
-      ],
-    }));
+    const tokenValue = MARGIN_SIZES[size];
+    const isNegative = String(size).startsWith('n');
+
+    if (isNegative) {
+      // Negative values: n8 → '100-negative', combine .d-mtn8 with .d-mbs-n100
+      const pixelNum = size.substring(1); // 'n8' → '8'
+      const baseToken = tokenValue.replace('-negative', ''); // '100-negative' → '100'
+
+      // d-mtn + d-mbs-n (margin-block-start negative)
+      generatedRules.marginTop.push(new Rule({
+        source: clonedSource,
+        selector: `.d-mtn${pixelNum}, .d-mbs-n${baseToken}`,
+        nodes: [
+          declaration.clone({ prop: 'margin-block-start', value: `var(--dt-spacing-${tokenValue}) !important` }),
+        ],
+      }));
+      // d-mrn + d-mie-n (margin-inline-end negative)
+      generatedRules.marginRight.push(new Rule({
+        source: clonedSource,
+        selector: `.d-mrn${pixelNum}, .d-mie-n${baseToken}`,
+        nodes: [
+          declaration.clone({ prop: 'margin-inline-end', value: `var(--dt-spacing-${tokenValue}) !important` }),
+        ],
+      }));
+      // d-mbn + d-mbe-n (margin-block-end negative)
+      generatedRules.marginBottom.push(new Rule({
+        source: clonedSource,
+        selector: `.d-mbn${pixelNum}, .d-mbe-n${baseToken}`,
+        nodes: [
+          declaration.clone({ prop: 'margin-block-end', value: `var(--dt-spacing-${tokenValue}) !important` }),
+        ],
+      }));
+      // d-mln + d-mis-n (margin-inline-start negative)
+      generatedRules.marginLeft.push(new Rule({
+        source: clonedSource,
+        selector: `.d-mln${pixelNum}, .d-mis-n${baseToken}`,
+        nodes: [
+          declaration.clone({ prop: 'margin-inline-start', value: `var(--dt-spacing-${tokenValue}) !important` }),
+        ],
+      }));
+      // d-mxn + d-mi-n (margin-inline negative)
+      generatedRules.marginHorizontal.push(new Rule({
+        source: clonedSource,
+        selector: `.d-mxn${pixelNum}, .d-mi-n${baseToken}`,
+        nodes: [
+          declaration.clone({ prop: 'margin-inline', value: `var(--dt-spacing-${tokenValue}) !important` }),
+        ],
+      }));
+      // d-myn + d-mb-n (margin-block negative)
+      generatedRules.marginVertical.push(new Rule({
+        source: clonedSource,
+        selector: `.d-myn${pixelNum}, .d-mb-n${baseToken}`,
+        nodes: [
+          declaration.clone({ prop: 'margin-block', value: `var(--dt-spacing-${tokenValue}) !important` }),
+        ],
+      }));
+    } else {
+      // Positive values: 8 → '100', combine .d-mt8 with .d-mbs-100
+      // d-mt + d-mbs (margin-block-start)
+      generatedRules.marginTop.push(new Rule({
+        source: clonedSource,
+        selector: `.d-mt${size}, .d-mbs-${tokenValue}`,
+        nodes: [
+          declaration.clone({ prop: 'margin-block-start', value: `var(--dt-spacing-${tokenValue}) !important` }),
+        ],
+      }));
+      // d-mr + d-mie (margin-inline-end)
+      generatedRules.marginRight.push(new Rule({
+        source: clonedSource,
+        selector: `.d-mr${size}, .d-mie-${tokenValue}`,
+        nodes: [
+          declaration.clone({ prop: 'margin-inline-end', value: `var(--dt-spacing-${tokenValue}) !important` }),
+        ],
+      }));
+      // d-mb + d-mbe (margin-block-end)
+      generatedRules.marginBottom.push(new Rule({
+        source: clonedSource,
+        selector: `.d-mb${size}, .d-mbe-${tokenValue}`,
+        nodes: [
+          declaration.clone({ prop: 'margin-block-end', value: `var(--dt-spacing-${tokenValue}) !important` }),
+        ],
+      }));
+      // d-ml + d-mis (margin-inline-start)
+      generatedRules.marginLeft.push(new Rule({
+        source: clonedSource,
+        selector: `.d-ml${size}, .d-mis-${tokenValue}`,
+        nodes: [
+          declaration.clone({ prop: 'margin-inline-start', value: `var(--dt-spacing-${tokenValue}) !important` }),
+        ],
+      }));
+      // d-mx + d-mi (margin-inline)
+      generatedRules.marginHorizontal.push(new Rule({
+        source: clonedSource,
+        selector: `.d-mx${size}, .d-mi-${tokenValue}`,
+        nodes: [
+          declaration.clone({ prop: 'margin-inline', value: `var(--dt-spacing-${tokenValue}) !important` }),
+        ],
+      }));
+      // d-my + d-mb (margin-block)
+      generatedRules.marginVertical.push(new Rule({
+        source: clonedSource,
+        selector: `.d-my${size}, .d-mb-${tokenValue}`,
+        nodes: [
+          declaration.clone({ prop: 'margin-block', value: `var(--dt-spacing-${tokenValue}) !important` }),
+        ],
+      }));
+      // d-m (margin all - no logical equivalent needed)
+      generatedRules.marginAll.push(new Rule({
+        source: clonedSource,
+        selector: `.d-m${size}`,
+        nodes: [
+          declaration.clone({ prop: 'margin', value: `var(--dt-spacing-${tokenValue}) !important` }),
+        ],
+      }));
+    }
   });
 }
 
 /**
- * Generate Padding utility classes.
+ * Generate Padding utility classes combining legacy pixel-based names with new token-based names.
+ * Both class sets use CSS logical properties and reference the same tokens.
+ * Example output: .d-pl8, .d-pis-100 { padding-inline-start: var(--dt-spacing-100) !important; }
  * @param { Source } clonedSource
  * @param { Declaration } declaration
  */
 function paddingUtilities (clonedSource, declaration) {
-  Object.keys(PADDING_SIZES)
-    .forEach(size => {
-      generatedRules.paddingTop.push(new Rule({
-        source: clonedSource,
-        selector: `.d-pt${size}`,
-        nodes: [
-          declaration.clone({ prop: 'padding-top', value: `var(--dt-space-${PADDING_SIZES[size]}) !important` }),
-        ],
-      }));
-      generatedRules.paddingRight.push(new Rule({
-        source: clonedSource,
-        selector: `.d-pr${size}`,
-        nodes: [
-          declaration.clone({ prop: 'padding-right', value: `var(--dt-space-${PADDING_SIZES[size]}) !important` }),
-        ],
-      }));
-      generatedRules.paddingBottom.push(new Rule({
-        source: clonedSource,
-        selector: `.d-pb${size}`,
-        nodes: [
-          declaration.clone({ prop: 'padding-bottom', value: `var(--dt-space-${PADDING_SIZES[size]}) !important` }),
-        ],
-      }));
-      generatedRules.paddingLeft.push(new Rule({
-        source: clonedSource,
-        selector: `.d-pl${size}`,
-        nodes: [
-          declaration.clone({ prop: 'padding-left', value: `var(--dt-space-${PADDING_SIZES[size]}) !important` }),
-        ],
-      }));
-      generatedRules.paddingHorizontal.push(new Rule({
-        source: clonedSource,
-        selector: `.d-px${size}`,
-        nodes: [
-          declaration.clone({ prop: 'padding-left', value: `var(--dt-space-${PADDING_SIZES[size]}) !important` }),
-          declaration.clone({ prop: 'padding-right', value: `var(--dt-space-${PADDING_SIZES[size]}) !important` }),
-        ],
-      }));
-      generatedRules.paddingVertical.push(new Rule({
-        source: clonedSource,
-        selector: `.d-py${size}`,
-        nodes: [
-          declaration.clone({ prop: 'padding-top', value: `var(--dt-space-${PADDING_SIZES[size]}) !important` }),
-          declaration.clone({ prop: 'padding-bottom', value: `var(--dt-space-${PADDING_SIZES[size]}) !important` }),
-        ],
-      }));
-      generatedRules.paddingAll.push(new Rule({
-        source: clonedSource,
-        selector: `.d-p${size}`,
-        nodes: [
-          declaration.clone({ prop: 'padding', value: `var(--dt-space-${PADDING_SIZES[size]}) !important` }),
-        ],
-      }));
-    });
+  Object.keys(PADDING_SIZES).forEach(size => {
+    const tokenValue = PADDING_SIZES[size];
+
+    // d-pt + d-pbs (padding-block-start)
+    generatedRules.paddingTop.push(new Rule({
+      source: clonedSource,
+      selector: `.d-pt${size}, .d-pbs-${tokenValue}`,
+      nodes: [
+        declaration.clone({ prop: 'padding-block-start', value: `var(--dt-spacing-${tokenValue}) !important` }),
+      ],
+    }));
+    // d-pr + d-pie (padding-inline-end)
+    generatedRules.paddingRight.push(new Rule({
+      source: clonedSource,
+      selector: `.d-pr${size}, .d-pie-${tokenValue}`,
+      nodes: [
+        declaration.clone({ prop: 'padding-inline-end', value: `var(--dt-spacing-${tokenValue}) !important` }),
+      ],
+    }));
+    // d-pb + d-pbe (padding-block-end)
+    generatedRules.paddingBottom.push(new Rule({
+      source: clonedSource,
+      selector: `.d-pb${size}, .d-pbe-${tokenValue}`,
+      nodes: [
+        declaration.clone({ prop: 'padding-block-end', value: `var(--dt-spacing-${tokenValue}) !important` }),
+      ],
+    }));
+    // d-pl + d-pis (padding-inline-start)
+    generatedRules.paddingLeft.push(new Rule({
+      source: clonedSource,
+      selector: `.d-pl${size}, .d-pis-${tokenValue}`,
+      nodes: [
+        declaration.clone({ prop: 'padding-inline-start', value: `var(--dt-spacing-${tokenValue}) !important` }),
+      ],
+    }));
+    // d-px + d-pi (padding-inline)
+    generatedRules.paddingHorizontal.push(new Rule({
+      source: clonedSource,
+      selector: `.d-px${size}, .d-pi-${tokenValue}`,
+      nodes: [
+        declaration.clone({ prop: 'padding-inline', value: `var(--dt-spacing-${tokenValue}) !important` }),
+      ],
+    }));
+    // d-py + d-pb (padding-block)
+    generatedRules.paddingVertical.push(new Rule({
+      source: clonedSource,
+      selector: `.d-py${size}, .d-pb-${tokenValue}`,
+      nodes: [
+        declaration.clone({ prop: 'padding-block', value: `var(--dt-spacing-${tokenValue}) !important` }),
+      ],
+    }));
+    // d-p (padding all - no logical equivalent needed)
+    generatedRules.paddingAll.push(new Rule({
+      source: clonedSource,
+      selector: `.d-p${size}`,
+      nodes: [
+        declaration.clone({ prop: 'padding', value: `var(--dt-spacing-${tokenValue}) !important` }),
+      ],
+    }));
+  });
 }
 
 /**

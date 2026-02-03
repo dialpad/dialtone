@@ -988,22 +988,22 @@
       "type": "spacing",
       "description": "No spacing"
     },
-    "0125": {
+    "1": {
       "value": "{spacing.base} * 0.125",
       "type": "spacing",
       "description": "1px - minimal spacing for borders/dividers"
     },
-    "025": {
+    "25": {
       "value": "{spacing.base} * 0.25",
       "type": "spacing",
       "description": "2px"
     },
-    "050": {
+    "50": {
       "value": "{spacing.base} * 0.5",
       "type": "spacing",
       "description": "4px"
     },
-    "075": {
+    "75": {
       "value": "{spacing.base} * 0.75",
       "type": "spacing",
       "description": "6px"
@@ -1108,20 +1108,20 @@
       "type": "spacing",
       "description": "64px - spacing cap"
     },
-    "0125-negative": {
-      "value": "{spacing.0125} * -1",
+    "1-negative": {
+      "value": "{spacing.1} * -1",
       "type": "spacing"
     },
-    "025-negative": {
-      "value": "{spacing.025} * -1",
+    "25-negative": {
+      "value": "{spacing.25} * -1",
       "type": "spacing"
     },
-    "050-negative": {
-      "value": "{spacing.050} * -1",
+    "50-negative": {
+      "value": "{spacing.50} * -1",
       "type": "spacing"
     },
-    "075-negative": {
-      "value": "{spacing.075} * -1",
+    "75-negative": {
+      "value": "{spacing.75} * -1",
       "type": "spacing"
     },
     "100-negative": {
