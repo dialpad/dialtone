@@ -1,4 +1,4 @@
-import { addons } from '@storybook/addons';
+import { addons } from '@storybook/manager-api';
 
 const CSS_TO_HIDE_TEST_SECTION_FROM_SIDEBAR = `
 #visual-testing,
