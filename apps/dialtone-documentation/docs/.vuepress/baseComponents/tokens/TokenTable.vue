@@ -195,7 +195,7 @@ export default {
 <style scoped>
 .token-name {
   /* make space for the copy button that appears on mouse enter */
-  min-height: 2.8rem;
+  min-block-size: 2.8rem;
 }
 
 .d-table th {
@@ -204,7 +204,7 @@ export default {
 }
 
 .d-table tr th:first-child {
-  width: 16rem;
+  inline-size: 16rem;
 }
 
 .d-table thead tr {

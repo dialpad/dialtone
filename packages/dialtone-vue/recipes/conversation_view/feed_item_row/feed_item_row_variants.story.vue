@@ -317,7 +317,7 @@ const { mockReactions } = useMockReactions();
       }
     }
     &__thread{
-      height: 32px;
+      block-size: 32px;
     }
     &__reply{
       color: var(--dt-color-foreground-tertiary);

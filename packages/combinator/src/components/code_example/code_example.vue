@@ -185,9 +185,9 @@ const formatHTML = async (elementHTML) => {
 
 <style scoped lang="less">
 .code-example-tab-group {
-  margin-top: var(--dt-space-500);
+  margin-block-start: var(--dt-space-500);
   .language-html {
-    margin-top: 0;
+    margin-block-start: 0;
     position: relative;
   }
 }
