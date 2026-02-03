@@ -1,3 +1,10 @@
+# [3.201.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.200.0...dialtone-vue/v3.201.0) (2026-02-03)
+
+
+### Features
+
+* DP-159552 editor table support when pasting ([#1034](https://github.com/dialpad/dialtone/issues/1034)) ([8ec5592](https://github.com/dialpad/dialtone/commit/8ec559290b2674eb3666e2f74627d91c23d8d257))
+
 # [3.200.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.199.1...dialtone-vue/v3.200.0) (2026-01-29)
 
 
