@@ -79,7 +79,9 @@ function boxShadows (shadowDeclarations, Declaration, parentRule) {
     .reduce((shadows, shadow) => {
       const [name, index] = shadow
         .split(shadowSegmentsRegex).slice(1, -1);
-      shadows[name] = Number.isNaN(Number.parseInt(index)) ? 1 : Number.parseInt(index);
+      // Track the maximum layer index for multi-layer shadows
+      const layerIndex = Number.isNaN(Number.parseInt(index)) ? 1 : Number.parseInt(index);
+      shadows[name] = Math.max(shadows[name] || 0, layerIndex);
       return shadows;
     }, {});
 
