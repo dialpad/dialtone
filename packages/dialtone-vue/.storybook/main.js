@@ -1,3 +1,4 @@
+// This file has been automatically migrated to valid ESM format by Storybook.
 import { createRequire } from 'node:module';
 import { dirname, join } from 'node:path';
 import { mergeConfig } from 'vite';
@@ -27,23 +28,6 @@ const config = {
   async viteFinal (config) {
     // Merge custom configuration into the default config
     return mergeConfig(config, {
-      // [Bug]: MDX not loading on Storybook 10
-      // https://github.com/storybookjs/storybook/issues/33118
-      plugins: [
-        {
-          name: 'fix-mdx-react-shim',
-          enforce: 'pre',
-          resolveId(source) {
-            if (
-              source.startsWith('file://') &&
-              source.includes('mdx-react-shim.js')
-            ) {
-              return new URL(source).pathname;
-            }
-            return null;
-          },
-        },
-      ],
       build: {
         sourcemap: true,
       },
