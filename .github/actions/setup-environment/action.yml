@@ -16,8 +16,8 @@ runs:
     - name: Configure GitHub Packages auth
       shell: bash
       run: |
-        echo "@dialpad:registry=https://npm.pkg.github.com" > .npmrc
-        echo "//npm.pkg.github.com/:_authToken=${{ github.token }}" >> .npmrc
+        echo "@dialpad:registry=https://npm.pkg.github.com" >> ~/.npmrc
+        echo "//npm.pkg.github.com/:_authToken=${{ github.token }}" >> ~/.npmrc
 
     - name: Install dependencies
       shell: bash
