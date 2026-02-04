@@ -11,7 +11,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-0)",
+            "WEB": "var(--dt-spacing-0)",
             "ANDROID": "dtSpace0",
             "iOS": "dtSpace0"
           }
@@ -30,7 +30,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-50)",
+            "WEB": "var(--dt-size-50)",
             "ANDROID": "dtSpace50",
             "iOS": "dtSpace50"
           }
@@ -49,7 +49,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-100)",
+            "WEB": "var(--dt-spacing-1)",
             "ANDROID": "dtSpace100",
             "iOS": "dtSpace100"
           }
@@ -68,7 +68,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-200)",
+            "WEB": "var(--dt-spacing-25)",
             "ANDROID": "dtSpace200",
             "iOS": "dtSpace200"
           }
@@ -87,7 +87,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-300)",
+            "WEB": "var(--dt-spacing-50)",
             "ANDROID": "dtSpace300",
             "iOS": "dtSpace300"
           }
@@ -106,7 +106,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-350)",
+            "WEB": "var(--dt-spacing-75)",
             "ANDROID": "dtSpace350",
             "iOS": "dtSpace350"
           }
@@ -125,7 +125,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-400)",
+            "WEB": "var(--dt-spacing-100)",
             "ANDROID": "dtSpace400",
             "iOS": "dtSpace400"
           }
@@ -144,7 +144,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-450)",
+            "WEB": "var(--dt-spacing-150)",
             "ANDROID": "dtSpace450",
             "iOS": "dtSpace450"
           }
@@ -163,7 +163,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-500)",
+            "WEB": "var(--dt-spacing-200)",
             "ANDROID": "dtSpace500",
             "iOS": "dtSpace500"
           }
@@ -182,7 +182,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-525)",
+            "WEB": "var(--dt-spacing-250)",
             "ANDROID": "dtSpace525",
             "iOS": "dtSpace525"
           }
@@ -201,7 +201,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-550)",
+            "WEB": "var(--dt-spacing-300)",
             "ANDROID": "dtSpace550",
             "iOS": "dtSpace550"
           }
@@ -220,7 +220,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-600)",
+            "WEB": "var(--dt-spacing-400)",
             "ANDROID": "dtSpace600",
             "iOS": "dtSpace600"
           }
@@ -239,7 +239,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-625)",
+            "WEB": "var(--dt-spacing-525)",
             "ANDROID": "dtSpace625",
             "iOS": "dtSpace625"
           }
@@ -258,7 +258,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-650)",
+            "WEB": "var(--dt-spacing-600)",
             "ANDROID": "dtSpace650",
             "iOS": "dtSpace650"
           }
@@ -277,7 +277,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-700)",
+            "WEB": "var(--dt-spacing-800)",
             "ANDROID": "dtSpace700",
             "iOS": "dtSpace700"
           }
@@ -296,7 +296,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-720)",
+            "WEB": "var(--dt-size-720)",
             "ANDROID": "dtSpace720",
             "iOS": "dtSpace720"
           }
@@ -315,7 +315,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-730)",
+            "WEB": "var(--dt-size-730)",
             "ANDROID": "dtSpace730",
             "iOS": "dtSpace730"
           }
@@ -334,7 +334,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-750)",
+            "WEB": "var(--dt-layout-150)",
             "ANDROID": "dtSpace750",
             "iOS": "dtSpace750"
           }
@@ -353,7 +353,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-760)",
+            "WEB": "var(--dt-size-760)",
             "ANDROID": "dtSpace760",
             "iOS": "dtSpace760"
           }
@@ -372,7 +372,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-775)",
+            "WEB": "var(--dt-size-775)",
             "ANDROID": "dtSpace775",
             "iOS": "dtSpace775"
           }
@@ -391,7 +391,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-800)",
+            "WEB": "var(--dt-layout-200)",
             "ANDROID": "dtSpace800",
             "iOS": "dtSpace800"
           }
@@ -410,7 +410,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-825)",
+            "WEB": "var(--dt-size-825)",
             "ANDROID": "dtSpace825",
             "iOS": "dtSpace825"
           }
@@ -429,7 +429,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-850)",
+            "WEB": "var(--dt-layout-225)",
             "ANDROID": "dtSpace850",
             "iOS": "dtSpace850"
           }
@@ -448,7 +448,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-875)",
+            "WEB": "var(--dt-size-875)",
             "ANDROID": "dtSpace875",
             "iOS": "dtSpace875"
           }
@@ -467,7 +467,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-900)",
+            "WEB": "var(--dt-layout-250)",
             "ANDROID": "dtSpace900",
             "iOS": "dtSpace900"
           }
@@ -486,7 +486,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-905)",
+            "WEB": "var(--dt-size-905)",
             "ANDROID": "dtSpace905",
             "iOS": "dtSpace905"
           }
@@ -505,7 +505,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-925)",
+            "WEB": "var(--dt-size-925)",
             "ANDROID": "dtSpace925",
             "iOS": "dtSpace925"
           }
@@ -524,7 +524,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-950)",
+            "WEB": "var(--dt-layout-400)",
             "ANDROID": "dtSpace950",
             "iOS": "dtSpace950"
           }
@@ -543,7 +543,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-975)",
+            "WEB": "var(--dt-size-975)",
             "ANDROID": "dtSpace975",
             "iOS": "dtSpace975"
           }
@@ -562,7 +562,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-1000)",
+            "WEB": "var(--dt-layout-500)",
             "ANDROID": "dtSpace1000",
             "iOS": "dtSpace1000"
           }
@@ -581,7 +581,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-1020)",
+            "WEB": "var(--dt-size-1020)",
             "ANDROID": "dtSpace1020",
             "iOS": "dtSpace1020"
           }
@@ -600,7 +600,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-1040)",
+            "WEB": "var(--dt-size-1040)",
             "ANDROID": "dtSpace1040",
             "iOS": "dtSpace1040"
           }
@@ -619,7 +619,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-1050)",
+            "WEB": "var(--dt-size-1050)",
             "ANDROID": "dtSpace1050",
             "iOS": "dtSpace1050"
           }
@@ -638,7 +638,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-1060)",
+            "WEB": "var(--dt-size-1060)",
             "ANDROID": "dtSpace1060",
             "iOS": "dtSpace1060"
           }
@@ -657,7 +657,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-1080)",
+            "WEB": "var(--dt-size-1080)",
             "ANDROID": "dtSpace1080",
             "iOS": "dtSpace1080"
           }
@@ -676,7 +676,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-1100)",
+            "WEB": "var(--dt-layout-900)",
             "ANDROID": "dtSpace1100",
             "iOS": "dtSpace1100"
           }
@@ -695,7 +695,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-1115)",
+            "WEB": "var(--dt-size-1115)",
             "ANDROID": "dtSpace1115",
             "iOS": "dtSpace1115"
           }
@@ -714,7 +714,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-1120)",
+            "WEB": "var(--dt-size-1120)",
             "ANDROID": "dtSpace1120",
             "iOS": "dtSpace1120"
           }
@@ -733,7 +733,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-1125)",
+            "WEB": "var(--dt-size-1125)",
             "ANDROID": "dtSpace1125",
             "iOS": "dtSpace1125"
           }
@@ -752,7 +752,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-1130)",
+            "WEB": "var(--dt-size-1130)",
             "ANDROID": "dtSpace1130",
             "iOS": "dtSpace1130"
           }
@@ -771,7 +771,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-1150)",
+            "WEB": "var(--dt-size-1150)",
             "ANDROID": "dtSpace1150",
             "iOS": "dtSpace1150"
           }
@@ -790,7 +790,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-1200)",
+            "WEB": "var(--dt-size-1200)",
             "ANDROID": "dtSpace1200",
             "iOS": "dtSpace1200"
           }
@@ -809,7 +809,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-50-negative)",
+            "WEB": "var(--dt-size-50-negative)",
             "ANDROID": "dtSpace50Negative",
             "iOS": "dtSpace50Negative"
           }
@@ -828,7 +828,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-100-negative)",
+            "WEB": "var(--dt-spacing-1-negative)",
             "ANDROID": "dtSpace100Negative",
             "iOS": "dtSpace100Negative"
           }
@@ -847,7 +847,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-200-negative)",
+            "WEB": "var(--dt-spacing-25-negative)",
             "ANDROID": "dtSpace200Negative",
             "iOS": "dtSpace200Negative"
           }
@@ -866,7 +866,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-300-negative)",
+            "WEB": "var(--dt-spacing-50-negative)",
             "ANDROID": "dtSpace300Negative",
             "iOS": "dtSpace300Negative"
           }
@@ -885,7 +885,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-350-negative)",
+            "WEB": "var(--dt-spacing-75-negative)",
             "ANDROID": "dtSpace350Negative",
             "iOS": "dtSpace350Negative"
           }
@@ -904,7 +904,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-400-negative)",
+            "WEB": "var(--dt-spacing-100-negative)",
             "ANDROID": "dtSpace400Negative",
             "iOS": "dtSpace400Negative"
           }
@@ -923,7 +923,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-450-negative)",
+            "WEB": "var(--dt-spacing-150-negative)",
             "ANDROID": "dtSpace450Negative",
             "iOS": "dtSpace450Negative"
           }
@@ -942,7 +942,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-500-negative)",
+            "WEB": "var(--dt-spacing-200-negative)",
             "ANDROID": "dtSpace500Negative",
             "iOS": "dtSpace500Negative"
           }
@@ -961,7 +961,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-525-negative)",
+            "WEB": "var(--dt-spacing-250-negative)",
             "ANDROID": "dtSpace525Negative",
             "iOS": "dtSpace525Negative"
           }
@@ -980,7 +980,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-550-negative)",
+            "WEB": "var(--dt-spacing-300-negative)",
             "ANDROID": "dtSpace550Negative",
             "iOS": "dtSpace550Negative"
           }
@@ -999,7 +999,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-600-negative)",
+            "WEB": "var(--dt-spacing-400-negative)",
             "ANDROID": "dtSpace600Negative",
             "iOS": "dtSpace600Negative"
           }
@@ -1018,7 +1018,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-625-negative)",
+            "WEB": "var(--dt-spacing-525-negative)",
             "ANDROID": "dtSpace625Negative",
             "iOS": "dtSpace625Negative"
           }
@@ -1037,7 +1037,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-650-negative)",
+            "WEB": "var(--dt-spacing-600-negative)",
             "ANDROID": "dtSpace650Negative",
             "iOS": "dtSpace650Negative"
           }
@@ -1056,7 +1056,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-700-negative)",
+            "WEB": "var(--dt-spacing-800-negative)",
             "ANDROID": "dtSpace700Negative",
             "iOS": "dtSpace700Negative"
           }
@@ -1075,7 +1075,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-720-negative)",
+            "WEB": "var(--dt-size-720-negative)",
             "ANDROID": "dtSpace720Negative",
             "iOS": "dtSpace720Negative"
           }
@@ -1094,7 +1094,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-730-negative)",
+            "WEB": "var(--dt-size-730-negative)",
             "ANDROID": "dtSpace730Negative",
             "iOS": "dtSpace730Negative"
           }
@@ -1113,7 +1113,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-750-negative)",
+            "WEB": "var(--dt-layout-150-negative)",
             "ANDROID": "dtSpace750Negative",
             "iOS": "dtSpace750Negative"
           }
@@ -1132,7 +1132,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-760-negative)",
+            "WEB": "var(--dt-size-760-negative)",
             "ANDROID": "dtSpace760Negative",
             "iOS": "dtSpace760Negative"
           }
@@ -1151,7 +1151,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-775-negative)",
+            "WEB": "var(--dt-size-775-negative)",
             "ANDROID": "dtSpace775Negative",
             "iOS": "dtSpace775Negative"
           }
@@ -1170,7 +1170,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-800-negative)",
+            "WEB": "var(--dt-layout-200-negative)",
             "ANDROID": "dtSpace800Negative",
             "iOS": "dtSpace800Negative"
           }
@@ -1189,7 +1189,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-825-negative)",
+            "WEB": "var(--dt-size-825-negative)",
             "ANDROID": "dtSpace825Negative",
             "iOS": "dtSpace825Negative"
           }
@@ -1208,7 +1208,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-850-negative)",
+            "WEB": "var(--dt-size-850-negative)",
             "ANDROID": "dtSpace850Negative",
             "iOS": "dtSpace850Negative"
           }
@@ -1227,7 +1227,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-875-negative)",
+            "WEB": "var(--dt-size-875-negative)",
             "ANDROID": "dtSpace875Negative",
             "iOS": "dtSpace875Negative"
           }
@@ -1246,7 +1246,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-900-negative)",
+            "WEB": "var(--dt-size-900-negative)",
             "ANDROID": "dtSpace900Negative",
             "iOS": "dtSpace900Negative"
           }
@@ -1265,7 +1265,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-905-negative)",
+            "WEB": "var(--dt-size-905-negative)",
             "ANDROID": "dtSpace905Negative",
             "iOS": "dtSpace905Negative"
           }
@@ -1284,7 +1284,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-925-negative)",
+            "WEB": "var(--dt-size-925-negative)",
             "ANDROID": "dtSpace925Negative",
             "iOS": "dtSpace925Negative"
           }
@@ -1303,7 +1303,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-950-negative)",
+            "WEB": "var(--dt-size-950-negative)",
             "ANDROID": "dtSpace950Negative",
             "iOS": "dtSpace950Negative"
           }
@@ -1322,7 +1322,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-975-negative)",
+            "WEB": "var(--dt-size-975-negative)",
             "ANDROID": "dtSpace975Negative",
             "iOS": "dtSpace975Negative"
           }
@@ -1341,7 +1341,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-1000-negative)",
+            "WEB": "var(--dt-size-1000-negative)",
             "ANDROID": "dtSpace1000Negative",
             "iOS": "dtSpace1000Negative"
           }
@@ -1360,7 +1360,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-1020-negative)",
+            "WEB": "var(--dt-size-1020-negative)",
             "ANDROID": "dtSpace1020Negative",
             "iOS": "dtSpace1020Negative"
           }
@@ -1379,7 +1379,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-1040-negative)",
+            "WEB": "var(--dt-size-1040-negative)",
             "ANDROID": "dtSpace1040Negative",
             "iOS": "dtSpace1040Negative"
           }
@@ -1398,7 +1398,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-1050-negative)",
+            "WEB": "var(--dt-size-1050-negative)",
             "ANDROID": "dtSpace1050Negative",
             "iOS": "dtSpace1050Negative"
           }
@@ -1417,7 +1417,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-1060-negative)",
+            "WEB": "var(--dt-size-1060-negative)",
             "ANDROID": "dtSpace1060Negative",
             "iOS": "dtSpace1060Negative"
           }
@@ -1436,7 +1436,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-1080-negative)",
+            "WEB": "var(--dt-size-1080-negative)",
             "ANDROID": "dtSpace1080Negative",
             "iOS": "dtSpace1080Negative"
           }
@@ -1455,7 +1455,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-1100-negative)",
+            "WEB": "var(--dt-size-1100-negative)",
             "ANDROID": "dtSpace1100Negative",
             "iOS": "dtSpace1100Negative"
           }
@@ -1474,7 +1474,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-1115-negative)",
+            "WEB": "var(--dt-size-1115-negative)",
             "ANDROID": "dtSpace1115Negative",
             "iOS": "dtSpace1115Negative"
           }
@@ -1493,7 +1493,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-1120-negative)",
+            "WEB": "var(--dt-size-1120-negative)",
             "ANDROID": "dtSpace1120Negative",
             "iOS": "dtSpace1120Negative"
           }
@@ -1512,7 +1512,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-1125-negative)",
+            "WEB": "var(--dt-size-1125-negative)",
             "ANDROID": "dtSpace1125Negative",
             "iOS": "dtSpace1125Negative"
           }
@@ -1531,7 +1531,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-1130-negative)",
+            "WEB": "var(--dt-size-1130-negative)",
             "ANDROID": "dtSpace1130Negative",
             "iOS": "dtSpace1130Negative"
           }
@@ -1550,7 +1550,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-1150-negative)",
+            "WEB": "var(--dt-size-1150-negative)",
             "ANDROID": "dtSpace1150Negative",
             "iOS": "dtSpace1150Negative"
           }
@@ -1569,7 +1569,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-1200-negative)",
+            "WEB": "var(--dt-size-1200-negative)",
             "ANDROID": "dtSpace1200Negative",
             "iOS": "dtSpace1200Negative"
           }
@@ -1588,7 +1588,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-0-percent)",
+            "WEB": "var(--dt-layout-0-percent)",
             "ANDROID": "dtSpace0Percent",
             "iOS": "dtSpace0Percent"
           }
@@ -1607,7 +1607,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-5-percent)",
+            "WEB": "var(--dt-layout-5-percent)",
             "ANDROID": "dtSpace5Percent",
             "iOS": "dtSpace5Percent"
           }
@@ -1626,7 +1626,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-10-percent)",
+            "WEB": "var(--dt-layout-10-percent)",
             "ANDROID": "dtSpace10Percent",
             "iOS": "dtSpace10Percent"
           }
@@ -1645,7 +1645,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-20-percent)",
+            "WEB": "var(--dt-layout-20-percent)",
             "ANDROID": "dtSpace20Percent",
             "iOS": "dtSpace20Percent"
           }
@@ -1664,7 +1664,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-25-percent)",
+            "WEB": "var(--dt-layout-25-percent)",
             "ANDROID": "dtSpace25Percent",
             "iOS": "dtSpace25Percent"
           }
@@ -1683,7 +1683,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-30-percent)",
+            "WEB": "var(--dt-layout-30-percent)",
             "ANDROID": "dtSpace30Percent",
             "iOS": "dtSpace30Percent"
           }
@@ -1702,7 +1702,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-33-percent)",
+            "WEB": "var(--dt-layout-33-percent)",
             "ANDROID": "dtSpace33Percent",
             "iOS": "dtSpace33Percent"
           }
@@ -1721,7 +1721,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-40-percent)",
+            "WEB": "var(--dt-layout-40-percent)",
             "ANDROID": "dtSpace40Percent",
             "iOS": "dtSpace40Percent"
           }
@@ -1740,7 +1740,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-50-percent)",
+            "WEB": "var(--dt-layout-50-percent)",
             "ANDROID": "dtSpace50Percent",
             "iOS": "dtSpace50Percent"
           }
@@ -1759,7 +1759,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-60-percent)",
+            "WEB": "var(--dt-layout-60-percent)",
             "ANDROID": "dtSpace60Percent",
             "iOS": "dtSpace60Percent"
           }
@@ -1778,7 +1778,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-66-percent)",
+            "WEB": "var(--dt-layout-66-percent)",
             "ANDROID": "dtSpace66Percent",
             "iOS": "dtSpace66Percent"
           }
@@ -1797,7 +1797,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-70-percent)",
+            "WEB": "var(--dt-layout-70-percent)",
             "ANDROID": "dtSpace70Percent",
             "iOS": "dtSpace70Percent"
           }
@@ -1816,7 +1816,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-75-percent)",
+            "WEB": "var(--dt-layout-75-percent)",
             "ANDROID": "dtSpace75Percent",
             "iOS": "dtSpace75Percent"
           }
@@ -1835,7 +1835,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-80-percent)",
+            "WEB": "var(--dt-layout-80-percent)",
             "ANDROID": "dtSpace80Percent",
             "iOS": "dtSpace80Percent"
           }
@@ -1854,7 +1854,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-90-percent)",
+            "WEB": "var(--dt-layout-90-percent)",
             "ANDROID": "dtSpace90Percent",
             "iOS": "dtSpace90Percent"
           }
@@ -1873,7 +1873,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-95-percent)",
+            "WEB": "var(--dt-layout-95-percent)",
             "ANDROID": "dtSpace95Percent",
             "iOS": "dtSpace95Percent"
           }
@@ -1892,7 +1892,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-space-100-percent)",
+            "WEB": "var(--dt-layout-100-percent)",
             "ANDROID": "dtSpace100Percent",
             "iOS": "dtSpace100Percent"
           }

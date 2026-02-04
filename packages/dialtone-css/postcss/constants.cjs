@@ -48,6 +48,22 @@ module.exports = {
     48: '650',
     64: '700',
   },
+  // Gap spaces using new spacing tokens
+  GAP_SPACES_SPACING: {
+    0: '0',
+    1: '1',
+    2: '25',
+    4: '50',
+    6: '75',
+    8: '100',
+    12: '150',
+    16: '200',
+    20: '250',
+    24: '300',
+    32: '400',
+    48: '600',
+    64: '800',
+  },
   LAYOUT_SIZES: {
     0: '0',
     1: '100',
@@ -82,6 +98,48 @@ module.exports = {
     n96: '750-negative',
     n102: '760-negative',
   },
+  // Position sizes using new spacing tokens (0-64px) - EXACT MATCHES ONLY
+  POSITION_SIZES_SPACING: {
+    0: '0',
+    1: '1',
+    2: '25',
+    4: '50',
+    6: '75',
+    8: '100',
+    12: '150',
+    16: '200',
+    20: '250',
+    24: '300',
+    32: '400',
+    48: '600',
+    64: '800',
+    n1: '1-negative',
+    n2: '25-negative',
+    n4: '50-negative',
+    n6: '75-negative',
+    n8: '100-negative',
+    n12: '150-negative',
+    n16: '200-negative',
+    n24: '300-negative',
+    n32: '400-negative',
+    n48: '600-negative',
+    n64: '800-negative',
+  },
+  // Position sizes using layout tokens (64px+) - EXACT MATCHES ONLY
+  POSITION_SIZES_LAYOUT: {
+    96: '150',
+    n96: '150-negative',
+  },
+  // Position sizes that don't have exact spacing/layout matches - use size tokens
+  // TODO: Migrate these once spacing/layout tokens are expanded
+  POSITION_SIZES_DEPRECATED: {
+    72: '720',
+    84: '730',
+    102: '760',
+    n72: '720-negative',
+    n84: '730-negative',
+    n102: '760-negative',
+  },
   PADDING_SIZES: {
     0: '0',
     1: '100',
@@ -98,6 +156,27 @@ module.exports = {
     64: '700',
     96: '750',
     128: '800',
+  },
+  // Padding sizes using new spacing tokens (0-64px)
+  PADDING_SIZES_SPACING: {
+    0: '0',
+    1: '1',
+    2: '25',
+    4: '50',
+    6: '75',
+    8: '100',
+    12: '150',
+    16: '200',
+    20: '250',
+    24: '300',
+    32: '400',
+    48: '600',
+    64: '800',
+  },
+  // Padding sizes using layout tokens (64px+)
+  PADDING_SIZES_LAYOUT: {
+    96: '150',
+    128: '200',
   },
   MARGIN_SIZES: {
     0: '0',
@@ -128,6 +207,40 @@ module.exports = {
     n64: '700-negative',
     n96: '750-negative',
     n128: '800-negative',
+  },
+  // Margin sizes using new spacing tokens (0-64px)
+  MARGIN_SIZES_SPACING: {
+    0: '0',
+    1: '1',
+    2: '25',
+    4: '50',
+    6: '75',
+    8: '100',
+    12: '150',
+    16: '200',
+    20: '250',
+    24: '300',
+    32: '400',
+    48: '600',
+    64: '800',
+    n1: '1-negative',
+    n2: '25-negative',
+    n4: '50-negative',
+    n6: '75-negative',
+    n8: '100-negative',
+    n12: '150-negative',
+    n16: '200-negative',
+    n24: '300-negative',
+    n32: '400-negative',
+    n48: '600-negative',
+    n64: '800-negative',
+  },
+  // Margin sizes using layout tokens (64px+)
+  MARGIN_SIZES_LAYOUT: {
+    96: '150',
+    128: '200',
+    n96: '150-negative',
+    n128: '200-negative',
   },
   REGEX_OPTIONS: {
     COLORS: [
@@ -223,5 +336,66 @@ module.exports = {
     1140: '1115',
     1268: '1120',
     1340: '1130',
+  },
+  // Small sizes (0-64px) using spacing tokens
+  // Maps pixel value to spacing token number (algorithmic: N = pixels / 8 * 100)
+  WIDTH_HEIGHTS_SPACING: {
+    0: '0',
+    1: '1',
+    2: '25',
+    4: '50',
+    6: '75',
+    8: '100',
+    12: '150',
+    16: '200',
+    20: '250',
+    24: '300',
+    32: '400',
+    42: '525',
+    48: '600',
+    64: '800',
+  },
+  // Large sizes (64px+) using layout tokens
+  // Maps pixel value to layout token number
+  WIDTH_HEIGHTS_LAYOUT: {
+    64: '100',   // Also in spacing, skipped in generator
+    80: '125',
+    96: '150',
+    112: '175',
+    128: '200',
+    160: '225',
+    192: '250',
+    224: '275',
+    256: '300',
+    320: '350',
+    384: '400',
+    448: '450',
+    512: '500',
+    640: '600',
+    768: '700',
+    896: '800',
+    1024: '900',
+  },
+  // Deprecated classes - old pixel values without layout token matches
+  // These use OLD size tokens and will be removed in Dialtone v11
+  // These classes maintain backwards compatibility for values that don't
+  // align with the new spacing/layout token system
+  WIDTH_HEIGHTS_DEPRECATED: {
+    72: '720',     // 72px → --dt-size-720
+    84: '730',     // 84px → --dt-size-730
+    102: '760',    // 102px → --dt-size-760
+    114: '775',    // 114px → --dt-size-775
+    164: '825',    // 164px → --dt-size-825
+    216: '875',    // 216px → --dt-size-875
+    264: '905',    // 264px → --dt-size-905
+    332: '925',    // 332px → --dt-size-925
+    464: '975',    // 464px → --dt-size-975
+    628: '1020',   // 628px → --dt-size-1020
+    764: '1040',   // 764px → --dt-size-1040
+    828: '1060',   // 828px → --dt-size-1060
+    912: '1080',   // 912px → --dt-size-1080
+    1140: '1115',  // 1140px → --dt-size-1115
+    1268: '1120',  // 1268px → --dt-size-1120
+    1340: '1130',  // 1340px → --dt-size-1130
   },
 };
