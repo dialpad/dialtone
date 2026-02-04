@@ -131,13 +131,15 @@ export default {
     },
 
     /**
-     * The size of the avatar
-     * @values xs, sm, md, lg, xl
+     * The size of the avatar.
+     * T-shirt sizes (xs, sm, md, lg, xl) are deprecated and will be removed in the next major version.
+     * Please use the numeric scale instead.
+     * @values 100, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, xs, sm, md, lg, xl
      */
     size: {
-      type: String,
-      default: 'md',
-      validator: (size) => Object.keys(AVATAR_SIZE_MODIFIERS).includes(size),
+      type: [String, Number],
+      default: 300,
+      validator: (size) => Object.keys(AVATAR_SIZE_MODIFIERS).includes(String(size)),
     },
 
     /**
@@ -334,8 +336,8 @@ export default {
     },
 
     validatedSize () {
-      // TODO: Group only supports xs size for now. Remove this when we support other sizes.
-      return this.group ? 'xs' : this.size;
+      // TODO: Group only supports size 100 for now. Remove this when we support other sizes.
+      return this.group ? 100 : this.size;
     },
 
     showImage () {
@@ -395,10 +397,13 @@ export default {
 
     formatInitials () {
       const initials = extractInitialsFromName(this.fullName);
+      const size = String(this.validatedSize);
 
-      if (this.validatedSize === 'xs') {
+      // xs/100 are too small for initials
+      if (size === 'xs' || size === '100') {
         this.formattedInitials = '';
-      } else if (this.validatedSize === 'sm') {
+      // sm/150/200 show single initial
+      } else if (size === 'sm' || size === '150' || size === '200') {
         this.formattedInitials = initials[0];
       } else {
         this.formattedInitials = initials;

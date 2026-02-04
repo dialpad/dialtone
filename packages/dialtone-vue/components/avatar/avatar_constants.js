@@ -1,4 +1,17 @@
 export const AVATAR_SIZE_MODIFIERS = {
+  // 11-size system: 100-500 support presence, 600-900 do not
+  100: 'd-avatar--size-100',
+  150: 'd-avatar--size-150',
+  200: 'd-avatar--size-200',
+  250: 'd-avatar--size-250',
+  300: 'd-avatar--size-300',
+  400: 'd-avatar--size-400',
+  500: 'd-avatar--size-500',
+  600: 'd-avatar--size-600',
+  700: 'd-avatar--size-700',
+  800: 'd-avatar--size-800',
+  900: 'd-avatar--size-900',
+  // T-shirt sizes (deprecated aliases)
   xs: 'd-avatar--xs',
   sm: 'd-avatar--sm',
   md: 'd-avatar--md',
@@ -26,6 +39,19 @@ export const AVATAR_PRESENCE_STATES = {
 };
 
 export const AVATAR_ICON_SIZES = {
+  // 11-size system icon mappings
+  100: '100',
+  150: '100',
+  200: '200',
+  250: '200',
+  300: '300',
+  400: '500',
+  500: '600',
+  600: '600',
+  700: '700',
+  800: '800',
+  900: '800',
+  // T-shirt sizes (deprecated aliases)
   xs: '100',
   sm: '200',
   md: '300',

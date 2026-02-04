@@ -162,8 +162,24 @@ vueCode='
 
 ### Sizes
 
+Avatar supports a 100-based sizing scale. T-shirt sizes (`xs`, `sm`, `md`, `lg`, `xl`) are deprecated but still supported as aliases.
+
+| Size | Alias | Dimensions |
+|------|-------|------------|
+| `100` | `xs` | 16px |
+| `150` | — | 20px |
+| `200` | `sm` | 24px |
+| `250` | — | 28px |
+| `300` | `md` | 32px (default) |
+| `400` | `lg` | 40px |
+| `500` | `xl` | 48px |
+| `600` | — | 64px |
+| `700` | — | 96px |
+| `800` | — | 128px |
+| `900` | — | 256px |
+
 <code-well-header>
-    <dt-stack direction="row" align="center" gap="500">
+    <dt-stack direction="row" align="center" gap="500" class="d-fw-wrap">
         <dt-avatar v-for="size in sizes" :size="size">
           <template #icon="{ iconSize }">
             <dt-icon-user :size="iconSize" />
@@ -174,54 +190,115 @@ vueCode='
 
 <code-example-tabs
 htmlCode='
-<div class="d-avatar d-avatar--xs">
+<!-- 100-based sizes (recommended) -->
+<div class="d-avatar d-avatar--size-100">
   <div class="d-avatar__canvas">
     <svg>...</svg>
   </div>
 </div>
-<div class="d-avatar d-avatar--sm">
+<div class="d-avatar d-avatar--size-150">
   <div class="d-avatar__canvas">
     <svg>...</svg>
   </div>
 </div>
-<div class="d-avatar d-avatar--md">
+<div class="d-avatar d-avatar--size-200">
   <div class="d-avatar__canvas">
     <svg>...</svg>
   </div>
 </div>
-<div class="d-avatar d-avatar--lg">
-  <div class="d-avatar__canvas">
+<div class="d-avatar d-avatar--size-250">
+  ss="d-avatar__canvas">
     <svg>...</svg>
   </div>
 </div>
-<div class="d-avatar d-avatar--xl">
-  <div class="d-avatar__canvas">
+<div class="d-avatar d-avatar--size-300">
+  ss="d-avatar__canvas">
+    <svg>...</svg>
+  </div>
+</div>
+<div class="d-avatar d-avatar--size-400">
+  ss="d-avatar__canvas">
+    <svg>...</svg>
+  </div>
+</div>
+<div class="d-avatar d-avatar--size-500">
+  ss="d-avatar__canvas">
+    <svg>...</svg>
+  </div>
+</div>
+<div class="d-avatar d-avatar--size-600">
+  ss="d-avatar__canvas">
+    <svg>...</svg>
+  </div>
+</div>
+<div class="d-avatar d-avatar--size-700">
+  ss="d-avatar__canvas">
+    <svg>...</svg>
+  </div>
+</div>
+<div class="d-avatar d-avatar--size-800">
+  ss="d-avatar__canvas">
+    <svg>...</svg>
+  </div>
+</div>
+<div class="d-avatar d-avatar--size-900">
+  ss="d-avatar__canvas">
     <svg>...</svg>
   </div>
 </div>
 '
 vueCode='
-<dt-avatar size="xs">
+<dt-avatar size="100">
   <template #icon="{ iconSize }">
     <dt-icon-user :size="iconSize" />
   </template>
 </dt-avatar>
-<dt-avatar size="sm" icon-name="user">
+<dt-avatar size="150">
   <template #icon="{ iconSize }">
     <dt-icon-user :size="iconSize" />
   </template>
 </dt-avatar>
-<dt-avatar size="md" icon-name="user">
+<dt-avatar size="200">
   <template #icon="{ iconSize }">
     <dt-icon-user :size="iconSize" />
   </template>
 </dt-avatar>
-<dt-avatar size="lg" icon-name="user">
+<dt-avatar size="250">
   <template #icon="{ iconSize }">
     <dt-icon-user :size="iconSize" />
   </template>
 </dt-avatar>
-<dt-avatar size="xl" icon-name="user">
+<dt-avatar size="300">
+  <template #icon="{ iconSize }">
+    <dt-icon-user :size="iconSize" />
+  </template>
+</dt-avatar>
+<dt-avatar size="400">
+  <template #icon="{ iconSize }">
+    <dt-icon-user :size="iconSize" />
+  </template>
+</dt-avatar>
+<dt-avatar size="500">
+  <template #icon="{ iconSize }">
+    <dt-icon-user :size="iconSize" />
+  </template>
+</dt-avatar>
+<dt-avatar size="600">
+  <template #icon="{ iconSize }">
+    <dt-icon-user :size="iconSize" />
+  </template>
+</dt-avatar>
+<dt-avatar size="700">
+  <template #icon="{ iconSize }">
+    <dt-icon-user :size="iconSize" />
+  </template>
+</dt-avatar>
+<dt-avatar size="800">
+  <template #icon="{ iconSize }">
+    <dt-icon-user :size="iconSize" />
+  </template>
+</dt-avatar>
+<dt-avatar size="900">
   <template #icon="{ iconSize }">
     <dt-icon-user :size="iconSize" />
   </template>
@@ -533,5 +610,5 @@ your specific usage.
 import { DtIconUser, DtIconHear } from '@dialpad/dialtone-icons/vue3';
 
 const colors = ['100', '200', '300', '400', '500', '600', '700', '800', '900', '1000', '1100', '1200', '1300', '1400', '1500', '1600', '1700', '1800'];
-const sizes = ['xs', 'sm', 'md', 'lg', 'xl'];
+const sizes = ['100', '150', '200', '250', '300', '400', '500', '600', '700', '800', '900'];
 </script>
