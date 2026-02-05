@@ -126,19 +126,17 @@ module.exports = {
     n64: '800-negative',
   },
   // Position sizes using layout tokens (64px+) - EXACT MATCHES ONLY
+  // Note: Negative layout utilities removed - not used in practice
   POSITION_SIZES_LAYOUT: {
     96: '150',
-    n96: '150-negative',
   },
   // Position sizes that don't have exact spacing/layout matches - use size tokens
   // TODO: Migrate these once spacing/layout tokens are expanded
+  // Note: Negative position utilities for 72px+ removed - not used in practice
   POSITION_SIZES_DEPRECATED: {
     72: '720',
     84: '730',
     102: '760',
-    n72: '720-negative',
-    n84: '730-negative',
-    n102: '760-negative',
   },
   PADDING_SIZES: {
     0: '0',
@@ -236,11 +234,10 @@ module.exports = {
     n64: '800-negative',
   },
   // Margin sizes using layout tokens (64px+)
+  // Note: Negative layout utilities removed - not used in practice
   MARGIN_SIZES_LAYOUT: {
     96: '150',
     128: '200',
-    n96: '150-negative',
-    n128: '200-negative',
   },
   REGEX_OPTIONS: {
     COLORS: [

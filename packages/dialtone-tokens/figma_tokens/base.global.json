@@ -1113,7 +1113,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-layout-150-negative)",
+            "WEB": "var(--dt-size-750-negative)",
             "ANDROID": "dtSpace750Negative",
             "iOS": "dtSpace750Negative"
           }
@@ -1170,7 +1170,7 @@
             "GAP"
           ],
           "codeSyntax": {
-            "WEB": "var(--dt-layout-200-negative)",
+            "WEB": "var(--dt-size-800-negative)",
             "ANDROID": "dtSpace800Negative",
             "iOS": "dtSpace800Negative"
           }
