@@ -15,6 +15,7 @@
         { 'd-avatar--image-loaded': imageLoadedSuccessfully },
       ]"
     >
+      <h1> {{ overlayText }} </h1>
       <img
         v-if="showImage"
         ref="avatarImage"
