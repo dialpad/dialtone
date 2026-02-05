@@ -1,15 +1,15 @@
 import '../css/dialtone-globals.less';
 import '@dialpad/dialtone-css/lib/dist/dialtone.css';
 import 'overlayscrollbars/overlayscrollbars.css';
-import { addons } from '@storybook/preview-api';
+import { addons } from 'storybook/preview-api';
 import { setTheme } from '@dialpad/dialtone-tokens/themes/config';
 import DpLight from '@dialpad/dialtone-tokens/themes/dp-light';
 import DpDark from '@dialpad/dialtone-tokens/themes/dp-dark';
-import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
-import { setup } from '@storybook/vue3';
-import React from 'react';
-import { DocsContainer } from '@storybook/addon-docs';
-import { useDarkMode, DARK_MODE_EVENT_NAME } from 'storybook-dark-mode';
+import { MINIMAL_VIEWPORTS } from 'storybook/viewport';
+import { setup } from '@storybook/vue3-vite';
+import { DocsContainer } from '@storybook/addon-docs/blocks';
+import { DARK_MODE_EVENT_NAME } from '@vueless/storybook-dark-mode';
+import React, { useState, useEffect } from 'react';
 import fixDefaultSlot from '../components/plugins/fixDefaultSlot';
 import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge, setCustomEmojiUrl, setCustomEmojiJson } from '@/common/emoji';
 import customEmojiJson from '@/common/custom-emoji.json';
@@ -43,6 +43,7 @@ setup((app) => {
 
 export default {
   name: 'StorybookPreview',
+
   parameters: {
     a11y: {
       config: {
@@ -62,7 +63,7 @@ export default {
     },
 
     viewport: {
-      viewports: MINIMAL_VIEWPORTS,
+      options: MINIMAL_VIEWPORTS,
     },
 
     options: {
@@ -101,16 +102,36 @@ export default {
       },
     },
 
-    backgrounds: { disable: true },
+    backgrounds: { disabled: true },
     docs: {
       container: ({ children, ...props }) => {
-        const isDark = useDarkMode();
-        return <DocsContainer context={props.context} theme={isDark ? dialtoneDarkTheme : dialtoneLightTheme}>
-          {children}
-        </DocsContainer>;
+        const [isDark, setDark] = useState(false);
+        const channel = addons.getChannel();
+
+        channel.on(DARK_MODE_EVENT_NAME, (isDark) => {
+          setTheme(isDark ? DpDark : DpLight);
+        });
+
+        useEffect(() => {
+          channel.on(DARK_MODE_EVENT_NAME, setDark);
+          return () => {
+            channel.off(DARK_MODE_EVENT_NAME, setDark);
+          };
+        }, [channel, setDark]);
+
+        return (
+          <DocsContainer
+            theme={isDark ? dialtoneDarkTheme : dialtoneLightTheme}
+            context={props.context}
+          >
+            {children}
+          </DocsContainer>
+        );
       },
     },
 
     percy: { globalShow: true },
   },
+
+  tags: ['autodocs']
 };

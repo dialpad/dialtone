@@ -8,17 +8,17 @@ const MOCK_MONTH = 6; // Note: month is zero-based, so 6 represents July
 const MOCK_YEAR = 2023;
 const MOCK_TEST_DATE = new Date(MOCK_YEAR, MOCK_MONTH, MOCK_DAY);
 
+const MOCK_CURRENT_LOCALE = 'en-US';
 const MOCK_TODAY_YEAR = MOCK_TEST_DATE.getFullYear();
 const MOCK_TODAY_MONTH = MOCK_TEST_DATE.getMonth();
-const MOCK_FORMATTED_LAST_MONTH = formatMonth(MOCK_TODAY_MONTH - 1, INTL_MONTH_FORMAT);
-const MOCK_FORMATTED_TODAY_MONTH = formatMonth(MOCK_TODAY_MONTH, INTL_MONTH_FORMAT);
-const MOCK_FORMATTED_NEXT_MONTH = formatMonth(MOCK_TODAY_MONTH + 1, INTL_MONTH_FORMAT);
+const MOCK_FORMATTED_LAST_MONTH = formatMonth(MOCK_TODAY_MONTH - 1, INTL_MONTH_FORMAT, MOCK_CURRENT_LOCALE);
+const MOCK_FORMATTED_TODAY_MONTH = formatMonth(MOCK_TODAY_MONTH, INTL_MONTH_FORMAT, MOCK_CURRENT_LOCALE);
+const MOCK_FORMATTED_NEXT_MONTH = formatMonth(MOCK_TODAY_MONTH + 1, INTL_MONTH_FORMAT, MOCK_CURRENT_LOCALE);
 const MOCK_HEADER_SELECTED_DATE = `${MOCK_FORMATTED_TODAY_MONTH} ${MOCK_TODAY_YEAR}`;
 const MOCK_LOCALIZED_PREVIOUS_YEAR_LABEL = `Change to Previous year ${MOCK_TODAY_YEAR - 1}`;
 const MOCK_LOCALIZED_PREVIOUS_MONTH_LABEL = `Change to Previous month ${MOCK_FORMATTED_LAST_MONTH}`;
 const MOCK_LOCALIZED_NEXT_MONTH_LABEL = `Change to Next month ${MOCK_FORMATTED_NEXT_MONTH}`;
 const MOCK_LOCALIZED_NEXT_YEAR_LABEL = `Change to Next year ${MOCK_TODAY_YEAR + 1}`;
-const MOCK_CURRENT_LOCALE = 'en-US';
 
 const baseProps = {
   selectedDate: MOCK_TEST_DATE,
@@ -138,7 +138,7 @@ describe('DtDatepicker Tests', () => {
 
       it('previous month button should has correct aria label', () => {
         expect(prevMonthButton.attributes('aria-label'))
-         
+
           .toContain(MOCK_LOCALIZED_PREVIOUS_MONTH_LABEL);
       });
 
@@ -262,7 +262,7 @@ describe('DtDatepicker Tests', () => {
 
       expect(datepickerValue
         .text())
-        .toBe(`${formatMonth(MOCK_TODAY_MONTH - 1, INTL_MONTH_FORMAT)} ${MOCK_TODAY_YEAR}`);
+        .toBe(`${formatMonth(MOCK_TODAY_MONTH - 1, INTL_MONTH_FORMAT, MOCK_CURRENT_LOCALE)} ${MOCK_TODAY_YEAR}`);
     });
 
     it('should update month when next month button is clicked', async () => {
@@ -270,7 +270,7 @@ describe('DtDatepicker Tests', () => {
 
       expect(datepickerValue
         .text())
-        .toBe(`${formatMonth(MOCK_TODAY_MONTH + 1, INTL_MONTH_FORMAT)} ${MOCK_TODAY_YEAR}`);
+        .toBe(`${formatMonth(MOCK_TODAY_MONTH + 1, INTL_MONTH_FORMAT, MOCK_CURRENT_LOCALE)} ${MOCK_TODAY_YEAR}`);
     });
 
     it('should go to previous month on left arrow press on first day', async () => {
@@ -280,7 +280,7 @@ describe('DtDatepicker Tests', () => {
 
       expect(datepickerValue
         .text())
-        .toBe(`${formatMonth(MOCK_TODAY_MONTH - 1, INTL_MONTH_FORMAT)} ${MOCK_TODAY_YEAR}`);
+        .toBe(`${formatMonth(MOCK_TODAY_MONTH - 1, INTL_MONTH_FORMAT, MOCK_CURRENT_LOCALE)} ${MOCK_TODAY_YEAR}`);
     });
 
     it('should go to next month on right arrow press on last day', async () => {
@@ -291,7 +291,7 @@ describe('DtDatepicker Tests', () => {
       // Should be June
       expect(datepickerValue
         .text())
-        .toBe(`${formatMonth(MOCK_TODAY_MONTH - 1, INTL_MONTH_FORMAT)} ${MOCK_TODAY_YEAR}`);
+        .toBe(`${formatMonth(MOCK_TODAY_MONTH - 1, INTL_MONTH_FORMAT, MOCK_CURRENT_LOCALE)} ${MOCK_TODAY_YEAR}`);
 
       const daysJune = wrapper.findAll('.d-datepicker__day');
 
@@ -300,7 +300,7 @@ describe('DtDatepicker Tests', () => {
       // Should be July again
       expect(datepickerValue
         .text())
-        .toBe(`${formatMonth(MOCK_TODAY_MONTH, INTL_MONTH_FORMAT)} ${MOCK_TODAY_YEAR}`);
+        .toBe(`${formatMonth(MOCK_TODAY_MONTH, INTL_MONTH_FORMAT, MOCK_CURRENT_LOCALE)} ${MOCK_TODAY_YEAR}`);
     });
 
     it('should go to prev month on up arrow press on some day of first week month', async () => {
@@ -311,7 +311,7 @@ describe('DtDatepicker Tests', () => {
       // Should be June
       expect(datepickerValue
         .text())
-        .toBe(`${formatMonth(MOCK_TODAY_MONTH - 1, INTL_MONTH_FORMAT)} ${MOCK_TODAY_YEAR}`);
+        .toBe(`${formatMonth(MOCK_TODAY_MONTH - 1, INTL_MONTH_FORMAT, MOCK_CURRENT_LOCALE)} ${MOCK_TODAY_YEAR}`);
     });
 
     it('should go to next month on down arrow press on some day of last week month', async () => {
@@ -322,7 +322,7 @@ describe('DtDatepicker Tests', () => {
       // Should be June
       expect(datepickerValue
         .text())
-        .toBe(`${formatMonth(MOCK_TODAY_MONTH - 1, INTL_MONTH_FORMAT)} ${MOCK_TODAY_YEAR}`);
+        .toBe(`${formatMonth(MOCK_TODAY_MONTH - 1, INTL_MONTH_FORMAT, MOCK_CURRENT_LOCALE)} ${MOCK_TODAY_YEAR}`);
 
       const daysJune = wrapper.findAll('.d-datepicker__day');
 
@@ -331,7 +331,7 @@ describe('DtDatepicker Tests', () => {
       // Should be July again
       expect(datepickerValue
         .text())
-        .toBe(`${formatMonth(MOCK_TODAY_MONTH, INTL_MONTH_FORMAT)} ${MOCK_TODAY_YEAR}`);
+        .toBe(`${formatMonth(MOCK_TODAY_MONTH, INTL_MONTH_FORMAT, MOCK_CURRENT_LOCALE)} ${MOCK_TODAY_YEAR}`);
     });
 
     it('should emit selected-date event when a day is clicked', async () => {

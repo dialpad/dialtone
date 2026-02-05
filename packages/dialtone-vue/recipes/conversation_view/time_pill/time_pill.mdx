@@ -1,4 +1,4 @@
-import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/addon-docs/blocks';
 
 import * as TimePillStories from './time_pill.stories';
 
@@ -20,9 +20,7 @@ Pass in a display value as dateTimeDisplay, and the actual date into dateTime.
 
 - dateTime: '2022-09-13'
 
-<Canvas>
-  <Story of={TimePillStories.Default} />
-</Canvas>
+<Canvas of={TimePillStories.Default} />
 
 ## Slots, Props & Events
 

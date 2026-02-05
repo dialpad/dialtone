@@ -13,6 +13,13 @@ runs:
         node-version-file: ".nvmrc"
         cache: "pnpm"
 
+    - name: Configure GitHub Packages auth
+      shell: bash
+      run: |
+        # Required because i18n & i18n-services are private. Along with .npmrc config.
+        echo "@dialpad:registry=https://npm.pkg.github.com" >> ~/.npmrc
+        echo "//npm.pkg.github.com/:_authToken=${{ github.token }}" >> ~/.npmrc
+
     - name: Install dependencies
       shell: bash
       run: pnpm install --frozen-lockfile

@@ -1,5 +1,5 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import DtRecipeGeneralRow from './general_row.vue';
 
 import DtRecipeGeneralRowDefaultTemplate from './general_row_default.story.vue';

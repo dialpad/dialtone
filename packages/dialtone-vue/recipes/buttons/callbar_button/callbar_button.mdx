@@ -1,4 +1,4 @@
-import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/addon-docs/blocks';
 
 import * as CallbarButtonStories from './callbar_button.stories';
 
@@ -12,21 +12,15 @@ import * as CallbarButtonStories from './callbar_button.stories';
 
 ## Base Style
 
-<Canvas>
-  <Story of={CallbarButtonStories.Default} />
-</Canvas>
+<Canvas of={CallbarButtonStories.Default} />
 
 ## Variants
 
-<Canvas>
-  <Story of={CallbarButtonStories.Variants} />
-</Canvas>
+<Canvas of={CallbarButtonStories.Variants} />
 
 ## All call bar buttons from the spec
 
-<Canvas>
-  <Story of={CallbarButtonStories.Callbar} />
-</Canvas>
+<Canvas of={CallbarButtonStories.Callbar} />
 
 ## Slots, Props & Events
 

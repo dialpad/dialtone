@@ -1,4 +1,9 @@
+// This file has been automatically migrated to valid ESM format by Storybook.
+import { createRequire } from 'node:module';
+import { dirname, join } from 'node:path';
 import { mergeConfig } from 'vite';
+
+const require = createRequire(import.meta.url);
 
 /** @type { import('@storybook/vue3-vite').StorybookConfig } */
 const config = {
@@ -7,14 +12,19 @@ const config = {
     '../@(components|directives|docs|recipes|localization)/**/*.mdx',
     '../functions/*.mdx',
   ],
-  addons: ['@storybook/addon-links', '@storybook/addon-essentials', '@storybook/addon-a11y', 'storybook-dark-mode'],
+
+  addons: [
+    getAbsolutePath('@storybook/addon-links'),
+    getAbsolutePath('@storybook/addon-a11y'),
+    getAbsolutePath('@vueless/storybook-dark-mode'),
+    getAbsolutePath('@storybook/addon-docs'),
+  ],
+
   framework: {
-    name: '@storybook/vue3-vite',
+    name: getAbsolutePath('@storybook/vue3-vite'),
     options: {},
   },
-  docs: {
-    autodocs: false,
-  },
+
   async viteFinal (config) {
     // Merge custom configuration into the default config
     return mergeConfig(config, {
@@ -26,6 +36,11 @@ const config = {
       },
     });
   },
+
   staticDirs: ['../common/assets/'],
 };
 export default config;
+
+function getAbsolutePath(value) {
+  return dirname(require.resolve(join(value, 'package.json')));
+}
