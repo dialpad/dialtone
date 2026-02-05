@@ -169,6 +169,6 @@ export default {
 
 <style>
 .dtc-code-editor__margin {
-  border-left: var(--dtc-theme-color-background-darken) solid 1px;
+  border-inline-start: var(--dtc-theme-color-background-darken) solid 1px;
 }
 </style>

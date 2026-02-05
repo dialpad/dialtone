@@ -3,6 +3,8 @@ title: Font Variant Numeric
 description: Utilities to change an element's font variant numeric.
 ---
 
+<FontUtilitiesNotice />
+
 The `font-variant-numeric` CSS property controls the usage of alternate glyphs for numbers, fractions, and ordinal markers.
 
 ## Normal (Default)
@@ -129,6 +131,7 @@ Use `d-fvn-unset` to deactivate other value previously set to `font-variant-nume
 
 <script setup>
   import { fontVariantNumeric } from '@data/type.json';
+  import FontUtilitiesNotice from '@baseComponents/FontUtilitiesNotice.vue';
 </script>
 
 ## Classes

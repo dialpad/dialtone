@@ -330,7 +330,7 @@ export default {
   }
 
   &__component {
-    padding: var(--dt-space-500);
+    padding: var(--dt-spacing-200);
     display: grid;
     flex: 1;
     align-items: center;
@@ -343,7 +343,7 @@ export default {
   }
 
   &__controls {
-    padding: var(--dt-space-500);
+    padding: var(--dt-spacing-200);
     background-color: var(--dt-color-surface-secondary-opaque);
 
     @media screen and (min-width: 640px) {

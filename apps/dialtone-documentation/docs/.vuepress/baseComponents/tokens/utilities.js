@@ -1,5 +1,5 @@
 import tokensJson from '@dialpad/dialtone-tokens/dist/doc.json';
-import { CATEGORY_MAP, SUBCATEGORY_MAP, FORMAT_MAP, MODES, THEMES, getTokensStructure } from './constants';
+import { CATEGORY_MAP, SUBCATEGORY_MAP, FORMAT_MAP, MODES, THEMES, DEPRECATED_PATTERNS, getTokensStructure } from './constants';
 
 /**
   Process the file tokensJson and fill processedTokens with the data we want to show.
@@ -24,6 +24,9 @@ export const addTokensToStructure = (structure) => {
         Object.entries(combined).forEach((token) => {
           addTokensToCategories(token, format, structure[format][themeKey]);
         });
+
+        // Sort text style tokens: text first, then typography, each by type then size
+        structure[format][themeKey].typography['text style']._children.sort(sortFontStyleTokens);
       }
     }
   });
@@ -41,6 +44,33 @@ const splitCompositionTokenIntoArray = (value) => {
   return value;
 };
 
+/**
+ * Sort text style tokens: text tokens first, then typography tokens,
+ * each sorted by type (headline, body, label, code, etc.) then by size (3xl -> xs)
+ */
+const TYPE_ORDER = ['headline', 'body', 'label', 'code', 'helper', 'button', 'inputs'];
+const SIZE_ORDER = ['3xl', '2xl', 'xl', 'lg', 'md', 'sm', 'xs'];
+
+const sortFontStyleTokens = (a, b) => {
+  const aName = a.name || a.exampleName || '';
+  const bName = b.name || b.exampleName || '';
+
+  // Text tokens before typography tokens
+  const aIsText = aName.includes('--dt-text');
+  const bIsText = bName.includes('--dt-text');
+  if (aIsText !== bIsText) return aIsText ? -1 : 1;
+
+  // Sort by type
+  const aType = TYPE_ORDER.findIndex(t => aName.includes(t));
+  const bType = TYPE_ORDER.findIndex(t => bName.includes(t));
+  if (aType !== bType) return aType - bType;
+
+  // Sort by size
+  const aSize = SIZE_ORDER.findIndex(s => aName.includes(`-${s})`));
+  const bSize = SIZE_ORDER.findIndex(s => bName.includes(`-${s})`));
+  return aSize - bSize;
+};
+
 // eslint-disable-next-line complexity
 const addTokensToCategories = (token, format, structure) => {
   const [key, value] = token;
@@ -48,7 +78,8 @@ const addTokensToCategories = (token, format, structure) => {
 
   const { name, value: tokenValue, description, keywords, isCompositionToken } = value[FORMAT_MAP[format]];
   const { value: exampleValue, name: exampleName } = value[FORMAT_MAP.CSS];
-  const displayToken = { exampleValue, exampleName, name, tokenValue, description, keywords };
+  const deprecated = isDeprecatedToken(exampleName);
+  const displayToken = { exampleValue, exampleName, name, tokenValue, description, keywords, deprecated };
 
   if (isCompositionToken) {
     displayToken.tokenValue = splitCompositionTokenIntoArray(tokenValue);
@@ -90,7 +121,7 @@ const addTokensToCategories = (token, format, structure) => {
 
   // TYPOGRAPHY
   if (key.startsWith('typography')) {
-    structure.typography['font style']._children.push({ ...displayToken, hidden: !isCompositionToken });
+    structure.typography['text style']._children.push({ ...displayToken, hidden: !isCompositionToken });
     return;
   }
 
@@ -116,28 +147,46 @@ const addTokensToCategories = (token, format, structure) => {
     return;
   }
 
+  // TEXT (display alongside typography in Font Style)
+  if (key.startsWith('text')) {
+    structure.typography['text style']._children.push({ ...displayToken, hidden: !isCompositionToken });
+    return;
+  }
+
   // SHADOW
   if (key.startsWith('shadow')) {
     structure.shadow._children.push({ ...displayToken, hidden: !isCompositionToken });
     return;
   }
 
-  // SIZE
-  if (key.startsWith('size') && key.endsWith('negative')) {
-    structure.size.negative._children.push(displayToken);
+  // SPACING (0-64px)
+  if (key.startsWith('spacing') && key.endsWith('negative')) {
+    structure.spacing.negative._children.push(displayToken);
     return;
   }
 
-  if (key.startsWith('size') && key.endsWith('percent')) {
-    structure.size.percentage._children.push(displayToken);
+  if (key.startsWith('spacing')) {
+    structure.spacing.base._children.push(displayToken);
     return;
   }
 
-  if (key.startsWith('size') && SUBCATEGORY_MAP.size.includes(splitKeys[1])) {
-    addTokenToSubcategory(displayToken, 'size', SUBCATEGORY_MAP.size.find(sub => sub === splitKeys[1]), structure);
+  // LAYOUT (64px+)
+  if (key.startsWith('layout') && key.endsWith('negative')) {
+    structure.layout.negative._children.push(displayToken);
     return;
   }
 
+  if (key.startsWith('layout') && key.endsWith('percent')) {
+    structure.layout.percentage._children.push(displayToken);
+    return;
+  }
+
+  if (key.startsWith('layout')) {
+    structure.layout.base._children.push(displayToken);
+    return;
+  }
+
+  // SIZE (radius, border, and component-specific only)
   if (key.startsWith('size/radius')) {
     structure.size.radius._children.push(displayToken);
     return;
@@ -145,11 +194,6 @@ const addTokensToCategories = (token, format, structure) => {
 
   if (key.startsWith('size/border')) {
     structure.size.border._children.push(displayToken);
-    return;
-  }
-
-  if (key.startsWith('size')) {
-    structure.size.base._children.push(displayToken);
     return;
   }
 
@@ -162,20 +206,8 @@ const addTokensToCategories = (token, format, structure) => {
     return;
   }
 
-  // SPACE
-  if (key.startsWith('space') && key.endsWith('negative')) {
-    structure.space.negative._children.push(displayToken);
-    return;
-  }
-
-  if (key.startsWith('space') && key.endsWith('percent')) {
-    structure.space.percentage._children.push(displayToken);
-    return;
-  }
-
-  if (key.startsWith('space')) {
-    structure.space.base._children.push(displayToken);
-  }
+  // Old size base/negative tokens are deprecated - suppress from display
+  // They are replaced by spacing (0-64px) and layout (64px+) tokens
 };
 
 const addTokenToSubcategory = (token, category, subcategory, structure) => {
@@ -183,3 +215,7 @@ const addTokenToSubcategory = (token, category, subcategory, structure) => {
 };
 
 const isBaseToken = (name) => name.endsWith('base') || name.endsWith('root');
+
+const isDeprecatedToken = (name) => {
+  return DEPRECATED_PATTERNS.some(pattern => name.includes(pattern));
+};

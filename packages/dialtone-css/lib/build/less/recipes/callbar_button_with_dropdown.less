@@ -1,9 +1,9 @@
 .dt-recipe--callbar-button-with-dropdown--arrow {
-  width: var(--dt-size-500);
-  height: var(--dt-size-500);
-  margin-top: var(--dt-spacing-150);
-  margin-left: calc(var(--dt-spacing-50-negative) * 5);
-  padding: var(--dt-spacing-100);
+  inline-size: var(--dt-size-500);
+  block-size: var(--dt-size-500);
+  margin-block-start: var(--dt-size-450);
+  margin-inline-start: calc(var(--dt-size-300-negative) * 5);
+  padding: var(--dt-size-400);
   border-radius: var(--dt-size-300);
 
   &.d-btn--active {
@@ -11,7 +11,7 @@
   }
 
   &--large {
-    margin-left: var(--dt-spacing-300-negative);
+    margin-inline-start: var(--dt-size-550-negative);
   }
 
   &__icon {
@@ -38,12 +38,12 @@
 .dt-recipe--callbar-button-with-dropdown--button .tab-group {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  block-size: 100%;
 }
 
 .dt-recipe--callbar-button-with-dropdown--button .tab-content {
   flex: 1 1 100%;
-  overflow-y: auto;
+  overflow-block: auto;
 }
 
 .dt-recipe--callbar-button-with-dropdown {

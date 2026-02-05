@@ -13,7 +13,7 @@ description: Utilities for controlling the display box type of an element.
     <div class="d-d-contents">
       <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p8 d-bgc-moderate-opaque d-bar2 d-code--sm">d-d-contents</dt-stack>
     </div>
-    <dt-stack direction="row" gap="400" class="d-p8 d-ba d-baw4 d-bar4 d-bc-default d-bgc-moderate">
+    <dt-stack direction="row" gap="400" class="d-p8 d-ba d-baw4 d-bar4 d-bgc-moderate">
       <div>
         <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p8 d-bgc-moderate-opaque d-bar2 d-code--sm d-d-inline-block">d-d-inline-block</dt-stack>
       </div>
@@ -24,7 +24,7 @@ description: Utilities for controlling the display box type of an element.
         <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p8 d-bgc-moderate-opaque d-bar2 d-code--sm d-d-inline-block">d-d-inline-block</dt-stack>
       </div>
     </dt-stack>
-    <dt-stack direction="row" gap="400" class="d-p8 d-ba d-baw4 d-bar4 d-bc-default d-bgc-moderate">
+    <dt-stack direction="row" gap="400" class="d-p8 d-ba d-baw4 d-bar4 d-bgc-moderate">
       <div>
         <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p4 d-bgc-moderate-opaque d-bar2 d-code--sm d-d-inline">d-d-inline</dt-stack>
       </div>

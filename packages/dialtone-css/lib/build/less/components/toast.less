@@ -11,12 +11,12 @@
 //  ----------------------------------------------------------------------------
 .d-toast-wrapper {
   position: absolute;
-  top: var(--dt-spacing-400); // 32
-  left: 50%;
+  inset-block-start: var(--dt-size-600); // 32
+  inset-inline-start: 50%;
   z-index: var(--zi-notification);
   display: flex;
   flex-direction: column;
-  gap: var(--dt-spacing-200);
+  gap: var(--dt-size-500);
   transform: translateX(-50%);
 }
 
@@ -31,7 +31,7 @@
 
     z-index: var(--zi-notification);
     display: block;
-    max-width: var(--dt-size-975);
+    max-inline-size: var(--dt-size-975);
     word-break: normal;
     box-shadow: var(--toast-box-shadow);
     pointer-events: all;
@@ -63,7 +63,7 @@
 
 
     .d-notice__actions button:first-child {
-        margin-left: var(--dt-spacing-400); // 32
+        margin-inline-start: var(--dt-size-600); // 32
     }
 }
 
@@ -107,7 +107,7 @@
 .d-toast--viewing {
   --toast-border-radius: var(--dt-size-radius-200);
 
-  border-top: var(--dt-size-300) solid var(--dt-color-magenta-300);
+  border-block-start: var(--dt-size-300) solid var(--dt-color-magenta-300);
 
   .d-notice__icon {
     color: var(--dt-color-magenta-300);
@@ -146,8 +146,8 @@
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  width: var(--dt-size-925);
-  padding: var(--dt-spacing-75) var(--dt-spacing-75) var(--dt-spacing-150) var(--dt-spacing-150);
+  inline-size: var(--dt-size-925);
+  padding: var(--dt-size-350) var(--dt-size-350) var(--dt-size-450) var(--dt-size-450);
   color: var(--toast-alternate-color-text);
   font-size: var(--toast-alternate-font-size);
   line-height: var(--toast-alternate-line-height);
@@ -177,7 +177,7 @@
   .d-toast-layout-alternate__icon {
     display: flex;
     flex: 0 auto;
-    margin-right: var(--dt-spacing-50);
+    margin-inline-end: var(--dt-size-300);
     color: var(--toast-alternate-color-icon);
   }
 
@@ -199,7 +199,7 @@
   display: flex;
   flex: 1 auto;
   flex-direction: column;
-  margin-right: var(--dt-spacing-200);
+  margin-inline-end: var(--dt-size-500);
   color: var(--dt-color-foreground-primary);
   font-weight: var(--dt-font-weight-normal);
   font-size: var(--dt-font-size-200);
@@ -208,17 +208,17 @@
 .d-toast-alternate__dialog {
   position: relative;
   align-items: center;
-  width: var(--dt-size-100-percent);
+  inline-size: var(--dt-size-100-percent);
 
 
   .d-notice__actions button:first-child {
-    margin-left: var(--dt-spacing-400); // 32
+    margin-inline-start: var(--dt-size-600); // 32
   }
 }
 
 .d-toast-alternate__header {
   display: flex;
-  gap: var(--dt-spacing-25);
+  gap: var(--dt-size-200);
   align-items: center;
   color: var(--toast-alternate-font-color);
 }

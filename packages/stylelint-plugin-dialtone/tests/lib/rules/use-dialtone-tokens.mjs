@@ -15,7 +15,7 @@ testRule({
   accept: [
     {
       code: `.a {
-        padding: var(--dt-space-450);
+        padding: var(--dt-spacing-150);
       }`,
       description: 'setting padding using a Dialtone token',
     },
@@ -28,8 +28,8 @@ testRule({
       }`,
       description: 'setting padding using px',
       warnings: [
-        { message: messages.useDialtoneTokens("12px") },
-        { message: messages.useRemInsteadOfPx("12px") },
+        { message: messages.useDialtoneTokens('12px') },
+        { message: messages.useRemInsteadOfPx('12px') },
       ],
     },
     {
@@ -37,7 +37,7 @@ testRule({
         padding: 1.2rem;
       }`,
       description: 'setting padding using rem',
-      message: messages.useDialtoneTokens("1.2rem"),
+      message: messages.useDialtoneTokens('1.2rem'),
     },
   ],
 });

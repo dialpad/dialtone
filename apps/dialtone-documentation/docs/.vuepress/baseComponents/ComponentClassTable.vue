@@ -8,7 +8,7 @@
               class="d-w40p d-p0 d-bbw0"
               scope="col"
             >
-              <div class="d-p16 d-bb d-bc-default d-bbw1">
+              <div class="d-p16 d-bb d-bbw1">
                 Class
               </div>
             </th>
@@ -16,7 +16,7 @@
               class="d-w30p d-p0 d-bbw0"
               scope="col"
             >
-              <div class="d-p16 d-bb d-bc-default d-bbw1">
+              <div class="d-p16 d-bb d-bbw1">
                 Applies to
               </div>
             </th>
@@ -24,7 +24,7 @@
               class="d-p0 d-bbw0"
               scope="col"
             >
-              <div class="d-p16 d-bb d-bc-default d-bbw1">
+              <div class="d-p16 d-bb d-bbw1">
                 Description
               </div>
             </th>

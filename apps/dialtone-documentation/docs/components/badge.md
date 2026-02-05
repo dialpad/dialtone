@@ -305,44 +305,44 @@ Decorative badges label and classify items for quick recognition.
 <code-well-header bgclass="d-bgc-primary">
   <dt-stack direction="row" gap="500" align="baseline">
     <dt-stack gap="500">
-      <span class="d-label--md-compact">Black</span>
+      <dt-text kind="label" size="md" density="200">Black</dt-text>
       <dt-badge text="Label" decoration="black-400"></dt-badge>
       <dt-badge text="Label" decoration="black-500"></dt-badge>
       <dt-badge text="Label" decoration="black-900"></dt-badge>
     </dt-stack>
     <dt-stack gap="500">
-      <span class="d-label--md-compact">Red</span>
+      <dt-text kind="label" size="md" density="200">Red</dt-text>
       <dt-badge text="Label" decoration="red-200"></dt-badge>
       <dt-badge text="Label" decoration="red-300"></dt-badge>
       <dt-badge text="Label" decoration="red-400"></dt-badge>
     </dt-stack>
     <dt-stack gap="500">
-      <span class="d-label--md-compact">Purple</span>
+      <dt-text kind="label" size="md" density="200">Purple</dt-text>
       <dt-badge text="Label" decoration="purple-200"></dt-badge>
       <dt-badge text="Label" decoration="purple-300"></dt-badge>
       <dt-badge text="Label" decoration="purple-400"></dt-badge>
       <dt-badge text="Label" decoration="purple-500"></dt-badge>
     </dt-stack>
     <dt-stack gap="500">
-      <span class="d-label--md-compact">Blue</span>
+      <dt-text kind="label" size="md" density="200">Blue</dt-text>
       <dt-badge text="Label" decoration="blue-200"></dt-badge>
       <dt-badge text="Label" decoration="blue-300"></dt-badge>
       <dt-badge text="Label" decoration="blue-400"></dt-badge>
     </dt-stack>
     <dt-stack gap="500">
-      <span class="d-label--md-compact">Green</span>
+      <dt-text kind="label" size="md" density="200">Green</dt-text>
       <dt-badge text="Label" decoration="green-300"></dt-badge>
       <dt-badge text="Label" decoration="green-400"></dt-badge>
       <dt-badge text="Label" decoration="green-500"></dt-badge>
     </dt-stack>
     <dt-stack gap="500">
-      <span class="d-label--md-compact">Gold</span>
+      <dt-text kind="label" size="md" density="200">Gold</dt-text>
       <dt-badge text="Label" decoration="gold-300"></dt-badge>
       <dt-badge text="Label" decoration="gold-400"></dt-badge>
       <dt-badge text="Label" decoration="gold-500"></dt-badge>
     </dt-stack>
     <dt-stack gap="500">
-      <span class="d-label--md-compact">Magenta</span>
+      <dt-text kind="label" size="md" density="200">Magenta</dt-text>
       <dt-badge text="Label" decoration="magenta-200"></dt-badge>
       <dt-badge text="Label" decoration="magenta-300"></dt-badge>
       <dt-badge text="Label" decoration="magenta-400"></dt-badge>

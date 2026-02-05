@@ -5,27 +5,27 @@
         <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
           <tr>
             <th class="d-p0 d-bbw0" scope="col">
-              <div class="d-p16 d-bb d-bc-default d-bbw1">
+              <div class="d-p16 d-bb d-bbw1">
                 Color
               </div>
             </th>
             <th class="d-p0 d-bbw0" scope="col">
-              <div class="d-p16 d-bb d-bc-default d-bbw1">
+              <div class="d-p16 d-bb d-bbw1">
                 Section
               </div>
             </th>
             <th class="d-p0 d-bbw0" scope="col">
-              <div class="d-p16 d-bb d-bc-default d-bbw1">
+              <div class="d-p16 d-bb d-bbw1">
                 State
               </div>
             </th>
             <th class="d-p0 d-bbw0" scope="col">
-              <div class="d-p16 d-bb d-bc-default d-bbw1">
+              <div class="d-p16 d-bb d-bbw1">
                 Property
               </div>
             </th>
             <th class="d-p0 d-bbw0" scope="col">
-              <div class="d-p16 d-bb d-bc-default d-bbw1">
+              <div class="d-p16 d-bb d-bbw1">
                 Variable
               </div>
             </th>
@@ -59,7 +59,7 @@
                     'background-color': `var(--dt-shell-mention-color-background)`,
                   }"
                 >
-                  Aa
+                  Ag
                 </dt-stack>
               </dt-stack>
               <dt-stack
@@ -78,7 +78,7 @@
                 :style="{ color: `var(${color.variable})` }"
                 class="d-fs-300 d-p6 d-ta-center d-fw-medium"
               >
-                Aa
+                Ag
               </div>
               <div
                 v-else-if="color.property === 'border-color'"

@@ -8,7 +8,7 @@ description: Search Dialtone's design system with AI assistants using the Model 
 The Dialtone MCP Server provides AI assistants with real-time search access to:
 
 - **3,315 CSS utility classes** - Find classes like `d-p8`, `d-d-flex`, `d-w100p`
-- **5,691 design tokens** - Find tokens like `--dt-color-foreground-primary`, `--dt-space-400`
+- **5,691 design tokens** - Find tokens like `--dt-color-foreground-primary`, `--dt-spacing-100`
 - **87 Vue components** - Discover `DtButton`, `DtModal` with full API documentation
 - **594 icons** - Find icons like `bell-ring`, `arrow-up`, `calendar-plus`
 
@@ -128,7 +128,7 @@ Find design tokens (CSS variables) from Dialtone's design system. Use when your 
 
 ```
 "color foreground primary" → --dt-color-foreground-primary
-"space 400"                → --dt-space-400, --dt-space-400-negative
+"spacing 100"              → --dt-spacing-100, --dt-spacing-100-negative
 "font family"              → --dt-font-family-body, --dt-font-family-expressive
 "font weight bold"         → --dt-font-weight-bold
 ```
@@ -198,7 +198,7 @@ When working on a component and need specific styling:
 ```
 User: "What class adds padding 8px to all sides?"
 Claude: [Uses search_utility_classes tool]
-Result: d-p8 (padding: var(--dt-space-400) which equals 8px)
+Result: d-p8 (padding: var(--dt-spacing-100) which equals 8px)
 ```
 
 ### Discovering Components

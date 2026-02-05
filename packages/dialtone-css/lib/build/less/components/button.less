@@ -22,49 +22,49 @@
   //  ------------------------------------------------------------------------
   --button-color-text: var(--dt-action-color-foreground-base-default);
   --button-color-background: var(--dt-action-color-background-base-default);
-  --button-color-border: transparent;
+  --button-color-border: var(--dt-action-color-border-base-default);
   --button-gap: calc(var(--button-padding-x) / 2);
   --button-border-radius: var(--dt-button-size-radius-md);
   --button-border-width: var(--dt-size-border-100);
   --button-typography: var(--dt-typography-button-md);
   --button-padding-y-xs: calc(
-    calc(var(--dt-spacing-100) - var(--dt-spacing-1)) - var(--button-border-width)
+    calc(var(--dt-size-400) - var(--dt-size-100)) - var(--button-border-width)
   ); // ((8 - 1) - border-width)
 
   --button-padding-x-xs: calc(
-    var(--dt-spacing-100) - var(--button-border-width)
+    var(--dt-size-400) - var(--button-border-width)
   ); // 8 minus border-width
 
   --button-padding-y-sm: calc(
-    var(--dt-spacing-100) - var(--button-border-width)
+    var(--dt-size-400) - var(--button-border-width)
   ); // 8 minus border-width
 
   --button-padding-x-sm: calc(
-    var(--dt-spacing-150) - var(--button-border-width)
+    var(--dt-size-450) - var(--button-border-width)
   ); // 12 minus border-width
 
   --button-padding-y-md: calc(
-    var(--dt-spacing-100) - var(--button-border-width)
+    var(--dt-size-400) - var(--button-border-width)
   ); // 8 minus border-width
 
   --button-padding-x-md: calc(
-    var(--dt-spacing-150) - var(--button-border-width)
+    var(--dt-size-450) - var(--button-border-width)
   ); // 12 minus border-width
 
   --button-padding-y-lg: calc(
-    (var(--dt-spacing-100) + var(--dt-spacing-25)) - var(--button-border-width)
+    (var(--dt-size-400) + var(--dt-size-200)) - var(--button-border-width)
   ); // 10 minus border-width
 
   --button-padding-x-lg: calc(
-    var(--dt-spacing-200) - var(--button-border-width)
+    var(--dt-size-500) - var(--button-border-width)
   ); // 16 minus border-width
 
   --button-padding-y-xl: calc(
-    var(--dt-spacing-150) - var(--button-border-width)
+    var(--dt-size-450) - var(--button-border-width)
   ); // 12 minus border-width
 
   --button-padding-x-xl: calc(
-    var(--dt-spacing-200) - var(--button-border-width)
+    var(--dt-size-500) - var(--button-border-width)
   ); // 16 minus border-width
 
   --button-padding-y: var(--button-padding-y-md);
@@ -228,11 +228,11 @@
 }
 
 .d-btn__icon--left:not(:only-child) {
-  margin-left: var(--dt-spacing-25-negative);
+  margin-inline-start: var(--dt-size-200-negative);
 }
 
 .d-btn__icon--right:not(:only-child) {
-  margin-right: var(--dt-spacing-25-negative);
+  margin-inline-end: var(--dt-size-200-negative);
 }
 
 //  ============================================================================
@@ -287,13 +287,13 @@
   }
 
   &.d-btn--lg {
-    --button-padding-x: calc(var(--button-padding-y-lg) + var(--dt-spacing-1));
-    --button-padding-y: calc(var(--button-padding-y-lg) + var(--dt-spacing-1));
+    --button-padding-x: calc(var(--button-padding-y-lg) + var(--dt-size-100));
+    --button-padding-y: calc(var(--button-padding-y-lg) + var(--dt-size-100));
   }
 
   &.d-btn--xl {
-    --button-padding-x: calc(var(--button-padding-y-xl) + var(--dt-spacing-50));
-    --button-padding-y: calc(var(--button-padding-y-xl) + var(--dt-spacing-50));
+    --button-padding-x: calc(var(--button-padding-y-xl) + var(--dt-size-300));
+    --button-padding-y: calc(var(--button-padding-y-xl) + var(--dt-size-300));
   }
 }
 
@@ -307,6 +307,7 @@
 //  ----------------------------------------------------------------------------
 .d-btn--primary {
   --button-color-text: var(--dt-action-color-foreground-base-primary-default);
+  --button-color-border: var(--dt-action-color-border-base-default);
   --button-color-background: var(
     --dt-action-color-background-base-primary-default
   );
@@ -332,6 +333,7 @@
 //  ----------------------------------------------------------------------------
 .d-btn--muted {
   --button-color-text: var(--dt-action-color-foreground-muted-default);
+  --button-color-border: var(--dt-action-color-border-muted-default);
 
   &:hover:not([disabled]) {
     --button-color-text: var(--dt-action-color-foreground-muted-hover);
@@ -355,6 +357,7 @@
 .d-btn--danger {
   --button-color-text: var(--dt-action-color-foreground-critical-default);
   --button-color-background: var(--dt-action-color-background-critical-default);
+  --button-color-border: var(--dt-action-color-border-critical-default);
 
   &:hover:not([disabled]) {
     --button-color-text: var(--dt-action-color-foreground-critical-hover);
@@ -411,6 +414,7 @@
 .d-btn--positive {
   --button-color-text: var(--dt-action-color-foreground-positive-default);
   --button-color-background: var(--dt-action-color-background-positive-default);
+  --button-color-border: var(--dt-action-color-border-positive-default);
 
   &:hover:not([disabled]) {
     --button-color-text: var(--dt-action-color-foreground-positive-hover);
@@ -468,6 +472,7 @@
 .d-btn--inverted {
   --button-color-text: var(--dt-action-color-foreground-inverted-default);
   --button-color-background: var(--dt-action-color-background-inverted-default);
+  --button-color-border: var(--dt-action-color-border-inverted-default);
 
   &:hover:not([disabled]) {
     --button-color-text: var(--dt-action-color-foreground-inverted-hover);
@@ -548,13 +553,13 @@
   }
 
   &.d-btn--lg {
-    --button-padding-x: calc(var(--button-padding-y-lg) + var(--dt-spacing-1));
-    --button-padding-y: calc(var(--button-padding-y-lg) + var(--dt-spacing-1));
+    --button-padding-x: calc(var(--button-padding-y-lg) + var(--dt-size-100));
+    --button-padding-y: calc(var(--button-padding-y-lg) + var(--dt-size-100));
   }
 
   &.d-btn--xl {
-    --button-padding-x: calc(var(--button-padding-y-xl) + var(--dt-spacing-50));
-    --button-padding-y: calc(var(--button-padding-y-xl) + var(--dt-spacing-50));
+    --button-padding-x: calc(var(--button-padding-y-xl) + var(--dt-size-300));
+    --button-padding-y: calc(var(--button-padding-y-xl) + var(--dt-size-300));
   }
 }
 
@@ -601,7 +606,7 @@
 
   &:focus-visible {
     box-shadow:
-      0 0 0 var(--dt-spacing-1) var(--dt-color-neutral-white),
+      0 0 0 var(--dt-size-100) var(--dt-color-neutral-white),
       0 0 0 0.25em
         hsl(
           var(--brand-color-h) var(--brand-color-s) var(--brand-color-l) ~" / " 90%
@@ -618,10 +623,9 @@
   .d-btn__icon {
     align-items: center;
     justify-content: center;
-    width: 2em;
-    height: 2em;
-    margin-right: var(--dt-spacing-100);
-    margin-left: var(--dt-spacing-50-negative);
+    inline-size: 2em;
+    block-size: 2em;
+    margin-inline: var(--dt-size-300-negative) var(--dt-size-400);
     background-color: var(--dt-color-neutral-white);
     border-radius: var(--dt-size-radius-200);
   }
@@ -670,10 +674,10 @@
   //  Show the loading animation
   &::before {
     position: absolute;
-    width: var(--dt-size-500);
-    height: var(--dt-size-500);
+    inline-size: var(--dt-size-500);
+    block-size: var(--dt-size-500);
     border: var(--dt-size-200) solid currentColor;
-    border-left-color: transparent !important;
+    border-inline-start-color: transparent !important;
     border-radius: var(--dt-size-radius-circle);
     animation: d-loading-circle 900ms infinite linear;
     content: "";
@@ -686,14 +690,14 @@
 
 .d-split-btn {
   display: inline-flex;
-  gap: var(--dt-spacing-0);
+  gap: var(--dt-size-0);
   align-items: stretch;
   justify-content: center;
 
   .d-popover,
   .d-popover div,
   .d-popover &__omega {
-    height: 100%;
+    block-size: 100%;
   }
 
   &__alpha,
@@ -714,10 +718,9 @@
     // vertical divider between the two buttons
     &::before {
       position: absolute;
-      top: var(--button-border-radius);
-      bottom: var(--button-border-radius);
-      left: var(--dt-size-100-negative);
-      width: var(--dt-size-100);
+      inset-block: var(--button-border-radius);
+      inset-inline-start: var(--dt-size-100-negative);
+      inline-size: var(--dt-size-100);
       background-color: var(
         --button-color-text
       ); // use text color for divider line
@@ -747,13 +750,11 @@
     &.d-btn:disabled::before,
     &.d-btn--outlined::before,
     &.d-btn--primary::before {
-      top: var(--dt-size-100-negative);
-      bottom: var(--dt-size-100-negative);
+      inset-block: var(--dt-size-100-negative);
     }
 
     &.d-btn--outlined::before {
-      top: var(--dt-size-50-negative);
-      bottom: var(--dt-size-50-negative);
+      inset-block: var(--dt-size-50-negative);
     }
   }
 
@@ -761,9 +762,9 @@
   &__alpha:disabled:not(.d-btn--primary),
   &__alpha.d-btn--primary,
   &__alpha.d-btn--outlined {
-    border-right: 0;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+    border-inline-end: 0;
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
   }
 
   &__alpha:not(.d-btn--outlined) {
@@ -784,30 +785,30 @@
   &__omega:disabled:not(.d-btn--primary),
   &__omega.d-btn--primary,
   &__omega.d-btn--outlined {
-    border-left: 0;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+    border-inline-start: 0;
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
   }
 
   // adjust x-padding for icon-only button at each size
   &__omega--xs.d-btn--icon-only {
-    --button-padding-x: var(--dt-spacing-50);
+    --button-padding-x: var(--dt-size-300);
   }
 
   &__omega--sm.d-btn--icon-only {
-    --button-padding-x: var(--dt-spacing-50);
+    --button-padding-x: var(--dt-size-300);
   }
 
   &__omega--md.d-btn--icon-only {
-    --button-padding-x: var(--dt-spacing-75);
+    --button-padding-x: var(--dt-size-350);
   }
 
   &__omega--lg.d-btn--icon-only {
-    --button-padding-x: var(--dt-spacing-100);
+    --button-padding-x: var(--dt-size-400);
   }
 
   &__omega--xl.d-btn--icon-only {
-    --button-padding-x: var(--dt-spacing-150);
+    --button-padding-x: var(--dt-size-450);
   }
 }
 

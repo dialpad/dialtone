@@ -27,11 +27,11 @@
   --badge-line-height: calc(var(--dt-size-500) + var(--dt-size-200));
   --badge-font-size: var(--dt-font-size-100);
   --badge-font-weight: var(--dt-font-weight-semi-bold);
-  --badge-gap: var(--dt-spacing-25);
+  --badge-gap: var(--dt-size-200);
   --badge-letter-spacing: var(--dt-size-50);
-  --badge-padding-y: var(--dt-spacing-1);
-  --badge-padding-x: var(--dt-spacing-50);
-  --badge-label-padding-x: var(--dt-spacing-25);
+  --badge-padding-y: var(--dt-size-100);
+  --badge-padding-x: var(--dt-size-300);
+  --badge-label-padding-x: var(--dt-size-200);
   --badge-text-case: none;
   --badge-decorative-color: var(--dt-color-black-900);
 
@@ -58,11 +58,11 @@
   //  --------------------------------------------------------------------------
   &--count {
     --badge-radius: var(--dt-size-radius-pill);
-    --badge-padding-x: calc(var(--dt-spacing-100) - var(--dt-spacing-1));
-    --badge-padding-y: var(--dt-spacing-50);
+    --badge-padding-x: calc(var(--dt-size-400) - var(--dt-size-100));
+    --badge-padding-y: var(--dt-size-300);
     --badge-line-height: var(--dt-size-500);
-    --badge-label-padding-x: var(--dt-spacing-0);
-    --badge-gap: var(--dt-spacing-50);
+    --badge-label-padding-x: var(--dt-size-0);
+    --badge-gap: var(--dt-size-300);
   }
 
   //  TYPE
@@ -135,11 +135,11 @@
   //  --------------------------------------------------------------------------
   &__decorative {
     display: inline-flex;
-    width: var(--dt-size-400);
-    height: var(--dt-size-400);
+    inline-size: var(--dt-size-400);
+    block-size: var(--dt-size-400);
     background-color: var(--badge-decorative-color);
     border-radius: var(--dt-size-200);
-    margin-inline-start: var(--dt-spacing-25);
+    margin-inline-start: var(--dt-size-200);
   }
 
   &__label {
@@ -154,10 +154,10 @@
   }
 
   &__icon-left {
-    padding-inline-start: var(--dt-spacing-1);
+    padding-inline-start: var(--dt-size-100);
   }
 
   &__icon-right {
-    padding-inline-end: var(--dt-spacing-1);
+    padding-inline-end: var(--dt-size-100);
   }
 }

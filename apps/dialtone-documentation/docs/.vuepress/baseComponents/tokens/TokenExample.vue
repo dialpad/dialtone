@@ -4,27 +4,33 @@
     direction="row"
     justify="center"
     align="center"
-    class="d-bar4 d-h32 colorRectangle"
+    class="d-bar4 d-hmn32 colorRectangle"
     :style="getColorStyle"
   >
-    <div v-if="isForeground || isLink" :class="['d-headline--lg', { 'link-example': isLink }]">
-      Aa
-    </div>
+    <dt-text
+      v-if="isForeground || isLink"
+      as="p"
+      kind="headline"
+      size="xl"
+      :class="{ 'link-example': isLink }"
+    >
+      Ag
+    </dt-text>
   </dt-stack>
   <dt-stack
-    v-if="category === 'typography'"
+    v-if="category === 'typography' || category === 'text'"
     direction="row"
     justify="center"
     align="center"
-    class="d-h32"
+    class="d-hmn32"
   >
     <div :style="getTypographyStyle">
-      Aa
+      Ag
     </div>
   </dt-stack>
   <div
     v-if="category === 'shadow'"
-    class="d-bar4 d-h32"
+    class="d-bar4 d-hmn32"
     :style="getShadowStyle"
   />
   <div
@@ -65,11 +71,12 @@ const TYPOGRAPHY_KEY_MAP = {
 const SHADOW_COMPOSITION_TOKENS = ['small', 'medium', 'large', 'extra-large', 'card', 'focus', 'focus-inset'];
 
 const isTypography = (name, key) => name.includes('--dt-typography') && name.includes(key);
+const isText = (name, key) => name.includes('--dt-text') && name.includes(key);
 const isFont = (name, key) => name.includes(`--dt-font-${key}`);
 const getRectSizeStyle = (value) => {
-  if (value.endsWith('%')) return { width: value };
+  if (value.endsWith('%')) return { 'inline-size': value };
   const size = parseFloat(value.replace('rem', ''));
-  if (size < 12.8 && size > -12.8) return { width: `${Math.abs(size)}rem` };
+  if (size < 12.8 && size > -12.8) return { 'inline-size': `${Math.abs(size)}rem` };
   return null;
 };
 
@@ -142,11 +149,11 @@ const foregroundBackgroundColor = computed(() => {
 
 const getTypographyStyle = computed(() => {
   for (const key in TYPOGRAPHY_KEY_MAP) {
-    if (isFont(props.name, key) || isTypography(props.name, key)) {
+    if (isFont(props.name, key) || isTypography(props.name, key) || isText(props.name, key)) {
       return { [TYPOGRAPHY_KEY_MAP[key]]: props.value };
     }
   }
-  if (props.name.startsWith('var(--dt-typography')) {
+  if (props.name.startsWith('var(--dt-typography') || props.name.startsWith('var(--dt-text')) {
     return `font: ${props.value}`;
   }
   return null;
@@ -162,13 +169,13 @@ const getShadowStyle = computed(() => {
 const getSizeStyle = computed(() => {
   if (props.name.includes('radius')) {
     if (props.name.includes('circle')) {
-      return { width: 'var(--dt-size-600)', borderRadius: props.value };
+      return { 'inline-size': 'var(--dt-size-600)', borderRadius: props.value };
     }
-    return { width: 'var(--dt-size-100-percent)', borderRadius: props.value };
+    return { 'inline-size': 'var(--dt-size-100-percent)', borderRadius: props.value };
   }
   if (props.name.includes('border')) {
     return {
-      width: 'var(--dt-size-100-percent)',
+      'inline-size': 'var(--dt-size-100-percent)',
       backgroundColor: 'var(--dt-color-neutral-transparent)',
       border: `${props.value} solid var(--dt-color-border-brand)`,
     };
@@ -183,7 +190,7 @@ const displaySpaceReference = computed(() => {
 });
 
 const getSpaceAfterStyle = computed(() => {
-  return { left: props.value };
+  return { 'inset-inline-start': props.value };
 });
 
 const isPercentage = computed(() => props.value.endsWith('%'));
@@ -195,21 +202,21 @@ const isPercentage = computed(() => props.value.endsWith('%'));
 }
 
 .link-example {
-  border-bottom: var(--dt-size-200) solid;
+  border-block-end: var(--dt-size-200) solid;
   line-height: initial;
 }
 
 .sizeRectangle {
-  height: var(--dt-size-600);
+  block-size: var(--dt-size-600);
   background-color: var(--dt-color-surface-brand-strong);
   border-radius: var(--dt-size-radius-300);
-  width: 0;
+  inline-size: 0;
 }
 
 .spaceRectangle {
-  height: var(--dt-size-600);
+  block-size: var(--dt-size-600);
   background-color: var(--dt-color-surface-brand-strong);
-  width: 0;
+  inline-size: 0;
 }
 
 .space {
@@ -218,28 +225,28 @@ const isPercentage = computed(() => props.value.endsWith('%'));
 }
 
 .spaceReference {
-  height: var(--dt-size-600);
-  width: var(--dt-size-500);
+  block-size: var(--dt-size-600);
+  inline-size: var(--dt-size-500);
   background-color: var(--dt-color-surface-moderate);
   display: flex;
   align-items: center;
   justify-content: center;
   font: var(--dt-typography-body-sm);
   color: var(--dt-color-foreground-muted);
-  padding: var(--dt-space-400) var(--dt-space-200);
-  border-top-right-radius: var(--dt-size-radius-300);
-  border-bottom-right-radius: var(--dt-size-radius-300);
+  padding: var(--dt-size-400) var(--dt-size-200);
+  border-start-end-radius: var(--dt-size-radius-300);
+  border-end-end-radius: var(--dt-size-radius-300);
   &.spaceBefore {
     border-radius: var(--dt-size-radius-0);
-    border-top-left-radius: var(--dt-size-radius-300);
-    border-bottom-left-radius: var(--dt-size-radius-300);
+    border-start-start-radius: var(--dt-size-radius-300);
+    border-end-start-radius: var(--dt-size-radius-300);
   }
 }
 
 .spaceReference.percentage {
   position: absolute;
   &.spaceBefore {
-    right: 100%;
+    inset-inline-end: 100%;
   }
 }
 </style>

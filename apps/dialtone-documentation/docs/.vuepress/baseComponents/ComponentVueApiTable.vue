@@ -15,7 +15,7 @@
               scope="col"
               class="d-p0 d-bbw0"
             >
-              <div class="d-p16 d-bb d-bc-default d-bbw1">
+              <div class="d-p16 d-bb d-bbw1">
                 Name
               </div>
             </th>
@@ -23,7 +23,7 @@
               scope="col"
               class="vue-api-table d-p0 d-bbw0"
             >
-              <div class="d-p16 d-bb d-bc-default d-bbw1">
+              <div class="d-p16 d-bb d-bbw1">
                 Description
               </div>
             </th>
@@ -32,7 +32,7 @@
               scope="col"
               class="d-p0 d-bbw0"
             >
-              <div class="d-p16 d-bb d-bc-default d-bbw1">
+              <div class="d-p16 d-bb d-bbw1">
                 Default
               </div>
             </th>

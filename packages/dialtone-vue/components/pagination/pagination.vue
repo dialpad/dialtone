@@ -37,10 +37,11 @@
       </div>
       <dt-button
         v-else
+        class="d-pagination__item"
         :aria-label="pageNumberAriaLabel(page)"
         :kind="currentPage === page ? 'default' : 'muted'"
         :importance="currentPage === page ? 'primary' : 'clear'"
-        label-class=""
+        label-class="d-pagination__item-label"
         @click="changePage(page)"
       >
         {{ page }}

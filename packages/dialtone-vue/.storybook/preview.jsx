@@ -1,10 +1,41 @@
 import '../css/dialtone-globals.less';
 import '@dialpad/dialtone-css/lib/dist/dialtone.css';
 import 'overlayscrollbars/overlayscrollbars.css';
+// Import layered token CSS files
+import '@dialpad/dialtone-tokens/layered/tokens-core.css';
+import '@dialpad/dialtone-tokens/layered/tokens-base-colors.css';
+import '@dialpad/dialtone-tokens/layered/tokens-dp-colors.css';
 import { addons } from '@storybook/preview-api';
-import { setTheme } from '@dialpad/dialtone-tokens/themes/config';
-import DpLight from '@dialpad/dialtone-tokens/themes/dp-light';
-import DpDark from '@dialpad/dialtone-tokens/themes/dp-dark';
+import { setTheme, setMode, setBrand, setContrast, initDialtoneTheme } from '@dialpad/dialtone-tokens/themes/config';
+
+// Layered theme imports
+let Dp, Tmo, Aegean, Botany, Buttercream, HighDesert, Melon, Plum, Sunflower, VerdantHaze;
+let ProtaDeuter, Trita, Theme101, Theme102, Theme103, Theme137, HighContrast;
+
+(async () => {
+  Dp = (await import('@dialpad/dialtone-tokens/themes/dp')).default;
+  Tmo = (await import('@dialpad/dialtone-tokens/themes/tmo')).default;
+  Aegean = (await import('@dialpad/dialtone-tokens/themes/aegean')).default;
+  Botany = (await import('@dialpad/dialtone-tokens/themes/botany')).default;
+  Buttercream = (await import('@dialpad/dialtone-tokens/themes/buttercream')).default;
+  HighDesert = (await import('@dialpad/dialtone-tokens/themes/high-desert')).default;
+  Melon = (await import('@dialpad/dialtone-tokens/themes/melon')).default;
+  Plum = (await import('@dialpad/dialtone-tokens/themes/plum')).default;
+  Sunflower = (await import('@dialpad/dialtone-tokens/themes/sunflower')).default;
+  VerdantHaze = (await import('@dialpad/dialtone-tokens/themes/verdant-haze')).default;
+  ProtaDeuter = (await import('@dialpad/dialtone-tokens/themes/prota-deuter')).default;
+  Trita = (await import('@dialpad/dialtone-tokens/themes/trita')).default;
+  Theme101 = (await import('@dialpad/dialtone-tokens/themes/101')).default;
+  Theme102 = (await import('@dialpad/dialtone-tokens/themes/102')).default;
+  Theme103 = (await import('@dialpad/dialtone-tokens/themes/103')).default;
+  Theme137 = (await import('@dialpad/dialtone-tokens/themes/137')).default;
+  HighContrast = (await import('@dialpad/dialtone-tokens/themes/high-contrast')).default;
+
+  // Initialize layered theming once themes are loaded
+  if (Dp) {
+    initDialtoneTheme(Dp, 'light', document.documentElement);
+  }
+})();
 import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { setup } from '@storybook/vue3';
 import React from 'react';
@@ -19,13 +50,78 @@ import { DtScrollbarDirective } from '@/directives/scrollbar_directive';
 import { DtStack } from '@/components/stack';
 import { faker } from '@faker-js/faker';
 
-setTheme(DpLight);
+let currentContrast = 'default';
+// Initialize dark mode from localStorage (storybook-dark-mode stores it there)
+let currentDarkMode = (() => {
+  try {
+    const storedValue = localStorage.getItem('sb-addon-themes-3');
+    if (storedValue) {
+      const parsed = JSON.parse(storedValue);
+      return parsed.current === 'dark';
+    }
+  } catch (e) {
+    // Ignore errors
+  }
+  return false; // Default to light mode
+})();
+let currentBrandTheme = 'dp';
+
 
 const channel = addons.getChannel();
 
-channel.on(DARK_MODE_EVENT_NAME, (isDark) => {
-  setTheme(isDark ? DpDark : DpLight);
+// Function to get layered themes (ensures async imports have completed)
+const getLayeredThemes = () => ({
+  'dp': Dp,
+  'tmo': Tmo,
+  'aegean': Aegean,
+  'botany': Botany,
+  'buttercream': Buttercream,
+  'high-desert': HighDesert,
+  'melon': Melon,
+  'plum': Plum,
+  'sunflower': Sunflower,
+  'verdant-haze': VerdantHaze,
+  'prota-deuter': ProtaDeuter,
+  'trita': Trita,
+  '101': Theme101,
+  '102': Theme102,
+  '103': Theme103,
+  '137': Theme137,
 });
+
+const updateTheme = (isDark, isHighContrast, brandTheme = 'dp') => {
+  currentDarkMode = isDark;
+  currentContrast = isHighContrast ? 'high' : 'default';
+  currentBrandTheme = brandTheme;
+
+  // Use layered theming system with data-dt-mode
+  setMode(isDark ? 'dark' : 'light', document.documentElement);
+
+  // Get current layered themes
+  const layeredThemes = getLayeredThemes();
+
+  // Wait for layered themes to load
+  if (layeredThemes[brandTheme]) {
+    setBrand(layeredThemes[brandTheme], document.documentElement);
+  } else {
+    // Themes might still be loading, try again
+    setTimeout(() => {
+      const themes = getLayeredThemes();
+      if (themes[brandTheme]) {
+        setBrand(themes[brandTheme], document.documentElement);
+      }
+    }, 100);
+  }
+
+  setContrast(isHighContrast ? HighContrast : null, document.documentElement);
+};
+
+channel.on(DARK_MODE_EVENT_NAME, (isDark) => {
+  updateTheme(isDark, currentContrast === 'high', currentBrandTheme);
+});
+
+// Initialize theme on load with current dark mode state
+updateTheme(currentDarkMode, currentContrast === 'high', currentBrandTheme);
 
 setEmojiAssetUrlSmall('https://static.dialpadcdn.com/joypixels/png/unicode/32/', '.png');
 setEmojiAssetUrlLarge('https://static.dialpadcdn.com/joypixels/svg/unicode/', '.svg');
@@ -43,6 +139,47 @@ setup((app) => {
 
 export default {
   name: 'StorybookPreview',
+  globalTypes: {
+    theme: {
+      description: 'Brand theme',
+      defaultValue: 'dp',
+      toolbar: {
+        title: 'Theme',
+        icon: 'paintbrush',
+        items: [
+          { value: 'dp', title: 'Dialpad' },
+          { value: 'tmo', title: 'T-Mobile' },
+          { value: 'aegean', title: 'Aegean' },
+          { value: 'botany', title: 'Botany' },
+          { value: 'buttercream', title: 'Buttercream' },
+          { value: 'high-desert', title: 'High Desert' },
+          { value: 'melon', title: 'Melon' },
+          { value: 'plum', title: 'Plum' },
+          { value: 'sunflower', title: 'Sunflower' },
+          { value: 'verdant-haze', title: 'Verdant Haze' },
+          { value: 'prota-deuter', title: 'Protanopia/Deuteranopia' },
+          { value: 'trita', title: 'Tritanopia' },
+          { value: '101', title: 'Theme 101' },
+          { value: '102', title: 'Theme 102' },
+          { value: '103', title: 'Theme 103' },
+          { value: '137', title: 'Theme 137' },
+        ],
+        dynamicTitle: true,
+      },
+    },
+    contrast: {
+      description: 'Contrast level',
+      toolbar: {
+        title: 'Contrast',
+        icon: 'contrast',
+        items: [
+          { value: 'default', icon: 'circlehollow', title: 'Default contrast' },
+          { value: 'high', icon: 'circle', title: 'High contrast' },
+        ],
+        dynamicTitle: true,
+      },
+    },
+  },
   parameters: {
     a11y: {
       config: {
@@ -113,4 +250,12 @@ export default {
 
     percy: { globalShow: true },
   },
+  decorators: [
+    (story, context) => {
+      const isHighContrast = context.globals.contrast === 'high';
+      const brandTheme = context.globals.theme || 'dp';
+      updateTheme(currentDarkMode, isHighContrast, brandTheme);
+      return story();
+    },
+  ],
 };

@@ -1,6 +1,6 @@
 <template>
   <dt-stack
-    class="d-br d-bc-default d-pr16"
+    class="d-br d-pr16"
     gap="500"
   >
     <h2>Sizes</h2>

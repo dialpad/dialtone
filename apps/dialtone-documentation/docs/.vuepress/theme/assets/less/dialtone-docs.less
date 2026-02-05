@@ -27,7 +27,11 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 7.2rem;
+  scroll-padding-block-start: 7.2rem;
+}
+
+body {
+  background-color: var(--dt-shell-color-surface-default);
 }
 
 //  ============================================================================
@@ -37,7 +41,7 @@ html {
 html body {
   --docsearch-primary-color: var(--dt-color-brand-purple);
   --docsearch-text-color: var(--dt-color-foreground-primary);
-  --docsearch-spacing: var(--dt-space-550);
+  --docsearch-spacing: var(--dt-size-550);
   // --docsearch-icon-stroke-width
   --docsearch-highlight-color: var(--docsearch-primary-color);
   --docsearch-muted-color: var(--dt-color-foreground-tertiary);
@@ -66,7 +70,8 @@ html body {
   --docsearch-footer-shadow: 0 -1px 0 0 var(--dt-color-border-subtle),0 -1px 3px 0 rgb(0,0,0,.2);
 
   .DocSearch-Modal {
-    margin-top: 15vh;
+    margin-block-start: 15vh;
+    background-clip: padding-box;
     border: var(--dt-size-100) solid var(--dt-color-border-subtle);
     border-radius: var(--dt-size-radius-500);
     box-shadow: var(--dt-shadow-large);
@@ -80,16 +85,15 @@ html body {
 
   .DocSearch-SearchBar {
     padding: var(--docsearch-spacing);
-    border-bottom: 1px solid var(--dt-color-border-subtle);
+    border-block-end: 1px solid var(--dt-color-border-subtle);
   }
 
   .DocSearch-Form {
     padding: 0 var(--docsearch-spacing);
-    padding-right: var(--dt-space-450);
-    padding-left: var(--dt-space-450);
     border: none;
     border-radius: var(--dt-size-radius-400);
     box-shadow: var(--docsearch-searchbox-shadow);
+    padding-inline: var(--dt-size-450) var(--dt-size-450);
   }
 
   .DocSearch-MagnifierLabel svg,
@@ -99,7 +103,7 @@ html body {
 
   .DocSearch-Input {
     font-size: var(--dt-font-size-300);
-    padding-inline-start: var(--dt-space-400);
+    padding-inline-start: var(--dt-size-400);
 
     &:focus-visible {
       box-shadow: none;
@@ -113,8 +117,8 @@ html body {
   .DocSearch-LoadingIndicator svg,
   .DocSearch-MagnifierLabel svg,
   .DocSearch-Search-Icon {
-    width: var(--dt-icon-size-300) !important;
-    height: var(--dt-icon-size-300) !important;
+    inline-size: var(--dt-icon-size-300) !important;
+    block-size: var(--dt-icon-size-300) !important;
   }
 
   .DocSearch-Reset:hover {
@@ -126,7 +130,7 @@ html body {
   }
 
   .DocSearch-Dropdown {
-    max-height: var(--dt-size-1000);
+    max-block-size: var(--dt-size-1000);
   }
 
   .DocSearch-Dropdown-Container {
@@ -138,7 +142,7 @@ html body {
   }
 
   .DocSearch-Hit-source {
-    padding: var(--dt-space-400) var(--dt-space-300) 0;
+    padding: var(--dt-size-400) var(--dt-size-300) 0;
     color: var(--dt-color-foreground-primary);
     font-weight: var(--dt-font-weight-bold);
     font-size: var(--dt-font-size-200);
@@ -154,33 +158,32 @@ html body {
   }
 
   .DocSearch-Hit-Container {
-    padding-right: 0;
+    padding-inline-end: 0;
   }
 
   .DocSearch-Hit {
-    padding-bottom: var(--dt-space-400);
+    padding-block-end: var(--dt-size-400);
   }
 
   .DocSearch-Hits mark {
-    padding: var(--dt-space-200);
+    padding: var(--dt-size-200);
     color: var(--dt-color-foreground-primary);
     background: var(--dt-color-surface-warning);
   }
 
   .DocSearch-Hit a {
-    padding-right: var(--dt-space-450);
-    padding-left: var(--dt-space-450);
+    padding-inline: var(--dt-size-450) var(--dt-size-450);
     border-radius: var(--dt-size-radius-300);
   }
 
   .DocSearch-Hit-action svg,
   .DocSearch-Hit-icon svg {
-    width: var(--dt-icon-size-200);
-    height: var(--dt-icon-size-200);
+    inline-size: var(--dt-icon-size-200);
+    block-size: var(--dt-icon-size-200);
   }
 
   .DocSearch-Hit-content-wrapper {
-    margin: 0 var(--dt-space-200);
+    margin: 0 var(--dt-size-200);
     font-weight: var(--dt-font-weight-normal);
     line-height: var(--dt-font-line-height-200);
   }
@@ -232,13 +235,13 @@ html body {
   }
 
   .DocSearch-Help {
-    margin-top: var(--dt-space-400);
+    margin-block-start: var(--dt-size-400);
     color: var(--dt-color-foreground-secondary);
     font-size: var(--dt-font-size-100);
   }
 
   .DocSearch-NoResults {
-    padding: var(--dt-space-600) 0;
+    padding: var(--dt-size-600) 0;
     font-size: var(--dt-font-size-200);
   }
 
@@ -260,33 +263,62 @@ html body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: var(--dt-size-700);
-  padding: var(--dt-space-500) var(--dt-space-500) var(--dt-space-500) var(--dt-space-400);
-  background-color: var(--dt-color-surface-secondary);
-  border-bottom: var(--dt-size-border-50) solid var(--dt-color-border-subtle);
+  padding: var(--dt-size-500) var(--dt-size-500) var(--dt-size-500) var(--dt-size-400);
+  color: var(--dt-shell-color-foreground-primary);
+  background-color: var(--dt-shell-color-surface-default);
+  block-size: var(--dt-size-700);
+}
+
+.dialtone-shell-btn {
+  --button-color-text: var(--dt-shell-action-color-foreground-secondary-default);
+  --button-color-background: var(--dt-shell-action-color-background-secondary-default);
+
+  font-weight: var(--dt-font-weight-normal);
+
+  &.d-btn--active:not(.d-btn--disabled) {
+    --button-color-text: var(--dt-shell-action-color-foreground-primary-strong);
+    --button-color-background: var(--dt-shell-action-color-background-primary-selected);
+  }
+
+  &:hover:not(.d-btn--disabled) {
+    --button-color-text: var(--dt-shell-action-color-foreground-secondary-default);
+    --button-color-background: var(--dt-shell-action-color-background-secondary-hover);
+  }
+
 }
 
 .dialtone-sidebar {
   position: sticky;
-  top: var(--dt-size-700);
-  // TODO: redo 😜
-  height: calc(100vh - var(--dt-space-700));
   overflow-y: auto;
-  background-color: var(--dt-color-surface-secondary);
-  border-right: var(--dt-size-100) solid var(--dt-color-border-subtle);
+  color: var(--dt-shell-color-foreground-primary);
+  inset-block-start: var(--dt-size-700);
+  // TODO: redo 😜
+  block-size: calc(100vh - var(--dt-size-700));
+  // border-inline-end: var(--dt-size-100) solid var(--dt-shell-color-border-subtle);
 
   &__list {
-    top: var(--dt-space-700);
-    bottom: 0;
-    width: calc(var(--dt-size-300) * 64);
-    padding: var(--dt-size-550) var(--dt-size-450) var(--dt-size-750);
+    padding: var(--dt-size-550) 0 var(--dt-size-750) var(--dt-size-450);
+    inset-block: var(--dt-size-700) 0;
+    inline-size: calc(var(--dt-size-300) * 64);
+  }
+}
+
+.dialtone-content {
+  background-color: var(--dt-color-surface-primary);
+  border-block: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
+
+  @media (min-width: 980px) {
+    margin-bottom: var(--dt-size-500);
+    border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
+    border-radius: var(--dt-size-radius-500);
+    margin-inline: var(--dt-size-500);
   }
 }
 
 a.header-anchor {
-  float: left;
-  margin-left: -0.87em;
-  padding-right: 0.23em;
+  float: inline-start;
+  margin-inline-start: -0.87em;
+  padding-inline-end: 0.23em;
   font-size: inherit;
   text-decoration: none;
   opacity: 0;
@@ -297,26 +329,19 @@ a.header-anchor {
 }
 
 .d-docsite--header-2 {
-  margin-top: var(--dt-space-600);
-  margin-bottom: var(--dt-space-400);
-  font: var(--dt-typography-headline-xl);
-  font-family: var(--dt-font-family-expressive);
+  font: var(--dt-text-headline-2xl);
+  font-weight: var(--dt-font-weight-medium);
+  margin-block: var(--dt-size-600) var(--dt-size-400);
 }
 
 .d-docsite--header-3 {
-  margin-top: var(--dt-space-500);
-  margin-bottom: var(--dt-space-300);
-  font-weight: var(--dt-font-weight-semi-bold);
-  font-size: var(--dt-font-size-300);
-  line-height: var(--dt-font-line-height-400);
+  font: var(--dt-text-headline-xl);
+  margin-block: var(--dt-size-500) var(--dt-size-300);
 }
 
 .d-docsite--header-4 {
-  margin-top: var(--dt-space-500);
-  margin-bottom: var(--dt-space-300);
-  font-weight: var(--dt-font-weight-bold);
-  font-size: var(--dt-font-size-200);
-  line-height: var(--dt-font-line-height-400);
+  font: var(--dt-text-headline-lg);
+  margin-block: var(--dt-size-500) var(--dt-size-300);
 }
 
 .d-docsite--header-2,
@@ -348,10 +373,11 @@ a.header-anchor {
 }
 
 .d-docsite--paragraph {
-  max-width: 75ch;
-  margin-bottom: 1em;
+  max-inline-size: 75ch;
+  margin-block-end: 1em;
   font-size: var(--dt-font-size-200);
   line-height: var(--dt-font-line-height-400);
+  text-wrap: pretty;
 
   .d-notice & {
     // OVERRIDE
@@ -367,24 +393,23 @@ a.header-anchor {
 
 .d-docsite--unordered-list,
 .d-docsite--ordered-list {
-  margin: var(--dt-space-400) 0;
-  padding-left: var(--dt-space-500);
+  margin: var(--dt-size-400) 0;
+  padding-inline-start: var(--dt-size-500);
 }
 
 .d-docsite--list-element {
-  max-width: 75ch;
-  margin-bottom: var(--dt-space-300);
+  max-inline-size: 75ch;
+  margin-block-end: var(--dt-size-300);
   font-size: var(--dt-font-size-200);
   line-height: var(--dt-font-line-height-400);
 
   &:last-child {
-    margin-bottom: 0;
+    margin-block-end: 0;
   }
 }
 
 .d-docsite--preview-header {
-  margin-top: var(--dt-space-600);
-  margin-bottom: var(--dt-space-300);
+  margin-block: var(--dt-size-600) var(--dt-size-300);
 }
 
 .d-docsite-code {
@@ -403,7 +428,7 @@ a.header-anchor {
 
   display: grid;
   grid-template-columns: repeat(var(--icon-grid-columns), [col] var(--icon-card-width));
-  gap: var(--dt-space-400);
+  gap: var(--dt-size-400);
 
   @media screen and (min-width: 375px) {
     --icon-grid-columns: 3;
@@ -440,21 +465,21 @@ a.header-anchor {
 
 .dialtone-icon-grid__item {
   position: relative;
-  width: var(--dt-size-100-percent);
-  height: var(--dt-size-750);
+  inline-size: var(--dt-size-100-percent);
+  block-size: var(--dt-size-750);
 }
 
 .dialtone-icon-card {
   position: relative;
   display: flex;
-  width: 100%;
-  height: 100%;
+  inline-size: 100%;
+  block-size: 100%;
 
   .d-popover {
-    height: 100%;
+    block-size: 100%;
 
     > div {
-      height: 100%;
+      block-size: 100%;
     }
   }
 }
@@ -464,8 +489,8 @@ a.header-anchor {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: var(--icon-card-width);
-  height: 100%;
+  inline-size: var(--icon-card-width);
+  block-size: 100%;
   cursor: pointer;
   transition: all 150ms var(--ttf-in-out);
 
@@ -519,36 +544,35 @@ a.header-anchor {
 }
 
 .dialtone-icon-card__icon {
-  width: var(--dt-size-650);
-  height: var(--dt-size-650);
-  margin-bottom: var(--dt-space-300);
+  inline-size: var(--dt-size-650);
+  block-size: var(--dt-size-650);
+  margin-block-end: var(--dt-size-300);
 
   svg {
-    width: 100%;
-    height: auto;
+    inline-size: 100%;
+    block-size: auto;
   }
 }
 
 .dialtone-icon-card__icon--autosize {
-  margin-bottom: var(--dt-space-300);
+  margin-block-end: var(--dt-size-300);
 
   svg {
-    width: 100%;
-    height: auto;
+    inline-size: 100%;
+    block-size: auto;
   }
 }
 
 .dialtone-icon-card__title {
-  margin-top: 0;
-  margin-bottom: var(--dt-space-300);
+  margin-block: 0 var(--dt-size-300);
   font-weight: var(--dt-font-weight-bold);
   font-size: var(--dt-font-size-200);
   line-height: var(--dt-font-line-height-200);
 }
 
 .dialtone-icon-card__subtitle {
-  width: 100%;
-  margin-bottom: 0;
+  inline-size: 100%;
+  margin-block-end: 0;
   overflow: hidden;
   font: var(--dt-typography-label-sm-plain);
   text-align: center;
@@ -557,13 +581,13 @@ a.header-anchor {
 
 .dialtone-icon-card__name {
   position: absolute;
-  bottom: var(--dt-space-400);
+  inset-block-end: var(--dt-size-400);
   color: var(--dt-color-foreground-primary);
   font: var(--dt-typography-code-sm);
 }
 
 .dialtone-icon-popover {
-  max-width: var(--dt-size-950);
+  max-inline-size: var(--dt-size-950);
 }
 
 //  ============================================================================
@@ -576,8 +600,7 @@ a.header-anchor {
   background-color: var(--dt-color-surface-primary);
 
   &__inner-wrapper {
-    padding-top: calc(var(--dt-space-300) * 32);
-    padding-bottom: calc(var(--dt-space-300) * 32);
+    padding-block: calc(var(--dt-size-300) * 32);
     text-wrap: balance;
 
     @media (max-width: 640px) {
@@ -587,11 +610,11 @@ a.header-anchor {
 
   &__content {
     align-items: flex-start;
-    max-width: 40%;
+    max-inline-size: 40%;
 
     @media (max-width: 640px) {
       align-items: unset;
-      max-width: 100%;
+      max-inline-size: 100%;
       text-align: center;
     }
   }
@@ -603,14 +626,12 @@ a.header-anchor {
   }
 
   @media (max-width: 640px) {
-    padding-right: var(--dt-space-500);
-    padding-left: var(--dt-space-400);
+    padding-inline: var(--dt-size-400) var(--dt-size-500);
   }
 }
 
 .links {
-  padding-top: var(--dt-space-650);
-  padding-bottom: var(--dt-space-650);
+  padding-block: var(--dt-size-650) var(--dt-size-650);
   text-wrap: balance;
 
   @media (max-width: 640px) {
@@ -622,7 +643,7 @@ a.header-anchor {
   @media (max-width: 640px) {
     display: block;
     grid-column: 1 / -1 !important;
-    margin-bottom: calc(var(--dt-space-300) * 18);
+    margin-block-end: calc(var(--dt-size-300) * 18);
   }
 }
 
@@ -632,8 +653,8 @@ a.header-anchor {
 //  ----------------------------------------------------------------------------
 
 .dialtone-page-title {
-  margin-bottom: var(--dt-space-400);
-  font: var(--dt-typography-headline-xxl);
+  margin-block-end: var(--dt-size-400);
+  font: var(--dt-text-headline-3xl);
 }
 
 //  ============================================================================
@@ -642,8 +663,8 @@ a.header-anchor {
 //  ----------------------------------------------------------------------------
 
 .dialtone-intro {
-  max-width: 58ch;
-  margin-bottom: var(--dt-space-400);
+  max-inline-size: 58ch;
+  margin-block-end: var(--dt-size-400);
   color: var(--dt-color-foreground-secondary);
   font-size: var(--dt-font-size-300);
   line-height: var(--dt-font-line-height-300);
@@ -656,26 +677,29 @@ a.header-anchor {
 
 .dialtone-wall {
   display: grid;
-  gap: var(--dt-space-500);
-  margin-top: var(--dt-space-500);
+  gap: var(--dt-size-500);
+  margin-block-start: var(--dt-size-500);
 
   @media screen and (min-width: 640px) {
     grid-template-columns: [full-start] repeat(2, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end] !important;
-    gap: var(--dt-space-600);
+    gap: var(--dt-size-600);
   }
 
   @media screen and (min-width: 768px) {
     grid-template-columns: [full-start] repeat(3, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end] !important;
   }
 
+  @media screen and (min-width: 1354px) {
+    gap: var(--dt-size-600);
+  }
+
   &__item {
     display: block;
     overflow: hidden;
     text-decoration: none;
-    background-color: var(--dt-color-surface-primary);
-    border: var(--dt-size-100) solid;
-    border-color: var(--dt-color-border-default);
-    border-radius: var(--dt-size-400);
+    background-color: var(--dt-color-surface-secondary);
+    border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
+    border-radius: var(--dt-size-radius-400);
     opacity: .7;
     transition-timing-function: var(--ttf-in-out);
     transition-duration: var(--td200);
@@ -687,7 +711,7 @@ a.header-anchor {
 
     &:is(a):hover {
       text-decoration: none;
-      border-color: var(--dt-color-border-moderate);
+      border-color: var(--dt-color-border-default);
       box-shadow: var(--dt-shadow-small);
     }
 
@@ -702,26 +726,26 @@ a.header-anchor {
   }
 
   &__thumb {
-    width: auto;
-    height: var(--dt-size-750);
+    inline-size: auto;
+    block-size: var(--dt-size-750);
 
     @media screen and (min-width: 640px) {
       display: block;
-      width: 100%;
-      height: auto;
+      inline-size: 100%;
+      block-size: auto;
     }
   }
 
   &__details {
     display: flex;
     flex-direction: column;
-    gap: var(--dt-space-300);
-    padding: var(--dt-space-500);
+    gap: var(--dt-size-300);
+    padding: var(--dt-size-500);
   }
 
   &__title {
     display: flex;
-    gap: var(--dt-space-400);
+    gap: var(--dt-size-400);
     align-items: center;
     color: var(--dt-color-foreground-secondary);
     font-weight: var(--dt-font-weight-semi-bold);
@@ -734,9 +758,14 @@ a.header-anchor {
   }
 
   &__description {
-    color: var(--dt-color-foreground-tertiary);
-    font-size: var(--dt-font-size-200);
-    line-height: var(--dt-font-line-height-300);
+    display: none;
+
+    @media screen and (min-width: 768px) {
+      display: block;
+      color: var(--dt-color-foreground-tertiary);
+      font-size: var(--dt-font-size-200);
+      line-height: var(--dt-font-line-height-300);
+    }
   }
 }
 
@@ -747,12 +776,12 @@ a.header-anchor {
 
 .dialtone-definition {
   > dt {
-    margin-top: var(--dt-space-500);
+    margin-block-start: var(--dt-size-500);
     font-weight: var(--dt-font-weight-bold);
   }
 
   > dd {
-    max-width: 72ch;
+    max-inline-size: 72ch;
     margin: 0;
   }
 
@@ -772,9 +801,8 @@ a.header-anchor {
 
   display: flex;
   flex-direction: column;
-  gap: var(--dt-space-500);
-  margin-top: var(--dt-space-500);
-  margin-bottom: var(--dt-space-500);
+  gap: var(--dt-size-500);
+  margin-block: var(--dt-size-500) var(--dt-size-500);
 
   @media screen and (min-width: 640px) {
     flex-direction: row;
@@ -782,10 +810,10 @@ a.header-anchor {
 
   &__hd {
     display: flex;
-    gap: var(--dt-space-100);
+    gap: var(--dt-size-100);
     align-items: center;
     align-self: baseline;
-    padding: var(--dt-space-100) var(--dt-space-350);
+    padding: var(--dt-size-100) var(--dt-size-350);
     color: var(--dt-color-foreground-primary-inverted);
     font-size: var(--dt-font-size-100);
     background-color: var(--usage-item-background-hd);
@@ -801,15 +829,15 @@ a.header-anchor {
   }
 
   &__label {
-    padding-inline: var(--dt-space-200);
+    padding-inline: var(--dt-size-200);
   }
 
   &__item {
     display: flex;
     flex: 1;
     flex-direction: column;
-    gap: var(--dt-space-500);
-    padding: var(--dt-space-500);
+    gap: var(--dt-size-500);
+    padding: var(--dt-size-500);
     border: var(--dt-size-border-100) solid var(--usage-item-color-border);
     border-radius: var(--dt-size-400);
 
@@ -852,6 +880,6 @@ a.header-anchor {
 
 @media (max-width: 980px) {
   html {
-    scroll-padding-top: 13.6rem;
+    scroll-padding-block-start: 13.6rem;
   }
 }

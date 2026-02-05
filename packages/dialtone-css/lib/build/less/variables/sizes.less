@@ -11,55 +11,55 @@
 //  ----------------------------------------------------------------------------
 
 #d-internal__input-and-select-xs() {
-    --input-padding-y: calc(calc(var(--dt-spacing-100) - var(--dt-spacing-1)) - var(--input-border-width));
-    --input-padding-x: calc(var(--dt-spacing-100) - var(--input-border-width));
+    --input-padding-y: calc(calc(var(--dt-size-400) - var(--dt-size-100)) - var(--input-border-width));
+    --input-padding-x: calc(var(--dt-size-400) - var(--input-border-width));
     --input-border-radius: var(--dt-inputs-size-radius-xs);
     --input-typography: var(--dt-typography-inputs-xs);
 
     .d-btn__icon {
-        width: var(--dt-icon-size-100);
-        height: var(--dt-icon-size-100);
+        inline-size: var(--dt-icon-size-100);
+        block-size: var(--dt-icon-size-100);
     }
 }
 
 //  $$  SMALL
 //  ----------------------------------------------------------------------------
 #d-internal__input-and-select-sm() {
-    --input-padding-y: calc(var(--dt-spacing-100) - var(--input-border-width));
-    --input-padding-x: calc((var(--dt-spacing-200) - var(--dt-spacing-50)) - var(--input-border-width));
+    --input-padding-y: calc(var(--dt-size-400) - var(--input-border-width));
+    --input-padding-x: calc((var(--dt-size-500) - var(--dt-size-300)) - var(--input-border-width));
     --input-typography: var(--dt-typography-inputs-sm);
     --input-border-radius: var(--dt-inputs-size-radius-sm);
 
     .d-btn__icon {
-        width: var(--dt-icon-size-200);
-        height: var(--dt-icon-size-200);
+        inline-size: var(--dt-icon-size-200);
+        block-size: var(--dt-icon-size-200);
     }
 }
 
 //  $$  LARGE
 //  ----------------------------------------------------------------------------
 #d-internal__input-and-select-lg() {
-    --input-padding-y: calc((var(--dt-spacing-100) + var(--dt-spacing-25)) - var(--input-border-width));
-    --input-padding-x: calc(var(--dt-spacing-200) - var(--input-border-width));
+    --input-padding-y: calc((var(--dt-size-400) + var(--dt-size-200)) - var(--input-border-width));
+    --input-padding-x: calc(var(--dt-size-500) - var(--input-border-width));
     --input-border-radius: var(--dt-inputs-size-radius-lg);
     --input-typography: var(--dt-typography-inputs-lg);
 
     .d-btn__icon {
-        width: var(--dt-icon-size-400);
-        height: var(--dt-icon-size-400);
+        inline-size: var(--dt-icon-size-400);
+        block-size: var(--dt-icon-size-400);
     }
 }
 
 //  $$  EXTRA LARGE
 //  ----------------------------------------------------------------------------
 #d-internal__input-and-select-xl() {
-    --input-padding-y: calc((var(--dt-spacing-200) - var(--dt-spacing-50)) - var(--input-border-width));
-    --input-padding-x: calc(var(--dt-spacing-200) - var(--input-border-width));
+    --input-padding-y: calc((var(--dt-size-500) - var(--dt-size-300)) - var(--input-border-width));
+    --input-padding-x: calc(var(--dt-size-500) - var(--input-border-width));
     --input-border-radius: var(--dt-inputs-size-radius-xl);
     --input-typography: var(--dt-typography-inputs-xl);
 
     .d-btn__icon {
-        width: var(--dt-icon-size-500);
-        height: var(--dt-icon-size-500);
+        inline-size: var(--dt-icon-size-500);
+        block-size: var(--dt-icon-size-500);
     }
 }

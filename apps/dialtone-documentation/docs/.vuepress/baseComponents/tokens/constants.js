@@ -14,11 +14,9 @@ export const THEMES = [
   { value: 'tmo', label: 'T-Mobile' },
   // { value: 'expressive', label: 'Expressive' },
   // { value: 'expressive-sm', label: 'Expressive Small' },
-  // { value: 'deca', label: 'Deca' },
   { value: 'aegean', label: 'Aegean' },
   { value: 'botany', label: 'Botany' },
   { value: 'buttercream', label: 'Buttercream' },
-  { value: 'ceruleo', label: 'Ceruleo' },
   { value: 'high-desert', label: 'High Desert' },
   { value: 'melon', label: 'Melon' },
   { value: 'plum', label: 'Plum' },
@@ -28,9 +26,10 @@ export const THEMES = [
 
 export const CATEGORY_MAP = {
   color: ['color', 'opacity', 'shell'],
-  typography: ['typography', 'font'],
+  typography: ['typography', 'font', 'text'],
+  spacing: ['spacing'],
+  layout: ['layout'],
   size: ['size'],
-  space: ['space'],
   shadow: ['shadow'],
   component: ['topbar', 'sidebar', 'presence', 'mention', 'avatar', 'badge', 'checkbox', 'icon', 'inputs', 'action'],
 };
@@ -40,6 +39,14 @@ export const SUBCATEGORY_MAP = {
   font: ['family', 'weight', 'size'],
   size: ['radius', 'border'],
 };
+
+export const DEPRECATED_PATTERNS = [
+  'typography-headline-',
+  'typography-body-',
+  'typography-label-',
+  'typography-helper-',
+  'typography-code-',
+];
 
 export const getTokensStructure = () => ({
   color: {
@@ -55,10 +62,13 @@ export const getTokensStructure = () => ({
     link: {
       _children: [],
     },
-    neutral: {
+    theme: {
       _children: [],
     },
-    theme: {
+    chart: {
+      _children: [],
+    },
+    neutral: {
       _children: [],
     },
     opacity: {
@@ -67,30 +77,27 @@ export const getTokensStructure = () => ({
     components: {
       _children: [],
     },
-    chart: {
-      _children: [],
-    },
     base: {
       _children: [],
     },
   },
   typography: {
-    'font style': {
+    'text style': {
       _children: [],
     },
-    'font family': {
+    'font size': {
       _children: [],
     },
     'font weight': {
       _children: [],
     },
-    textcase: {
-      _children: [],
-    },
     'line height': {
       _children: [],
     },
-    'font size': {
+    'font family': {
+      _children: [],
+    },
+    textcase: {
       _children: [],
     },
     components: {
@@ -100,16 +107,20 @@ export const getTokensStructure = () => ({
   shadow: {
     _children: [],
   },
-  size: {
+  spacing: {
     base: {
       _children: [],
     },
     negative: {
       _children: [],
     },
-    percentage: {
+  },
+  layout: {
+    base: {
       _children: [],
     },
+  },
+  size: {
     radius: {
       _children: [],
     },
@@ -117,17 +128,6 @@ export const getTokensStructure = () => ({
       _children: [],
     },
     components: {
-      _children: [],
-    },
-  },
-  space: {
-    base: {
-      _children: [],
-    },
-    negative: {
-      _children: [],
-    },
-    percentage: {
       _children: [],
     },
   },

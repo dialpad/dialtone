@@ -48,8 +48,8 @@
           "link": "/guides/getting-started/"
         },
         {
-          "text": "Dialtone MCP Server",
-          "link": "/guides/mcp-server/"
+          "text": "Theme and Mode",
+          "link": "/guides/theme-and-mode/"
         },
         {
           "text": "Contributing",
@@ -160,12 +160,8 @@
           "planned": true
         },
         {
-          "text": "Space",
-          "link": "/design/space/"
-        },
-        {
-          "text": "Size",
-          "link": "/design/size/"
+          "text": "Size and Space",
+          "link": "/design/size-and-space/"
         },
         {
           "text": "Motion",
@@ -634,6 +630,10 @@
           "link": "/components/empty-state.html"
         },
         {
+          "text": "Filter Pill",
+          "link": "/components/filter-pill.html"
+        },
+        {
           "text": "Hovercard",
           "link": "/components/hovercard.html"
         },
@@ -684,6 +684,10 @@
         {
           "text": "Loader",
           "link": "/components/loader.html"
+        },
+        {
+          "text": "Mode Island",
+          "link": "/components/mode-island.html"
         },
         {
           "text": "Modal",
@@ -752,6 +756,10 @@
         {
           "text": "Tabs",
           "link": "/components/tabs.html"
+        },
+        {
+          "text": "Text",
+          "link": "/components/text.html"
         },
         {
           "text": "Toast",

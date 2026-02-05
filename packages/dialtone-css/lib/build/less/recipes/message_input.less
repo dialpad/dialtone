@@ -18,7 +18,7 @@
 }
 
 .d-recipe-message-input__button-stack {
-  padding: var(--dt-spacing-100);
+  padding: var(--dt-size-400);
   background-color: var(--dt-color-surface-secondary);
 }
 
@@ -27,34 +27,33 @@
 }
 
 .d-recipe-message-input__editor-wrapper {
-  padding: var(--dt-spacing-150) var(--dt-spacing-200) var(--dt-spacing-50);
+  padding: var(--dt-size-450) var(--dt-size-500) var(--dt-size-300);
 }
 
 .d-recipe-message-input__link-popover {
-  width: 36.0rem;
+  inline-size: 36.0rem;
 }
 
 .d-recipe-message-input__remaining-char {
-  margin-right: var(--dt-spacing-50);
+  margin-inline-end: var(--dt-size-300);
   color: var(--dt-color-foreground-critical);
   font-size: var(--dt-font-size-100);
 }
 
 .d-recipe-message-input__remaining-char-tooltip {
-  margin-top: auto;
-  margin-bottom: auto;
+  margin-block: auto;
 }
 
 .d-recipe-message-input__button {
-  max-width: 2.8rem;
-  max-height: 2.8rem;
+  max-inline-size: 2.8rem;
+  max-block-size: 2.8rem;
   border-radius: var(--dt-size-radius-300);
 }
 
 .d-recipe-message-input__send-button.d-recipe-message-input__button:not(.d-btn--icon-only),
 .d-recipe-message-input__cancel-button {
-  max-width: unset;
-  padding: var(--dt-spacing-75);
+  max-inline-size: unset;
+  padding: var(--dt-size-350);
 }
 
 .d-recipe-message-input__send-button--disabled {
@@ -66,7 +65,7 @@
 .d-recipe-message-input__bottom-section {
   display: flex;
   justify-content: space-between;
-  padding: var(--dt-spacing-50) var(--dt-spacing-100) var(--dt-spacing-100);
+  padding: var(--dt-size-300) var(--dt-size-400) var(--dt-size-400);
 }
 
 .d-recipe-message-input__bottom-section-left,
@@ -83,12 +82,12 @@
 }
 
 .d-recipe-message-input-meeting-pill__layout {
-  grid-template-areas: 'left content right';
+  grid-template-areas: 'start content end';
   grid-template-columns: minmax(0, max-content) 1fr minmax(0, max-content);
-  gap: var(--dt-spacing-100);
+  gap: var(--dt-size-400);
   align-items: center;
-  max-width: var(--dt-size-905);
-  padding: var(--dt-spacing-25) var(--dt-spacing-100);
+  max-inline-size: var(--dt-size-905);
+  padding: var(--dt-size-200) var(--dt-size-400);
   font: var(--dt-typography-headline-md);
   border: var(--dt-size-border-100) solid var(--dt-color-border-default);
   border-radius: var(--dt-size-radius-300);
@@ -97,7 +96,7 @@
 .d-recipe-message-input-meeting-pill__icon {
   display: flex;
   align-items: center;
-  padding: var(--dt-spacing-75);
+  padding: var(--dt-size-350);
 }
 
 .d-recipe-message-input-meeting-pill__close {
@@ -111,10 +110,9 @@
 }
 
 .d-recipe-message-input--button-group-divider {
-  width: var(--dt-size-100);
-  height: calc(var(--dt-size-550) + var(--dt-size-300));
-  margin-right: var(--dt-spacing-50);
-  margin-left: var(--dt-spacing-50);
+  inline-size: var(--dt-size-100);
+  block-size: calc(var(--dt-size-550) + var(--dt-size-300));
+  margin-inline: var(--dt-size-300);
   background: var(--dt-color-border-subtle);
 }
 
@@ -127,10 +125,9 @@
 }
 
 .d-recipe-message-input__link-input {
-  margin-top: var(--dt-spacing-75);
-  padding-top: var(--dt-spacing-25);
-  padding-bottom: var(--dt-spacing-25);
+  margin-block-start: var(--dt-size-350);
+  padding-block: var(--dt-size-200);
   background-color: var(--dt-color-surface-secondary);
-  border: var(--dt-spacing-1) solid;
+  border: var(--dt-size-100) solid;
   border-color: var(--dt-color-border-default);
 }

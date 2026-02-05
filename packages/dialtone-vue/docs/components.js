@@ -1,20 +1,19 @@
 import { styled } from '@storybook/theming';
 
 export const DocImg = styled.img`
-  max-width: 300px;
-  height: auto;
+  max-inline-size: 300px;
+  block-size: auto;
 `;
 
 export const LogoContainer = styled.div`
-  width: 100%;
+  inline-size: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 5rem !important;
+  margin-block-end: 5rem;
 `;
 
 export const Logo = styled.img`
-  height: auto;
-  margin-left: -2.8rem;
-  width: 240px;
+  block-size: auto;
+  inline-size: 300px;
 `;

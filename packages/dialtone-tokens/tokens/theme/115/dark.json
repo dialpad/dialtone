@@ -1,0 +1,40 @@
+{
+  "shell": {
+    "base": {
+      "color": {
+        "surface": {
+          "value": "#250F0F",
+          "type": "color"
+        },
+        "foreground": {
+          "value": "#FFE0D0",
+          "type": "color"
+        },
+        "border": {
+          "value": "#FFE0D0",
+          "type": "color"
+        },
+        "accent": {
+          "value": "#FF8468",
+          "type": "color"
+        },
+        "action": {
+          "value": "#E3C0B0",
+          "type": "color"
+        }
+      }
+    },
+    "logo": {
+      "color": {
+        "star": {
+          "value": "{color.purple.1000}",
+          "type": "color"
+        },
+        "wordmark": {
+          "value": "{color.purple.1000}",
+          "type": "color"
+        }
+      }
+    }
+  }
+}

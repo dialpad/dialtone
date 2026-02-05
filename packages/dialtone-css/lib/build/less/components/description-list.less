@@ -5,10 +5,10 @@
   align-items: flex-start;
   font: var(--dt-typography-body-sm);
 
-  --description-list-gap: var(--dt-spacing-100);
+  --description-list-gap: var(--dt-size-400);
   each(range(0, 600, 100), {
     &--gap-@{value} {
-     --description-list-gap: ~"var(--dt-spacing-@{value})";
+     --description-list-gap: ~"var(--dt-size-@{value})";
     }
   });
 
@@ -24,7 +24,7 @@
 
   &__description {
     flex: 1 1 50%;
-    margin-left: 0;
+    margin-inline-start: 0;
     color: var(--dt-color-foreground-primary);
   }
 }

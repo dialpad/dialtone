@@ -21,15 +21,12 @@
   //  ------------------------------------------------------------------------
   --avatar-color-background: var(--dt-avatar-color-background-000);
   --avatar-color-text: var(--dt-avatar-color-foreground);
-  --avatar-size-shape: var(--dt-spacing-400);
+  --avatar-size-shape: var(--dt-size-600);
   --avatar-size-image: var(--dt-size-100-percent);
   --avatar-size-text: var(--dt-font-size-200);
-  --avatar-border-radius: calc(var(--avatar-size-shape) * 0.125);
-  --avatar-presence-position-right: 0;
-  --avatar-presence-position-bottom: 0;
+  --avatar-presence-position-right: var(--dt-size-200-negative);
+  --avatar-presence-position-bottom: var(--dt-size-200-negative);
   --avatar-count-color-shadow: var(--dt-shell-color-surface-default);
-  --avatar-presence-size: calc(var(--avatar-size-shape) * 0.375);
-  --avatar-presence-border-radius: calc(var(--avatar-border-radius) * 0.625);
   --avatar-presence-mask-size: calc(var(--dt-size-450) + var(--dt-size-50));
 
   position: relative;
@@ -69,16 +66,14 @@
     block-size: var(--avatar-size-shape);
     overflow: hidden;
     background-color: var(--avatar-color-background);
-    border-radius: var(--avatar-border-radius);
-    -webkit-mask: none;
-    mask: none;
+    border-radius: var(--dt-size-radius-pill);
   }
 
   &__image {
     inline-size: var(--avatar-size-image);
     block-size: var(--avatar-size-image);
     object-fit: cover;
-    border-radius: var(--avatar-border-radius);
+    border-radius: var(--dt-size-radius-pill);
   }
 
   &--image-loaded {
@@ -102,30 +97,23 @@
 
   &__presence {
     position: absolute;
-    right: var(--avatar-presence-position-right);
-    bottom: var(--avatar-presence-position-bottom);
+    inset-inline-end: var(--avatar-presence-position-right);
+    inset-block-end: var(--avatar-presence-position-bottom);
     z-index: var(--zi-base);
-
-    &.d-presence {
-      --presence-size: var(--avatar-presence-size);
-      --presence-border-radius: var(--avatar-presence-border-radius);
-
-      display: flex;
-      border: none;
-    }
+    display: flex;
   }
 
   &__count {
     position: absolute;
-    right: var(--dt-spacing-0);
-    bottom: var(--dt-spacing-0);
+    inset-inline-end: var(--dt-size-0);
+    inset-block-end: var(--dt-size-0);
     z-index: var(--zi-base);
     display: inline-flex;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    min-width: calc(var(--dt-size-300) * 3.5);
-    padding: var(--dt-spacing-25) calc(var(--dt-spacing-25) + var(--dt-spacing-1));
+    min-inline-size: calc(var(--dt-size-300) * 3.5);
+    padding: var(--dt-size-200) calc(var(--dt-size-200) + var(--dt-size-100));
     color: var(--dt-color-foreground-primary-inverted);
     font-weight: var(--dt-font-weight-bold);
     font-size: calc(var(--dt-font-size-100) - var(--dt-size-200));
@@ -151,7 +139,7 @@
     padding: 0;
     background-color: var(--dt-color-neutral-transparent);
     border: var(--dt-size-border-100) solid var(--avatar-color-border);
-    border-radius: var(--avatar-border-radius);
+    border-radius: var(--dt-size-radius-circle);
     cursor: pointer;
 
     &:focus-visible {
@@ -179,7 +167,7 @@
     inline-size: var(--dt-size-100-percent);
     block-size: var(--dt-size-100-percent);
     background-color: var(--dt-color-surface-contrast-opaque);
-    border-radius: var(--avatar-border-radius);
+    border-radius: var(--dt-size-radius-circle);
     opacity: var(--dt-opacity-900);
 
     &-icon {
@@ -198,85 +186,61 @@
 
   //  --  SIZES
   //  ------------------------------------------------------------------------
-  //  New 11-size system: 100-500 support presence, 600-900 do not.
-  //  SVG masks exported from Figma design file.
-  //  Formulas: avatar-radius = size * 0.125, presence = size * 0.375
-  //  ------------------------------------------------------------------------
 
-  // Size 100: 16px (presence: 6px)
-  &--xs,
-  &--size-100 {
-    --avatar-size-shape: var(--dt-spacing-200);
-    --avatar-size-text: var(--dt-font-size-50);
-    --avatar-mask-presence: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='white' d='M12.7998 8.16399e-10C13.9199 8.16399e-10 14.4804 -0.000213534 14.9082 0.217773C15.2845 0.409508 15.5905 0.715544 15.7822 1.0918C16.0002 1.51962 16 2.08009 16 3.2002V8.5H12.5C11.1 8.5 10.4 8.50007 9.86523 8.77246C9.39483 9.01214 9.01214 9.39483 8.77246 9.86523C8.50007 10.4 8.5 11.1 8.5 12.5V16H3.2002C2.08009 16 1.51962 16.0002 1.0918 15.7822C0.715544 15.5905 0.409508 15.2845 0.217773 14.9082C-0.000213534 14.4804 8.164e-10 13.9199 8.164e-10 12.7998V3.2002C8.164e-10 2.08009 -0.000213534 1.51962 0.217773 1.0918C0.409508 0.715544 0.715544 0.409508 1.0918 0.217773C1.51962 -0.000213534 2.08009 8.16399e-10 3.2002 8.16399e-10H12.7998Z'/%3E%3C/svg%3E");
+  &--xs {
+    --avatar-size-shape: calc(var(--dt-size-500) + var(--dt-size-200));
+    --avatar-presence-position-right: var(--dt-size-300-negative);
+    --avatar-presence-position-bottom: var(--dt-size-300-negative);
+    --avatar-presence-mask-offset-x: var(--dt-size-200);
+    --avatar-presence-mask-offset-y: var(--dt-size-200);
   }
 
-  // Size 150: 20px (presence: 7.5px)
-  &--size-150 {
-    --avatar-size-shape: var(--dt-spacing-250);
-    --avatar-size-text: var(--dt-font-size-75);
-    --avatar-mask-presence: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath fill='white' d='M16 0C17.4 0 18.1 0 18.6348 0.272461C19.1052 0.512144 19.4879 0.894829 19.7275 1.36523C19.9999 1.89999 20 2.60002 20 4V10.6299H15.6299C13.8798 10.6299 13.0044 10.6301 12.3359 10.9707C11.7482 11.2703 11.2703 11.7482 10.9707 12.3359C10.6301 13.0044 10.6299 13.8798 10.6299 15.6299V20H4C2.60002 20 1.89999 19.9999 1.36523 19.7275C0.894829 19.4879 0.512144 19.1052 0.272461 18.6348C0 18.1 0 17.4 0 16V4C0 2.60002 0 1.89999 0.272461 1.36523C0.512144 0.894829 0.894829 0.512144 1.36523 0.272461C1.89999 0 2.60002 0 4 0H16Z'/%3E%3C/svg%3E");
-  }
-
-  // Size 200: 24px (presence: 9px)
-  &--sm,
-  &--size-200 {
-    --avatar-size-shape: var(--dt-spacing-300);
+  &--sm {
+    --avatar-size-shape: var(--dt-size-550);
     --avatar-size-text: var(--dt-font-size-100);
-    --avatar-mask-presence: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M19.2002 0C20.8802 0 21.7206 0.000180636 22.3623 0.327148C22.9265 0.614723 23.3853 1.07347 23.6729 1.6377C23.9998 2.27941 24 3.11978 24 4.7998V12.75H18.75C16.6499 12.75 15.6 12.7505 14.7979 13.1592C14.0922 13.5187 13.5187 14.0922 13.1592 14.7979C12.7505 15.6 12.75 16.6499 12.75 18.75V24H4.7998C3.11978 24 2.27941 23.9998 1.6377 23.6729C1.07347 23.3853 0.614723 22.9265 0.327148 22.3623C0.00018066 21.7206 0 20.8802 0 19.2002V4.7998C0 3.11978 0.000180636 2.27941 0.327148 1.6377C0.614723 1.07347 1.07347 0.614723 1.6377 0.327148C2.27941 0.00018066 3.11978 0 4.7998 0H19.2002Z'/%3E%3C/svg%3E");
+    --avatar-presence-position-right: var(--dt-size-200-negative);
+    --avatar-presence-position-bottom: var(--dt-size-200-negative);
+    --avatar-presence-mask-offset-x: var(--dt-size-300);
+    --avatar-presence-mask-offset-y: var(--dt-size-300);
   }
 
-  // Size 250: 28px (presence: 10.5px)
-  &--size-250 {
-    --avatar-size-shape: var(--dt-spacing-350);
-    --avatar-size-text: var(--dt-font-size-150);
-    --avatar-mask-presence: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Cpath fill='white' d='M22.4004 0C24.3603 0 25.3402 0.000384062 26.0889 0.381836C26.7474 0.717384 27.2826 1.25262 27.6182 1.91113C27.9996 2.65977 28 3.63969 28 5.59961V14.8799H21.8799C19.4297 14.8799 18.2044 14.8796 17.2686 15.3564C16.4454 15.7759 15.7759 16.4454 15.3564 17.2686C14.8796 18.2044 14.8799 19.4297 14.8799 21.8799V28H5.59961C3.63969 28 2.65977 27.9996 1.91113 27.6182C1.25262 27.2826 0.717384 26.7474 0.381836 26.0889C0.000384089 25.3402 0 24.3603 0 22.4004V5.59961C0 3.63969 0.000384062 2.65977 0.381836 1.91113C0.717384 1.25262 1.25262 0.717384 1.91113 0.381836C2.65977 0.000384089 3.63969 0 5.59961 0H22.4004Z'/%3E%3C/svg%3E");
+  &--md {
+    --avatar-size-shape: var(--dt-size-600);
+    --avatar-size-text: var(--dt-font-size-200);
+    --avatar-presence-position-right: var(--dt-size-100-negative);
+    --avatar-presence-position-bottom: var(--dt-size-100-negative);
+    --avatar-presence-mask-offset-x: calc(
+      var(--dt-size-350) - var(--dt-size-100)
+    );
+    --avatar-presence-mask-offset-y: calc(
+      var(--dt-size-350) - var(--dt-size-100)
+    );
   }
 
-  // Size 300: 32px (presence: 12px) - Default size
-  &--md,
-  &--size-300 {
-    --avatar-mask-presence: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath fill='white' d='M25.5996 0C27.8398 0 28.9608 0 29.8164 0.435547C30.5689 0.819016 31.181 1.43109 31.5645 2.18359C32.0004 3.03924 32 4.16018 32 6.40039V17H25C22.2 17 20.8 17.0001 19.7305 17.5449C18.7897 18.0243 18.0243 18.7897 17.5449 19.7305C17.0001 20.8 17 22.2 17 25V32H6.40039C4.16018 32 3.03924 32.0004 2.18359 31.5645C1.43109 31.181 0.819016 30.5689 0.435547 29.8164C0 28.9608 0 27.8398 0 25.5996V6.40039C0 4.16018 0 3.03924 0.435547 2.18359C0.819016 1.43109 1.43109 0.819016 2.18359 0.435547C3.03924 0 4.16018 0 6.40039 0H25.5996Z'/%3E%3C/svg%3E");
-  }
-
-  // Size 400: 40px (presence: 15px)
-  &--lg,
-  &--size-400 {
-    --avatar-size-shape: var(--dt-spacing-500);
+  &--lg {
+    --avatar-size-shape: var(--dt-size-650);
     --avatar-size-text: var(--dt-font-size-300);
-    --avatar-mask-presence: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cpath fill='white' d='M32 0C34.8 0 36.2 0.000134261 37.2695 0.544922C38.2103 1.02429 38.9757 1.78966 39.4551 2.73047C39.9999 3.79998 40 5.20005 40 8V21.25H31.25C27.7497 21.25 25.9991 21.2504 24.6621 21.9316C23.4865 22.5308 22.5308 23.4865 21.9316 24.6621C21.2504 25.9991 21.25 27.7497 21.25 31.25V40H8C5.20005 40 3.79998 39.9999 2.73047 39.4551C1.78966 38.9757 1.02429 38.2103 0.544922 37.2695C0.000134268 36.2 0 34.8 0 32V8C0 5.20005 0.000134261 3.79998 0.544922 2.73047C1.02429 1.78966 1.78966 1.02429 2.73047 0.544922C3.79998 0.000134268 5.20005 0 8 0H32Z'/%3E%3C/svg%3E");
+    --avatar-presence-position-right: var(--dt-size-100);
+    --avatar-presence-position-bottom: var(--dt-size-100);
+    --avatar-presence-mask-offset-x: calc(
+      var(--dt-size-400) - var(--dt-size-100)
+    );
+    --avatar-presence-mask-offset-y: calc(
+      var(--dt-size-400) - var(--dt-size-100)
+    );
   }
 
-  // Size 500: 48px (presence: 18px)
-  &--xl,
-  &--size-500 {
-    --avatar-size-shape: var(--dt-spacing-600);
+  &--xl {
+    --avatar-size-shape: var(--dt-size-700);
     --avatar-size-text: var(--dt-font-size-400);
-    --avatar-mask-presence: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cpath fill='white' d='M38.4004 0C41.7603 0 43.4402 0.000417543 44.7236 0.654297C45.8526 1.22954 46.7705 2.14739 47.3457 3.27637C47.9996 4.55977 48 6.23965 48 9.59961V25.5H37.5C33.2996 25.5 31.1991 25.4999 29.5947 26.3174C28.1837 27.0364 27.0364 28.1837 26.3174 29.5947C25.4999 31.1991 25.5 33.2996 25.5 37.5V48H9.59961C6.23965 48 4.55977 47.9996 3.27637 47.3457C2.14739 46.7705 1.22954 45.8526 0.654297 44.7236C0.000417589 43.4402 0 41.7603 0 38.4004V9.59961C0 6.23965 0.000417543 4.55977 0.654297 3.27637C1.22954 2.14739 2.14739 1.22954 3.27637 0.654297C4.55977 0.000417589 6.23965 0 9.59961 0H38.4004Z'/%3E%3C/svg%3E");
-  }
-
-  // Size 600: 64px (no presence support)
-  &--size-600 {
-    --avatar-size-shape: var(--dt-spacing-800);
-    --avatar-size-text: var(--dt-font-size-500);
-  }
-
-  // Size 700: 96px (no presence support)
-  &--size-700 {
-    --avatar-size-shape: var(--dt-layout-150);
-    --avatar-size-text: var(--dt-font-size-600);
-  }
-
-  // Size 800: 128px (no presence support)
-  &--size-800 {
-    --avatar-size-shape: var(--dt-layout-200);
-    --avatar-size-text: var(--dt-font-size-700);
-  }
-
-  // Size 900: 256px (no presence support)
-  &--size-900 {
-    --avatar-size-shape: var(--dt-layout-300);
-    --avatar-size-text: var(--dt-font-size-800);
+    --avatar-presence-position-right: var(--dt-size-300);
+    --avatar-presence-position-bottom: var(--dt-size-300);
+    --avatar-presence-mask-offset-x: calc(
+      var(--dt-size-450) - var(--dt-size-200)
+    );
+    --avatar-presence-mask-offset-y: calc(
+      var(--dt-size-450) - var(--dt-size-200)
+    );
   }
 
   //  --  PRESENCE
@@ -285,10 +249,13 @@
   &--presence {
     > .d-avatar__canvas,
     > .d-avatar__overlay {
-      -webkit-mask: var(--avatar-mask-presence);
-      mask: var(--avatar-mask-presence);
-      -webkit-mask-size: 100% 100%;
-      mask-size: 100% 100%;
+      mask: radial-gradient(
+        circle calc(var(--avatar-presence-mask-size) / 2) at
+          calc(var(--dt-size-100-percent) - var(--avatar-presence-mask-offset-x))
+          calc(var(--dt-size-100-percent) - var(--avatar-presence-mask-offset-y)),
+        var(--dt-color-neutral-transparent) 92%, // less than 99% to smooth the edges
+        var(--dt-color-neutral-white) var(--dt-size-100-percent)
+      );
     }
 
     &.d-avatar--clickable {
@@ -301,13 +268,20 @@
         position: absolute;
         background-color: var(--dt-color-neutral-transparent);
         border: var(--dt-size-border-100) solid var(--avatar-color-border);
-        border-radius: var(--avatar-border-radius);
+        border-radius: var(--dt-size-radius-circle);
         content: "";
-        inset: calc(var(--dt-spacing-1) * -1);
-        -webkit-mask: var(--avatar-mask-presence);
-        mask: var(--avatar-mask-presence);
-        -webkit-mask-size: 100% 100%;
-        mask-size: 100% 100%;
+        inset: calc(var(--dt-size-100) * -1);
+        mask: radial-gradient(
+          circle calc(var(--avatar-presence-mask-size) / 2) at
+            calc(
+              var(--dt-size-100-percent) - var(--avatar-presence-mask-offset-x) - var(--dt-size-100)
+            )
+            calc(
+              var(--dt-size-100-percent) - var(--avatar-presence-mask-offset-y) - var(--dt-size-100)
+            ),
+          var(--dt-color-neutral-transparent) 92%, // less than 99% to smooth the edges
+          var(--dt-color-neutral-white) var(--dt-size-100-percent)
+        );
       }
     }
 
@@ -350,8 +324,8 @@
     --avatar-count-mask-outer-circle-y: calc(
       var(--dt-size-400) + var(--dt-size-100)
     );
-    --avatar-count-mask-offset-x: var(--dt-spacing-1);
-    --avatar-count-mask-offset-y: var(--dt-spacing-1);
+    --avatar-count-mask-offset-x: var(--dt-size-100);
+    --avatar-count-mask-offset-y: var(--dt-size-100);
     --avatar-count-mask-svg-w: calc(var(--dt-size-625) - var(--dt-size-200));
     --avatar-count-mask-svg-h: calc(var(--dt-size-500) + var(--dt-size-200));
     --avatar-count-color-shadow: var(--dt-color-neutral-transparent);
@@ -376,8 +350,8 @@
     // Example: <div class="d-avatar d-avatar--group d-avatar--group-digits-2">
 
     &-digits-2 {
-      --avatar-count-mask-offset-x: var(--dt-spacing-50);
-      --avatar-count-mask-offset-y: var(--dt-spacing-100);
+      --avatar-count-mask-offset-x: var(--dt-size-300);
+      --avatar-count-mask-offset-y: var(--dt-size-400);
 
       > .d-avatar__canvas,
       > .d-avatar__overlay {
@@ -399,14 +373,14 @@
       }
 
       > .d-avatar__count {
-        padding-inline: var(--dt-spacing-0);
+        padding-inline: var(--dt-size-0);
         inline-size: calc(var(--dt-size-500) + var(--dt-size-200));
       }
     }
 
     &-digits-3 {
-      --avatar-count-mask-offset-x: var(--dt-spacing-50-negative);
-      --avatar-count-mask-offset-y: var(--dt-spacing-100);
+      --avatar-count-mask-offset-x: var(--dt-size-300-negative);
+      --avatar-count-mask-offset-y: var(--dt-size-400);
 
       > .d-avatar__canvas,
       > .d-avatar__overlay {
@@ -428,7 +402,7 @@
       }
 
       > .d-avatar__count {
-        padding-inline: var(--dt-spacing-0);
+        padding-inline: var(--dt-size-0);
         inline-size: calc(var(--dt-size-550) + var(--dt-size-200));
       }
     }

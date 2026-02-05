@@ -148,6 +148,14 @@ export default {
 
   emits: [
     /**
+     * Native click event
+     *
+     * @event click
+     * @type {PointerEvent | KeyboardEvent}
+     */
+    'click',
+
+    /**
      * Key down event
      *
      * @event keydown
@@ -186,6 +194,10 @@ export default {
 
     listItemListeners () {
       return {
+        click: event => {
+          this.onClick(event);
+        },
+
         keydown: event => {
           if (['enter', 'space'].includes(event.code.toLowerCase())) {
             this.onClick(event);
@@ -232,7 +244,6 @@ export default {
   methods: {
     onClick (e) {
       // disabled as we do not want to override native click
-      // eslint-disable-next-line vue/require-explicit-emits
       this.$emit('click', e);
     },
 

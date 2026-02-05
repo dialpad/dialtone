@@ -1,0 +1,28 @@
+{
+  "shell": {
+    "base": {
+      "color": {
+        "surface": {
+          "value": "#EDE9DE",
+          "type": "color"
+        },
+        "foreground": {
+          "value": "#293124",
+          "type": "color"
+        },
+        "border": {
+          "value": "#293124",
+          "type": "color"
+        },
+        "accent": {
+          "value": "#883221",
+          "type": "color"
+        },
+        "action": {
+          "value": "#B86009",
+          "type": "color"
+        }
+      }
+    }
+  }
+}

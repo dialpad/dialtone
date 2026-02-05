@@ -7,7 +7,7 @@ description: Utilities for controlling the resize of an element.
 
 <code-well-header>
   <dt-stack gap="400" class="d-w50p">
-    <div v-for="{ class: className } in resize.slice(0, 4)" :class="className" class="d-of-auto d-p16 d-ba d-bc-default">
+    <div v-for="{ class: className } in resize.slice(0, 4)" :class="className" class="d-of-auto d-p16 d-ba">
       .{{ className }}
     </div>
   </dt-stack>

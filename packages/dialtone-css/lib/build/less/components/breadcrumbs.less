@@ -46,18 +46,19 @@
     //  ----------------------------------------------------------------------------
     &__item {
         position: relative;
-        margin: 0 0 0 var(--dt-spacing-100);
+        margin-inline: var(--dt-size-400) 0;
+        margin-block: 0;
         padding: 0;
         list-style: none;
 
         //  Provide a forward slash with each element except when it's the last one.
         &:not(:last-of-type) {
-            margin-right: var(--dt-spacing-150);
+            margin-inline-end: var(--dt-size-450);
 
             &::before {
                 position: absolute;
-                right: var(--dt-spacing-150-negative);
-                margin-top: var(--dt-spacing-1-negative);
+                inset-inline-end: var(--dt-size-450-negative);
+                margin-block-start: var(--dt-size-100-negative);
                 color: var(--breadcrumbs-color-separator);
                 content: '/';
             }

@@ -207,6 +207,7 @@ export default [
     rules: {
       'max-lines': 'off',
       'no-console': 'off',
+      'vue/no-restricted-class': 'off',
     },
   },
   {

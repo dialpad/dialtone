@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-combinator",
-  "version": "1.1.1",
+  "version": "1.1.2-next.1",
   "description": "Dialtone vue component combinator",
   "scripts": {
     "lint": "eslint --fix src",
@@ -31,7 +31,7 @@
   "dependencies": {
     "@dialpad/dialtone-css": "workspace:*",
     "@dialpad/dialtone-icons": "workspace:*",
-    "@dialpad/dialtone-vue": "workspace:vue3",
+    "@dialpad/dialtone-vue": "workspace:vue3-next",
     "change-case": "^4.1.2",
     "js-beautify": "^1.14.4",
     "json5-with-undefined": "^2.1.301",

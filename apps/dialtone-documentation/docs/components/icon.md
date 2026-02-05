@@ -69,7 +69,7 @@ The icon's color inherits from the parent's foreground color.
   <dt-stack direction="row" align="center" justify="center">
     <dt-stack :class="selectedColor" direction="row" as="div" gap="300">
       <dt-icon-settings size="300" />
-      <p>Settings</p>
+      <dt-text>Settings</dt-text>
     </dt-stack>
   </dt-stack>
   <dt-select-menu label="Color" :options="iconColors" v-model="selectedColor" />
@@ -79,7 +79,7 @@ The icon's color inherits from the parent's foreground color.
 ```js
 <dt-stack class="d-fc-success">
   <dt-icon-settings size="300" />
-  <p>Settings</p>
+  <dt-text>Settings</dt-text>
 </dt-stack>
 ```
 
@@ -95,11 +95,11 @@ When setting the color of an icon take these into consideration:
 <dt-stack direction="row" as="section" gap="100" class="d-bgc-primary d-bc-default d-bar32 d-py8 d-px16 d-w100p">
 <dt-stack direction="row" as="section" gap="300" class="d-fl1">
 <dt-icon name="headphones" size="300" ariaLabel="Headphones icon" />
-<p class="d-body--md d-truncate d-w100p d-wmx102">Ai Contact Center</p>
+<dt-text kind="body" truncate class="d-w100p d-wmx102">Ai Contact Center</dt-text>
 </dt-stack>
 <dt-stack direction="row" as="section" gap="300">
 <dt-icon class="d-fc-success" name="bell" size="200" ariaLabel="Bell Icon" />
-<p class="d-fc-success d-body--sm">Available</p>
+<dt-text kind="body" size="sm" tone="success">Available</dt-text>
 </dt-stack>
 </dt-stack>
 </dt-stack>
@@ -114,11 +114,11 @@ When setting the color of an icon take these into consideration:
 <dt-stack direction="row" as="section" gap="100" class="d-bgc-primary d-bc-default d-bar32 d-py8 d-px16 d-w100p">
 <dt-stack direction="row" as="section" gap="300" class="d-fl1">
 <dt-icon name="headphones" size="300" ariaLabel="Headphones icon" />
-<p class="d-body--md d-truncate d-w100p d-wmx102">Ai Contact Center</p>
+<dt-text kind="body" truncate class="d-w100p d-wmx102">Ai Contact Center</dt-text>
 </dt-stack>
 <dt-stack direction="row" as="section" gap="300">
 <dt-icon class="d-fc-critical" name="bell" size="200" ariaLabel="Bell Icon" />
-<p class="d-fc-success d-body--sm">Available</p>
+<dt-text kind="body" size="sm" tone="success">Available</dt-text>
 </dt-stack>
 </dt-stack>
 </dt-stack>
@@ -141,17 +141,17 @@ We encourage utilizing the [Stack component](/components/stack.md) for aligning 
     <dt-stack direction="row" align="center" justify="center">
       <dt-stack :direction="selectedDirection" class="d-fl-center" gap="300">
       <dt-icon-settings size="300" />
-      <p>Settings</p>
+      <dt-text>Settings</dt-text>
       </dt-stack>
     </dt-stack>
     <dt-select-menu label="Direction" :options="stackDirection" v-model="selectedDirection" />
   </div>
 </code-well-header>
 
-```js
+```html
 <dt-stack direction="row" class="d-fl-center" gap="300">
   <dt-icon-settings size="300" />
-  <p>Settings</p>
+  <dt-text>Settings</dt-text>
 </dt-stack>
 ```
 
@@ -185,8 +185,8 @@ Dialtone provides eight sizes for icons. Each of the sizes represents the width 
         <td class="d-ta-center">
           <dt-icon name="inbox" :size="size" />
         </td>
-        <td class="d-code--sm d-docsite-code">{{ width_height }}</td>
-        <td class="d-code--sm d-docsite-code">.{{ className }}</td>
+        <td><dt-text kind="code" size="sm">{{ width_height }}</dt-text></td>
+        <td><dt-text kind="code" size="sm">.{{ className }}</dt-text></td>
       </tr>
     </tbody>
   </table>

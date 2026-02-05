@@ -91,15 +91,15 @@ It is highly recommended to use the [stack component](/components/stack.md) or t
         </th>
         <td class="d-code--sm">
           <span v-if="i == 'y'">
-            margin-top: {{ output }} !important;<br/>
-            margin-bottom: {{ output }} !important;
+            margin-block-start: {{ output }} !important;<br/>
+            margin-block-end: {{ output }} !important;
           </span>
           <span v-else-if="i == 'x'">
-            margin-right: {{ output }} !important;<br/>
-            margin-left: {{ output }} !important;
+            margin-inline-end: {{ output }} !important;<br/>
+            margin-inline-start: {{ output }} !important;
           </span>
           <span v-else>
-            <span v-if="i !== 'All'">margin-{{ i }}: {{ output }} !important; </span>
+            <span v-if="i !== 'All'">margin-{{ i === 'top' ? 'block-start' : i === 'bottom' ? 'block-end' : i === 'left' ? 'inline-start' : i === 'right' ? 'inline-end' : i }}: {{ output }} !important; </span>
             <span v-else>margin: {{ output }} !important</span>
           </span>
         </td>
@@ -114,15 +114,15 @@ It is highly recommended to use the [stack component](/components/stack.md) or t
         </th>
         <td class="d-code--sm">
           <span v-if="i == 'y'">
-            margin-top: -{{ output }} !important;<br/>
-            margin-bottom: -{{ output }} !important;
+            margin-block-start: -{{ output }} !important;<br/>
+            margin-block-end: -{{ output }} !important;
           </span>
           <span v-else-if="i == 'x'">
-            margin-right: -{{ output }} !important;<br/>
-            margin-left: -{{ output }} !important;
+            margin-inline-end: -{{ output }} !important;<br/>
+            margin-inline-start: -{{ output }} !important;
           </span>
           <span v-else>
-            <span v-if="i !== 'All'">margin-{{ i }}: -{{ output }} !important; </span>
+            <span v-if="i !== 'All'">margin-{{ i === 'top' ? 'block-start' : i === 'bottom' ? 'block-end' : i === 'left' ? 'inline-start' : i === 'right' ? 'inline-end' : i }}: -{{ output }} !important; </span>
             <span v-else>margin: -{{ output }} !important</span>
           </span>
         </td>
@@ -137,15 +137,15 @@ It is highly recommended to use the [stack component](/components/stack.md) or t
         </th>
         <td class="d-code--sm">
           <span v-if="i == 'y'">
-            margin-top: auto !important;<br/>
-            margin-bottom: auto !important;
+            margin-block-start: auto !important;<br/>
+            margin-block-end: auto !important;
           </span>
           <span v-else-if="i == 'x'">
-            margin-right: auto !important;<br/>
-            margin-left: auto !important;
+            margin-inline-end: auto !important;<br/>
+            margin-inline-start: auto !important;
           </span>
           <span v-else>
-            <span v-if="i !== 'All'">margin-{{ i }}: auto !important; </span>
+            <span v-if="i !== 'All'">margin-{{ i === 'top' ? 'block-start' : i === 'bottom' ? 'block-end' : i === 'left' ? 'inline-start' : i === 'right' ? 'inline-end' : i }}: auto !important; </span>
             <span v-else>margin: auto !important</span>
           </span>
         </td>
@@ -160,15 +160,15 @@ It is highly recommended to use the [stack component](/components/stack.md) or t
         </th>
         <td class="d-code--sm">
           <span v-if="i == 'y'">
-            margin-top: unset !important;<br/>
-            margin-bottom: unset !important;
+            margin-block-start: unset !important;<br/>
+            margin-block-end: unset !important;
           </span>
           <span v-else-if="i == 'x'">
-            margin-right: unset !important;<br/>
-            margin-left: unset !important;
+            margin-inline-end: unset !important;<br/>
+            margin-inline-start: unset !important;
           </span>
           <span v-else>
-            <span v-if="i !== 'All'">margin-{{ i }}: unset !important; </span>
+            <span v-if="i !== 'All'">margin-{{ i === 'top' ? 'block-start' : i === 'bottom' ? 'block-end' : i === 'left' ? 'inline-start' : i === 'right' ? 'inline-end' : i }}: unset !important; </span>
             <span v-else>margin: unset !important</span>
           </span>
         </td>

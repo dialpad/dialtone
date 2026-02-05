@@ -5,7 +5,7 @@
     header-class="d-ol-none"
     sidebar-class="dialtone-sidebar d-d-none lg:d-d-block d-ol-none"
     footer-class="d-text-right d-ol-none"
-    content-class="d-ol-none"
+    content-class="d-ol-none dialtone-content"
   >
     <template #header>
       <div class="dialtone-header">

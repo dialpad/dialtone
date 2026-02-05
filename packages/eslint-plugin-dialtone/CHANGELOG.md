@@ -1,3 +1,10 @@
+## [1.11.1-next.1](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.11.0...eslint-plugin-dialtone/v1.11.1-next.1) (2026-01-30)
+
+
+### Code Refactoring
+
+* **Text:** DLT-2883 rename headline sizes from xxl => 2xl, etc ([#1029](https://github.com/dialpad/dialtone/issues/1029)) ([0ac86f3](https://github.com/dialpad/dialtone/commit/0ac86f30fb59298942a633d0fc42e68ee3ff348f))
+
 # [1.11.0](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.10.0...eslint-plugin-dialtone/v1.11.0) (2025-11-25)
 
 

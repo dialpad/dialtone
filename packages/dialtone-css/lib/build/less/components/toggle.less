@@ -34,9 +34,9 @@
   position: relative;
   display: inline-block;
   box-sizing: border-box;
-  width: var(--toggle-size-width);
-  min-width: var(--toggle-size-width);
-  height: var(--toggle-size-height);
+  inline-size: var(--toggle-size-width);
+  min-inline-size: var(--toggle-size-width);
+  block-size: var(--toggle-size-height);
   padding: 0;
   line-height: var(--lh4);
   vertical-align: middle;
@@ -50,14 +50,14 @@
 
   &__inner {
     position: absolute;
-    top: calc(var(--dt-spacing-50) - var(--dt-spacing-1)); // 3
-    left: var(--dt-spacing-300); // 24
-    width: var(--toggle-size-icon);
-    height: var(--toggle-size-icon);
+    inset-block-start: calc(var(--dt-size-300) - var(--dt-size-100)); // 3
+    inset-inline-start: var(--dt-size-550); // 24
+    inline-size: var(--toggle-size-icon);
+    block-size: var(--toggle-size-icon);
 
     .d-toggle--small & {
-      top: var(--dt-spacing-1); // 1
-      left: calc(var(--dt-spacing-200) + var(--dt-spacing-1)); // 17
+      inset-block-start: var(--dt-size-100); // 1
+      inset-inline-start: calc(var(--dt-size-500) + var(--dt-size-100)); // 17
     }
 
     .d-toggle--indeterminate & {
@@ -68,6 +68,7 @@
     background-repeat: no-repeat;
     background-size: cover;
 
+    [data-dt-mode="dark"] &,
     [data-dt-theme="dark"] & {
       background-image: url("data:image/svg+xml,<svg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'> <path fill-rule='evenodd' clip-rule='evenodd' d='M3.05806 3.05806C3.30214 2.81398 3.69786 2.81398 3.94194 3.05806L7 6.11612L10.0581 3.05806C10.3021 2.81398 10.6979 2.81398 10.9419 3.05806C11.186 3.30214 11.186 3.69786 10.9419 3.94194L7.88388 7L10.9419 10.0581C11.186 10.3021 11.186 10.6979 10.9419 10.9419C10.6979 11.186 10.3021 11.186 10.0581 10.9419L7 7.88388L3.94194 10.9419C3.69786 11.186 3.30214 11.186 3.05806 10.9419C2.81398 10.6979 2.81398 10.3021 3.05806 10.0581L6.11612 7L3.05806 3.94194C2.81398 3.69786 2.81398 3.30214 3.05806 3.05806Z' fill='black'/> </svg>");
     }
@@ -75,14 +76,14 @@
 
   &::after {
     position: absolute;
-    top: var(--dt-spacing-1); // 1
-    left: var(--dt-spacing-1); // 1
-    width: calc(var(--toggle-size-icon) + var(--dt-size-300));
-    height: calc(var(--toggle-size-icon) + var(--dt-size-300));
+    inset-block-start: var(--dt-size-100); // 1
+    inset-inline-start: var(--dt-size-100); // 1
+    inline-size: calc(var(--toggle-size-icon) + var(--dt-size-300));
+    block-size: calc(var(--toggle-size-icon) + var(--dt-size-300));
     background-color: var(--dt-color-surface-primary);
     border-radius: var(--dt-size-radius-circle);
     cursor: pointer;
-    transition: left var(--toggle-transition-speed) var(--toggle-transition-timing-function);
+    transition: inset-inline-start var(--toggle-transition-speed) var(--toggle-transition-timing-function);
     content: ' ';
   }
 
@@ -95,14 +96,14 @@
 
     &::before {
       position: absolute;
-      inset: var(--dt-spacing-50-negative) 0 var(--dt-spacing-50-negative) 0; // -4 // -4
+      inset: var(--dt-size-300-negative) 0 var(--dt-size-300-negative) 0; // -4 // -4
       content: '';
     }
   }
 
   &--small::after {
-    width: var(--toggle-size-icon);
-    height: var(--toggle-size-icon);
+    inline-size: var(--toggle-size-icon);
+    block-size: var(--toggle-size-icon);
   }
 
   //  $$  CHECKED TOGGLE
@@ -111,25 +112,25 @@
     --toggle-color-background: var(--dt-checkbox-color-background-checked);
 
     .d-toggle__inner {
-      left: var(--dt-spacing-75); // 6
+      inset-inline-start: var(--dt-size-350); // 6
       background-image: url("data:image/svg+xml,<svg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'> <path fill-rule='evenodd' clip-rule='evenodd' d='M12.1083 3.05806C12.3524 3.30214 12.3524 3.69786 12.1083 3.94194L5.69162 10.3586C5.44754 10.6027 5.05181 10.6027 4.80773 10.3586L1.89107 7.44194C1.64699 7.19786 1.64699 6.80214 1.89107 6.55806C2.13514 6.31398 2.53087 6.31398 2.77495 6.55806L5.24967 9.03278L11.2244 3.05806C11.4685 2.81398 11.8642 2.81398 12.1083 3.05806Z' fill='white'/> </svg>");
 
+      [data-dt-mode="dark"] &,
       [data-dt-theme="dark"] & {
         background-image: url("data:image/svg+xml,<svg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'> <path fill-rule='evenodd' clip-rule='evenodd' d='M12.1083 3.05806C12.3524 3.30214 12.3524 3.69786 12.1083 3.94194L5.69162 10.3586C5.44754 10.6027 5.05181 10.6027 4.80773 10.3586L1.89107 7.44194C1.64699 7.19786 1.64699 6.80214 1.89107 6.55806C2.13514 6.31398 2.53087 6.31398 2.77495 6.55806L5.24967 9.03278L11.2244 3.05806C11.4685 2.81398 11.8642 2.81398 12.1083 3.05806Z' fill='black'/> </svg>");
       }
     }
 
     &.d-toggle--small .d-toggle__inner {
-      left: calc(var(--dt-spacing-1) + var(--dt-spacing-25)); // 3
+      inset-inline-start: calc(var(--dt-size-100) + var(--dt-size-200)); // 3
     }
 
     &::after {
-      left: calc(var(--dt-spacing-300) + var(--dt-spacing-1)); // 25
+      inset-inline-start: calc(var(--dt-size-550) + var(--dt-size-100)); // 25
     }
 
     &.d-toggle--small::after {
-      right: var(--dt-spacing-1); // 1
-      left: calc(calc(var(--dt-spacing-50) * 5) - var(--dt-spacing-1)); // 19
+      inset-inline: calc(calc(var(--dt-size-300) * 5) - var(--dt-size-100)) var(--dt-size-100); // 1 // 19
     }
   }
 
@@ -141,7 +142,7 @@
     }
 
     &::after {
-      left: 50%;
+      inset-inline-start: 50%;
       transform: translate(-50%, 0);
     }
   }
@@ -168,7 +169,7 @@
 }
 
 .d-toggle-group {
-  gap: var(--dt-spacing-100); // 8
+  gap: var(--dt-size-400); // 8
 }
 
 //  ============================================================================

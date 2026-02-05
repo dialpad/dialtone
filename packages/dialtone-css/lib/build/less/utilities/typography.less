@@ -45,8 +45,7 @@ h6,
 p,
 ol,
 ul {
-    margin-top: 0;
-    margin-bottom: 0;
+    margin-block: 0;
 }
 
 //  ============================================================================
@@ -239,9 +238,15 @@ ul {
 //  ============================================================================
 //  $   FONT SIZE
 //  ----------------------------------------------------------------------------
+.d-fs-50 { font-size: var(--dt-font-size-50) !important; }
+.d-fs-75 { font-size: var(--dt-font-size-75) !important; }
 .d-fs-100 { font-size: var(--dt-font-size-100) !important; }
+.d-fs-125 { font-size: var(--dt-font-size-125) !important; }
+.d-fs-150 { font-size: var(--dt-font-size-150) !important; }
 .d-fs-200 { font-size: var(--dt-font-size-200) !important; }
+.d-fs-250 { font-size: var(--dt-font-size-250) !important; }
 .d-fs-300 { font-size: var(--dt-font-size-300) !important; }
+.d-fs-350 { font-size: var(--dt-font-size-350) !important; }
 .d-fs-400 { font-size: var(--dt-font-size-400) !important; }
 .d-fs-500 { font-size: var(--dt-font-size-500) !important; }
 
@@ -338,8 +343,8 @@ ul {
 //  ============================================================================
 //  $$  TEXT ALIGN
 //  ----------------------------------------------------------------------------
-.d-ta-left { text-align: left !important; }
-.d-ta-right { text-align: right !important; }
+.d-ta-left { text-align: start !important; }
+.d-ta-right { text-align: end !important; }
 .d-ta-center { text-align: center !important; }
 .d-ta-justify { text-align: justify !important; }
 .d-ta-unset { text-align: unset !important; }

@@ -261,7 +261,7 @@ showHtmlWarning />
 <code-well-header>
   <dt-stack gap="500" class="d-w100p">
     <dt-stack gap="200">
-      <h3 class="d-label" id="interactive-gap-label">Select a gap option</h3>
+      <dt-text as="h3" kind="label" size="md" id="interactive-gap-label">Select a gap option</dt-text>
       <dt-stack
         :direction="{ 'default': 'column', 'md': 'row' }"
         gap="200"
@@ -294,7 +294,7 @@ showHtmlWarning />
       align="start"
     >
       <dt-stack class="d-w100p md:d-w50p" gap="300">
-        <h3 class="d-headline--md">Column</h3>
+        <dt-text as="h3" kind="headline" size="md">Column</dt-text>
         <dt-stack
           :gap="selectedGap"
           ref="gapExample"
@@ -306,7 +306,7 @@ showHtmlWarning />
         </dt-stack>
       </dt-stack>
       <dt-stack class="d-w100p md:d-w50p" gap="300">
-        <h3 class="d-headline--md">Row</h3>
+        <dt-text as="h3" kind="headline" size="md">Row</dt-text>
         <dt-stack
           direction="row"
           :gap="selectedGap"
@@ -343,16 +343,16 @@ vueCode='
       <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
         <tr>
           <th scope="col" class="d-p0 d-bbw0">
-            <div class="d-p16 d-bb d-bc-default d-bbw1">Size</div>
+            <div class="d-p16 d-bb d-bbw1">Size</div>
           </th>
           <th scope="col" class="d-p0 d-bbw0">
-            <div class="d-p16 d-bb d-bc-default d-bbw1">Design Token</div>
+            <div class="d-p16 d-bb d-bbw1">Design Token</div>
           </th>
           <th scope="col" class="d-ta-right d-p0 d-bbw0">
-            <div class="d-p16 d-bb d-bc-default d-bbw1">REM</div>
+            <div class="d-p16 d-bb d-bbw1">REM</div>
           </th>
           <th scope="col" class="d-ta-right d-p0 d-bbw0">
-            <div class="d-p16 d-bb d-bc-default d-bbw1">PX</div>
+            <div class="d-p16 d-bb d-bbw1">PX</div>
           </th>
         </tr>
       </thead>
@@ -362,7 +362,7 @@ vueCode='
               0
           </th>
           <td>
-            <strong>var(--dt-space-0)</strong>
+            <strong>var(--dt-size-0)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             0.0rem
@@ -376,7 +376,7 @@ vueCode='
              50
           </th>
           <td>
-            <strong>var(--dt-space-50)</strong>
+            <strong>var(--dt-size-50)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             0.05rem
@@ -390,7 +390,7 @@ vueCode='
             100
           </th>
           <td>
-            <strong>var(--dt-space-100)</strong>
+            <strong>var(--dt-size-100)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             0.1rem
@@ -404,7 +404,7 @@ vueCode='
             200
           </th>
           <td>
-            <strong>var(--dt-space-200)</strong>
+            <strong>var(--dt-size-200)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             0.2rem
@@ -418,7 +418,7 @@ vueCode='
             300
           </th>
           <td>
-            <strong>var(--dt-space-300)</strong>
+            <strong>var(--dt-size-300)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             0.4rem
@@ -432,7 +432,7 @@ vueCode='
             350
           </th>
           <td>
-            <strong>var(--dt-space-350)</strong>
+            <strong>var(--dt-size-350)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             0.6rem
@@ -446,7 +446,7 @@ vueCode='
             400
           </th>
           <td>
-            <strong>var(--dt-space-400)</strong>
+            <strong>var(--dt-size-400)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             0.8rem
@@ -460,7 +460,7 @@ vueCode='
             450
           </th>
           <td>
-            <strong>var(--dt-space-450)</strong>
+            <strong>var(--dt-size-450)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             1.2rem
@@ -474,7 +474,7 @@ vueCode='
             500
           </th>
           <td>
-            <strong>var(--dt-space-500)</strong>
+            <strong>var(--dt-size-500)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             1.6rem
@@ -488,7 +488,7 @@ vueCode='
             525
           </th>
           <td>
-            <strong>var(--dt-space-525)</strong>
+            <strong>var(--dt-size-525)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             2.0rem
@@ -502,7 +502,7 @@ vueCode='
             550
           </th>
           <td>
-            <strong>var(--dt-space-550)</strong>
+            <strong>var(--dt-size-550)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             2.4rem
@@ -516,7 +516,7 @@ vueCode='
             600
           </th>
           <td>
-            <strong>var(--dt-space-600)</strong>
+            <strong>var(--dt-size-600)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             3.2rem
@@ -530,7 +530,7 @@ vueCode='
             625
           </th>
           <td>
-            <strong>var(--dt-space-625)</strong>
+            <strong>var(--dt-size-625)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             4.2rem
@@ -544,7 +544,7 @@ vueCode='
             650
           </th>
           <td>
-            <strong>var(--dt-space-650)</strong>
+            <strong>var(--dt-size-650)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             4.8rem
@@ -558,7 +558,7 @@ vueCode='
             700
           </th>
           <td>
-            <strong>var(--dt-space-700)</strong>
+            <strong>var(--dt-size-700)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             6.4rem
@@ -932,14 +932,14 @@ Align items along their text baselines.
     class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--baseline"
     ref="alignBaselineExample"
   >
-    <div class="d-bgc-moderate-opaque d-p16 d-bar8 d-body--sm">
-      Small body
+    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <dt-text kind="body" size="xs">Small body</dt-text>
     </div>
-    <div class="d-bgc-moderate-opaque d-p16 d-bar8 d-body--md">
-      Medium body
+    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <dt-text kind="body" size="md">Medium body</dt-text>
     </div>
-    <div class="d-bgc-moderate-opaque d-p16 d-bar8 d-headline--xxl">
-      Large headline
+    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <dt-text kind="headline" size="2xl">Large headline</dt-text>
     </div>
   </dt-stack>
 </code-well-header>
@@ -952,9 +952,9 @@ vueCode='
   gap="400"
   align="baseline"
 >
-  <div class="d-body--sm">Small text</div>
-  <div class="d-body--md">Medium text</div>
-  <div class="d-headline--md">Large text</div>
+  <dt-text kind="body" size="xs">Small body</dt-text>
+  <dt-text kind="body" size="md">Medium body</dt-text>
+  <dt-text kind="headline" size="2xl">Large headline</dt-text>
 </dt-stack>
 '
 showHtmlWarning />
@@ -1454,6 +1454,113 @@ Resize your browser to see the justification change at different breakpoints.
 
 View the [Migrating from Flex CSS Utilities to DtStack](/about/whats-new/posts/2025-12-2) for more details.
 
+## Examples
+
+### Profile Card
+
+<code-well-header>
+  <ExampleProfileCard />
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-stack gap="500">
+  <dt-stack gap="400" class="d-jc-space-between">
+    <dt-stack>
+      <dt-text as="h2" kind="headline" size="xl" strength="medium" density="200" class="d-fs-400">
+        Katie Rodriguez
+      </dt-text>
+      <dt-stack direction="row" gap="350">
+        <dt-text tone="success">
+          Available
+        </dt-text>
+        <dt-text>&bull;</dt-text>
+        <dt-text tone="tertiary">
+          Working from coffee shop
+        </dt-text>
+      </dt-stack>
+    </dt-stack>
+    <dt-stack gap="200">
+      <dt-text kind="body" size="md" density="200" strength="semibold" tone="tertiary">
+        Chief Customer Success Officer
+      </dt-text>
+      <dt-text kind="body" size="sm" density="200">
+        <dt-text strength="semibold">
+          6:19 am
+        </dt-text> local time
+      </dt-text>
+    </dt-stack>
+  </dt-stack>
+  <dt-stack gap="400" direction="row" class="d-jc-space-between">
+    <dt-button class="d-fl1" kind="muted" importance="outlined">
+      <template #icon="{ iconSize }">
+        <dt-icon-phone :size="iconSize" />
+      </template>
+      Call
+    </dt-button>
+    <dt-button class="d-fl1" kind="muted" importance="outlined">
+      <template #icon="{ iconSize }">
+        <dt-icon-quick-reply :size="iconSize" />
+      </template>
+      Message
+    </dt-button>
+    <dt-button class="d-fl1" kind="muted" importance="outlined">
+      <template #icon="{ iconSize }">
+        <dt-icon-video :size="iconSize" />
+      </template>
+      Meet
+    </dt-button>
+  </dt-stack>
+</dt-stack>
+'
+/>
+
+### Call Log
+
+<code-well-header>
+  <dt-stack gap="400" class="d-w100p">
+    <dt-text as="h2" kind="headline" size="lg">Saturday, May 24, 2025</dt-text>
+    <dt-stack direction="row" gap="450" class="d-w100p">
+      <dt-avatar full-name="Ashanti Trevor" />
+      <dt-stack class="d-fl1">
+        <dt-text kind="body" size="sm" strength="bold">Ashanti Trevor</dt-text>
+        <dt-stack direction="row" gap="300">
+          <dt-stack direction="row" gap="400">
+            <dt-icon name="phone-outgoing" size="200" class="d-fc-tertiary" />
+            <dt-text kind="body" size="xs" tone="tertiary">Outgoing call</dt-text>
+          </dt-stack>
+          <dt-text kind="body" size="xs" tone="tertiary">&bull;</dt-text>
+          <dt-text kind="body" size="xs" tone="tertiary">2 minutes 10 seconds</dt-text>
+        </dt-stack>
+      </dt-stack>
+      <dt-text kind="body" size="sm" tone="tertiary">3:23 pm</dt-text>
+      <dt-badge kind="count" type="bulletin" text="6" />
+    </dt-stack>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-text as="h2" kind="headline" size="lg">Saturday, May 24, 2025</dt-text>
+<dt-stack direction="row" gap="450" class="d-w100p">
+  <dt-avatar full-name="Ashanti Trevor" />
+  <dt-stack class="d-fl1">
+    <dt-text kind="body" size="sm" strength="bold">Ashanti Trevor</dt-text>
+    <dt-stack direction="row" gap="300">
+      <dt-stack direction="row" gap="400">
+        <dt-icon name="phone-outgoing" size="200" class="d-fc-tertiary" />
+        <dt-text kind="body" size="xs" tone="tertiary">Outgoing call</dt-text>
+      </dt-stack>
+      <dt-text kind="body" size="xs" tone="tertiary">&bull;</dt-text>
+      <dt-text kind="body" size="xs" tone="tertiary">2 minutes 10 seconds</dt-text>
+    </dt-stack>
+  </dt-stack>
+  <dt-text kind="body" size="sm" tone="tertiary">3:23 pm</dt-text>
+  <dt-badge kind="count" type="bulletin" text="6" />
+</dt-stack>
+'
+/>
+
 ## Vue API
 
 <component-vue-api component-name="stack" />
@@ -1469,6 +1576,7 @@ View the [Migrating from Flex CSS Utilities to DtStack](/about/whats-new/posts/2
     DtIconLock,
   } from '@dialpad/dialtone-icons/vue3';
   import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
+  import ExampleProfileCard from '@exampleComponents/ExampleProfileCard.vue';
 
   const selectedGap = ref('400');
   const focusedGapIndex = ref(0);
@@ -1554,7 +1662,7 @@ View the [Migrating from Flex CSS Utilities to DtStack](/about/whats-new/posts/2
 <style scoped lang="less">
   .axis-outline {
     --axis-size: var(--dt-size-200);
-    --axis-offset: var(--dt-space-200-negative);
+    --axis-offset: var(--dt-size-200-negative);
     --axis-color: var(--dt-color-border-critical);
     --axis-opacity: var(--dt-opacity-800);
     --axis-pattern-vertical: repeating-linear-gradient(
@@ -1668,7 +1776,7 @@ View the [Migrating from Flex CSS Utilities to DtStack](/about/whats-new/posts/2
 
     // Special case for baseline
     &--baseline::before {
-      bottom: calc(var(--dt-space-500) + var(--dt-space-400));
+      bottom: calc(var(--dt-size-500) + var(--dt-size-400));
       height: var(--axis-size);
       width: 100%;
       background-image: var(--axis-pattern-horizontal);

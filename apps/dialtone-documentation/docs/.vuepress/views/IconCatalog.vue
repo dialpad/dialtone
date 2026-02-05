@@ -21,10 +21,10 @@
           <dt-button
             v-if="!isSearchEmpty"
             id="search-input-button-close"
+            v-dt-tooltip="'Clear search'"
             kind="muted"
             importance="clear"
             size="xs"
-            circle
             aria-label="Clear filters"
             @click="resetSearch"
           >
@@ -68,10 +68,14 @@
     :key="category"
     class="d-mb16"
   >
-    <div
-      class="d-headline--lg d-tt-capitalize d-mb4"
-      v-text="category"
-    />
+    <dt-text
+      as="h2"
+      kind="headline"
+      size="xl"
+      class="d-tt-capitalize d-mb4"
+    >
+      {{ category }}
+    </dt-text>
     <div class="d-gl-docsite-icons">
       <icon-popover
         v-for="(keywords, name) in icons"
@@ -273,6 +277,6 @@ onMounted(() => {
 <style scoped>
   /* more or less a hack, 🤷‍♂️ */
   #search-input-button-close {
-    margin-right: var(--dt-size-350-negative);
+    margin-inline-end: var(--dt-size-350-negative);
   }
 </style>

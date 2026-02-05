@@ -2680,7 +2680,7 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Base default medium text style for main content."
+        "description": "(DEPRECATED) Base default medium text style for main content."
       },
       "md-compact": {
         "value": {
@@ -2691,7 +2691,7 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A tighter-spaced version of medium body style."
+        "description": "(DEPRECATED) A tighter-spaced version of medium body style."
       },
       "sm": {
         "value": {
@@ -2702,7 +2702,7 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Reduced small text style for less prominent or adjacent content."
+        "description": "(DEPRECATED) Reduced small text style for less prominent or adjacent content."
       },
       "sm-compact": {
         "value": {
@@ -2713,7 +2713,7 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A tighter-spaced version of small body style."
+        "description": "(DEPRECATED) A tighter-spaced version of small body style."
       }
     },
     "headline": {
@@ -2726,7 +2726,7 @@
           "textCase": "{font.text-case.uppercase}"
         },
         "type": "typography",
-        "description": "Visually concise and uppercase title text used above a paired headline. Also known as a kicker or overline."
+        "description": "(DEPRECATED) Visually concise and uppercase title text used above a paired headline. Also known as a kicker or overline."
       },
       "sm": {
         "value": {
@@ -2737,7 +2737,7 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Smaller text size for secondary information or subheadings."
+        "description": "(DEPRECATED) Smaller text size for secondary information or subheadings."
       },
       "sm-compact": {
         "value": {
@@ -2748,7 +2748,7 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A tighter-spaced version of small headline style."
+        "description": "(DEPRECATED) A tighter-spaced version of small headline style."
       },
       "sm-soft": {
         "value": {
@@ -2759,7 +2759,7 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A softer font weight version of small headline style."
+        "description": "(DEPRECATED) A softer font weight version of small headline style."
       },
       "sm-soft-compact": {
         "value": {
@@ -2770,7 +2770,7 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A softer font weight, tighter-spaced version of small headline style."
+        "description": "(DEPRECATED) A softer font weight, tighter-spaced version of small headline style."
       },
       "md": {
         "value": {
@@ -2781,7 +2781,7 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Medium-sized base text style for headlines."
+        "description": "(DEPRECATED) Medium-sized base text style for headlines."
       },
       "md-compact": {
         "value": {
@@ -2792,7 +2792,7 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A tighter-spaced version of medium headline style."
+        "description": "(DEPRECATED) A tighter-spaced version of medium headline style."
       },
       "lg": {
         "value": {
@@ -2803,7 +2803,7 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Large text style for headlines to attract attention."
+        "description": "(DEPRECATED) Large text style for headlines to attract attention."
       },
       "lg-soft": {
         "value": {
@@ -2814,7 +2814,7 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A softer font weight version of large headline style."
+        "description": "(DEPRECATED) A softer font weight version of large headline style."
       },
       "lg-compact": {
         "value": {
@@ -2825,7 +2825,7 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A tighter-spaced version of large body style."
+        "description": "(DEPRECATED) A tighter-spaced version of large body style."
       },
       "lg-soft-compact": {
         "value": {
@@ -2836,51 +2836,51 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A softer font weight, tighter spaced version of large headline style."
+        "description": "(DEPRECATED) A softer font weight, tighter spaced version of large headline style."
       },
       "xl": {
         "value": {
           "fontFamily": "{font.family.body}",
-          "fontWeight": "{font.weight.medium}",
+          "fontWeight": "{font.weight.bold}",
           "lineHeight": "{font.lineHeight.200}",
           "fontSize": "{font.size.400}",
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Extra large text style for high importance headlines."
+        "description": "(DEPRECATED) Extra large text style for high importance headlines."
       },
       "xl-compact": {
         "value": {
           "fontFamily": "{font.family.body}",
-          "fontWeight": "{font.weight.medium}",
+          "fontWeight": "{font.weight.bold}",
           "lineHeight": "{font.lineHeight.100}",
           "fontSize": "{font.size.400}",
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A tighter-spaced version of extra large headline style."
+        "description": "(DEPRECATED) A tighter-spaced version of extra large headline style."
       },
       "xxl": {
         "value": {
           "fontFamily": "{font.family.body}",
-          "fontWeight": "{font.weight.medium}",
+          "fontWeight": "{font.weight.bold}",
           "lineHeight": "{font.lineHeight.200}",
           "fontSize": "{font.size.500}",
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Largest text style for extra extra large content."
+        "description": "(DEPRECATED) Largest text style for extra extra large content."
       },
       "xxl-compact": {
         "value": {
           "fontFamily": "{font.family.body}",
-          "fontWeight": "{font.weight.medium}",
-          "lineHeight": "{font.lineHeight.100}",
+          "fontWeight": "{font.weight.bold}",
+          "lineHeight": "{font.lineHeight.200}",
           "fontSize": "{font.size.500}",
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A tighter-spaced version of extra extra large headline style."
+        "description": "(DEPRECATED) A tighter-spaced version of extra extra large headline style."
       }
     },
     "label": {
@@ -3003,7 +3003,7 @@
           "fontFamily": "{font.family.mono}",
           "fontWeight": "{font.weight.normal}",
           "lineHeight": "{font.lineHeight.200}",
-          "fontSize": "{font.size.200}",
+          "fontSize": "{font.size.150}",
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
@@ -3014,7 +3014,7 @@
           "fontFamily": "{font.family.mono}",
           "fontWeight": "{font.weight.normal}",
           "lineHeight": "{font.lineHeight.200}",
-          "fontSize": "{font.size.100}",
+          "fontSize": "{font.size.75}",
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
@@ -3074,11 +3074,211 @@
       }
     }
   },
+  "text": {
+    "headline": {
+      "3xl": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.bold}",
+          "fontSize": "{font.size.500}",
+          "lineHeight": "{font.lineHeight.200}"
+        },
+        "type": "typography",
+        "description": "XXXL headline style"
+      },
+      "2xl": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.bold}",
+          "fontSize": "{font.size.400}",
+          "lineHeight": "{font.lineHeight.200}"
+        },
+        "type": "typography",
+        "description": "XXL headline style"
+      },
+      "xl": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.bold}",
+          "fontSize": "{font.size.300}",
+          "lineHeight": "{font.lineHeight.400}"
+        },
+        "type": "typography",
+        "description": "XL headline style"
+      },
+      "lg": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.bold}",
+          "fontSize": "{font.size.250}",
+          "lineHeight": "{font.lineHeight.300}"
+        },
+        "type": "typography",
+        "description": "Large headline style"
+      },
+      "md": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.bold}",
+          "fontSize": "{font.size.200}",
+          "lineHeight": "{font.lineHeight.400}"
+        },
+        "type": "typography",
+        "description": "Medium headline style"
+      },
+      "sm": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.bold}",
+          "fontSize": "{font.size.150}",
+          "lineHeight": "{font.lineHeight.300}"
+        },
+        "type": "typography",
+        "description": "Small headline style"
+      },
+      "xs": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.bold}",
+          "fontSize": "{font.size.100}",
+          "lineHeight": "{font.lineHeight.300}"
+        },
+        "type": "typography",
+        "description": "Extra small headline style"
+      }
+    },
+    "body": {
+      "lg": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.normal}",
+          "fontSize": "{font.size.250}",
+          "lineHeight": "{font.lineHeight.400}"
+        },
+        "type": "typography",
+        "description": "Large body style"
+      },
+      "md": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.normal}",
+          "fontSize": "{font.size.200}",
+          "lineHeight": "{font.lineHeight.400}"
+        },
+        "type": "typography",
+        "description": "Medium (default) body style"
+      },
+      "sm": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.normal}",
+          "fontSize": "{font.size.150}",
+          "lineHeight": "{font.lineHeight.300}"
+        },
+        "type": "typography",
+        "description": "Small body style"
+      },
+      "xs": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.normal}",
+          "fontSize": "{font.size.100}",
+          "lineHeight": "{font.lineHeight.300}"
+        },
+        "type": "typography",
+        "description": "Extra small body style"
+      }
+    },
+    "label": {
+      "lg": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.semiBold}",
+          "fontSize": "{font.size.250}",
+          "lineHeight": "{font.lineHeight.300}"
+        },
+        "type": "typography",
+        "description": "Large label style"
+      },
+      "md": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.semiBold}",
+          "fontSize": "{font.size.200}",
+          "lineHeight": "{font.lineHeight.400}"
+        },
+        "type": "typography",
+        "description": "Medium (default) label style"
+      },
+      "sm": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.semiBold}",
+          "fontSize": "{font.size.150}",
+          "lineHeight": "{font.lineHeight.400}"
+        },
+        "type": "typography",
+        "description": "Small label style"
+      },
+      "xs": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.semiBold}",
+          "fontSize": "{font.size.100}",
+          "lineHeight": "{font.lineHeight.300}"
+        },
+        "type": "typography",
+        "description": "Extra small label style"
+      }
+    },
+    "code": {
+      "lg": {
+        "value": {
+          "fontFamily": "{font.family.mono}",
+          "fontWeight": "{font.weight.normal}",
+          "fontSize": "{font.size.250}",
+          "lineHeight": "{font.lineHeight.200}"
+        },
+        "type": "typography",
+        "description": "Large code style"
+      },
+      "md": {
+        "value": {
+          "fontFamily": "{font.family.mono}",
+          "fontWeight": "{font.weight.normal}",
+          "fontSize": "{font.size.200}",
+          "lineHeight": "{font.lineHeight.200}"
+        },
+        "type": "typography",
+        "description": "Medium (default) code style"
+      },
+      "sm": {
+        "value": {
+          "fontFamily": "{font.family.mono}",
+          "fontWeight": "{font.weight.normal}",
+          "fontSize": "{font.size.150}",
+          "lineHeight": "{font.lineHeight.200}"
+        },
+        "type": "typography",
+        "description": "Small code style"
+      },
+      "xs": {
+        "value": {
+          "fontFamily": "{font.family.mono}",
+          "fontWeight": "{font.weight.normal}",
+          "fontSize": "{font.size.100}",
+          "lineHeight": "{font.lineHeight.200}"
+        },
+        "type": "typography",
+        "description": "Extra small code style"
+      }
+    }
+  },
   "size": {
     "border": {
       "focus": {
         "value": "{size.border.200} + {size.border.100}",
-        "type": "borderWidth"
+        "type": "dimension"
       }
     }
   },
@@ -3087,60 +3287,60 @@
       "border": {
         "default": {
           "value": "{size.border.150}",
-          "type": "borderWidth"
+          "type": "dimension"
         },
         "status": {
           "value": "{size.border.200}",
-          "type": "borderWidth"
+          "type": "dimension"
         }
       },
       "radius": {
         "xs": {
           "value": "{size.radius.300}",
-          "type": "borderRadius"
+          "type": "dimension"
         },
         "sm": {
           "value": "{size.radius.400}",
-          "type": "borderRadius"
+          "type": "dimension"
         },
         "md": {
           "value": "{size.radius.400}",
-          "type": "borderRadius"
+          "type": "dimension"
         },
         "lg": {
           "value": "{size.radius.450}",
-          "type": "borderRadius"
+          "type": "dimension"
         },
         "xl": {
           "value": "{size.radius.500}",
-          "type": "borderRadius"
+          "type": "dimension"
         }
       }
     },
     "lineHeight": {
       "xs": {
         "value": "{font.lineHeight.200}",
-        "type": "lineHeights",
+        "type": "dimension",
         "description": "Line height for extra small inputs (e.g. input and textarea)"
       },
       "sm": {
         "value": "{font.lineHeight.200}",
-        "type": "lineHeights",
+        "type": "dimension",
         "description": "Line height for small inputs (e.g. input and textarea)"
       },
       "md": {
         "value": "{font.lineHeight.200}",
-        "type": "lineHeights",
+        "type": "dimension",
         "description": "Line height for medium inputs (e.g. input and textarea)"
       },
       "lg": {
         "value": "{font.lineHeight.200}",
-        "type": "lineHeights",
+        "type": "dimension",
         "description": "Line height for large inputs (e.g. input and textarea)"
       },
       "xl": {
         "value": "{font.lineHeight.200}",
-        "type": "lineHeights",
+        "type": "dimension",
         "description": "Line height for extra large inputs (e.g. input and textarea)"
       }
     },
@@ -3148,54 +3348,54 @@
       "size": {
         "xs": {
           "value": "{font.size.100}",
-          "type": "fontSizes",
+          "type": "dimension",
           "description": "Font size for extra small inputs (e.g. input and textarea)"
         },
         "sm": {
           "value": "{font.size.100}",
-          "type": "fontSizes",
+          "type": "dimension",
           "description": "Font size for small inputs (e.g. input and textarea)"
         },
         "md": {
           "value": "{font.size.200}",
-          "type": "fontSizes",
+          "type": "dimension",
           "description": "Font size for medium inputs (e.g. input and textarea)"
         },
         "lg": {
           "value": "{font.size.300}",
-          "type": "fontSizes",
+          "type": "dimension",
           "description": "Font size for large inputs (e.g. input and textarea)"
         },
         "xl": {
           "value": "{font.size.400}",
-          "type": "fontSizes",
+          "type": "dimension",
           "description": "Font size for extra large inputs (e.g. input and textarea)"
         }
       },
       "weight": {
         "xs": {
           "value": "{font.weight.normal}",
-          "type": "fontWeights",
+          "type": "fontWeight",
           "description": "Font weight for extra small inputs (e.g. input and textarea)"
         },
         "sm": {
           "value": "{font.weight.normal}",
-          "type": "fontWeights",
+          "type": "fontWeight",
           "description": "Font weight for small inputs (e.g. input and textarea)"
         },
         "md": {
           "value": "{font.weight.normal}",
-          "type": "fontWeights",
+          "type": "fontWeight",
           "description": "Font weight for medium inputs (e.g. input and textarea)"
         },
         "lg": {
           "value": "{font.weight.normal}",
-          "type": "fontWeights",
+          "type": "fontWeight",
           "description": "Font weight for large inputs (e.g. input and textarea)"
         },
         "xl": {
           "value": "{font.weight.normal}",
-          "type": "fontWeights",
+          "type": "fontWeight",
           "description": "Font weight for extra large inputs (e.g. input and textarea)"
         }
       }
@@ -3555,6 +3755,10 @@
       },
       "border": {
         "base": {
+          "default": {
+            "value": "transparent",
+            "type": "color"
+          },
           "outlined": {
             "default": {
               "value": "{color.border.brand}",
@@ -3563,6 +3767,10 @@
           }
         },
         "critical": {
+          "default": {
+            "value": "transparent",
+            "type": "color"
+          },
           "outlined": {
             "default": {
               "value": "{color.border.critical}",
@@ -3571,6 +3779,10 @@
           }
         },
         "inverted": {
+          "default": {
+            "value": "transparent",
+            "type": "color"
+          },
           "outlined": {
             "default": {
               "value": "{color.border.default-inverted}",
@@ -3579,6 +3791,10 @@
           }
         },
         "muted": {
+          "default": {
+            "value": "transparent",
+            "type": "color"
+          },
           "outlined": {
             "default": {
               "value": "{color.border.default}",
@@ -3587,6 +3803,10 @@
           }
         },
         "positive": {
+          "default": {
+            "value": "transparent",
+            "type": "color"
+          },
           "outlined": {
             "default": {
               "value": "{color.border.success}",
@@ -3961,19 +4181,19 @@
       "color": {
         "background": {
           "available": {
-            "value": "{color.green.425}",
+            "value": "{presence.color.available}",
             "type": "color"
           },
           "busy-unavailable": {
-            "value": "{color.red.500}",
+            "value": "{presence.color.unavailable}",
             "type": "color"
           },
           "busy": {
-            "value": "{color.gold.500}",
+            "value": "{presence.color.busy}",
             "type": "color"
           },
           "offline": {
-            "value": "{color.black.500}",
+            "value": "{presence.color.offline}",
             "type": "color"
           }
         }
@@ -4024,15 +4244,15 @@
           "type": "color"
         },
         "status-positive": {
-          "value": "{color.green.425}",
+          "value": "{color.foreground.success}",
           "type": "color"
         },
         "status-critical": {
-          "value": "{color.red.500}",
+          "value": "{color.foreground.critical}",
           "type": "color"
         },
         "status-warning": {
-          "value": "{color.gold.500}",
+          "value": "{color.foreground.warning}",
           "type": "color"
         },
         "status-away": {
@@ -4463,7 +4683,7 @@
     "logo": {
       "color": {
         "star": {
-          "value": "{color.purple.400}",
+          "value": "{color.surface.brand-strong}",
           "type": "color"
         },
         "wordmark": {
@@ -4475,19 +4695,19 @@
     "presence": {
       "color": {
         "available": {
-          "value": "{shell.base.color.status-positive}",
+          "value": "{presence.color.available}",
           "type": "color"
         },
         "unavailable": {
-          "value": "{shell.base.color.status-critical}",
+          "value": "{presence.color.unavailable}",
           "type": "color"
         },
         "busy": {
-          "value": "{shell.base.color.status-warning}",
+          "value": "{presence.color.busy}",
           "type": "color"
         },
         "offline": {
-          "value": "{shell.base.color.status-away}",
+          "value": "{presence.color.offline}",
           "type": "color"
         }
       }

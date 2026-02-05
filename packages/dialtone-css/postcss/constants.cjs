@@ -8,17 +8,6 @@
 
 // @TODO: Move HSLA_EXCLUDED_COLORS to common/utils to share and sync it with dialtone-tokens/postcss/common.js
 module.exports = {
-  // Spacing token stops for generating new token-based utility classes (.d-pis-100, .d-mis-100, etc.)
-  SPACING_TOKENS: [
-    '0', '1', '25', '50', '75', '100', '125', '150', '175', '200',
-    '225', '250', '275', '300', '350', '400', '450', '500', '525',
-    '550', '600', '650', '700', '750', '800',
-  ],
-  SPACING_TOKENS_NEGATIVE: [
-    '1', '25', '50', '75', '100', '125', '150', '175', '200',
-    '225', '250', '275', '300', '350', '400', '450', '500', '525',
-    '550', '600', '650', '700', '750', '800',
-  ],
   HSLA_EXCLUDED_COLORS: ['--dt-color-surface-ai', '--dt-color-gradient-gold-red-magenta-purple', '--dt-color-gradient-magenta-purple', '--dt-badge-color-background-ai', '--dt-color-border-ai'],
   OPACITIES: [
     100,
@@ -44,63 +33,86 @@ module.exports = {
     24: '550', // TODO: Remove as it doesn't have a valid token?
     32: 'radius-600',
   },
-  // Maps pixel values to new algorithmic spacing token numbers
-  // Formula: spacing-N where N = (pixels / 8) * 100
-  // Example: 8px → spacing-100, 16px → spacing-200
   GAP_SPACES: {
     0: '0',
-    1: '1',      // 1px
-    2: '25',     // 2px
-    4: '50',     // 4px
-    6: '75',     // 6px
-    8: '100',    // 8px (base)
-    10: '125',   // 10px
-    12: '150',   // 12px
-    14: '175',   // 14px
-    16: '200',   // 16px
-    18: '225',   // 18px
-    20: '250',   // 20px
-    22: '275',   // 22px
-    24: '300',   // 24px
-    28: '350',   // 28px
-    32: '400',   // 32px
-    36: '450',   // 36px
-    40: '500',   // 40px
-    42: '525',   // 42px (legacy)
-    44: '550',   // 44px
-    48: '600',   // 48px
-    52: '650',   // 52px
-    56: '700',   // 56px
-    60: '750',   // 60px
-    64: '800',   // 64px (spacing cap)
+    1: '100',
+    2: '200',
+    4: '300',
+    6: '350',
+    8: '400',
+    12: '450',
+    16: '500',
+    20: '525',
+    24: '550',
+    32: '600',
+    48: '650',
+    64: '700',
   },
-  // Maps pixel values to new algorithmic spacing token numbers for layout positioning
+  // Gap spaces using new spacing tokens
+  GAP_SPACES_SPACING: {
+    0: '0',
+    1: '1',
+    2: '25',
+    4: '50',
+    6: '75',
+    8: '100',
+    12: '150',
+    16: '200',
+    20: '250',
+    24: '300',
+    32: '400',
+    48: '600',
+    64: '800',
+  },
   LAYOUT_SIZES: {
     0: '0',
-    1: '1',      // 1px
-    2: '25',     // 2px
-    4: '50',     // 4px
-    6: '75',     // 6px
-    8: '100',    // 8px
-    10: '125',   // 10px
-    12: '150',   // 12px
-    14: '175',   // 14px
-    16: '200',   // 16px
-    18: '225',   // 18px
-    20: '250',   // 20px
-    22: '275',   // 22px
-    24: '300',   // 24px
-    28: '350',   // 28px
-    32: '400',   // 32px
-    36: '450',   // 36px
-    40: '500',   // 40px
-    42: '525',   // 42px (legacy)
-    44: '550',   // 44px
-    48: '600',   // 48px
-    52: '650',   // 52px
-    56: '700',   // 56px
-    60: '750',   // 60px
-    64: '800',   // 64px (spacing cap)
+    1: '100',
+    2: '200',
+    4: '300',
+    6: '350',
+    8: '400',
+    12: '450',
+    16: '500',
+    20: '525',
+    24: '550',
+    32: '600',
+    48: '650',
+    64: '700',
+    72: '720',
+    84: '730',
+    96: '750',
+    102: '760',
+    n1: '100-negative',
+    n2: '200-negative',
+    n4: '300-negative',
+    n6: '350-negative',
+    n8: '400-negative',
+    n12: '450-negative',
+    n16: '500-negative',
+    n24: '550-negative',
+    n32: '600-negative',
+    n48: '650-negative',
+    n64: '700-negative',
+    n72: '720-negative',
+    n84: '730-negative',
+    n96: '750-negative',
+    n102: '760-negative',
+  },
+  // Position sizes using new spacing tokens (0-64px) - EXACT MATCHES ONLY
+  POSITION_SIZES_SPACING: {
+    0: '0',
+    1: '1',
+    2: '25',
+    4: '50',
+    6: '75',
+    8: '100',
+    12: '150',
+    16: '200',
+    20: '250',
+    24: '300',
+    32: '400',
+    48: '600',
+    64: '800',
     n1: '1-negative',
     n2: '25-negative',
     n4: '50-negative',
@@ -108,91 +120,124 @@ module.exports = {
     n8: '100-negative',
     n12: '150-negative',
     n16: '200-negative',
-    n20: '250-negative',
     n24: '300-negative',
     n32: '400-negative',
     n48: '600-negative',
     n64: '800-negative',
   },
-  // Maps pixel values to new algorithmic spacing token numbers for padding
+  // Position sizes using layout tokens (64px+) - EXACT MATCHES ONLY
+  // Note: Negative layout utilities removed - not used in practice
+  POSITION_SIZES_LAYOUT: {
+    96: '150',
+  },
+  // Position sizes that don't have exact spacing/layout matches - use size tokens
+  // TODO: Migrate these once spacing/layout tokens are expanded
+  // Note: Negative position utilities for 72px+ removed - not used in practice
+  POSITION_SIZES_DEPRECATED: {
+    72: '720',
+    84: '730',
+    102: '760',
+  },
   PADDING_SIZES: {
     0: '0',
-    1: '1',      // 1px
-    2: '25',     // 2px
-    4: '50',     // 4px
-    6: '75',     // 6px
-    8: '100',    // 8px (base)
-    10: '125',   // 10px
-    12: '150',   // 12px
-    14: '175',   // 14px
-    16: '200',   // 16px
-    18: '225',   // 18px
-    20: '250',   // 20px
-    22: '275',   // 22px
-    24: '300',   // 24px
-    28: '350',   // 28px
-    32: '400',   // 32px
-    36: '450',   // 36px
-    40: '500',   // 40px
-    42: '525',   // 42px (legacy)
-    44: '550',   // 44px
-    48: '600',   // 48px
-    52: '650',   // 52px
-    56: '700',   // 56px
-    60: '750',   // 60px
-    64: '800',   // 64px (spacing cap)
+    1: '100',
+    2: '200',
+    4: '300',
+    6: '350',
+    8: '400',
+    12: '450',
+    16: '500',
+    20: '525',
+    24: '550',
+    32: '600',
+    48: '650',
+    64: '700',
+    96: '750',
+    128: '800',
   },
-  // Maps pixel values to new algorithmic spacing token numbers for margin
+  // Padding sizes using new spacing tokens (0-64px)
+  PADDING_SIZES_SPACING: {
+    0: '0',
+    1: '1',
+    2: '25',
+    4: '50',
+    6: '75',
+    8: '100',
+    12: '150',
+    16: '200',
+    20: '250',
+    24: '300',
+    32: '400',
+    48: '600',
+    64: '800',
+  },
+  // Padding sizes using layout tokens (64px+)
+  PADDING_SIZES_LAYOUT: {
+    96: '150',
+    128: '200',
+  },
   MARGIN_SIZES: {
     0: '0',
-    1: '1',      // 1px
-    2: '25',     // 2px
-    4: '50',     // 4px
-    6: '75',     // 6px
-    8: '100',    // 8px (base)
-    10: '125',   // 10px
-    12: '150',   // 12px
-    14: '175',   // 14px
-    16: '200',   // 16px
-    18: '225',   // 18px
-    20: '250',   // 20px
-    22: '275',   // 22px
-    24: '300',   // 24px
-    28: '350',   // 28px
-    32: '400',   // 32px
-    36: '450',   // 36px
-    40: '500',   // 40px
-    42: '525',   // 42px (legacy)
-    44: '550',   // 44px
-    48: '600',   // 48px
-    52: '650',   // 52px
-    56: '700',   // 56px
-    60: '750',   // 60px
-    64: '800',   // 64px (spacing cap)
+    1: '100',
+    2: '200',
+    4: '300',
+    6: '350',
+    8: '400',
+    12: '450',
+    16: '500',
+    20: '525',
+    24: '550',
+    32: '600',
+    48: '650',
+    64: '700',
+    96: '750',
+    128: '800',
+    n1: '100-negative',
+    n2: '200-negative',
+    n4: '300-negative',
+    n6: '350-negative',
+    n8: '400-negative',
+    n12: '450-negative',
+    n16: '500-negative',
+    n24: '550-negative',
+    n32: '600-negative',
+    n48: '650-negative',
+    n64: '700-negative',
+    n96: '750-negative',
+    n128: '800-negative',
+  },
+  // Margin sizes using new spacing tokens (0-64px)
+  MARGIN_SIZES_SPACING: {
+    0: '0',
+    1: '1',
+    2: '25',
+    4: '50',
+    6: '75',
+    8: '100',
+    12: '150',
+    16: '200',
+    20: '250',
+    24: '300',
+    32: '400',
+    48: '600',
+    64: '800',
     n1: '1-negative',
     n2: '25-negative',
     n4: '50-negative',
     n6: '75-negative',
     n8: '100-negative',
-    n10: '125-negative',
     n12: '150-negative',
-    n14: '175-negative',
     n16: '200-negative',
-    n18: '225-negative',
-    n20: '250-negative',
-    n22: '275-negative',
     n24: '300-negative',
-    n28: '350-negative',
     n32: '400-negative',
-    n36: '450-negative',
-    n40: '500-negative',
-    n42: '525-negative',
-    n44: '550-negative',
     n48: '600-negative',
-    n52: '650-negative',
-    n56: '700-negative',
-    n60: '750-negative',
     n64: '800-negative',
+  },
+  // Margin sizes using layout tokens (64px+)
+  // Note: Negative layout utilities removed - not used in practice
+  MARGIN_SIZES_LAYOUT: {
+    96: '150',
+    128: '200',
   },
   REGEX_OPTIONS: {
     COLORS: [
@@ -252,62 +297,46 @@ module.exports = {
     ].join('|'),
     OPACITY_VARIATIONS: '\\d{1,3}',
   },
-  // Maps pixel values to spacing tokens (0-64px) or layout tokens (64px+)
-  // The generator needs to use --dt-spacing- for small values, --dt-layout- for large
-  WIDTH_HEIGHTS_SPACING: {
-    0: '0',
-    1: '1',      // 1px
-    2: '25',     // 2px
-    4: '50',     // 4px
-    6: '75',     // 6px
-    8: '100',    // 8px
-    10: '125',   // 10px
-    12: '150',   // 12px
-    14: '175',   // 14px
-    16: '200',   // 16px
-    18: '225',   // 18px
-    20: '250',   // 20px
-    22: '275',   // 22px
-    24: '300',   // 24px
-    28: '350',   // 28px
-    32: '400',   // 32px
-    36: '450',   // 36px
-    40: '500',   // 40px
-    42: '525',   // 42px (legacy)
-    44: '550',   // 44px
-    48: '600',   // 48px
-    52: '650',   // 52px
-    56: '700',   // 56px
-    60: '750',   // 60px
-    64: '800',   // 64px (spacing cap)
-  },
-  WIDTH_HEIGHTS_LAYOUT: {
-    64: '100',    // 64px (layout-100)
-    80: '125',    // 80px
-    96: '150',    // 96px
-    112: '175',   // 112px
-    128: '200',   // 128px (layout base)
-    160: '225',   // 160px
-    192: '250',   // 192px
-    224: '275',   // 224px
-    256: '300',   // 256px
-    288: '325',   // 288px
-    320: '350',   // 320px
-    352: '375',   // 352px
-    384: '400',   // 384px
-    448: '450',   // 448px
-    512: '500',   // 512px
-    576: '550',   // 576px
-    640: '600',   // 640px
-    704: '650',   // 704px
-    768: '700',   // 768px
-    832: '750',   // 832px
-    896: '800',   // 896px
-    960: '850',   // 960px
-    1024: '900',  // 1024px (layout cap)
-  },
-  // Legacy combined mapping for backwards compatibility during migration
   WIDTH_HEIGHTS: {
+    0: '0',
+    1: '100',
+    2: '200',
+    4: '300',
+    6: '350',
+    8: '400',
+    12: '450',
+    16: '500',
+    20: '525',
+    24: '550',
+    32: '600',
+    42: '625',
+    48: '650',
+    64: '700',
+    72: '720',
+    84: '730',
+    96: '750',
+    102: '760',
+    114: '775',
+    128: '800',
+    164: '825',
+    216: '875',
+    264: '905',
+    332: '925',
+    384: '950',
+    464: '975',
+    512: '1000',
+    628: '1020',
+    764: '1040',
+    828: '1060',
+    912: '1080',
+    1024: '1100',
+    1140: '1115',
+    1268: '1120',
+    1340: '1130',
+  },
+  // Small sizes (0-64px) using spacing tokens
+  // Maps pixel value to spacing token number (algorithmic: N = pixels / 8 * 100)
+  WIDTH_HEIGHTS_SPACING: {
     0: '0',
     1: '1',
     2: '25',
@@ -322,5 +351,48 @@ module.exports = {
     42: '525',
     48: '600',
     64: '800',
+  },
+  // Large sizes (64px+) using layout tokens
+  // Maps pixel value to layout token number
+  WIDTH_HEIGHTS_LAYOUT: {
+    64: '100',   // Also in spacing, skipped in generator
+    80: '125',
+    96: '150',
+    112: '175',
+    128: '200',
+    160: '225',
+    192: '250',
+    224: '275',
+    256: '300',
+    320: '350',
+    384: '400',
+    448: '450',
+    512: '500',
+    640: '600',
+    768: '700',
+    896: '800',
+    1024: '900',
+  },
+  // Deprecated classes - old pixel values without layout token matches
+  // These use OLD size tokens and will be removed in Dialtone v11
+  // These classes maintain backwards compatibility for values that don't
+  // align with the new spacing/layout token system
+  WIDTH_HEIGHTS_DEPRECATED: {
+    72: '720',     // 72px → --dt-size-720
+    84: '730',     // 84px → --dt-size-730
+    102: '760',    // 102px → --dt-size-760
+    114: '775',    // 114px → --dt-size-775
+    164: '825',    // 164px → --dt-size-825
+    216: '875',    // 216px → --dt-size-875
+    264: '905',    // 264px → --dt-size-905
+    332: '925',    // 332px → --dt-size-925
+    464: '975',    // 464px → --dt-size-975
+    628: '1020',   // 628px → --dt-size-1020
+    764: '1040',   // 764px → --dt-size-1040
+    828: '1060',   // 828px → --dt-size-1060
+    912: '1080',   // 912px → --dt-size-1080
+    1140: '1115',  // 1140px → --dt-size-1115
+    1268: '1120',  // 1268px → --dt-size-1120
+    1340: '1130',  // 1340px → --dt-size-1130
   },
 };

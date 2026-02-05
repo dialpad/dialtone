@@ -1,4 +1,4 @@
-<!-- eslint-disable max-len -->
+<!-- eslint-disable max-len, max-lines -->
 <template>
   <dt-stack
     as="nav"
@@ -10,7 +10,7 @@
       v-for="link in items"
       :key="link.text"
       :to="link.link"
-      class="d-btn d-btn--muted d-fw-normal"
+      class="d-btn d-btn--muted dialtone-shell-btn"
       :class="{ 'd-btn--active': isActiveLink(link.text) }"
     >
       <span class="d-btn__label">{{ link.text }}</span>
@@ -19,7 +19,7 @@
   <dt-stack direction="row" gap="300">
     <a
       v-dt-tooltip="'Storybook'"
-      class="d-btn d-btn--muted d-btn--icon-only"
+      class="d-btn d-btn--muted d-btn--icon-only dialtone-shell-btn dialtone-shell-btn"
       href="https://dialtone.dialpad.com/vue"
       target="_blank"
       rel="noreferrer noopener"
@@ -58,7 +58,7 @@
     </a>
     <a
       v-dt-tooltip="'Github Repository'"
-      class="d-btn d-btn--muted d-btn--icon-only"
+      class="d-btn d-btn--muted d-btn--icon-only dialtone-shell-btn"
       href="https://github.com/dialpad/dialtone"
       target="_blank"
       rel="noreferrer noopener"
@@ -85,7 +85,7 @@
     </a>
     <a
       v-dt-tooltip="'Codepen Template'"
-      class="d-btn d-btn--muted d-btn--icon-only"
+      class="d-btn d-btn--muted d-btn--icon-only dialtone-shell-btn"
       href="https://codepen.io/pen?template=oNmoRqO"
       target="_blank"
       rel="noopener noreferrer"
@@ -117,35 +117,204 @@
         </svg>
       </span>
     </a>
-    <dt-button
-      v-dt-tooltip:bottom="`Mode: ${currentMode.charAt(0).toUpperCase() + currentMode.slice(1)} `"
-      importance="clear"
-      kind="muted"
-      @click="toggleMode"
+    <dt-dropdown
+      id="theme-toggle-dropdown"
+      navigation-type="arrow-keys"
+      placement="bottom-start"
+      class="theme-toggle-dropdown"
+      max-height="33vh"
     >
-      <template #icon>
-        <dt-icon
-          size="400"
-          :name="currentModeIconName"
-        />
+      <template #anchor>
+        <dt-button
+          v-dt-tooltip:bottom="`Theme: ${currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1)} `"
+          class="theme-toggle-button dialtone-shell-btn"
+          importance="clear"
+          kind="muted"
+        >
+          <template #icon>
+            <dt-icon
+              size="400"
+              name="satisfied-filled"
+            />
+          </template>
+        </dt-button>
       </template>
-    </dt-button>
-    <dt-button
-      v-dt-tooltip:bottom="`Theme: ${currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1)} `"
-      :circle="true"
-      importance="clear"
-      kind="muted"
-      hidden
-      @click="toggleTheme"
-    >
-      <template #icon>
-        <dt-icon
-          class="theme-toggle-button"
-          size="400"
-          name="triangle"
-        />
+      <template #list>
+        <dt-list-item-group
+          heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+          heading="Base Theme"
+        >
+          <dt-list-item
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setTheme('dp')"
+          >
+            Dialpad (DP)
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentTheme !== 'dp' }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+        </dt-list-item-group>
+        <dt-dropdown-separator />
+        <dt-list-item-group
+          heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+          heading="Partner Themes"
+        >
+          <dt-list-item
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setTheme('tmo')"
+          >
+            T-Mobile (TMO)
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentTheme !== 'tmo' }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+        </dt-list-item-group>
+        <dt-dropdown-separator />
+        <dt-list-item-group
+          heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+          heading="Accessibility"
+        >
+          <dt-list-item
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setTheme('prota-deuter')"
+          >
+            Prota-Deuter
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentTheme !== 'prota-deuter' }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+          <dt-list-item
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setTheme('trita')"
+          >
+            Trita
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentTheme !== 'trita' }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+        </dt-list-item-group>
+        <dt-dropdown-separator />
+        <dt-list-item-group
+          heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+          heading="Named Themes"
+        >
+          <dt-list-item
+            v-for="themeName in namedThemes"
+            :key="themeName"
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setTheme(themeName)"
+          >
+            {{ formatThemeName(themeName) }}
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentTheme !== themeName }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+        </dt-list-item-group>
+        <dt-dropdown-separator />
+        <dt-list-item-group
+          heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+          heading="Experimental (37 themes)"
+        >
+          <dt-list-item
+            v-for="themeNum in numberedThemes"
+            :key="themeNum"
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setTheme(themeNum)"
+          >
+            Theme {{ themeNum }}
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentTheme !== themeNum }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+        </dt-list-item-group>
       </template>
-    </dt-button>
+    </dt-dropdown>
+    <dt-dropdown navigation-type="arrow-keys" placement="bottom-start">
+      <template #anchor>
+        <dt-button
+          v-dt-tooltip:bottom="`Mode: ${currentMode.charAt(0).toUpperCase() + currentMode.slice(1)} `"
+          importance="clear"
+          kind="muted"
+          class="dialtone-shell-btn"
+        >
+          <template #icon>
+            <dt-icon
+              size="400"
+              :name="currentModeIconName"
+            />
+          </template>
+        </dt-button>
+      </template>
+      <template #list>
+        <dt-list-item-group
+          heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+          heading="Mode"
+        >
+          <dt-list-item
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setMode('system')"
+          >
+            System
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentMode !== 'system' }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+          <dt-list-item
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setMode('light')"
+          >
+            Light
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentMode !== 'light' }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+          <dt-list-item
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setMode('dark')"
+          >
+            Dark
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentMode !== 'dark' }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+        </dt-list-item-group>
+        <dt-dropdown-separator />
+        <dt-list-item-group
+          heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+          heading="Contrast"
+        >
+          <dt-list-item
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setContrast('default')"
+          >
+            Default
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentContrast !== 'default' }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+          <dt-list-item
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setContrast('high')"
+          >
+            High
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentContrast !== 'high' }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+        </dt-list-item-group>
+      </template>
+    </dt-dropdown>
     <dt-button
       importance="outlined"
       kind="muted"
@@ -165,8 +334,7 @@
 
 <script setup>
 import { useRoute } from 'vue-router';
-import { onMounted, onUnmounted, inject, computed } from 'vue';
-import { setTheme } from '@dialpad/dialtone-tokens/themes/config';
+import { useThemeManager } from '../composables/useThemeManager';
 
 defineProps({
   items: {
@@ -177,83 +345,28 @@ defineProps({
 defineEmits(['search']);
 
 const route = useRoute();
-const currentMode = inject('currentMode');
-const currentTheme = inject('currentTheme');
-const modes = ['system', 'light', 'dark'];
-const themes = inject('themes');
-const excludedThemeNames = ['dp-deca', 'expressive'];
-const prefersDarkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-const themesKeys = Array.from(
-  new Set(
-    Object.keys(themes)
-      .filter(key => !excludedThemeNames.some(exclusion => key.startsWith(exclusion)))
-      .map(key => key.replace(/-(dark|light)/, '')),
-  ),
-);
 
-const currentModeIconName = computed(() => {
-  switch (currentMode.value) {
-    case 'dark':
-      return 'moon';
-    case 'light':
-      return 'sun';
-    default:
-      return 'circle-half-filled';
-  }
-});
+// Use theme manager composable with theme switching enabled
+const {
+  currentMode,
+  currentTheme,
+  currentContrast,
+  currentModeIconName,
+  setMode,
+  setContrast,
+  setTheme,
+  namedThemes,
+  numberedThemes,
+  formatThemeName,
+} = useThemeManager({ includeThemes: true });
+
 const isActiveLink = (text) => {
   const linkBase = text.toLowerCase();
   return route.path.search(linkBase) !== -1;
 };
-
-const toggleMode = () => {
-  const currentIndex = modes.indexOf(currentMode.value);
-  const nextIndex = (currentIndex + 1) % modes.length;
-  currentMode.value = modes[nextIndex];
-
-  setCss();
-  localStorage.setItem('preferredMode', currentMode.value);
-};
-
-const toggleTheme = () => {
-  const currentIndex = themesKeys.indexOf(currentTheme.value);
-  const nextIndex = (currentIndex + 1) % themesKeys.length;
-  currentTheme.value = themesKeys[nextIndex];
-  setCss();
-  localStorage.setItem('preferredTheme', currentTheme.value);
-};
-
-const setCss = () => {
-  if (!modes.includes(currentMode.value)) {
-    currentMode.value = 'system';
-    localStorage.setItem('preferredMode', currentMode.value);
-  }
-
-  const mode = currentMode.value === 'system' ? (prefersDarkMediaQuery.matches ? 'dark' : 'light') : currentMode.value
-
-  const preferredTheme = `${currentTheme.value}-${mode}`;
-  let theme = themes[preferredTheme];
-
-  if (!theme) {
-    const defaultTheme = `dp-${mode}`;
-    console.warn(`Theme [${preferredTheme}] does not exists, using default theme [${defaultTheme}]`);
-    theme = themes[defaultTheme];
-  }
-
-  setTheme(theme);
-};
-
-onMounted(() => {
-  prefersDarkMediaQuery.addEventListener('change', setCss);
-  setCss();
-});
-
-onUnmounted(() => {
-  prefersDarkMediaQuery.removeEventListener('change', setCss);
-});
 </script>
 
-<style>
+<style scoped>
 .theme-toggle-button {
   color: var(--dt-shell-mention-color-surface-primary);
 }

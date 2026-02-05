@@ -13,6 +13,8 @@
         "{projectRoot}/build-docs.js",
         "{projectRoot}/build-ios.js",
         "{projectRoot}/build-sd-transforms.js",
+        "{projectRoot}/build-sd-transforms-layered.js",
+        "{projectRoot}/build-layered.js",
         "{projectRoot}/dialtone-transforms.js",
         "{projectRoot}/generate-themes.js",
         "{projectRoot}/vite.config.js"

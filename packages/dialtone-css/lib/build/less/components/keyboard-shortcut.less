@@ -12,11 +12,11 @@
 //  ----------------------------------------------------------------------------
 .d-keyboard-shortcut {
   display: inline-flex;
-  gap: var(--dt-spacing-25);
+  gap: var(--dt-size-200);
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  padding-inline: var(--dt-spacing-75);
+  padding-inline: var(--dt-size-350);
   font: var(--dt-typography-body-sm);
   line-height: var(--dt-font-line-height-400);
   min-inline-size: 1lh;
@@ -36,8 +36,8 @@
   /* https://css-tricks.com/inclusively-hidden/ */
   &--sr-only:not(:focus, :active) {
     position: absolute;
-    width: 1px;
-    height: 1px;
+    inline-size: 1px;
+    block-size: 1px;
     overflow: hidden;
     white-space: nowrap;
     clip-path: inset(50%);

@@ -15,19 +15,18 @@
     //  ------------------------------------------------------------------------
     --banner-color-border: var(--dt-color-border-default);
     --banner-line-height: var(--dt-font-line-height-200);
-    --banner-dialog-padding-y: var(--dt-spacing-100);
-    --banner-dialog-padding-x: var(--dt-spacing-200);
+    --banner-dialog-padding-y: var(--dt-size-400);
+    --banner-dialog-padding-x: var(--dt-size-500);
 
     position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
+    inset-block-start: 0;
+    inset-inline: 0;
     z-index: var(--zi-navigation-fixed);
-    max-width: 100%;
-    min-height: var(--dt-size-650); // 48
+    max-inline-size: 100%;
+    min-block-size: var(--dt-size-650); // 48
     padding: 0;
     line-height: var(--banner-line-height);
-    border-bottom: 1px solid var(--banner-color-border);
+    border-block-end: 1px solid var(--banner-color-border);
     border-radius: 0;
     box-shadow: none;
 
@@ -54,14 +53,15 @@
     position: relative;
     display: flex;
     align-items: center;
-    width: 100%;
-    min-height: 100%;
+    inline-size: 100%;
+    max-inline-size: 128rem;
+    min-block-size: 100%;
     margin: 0 auto;
     padding: var(--banner-dialog-padding-y) var(--banner-dialog-padding-x);
 
     .d-notice__content {
         flex-direction: row;
-        gap: var(--dt-spacing-50);
+        gap: var(--dt-size-300);
         align-items: baseline;
     }
 

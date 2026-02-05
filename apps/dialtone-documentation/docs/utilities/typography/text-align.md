@@ -3,6 +3,8 @@ title: Text Align
 description: Utilities for controlling an element's text alignment.
 ---
 
+<FontUtilitiesNotice />
+
 ## Usage
 
 Use `d-ta-{n}` to change an element's text alignment.
@@ -32,6 +34,7 @@ Use `d-ta-{n}` to change an element's text alignment.
 
 <script setup>
   import { align } from '@data/type.json';
+  import FontUtilitiesNotice from '@baseComponents/FontUtilitiesNotice.vue';
 </script>
 
 ## Classes

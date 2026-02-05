@@ -19,7 +19,7 @@
     --notice-color-text: var(--dt-color-foreground-primary);
     --notice-color-icon: var(--notice-color-text);
     --notice-color-shadow: var(--dt-color-border-subtle);
-    --notice-padding: var(--dt-spacing-200);
+    --notice-padding: var(--dt-size-500);
     --notice-font-size: var(--dt-font-size-200);
     --notice-line-height: var(--dt-font-line-height-300);
     --notice-border-radius: var(--dt-size-400);
@@ -30,8 +30,8 @@
     display: flex;
     align-items: center;
     box-sizing: border-box;
-    width: 100%;
-    max-width: var(--dt-size-1020);
+    inline-size: 100%;
+    max-inline-size: var(--dt-size-1020);
     padding: var(--notice-padding);
     color: var(--notice-color-text);
     font-size: var(--notice-font-size);
@@ -50,7 +50,7 @@
     display: flex;
     flex: 1 auto;
     flex-direction: column;
-    margin-right: var(--dt-spacing-200);
+    margin-inline-end: var(--dt-size-500);
 }
 
 //  $$  ACTIONS
@@ -58,7 +58,7 @@
 .d-notice__actions {
     display: flex;
     flex: 0 auto;
-    gap: var(--dt-spacing-100);
+    gap: var(--dt-size-400);
     align-items: center;
 
     .d-btn {
@@ -71,11 +71,11 @@
 .d-notice__icon {
     display: flex;
     flex: 0 auto;
-    margin-right: var(--dt-spacing-150);
+    margin-inline-end: var(--dt-size-450);
     color: var(--notice-color-icon);
 
     .d-banner & {
-        margin-right: var(--dt-spacing-100);
+        margin-inline-end: var(--dt-size-400);
     }
 }
 

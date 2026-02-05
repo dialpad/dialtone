@@ -1,0 +1,12 @@
+{
+  "shell": {
+    "base": {
+      "color": {
+        "accent": {
+          "value": "#ed0026",
+          "type": "color"
+        }
+      }
+    }
+  }
+}

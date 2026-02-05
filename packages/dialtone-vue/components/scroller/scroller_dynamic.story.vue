@@ -117,10 +117,10 @@ function replaceItems () {
 }
 
 .image{
-  width: 25px;
-  height: 25px;
+  inline-size: 25px;
+  block-size: 25px;
   border-radius: 50%;
-  margin-right: 10px;
+  margin-inline-end: 10px;
   object-fit: cover;
 }
 
@@ -129,10 +129,10 @@ function replaceItems () {
   align-items: center;
   div {
     background-color: red;
-    width: 5px;
-    height: 5px;
+    inline-size: 5px;
+    block-size: 5px;
     border-radius: 25px;
-    margin-left: 5px;
+    margin-inline-start: 5px;
 
     &.enabled{
       background-color: #00ff00;

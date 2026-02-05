@@ -20,8 +20,16 @@ writeDocs();
 
 await generateDebugTheme();
 
-// Generate theme files based on tokens/theme directory
+// Generate layered token system
+console.log('\n=== Generating Layered Token System ===\n');
+const { buildLayeredTokens } = await import('./build-layered.js');
+await buildLayeredTokens(); // Generate layered CSS files
+
+// Generate theme files (now uses layered system - REPLACES old system)
 await generateThemeFiles();
+
+// Build theme files for distribution
+await buildThemeFiles();
 
 /**
  * Generates the debug theme which shows all dialtone colors as bright orange so you can easily tell what is not
@@ -41,12 +49,14 @@ async function generateDebugTheme () {
  * @param {Array} plugins - The postcss plugins to run.
  * Runs postcss on all the files in the tokens output directory with the specified plugins.
  */
-// eslint-disable-next-line complexity
+ 
 async function runPostCss (filesOrDirectory, plugins = [dialtoneTokensPlugin]) {
   const postCss = postcss(plugins);
   let files = Array.isArray(filesOrDirectory) ? filesOrDirectory : [filesOrDirectory];
   if (!Array.isArray(filesOrDirectory) && fs.lstatSync(filesOrDirectory).isDirectory()) {
-    files = fs.readdirSync(filesOrDirectory).map(file => path.join(filesOrDirectory, file));
+    files = fs.readdirSync(filesOrDirectory)
+      .map(file => path.join(filesOrDirectory, file))
+      .filter(file => fs.lstatSync(file).isFile() && file.endsWith('.css')); // Skip directories and non-CSS files
   }
   for (const file of files) {
     const css = fs.readFileSync(file);
@@ -56,5 +66,24 @@ async function runPostCss (filesOrDirectory, plugins = [dialtoneTokensPlugin]) {
     if (result.map) {
       fs.writeFileSync(file, result.map.toString());
     }
+  }
+}
+
+/**
+ * Build theme files for distribution using vite
+ */
+async function buildThemeFiles () {
+  console.log('Building theme files for distribution...');
+
+  try {
+    // Dynamic import to avoid issues if vite is not available
+    const { build } = await import('vite');
+    const viteConfig = await import('./vite.config.js');
+
+    await build(viteConfig.default);
+    console.log('Theme files built successfully');
+  } catch (error) {
+    console.error('Failed to build theme files:', error);
+    // Don't throw - allow build to continue for cases where vite build isn't critical
   }
 }

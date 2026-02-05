@@ -19,9 +19,9 @@ Use `d-ai-stretch` to stretch items across the element's cross axis. This is the
 
 ```html
 <dt-stack direction="row" class="d-ai-stretch">
-  <div class="d-py8">1</div>
-  <div class="d-py16">2</div>
-  <div class="d-py4">3</div>
+  <div>1</div>
+  <div>2</div>
+  <div>3</div>
 </dt-stack>
 ```
 
@@ -39,9 +39,9 @@ Use `d-ai-flex-start` to align items to the start of the element's cross axis.
 
 ```html
 <dt-stack direction="row" class="d-ai-flex-start">
-  <div class="d-h32">1</div>
-  <div class="d-h64">2</div>
-  <div class="d-h16">3</div>
+  <div>1</div>
+  <div>2</div>
+  <div>3</div>
 </dt-stack>
 ```
 

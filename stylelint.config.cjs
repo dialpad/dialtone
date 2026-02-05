@@ -18,6 +18,7 @@ module.exports = {
   plugins: [
     'stylelint-less',
     'stylelint-no-px',
+    '@dialpad/stylelint-plugin-dialtone',
   ],
   fix: true,
   customSyntax: 'postcss-less',
@@ -41,6 +42,7 @@ module.exports = {
 
     // override stylelint-config-standard rules
     'color-function-notation': null,
+    'color-function-alias-notation': null,
     'custom-media-pattern': null,
     'custom-property-pattern': null,
     'media-feature-name-no-vendor-prefix': null,
@@ -56,14 +58,30 @@ module.exports = {
         ignoreShorthands: ['/grid/'],
       },
     ],
+    'block-no-redundant-nested-style-rules': null,
+    'container-name-pattern': null,
+    'layer-name-pattern': null,
+    'lightness-notation': null,
+    'at-rule-descriptor-no-unknown': null,
+    'at-rule-descriptor-value-no-unknown': null,
+    'at-rule-no-deprecated': null,
+    'declaration-property-value-keyword-no-deprecated': null,
+    'media-type-no-deprecated': null,
+    'nesting-selector-no-missing-scoping-root': null,
+    'no-invalid-position-declaration': null,
+    'property-no-deprecated': null,
+    'syntax-string-no-invalid': null,
     'less/color-no-invalid-hex': null,
     'less/no-duplicate-variables': null,
     'meowtec/no-px': [
       true,
       {
-        message: 'Use dialtone variables such as line-height: var(--lh-200) or width: var(--size-600) or ' +
-        'padding: var(--space-400) rather than directly setting px. See the lib/build/less/variables folder.',
+        message: 'Use dialtone tokens such as line-height: var(--dt-size-200) or width: var(--dt-size-600) or ' +
+        'padding: var(--dt-size-400) rather than directly setting px. See https://dialtone.dialpad.com/tokens/',
       },
     ],
+
+    // dialtone plugin rules
+    '@dialpad/stylelint-plugin-dialtone/no-deprecated-space-tokens': [true, { severity: 'warning' }],
   },
 };

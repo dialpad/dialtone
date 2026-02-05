@@ -23,36 +23,109 @@ If you only need access to Dialtone's variables and customizations to build a fi
 @import (reference) "@dialpad/dialtone-css/lib/build/less/dialtone.less";
 ```
 
+## Theme and Mode
+
+Dialtone includes a powerful theming system for light/dark modes, multiple themes, and accessibility. To add theming support to your project:
+
+```bash
+npm install @dialpad/dialtone @dialpad/dialtone-tokens
+```
+
+```js
+import { initDialtoneTheme } from '@dialpad/dialtone/themes/config';
+import Dp from '@dialpad/dialtone-tokens/themes/dp';
+
+initDialtoneTheme(Dp, 'light');
+```
+
+This gives you access to multiple themes, light/dark mode switching, high contrast support, and Shadow DOM compatibility for web components.
+
+[Learn more about Theme and Mode →](/guides/theme-and-mode/)
+
 ## Usage
 
-A general overview of Dialtone's utility classes, CSS components, and Vue components.
-
-### Utility-First
-
-Dialtone's CSS library offers a framework of utility-first classes. Each class is a small, [atomic style](https://css-tricks.com/lets-define-exactly-atomic-css/) declaration that, when chained together, should mitigate most situations in which custom CSS must be written. Just write these classes right in your mark-up and you're all set!
+Dialtone's CSS library offers a framework of [CSS Utilities](/utilities/) classes. Each class is a small, [atomic style](https://css-tricks.com/lets-define-exactly-atomic-css/) declaration that, when chained together, should mitigate most situations in which custom CSS must be written. Just write these classes right in your mark-up and you're all set!
 
 <code-well-header>
-  <div class="d-body--sm d-p8 d-bgc-contrast d-fc-primary-inverted d-bar8">Box</div>
+  <dt-stack
+    direction="row"
+    gap="400"
+    justify="between"
+    class="
+      d-w100p
+      d-bar8
+      d-fc-tertiary
+      d-p16
+      d-bgc-moderate
+      d-ba
+      d-bc-subtle
+    "
+  >
+    <dt-text as="p" kind="body" size="sm" align="center" tone="tertiary" wrap="balance">
+      The quick brown fox jumps over the lazy dog.
+    </dt-text>
+    <dt-text as="p" kind="body" size="sm" align="center" tone="tertiary" wrap="balance">
+      The quick brown fox jumps over the lazy dog.
+    </dt-text>
+    <dt-text as="p" kind="body" size="sm" align="center" tone="tertiary" wrap="balance">
+      The quick brown fox jumps over the lazy dog.
+    </dt-text>
+  </dt-stack>
 </code-well-header>
 
 ```html
-<div class="d-body--sm d-p8 d-bgc-contrast d-fc-primary-inverted d-bar8">Box</div>
+<dt-stack
+  direction="row"
+  gap="400"
+  justify="between"
+  class="
+    d-w100p
+    d-bar8
+    d-fc-tertiary
+    d-p16
+    d-bgc-moderate
+    d-ba
+    d-bc-subtle
+  "
+  >
+  <dt-text as="p" kind="body" size="sm" align="center" tone="tertiary" wrap="balance">
+    The quick brown fox jumps over the lazy dog.
+  </dt-text>
+  <dt-text as="p" kind="body" size="sm" align="center" tone="tertiary" wrap="balance">
+    The quick brown fox jumps over the lazy dog.
+  </dt-text>
+  <dt-text as="p" kind="body" size="sm" align="center" tone="tertiary" wrap="balance">
+    The quick brown fox jumps over the lazy dog.
+  </dt-text>
+</dt-stack>
 ```
 
 In the above example, we used:
 
-- Our [padding utility class](/utilities/spacing/padding.md) `.d-p8` to add 8px of padding on all sides.
-- Our [background color utility class](/utilities/backgrounds/color.md) `.d-bgc-contrast`.
-- Our [font color utility class](/utilities/typography/font-color.md) `.d-fc-primary-inverted` to change the font color to the inverted primary text color.
-- Our [border radius](/utilities/borders/radius.md) `.d-bar8` for rounded corners.
-- Our [text style](/design/typography/index.md) `.d-body--sm`.
+- **[Stack component](/components/stack.md)** `<dt-stack>` to layout items in a row with consistent gap.
+- **[Text component](/components/text.md)** `<dt-text>` for typography with relevant props.
+- **[Width utility](/utilities/sizing/width.md)** `.d-w100p` for full width.
+- **[Padding utility](/utilities/spacing/padding.md)** `.d-p16` to add 16px of padding on all sides.
+- **[Background color utility](/utilities/backgrounds/color.md)** `.d-bgc-moderate` for a moderate background.
+- **[Border utility](/utilities/borders/style.md)** `.d-ba` for a border on all sides.
+- **[Border color utility](/utilities/borders/color.md)** `.d-bc-subtle` for a subtle border color.
+- **[Border radius utility](/utilities/borders/radius.md)** `.d-bar8` for rounded corners.
 
 Though an atomic CSS approach comes with many advantages, we know it also offers a notable disadvantage: reducing the CSS cascade. This is especially true for repeated UI elements, which can end up creating redundant mark-up. For these instances, Dialtone offers components.
 
 ### Components
 
 There are two methods to implement Dialtone components: Vue (recommended) and CSS. Vue is the preferred method as it's more robust and readily accessible out-of-the-box. [Get started with Vue components](https://dialtone.dialpad.com/vue/).
-In the event Dialtone Vue doesn't suit your needs, Dialtone's CSS library offers the same set of components. These may require more work to implement and make accessible, but will work in a pinch.
+
+<code-well-header>
+  <dt-button>Primary Button</dt-button>
+</code-well-header>
+
+```html
+<dt-button>Primary Button</dt-button>
+```
+
+In the event Dialtone Vue doesn't suit your needs, Dialtone's CSS library offers the same set of components in raw HTML and CSS. These may require more work to implement and make accessible, but will work in a pinch.
 
 <code-well-header>
   <button class="d-btn d-btn--primary">Primary Button</button>
@@ -100,16 +173,16 @@ In the event you need to write CSS, use [BEM (Block Element Modifier)](http://ge
 
   // Elements within block
   &__header {
-    padding: var(--dt-space-500);
+    padding: var(--dt-size-500);
   }
 
   &__body {
     flex-grow: 1;
-    padding: var(--dt-space-500);
+    padding: var(--dt-size-500);
   }
 
   &__footer {
-    padding: var(--dt-space-500);
+    padding: var(--dt-size-500);
   }
 }
 ```
