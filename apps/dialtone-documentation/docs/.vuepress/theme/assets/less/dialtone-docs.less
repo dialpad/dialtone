@@ -266,6 +266,7 @@ html body {
   padding: var(--dt-size-500) var(--dt-size-550) var(--dt-size-500) var(--dt-size-500);
   color: var(--dt-shell-color-foreground-primary);
   background-color: var(--dt-shell-color-surface-default);
+  view-transition-name: dialtone-header;
 
   > :first-child {
     justify-self: start;
@@ -913,4 +914,20 @@ code {
   html {
     scroll-padding-block-start: 13.6rem;
   }
+}
+
+// ============================================================================
+// $    VIEW TRANSITIONS
+//      Smooth header morph between home (Blank layout) and inner pages (Layout)
+// ----------------------------------------------------------------------------
+
+::view-transition-old(dialtone-header),
+::view-transition-new(dialtone-header) {
+  animation-duration: var(--td100);
+  animation-timing-function: var(--ttf-out-quint);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
 }

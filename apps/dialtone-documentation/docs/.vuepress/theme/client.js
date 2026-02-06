@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { defineClientConfig } from 'vuepress/client';
 import Layout from './layouts/Layout.vue';
 import NotFound from './layouts/NotFound.vue';
@@ -23,7 +24,7 @@ import './assets/less/dialtone-docs.less';
 import './assets/less/dialtone-syntax.less';
 
 // Import DP theme synchronously so it's available immediately on page load
-import dpTheme from '@dialpad/dialtone-tokens/themes/dp';
+import '@dialpad/dialtone-tokens/themes/dp';
 import { setMode } from '@dialpad/dialtone-tokens/themes/config';
 
 // Apply default theme immediately to prevent FOUC (Flash of Unstyled Content)
@@ -80,9 +81,38 @@ export default defineClientConfig({
       await importDialtoneThemes(app);
     }
 
-    // Navigation handling
+    // View Transitions API integration
+    let resolveViewTransition;
+
     router.beforeEach((to, from, next) => {
+      if (document.startViewTransition) {
+        const domUpdatePromise = new Promise(resolve => {
+          resolveViewTransition = resolve;
+        });
+
+        document.startViewTransition(async () => {
+          await domUpdatePromise;
+        });
+      }
       next();
+    });
+
+    router.afterEach(async () => {
+      await flushPromises();
+      resolveViewTransition?.();
+
+      // Re-initialize docsearch when layout switch recreates the #docsearch container
+      const container = document.querySelector('#docsearch');
+      if (container && !container.children.length) {
+        const docsearchModule = await import('@docsearch/js');
+        docsearchModule.default({
+          apiKey: '6436ebddb959748daeec411eb388a99d',
+          indexName: 'dialpad',
+          appId: 'Y5HG9UX6KM',
+          placeholder: 'Search',
+          container: '#docsearch',
+        });
+      }
     });
 
     router.options.scrollBehavior = async (to) => {
