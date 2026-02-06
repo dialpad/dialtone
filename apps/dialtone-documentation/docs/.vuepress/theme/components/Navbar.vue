@@ -119,7 +119,6 @@
     </a>
     <dt-dropdown
       id="theme-toggle-dropdown"
-      hidden
       navigation-type="arrow-keys"
       placement="bottom-start"
       class="theme-toggle-dropdown"
