@@ -370,6 +370,10 @@
                 "link": "/components/tabs.html"
               },
               {
+                "text": "Text",
+                "link": "/components/text.html"
+              },
+              {
                 "text": "Toast",
                 "link": "/components/toast.html"
               },
@@ -717,6 +721,10 @@
                   {
                     "text": "Line Height",
                     "link": "/utilities/typography/line-height.html"
+                  },
+                  {
+                    "text": "Line Clamp",
+                    "link": "/utilities/typography/line-clamp.html"
                   },
                   {
                     "text": "Lists",
