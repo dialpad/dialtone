@@ -19,15 +19,7 @@ Check out our complete icon collection in the [icon catalog](/foundations/icons/
 
 Here is an example that demonstrates how you can use the icon component in your project:
 
-### Vue 2
-
-```js
-import { DtIconUserPlus } from '@dialpad/dialtone-icons/vue2';
-
-<dt-icon-user-plus size="500" />
-```
-
-### Vue 3
+### With Tree Shaking (Preferred)
 
 ```js
 import { DtIconUserPlus } from '@dialpad/dialtone-icons/vue3';
@@ -52,10 +44,10 @@ Adjust the size using the `size` prop. Note that sizes 600, 700, and 800 are exc
 <div class="d-gc2">
 <code-well-header>
   <div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols2 d-w100p">
-    <div class="d-fl-center">
+    <dt-stack direction="row" align="center" justify="center">
       <dt-icon-settings :size="selectedSize" />
-    </div>
-    <dt-select-menu label="Size" :options="sizeValues" @change="changeIconSize" />
+    </dt-stack>
+    <dt-select-menu label="Size" :options="sizeValues" v-model="selectedSize" />
   </div>
 </code-well-header>
 
@@ -75,20 +67,20 @@ The icon's color inherits from the parent's foreground color.
 <div class="d-gc2">
 <code-well-header>
 <div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols2 d-w100p">
-  <div class="d-fl-center">
+  <dt-stack direction="row" align="center" justify="center">
     <dt-stack :class="selectedColor" direction="row" as="div" gap="300">
       <dt-icon-settings size="300" />
-      <p>Settings</p>
+      <dt-text>Settings</dt-text>
     </dt-stack>
-  </div>
-  <dt-select-menu label="Color" :options="iconColors" @change="changeIconColor" />
+  </dt-stack>
+  <dt-select-menu label="Color" :options="iconColors" v-model="selectedColor" />
 </div>
 </code-well-header>
 
 ```js
 <dt-stack class="d-fc-success">
   <dt-icon-settings size="300" />
-  <p>Settings</p>
+  <dt-text>Settings</dt-text>
 </dt-stack>
 ```
 
@@ -97,21 +89,21 @@ The icon's color inherits from the parent's foreground color.
 
 <div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
 
-When setting the color of an icon take these into considaration:
+When setting the color of an icon take these into consideration:
 
 <div class="d-gc1">
-<div style="background: var(--dt-color-purple-100)" class="d-p16 d-hmn164 d-bar8 d-d-flex d-ai-center">
-<dt-stack direction="row" as="section" gap="100" class="d-bgc-primary d-bar32 d-py8 d-px16 d-w100p">
+<dt-stack direction="row" align="center" class="d-p16 d-hmn164 d-bar8" style="background: var(--dt-color-purple-100)">
+<dt-stack direction="row" as="section" gap="100" class="d-bgc-primary d-bc-default d-bar32 d-py8 d-px16 d-w100p">
 <dt-stack direction="row" as="section" gap="300" class="d-fl1">
 <dt-icon name="headphones" size="300" ariaLabel="Headphones icon" />
-<p class="d-body--md d-truncate d-w100p d-wmx102">Ai Contact Center</p>
+<dt-text kind="body" truncate class="d-w100p d-wmx102">Ai Contact Center</dt-text>
 </dt-stack>
 <dt-stack direction="row" as="section" gap="300">
 <dt-icon class="d-fc-success" name="bell" size="200" ariaLabel="Bell Icon" />
-<p class="d-fc-success d-body--sm">Available</p>
+<dt-text kind="body" size="sm" tone="success">Available</dt-text>
 </dt-stack>
 </dt-stack>
-</div>
+</dt-stack>
 
 - Match the icon color with the text color when pairing them.
 - All icons are monochrome.
@@ -119,18 +111,18 @@ When setting the color of an icon take these into considaration:
 </div>
 
 <div class="d-gc1">
-<div class="d-bgc-critical-subtle-opaque d-p16 d-hmn164 d-bar8 d-d-flex d-ai-center">
-<dt-stack direction="row" as="section" gap="100" class="d-bgc-primary d-bar32 d-py8 d-px16 d-w100p">
+<dt-stack direction="row" align="center" class="d-bgc-critical-subtle-opaque d-p16 d-hmn164 d-bar8">
+<dt-stack direction="row" as="section" gap="100" class="d-bgc-primary d-bc-default d-bar32 d-py8 d-px16 d-w100p">
 <dt-stack direction="row" as="section" gap="300" class="d-fl1">
 <dt-icon name="headphones" size="300" ariaLabel="Headphones icon" />
-<p class="d-body--md d-truncate d-w100p d-wmx102">Ai Contact Center</p>
+<dt-text kind="body" truncate class="d-w100p d-wmx102">Ai Contact Center</dt-text>
 </dt-stack>
 <dt-stack direction="row" as="section" gap="300">
 <dt-icon class="d-fc-critical" name="bell" size="200" ariaLabel="Bell Icon" />
-<p class="d-fc-success d-body--sm">Available</p>
+<dt-text kind="body" size="sm" tone="success">Available</dt-text>
 </dt-stack>
 </dt-stack>
-</div>
+</dt-stack>
 
 - Don’t use different colors for text and icons.
 - Don’t use more than one color within an icon.
@@ -147,20 +139,20 @@ We encourage utilizing the [Stack component](/components/stack.md) for aligning 
 <div class="d-gc2">
 <code-well-header>
   <div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols2 d-w100p">
-    <div class="d-fl-center">
+    <dt-stack direction="row" align="center" justify="center">
       <dt-stack :direction="selectedDirection" class="d-fl-center" gap="300">
       <dt-icon-settings size="300" />
-      <p>Settings</p>
+      <dt-text>Settings</dt-text>
       </dt-stack>
-    </div>
-    <dt-select-menu label="Direction" :options="stackDirection" @change="changeDirection" />
+    </dt-stack>
+    <dt-select-menu label="Direction" :options="stackDirection" v-model="selectedDirection" />
   </div>
 </code-well-header>
 
-```js
+```html
 <dt-stack direction="row" class="d-fl-center" gap="300">
   <dt-icon-settings size="300" />
-  <p>Settings</p>
+  <dt-text>Settings</dt-text>
 </dt-stack>
 ```
 
@@ -194,8 +186,8 @@ Dialtone provides eight sizes for icons. Each of the sizes represents the width 
         <td class="d-ta-center">
           <dt-icon name="inbox" :size="size" />
         </td>
-        <td class="d-code--sm d-docsite-code">{{ width_height }}</td>
-        <td class="d-code--sm d-docsite-code">.{{ className }}</td>
+        <td><dt-text kind="code" size="sm">{{ width_height }}</dt-text></td>
+        <td><dt-text kind="code" size="sm">.{{ className }}</dt-text></td>
       </tr>
     </tbody>
   </table>
@@ -231,23 +223,8 @@ Dialtone provides eight sizes for icons. Each of the sizes represents the width 
   ];
 
   const selectedIcon = ref('settings');
-  const selectedSize = ref(500);
+  const selectedSize = ref('500');
   const selectedColor = ref('d-fc-success');
   const selectedDirection = ref('row');
 
-  const changeIcon = (newIcon) => {
-    selectedIcon.value = newIcon;
-  };
-
-  const changeIconColor = (newColor) => {
-    selectedColor.value = newColor;
-  };
-
-  const changeIconSize = (newSize) => {
-    selectedSize.value = newSize;
-  };
-
-  const changeDirection = (newDirection) => {
-    selectedDirection.value = newDirection;
-  };
 </script>

@@ -3,15 +3,7 @@ title: Font Weight
 description: Utilities to change an element's font-weight.
 ---
 
-<dt-notice
-  kind="warning"
-  :hideClose="true"
-  class="d-wmx100p"
->
-  <template #default>
-    <p class="d-body--md-compact">Before applying a typography utility, first consider using <router-link class="d-fw-semibold d-link d-link--muted" to="/foundations/typography/">Dialtone's text styles</router-link> that bundles Font family, Font weight, Font size, and Line height together.</p>
-  </template>
-</dt-notice>
+<FontUtilitiesNotice />
 
 ## Usage
 
@@ -39,7 +31,7 @@ Use `d-fw-{n}` to change an element's font-weight.
 
 ## Variables
 
-<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+<clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
       <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
@@ -56,7 +48,7 @@ Use `d-fw-{n}` to change an element's font-weight.
       </tbody>
     </table>
   </div>
-</div>
+</clamped-table-wrapper>
 
 ## Classes
 
@@ -77,4 +69,6 @@ Use `d-fw-{n}` to change an element's font-weight.
 
 <script setup>
   import { weight } from '@data/type.json';
+  import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
+  import FontUtilitiesNotice from '@baseComponents/FontUtilitiesNotice.vue';
 </script>

@@ -20,13 +20,14 @@ Set an element's z-index by using a class (`.d-zi-{level}`>). These classes matc
 
 <script setup>
   import zIndex from '@data/z-index.json';
+  import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
 </script>
 
 ## Variables
 
 When writing Less, you can set an element's z-index by using a variable (`var(--zi-{name})`). The table below lists the available variables, output, and a description for when they should be used.
 
-<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+<clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
       <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
@@ -45,4 +46,4 @@ When writing Less, you can set an element's z-index by using a variable (`var(--
       </tbody>
     </table>
   </div>
-</div>
+</clamped-table-wrapper>

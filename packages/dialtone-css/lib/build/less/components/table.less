@@ -34,7 +34,7 @@
 
     // Caption styles
     .d-table__caption {
-      margin-block-end: var(--dt-space-400); // 8
+      margin-block-end: var(--dt-size-400); // 8
       color: var(--table-th-color-text);
       font-weight: var(--dt-font-weight-bold);
       font-size: var(--table-font-size);
@@ -67,7 +67,7 @@
     // Header & Cell Styles
     th,
     td {
-        padding: var(--dt-space-500); // 16
+        padding: var(--dt-size-500); // 16
         text-align: start;
         border-block-end: var(--dt-size-100) solid var(--table-color-border);
     }
@@ -112,7 +112,7 @@
     &.d-table--inverted {
         // Row Styles
         tr:nth-child(even) {
-            background-color: hsla(var(--bgc-primary-hsl) / 0.1);
+            background-color: hsl(var(--bgc-primary-hsl) / 0.1);
         }
     }
 }

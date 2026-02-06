@@ -10,7 +10,7 @@ keywords: ["profile picture","user image","profile image","d-avatar","DtAvatar",
 ---
 
 <code-well-header>
-  <div class="d-d-flex d-ai-center d-flow16">
+  <dt-stack direction="row" align="center" gap="500">
     <dt-avatar size="lg">
       <template #icon="{ iconSize }">
         <dt-icon-user :size="iconSize" />
@@ -18,7 +18,7 @@ keywords: ["profile picture","user image","profile image","d-avatar","DtAvatar",
     </dt-avatar>
     <dt-avatar size="lg" full-name="dp" color="1000" presence="busy" />
     <dt-avatar size="lg" image-src="/assets/images/person.png" image-alt="avatar user" presence="active" />
-  </div>
+  </dt-stack>
 </code-well-header>
 
 <!-- <component-combinator component-name="DtAvatar" /> -->
@@ -164,13 +164,13 @@ vueCode='
 ### Sizes
 
 <code-well-header>
-    <div class="d-d-inline-flex d-ai-center d-flow8">
+    <dt-stack direction="row" align="center" gap="500">
         <dt-avatar v-for="size in sizes" :size="size">
           <template #icon="{ iconSize }">
             <dt-icon-user :size="iconSize" />
           </template>
         </dt-avatar>
-    </div>
+    </dt-stack>
 </code-well-header>
 
 <code-example-tabs
@@ -232,16 +232,25 @@ vueCode='
 
 ### Group
 
+Adds a count badge and CSS mask to the avatar based on the number of digits (1, 2, or 3). Currently available only with the `xs` avatar size.
+
 <code-well-header>
-    <div class="d-d-inline-flex d-ai-center d-flow8">
+    <dt-stack direction="row" align="center" gap="500">
+        <dt-avatar :group="100" image-src="/assets/images/person.png" image-alt="Person Avatar" />
         <dt-avatar :group="11" image-src="/assets/images/person.png" image-alt="Person Avatar" />
         <dt-avatar :group="3" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-    </div>
+    </dt-stack>
 </code-well-header>
 
 <code-example-tabs
 htmlCode='
-<div class="d-avatar d-avatar--group">
+<div class="d-avatar d-avatar--group d-avatar--group-digits-3">
+  <div class="d-avatar__canvas">
+    <img class="d-avatar__image" src="/assets/images/person.png" alt="Person Avatar"/>
+  </div>
+  <span class="d-avatar__count"><span class="d-avatar__count-number">12</span></span>
+</div>
+<div class="d-avatar d-avatar--group d-avatar--group-digits-2">
   <div class="d-avatar__canvas">
     <img class="d-avatar__image" src="/assets/images/person.png" alt="Person Avatar"/>
   </div>
@@ -255,6 +264,7 @@ htmlCode='
 </div>
 '
 vueCode='
+<dt-avatar :group="100" image-src="/assets/images/person.png" image-alt="Person Avatar" />
 <dt-avatar :group="11" image-src="/assets/images/person.png" image-alt="Person Avatar" />
 <dt-avatar :group="3" image-src="/assets/images/person.png" image-alt="Person Avatar" />
 '
@@ -262,35 +272,146 @@ vueCode='
 
 ### Presence
 
-Positions the [Presence](/components/presence.md) component at each size.
+Positions the [Presence](/components/presence.md) component at each size and applies a CSS mask to the avatar.
 
 <code-well-header>
-    <div class="d-d-inline-flex d-ai-center d-flow8">
-        <dt-avatar size="xs" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar size="sm" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar size="md" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar size="lg" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar size="xl" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-    </div>
-    <div class="d-d-inline-flex d-ai-center d-flow8">
-        <dt-avatar size="xs" presence="active" color="1200" />
-        <dt-avatar size="sm" presence="away" color="500" full-name="W" />
-        <dt-avatar size="md" presence="busy" color="800" full-name="FR" />
-        <dt-avatar size="lg" presence="offline" color="1200" full-name="JH" />
-        <dt-avatar size="xl" color="1500" full-name="AE" />
-    </div>
+  <dt-stack gap="400">
+      <dt-stack direction="row" align="center" gap="400">
+          <dt-avatar size="xs" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+          <dt-avatar size="sm" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+          <dt-avatar size="md" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+          <dt-avatar size="lg" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+          <dt-avatar size="xl" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      </dt-stack>
+      <dt-stack direction="row" align="center" gap="400">
+          <dt-avatar size="xs" presence="active" color="1200" full-name="Test Name" />
+          <dt-avatar size="sm" presence="away" color="500" full-name="William Steele" />
+          <dt-avatar size="md" presence="busy" color="800" full-name="Frank Richard" />
+          <dt-avatar size="lg" presence="offline" color="1200" full-name="John Hawkins" />
+          <dt-avatar size="xl" presence="active" color="1500" full-name="Alice Edwards" />
+      </dt-stack>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
 htmlCode='
-<div class="d-avatar d-avatar--{$size)">
+<!-- First set with images -->
+<div class="d-avatar d-avatar--xs d-avatar--color-100 d-avatar--presence">
   <div class="d-avatar__canvas">
-    ...
+    <img
+      class="d-avatar__image"
+      src="/assets/images/person.png"
+      alt="Person Avatar"
+    />
   </div>
-  <div class="d-avatar__presence">
-    <div class="d-presence d-avatar__presence d-avatar__presence--md"><!---->
-      <div class="d-presence__inner d-presence__inner--{$status}" />
-    </div>
+  <div class="d-presence d-avatar__presence" role="status" aria-live="off">
+    <div class="d-presence__inner d-presence__inner--active"></div>
+  </div>
+</div>
+<div class="d-avatar d-avatar--sm d-avatar--color-1100 d-avatar--presence">
+  <div class="d-avatar__canvas">
+    <img
+      class="d-avatar__image"
+      src="/assets/images/person.png"
+      alt="Person Avatar"
+    />
+  </div>
+  <div class="d-presence d-avatar__presence" role="status" aria-live="off">
+    <div class="d-presence__inner d-presence__inner--away"></div>
+  </div>
+</div>
+<div class="d-avatar d-avatar--md d-avatar--color-1300 d-avatar--presence">
+  <div class="d-avatar__canvas">
+    <img
+      class="d-avatar__image"
+      src="/assets/images/person.png"
+      alt="Person Avatar"
+    />
+  </div>
+  <div
+    class="d-presence d-avatar__presence d-avatar__presence--md"
+    role="status"
+    aria-live="off"
+  >
+    <div class="d-presence__inner d-presence__inner--busy"></div>
+  </div>
+</div>
+<div class="d-avatar d-avatar--lg d-avatar--color-1200 d-avatar--presence">
+  <div class="d-avatar__canvas">
+    <img
+      class="d-avatar__image"
+      src="/assets/images/person.png"
+      alt="Person Avatar"
+    />
+  </div>
+  <div
+    class="d-presence d-avatar__presence d-avatar__presence--lg"
+    role="status"
+    aria-live="off"
+  >
+    <div class="d-presence__inner d-presence__inner--offline"></div>
+  </div>
+</div>
+<div class="d-avatar d-avatar--xl d-avatar--color-900 d-avatar--presence">
+  <div class="d-avatar__canvas">
+    <img
+      class="d-avatar__image"
+      src="/assets/images/person.png"
+      alt="Person Avatar"
+    />
+  </div>
+  <div class="d-presence d-avatar__presence" role="status" aria-live="off">
+    <div class="d-presence__inner d-presence__inner--active"></div>
+  </div>
+</div>
+
+<!-- Second set with initials -->
+<div class="d-avatar d-avatar--xs d-avatar--color-1200 d-avatar--presence">
+  <div class="d-avatar__canvas">
+    <span class="d-avatar__initials"></span>
+  </div>
+  <div class="d-presence d-avatar__presence" role="status" aria-live="off">
+    <div class="d-presence__inner d-presence__inner--active"></div>
+  </div>
+</div>
+<div class="d-avatar d-avatar--sm d-avatar--color-500 d-avatar--presence">
+  <div class="d-avatar__canvas">
+    <span class="d-avatar__initials">W</span>
+  </div>
+  <div class="d-presence d-avatar__presence" role="status" aria-live="off">
+    <div class="d-presence__inner d-presence__inner--away"></div>
+  </div>
+</div>
+<div class="d-avatar d-avatar--md d-avatar--color-800 d-avatar--presence">
+  <div class="d-avatar__canvas">
+    <span class="d-avatar__initials">FR</span>
+  </div>
+  <div
+    class="d-presence d-avatar__presence d-avatar__presence--md"
+    role="status"
+    aria-live="off"
+  >
+    <div class="d-presence__inner d-presence__inner--busy"></div>
+  </div>
+</div>
+<div class="d-avatar d-avatar--lg d-avatar--color-1200 d-avatar--presence">
+  <div class="d-avatar__canvas">
+    <span class="d-avatar__initials">JH</span>
+  </div>
+  <div
+    class="d-presence d-avatar__presence d-avatar__presence--lg"
+    role="status"
+    aria-live="off"
+  >
+    <div class="d-presence__inner d-presence__inner--offline"></div>
+  </div>
+</div>
+<div class="d-avatar d-avatar--xl d-avatar--color-1500 d-avatar--presence">
+  <div class="d-avatar__canvas">
+    <span class="d-avatar__initials">AE</span>
+  </div>
+  <div class="d-presence d-avatar__presence" role="status" aria-live="off">
+    <div class="d-presence__inner d-presence__inner--active"></div>
   </div>
 </div>
 '
@@ -299,26 +420,26 @@ vueCode='
 <dt-avatar size="sm" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
 <dt-avatar size="md" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
 <dt-avatar size="lg" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-<dt-avatar size="xl" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-<dt-avatar size="xs" presence="active" color="1200" />
-<dt-avatar size="sm" presence="away" color="500" full-name="W" />
-<dt-avatar size="md" presence="busy" color="800" full-name="FR" />
-<dt-avatar size="lg" presence="offline" color="1200" full-name="JH" />
-<dt-avatar size="xl" color="1500" full-name="AE" />
+<dt-avatar size="xl" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+<dt-avatar size="xs" presence="active" color="1200" full-name="Test Name" />
+<dt-avatar size="sm" presence="away" color="500" full-name="William Steele" />
+<dt-avatar size="md" presence="busy" color="800" full-name="Frank Richard" />
+<dt-avatar size="lg" presence="offline" color="1200" full-name="John Hawkins" />
+<dt-avatar size="xl" presence="active" color="1500" full-name="Alice Edwards" />
 '
 />
 
 ### Overlay
 
 <code-well-header>
-  <div class="d-d-flex d-ai-center d-flow16">
+  <dt-stack direction="row" align="center" gap="500">
     <dt-avatar size="lg" image-src="/assets/images/person.png" image-alt="avatar user">
       <template #overlayIcon>
         <dt-icon-hear />
       </template>
     </dt-avatar>
     <dt-avatar size="lg" image-src="/assets/images/person.png" image-alt="avatar user" overlay-text="+3" />
-  </div>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
@@ -352,13 +473,13 @@ vueCode='
 If you need to create a clickable avatar you can set the clickable prop. This will make the avatar a clickable component, set some styling and will be navigable by keyboard. In order for the clickable avatar to be fully accessible, you need to either set `full-name`, `image-alt` or `icon-aria-label` attributes.
 
 <code-well-header>
-  <div class="d-d-flex d-ai-center d-flow16">
+  <dt-stack direction="row" align="center" gap="500">
     <dt-avatar clickable icon-aria-label="user" ref="example-clickable">
       <template #icon="{ iconSize }">
         <dt-icon-user :size="iconSize" />
       </template>
     </dt-avatar>
-  </div>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
@@ -377,9 +498,9 @@ vueCode='
 You may use a seed to make the randomly generated color be the same every time for that seed. This is useful if you want users to always have the same color, just pass in their unique user ID as the seed.
 
 <code-well-header>
-  <div class="d-d-flex d-ai-center d-flow16">
+  <dt-stack direction="row" align="center" gap="500">
     <dt-avatar full-name="Jaqueline Nackos" seed="X5G3D7D3DS3WL7" ref="example-seeded" />
-  </div>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs

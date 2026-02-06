@@ -1,7 +1,7 @@
 <template>
   <dt-tab-group class="code-example-tab-group" @change="selectedPanelId = $event.selected">
     <template #tabs>
-      <div class="d-d-flex d-jc-space-between d-ai-flex-start d-w100p">
+      <dt-stack direction="row" justify="between" align="start" class="d-w100p">
         <div>
           <dt-tab
             :id="vueTabId"
@@ -27,13 +27,13 @@
         >
           Copy Code
         </copy-button>
-      </div>
+      </dt-stack>
     </template>
     <dt-tab-panel
       :id="vuePanelId"
       :tab-id="vueTabId"
     >
-      <div v-dt-scrollbar class="language-html d-hmx332" data-ext="html">
+      <div ref="vuePanelRef" v-dt-scrollbar class="language-html d-hmx332" data-ext="html">
         <pre class="language-html" v-html="highlightedVue" />
       </div>
     </dt-tab-panel>
@@ -50,20 +50,40 @@
       >
         Raw HTML renders visuals only. You may need to add JS to replicate its functionality.
       </dt-banner>
-      <div v-dt-scrollbar class="language-html d-hmx332" data-ext="html">
+      <div ref="htmlPanelRef" v-dt-scrollbar class="language-html d-hmx332" data-ext="html">
         <pre class="language-html" v-html="highlightedHtml" />
       </div>
     </dt-tab-panel>
+    <div
+      v-if="shouldShowButton"
+      class="code-example-tab-group__more d-ps-absolute d-bn16 d-l50p"
+      aria-hidden="true"
+    >
+      <dt-button
+        class="code-example-tab-group__more-btn d-bgc-secondary d-bs-sm"
+        kind="muted"
+        importance="outlined"
+        icon-position="right"
+        size="sm"
+        @click="expandCodeBlocks"
+      >
+        Show all
+        <template #icon="{ iconSize }">
+          <dt-icon name="arrow-down" :size="iconSize" />
+        </template>
+      </dt-button>
+    </div>
   </dt-tab-group>
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, ref, nextTick } from 'vue';
 import Prism from 'prismjs';
 import prettier from 'prettier/standalone';
 import htmlParser from 'prettier/plugins/html.mjs';
 import CopyButton from './CopyButton.vue';
 import { getUniqueString } from '@workspaceRoot/common/utils/client.mjs';
+import { useDocExpandable } from '../composables/useDocExpandable.js';
 
 const props = defineProps({
   /**
@@ -120,12 +140,34 @@ const htmlPanelId = getUniqueString();
 
 const selectedPanelId = ref(vuePanelId);
 
+// Expandable functionality
+const vuePanelRef = ref(null);
+const htmlPanelRef = ref(null);
+const { shouldShowButton, handleExpand, initExpandable } = useDocExpandable({
+  maxHeightClass: 'd-hmx332',
+});
+
+/**
+ * Expand all code blocks by removing max-height class.
+ */
+const expandCodeBlocks = () => {
+  const panels = [vuePanelRef.value, htmlPanelRef.value].filter(Boolean);
+  handleExpand(panels);
+};
+
 onMounted(async () => {
   if (typeof props.htmlCode === 'function') {
     const componentRef = props.htmlCode();
     const el = componentRef.$el ?? componentRef;
     const formatted = await formatHTML(el.outerHTML);
     formattedHTML.value = formatted;
+  }
+
+  // Initialize expandable after content is rendered
+  await nextTick();
+  const activePanel = selectedPanelId.value === vuePanelId ? vuePanelRef.value : htmlPanelRef.value;
+  if (activePanel) {
+    initExpandable(activePanel);
   }
 });
 
@@ -158,10 +200,16 @@ const formatHTML = async (elementHTML) => {
 
 <style scoped lang="less">
 .code-example-tab-group {
-  margin-top: var(--dt-space-500);
+  margin-top: var(--dt-size-500);
+  position: relative;
+
   .language-html {
     margin-top: 0;
     position: relative;
+  }
+
+  &__more {
+    transform: translateX(calc(var(--dt-size-50-percent) * -1));
   }
 }
 </style>

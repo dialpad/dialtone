@@ -10,7 +10,7 @@ description: Utilities for setting an element's interior spacing between child e
 ## Add Padding to All Sides
 
 <code-well-header>
-  <div class="d-h128 d-w128 d-p16 d-bar8 d-bgc-bold d-of-hidden"><div class="d-fl-center d-fl1 d-h100p d-bgc-moderate d-bar4 d-code--md">d-p16</div></div>
+  <div class="d-h128 d-w128 d-p16 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-fl1 d-h100p d-bgc-moderate d-bar4 d-code--md">d-p16</dt-stack></div>
 </code-well-header>
 
 ```html
@@ -20,12 +20,12 @@ description: Utilities for setting an element's interior spacing between child e
 ## Add Padding to a Single Side
 
 <code-well-header>
-  <div class="d-d-flex d-fw-wrap d-ai-start d-jc-center d-w100p d-flow24">
-    <div class="d-as-center d-pt12 d-bar8 d-bgc-bold d-of-hidden"><div class="d-fl-center d-p16 d-bgc-moderate d-bbr4 d-code--md">d-pt12</div></div>
-    <div class="d-as-center d-pr16 d-bar8 d-bgc-bold d-of-hidden"><div class="d-fl-center d-p16 d-bgc-moderate d-brl4 d-code--md">d-pr16</div></div>
-    <div class="d-as-center d-pb24 d-bar8 d-bgc-bold d-of-hidden"><div class="d-fl-center d-p16 d-bgc-moderate d-btr4 d-code--md">d-pb24</div></div>
-    <div class="d-as-center d-pl32 d-bar8 d-bgc-bold d-of-hidden"><div class="d-fl-center d-p16 d-bgc-moderate d-brr4 d-code--md">d-pl32</div></div>
-  </div>
+  <dt-stack direction="row" justify="center" gap="550" class="d-fw-wrap d-w100p">
+    <div class="d-as-center d-pt12 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bbr4 d-code--md">d-pt12</dt-stack></div>
+    <div class="d-as-center d-pr16 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-brl4 d-code--md">d-pr16</dt-stack></div>
+    <div class="d-as-center d-pb24 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-btr4 d-code--md">d-pb24</dt-stack></div>
+    <div class="d-as-center d-pl32 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-brr4 d-code--md">d-pl32</dt-stack></div>
+  </dt-stack>
 </code-well-header>
 
 ```html
@@ -38,7 +38,7 @@ description: Utilities for setting an element's interior spacing between child e
 ## Add Horizontal Padding
 
 <code-well-header>
-  <div class="d-as-center d-px16 d-bar8 d-bgc-bold d-of-hidden"><div class="d-fl-center d-p16 d-bgc-moderate d-code--md">d-px16</div></div>
+  <div class="d-as-center d-px16 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-code--md">d-px16</dt-stack></div>
 </code-well-header>
 
 ```html
@@ -48,7 +48,7 @@ description: Utilities for setting an element's interior spacing between child e
 ## Add Vertical Padding
 
 <code-well-header>
-  <div class="d-as-center d-py16 d-bar8 d-bgc-bold d-of-hidden"><div class="d-fl-center d-p16 d-bgc-moderate d-code--md">d-py16</div></div>
+  <div class="d-as-center d-py16 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-code--md">d-py16</dt-stack></div>
 </code-well-header>
 
 ```html

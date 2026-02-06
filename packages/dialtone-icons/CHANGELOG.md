@@ -1,8 +1,43 @@
-## [4.44.2-next.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.44.1...dialtone-icons/v4.44.2-next.1) (2025-10-08)
+## [4.47.2](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.47.1...dialtone-icons/v4.47.2) (2026-01-15)
+
+## [4.47.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.47.0...dialtone-icons/v4.47.1) (2026-01-13)
+
+# [4.47.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.46.1...dialtone-icons/v4.47.0) (2025-12-23)
+
+
+### Bug Fixes
+
+* **Icons:** optical alignment NO-JIRA ([#1003](https://github.com/dialpad/dialtone/issues/1003)) ([ac9cba6](https://github.com/dialpad/dialtone/commit/ac9cba68f77cbd2807e47d68bc3ff7b2fd9d0448))
+
+
+### Features
+
+* **Icons:** new density line spacing icons DLT-2874 ([#1004](https://github.com/dialpad/dialtone/issues/1004)) ([5767ede](https://github.com/dialpad/dialtone/commit/5767ede12c8fc7ee6c3c735c23d62181c0e57154))
+
+## [4.46.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.46.0...dialtone-icons/v4.46.1) (2025-12-03)
+
+
+### Bug Fixes
+
+* **Docs:** DLT-2849 fix dt-select-menu values in documentation pages ([#984](https://github.com/dialpad/dialtone/issues/984)) ([a60aa76](https://github.com/dialpad/dialtone/commit/a60aa760e578d822cb23eb737942fe3f8c62dd2a))
+
+# [4.46.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.45.1...dialtone-icons/v4.46.0) (2025-12-02)
+
+
+### Features
+
+* **Icon:** DP-166633 add bracket left right icon ([#982](https://github.com/dialpad/dialtone/issues/982)) ([278c2a4](https://github.com/dialpad/dialtone/commit/278c2a440fa60f58c47371442aa21edbc1e739ce))
+
+## [4.45.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.45.0...dialtone-icons/v4.45.1) (2025-11-26)
+
+# [4.45.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.44.1...dialtone-icons/v4.45.0) (2025-11-13)
+
+
+### Features
+
+* **Mcp Server:** DLT-2837 add icon search tool ([#967](https://github.com/dialpad/dialtone/issues/967)) ([25d4d7d](https://github.com/dialpad/dialtone/commit/25d4d7dccce543473342cd2b4211cefbb732e486))
 
 ## [4.44.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.44.0...dialtone-icons/v4.44.1) (2025-10-06)
-
-## [4.44.1-next.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.44.0...dialtone-icons/v4.44.1-next.1) (2025-09-17)
 
 # [4.44.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.43.0...dialtone-icons/v4.44.0) (2025-09-10)
 
@@ -388,6 +423,34 @@
 ### Documentation
 
 * NO-JIRA github doc update ([#298](https://github.com/dialpad/dialtone/issues/298)) ([99d24b3](https://github.com/dialpad/dialtone/commit/99d24b3bf8d6802afd418dfaba3290b164be6c03))
+
+## [4.15.1-alpha.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.15.0...dialtone-icons/v4.15.1-alpha.1) (2024-05-03)
+
+
+### Code Refactoring
+
+* linter changes ([df290fe](https://github.com/dialpad/dialtone/commit/df290feaf001c8732ed17f8939348174dbe63f7b))
+
+## [4.15.1-alpha.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.15.0...dialtone-icons/v4.15.1-alpha.1) (2024-05-03)
+
+
+### Code Refactoring
+
+* linter changes ([df290fe](https://github.com/dialpad/dialtone/commit/df290feaf001c8732ed17f8939348174dbe63f7b))
+
+## [4.15.1-alpha.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.15.0...dialtone-icons/v4.15.1-alpha.1) (2024-05-03)
+
+
+### Code Refactoring
+
+* linter changes ([df290fe](https://github.com/dialpad/dialtone/commit/df290feaf001c8732ed17f8939348174dbe63f7b))
+
+## [4.15.1-alpha.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.15.0...dialtone-icons/v4.15.1-alpha.1) (2024-05-03)
+
+
+### Code Refactoring
+
+* linter changes ([df290fe](https://github.com/dialpad/dialtone/commit/df290feaf001c8732ed17f8939348174dbe63f7b))
 
 ## [4.15.1-alpha.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.15.0...dialtone-icons/v4.15.1-alpha.1) (2024-05-03)
 

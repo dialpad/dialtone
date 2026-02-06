@@ -26,9 +26,8 @@ export const THEMES = [
 
 export const CATEGORY_MAP = {
   color: ['color', 'opacity', 'shell'],
-  typography: ['typography', 'font'],
+  typography: ['typography', 'font', 'text'],
   size: ['size'],
-  space: ['space'],
   shadow: ['shadow'],
   component: ['topbar', 'sidebar', 'presence', 'mention', 'avatar', 'badge', 'checkbox', 'icon', 'inputs', 'action'],
 };
@@ -38,6 +37,14 @@ export const SUBCATEGORY_MAP = {
   font: ['family', 'weight', 'size'],
   size: ['radius', 'border'],
 };
+
+export const DEPRECATED_PATTERNS = [
+  'typography-headline-',
+  'typography-body-',
+  'typography-label-',
+  'typography-helper-',
+  'typography-code-',
+];
 
 export const getTokensStructure = () => ({
   color: {
@@ -53,10 +60,13 @@ export const getTokensStructure = () => ({
     link: {
       _children: [],
     },
-    neutral: {
+    theme: {
       _children: [],
     },
-    theme: {
+    chart: {
+      _children: [],
+    },
+    neutral: {
       _children: [],
     },
     opacity: {
@@ -65,30 +75,27 @@ export const getTokensStructure = () => ({
     components: {
       _children: [],
     },
-    chart: {
-      _children: [],
-    },
     base: {
       _children: [],
     },
   },
   typography: {
-    'font style': {
+    'text style': {
       _children: [],
     },
-    'font family': {
+    'font size': {
       _children: [],
     },
     'font weight': {
       _children: [],
     },
-    textcase: {
-      _children: [],
-    },
     'line height': {
       _children: [],
     },
-    'font size': {
+    'font family': {
+      _children: [],
+    },
+    textcase: {
       _children: [],
     },
     components: {
@@ -115,17 +122,6 @@ export const getTokensStructure = () => ({
       _children: [],
     },
     components: {
-      _children: [],
-    },
-  },
-  space: {
-    base: {
-      _children: [],
-    },
-    negative: {
-      _children: [],
-    },
-    percentage: {
       _children: [],
     },
   },

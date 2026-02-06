@@ -1,5 +1,5 @@
 <template>
-  <div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+  <clamped-table-wrapper>
     <div>
       <table class="d-table dialtone-doc-table">
         <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
@@ -34,35 +34,51 @@
         <tbody>
           <tr v-for="color in themeColors" :key="color.variable">
             <td>
-              <div v-if="color.section === 'sidebar icon'" class="d-d-flex d-ai-center d-jc-center" title="Sample icon">
-                <dt-icon name="info" :style="{ color: `var(--${color.variable})` }" />
-              </div>
-              <div
-                v-else-if="color.section === 'mention' && color.property === 'color'"
-                class="d-d-flex d-ai-center d-jc-center"
+              <dt-stack
+                v-if="color.section === 'sidebar icon'"
+                direction="row"
+                align="center"
+                justify="center"
+                title="Sample icon"
               >
-                <div
+                <dt-icon name="info" :style="{ color: `var(--${color.variable})` }" />
+              </dt-stack>
+              <dt-stack
+                v-else-if="color.section === 'mention' && color.property === 'color'"
+                direction="row"
+                align="center"
+                justify="center"
+              >
+                <dt-stack
+                  direction="row"
+                  align="center"
+                  justify="center"
+                  class="d-bar-circle d-w42 d-h42 d-fs-300 d-fw-medium"
                   :style="{
                     color: `var(${color.variable})`,
                     'background-color': `var(--dt-shell-mention-color-background)`,
                   }"
-                  class="d-bar-circle d-w42 d-h42 d-fs-300 d-d-flex d-ai-center d-jc-center d-fw-medium"
                 >
-                  Aa
-                </div>
-              </div>
-              <div v-else-if="color.property === 'background-color'" class="d-d-flex d-ai-center d-jc-center">
+                  Ag
+                </dt-stack>
+              </dt-stack>
+              <dt-stack
+                v-else-if="color.property === 'background-color'"
+                direction="row"
+                align="center"
+                justify="center"
+              >
                 <div
                   :style="{ backgroundColor: `var(${color.variable})` }"
                   class="d-w42 d-h42 d-bar-circle d-ba d-bc-subtle"
                 />
-              </div>
+              </dt-stack>
               <div
                 v-else-if="color.property === 'color'"
                 :style="{ color: `var(${color.variable})` }"
                 class="d-fs-300 d-p6 d-ta-center d-fw-medium"
               >
-                Aa
+                Ag
               </div>
               <div
                 v-else-if="color.property === 'border-color'"
@@ -82,11 +98,12 @@
         </tbody>
       </table>
     </div>
-  </div>
+  </clamped-table-wrapper>
 </template>
 
 <script setup>
 import { inject } from 'vue';
+import ClampedTableWrapper from './ClampedTableWrapper.vue';
 import { alphabeticalSorter } from '@utilities';
 
 const tokensDocs = inject('tokensDocs');

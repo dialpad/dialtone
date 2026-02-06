@@ -1,5 +1,5 @@
 import tokensJson from '@dialpad/dialtone-tokens/dist/doc.json';
-import { CATEGORY_MAP, SUBCATEGORY_MAP, FORMAT_MAP, MODES, THEMES, getTokensStructure } from './constants';
+import { CATEGORY_MAP, SUBCATEGORY_MAP, FORMAT_MAP, MODES, THEMES, DEPRECATED_PATTERNS, getTokensStructure } from './constants';
 
 /**
   Process the file tokensJson and fill processedTokens with the data we want to show.
@@ -24,6 +24,9 @@ export const addTokensToStructure = (structure) => {
         Object.entries(combined).forEach((token) => {
           addTokensToCategories(token, format, structure[format][themeKey]);
         });
+
+        // Sort text style tokens: text first, then typography, each by type then size
+        structure[format][themeKey].typography['text style']._children.sort(sortFontStyleTokens);
       }
     }
   });
@@ -41,6 +44,33 @@ const splitCompositionTokenIntoArray = (value) => {
   return value;
 };
 
+/**
+ * Sort text style tokens: text tokens first, then typography tokens,
+ * each sorted by type (headline, body, label, code, etc.) then by size (3xl -> xs)
+ */
+const TYPE_ORDER = ['headline', 'body', 'label', 'code', 'helper', 'button', 'inputs'];
+const SIZE_ORDER = ['3xl', '2xl', 'xl', 'lg', 'md', 'sm', 'xs'];
+
+const sortFontStyleTokens = (a, b) => {
+  const aName = a.name || a.exampleName || '';
+  const bName = b.name || b.exampleName || '';
+
+  // Text tokens before typography tokens
+  const aIsText = aName.includes('--dt-text');
+  const bIsText = bName.includes('--dt-text');
+  if (aIsText !== bIsText) return aIsText ? -1 : 1;
+
+  // Sort by type
+  const aType = TYPE_ORDER.findIndex(t => aName.includes(t));
+  const bType = TYPE_ORDER.findIndex(t => bName.includes(t));
+  if (aType !== bType) return aType - bType;
+
+  // Sort by size
+  const aSize = SIZE_ORDER.findIndex(s => aName.includes(`-${s})`));
+  const bSize = SIZE_ORDER.findIndex(s => bName.includes(`-${s})`));
+  return aSize - bSize;
+};
+
 // eslint-disable-next-line complexity
 const addTokensToCategories = (token, format, structure) => {
   const [key, value] = token;
@@ -48,7 +78,8 @@ const addTokensToCategories = (token, format, structure) => {
 
   const { name, value: tokenValue, description, keywords, isCompositionToken } = value[FORMAT_MAP[format]];
   const { value: exampleValue, name: exampleName } = value[FORMAT_MAP.CSS];
-  const displayToken = { exampleValue, exampleName, name, tokenValue, description, keywords };
+  const deprecated = isDeprecatedToken(exampleName);
+  const displayToken = { exampleValue, exampleName, name, tokenValue, description, keywords, deprecated };
 
   if (isCompositionToken) {
     displayToken.tokenValue = splitCompositionTokenIntoArray(tokenValue);
@@ -90,7 +121,7 @@ const addTokensToCategories = (token, format, structure) => {
 
   // TYPOGRAPHY
   if (key.startsWith('typography')) {
-    structure.typography['font style']._children.push({ ...displayToken, hidden: !isCompositionToken });
+    structure.typography['text style']._children.push({ ...displayToken, hidden: !isCompositionToken });
     return;
   }
 
@@ -113,6 +144,12 @@ const addTokensToCategories = (token, format, structure) => {
   if (CATEGORY_MAP.component.includes(splitKeys[0]) &&
     (splitKeys[1] === 'font' || splitKeys[1] === 'lineHeight')) {
     structure.typography.components._children.push(displayToken);
+    return;
+  }
+
+  // TEXT (display alongside typography in Font Style)
+  if (key.startsWith('text')) {
+    structure.typography['text style']._children.push({ ...displayToken, hidden: !isCompositionToken });
     return;
   }
 
@@ -162,20 +199,8 @@ const addTokensToCategories = (token, format, structure) => {
     return;
   }
 
-  // SPACE
-  if (key.startsWith('space') && key.endsWith('negative')) {
-    structure.space.negative._children.push(displayToken);
-    return;
-  }
-
-  if (key.startsWith('space') && key.endsWith('percent')) {
-    structure.space.percentage._children.push(displayToken);
-    return;
-  }
-
-  if (key.startsWith('space')) {
-    structure.space.base._children.push(displayToken);
-  }
+  // SPACE tokens are deprecated - they now alias to SIZE tokens
+  // Suppress them from the tokens page display
 };
 
 const addTokenToSubcategory = (token, category, subcategory, structure) => {
@@ -183,3 +208,7 @@ const addTokenToSubcategory = (token, category, subcategory, structure) => {
 };
 
 const isBaseToken = (name) => name.endsWith('base') || name.endsWith('root');
+
+const isDeprecatedToken = (name) => {
+  return DEPRECATED_PATTERNS.some(pattern => name.includes(pattern));
+};

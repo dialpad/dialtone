@@ -3,28 +3,30 @@ title: Flex, Grow, & Shrink
 description: Utilities for setting an object's flex, grow, and shrink flex properties.
 ---
 
+<FlexStackNotice />
+
 ## Flex
 
 The `flex` property is a shorthand property for `flex-grow`, `flex-shrink`, and `flex-basis` properties. You can also
 control the grow and shrink flex values separately with their own utility classes.
 
 <code-well-header>
-  <div class="d-d-flex d-w100p d-bar8 d-bgc-moderate">
+  <dt-stack direction="row" class="d-w100p d-bar8 d-bgc-moderate">
     <div class="d-fl-none d-p16 d-ps-relative">Content cannot flex</div>
     <div class="d-fl1 d-p16 d-bgc-moderate-opaque d-ps-relative">Text that will flex</div>
     <div class="d-fl-none d-p16 d-ps-relative">Content cannot flex</div>
-  </div>
+  </dt-stack>
 </code-well-header>
 
 ```html
-<div class="d-d-flex">
+<dt-stack direction="row">
   <div>...</div>
   <div class="d-fl1">...</div>
   <div>...</div>
-</div>
+</dt-stack>
 ```
 
-<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle d-mb16">
+<clamped-table-wrapper class="d-mb16">
   <div>
     <table class="d-table dialtone-doc-table">
       <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
@@ -48,29 +50,29 @@ control the grow and shrink flex values separately with their own utility classe
       </tbody>
     </table>
   </div>
-</div>
+</clamped-table-wrapper>
 
 ## Flex Grow
 
 The `flex-grow` sets the flex container’s grow factor relative to the parent's main size. The default value is 0.
 
 <code-well-header>
-  <div class="d-d-flex d-w100p d-bar8 d-bgc-moderate">
+  <dt-stack direction="row" class="d-w100p d-bar8 d-bgc-moderate">
     <div class="d-fl-none d-p16">Content cannot flex</div>
     <div class="d-fl-grow1 d-p16 d-bgc-moderate-opaque">Text that will grow</div>
     <div class="d-fl-none d-p16">Content cannot flex</div>
-  </div>
+  </dt-stack>
 </code-well-header>
 
 ```html
-<div class="d-d-flex">
+<dt-stack direction="row">
   <div>...</div>
   <div class="d-fl-grow1">...</div>
   <div>...</div>
-</div>
+</dt-stack>
 ```
 
-<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle d-mb16">
+<clamped-table-wrapper class="d-mb16">
   <div>
     <table class="d-table dialtone-doc-table">
       <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
@@ -94,29 +96,29 @@ The `flex-grow` sets the flex container’s grow factor relative to the parent's
       </tbody>
     </table>
   </div>
-</div>
+</clamped-table-wrapper>
 
 ## Flex Shrink
 
 The `flex-shrink` sets the flex container’s shrink factor relative to the parent's main size. The default value is 1.
 
 <code-well-header>
-  <div class="d-d-flex d-w5 d-bar8 d-bgc-moderate">
+  <dt-stack direction="row" class="d-w5 d-bar8 d-bgc-moderate">
     <div class="d-fl-none d-p16">Longer text that cannot flex</div>
     <div class="d-fl-shrink1 d-p16 d-bgc-moderate-opaque">Text that will shrink even if it causes text to wrap</div>
     <div class="d-fl-none d-p16">Longer text that cannot flex</div>
-  </div>
+  </dt-stack>
 </code-well-header>
 
 ```html
-<div class="d-d-flex">
+<dt-stack direction="row">
   <div>...</div>
   <div class="d-fl-shrink1">...</div>
   <div>...</div>
-</div>
+</dt-stack>
 ```
 
-<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle d-mb16">
+<clamped-table-wrapper class="d-mb16">
   <div>
     <table class="d-table dialtone-doc-table">
       <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
@@ -140,8 +142,9 @@ The `flex-shrink` sets the flex container’s shrink factor relative to the pare
       </tbody>
     </table>
   </div>
-</div>
+</clamped-table-wrapper>
 
 <script setup>
   import { properties } from '@data/flex.json';
+  import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
 </script>

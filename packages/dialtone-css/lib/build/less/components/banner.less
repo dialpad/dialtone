@@ -15,8 +15,8 @@
     //  ------------------------------------------------------------------------
     --banner-color-border: var(--dt-color-border-default);
     --banner-line-height: var(--dt-font-line-height-200);
-    --banner-dialog-padding-y: var(--dt-space-400);
-    --banner-dialog-padding-x: var(--dt-space-500);
+    --banner-dialog-padding-y: var(--dt-size-400);
+    --banner-dialog-padding-x: var(--dt-size-500);
 
     position: fixed;
     inset-block-start: 0;
@@ -61,8 +61,12 @@
 
     .d-notice__content {
         flex-direction: row;
-        gap: var(--dt-space-300);
+        gap: var(--dt-size-300);
         align-items: baseline;
+    }
+
+    .d-notice__message {
+        font-size: var(--dt-font-size-200) !important;
     }
 }
 

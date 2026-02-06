@@ -36,7 +36,7 @@
         name="format-select"
         label="Format"
         select-class="d-w128"
-        :value="format"
+        :model-value="format"
         :options="formatSelectMenuOptions"
         @change="updateFormat"
       />
@@ -44,7 +44,7 @@
         name="mode-select"
         label="Mode"
         select-class="d-w128"
-        :value="mode"
+        :model-value="mode"
         :options="MODES"
         @change="updateMode"
       />
@@ -52,7 +52,7 @@
         name="theme-select"
         label="Theme"
         select-class="d-w128"
-        :value="theme"
+        :model-value="theme"
         :options="THEMES"
         @change="updateTheme"
       />

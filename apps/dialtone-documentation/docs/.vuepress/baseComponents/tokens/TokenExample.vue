@@ -1,24 +1,36 @@
 <template>
-  <div
+  <dt-stack
     v-if="category === 'color'"
-    class="d-bar4 d-h32 d-d-flex d-jc-center d-ai-center colorRectangle"
+    direction="row"
+    justify="center"
+    align="center"
+    class="d-bar4 d-hmn32 colorRectangle"
     :style="getColorStyle"
   >
-    <div v-if="isForeground || isLink" :class="['d-headline--lg', { 'link-example': isLink }]">
-      Aa
-    </div>
-  </div>
-  <div
-    v-if="category === 'typography'"
-    class="d-h32 d-d-flex d-jc-center d-ai-center"
+    <dt-text
+      v-if="isForeground || isLink"
+      as="p"
+      kind="headline"
+      size="xl"
+      :class="{ 'link-example': isLink }"
+    >
+      Ag
+    </dt-text>
+  </dt-stack>
+  <dt-stack
+    v-if="category === 'typography' || category === 'text'"
+    direction="row"
+    justify="center"
+    align="center"
+    class="d-hmn32"
   >
     <div :style="getTypographyStyle">
-      Aa
+      Ag
     </div>
-  </div>
+  </dt-stack>
   <div
     v-if="category === 'shadow'"
-    class="d-bar4 d-h32"
+    class="d-bar4 d-hmn32"
     :style="getShadowStyle"
   />
   <div
@@ -59,6 +71,7 @@ const TYPOGRAPHY_KEY_MAP = {
 const SHADOW_COMPOSITION_TOKENS = ['small', 'medium', 'large', 'extra-large', 'card', 'focus', 'focus-inset'];
 
 const isTypography = (name, key) => name.includes('--dt-typography') && name.includes(key);
+const isText = (name, key) => name.includes('--dt-text') && name.includes(key);
 const isFont = (name, key) => name.includes(`--dt-font-${key}`);
 const getRectSizeStyle = (value) => {
   if (value.endsWith('%')) return { 'inline-size': value };
@@ -136,11 +149,11 @@ const foregroundBackgroundColor = computed(() => {
 
 const getTypographyStyle = computed(() => {
   for (const key in TYPOGRAPHY_KEY_MAP) {
-    if (isFont(props.name, key) || isTypography(props.name, key)) {
+    if (isFont(props.name, key) || isTypography(props.name, key) || isText(props.name, key)) {
       return { [TYPOGRAPHY_KEY_MAP[key]]: props.value };
     }
   }
-  if (props.name.startsWith('var(--dt-typography')) {
+  if (props.name.startsWith('var(--dt-typography') || props.name.startsWith('var(--dt-text')) {
     return `font: ${props.value}`;
   }
   return null;
@@ -195,14 +208,14 @@ const isPercentage = computed(() => props.value.endsWith('%'));
 
 .sizeRectangle {
   block-size: var(--dt-size-600);
-  background-color: var(--dt-color-purple-400);
+  background-color: var(--dt-color-surface-brand-strong);
   border-radius: var(--dt-size-radius-300);
   inline-size: 0;
 }
 
 .spaceRectangle {
   block-size: var(--dt-size-600);
-  background-color: var(--dt-color-purple-400);
+  background-color: var(--dt-color-surface-brand-strong);
   inline-size: 0;
 }
 
@@ -220,7 +233,7 @@ const isPercentage = computed(() => props.value.endsWith('%'));
   justify-content: center;
   font: var(--dt-typography-body-sm);
   color: var(--dt-color-foreground-muted);
-  padding: var(--dt-space-400) var(--dt-space-200);
+  padding: var(--dt-size-400) var(--dt-size-200);
   border-start-end-radius: var(--dt-size-radius-300);
   border-end-end-radius: var(--dt-size-radius-300);
   &.spaceBefore {

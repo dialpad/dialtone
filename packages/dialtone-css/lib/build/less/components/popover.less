@@ -45,7 +45,6 @@
     overflow: auto;
     color: var(--dt-color-foreground-primary);
     background-color: var(--popover-color-background);
-    background-clip: padding-box;
     border: var(--popover-border-width) solid var(--popover-color-border);
     border-radius: var(--popover-border-radius);
     box-shadow: var(--popover-shadow);
@@ -74,7 +73,7 @@
     justify-content: flex-end;
     inline-size: 100%;
     min-block-size: var(--dt-size-650);
-    padding-block: var(--dt-space-350) var(--dt-space-350);
+    padding-block: var(--dt-size-350) var(--dt-size-350);
     overflow: auto;
     font-weight: var(--dt-font-weight-semi-bold);
     font-size: var(--dt-font-size-200);
@@ -85,8 +84,8 @@
     }
 
     &__close-button {
-      margin-inline-end: var(--dt-space-350);
-      padding: var(--dt-space-350);
+      margin-inline-end: var(--dt-size-350);
+      padding: var(--dt-size-350);
       border-color: transparent;
     }
   }

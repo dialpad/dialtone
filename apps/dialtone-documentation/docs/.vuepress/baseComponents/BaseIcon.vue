@@ -32,20 +32,23 @@
           </dt-button>
         </template>
         <template #headerContent>
-          <span
-            class="d-tt-capitalize d-fc-primary"
-            v-text="name"
-          />
+          <dt-text class="d-tt-capitalize">
+            {{ name }}
+          </dt-text>
         </template>
         <template #content>
           <dt-stack gap="500">
             <dt-stack direction="row" gap="300">
-              <div class="d-d-flex d-fd-column d-fl-grow5">
-                <span class="d-label d-label--sm">Name</span>
-                <div class="d-d-flex d-jc-space-between">
-                  <span class="d-body--md-compact">{{ name }}</span>
-                </div>
-              </div>
+              <dt-stack class="d-fl-grow5">
+                <dt-text kind="label" size="sm">
+                  Name
+                </dt-text>
+                <dt-stack direction="row" justify="between">
+                  <dt-text kind="body" size="md" density="200">
+                    {{ name }}
+                  </dt-text>
+                </dt-stack>
+              </dt-stack>
               <a
                 class="d-btn d-btn--muted"
                 :href="figmaLink"
@@ -106,15 +109,17 @@
                 <span class="d-btn__label">Figma</span>
               </a>
             </dt-stack>
-            <div class="d-d-flex d-ai-center">
-              <div class="d-d-flex d-fd-column d-fl-grow5">
-                <span class="d-label d-label--sm">Description</span>
-                <div class="d-body--md-compact">
+            <dt-stack direction="row" align="center">
+              <dt-stack class="d-fl-grow5">
+                <dt-text kind="label" size="sm">
+                  Description
+                </dt-text>
+                <dt-text kind="body" size="md" density="200">
                   {{ desc }}
-                </div>
-              </div>
-            </div>
-            <div class="d-d-flex d-ai-flex-end">
+                </dt-text>
+              </dt-stack>
+            </dt-stack>
+            <dt-stack direction="row" align="end">
               <div class="d-fl-grow1">
                 <dt-input
                   class="d-ff-mono"
@@ -130,8 +135,8 @@
                 :text="rawSvg"
                 aria-label="Copy SVG markup"
               />
-            </div>
-            <div class="d-d-flex d-ai-flex-end">
+            </dt-stack>
+            <dt-stack direction="row" align="end">
               <div class="d-fl-grow1">
                 <dt-input
                   class="d-ff-mono"
@@ -147,7 +152,7 @@
                 :text="`<${vue} />`"
                 aria-label="Copy Vue markup"
               />
-            </div>
+            </dt-stack>
           </dt-stack>
         </template>
       </dt-popover>

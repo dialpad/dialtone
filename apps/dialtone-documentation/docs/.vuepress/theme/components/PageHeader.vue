@@ -108,11 +108,17 @@
           </a>
         </span>
       </div>
-      <p
+      <dt-text
         v-if="$frontmatter.description"
-        class="dialtone-intro"
-        v-html="$frontmatter.description"
-      />
+        as="p"
+        kind="body"
+        size="lg"
+        tone="secondary"
+        wrap="pretty"
+        class="d-mb16"
+      >
+        {{ $frontmatter.description }}
+      </dt-text>
     </header>
     <slot name="content-bottom" />
     <div

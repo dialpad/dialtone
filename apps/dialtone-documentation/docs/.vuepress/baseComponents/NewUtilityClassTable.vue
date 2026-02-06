@@ -1,5 +1,5 @@
 <template>
-  <div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+  <clamped-table-wrapper>
     <div>
       <table class="d-table dialtone-doc-table d-fc-primary">
         <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
@@ -29,19 +29,21 @@
             <td
               class="d-code--sm d-ws-break-spaces"
             >
-              <div class="d-d-flex d-jc-space-between d-ai-center d-gg16">
+              <dt-stack direction="row" justify="between" align="center" gap="500">
                 <span class="d-fl-grow1 d-code--sm" v-text="value" />
                 <slot name="example" :class-name="className" />
-              </div>
+              </dt-stack>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
-  </div>
+  </clamped-table-wrapper>
 </template>
 
 <script setup>
+import ClampedTableWrapper from './ClampedTableWrapper.vue';
+
 defineOptions({
   name: 'NewUtilityClassTable',
 });

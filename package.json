@@ -1,11 +1,14 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "9.143.0-next.2",
+  "version": "9.154.0-next.5",
   "packageManager": "pnpm@9.9.0",
   "description": "Dialpad's Dialtone design system monorepo",
   "scripts": {
     "prepare": "husky install",
-    "prepack": "nx run dialtone:build"
+    "prepack": "nx run dialtone:build",
+    "clean": "pnpm clean:dist && pnpm clean:cache",
+    "clean:dist": "rm -rf packages/dialtone-tokens/dist apps/dialtone-documentation/docs/.vuepress/.cache apps/dialtone-documentation/docs/.vuepress/.temp",
+    "clean:cache": "pnpm nx reset --onlyCache"
   },
   "pnpm": {
     "peerDependencyRules": {
@@ -15,48 +18,21 @@
         "react": "^18.3.1",
         "typescript": "^5.2",
         "vite": "^5.0.0 || ^7.0.7",
-        "vue": "^2.6 || ^3.2",
+        "vue": "^3.2",
         "vuepress": "^2.0.0-rc.24"
-      }
-    },
-    "packageExtensions": {
-      "@linusborg/vue-simple-portal": {
-        "peerDependencies": {
-          "vue": "^2.6.6"
-        }
-      },
-      "@tiptap/vue-2": {
-        "peerDependencies": {
-          "vue": "^2.6.0"
-        }
-      },
-      "@tiptap/vue-3": {
-        "peerDependencies": {
-          "vue": "^3.3.4"
-        }
-      },
-      "typedoc": {
-        "peerDependencies": {
-          "typescript": "^5.2"
-        }
-      },
-      "vue-template-compiler": {
-        "peerDependencies": {
-          "vue": "^2.7.15"
-        }
       }
     },
     "overrides": {
       "@typescript-eslint/utils": "^8.44.1",
       "braces": ">=3.0.3",
       "cross-spawn": ">=7.0.5",
-      "minimatch": ">=3.0.5",
       "nanoid": ">=3.3.8",
       "sass": "^1.70.0",
       "sugarss": "^5.0.0",
       "semver-regex": "3.1.4",
-      "stylelint": "^15.11.0",
+      "stylelint": "^16.25.0",
       "tar-fs": ">=2.1.3",
+      "test-exclude": "^7.0.1",
       "trim": ">=0.0.3",
       "trim-newlines": ">=3.0.1"
     }
@@ -64,6 +40,9 @@
   "files": [
     "dist"
   ],
+  "bin": {
+    "dialtone-migrate-flex-to-stack": "./dist/js/dialtone_migrate_flex_to_stack/index.mjs"
+  },
   "exports": {
     "./CHANGELOG.json": "./CHANGELOG.json",
     "./css": "./dist/css/dialtone.min.css",
@@ -73,16 +52,6 @@
       "types": "./dist/tokens/types/postcss/*.d.ts",
       "import": "./dist/tokens/postcss/*.js",
       "require": "./dist/tokens/postcss/*.cjs"
-    },
-    "./vue2": {
-      "types": "./dist/vue2/types/index.d.ts",
-      "import": "./dist/vue2/dialtone-vue.js",
-      "require": "./dist/vue2/dialtone-vue.cjs"
-    },
-    "./vue2/lib/*": {
-      "types": "./dist/vue2/types/index.d.ts",
-      "import": "./dist/vue2/lib/*/index.js",
-      "require": "./dist/vue2/lib/*/index.cjs"
     },
     "./vue3": {
       "types": "./dist/vue3/types/index.d.ts",
@@ -148,7 +117,7 @@
     "@commitlint/cli": "^18.4.3",
     "@commitlint/config-conventional": "^17.6.6",
     "@dialpad/conventional-changelog-angular": "^1.1.1",
-    "@dialpad/i18n-services": "1.5.0",
+    "@dialpad/i18n-services": "1.11.0",
     "@dialpad/semantic-release-changelog-json": "^1.0.0",
     "@faker-js/faker": "8.4.1",
     "@percy/cli": "1.30.9",
@@ -167,7 +136,6 @@
     "@storybook/theming": "7.6.20",
     "@types/node": "^20.4.5",
     "@vitejs/plugin-vue": "^5.2.3",
-    "@vitejs/plugin-vue2": "^2.3.3",
     "@vitest/coverage-v8": "^1.0.0",
     "@vue/tsconfig": "^0.4.0",
     "axe-core": "^4.7.2",
@@ -203,11 +171,11 @@
     "semantic-release-plus": "^20.0.0",
     "storybook": "7.6.20",
     "storybook-dark-mode": "^3.0.3",
-    "stylelint": "^15.11.0",
+    "stylelint": "^16.25.0",
     "stylelint-config-rational-order": "^0.1.2",
     "stylelint-config-recommended-less": "^3.0.1",
-    "stylelint-config-standard": "^39.0.0",
-    "stylelint-less": "3.0.1",
+    "stylelint-config-standard": "^39.0.1",
+    "stylelint-less": "^3.0.1",
     "stylelint-no-px": "^1.0.1",
     "tinycolor2": "^1.6.0",
     "typedoc": "^0.28.2",
@@ -223,7 +191,7 @@
     "yo": "^5.0.0"
   },
   "peerDependencies": {
-    "vue": "^2 || ^3"
+    "vue": "^3"
   },
   "homepage": "https://dialtone.dialpad.com",
   "keywords": [

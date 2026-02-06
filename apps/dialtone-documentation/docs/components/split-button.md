@@ -87,9 +87,9 @@ htmlCode='
 </span>
 '
 vueCode='
-<dt-split-button omega-tooltip-text="More calling options"> Place Call </dt-button>
-<dt-split-button importance="outlined" omega-tooltip-text="More calling options"> Place Call </dt-button>
-<dt-split-button importance="clear" omega-tooltip-text="More calling options"> Place Call </dt-button>
+<dt-split-button omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+<dt-split-button importance="outlined" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+<dt-split-button importance="clear" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
 '
 showHtmlWarning />
 
@@ -131,9 +131,9 @@ htmlCode='
 </span>
 '
 vueCode='
-<dt-split-button kind="danger" omega-tooltip-text="More calling options"> Place Call </dt-button>
-<dt-split-button importance="outlined" kind="danger" omega-tooltip-text="More calling options"> Place Call </dt-button>
-<dt-split-button importance="clear" kind="danger" omega-tooltip-text="More calling options"> Place Call </dt-button>
+<dt-split-button kind="danger" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+<dt-split-button importance="outlined" kind="danger" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+<dt-split-button importance="clear" kind="danger" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
 '
 showHtmlWarning />
 
@@ -175,9 +175,9 @@ htmlCode='
 </span>
 '
 vueCode='
-<dt-split-button kind="positive" omega-tooltip-text="More calling options"> Place Call </dt-button>
-<dt-split-button kind="positive" importance="outlined" omega-tooltip-text="More calling options"> Place Call </dt-button>
-<dt-split-button kind="positive" importance="clear" omega-tooltip-text="More calling options"> Place Call </dt-button>
+<dt-split-button kind="positive" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+<dt-split-button kind="positive" importance="outlined" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+<dt-split-button kind="positive" importance="clear" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
 '
 showHtmlWarning />
 
@@ -261,12 +261,13 @@ showHtmlWarning />
 
 ### Disabled
 
+Use the `disabled` prop to disable both buttons, or use `alpha-disabled` and `omega-disabled` to disable each button independently.
+
 <code-well-header>
   <dt-stack direction="row" gap="400">
-      <dt-split-button disabled omega-tooltip-text="More calling options"> Place Call (disable attribute)</dt-split-button>
-      <span class="d-c-not-allowed">
-        <dt-split-button class="d-btn--disabled" omega-tooltip-text="More calling options"> Place Call (disabled class) </dt-split-button>
-      </span>
+      <dt-split-button disabled omega-tooltip-text="More calling options"> Both disabled </dt-split-button>
+      <dt-split-button alpha-disabled omega-tooltip-text="More calling options"> Alpha disabled </dt-split-button>
+      <dt-split-button omega-disabled omega-tooltip-text="More calling options"> Omega disabled </dt-split-button>
   </dt-stack>
 </code-well-header>
 
@@ -274,26 +275,33 @@ showHtmlWarning />
 htmlCode='
 <span class="d-split-btn">
   <button class="base-button__button d-btn d-btn--primary d-split-btn__alpha d-split-btn__alpha--md" type="button" disabled>
-    <span class="d-btn__label base-button__label"> Place Call </span>
+    <span class="d-btn__label base-button__label"> Both disabled </span>
   </button>
   <button class="base-button__button d-btn d-btn--primary d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button" disabled>
     <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
   </button>
 </span>
 <span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--primary d-split-btn__alpha d-split-btn__alpha--md d-btn--disabled" type="button">
-    <span class="d-btn__label base-button__label"> Place Call </span>
+  <button class="base-button__button d-btn d-btn--primary d-split-btn__alpha d-split-btn__alpha--md" type="button" disabled>
+    <span class="d-btn__label base-button__label"> Alpha disabled </span>
   </button>
-  <button class="base-button__button d-btn d-btn--primary d-btn--icon-only d-split-btn__omega d-split-btn__omega--md d-btn--disabled" type="button">
+  <button class="base-button__button d-btn d-btn--primary d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
+    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
+  </button>
+</span>
+<span class="d-split-btn">
+  <button class="base-button__button d-btn d-btn--primary d-split-btn__alpha d-split-btn__alpha--md" type="button">
+    <span class="d-btn__label base-button__label"> Omega disabled </span>
+  </button>
+  <button class="base-button__button d-btn d-btn--primary d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button" disabled>
     <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
   </button>
 </span>
 '
 vueCode='
-<dt-split-button disabled> Place Call (disable attribute)</dt-split-button>
-<span class="d-c-not-allowed">
-  <dt-split-button class="d-btn--disabled"> Place Call (disabled class) </dt-split-button>
-</span>
+<dt-split-button disabled omega-tooltip-text="More calling options"> Both disabled </dt-split-button>
+<dt-split-button alpha-disabled omega-tooltip-text="More calling options"> Alpha disabled </dt-split-button>
+<dt-split-button omega-disabled omega-tooltip-text="More calling options"> Omega disabled </dt-split-button>
 '
 showHtmlWarning />
 

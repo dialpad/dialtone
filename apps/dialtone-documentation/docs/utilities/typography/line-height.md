@@ -3,15 +3,7 @@ title: Line Height
 description: Utilities to change an element's line-height.
 ---
 
-<dt-notice
-  kind="warning"
-  :hideClose="true"
-  class="d-wmx100p"
->
-  <template #default>
-    <p class="d-body--md-compact">Before applying a typography utility, first consider using <router-link class="d-fw-bold d-link d-link--muted" to="/foundations/typography/">Dialtone's text styles</router-link> that bundles Font family, Font weight, Font size, and Line height together.</p>
-  </template>
-</dt-notice>
+<FontUtilitiesNotice />
 
 ## Relative Line-Heights
 
@@ -62,7 +54,7 @@ Use `d-lh{n}` to fix an element's line-height. This allows you to target a speci
 
 ## CSS Variables
 
-<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+<clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
       <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
@@ -87,7 +79,7 @@ Use `d-lh{n}` to fix an element's line-height. This allows you to target a speci
       </tbody>
     </table>
   </div>
-</div>
+</clamped-table-wrapper>
 
 ## Classes
 
@@ -121,5 +113,7 @@ Use `d-lh{n}` to fix an element's line-height. This allows you to target a speci
 
 <script setup>
   import { lineHeight } from '@data/type.json';
+  import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
+  import FontUtilitiesNotice from '@baseComponents/FontUtilitiesNotice.vue';
   const { relative, fixed } = lineHeight;
 </script>

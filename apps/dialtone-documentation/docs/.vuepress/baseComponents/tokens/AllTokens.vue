@@ -6,10 +6,16 @@
     v-model:theme="theme"
     @filter="filterTokens"
   />
-  <div v-if="noSearchResults" class="d-body d-fc-tertiary d-p16 d-ta-center">
-    No results found for
-    <strong class="d-fw-semibold"> &OpenCurlyDoubleQuote;{{ searchCriteria }}&CloseCurlyDoubleQuote;</strong>
-  </div>
+  <dt-empty-state
+    v-if="noSearchResults"
+    size="sm"
+    :header-text="`No results found for &OpenCurlyDoubleQuote;${searchCriteria}&CloseCurlyDoubleQuote;`"
+    class="d-w100p d-ba d-bc-subtle d-bar8 d-mt16 d-pt32"
+  >
+    <template #icon="{ iconSize }">
+      <dt-icon name="box" :size="iconSize" />
+    </template>
+  </dt-empty-state>
   <token-tree v-else :node="filteredTokens" :category="null" :level="2" :mode="mode" />
 </template>
 

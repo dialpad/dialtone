@@ -608,11 +608,14 @@
         "view",
         "watch",
         "hide",
-        "hidden"
+        "hidden",
+        "visibility"
       ],
       "eye": [
         "view",
-        "watch"
+        "watch",
+        "show",
+        "visibility"
       ],
       "fast-forward": [
         "music"
@@ -1229,7 +1232,8 @@
         "listen",
         "radio",
         "podcast",
-        "microphone"
+        "microphone",
+        "unmute"
       ],
       "monitor-off": [
         "share"
@@ -1311,11 +1315,13 @@
       ],
       "volume-1": [
         "music",
-        "sound"
+        "sound",
+        "down"
       ],
       "volume-2": [
         "music",
-        "sound"
+        "sound",
+        "up"
       ],
       "volume-x": [
         "music",
@@ -1332,12 +1338,14 @@
         "security"
       ],
       "wifi-off": [
-        "disabled"
+        "disabled",
+        "offline"
       ],
       "wifi": [
         "connection",
         "signal",
-        "wireless"
+        "wireless",
+        "online"
       ],
       "zap-off": [
         "flash",
@@ -1391,6 +1399,16 @@
         "text",
         "strong",
         "format"
+      ],
+      "braces": [
+        "brackets",
+        "code",
+        "json",
+        "code",
+        "token",
+        "curly",
+        "data",
+        "variables"
       ],
       "branch": [],
       "call-merge": [
@@ -1466,8 +1484,56 @@
         "todo",
         "done"
       ],
+      "list-chevrons-down-up": [
+        "density",
+        "spacing",
+        "options",
+        "collapse",
+        "expand",
+        "disclosure",
+        "show",
+        "hide",
+        "accordion",
+        "more",
+        "less",
+        "fold",
+        "unfold"
+      ],
+      "list-chevrons-up-down": [
+        "density",
+        "spacing",
+        "options",
+        "collapse",
+        "expand",
+        "disclosure",
+        "show",
+        "hide",
+        "accordion",
+        "more",
+        "less",
+        "fold",
+        "unfold"
+      ],
       "list-ordered": [
         "sort"
+      ],
+      "list-spacing-compact": [
+        "line",
+        "density",
+        "spacing",
+        "tight"
+      ],
+      "list-spacing-expanded": [
+        "line",
+        "density",
+        "spacing",
+        "comfortable"
+      ],
+      "list-spacing-regular": [
+        "line",
+        "density",
+        "spacing",
+        "default"
       ],
       "paperclip": [
         "attachment",
@@ -1611,7 +1677,8 @@
         "done"
       ],
       "check": [
-        "done"
+        "done",
+        "success"
       ],
       "circle-half-filled": [
         "mode",
@@ -1729,13 +1796,15 @@
         "sign in",
         "arrow",
         "enter",
-        "auth"
+        "auth",
+        "login"
       ],
       "log-out": [
         "sign out",
         "arrow",
         "exit",
-        "auth"
+        "auth",
+        "logout"
       ],
       "more-horizontal": [
         "ellipsis",
@@ -1833,7 +1902,8 @@
         "cog",
         "edit",
         "gear",
-        "preferences"
+        "preferences",
+        "configuration"
       ],
       "shield-alert": [
         "security",
@@ -2275,7 +2345,9 @@
       "user": [
         "person",
         "account",
-        "contact"
+        "contact",
+        "profile",
+        "avatar"
       ],
       "users": [
         "group",
@@ -2432,7 +2504,8 @@
         "time",
         "event",
         "birthdate",
-        "birthday"
+        "birthday",
+        "schedule"
       ],
       "clock-1": [
         "time",

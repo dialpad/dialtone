@@ -3,39 +3,41 @@ title: Direction, Wrap, & Flow
 description: Utilities for setting an object's flex direction, wrap, and flow directions.
 ---
 
+<FlexStackNotice />
+
 ## Flex Direction
 
 The `flex-direction` property declares a flex container’s main axis direction. The default value is row.
 
 <code-well-header>
-  <div class="d-d-flex d-fd-row-reverse d-w100p d-bar8 d-bgc-moderate">
-    <div class="d-fl-center d-m8 d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">1</div>
-    <div class="d-fl-center d-m8 d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">2</div>
-    <div class="d-fl-center d-m8 d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">3</div>
-  </div>
-  <div class="d-d-flex d-fd-row d-w100p d-mt16 d-bar8 d-bgc-moderate">
-    <div class="d-fl-center d-m8 d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">1</div>
-    <div class="d-fl-center d-m8 d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">2</div>
-    <div class="d-fl-center d-m8 d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">3</div>
-  </div>
+  <dt-stack class="d-fd-row-reverse d-w100p d-bar8 d-bgc-moderate">
+    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+  </dt-stack>
+  <dt-stack class="d-fd-row d-w100p d-mt16 d-bar8 d-bgc-moderate">
+    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+  </dt-stack>
 </code-well-header>
 
 ```html
-<div class="d-d-flex d-fd-row-reverse">
+<dt-stack class="d-fd-row-reverse">
   <div>1</div>
   <div>2</div>
   <div>3</div>
-</div>
-<div class="d-d-flex d-fd-row">
+</dt-stack>
+<dt-stack class="d-fd-row">
   <div>1</div>
   <div>2</div>
   <div>3</div>
-</div>
+</dt-stack>
 ```
 
 ### Classes
 
-<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle d-mb16">
+<clamped-table-wrapper class="d-mb16">
   <div>
     <table class="d-table dialtone-doc-table">
       <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
@@ -54,31 +56,31 @@ The `flex-direction` property declares a flex container’s main axis direction.
       </tbody>
     </table>
   </div>
-</div>
+</clamped-table-wrapper>
 
 ## Flex Wrap
 
 The `flex-wrap` property declares a flex container’s wrapping status. The default value is nowrap.
 
 <code-well-header>
-  <div class="d-d-flex d-fw-wrap d-w100p d-bar8 d-bgc-moderate">
-    <div class="d-fl-center d-m8 d-p16 d-w25p d-h64 d-bgc-moderate-opaque d-bar4">1</div>
-    <div class="d-fl-center d-m8 d-p16 d-w50p d-h64 d-bgc-moderate-opaque d-bar4">2</div>
-    <div class="d-fl-center d-m8 d-p16 d-w75p d-h64 d-bgc-moderate-opaque d-bar4">3</div>
-  </div>
+  <dt-stack direction="row" class="d-fw-wrap d-w100p d-bar8 d-bgc-moderate">
+    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w25p d-h64 d-bgc-moderate-opaque d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w50p d-h64 d-bgc-moderate-opaque d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w75p d-h64 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+  </dt-stack>
 </code-well-header>
 
 ```html
-<div class="d-d-flex d-fw-wrap">
+<dt-stack direction="row" class="d-fw-wrap">
   <div>1</div>
   <div>2</div>
   <div>3</div>
-</div>
+</dt-stack>
 ```
 
 ### Classes
 
-<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle d-mb16">
+<clamped-table-wrapper class="d-mb16">
   <div>
     <table class="d-table dialtone-doc-table">
       <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
@@ -94,34 +96,34 @@ The `flex-wrap` property declares a flex container’s wrapping status. The defa
           <td class="d-code--sm">{{ output }}</td>
           <td>{{ description }}</td>
         </tr>
-        </tbody>
+      </tbody>
     </table>
   </div>
-</div>
+</clamped-table-wrapper>
 
 ## Flex Flow
 
 The `flex-flow` property is a shorthand property that sets allows you to quickly set the above `flex-direction` and `flex-wrap` properties. By default all flex containers are set to `row` and `nowrap`.
 
 <code-well-header>
-  <div class="d-d-flex d-ff-row-reverse-wrap d-w100p d-bar8 d-bgc-moderate">
-    <div class="d-fl-center d-m8 d-p16 d-w25p d-h64 d-bgc-moderate-opaque d-bar4">1</div>
-    <div class="d-fl-center d-m8 d-p16 d-w50p d-h64 d-bgc-moderate-opaque d-bar4">2</div>
-    <div class="d-fl-center d-m8 d-p16 d-w75p d-h64 d-bgc-moderate-opaque d-bar4">3</div>
-  </div>
+  <dt-stack class="d-ff-row-reverse-wrap d-w100p d-bar8 d-bgc-moderate">
+    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w25p d-h64 d-bgc-moderate-opaque d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w50p d-h64 d-bgc-moderate-opaque d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w75p d-h64 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+  </dt-stack>
 </code-well-header>
 
 ```html
-<div class="d-d-flex d-ff-row-reverse-wrap">
+<dt-stack class="d-ff-row-reverse-wrap">
   <div>1</div>
   <div>2</div>
   <div>3</div>
-</div>
+</dt-stack>
 ```
 
 ### Classes
 
-<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle d-mb16">
+<clamped-table-wrapper class="d-mb16">
   <div>
     <table class="d-table dialtone-doc-table">
       <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
@@ -140,8 +142,9 @@ The `flex-flow` property is a shorthand property that sets allows you to quickly
       </tbody>
     </table>
   </div>
-</div>
+</clamped-table-wrapper>
 
 <script setup>
   import { direction, wrap, flow } from '@data/flex.json';
+  import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
 </script>

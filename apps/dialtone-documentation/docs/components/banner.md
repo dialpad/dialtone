@@ -10,9 +10,17 @@ keywords: ["alert","notification","message","d-banner","DtBanner","dt-banner"]
 ---
 
 <code-well-header class="d-p0">
-    <dt-banner title="Example banner" kind="info" class="d-ps-relative d-zi-base">
-        Message body with a <dt-link kind="muted">Link</dt-link>
-    </dt-banner>
+    <dt-stack gap="500" class="d-w100p" align="center">
+      <dt-banner title="Example banner" kind="info" class="d-ps-relative d-zi-base">
+          Message body with a <dt-link kind="muted">Link</dt-link>
+          <template #action>
+            <dt-button size="sm" kind="muted" importance="outlined">Action</dt-button>
+          </template>
+      </dt-banner>
+      <dt-stack direction="row">
+          <dt-button @click="toggleBanner('example-pinned')">Pin to top</dt-button>
+      </dt-stack>
+    </dt-stack>
 </code-well-header>
 
 ## Usage
@@ -29,13 +37,13 @@ Banners are a type of notice and so you can use the following [Notice](notice.md
 ### Kind
 
 <code-well-header>
-    <div class="d-d-flex d-w100p d-flow8 d-ai-flex-end">
+    <dt-stack direction="row" gap="400" align="end" class="d-w100p">
         <div class="d-fl-grow1">
-            <dt-select-menu label="Style" :options="bannerOptions" @change="changeKind" />
+            <dt-select-menu label="Style" :options="bannerOptions" v-model="selectedKind" />
         </div>
         <dt-checkbox value="important" @input="toggleImportant">Important</dt-checkbox>
         <dt-button @click="toggleBanner('example-kind')">Toggle Example</dt-button>
-    </div>
+    </dt-stack>
 </code-well-header>
 
 <dt-banner
@@ -83,9 +91,9 @@ vueCode='
 Pins the banner to the top of the window.
 
 <code-well-header>
-    <div class="d-d-flex d-w100p d-flow8 d-ai-flex-end">
+    <dt-stack direction="row">
         <dt-button @click="toggleBanner('example-pinned')">Toggle Example</dt-button>
-    </div>
+    </dt-stack>
 </code-well-header>
 
 <dt-banner
@@ -94,7 +102,10 @@ Pins the banner to the top of the window.
   v-show="shownBanner === 'example-pinned'"
   @close="closeBanner"
 >
-  Message body
+  Detailed description goes here.
+  <template #action>
+    <dt-button size="sm" kind="muted" importance="outlined">Action</dt-button>
+  </template>
 </dt-banner>
 
 <code-example-tabs
@@ -102,7 +113,15 @@ htmlCode='
 <aside class="d-banner d-banner--base d-banner--pinned" role="alert" aria-hidden="false">...</aside>
 '
 vueCode='
-<dt-banner kind="base" title="Optional banner title" :pinned="true"> Message body </dt-banner>
+<dt-banner
+  :pinned="true"
+  title="Optional banner title"
+>
+  Detailed description goes here.
+  <template #action>
+    <dt-button size="sm" kind="muted" importance="outlined">Action</dt-button>
+  </template>
+</dt-banner>
 '
 />
 
@@ -145,10 +164,6 @@ function toggleBanner (id) {
 
 function toggleImportant () {
   important.value = !important.value;
-}
-
-function changeKind (kind) {
-  selectedKind.value = kind;
 }
 
 function closeBanner () {

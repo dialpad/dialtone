@@ -4,5 +4,5 @@
 <rect x="174.028" y="127.475" width="180" height="8" rx="4" fill="var(--dt-color-foreground-placeholder)"/>
 <rect x="174.028" y="143.475" width="130" height="8" rx="4" fill="var(--dt-color-foreground-placeholder)"/>
 <rect x="160.23" y="163.475" width="100" height="24" rx="4" fill="var(--dt-color-foreground-placeholder)"/>
-<rect x="267.826" y="163.475" width="100" height="24" rx="4" fill="var(--dt-color-brand-purple)"/>
+<rect x="267.826" y="163.475" width="100" height="24" rx="4" fill="var(--dt-action-color-background-base-primary-default)"/>
 </svg>

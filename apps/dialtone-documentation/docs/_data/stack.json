@@ -21,84 +21,69 @@
       "description": "Styles stack group with row-reverse direction."
     },
     {
-      "class": "d-stack--xl--column",
+      "class": "d-stack--align-normal",
       "applies": ".d-stack",
-      "description": "Styles stack in extra large screen with column direction."
+      "description": "Aligns stack items with browser default behavior along the cross-axis (default)."
     },
     {
-      "class": "d-stack--xl--column-reverse",
+      "class": "d-stack--align-start",
       "applies": ".d-stack",
-      "description": "Styles stack in extra large screen with column reverse direction."
+      "description": "Aligns stack items to the start along the cross-axis."
     },
     {
-      "class": "d-stack--xl--row",
+      "class": "d-stack--align-center",
       "applies": ".d-stack",
-      "description": "Styles stack in extra large screen with row direction."
+      "description": "Aligns stack items to the center along the cross-axis."
     },
     {
-      "class": "d-stack--xl--row-reverse",
+      "class": "d-stack--align-end",
       "applies": ".d-stack",
-      "description": "Styles stack in extra large screen with row reverse direction."
+      "description": "Aligns stack items to the end along the cross-axis."
     },
     {
-      "class": "d-stack--lg--column",
+      "class": "d-stack--align-stretch",
       "applies": ".d-stack",
-      "description": "Styles stack in large screen with column direction."
+      "description": "Stretches stack items to fill the cross-axis."
     },
     {
-      "class": "d-stack--lg--column-reverse",
+      "class": "d-stack--align-baseline",
       "applies": ".d-stack",
-      "description": "Styles stack in large screen with column reverse direction."
+      "description": "Aligns stack items along their baselines."
     },
     {
-      "class": "d-stack--lg--row",
+      "class": "d-stack--justify-start",
       "applies": ".d-stack",
-      "description": "Styles stack in large screen with row direction."
+      "description": "Justifies stack items to the start along the main axis (default)."
     },
     {
-      "class": "d-stack--lg--row-reverse",
+      "class": "d-stack--justify-center",
       "applies": ".d-stack",
-      "description": "Styles stack in large screen with row reverse direction."
+      "description": "Justifies stack items to the center along the main axis."
     },
     {
-      "class": "d-stack--md--column",
+      "class": "d-stack--justify-end",
       "applies": ".d-stack",
-      "description": "Styles stack in medium screen with column direction."
+      "description": "Justifies stack items to the end along the main axis."
     },
     {
-      "class": "d-stack--md--column-reverse",
+      "class": "d-stack--justify-around",
       "applies": ".d-stack",
-      "description": "Styles stack in medium screen with column reverse direction."
+      "description": "Distributes stack items with equal space around each item."
     },
     {
-      "class": "d-stack--md--row",
+      "class": "d-stack--justify-between",
       "applies": ".d-stack",
-      "description": "Styles stack in medium screen with row direction."
+      "description": "Distributes stack items with space between them."
     },
     {
-      "class": "d-stack--md--row-reverse",
+      "class": "d-stack--justify-evenly",
       "applies": ".d-stack",
-      "description": "Styles stack in medium screen with row reverse direction."
+      "description": "Distributes stack items with equal space between all items."
     },
     {
-      "class": "d-stack--sm--column",
+      "class": "d-stack--gap-50",
       "applies": ".d-stack",
-      "description": "Styles stack in small screen with column direction."
-    },
-    {
-      "class": "d-stack--sm--column-reverse",
-      "applies": ".d-stack",
-      "description": "Styles stack in small screen with column reverse direction."
-    },
-    {
-      "class": "d-stack--sm--row",
-      "applies": ".d-stack",
-      "description": "Styles stack in small screen with row direction."
-    },
-    {
-      "class": "d-stack--sm--row-reverse",
-      "applies": ".d-stack",
-      "description": "Styles stack in small screen with row reverse direction."
+      "description": "Styles stack with gap 50 between elements."
     },
     {
       "class": "d-stack--gap-100",
@@ -116,6 +101,11 @@
       "description": "Styles stack with gap 300 between elements."
     },
     {
+      "class": "d-stack--gap-350",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 350 between elements."
+    },
+    {
       "class": "d-stack--gap-400",
       "applies": ".d-stack",
       "description": "Styles stack with gap 400 between elements."
@@ -123,7 +113,7 @@
     {
       "class": "d-stack--gap-450",
       "applies": ".d-stack",
-      "description": "Styles stack with gap 400 between elements."
+      "description": "Styles stack with gap 450 between elements."
     },
     {
       "class": "d-stack--gap-500",
@@ -131,9 +121,634 @@
       "description": "Styles stack with gap 500 between elements."
     },
     {
+      "class": "d-stack--gap-525",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 525 between elements."
+    },
+    {
+      "class": "d-stack--gap-550",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 550 between elements."
+    },
+    {
       "class": "d-stack--gap-600",
       "applies": ".d-stack",
       "description": "Styles stack with gap 600 between elements."
+    },
+    {
+      "class": "d-stack--gap-625",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 625 between elements."
+    },
+    {
+      "class": "d-stack--gap-650",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 650 between elements."
+    },
+    {
+      "class": "d-stack--gap-700",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 700 between elements."
+    },
+    {
+      "class": "d-stack--sm-column",
+      "applies": ".d-stack",
+      "description": "Styles stack in small screen with column direction."
+    },
+    {
+      "class": "d-stack--sm-column-reverse",
+      "applies": ".d-stack",
+      "description": "Styles stack in small screen with column reverse direction."
+    },
+    {
+      "class": "d-stack--sm-row",
+      "applies": ".d-stack",
+      "description": "Styles stack in small screen with row direction."
+    },
+    {
+      "class": "d-stack--sm-row-reverse",
+      "applies": ".d-stack",
+      "description": "Styles stack in small screen with row reverse direction."
+    },
+    {
+      "class": "d-stack--sm-align-normal",
+      "applies": ".d-stack",
+      "description": "Aligns stack items with browser default behavior on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm-align-start",
+      "applies": ".d-stack",
+      "description": "Aligns stack items to the start on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm-align-center",
+      "applies": ".d-stack",
+      "description": "Aligns stack items to the center on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm-align-end",
+      "applies": ".d-stack",
+      "description": "Aligns stack items to the end on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm-align-stretch",
+      "applies": ".d-stack",
+      "description": "Stretches stack items to fill the cross-axis on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm-align-baseline",
+      "applies": ".d-stack",
+      "description": "Aligns stack items along their baselines on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm-justify-start",
+      "applies": ".d-stack",
+      "description": "Justifies stack items to the start on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm-justify-center",
+      "applies": ".d-stack",
+      "description": "Justifies stack items to the center on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm-justify-end",
+      "applies": ".d-stack",
+      "description": "Justifies stack items to the end on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm-justify-around",
+      "applies": ".d-stack",
+      "description": "Distributes stack items with equal space around each item on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm-justify-between",
+      "applies": ".d-stack",
+      "description": "Distributes stack items with space between them on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm-justify-evenly",
+      "applies": ".d-stack",
+      "description": "Distributes stack items with equal space between all items on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm-gap-50",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 50 on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm-gap-100",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 100 on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm-gap-200",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 200 on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm-gap-300",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 300 on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm-gap-350",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 350 on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm-gap-400",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 400 on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm-gap-450",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 450 on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm-gap-500",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 500 on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm-gap-525",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 525 on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm-gap-550",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 550 on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm-gap-600",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 600 on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm-gap-625",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 625 on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm-gap-650",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 650 on small screens and larger."
+    },
+    {
+      "class": "d-stack--sm-gap-700",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 700 on small screens and larger."
+    },
+    {
+      "class": "d-stack--md-column",
+      "applies": ".d-stack",
+      "description": "Styles stack in medium screen with column direction."
+    },
+    {
+      "class": "d-stack--md-column-reverse",
+      "applies": ".d-stack",
+      "description": "Styles stack in medium screen with column reverse direction."
+    },
+    {
+      "class": "d-stack--md-row",
+      "applies": ".d-stack",
+      "description": "Styles stack in medium screen with row direction."
+    },
+    {
+      "class": "d-stack--md-row-reverse",
+      "applies": ".d-stack",
+      "description": "Styles stack in medium screen with row reverse direction."
+    },
+    {
+      "class": "d-stack--md-align-normal",
+      "applies": ".d-stack",
+      "description": "Aligns stack items with browser default behavior on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md-align-start",
+      "applies": ".d-stack",
+      "description": "Aligns stack items to the start on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md-align-center",
+      "applies": ".d-stack",
+      "description": "Aligns stack items to the center on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md-align-end",
+      "applies": ".d-stack",
+      "description": "Aligns stack items to the end on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md-align-stretch",
+      "applies": ".d-stack",
+      "description": "Stretches stack items to fill the cross-axis on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md-align-baseline",
+      "applies": ".d-stack",
+      "description": "Aligns stack items along their baselines on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md-justify-start",
+      "applies": ".d-stack",
+      "description": "Justifies stack items to the start on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md-justify-center",
+      "applies": ".d-stack",
+      "description": "Justifies stack items to the center on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md-justify-end",
+      "applies": ".d-stack",
+      "description": "Justifies stack items to the end on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md-justify-around",
+      "applies": ".d-stack",
+      "description": "Distributes stack items with equal space around each item on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md-justify-between",
+      "applies": ".d-stack",
+      "description": "Distributes stack items with space between them on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md-justify-evenly",
+      "applies": ".d-stack",
+      "description": "Distributes stack items with equal space between all items on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md-gap-50",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 50 on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md-gap-100",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 100 on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md-gap-200",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 200 on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md-gap-300",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 300 on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md-gap-350",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 350 on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md-gap-400",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 400 on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md-gap-450",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 450 on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md-gap-500",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 500 on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md-gap-525",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 525 on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md-gap-550",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 550 on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md-gap-600",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 600 on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md-gap-625",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 625 on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md-gap-650",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 650 on medium screens and larger."
+    },
+    {
+      "class": "d-stack--md-gap-700",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 700 on medium screens and larger."
+    },
+    {
+      "class": "d-stack--lg-column",
+      "applies": ".d-stack",
+      "description": "Styles stack in large screen with column direction."
+    },
+    {
+      "class": "d-stack--lg-column-reverse",
+      "applies": ".d-stack",
+      "description": "Styles stack in large screen with column reverse direction."
+    },
+    {
+      "class": "d-stack--lg-row",
+      "applies": ".d-stack",
+      "description": "Styles stack in large screen with row direction."
+    },
+    {
+      "class": "d-stack--lg-row-reverse",
+      "applies": ".d-stack",
+      "description": "Styles stack in large screen with row reverse direction."
+    },
+    {
+      "class": "d-stack--lg-align-normal",
+      "applies": ".d-stack",
+      "description": "Aligns stack items with browser default behavior on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg-align-start",
+      "applies": ".d-stack",
+      "description": "Aligns stack items to the start on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg-align-center",
+      "applies": ".d-stack",
+      "description": "Aligns stack items to the center on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg-align-end",
+      "applies": ".d-stack",
+      "description": "Aligns stack items to the end on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg-align-stretch",
+      "applies": ".d-stack",
+      "description": "Stretches stack items to fill the cross-axis on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg-align-baseline",
+      "applies": ".d-stack",
+      "description": "Aligns stack items along their baselines on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg-justify-start",
+      "applies": ".d-stack",
+      "description": "Justifies stack items to the start on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg-justify-center",
+      "applies": ".d-stack",
+      "description": "Justifies stack items to the center on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg-justify-end",
+      "applies": ".d-stack",
+      "description": "Justifies stack items to the end on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg-justify-around",
+      "applies": ".d-stack",
+      "description": "Distributes stack items with equal space around each item on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg-justify-between",
+      "applies": ".d-stack",
+      "description": "Distributes stack items with space between them on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg-justify-evenly",
+      "applies": ".d-stack",
+      "description": "Distributes stack items with equal space between all items on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg-gap-50",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 50 on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg-gap-100",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 100 on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg-gap-200",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 200 on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg-gap-300",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 300 on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg-gap-350",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 350 on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg-gap-400",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 400 on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg-gap-450",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 450 on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg-gap-500",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 500 on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg-gap-525",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 525 on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg-gap-550",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 550 on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg-gap-600",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 600 on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg-gap-625",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 625 on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg-gap-650",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 650 on large screens and larger."
+    },
+    {
+      "class": "d-stack--lg-gap-700",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 700 on large screens and larger."
+    },
+    {
+      "class": "d-stack--xl-column",
+      "applies": ".d-stack",
+      "description": "Styles stack in extra large screen with column direction."
+    },
+    {
+      "class": "d-stack--xl-column-reverse",
+      "applies": ".d-stack",
+      "description": "Styles stack in extra large screen with column reverse direction."
+    },
+    {
+      "class": "d-stack--xl-row",
+      "applies": ".d-stack",
+      "description": "Styles stack in extra large screen with row direction."
+    },
+    {
+      "class": "d-stack--xl-row-reverse",
+      "applies": ".d-stack",
+      "description": "Styles stack in extra large screen with row reverse direction."
+    },
+    {
+      "class": "d-stack--xl-align-normal",
+      "applies": ".d-stack",
+      "description": "Aligns stack items with browser default behavior on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl-align-start",
+      "applies": ".d-stack",
+      "description": "Aligns stack items to the start on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl-align-center",
+      "applies": ".d-stack",
+      "description": "Aligns stack items to the center on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl-align-end",
+      "applies": ".d-stack",
+      "description": "Aligns stack items to the end on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl-align-stretch",
+      "applies": ".d-stack",
+      "description": "Stretches stack items to fill the cross-axis on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl-align-baseline",
+      "applies": ".d-stack",
+      "description": "Aligns stack items along their baselines on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl-justify-start",
+      "applies": ".d-stack",
+      "description": "Justifies stack items to the start on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl-justify-center",
+      "applies": ".d-stack",
+      "description": "Justifies stack items to the center on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl-justify-end",
+      "applies": ".d-stack",
+      "description": "Justifies stack items to the end on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl-justify-around",
+      "applies": ".d-stack",
+      "description": "Distributes stack items with equal space around each item on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl-justify-between",
+      "applies": ".d-stack",
+      "description": "Distributes stack items with space between them on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl-justify-evenly",
+      "applies": ".d-stack",
+      "description": "Distributes stack items with equal space between all items on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl-gap-50",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 50 on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl-gap-100",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 100 on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl-gap-200",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 200 on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl-gap-300",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 300 on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl-gap-350",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 350 on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl-gap-400",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 400 on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl-gap-450",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 450 on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl-gap-500",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 500 on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl-gap-525",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 525 on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl-gap-550",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 550 on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl-gap-600",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 600 on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl-gap-625",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 625 on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl-gap-650",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 650 on extra large screens and larger."
+    },
+    {
+      "class": "d-stack--xl-gap-700",
+      "applies": ".d-stack",
+      "description": "Styles stack with gap 700 on extra large screens and larger."
     }
   ]
 }

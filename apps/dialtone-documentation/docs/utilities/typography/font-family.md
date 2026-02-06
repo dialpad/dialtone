@@ -3,15 +3,7 @@ title: Font Family
 description: Utilities to change an element's font-family.
 ---
 
-<dt-notice
-  kind="warning"
-  :hideClose="true"
-  class="d-wmx100p"
->
-  <template #default>
-    <p class="d-body--md-compact">Before applying a typography utility, first consider using <router-link class="d-fw-semibold d-link d-link--muted" to="/foundations/typography/">Dialtone's text styles</router-link> that bundles Font family, Font weight, Font size, and Line height together.</p>
-  </template>
-</dt-notice>
+<FontUtilitiesNotice />
 
 ## Sans-Serif
 
@@ -51,11 +43,13 @@ Dialtone supports select marketing fonts and weights. Use the following combinat
 
 <script setup>
   import { fontFamily } from '@data/type.json';
+  import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
+  import FontUtilitiesNotice from '@baseComponents/FontUtilitiesNotice.vue';
 </script>
 
 ## CSS Variables
 
-<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+<clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
       <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
@@ -72,11 +66,11 @@ Dialtone supports select marketing fonts and weights. Use the following combinat
       </tbody>
     </table>
   </div>
-</div>
+</clamped-table-wrapper>
 
 ## Classes
 
-<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+<clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
       <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
@@ -93,4 +87,4 @@ Dialtone supports select marketing fonts and weights. Use the following combinat
       </tbody>
     </table>
   </div>
-</div>
+</clamped-table-wrapper>

@@ -1,7 +1,6 @@
 ---
-title: Getting Started with Dialtone
+title: Getting Started
 description: A quick start guide to add Dialtone to your project.
-keywords: ["setup","install","quick start","introduction"]
 ---
 
 ## Adding Dialtone to Your Project
@@ -45,34 +44,88 @@ This gives you access to multiple themes, light/dark mode switching, high contra
 
 ## Usage
 
-A general overview of Dialtone's utility classes, CSS components, and Vue components.
-
-### Utility-First
-
-Dialtone's CSS library offers a framework of utility-first classes. Each class is a small, [atomic style](https://css-tricks.com/lets-define-exactly-atomic-css/) declaration that, when chained together, should mitigate most situations in which custom CSS must be written. Just write these classes right in your mark-up and you're all set!
+Dialtone's CSS library offers a framework of [CSS Utilities](/utilities/) classes. Each class is a small, [atomic style](https://css-tricks.com/lets-define-exactly-atomic-css/) declaration that, when chained together, should mitigate most situations in which custom CSS must be written. Just write these classes right in your mark-up and you're all set!
 
 <code-well-header>
-  <div class="d-body--sm d-p8 d-bgc-contrast d-fc-primary-inverted d-bar8">Box</div>
+  <dt-stack
+    direction="row"
+    gap="400"
+    justify="between"
+    class="
+      d-w100p
+      d-bar8
+      d-fc-tertiary
+      d-p16
+      d-bgc-moderate
+      d-ba
+      d-bc-subtle
+    "
+  >
+    <dt-text as="p" kind="body" size="sm" align="center" tone="tertiary" wrap="balance">
+      The quick brown fox jumps over the lazy dog.
+    </dt-text>
+    <dt-text as="p" kind="body" size="sm" align="center" tone="tertiary" wrap="balance">
+      The quick brown fox jumps over the lazy dog.
+    </dt-text>
+    <dt-text as="p" kind="body" size="sm" align="center" tone="tertiary" wrap="balance">
+      The quick brown fox jumps over the lazy dog.
+    </dt-text>
+  </dt-stack>
 </code-well-header>
 
 ```html
-<div class="d-body--sm d-p8 d-bgc-contrast d-fc-primary-inverted d-bar8">Box</div>
+<dt-stack
+  direction="row"
+  gap="400"
+  justify="between"
+  class="
+    d-w100p
+    d-bar8
+    d-fc-tertiary
+    d-p16
+    d-bgc-moderate
+    d-ba
+    d-bc-subtle
+  "
+  >
+  <dt-text as="p" kind="body" size="sm" align="center" tone="tertiary" wrap="balance">
+    The quick brown fox jumps over the lazy dog.
+  </dt-text>
+  <dt-text as="p" kind="body" size="sm" align="center" tone="tertiary" wrap="balance">
+    The quick brown fox jumps over the lazy dog.
+  </dt-text>
+  <dt-text as="p" kind="body" size="sm" align="center" tone="tertiary" wrap="balance">
+    The quick brown fox jumps over the lazy dog.
+  </dt-text>
+</dt-stack>
 ```
 
 In the above example, we used:
 
-- Our [padding utility class](/utilities/spacing/padding.md) `.d-p8` to add 8px of padding on all sides.
-- Our [background color utility class](/utilities/backgrounds/color.md) `.d-bgc-contrast`.
-- Our [font color utility class](/utilities/typography/font-color.md) `.d-fc-primary-inverted` to change the font color to the inverted primary text color.
-- Our [border radius](/utilities/borders/radius.md) `.d-bar8` for rounded corners.
-- Our [text style](/foundations/typography/index.md) `.d-body--sm`.
+- **[Stack component](/components/stack.md)** `<dt-stack>` to layout items in a row with consistent gap.
+- **[Text component](/components/text.md)** `<dt-text>` for typography with relevant props.
+- **[Width utility](/utilities/sizing/width.md)** `.d-w100p` for full width.
+- **[Padding utility](/utilities/spacing/padding.md)** `.d-p16` to add 16px of padding on all sides.
+- **[Background color utility](/utilities/backgrounds/color.md)** `.d-bgc-moderate` for a moderate background.
+- **[Border utility](/utilities/borders/style.md)** `.d-ba` for a border on all sides.
+- **[Border color utility](/utilities/borders/color.md)** `.d-bc-subtle` for a subtle border color.
+- **[Border radius utility](/utilities/borders/radius.md)** `.d-bar8` for rounded corners.
 
 Though an atomic CSS approach comes with many advantages, we know it also offers a notable disadvantage: reducing the CSS cascade. This is especially true for repeated UI elements, which can end up creating redundant mark-up. For these instances, Dialtone offers components.
 
 ### Components
 
 There are two methods to implement Dialtone components: Vue (recommended) and CSS. Vue is the preferred method as it's more robust and readily accessible out-of-the-box. [Get started with Vue components](https://dialtone.dialpad.com/vue/).
-In the event Dialtone Vue doesn't suit your needs, Dialtone's CSS library offers the same set of components. These may require more work to implement and make accessible, but will work in a pinch.
+
+<code-well-header>
+  <dt-button>Primary Button</dt-button>
+</code-well-header>
+
+```html
+<dt-button>Primary Button</dt-button>
+```
+
+In the event Dialtone Vue doesn't suit your needs, Dialtone's CSS library offers the same set of components in raw HTML and CSS. These may require more work to implement and make accessible, but will work in a pinch.
 
 <code-well-header>
   <button class="d-btn d-btn--primary">Primary Button</button>
@@ -120,16 +173,16 @@ In the event you need to write CSS, use [BEM (Block Element Modifier)](http://ge
 
   // Elements within block
   &__header {
-    padding: var(--dt-space-500);
+    padding: var(--dt-size-500);
   }
 
   &__body {
     flex-grow: 1;
-    padding: var(--dt-space-500);
+    padding: var(--dt-size-500);
   }
 
   &__footer {
-    padding: var(--dt-space-500);
+    padding: var(--dt-size-500);
   }
 }
 ```
@@ -156,25 +209,6 @@ All Dialtone components are implemented with `box-sizing: border-box;` applied. 
 In `Vue`, we apply `border-box` globally at the `VueView` level, ensuring all child elements use this style. As such, Dialtone styles will work correctly in Vue with respect to element sizing.
 
 In `Backbone` we are not using `border-box` by default. Because Dialtone expects this, anytime we wish to use Dialtone styles in Backbone we must ensure to apply the `border-box` style to all affected elements.
-
-## Components
-
-Components are reusable building blocks that support a specific interaction or UI need. These components can be reused across Dialpad products and projects
-ensuring UI consistency and cohesion while helping teams deliver high-quality features faster.
-
-Dialtone provides two options to use the components: CSS and Vue.
-
-### Vue components (recommended)
-
-Use [Vue components](https://dialtone.dialpad.com/vue3/index.html) in the case your project supports Vue since these components are built conforming to [WCAG AA Accessibility Guidelines](https://www.w3.org/WAI/standards-guidelines/wcag/glance/)
-and with usability and performance in mind.
-
-### CSS components
-
-If Vue isn't supported in your application, you can use the [CSS components](../components/avatar.md) in your project, but you'll be responsible
-for writing the correct markup, managing DOM elements and events, and making it [accessible for all users](../getting-started/accessibility/fundamentals.md).
-
-See more about [components usage](../getting-started/usage.md/#components).
 
 ## Build Dialtone Locally
 

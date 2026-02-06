@@ -200,7 +200,7 @@ htmlCode='
     aria-modal="false"
     tabindex="-1"
     class="d-popover__dialog d-popover__dialog--modal"
-    style="max-height: calc(100vh - var(--dt-space-300));"
+    style="max-height: calc(100vh - var(--dt-size-300));"
   >
     <div class="d-popover__header d-pl16">
       <div class="d-popover__header__content"><div class="d-w100p">This is the header</div></div>
@@ -280,7 +280,7 @@ htmlCode='
     aria-modal="false"
     tabindex="-1"
     class="d-popover__dialog d-popover__dialog--modal"
-    style="max-height: calc(100vh - var(--dt-space-300));"
+    style="max-height: calc(100vh - var(--dt-size-300));"
   >
     <div class="d-popover__content d-p16">
       <div>

@@ -17,12 +17,14 @@
           custom
         >
           <dt-button
+            :id="labelId"
             v-bind="attrs"
             importance="clear"
             kind="muted"
             label-class="d-jc-flex-start d-ta-left"
             icon-position="right"
             :size="depth === 0 ? 'lg' : undefined"
+            :tabindex="actionableTabIndex"
             :class="[
               'd-w100p dialtone-shell-btn',
               {
@@ -59,13 +61,14 @@
       <div v-dt-scrollbar class="d-hmx464">
         <dt-stack
           as="ul"
+          :aria-labelledby="labelId"
           gap="200"
           :class="{
             'd-pt4': depth === 0 || depth === 1,
           }"
         >
           <li
-            v-for="(subItem, index) in subItems"
+            v-for="subItem in subItems"
             :key="subItem.text"
           >
             <sidebar-item
@@ -188,6 +191,13 @@ const emit = defineEmits(['toggle']);
 
 const subItems = computed(() => {
   return props.item?.children || [];
+});
+const labelId = computed(() => {
+  return `sidebar-label-${props.item?.text?.toLowerCase().replace(/\s+/g, '-')}`;
+});
+const actionableTabIndex = computed(() => {
+  // Items without links are not actionable and should be removed from tab order
+  return props.item.link ? undefined : -1;
 });
 
 const route = useRoute();

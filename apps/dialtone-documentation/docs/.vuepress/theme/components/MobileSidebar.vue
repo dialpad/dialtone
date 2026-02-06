@@ -1,11 +1,20 @@
 <template>
   <div class="mobile-sidebar">
-    <div
+    <dt-stack
+      direction="row"
+      align="center"
+      justify="between"
       class="
         d-px16
-        d-ps-fixed d-w100p d-bgc-secondary d-h64 d-x0
-        d-d-flex d-bb d-ai-center
-        d-jc-space-between d-t64 lg:d-d-none
+        d-ps-fixed
+        d-w100p
+        d-bgc-secondary
+        d-h64
+        d-x0
+        d-bb
+        d-bc-default
+        d-t64
+        lg:d-d-none
       "
     >
       <dt-breadcrumbs :breadcrumbs="breadcrumbs" />
@@ -20,14 +29,20 @@
           />
         </template>
       </dt-button>
-    </div>
-    <div
-      :class="{ 'd-o0 d-d-none': !isSiteNavOpen }"
+    </dt-stack>
+    <dt-stack
+      align="baseline"
       class="
-        mobile-header-drop-down-navigation d-ps-fixed d-l0 d-w100p
-        d-bgc-primary d-of-auto d-d-flex
-        d-fd-column d-ai-baseline d-pt24 d-px16
+        mobile-header-drop-down-navigation
+        d-ps-fixed
+        d-l0
+        d-w100p
+        d-bgc-primary
+        d-of-auto
+        d-pt24
+        d-px16
       "
+      :class="{ 'd-o0 d-d-none': !isSiteNavOpen }"
     >
       <sidebar-item
         v-for="item in sidebarItems"
@@ -36,7 +51,7 @@
         :is-single-page="item.isSinglePage"
         @click="toggleSiteNav"
       />
-    </div>
+    </dt-stack>
   </div>
 </template>
 
@@ -99,7 +114,7 @@ async function toggleSiteNav () {
   }
 
   .mobile-header-drop-down-navigation {
-    inset-block-start: var(--dt-space-800);
+    inset-block-start: var(--dt-size-800);
     block-size: 100%;
     padding-block-end: 15.2rem;
 

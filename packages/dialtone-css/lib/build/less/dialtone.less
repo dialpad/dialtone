@@ -14,6 +14,7 @@
 //  --  COMPONENTS
 @import 'components/root-layout';
 @import 'components/stack';
+@import 'components/text';
 @import 'components/item-layout';
 @import 'components/avatar';
 @import 'components/badge';
@@ -91,6 +92,7 @@
 @import 'recipes/ivr_node';
 @import 'recipes/leftbar_row';
 @import 'recipes/message_input';
+@import 'recipes/motion_text';
 @import 'recipes/settings_menu_button';
 @import 'recipes/time_pill';
 @import 'recipes/top_banner_info';
@@ -99,3 +101,26 @@
 //  --  THEMES & GLOBAL SETTINGS
 @import 'dialtone-globals';
 @import 'themes/default';
+
+//  --  DEBUG
+[data-migrate-outline] {
+  --outline-color: orangered;
+  --outline-size: var(--dt-size-200);
+  --outline-offset: calc(var(--outline-size) * -1);
+
+  /* stylelint-disable-next-line meowtec/no-px */
+  outline: var(--outline-size) solid var(--outline-color) !important;
+  /* stylelint-disable-next-line meowtec/no-px */
+  outline-offset: var(--outline-offset);
+
+  &:hover {
+    --outline-color: transparent;
+  }
+  /* stylelint-disable-next-line meowtec/no-px */
+  > * {
+    /* stylelint-disable-next-line meowtec/no-px */
+    outline: var(--outline-size) dotted var(--outline-color);
+    /* stylelint-disable-next-line meowtec/no-px */
+    outline-offset: var(--outline-offset);
+  }
+}

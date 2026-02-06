@@ -22,9 +22,32 @@ const props = defineProps({
 });
 
 const markdownToHtml = computed(() => {
-  // eslint-disable-next-line new-cap
+  /**
+   * Fix multi-line HTML tags from JSDoc comments.
+   *
+   * Problem: JSDoc comments can have HTML tags split across multiple lines like:
+   *   <a
+   *     class="d-link"
+   *     href="..."
+   *   >
+   *
+   * Solution: Collapse all whitespace (including newlines) within HTML tags into single spaces.
+   * This transforms the above into: <a class="d-link" href="...">
+   */
+  const normalizedMarkdown = props.markdown.replace(
+    /<(\w+)([^>]*)>/gs,
+    (match, tagName, attributes) => {
+      // Replace all whitespace (spaces, tabs, newlines) with a single space
+      const cleanAttributes = attributes.replace(/\s+/g, ' ').trim();
+
+      // Reconstruct the tag: <tagName attributes> or <tagName> if no attributes
+      return cleanAttributes ? `<${tagName} ${cleanAttributes}>` : `<${tagName}>`;
+    },
+  );
+
+  // Convert markdown to HTML (with HTML tags enabled)
   const md = new markdownIt({ html: true });
-  let renderedMarkdown = md.render(props.markdown);
+  let renderedMarkdown = md.render(normalizedMarkdown);
 
   // Add 'd-link' class to all <a> tags
   renderedMarkdown = renderedMarkdown.replace(/<a /g, '<a class="d-link" ');

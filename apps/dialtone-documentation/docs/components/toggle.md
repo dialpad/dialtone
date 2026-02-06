@@ -9,9 +9,9 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["switch","checkbox","on off","d-toggle","DtToggle","dt-toggle"]
 ---
 <code-well-header>
-  <div class="d-toggle-group d-d-flex d-ai-center">
+  <dt-stack direction="row" align="center" class="d-toggle-group">
     <dt-toggle label-class="d-mr6">Label</dt-toggle>
-  </div>
+  </dt-stack>
 </code-well-header>
 
 <!-- <component-combinator component-name="DtToggle" /> -->

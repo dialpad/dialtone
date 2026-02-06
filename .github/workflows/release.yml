@@ -16,7 +16,6 @@ on:
           - icons
           - language-server
           - tokens
-          - vue2
           - vue3
           - eslint-plugin
           - stylelint-plugin
@@ -63,8 +62,6 @@ jobs:
       pull-requests: write
     env:
       RELEASE_TAG: ${{ needs.get-branch-name.outputs.current_branch == 'staging' && 'latest' || needs.get-branch-name.outputs.current_branch }}
-      DIALTONE_VUE3_RELEASE_TAG: ${{ needs.get-branch-name.outputs.current_branch == 'staging' && 'vue3' || needs.get-branch-name.outputs.current_branch }}
-      NPM_TOKEN: ${{ secrets.DIALTONE_NPM_TOKEN }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout
@@ -73,22 +70,8 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.DIALTONE_CI_TOKEN }}
 
-      - name: Use pnpm
-        uses: pnpm/action-setup@v3
-
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: ".nvmrc"
-          cache: "pnpm"
-          registry-url: "https://npm.pkg.github.com"
-          scope: "dialpad"
-        env:
-          NODE_AUTH_TOKEN: ${{ github.token }}
-
-      - name: Install dependencies
-        shell: bash
-        run: pnpm install --frozen-lockfile
+      - name: Setup Environment
+        uses: ./.github/actions/setup-environment
 
       # Release to GitHub
       - name: Release Dialtone Combinator ${{ env.RELEASE_TAG }}
@@ -115,13 +98,9 @@ jobs:
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'tokens' }}
         run: pnpm nx run dialtone-tokens:release
 
-      - name: Release Dialtone Vue@${{ env.RELEASE_TAG }}
-        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'vue2' }}
-        run: pnpm nx run dialtone-vue2:release
-
-      - name: Release Dialtone Vue@${{ env.DIALTONE_VUE3_RELEASE_TAG }}
+      - name: Release Dialtone Vue ${{ env.RELEASE_TAG }}
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'vue3' }}
-        run: pnpm nx run dialtone-vue3:release
+        run: pnpm nx run dialtone-vue:release
 
       - name: Release Dialtone ESLint Plugin ${{ env.RELEASE_TAG }}
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'eslint-plugin' }}

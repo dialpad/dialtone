@@ -28,7 +28,7 @@ StyleDictionary.registerAction({
 
 StyleDictionary.registerTransformGroup({
   name: 'custom/css/tokens-studio',
-  transforms: [...getTransforms({ platform: 'css' }), 'name/kebab', 'dt/size/pxToRem', 'dt/space/pxToRem'].filter(transform => !['name/camel', 'ts/size/px', 'ts/typography/css/fontFamily'].includes(transform)),
+  transforms: [...getTransforms({ platform: 'css' }), 'name/kebab', 'dt/size/pxToRem', 'dt/space/pxToRem', 'dt/lineHeight/percentToDecimal'].filter(transform => !['name/camel', 'ts/size/px', 'ts/typography/css/fontFamily'].includes(transform)),
 });
 
 export async function run () {
@@ -151,7 +151,7 @@ export async function run () {
               format: 'android/resources',
               resourceType: 'color',
               filter: function (token) {
-                if (token.value.startsWith('linear-gradient')) return false;
+                if (typeof token.value === 'string' && token.value.startsWith('linear-gradient')) return false;
                 if (token.path.includes('shadow')) return false;
                 return ['color'].includes(token.type) && token.isSource;
               },
@@ -161,7 +161,7 @@ export async function run () {
               format: 'android/resources',
               resourceType: 'dimen',
               filter: function (token) {
-                if (token.value.startsWith('linear-gradient')) return false;
+                if (typeof token.value === 'string' && token.value.startsWith('linear-gradient')) return false;
                 if (token.path.includes('shadow')) return false;
                 return ['dimension'].includes(token.type) && token.isSource;
               },
@@ -198,7 +198,7 @@ export async function run () {
               },
 
               filter: function (token) {
-                if (token.value.startsWith('linear-gradient')) return false;
+                if (typeof token.value === 'string' && token.value.startsWith('linear-gradient')) return false;
                 if (token.path.includes('shadow')) return false;
                 return token.isSource;
               },
@@ -229,7 +229,7 @@ export async function run () {
                 className: `DialtoneTokens${kebabCaseToPascalCase(themeName)}`,
               },
               filter: function (token) {
-                if (token.value.startsWith('linear-gradient')) return false;
+                if (typeof token.value === 'string' && token.value.startsWith('linear-gradient')) return false;
                 return token.isSource;
               },
             },

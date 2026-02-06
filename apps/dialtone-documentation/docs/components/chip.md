@@ -11,10 +11,31 @@ keywords: ["tag","pill","token","badge","d-chip","DtChip","dt-chip"]
 
 <code-well-header>
   <dt-stack direction="row" gap="400">
-    <example-chip size="sm" label="Chip" hide-close-btn :interactive="false"/>
-    <example-chip size="sm" label="Chip" :interactive="false"/>
-    <example-chip size="sm" label="Chip" with-avatar/>
-    <example-chip size="sm" label="Chip" with-icon/>
+    <dt-chip size="sm" :hide-close="true" :interactive="false">Chip</dt-chip>
+    <dt-chip size="sm" :interactive="false">Chip</dt-chip>
+    <dt-chip size="sm">
+      <template #avatar>
+        <dt-avatar
+          image-src="/assets/images/person.png"
+          image-alt="Jaqueline Nackos"
+          full-name="Jaqueline Nackos"
+        />
+      </template>
+      <template #default>
+        Chip
+      </template>
+    </dt-chip>
+    <dt-chip size="sm">
+      <template #icon>
+        <dt-icon
+          name="phone"
+          size="200"
+        />
+      </template>
+      <template #default>
+        Chip
+      </template>
+    </dt-chip>
   </dt-stack>
 </code-well-header>
 
@@ -27,7 +48,7 @@ keywords: ["tag","pill","token","badge","d-chip","DtChip","dt-chip"]
 Add `:interactive="false"` to make it a read-only, non-interactive Chip. This changes it from a `<button>` to a non-interactive, read-only Chip with no events or hover/active state. Note that this does not effect the interactivity of its `×` remove button.
 
 <code-well-header>
-  <example-chip label="Chip" :interactive="false"/>
+  <dt-chip :interactive="false">Chip</dt-chip>
 </code-well-header>
 
 <code-example-tabs
@@ -53,7 +74,7 @@ showHtmlWarning />
 ### Default
 
 <code-well-header>
-  <example-chip label="Chip"/>
+  <dt-chip>Chip</dt-chip>
 </code-well-header>
 
 <code-example-tabs
@@ -76,10 +97,27 @@ vueCode='
 '
 showHtmlWarning />
 
+### Disabled
+
+Use the `disabled` prop to disable both the Chip and its close button. This sets `aria-disabled="true"` and `tabindex="-1"` on the interactive elements and applies disabled styles, preventing pointer and keyboard interaction.
+
+<code-well-header>
+  <dt-chip disabled ref="example-disabled">Chip</dt-chip>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode="() => $refs['example-disabled']"
+vueCode='
+<dt-chip disabled>
+  Chip
+</dt-chip>
+'
+showHtmlWarning />
+
 ### Without Close Button
 
 <code-well-header>
-  <example-chip label="Chip" hide-close-btn/>
+  <dt-chip :hide-close="true">Chip</dt-chip>
 </code-well-header>
 
 <code-example-tabs
@@ -100,7 +138,17 @@ showHtmlWarning />
 ### With Icon
 
 <code-well-header>
-  <example-chip label="Chip" with-icon hide-close-btn/>
+  <dt-chip with-icon :hide-close="true">
+    <template #icon>
+      <dt-icon
+        name="phone"
+        size="200"
+      />
+    </template>
+    <template #default>
+      Chip
+    </template>
+  </dt-chip>
 </code-well-header>
 
 <code-example-tabs
@@ -132,7 +180,17 @@ showHtmlWarning />
 ### With Icon and Close Button
 
 <code-well-header>
-  <example-chip label="Chip" with-icon/>
+  <dt-chip>
+    <template #icon>
+      <dt-icon
+        name="phone"
+        size="200"
+      />
+    </template>
+    <template #default>
+      Chip
+    </template>
+  </dt-chip>
 </code-well-header>
 
 <code-example-tabs
@@ -169,7 +227,18 @@ showHtmlWarning />
 ### With Avatar and Close Button
 
 <code-well-header>
-  <example-chip label="Chip" with-avatar/>
+  <dt-chip>
+    <template #avatar>
+      <dt-avatar
+        image-src="/assets/images/person.png"
+        image-alt="Jaqueline Nackos"
+        full-name="Jaqueline Nackos"
+      />
+    </template>
+    <template #default>
+      Chip
+    </template>
+  </dt-chip>
 </code-well-header>
 
 <code-example-tabs
@@ -190,6 +259,8 @@ vueCode='
 <dt-chip>
   <template #avatar>
     <dt-avatar
+      image-src="/assets/images/person.png"
+      image-alt="Jaqueline Nackos"
       full-name="Jaqueline Nackos"
     />
   </template>
@@ -205,7 +276,9 @@ showHtmlWarning />
 To truncate text, add `.d-truncate` to the content element, and set the width of the `.d-chip` element.
 
 <code-well-header>
-  <example-chip label="Chip loooooong name" truncate/>
+  <dt-chip content-class="d-w102">
+    <span class="d-chip__text d-truncate">Chip loooooong name</span>
+  </dt-chip>
 </code-well-header>
 
 <code-example-tabs
@@ -232,9 +305,9 @@ showHtmlWarning />
 
 <code-well-header>
   <dt-stack direction="row" gap="400">
-    <example-chip :interactive="false" label="Chip" size="xs"/>
-    <example-chip :interactive="false" label="Chip" size="sm"/>
-    <example-chip :interactive="false" label="Chip" />
+    <dt-chip :interactive="false" size="xs">Chip</dt-chip>
+    <dt-chip :interactive="false" size="sm">Chip</dt-chip>
+    <dt-chip :interactive="false">Chip</dt-chip>
   </dt-stack>
 </code-well-header>
 
@@ -290,10 +363,6 @@ vueCode='
 </dt-chip>
 '
 showHtmlWarning />
-
-<script setup>
-  import ExampleChip from '@exampleComponents/ExampleChip.vue';
-</script>
 
 ## Vue API
 

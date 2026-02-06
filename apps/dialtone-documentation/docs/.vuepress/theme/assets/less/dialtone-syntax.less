@@ -4,15 +4,15 @@
  */
 
 div[class*="language-"] {
-	margin: var(--dt-space-500) 0;
-	padding: var(--dt-space-500);
+	margin: var(--dt-size-500) 0;
+	padding: var(--dt-size-500);
 	background-color: var(--dt-color-surface-secondary);
 	border-radius: var(--dt-size-500);
 
 	& pre {
 		margin: 0;
-		padding: var(--dt-space-450);11
-    padding-top: var(--dt-space-550);
+		padding: var(--dt-size-450);
+    padding-top: var(--dt-size-550);
 
 		& code {
 			padding: 0;
@@ -22,7 +22,7 @@ div[class*="language-"] {
 	}
 
 	&[class*="html"] {
-		margin-block-start: var(--dt-space-400-negative);
+		margin-block-start: var(--dt-size-400-negative);
 		border-radius: 0 0 var(--dt-size-400) var(--dt-size-400) !important;
 	}
 
@@ -34,26 +34,29 @@ div[class*="language-"] {
 }
 
 code:not(.d-code--md, .d-code--sm) {
-	padding: var(--dt-space-200) var(--dt-space-300);
+	padding: var(--dt-size-200) var(--dt-size-300);
 	color: var(--dt-color-blue-500);
 	background-color: var(--dt-color-surface-info);
 	border-radius: var(--dt-size-100);
+	user-select: all;
 }
 
 code[class*="language-"],
 pre[class*="language-"] {
 	margin: 0;
 	color: var(--dt-color-black-1000);
-	font: var(--dt-typography-code-md);
+	font: var(--dt-text-code-sm);
 	line-height: var(--dt-font-line-height-400);
 	white-space: pre;
 	text-align: start;
 	word-wrap: normal;
 	word-break: normal;
 	word-spacing: normal;
+	overflow-wrap: normal;
 	tab-size: 4;
 	hyphens: none;
 	border-radius: var(--dt-size-radius-400);
+	user-select: initial;
 }
 
 @media print {
@@ -65,13 +68,13 @@ pre[class*="language-"] {
 
 /* Code blocks */
 pre[class*="language-"] {
-	padding: var(--dt-space-100);
+	padding: var(--dt-size-100);
 	overflow: auto;
 }
 
 /* Inline code */
 :not(pre) > code[class*="language-"] {
-	padding: var(--dt-space-100);
+	padding: var(--dt-size-100);
 	white-space: normal;
 }
 
@@ -149,7 +152,7 @@ pre[class*="language-"] {
 
 pre[class*="language-"].line-numbers {
 	position: relative;
-	padding-inline-start: var(--dt-space-600);
+	padding-inline-start: var(--dt-size-600);
 	counter-reset: linenumber;
 }
 
@@ -161,10 +164,10 @@ pre[class*="language-"].line-numbers > code {
 .line-numbers .line-numbers-rows {
 	position: absolute;
 	inset-block-start: 0;
-	inset-inline-start: var(--dt-space-negative-600);
+	inset-inline-start: var(--dt-size-negative-600);
 	inline-size: var(--dt-size-600);
 	font-size: 100%;
-	letter-spacing: var(--dt-space-negative-100);
+	letter-spacing: var(--dt-size-negative-100);
 	border-inline-end: var(--dt-size-100) solid var(--dt-color-black-600);
 	-webkit-user-select: none;
 	-moz-user-select: none;
@@ -179,7 +182,7 @@ pre[class*="language-"].line-numbers > code {
 
   &::before {
     display: block;
-    padding-inline-end: var(--dt-space-400);
+    padding-inline-end: var(--dt-size-400);
     color: var(--dt-color-black-600);
     text-align: end;
     content: counter(linenumber);
@@ -189,9 +192,9 @@ pre[class*="language-"].line-numbers > code {
 .command-line-prompt {
 	display: block;
 	float: inline-start;
-	margin-inline-end: var(--dt-space-negative-450);
+	margin-inline-end: var(--dt-size-negative-450);
 	font-size: 100%;
-	letter-spacing: var(--dt-space-negative-100);
+	letter-spacing: var(--dt-size-negative-100);
 	border-inline-end: var(--dt-size-100) solid var(--dt-color-black-600);
 	user-select: none;
 	pointer-events: none;
@@ -199,7 +202,7 @@ pre[class*="language-"].line-numbers > code {
 
 .command-line-prompt > span::before {
 	display: block;
-	padding-inline-end: var(--dt-space-400);
+	padding-inline-end: var(--dt-size-400);
 	color: var(--dt-color-black-600);
 	content: ' ';
 }

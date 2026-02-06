@@ -9,10 +9,10 @@ Use `d-pls-stretch{-n}` to stretch grid items along their block and inline axis.
 
 <code-well-header>
   <div class="d-d-grid d-g-cols2 d-g16 d-w100p d-hmn216 d-bar8 d-bgc-moderate">
-    <div class="d-fl-center d-pls-stretch d-p16 d-bgc-bold-opaque d-bar4">1</div>
-    <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4 ">2</div>
-    <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">3</div>
-    <div class="d-fl-center d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">4</div>
+    <dt-stack direction="row" align="center" justify="center" class="d-pls-stretch d-p16 d-bgc-bold-opaque d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">4</dt-stack>
   </div>
 </code-well-header>
 
@@ -31,10 +31,10 @@ Use `d-pls-start{-n}` to align a grid item along the start of their block and/or
 
 <code-well-header>
   <div class="d-d-grid d-g-cols2 d-g16 d-w100p d-h216 d-bar8 d-bgc-moderate">
-    <div class="d-fl-center d-pls-start d-p16 d-w64 d-h64 d-bgc-bold-opaque d-bar4">1</div>
-    <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">2</div>
-    <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">3</div>
-    <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">4</div>
+    <dt-stack direction="row" align="center" justify="center" class="d-pls-start d-p16 d-w64 d-h64 d-bgc-bold-opaque d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4">4</dt-stack>
   </div>
 </code-well-header>
 
@@ -53,10 +53,10 @@ Use `d-pls-end{-n}` to align a grid item along the end of their block and/or inl
 
 <code-well-header>
   <div class="d-d-grid d-g-cols2 d-g16 d-w100p d-h216 d-bar8 d-bgc-moderate">
-    <div class="d-fl-center d-pls-end d-p16 d-w64 d-h64 d-bgc-bold-opaque d-bar4">1</div>
-    <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">2</div>
-    <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">3</div>
-    <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">4</div>
+    <dt-stack direction="row" align="center" justify="center" class="d-pls-end d-p16 d-w64 d-h64 d-bgc-bold-opaque d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4">4</dt-stack>
   </div>
 </code-well-header>
 
@@ -75,10 +75,10 @@ Use `d-pls-center{-n}` to align a grid item along the center of their block and/
 
 <code-well-header>
   <div class="d-d-grid d-g-cols2 d-g16 d-w100p d-h216 d-bar8 d-bgc-moderate">
-    <div class="d-fl-center d-pls-center d-p16 d-w64 d-h64 d-bgc-bold-opaque d-bar4">1</div>
-    <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">2</div>
-    <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">3</div>
-    <div class="d-fl-center d-p16 d-bgc-moderate-opaque d-bar4">4</div>
+    <dt-stack direction="row" align="center" justify="center" class="d-pls-center d-p16 d-w64 d-h64 d-bgc-bold-opaque d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4">4</dt-stack>
   </div>
 </code-well-header>
 

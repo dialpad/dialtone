@@ -137,7 +137,7 @@ When `type` is set to "custom" the list item will not render any styles or slots
       navigation-type="tab"
       type="custom"
     >
-      <div class="d-py8 d-px12 d-d-flex d-ai-center d-jc-space-between">
+      <dt-stack direction="row" align="center" justify="between" class="d-py8 d-px12">
         <div>
           <time
             class="d-fs-100 d-pr12"
@@ -149,7 +149,7 @@ When `type` is set to "custom" the list item will not render any styles or slots
             Custom List Item Example
           </span>
         </div>
-        <div class="d-p6 d-tn8 d-r12 d-d-flex d-bgc-white d-bar4 d-bs-md">
+        <dt-stack direction="row" class="d-p6 d-tn8 d-r12 d-bgc-white d-bar4 d-bs-md">
           <dt-button
             class="d-p4 d-py8"
             importance="clear"
@@ -186,8 +186,8 @@ When `type` is set to "custom" the list item will not render any styles or slots
               />
             </template>
           </dt-button>
-        </div>
-      </div>
+        </dt-stack>
+      </dt-stack>
     </dt-list-item>
   </ul>
 </code-well-header>
@@ -200,7 +200,7 @@ vueCode='
     navigation-type="tab"
     type="custom"
   >
-    <div class="d-py8 d-px12 d-d-flex d-ai-center d-jc-space-between">
+    <dt-stack direction="row" align="center" justify="between" class="d-py8 d-px12">
       <div>
         <time
           class="d-fs-100 d-pr12"
@@ -212,7 +212,7 @@ vueCode='
           Custom List Item Example
         </span>
       </div>
-      <div class="d-p6 d-tn8 d-r12 d-d-flex d-bgc-white d-bar4 d-bs-md">
+      <dt-stack direction="row" class="d-p6 d-tn8 d-r12 d-bgc-white d-bar4 d-bs-md">
         <dt-button
           class="d-p4 d-py8"
           importance="clear"
@@ -249,8 +249,8 @@ vueCode='
             />
           </template>
         </dt-button>
-      </div>
-      </div>
+      </dt-stack>
+      </dt-stack>
   </dt-list-item>
 </ul>
 '

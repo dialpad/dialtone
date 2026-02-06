@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-emojis",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Dialpad's emojis JSON data",
   "keywords": [
     "Dialpad",
@@ -8,6 +8,11 @@
     "Emojis"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dialpad/dialtone.git",
+    "directory": "packages/dialtone-emojis"
+  },
   "contributors": [
     {
       "name": "Brad Paugh",

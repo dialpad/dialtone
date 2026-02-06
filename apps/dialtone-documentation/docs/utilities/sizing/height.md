@@ -9,12 +9,12 @@ keywords: ["width","height","size","dimensions"]
 Use `d-h{n}p` to set a percentage height for an element.
 
 <code-well-header class="d-d-flex d-p24 d-bgc-secondary d-w100p d-h332 d-flow16 d-code--md d-ta-center" v-dt-scrollbar:never custom>
-  <div v-for="i in percentage" class="d-d-flex d-fl-center d-h100p d-ps-relative">
+  <dt-stack direction="row" align="center" justify="center" class="d-h100p d-ps-relative" v-for="i in percentage">
     <span class="d-zi-active d-w72">d-h{{i}}p</span>
     <div class="d-w72 d-h216 d-ps-absolute d-bgc-moderate">
       <div class="d-w72 d-bgc-bold d-bar4" :class="`d-h${i}p`"></div>
     </div>
-  </div>
+  </dt-stack>
 </code-well-header>
 
 ```html
@@ -39,10 +39,10 @@ Use `d-h{n}p` to set a percentage height for an element.
 Use `d-h{n}` to set a fixed height for an element.
 
 <code-well-header class="d-d-flex d-p24 d-bgc-secondary d-w100p d-hmx512 d-flow16 d-of-scroll d-ta-center" v-dt-scrollbar:never custom>
-  <div v-for="(i, index) in fixed" class="d-d-flex d-fd-column d-pls-start d-g8" :key="index">
+  <dt-stack gap="400" class="d-pls-start" v-for="(i, index) in fixed" :key="index">
     <span class="d-code--md">d-h{{i}}</span>
-    <div class="d-fl-center d-w64 d-bgc-bold d-bar4" :class="`d-h${i}`"></div>
-  </div>
+    <dt-stack direction="row" align="center" justify="center" class="d-w64 d-bgc-bold d-bar4" :class="`d-h${i}`"></dt-stack>
+  </dt-stack>
 </code-well-header>
 
 ```html
@@ -89,7 +89,7 @@ Use `d-h{n}` to set a fixed height for an element.
 Use `d-h100vh` to have an element cover the user's viewport.
 
 <code-well-header class="d-ps-relative d-d-flex d-jc-center d-p24 d-bgc-secondary d-w100p d-h3 d-flow16 d-of-y-scroll" custom>
-  <div class="d-fl-center d-py16 d-px8 d-w100vw d-h100vh d-bgc-moderate d-bar4 d-ta-center">Viewport</div>
+  <dt-stack direction="row" align="center" justify="center" class="d-py16 d-px8 d-w100vw d-h100vh d-bgc-moderate d-bar4 d-ta-center">Viewport</dt-stack>
 </code-well-header>
 
 ```html
@@ -101,7 +101,7 @@ Use `d-h100vh` to have an element cover the user's viewport.
 Use `d-h-auto` have the browser calculate and select a height.
 
 <code-well-header class="d-ps-relative d-d-flex d-jc-center d-p24 d-bgc-secondary d-w100p d-hmn216 d-flow16" custom>
-  <div class="d-fl-center d-py16 d-px8 d-w100p d-h-auto d-bgc-moderate d-bar4 d-ta-center">Auto</div>
+  <dt-stack direction="row" align="center" justify="center" class="d-py16 d-px8 d-w100p d-h-auto d-bgc-moderate d-bar4 d-ta-center">Auto</dt-stack>
 </code-well-header>
 
 ```html
@@ -110,11 +110,12 @@ Use `d-h-auto` have the browser calculate and select a height.
 
 <script setup>
   import { percentage, fixed, other } from '@data/width-height.json';
+  import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
 </script>
 
 ## Classes
 
-<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+<clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
       <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
@@ -147,4 +148,4 @@ Use `d-h-auto` have the browser calculate and select a height.
       </tbody>
     </table>
   </div>
-</div>
+</clamped-table-wrapper>

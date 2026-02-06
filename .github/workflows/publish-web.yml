@@ -14,8 +14,7 @@ on:
           - dialtone-emojis
           - dialtone-icons
           - dialtone-tokens
-          - dialtone-vue2
-          - dialtone-vue3
+          - dialtone-vue
           - eslint-plugin-dialtone
           - stylelint-plugin-dialtone
           - postcss-responsive-variations
@@ -38,7 +37,6 @@ jobs:
     outputs:
       current_branch: ${{ steps.branch-name.outputs.current_branch }}
       release_tag: ${{ steps.branch-name.outputs.current_branch == 'production' && 'latest' || steps.branch-name.outputs.current_branch }}
-      dialtone_vue3_release_tag: ${{ steps.branch-name.outputs.current_branch == 'production' && 'vue3' || format('vue3-{0}', steps.branch-name.outputs.current_branch) }}
     steps:
       - name: Get branch name
         id: branch-name
@@ -70,10 +68,8 @@ jobs:
               - 'packages/dialtone-icons/package.json'
             dialtone-tokens:
               - 'packages/dialtone-tokens/package.json'
-            dialtone-vue2:
-              - 'packages/dialtone-vue2/package.json'
-            dialtone-vue3:
-              - 'packages/dialtone-vue3/package.json'
+            dialtone-vue:
+              - 'packages/dialtone-vue/package.json'
             eslint-plugin-dialtone:
               - 'packages/eslint-plugin-dialtone/package.json'
             stylelint-plugin-dialtone:
@@ -116,6 +112,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       packages: write
+      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -123,21 +120,43 @@ jobs:
       - name: Setup Environment
         uses: ./.github/actions/setup-environment
 
-      - name: Remove GitHub registry if publishing to npm
+      - name: Configure npm registry for publishing
+        if: matrix.registry == 'npm'
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Remove @dialpad scope configuration for npm
         if: matrix.registry == 'npm'
         run: |
-          pnpm config delete @dialpad:registry;
-          pnpm config set //registry.npmjs.org/:_authToken=${{ secrets.DIALTONE_NPM_TOKEN }}
+          # Remove @dialpad scope configuration to use default npm registry instead of GitHub Packages
+          npm config delete @dialpad:registry || true
+
+      - name: Configure GitHub Packages for publishing
+        if: matrix.registry == 'GitHub'
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          registry-url: "https://npm.pkg.github.com"
+          scope: "@dialpad"
+
+      - name: Configure @dialpad scope for GitHub Packages
+        if: matrix.registry == 'GitHub'
+        run: |
+          # Set @dialpad scope to use GitHub Packages instead of npm
+          npm config set @dialpad:registry https://npm.pkg.github.com/
 
       - name: Delay job to avoid npm rate limits
-        if: matrix.package == 'dialtone-vue3'
+        if: matrix.package == 'dialtone-vue'
         run: sleep 15s
         shell: bash
 
       # Publish npm/GitHub
       - name: Publish ${{ matrix.package }}@${{ env.RELEASE_TAG }}
         env:
-          RELEASE_TAG: ${{ matrix.package == 'dialtone-vue3' && needs.variables-setup.outputs.dialtone_vue3_release_tag || needs.variables-setup.outputs.release_tag }}
+          RELEASE_TAG: ${{ needs.variables-setup.outputs.release_tag }}
+          NODE_AUTH_TOKEN: ${{ matrix.registry == 'GitHub' && secrets.GITHUB_TOKEN || '' }}
         run: >
           pnpm nx run ${{ matrix.package }}:publish
           --publish-branch=${{ needs.variables-setup.outputs.current_branch }}

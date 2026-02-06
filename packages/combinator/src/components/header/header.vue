@@ -1,10 +1,18 @@
 <template>
-  <div class="dtc-theme__canvas d-d-flex d-ai-stretch d-pl12">
+  <dt-stack
+    direction="row"
+    align="stretch"
+    class="dtc-theme__canvas d-pl12"
+  >
     <h1 class="d-headline32 d-as-center">
       {{ component.name }}
     </h1>
     <div class="d-fl-grow1 d-ml12 d-bl">
-      <div class="d-d-flex d-ai-center dtc-header__variant d-h100p">
+      <dt-stack
+        direction="row"
+        align="center"
+        class="dtc-header__variant d-h100p"
+      >
         <div class="d-pl6 d-pt2 d-fl-grow1">
           <dt-select-menu
             class="d-ba-none"
@@ -18,9 +26,9 @@
             @input="e => emit('update:variant', e)"
           />
         </div>
-      </div>
+      </dt-stack>
     </div>
-  </div>
+  </dt-stack>
 </template>
 
 <script setup>

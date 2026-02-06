@@ -1,0 +1,331 @@
+<!-- Use this template story to allow the user control the component's props and slots -->
+<template>
+  <dt-stack gap="600">
+    <div>
+      <h3>Feed item with showHeader as False and isActive true</h3>
+      <ul class="d-py8">
+        <dt-recipe-feed-item-row
+          :show-header="false"
+          :avatar-image-url="$attrs.avatarImageUrl"
+          :display-name="$attrs.displayName"
+          :time="$attrs.time"
+          :short-time="$attrs.shortTime"
+          :is-active="true"
+          :state="$attrs.state"
+          @hover="$attrs.onHover"
+          @focus="$attrs.onFocus"
+        >
+          <template v-if="$attrs.default">
+            <dt-emoji-text-wrapper
+              element-type="span"
+              size="400"
+            >
+              {{ $attrs.default }}
+            </dt-emoji-text-wrapper>
+          </template>
+          <template
+            #threading
+          >
+            <dt-stack
+              class="feed-item-row__thread d-d-flex d-ai-center"
+              direction="row"
+              gap="400"
+            >
+              <dt-stack
+                direction="row"
+                gap="300"
+              >
+                <dt-avatar
+                  v-for="person of persons"
+                  :key="person"
+                  :full-name="person"
+                  seed="seed"
+                  size="sm"
+                />
+              </dt-stack>
+              <dt-stack
+                direction="row"
+                gap="400"
+              >
+                <dt-stack
+                  direction="row"
+                  align="center"
+                  class="d-fs-100 d-lh200"
+                >
+                  <a class="d-link d-pr4">3 replies</a>
+                  <span class="feed-item-row__reply">Last reply an hour ago</span>
+                </dt-stack>
+              </dt-stack>
+            </dt-stack>
+          </template>
+          <template
+            #reactions
+          >
+            <dt-recipe-emoji-row
+              :reactions="mockReactions"
+            />
+          </template>
+          <template
+            #menu
+          >
+            <!-- TODO replace this with DT menu -->
+            <dt-stack
+              direction="row"
+              class="d-bgc-primary d-bar-pill d-bc-default d-ba"
+              role="group"
+            >
+              <dt-button
+                v-for="button of hoverButtons"
+                :key="button"
+                kind="muted"
+                importance="clear"
+                size="xs"
+                aria-label="button"
+              >
+                <template #icon>
+                  <slot name="icon">
+                    <dt-icon
+                      :name="button"
+                      size="300"
+                    />
+                  </slot>
+                </template>
+              </dt-button>
+            </dt-stack>
+          </template>
+        </dt-recipe-feed-item-row>
+      </ul>
+    </div>
+    <div>
+      <h3>Feed item with image attachment</h3>
+      <ul class="d-py8">
+        <dt-recipe-feed-item-row
+          :show-header="true"
+          :avatar-image-url="$attrs.avatarImageUrl"
+          :display-name="$attrs.displayName"
+          :time="$attrs.time"
+          :short-time="$attrs.shortTime"
+          :is-active="true"
+          @hover="$attrs.onHover"
+          @focus="$attrs.onFocus"
+        >
+          Some text alongside a gif
+          <template #attachment>
+            <dt-image-viewer
+              :image-src="fryImage"
+              image-alt="Alt Text"
+              close-aria-label="Close"
+              image-button-class="d-recipe-feed-item-row__image d-wmn64 d-hmn64 w-wmx332 d-hmx332"
+              aria-label="Click to open image"
+            />
+          </template>
+          <template
+            #reactions
+          >
+            <dt-recipe-emoji-row
+              :reactions="mockReactions"
+            />
+          </template>
+        </dt-recipe-feed-item-row>
+      </ul>
+    </div>
+    <div>
+      <h3>With video attachment</h3>
+      <ul class="d-py8">
+        <dt-recipe-feed-item-row
+          ref="feedItemRowFade"
+          :show-header="false"
+          :avatar-image-url="$attrs.avatarImageUrl"
+          :display-name="$attrs.displayName"
+          :time="$attrs.time"
+          :short-time="$attrs.shortTime"
+          :is-active="true"
+        >
+          <template v-if="$attrs.default">
+            <dt-emoji-text-wrapper
+              element-type="span"
+              size="400"
+            >
+              {{ $attrs.default }}
+            </dt-emoji-text-wrapper>
+          </template>
+          <template #attachment>
+            <!-- eslint-disable-next-line vuejs-accessibility/media-has-caption -->
+            <video
+              class="d-recipe-feed-item-row__video"
+              controls
+              src="https://www.w3schools.com/html/mov_bbb.mp4"
+            />
+          </template>
+        </dt-recipe-feed-item-row>
+      </ul>
+    </div>
+    <div>
+      <h3>Feed item state "error"</h3>
+      <ul class="d-py8">
+        <dt-recipe-feed-item-row
+          :show-header="false"
+          :avatar-image-url="$attrs.avatarImageUrl"
+          :display-name="$attrs.displayName"
+          :time="$attrs.time"
+          :short-time="$attrs.shortTime"
+          :is-active="true"
+          state="ERROR"
+          @hover="$attrs.onHover"
+          @focus="$attrs.onFocus"
+        >
+          <template v-if="defaultSlot">
+            <dt-emoji-text-wrapper
+              element-type="span"
+              size="400"
+            >
+              {{ defaultSlot }}
+            </dt-emoji-text-wrapper>
+          </template>
+        </dt-recipe-feed-item-row>
+      </ul>
+    </div>
+    <div>
+      <h3>Feed item state "searched"</h3>
+      <dt-button
+        @click="fadeState = fadeState === 'NORMAL' ? 'SEARCHED' : 'NORMAL'"
+      >
+        Click to fade
+      </dt-button>
+      <ul class="d-py8">
+        <dt-recipe-feed-item-row
+          ref="feedItemRowFade"
+          :show-header="false"
+          :avatar-image-url="$attrs.avatarImageUrl"
+          :display-name="$attrs.displayName"
+          :time="$attrs.time"
+          :short-time="$attrs.shortTime"
+          :is-active="true"
+          :state="fadeState"
+          @hover="$attrs.onHover"
+          @focus="$attrs.onFocus"
+        >
+          <template v-if="defaultSlot">
+            <dt-emoji-text-wrapper
+              element-type="span"
+              size="400"
+            >
+              {{ defaultSlot }}
+            </dt-emoji-text-wrapper>
+          </template>
+        </dt-recipe-feed-item-row>
+      </ul>
+    </div>
+    <div class="d-h332">
+      <h3>Feed item pill within</h3>
+      <ul class="d-py8">
+        <dt-recipe-feed-item-row
+          ref="feedItemRowFade"
+          :show-header="false"
+          :avatar-image-url="$attrs.avatarImageUrl"
+          :display-name="$attrs.displayName"
+          :time="$attrs.time"
+          :short-time="$attrs.shortTime"
+          :is-active="true"
+        >
+          <template #attachment>
+            <dt-recipe-feed-item-pill
+              default-toggled
+              title="Ben called you"
+              icon-name="phone-outgoing"
+              wrapper-class="d-w628"
+              border-color="ai"
+            >
+              <template #subtitle>
+                Lasted 8 min • Ended at 11:56 AM
+              </template>
+              <template #right>
+                <div>
+                  <dt-button
+                    aria-label="Open external link"
+                    kind="muted"
+                    importance="clear"
+                    :circle="true"
+                    @click.stop=""
+                  >
+                    <template #icon>
+                      <dt-icon
+                        name="external-link"
+                        size="300"
+                      />
+                    </template>
+                  </dt-button>
+                </div>
+              </template>
+              <template #content>
+                <div class="d-p16">
+                  <p>
+                    The agent from Dialpad called to follow up on a support ticket
+                    that Jeff was handling for them regarding Dialpad CTI. They apologized
+                    for calling outside of the requested time and expressed that they had
+                    asked the team to look into the issue and would email them after the call.
+                  </p>
+                  <p class="d-fs-100 d-mt12">
+                    <strong>Actions items</strong>
+                  </p>
+                  <dt-stack
+                    as="p"
+                    direction="row"
+                  >
+                    <strong class="d-mr4">1. </strong>
+                    The agent needs to inform the team to check on Vijay's request or ticket regarding Dialpad CTI.
+                  </dt-stack>
+                </div>
+              </template>
+            </dt-recipe-feed-item-pill>
+          </template>
+        </dt-recipe-feed-item-row>
+      </ul>
+    </div>
+  </dt-stack>
+</template>
+
+<script setup>
+import DtRecipeFeedItemRow from './feed_item_row.vue';
+
+import { DtRecipeEmojiRow } from '../emoji_row';
+import { DtRecipeFeedItemPill } from '../feed_item_pill';
+import { DtStack } from '@/components/stack';
+import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
+import { DtAvatar } from '@/components/avatar';
+import { DtIcon } from '@/components/icon';
+import { DtImageViewer } from '@/components/image_viewer';
+import { DtButton } from '@/components/button';
+import { useMockReactions } from '@/recipes/conversation_view/emoji_row/composables/useMockReactions.js';
+import fryImage from '@/common/assets/fry.gif';
+
+const fadeState = 'SEARCHED';
+const hoverButtons = ['bell', 'living-thing', 'map-pin'];
+const persons = ['Jim Halpert', 'Michael Scott', 'Pam'];
+const { mockReactions } = useMockReactions();
+</script>
+
+<style lang="less" scoped>
+  .feed-item-row {
+    &__default-story {
+      p {
+        color: var(--dt-color-foreground-primary);
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 24px;
+      }
+    }
+    &__thread{
+      height: 32px;
+    }
+    &__reply{
+      color: var(--dt-color-foreground-tertiary);
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 16px;
+      letter-spacing: -0.12px;
+    }
+  }
+</style>

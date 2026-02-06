@@ -379,51 +379,51 @@ The following functions are available for date formatting.
   <dt-stack
     :direction="{ 'default': 'column', 'md': 'row' }"
     gap="600"
-    class="d-ai-flex-start"
+    align="start"
   >
-    <dt-stack class="d-ai-center">
+    <dt-stack align="center">
       <dt-datepicker
         :selected-date="currentSelectedDate"
         @selected-date="currentSelectedDate = $event;"
       />
-      <p class="d-body--sm">
+      <dt-text as="p" kind="body" size="sm" tone="tertiary" align="center" wrap="balance">
         {{ currentSelectedDate }}
-      </p>
+      </dt-text>
     </dt-stack>
-    <table class="d-table d-body--sm d-bt d-fl1">
+    <table class="d-table d-bt d-fl1">
       <tr>
-        <th scope="row" class="d-code--sm">formatLong</th>
-        <td>{{ formatLong(currentSelectedDate) }}</td>
+        <th scope="row"><dt-text as="code" kind="code" size="sm">formatLong</dt-text></th>
+        <td><dt-text kind="body" size="sm">{{ formatLong(currentSelectedDate) }}</dt-text></td>
       </tr>
       <tr>
-        <th scope="row" class="d-code--sm">formatMedium</th>
-        <td>{{ formatMedium(currentSelectedDate) }}</td>
+        <th scope="row"><dt-text as="code" kind="code" size="sm">formatMedium</dt-text></th>
+        <td><dt-text kind="body" size="sm">{{ formatMedium(currentSelectedDate) }}</dt-text></td>
       </tr>
       <tr>
-        <th scope="row" class="d-code--sm">formatShort</th>
-        <td>{{ formatShort(currentSelectedDate) }}</td>
+        <th scope="row"><dt-text as="code" kind="code" size="sm">formatShort</dt-text></th>
+        <td><dt-text kind="body" size="sm">{{ formatShort(currentSelectedDate) }}</dt-text></td>
       </tr>
       <tr>
-        <th scope="row" class="d-code--sm">formatShort (no weekday)</th>
-        <td>{{ formatShort(currentSelectedDate, false) }}</td>
+        <th scope="row"><dt-text as="code" kind="code" size="sm">formatShort (no weekday)</dt-text></th>
+        <td><dt-text kind="body" size="sm">{{ formatShort(currentSelectedDate, false) }}</dt-text></td>
       </tr>
       <tr>
-        <th scope="row" class="d-code--sm">formatNoYear</th>
-        <td>{{ formatNoYear(currentSelectedDate) }}</td>
+        <th scope="row"><dt-text as="code" kind="code" size="sm">formatNoYear</dt-text></th>
+        <td><dt-text kind="body" size="sm">{{ formatNoYear(currentSelectedDate) }}</dt-text></td>
       </tr>
       <tr>
-        <th scope="row" class="d-code--sm">formatNoYear (abbreviated)</th>
-        <td>{{ formatNoYear(currentSelectedDate, true) }}</td>
+        <th scope="row"><dt-text as="code" kind="code" size="sm">formatNoYear (abbreviated)</dt-text></th>
+        <td><dt-text kind="body" size="sm">{{ formatNoYear(currentSelectedDate, true) }}</dt-text></td>
       </tr>
       <tr>
-        <th scope="row" class="d-code--sm">formatNumerical</th>
-        <td>{{ formatNumerical(currentSelectedDate) }}</td>
+        <th scope="row"><dt-text as="code" kind="code" size="sm">formatNumerical</dt-text></th>
+        <td><dt-text kind="body" size="sm">{{ formatNumerical(currentSelectedDate) }}</dt-text></td>
       </tr>
     </table>
   </dt-stack>
 </div>
 
-<!-- TODO: Autogenerate the docs from JSDocs in packages/dialtone-vue2/components/datepicker/formatUtils.js -->
+<!-- TODO: Autogenerate the docs from JSDocs in packages/dialtone-vue/components/datepicker/formatUtils.js -->
 ### formatLong
 
 **formatLong**(`date`, `locale`): `string`

@@ -40,9 +40,9 @@
 //      each defined spacing unit.
 //      TODO: Deprecated classes, remove on our next migration. https://dialpad.atlassian.net/browse/DLT-1763
 //  ----------------------------------------------------------------------------
-.d-gcg-unset { grid-column-gap: unset !important; }
-.d-grg-unset { grid-row-gap: unset !important; }
-.d-gg-unset { grid-gap: unset !important; }
+.d-gcg-unset { column-gap: unset !important; }
+.d-grg-unset { row-gap: unset !important; }
+.d-gg-unset { gap: unset !important; }
 
 
 //  ============================================================================
@@ -96,11 +96,11 @@
 }
 
 .d-gl-header {
+    grid-auto-rows: 1fr;
+    grid-auto-columns: minmax(min-content, auto);
     grid-template-areas: 'header'
                          'content';
     grid-template-rows: [header-start] var(--header-height) [header-end content-start] var(--content-height) [content-end];
-    grid-auto-rows: 1fr;
-    grid-auto-columns: minmax(min-content, auto);
 }
 
 //  $   GRID AREAS

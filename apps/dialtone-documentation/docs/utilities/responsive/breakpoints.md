@@ -164,10 +164,18 @@ const classes = [
 
 <code-well-header>
   <div class="d-ai-center d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center">Visible on <strong>all</strong> screens</div>
-  <div class="d-fl-center d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center d-d-none xl:d-d-block">Visible only on screens wider than <strong>extra-large</strong> breakpoint</div>
-  <div class="d-fl-center d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center d-d-none lg:d-d-block">Visible only on screens wider than <strong>large</strong> breakpoint</div>
-  <div class="d-fl-center d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center d-d-none md:d-d-block">Visible only on screens wider than <strong>medium</strong> breakpoint</div>
-  <div class="d-fl-center d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center d-d-none sm:d-d-block">Visible only on screens wider than <strong>small</strong> breakpoint</div>
+  <div class="d-d-none xl:d-d-block d-w100p">
+    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center">Visible only on screens wider than <strong>extra-large</strong> breakpoint</dt-stack>
+  </div>
+  <div class="d-d-none lg:d-d-block d-w100p">
+    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center">Visible only on screens wider than <strong>large</strong> breakpoint</dt-stack>
+  </div>
+  <div class="d-d-none md:d-d-block d-w100p">
+    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center">Visible only on screens wider than <strong>medium</strong> breakpoint</dt-stack>
+  </div>
+  <div class="d-d-none sm:d-d-block d-w100p">
+    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center">Visible only on screens wider than <strong>small</strong> breakpoint</dt-stack>
+  </div>
 </code-well-header>
 
 ```html
@@ -182,7 +190,7 @@ const classes = [
 
 To help keep prefixes concise, we use abbreviations. This syntax is used consistently across all responsive classes. As the viewport size grows, you can change an elements properties. For example, you can set an element to display normally, but be hidden at smaller sizes: `.d-d-block .sm:d-d-none`.
 
-<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+<clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
       <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
@@ -216,4 +224,8 @@ To help keep prefixes concise, we use abbreviations. This syntax is used consist
       </tbody>
     </table>
   </div>
-</div>
+</clamped-table-wrapper>
+
+<script setup>
+  import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
+</script>

@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-tokens",
-  "version": "1.48.0-next.4",
+  "version": "1.48.0-next.9",
   "description": "Design tokens for Dialtone.",
   "type": "module",
   "scripts": {
@@ -33,6 +33,11 @@
     "./*": "./*"
   },
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dialpad/dialtone.git",
+    "directory": "packages/dialtone-tokens"
+  },
   "bugs": {
     "url": "https://github.com/dialpad/dialtone-tokens/issues"
   },

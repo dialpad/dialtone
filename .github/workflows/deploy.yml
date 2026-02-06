@@ -22,9 +22,9 @@ on:
       - 'packages/dialtone-tokens/themes/**'
       - 'packages/dialtone-tokens/tokens/**'
       - 'packages/dialtone-tokens/gulpfile.cjs'
-      - 'packages/dialtone-vue*/**/*.vue'
-      - 'packages/dialtone-vue*/**/*.*js'
-      - 'packages/dialtone-vue*/**/*.stories.js'
+      - 'packages/dialtone-vue/**/*.vue'
+      - 'packages/dialtone-vue/**/*.*js'
+      - 'packages/dialtone-vue/**/*.stories.js'
       - '!**/*.test.*js'
   pull_request:
     paths:
@@ -40,17 +40,16 @@ on:
       - 'packages/dialtone-tokens/themes/**'
       - 'packages/dialtone-tokens/tokens/**'
       - 'packages/dialtone-tokens/gulpfile.cjs'
-      - 'packages/dialtone-vue*/**/*.vue'
-      - 'packages/dialtone-vue*/**/*.*js'
-      - 'packages/dialtone-vue*/**/*.stories.js'
+      - 'packages/dialtone-vue/**/*.vue'
+      - 'packages/dialtone-vue/**/*.*js'
+      - 'packages/dialtone-vue/**/*.stories.js'
       - '!**/*.test.*js'
 
 env:
   HUSKY: 0
   BASE_URL: ${{ github.event_name == 'pull_request' && format('deploy-previews/pr-{0}/', github.event.pull_request.number) || (github.ref_name != 'production' && format('{0}/', github.ref_name)) || '' }}
   DIALTONE_BUCKET_DIRECTORY: dialtone.dialpad.com
-  DIALTONE_VUE_2_BUCKET_DIRECTORY: dialtone.dialpad.com/vue
-  DIALTONE_VUE_3_BUCKET_DIRECTORY: dialtone.dialpad.com/vue3
+  DIALTONE_VUE_3_BUCKET_DIRECTORY: dialtone.dialpad.com/vue
 
 concurrency:
   group: "${{ github.workflow }}-${{ github.ref }}"
@@ -85,8 +84,8 @@ jobs:
               - 'packages/dialtone-tokens/themes/**'
               - 'packages/dialtone-tokens/tokens/**'
               - 'packages/dialtone-tokens/gulpfile.cjs'
-              - 'packages/dialtone-vue3/{common,components,directives,localization,recipes}/**/!(*.story.vue|*.test.js|*.stories.js)'
-            dialtone-vue2:
+              - 'packages/dialtone-vue/{common,components,directives,localization,recipes}/**/!(*.story.vue|*.test.js|*.stories.js)'
+            dialtone-vue:
               - 'packages/dialtone-css/**/*.less'
               - 'packages/dialtone-css/postcss/*.cjs'
               - 'packages/dialtone-css/gulpfile.cjs'
@@ -98,20 +97,7 @@ jobs:
               - 'packages/dialtone-tokens/themes/**'
               - 'packages/dialtone-tokens/tokens/**'
               - 'packages/dialtone-tokens/gulpfile.cjs'
-              - 'packages/dialtone-vue2/**'
-            dialtone-vue3:
-              - 'packages/dialtone-css/**/*.less'
-              - 'packages/dialtone-css/postcss/*.cjs'
-              - 'packages/dialtone-css/gulpfile.cjs'
-              - 'packages/dialtone-emojis/src/**'
-              - 'packages/dialtone-icons/src/**'
-              - 'packages/dialtone-icons/gulpfile.cjs'
-              - 'packages/dialtone-tokens/*.js'
-              - 'packages/dialtone-tokens/postcss/**'
-              - 'packages/dialtone-tokens/themes/**'
-              - 'packages/dialtone-tokens/tokens/**'
-              - 'packages/dialtone-tokens/gulpfile.cjs'
-              - 'packages/dialtone-vue3/**'
+              - 'packages/dialtone-vue/**'
 
   check-dialpad-member:
     runs-on: ubuntu-latest
@@ -130,7 +116,7 @@ jobs:
     name: Deploy sites
     if: ${{ needs.filter-actions.outputs.packages != '[]' }}
     env:
-      BUCKET_CLEANUP_EXCLUDE: '/alpha/|/beta/|/deploy-previews/|/staging/|/next/|/vue/|/vue3/'
+      BUCKET_CLEANUP_EXCLUDE: '/alpha/|/beta/|/deploy-previews/|/staging/|/next/|/vue/'
     strategy:
       fail-fast: false
       matrix:
@@ -162,22 +148,17 @@ jobs:
         id: expand
         env:
           DIALTONE_DIST_DIRECTORY: apps/dialtone-documentation/docs/.vuepress/dist
-          DIALTONE_VUE_2_DIST_DIRECTORY: packages/dialtone-vue2/storybook-static
-          DIALTONE_VUE_3_DIST_DIRECTORY: packages/dialtone-vue3/storybook-static
+          DIALTONE_VUE_3_DIST_DIRECTORY: packages/dialtone-vue/storybook-static
         run: |
           if [[ ${{ matrix.package }} == 'dialtone-documentation' ]]; then
             echo "VUEPRESS_BASE_URL=/$BASE_URL" >> $GITHUB_ENV;
             echo "source_directory=$DIALTONE_DIST_DIRECTORY" >> $GITHUB_OUTPUT;
             echo "dest_directory=$DIALTONE_BUCKET_DIRECTORY/$BASE_URL" >> $GITHUB_OUTPUT;
             echo "build_command=dialtone-documentation:build" >> $GITHUB_OUTPUT;
-          elif [[ ${{ matrix.package }} == 'dialtone-vue2' ]]; then
-            echo "source_directory=$DIALTONE_VUE_2_DIST_DIRECTORY" >> $GITHUB_OUTPUT;
-            echo "dest_directory=$DIALTONE_VUE_2_BUCKET_DIRECTORY/$BASE_URL" >> $GITHUB_OUTPUT;
-            echo "build_command=dialtone-vue2:build-storybook" >> $GITHUB_OUTPUT;
-          elif [[ ${{ matrix.package }} == 'dialtone-vue3' ]]; then
+          elif [[ ${{ matrix.package }} == 'dialtone-vue' ]]; then
             echo "source_directory=$DIALTONE_VUE_3_DIST_DIRECTORY" >> $GITHUB_OUTPUT;
             echo "dest_directory=$DIALTONE_VUE_3_BUCKET_DIRECTORY/$BASE_URL" >> $GITHUB_OUTPUT;
-            echo "build_command=dialtone-vue3:build-storybook" >> $GITHUB_OUTPUT;
+            echo "build_command=dialtone-vue:build-storybook" >> $GITHUB_OUTPUT;
           fi
 
       # ---------- #
@@ -237,8 +218,7 @@ jobs:
         with:
           message: |
             ✔️ Deploy previews ready!
-            ${{ contains(needs.filter-actions.outputs.packages, 'dialtone-documentation') && format('😎 Dialtone documentation preview: https://{0}/{1}', env.DIALTONE_BUCKET_DIRECTORY, env.BASE_URL) }}
-            ${{ contains(needs.filter-actions.outputs.packages, 'dialtone-vue2') && format('😎 Dialtone-vue 2 preview: https://{0}/{1}', env.DIALTONE_VUE_2_BUCKET_DIRECTORY, env.BASE_URL) || '' }}
-            ${{ contains(needs.filter-actions.outputs.packages, 'dialtone-vue3') && format('😎 Dialtone-vue 3 the preview: https://{0}/{1}', env.DIALTONE_VUE_3_BUCKET_DIRECTORY, env.BASE_URL) || '' }}
+            ${{ contains(needs.filter-actions.outputs.packages, 'dialtone-documentation') && format('😎 Dialtone documentation preview: https://{0}/{1}', env.DIALTONE_BUCKET_DIRECTORY, env.BASE_URL) || '' }}
+            ${{ contains(needs.filter-actions.outputs.packages, 'dialtone-vue') && format('😎 Dialtone-vue preview: https://{0}/{1}', env.DIALTONE_VUE_3_BUCKET_DIRECTORY, env.BASE_URL) || '' }}
           message-id: 'deploy-preview-message'
           refresh-message-position: true

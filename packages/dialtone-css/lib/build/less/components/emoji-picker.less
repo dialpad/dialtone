@@ -21,11 +21,11 @@
 
   &--header {
     position: relative;
-    padding: var(--dt-space-300) var(--dt-space-300) 0;
+    padding: var(--dt-size-300) var(--dt-size-300) 0;
 
     &::after {
       position: absolute;
-      inset-inline: 0 0;
+      inset-inline: 0;
       inset-block-end: 0;
       block-size: var(--dt-size-border-200);
       background-color: var(--dt-color-surface-moderate) !important;
@@ -38,7 +38,7 @@
     box-sizing: content-box !important;
     inline-size: auto;
     max-inline-size: calc(var(--dt-size-925) + var(--dt-size-400));
-    margin: 0 var(--dt-space-500);
+    margin: 0 var(--dt-size-500);
   }
 
   &--footer {
@@ -47,7 +47,7 @@
     align-items: center;
     justify-content: space-between;
     block-size: calc(var(--dt-size-650) + var(--dt-size-400) + var(--dt-size-200));
-    padding: 0 var(--dt-space-500);
+    padding: 0 var(--dt-size-500);
     background: var(--dt-color-surface-secondary);
     border-block-start: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
   }
@@ -58,7 +58,7 @@
   }
 
   &__tabset-list {
-      gap: var(--dt-space-0);
+      gap: var(--dt-size-0);
       justify-content: space-between;
 
       &::after {
@@ -66,8 +66,8 @@
       }
 
       .d-tab {
-        --tab-padding-y: var(--dt-space-400);
-        --tab-padding-x: var(--dt-space-300);
+        --tab-padding-y: var(--dt-size-400);
+        --tab-padding-x: var(--dt-size-300);
 
         flex-grow: 1;
 
@@ -82,9 +82,9 @@
   &__skin-list {
     display: inline-flex;
     flex-direction: row;
-    gap: var(--dt-space-300);
+    gap: var(--dt-size-300);
     align-items: flex-start;
-    padding: var(--dt-space-300);
+    padding: var(--dt-size-300);
     background: var(--dt-color-surface-moderate-opaque);
     border-radius: var(--dt-size-radius-pill);
 
@@ -116,7 +116,7 @@
       inline-size: var(--dt-size-625);
       block-size: var(--dt-size-625);
       margin: 0;
-      padding: calc(var(--dt-space-350) + var(--dt-space-100));
+      padding: calc(var(--dt-size-350) + var(--dt-size-100));
       background: var(--dt-color-surface-moderate-opaque);
       border: none;
       border-radius: var(--dt-size-radius-circle);
@@ -133,7 +133,7 @@
     min-block-size: calc(var(--dt-size-905) + var(--dt-size-600) + var(--dt-size-100));
 
     p {
-      padding-block-end: var(--dt-space-300);
+      padding-block-end: var(--dt-size-300);
       color: var(--dt-color-foreground-secondary);
       font: var(--dt-typography-headline-eyebrow);
       text-transform: var(--dt-typography-headline-eyebrow-text-case);
@@ -145,7 +145,7 @@
     inset-block-start: 0;
     inline-size: 100%;
     margin: 0;
-    padding: var(--dt-space-500) var(--dt-space-500) 0 var(--dt-space-500);
+    padding: var(--dt-size-500) var(--dt-size-500) 0 var(--dt-size-500);
     background: var(--dt-color-surface-primary);
   }
 
@@ -153,33 +153,33 @@
     position: relative;
     block-size: 100%;
     max-block-size: calc(var(--dt-size-905) + var(--dt-size-600) + var(--dt-size-100));
-    padding-block-end: calc(var(--dt-space-300) + var(--dt-space-100));
+    padding-block-end: calc(var(--dt-size-300) + var(--dt-size-100));
     overflow: hidden auto;
 
     div:not(:first-child) {
       p {
-        margin-block-start: var(--dt-space-500);
+        margin-block-start: var(--dt-size-500);
       }
     }
   }
 
   &__search-label {
-    padding-block-start: var(--dt-space-500);
+    padding-block-start: var(--dt-size-500);
   }
 
   &__search-x-button {
-    margin-inline-end: var(--dt-space-300-negative);
+    margin-inline-end: var(--dt-size-300-negative);
   }
 
   &__tab {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--dt-space-200);
+    gap: var(--dt-size-200);
     inline-size: calc(100% + calc(var(--dt-size-500) - var(--dt-size-100)));
     max-inline-size: calc(var(--dt-size-925) + var(--dt-size-400));
     // We use this margin left to align the emoji list with the tabset label
-    margin-inline-start: var(--dt-space-350-negative);
-    padding-block-start: var(--dt-space-300);
+    margin-inline-start: var(--dt-size-350-negative);
+    padding-block-start: var(--dt-size-300);
 
     button {
       display: flex;
@@ -213,7 +213,7 @@
   &__search {
     position: relative;
     z-index: 1;
-    padding: var(--dt-space-500) 0 0 0;
+    padding: var(--dt-size-500) 0 0 0;
   }
 
   &__search-button {
@@ -228,7 +228,7 @@
 
   &__data {
     display: flex;
-    gap: var(--dt-space-400);
+    gap: var(--dt-size-400);
     align-items: center;
     inline-size: 100%;
     max-inline-size: calc(var(--dt-size-905) + var(--dt-size-550) + var(--dt-size-200));

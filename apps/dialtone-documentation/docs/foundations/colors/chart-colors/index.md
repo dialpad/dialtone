@@ -38,7 +38,7 @@ Use for data visualizations that only require comparing one or two data points, 
 - Indicating selected chart series or segments.
 - Dimming or disabling inactive chart elements.
 
-<token-table :tokens="singleColorTokens" theme="light" :show-value="false" />
+<token-table :tokens="singleColorTokens" :mode="resolvedMode" :show-value="false" />
 
 ### Semantic
 
@@ -55,7 +55,7 @@ Apply colors that associate meaning to the data points, such as status, severity
 - Sentiment Analysis: Representing positive, neutral, or negative sentiment.
 - Brand Alignment: Emphasizing data related directly to Dialpad's core identity.
 
-<token-table :tokens="semanticTokens" theme="light" :show-value="false" />
+<token-table :tokens="semanticTokens" :mode="resolvedMode" :show-value="false" />
 
 ### Categorical
 
@@ -70,7 +70,7 @@ Apply unique colors to distinguish two or more unrelated data where color carrie
 - Multi-series bar charts, pie charts, or line charts comparing different groups.
 - Visualizing discrete variables (e.g., customer segments, operating systems).
 
-<token-table :tokens="categoricalTokens" theme="light" :show-value="false" />
+<token-table :tokens="categoricalTokens" :mode="resolvedMode" :show-value="false" />
 
 ### Sequential
 
@@ -90,13 +90,13 @@ To represent data using progressive shades or tints of a single color, emphasizi
 
 Using sequential range tokens enable the ability to dynamically create varying number of color steps for a single data series with `start` and `end` tokens.
 
-<token-table :tokens="sequentialRangeTokens" theme="light" :show-value="false" />
+<token-table :tokens="sequentialRangeTokens" :mode="resolvedMode" :show-value="false" />
 
 #### Sequential Default
 
 The default range are a fixed number of 10 available colors for a single data series. If you need to create fewer or more colors, use the sequential range tokens.
 
-<token-table :tokens="sequentialTokens" theme="light" :show-value="false" />
+<token-table :tokens="sequentialTokens" :mode="resolvedMode" :show-value="false" />
 
 ## Usage
 
@@ -198,6 +198,9 @@ While this system aims for robustness, be aware of potential challenges during i
 <script setup>
 import tokensJson from '@dialpad/dialtone-tokens/dist/doc.json';
 import { alphabeticalSorter } from '@utilities';
+import { useThemeManager } from '@composables/useThemeManager';
+
+const { resolvedMode } = useThemeManager();
 
 /*
 * Remove unwanted background-clip classes

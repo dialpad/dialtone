@@ -62,4 +62,12 @@ Then configure the rules you want to use under the rules section.
 
 ## Supported Rules
 
-* Fill in provided rules here
+* [custom-implementation](docs/rules/custom-implementation.md)
+* [deprecated-base-color-classes](docs/rules/deprecated-base-color-classes.md)
+* [deprecated-component](docs/rules/deprecated-component.md)
+* [deprecated-directive](docs/rules/deprecated-directive.md)
+* [deprecated-flex-gap-classes](docs/rules/deprecated-flex-gap-classes.md)
+* [deprecated-grid-gap-classes](docs/rules/deprecated-grid-gap-classes.md)
+* [deprecated-icons](docs/rules/deprecated-icons.md)
+* [deprecated-stack-alignment-classes](docs/rules/deprecated-stack-alignment-classes.md)
+* [recommend-typography-style](docs/rules/recommend-typography-style.md)

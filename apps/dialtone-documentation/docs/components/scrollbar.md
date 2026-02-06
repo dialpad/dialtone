@@ -62,10 +62,6 @@ vueCode='
 Import the directive and styling from dialtone
 
 ```javascript
-// For Vue 2
-import { DtScrollbarDirective } from "@dialpad/dialtone/vue2";
-
-// For Vue 3+
 import { DtScrollbarDirective } from "@dialpad/dialtone/vue3";
 
 // Import styling
@@ -75,10 +71,6 @@ import 'overlayscrollbars/overlayscrollbars.css';
 Install the directive into vue instance
 
 ```javascript
-// For Vue 2
-Vue.use(DtScrollbarDirective);
-
-// For Vue 3+
 app.use(DtScrollbarDirective);
 ```
 
@@ -206,7 +198,7 @@ This can make it challenging to use with components that rely on event listeners
 
 <style lang="less" scoped>
 .item {
-  padding: var(--dt-space-300) var(--dt-space-400);
+  padding: var(--dt-size-300) var(--dt-size-400);
   border-block-end: var(--dt-size-border-100) solid var(--dt-color-border-default);
   &:last-child {
     border-block-end: none;

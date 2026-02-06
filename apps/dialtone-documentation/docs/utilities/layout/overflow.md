@@ -38,13 +38,14 @@ Consider using the custom scrollbar first with the <router-link class="d-link d-
 
 <script setup>
     import overflow from '@data/overflow.json';
+    import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
 </script>
 
 ## Classes
 
 The `overflow` CSS shorthand property sets the desired behavior for how content is handled when it exceeds the wrapper's bounds in both directions (x-axis and then y-axis).
 
-<div v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+<clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
         <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
@@ -63,4 +64,4 @@ The `overflow` CSS shorthand property sets the desired behavior for how content 
         </tbody>
     </table>
   </div>
-</div>
+</clamped-table-wrapper>
