@@ -115,6 +115,43 @@
         ]
       }
     },
+    "ui-kits": {
+      "title": "UI Kits",
+      "route": "/ui-kits/",
+      "icon": "box",
+      "sections": {
+        "/ui-kits/": [
+          {
+            "text": "Meet the Kits",
+            "link": "/ui-kits/",
+            "icon": "box",
+            "children": [
+              { "text": "ChatKit", "link": "https://uikits.dialpad.com/chatkit/", "description": "Chat and messaging UI components for building conversation experiences.", "status": "ready" },
+              { "text": "FormKit", "link": "https://uikits.dialpad.com/formkit/", "description": "Form and data entry components for building input-driven interfaces.", "status": "ready" },
+              { "text": "AnalyticsKit", "link": "https://uikits.dialpad.com/analyticskit/", "description": "Analytics and data visualization components for dashboards and reporting.", "status": "planned" },
+              { "text": "CallbarKit", "link": "https://uikits.dialpad.com/callbarkit/", "description": "Call bar and telephony UI components for voice and video experiences.", "status": "planned" },
+              { "text": "NavigationKit", "link": "https://uikits.dialpad.com/navigationkit/", "description": "Navigation and routing pattern components for consistent wayfinding.", "status": "planned" },
+              { "text": "WorkflowKit", "link": "https://uikits.dialpad.com/workflowkit/", "description": "Workflow and process UI components for multi-step task flows.", "status": "planned" }
+            ]
+          },
+          {
+            "text": "What are UI Kits?",
+            "link": "/ui-kits/what-are-ui-kits/",
+            "icon": "info"
+          },
+          {
+            "text": "Where to Start",
+            "link": "/ui-kits/where-to-start/",
+            "icon": "lightbulb"
+          },
+          {
+            "text": "How to Contribute",
+            "link": "/ui-kits/how-to-contribute/",
+            "icon": "edit"
+          }
+        ]
+      }
+    },
     "dialtone": {
       "title": "Design System",
       "route": "/dialtone/",

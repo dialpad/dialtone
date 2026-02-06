@@ -79,8 +79,40 @@
               nested
               @toggle="(itemKey, shouldOpen) => $emit('toggle', itemKey, shouldOpen)"
             />
+            <div
+              v-else-if="subItem.status === 'planned'"
+              class="d-btn d-w100p d-jc-flex-start d-ta-left d-fw-normal d-fc-disabled h:d-bgc-transparent d-c-default"
+              :class="[{ 'd-pl48': depth === 0 }, { 'd-pl64': depth === 1 }]"
+            >
+              {{ subItem.text }}
+              <dt-badge
+                class="d-fw-normal d-ml4"
+              >
+                Planned
+              </dt-badge>
+            </div>
+            <a
+              v-else-if="isExternalLink(subItem.link)"
+              :href="subItem.link"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="d-td-none"
+            >
+              <dt-button
+                importance="clear"
+                kind="muted"
+                label-class="d-jc-flex-start d-ta-left"
+                :class="[
+                  'dialtone-shell-btn d-w100p',
+                  { 'd-pl48': depth === 0 },
+                  { 'd-pl64': depth === 1 },
+                ]"
+              >
+                {{ subItem.text }}
+              </dt-button>
+            </a>
             <router-link
-              v-else-if="!subItem.planned"
+              v-else
               v-slot="{ navigate, isExactActive }"
               :to="subItem.link"
               custom
@@ -105,18 +137,6 @@
                 {{ subItem.text }}
               </dt-button>
             </router-link>
-            <div
-              v-else
-              class="d-btn d-w100p d-jc-flex-start d-ta-left d-fw-normal d-fc-disabled h:d-bgc-transparent d-c-default"
-            >
-              {{ subItem.text }}
-              <dt-badge
-                v-if="subItem.planned"
-                class="d-fw-normal d-ml4"
-              >
-                Planned
-              </dt-badge>
-            </div>
           </li>
         </dt-stack>
       </div>
@@ -188,6 +208,8 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['toggle']);
+
+const isExternalLink = (link) => /^https?:\/\//.test(link);
 
 const subItems = computed(() => {
   return props.item?.children || [];

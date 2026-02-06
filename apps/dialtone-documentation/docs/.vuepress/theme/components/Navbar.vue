@@ -343,8 +343,7 @@ const route = useRoute();
 const navItems = [
   { text: 'Foundations', link: '/foundations/' },
   { text: 'Design System', link: '/dialtone/' },
-  { text: 'Careers', link: '/careers/' },
-  { text: 'Articles', link: '/articles/' },
+  { text: 'UI Kits', link: '/ui-kits/' },
 ];
 
 // Use theme manager composable with theme switching enabled

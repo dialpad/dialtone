@@ -23,6 +23,9 @@ function detectTopLevelGroup(path) {
   if (path.includes('/articles/')) {
     return 'articles';
   }
+  if (path.includes('/ui-kits/')) {
+    return 'ui-kits';
+  }
   if (path.includes('/dialtone/')) {
     return 'dialtone';
   }
