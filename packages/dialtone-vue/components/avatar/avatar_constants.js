@@ -26,6 +26,15 @@ export const AVATAR_KIND_MODIFIERS = {
 };
 
 export const AVATAR_PRESENCE_SIZE_MODIFIERS = {
+  // 11-size system: Only sizes 100-500 support presence
+  100: 'd-avatar__presence--100',
+  150: 'd-avatar__presence--150',
+  200: 'd-avatar__presence--200',
+  250: 'd-avatar__presence--250',
+  300: 'd-avatar__presence--300',
+  400: 'd-avatar__presence--400',
+  500: 'd-avatar__presence--500',
+  // T-shirt sizes (deprecated)
   md: 'd-avatar__presence--md',
   lg: 'd-avatar__presence--lg',
 };
