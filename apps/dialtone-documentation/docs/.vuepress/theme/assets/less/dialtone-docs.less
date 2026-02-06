@@ -280,37 +280,37 @@ html body {
   }
 }
 
-.dialtone-shell-btn {
-  --button-color-text: var(--dt-shell-action-color-foreground-secondary-default);
-  --button-color-background: var(--dt-shell-action-color-background-secondary-default);
+// .dialtone-shell-btn {
+//   --button-color-text: var(--dt-shell-action-color-foreground-secondary-default);
+//   --button-color-background: var(--dt-shell-action-color-background-secondary-default);
 
-  font-family: "Season Sans";
+//   font-family: "Season Sans";
 
-  &.d-btn,
-  &.d-btn--md {
-    font-size: 16px;
-  }
+//   &.d-btn,
+//   &.d-btn--md {
+//     font-size: 16px;
+//   }
 
-  &.d-btn--lg {
-    font-size: 20px;
-  }
+//   &.d-btn--lg {
+//     font-size: 20px;
+//   }
 
-  &.d-btn--xs,
-  &.d-btn--sm {
-    font-size: 14px;
-  }
+//   &.d-btn--xs,
+//   &.d-btn--sm {
+//     font-size: 14px;
+//   }
 
-  &.d-btn--active:not(.d-btn--disabled) {
-    --button-color-text: var(--dt-shell-action-color-foreground-primary-strong);
-    --button-color-background: var(--dt-shell-action-color-background-primary-selected);
-  }
+//   &.d-btn--active:not(.d-btn--disabled) {
+//     --button-color-text: var(--dt-shell-action-color-foreground-primary-strong);
+//     --button-color-background: var(--dt-shell-action-color-background-primary-selected);
+//   }
 
-  &:hover:not(.d-btn--disabled) {
-    --button-color-text: var(--dt-shell-action-color-foreground-secondary-default);
-    --button-color-background: var(--dt-shell-action-color-background-secondary-hover);
-  }
+//   &:hover:not(.d-btn--disabled) {
+//     --button-color-text: var(--dt-shell-action-color-foreground-secondary-default);
+//     --button-color-background: var(--dt-shell-action-color-background-secondary-hover);
+//   }
 
-}
+// }
 
 .dialtone-sidebar {
   position: sticky;
@@ -356,22 +356,16 @@ a.header-anchor {
 
 .d-docsite--header-2 {
   font: var(--dt-text-headline-2xl);
-  font-size: 32px;
-  font-family: "Season Sans";
   margin-block: var(--dt-size-600) var(--dt-size-400);
 }
 
 .d-docsite--header-3 {
   font: var(--dt-text-headline-xl);
-  font-size: 24px;
-  font-family: "Season Sans";
   margin-block: var(--dt-size-500) var(--dt-size-300);
 }
 
 .d-docsite--header-4 {
   font: var(--dt-text-headline-lg);
-  font-size: 20px;
-  font-family: "Season Sans";
   margin-block: var(--dt-size-500) var(--dt-size-300);
 }
 
@@ -404,10 +398,7 @@ a.header-anchor {
 }
 
 .d-docsite--paragraph {
-  font-weight: var(--dt-font-weight-medium);
-  font-size: 20px;
-  font-family: "Season Sans";
-  line-height: var(--dt-font-line-height-400);
+  font: var(--dt-text-body-md);
   max-inline-size: 75ch;
   margin-block-end: 1em;
   text-wrap: pretty;
@@ -433,9 +424,7 @@ code {
 .d-docsite--unordered-list,
 .d-docsite--list-element,
 .d-docsite--ordered-list {
-  font-weight: var(--dt-font-weight-medium);
-  font-size: 20px;
-  font-family: "Season Sans";
+  font: var(--dt-text-body-md);
   list-style: revert;
 }
 
@@ -448,8 +437,7 @@ code {
 .d-docsite--list-element {
   max-inline-size: 75ch;
   margin-block-end: var(--dt-size-300);
-  font-size: 20px;
-  line-height: var(--dt-font-line-height-400);
+  font: var(--dt-text-body-md);
 
   &:last-child {
     margin-block-end: 0;
@@ -705,22 +693,6 @@ code {
 
 .dialtone-page-title {
   font: var(--dt-text-headline-3xl);
-  font-size: 48px;
-  font-family: "Season Sans";
-  margin-block-end: var(--dt-size-400);
-}
-
-//  ============================================================================
-//  $   INTRO PARAGRAPH
-//      Type styles for intro paragraph, aka front matter's `desc`
-//  ----------------------------------------------------------------------------
-
-.dialtone-intro {
-  color: var(--dt-color-foreground-secondary);
-  font-size: 24px;
-  font-family: "Season Sans";
-  line-height: var(--dt-font-line-height-300);
-  max-inline-size: 58ch;
   margin-block-end: var(--dt-size-400);
 }
 
@@ -750,7 +722,6 @@ code {
   &__item {
     display: block;
     overflow: hidden;
-    font-family: "Season Sans";
     text-decoration: none;
     background-color: var(--dt-color-surface-secondary);
     border: var(--dt-size-border-100) solid transparent;
@@ -803,8 +774,7 @@ code {
     gap: var(--dt-size-400);
     align-items: center;
     color: var(--dt-color-foreground-secondary);
-    font-weight: var(--dt-font-weight-semi-bold);
-    font-size: 24px;
+    font: var(--dt-text-headline-xl);
     line-height: var(--dt-font-line-height-200);
   }
 
@@ -814,14 +784,12 @@ code {
 
   &__description {
     display: none;
-    font-size: 16px;
+    font: var(--dt-text-body-md);
 
-    // @media screen and (min-width: 1024px) {
-    //   display: block;
-    //   color: var(--dt-color-foreground-tertiary);
-    //   font-size: 20px;
-    //   line-height: var(--dt-font-line-height-300);
-    // }
+    @media screen and (min-width: 1024px) {
+      display: block;
+      color: var(--dt-color-foreground-tertiary);
+    }
   }
 }
 
@@ -858,8 +826,6 @@ code {
   display: flex;
   flex-direction: column;
   gap: var(--dt-size-600);
-  font-size: 20px;
-  font-family: "Season Sans";
   margin-block: var(--dt-size-550);
 
   @media screen and (min-width: 640px) {
@@ -873,7 +839,6 @@ code {
     align-self: baseline;
     padding: var(--dt-size-100) var(--dt-size-350);
     color: var(--dt-color-foreground-primary-inverted);
-    font-size: 14px;
     background-color: var(--usage-item-background-hd);
     border-radius: var(--dt-size-radius-pill);
 
