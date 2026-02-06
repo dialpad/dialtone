@@ -280,7 +280,7 @@ html body {
   }
 
   &--home {
-    --position-top: 16px;
+    --position-top: var(--dt-size-500);
 
     position: fixed;
     z-index: 1;
@@ -292,7 +292,7 @@ html body {
     backdrop-filter: blur(8px);
     transition: inset cubic-bezier(0.4, 0, 0.2, 1) 0.66s;
     will-change: inset;
-    inset: var(--position-top) 16px;
+    inset: var(--position-top) var(--dt-size-500);
     inset-block-end: auto;
   }
 
