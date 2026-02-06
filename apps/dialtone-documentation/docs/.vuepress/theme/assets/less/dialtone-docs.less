@@ -280,37 +280,21 @@ html body {
   }
 }
 
-// .dialtone-shell-btn {
-//   --button-color-text: var(--dt-shell-action-color-foreground-secondary-default);
-//   --button-color-background: var(--dt-shell-action-color-background-secondary-default);
+.dialtone-shell-btn {
+  --button-color-text: var(--dt-shell-action-color-foreground-secondary-default);
+  --button-color-background: var(--dt-shell-action-color-background-secondary-default);
 
-//   font-family: "Season Sans";
+  &.d-btn--active:not(.d-btn--disabled) {
+    --button-color-text: var(--dt-shell-action-color-foreground-primary-strong);
+    --button-color-background: var(--dt-shell-action-color-background-primary-selected);
+  }
 
-//   &.d-btn,
-//   &.d-btn--md {
-//     font-size: 16px;
-//   }
+  &:hover:not(.d-btn--disabled) {
+    --button-color-text: var(--dt-shell-action-color-foreground-secondary-default);
+    --button-color-background: var(--dt-shell-action-color-background-secondary-hover);
+  }
 
-//   &.d-btn--lg {
-//     font-size: 20px;
-//   }
-
-//   &.d-btn--xs,
-//   &.d-btn--sm {
-//     font-size: 14px;
-//   }
-
-//   &.d-btn--active:not(.d-btn--disabled) {
-//     --button-color-text: var(--dt-shell-action-color-foreground-primary-strong);
-//     --button-color-background: var(--dt-shell-action-color-background-primary-selected);
-//   }
-
-//   &:hover:not(.d-btn--disabled) {
-//     --button-color-text: var(--dt-shell-action-color-foreground-secondary-default);
-//     --button-color-background: var(--dt-shell-action-color-background-secondary-hover);
-//   }
-
-// }
+}
 
 .dialtone-sidebar {
   position: sticky;
