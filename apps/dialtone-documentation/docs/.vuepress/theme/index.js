@@ -90,7 +90,7 @@ function _extractFrontmatter (app, path, options, exceptions = []) {
     return;
   }
 
-  const regExpPath = new RegExp(`^${path}[^/]+(\.html|/)$`);
+  const regExpPath = new RegExp(`^${path}[^/]+(\\.html|/)$`);
 
   indexPage.data.enhancedFrontmatter = app.pages
     .filter(page => regExpPath.test(page.path))
@@ -278,7 +278,7 @@ export const dialtoneVuepressTheme = (options) => ({
         ]);
       _extractFrontmatter(app, '/guides/content/', options);
       _extractFrontmatter(app, '/components/', options, ['/components/status/']);
-      _extractFrontmatter(app, '/foundations/', options, ['/foundations/typography/', '/foundations/typography.html', '/foundations/colors/usage/', '/foundations/colors/palette/', '/foundations/colors/themes/', '/foundations/colors/chart-colors/', '/foundations/icons/usage/', '/foundations/icons/crafting-an-icon/', '/foundations/brand/using-our-logo/', '/foundations/brand/our-icon/', '/foundations/brand/sub-brands-and-co-branding/', '/foundations/brand/samples/']);
+      _extractFrontmatter(app, '/foundations/', options, ['/foundations/typography/', '/foundations/typography.html', '/foundations/colors/usage/', '/foundations/colors/palette/', '/foundations/colors/themes/', '/foundations/colors/chart-colors/', '/foundations/icons/usage/', '/foundations/icons/crafting-an-icon/', '/foundations/brand/using-our-logo/', '/foundations/brand/our-icon/', '/foundations/brand/sub-brands-and-co-branding/', '/foundations/brand/samples/', '/foundations/size/', '/foundations/space/']);
       _extractFrontmatter(app, '/foundations/colors/', options);
       _extractComponentStatus(app);
       _injectKeywordsFromFrontmatter(app, options);

@@ -21,7 +21,7 @@
             v-bind="attrs"
             importance="clear"
             kind="muted"
-            label-class="d-jc-flex-start d-ta-left"
+            label-class="d-jc-flex-start d-ta-left d-fw-normal"
             icon-position="right"
             :size="depth === 0 ? 'lg' : undefined"
             :tabindex="actionableTabIndex"
@@ -81,15 +81,17 @@
             />
             <div
               v-else-if="subItem.status === 'planned'"
-              class="d-btn d-w100p d-jc-flex-start d-ta-left d-fw-normal d-fc-disabled h:d-bgc-transparent d-c-default"
+              class="d-btn d-w100p d-jc-flex-start d-ta-left d-fw-normal d-fc-muted h:d-bgc-transparent d-c-default"
               :class="[{ 'd-pl48': depth === 0 }, { 'd-pl64': depth === 1 }]"
             >
-              {{ subItem.text }}
-              <dt-badge
-                class="d-fw-normal d-ml4"
-              >
-                Planned
-              </dt-badge>
+              <dt-stack as="span" direction="row" justify="space-between" class="d-w100p">
+                {{ subItem.text }}
+                <dt-badge
+                  class="d-fw-normal d-ml4"
+                >
+                  Planned
+                </dt-badge>
+              </dt-stack>
             </div>
             <a
               v-else-if="isExternalLink(subItem.link)"
@@ -101,14 +103,23 @@
               <dt-button
                 importance="clear"
                 kind="muted"
-                label-class="d-jc-flex-start d-ta-left"
+                label-class="d-jc-flex-start d-ta-left d-fw-normal"
                 :class="[
                   'dialtone-shell-btn d-w100p',
                   { 'd-pl48': depth === 0 },
                   { 'd-pl64': depth === 1 },
                 ]"
               >
-                {{ subItem.text }}
+                <dt-stack as="span" direction="row" justify="space-between" class="d-w100p">
+                  {{ subItem.text }}
+                  <dt-badge
+                    v-if="subItem.status === 'beta'"
+                    class="d-fw-normal d-ml4"
+                    type="info"
+                  >
+                    Beta
+                  </dt-badge>
+                </dt-stack>
               </dt-button>
             </a>
             <router-link
@@ -120,7 +131,7 @@
               <dt-button
                 importance="clear"
                 kind="muted"
-                label-class="d-jc-flex-start d-ta-left"
+                label-class="d-jc-flex-start d-ta-left d-fw-normal"
                 :active="isActiveLink(isExactActive, subItem.link)"
                 :class="[
                   'dialtone-shell-btn d-w100p',
@@ -156,7 +167,7 @@
       <dt-button
         importance="clear"
         kind="muted"
-        label-class="d-jc-flex-start d-ta-left"
+        label-class="d-jc-flex-start d-ta-left d-fw-normal"
         :size="depth === 0 ? 'lg' : undefined"
         :active="isActiveLink(isExactActive, item.link)"
         :class="[
