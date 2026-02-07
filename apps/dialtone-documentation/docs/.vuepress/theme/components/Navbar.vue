@@ -18,6 +18,7 @@
   <dt-stack direction="row" gap="300">
     <a
       v-dt-tooltip="'Storybook'"
+      hidden
       class="d-btn d-btn--muted d-btn--icon-only dialtone-shell-btn"
       href="https://dialtone.dialpad.com/vue"
       target="_blank"
@@ -57,6 +58,7 @@
     </a>
     <a
       v-dt-tooltip="'Github Repository'"
+      hidden
       class="d-btn d-btn--muted d-btn--icon-only dialtone-shell-btn"
       href="https://github.com/dialpad/dialtone"
       target="_blank"
@@ -84,6 +86,7 @@
     </a>
     <a
       v-dt-tooltip="'Codepen Template'"
+      hidden
       class="d-btn d-btn--muted d-btn--icon-only dialtone-shell-btn"
       href="https://codepen.io/pen?template=oNmoRqO"
       target="_blank"
