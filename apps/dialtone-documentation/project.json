@@ -19,7 +19,7 @@
       "outputs": ["{projectRoot}/docs/.vuepress/dist"],
       "options": {
         "cwd": "{projectRoot}",
-        "command": "NODE_OPTIONS='--max-old-space-size=6144' vuepress build docs"
+        "command": "node scripts/generate-raw-markdown.mjs && NODE_OPTIONS='--max-old-space-size=6144' vuepress build docs"
       }
     },
     "start": {
@@ -43,7 +43,7 @@
             "command": "nx watch --projects=dialtone-css,dialtone-tokens,dialtone-vue -- nx run \\$NX_PROJECT_NAME:build"
           },
           {
-            "command": "vuepress dev docs"
+            "command": "node scripts/generate-raw-markdown.mjs && vuepress dev docs"
           }
         ]
       }

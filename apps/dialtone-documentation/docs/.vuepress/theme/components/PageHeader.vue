@@ -162,7 +162,7 @@
               </template>
               <template #list="{ close }">
                 <dt-list-item-group>
-                  <dt-list-item role="menuitem" navigation-type="arrow-keys" @click="onCopyMarkdownLink(close)">
+                  <dt-list-item v-if="rawMarkdownUrl" role="menuitem" navigation-type="arrow-keys" @click="onCopyAsMarkdown(close)">
                     Copy as Markdown
                   </dt-list-item>
                   <dt-list-item role="menuitem" navigation-type="arrow-keys" @click="onCopyMarkdownLink(close)">
@@ -171,7 +171,12 @@
                 </dt-list-item-group>
                 <dt-dropdown-separator />
                 <dt-list-item-group>
-                  <dt-list-item role="menuitem" navigation-type="arrow-keys">
+                  <dt-list-item
+                    v-if="rawMarkdownUrl"
+                    role="menuitem"
+                    navigation-type="arrow-keys"
+                    @click="onViewAsMarkdown(close)"
+                  >
                     View as Markdown
                   </dt-list-item>
                   <dt-list-item role="menuitem" navigation-type="arrow-keys">
@@ -179,6 +184,9 @@
                   </dt-list-item>
                   <dt-list-item role="menuitem" navigation-type="arrow-keys">
                     Open in ChatGPT
+                  </dt-list-item>
+                  <dt-list-item role="menuitem" navigation-type="arrow-keys">
+                    Open in Gemini
                   </dt-list-item>
                 </dt-list-item-group>
               </template>
@@ -220,16 +228,52 @@ const page = usePageData();
 const showCopiedIcon = ref(false);
 let copiedTimeout;
 
-function onCopyMarkdownLink (close) {
-  close();
+function showCopiedFeedback () {
   showCopiedIcon.value = true;
   clearTimeout(copiedTimeout);
   copiedTimeout = setTimeout(() => { showCopiedIcon.value = false; }, 2000);
 }
 
+function onCopyMarkdownLink (close) {
+  close();
+  showCopiedFeedback();
+}
+
+async function onCopyAsMarkdown (close) {
+  close();
+  try {
+    const res = await fetch(rawMarkdownUrl.value);
+    const text = await res.text();
+    await navigator.clipboard.writeText(text);
+    showCopiedFeedback();
+  } catch (e) {
+    console.error('Failed to copy markdown:', e);
+  }
+}
+
 const SLUG_OVERRIDES = { tabs: 'tab' };
 const EXCLUDED_SLUGS = new Set(['scrollbar', 'table']);
 const GITHUB_BASE = 'https://github.com/dialpad/dialtone/tree/staging/packages/dialtone-vue/components';
+
+const RAW_SECTIONS = ['/components/', '/foundations/', '/dialtone/', '/ui-kits/', '/utilities/', '/guides/', '/tokens/'];
+
+const rawMarkdownUrl = computed(() => {
+  const path = page.value.path;
+  if (!RAW_SECTIONS.some(s => path.startsWith(s))) return null;
+  // Section root pages: /foundations/ → /raw/foundations/index.md
+  if (RAW_SECTIONS.includes(path)) return `/raw${path}index.md`;
+  // All other pages: strip trailing / or /index.html or .html, prepend /raw, append .md
+  const clean = path.replace(/(?:\/(?:index\.html)?|\.html)$/, '');
+  if (!clean) return null;
+  return `/raw${clean}.md`;
+});
+
+function onViewAsMarkdown (close) {
+  close();
+  if (rawMarkdownUrl.value) {
+    window.open(rawMarkdownUrl.value, '_blank', 'noopener,noreferrer');
+  }
+}
 
 const githubUrl = computed(() => {
   const match = page.value.path.match(/^\/components\/([^/.]+)/);
