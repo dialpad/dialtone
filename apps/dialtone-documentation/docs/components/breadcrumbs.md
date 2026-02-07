@@ -6,7 +6,7 @@ thumb: true
 image: assets/images/components/breadcrumbs.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-breadcrumbs--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=2455-0
-keywords: ["navigation","breadcrumb","path","d-breadcrumbs","DtBreadcrumbs","dt-breadcrumbs"]
+keywords: ["navigation", "path", "d-breadcrumbs", "DtBreadcrumbs", "dt-breadcrumbs", "trail", "path navigation"]
 ---
 
 <code-well-header>

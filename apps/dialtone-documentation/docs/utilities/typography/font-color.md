@@ -1,6 +1,7 @@
 ---
 title: Font Color
 description: Utilities to change an element's font-color.
+keywords: ["text color", "foreground color", "font colour"]
 ---
 
 <FontUtilitiesNotice />

@@ -1,7 +1,7 @@
 ---
 title: Cursor
 description: Utilities for setting the type of mouse cursor, if any, to show when the mouse pointer is over an element.
-keywords: ["cursor","pointer","hover","focus"]
+keywords: ["pointer", "hover", "focus"]
 ---
 ## Usage
 

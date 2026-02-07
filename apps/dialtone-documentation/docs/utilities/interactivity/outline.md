@@ -1,6 +1,7 @@
 ---
 title: Outline
 description: Utilities for controlling an element's outline.
+keywords: ["focus ring", "focus outline", "focus style"]
 ---
 
 ## Usage

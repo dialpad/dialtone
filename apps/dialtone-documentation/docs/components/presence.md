@@ -6,7 +6,7 @@ thumb: true
 image: assets/images/components/presence.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-presence--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=9628-58458
-keywords: ["status","online","availability","d-presence","DtPresence","dt-presence"]
+keywords: ["status", "online", "availability", "d-presence", "DtPresence", "dt-presence", "status indicator", "status dot"]
 ---
 
 <code-well-header>

@@ -1,7 +1,7 @@
 ---
 title: Theme and Mode
 description: Dialtone's system to customize appearance and support light/dark modes.
-keywords: ["dark mode","light mode","theme"]
+keywords: ["dark mode", "light mode"]
 ---
 
 ## Overview

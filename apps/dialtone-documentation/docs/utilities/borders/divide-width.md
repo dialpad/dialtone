@@ -1,6 +1,7 @@
 ---
 title: Divide Width
 description: Utilities for controlling the divider width between an element's child items.
+keywords: ["divider width","separator width","divider size"]
 ---
 
 ## Default Width

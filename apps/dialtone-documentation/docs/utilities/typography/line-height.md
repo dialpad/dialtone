@@ -1,6 +1,7 @@
 ---
 title: Line Height
 description: Utilities to change an element's line-height.
+keywords: ["leading", "line spacing"]
 ---
 
 <FontUtilitiesNotice />

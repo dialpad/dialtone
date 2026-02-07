@@ -1,7 +1,7 @@
 ---
 title: Box Sizing
 description: Utilities for controlling how the browser should calculate an element's total size.
-keywords: ["display","position","overflow","z-index"]
+keywords: ["border box", "content box"]
 ---
 
 ## Examples

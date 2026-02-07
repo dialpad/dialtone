@@ -1,6 +1,7 @@
 ---
 title: Position
 description: Utility classes to change an element’s position type.
+keywords: ["relative", "absolute", "fixed", "sticky", "static"]
 ---
 
 ## Examples

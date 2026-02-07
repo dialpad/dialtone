@@ -1,6 +1,7 @@
 ---
 title: Background Color
 description: Utilities for setting the background color.
+keywords: ["bg color","background colour","bgc"]
 ---
 
 <dt-notice kind="warning" class="d-wmx100p d-mt24" hideClose>

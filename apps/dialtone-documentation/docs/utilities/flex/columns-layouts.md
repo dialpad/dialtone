@@ -1,6 +1,7 @@
 ---
 title: Columns & Layouts
 description: Utilities for flex columns and common flex layouts.
+keywords: ["flexbox","flex columns","flex layout","column layout"]
 ---
 
 <FlexStackNotice />

@@ -1,7 +1,7 @@
 ---
 title: Align Content
 description: Utilities for setting how rows are distributed along its cross axis. This property only works when a parent container has more than one line.
-keywords: ["flexbox","layout","justify","align"]
+keywords: ["flexbox", "cross axis", "flex wrap"]
 ---
 
 <FlexStackNotice />
