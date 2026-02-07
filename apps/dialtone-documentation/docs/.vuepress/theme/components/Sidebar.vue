@@ -229,7 +229,11 @@ const handleKeydown = (event) => {
       if (focusedIndex.value > 0) {
         focusedIndex.value--;
       } else {
-        focusedIndex.value = flattenedFilteredItems.value.length - 1;
+        focusedIndex.value = -1;
+        nextTick(() => {
+          const inputElement = searchInput.value?.$el?.querySelector('input');
+          inputElement?.focus();
+        });
       }
       break;
 
