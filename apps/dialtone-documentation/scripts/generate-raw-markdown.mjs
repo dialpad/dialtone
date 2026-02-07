@@ -10,7 +10,7 @@
  *   node scripts/generate-raw-markdown.mjs
  */
 
-import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync } from 'node:fs';
 import { resolve, basename, dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -25,7 +25,6 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const ROOT = resolve(__dirname, '..');
 
 const DATA_DIR = resolve(ROOT, 'docs/_data');
-const PUBLIC_RAW = resolve(ROOT, 'docs/.vuepress/public/raw');
 const UTILITIES_DIR = resolve(ROOT, 'docs/utilities');
 
 // Data source paths
@@ -90,9 +89,7 @@ function mapOutputPath (relPath) {
   const base = basename(relPath);
   const dir = dirname(relPath);
   if (base === 'index.md') {
-    // "index.md" at section root → section root file
     if (dir === '.') return 'index.md';
-    // "colors/index.md" → "colors.md"
     return dir + '.md';
   }
   return relPath;
@@ -114,11 +111,28 @@ function loadJson (path, label) {
 }
 
 /**
+ * Build a markdown link line from a file's title frontmatter.
+ */
+function buildLinkFromFile (filePath, linkTarget) {
+  const content = readFileSync(filePath, 'utf-8');
+  const titleMatch = content.match(/^title:\s*(.+)$/m);
+  const title = titleMatch ? titleMatch[1] : basename(linkTarget, '.md');
+  return `- [${title}](${linkTarget})`;
+}
+
+/**
+ * List .md files in a directory (excluding index.md), sorted.
+ */
+function listMdFiles (dir) {
+  return readdirSync(dir)
+    .filter(f => f.endsWith('.md') && f !== 'index.md')
+    .sort();
+}
+
+/**
  * After all files are generated for a non-flat section, scan the output
  * directory for any .md file whose stem matches a sibling subdirectory.
  * For each match, append a "## Pages" section linking to child files.
- *
- * Example: guides/content.md + guides/content/ → append links from content/ dir
  */
 function appendSubdirectoryLinks (outputBase) {
   let entries;
@@ -140,23 +154,17 @@ function appendSubdirectoryLinks (outputBase) {
 
     if (children.length === 0) continue;
 
-    const links = children.map(f => {
-      const content = readFileSync(resolve(subDir, f), 'utf-8');
-      const titleMatch = content.match(/^title:\s*(.+)$/m);
-      const title = titleMatch ? titleMatch[1] : basename(f, '.md');
-      return `- [${title}](${stem}/${f})`;
-    });
-
+    const links = children.map(f => buildLinkFromFile(resolve(subDir, f), `${stem}/${f}`));
     const filePath = resolve(outputBase, entry);
     const existing = readFileSync(filePath, 'utf-8');
     writeFileSync(filePath, existing.trimEnd() + '\n\n## Pages\n\n' + links.join('\n') + '\n', 'utf-8');
   }
 }
 
-function main () {
-  console.log('[generate-raw-markdown] Starting...');
-
-  // Load all data sources
+/**
+ * Load all external JSON data sources and push them into module-level caches.
+ */
+function loadAllDataSources () {
   const componentDocs = loadJson(COMPONENT_DOCS_JSON, 'component-documentation.json');
   setComponentDocs(componentDocs || []);
 
@@ -175,6 +183,87 @@ function main () {
   const cssTokensDocs = loadJson(TOKENS_DOCS_JSON, 'tokens-docs.json');
   setTokensDocs(cssTokensDocs);
   setColorUtilityClassDocs(utilityDocs || {});
+}
+
+/**
+ * Generate an index.md listing all pages for a flat section.
+ */
+function generateFlatIndex (section, sourceDir, outputBase) {
+  const srcIndex = resolve(sourceDir, 'index.md');
+  try {
+    const srcContent = readFileSync(srcIndex, 'utf-8');
+    const titleMatch = srcContent.match(/^title:\s*(.+)$/m);
+    const descMatch = srcContent.match(/^description:\s*(.+)$/m);
+    const title = titleMatch?.[1] ?? section.name;
+    const desc = descMatch?.[1] ?? '';
+
+    const links = listMdFiles(outputBase).map(f => buildLinkFromFile(resolve(outputBase, f), f));
+
+    let indexContent = `# ${title}\n\n${desc}\n`;
+    if (links.length > 0) {
+      indexContent += '\n## Pages\n\n' + links.join('\n') + '\n';
+    }
+    writeFileSync(resolve(outputBase, 'index.md'), indexContent, 'utf-8');
+  } catch (err) {
+    console.warn(`[generate-raw-markdown] ${section.name}: could not generate index.md: ${err.message}`);
+  }
+}
+
+/**
+ * Append sibling page links to a non-flat section's index.md.
+ */
+function appendSiblingLinks (section, outputBase) {
+  const indexPath = resolve(outputBase, 'index.md');
+  const siblings = listMdFiles(outputBase);
+  if (siblings.length === 0) return;
+
+  const links = siblings.map(f => buildLinkFromFile(resolve(outputBase, f), f));
+  try {
+    const indexContent = readFileSync(indexPath, 'utf-8');
+    writeFileSync(indexPath, indexContent.trimEnd() + '\n\n## Pages\n\n' + links.join('\n') + '\n', 'utf-8');
+  } catch (err) {
+    console.warn(`[generate-raw-markdown] ${section.name}: could not append links to index.md: ${err.message}`);
+  }
+}
+
+/**
+ * Build a markdown link for an overview section from its source index.md.
+ */
+function buildOverviewLink (linkPath) {
+  const srcDir = linkPath.replace(/^\/|\/$/g, '');
+  const srcFile = resolve(ROOT, 'docs', srcDir, 'index.md');
+  try {
+    const content = readFileSync(srcFile, 'utf-8');
+    const titleMatch = content.match(/^title:\s*(.+)$/m);
+    const descMatch = content.match(/^description:\s*(.+)$/m);
+    const title = titleMatch?.[1] ?? srcDir;
+    const desc = descMatch?.[1] ?? '';
+    return desc ? `- [${title}](${linkPath}) — ${desc}` : `- [${title}](${linkPath})`;
+  } catch {
+    return `- [${srcDir}](${linkPath})`;
+  }
+}
+
+/**
+ * Append overview section links (e.g. Components, Utilities) to a section's index.md.
+ */
+function appendOverviewLinks (section, outputBase) {
+  if (!section.overviewLinks?.length) return;
+
+  const indexPath = resolve(outputBase, 'index.md');
+  const links = section.overviewLinks.map(buildOverviewLink);
+  try {
+    const indexContent = readFileSync(indexPath, 'utf-8');
+    writeFileSync(indexPath, indexContent.trimEnd() + '\n\n## Sections\n\n' + links.join('\n') + '\n', 'utf-8');
+  } catch (err) {
+    console.warn(`[generate-raw-markdown] ${section.name}: could not append sections to index.md: ${err.message}`);
+  }
+}
+
+function main () {
+  console.log('[generate-raw-markdown] Starting...');
+
+  loadAllDataSources();
 
   let totalSuccess = 0;
   let totalError = 0;
@@ -185,15 +274,9 @@ function main () {
 
     mkdirSync(outputBase, { recursive: true });
 
-    let files;
-    if (section.flat) {
-      // Legacy flat mode: top-level .md files only, skip index.md
-      files = readdirSync(sourceDir)
-        .filter(f => f.endsWith('.md') && f !== 'index.md');
-    } else {
-      // Recursive mode: discover all .md files
-      files = walkDir(sourceDir);
-    }
+    const files = section.flat
+      ? readdirSync(sourceDir).filter(f => f.endsWith('.md') && f !== 'index.md')
+      : walkDir(sourceDir);
 
     console.log(`[generate-raw-markdown] ${section.name}: found ${files.length} files`);
 
@@ -205,10 +288,7 @@ function main () {
       const outputRelPath = section.flat ? relFile : mapOutputPath(relFile);
       const outputPath = resolve(outputBase, outputRelPath);
 
-      // Ensure intermediate output directories exist
       mkdirSync(dirname(outputPath), { recursive: true });
-
-      const slug = basename(relFile, '.md');
 
       try {
         const source = readFileSync(sourcePath, 'utf-8');
@@ -225,87 +305,14 @@ function main () {
       }
     }
 
-    // For flat sections, generate an index.md listing all component pages
     if (section.flat) {
-      const srcIndex = resolve(sourceDir, 'index.md');
-      try {
-        const srcContent = readFileSync(srcIndex, 'utf-8');
-        const titleMatch = srcContent.match(/^title:\s*(.+)$/m);
-        const descMatch = srcContent.match(/^description:\s*(.+)$/m);
-        const title = titleMatch?.[1] ?? section.name;
-        const desc = descMatch?.[1] ?? '';
-
-        const outputFiles = readdirSync(outputBase)
-          .filter(f => f.endsWith('.md') && f !== 'index.md')
-          .sort();
-        const links = outputFiles.map(f => {
-          const content = readFileSync(resolve(outputBase, f), 'utf-8');
-          const fTitleMatch = content.match(/^title:\s*(.+)$/m);
-          const fTitle = fTitleMatch ? fTitleMatch[1] : basename(f, '.md');
-          return `- [${fTitle}](${f})`;
-        });
-
-        let indexContent = `# ${title}\n\n${desc}\n`;
-        if (links.length > 0) {
-          indexContent += '\n## Pages\n\n' + links.join('\n') + '\n';
-        }
-        writeFileSync(resolve(outputBase, 'index.md'), indexContent, 'utf-8');
-      } catch (err) {
-        console.warn(`[generate-raw-markdown] ${section.name}: could not generate index.md: ${err.message}`);
-      }
-    }
-
-    // For non-flat sections, append child page links to the section root index.md
-    if (!section.flat) {
-      const indexPath = resolve(outputBase, 'index.md');
-      const siblings = readdirSync(outputBase)
-        .filter(f => f.endsWith('.md') && f !== 'index.md')
-        .sort();
-      if (siblings.length > 0) {
-        const links = siblings.map(f => {
-          const content = readFileSync(resolve(outputBase, f), 'utf-8');
-          const titleMatch = content.match(/^title:\s*(.+)$/m);
-          const title = titleMatch ? titleMatch[1] : basename(f, '.md');
-          return `- [${title}](${f})`;
-        });
-        try {
-          const indexContent = readFileSync(indexPath, 'utf-8');
-          writeFileSync(indexPath, indexContent.trimEnd() + '\n\n## Pages\n\n' + links.join('\n') + '\n', 'utf-8');
-        } catch (err) {
-          console.warn(`[generate-raw-markdown] ${section.name}: could not append links to index.md: ${err.message}`);
-        }
-      }
-
-      // Append child page links to any intermediate landing pages
+      generateFlatIndex(section, sourceDir, outputBase);
+    } else {
+      appendSiblingLinks(section, outputBase);
       appendSubdirectoryLinks(outputBase);
     }
 
-    // Append overview section links (e.g. Components, Utilities) to the index.md
-    if (section.overviewLinks?.length) {
-      const indexPath = resolve(outputBase, 'index.md');
-      const links = [];
-      for (const linkPath of section.overviewLinks) {
-        // linkPath is like "/components/" → source at docs/components/index.md
-        const srcDir = linkPath.replace(/^\/|\/$/g, '');
-        const srcFile = resolve(ROOT, 'docs', srcDir, 'index.md');
-        try {
-          const content = readFileSync(srcFile, 'utf-8');
-          const titleMatch = content.match(/^title:\s*(.+)$/m);
-          const descMatch = content.match(/^description:\s*(.+)$/m);
-          const title = titleMatch?.[1] ?? srcDir;
-          const desc = descMatch?.[1] ?? '';
-          links.push(desc ? `- [${title}](${linkPath}) — ${desc}` : `- [${title}](${linkPath})`);
-        } catch {
-          links.push(`- [${srcDir}](${linkPath})`);
-        }
-      }
-      try {
-        const indexContent = readFileSync(indexPath, 'utf-8');
-        writeFileSync(indexPath, indexContent.trimEnd() + '\n\n## Sections\n\n' + links.join('\n') + '\n', 'utf-8');
-      } catch (err) {
-        console.warn(`[generate-raw-markdown] ${section.name}: could not append sections to index.md: ${err.message}`);
-      }
-    }
+    appendOverviewLinks(section, outputBase);
 
     console.log(`[generate-raw-markdown] ${section.name}: ${successCount} generated, ${errorCount} errors`);
     totalSuccess += successCount;

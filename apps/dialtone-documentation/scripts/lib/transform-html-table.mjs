@@ -58,21 +58,16 @@ function extractCells (rowHtml) {
 }
 
 /**
- * Process accumulated lines from an HTML <table> block.
- * @param {string[]} lines - All lines between <table> and </table> inclusive
- * @returns {string[]} - Output markdown lines
+ * Extract all <tr> row HTML segments from the table, handling nested <tr> depth.
+ * Returns array of { cells, isHeaderRow }.
  */
-export function transformHtmlTable (lines) {
-  const html = lines.join('\n');
-
-  // Extract rows by tracking <tr> depth
+function extractRows (html) {
   const rows = [];
   const trOpenRegex = /<tr[\s>]/gi;
   let trMatch;
 
   while ((trMatch = trOpenRegex.exec(html)) !== null) {
     const trStart = trMatch.index;
-    // Find matching </tr>
     let depth = 1;
     const trCloseRegex = /<(\/?)(tr)\b[^>]*>/gi;
     trCloseRegex.lastIndex = trStart + trMatch[0].length;
@@ -92,52 +87,49 @@ export function transformHtmlTable (lines) {
       }
     }
 
-    const rowHtml = html.slice(trStart, trEnd);
-    const cells = extractCells(rowHtml);
+    const cells = extractCells(html.slice(trStart, trEnd));
     if (cells.length === 0) continue;
-
-    const allTh = cells.every(c => c.type === 'th');
 
     rows.push({
       cells: cells.map(c => c.text),
-      isHeaderRow: allTh && rows.length === 0,
+      isHeaderRow: cells.every(c => c.type === 'th') && rows.length === 0,
     });
   }
 
+  return rows;
+}
+
+/**
+ * Process accumulated lines from an HTML <table> block.
+ * @param {string[]} lines - All lines between <table> and </table> inclusive
+ * @returns {string[]} - Output markdown lines
+ */
+export function transformHtmlTable (lines) {
+  const rows = extractRows(lines.join('\n'));
   if (rows.length === 0) return [];
 
-  const output = [];
-
-  // Determine column count from the widest row
   const colCount = Math.max(...rows.map(r => r.cells.length));
+  const pad = arr => {
+    while (arr.length < colCount) arr.push('');
+    return arr;
+  };
 
-  // If first row is a header, use it as the header
   let headerRow;
   let dataRows;
   if (rows[0].isHeaderRow) {
     headerRow = rows[0].cells;
     dataRows = rows.slice(1);
   } else {
-    // Generate generic column headers
     headerRow = Array.from({ length: colCount }, (_, i) => `Col ${i + 1}`);
     dataRows = rows;
   }
 
-  // Pad to colCount
-  const pad = arr => {
-    while (arr.length < colCount) arr.push('');
-    return arr;
-  };
-
-  // Emit header
+  const output = [];
   output.push('| ' + pad([...headerRow]).join(' | ') + ' |');
   output.push('| ' + Array(colCount).fill('---').join(' | ') + ' |');
-
-  // Emit data rows
   for (const row of dataRows) {
     output.push('| ' + pad([...row.cells]).join(' | ') + ' |');
   }
-
   output.push('');
   return output;
 }

@@ -78,6 +78,13 @@ export function isStandaloneVueComponentLine (line) {
 }
 
 /**
+ * Capitalize the first letter of a string.
+ */
+export function capitalize (str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+/**
  * Convert a kebab-case slug to PascalCase with Dt prefix.
  * e.g. "avatar" → "DtAvatar", "select-menu" → "DtSelectMenu"
  */

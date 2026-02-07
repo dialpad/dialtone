@@ -46,11 +46,33 @@ export function findComponent (componentName) {
  * Format a prop default value for display.
  */
 function formatDefault (defaultValue) {
-  if (!defaultValue) return "''";
+  if (!defaultValue) return '\'\'';
   const val = defaultValue.value;
-  if (val === 'undefined' || val === undefined) return "''";
+  if (val === 'undefined' || val === undefined) return '\'\'';
   if (defaultValue.func) return '(function)';
   return val;
+}
+
+/**
+ * Build a markdown table section for a set of API items.
+ * @param {string} heading - Section heading (e.g. "Props")
+ * @param {object[]} items - Array of API item objects
+ * @param {Function} formatRow - Converts one item into a table row string
+ * @param {string[]} headers - Column headers
+ * @returns {string[]} - Output markdown lines
+ */
+function buildApiTable (heading, items, headers, formatRow) {
+  if (items.length === 0) return [];
+  const output = [];
+  output.push(`### ${heading}`);
+  output.push('');
+  output.push('| ' + headers.join(' | ') + ' |');
+  output.push('| ' + headers.map(() => '---').join(' | ') + ' |');
+  for (const item of items) {
+    output.push(formatRow(item));
+  }
+  output.push('');
+  return output;
 }
 
 /**
@@ -66,55 +88,31 @@ export function transformVueApi (componentName) {
 
   const output = [];
 
-  // Props table
   const props = component.props ? Object.values(component.props) : [];
-  if (props.length > 0) {
-    output.push('### Props');
-    output.push('');
-    output.push('| Name | Description | Type | Default |');
-    output.push('| --- | --- | --- | --- |');
-    for (const prop of props) {
-      const name = escapeTableCell(prop.name || '');
-      const desc = escapeTableCell(prop.description || '');
-      const type = escapeTableCell(prop.type ? prop.type.name : '');
-      const def = escapeTableCell(formatDefault(prop.defaultValue));
-      output.push(`| \`${name}\` | ${desc} | \`${type}\` | \`${def}\` |`);
-    }
-    output.push('');
-  }
+  output.push(...buildApiTable('Props', props, ['Name', 'Description', 'Type', 'Default'], (prop) => {
+    const name = escapeTableCell(prop.name || '');
+    const desc = escapeTableCell(prop.description || '');
+    const type = escapeTableCell(prop.type ? prop.type.name : '');
+    const def = escapeTableCell(formatDefault(prop.defaultValue));
+    return `| \`${name}\` | ${desc} | \`${type}\` | \`${def}\` |`;
+  }));
 
-  // Slots table
   const slots = component.slots ? Object.values(component.slots) : [];
-  if (slots.length > 0) {
-    output.push('### Slots');
-    output.push('');
-    output.push('| Name | Description |');
-    output.push('| --- | --- |');
-    for (const slot of slots) {
-      const name = escapeTableCell(slot.name || '');
-      const desc = escapeTableCell(slot.description || '');
-      output.push(`| \`${name}\` | ${desc} |`);
-    }
-    output.push('');
-  }
+  output.push(...buildApiTable('Slots', slots, ['Name', 'Description'], (slot) => {
+    const name = escapeTableCell(slot.name || '');
+    const desc = escapeTableCell(slot.description || '');
+    return `| \`${name}\` | ${desc} |`;
+  }));
 
-  // Events table
   const events = component.events ? Object.values(component.events) : [];
-  if (events.length > 0) {
-    output.push('### Events');
-    output.push('');
-    output.push('| Name | Description | Payload |');
-    output.push('| --- | --- | --- |');
-    for (const event of events) {
-      const name = escapeTableCell(event.name || '');
-      const desc = escapeTableCell(event.description || '');
-      const payload = escapeTableCell(
-        event.type && event.type.names ? event.type.names.join(' \\| ') : '',
-      );
-      output.push(`| \`${name}\` | ${desc} | \`${payload}\` |`);
-    }
-    output.push('');
-  }
+  output.push(...buildApiTable('Events', events, ['Name', 'Description', 'Payload'], (event) => {
+    const name = escapeTableCell(event.name || '');
+    const desc = escapeTableCell(event.description || '');
+    const payload = escapeTableCell(
+      event.type && event.type.names ? event.type.names.join(' \\| ') : '',
+    );
+    return `| \`${name}\` | ${desc} | \`${payload}\` |`;
+  }));
 
   return output;
 }

@@ -22,61 +22,51 @@
  */
 
 /**
+ * Categorize a trimmed usage line into a slot transition or content.
+ * Returns { slot: string|null } for transitions, or null for content lines.
+ */
+function categorizeUsageLine (trimmed) {
+  if (trimmed.match(/<template\s+#do\s*>/)) return { slot: 'do' };
+  if (trimmed.match(/<template\s+#dont\s*>/)) return { slot: 'dont' };
+  if (trimmed === '</template>') return { slot: null };
+  if (trimmed === '<dialtone-usage>' || trimmed === '</dialtone-usage>') return { slot: 'skip' };
+  return null;
+}
+
+/**
+ * Emit a labeled section if content is non-empty.
+ */
+function emitSection (label, contentLines, output) {
+  const content = contentLines.join('\n').trim();
+  if (!content) return;
+  output.push(`**${label}:**`);
+  output.push('');
+  output.push(content);
+  output.push('');
+}
+
+/**
  * Process accumulated lines from a <dialtone-usage> block.
  * @param {string[]} lines - All lines between <dialtone-usage> and </dialtone-usage> inclusive
  * @returns {string[]} - Output markdown lines
  */
 export function transformUsage (lines) {
-  const output = [];
   let currentSlot = null;
   const doLines = [];
   const dontLines = [];
 
   for (const line of lines) {
-    const trimmed = line.trim();
-
-    // Detect slot boundaries
-    if (trimmed.match(/<template\s+#do\s*>/)) {
-      currentSlot = 'do';
+    const transition = categorizeUsageLine(line.trim());
+    if (transition) {
+      if (transition.slot !== 'skip') currentSlot = transition.slot;
       continue;
     }
-    if (trimmed.match(/<template\s+#dont\s*>/)) {
-      currentSlot = 'dont';
-      continue;
-    }
-    if (trimmed === '</template>') {
-      currentSlot = null;
-      continue;
-    }
-    if (trimmed === '<dialtone-usage>' || trimmed === '</dialtone-usage>') {
-      continue;
-    }
-
-    // Accumulate content into the appropriate slot
-    if (currentSlot === 'do') {
-      doLines.push(line);
-    } else if (currentSlot === 'dont') {
-      dontLines.push(line);
-    }
+    if (currentSlot === 'do') doLines.push(line);
+    else if (currentSlot === 'dont') dontLines.push(line);
   }
 
-  // Emit Do section
-  const doContent = doLines.join('\n').trim();
-  if (doContent) {
-    output.push('**Do:**');
-    output.push('');
-    output.push(doContent);
-    output.push('');
-  }
-
-  // Emit Don't section
-  const dontContent = dontLines.join('\n').trim();
-  if (dontContent) {
-    output.push("**Don't:**");
-    output.push('');
-    output.push(dontContent);
-    output.push('');
-  }
-
+  const output = [];
+  emitSection('Do', doLines, output);
+  emitSection('Don\'t', dontLines, output);
   return output;
 }

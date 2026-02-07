@@ -10,25 +10,32 @@ import { resolve } from 'node:path';
 import { escapeTableCell, stripHtmlTags } from './utils.mjs';
 
 /**
+ * Load and parse a component's JSON data file.
+ * @returns {{ data: object } | { error: string[] }}
+ */
+function loadComponentData (componentName, dataDir, label) {
+  const jsonPath = resolve(dataDir, `${componentName}.json`);
+  if (!existsSync(jsonPath)) {
+    return { error: [`<!-- ${label} data not found for "${componentName}" -->`] };
+  }
+  try {
+    return { data: JSON.parse(readFileSync(jsonPath, 'utf-8')) };
+  } catch {
+    return { error: [`<!-- Failed to parse ${label} data for "${componentName}" -->`] };
+  }
+}
+
+/**
  * Generate a markdown table from the component's CSS class data.
  * @param {string} componentName - kebab-case name, e.g. "avatar"
  * @param {string} dataDir - Absolute path to the _data directory
  * @returns {string[]} - Output markdown lines
  */
 export function transformClassTable (componentName, dataDir) {
-  const jsonPath = resolve(dataDir, `${componentName}.json`);
-  if (!existsSync(jsonPath)) {
-    return [`<!-- Class data not found for "${componentName}" -->`];
-  }
+  const result = loadComponentData(componentName, dataDir, 'Class');
+  if (result.error) return result.error;
 
-  let data;
-  try {
-    data = JSON.parse(readFileSync(jsonPath, 'utf-8'));
-  } catch {
-    return [`<!-- Failed to parse class data for "${componentName}" -->`];
-  }
-
-  const classes = data.classes;
+  const classes = result.data.classes;
   if (!classes || classes.length === 0) {
     return [`<!-- No classes defined for "${componentName}" -->`];
   }
@@ -36,14 +43,12 @@ export function transformClassTable (componentName, dataDir) {
   const output = [];
   output.push('| Class | Applies to | Description |');
   output.push('| --- | --- | --- |');
-
   for (const entry of classes) {
     const cls = escapeTableCell(entry.class || '');
     const applies = escapeTableCell(entry.applies || '');
     const desc = escapeTableCell(entry.description || '');
     output.push(`| \`${cls}\` | ${applies} | ${desc} |`);
   }
-
   output.push('');
   return output;
 }
@@ -55,19 +60,10 @@ export function transformClassTable (componentName, dataDir) {
  * @returns {string[]} - Output markdown lines
  */
 export function transformAccessibleTable (componentName, dataDir) {
-  const jsonPath = resolve(dataDir, `${componentName}.json`);
-  if (!existsSync(jsonPath)) {
-    return [`<!-- Accessible data not found for "${componentName}" -->`];
-  }
+  const result = loadComponentData(componentName, dataDir, 'Accessible');
+  if (result.error) return result.error;
 
-  let data;
-  try {
-    data = JSON.parse(readFileSync(jsonPath, 'utf-8'));
-  } catch {
-    return [`<!-- Failed to parse accessible data for "${componentName}" -->`];
-  }
-
-  const accessible = data.accessible;
+  const accessible = result.data.accessible;
   if (!accessible || accessible.length === 0) {
     return [`<!-- No accessibility data defined for "${componentName}" -->`];
   }
@@ -75,14 +71,12 @@ export function transformAccessibleTable (componentName, dataDir) {
   const output = [];
   output.push('| Item | Applies to | Description |');
   output.push('| --- | --- | --- |');
-
   for (const entry of accessible) {
     const item = escapeTableCell(entry.item || '');
     const applies = escapeTableCell(entry.applies || '');
     const desc = escapeTableCell(stripHtmlTags(entry.description || ''));
     output.push(`| \`${item}\` | ${applies} | ${desc} |`);
   }
-
   output.push('');
   return output;
 }

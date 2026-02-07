@@ -8,6 +8,8 @@
  *   [{ name, file, vue, desc }, ...]
  */
 
+import { escapeTableCell, capitalize } from './utils.mjs';
+
 let iconKeywords = null;
 let illustrationData = null;
 
@@ -59,7 +61,7 @@ export function transformIconCatalog () {
     for (const name of iconNames) {
       const kw = icons[name];
       const keywords = Array.isArray(kw) ? kw.join(', ') : '';
-      lines.push(`| ${name} | ${escapeCell(keywords)} |`);
+      lines.push(`| ${name} | ${escapeTableCell(keywords)} |`);
     }
     lines.push('');
   }
@@ -86,16 +88,8 @@ export function transformIllustrationCatalog () {
     const name = item.name || '';
     const vue = item.vue ? `\`<${item.vue} />\`` : '';
     const desc = item.desc || '';
-    lines.push(`| ${escapeCell(name)} | ${vue} | ${escapeCell(desc)} |`);
+    lines.push(`| ${escapeTableCell(name)} | ${vue} | ${escapeTableCell(desc)} |`);
   }
 
   return lines;
-}
-
-function capitalize (str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
-function escapeCell (text) {
-  return (text || '').replace(/\|/g, '\\|').replace(/\s+/g, ' ').trim();
 }
