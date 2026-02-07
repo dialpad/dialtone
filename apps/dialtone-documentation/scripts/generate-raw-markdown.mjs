@@ -59,7 +59,7 @@ const SECTIONS = [
   { name: 'ui-kits', sourceDir: 'docs/ui-kits', outputDir: 'raw/ui-kits' },
   { name: 'guides', sourceDir: 'docs/guides', outputDir: 'raw/guides' },
   { name: 'tokens', sourceDir: 'docs/tokens', outputDir: 'raw/tokens' },
-  { name: 'utilities', sourceDir: 'docs/utilities', outputDir: 'raw/utilities' },
+  { name: 'utilities', sourceDir: 'docs/utilities', outputDir: 'raw/utilities', navSection: '/utilities/' },
 ];
 
 /**
@@ -247,6 +247,54 @@ function buildOverviewLink (linkPath, currentRawDir) {
 }
 
 /**
+ * Load nav categories for a section from site-nav.json.
+ * Returns the category children array, or null if not found.
+ */
+function loadNavCategories (navSection) {
+  const navData = loadJson(resolve(DATA_DIR, 'site-nav.json'), 'site-nav.json');
+  return navData?.topLevelGroups?.dialtone?.sections?.[navSection]?.[0]?.children ?? null;
+}
+
+/**
+ * Build categorized markdown link lines from nav category entries.
+ */
+function buildCategoryLinks (categories, currentRawDir) {
+  const lines = [];
+  for (const category of categories) {
+    if (!category.children?.length) continue;
+    lines.push(`### ${category.text}`);
+    for (const child of category.children) {
+      lines.push(`- [${child.text}](${resolveRawLink(child.link, currentRawDir)})`);
+    }
+    lines.push('');
+  }
+  return lines;
+}
+
+/**
+ * Append categorized child page links from site-nav.json to a section's index.md.
+ * Used for sections like utilities where pages are nested in subdirectories.
+ */
+function appendNavLinks (section, outputBase) {
+  if (!section.navSection) return;
+
+  const categories = loadNavCategories(section.navSection);
+  if (!categories?.length) return;
+
+  const currentRawDir = section.outputDir.replace(/^raw\//, '');
+  const lines = buildCategoryLinks(categories, currentRawDir);
+  if (lines.length === 0) return;
+
+  const indexPath = resolve(outputBase, 'index.md');
+  try {
+    const indexContent = readFileSync(indexPath, 'utf-8');
+    writeFileSync(indexPath, indexContent.trimEnd() + '\n\n## Pages\n\n' + lines.join('\n').trimEnd() + '\n', 'utf-8');
+  } catch (err) {
+    console.warn(`[generate-raw-markdown] ${section.name}: could not append nav links to index.md: ${err.message}`);
+  }
+}
+
+/**
  * Append overview section links (e.g. Components, Utilities) to a section's index.md.
  */
 function appendOverviewLinks (section, outputBase) {
@@ -319,6 +367,7 @@ function main () {
       appendSubdirectoryLinks(outputBase);
     }
 
+    appendNavLinks(section, outputBase);
     appendOverviewLinks(section, outputBase);
 
     console.log(`[generate-raw-markdown] ${section.name}: ${successCount} generated, ${errorCount} errors`);
