@@ -163,6 +163,10 @@
                 "link": "/dialtone/whats-new/"
               },
               {
+                "text": "MCP Server",
+                "link": "/guides/mcp-server/"
+              },
+              {
                 "text": "Getting Started",
                 "link": "/guides/getting-started/",
                 "children": [
@@ -173,12 +177,12 @@
                   {
                     "text": "Contributing",
                     "link": "/guides/contributing/"
-                  },
-                  {
-                    "text": "Accessibility",
-                    "link": "/guides/accessibility/"
                   }
                 ]
+              },
+              {
+                "text": "Accessibility",
+                "link": "/guides/accessibility/"
               },
               {
                 "text": "Release Notes",
