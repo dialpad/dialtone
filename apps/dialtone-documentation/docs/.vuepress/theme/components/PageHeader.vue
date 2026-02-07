@@ -162,7 +162,12 @@
               </template>
               <template #list="{ close }">
                 <dt-list-item-group>
-                  <dt-list-item v-if="rawMarkdownUrl" role="menuitem" navigation-type="arrow-keys" @click="onCopyAsMarkdown(close)">
+                  <dt-list-item
+                    v-if="rawMarkdownUrl"
+                    role="menuitem"
+                    navigation-type="arrow-keys"
+                    @click="onCopyAsMarkdown(close)"
+                  >
                     Copy as Markdown
                   </dt-list-item>
                   <dt-list-item role="menuitem" navigation-type="arrow-keys" @click="onCopyMarkdownLink(close)">
@@ -179,14 +184,21 @@
                   >
                     View as Markdown
                   </dt-list-item>
-                  <dt-list-item role="menuitem" navigation-type="arrow-keys">
+                  <dt-list-item
+                    v-if="rawMarkdownUrl"
+                    role="menuitem"
+                    navigation-type="arrow-keys"
+                    @click="openInAiChat(close, 'claude')"
+                  >
                     Open in Claude.ai
                   </dt-list-item>
-                  <dt-list-item role="menuitem" navigation-type="arrow-keys">
+                  <dt-list-item
+                    v-if="rawMarkdownUrl"
+                    role="menuitem"
+                    navigation-type="arrow-keys"
+                    @click="openInAiChat(close, 'chatgpt')"
+                  >
                     Open in ChatGPT
-                  </dt-list-item>
-                  <dt-list-item role="menuitem" navigation-type="arrow-keys">
-                    Open in Gemini
                   </dt-list-item>
                 </dt-list-item-group>
               </template>
@@ -234,9 +246,17 @@ function showCopiedFeedback () {
   copiedTimeout = setTimeout(() => { showCopiedIcon.value = false; }, 2000);
 }
 
-function onCopyMarkdownLink (close) {
+async function onCopyMarkdownLink (close) {
   close();
-  showCopiedFeedback();
+  try {
+    const url = rawMarkdownUrl.value
+      ? window.location.origin + rawMarkdownUrl.value
+      : window.location.href;
+    await navigator.clipboard.writeText(url);
+    showCopiedFeedback();
+  } catch (e) {
+    console.error('Failed to copy markdown link:', e);
+  }
 }
 
 async function onCopyAsMarkdown (close) {
@@ -267,6 +287,20 @@ const rawMarkdownUrl = computed(() => {
   if (!clean) return null;
   return `/raw${clean}.md`;
 });
+
+const AI_CHAT_URLS = {
+  claude: 'https://claude.ai/new',
+  chatgpt: 'https://chatgpt.com/',
+};
+
+function openInAiChat (close, service) {
+  close();
+  const rawUrl = window.location.origin + rawMarkdownUrl.value;
+  const prompt = `Read ${rawUrl} so I can ask questions about it.`;
+  const base = AI_CHAT_URLS[service];
+  const url = `${base}?q=${encodeURIComponent(prompt)}`;
+  window.open(url, '_blank', 'noopener,noreferrer');
+}
 
 function onViewAsMarkdown (close) {
   close();
