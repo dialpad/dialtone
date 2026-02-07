@@ -280,12 +280,12 @@ const RAW_SECTIONS = ['/components/', '/foundations/', '/dialtone/', '/ui-kits/'
 const rawMarkdownUrl = computed(() => {
   const path = page.value.path;
   if (!RAW_SECTIONS.some(s => path.startsWith(s))) return null;
-  // Section root pages: /foundations/ → /raw/foundations/index.md
-  if (RAW_SECTIONS.includes(path)) return withBase(`/raw${path}index.md`);
-  // All other pages: strip trailing / or /index.html or .html, prepend /raw, append .md
+  // Section root pages: /foundations/ → /md/foundations/index.md
+  if (RAW_SECTIONS.includes(path)) return withBase(`/md${path}index.md`);
+  // All other pages: strip trailing / or /index.html or .html, prepend /md, append .md
   const clean = path.replace(/(?:\/(?:index\.html)?|\.html)$/, '');
   if (!clean) return null;
-  return withBase(`/raw${clean}.md`);
+  return withBase(`/md${clean}.md`);
 });
 
 const AI_CHAT_URLS = {

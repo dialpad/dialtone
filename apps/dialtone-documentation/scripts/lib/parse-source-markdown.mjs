@@ -88,7 +88,7 @@ function emitFrontmatter (fm, output) {
   const meta = [];
   if (fm.status) meta.push(`- **Status**: ${fm.status}`);
   if (fm.storybook) meta.push(`- **Storybook**: ${fm.storybook}`);
-  if (fm.keywords) meta.push(`- **Keywords**: ${fm.keywords.replace(/^\[|]$/g, '').replace(/"/g, '')}`);
+  if (fm.keywords) meta.push(`- **Keywords**: ${fm.keywords.replace(/^\[|]$/g, '').replace(/"/g, '').replace(/,(?!\s)/g, ', ')}`);
   if (fm.author) meta.push(`- **Author**: ${fm.author}`);
   if (fm.posted) meta.push(`- **Posted**: ${fm.posted}`);
   if (meta.length > 0) {

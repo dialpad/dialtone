@@ -28,7 +28,7 @@ out
 coverage
 
 # Generated raw markdown for component docs #
-apps/dialtone-documentation/docs/.vuepress/public/raw/
+apps/dialtone-documentation/docs/.vuepress/public/md/
 
 # Dialtone icons #
 packages/dialtone-icons/index.js

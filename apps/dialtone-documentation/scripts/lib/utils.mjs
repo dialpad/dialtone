@@ -105,7 +105,7 @@ export function stripHtmlTags (html) {
 }
 
 /**
- * Sections that have raw markdown equivalents under /raw/.
+ * Sections that have raw markdown equivalents under /md/.
  */
 const RAW_SECTIONS = new Set([
   'components', 'foundations', 'dialtone', 'ui-kits',
@@ -113,7 +113,7 @@ const RAW_SECTIONS = new Set([
 ]);
 
 /**
- * Convert a cleaned path-parts array into the raw .md file path.
+ * Convert a cleaned path-parts array into the .md file path.
  * Mirrors mapOutputPath logic: index.md in subdirs collapses to parent.md.
  */
 function partsToMdPath (parts) {
@@ -147,7 +147,7 @@ function toRelativePath (fromDir, toPath) {
  * Convert a VuePress absolute link to a relative raw .md path.
  *
  * @param {string} href - The link href (e.g. "/components/text.html#tone")
- * @param {string} currentRawDir - Directory of the current file within raw/ (e.g. "dialtone")
+ * @param {string} currentRawDir - Directory of the current file within md/ (e.g. "dialtone")
  * @returns {string} - Relative .md path, or original href if no conversion applies
  */
 export function resolveRawLink (href, currentRawDir) {
@@ -171,7 +171,7 @@ export function resolveRawLink (href, currentRawDir) {
  * Rewrite all absolute markdown links in a string to relative raw .md paths.
  *
  * @param {string} markdown - The markdown content
- * @param {string} currentRawDir - Directory of the current file within raw/
+ * @param {string} currentRawDir - Directory of the current file within md/
  * @returns {string} - Markdown with rewritten links
  */
 export function rewriteAbsoluteLinks (markdown, currentRawDir) {

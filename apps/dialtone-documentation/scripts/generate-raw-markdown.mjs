@@ -4,7 +4,7 @@
  *
  * Reads source .md files from multiple sections (components, foundations,
  * dialtone, ui-kits, guides, tokens, utilities), transforms them into clean
- * markdown (no Vue components), and writes them to docs/.vuepress/public/raw/{section}/.
+ * markdown (no Vue components), and writes them to docs/.vuepress/public/md/{section}/.
  *
  * Usage:
  *   node scripts/generate-raw-markdown.mjs
@@ -43,12 +43,12 @@ const TYPE_JSON = resolve(DATA_DIR, 'type.json');
  * - flat: false → recursively discover all .md files in nested directories
  */
 const SECTIONS = [
-  { name: 'components', sourceDir: 'docs/components', outputDir: 'raw/components', flat: true },
-  { name: 'foundations', sourceDir: 'docs/foundations', outputDir: 'raw/foundations' },
+  { name: 'components', sourceDir: 'docs/components', outputDir: 'md/components', flat: true },
+  { name: 'foundations', sourceDir: 'docs/foundations', outputDir: 'md/foundations' },
   {
     name: 'dialtone',
     sourceDir: 'docs/dialtone',
-    outputDir: 'raw/dialtone',
+    outputDir: 'md/dialtone',
     overviewLinks: [
       '/components/',
       '/utilities/',
@@ -57,10 +57,10 @@ const SECTIONS = [
       '/functions-and-utilities/',
     ],
   },
-  { name: 'ui-kits', sourceDir: 'docs/ui-kits', outputDir: 'raw/ui-kits' },
-  { name: 'guides', sourceDir: 'docs/guides', outputDir: 'raw/guides' },
-  { name: 'tokens', sourceDir: 'docs/tokens', outputDir: 'raw/tokens' },
-  { name: 'utilities', sourceDir: 'docs/utilities', outputDir: 'raw/utilities', navSection: '/utilities/' },
+  { name: 'ui-kits', sourceDir: 'docs/ui-kits', outputDir: 'md/ui-kits' },
+  { name: 'guides', sourceDir: 'docs/guides', outputDir: 'md/guides' },
+  { name: 'tokens', sourceDir: 'docs/tokens', outputDir: 'md/tokens' },
+  { name: 'utilities', sourceDir: 'docs/utilities', outputDir: 'md/utilities', navSection: '/utilities/' },
 ];
 
 /**
@@ -309,7 +309,7 @@ function appendNavLinks (section, outputBase) {
   const categories = loadNavCategories(section.navSection);
   if (!categories?.length) return;
 
-  const currentRawDir = section.outputDir.replace(/^raw\//, '');
+  const currentRawDir = section.outputDir.replace(/^md\//, '');
   const lines = buildCategoryLinks(categories, currentRawDir);
   if (lines.length === 0) return;
 
@@ -329,7 +329,7 @@ function appendOverviewLinks (section, outputBase) {
   if (!section.overviewLinks?.length) return;
 
   const indexPath = resolve(outputBase, 'index.md');
-  const currentRawDir = section.outputDir.replace(/^raw\//, '');
+  const currentRawDir = section.outputDir.replace(/^md\//, '');
   const links = section.overviewLinks.map(lp => buildOverviewLink(lp, currentRawDir));
   try {
     const indexContent = readFileSync(indexPath, 'utf-8');
@@ -533,7 +533,7 @@ function main () {
 
       try {
         const source = readFileSync(sourcePath, 'utf-8');
-        const rawDir = dirname(section.outputDir.replace(/^raw\//, '') + '/' + outputRelPath);
+        const rawDir = dirname(section.outputDir.replace(/^md\//, '') + '/' + outputRelPath);
         const result = rewriteAbsoluteLinks(
           parseSourceMarkdown(source, {
             dataDir: DATA_DIR,
@@ -578,7 +578,7 @@ function main () {
     totalError += errorCount;
   }
 
-  const rawBase = resolve(ROOT, 'docs/.vuepress/public/raw');
+  const rawBase = resolve(ROOT, 'docs/.vuepress/public/md');
   appendNavChildLinks(rawBase);
 
   console.log(`[generate-raw-markdown] Done: ${totalSuccess} total generated, ${totalError} total errors`);

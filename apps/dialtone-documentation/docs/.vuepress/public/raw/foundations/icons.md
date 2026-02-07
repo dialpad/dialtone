@@ -1,0 +1,705 @@
+# Icons
+
+An icon style for visually communicating commands, status, and more.
+
+- **Storybook**: https://vue.dialpad.design/?path=/story/components-icon--default
+- **Keywords**: svg, glyph, symbol, iconography
+
+## Usage
+
+Icons can be used via Vue components or SVG sprites:
+
+**Vue (recommended, tree-shakeable):**
+```html
+<dt-icon-{icon-name} size="500" />
+```
+
+**Vue (deprecated, not tree-shakeable):**
+```html
+<dt-icon name="{icon-name}" size="500" />
+```
+
+Available sizes: 100, 200, 300, 400, 500 (default), 600, 700, 800.
+
+## Alerts
+
+| Icon | Keywords |
+| --- | --- |
+| alert-circle | warning, caution |
+| alert-triangle | danger, error |
+| bell | notification, alert, ring |
+| bell-minus | quiet |
+| bell-off | mute, silent, notify, notification |
+| bell-plus | notify, increase, notification |
+| bell-ring | alarm, notify, notification |
+| concierge-bell | notification |
+| flame | fire, burn, hot |
+| megaphone | announce, shout, broadcast |
+| megaphone-off | announce |
+| newspaper | news, article, press, blog |
+| siren | emergency, alarm |
+| snooze | delay, postpone, remind |
+
+## Arrows
+
+| Icon | Keywords |
+| --- | --- |
+| arrow-down | direction |
+| arrow-down-left | direction |
+| arrow-down-right | direction |
+| arrow-left | direction |
+| arrow-left-right | bidirectional, direction, swap, switch, transaction, reorder, move |
+| arrow-right | direction |
+| arrow-up | direction |
+| arrow-up-down | bidirectional, direction, swap, switch, network, mobile data, internet, reorder, move |
+| arrow-up-left | direction |
+| arrow-up-right | direction |
+| chevron-down | arrow |
+| chevron-first | arrow, previous, music |
+| chevron-last | arrow, skip, next, music |
+| chevron-left | arrow |
+| chevron-right | arrow |
+| chevron-up | arrow |
+| chevrons-down | arrow |
+| chevrons-down-up | arrow, collapse, fold, vertical |
+| chevrons-left | arrow |
+| chevrons-left-right | arrow, expand, horizontal, unfold |
+| chevrons-right | arrow |
+| chevrons-right-left | arrow, collapse, fold, horizontal |
+| chevrons-up | arrow |
+| chevrons-up-down | arrow, expand, unfold, vertical |
+| corner-down-left | arrow, return |
+| corner-down-right | arrow |
+| corner-left-down | arrow |
+| corner-left-up | arrow |
+| corner-right-down | arrow |
+| corner-right-up | arrow |
+| corner-up-left | arrow |
+| corner-up-right | arrow |
+| redo | undo, history |
+| rematch | user |
+| repeat | loop, arrows |
+| reply | email |
+| undo-2 | redo, history |
+
+## Brand-full-color
+
+| Icon | Keywords |
+| --- | --- |
+| airtable |  |
+| amex |  |
+| app-store-badge |  |
+| apple |  |
+| asana |  |
+| brand-dialpad |  |
+| brand-dialpad-meetings |  |
+| bullhorn |  |
+| clockify |  |
+| copper-crm |  |
+| dialbot | brand |
+| dialpad-ai-color | brand |
+| dialpad-ai-color-reversed | brand |
+| dialpad-analytics-ai | brand |
+| dialpad-logo | brand |
+| dialpad-sparkle | ai, sparkle, brand |
+| dialpad-star-mark-color | dp, brand, agentic |
+| diners-club |  |
+| discover |  |
+| dpm-logo | brand, dialpad, meetings, logo |
+| evernote |  |
+| facebook |  |
+| freshdesk |  |
+| freshsales-crm |  |
+| front |  |
+| giphy |  |
+| gmail |  |
+| google-business-messaging |  |
+| google-calendar |  |
+| google-docs |  |
+| google-drive |  |
+| google-glyph |  |
+| google-meet |  |
+| google-sheets |  |
+| google-slides |  |
+| greenhouse |  |
+| highfive |  |
+| hubspot |  |
+| instagram |  |
+| intercom |  |
+| jcb |  |
+| jira-service-desk |  |
+| line-messenger |  |
+| linkedin |  |
+| maestro |  |
+| mastercard |  |
+| messenger |  |
+| microsoft |  |
+| microsoft-dynamics-365 |  |
+| microsoft-teams |  |
+| miro |  |
+| monday-com |  |
+| o365-calendar | microsoft, office |
+| office-365 |  |
+| pipedrive |  |
+| play-store-badge |  |
+| salesforce-glyph |  |
+| salesforce-logo |  |
+| servicenow |  |
+| slack |  |
+| snapchat |  |
+| t-mobile | tmo |
+| telegram |  |
+| threads | meta, facebook |
+| tiktok |  |
+| toggl |  |
+| twitter |  |
+| union-pay |  |
+| viber |  |
+| visa |  |
+| we-chat |  |
+| webex | cisco |
+| whatsapp |  |
+| x-brand | twitter |
+| zendesk |  |
+| zoho |  |
+| zoho-crm |  |
+| zoho-desk |  |
+| zoom |  |
+
+## Brand
+
+| Icon | Keywords |
+| --- | --- |
+| agent-assist | ai, conversation, chat, brand |
+| ai-notes | brand |
+| coaching-hub | brand |
+| default-ai-agent-fab | fab, brand, agent |
+| dialpad-ai | artificial, intelligence, voice, brand |
+| dialpad-ai-reversed | dp, brand |
+| dialpad-logomark | brand |
+| dialpad-meetings-star | dp, meetings, brand, sparkle, star |
+| dialpad-star | brand, sparkle, star |
+| dialpad-star-mark | dp, brand, agentic |
+| dialpad-star-reversed | dp, brand, sparkle, star |
+| dialpad-wfm | brand, workforce, surfboard, management |
+| dp-phone | call, dialpad, brand |
+| waveform | brand |
+| zoom-logo | video, competitor |
+
+## Communication
+
+| Icon | Keywords |
+| --- | --- |
+| call-abandoned | phone, missed, escape |
+| call-rejected | decline, ignore, dismiss |
+| contacts | address, people, person |
+| dialer | phone |
+| digital-whisper | private |
+| forward | send, share, email |
+| hand | gesture, palm |
+| listening | ear, hear, audio |
+| mail | email, message, letter, unread |
+| mail-open | email, message, letter, read |
+| mails | emails, messages, letters, multiple, mailing list, newsletter, copy |
+| message | chat, speech |
+| music | quaver, eighth note, note |
+| notes | clipboard, write |
+| past-conversations | previous, history |
+| phone | call |
+| phone-call | ring |
+| phone-forward | call, forward |
+| phone-hold | phone, pause, call |
+| phone-incoming | call |
+| phone-missed | call |
+| phone-off | call, mute |
+| phone-outgoing | call |
+| power-dialer | powerdialer, lightning, list, speed |
+| power-dialer-off | powerdialer, lightning, list, speed, strikethrough |
+| quick-reply | message, chat, reply |
+| reply-all | email |
+| send | email, message, mail, paper airplane, paper aeroplane, submit |
+| simultaneous-ring | simultaneous, multi-ring, multiple calls, phone |
+| thread | conversation, chat, message, reply |
+| unread | message, text, chat, conversation |
+| voicemail | phone, cassette |
+| voicemail-drop | message, record, inbox |
+| webchat | message, chat |
+| whisper | soft |
+
+## Controls
+
+| Icon | Keywords |
+| --- | --- |
+| barge | interrupt, enter, join |
+| blur-background | video, camera, effects, lens |
+| circle-slashed | diameter, zero, Ø, null, nothing, maths |
+| delete | backspace, remove |
+| download | import, export |
+| end-chat | finish, terminate |
+| expand | scale, fullscreen |
+| eye | view, watch, show, visibility |
+| eye-off | view, watch, hide, hidden, visibility |
+| fast-forward | music |
+| filter | funnel, hopper |
+| food | pizza, emoji, slice |
+| gamepad | controller, emoji, activity |
+| gif-filled | giphy |
+| gif-outline | giphy |
+| grid | table |
+| grip-horizontal | grab, dots, handle |
+| grip-vertical | grab, dots, handle, move, drag |
+| hear | listen, ear, audio |
+| heart | like, love, emotion |
+| history | time, redo, undo, rewind, timeline, version |
+| hold | pause, wait |
+| key | password, login, authentication, secure |
+| large-self-view | view, focus |
+| layout | window, webpage |
+| layout-dashboard | masonry, brick |
+| layout-filmstrip | view |
+| layout-grid | app, home, start |
+| layout-template | window, webpage, block, section |
+| lightbulb | light |
+| lightbulb-off | dark |
+| listen | ear, hear, audio |
+| living-thing | pet, cat, dog, animal |
+| lock | security, password, secure, admin |
+| lock-filled | security, password, secure, admin, locked |
+| maximize | fullscreen, expand |
+| menu | bars, navigation, hamburger, options |
+| minimize | exit fullscreen, close, shrink |
+| minimize-alt | window |
+| minus-circle | subtract, decrease |
+| multi-line-dept | selection, line, department, fork |
+| music-off | mute, silent |
+| object | item |
+| option | key, mac, button |
+| park | call |
+| pause | music, audio, stop, video, media |
+| pause-circle | music, audio, stop, video, media |
+| pause-circle-filled | music, audio, stop, video, media |
+| phone-hang-up | disconnect, end, call, leave |
+| picture-in-picture | overlay, miniature, window |
+| pin | save, map, lock, fix |
+| pin-filled | save, location, map, lock, fix |
+| pin-off | unpin, unsave, unlock, remove, unfix |
+| play | music, start |
+| play-circle | music, start, video, media |
+| play-circle-filled | music, start, video, media |
+| play-filled | music, start, video, media |
+| plus | add, new, maths |
+| plus-circle | add, new, maths |
+| plus-circle-filled | add, new, maths |
+| record | circle |
+| record-filled | circle |
+| refresh | reload |
+| rewind | music |
+| rewind-15-sec | back, reverse |
+| search | find, magnifier, magnifying glass |
+| share | network, connections |
+| sheet | spreadsheets, table, excel |
+| shortcuts | arrow |
+| shuffle | music |
+| sidebar | menu, navigation, panel |
+| sidebar-close | menu |
+| sidebar-open | menu |
+| skip-15-sec | fast-forward, advance, forward |
+| skip-back | arrow, previous, music |
+| skip-back-ten | rewind, back, jump |
+| skip-forward | arrow, skip, next, music |
+| skip-forward-ten | fast, forward, jump |
+| sliders | settings, controls |
+| sliders-horizontal | settings, filters, controls |
+| small-self-view | square, views |
+| sort-asc | filter |
+| sort-desc | filter |
+| sticker | label |
+| stop-circle | media, music |
+| stop-circle-filled | media, music |
+| stop-filled | square, pause |
+| table | sheet, grid, spreadsheet |
+| takeover | phone, call |
+| transfer | phone, arrows, call |
+| transfer-webchat | discussion, message |
+| transportation | vehicle, travel |
+| trash | garbage, delete, remove, bin |
+| unlock | security |
+| unlock-filled | security |
+| x-circle | cancel, close, delete, remove, times, clear, maths |
+| zoom-in | magnifying glass, plus |
+| zoom-out | magnifying glass, plus |
+
+## Data
+
+| Icon | Keywords |
+| --- | --- |
+| activity | pulse, health, action, motion |
+| axis-3d | gizmo, coordinates |
+| bar-chart | statistics, diagram, graph |
+| bar-chart-2 | statistics, diagram, graph |
+| bar-chart-3 | statistics, diagram, graph |
+| bar-chart-4 | statistics, diagram, graph |
+| bar-chart-horizontal | statistics, diagram, graph |
+| binary | code, digits, computer, zero, one |
+| dash | horizontal, minus |
+| equal | calculate, maths |
+| line-chart | statistics, diagram, graph |
+| live-queue | waiting |
+| pie-chart | statistics, diagram |
+| trending-down | statistics |
+| trending-up | statistics |
+
+## Devices
+
+| Icon | Keywords |
+| --- | --- |
+| airplay | stream, cast, mirroring |
+| ata-adapter |  |
+| battery | power, electricity |
+| battery-charging | power, electricity |
+| battery-full | power, electricity |
+| battery-low | power, electricity |
+| battery-medium | power, electricity |
+| bluetooth | wireless |
+| bluetooth-connected | paired, linked, connected |
+| bluetooth-off | lost, disconnected, inactive |
+| bluetooth-searching | pairing |
+| calculator | count, calculating machine |
+| camera | photo, webcam, video |
+| camera-off | photo, webcam, video |
+| camera-tracking | focus, lens, video |
+| cast | chromecast, airplay |
+| connection-api | plug, plugin, connected, connection, connections |
+| dect-base-station |  |
+| dect-handset |  |
+| deskphone | telephone, landline |
+| download-cloud | import |
+| file-audio | music, audio, sound, headphones |
+| film | movie, video |
+| focus | camera, lens, photo |
+| hd | quality, resolution, high |
+| headphones | music, audio, sound |
+| headset | microphone, headphones |
+| laptop-2 | computer |
+| lightning-bolt | power, energy, electricity, electric |
+| mic | record, sound, listen, radio, podcast, microphone, unmute |
+| mic-off | record, sound, mute, microphone |
+| monitor | tv, screen, display |
+| monitor-off | share |
+| monitor-speaker | devices, connect, cast |
+| mouse | device, scroll, click |
+| plug | power |
+| print-fax | printer, office, device |
+| printer | fax, office, device |
+| screen-share-off | desktop, disconnect |
+| share-screen | screenshare |
+| smartphone | phone, cellphone, device |
+| smartphone-charging | phone, cellphone, device, power |
+| speaker | audio, music |
+| switch-to-cellular | signal |
+| switch-to-hd | quality |
+| usb | universal, serial, bus, controller, connector, interface |
+| video | camera, movie, film, recording |
+| video-off | camera, movie, film |
+| volume | music, sound, mute |
+| volume-1 | music, sound, down |
+| volume-2 | music, sound, up |
+| volume-x | music, sound, mute |
+| webcam | camera, security |
+| wifi | connection, signal, wireless, online |
+| wifi-off | disabled, offline |
+| zap-off | flash, camera, lightning |
+
+## Editing
+
+| Icon | Keywords |
+| --- | --- |
+| ai-write | edit, AI, call length, summary, pencil |
+| align-center | Text, Format, Flush |
+| align-justify | Text, Format, Flush |
+| align-left | Text, Format, Flush |
+| align-right | Text, Format, Flush |
+| asterisk | reference |
+| at-sign | mention, at, email, message |
+| baseline | text, format, color |
+| bold | text, strong, format |
+| braces | brackets, code, json, code, token, curly, data, variables |
+| branch |  |
+| call-merge | arrows, converge, join, connect |
+| code-block | developer, programming, script, syntax |
+| edit | pencil, change |
+| edit-2 | pencil, change |
+| eraser | pencil, drawing, undo, delete, clear |
+| expert-node |  |
+| image | picture, photo |
+| indent | text, tab |
+| inspect | element, mouse, click, cursor, pointer, box |
+| italic | oblique, text, format |
+| keyboard | layout, spell, settings, mouse |
+| link-2 | chain, url |
+| link-2-off | unchain, chain |
+| list-add | insert |
+| list-bullet | options |
+| list-checks | todo, done |
+| list-chevrons-down-up | density, spacing, options, collapse, expand, disclosure, show, hide, accordion, more, less, fold, unfold |
+| list-chevrons-up-down | density, spacing, options, collapse, expand, disclosure, show, hide, accordion, more, less, fold, unfold |
+| list-ordered | sort |
+| list-spacing-compact | line, density, spacing, tight |
+| list-spacing-expanded | line, density, spacing, comfortable |
+| list-spacing-regular | line, density, spacing, default |
+| paint-bucket | color, fill, paint |
+| paperclip | attachment, file |
+| quote | quotation |
+| scissors | cut |
+| strikethrough | cross out, delete, remove, format |
+| text-cursor | select |
+| type | text, font, typography |
+| underline | text, format |
+| unlink-2 | url, unchain, unchain |
+
+## General
+
+| Icon | Keywords |
+| --- | --- |
+| accessibility | disability, disabled, dda, wheelchair |
+| accessibility-mac | humanpictos, people, man silhouette, disability, disabled, dda, inclusive |
+| add-task | check, plus |
+| album | photo, book |
+| archive | index, box |
+| archive-restore | archive, unarchive, restore, index, box |
+| attestation | checkbox |
+| attestation-outline | checkbox |
+| book | read, dictionary, booklet, magazine, library |
+| book-open | read, library |
+| bookmark | read, clip, marker, tag |
+| bookmark-filled | read, clip, marker, tag |
+| bookmark-minus | delete, remove |
+| bookmark-plus | add |
+| box | cube, package |
+| box-select | selection, square, rectangular, marquee, tool |
+| boxes | cubes, packages, parts, group, units, collection, cluster |
+| breakout-rooms | rooms, groups |
+| bullet | dot, point, circle |
+| check | done, success |
+| check-circle | done |
+| check-circle-filled | approved, done |
+| circle-half-filled | mode, dark |
+| close | cancel, close, delete, remove, times, clear, maths |
+| code | source, programming, html, xml |
+| copy | clone, duplicate |
+| copyright | licence |
+| credit-card | bank, purchase, payment, cc |
+| dissatisfied | unhappy |
+| dissatisfied-filled | unhappy, rating, rate, vote, voting, review |
+| double-check | read |
+| empty | blank |
+| flag | report |
+| flag-off | unflag |
+| form-input | 2fa, authenticate, login, field, text |
+| gauge | dashboard |
+| graduation | university, hat, cap, learn, study, education, ceremony, academic, diploma |
+| hash | hashtag, number, pound |
+| hash-bold | number, pound, hashtag, number |
+| help-circle | question mark |
+| inbox | email |
+| info | help |
+| isolated-queries | list, alert, query, queries |
+| keypad | number, dialpad, keypad |
+| library | book, music, album |
+| log-in | sign in, arrow, enter, auth, login |
+| log-out | sign out, arrow, exit, auth, logout |
+| more-horizontal | ellipsis, menu, options |
+| more-vertical | ellipsis, menu, options |
+| network | tree |
+| neutral | bored, meh, average, face |
+| not-enough-queries | list, plus, query, queries |
+| package | box, container |
+| party-popper | emoji, congratulations, celebration, party |
+| power | on, off, device |
+| puzzle | component, module, part, piece |
+| queries | list, question mark, query, queries |
+| rocket | release, boost, launch, space, version, science |
+| satisfied | happy, pleased, smile, great, good, rating, rate, vote, voting, review |
+| satisfied-filled | happy, pleased, smile, great, good, rating, rate, vote, voting, review |
+| scroll | paper, log, scripture, document, parchment, transcript |
+| settings | cog, edit, gear, preferences, configuration |
+| shield | security, secure |
+| shield-alert | security, secure, virus, admin, safety |
+| shield-check | security, secure, done, save |
+| shield-close | security, secure, wrong, unsave, virus |
+| shield-off | security, secure, security, insecure |
+| somewhat-dissatisfied | face, rating, rate, vote, voting, review |
+| somewhat-dissatisfied-filled | face, rating, rate, vote, voting, review |
+| somewhat-satisfied | smile, happy, pleased, good, face, rating, rate, vote, voting, review |
+| somewhat-satisfied-filled | smile, happy, pleased, good, face, rating, rate, vote, voting, review |
+| sparkle | stars, magic, help, ai |
+| sparkle-filled | stars, magic, help, ai |
+| star | bookmark, favorite, like, review, rating |
+| star-filled | bookmark, favorite, like, review, rating |
+| tag | label, badge, ticket, mark |
+| tags | labels, badges, tickets, marks, copy, multiple |
+| task | check |
+| text-cursor-input | select |
+| thumbs-down | dislike, bad, emotion, no |
+| thumbs-down-filled | dislike, bad, emotion, no |
+| thumbs-up | like, good, emotion, yes |
+| thumbs-up-filled | like, good, emotion, ok, yes |
+| too-many-queries | list, minus, query, queries |
+| tools | wrench |
+| triangle | delta, shape |
+| very-dissatisfied | sad, frown, unhappy, bad, poor, face |
+| very-dissatisfied-filled | sad, frown, unhappy, bad, poor, face |
+| very-satisfied | happy, smile, face, great, pleased, good |
+| very-satisfied-filled | happy, smile, face, great, pleased, good |
+| video-settings | preferences, configure |
+| whatsapp-outlined |  |
+
+## Os
+
+| Icon | Keywords |
+| --- | --- |
+| clipboard | copy, paste |
+| clipboard-check | copied, pasted |
+| clipboard-copy | copy, paste |
+| clipboard-edit | edit, paste, signature |
+| clipboard-list | copy, paste, tasks |
+| clipboard-signature | paste, signature |
+| clipboard-type | paste, format, text |
+| clipboard-x | copy, paste, discard, remove |
+| cloud-off | disconnect |
+| command | keyboard, cmd, terminal, prompt |
+| cpu | processor, technology, computer, chip |
+| external-link | outbound |
+| file | document |
+| file-pdf | document |
+| files | multiple, copy, documents |
+| fingerprint | 2fa, authentication, biometric, identity, security |
+| folder | directory |
+| folder-tree | directory, tree, browser |
+| folders | multiple, copy, directories |
+| hard-drive | computer, server, memory, data, ssd, disk, hard disk |
+| import | save |
+| languages | translate |
+| life-buoy | help, rescue, ship, life ring, support |
+| qr-code | barcode |
+| save | floppy disk |
+| scan | qr-code |
+| scan-face | face, biometric, authentication, 2fa |
+| scan-file | document, capture, scanner |
+| share-2 | network, connections |
+| signal-best | connection, wireless, gsm, phone, 2g, 3g, 4g, 5g |
+| signal-high | connection, wireless, gsm, phone, 2g, 3g, 4g, 5g |
+| signal-low | connection, wireless, gsm, phone, 2g, 3g, 4g, 5g |
+| signal-medium | connection, wireless, gsm, phone, 2g, 3g, 4g, 5g |
+| signal-zero | connection, wireless, gsm, phone, 2g, 3g, 4g, 5g, lost |
+| slash | cancel, ban, no, stop, forbidden, prohibited, error |
+| token | symbol, figma |
+| toy-brick | lego, block, addon, plugin, integration |
+| upload | file |
+| upload-cloud | file |
+
+## People
+
+| Icon | Keywords |
+| --- | --- |
+| user | person, account, contact, profile, avatar |
+| user-check | followed, subscribed, done |
+| user-minus | delete, remove, unfollow, unsubscribe |
+| user-plus | new, add, create, follow, subscribe |
+| user-rematch | people |
+| user-remove | delete, remove, unfollow, unsubscribe, unavailable |
+| user-speak | voice, talk, speak |
+| users | group, people |
+
+## Places
+
+| Icon | Keywords |
+| --- | --- |
+| briefcase | work, bag, baggage, folder |
+| building | organisation, organization |
+| building-2 | business, company, enterprise, skyscraper, organisation, organization |
+| factory | building, business, energy, industry, manufacture, sector |
+| globe-2 | world, browser, language, translate |
+| home | house, living |
+| map | location, navigation, travel |
+| map-pin | location, navigation, travel, marker |
+| map-pin-filled | location, navigation, travel, marker |
+
+## Time
+
+| Icon | Keywords |
+| --- | --- |
+| alarm-check | done |
+| alarm-clock-off | morning, turn-off |
+| alarm-minus | remove |
+| alarm-plus | add |
+| calendar | date, time, event, birthdate, birthday, schedule |
+| calendar-check | date, time, event, confirm, subscribe |
+| calendar-check-2 | date, time, event, confirm, subscribe |
+| calendar-clock | date, time, event, clock |
+| calendar-days | date, time, event |
+| calendar-heart | date, time, event, heart, favourite, subscribe |
+| calendar-minus | date, time, event, delete, remove |
+| calendar-off | date, time, event, delete, remove |
+| calendar-plus | date, time, event, add, subscribe, create, new |
+| calendar-range | date, time, event, range, period |
+| calendar-search | date, time, search, events |
+| calendar-x | date, time, event, remove, busy |
+| clock | time, watch, alarm |
+| clock-1 | time, watch, alarm |
+| clock-10 | time, watch, alarm |
+| clock-11 | time, watch, alarm |
+| clock-12 | time, watch, alarm |
+| clock-2 | time, watch, alarm |
+| clock-3 | time, watch, alarm |
+| clock-4 | time, watch, alarm |
+| clock-5 | time, watch, alarm |
+| clock-6 | time, watch, alarm |
+| clock-7 | time, watch, alarm |
+| clock-8 | time, watch, alarm |
+| clock-9 | time, watch, alarm |
+| hourglass | timer, time, sandglass |
+| infinity | unlimited, forever, loop, maths |
+| loading |  |
+| timer | time, timer, stopwatch |
+| timer-off | time, timer, stopwatch |
+| timer-reset | time, timer, stopwatch |
+
+## Weather
+
+| Icon | Keywords |
+| --- | --- |
+| cloud | weather |
+| cloud-cog | computing, ai, cluster, network |
+| cloud-drizzle | weather, shower |
+| cloud-fog | weather, mist |
+| cloud-hail | weather, rainfall |
+| cloud-lightning | weather, bolt |
+| cloud-moon | weather, night |
+| cloud-moon-rain | weather, partly, night, rainfall |
+| cloud-rain | weather, rainfall |
+| cloud-rain-wind | weather, rainfall |
+| cloud-snow | weather, blizzard |
+| cloud-sun | weather, partly |
+| cloud-sun-rain | weather, partly, rainfall |
+| cloudy | clouds |
+| haze | mist, fog |
+| moon | dark, night |
+| snowflake | cold, weather, freeze, snow, winter |
+| sun | brightness, weather, light, summer |
+| sun-dim | brightness, dim, low, brightness low |
+| sun-medium | brightness, medium |
+| sunrise | weather, time, morning, day |
+| sunset | weather, time, evening, night |
+| thermometer | temperature, celsius, fahrenheit, weather |
+| thermometer-snowflake | temperature, celsius, fahrenheit, weather, cold, freeze, freezing |
+| thermometer-sun | temperature, celsius, fahrenheit, weather, warm, hot |
+| umbrella | rain, weather |
+| wind | weather, air, blow |
+
+*601 icons across 15 categories.*
+
+## Pages
+
+- [Crafting an Icon](icons/crafting-an-icon.md)
+- [Icon Usage](icons/usage.md)
