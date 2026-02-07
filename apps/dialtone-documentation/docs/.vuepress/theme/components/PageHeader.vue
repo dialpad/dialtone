@@ -233,7 +233,7 @@
 
 <script setup>
 import { computed, ref } from 'vue';
-import { usePageData } from 'vuepress/client';
+import { usePageData, withBase } from 'vuepress/client';
 
 const page = usePageData();
 
@@ -281,11 +281,11 @@ const rawMarkdownUrl = computed(() => {
   const path = page.value.path;
   if (!RAW_SECTIONS.some(s => path.startsWith(s))) return null;
   // Section root pages: /foundations/ → /raw/foundations/index.md
-  if (RAW_SECTIONS.includes(path)) return `/raw${path}index.md`;
+  if (RAW_SECTIONS.includes(path)) return withBase(`/raw${path}index.md`);
   // All other pages: strip trailing / or /index.html or .html, prepend /raw, append .md
   const clean = path.replace(/(?:\/(?:index\.html)?|\.html)$/, '');
   if (!clean) return null;
-  return `/raw${clean}.md`;
+  return withBase(`/raw${clean}.md`);
 });
 
 const AI_CHAT_URLS = {
