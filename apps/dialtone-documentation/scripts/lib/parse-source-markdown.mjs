@@ -66,30 +66,33 @@ function extractScriptSetup (lines) {
  * Process a frontmatter line, extracting known fields.
  */
 function extractFrontmatterFields (trimmed, fm) {
-  for (const field of ['title', 'heading', 'description', 'author', 'posted']) {
+  for (const field of ['title', 'heading', 'description', 'author', 'posted', 'status', 'storybook', 'keywords']) {
     const val = parseFrontmatterField(trimmed, field);
     if (val !== null) fm[field] = val;
   }
 }
 
 /**
- * Emit the reduced frontmatter block and title/description.
+ * Emit the title, description, and metadata as plain markdown (no YAML frontmatter).
  */
 function emitFrontmatter (fm, output) {
   const displayTitle = fm.title || fm.heading;
-  output.push('---');
-  if (displayTitle) output.push(`title: ${displayTitle}`);
-  if (fm.description) output.push(`description: ${fm.description}`);
-  if (fm.author) output.push(`author: ${fm.author}`);
-  if (fm.posted) output.push(`posted: ${fm.posted}`);
-  output.push('---');
-  output.push('');
   if (displayTitle) {
     output.push(`# ${displayTitle}`);
     output.push('');
   }
   if (fm.description) {
     output.push(fm.description);
+    output.push('');
+  }
+  const meta = [];
+  if (fm.status) meta.push(`- **Status**: ${fm.status}`);
+  if (fm.storybook) meta.push(`- **Storybook**: ${fm.storybook}`);
+  if (fm.keywords) meta.push(`- **Keywords**: ${fm.keywords.replace(/^\[|]$/g, '').replace(/"/g, '')}`);
+  if (fm.author) meta.push(`- **Author**: ${fm.author}`);
+  if (fm.posted) meta.push(`- **Posted**: ${fm.posted}`);
+  if (meta.length > 0) {
+    output.push(...meta);
     output.push('');
   }
 }
@@ -370,7 +373,7 @@ export function parseSourceMarkdown (source, { dataDir, filePath, utilitiesDir }
     frontmatterSeen: false,
     tableNestDepth: 0,
     utilityTableIsNew: false,
-    fm: { title: '', heading: '', description: '', author: '', posted: '' },
+    fm: { title: '', heading: '', description: '', author: '', posted: '', status: '', storybook: '', keywords: '' },
     scriptSetupContent,
     filePath,
     utilitiesDir,
