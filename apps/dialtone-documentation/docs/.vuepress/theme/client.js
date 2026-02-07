@@ -89,53 +89,55 @@ export default defineClientConfig({
       await importDialtoneThemes(app);
     }
 
-    // View Transitions API integration
-    let resolveViewTransition;
+    if (!__VUEPRESS_SSR__) {
+      // View Transitions API integration
+      let resolveViewTransition;
 
-    router.beforeEach((to, from, next) => {
-      // Resolve any pending transition before starting a new one
-      resolveViewTransition?.();
+      router.beforeEach((to, from, next) => {
+        // Resolve any pending transition before starting a new one
+        resolveViewTransition?.();
 
-      if (document.startViewTransition) {
-        const domUpdatePromise = new Promise(resolve => {
-          resolveViewTransition = resolve;
-        });
+        if (document.startViewTransition) {
+          const domUpdatePromise = new Promise(resolve => {
+            resolveViewTransition = resolve;
+          });
 
-        document.startViewTransition(async () => {
-          await domUpdatePromise;
-        });
-      }
-      next();
-    });
-
-    router.afterEach(async () => {
-      await flushPromises();
-      resolveViewTransition?.();
-
-      // Re-initialize docsearch when layout switch recreates the #docsearch container
-      const container = document.querySelector('#docsearch');
-      if (container && !container.children.length) {
-        const docsearchModule = await import('@docsearch/js');
-        docsearchModule.default(DOCSEARCH_CONFIG);
-      }
-    });
-
-    router.options.scrollBehavior = async (to) => {
-      if (to.hash) {
-        const html = document.querySelector('html');
-        // vue-router does not incorporate scroll-padding-top on its own.
-        if (html) {
-          const top = parseFloat(getComputedStyle(html).scrollPaddingTop);
-          await flushPromises();
-          return {
-            el: to.hash,
-            behavior: 'smooth',
-            top,
-          };
+          document.startViewTransition(async () => {
+            await domUpdatePromise;
+          });
         }
-      }
-      return { top: 0 };
-    };
+        next();
+      });
+
+      router.afterEach(async () => {
+        await flushPromises();
+        resolveViewTransition?.();
+
+        // Re-initialize docsearch when layout switch recreates the #docsearch container
+        const container = document.querySelector('#docsearch');
+        if (container && !container.children.length) {
+          const docsearchModule = await import('@docsearch/js');
+          docsearchModule.default(DOCSEARCH_CONFIG);
+        }
+      });
+
+      router.options.scrollBehavior = async (to) => {
+        if (to.hash) {
+          const html = document.querySelector('html');
+          // vue-router does not incorporate scroll-padding-top on its own.
+          if (html) {
+            const top = parseFloat(getComputedStyle(html).scrollPaddingTop);
+            await flushPromises();
+            return {
+              el: to.hash,
+              behavior: 'smooth',
+              top,
+            };
+          }
+        }
+        return { top: 0 };
+      };
+    }
   },
   setup () {
     onBeforeMount(() => {
