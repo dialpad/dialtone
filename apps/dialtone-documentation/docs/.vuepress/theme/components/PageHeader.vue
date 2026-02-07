@@ -2,19 +2,20 @@
   <section>
     <slot name="content-top" />
     <header>
-      <div class="d-stack d-stack--row d-stack--gap-500 d-jc-space-between">
-        <div class="d-stack d-stack--row d-stack--gap-400">
+      <dt-stack direction="row" gap="500" justify="between">
+        <dt-stack direction="row" gap="400">
           <h1
             v-if="$frontmatter.title"
             class="dialtone-page-title"
             v-text="$frontmatter.title"
           />
-          <span
+          <dt-badge
             v-if="$frontmatter.new"
-            class="d-badge d-badge--bulletin"
-          >New</span>
-        </div>
-        <span class="d-stack d-stack--row d-stack--gap-300">
+            type="bulletin"
+            text="New"
+          />
+        </dt-stack>
+        <dt-stack as="span" direction="row" gap="200">
           <a
             v-if="githubUrl"
             class="d-btn d-btn--muted"
@@ -135,8 +136,8 @@
             </span>
             <span class="d-btn__label">Figma</span>
           </a>
-        </span>
-      </div>
+        </dt-stack>
+      </dt-stack>
       <dt-text
         v-if="$frontmatter.description"
         as="p"
