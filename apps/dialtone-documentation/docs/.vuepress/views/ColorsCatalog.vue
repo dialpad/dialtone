@@ -1,5 +1,5 @@
 <template>
-  <section class="d-stack16">
+  <dt-stack as="section" gap="500">
     <div class="d-d-grid d-gg24 d-g-cols1 md:d-g-cols2">
       <base-color
         v-for="({ stops }, colorName) in colors"
@@ -9,7 +9,7 @@
         :mode="mode"
       />
     </div>
-  </section>
+  </dt-stack>
 </template>
 
 <script setup>

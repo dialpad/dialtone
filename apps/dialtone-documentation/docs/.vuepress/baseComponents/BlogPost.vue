@@ -1,7 +1,7 @@
 <!-- eslint-disable max-len -->
 <template>
   <article class="blog-post">
-    <section class="d-stack16">
+    <dt-stack as="section" gap="500">
       <component
         :is="isPreview ? 'h2' : 'h1'"
         class="d-d-flex"
@@ -37,7 +37,7 @@
       <div class="blog-post-content">
         <slot />
       </div>
-    </section>
+    </dt-stack>
   </article>
 </template>
 

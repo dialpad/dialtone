@@ -6,7 +6,7 @@
       :size="selectedSize"
     />
   </dt-stack>
-  <div class="d-stack16 d-fc-primary">
+  <dt-stack gap="500" class="d-fc-primary">
     <div class="d-wmx50p">
       <dt-select-menu
         v-model="selectedSize"
@@ -112,7 +112,7 @@
         aria-label="Copy Vue Deprecated markup"
       />
     </dt-stack>
-  </div>
+  </dt-stack>
 </template>
 
 <script setup>
