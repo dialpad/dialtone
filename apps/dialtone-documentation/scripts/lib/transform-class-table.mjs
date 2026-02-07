@@ -44,7 +44,7 @@ export function transformClassTable (componentName, dataDir) {
   output.push('| Class | Applies to | Description |');
   output.push('| --- | --- | --- |');
   for (const entry of classes) {
-    const cls = escapeTableCell(entry.class || '');
+    const cls = (entry.class || '').replace(/\s+/g, ' ').trim();
     const applies = escapeTableCell(entry.applies || '');
     const desc = escapeTableCell(entry.description || '');
     output.push(`| \`${cls}\` | ${applies} | ${desc} |`);
@@ -72,7 +72,7 @@ export function transformAccessibleTable (componentName, dataDir) {
   output.push('| Item | Applies to | Description |');
   output.push('| --- | --- | --- |');
   for (const entry of accessible) {
-    const item = escapeTableCell(entry.item || '');
+    const item = (entry.item || '').replace(/\s+/g, ' ').trim();
     const applies = escapeTableCell(entry.applies || '');
     const desc = escapeTableCell(stripHtmlTags(entry.description || ''));
     output.push(`| \`${item}\` | ${applies} | ${desc} |`);

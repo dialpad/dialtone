@@ -8,7 +8,11 @@
  */
 export function escapeTableCell (text) {
   if (!text) return '';
-  return text.replace(/\|/g, '\\|').replace(/\s+/g, ' ').trim();
+  // Escape pipes but skip those inside backtick code spans
+  return text
+    .replace(/`[^`]*`|(\|)/g, (m, pipe) => pipe ? '\\|' : m)
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
 /**

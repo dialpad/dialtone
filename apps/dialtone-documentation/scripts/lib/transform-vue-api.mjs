@@ -88,28 +88,32 @@ export function transformVueApi (componentName) {
 
   const output = [];
 
+  // Values wrapped in backticks don't need pipe escaping — GFM processes
+  // code spans before pipe splitting, so pipes inside are literal.
+  const codeCell = (text) => (text || '').replace(/\s+/g, ' ').trim();
+
   const props = component.props ? Object.values(component.props) : [];
   output.push(...buildApiTable('Props', props, ['Name', 'Description', 'Type', 'Default'], (prop) => {
-    const name = escapeTableCell(prop.name || '');
+    const name = codeCell(prop.name);
     const desc = escapeTableCell(prop.description || '');
-    const type = escapeTableCell(prop.type ? prop.type.name : '');
-    const def = escapeTableCell(formatDefault(prop.defaultValue));
+    const type = codeCell(prop.type ? prop.type.name : '');
+    const def = codeCell(formatDefault(prop.defaultValue));
     return `| \`${name}\` | ${desc} | \`${type}\` | \`${def}\` |`;
   }));
 
   const slots = component.slots ? Object.values(component.slots) : [];
   output.push(...buildApiTable('Slots', slots, ['Name', 'Description'], (slot) => {
-    const name = escapeTableCell(slot.name || '');
+    const name = codeCell(slot.name);
     const desc = escapeTableCell(slot.description || '');
     return `| \`${name}\` | ${desc} |`;
   }));
 
   const events = component.events ? Object.values(component.events) : [];
   output.push(...buildApiTable('Events', events, ['Name', 'Description', 'Payload'], (event) => {
-    const name = escapeTableCell(event.name || '');
+    const name = codeCell(event.name);
     const desc = escapeTableCell(event.description || '');
-    const payload = escapeTableCell(
-      event.type && event.type.names ? event.type.names.join(' \\| ') : '',
+    const payload = codeCell(
+      event.type && event.type.names ? event.type.names.join(' | ') : '',
     );
     return `| \`${name}\` | ${desc} | \`${payload}\` |`;
   }));

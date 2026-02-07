@@ -14,15 +14,17 @@ import { escapeTableCell, stripHtmlTags } from './utils.mjs';
 function extractCells (rowHtml) {
   const cells = [];
   // Find all <th> and <td> opening tags with their positions
-  const openRegex = /<(th|td)\b[^>]*>/gi;
+  const openRegex = /<(th|td)\b([^>]*)>/gi;
   let openMatch;
   const openings = [];
 
   while ((openMatch = openRegex.exec(rowHtml)) !== null) {
+    const colspanMatch = openMatch[2].match(/colspan\s*=\s*"?(\d+)"?/i);
     openings.push({
       type: openMatch[1].toLowerCase(),
       start: openMatch.index + openMatch[0].length,
       tagStart: openMatch.index,
+      colspan: colspanMatch ? parseInt(colspanMatch[1], 10) : 1,
     });
   }
 
@@ -51,7 +53,13 @@ function extractCells (rowHtml) {
 
     const content = rowHtml.slice(opening.start, endPos);
     const text = stripHtmlTags(content);
-    cells.push({ type: tagType, text: escapeTableCell(text) });
+    const escaped = escapeTableCell(text);
+    // For colspan, insert empty cells before and place text in the last spanned
+    // column so that empty-column removal aligns headers with data correctly.
+    for (let i = 1; i < opening.colspan; i++) {
+      cells.push({ type: tagType, text: '' });
+    }
+    cells.push({ type: tagType, text: escaped });
   }
 
   return cells;
@@ -124,11 +132,17 @@ export function transformHtmlTable (lines) {
     dataRows = rows;
   }
 
+  // Drop columns where every data cell is empty (e.g. stripped Vue component previews)
+  const keepCol = Array.from({ length: colCount }, (_, i) =>
+    dataRows.some(r => (r.cells[i] || '').trim() !== ''),
+  );
+  const filterCols = arr => arr.filter((_, i) => keepCol[i]);
+
   const output = [];
-  output.push('| ' + pad([...headerRow]).join(' | ') + ' |');
-  output.push('| ' + Array(colCount).fill('---').join(' | ') + ' |');
+  output.push('| ' + filterCols(pad([...headerRow])).join(' | ') + ' |');
+  output.push('| ' + filterCols(Array(colCount).fill('---')).join(' | ') + ' |');
   for (const row of dataRows) {
-    output.push('| ' + pad([...row.cells]).join(' | ') + ' |');
+    output.push('| ' + filterCols(pad([...row.cells])).join(' | ') + ' |');
   }
   output.push('');
   return output;
