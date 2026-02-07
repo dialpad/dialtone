@@ -210,10 +210,9 @@
         v-if="$frontmatter.description"
         as="p"
         kind="body"
-        size="lg"
-        tone="secondary"
+        tone="tertiary"
         wrap="pretty"
-        class="d-mb16"
+        class="d-mb16 d-fs-300"
       >
         {{ $frontmatter.description }}
       </dt-text>
