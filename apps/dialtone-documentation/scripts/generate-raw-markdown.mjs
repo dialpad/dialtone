@@ -35,6 +35,7 @@ const TOKEN_DOCS_JSON = resolve(ROOT, '../../packages/dialtone-tokens/dist/doc.j
 const ICON_KEYWORDS_JSON = resolve(ROOT, '../../packages/dialtone-icons/dist/keywords-icons.json');
 const ILLUSTRATION_JSON = resolve(ROOT, 'docs/_data/svg-spot.json');
 const TOKENS_DOCS_JSON = resolve(ROOT, '../../packages/dialtone-css/lib/dist/tokens-docs.json');
+const TYPE_JSON = resolve(DATA_DIR, 'type.json');
 
 /**
  * Section configuration.
@@ -391,10 +392,51 @@ function generateComponentStatusPage (sourceDir, outputBase) {
 }
 
 /**
- * Walk the site-nav.json tree and append child links to any page
- * whose nav entry has children (e.g. Getting Started → Theme and Mode, etc.).
- * Skips pages that already have a "## Pages" section from filesystem-based linking.
+ * Build a markdown table from typographyStyles entries.
  */
+function buildTypographyTable (styles) {
+  const rows = styles.map(s => `| .${s.var} | ${s.output} |`);
+  return ['| Class | Output |', '| --- | --- |', ...rows].join('\n');
+}
+
+/**
+ * Post-process the generated typography.md to replace Vue template expressions
+ * with actual data from type.json.
+ */
+function postProcessTypography (filePath, typographyStyles) {
+  let content = readFileSync(filePath, 'utf-8');
+
+  // Replace broken API table (v-for produced a single row with {{ }} expressions)
+  // Also clean up stray <div> wrapper from <clamped-table-wrapper>
+  content = content.replace(
+    /\s*<div>\n\| Class \| Output \|\n\| --- \| --- \|\n\| \.?\{\{ varName \}\} \| \{\{ output \}\} \|\n+\s*<\/div>/,
+    '\n' + buildTypographyTable(typographyStyles),
+  );
+
+  // Insert category tables after each heading + description paragraph
+  const categories = [
+    { heading: '### Headlines', prefix: 'd-text-headline' },
+    { heading: '### Body', prefix: 'd-text-body' },
+    { heading: '### Label', prefix: 'd-text-label' },
+    { heading: '### Code', prefix: 'd-text-code' },
+  ];
+  for (const { heading, prefix } of categories) {
+    const styles = typographyStyles.filter(s => s.var.startsWith(prefix));
+    if (styles.length === 0) continue;
+    const table = buildTypographyTable(styles);
+    // Insert table after the heading's description paragraph (next blank line)
+    const idx = content.indexOf(heading);
+    if (idx === -1) continue;
+    const afterHeading = content.indexOf('\n\n', idx + heading.length);
+    if (afterHeading === -1) continue;
+    const nextSection = content.indexOf('\n\n', afterHeading + 2);
+    const insertAt = nextSection !== -1 ? nextSection + 2 : content.length;
+    content = content.slice(0, insertAt) + '\n' + table + '\n' + content.slice(insertAt);
+  }
+
+  writeFileSync(filePath, content, 'utf-8');
+}
+
 /**
  * Build a child link line from a nav child entry, reading the raw file for its title.
  */
@@ -521,6 +563,15 @@ function main () {
 
     appendNavLinks(section, outputBase);
     appendOverviewLinks(section, outputBase);
+
+    if (section.name === 'foundations') {
+      try {
+        const typeData = JSON.parse(readFileSync(TYPE_JSON, 'utf-8'));
+        postProcessTypography(resolve(outputBase, 'typography.md'), typeData.typographyStyles);
+      } catch (err) {
+        console.warn(`[generate-raw-markdown] typography post-process: ${err.message}`);
+      }
+    }
 
     console.log(`[generate-raw-markdown] ${section.name}: ${successCount} generated, ${errorCount} errors`);
     totalSuccess += successCount;
