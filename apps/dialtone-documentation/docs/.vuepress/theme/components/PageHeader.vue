@@ -2,7 +2,11 @@
   <section>
     <slot name="content-top" />
     <header>
-      <dt-stack direction="row" gap="500" justify="between">
+      <dt-stack
+        :direction="{ default: 'column', md: 'row' }"
+        :gap="{ default: '200', lg: '500' }"
+        justify="between"
+      >
         <dt-stack direction="row" gap="400">
           <h1
             v-if="$frontmatter.title"
@@ -15,7 +19,7 @@
             text="New"
           />
         </dt-stack>
-        <dt-stack as="span" direction="row" gap="200">
+        <dt-stack direction="row" gap="200">
           <a
             v-if="githubUrl"
             class="d-btn d-btn--muted"
