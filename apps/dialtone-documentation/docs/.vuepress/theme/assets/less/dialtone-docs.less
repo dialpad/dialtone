@@ -53,6 +53,7 @@ html body {
   --docsearch-modal-shadow: var(--dt-shadow-large);
   /* stylelint-disable-next-line meowtec/no-px */
   --docsearch-searchbox-height: 40px;
+  /* stylelint-disable-next-line meowtec/no-px */
   --docsearch-searchbox-initial-height: 40px;
   // --docsearch-searchbox-background
   --docsearch-searchbox-focus-background: var(--dt-inputs-color-background-default);
@@ -61,13 +62,13 @@ html body {
   --docsearch-hit-color: var(--dt-color-foreground-tertiary);
   --docsearch-hit-active-color: var(--dt-color-neutral-white);
   --docsearch-hit-background: var(--dt-color-surface-primary);
-  --docsearch-hit-shadow: inset 0 0 0 1px var(--dt-color-border-subtle);
+  --docsearch-hit-shadow: inset 0 0 0 var(--dt-size-border-100) var(--dt-color-border-subtle);
   --docsearch-key-gradient: linear-gradient(-225deg,var(--dt-color-surface-primary),var(--dt-color-surface-secondary));
-  --docsearch-key-shadow: inset 0 0 0 1px var(--dt-color-border-default);
+  --docsearch-key-shadow: inset 0 0 0 var(--dt-size-border-100) var(--dt-color-border-default);
   --docsearch-footer-height: var(--dt-size-650);
   --docsearch-footer-background: var(--dt-color-surface-primary);
   /* stylelint-disable-next-line meowtec/no-px */
-  --docsearch-footer-shadow: 0 -1px 0 0 var(--dt-color-border-subtle),0 -1px 3px 0 rgb(0,0,0,.2);
+  --docsearch-footer-shadow: 0 var(--dt-size-100-negative) 0 0 var(--dt-color-border-subtle),0 var(--dt-size-100-negative) 3px 0 rgb(0,0,0,.2);
 
   .DocSearch-Modal {
     margin-block-start: 15vh;
@@ -285,12 +286,12 @@ html body {
 
     position: fixed;
     z-index: 1;
-    max-width: 1400px;
+    max-width: calc(var(--dt-size-300) * 350);
     border-radius: var(--dt-size-radius-450);
-    box-shadow: var(--dt-shadow-card);
+    /* stylelint-disable-next-line meowtec/no-px */
     box-shadow: 0 255.043px 71.487px 0 rgba(0, 0, 0, 0.00), 0 163.131px 65.306px 0 rgba(0, 0, 0, 0.01), 0 91.912px 55.094px 0 rgba(0, 0, 0, 0.03), 0 40.85px 40.85px 0 rgba(0, 0, 0, 0.05), 0 10.212px 22.306px 0 rgba(0, 0, 0, 0.05);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(var(--dt-size-400));
+    backdrop-filter: blur(var(--dt-size-400));
     transition: inset cubic-bezier(0.4, 0, 0.2, 1) 0.66s;
     will-change: inset;
     inset: var(--position-top) var(--dt-size-500);
@@ -418,13 +419,11 @@ a.header-anchor {
 }
 
 code {
-  /* stylelint-disable-next-line no-duplicate-selectors */
   .d-docsite--paragraph &,
   .d-docsite--unordered-list &,
   .d-docsite--ordered-list &,
   .d-docsite--list-element &,
-  .d-docsite--preview-header &,
-  .d-docsite--paragraph & {
+  .d-docsite--preview-header & {
     font-size: 95%;
   }
 }
@@ -605,9 +604,6 @@ code {
     inline-size: 100%;
     block-size: auto;
   }
-}
-
-.dialtone-doc-table {
 }
 
 .dialtone-icon-card__title {

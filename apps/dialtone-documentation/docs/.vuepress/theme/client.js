@@ -170,9 +170,9 @@ async function registerDialtoneVue (app) {
   const module = await import('@dialpad/dialtone-vue');
   const documentation = await import('@dialpad/dialtone-vue/component-documentation.json');
 
-  const dialtoneConstants = [];
-  const dialtoneComponents = [];
-  const dialtoneUtils = [];
+  const dialtoneConstants = {};
+  const dialtoneComponents = {};
+  const dialtoneUtils = {};
 
   Object.keys(module).forEach(key => {
     if (/^[A-Z_]+$/.test(key)) {
@@ -207,8 +207,8 @@ async function registerDialtoneCombinator (app) {
 async function registerDialtoneIcons (app) {
   const icons = await import('@dialpad/dialtone-icons/vue3');
 
-  const dialtoneIcons = [];
-  const dialtoneIllustrations = [];
+  const dialtoneIcons = {};
+  const dialtoneIllustrations = {};
 
   Object.keys(icons).forEach(key => {
     if (key.startsWith('DtIcon')) {

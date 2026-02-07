@@ -1,7 +1,7 @@
 <!-- eslint-disable max-len -->
 <template>
-  <div class="showcase-carousel">
-    <dt-stack direction="row" gap="700" class="showcase-carousel__track">
+  <div ref="carouselContainerRef" class="showcase-carousel">
+    <dt-stack ref="carouselTrackRef" direction="row" gap="700" class="showcase-carousel__track">
       <img style="align-self: flex-start; width: 468px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--01.jpg" alt="">
       <img style="align-self: flex-end; width: 546px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--02.jpg" alt="">
       <img style="align-self: flex-start; width: 352px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--03.jpg" alt="">
@@ -16,7 +16,10 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
+
+const carouselContainerRef = ref(null);
+const carouselTrackRef = ref(null);
 
 // Configuration constants
 const DEFAULT_SPEED = -2;          // Slow leftward scroll when not hovering
@@ -27,8 +30,8 @@ const SMOOTHING_ACTIVE = 0.5;       // Fast response when hovering
 const SMOOTHING_INACTIVE = 0.15;    // Smooth transition when leaving
 
 onMounted(() => {
-  const carouselContainer = document.querySelector('.showcase-carousel');
-  const carousel = document.querySelector('.showcase-carousel__track');
+  const carouselContainer = carouselContainerRef.value;
+  const carousel = carouselTrackRef.value?.$el;
 
   if (carousel && carouselContainer) {
     // Clone images multiple times for seamless infinite scrolling

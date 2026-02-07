@@ -125,7 +125,7 @@
     >
       <template #anchor>
         <dt-button
-          v-dt-tooltip:bottom="`Theme: ${currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1)} `"
+          v-dt-tooltip:bottom="`Theme: ${capitalize(currentTheme)}`"
           class="theme-toggle-button dialtone-shell-btn"
           importance="clear"
           kind="muted"
@@ -237,7 +237,7 @@
     <dt-dropdown navigation-type="arrow-keys" placement="bottom-start">
       <template #anchor>
         <dt-button
-          v-dt-tooltip:bottom="`Mode: ${currentMode.charAt(0).toUpperCase() + currentMode.slice(1)} `"
+          v-dt-tooltip:bottom="`Mode: ${capitalize(currentMode)}`"
           importance="clear"
           kind="muted"
           class="dialtone-shell-btn"
@@ -358,6 +358,8 @@ const {
   numberedThemes,
   formatThemeName,
 } = useThemeManager({ includeThemes: true });
+
+const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
 const isActiveLink = (link) => {
   // For Design System, check all related paths (same as useSidebarItems.js)
