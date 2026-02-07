@@ -162,6 +162,7 @@ export function transformColorsCatalog (mode = 'light') {
 
   const output = [];
   for (const [colorName, stops] of Object.entries(groups)) {
+    stops.sort((a, b) => Number(a.stop) - Number(b.stop));
     output.push(`#### ${colorName.charAt(0).toUpperCase() + colorName.slice(1)}`);
     output.push('');
     output.push('| Stop | Variable | Value |');
