@@ -15,6 +15,7 @@ import { resolve, basename, dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { parseSourceMarkdown } from './lib/parse-source-markdown.mjs';
+import { rewriteAbsoluteLinks, resolveRawLink } from './lib/utils.mjs';
 import { setComponentDocs } from './lib/transform-vue-api.mjs';
 import { setUtilityClassDocs } from './lib/transform-utility-class-table.mjs';
 import { setTokenDocs } from './lib/transform-tokens.mjs';
@@ -229,18 +230,19 @@ function appendSiblingLinks (section, outputBase) {
 /**
  * Build a markdown link for an overview section from its source index.md.
  */
-function buildOverviewLink (linkPath) {
+function buildOverviewLink (linkPath, currentRawDir) {
   const srcDir = linkPath.replace(/^\/|\/$/g, '');
   const srcFile = resolve(ROOT, 'docs', srcDir, 'index.md');
+  const rawLink = resolveRawLink(linkPath, currentRawDir);
   try {
     const content = readFileSync(srcFile, 'utf-8');
     const titleMatch = content.match(/^title:\s*(.+)$/m);
     const descMatch = content.match(/^description:\s*(.+)$/m);
     const title = titleMatch?.[1] ?? srcDir;
     const desc = descMatch?.[1] ?? '';
-    return desc ? `- [${title}](${linkPath}) — ${desc}` : `- [${title}](${linkPath})`;
+    return desc ? `- [${title}](${rawLink}) — ${desc}` : `- [${title}](${rawLink})`;
   } catch {
-    return `- [${srcDir}](${linkPath})`;
+    return `- [${srcDir}](${rawLink})`;
   }
 }
 
@@ -251,7 +253,8 @@ function appendOverviewLinks (section, outputBase) {
   if (!section.overviewLinks?.length) return;
 
   const indexPath = resolve(outputBase, 'index.md');
-  const links = section.overviewLinks.map(buildOverviewLink);
+  const currentRawDir = section.outputDir.replace(/^raw\//, '');
+  const links = section.overviewLinks.map(lp => buildOverviewLink(lp, currentRawDir));
   try {
     const indexContent = readFileSync(indexPath, 'utf-8');
     writeFileSync(indexPath, indexContent.trimEnd() + '\n\n## Sections\n\n' + links.join('\n') + '\n', 'utf-8');
@@ -292,11 +295,15 @@ function main () {
 
       try {
         const source = readFileSync(sourcePath, 'utf-8');
-        const result = parseSourceMarkdown(source, {
-          dataDir: DATA_DIR,
-          filePath: sourcePath,
-          utilitiesDir: UTILITIES_DIR,
-        });
+        const rawDir = dirname(section.outputDir.replace(/^raw\//, '') + '/' + outputRelPath);
+        const result = rewriteAbsoluteLinks(
+          parseSourceMarkdown(source, {
+            dataDir: DATA_DIR,
+            filePath: sourcePath,
+            utilitiesDir: UTILITIES_DIR,
+          }),
+          rawDir,
+        );
         writeFileSync(outputPath, result, 'utf-8');
         successCount++;
       } catch (err) {

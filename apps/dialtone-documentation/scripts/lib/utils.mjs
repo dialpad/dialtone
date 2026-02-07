@@ -103,3 +103,84 @@ export function stripHtmlTags (html) {
   if (!html) return '';
   return html.replace(/<[^>]*>/g, '').trim();
 }
+
+/**
+ * Sections that have raw markdown equivalents under /raw/.
+ */
+const RAW_SECTIONS = new Set([
+  'components', 'foundations', 'dialtone', 'ui-kits',
+  'guides', 'tokens', 'utilities',
+]);
+
+/**
+ * Convert a cleaned path-parts array into the raw .md file path.
+ * Mirrors mapOutputPath logic: index.md in subdirs collapses to parent.md.
+ */
+function partsToMdPath (parts) {
+  const last = parts[parts.length - 1];
+  if (parts.length === 1) return parts[0] + '/index.md';
+  if (last === 'index.md' || last === 'index.html') {
+    const parent = parts.slice(0, -1);
+    return parent.length === 1 ? parent[0] + '/index.md' : parent.join('/') + '.md';
+  }
+  if (last.endsWith('.html')) return parts.slice(0, -1).join('/') + '/' + last.replace(/\.html$/, '.md');
+  if (last.endsWith('.md')) return parts.join('/');
+  return parts.join('/') + '.md';
+}
+
+/**
+ * Compute a relative path from one directory to a target file path.
+ */
+function toRelativePath (fromDir, toPath) {
+  const fromParts = fromDir ? fromDir.split('/').filter(Boolean) : [];
+  const toParts = toPath.split('/');
+  let common = 0;
+  while (common < fromParts.length && common < toParts.length && fromParts[common] === toParts[common]) {
+    common++;
+  }
+  const ups = fromParts.length - common;
+  const rest = toParts.slice(common).join('/');
+  return ups > 0 ? '../'.repeat(ups) + rest : './' + rest;
+}
+
+/**
+ * Convert a VuePress absolute link to a relative raw .md path.
+ *
+ * @param {string} href - The link href (e.g. "/components/text.html#tone")
+ * @param {string} currentRawDir - Directory of the current file within raw/ (e.g. "dialtone")
+ * @returns {string} - Relative .md path, or original href if no conversion applies
+ */
+export function resolveRawLink (href, currentRawDir) {
+  if (!href.startsWith('/') || href.startsWith('/assets/')) return href;
+
+  const hashIdx = href.indexOf('#');
+  const path = (hashIdx >= 0 ? href.slice(0, hashIdx) : href).replace(/^\/|\/$/g, '');
+  const anchor = hashIdx >= 0 ? href.slice(hashIdx) : '';
+
+  const parts = path.split('/');
+  if (!RAW_SECTIONS.has(parts[0])) return href;
+
+  const last = parts[parts.length - 1];
+  const extMatch = last.match(/\.(\w+)$/);
+  if (extMatch && !['md', 'html'].includes(extMatch[1])) return href;
+
+  return toRelativePath(currentRawDir, partsToMdPath(parts)) + anchor;
+}
+
+/**
+ * Rewrite all absolute markdown links in a string to relative raw .md paths.
+ *
+ * @param {string} markdown - The markdown content
+ * @param {string} currentRawDir - Directory of the current file within raw/
+ * @returns {string} - Markdown with rewritten links
+ */
+export function rewriteAbsoluteLinks (markdown, currentRawDir) {
+  return markdown.replace(
+    /\[([^\]]*)\]\((\/[^)]+)\)/g,
+    (match, text, href) => {
+      const newHref = resolveRawLink(href, currentRawDir);
+      if (newHref === href) return match;
+      return `[${text}](${newHref})`;
+    },
+  );
+}
