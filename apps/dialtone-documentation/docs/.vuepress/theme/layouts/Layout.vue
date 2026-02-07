@@ -58,7 +58,7 @@ import Sidebar from '../components/Sidebar.vue';
 import Home from '../components/Home.vue';
 import Page from '../components/Page.vue';
 import MobileSidebar from '../components/MobileSidebar.vue';
-import { computed, ref, watch, onMounted } from 'vue';
+import { computed, ref, watch, onMounted, onUnmounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
 import { disableRootScrolling, enableRootScrolling } from '@dialpad/dialtone-vue';
@@ -198,7 +198,7 @@ const findCurrent = () => {
   next.value = isLastItem && nextItems ? nextItems[0] : filteredItems[childIndex + 1];
 };
 const openSearch = () => {
-  docSearchBtn.value.children[0].click();
+  docSearchBtn.value?.children[0]?.click();
 };
 
 watch(
@@ -212,9 +212,7 @@ watch(
 
 onMounted(() => {
   evaluateWindowWidth();
-  window.addEventListener('resize', () => {
-    evaluateWindowWidth();
-  });
+  window.addEventListener('resize', evaluateWindowWidth);
 
   observer = new MutationObserver((mutationList) => {
     for (const mutation of mutationList) {
@@ -227,5 +225,10 @@ onMounted(() => {
   });
 
   observer.observe(document.body, { attributes: true });
+});
+
+onUnmounted(() => {
+  window.removeEventListener('resize', evaluateWindowWidth);
+  observer?.disconnect();
 });
 </script>

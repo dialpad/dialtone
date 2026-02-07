@@ -161,7 +161,7 @@ pageClass: dialpad-design-home
 
   background-image: var(--grad);
   background-attachment: fixed;
-  height: 100vh;
+  block-size: 100vh;
 
   [data-dt-mode="dark"] & {
     --grad: radial-gradient(circle at var(--grad-position-x) var(--grad-position-y), rgb(246, 100, 55) 0%, rgb(223, 38, 110) 30%, rgb(191, 10, 128) 44%, rgb(81, 30, 118) 71%, var(--dt-color-purple-50) 100%);

@@ -96,7 +96,7 @@ const filterItems = (items, searchTerm) => {
     // Check if current item matches (text or keywords)
     const itemMatches = item.text.toLowerCase().includes(term) ||
       (item.keywords?.some(keyword =>
-        keyword.toLowerCase().includes(term)
+        keyword.toLowerCase().includes(term),
       ) ?? false);
 
     // Recursively filter children if they exist
@@ -146,8 +146,6 @@ const flattenedFilteredItems = computed(() => {
   traverse(filteredItems.value);
   return flattened;
 });
-
-// No longer need focusedItemLink computed - using native focus instead
 
 // Compute which items should be open during search
 const computeOpenItemsForSearch = (items) => {
@@ -216,43 +214,30 @@ const handleKeydown = (event) => {
     return;
   }
 
-  console.log(`Key pressed: ${event.key}, current focusedIndex: ${focusedIndex.value}, total items: ${flattenedFilteredItems.value.length}`);
-
   switch (event.key) {
     case 'ArrowDown':
       event.preventDefault();
-      console.log('ArrowDown - before increment:', focusedIndex.value);
-      // Move focus down, wrap to beginning if at end
       if (focusedIndex.value < flattenedFilteredItems.value.length - 1) {
         focusedIndex.value++;
-        console.log('Incremented to:', focusedIndex.value);
       } else {
         focusedIndex.value = 0;
-        console.log('Wrapped to 0');
       }
       break;
 
     case 'ArrowUp':
       event.preventDefault();
-      console.log('ArrowUp - before decrement:', focusedIndex.value);
-      // Move focus up, wrap to end if at beginning
       if (focusedIndex.value > 0) {
         focusedIndex.value--;
-        console.log('Decremented to:', focusedIndex.value);
       } else {
         focusedIndex.value = flattenedFilteredItems.value.length - 1;
-        console.log('Wrapped to end:', focusedIndex.value);
       }
       break;
 
     case 'Enter':
       event.preventDefault();
-      console.log('Enter pressed, navigating to index:', focusedIndex.value);
-      // Navigate to focused item
       if (focusedIndex.value >= 0 && focusedIndex.value < flattenedFilteredItems.value.length) {
         const focusedItem = flattenedFilteredItems.value[focusedIndex.value];
         if (focusedItem.link) {
-          console.log('Navigating to:', focusedItem.link);
           router.push(focusedItem.link);
         }
       }
@@ -260,8 +245,6 @@ const handleKeydown = (event) => {
 
     case 'Escape':
       event.preventDefault();
-      console.log('Escape pressed, clearing search and returning focus to input');
-      // Clear search and focus, return to input
       inputValue.value = '';
       focusedIndex.value = -1;
       // Return focus to search input
@@ -319,23 +302,16 @@ watch(focusedIndex, async (newIndex) => {
     // Wait for DOM to update
     await nextTick();
 
-    // Get the item we want to focus
     const targetItem = flattenedFilteredItems.value[newIndex];
-    console.log(`Trying to focus item at index ${newIndex}: ${targetItem.text} (link: ${targetItem.link})`);
-
-    // Query for the button with matching data-sidebar-link attribute
     const button = document.querySelector(`.dialtone-sidebar__list [data-sidebar-link="${targetItem.link}"]`);
 
     if (button) {
-      console.log(`Found button, calling focus()`);
       button.focus();
       button.scrollIntoView({
         behavior: 'smooth',
         block: 'nearest',
         inline: 'nearest',
       });
-    } else {
-      console.log(`Button not found in DOM for link: ${targetItem.link}`);
     }
   }
 });

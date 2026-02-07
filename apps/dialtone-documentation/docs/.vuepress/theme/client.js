@@ -1,4 +1,4 @@
-/* eslint-disable max-lines */
+ 
 import { defineClientConfig } from 'vuepress/client';
 import Layout from './layouts/Layout.vue';
 import NotFound from './layouts/NotFound.vue';
@@ -69,6 +69,14 @@ const initOverlayScrollbars = () => {
   });
 };
 
+const DOCSEARCH_CONFIG = {
+  apiKey: '6436ebddb959748daeec411eb388a99d',
+  indexName: 'dialpad',
+  appId: 'Y5HG9UX6KM',
+  placeholder: 'Search',
+  container: '#docsearch',
+};
+
 export default defineClientConfig({
   async enhance ({ app, router }) {
     // Register libraries
@@ -85,6 +93,9 @@ export default defineClientConfig({
     let resolveViewTransition;
 
     router.beforeEach((to, from, next) => {
+      // Resolve any pending transition before starting a new one
+      resolveViewTransition?.();
+
       if (document.startViewTransition) {
         const domUpdatePromise = new Promise(resolve => {
           resolveViewTransition = resolve;
@@ -105,13 +116,7 @@ export default defineClientConfig({
       const container = document.querySelector('#docsearch');
       if (container && !container.children.length) {
         const docsearchModule = await import('@docsearch/js');
-        docsearchModule.default({
-          apiKey: '6436ebddb959748daeec411eb388a99d',
-          indexName: 'dialpad',
-          appId: 'Y5HG9UX6KM',
-          placeholder: 'Search',
-          container: '#docsearch',
-        });
+        docsearchModule.default(DOCSEARCH_CONFIG);
       }
     });
 
@@ -151,14 +156,7 @@ export default defineClientConfig({
     });
     onMounted(async () => {
       const docsearch = (await import('@docsearch/js'))?.default;
-
-      docsearch({
-          apiKey: '6436ebddb959748daeec411eb388a99d',
-          indexName: 'dialpad',
-          appId: 'Y5HG9UX6KM',
-          placeholder: 'Search',
-          container: '#docsearch',
-      });
+      docsearch(DOCSEARCH_CONFIG);
     });
   },
   layouts: {
@@ -359,7 +357,7 @@ async function importDialtoneThemes (app) {
       'high-contrast': themeModules[50].default,
     };
 
-    console.log(`Successfully loaded ${Object.keys(themes).length - 1} themes + high contrast`);
+    console.info(`Successfully loaded ${Object.keys(themes).length - 1} themes + high contrast`);
 
     app.provide('themes', themes);
   } catch (error) {
@@ -367,4 +365,3 @@ async function importDialtoneThemes (app) {
   }
 }
 
-// OLD LEGACY CODE REMOVED

@@ -1,3 +1,4 @@
+<!-- eslint-disable max-len -->
 <template>
   <div class="showcase-carousel">
     <dt-stack direction="row" gap="700" class="showcase-carousel__track">
@@ -89,14 +90,17 @@ onMounted(() => {
     animate();
 
     // Mouse interaction handlers
-    carouselContainer.addEventListener('mouseenter', () => {
+    const handleMouseEnter = () => {
       isHovering = true;
-    });
+    };
 
-    carouselContainer.addEventListener('mouseleave', () => {
+    const handleMouseLeave = () => {
       isHovering = false;
       targetSpeed = DEFAULT_SPEED;
-    });
+    };
+
+    carouselContainer.addEventListener('mouseenter', handleMouseEnter);
+    carouselContainer.addEventListener('mouseleave', handleMouseLeave);
 
     const handleMouseMove = (e) => {
       if (!isHovering) return;
@@ -142,6 +146,9 @@ onMounted(() => {
       if (animationId) {
         cancelAnimationFrame(animationId);
       }
+      carouselContainer.removeEventListener('mouseenter', handleMouseEnter);
+      carouselContainer.removeEventListener('mouseleave', handleMouseLeave);
+      carouselContainer.removeEventListener('mousemove', handleMouseMove);
     });
   }
 });
