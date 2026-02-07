@@ -112,12 +112,17 @@ function loadJson (path, label) {
 }
 
 /**
- * Build a markdown link line from a file's title frontmatter.
+ * Build a markdown link line from a file's first heading.
+ * Optionally appends a date if found in the file's metadata.
  */
-function buildLinkFromFile (filePath, linkTarget) {
+function buildLinkFromFile (filePath, linkTarget, { includeDate = false } = {}) {
   const content = readFileSync(filePath, 'utf-8');
-  const titleMatch = content.match(/^title:\s*(.+)$/m);
+  const titleMatch = content.match(/^#\s+(.+)$/m);
   const title = titleMatch ? titleMatch[1] : basename(linkTarget, '.md');
+  if (includeDate) {
+    const dateMatch = content.match(/^- \*\*Posted\*\*:\s*(.+)$/m);
+    if (dateMatch) return `- [${title}](${linkTarget}) — ${dateMatch[1]}`;
+  }
   return `- [${title}](${linkTarget})`;
 }
 
@@ -128,6 +133,33 @@ function listMdFiles (dir) {
   return readdirSync(dir)
     .filter(f => f.endsWith('.md') && f !== 'index.md')
     .sort();
+}
+
+/**
+ * Sort files by date descending if all match YYYY-M-D.md, else alphabetically.
+ * Returns true if date-based sorting was applied.
+ */
+const DATE_RE = /(\d{4})-(\d{1,2})-(\d{1,2})\.md$/;
+function sortChildFiles (children) {
+  const hasDates = children.every(f => DATE_RE.test(f));
+  if (hasDates) {
+    children.sort((a, b) => {
+      const [, yA, mA, dA] = a.match(DATE_RE);
+      const [, yB, mB, dB] = b.match(DATE_RE);
+      return (yB - yA) || (mB - mA) || (dB - dA);
+    });
+  } else {
+    children.sort();
+  }
+  return hasDates;
+}
+
+/**
+ * Append a "## Pages" section to a file from an array of markdown link lines.
+ */
+function appendPagesSection (filePath, links) {
+  const existing = readFileSync(filePath, 'utf-8');
+  writeFileSync(filePath, existing.trimEnd() + '\n\n## Pages\n\n' + links.join('\n') + '\n', 'utf-8');
 }
 
 /**
@@ -149,16 +181,12 @@ function appendSubdirectoryLinks (outputBase) {
       if (!statSync(subDir).isDirectory()) continue;
     } catch { continue; }
 
-    const children = readdirSync(subDir)
-      .filter(f => f.endsWith('.md'))
-      .sort();
-
+    const children = walkDir(subDir, subDir);
     if (children.length === 0) continue;
 
-    const links = children.map(f => buildLinkFromFile(resolve(subDir, f), `${stem}/${f}`));
-    const filePath = resolve(outputBase, entry);
-    const existing = readFileSync(filePath, 'utf-8');
-    writeFileSync(filePath, existing.trimEnd() + '\n\n## Pages\n\n' + links.join('\n') + '\n', 'utf-8');
+    const hasDates = sortChildFiles(children);
+    const links = children.map(f => buildLinkFromFile(resolve(subDir, f), `${stem}/${f}`, { includeDate: hasDates }));
+    appendPagesSection(resolve(outputBase, entry), links);
   }
 }
 
@@ -220,8 +248,7 @@ function appendSiblingLinks (section, outputBase) {
 
   const links = siblings.map(f => buildLinkFromFile(resolve(outputBase, f), f));
   try {
-    const indexContent = readFileSync(indexPath, 'utf-8');
-    writeFileSync(indexPath, indexContent.trimEnd() + '\n\n## Pages\n\n' + links.join('\n') + '\n', 'utf-8');
+    appendPagesSection(indexPath, links);
   } catch (err) {
     console.warn(`[generate-raw-markdown] ${section.name}: could not append links to index.md: ${err.message}`);
   }
@@ -311,6 +338,127 @@ function appendOverviewLinks (section, outputBase) {
   }
 }
 
+/**
+ * Map a frontmatter value to a status label, matching the VuePress theme logic.
+ */
+function componentStatus (property) {
+  if (!property) return 'N/A';
+  switch (property) {
+    case 'wip': return 'In progress';
+    case 'planned': return 'Planned';
+    default: return 'Ready';
+  }
+}
+
+/**
+ * Generate a component status page with CSS, Vue, and Figma columns.
+ * Reads source frontmatter for status/storybook/figma fields.
+ */
+function generateComponentStatusPage (sourceDir, outputBase) {
+  const files = readdirSync(sourceDir)
+    .filter(f => f.endsWith('.md') && f !== 'index.md')
+    .sort();
+
+  const rows = files.map(f => {
+    const content = readFileSync(resolve(sourceDir, f), 'utf-8');
+    const fmMatch = content.match(/^---\n([\s\S]*?)\n---/);
+    const fm = fmMatch ? fmMatch[1] : '';
+    const titleMatch = fm.match(/^title:\s*(.+)$/m);
+    const title = titleMatch ? titleMatch[1] : basename(f, '.md');
+    const statusMatch = fm.match(/^status:\s*(.+)$/m);
+    const storybookMatch = fm.match(/^storybook:\s*(.+)$/m);
+    const figmaMatch = fm.match(/^figma_url:\s*(.+)$/m) || fm.match(/^figma:\s*(.+)$/m);
+    const css = componentStatus(statusMatch?.[1]);
+    const vue = componentStatus(storybookMatch?.[1]);
+    const figma = componentStatus(figmaMatch?.[1]);
+    return `| [${title}](${f}) | ${css} | ${vue} | ${figma} |`;
+  });
+
+  const output = [
+    '# Component Status',
+    '',
+    'Overview of the components health status.',
+    '',
+    'Ready | In progress | Planned | N/A',
+    '',
+    '| Component | CSS | Vue | Figma |',
+    '| --- | --- | --- | --- |',
+    ...rows,
+    '',
+  ].join('\n');
+
+  writeFileSync(resolve(outputBase, 'status.md'), output, 'utf-8');
+}
+
+/**
+ * Walk the site-nav.json tree and append child links to any page
+ * whose nav entry has children (e.g. Getting Started → Theme and Mode, etc.).
+ * Skips pages that already have a "## Pages" section from filesystem-based linking.
+ */
+/**
+ * Build a child link line from a nav child entry, reading the raw file for its title.
+ */
+function buildNavChildLink (child, parentDir, rawBase) {
+  const childRel = relative(parentDir, child.link.replace(/^\/|\/$/g, '')) + '.md';
+  const childFile = resolve(rawBase, child.link.replace(/^\/|\/$/g, '') + '.md');
+  try {
+    const cc = readFileSync(childFile, 'utf-8');
+    const tm = cc.match(/^#\s+(.+)$/m);
+    return `- [${tm ? tm[1] : child.text}](${childRel})`;
+  } catch {
+    return `- [${child.text}](${childRel})`;
+  }
+}
+
+/**
+ * Walk the site-nav.json tree and append child links to any page
+ * whose nav entry has children (e.g. Getting Started → Theme and Mode, etc.).
+ * Skips pages that already have a "## Pages" section from filesystem-based linking.
+ */
+/**
+ * If a nav entry has children and the corresponding raw file lacks a ## Pages
+ * section, append child links to it.
+ */
+function tryAppendNavChildren (entry, rawBase) {
+  if (!entry.link || !entry.children?.length) return;
+  const parentFile = resolve(rawBase, entry.link.replace(/^\/|\/$/g, '') + '.md');
+  let parentContent;
+  try { parentContent = readFileSync(parentFile, 'utf-8'); } catch { return; }
+  if (parentContent.includes('\n## Pages\n')) return;
+
+  const parentDir = dirname(entry.link.replace(/^\/|\/$/g, ''));
+  const links = entry.children
+    .filter(c => c.link && !c.link.startsWith('http'))
+    .map(c => buildNavChildLink(c, parentDir, rawBase));
+  if (links.length > 0) appendPagesSection(parentFile, links);
+}
+
+/**
+ * Walk the site-nav.json tree and append child links to any page
+ * whose nav entry has children (e.g. Getting Started → Theme and Mode, etc.).
+ * Skips pages that already have a "## Pages" section from filesystem-based linking.
+ */
+function appendNavChildLinks (rawBase) {
+  let navData;
+  try {
+    navData = JSON.parse(readFileSync(resolve(DATA_DIR, 'site-nav.json'), 'utf-8'));
+  } catch { return; }
+
+  function walk (entries) {
+    if (!entries) return;
+    for (const entry of entries) {
+      tryAppendNavChildren(entry, rawBase);
+      if (entry.children) walk(entry.children);
+    }
+  }
+
+  const sections = navData?.topLevelGroups?.dialtone?.sections;
+  if (!sections) return;
+  for (const sectionEntries of Object.values(sections)) {
+    walk(sectionEntries);
+  }
+}
+
 function main () {
   console.log('[generate-raw-markdown] Starting...');
 
@@ -362,6 +510,10 @@ function main () {
 
     if (section.flat) {
       generateFlatIndex(section, sourceDir, outputBase);
+      if (section.name === 'components') {
+        generateComponentStatusPage(sourceDir, outputBase);
+        successCount++;
+      }
     } else {
       appendSiblingLinks(section, outputBase);
       appendSubdirectoryLinks(outputBase);
@@ -374,6 +526,9 @@ function main () {
     totalSuccess += successCount;
     totalError += errorCount;
   }
+
+  const rawBase = resolve(ROOT, 'docs/.vuepress/public/raw');
+  appendNavChildLinks(rawBase);
 
   console.log(`[generate-raw-markdown] Done: ${totalSuccess} total generated, ${totalError} total errors`);
 }
