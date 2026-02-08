@@ -3,6 +3,14 @@
  */
 
 /**
+ * Collapse whitespace and trim text for use inside a backtick-wrapped table cell.
+ * Pipes inside backtick code spans are literal in GFM, so no escaping needed.
+ */
+export function codeCell (text) {
+  return (text || '').replace(/\s+/g, ' ').trim();
+}
+
+/**
  * Escape pipe characters inside a markdown table cell.
  * Also collapses whitespace and trims.
  */

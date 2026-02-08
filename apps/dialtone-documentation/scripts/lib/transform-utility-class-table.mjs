@@ -11,7 +11,7 @@
  */
 
 import { UTILITY_CLASS_MAPPING } from './utility-class-prefixes.mjs';
-import { escapeTableCell } from './utils.mjs';
+import { escapeTableCell, codeCell } from './utils.mjs';
 
 let utilityClassDocs = {};
 
@@ -54,7 +54,7 @@ function renderTable (entries) {
     const outputs = entry.values
       .map(v => `${v.prop}: ${v.value}`)
       .join('; ');
-    lines.push(`| \`${escapeTableCell(className)}\` | ${escapeTableCell(outputs)} |`);
+    lines.push(`| \`${codeCell(className)}\` | ${escapeTableCell(outputs)} |`);
   }
 
   return lines;

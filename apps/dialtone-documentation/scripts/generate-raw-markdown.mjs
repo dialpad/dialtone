@@ -37,6 +37,9 @@ const ILLUSTRATION_JSON = resolve(ROOT, 'docs/_data/svg-spot.json');
 const TOKENS_DOCS_JSON = resolve(ROOT, '../../packages/dialtone-css/lib/dist/tokens-docs.json');
 const TYPE_JSON = resolve(DATA_DIR, 'type.json');
 
+/** Cached site-nav.json data — loaded once in loadAllDataSources(). */
+let _navData = null;
+
 /**
  * Section configuration.
  * - flat: true  → read only top-level .md files, skip index.md (legacy components behavior)
@@ -156,11 +159,21 @@ function sortChildFiles (children) {
 }
 
 /**
+ * Append a markdown section to a file from an array of content lines.
+ * @param {string} filePath - Absolute path to the file
+ * @param {string[]} lines - Content lines to append
+ * @param {string} heading - Section heading (default: "## Pages")
+ */
+function appendMarkdownSection (filePath, lines, heading = '## Pages') {
+  const existing = readFileSync(filePath, 'utf-8');
+  writeFileSync(filePath, existing.trimEnd() + '\n\n' + heading + '\n\n' + lines.join('\n').trimEnd() + '\n', 'utf-8');
+}
+
+/**
  * Append a "## Pages" section to a file from an array of markdown link lines.
  */
 function appendPagesSection (filePath, links) {
-  const existing = readFileSync(filePath, 'utf-8');
-  writeFileSync(filePath, existing.trimEnd() + '\n\n## Pages\n\n' + links.join('\n') + '\n', 'utf-8');
+  appendMarkdownSection(filePath, links);
 }
 
 /**
@@ -213,6 +226,8 @@ function loadAllDataSources () {
   const cssTokensDocs = loadJson(TOKENS_DOCS_JSON, 'tokens-docs.json');
   setTokensDocs(cssTokensDocs);
   setColorUtilityClassDocs(utilityDocs || {});
+
+  _navData = loadJson(resolve(DATA_DIR, 'site-nav.json'), 'site-nav.json');
 }
 
 /**
@@ -279,8 +294,7 @@ function buildOverviewLink (linkPath, currentRawDir) {
  * Returns the category children array, or null if not found.
  */
 function loadNavCategories (navSection) {
-  const navData = loadJson(resolve(DATA_DIR, 'site-nav.json'), 'site-nav.json');
-  return navData?.topLevelGroups?.dialtone?.sections?.[navSection]?.[0]?.children ?? null;
+  return _navData?.topLevelGroups?.dialtone?.sections?.[navSection]?.[0]?.children ?? null;
 }
 
 /**
@@ -315,8 +329,7 @@ function appendNavLinks (section, outputBase) {
 
   const indexPath = resolve(outputBase, 'index.md');
   try {
-    const indexContent = readFileSync(indexPath, 'utf-8');
-    writeFileSync(indexPath, indexContent.trimEnd() + '\n\n## Pages\n\n' + lines.join('\n').trimEnd() + '\n', 'utf-8');
+    appendMarkdownSection(indexPath, lines);
   } catch (err) {
     console.warn(`[generate-raw-markdown] ${section.name}: could not append nav links to index.md: ${err.message}`);
   }
@@ -332,8 +345,7 @@ function appendOverviewLinks (section, outputBase) {
   const currentRawDir = section.outputDir.replace(/^md\//, '');
   const links = section.overviewLinks.map(lp => buildOverviewLink(lp, currentRawDir));
   try {
-    const indexContent = readFileSync(indexPath, 'utf-8');
-    writeFileSync(indexPath, indexContent.trimEnd() + '\n\n## Sections\n\n' + links.join('\n') + '\n', 'utf-8');
+    appendMarkdownSection(indexPath, links, '## Sections');
   } catch (err) {
     console.warn(`[generate-raw-markdown] ${section.name}: could not append sections to index.md: ${err.message}`);
   }
@@ -481,10 +493,7 @@ function tryAppendNavChildren (entry, rawBase) {
  * Skips pages that already have a "## Pages" section from filesystem-based linking.
  */
 function appendNavChildLinks (rawBase) {
-  let navData;
-  try {
-    navData = JSON.parse(readFileSync(resolve(DATA_DIR, 'site-nav.json'), 'utf-8'));
-  } catch { return; }
+  if (!_navData) return;
 
   function walk (entries) {
     if (!entries) return;
@@ -494,7 +503,7 @@ function appendNavChildLinks (rawBase) {
     }
   }
 
-  const sections = navData?.topLevelGroups?.dialtone?.sections;
+  const sections = _navData?.topLevelGroups?.dialtone?.sections;
   if (!sections) return;
   for (const sectionEntries of Object.values(sections)) {
     walk(sectionEntries);
@@ -537,7 +546,15 @@ function extractTitleAndDescription (filePath) {
     if (!trimmed) continue;
     // Skip metadata lines (- **Key**: value) and headings
     if (/^- \*\*/.test(trimmed) || /^#/.test(trimmed)) continue;
-    description = trimmed;
+    // Skip Vue/HTML attribute remnants (e.g. kind="warning", :hideClose="true")
+    if (/^:?\w+="/.test(trimmed)) continue;
+    // Skip HTML/Vue tag lines and closing angle brackets from multi-line tags
+    if (/^<\/?[a-zA-Z]/.test(trimmed) || trimmed === '>') continue;
+    // Skip bare placeholder text
+    if (trimmed === 'Description') continue;
+    // Strip inline HTML/Vue tags but preserve markdown autolinks (<https://...>)
+    description = trimmed.replace(/<(?!https?:\/\/)[^>]*>/g, '').trim();
+    if (!description) continue;
     break;
   }
 
@@ -553,10 +570,15 @@ function titleCase (slug) {
 
 /**
  * Build a single llms.txt list entry for a file.
+ * @param {string} sectionName
+ * @param {string} relFile
+ * @param {string} sectionDir
+ * @param {Map<string,{title:string,description:string}>} [cache] - Optional pre-built cache
  */
-function llmsTxtEntry (sectionName, relFile, sectionDir) {
-  const filePath = resolve(sectionDir, relFile);
-  const { title, description } = extractTitleAndDescription(filePath);
+function llmsTxtEntry (sectionName, relFile, sectionDir, cache) {
+  const { title, description } = cache
+    ? cache.get(relFile)
+    : extractTitleAndDescription(resolve(sectionDir, relFile));
   const url = `${BASE_URL}/md/${sectionName}/${relFile}`;
   const descSuffix = description ? `: ${description}` : '';
   return `- [${title}](${url})${descSuffix}`;
@@ -568,7 +590,7 @@ function llmsTxtEntry (sectionName, relFile, sectionDir) {
  * Sections with subdirectory hierarchy render parent pages as top-level entries
  * and group child pages under H3 sub-headings. Flat sections are unchanged.
  */
-function generateLlmsTxt (mdBase) {
+function generateLlmsTxt (mdBase, sectionFiles) {
   const lines = [
     '# Dialtone Design System',
     '',
@@ -581,12 +603,16 @@ function generateLlmsTxt (mdBase) {
   const sectionOrder = Object.keys(SECTION_META);
 
   for (const sectionName of sectionOrder) {
+    const files = sectionFiles[sectionName];
+    if (!files || files.length === 0) continue;
+
     const sectionDir = resolve(mdBase, sectionName);
-    if (!existsSync(sectionDir)) continue;
 
-    const files = walkDir(sectionDir, sectionDir).sort();
-
-    if (files.length === 0) continue;
+    // Build title/description cache — read each file once for this section
+    const cache = new Map();
+    for (const relFile of files) {
+      cache.set(relFile, extractTitleAndDescription(resolve(sectionDir, relFile)));
+    }
 
     lines.push(`## ${SECTION_META[sectionName]}`, '');
 
@@ -610,13 +636,13 @@ function generateLlmsTxt (mdBase) {
 
     if (!hasHierarchy) {
       // Flat section — index.md first, then alphabetical
-      files.sort((a, b) => {
+      const sorted = [...files].sort((a, b) => {
         if (basename(a) === 'index.md') return -1;
         if (basename(b) === 'index.md') return 1;
         return a.localeCompare(b);
       });
-      for (const relFile of files) {
-        lines.push(llmsTxtEntry(sectionName, relFile, sectionDir));
+      for (const relFile of sorted) {
+        lines.push(llmsTxtEntry(sectionName, relFile, sectionDir, cache));
       }
       lines.push('');
       continue;
@@ -642,11 +668,11 @@ function generateLlmsTxt (mdBase) {
     const adoptedByDir = {};
     for (const f of topLevel) {
       if (parentFiles.has(f)) continue;
-      const { title: fTitle } = extractTitleAndDescription(resolve(sectionDir, f));
+      const { title: fTitle } = cache.get(f);
       const fWord = fTitle.split(/\s+/)[0].toLowerCase();
       for (const pf of parentEntries) {
         const dirName = basename(pf, '.md');
-        const { title: pTitle } = extractTitleAndDescription(resolve(sectionDir, pf));
+        const { title: pTitle } = cache.get(pf);
         if (fWord === pTitle.split(/\s+/)[0].toLowerCase()) {
           adopted.add(f);
           (adoptedByDir[dirName] ??= []).push(f);
@@ -658,15 +684,14 @@ function generateLlmsTxt (mdBase) {
     for (const relFile of parentEntries) {
       const stem = basename(relFile, '.md');
       const children = nested[stem];
-      const parentPath = resolve(sectionDir, relFile);
-      const { title: parentTitle } = extractTitleAndDescription(parentPath);
+      const { title: parentTitle } = cache.get(relFile);
       lines.push(`### ${parentTitle}`, '');
-      lines.push(llmsTxtEntry(sectionName, relFile, sectionDir));
+      lines.push(llmsTxtEntry(sectionName, relFile, sectionDir, cache));
       for (const af of (adoptedByDir[stem] ?? []).sort()) {
-        lines.push(llmsTxtEntry(sectionName, af, sectionDir));
+        lines.push(llmsTxtEntry(sectionName, af, sectionDir, cache));
       }
       for (const child of children) {
-        lines.push(llmsTxtEntry(sectionName, child, sectionDir));
+        lines.push(llmsTxtEntry(sectionName, child, sectionDir, cache));
       }
       lines.push('');
     }
@@ -675,7 +700,7 @@ function generateLlmsTxt (mdBase) {
     for (const dirName of orphanDirs) {
       lines.push(`### ${titleCase(dirName)}`, '');
       for (const child of nested[dirName]) {
-        lines.push(llmsTxtEntry(sectionName, child, sectionDir));
+        lines.push(llmsTxtEntry(sectionName, child, sectionDir, cache));
       }
       lines.push('');
     }
@@ -690,7 +715,7 @@ function generateLlmsTxt (mdBase) {
       });
     if (standalone.length > 0) {
       for (const relFile of standalone) {
-        lines.push(llmsTxtEntry(sectionName, relFile, sectionDir));
+        lines.push(llmsTxtEntry(sectionName, relFile, sectionDir, cache));
       }
       lines.push('');
     }
@@ -707,15 +732,15 @@ function generateLlmsTxt (mdBase) {
 /**
  * Generate llms-full.txt — full concatenation of all documentation pages.
  */
-function generateLlmsFullTxt (mdBase) {
+function generateLlmsFullTxt (mdBase, sectionFiles) {
   const parts = [];
   const sectionOrder = Object.keys(SECTION_META);
 
   for (const sectionName of sectionOrder) {
-    const sectionDir = resolve(mdBase, sectionName);
-    if (!existsSync(sectionDir)) continue;
+    const files = sectionFiles[sectionName];
+    if (!files || files.length === 0) continue;
 
-    const files = walkDir(sectionDir, sectionDir).sort();
+    const sectionDir = resolve(mdBase, sectionName);
 
     for (const relFile of files) {
       const filePath = resolve(sectionDir, relFile);
@@ -820,9 +845,16 @@ function main () {
   const rawBase = resolve(ROOT, 'docs/.vuepress/public/md');
   appendNavChildLinks(rawBase);
 
-  // Generate LLM discovery files
-  generateLlmsTxt(rawBase);
-  generateLlmsFullTxt(rawBase);
+  // Build file index once for LLM discovery files
+  const sectionFiles = {};
+  for (const sectionName of Object.keys(SECTION_META)) {
+    const sectionDir = resolve(rawBase, sectionName);
+    if (existsSync(sectionDir)) {
+      sectionFiles[sectionName] = walkDir(sectionDir, sectionDir).sort();
+    }
+  }
+  generateLlmsTxt(rawBase, sectionFiles);
+  generateLlmsFullTxt(rawBase, sectionFiles);
 
   console.log(`[generate-raw-markdown] Done: ${totalSuccess} total generated, ${totalError} total errors`);
 }

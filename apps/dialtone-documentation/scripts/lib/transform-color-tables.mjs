@@ -5,7 +5,7 @@
  * - <ColorsCatalog> — base color palette grouped by color name
  */
 
-import { escapeTableCell } from './utils.mjs';
+import { escapeTableCell, capitalize } from './utils.mjs';
 
 let tokensDocs = {};
 let utilityClassDocs = {};
@@ -163,7 +163,7 @@ export function transformColorsCatalog (mode = 'light') {
   const output = [];
   for (const [colorName, stops] of Object.entries(groups)) {
     stops.sort((a, b) => Number(a.stop) - Number(b.stop));
-    output.push(`#### ${colorName.charAt(0).toUpperCase() + colorName.slice(1)}`);
+    output.push(`#### ${capitalize(colorName)}`);
     output.push('');
     output.push('| Stop | Variable | Value |');
     output.push('| --- | --- | --- |');

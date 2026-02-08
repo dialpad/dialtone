@@ -6,7 +6,7 @@
  */
 
 import { readFileSync } from 'node:fs';
-import { escapeTableCell, slugToPascalComponentName } from './utils.mjs';
+import { escapeTableCell, codeCell, slugToPascalComponentName } from './utils.mjs';
 
 let _componentDocData = null;
 
@@ -87,10 +87,6 @@ export function transformVueApi (componentName) {
   }
 
   const output = [];
-
-  // Values wrapped in backticks don't need pipe escaping — GFM processes
-  // code spans before pipe splitting, so pipes inside are literal.
-  const codeCell = (text) => (text || '').replace(/\s+/g, ' ').trim();
 
   const props = component.props ? Object.values(component.props) : [];
   output.push(...buildApiTable('Props', props, ['Name', 'Description', 'Type', 'Default'], (prop) => {
