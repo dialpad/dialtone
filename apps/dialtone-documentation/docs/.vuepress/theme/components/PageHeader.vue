@@ -141,37 +141,37 @@
             <span class="d-btn__label">GitHub</span>
           </a>
           <span class="d-pl8">
-            <dt-dropdown navigation-type="arrow-keys" placement="bottom-end">
-              <template #anchor="{ attrs }">
-                <dt-button v-bind="attrs" size="sm" importance="outlined" kind="muted" icon-position="right">
-                  <dt-stack direction="row" gap="350">
-                    <dt-icon
-                      :name="showCopiedIcon ? 'check' : 'copy'"
-                      size="200"
-                      :class="{ 'd-fc-success': showCopiedIcon }"
-                    />
-                    Copy
-                  </dt-stack>
-                  <template #icon>
-                    <dt-icon
-                      name="chevron-down"
-                      size="200"
-                    />
-                  </template>
-                </dt-button>
+            <dt-split-button
+              size="sm"
+              importance="outlined"
+              kind="muted"
+              omega-tooltip-text="More options"
+              alpha-aria-label="Copy Markdown"
+              @alpha-clicked="onCopyAsMarkdown()"
+            >
+              <template #alphaIcon>
+                <dt-icon
+                  :name="showCopiedIcon ? 'check' : 'copy'"
+                  size="200"
+                  :class="{ 'd-fc-success': showCopiedIcon }"
+                />
               </template>
-              <template #list="{ close }">
+              Copy MD
+              <template #dropdownList="{ close }">
                 <dt-list-item-group>
                   <dt-list-item
-                    v-if="rawMarkdownUrl"
                     role="menuitem"
                     navigation-type="arrow-keys"
-                    @click="onCopyAsMarkdown(close)"
+                    @click="onCopyMarkdownLink(close)"
                   >
-                    Copy as Markdown
-                  </dt-list-item>
-                  <dt-list-item role="menuitem" navigation-type="arrow-keys" @click="onCopyMarkdownLink(close)">
                     Copy Markdown link
+                  </dt-list-item>
+                  <dt-list-item
+                    role="menuitem"
+                    navigation-type="arrow-keys"
+                    @click="onDownloadAll(close)"
+                  >
+                    Download all
                   </dt-list-item>
                 </dt-list-item-group>
                 <dt-dropdown-separator />
@@ -182,7 +182,7 @@
                     navigation-type="arrow-keys"
                     @click="onViewAsMarkdown(close)"
                   >
-                    View Markdown
+                    Open as Markdown
                   </dt-list-item>
                   <dt-list-item
                     v-if="rawMarkdownUrl"
@@ -202,7 +202,7 @@
                   </dt-list-item>
                 </dt-list-item-group>
               </template>
-            </dt-dropdown>
+            </dt-split-button>
           </span>
         </dt-stack>
       </dt-stack>
@@ -246,7 +246,7 @@ function showCopiedFeedback () {
 }
 
 async function onCopyMarkdownLink (close) {
-  close();
+  close?.();
   try {
     const url = rawMarkdownUrl.value
       ? window.location.origin + rawMarkdownUrl.value
@@ -258,8 +258,21 @@ async function onCopyMarkdownLink (close) {
   }
 }
 
+function onDownloadAll (close) {
+  close?.();
+  const url = withBase('/llms-full.txt');
+  const date = new Date().toISOString().slice(0, 10);
+  const a = document.createElement('a');
+  a.style.display = 'none';
+  a.href = url;
+  a.download = `dialtone-complete-documentation--${date}.md`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
 async function onCopyAsMarkdown (close) {
-  close();
+  close?.();
   try {
     const res = await fetch(rawMarkdownUrl.value);
     if (!res.ok) {
@@ -297,7 +310,7 @@ const AI_CHAT_URLS = {
 };
 
 function openInAiChat (close, service) {
-  close();
+  close?.();
   const rawUrl = window.location.origin + rawMarkdownUrl.value;
   const prompt = `Read ${rawUrl} so I can ask questions about it.`;
   const base = AI_CHAT_URLS[service];
@@ -306,7 +319,7 @@ function openInAiChat (close, service) {
 }
 
 function onViewAsMarkdown (close) {
-  close();
+  close?.();
   if (rawMarkdownUrl.value) {
     window.open(rawMarkdownUrl.value, '_blank', 'noopener,noreferrer');
   }
