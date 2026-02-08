@@ -186,25 +186,6 @@ export const INLINE_HANDLERS = [
     closingTags: ['</FontUtilitiesNotice>', '</font-utilities-notice>'],
   },
 
-  // <ButtonVariantsTable /> or <button-variants-table>
-  {
-    match: (trimmed) =>
-      (trimmed.startsWith('<ButtonVariantsTable') || trimmed.startsWith('<button-variants-table'))
-        ? trimmed : null,
-    handle: () => [
-      '| | clear | outlined | primary |',
-      '| --- | --- | --- | --- |',
-      '| **default** — Our default button colors. | Default level of importance. Typically used for secondary or minimally important actions. | Slightly more important than clear, presenting a contrasting border and transparent background. | Highest level of importance, presenting a solid background color. |',
-      '| **danger** — Potentially destructive or otherwise critical actions. | clear danger | outlined danger | primary danger |',
-      '| **positive** — Used to communicate positive actions. | clear positive | outlined positive | primary positive |',
-      '| **inverted** — Use for placement on non-white, dark backgrounds. | clear inverted | outlined inverted | primary inverted |',
-      '| **muted** — For non-primary actions and contexts where base style may not work. | clear muted | outlined muted | N/A |',
-      '| **unstyled** — Raw button devoid of any style. | N/A | N/A | N/A |',
-      '',
-    ],
-    closingTags: ['</ButtonVariantsTable>', '</button-variants-table>'],
-  },
-
   // <all-tokens />
   {
     match: (trimmed) => trimmed.startsWith('<all-tokens') ? trimmed : null,
