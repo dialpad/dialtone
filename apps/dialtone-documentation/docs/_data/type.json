@@ -497,11 +497,11 @@
     "unset"
   ],
   "align": [
-    "left",
-    "right",
-    "center",
-    "justify",
-    "unset"
+    { "class": "left", "value": "start" },
+    { "class": "right", "value": "end" },
+    { "class": "center", "value": "center" },
+    { "class": "justify", "value": "justify" },
+    { "class": "unset", "value": "unset" }
   ],
   "lineClamp": [
     "1",

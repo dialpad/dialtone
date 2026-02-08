@@ -16,6 +16,7 @@ Use `d-bc-{color}` to set an element's border color.
   <dt-stack
     gap="500"
     :direction="{ 'default': 'column', 'md': 'row' }"
+    class="d-fw-wrap"
   >
     <div
       v-for="color in ['subtle', 'default', 'moderate', 'bold', 'critical', 'success', 'warning']"

@@ -44,8 +44,8 @@ Use `d-ta-{n}` to change an element's text alignment.
   <template #content>
     <tbody>
       <tr v-for="i in align">
-        <th class="d-code--sm d-docsite-code">.d-ta-{{ i }}</th>
-        <td class="d-code--sm">text-align: {{ i }} !important;</td>
+        <th class="d-code--sm d-docsite-code">.d-ta-{{ i.class }}</th>
+        <td class="d-code--sm">text-align: {{ i.value }} !important;</td>
       </tr>
     </tbody>
   </template>
