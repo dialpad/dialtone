@@ -383,8 +383,55 @@ function handleDtNoticeState (ctx) {
   ctx.accumulator.push(ctx.line);
 }
 
-function isRemovableLine (ctx) {
-  return isStandaloneVueComponentLine(ctx.trimmed) || isVueClosingTag(ctx.trimmed);
+/**
+ * Remove Vue component tags that may span multiple lines and contain inner content.
+ * Handles: orphaned closing tags, single-line self-closing tags, and multi-line
+ * opening tags (with or without inner content up to the matching closing tag).
+ */
+function tryRemoveVueComponent (ctx) {
+  // Orphaned closing tag — safety net
+  if (isVueClosingTag(ctx.trimmed)) return true;
+
+  // Must be a standalone Vue component opening tag
+  if (!isStandaloneVueComponentLine(ctx.trimmed)) return false;
+
+  // If the line is already a closing tag (handled above), skip
+  if (ctx.trimmed.startsWith('</')) return true;
+
+  // Single-line self-closing: <DtFoo ... />
+  if (ctx.trimmed.endsWith('/>')) return true;
+
+  // Single-line with closing tag on same line: <dt-foo>...</dt-foo>
+  const tagMatch = ctx.trimmed.match(/^<([a-zA-Z][a-zA-Z0-9-]*)/);
+  if (!tagMatch) return true;
+  const tagName = tagMatch[1];
+  const closingTag = `</${tagName}>`;
+
+  if (ctx.trimmed.includes('>') && ctx.trimmed.includes(closingTag)) return true;
+
+  // Multi-line: advance past attribute lines until we find the end of the opening tag
+  const openTagClosed = ctx.trimmed.includes('>');
+  if (!openTagClosed) {
+    while (ctx.i + 1 < ctx.lines.length) {
+      ctx.i++;
+      const nextTrimmed = ctx.lines[ctx.i].trim();
+      if (nextTrimmed.includes('>')) break;
+    }
+  }
+
+  // Check if the opening tag was self-closing (`/>`)
+  const currentTrimmed = ctx.lines[ctx.i].trim();
+  if (currentTrimmed.endsWith('/>') || currentTrimmed === '/>') return true;
+
+  // Not self-closing — advance past inner content until the matching closing tag
+  const closingTagLower = closingTag.toLowerCase();
+  while (ctx.i + 1 < ctx.lines.length) {
+    ctx.i++;
+    const nextTrimmed = ctx.lines[ctx.i].trim();
+    if (nextTrimmed.toLowerCase().startsWith(closingTagLower)) break;
+  }
+
+  return true;
 }
 
 /**
@@ -403,7 +450,7 @@ const NORMAL_DETECTORS = [
   tryDetectHtmlTable,
   tryInlineHandlers,
   tryDetectDtNotice,
-  isRemovableLine,
+  tryRemoveVueComponent,
 ];
 
 /**
