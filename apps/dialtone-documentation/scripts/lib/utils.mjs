@@ -72,6 +72,7 @@ const HANDLED_COMPONENTS = new Set([
   'flexstacknotice',
   'fontutilitiesnotice',
   'buttonvariantstable',
+  'dt-notice',
 ]);
 
 export function isStandaloneVueComponentLine (line) {

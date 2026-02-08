@@ -37,6 +37,7 @@ const S = {
   STYLE_BLOCK: 'STYLE_BLOCK',
   HTML_COMMENT: 'HTML_COMMENT',
   ICONS_BLOCK: 'ICONS_BLOCK',
+  DT_NOTICE: 'DT_NOTICE',
 };
 
 /**
@@ -290,6 +291,98 @@ function tryDetectFrontmatterStart (ctx) {
   return true;
 }
 
+// ── Kind → GitHub alert mapping for dt-notice ────────────────────
+const NOTICE_KIND_MAP = {
+  warning: 'WARNING',
+  info: 'NOTE',
+  error: 'CAUTION',
+  success: 'TIP',
+  base: 'NOTE',
+};
+
+/**
+ * Extract the `kind` attribute from a (possibly partial) tag string.
+ */
+function extractNoticeKind (tagText) {
+  const m = tagText.match(/\bkind="([^"]*)"/);
+  return m ? m[1] : null;
+}
+
+/**
+ * Strip remaining inline HTML tags (but keep text content).
+ */
+function stripInlineHtml (text) {
+  return text.replace(/<[^>]*>/g, '').trim();
+}
+
+function tryDetectDtNotice (ctx) {
+  if (!ctx.trimmed.startsWith('<dt-notice')) return false;
+
+  // Collect the full opening tag (may span multiple lines)
+  let openTagText = ctx.trimmed;
+  let openTagClosed = openTagText.includes('>');
+
+  if (!openTagClosed) {
+    // Multi-line opening tag — accumulate until we find the closing >
+    const tagLines = [ctx.trimmed];
+    while (!openTagClosed && ctx.i + 1 < ctx.lines.length) {
+      ctx.i++;
+      const nextTrimmed = ctx.lines[ctx.i].trim();
+      tagLines.push(nextTrimmed);
+      if (nextTrimmed.includes('>')) {
+        openTagClosed = true;
+      }
+    }
+    openTagText = tagLines.join(' ');
+  }
+
+  const kind = extractNoticeKind(openTagText) || 'base';
+  ctx.noticeKind = kind;
+  ctx.accumulator = [];
+  ctx.state = S.DT_NOTICE;
+  return true;
+}
+
+// ── State handler: DT_NOTICE ──────────────────────────────────────
+function handleDtNoticeState (ctx) {
+  if (ctx.trimmed === '</dt-notice>' || ctx.trimmed.startsWith('</dt-notice>')) {
+    // Process accumulated content
+    const alertType = NOTICE_KIND_MAP[ctx.noticeKind] || 'NOTE';
+    const filtered = ctx.accumulator
+      .filter(l => {
+        const t = l.trim();
+        // Skip <template #default> and </template> wrappers
+        if (t.match(/^<template\b/)) return false;
+        if (t === '</template>') return false;
+        return true;
+      });
+
+    // Join all content, convert router-links (which may span lines), then strip HTML
+    const joined = filtered.join('\n');
+    const withLinks = convertRouterLinks(joined);
+    const cleaned = stripInlineHtml(withLinks);
+
+    // Collapse whitespace within each paragraph but preserve blank-line paragraph breaks
+    const paragraphs = cleaned.split(/\n\s*\n/).map(p => p.replace(/\s+/g, ' ').trim()).filter(Boolean);
+    const content = paragraphs.join('\n\n');
+
+    if (content) {
+      ctx.output.push(`> [!${alertType}]`);
+      for (const line of content.split('\n')) {
+        const trimmedLine = line.trim();
+        ctx.output.push(trimmedLine ? `> ${trimmedLine}` : '>');
+      }
+      ctx.output.push('');
+    }
+
+    ctx.accumulator = [];
+    ctx.state = S.NORMAL;
+    return;
+  }
+
+  ctx.accumulator.push(ctx.line);
+}
+
 function isRemovableLine (ctx) {
   return isStandaloneVueComponentLine(ctx.trimmed) || isVueClosingTag(ctx.trimmed);
 }
@@ -309,6 +402,7 @@ const NORMAL_DETECTORS = [
   tryDetectDialtoneUsage,
   tryDetectHtmlTable,
   tryInlineHandlers,
+  tryDetectDtNotice,
   isRemovableLine,
 ];
 
@@ -337,6 +431,7 @@ const STATE_HANDLERS = {
   [S.CODE_EXAMPLE_TABS]: handleCodeExampleTabsState,
   [S.DIALTONE_USAGE]: handleDialtoneUsageState,
   [S.HTML_TABLE]: handleHtmlTableState,
+  [S.DT_NOTICE]: handleDtNoticeState,
 };
 
 /**
