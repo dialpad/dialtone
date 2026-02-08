@@ -27,7 +27,7 @@ dist
 out
 coverage
 
-# Generated raw markdown for component docs #
+# Generated raw markdown and LLM discovery files #
 apps/dialtone-documentation/docs/.vuepress/public/md/
 apps/dialtone-documentation/docs/.vuepress/public/llms.txt
 apps/dialtone-documentation/docs/.vuepress/public/llms-full.txt

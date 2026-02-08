@@ -262,6 +262,10 @@ async function onCopyAsMarkdown (close) {
   close();
   try {
     const res = await fetch(rawMarkdownUrl.value);
+    if (!res.ok) {
+      console.error(`Failed to fetch markdown: ${res.status} ${res.statusText}`);
+      return;
+    }
     const text = await res.text();
     await navigator.clipboard.writeText(text);
     showCopiedFeedback();
