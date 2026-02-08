@@ -412,7 +412,6 @@ vueCode='
 '
 showHtmlWarning />
 
-
 ### Positioned Components
 
 [Popovers](/components/popover.html), [Dropdowns](/components/dropdown.html), and [Hovercards](/components/hovercard.html) are typically rendered at the root element of the DOM tree, and thus inherit the page's mode by default. They can be forced to a specific mode by assigning a Mode Island to its content slot.

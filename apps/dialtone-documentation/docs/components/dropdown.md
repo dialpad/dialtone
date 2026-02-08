@@ -342,7 +342,7 @@ vueCode='
 
 ## Vue API
 
-<component-vue-api component-name="dropdown" />
+<component-vue-api component-name="dropdown" :also-import="['dropdownseparator']" />
 
 ## Accessibility
 

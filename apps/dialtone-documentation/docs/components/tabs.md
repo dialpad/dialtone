@@ -337,15 +337,15 @@ showHtmlWarning />
 
 ### Tab Group
 
-<component-vue-api component-name="tabgroup" />
+<component-vue-api component-name="tabgroup" :also-import="['tab', 'tabpanel']" />
 
 ### Tab Panel
 
-<component-vue-api component-name="tabpanel" />
+<component-vue-api component-name="tabpanel" :show-import="false" />
 
 ### Tab
 
-<component-vue-api component-name="tab" />
+<component-vue-api component-name="tab" :show-import="false" />
 
 ## Classes
 
