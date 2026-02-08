@@ -88,12 +88,16 @@ const docSlots = componentDocs.find(f => isSameComponentName(f.displayName))
   });
 
 const resolveDefaultValue = (rawDefault, values) => {
-  if (!rawDefault || !values?.length) return rawDefault;
+  if (!rawDefault) return rawDefault;
+  if (rawDefault === 'undefined') return null;
+  if (/getUniqueString\(\)/.test(rawDefault)) return 'generated unique ID';
+  if (!values?.length) return rawDefault;
   // Match constant references like DT_MODE_ISLAND_TYPES.INVERTED
   const match = rawDefault.match(/^[A-Z][A-Z_]*\.[A-Z][A-Z_]*$/);
   if (!match) return rawDefault;
   const key = rawDefault.split('.')[1].toLowerCase().replace(/_/g, '-');
-  return values.find(v => v === key || v === key.replace(/-/g, '_')) ?? rawDefault;
+  return values.find(v => v === key || v === key.replace(/-/g, '_'))
+    ?? (key === 'none' && values.includes('null') ? 'null' : rawDefault);
 };
 
 const docProps = componentDocs.find(f => isSameComponentName(f.displayName))
