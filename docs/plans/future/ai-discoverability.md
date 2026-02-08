@@ -27,7 +27,7 @@ Extend the Dialtone MCP server to serve documentation content — usage guidance
 - AI assistant can answer "what's the voice and tone for error messages?" (not possible today)
 - AI assistant can retrieve any of the 208 doc pages through a tool call
 - Existing MCP server tests continue to pass
-- No additional runtime network dependency (docs bundled at build time)
+- No additional runtime network dependency for documentation access (docs bundled at build time)
 
 ## Constraints & Guardrails
 
@@ -45,8 +45,10 @@ Extend the Dialtone MCP server to serve documentation content — usage guidance
 
 **Key Risks:**
 
-- Large doc pages exceeding tool output limits: Mitigate by truncating with a "continued" indicator and offset parameter
+- Large doc pages exceeding tool output limits: Mitigate by returning an error with page size info for oversized pages; consider truncation only if this proves insufficient in practice
 - Stale bundled docs after design system updates: Mitigate by tying the bundle step to the existing NX build pipeline
+- Increased npm package size: Bundling ~1.8MB of markdown into the MCP server package will significantly increase download/install size; acceptable given the value, but worth monitoring
+- Build pipeline ordering: MCP server's `project.json` currently depends on `dialtone-css:build` and `dialtone-vue:build` only — a new dependency on docs app build output must be added explicitly
 
 ## Background: What Exists Today
 
@@ -104,9 +106,13 @@ The `llms.txt` file already serves as the index. Each raw markdown file is a sel
 ### Phase 2: Documentation Tools in MCP Server
 
 1. **Bundle raw markdown into the MCP server package**
-   - What: Add a build step that copies the generated `md/` directory and `llms.txt` into a JSON map (`docs-corpus.json`) keyed by relative path
+   - What: Add a build step that generates a JSON map (`docs-corpus.json`) from the `md/` directory and `llms.txt`, keyed by relative path, with pre-extracted title and description per page
    - Why: The server must work offline without network access to the docs site
-   - Considerations: Must run after `generate-raw-markdown.mjs` in the NX dependency graph; keep the JSON map as a build artifact, not checked into source
+   - Approach options (decide before coding):
+     - **Option A (recommended):** Build script in MCP server package generates JSON, imported via `with { type: 'json' }` like existing data sources in `data.ts`. Rollup's `@rollup/plugin-json` inlines it at build time.
+     - **Option B:** Import directly from docs app package (`@dialpad/dialtone-documentation/public/md/...`). Cleaner dependency but requires cross-package import path.
+     - **Option C:** Generate a `.ts` module with exported string literals. Avoids JSON parsing overhead at runtime.
+   - Considerations: Must run after `generate-raw-markdown.mjs` in the NX dependency graph; keep the JSON map as a build artifact, not checked into source; `package.json` `"files": ["build"]` means output must end up in `build/`
    - Dependencies: None (raw markdown pipeline is complete)
 
 2. **Add `list_docs` tool**
@@ -117,13 +123,14 @@ The `llms.txt` file already serves as the index. Each raw markdown file is a sel
 3. **Add `search_docs` tool**
    - What: Full-text keyword search across all 208 markdown files, returns top N matches with surrounding context snippets
    - Why: Lets the LLM find relevant pages without knowing exact paths
-   - Considerations: Simple substring/regex matching is sufficient for 208 files; return path, title, and a ~200-word snippet per match; default limit of 10 results
+   - Considerations: Case-insensitive substring matching (consistent with existing tools which use `.toLowerCase()`); search body content only (not frontmatter metadata); return path, title, and a ~200-word context snippet per match; default limit of 10 results (matches `search_components` default)
+   - Snippet extraction: Find the first match position, expand to surrounding paragraph boundaries (or ±100 words), highlight the match context
    - Dependencies: Step 1 (corpus must be bundled)
 
 4. **Add `get_doc_page` tool**
    - What: Returns the full markdown content of a single page by path (e.g., `components/button.md`)
    - Why: Lets the LLM read complete usage guidance, examples, and variant documentation
-   - Considerations: Most pages are well under 25K tokens; for oversized pages, truncate with a note and support an `offset` parameter for continuation
+   - Considerations: Most pages are well under 25K tokens; for oversized pages, return an error with the page size so the LLM can use `search_docs` to target specific sections instead. Avoid offset-based pagination — splitting markdown breaks rendering context (examples reference earlier sections, code blocks span headings). Revisit pagination only if oversized pages prove to be a real problem in practice.
    - Dependencies: Step 1 (corpus must be bundled)
 
 5. **Register tools with descriptive schemas**
@@ -137,18 +144,75 @@ The `llms.txt` file already serves as the index. Each raw markdown file is a sel
    - Considerations: Example rule: "For how/when/why questions, use `search_docs` or `get_doc_page`; for what-is-the-prop-name questions, use `search_components`"
 
 7. **Add tests for new tools**
-   - What: Add test cases to the existing test suite (currently 77 tests) covering search, fetch, edge cases (missing page, empty query, large page truncation)
+   - What: Add test cases covering search, fetch, edge cases (missing page, empty query, oversized page error)
+   - Note: The current "test suite" is `test-search.js`, a standalone validation script (not a unit test framework like Vitest/Jest). Decision needed: extend the existing script (pragmatic, follows current pattern) or introduce a proper test runner (more robust, adds setup scope).
    - Dependencies: Steps 2-4
 
 8. **Wire into NX build pipeline**
    - What: Add the corpus bundling step as a dependency of the MCP server's build target in `project.json`
    - Why: Ensures `npm run build` for the MCP server always picks up the latest docs
-   - Considerations: The docs app's `generate-raw-markdown` must run before the MCP server's bundle step
+   - Concrete change: MCP server's `project.json` `dependsOn` currently lists `["dialtone-css:build", "dialtone-vue:build"]` — must add `"dialtone-documentation:generate-raw-markdown"` (or `"dialtone-documentation:build"`) to ensure markdown exists before bundling
+   - Considerations: This introduces a new cross-package dependency; verify it doesn't create a circular dependency in the NX graph
    - Dependencies: Step 1
 
 9. **Update MCP server documentation**
    - What: Update `packages/dialtone-mcp-server/README.md` with new tool descriptions and examples; fill in the placeholder guide at `docs/guides/mcp-server/index.md`
    - Dependencies: Steps 2-6
+
+### Phase 3: Automated Tests for the Pipeline
+
+**Test fixtures:** Create a `test/fixtures/` directory with minimal JSON mocks (`component-documentation.json`, `dialtone-docs.json`, `site-nav.json`) and small source doc files. Keep fixtures self-contained so tests don't depend on live data that changes with design system updates.
+
+**Testing strategy:** Assert semantic properties (presence of headings, no HTML tags, valid GFM structure) rather than exact output strings—this reduces brittleness when formatting changes.
+
+#### 3a — Core Pipeline (Priority: High)
+
+1. **Unit tests for parseSourceMarkdown**
+    - What: Test the core parser with fixtures containing frontmatter, `<code-example-tabs>`, `<dialtone-usage>`, `<component-vue-api>`, `<utility-class-table>`, `<table>` with nested Vue components
+    - Why: These transforms are intricate; bugs show up as subtle doc regressions or broken LLM inputs
+    - Considerations: Use small inline fixture strings, not full doc pages; test each transform in isolation
+    - Include: State machine transitions (fenced code priority, nested states), quote tracking in `inSingleQuoteAttr` (edge case: `/>` inside quoted attribute values)
+
+2. **Unit tests for HTML table transform**
+    - What: Test `transformHtmlTable` with colspan, nested content, and rows containing only stripped Vue components
+    - Why: HTML tables are the most complex transform, with multi-cell spans and empty-after-stripping rows
+
+3. **Unit tests for link rewriting**
+    - What: Test `rewriteAbsoluteLinks` / `resolveRawLink` with a matrix of paths (`/components/x.html#anchor`, `/guides/getting-started/`, `/assets/image.png`, cross-section links)
+    - Why: Link rewriting has many edge cases (anchors, extensions, section boundaries)
+    - Include: External links (pass through unchanged), asset paths (unchanged), cross-section links (components → utilities)
+
+#### 3b — Inline Component Handlers (Priority: Medium)
+
+4. **Unit tests for component handlers** (`component-handlers.mjs`)
+    - What: Test the 14 inline handlers (`<component-vue-api>`, `<component-class-table>`, `<component-accessible-table>`, `<DesignColorTable>`, `<ThemeColorTable>`, `<ColorsCatalog>`, `<FlexStackNotice>`, `<FontUtilitiesNotice>`, `<ButtonVariantsTable>`, `<all-tokens>`, `<icon-catalog>`, etc.) with mock JSON data
+    - Why: Each handler has complex attribute parsing and data lookups; currently untested
+    - Include: Missing component graceful handling, malformed attributes
+
+5. **Unit tests for cleanup/normalization functions**
+    - What: Test `cleanupOutput` (collapse 3+ blank lines, trim trailing whitespace), `escapeTableCell` (escape pipes but not inside backticks), `stripHtmlTags`, `convertRouterLinks`
+    - Why: Small utility functions with edge cases that are easy to cover and catch regressions early
+
+#### 3c — Integration & Specialized Transforms (Priority: Medium-Low)
+
+6. **Unit tests for typography post-processing**
+    - What: Test `postProcessTypography` with mock `type.json` data; assert `{{ varName }}` / `{{ output }}` replacement and category table insertion at correct positions
+    - Why: Regex-based transforms prone to subtle bugs, specific to one file but high-value output
+
+7. **Unit tests for index generation logic**
+    - What: Test `generateFlatIndex`, `appendSiblingLinks`, `appendNavLinks`, `appendOverviewLinks` with mock nav tree and filesystem
+    - Why: Navigation tree walking has section-specific behavior (flat vs. recursive, nav-linked vs. filesystem-linked)
+
+8. **Smoke test for the full generator**
+    - What: Copy a small fixture subset of docs into a temp dir, run `generate-raw-markdown.mjs` against it, assert key output files and llms.txt look sane
+    - Why: Catches regressions in filesystem assumptions, nav linking, and output structure without testing every transform
+    - Considerations: Keep fixtures minimal (~5-10 files across 2-3 sections); include at least one file per section type; assert file count, presence of key headings, no HTML tags in output
+
+#### 3d — Error Cases & Hardening (Priority: Low)
+
+9. **Error case tests**
+    - What: Malformed HTML tables (unclosed tags, mismatched nesting), missing data sources (`component-documentation.json` absent), invalid frontmatter (malformed YAML), broken Vue component attributes (missing closing quote in `vueCode='...'`)
+    - Why: Ensures graceful degradation rather than silent corruption of output
 
 ## Phase Completion Summaries
 
@@ -181,17 +245,56 @@ The `llms.txt` file already serves as the index. Each raw markdown file is a sel
 
 - None
 
+## Peer Review (2026-02-07)
+
+Feedback received post-Phase 1. Decisions and actions taken:
+
+| Item | Severity | Action | Rationale |
+| --- | --- | --- | --- |
+| Monolithic `generate-raw-markdown.mjs` | major | Partial — extracted llms generation into `scripts/lib/generate-llms.mjs` | Transforms were already in 14 modules. Separate CLIs add build complexity for no gain at current scale. Llms generation is the one distinct concern worth splitting. |
+| `.html` link bug in `appendNavChildLinks` | major | Fixed — added `navLinkToStem()` helper that strips `.html` before appending `.md` | Real bug: silently skipped all nav-driven page links for utilities. Impact was masked by filesystem-based linking covering the same pages. |
+| `onCopyAsMarkdown` missing `res.ok` check | minor | Fixed — added early return on non-OK response | Prevented silently copying 404/500 HTML to clipboard. |
+| Null guard on `rawMarkdownUrl` | minor | Declined | The `v-if` template guard is the correct pattern. Adding internal null checks for hypothetical future misuse is over-engineering. |
+| `RAW_SECTIONS` duplicated in PageHeader.vue and utils.mjs | minor | Declined | Different data shapes (URL path prefixes vs. section name strings). Coupling a Vue component to a Node build script to save 2 lines that rarely change isn't worth it. |
+| `.gitignore` comment outdated | nit | Fixed | Updated "component docs" to "raw markdown and LLM discovery files". |
+| No automated tests | major | Planned — added as Phase 3 | Unit tests for transforms and a smoke test are the right next investment. Expanded from 4 to 9 test areas after review. |
+| Repeated page-listing patterns | minor | Declined | Filesystem discovery, nav-driven categorization, and llms.txt hierarchy have different inputs and semantics. A shared abstraction would be more complex than the duplication. |
+
 ## Open Questions
 
-- [ ] Should `search_docs` use simple substring matching or a lightweight scoring algorithm (e.g., TF-IDF)?
-- [ ] Should the corpus JSON map include pre-extracted titles/descriptions, or parse them at query time?
-- [ ] What is the right default result limit for `search_docs`? (10? 5?)
-- [ ] Should `get_doc_page` support section-level retrieval (e.g., `components/button.md#variants`) or always return full pages?
-- [ ] Version the corpus bundle separately from the MCP server, or release together?
+**Resolved:**
+
+- [x] Should `search_docs` use simple substring matching or a lightweight scoring algorithm (e.g., TF-IDF)? → **Substring matching.** Consistent with existing tools (`search_components`, `search_utility_classes` all use `.toLowerCase()` substring matching). TF-IDF is overkill for 208 files.
+- [x] Should the corpus JSON map include pre-extracted titles/descriptions, or parse them at query time? → **Pre-extract.** `llms.txt` already has titles and descriptions; parsing frontmatter at query time is wasteful.
+- [x] What is the right default result limit for `search_docs`? (10? 5?) → **10.** Matches `search_components` default. Doc snippets are longer than structured API data, so fewer results per query is appropriate.
+- [x] Should `get_doc_page` support section-level retrieval (e.g., `components/button.md#variants`) or always return full pages? → **Full pages only, initially.** Heading-based splitting breaks context (examples reference earlier sections, code blocks span headings). If oversized pages prove problematic, revisit.
+- [x] Version the corpus bundle separately from the MCP server, or release together? → **Release together.** `package.json` publishes `build/` as a single artifact; a separate package adds installation complexity for no practical gain.
+
+**Still open:**
+
+- [ ] Which bundling approach for Step 1? (Option A: generated JSON with `import ... with { type: 'json' }`, Option B: cross-package import, Option C: generated `.ts` module)
+- [ ] Should Step 7 tests extend the existing `test-search.js` validation script or introduce a proper test runner (Vitest/Jest)?
+- [ ] What is the acceptable npm package size increase? (Currently small; will grow by ~1.8MB)
+
+## Rollback Strategy
+
+If Phase 2 introduces regressions for existing MCP server consumers:
+
+- New tools (`list_docs`, `search_docs`, `get_doc_page`) are additive — they can be removed without affecting existing tool schemas or behavior
+- The corpus bundle is a separate data source from the four existing JSON imports — removing it has no side effects on existing tools
+- `client-rules.json` changes are advisory only and don't affect tool execution
+- Worst case: revert the MCP server to the pre-Phase 2 commit and publish a patch release
+
+## Performance Considerations
+
+- **Startup time:** A 1.8MB JSON corpus will be inlined into `build/index.js` by Rollup. JSON parse time for this size is typically <50ms — negligible for a server that starts once per session.
+- **Search latency:** Substring search across 208 files (~500K tokens total) is a single-pass operation. Expect <100ms per query even without indexing.
+- **Memory footprint:** The corpus will be held in memory for the server's lifetime. ~1.8MB of strings is well within acceptable limits for a long-running Node process.
 
 ## References
 
 - Raw markdown pipeline: `apps/dialtone-documentation/scripts/generate-raw-markdown.mjs`
+- LLM file generation: `apps/dialtone-documentation/scripts/lib/generate-llms.mjs`
 - MCP server package: `packages/dialtone-mcp-server/`
 - MCP server README: `packages/dialtone-mcp-server/README.md`
 - llms.txt spec: <https://llmstxt.org/>
