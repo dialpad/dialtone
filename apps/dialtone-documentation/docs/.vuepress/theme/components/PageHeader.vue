@@ -171,7 +171,7 @@
                     navigation-type="arrow-keys"
                     @click="onDownloadAll(close)"
                   >
-                    Download all
+                    Download full docs
                   </dt-list-item>
                 </dt-list-item-group>
                 <dt-dropdown-separator />
