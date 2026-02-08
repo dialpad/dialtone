@@ -19,7 +19,7 @@ pageClass: dialpad-design-home
     <dt-stack style="filter: drop-shadow(rgba(0, 0, 0, 0.25) 0px 25px 30px);" class="d-w114">
       <svg-loader name="home--dialtone-badge" />
     </dt-stack>
-    <h2 class="d-headline--xxl d-ff-expressive d-wmx764" style="font-size: 48px;font-family:var(--dt-font-family-expressive); text-wrap: balance; max-width: 1400px;">Setting the tone.</h2>
+    <h2 class="d-headline--xxl d-ff-expressive d-wmx764" style="font-size: 48px;font-family:var(--dt-font-family-expressive); text-wrap: balance; max-width: 1400px; font-weight: var(--dt-font-weight-regular);">Setting the tone.</h2>
     <p class="d-ta-center d-docsite--paragraph d-m0 d-wmx764" style="text-wrap: balance; font-size: 24px; font-weight: 400;">Dialtone is Dialpad’s shared design language—shaping everything from our product interfaces to our marketing. It defines how our brand looks, feels, and behaves across every touchpoint. Built on principles of clarity, consistency, and accessibility, Dialtone keeps our visual identity cohesive and unmistakably Dialpad.</p>
   </dt-stack>
   <dt-stack gap="700" class="d-py64 d-px64 d-pt96 d-ai-center d-bgc-secondary-opaque">
@@ -38,17 +38,17 @@ pageClass: dialpad-design-home
       </router-link>
     </dt-stack>
     <dt-stack style="max-width: 1400px;" gap="550" class="d-ai-center d-jc-center">
-      <h2 class="d-headline--xxl d-ff-expressive" style="font-size: 48px;font-family:var(--dt-font-family-expressive); text-wrap: balance; max-width: 1400px;">Foundations</h2>
-      <p class="d-ta-center d-docsite--paragraph d-m0 d-wmx764" style="text-wrap: balance; font-size: 24px; font-family:var(--dt-font-family-expressive)">The building blocks of Dialtone... Color, Type, Icons, and more.</p>
+      <h2 class="d-headline--xxl d-ff-expressive" style="font-size: 48px;font-family:var(--dt-font-family-expressive); text-wrap: balance; max-width: 1400px; font-weight: var(--dt-font-weight-regular);">Foundations</h2>
+      <p class="d-ta-center d-docsite--paragraph d-m0 d-wmx764" style="text-wrap: balance; font-size: 24px; font-family:var(--dt-font-family-expressive);">The building blocks of Dialtone... Color, Type, Icons, and more.</p>
       <p class="d-ta-center d-docsite--paragraph d-m0 d-wmx764">
-        <dt-link href="./foundations/">
+        <router-link to="./foundations/">
           <dt-button size="lg" icon-position="right" @click="navigate">
             View Foundations
             <template #icon>
               <dt-icon name="arrow-right" size="300" />
             </template>
           </dt-button>
-        </dt-link>
+        </router-link>
       </p>
     </dt-stack>
   </dt-stack>
@@ -68,38 +68,38 @@ pageClass: dialpad-design-home
       </router-link>
     </dt-stack>
     <dt-stack style="max-width: 1400px" gap="550" class="d-ai-center d-jc-center">
-      <h2 class="d-headline--xxl d-ff-expressive" style="font-size: 48px;font-family:var(--dt-font-family-expressive); text-wrap: balance; max-width: 1400px;">Design System</h2>
+      <h2 class="d-headline--xxl d-ff-expressive" style="font-size: 48px;font-family:var(--dt-font-family-expressive); text-wrap: balance; max-width: 1400px; font-weight: var(--dt-font-weight-regular);">Design System</h2>
       <p class="d-ta-center d-docsite--paragraph d-m0 d-wmx764" style="text-wrap: balance;  font-size: 24px; font-family:var(--dt-font-family-expressive)">Build with Dialtone Components, Design Tokens, CSS Utilities, and more.</p>
       <p class="d-ta-center d-docsite--paragraph d-m0 d-wmx764">
-        <dt-link href="./dialtone/">
+        <router-link to="./dialtone/">
           <dt-button size="lg" icon-position="right">
             View all Documentation
             <template #icon>
               <dt-icon name="arrow-right" size="300" />
             </template>
           </dt-button>
-        </dt-link>
+        </router-link>
       </p>
     </dt-stack>
   </dt-stack>
   <dt-stack gap="700" class="d-py64 d-px64 d-pt96 d-ai-center">
     <dt-stack style="max-width: 1400px" gap="550" class="d-ai-center">
-      <h2 class="d-headline--xxl d-ff-expressive" style="font-size: 48px;font-family:var(--dt-font-family-expressive); text-wrap: balance; max-width: 1400px;">What's New</h2>
+      <h2 class="d-headline--xxl d-ff-expressive" style="font-size: 48px;font-family:var(--dt-font-family-expressive); text-wrap: balance; max-width: 1400px; font-weight: var(--dt-font-weight-regular);">What's New</h2>
       <p class="d-ta-center d-docsite--paragraph d-m0 d-wmx764" style="text-wrap: balance; font-size: 24px; font-family:var(--dt-font-family-expressive)">The latest from Dialpad Design.</p>
       <p class="d-ta-center d-docsite--paragraph d-m0 d-wmx764">
-        <dt-link href="./dialtone/whats-new/">
+        <router-link to="./dialtone/whats-new/">
           <dt-button size="lg" icon-position="right">
             View all
             <template #icon>
               <dt-icon name="arrow-right" size="300" />
             </template>
           </dt-button>
-        </dt-link>
+        </router-link>
       </p>
     </dt-stack>
     <dt-stack style="max-width: 1400px" direction="row" gap="600" class="d-w100p d-ai-flex-start d-jc-center">
       <dt-stack class="d-w100p">
-        <p class="d-docsite--paragraph d-m0">
+        <p class="d-docsite--paragraph d-fs-300 d-m0">
           <dt-link href="#link-to-" class=" d-d-block">
             <dt-stack gap="500">
               <img class="d-bar16 d-d-block d-w100p" src="/assets/images/placeholder-home-blog--01.png" alt="">
@@ -109,7 +109,7 @@ pageClass: dialpad-design-home
         </p>
       </dt-stack>
       <dt-stack class="d-w100p">
-        <p class="d-docsite--paragraph d-m0">
+        <p class="d-docsite--paragraph d-fs-300 d-m0">
           <dt-link href="#link-to-" class=" d-d-block">
             <dt-stack gap="500">
               <img class="d-bar16 d-d-block d-w100p" src="/assets/images/placeholder-home-blog--02.png" alt="">
@@ -119,7 +119,7 @@ pageClass: dialpad-design-home
         </p>
       </dt-stack>
       <dt-stack class="d-w100p">
-        <p class="d-docsite--paragraph d-m0">
+        <p class="d-docsite--paragraph d-fs-300 d-m0">
           <dt-link href="#link-to-" class=" d-d-block">
             <dt-stack gap="500">
               <img class="d-bar16 d-d-block d-w100p" src="/assets/images/placeholder-home-blog--03.png" alt="">
