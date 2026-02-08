@@ -343,37 +343,48 @@ function tryDetectDtNotice (ctx) {
   return true;
 }
 
+/**
+ * Convert dt-notice template content into GFM alert lines.
+ * @param {string} openingTag - The <dt-notice ...> opening tag (for kind extraction)
+ * @param {string[]} bodyLines - Lines between <dt-notice> and </dt-notice>
+ * @returns {string[]} - GFM alert markdown lines
+ */
+export function transformDtNotice (openingTag, bodyLines) {
+  const kind = extractNoticeKind(openingTag) || 'base';
+  const alertType = NOTICE_KIND_MAP[kind] || 'NOTE';
+
+  const filtered = bodyLines.filter(l => {
+    const t = l.trim();
+    if (t.match(/^<template\b/)) return false;
+    if (t === '</template>') return false;
+    return true;
+  });
+
+  const joined = filtered.join('\n');
+  const withLinks = convertRouterLinks(joined);
+  const cleaned = stripInlineHtml(withLinks);
+  const paragraphs = cleaned.split(/\n\s*\n/)
+    .map(p => p.replace(/\s+/g, ' ').trim())
+    .filter(Boolean);
+  const content = paragraphs.join('\n\n');
+
+  if (!content) return [];
+  const lines = [`> [!${alertType}]`];
+  for (const line of content.split('\n')) {
+    const trimmedLine = line.trim();
+    lines.push(trimmedLine ? `> ${trimmedLine}` : '>');
+  }
+  lines.push('');
+  return lines;
+}
+
 // ── State handler: DT_NOTICE ──────────────────────────────────────
 function handleDtNoticeState (ctx) {
   if (ctx.trimmed === '</dt-notice>' || ctx.trimmed.startsWith('</dt-notice>')) {
-    // Process accumulated content
-    const alertType = NOTICE_KIND_MAP[ctx.noticeKind] || 'NOTE';
-    const filtered = ctx.accumulator
-      .filter(l => {
-        const t = l.trim();
-        // Skip <template #default> and </template> wrappers
-        if (t.match(/^<template\b/)) return false;
-        if (t === '</template>') return false;
-        return true;
-      });
-
-    // Join all content, convert router-links (which may span lines), then strip HTML
-    const joined = filtered.join('\n');
-    const withLinks = convertRouterLinks(joined);
-    const cleaned = stripInlineHtml(withLinks);
-
-    // Collapse whitespace within each paragraph but preserve blank-line paragraph breaks
-    const paragraphs = cleaned.split(/\n\s*\n/).map(p => p.replace(/\s+/g, ' ').trim()).filter(Boolean);
-    const content = paragraphs.join('\n\n');
-
-    if (content) {
-      ctx.output.push(`> [!${alertType}]`);
-      for (const line of content.split('\n')) {
-        const trimmedLine = line.trim();
-        ctx.output.push(trimmedLine ? `> ${trimmedLine}` : '>');
-      }
-      ctx.output.push('');
-    }
+    // Build the opening tag string for kind extraction
+    const openingTag = `<dt-notice kind="${ctx.noticeKind}">`;
+    const result = transformDtNotice(openingTag, ctx.accumulator);
+    ctx.output.push(...result);
 
     ctx.accumulator = [];
     ctx.state = S.NORMAL;
@@ -483,12 +494,13 @@ const STATE_HANDLERS = {
 
 /**
  * Convert inline <router-link to="...">text</router-link> to markdown links.
+ * Uses dotAll flag to handle router-link tags that span multiple lines.
  */
 function convertRouterLinks (line) {
   if (!line.includes('<router-link')) return line;
   return line.replace(
-    /<router-link\b[^>]*\bto="([^"]*)"[^>]*>(.*?)<\/router-link>/g,
-    '[$2]($1)',
+    /<router-link\b[^>]*\bto="([^"]*)"[^>]*>(.*?)<\/router-link>/gs,
+    (_, url, text) => `[${text.replace(/\s+/g, ' ').trim()}](${url})`,
   );
 }
 
