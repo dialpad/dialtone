@@ -68,7 +68,15 @@ export const INLINE_HANDLERS = [
   // <component-vue-api component-name="X" />
   {
     match: (trimmed) => trimmed.match(/<component-vue-api\s+component-name="([^"]+)"/),
-    handle: (m) => transformVueApi(m[1]),
+    handle: (m, ctx) => {
+      const tag = ctx.trimmed;
+      const showImport = !tag.includes(':show-import="false"');
+      const alsoMatch = tag.match(/:also-import="\[([^\]]*)\]"/);
+      const alsoImport = alsoMatch
+        ? alsoMatch[1].split(',').map(s => s.trim().replace(/^'|'$/g, ''))
+        : [];
+      return transformVueApi(m[1], { showImport, alsoImport });
+    },
     closingTags: ['</component-vue-api>'],
   },
 

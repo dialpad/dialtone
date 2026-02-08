@@ -78,15 +78,30 @@ function buildApiTable (heading, items, headers, formatRow) {
 /**
  * Generate markdown tables for a component's Vue API.
  * @param {string} componentName - kebab-case name, e.g. "avatar"
+ * @param {object} [options]
+ * @param {boolean} [options.showImport=true] - Whether to render the import statement
+ * @param {string[]} [options.alsoImport=[]] - Additional component names to include in the import
  * @returns {string[]} - Output markdown lines
  */
-export function transformVueApi (componentName) {
+export function transformVueApi (componentName, { showImport = true, alsoImport = [] } = {}) {
   const component = findComponent(componentName);
   if (!component) {
     return [`<!-- Vue API data not found for "${componentName}" -->`];
   }
 
   const output = [];
+
+  if (showImport) {
+    const names = [component.displayName];
+    for (const name of alsoImport) {
+      const entry = findComponent(name);
+      if (entry) names.push(entry.displayName);
+    }
+    output.push('```js');
+    output.push(`import { ${names.join(', ')} } from '@dialpad/dialtone-vue';`);
+    output.push('```');
+    output.push('');
+  }
 
   const props = component.props ? Object.values(component.props) : [];
   output.push(...buildApiTable('Props', props, ['Name', 'Description', 'Type', 'Default'], (prop) => {

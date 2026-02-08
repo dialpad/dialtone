@@ -275,7 +275,7 @@ function tryInlineHandlers (ctx) {
   for (const handler of INLINE_HANDLERS) {
     const m = handler.match(ctx.trimmed);
     if (m) {
-      ctx.output.push(...handler.handle(m, ctx.handlerCtx));
+      ctx.output.push(...handler.handle(m, { ...ctx.handlerCtx, trimmed: ctx.trimmed }));
       ctx.i = consumeUntilClose(ctx.lines, ctx.i, ctx.trimmed, ...handler.closingTags);
       return true;
     }
