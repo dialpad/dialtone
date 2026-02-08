@@ -46,9 +46,11 @@
           >
             <th scope="row">
               <dt-stack gap="300">
-                <code class="d-code--sm d-docsite-code">
-                  {{ name }}
-                </code>
+                <span>
+                  <code class="d-code--sm d-docsite-code">
+                    {{ name }}
+                  </code>
+                </span>
                 <div
                   v-if="required"
                   class="d-fc-critical d-fw-normal"
