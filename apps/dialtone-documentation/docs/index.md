@@ -97,36 +97,28 @@ pageClass: dialpad-design-home
         </router-link>
       </p>
     </dt-stack>
-    <dt-stack style="max-width: 1400px" direction="row" gap="600" class="d-w100p d-ai-flex-start d-jc-center">
-      <dt-stack class="d-w100p">
-        <p class="d-docsite--paragraph d-fs-300 d-m0">
-          <dt-link href="#link-to-" class=" d-d-block">
-            <dt-stack gap="500">
-              <img class="d-bar16 d-d-block d-w100p" src="/assets/images/placeholder-home-blog--01.png" alt="">
-              <span>Replacing Hard-Coded or Base tokens for Chart Tokens</span>
-            </dt-stack>
-          </dt-link>
-        </p>
-      </dt-stack>
-      <dt-stack class="d-w100p">
-        <p class="d-docsite--paragraph d-fs-300 d-m0">
-          <dt-link href="#link-to-" class=" d-d-block">
-            <dt-stack gap="500">
-              <img class="d-bar16 d-d-block d-w100p" src="/assets/images/placeholder-home-blog--02.png" alt="">
-              <span>Breaking change in postcss-responsive-variations plugin</span>
-            </dt-stack>
-          </dt-link>
-        </p>
-      </dt-stack>
-      <dt-stack class="d-w100p">
-        <p class="d-docsite--paragraph d-fs-300 d-m0">
-          <dt-link href="#link-to-" class=" d-d-block">
-            <dt-stack gap="500">
-              <img class="d-bar16 d-d-block d-w100p" src="/assets/images/placeholder-home-blog--03.png" alt="">
-              <span>Vue 3 input components v-model breaking change</span>
-            </dt-stack>
-          </dt-link>
-        </p>
+    <dt-stack
+      style="max-width: 1400px"
+      gap="600"
+      class="d-w100p"
+      align="start"
+      justify="center"
+      :direction="{ 'default': 'column', 'md': 'row' }"
+    >
+      <dt-stack
+        v-for="post in $page.blogPosts.sort(sortHandler).slice(0, 3)"
+        :key="post.posted"
+        class="d-w100p"
+      >
+        <router-link :to="`/dialtone/whats-new/posts/${post.posted}`" class="d-d-block d-td-none">
+          <dt-stack gap="300">
+            <dt-link class="d-d-inline">
+              <dt-text as="h3" kind="headline" size="md">{{ post.heading }}</dt-text>
+            </dt-link>
+            <dt-text as="time" kind="body" size="xs" tone="tertiary">{{ post.author }} &middot; {{ formatDate(post.posted) }}</dt-text>
+            <dt-text as="p" kind="body" size="md" tone="primary" wrap="pretty">{{ post.excerpt }}</dt-text>
+          </dt-stack>
+        </router-link>
       </dt-stack>
     </dt-stack>
   </dt-stack>
@@ -196,11 +188,21 @@ pageClass: dialpad-design-home
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
+import { parse, compareDesc, format } from 'date-fns';
 import ShowcaseCarousel from '../../baseComponents/ShowcaseCarousel.vue';
 import GradientHero from '../../baseComponents/GradientHero.vue';
 import HeaderOverlay from '../../baseComponents/HeaderOverlay.vue';
 
 const docSearchBtn = ref(null);
+
+const sortHandler = (a, b) => compareDesc(
+  parse(a.posted, 'y-M-d', new Date()),
+  parse(b.posted, 'y-M-d', new Date()),
+);
+
+const formatDate = (dateStr) => {
+  return format(parse(dateStr, 'y-M-d', new Date()), 'MMMM do, y');
+};
 
 const openSearch = () => {
   docSearchBtn.value?.children[0]?.click();

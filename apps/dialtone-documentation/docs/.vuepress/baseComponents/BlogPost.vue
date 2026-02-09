@@ -1,13 +1,13 @@
 <!-- eslint-disable max-len -->
 <template>
   <article class="blog-post">
-    <dt-stack as="section" gap="500">
+    <dt-stack as="section" gap="400">
       <component
         :is="isPreview ? 'h2' : 'h1'"
-        class="d-d-flex"
+        class="d-d-flex d-g8"
         :class="isPreview ? 'd-docsite--header-3 d-mt0' : 'dialtone-page-title'"
       >
-        <div class=" d-fl1">
+        <div>
           {{ heading }}
         </div>
         <copy-button
@@ -16,25 +16,34 @@
           aria-label="Copy post link"
         />
       </component>
-      <dt-stack direction="row" align="center">
-        <dt-stack as="section" direction="row">
-          <dt-avatar
-            size="lg"
-            :seed="author"
-            :full-name="author"
-            avatar-class="d-mr16"
-          />
-          <div class="d-d-grid d-g-cols1">
-            <div class="d-fw-semibold d-fc-secondary">
-              {{ author }}
-            </div>
-            <time class="d-fc-tertiary">
-              {{ format(posted, 'MMMM do, y') }}
-            </time>
-          </div>
+      <dt-stack as="section" direction="row" gap="400">
+        <dt-avatar
+          size="md"
+          :seed="author"
+          :full-name="author"
+        />
+        <dt-stack>
+          <dt-text size="sm" kind="label" tone="secondary" density="200">
+            {{ author }}
+          </dt-text>
+          <dt-text as="time" size="sm" kind="body" tone="tertiary">
+            {{ format(posted, 'MMMM do, y') }}
+          </dt-text>
         </dt-stack>
       </dt-stack>
-      <div class="blog-post-content">
+      <dt-text
+        v-if="excerpt"
+        as="p"
+        :size="isPreview ? 'md' : 'lg'"
+        kind="body"
+        tone="tertiary"
+        class="d-mt8"
+        :class="isPreview ? '' : 'd-bb d-bc-subtle d-pb24'"
+        wrap="pretty"
+      >
+        {{ excerpt }}
+      </dt-text>
+      <div v-if="$slots.default" class="blog-post-content">
         <slot />
       </div>
     </dt-stack>
@@ -63,9 +72,21 @@ defineProps({
     type: Boolean,
     default: false,
   },
+  excerpt: {
+    type: String,
+    default: '',
+  },
 });
 
 const blogLink = computed(() => {
   return window.location.href;
 });
 </script>
+
+<style lang="less">
+.blog-post-content {
+  .d-docsite--header-2:first-of-type {
+    margin-top: var(--dt-size-500);
+  }
+}
+</style>

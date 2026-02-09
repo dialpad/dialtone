@@ -17,9 +17,8 @@
             :heading="heading"
             :posted="posted"
             :is-preview="true"
-          >
-            <slot />
-          </blog-post>
+            :excerpt="excerpt"
+          />
         </template>
       </dt-card>
     </dt-link>
@@ -42,6 +41,10 @@ defineProps({
   author: {
     type: String,
     required: true,
+  },
+  excerpt: {
+    type: String,
+    default: '',
   },
 });
 </script>

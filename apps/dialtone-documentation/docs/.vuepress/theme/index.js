@@ -26,8 +26,7 @@ const _sortAlphabetically = (str1, str2) => {
 };
 
 function _blogPostsFrontmatter (app) {
-  const blogIndex = app.pages.find(page => page.path === '/dialtone/whats-new/');
-  blogIndex.data.blogPosts = app.pages
+  const blogPosts = app.pages
     .filter(page => page.path.includes('/dialtone/whats-new/posts'))
     .map(post => {
       delete post.frontmatter.description;
@@ -36,6 +35,14 @@ function _blogPostsFrontmatter (app) {
         firstParagraph: post.contentRendered.split('\n').find(f => f.startsWith('<p>')),
       };
     });
+
+  const blogIndex = app.pages.find(page => page.path === '/dialtone/whats-new/');
+  blogIndex.data.blogPosts = blogPosts;
+
+  const homePage = app.pages.find(page => page.path === '/');
+  if (homePage) {
+    homePage.data.blogPosts = blogPosts;
+  }
 }
 
 function _injectOverviewPages (app) {
@@ -286,6 +293,9 @@ export const dialtoneVuepressTheme = (options) => ({
 
     extendsPage: (page) => {
       switch (page.path) {
+        case '/':
+          page.data.blogPosts = [];
+          break;
         case '/dialtone/':
           page.data.overviewPages = [];
           break;

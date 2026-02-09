@@ -4,9 +4,7 @@ description: Updates, progress and planning for all things Dialtone.
 keywords: ["changelog","updates","latest","news"]
 ---
 
-<BlogPostPreview v-for="post in $page.blogPosts.sort(sortHandler)" :key="post.posted" :author="post.author" :heading="post.heading" :posted="parse(post.posted, 'y-M-d', new Date())">
-  <span v-html="post.firstParagraph"></span>
-</BlogPostPreview>
+<BlogPostPreview v-for="post in $page.blogPosts.sort(sortHandler)" :key="post.posted" :author="post.author" :heading="post.heading" :posted="parse(post.posted, 'y-M-d', new Date())" :excerpt="post.excerpt" />
 
 <script setup>
 import BlogPostPreview from '@baseComponents/BlogPostPreview.vue';
