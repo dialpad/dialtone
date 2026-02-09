@@ -98,6 +98,9 @@ import {
 import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants.js';
 import { extractInitialsFromName } from './utils';
 
+// Check if browser supports oklch() - only compute hex fallback if not
+const supportsOklch = typeof CSS !== 'undefined' && CSS.supports?.('background', 'oklch(0.5 0.1 0)');
+
 /**
  * An avatar is a visual representation of a user or object.
  * @see https://dialtone.dialpad.com/components/avatar.html
@@ -394,14 +397,13 @@ export default {
     },
 
     /**
-     * Compute inline styles for fallback color
-     * oklch() in CSS will override this in modern browsers
+     * Compute inline styles for fallback color in browsers that don't support oklch()
      */
     avatarStyles () {
       const styles = { ...this.$attrs.style };
 
-      // Only compute fallback for non-icon avatars with valid family/variant
-      if (!this.isIconType() && this.computedFamily && this.computedVariant !== undefined) {
+      // Only compute hex fallback for browsers that don't support oklch()
+      if (!supportsOklch && !this.isIconType() && this.computedFamily && this.computedVariant !== undefined) {
         const fallbackHex = computeAvatarHex(this.computedFamily, this.computedVariant, this.anchorHue);
         styles['--avatar-color-background'] = fallbackHex;
       }
@@ -469,7 +471,10 @@ export default {
   mounted () {
     this.validateProps();
     this.setImageListeners();
-    this.readAnchorHue();
+    // Only read anchor hue for fallback computation in browsers without oklch() support
+    if (!supportsOklch) {
+      this.readAnchorHue();
+    }
   },
 
   methods: {
