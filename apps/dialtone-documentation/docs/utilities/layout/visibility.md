@@ -1,6 +1,7 @@
 ---
 title: Visibility
 description: Utilities for showing or hiding an element without changing the layout of a document.
+keywords: ["visible", "hidden", "show", "hide", "screen reader"]
 ---
 
 ## Usage

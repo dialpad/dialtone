@@ -1,6 +1,7 @@
 ---
 title: Justify Items
 description: Utilities for controlling how grid items align along their inline axis.
+keywords: ["css grid", "inline axis"]
 ---
 
 ## Auto

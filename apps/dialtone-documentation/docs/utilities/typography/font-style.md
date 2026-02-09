@@ -1,6 +1,7 @@
 ---
 title: Font Style
 description: Utilities to change an element's font styles.
+keywords: ["italic", "oblique", "normal"]
 ---
 
 <FontUtilitiesNotice />

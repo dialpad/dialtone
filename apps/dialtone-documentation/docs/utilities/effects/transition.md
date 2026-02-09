@@ -1,6 +1,7 @@
 ---
 title: Transition
 description: Utilities for controlling how an element transitions in and out of states.
+keywords: ["animation", "animate", "ease", "duration"]
 ---
 
 ## Adding a Transition

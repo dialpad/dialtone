@@ -4,6 +4,7 @@ description: A directive that adds a custom overlay scrollbar to any scrollable 
 status: beta
 thumb: true
 image: assets/images/components/scrollbar.png
+keywords: ["scrollable", "d-scrollbar", "DtScrollbar", "dt-scrollbar", "custom scrollbar", "scroll container"]
 ---
 
 ## Scrollbar Directive
@@ -61,7 +62,7 @@ vueCode='
 Import the directive and styling from dialtone
 
 ```javascript
-import { DtScrollbarDirective } from "@dialpad/dialtone/vue3";
+import { DtScrollbarDirective } from "@dialpad/dialtone/vue";
 
 // Import styling
 import 'overlayscrollbars/overlayscrollbars.css';

@@ -1,6 +1,7 @@
 ---
 title: Divide Color
 description: Utilities for controlling the border color between an element's child items.
+keywords: ["divider color","separator color","divide colour"]
 ---
 
 ## Vertical Dividers

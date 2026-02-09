@@ -1,6 +1,7 @@
 ---
 title: Layouts
 description: Common grid layout patterns used throughout Dialpad and UberConference.
+keywords: ["css grid","grid layout","grid template","columns","rows"]
 ---
 
 ## Sidebar

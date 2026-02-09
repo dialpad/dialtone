@@ -1,4 +1,7 @@
 <template>
+  <div v-if="showImport" class="language-javascript" data-highlighter="prismjs" data-ext="js">
+    <pre><code class="language-javascript" v-html="highlightedImport" /></pre>
+  </div>
   <component-vue-api-table
     v-if="docSlots"
     category-name="Slots"
@@ -18,12 +21,31 @@
 
 <script setup>
 import { computed, inject } from 'vue';
+import Prism from 'prismjs';
 import ComponentVueApiTable from './ComponentVueApiTable.vue';
 
 const props = defineProps({
   componentName: {
     type: String,
     required: true,
+  },
+
+  /**
+   * Show the import statement above the API tables.
+   * Set to false on subsequent <component-vue-api> tags for compound components.
+   */
+  showImport: {
+    type: Boolean,
+    default: true,
+  },
+
+  /**
+   * Additional component names to include in the import statement.
+   * Used for compound components (e.g., tabs page passes ['tab', 'tabpanel']).
+   */
+  alsoImport: {
+    type: Array,
+    default: () => [],
   },
 });
 const formattedComponentName = computed(() => `Dt${props.componentName}`);
@@ -34,6 +56,29 @@ const isSameComponentName = (name) => {
     name.toLowerCase() === props.componentName.toLowerCase();
 };
 
+const findDisplayName = (componentName) => {
+  const formatted = `Dt${componentName}`.toLowerCase();
+  const entry = componentDocs.find(
+    f => f.displayName && (
+      f.displayName.toLowerCase() === formatted ||
+      f.displayName.toLowerCase() === componentName.toLowerCase()
+    ),
+  );
+  return entry?.displayName || `Dt${componentName.charAt(0).toUpperCase()}${componentName.slice(1)}`;
+};
+
+const importStatement = computed(() => {
+  const names = [findDisplayName(props.componentName)];
+  for (const name of props.alsoImport) {
+    names.push(findDisplayName(name));
+  }
+  return `import { ${names.join(', ')} } from '@dialpad/dialtone-vue';`;
+});
+
+const highlightedImport = computed(() => {
+  return Prism.highlight(importStatement.value, Prism.languages.javascript, 'javascript');
+});
+
 const docSlots = componentDocs.find(f => isSameComponentName(f.displayName))
   ?.slots?.map((item) => {
     return {
@@ -42,13 +87,26 @@ const docSlots = componentDocs.find(f => isSameComponentName(f.displayName))
     };
   });
 
+const resolveDefaultValue = (rawDefault, values) => {
+  if (!rawDefault) return rawDefault;
+  if (rawDefault === 'undefined') return null;
+  if (/getUniqueString\(\)/.test(rawDefault)) return 'generated unique ID';
+  if (!values?.length) return rawDefault;
+  // Match constant references like DT_MODE_ISLAND_TYPES.INVERTED
+  const match = rawDefault.match(/^[A-Z][A-Z_]*\.[A-Z][A-Z_]*$/);
+  if (!match) return rawDefault;
+  const key = rawDefault.split('.')[1].toLowerCase().replace(/_/g, '-');
+  return values.find(v => v === key || v === key.replace(/-/g, '_'))
+    ?? (key === 'none' && values.includes('null') ? 'null' : rawDefault);
+};
+
 const docProps = componentDocs.find(f => isSameComponentName(f.displayName))
   ?.props?.map((item) => {
     return {
       name: item?.name,
       description: item?.description,
       type: item?.type?.name,
-      defaultValue: item?.defaultValue?.value,
+      defaultValue: resolveDefaultValue(item?.defaultValue?.value, item?.values),
       values: item?.values,
       required: item?.required,
     };

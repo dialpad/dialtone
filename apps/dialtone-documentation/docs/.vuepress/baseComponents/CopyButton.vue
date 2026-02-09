@@ -6,7 +6,6 @@
     <template #anchor>
       <dt-button
         :aria-label="ariaLabel"
-        :circle="$slots.default ? false : true"
         size="xs"
         importance="clear"
         kind="muted"

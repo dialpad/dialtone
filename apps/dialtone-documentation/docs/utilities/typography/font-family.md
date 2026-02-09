@@ -1,6 +1,7 @@
 ---
 title: Font Family
 description: Utilities to change an element's font-family.
+keywords: ["typeface", "sans serif", "monospace"]
 ---
 
 <FontUtilitiesNotice />

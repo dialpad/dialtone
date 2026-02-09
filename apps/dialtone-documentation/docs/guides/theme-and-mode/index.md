@@ -1,6 +1,7 @@
 ---
 title: Theme and Mode
 description: Dialtone's system to customize appearance and support light/dark modes.
+keywords: ["dark mode", "light mode"]
 ---
 
 ## Overview
@@ -51,7 +52,7 @@ Done. Your app now has theming with light mode and the Dialpad base theme.
 
 - `high-contrast` - Enhanced contrast ratios for WCAG AAA compliance
 
-[See all themes visually →](/design/colors/themes/)
+[See all themes visually →](/foundations/colors/themes/)
 
 ## Basic Usage
 
@@ -118,7 +119,7 @@ import Melon from '@dialpad/dialtone-tokens/themes/melon';
 import ProtaDeuter from '@dialpad/dialtone-tokens/themes/prota-deuter';
 ```
 
-[Browse all themes with visual examples →](/design/colors/themes/)
+[Browse all themes with visual examples →](/foundations/colors/themes/)
 
 ## Advanced Usage
 
@@ -391,7 +392,7 @@ function toggleContrast() {
 
 ## Related
 
-- [Design: Colors and Themes](/design/colors/themes/) - Visual examples of all themes
+- [Design: Colors and Themes](/foundations/colors/themes/) - Visual examples of all themes
 - [Component: Mode Island](/components/mode-island.html) - Create mode sections within pages
 - [Getting Started](/guides/getting-started/) - Initial Dialtone setup
 - [Design Tokens](/tokens/) - Complete token catalog

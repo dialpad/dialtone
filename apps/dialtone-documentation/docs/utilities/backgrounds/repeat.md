@@ -1,6 +1,7 @@
 ---
 title: Background Repeat
 description: Utilities for controlling if or how an element's background image repeats.
+keywords: ["bg repeat", "no repeat", "tile"]
 ---
 
 ## Usage

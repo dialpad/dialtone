@@ -1,6 +1,7 @@
 ---
 title: Background Size
 description: Utilities for controlling an element's background size.
+keywords: ["bg size", "cover", "contain"]
 ---
 
 ## Usage

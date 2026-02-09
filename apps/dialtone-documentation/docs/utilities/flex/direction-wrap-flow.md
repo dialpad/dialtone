@@ -1,6 +1,7 @@
 ---
 title: Direction, Wrap, & Flow
 description: Utilities for setting an object's flex direction, wrap, and flow directions.
+keywords: ["flexbox","flex direction","flex wrap","flex flow","row","column"]
 ---
 
 <FlexStackNotice />

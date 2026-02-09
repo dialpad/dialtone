@@ -3,6 +3,7 @@ title: Error Messages
 prev: { link: "/guides/content/action-language/", text: "Action Language" }
 next: { link: "/guides/content/grammar-and-mechanics/", text: "Grammar and Mechanics" }
 description: Errors can be scary and frustrating for users. We aim to make users aware of errors, easy to understand, and provide helpful suggestions (when possible) to correct them.
+keywords: ["errors","error copy","validation messages"]
 ---
 Good error messages should:
 

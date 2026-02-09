@@ -1,6 +1,7 @@
 ---
 title: Contributing
 description: Help Dialtone be even better.
+keywords: ["contribute","pull request","development"]
 ---
 
 ## Component Contribution

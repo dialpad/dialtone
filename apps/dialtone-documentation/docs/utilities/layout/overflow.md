@@ -1,6 +1,7 @@
 ---
 title: Overflow
 description: Utilities for controlling how an element handles content that is too large for the container.
+keywords: ["scroll", "hidden", "auto", "clip", "scrollbar"]
 ---
 
 <dt-notice kind="info" class="d-wmx100p d-mt24" hideClose>

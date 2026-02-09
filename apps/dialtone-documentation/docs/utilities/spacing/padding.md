@@ -1,6 +1,7 @@
 ---
 title: Padding
 description: Utilities for setting an element's interior spacing between child elements and the element's box edge.
+keywords: ["inner spacing", "inset"]
 ---
 
 <dt-notice kind="info" class="d-wmx100p d-mt24" hideClose>

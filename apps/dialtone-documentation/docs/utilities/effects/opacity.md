@@ -1,6 +1,7 @@
 ---
 title: Opacity
 description: Utility classes for changing an element's opacity.
+keywords: ["transparent", "alpha", "fade"]
 ---
 
 ## Usage
