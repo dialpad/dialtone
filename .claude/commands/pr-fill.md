@@ -36,32 +36,74 @@ When this command is used, Claude should:
    - File patterns (Vue components, CSS, documentation)
    - New vs modified files
 
-5. **Generate template with smart defaults:**
-   - Use oldest commit message as PR title (preserve existing if present)
+5. **Resolve Jira ticket:**
+   - Check the oldest commit message on the branch for `DLT-\d+` pattern
+   - Check the branch name for patterns like `feat/DLT-123-description`
+   - Check recent commits for `DLT-\d+` pattern
+   - If no ticket found, create one via `mcp__atlassian__createJiraIssue`:
+     1. Get cloud ID from `mcp__atlassian__getAccessibleAtlassianResources`
+     2. Create issue with `projectKey: "DLT"`, `issueTypeName: "Task"`, and a summary derived from the PR changes
+   - If Jira MCP unavailable, use `NO-JIRA`
+   - Format as: `[DLT-XXX](https://dialpad.atlassian.net/browse/DLT-XXX)`
+
+6. **Validate and set PR title:**
+   - PR title must follow commitlint format: `<type>(<scope>): <jira> <subject>`
+   - Validate against regex: `^(\w*)(?:\((.+)\))?: ((?:NO-JIRA|[A-Z]{2,}-\d+)(?: [A-Z]{2,}-\d+)*) (.+)$`
+   - If the current PR title does not match, derive the correct title from the oldest commit message or the changes
+   - Update with `gh pr edit <PR_NUMBER> --title "<VALIDATED_TITLE>"`
+
+7. **Generate template with smart defaults:**
    - Auto-check appropriate change type boxes
    - Include relevant checklist sections based on file changes
    - Pre-populate sections where possible
-   - Extract Jira ticket URL from oldest commit message
    - In the description section, describe the changes in a summarized way, no need to list every file changed
 
-6. **Update the PR:**
-   - Use `gh pr edit <PR_NUMBER> --body "<DESCRIPTION>"` to update
-   - Confirm update: `gh pr view <PR_NUMBER> --json title,body,url`
-   - Display success message with PR URL
+8. **Detect cross-package impact:**
+   When changes span multiple packages, add a "Cross-Package Impact" section after the Description section. Note which packages are affected and potential downstream effects based on the dependency graph:
+
+   ```
+   tokens --> CSS --> Vue --> docs / MCP / language-server
+   ```
+
+   For example, if tokens changed, note that CSS, Vue, and downstream consumers may be affected. If Vue components changed, note documentation and MCP server may need updates.
+
+9. **Flag documentation artifacts:**
+   Add a "Documentation Artifacts" section listing which of these 6 artifacts may need updating based on the changes:
+
+   | Artifact | Location | When to update |
+   |---|---|---|
+   | Vue source | `packages/dialtone-vue/components/` | Component behavior or API changes |
+   | Tests | `*.test.js`, `*.spec.js` | Any component changes |
+   | Storybook stories | `*.stories.js` | Visual or interactive changes |
+   | Component docs JSON | `packages/dialtone-vue/components/*/docs.json` | Prop, slot, or event changes |
+   | VuePress docs | `apps/dialtone-documentation/docs/` | User-facing documentation |
+   | MCP server data | `packages/dialtone-mcp-server/` | Component API changes |
+
+   Only include artifacts that are relevant to the changes. Mark artifacts that are already updated with a checkmark and those that may still need attention with a flag.
+
+10. **Strip Co-Authored-By lines:**
+    Before writing the final PR body, remove any `Co-Authored-By:` lines from the generated content. These must never appear in PR descriptions.
+
+11. **Update the PR:**
+    - Use `gh pr edit <PR_NUMBER> --body "<DESCRIPTION>"` to update
+    - Confirm update: `gh pr view <PR_NUMBER> --json title,body,url`
+    - Display success message with PR URL
 
 ## File Pattern Detection
 
-- `*.vue` or `packages/dialtone-vue*` → Include Vue checklist
-- `*.css`, `*.less`, or `packages/dialtone-css` → Include CSS checklist
-- New component files → Include new component checklist
-- Documentation files → Focus on documentation sections
+- `*.vue` or `packages/dialtone-vue*` --> Include Vue checklist
+- `*.css`, `*.less`, or `packages/dialtone-css` --> Include CSS checklist
+- New component files --> Include new component checklist
+- Documentation files --> Focus on documentation sections
 
 ## Template Sections to Auto-Fill
 
-- PR Title (from oldest commit message in that branch)
+- PR Title (validated commitlint format, from oldest commit message in that branch)
 - Type of Change (auto-checked based on detection)
+- Jira Ticket (linked URL, created if needed)
 - Description (summarized changes)
-- Jira ticket URL (from oldest commit message)
+- Cross-Package Impact (if multi-package changes detected)
+- Documentation Artifacts (flagging what may need updates)
 - Relevant checklists (based on file changes)
 
 ## Example Output Structure
@@ -79,7 +121,30 @@ When this command is used, Claude should:
 [DLT-123](https://dialpad.atlassian.net/browse/DLT-123)
 
 ## :book: Description
-Add a new tooltip component to Dialtone.
+Add a new tooltip component to Dialtone with configurable placement,
+arrow positioning, and accessible keyboard interactions.
+
+## :package: Cross-Package Impact
+
+Changes span the following packages:
+
+| Package | Changes | Downstream Impact |
+|---|---|---|
+| dialtone-css | New tooltip styles | Vue tooltip component depends on these styles |
+| dialtone-vue | New tooltip component | Documentation site and MCP server need updates |
+
+Dependency flow: tokens --> **CSS** --> **Vue** --> docs/MCP/language-server
+
+## :page_facing_up: Documentation Artifacts
+
+| Artifact | Status | Notes |
+|---|---|---|
+| Vue source | Updated | New component added |
+| Tests | Updated | Unit tests included |
+| Storybook stories | Updated | Stories for all variants |
+| Component docs JSON | Updated | Props and events documented |
+| VuePress docs | Needs attention | Component page not yet created |
+| MCP server data | Needs attention | New component not yet registered |
 
 ## :bulb: Context
 
