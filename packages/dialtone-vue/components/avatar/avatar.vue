@@ -4,8 +4,8 @@
     :id="id"
     :class="avatarClasses"
     :style="avatarStyles"
-    :data-avatar-family="computedFamily"
-    :data-avatar-variant="computedVariant"
+    :data-avatar-family="!iconOnly ? computedFamily : undefined"
+    :data-avatar-variant="!iconOnly ? computedVariant : undefined"
     data-qa="dt-avatar"
     @click="handleClick"
   >
@@ -305,6 +305,16 @@ export default {
       type: String,
       default: undefined,
     },
+
+    /**
+     * When true, renders the avatar with a transparent background and no color.
+     * Useful for displaying icons that should not have a colored background,
+     * such as channel or navigation icons.
+     */
+    iconOnly: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: [
@@ -394,6 +404,7 @@ export default {
           'd-avatar--group-digits-3': this.showGroup && this.group > 99,
           'd-avatar--clickable': this.clickable,
           'd-avatar--presence': this.presence && !this.showGroup,
+          'd-avatar--icon-only': this.iconOnly,
         },
       ];
     },

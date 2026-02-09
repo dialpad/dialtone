@@ -166,6 +166,15 @@
     --avatar-color-background: oklch(var(--avatar-l) var(--avatar-c) calc(var(--dt-avatar-anchor-hue) + var(--avatar-hue-offset)));
   }
 
+  //  --  ICON ONLY
+  //  Transparent background for icon-only avatars (e.g., channel icons)
+  //  ------------------------------------------------------------------------
+  &--icon-only {
+    .d-avatar__canvas {
+      background-color: var(--dt-color-neutral-transparent);
+    }
+  }
+
   //  --  CHILDREN
   //  ------------------------------------------------------------------------
 

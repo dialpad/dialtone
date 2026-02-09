@@ -43,6 +43,59 @@
       </div>
     </div>
     <div>
+      <h2>Icon Only (Transparent Background)</h2>
+      <div class="d-flow16 d-d-flex d-ai-center">
+        <dt-avatar
+          icon-only
+          size="300"
+        >
+          <template #icon="{ iconSize }">
+            <dt-icon-hash :size="iconSize" />
+          </template>
+        </dt-avatar>
+        <dt-avatar
+          icon-only
+          size="300"
+        >
+          <template #icon="{ iconSize }">
+            <dt-icon-hash-bold :size="iconSize" />
+          </template>
+        </dt-avatar>
+        <dt-avatar
+          icon-only
+          size="300"
+        >
+          <template #icon="{ iconSize }">
+            <dt-icon-lock :size="iconSize" />
+          </template>
+        </dt-avatar>
+        <dt-avatar
+          icon-only
+          size="300"
+        >
+          <template #icon="{ iconSize }">
+            <dt-icon-lock-filled :size="iconSize" />
+          </template>
+        </dt-avatar>
+        <dt-avatar
+          icon-only
+          size="300"
+        >
+          <template #icon="{ iconSize }">
+            <dt-icon-inbox :size="iconSize" />
+          </template>
+        </dt-avatar>
+        <dt-avatar
+          icon-only
+          size="300"
+        >
+          <template #icon="{ iconSize }">
+            <dt-icon-contacts :size="iconSize" />
+          </template>
+        </dt-avatar>
+      </div>
+    </div>
+    <div>
       <h2>Presence</h2>
       <div class="d-flow16 d-d-flex d-ai-center">
         <dt-avatar
@@ -137,13 +190,33 @@
 </template>
 
 <script>
-import { DtIconUser, DtIconHear } from '@dialpad/dialtone-icons/vue3';
+import {
+  DtIconUser,
+  DtIconHear,
+  DtIconHash,
+  DtIconHashBold,
+  DtIconLock,
+  DtIconLockFilled,
+  DtIconInbox,
+  DtIconContacts,
+} from '@dialpad/dialtone-icons/vue3';
 import DtAvatar from './avatar.vue';
 import { AVATAR_PRESENCE_STATES, AVATAR_SIZE_MODIFIERS } from './avatar_constants.js';
 
 export default {
   name: 'DtAvatarVariants',
-  components: { DtAvatar, DtIconUser, DtIconHear },
+  components: {
+    DtAvatar,
+    DtIconUser,
+    DtIconHear,
+    DtIconHash,
+    DtIconHashBold,
+    DtIconLock,
+    DtIconLockFilled,
+    DtIconInbox,
+    DtIconContacts,
+  },
+
   data () {
     return {
       avatarSizes: Object.keys(AVATAR_SIZE_MODIFIERS),
