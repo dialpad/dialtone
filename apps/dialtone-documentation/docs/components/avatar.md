@@ -15,7 +15,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
         <dt-icon-user :size="iconSize" />
       </template>
     </dt-avatar>
-    <dt-avatar size="lg" full-name="dp" color="1000" presence="busy" />
+    <dt-avatar size="lg" full-name="dp" seed="user-123" presence="busy" />
     <dt-avatar size="lg" image-src="/assets/images/person.png" image-alt="avatar user" presence="active" />
   </dt-stack>
 </code-well-header>
@@ -60,7 +60,7 @@ The Avatar component is designed to prioritize different sources for content dis
         </tr>
         <tr>
             <td>
-                <dt-avatar full-name="DP" color="1600" />
+                <dt-avatar full-name="DP" seed="user-456" />
             </td>
             <th class="d-ta-left"><a class="d-link" href="#initials">Initials</a></th>
             <td>When the user's name is known.</td>
@@ -114,27 +114,27 @@ vueCode='
 
 ### Initials
 
-If `color` is not provided, the avatar will display a random color. This can be deterministic, see [seeded](#seeded). The default color '000' is not included in randomized colors and can only be set manually.
+If no color information is provided, the avatar will display a random color based on the `seed` prop. This ensures consistent colors for the same user across sessions. Colors are dynamically computed using OKLCH and adapt to the current theme.
 
 <code-well-header>
     <dt-stack direction="row" gap="500" class="d-wmx50p d-fw-wrap">
-      <dt-avatar v-for="color in colors" :color="color" full-name="DP" />
+      <dt-avatar v-for="seed in seeds" :seed="seed" full-name="DP" />
     </dt-stack>
 </code-well-header>
 
 <code-example-tabs
 htmlCode='
-<div class="d-avatar d-avatar--{$size} d-avatar--{$color}">
+<div class="d-avatar d-avatar--{$size}" data-avatar-family="{$family}" data-avatar-variant="{$variant}">
   <div class="d-avatar__canvas">
     <span class="d-avatar__initials">DP</span>
   </div>
 </div>
 '
 vueCode='
-<!-- colors 000 to 1800 are valid, note 000 is the default grey color. -->
+<!-- Use seed for consistent random colors per user -->
 <dt-avatar
   full-name="DP"
-  color="100"
+  seed="user-unique-id"
 />
 '
 />
@@ -360,19 +360,19 @@ Positions the [Presence](/components/presence.md) component at each size and app
           <dt-avatar size="xl" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
       </dt-stack>
       <dt-stack direction="row" align="center" gap="400">
-          <dt-avatar size="xs" presence="active" color="1200" full-name="Test Name" />
-          <dt-avatar size="sm" presence="away" color="500" full-name="William Steele" />
-          <dt-avatar size="md" presence="busy" color="800" full-name="Frank Richard" />
-          <dt-avatar size="lg" presence="offline" color="1200" full-name="John Hawkins" />
-          <dt-avatar size="xl" presence="active" color="1500" full-name="Alice Edwards" />
+          <dt-avatar size="xs" presence="active" seed="user-1" full-name="Test Name" />
+          <dt-avatar size="sm" presence="away" seed="user-2" full-name="William Steele" />
+          <dt-avatar size="md" presence="busy" seed="user-3" full-name="Frank Richard" />
+          <dt-avatar size="lg" presence="offline" seed="user-4" full-name="John Hawkins" />
+          <dt-avatar size="xl" presence="active" seed="user-5" full-name="Alice Edwards" />
       </dt-stack>
   </dt-stack>
 </code-well-header>
 
 <code-example-tabs
 htmlCode='
-<!-- First set with images -->
-<div class="d-avatar d-avatar--xs d-avatar--color-100 d-avatar--presence">
+<!-- First set with images (no color needed when using image) -->
+<div class="d-avatar d-avatar--xs d-avatar--presence">
   <div class="d-avatar__canvas">
     <img
       class="d-avatar__image"
@@ -384,7 +384,7 @@ htmlCode='
     <div class="d-presence__inner d-presence__inner--active"></div>
   </div>
 </div>
-<div class="d-avatar d-avatar--sm d-avatar--color-1100 d-avatar--presence">
+<div class="d-avatar d-avatar--sm d-avatar--presence">
   <div class="d-avatar__canvas">
     <img
       class="d-avatar__image"
@@ -396,7 +396,7 @@ htmlCode='
     <div class="d-presence__inner d-presence__inner--away"></div>
   </div>
 </div>
-<div class="d-avatar d-avatar--md d-avatar--color-1300 d-avatar--presence">
+<div class="d-avatar d-avatar--md d-avatar--presence">
   <div class="d-avatar__canvas">
     <img
       class="d-avatar__image"
@@ -412,7 +412,7 @@ htmlCode='
     <div class="d-presence__inner d-presence__inner--busy"></div>
   </div>
 </div>
-<div class="d-avatar d-avatar--lg d-avatar--color-1200 d-avatar--presence">
+<div class="d-avatar d-avatar--lg d-avatar--presence">
   <div class="d-avatar__canvas">
     <img
       class="d-avatar__image"
@@ -428,7 +428,7 @@ htmlCode='
     <div class="d-presence__inner d-presence__inner--offline"></div>
   </div>
 </div>
-<div class="d-avatar d-avatar--xl d-avatar--color-900 d-avatar--presence">
+<div class="d-avatar d-avatar--xl d-avatar--presence">
   <div class="d-avatar__canvas">
     <img
       class="d-avatar__image"
@@ -441,8 +441,8 @@ htmlCode='
   </div>
 </div>
 
-<!-- Second set with initials -->
-<div class="d-avatar d-avatar--xs d-avatar--color-1200 d-avatar--presence">
+<!-- Second set with initials (colors computed from seed via data-attributes) -->
+<div class="d-avatar d-avatar--xs d-avatar--presence" data-avatar-family="3" data-avatar-variant="5">
   <div class="d-avatar__canvas">
     <span class="d-avatar__initials"></span>
   </div>
@@ -450,7 +450,7 @@ htmlCode='
     <div class="d-presence__inner d-presence__inner--active"></div>
   </div>
 </div>
-<div class="d-avatar d-avatar--sm d-avatar--color-500 d-avatar--presence">
+<div class="d-avatar d-avatar--sm d-avatar--presence" data-avatar-family="7" data-avatar-variant="2">
   <div class="d-avatar__canvas">
     <span class="d-avatar__initials">W</span>
   </div>
@@ -458,7 +458,7 @@ htmlCode='
     <div class="d-presence__inner d-presence__inner--away"></div>
   </div>
 </div>
-<div class="d-avatar d-avatar--md d-avatar--color-800 d-avatar--presence">
+<div class="d-avatar d-avatar--md d-avatar--presence" data-avatar-family="10" data-avatar-variant="4">
   <div class="d-avatar__canvas">
     <span class="d-avatar__initials">FR</span>
   </div>
@@ -470,7 +470,7 @@ htmlCode='
     <div class="d-presence__inner d-presence__inner--busy"></div>
   </div>
 </div>
-<div class="d-avatar d-avatar--lg d-avatar--color-1200 d-avatar--presence">
+<div class="d-avatar d-avatar--lg d-avatar--presence" data-avatar-family="5" data-avatar-variant="7">
   <div class="d-avatar__canvas">
     <span class="d-avatar__initials">JH</span>
   </div>
@@ -482,7 +482,7 @@ htmlCode='
     <div class="d-presence__inner d-presence__inner--offline"></div>
   </div>
 </div>
-<div class="d-avatar d-avatar--xl d-avatar--color-1500 d-avatar--presence">
+<div class="d-avatar d-avatar--xl d-avatar--presence" data-avatar-family="12" data-avatar-variant="3">
   <div class="d-avatar__canvas">
     <span class="d-avatar__initials">AE</span>
   </div>
@@ -497,11 +497,11 @@ vueCode='
 <dt-avatar size="md" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
 <dt-avatar size="lg" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
 <dt-avatar size="xl" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-<dt-avatar size="xs" presence="active" color="1200" full-name="Test Name" />
-<dt-avatar size="sm" presence="away" color="500" full-name="William Steele" />
-<dt-avatar size="md" presence="busy" color="800" full-name="Frank Richard" />
-<dt-avatar size="lg" presence="offline" color="1200" full-name="John Hawkins" />
-<dt-avatar size="xl" presence="active" color="1500" full-name="Alice Edwards" />
+<dt-avatar size="xs" presence="active" seed="user-1" full-name="Test Name" />
+<dt-avatar size="sm" presence="away" seed="user-2" full-name="William Steele" />
+<dt-avatar size="md" presence="busy" seed="user-3" full-name="Frank Richard" />
+<dt-avatar size="lg" presence="offline" seed="user-4" full-name="John Hawkins" />
+<dt-avatar size="xl" presence="active" seed="user-5" full-name="Alice Edwards" />
 '
 />
 
@@ -609,6 +609,6 @@ your specific usage.
 <script setup>
 import { DtIconUser, DtIconHear } from '@dialpad/dialtone-icons/vue3';
 
-const colors = ['100', '200', '300', '400', '500', '600', '700', '800', '900', '1000', '1100', '1200', '1300', '1400', '1500', '1600', '1700', '1800'];
+const seeds = ['alice', 'bob', 'carol', 'david', 'eve', 'frank', 'grace', 'henry', 'iris', 'jack', 'kate', 'leo', 'mia', 'noah', 'olive', 'paul', 'quinn', 'ruby'];
 const sizes = ['100', '150', '200', '250', '300', '400', '500', '600', '700', '800', '900'];
 </script>

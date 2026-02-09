@@ -205,16 +205,19 @@ describe('DtAvatar Tests', () => {
 
     describe('When seed is set', () => {
       // note we keep these tests in sync with the android team, so do not change without communicating with them.
+      // The seed determines family (1-12) and variant (0-9) deterministically via getRandomFamilyVariant()
+      // Algorithm: hash seed string, family = (absHash % 12) + 1, variant = floor(absHash / 12) % 10
       it.each([
-        ['a', 'd-avatar--color-800'],
-        ['aaa', 'd-avatar--color-400'],
-        ['bbbbb', 'd-avatar--color-1100'],
-      ])('when seed is set to: %s color class: %s should be set on avatar', (seed, expectedClass) => {
+        ['a', '2', '8'],
+        ['aaa', '10', '6'],
+        ['bbbbb', '11', '0'],
+      ])('when seed is set to: %s data-avatar-family: %s and data-avatar-variant: %s should be set', (seed, expectedFamily, expectedVariant) => {
         mockProps = { seed };
 
         updateWrapper();
 
-        expect(wrapper.classes(expectedClass)).toBe(true);
+        expect(wrapper.attributes('data-avatar-family')).toBe(expectedFamily);
+        expect(wrapper.attributes('data-avatar-variant')).toBe(expectedVariant);
       });
     });
 

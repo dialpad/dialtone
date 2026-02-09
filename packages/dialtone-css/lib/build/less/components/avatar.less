@@ -8,7 +8,7 @@
 //
 //  TABLE OF CONTENTS
 //  • BASE STYLE
-//    • COLOR VARIANTS
+//    • OKLCH COLOR SYSTEM
 //    • CHILDREN
 //    • SIZES
 //    • VARIANTS
@@ -20,7 +20,7 @@
   //  Component CSS Vars
   //  ------------------------------------------------------------------------
   --avatar-color-background: var(--dt-avatar-color-background-000);
-  --avatar-color-text: var(--dt-avatar-color-foreground);
+  --avatar-color-text: var(--dt-color-neutral-black);
   --avatar-size-shape: var(--dt-spacing-400);
   --avatar-size-image: var(--dt-size-100-percent);
   --avatar-size-text: var(--dt-font-size-200);
@@ -35,27 +35,136 @@
   display: flex;
   color: var(--avatar-color-text);
 
-  //  --  COLOR VARIANTS
+  //  ============================================================================
+  //  $   OKLCH COLOR SYSTEM
+  //  ----------------------------------------------------------------------------
+  //  Dynamic theme-aware avatar colors using OKLCH color space.
+  //  Colors are computed at runtime based on:
+  //  - Theme anchor hue (--dt-avatar-anchor-hue)
+  //  - Family hue offset (12 families, 30° apart)
+  //  - Variant lightness/chroma (10 variants per family)
+  //
+  //  Usage: <div class="d-avatar" data-avatar-family="5" data-avatar-variant="4">
+  //  This renders a green (family 5) medium-dark (variant 4) avatar.
+  //  ----------------------------------------------------------------------------
+
+  //  --  LIGHTNESS SCALE (L in OKLCH)
+  //  10 values from dark (0.45) to light (0.85)
   //  ------------------------------------------------------------------------
-  &--color-000 { --avatar-color-background: var(--dt-avatar-color-background-000); }
-  &--color-100 { --avatar-color-background: var(--dt-avatar-color-background-100); }
-  &--color-200 { --avatar-color-background: var(--dt-avatar-color-background-200); }
-  &--color-300 { --avatar-color-background: var(--dt-avatar-color-background-300); }
-  &--color-400 { --avatar-color-background: var(--dt-avatar-color-background-400); }
-  &--color-500 { --avatar-color-background: var(--dt-avatar-color-background-500); }
-  &--color-600 { --avatar-color-background: var(--dt-avatar-color-background-600); }
-  &--color-700 { --avatar-color-background: var(--dt-avatar-color-background-700); }
-  &--color-800 { --avatar-color-background: var(--dt-avatar-color-background-800); }
-  &--color-900 { --avatar-color-background: var(--dt-avatar-color-background-900); }
-  &--color-1000 { --avatar-color-background: var(--dt-avatar-color-background-1000); }
-  &--color-1100 { --avatar-color-background: var(--dt-avatar-color-background-1100); }
-  &--color-1200 { --avatar-color-background: var(--dt-avatar-color-background-1200); }
-  &--color-1300 { --avatar-color-background: var(--dt-avatar-color-background-1300); }
-  &--color-1400 { --avatar-color-background: var(--dt-avatar-color-background-1400); }
-  &--color-1500 { --avatar-color-background: var(--dt-avatar-color-background-1500); }
-  &--color-1600 { --avatar-color-background: var(--dt-avatar-color-background-1600); }
-  &--color-1700 { --avatar-color-background: var(--dt-avatar-color-background-1700); }
-  &--color-1800 { --avatar-color-background: var(--dt-avatar-color-background-1800); }
+  --avatar-l-0: 0.45;
+  --avatar-l-1: 0.49;
+  --avatar-l-2: 0.54;
+  --avatar-l-3: 0.59;
+  --avatar-l-4: 0.64;
+  --avatar-l-5: 0.69;
+  --avatar-l-6: 0.74;
+  --avatar-l-7: 0.78;
+  --avatar-l-8: 0.82;
+  --avatar-l-9: 0.85;
+
+  //  --  CHROMA SCALE (C in OKLCH)
+  //  Bell curve: lower at extremes, peak in middle for best saturation
+  //  ------------------------------------------------------------------------
+  --avatar-c-0: 0.08;
+  --avatar-c-1: 0.12;
+  --avatar-c-2: 0.15;
+  --avatar-c-3: 0.17;
+  --avatar-c-4: 0.18;
+  --avatar-c-5: 0.17;
+  --avatar-c-6: 0.15;
+  --avatar-c-7: 0.12;
+  --avatar-c-8: 0.10;
+  --avatar-c-9: 0.08;
+
+  //  --  FAMILY HUE OFFSETS
+  //  12 families, each 30° apart around the color wheel
+  //  Applied via data-avatar-family attribute
+  //  ------------------------------------------------------------------------
+  &[data-avatar-family="1"] { --avatar-hue-offset: 0; }
+  &[data-avatar-family="2"] { --avatar-hue-offset: 30; }
+  &[data-avatar-family="3"] { --avatar-hue-offset: 60; }
+  &[data-avatar-family="4"] { --avatar-hue-offset: 90; }
+  &[data-avatar-family="5"] { --avatar-hue-offset: 120; }
+  &[data-avatar-family="6"] { --avatar-hue-offset: 150; }
+  &[data-avatar-family="7"] { --avatar-hue-offset: 180; }
+  &[data-avatar-family="8"] { --avatar-hue-offset: 210; }
+  &[data-avatar-family="9"] { --avatar-hue-offset: 240; }
+  &[data-avatar-family="10"] { --avatar-hue-offset: 270; }
+  &[data-avatar-family="11"] { --avatar-hue-offset: 300; }
+  &[data-avatar-family="12"] { --avatar-hue-offset: 330; }
+
+  //  --  VARIANT LIGHTNESS/CHROMA + TEXT COLOR
+  //  10 variants (0-9) setting L, C, and text color
+  //  Variants 0-5: light text (dark backgrounds)
+  //  Variants 6-9: dark text (light backgrounds)
+  //  ------------------------------------------------------------------------
+  &[data-avatar-variant="0"] {
+    --avatar-l: var(--avatar-l-0);
+    --avatar-c: var(--avatar-c-0);
+    --avatar-color-text: var(--dt-avatar-color-foreground-light);
+  }
+
+  &[data-avatar-variant="1"] {
+    --avatar-l: var(--avatar-l-1);
+    --avatar-c: var(--avatar-c-1);
+    --avatar-color-text: var(--dt-avatar-color-foreground-light);
+  }
+
+  &[data-avatar-variant="2"] {
+    --avatar-l: var(--avatar-l-2);
+    --avatar-c: var(--avatar-c-2);
+    --avatar-color-text: var(--dt-avatar-color-foreground-light);
+  }
+
+  &[data-avatar-variant="3"] {
+    --avatar-l: var(--avatar-l-3);
+    --avatar-c: var(--avatar-c-3);
+    --avatar-color-text: var(--dt-avatar-color-foreground-light);
+  }
+
+  &[data-avatar-variant="4"] {
+    --avatar-l: var(--avatar-l-4);
+    --avatar-c: var(--avatar-c-4);
+    --avatar-color-text: var(--dt-avatar-color-foreground-light);
+  }
+
+  &[data-avatar-variant="5"] {
+    --avatar-l: var(--avatar-l-5);
+    --avatar-c: var(--avatar-c-5);
+    --avatar-color-text: var(--dt-avatar-color-foreground-light);
+  }
+
+  &[data-avatar-variant="6"] {
+    --avatar-l: var(--avatar-l-6);
+    --avatar-c: var(--avatar-c-6);
+    --avatar-color-text: var(--dt-avatar-color-foreground-dark);
+  }
+
+  &[data-avatar-variant="7"] {
+    --avatar-l: var(--avatar-l-7);
+    --avatar-c: var(--avatar-c-7);
+    --avatar-color-text: var(--dt-avatar-color-foreground-dark);
+  }
+
+  &[data-avatar-variant="8"] {
+    --avatar-l: var(--avatar-l-8);
+    --avatar-c: var(--avatar-c-8);
+    --avatar-color-text: var(--dt-avatar-color-foreground-dark);
+  }
+
+  &[data-avatar-variant="9"] {
+    --avatar-l: var(--avatar-l-9);
+    --avatar-c: var(--avatar-c-9);
+    --avatar-color-text: var(--dt-avatar-color-foreground-dark);
+  }
+
+  //  --  OKLCH BACKGROUND COMPUTATION
+  //  When both family and variant are set, compute the background color
+  //  using oklch() with calc() for theme-aware hue rotation
+  //  ------------------------------------------------------------------------
+  &[data-avatar-family][data-avatar-variant] {
+    --avatar-color-background: oklch(var(--avatar-l) var(--avatar-c) calc(var(--dt-avatar-anchor-hue) + var(--avatar-hue-offset)));
+  }
 
   //  --  CHILDREN
   //  ------------------------------------------------------------------------
@@ -258,64 +367,6 @@
     --avatar-size-shape: var(--dt-layout-300);
     --avatar-size-text: var(--dt-font-size-600);
   }
-
-
-  // T-shirt sizes (deprecated - use numeric scale instead)
-  // &--xs {
-  //   --avatar-size-shape: calc(var(--dt-size-500) + var(--dt-size-200));
-  //   --avatar-presence-position-right: var(--dt-size-300-negative);
-  //   --avatar-presence-position-bottom: var(--dt-size-300-negative);
-  //   --avatar-presence-mask-offset-x: var(--dt-size-200);
-  //   --avatar-presence-mask-offset-y: var(--dt-size-200);
-  // }
-
-  // &--sm {
-  //   --avatar-size-shape: var(--dt-size-550);
-  //   --avatar-size-text: var(--dt-font-size-100);
-  //   --avatar-presence-position-right: var(--dt-size-200-negative);
-  //   --avatar-presence-position-bottom: var(--dt-size-200-negative);
-  //   --avatar-presence-mask-offset-x: var(--dt-size-300);
-  //   --avatar-presence-mask-offset-y: var(--dt-size-300);
-  // }
-
-  // &--md {
-  //   --avatar-size-shape: var(--dt-size-600);
-  //   --avatar-size-text: var(--dt-font-size-200);
-  //   --avatar-presence-position-right: var(--dt-size-100-negative);
-  //   --avatar-presence-position-bottom: var(--dt-size-100-negative);
-  //   --avatar-presence-mask-offset-x: calc(
-  //     var(--dt-size-350) - var(--dt-size-100)
-  //   );
-  //   --avatar-presence-mask-offset-y: calc(
-  //     var(--dt-size-350) - var(--dt-size-100)
-  //   );
-  // }
-
-  // &--lg {
-  //   --avatar-size-shape: var(--dt-size-650);
-  //   --avatar-size-text: var(--dt-font-size-300);
-  //   --avatar-presence-position-right: var(--dt-size-100);
-  //   --avatar-presence-position-bottom: var(--dt-size-100);
-  //   --avatar-presence-mask-offset-x: calc(
-  //     var(--dt-size-400) - var(--dt-size-100)
-  //   );
-  //   --avatar-presence-mask-offset-y: calc(
-  //     var(--dt-size-400) - var(--dt-size-100)
-  //   );
-  // }
-
-  // &--xl {
-  //   --avatar-size-shape: var(--dt-size-700);
-  //   --avatar-size-text: var(--dt-font-size-400);
-  //   --avatar-presence-position-right: var(--dt-size-300);
-  //   --avatar-presence-position-bottom: var(--dt-size-300);
-  //   --avatar-presence-mask-offset-x: calc(
-  //     var(--dt-size-450) - var(--dt-size-200)
-  //   );
-  //   --avatar-presence-mask-offset-y: calc(
-  //     var(--dt-size-450) - var(--dt-size-200)
-  //   );
-  // }
 
   //  --  PRESENCE
   //  ------------------------------------------------------------------------

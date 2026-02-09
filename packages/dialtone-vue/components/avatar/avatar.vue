@@ -3,7 +3,9 @@
     :is="clickable ? 'button' : 'div'"
     :id="id"
     :class="avatarClasses"
-    :style="$attrs.style"
+    :style="avatarStyles"
+    :data-avatar-family="computedFamily"
+    :data-avatar-variant="computedVariant"
     data-qa="dt-avatar"
     @click="handleClick"
   >
@@ -78,16 +80,20 @@
 </template>
 
 <script>
-import { getUniqueString, getRandomElement, hasSlotContent } from '@/common/utils';
+import { getUniqueString, hasSlotContent } from '@/common/utils';
 import { DtPresence } from '../presence';
 import {
   AVATAR_KIND_MODIFIERS,
   AVATAR_SIZE_MODIFIERS,
   AVATAR_PRESENCE_SIZE_MODIFIERS,
   AVATAR_PRESENCE_STATES,
-  AVATAR_RANDOM_COLORS,
   AVATAR_GROUP_VALIDATOR,
   AVATAR_ICON_SIZES,
+  AVATAR_FAMILY_COUNT,
+  AVATAR_VARIANT_COUNT,
+  colorToFamilyVariant,
+  getRandomFamilyVariant,
+  computeAvatarHex,
 } from './avatar_constants';
 import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants.js';
 import { extractInitialsFromName } from './utils';
@@ -122,8 +128,34 @@ export default {
     },
 
     /**
-     * Set the avatar background to a specific color. If undefined will randomize the color which can be deterministic
-     * if the seed prop is set.
+     * Avatar color family (1-12). Each family represents a different hue offset from the theme's anchor.
+     * Families: 1=Red, 2=Orange, 3=Amber, 4=Yellow-Green, 5=Green, 6=Teal, 7=Cyan, 8=Blue, 9=Indigo, 10=Purple, 11=Magenta, 12=Pink
+     * If not provided, will be randomized (deterministically if seed is set).
+     * @values 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
+     */
+    family: {
+      type: Number,
+      default: undefined,
+      validator: (val) => val >= 1 && val <= AVATAR_FAMILY_COUNT,
+    },
+
+    /**
+     * Avatar color variant (0-9). Controls lightness/chroma within the family.
+     * 0 = darkest, 9 = lightest. Variants 0-5 have light text, 6-9 have dark text.
+     * If not provided, will be randomized (deterministically if seed is set).
+     * @values 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+     */
+    variant: {
+      type: Number,
+      default: undefined,
+      validator: (val) => val >= 0 && val < AVATAR_VARIANT_COUNT,
+    },
+
+    /**
+     * Avatar color code. Converted internally to family/variant.
+     * Format: family (1-12) * 100 + variant (0-9) * 10, e.g., '540' = family 5, variant 4.
+     * If undefined, will randomize (deterministically if seed is set).
+     * Prefer using family/variant props directly for new code.
      */
     color: {
       type: String,
@@ -190,7 +222,7 @@ export default {
 
     /**
      * Determines whether to show a group avatar.
-     * Limit to 2 digits max, more than 99 will be rendered as “99+”.
+     * Limit to 2 digits max, more than 99 will be rendered as "99+".
      * if the number is 1 or less it would just show the regular avatar as if group had not been set.
      */
     group: {
@@ -290,6 +322,7 @@ export default {
       formattedInitials: '',
       initializing: false,
       hasSlotContent,
+      anchorHue: 0,
     };
   },
 
@@ -302,6 +335,48 @@ export default {
       return 'dt-avatar-icon';
     },
 
+    /**
+     * Compute family from props, color prop, or random
+     */
+    computedFamily () {
+      // Icon-type avatars don't use color
+      if (this.isIconType()) return undefined;
+
+      // Explicit family prop takes precedence
+      if (this.family !== undefined) return this.family;
+
+      // Color prop (converted to family/variant)
+      if (this.color !== undefined) {
+        const parsed = colorToFamilyVariant(this.color);
+        if (parsed) return parsed.family;
+      }
+
+      // Random based on seed
+      const random = getRandomFamilyVariant(this.seed);
+      return random.family;
+    },
+
+    /**
+     * Compute variant from props, color prop, or random
+     */
+    computedVariant () {
+      // Icon-type avatars don't use color
+      if (this.isIconType()) return undefined;
+
+      // Explicit variant prop takes precedence
+      if (this.variant !== undefined) return this.variant;
+
+      // Color prop (converted to family/variant)
+      if (this.color !== undefined) {
+        const parsed = colorToFamilyVariant(this.color);
+        if (parsed) return parsed.variant;
+      }
+
+      // Random based on seed
+      const random = getRandomFamilyVariant(this.seed);
+      return random.variant;
+    },
+
     avatarClasses () {
       return [
         'd-avatar',
@@ -312,11 +387,26 @@ export default {
           'd-avatar--group': this.showGroup,
           'd-avatar--group-digits-2': this.showGroup && this.group > 9 && this.group < 100,
           'd-avatar--group-digits-3': this.showGroup && this.group > 99,
-          [`d-avatar--color-${this.getColor()}`]: !this.isIconType(),
           'd-avatar--clickable': this.clickable,
           'd-avatar--presence': this.presence && !this.showGroup,
         },
       ];
+    },
+
+    /**
+     * Compute inline styles for fallback color
+     * oklch() in CSS will override this in modern browsers
+     */
+    avatarStyles () {
+      const styles = { ...this.$attrs.style };
+
+      // Only compute fallback for non-icon avatars with valid family/variant
+      if (!this.isIconType() && this.computedFamily && this.computedVariant !== undefined) {
+        const fallbackHex = computeAvatarHex(this.computedFamily, this.computedVariant, this.anchorHue);
+        styles['--avatar-color-background'] = fallbackHex;
+      }
+
+      return Object.keys(styles).length > 0 ? styles : undefined;
     },
 
     overlayClasses () {
@@ -379,6 +469,7 @@ export default {
   mounted () {
     this.validateProps();
     this.setImageListeners();
+    this.readAnchorHue();
   },
 
   methods: {
@@ -410,8 +501,18 @@ export default {
       }
     },
 
-    getColor () {
-      return this.color ?? getRandomElement(AVATAR_RANDOM_COLORS, this.seed);
+    /**
+     * Read the anchor hue from CSS custom property for fallback computation
+     */
+    readAnchorHue () {
+      try {
+        const hueValue = getComputedStyle(document.documentElement)
+          .getPropertyValue('--dt-avatar-anchor-hue')
+          .trim();
+        this.anchorHue = parseFloat(hueValue) || 0;
+      } catch {
+        this.anchorHue = 0;
+      }
     },
 
     _loadedImageEventHandler (el) {

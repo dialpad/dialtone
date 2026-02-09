@@ -334,7 +334,7 @@ vueCode='
       <dt-stack gap="400" direction="row">
         <dt-avatar
           full-name="TA"
-          color="700"
+          seed="ted-anderson"
           size="lg"
         />
         <dt-stack gap="200">
@@ -384,7 +384,7 @@ vueCode='
 <dt-mode-island class="d-ba d-bc-subtle d-p8 d-py4 d-bar32 d-bs-md d-w100p">
   <dt-stack direction="row" gap="600">
     <dt-stack gap="400" direction="row">
-      <dt-avatar full-name="TA" color="700" size="lg" />
+      <dt-avatar full-name="TA" seed="ted-anderson" size="lg" />
       <dt-stack gap="200">
         <dt-text kind="label" size="md" density="200">Ted Anderson</dt-text>
         <dt-stack direction="row" gap="300" align="baseline">
