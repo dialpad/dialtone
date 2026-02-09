@@ -122,8 +122,9 @@ export default {
     },
 
     /**
-     * Pass in a seed to get the random color generation based on that string. For example if you pass in a
-     * user ID as the string it will return the same randomly generated colors every time for that user.
+     * **Recommended.** Pass a unique identifier (e.g., user ID) to generate consistent,
+     * deterministic colors for this avatar. The same seed always produces the same color.
+     * This is the preferred approach for most use cases.
      */
     seed: {
       type: String,
@@ -131,9 +132,11 @@ export default {
     },
 
     /**
-     * Avatar color family (1-12). Each family represents a different hue offset from the theme's anchor.
-     * Families: 1=Red, 2=Orange, 3=Amber, 4=Yellow-Green, 5=Green, 6=Teal, 7=Cyan, 8=Blue, 9=Indigo, 10=Purple, 11=Magenta, 12=Pink
-     * If not provided, will be randomized (deterministically if seed is set).
+     * **Advanced.** Avatar color family (1-12). Each family represents a different hue
+     * offset from the theme's anchor. Only use this if you need explicit control over
+     * the color. For most cases, use `seed` instead.
+     * Families: 1=Red, 2=Orange, 3=Amber, 4=Yellow-Green, 5=Green, 6=Teal, 7=Cyan,
+     * 8=Blue, 9=Indigo, 10=Purple, 11=Magenta, 12=Pink
      * @values 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
      */
     family: {
@@ -143,9 +146,9 @@ export default {
     },
 
     /**
-     * Avatar color variant (0-9). Controls lightness/chroma within the family.
+     * **Advanced.** Avatar color variant (0-9). Controls lightness/chroma within the family.
+     * Only use this if you need explicit control over the color. For most cases, use `seed` instead.
      * 0 = darkest, 9 = lightest. Variants 0-5 have light text, 6-9 have dark text.
-     * If not provided, will be randomized (deterministically if seed is set).
      * @values 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
      */
     variant: {
@@ -155,10 +158,9 @@ export default {
     },
 
     /**
-     * Avatar color code. Converted internally to family/variant.
+     * **Legacy.** Avatar color code for backward compatibility. Converted internally
+     * to family/variant. For new code, use `seed` (recommended) or `family`/`variant`.
      * Format: family (1-12) * 100 + variant (0-9) * 10, e.g., '540' = family 5, variant 4.
-     * If undefined, will randomize (deterministically if seed is set).
-     * Prefer using family/variant props directly for new code.
      */
     color: {
       type: String,
