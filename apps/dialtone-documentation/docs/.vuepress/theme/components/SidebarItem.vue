@@ -23,17 +23,17 @@
             kind="muted"
             label-class="d-jc-flex-start d-ta-left d-fw-normal"
             icon-position="right"
-            :size="depth === 0 ? undefined : 'sm'"
+            :size="depth === 0 ? 'lg' : undefined"
             :tabindex="actionableTabIndex"
             :class="[
               'd-w100p dialtone-shell-btn',
               {
                 'd-headline--eyebrow d-fw-semibold d-bgc-transparent d-c-default': !item.link,
                 'd-btn--active': isActiveLink(isExactActive, item.link, true),
-                'd-pr12 d-mr1': depth === 1,
+                'd-pr16': depth === 1,
               },
               {
-                'd-pl32': depth === 1,
+                'd-pl48': depth === 1,
               },
             ]"
             :data-sidebar-link="item.link"
@@ -42,10 +42,10 @@
             <dt-icon
               v-if="depth === 0 && item.icon"
               :name="item.icon"
-              size="300"
+              size="400"
               class="d-mr12 d-fc-muted"
             />
-            <span :class="{ 'd-pl8': depth === 1 }">{{ item.text }}</span>
+            {{ item.text }}
             <template #icon="{ iconSize }">
               <dt-icon
                 v-if="item.link"
@@ -81,18 +81,8 @@
             />
             <div
               v-else-if="subItem.status === 'planned'"
-              class="
-                d-btn
-                d-btn--sm
-                d-w100p
-                d-jc-flex-start
-                d-ta-left
-                d-fw-normal
-                d-fc-muted
-                h:d-bgc-transparent
-                d-c-default
-              "
-              :class="[{ 'd-pl32': depth === 0 }, { 'd-pl64': depth === 1 }]"
+              class="d-btn d-w100p d-jc-flex-start d-ta-left d-fw-normal d-fc-muted h:d-bgc-transparent d-c-default"
+              :class="[{ 'd-pl48': depth === 0 }, { 'd-pl64': depth === 1 }]"
             >
               <dt-stack as="span" direction="row" justify="space-between" class="d-w100p">
                 {{ subItem.text }}
@@ -113,11 +103,10 @@
               <dt-button
                 importance="clear"
                 kind="muted"
-                size="sm"
                 label-class="d-jc-flex-start d-ta-left d-fw-normal"
                 :class="[
                   'dialtone-shell-btn d-w100p',
-                  { 'd-pl32': depth === 0 },
+                  { 'd-pl48': depth === 0 },
                   { 'd-pl64': depth === 1 },
                 ]"
               >
@@ -142,13 +131,12 @@
               <dt-button
                 importance="clear"
                 kind="muted"
-                size="sm"
                 label-class="d-jc-flex-start d-ta-left d-fw-normal"
                 :active="isActiveLink(isExactActive, subItem.link)"
                 :class="[
                   'dialtone-shell-btn d-w100p',
                   {
-                    'd-pl32': depth === 0,
+                    'd-pl48': depth === 0,
                   },
                   {
                     'd-pl64': depth === 1,
@@ -180,7 +168,7 @@
         importance="clear"
         kind="muted"
         label-class="d-jc-flex-start d-ta-left d-fw-normal"
-        :size="depth === 0 ? undefined : 'sm'"
+        :size="depth === 0 ? 'lg' : undefined"
         :active="isActiveLink(isExactActive, item.link)"
         :class="[
           'd-w100p dialtone-shell-btn',
@@ -194,7 +182,7 @@
         <dt-icon
           v-if="depth === 0 && item.icon"
           :name="item.icon"
-          size="300"
+          size="400"
           class="d-mr12 d-fc-muted"
         />
         {{ item.text }}

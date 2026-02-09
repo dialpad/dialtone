@@ -19,6 +19,18 @@
   --docsearch-primary-color: #7C52FF;
 }
 
+// Prevent flash of empty content before Vue hydrates.
+// The app starts invisible; once Vue mounts it adds [data-app-ready]
+// which fades the content in.
+#app {
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+html[data-app-ready] #app {
+  opacity: 1;
+}
+
 //  ============================================================================
 //  @   RESETS
 //  ============================================================================

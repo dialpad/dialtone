@@ -79,14 +79,16 @@ const DOCSEARCH_CONFIG = {
 
 export default defineClientConfig({
   async enhance ({ app, router }) {
-    // Register libraries
+    // Register libraries in parallel to minimize time-to-render
     if (!__VUEPRESS_SSR__) {
-      await initOverlayScrollbars();
-      await registerDialtoneVue(app);
-      await registerDialtoneCombinator(app);
-      await registerDialtoneIcons(app);
-      await importDocumentation(app);
-      await importDialtoneThemes(app);
+      await Promise.all([
+        initOverlayScrollbars(),
+        registerDialtoneVue(app),
+        registerDialtoneCombinator(app),
+        registerDialtoneIcons(app),
+        importDocumentation(app),
+        importDialtoneThemes(app),
+      ]);
     }
 
     if (!__VUEPRESS_SSR__) {
@@ -157,6 +159,9 @@ export default defineClientConfig({
       provide('currentContrast', currentContrast);
     });
     onMounted(async () => {
+      // Reveal the app now that Vue has hydrated and components are registered
+      document.documentElement.setAttribute('data-app-ready', '');
+
       const docsearch = (await import('@docsearch/js'))?.default;
       docsearch(DOCSEARCH_CONFIG);
     });
