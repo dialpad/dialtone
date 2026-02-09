@@ -21,7 +21,7 @@ import { transformCodeExampleTabs } from './transform-code-example-tabs.mjs';
 import { transformUsage } from './transform-usage.mjs';
 import { transformHtmlTable } from './transform-html-table.mjs';
 import { transformNewUtilityClassTable, transformOldUtilityClassTable } from './transform-utility-class-table.mjs';
-import { isStandaloneVueComponentLine, cleanupOutput } from './utils.mjs';
+import { isStandaloneVueComponentLine, cleanupOutput, PASSTHROUGH_COMPONENTS } from './utils.mjs';
 import { INLINE_HANDLERS, consumeUntilClose, parseFrontmatterField } from './component-handlers.mjs';
 
 const S = {
@@ -395,6 +395,29 @@ function handleDtNoticeState (ctx) {
 }
 
 /**
+ * Detect passthrough wrapper components (e.g. <BlogPost>, <BlogPostPreview>).
+ * Strips the opening/closing tags but keeps inner content for normal processing.
+ */
+function tryDetectPassthroughComponent (ctx) {
+  const match = ctx.trimmed.match(/^<\/?([a-zA-Z][a-zA-Z0-9-]*)/);
+  if (!match) return false;
+  const tagName = match[1].toLowerCase();
+  if (!PASSTHROUGH_COMPONENTS.has(tagName)) return false;
+
+  // Closing tag — just skip it
+  if (ctx.trimmed.startsWith('</')) return true;
+
+  // Opening tag — skip attribute lines until we find the closing >
+  if (!ctx.trimmed.includes('>')) {
+    while (ctx.i + 1 < ctx.lines.length) {
+      ctx.i++;
+      if (ctx.lines[ctx.i].trim().includes('>')) break;
+    }
+  }
+  return true;
+}
+
+/**
  * Remove Vue component tags that may span multiple lines and contain inner content.
  * Handles: orphaned closing tags, single-line self-closing tags, and multi-line
  * opening tags (with or without inner content up to the matching closing tag).
@@ -461,6 +484,7 @@ const NORMAL_DETECTORS = [
   tryDetectHtmlTable,
   tryInlineHandlers,
   tryDetectDtNotice,
+  tryDetectPassthroughComponent,
   tryRemoveVueComponent,
 ];
 

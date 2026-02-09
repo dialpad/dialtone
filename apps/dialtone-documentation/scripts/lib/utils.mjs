@@ -73,6 +73,17 @@ const HANDLED_COMPONENTS = new Set([
   'fontutilitiesnotice',
   'buttonvariantstable',
   'dt-notice',
+  'blogpost',
+  'blogpostpreview',
+]);
+
+/**
+ * Components whose opening/closing tags should be removed but whose
+ * inner content should be kept and processed normally.
+ */
+export const PASSTHROUGH_COMPONENTS = new Set([
+  'blogpost',
+  'blogpostpreview',
 ]);
 
 export function isStandaloneVueComponentLine (line) {
