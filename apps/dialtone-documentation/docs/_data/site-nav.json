@@ -124,21 +124,21 @@
               {
                 "text": "ChatKit",
                 "link": "https://uikits.dialpad.com/chatkit/",
-                "description": "Presentation components for the app conversation feed and chatbots. Includes message rows, composers, and action sheets.",
+                "description": "Presentational components for conversation feeds and chatbots. Includes message rows, composers, and action sheets.",
                 "status": "beta",
                 "fileName": "chatkit"
               },
               {
                 "text": "FormKit",
                 "link": "https://uikits.dialpad.com/formkit/",
-                "description": "Standardized fieldsets for complex settings and admin pages. Includes text inputs, textareas, and repeating multi-field variants.",
+                "description": "Standardized fieldsets for settings and admin pages. Includes text inputs, textareas, and repeating multi-field variants.",
                 "status": "beta",
                 "fileName": "formkit"
               },
               {
                 "text": "AnalyticsKit",
                 "link": "https://uikits.dialpad.com/analyticskit/",
-                "description": "Low-level D3.js visualization widgets for dashboards. Features dynamic charts, data tables, and metric summaries.",
+                "description": "Data visualization widgets for dashboards. Features dynamic charts, data tables, and metric summaries.",
                 "status": "planned",
                 "fileName": "analyticskit"
               },
@@ -152,14 +152,14 @@
               {
                 "text": "NavigationKit",
                 "link": "https://uikits.dialpad.com/navigationkit/",
-                "description": "Components for the application chrome, including top and left navigation. Houses contact rows, unread pills, and menu buttons.",
+                "description": "Components appearing in the application shell (top and left navigation). Houses contact rows, unread pills, and menu buttons.",
                 "status": "planned",
                 "fileName": "navigationkit"
               },
               {
                 "text": "WorkflowKit",
                 "link": "https://uikits.dialpad.com/workflowkit/",
-                "description": "Logic-driven components for visual builders and scripted editors. Centered around the IVR Node for telephony routing.",
+                "description": "Visual workflow builder components. Centered around the IVR Node for telephony routing.",
                 "status": "planned",
                 "fileName": "workflowkit"
               }
