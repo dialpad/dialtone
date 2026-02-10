@@ -24,7 +24,7 @@
   "color": {
     "foreground": {
       "critical": {
-        "value": "{color.magenta.475}",
+        "value": "{color.magenta.500}",
         "type": "color"
       },
       "success": {

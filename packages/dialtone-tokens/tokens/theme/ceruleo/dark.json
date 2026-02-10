@@ -19,11 +19,11 @@
           "type": "color"
         },
         "action": {
-          "value": "{color.blue.475}",
+          "value": "{color.blue.500}",
           "type": "color"
         },
         "status-positive": {
-          "value": "{color.green.475}",
+          "value": "{color.green.500}",
           "type": "color"
         },
         "status-critical": {

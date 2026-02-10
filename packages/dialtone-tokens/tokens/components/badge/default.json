@@ -45,7 +45,7 @@
           "type": "color"
         },
         "bulletin-subtle": {
-          "value": "{color.purple.550}",
+          "value": "{color.purple.600}",
           "type": "color"
         },
         "ai": {

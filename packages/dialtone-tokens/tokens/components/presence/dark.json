@@ -2,7 +2,7 @@
   "presence": {
     "color": {
       "available": {
-        "value": "{color.green.425}",
+        "value": "{color.green.400}",
         "type": "color"
       },
       "unavailable": {
