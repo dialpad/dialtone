@@ -112,9 +112,9 @@
             <span class="d-btn__label">Storybook</span>
           </a>
           <a
-            v-if="githubUrl"
+            v-if="githubUrl || $frontmatter.github_url"
             class="d-btn d-btn--muted d-btn--sm"
-            :href="githubUrl"
+            :href="$frontmatter.github_url || githubUrl"
             target="_blank"
             rel="noopener noreferrer"
           >
