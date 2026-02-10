@@ -2,23 +2,39 @@
   "hooks": {
     "PreToolUse": [
       {
-        "matcher": "Bash",
+        "matcher": {
+          "tools": ["Bash"]
+        },
         "hooks": [
-          ".claude/hooks/strip-coauthor.sh",
-          ".claude/hooks/commit-format.sh"
+          {
+            "type": "command",
+            "command": ".claude/hooks/strip-coauthor.sh"
+          },
+          {
+            "type": "command",
+            "command": ".claude/hooks/commit-format.sh"
+          }
         ]
       },
       {
-        "matcher": "Edit|Write",
+        "matcher": {
+          "tools": ["Edit", "Write"]
+        },
         "hooks": [
-          ".claude/hooks/branch-protection.sh"
+          {
+            "type": "command",
+            "command": ".claude/hooks/branch-protection.sh"
+          }
         ]
       }
     ],
     "UserPromptSubmit": [
       {
         "hooks": [
-          ".claude/hooks/skill-activation.sh"
+          {
+            "type": "command",
+            "command": ".claude/hooks/skill-activation.sh"
+          }
         ]
       }
     ]
