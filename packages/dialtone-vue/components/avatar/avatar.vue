@@ -315,6 +315,15 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * When true, renders the avatar in a desaturated/washed-out state.
+     * Use this to indicate that a user is deactivated or inactive.
+     */
+    deactivated: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: [
@@ -405,6 +414,7 @@ export default {
           'd-avatar--clickable': this.clickable,
           'd-avatar--presence': this.presence && !this.showGroup,
           'd-avatar--icon-only': this.iconOnly,
+          'd-avatar--deactivated': this.deactivated,
         },
       ];
     },

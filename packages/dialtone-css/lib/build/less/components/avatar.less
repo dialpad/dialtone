@@ -175,6 +175,27 @@
     }
   }
 
+  //  --  DEACTIVATED
+  //  Desaturated avatar for deactivated/inactive users
+  //  Applies grayscale + white lighten overlay for a "washed out" appearance
+  //  ------------------------------------------------------------------------
+  &--deactivated {
+    .d-avatar__canvas {
+      position: relative;
+      filter: saturate(0);
+
+      &::after {
+        position: absolute;
+        background-color: var(--dt-color-neutral-white);
+        border-radius: inherit;
+        opacity: 0.5;
+        content: '';
+        pointer-events: none;
+        inset: 0;
+      }
+    }
+  }
+
   //  --  CHILDREN
   //  ------------------------------------------------------------------------
 

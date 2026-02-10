@@ -569,6 +569,53 @@ vueCode='
 '
 />
 
+### Deactivated
+
+Use the `deactivated` prop to render the avatar in a desaturated/washed-out state. This is useful to indicate that a user is deactivated or inactive.
+
+<code-well-header>
+  <dt-stack direction="row" align="center" gap="500">
+    <dt-avatar deactivated image-src="/assets/images/person.png" image-alt="Deactivated user" ref="example-deactivated-image" />
+    <dt-avatar deactivated full-name="Deactivated User" seed="user-deactivated" ref="example-deactivated-initials" />
+    <dt-avatar deactivated ref="example-deactivated-icon">
+      <template #icon="{ iconSize }">
+        <dt-icon-user :size="iconSize" />
+      </template>
+    </dt-avatar>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+htmlCode='
+<div class="d-avatar d-avatar--deactivated">
+  <div class="d-avatar__canvas">
+    <img class="d-avatar__image" src="/assets/images/person.png" alt="Deactivated user" />
+  </div>
+</div>
+<div class="d-avatar d-avatar--deactivated" data-avatar-family="5" data-avatar-variant="3">
+  <div class="d-avatar__canvas">
+    <span class="d-avatar__initials">DU</span>
+  </div>
+</div>
+<div class="d-avatar d-avatar--deactivated">
+  <div class="d-avatar__canvas">
+    <span class="d-avatar__icon">
+      <svg>...</svg>
+    </span>
+  </div>
+</div>
+'
+vueCode='
+<dt-avatar deactivated image-src="/assets/images/person.png" image-alt="Deactivated user" />
+<dt-avatar deactivated full-name="Deactivated User" seed="user-deactivated" />
+<dt-avatar deactivated>
+  <template #icon="{ iconSize }">
+    <dt-icon-user :size="iconSize" />
+  </template>
+</dt-avatar>
+'
+/>
+
 ### Seeded
 
 You may use a seed to make the randomly generated color be the same every time for that seed. This is useful if you want users to always have the same color, just pass in their unique user ID as the seed.

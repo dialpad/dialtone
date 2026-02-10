@@ -286,6 +286,20 @@ describe('DtAvatar Tests', () => {
         expect(wrapper.classes('d-avatar--presence')).toBe(false);
       });
     });
+
+    describe('When deactivated is provided', () => {
+      it('should apply deactivated class when true', async () => {
+        await wrapper.setProps({ deactivated: true });
+
+        expect(wrapper.classes('d-avatar--deactivated')).toBe(true);
+      });
+
+      it('should not apply deactivated class when false', async () => {
+        await wrapper.setProps({ deactivated: false });
+
+        expect(wrapper.classes('d-avatar--deactivated')).toBe(false);
+      });
+    });
   });
 
   describe('Interactivity Tests', () => {

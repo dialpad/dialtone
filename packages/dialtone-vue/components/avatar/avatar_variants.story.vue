@@ -96,6 +96,34 @@
       </div>
     </div>
     <div>
+      <h2>Deactivated</h2>
+      <div class="d-flow16 d-d-flex d-ai-center">
+        <dt-avatar
+          :seed="$attrs.seed"
+          size="300"
+          full-name="Deactivated User"
+          :image-src="$attrs.imageSrc"
+          :image-alt="$attrs.imageAlt"
+          deactivated
+        />
+        <dt-avatar
+          :seed="$attrs.seed"
+          size="300"
+          full-name="Deactivated User"
+          deactivated
+        />
+        <dt-avatar
+          :seed="$attrs.seed"
+          size="300"
+          deactivated
+        >
+          <template #icon="{ iconSize }">
+            <dt-icon-user :size="iconSize" />
+          </template>
+        </dt-avatar>
+      </div>
+    </div>
+    <div>
       <h2>Presence</h2>
       <div class="d-flow16 d-d-flex d-ai-center">
         <dt-avatar
