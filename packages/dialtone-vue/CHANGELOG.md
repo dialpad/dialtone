@@ -1,3 +1,10 @@
+# [3.202.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.201.0...dialtone-vue/v3.202.0) (2026-02-10)
+
+
+### Features
+
+* DLT-2903 storybook 10 ([#1043](https://github.com/dialpad/dialtone/issues/1043)) ([52b6d6c](https://github.com/dialpad/dialtone/commit/52b6d6ca90e91eed385404400af159a16c6ca128))
+
 # [3.201.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.200.0...dialtone-vue/v3.201.0) (2026-02-03)
 
 
