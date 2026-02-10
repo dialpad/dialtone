@@ -1,20 +1,15 @@
 ---
 title: Where to Start
-description: A guide to getting started with Dialpad UI Kits.
+description: Adding a UI Kit component to your project.
 ---
 
-Whether you're a designer or a developer, here's how to get started with UI Kits.
+## 1. Install and add Dialtone
 
-## 1. Pick a Kit
+Dialtone is a prerequesite for all UI Kits.See the Dialtone [Getting Started](/guides/getting-started/) guide for instructions on how to install and add Dialtone to your project.
 
-Start by choosing the kit that matches your product area. Each kit is designed for a specific domain:
+## 2. Choose a Kit
 
-- **ChatKit** — for chat and messaging experiences
-- **FormKit** — for forms and data entry interfaces
-
-## 2. Install the package
-
-Each UI Kit is distributed as its own npm package. Install the one you need:
+Select the UI kit or kits you want to use. A list of all UI Kits can be found on the [Meet the Kits](/ui-kits/) page. A more full list of components can be found in the [UI Kits Storybook](https://uikits.dialpad.com/chatkit) page or the [GitHub Repository](https://github.com/dialpad/dialpad-uikits).
 
 ```bash
 npm install @dialpad/chatkit
@@ -27,13 +22,20 @@ npm install @dialpad/formkit
 Import the components you need from the kit and use them in your Vue templates:
 
 ```js
-import { DtChatMessage } from '@dialpad/chatkit';
+import "@dialpad/formkit/vue3/css";
+import { DpInputTextField } from '@dialpad/formkit/vue3'
 ```
 
-## 4. Explore the kit documentation
+```js
+<DtInputTextField
+  :checkbox="checkbox"
+  description="Customer inquiries made outside business hours will be sent here"
+  :errors="errors"
+  :records="records"
+  title="Business email for after-hours contacts"
+/>
+```
 
-Each kit has its own dedicated documentation site with component APIs, usage guidelines, and live examples. Visit the kit's site from the [Meet the Kits](/ui-kits/) page.
+## Contributing
 
-## Prerequisites
-
-UI Kits are built on top of Dialtone. Make sure your project has Dialtone set up before using any kit. See [Getting Started](/guides/getting-started/) for Dialtone setup instructions.
+If you are interested in adding a new or modifying an existing component within UI Kits, see [How to Contribute](/ui-kits/how-to-contribute/).

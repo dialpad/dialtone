@@ -1,34 +1,23 @@
 ---
 title: How to Contribute
-description: Learn how to contribute to Dialpad UI Kits.
+description: Thanks for your interest in contributing to Dialpad UI Kits!
 ---
 
-UI Kits are open to contributions from across the organization. Whether you're fixing a bug, improving documentation, or proposing a new component, here's how to get involved.
+## Proposing a new component or kit
 
-## Reporting issues
+1. Before contributing, check the existing [UI Kits](/ui-kits/) and [Dialtone components](/components/) to see if there is already a kit or component that serves the same function.
+2. Reach out to the team in the `#dialpad-uikits` and `#dialtone` channels to get the conversation started -- we'd love to hear about your idea and help with the process.
+3. Create a Jira ticket within the Dialpad (DP) project, select “Dialtone | UI Kits” as the component, and include designs, kit and component information, reasoning, and the team or individuals who will act as maintainers.
+4. Open a pull request in the [Dialpad UI Kits repository](https://github.com/dialpad/dialpad-uikits). All new UI Kits components are expected to follow the design and coding guidelines.
 
-If you find a bug or have a feature request, open an issue in the relevant kit's repository. Include clear steps to reproduce the problem and any relevant context.
+## Improvements and bug fixes
 
-## Making code contributions
+1. Please **reach out to the [codeowners](https://dialpad.atlassian.net)** to discuss contributing an improvement or bug fix for a specific kit or component. If you're unsure who to contact, please reach out in the `#dialpad-uikits` channel.
+2. **Open a pull request** in the Dialpad UI Kits repository. Please check that your changes follow the design and coding guidelines as outlined in the [contributing guide](/guides/contributing/).
 
-1. **Fork and clone** the kit's repository.
-2. **Create a branch** from `staging` with a descriptive name (e.g., `feat/chat-message-reactions`).
-3. **Make your changes** following the kit's coding conventions and Dialtone's design guidelines.
-4. **Write or update tests** to cover your changes.
-5. **Open a pull request** against `staging` with a clear description of what you changed and why.
+## Feature requests and bug reports
 
-## Proposing a new component
+If you find a bug or have a feature request, please reach out and let us know in the Dialpad app `#dialpad-uikits` or `#dialtone` channels. Use the links below to submit formal bug reports and feature requests once it has been discussed with the team:
 
-Before building a new component, open a discussion or issue to propose it. Include:
-
-- **Use case:** What problem does this component solve?
-- **API sketch:** What props and events should it support?
-- **Design:** Any mockups or references from existing patterns.
-
-## Design contributions
-
-Designers can contribute by reviewing component designs, proposing improvements, and ensuring kits align with Dialtone's design language. Reach out to the Design System team to get involved.
-
-## Questions?
-
-If you're unsure where to start or need guidance, reach out to the Design System team or check the [Contributing guide](/guides/contributing/) for general Dialtone contribution guidelines.
+- [Submit a bug report](https://dialpad.atlassian.net/)
+- [Submit a feature request](https://dialpad.atlassian.net/)

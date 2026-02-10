@@ -1,6 +1,6 @@
 ---
-title: UI Kits
-description: Pre-built, composable UI kits for common product experiences at Dialpad.
+title: Dialpad UI Kits
+description: Domain-specific components built with Dialtone.
 ---
 
 <ui-kits-overview />

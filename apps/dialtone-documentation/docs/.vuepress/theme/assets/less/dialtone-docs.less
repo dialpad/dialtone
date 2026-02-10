@@ -16,7 +16,7 @@
 //  ----------------------------------------------------------------------------
 
 :root {
-  --docsearch-primary-color: #7C52FF;
+  --docsearch-primary-color: #7c52ff;
 }
 
 // Prevent flash of empty content before Vue hydrates.
@@ -68,19 +68,30 @@ html body {
   /* stylelint-disable-next-line meowtec/no-px */
   --docsearch-searchbox-initial-height: 40px;
   // --docsearch-searchbox-background
-  --docsearch-searchbox-focus-background: var(--dt-inputs-color-background-default);
-  --docsearch-searchbox-shadow: inset 0 0 0 var(--dt-size-border-100) var(--dt-inputs-color-border-default);
+  --docsearch-searchbox-focus-background: var(
+    --dt-inputs-color-background-default
+  );
+  --docsearch-searchbox-shadow: inset 0 0 0 var(--dt-size-border-100)
+    var(--dt-inputs-color-border-default);
   --docsearch-hit-height: var(--dt-size-650);
   --docsearch-hit-color: var(--dt-color-foreground-tertiary);
   --docsearch-hit-active-color: var(--dt-color-neutral-white);
   --docsearch-hit-background: var(--dt-color-surface-primary);
-  --docsearch-hit-shadow: inset 0 0 0 var(--dt-size-border-100) var(--dt-color-border-subtle);
-  --docsearch-key-gradient: linear-gradient(-225deg,var(--dt-color-surface-primary),var(--dt-color-surface-secondary));
-  --docsearch-key-shadow: inset 0 0 0 var(--dt-size-border-100) var(--dt-color-border-default);
+  --docsearch-hit-shadow: inset 0 0 0 var(--dt-size-border-100)
+    var(--dt-color-border-subtle);
+  --docsearch-key-gradient: linear-gradient(
+    -225deg,
+    var(--dt-color-surface-primary),
+    var(--dt-color-surface-secondary)
+  );
+  --docsearch-key-shadow: inset 0 0 0 var(--dt-size-border-100)
+    var(--dt-color-border-default);
   --docsearch-footer-height: var(--dt-size-650);
   --docsearch-footer-background: var(--dt-color-surface-primary);
   /* stylelint-disable-next-line meowtec/no-px */
-  --docsearch-footer-shadow: 0 var(--dt-size-100-negative) 0 0 var(--dt-color-border-subtle),0 var(--dt-size-100-negative) 3px 0 rgb(0,0,0,.2);
+  --docsearch-footer-shadow: 0 var(--dt-size-100-negative) 0 0
+      var(--dt-color-border-subtle),
+    0 var(--dt-size-100-negative) 3px 0 rgb(0, 0, 0, 0.2);
 
   .DocSearch-Modal {
     margin-block-start: 15vh;
@@ -111,7 +122,7 @@ html body {
 
   .DocSearch-MagnifierLabel svg,
   .DocSearch-Close svg {
-    color: var(--dt-color-foreground-muted)
+    color: var(--dt-color-foreground-muted);
   }
 
   .DocSearch-Input {
@@ -135,7 +146,7 @@ html body {
   }
 
   .DocSearch-Reset:hover {
-    color: var(--dt-color-foreground-primary)
+    color: var(--dt-color-foreground-primary);
   }
 
   .DocSearch-Cancel {
@@ -232,7 +243,7 @@ html body {
   }
 
   .DocSearch-Logo svg {
-    filter: saturate(0) contrast(.25);
+    filter: saturate(0) contrast(0.25);
   }
 
   .DocSearch-Commands {
@@ -276,7 +287,8 @@ html body {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  padding: var(--dt-size-500) var(--dt-size-550) var(--dt-size-500) var(--dt-size-500);
+  padding: var(--dt-size-500) var(--dt-size-550) var(--dt-size-500)
+    var(--dt-size-500);
   color: var(--dt-shell-color-foreground-primary);
   background-color: var(--dt-shell-color-surface-default);
   view-transition-name: dialtone-header;
@@ -301,7 +313,12 @@ html body {
     max-width: calc(var(--dt-size-300) * 350);
     border-radius: var(--dt-size-radius-450);
     /* stylelint-disable-next-line meowtec/no-px */
-    box-shadow: 0 255.043px 71.487px 0 rgba(0, 0, 0, 0.00), 0 163.131px 65.306px 0 rgba(0, 0, 0, 0.01), 0 91.912px 55.094px 0 rgba(0, 0, 0, 0.03), 0 40.85px 40.85px 0 rgba(0, 0, 0, 0.05), 0 10.212px 22.306px 0 rgba(0, 0, 0, 0.05);
+    box-shadow:
+      0 255.043px 71.487px 0 rgba(0, 0, 0, 0),
+      0 163.131px 65.306px 0 rgba(0, 0, 0, 0.01),
+      0 91.912px 55.094px 0 rgba(0, 0, 0, 0.03),
+      0 40.85px 40.85px 0 rgba(0, 0, 0, 0.05),
+      0 10.212px 22.306px 0 rgba(0, 0, 0, 0.05);
     -webkit-backdrop-filter: blur(var(--dt-size-400));
     backdrop-filter: blur(var(--dt-size-400));
     transition: inset cubic-bezier(0.4, 0, 0.2, 1) 0.66s;
@@ -313,23 +330,31 @@ html body {
   &--off-canvas {
     --position-top: -105%;
   }
-
 }
 
 .dialtone-shell-btn {
-  --button-color-text: var(--dt-shell-action-color-foreground-secondary-default);
-  --button-color-background: var(--dt-shell-action-color-background-secondary-default);
+  --button-color-text: var(
+    --dt-shell-action-color-foreground-secondary-default
+  );
+  --button-color-background: var(
+    --dt-shell-action-color-background-secondary-default
+  );
 
   &.d-btn--active:not(.d-btn--disabled) {
     --button-color-text: var(--dt-shell-action-color-foreground-primary-strong);
-    --button-color-background: var(--dt-shell-action-color-background-primary-selected);
+    --button-color-background: var(
+      --dt-shell-action-color-background-primary-selected
+    );
   }
 
   &:hover:not(.d-btn--disabled) {
-    --button-color-text: var(--dt-shell-action-color-foreground-secondary-default);
-    --button-color-background: var(--dt-shell-action-color-background-secondary-hover);
+    --button-color-text: var(
+      --dt-shell-action-color-foreground-secondary-default
+    );
+    --button-color-background: var(
+      --dt-shell-action-color-background-secondary-hover
+    );
   }
-
 }
 
 .dialtone-sidebar {
@@ -402,20 +427,22 @@ a.header-anchor {
 }
 
 .d-gl-docsite {
-  grid-template-areas: 'content';
+  grid-template-areas: "content";
   grid-template-columns: [content] minmax(32rem, 104rem);
 }
 
 .d-gl-docsite-toc,
 .d-gl-docsite.tokens-page {
-  grid-template-areas: 'content toc';
-  grid-template-columns: [content] minmax(32rem, 99rem) [toc] minmax(min-content, 21.6rem);
+  grid-template-areas: "content toc";
+  grid-template-columns: [content] minmax(32rem, 99rem) [toc] minmax(
+      min-content,
+      21.6rem
+    );
 
   @media (max-width: 1264px) {
-    grid-template-areas: 'content';
+    grid-template-areas: "content";
     grid-template-columns: [content] minmax(32rem, 99rem);
   }
-
 }
 
 .d-docsite--paragraph {
@@ -482,7 +509,10 @@ code {
   --icon-grid-columns: 2;
 
   display: grid;
-  grid-template-columns: repeat(var(--icon-grid-columns), [col] var(--icon-card-width));
+  grid-template-columns: repeat(
+    var(--icon-grid-columns),
+    [col] var(--icon-card-width)
+  );
   gap: var(--dt-size-400);
 
   @media screen and (min-width: 375px) {
@@ -549,7 +579,7 @@ code {
   cursor: pointer;
   transition: all 150ms var(--ttf-in-out);
 
-  .dialtone-icon-card[data-selected='yes'] & {
+  .dialtone-icon-card[data-selected="yes"] & {
     background-color: var(--dt-action-color-background-muted-active);
   }
 
@@ -557,8 +587,13 @@ code {
     background-color: var(--dt-color-neutral-black);
 
     &:hover,
-    .dialtone-icon-card[data-selected='yes'] & {
-      background-color: hsl(var(--dt-color-neutral-black-h), var(--dt-color-neutral-black-s), var(--dt-color-neutral-black-l), 0.8);
+    .dialtone-icon-card[data-selected="yes"] & {
+      background-color: hsl(
+        var(--dt-color-neutral-black-h),
+        var(--dt-color-neutral-black-s),
+        var(--dt-color-neutral-black-l),
+        0.8
+      );
     }
 
     .dialtone-icon-card__name {
@@ -570,7 +605,7 @@ code {
     background-color: var(--dt-color-neutral-white);
 
     &:hover,
-    .dialtone-icon-card[data-selected='yes'] & {
+    .dialtone-icon-card[data-selected="yes"] & {
       background-color: hsl(0deg, 0%, 91.37%, 0.4);
     }
 
@@ -583,8 +618,13 @@ code {
     background-color: var(--dt-color-surface-contrast);
 
     &:hover,
-    .dialtone-icon-card[data-selected='yes'] & {
-      background-color: hsl(var(--dt-color-black-900-h), var(--dt-color-black-900-s), var(--dt-color-black-900-l), 0.8);
+    .dialtone-icon-card[data-selected="yes"] & {
+      background-color: hsl(
+        var(--dt-color-black-900-h),
+        var(--dt-color-black-900-s),
+        var(--dt-color-black-900-l),
+        0.8
+      );
     }
 
     .dialtone-icon-card__name {
@@ -723,12 +763,18 @@ code {
   margin-block-start: var(--dt-size-500);
 
   @media screen and (min-width: 640px) {
-    grid-template-columns: [full-start] repeat(2, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end] !important;
+    grid-template-columns: [full-start] repeat(
+        2,
+        [col-start] var(--col-width, minmax(0, 1fr)) [col-end]
+      ) [full-end] !important;
     gap: var(--dt-size-600);
   }
 
   @media screen and (min-width: 768px) {
-    grid-template-columns: [full-start] repeat(3, [col-start] var(--col-width, minmax(0, 1fr)) [col-end]) [full-end] !important;
+    grid-template-columns: [full-start] repeat(
+        3,
+        [col-start] var(--col-width, minmax(0, 1fr)) [col-end]
+      ) [full-end] !important;
   }
 
   @media screen and (min-width: 1354px) {
@@ -742,7 +788,7 @@ code {
     background-color: var(--dt-color-surface-secondary);
     border: var(--dt-size-border-100) solid transparent;
     border-radius: var(--dt-size-radius-500);
-    opacity: .7;
+    opacity: 0.7;
     transition-timing-function: var(--ttf-in-out);
     transition-duration: var(--td200);
     transition-property: box-shadow;
@@ -763,8 +809,38 @@ code {
   }
 
   &__image {
+    position: relative;
+    overflow: hidden;
     text-align: center;
-    background-color: var(--dt-color-surface-secondary);
+    aspect-ratio: 340 / 250;
+
+    &--3-2 {
+      aspect-ratio: 3 / 2;
+    }
+
+    &--icon-container {
+      display:flex;
+      align-items: center;
+      justify-content: center;
+      // background-color: var(--dt-color-surface-moderate);
+      color: var(--dt-color-purple-1000);
+
+      --accent-color: var(--dt-color-purple-400);
+
+      > svg {
+        width: calc(var(--dt-size-700) + var(--dt-size-500));
+        height: calc(var(--dt-size-700) + var(--dt-size-500));
+      }
+    }
+
+    &--grayscale {
+      opacity: 0.6;
+      filter: grayscale(1);
+    }
+
+    &--single-color {
+      --accent-color: currentColor;
+    }
   }
 
   &__thumb {
@@ -889,7 +965,6 @@ code {
     &--dont {
       --usage-item-color-border: var(--dt-color-border-critical);
     }
-
   }
 
   &__bd {
