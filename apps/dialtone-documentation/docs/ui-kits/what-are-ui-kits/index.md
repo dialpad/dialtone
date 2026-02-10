@@ -33,7 +33,7 @@ Product teams are encouraged to treat kits an an incubator for domain-specific c
 
 <UiKitsComparisonTable />
 
-## History and Benefits
+## History & Benefits
 
 Many UI Kit components began as "Dialtone recipes", while others were created by product teams to solve specific problems. We are evolving our component architecture to better serve Dialpad’s scaling product needs via:
 

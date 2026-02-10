@@ -3,6 +3,10 @@ title: How to Contribute
 description: Thanks for your interest in contributing to Dialpad UI Kits!
 ---
 
+<dt-notice kind="info" hide-close>
+  This is an abbreviated version of the <a href="/guides/contributing/" class="d-link d-link--muted">full contributing guide</a>. We encourage all potential contributors to read the full guide for more information.
+</dt-notice>
+
 ## Proposing a new component or kit
 
 1. **Before contributing**, check the existing [UI Kits](/ui-kits/) and [Dialtone components](/components/) to see if there is already a kit or component that serves the same function.

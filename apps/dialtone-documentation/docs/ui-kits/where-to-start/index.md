@@ -9,7 +9,7 @@ Dialtone is a prerequesite for all UI Kits.See the Dialtone [Getting Started](/g
 
 ## 2. Choose a Kit
 
-Select the UI kit or kits you want to use. A list of all UI Kits can be found on the [Meet the Kits](/ui-kits/) page. A more full list of components can be found in the [UI Kits Storybook](https://uikits.dialpad.com/chatkit) page or the [GitHub Repository](https://github.com/dialpad/dialpad-uikits).
+Select the UI kit or kits you want to use. A list of all UI Kits can be found on the [Meet the Kits](/ui-kits/) page. A more full list of components can be found in the [GitHub Repository](https://github.com/dialpad/dialpad-uikits).
 
 ```bash
 npm install @dialpad/chatkit
@@ -36,6 +36,6 @@ import { DpInputTextField } from '@dialpad/formkit/vue3'
 />
 ```
 
-## Contributing
+## Next Steps
 
-If you are interested in adding a new or modifying an existing component within UI Kits, see [How to Contribute](/ui-kits/how-to-contribute/).
+The [UI Kits storybooks](https://uikits.dialpad.com/chatkit) and [GitHub repository](https://github.com/dialpad/dialpad-uikits) have more detailed reference material for each component. If you are interested in adding a new or modifying an existing component within UI Kits, see [How to Contribute](/ui-kits/how-to-contribute/).
