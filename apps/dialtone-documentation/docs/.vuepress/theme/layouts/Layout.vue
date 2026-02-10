@@ -91,6 +91,9 @@ function detectTopLevelGroup(path) {
   if (path.includes('/foundations/')) {
     return 'foundations';
   }
+  if (path.includes('/ui-kits/')) {
+    return 'ui-kits';
+  }
   if (path.includes('/careers/')) {
     return 'careers';
   }

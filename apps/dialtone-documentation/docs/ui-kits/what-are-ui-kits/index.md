@@ -1,9 +1,14 @@
 ---
 title: What are UI Kits?
-description: Domain-specific components built with Vue 3 and Dialtone
+description: An introduction to UI Kits -- domain-specific components built with Dialtone.
+prev:
+  text: Meet the Kits
+  link: /ui-kits/
 ---
 
-UI Kits are reusable compositions that combine multiple atomic Dialtone components into production-ready patterns. While Dialtone provides the "atoms" (like buttons and inputs), UI Kits aim to provide the "compositions" specific to certain product domains, such as Messaging or Analytics.
+## Overview
+
+UI Kits are reusable compositions that combine multiple atomic Dialtone components into production-ready patterns. While Dialtone provides the "atoms" (like buttons and inputs), UI Kits aim to provide the "compositions" specific to certain product domains, such as Messaging or Analytics. UI Kits are built with Vue 3 and are available as npm packages.
 
 ## Component Grouping
 

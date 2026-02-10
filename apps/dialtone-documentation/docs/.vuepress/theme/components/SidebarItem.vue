@@ -145,7 +145,22 @@
                 :data-sidebar-link="subItem.link"
                 @click="navigate"
               >
-                {{ subItem.text }}
+                <dt-stack as="span" direction="row" justify="space-between" class="d-w100p">
+                  {{ subItem.text }}
+                  <dt-badge
+                    v-if="subItem.status === 'beta'"
+                    class="d-fw-normal d-ml4"
+                    type="info"
+                  >
+                    Beta
+                  </dt-badge>
+                  <dt-badge
+                    v-else-if="subItem.status === 'planned'"
+                    class="d-fw-normal d-ml4"
+                  >
+                    Planned
+                  </dt-badge>
+                </dt-stack>
               </dt-button>
             </router-link>
           </li>
