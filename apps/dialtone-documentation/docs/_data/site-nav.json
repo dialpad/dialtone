@@ -125,43 +125,37 @@
                 "text": "ChatKit",
                 "link": "https://uikits.dialpad.com/chatkit/",
                 "description": "Presentational components for conversation feeds and chatbots. Includes message rows, composers, and action sheets.",
-                "status": "beta",
-                "fileName": "chatkit"
+                "status": "beta"
               },
               {
                 "text": "FormKit",
                 "link": "https://uikits.dialpad.com/formkit/",
                 "description": "Standardized fieldsets for settings and admin pages. Includes text inputs, textareas, and repeating multi-field variants.",
-                "status": "beta",
-                "fileName": "formkit"
+                "status": "beta"
               },
               {
                 "text": "AnalyticsKit",
                 "link": "https://uikits.dialpad.com/analyticskit/",
                 "description": "Data visualization widgets for dashboards. Features dynamic charts, data tables, and metric summaries.",
-                "status": "planned",
-                "fileName": "analyticskit"
+                "status": "planned"
               },
               {
                 "text": "CallbarKit",
                 "link": "https://uikits.dialpad.com/callbarkit/",
                 "description": "Specialized building blocks for meeting and telephony controls. Includes callbar buttons, banners, and timers.",
-                "status": "planned",
-                "fileName": "callbarkit"
+                "status": "planned"
               },
               {
                 "text": "NavigationKit",
                 "link": "https://uikits.dialpad.com/navigationkit/",
                 "description": "Components appearing in the application shell (top and left navigation). Houses contact rows, unread pills, and menu buttons.",
-                "status": "planned",
-                "fileName": "navigationkit"
+                "status": "planned"
               },
               {
                 "text": "WorkflowKit",
                 "link": "https://uikits.dialpad.com/workflowkit/",
                 "description": "Visual workflow builder components. Centered around the IVR Node for telephony routing.",
-                "status": "planned",
-                "fileName": "workflowkit"
+                "status": "planned"
               }
             ]
           },

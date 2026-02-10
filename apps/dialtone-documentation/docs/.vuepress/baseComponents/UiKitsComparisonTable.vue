@@ -1,6 +1,6 @@
 <template>
   <div v-dt-scrollbar:never class="d-hmx464 d-bar8 d-ba d-bc-subtle d-mt24">
-    <dt-mode-island :mode="currentMode">
+    <div>
       <table class="d-table dialtone-doc-table">
         <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
           <tr>
@@ -134,16 +134,12 @@
           </tr>
         </tbody>
       </table>
-    </dt-mode-island>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { inject } from 'vue';
-
 defineOptions({
   name: 'UiKitsComparisonTable',
 });
-
-const currentMode = inject('currentMode');
 </script>
