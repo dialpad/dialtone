@@ -87,14 +87,12 @@ import {
   AVATAR_PRESENCE_SIZE_MODIFIERS,
   AVATAR_PRESENCE_STATES,
   AVATAR_GROUP_VALIDATOR,
-  AVATAR_ICON_SIZES,
   AVATAR_FAMILY_COUNT,
   AVATAR_VARIANT_COUNT,
   colorToFamilyVariant,
   getRandomFamilyVariant,
   computeAvatarHex,
 } from './avatar_constants';
-import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants.js';
 import { extractInitialsFromName } from './utils';
 
 // Check if browser supports oklch() - only compute hex fallback if not
@@ -270,16 +268,6 @@ export default {
     },
 
     /**
-     * Icon size to be displayed on the avatar
-     * @values 100, 200, 300, 400, 500, 600, 700, 800
-     */
-    iconSize: {
-      type: String,
-      default: '',
-      validator: (size) => !size || Object.keys(ICON_SIZE_MODIFIERS).includes(size),
-    },
-
-    /**
      * Full name used to extract initials.
      */
     fullName: {
@@ -340,7 +328,6 @@ export default {
       AVATAR_SIZE_MODIFIERS,
       AVATAR_KIND_MODIFIERS,
       AVATAR_PRESENCE_SIZE_MODIFIERS,
-      AVATAR_ICON_SIZES,
       imageLoadedSuccessfully: null,
       formattedInitials: '',
       initializing: false,
@@ -408,8 +395,8 @@ export default {
         this.avatarClass,
         {
           'd-avatar--group': this.showGroup,
-          'd-avatar--group-digits-2': this.showGroup && this.group > 9 && this.group < 100,
-          'd-avatar--group-digits-3': this.showGroup && this.group > 99,
+          'd-avatar--group-digits-2': this.showGroup && String(this.formattedGroup).length === 2,
+          'd-avatar--group-digits-3': this.showGroup && String(this.formattedGroup).length >= 3,
           'd-avatar--clickable': this.clickable,
           'd-avatar--presence': this.presence && !this.showGroup,
           'd-avatar--icon-only': this.iconOnly,
@@ -447,8 +434,8 @@ export default {
 
     formattedGroup () {
       const size = String(this.validatedSize);
-      // Sizes 100, 150, 200 cap at 2 digits — too small for 3
-      const smallSizes = ['xs', '100', '150', '200'];
+      // Sizes 100-250 cap at 2 digits — too small for 3
+      const smallSizes = ['xs', '100', '150', '200', '250'];
       const maxDigits = smallSizes.includes(size) ? 2 : 3;
       if (maxDigits === 2) {
         return this.group > 9 ? '9+' : this.group;

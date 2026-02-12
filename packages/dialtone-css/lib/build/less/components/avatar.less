@@ -459,7 +459,9 @@
   //  The image/initials content is reduced in size (stagger) to visually
   //  separate the avatar from the count badge, communicating association
   //  without the tighter coupling of presence indicators.
-  //  Supports sizes 100-600. Size 100 hides the avatar entirely.
+  //  Supports sizes 100-500. Size 100 hides the avatar entirely.
+  //  Sizes 100-250 support up to 2 digits (9+).
+  //  Sizes 300-500 support up to 3 digits (99+).
   //  ------------------------------------------------------------------------
   &--group {
     &.d-avatar--clickable {
@@ -504,8 +506,7 @@
         --avatar-count-position: var(--dt-spacing-1-negative);
       }
 
-      &.d-avatar--group-digits-2,
-      &.d-avatar--group-digits-3 {
+      &.d-avatar--group-digits-2 {
         --avatar-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath fill='white' d='M16 0c1.4 0 2.1 0 2.635.272a2.5 2.5 0 0 1 1.092 1.093C20 1.9 20 2.6 20 4v3h-8c-2.8 0-4.2 0-5.27.545A5 5 0 0 0 4.545 9.73C4 10.8 4 12.2 4 15v5l-.927-.004c-.813-.013-1.307-.064-1.708-.268a2.5 2.5 0 0 1-1.093-1.093C0 18.1 0 17.4 0 16V4c0-1.4 0-2.1.272-2.635A2.5 2.5 0 0 1 1.365.272C1.9 0 2.6 0 4 0z'/%3E%3C/svg%3E");
       }
     }
@@ -515,8 +516,7 @@
       --avatar-size-image: var(--dt-spacing-200);
       --avatar-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M19.2 0c1.68 0 2.52 0 3.162.327a3 3 0 0 1 1.31 1.31C24 2.28 24 3.12 24 4.8v4.95h-6.25c-2.8 0-4.2 0-5.27.545a5 5 0 0 0-2.185 2.185c-.545 1.07-.545 2.47-.545 5.27V24H4.8c-1.68 0-2.52 0-3.162-.327a3 3 0 0 1-1.31-1.31C0 21.72 0 20.88 0 19.2V4.8c0-1.68 0-2.52.327-3.162a3 3 0 0 1 1.31-1.31C2.28 0 3.12 0 4.8 0z'/%3E%3C/svg%3E");
 
-      &.d-avatar--group-digits-2,
-      &.d-avatar--group-digits-3 {
+      &.d-avatar--group-digits-2 {
         --avatar-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M19.2 0c1.68 0 2.52 0 3.162.327a3 3 0 0 1 1.31 1.31C24 2.28 24 3.12 24 4.8v4.7H13.85c-3.36 0-5.04 0-6.324.654a6 6 0 0 0-2.622 2.622C4.25 14.06 4.25 15.74 4.25 19.1v4.897c-1.322-.004-2.045-.035-2.612-.324a3 3 0 0 1-1.31-1.31C0 21.72 0 20.88 0 19.2V4.8c0-1.68 0-2.52.327-3.162a3 3 0 0 1 1.31-1.31C2.28 0 3.12 0 4.8 0z'/%3E%3C/svg%3E");
       }
     }
@@ -525,8 +525,7 @@
       --avatar-size-image: var(--dt-spacing-250);
       --avatar-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Cpath fill='white' d='M22.4 0c1.96 0 2.94 0 3.689.382a3.5 3.5 0 0 1 1.53 1.53C27.998 2.66 28 3.64 28 5.6v7.9h-6.5c-2.8 0-4.2 0-5.27.545a5 5 0 0 0-2.185 2.185C13.5 17.3 13.5 18.7 13.5 21.5V28H5.6c-1.96 0-2.94 0-3.689-.382a3.5 3.5 0 0 1-1.53-1.53C.002 25.34 0 24.36 0 22.4V5.6c0-1.96 0-2.94.382-3.69A3.5 3.5 0 0 1 1.912.38C2.66.002 3.64 0 5.6 0z'/%3E%3C/svg%3E");
 
-      &.d-avatar--group-digits-2,
-      &.d-avatar--group-digits-3 {
+      &.d-avatar--group-digits-2 {
         --avatar-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Cpath fill='white' d='M22.4 0c1.96 0 2.94 0 3.689.382a3.5 3.5 0 0 1 1.53 1.53C27.998 2.66 28 3.64 28 5.6v7.65H17.05c-3.08 0-4.62 0-5.797.6a5.5 5.5 0 0 0-2.403 2.403c-.6 1.176-.6 2.717-.6 5.797V28H5.6c-1.96 0-2.94 0-3.689-.382a3.5 3.5 0 0 1-1.53-1.53C.002 25.34 0 24.36 0 22.4V5.6c0-1.96 0-2.94.382-3.69A3.5 3.5 0 0 1 1.912.38C2.66.002 3.64 0 5.6 0z'/%3E%3C/svg%3E");
       }
     }

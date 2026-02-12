@@ -131,7 +131,7 @@ export function colorToFamilyVariant (colorCode) {
   const family = Math.floor(num / 100);
   const variant = (num % 100) / 10;
   if (family < 1 || family > AVATAR_FAMILY_COUNT) return null;
-  if (variant < 0 || variant >= AVATAR_VARIANT_COUNT) return null;
+  if (!Number.isInteger(variant) || variant < 0 || variant >= AVATAR_VARIANT_COUNT) return null;
   return { family, variant };
 }
 

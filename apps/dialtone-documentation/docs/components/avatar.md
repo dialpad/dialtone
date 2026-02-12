@@ -173,9 +173,9 @@ Avatar supports a 100-based sizing scale. T-shirt sizes (`xs`, `sm`, `md`, `lg`,
 | `200` | `sm` | 24px |
 | `250` | — | 28px |
 | `300` | `md` | 32px (default) |
-| `400` | `lg` | 40px |
-| `500` | `xl` | 48px |
-| `600` | — | 64px |
+| `400` | — | 40px |
+| `500` | `lg` | 48px |
+| `600` | `xl` | 64px |
 | `700` | — | 96px |
 | `800` | — | 128px |
 | `900` | — | 256px |
@@ -209,42 +209,42 @@ htmlCode='
   </div>
 </div>
 <div class="d-avatar d-avatar--size-250">
-  ss="d-avatar__canvas">
+  <div class="d-avatar__canvas">
     <svg>...</svg>
   </div>
 </div>
 <div class="d-avatar d-avatar--size-300">
-  ss="d-avatar__canvas">
+  <div class="d-avatar__canvas">
     <svg>...</svg>
   </div>
 </div>
 <div class="d-avatar d-avatar--size-400">
-  ss="d-avatar__canvas">
+  <div class="d-avatar__canvas">
     <svg>...</svg>
   </div>
 </div>
 <div class="d-avatar d-avatar--size-500">
-  ss="d-avatar__canvas">
+  <div class="d-avatar__canvas">
     <svg>...</svg>
   </div>
 </div>
 <div class="d-avatar d-avatar--size-600">
-  ss="d-avatar__canvas">
+  <div class="d-avatar__canvas">
     <svg>...</svg>
   </div>
 </div>
 <div class="d-avatar d-avatar--size-700">
-  ss="d-avatar__canvas">
+  <div class="d-avatar__canvas">
     <svg>...</svg>
   </div>
 </div>
 <div class="d-avatar d-avatar--size-800">
-  ss="d-avatar__canvas">
+  <div class="d-avatar__canvas">
     <svg>...</svg>
   </div>
 </div>
 <div class="d-avatar d-avatar--size-900">
-  ss="d-avatar__canvas">
+  <div class="d-avatar__canvas">
     <svg>...</svg>
   </div>
 </div>
