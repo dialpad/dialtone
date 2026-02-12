@@ -1,6 +1,7 @@
 ---
 title: Gap
 description: Utilities to control the spacing between columns, rows, or both in grids.
+keywords: ["css grid","grid gap","gutter","spacing"]
 ---
 
 ## Adding Universal Row and Column Gaps

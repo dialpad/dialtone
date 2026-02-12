@@ -6,6 +6,7 @@ description: Datepicker component will provide a calendar to select a date.
 status: beta
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-datepicker--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=13998-86
+keywords: ["date picker", "calendar", "date selector", "d-datepicker", "DtDatepicker", "dt-datepicker", "date input", "schedule"]
 ---
 
 <code-well-header>
@@ -339,37 +340,6 @@ vueCode='
 
 <component-vue-api component-name="datepicker"></component-vue-api>
 
-## Accessibility
-
-Keyboard navigation with arrow and tab keys for datepicker component.
-
-It will switch between `month-year-picker` and `calendar` with `TAB`.
-
-It will move around all calendar days with `arrow-keys`.
-
-It will jump from `month-year-picker` to `calendar` with `DOWN` arrow key.
-
-It will jump to `month-year-picker` when there is no more days at the bottom or top of the calendar.
-
-It will change year or month with `ENTER` or `SPACE` (native event)
-
-It will select day with `ENTER` or `SPACE` (native event)
-
-It will start with focus on previous-year on mounted
-
-Screen reader will say
-
-In `month-year-picker`:
-
-- Change to previous year, 2022
-- Change to previous month, july
-- Change to next month, september
-- Change to next year, 2024
-
-In `calendar`:
-
-- Select day 20 July 2023
-
 ## Date Formats
 
 The following functions are available for date formatting.
@@ -391,32 +361,32 @@ The following functions are available for date formatting.
     </dt-stack>
     <table class="d-table d-bt d-fl1">
       <tr>
-        <th scope="row"><dt-text as="code" kind="code" size="sm">formatLong</dt-text></th>
-        <td><dt-text kind="body" size="sm">{{ formatLong(currentSelectedDate) }}</dt-text></td>
+        <th class="d-pl0" scope="row"><dt-text as="code" kind="code" size="xs" class="d-bgc-transparent">formatLong</dt-text></th>
+        <td><dt-text kind="body" size="xs">{{ formatLong(currentSelectedDate) }}</dt-text></td>
       </tr>
       <tr>
-        <th scope="row"><dt-text as="code" kind="code" size="sm">formatMedium</dt-text></th>
-        <td><dt-text kind="body" size="sm">{{ formatMedium(currentSelectedDate) }}</dt-text></td>
+        <th class="d-pl0" scope="row"><dt-text as="code" kind="code" size="xs" class="d-bgc-transparent">formatMedium</dt-text></th>
+        <td><dt-text kind="body" size="xs">{{ formatMedium(currentSelectedDate) }}</dt-text></td>
       </tr>
       <tr>
-        <th scope="row"><dt-text as="code" kind="code" size="sm">formatShort</dt-text></th>
-        <td><dt-text kind="body" size="sm">{{ formatShort(currentSelectedDate) }}</dt-text></td>
+        <th class="d-pl0" scope="row"><dt-text as="code" kind="code" size="xs" class="d-bgc-transparent">formatShort</dt-text></th>
+        <td><dt-text kind="body" size="xs">{{ formatShort(currentSelectedDate) }}</dt-text></td>
       </tr>
       <tr>
-        <th scope="row"><dt-text as="code" kind="code" size="sm">formatShort (no weekday)</dt-text></th>
-        <td><dt-text kind="body" size="sm">{{ formatShort(currentSelectedDate, false) }}</dt-text></td>
+        <th class="d-pl0" scope="row"><dt-text as="code" kind="code" size="xs" class="d-bgc-transparent">formatShort (no weekday)</dt-text></th>
+        <td><dt-text kind="body" size="xs">{{ formatShort(currentSelectedDate, false) }}</dt-text></td>
       </tr>
       <tr>
-        <th scope="row"><dt-text as="code" kind="code" size="sm">formatNoYear</dt-text></th>
-        <td><dt-text kind="body" size="sm">{{ formatNoYear(currentSelectedDate) }}</dt-text></td>
+        <th class="d-pl0" scope="row"><dt-text as="code" kind="code" size="xs" class="d-bgc-transparent">formatNoYear</dt-text></th>
+        <td><dt-text kind="body" size="xs">{{ formatNoYear(currentSelectedDate) }}</dt-text></td>
       </tr>
       <tr>
-        <th scope="row"><dt-text as="code" kind="code" size="sm">formatNoYear (abbreviated)</dt-text></th>
-        <td><dt-text kind="body" size="sm">{{ formatNoYear(currentSelectedDate, true) }}</dt-text></td>
+        <th class="d-pl0" scope="row"><dt-text as="code" kind="code" size="xs" class="d-bgc-transparent">formatNoYear (abbreviated)</dt-text></th>
+        <td><dt-text kind="body" size="xs">{{ formatNoYear(currentSelectedDate, true) }}</dt-text></td>
       </tr>
       <tr>
-        <th scope="row"><dt-text as="code" kind="code" size="sm">formatNumerical</dt-text></th>
-        <td><dt-text kind="body" size="sm">{{ formatNumerical(currentSelectedDate) }}</dt-text></td>
+        <th class="d-pl0" scope="row"><dt-text as="code" kind="code" size="xs" class="d-bgc-transparent">formatNumerical</dt-text></th>
+        <td><dt-text kind="body" size="xs">{{ formatNumerical(currentSelectedDate) }}</dt-text></td>
       </tr>
     </table>
   </dt-stack>
@@ -519,6 +489,31 @@ Formats a date into a numerical string representation.
 `string`
 
 The formatted numerical date string.
+
+## Accessibility
+
+Keyboard navigation with arrow and tab keys for datepicker component.
+
+- It will switch between `month-year-picker` and `calendar` with `TAB`.
+- It will move around all calendar days with `arrow-keys`.
+- It will jump from `month-year-picker` to `calendar` with `DOWN` arrow key.
+- It will jump to `month-year-picker` when there are no more days at the bottom or top of the calendar.
+- It will change year or month with `ENTER` or `SPACE` (native event)
+- It will select day with `ENTER` or `SPACE` (native event)
+- It will start with focus on previous-year on mounted. Screen reader announcement:
+
+  ```text
+  In `month-year-picker`:
+
+  - Change to previous year, 2022
+  - Change to previous month, july
+  - Change to next month, september
+  - Change to next year, 2024
+
+  In `calendar`:
+
+  - Select day 20 July 2023
+  ```
 
 <script setup>
 import { ref, inject } from 'vue';

@@ -1,6 +1,7 @@
 ---
 title: Align Self
 description: Utilities for setting how an element's is aligned along a parent's cross axis.
+keywords: ["flexbox", "cross axis", "override"]
 ---
 
 <FlexStackNotice />

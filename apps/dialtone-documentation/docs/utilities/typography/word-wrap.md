@@ -1,6 +1,7 @@
 ---
 title: Word wrap
 description: Utilities for controlling the way words wrap within an element. Generally used for handling overflow of long strings that are actually supposed to be a single unbroken word, like URLs or file paths.
+keywords: ["overflow wrap", "break word", "long url"]
 ---
 
 ## Normal

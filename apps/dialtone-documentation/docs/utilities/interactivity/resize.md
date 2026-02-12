@@ -1,6 +1,7 @@
 ---
 title: Resize
 description: Utilities for controlling the resize of an element.
+keywords: ["resizable", "drag to resize"]
 ---
 
 ## Usage

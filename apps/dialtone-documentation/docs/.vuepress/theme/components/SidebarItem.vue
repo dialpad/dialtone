@@ -1,11 +1,12 @@
 <template>
+  <!-- Item with children - render as collapsible -->
   <dt-collapsible
+    v-if="subItems.length > 0"
+    v-model:open="isOpen"
     element-type="li"
-    max-width="100%"
-    :open="item.link ? isOpen : true"
     class="dt-sidebar-item"
   >
-    <template #anchor="{ attrs }">
+    <template #anchor="{ attrs, listeners }">
       <dt-stack
         direction="row"
         class="d-ps-relative"
@@ -20,18 +21,30 @@
             v-bind="attrs"
             importance="clear"
             kind="muted"
-            label-class="d-jc-flex-start"
+            label-class="d-jc-flex-start d-ta-left d-fw-normal"
             icon-position="right"
+            :size="depth === 0 ? 'lg' : undefined"
             :tabindex="actionableTabIndex"
             :class="[
-              'd-w100p d-fw-normal',
+              'd-w100p dialtone-shell-btn',
               {
-                'd-fs-100 d-fw-semibold d-tt-uppercase d-bgc-transparent d-c-default': !item.link,
-                'd-btn--active': isActiveLink(isExactActive, item.link),
+                'd-headline--eyebrow d-fw-semibold d-bgc-transparent d-c-default': !item.link,
+                'd-btn--active': isActiveLink(isExactActive, item.link, true),
+                'd-pr16': depth === 1,
+              },
+              {
+                'd-pl48': depth === 1,
               },
             ]"
-            @click="handleAnchorClick(navigate, item.link)"
+            :data-sidebar-link="item.link"
+            @click="handleClick($event, listeners, navigate, item.link)"
           >
+            <dt-icon
+              v-if="depth === 0 && item.icon"
+              :name="item.icon"
+              size="400"
+              class="d-mr12 d-fc-muted"
+            />
             {{ item.text }}
             <template #icon="{ iconSize }">
               <dt-icon
@@ -45,59 +58,141 @@
       </dt-stack>
     </template>
     <template #content>
-      <dt-stack
-        as="ul"
-        :aria-labelledby="labelId"
-        :class="{ 'd-pl8': nested }"
-        gap="200"
-      >
-        <li
-          v-for="(subItem, index) in subItems"
-          :key="subItem.text"
+      <div v-dt-scrollbar class="d-hmx464">
+        <dt-stack
+          as="ul"
+          :aria-labelledby="labelId"
+          gap="200"
+          :class="{
+            'd-pt4': depth === 0 || depth === 1,
+          }"
         >
-          <sidebar-item v-if="subItem.children" :item="subItem" nested />
-          <router-link
-            v-else-if="!subItem.planned"
-            v-slot="{ navigate, isExactActive }"
-            :to="subItem.link"
-            custom
+          <li
+            v-for="subItem in subItems"
+            :key="subItem.text"
           >
-            <dt-button
-              importance="clear"
-              kind="muted"
-              label-class="d-jc-flex-start"
-              :active="isActiveLink(isExactActive, subItem.link)"
-              :class="[
-                'dialtone-shell-btn d-w100p',
-                {
-                  'd-mt2': (index === 0 && nested), // add margin top to first nested item
-                },
-              ]"
-              @click="navigate"
+            <sidebar-item
+              v-if="subItem.children"
+              :item="subItem"
+              :depth="depth + 1"
+              :open-items="openItems"
+              nested
+              @toggle="(itemKey, shouldOpen) => $emit('toggle', itemKey, shouldOpen)"
+            />
+            <div
+              v-else-if="subItem.status === 'planned'"
+              class="d-btn d-w100p d-jc-flex-start d-ta-left d-fw-normal d-fc-muted h:d-bgc-transparent d-c-default"
+              :class="[{ 'd-pl48': depth === 0 }, { 'd-pl64': depth === 1 }]"
             >
-              {{ subItem.text }}
-            </dt-button>
-          </router-link>
-          <div
-            v-else
-            class="d-btn d-w100p d-jc-flex-start d-fw-normal d-fc-disabled h:d-bgc-transparent d-c-default"
-          >
-            {{ subItem.text }}
-            <dt-badge
-              v-if="subItem.planned"
-              class="d-fw-normal d-ml4"
+              <dt-stack as="span" direction="row" justify="space-between" class="d-w100p">
+                {{ subItem.text }}
+                <dt-badge
+                  class="d-fw-normal d-ml4"
+                >
+                  Planned
+                </dt-badge>
+              </dt-stack>
+            </div>
+            <a
+              v-else-if="isExternalLink(subItem.link)"
+              :href="subItem.link"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="d-td-none"
             >
-              Planned
-            </dt-badge>
-          </div>
-        </li>
-      </dt-stack>
+              <dt-button
+                importance="clear"
+                kind="muted"
+                label-class="d-jc-flex-start d-ta-left d-fw-normal"
+                :class="[
+                  'dialtone-shell-btn d-w100p',
+                  { 'd-pl48': depth === 0 },
+                  { 'd-pl64': depth === 1 },
+                ]"
+              >
+                <dt-stack as="span" direction="row" justify="space-between" class="d-w100p">
+                  {{ subItem.text }}
+                  <dt-badge
+                    v-if="subItem.status === 'beta'"
+                    class="d-fw-normal d-ml4"
+                    type="info"
+                  >
+                    Beta
+                  </dt-badge>
+                </dt-stack>
+              </dt-button>
+            </a>
+            <router-link
+              v-else
+              v-slot="{ navigate, isExactActive }"
+              :to="subItem.link"
+              custom
+            >
+              <dt-button
+                importance="clear"
+                kind="muted"
+                label-class="d-jc-flex-start d-ta-left d-fw-normal"
+                :active="isActiveLink(isExactActive, subItem.link)"
+                :class="[
+                  'dialtone-shell-btn d-w100p',
+                  {
+                    'd-pl48': depth === 0,
+                  },
+                  {
+                    'd-pl64': depth === 1,
+                  },
+                ]"
+                :data-sidebar-link="subItem.link"
+                @click="navigate"
+              >
+                {{ subItem.text }}
+              </dt-button>
+            </router-link>
+          </li>
+        </dt-stack>
+      </div>
     </template>
   </dt-collapsible>
+
+  <!-- Item without children - render as simple link -->
+  <li
+    v-else
+    class="dt-sidebar-item"
+  >
+    <router-link
+      v-slot="{ navigate, isExactActive }"
+      :to="item.link ?? ''"
+      custom
+    >
+      <dt-button
+        importance="clear"
+        kind="muted"
+        label-class="d-jc-flex-start d-ta-left d-fw-normal"
+        :size="depth === 0 ? 'lg' : undefined"
+        :active="isActiveLink(isExactActive, item.link)"
+        :class="[
+          'd-w100p dialtone-shell-btn',
+          {
+            'd-headline--eyebrow d-fw-semibold d-bgc-transparent d-c-default': !item.link,
+          },
+        ]"
+        :data-sidebar-link="item.link"
+        @click="navigate"
+      >
+        <dt-icon
+          v-if="depth === 0 && item.icon"
+          :name="item.icon"
+          size="400"
+          class="d-mr12 d-fc-muted"
+        />
+        {{ item.text }}
+      </dt-button>
+    </router-link>
+  </li>
 </template>
 
 <script setup>
-import { computed, onMounted, ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 
 const props = defineProps({
@@ -113,7 +208,20 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  depth: {
+    type: Number,
+    default: 0,
+  },
+  openItems: {
+    type: Set,
+    required: true,
+  },
 });
+
+const emit = defineEmits(['toggle']);
+
+const isExternalLink = (link) => /^https?:\/\//.test(link);
+
 const subItems = computed(() => {
   return props.item?.children || [];
 });
@@ -124,34 +232,66 @@ const actionableTabIndex = computed(() => {
   // Items without links are not actionable and should be removed from tab order
   return props.item.link ? undefined : -1;
 });
+
 const route = useRoute();
 const hash = ref(route.hash);
-const isOpen = ref(false);
+
+// Controlled component - open state comes from parent via openItems Set
+const isOpen = computed(() => {
+  const key = props.item.link || props.item.text;
+  return props.openItems.has(key);
+});
 
 watch(route, (newRoute) => {
   hash.value = newRoute.hash;
-  isOpen.value = false;
-}, { flush: 'pre', immediate: true, deep: true });
-
-onMounted(() => {
-  if (route.path === props.item.link) {
-    isOpen.value = true;
-  }
 });
 
 // isExactActive from the router-link doesn't work with hashes,
 // that's why we need to check for the hash if it's a single page
-const isActiveLink = (isExactActive, link) => {
+const isActiveLink = (isExactActive, link, isParentButton = false) => {
   if (!link) return false;
-  const active = props.isSinglePage ? hash.value === link : isExactActive;
-  if (route.path === link) { isOpen.value = active; }
-  return active;
+
+  // Check if this is a grouping-only parent (link matches first child)
+  // Only apply this check when evaluating the parent button itself, not child buttons
+  if (isParentButton && props.item.children && props.item.children.length > 0) {
+    const firstChildLink = props.item.children[0].link;
+    if (link === firstChildLink) {
+      // This is a grouping-only parent - don't show as active
+      return false;
+    }
+  }
+
+  // Special case: Highlight What's New when viewing blog posts
+  if (link === '/dialtone/whats-new/' && route.path.startsWith('/dialtone/whats-new/posts/')) {
+    return true;
+  }
+
+  return props.isSinglePage ? hash.value === link : isExactActive;
 };
 
-function handleAnchorClick (navigate, link) {
-  isOpen.value = true;
-  if (!link) return;
-  navigate();
+function handleClick (event, listeners, navigate, link) {
+  const itemKey = props.item.link || props.item.text;
+
+  // If we're already on this exact page, just toggle the collapsible
+  if (link && route.path === link) {
+    event.preventDefault();
+    // Only emit toggle to parent - don't call listeners to avoid double toggle
+    emit('toggle', itemKey, !isOpen.value);
+    return;
+  }
+
+  // We're NOT on this page, so navigate
+  if (link && route.path !== link) {
+    navigate();
+    // Don't emit toggle - route watcher in Sidebar will handle it
+    return;
+  }
+
+  // If no link, just toggle
+  if (!link) {
+    event.preventDefault();
+    emit('toggle', itemKey, !isOpen.value);
+  }
 }
 </script>
 

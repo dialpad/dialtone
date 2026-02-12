@@ -1,3 +1,4 @@
+ 
 import { defineClientConfig } from 'vuepress/client';
 import Layout from './layouts/Layout.vue';
 import NotFound from './layouts/NotFound.vue';
@@ -22,6 +23,30 @@ import '@dialpad/dialtone-combinator/css';
 import './assets/less/dialtone-docs.less';
 import './assets/less/dialtone-syntax.less';
 
+// Import DP theme synchronously so it's available immediately on page load
+import '@dialpad/dialtone-tokens/themes/dp';
+import { setMode } from '@dialpad/dialtone-tokens/themes/config';
+
+// Apply default theme immediately to prevent FOUC (Flash of Unstyled Content)
+if (typeof document !== 'undefined') {
+  // Set default mode (light/dark) based on system preference or localStorage
+  const preferredMode = typeof localStorage !== 'undefined'
+    ? localStorage.getItem('preferredMode') || 'system'
+    : 'system';
+
+  let actualMode = preferredMode;
+  if (preferredMode === 'system') {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    actualMode = prefersDark ? 'dark' : 'light';
+  }
+
+  // Apply mode immediately
+  setMode(actualMode, document.documentElement);
+
+  // Set data attributes immediately
+  document.documentElement.setAttribute('data-dt-brand', 'dp');
+}
+
 // The default scrollbar exists outside of the vue instance on the body so
 // we cannot use the vue directive for our custom scrollbar. Init it manually here.
 const initOverlayScrollbars = () => {
@@ -44,33 +69,77 @@ const initOverlayScrollbars = () => {
   });
 };
 
+const DOCSEARCH_CONFIG = {
+  apiKey: '6436ebddb959748daeec411eb388a99d',
+  indexName: 'dialpad',
+  appId: 'Y5HG9UX6KM',
+  placeholder: 'Search',
+  container: '#docsearch',
+};
+
 export default defineClientConfig({
   async enhance ({ app, router }) {
-    // Register libraries
+    // Register libraries in parallel to minimize time-to-render
     if (!__VUEPRESS_SSR__) {
-      await initOverlayScrollbars();
-      await registerDialtoneVue(app);
-      await registerDialtoneCombinator(app);
-      await registerDialtoneIcons(app);
-      await importDocumentation(app);
-      await importDialtoneThemes(app);
+      await Promise.all([
+        initOverlayScrollbars(),
+        registerDialtoneVue(app),
+        registerDialtoneCombinator(app),
+        registerDialtoneIcons(app),
+        importDocumentation(app),
+        importDialtoneThemes(app),
+      ]);
     }
-    router.options.scrollBehavior = async (to) => {
-      if (to.hash) {
-        const html = document.querySelector('html');
-        // vue-router does not incorporate scroll-padding-top on its own.
-        if (html) {
-          const top = parseFloat(getComputedStyle(html).scrollPaddingTop);
-          await flushPromises();
-          return {
-            el: to.hash,
-            behavior: 'smooth',
-            top,
-          };
+
+    if (!__VUEPRESS_SSR__) {
+      // View Transitions API integration
+      let resolveViewTransition;
+
+      router.beforeEach((to, from, next) => {
+        // Resolve any pending transition before starting a new one
+        resolveViewTransition?.();
+
+        if (document.startViewTransition) {
+          const domUpdatePromise = new Promise(resolve => {
+            resolveViewTransition = resolve;
+          });
+
+          document.startViewTransition(async () => {
+            await domUpdatePromise;
+          });
         }
-      }
-      return { top: 0 };
-    };
+        next();
+      });
+
+      router.afterEach(async () => {
+        await flushPromises();
+        resolveViewTransition?.();
+
+        // Re-initialize docsearch when layout switch recreates the #docsearch container
+        const container = document.querySelector('#docsearch');
+        if (container && !container.children.length) {
+          const docsearchModule = await import('@docsearch/js');
+          docsearchModule.default(DOCSEARCH_CONFIG);
+        }
+      });
+
+      router.options.scrollBehavior = async (to) => {
+        if (to.hash) {
+          const html = document.querySelector('html');
+          // vue-router does not incorporate scroll-padding-top on its own.
+          if (html) {
+            const top = parseFloat(getComputedStyle(html).scrollPaddingTop);
+            await flushPromises();
+            return {
+              el: to.hash,
+              behavior: 'smooth',
+              top,
+            };
+          }
+        }
+        return { top: 0 };
+      };
+    }
   },
   setup () {
     onBeforeMount(() => {
@@ -90,15 +159,11 @@ export default defineClientConfig({
       provide('currentContrast', currentContrast);
     });
     onMounted(async () => {
-      const docsearch = (await import('@docsearch/js'))?.default;
+      // Reveal the app now that Vue has hydrated and components are registered
+      document.documentElement.setAttribute('data-app-ready', '');
 
-      docsearch({
-          apiKey: '6436ebddb959748daeec411eb388a99d',
-          indexName: 'dialpad',
-          appId: 'Y5HG9UX6KM',
-          placeholder: 'Search Dialtone',
-          container: '#docsearch',
-      });
+      const docsearch = (await import('@docsearch/js'))?.default;
+      docsearch(DOCSEARCH_CONFIG);
     });
   },
   layouts: {
@@ -112,9 +177,9 @@ async function registerDialtoneVue (app) {
   const module = await import('@dialpad/dialtone-vue');
   const documentation = await import('@dialpad/dialtone-vue/component-documentation.json');
 
-  const dialtoneConstants = [];
-  const dialtoneComponents = [];
-  const dialtoneUtils = [];
+  const dialtoneConstants = {};
+  const dialtoneComponents = {};
+  const dialtoneUtils = {};
 
   Object.keys(module).forEach(key => {
     if (/^[A-Z_]+$/.test(key)) {
@@ -149,8 +214,8 @@ async function registerDialtoneCombinator (app) {
 async function registerDialtoneIcons (app) {
   const icons = await import('@dialpad/dialtone-icons/vue3');
 
-  const dialtoneIcons = [];
-  const dialtoneIllustrations = [];
+  const dialtoneIcons = {};
+  const dialtoneIllustrations = {};
 
   Object.keys(icons).forEach(key => {
     if (key.startsWith('DtIcon')) {
@@ -299,7 +364,7 @@ async function importDialtoneThemes (app) {
       'high-contrast': themeModules[50].default,
     };
 
-    console.log(`Successfully loaded ${Object.keys(themes).length - 1} themes + high contrast`);
+    console.info(`Successfully loaded ${Object.keys(themes).length - 1} themes + high contrast`);
 
     app.provide('themes', themes);
   } catch (error) {
@@ -307,4 +372,3 @@ async function importDialtoneThemes (app) {
   }
 }
 
-// OLD LEGACY CODE REMOVED

@@ -1,6 +1,7 @@
 ---
 title: Justify Content
 description: Utilities for setting how an element's space around and between content is distributed along its main axis.
+keywords: ["flexbox", "main axis", "space between", "space around"]
 ---
 
 <FlexStackNotice />

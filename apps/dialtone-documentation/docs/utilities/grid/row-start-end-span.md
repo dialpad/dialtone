@@ -1,6 +1,7 @@
 ---
 title: Row Start / End / Span
 description: Utilities for controlling how elements are placed across grid rows.
+keywords: ["css grid", "grid row", "row span", "row end"]
 ---
 
 ## Spanning Rows

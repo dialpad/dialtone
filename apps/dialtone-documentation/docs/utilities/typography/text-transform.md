@@ -1,6 +1,7 @@
 ---
 title: Text Transform
 description: Utilities for controlling an element's text transform.
+keywords: ["uppercase", "lowercase", "capitalize"]
 ---
 
 ## Uppercase

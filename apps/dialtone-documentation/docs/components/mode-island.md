@@ -2,6 +2,7 @@
 title: Mode Island
 description: Create independent sections with their own color modes.
 status: beta
+keywords: ["theme island","mode override","d-mode-island","DtModeIsland","dt-mode-island"]
 ---
 
 <code-well-header>
@@ -410,7 +411,6 @@ vueCode='
 </dt-mode-island>
 '
 showHtmlWarning />
-
 
 ### Positioned Components
 

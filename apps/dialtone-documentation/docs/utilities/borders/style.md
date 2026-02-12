@@ -1,6 +1,7 @@
 ---
 title: Border Style
 description: Utilities for controlling an element's border style.
+keywords: ["solid", "dashed", "dotted", "none"]
 ---
 
 ## Dashed Borders

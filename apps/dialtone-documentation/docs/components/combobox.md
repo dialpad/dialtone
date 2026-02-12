@@ -6,6 +6,7 @@ thumb: true
 image: assets/images/components/combobox.png
 figma: planned
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox--default
+keywords: ["autocomplete","typeahead","search select","d-combobox","DtCombobox","dt-combobox"]
 ---
 
 ## Base Style

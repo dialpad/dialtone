@@ -1,6 +1,7 @@
 ---
 title: Z-Index
 description: Utility classes for setting an element's z-index level.
+keywords: ["stacking", "layer", "overlap"]
 ---
 
 ## Classes

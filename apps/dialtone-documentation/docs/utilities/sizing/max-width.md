@@ -1,6 +1,7 @@
 ---
 title: Max-width
 description: Utilities to control an element's maximum width.
+keywords: ["maximum width", "mxw"]
 ---
 
 ## Percentages

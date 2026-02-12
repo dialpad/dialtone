@@ -1,5 +1,6 @@
 ---
 title: Text Styles
+keywords: ["headline", "body", "label", "caption"]
 ---
 
 <dt-notice

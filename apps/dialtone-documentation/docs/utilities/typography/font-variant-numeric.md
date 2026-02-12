@@ -1,6 +1,7 @@
 ---
 title: Font Variant Numeric
 description: Utilities to change an element's font variant numeric.
+keywords: ["tabular", "lining", "oldstyle"]
 ---
 
 <FontUtilitiesNotice />

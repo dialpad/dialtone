@@ -1,6 +1,7 @@
 ---
 title: Font Size
 description: Utilities to change an element's font-size.
+keywords: ["text size", "type size", "type scale"]
 ---
 
 <FontUtilitiesNotice />

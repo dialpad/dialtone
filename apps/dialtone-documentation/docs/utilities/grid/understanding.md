@@ -1,6 +1,7 @@
 ---
 title: Understanding Grids
 description: CSS grids are a two-dimensional layout tool that allow you to place items within columns and rows simulateously unlike Flexbox which is a one-dimensional layout tool and requires complex nesting at times.
+keywords: ["css grid","grid tutorial","grid guide","two dimensional","layout"]
 ---
 
 In the past CSS grid systems based on Flexbox required a number of CSS classes to achieve two-dimensional layouts. With the introduction of CSS grids, that is no longer needed. Most grid layouts can be generated quickly using CSS within your Less. Also CSS grids are highly specific to the content placed within it. That said, there are a few common layouts and grid helpers that Dialtone provides to help you as you're laying out content.

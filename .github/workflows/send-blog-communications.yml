@@ -1,21 +1,10 @@
 name: Send blog communications
 on:
-  workflow_dispatch:
-    inputs:
-      file_path:
-        description: 'Path to the blog post markdown file (e.g., apps/dialtone-documentation/docs/about/whats-new/posts/2026-1-14.md)'
-        required: true
-        type: string
-      test_email:
-        description: 'Optional: Send to this email address instead of the production list (for testing)'
-        required: false
-        type: string
-  workflow_run:
-    workflows: ["Deploy"]
-    types:
-      - completed
+  push:
     branches:
       - production
+    paths:
+      - 'apps/dialtone-documentation/docs/dialtone/whats-new/posts/*.md'
 
 env:
   HUSKY: 0
@@ -28,37 +17,22 @@ jobs:
   added-posts:
     name: Get added posts
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     outputs:
-      added_posts: ${{ steps.set-posts.outputs.posts }}
+      added_posts: ${{ steps.changed-files.outputs.added_files }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event_name == 'workflow_dispatch' && github.ref || github.event.workflow_run.head_sha }}
           fetch-depth: 0
-
-      - name: Get changed files (automatic)
-        if: ${{ github.event_name == 'workflow_run' }}
+      - name: Get changed files
         id: changed-files
         uses: tj-actions/changed-files@2f7c5bfce28377bc069a65ba478de0a74aa0ca32
         with:
-          files: 'apps/dialtone-documentation/docs/about/whats-new/posts/*.md'
+          files: 'apps/dialtone-documentation/docs/dialtone/whats-new/posts/*.md'
           json: true
           escape_json: false
-          sha: ${{ github.event.workflow_run.head_sha }}
-
-      - name: Set posts output
-        id: set-posts
-        run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "posts=[\"${{ github.event.inputs.file_path }}\"]" >> $GITHUB_OUTPUT
-          else
-            echo "posts=${{ steps.changed-files.outputs.added_files }}" >> $GITHUB_OUTPUT
-          fi
-
       - name: List all added posts
-        run: echo '${{ steps.set-posts.outputs.posts }}'
+        run: echo '${{ steps.changed-files.outputs.added_files }}'
 
   send-email:
     name: Send email
@@ -71,14 +45,12 @@ jobs:
       matrix:
         files: ${{ fromJSON(needs.added-posts.outputs.added_posts) }}
     env:
-      TO_MAIL: ${{ github.event.inputs.test_email || 'dialtone-users@dialpad.com' }}
+      TO_MAIL: dialtone-users@dialpad.com
       FILE_PATH: ${{ matrix.files }}
       API_URL: https://us-central1-dp-dialtone-design-system.cloudfunctions.net/send-email
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event_name == 'workflow_dispatch' && github.ref || github.event.workflow_run.head_sha }}
 
       - name: Get link from file name
         id: get-post-url
@@ -97,10 +69,13 @@ jobs:
       # - Remove blog post component.
       # - Remove comments.
       # - Remove empty lines at the beginning of the file.
+      # - Escape quotes
+      # - Escape double quotes
+      # - Add new line escaped character at the end of every line
       # - Replace links paths for their absolute paths (prefixed by https://dialtone.dialpad.com).
       # - Ellipsis the article to the first 10 lines.
       # - Append the URL of the article at the end of the article.
-      # - Store the result in MESSAGE_BODY env variable (jq will handle JSON escaping)
+      # - Print the result to MESSAGE_BODY env variable removing the new lines to avoid issues with JSON
       - name: Process Markdown file
         run: |
           sed -i -E \
@@ -109,16 +84,27 @@ jobs:
           -e '/^<\/*BlogPost.*$/d' \
           -e '/^<!--.*$/d' \
           -e '/./,$!d' \
+          -e "s/'/'\\\''/g" \
+          -e 's/"/\\"/g' \
+          -e 's/$/\\n/g' \
           -e 's_(\[.*\])\(([^)]+)\)_\1(https://dialtone.dialpad.com\2)_g' \
           $FILE_PATH;
-          sed -i -e '10q' $FILE_PATH;
-          echo -e "\n... Read the full article: $POST_URL" >> $FILE_PATH;
+          sed -i 10q $FILE_PATH;
+          echo -e "... Read the full article: $POST_URL" >> $FILE_PATH;
           {
             echo 'MESSAGE_BODY<<EOF'
-            cat $FILE_PATH
+            cat $FILE_PATH | tr -d '\n'
             echo
             echo EOF
           } >> $GITHUB_ENV;
+
+      - name: Wait for deployment to succeed
+        uses: lewagon/wait-on-check-action@v1.3.4
+        with:
+          ref: ${{ github.ref }}
+          check-name: 'Deploy sites'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 10
 
       - id: auth
         name: Authenticate to Google Cloud
@@ -131,20 +117,18 @@ jobs:
 
       - name: Send email
         run: |
-          jq -n \
-            --arg to "${{ env.TO_MAIL }}" \
-            --arg subject "[dialtone] New blog post: ${{ env.BLOG_POST_HEADING }}" \
-            --arg message "${{ env.MESSAGE_BODY }}" \
-            '{to: $to, subject: $subject, message: $message}' | \
           curl -m 70 -X POST ${{ env.API_URL }} \
-            -H "Authorization: bearer ${{ steps.auth.outputs.id_token }}" \
-            -H "Content-Type: application/json" \
-            -d @-
+          -H "Authorization: bearer ${{ steps.auth.outputs.id_token }}" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "to": "${{ env.TO_MAIL }}",
+            "subject": "[dialtone] New blog post: \"${{ env.BLOG_POST_HEADING }}\"",
+            "message": "${{ env.MESSAGE_BODY }}"
+          }'
 
   send-sms:
     name: Send SMS
     runs-on: ubuntu-latest
-    if: ${{ github.event.inputs.test_email == '' || github.event_name != 'workflow_dispatch' }}
     permissions:
       contents: read
       id-token: write
@@ -158,8 +142,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event_name == 'workflow_dispatch' && github.ref || github.event.workflow_run.head_sha }}
 
       - name: Get link from file name
         id: get-post-url
@@ -172,6 +154,14 @@ jobs:
         run: |
           echo "BLOG_POST_HEADING=$(sed -n 's/^heading: *//p' $FILE_PATH)" >> $GITHUB_ENV
 
+      - name: Wait for deployment to succeed
+        uses: lewagon/wait-on-check-action@v1.3.4
+        with:
+          ref: ${{ github.ref }}
+          check-name: 'Deploy sites'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 10
+
       - id: auth
         name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
@@ -183,10 +173,9 @@ jobs:
 
       - name: Send sms
         run: |
-          jq -n \
-            --arg message "New blog post: ${{ env.BLOG_POST_HEADING }}. Read full article: ${{ env.POST_URL }}" \
-            '{message: $message}' | \
           curl -m 70 -X POST ${{ env.API_URL }} \
-            -H "Authorization: bearer ${{ steps.auth.outputs.id_token }}" \
-            -H "Content-Type: application/json" \
-            -d @-
+          -H "Authorization: bearer ${{ steps.auth.outputs.id_token }}" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "message": "New blog post: \"${{ env.BLOG_POST_HEADING }}\". Read full article: ${{ env.POST_URL }}"
+          }'

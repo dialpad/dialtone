@@ -10,15 +10,10 @@ const baseURL = (process.env.VUEPRESS_BASE_URL ?? '/');
 
 const themeConfig = {
   logo: baseURL + 'assets/images/dialpad-logo.svg',
-  navbar: [
-    { text: 'Home', link: '/' },
-    { text: 'Design', link: '/design/' },
-    { text: 'Components', link: '/components/' },
-    { text: 'Utilities', link: '/utilities/' },
-    { text: 'Tokens', link: '/tokens/' },
-    { text: 'Guides', link: '/guides/' },
-    { text: 'About', link: '/about/dialtone' },
-  ],
+  // Navbar config disabled - now using Navbar component with hardcoded top-level navigation
+  // Top-level navigation: Foundations | Design System | Careers | Articles
+  // Design System sections (Design, Components, etc.) appear in left sidebar
+  navbar: [],
   sidebar,
   sidebarDepth: 0,
   editLink: false,
@@ -50,6 +45,12 @@ export default defineUserConfig({
       ],
       css: {
         devSourcemap: true,
+      },
+      server: {
+        watch: {
+          // Ignore packages directory to prevent rebuild loops
+          ignored: ['**/packages/**', '**/node_modules/**'],
+        },
       },
     },
     vuePluginOptions: {

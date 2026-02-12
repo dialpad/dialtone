@@ -4,14 +4,13 @@
     as="nav"
     direction="row"
     gap="300"
-    role="navigation"
   >
     <router-link
-      v-for="link in items"
+      v-for="link in navItems"
       :key="link.text"
       :to="link.link"
-      class="d-btn d-btn--muted dialtone-shell-btn"
-      :class="{ 'd-btn--active': isActiveLink(link.text) }"
+      class="d-btn d-btn--muted d-btn--lg dialtone-shell-btn"
+      :class="{ 'd-btn--active': isActiveLink(link.link) }"
     >
       <span class="d-btn__label">{{ link.text }}</span>
     </router-link>
@@ -19,7 +18,8 @@
   <dt-stack direction="row" gap="300">
     <a
       v-dt-tooltip="'Storybook'"
-      class="d-btn d-btn--muted d-btn--icon-only dialtone-shell-btn dialtone-shell-btn"
+      hidden
+      class="d-btn d-btn--muted d-btn--icon-only dialtone-shell-btn"
       href="https://dialtone.dialpad.com/vue"
       target="_blank"
       rel="noreferrer noopener"
@@ -58,6 +58,7 @@
     </a>
     <a
       v-dt-tooltip="'Github Repository'"
+      hidden
       class="d-btn d-btn--muted d-btn--icon-only dialtone-shell-btn"
       href="https://github.com/dialpad/dialtone"
       target="_blank"
@@ -85,6 +86,7 @@
     </a>
     <a
       v-dt-tooltip="'Codepen Template'"
+      hidden
       class="d-btn d-btn--muted d-btn--icon-only dialtone-shell-btn"
       href="https://codepen.io/pen?template=oNmoRqO"
       target="_blank"
@@ -119,6 +121,7 @@
     </a>
     <dt-dropdown
       id="theme-toggle-dropdown"
+      hidden
       navigation-type="arrow-keys"
       placement="bottom-start"
       class="theme-toggle-dropdown"
@@ -126,7 +129,7 @@
     >
       <template #anchor>
         <dt-button
-          v-dt-tooltip:bottom="`Theme: ${currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1)} `"
+          v-dt-tooltip:bottom="`Theme: ${capitalize(currentTheme)}`"
           class="theme-toggle-button dialtone-shell-btn"
           importance="clear"
           kind="muted"
@@ -238,7 +241,7 @@
     <dt-dropdown navigation-type="arrow-keys" placement="bottom-start">
       <template #anchor>
         <dt-button
-          v-dt-tooltip:bottom="`Mode: ${currentMode.charAt(0).toUpperCase() + currentMode.slice(1)} `"
+          v-dt-tooltip:bottom="`Mode: ${capitalize(currentMode)}`"
           importance="clear"
           kind="muted"
           class="dialtone-shell-btn"
@@ -316,18 +319,17 @@
       </template>
     </dt-dropdown>
     <dt-button
-      importance="outlined"
+      v-dt-tooltip:bottom-end="'Search'"
+      importance="clear"
       kind="muted"
-      class="d-ml8 d-w164 d-bc-subtle h:d-bc-default h:d-bgc-transparent"
       @click="$emit('search')"
     >
       <template #icon>
         <dt-icon
           name="search"
-          size="200"
+          size="400"
         />
       </template>
-      <span class="d-fc-placeholder">Search Dialtone</span>
     </dt-button>
   </dt-stack>
 </template>
@@ -336,15 +338,16 @@
 import { useRoute } from 'vue-router';
 import { useThemeManager } from '../composables/useThemeManager';
 
-defineProps({
-  items: {
-    type: Array,
-    default: () => [],
-  },
-});
 defineEmits(['search']);
 
 const route = useRoute();
+
+// Top-level navigation items
+const navItems = [
+  { text: 'Foundations', link: '/foundations/' },
+  { text: 'Design System', link: '/dialtone/' },
+  { text: 'UI Kits', link: '/ui-kits/' },
+];
 
 // Use theme manager composable with theme switching enabled
 const {
@@ -360,9 +363,16 @@ const {
   formatThemeName,
 } = useThemeManager({ includeThemes: true });
 
-const isActiveLink = (text) => {
-  const linkBase = text.toLowerCase();
-  return route.path.search(linkBase) !== -1;
+const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
+const isActiveLink = (link) => {
+  // For Design System, check all related paths (same as useSidebarItems.js)
+  if (link === '/dialtone/') {
+    const designSystemPaths = ['/components/', '/utilities/', '/tokens/', '/guides/', '/about/', '/dialtone/'];
+    return designSystemPaths.some(p => route.path.includes(p));
+  }
+  // For other links, use simple path matching
+  return route.path.startsWith(link);
 };
 </script>
 

@@ -20,14 +20,6 @@
               </div>
             </th>
             <th
-              scope="col"
-              class="vue-api-table d-p0 d-bbw0"
-            >
-              <div class="d-p16 d-bb d-bbw1">
-                Description
-              </div>
-            </th>
-            <th
               v-if="withDefault"
               scope="col"
               class="d-p0 d-bbw0"
@@ -36,19 +28,29 @@
                 Default
               </div>
             </th>
+            <th
+              scope="col"
+              class="vue-api-table d-p0 d-bbw0"
+            >
+              <div class="d-p16 d-bb d-bbw1">
+                Type
+              </div>
+            </th>
           </tr>
         </thead>
         <tbody>
           <tr
             v-for="({ name, description, type, defaultValue, values, required }) in sortedTableDataByName"
             :key="name"
+            class="d-va-baseline"
           >
-            <th
-              scope="row"
-              class="d-code--sm d-docsite-code"
-            >
+            <th scope="row">
               <dt-stack gap="300">
-                <div>{{ name }}</div>
+                <span>
+                  <code class="d-code--sm d-docsite-code">
+                    {{ name }}
+                  </code>
+                </span>
                 <div
                   v-if="required"
                   class="d-fc-critical d-fw-normal"
@@ -58,41 +60,48 @@
               </dt-stack>
             </th>
 
-            <td
-              class="d-lh-300 vue-api-table"
-            >
-              <dt-stack
-                v-if="description"
-                gap="400"
-              >
-                <markdown-render :markdown="description" />
-                <span v-if="type">
-                  <span class="d-code--sm">Type:</span> <dt-badge>{{ type }}</dt-badge>
-                </span>
+            <td v-if="withDefault">
+              <code v-if="defaultValue" class="d-code--sm d-docsite-code">
+                {{ defaultValue }}
+              </code>
+            </td>
+
+            <td class="vue-api-table">
+              <dt-stack gap="350">
                 <dt-stack
                   v-if="values"
                   direction="row"
-                  class="d-ai-center d-fw-wrap"
-                  gap="300"
+                  align="baseline"
+                  class="d-fw-wrap"
+                  gap="350"
                 >
-                  <span class="d-code--sm">Values:</span>
-                  <dt-badge
-                    v-for="value in values"
-
+                  <template
+                    v-for="(value, index) in values"
                     :key="`${name} ${value}`"
                   >
-                    {{ value }}
-                  </dt-badge>
+                    <dt-text v-if="index > 0" tone="muted" as="span" kind="body" size="xs">
+                      |
+                    </dt-text>
+                    <code class="d-code--sm d-docsite-code">"{{ value }}"</code>
+                  </template>
                 </dt-stack>
+                <span v-else-if="type">
+                  <code class="d-code--sm d-docsite-code">
+                    {{ type }}
+                  </code>
+                </span>
+                <dt-text
+                  v-if="description"
+                  as="p"
+                  kind="body"
+                  size="sm"
+                  wrap="balance"
+                >
+                  <markdown-render
+                    :markdown="description"
+                  />
+                </dt-text>
               </dt-stack>
-            </td>
-            <td
-              v-if="withDefault"
-              class="d-fs-100"
-            >
-              <dt-badge v-if="defaultValue">
-                {{ defaultValue }}
-              </dt-badge>
             </td>
           </tr>
         </tbody>

@@ -1,6 +1,7 @@
 ---
 title: Background Clip
 description: Utilities for controlling whether an element's background extends underneath its border, padding, or content box.
+keywords: ["bg clip", "padding box", "content box"]
 ---
 
 ## Usage

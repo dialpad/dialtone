@@ -1,6 +1,7 @@
 ---
 title: Background Patterns
 description: Utilities for adding distinctive background patterns for Department and Call Centers.
+keywords: ["bg pattern", "department", "call center"]
 ---
 
 ## Usage

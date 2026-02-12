@@ -1,6 +1,7 @@
 ---
 title: Box Shadows
 description: Utilities for controlling an element's box shadows.
+keywords: ["drop shadow", "elevation"]
 ---
 
 ## Outer Shadow

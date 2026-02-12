@@ -1,10 +1,11 @@
 ---
 title: Background Color
 description: Utilities for setting the background color.
+keywords: ["bg color","background colour","bgc"]
 ---
 
 <dt-notice kind="warning" class="d-wmx100p d-mt24" hideClose>
-  Before using background color utilities, first consider <router-link class="d-link d-link--muted" to="/design/colors/palette/#surface">semantic surface colors</router-link>.
+  Before using background color utilities, first consider <router-link class="d-link d-link--muted" to="/foundations/colors/palette/#surface">semantic surface colors</router-link>.
 </dt-notice>
 
 ## Usage

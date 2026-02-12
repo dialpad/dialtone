@@ -1,10 +1,11 @@
 ---
 title: Border Colors
 description: Utilities for controlling an element's border color.
+keywords: ["border colour"]
 ---
 
 <dt-notice kind="warning" class="d-wmx100p d-mt24" hideClose>
-  Before using border color utilities, first consider <router-link class="d-link d-link--muted" to="/design/colors/palette/#borders">semantic border colors</router-link>.
+  Before using border color utilities, first consider <router-link class="d-link d-link--muted" to="/foundations/colors/palette/#borders">semantic border colors</router-link>.
 </dt-notice>
 
 ## Usage
@@ -15,6 +16,7 @@ Use `d-bc-{color}` to set an element's border color.
   <dt-stack
     gap="500"
     :direction="{ 'default': 'column', 'md': 'row' }"
+    class="d-fw-wrap"
   >
     <div
       v-for="color in ['subtle', 'default', 'moderate', 'bold', 'critical', 'success', 'warning']"
