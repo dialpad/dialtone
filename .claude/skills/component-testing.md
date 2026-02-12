@@ -207,6 +207,7 @@ _setWrapper({}, {}, {}, {
 ## Anti-Patterns
 
 ### Do NOT Test Implementation Details
+
 ```javascript
 // BAD — testing internal state
 expect(wrapper.vm.internalCounter).toBe(5);
@@ -218,9 +219,11 @@ expect(wrapper.find('[data-qa="dt-spinner"]').exists()).toBe(true);
 ```
 
 ### Do NOT Rely on Snapshot Tests Alone
+
 Snapshot tests break on any change and do not test behavior. Use them sparingly (e.g., for complex SVG rendering), never as the sole test for a component.
 
 ### Do NOT Hardcode Values That Have Constants
+
 ```javascript
 // BAD
 expect(wrapper.props('size')).toBe('md');
@@ -230,10 +233,13 @@ expect(wrapper.props('size')).toBe(COMPONENT_SIZE_DEFAULT);
 ```
 
 ### Do NOT Skip Cleanup
+
 Always include `afterEach` with `wrapper?.unmount()` to prevent test leakage.
 
 ### Do NOT Skip Accessibility Tests
+
 Every interactive component must test:
+
 - ARIA attributes (`role`, `aria-label`, `aria-expanded`, `aria-disabled`)
 - Keyboard navigation (Enter, Space, Escape, Arrow keys as applicable)
 - Focus management (focus trapping in modals, focus return after close)

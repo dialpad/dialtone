@@ -2,7 +2,7 @@
 
 ## Usage
 
-```
+```text
 /pr-fill [PR_NUMBER or PR_URL] [DESCRIPTION]
 ```
 
@@ -61,7 +61,7 @@ When this command is used, Claude should:
 8. **Detect cross-package impact:**
    When changes span multiple packages, add a "Cross-Package Impact" section after the Description section. Note which packages are affected and potential downstream effects based on the dependency graph:
 
-   ```
+   ```text
    tokens --> CSS --> Vue --> docs / MCP / language-server
    ```
 
@@ -71,7 +71,7 @@ When this command is used, Claude should:
    Add a "Documentation Artifacts" section listing which of these 6 artifacts may need updating based on the changes:
 
    | Artifact | Location | When to update |
-   |---|---|---|
+   | --- | --- | --- |
    | Vue source | `packages/dialtone-vue/components/` | Component behavior or API changes |
    | Tests | `*.test.js`, `*.spec.js` | Any component changes |
    | Storybook stories | `*.stories.js` | Visual or interactive changes |

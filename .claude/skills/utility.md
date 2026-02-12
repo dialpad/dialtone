@@ -18,7 +18,7 @@ description: "CSS utility class creation and updates. Use when adding, modifying
 Match the CSS property to an existing `.less` file:
 
 | Property Type | File |
-|---|---|
+| --- | --- |
 | `display` | `display.less` |
 | `margin`, `padding` | `spacing.less` |
 | `flex-*` properties | `flex.less` |
@@ -38,6 +38,7 @@ If no match exists among the 11 files, check all files first. Only create a new 
 Pattern: `d-<property-shorthand><value>`
 
 Examples:
+
 - `d-p8` = `padding: var(--dt-space-400)` (8px via token)
 - `d-d-flex` = `display: flex`
 - `d-w100p` = `width: 100%`
@@ -45,6 +46,7 @@ Examples:
 - `d-fs-200` = `font-size: var(--dt-font-size-200)`
 
 Common property shorthands:
+
 - `d` = display
 - `p` = padding, `m` = margin (with `t/r/b/l/x/y` directional suffixes)
 - `w` = width, `h` = height
@@ -66,6 +68,7 @@ ALWAYS use `var(--dt-*)` CSS custom properties. Never hardcode colors, spacing, 
 ```
 
 Token categories for reference:
+
 - **Colors**: `var(--dt-color-foreground-*)`, `var(--dt-color-surface-*)`, `var(--dt-color-border-*)`
 - **Spacing**: `var(--dt-space-400)` (scale: 0, 100, 200, 300, 400, 450, 500, 550, 600, 650, 700, 750, 800)
 - **Typography**: `var(--dt-font-size-*)`, `var(--dt-font-weight-*)`, `var(--dt-font-family-*)`
@@ -76,6 +79,7 @@ Use the Dialtone MCP search tools (`search_tokens`, `search_utility_classes`) to
 ### 4. Check for Duplicates
 
 Before adding a new utility:
+
 - Search the `.less` files for existing classes that serve the same purpose
 - Use `search_utility_classes` MCP tool to verify no existing utility already covers the case
 - Check for aliases or shorthand variants that may already exist
@@ -83,6 +87,7 @@ Before adding a new utility:
 ### 5. Consider Responsive Variants
 
 If the utility should be responsive at different breakpoints:
+
 - The `postcss-responsive-variations` plugin generates responsive variants (e.g., `sm:d-d-flex`)
 - This is opt-in per project — the plugin must be configured for the utility pattern
 - Default breakpoints (mobile-first, `min-width`): `sm:480px`, `md:640px`, `lg:960px`, `xl:1264px`

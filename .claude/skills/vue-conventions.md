@@ -106,6 +106,7 @@ size: {
 - **Icon sizes**: use numeric scale `100`, `200`, `300`, `400`, `500`, `600`, `700`, `800`.
 - Always import size constants from the component's `*_constants.js` file.
 - Define both the individual values and a default:
+
   ```javascript
   export const COMPONENT_SIZES = { XS: 'xs', SM: 'sm', MD: 'md', LG: 'lg', XL: 'xl' };
   export const COMPONENT_SIZE_DEFAULT = COMPONENT_SIZES.MD;

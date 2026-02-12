@@ -100,16 +100,19 @@ The template handles **presentation only**:
 ## Anti-Patterns to Flag
 
 ### Template Anti-Patterns
+
 - Business logic in `<template>`: complex ternaries, data transformation, filtering inline with `.filter()` or `.map()`.
 - Deeply nested conditional rendering (3+ levels of `v-if`) — extract into sub-components.
 
 ### Script Anti-Patterns
+
 - Direct DOM manipulation (`document.querySelector`, `innerHTML`, `classList.add`).
 - Watchers that could be computed properties. If you are watching a value to derive another value, use `computed()` instead.
 - Methods that only format data — these should be computed properties.
 - Components doing too much — split into presentation + container components.
 
 ### Style Anti-Patterns
+
 - Inline styles: `style="color: red"` — use utility classes or scoped styles with tokens.
 - Raw CSS values: `color: #1C1C1C` — use `var(--dt-color-foreground-primary)`.
 - Unscoped styles that bleed globally.

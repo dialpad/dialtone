@@ -57,6 +57,7 @@ Export all size modifiers, variant kinds, and validation arrays. These are impor
 #### `<name>.test.js` — Vitest Tests
 
 Use `@vue/test-utils` with `mount`. Cover:
+
 - Default rendering
 - All prop variants
 - Event emissions
@@ -86,6 +87,7 @@ export * from './<name>_constants';
 ### 4. CSS Styles
 
 If the component needs custom styles:
+
 - Create styles in `packages/dialtone-css/` using design tokens (`var(--dt-*)`)
 - Never use raw color/spacing values
 
@@ -140,22 +142,26 @@ When modifying an existing component, verify the full pipeline:
 ## Common Checks (Both Create and Update)
 
 ### Props
+
 - Use `validator` NOT `validate` (Vue silently ignores `validate`)
 - Constants exported from `*_constants.js` and imported in the component
 - JSDoc complete with `@see` and `@values` annotations
 
 ### Code Quality
+
 - Separation of concerns: no business logic in template
 - No raw CSS values — use design tokens via `var(--dt-*)`
 - Component name follows `Dt<PascalCase>` convention (e.g., `DtButton`, `DtHovercard`)
 
 ### Accessibility
+
 - ARIA attributes on interactive elements
 - Keyboard navigation support (Tab, Enter, Escape, Arrow keys as appropriate)
 - Focus management for popover/modal patterns
 - Screen reader announcements for dynamic content
 
 ### Conventions
+
 - `compatConfig: { MODE: 3 }` for Vue 2/3 compat (legacy components only)
 - Visibility toggles: prefer `open`/`update:open` for new components
 - Size scale: `xs`, `sm`, `md`, `lg`, `xl` for interactive components

@@ -103,7 +103,7 @@ Run a regression check to ensure the changes don't break other components:
 
 Generate a summary report:
 
-```
+```text
 ## Component Pipeline Report: <ComponentName>
 
 | Artifact                | Status | Notes               |

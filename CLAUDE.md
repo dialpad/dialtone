@@ -4,7 +4,7 @@ Dialtone is Dialpad's design system — a monorepo providing tokens, CSS utiliti
 
 ## Monorepo Structure
 
-```
+```text
 packages/
   dialtone-tokens/       # Design tokens (color, space, typography, shadows) → JSON/CSS/iOS/Android
   dialtone-css/          # CSS utility classes built with gulp + Less
@@ -23,7 +23,7 @@ apps/
 
 ### Dependency Graph
 
-```
+```text
 dialtone-tokens → dialtone-css → dialtone-vue → dialtone-documentation
                                               → dialtone-mcp-server
                                               → language-server
@@ -34,7 +34,7 @@ dialtone-tokens → dialtone-css → dialtone-vue → dialtone-documentation
 All builds use Nx. Run from the repo root:
 
 | Package | Build | Test | Lint |
-|---------|-------|------|------|
+| --------- | ------- | ------ | ------ |
 | dialtone-tokens | `pnpm nx run dialtone-tokens:build` | — | — |
 | dialtone-css | `pnpm nx run dialtone-css:build` | — | `pnpm nx run dialtone-css:lint` |
 | dialtone-vue | `pnpm nx run dialtone-vue:build` | `pnpm nx run dialtone-vue:test` | `pnpm nx run dialtone-vue:lint` |
@@ -68,7 +68,8 @@ See [COMMIT_CONVENTION.md](.github/COMMIT_CONVENTION.md) for full details.
 **Subject**: Imperative, present tense. No capitalized first letter. No trailing period.
 
 **Examples**:
-```
+
+```text
 feat(select-menu): DLT-123 add leftIcon prop
 fix(combobox, combobox-with-popover): DLT-456 fix keyboard navigation
 chore: NO-JIRA update dependencies
@@ -182,7 +183,7 @@ When creating or updating a component, ALL of these must stay in sync:
 ## Key Files Reference
 
 | File | Purpose |
-|------|---------|
+| ------ | --------- |
 | `commitlint.config.cjs` | Commit format rules |
 | `parser-preset.cjs` | Commit message parser regex |
 | `.github/COMMIT_CONVENTION.md` | Commit convention documentation |

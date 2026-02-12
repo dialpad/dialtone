@@ -6,7 +6,7 @@ description: "Design token creation and updates. Use when adding, modifying, or 
 
 ## Token Hierarchy
 
-```
+```text
 packages/dialtone-tokens/tokens/
   base/
     default.json     # Light mode base tokens
@@ -25,7 +25,7 @@ The build order is defined in `$metadata.json`. Token resolution flows from base
 ### 1. Determine the Correct Location
 
 | Token Purpose | File Location |
-|---|---|
+| --- | --- |
 | Global color, space, font, shadow | `tokens/base/default.json` + `tokens/base/dark.json` |
 | Component-specific (e.g., button background) | `tokens/components/<component>/` |
 | Brand theming (e.g., Dialpad vs TalkDesk) | `tokens/theme/<brand>/` |
@@ -35,7 +35,7 @@ The build order is defined in `$metadata.json`. Token resolution flows from base
 Tokens use camelCase with category prefixes:
 
 | Category | Pattern | Example |
-|---|---|---|
+| --- | --- | --- |
 | Colors | `dtColor<Category><Variant>` | `dtColorForegroundPrimary` |
 | Spacing | `dtSpace<Scale>` | `dtSpace400` |
 | Typography (size) | `dtFontSize<Variant>` | `dtFontSizeBodyMd` |
@@ -78,6 +78,7 @@ In dark mode, the same semantic token references a different base value:
 ### 5. Validate Reference Chains
 
 Before committing, ensure:
+
 - All referenced tokens (inside `{}`) exist and resolve correctly
 - No circular references
 - Dark mode references point to valid dark-mode base values
@@ -86,6 +87,7 @@ Before committing, ensure:
 ### 6. Check for Duplicates
 
 Search existing tokens for conflicting names or redundant values:
+
 - Use `search_tokens` MCP tool to find similar tokens
 - Check both `default.json` and `dark.json` for the token name
 - Review `$metadata.json` to understand which token sets are in scope
@@ -93,15 +95,17 @@ Search existing tokens for conflicting names or redundant values:
 ## Token Value Guidelines
 
 ### Colors
+
 - Never use raw hex colors — always reference base palette tokens
 - Base palette is defined in `tokens/base/` and contains the full color spectrum
 - Semantic tokens (foreground, surface, border) reference palette tokens
 
 ### Spacing Scale
+
 The spacing scale maps token names to pixel values:
 
 | Token | Value |
-|---|---|
+| --- | --- |
 | `dtSpace0` | 0px |
 | `dtSpace100` | 2px |
 | `dtSpace200` | 4px |
@@ -117,11 +121,13 @@ The spacing scale maps token names to pixel values:
 | `dtSpace800` | 48px |
 
 ### Typography
+
 - Font sizes follow a modular scale similar to spacing
 - Font weights: normal (400), medium (500), semi-bold (600), bold (700)
 - Font families: default sans-serif, monospace
 
 ### Shadows
+
 - Shadows compose multiple values: offset-x, offset-y, blur, spread, color
 - Multi-layer box shadows are supported (handled correctly by the PostCSS plugin)
 - Shadow color tokens should use alpha transparency
