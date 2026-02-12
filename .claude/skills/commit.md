@@ -6,7 +6,7 @@ description: "Full commit workflow with Jira integration, format validation, and
 
 ## Commit Format
 
-```
+```text
 <type>(<scope>): <jira> <subject>
 ```
 
@@ -31,7 +31,7 @@ Review the output to understand the scope and nature of the changes.
 Infer the commit type from what files changed:
 
 | File pattern | Likely type |
-|---|---|
+| --- | --- |
 | `*.vue`, component directories | `feat` (new) or `fix` (existing) |
 | `*.test.js`, `*.spec.js` | `test` |
 | `*.md`, `docs/`, `apps/dialtone-documentation/` | `docs` |
@@ -64,15 +64,19 @@ Scope must be **lowercase kebab-case**.
 Find the Jira ticket in this priority order:
 
 **a. Branch name pattern:**
+
 ```bash
 git branch --show-current
 ```
+
 Look for patterns like `feat/DLT-123-description` or `fix/DLT-456-some-bug`. Extract `DLT-\d+`.
 
 **b. Recent commits on this branch:**
+
 ```bash
 git log --oneline -10
 ```
+
 Look for `DLT-\d+` in recent commit messages on the current branch.
 
 **c. User input:**
@@ -80,6 +84,7 @@ If the user mentioned a Jira ticket in conversation, use it.
 
 **d. Create a new ticket:**
 If no ticket found, create one via `mcp__atlassian__createJiraIssue`:
+
 1. First get the cloud ID: `mcp__atlassian__getAccessibleAtlassianResources`
 2. Then create the issue:
    - `cloudId`: from step 1
@@ -95,6 +100,7 @@ If the Jira MCP tools are unavailable or fail, use `NO-JIRA`.
 Format: `<type>(<scope>): <jira> <subject>`
 
 **Subject rules:**
+
 - Imperative, present tense: "add" not "added" or "adds"
 - No capital first letter
 - No trailing period
@@ -103,19 +109,22 @@ Format: `<type>(<scope>): <jira> <subject>`
 **Body (optional):** For complex changes, add a body after a blank line explaining the "why".
 
 **Footer (optional):** For breaking changes, add:
-```
+
+```text
 BREAKING CHANGE: description of what breaks and migration path
 ```
 
 ### 6. Stage Files
 
 Stage only the relevant files. **Never stage:**
+
 - `.env`, `.env.*`
 - `credentials.*`, `secrets.*`, `*.local`
 - `node_modules/`
 - Large binary files not part of the change
 
 Use specific file paths:
+
 ```bash
 git add packages/dialtone-vue/components/tooltip/tooltip.vue
 git add packages/dialtone-vue/components/tooltip/tooltip.test.js
@@ -126,11 +135,13 @@ git add packages/dialtone-vue/components/tooltip/tooltip.test.js
 ### 7. Validate
 
 Before committing, mentally verify the message matches the parser regex:
-```
+
+```text
 ^(\w*)(?:\((.+)\))?: ((?:NO-JIRA|[A-Z]{2,}-\d+)(?: [A-Z]{2,}-\d+)*) (.+)$
 ```
 
 Check:
+
 - Type is one of the valid types
 - Scope (if present) is kebab-case in parentheses
 - Jira ticket is `DLT-\d+` or `NO-JIRA`
@@ -173,32 +184,38 @@ EOF
 ## Examples
 
 ### Simple component fix
-```
+
+```text
 fix(tooltip): DLT-456 correct z-index stacking in nested popovers
 ```
 
 ### New feature across packages
-```
+
+```text
 feat(select-menu): DLT-789 add multi-select support
 ```
 
 ### Documentation-only change
-```
+
+```text
 docs(tooltip): NO-JIRA update usage examples
 ```
 
 ### Build system change
-```
+
+```text
 build: DLT-321 upgrade vite to v6
 ```
 
 ### Multiple scopes
-```
+
+```text
 fix(combobox, tooltip): DLT-123 fix focus trap when nested
 ```
 
 ### Breaking change
-```
+
+```text
 feat(text): DLT-2883 rename headline sizes from xxl to 2xl
 
 BREAKING CHANGE: headline size props changed from xxl/xxxl to 2xl/3xl.
@@ -206,12 +223,14 @@ Update all usages of size="xxl" to size="2xl".
 ```
 
 ### Test-only change
-```
+
+```text
 test(modal): DLT-555 add keyboard navigation tests
 ```
 
 ### Revert
-```
+
+```text
 revert(popover): DLT-100 revert arrow offset changes
 
 This reverts commit abc1234 which introduced positioning regressions.

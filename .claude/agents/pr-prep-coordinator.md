@@ -18,11 +18,12 @@ Validates that a PR is ready before submission. Catches issues that CI doesn't c
 
 Identify all packages with changes and trace impact through the dependency chain:
 
-```
+```text
 tokens → CSS → Vue → docs / MCP server / language server
 ```
 
 Steps:
+
 - Run `git diff --name-only staging...HEAD` to identify changed files
 - Map each changed file to its package
 - For each changed upstream package, verify downstream packages still build:
@@ -32,6 +33,7 @@ Steps:
 - Flag if changes might affect external consumers (Firespotter, web-clients)
 
 Build verification commands:
+
 - Tokens: `pnpm nx run dialtone-tokens:build`
 - CSS: `pnpm nx run dialtone-css:build`
 - Vue: `pnpm nx run dialtone-vue:build`
@@ -51,6 +53,7 @@ Check for changes that could break consumers:
 - **Removed/renamed tokens**: Token names that changed or were removed
 
 If breaking changes are found:
+
 - Ensure commit messages include `BREAKING CHANGE:` in the footer
 - Suggest migration steps for consumers
 - Flag whether the change requires a major version bump
@@ -67,10 +70,12 @@ For each changed component, verify all 6 artifacts are updated:
 6. Sidebar navigation (`site-nav.json` if new pages added)
 
 For new utilities:
+
 - Verify the utility is included in docs JSON
 - Check that documentation page exists or is updated
 
 For new tokens:
+
 - Verify platform outputs are generated (CSS, Less, JS, etc.)
 - Check documentation page exists or is updated
 

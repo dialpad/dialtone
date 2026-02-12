@@ -17,7 +17,7 @@ Specialist agent for Dialtone's VuePress 2 documentation site. Creates and updat
 
 ### VuePress 2 Structure
 
-```
+```text
 apps/dialtone-documentation/docs/
 ├── .vuepress/
 │   ├── config.js          # Site config, navbar, sidebar from site-nav.json
@@ -58,6 +58,7 @@ The sidebar is a nested JSON structure with sections and items:
 ```
 
 Rules:
+
 - Items within sections are **alphabetically ordered** by title
 - The `"planned": true` flag marks items as upcoming (renders differently in sidebar)
 - URLs must end with a trailing slash
@@ -142,6 +143,7 @@ Keyboard interaction and ARIA attribute notes.
 ```
 
 After creating the page:
+
 - Add entry to `site-nav.json` in correct alphabetical position within the Components section
 - Verify the URL path matches the file location
 
@@ -221,7 +223,8 @@ Description of this token category and usage guidance.
   color: var(--dt-color-foreground-primary);
 }
 ```
-```
+
+```text
 
 ### 5. Validate Documentation
 
