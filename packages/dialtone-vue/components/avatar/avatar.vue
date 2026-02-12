@@ -30,7 +30,6 @@
         :class="[iconClass, AVATAR_KIND_MODIFIERS.icon]"
         :aria-label="clickable ? iconAriaLabel : ''"
         :data-qa="iconDataQa"
-        :role="clickable ? 'button' : ''"
       >
         <!-- @slot Slot for avatar icon. It will display if no imageSrc is provided -->
         <slot name="icon" />
@@ -66,7 +65,7 @@
       :aria-label="`${group} participants`"
     >{{ formattedGroup }}</span>
     <dt-presence
-      v-if="presence && !showGroup"
+      v-if="presence && !showGroup && AVATAR_PRESENCE_SIZE_MODIFIERS[size]"
       :presence="presence"
       :class="[
         'd-avatar__presence',

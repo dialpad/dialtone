@@ -36,8 +36,8 @@
           :size="size"
           full-name="Avatar Icon"
         >
-          <template #icon="{ iconSize }">
-            <dt-icon-user :size="iconSize" />
+          <template #icon>
+            <dt-icon-user />
           </template>
         </dt-avatar>
       </div>
@@ -49,48 +49,48 @@
           icon-only
           size="300"
         >
-          <template #icon="{ iconSize }">
-            <dt-icon-hash :size="iconSize" />
+          <template #icon>
+            <dt-icon-hash />
           </template>
         </dt-avatar>
         <dt-avatar
           icon-only
           size="300"
         >
-          <template #icon="{ iconSize }">
-            <dt-icon-hash-bold :size="iconSize" />
+          <template #icon>
+            <dt-icon-hash-bold />
           </template>
         </dt-avatar>
         <dt-avatar
           icon-only
           size="300"
         >
-          <template #icon="{ iconSize }">
-            <dt-icon-lock :size="iconSize" />
+          <template #icon>
+            <dt-icon-lock />
           </template>
         </dt-avatar>
         <dt-avatar
           icon-only
           size="300"
         >
-          <template #icon="{ iconSize }">
-            <dt-icon-lock-filled :size="iconSize" />
+          <template #icon>
+            <dt-icon-lock-filled />
           </template>
         </dt-avatar>
         <dt-avatar
           icon-only
           size="300"
         >
-          <template #icon="{ iconSize }">
-            <dt-icon-inbox :size="iconSize" />
+          <template #icon>
+            <dt-icon-inbox />
           </template>
         </dt-avatar>
         <dt-avatar
           icon-only
           size="300"
         >
-          <template #icon="{ iconSize }">
-            <dt-icon-contacts :size="iconSize" />
+          <template #icon>
+            <dt-icon-contacts />
           </template>
         </dt-avatar>
       </div>
@@ -117,8 +117,8 @@
           size="300"
           deactivated
         >
-          <template #icon="{ iconSize }">
-            <dt-icon-user :size="iconSize" />
+          <template #icon>
+            <dt-icon-user />
           </template>
         </dt-avatar>
       </div>
@@ -176,8 +176,8 @@
           icon-aria-label="user icon"
           clickable
         >
-          <template #icon="{ iconSize }">
-            <dt-icon-user :size="iconSize" />
+          <template #icon>
+            <dt-icon-user />
           </template>
         </dt-avatar>
         <dt-avatar

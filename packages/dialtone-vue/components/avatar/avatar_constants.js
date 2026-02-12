@@ -35,6 +35,8 @@ export const AVATAR_PRESENCE_SIZE_MODIFIERS = {
   400: 'd-avatar__presence--400',
   500: 'd-avatar__presence--500',
   // T-shirt sizes (deprecated)
+  xs: 'd-avatar__presence--100',
+  sm: 'd-avatar__presence--200',
   md: 'd-avatar__presence--md',
   lg: 'd-avatar__presence--lg',
 };
@@ -142,7 +144,7 @@ export function colorToFamilyVariant (colorCode) {
  */
 export function getRandomFamilyVariant (seed) {
   let hash = 0;
-  if (seed) {
+  if (seed != null) {
     for (let i = 0; i < seed.length; i++) {
       hash = ((hash << 5) - hash) + seed.charCodeAt(i);
       hash = hash & hash;

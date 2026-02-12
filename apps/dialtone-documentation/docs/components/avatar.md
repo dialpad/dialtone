@@ -11,8 +11,8 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 <code-well-header>
   <dt-stack direction="row" align="center" gap="500">
     <dt-avatar size="lg">
-      <template #icon="{ iconSize }">
-        <dt-icon-user :size="iconSize" />
+      <template #icon>
+        <dt-icon-user />
       </template>
     </dt-avatar>
     <dt-avatar size="lg" full-name="dp" seed="user-123" presence="busy" />
@@ -52,8 +52,8 @@ The component prioritizes different sources for content display, sequentially ch
         <tr>
             <td>
                 <dt-avatar>
-                  <template #icon="{ iconSize }">
-                    <dt-icon-user :size="iconSize" />
+                  <template #icon>
+                    <dt-icon-user />
                   </template>
                 </dt-avatar>
             </td>
@@ -90,8 +90,8 @@ The component prioritizes different sources for content display, sequentially ch
 
 <code-well-header>
   <dt-avatar>
-    <template #icon="{ iconSize }">
-      <dt-icon-user :size="iconSize" />
+    <template #icon>
+      <dt-icon-user />
     </template>
   </dt-avatar>
 </code-well-header>
@@ -107,8 +107,8 @@ htmlCode='
 </div>'
 vueCode='
 <dt-avatar>
-  <template #icon="{ iconSize }">
-    <dt-icon-user :size="iconSize" />
+  <template #icon>
+    <dt-icon-user />
   </template>
 </dt-avatar>
 '
@@ -183,8 +183,8 @@ Avatar supports a 100-based sizing scale. T-shirt sizes (`xs`, `sm`, `md`, `lg`,
 <code-well-header>
     <dt-stack direction="row" align="center" gap="500" class="d-fw-wrap">
         <dt-avatar v-for="size in sizes" :size="size">
-          <template #icon="{ iconSize }">
-            <dt-icon-user :size="iconSize" />
+          <template #icon>
+            <dt-icon-user />
           </template>
         </dt-avatar>
     </dt-stack>
@@ -251,58 +251,58 @@ htmlCode='
 '
 vueCode='
 <dt-avatar size="100">
-  <template #icon="{ iconSize }">
-    <dt-icon-user :size="iconSize" />
+  <template #icon>
+    <dt-icon-user />
   </template>
 </dt-avatar>
 <dt-avatar size="150">
-  <template #icon="{ iconSize }">
-    <dt-icon-user :size="iconSize" />
+  <template #icon>
+    <dt-icon-user />
   </template>
 </dt-avatar>
 <dt-avatar size="200">
-  <template #icon="{ iconSize }">
-    <dt-icon-user :size="iconSize" />
+  <template #icon>
+    <dt-icon-user />
   </template>
 </dt-avatar>
 <dt-avatar size="250">
-  <template #icon="{ iconSize }">
-    <dt-icon-user :size="iconSize" />
+  <template #icon>
+    <dt-icon-user />
   </template>
 </dt-avatar>
 <dt-avatar size="300">
-  <template #icon="{ iconSize }">
-    <dt-icon-user :size="iconSize" />
+  <template #icon>
+    <dt-icon-user />
   </template>
 </dt-avatar>
 <dt-avatar size="400">
-  <template #icon="{ iconSize }">
-    <dt-icon-user :size="iconSize" />
+  <template #icon>
+    <dt-icon-user />
   </template>
 </dt-avatar>
 <dt-avatar size="500">
-  <template #icon="{ iconSize }">
-    <dt-icon-user :size="iconSize" />
+  <template #icon>
+    <dt-icon-user />
   </template>
 </dt-avatar>
 <dt-avatar size="600">
-  <template #icon="{ iconSize }">
-    <dt-icon-user :size="iconSize" />
+  <template #icon>
+    <dt-icon-user />
   </template>
 </dt-avatar>
 <dt-avatar size="700">
-  <template #icon="{ iconSize }">
-    <dt-icon-user :size="iconSize" />
+  <template #icon>
+    <dt-icon-user />
   </template>
 </dt-avatar>
 <dt-avatar size="800">
-  <template #icon="{ iconSize }">
-    <dt-icon-user :size="iconSize" />
+  <template #icon>
+    <dt-icon-user />
   </template>
 </dt-avatar>
 <dt-avatar size="900">
-  <template #icon="{ iconSize }">
-    <dt-icon-user :size="iconSize" />
+  <template #icon>
+    <dt-icon-user />
   </template>
 </dt-avatar>
 '
@@ -347,14 +347,14 @@ Provides the user's current [presence](/components/presence.md), positioned in t
           <dt-avatar size="sm" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
           <dt-avatar size="md" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
           <dt-avatar size="lg" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-          <dt-avatar size="xl" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+          <dt-avatar size="500" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
       </dt-stack>
       <dt-stack direction="row" align="center" gap="400">
           <dt-avatar size="xs" presence="active" seed="user-1" full-name="Test Name" />
           <dt-avatar size="sm" presence="away" seed="user-2" full-name="William Steele" />
           <dt-avatar size="md" presence="busy" seed="user-3" full-name="Frank Richard" />
           <dt-avatar size="lg" presence="offline" seed="user-4" full-name="John Hawkins" />
-          <dt-avatar size="xl" presence="active" seed="user-5" full-name="Alice Edwards" />
+          <dt-avatar size="500" presence="active" seed="user-5" full-name="Alice Edwards" />
       </dt-stack>
   </dt-stack>
 </code-well-header>
@@ -418,7 +418,7 @@ htmlCode='
     <div class="d-presence__inner d-presence__inner--offline"></div>
   </div>
 </div>
-<div class="d-avatar d-avatar--xl d-avatar--presence">
+<div class="d-avatar d-avatar--size-500 d-avatar--presence">
   <div class="d-avatar__canvas">
     <img
       class="d-avatar__image"
@@ -426,7 +426,11 @@ htmlCode='
       alt="Person Avatar"
     />
   </div>
-  <div class="d-presence d-avatar__presence" role="status" aria-live="off">
+  <div
+    class="d-presence d-avatar__presence d-avatar__presence--500"
+    role="status"
+    aria-live="off"
+  >
     <div class="d-presence__inner d-presence__inner--active"></div>
   </div>
 </div>
@@ -472,11 +476,15 @@ htmlCode='
     <div class="d-presence__inner d-presence__inner--offline"></div>
   </div>
 </div>
-<div class="d-avatar d-avatar--xl d-avatar--presence" data-avatar-family="12" data-avatar-variant="3">
+<div class="d-avatar d-avatar--size-500 d-avatar--presence" data-avatar-family="12" data-avatar-variant="3">
   <div class="d-avatar__canvas">
     <span class="d-avatar__initials">AE</span>
   </div>
-  <div class="d-presence d-avatar__presence" role="status" aria-live="off">
+  <div
+    class="d-presence d-avatar__presence d-avatar__presence--500"
+    role="status"
+    aria-live="off"
+  >
     <div class="d-presence__inner d-presence__inner--active"></div>
   </div>
 </div>
@@ -486,12 +494,12 @@ vueCode='
 <dt-avatar size="sm" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
 <dt-avatar size="md" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
 <dt-avatar size="lg" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-<dt-avatar size="xl" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+<dt-avatar size="500" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
 <dt-avatar size="xs" presence="active" seed="user-1" full-name="Test Name" />
 <dt-avatar size="sm" presence="away" seed="user-2" full-name="William Steele" />
 <dt-avatar size="md" presence="busy" seed="user-3" full-name="Frank Richard" />
 <dt-avatar size="lg" presence="offline" seed="user-4" full-name="John Hawkins" />
-<dt-avatar size="xl" presence="active" seed="user-5" full-name="Alice Edwards" />
+<dt-avatar size="500" presence="active" seed="user-5" full-name="Alice Edwards" />
 '
 />
 
@@ -543,8 +551,8 @@ Avatars that convey meaning on their own — such as navigation or actions — s
 <code-well-header>
   <dt-stack direction="row" align="center" gap="500">
     <dt-avatar clickable icon-aria-label="user" ref="example-clickable">
-      <template #icon="{ iconSize }">
-        <dt-icon-user :size="iconSize" />
+      <template #icon>
+        <dt-icon-user />
       </template>
     </dt-avatar>
   </dt-stack>
@@ -554,8 +562,8 @@ Avatars that convey meaning on their own — such as navigation or actions — s
 :htmlCode="() => $refs['example-clickable']"
 vueCode='
 <dt-avatar clickable icon-aria-label="user">
-  <template #icon="{ iconSize }">
-    <dt-icon-user :size="iconSize" />
+  <template #icon>
+    <dt-icon-user />
   </template>
 </dt-avatar>
 '
@@ -570,8 +578,8 @@ Use the `deactivated` prop to render the avatar in a desaturated/washed-out stat
     <dt-avatar deactivated image-src="/assets/images/person.png" image-alt="Deactivated user" ref="example-deactivated-image" />
     <dt-avatar deactivated full-name="Deactivated User" seed="user-deactivated" ref="example-deactivated-initials" />
     <dt-avatar deactivated ref="example-deactivated-icon">
-      <template #icon="{ iconSize }">
-        <dt-icon-user :size="iconSize" />
+      <template #icon>
+        <dt-icon-user />
       </template>
     </dt-avatar>
   </dt-stack>
@@ -601,8 +609,8 @@ vueCode='
 <dt-avatar deactivated image-src="/assets/images/person.png" image-alt="Deactivated user" />
 <dt-avatar deactivated full-name="Deactivated User" seed="user-deactivated" />
 <dt-avatar deactivated>
-  <template #icon="{ iconSize }">
-    <dt-icon-user :size="iconSize" />
+  <template #icon>
+    <dt-icon-user />
   </template>
 </dt-avatar>
 '
