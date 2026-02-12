@@ -24,7 +24,9 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 
 ## Usage
 
-The Avatar component is designed to prioritize different sources for content display. It will sequentially check for the availability of an image source (`image-src`) or content through the icon slot. If both are not provided, the avatar will extract and display initials from the full name (`full-name`). The resulting initials are extracted using the following logic:
+An avatar is a visual representation of a contact, user, or entity in Dialpad.
+
+The component prioritizes different sources for content display, sequentially checking first for an image source (`image-src`) or content in the icon slot. If neither are provided, initials are extracted from the full name (`full-name`) using the following logic:
 
 * If the string contains two or more words, the result will be the first character of the first and last word capitalized. E.g.:
 `full-name: "Jaqueline Nackos"` will result in: `JN`.
@@ -114,7 +116,7 @@ vueCode='
 
 ### Initials
 
-If no color information is provided, the avatar will display a random color based on the `seed` prop. This ensures consistent colors for the same user across sessions. Colors are dynamically computed using OKLCH and adapt to the current theme.
+Unless otherwise specified via the `color` prop, a background color will be provided based on the `seed` prop. This background is based on a hashed version of the user ID, allowing the colors to be consistent across sessions. Colors are dynamically computed using OKLCH and adapt to the current theme.
 
 <code-well-header>
     <dt-stack direction="row" gap="500" class="d-wmx50p d-fw-wrap">
@@ -308,47 +310,35 @@ vueCode='
 
 ### Group
 
-Adds a count badge and CSS mask to the avatar based on the number of digits (1, 2, or 3). Currently available only with the `xs` avatar size.
+The group avatar is used to represent group discussions in a compact form. A count badge is added on top of the avatar. The avatar shown is the last person to send a message in the group. The group avatar is available only from sizes 100-500. At size 100, only the count badge is shown.
 
 <code-well-header>
     <dt-stack direction="row" align="center" gap="500">
-        <dt-avatar :group="100" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar :group="11" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar :group="3" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+        <dt-avatar size="100" :group="3" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+        <dt-avatar size="150" :group="5" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+        <dt-avatar size="200" :group="12" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+        <dt-avatar size="250" :group="8" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+        <dt-avatar size="300" :group="24" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+        <dt-avatar size="400" :group="100" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+        <dt-avatar size="500" :group="7" image-src="/assets/images/person.png" image-alt="Person Avatar" />
     </dt-stack>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-avatar d-avatar--group d-avatar--group-digits-3">
-  <div class="d-avatar__canvas">
-    <img class="d-avatar__image" src="/assets/images/person.png" alt="Person Avatar"/>
-  </div>
-  <span class="d-avatar__count"><span class="d-avatar__count-number">12</span></span>
-</div>
-<div class="d-avatar d-avatar--group d-avatar--group-digits-2">
-  <div class="d-avatar__canvas">
-    <img class="d-avatar__image" src="/assets/images/person.png" alt="Person Avatar"/>
-  </div>
-  <span class="d-avatar__count"><span class="d-avatar__count-number">12</span></span>
-</div>
-<div class="d-avatar d-avatar--group">
-  <div class="d-avatar__canvas">
-    <img class="d-avatar__image" src="/assets/images/person.png" alt="Person Avatar"/>
-  </div>
-  <span class="d-avatar__count"><span class="d-avatar__count-number">1</span></span>
-</div>
-'
 vueCode='
-<dt-avatar :group="100" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-<dt-avatar :group="11" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-<dt-avatar :group="3" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+<dt-avatar size="100" :group="3" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+<dt-avatar size="150" :group="5" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+<dt-avatar size="200" :group="12" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+<dt-avatar size="250" :group="8" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+<dt-avatar size="300" :group="24" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+<dt-avatar size="400" :group="100" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+<dt-avatar size="500" :group="7" image-src="/assets/images/person.png" image-alt="Person Avatar" />
 '
 />
 
 ### Presence
 
-Positions the [Presence](/components/presence.md) component at each size and applies a CSS mask to the avatar.
+Provides the user's current [presence](/components/presence.md), positioned in the bottom right corner.
 
 <code-well-header>
   <dt-stack gap="400">
@@ -546,7 +536,9 @@ vueCode='
 
 ### Clickable
 
-If you need to create a clickable avatar you can set the clickable prop. This will make the avatar a clickable component, set some styling and will be navigable by keyboard. In order for the clickable avatar to be fully accessible, you need to either set `full-name`, `image-alt` or `icon-aria-label` attributes.
+Avatars that appear alongside a visible label (e.g., a user's name) are decorative and should not be focusable or announced by screen readers. This is the default behavior.
+
+Avatars that convey meaning on their own — such as navigation or actions — should be made interactive using the `clickable` prop. This renders the avatar as a `<button>` with visible focus ring and keyboard activation via Enter and Space. Provide an accessible name via `icon-aria-label` (for icon avatars), `full-name` (for initials avatars), or `image-alt` (for image avatars).
 
 <code-well-header>
   <dt-stack direction="row" align="center" gap="500">
@@ -616,23 +608,6 @@ vueCode='
 '
 />
 
-### Seeded
-
-You may use a seed to make the randomly generated color be the same every time for that seed. This is useful if you want users to always have the same color, just pass in their unique user ID as the seed.
-
-<code-well-header>
-  <dt-stack direction="row" align="center" gap="500">
-    <dt-avatar full-name="Jaqueline Nackos" seed="X5G3D7D3DS3WL7" ref="example-seeded" />
-  </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs['example-seeded']"
-vueCode='
-<dt-avatar full-name="Jaqueline Nackos" seed="X5G3D7D3DS3WL7" />
-'
-/>
-
 ## Vue API
 
 <component-vue-api component-name="avatar" />
@@ -643,15 +618,13 @@ vueCode='
 
 ## Accessibility
 
-Initial avatars' background and font color combinations have been paired to ensure minimum contrast is met.
+Initials avatars use background and text color pairings that meet WCAG AA minimum contrast requirements. Variants 0–5 use light text on dark backgrounds, and variants 6–9 use dark text on light backgrounds.
 
-When it comes to voiceover, avatars accompanying a label should generally be considered decorative,
-is not focusable, nor is it read out. An example is a user's avatar next to their name.
+The `deactivated` prop applies a visual desaturation effect that is not conveyed to screen readers. If the deactivated status is meaningful, communicate it through surrounding text or an `aria-label` on a parent element.
 
-Avatars unaccompanied by labels, especially those representing functionality or navigation, should be focusable and
-read out in voiceover. Please refer
-to [WCAG](https://www.w3.org/WAI/tutorials/images/decorative) references for
-your specific usage.
+The group count badge includes `role="img"` and an `aria-label` (e.g., "3 participants") so screen readers announce the participant count with context rather than reading the raw number.
+
+For more guidance, see the [WCAG images tutorial](https://www.w3.org/WAI/tutorials/images/decorative/).
 
 <script setup>
 import { DtIconUser, DtIconHear } from '@dialpad/dialtone-icons/vue3';

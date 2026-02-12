@@ -190,27 +190,27 @@
       </div>
     </div>
     <div>
-      <h2>Group</h2>
-      <div class="d-flow16 d-d-flex">
+      <h2>Group (Single Digit)</h2>
+      <div class="d-flow16 d-d-flex d-ai-center">
         <dt-avatar
+          v-for="size in groupSizes"
+          :key="`group-${size}`"
           :seed="$attrs.seed"
-          full-name="Person avatar"
-          :group="3"
-        />
-        <dt-avatar
-          :seed="$attrs.seed"
-          :group="10"
-        >
-          <template #icon="{ iconSize }">
-            <dt-icon-user :size="iconSize" />
-          </template>
-        </dt-avatar>
-        <dt-avatar
-          :seed="$attrs.seed"
+          :size="size"
           full-name="Person avatar"
           :image-src="$attrs.imageSrc"
           :image-alt="$attrs.imageAlt"
-          :group="100"
+          :group="3"
+        />
+      </div>
+      <div class="d-flow16 d-d-flex d-ai-center d-mt8">
+        <dt-avatar
+          v-for="size in groupSizes"
+          :key="`group-initials-${size}`"
+          :seed="$attrs.seed"
+          :size="size"
+          full-name="Person avatar"
+          :group="5"
         />
       </div>
     </div>
@@ -248,6 +248,7 @@ export default {
   data () {
     return {
       avatarSizes: Object.keys(AVATAR_SIZE_MODIFIERS),
+      groupSizes: ['100', '150', '200', '250', '300', '400', '500', '600'],
     };
   },
 

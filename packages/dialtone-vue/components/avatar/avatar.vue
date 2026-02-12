@@ -33,10 +33,7 @@
         :role="clickable ? 'button' : ''"
       >
         <!-- @slot Slot for avatar icon. It will display if no imageSrc is provided -->
-        <slot
-          name="icon"
-          :icon-size="iconSize || AVATAR_ICON_SIZES[size]"
-        />
+        <slot name="icon" />
       </div>
       <span
         v-else
@@ -65,6 +62,8 @@
       v-if="showGroup"
       class="d-avatar__count"
       data-qa="dt-avatar-count"
+      role="img"
+      :aria-label="`${group} participants`"
     >{{ formattedGroup }}</span>
     <dt-presence
       v-if="presence && !showGroup"
@@ -447,12 +446,18 @@ export default {
     },
 
     formattedGroup () {
+      const size = String(this.validatedSize);
+      // Sizes 100, 150, 200 cap at 2 digits — too small for 3
+      const smallSizes = ['xs', '100', '150', '200'];
+      const maxDigits = smallSizes.includes(size) ? 2 : 3;
+      if (maxDigits === 2) {
+        return this.group > 9 ? '9+' : this.group;
+      }
       return this.group > 99 ? '99+' : this.group;
     },
 
     validatedSize () {
-      // TODO: Group only supports size 100 for now. Remove this when we support other sizes.
-      return this.group ? 100 : this.size;
+      return this.size;
     },
 
     showImage () {
