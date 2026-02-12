@@ -514,8 +514,10 @@
       --avatar-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath fill='white' d='M16 0c1.4 0 2.1 0 2.635.272a2.5 2.5 0 0 1 1.092 1.093C20 1.9 20 2.6 20 4v3h-5c-2.8 0-4.2 0-5.27.545A5 5 0 0 0 7.545 9.73C7 10.8 7 12.2 7 15v5H4c-1.4 0-2.1 0-2.635-.273a2.5 2.5 0 0 1-1.093-1.092C0 18.1 0 17.4 0 16V4c0-1.4 0-2.1.272-2.635A2.5 2.5 0 0 1 1.365.272C1.9 0 2.6 0 4 0z'/%3E%3C/svg%3E");
 
       > .d-avatar__count {
-        --avatar-count-font-size: var(--dt-font-size-50);
+        --avatar-count-inline-size: calc(var(--dt-layout-100) * 0.19);
         --avatar-count-position: var(--dt-spacing-1-negative);
+
+        padding: var(--dt-spacing-0) var(--dt-spacing-1);
       }
 
       .d-avatar__initials {
