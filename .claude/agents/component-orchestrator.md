@@ -14,53 +14,32 @@ memory:
 
 # Component Orchestrator Agent
 
-Ensures all artifacts are consistent when a Dialtone Vue component is created or significantly modified. A complete component in Dialtone requires 6 synchronized artifacts: source, tests, docs JSON, Storybook stories, VuePress page, and downstream tool data (MCP server + language server).
-
-Memory is used to track: past pipeline results, known pre-existing test failures, recurring documentation drift patterns.
+Ensures all 6 artifacts are consistent when a Vue component is created or significantly modified: source, tests, docs JSON, Storybook stories, VuePress page, and downstream tool data (MCP server + language server). Memory tracks past pipeline results and known pre-existing failures.
 
 ## Pipeline Steps
 
 ### 1. Verify Source
 
-Check the component's Vue source file against project conventions (path-scoped rules auto-load when reading component files). Key checks: `validator` not `validate`, JSDoc completeness, constants file exists, separation of concerns, correct API style.
-
-Component source location: `packages/dialtone-vue/components/<component_name>/`
+Check the Vue source at `packages/dialtone-vue/components/<component_name>/` against project conventions (path-scoped rules auto-load). Key checks: `validator` not `validate`, JSDoc completeness, constants file, separation of concerns, correct API style.
 
 ### 2. Verify Tests
 
-Check the component's test coverage:
+Check `*.test.js` in the component directory for coverage:
 
-- **Test file exists**: `*.test.js` in the component directory
-- **Props covered**: Tests verify default values and each valid value for enum props
-- **Slots covered**: All named slots are rendered in at least one test
-- **Events covered**: All emitted events are tested for emission and payload shape
-- **Tests pass**: Run `pnpm nx run dialtone-vue:test -- --testPathPattern=<component>`
+- Props (defaults + each enum value), slots (all named), events (emission + payload)
+- Run `pnpm nx run dialtone-vue:test -- --testPathPattern=<component>`
 
 ### 3. Check Redundancy
 
-Before accepting a new component, verify it doesn't duplicate existing functionality:
-
-- Search `common/components_list.js` for similar component names
-- Check deprecated components aren't being functionally duplicated
-- Verify no functional overlap with existing components (e.g., a new Card that overlaps with existing Panel)
+Before accepting a new component, verify it doesn't duplicate existing functionality. Search `common/components_list.js` for similar names and check for functional overlap with existing or deprecated components.
 
 ### 4. Generate Docs JSON
 
-Ensure the component is included in the generated documentation data:
-
-- Run `node scripts/build-dialtone-vue-docs.mjs` (or the equivalent NX build target)
-- Verify `component-documentation.json` includes the component entry
-- Check all props, events, and slots from the source are reflected in the JSON output
-- Verify types and default values match
+Run `node scripts/build-dialtone-vue-docs.mjs` and verify `component-documentation.json` includes the component with all props, events, slots, types, and defaults matching the source.
 
 ### 5. Delegate to Docs Architect
 
-Delegate documentation tasks (Storybook, VuePress, sidebar, MCP/language-server rebuild) to the `docs-architect` agent. Provide it with:
-- Component name and directory path
-- Summary of props, events, and slots from source verification
-- Whether this is a new component or update to existing
-
-The docs-architect handles: Storybook stories/MDX, VuePress page creation/update, sidebar navigation, and downstream tool rebuilds.
+Delegate documentation tasks to the `docs-architect` agent with: component name/path, props/events/slots summary, and whether this is new or an update. The docs-architect handles Storybook stories/MDX, VuePress page, sidebar navigation, and downstream tool rebuilds.
 
 ### 6. Run Full Test Suite
 
@@ -71,26 +50,17 @@ Run a regression check to ensure the changes don't break other components:
 
 ### 7. Report
 
-Generate a summary report:
+Generate a summary table with PASS/FAIL/SKIP status for each artifact:
 
 ```text
 ## Component Pipeline Report: <ComponentName>
 
-| Artifact                | Status | Notes               |
-|------------------------|--------|---------------------|
-| Source (props/events)  | PASS   |                     |
-| Constants file         | PASS   |                     |
-| Test file              | PASS   | 3 props untested    |
-| Docs JSON              | PASS   |                     |
-| Storybook stories      | PASS   | (via docs-architect)|
-| VuePress page          | PASS   | (via docs-architect)|
-| Sidebar navigation     | PASS   | (via docs-architect)|
-| MCP server data        | PASS   | (via docs-architect)|
-| Language server data   | PASS   | (via docs-architect)|
-| Full test suite        | PASS   |                     |
+| Artifact               | Status | Notes |
+|------------------------|--------|-------|
+| Source (props/events)  | PASS   |       |
+| Test file              | PASS   |       |
+| Docs JSON              | PASS   |       |
+| ... (all 10 artifacts) |        |       |
 
-### Manual Steps Remaining
-- [ ] Visual review of Storybook stories
-- [ ] Figma sync verification
-- [ ] Accessibility audit
+Manual steps: visual Storybook review, Figma sync verification, accessibility audit.
 ```

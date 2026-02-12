@@ -43,20 +43,17 @@ Check prop/event/slot naming against conventions defined in project rules (`.cla
 
 ### 4. Constants Coverage
 
-Each component with enum-like props (size, kind, type, etc.) should have a `*_constants.js` file that exports the valid values.
+Each component with enum-like props should have a `*_constants.js` file.
 
-- Check that constants files exist for components with enum props
-- Verify constants are imported and used in prop validators (not hardcoded strings)
+- Verify constants files exist and are imported in prop validators
 - Check for inline arrays in validators that should reference constants
 
 ### 5. Documentation-Code Drift
 
-Compare the Vue source (props, events, slots) against the generated `component-documentation.json`:
+Compare Vue source (props, events, slots) against `component-documentation.json`:
 
-- Props in source but not in docs JSON
-- Props in docs JSON but removed from source
+- Props/events/slots present in one but missing from the other
 - Mismatched types or default values
-- Missing event or slot documentation
 
 ### 6. Separation of Concerns Violations
 
@@ -64,78 +61,32 @@ Scan Vue templates and styles for anti-patterns per project conventions: complex
 
 ### 7. Test Coverage Gaps
 
-For each component, compare its props/events/slots against its test file:
+Compare each component's props/events/slots against its test file:
 
-- Props without any test assertion
-- Events that are never tested for emission
-- Named slots that are never rendered in tests
+- Props, events, or slots without test coverage
 - Components with no test file at all
 
 ### 8. CSS Token Usage
 
 Scan `.less` and `.css` files for:
 
-- Raw hex color values that should use token variables
-- Raw pixel values for spacing/sizing that should use token variables
+- Raw hex/pixel values that should use `var(--dt-*)` tokens
 - `!important` usage outside of utility class definitions
-- Hardcoded font families or font sizes
 
 ## Area-Specific Analysis
 
-### `/analyze components`
-
-Runs checks 1-5 above, focused on Vue component source code quality.
-
-### `/analyze tokens`
-
-- Token reference chains: verify token aliases resolve correctly
-- Missing dark mode counterparts: find tokens without dark theme values
-- Naming consistency: check token names follow the `--dt-{category}-{property}-{variant}` convention
-- Unused tokens: cross-reference token definitions against usage in CSS and Vue files
-
-### `/analyze utilities`
-
-- Duplicate utility classes: find classes with identical CSS output
-- Missing token references: utilities using raw values instead of tokens
-- Naming convention violations: classes not following `d-{property}{value}` pattern
-- Responsive variant gaps: utilities that should have responsive variants but don't
-
-### `/analyze docs`
-
-- Documentation-code drift (check 5 above)
-- Missing component pages: components in source without a docs page
-- Broken sidebar links: entries in `site-nav.json` pointing to nonexistent pages
-- Missing frontmatter: pages without required fields (`status`, `title`, `description`)
-- Stale planned flags: components marked `"planned": true` in sidebar that are now implemented
+- **`/analyze components`** — Runs checks 1-5 (validate bug, compatConfig, naming, constants, doc drift)
+- **`/analyze tokens`** — Token alias resolution, missing dark mode counterparts, naming consistency, unused tokens
+- **`/analyze utilities`** — Duplicate classes, missing token refs, naming violations, responsive variant gaps
+- **`/analyze docs`** — Check 5 (doc drift) plus missing pages, broken sidebar links, stale planned flags
 
 ## Output Format
 
 Group findings by severity:
 
-### Critical
-
-Bugs that cause silent failures or broken functionality:
-
-- `validate` vs `validator` instances
-- Broken token references
-- Missing exports that break consumers
-
-### Warning
-
-Inconsistencies and gaps that should be addressed:
-
-- Naming pattern violations
-- Missing documentation
-- Test coverage gaps
-- Missing `compatConfig`
-
-### Info
-
-Style suggestions and potential improvements:
-
-- Separation of concerns suggestions
-- Token usage opportunities
-- Potential redundancies
+- **Critical** — Silent failures or broken functionality (e.g., `validate` vs `validator`)
+- **Warning** — Inconsistencies and gaps (e.g., missing documentation, test coverage gaps)
+- **Info** — Style suggestions and improvements (e.g., token usage opportunities)
 
 Format each finding as:
 

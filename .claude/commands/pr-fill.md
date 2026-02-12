@@ -8,9 +8,9 @@
 
 ## Description
 
-Generates a filled PR description based on the Dialtone PR template (.github/pull_request_template.md) and uses the `gh` CLI to update the actual PR. If no PR number is provided, it assumes the current branch has an open PR. If no description is provided, it analyzes git diff and commit messages to auto-populate relevant sections.
+Generates a filled PR description based on the Dialtone PR template (.github/pull_request_template.md) and uses `gh` CLI to update the PR. If no PR number is provided, assumes the current branch has an open PR. If no description is provided, analyzes git diff and commit messages to auto-populate sections.
 
-Sections that cannot be completed are left as placeholders for manual completion (e.g. "Screenshots / GIFs" and "Sources"). Sections that are not relevant to the change should be removed, for example if there were no CSS changes, the CSS checklist should be removed.
+Sections that cannot be completed are left as placeholders for manual completion. Irrelevant sections should be removed (e.g. CSS checklist when there are no CSS changes).
 
 ## Implementation
 
@@ -47,8 +47,7 @@ When this command is used, Claude should:
    - Format as: `[DLT-XXX](https://dialpad.atlassian.net/browse/DLT-XXX)`
 
 6. **Validate and set PR title:**
-   - PR title must follow commitlint format: `<type>(<scope>): <jira> <subject>`
-   - Validate against regex: `^(\w*)(?:\((.+)\))?: ((?:NO-JIRA|[A-Z]{2,}-\d+)(?: [A-Z]{2,}-\d+)*) (.+)$`
+   - Must follow commitlint format (see CLAUDE.md Commit Convention)
    - If the current PR title does not match, derive the correct title from the oldest commit message or the changes
    - Update with `gh pr edit <PR_NUMBER> --title "<VALIDATED_TITLE>"`
 
@@ -59,27 +58,10 @@ When this command is used, Claude should:
    - In the description section, describe the changes in a summarized way, no need to list every file changed
 
 8. **Detect cross-package impact:**
-   When changes span multiple packages, add a "Cross-Package Impact" section after the Description section. Note which packages are affected and potential downstream effects based on the dependency graph:
-
-   ```text
-   tokens --> CSS --> Vue --> docs / MCP / language-server
-   ```
-
-   For example, if tokens changed, note that CSS, Vue, and downstream consumers may be affected. If Vue components changed, note documentation and MCP server may need updates.
+   When changes span multiple packages, add a "Cross-Package Impact" section noting affected packages and downstream effects per the dependency graph (`tokens --> CSS --> Vue --> docs / MCP / language-server`).
 
 9. **Flag documentation artifacts:**
-   Add a "Documentation Artifacts" section listing which of these 6 artifacts may need updating based on the changes:
-
-   | Artifact | Location | When to update |
-   | --- | --- | --- |
-   | Vue source | `packages/dialtone-vue/components/` | Component behavior or API changes |
-   | Tests | `*.test.js`, `*.spec.js` | Any component changes |
-   | Storybook stories | `*.stories.js` | Visual or interactive changes |
-   | Component docs JSON | `packages/dialtone-vue/components/*/docs.json` | Prop, slot, or event changes |
-   | VuePress docs | `apps/dialtone-documentation/docs/` | User-facing documentation |
-   | MCP server data | `packages/dialtone-mcp-server/` | Component API changes |
-
-   Only include artifacts that are relevant to the changes. Mark artifacts that are already updated with a checkmark and those that may still need attention with a flag.
+   Check all 6 documentation artifacts are updated (see CLAUDE.md Documentation Pipeline). Add a "Documentation Artifacts" section listing which are relevant to the changes. Mark artifacts already updated with a checkmark and those needing attention with a flag.
 
 10. **Strip Co-Authored-By lines:**
     Before writing the final PR body, remove any `Co-Authored-By:` lines from the generated content. These must never appear in PR descriptions.
@@ -98,13 +80,9 @@ When this command is used, Claude should:
 
 ## Template Sections to Auto-Fill
 
-- PR Title (validated commitlint format, from oldest commit message in that branch)
-- Type of Change (auto-checked based on detection)
-- Jira Ticket (linked URL, created if needed)
-- Description (summarized changes)
-- Cross-Package Impact (if multi-package changes detected)
-- Documentation Artifacts (flagging what may need updates)
-- Relevant checklists (based on file changes)
+- PR Title (commitlint format, from oldest commit), Type of Change, Jira Ticket (linked URL)
+- Description (summarized changes), Cross-Package Impact (if multi-package)
+- Documentation Artifacts (flagging what needs updates), Relevant checklists (based on file changes)
 
 ## Example Output Structure
 
@@ -148,14 +126,9 @@ Dependency flow: tokens --> **CSS** --> **Vue** --> docs/MCP/language-server
 
 ## :bulb: Context
 
-<!--- Describe the purpose of the changes -->
-<!--- Why did we make these changes? -->
-<!--- What problem(s) do they solve? -->
+<!--- Why did we make these changes? What problem(s) do they solve? -->
 
 ## :pencil: Checklist
-
-<!--- Tick or place an `x` in all of the checkboxes that apply -->
-<!--- Remove checkboxes that do not apply -->
 
 For all PRs:
 
@@ -179,8 +152,6 @@ For all CSS changes:
 
 If new component:
 
-<!--- There are lots of things to remember when adding a new component to the system! This is so you don't forget any of them. -->
-
 - I am exporting any new components or constants:
   - [x] from the index.js in the component directory.
   - [x] from the index.js in the root (`packages/dialtone-vue`).
@@ -194,14 +165,13 @@ If new component:
 
 ## :crystal_ball: Next Steps
 
-<!--- Describe any future changes that need to be made after merging the PR, especially any follow up tasks after release. -->
+<!--- Future changes needed after merging, especially follow-up tasks after release. -->
 
 ## :camera: Screenshots / GIFs
 
-<!--- Add these if necessary. Since we have deploy previews for every PR it may not always be. -->
-<!--- Link any screenshots / GIFs below -->
+<!--- Add if necessary (deploy previews may suffice) -->
 
 ## :link: Sources
 
-<!--- Add any links to external reference material -->
+<!--- Add links to external reference material -->
 ```

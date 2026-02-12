@@ -16,63 +16,14 @@ Before scaffolding, verify the component name is available:
 
 ### 2. Scaffold Component Files
 
-New components use **Composition API** with `<script setup lang="ts">`. Create the following files under `packages/dialtone-vue/components/<name>/`:
+New components use **Composition API** with `<script setup lang="ts">`, `defineProps`, `defineEmits`, and `withDefaults`. See path-scoped rules for conventions. Create the following files under `packages/dialtone-vue/components/<name>/`:
 
-#### `<name>.vue` — Component Implementation
-
-```vue
-<template>
-  <!-- Template with proper ARIA attributes and keyboard navigation -->
-</template>
-
-<script setup lang="ts">
-import { computed, ref } from 'vue';
-import {
-  DT_<NAME>_SIZE_MODIFIERS,
-  DT_<NAME>_KINDS,
-} from './<name>_constants';
-
-/**
- * Dt<Name> — Brief description of the component.
- * @see https://dialtone.dialpad.com/components/<name>/
- */
-
-const props = withDefaults(defineProps<{
-  /** Description of prop */
-  size?: string;
-}>(), {
-  size: 'md',
-});
-
-const emit = defineEmits<{
-  (e: 'update:modelValue', value: unknown): void;
-}>();
-</script>
-```
-
-#### `<name>_constants.js` — Constants
-
-Export all size modifiers, variant kinds, and validation arrays. These are imported by the component and by tests/stories.
-
-#### `<name>.test.js` — Vitest Tests
-
-Use `@vue/test-utils` with `mount`. Cover:
-
-- Default rendering
-- All prop variants
-- Event emissions
-- Slot rendering
-- Accessibility (ARIA attributes present)
-
-#### `<name>.stories.js` — Storybook Stories
-
-Create stories for each variant/size combination. Include controls for interactive props.
-
-#### `<name>.mdx` — Storybook Docs
-
-MDX documentation page with usage examples and API table.
-
-#### `index.js` — Barrel Export
+- **`<name>.vue`** — Component implementation (Composition API, ARIA attributes, keyboard navigation)
+- **`<name>_constants.js`** — Exported size modifiers, variant kinds, validation arrays (imported by component, tests, stories)
+- **`<name>.test.js`** — Vitest + `@vue/test-utils` tests (rendering, props, events, slots, a11y)
+- **`<name>.stories.js`** — Storybook stories for variant/size combinations with interactive controls
+- **`<name>.mdx`** — MDX documentation page with usage examples and API table
+- **`index.js`** — Barrel export:
 
 ```js
 export { default as Dt<Name> } from './<name>.vue';
@@ -107,43 +58,19 @@ If the component needs custom styles:
 
 ## Updating an Existing Component (`/component update <name>`)
 
-When modifying an existing component, verify the full pipeline:
+Follow steps 2-6 from create flow above, with these additions:
 
-### 1. Verify Source Changes
-
-- Read the existing component file before making changes
-- Verify props, events, and slots follow project conventions (auto-loaded via path-scoped rules)
-- Update JSDoc comments for any changed/added props or events
-- Update constants file if new variants/sizes are added
-
-### 2. Update Tests
-
-- Add test cases for new/changed props, events, and slots
-- Run existing tests to verify no regressions: `pnpm nx run dialtone-vue:test -- --filter <name>`
-
-### 3. Update Storybook
-
-- Add stories for new variants and controls for new props
-- Update `.mdx` docs if API surface changed
-
-### 4. Update Documentation
-
-- Update VuePress page under `apps/dialtone-documentation/docs/components/<name>.md`
-- Ensure prop tables, event descriptions, and slot docs are current
-
-### 5. Rebuild Pipeline
-
-- Rebuild docs JSON: `scripts/build-dialtone-vue-docs.mjs`
-- Rebuild MCP data: `pnpm nx run dialtone-mcp-server:build`
-- Run full test suite: `pnpm nx run dialtone-vue:test`
+- Read the existing component **before** making changes
+- Update JSDoc comments and constants file for any changed/added props, events, or sizes
+- Add test cases for new/changed behavior; run existing tests for regressions
+- Update Storybook stories/MDX and VuePress docs if API surface changed
 
 ---
 
-## Common Checks (Both Create and Update)
+## Common Checks
 
-Follow all Vue conventions per project rules (path-scoped rules auto-load when editing component files). Key verification points:
+Path-scoped rules auto-load when editing component files. Key verification points:
 
 - Props use `validator` not `validate`
 - Constants exported and imported (no hardcoded strings)
 - ARIA attributes, keyboard navigation, focus management
-- Component name follows `Dt<PascalCase>` convention
