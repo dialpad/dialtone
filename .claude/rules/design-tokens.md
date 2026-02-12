@@ -16,8 +16,8 @@ camelCase with category prefix: `dtColor*`, `dtSpace*`, `dtFontSize*`, `dtFontWe
 
 These produce CSS custom properties: `--dt-color-foreground-primary`, `--dt-space-400`, etc.
 
-## Dark Mode — Always Maintain Both
-When adding/editing a token in `default.json`, you MUST also add/update `dark.json`. Same token name, different base palette reference.
+## Dark Mode
+Values in `dark.json` override `default.json`. When adding/editing a token, ensure `dark.json` has the corresponding override with the appropriate dark palette reference.
 
 ## Token References
 Use curly-brace syntax to reference other tokens:
