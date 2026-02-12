@@ -214,6 +214,56 @@
         />
       </div>
     </div>
+    <div>
+      <h2>Group (Double Digit)</h2>
+      <div class="d-flow16 d-d-flex d-ai-center">
+        <dt-avatar
+          v-for="size in groupSizes"
+          :key="`group-double-${size}`"
+          :seed="$attrs.seed"
+          :size="size"
+          full-name="Person avatar"
+          :image-src="$attrs.imageSrc"
+          :image-alt="$attrs.imageAlt"
+          :group="12"
+        />
+      </div>
+      <div class="d-flow16 d-d-flex d-ai-center d-mt8">
+        <dt-avatar
+          v-for="size in groupSizes"
+          :key="`group-double-initials-${size}`"
+          :seed="$attrs.seed"
+          :size="size"
+          full-name="Person avatar"
+          :group="12"
+        />
+      </div>
+    </div>
+    <div>
+      <h2>Group (Triple Digit)</h2>
+      <div class="d-flow16 d-d-flex d-ai-center">
+        <dt-avatar
+          v-for="size in groupSizes"
+          :key="`group-triple-${size}`"
+          :seed="$attrs.seed"
+          :size="size"
+          full-name="Person avatar"
+          :image-src="$attrs.imageSrc"
+          :image-alt="$attrs.imageAlt"
+          :group="120"
+        />
+      </div>
+      <div class="d-flow16 d-d-flex d-ai-center d-mt8">
+        <dt-avatar
+          v-for="size in groupSizes"
+          :key="`group-triple-initials-${size}`"
+          :seed="$attrs.seed"
+          :size="size"
+          full-name="Person avatar"
+          :group="120"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -248,7 +298,7 @@ export default {
   data () {
     return {
       avatarSizes: Object.keys(AVATAR_SIZE_MODIFIERS),
-      groupSizes: ['100', '150', '200', '250', '300', '400', '500', '600'],
+      groupSizes: ['100', '150', '200', '250', '300', '400', '500'],
     };
   },
 

@@ -17,29 +17,31 @@
         { 'd-avatar--image-loaded': imageLoadedSuccessfully },
       ]"
     >
-      <img
-        v-if="showImage"
-        ref="avatarImage"
-        class="d-avatar__image"
-        data-qa="dt-avatar-image"
-        :src="imageSrc"
-        :alt="imageAlt"
-      >
-      <div
-        v-else-if="isIconType()"
-        :class="[iconClass, AVATAR_KIND_MODIFIERS.icon]"
-        :aria-label="clickable ? iconAriaLabel : ''"
-        :data-qa="iconDataQa"
-      >
-        <!-- @slot Slot for avatar icon. It will display if no imageSrc is provided -->
-        <slot name="icon" />
+      <div class="d-avatar__canvas-inner">
+        <img
+          v-if="showImage"
+          ref="avatarImage"
+          class="d-avatar__image"
+          data-qa="dt-avatar-image"
+          :src="imageSrc"
+          :alt="imageAlt"
+        >
+        <div
+          v-else-if="isIconType()"
+          :class="[iconClass, AVATAR_KIND_MODIFIERS.icon]"
+          :aria-label="clickable ? iconAriaLabel : ''"
+          :data-qa="iconDataQa"
+        >
+          <!-- @slot Slot for avatar icon. It will display if no imageSrc is provided -->
+          <slot name="icon" />
+        </div>
+        <span
+          v-else
+          :class="[AVATAR_KIND_MODIFIERS.initials]"
+        >
+          {{ formattedInitials }}
+        </span>
       </div>
-      <span
-        v-else
-        :class="[AVATAR_KIND_MODIFIERS.initials]"
-      >
-        {{ formattedInitials }}
-      </span>
     </div>
     <div
       v-if="hasOverlayIcon || overlayText"
