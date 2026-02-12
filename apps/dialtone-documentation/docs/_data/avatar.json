@@ -86,12 +86,12 @@
       "description": "Deprecated. Alias for size-500 (48px)."
     },
     {
-      "class": "data-avatar-family=\"1-12\"",
+      "class": "data-avatar-family=\"[1-12]\"",
       "applies": ".d-avatar",
       "description": "Sets the hue family (1-12). Each family is 30° apart on the color wheel, offset from the theme's anchor hue."
     },
     {
-      "class": "data-avatar-variant=\"0-9\"",
+      "class": "data-avatar-variant=\"[0-9]\"",
       "applies": ".d-avatar",
       "description": "Sets the lightness/chroma variant (0-9). 0=darkest, 9=lightest. Variants 0-5 use light text, 6-9 use dark text."
     },
