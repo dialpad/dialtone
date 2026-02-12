@@ -112,7 +112,7 @@ When modifying an existing component, verify the full pipeline:
 ### 1. Verify Source Changes
 
 - Read the existing component file before making changes
-- Props must use `validator` (NOT `validate` — Vue silently ignores `validate`)
+- Verify props, events, and slots follow project conventions (auto-loaded via path-scoped rules)
 - Update JSDoc comments for any changed/added props or events
 - Update constants file if new variants/sizes are added
 
@@ -141,27 +141,9 @@ When modifying an existing component, verify the full pipeline:
 
 ## Common Checks (Both Create and Update)
 
-### Props
+Follow all Vue conventions per project rules (path-scoped rules auto-load when editing component files). Key verification points:
 
-- Use `validator` NOT `validate` (Vue silently ignores `validate`)
-- Constants exported from `*_constants.js` and imported in the component
-- JSDoc complete with `@see` and `@values` annotations
-
-### Code Quality
-
-- Separation of concerns: no business logic in template
-- No raw CSS values — use design tokens via `var(--dt-*)`
-- Component name follows `Dt<PascalCase>` convention (e.g., `DtButton`, `DtHovercard`)
-
-### Accessibility
-
-- ARIA attributes on interactive elements
-- Keyboard navigation support (Tab, Enter, Escape, Arrow keys as appropriate)
-- Focus management for popover/modal patterns
-- Screen reader announcements for dynamic content
-
-### Conventions
-
-- `compatConfig: { MODE: 3 }` for Vue 2/3 compat (legacy components only)
-- Visibility toggles: prefer `open`/`update:open` for new components
-- Size scale: `xs`, `sm`, `md`, `lg`, `xl` for interactive components
+- Props use `validator` not `validate`
+- Constants exported and imported (no hardcoded strings)
+- ARIA attributes, keyboard navigation, focus management
+- Component name follows `Dt<PascalCase>` convention

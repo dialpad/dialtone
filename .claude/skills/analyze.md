@@ -19,21 +19,17 @@ Run a comprehensive audit of the Dialtone monorepo for consistency, correctness,
 
 ### 1. `validate` vs `validator` Bug
 
-Search all `.vue` files in `packages/dialtone-vue/components/` for `validate:` used in prop definitions. The correct Vue API key is `validator:`. Vue silently ignores `validate:`, so these are invisible bugs.
+Search all `.vue` files for `validate:` in prop definitions (should be `validator:`). Vue silently ignores `validate:`.
 
 ```bash
-# Find instances of the bug
 grep -rn "validate:" --include="*.vue" packages/dialtone-vue/components/ | grep -v "validator:"
 ```
 
-Report each instance with file path and line number.
-
 ### 2. Missing `compatConfig`
 
-All Options API components must have `compatConfig: { MODE: 3 }` for Vue 2/3 compatibility. Skip components using `<script setup>` (Composition API).
+Find Options API components missing `compatConfig: { MODE: 3 }`. Skip `<script setup>` components.
 
 ```bash
-# Find Options API components missing compatConfig
 for f in $(find packages/dialtone-vue/components -name "*.vue"); do
   if grep -q "export default {" "$f" && ! grep -q "compatConfig" "$f"; then
     echo "$f"
@@ -43,13 +39,7 @@ done
 
 ### 3. Prop Naming Consistency
 
-Check these conventions:
-
-- **Visibility toggles**: Should use `hideX` (negative polarity) pattern, not `showX`
-- **Event naming**: Popover/Collapsible/ImageViewer/FilterPill use `update:open`; Modal/Tooltip/Toast use `update:show`
-- **Slot naming**: Popover/Hovercard use `headerContent`/`footerContent`; Card/Modal use `header`/`footer`
-
-Flag any deviations from these established patterns.
+Check prop/event/slot naming against conventions defined in project rules (`.claude/rules/vue-components.md`). Flag deviations from established patterns.
 
 ### 4. Constants Coverage
 
@@ -70,11 +60,7 @@ Compare the Vue source (props, events, slots) against the generated `component-d
 
 ### 6. Separation of Concerns Violations
 
-Scan Vue templates and styles for anti-patterns:
-
-- **Template complexity**: Ternaries with function calls, inline array filtering, complex computed expressions inlined in templates
-- **Inline styles**: `style="..."` attributes in templates (should use classes)
-- **Raw values in styles**: Hex colors (`#xxx`), pixel values (`12px`), or spacing values in `<style>` sections that should use design tokens (`var(--dt-*)`)
+Scan Vue templates and styles for anti-patterns per project conventions: complex template expressions (should be computed), inline styles (should use classes), raw CSS values (should use `var(--dt-*)` tokens).
 
 ### 7. Test Coverage Gaps
 

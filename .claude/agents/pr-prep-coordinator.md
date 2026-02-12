@@ -103,12 +103,7 @@ Ensure new additions don't duplicate existing functionality:
 
 ### 6. Separation of Concerns
 
-Scan changed Vue files for anti-patterns:
-
-- **Business logic in templates**: Complex ternaries, inline filtering, computed expressions that should be extracted
-- **Inline styles**: `style="..."` attributes (should use utility classes)
-- **Raw values in styles**: Hex colors, pixel values in `<style>` sections (should use design tokens)
-- **Missing token usage**: Hardcoded spacing, colors, or typography values
+Scan changed Vue files for anti-patterns per project conventions (`.claude/rules/vue-components.md`): complex template expressions, inline styles, raw CSS values that should use tokens.
 
 ## Output Format
 

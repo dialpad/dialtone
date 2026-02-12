@@ -22,13 +22,7 @@ Memory is used to track: past pipeline results, known pre-existing test failures
 
 ### 1. Verify Source
 
-Check the component's Vue source file for correctness:
-
-- **Props use `validator` not `validate`**: Vue silently ignores `validate:`, making it a hidden bug
-- **JSDoc is complete**: All props, events, and slots have JSDoc comments with `@see` and `@values` annotations where applicable
-- **Constants file exists**: A `*_constants.js` file exports all enum values for props with constrained values
-- **Separation of concerns**: No business logic in templates, no inline styles, no raw color/spacing values
-- **Correct API style**: New components use Composition API (`<script setup>`); existing components use Options API with `compatConfig: { MODE: 3 }`
+Check the component's Vue source file against project conventions (path-scoped rules auto-load when reading component files). Key checks: `validator` not `validate`, JSDoc completeness, constants file exists, separation of concerns, correct API style.
 
 Component source location: `packages/dialtone-vue/components/<component_name>/`
 

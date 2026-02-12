@@ -6,7 +6,7 @@ paths:
 # CSS Utility Rules
 
 ## File Location
-Utilities live in `packages/dialtone-css/lib/build/less/utilities/`. Each `.less` file groups related utilities by CSS property type (display.less, spacing.less, flex.less, sizing.less, typography.less, color.less, borders.less, position.less, overflow.less, visibility.less, z-index.less).
+Utilities live in `packages/dialtone-css/lib/build/less/utilities/`. The 11 files: `backgrounds.less`, `borders.less`, `colors.less`, `effects.less`, `flex.less`, `grid.less`, `interactivity.less`, `layout.less`, `sizing.less`, `spacing.less`, `typography.less`.
 
 ## Naming Convention
 Pattern: `d-<property-shorthand><value>` (e.g., `d-p8`, `d-d-flex`, `d-w100p`, `d-mt-auto`, `d-fs-200`).

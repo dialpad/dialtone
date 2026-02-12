@@ -42,17 +42,18 @@ apps/dialtone-documentation/docs/
 
 ### Sidebar Navigation (`site-nav.json`)
 
-The sidebar is a nested JSON structure with sections and items:
+The sidebar uses path-keyed objects. Top-level keys are path prefixes, each containing an array of group objects:
 
 ```json
 {
-  "sections": [
+  "/components/": [
     {
-      "title": "Components",
-      "items": [
-        { "title": "Avatar", "url": "/components/avatar/" },
-        { "title": "Badge", "url": "/components/badge/" },
-        { "title": "Future Component", "url": "/components/future/", "planned": true }
+      "text": "Components",
+      "children": [
+        { "text": "Overview", "link": "/components/" },
+        { "text": "Avatar", "link": "/components/avatar.html" },
+        { "text": "Badge", "link": "/components/badge.html" },
+        { "text": "Future Component", "link": "/components/future.html", "planned": true }
       ]
     }
   ]
@@ -61,10 +62,15 @@ The sidebar is a nested JSON structure with sections and items:
 
 Rules:
 
-- Items within sections are **alphabetically ordered** by title
+- Top-level keys are path prefixes (e.g., `"/components/"`, `"/utilities/"`, `"/tokens/"`)
+- Each value is an array of group objects with `"text"` (group title) and `"children"`
+- Children use `"text"` for display name and `"link"` for URL
+- Component/utility page links use `.html` suffix (e.g., `/components/avatar.html`)
+- Index/overview page links use trailing slash (e.g., `/components/`)
+- Items within groups are **alphabetically ordered** by text (after Overview/Status entries)
 - The `"planned": true` flag marks items as upcoming (renders differently in sidebar)
-- URLs must end with a trailing slash
-- Each URL must correspond to an existing markdown file (or be marked as planned)
+- Children can be nested (e.g., Guides > Content > sub-pages)
+- Each link must correspond to an existing markdown file (or be marked as planned)
 
 ### Frontmatter Fields
 
