@@ -7,6 +7,8 @@ tools:
   - Edit
   - Glob
   - Grep
+memory:
+  scope: project
 ---
 
 # Docs Architect Agent

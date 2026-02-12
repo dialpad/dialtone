@@ -46,13 +46,6 @@ All builds use Nx. Run from the repo root:
 | postcss-responsive-variations | — | `pnpm nx run postcss-responsive-variations:test` (Jest) | — |
 | All | `pnpm nx run dialtone:build` | `pnpm nx run dialtone:test:all` | `pnpm nx run dialtone:lint:all` |
 
-### Test Frameworks
-
-- **Vue components**: Vitest + @vue/test-utils — `pnpm nx run dialtone-vue:test`
-- **ESLint plugin**: Mocha — `pnpm nx run eslint-plugin-dialtone:test`
-- **PostCSS plugin**: Jest — `pnpm nx run postcss-responsive-variations:test`
-- **Stylelint plugin**: Node test runner — `pnpm nx run stylelint-plugin-dialtone:test`
-
 ## Commit Convention
 
 Format: `<type>(<scope>): <jira> <subject>`
@@ -63,7 +56,7 @@ See [COMMIT_CONVENTION.md](.github/COMMIT_CONVENTION.md) for full details.
 
 **Scope**: Lowercase kebab-case. Use component name, package name, or omit. Multiple scopes separated by comma.
 
-**Jira**: Required. Use `DLT-XXX` ticket ID, or `NO-JIRA` if none. Multiple tickets separated by spaces.
+**Jira**: Required. Use `DLT-XXX` ticket ID, or `NO-JIRA` if none.
 
 **Subject**: Imperative, present tense. No capitalized first letter. No trailing period.
 
@@ -77,15 +70,12 @@ chore: NO-JIRA update dependencies
 
 **Release-triggering types**: `feat` (MINOR), `fix`/`perf`/`refactor` (PATCH). `BREAKING CHANGE:` in footer → MAJOR.
 
-**Parser regex**: `^(\w*)(?:\((.+)\))?: ((?:NO-JIRA|[A-Z]{2,}-\d+)(?: [A-Z]{2,}-\d+)*) (.+)$`
-
 ## PR Conventions
 
 - PR title must follow the same commit convention format
 - Use `/pr-fill` to auto-generate PR description from the template
 - Never include `Co-Authored-By` lines in commits or PR bodies
 - When changes span multiple packages, note cross-package impact in the PR description
-- Flag which documentation artifacts need updating
 
 ## Jira
 
@@ -93,85 +83,25 @@ chore: NO-JIRA update dependencies
 - All work requires a Jira ticket — create one via the Atlassian MCP if none exists
 - Ticket URL format: `https://dialpad.atlassian.net/browse/DLT-XXX`
 
-## Vue Conventions
+## Vue Conventions (Summary)
 
-### New Components — Composition API
+- **New components**: Composition API with `<script setup lang="ts">`
+- **Existing components**: Options API with `compatConfig: { MODE: 3 }` — do NOT convert unless explicitly asked
+- **Props**: Use `validator` (NOT `validate` — Vue silently ignores `validate`)
+- **Events**: `update:modelValue` for v-model; `update:open` for new overlays; `update:show` for legacy Modal/Tooltip/Toast
 
-All new Vue components MUST use Composition API with `<script setup>`:
-
-```vue
-<script setup lang="ts">
-import { computed, ref } from 'vue';
-
-const props = defineProps<{
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-  label: string;
-}>();
-
-const emit = defineEmits<{
-  'update:modelValue': [value: string];
-}>();
-
-defineSlots<{
-  default(): any;
-  headerContent(): any;
-}>();
-</script>
-```
-
-### Existing Components — Options API
-
-Existing components use Options API with `compatConfig: { MODE: 3 }`. Do NOT convert existing components to Composition API unless explicitly tasked to do so.
-
-### Conventions
-
-- **Props**: Use `validator` (NOT `validate` — Vue silently ignores `validate`). Reference `*_constants.js` for allowed values. Add JSDoc with `@values` annotation.
-- **Events**: `update:modelValue` for v-model. `update:open` for Popover/Collapsible/ImageViewer/FilterPill. `update:show` for Modal/Tooltip/Toast (legacy inconsistency — don't change).
-- **Slots**: `headerContent`/`footerContent` for overlays (Popover, Hovercard). `header`/`footer` for structural (Card, Modal).
-- **Sizes**: `xs`/`sm`/`md`/`lg`/`xl` for interactive components. `100`-`800` numeric for icons.
-- **Visibility toggles**: `hideX` (negative polarity) is the dominant pattern.
-- **Mixins**: Legacy shared behavior (`InputMixin`, `CheckableMixin`, `GroupableMixin`, `MessagesMixin`). Understand them, but use composables for new work.
-
-## Separation of Concerns
-
-Vue components must follow clear separation:
-
-- **Template**: Presentation only — conditional rendering, loops, event binding. No complex expressions (use computed). No API calls.
-- **Script**: All logic — computed properties, watchers, methods, state management. Composables for reusable logic (new) or mixins (legacy).
-- **Styles**: Scoped styles or Dialtone utility classes. Reference design tokens (`var(--dt-*)`). Never hardcode colors, spacing, or typography. No `!important` except in utility definitions.
-
-## CSS Utilities
-
-- Located in `packages/dialtone-css/lib/build/less/utilities/`
-- Naming: `d-<property><value>` pattern (e.g., `d-p8`, `d-d-flex`, `d-w100p`)
-- Always reference tokens via `var(--dt-*)` custom properties
-- Built with gulp + Less, ships as one monolithic CSS file
-- No `sideEffects: false` — not tree-shakeable by JS bundlers
-
-## Design Tokens
-
-- Located in `packages/dialtone-tokens/tokens/`
-- Hierarchy: `base/` (default.json + dark.json) → `components/<name>/` → `theme/<brand>/`
-- Naming: `dtColor*`, `dtSpace*`, `dtFont*`, `dtSize*`
-- Always maintain dark mode counterpart when adding/editing tokens
-- Build outputs: CSS custom properties, docs JSON, iOS/Android platform outputs
-- Figma sync: `sync:tokens-to-figma` / `sync:figma-to-tokens`
+Detailed conventions are in path-scoped rules (`.claude/rules/vue-components.md`) that activate automatically when editing component files.
 
 ## Documentation Pipeline (6 Artifacts)
 
-When creating or updating a component, ALL of these must stay in sync:
+When creating or updating a component, ALL must stay in sync:
 
-1. **Vue source** — Component implementation in `packages/dialtone-vue/components/`
-2. **Tests** — `.test.js` files using Vitest + @vue/test-utils
-3. **Storybook stories** — Stories in component directory, `.stories.js` + `.mdx` docs
-4. **Component docs JSON** — Generated by `scripts/build-dialtone-vue-docs.mjs` → `component-documentation.json`
-5. **VuePress documentation** — Page in `apps/dialtone-documentation/docs/`, sidebar entry in `_data/site-nav.json`
-6. **MCP server data** — `packages/dialtone-mcp-server/src/data.ts` imports from docs JSON
-
-## Known Issues
-
-- **`validate` vs `validator`**: 8 instances across 6 files use the incorrect `validate` key, which Vue silently ignores. Use `validator` for all prop validation.
-- **`show` vs `open` naming**: Modal/Tooltip/Toast use `show`/`update:show` while Popover/Collapsible use `open`/`update:open`. This is a legacy inconsistency — follow existing pattern per component, don't mix.
+1. **Vue source** — `packages/dialtone-vue/components/`
+2. **Tests** — `.test.js` using Vitest + @vue/test-utils
+3. **Storybook stories** — `.stories.js` + `.mdx`
+4. **Component docs JSON** — via `scripts/build-dialtone-vue-docs.mjs`
+5. **VuePress documentation** — `apps/dialtone-documentation/docs/`, sidebar in `_data/site-nav.json`
+6. **MCP server data** — `packages/dialtone-mcp-server/src/data.ts`
 
 ## Release Process
 

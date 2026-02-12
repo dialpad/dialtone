@@ -1,5 +1,6 @@
 ---
 description: "Pattern audit and consistency checking across the Dialtone codebase. Use '/analyze' to run full audit, or '/analyze <area>' to focus on specific areas (components, tokens, utilities, docs)."
+context: fork
 ---
 
 # Dialtone Codebase Analyzer

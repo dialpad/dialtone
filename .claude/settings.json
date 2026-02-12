@@ -6,10 +6,6 @@
         "hooks": [
           {
             "type": "command",
-            "command": ".claude/hooks/strip-coauthor.sh"
-          },
-          {
-            "type": "command",
             "command": ".claude/hooks/commit-format.sh"
           }
         ]
@@ -20,16 +16,6 @@
           {
             "type": "command",
             "command": ".claude/hooks/branch-protection.sh"
-          }
-        ]
-      }
-    ],
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": ".claude/hooks/skill-activation.sh"
           }
         ]
       }

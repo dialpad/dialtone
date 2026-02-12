@@ -6,6 +6,8 @@ tools:
   - Glob
   - Grep
   - Task
+memory:
+  scope: project
 ---
 
 # PR Prep Coordinator Agent
