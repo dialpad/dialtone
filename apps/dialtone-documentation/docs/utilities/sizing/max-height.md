@@ -1,6 +1,7 @@
 ---
 title: Max-height
 description: Utilities to control an element's maximum height.
+keywords: ["maximum height", "mxh"]
 ---
 
 ## Example

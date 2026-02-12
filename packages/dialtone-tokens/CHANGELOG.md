@@ -1,3 +1,17 @@
+# [1.48.0-next.9](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.8...dialtone-tokens/v1.48.0-next.9) (2026-02-03)
+
+
+### Bug Fixes
+
+* **Tokens:** handle multi-layer box shadows correctly in postcss plugin ([feea7f1](https://github.com/dialpad/dialtone/commit/feea7f19f8f5380460db28eae0d51fab73413c24))
+
+# [1.48.0-next.8](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.7...dialtone-tokens/v1.48.0-next.8) (2026-02-03)
+
+
+### Bug Fixes
+
+* **Tokens:** NO-JIRA output line-height as unitless instead of percentages ([#1040](https://github.com/dialpad/dialtone/issues/1040)) ([33d8505](https://github.com/dialpad/dialtone/commit/33d850503133a0507968fadd73f0722b48a35e3e))
+
 # [1.48.0-next.7](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.6...dialtone-tokens/v1.48.0-next.7) (2026-01-30)
 
 

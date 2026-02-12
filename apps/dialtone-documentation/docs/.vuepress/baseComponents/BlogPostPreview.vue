@@ -1,7 +1,7 @@
 <template>
   <router-link
     v-slot="{ navigate }"
-    :to="`/about/whats-new/posts/${format(posted, 'y-M-d')}`"
+    :to="`/dialtone/whats-new/posts/${format(posted, 'y-M-d')}`"
     custom
   >
     <dt-link
@@ -9,7 +9,7 @@
       @click="(e) => { navigate(e); }"
     >
       <dt-card
-        class="d-mt16 d-bgc-primary d-bs-none h:d-bs-sm d-ba d-bar8 d-bbw1"
+        class="d-mt16 d-bgc-primary d-bs-none h:d-bs-sm d-bar8 d-bbw1"
       >
         <template #content>
           <blog-post
@@ -17,9 +17,8 @@
             :heading="heading"
             :posted="posted"
             :is-preview="true"
-          >
-            <slot />
-          </blog-post>
+            :excerpt="excerpt"
+          />
         </template>
       </dt-card>
     </dt-link>
@@ -42,6 +41,10 @@ defineProps({
   author: {
     type: String,
     required: true,
+  },
+  excerpt: {
+    type: String,
+    default: '',
   },
 });
 </script>

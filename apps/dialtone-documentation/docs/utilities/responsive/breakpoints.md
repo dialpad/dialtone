@@ -1,6 +1,7 @@
 ---
 title: Breakpoints
 description: All classes can have responsive variations. Using our plugin @dialpad/postcss-responsive-variations and configuring the breakpoint constants, you can create media queries represented in conditional prefixes. These prefixed classes allow you to apply a style or property within a specific breakpoint.
+keywords: ["media query", "mobile", "responsive"]
 ---
 
 ## How Responsive Variations Work
@@ -139,7 +140,7 @@ export default {
 };
 ```
 
-For more context on this approach and its benefits, see our [What's New post about mobile-first design principles](https://dialtone.dialpad.com/about/whats-new/posts/2025-5-6.html).
+For more context on this approach and its benefits, see our [What's New post about mobile-first design principles](https://dialtone.dialpad.com/dialtone/whats-new/posts/2025-5-6.html).
 
 ### Examples of Class Patterns
 

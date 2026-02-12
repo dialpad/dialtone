@@ -6,7 +6,7 @@
       :size="selectedSize"
     />
   </dt-stack>
-  <div class="d-stack16 d-fc-primary">
+  <dt-stack gap="500" class="d-fc-primary">
     <div class="d-wmx50p">
       <dt-select-menu
         v-model="selectedSize"
@@ -100,7 +100,7 @@
           <template #description>
             This Vue approach does not include tree-shaking.
             Please use the Vue snippet above.
-            <dt-link href="/about/whats-new/posts/2024-4-15.html" target="_blank">
+            <dt-link href="/dialtone/whats-new/posts/2024-4-15.html" target="_blank">
               About this change.
             </dt-link>
           </template>
@@ -112,7 +112,7 @@
         aria-label="Copy Vue Deprecated markup"
       />
     </dt-stack>
-  </div>
+  </dt-stack>
 </template>
 
 <script setup>

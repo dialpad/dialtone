@@ -1,6 +1,6 @@
 <template>
   <dt-stack gap="500">
-    <dt-stack gap="400" class="d-jc-space-between">
+    <dt-stack gap="400" justify="between">
       <dt-stack>
         <dt-text as="h2" kind="headline" size="xl" strength="medium" density="200" class="d-fs-400">
           Katie Rodriguez
@@ -26,7 +26,7 @@
         </dt-text>
       </dt-stack>
     </dt-stack>
-    <dt-stack gap="400" direction="row" class="d-jc-space-between">
+    <dt-stack gap="400" direction="row" justify="between">
       <dt-button class="d-fl1" kind="muted" importance="outlined">
         <template #icon="{ iconSize }">
           <dt-icon-phone :size="iconSize" />

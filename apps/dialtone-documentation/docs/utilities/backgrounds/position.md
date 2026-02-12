@@ -1,6 +1,7 @@
 ---
 title: Background Position
 description: Utilities for controlling the position of an element's background image.
+keywords: ["bg position", "center", "top", "bottom"]
 ---
 
 ## Usage

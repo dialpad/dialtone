@@ -1,6 +1,7 @@
 ---
 title: Align Items
 description: Utilities for setting how an element's is aligned along an element's cross axis.
+keywords: ["flexbox", "cross axis", "center", "stretch"]
 ---
 
 <FlexStackNotice />

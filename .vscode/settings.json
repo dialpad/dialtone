@@ -31,7 +31,6 @@
   "css.validate": false,
   "less.validate": false,
   "stylelint.validate": ["css", "less"],
-  "stylelint.configFile": "./stylelint.config.cjs",
   "stylelint.stylelintPath": "./node_modules/stylelint",
   "eslint.format.enable": true,
   "eslint.validate": [

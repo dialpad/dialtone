@@ -1,6 +1,7 @@
 ---
 title: Gap
 description: Utilities to control the spacing between columns, rows, or both.
+keywords: ["flexbox","flex gap","spacing","gutter"]
 ---
 
 <FlexStackNotice />

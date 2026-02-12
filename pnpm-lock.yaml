@@ -164,6 +164,9 @@ importers:
       '@dialpad/semantic-release-changelog-json':
         specifier: ^1.0.0
         version: 1.0.0(semantic-release@21.1.2(typescript@5.9.3))
+      '@dialpad/stylelint-plugin-dialtone':
+        specifier: workspace:*
+        version: link:packages/stylelint-plugin-dialtone
       '@faker-js/faker':
         specifier: 8.4.1
         version: 8.4.1

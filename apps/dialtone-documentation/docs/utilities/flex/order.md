@@ -1,6 +1,7 @@
 ---
 title: Order
 description: Utilities for controlling an element's order within a parent container.
+keywords: ["flexbox","flex order","reorder","sort"]
 ---
 
 <FlexStackNotice />

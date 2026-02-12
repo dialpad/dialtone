@@ -1,6 +1,7 @@
 ---
 title: Font Weight
 description: Utilities to change an element's font-weight.
+keywords: ["bold", "semibold", "light", "thin"]
 ---
 
 <FontUtilitiesNotice />

@@ -6,6 +6,7 @@ thumb: true
 image: assets/images/components/emoji.png
 figma: planned
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-emoji--default
+keywords: ["emoticon","smiley","d-emoji","DtEmoji","dt-emoji"]
 ---
 
 <code-well-header>

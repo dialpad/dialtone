@@ -1,6 +1,7 @@
 ---
 title: Coordinates
 description: Utility classes to assign an element’s top, right, bottom, or left position.
+keywords: ["top","right","bottom","left","inset","position offset"]
 ---
 
 ## Positive Coordinates

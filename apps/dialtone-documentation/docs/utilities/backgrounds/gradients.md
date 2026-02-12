@@ -1,6 +1,7 @@
 ---
 title: Gradients
 description: Utilities for creating an background gradient and controlling its stops.
+keywords: ["linear gradient", "bg gradient", "color stops"]
 ---
 
 ## Starting Color

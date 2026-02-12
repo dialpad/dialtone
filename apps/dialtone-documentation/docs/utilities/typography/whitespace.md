@@ -1,6 +1,7 @@
 ---
 title: Whitespace
 description: Utilities for controlling an element's whitespace.
+keywords: ["nowrap", "pre", "pre wrap", "word spacing"]
 ---
 
 ## Normal

@@ -1,6 +1,7 @@
 ---
 title: Word Break
 description: Utilities for controlling the way words break within an element. Useful when you want to ensure that text will absolutely not overflow its container, regardless readability risk.
+keywords: ["break all", "break word", "overflow wrap"]
 ---
 
 ## Normal

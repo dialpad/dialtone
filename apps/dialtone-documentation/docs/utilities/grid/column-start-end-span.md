@@ -1,6 +1,7 @@
 ---
 title: Column Start / End / Span
 description: Utilities for controlling how elements are placed across grid columns.
+keywords: ["css grid","layout","columns","rows"]
 ---
 
 ## Spanning Columns

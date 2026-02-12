@@ -5,6 +5,7 @@ status: ready
 thumb: true
 image: assets/images/components/root-layout.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-root-layout--default
+keywords: ["app layout","page layout","d-root-layout","DtRootLayout","dt-root-layout"]
 ---
 
 <code-well-header>

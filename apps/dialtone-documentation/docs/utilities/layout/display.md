@@ -1,6 +1,7 @@
 ---
 title: Display
 description: Utilities for controlling the display box type of an element.
+keywords: ["block", "inline", "flex", "grid", "none", "hidden"]
 ---
 
 ## Examples
