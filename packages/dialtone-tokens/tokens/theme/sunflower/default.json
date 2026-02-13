@@ -11,11 +11,11 @@
           "type": "color"
         },
         "border": {
-          "value": "{color.red.900}",
+          "value": "{color.red.950}",
           "type": "color"
         },
         "accent": {
-          "value": "{color.red.600}",
+          "value": "{color.red.800}",
           "type": "color"
         },
         "action": {

@@ -38,7 +38,7 @@
   "color": {
     "foreground": {
       "warning": {
-        "value": "{color.gold.500}",
+        "value": "{color.gold.700}",
         "type": "color"
       }
     }

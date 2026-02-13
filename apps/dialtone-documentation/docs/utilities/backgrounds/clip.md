@@ -28,11 +28,11 @@ Use `d-bgc-{name}` to control which box an element's background is clipped by.
 Use `d-bgc-text` to clip the background color(s) within the foreground text.
 
 <code-well-header>
-  <dt-text kind="headline" size="3xl" class="d-ba d-bgc-text d-bgg-to-r d-bgg-from-magenta-400 d-bgg-to-purple-400">Magic stuff happens.</dt-text>
+  <dt-text kind="headline" size="3xl" class="d-ba d-bgc-text d-bgg-to-r d-bgg-from-magenta-500 d-bgg-to-purple-600">Magic stuff happens.</dt-text>
 </code-well-header>
 
 ```html
-<dt-text kind="headline" size="3xl" class="d-ba d-bgc-text d-bgg-to-r d-bgg-from-magenta-400 d-bgg-to-purple-400">...</dt-text>
+<dt-text kind="headline" size="3xl" class="d-ba d-bgc-text d-bgg-to-r d-bgg-from-magenta-500 d-bgg-to-purple-600">...</dt-text>
 ```
 
 ## Classes
