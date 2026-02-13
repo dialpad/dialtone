@@ -1089,7 +1089,7 @@ export default {
         return category.items;
       }
       return category.items.filter((item) =>
-        item.name.toLowerCase().includes(searchValue),
+        item.name.toLowerCase().includes(searchValue)
       );
     },
 
