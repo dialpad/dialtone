@@ -27,7 +27,7 @@
       :show-quick-replies-button="$attrs.showQuickRepliesButton"
       :show-code-block-button="$attrs.showCodeBlockButton"
       :show-inline-image-button="$attrs.showInlineImageButton"
-      :show-variable-button="$attrs.showVariableButton"
+      :show-add-variable="showAddVariable"
       :allow-tables="$attrs.allowTables"
       @focus="$attrs.onFocus"
       @blur="$attrs.onBlur"
@@ -45,12 +45,67 @@
 import DtRecipeEditor from './editor.vue';
 
 export default {
-  name: 'DtRecipeEditorDefault',
+  name: 'DtRecipeEditorWithVariables',
   components: { DtRecipeEditor },
 
   data () {
     return {
-      modelValue: this.$attrs.modelValue,
+      modelValue: this.$attrs.modelValue || '<p>Try inserting a variable using the button!</p>',
+      showAddVariable: {
+        showAddVariableButton: true,
+        categories: [
+          {
+            name: "Agent",
+            items: [
+              {
+                id: "agent-first-name",
+                name: "First name",
+                placeholder: "agent first name",
+              },
+              {
+                id: "agent-last-name",
+                name: "Last name",
+                placeholder: "agent last name",
+              },
+              {
+                id: "agent-full-name",
+                name: "Full name",
+                placeholder: "agent full name",
+              },
+              {
+                id: "agent-phone-number",
+                name: "Phone number",
+                placeholder: "agent phone number",
+              },
+              {
+                id: "agent-email-address",
+                name: "Email address",
+                placeholder: "agent email address",
+              },
+            ],
+          },
+          {
+            name: "Company",
+            items: [
+              {
+                id: "company-name",
+                name: "Name",
+                placeholder: "company name",
+              },
+              {
+                id: "company-email-address",
+                name: "Email address",
+                placeholder: "company email address",
+              },
+              {
+                id: "company-website",
+                name: "Website",
+                placeholder: "company website",
+              },
+            ],
+          },
+        ],
+      },
     };
   },
 };

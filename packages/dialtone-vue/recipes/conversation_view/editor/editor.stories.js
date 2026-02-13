@@ -2,6 +2,7 @@ import { action } from 'storybook/actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeEditor from './editor.vue';
 import DtRecipeEditorDefault from './editor_default.story.vue';
+import DtRecipeEditorWithVariables from './editor_with_variables.story.vue';
 
 /*
   Controls
@@ -88,8 +89,19 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   DtRecipeEditorDefault,
 );
 
+const WithVariablesTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+  args,
+  argTypes,
+  DtRecipeEditorWithVariables,
+);
+
 // Stories
 export const Default = {
   render: DefaultTemplate,
+  args: {},
+};
+
+export const WithVariables = {
+  render: WithVariablesTemplate,
   args: {},
 };
