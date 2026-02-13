@@ -55,68 +55,75 @@
         direction="row"
         gap="300"
       >
-        <DtPopover
-          padding="small"
-          navigation-type="arrow-keys"
-          :modal="false"
-          placement="bottom-start"
+        <dt-tooltip
+          :message="i18n.$t('Variable')"
+          placement="top"
         >
-          <template #anchor="{ attrs }">
-            <DtButton
-              v-bind="attrs"
-              kind="muted"
-              size="xs"
-              importance="clear"
-              :aria-label="variableButton.tooltipMessage"
-              :data-qa="variableButton.dataQA"
-              label-class="d-jc-flex-start"
+          <template #anchor>
+            <dt-popover
+              padding="small"
+              navigation-type="arrow-keys"
+              :modal="false"
+              placement="bottom-start"
             >
-              <template #icon>
-                <component
-                  :is="variableButton.icon"
-                  :size="200"
-                />
+              <template #anchor="{ attrs }">
+                <dt-button
+                  v-bind="attrs"
+                  kind="muted"
+                  size="xs"
+                  importance="clear"
+                  :aria-label="variableButton.tooltipMessage"
+                  :data-qa="variableButton.dataQA"
+                  label-class="d-jc-flex-start"
+                >
+                  <template #icon>
+                    <component
+                      :is="variableButton.icon"
+                      :size="200"
+                    />
+                  </template>
+                </dt-button>
               </template>
-            </DtButton>
-          </template>
-          <template #content="{ close }">
-            <DtInput
-              v-model="variableSearchValue"
-              root-class="d-p8 d-pb4 d-w264"
-              type="search"
-              :placeholder="this.i18n.$t('Search variable')"
-              size="md"
-              role="menuitem"
-            >
-              <template #leftIcon="{ iconSize }">
-                <DtIconSearch :size="iconSize"/>
+              <template #content="{ close }">
+                <dt-input
+                  v-model="variableSearchValue"
+                  root-class="d-p8 d-pb4 d-w264"
+                  type="search"
+                  :placeholder="this.i18n.$t('Search variable')"
+                  size="md"
+                  role="menuitem"
+                >
+                  <template #leftIcon="{ iconSize }">
+                    <dt-icon-search :size="iconSize"/>
+                  </template>
+                </dt-input>
+                <dt-list-item-group
+                  v-for="(category, index) in getFilteredCategories(showAddVariable.categories)"
+                  :key="category.name"
+                  :heading="this.i18n.$t(category.name)"
+                  heading-class="d-headline--sm-compact d-p8"
+                >
+                  <dt-list-item
+                    v-for="item in getFilteredItemsForCategory(category)"
+                    :key="category.name + item.name"
+                    role="menuitem"
+                    navigation-type="arrow-keys"
+                    @click="
+                      insertVariable(category.name, item);
+                      close();
+                    "
+                  >
+                    {{ this.i18n.$t(item.name) }}
+                  </dt-list-item>
+                  <dt-dropdown-separator
+                    v-if="index < getFilteredCategories(showAddVariable.categories).length - 1"
+                    class="d-m0 d-mt8"
+                  />
+                </dt-list-item-group>
               </template>
-            </DtInput>
-            <DtListItemGroup
-              v-for="(category, index) in getFilteredCategories(showAddVariable.categories)"
-              :key="category.name"
-              :heading="this.i18n.$t(category.name)"
-              heading-class="d-headline--sm-compact d-p8"
-            >
-              <DtListItem
-                v-for="item in getFilteredItemsForCategory(category)"
-                :key="category.name + item.name"
-                role="menuitem"
-                navigation-type="arrow-keys"
-                @click="
-                  insertVariable(category.name, item);
-                  close();
-                "
-              >
-                {{ this.i18n.$t(item.name) }}
-              </DtListItem>
-              <DtDropdownSeparator
-                v-if="index < getFilteredCategories(showAddVariable.categories).length - 1"
-                class="d-m0 d-mt8"
-              />
-            </DtListItemGroup>
+            </dt-popover>
           </template>
-        </DtPopover>
+        </dt-tooltip>
         <div class="d-recipe-editor__button-group-divider" />
       </dt-stack>
       <dt-stack
