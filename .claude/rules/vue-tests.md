@@ -36,7 +36,9 @@ Import valid values from `*_constants.js`. Never hardcode strings like `'md'` �
 1. **Presentation**: Default rendering, slot content, size/variant classes.
 2. **Interactivity**: Event emissions with `wrapper.emitted()`, prop-driven behavior.
 3. **Accessibility**: ARIA attributes (`role`, `aria-label`, `aria-expanded`), keyboard navigation (Enter, Space, Escape, Arrow keys), focus management.
+## Test Focus
 
+Each `it` block should test one behavior. Multiple assertions are fine when they validate the same concept (e.g., checking both existence and content of an element). If you need a new `describe('When ...')` to explain the setup, it's a separate test.
 ## Anti-Patterns
 - Don't test internal state (`wrapper.vm.internalCounter`) — test observable behavior.
 - Don't rely on snapshot tests alone — they don't test behavior.
