@@ -93,7 +93,7 @@
               </template>
             </DtInput>
             <DtListItemGroup
-              v-for="(category, index) in showAddVariable.categories"
+              v-for="(category, index) in getFilteredCategories(showAddVariable.categories)"
               :key="category.name"
               :heading="this.i18n.$t(category.name)"
               heading-class="d-headline--sm-compact d-p8"
@@ -111,7 +111,7 @@
                 {{ this.i18n.$t(item.name) }}
               </DtListItem>
               <DtDropdownSeparator
-                v-if="index < showAddVariable.categories.length - 1"
+                v-if="index < getFilteredCategories(showAddVariable.categories).length - 1"
                 class="d-m0 d-mt8"
               />
             </DtListItemGroup>
@@ -1085,6 +1085,12 @@ export default {
         item.name.toLowerCase().includes(searchValue),
       );
     },
+
+    getFilteredCategories(categories) {
+      return categories.filter(
+        (category) => this.getFilteredItemsForCategory(category).length,
+      );
+    }
   },
 };
 </script>
