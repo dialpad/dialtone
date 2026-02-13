@@ -659,7 +659,7 @@ export default {
         processVariableNode (node) {
           const variableId = node.attrs?.id || '';
           const altText = node.attrs?.altText || '';
-          return `<!-- @variable: {"id": "${variableId}", "altText": "${altText}"} -->`;
+          return `{{${variableId}=${altText}}}`;
         },
 
         processUnknownNode (node) {

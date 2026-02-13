@@ -1075,7 +1075,7 @@ describe('DtRichTextEditor tests', () => {
       it('should enable the variable extension', function () {
         const editorInstance = wrapper.vm.editor;
         const variableExtension = editorInstance.extensionManager.extensions.find(
-          ext => ext.name === 'variable'
+          ext => ext.name === 'variable',
         );
         expect(variableExtension).toBeDefined();
       });
@@ -1181,9 +1181,7 @@ describe('DtRichTextEditor tests', () => {
         await wrapper.vm.$nextTick();
 
         const markdownOutput = wrapper.vm.getOutput();
-        expect(markdownOutput).toContain('<!-- @variable:');
-        expect(markdownOutput).toContain('"id": "user_name"');
-        expect(markdownOutput).toContain('"altText": "Bob"');
+        expect(markdownOutput).toBe('Hello {{user_name=Bob}} welcome!\n');
       });
 
       it('should insert multiple variables', async function () {
@@ -1213,7 +1211,7 @@ describe('DtRichTextEditor tests', () => {
       it('should preserve variable items configuration', function () {
         const editorInstance = wrapper.vm.editor;
         const variableExtension = editorInstance.extensionManager.extensions.find(
-          ext => ext.name === 'variable'
+          ext => ext.name === 'variable',
         );
         
         expect(variableExtension.options.variableItems).toEqual(variableItems);
@@ -1270,7 +1268,7 @@ describe('DtRichTextEditor tests', () => {
       it('should not enable the variable extension', function () {
         const editorInstance = wrapper.vm.editor;
         const variableExtension = editorInstance.extensionManager.extensions.find(
-          ext => ext.name === 'variable'
+          ext => ext.name === 'variable',
         );
         expect(variableExtension).toBeUndefined();
       });
@@ -1308,8 +1306,7 @@ describe('DtRichTextEditor tests', () => {
         await wrapper.vm.$nextTick();
 
         const markdownOutput = wrapper.vm.getOutput();
-        expect(markdownOutput).toContain('Hello <!-- @variable:');
-        expect(markdownOutput).toContain('**bold text**');
+        expect(markdownOutput).toBe('Hello {{test_var=Variable}} and **bold text**\n');
       });
 
       it('should handle variables in complex document structure', async function () {
