@@ -26,7 +26,7 @@ const baseProps = {
 };
 
 const getClientRectsMock = vi.fn(() => [{}]);
-const getBoundingClientRect = vi.fn(() => [{}]);
+const getBoundingClientRect = vi.fn(() => ({}));
 const scrollByMock = vi.fn();
 
 // Helpers
