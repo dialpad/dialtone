@@ -410,7 +410,7 @@ export default {
      * Compute inline styles for fallback color in browsers that don't support oklch()
      */
     avatarStyles () {
-      const styles = { ...this.$attrs.style };
+      const styles = typeof this.$attrs.style === 'object' ? {{ ...this.$attrs.style } : {};
 
       // Only compute hex fallback for browsers that don't support oklch()
       if (!supportsOklch && !this.isIconType() && this.computedFamily && this.computedVariant !== undefined) {
