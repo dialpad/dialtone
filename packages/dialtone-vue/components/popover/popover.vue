@@ -591,7 +591,7 @@ export default {
 
     calculatedMaxHeight () {
       if (this.isOutsideViewport && this.modal) {
-        return `calc(100vh - var(--dt-space-300))`;
+        return `calc(100vh - var(--dt-spacing-50))`;
       }
       return this.maxHeight;
     },
@@ -690,7 +690,7 @@ export default {
     this.mutationObserver.observe(this.$refs.anchor, {childList: true});
 
     // rootMargin here must be greater than the margin of the height we are setting in calculatedMaxHeight which
-    // currently is var(--dt-space-300) (4px). If not the intersectionObserver will continually trigger in an infinite
+    // currently is var(--dt-spacing-50) (4px). If not the intersectionObserver will continually trigger in an infinite
     // loop.
     // threshold 1.0 makes this trigger every time the dialog "touches" the edge of the viewport.
     this.intersectionObserver = new IntersectionObserver(this.hasIntersectedViewport);
