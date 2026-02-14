@@ -21,9 +21,9 @@ export default {
 
 <style lang="less">
 .dtc-code-editor-input {
-  padding: var(--dt-space-200) var(--dt-space-300) var(--dt-space-200) var(--dt-space-300);
-  border-radius: var(--dt-space-350);
-  border: solid var(--dt-space-100);
+  padding: var(--dt-spacing-25) var(--dt-spacing-50) var(--dt-spacing-25) var(--dt-spacing-50);
+  border-radius: var(--dt-spacing-75);
+  border: solid var(--dt-spacing-1);
   border-color: var(--dtc-theme-color-background-lighten);
   background-color: var(--dtc-theme-color-background-darken);
   outline: none;

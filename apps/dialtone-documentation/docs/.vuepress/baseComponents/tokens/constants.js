@@ -27,6 +27,8 @@ export const THEMES = [
 export const CATEGORY_MAP = {
   color: ['color', 'opacity', 'shell'],
   typography: ['typography', 'font', 'text'],
+  spacing: ['spacing'],
+  layout: ['layout'],
   size: ['size'],
   shadow: ['shadow'],
   component: ['topbar', 'sidebar', 'presence', 'mention', 'avatar', 'badge', 'checkbox', 'icon', 'inputs', 'action'],
@@ -105,16 +107,20 @@ export const getTokensStructure = () => ({
   shadow: {
     _children: [],
   },
-  size: {
+  spacing: {
     base: {
       _children: [],
     },
     negative: {
       _children: [],
     },
-    percentage: {
+  },
+  layout: {
+    base: {
       _children: [],
     },
+  },
+  size: {
     radius: {
       _children: [],
     },

@@ -80,7 +80,7 @@ const decorator = () => ({
       resize: horizontal;
       height: auto;
       border: 1px solid var(--dt-color-border-subtle);
-      padding: var(--dt-space-450);
+      padding: var(--dt-spacing-150);
       borderRadius: var(--dt-size-radius-400);"
       >
       <story />

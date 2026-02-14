@@ -15,7 +15,7 @@ testRule({
   accept: [
     {
       code: `.a {
-        padding: var(--dt-space-450);
+        padding: var(--dt-spacing-150);
       }`,
       description: 'setting padding using a Dialtone token',
     },

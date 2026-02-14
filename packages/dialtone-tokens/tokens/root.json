@@ -9,7 +9,7 @@
   },
   "size": {
     "base": {
-      "value": "{font.size.root} * 0.8",
+      "value": "8px",
       "type": "dimension"
     }
   },
@@ -17,6 +17,20 @@
     "base": {
       "value": "{size.base}",
       "type": "dimension"
+    }
+  },
+  "spacing": {
+    "base": {
+      "value": "{size.base}",
+      "type": "dimension",
+      "description": "8px - Base spacing unit"
+    }
+  },
+  "layout": {
+    "base": {
+      "value": "{size.base} * 8",
+      "type": "dimension",
+      "description": "64px - Layout base unit unit"
     }
   }
 }

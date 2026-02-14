@@ -12,6 +12,10 @@ runs:
       with:
         node-version-file: ".nvmrc"
         cache: "pnpm"
+        registry-url: "https://npm.pkg.github.com"
+        scope: "dialpad"
+      env:
+        NODE_AUTH_TOKEN: ${{ github.token }}
 
     - name: Install dependencies
       shell: bash
