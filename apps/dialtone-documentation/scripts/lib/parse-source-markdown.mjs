@@ -309,6 +309,14 @@ function extractNoticeKind (tagText) {
 }
 
 /**
+ * Extract the `title` attribute from a (possibly partial) tag string.
+ */
+function extractNoticeTitle (tagText) {
+  const m = tagText.match(/\btitle="([^"]*)"/);
+  return m ? m[1] : null;
+}
+
+/**
  * Strip remaining inline HTML tags (but keep text content).
  */
 function stripInlineHtml (text) {
@@ -338,6 +346,7 @@ function tryDetectDtNotice (ctx) {
 
   const kind = extractNoticeKind(openTagText) || 'base';
   ctx.noticeKind = kind;
+  ctx.noticeOpenTag = openTagText;
   ctx.accumulator = [];
   ctx.state = S.DT_NOTICE;
   return true;
@@ -366,7 +375,13 @@ export function transformDtNotice (openingTag, bodyLines) {
   const paragraphs = cleaned.split(/\n\s*\n/)
     .map(p => p.replace(/\s+/g, ' ').trim())
     .filter(Boolean);
-  const content = paragraphs.join('\n\n');
+  let content = paragraphs.join('\n\n');
+
+  // Use title attribute as fallback when body is empty
+  if (!content) {
+    const title = extractNoticeTitle(openingTag);
+    if (title) content = title;
+  }
 
   if (!content) return [];
   const lines = [`> [!${alertType}]`];
@@ -381,9 +396,7 @@ export function transformDtNotice (openingTag, bodyLines) {
 // ── State handler: DT_NOTICE ──────────────────────────────────────
 function handleDtNoticeState (ctx) {
   if (ctx.trimmed === '</dt-notice>' || ctx.trimmed.startsWith('</dt-notice>')) {
-    // Build the opening tag string for kind extraction
-    const openingTag = `<dt-notice kind="${ctx.noticeKind}">`;
-    const result = transformDtNotice(openingTag, ctx.accumulator);
+    const result = transformDtNotice(ctx.noticeOpenTag, ctx.accumulator);
     ctx.output.push(...result);
 
     ctx.accumulator = [];
