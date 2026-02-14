@@ -1,6 +1,7 @@
 ---
 title: Vertical Align
 description: Utilities for controlling an element's text baseline.
+keywords: ["baseline", "middle", "top", "bottom"]
 ---
 
 ## Baseline

@@ -1,6 +1,7 @@
 ---
 title: Text Overflow
 description: Utilities for controlling an element's text overflow.
+keywords: ["ellipsis", "truncate", "clip"]
 ---
 
 ## Truncate

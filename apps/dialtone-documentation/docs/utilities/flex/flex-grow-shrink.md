@@ -1,6 +1,7 @@
 ---
 title: Flex, Grow, & Shrink
 description: Utilities for setting an object's flex, grow, and shrink flex properties.
+keywords: ["flexbox", "flex shrink", "flex basis"]
 ---
 
 <FlexStackNotice />

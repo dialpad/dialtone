@@ -3,6 +3,7 @@ title: Help Content
 prev: { link: "/guides/content/grammar-and-mechanics/", text: "Grammar and Mechanics" }
 next: { link: "/guides/content/inclusive-language/", text: "Inclusive Language" }
 description: Help content is educational copy that provides additional information about interactive elements or concepts in the UI.
+keywords: ["help text","tooltips","documentation"]
 ---
 
 The goal with any help content should be to teach users:

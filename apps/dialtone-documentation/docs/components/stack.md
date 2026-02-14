@@ -5,6 +5,7 @@ status: ready
 thumb: true
 image: assets/images/components/stack.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-stack--default
+keywords: ["layout", "vertical", "horizontal", "d-stack", "DtStack", "dt-stack", "flex container", "auto layout"]
 ---
 
 <code-well-header>

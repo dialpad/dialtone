@@ -5,6 +5,7 @@ status: ready
 thumb: true
 image: assets/images/components/emoji-text-wrapper.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-emoji-text-wrapper--default
+keywords: ["emoji support","emoticon wrapper","d-emoji-text-wrapper","DtEmojiTextWrapper","dt-emoji-text-wrapper"]
 ---
 
 <code-well-header>

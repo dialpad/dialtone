@@ -1,6 +1,7 @@
 ---
 title: Margins
 description: Utilities to adjust an element's exterior spacing between other objects.
+keywords: ["outer spacing", "gap", "offset"]
 ---
 
 <dt-notice kind="warning" class="d-wmx100p d-mt24" hideClose>

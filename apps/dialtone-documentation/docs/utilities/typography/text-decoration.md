@@ -1,6 +1,7 @@
 ---
 title: Text Decoration
 description: Utilities to change an element's text decoration styles.
+keywords: ["underline", "strikethrough", "line through"]
 ---
 
 ## Underline

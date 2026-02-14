@@ -1,6 +1,7 @@
 ---
 title: Line Clamp
 description: Limiting the number of lines displayed for text content.
+keywords: ["truncate", "ellipsis", "max lines"]
 ---
 
 <FontUtilitiesNotice />

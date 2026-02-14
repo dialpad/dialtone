@@ -1,6 +1,7 @@
 ---
 title: Min-width
 description: Utilities to control an element's minimum width.
+keywords: ["minimum width", "mnw"]
 ---
 
 ## Percentages

@@ -1,5 +1,5 @@
 <template>
-  <aside class="dialtone-toc d-of-auto d-py32 d-ps-fixed d-d-none xl:d-d-block">
+  <aside class="dialtone-toc d-of-auto d-py64 d-ps-fixed d-d-none xl:d-d-block">
     <dt-text as="h2" kind="headline" size="xs" strength="semibold" tone="secondary" class="d-tt-uppercase d-px8 d-pb4">
       On this page
     </dt-text>

@@ -1,6 +1,7 @@
 <template>
-  <div
-    class="d-stack16 d-p16 d-bar8"
+  <dt-stack
+    gap="500"
+    class="d-p16 d-bar8"
   >
     <h3
       :id="kind"
@@ -29,7 +30,7 @@
         :display-name="kind === 'brand-logos'"
       />
     </div>
-  </div>
+  </dt-stack>
 </template>
 
 <script>

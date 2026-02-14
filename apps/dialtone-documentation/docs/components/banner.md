@@ -6,6 +6,7 @@ thumb: true
 image: assets/images/components/banner.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-banner--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=4516-0
+keywords: ["alert","notification","message","d-banner","DtBanner","dt-banner"]
 ---
 
 <code-well-header class="d-p0">

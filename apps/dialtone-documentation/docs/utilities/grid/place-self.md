@@ -1,6 +1,7 @@
 ---
 title: Place Self
 description: Utilities for controlling a grid item's alignment along their block and inline axis directions.
+keywords: ["css grid", "align", "justify"]
 ---
 
 ## Stretch

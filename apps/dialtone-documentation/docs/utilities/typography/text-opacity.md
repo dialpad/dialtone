@@ -1,6 +1,7 @@
 ---
 title: Text Opacity
 description: Utilities for controlling an element's font-color opacity.
+keywords: ["font opacity", "color alpha"]
 ---
 The ability to control an element's color is <em>only</em> provided as a class. We do not provide variables to control this. The text opacity class resets the font color's alpha channel CSS variable value.
 

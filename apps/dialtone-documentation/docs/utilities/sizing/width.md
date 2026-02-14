@@ -1,6 +1,7 @@
 ---
 title: Width
 description: Utilities to control an element's width.
+keywords: ["size", "wide", "vw", "viewport width"]
 ---
 
 ## Percentages
