@@ -73,11 +73,20 @@ Scan `.less` and `.css` files for:
 - Raw hex/pixel values that should use `var(--dt-*)` tokens
 - `!important` usage outside of utility class definitions
 
+### 9. Base Color Usage
+
+Scan templates and styles for base color patterns that should use semantic equivalents:
+
+- Utility classes with numeric stops: `d-fc-{color}-{stop}`, `d-bgc-{color}-{stop}`, `d-bc-{color}-{stop}`
+- CSS custom properties with base color stops: `var(--dt-color-{color}-{stop})` in `color:`, `background-color:`, `border-color:` declarations
+
+Migration tool: `npx dialtone-migration-helper --cwd ./src` → select "base to semantic"
+
 ## Area-Specific Analysis
 
 - **`/analyze components`** — Runs checks 1-5 (validate bug, compatConfig, naming, constants, doc drift)
 - **`/analyze tokens`** — Token alias resolution, missing dark mode counterparts, naming consistency, unused tokens
-- **`/analyze utilities`** — Duplicate classes, missing token refs, naming violations, responsive variant gaps
+- **`/analyze utilities`** — Duplicate classes, missing token refs, naming violations, responsive variant gaps, base color usage
 - **`/analyze docs`** — Check 5 (doc drift) plus missing pages, broken sidebar links, stale planned flags
 
 ## Output Format

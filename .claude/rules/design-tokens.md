@@ -16,6 +16,10 @@ camelCase with category prefix: `dtColor*`, `dtSpace*`, `dtFontSize*`, `dtFontWe
 
 These produce CSS custom properties: `--dt-color-foreground-primary`, `--dt-space-400`, etc.
 
+## Color Scale
+All base colors use a standard 12-stop scale: 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950, 1000.
+Irregular stops (250, 350, 425, etc.) were removed in the Feb 2026 migration. Do not create tokens referencing irregular stops.
+
 ## Dark Mode
 Values in `dark.json` override `default.json`. When adding/editing a token, ensure `dark.json` has the corresponding override with the appropriate dark palette reference.
 

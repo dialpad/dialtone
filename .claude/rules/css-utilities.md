@@ -13,6 +13,14 @@ Pattern: `d-<property-shorthand><value>` (e.g., `d-p8`, `d-d-flex`, `d-w100p`, `
 
 Common shorthands: `d`=display, `p`=padding, `m`=margin (with `t/r/b/l/x/y`), `w`=width, `h`=height, `fw`=font-weight, `fs`=font-size, `c`=color, `bgc`=background-color.
 
+## Color Utilities
+Color utilities use semantic tokens, not base palette stops:
+- `d-fc-*` (foreground) → `var(--dt-color-foreground-*)`
+- `d-bgc-*` (surface) → `var(--dt-color-surface-*)`
+- `d-bc-*` (border) → `var(--dt-color-border-*)`
+
+Prefer semantic equivalents over base color utilities (e.g., `d-fc-critical` instead of `d-fc-red-600`). The ESLint rule `deprecated-base-color-classes` flags base color utility usage.
+
 ## Token References — Mandatory
 ALWAYS use `var(--dt-*)` custom properties. Never hardcode raw values.
 
