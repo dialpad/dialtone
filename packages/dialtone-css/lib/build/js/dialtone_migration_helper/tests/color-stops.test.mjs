@@ -1,4 +1,4 @@
-import { describe, it } from 'node:test';
+import { describe, it, before } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
@@ -186,16 +186,13 @@ describe('color-stops config', () => {
   describe('example .vue file integration', () => {
     let input;
 
-    it('loads the test examples file', async () => {
+    before(async () => {
       input = await readFile(
-        join(__dirname, 'base-color-migration-test-examples.vue'),
-        'utf8',
+        join(__dirname, 'base-color-migration-test-examples.vue'), 'utf8',
       );
-      assert.ok(input.length > 0);
     });
 
-    it('transforms all old stops to new stops', async () => {
-      if (!input) input = await readFile(join(__dirname, 'base-color-migration-test-examples.vue'), 'utf8');
+    it('transforms all old stops to new stops', () => {
       const output = apply(input);
 
       // Old stops that should have been replaced should NOT appear
@@ -207,11 +204,11 @@ describe('color-stops config', () => {
         'green-350', 'green-425', 'green-475',
         'red-350', 'red-450',
       ];
+      const prefixes = ['dt-color-', 'd-bgc-', 'd-fc-', 'd-bc-', 'd-bgg-from-', 'd-bgg-to-'];
       for (const old of oldStops) {
-        assert.ok(
-          !output.includes(`dt-color-${old}`) && !output.includes(`d-bgc-${old}`) && !output.includes(`d-fc-${old}`),
-          `Old stop "${old}" should have been replaced`,
-        );
+        for (const prefix of prefixes) {
+          assert.ok(!output.includes(`${prefix}${old}`), `"${prefix}${old}" should have been replaced`);
+        }
       }
 
       // New stops that should appear
@@ -224,10 +221,7 @@ describe('color-stops config', () => {
         'red-400', 'red-600',
       ];
       for (const newStop of newStops) {
-        assert.ok(
-          output.includes(newStop),
-          `New stop "${newStop}" should appear in output`,
-        );
+        assert.ok(output.includes(newStop), `New stop "${newStop}" should appear in output`);
       }
 
       // Unchanged stops should still be present

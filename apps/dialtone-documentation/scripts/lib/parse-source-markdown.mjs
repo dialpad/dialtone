@@ -301,18 +301,10 @@ const NOTICE_KIND_MAP = {
 };
 
 /**
- * Extract the `kind` attribute from a (possibly partial) tag string.
+ * Extract an attribute value from a (possibly partial) tag string.
  */
-function extractNoticeKind (tagText) {
-  const m = tagText.match(/\bkind="([^"]*)"/);
-  return m ? m[1] : null;
-}
-
-/**
- * Extract the `title` attribute from a (possibly partial) tag string.
- */
-function extractNoticeTitle (tagText) {
-  const m = tagText.match(/\btitle="([^"]*)"/);
+function extractTagAttribute (tagText, attr) {
+  const m = tagText.match(new RegExp(`\\b${attr}="([^"]*)"`));
   return m ? m[1] : null;
 }
 
@@ -344,7 +336,7 @@ function tryDetectDtNotice (ctx) {
     openTagText = tagLines.join(' ');
   }
 
-  const kind = extractNoticeKind(openTagText) || 'base';
+  const kind = extractTagAttribute(openTagText, 'kind') || 'base';
   ctx.noticeKind = kind;
   ctx.noticeOpenTag = openTagText;
   ctx.accumulator = [];
@@ -359,7 +351,7 @@ function tryDetectDtNotice (ctx) {
  * @returns {string[]} - GFM alert markdown lines
  */
 export function transformDtNotice (openingTag, bodyLines) {
-  const kind = extractNoticeKind(openingTag) || 'base';
+  const kind = extractTagAttribute(openingTag, 'kind') || 'base';
   const alertType = NOTICE_KIND_MAP[kind] || 'NOTE';
 
   const filtered = bodyLines.filter(l => {
@@ -379,7 +371,7 @@ export function transformDtNotice (openingTag, bodyLines) {
 
   // Use title attribute as fallback when body is empty
   if (!content) {
-    const title = extractNoticeTitle(openingTag);
+    const title = extractTagAttribute(openingTag, 'title');
     if (title) content = title;
   }
 
