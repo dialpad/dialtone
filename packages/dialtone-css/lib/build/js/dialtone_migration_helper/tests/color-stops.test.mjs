@@ -4,22 +4,10 @@ import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import config from '../configs/color-stops.mjs';
+import { applyConfig } from './helpers.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-
-/**
- * Simulate modifyFileContents behavior from helpers.mjs (lines 158-160).
- * For each expression, apply the regex replace with function replacer.
- */
-function applyConfig (input) {
-  let result = input;
-  for (const expr of config.expressions) {
-    result = result.replace(expr.from, (match) => {
-      return match.replace(expr.from, expr.to);
-    });
-  }
-  return result;
-}
+const apply = (input) => applyConfig(config, input);
 
 // ─── Unit tests: individual replacements ──────────────────────────────
 
@@ -79,7 +67,7 @@ describe('color-stops config', () => {
 
     for (const [input, expected] of cases) {
       it(`${input} → ${expected}`, () => {
-        assert.equal(applyConfig(input), expected);
+        assert.equal(apply(input), expected);
       });
     }
   });
@@ -89,7 +77,7 @@ describe('color-stops config', () => {
     for (const suffix of suffixes) {
       it(`purple-350${suffix} → purple-500${suffix}`, () => {
         assert.equal(
-          applyConfig(`var(--dt-color-purple-350${suffix})`),
+          apply(`var(--dt-color-purple-350${suffix})`),
           `var(--dt-color-purple-500${suffix})`,
         );
       });
@@ -101,7 +89,7 @@ describe('color-stops config', () => {
     for (const prefix of prefixes) {
       it(`d-${prefix}-purple-350 → d-${prefix}-purple-500`, () => {
         assert.equal(
-          applyConfig(`d-${prefix}-purple-350`),
+          apply(`d-${prefix}-purple-350`),
           `d-${prefix}-purple-500`,
         );
       });
@@ -110,22 +98,22 @@ describe('color-stops config', () => {
 
   describe('pseudo-prefixed utility classes', () => {
     it('h:d-bgc-purple-350 → h:d-bgc-purple-500', () => {
-      assert.equal(applyConfig('h:d-bgc-purple-350'), 'h:d-bgc-purple-500');
+      assert.equal(apply('h:d-bgc-purple-350'), 'h:d-bgc-purple-500');
     });
     it('f:d-fc-blue-425 → f:d-fc-blue-500', () => {
-      assert.equal(applyConfig('f:d-fc-blue-425'), 'f:d-fc-blue-500');
+      assert.equal(apply('f:d-fc-blue-425'), 'f:d-fc-blue-500');
     });
     it('a:d-bc-green-500 → a:d-bc-green-800', () => {
-      assert.equal(applyConfig('a:d-bc-green-500'), 'a:d-bc-green-800');
+      assert.equal(apply('a:d-bc-green-500'), 'a:d-bc-green-800');
     });
   });
 
   describe('responsive-prefixed utility classes', () => {
     it('sm:d-bgc-magenta-400 → sm:d-bgc-magenta-500', () => {
-      assert.equal(applyConfig('sm:d-bgc-magenta-400'), 'sm:d-bgc-magenta-500');
+      assert.equal(apply('sm:d-bgc-magenta-400'), 'sm:d-bgc-magenta-500');
     });
     it('md:d-fc-gold-450 → md:d-fc-gold-600', () => {
-      assert.equal(applyConfig('md:d-fc-gold-450'), 'md:d-fc-gold-600');
+      assert.equal(apply('md:d-fc-gold-450'), 'md:d-fc-gold-600');
     });
   });
 
@@ -134,7 +122,7 @@ describe('color-stops config', () => {
     for (const stop of unchanged) {
       it(`purple-${stop} unchanged`, () => {
         assert.equal(
-          applyConfig(`var(--dt-color-purple-${stop})`),
+          apply(`var(--dt-color-purple-${stop})`),
           `var(--dt-color-purple-${stop})`,
         );
       });
@@ -143,7 +131,7 @@ describe('color-stops config', () => {
     for (const color of ['blue', 'gold', 'green', 'red']) {
       it(`${color}-300 unchanged`, () => {
         assert.equal(
-          applyConfig(`var(--dt-color-${color}-300)`),
+          apply(`var(--dt-color-${color}-300)`),
           `var(--dt-color-${color}-300)`,
         );
       });
@@ -153,31 +141,31 @@ describe('color-stops config', () => {
   describe('non-accent colors are not modified', () => {
     it('black-500 unchanged', () => {
       assert.equal(
-        applyConfig('var(--dt-color-black-500)'),
+        apply('var(--dt-color-black-500)'),
         'var(--dt-color-black-500)',
       );
     });
     it('tan-300 unchanged', () => {
       assert.equal(
-        applyConfig('var(--dt-color-tan-300)'),
+        apply('var(--dt-color-tan-300)'),
         'var(--dt-color-tan-300)',
       );
     });
     it('d-bgc-black-300 unchanged', () => {
-      assert.equal(applyConfig('d-bgc-black-300'), 'd-bgc-black-300');
+      assert.equal(apply('d-bgc-black-300'), 'd-bgc-black-300');
     });
   });
 
   describe('collision safety (single-pass)', () => {
     it('purple-300 becomes 400, not 600', () => {
       assert.equal(
-        applyConfig('var(--dt-color-purple-300)'),
+        apply('var(--dt-color-purple-300)'),
         'var(--dt-color-purple-400)',
       );
     });
     it('magenta-300 becomes 400, not 500', () => {
       assert.equal(
-        applyConfig('var(--dt-color-magenta-300)'),
+        apply('var(--dt-color-magenta-300)'),
         'var(--dt-color-magenta-400)',
       );
     });
@@ -189,7 +177,7 @@ describe('color-stops config', () => {
         '.card { color: var(--dt-color-purple-350); background: var(--dt-color-purple-400); }';
       const expected =
         '.card { color: var(--dt-color-purple-500); background: var(--dt-color-purple-600); }';
-      assert.equal(applyConfig(input), expected);
+      assert.equal(apply(input), expected);
     });
   });
 
@@ -208,7 +196,7 @@ describe('color-stops config', () => {
 
     it('transforms all old stops to new stops', async () => {
       if (!input) input = await readFile(join(__dirname, 'base-color-migration-test-examples.vue'), 'utf8');
-      const output = applyConfig(input);
+      const output = apply(input);
 
       // Old stops that should have been replaced should NOT appear
       const oldStops = [
