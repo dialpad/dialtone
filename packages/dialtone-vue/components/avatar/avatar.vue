@@ -28,7 +28,7 @@
           :alt="imageAlt"
         >
         <div
-          v-else-if="isIconType()"
+          v-else-if="isIconType"
           :class="[iconClass, AVATAR_KIND_MODIFIERS.icon]"
           :aria-label="clickable ? iconAriaLabel : ''"
           :data-qa="iconDataQa"
@@ -343,6 +343,10 @@ export default {
       return hasSlotContent(this.$slots.overlayIcon);
     },
 
+    isIconType () {
+      return hasSlotContent(this.$slots.icon);
+    },
+
     iconDataQa () {
       return 'dt-avatar-icon';
     },
@@ -352,7 +356,7 @@ export default {
      */
     computedFamily () {
       // Icon-type avatars don't use color
-      if (this.isIconType()) return undefined;
+      if (this.isIconType) return undefined;
 
       // Explicit family prop takes precedence
       if (this.family !== undefined) return this.family;
@@ -373,7 +377,7 @@ export default {
      */
     computedVariant () {
       // Icon-type avatars don't use color
-      if (this.isIconType()) return undefined;
+      if (this.isIconType) return undefined;
 
       // Explicit variant prop takes precedence
       if (this.variant !== undefined) return this.variant;
@@ -411,15 +415,17 @@ export default {
      * Compute inline styles for fallback color in browsers that don't support oklch()
      */
     avatarStyles () {
-      const styles = typeof this.$attrs.style === 'object' ? { ...this.$attrs.style } : {};
+      // $attrs.style can be object, string, or array — normalize to an array for merging
+      const attrStyle = this.$attrs.style;
+      const baseStyles = attrStyle != null ? [].concat(attrStyle) : [];
 
       // Only compute hex fallback for browsers that don't support oklch()
-      if (!supportsOklch && !this.isIconType() && this.computedFamily && this.computedVariant !== undefined) {
+      if (!supportsOklch && !this.isIconType && this.computedFamily && this.computedVariant !== undefined) {
         const fallbackHex = computeAvatarHex(this.computedFamily, this.computedVariant, this.anchorHue);
-        styles['--avatar-color-background'] = fallbackHex;
+        baseStyles.push({ '--avatar-color-background': fallbackHex });
       }
 
-      return Object.keys(styles).length > 0 ? styles : undefined;
+      return baseStyles.length > 0 ? baseStyles : undefined;
     },
 
     overlayClasses () {
@@ -495,10 +501,6 @@ export default {
   },
 
   methods: {
-    isIconType () {
-      return hasSlotContent(this.$slots.icon);
-    },
-
     async setImageListeners () {
       await this.$nextTick();
       const el = this.$refs.avatarImage;
