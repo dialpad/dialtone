@@ -7,6 +7,7 @@
     :data-avatar-family="!iconOnly ? computedFamily : undefined"
     :data-avatar-variant="!iconOnly ? computedVariant : undefined"
     data-qa="dt-avatar"
+    :type="clickable ? 'button' : undefined"
     @click="handleClick"
   >
     <div
