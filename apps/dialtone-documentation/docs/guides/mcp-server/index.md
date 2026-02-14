@@ -1,7 +1,6 @@
 ---
 title: Dialtone MCP Server
 description: Search Dialtone's design system with AI assistants using the Model Context Protocol
-thumb: true
 ---
 
 ## What It Does

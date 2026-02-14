@@ -680,9 +680,9 @@ function layoutUtilities (clonedSource, declaration) {
 
 /**
  * Generate Sizing utility classes using a three-tier token approach:
- * - Tier 1 (0-64px): Use --dt-spacing-* tokens (algorithmic)
- * - Tier 2 (64px+ with layout match): Use --dt-layout-* tokens (algorithmic)
- * - Tier 3 (64px+ without layout match): Use --dt-size-* tokens (legacy, deprecated)
+ * - Tier 1 (0-42px): Use calc() from --dt-layout-base (backward-compat, deprecated)
+ * - Tier 2 (16px+): Use --dt-layout-* tokens (base-64 scale)
+ * - Tier 3 (no layout match): Use --dt-size-* tokens (legacy, deprecated)
  * @param { Source } clonedSource
  * @param { Declaration } declaration
  */
@@ -733,16 +733,14 @@ function sizingUtilities (clonedSource, declaration) {
     }));
   }
 
-  // Tier 1: Small sizes (0-64px) with spacing tokens
+  // Tier 1: Small sizes (0-42px) — backward-compat, uses calc from layout base
   Object.keys(WIDTH_HEIGHTS_SPACING).forEach(size => {
-    const tokenVar = `var(--dt-spacing-${WIDTH_HEIGHTS_SPACING[size]})`;
+    const tokenVar = size === '0' ? '0' : `calc(var(--dt-layout-base) * ${size} / 64)`;
     generateSizingRules(size, tokenVar);
   });
 
-  // Tier 2: Large sizes (64px+ with layout match) with layout tokens
+  // Tier 2: Layout sizes (16px+) with layout tokens
   Object.keys(WIDTH_HEIGHTS_LAYOUT).forEach(size => {
-    // Skip 64 - already covered by spacing (spacing-800 = 64px)
-    if (size === '64') return;
     const tokenVar = `var(--dt-layout-${WIDTH_HEIGHTS_LAYOUT[size]})`;
     generateSizingRules(size, tokenVar);
   });
