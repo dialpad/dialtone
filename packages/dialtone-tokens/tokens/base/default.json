@@ -1413,11 +1413,6 @@
     }
   },
   "spacing": {
-    "base": {
-      "value": "8px",
-      "type": "dimension",
-      "description": "8px - Base spacing unit"
-    },
     "0": {
       "value": "0px",
       "type": "dimension",
@@ -1627,11 +1622,6 @@
     }
   },
   "layout": {
-    "base": {
-      "value": "64px",
-      "type": "dimension",
-      "description": "64px - Layout base unit"
-    },
     "25": {
       "value": "{layout.base} * 0.25",
       "type": "dimension",
