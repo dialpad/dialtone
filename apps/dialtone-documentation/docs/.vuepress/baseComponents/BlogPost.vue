@@ -88,5 +88,29 @@ const blogLink = computed(() => {
   .d-docsite--header-2:first-of-type {
     margin-top: var(--dt-size-500);
   }
+  > table:not([class]) {
+    border: 1px solid var(--dt-color-border-subtle);
+    border-collapse: collapse;
+    margin: var(--dt-size-200) 0;
+    width: 100%;
+
+    th {
+      font: var(--dt-text-label-sm);
+      color: var(--dt-color-foreground-secondary);
+    }
+
+    th, td {
+      text-align: left;
+      border: 1px solid var(--dt-color-border-subtle);
+      border-inline: 0;
+      padding: var(--dt-size-400);
+    }
+
+    code {
+      background-color: var(--dt-color-background-default);
+      padding: var(--dt-size-200);
+      font: var(--dt-text-code-xs);
+    }
+  }
 }
 </style>
