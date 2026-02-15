@@ -10,7 +10,7 @@ keywords: ["anchor", "hyperlink", "url", "d-link", "DtLink", "dt-link", "text li
 ---
 
 <code-well-header>
-  <dt-link href="#link" class="d-link">Base link</dt-link>
+  <dt-link href="#link">Base link</dt-link>
 </code-well-header>
 
 <!-- <component-combinator component-name="DtLink" /> -->
@@ -93,6 +93,23 @@ vueCode='
 <dt-link :href="#link" kind="warning" inverted>Inverted warning link</dt-link>
 <dt-link :href="#link" kind="muted" inverted>Inverted muted link</dt-link>
 <dt-link :href="#link" kind="mention" inverted>Inverted mention link</dt-link>
+'
+showHtmlWarning />
+
+### No underline
+
+This inverts the underline behavior. With `underline="false"`, the link will not have an underline by default, but will show one on hover.
+
+<code-well-header>
+  <dt-link href="#link" :underline="false">No underline link</dt-link>
+</code-well-header>
+
+<code-example-tabs
+htmlCode='
+<a href="#link" class="d-link d-link--no-underline">No underline link</a>
+'
+vueCode='
+<dt-link href="#link" :underline="false">No underline link</dt-link>
 '
 showHtmlWarning />
 
