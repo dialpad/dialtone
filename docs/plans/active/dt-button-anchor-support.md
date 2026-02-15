@@ -115,7 +115,7 @@ The `as` prop exists in Dialtone already (DtStack, DtText, DtItemLayout, DtModeI
 
 ### Styling is unaffected by this change
 
-All visual rendering (`kind`, `importance`, `size`, `circle`, etc.) flows through the `buttonClasses()` method in `button.vue` (lines 304-328), which computes CSS classes purely from prop values and never references the root element tag. The classes (`d-btn`, `d-btn--muted`, `d-btn--primary`, etc.) are applied via `:class` on the root element and work identically on `<button>`, `<a>`, and `<router-link>`. The inner `<span>` structure for icon and label also stays the same. Only which HTML attributes get applied to the root element changes.
+All visual rendering (`kind`, `importance`, `size`, `circle`, etc.) flows through the `buttonClasses()` method in `button.vue`, which computes CSS classes purely from prop values and never references the root element tag. The classes (`d-btn`, `d-btn--muted`, `d-btn--primary`, etc.) are applied via `:class` on the root element and work identically on `<button>`, `<a>`, and `<router-link>`. The inner `<span>` structure for icon and label also stays the same. Only which HTML attributes get applied to the root element changes.
 
 ## Breaking Change Assessment
 
@@ -150,24 +150,90 @@ Adding `to` introduces a vue-router dependency in the component library. This is
 
 ## Accessibility Considerations
 
-When DtButton renders as `<a>`:
+When DtButton renders as `<a>` or `<router-link>`:
 
-1. **`role="button"`** — Required so screen readers announce it as a button, not a link. Dialtone's own button.md docs (lines 1180-1182) already specify this requirement.
-2. **Space key handler** — `<a>` elements only respond to Enter. Buttons respond to both Enter and Space. A keydown handler must trigger click on Space when rendering as `<a>`.
-3. **`disabled` state** — `disabled` attribute doesn't exist on `<a>`. Use `aria-disabled="true"` + CSS `pointer-events: none` + prevent click handler.
-4. **`type` prop** — Should be omitted from the rendered `<a>` element (only valid on `<button>`).
-5. **`href`, `target`, `rel`** — Should only be rendered on `<a>`, not `<button>`.
+1. **No `role="button"`** — The element navigates, so the native link role is semantically correct. Screen reader users should know the element will navigate. This matches Bootstrap Vue and Vuetify behavior (neither adds `role="button"` to navigating elements).
+2. **Space key handler** — `<a>` elements only respond to Enter. Buttons respond to both Enter and Space. Since DtButton looks like a button, users may expect Space to work. A keydown handler triggers click on Space.
+3. **`disabled` state** — `disabled` attribute doesn't exist on `<a>`. Use `aria-disabled="true"` + `tabindex="-1"` + prevent click handler with `stopImmediatePropagation`. `href` is also removed when disabled to prevent navigation.
+4. **`type` prop** — Omitted from the rendered `<a>` element (only valid on `<button>`).
+5. **`href`, `target`, `rel`** — Only rendered on `<a>`, not `<button>`.
 
-## Implementation Outline
+## Implementation Milestones
 
-### New props on DtButton
+### Milestone 1: Core component changes (button.vue) — DONE
+
+- [x] Add `to`, `href`, `target`, `rel`, `replace` props
+- [x] Change template from `<button>` to `<component :is="computedTag">`
+- [x] Add `computedTag`, `computedAttrs`, `computedListeners`, `isNativeButton` computed properties
+- [x] Lazy-resolve `RouterLink` via `resolveComponent('RouterLink')` with `<a>` fallback
+- [x] Space key handler for link elements
+- [x] Disabled state: `aria-disabled`, `tabindex=-1`, remove `href`, prevent click with `stopImmediatePropagation`
+- [x] No `role="button"` — navigating elements keep native link role
+- [x] Prop descriptions reference activating prop (`href`/`to`) not rendered element
+
+### Milestone 2: Unit tests — DONE
+
+14 new tests in `button.test.js` (48 total, up from 34):
+
+- [x] `href` rendering: `<a>` tag, `href`/`target`/`rel` attributes, no `role="button"`
+- [x] `to` rendering: `<router-link>` stub, passes `to`/`replace` props, precedence over `href`
+- [x] Disabled state: `<a>` (aria-disabled, tabindex, no href, prevents click), `<router-link>` (aria-disabled, tabindex), `<button>` (native disabled unchanged)
+- [x] Keyboard: Space key on `<a>` triggers click, disabled `<a>` blocks Space
+
+### Milestone 3: Storybook stories — DONE
+
+- [x] Update `button_default.story.vue` to pass through new props
+- [x] Add `href` navigation variant to `button_variants.story.vue` (no `to` variant — Storybook has no vue-router)
+- [x] Add Storybook controls for `to`, `href`, `target` (dropdown), `rel`, `replace`
+
+### REVIEW CHECKPOINT 1 — DONE
+
+- [x] Review component code changes in `button.vue`
+- [x] Review test results
+- [x] Visually verify Storybook `components-button--variants` navigation section
+- [x] Confirm visual parity with existing `d-btn` class workarounds
+
+### Milestone 4: Documentation (button.md) — DONE
+
+- [x] Add "Navigation" section after Variants, before Sizes
+- [x] Decision tree: `to` vs `href` vs neither
+- [x] Before/after migration examples (Migration subsection)
+- [x] Clarify link-vs-button guidance in Usage section
+- [x] Update Accessibility section (outdated `role="button"` guidance replaced)
+
+### Milestone 5: Migrate doc site workarounds — DONE
+
+- [x] PageHeader.vue: Storybook + Figma `<a class="d-btn">` → `<dt-button href="..." kind="muted" importance="clear">`
+- [x] Navbar.vue: `<router-link class="d-btn">` nav links → `<dt-button :to="..." kind="muted" importance="clear" :active="...">`
+- [x] Navbar.vue: Storybook, GitHub, Codepen `<a class="d-btn d-btn--icon-only">` → `<dt-button href="..." kind="muted" importance="clear" aria-label="...">`
+- [x] BaseIcon.vue: Figma `<a class="d-btn">` → `<dt-button :href="figmaLink" kind="muted" importance="clear">`
+
+### Milestone 6: Refactor `<router-link custom>` wrapping DtButton — DONE
+
+Replaced verbose `<router-link v-slot="{ navigate }" custom>` wrappers with DtButton's `to` prop.
+
+- [x] Page.vue: prev/next navigation buttons — direct `to` prop replacement
+- [x] Home.vue: "Get Started" and "What's New?" CTAs — removed `role="link"` and `@keypress.enter` (both unnecessary with `to` prop), kept analytics `@click`
+- [x] Home.vue: "Make a request" and "Report a bug" `<a class="d-btn d-btn--muted d-btn--outlined d-btn--lg">` → `<dt-button href="..." kind="muted" importance="outlined" size="lg">`
+- [x] SidebarItem.vue: main item + sub-item — refactored `isActiveLink` to compute from `useRoute()` instead of router-link's `isExactActive` scoped slot, simplified `handleAnchorClick` to drop `navigate` parameter, items without `link` render as `<button>` (no `to` prop)
+
+### REVIEW CHECKPOINT 2 — DONE
+
+- [x] Review documentation page for button
+- [x] Visually verify Page.vue prev/next navigation
+- [x] Visually verify Home.vue CTA buttons + confirm analytics still fire
+- [x] Visually verify Home.vue "Make a request" / "Report a bug" external links
+- [x] Visually verify SidebarItem.vue sidebar navigation + active state highlighting
+- [x] Confirm all migrated buttons render identically to old workarounds
+- [ ] Confirm all migrated buttons render identically to old workarounds
+
+## Implementation Details
+
+### New props
 
 ```js
-// Navigation
 to: { type: [String, Object], default: null },
 href: { type: String, default: null },
-
-// Anchor/router-link attributes
 target: { type: String, default: null },
 rel: { type: String, default: null },
 replace: { type: Boolean, default: false },
@@ -177,110 +243,91 @@ replace: { type: Boolean, default: false },
 
 ```vue
 <!-- From -->
-<button :class="..." :type="type" :disabled="disabled" ...>
+<button :class="..." :type="type" :disabled="disabled" v-on="buttonListeners">
 
 <!-- To -->
-<component
-  :is="computedTag"
-  :class="..."
-  v-bind="computedAttrs"
-  v-on="computedListeners"
->
+<component :is="computedTag" :class="..." v-bind="computedAttrs" v-on="computedListeners">
 ```
 
-### Computed logic
+### Computed logic (as implemented)
 
 ```js
-const computedTag = computed(() => {
-  if (props.to) return resolveRouterLink(); // lazy resolution
-  if (props.href) return 'a';
+computedTag () {
+  if (this.to) return this.resolveRouterLink();
+  if (this.href) return 'a';
   return 'button';
-});
+},
 
-const isLink = computed(() => !!(props.to || props.href));
-
-const computedAttrs = computed(() => {
-  if (props.to) {
+computedAttrs () {
+  if (this.to) {
     return {
-      to: props.to,
-      replace: props.replace,
-      ...(props.disabled && { 'aria-disabled': 'true', tabindex: '-1' }),
+      to: this.to,
+      replace: this.replace,
+      ...(this.disabled && { 'aria-disabled': 'true', tabindex: '-1' }),
     };
   }
-  if (props.href) {
+  if (this.href) {
     return {
-      href: props.href,
-      target: props.target,
-      rel: props.rel,
-      role: 'button',
-      ...(props.disabled && { 'aria-disabled': 'true', tabindex: '-1' }),
+      href: this.disabled ? null : this.href,
+      target: this.target,
+      rel: this.rel,
+      ...(this.disabled && { 'aria-disabled': 'true', tabindex: '-1' }),
     };
   }
   return {
-    type: props.type,
-    disabled: props.disabled,
+    type: this.type,
+    disabled: this.disabled,
   };
-});
+},
 ```
 
-### Files to modify
+### Files modified
 
 - `packages/dialtone-vue/components/button/button.vue` — template + props + computed logic
-- `packages/dialtone-vue/components/button/button_constants.js` — new prop validators if needed
-- `packages/dialtone-vue/components/button/button.test.js` — new test cases for `to`, `href`, and accessibility
-- `apps/dialtone-documentation/docs/components/button.md` — document the new capability (see Documentation section)
+- `packages/dialtone-vue/components/button/button.test.js` — 14 new test cases
+- `packages/dialtone-vue/components/button/button.stories.js` — Storybook controls for new props
+- `packages/dialtone-vue/components/button/button_default.story.vue` — pass through new props
+- `packages/dialtone-vue/components/button/button_variants.story.vue` — `href` navigation variant
 
-### Complexity estimate
+### Files not modified
 
-Moderate — not high:
-
-- ~60-100 lines of new/changed code in the component
-- ~100-150 lines of new tests
-- Template change is small (`<button>` to `<component :is>`)
-- Main work is conditional attribute handling, router-link resolution, and accessibility
+- `packages/dialtone-vue/components/button/button_constants.js` — no new validators needed
 
 ## Test Plan
 
 ### Unit tests
 
-Run: `pnpm nx run dialtone-vue:test -- --testPathPattern=button`
+Run: `pnpm exec vitest run --test-timeout=10000 components/button/button.test.js`
 
-**New test cases needed:**
+14 new tests covering actual new behaviors:
 
 `href` rendering:
 
 - Renders `<a>` when `href` is provided
-- Does not render `<a>` when `href` is not provided (default `<button>`)
 - Applies `href`, `target`, `rel` attributes on `<a>`
-- Does not apply `type` attribute on `<a>`
-- Applies `role="button"` on `<a>`
-- Applies all button classes (`kind`, `importance`, `size`, `circle`) identically on `<a>`
-- Slots (`default`, `icon`) render identically on `<a>`
+- Does not apply `role="button"` (element navigates, native link role is correct)
 
 `to` rendering:
 
 - Renders `<router-link>` when `to` is provided
 - Passes `to` and `replace` props to `<router-link>`
 - `to` takes precedence over `href` when both are provided
-- Does not apply `type` attribute on `<router-link>`
-- Applies all button classes identically on `<router-link>`
 
 Disabled state:
 
-- `<a>` with `disabled`: renders `aria-disabled="true"`, `tabindex="-1"`, prevents click
-- `<router-link>` with `disabled`: renders `aria-disabled="true"`, `tabindex="-1"`, prevents navigation
+- `<a>` with `disabled`: `aria-disabled="true"`, `tabindex="-1"`, no `href`, prevents click
+- `<router-link>` with `disabled`: `aria-disabled="true"`, `tabindex="-1"`
 - `<button>` with `disabled`: unchanged behavior (native `disabled` attribute)
 
 Keyboard accessibility:
 
 - `<a>` responds to Space key (triggers click)
-- `<a>` responds to Enter key (native behavior)
+- Disabled `<a>` blocks Space key
 
 ### Integration verification
 
-1. Storybook: button-as-anchor and button-as-router-link render identically to current workarounds
-2. Accessibility: keyboard test (Tab, Enter, Space all work correctly per element type)
-3. Doc site: convert PageHeader.vue workarounds as proof-of-concept
+1. Storybook: `components-button--variants` shows `href` navigation variant
+2. Doc site: Milestone 5 converts workarounds as proof-of-concept (also validates `to` prop with real vue-router)
 
 ## Documentation Plan
 

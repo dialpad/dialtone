@@ -47,7 +47,6 @@
                 </dt-stack>
               </dt-stack>
               <dt-button
-                outline
                 :href="figmaLink"
                 target="_blank"
                 rel="noopener noreferrer"
