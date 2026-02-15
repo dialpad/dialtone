@@ -47,9 +47,11 @@ export default defineUserConfig({
         devSourcemap: true,
       },
       server: {
+        // hmr: {
+        //   overlay: false,
+        // },
         watch: {
-          // Ignore packages directory to prevent rebuild loops
-          ignored: ['**/packages/**', '**/node_modules/**'],
+          ignored: ['**/node_modules/**'],
         },
       },
     },
