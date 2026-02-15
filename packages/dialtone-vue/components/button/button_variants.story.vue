@@ -201,25 +201,7 @@
           </template>
           External Link
         </dt-button>
-        <!-- Navigation: to (renders <router-link>) -->
-        <dt-button
-          to="components-button--default"
-          size="sm"
-          importance="outlined"
-          kind="muted"
-        >
-          Router Link
-        </dt-button>
-        <!-- Navigation: to with replace -->
-        <dt-button
-          to="/components/button.html"
-          :replace="true"
-          size="sm"
-          importance="outlined"
-          kind="muted"
-        >
-          Router Link (replace history)
-        </dt-button>
+        (via <code>href</code> prop)
       </dt-stack>
     </dt-stack>
   </div>
