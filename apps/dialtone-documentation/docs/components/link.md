@@ -105,6 +105,45 @@ vueCode='
 '
 showHtmlWarning />
 
+## Navigation
+
+DtLink supports both external links and internal SPA navigation via Vue Router.
+
+### href
+
+Use `href` for standard anchor links — external URLs, hash links, etc.
+
+<code-example-tabs
+vueCode='
+<dt-link href="https://github.com/dialpad/dialtone" target="_blank" rel="noopener noreferrer">
+  GitHub
+</dt-link>
+<dt-link href="#section">Jump to section</dt-link>
+'
+showHtmlWarning />
+
+### to
+
+Use `to` for Vue Router navigation. DtLink renders as a `<router-link>` when `to` is provided.
+
+<code-example-tabs
+vueCode='
+<dt-link to="/components/">Browse Components</dt-link>
+<dt-link to="/components/button">Button docs</dt-link>
+<dt-link :to="{ name: &apos;component&apos;, params: { id: &apos;button&apos; } }">Button docs</dt-link>
+'
+showHtmlWarning />
+
+### Replace history
+
+Use the `replace` prop to replace the current history entry instead of pushing a new one. Only applies when `to` is provided.
+
+<code-example-tabs
+vueCode='
+<dt-link to="/components/" replace>Browse Components</dt-link>
+'
+showHtmlWarning />
+
 ## Vue API
 
 <component-vue-api component-name="link" />
