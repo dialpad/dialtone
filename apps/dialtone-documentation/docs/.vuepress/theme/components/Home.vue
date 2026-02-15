@@ -78,9 +78,9 @@
           Foundational color, iconography, and spacing guidelines
         </p>
         <dt-stack gap="300">
-          <router-link class="d-link" to="/design/">
+          <dt-link to="/design/">
             Browse Design Guidelines
-          </router-link>
+          </dt-link>
         </dt-stack>
       </dt-stack>
       <dt-stack gap="400" class="link d-body--md d-gc3 d-px32 d-ta-center">
@@ -96,12 +96,12 @@
           Presentational UI components offered in CSS and Vue
         </p>
         <dt-stack gap="300">
-          <router-link class="d-link" to="/components/">
+          <dt-link to="/components/">
             Browse CSS Components
-          </router-link>
-          <a class="d-link" href="https://dialtone.dialpad.com/vue/index.html?path=/docs/welcome--docs" target="_blank" rel="noopener noreferrer">
+          </dt-link>
+          <dt-link href="https://dialtone.dialpad.com/vue/index.html?path=/docs/welcome--docs" target="_blank" rel="noopener noreferrer">
             Browse Vue Components
-          </a>
+          </dt-link>
         </dt-stack>
       </dt-stack>
       <dt-stack gap="400" class="link d-body--md d-gc3 d-px32 d-ta-center">
@@ -117,9 +117,9 @@
           A utility-first CSS framework for building user interfaces.
         </p>
         <dt-stack gap="300">
-          <router-link class="d-link" to="/utilities/">
+          <dt-link to="/utilities/">
             Browse Utility Classes
-          </router-link>
+          </dt-link>
         </dt-stack>
       </dt-stack>
       <dt-stack gap="400" class="link d-body--md d-gc3 d-px32 d-ta-center">
@@ -135,15 +135,15 @@
           Reference guidelines for Accessibility, Writing, and more
         </p>
         <dt-stack gap="300">
-          <router-link class="d-link" to="/guides/getting-started/">
+          <dt-link to="/guides/getting-started/">
             Getting Started
-          </router-link>
-          <router-link class="d-link" to="/guides/content/">
+          </dt-link>
+          <dt-link to="/guides/content/">
             Writing Guidelines
-          </router-link>
-          <router-link class="d-link" to="/guides/accessibility/">
+          </dt-link>
+          <dt-link to="/guides/accessibility/">
             Accessibility
-          </router-link>
+          </dt-link>
         </dt-stack>
       </dt-stack>
     </div>
