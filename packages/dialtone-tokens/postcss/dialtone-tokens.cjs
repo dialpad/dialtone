@@ -1,14 +1,10 @@
-const Color = require('colorjs.io').default;
 const {
   PLATFORM_FONT_SIZES,
   Z_INDEX,
-  IS_COLOR_REGEX,
-  IS_THEME_COLOR_REGEX,
   IS_SHADOW_REGEX,
   IS_TYPOGRAPHY_REGEX,
   IS_TEXT_REGEX,
   REGEX_OPTIONS,
-  OKLCH_EXCLUDED_COLORS,
 } = require('./constants.cjs');
 
 let newDocEntries = {};
@@ -125,56 +121,6 @@ function wrapInCalc (declaration) {
 }
 
 /**
- * Generate OKLCH CSS Variables.
- * @param { Declaration } declaration
- */
-// eslint-disable-next-line complexity
-function generateColorOklch (declaration) {
-  // Prevent regenerating oklch variables that have already been generated, since postcss will run this
-  // even for newly generated variables.
-  const isOklch = ['-h', '-c', '-l', '-a', '-oklch', '-oklcha'].some(suffix => {
-    if (declaration.prop.endsWith(suffix)) {
-      return true;
-    }
-    return false;
-  });
-
-  const isReferenceToken = (value) => value.includes('var(--');
-  const shouldHaveOklchGenerated = (prop) =>
-    (IS_COLOR_REGEX.test(prop) ||
-    IS_THEME_COLOR_REGEX.test(prop)) &&
-    !isOklch &&
-    !OKLCH_EXCLUDED_COLORS.includes(prop);
-
-  if (!shouldHaveOklchGenerated(declaration.prop)) return;
-
-  if (isReferenceToken(declaration.value)) {
-    const varName = declaration.value.substring(4, declaration.value.length - 1);
-    declaration.before({ prop: `${declaration.prop}-l`, value: `var(${varName}-l)` });
-    declaration.before({ prop: `${declaration.prop}-c`, value: `var(${varName}-c)` });
-    declaration.before({ prop: `${declaration.prop}-h`, value: `var(${varName}-h)` });
-    declaration.before({ prop: `${declaration.prop}-a`, value: `var(${varName}-a)` });
-    declaration.before({ prop: `${declaration.prop}-oklch`, value: `var(${varName}-oklch)` });
-    declaration.before({ prop: `${declaration.prop}-oklcha`, value: `var(${varName}-oklcha)` });
-    return;
-  }
-
-  const color = new Color(declaration.value).to('oklch');
-  let [lightness, chroma, hue] = color.coords;
-  const alpha = color.alpha?.raw || color.alpha;
-  lightness = lightness?.raw || lightness;
-  chroma = chroma?.raw || chroma;
-  hue = hue?.raw || (isNaN(hue) ? 0 : hue);
-
-  declaration.before({ prop: `${declaration.prop}-l`, value: `${lightness}` });
-  declaration.before({ prop: `${declaration.prop}-c`, value: `${chroma}` });
-  declaration.before({ prop: `${declaration.prop}-h`, value: `${hue}` });
-  declaration.before({ prop: `${declaration.prop}-a`, value: `${alpha}` });
-  declaration.before({ prop: `${declaration.prop}-oklch`, value: `var(${declaration.prop}-l) var(${declaration.prop}-c) var(${declaration.prop}-h)` });
-  declaration.before({ prop: `${declaration.prop}-oklcha`, value: `oklch(var(${declaration.prop}-l) var(${declaration.prop}-c) var(${declaration.prop}-h) / var(--alpha, ${alpha}))` });
-}
-
-/**
  * Generates font sizes for specific platforms
  * TV, TC8 and Mobile
  * @param { Declaration } declaration
@@ -280,8 +226,6 @@ module.exports = () => {
     },
 
     Declaration (declaration) {
-      generateColorOklch(declaration);
-
       // A little hacky, but doesn't seem like there's a better way to do this currently.
       // wraps calculated values in calc() for css if it contains a multiplication operator.
       // This could cause issues if a value ever contains a * character that isn't for multiplication.
