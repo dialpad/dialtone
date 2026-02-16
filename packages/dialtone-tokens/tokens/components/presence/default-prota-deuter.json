@@ -2,7 +2,7 @@
   "presence": {
     "color": {
       "available": {
-        "value": "#1E6EF4",
+        "value": "oklch(0.5734 0.215 260.57)",
         "type": "color"
       },
       "unavailable": {

@@ -3,23 +3,23 @@
     "base": {
       "color": {
         "surface": {
-          "value": "#EDF0EB",
+          "value": "oklch(0.9515 0.0074 132.42)",
           "type": "color"
         },
         "foreground": {
-          "value": "#1A2214",
+          "value": "oklch(0.2394 0.0282 132.38)",
           "type": "color"
         },
         "border": {
-          "value": "#344626",
+          "value": "oklch(0.3696 0.0566 132.52)",
           "type": "color"
         },
         "accent": {
-          "value": "#C0CAAE",
+          "value": "oklch(0.8237 0.0397 123.28)",
           "type": "color"
         },
         "action": {
-          "value": "#3F5F01",
+          "value": "oklch(0.4436 0.1168 128.85)",
           "type": "color"
         }
       }
@@ -28,7 +28,7 @@
       "color": {
         "foreground": {
           "primary": {
-            "value": "#1A2214",
+            "value": "oklch(0.2394 0.0282 132.38)",
             "type": "color"
           }
         }
