@@ -9,7 +9,7 @@
             "modify": {
               "type": "alpha",
               "value": ".65",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -134,7 +134,7 @@
             "modify": {
               "type": "darken",
               "value": ".5",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -151,7 +151,7 @@
             "modify": {
               "type": "darken",
               "value": ".5",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -164,7 +164,7 @@
             "modify": {
               "type": "darken",
               "value": ".4",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -197,7 +197,7 @@
             "modify": {
               "type": "alpha",
               "value": ".90",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -210,7 +210,7 @@
             "modify": {
               "type": "alpha",
               "value": ".03",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -223,7 +223,7 @@
             "modify": {
               "type": "alpha",
               "value": ".18",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -236,7 +236,7 @@
             "modify": {
               "type": "alpha",
               "value": ".30",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -249,7 +249,7 @@
             "modify": {
               "type": "alpha",
               "value": ".74",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -262,7 +262,7 @@
             "modify": {
               "type": "alpha",
               "value": ".97",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -275,7 +275,7 @@
             "modify": {
               "type": "alpha",
               "value": ".2",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -288,7 +288,7 @@
             "modify": {
               "type": "alpha",
               "value": ".55",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -301,7 +301,7 @@
             "modify": {
               "type": "alpha",
               "value": ".28",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -314,7 +314,7 @@
             "modify": {
               "type": "alpha",
               "value": "0.4",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -327,7 +327,7 @@
             "modify": {
               "type": "alpha",
               "value": "0.7",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -340,7 +340,7 @@
             "modify": {
               "type": "alpha",
               "value": ".6",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -353,7 +353,7 @@
             "modify": {
               "type": "alpha",
               "value": ".7",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -366,7 +366,7 @@
             "modify": {
               "type": "alpha",
               "value": ".6",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -379,7 +379,7 @@
             "modify": {
               "type": "alpha",
               "value": "0.7",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -392,7 +392,7 @@
             "modify": {
               "type": "alpha",
               "value": "0.65",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -433,7 +433,7 @@
             "modify": {
               "type": "alpha",
               "value": "0.04",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -446,7 +446,7 @@
             "modify": {
               "type": "alpha",
               "value": ".11",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -459,7 +459,7 @@
             "modify": {
               "type": "alpha",
               "value": "0.18",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -472,7 +472,7 @@
             "modify": {
               "type": "alpha",
               "value": ".5",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -485,7 +485,7 @@
             "modify": {
               "type": "alpha",
               "value": ".5",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -498,7 +498,7 @@
             "modify": {
               "type": "alpha",
               "value": ".8",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -517,7 +517,7 @@
             "modify": {
               "type": "alpha",
               "value": ".14",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -530,7 +530,7 @@
             "modify": {
               "type": "alpha",
               "value": ".22",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -543,7 +543,7 @@
             "modify": {
               "type": "alpha",
               "value": ".36",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -556,7 +556,7 @@
             "modify": {
               "type": "alpha",
               "value": ".5",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -617,7 +617,7 @@
             "modify": {
               "type": "alpha",
               "value": ".1",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -630,7 +630,7 @@
             "modify": {
               "type": "alpha",
               "value": ".18",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -643,7 +643,7 @@
             "modify": {
               "type": "alpha",
               "value": ".34",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -656,7 +656,7 @@
             "modify": {
               "type": "alpha",
               "value": ".5",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -1031,7 +1031,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": ".3",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -1044,7 +1044,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": "0.2",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -1073,7 +1073,7 @@
                 "modify": {
                   "type": "lighten",
                   "value": ".25",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -1104,7 +1104,7 @@
                 "modify": {
                   "type": "lighten",
                   "value": ".25",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -1125,7 +1125,7 @@
                 "modify": {
                   "type": "darken",
                   "value": ".32",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -1142,7 +1142,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": ".15",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -1161,7 +1161,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": ".1",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -1174,7 +1174,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": ".15",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -1191,7 +1191,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": ".12",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -1241,7 +1241,7 @@
               "modify": {
                 "type": "lighten",
                 "value": ".15",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1254,7 +1254,7 @@
               "modify": {
                 "type": "lighten",
                 "value": ".15",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1267,7 +1267,7 @@
               "modify": {
                 "type": "lighten",
                 "value": ".8",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1286,7 +1286,7 @@
               "modify": {
                 "type": "alpha",
                 "value": ".15",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1299,7 +1299,7 @@
               "modify": {
                 "type": "alpha",
                 "value": ".18",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }

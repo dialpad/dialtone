@@ -130,18 +130,18 @@ function colorUtilities (clonedSource, declaration) {
   /**
    * High Contrast Color Utilities
    *
-   * Problem: High contrast tokens redefine colors as complete hsl() values (e.g. hsl(0 0% 0% / 0.5)),
-   * but CSS utilities construct colors from HSLA split components:
-   *   - var(--dt-color-border-subtle-h)
-   *   - var(--dt-color-border-subtle-s)
+   * Problem: High contrast tokens redefine colors as complete oklch() values (e.g. oklch(0 0 0 / 0.5)),
+   * but CSS utilities construct colors from OKLCH split components:
    *   - var(--dt-color-border-subtle-l)
+   *   - var(--dt-color-border-subtle-c)
+   *   - var(--dt-color-border-subtle-h)
    *   - var(--dt-color-border-subtle-a)
    *
    * These split components don't exist in high contrast mode, causing utilities to fail.
    *
    * Solution: Generate [data-dt-contrast="high"] overrides that use the full token variable
    * instead of constructing from splits. This ensures:
-   *   - Normal mode: HSLA splits work, opacity utilities (--fco, --bgo, --bco, --dco) functional
+   *   - Normal mode: OKLCH splits work, opacity utilities (--fco, --bgo, --bco, --dco) functional
    *   - High contrast mode: Full variable used, splits ignored
    *
    * The list of high contrast colors is dynamically extracted from token files to future-proof
@@ -270,7 +270,7 @@ function colorUtilities (clonedSource, declaration) {
           prop: '--bgg-to',
           value: OKLCH_EXCLUDED_COLORS.includes(token)
             ? `var(${token}) !important`
-            : `hsl(var(${token}-h) var(${token}-s) var(${token}-l) / 0%) !important`,
+            : `oklch(from var(${token}) l c h / 0%) !important`,
         }),
       ],
     }));
