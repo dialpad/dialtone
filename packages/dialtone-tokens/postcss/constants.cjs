@@ -1,6 +1,6 @@
 /**
  * This file contains the constants that we use to dynamically generate
- * the dialtone hsl tokens and composition tokens
+ * the dialtone oklch tokens and composition tokens
  *
  * Put here the unique values that are needed to generate the classes or mappings
  * to variables.
@@ -9,7 +9,7 @@
  */
 
 module.exports = {
-  HSLA_EXCLUDED_COLORS: ['--dt-color-surface-ai', '--dt-color-gradient-gold-red-magenta-purple', '--dt-color-gradient-magenta-purple', '--dt-badge-color-background-ai', '--dt-color-border-ai'],
+  OKLCH_EXCLUDED_COLORS: ['--dt-color-surface-ai', '--dt-color-gradient-gold-red-magenta-purple', '--dt-color-gradient-magenta-purple', '--dt-badge-color-background-ai', '--dt-color-border-ai'],
   IS_COLOR_REGEX: /--dt.*-color/,
   IS_THEME_COLOR_REGEX: /(--dt-theme-).*-(color).*/,
   IS_SHADOW_REGEX: /--dt.*-shadow/,

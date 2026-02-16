@@ -25,7 +25,7 @@ const {
   WIDTH_HEIGHTS_SPACING,
   WIDTH_HEIGHTS_LAYOUT,
   WIDTH_HEIGHTS_DEPRECATED,
-  HSLA_EXCLUDED_COLORS,
+  OKLCH_EXCLUDED_COLORS,
 } = require('./constants.cjs');
 const {
   appendHoverFocusSelectors,
@@ -167,7 +167,7 @@ function colorUtilities (clonedSource, declaration) {
     return [
       declaration.clone({
         prop: opacityVar,
-        value: HSLA_EXCLUDED_COLORS.includes(token)
+        value: OKLCH_EXCLUDED_COLORS.includes(token)
           ? `100%`
           : `var(${token}-a)`,
       }),
@@ -176,7 +176,7 @@ function colorUtilities (clonedSource, declaration) {
         // Use relative color syntax to apply opacity
         // Extracts l, c, h from the token and applies the opacity variable to alpha
         // Alpha channel accepts percentages directly (75% = 0.75 opacity)
-        value: HSLA_EXCLUDED_COLORS.includes(token)
+        value: OKLCH_EXCLUDED_COLORS.includes(token)
           ? `var(${token}) !important`
           : `oklch(from var(${token}) l c h / var(${opacityVar})) !important`,
       }),
@@ -268,7 +268,7 @@ function colorUtilities (clonedSource, declaration) {
         ..._generateColorNodes(token, '--bgg-from', '--bgg-from-opacity'),
         declaration.clone({
           prop: '--bgg-to',
-          value: HSLA_EXCLUDED_COLORS.includes(token)
+          value: OKLCH_EXCLUDED_COLORS.includes(token)
             ? `var(${token}) !important`
             : `hsl(var(${token}-h) var(${token}-s) var(${token}-l) / 0%) !important`,
         }),

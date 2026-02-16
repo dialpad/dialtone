@@ -8,7 +8,7 @@ const {
   IS_TYPOGRAPHY_REGEX,
   IS_TEXT_REGEX,
   REGEX_OPTIONS,
-  HSLA_EXCLUDED_COLORS,
+  OKLCH_EXCLUDED_COLORS,
 } = require('./constants.cjs');
 
 let newDocEntries = {};
@@ -125,14 +125,14 @@ function wrapInCalc (declaration) {
 }
 
 /**
- * Generate HSL CSS Variables.
+ * Generate OKLCH CSS Variables.
  * @param { Declaration } declaration
  */
 // eslint-disable-next-line complexity
-function generateColorHsla (declaration) {
-  // Prevent regenerating hsla variables that have already been generated, since postcss will run this
+function generateColorOklch (declaration) {
+  // Prevent regenerating oklch variables that have already been generated, since postcss will run this
   // even for newly generated variables.
-  const isHSLA = ['-h', '-s', '-l', '-a', '-hsl', '-hsla'].some(suffix => {
+  const isOklch = ['-h', '-c', '-l', '-a', '-oklch', '-oklcha'].some(suffix => {
     if (declaration.prop.endsWith(suffix)) {
       return true;
     }
@@ -140,38 +140,38 @@ function generateColorHsla (declaration) {
   });
 
   const isReferenceToken = (value) => value.includes('var(--');
-  const shouldHaveHSLAGenerated = (prop) =>
+  const shouldHaveOklchGenerated = (prop) =>
     (IS_COLOR_REGEX.test(prop) ||
     IS_THEME_COLOR_REGEX.test(prop)) &&
-    !isHSLA &&
-    !HSLA_EXCLUDED_COLORS.includes(prop);
+    !isOklch &&
+    !OKLCH_EXCLUDED_COLORS.includes(prop);
 
-  if (!shouldHaveHSLAGenerated(declaration.prop)) return;
+  if (!shouldHaveOklchGenerated(declaration.prop)) return;
 
   if (isReferenceToken(declaration.value)) {
     const varName = declaration.value.substring(4, declaration.value.length - 1);
-    declaration.before({ prop: `${declaration.prop}-h`, value: `var(${varName}-h)` });
-    declaration.before({ prop: `${declaration.prop}-s`, value: `var(${varName}-s)` });
     declaration.before({ prop: `${declaration.prop}-l`, value: `var(${varName}-l)` });
+    declaration.before({ prop: `${declaration.prop}-c`, value: `var(${varName}-c)` });
+    declaration.before({ prop: `${declaration.prop}-h`, value: `var(${varName}-h)` });
     declaration.before({ prop: `${declaration.prop}-a`, value: `var(${varName}-a)` });
-    declaration.before({ prop: `${declaration.prop}-hsl`, value: `var(${varName}-hsl)` });
-    declaration.before({ prop: `${declaration.prop}-hsla`, value: `var(${varName}-hsla)` });
+    declaration.before({ prop: `${declaration.prop}-oklch`, value: `var(${varName}-oklch)` });
+    declaration.before({ prop: `${declaration.prop}-oklcha`, value: `var(${varName}-oklcha)` });
     return;
   }
 
-  const color = new Color(declaration.value).to('hsl');
-  let [hue, saturation, lightness] = color.coords;
-  const alpha = ((color.alpha?.raw || color.alpha) * 100).toFixed(0);
-  hue = hue?.raw || (isNaN(hue) ? 0 : hue);
-  saturation = saturation?.raw || saturation;
+  const color = new Color(declaration.value).to('oklch');
+  let [lightness, chroma, hue] = color.coords;
+  const alpha = color.alpha?.raw || color.alpha;
   lightness = lightness?.raw || lightness;
+  chroma = chroma?.raw || chroma;
+  hue = hue?.raw || (isNaN(hue) ? 0 : hue);
 
+  declaration.before({ prop: `${declaration.prop}-l`, value: `${lightness}` });
+  declaration.before({ prop: `${declaration.prop}-c`, value: `${chroma}` });
   declaration.before({ prop: `${declaration.prop}-h`, value: `${hue}` });
-  declaration.before({ prop: `${declaration.prop}-s`, value: `${saturation}%` });
-  declaration.before({ prop: `${declaration.prop}-l`, value: `${lightness}%` });
-  declaration.before({ prop: `${declaration.prop}-a`, value: `${alpha}%` });
-  declaration.before({ prop: `${declaration.prop}-hsl`, value: `var(${declaration.prop}-h) var(${declaration.prop}-s) var(${declaration.prop}-l)` });
-  declaration.before({ prop: `${declaration.prop}-hsla`, value: `hsl(var(${declaration.prop}-h) var(${declaration.prop}-s) var(${declaration.prop}-l) / var(--alpha, ${alpha}%))` });
+  declaration.before({ prop: `${declaration.prop}-a`, value: `${alpha}` });
+  declaration.before({ prop: `${declaration.prop}-oklch`, value: `var(${declaration.prop}-l) var(${declaration.prop}-c) var(${declaration.prop}-h)` });
+  declaration.before({ prop: `${declaration.prop}-oklcha`, value: `oklch(var(${declaration.prop}-l) var(${declaration.prop}-c) var(${declaration.prop}-h) / var(--alpha, ${alpha}))` });
 }
 
 /**
@@ -280,7 +280,7 @@ module.exports = () => {
     },
 
     Declaration (declaration) {
-      generateColorHsla(declaration);
+      generateColorOklch(declaration);
 
       // A little hacky, but doesn't seem like there's a better way to do this currently.
       // wraps calculated values in calc() for css if it contains a multiplication operator.

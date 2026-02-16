@@ -5,46 +5,46 @@ const {
   IS_SHADOW_REGEX,
   IS_TYPOGRAPHY_REGEX,
   REGEX_OPTIONS,
-  HSLA_EXCLUDED_COLORS,
+  OKLCH_EXCLUDED_COLORS,
 } = require('./constants.cjs');
 
 /**
- * Generate HSL CSS Variables for a color declaration
+ * Generate OKLCH CSS Variables for a color declaration
  */
-function generateColorHsla (declaration) {
-  const isHSLA = ['-h', '-s', '-l', '-a', '-hsl', '-hsla'].some(suffix => declaration.prop.endsWith(suffix));
+function generateColorOklch (declaration) {
+  const isOklch = ['-h', '-c', '-l', '-a', '-oklch', '-oklcha'].some(suffix => declaration.prop.endsWith(suffix));
   const isReferenceToken = (value) => value.includes('var(--');
-  const shouldHaveHSLAGenerated = (prop) =>
+  const shouldHaveOklchGenerated = (prop) =>
     (IS_COLOR_REGEX.test(prop) || IS_THEME_COLOR_REGEX.test(prop)) &&
-    !isHSLA &&
-    !HSLA_EXCLUDED_COLORS.includes(prop);
+    !isOklch &&
+    !OKLCH_EXCLUDED_COLORS.includes(prop);
 
-  if (!shouldHaveHSLAGenerated(declaration.prop)) return;
+  if (!shouldHaveOklchGenerated(declaration.prop)) return;
 
   if (isReferenceToken(declaration.value)) {
     const varName = declaration.value.substring(4, declaration.value.length - 1);
-    declaration.before({ prop: `${declaration.prop}-h`, value: `var(${varName}-h)` });
-    declaration.before({ prop: `${declaration.prop}-s`, value: `var(${varName}-s)` });
     declaration.before({ prop: `${declaration.prop}-l`, value: `var(${varName}-l)` });
+    declaration.before({ prop: `${declaration.prop}-c`, value: `var(${varName}-c)` });
+    declaration.before({ prop: `${declaration.prop}-h`, value: `var(${varName}-h)` });
     declaration.before({ prop: `${declaration.prop}-a`, value: `var(${varName}-a)` });
-    declaration.before({ prop: `${declaration.prop}-hsl`, value: `var(${varName}-hsl)` });
-    declaration.before({ prop: `${declaration.prop}-hsla`, value: `var(${varName}-hsla)` });
+    declaration.before({ prop: `${declaration.prop}-oklch`, value: `var(${varName}-oklch)` });
+    declaration.before({ prop: `${declaration.prop}-oklcha`, value: `var(${varName}-oklcha)` });
     return;
   }
 
-  const color = new Color(declaration.value).to('hsl');
-  let [hue, saturation, lightness] = color.coords;
-  const alpha = ((color.alpha?.raw || color.alpha) * 100).toFixed(0);
-  hue = hue?.raw || (isNaN(hue) ? 0 : hue);
-  saturation = saturation?.raw || saturation;
+  const color = new Color(declaration.value).to('oklch');
+  let [lightness, chroma, hue] = color.coords;
+  const alpha = color.alpha?.raw || color.alpha;
   lightness = lightness?.raw || lightness;
+  chroma = chroma?.raw || chroma;
+  hue = hue?.raw || (isNaN(hue) ? 0 : hue);
 
+  declaration.before({ prop: `${declaration.prop}-l`, value: `${lightness}` });
+  declaration.before({ prop: `${declaration.prop}-c`, value: `${chroma}` });
   declaration.before({ prop: `${declaration.prop}-h`, value: `${hue}` });
-  declaration.before({ prop: `${declaration.prop}-s`, value: `${saturation}%` });
-  declaration.before({ prop: `${declaration.prop}-l`, value: `${lightness}%` });
-  declaration.before({ prop: `${declaration.prop}-a`, value: `${alpha}%` });
-  declaration.before({ prop: `${declaration.prop}-hsl`, value: `var(${declaration.prop}-h) var(${declaration.prop}-s) var(${declaration.prop}-l)` });
-  declaration.before({ prop: `${declaration.prop}-hsla`, value: `hsl(var(${declaration.prop}-h) var(${declaration.prop}-s) var(${declaration.prop}-l) / var(--alpha, ${alpha}%))` });
+  declaration.before({ prop: `${declaration.prop}-a`, value: `${alpha}` });
+  declaration.before({ prop: `${declaration.prop}-oklch`, value: `var(${declaration.prop}-l) var(${declaration.prop}-c) var(${declaration.prop}-h)` });
+  declaration.before({ prop: `${declaration.prop}-oklcha`, value: `oklch(var(${declaration.prop}-l) var(${declaration.prop}-c) var(${declaration.prop}-h) / var(--alpha, ${alpha}))` });
 }
 
 /**
@@ -125,9 +125,9 @@ module.exports = () => {
         }
       }
     },
-    // Process each declaration to generate HSLA components
+    // Process each declaration to generate OKLCH components
     Declaration (declaration) {
-      generateColorHsla(declaration);
+      generateColorOklch(declaration);
     },
   };
 };
