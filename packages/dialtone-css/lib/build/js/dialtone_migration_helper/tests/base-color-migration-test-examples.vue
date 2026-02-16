@@ -25,6 +25,14 @@
   <div :style="{ color: 'var(--dt-color-purple-350-l)' }"></div>
   <div :style="{ color: 'var(--dt-color-purple-350-hsl)' }"></div>
 
+  <!-- TEST 2b: Purple OKLCH variants -->
+  <div :style="{ color: 'var(--dt-color-purple-350-h)' }"></div>
+  <div :style="{ color: 'var(--dt-color-purple-350-c)' }"></div>
+  <div :style="{ color: 'var(--dt-color-purple-350-l)' }"></div>
+  <div :style="{ color: 'var(--dt-color-purple-350-a)' }"></div>
+  <div :style="{ color: 'var(--dt-color-purple-350-oklch)' }"></div>
+  <div :style="{ color: 'var(--dt-color-purple-350-oklcha)' }"></div>
+
   <!-- TEST 3: Purple utility classes -->
   <div class="d-bgc-purple-250 d-fc-purple-300 d-bc-purple-350"></div>
   <div class="d-bgg-from-purple-450 d-bgg-to-purple-500"></div>
@@ -167,6 +175,16 @@
   --custom-s: var(--dt-color-gold-450-s);
   --custom-l: var(--dt-color-red-600-l);
   --custom-hsl: var(--dt-color-purple-550-hsl);
+}
+
+/* TEST 22b: OKLCH variants in stylesheets */
+.test-oklch {
+  --custom-h: var(--dt-color-magenta-475-h);
+  --custom-c: var(--dt-color-gold-450-c);
+  --custom-l: var(--dt-color-red-600-l);
+  --custom-a: var(--dt-color-red-600-a);
+  --custom-oklch: var(--dt-color-purple-550-oklch);
+  --custom-oklcha: var(--dt-color-purple-550-oklcha);
 }
 
 /* TEST 23: Unchanged stops in stylesheets */

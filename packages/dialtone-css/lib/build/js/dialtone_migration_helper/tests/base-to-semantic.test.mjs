@@ -144,6 +144,7 @@ describe('base-to-semantic config', () => {
     const skipCases = [
       ['.a { --my-color: var(--dt-color-red-600); }', 'custom property'],
       ['.a {\n  color: var(--dt-color-red-600-hsl);\n}', 'HSL variant'],
+      ['.a {\n  color: var(--dt-color-red-600-oklch);\n}', 'OKLCH variant'],
       ['.a {\n  color: var(--dt-color-foreground-critical);\n}', 'already semantic'],
       ['var(--dt-color-red-600)', 'bare var() no property context'],
       ['.a { fill: var(--dt-color-red-600); }', 'fill property'],

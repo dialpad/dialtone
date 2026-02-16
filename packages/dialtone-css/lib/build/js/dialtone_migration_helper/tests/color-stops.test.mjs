@@ -72,8 +72,8 @@ describe('color-stops config', () => {
     }
   });
 
-  describe('HSL variants', () => {
-    const suffixes = ['-h', '-s', '-l', '-hsl'];
+  describe('HSL and OKLCH variants', () => {
+    const suffixes = ['-h', '-s', '-l', '-a', '-hsl', '-hsla', '-c', '-oklch', '-oklcha'];
     for (const suffix of suffixes) {
       it(`purple-350${suffix} → purple-500${suffix}`, () => {
         assert.equal(
