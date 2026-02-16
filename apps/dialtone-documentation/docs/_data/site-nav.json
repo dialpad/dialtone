@@ -175,6 +175,10 @@
                     "link": "/guides/theme-and-mode/"
                   },
                   {
+                    "text": "CSS Layers",
+                    "link": "/guides/css-layers/"
+                  },
+                  {
                     "text": "Contributing",
                     "link": "/guides/contributing/"
                   }
