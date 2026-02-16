@@ -589,35 +589,24 @@
 //  ----------------------------------------------------------------------------
 .d-btn--brand {
   --button-color-text: var(--dt-color-neutral-white);
-  --button-color-background: hsl(
-    var(--brand-color-h) var(--brand-color-s) var(--brand-color-l)
-  );
+  --button-color-background: var(--brand-color);
 
   display: flex;
 
   &:hover:not([disabled]),
   &:active:not([disabled]) {
-    --button-color-text: hsl(var(--dt-color-neutral-white-hsl) ~" / " 90%);
-    --button-color-background: hsl(
-      var(--brand-color-h) calc(var(--brand-color-s) + 2.5%)
-        calc(var(--brand-color-l) - 5%)
-    );
+    --button-color-text: oklch(from var(--dt-color-neutral-white) l c h / 0.9);
+    --button-color-background: oklch(from var(--brand-color) calc(l - 0.05) c h);
   }
 
   &:focus-visible {
     box-shadow:
       0 0 0 var(--dt-size-100) var(--dt-color-neutral-white),
-      0 0 0 0.25em
-        hsl(
-          var(--brand-color-h) var(--brand-color-s) var(--brand-color-l) ~" / " 90%
-        );
+      0 0 0 0.25em oklch(from var(--brand-color) l c h / 0.9);
   }
 
   &:active:not([disabled]) {
-    --button-color-background: hsl(
-      var(--brand-color-h) calc(var(--brand-color-s) + 5%)
-        calc(var(--brand-color-l) - 10%)
-    );
+    --button-color-background: oklch(from var(--brand-color) calc(l - 0.1) c h);
   }
 
   .d-btn__icon {
@@ -637,21 +626,15 @@
 
 //  --  GOOGLE
 .d-btn--google {
-  --brand-color-h: 217;
-  --brand-color-s: 89%;
-  --brand-color-l: 61%;
+  --brand-color: oklch(0.6348 0.1777 259.54deg);
 }
 //  --  OFFICE 365
 .d-btn--o365 {
-  --brand-color-h: 15;
-  --brand-color-s: 99%;
-  --brand-color-l: 46%;
+  --brand-color: oklch(0.6148 0.2166 34.72deg);
 }
 //  --  LINKEDIN
 .d-btn--linkedin {
-  --brand-color-h: 197;
-  --brand-color-s: 100%;
-  --brand-color-l: 26%;
+  --brand-color: oklch(0.4578 0.0962 234.27deg);
 }
 
 //  ============================================================================
