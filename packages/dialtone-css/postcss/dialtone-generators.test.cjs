@@ -85,11 +85,7 @@ describe('dialtone-generators', () => {
 
   describe('When processing empty input', () => {
     it('does not add a layer when no utilities are generated', async () => {
-      const input = `
-        .some-class {
-          color: blue;
-        }
-      `;
+      const input = '';
 
       const result = await postcss([dialtoneGenerators()])
         .process(input, { from: undefined });

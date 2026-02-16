@@ -1,18 +1,15 @@
-module.exports = (opts = {}) => {
-  const options = {
-    // If true, only warn instead of throwing error
-    warnOnly: opts.warnOnly || false,
-    // Patterns to exclude from validation (regex or strings)
-    allowlist: opts.allowlist || [
-      /^:root\b/,           // Allow :root selectors (CSS custom properties)
-      /^html\b/,            // Allow html element
-      /^body\b/,            // Allow body element
-      /^\*\b/,              // Allow universal selector
-      /^:where\(/,          // Allow :where() functional pseudo-class
-      /^::?[-\w]+$/,        // Allow pseudo-elements and pseudo-classes by themselves
-    ],
-    ...opts,
-  };
+module.exports = ({
+  warnOnly = false,
+  allowlist = [
+    /^:root\b/,           // Allow :root selectors (CSS custom properties)
+    /^html\b/,            // Allow html element
+    /^body\b/,            // Allow body element
+    /^\*/,                // Allow universal selector
+    /^:where\(/,          // Allow :where() functional pseudo-class
+    /^::?[-\w]+$/,        // Allow pseudo-elements and pseudo-classes by themselves
+  ],
+} = {}) => {
+  const options = { warnOnly, allowlist };
 
   return {
     postcssPlugin: 'postcss-validate-layers',

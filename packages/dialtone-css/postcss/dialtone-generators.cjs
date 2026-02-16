@@ -958,6 +958,9 @@ module.exports = () => {
   return {
     postcssPlugin: 'postcss-dialtone-generators',
     Once (root) {
+      // Reset all generated rules to avoid accumulating duplicates in watch mode
+      Object.keys(generatedRules).forEach(key => { generatedRules[key] = []; });
+
       // Find a Rule with a Declaration child to use as clone template.
       // With @layer wrappers the tree structure varies, so walk to find one.
       let clonedSource;
