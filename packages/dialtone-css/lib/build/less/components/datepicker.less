@@ -10,6 +10,7 @@
 //  ============================================================================
 //  $   BASE STYLE
 //  ----------------------------------------------------------------------------
+@layer dialtone.components {
 .d-datepicker {
   --datepicker-width: calc(var(--dt-size-300) * 75); // A bit of a magic number as default fixed size, may use CSS utilities to override
   --datepicker-button-size: calc(var(--dt-size-600) - var(--dt-size-200)); // Emulates SM button since Vue component in lieu of Vue component using DT button
@@ -79,4 +80,5 @@
       background-color: var(--dt-color-neutral-transparent);
     }
   }
+}
 }

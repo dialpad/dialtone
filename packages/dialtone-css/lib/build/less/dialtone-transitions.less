@@ -1,4 +1,6 @@
 @import (reference) './components/modal';
+
+@layer dialtone.base {
 // Vue transition classes for code samples.
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.18s ease-in-out;
@@ -100,21 +102,22 @@
 }
 
 .d-zoom-enter-from, .d-zoom-leave-to {
-  .d-modal--animate();
+  ._modal-animate();
 }
 
 .d-zoom__dialog-enter-from, .d-zoom__dialog-leave-to {
-  .d-modal__dialog--animate();
+  ._modal-dialog-animate();
 }
 
 .d-zoom-enter-active, .d-zoom__dialog-enter-active {
-  .d-modal--animate-in();
+  ._modal-animate-in();
 }
 
 .d-zoom-leave-active {
-  .d-modal--animate-out();
+  ._modal-animate-out();
 }
 
 .d-zoom__dialog-leave-active {
-  .d-modal__dialog--animate-out();
+  ._modal-dialog-animate-out();
+}
 }
