@@ -271,6 +271,20 @@ describe('DtButton Tests', () => {
             expect(button.classes().includes('d-link--danger')).toBe(true);
           });
         });
+
+        describe('When underline is false', () => {
+          it('should have no-underline class', async () => {
+            await wrapper.setProps({ underline: false });
+
+            expect(button.classes().includes('d-link--no-underline')).toBe(true);
+          });
+        });
+
+        describe('When underline is true (default)', () => {
+          it('should not have no-underline class', () => {
+            expect(button.classes().includes('d-link--no-underline')).toBe(false);
+          });
+        });
       });
 
       describe('When button has kind set to unstyled', () => {

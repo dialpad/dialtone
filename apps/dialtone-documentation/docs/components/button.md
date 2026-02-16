@@ -303,6 +303,29 @@ vueCode='
 '
 showHtmlWarning />
 
+### Link no underline
+
+This inverts the underline behavior. With `underline="false"`, the link will not have an underline by default, but will show one on hover.
+
+<code-well-header>
+  <dt-stack
+    gap="400"
+    :direction="{ 'default': 'column', 'md': 'row' }"
+    ref="linkNoUnderlineExample"
+  >
+    <dt-button link :underline="false">Place Call</dt-button>
+    <dt-button link linkKind="danger" :underline="false">Place Call</dt-button>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.linkNoUnderlineExample'
+vueCode='
+<dt-button link :underline="false">Place Call</dt-button>
+<dt-button link linkKind="danger" :underline="false">Place Call</dt-button>
+'
+showHtmlWarning />
+
 ### Unstyled
 
 The unstyled button removes all default Dialtone styling while preserving the semantic HTML `<button>` element and maintaining proper button behavior and accessibility.
