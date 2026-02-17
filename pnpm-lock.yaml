@@ -942,9 +942,6 @@ importers:
       stylelint:
         specifier: ^16.25.0
         version: 16.26.1(typescript@5.9.3)
-      stylelint-use-logical:
-        specifier: ^2.1.2
-        version: 2.1.2(stylelint@16.26.1(typescript@5.9.3))
     devDependencies:
       eslint-plugin-n:
         specifier: ^17.0.0
@@ -952,6 +949,9 @@ importers:
       stylelint-test-rule-node:
         specifier: ^0.2.1
         version: 0.2.2(stylelint@16.26.1(typescript@5.9.3))
+      stylelint-use-logical:
+        specifier: ^2.1.2
+        version: 2.1.2(stylelint@16.26.1(typescript@5.9.3))
       vue-eslint-parser:
         specifier: ^10.0.0
         version: 10.2.0(eslint@9.39.2(jiti@1.21.7))
