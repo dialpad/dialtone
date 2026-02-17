@@ -86,7 +86,7 @@ const blogLink = computed(() => {
 <style lang="less">
 .blog-post-content {
   .d-docsite--header-2:first-of-type {
-    margin-top: var(--dt-size-500);
+    margin-block-start: var(--dt-size-500);
   }
 }
 </style>
