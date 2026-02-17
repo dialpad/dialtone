@@ -401,6 +401,9 @@ importers:
       '@dialpad/postcss-responsive-variations':
         specifier: workspace:*
         version: link:../../packages/postcss-responsive-variations
+      '@dialpad/stylelint-plugin-dialtone':
+        specifier: workspace:*
+        version: link:../../packages/stylelint-plugin-dialtone
       '@docsearch/css':
         specifier: ^4.0.1
         version: 4.5.3
@@ -547,6 +550,9 @@ importers:
       '@dialpad/postcss-responsive-variations':
         specifier: workspace:*
         version: link:../postcss-responsive-variations
+      '@dialpad/stylelint-plugin-dialtone':
+        specifier: workspace:*
+        version: link:../stylelint-plugin-dialtone
       autoprefixer:
         specifier: ^10.4.14
         version: 10.4.23(postcss@8.5.6)
@@ -943,6 +949,9 @@ importers:
       stylelint-test-rule-node:
         specifier: ^0.2.1
         version: 0.2.2(stylelint@16.26.1(typescript@5.9.3))
+      stylelint-use-logical:
+        specifier: ^2.1.2
+        version: 2.1.2(stylelint@16.26.1(typescript@5.9.3))
       vue-eslint-parser:
         specifier: ^10.0.0
         version: 10.2.0(eslint@9.39.2(jiti@1.21.7))
@@ -15125,6 +15134,12 @@ packages:
   stylelint-test-rule-node@0.2.2:
     resolution: {integrity: sha512-muMgHkW0rpGwIHuL+dgxiWgojcPNByNiBHm5+NqZT/vUAWo0QZYY1jCDVbw2G404LFpzHDd0BZ4JEMKOIw/Dlw==}
     engines: {node: '>=18.12.0'}
+    peerDependencies:
+      stylelint: ^16.25.0
+
+  stylelint-use-logical@2.1.2:
+    resolution: {integrity: sha512-4ffvPNk/swH4KS3izExWuzQOuzLmi0gb0uOhvxWJ20vDA5W5xKCjcHHtLoAj1kKvTIX6eGIN5xGtaVin9PD0wg==}
+    engines: {node: '>=14.0.0'}
     peerDependencies:
       stylelint: ^16.25.0
 
@@ -33935,6 +33950,10 @@ snapshots:
       stylelint: 16.26.1(typescript@5.9.3)
 
   stylelint-test-rule-node@0.2.2(stylelint@16.26.1(typescript@5.9.3)):
+    dependencies:
+      stylelint: 16.26.1(typescript@5.9.3)
+
+  stylelint-use-logical@2.1.2(stylelint@16.26.1(typescript@5.9.3)):
     dependencies:
       stylelint: 16.26.1(typescript@5.9.3)
 

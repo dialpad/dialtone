@@ -445,9 +445,9 @@ export default {
 
 <style lang="less" scoped>
 .callbox-image {
-  height: 140px;
+  block-size: 140px;
   object-fit: cover;
-  width: 100%;
+  inline-size: 100%;
 }
 
 .voice-chat-icon {

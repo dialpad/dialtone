@@ -83,5 +83,6 @@ module.exports = {
 
     // dialtone plugin rules
     '@dialpad/stylelint-plugin-dialtone/no-deprecated-space-tokens': [true, { severity: 'warning' }],
+    'csstools/use-logical': 'always',
   },
 };

@@ -39,8 +39,12 @@
     "directory": "packages/stylelint-plugin-dialtone"
   },
   "main": "./lib/index.js",
+  "bin": {
+    "fix-logical-properties": "./bin/fix-logical-properties.js"
+  },
   "files": [
-    "lib"
+    "lib",
+    "bin"
   ],
   "exports": "./lib/index.js",
   "scripts": {
@@ -52,6 +56,7 @@
   "devDependencies": {
     "eslint-plugin-n": "^17.0.0",
     "stylelint-test-rule-node": "^0.2.1",
+    "stylelint-use-logical": "^2.1.2",
     "vue-eslint-parser": "^10.0.0"
   },
   "engines": {
