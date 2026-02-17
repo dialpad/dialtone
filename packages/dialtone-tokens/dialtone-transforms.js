@@ -5,6 +5,7 @@
  */
 
 import { colorsFilter, colorModifiersFilter, DeviceObjectFormat, deviceTransformColorModifiers, tokenColorToDeviceColor } from './transform-util.js';
+import { parse, converter } from 'culori';
 
 const SIZE_IDENTIFIERS = ['sizing', 'borderWidth', 'borderRadius', 'blur', 'spread', 'x', 'y', 'dimension'];
 const SPACING_IDENTIFIERS = ['spacing'];
@@ -389,6 +390,31 @@ export function registerDialtoneTransforms (styleDictionary) {
         return `${token.value}, ${FALLBACK_FONTS_MONO.join(', ')}`;
       }
       return token.value;
+    },
+  });
+
+  // Convert hex color to OKLCH and extract just the hue component (degrees)
+  // Used for avatar anchor hue that rotates avatar colors based on theme accent
+  const toOklch = converter('oklch');
+  styleDictionary.registerTransform({
+    name: 'dt/avatar/anchorHue',
+    type: 'value',
+    transitive: true, // Must be transitive to run after references are resolved
+    filter: function (token) {
+      // Only apply to avatar.anchor.hue token
+      return token.path.join('.') === 'avatar.anchor.hue';
+    },
+    transform: (token) => {
+      const color = parse(token.value);
+      if (!color) {
+        console.warn(`Could not parse color for avatar anchor hue: ${token.value}`);
+        return '0';
+      }
+      const oklch = toOklch(color);
+      // Return just the hue value in degrees, rounded to 1 decimal
+      // Handle achromatic colors (undefined hue) by defaulting to 0
+      const hue = oklch.h ?? 0;
+      return Math.round(hue * 10) / 10;
     },
   });
 

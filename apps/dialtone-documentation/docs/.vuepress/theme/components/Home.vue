@@ -12,8 +12,4 @@
 </template>
 
 <script setup>
-function sendAnalyticsEvent () {
-  if (!window.gtag) return;
-  window.gtag('event', 'click', { event_name: 'get_started_button_clicked' });
-}
 </script>

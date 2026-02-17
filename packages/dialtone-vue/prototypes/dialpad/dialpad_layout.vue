@@ -22,13 +22,13 @@ import { DtRootLayout } from '@/components/root_layout';
 }
 .dialpad-layout {
   block-size: calc(100vh - 2rem);
-  padding: var(--dt-space-500);
+  padding: var(--dt-spacing-200);
   background: var(--dt-color-surface-secondary);
   border-radius: var(--dt-border-radius-sm);
 }
 
 .dialpad-leftbar {
-  padding: var(--dt-space-400);
+  padding: var(--dt-spacing-100);
   inline-size: var(--dialpad-sidebar-width);
   background: var(--dt-color-surface-primary);
 }

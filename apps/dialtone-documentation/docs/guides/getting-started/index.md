@@ -210,6 +210,30 @@ In `Vue`, we apply `border-box` globally at the `VueView` level, ensuring all ch
 
 In `Backbone` we are not using `border-box` by default. Because Dialtone expects this, anytime we wish to use Dialtone styles in Backbone we must ensure to apply the `border-box` style to all affected elements.
 
+## AI-Assisted Development
+
+The [Dialtone MCP Server](/guides/mcp-server/) enables AI assistants like Claude Code, GitHub Copilot, and Cursor to search Dialtone in real-time while you code. Instead of manually searching documentation, your AI assistant can instantly find the right components, utility classes, design tokens, and icons for you.
+
+**Install with npm:**
+
+```bash
+npm install -D @dialpad/dialtone-mcp-server
+```
+
+Create `.mcp.json` in your project root:
+
+```json
+{
+  "mcpServers": {
+    "dialtone": {
+      "command": "dialtone-mcp-server"
+    }
+  }
+}
+```
+
+Restart your AI assistant to connect. [Read the full MCP Server guide](/guides/mcp-server/) for installation options, search tools, and platform-specific setup.
+
 ## Build Dialtone Locally
 
 We're excited you want to install Dialtone locally as this most likely means you'll be contributing soon! Before you get to get started though,  **please make sure you've read our [contributing docs](https://github.com/dialpad/dialtone/blob/master/.github/CONTRIBUTING.md)**.
