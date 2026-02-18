@@ -100,7 +100,7 @@
               </template>
             </dt-input>
             <dt-list-item-group
-              v-for="(category, index) in getFilteredCategories(showAddVariable.categories)"
+              v-for="(category, index) in filteredCategories"
               :key="category.name"
               :heading="this.i18n.$t(category.name)"
               heading-class="d-headline--sm-compact d-p8"
@@ -118,7 +118,7 @@
                 {{ this.i18n.$t(item.name) }}
               </dt-list-item>
               <dt-dropdown-separator
-                v-if="index < getFilteredCategories(showAddVariable.categories).length - 1"
+                v-if="index < filteredCategories.length - 1"
                 class="d-m0 d-mt8"
               />
             </dt-list-item-group>
@@ -874,6 +874,12 @@ export default {
     showAddLinkButtonLabels () {
       return this.i18n.$ta('DIALTONE_EDITOR_ADD_LINK_BUTTON');
     },
+
+    filteredCategories() {
+      return this.showAddVariable.categories.filter(
+        (category) => this.getFilteredItemsForCategory(category).length,
+      );
+    }
   },
 
   watch: {
@@ -1092,12 +1098,6 @@ export default {
         item.name.toLowerCase().includes(searchValue)
       );
     },
-
-    getFilteredCategories(categories) {
-      return categories.filter(
-        (category) => this.getFilteredItemsForCategory(category).length,
-      );
-    }
   },
 };
 </script>
