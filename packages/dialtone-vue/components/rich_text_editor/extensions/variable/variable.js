@@ -78,7 +78,7 @@ export const Variable = Node.create({
           type: this.name,
           attrs: {
             id: options.id || null,
-            altText: options.altText || ''
+            altText: options.altText || '',
           },
         });
       },

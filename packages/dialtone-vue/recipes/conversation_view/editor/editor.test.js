@@ -1,5 +1,10 @@
 import { mount } from '@vue/test-utils';
 import DtRecipeEditor from './editor.vue';
+import {
+  findVariable,
+  countVariables,
+  variableExists,
+} from '../../../common/test_utils/node_traversal';
 
 // Wrappers
 let wrapper;
@@ -659,96 +664,54 @@ describe('DtRecipeEditor tests', () => {
       });
 
       it('should insert a variable when insertVariable is called', async () => {
-        wrapper.vm.insertVariable('Customer', { 
-          id: 'customer_name', 
-          placeholder: 'Customer Name' 
+        wrapper.vm.insertVariable('Customer', {
+          id: 'customer_name',
+          placeholder: 'Customer Name',
         });
         await wrapper.vm.$nextTick();
-        
+
         const editorJSON = wrapper.vm.$refs.richTextEditor.editor.getJSON();
-        let variableFound = false;
-        
-        const traverseNode = (node) => {
-          if (node.type === 'variable' && node.attrs.id === 'customer_name') {
-            variableFound = true;
-          }
-          if (node.content) {
-            node.content.forEach(traverseNode);
-          }
-        };
-        
-        if (editorJSON.content) {
-          editorJSON.content.forEach(traverseNode);
-        }
-        
+        const variableFound = variableExists(editorJSON.content, 'customer_name');
         expect(variableFound).toBe(true);
       });
 
       it('should insert multiple variables', async () => {
-        wrapper.vm.insertVariable('Customer', { 
-          id: 'customer_name', 
-          placeholder: 'Customer Name' 
+        wrapper.vm.insertVariable('Customer', {
+          id: 'customer_name',
+          placeholder: 'Customer Name',
         });
-        wrapper.vm.insertVariable('Ticket', { 
-          id: 'ticket_id', 
-          placeholder: 'Ticket ID' 
+        wrapper.vm.insertVariable('Ticket', {
+          id: 'ticket_id',
+          placeholder: 'Ticket ID',
         });
         await wrapper.vm.$nextTick();
-        
+
         const editorJSON = wrapper.vm.$refs.richTextEditor.editor.getJSON();
-        let variableCount = 0;
-        
-        const countVariables = (node) => {
-          if (node.type === 'variable') {
-            variableCount++;
-          }
-          if (node.content) {
-            node.content.forEach(countVariables);
-          }
-        };
-        
-        if (editorJSON.content) {
-          editorJSON.content.forEach(countVariables);
-        }
-        
+        const variableCount = countVariables(editorJSON.content);
         expect(variableCount).toBe(2);
       });
 
       it('should insert variable with correct attributes', async () => {
-        wrapper.vm.insertVariable('Customer', { 
-          id: 'customer_email', 
-          placeholder: 'Customer Email' 
+        wrapper.vm.insertVariable('Customer', {
+          id: 'customer_email',
+          placeholder: 'Customer Email',
         });
         await wrapper.vm.$nextTick();
-        
+
         const editorJSON = wrapper.vm.$refs.richTextEditor.editor.getJSON();
-        let variableNode = null;
-        
-        const findVariable = (node) => {
-          if (node.type === 'variable' && node.attrs.id === 'customer_email') {
-            variableNode = node;
-          }
-          if (node.content && !variableNode) {
-            node.content.forEach(findVariable);
-          }
-        };
-        
-        if (editorJSON.content) {
-          editorJSON.content.forEach(findVariable);
-        }
-        
+        const variableNode = findVariable(editorJSON.content, 'customer_email');
         expect(variableNode).not.toBeNull();
         expect(variableNode.attrs.id).toBe('customer_email');
         expect(variableNode.attrs.altText).toBe('');
       });
 
       it('should render variables in HTML output', async () => {
-        wrapper.vm.insertVariable('Ticket', { 
-          id: 'ticket_status', 
-          placeholder: 'Ticket Status' 
+        wrapper.vm.insertVariable('Ticket', {
+          id: 'ticket_status',
+          placeholder: 'Ticket Status',
         });
         await wrapper.vm.$nextTick();
-        
+
         const html = wrapper.vm.$refs.richTextEditor.editor.getHTML();
         expect(html).toContain('data-variable-id="ticket_status"');
       });

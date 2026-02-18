@@ -2,6 +2,10 @@ import { mount } from '@vue/test-utils';
 import DtRichTextEditor from './rich_text_editor.vue';
 import { EditorContent } from '@tiptap/vue-3';
 import { simulatePaste } from '../../tests/setupTests';
+import {
+  findVariable,
+  countVariables,
+} from '../../common/test_utils/node_traversal';
 
 // Wrappers
 let wrapper;
@@ -1094,25 +1098,14 @@ describe('DtRichTextEditor tests', () => {
         await wrapper.vm.$nextTick();
 
         const json = editorInstance.getJSON();
-        let variableFound = false;
-        
-        const findVariable = (node) => {
-          if (node.type === 'variable' && node.attrs.id === 'user_name') {
-            variableFound = true;
-            expect(node.attrs.altText).toBe('John Doe');
-          }
-          if (node.content) {
-            node.content.forEach(findVariable);
-          }
-        };
-        
-        json.content.forEach(findVariable);
-        expect(variableFound).toBe(true);
+        const variableNode = findVariable(json.content, 'user_name');
+        expect(variableNode).not.toBeNull();
+        expect(variableNode.attrs.altText).toBe('John Doe');
       });
 
       it('should render variables in HTML output', async function () {
         await wrapper.setProps({ outputFormat: 'html' });
-        
+
         const editorInstance = wrapper.vm.editor;
         editorInstance.commands.insertVariable({
           id: 'company_name',
@@ -1127,7 +1120,7 @@ describe('DtRichTextEditor tests', () => {
 
       it('should render variables in JSON output', async function () {
         await wrapper.setProps({ outputFormat: 'json' });
-        
+
         const editorInstance = wrapper.vm.editor;
         editorInstance.commands.insertVariable({
           id: 'ticket_id',
@@ -1137,26 +1130,15 @@ describe('DtRichTextEditor tests', () => {
 
         const jsonOutput = wrapper.vm.getOutput();
         expect(jsonOutput.content).toBeDefined();
-        
-        let variableNode = null;
-        const findVariable = (node) => {
-          if (node.type === 'variable') {
-            variableNode = node;
-          }
-          if (node.content && !variableNode) {
-            node.content.forEach(findVariable);
-          }
-        };
-        
-        jsonOutput.content.forEach(findVariable);
+
+        const variableNode = findVariable(jsonOutput.content, 'ticket_id');
         expect(variableNode).not.toBeNull();
-        expect(variableNode.attrs.id).toBe('ticket_id');
         expect(variableNode.attrs.altText).toBe('#12345');
       });
 
       it('should render variable altText in text output', async function () {
         await wrapper.setProps({ outputFormat: 'text', modelValue: '' });
-        
+
         const editorInstance = wrapper.vm.editor;
         editorInstance.commands.insertVariable({
           id: 'user_name',
@@ -1170,7 +1152,7 @@ describe('DtRichTextEditor tests', () => {
 
       it('should render variables in markdown output as comments', async function () {
         await wrapper.setProps({ outputFormat: 'markdown', modelValue: '' });
-        
+
         const editorInstance = wrapper.vm.editor;
         editorInstance.commands.insertContent('Hello ');
         editorInstance.commands.insertVariable({
@@ -1186,25 +1168,14 @@ describe('DtRichTextEditor tests', () => {
 
       it('should insert multiple variables', async function () {
         const editorInstance = wrapper.vm.editor;
-        
+
         editorInstance.commands.insertVariable({ id: 'user_name', altText: 'User' });
         editorInstance.commands.insertContent(' from ');
         editorInstance.commands.insertVariable({ id: 'company_name', altText: 'Company' });
         await wrapper.vm.$nextTick();
 
         const json = editorInstance.getJSON();
-        let variableCount = 0;
-        
-        const countVariables = (node) => {
-          if (node.type === 'variable') {
-            variableCount++;
-          }
-          if (node.content) {
-            node.content.forEach(countVariables);
-          }
-        };
-        
-        json.content.forEach(countVariables);
+        const variableCount = countVariables(json.content);
         expect(variableCount).toBe(2);
       });
 
@@ -1213,13 +1184,13 @@ describe('DtRichTextEditor tests', () => {
         const variableExtension = editorInstance.extensionManager.extensions.find(
           ext => ext.name === 'variable',
         );
-        
+
         expect(variableExtension.options.variableItems).toEqual(variableItems);
       });
 
       it('should handle variables with empty altText', async function () {
         await wrapper.setProps({ outputFormat: 'text', modelValue: '' });
-        
+
         const editorInstance = wrapper.vm.editor;
         editorInstance.commands.insertContent('Hello ');
         editorInstance.commands.insertVariable({ id: 'user_name', altText: '' });
@@ -1232,28 +1203,16 @@ describe('DtRichTextEditor tests', () => {
 
       it('should parse variables from HTML input', async function () {
         const htmlWithVariable = '<p>Hello <variable data-variable-id="user_name" data-alt-text="Alice"></variable>!</p>';
-        
-        await wrapper.setProps({ 
+
+        await wrapper.setProps({
           modelValue: htmlWithVariable,
           outputFormat: 'json',
         });
         await wrapper.vm.$nextTick();
 
         const jsonOutput = wrapper.vm.getOutput();
-        let variableNode = null;
-        
-        const findVariable = (node) => {
-          if (node.type === 'variable') {
-            variableNode = node;
-          }
-          if (node.content && !variableNode) {
-            node.content.forEach(findVariable);
-          }
-        };
-        
-        jsonOutput.content.forEach(findVariable);
+        const variableNode = findVariable(jsonOutput.content, 'user_name');
         expect(variableNode).not.toBeNull();
-        expect(variableNode.attrs.id).toBe('user_name');
         expect(variableNode.attrs.altText).toBe('Alice');
       });
     });
@@ -1291,12 +1250,12 @@ describe('DtRichTextEditor tests', () => {
       });
 
       it('should handle variables mixed with formatted text in markdown', async function () {
-        await wrapper.setProps({ 
+        await wrapper.setProps({
           outputFormat: 'markdown',
           allowBold: true,
           allowItalic: true,
         });
-        
+
         const editorInstance = wrapper.vm.editor;
         editorInstance.commands.insertContent('Hello ');
         editorInstance.commands.insertVariable({ id: 'test_var', altText: 'Variable' });
@@ -1314,7 +1273,7 @@ describe('DtRichTextEditor tests', () => {
           outputFormat: 'json',
           allowBulletList: true,
         });
-        
+
         const editorInstance = wrapper.vm.editor;
         editorInstance.commands.toggleBulletList();
         editorInstance.commands.insertContent('Item with ');
@@ -1323,19 +1282,9 @@ describe('DtRichTextEditor tests', () => {
 
         const jsonOutput = wrapper.vm.getOutput();
         expect(jsonOutput.content[0].type).toBe('bulletList');
-        
-        let variableFound = false;
-        const findVariable = (node) => {
-          if (node.type === 'variable') {
-            variableFound = true;
-          }
-          if (node.content) {
-            node.content.forEach(findVariable);
-          }
-        };
-        
-        jsonOutput.content.forEach(findVariable);
-        expect(variableFound).toBe(true);
+
+        const hasVariables = countVariables(jsonOutput.content) > 0;
+        expect(hasVariables).toBe(true);
       });
     });
   });

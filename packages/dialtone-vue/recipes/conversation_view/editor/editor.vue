@@ -91,18 +91,18 @@
               v-model="variableSearchValue"
               root-class="d-p8 d-pb4 d-w264"
               type="search"
-              :placeholder="this.i18n.$t('Search variable')"
+              :placeholder="i18n.$t('Search variable')"
               size="md"
               role="menuitem"
             >
               <template #leftIcon="{ iconSize }">
-                <dt-icon-search :size="iconSize"/>
+                <dt-icon-search :size="iconSize" />
               </template>
             </dt-input>
             <dt-list-item-group
               v-for="(category, index) in filteredCategories"
               :key="category.name"
-              :heading="this.i18n.$t(category.name)"
+              :heading="i18n.$t(category.name)"
               heading-class="d-headline--sm-compact d-p8"
             >
               <dt-list-item
@@ -115,11 +115,10 @@
                   close();
                 "
               >
-                {{ this.i18n.$t(item.name) }}
+                {{ i18n.$t(item.name) }}
               </dt-list-item>
               <dt-dropdown-separator
                 v-if="index < filteredCategories.length - 1"
-                class="d-m0 d-mt8"
               />
             </dt-list-item-group>
           </template>
@@ -282,9 +281,9 @@ import { DtPopover } from '@/components/popover';
 import { DtStack } from '@/components/stack';
 import { DtInput } from '@/components/input';
 import { DtTooltip } from '@/components/tooltip';
-import {DtListItem} from "@/components/list_item/index.js";
-import {DtDropdownSeparator} from "@/components/dropdown/index.js";
-import {DtListItemGroup} from "@/components/list_item_group/index.js";
+import {DtListItem} from '@/components/list_item/index.js';
+import {DtDropdownSeparator} from '@/components/dropdown/index.js';
+import {DtListItemGroup} from '@/components/list_item_group/index.js';
 import {
   DtIconAlignCenter,
   DtIconAlignJustify,
@@ -879,7 +878,7 @@ export default {
       return this.showAddVariable.categories.filter(
         (category) => this.getFilteredItemsForCategory(category).length,
       );
-    }
+    },
   },
 
   watch: {
@@ -1095,7 +1094,7 @@ export default {
         return category.items;
       }
       return category.items.filter((item) =>
-        item.name.toLowerCase().includes(searchValue)
+        item.name.toLowerCase().includes(searchValue),
       );
     },
   },

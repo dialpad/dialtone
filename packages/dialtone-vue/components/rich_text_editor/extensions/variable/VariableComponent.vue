@@ -33,6 +33,7 @@ export default {
       get() {
         return this.node?.attrs?.altText || '';
       },
+
       set(value) {
         this.updateAttributes({ altText: value });
       },
@@ -64,29 +65,37 @@ export default {
   },
 };
 </script>
+
 <template>
-  <NodeViewWrapper class="d-d-inline-flex">
-    <DtPopover
+  <!-- eslint-disable vue/no-restricted-class -->
+  <node-view-wrapper class="d-d-inline-block">
+    <dt-popover
       padding="small"
       navigation-type="arrow-keys"
       placement="top-start"
       :modal="false"
     >
       <template #anchor="{ attrs }">
-        <DtButton v-bind="attrs" kind="unstyled">
-          <DtBadge :text="badgeLabel" contenteditable="false" />
-        </DtButton>
+        <dt-button
+          v-bind="attrs"
+          kind="unstyled"
+        >
+          <dt-badge
+            :text="badgeLabel"
+            contenteditable="false"
+          />
+        </dt-button>
       </template>
       <template #content="{ close }">
-        <DtInput
+        <dt-input
           v-model="altText"
           root-class="d-p8 d-w332"
-          :label="this.i18n.$t('Alternate text')"
-          :placeholder="this.i18n.$t(placeholderText)"
+          :label="i18n.$t('Alternate text')"
+          :placeholder="i18n.$t(placeholderText)"
           :validate="{
             length: {
-              description: this.i18n.$t('Used when the variable data isn’t available.'),
-              message: this.i18n.$t(`Max ${MAX_VARIABLE_ALT_LENGTH} characters allowed.`),
+              description: i18n.$t('Used when the variable data isn’t available.'),
+              message: i18n.$t(`Max ${MAX_VARIABLE_ALT_LENGTH} characters allowed.`),
               max: MAX_VARIABLE_ALT_LENGTH,
               warn: MAX_VARIABLE_ALT_LENGTH,
               limitMaxLength: true,
@@ -95,6 +104,6 @@ export default {
           @keyup.enter="close()"
         />
       </template>
-    </DtPopover>
-  </NodeViewWrapper>
+    </dt-popover>
+  </node-view-wrapper>
 </template>

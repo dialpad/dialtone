@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils';
 import { DtRichTextEditor } from '@/components/rich_text_editor';
 import { EditorContent } from '@tiptap/vue-3';
+import { findAllVariables } from '../../../../common/test_utils/node_traversal';
 
 // Wrappers
 let wrapper;
@@ -36,26 +37,7 @@ const _setChildWrappers = () => {
 
 const _getVariableNodesFromJSON = () => {
   const json = wrapper.vm.editor.getJSON();
-  const variableNodes = [];
-
-  const traverseNode = (node) => {
-    if (node.type === 'variable') {
-      variableNodes.push(node);
-    }
-    if (node.content) {
-      for (const childNode of node.content) {
-        traverseNode(childNode);
-      }
-    }
-  };
-
-  if (json.content) {
-    for (const node of json.content) {
-      traverseNode(node);
-    }
-  }
-
-  return variableNodes;
+  return findAllVariables(json.content);
 };
 
 const _insertVariable = (id, altText = '') => {
@@ -180,7 +162,7 @@ describe('DtRichTextEditor Variable Extension tests', () => {
             .focus()
             .setNodeSelection(variablePos)
             .updateAttributes('variable', {
-              altText: 'Updated Name'
+              altText: 'Updated Name',
             })
             .run();
           await wrapper.vm.$nextTick();
@@ -246,7 +228,7 @@ describe('DtRichTextEditor Variable Extension tests', () => {
         await wrapper.vm.$nextTick();
 
         const variableExtension = wrapper.vm.editor.extensionManager.extensions.find(
-          ext => ext.name === 'variable'
+          ext => ext.name === 'variable',
         );
 
         expect(variableExtension).toBeDefined();
@@ -341,7 +323,7 @@ describe('DtRichTextEditor Variable Extension tests', () => {
     describe('Variable as Inline Node', () => {
       it('should be inline and atomic', async () => {
         const variableExtension = wrapper.vm.editor.extensionManager.extensions.find(
-          ext => ext.name === 'variable'
+          ext => ext.name === 'variable',
         );
 
         const nodeSpec = variableExtension.config;
