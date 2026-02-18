@@ -63,7 +63,7 @@
         >
           <template #anchor="{ attrs }">
             <dt-tooltip
-              :message="i18n.$t('Variable')"
+              :message="variableButton.tooltipMessage"
               placement="top"
             >
               <template #anchor>
@@ -91,7 +91,7 @@
               v-model="variableSearchValue"
               root-class="d-p8 d-pb4 d-w264"
               type="search"
-              :placeholder="i18n.$t('Search variable')"
+              :placeholder="i18n.$t('DIALTONE_EDITOR_VARIABLE_POPOVER_SEARCH_PLACEHOLDER')"
               size="md"
               role="menuitem"
             >
@@ -102,7 +102,7 @@
             <dt-list-item-group
               v-for="(category, index) in filteredCategories"
               :key="category.name"
-              :heading="i18n.$t(category.name)"
+              :heading="category.name"
               heading-class="d-headline--sm-compact d-p8"
             >
               <dt-list-item
@@ -115,7 +115,7 @@
                   close();
                 "
               >
-                {{ i18n.$t(item.name) }}
+                {{ item.name }}
               </dt-list-item>
               <dt-dropdown-separator
                 v-if="index < filteredCategories.length - 1"

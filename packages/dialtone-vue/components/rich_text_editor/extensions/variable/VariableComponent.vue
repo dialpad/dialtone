@@ -6,7 +6,7 @@ import { DtBadge } from '@/components/badge';
 import { DialtoneLocalization } from '@/localization/index.js';
 import { nodeViewProps, NodeViewWrapper } from '@tiptap/vue-3';
 
-const MAX_VARIABLE_ALT_LENGTH = 50;
+const MAX_VARIABLE_ALT_LENGTH = 100;
 
 export default {
   name: 'VariableComponent',
@@ -56,11 +56,11 @@ export default {
     },
 
     badgeLabel() {
-      return this.i18n.$t(`{} ${this.placeholder}`);
+      return `{} ${this.placeholder}`;
     },
 
     placeholderText() {
-      return this.i18n.$t(`Replaces ${this.placeholder}`);
+      return `Replaces ${this.placeholder}`;
     },
   },
 };
@@ -90,12 +90,12 @@ export default {
         <dt-input
           v-model="altText"
           root-class="d-p8 d-w332"
-          :label="i18n.$t('Alternate text')"
-          :placeholder="i18n.$t(placeholderText)"
+          :label="i18n.$t('DIALTONE_EDITOR_VARIABLE_LABEL')"
+          :placeholder="placeholderText"
           :validate="{
             length: {
-              description: i18n.$t('Used when the variable data isn’t available.'),
-              message: i18n.$t(`Max ${MAX_VARIABLE_ALT_LENGTH} characters allowed.`),
+              description: i18n.$t('DIALTONE_EDITOR_VARIABLE_VALIDATE_DESCRIPTION'),
+              message: i18n.$t('DIALTONE_EDITOR_VARIABLE_VALIDATE_MESSAGE'),
               max: MAX_VARIABLE_ALT_LENGTH,
               warn: MAX_VARIABLE_ALT_LENGTH,
               limitMaxLength: true,

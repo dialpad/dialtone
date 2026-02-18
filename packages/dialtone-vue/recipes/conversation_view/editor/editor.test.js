@@ -471,7 +471,7 @@ describe('DtRecipeEditor tests', () => {
         });
 
         it('should have correct aria-label for variable button', () => {
-          expect(variableBtn.attributes('aria-label')).toContain('DIALTONE_EDITOR_VARIABLE_BUTTON_LABEL');
+          expect(variableBtn.attributes('aria-label')).toContain('Variable');
         });
 
         it('should have correct data-qa attribute', () => {
