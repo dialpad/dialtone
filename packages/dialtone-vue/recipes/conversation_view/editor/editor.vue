@@ -79,7 +79,7 @@
                   <template #icon>
                     <component
                       :is="variableButton.icon"
-                      :size="200"
+                      size="200"
                     />
                   </template>
                 </dt-button>
