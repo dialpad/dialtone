@@ -5,6 +5,8 @@ paths:
 
 # Vue Component Test Rules
 
+> **Canonical reference**: See [TEST_GUIDELINE.md](../../packages/dialtone-vue/.github/TEST_CONTRIBUTING/TEST_GUIDELINE.md) for the full test contributing guide, including the standardized template, `updateWrapper()` pattern, and the 5 required test sections.
+
 ## Framework
 - Vitest + @vue/test-utils
 - Run all: `pnpm nx run dialtone-vue:test`

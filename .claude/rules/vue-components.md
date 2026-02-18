@@ -10,7 +10,7 @@ paths:
 - **Existing components**: Options API with `compatConfig: { MODE: 3 }`. Do NOT convert unless explicitly asked.
 
 ## Props
-- Use `validator` — NEVER `validate`. Vue silently ignores `validate` (8 known instances across 6 files).
+- Use `validator` — NEVER `validate`. Vue silently ignores `validate`.
 - Import allowed values from `*_constants.js`. Never hardcode valid value arrays inline.
 - Add JSDoc with `@values` annotation.
 - Boolean visibility toggles: prefer `hideX` negative polarity (`hideClose`, `hideHeader`, `hideArrow`).
@@ -32,7 +32,7 @@ paths:
 ## Separation of Concerns
 - **Template**: Presentation only. No complex expressions (extract to computed). No API calls.
 - **Script**: All logic. Use composables for new reusable logic, mixins for legacy.
-- **Styles**: `<style scoped>` or Dialtone utility classes (`d-*`). Reference tokens via `var(--dt-*)`. Never hardcode colors, spacing, or typography. No `!important` except in utility definitions.
+- **Styles**: Component styles live in `packages/dialtone-css/lib/build/less/components/{component-name}.less`. Use Dialtone utility classes (`d-*`) in templates. Reference tokens via `var(--dt-*)`. Never hardcode colors, spacing, or typography.
 
 ## File Structure (per component directory)
 - `component_name.vue` — implementation
@@ -41,9 +41,15 @@ paths:
 - `component_name.stories.js` — Storybook stories
 - `component_name.mdx` — Storybook docs
 - `index.js` — barrel export
+- `utils.js` — utility/helper functions (optional)
+- `validators.js` — prop/value validators (optional)
+- `modules/` — sub-components for complex components (optional, e.g. emoji_picker, datepicker)
+- `composables/` — composition functions (optional, e.g. `useCalendar.js`, `useKeyboardNavigation.js`)
 
 ## 6-Artifact Pipeline
+
 When creating or updating a component, ALL must stay in sync:
+
 1. Vue source in `packages/dialtone-vue/components/`
 2. Tests (`.test.js`) using Vitest + @vue/test-utils
 3. Storybook stories (`.stories.js` + `.mdx`)
