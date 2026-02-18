@@ -62,6 +62,9 @@ DIALTONE_EDITOR_ADD_LINK_BUTTON =
   .title = Add Link
   .aria-label = Input field to add link
 
+DIALTONE_EDITOR_FONT_STYLE_BUTTON_LABEL = Font Style
+DIALTONE_EDITOR_FONT_STYLE_SEARCH_PLACEHOLDER = Search font
+
 DIALTONE_EMOJI_ROW_REACTION_LABEL =
   { $personCount ->
   *[other] reacted with { $reaction }

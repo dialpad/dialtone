@@ -13,6 +13,77 @@
       gap="450"
     >
       <dt-stack
+        v-if="fontStyleButton.showBtn"
+        direction="row"
+        gap="300"
+      >
+        <dt-popover
+          :open="showFontStyleDropdown"
+          :show-close-button="false"
+          data-qa="dt-recipe-editor-font-style-input-popover"
+          padding="small"
+          placement="bottom-start"
+          @opened="toggleFontStyleDropdown"
+        >
+          <template #anchor>
+            <dt-tooltip
+              :key="fontStyleButton.key"
+              :message="fontStyleButton.tooltipMessage"
+              placement="top"
+            >
+              <template #anchor>
+                <dt-button
+                  :ref="getButtonRef('custom', fontStyleButton.selector)"
+                  :active="$refs.richTextEditor?.editor?.isActive(fontStyleButton.selector)"
+                  :aria-label="fontStyleButton.tooltipMessage"
+                  :data-qa="fontStyleButton.dataQA"
+                  :tabindex="canFocus(getButtonRef('custom', fontStyleButton.selector)) ? 0 : -1"
+                  importance="clear"
+                  kind="muted"
+                  size="xs"
+                  @click="fontStyleButton.onClick()"
+                  @keydown.right.stop="shiftActionBarFocusRight"
+                  @keydown.left.stop="shiftActionBarFocusLeft"
+                >
+                  <template #icon>
+                    <component
+                      :is="fontStyleButton.icon"
+                      size="200"
+                    />
+                  </template>
+                </dt-button>
+              </template>
+            </dt-tooltip>
+          </template>
+          <template #content="{ close }">
+            <dt-input
+              v-model="fontStyleSearch"
+              root-class="d-p8 d-pb4 d-w216"
+              type="search"
+              :placeholder="i18n.$t('DIALTONE_EDITOR_FONT_STYLE_SEARCH_PLACEHOLDER')"
+              size="md"
+              role="menuitem"
+            >
+              <template #leftIcon="{ iconSize }">
+                <dt-icon-search :size="iconSize" />
+              </template>
+            </dt-input>
+            <dt-list-item
+              v-for="fontStyle in filteredFontStyles"
+              :key="fontStyle.name"
+              role="menuitem"
+              navigation-type="arrow-keys"
+              @click="
+                close();
+              "
+            >
+              {{ fontStyle.name }}
+            </dt-list-item>
+          </template>
+        </dt-popover>
+      </dt-stack>
+
+      <dt-stack
         v-for="buttonGroup in buttonGroups"
         :key="buttonGroup.key"
         direction="row"
@@ -197,6 +268,7 @@ import {
 import {
   EDITOR_SUPPORTED_LINK_PROTOCOLS,
   EDITOR_DEFAULT_LINK_PREFIX,
+  AVAILABLE_FONT_STYLES,
 } from './editor_constants.js';
 import { removeClassStyleAttrs, addClassStyleAttrs } from '@/common/utils';
 import { DtButton } from '@/components/button';
@@ -204,6 +276,7 @@ import { DtPopover } from '@/components/popover';
 import { DtStack } from '@/components/stack';
 import { DtInput } from '@/components/input';
 import { DtTooltip } from '@/components/tooltip';
+import { DtListItem } from '@/components/list_item';
 import {
   DtIconAlignCenter,
   DtIconAlignJustify,
@@ -220,6 +293,8 @@ import {
   DtIconQuote,
   DtIconStrikethrough,
   DtIconUnderline,
+  DtIconType,
+  DtIconSearch,
 } from '@dialpad/dialtone-icons/vue3';
 import { DialtoneLocalization } from '@/localization';
 
@@ -234,6 +309,7 @@ export default {
     DtStack,
     DtInput,
     DtTooltip,
+    DtListItem,
     DtIconQuickReply,
     DtIconBold,
     DtIconItalic,
@@ -249,6 +325,8 @@ export default {
     DtIconCodeBlock,
     DtIconLink2,
     DtIconImage,
+    DtIconSearch,
+    DtIconType,
   },
 
   mixins: [],
@@ -462,6 +540,14 @@ export default {
     },
 
     /**
+     * Show font style, size, & color buttons.
+     */
+    showFontButtons: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
      * Use div tags instead of paragraph tags to show text
      */
     useDivTags: {
@@ -538,6 +624,8 @@ export default {
       },
 
       showLinkInput: false,
+      showFontStyleDropdown: false,
+      fontStyleSearch: '',
       linkInput: '',
       currentButtonRefIndex: 0,
       i18n: new DialtoneLocalization(),
@@ -741,6 +829,17 @@ export default {
       };
     },
 
+    fontStyleButton () {
+      return {
+        showBtn: this.showFontButtons,
+        selector: 'fontStyle',
+        icon: DtIconType,
+        dataQA: 'dt-recipe-editor-font-style-btn',
+        tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_FONT_STYLE_BUTTON_LABEL'),
+        onClick: () => this.toggleFontStyleDropdown(true),
+      }
+    },
+
     confirmSetLinkButtonLabels () {
       return this.i18n.$ta('DIALTONE_EDITOR_CONFIRM_SET_LINK_BUTTON');
     },
@@ -755,6 +854,13 @@ export default {
 
     showAddLinkButtonLabels () {
       return this.i18n.$ta('DIALTONE_EDITOR_ADD_LINK_BUTTON');
+    },
+
+    filteredFontStyles () {
+      const searchValue = this.fontStyleSearch.toLowerCase();
+      return AVAILABLE_FONT_STYLES.filter((item) =>
+        item.name.toLowerCase().includes(searchValue),
+      );
     },
   },
 
@@ -826,6 +932,10 @@ export default {
 
     openLinkInput () {
       this.showLinkInput = true;
+    },
+
+    toggleFontStyleDropdown (open) {
+      this.showFontStyleDropdown = open;
     },
 
     updateInput (openedInput) {
