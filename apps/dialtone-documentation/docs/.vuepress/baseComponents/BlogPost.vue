@@ -86,13 +86,13 @@ const blogLink = computed(() => {
 <style lang="less">
 .blog-post-content {
   .d-docsite--header-2:first-of-type {
-    margin-top: var(--dt-size-500);
+    margin-block-start: var(--dt-size-500);
   }
   > table:not([class]) {
     border: 1px solid var(--dt-color-border-subtle);
     border-collapse: collapse;
     margin: var(--dt-size-500) 0;
-    width: 100%;
+    inline-size: 100%;
 
     th {
       font: var(--dt-text-label-sm);
@@ -100,7 +100,7 @@ const blogLink = computed(() => {
     }
 
     th, td {
-      text-align: left;
+      text-align: start;
       border: 1px solid var(--dt-color-border-subtle);
       border-inline: 0;
       padding: var(--dt-size-400);

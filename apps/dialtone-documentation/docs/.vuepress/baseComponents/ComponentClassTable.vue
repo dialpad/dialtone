@@ -38,7 +38,7 @@
             <th
               scope="row"
               class="d-code--sm d-docsite-code"
-              v-text="`.${className}`"
+              v-text="className.startsWith('data-') ? className : `.${className}`"
             />
             <td class="d-code--sm">
               <span

@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "9.154.0-next.5",
+  "version": "9.156.1",
   "packageManager": "pnpm@9.9.0",
   "description": "Dialpad's Dialtone design system monorepo",
   "scripts": {
@@ -141,7 +141,7 @@
     "axe-core": "^4.7.2",
     "axe-playwright": "^2.0.3",
     "c8": "^8.0.0",
-    "colorjs.io": "0.5.2",
+    "colorjs.io": "0.4.5",
     "concurrently": "^8.2.2",
     "del": "^6.1.1",
     "eslint": "^9.33.0",

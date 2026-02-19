@@ -234,8 +234,8 @@ importers:
         specifier: ^8.0.0
         version: 8.0.1
       colorjs.io:
-        specifier: 0.5.2
-        version: 0.5.2
+        specifier: 0.4.5
+        version: 0.4.5
       concurrently:
         specifier: ^8.2.2
         version: 8.2.2
@@ -401,6 +401,9 @@ importers:
       '@dialpad/postcss-responsive-variations':
         specifier: workspace:*
         version: link:../../packages/postcss-responsive-variations
+      '@dialpad/stylelint-plugin-dialtone':
+        specifier: workspace:*
+        version: link:../../packages/stylelint-plugin-dialtone
       '@docsearch/css':
         specifier: ^4.0.1
         version: 4.5.3
@@ -547,6 +550,9 @@ importers:
       '@dialpad/postcss-responsive-variations':
         specifier: workspace:*
         version: link:../postcss-responsive-variations
+      '@dialpad/stylelint-plugin-dialtone':
+        specifier: workspace:*
+        version: link:../stylelint-plugin-dialtone
       autoprefixer:
         specifier: ^10.4.14
         version: 10.4.23(postcss@8.5.6)
@@ -666,8 +672,8 @@ importers:
         version: 9.39.2(jiti@1.21.7)
     devDependencies:
       '@tokens-studio/sd-transforms':
-        specifier: ^1.2.3
-        version: 1.3.0(style-dictionary@4.4.0(tslib@2.8.1))
+        specifier: 1.2.3
+        version: 1.2.3(style-dictionary@4.1.0(tslib@2.8.1))
       '@types/node':
         specifier: ^22.8.4
         version: 22.19.7
@@ -680,6 +686,9 @@ importers:
       axios:
         specifier: ^1.12.2
         version: 1.13.4
+      culori:
+        specifier: 4.0.2
+        version: 4.0.2
       dotenv:
         specifier: ^16.3.1
         version: 16.6.1
@@ -693,8 +702,8 @@ importers:
         specifier: 11.0.0
         version: 11.0.0(jiti@1.21.7)(postcss@8.4.39)(tsx@4.21.0)
       style-dictionary:
-        specifier: ^4.1.0
-        version: 4.4.0(tslib@2.8.1)
+        specifier: 4.1.0
+        version: 4.1.0(tslib@2.8.1)
       tsx:
         specifier: ^4.19.0
         version: 4.21.0
@@ -940,6 +949,9 @@ importers:
       stylelint-test-rule-node:
         specifier: ^0.2.1
         version: 0.2.2(stylelint@16.26.1(typescript@5.9.3))
+      stylelint-use-logical:
+        specifier: ^2.1.2
+        version: 2.1.2(stylelint@16.26.1(typescript@5.9.3))
       vue-eslint-parser:
         specifier: ^10.0.0
         version: 10.2.0(eslint@9.39.2(jiti@1.21.7))
@@ -1724,11 +1736,11 @@ packages:
       postcss-selector-parser: ^7.0.0
 
   '@dialpad/conventional-changelog-angular@1.1.1':
-    resolution: {integrity: sha512-qUT8qgaypYlGPXDO5HqYdq0Q670fqAxr5AaJUo3AOzBJ6IRTcG48kXo6Z9GRVgqrL21jd6MS+fx5nu1wKM0W0w==}
+    resolution: {integrity: sha512-TLsyNwTUmGK6TtvdoC4SE/13Ae501pdzhSIyOV9V3HOVf8YrVTOgLUJ/l97kZSxcTOeRbFeRjbWfH7W3ixn36g==, tarball: https://npm.pkg.github.com/download/@dialpad/conventional-changelog-angular/1.1.1/1c54240f941b2d02d73e4ca2d4e53420d128bbf6}
     engines: {node: '>=10'}
 
   '@dialpad/i18n-services@1.11.0':
-    resolution: {integrity: sha512-vXXU2I7oJ+06yoMYBpBVYEZo+hubHgUsK+8yydFzOxNbIs7KOuH8s0gT36hdWdkM0kPWKUn3X/TaMcTu+At9Ww==}
+    resolution: {integrity: sha512-NzGie5sIbfW/AyJwtIRZOumhAiXP6329VNBOrVerXgGrXqbTacTAuXPPVSgprFol5kWdbV34QtAlKN5OY11WEw==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n-services/1.11.0/20198484967555617ab62da6ad3c276265ee232d}
     hasBin: true
     peerDependencies:
       '@vue/composition-api': '*'
@@ -1738,12 +1750,12 @@ packages:
         optional: true
 
   '@dialpad/i18n@1.22.3':
-    resolution: {integrity: sha512-vIviaCpnXRyd/CegJw4jlcdB9Zbgmml0gmHr9cNXUtJuC+DEOtwadVtq7qpUedggKMltg7VlMkC38U85C6W/yw==}
+    resolution: {integrity: sha512-vIviaCpnXRyd/CegJw4jlcdB9Zbgmml0gmHr9cNXUtJuC+DEOtwadVtq7qpUedggKMltg7VlMkC38U85C6W/yw==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n/1.22.3/fcdcd6ab6ab141035696d71caf35b3554b64c726}
     peerDependencies:
       vue: ^3.0.0
 
   '@dialpad/semantic-release-changelog-json@1.0.0':
-    resolution: {integrity: sha512-9bbDAiJR2MHI6M5KNsLQGebmg1d1exXP9O8lET6SIVWeaq6bIJrWM7WRqyohkBpq3Ad2ZPc0Rq6zCY0UC/wiVQ==}
+    resolution: {integrity: sha512-RIk5Wkco9pTucCO5Pi+4kx2CtmaDzY94V77bK/gluhb3IEDVktnzpS5SIWV+dTKtXUrHweoSXjCH+1cSifgefw==, tarball: https://npm.pkg.github.com/download/@dialpad/semantic-release-changelog-json/1.0.0/40fb236ee722da99879010c02f12b95cb2635ddc}
     engines: {node: '>=14.17'}
     peerDependencies:
       semantic-release: '>=18.0.0'
@@ -5237,11 +5249,11 @@ packages:
   '@tokenizer/token@0.3.0':
     resolution: {integrity: sha512-OvjF+z51L3ov0OyAU0duzsYuvO01PH7x4t6DJx+guahgTnBHkhJdG7soQeTSFLWN3efnHyibZ4Z8l2EuWwJN3A==}
 
-  '@tokens-studio/sd-transforms@1.3.0':
-    resolution: {integrity: sha512-zVbiYjTGWpSuwzZwiuvcWf79CQEcTMKSxrOaQJ0zHXFxEmrpETWeIRxv2IO8rtMos/cS8mvnDwPngoHQOMs1SA==}
+  '@tokens-studio/sd-transforms@1.2.3':
+    resolution: {integrity: sha512-4F/Nl0oWwmukNLkOehrvosAFKvWUVieWqlKDua80NU1jNWgpax4EQjbHDQgfCF9nCthdcdcImzhItqbaLcmlvg==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
-      style-dictionary: ^4.3.0 || ^5.0.0-rc.0
+      style-dictionary: ^4.0.1
 
   '@tokens-studio/types@0.5.2':
     resolution: {integrity: sha512-rzMcZP0bj2E5jaa7Fj0LGgYHysoCrbrxILVbT0ohsCUH5uCHY/u6J7Qw/TE0n6gR9Js/c9ZO9T8mOoz0HdLMbA==}
@@ -7220,8 +7232,8 @@ packages:
   colorette@2.0.20:
     resolution: {integrity: sha512-IfEDxwoWIjkeXL1eXcDiow4UbKjhLdq6/EuSVR9GMN7KVH3r9gQ83e73hsz1Nd1T3ijd5xv1wcWRYO+D6kCI2w==}
 
-  colorjs.io@0.5.2:
-    resolution: {integrity: sha512-twmVoizEW7ylZSN32OgKdXRmo1qg+wT5/6C3xu5b9QsWzSFAhHLn2xd8ro0diCsKfCj1RdaTP/nrcW+vAoQPIw==}
+  colorjs.io@0.4.5:
+    resolution: {integrity: sha512-yCtUNCmge7llyfd/Wou19PMAcf5yC3XXhgFoAh6zsO2pGswhUPBaaUh8jzgHnXtXuZyFKzXZNAnyF5i+apICow==}
 
   colors@1.0.3:
     resolution: {integrity: sha512-pFGrxThWcWQ2MsAz6RtgeWe4NK2kUE1WfsrvvlctdII745EW9I0yflqhe7++M5LEc7bV2c/9/5zc8sFcpL0Drw==}
@@ -7838,6 +7850,10 @@ packages:
 
   csv-parse@5.5.6:
     resolution: {integrity: sha512-uNpm30m/AGSkLxxy7d9yRXpJQFrZzVWLFBkS+6ngPcZkw/5k3L/jjFuj7tVnEpRn+QgmiXr21nDlhCiUK4ij2A==}
+
+  culori@4.0.2:
+    resolution: {integrity: sha512-1+BhOB8ahCn4O0cep0Sh2l9KCOfOdY+BXJnKMHFFzDEouSr/el18QwXEMRlOj9UY5nCeA8UN3a/82rUWRBeyBw==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
 
   currently-unhandled@0.4.1:
     resolution: {integrity: sha512-/fITjgjGU50vjQ4FH6eUoYu+iUoUKIXws2hL15JJpIR+BbTxaXQsMuuyjtNh2WqsSBS5nsaZHFsFecyw5CCAng==}
@@ -12981,8 +12997,8 @@ packages:
     resolution: {integrity: sha512-Vj7sf++t5pBD637NSfkxpHSMfWaeig5+DKWLhcqIYx6mWQz5hdJTGDVMQiJcw1ZYkhs7AazKDGpRVji1LJCZUQ==}
     engines: {node: '>=18'}
 
-  path-unified@0.2.0:
-    resolution: {integrity: sha512-MNKqvrKbbbb5p7XHXV6ZAsf/1f/yJQa13S/fcX0uua8ew58Tgc6jXV+16JyAbnR/clgCH+euKDxrF2STxMHdrg==}
+  path-unified@0.1.0:
+    resolution: {integrity: sha512-/Oaz9ZJforrkmFrwkR/AcvjVsCAwGSJHO0X6O6ISj8YeFbATjIEBXLDcZfnK3MO4uvCBrJTdVIxdOc79PMqSdg==}
 
   path@0.12.7:
     resolution: {integrity: sha512-aXXC6s+1w7otVF9UletFkFcDsJeO7lSZBPUQhtb5O0xJe8LtYhj/GxldoL09bBj9+ZmE2hNoHqQSFMN5fikh4Q==}
@@ -13619,11 +13635,6 @@ packages:
 
   prettier@3.3.2:
     resolution: {integrity: sha512-rAVeHYMcv8ATV5d508CFdn+8/pHPpXeIid1DdrPwXnaAdH7cqjVbpJaT5eq4yRAFU/lsbwYwSF/n5iNrdJHPQA==}
-    engines: {node: '>=14'}
-    hasBin: true
-
-  prettier@3.8.1:
-    resolution: {integrity: sha512-UOnG6LftzbdaHZcKoPFtOcCKztrQ57WkHDeRD9t/PTQtmT0NHSeWWepj6pS0z/N7+08BHFDQVUrfmfMRcZwbMg==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -15056,8 +15067,8 @@ packages:
     resolution: {integrity: sha512-fZtbhtvI9I48xDSywd/somNqgUHl2L2cstmXCCif0itOf96jeW18MBSyrLuNicYQVkvpOxkZtkzujiTJ9LW5Jw==}
     engines: {node: '>=10'}
 
-  style-dictionary@4.4.0:
-    resolution: {integrity: sha512-+xU0IA1StzqAqFs/QtXkK+XJa7wpS4X5H+JQccRKsRCElgeLGocFU1U/UMvMUylKFw6vwGV+Y/a2wb2pm5rFFQ==}
+  style-dictionary@4.1.0:
+    resolution: {integrity: sha512-DfY64t/XsL0bycnabIcIna/H1GyjK4sKLui2t0q6flr2uM+VpRNoSNCPOpi5YSouhKEFjoiC6ediyrMzraTz8A==}
     engines: {node: '>=18.0.0'}
     hasBin: true
 
@@ -15123,6 +15134,12 @@ packages:
   stylelint-test-rule-node@0.2.2:
     resolution: {integrity: sha512-muMgHkW0rpGwIHuL+dgxiWgojcPNByNiBHm5+NqZT/vUAWo0QZYY1jCDVbw2G404LFpzHDd0BZ4JEMKOIw/Dlw==}
     engines: {node: '>=18.12.0'}
+    peerDependencies:
+      stylelint: ^16.25.0
+
+  stylelint-use-logical@2.1.2:
+    resolution: {integrity: sha512-4ffvPNk/swH4KS3izExWuzQOuzLmi0gb0uOhvxWJ20vDA5W5xKCjcHHtLoAj1kKvTIX6eGIN5xGtaVin9PD0wg==}
+    engines: {node: '>=14.0.0'}
     peerDependencies:
       stylelint: ^16.25.0
 
@@ -22081,15 +22098,15 @@ snapshots:
 
   '@tokenizer/token@0.3.0': {}
 
-  '@tokens-studio/sd-transforms@1.3.0(style-dictionary@4.4.0(tslib@2.8.1))':
+  '@tokens-studio/sd-transforms@1.2.3(style-dictionary@4.1.0(tslib@2.8.1))':
     dependencies:
       '@bundled-es-modules/deepmerge': 4.3.1
       '@bundled-es-modules/postcss-calc-ast-parser': 0.1.6
       '@tokens-studio/types': 0.5.2
-      colorjs.io: 0.5.2
+      colorjs.io: 0.4.5
       expr-eval-fork: 2.0.2
       is-mergeable-object: 1.1.1
-      style-dictionary: 4.4.0(tslib@2.8.1)
+      style-dictionary: 4.1.0(tslib@2.8.1)
 
   '@tokens-studio/types@0.5.2': {}
 
@@ -24710,7 +24727,7 @@ snapshots:
 
   colorette@2.0.20: {}
 
-  colorjs.io@0.5.2: {}
+  colorjs.io@0.4.5: {}
 
   colors@1.0.3: {}
 
@@ -25241,6 +25258,8 @@ snapshots:
   csstype@3.2.3: {}
 
   csv-parse@5.5.6: {}
+
+  culori@4.0.2: {}
 
   currently-unhandled@0.4.1:
     dependencies:
@@ -31491,7 +31510,7 @@ snapshots:
 
   path-type@6.0.0: {}
 
-  path-unified@0.2.0: {}
+  path-unified@0.1.0: {}
 
   path@0.12.7:
     dependencies:
@@ -32072,8 +32091,6 @@ snapshots:
   prettier@2.8.8: {}
 
   prettier@3.3.2: {}
-
-  prettier@3.8.1: {}
 
   pretty-bytes@6.1.1: {}
 
@@ -33854,7 +33871,7 @@ snapshots:
       '@tokenizer/token': 0.3.0
       peek-readable: 4.1.0
 
-  style-dictionary@4.4.0(tslib@2.8.1):
+  style-dictionary@4.1.0(tslib@2.8.1):
     dependencies:
       '@bundled-es-modules/deepmerge': 4.3.1
       '@bundled-es-modules/glob': 10.4.2
@@ -33862,12 +33879,11 @@ snapshots:
       '@zip.js/zip.js': 2.8.15
       chalk: 5.6.2
       change-case: 5.4.4
-      commander: 12.1.0
+      commander: 8.3.0
       is-plain-obj: 4.1.0
       json5: 2.2.3
       patch-package: 8.0.1
-      path-unified: 0.2.0
-      prettier: 3.8.1
+      path-unified: 0.1.0
       tinycolor2: 1.6.0
     transitivePeerDependencies:
       - tslib
@@ -33934,6 +33950,10 @@ snapshots:
       stylelint: 16.26.1(typescript@5.9.3)
 
   stylelint-test-rule-node@0.2.2(stylelint@16.26.1(typescript@5.9.3)):
+    dependencies:
+      stylelint: 16.26.1(typescript@5.9.3)
+
+  stylelint-use-logical@2.1.2(stylelint@16.26.1(typescript@5.9.3)):
     dependencies:
       stylelint: 16.26.1(typescript@5.9.3)
 

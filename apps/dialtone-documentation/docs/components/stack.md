@@ -1702,84 +1702,84 @@ vueCode='
 
     // Inline axis indicators (vertical lines)
     &--inline-start::before {
-      left: var(--axis-offset);
-      width: var(--axis-size);
-      height: 100%;
+      inset-inline-start: var(--axis-offset);
+      inline-size: var(--axis-size);
+      block-size: 100%;
     }
 
     &--inline-center::before {
-      left: 50%;
-      top: 50%;
+      inset-inline-start: 50%;
+      inset-block-start: 50%;
       transform: translate(-50%, -50%);
-      width: var(--axis-size);
-      height: 100%;
+      inline-size: var(--axis-size);
+      block-size: 100%;
     }
 
     &--inline-end::before {
-      right: var(--axis-offset);
-      width: var(--axis-size);
-      height: 100%;
+      inset-inline-end: var(--axis-offset);
+      inline-size: var(--axis-size);
+      block-size: 100%;
     }
 
     &--inline-stretch {
       &::before {
-        left: var(--axis-offset);
-        width: var(--axis-size);
-        height: 100%;
+        inset-inline-start: var(--axis-offset);
+        inline-size: var(--axis-size);
+        block-size: 100%;
       }
 
       &::after {
-        right: var(--axis-offset);
-        width: var(--axis-size);
-        height: 100%;
+        inset-inline-end: var(--axis-offset);
+        inline-size: var(--axis-size);
+        block-size: 100%;
       }
     }
 
     // Block axis indicators (horizontal lines)
     &--block-start::before {
-      top: var(--axis-offset);
-      height: var(--axis-size);
-      width: 100%;
+      inset-block-start: var(--axis-offset);
+      block-size: var(--axis-size);
+      inline-size: 100%;
       background-image: var(--axis-pattern-horizontal);
     }
 
     &--block-center::before {
-      left: 50%;
-      top: 50%;
+      inset-inline-start: 50%;
+      inset-block-start: 50%;
       transform: translate(-50%, -50%);
-      width: 100%;
-      height: var(--axis-size);
+      inline-size: 100%;
+      block-size: var(--axis-size);
       background-image: var(--axis-pattern-horizontal);
     }
 
     &--block-end::before {
-      bottom: var(--axis-offset);
-      height: var(--axis-size);
-      width: 100%;
+      inset-block-end: var(--axis-offset);
+      block-size: var(--axis-size);
+      inline-size: 100%;
       background-image: var(--axis-pattern-horizontal);
     }
 
     &--block-stretch {
       &::before {
-        top: var(--axis-offset);
-        height: var(--axis-size);
-        width: 100%;
+        inset-block-start: var(--axis-offset);
+        block-size: var(--axis-size);
+        inline-size: 100%;
         background-image: var(--axis-pattern-horizontal);
       }
 
       &::after {
-        bottom: var(--axis-offset);
-        height: var(--axis-size);
-        width: 100%;
+        inset-block-end: var(--axis-offset);
+        block-size: var(--axis-size);
+        inline-size: 100%;
         background-image: var(--axis-pattern-horizontal);
       }
     }
 
     // Special case for baseline
     &--baseline::before {
-      bottom: calc(var(--dt-size-500) + var(--dt-size-400));
-      height: var(--axis-size);
-      width: 100%;
+      inset-block-end: calc(var(--dt-size-500) + var(--dt-size-400));
+      block-size: var(--axis-size);
+      inline-size: 100%;
       background-image: var(--axis-pattern-horizontal);
     }
   }

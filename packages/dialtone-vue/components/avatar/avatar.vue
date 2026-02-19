@@ -3,8 +3,11 @@
     :is="clickable ? 'button' : 'div'"
     :id="id"
     :class="avatarClasses"
-    :style="$attrs.style"
+    :style="avatarStyles"
+    :data-avatar-family="!iconOnly ? computedFamily : undefined"
+    :data-avatar-variant="!iconOnly ? computedVariant : undefined"
     data-qa="dt-avatar"
+    :type="clickable ? 'button' : undefined"
     @click="handleClick"
   >
     <div
@@ -15,33 +18,31 @@
         { 'd-avatar--image-loaded': imageLoadedSuccessfully },
       ]"
     >
-      <img
-        v-if="showImage"
-        ref="avatarImage"
-        class="d-avatar__image"
-        data-qa="dt-avatar-image"
-        :src="imageSrc"
-        :alt="imageAlt"
-      >
-      <div
-        v-else-if="isIconType()"
-        :class="[iconClass, AVATAR_KIND_MODIFIERS.icon]"
-        :aria-label="clickable ? iconAriaLabel : ''"
-        :data-qa="iconDataQa"
-        :role="clickable ? 'button' : ''"
-      >
-        <!-- @slot Slot for avatar icon. It will display if no imageSrc is provided -->
-        <slot
-          name="icon"
-          :icon-size="iconSize || AVATAR_ICON_SIZES[size]"
-        />
+      <div class="d-avatar__canvas-inner">
+        <img
+          v-if="showImage"
+          ref="avatarImage"
+          class="d-avatar__image"
+          data-qa="dt-avatar-image"
+          :src="imageSrc"
+          :alt="imageAlt"
+        >
+        <div
+          v-else-if="isIconType"
+          :class="[iconClass, AVATAR_KIND_MODIFIERS.icon]"
+          :aria-label="clickable ? iconAriaLabel : ''"
+          :data-qa="iconDataQa"
+        >
+          <!-- @slot Slot for avatar icon. It will display if no imageSrc is provided -->
+          <slot name="icon" />
+        </div>
+        <span
+          v-else
+          :class="[AVATAR_KIND_MODIFIERS.initials]"
+        >
+          {{ formattedInitials }}
+        </span>
       </div>
-      <span
-        v-else
-        :class="[AVATAR_KIND_MODIFIERS.initials]"
-      >
-        {{ formattedInitials }}
-      </span>
     </div>
     <div
       v-if="hasOverlayIcon || overlayText"
@@ -63,9 +64,11 @@
       v-if="showGroup"
       class="d-avatar__count"
       data-qa="dt-avatar-count"
+      role="img"
+      :aria-label="`${group} participants`"
     >{{ formattedGroup }}</span>
     <dt-presence
-      v-if="presence && !showGroup"
+      v-if="presence && !showGroup && AVATAR_PRESENCE_SIZE_MODIFIERS[size]"
       :presence="presence"
       :class="[
         'd-avatar__presence',
@@ -78,19 +81,24 @@
 </template>
 
 <script>
-import { getUniqueString, getRandomElement, hasSlotContent } from '@/common/utils';
+import { getUniqueString, hasSlotContent } from '@/common/utils';
 import { DtPresence } from '../presence';
 import {
   AVATAR_KIND_MODIFIERS,
   AVATAR_SIZE_MODIFIERS,
   AVATAR_PRESENCE_SIZE_MODIFIERS,
   AVATAR_PRESENCE_STATES,
-  AVATAR_RANDOM_COLORS,
   AVATAR_GROUP_VALIDATOR,
-  AVATAR_ICON_SIZES,
+  AVATAR_FAMILY_COUNT,
+  AVATAR_VARIANT_COUNT,
+  colorToFamilyVariant,
+  getRandomFamilyVariant,
+  computeAvatarHex,
 } from './avatar_constants';
-import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants.js';
 import { extractInitialsFromName } from './utils';
+
+// Check if browser supports oklch() - only compute hex fallback if not
+const supportsOklch = typeof CSS !== 'undefined' && CSS.supports?.('background', 'oklch(0.5 0.1 0)');
 
 /**
  * An avatar is a visual representation of a user or object.
@@ -113,8 +121,9 @@ export default {
     },
 
     /**
-     * Pass in a seed to get the random color generation based on that string. For example if you pass in a
-     * user ID as the string it will return the same randomly generated colors every time for that user.
+     * **Recommended.** Pass a unique identifier (e.g., user ID) to generate consistent,
+     * deterministic colors for this avatar. The same seed always produces the same color.
+     * This is the preferred approach for most use cases.
      */
     seed: {
       type: String,
@@ -122,8 +131,35 @@ export default {
     },
 
     /**
-     * Set the avatar background to a specific color. If undefined will randomize the color which can be deterministic
-     * if the seed prop is set.
+     * **Advanced.** Avatar color family (1-12). Each family represents a different hue
+     * offset from the theme's anchor. Only use this if you need explicit control over
+     * the color. For most cases, use `seed` instead.
+     * Families: 1=Red, 2=Orange, 3=Amber, 4=Yellow-Green, 5=Green, 6=Teal, 7=Cyan,
+     * 8=Blue, 9=Indigo, 10=Purple, 11=Magenta, 12=Pink
+     * @values 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
+     */
+    family: {
+      type: Number,
+      default: undefined,
+      validator: (val) => val >= 1 && val <= AVATAR_FAMILY_COUNT,
+    },
+
+    /**
+     * **Advanced.** Avatar color variant (0-9). Controls lightness/chroma within the family.
+     * Only use this if you need explicit control over the color. For most cases, use `seed` instead.
+     * 0 = darkest, 9 = lightest. Variants 0-5 have light text, 6-9 have dark text.
+     * @values 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+     */
+    variant: {
+      type: Number,
+      default: undefined,
+      validator: (val) => val >= 0 && val < AVATAR_VARIANT_COUNT,
+    },
+
+    /**
+     * **Legacy.** Avatar color code for backward compatibility. Converted internally
+     * to family/variant. For new code, use `seed` (recommended) or `family`/`variant`.
+     * Format: family (1-12) * 100 + variant (0-9) * 10, e.g., '540' = family 5, variant 4.
      */
     color: {
       type: String,
@@ -131,13 +167,15 @@ export default {
     },
 
     /**
-     * The size of the avatar
-     * @values xs, sm, md, lg, xl
+     * The size of the avatar.
+     * T-shirt sizes (xs, sm, md, lg, xl) are deprecated and will be removed in the next major version.
+     * Please use the numeric scale instead.
+     * @values 100, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, xs, sm, md, lg, xl
      */
     size: {
-      type: String,
-      default: 'md',
-      validator: (size) => Object.keys(AVATAR_SIZE_MODIFIERS).includes(size),
+      type: [String, Number],
+      default: 300,
+      validator: (size) => Object.keys(AVATAR_SIZE_MODIFIERS).includes(String(size)),
     },
 
     /**
@@ -188,7 +226,7 @@ export default {
 
     /**
      * Determines whether to show a group avatar.
-     * Limit to 2 digits max, more than 99 will be rendered as “99+”.
+     * Limit to 2 digits max, more than 99 will be rendered as "99+".
      * if the number is 1 or less it would just show the regular avatar as if group had not been set.
      */
     group: {
@@ -232,16 +270,6 @@ export default {
     },
 
     /**
-     * Icon size to be displayed on the avatar
-     * @values 100, 200, 300, 400, 500, 600, 700, 800
-     */
-    iconSize: {
-      type: String,
-      default: '',
-      validator: (size) => !size || Object.keys(ICON_SIZE_MODIFIERS).includes(size),
-    },
-
-    /**
      * Full name used to extract initials.
      */
     fullName: {
@@ -266,6 +294,25 @@ export default {
       type: String,
       default: undefined,
     },
+
+    /**
+     * When true, renders the avatar with a transparent background and no color.
+     * Useful for displaying icons that should not have a colored background,
+     * such as channel or navigation icons.
+     */
+    iconOnly: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * When true, renders the avatar in a desaturated/washed-out state.
+     * Use this to indicate that a user is deactivated or inactive.
+     */
+    deactivated: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: [
@@ -283,11 +330,11 @@ export default {
       AVATAR_SIZE_MODIFIERS,
       AVATAR_KIND_MODIFIERS,
       AVATAR_PRESENCE_SIZE_MODIFIERS,
-      AVATAR_ICON_SIZES,
       imageLoadedSuccessfully: null,
       formattedInitials: '',
       initializing: false,
       hasSlotContent,
+      anchorHue: 0,
     };
   },
 
@@ -296,8 +343,54 @@ export default {
       return hasSlotContent(this.$slots.overlayIcon);
     },
 
+    isIconType () {
+      return hasSlotContent(this.$slots.icon);
+    },
+
     iconDataQa () {
       return 'dt-avatar-icon';
+    },
+
+    /**
+     * Compute family from props, color prop, or random
+     */
+    computedFamily () {
+      // Icon-type avatars don't use color
+      if (this.isIconType) return undefined;
+
+      // Explicit family prop takes precedence
+      if (this.family !== undefined) return this.family;
+
+      // Color prop (converted to family/variant)
+      if (this.color !== undefined) {
+        const parsed = colorToFamilyVariant(this.color);
+        if (parsed) return parsed.family;
+      }
+
+      // Random based on seed
+      const random = getRandomFamilyVariant(this.seed);
+      return random.family;
+    },
+
+    /**
+     * Compute variant from props, color prop, or random
+     */
+    computedVariant () {
+      // Icon-type avatars don't use color
+      if (this.isIconType) return undefined;
+
+      // Explicit variant prop takes precedence
+      if (this.variant !== undefined) return this.variant;
+
+      // Color prop (converted to family/variant)
+      if (this.color !== undefined) {
+        const parsed = colorToFamilyVariant(this.color);
+        if (parsed) return parsed.variant;
+      }
+
+      // Random based on seed
+      const random = getRandomFamilyVariant(this.seed);
+      return random.variant;
     },
 
     avatarClasses () {
@@ -308,13 +401,31 @@ export default {
         this.avatarClass,
         {
           'd-avatar--group': this.showGroup,
-          'd-avatar--group-digits-2': this.showGroup && this.group > 9 && this.group < 100,
-          'd-avatar--group-digits-3': this.showGroup && this.group > 99,
-          [`d-avatar--color-${this.getColor()}`]: !this.isIconType(),
+          'd-avatar--group-digits-2': this.showGroup && String(this.formattedGroup).length === 2,
+          'd-avatar--group-digits-3': this.showGroup && String(this.formattedGroup).length >= 3,
           'd-avatar--clickable': this.clickable,
           'd-avatar--presence': this.presence && !this.showGroup,
+          'd-avatar--icon-only': this.iconOnly,
+          'd-avatar--deactivated': this.deactivated,
         },
       ];
+    },
+
+    /**
+     * Compute inline styles for fallback color in browsers that don't support oklch()
+     */
+    avatarStyles () {
+      // $attrs.style can be object, string, or array — normalize to an array for merging
+      const attrStyle = this.$attrs.style;
+      const baseStyles = attrStyle != null ? [].concat(attrStyle) : [];
+
+      // Only compute hex fallback for browsers that don't support oklch()
+      if (!supportsOklch && !this.isIconType && this.computedFamily && this.computedVariant !== undefined) {
+        const fallbackHex = computeAvatarHex(this.computedFamily, this.computedVariant, this.anchorHue);
+        baseStyles.push({ '--avatar-color-background': fallbackHex });
+      }
+
+      return baseStyles.length > 0 ? baseStyles : undefined;
     },
 
     overlayClasses () {
@@ -330,12 +441,18 @@ export default {
     },
 
     formattedGroup () {
+      const size = String(this.validatedSize);
+      // Sizes 100-250 cap at 2 digits — too small for 3
+      const smallSizes = ['xs', '100', '150', '200', '250'];
+      const maxDigits = smallSizes.includes(size) ? 2 : 3;
+      if (maxDigits === 2) {
+        return this.group > 9 ? '9+' : this.group;
+      }
       return this.group > 99 ? '99+' : this.group;
     },
 
     validatedSize () {
-      // TODO: Group only supports xs size for now. Remove this when we support other sizes.
-      return this.group ? 'xs' : this.size;
+      return this.size;
     },
 
     showImage () {
@@ -377,13 +494,13 @@ export default {
   mounted () {
     this.validateProps();
     this.setImageListeners();
+    // Only read anchor hue for fallback computation in browsers without oklch() support
+    if (!supportsOklch) {
+      this.readAnchorHue();
+    }
   },
 
   methods: {
-    isIconType () {
-      return hasSlotContent(this.$slots.icon);
-    },
-
     async setImageListeners () {
       await this.$nextTick();
       const el = this.$refs.avatarImage;
@@ -395,18 +512,31 @@ export default {
 
     formatInitials () {
       const initials = extractInitialsFromName(this.fullName);
+      const size = String(this.validatedSize);
 
-      if (this.validatedSize === 'xs') {
+      // xs/100 are too small for initials
+      if (size === 'xs' || size === '100') {
         this.formattedInitials = '';
-      } else if (this.validatedSize === 'sm') {
+      // sm/150/200 show single initial
+      } else if (size === 'sm' || size === '150' || size === '200') {
         this.formattedInitials = initials[0];
       } else {
         this.formattedInitials = initials;
       }
     },
 
-    getColor () {
-      return this.color ?? getRandomElement(AVATAR_RANDOM_COLORS, this.seed);
+    /**
+     * Read the anchor hue from CSS custom property for fallback computation
+     */
+    readAnchorHue () {
+      try {
+        const hueValue = getComputedStyle(document.documentElement)
+          .getPropertyValue('--dt-avatar-anchor-hue')
+          .trim();
+        this.anchorHue = parseFloat(hueValue) || 0;
+      } catch {
+        this.anchorHue = 0;
+      }
     },
 
     _loadedImageEventHandler (el) {

@@ -297,6 +297,6 @@ function handleClick (event, listeners, navigate, link) {
 
 <style lang="less" scoped>
 .dt-sidebar-item {
-  width: var(--dt-size-100-percent);
+  inline-size: var(--dt-size-100-percent);
 }
 </style>

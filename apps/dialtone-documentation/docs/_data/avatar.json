@@ -6,124 +6,94 @@
       "description": "Root level of Avatar."
     },
     {
+      "class": "d-avatar--size-100",
+      "applies": ".d-avatar",
+      "description": "Applies size 100 (16px). Supports presence."
+    },
+    {
+      "class": "d-avatar--size-150",
+      "applies": ".d-avatar",
+      "description": "Applies size 150 (20px). Supports presence."
+    },
+    {
+      "class": "d-avatar--size-200",
+      "applies": ".d-avatar",
+      "description": "Applies size 200 (24px). Supports presence."
+    },
+    {
+      "class": "d-avatar--size-250",
+      "applies": ".d-avatar",
+      "description": "Applies size 250 (28px). Supports presence."
+    },
+    {
+      "class": "d-avatar--size-300",
+      "applies": ".d-avatar",
+      "description": "Applies size 300 (32px). Default size. Supports presence."
+    },
+    {
+      "class": "d-avatar--size-400",
+      "applies": ".d-avatar",
+      "description": "Applies size 400 (40px). Supports presence."
+    },
+    {
+      "class": "d-avatar--size-500",
+      "applies": ".d-avatar",
+      "description": "Applies size 500 (48px). Supports presence."
+    },
+    {
+      "class": "d-avatar--size-600",
+      "applies": ".d-avatar",
+      "description": "Applies size 600 (64px)."
+    },
+    {
+      "class": "d-avatar--size-700",
+      "applies": ".d-avatar",
+      "description": "Applies size 700 (96px)."
+    },
+    {
+      "class": "d-avatar--size-800",
+      "applies": ".d-avatar",
+      "description": "Applies size 800 (128px)."
+    },
+    {
+      "class": "d-avatar--size-900",
+      "applies": ".d-avatar",
+      "description": "Applies size 900 (256px)."
+    },
+    {
       "class": "d-avatar--xs",
       "applies": ".d-avatar",
-      "description": "Applies extra-small size."
+      "description": "Deprecated. Alias for size-100 (16px)."
     },
     {
       "class": "d-avatar--sm",
       "applies": ".d-avatar",
-      "description": "Applies small size."
+      "description": "Deprecated. Alias for size-200 (24px)."
     },
     {
       "class": "d-avatar--md",
       "applies": ".d-avatar",
-      "description": "Applies medium size."
+      "description": "Deprecated. Alias for size-300 (32px)."
     },
     {
       "class": "d-avatar--lg",
       "applies": ".d-avatar",
-      "description": "Applies large size."
+      "description": "Deprecated. Alias for size-400 (40px)."
     },
     {
       "class": "d-avatar--xl",
       "applies": ".d-avatar",
-      "description": "Applies extra-large size."
+      "description": "Deprecated. Alias for size-500 (48px)."
     },
     {
-      "class": "d-avatar--color-000",
+      "class": "data-avatar-family=\"[1-12]\"",
       "applies": ".d-avatar",
-      "description": "Applies the default grey color."
+      "description": "Sets the hue family (1-12). Each family is 30° apart on the color wheel, offset from the theme's anchor hue."
     },
     {
-      "class": "d-avatar--color-100",
+      "class": "data-avatar-variant=\"[0-9]\"",
       "applies": ".d-avatar",
-      "description": "Applies a unique color."
-    },
-    {
-      "class": "d-avatar--color-200",
-      "applies": ".d-avatar",
-      "description": "Applies a unique color."
-    },
-    {
-      "class": "d-avatar--color-300",
-      "applies": ".d-avatar",
-      "description": "Applies a unique color."
-    },
-    {
-      "class": "d-avatar--color-400",
-      "applies": ".d-avatar",
-      "description": "Applies a unique color."
-    },
-    {
-      "class": "d-avatar--color-500",
-      "applies": ".d-avatar",
-      "description": "Applies a unique color."
-    },
-    {
-      "class": "d-avatar--color-600",
-      "applies": ".d-avatar",
-      "description": "Applies a unique color."
-    },
-    {
-      "class": "d-avatar--color-700",
-      "applies": ".d-avatar",
-      "description": "Applies a unique color."
-    },
-    {
-      "class": "d-avatar--color-800",
-      "applies": ".d-avatar",
-      "description": "Applies a unique color."
-    },
-    {
-      "class": "d-avatar--color-900",
-      "applies": ".d-avatar",
-      "description": "Applies a unique color."
-    },
-    {
-      "class": "d-avatar--color-1000",
-      "applies": ".d-avatar",
-      "description": "Applies a unique color."
-    },
-    {
-      "class": "d-avatar--color-1100",
-      "applies": ".d-avatar",
-      "description": "Applies a unique color."
-    },
-    {
-      "class": "d-avatar--color-1200",
-      "applies": ".d-avatar",
-      "description": "Applies a unique color."
-    },
-    {
-      "class": "d-avatar--color-1300",
-      "applies": ".d-avatar",
-      "description": "Applies a unique color."
-    },
-    {
-      "class": "d-avatar--color-1400",
-      "applies": ".d-avatar",
-      "description": "Applies a unique color."
-    },
-    {
-      "class": "d-avatar--color-1500",
-      "applies": ".d-avatar",
-      "description": "Applies a unique color."
-    },
-    {
-      "class": "d-avatar--color-1600",
-      "applies": ".d-avatar",
-      "description": "Applies a unique color."
-    },
-    {
-      "class": "d-avatar--color-1700",
-      "applies": ".d-avatar",
-      "description": "Applies a unique color."
-    },
-    {
-      "class": "d-avatar--color-1800",
-      "applies": ".d-avatar",
-      "description": "Applies a unique color."
+      "description": "Sets the lightness/chroma variant (0-9). 0=darkest, 9=lightest. Variants 0-5 use light text, 6-9 use dark text."
     },
     {
       "class": "d-avatar--group",
