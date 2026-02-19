@@ -90,6 +90,7 @@ import DivParagraph from './extensions/div';
 import { MentionPlugin } from './extensions/mentions/mention';
 import { ChannelPlugin } from './extensions/channels/channel';
 import { SlashCommandPlugin } from './extensions/slash_command/slash_command';
+import Variable from './extensions/variable';
 import {
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
@@ -387,6 +388,22 @@ export default {
     },
 
     /**
+     * Whether the input allows variables to be introduced in the text.
+     */
+    allowVariable: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Array of available variable items that can be inserted.
+     */
+    variableItems: {
+      type: Array,
+      default: () => [],
+    },
+
+    /**
      * Additional TipTap extensions to be added to the editor.
      */
     additionalExtensions: {
@@ -560,6 +577,7 @@ export default {
             channel: (node) => this.processChannelNode(node),
             'slash-commands': (node) => this.processSlashCommandsNode(node),
             emoji: (node) => this.processEmojiNode(node),
+            variable: (node) => this.processVariableNode(node),
           };
 
           const processor = nodeTypeMap[node.type];
@@ -636,6 +654,12 @@ export default {
 
         processEmojiNode (node) {
           return node.attrs?.code || '';
+        },
+
+        processVariableNode (node) {
+          const variableId = node.attrs?.id || '';
+          const altText = node.attrs?.altText || '';
+          return `{{${variableId}=${altText}}}`;
         },
 
         processUnknownNode (node) {
@@ -805,6 +829,12 @@ export default {
           onSelectedCommand: (command) => {
             this.$emit('selected-command', command);
           },
+        }));
+      }
+
+      if (this.allowVariable) {
+        extensions.push(Variable.configure({
+          variableItems: this.variableItems,
         }));
       }
 

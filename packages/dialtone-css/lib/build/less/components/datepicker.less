@@ -22,7 +22,6 @@
     padding: 0 var(--dt-space-300);
   }
 
-
   &__month-year {
     justify-content: space-between;
     width: 100%;
@@ -40,6 +39,11 @@
   &__nav-btn {
     width: var(--datepicker-button-size);
     height: var(--datepicker-button-size);
+
+    &:disabled {
+      background-color: var(--dt-color-neutral-transparent);
+      opacity: var(--dt-opacity-900);
+    }
   }
 
   &__weekday {
@@ -76,8 +80,8 @@
     }
 
     &--disabled {
-      color: var(--dt-color-foreground-muted);
       background-color: var(--dt-color-neutral-transparent);
+      opacity: var(--dt-opacity-900);
     }
   }
 }

@@ -11,6 +11,8 @@ export const argsData = {
   onCloseDatepicker: action('close-datepicker'),
   date: new Date(),
   opened: false,
+  minDate: null,
+  maxDate: null,
 };
 
 export const argTypesData = {

@@ -1,3 +1,20 @@
+# [3.203.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.202.0...dialtone-vue/v3.203.0) (2026-02-19)
+
+
+### Bug Fixes
+
+* **Message Input:** DP-174678 protect isSelectionActive ([#1063](https://github.com/dialpad/dialtone/issues/1063)) ([bea37e0](https://github.com/dialpad/dialtone/commit/bea37e0a77a90fc5825824fc2bc5d79363241546))
+
+
+### Code Refactoring
+
+* NO-JIRA export general-row icon from recipe for reuse in client ([#1062](https://github.com/dialpad/dialtone/issues/1062)) ([e268842](https://github.com/dialpad/dialtone/commit/e268842a0afa075da41ac9bee361e993b3f1d48c))
+
+
+### Features
+
+* **Datepicker:** DP-175969 add min and max date props ([#1053](https://github.com/dialpad/dialtone/issues/1053)) ([f3fa6e0](https://github.com/dialpad/dialtone/commit/f3fa6e08d060f520124f86d4712e97e61078acb0))
+
 # [3.202.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.201.0...dialtone-vue/v3.202.0) (2026-02-10)
 
 

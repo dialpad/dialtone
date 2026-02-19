@@ -43,6 +43,8 @@
     <br>
     <dt-datepicker
       :selected-date="currentSelectedDate"
+      :min-date="$attrs.minDate"
+      :max-date="$attrs.maxDate"
       @selected-date="currentSelectedDate = $event; $attrs.onSelectedDate($event)"
       @close-datepicker="$attrs.onCloseDatepicker"
     />
