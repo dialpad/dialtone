@@ -27,25 +27,51 @@
         "
         gap="300"
       >
-        <dt-text
-          as="h1"
-          kind="headline"
-          size="3xl"
+        <dt-stack
+          class="d-px8"
+          gap="400"
+          direction="row"
+          justify="between"
         >
-          Kitchen Sink
+          <dt-text
+            as="h1"
+            kind="headline"
+            size="3xl"
+          >
+            Kitchen Sink
+            <dt-text
+              kind="body"
+              size="md"
+              tone="muted"
+            >
+              {{ sections.length }} components
+            </dt-text>
+          </dt-text>
           <dt-text
             kind="body"
-            size="sm"
-            tone="muted"
+            size="xs"
           >
-            {{ sections.length }} components
+            <dt-link
+              href="/iframe.html?id=kitchen-sink--default&viewMode=story&globals=contrast:default"
+              target="_blank"
+            >
+              <dt-stack
+                gap="300"
+                direction="row"
+              >
+                Open in new window
+                <dt-icon-external-link size="100" />
+              </dt-stack>
+            </dt-link>
           </dt-text>
-        </dt-text>
-        <div v-dt-scrollbar>
+        </dt-stack>
+        <div
+          v-dt-scrollbar
+        >
           <dt-stack
             direction="row"
             gap="400"
-            class="d-pb8"
+            class="d-pb8 d-px8"
           >
             <dt-link
               v-for="section in sections"
@@ -83,7 +109,7 @@
           <dt-stack
             v-for="variant in section.variants"
             :key="variant.name"
-            class="d-ba d-bc-subtle d-p16 d-of-hidden"
+            class="d-ba d-bc-subtle d-p16"
             gap="400"
           >
             <dt-text
@@ -110,6 +136,7 @@ import { ref, h, onErrorCaptured, onMounted, defineComponent, markRaw } from 'vu
 import { DtLink } from '@/components/link';
 import { DtStack } from '@/components/stack';
 import { DtText } from '@/components/text';
+import { DtIconExternalLink } from '@dialpad/dialtone-icons/vue3';
 
 const storyLoaders = import.meta.glob(
   ['../**/*.stories.js', '!../kitchen_sink/**'],
