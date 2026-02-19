@@ -37,6 +37,9 @@ export default defineUserConfig({
 
   bundler: viteBundler({
     viteOptions: {
+      define: {
+        __DIALTONE_DEPLOY_PREVIEW__: JSON.stringify(baseURL.includes('deploy-previews')),
+      },
       build: {
         sourcemap: true,
       },
