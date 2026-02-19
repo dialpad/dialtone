@@ -7,7 +7,7 @@ image: assets/images/components/text.png
 ---
 
 <code-well-header>
-  <dt-stack :direction="{ 'default': 'column', 'md': 'row' }" gap="500" align="baseline">
+  <dt-stack direction="row" gap="500" align="baseline">
     <dt-text kind="headline" size="xl" as="h2">Extra large headline</dt-text>
     <dt-text kind="body" size="md" as="p">Medium body</dt-text>
     <dt-text kind="label" size="sm" as="p">Small label</dt-text>
@@ -84,7 +84,7 @@ vueCode='
 All kinds support `size` prop, but not all sizes are available for each kind. When `kind` is set, size defaults to `md` if not specified.
 
 <code-well-header>
-  <dt-stack class="d-w100p d-ba d-bar4">
+  <dt-stack class="d-w100p d-ba d-bar4 d-of-auto">
     <table class="d-w100p d-table">
       <tr class="d-va-baseline">
         <th></th>
