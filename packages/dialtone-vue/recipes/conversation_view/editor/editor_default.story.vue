@@ -28,6 +28,7 @@
       :show-code-block-button="$attrs.showCodeBlockButton"
       :show-inline-image-button="$attrs.showInlineImageButton"
       :show-variable-button="$attrs.showVariableButton"
+      :variable-categories="$attrs.variableCategories"
       :allow-tables="$attrs.allowTables"
       @focus="$attrs.onFocus"
       @blur="$attrs.onBlur"

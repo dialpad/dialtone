@@ -541,12 +541,17 @@ export default {
     /**
      * Show button to add a variable
      */
-    showAddVariable: {
-      type: Object,
-      default: () => ({
-        showAddVariableButton: false,
-        categories: [],
-      }),
+    showVariableButton: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Variable categories to display when variable button is clicked
+     */
+    variableCategories: {
+      type: Array,
+      default: () => [],
     },
 
     /**
@@ -653,8 +658,8 @@ export default {
     },
 
     flattenedVariableItems () {
-      if (!this.showAddVariable?.categories) return [];
-      return this.showAddVariable.categories.reduce((acc, category) => {
+      if (!this.variableCategories) return [];
+      return this.variableCategories.reduce((acc, category) => {
         return acc.concat(category.items || []);
       }, []);
     },
@@ -849,7 +854,7 @@ export default {
 
     variableButton() {
       return {
-        showBtn: this.showAddVariable.showAddVariableButton,
+        showBtn: this.showVariableButton,
         selector: 'variable',
         icon: DtIconBraces,
         dataQA: 'dt-recipe-editor-variable-btn',
@@ -875,7 +880,7 @@ export default {
     },
 
     filteredCategories() {
-      return this.showAddVariable.categories.filter(
+      return this.variableCategories.filter(
         (category) => this.getFilteredItemsForCategory(category).length,
       );
     },

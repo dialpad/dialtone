@@ -441,25 +441,23 @@ describe('DtRecipeEditor tests', () => {
           await wrapper.unmount();
           propsData = {
             ...baseProps,
-            showAddVariable: {
-              showAddVariableButton: true,
-              categories: [
-                {
-                  name: 'Customer',
-                  items: [
-                    { id: 'customer_name', name: 'Customer Name', placeholder: 'Customer Name' },
-                    { id: 'customer_email', name: 'Customer Email', placeholder: 'Customer Email' },
-                  ],
-                },
-                {
-                  name: 'Ticket',
-                  items: [
-                    { id: 'ticket_id', name: 'Ticket ID', placeholder: 'Ticket ID' },
-                    { id: 'ticket_status', name: 'Ticket Status', placeholder: 'Ticket Status' },
-                  ],
-                },
-              ],
-            },
+            showVariableButton: true,
+            variableCategories: [
+              {
+                name: 'Customer',
+                items: [
+                  { id: 'customer_name', name: 'Customer Name', placeholder: 'Customer Name' },
+                  { id: 'customer_email', name: 'Customer Email', placeholder: 'Customer Email' },
+                ],
+              },
+              {
+                name: 'Ticket',
+                items: [
+                  { id: 'ticket_id', name: 'Ticket ID', placeholder: 'Ticket ID' },
+                  { id: 'ticket_status', name: 'Ticket Status', placeholder: 'Ticket Status' },
+                ],
+              },
+            ],
           };
           _mountWrapper();
           await wrapper.vm.$nextTick();
@@ -484,10 +482,8 @@ describe('DtRecipeEditor tests', () => {
           await wrapper.unmount();
           propsData = {
             ...baseProps,
-            showAddVariable: {
-              showAddVariableButton: false,
-              categories: [],
-            },
+            showVariableButton: false,
+            variableCategories: [],
           };
           _mountWrapper();
           await wrapper.vm.$nextTick();
@@ -638,25 +634,23 @@ describe('DtRecipeEditor tests', () => {
         await wrapper.unmount();
         propsData = {
           ...baseProps,
-          showAddVariable: {
-            showAddVariableButton: true,
-            categories: [
-              {
-                name: 'Customer',
-                items: [
-                  { id: 'customer_name', name: 'Customer Name', placeholder: 'Customer Name' },
-                  { id: 'customer_email', name: 'Customer Email', placeholder: 'Customer Email' },
-                ],
-              },
-              {
-                name: 'Ticket',
-                items: [
-                  { id: 'ticket_id', name: 'Ticket ID', placeholder: 'Ticket ID' },
-                  { id: 'ticket_status', name: 'Ticket Status', placeholder: 'Ticket Status' },
-                ],
-              },
-            ],
-          },
+          showVariableButton: true,
+          variableCategories: [
+            {
+              name: 'Customer',
+              items: [
+                { id: 'customer_name', name: 'Customer Name', placeholder: 'Customer Name' },
+                { id: 'customer_email', name: 'Customer Email', placeholder: 'Customer Email' },
+              ],
+            },
+            {
+              name: 'Ticket',
+              items: [
+                { id: 'ticket_id', name: 'Ticket ID', placeholder: 'Ticket ID' },
+                { id: 'ticket_status', name: 'Ticket Status', placeholder: 'Ticket Status' },
+              ],
+            },
+          ],
         };
         _mountWrapper();
         await wrapper.vm.$nextTick();
