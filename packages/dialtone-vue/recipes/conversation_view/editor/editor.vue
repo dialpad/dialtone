@@ -18,14 +18,12 @@
         gap="300"
       >
         <dt-popover
-          :open="showFontStyleDropdown"
-          :show-close-button="false"
           data-qa="dt-recipe-editor-font-style-input-popover"
           padding="small"
           placement="bottom-start"
-          @opened="toggleFontStyleDropdown"
+          :modal="false"
         >
-          <template #anchor>
+          <template #anchor="{ attrs }">
             <dt-tooltip
               :key="fontStyleButton.key"
               :message="fontStyleButton.tooltipMessage"
@@ -33,6 +31,7 @@
             >
               <template #anchor>
                 <dt-button
+                  v-bind="attrs"
                   :ref="getButtonRef('custom', fontStyleButton.selector)"
                   :active="$refs.richTextEditor?.editor?.isActive(fontStyleButton.selector)"
                   :aria-label="fontStyleButton.tooltipMessage"
@@ -41,9 +40,6 @@
                   importance="clear"
                   kind="muted"
                   size="xs"
-                  @click="fontStyleButton.onClick()"
-                  @keydown.right.stop="shiftActionBarFocusRight"
-                  @keydown.left.stop="shiftActionBarFocusLeft"
                 >
                   <template #icon>
                     <component
@@ -61,7 +57,7 @@
               root-class="d-p8 d-pb4 d-w216"
               type="search"
               :placeholder="i18n.$t('DIALTONE_EDITOR_FONT_STYLE_SEARCH_PLACEHOLDER')"
-              size="md"
+              size="sm"
               role="menuitem"
             >
               <template #leftIcon="{ iconSize }">
@@ -71,10 +67,13 @@
             <dt-list-item
               v-for="fontStyle in filteredFontStyles"
               :key="fontStyle.name"
+              :selected="isCurrentFontFamily(fontStyle.value)"
+              :style="{ fontFamily: fontStyle.value || 'inherit' }"
               role="menuitem"
               navigation-type="arrow-keys"
               @click="
                 close();
+                onFontStyleSelect(fontStyle.value)
               "
             >
               {{ fontStyle.name }}
@@ -268,7 +267,6 @@ import {
 import {
   EDITOR_SUPPORTED_LINK_PROTOCOLS,
   EDITOR_DEFAULT_LINK_PREFIX,
-  AVAILABLE_FONT_STYLES,
 } from './editor_constants.js';
 import { removeClassStyleAttrs, addClassStyleAttrs } from '@/common/utils';
 import { DtButton } from '@/components/button';
@@ -543,8 +541,19 @@ export default {
      * Show font style, size, & color buttons.
      */
     showFontButtons: {
-      type: Boolean,
-      default: true,
+      type: Object,
+      default: () => ({
+        showFontStyleButton: true,
+        showFontSizeButton: true,
+        showFontColorButton: true,
+        fontStyles: [
+          { name: 'Arial', value: null }, // arial is the default font
+          { name: 'Georgia', value: 'Georgia' },
+          { name: 'Helvetica', value: 'Helvetica' },
+          { name: 'Verdana', value: 'Verdana'},
+          { name: 'Times New Roman', value: 'Times New Roman' },
+        ],
+      }),
     },
 
     /**
@@ -836,7 +845,6 @@ export default {
         icon: DtIconType,
         dataQA: 'dt-recipe-editor-font-style-btn',
         tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_FONT_STYLE_BUTTON_LABEL'),
-        onClick: () => this.toggleFontStyleDropdown(true),
       }
     },
 
@@ -858,7 +866,7 @@ export default {
 
     filteredFontStyles () {
       const searchValue = this.fontStyleSearch.toLowerCase();
-      return AVAILABLE_FONT_STYLES.filter((item) =>
+      return this.showFontButtons.fontStyles.filter((item) =>
         item.name.toLowerCase().includes(searchValue),
       );
     },
@@ -932,10 +940,6 @@ export default {
 
     openLinkInput () {
       this.showLinkInput = true;
-    },
-
-    toggleFontStyleDropdown (open) {
-      this.showFontStyleDropdown = open;
     },
 
     updateInput (openedInput) {
@@ -1064,6 +1068,22 @@ export default {
       const currentActionBarBtn = Array.isArray(currentRef) ? currentRef[0] : currentRef;
       previousActionBarBtn.$el.blur();
       currentActionBarBtn.$el.focus();
+    },
+
+    onFontStyleSelect (fontFamily) {
+      if (fontFamily) {
+        this.$refs.richTextEditor?.editor?.chain().focus().setFontFamily(fontFamily).run();
+      } else {
+        this.$refs.richTextEditor?.editor?.chain().focus().unsetFontFamily().run();
+      }
+      this.$refs.richTextEditor?.editor?.commands.focus();
+    },
+
+    isCurrentFontFamily (fontFamily) {
+      if (!fontFamily) {
+        return !this.$refs.richTextEditor?.editor?.getAttributes('textStyle')?.fontFamily;
+      }
+      return this.$refs.richTextEditor?.editor?.isActive('textStyle', { fontFamily });
     },
   },
 };
