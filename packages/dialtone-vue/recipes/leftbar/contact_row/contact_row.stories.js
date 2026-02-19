@@ -1,11 +1,10 @@
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeContactRow from './contact_row.vue';
 
 import DtRecipeContactRowDefaultTemplate from './contact_row_default.story.vue';
 import DtRecipeContactRowVariantsTemplate from './contact_row_variants.story.vue';
 import { AVATAR_PRESENCE_STATES } from '@/components/avatar/avatar_constants';
-import { AVATAR_COLORS } from '@/components/avatar';
 import defaultImage from '@/common/assets/avatar2.png';
 
 // Default Prop Values
@@ -34,16 +33,10 @@ export const argTypesData = {
   },
 
   avatarColor: {
-    options: [
-      undefined,
-      ...AVATAR_COLORS,
-    ],
     control: {
-      type: 'select',
-      labels: {
-        undefined: '(empty)',
-      },
+      type: 'text',
     },
+    description: 'Legacy color prop. Use avatarSeed instead for auto-generated colors.',
   },
 
   // Action Event Handlers

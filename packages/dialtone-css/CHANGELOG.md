@@ -1,9 +1,16 @@
-# [8.72.0-next.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.72.0-next.2...dialtone-css/v8.72.0-next.3) (2026-01-30)
+# [8.72.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.71.7...dialtone-css/v8.72.0) (2026-02-03)
 
 
-### Code Refactoring
+### Features
 
-* **Text:** DLT-2883 rename headline sizes from xxl => 2xl, etc ([#1029](https://github.com/dialpad/dialtone/issues/1029)) ([0ac86f3](https://github.com/dialpad/dialtone/commit/0ac86f30fb59298942a633d0fc42e68ee3ff348f))
+* DP-159552 editor table support when pasting ([#1034](https://github.com/dialpad/dialtone/issues/1034)) ([8ec5592](https://github.com/dialpad/dialtone/commit/8ec559290b2674eb3666e2f74627d91c23d8d257))
+
+## [8.71.7](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.71.6...dialtone-css/v8.71.7) (2026-01-30)
+
+
+### Bug Fixes
+
+* **Contact Info:** DLT-2904 remove min-width from left section ([#1032](https://github.com/dialpad/dialtone/issues/1032)) ([7dbc88d](https://github.com/dialpad/dialtone/commit/7dbc88d699e8adee9f86ace3cb31fab5930f5238))
 
 ## [8.71.6](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.71.5...dialtone-css/v8.71.6) (2026-01-20)
 

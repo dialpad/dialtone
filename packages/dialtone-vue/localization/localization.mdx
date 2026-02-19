@@ -1,4 +1,4 @@
-import {Meta, Subtitle, Canvas, Story} from '@storybook/blocks';
+import {Meta, Subtitle, Canvas, Story} from '@storybook/addon-docs/blocks';
 import * as LocalizationStories from './localization.stories.js';
 
 <Meta of={LocalizationStories}/>
@@ -10,9 +10,7 @@ import * as LocalizationStories from './localization.stories.js';
     Mostly on aria-labels available only to screen readers, but some others might include localized text that's visible.
 </Subtitle>
 
-<Canvas>
-    <Story of={LocalizationStories.Default}/>
-</Canvas>
+<Canvas of={LocalizationStories.Default} />
 
 ## Included components
 

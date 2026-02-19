@@ -111,14 +111,17 @@ describe('DtRecipeContactInfo Tests', () => {
     describe('When `avatarColor` is defined', () => {
       beforeEach(async () => {
         await wrapper.setProps({
-          avatarColor: '000',
+          avatarColor: '540',
         });
+        _setChildWrappers();
       });
       it('Avatar should display', () => {
         expect(avatarElement.exists()).toBe(true);
       });
-      it('Should display correct color', () => {
-        expect(avatarElement.classes()).toContain('d-avatar--color-000');
+      it('Should display correct color via data-attributes', () => {
+        // color '540' = family 5, variant 4
+        expect(avatarElement.attributes('data-avatar-family')).toBe('5');
+        expect(avatarElement.attributes('data-avatar-variant')).toBe('4');
       });
     });
 

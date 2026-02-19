@@ -17,6 +17,12 @@ runs:
       env:
         NODE_AUTH_TOKEN: ${{ github.token }}
 
+    - name: Configure GitHub Packages auth
+      shell: bash
+      run: |
+        echo "@dialpad:registry=https://npm.pkg.github.com" >> ~/.npmrc
+        echo "//npm.pkg.github.com/:_authToken=${{ github.token }}" >> ~/.npmrc
+
     - name: Install dependencies
       shell: bash
       run: pnpm install --frozen-lockfile

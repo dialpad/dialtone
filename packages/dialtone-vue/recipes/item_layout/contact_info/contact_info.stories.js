@@ -1,11 +1,11 @@
 /* eslint-disable max-lines */
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 import DtRecipeContactInfo from './contact_info.vue';
 
 import DtRecipeContactInfoDefaultTemplate from './contact_info_default.story.vue';
 import DtRecipeContactInfoVariantsTemplate from './contact_info_variants.story.vue';
-import { AVATAR_SIZE_MODIFIERS, AVATAR_COLORS } from '@/components/avatar';
+import { AVATAR_SIZE_MODIFIERS } from '@/components/avatar';
 import { PRESENCE_STATES_LIST } from '@/components/presence';
 
 import avatarImage from '@/common/assets/avatar1.png?url';
@@ -49,16 +49,10 @@ export const argTypesData = {
   },
 
   avatarColor: {
-    options: [
-      undefined,
-      ...AVATAR_COLORS,
-    ],
     control: {
-      type: 'select',
-      labels: {
-        undefined: '(empty)',
-      },
+      type: 'text',
     },
+    description: 'Legacy color prop. Use avatarSeed instead for auto-generated colors.',
   },
 
   avatarLabelledBy: {

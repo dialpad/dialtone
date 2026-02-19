@@ -1,4 +1,4 @@
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import ToggleDefault from './toggle_default.story.vue';
 import ToggleVariants from './toggle_variants.story.vue';

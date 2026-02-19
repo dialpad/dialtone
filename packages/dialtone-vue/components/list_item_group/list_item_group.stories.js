@@ -35,7 +35,6 @@ export default {
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {},
 };
 
 // Templates

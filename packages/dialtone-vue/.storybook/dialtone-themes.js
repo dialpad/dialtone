@@ -2,7 +2,7 @@
  * For more theme related documentation, please check out:
  * https://storybook.js.org/docs/react/configure/theming
  */
-import { create } from '@storybook/theming/create';
+import { create } from 'storybook/theming/create';
 import dialpadLogoWhite from '../common/assets/dialpad-logo-white.svg';
 import dialpadLogoBlack from '../common/assets/dialpad-logo-black.svg';
 

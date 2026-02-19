@@ -115,6 +115,7 @@ Find CSS utility classes to style HTML elements. Use when your query mentions CS
 ```
 
 **Parameters:**
+
 - `query` (required): CSS property and/or value
 - `limit` (optional): Maximum results (1-50, default 15)
 
@@ -134,6 +135,7 @@ Find design tokens (CSS variables) from Dialtone's design system. Use when your 
 ```
 
 **Parameters:**
+
 - `query` (required): Token category, name, or value
 - `limit` (optional): Maximum results (1-50, default 15)
 
@@ -152,6 +154,7 @@ Find Vue components from Dialtone's component library with props, events, and sl
 ```
 
 **Returns:**
+
 - Component name
 - Description
 - Props (name, type, default, description)
@@ -160,6 +163,7 @@ Find Vue components from Dialtone's component library with props, events, and sl
 - Import path
 
 **Parameters:**
+
 - `query` (required): Component name or UI element
 - `limit` (optional): Maximum results (1-30, default 10)
 
@@ -179,6 +183,7 @@ Find icons from Dialtone's icon library and learn how to use icon components. Ic
 ```
 
 **Returns:**
+
 - Icon name
 - Categories
 - Keywords
@@ -186,6 +191,7 @@ Find icons from Dialtone's icon library and learn how to use icon components. Ic
 - Usage example
 
 **Parameters:**
+
 - `query` (required): Icon name, category, or keyword
 - `limit` (optional): Maximum results (1-50, default 20)
 
@@ -256,17 +262,20 @@ The server checks for updates automatically on startup. If a new version is avai
 **To update:**
 
 **Project-scoped:**
+
 ```bash
 npm install -D @dialpad/dialtone-mcp-server@latest
 ```
 
 **User-scoped (local directory):**
+
 ```bash
 cd ~/.mcp-servers
 npm update @dialpad/dialtone-mcp-server
 ```
 
 **User-scoped (global):**
+
 ```bash
 npm update -g @dialpad/dialtone-mcp-server
 ```
@@ -279,16 +288,19 @@ After updating, restart your Claude Code conversation to load the new version.
 ### Managing Connections
 
 **List configured servers:**
+
 ```bash
 claude mcp list
 ```
 
 **View specific server:**
+
 ```bash
 claude mcp get dialtone
 ```
 
 **Remove server:**
+
 ```bash
 claude mcp remove dialtone
 ```
@@ -333,27 +345,36 @@ Restart Claude Desktop and look for the 🔌 icon to confirm connection.
 
 1. Verify `.mcp.json` exists in your project root with correct format
 2. Check package is installed:
+
    ```bash
    npm list @dialpad/dialtone-mcp-server
    ```
+
 3. Verify bin command exists:
+
    ```bash
    ls node_modules/.bin/dialtone-mcp-server
    ```
+
 4. Restart Claude Code completely
 
 **For user-scoped installation:**
 
 1. List configured servers:
+
    ```bash
    claude mcp list
    ```
+
 2. Check if dialtone is listed and enabled
 3. Test the server:
+
    ```bash
    claude mcp get dialtone
    ```
+
 4. Check configuration:
+
    ```bash
    cat ~/.claude/mcp.json
    ```

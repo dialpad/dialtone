@@ -244,6 +244,39 @@
       <!-- With tooltip -->
       <dt-stack
         gap="500"
+        class="d-br d-bc-default d-pr16"
+      >
+        <h2>Disabled</h2>
+        <dt-stack gap="500">
+          <dt-split-button
+            size="xs"
+            :alpha-disabled="true"
+            :omega-tooltip-text="omegaTooltipText"
+            :omega-aria-label="omegaAriaLabel"
+          >
+            Alpha disabled
+          </dt-split-button>
+          <dt-split-button
+            size="xs"
+            :omega-disabled="true"
+            :omega-tooltip-text="omegaTooltipText"
+            :omega-aria-label="omegaAriaLabel"
+          >
+            Omega disabled
+          </dt-split-button>
+          <dt-split-button
+            size="xs"
+            :disabled="true"
+            :omega-tooltip-text="omegaTooltipText"
+            :omega-aria-label="omegaAriaLabel"
+          >
+            Both disabled
+          </dt-split-button>
+        </dt-stack>
+      </dt-stack>
+      <!-- With tooltip -->
+      <dt-stack
+        gap="500"
         class="d-br d-pr16"
       >
         <h2>With tooltip</h2>

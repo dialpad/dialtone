@@ -1,9 +1,9 @@
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 import DtAvatar from './avatar.vue';
-import { AVATAR_SIZE_MODIFIERS, AVATAR_PRESENCE_STATES, AVATAR_COLORS } from './avatar_constants';
+import { AVATAR_SIZE_MODIFIERS, AVATAR_PRESENCE_STATES } from './avatar_constants';
 import DtAvatarDefaultTemplate from './avatar_default.story.vue';
 import DtAvatarVariantsTemplate from './avatar_variants.story.vue';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 import defaultImage from '@/common/assets/avatar2.png';
 
@@ -28,12 +28,9 @@ export const argTypesData = {
   },
   color: {
     control: {
-      type: 'select',
-      labels: {
-        undefined: '(empty)',
-      },
+      type: 'text',
     },
-    options: AVATAR_COLORS,
+    description: 'Legacy color prop. Use seed instead for auto-generated colors.',
   },
   iconName: {
     options: ICONS_LIST,

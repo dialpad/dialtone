@@ -31,13 +31,13 @@
     >
       <template #default="{ item }">
         <div class="avatar">
+          <dt-avatar
+            :seed="String(item.id)"
+            size="200"
+            :image-src="item.avatar"
+            image-alt="avatar"
+          />
           {{ item.id }}
-          <img
-            :key="item.avatar"
-            :src="item.avatar"
-            alt="avatar"
-            class="image"
-          >
         </div>
         <div class="text">
           {{ item.message }}
@@ -49,6 +49,7 @@
 
 <script setup>
 import DtScroller from './scroller.vue';
+import { DtAvatar } from '@/components/avatar';
 import { nextTick, ref } from 'vue';
 
 import defaultAvatar from './person.png';
@@ -116,12 +117,10 @@ function replaceItems () {
   border: 1px solid red;
 }
 
-.image{
-  inline-size: 25px;
-  block-size: 25px;
-  border-radius: 50%;
-  margin-inline-end: 10px;
-  object-fit: cover;
+.avatar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .autoscrolling{

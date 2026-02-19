@@ -1,4 +1,4 @@
-import { Meta, Subtitle, Story, Canvas } from '@storybook/addon-docs';
+import { Meta, Subtitle, Story, Canvas } from '@storybook/addon-docs/blocks';
 import { DocImg } from '../components'
 import * as InputStories from '../../components/input/input.stories';
 
@@ -20,9 +20,7 @@ and turn them into living documentation.
 
 For example, the `WithSuccess` story from `input.stories.js` gets rendered as:
 
-<Canvas>
-  <Story of={InputStories.WithSuccess} />
-</Canvas>
+<Canvas of={InputStories.WithSuccess} />
 
 ```js
 # input.stories.js

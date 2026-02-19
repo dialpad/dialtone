@@ -4,7 +4,7 @@ import DtHovercardDefaultTemplate from './hovercard_default.story.vue';
 import DtHovercardManyTemplate from './hovercard_many.story.vue';
 import DtHovercardWithInputTemplate from './hovercard_with_input.story.vue';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import {
   POPOVER_DIRECTIONS,
   POPOVER_PADDING_CLASSES,

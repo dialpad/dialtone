@@ -336,6 +336,35 @@ vueCode='
 '
 />
 
+### With min/max date
+
+Constrain the selectable date range by providing `min-date` and/or `max-date` props. Days outside the range are disabled and navigation buttons are disabled when the target month is fully out of range.
+
+<code-well-header>
+  <dt-datepicker
+    :selected-date="currentSelectedDate"
+    :min-date="minDate"
+    :max-date="maxDate"
+    @selected-date="currentSelectedDate = $event;"
+  />
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<script setup>
+const today = new Date();
+const minDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 5);
+const maxDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 15);
+</script>
+
+<dt-datepicker
+  :selected-date="new Date()"
+  :min-date="minDate"
+  :max-date="maxDate"
+/>
+'
+showHtmlWarning />
+
 ## Vue API
 
 <component-vue-api component-name="datepicker"></component-vue-api>
@@ -523,6 +552,10 @@ const { formatLong, formatMedium, formatShort, formatNoYear, formatNumerical } =
 
 const currentSelectedDate = ref(new Date());
 const datepickerOpened = ref(false);
+
+const today = new Date();
+const minDate = ref(new Date(today.getFullYear(), today.getMonth(), today.getDate() - 5));
+const maxDate = ref(new Date(today.getFullYear(), today.getMonth(), today.getDate() + 15));
 
 const toggleDatepicker = () => {
   datepickerOpened.value = !datepickerOpened.value;

@@ -1,4 +1,4 @@
-import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/addon-docs/blocks';
 
 import * as GroupRowStories from './group_row.stories';
 
@@ -12,15 +12,11 @@ import * as GroupRowStories from './group_row.stories';
 
 ## Base Style
 
-<Canvas>
-  <Story of={GroupRowStories.Default} />
-</Canvas>
+<Canvas of={GroupRowStories.Default} />
 
 ## Variants
 
-<Canvas>
-  <Story of={GroupRowStories.Variants} />
-</Canvas>
+<Canvas of={GroupRowStories.Variants} />
 
 ## Slots, Props & Events
 

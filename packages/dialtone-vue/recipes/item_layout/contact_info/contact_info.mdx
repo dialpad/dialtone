@@ -1,4 +1,4 @@
-import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/addon-docs/blocks';
 
 import * as ContactInfoStories from './contact_info.stories';
 
@@ -29,15 +29,11 @@ it is required to provide a value in `avatarFullName` to use in the alt attribut
 If `avatarSrc` is empty, it will fall back to `avatarFullName`, and user initials will be displayed
 in avatar.
 
-<Canvas>
-  <Story of={ContactInfoStories.Default} />
-</Canvas>
+<Canvas of={ContactInfoStories.Default} />
 
 ## Variants
 
-<Canvas>
-  <Story of={ContactInfoStories.Variants} />
-</Canvas>
+<Canvas of={ContactInfoStories.Variants} />
 
 ## Slots, Props & Events
 

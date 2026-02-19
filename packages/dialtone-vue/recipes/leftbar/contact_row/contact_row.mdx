@@ -1,4 +1,4 @@
-import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/addon-docs/blocks';
 
 import * as ContactRowStories from './contact_row.stories';
 
@@ -12,15 +12,11 @@ import * as ContactRowStories from './contact_row.stories';
 
 ## Base Style
 
-<Canvas>
-  <Story of={ContactRowStories.Default} />
-</Canvas>
+<Canvas of={ContactRowStories.Default} />
 
 ## Variants
 
-<Canvas>
-  <Story of={ContactRowStories.Variants} />
-</Canvas>
+<Canvas of={ContactRowStories.Variants} />
 
 ## Slots, Props & Events
 

@@ -1,4 +1,4 @@
-import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/addon-docs/blocks';
 
 import * as EmojiRowStories from './emoji_row.stories';
 
@@ -14,9 +14,7 @@ import * as EmojiRowStories from './emoji_row.stories';
 
 Pass in an array of reactions to be shown
 
-<Canvas>
-  <Story of={EmojiRowStories.Default} />
-</Canvas>
+<Canvas of={EmojiRowStories.Default} />
 
 ## Slots, Props & Events
 

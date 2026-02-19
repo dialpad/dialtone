@@ -1,5 +1,5 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import DtLink from './link.vue';
 
 import DtLinkDefaultTemplate from './link_default.story.vue';
