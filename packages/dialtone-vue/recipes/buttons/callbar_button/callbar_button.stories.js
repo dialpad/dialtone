@@ -1,4 +1,4 @@
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 import DtRecipeCallbarButton from './callbar_button.vue';
 import { CALLBAR_BUTTON_VALID_WIDTH_SIZE } from './callbar_button_constants';

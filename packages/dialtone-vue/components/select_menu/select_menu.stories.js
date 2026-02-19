@@ -1,4 +1,4 @@
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { SELECT_SIZE_MODIFIERS } from './select_menu_constants';
 import DtSelectMenu from './select_menu.vue';

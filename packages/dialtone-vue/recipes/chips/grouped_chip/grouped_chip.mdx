@@ -1,4 +1,4 @@
-import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/addon-docs/blocks';
 
 import * as GroupedChipStories from './grouped_chip.stories';
 
@@ -25,9 +25,7 @@ This component has 4 slots: **leftIcon**, **leftContent**, **rightIcon** and **r
 
 **rightContent** is used to display content and is placed on the right hand side.
 
-<Canvas>
-  <Story of={GroupedChipStories.Default} />
-</Canvas>
+<Canvas of={GroupedChipStories.Default} />
 
 ## Slots, Props & Events
 

@@ -36,15 +36,15 @@
             :circle="true"
             size="sm"
             importance="clear"
-            :disabled="!day.currentMonth"
+            :disabled="day.disabled"
             :class="{
-              'd-datepicker__day--disabled': !day.currentMonth,
+              'd-datepicker__day--disabled': day.disabled,
               'd-datepicker__day--selected': selectedDay
-                ? ((day.text === selectedDay) && day.currentMonth)
+                ? ((day.text === selectedDay) && !day.disabled)
                 : day.selected,
             }"
             type="button"
-            :aria-selected="!!selectedDay ? ((day.text === selectedDay) && day.currentMonth) : day.selected"
+            :aria-selected="!!selectedDay ? ((day.text === selectedDay) && !day.disabled) : day.selected"
             :aria-label="dayAriaLabel(day)"
             role="option"
             @click="selectDay(day)"

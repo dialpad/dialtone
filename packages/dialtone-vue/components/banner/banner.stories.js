@@ -1,4 +1,4 @@
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import DtBanner from './banner.vue';
 import { NOTICE_KINDS } from '@/components/notice/index.js';
 import BannerDefault from './banner_default.story.vue';

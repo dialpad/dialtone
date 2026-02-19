@@ -1,4 +1,4 @@
-import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/addon-docs/blocks';
 
 import * as TooltipStories from './tooltip.stories';
 
@@ -24,29 +24,21 @@ A tooltip has two slots:
 1. **the anchor** required slot
 2. **the default** slot (which could be replaced with prop message)
 
-<Canvas>
-    <Story of={TooltipStories.Default} />
-</Canvas>
+<Canvas of={TooltipStories.Default} />
 
 ## Variants
 
-<Canvas>
-    <Story of={TooltipStories.Variants} />
-</Canvas>
+<Canvas of={TooltipStories.Variants} />
 
 ## Flip
 
-<Canvas>
-    <Story of={TooltipStories.Flip} />
-</Canvas>
+<Canvas of={TooltipStories.Flip} />
 
 ## Dinamically change the position when the content changes
 
 This is achieved by setting the property `sticky` to "popper"
 
-<Canvas>
-    <Story of={TooltipStories.ChangeOnClick} />
-</Canvas>
+<Canvas of={TooltipStories.ChangeOnClick} />
 
 ## Props & Slots
 

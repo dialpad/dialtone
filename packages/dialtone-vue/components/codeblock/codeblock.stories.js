@@ -19,7 +19,6 @@ export default {
   component: DtCodeblock,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
-  parameters: {},
 };
 
 // Templates

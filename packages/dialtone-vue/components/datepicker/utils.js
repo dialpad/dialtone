@@ -1,5 +1,5 @@
 import {
-  startOfWeek, addDays, getMonth, isEqual,
+  startOfWeek, startOfDay, addDays, getMonth, isEqual,
   addMonths, startOfMonth, getDay, getDate,
   subMonths, endOfMonth,
 } from 'date-fns';
@@ -11,19 +11,24 @@ const _parsedGetDate = (value) => (value ? new Date(value) : new Date());
  * Get 7 days from the provided start date, month is used to check
  * whether the date is from the specified month or in the offset
  */
-const getWeekDays = (startDay, month, selectedDay) => {
+const getWeekDays = (startDay, month, selectedDay, minDate = null, maxDate = null) => {
   const startDate = _parsedGetDate(JSON.parse(JSON.stringify(startDay)));
+  const normalizedMin = minDate ? startOfDay(minDate) : null;
+  const normalizedMax = maxDate ? startOfDay(maxDate) : null;
   const dates = [];
   for (let i = 0; i < 7; i++) {
     const next = addDays(startDate, i);
     const isNext = getMonth(next) !== month;
+    const disabled = isNext
+      || (normalizedMin && startOfDay(next) < normalizedMin)
+      || (normalizedMax && startOfDay(next) > normalizedMax);
     dates.push({
       text: next.getDate(),
       value: next,
       currentMonth: !isNext,
+      disabled: !!disabled,
       isFirstDayOfMonth: next.getDate() === 1 && !isNext,
-      // will be selected if the date is the same as the selected day and is from the current month
-      selected: selectedDay ? (next.getDate() === selectedDay && !isNext) : false,
+      selected: selectedDay ? (next.getDate() === selectedDay && !disabled) : false,
     });
   }
   return dates;
@@ -39,7 +44,7 @@ const isDateEqual = (date, dateToCompare) => {
 /**
  * Get days for the calendar to be displayed in a table grouped by weeks
  */
-export const getCalendarDays = (month, year, selectedDay) => {
+export const getCalendarDays = (month, year, selectedDay, minDate = null, maxDate = null) => {
   const weeks = [];
   const firstDate = _parsedGetDate(new Date(year, month));
   const lastDate = _parsedGetDate(new Date(year, month + 1, 0));
@@ -49,7 +54,7 @@ export const getCalendarDays = (month, year, selectedDay) => {
   const firstDateInCalendar = startOfWeek(firstDate, { weekStartsOn });
 
   const addDaysToWeek = (date) => {
-    const days = getWeekDays(date, month, selectedDay);
+    const days = getWeekDays(date, month, selectedDay, minDate, maxDate);
 
     weeks.push({ days });
 

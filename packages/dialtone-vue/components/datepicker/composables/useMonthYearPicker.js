@@ -1,5 +1,5 @@
 import { computed, ref, watch } from 'vue';
-import { addMonths, getDate, getMonth, getYear, set, subMonths } from 'date-fns';
+import { addMonths, endOfMonth, getDate, getMonth, getYear, set, startOfDay, startOfMonth, subMonths } from 'date-fns';
 import { formatMonth, getCalendarDays } from '../utils.js';
 import { INTL_MONTH_FORMAT } from '../datepicker_constants';
 import { returnFirstEl } from '@/common/utils';
@@ -14,7 +14,31 @@ export function useMonthYearPicker (props, emits) {
   const i18n = new DialtoneLocalization();
 
   const calendarDays = computed(() => {
-    return getCalendarDays(selectMonth.value, selectYear.value, highlightedDay.value);
+    return getCalendarDays(selectMonth.value, selectYear.value, highlightedDay.value, props.minDate, props.maxDate);
+  });
+
+  const isPrevMonthDisabled = computed(() => {
+    if (!props.minDate) return false;
+    const prevMonth = subMonths(new Date(selectYear.value, selectMonth.value, 1), 1);
+    return endOfMonth(prevMonth) < startOfDay(props.minDate);
+  });
+
+  const isNextMonthDisabled = computed(() => {
+    if (!props.maxDate) return false;
+    const nextMonth = addMonths(new Date(selectYear.value, selectMonth.value, 1), 1);
+    return startOfMonth(nextMonth) > startOfDay(props.maxDate);
+  });
+
+  const isPrevYearDisabled = computed(() => {
+    if (!props.minDate) return false;
+    const prevYearMonth = new Date(selectYear.value - 1, selectMonth.value, 1);
+    return endOfMonth(prevYearMonth) < startOfDay(props.minDate);
+  });
+
+  const isNextYearDisabled = computed(() => {
+    if (!props.maxDate) return false;
+    const nextYearMonth = new Date(selectYear.value + 1, selectMonth.value, 1);
+    return startOfMonth(nextYearMonth) > startOfDay(props.maxDate);
   });
 
   watch(selectMonth, () => {
@@ -26,6 +50,14 @@ export function useMonthYearPicker (props, emits) {
     highlightDay();
     emits('calendar-days', calendarDays.value);
   }, { immediate: true });
+
+  watch(() => props.minDate, () => {
+    emits('calendar-days', calendarDays.value);
+  });
+
+  watch(() => props.maxDate, () => {
+    emits('calendar-days', calendarDays.value);
+  });
 
   function formattedMonth (month) {
     return formatMonth(month, INTL_MONTH_FORMAT, i18n.currentLocale);
@@ -93,6 +125,9 @@ export function useMonthYearPicker (props, emits) {
   }
 
   function changeMonth (value) {
+    if (value === -1 && isPrevMonthDisabled.value) return;
+    if (value === 1 && isNextMonthDisabled.value) return;
+
     // Adjust year when changing from January to December or vice versa
     if ((selectMonth.value === 0 && value === -1) || (selectMonth.value === 11 && value === 1)) {
       selectYear.value += value;
@@ -107,6 +142,9 @@ export function useMonthYearPicker (props, emits) {
   }
 
   function changeYear (value) {
+    if (value === -1 && isPrevYearDisabled.value) return;
+    if (value === 1 && isNextYearDisabled.value) return;
+
     selectYear.value = selectYear.value + value;
   }
 
@@ -145,6 +183,10 @@ export function useMonthYearPicker (props, emits) {
     changeYear,
     goToNextMonth,
     goToPrevMonth,
+    isPrevMonthDisabled,
+    isNextMonthDisabled,
+    isPrevYearDisabled,
+    isNextYearDisabled,
     previousYearAriaLabel,
     previousMonthAriaLabel,
     nextYearAriaLabel,

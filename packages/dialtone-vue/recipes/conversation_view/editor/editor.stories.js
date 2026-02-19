@@ -1,4 +1,4 @@
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeEditor from './editor.vue';
 import DtRecipeEditorDefault from './editor_default.story.vue';

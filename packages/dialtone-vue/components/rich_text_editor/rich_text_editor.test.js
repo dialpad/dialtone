@@ -471,7 +471,64 @@ describe('DtRichTextEditor tests', () => {
           output = wrapper.vm.getOutput();
           expect(output).toBe('<strong>bold pasted text</strong>');
         });
+        it('should preserve tables when pasted', async () => {
+          // When new extensions are added due to change in props editor needs to be recreated
+          wrapper.unmount();
+          props['outputFormat'] = 'html';
+          props['modelValue'] = '';
+          props['allowTables'] = true;
+          editorEl?.remove();
+          wrapper = mount(DtRichTextEditor, {
+            props,
+            components: { EditorContent },
+            listeners,
+            attrs,
+            slots,
+            attachTo: document.body,
+          });
+          await wrapper.vm.$nextTick();
+          editor = wrapper.find('[data-qa="dt-rich-text-editor"]').find('div[contenteditable]');
+          editorEl = document.getElementsByClassName('qa-editor')[0];
 
+          const clipboardData = new DataTransfer();
+          clipboardData.setData('text/plain', 'testtesttesttest');
+          clipboardData.setData('text/html', '<table><tr><td>test</td><td>test</td></tr><tr><td>test</td><td>test</td></tr></table>');
+
+          const pasteEvent = new ClipboardEvent('paste', {
+            clipboardData,
+            bubbles: true,
+            cancelable: true,
+          });
+
+          editorEl.dispatchEvent(pasteEvent);
+          await wrapper.vm.$nextTick();
+          const output = wrapper.vm.getOutput();
+          // Check that the table has been converted to a table with the enforced styling
+          expect(output).toBe(`<table style="min-width: 50px;"><colgroup><col style="min-width: 25px;"><col style="min-width: 25px;"></colgroup><tbody><tr><td colspan="1" rowspan="1"><p>test</p></td><td colspan="1" rowspan="1"><p>test</p></td></tr><tr><td colspan="1" rowspan="1"><p>test</p></td><td colspan="1" rowspan="1"><p>test</p></td></tr></tbody></table>`);
+        });
+
+        it('should not preserve tables when pasted without allow tables', async () => {
+          await wrapper.setProps({
+            pasteRichText: false,
+            outputFormat: 'html',
+            modelValue: '',
+          });
+          const clipboardData = new DataTransfer();
+          clipboardData.setData('text/plain', 'testtesttesttest');
+          clipboardData.setData('text/html', '<table><tr><td>test</td><td>test</td></tr><tr><td>test</td><td>test</td></tr></table>');
+
+          const pasteEvent = new ClipboardEvent('paste', {
+            clipboardData,
+            bubbles: true,
+            cancelable: true,
+          });
+
+          editorEl.dispatchEvent(pasteEvent);
+          await wrapper.vm.$nextTick();
+          const output = wrapper.vm.getOutput();
+          // Check that the table has been converted to text;
+          expect(output).toBe(`<p>testtesttesttest</p>`);
+        });
         it('if pasteRichText is false, line breaks should be preserved as hard breaks', async () => {
           await wrapper.setProps({
             pasteRichText: false,

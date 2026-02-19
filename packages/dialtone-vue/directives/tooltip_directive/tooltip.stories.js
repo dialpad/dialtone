@@ -8,7 +8,7 @@ export const argTypesData = {};
 // Story Collection
 export default {
   title: 'Directives/Tooltip',
-  component: '<div></div>',
+  component: TooltipDirectiveDefaultTemplate,
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,

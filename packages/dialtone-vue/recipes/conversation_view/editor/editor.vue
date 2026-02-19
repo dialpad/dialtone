@@ -175,6 +175,7 @@
         :output-format="htmlOutputFormat"
         :placeholder="placeholder"
         :use-div-tags="useDivTags"
+        :allow-tables="allowTables"
         data-qa="dt-rich-text-editor"
         v-bind="removeClassStyleAttrs($attrs)"
         @text-input="onTextInput"
@@ -464,6 +465,14 @@ export default {
      * Use div tags instead of paragraph tags to show text
      */
     useDivTags: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Allow Tables to be used in to the editor
+     */
+    allowTables: {
       type: Boolean,
       default: false,
     },
