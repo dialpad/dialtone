@@ -245,7 +245,7 @@ export default {
         const channel = addons.getChannel();
 
         channel.on(DARK_MODE_EVENT_NAME, (isDark) => {
-          setTheme(isDark ? DpDark : DpLight);
+          setMode(isDark ? 'dark' : 'light', document.documentElement);
         });
 
         useEffect(() => {
