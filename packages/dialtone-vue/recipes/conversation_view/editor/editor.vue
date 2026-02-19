@@ -13,111 +13,167 @@
       gap="450"
     >
       <dt-stack
-        v-if="fontStyleButton.showBtn"
-        direction="row"
-        gap="300"
-      >
-        <dt-popover
-          data-qa="dt-recipe-editor-font-style-input-popover"
-          padding="small"
-          placement="bottom-start"
-          :modal="false"
-        >
-          <template #anchor="{ attrs }">
-            <dt-tooltip
-              :key="fontStyleButton.key"
-              :message="fontStyleButton.tooltipMessage"
-              placement="top"
-            >
-              <template #anchor>
-                <dt-button
-                  v-bind="attrs"
-                  :ref="getButtonRef('custom', fontStyleButton.selector)"
-                  :active="$refs.richTextEditor?.editor?.isActive(fontStyleButton.selector)"
-                  :aria-label="fontStyleButton.tooltipMessage"
-                  :data-qa="fontStyleButton.dataQA"
-                  :tabindex="canFocus(getButtonRef('custom', fontStyleButton.selector)) ? 0 : -1"
-                  importance="clear"
-                  kind="muted"
-                  size="xs"
-                >
-                  <template #icon>
-                    <component
-                      :is="fontStyleButton.icon"
-                      size="200"
-                    />
-                  </template>
-                </dt-button>
-              </template>
-            </dt-tooltip>
-          </template>
-          <template #content="{ close }">
-            <dt-input
-              v-model="fontStyleSearch"
-              root-class="d-p8 d-pb4 d-w216"
-              type="search"
-              :placeholder="i18n.$t('DIALTONE_EDITOR_FONT_STYLE_SEARCH_PLACEHOLDER')"
-              size="sm"
-              role="menuitem"
-            >
-              <template #leftIcon="{ iconSize }">
-                <dt-icon-search :size="iconSize" />
-              </template>
-            </dt-input>
-            <dt-list-item
-              v-for="fontStyle in filteredFontStyles"
-              :key="fontStyle.name"
-              :selected="isCurrentFontFamily(fontStyle.value)"
-              :style="{ fontFamily: fontStyle.value || 'inherit' }"
-              role="menuitem"
-              navigation-type="arrow-keys"
-              @click="
-                close();
-                onFontStyleSelect(fontStyle.value)
-              "
-            >
-              {{ fontStyle.name }}
-            </dt-list-item>
-          </template>
-        </dt-popover>
-      </dt-stack>
-
-      <dt-stack
         v-for="buttonGroup in buttonGroups"
         :key="buttonGroup.key"
         direction="row"
         gap="300"
       >
-        <dt-tooltip
-          v-for="button in buttonGroup.buttonGroup"
-          :key="getButtonKey(buttonGroup.key, button.selector)"
-          :message="button.tooltipMessage"
-          placement="top"
-        >
-          <template #anchor>
-            <dt-button
-              :ref="getButtonRef(buttonGroup.key, button.selector)"
-              :active="$refs.richTextEditor?.editor?.isActive(button.selector)"
-              :aria-label="button.tooltipMessage"
-              :data-qa="button.dataQA"
-              :tabindex="canFocus(getButtonRef(buttonGroup.key, button.selector)) ? 0 : -1"
-              importance="clear"
-              kind="muted"
-              size="xs"
-              @click="button.onClick()"
-              @keydown.right.stop="shiftActionBarFocusRight"
-              @keydown.left.stop="shiftActionBarFocusLeft"
-            >
-              <template #icon>
-                <component
-                  :is="button.icon"
-                  size="200"
-                />
-              </template>
-              {{ button?.label }}
-            </dt-button>
-          </template>
-        </dt-tooltip>
+        <template v-for="button in buttonGroup.buttonGroup">
+          <!-- fontStyle button -->
+          <dt-popover
+            v-if="button.selector === 'fontStyle'"
+            :key="getButtonKey(buttonGroup.key, button.selector)"
+            data-qa="dt-recipe-editor-font-style-input-popover"
+            padding="small"
+            placement="bottom-start"
+            :modal="false"
+          >
+            <template #anchor="{ attrs }">
+              <dt-tooltip
+                :message="button.tooltipMessage"
+                placement="top"
+              >
+                <template #anchor>
+                  <dt-button
+                    v-bind="attrs"
+                    :ref="getButtonRef(buttonGroup.key, button.selector)"
+                    :active="$refs.richTextEditor?.editor?.isActive(button.selector)"
+                    :aria-label="button.tooltipMessage"
+                    :data-qa="button.dataQA"
+                    :tabindex="canFocus(getButtonRef(buttonGroup.key, button.selector)) ? 0 : -1"
+                    importance="clear"
+                    kind="muted"
+                    size="xs"
+                    @keydown.right.stop="shiftActionBarFocusRight"
+                    @keydown.left.stop="shiftActionBarFocusLeft"
+                  >
+                    <template #icon>
+                      <component
+                        :is="button.icon"
+                        size="200"
+                      />
+                    </template>
+                  </dt-button>
+                </template>
+              </dt-tooltip>
+            </template>
+            <template #content="{ close }">
+              <dt-input
+                v-model="fontStyleSearch"
+                root-class="d-p8 d-pb4 d-w216"
+                type="search"
+                :placeholder="i18n.$t('DIALTONE_EDITOR_FONT_STYLE_SEARCH_PLACEHOLDER')"
+                size="sm"
+                role="menuitem"
+              >
+                <template #leftIcon="{ iconSize }">
+                  <dt-icon-search :size="iconSize" />
+                </template>
+              </dt-input>
+              <dt-list-item
+                v-for="fontStyle in filteredFontStyles"
+                :key="fontStyle.name"
+                :selected="isCurrentFontFamily(fontStyle.value)"
+                :style="{ fontFamily: fontStyle.value || 'inherit' }"
+                role="menuitem"
+                navigation-type="arrow-keys"
+                @click="
+                  close();
+                  onFontStyleSelect(fontStyle.value)
+                "
+              >
+                {{ fontStyle.name }}
+              </dt-list-item>
+            </template>
+          </dt-popover>
+          <!-- fontSize button -->
+          <dt-popover
+            v-else-if="button.selector === 'fontSize'"
+            :key="getButtonKey(buttonGroup.key, button.selector)"
+            data-qa="dt-recipe-editor-font-size-input-popover"
+            padding="small"
+            placement="bottom-start"
+            :modal="false"
+          >
+            <template #anchor="{ attrs }">
+              <dt-tooltip
+                :message="button.tooltipMessage"
+                placement="top"
+              >
+                <template #anchor>
+                  <dt-button
+                    v-bind="attrs"
+                    :ref="getButtonRef(buttonGroup.key, button.selector)"
+                    :active="$refs.richTextEditor?.editor?.isActive(button.selector)"
+                    :aria-label="button.tooltipMessage"
+                    :data-qa="button.dataQA"
+                    :tabindex="canFocus(getButtonRef(buttonGroup.key, button.selector)) ? 0 : -1"
+                    importance="clear"
+                    kind="muted"
+                    size="xs"
+                    @keydown.right.stop="shiftActionBarFocusRight"
+                    @keydown.left.stop="shiftActionBarFocusLeft"
+                  >
+                    <template #icon>
+                      <component
+                        :is="button.icon"
+                        size="200"
+                      />
+                    </template>
+                  </dt-button>
+                </template>
+              </dt-tooltip>
+            </template>
+            <template #content="{ close }">
+              <dt-list-item
+                v-for="fontSize in fontSizes"
+                :key="fontSize.name"
+                :selected="isCurrentFontSize(fontSize.value)"
+
+                role="menuitem"
+                navigation-type="arrow-keys"
+                @click="
+                  close();
+                  onFontSizeSelect(fontSize.value)
+                "
+              >
+                <span :style="{ fontSize: fontSize.value }">{{ fontSize.name }}</span>
+              </dt-list-item>
+            </template>
+          </dt-popover>
+
+          <!-- Regular buttons -->
+          <dt-tooltip
+            v-else
+            :key="getButtonKey(buttonGroup.key, button.selector)"
+            :message="button.tooltipMessage"
+            placement="top"
+          >
+            <template #anchor>
+              <dt-button
+                :ref="getButtonRef(buttonGroup.key, button.selector)"
+                :active="$refs.richTextEditor?.editor?.isActive(button.selector)"
+                :aria-label="button.tooltipMessage"
+                :data-qa="button.dataQA"
+                :tabindex="canFocus(getButtonRef(buttonGroup.key, button.selector)) ? 0 : -1"
+                importance="clear"
+                kind="muted"
+                size="xs"
+                @click="button.onClick()"
+                @keydown.right.stop="shiftActionBarFocusRight"
+                @keydown.left.stop="shiftActionBarFocusLeft"
+              >
+                <template #icon>
+                  <component
+                    :is="button.icon"
+                    size="200"
+                  />
+                </template>
+                {{ button?.label }}
+              </dt-button>
+            </template>
+          </dt-tooltip>
+        </template>
         <div class="d-recipe-editor__button-group-divider" />
       </dt-stack>
       <dt-stack
@@ -258,7 +314,6 @@
 </template>
 
 <script>
-/* eslint-disable max-lines */
 import {
   DtRichTextEditor,
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
@@ -538,22 +593,51 @@ export default {
     },
 
     /**
-     * Show font style, size, & color buttons.
+     * Show font style button.
      */
-    showFontButtons: {
-      type: Object,
-      default: () => ({
-        showFontStyleButton: true,
-        showFontSizeButton: true,
-        showFontColorButton: true,
-        fontStyles: [
-          { name: 'Arial', value: null }, // arial is the default font
-          { name: 'Georgia', value: 'Georgia' },
-          { name: 'Helvetica', value: 'Helvetica' },
-          { name: 'Verdana', value: 'Verdana'},
-          { name: 'Times New Roman', value: 'Times New Roman' },
-        ],
-      }),
+    showFontStyleButton: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Show font size button.
+     */
+    showFontSizeButton: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Show font color button.
+     */
+    showFontColorButton: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Available font styles for the font style dropdown.
+     */
+    fontStyles: {
+      type: Array,
+      default: () => [
+        { name: 'Arial', value: null }, // arial is the default font
+        { name: 'Georgia', value: 'Georgia' },
+        { name: 'Helvetica', value: 'Helvetica' },
+        { name: 'Verdana', value: 'Verdana'},
+        { name: 'Times New Roman', value: 'Times New Roman' },
+      ],
+    },
+
+    fontSizes : {
+      type: Array,
+      default: () => [
+        { name: 'Small', value: '12px'},
+        { name: 'Normal', value: '15px'},
+        { name: 'Large', value: '24px'},
+        { name: 'Huge', value: '36px'},
+      ],
     },
 
     /**
@@ -705,6 +789,20 @@ export default {
     textFormatButtons () {
       return [
         {
+          showBtn: this.showFontStyleButton,
+          selector: 'fontStyle',
+          icon: DtIconType,
+          dataQA: 'dt-recipe-editor-font-style-btn',
+          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_FONT_STYLE_BUTTON_LABEL'),
+        },
+        {
+          showBtn: this.showFontSizeButton,
+          selector: 'fontSize',
+          icon: DtIconType,
+          dataQA: 'dt-recipe-editor-font-size-btn',
+          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_FONT_SIZE_BUTTON_LABEL'),
+        },
+        {
           showBtn: this.showBoldButton,
           selector: 'bold',
           icon: DtIconBold,
@@ -838,16 +936,6 @@ export default {
       };
     },
 
-    fontStyleButton () {
-      return {
-        showBtn: this.showFontButtons,
-        selector: 'fontStyle',
-        icon: DtIconType,
-        dataQA: 'dt-recipe-editor-font-style-btn',
-        tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_FONT_STYLE_BUTTON_LABEL'),
-      }
-    },
-
     confirmSetLinkButtonLabels () {
       return this.i18n.$ta('DIALTONE_EDITOR_CONFIRM_SET_LINK_BUTTON');
     },
@@ -866,7 +954,7 @@ export default {
 
     filteredFontStyles () {
       const searchValue = this.fontStyleSearch.toLowerCase();
-      return this.showFontButtons.fontStyles.filter((item) =>
+      return this.fontStyles.filter((item) =>
         item.name.toLowerCase().includes(searchValue),
       );
     },
@@ -1084,6 +1172,20 @@ export default {
         return !this.$refs.richTextEditor?.editor?.getAttributes('textStyle')?.fontFamily;
       }
       return this.$refs.richTextEditor?.editor?.isActive('textStyle', { fontFamily });
+    },
+
+    onFontSizeSelect (fontSize) {
+      // TODO: requires tiptap V3 for support
+      this.$refs.richTextEditor?.editor?.chain().focus().setFontSize(fontSize).run();
+      this.$refs.richTextEditor?.editor?.commands.focus();
+    },
+
+    isCurrentFontSize (fontSize) {
+      // TODO: requires tiptap V3 for support
+      if (!fontSize) {
+        return !this.$refs.richTextEditor?.editor?.getAttributes('textStyle')?.fontSize;
+      }
+      return this.$refs.richTextEditor?.editor?.isActive('textStyle', { fontSize });
     },
   },
 };

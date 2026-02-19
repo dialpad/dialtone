@@ -27,6 +27,7 @@
       :show-quick-replies-button="$attrs.showQuickRepliesButton"
       :show-code-block-button="$attrs.showCodeBlockButton"
       :show-inline-image-button="$attrs.showInlineImageButton"
+      :show-font-buttons="$attrs.showFontButtons"
       :allow-tables="$attrs.allowTables"
       @focus="$attrs.onFocus"
       @blur="$attrs.onBlur"

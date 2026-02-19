@@ -5,6 +5,7 @@ import DtRecipeEditor from './editor.vue';
 let wrapper;
 let editor;
 
+let fontStyleBtn;
 let boldFormatBtn;
 let italicsFormatBtn;
 let underlineFormatBtn;
@@ -44,6 +45,7 @@ const _setChildWrappers = () => {
   editor = wrapper.find('[data-qa="dt-rich-text-editor"]').find('div[contenteditable]');
 
   // buttons
+  fontStyleBtn = wrapper.find('[data-qa="dt-recipe-editor-font-style-btn"]');
   boldFormatBtn = wrapper.find('[data-qa="dt-recipe-editor-bold-btn"]');
   italicsFormatBtn = wrapper.find('[data-qa="dt-recipe-editor-italics-btn"]');
   underlineFormatBtn = wrapper.find('[data-qa="dt-recipe-editor-underline-btn"]');
@@ -582,15 +584,15 @@ describe('DtRecipeEditor tests', () => {
       it('should have only the first button as a focusable item', async function () {
         await quickRepliesBtn.trigger('focus');
         expect(quickRepliesBtn.html()).toContain(`tabindex="0"`);
-        expect(boldFormatBtn.html()).toContain(`tabindex="-1"`);
+        expect(fontStyleBtn.html()).toContain(`tabindex="-1"`);
       });
 
       it('should focus the next button to the right when right arrow key is pressed', async function () {
         await quickRepliesBtn.trigger('focus');
         await quickRepliesBtn.trigger('keydown', { key: 'Right' });
         expect(quickRepliesBtn.html()).toContain(`tabindex="-1"`);
-        expect(boldFormatBtn.html()).toContain(`tabindex="0"`);
-        expect(document.activeElement).toBe(boldFormatBtn.element);
+        expect(fontStyleBtn.html()).toContain(`tabindex="0"`);
+        expect(document.activeElement).toBe(fontStyleBtn.element);
       });
 
       it('should focus the next button to the left when left arrow key is pressed', async function () {
@@ -598,7 +600,7 @@ describe('DtRecipeEditor tests', () => {
         await quickRepliesBtn.trigger('keydown', { key: 'Right' });
         await quickRepliesBtn.trigger('keydown', { key: 'Left' });
         expect(quickRepliesBtn.html()).toContain(`tabindex="0"`);
-        expect(boldFormatBtn.html()).toContain(`tabindex="-1"`);
+        expect(fontStyleBtn.html()).toContain(`tabindex="-1"`);
         expect(document.activeElement).toBe(quickRepliesBtn.element);
       });
 
