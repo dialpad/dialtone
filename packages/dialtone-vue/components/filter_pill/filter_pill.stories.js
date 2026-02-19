@@ -3,7 +3,7 @@ import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtFilterPill from './filter_pill.vue';
 import DtFilterPillDefaultTemplate from './filter_pill_default.story.vue';
 import DtFilterPillVariantsTemplate from './filter_pill_variants.story.vue';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { BUTTON_SIZE_MODIFIERS } from '@/components/button';
 import { POPOVER_DIRECTIONS, POPOVER_PADDING_CLASSES } from '@/components/popover/index.js';
 
