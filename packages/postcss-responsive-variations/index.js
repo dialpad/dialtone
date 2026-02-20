@@ -90,7 +90,16 @@ module.exports = (opts = {}) => {
 
       if (!atRules?.length) return;
 
-      root.append(atRules);
+      // When a layer is specified, wrap @media rules inside @layer so that
+      // responsive !important utilities stay within the same cascade layer
+      // as the base utilities they override.
+      if (opts.layer) {
+        const layerRule = postcss.atRule({ name: 'layer', params: opts.layer });
+        atRules.forEach(rule => layerRule.append(rule));
+        root.append(layerRule);
+      } else {
+        root.append(atRules);
+      }
     },
   };
 };

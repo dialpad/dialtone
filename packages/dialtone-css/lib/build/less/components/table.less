@@ -12,6 +12,7 @@
 //  ============================================================================
 //  $   BASE STYLE
 //  ----------------------------------------------------------------------------
+@layer dialtone.components {
 .d-table {
     //  Component CSS Vars
     //  ------------------------------------------------------------------------
@@ -38,7 +39,7 @@
       color: var(--table-th-color-text);
       font-weight: var(--dt-font-weight-bold);
       font-size: var(--table-font-size);
-      .d-ta-unset();
+      text-align: unset !important;
     }
 
     // Table Head Styles
@@ -115,4 +116,5 @@
             background-color: hsl(var(--bgc-primary-hsl) / 0.1);
         }
     }
+}
 }

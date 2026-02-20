@@ -27,12 +27,15 @@
 //  ============================================================================
 //  $   FONT FAMILY
 //  ----------------------------------------------------------------------------
+@layer dialtone.utilities {
 .d-ff-custom { font-family: var(--dt-font-family-body) !important; }
 .d-ff-sans { font-family: var(--dt-font-family-body) !important; }
 .d-ff-mono { font-family: var(--dt-font-family-mono) !important; }
 .d-ff-marketing { font-family: var(--dt-font-family-expressive) !important; }
 .d-ff-unset { font-family: unset !important; }
+}
 
+@layer dialtone.reset {
 //  ============================================================================
 //  $   RESET HEADERS & PARAGRAPH MARGINS
 //  ----------------------------------------------------------------------------
@@ -47,7 +50,9 @@ ol,
 ul {
     margin-block: 0;
 }
+}
 
+@layer dialtone.components {
 //  ============================================================================
 //  $   HEADLINE STYLES
 //  ----------------------------------------------------------------------------
@@ -234,7 +239,9 @@ ul {
 .d-code-small {
     font: var(--dt-typography-code-sm);
 }
+}
 
+@layer dialtone.utilities {
 //  ============================================================================
 //  $   FONT SIZE
 //  ----------------------------------------------------------------------------
@@ -269,14 +276,17 @@ ul {
 .d-fs-500-tv { font-size: var(--dt-font-size-500-tv) !important; }
 
 // TODO: deprecate these `d-headline##` classes once no longer in product use
-.d-headline10 { .d-headline--eyebrow(); }
-.d-headline24 { .d-headline--lg(); }
-.d-headline28 { .d-headline--xl(); }
-.d-headline32 { .d-headline--xl(); }
-.d-headline36 { .d-headline--xl(); }
-.d-headline42 { .d-headline--xxl(); }
-.d-headline48 { .d-headline--xxl(); }
-.d-headline54 { .d-headline--xxl(); }
+.d-headline10 {
+  font: var(--dt-typography-headline-eyebrow);
+  text-transform: var(--dt-typography-headline-eyebrow-text-case);
+}
+.d-headline24 { font: var(--dt-typography-headline-lg); }
+.d-headline28 { font: var(--dt-typography-headline-xl); }
+.d-headline32 { font: var(--dt-typography-headline-xl); }
+.d-headline36 { font: var(--dt-typography-headline-xl); }
+.d-headline42 { font: var(--dt-typography-headline-xxl); }
+.d-headline48 { font: var(--dt-typography-headline-xxl); }
+.d-headline54 { font: var(--dt-typography-headline-xxl); }
 
 //  ============================================================================
 //  $$  FONT STYLE
@@ -509,3 +519,4 @@ ul {
 .d-fvn-diagonal { font-variant-numeric: diagonal-fractions !important; }
 .d-fvn-stacked { font-variant-numeric: stacked-fractions !important; }
 .d-fvn-unset { font-variant-numeric: unset !important; }
+}
