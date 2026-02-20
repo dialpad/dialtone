@@ -2,6 +2,8 @@
   <div>
     <dt-link
       :href="$attrs.href"
+      :to="$attrs.to"
+      :replace="$attrs.replace"
       :kind="$attrs.kind"
       :inverted="$attrs.inverted"
       :rel="$attrs.rel"
