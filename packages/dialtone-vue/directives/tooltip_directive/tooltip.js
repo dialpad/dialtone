@@ -6,60 +6,62 @@ import deepEqual from 'deep-equal';
 export const DtTooltipDirective = {
   name: 'dt-tooltip-directive',
   install (app) {
-    let tooltipInstance;
-    const mountPoint = document.createElement('div');
-    document.body.appendChild(mountPoint);
-
     const DEFAULT_PLACEMENT = 'top';
-    const DtTooltipDirectiveApp = createApp({
-      name: 'DtTooltipDirectiveApp',
-      components: { DtTooltip },
-      data () {
-        return {
-          tooltips: [],
-        };
-      },
-
-      created () {
-        tooltipInstance = getCurrentInstance();
-      },
-
-      methods: {
-        addOrUpdateTooltip (id, tooltipConfig) {
-          const index = this.tooltips.findIndex(tooltip => tooltip.id === id);
-          if (index !== -1) {
-            // Update existing tooltip
-            this.tooltips.splice(index, 1, { id, ...tooltipConfig });
-          } else {
-            // Add new tooltip
-            this.tooltips.push({ id, ...tooltipConfig });
-          }
+    if (!global.__DtTooltipDirectiveAppInstance) {
+      const DtTooltipDirectiveApp = createApp({
+        name: 'DtTooltipDirectiveApp',
+        components: { DtTooltip },
+        data () {
+          return {
+            tooltips: [],
+          };
         },
 
-        removeTooltip (id) {
-          this.tooltips = this.tooltips.filter(tooltip => tooltip.id !== id);
+        created () {
+          global.__DtTooltipDirectiveAppInstance = getCurrentInstance();
         },
-      },
 
-      render () {
-        return h('div',
-          this.tooltips.map(({ id, ...tooltipProps }) => {
-            return h(DtTooltip, {
-              key: id,
-              ...tooltipProps,
-              sticky: tooltipProps.sticky !== undefined ? tooltipProps.sticky : true,
-              /**
-               * Set the delay to false when running tests only.
-               */
-              delay: tooltipProps.delay !== undefined ? tooltipProps.delay : (process.env.NODE_ENV !== 'test'),
-              externalAnchor: `[data-dt-tooltip-id="${id}"]`,
-            });
-          }),
-        );
-      },
-    });
+        methods: {
+          addOrUpdateTooltip (id, tooltipConfig) {
+            const index = this.tooltips.findIndex(tooltip => tooltip.id === id);
+            if (index !== -1) {
+              // Update existing tooltip
+              this.tooltips.splice(index, 1, { id, ...tooltipConfig });
+            } else {
+              // Add new tooltip
+              this.tooltips.push({ id, ...tooltipConfig });
+            }
+          },
 
-    DtTooltipDirectiveApp.mount(mountPoint);
+          removeTooltip (id) {
+            this.tooltips = this.tooltips.filter(tooltip => tooltip.id !== id);
+          },
+        },
+
+        render () {
+          return h('div',
+            this.tooltips.map(({ id, ...tooltipProps }) => {
+              return h(DtTooltip, {
+                key: id,
+                ...tooltipProps,
+                sticky: tooltipProps.sticky !== undefined ? tooltipProps.sticky : true,
+                /**
+                 * Set the delay to false when running tests only.
+                 */
+                delay: tooltipProps.delay !== undefined ? tooltipProps.delay : (process.env.NODE_ENV !== 'test'),
+                externalAnchor: `[data-dt-tooltip-id="${id}"]`,
+              });
+            }),
+          );
+        },
+      });
+
+      const mountPoint = document.createElement('div');
+      document.body.appendChild(mountPoint);
+      DtTooltipDirectiveApp.mount(mountPoint);
+    }
+
+    const tooltipInstance = global.__DtTooltipDirectiveAppInstance;
 
     app.directive('dt-tooltip', {
       beforeMount (anchor, binding) {
