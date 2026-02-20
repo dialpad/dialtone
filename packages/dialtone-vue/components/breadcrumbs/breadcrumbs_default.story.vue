@@ -2,12 +2,11 @@
   <div
     :class="[
       {
-        'd-bgc-purple-600': $attrs.inverted,
+        'd-bgc-contrast': $attrs.inverted,
       },
     ]"
   >
     <dt-breadcrumbs
-      class="d-py16 d-px12"
       :breadcrumbs="$attrs.breadcrumbs"
       :inverted="$attrs.inverted"
     >

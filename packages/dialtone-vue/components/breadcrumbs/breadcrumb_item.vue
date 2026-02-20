@@ -12,8 +12,10 @@
       :kind="linkKind"
       :inverted="linkInverted"
       :aria-current="ariaCurrent"
+      :underline="false"
       data-qa="breadcrumb-item"
       v-bind="removeClassStyleAttrs($attrs)"
+      :class="['d-breadcrumbs__link']"
     >
       <!-- @slot default slot for breadcrumb item's label -->
       <slot>

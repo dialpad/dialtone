@@ -7,7 +7,7 @@
       { [BREADCRUMBS_INVERTED_MODIFIER]: inverted },
     ]"
   >
-    <ol>
+    <ol :class="['d-breadcrumbs__list']">
       <!-- @slot default slot for breadcrumbs content -->
       <slot>
         <dt-breadcrumb-item
