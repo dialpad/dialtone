@@ -168,14 +168,17 @@ const props = defineProps({
 const sections = ref([]);
 const loading = ref(true);
 
+function sanitizeId (str) {
+  return str.toLowerCase().replace(/[\s/_]+/g, '-');
+}
+
 function scrollTo (id) {
   document.getElementById(`ks-${id}`)?.scrollIntoView({ behavior: 'smooth' });
 }
 
-
 function createErrorBoundary (name) {
   return markRaw(defineComponent({
-    name: 'ErrorBoundary',
+    name: `ErrorBoundary-${name}`,
     setup (_, { slots }) {
       const error = ref(null);
       onErrorCaptured((err) => {
@@ -194,9 +197,8 @@ function createErrorBoundary (name) {
   }));
 }
 
-function extractVariants (module, meta) {
+function extractVariants (module, meta, name) {
   const variants = [];
-  const name = meta.title.split('/').pop();
 
   for (const [exportName, exportValue] of Object.entries(module)) {
     if (exportName === 'default') continue;
@@ -223,7 +225,7 @@ function extractVariants (module, meta) {
 
 onMounted(async () => {
   const results = await Promise.allSettled(
-    Object.entries(props.loaders).map(async ([, loader]) => loader()),
+    Object.values(props.loaders).map(async (loader) => loader()),
   );
 
   const loaded = [];
@@ -236,12 +238,12 @@ onMounted(async () => {
     if (!meta?.title) continue;
 
     const name = meta.title.split('/').pop();
-    const id = name.toLowerCase().replace(/[\s_]+/g, '-');
-    const variants = extractVariants(module, meta);
+    const id = sanitizeId(name);
+    const storyId = sanitizeId(meta.title);
+    const variants = extractVariants(module, meta, name);
 
     if (variants.length === 0) continue;
 
-    const storyId = meta.title.toLowerCase().replace(/[\s/]+/g, '-');
     loaded.push({ id, name, storyId, variants });
   }
 
@@ -251,14 +253,7 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.kitchen-sink__nav {
-  inset-block-start: 56px;
-}
-
 .kitchen-sink__section {
   scroll-margin-top: var(--dt-size-750);
-}
-[outline] {
-  outline: 2px solid orangered;
 }
 </style>
