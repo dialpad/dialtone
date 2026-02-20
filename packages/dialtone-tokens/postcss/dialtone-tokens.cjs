@@ -250,7 +250,7 @@ function getThemeFromFilename (filename) {
 module.exports = () => {
   return {
     postcssPlugin: 'dialtone-tokens',
-    async Once (root, { Declaration }) {
+    async Once (root, { Declaration, AtRule }) {
       // dynamic import because we're importing ES6 into CJS
       const { buildDocs } = await import('../build-docs.js');
 
@@ -277,6 +277,13 @@ module.exports = () => {
 
       // add the new entries to the documentation object
       buildDocs(platformName, theme, newDocEntries);
+
+      // Wrap all token CSS output in @layer dialtone.base
+      const layerRule = new AtRule({ name: 'layer', params: 'dialtone.base' });
+      const nodes = [];
+      root.each(node => nodes.push(node));
+      nodes.forEach(node => layerRule.append(node));
+      root.append(layerRule);
     },
 
     Declaration (declaration) {
