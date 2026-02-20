@@ -44,6 +44,15 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Determines whether the link should display an underline.
+     * @values true, false
+     */
+    underline: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   data () {
@@ -57,6 +66,7 @@ export default {
       return [
         'd-link',
         getLinkKindModifier(this.kind, this.inverted),
+        { 'd-link--no-underline': !this.underline },
       ];
     },
   },

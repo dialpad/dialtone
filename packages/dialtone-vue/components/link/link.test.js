@@ -145,5 +145,21 @@ describe('DtLink tests', () => {
         expect(nativeLink.classes(getLinkKindModifier(MUTED, true))).toBe(true);
       });
     });
+
+    describe('When underline is false', () => {
+      it('should have no-underline class', async () => {
+        mockProps = { underline: false };
+
+        updateWrapper();
+
+        expect(nativeLink.classes('d-link--no-underline')).toBe(true);
+      });
+    });
+
+    describe('When underline is true (default)', () => {
+      it('should not have no-underline class', () => {
+        expect(nativeLink.classes('d-link--no-underline')).toBe(false);
+      });
+    });
   });
 });

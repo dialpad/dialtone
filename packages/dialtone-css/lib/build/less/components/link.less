@@ -67,6 +67,16 @@
     //  ============================================================================
     //  $$  WARNING
     //  ----------------------------------------------------------------------------
+    &--no-underline {
+        --link-text-decoration: none;
+
+        &:hover {
+            --link-text-decoration: underline;
+        }
+    }
+
+    //  $$  WARNING
+    //  ----------------------------------------------------------------------------
     &--warning {
         --link-color-default: var(--dt-color-link-warning);
         --link-color-default-hover: var(--dt-color-link-warning-hover);
