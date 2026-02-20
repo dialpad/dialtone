@@ -14,41 +14,29 @@
         class="d-pt32"
         as="nav"
       >
-        <router-link
+        <dt-button
           v-if="prev"
-          v-slot="{ navigate }"
           :to="prev.link"
-          custom
+          importance="clear"
+          size="lg"
         >
-          <dt-button
-            importance="clear"
-            size="lg"
-            @click="navigate"
-          >
-            <template #icon>
-              <dt-icon name="arrow-left" />
-            </template>
-            {{ prev.text }}
-          </dt-button>
-        </router-link>
-        <router-link
+          <template #icon>
+            <dt-icon name="arrow-left" />
+          </template>
+          {{ prev.text }}
+        </dt-button>
+        <dt-button
           v-if="next"
-          v-slot="{ navigate }"
           :to="next.link"
-          custom
+          icon-position="right"
+          importance="clear"
+          size="lg"
         >
-          <dt-button
-            icon-position="right"
-            importance="clear"
-            size="lg"
-            @click="navigate"
-          >
-            <template #icon>
-              <dt-icon name="arrow-right" />
-            </template>
-            {{ next.text }}
-          </dt-button>
-        </router-link>
+          <template #icon>
+            <dt-icon name="arrow-right" />
+          </template>
+          {{ next.text }}
+        </dt-button>
       </dt-stack>
       <footer class="d-mt16 d-mb16 d-body--sm d-fc-tertiary">
         <span

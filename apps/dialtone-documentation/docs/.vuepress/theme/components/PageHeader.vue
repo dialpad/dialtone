@@ -15,14 +15,15 @@
           >New</span>
         </div>
         <span class="d-stack d-stack--row d-stack--gap-300">
-          <a
+          <dt-button
             v-if="$frontmatter.storybook && $frontmatter.storybook !== 'planned'"
-            class="d-btn d-btn--muted d-btn--muted"
             :href="$frontmatter.storybook"
             target="_blank"
             rel="noopener noreferrer"
+            kind="muted"
+            importance="clear"
           >
-            <span class="d-btn__icon d-btn__icon--left">
+            <template #icon>
               <svg
                 class="d-icon d-icon--size-300"
                 viewBox="0 0 24 24"
@@ -53,17 +54,18 @@
                   fill="white"
                 />
               </svg>
-            </span>
-            <span class="d-btn__label">Storybook</span>
-          </a>
-          <a
+            </template>
+            Storybook
+          </dt-button>
+          <dt-button
             v-if="$frontmatter.figma_url"
-            class="d-btn d-btn--muted"
             :href="$frontmatter.figma_url"
             target="_blank"
             rel="noopener noreferrer"
+            kind="muted"
+            importance="clear"
           >
-            <span class="d-btn__icon d-btn__icon--left">
+            <template #icon>
               <svg
                 class="d-icon d-icon--size-300"
                 viewBox="0 0 24 24"
@@ -103,9 +105,9 @@
                   fill="#A259FF"
                 />
               </svg>
-            </span>
-            <span class="d-btn__label">Figma</span>
-          </a>
+            </template>
+            Figma
+          </dt-button>
         </span>
       </div>
       <p

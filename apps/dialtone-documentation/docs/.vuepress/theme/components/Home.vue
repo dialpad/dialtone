@@ -29,35 +29,20 @@
           </a>
         </dt-stack>
         <dt-stack direction="row" justify="center" gap="500">
-          <router-link
-            v-slot="{ navigate }"
+          <dt-button
             to="/guides/getting-started/"
-            custom
+            size="lg"
+            @click="sendAnalyticsEvent()"
           >
-            <dt-button
-              role="link"
-              size="lg"
-              @click="(e) => { sendAnalyticsEvent(); navigate(e); }"
-              @keypress.enter="(e) => { sendAnalyticsEvent(); navigate(e); }"
-            >
-              Get Started
-            </dt-button>
-          </router-link>
-          <router-link
-            v-slot="{ navigate }"
+            Get Started
+          </dt-button>
+          <dt-button
             to="/about/whats-new/"
-            custom
+            size="lg"
+            importance="outlined"
           >
-            <dt-button
-              role="link"
-              size="lg"
-              importance="outlined"
-              @click="(e) => { navigate(e); }"
-              @keypress.enter="(e) => { navigate(e); }"
-            >
-              What's New?
-            </dt-button>
-          </router-link>
+            What's New?
+          </dt-button>
         </dt-stack>
       </dt-stack>
       <svg-loader class="hero__image d-w50p" name="home-billboard" />
@@ -153,22 +138,26 @@
       <h2 class="d-headline--lg d-fw-semibold">
         Don't see something? Want to contribute?
       </h2>
-      <a
-        class="d-btn d-btn--muted d-btn--outlined d-btn--lg"
+      <dt-button
         href="https://dialpad.atlassian.net/servicedesk/customer/portal/123/create/465"
         target="_blank"
         rel="noopener noreferrer"
+        kind="muted"
+        importance="outlined"
+        size="lg"
       >
         Make a request
-      </a>
-      <a
-        class="d-btn d-btn--muted d-btn--outlined d-btn--lg"
+      </dt-button>
+      <dt-button
         href="https://dialpad.atlassian.net/secure/CreateIssue.jspa?issuetype=1&pid=12508"
         target="_blank"
         rel="noopener noreferrer"
+        kind="muted"
+        importance="outlined"
+        size="lg"
       >
         Report a bug
-      </a>
+      </dt-button>
     </dt-stack>
   </section>
 </template>

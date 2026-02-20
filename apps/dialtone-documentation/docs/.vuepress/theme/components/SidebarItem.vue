@@ -10,38 +10,33 @@
         direction="row"
         class="d-ps-relative"
       >
-        <router-link
-          v-slot="{ navigate, isExactActive }"
-          :to="item.link ?? ''"
-          custom
+        <dt-button
+          :id="labelId"
+          v-bind="attrs"
+          :to="item.link || undefined"
+          :active="isActiveLink(item.link)"
+          importance="clear"
+          kind="muted"
+          label-class="d-jc-flex-start"
+          icon-position="right"
+          :tabindex="actionableTabIndex"
+          :class="[
+            'd-w100p d-fw-normal',
+            {
+              'd-headline--eyebrow d-fw-semibold d-fc-secondary d-bgc-transparent d-c-default': !item.link,
+            },
+          ]"
+          @click="handleAnchorClick"
         >
-          <dt-button
-            :id="labelId"
-            v-bind="attrs"
-            importance="clear"
-            kind="muted"
-            label-class="d-jc-flex-start"
-            icon-position="right"
-            :tabindex="actionableTabIndex"
-            :class="[
-              'd-w100p d-fw-normal',
-              {
-                'd-headline--eyebrow d-fw-semibold d-fc-secondary d-bgc-transparent d-c-default': !item.link,
-                'd-btn--active': isActiveLink(isExactActive, item.link),
-              },
-            ]"
-            @click="handleAnchorClick(navigate, item.link)"
-          >
-            {{ item.text }}
-            <template #icon="{ iconSize }">
-              <dt-icon
-                v-if="item.link"
-                :name="isOpen ? 'chevron-down' : 'chevron-right'"
-                :size="iconSize"
-              />
-            </template>
-          </dt-button>
-        </router-link>
+          {{ item.text }}
+          <template #icon="{ iconSize }">
+            <dt-icon
+              v-if="item.link"
+              :name="isOpen ? 'chevron-down' : 'chevron-right'"
+              :size="iconSize"
+            />
+          </template>
+        </dt-button>
       </dt-stack>
     </template>
     <template #content>
@@ -56,28 +51,22 @@
           :key="subItem.text"
         >
           <sidebar-item v-if="subItem.children" :item="subItem" nested />
-          <router-link
+          <dt-button
             v-else-if="!subItem.planned"
-            v-slot="{ navigate, isExactActive }"
             :to="subItem.link"
-            custom
+            :active="isActiveLink(subItem.link)"
+            importance="clear"
+            kind="muted"
+            label-class="d-jc-flex-start"
+            :class="[
+              'd-w100p d-fw-normal',
+              {
+                'd-mt2': (index === 0 && nested), // add margin top to first nested item
+              },
+            ]"
           >
-            <dt-button
-              importance="clear"
-              kind="muted"
-              label-class="d-jc-flex-start"
-              :class="[
-                'd-w100p d-fw-normal',
-                {
-                  'd-btn--active': isActiveLink(isExactActive, subItem.link),
-                  'd-mt2': (index === 0 && nested), // add margin top to first nested item
-                },
-              ]"
-              @click="navigate"
-            >
-              {{ subItem.text }}
-            </dt-button>
-          </router-link>
+            {{ subItem.text }}
+          </dt-button>
           <div
             v-else
             class="d-btn d-w100p d-jc-flex-start d-fw-normal d-fc-disabled h:d-bgc-transparent d-c-default"
@@ -139,19 +128,19 @@ onMounted(() => {
   }
 });
 
-// isExactActive from the router-link doesn't work with hashes,
-// that's why we need to check for the hash if it's a single page
-const isActiveLink = (isExactActive, link) => {
+// isExactActive from router-link doesn't work with hashes,
+// that's why we need to check for the hash if it's a single page.
+// Now computed from route directly instead of router-link's scoped slot.
+const isActiveLink = (link) => {
   if (!link) return false;
+  const isExactActive = route.path === link;
   const active = props.isSinglePage ? hash.value === link : isExactActive;
-  if (route.path === link) { isOpen.value = active; }
+  if (isExactActive) { isOpen.value = active; }
   return active;
 };
 
-function handleAnchorClick (navigate, link) {
+function handleAnchorClick () {
   isOpen.value = true;
-  if (!link) return;
-  navigate();
 }
 </script>
 
