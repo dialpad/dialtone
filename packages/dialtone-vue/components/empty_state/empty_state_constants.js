@@ -11,15 +11,15 @@ export const EMPTY_STATE_CONTENT_SIZE_MODIFIERS = {
 };
 
 export const EMPTY_STATE_HEADLINE_SIZE_MODIFIERS = {
-  sm: 'd-headline--md',
-  md: 'd-headline--xl',
-  lg: 'd-headline--xxl',
+  sm: 'd-text-headline--md d-lh-200',
+  md: 'd-text-headline--xl d-lh-200',
+  lg: 'd-text-headline--2xl',
 };
 
 export const EMPTY_STATE_BODY_SIZE_MODIFIERS = {
-  sm: 'd-body--sm',
-  md: 'd-body--sm',
-  lg: 'd-body--md',
+  sm: 'd-text-body--sm',
+  md: 'd-text-body--md d-lh-300',
+  lg: 'd-text-body--lg d-lh-300',
 };
 
 export default {
