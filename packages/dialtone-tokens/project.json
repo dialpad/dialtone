@@ -27,6 +27,7 @@
         "cwd": "{projectRoot}",
         "commands": [
           "rm -rf dist",
+          "git clean -fx themes/",
           "node ./build.js",
           "pnpm exec vite build"
         ],
