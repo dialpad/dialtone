@@ -10,7 +10,7 @@ keywords: ["anchor", "hyperlink", "url", "d-link", "DtLink", "dt-link", "text li
 ---
 
 <code-well-header>
-  <a href="#link" class="d-link">Base link</a>
+  <dt-link href="#link">Base link</dt-link>
 </code-well-header>
 
 <!-- <component-combinator component-name="DtLink" /> -->
@@ -49,23 +49,18 @@ keywords: ["anchor", "hyperlink", "url", "d-link", "DtLink", "dt-link", "text li
 ### Default
 
 <code-well-header>
-  <a href="#link" class="d-link">Base link</a>
-  <a href="#link" class="d-link d-link--danger">Danger link</a>
-  <a href="#link" class="d-link d-link--muted">Muted link</a>
-  <a href="#link" class="d-link d-link--success">Success link</a>
-  <a href="#link" class="d-link d-link--warning">Warning link</a>
-  <a href="#link" class="d-link d-link--mention">Mention link</a>
+  <DtStack gap="400" ref="linkExample1">
+    <dt-link href="#link">Base link</dt-link>
+    <dt-link href="#link" kind="danger">Danger link</dt-link>
+    <dt-link href="#link" kind="muted">Muted link</dt-link>
+    <dt-link href="#link" kind="success">Success link</dt-link>
+    <dt-link href="#link" kind="warning">Warning link</dt-link>
+    <dt-link href="#link" kind="mention">Mention link</dt-link>
+  </DtStack>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<a href="#link" class="d-link">Link</a>
-<a href="#link" class="d-link d-link--danger">Danger link</a>
-<a href="#link" class="d-link d-link--muted">Muted link</a>
-<a href="#link" class="d-link d-link--success">Success link</a>
-<a href="#link" class="d-link d-link--warning">Warning link</a>
-<a href="#link" class="d-link d-link--mention">Mention link</a>
-'
+:htmlCode='() => $refs.linkExample1'
 vueCode='
 <dt-link :href="#link">Link</dt-link>
 <dt-link :href="#link" kind="danger">Danger link</dt-link>
@@ -79,23 +74,18 @@ showHtmlWarning />
 ### Inverted
 
 <code-well-header bgclass="d-bgc-contrast">
-  <a href="#link" class="d-link d-link--inverted">Inverted base link</a>
-  <a href="#link" class="d-link d-link--inverted-danger">Inverted danger link</a>
-  <a href="#link" class="d-link d-link--inverted-success">Inverted success link</a>
-  <a href="#link" class="d-link d-link--inverted-warning">Inverted warning link</a>
-  <a href="#link" class="d-link d-link--inverted-muted">Inverted muted link</a>
-  <a href="#link" class="d-link d-link--inverted-mention">Inverted mention link</a>
+  <DtStack gap="400" ref="linkExample2">
+    <dt-link href="#link" inverted>Inverted base link</dt-link>
+    <dt-link href="#link" kind="danger" inverted>Inverted danger link</dt-link>
+    <dt-link href="#link" kind="success" inverted>Inverted success link</dt-link>
+    <dt-link href="#link" kind="warning" inverted>Inverted warning link</dt-link>
+    <dt-link href="#link" kind="muted" inverted>Inverted muted link</dt-link>
+    <dt-link href="#link" kind="mention" inverted>Inverted mention link</dt-link>
+  </DtStack>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<a href="#link" class="d-link d-link--inverted">Inverted link</a>
-<a href="#link" class="d-link d-link--inverted-danger">Inverted danger link</a>
-<a href="#link" class="d-link d-link--inverted-success">Inverted success link</a>
-<a href="#link" class="d-link d-link--inverted-warning">Inverted warning link</a>
-<a href="#link" class="d-link d-link--inverted-muted">Inverted muted link</a>
-<a href="#link" class="d-link d-link--inverted-mention">Inverted muted link</a>
-'
+:htmlCode='() => $refs.linkExample2'
 vueCode='
 <dt-link :href="#link" inverted>Inverted link</dt-link>
 <dt-link :href="#link" kind="danger" inverted>Inverted danger link</dt-link>
@@ -103,6 +93,23 @@ vueCode='
 <dt-link :href="#link" kind="warning" inverted>Inverted warning link</dt-link>
 <dt-link :href="#link" kind="muted" inverted>Inverted muted link</dt-link>
 <dt-link :href="#link" kind="mention" inverted>Inverted mention link</dt-link>
+'
+showHtmlWarning />
+
+### No underline
+
+This inverts the underline behavior. With `underline="false"`, the link will not have an underline by default, but will show one on hover.
+
+<code-well-header>
+  <dt-link href="#link" :underline="false">No underline link</dt-link>
+</code-well-header>
+
+<code-example-tabs
+htmlCode='
+<a href="#link" class="d-link d-link--no-underline">No underline link</a>
+'
+vueCode='
+<dt-link href="#link" :underline="false">No underline link</dt-link>
 '
 showHtmlWarning />
 

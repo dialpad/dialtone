@@ -16,6 +16,10 @@ To make code changes in our Design System please first read the
 [CONTRIBUTING.md](https://github.com/dialpad/dialtone/blob/staging/.github/CONTRIBUTING.md#contributing)
 in our Dialtone repository.
 
+### CSS Architecture
+
+Dialtone uses [CSS Cascade Layers](../css-layers/) to organize styles into a predictable hierarchy. When contributing CSS, all styles must be wrapped in the appropriate `@layer` block. Read the [CSS Layers Guide](../css-layers/) to understand where to place your styles.
+
 ## Adding Icons and Illustrations
 
 If you need to add an icon into Dialtone, here’s how you would go about doing that.

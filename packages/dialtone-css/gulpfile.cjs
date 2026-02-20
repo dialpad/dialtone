@@ -371,10 +371,11 @@ const libDocs = function (done) {
   if (!settings.documentation) return done();
 
   const postCSSDialtoneDocs = require('./postcss/dialtone-docs.cjs');
+  const postCSSValidateLayers = require('./postcss/validate-layers.cjs');
 
   //  Generate documentation
   return src('./lib/dist/dialtone-default-theme.css')
-    .pipe(postCSS([postCSSDialtoneDocs]));
+    .pipe(postCSS([postCSSDialtoneDocs, postCSSValidateLayers]));
 };
 
 //  ================================================================================
