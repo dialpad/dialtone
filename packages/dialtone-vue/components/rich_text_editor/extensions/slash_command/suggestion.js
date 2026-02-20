@@ -1,7 +1,6 @@
 import { markRaw } from 'vue';
 import { VueRenderer } from '@tiptap/vue-3';
-import tippy from 'tippy.js';
-import hideOnEsc from '../tippy_plugins/hide_on_esc';
+import { computePosition, flip, shift, offset } from '@floating-ui/dom';
 
 import SuggestionList from '../suggestion/SuggestionList.vue';
 import SlashCommandSuggestion from './SlashCommandSuggestion.vue';
@@ -17,8 +16,37 @@ export default {
 
   render: () => {
     let component;
-    let popup;
+    let floatingEl;
     let popupIsOpen = false;
+    let virtualEl = {
+      getBoundingClientRect: () => ({ width: 0, height: 0, x: 0, y: 0, top: 0, left: 0, right: 0, bottom: 0 }),
+    };
+    let escHandler;
+
+    async function updatePosition () {
+      if (!floatingEl || !virtualEl.getBoundingClientRect) return;
+      const { x, y } = await computePosition(virtualEl, floatingEl, {
+        placement: 'top-start',
+        middleware: [offset(0), flip(), shift({ padding: 8 })],
+      });
+      Object.assign(floatingEl.style, {
+        left: `${x}px`,
+        top: `${y}px`,
+      });
+    }
+
+    function show () {
+      if (!floatingEl) return;
+      floatingEl.style.display = 'block';
+      popupIsOpen = true;
+      updatePosition();
+    }
+
+    function hide () {
+      if (!floatingEl) return;
+      floatingEl.style.display = 'none';
+      popupIsOpen = false;
+    }
 
     return {
       onStart: props => {
@@ -36,22 +64,23 @@ export default {
           return;
         }
 
-        popup = tippy('body', {
-          getReferenceClientRect: props.clientRect,
-          appendTo: () => document.body,
-          content: component.element,
-          showOnCreate: false,
-          onShow: () => { popupIsOpen = true; },
-          onHidden: () => { popupIsOpen = false; },
-          interactive: true,
-          trigger: 'manual',
-          placement: 'top-start',
-          zIndex: 650,
-          plugins: [hideOnEsc],
-        });
+        floatingEl = component.element;
+        floatingEl.style.position = 'absolute';
+        floatingEl.style.zIndex = '650';
+        floatingEl.style.display = 'none';
+        document.body.appendChild(floatingEl);
+
+        virtualEl = { getBoundingClientRect: props.clientRect };
+
+        escHandler = (e) => {
+          if (e.key === 'Escape' && popupIsOpen) {
+            hide();
+          }
+        };
+        document.addEventListener('keydown', escHandler);
 
         if (props.items.length > 0) {
-          popup?.[0].show();
+          show();
         }
       },
 
@@ -59,18 +88,17 @@ export default {
         component?.updateProps(props);
 
         if (props.items.length > 0) {
-          popup?.[0].show();
+          show();
         } else {
-          popup?.[0].hide();
+          hide();
         }
 
         if (!props.clientRect) {
           return;
         }
 
-        popup?.[0].setProps({
-          getReferenceClientRect: props.clientRect,
-        });
+        virtualEl = { getBoundingClientRect: props.clientRect };
+        updatePosition();
       },
 
       onKeyDown (props) {
@@ -80,8 +108,12 @@ export default {
       },
 
       onExit () {
-        popup?.[0].destroy();
-        popup = null;
+        if (escHandler) {
+          document.removeEventListener('keydown', escHandler);
+          escHandler = null;
+        }
+        floatingEl?.remove();
+        floatingEl = null;
         component?.destroy();
         component = null;
       },
