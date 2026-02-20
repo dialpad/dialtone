@@ -141,6 +141,48 @@
               </dt-list-item>
             </template>
           </dt-popover>
+          <dt-tooltip
+            v-else-if="button.selector === 'fontColor'"
+            :key="getButtonKey(buttonGroup.key, button.selector)"
+            data-qa="dt-recipe-editor-font-color-tooltip"
+            :message="button.tooltipMessage"
+            placement="top"
+          >
+            <template #anchor>
+              <dt-button
+                :ref="getButtonRef(buttonGroup.key, button.selector)"
+                kind="muted"
+                importance="clear"
+                size="xs"
+                icon-position="right"
+                :active="$refs.richTextEditor?.editor?.isActive(button.selector)"
+                :tabindex="canFocus(getButtonRef(buttonGroup.key, button.selector)) ? 0 : -1"
+                :aria-label="button.tooltipMessage"
+                :data-qa="button.dataQA"
+                @keydown.right.stop="shiftActionBarFocusRight"
+                @keydown.left.stop="shiftActionBarFocusLeft"
+                @click="button.onClick()"
+              >
+                <template #icon>
+                  <dt-icon-chevron-down size="200" />
+                </template>
+                <template #default>
+                  <dt-input
+                    :value="currentFontColor"
+                    input-class="colorPickerInput d-w100p d-h100p d-p0 d-bar0 d-c-pointer"
+                    input-wrapper-class="d-w16 d-h16 d-mt4 d-bar4 d-ba-none"
+                    size="sm"
+                    type="color"
+                    @input="onColorPickerInput"
+                  >
+                    <template #icon>
+                      <dt-icon-chevron-down size="200" />
+                    </template>
+                  </dt-input>
+                </template>
+              </dt-button>
+            </template>
+          </dt-tooltip>
 
           <!-- Regular buttons -->
           <dt-tooltip
@@ -385,6 +427,7 @@
         @blur="onBlur"
         @focus="onFocus"
         @input="onInput($event)"
+        @selected="onSelected"
       />
     </div>
   </div>
@@ -399,6 +442,7 @@ import {
 import {
   EDITOR_SUPPORTED_LINK_PROTOCOLS,
   EDITOR_DEFAULT_LINK_PREFIX,
+  EDITOR_DEFAULT_FONT_COLOR,
 } from './editor_constants.js';
 import { removeClassStyleAttrs, addClassStyleAttrs } from '@/common/utils';
 import { DtButton } from '@/components/button';
@@ -428,6 +472,7 @@ import {
   DtIconType,
   DtIconBraces,
   DtIconSearch,
+  DtIconChevronDown,
 } from '@dialpad/dialtone-icons/vue3';
 import { DialtoneLocalization } from '@/localization';
 
@@ -445,7 +490,6 @@ export default {
     DtStack,
     DtInput,
     DtTooltip,
-    DtListItem,
     DtIconQuickReply,
     DtIconBold,
     DtIconItalic,
@@ -464,6 +508,7 @@ export default {
     DtIconSearch,
     DtIconType,
     DtIconBraces,
+    DtIconChevronDown,
   },
 
   mixins: [],
@@ -816,6 +861,7 @@ export default {
         class: 'd-recipe-editor__link',
       },
 
+      currentFontColor: undefined,
       showLinkInput: false,
       showFontStyleDropdown: false,
       fontStyleSearch: '',
@@ -909,6 +955,13 @@ export default {
           icon: DtIconType,
           dataQA: 'dt-recipe-editor-font-size-btn',
           tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_FONT_SIZE_BUTTON_LABEL'),
+        },
+        {
+          showBtn: this.showFontColorButton,
+          selector: 'fontColor',
+          dataQA: 'dt-recipe-editor-font-color-btn',
+          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_FONT_COLOR_BUTTON_LABEL'),
+          onClick: this.onColorPickerButtonClick,
         },
         {
           showBtn: this.showBoldButton,
@@ -1077,10 +1130,15 @@ export default {
         item.name.toLowerCase().includes(searchValue),
       );
     },
+
     filteredCategories() {
       return this.variableCategories.filter(
         (category) => this.getFilteredItemsForCategory(category).length,
       );
+    },
+
+    colorPickerInput() {
+      return document.querySelector('.colorPickerInput');
     },
   },
 
@@ -1255,6 +1313,10 @@ export default {
       this.$emit('update:modelValue', event);
     },
 
+    onSelected() {
+      this.updateFontColorInput();
+    },
+
     getButtonKey (key, selector) {
       return `${key}-${JSON.stringify(selector)}`;
     },
@@ -1320,7 +1382,7 @@ export default {
       }
       return this.$refs.richTextEditor?.editor?.isActive('textStyle', { fontSize });
     },
-    
+
     getFilteredItemsForCategory(category) {
       const searchValue = this.variableSearchValue.toLowerCase();
       if (category.name.toLowerCase().includes(searchValue)) {
@@ -1330,6 +1392,28 @@ export default {
         item.name.toLowerCase().includes(searchValue),
       );
     },
+
+    updateFontColorInput() {
+      this.currentFontColor = this.$refs.richTextEditor?.editor?.getAttributes('textStyle')?.color || EDITOR_DEFAULT_FONT_COLOR;
+    },
+
+    onColorPickerButtonClick () {
+      this.colorPickerInput?.click();
+    },
+
+    onColorPickerInput (fontColor) {
+      this.$refs.richTextEditor?.editor?.chain().focus().setColor(fontColor).run();
+      this.$refs.richTextEditor?.editor?.commands.focus();
+    },
   },
 };
 </script>
+
+<style>
+.colorPickerInput::-webkit-color-swatch-wrapper {
+  padding: 0 !important;
+}
+.colorPickerInput::-webkit-color-swatch {
+  border: none !important;
+}
+</style>
