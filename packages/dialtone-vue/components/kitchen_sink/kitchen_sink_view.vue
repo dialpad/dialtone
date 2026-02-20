@@ -26,13 +26,14 @@
           d-mxn10
           d-bs-card
         "
-        gap="300"
+        gap="400"
       >
         <dt-stack
           class="d-px8"
           gap="400"
           direction="row"
           justify="between"
+          align="baseline"
         >
           <dt-text
             as="h1"
@@ -40,17 +41,10 @@
             size="3xl"
           >
             {{ title }}
-            <dt-text
-              kind="body"
-              size="md"
-              tone="muted"
-            >
-              {{ sections.length }} {{ itemLabel }}
-            </dt-text>
           </dt-text>
           <dt-text
             kind="body"
-            size="xs"
+            size="sm"
           >
             <dt-link
               :href="iframeUrl"
@@ -62,7 +56,7 @@
                 direction="row"
               >
                 Open in new window
-                <dt-icon-external-link size="100" />
+                <dt-icon-external-link size="200" />
               </dt-stack>
             </dt-link>
           </dt-text>
@@ -101,13 +95,25 @@
           gap="500"
           class="d-py32 kitchen-sink__section"
         >
-          <dt-text
-            as="h2"
-            kind="headline"
-            size="2xl"
+          <dt-stack
+            gap="400"
+            direction="row"
+            justify="between"
+            align="baseline"
           >
-            {{ section.name }}
-          </dt-text>
+            <dt-text
+              as="h2"
+              kind="headline"
+              size="2xl"
+            >
+              {{ section.name }}
+            </dt-text>
+            <dt-link
+              :href="`/?path=/story/${section.storyId}--default`"
+            >
+              View Story
+            </dt-link>
+          </dt-stack>
           <dt-stack
             v-for="variant in section.variants"
             :key="variant.name"
@@ -165,6 +171,7 @@ const loading = ref(true);
 function scrollTo (id) {
   document.getElementById(`ks-${id}`)?.scrollIntoView({ behavior: 'smooth' });
 }
+
 
 function createErrorBoundary (name) {
   return markRaw(defineComponent({
@@ -234,7 +241,8 @@ onMounted(async () => {
 
     if (variants.length === 0) continue;
 
-    loaded.push({ id, name, variants });
+    const storyId = meta.title.toLowerCase().replace(/[\s/]+/g, '-');
+    loaded.push({ id, name, storyId, variants });
   }
 
   sections.value = loaded.sort((a, b) => a.name.localeCompare(b.name));
