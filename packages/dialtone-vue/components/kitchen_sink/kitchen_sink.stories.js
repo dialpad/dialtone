@@ -1,4 +1,5 @@
-import KitchenSinkTemplate from './kitchen_sink.story.vue';
+import KitchenSinkComponentsTemplate from './kitchen_sink.story.vue';
+import KitchenSinkRecipesTemplate from './kitchen_sink_recipes.story.vue';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 
 export default {
@@ -11,9 +12,24 @@ export default {
   },
 };
 
-const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, KitchenSinkTemplate);
+const ComponentsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+  args,
+  argTypes,
+  KitchenSinkComponentsTemplate,
+);
 
-export const Default = {
-  render: Template,
+const RecipesTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+  args,
+  argTypes,
+  KitchenSinkRecipesTemplate,
+);
+
+export const Components = {
+  render: ComponentsTemplate,
+  args: {},
+};
+
+export const Recipes = {
+  render: RecipesTemplate,
   args: {},
 };

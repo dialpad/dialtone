@@ -1,8 +1,8 @@
 <template>
   <kitchen-sink-view
-    title="Kitchen Sink: Components"
-    item-label="components"
-    iframe-url="/iframe.html?id=kitchen-sink--components&viewMode=story"
+    title="Kitchen Sink: Recipes"
+    item-label="recipes"
+    iframe-url="/iframe.html?id=kitchen-sink--recipes&viewMode=story"
     :loaders="loaders"
   />
 </template>
@@ -11,6 +11,6 @@
 import KitchenSinkView from './kitchen_sink_view.vue';
 
 const loaders = import.meta.glob(
-  ['../**/*.stories.js', '!../kitchen_sink/**'],
+  '../../recipes/**/*.stories.js',
 );
 </script>
