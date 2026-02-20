@@ -60,14 +60,18 @@
     margin: 0 auto;
     padding: var(--banner-dialog-padding-y) var(--banner-dialog-padding-x);
 
+    .d-notice__icon {
+        margin-block-start: var(--dt-size-0);
+    }
+
     .d-notice__content {
         flex-direction: row;
-        gap: var(--dt-size-300);
+        gap: var(--dt-size-350);
         align-items: baseline;
     }
 
     .d-notice__message {
-        font-size: var(--dt-font-size-200) !important;
+        font: var(--dt-text-body-sm);
     }
 }
 
