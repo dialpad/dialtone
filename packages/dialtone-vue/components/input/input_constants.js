@@ -52,6 +52,9 @@ export const INPUT_STATE_CLASSES = {
 };
 
 export const DESCRIPTION_SIZE_CLASSES = {
+  xs: 'd-description--xs',
+  sm: 'd-description--sm',
+  md: '',
   lg: 'd-description--lg',
   xl: 'd-description--xl',
 };

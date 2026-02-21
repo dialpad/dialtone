@@ -70,24 +70,29 @@ fieldset {
   display: flex;
   box-sizing: border-box;
   color: var(--dt-color-foreground-tertiary);
-  font-size: var(--dt-font-size-100);
+  font-size: var(--dt-font-size-150);
   font-family: inherit;
-  line-height: var(--dt-font-line-height-400);
+  line-height: var(--dt-font-line-height-300);
   fill: currentColor;
+
+  //  $$  SIZES
+  //  ----------------------------------------------------------------------------
+  &--xs,
+  &--sm {
+    font-size: var(--dt-font-size-75);
+  }
+
+  &--lg {
+    font-size: var(--dt-font-size-150);
+  }
+
+  &--xl {
+    font-size: var(--dt-font-size-200);
+  }
 }
 
 .d-label + .d-description {
   margin-block: var(--dt-size-300-negative) var(--dt-size-300);
-}
-
-//  $$  SIZES
-//  ----------------------------------------------------------------------------
-.d-description--lg {
-  font-size: var(--dt-font-size-200);
-}
-
-.d-description--xl {
-  font-size: var(--dt-font-size-200);
 }
 
 //  ============================================================================
@@ -102,13 +107,14 @@ fieldset {
   margin-block-start: var(--dt-size-400);
   color: var(--validation-color-text);
   font-weight: var(--dt-font-weight-medium);
-  font-size: var(--dt-font-size-100);
+  font-size: var(--dt-font-size-150);
   font-family: inherit;
   line-height: var(--dt-font-line-height-300);
 
   // Icon Slot
   &::before {
     display: block;
+    margin-block-start: var(--dt-size-200);
     inline-size: var(--dt-size-500); // 16
     min-inline-size: var(--dt-size-500); // 16
     block-size: var(--dt-size-500); // 16

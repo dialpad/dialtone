@@ -389,8 +389,8 @@ describe('DtInput tests', () => {
           expect(label.classes().includes(`d-label--${MOCK_INPUT_SIZE_EXTRA_SMALL}`)).toBe(true);
         });
 
-        it('should not add description size class', () => {
-          expect(description.classes().includes(`d-description--${MOCK_INPUT_SIZE_EXTRA_SMALL}`)).toBe(false);
+        it('should add description size class', () => {
+          expect(description.classes().includes(`d-description--${MOCK_INPUT_SIZE_EXTRA_SMALL}`)).toBe(true);
         });
       });
 
