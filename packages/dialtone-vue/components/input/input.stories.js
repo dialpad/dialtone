@@ -103,6 +103,7 @@ export const argTypesData = {
     },
   },
   currentLength: {
+    control: 'number',
     table: {
       defaultValue: {
         summary: 'null',
@@ -110,11 +111,33 @@ export const argTypesData = {
     },
   },
   validate: {
+    control: 'object',
     table: {
       defaultValue: {
         summary: 'null',
       },
     },
+  },
+  disabled: {
+    control: { type: 'boolean' },
+  },
+  hidden: {
+    control: { type: 'boolean' },
+  },
+  labelVisible: {
+    control: { type: 'boolean' },
+  },
+  retainWarning: {
+    control: { type: 'boolean' },
+  },
+  name: {
+    control: { type: 'text' },
+  },
+  inputWrapperClass: {
+    control: 'text',
+  },
+  rootClass: {
+    control: 'text',
   },
 
   // HTML attributes
