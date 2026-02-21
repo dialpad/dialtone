@@ -1,5 +1,8 @@
 <template>
-  <div id="components-checkbox--variants-container">
+  <dt-stack
+    id="components-checkbox--variants-container"
+    gap="400"
+  >
     <!-- Default -->
     <dt-checkbox
       name="default"
@@ -212,16 +215,17 @@
       checked
     />
     <!-- Checked and With Description and Success validation message -->
-  </div>
+  </dt-stack>
 </template>
 
 <script>
 import DtCheckbox from './checkbox.vue';
+import DtStack from '../stack/stack.vue';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 
 export default {
   name: 'CheckboxVariants',
-  components: { DtCheckbox },
+  components: { DtCheckbox, DtStack },
   created () {
     this.VALIDATION_MESSAGE_TYPES = VALIDATION_MESSAGE_TYPES;
   },

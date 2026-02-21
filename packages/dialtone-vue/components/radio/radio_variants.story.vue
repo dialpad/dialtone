@@ -1,5 +1,8 @@
 <template>
-  <div id="components-radio--variants-container">
+  <dt-stack
+    id="components-radio--variants-container"
+    gap="400"
+  >
     <!-- Default -->
     <dt-radio
       name="Value"
@@ -182,16 +185,17 @@
       checked
     />
     <!-- Checked With Messages -->
-  </div>
+  </dt-stack>
 </template>
 
 <script>
 import DtRadio from './radio.vue';
+import DtStack from '../stack/stack.vue';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 
 export default {
   name: 'RadioVariants',
-  components: { DtRadio },
+  components: { DtRadio, DtStack },
   setup () {
     return {
       VALIDATION_MESSAGE_TYPES,
