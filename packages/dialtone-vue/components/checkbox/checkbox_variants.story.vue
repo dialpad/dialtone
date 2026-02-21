@@ -108,6 +108,7 @@
       label="Success"
       description="With Description"
       validation-state="success"
+      :messages="[{ message: 'Success message', type: VALIDATION_MESSAGE_TYPES.SUCCESS }]"
     />
     <!-- Success With Description -->
 
@@ -118,6 +119,7 @@
       label="Warning"
       description="With Description"
       validation-state="warning"
+      :messages="[{ message: 'Warning message', type: VALIDATION_MESSAGE_TYPES.WARNING }]"
     />
     <!-- Warning With Description -->
 
@@ -128,6 +130,7 @@
       label="Error"
       description="With Description"
       validation-state="error"
+      :messages="[{ message: 'Critical message', type: VALIDATION_MESSAGE_TYPES.ERROR }]"
     />
     <!-- Error With Description -->
 
@@ -138,6 +141,7 @@
       label="Checked Success"
       description="With Description"
       validation-state="success"
+      :messages="[{ message: 'Success message', type: VALIDATION_MESSAGE_TYPES.SUCCESS }]"
       checked
     />
     <!-- Checked Success With Description -->
@@ -160,6 +164,7 @@
       label="Checked Error"
       description="With Description"
       validation-state="error"
+      :messages="[{ message: 'Critical message', type: VALIDATION_MESSAGE_TYPES.ERROR }]"
       checked
     />
     <!-- Checked Error With Description -->
