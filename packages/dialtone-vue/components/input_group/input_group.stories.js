@@ -106,6 +106,7 @@ export const argTypesData = {
 export default {
   title: 'Components/Input Group',
   component: DtInputGroup,
+  tags: ['!dev', '!autodocs'],
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
