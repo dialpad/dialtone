@@ -71,6 +71,12 @@ export const argTypesData = {
       },
     },
   },
+  legendClass: {
+    control: 'text',
+  },
+  messagesClass: {
+    control: 'text',
+  },
 
   // Directives
   'v-model': {
