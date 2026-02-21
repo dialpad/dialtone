@@ -37,8 +37,6 @@
         box-sizing: border-box;
         margin: 0;
         padding: 0;
-        font-size: var(--breadcrumbs-font-size);
-        line-height: var(--breadcrumbs-line-height);
         list-style: none;
     }
 
@@ -47,10 +45,12 @@
     //  ----------------------------------------------------------------------------
     &__item {
         position: relative;
+        padding: 0;
+        font-size: var(--breadcrumbs-font-size);
+        line-height: var(--breadcrumbs-line-height);
+        list-style: none;
         margin-inline: var(--dt-size-400) 0;
         margin-block: 0;
-        padding: 0;
-        list-style: none;
 
         //  Provide a forward slash with each element except when it's the last one.
         &:not(:last-of-type) {
@@ -58,10 +58,10 @@
 
             &::before {
                 position: absolute;
-                inset-inline-end: var(--dt-size-450-negative);
-                margin-block-start: var(--dt-size-100-negative);
                 color: var(--breadcrumbs-color-separator);
                 content: '/';
+                inset-inline-end: var(--dt-size-450-negative);
+                margin-block-start: var(--dt-size-100-negative);
             }
         }
 
