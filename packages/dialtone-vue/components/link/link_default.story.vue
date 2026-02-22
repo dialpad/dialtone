@@ -4,6 +4,7 @@
       :href="$attrs.href"
       :kind="$attrs.kind"
       :inverted="$attrs.inverted"
+      :underline="$attrs.underline"
       :rel="$attrs.rel"
       @click="$attrs.onClick"
       @focusin="$attrs.onFocusIn"
