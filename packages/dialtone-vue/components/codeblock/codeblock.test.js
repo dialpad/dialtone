@@ -49,5 +49,19 @@ describe('DtCodeblock Tests', () => {
         expect(codeElement.text()).toEqual(text);
       });
     });
+
+    describe('When bordered prop is true', () => {
+      it('should add the bordered class to the pre element', async () => {
+        await wrapper.setProps({ bordered: true });
+        expect(wrapper.find('pre').classes()).toContain('d-codeblock--bordered');
+      });
+    });
+
+    describe('When size prop is set', () => {
+      it('should apply the size modifier class to the code element', async () => {
+        await wrapper.setProps({ size: 'lg' });
+        expect(wrapper.find('code').classes()).toContain('d-codeblock__code--lg');
+      });
+    });
   });
 });
