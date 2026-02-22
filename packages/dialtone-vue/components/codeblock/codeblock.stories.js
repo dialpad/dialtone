@@ -7,7 +7,6 @@ import DtCodeblockVariantsTemplate from './codeblock_variants.story.vue';
 export const argTypesData = {
   // Props
   text: {
-    description: 'The text to include in the codeblock',
     control: {
       type: 'text',
     },
@@ -31,17 +30,11 @@ export default {
 };
 
 // Templates
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtCodeblockDefaultTemplate,
-);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtCodeblockDefaultTemplate);
 
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
-  args,
-  argTypes,
-  DtCodeblockVariantsTemplate,
-);
+const VariantsTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtCodeblockVariantsTemplate);
 
 export const Default = {
   render: DefaultTemplate,

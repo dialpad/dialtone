@@ -16,11 +16,17 @@ export default {
   name: 'DtCodeblock',
 
   props: {
+    /**
+     * The text to display in the codeblock.
+     */
     text: {
       type: String,
       required: true,
     },
 
+    /**
+     * Whether to render as a styled container block.
+     */
     bordered: {
       type: Boolean,
       default: false,
