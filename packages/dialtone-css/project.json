@@ -33,6 +33,13 @@
         "parallel": false
       }
     },
+    "buildWatch": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "gulp buildWatch"
+      }
+    },
     "watch": {
       "executor": "nx:run-commands",
       "dependsOn": [
