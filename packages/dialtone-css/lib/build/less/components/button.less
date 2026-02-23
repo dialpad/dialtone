@@ -114,19 +114,27 @@
 
   &--disabled,
   &:disabled {
-    color: color-mix(in oklch, var(--button-color-text) 70%, transparent);
-    background-color: color-mix(in oklch,
-      oklch(
-        from var(--button-color-background) l calc(c - .08) h
-      )
-      55%, transparent
-    );
-    border-color: color-mix(in oklch, var(--button-color-border) 65%, transparent);
+    --chroma-adjust-text: .04;
+    --chroma-adjust-background: .085;
+    --chroma-adjust-border: .085;
+    --opacity-adjust-text: 50%;
+    --opacity-adjust-background: 40%;
+    --opacity-adjust-border: 40%;
+
+    color:            color-mix(in oklch, oklch( from var(--button-color-text)       l calc(c - var(--chroma-adjust-text)) h ) var(--opacity-adjust-text), transparent );
+    background-color: color-mix(in oklch, oklch( from var(--button-color-background) l calc(c - var(--chroma-adjust-background)) h ) var(--opacity-adjust-background), transparent );
+    border-color:     color-mix(in oklch, oklch( from var(--button-color-border)     l calc(c - var(--chroma-adjust-border)) h ) var(--opacity-adjust-border), transparent );
     cursor: not-allowed;
     transition: none;
+    pointer-events: none;
 
     &.d-btn--primary {
-      color: color-mix(in oklch, var(--button-color-text) 80%, transparent);
+      --opacity-adjust-text: 90%;
+    }
+
+    &.d-btn--muted {
+      --opacity-adjust-text: 40%;
+      --opacity-adjust-border: 80%;
     }
   }
 }

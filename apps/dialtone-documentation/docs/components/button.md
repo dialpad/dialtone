@@ -172,8 +172,40 @@ showHtmlWarning />
 
 ### Disabled
 
-Buttons can be disabled using either the `disabled` attribute or a Dialtone class. Use the attribute when a button should appear disabled and not recieve focus; use the class when a button should appear disabled but still recieve focus (i.e. a disabled button with a tooltip). Using the class also requires `aria-disabled` and a wrapper to display the "not allowed" pointer. Additional javascript implementation is required to prevent the click event.
-All button styles and variations appear the same when disabled.
+<code-well-header>
+  <dt-toggle v-model="isDisabled" size="sm" wrapperClass="d-g8 d-m-auto d-pb8">Disabled</dt-toggle>
+  <dt-stack gap="400" ref="disabledAll">
+    <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+      <dt-button :disabled="isDisabled"> Place Call </dt-button>
+      <dt-button :disabled="isDisabled" importance="outlined"> Place Call </dt-button>
+      <dt-button :disabled="isDisabled" importance="clear"> Place Call </dt-button>
+    </dt-stack>
+    <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+      <dt-button :disabled="isDisabled" kind="danger"> Place Call </dt-button>
+      <dt-button :disabled="isDisabled" kind="danger" importance="outlined"> Place Call </dt-button>
+      <dt-button :disabled="isDisabled" kind="danger" importance="clear"> Place Call </dt-button>
+    </dt-stack>
+    <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+      <dt-button :disabled="isDisabled" kind="positive">Place Call</dt-button>
+      <dt-button :disabled="isDisabled" kind="positive" importance="outlined">Place Call</dt-button>
+      <dt-button :disabled="isDisabled" kind="positive" importance="clear">Place Call</dt-button>
+    </dt-stack>
+    <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+      <dt-button :disabled="isDisabled" kind="muted" importance="clear"> Place Call </dt-button>
+      <dt-button :disabled="isDisabled" kind="muted" importance="outlined"> Place Call </dt-button>
+    </dt-stack>
+  </dt-stack>
+</code-well-header>
+<code-example-tabs
+:htmlCode='() => $refs.disabledAll'
+vueCode='
+<dt-button disabled {props}>Place Call</dt-button>
+'
+showHtmlWarning />
+
+Buttons can be disabled using the `disabled` attribute or the Dialtone class, `d-btn--disabled`. Use the attribute when a button should appear disabled and not receive focus; use the class when a button should appear disabled but still receive focus (i.e. a disabled button with a tooltip).
+
+Using the class also requires `aria-disabled`, and additional javascript implementation is required to prevent events.
 
 <code-well-header>
   <dt-stack
@@ -185,8 +217,8 @@ All button styles and variations appear the same when disabled.
       <dt-button disabled>Place Call (disabled attribute)</dt-button>
     </span>
     <span>
-      <span class="d-c-not-allowed">
-        <dt-button class="d-btn--disabled">Place Call (disabled class)</dt-button>
+      <span v-dt-tooltip="`Tooltip example`">
+        <dt-button class="d-btn--disabled" aria-disabled="true">Place Call (disabled class)</dt-button>
       </span>
     </span>
   </dt-stack>
@@ -198,8 +230,8 @@ vueCode='
 <!-- disabled attribute -->
 <dt-button disabled>Place Call</dt-button>
 <!-- disabled class -->
-<span class="d-c-not-allowed">
-  <dt-button class="d-btn--disabled">Place Call</dt-button>
+<span v-dt-tooltip="`Tooltip example`">
+  <dt-button class="d-btn--disabled" aria-disabled="true">Place Call (disabled class)</dt-button>
 </span>
 '
 showHtmlWarning />
@@ -1133,5 +1165,8 @@ We provide the following branded buttons for log-in and sign-up workflows.
 <component-class-table component-name="button"></component-class-table>
 
 <script setup>
+import { ref } from 'vue';
 import ButtonVariantsTable from '@baseComponents/ButtonVariantsTable.vue';
+
+const isDisabled = ref(true);
 </script>
