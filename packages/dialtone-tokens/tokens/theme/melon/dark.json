@@ -7,7 +7,7 @@
           "type": "color"
         },
         "accent": {
-          "value": "{color.magenta.600}",
+          "value": "{color.magenta.900}",
           "type": "color"
         },
         "action": {
