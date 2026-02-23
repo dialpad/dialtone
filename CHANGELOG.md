@@ -1,3 +1,10 @@
+## [9.160.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.160.0...dialtone/v9.160.1) (2026-02-23)
+
+
+### Bug Fixes
+
+* **Tooltip:** NO-JIRA fix docsite ([#1075](https://github.com/dialpad/dialtone/issues/1075)) ([7a097aa](https://github.com/dialpad/dialtone/commit/7a097aa48bccc3dbe7fa0d4ed5171c7080f64db7))
+
 # [9.160.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.159.0...dialtone/v9.160.0) (2026-02-23)
 
 
