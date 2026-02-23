@@ -9,6 +9,7 @@
       :editor="editor"
       :should-show="bubbleMenuShouldShow"
       :options="floatingOptions"
+      :append-to="appendTo"
       style="visibility: visible;"
     >
       <div class="d-popover__dialog">
@@ -535,6 +536,7 @@ export default {
   data () {
     return {
       editor: null,
+      appendTo: () => returnFirstEl(this.$refs.editor.$el).getRootNode()?.querySelector('body'),
       floatingOptions: {
         placement: 'top-start',
       },
