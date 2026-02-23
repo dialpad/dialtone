@@ -10,27 +10,15 @@ keywords: ["navigation", "path", "d-breadcrumbs", "DtBreadcrumbs", "dt-breadcrum
 ---
 
 <code-well-header>
-  <div class="d-w100p">
-    <nav class="d-breadcrumbs" aria-label="breadcrumb">
-      <ol>
-        <li class="d-breadcrumbs__item">
-          <a href="#" class="d-link d-link--muted">Root</a>
-        </li>
-        <li class="d-breadcrumbs__item">
-          <a href="#" class="d-link d-link--muted">Section</a>
-        </li>
-        <li class="d-breadcrumbs__item">
-          <a href="#" class="d-link d-link--muted">Section</a>
-        </li>
-        <li class="d-breadcrumbs__item">
-          <a href="#" class="d-link d-link--muted">Section</a>
-        </li>
-        <li class="d-breadcrumbs__item d-breadcrumbs__item--selected">
-          <a href="#" class="d-link d-link--muted" aria-current="location">Current Page</a>
-        </li>
-      </ol>
-    </nav>
-  </div>
+  <dt-breadcrumbs
+    :breadcrumbs="[
+      { href: '#', label: 'Root' },
+      { href: '#', label: 'Section' },
+      { href: '#', label: 'Section' },
+      { href: '#', label: 'Section' },
+      { href: '#', label: 'Current Page', selected: true },
+    ]"
+  />
 </code-well-header>
 
 <!-- <component-combinator component-name="DtBreadcrumbs" /> -->
@@ -54,74 +42,30 @@ Breadcrumbs are always treated as secondary and should not entirely replace the 
 ### Default
 
 <code-well-header>
-    <nav class="d-breadcrumbs" aria-label="breadcrumb">
-        <ol>
-            <li class="d-breadcrumbs__item">
-                <a href="#" class="d-link d-link--muted">Root</a>
-            </li>
-            <li class="d-breadcrumbs__item">
-                <a href="#" class="d-link d-link--muted">Section</a>
-            </li>
-            <li class="d-breadcrumbs__item">
-                <a href="#" class="d-link d-link--muted">Section</a>
-            </li>
-            <li class="d-breadcrumbs__item">
-                <a href="#" class="d-link d-link--muted">Section</a>
-            </li>
-            <li class="d-breadcrumbs__item d-breadcrumbs__item--selected">
-                <a href="#" class="d-link d-link--muted" aria-current="location">Current Page</a>
-            </li>
-        </ol>
-    </nav>
+  <dt-breadcrumbs
+    ref="defaultExample"
+    :breadcrumbs="[
+      { href: '#', label: 'Root' },
+      { href: '#', label: 'Section' },
+      { href: '#', label: 'Section' },
+      { href: '#', label: 'Section' },
+      { href: '#', label: 'Current Page', selected: true },
+    ]"
+  />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<nav class="d-breadcrumbs" aria-label="breadcrumb">
-  <ol>
-    <li class="d-breadcrumbs__item">
-      <a href="#" class="d-link d-link--muted">Root</a>
-    </li>
-    <li class="d-breadcrumbs__item">
-      <a href="#" class="d-link d-link--muted">Section</a>
-    </li>
-    <li class="d-breadcrumbs__item">
-      <a href="#" class="d-link d-link--muted">Section</a>
-    </li>
-    <li class="d-breadcrumbs__item">
-      <a href="#" class="d-link d-link--muted">Section</a>
-    </li>
-    <li class="d-breadcrumbs__item d-breadcrumbs__item--selected">
-      <a href="#" class="d-link d-link--muted" aria-current="location">Current Page</a>
-    </li>
-  </ol>
-</nav>
-'
+:htmlCode='() => $refs.defaultExample'
 vueCode='
 <dt-breadcrumbs
   :breadcrumbs="[
-    {
-      href: `#`,
-      label: `Root`,
-    },
-    {
-      href: `#`,
-      label: `Section`,
-    },
-    {
-      href: `#`,
-      label: `Section`,
-    },
-    {
-      href: `#`,
-      label: `Section`,
-    },
-    {
-      href: `#`,
-      label: `Current Page`,
-      selected: true,
-    },
-  ]" />
+    { href: `#`, label: `Root` },
+    { href: `#`, label: `Section` },
+    { href: `#`, label: `Section` },
+    { href: `#`, label: `Section` },
+    { href: `#`, label: `Current Page`, selected: true },
+  ]"
+/>
 '
 showHtmlWarning />
 
