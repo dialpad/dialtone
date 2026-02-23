@@ -787,6 +787,10 @@
                     "link": "/utilities/typography/text-transform.html"
                   },
                   {
+                    "text": "Text Wrap",
+                    "link": "/utilities/typography/text-wrap.html"
+                  },
+                  {
                     "text": "Vertical Alignment",
                     "link": "/utilities/typography/vertical-align.html"
                   },
