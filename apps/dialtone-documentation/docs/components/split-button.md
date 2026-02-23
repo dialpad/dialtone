@@ -181,50 +181,6 @@ vueCode='
 '
 showHtmlWarning />
 
-### Inverted
-
-<code-well-header bgclass="d-bgc-contrast">
-  <dt-stack direction="row" gap="400">
-      <dt-split-button kind="inverted" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
-      <dt-split-button importance="outlined" kind="inverted" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
-      <dt-split-button importance="clear" kind="inverted" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
-  </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--primary d-btn--inverted d-split-btn__alpha d-split-btn__alpha--md" type="button">
-    <span class="d-btn__label base-button__label"> Place Call </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--primary d-btn--inverted d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--outlined d-btn--inverted d-split-btn__alpha d-split-btn__alpha--md" type="button">
-    <span class="d-btn__label base-button__label"> Place Call </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--outlined d-btn--inverted d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--inverted d-split-btn__alpha d-split-btn__alpha--md" type="button">
-    <span class="d-btn__label base-button__label"> Place Call </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--inverted d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-'
-vueCode='
-<dt-split-button kind="inverted" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
-<dt-split-button importance="outlined" kind="inverted" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
-<dt-split-button importance="clear" kind="inverted" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
-'
-showHtmlWarning />
-
 ### Muted
 
 <code-well-header>
@@ -344,6 +300,46 @@ htmlCode='
 vueCode='
 <dt-split-button alpha-active omega-tooltip-text="More calling options"> Alpha active </dt-split-button>
 <dt-split-button omega-active omega-tooltip-text="More calling options"> Omega active </dt-split-button>
+'
+showHtmlWarning />
+
+### Inverted
+
+<dt-notice
+  title="Deprecated"
+  kind="error"
+  class="d-wmx100p d-my16"
+>
+  <code>kind="inverted"</code> has been deprecated in favor of using <router-link to="mode-island.html"> <DtLink>DtModeIsland</DtLink> </router-link> as a wrapper.
+</dt-notice>
+
+<code-well-header>
+  <dt-mode-island class="d-p16 d-bar16">
+    <dt-stack gap="400" ref="modeIslandExample">
+      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+        <dt-split-button omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+        <dt-split-button importance="outlined" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+        <dt-split-button importance="clear" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+      </dt-stack>
+      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+        <dt-split-button kind="danger" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+        <dt-split-button kind="danger" importance="outlined" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+        <dt-split-button kind="danger" importance="clear" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+      </dt-stack>
+      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+        <dt-split-button kind="muted" importance="clear" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+        <dt-split-button kind="muted" importance="outlined" omega-tooltip-text="More calling options"> Place Call </dt-split-button>
+      </dt-stack>
+    </dt-stack>
+  </dt-mode-island>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.modeIslandExample'
+vueCode='
+<dt-mode-island>
+ <dt-split-button {props}> Place Call </dt-split-button>
+</dt-mode-island>
 '
 showHtmlWarning />
 

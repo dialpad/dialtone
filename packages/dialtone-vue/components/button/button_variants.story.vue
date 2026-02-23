@@ -23,12 +23,10 @@
         <tr
           v-for="kind in variantKinds"
           :key="kind"
-          :class="{ 'd-bgc-contrast': kind === 'inverted' }"
         >
           <th
             class="d-ta-right d-ba d-brw2"
             scope="row"
-            :class="{ 'd-bc-default-inverted d-fc-primary-inverted': kind === 'inverted' }"
           >
             <span
               class="d-headline--eyebrow"
@@ -38,8 +36,7 @@
           <td
             v-for="importance in importanceList"
             :key="`${kind}-${importance}`"
-            class="d-ta-center d-br"
-            :class="[kind === 'inverted' ? 'd-bc-default-inverted' : 'd-bc-default']"
+            class="d-ta-center d-br d-bc-default"
           >
             <abbr
               v-if="isInvalidCombination({ kind, importance })"
@@ -51,7 +48,7 @@
               :kind="kind"
               :importance="importance"
             >
-              {{ kind }} / {{ importance }}
+              Place Call
             </dt-button>
           </td>
         </tr>
@@ -240,7 +237,7 @@ export default {
       sizes: Object.keys(BUTTON_SIZE_MODIFIERS),
       importanceList: Object.keys(BUTTON_IMPORTANCE_MODIFIERS),
       iconPositions: Object.keys(ICON_POSITION_MODIFIERS),
-      variantKinds: Object.keys(BUTTON_KIND_MODIFIERS).filter(k => k !== 'unstyled'),
+      variantKinds: Object.keys(BUTTON_KIND_MODIFIERS).filter(k => k !== 'unstyled' && k !== 'inverted'),
       disabledKinds: Object.keys(BUTTON_KIND_MODIFIERS).filter(k => k !== 'unstyled' && k !== 'inverted'),
     };
   },

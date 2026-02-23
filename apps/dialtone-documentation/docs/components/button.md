@@ -128,52 +128,6 @@ vueCode='
 '
 showHtmlWarning />
 
-### Inverted
-
-<dt-notice
-  title="Deprecated"
-  kind="error"
-  class="d-wmx100p d-my16"
->
-  <code>kind="inverted"</code> prop has been deprecated in favor of using <router-link to="mode-island.html"> <DtLink>DtModeIsland</DtLink> </router-link> as a wrapper.
-</dt-notice>
-
-In place of <code>kind="inverted"</code>, use the <router-link to="mode-island.html"> <DtLink>DtModeIsland</DtLink> </router-link> component as a wrapper.
-
-<code-well-header>
-  <dt-mode-island class="d-p16 d-bar16">
-    <dt-stack gap="400" ref="modeIslandExample">
-      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
-        <dt-button> Place Call </dt-button>
-        <dt-button importance="outlined"> Place Call </dt-button>
-        <dt-button importance="clear"> Place Call </dt-button>
-      </dt-stack>
-      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
-        <dt-button kind="danger"> Place Call </dt-button>
-        <dt-button kind="danger" importance="outlined"> Place Call </dt-button>
-        <dt-button kind="danger" importance="clear"> Place Call </dt-button>
-      </dt-stack>
-      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
-        <dt-button kind="positive">Place Call</dt-button>
-        <dt-button kind="positive" importance="outlined">Place Call</dt-button>
-        <dt-button kind="positive" importance="clear">Place Call</dt-button>
-      </dt-stack>
-      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
-        <dt-button kind="muted" importance="clear"> Place Call </dt-button>
-        <dt-button kind="muted" importance="outlined"> Place Call </dt-button>
-      </dt-stack>
-    </dt-stack>
-  </dt-mode-island>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.modeIslandExample'
-vueCode='
-<dt-button disabled {props}>Place Call</dt-button>
-'
-showHtmlWarning />
-
-
 ### Muted
 
 The muted button style is used to communicate non-primary actions for contexts in which the base style may not work
@@ -361,22 +315,52 @@ vueCode='
 '
 showHtmlWarning />
 
-## Split Button
+### Inverted
 
-The [Split Button](split-button.md) is its own component containing multiple buttons.
+<dt-notice
+  title="Deprecated"
+  kind="error"
+  class="d-wmx100p d-my16"
+>
+  <code>kind="inverted"</code> has been deprecated in favor of using <router-link to="mode-island.html"> <DtLink>DtModeIsland</DtLink> </router-link> as a wrapper.
+</dt-notice>
+
+In place of <code>kind="inverted"</code>, use the <router-link to="mode-island.html"> <DtLink>DtModeIsland</DtLink> </router-link> component as a wrapper.
 
 <code-well-header>
-  <dt-split-button
-    omega-tooltip-text="More calling options"
-  >
-    Place call
-    <template #dropdownList>
-      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>
-      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item>
-      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>
-    </template>
-  </dt-split-button>
+  <dt-mode-island class="d-p16 d-bar16">
+    <dt-stack gap="400" ref="modeIslandExample">
+      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+        <dt-button> Place Call </dt-button>
+        <dt-button importance="outlined"> Place Call </dt-button>
+        <dt-button importance="clear"> Place Call </dt-button>
+      </dt-stack>
+      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+        <dt-button kind="danger"> Place Call </dt-button>
+        <dt-button kind="danger" importance="outlined"> Place Call </dt-button>
+        <dt-button kind="danger" importance="clear"> Place Call </dt-button>
+      </dt-stack>
+      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+        <dt-button kind="positive">Place Call</dt-button>
+        <dt-button kind="positive" importance="outlined">Place Call</dt-button>
+        <dt-button kind="positive" importance="clear">Place Call</dt-button>
+      </dt-stack>
+      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+        <dt-button kind="muted" importance="clear"> Place Call </dt-button>
+        <dt-button kind="muted" importance="outlined"> Place Call </dt-button>
+      </dt-stack>
+    </dt-stack>
+  </dt-mode-island>
 </code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.modeIslandExample'
+vueCode='
+<dt-mode-island>
+  <dt-button {props}>Place Call</dt-button>
+</dt-mode-island>
+'
+showHtmlWarning />
 
 ## Sizes
 
@@ -1135,6 +1119,28 @@ vueCode='
 </dt-button>
 '
 showHtmlWarning />
+
+## Split Button
+
+<dt-notice
+  kind="info"
+  class="d-wmx100p d-my16"
+>
+  <router-link to="split-button.html"> <DtLink>DtSplitButton</DtLink> </router-link> is its own component containing multiple DtButtons.
+</dt-notice>
+
+<code-well-header>
+  <dt-split-button
+    omega-tooltip-text="More calling options"
+  >
+    Place call
+    <template #dropdownList>
+      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>
+      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item>
+      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>
+    </template>
+  </dt-split-button>
+</code-well-header>
 
 ## Branded
 

@@ -127,6 +127,7 @@ export default {
      * Determines whether the link should have inverted styling if the button is styled as a link.
      * @values true, false
      * @see DtLink
+     * @ignore
      */
     linkInverted: {
       type: Boolean,
@@ -211,7 +212,7 @@ export default {
 
     /**
      * The color of the button.
-     * @values default, unstyled, muted, danger, positive, inverted
+     * @values default, unstyled, muted, danger, positive
      */
     kind: {
       type: String,

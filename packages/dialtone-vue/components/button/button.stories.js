@@ -19,7 +19,6 @@ export const argsData = {
   onFocusOut: action('focusout'),
   size: 'md',
   link: false,
-  linkInverted: false,
 };
 
 const iconsList = getIconNames();
@@ -67,7 +66,7 @@ export const argTypesData = {
   },
   kind: {
     control: 'select',
-    options: Object.keys(BUTTON_KIND_MODIFIERS),
+    options: Object.keys(BUTTON_KIND_MODIFIERS).filter(k => k !== 'inverted'),
   },
   link: {
     type: {
@@ -85,7 +84,7 @@ export const argTypesData = {
     options: Object.keys(LINK_KIND_MODIFIERS),
   },
   linkInverted: {
-    control: 'boolean',
+    table: { disable: true },
   },
   loading: {
     control: 'boolean',
