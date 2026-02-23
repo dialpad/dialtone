@@ -1,3 +1,18 @@
+# [9.160.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.159.0...dialtone/v9.160.0) (2026-02-23)
+
+
+### Bug Fixes
+
+* **Message Input:** DLT-3000 incorrect syntax on emoji picker open ([#1068](https://github.com/dialpad/dialtone/issues/1068)) ([b4bce6e](https://github.com/dialpad/dialtone/commit/b4bce6eb0a10eda2a4cf61610b4313ae0e8e470b))
+* **Tooltip:** DLT-3029 render tooltip-directive with a singleton app ([#1066](https://github.com/dialpad/dialtone/issues/1066)) ([ac119b3](https://github.com/dialpad/dialtone/commit/ac119b3fe3117b57753b39cbbf56bdf198c5adb5))
+
+
+### Features
+
+* **Button:** DLT-3009 add support for anchor and router-link rendering ([#1055](https://github.com/dialpad/dialtone/issues/1055)) ([638f846](https://github.com/dialpad/dialtone/commit/638f84641d68a27a95d1fe1fa420e6a3ab01ea51))
+* **Editor:** DP-175971 added custom variable extension to rich text editor ([#1052](https://github.com/dialpad/dialtone/issues/1052)) ([a437509](https://github.com/dialpad/dialtone/commit/a4375091aebbea1e354367693a439a7d74692a37))
+* **Link:** DLT-3010 add router-link rendering support ([#1056](https://github.com/dialpad/dialtone/issues/1056)) ([a7c9d98](https://github.com/dialpad/dialtone/commit/a7c9d984c581a3695f4e12db600dbe9a7a0a8e37))
+
 # [9.159.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.158.0...dialtone/v9.159.0) (2026-02-19)
 
 
