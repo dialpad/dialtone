@@ -7,7 +7,7 @@ export const DtTooltipDirective = {
   name: 'dt-tooltip-directive',
   install (app) {
     const DEFAULT_PLACEMENT = 'top';
-    if (!global.__DtTooltipDirectiveAppInstance) {
+    if (!globalThis.__DtTooltipDirectiveAppInstance) {
       const DtTooltipDirectiveApp = createApp({
         name: 'DtTooltipDirectiveApp',
         components: { DtTooltip },
@@ -18,7 +18,7 @@ export const DtTooltipDirective = {
         },
 
         created () {
-          global.__DtTooltipDirectiveAppInstance = getCurrentInstance();
+          globalThis.__DtTooltipDirectiveAppInstance = getCurrentInstance();
         },
 
         methods: {
@@ -61,7 +61,7 @@ export const DtTooltipDirective = {
       DtTooltipDirectiveApp.mount(mountPoint);
     }
 
-    const tooltipInstance = global.__DtTooltipDirectiveAppInstance;
+    const tooltipInstance = globalThis.__DtTooltipDirectiveAppInstance;
 
     app.directive('dt-tooltip', {
       beforeMount (anchor, binding) {
