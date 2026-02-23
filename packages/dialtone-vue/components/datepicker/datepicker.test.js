@@ -342,4 +342,221 @@ describe('DtDatepicker Tests', () => {
       expect(wrapper.emitted('selected-date')).toBeTruthy();
     });
   });
+
+  describe('Min/Max Date Tests', () => {
+    const MIN_DATE = new Date(MOCK_YEAR, MOCK_MONTH, 10);
+    const MAX_DATE = new Date(MOCK_YEAR, MOCK_MONTH, 20);
+
+    beforeEach(async () => {
+      mockProps = { minDate: MIN_DATE, maxDate: MAX_DATE };
+      await updateWrapper();
+    });
+
+    it('days before minDate should be disabled', () => {
+      const days = wrapper.findAll('.d-datepicker__calendar button');
+      // Day 9 (July 9) is index 14 (6 offset days from June + 9 - 1)
+      const day9 = days.at(14);
+
+      expect(day9.attributes('disabled')).toBeDefined();
+      expect(day9.classes('d-datepicker__day--disabled')).toBe(true);
+    });
+
+    it('days after maxDate should be disabled', () => {
+      const days = wrapper.findAll('.d-datepicker__calendar button');
+      // Day 21 (July 21) is index 26 (6 + 21 - 1)
+      const day21 = days.at(26);
+
+      expect(day21.attributes('disabled')).toBeDefined();
+      expect(day21.classes('d-datepicker__day--disabled')).toBe(true);
+    });
+
+    it('days within range should be enabled', () => {
+      const days = wrapper.findAll('.d-datepicker__calendar button');
+      // Day 15 (July 15) is index 20 (6 + 15 - 1)
+      const day15 = days.at(20);
+
+      expect(day15.attributes('disabled')).toBeUndefined();
+      expect(day15.classes('d-datepicker__day--disabled')).toBe(false);
+    });
+
+    it('clicking a disabled day should not emit selected-date', async () => {
+      const days = wrapper.findAll('.d-datepicker__calendar button');
+      // Day 9 is before minDate
+      const day9 = days.at(14);
+
+      await day9.trigger('click');
+
+      expect(wrapper.emitted('selected-date')).toBeFalsy();
+    });
+
+    it('clicking an enabled day should emit selected-date', async () => {
+      const days = wrapper.findAll('.d-datepicker__calendar button');
+      // Day 15 is within range
+      const day15 = days.at(20);
+
+      await day15.trigger('click');
+
+      expect(wrapper.emitted('selected-date')).toBeTruthy();
+    });
+
+    describe('navigation button constraints', () => {
+      it('previous month button should be disabled when at min bound', () => {
+        expect(prevMonthButton.attributes('disabled')).toBeDefined();
+      });
+
+      it('next month button should be disabled when at max bound', () => {
+        expect(nextMonthButton.attributes('disabled')).toBeDefined();
+      });
+
+      it('should not navigate past minDate month', async () => {
+        await prevMonthButton.trigger('click');
+
+        expect(datepickerValue.text()).toBe(MOCK_HEADER_SELECTED_DATE);
+      });
+
+      it('should not navigate past maxDate month', async () => {
+        await nextMonthButton.trigger('click');
+
+        expect(datepickerValue.text()).toBe(MOCK_HEADER_SELECTED_DATE);
+      });
+    });
+
+    it('boundary minDate day should be enabled', () => {
+      const days = wrapper.findAll('.d-datepicker__calendar button');
+      // Day 10 (July 10) is index 15 (6 + 10 - 1), the minDate itself
+      const day10 = days.at(15);
+
+      expect(day10.attributes('disabled')).toBeUndefined();
+      expect(day10.classes('d-datepicker__day--disabled')).toBe(false);
+    });
+
+    it('boundary maxDate day should be enabled', () => {
+      const days = wrapper.findAll('.d-datepicker__calendar button');
+      // Day 20 (July 20) is index 25 (6 + 20 - 1), the maxDate itself
+      const day20 = days.at(25);
+
+      expect(day20.attributes('disabled')).toBeUndefined();
+      expect(day20.classes('d-datepicker__day--disabled')).toBe(false);
+    });
+
+    it('clicking boundary minDate day should emit selected-date', async () => {
+      const days = wrapper.findAll('.d-datepicker__calendar button');
+      const day10 = days.at(15);
+
+      await day10.trigger('click');
+
+      expect(wrapper.emitted('selected-date')).toBeTruthy();
+    });
+
+    it('clicking boundary maxDate day should emit selected-date', async () => {
+      const days = wrapper.findAll('.d-datepicker__calendar button');
+      const day20 = days.at(25);
+
+      await day20.trigger('click');
+
+      expect(wrapper.emitted('selected-date')).toBeTruthy();
+    });
+
+    describe('reactive prop changes', () => {
+      it('should update disabled days when minDate changes', async () => {
+        const days = wrapper.findAll('.d-datepicker__calendar button');
+        // Day 5 (July 5) is index 10 (6 + 5 - 1), currently disabled
+        const day5 = days.at(10);
+
+        expect(day5.attributes('disabled')).toBeDefined();
+
+        // Change minDate to July 3
+        await wrapper.setProps({ minDate: new Date(MOCK_YEAR, MOCK_MONTH, 3) });
+
+        const updatedDays = wrapper.findAll('.d-datepicker__calendar button');
+        const updatedDay5 = updatedDays.at(10);
+
+        expect(updatedDay5.attributes('disabled')).toBeUndefined();
+      });
+
+      it('should update disabled days when maxDate changes', async () => {
+        const days = wrapper.findAll('.d-datepicker__calendar button');
+        // Day 25 (July 25) is index 30 (6 + 25 - 1), currently disabled
+        const day25 = days.at(30);
+
+        expect(day25.attributes('disabled')).toBeDefined();
+
+        // Change maxDate to July 28
+        await wrapper.setProps({ maxDate: new Date(MOCK_YEAR, MOCK_MONTH, 28) });
+
+        const updatedDays = wrapper.findAll('.d-datepicker__calendar button');
+        const updatedDay25 = updatedDays.at(30);
+
+        expect(updatedDay25.attributes('disabled')).toBeUndefined();
+      });
+    });
+
+    describe('with only minDate', () => {
+      beforeEach(async () => {
+        mockProps = { minDate: MIN_DATE };
+        await updateWrapper();
+      });
+
+      it('days before minDate should be disabled', () => {
+        const days = wrapper.findAll('.d-datepicker__calendar button');
+        const day9 = days.at(14);
+
+        expect(day9.attributes('disabled')).toBeDefined();
+      });
+
+      it('days after minDate should be enabled', () => {
+        const days = wrapper.findAll('.d-datepicker__calendar button');
+        const day15 = days.at(20);
+
+        expect(day15.attributes('disabled')).toBeUndefined();
+      });
+
+      it('next month button should not be disabled', () => {
+        expect(nextMonthButton.attributes('disabled')).toBeUndefined();
+      });
+    });
+
+    describe('with only maxDate', () => {
+      beforeEach(async () => {
+        mockProps = { maxDate: MAX_DATE };
+        await updateWrapper();
+      });
+
+      it('days after maxDate should be disabled', () => {
+        const days = wrapper.findAll('.d-datepicker__calendar button');
+        const day21 = days.at(26);
+
+        expect(day21.attributes('disabled')).toBeDefined();
+      });
+
+      it('days before maxDate should be enabled', () => {
+        const days = wrapper.findAll('.d-datepicker__calendar button');
+        const day15 = days.at(20);
+
+        expect(day15.attributes('disabled')).toBeUndefined();
+      });
+
+      it('previous month button should not be disabled', () => {
+        expect(prevMonthButton.attributes('disabled')).toBeUndefined();
+      });
+    });
+
+    describe('invalid prop combination', () => {
+      it('should warn when maxDate is before minDate', async () => {
+        const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+        mockProps = {
+          minDate: new Date(MOCK_YEAR, MOCK_MONTH, 20),
+          maxDate: new Date(MOCK_YEAR, MOCK_MONTH, 10),
+        };
+        await updateWrapper();
+
+        expect(warnSpy).toHaveBeenCalledWith(
+          expect.stringContaining('maxDate must be after or equal to minDate'),
+        );
+
+        warnSpy.mockRestore();
+      });
+    });
+  });
 });

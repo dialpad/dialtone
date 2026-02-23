@@ -9,7 +9,7 @@ packages/
   dialtone-tokens/       # Design tokens (color, space, typography, shadows) → JSON/CSS/iOS/Android
   dialtone-css/          # CSS utility classes built with gulp + Less
   dialtone-vue/          # Vue 3 component library (58+ components)
-  dialtone-icons/        # SVG icons → Vue components (vue2/, vue3/, android/)
+  dialtone-icons/        # SVG icons → Vue components (vue3/, android/)
   dialtone-emojis/       # Emoji assets
   dialtone-mcp-server/   # MCP server for Claude Code (component/utility/token search)
   language-server/       # LSP for IDE completions
@@ -81,6 +81,7 @@ chore: NO-JIRA update dependencies
 
 - Project: **DLT** (Dialtone)
 - All work requires a Jira ticket — create one via the Atlassian MCP if none exists
+- The Atlassian MCP server is not bundled with this project — it must be configured per-user in your Claude Code MCP settings
 - Ticket URL format: `https://dialpad.atlassian.net/browse/DLT-XXX`
 
 ## Vue Conventions (Summary)

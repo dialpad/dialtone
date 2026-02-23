@@ -21,6 +21,7 @@
             :ref="el => { if (el) setDayRef(el) }"
             :aria-label="previousYearAriaLabel()"
             :circle="true"
+            :disabled="isPrevYearDisabled"
             class="d-datepicker__nav-btn"
             importance="clear"
             kind="muted"
@@ -46,6 +47,7 @@
             :ref="el => { if (el) setDayRef(el) }"
             :aria-label="previousMonthAriaLabel()"
             :circle="true"
+            :disabled="isPrevMonthDisabled"
             class="d-datepicker__nav-btn"
             importance="clear"
             kind="muted"
@@ -86,6 +88,7 @@
             :ref="el => { if (el) setDayRef(el) }"
             :aria-label="nextMonthAriaLabel()"
             :circle="true"
+            :disabled="isNextMonthDisabled"
             class="d-datepicker__nav-btn"
             importance="clear"
             kind="muted"
@@ -111,6 +114,7 @@
             :ref="el => { if (el) setDayRef(el) }"
             :aria-label="nextYearAriaLabel()"
             :circle="true"
+            :disabled="isNextYearDisabled"
             class="d-datepicker__nav-btn"
             importance="clear"
             kind="muted"
@@ -147,6 +151,16 @@ const props = defineProps({
   selectedDate: {
     type: Date,
     required: true,
+  },
+
+  minDate: {
+    type: Date,
+    default: null,
+  },
+
+  maxDate: {
+    type: Date,
+    default: null,
   },
 });
 
@@ -194,6 +208,10 @@ const {
   changeYear,
   goToNextMonth,
   goToPrevMonth,
+  isPrevMonthDisabled,
+  isNextMonthDisabled,
+  isPrevYearDisabled,
+  isNextYearDisabled,
   previousYearAriaLabel,
   previousMonthAriaLabel,
   nextMonthAriaLabel,

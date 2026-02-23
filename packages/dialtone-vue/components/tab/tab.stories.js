@@ -1,5 +1,5 @@
 import DtTab from './tab.vue';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 // Default Prop Values
 export const argsData = {

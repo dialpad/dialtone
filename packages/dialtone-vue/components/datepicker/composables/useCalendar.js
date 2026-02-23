@@ -25,7 +25,7 @@ export function useCalendar (props, emits) {
   }
 
   function setDayRef (el, day) {
-    if (!daysRef.value.some(day => day.el === el) && day.currentMonth) {
+    if (!daysRef.value.some(day => day.el === el) && !day.disabled) {
       daysRef.value.push({ el, day });
     }
   }
@@ -116,7 +116,7 @@ export function useCalendar (props, emits) {
   }
 
   function selectDay (day) {
-    if (!day.currentMonth) { return; }
+    if (day.disabled) { return; }
 
     // local selectedDay is updated when a day is selected
     selectedDay.value = day.text;

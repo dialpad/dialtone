@@ -10,7 +10,7 @@ import PopoverVariants from './popover_variants.story.vue';
 import PopoverIframe from './popover_iframe.story.vue';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { POPOVER_DIRECTIONS, POPOVER_STICKY_VALUES } from './popover_constants';
 
 // Default Props for all variations
@@ -175,8 +175,6 @@ export const Default = {
       template: `<dt-stack direction="row" justify="center" align="center" class="d-h332"><story /></dt-stack>`,
     }),
   ],
-
-  parameters: {},
 };
 
 export const Variants = {

@@ -3,7 +3,7 @@ import DtAvatar from './avatar.vue';
 import { AVATAR_SIZE_MODIFIERS, AVATAR_PRESENCE_STATES } from './avatar_constants';
 import DtAvatarDefaultTemplate from './avatar_default.story.vue';
 import DtAvatarVariantsTemplate from './avatar_variants.story.vue';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 import defaultImage from '@/common/assets/avatar2.png';
 

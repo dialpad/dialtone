@@ -134,6 +134,16 @@ export default {
     },
 
     /**
+     * Determines whether the link-styled button should display an underline.
+     * Only applies when the link prop is true.
+     * @values true, false
+     */
+    underline: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
      * HTML button disabled attribute
      * <a class="d-link" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#disabled" target="_blank"> (Reference) </a>
      * @values true, false
@@ -307,6 +317,7 @@ export default {
           'd-link',
           getLinkKindModifier(this.linkKind, this.linkInverted),
           BUTTON_SIZE_MODIFIERS[this.size],
+          { 'd-link--no-underline': !this.underline },
         ];
       }
       if (this.kind === 'unstyled') {

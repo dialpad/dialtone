@@ -121,7 +121,7 @@
     </a>
     <dt-dropdown
       id="theme-toggle-dropdown"
-      hidden
+      :hidden="!showThemeSwitcher"
       navigation-type="arrow-keys"
       placement="bottom-start"
       class="theme-toggle-dropdown"
@@ -341,6 +341,7 @@ import { useThemeManager } from '../composables/useThemeManager';
 defineEmits(['search']);
 
 const route = useRoute();
+const showThemeSwitcher = __VUEPRESS_DEV__ || __DIALTONE_DEPLOY_PREVIEW__;
 
 // Top-level navigation items
 const navItems = [

@@ -97,6 +97,4 @@ export const Default = {
       0.25
   </div>`,
   },
-
-  parameters: {},
 };

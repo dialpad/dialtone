@@ -14,6 +14,7 @@
 //  ============================================================================
 //  $   BASE STYLE
 //  ----------------------------------------------------------------------------
+@layer dialtone.components {
 .d-chip {
   //  Component CSS Vars
   --chip-color-text: var(--dt-color-foreground-primary);
@@ -84,8 +85,8 @@
 }
 
 .d-chip__close {
-  .d-btn();
-  .d-btn--circle();
+  ._btn();
+  ._btn-circle();
 
   position: absolute;
   inset-inline-end: var(--dt-size-200);
@@ -195,4 +196,5 @@
     inline-size: var(--dt-size-550);
     block-size: var(--dt-size-550);
   }
+}
 }

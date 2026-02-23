@@ -8,6 +8,8 @@
       <month-year-picker
         ref="monthYearPicker"
         :selected-date="selectedDate"
+        :min-date="minDate"
+        :max-date="maxDate"
         @calendar-days="updateCalendarDays"
         @focus-first-day="$refs.calendar.focusFirstDay()"
         @focus-last-day="$refs.calendar.focusLastDay()"
@@ -44,6 +46,35 @@ defineProps({
   selectedDate: {
     type: Date,
     default: () => (new Date()),
+  },
+
+  /**
+     * Minimum selectable date. Days before this date will be disabled.
+     * Must be before or equal to maxDate when both are provided.
+     *
+     * @type {Date}
+     */
+  minDate: {
+    type: Date,
+    default: null,
+  },
+
+  /**
+     * Maximum selectable date. Days after this date will be disabled.
+     * Must be after or equal to minDate when both are provided.
+     *
+     * @type {Date}
+     */
+  maxDate: {
+    type: Date,
+    default: null,
+    validator: (value, props) => {
+      if (value && props.minDate && value < props.minDate) {
+        console.warn('[DtDatepicker]: maxDate must be after or equal to minDate.');
+        return false;
+      }
+      return true;
+    },
   },
 });
 

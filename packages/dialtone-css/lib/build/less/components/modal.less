@@ -18,10 +18,79 @@
 //  • TRANSITIONS
 //
 //  ============================================================================
+//  $   TRANSITION MIXINS
+//  ----------------------------------------------------------------------------
+//  Parametric mixins defined outside @layer for cross-file access.
+//  Called from within @layer below and from dialtone-transitions.less.
+._modal-animate() {
+  z-index: var(--zi-hide) !important;
+  backface-visibility: hidden !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+._modal-dialog-animate() {
+  ._modal-animate();
+
+  transform: translate3d(0, 30%, 0) scale3d(0.75, 0.75, 0.75) !important;
+}
+
+._modal-animate-in() {
+  transition:
+    opacity 100ms var(--ttf-in-out) 10ms,
+    z-index 0s 0s,
+    visibility 0s 0s,
+    transform 100ms var(--ttf-in-out) 10ms;
+
+  @media (prefers-reduced-motion) {
+    transition: none !important;
+  }
+}
+
+._modal-animate-out() {
+  transition:
+    opacity 100ms var(--ttf-in-out) 10ms,
+    z-index 0s 200ms,
+    visibility 0s 200ms,
+    transform 100ms var(--ttf-in-out) 10ms;
+
+  &.d-modal--full {
+    transition:
+      opacity 200ms var(--ttf-in-out) 0s,
+      z-index 0s 200ms,
+      visibility 0s 200ms;
+  }
+
+  @media (prefers-reduced-motion) {
+    transition: none !important;
+  }
+}
+
+._modal-dialog-animate-out() {
+  transition:
+    opacity 200ms var(--ttf-in-out) 0s,
+    z-index 0s 200ms,
+    visibility 0s 200ms,
+    transform 100ms var(--ttf-in-out) 0s;
+
+  &.d-modal--full {
+    transition:
+      opacity 200ms var(--ttf-in-out) 0s,
+      z-index 0s 200ms,
+      visibility 0s 200ms;
+  }
+
+  @media (prefers-reduced-motion) {
+    transition: none !important;
+  }
+}
+
+//  ============================================================================
 //  $   BASE STYLES
 //  ============================================================================
 //  $$  WRAPPER
 //  ----------------------------------------------------------------------------
+@layer dialtone.components {
 .d-modal {
     //  Component CSS Vars
     //  ------------------------------------------------------------------------
@@ -283,65 +352,23 @@
 //  $   TRANSITIONS
 //  ----------------------------------------------------------------------------
 .d-modal--animate {
-  z-index: var(--zi-hide) !important;
-  backface-visibility: hidden !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
+  ._modal-animate();
 }
 
 .d-modal__dialog--animate {
-  .d-modal--animate();
-
-  transform: translate3d(0, 30%, 0) scale3d(0.75, 0.75, 0.75) !important;
+  ._modal-dialog-animate();
 }
 
 .d-modal--animate-in,
  .d-modal__dialog--animate-in {
-  transition:
-    opacity 100ms var(--ttf-in-out) 10ms,
-    z-index 0s 0s,
-    visibility 0s 0s,
-    transform 100ms var(--ttf-in-out) 10ms;
-
-  @media (prefers-reduced-motion) {
-    transition: none !important;
-  }
+  ._modal-animate-in();
 }
 
 .d-modal--animate-out {
-  transition:
-    opacity 100ms var(--ttf-in-out) 10ms,
-    z-index 0s 200ms,
-    visibility 0s 200ms,
-    transform 100ms var(--ttf-in-out) 10ms;
-
-  &.d-modal--full {
-    transition:
-      opacity 200ms var(--ttf-in-out) 0s,
-      z-index 0s 200ms,
-      visibility 0s 200ms;
-  }
-
-  @media (prefers-reduced-motion) {
-    transition: none !important;
-  }
+  ._modal-animate-out();
 }
 
 .d-modal__dialog--animate-out {
-  transition:
-    opacity 200ms var(--ttf-in-out) 0s,
-    z-index 0s 200ms,
-    visibility 0s 200ms,
-    transform 100ms var(--ttf-in-out) 0s;
-
-  &.d-modal--full {
-    transition:
-      opacity 200ms var(--ttf-in-out) 0s,
-      z-index 0s 200ms,
-      visibility 0s 200ms;
-  }
-
-  @media (prefers-reduced-motion) {
-    transition: none !important;
-  }
+  ._modal-dialog-animate-out();
+}
 }

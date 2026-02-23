@@ -13,11 +13,10 @@
 //  • SIZES
 //
 //  ============================================================================
-//  $   BASE STYLE
+//  $   PARAMETRIC MIXINS
 //  ----------------------------------------------------------------------------
-
-.d-btn,
-.d-btn--md {
+//  Defined outside @layer for cross-file mixin access (used by chip.less).
+._btn() {
   //  Component specific CSS Vars
   //  ------------------------------------------------------------------------
   --button-color-text: var(--dt-action-color-foreground-base-default);
@@ -125,6 +124,73 @@
     cursor: not-allowed;
     transition: none;
   }
+}
+
+._btn-circle() {
+  --button-padding-x: var(--button-padding-y-md);
+  --button-padding-y: var(--button-padding-y-md);
+  --button-color-text: var(--dt-action-color-foreground-muted-default);
+  --button-border-radius: var(--dt-size-radius-circle);
+
+  &:hover:not([disabled]) {
+    --button-color-text: var(--dt-action-color-foreground-muted-hover);
+    --button-color-background: var(--dt-action-color-background-muted-hover);
+  }
+
+  &:active:not([disabled]),
+  &.d-btn--active:not([disabled]),
+  &.d-btn--active:active:not([disabled]) {
+    --button-color-text: var(--dt-action-color-foreground-muted-active);
+    --button-color-background: var(--dt-action-color-background-muted-active);
+  }
+
+  .d-btn__icon {
+    margin: unset;
+  }
+
+  &.d-btn__label {
+    display: none;
+  }
+
+  &.d-btn--outlined {
+    --button-color-border: var(--dt-action-color-border-muted-outlined-default);
+  }
+
+  // Adjust padding based on sizes
+  &.d-btn--xs {
+    --button-padding-y: var(--button-padding-y-xs);
+    --button-padding-x: var(--button-padding-y-xs);
+  }
+
+  &.d-btn--sm {
+    --button-padding-y: var(--button-padding-y-sm);
+    --button-padding-x: var(--button-padding-y-sm);
+  }
+
+  &.d-btn--md {
+    --button-padding-x: var(--button-padding-y-md);
+    --button-padding-y: var(--button-padding-y-md);
+  }
+
+  &.d-btn--lg {
+    --button-padding-x: calc(var(--button-padding-y-lg) + var(--dt-size-100));
+    --button-padding-y: calc(var(--button-padding-y-lg) + var(--dt-size-100));
+  }
+
+  &.d-btn--xl {
+    --button-padding-x: calc(var(--button-padding-y-xl) + var(--dt-size-300));
+    --button-padding-y: calc(var(--button-padding-y-xl) + var(--dt-size-300));
+  }
+}
+
+//  ============================================================================
+//  $   BASE STYLE
+//  ----------------------------------------------------------------------------
+
+@layer dialtone.components {
+.d-btn,
+.d-btn--md {
+  ._btn();
 }
 
 .d-btn--unstyled {
@@ -241,60 +307,7 @@
 //  $$  CIRCLE BUTTONS
 //  ----------------------------------------------------------------------------
 .d-btn--circle {
-  --button-padding-x: var(--button-padding-y-md);
-  --button-padding-y: var(--button-padding-y-md);
-  --button-color-text: var(--dt-action-color-foreground-muted-default);
-  --button-border-radius: var(--dt-size-radius-circle);
-
-  &:hover:not([disabled]) {
-    --button-color-text: var(--dt-action-color-foreground-muted-hover);
-    --button-color-background: var(--dt-action-color-background-muted-hover);
-  }
-
-  &:active:not([disabled]),
-  &.d-btn--active:not([disabled]),
-  &.d-btn--active:active:not([disabled]) {
-    --button-color-text: var(--dt-action-color-foreground-muted-active);
-    --button-color-background: var(--dt-action-color-background-muted-active);
-  }
-
-  .d-btn__icon {
-    margin: unset;
-  }
-
-  &.d-btn__label {
-    display: none;
-  }
-
-  &.d-btn--outlined {
-    --button-color-border: var(--dt-action-color-border-muted-outlined-default);
-  }
-
-  // Adjust padding based on sizes
-  &.d-btn--xs {
-    --button-padding-y: var(--button-padding-y-xs);
-    --button-padding-x: var(--button-padding-y-xs);
-  }
-
-  &.d-btn--sm {
-    --button-padding-y: var(--button-padding-y-sm);
-    --button-padding-x: var(--button-padding-y-sm);
-  }
-
-  &.d-btn--md {
-    --button-padding-x: var(--button-padding-y-md);
-    --button-padding-y: var(--button-padding-y-md);
-  }
-
-  &.d-btn--lg {
-    --button-padding-x: calc(var(--button-padding-y-lg) + var(--dt-size-100));
-    --button-padding-y: calc(var(--button-padding-y-lg) + var(--dt-size-100));
-  }
-
-  &.d-btn--xl {
-    --button-padding-x: calc(var(--button-padding-y-xl) + var(--dt-size-300));
-    --button-padding-y: calc(var(--button-padding-y-xl) + var(--dt-size-300));
-  }
+  ._btn-circle();
 }
 
 //  $$  OUTLINED BUTTON
@@ -813,4 +826,5 @@
   &--space-between {
     justify-content: space-between;
   }
+}
 }

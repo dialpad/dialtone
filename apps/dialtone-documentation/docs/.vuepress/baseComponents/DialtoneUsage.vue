@@ -1,6 +1,6 @@
 <template>
   <div class="dialtone-usage">
-    <div class="dialtone-usage__item dialtone-usage__item--do">
+    <div v-if="$slots.do" class="dialtone-usage__item dialtone-usage__item--do">
       <h3 class="dialtone-usage__hd dialtone-usage__hd--do">
         <dt-icon name="check" size="200" />
         <div class="dialtone-usage__label">
@@ -11,7 +11,7 @@
         <slot name="do" />
       </div>
     </div>
-    <div class="dialtone-usage__item dialtone-usage__item--dont">
+    <div v-if="$slots.dont" class="dialtone-usage__item dialtone-usage__item--dont">
       <h3 class="dialtone-usage__hd dialtone-usage__hd--dont">
         <dt-icon name="close" size="200" />
         <div class="dialtone-usage__label">

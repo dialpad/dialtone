@@ -4,7 +4,7 @@
 const TokensBaseLight = require('@dialpad/dialtone-tokens/dist/tokens-base-light.json');
 const TokensDpLight = require('@dialpad/dialtone-tokens/dist/tokens-dp-light.json');
 
-const { Rule } = require('postcss');
+const { Rule, AtRule } = require('postcss');
 
 // TODO: Move these constants to the _data directory
 const {
@@ -870,15 +870,32 @@ module.exports = () => {
   return {
     postcssPlugin: 'postcss-dialtone-generators',
     Once (root) {
-      const rootSelector = root.last.prev().prev();
-      const clonedSource = rootSelector.source;
-      const declaration = rootSelector.first;
+      // Reset all generated rules to avoid accumulating duplicates in watch mode
+      Object.keys(generatedRules).forEach(key => { generatedRules[key] = []; });
+
+      // Find a Rule with a Declaration child to use as clone template.
+      // With @layer wrappers the tree structure varies, so walk to find one.
+      let clonedSource;
+      let declaration;
+      root.walkRules(rule => {
+        if (!declaration && rule.first && rule.first.type === 'decl') {
+          clonedSource = rule.source;
+          declaration = rule.first;
+        }
+      });
+      if (!declaration) return;
 
       _generateUtilities(clonedSource, declaration);
 
       const rules = Object.values(generatedRules).flat();
 
-      root.insertAfter(rootSelector, rules);
+      const layerRule = new AtRule({
+        name: 'layer',
+        params: 'dialtone.utilities',
+        source: clonedSource,
+      });
+      rules.forEach(rule => layerRule.append(rule));
+      root.append(layerRule);
     },
     Root (root) {
       root.walkRules(rule => {

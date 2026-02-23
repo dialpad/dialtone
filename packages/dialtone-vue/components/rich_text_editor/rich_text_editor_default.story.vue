@@ -25,6 +25,7 @@
     :additional-extensions="$attrs.additionalExtensions"
     :hide-link-bubble-menu="$attrs.hideLinkBubbleMenu"
     :use-div-tags="$attrs.useDivTags"
+    :allow-tables="$attrs.allowTables"
     @blur="$attrs.onBlur"
     @input="$attrs.onInput"
     @edit-link="$attrs.onEditLink"

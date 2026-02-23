@@ -34,21 +34,21 @@ and with usability and performance in mind.
 
 ### CSS components
 
-If Vue isn't supported in your application, you can use the [CSS components](../components/avatar.md) in your project, but you'll be responsible
-for writing the correct markup, managing DOM elements and events, and making it [accessible for all users](../getting-started/accessibility/fundamentals.md).
+If Vue isn't supported in your application, you can use the [CSS components](../components/index.md) in your project, but you'll be responsible
+for writing the correct markup, managing DOM elements and events, and making it [accessible for all users](../guides/accessibility/index.md).
 
-See more about [components usage](../getting-started/usage.md/#components).
+See more about [components usage](../guides/getting-started/index.md#usage).
 
 ## Intake
 
 ### Contributions
 
-Read about [how to contribute to Dialtone](../about/contributing.md).
+Read about [how to contribute to Dialtone](https://github.com/dialpad/dialtone/blob/staging/.github/CONTRIBUTING.md).
 
 ### Request a feature
 
 If your design isn't supported by any existing component, or the component you want to use isn't flexible enough to use in your design,
-please request a feature by [filling out this form](https://forms.monday.com/forms/8a9a6ff69d7e9f95caee029c2806e2c1?r=use1).
+please request a feature by [filling out this form](https://dialpad.atlassian.net/servicedesk/customer/portal/123/create/465).
 
 ### Report a bug
 

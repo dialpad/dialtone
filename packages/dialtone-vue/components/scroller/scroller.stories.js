@@ -2,7 +2,7 @@ import DtScroller from './scroller.vue';
 import ScrollerDefault from './scroller_default.story.vue';
 import ScrollerDynamic from './scroller_dynamic.story.vue';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 // Default Prop Values
 export const argsData = {

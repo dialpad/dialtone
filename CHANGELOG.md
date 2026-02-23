@@ -1,3 +1,17 @@
+# [9.158.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.157.0...dialtone/v9.158.0) (2026-02-10)
+
+
+### Features
+
+* DLT-2903 storybook 10 ([#1043](https://github.com/dialpad/dialtone/issues/1043)) ([52b6d6c](https://github.com/dialpad/dialtone/commit/52b6d6ca90e91eed385404400af159a16c6ca128))
+
+# [9.157.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.156.1...dialtone/v9.157.0) (2026-02-03)
+
+
+### Features
+
+* DP-159552 editor table support when pasting ([#1034](https://github.com/dialpad/dialtone/issues/1034)) ([8ec5592](https://github.com/dialpad/dialtone/commit/8ec559290b2674eb3666e2f74627d91c23d8d257))
+
 ## [9.156.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.156.0...dialtone/v9.156.1) (2026-01-30)
 
 

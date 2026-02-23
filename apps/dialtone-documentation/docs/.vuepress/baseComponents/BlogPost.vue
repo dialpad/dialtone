@@ -91,7 +91,7 @@ const blogLink = computed(() => {
   > table:not([class]) {
     border: 1px solid var(--dt-color-border-subtle);
     border-collapse: collapse;
-    margin: var(--dt-size-500) 0;
+    margin: var(--dt-size-200) 0;
     inline-size: 100%;
 
     th {

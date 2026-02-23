@@ -5,7 +5,7 @@ paths:
 
 # Icons Package Rules
 
-Source SVGs are transformed into auto-generated Vue components (separate outputs for `vue2/`, `vue3/`, `android/`).
+Source SVGs are transformed into auto-generated Vue components (separate outputs for `vue3/` and `android/`).
 
 Icon sizing uses the numeric scale: `100`, `200`, `300`, `400`, `500`, `600`, `700`, `800`.
 
