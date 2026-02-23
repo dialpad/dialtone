@@ -95,14 +95,14 @@
 
   //  --  STATES
   //  ------------------------------------------------------------------------
-  &:hover:not([disabled]) {
+  &:hover:not(:disabled) {
     --button-color-text: var(--dt-action-color-foreground-base-hover);
     --button-color-background: var(--dt-action-color-background-base-hover);
   }
 
-  &:active:not([disabled]),
-  &.d-btn--active:not([disabled]),
-  &.d-btn--active:active:not([disabled]) {
+  &:active:not(:disabled),
+  &.d-btn--active:not(:disabled),
+  &.d-btn--active:active:not(:disabled) {
     --button-color-text: var(--dt-action-color-foreground-base-active);
     --button-color-background: var(--dt-action-color-background-base-active);
   }
@@ -112,17 +112,22 @@
     box-shadow: var(--dt-shadow-focus);
   }
 
-  &[disabled] {
-    --button-color-border: transparent !important;
-    --button-color-text: var(
-      --dt-action-color-foreground-disabled-default
-    ) !important;
-    --button-color-background: var(
-      --dt-action-color-background-disabled-default
-    ) !important;
-
+  &--disabled,
+  &:disabled {
+    color: color-mix(in oklch, var(--button-color-text) 70%, transparent);
+    background-color: color-mix(in oklch,
+      oklch(
+        from var(--button-color-background) l calc(c - .12) h
+      )
+      55%, transparent
+    );
+    border-color: color-mix(in oklch, var(--button-color-border) 65%, transparent);
     cursor: not-allowed;
     transition: none;
+
+    &.d-btn--primary {
+      color: color-mix(in oklch, var(--button-color-text) 80%, transparent);
+    }
   }
 }
 
@@ -132,14 +137,14 @@
   --button-color-text: var(--dt-action-color-foreground-muted-default);
   --button-border-radius: var(--dt-size-radius-circle);
 
-  &:hover:not([disabled]) {
+  &:hover:not(:disabled) {
     --button-color-text: var(--dt-action-color-foreground-muted-hover);
     --button-color-background: var(--dt-action-color-background-muted-hover);
   }
 
-  &:active:not([disabled]),
-  &.d-btn--active:not([disabled]),
-  &.d-btn--active:active:not([disabled]) {
+  &:active:not(:disabled),
+  &.d-btn--active:not(:disabled),
+  &.d-btn--active:active:not(:disabled) {
     --button-color-text: var(--dt-action-color-foreground-muted-active);
     --button-color-background: var(--dt-action-color-background-muted-active);
   }
@@ -325,16 +330,16 @@
     --dt-action-color-background-base-primary-default
   );
 
-  &:hover:not([disabled]) {
+  &:hover:not(:disabled) {
     --button-color-text: var(--dt-action-color-foreground-base-primary-default);
     --button-color-background: var(
       --dt-action-color-background-base-primary-hover
     );
   }
 
-  &:active:not([disabled]),
-  &.d-btn--active:not([disabled]),
-  &.d-btn--active:active:not([disabled]) {
+  &:active:not(:disabled),
+  &.d-btn--active:not(:disabled),
+  &.d-btn--active:active:not(:disabled) {
     --button-color-text: var(--dt-action-color-foreground-base-primary-default);
     --button-color-background: var(
       --dt-action-color-background-base-primary-active
@@ -348,14 +353,14 @@
   --button-color-text: var(--dt-action-color-foreground-muted-default);
   --button-color-border: var(--dt-action-color-border-muted-default);
 
-  &:hover:not([disabled]) {
+  &:hover:not(:disabled) {
     --button-color-text: var(--dt-action-color-foreground-muted-hover);
     --button-color-background: var(--dt-action-color-background-muted-hover);
   }
 
-  &:active:not([disabled]),
-  &.d-btn--active:not([disabled]),
-  &.d-btn--active:active:not([disabled]) {
+  &:active:not(:disabled),
+  &.d-btn--active:not(:disabled),
+  &.d-btn--active:active:not(:disabled) {
     --button-color-text: var(--dt-action-color-foreground-muted-active);
     --button-color-background: var(--dt-action-color-background-muted-active);
   }
@@ -372,14 +377,14 @@
   --button-color-background: var(--dt-action-color-background-critical-default);
   --button-color-border: var(--dt-action-color-border-critical-default);
 
-  &:hover:not([disabled]) {
+  &:hover:not(:disabled) {
     --button-color-text: var(--dt-action-color-foreground-critical-hover);
     --button-color-background: var(--dt-action-color-background-critical-hover);
   }
 
-  &:active:not([disabled]),
-  &.d-btn--active:not([disabled]),
-  &.d-btn--active:active:not([disabled]) {
+  &:active:not(:disabled),
+  &.d-btn--active:not(:disabled),
+  &.d-btn--active:active:not(:disabled) {
     --button-color-text: var(--dt-action-color-foreground-critical-active);
     --button-color-background: var(
       --dt-action-color-background-critical-active
@@ -400,7 +405,7 @@
       --dt-action-color-background-critical-primary-default
     );
 
-    &:hover:not([disabled]) {
+    &:hover:not(:disabled) {
       --button-color-text: var(
         --dt-action-color-foreground-critical-primary-default
       );
@@ -409,9 +414,9 @@
       );
     }
 
-    &:active:not([disabled]),
-    &.d-btn--active:not([disabled]),
-    &.d-btn--active:active:not([disabled]) {
+    &:active:not(:disabled),
+    &.d-btn--active:not(:disabled),
+    &.d-btn--active:active:not(:disabled) {
       --button-color-text: var(
         --dt-action-color-foreground-critical-primary-default
       );
@@ -429,14 +434,14 @@
   --button-color-background: var(--dt-action-color-background-positive-default);
   --button-color-border: var(--dt-action-color-border-positive-default);
 
-  &:hover:not([disabled]) {
+  &:hover:not(:disabled) {
     --button-color-text: var(--dt-action-color-foreground-positive-hover);
     --button-color-background: var(--dt-action-color-background-positive-hover);
   }
 
-  &:active:not([disabled]),
-  &.d-btn--active:not([disabled]),
-  &.d-btn--active:active:not([disabled]) {
+  &:active:not(:disabled),
+  &.d-btn--active:not(:disabled),
+  &.d-btn--active:active:not(:disabled) {
     --button-color-text: var(--dt-action-color-foreground-positive-active);
     --button-color-background: var(
       --dt-action-color-background-positive-active
@@ -457,7 +462,7 @@
       --dt-action-color-background-positive-primary-default
     );
 
-    &:hover:not([disabled]) {
+    &:hover:not(:disabled) {
       --button-color-text: var(
         --dt-action-color-foreground-positive-primary-default
       );
@@ -466,9 +471,9 @@
       );
     }
 
-    &:active:not([disabled]),
-    &.d-btn--active:not([disabled]),
-    &.d-btn--active:active:not([disabled]) {
+    &:active:not(:disabled),
+    &.d-btn--active:not(:disabled),
+    &.d-btn--active:active:not(:disabled) {
       --button-color-text: var(
         --dt-action-color-foreground-positive-primary-default
       );
@@ -487,14 +492,14 @@
   --button-color-background: var(--dt-action-color-background-inverted-default);
   --button-color-border: var(--dt-action-color-border-inverted-default);
 
-  &:hover:not([disabled]) {
+  &:hover:not(:disabled) {
     --button-color-text: var(--dt-action-color-foreground-inverted-hover);
     --button-color-background: var(--dt-action-color-background-inverted-hover);
   }
 
-  &:active:not([disabled]),
-  &.d-btn--active:not([disabled]),
-  &.d-btn--active:active:not([disabled]) {
+  &:active:not(:disabled),
+  &.d-btn--active:not(:disabled),
+  &.d-btn--active:active:not(:disabled) {
     --button-color-text: var(--dt-action-color-foreground-inverted-active);
     --button-color-background: var(
       --dt-action-color-background-inverted-active
@@ -517,7 +522,7 @@
       --dt-action-color-background-inverted-primary-default
     );
 
-    &:hover:not([disabled]) {
+    &:hover:not(:disabled) {
       --button-color-text: var(
         --dt-action-color-foreground-inverted-primary-hover
       );
@@ -526,9 +531,9 @@
       );
     }
 
-    &:active:not([disabled]),
-    &.d-btn--active:not([disabled]),
-    &.d-btn--active:active:not([disabled]) {
+    &:active:not(:disabled),
+    &.d-btn--active:not(:disabled),
+    &.d-btn--active:active:not(:disabled) {
       --button-color-text: var(
         --dt-action-color-foreground-inverted-primary-active
       );
@@ -582,22 +587,6 @@
   .d-btn-loading();
 }
 
-//  $$  DISABLED STATE
-//  ----------------------------------------------------------------------------
-.d-btn--disabled {
-  --button-color-text: var(
-    --dt-action-color-foreground-disabled-default
-  ) !important;
-  --button-color-background: var(
-    --dt-action-color-background-disabled-default
-  ) !important;
-  --button-color-border: transparent !important;
-
-  cursor: not-allowed;
-  transition: none;
-  pointer-events: none;
-}
-
 //  $$  BRAND BUTTONS
 //  ----------------------------------------------------------------------------
 .d-btn--brand {
@@ -608,8 +597,8 @@
 
   display: flex;
 
-  &:hover:not([disabled]),
-  &:active:not([disabled]) {
+  &:hover:not(:disabled),
+  &:active:not(:disabled) {
     --button-color-text: hsl(var(--dt-color-neutral-white-hsl) ~" / " 90%);
     --button-color-background: hsl(
       var(--brand-color-h) calc(var(--brand-color-s) + 2.5%)
@@ -626,7 +615,7 @@
         );
   }
 
-  &:active:not([disabled]) {
+  &:active:not(:disabled) {
     --button-color-background: hsl(
       var(--brand-color-h) calc(var(--brand-color-s) + 5%)
         calc(var(--brand-color-l) - 10%)
