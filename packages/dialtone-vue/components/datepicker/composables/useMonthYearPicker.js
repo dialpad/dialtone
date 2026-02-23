@@ -14,7 +14,10 @@ export function useMonthYearPicker (props, emits) {
   const i18n = new DialtoneLocalization();
 
   const calendarDays = computed(() => {
-    return getCalendarDays(selectMonth.value, selectYear.value, highlightedDay.value, props.minDate, props.maxDate);
+    return getCalendarDays(
+      selectMonth.value, selectYear.value, highlightedDay.value,
+      props.minDate, props.maxDate, props.weekStartsOn,
+    );
   });
 
   const isPrevMonthDisabled = computed(() => {

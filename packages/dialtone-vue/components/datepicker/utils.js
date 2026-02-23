@@ -44,12 +44,12 @@ const isDateEqual = (date, dateToCompare) => {
 /**
  * Get days for the calendar to be displayed in a table grouped by weeks
  */
-export const getCalendarDays = (month, year, selectedDay, minDate = null, maxDate = null) => {
+export const getCalendarDays = (month, year, selectedDay, minDate = null, maxDate = null, weekStart = WEEK_START) => {
   const weeks = [];
   const firstDate = _parsedGetDate(new Date(year, month));
   const lastDate = _parsedGetDate(new Date(year, month + 1, 0));
 
-  const weekStartsOn = WEEK_START;
+  const weekStartsOn = weekStart;
 
   const firstDateInCalendar = startOfWeek(firstDate, { weekStartsOn });
 

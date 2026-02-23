@@ -10,6 +10,7 @@
         :selected-date="selectedDate"
         :min-date="minDate"
         :max-date="maxDate"
+        :week-starts-on="weekStartsOn"
         @calendar-days="updateCalendarDays"
         @focus-first-day="$refs.calendar.focusFirstDay()"
         @focus-last-day="$refs.calendar.focusLastDay()"
@@ -20,6 +21,7 @@
       <calendar
         ref="calendar"
         :calendar-days="calendarDays"
+        :week-starts-on="weekStartsOn"
         @select-date="$emit('selected-date', $event)"
         @focus-month-year-picker="$refs.monthYearPicker.focusMonthYearPicker()"
         @close-datepicker="$emit('close-datepicker')"
@@ -75,6 +77,17 @@ defineProps({
       }
       return true;
     },
+  },
+
+  /**
+     * Day the week starts on. 0 = Sunday, 1 = Monday, ... 6 = Saturday.
+     *
+     * @values 0, 1, 2, 3, 4, 5, 6
+     */
+  weekStartsOn: {
+    type: Number,
+    default: 0,
+    validator: (v) => Number.isInteger(v) && v >= 0 && v <= 6,
   },
 });
 
