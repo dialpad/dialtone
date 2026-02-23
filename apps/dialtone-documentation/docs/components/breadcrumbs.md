@@ -10,25 +10,27 @@ keywords: ["navigation", "path", "d-breadcrumbs", "DtBreadcrumbs", "dt-breadcrum
 ---
 
 <code-well-header>
-  <nav class="d-breadcrumbs" aria-label="breadcrumb">
-    <ol>
-      <li class="d-breadcrumbs__item">
-        <a href="#" class="d-link d-link--muted">Root</a>
-      </li>
-      <li class="d-breadcrumbs__item">
-        <a href="#" class="d-link d-link--muted">Section</a>
-      </li>
-      <li class="d-breadcrumbs__item">
-        <a href="#" class="d-link d-link--muted">Section</a>
-      </li>
-      <li class="d-breadcrumbs__item">
-        <a href="#" class="d-link d-link--muted">Section</a>
-      </li>
-      <li class="d-breadcrumbs__item d-breadcrumbs__item--selected">
-        <a href="#" class="d-link d-link--muted" aria-current="location">Current Page</a>
-      </li>
-    </ol>
-  </nav>
+  <div class="d-w100p">
+    <nav class="d-breadcrumbs" aria-label="breadcrumb">
+      <ol>
+        <li class="d-breadcrumbs__item">
+          <a href="#" class="d-link d-link--muted">Root</a>
+        </li>
+        <li class="d-breadcrumbs__item">
+          <a href="#" class="d-link d-link--muted">Section</a>
+        </li>
+        <li class="d-breadcrumbs__item">
+          <a href="#" class="d-link d-link--muted">Section</a>
+        </li>
+        <li class="d-breadcrumbs__item">
+          <a href="#" class="d-link d-link--muted">Section</a>
+        </li>
+        <li class="d-breadcrumbs__item d-breadcrumbs__item--selected">
+          <a href="#" class="d-link d-link--muted" aria-current="location">Current Page</a>
+        </li>
+      </ol>
+    </nav>
+  </div>
 </code-well-header>
 
 <!-- <component-combinator component-name="DtBreadcrumbs" /> -->
@@ -125,76 +127,31 @@ showHtmlWarning />
 
 ### Inverted
 
-<code-well-header class="d-bgc-contrast">
-    <nav class="d-breadcrumbs d-breadcrumbs--inverted d-bgc-contrast" aria-label="inverted breadcrumb">
-        <ol>
-            <li class="d-breadcrumbs__item">
-                <a href="#" class="d-link d-link--inverted">Root</a>
-            </li>
-            <li class="d-breadcrumbs__item">
-                <a href="#" class="d-link d-link--inverted">Section</a>
-            </li>
-            <li class="d-breadcrumbs__item">
-                <a href="#" class="d-link d-link--inverted">Section</a>
-            </li>
-            <li class="d-breadcrumbs__item">
-                <a href="#" class="d-link d-link--inverted">Section</a>
-            </li>
-            <li class="d-breadcrumbs__item d-breadcrumbs__item--selected">
-                <a href="#" class="d-link d-link--inverted" aria-current="location">Current Page</a>
-            </li>
-        </ol>
-    </nav>
+<dt-notice title="Deprecated" kind="error" class="d-wmx100p d-my16">
+  The <code>inverted</code> prop has been deprecated in favor of using <router-link to="mode-island.html"><DtLink>DtModeIsland</DtLink></router-link> as a wrapper.
+</dt-notice>
+
+In place of the <code>inverted</code> prop, use the <router-link to="mode-island.html"><DtLink>DtModeIsland</DtLink></router-link> component as a wrapper.
+
+<code-well-header>
+  <dt-mode-island class="d-p16 d-bar8">
+    <dt-breadcrumbs
+      ref="invertedBreadcrumbsExample"
+      :breadcrumbs="[
+        { href: '#', label: 'Root' },
+        { href: '#', label: 'Section' },
+        { href: '#', label: 'Current Page', selected: true },
+      ]"
+    />
+  </dt-mode-island>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<nav class="d-breadcrumbs d-breadcrumbs--inverted" aria-label="inverted breadcrumb">
-  <ol>
-    <li class="d-breadcrumbs__item">
-        <a href="#" class="d-link d-link--inverted">Root</a>
-    </li>
-    <li class="d-breadcrumbs__item">
-        <a href="#" class="d-link d-link--inverted">Section</a>
-    </li>
-    <li class="d-breadcrumbs__item">
-        <a href="#" class="d-link d-link--inverted">Section</a>
-    </li>
-    <li class="d-breadcrumbs__item">
-        <a href="#" class="d-link d-link--inverted">Section</a>
-    </li>
-    <li class="d-breadcrumbs__item d-breadcrumbs__item--selected">
-        <a href="#" class="d-link d-link--inverted" aria-current="location">Current Page</a>
-    </li>
-  </ol>
-</nav>
-'
+:htmlCode='() => $refs.invertedBreadcrumbsExample'
 vueCode='
-<dt-breadcrumbs
-  inverted
-  :breadcrumbs="[
-    {
-      href: `#`,
-      label: `Root`,
-    },
-    {
-      href: `#`,
-      label: `Section`,
-    },
-    {
-      href: `#`,
-      label: `Section`,
-    },
-    {
-      href: `#`,
-      label: `Section`,
-    },
-    {
-      href: `#`,
-      label: `Current Page`,
-      selected: true,
-    },
-  ]" />
+<dt-mode-island>
+  <dt-breadcrumbs :breadcrumbs="breadcrumbs" />
+</dt-mode-island>
 '
 showHtmlWarning />
 

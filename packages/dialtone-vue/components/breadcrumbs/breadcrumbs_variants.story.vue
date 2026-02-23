@@ -4,13 +4,6 @@
       class="d-py16 d-px12"
       :breadcrumbs="$attrs.breadcrumbs"
     />
-    <div class="d-bgc-purple-600 d-py16 d-px12">
-      <dt-breadcrumbs
-        inverted
-        :breadcrumbs="$attrs.breadcrumbs"
-      />
-    </div>
-
     <dt-breadcrumbs
       class="d-py16 d-px12"
     >

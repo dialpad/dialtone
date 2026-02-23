@@ -41,6 +41,7 @@ export default {
 
   props: {
     /**
+     * @ignore
      * Passed through to link. If true, applies inverted styles to the link.
      */
     inverted: {

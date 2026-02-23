@@ -82,50 +82,40 @@ keywords: ["data table", "grid", "rows", "d-table", "DtTable", "dt-table", "data
 
 ### Inverted Style
 
-Used when you want to display a data table on a darker background.
+<dt-notice title="Deprecated" kind="error" class="d-wmx100p d-my16">
+  The <code>d-table--inverted</code> modifier has been deprecated in favor of using <router-link to="mode-island.html"><DtLink>DtModeIsland</DtLink></router-link> as a wrapper.
+</dt-notice>
 
-<code-well-header bgclass="d-bgc-contrast">
-  <table class="d-table dialtone-doc-table d-table--inverted">
-    <caption class="d-table__caption">Office List</caption>
-    <thead>
-      <tr>
-        <th scope="col">Office</th>
-        <th scope="col">Country</th>
-        <th scope="col" width="10%">Employees</th>
-        <th scope="col">Contact</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="i in examples">
-        <th scope="row">{{ i.office }}</th>
-        <td>{{ i.country }}</td>
-        <td>{{ i.size }}</td>
-        <td>{{ i.contact }}</td>
-      </tr>
-    </tbody>
-  </table>
+In place of the <code>d-table--inverted</code> modifier, wrap the table in the <router-link to="mode-island.html"><DtLink>DtModeIsland</DtLink></router-link> component.
+
+<code-well-header>
+  <dt-mode-island class="d-p16 d-bar8">
+    <table class="d-table dialtone-doc-table">
+      <caption class="d-table__caption">Office List</caption>
+      <thead>
+        <tr>
+          <th scope="col">Office</th>
+          <th scope="col">Country</th>
+          <th scope="col" width="10%">Employees</th>
+          <th scope="col">Contact</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="i in examples">
+          <th scope="row">{{ i.office }}</th>
+          <td>{{ i.country }}</td>
+          <td>{{ i.size }}</td>
+          <td>{{ i.contact }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </dt-mode-island>
 </code-well-header>
 
 ```html
-<table class="d-table d-table--inverted">
-  <caption class="d-table__caption">...</caption>
-  <thead>
-    <tr>
-      <th scope="col">...</th>
-      <th scope="col">...</th>
-      <th scope="col">...</th>
-      <th scope="col">...</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-  </tbody>
-</table>
+<dt-mode-island>
+  <table class="d-table">...</table>
+</dt-mode-island>
 ```
 
 ### Striped
@@ -174,48 +164,34 @@ Used when you want to display a data table on a darker background.
 </table>
 ```
 
-<code-well-header bgclass="d-bgc-contrast">
-  <table class="d-table dialtone-doc-table d-table--inverted d-table--striped">
-    <caption class="d-table__caption">Office List</caption>
-    <thead>
-      <tr>
-        <th scope="col">Office</th>
-        <th scope="col">Country</th>
-        <th scope="col" width="10%">Employees</th>
-        <th scope="col">Contact</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="i in examples">
-        <th scope="row">{{ i.office }}</th>
-        <td>{{ i.country }}</td>
-        <td>{{ i.size }}</td>
-        <td>{{ i.contact }}</td>
-      </tr>
-    </tbody>
-  </table>
+<code-well-header>
+  <dt-mode-island class="d-p16 d-bar8">
+    <table class="d-table dialtone-doc-table d-table--striped">
+      <caption class="d-table__caption">Office List</caption>
+      <thead>
+        <tr>
+          <th scope="col">Office</th>
+          <th scope="col">Country</th>
+          <th scope="col" width="10%">Employees</th>
+          <th scope="col">Contact</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="i in examples">
+          <th scope="row">{{ i.office }}</th>
+          <td>{{ i.country }}</td>
+          <td>{{ i.size }}</td>
+          <td>{{ i.contact }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </dt-mode-island>
 </code-well-header>
 
 ```html
-<table class="d-table d-table--inverted d-table--striped">
-  <caption class="d-table__caption">...</caption>
-  <thead>
-    <tr>
-      <th scope="col">...</th>
-      <th scope="col">...</th>
-      <th scope="col">...</th>
-      <th scope="col">...</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-  </tbody>
-</table>
+<dt-mode-island>
+  <table class="d-table d-table--striped">...</table>
+</dt-mode-island>
 ```
 
 ## Classes

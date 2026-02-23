@@ -105,6 +105,7 @@ export default {
 
   props: {
     /**
+     * @ignore
      * If true, applies inverted styles.
      * @values true, false
      */
