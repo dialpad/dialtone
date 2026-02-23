@@ -130,24 +130,49 @@ showHtmlWarning />
 
 ### Inverted
 
-The inverted button style is used to visually separate buttons set on darker backgrounds.
+<dt-notice
+  title="Deprecated"
+  kind="error"
+  class="d-wmx100p d-my16"
+>
+  <code>kind="inverted"</code> prop has been deprecated in favor of using <router-link to="mode-island.html"> <DtLink>DtModeIsland</DtLink> </router-link> as a wrapper.
+</dt-notice>
 
-<code-well-header bgclass="d-bgc-contrast">
-  <dt-stack direction="row" gap="400" ref="invertedExample">
-    <dt-button kind="inverted"> Place Call </dt-button>
-    <dt-button kind="inverted" importance="outlined"> Place Call </dt-button>
-    <dt-button kind="inverted" importance="clear"> Place Call </dt-button>
-  </dt-stack>
+In place of <code>kind="inverted"</code>, use the <router-link to="mode-island.html"> <DtLink>DtModeIsland</DtLink> </router-link> component as a wrapper.
+
+<code-well-header>
+  <dt-mode-island class="d-p16 d-bar16">
+    <dt-stack gap="400" ref="modeIslandExample">
+      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+        <dt-button> Place Call </dt-button>
+        <dt-button importance="outlined"> Place Call </dt-button>
+        <dt-button importance="clear"> Place Call </dt-button>
+      </dt-stack>
+      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+        <dt-button kind="danger"> Place Call </dt-button>
+        <dt-button kind="danger" importance="outlined"> Place Call </dt-button>
+        <dt-button kind="danger" importance="clear"> Place Call </dt-button>
+      </dt-stack>
+      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+        <dt-button kind="positive">Place Call</dt-button>
+        <dt-button kind="positive" importance="outlined">Place Call</dt-button>
+        <dt-button kind="positive" importance="clear">Place Call</dt-button>
+      </dt-stack>
+      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+        <dt-button kind="muted" importance="clear"> Place Call </dt-button>
+        <dt-button kind="muted" importance="outlined"> Place Call </dt-button>
+      </dt-stack>
+    </dt-stack>
+  </dt-mode-island>
 </code-well-header>
 
 <code-example-tabs
-:htmlCode='() => $refs.invertedExample'
+:htmlCode='() => $refs.modeIslandExample'
 vueCode='
-<dt-button kind="inverted"> Place Call </dt-button>
-<dt-button kind="inverted" importance="outlined"> Place Call </dt-button>
-<dt-button kind="inverted" importance="clear"> Place Call </dt-button>
+<dt-button disabled {props}>Place Call</dt-button>
 '
 showHtmlWarning />
+
 
 ### Muted
 

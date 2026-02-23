@@ -1,7 +1,7 @@
 <script setup>
 console.log(window.DIALTONE_CONSTANTS);
 
-const kindModifiers = Object.keys(window.DIALTONE_CONSTANTS.BUTTON_KIND_MODIFIERS);
+const kindModifiers = Object.keys(window.DIALTONE_CONSTANTS.BUTTON_KIND_MODIFIERS).filter(k => k !== 'inverted');
 const importanceModifiers = Object.keys(window.DIALTONE_CONSTANTS.BUTTON_IMPORTANCE_MODIFIERS);
 
 const importanceDescriptions = {
