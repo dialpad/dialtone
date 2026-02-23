@@ -26,7 +26,7 @@
             :size="depth === 0 ? 'lg' : undefined"
             :tabindex="actionableTabIndex"
             :class="[
-              'd-w100p dialtone-shell-btn',
+              'd-w100p dialtone-shell-btn d-tw-pretty',
               {
                 'd-headline--eyebrow d-fw-semibold d-bgc-transparent d-c-default': !item.link,
                 'd-btn--active': isActiveLink(isExactActive, item.link, true),
@@ -105,7 +105,7 @@
                 kind="muted"
                 label-class="d-jc-flex-start d-ta-left d-fw-normal"
                 :class="[
-                  'dialtone-shell-btn d-w100p',
+                  'dialtone-shell-btn d-w100p d-tw-pretty',
                   { 'd-pl48': depth === 0 },
                   { 'd-pl64': depth === 1 },
                 ]"
@@ -134,7 +134,7 @@
                 label-class="d-jc-flex-start d-ta-left d-fw-normal"
                 :active="isActiveLink(isExactActive, subItem.link)"
                 :class="[
-                  'dialtone-shell-btn d-w100p',
+                  'dialtone-shell-btn d-w100p d-tw-pretty',
                   {
                     'd-pl48': depth === 0,
                   },
@@ -171,7 +171,7 @@
         :size="depth === 0 ? 'lg' : undefined"
         :active="isActiveLink(isExactActive, item.link)"
         :class="[
-          'd-w100p dialtone-shell-btn',
+          'd-w100p dialtone-shell-btn d-tw-pretty',
           {
             'd-headline--eyebrow d-fw-semibold d-bgc-transparent d-c-default': !item.link,
           },
