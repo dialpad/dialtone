@@ -40,6 +40,13 @@
         "command": "gulp buildWatch"
       }
     },
+    "startWatch": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "gulp startWatch"
+      }
+    },
     "watch": {
       "executor": "nx:run-commands",
       "dependsOn": [

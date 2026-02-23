@@ -419,6 +419,9 @@ exports.watch = series(
   watchFiles,
 );
 
+// start watching without a prior clean or full build (assumes build already ran).
+exports.startWatch = series(watchFiles);
+
 //  --  CONVERT WEBFONTS
 exports.fonts = series(
   webfonts,
