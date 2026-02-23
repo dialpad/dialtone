@@ -313,7 +313,7 @@ vueCode='
 <dt-text tone="{{tone}}">...</dt-text>
 '/>
 
-## As
+## Render as
 
 Use `as` to declare the underlying HTML tag that the component should render, independent of the visual styling. Defaults to `span`.
 
