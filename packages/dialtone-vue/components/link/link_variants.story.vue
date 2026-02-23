@@ -19,22 +19,6 @@
         </dt-link>
       </dt-stack>
       <dt-stack
-        class="d-bgc-contrast d-fw-wrap"
-        direction="row"
-        gap="400"
-        align="baseline"
-      >
-        <dt-link
-          v-for="kind in LINK_VARIANTS"
-          :key="kind"
-          inverted
-          href="#"
-          :kind="kind"
-        >
-          Inverted {{ kind }} link
-        </dt-link>
-      </dt-stack>
-      <dt-stack
         class="d-fw-wrap"
         direction="row"
         gap="400"

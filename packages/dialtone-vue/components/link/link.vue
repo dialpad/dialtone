@@ -39,6 +39,7 @@ export default {
      * Determines whether the link should have inverted styling
      * default is false.
      * @values true, false
+     * @ignore
      */
     inverted: {
       type: Boolean,

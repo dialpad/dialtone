@@ -10,7 +10,6 @@ import { LINK_VARIANTS } from './link_constants';
 export const argsData = {
   default: 'Default link',
   href: '#',
-  inverted: false,
   kind: '',
   rel: undefined,
   onClick: action('click'),
@@ -38,7 +37,7 @@ export const argTypesData = {
     },
   },
   inverted: {
-    control: 'boolean',
+    table: { disable: true },
   },
 
   // HTML attributes
