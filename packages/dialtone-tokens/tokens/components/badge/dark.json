@@ -16,7 +16,7 @@
               "modify": {
                 "type": "alpha",
                 "value": "1",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -31,7 +31,7 @@
               "modify": {
                 "type": "alpha",
                 "value": ".6",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }

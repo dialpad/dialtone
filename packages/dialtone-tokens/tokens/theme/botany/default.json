@@ -3,19 +3,19 @@
     "base": {
       "color": {
         "surface": {
-          "value": "#E9EEDE",
+          "value": "oklch(0.941 0.0219 120.97)",
           "type": "color"
         },
         "border": {
-          "value": "#022443",
+          "value": "oklch(0.2562 0.0697 250.26)",
           "type": "color"
         },
         "accent": {
-          "value": "#6633BB",
+          "value": "oklch(0.4675 0.199 294.53)",
           "type": "color"
         },
         "action": {
-          "value": "#396752",
+          "value": "oklch(0.4741 0.0617 163.1)",
           "type": "color"
         }
       }

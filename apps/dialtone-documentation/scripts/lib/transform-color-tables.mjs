@@ -19,8 +19,10 @@ export function setColorUtilityClassDocs (data) { utilityClassDocs = data || {};
  */
 function extractCSSVariableName (propValue) {
   const value = propValue?.values?.[0]?.value;
-  if (!value || !value.startsWith('var(')) return undefined;
-  return value.replace('var(', '').replace(/(-[hsla])?\).*/, '');
+  if (!value) return undefined;
+  const match = value.match(/var\((--[\w-]+)\)/);
+  if (!match) return undefined;
+  return match[1].replace(/(-(h|s|c|l|a|hsl|hsla|oklch|oklcha))$/, '');
 }
 
 /**

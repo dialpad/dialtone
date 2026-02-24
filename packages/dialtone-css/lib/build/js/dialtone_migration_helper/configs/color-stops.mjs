@@ -16,17 +16,17 @@ export default {
       'eg. var(--dt-color-purple-350) to var(--dt-color-purple-500)\n' +
     '- Renames d-{prefix}-{color}-{oldStop} utility classes\n\t' +
       'eg. d-bgc-purple-350 to d-bgc-purple-500\n' +
-    '- Includes HSL variants (-h, -s, -l, -hsl)\n' +
+    '- Includes HSL variants (-h, -s, -l, -a, -hsl, -hsla) and OKLCH variants (-h, -c, -l, -a, -oklch, -oklcha)\n' +
     '- Colors affected: purple, blue, magenta, gold, green, red. Other colors were already 12-stop.\n',
   patterns: ['**/*.{css,less,html,vue,md,js,ts,jsx,tsx}'],
   expressions: [
-    // CSS custom properties: var(--dt-color-{color}-{stop}) with optional HSL suffix
+    // CSS custom properties: var(--dt-color-{color}-{stop}) with optional HSL/OKLCH suffix
     {
-      from: /var\(--dt-color-(purple|blue|magenta|gold|green|red)-(\d+)(-(h|s|l|hsl))?\)/g,
-      to: (match, color, stop, hslGroup) => {
+      from: /var\(--dt-color-(purple|blue|magenta|gold|green|red)-(\d+)(-(h|s|c|l|a|hsl|hsla|oklch|oklcha))?\)/g,
+      to: (match, color, stop, suffixGroup) => {
         const newStop = MAP[color]?.[stop];
         if (newStop == null) return match;
-        return `var(--dt-color-${color}-${newStop}${hslGroup || ''})`;
+        return `var(--dt-color-${color}-${newStop}${suffixGroup || ''})`;
       },
     },
     // CSS utility classes: d-{prefix}-{color}-{stop}

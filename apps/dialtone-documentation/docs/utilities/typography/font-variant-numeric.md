@@ -153,6 +153,6 @@ Use `d-fvn-unset` to deactivate other value previously set to `font-variant-nume
     border-collapse: collapse;
   }
   .numbers-table td {
-    border: 1px solid var(--dt-color-border-moderate);
+    border: var(--dt-size-border-100) solid var(--dt-color-border-default);
   }
 </style>

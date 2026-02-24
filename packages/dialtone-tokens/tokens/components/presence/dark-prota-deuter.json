@@ -10,7 +10,7 @@
         "type": "color"
       },
       "available": {
-        "value": "#5CB8FF",
+        "value": "oklch(0.7559 0.135 244.32)",
         "type": "color"
       }
     }

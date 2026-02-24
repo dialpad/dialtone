@@ -3,11 +3,11 @@
     "base": {
       "color": {
         "surface": {
-          "value": "#222226",
+          "value": "oklch(0.2536 0.0075 285.86)",
           "type": "color"
         },
         "accent": {
-          "value": "#5CB8FF",
+          "value": "oklch(0.7559 0.135 244.32)",
           "type": "color"
         }
       }

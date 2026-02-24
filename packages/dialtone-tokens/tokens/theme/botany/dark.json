@@ -7,7 +7,7 @@
           "type": "color"
         },
         "border": {
-          "value": "#C6E4FF",
+          "value": "oklch(0.9057 0.0489 245.53)",
           "type": "color"
         },
         "accent": {
@@ -15,7 +15,7 @@
           "type": "color"
         },
         "action": {
-          "value": "#FFDFBF",
+          "value": "oklch(0.9221 0.0551 67.05)",
           "type": "color"
         }
       }

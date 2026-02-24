@@ -24,6 +24,10 @@ These produce CSS custom properties: `--dt-color-foreground-primary`, `--dt-spac
 All base colors use a standard 12-stop scale: 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950, 1000.
 Irregular stops (250, 350, 425, etc.) were removed in the Feb 2026 migration. Do not create tokens referencing irregular stops.
 
+## Color Space
+
+Base color token values use OKLCH format: `oklch(L C H)` (e.g., `oklch(0.6464 0.1985 289.97)`). Previous hex/HSL values were refactored to OKLCH in Feb 2026. HSL channel decomposition variables (`-h`, `-s`, `-l`, `-hsl`, `-hsla` suffixes) no longer exist — do not reference them.
+
 ## Dark Mode
 
 Values in `dark.json` override `default.json`. When adding/editing a token, ensure `dark.json` has the corresponding override with the appropriate dark palette reference.

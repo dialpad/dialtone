@@ -31,6 +31,7 @@ export * from './<name>_constants';
 ```
 
 **Optional files for complex components:**
+
 - **`utils.js`** — Utility/helper functions specific to this component
 - **`validators.js`** — Custom prop or value validators
 - **`modules/`** — Directory for sub-components (e.g. emoji_picker has `emoji_search.vue`, `emoji_selector.vue`)
