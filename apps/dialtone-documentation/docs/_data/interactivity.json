@@ -109,6 +109,10 @@
       "output": "pointer-events: none !important;"
     },
     {
+      "class": "d-us-all",
+      "output": "user-select: all !important;"
+    },
+    {
       "class": "d-us-auto",
       "output": "user-select: auto !important;"
     },
