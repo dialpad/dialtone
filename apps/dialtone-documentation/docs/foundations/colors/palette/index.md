@@ -95,6 +95,25 @@ Each of the colors listed above references these. For example, in Light mode
 `var(--dt-color-foreground-critical)` is an alias to
 `var(--dt-color-red-300)`, and will have a different value in Dark mode.
 
+<dt-tab-group>
+  <template #tabs>
+    <dt-tab id="1" panel-id="2" selected>
+      Light Mode
+    </dt-tab>
+    <dt-tab id="3" panel-id="4">
+      Dark Mode
+    </dt-tab>
+  </template>
+  <div>
+    <dt-tab-panel id="2" tab-id="1">
+      <ColorsCatalog mode="light"></ColorsCatalog>
+    </dt-tab-panel>
+    <dt-tab-panel id="4" tab-id="3">
+      <ColorsCatalog mode="dark"></ColorsCatalog>
+    </dt-tab-panel>
+  </div>
+</dt-tab-group>
+
 ### Light Theme
 
 <ColorsCatalog mode="light"></ColorsCatalog>
