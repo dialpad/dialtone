@@ -114,14 +114,6 @@ Each of the colors listed above references these. For example, in Light mode
   </div>
 </dt-tab-group>
 
-### Light Theme
-
-<ColorsCatalog mode="light"></ColorsCatalog>
-
-### Dark Theme
-
-<ColorsCatalog mode="dark"></ColorsCatalog>
-
 <script setup>
 import DesignColorTable from '@baseComponents/DesignColorTable.vue';
 import ThemeColorTable from '@baseComponents/ThemeColorTable.vue';
