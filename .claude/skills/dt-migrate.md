@@ -11,6 +11,7 @@ description: "Run Dialtone migration tools for token and utility renames. Use '/
 | `color-stops` | Renames irregular color stops (250, 350, 425, etc.) to standard 12-stop scale | `npx dialtone-migration-helper` → "color stops" |
 | `base-to-semantic` | Replaces base color utilities and CSS tokens with semantic equivalents | `npx dialtone-migration-helper` → "base to semantic" |
 | `space-to-size` | Renames `var(--dt-space-*)` to `var(--dt-size-*)` | `npx dialtone-migration-helper` → "space to size" |
+| `hsl-to-oklch` | Migrates consumer HSL channel variable patterns to OKLCH relative color syntax or plain `var()` | `npx dialtone-migration-helper` → "hsl to oklch" |
 
 ## Usage
 

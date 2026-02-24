@@ -70,3 +70,4 @@ After creating or updating a utility:
 - The CSS package ships as one monolithic file — every utility is included regardless of usage
 - PurgeCSS (shipped as a Dialtone PostCSS plugin) is the recommended approach for tree-shaking unused utilities in consuming projects
 - When adding utilities that pair with component styles, coordinate with the component skill to ensure consistency
+- Color utilities are generated using OKLCH relative color syntax (`oklch(from var(...) l c h / var(--opacity-var, alpha))`). When debugging color utility output, expect this format rather than raw `var()` references. See `postcss/dialtone-generators.cjs` for the generation logic.
