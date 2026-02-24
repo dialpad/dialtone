@@ -6,6 +6,7 @@
         kind="headline"
         size="lg"
         class="d-tt-capitalize"
+        text-box-trim="start"
         tabindex="-1"
       >
         {{ colorName }}
@@ -14,6 +15,7 @@
         v-dt-tooltip="`Lightness Contrast (APCA) against either pure white or black. 60 is considered AA accessible.`"
         as="abbr"
         tabindex="0"
+        text-box-trim="start"
         class="d-px12 d-td-dotted d-c-help"
       >
         LC

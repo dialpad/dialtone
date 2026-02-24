@@ -1,15 +1,20 @@
 <template>
-  <dt-stack as="section" gap="500">
-    <div class="d-d-grid d-gg24 d-g-cols1 md:d-g-cols2">
-      <base-color
-        v-for="({ stops }, colorName) in colors"
-        :key="colorName"
-        :color-name="colorName"
-        :stops="stops || []"
-        :mode="mode"
-      />
-    </div>
-  </dt-stack>
+  <dt-mode-island
+    :mode="mode"
+    class="d-p16 d-bgc-secondary"
+  >
+    <dt-stack as="section" gap="500">
+      <div class="d-d-grid d-g16 d-rg32 d-g-cols1 md:d-g-cols2">
+        <base-color
+          v-for="({ stops }, colorName) in colors"
+          :key="colorName"
+          :color-name="colorName"
+          :stops="stops || []"
+          :mode="mode"
+        />
+      </div>
+    </dt-stack>
+  </dt-mode-island>
 </template>
 
 <script setup>
