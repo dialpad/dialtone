@@ -1,3 +1,20 @@
+# [9.161.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.160.1...dialtone/v9.161.0) (2026-02-24)
+
+
+### Bug Fixes
+
+* **Popover:** DLT-2870 fix initial focus logic ([#1070](https://github.com/dialpad/dialtone/issues/1070)) ([7bdb3d5](https://github.com/dialpad/dialtone/commit/7bdb3d5d8d7786ea12b60dd49456e45c716c7b90))
+
+
+### Documentation
+
+* DLT-3038 improve default storybook doc view with autodocs ([#1071](https://github.com/dialpad/dialtone/issues/1071)) ([e6f7ccb](https://github.com/dialpad/dialtone/commit/e6f7ccbc55cabc0e29e89c82a20eb39767dcb907))
+
+
+### Features
+
+* **Datepicker:** DLT-3015 add weekStartsOn prop for locale-aware week start ([#1072](https://github.com/dialpad/dialtone/issues/1072)) ([04d2218](https://github.com/dialpad/dialtone/commit/04d22187f9b0e42459acbf2b04c55ec32c41e65b))
+
 ## [9.160.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.160.0...dialtone/v9.160.1) (2026-02-23)
 
 
