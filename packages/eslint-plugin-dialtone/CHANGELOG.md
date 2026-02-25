@@ -1,3 +1,10 @@
+## [1.11.1](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.11.0...eslint-plugin-dialtone/v1.11.1) (2026-02-24)
+
+
+### Bug Fixes
+
+* **Lint:** NO-JIRA fix typo in recommend-typography-style message ([#1076](https://github.com/dialpad/dialtone/issues/1076)) ([0af0da8](https://github.com/dialpad/dialtone/commit/0af0da85f35454e94f35574e4325f99e86746dd0))
+
 # [1.11.0](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.10.0...eslint-plugin-dialtone/v1.11.0) (2025-11-25)
 
 

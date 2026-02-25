@@ -1,3 +1,42 @@
+# [9.161.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.160.1...dialtone/v9.161.0) (2026-02-24)
+
+
+### Bug Fixes
+
+* **Popover:** DLT-2870 fix initial focus logic ([#1070](https://github.com/dialpad/dialtone/issues/1070)) ([7bdb3d5](https://github.com/dialpad/dialtone/commit/7bdb3d5d8d7786ea12b60dd49456e45c716c7b90))
+
+
+### Documentation
+
+* DLT-3038 improve default storybook doc view with autodocs ([#1071](https://github.com/dialpad/dialtone/issues/1071)) ([e6f7ccb](https://github.com/dialpad/dialtone/commit/e6f7ccbc55cabc0e29e89c82a20eb39767dcb907))
+
+
+### Features
+
+* **Datepicker:** DLT-3015 add weekStartsOn prop for locale-aware week start ([#1072](https://github.com/dialpad/dialtone/issues/1072)) ([04d2218](https://github.com/dialpad/dialtone/commit/04d22187f9b0e42459acbf2b04c55ec32c41e65b))
+
+## [9.160.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.160.0...dialtone/v9.160.1) (2026-02-23)
+
+
+### Bug Fixes
+
+* **Tooltip:** NO-JIRA fix docsite ([#1075](https://github.com/dialpad/dialtone/issues/1075)) ([7a097aa](https://github.com/dialpad/dialtone/commit/7a097aa48bccc3dbe7fa0d4ed5171c7080f64db7))
+
+# [9.160.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.159.0...dialtone/v9.160.0) (2026-02-23)
+
+
+### Bug Fixes
+
+* **Message Input:** DLT-3000 incorrect syntax on emoji picker open ([#1068](https://github.com/dialpad/dialtone/issues/1068)) ([b4bce6e](https://github.com/dialpad/dialtone/commit/b4bce6eb0a10eda2a4cf61610b4313ae0e8e470b))
+* **Tooltip:** DLT-3029 render tooltip-directive with a singleton app ([#1066](https://github.com/dialpad/dialtone/issues/1066)) ([ac119b3](https://github.com/dialpad/dialtone/commit/ac119b3fe3117b57753b39cbbf56bdf198c5adb5))
+
+
+### Features
+
+* **Button:** DLT-3009 add support for anchor and router-link rendering ([#1055](https://github.com/dialpad/dialtone/issues/1055)) ([638f846](https://github.com/dialpad/dialtone/commit/638f84641d68a27a95d1fe1fa420e6a3ab01ea51))
+* **Editor:** DP-175971 added custom variable extension to rich text editor ([#1052](https://github.com/dialpad/dialtone/issues/1052)) ([a437509](https://github.com/dialpad/dialtone/commit/a4375091aebbea1e354367693a439a7d74692a37))
+* **Link:** DLT-3010 add router-link rendering support ([#1056](https://github.com/dialpad/dialtone/issues/1056)) ([a7c9d98](https://github.com/dialpad/dialtone/commit/a7c9d984c581a3695f4e12db600dbe9a7a0a8e37))
+
 # [9.159.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.158.0...dialtone/v9.159.0) (2026-02-19)
 
 

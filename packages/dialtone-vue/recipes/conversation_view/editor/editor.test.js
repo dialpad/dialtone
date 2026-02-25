@@ -724,8 +724,13 @@ describe('DtRecipeEditor tests', () => {
 
     describe('When use div tags is enabled', () => {
       beforeEach(async () => {
-        _mountWrapper();
-        await wrapper.setProps({ useDivTags: true });
+        wrapper = mount(DtRecipeEditor, {
+          propsData: {...propsData, useDivTags: true },
+          listeners,
+          slots,
+          localVue: testContext.localVue,
+          attachTo: document.body,
+        });
         await wrapper.vm.$nextTick();
         _setChildWrappers();
       });

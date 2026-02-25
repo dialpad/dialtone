@@ -14,6 +14,7 @@ import fixDefaultSlot from '../components/plugins/fixDefaultSlot';
 import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge, setCustomEmojiUrl, setCustomEmojiJson } from '@/common/emoji';
 import customEmojiJson from '@/common/custom-emoji.json';
 import { dialtoneDarkTheme, dialtoneLightTheme } from './dialtone-themes.js';
+import { DialtoneDocsPage } from './DialtoneDocsPage.jsx';
 import { DtTooltipDirective } from '@/directives/tooltip_directive';
 import { DtScrollbarDirective } from '@/directives/scrollbar_directive';
 import { DtStack } from '@/components/stack';
@@ -104,6 +105,7 @@ export default {
 
     backgrounds: { disabled: true },
     docs: {
+      page: DialtoneDocsPage,
       container: ({ children, ...props }) => {
         const [isDark, setDark] = useState(false);
         const channel = addons.getChannel();

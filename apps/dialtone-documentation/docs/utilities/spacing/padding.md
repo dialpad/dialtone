@@ -4,7 +4,7 @@ description: Utilities for setting an element's interior spacing between child e
 ---
 
 <dt-notice kind="info" class="d-wmx100p d-mt24" hideClose>
-  Padding CSS Utilities are most appropriate for padding on the <strong>sides</strong> of an element. Avoiding using it to create spacing <strong>between</strong> elements. Instead, favor the <router-link class="d-link d-link--muted" to="/components/stack/">Stack</router-link> component and its <code>gap</code> property for spacing between. It can still be combined with flex utilities to create more complex layouts.
+  Padding CSS Utilities are most appropriate for padding on the <strong>sides</strong> of an element. Avoiding using it to create spacing <strong>between</strong> elements. Instead, favor the <dt-link to="/components/stack/" kind="muted">Stack</dt-link> component and its <code>gap</code> property for spacing between. It can still be combined with flex utilities to create more complex layouts.
 </dt-notice>
 
 ## Add Padding to All Sides

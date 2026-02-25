@@ -1,12 +1,7 @@
-import { markRaw } from 'vue';
-import { VueRenderer } from '@tiptap/vue-3';
 import { getEmojiData } from '@/common/emoji';
 
-import SuggestionList from '../suggestion/SuggestionList.vue';
+import { createSuggestionRenderer } from '../utils/suggestion_utils';
 import EmojiSuggestion from './EmojiSuggestion.vue';
-
-import tippy from 'tippy.js';
-import hideOnEsc from '../tippy_plugins/hide_on_esc';
 
 const suggestionLimit = 20;
 
@@ -68,70 +63,5 @@ export default {
     window.getSelection()?.collapseToEnd();
   },
 
-  render: () => {
-    let component;
-    let popup;
-    let popupIsOpen = false;
-
-    return {
-      onStart: props => {
-        component = new VueRenderer(SuggestionList, {
-          props: {
-            itemComponent: markRaw(EmojiSuggestion),
-            itemType: 'emoji',
-            ...props,
-          },
-          editor: props.editor,
-        });
-
-        if (!props.clientRect) {
-          return;
-        }
-
-        popup = tippy('body', {
-          getReferenceClientRect: props.clientRect,
-          appendTo: () => document.body,
-          content: component.element,
-          showOnCreate: false,
-          onShow: () => { popupIsOpen = true; },
-          onHidden: () => { popupIsOpen = false; },
-          interactive: true,
-          trigger: 'manual',
-          placement: 'top-start',
-          zIndex: 650,
-          plugins: [hideOnEsc],
-        });
-
-        if (props.items.length > 0) {
-          popup?.[0].show();
-        }
-      },
-
-      onUpdate (props) {
-        component?.updateProps(props);
-
-        if (props.items.length > 0) {
-          popup?.[0].show();
-        } else {
-          popup?.[0].hide();
-        }
-        popup?.[0].setProps({
-          getReferenceClientRect: props.clientRect,
-        });
-      },
-
-      onKeyDown (props) {
-        if (popupIsOpen) {
-          return component?.ref?.onKeyDown(props);
-        }
-      },
-
-      onExit () {
-        popup?.[0].destroy();
-        popup = null;
-        component?.destroy();
-        component = null;
-      },
-    };
-  },
+  render: createSuggestionRenderer(EmojiSuggestion, 'emoji'),
 };

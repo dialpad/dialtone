@@ -29,35 +29,20 @@
           </a>
         </dt-stack>
         <dt-stack direction="row" justify="center" gap="500">
-          <router-link
-            v-slot="{ navigate }"
+          <dt-button
             to="/guides/getting-started/"
-            custom
+            size="lg"
+            @click="sendAnalyticsEvent()"
           >
-            <dt-button
-              role="link"
-              size="lg"
-              @click="(e) => { sendAnalyticsEvent(); navigate(e); }"
-              @keypress.enter="(e) => { sendAnalyticsEvent(); navigate(e); }"
-            >
-              Get Started
-            </dt-button>
-          </router-link>
-          <router-link
-            v-slot="{ navigate }"
+            Get Started
+          </dt-button>
+          <dt-button
             to="/about/whats-new/"
-            custom
+            size="lg"
+            importance="outlined"
           >
-            <dt-button
-              role="link"
-              size="lg"
-              importance="outlined"
-              @click="(e) => { navigate(e); }"
-              @keypress.enter="(e) => { navigate(e); }"
-            >
-              What's New?
-            </dt-button>
-          </router-link>
+            What's New?
+          </dt-button>
         </dt-stack>
       </dt-stack>
       <svg-loader class="hero__image d-w50p" name="home-billboard" />
@@ -78,9 +63,9 @@
           Foundational color, iconography, and spacing guidelines
         </p>
         <dt-stack gap="300">
-          <router-link class="d-link" to="/design/">
+          <dt-link to="/design/">
             Browse Design Guidelines
-          </router-link>
+          </dt-link>
         </dt-stack>
       </dt-stack>
       <dt-stack gap="400" class="link d-body--md d-gc3 d-px32 d-ta-center">
@@ -96,12 +81,12 @@
           Presentational UI components offered in CSS and Vue
         </p>
         <dt-stack gap="300">
-          <router-link class="d-link" to="/components/">
+          <dt-link to="/components/">
             Browse CSS Components
-          </router-link>
-          <a class="d-link" href="https://dialtone.dialpad.com/vue/index.html?path=/docs/welcome--docs" target="_blank" rel="noopener noreferrer">
+          </dt-link>
+          <dt-link href="https://dialtone.dialpad.com/vue/index.html?path=/docs/welcome--docs" target="_blank" rel="noopener noreferrer">
             Browse Vue Components
-          </a>
+          </dt-link>
         </dt-stack>
       </dt-stack>
       <dt-stack gap="400" class="link d-body--md d-gc3 d-px32 d-ta-center">
@@ -117,9 +102,9 @@
           A utility-first CSS framework for building user interfaces.
         </p>
         <dt-stack gap="300">
-          <router-link class="d-link" to="/utilities/">
+          <dt-link to="/utilities/">
             Browse Utility Classes
-          </router-link>
+          </dt-link>
         </dt-stack>
       </dt-stack>
       <dt-stack gap="400" class="link d-body--md d-gc3 d-px32 d-ta-center">
@@ -135,15 +120,15 @@
           Reference guidelines for Accessibility, Writing, and more
         </p>
         <dt-stack gap="300">
-          <router-link class="d-link" to="/guides/getting-started/">
+          <dt-link to="/guides/getting-started/">
             Getting Started
-          </router-link>
-          <router-link class="d-link" to="/guides/content/">
+          </dt-link>
+          <dt-link to="/guides/content/">
             Writing Guidelines
-          </router-link>
-          <router-link class="d-link" to="/guides/accessibility/">
+          </dt-link>
+          <dt-link to="/guides/accessibility/">
             Accessibility
-          </router-link>
+          </dt-link>
         </dt-stack>
       </dt-stack>
     </div>
@@ -153,22 +138,26 @@
       <h2 class="d-headline--lg d-fw-semibold">
         Don't see something? Want to contribute?
       </h2>
-      <a
-        class="d-btn d-btn--muted d-btn--outlined d-btn--lg"
+      <dt-button
         href="https://dialpad.atlassian.net/servicedesk/customer/portal/123/create/465"
         target="_blank"
         rel="noopener noreferrer"
+        kind="muted"
+        importance="outlined"
+        size="lg"
       >
         Make a request
-      </a>
-      <a
-        class="d-btn d-btn--muted d-btn--outlined d-btn--lg"
+      </dt-button>
+      <dt-button
         href="https://dialpad.atlassian.net/secure/CreateIssue.jspa?issuetype=1&pid=12508"
         target="_blank"
         rel="noopener noreferrer"
+        kind="muted"
+        importance="outlined"
+        size="lg"
       >
         Report a bug
-      </a>
+      </dt-button>
     </dt-stack>
   </section>
 </template>

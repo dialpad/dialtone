@@ -4,7 +4,7 @@ description: Utilities to adjust an element's exterior spacing between other obj
 ---
 
 <dt-notice kind="warning" class="d-wmx100p d-mt24" hideClose>
-  Avoid applying margins directly. Lean toward using layout components like <router-link class="d-link d-link--muted" to="/components/stack/">Stack</router-link> for consistent and maintainable spacing <strong>between</strong> elements.
+  Avoid applying margins directly. Lean toward using layout components like <dt-link to="/components/stack/" kind="muted">Stack</dt-link> for consistent and maintainable spacing <strong>between</strong> elements.
 </dt-notice>
 
 ## Add Margin to All Sides
