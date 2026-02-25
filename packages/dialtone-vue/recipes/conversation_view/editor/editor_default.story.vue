@@ -8,7 +8,6 @@
       :auto-focus="$attrs.autoFocus"
       :editable="$attrs.editable"
       :input-class="$attrs.inputClass"
-      :link="$attrs.link"
       :placeholder="$attrs.placeholder"
       :max-height="$attrs.maxHeight"
       :show-add-link="$attrs.showAddLink"
