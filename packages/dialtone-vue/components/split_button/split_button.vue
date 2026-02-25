@@ -181,7 +181,7 @@ export default {
 
     /**
      * The position of the icon slot within the start button.
-     * @values left, right, top, bottom
+     * @values start, end, blockStart, blockEnd, left, right, top, bottom
      */
     startIconPosition: {
       type: String,
@@ -191,7 +191,7 @@ export default {
 
     /**
      * @deprecated Use startIconPosition
-     * @values left, right, top, bottom
+     * @values start, end, blockStart, blockEnd, left, right, top, bottom
      */
     alphaIconPosition: {
       type: String,

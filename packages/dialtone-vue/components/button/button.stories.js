@@ -70,6 +70,30 @@ export const argTypesData = {
       },
     },
   },
+  blockStartIcon: {
+    options: iconsList,
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'select',
+      labels: {
+        undefined: '(empty)',
+      },
+    },
+  },
+  blockEndIcon: {
+    options: iconsList,
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'select',
+      labels: {
+        undefined: '(empty)',
+      },
+    },
+  },
 
   // Props
   active: {
@@ -226,5 +250,23 @@ export const WithBothIcons = {
     default: 'Both Icons',
     startIcon: 'send',
     endIcon: 'arrow-right',
+  },
+};
+
+export const WithBlockStartIcon = {
+  render: Template,
+
+  args: {
+    default: 'Block Start Icon',
+    blockStartIcon: 'phone',
+  },
+};
+
+export const WithBlockEndIcon = {
+  render: Template,
+
+  args: {
+    default: 'Block End Icon',
+    blockEndIcon: 'phone',
   },
 };

@@ -136,8 +136,8 @@
       </dt-button>
 
       <!-- Icon Top -->
-      <dt-button icon-position="top">
-        <template #icon="{ iconSize }">
+      <dt-button>
+        <template #blockStartIcon="{ iconSize }">
           <dt-icon
             name="download"
             :size="iconSize"
@@ -147,8 +147,8 @@
       </dt-button>
 
       <!-- Icon Bottom -->
-      <dt-button icon-position="bottom">
-        <template #icon="{ iconSize }">
+      <dt-button>
+        <template #blockEndIcon="{ iconSize }">
           <dt-icon
             name="download"
             :size="iconSize"

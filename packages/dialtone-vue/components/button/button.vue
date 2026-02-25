@@ -12,6 +12,24 @@
     :aria-label="loading ? i18n.$t('DIALTONE_LOADING') : $attrs['aria-label']"
     v-on="buttonListeners"
   >
+    <!-- NEW: Block-start icon slot (above label) -->
+    <span
+      v-if="hasBlockStartIcon"
+      data-qa="dt-button-block-start-icon"
+      :class="[
+        'base-button__icon',
+        {
+          'd-btn__icon': kind !== 'unstyled',
+          'd-btn__icon--top': kind !== 'unstyled',
+        },
+      ]"
+    >
+      <!-- @slot Icon displayed above the button label (block-start) -->
+      <slot
+        name="blockStartIcon"
+        :icon-size="iconSize"
+      />
+    </span>
     <!-- NEW: Start icon slot -->
     <span
       v-if="hasStartIcon"
@@ -78,6 +96,24 @@
         :icon-size="iconSize"
       />
     </span>
+    <!-- NEW: Block-end icon slot (below label) -->
+    <span
+      v-if="hasBlockEndIcon"
+      data-qa="dt-button-block-end-icon"
+      :class="[
+        'base-button__icon',
+        {
+          'd-btn__icon': kind !== 'unstyled',
+          'd-btn__icon--bottom': kind !== 'unstyled',
+        },
+      ]"
+    >
+      <!-- @slot Icon displayed below the button label (block-end) -->
+      <slot
+        name="blockEndIcon"
+        :icon-size="iconSize"
+      />
+    </span>
   </button>
 </template>
 
@@ -120,8 +156,8 @@ export default {
 
     /**
      * The position of the icon slot within the button.
-     * @deprecated Use startIcon / endIcon slots instead.
-     * @values start, end, left, right, top, bottom
+     * @deprecated Use startIcon / endIcon / blockStartIcon / blockEndIcon slots instead.
+     * @values start, end, blockStart, blockEnd, left, right, top, bottom
      */
     iconPosition: {
       type: String,
@@ -338,8 +374,16 @@ export default {
       return hasSlotContent(this.$slots.endIcon);
     },
 
+    hasBlockStartIcon () {
+      return hasSlotContent(this.$slots.blockStartIcon);
+    },
+
+    hasBlockEndIcon () {
+      return hasSlotContent(this.$slots.blockEndIcon);
+    },
+
     hasNewIconSlots () {
-      return this.hasStartIcon || this.hasEndIcon;
+      return this.hasStartIcon || this.hasEndIcon || this.hasBlockStartIcon || this.hasBlockEndIcon;
     },
   },
 
@@ -411,7 +455,9 @@ export default {
     },
 
     isVerticalIconLayout () {
-      return !this.isIconOnly() && !this.hasNewIconSlots && ['top', 'bottom'].includes(this.iconPosition);
+      if (this.isIconOnly()) return false;
+      if (this.hasBlockStartIcon || this.hasBlockEndIcon) return true;
+      return !this.hasNewIconSlots && ['top', 'bottom'].includes(this.iconPosition);
     },
   },
 };

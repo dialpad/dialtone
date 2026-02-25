@@ -445,8 +445,8 @@ Place icons above or below the label with `blockStartIcon` and `blockEndIcon` sl
     ref="iconLabelExample"
   >
     <span>
-      <dt-button importance="outlined" icon-position="top">
-        <template #icon="{ iconSize }">
+      <dt-button importance="outlined">
+        <template #blockStartIcon="{ iconSize }">
           <dt-icon
             name="phone"
             :size="iconSize"
@@ -456,8 +456,8 @@ Place icons above or below the label with `blockStartIcon` and `blockEndIcon` sl
       </dt-button>
     </span>
     <span>
-      <dt-button importance="outlined" icon-position="bottom">
-        <template #icon="{ iconSize }">
+      <dt-button importance="outlined">
+        <template #blockEndIcon="{ iconSize }">
           <dt-icon
             name="phone"
             :size="iconSize"
@@ -473,7 +473,7 @@ Place icons above or below the label with `blockStartIcon` and `blockEndIcon` sl
 :htmlCode='() => $refs.iconLabelExample'
 vueCode='
 <dt-button importance="outlined">
-  <template #icon="{ iconSize }">
+  <template #blockStartIcon="{ iconSize }">
     <dt-icon
       name="phone"
       :size="iconSize"
@@ -481,26 +481,8 @@ vueCode='
   </template>
   Label
 </dt-button>
-<dt-button importance="outlined" icon-position="top">
-  <template #icon="{ iconSize }">
-    <dt-icon
-      name="phone"
-      :size="iconSize"
-    />
-  </template>
-  Label
-</dt-button>
-<dt-button importance="outlined" icon-position="bottom">
-  <template #icon="{ iconSize }">
-    <dt-icon
-      name="phone"
-      :size="iconSize"
-    />
-  </template>
-  Label
-</dt-button>
-<dt-button importance="outlined" icon-position="right">
-  <template #icon="{ iconSize }">
+<dt-button importance="outlined">
+  <template #blockEndIcon="{ iconSize }">
     <dt-icon
       name="phone"
       :size="iconSize"
