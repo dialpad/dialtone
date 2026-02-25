@@ -13,13 +13,12 @@
       </template>
       <dt-button
         importance="clear"
-        icon-position="right"
         size="xs"
         kind="muted"
         class="d-px4 d-py0"
       >
         Show 2 calls on hold
-        <template #icon>
+        <template #endIcon>
           <dt-icon
             name="arrow-up"
             size="200"
@@ -118,7 +117,6 @@
       <template #end>
         <dt-button
           importance="clear"
-          icon-position="right"
           size="xs"
           kind="muted"
           class="d-fc-primary d-p0 d-fw-bold"

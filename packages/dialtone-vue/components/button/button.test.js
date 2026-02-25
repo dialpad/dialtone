@@ -747,6 +747,25 @@ describe('DtButton Tests', () => {
       });
     });
 
+    describe('When both startIcon and icon slots are provided', () => {
+      it('should render startIcon and suppress the deprecated icon slot', () => {
+        mockSlots = {
+          default: 'Button Text',
+          startIcon: '<span>new</span>',
+          icon: '<span>old</span>',
+        };
+
+        updateWrapper();
+
+        const startIcon = wrapper.find('[data-qa="dt-button-start-icon"]');
+        const legacyIcon = wrapper.find('[data-qa="dt-button-icon"]');
+
+        expect(startIcon.exists()).toBe(true);
+        expect(startIcon.text()).toContain('new');
+        expect(legacyIcon.exists()).toBe(false);
+      });
+    });
+
     describe('When default slot is populated with text', () => {
       it('text should display in the button label', () => {
         mockSlots = { default: 'hello' };

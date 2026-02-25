@@ -78,7 +78,7 @@
       </template>
       <template
         v-if="$attrs.top"
-        #top
+        #blockStart
       >
         <span v-html="$attrs.top" />
       </template>

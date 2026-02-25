@@ -43,7 +43,7 @@
 
     <template
       v-if="$attrs.bottom"
-      #bottom
+      #blockEnd
     >
       <span v-html="$attrs.bottom" />
     </template>

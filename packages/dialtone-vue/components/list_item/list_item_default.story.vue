@@ -18,7 +18,7 @@
       <template #subtitle>
         <span v-html="$attrs.subtitle" />
       </template>
-      <template #bottom>
+      <template #blockEnd>
         <span v-html="$attrs.bottom" />
       </template>
       <template #end>

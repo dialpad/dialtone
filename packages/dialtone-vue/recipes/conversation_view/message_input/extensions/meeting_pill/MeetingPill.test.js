@@ -25,7 +25,7 @@ const baseProps = {
 const baseGlobal = {
   stubs: {
     'dt-item-layout': {
-      template: '<div class="d-recipe-message-input-meeting-pill__layout"><slot name="left" /><slot /><slot name="right" /></div>',
+      template: '<div class="d-recipe-message-input-meeting-pill__layout"><slot name="start" /><slot /><slot name="end" /></div>',
     },
     'dt-button': {
       template: '<button @click="$emit(\'click\', $event)" :aria-label="$attrs[\'aria-label\']" :title="$attrs.title"><slot name="icon" /></button>',

@@ -40,12 +40,15 @@
         <slot name="subtitle" />
       </div>
       <div
-        v-if="hasSlotContent($slots.bottom)"
+        v-if="hasSlotContent($slots.blockEnd) || hasSlotContent($slots.bottom)"
         data-qa="dt-item-layout-bottom-wrapper"
-        :class="[bottomClass, 'd-item-layout__bottom']"
+        :class="[resolvedBlockEndClass, 'd-item-layout__bottom']"
       >
         <!-- @slot Slot for content below subtitle -->
-        <slot name="bottom" />
+        <slot name="blockEnd">
+          <!-- @slot @deprecated Use blockEnd -->
+          <slot name="bottom" />
+        </slot>
       </div>
     </section>
     <section
@@ -141,11 +144,20 @@ export default {
     },
 
     /**
-     * Set the class for the bottom section.
+     * Set the class for the block-end section.
+     */
+    blockEndClass: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Set the class for the block-end section.
+     * @deprecated Use blockEndClass
      */
     bottomClass: {
       type: String,
-      default: '',
+      default: undefined,
     },
 
     /**
@@ -181,6 +193,10 @@ export default {
 
     resolvedEndClass () {
       return this.rightClass ?? this.endClass;
+    },
+
+    resolvedBlockEndClass () {
+      return this.bottomClass ?? this.blockEndClass;
     },
   },
 

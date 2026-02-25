@@ -1053,44 +1053,40 @@ showHtmlWarning />
     ref="loadingLabelExample"
   >
   <dt-button
-    icon-position="right"
     size="xs"
   >
     Validating
-    <template #icon="{ iconSize }">
+    <template #endIcon="{ iconSize }">
       <dt-loader
         :size="iconSize"
       />
     </template>
   </dt-button>
   <dt-button
-    icon-position="right"
     size="sm"
   >
     Validating
-    <template #icon="{ iconSize }">
+    <template #endIcon="{ iconSize }">
       <dt-loader
         :size="iconSize"
       />
     </template>
   </dt-button>
   <dt-button
-    icon-position="right"
     size="md"
   >
     Validating
-    <template #icon="{ iconSize }">
+    <template #endIcon="{ iconSize }">
       <dt-loader
         :size="iconSize"
       />
     </template>
   </dt-button>
   <dt-button
-    icon-position="right"
     size="lg"
   >
     Validating
-    <template #icon="{ iconSize }">
+    <template #endIcon="{ iconSize }">
       <dt-loader
         :size="iconSize"
       />
@@ -1102,9 +1098,9 @@ showHtmlWarning />
 <code-example-tabs
 :htmlCode='() => $refs.loadingLabelExample'
 vueCode='
-<dt-button icon-position="right">
+<dt-button>
   Validating
-  <template #icon="{ iconSize }">
+  <template #endIcon="{ iconSize }">
     <dt-loader :size="iconSize" />
   </template>
 </dt-button>

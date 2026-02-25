@@ -1,4 +1,6 @@
 export const ROOT_LAYOUT_SIDEBAR_POSITIONS = {
+  START: 'start',
+  END: 'end',
   LEFT: 'left',
   RIGHT: 'right',
 };

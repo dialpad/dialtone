@@ -29,7 +29,6 @@
           :kind="buttonKind"
           :size="size"
           data-qa="dt-filter-pill__button"
-          icon-position="right"
           importance="outlined"
           @click="isOpen = true"
         >
@@ -47,7 +46,7 @@
               />
             </slot>
           </span>
-          <template #icon="{ iconSize }">
+          <template #endIcon="{ iconSize }">
             <dt-icon-chevron-down
               :size="iconSize"
               class="d-filter-pill__icon"

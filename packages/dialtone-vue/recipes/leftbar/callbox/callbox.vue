@@ -83,11 +83,15 @@
         </div>
       </div>
       <div
-        v-if="$slots.bottom"
+        v-if="$slots.blockEnd || $slots.bottom"
         data-qa="dt-recipe-callbox__bottom-wrapper"
         class="d-recipe-callbox__main-content-bottom"
       >
-        <slot name="bottom" />
+        <!-- @slot Slot for block-end content -->
+        <slot name="blockEnd">
+          <!-- @slot @deprecated Use blockEnd -->
+          <slot name="bottom" />
+        </slot>
       </div>
     </div>
   </div>

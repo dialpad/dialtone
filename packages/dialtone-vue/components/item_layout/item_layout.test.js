@@ -117,6 +117,35 @@ describe('DtItemLayout tests', () => {
       });
     });
 
+    describe('When blockEnd content is provided', () => {
+      beforeEach(() => {
+        mockSlots = { blockEnd: 'block end content' };
+
+        updateWrapper();
+      });
+
+      it('should render the slot wrapper', () => {
+        expect(bottomWrapper.exists()).toBe(true);
+      });
+
+      it('should render the provided content', () => {
+        expect(wrapper.text().includes('block end content')).toBe(true);
+      });
+    });
+
+    describe('When blockEndClass prop is provided', () => {
+      beforeEach(() => {
+        mockSlots = { blockEnd: 'content' };
+        mockProps = { blockEndClass: 'custom-class' };
+
+        updateWrapper();
+      });
+
+      it('should apply the class to the bottom wrapper', () => {
+        expect(bottomWrapper.classes()).toContain('custom-class');
+      });
+    });
+
     describe('When selected content is provided', () => {
       beforeEach(() => {
         mockSlots = { selected: 'selected' };
@@ -229,6 +258,62 @@ describe('DtItemLayout tests', () => {
       });
     });
 
+    describe('When bottom slot is provided (deprecated)', () => {
+      beforeEach(() => {
+        mockSlots = { bottom: 'bottom content' };
+
+        updateWrapper();
+      });
+
+      it('should render the slot wrapper', () => {
+        expect(bottomWrapper.exists()).toBe(true);
+      });
+
+      it('should render the provided content', () => {
+        expect(wrapper.text().includes('bottom content')).toBe(true);
+      });
+    });
+
+    describe('When bottomClass prop is provided (deprecated)', () => {
+      beforeEach(() => {
+        mockSlots = { bottom: 'content' };
+        mockProps = { bottomClass: 'old-class' };
+
+        updateWrapper();
+      });
+
+      it('should apply the class to the bottom wrapper', () => {
+        expect(bottomWrapper.classes()).toContain('old-class');
+      });
+    });
+
+    describe('When both blockEnd and bottom slots are provided', () => {
+      beforeEach(() => {
+        mockSlots = { blockEnd: 'new content', bottom: 'old content' };
+
+        updateWrapper();
+      });
+
+      it('should render blockEnd content over bottom content', () => {
+        expect(wrapper.text().includes('new content')).toBe(true);
+        expect(wrapper.text().includes('old content')).toBe(false);
+      });
+    });
+
+    describe('When bottomClass overrides blockEndClass (deprecated takes precedence)', () => {
+      beforeEach(() => {
+        mockSlots = { blockEnd: 'content' };
+        mockProps = { blockEndClass: 'new-class', bottomClass: 'old-class' };
+
+        updateWrapper();
+      });
+
+      it('should use bottomClass value', () => {
+        expect(bottomWrapper.classes()).toContain('old-class');
+        expect(bottomWrapper.classes()).not.toContain('new-class');
+      });
+    });
+
     describe('When rightClass overrides endClass (deprecated takes precedence)', () => {
       beforeEach(() => {
         mockSlots = { end: 'end content' };
@@ -240,6 +325,23 @@ describe('DtItemLayout tests', () => {
       it('should use rightClass value', () => {
         expect(rightWrapper.classes()).toContain('old-class');
         expect(rightWrapper.classes()).not.toContain('new-class');
+      });
+    });
+
+    describe('When both start and left slots are provided', () => {
+      it('should render the new start content and suppress the deprecated left', () => {
+        mockSlots = {
+          start: 'new start',
+          left: 'old left',
+        };
+
+        updateWrapper();
+
+        leftWrapper = wrapper.find('[data-qa="dt-item-layout-left-wrapper"]');
+
+        expect(leftWrapper.exists()).toBe(true);
+        expect(leftWrapper.text()).toContain('new start');
+        expect(leftWrapper.text()).not.toContain('old left');
       });
     });
   });

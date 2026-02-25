@@ -93,15 +93,18 @@
     </template>
 
     <template
-      v-if="$slots.bottom"
-      #bottom
+      v-if="$slots.blockEnd || $slots.bottom"
+      #blockEnd
     >
       <div
         class="d-recipe-contact-info__bottom"
         data-qa="contact-info-bottom"
       >
-        <!-- @slot Slot for information at the bottom -->
-        <slot name="bottom" />
+        <!-- @slot Slot for block-end content -->
+        <slot name="blockEnd">
+          <!-- @slot @deprecated Use blockEnd -->
+          <slot name="bottom" />
+        </slot>
       </div>
     </template>
 

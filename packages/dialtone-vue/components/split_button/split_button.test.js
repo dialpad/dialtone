@@ -397,6 +397,76 @@ describe('DtSplitButton Tests', function () {
       });
     });
 
+    describe('When deprecated alphaTooltipText prop is used', () => {
+      it('Should pass the tooltip text to the alpha button', () => {
+        mockProps = { alphaTooltipText: MOCK_START_TOOLTIP_TEXT };
+
+        updateWrapper();
+
+        const alphaComponent = wrapper.findComponent(SplitButtonAlpha);
+
+        expect(alphaComponent.props('tooltipText')).toBe(MOCK_START_TOOLTIP_TEXT);
+      });
+    });
+
+    describe('When deprecated omegaTooltipText prop is used', () => {
+      it('Should pass the tooltip text to the omega button', () => {
+        mockProps = { omegaTooltipText: MOCK_END_TOOLTIP_TEXT };
+
+        updateWrapper();
+
+        const omegaComponent = wrapper.findComponent(SplitButtonOmega);
+
+        expect(omegaComponent.props('tooltipText')).toBe(MOCK_END_TOOLTIP_TEXT);
+      });
+    });
+
+    describe('When deprecated alphaIconPosition prop is used', () => {
+      it('Should position the icon correctly', () => {
+        mockSlots = { startIcon: '<dt-icon-send />' };
+        mockProps = { alphaIconPosition: 'right' };
+
+        updateWrapper();
+
+        expect(alphaIconSlot.classes().includes('d-btn__icon--right')).toBe(true);
+      });
+    });
+
+    describe('When deprecated alphaLabelClass prop is used', () => {
+      it('Should apply the label class', () => {
+        mockProps = { alphaLabelClass: 'custom-label-class' };
+
+        updateWrapper();
+
+        const labelEl = alphaButton.find('[data-qa="dt-button-label"]');
+
+        expect(labelEl.classes().includes('custom-label-class')).toBe(true);
+      });
+    });
+
+    describe('When deprecated omega slot is used', () => {
+      it('Should render the omega slot content', () => {
+        mockSlots = { omega: '<span data-qa="custom-omega">Custom omega</span>' };
+
+        wrapper = mount(DtSplitButton, {
+          props: { ...baseProps, ...mockProps },
+          slots: { ...baseSlots, ...mockSlots },
+          global: {
+            stubs: { transition: false },
+            plugins: [DtTooltipDirective],
+            components: { SplitButtonAlpha, SplitButtonOmega, DtIconSend },
+          },
+          attrs: { ...baseAttrs, ...mockAttrs },
+          attachTo: document.body,
+        });
+
+        const customOmega = wrapper.find('[data-qa="custom-omega"]');
+
+        expect(customOmega.exists()).toBe(true);
+        expect(customOmega.text()).toBe('Custom omega');
+      });
+    });
+
     describe('When start button is clicked', () => {
       it('Should emit deprecated alpha-clicked event', async () => {
         await alphaButton.trigger('click');

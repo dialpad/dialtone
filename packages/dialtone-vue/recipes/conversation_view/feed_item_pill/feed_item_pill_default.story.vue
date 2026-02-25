@@ -18,7 +18,7 @@
     <template #subtitle>
       Last 43 minutes - Ended at 5:04pm
     </template>
-    <template #bottom>
+    <template #blockEnd>
       <span class="d-fc-tertiary d-fs-100">8 people joined</span>
     </template>
     <template #end>

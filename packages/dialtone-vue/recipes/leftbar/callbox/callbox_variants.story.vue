@@ -327,7 +327,7 @@
           </template>
         </dt-button>
       </template>
-      <template #bottom>
+      <template #blockEnd>
         <dt-item-layout
           class="d-py4 d-px8"
           content-class="d-ac-center"

@@ -54,11 +54,15 @@
                 </div>
               </template>
               <template
-                v-if="$slots.bottom"
-                #bottom
+                v-if="$slots.blockEnd || $slots.bottom"
+                #blockEnd
               >
                 <div class="d-recipe-feed-item-pill__bottom">
-                  <slot name="bottom" />
+                  <!-- @slot Slot for block-end content -->
+                  <slot name="blockEnd">
+                    <!-- @slot @deprecated Use blockEnd -->
+                    <slot name="bottom" />
+                  </slot>
                 </div>
               </template>
               <template

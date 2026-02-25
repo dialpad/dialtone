@@ -52,7 +52,7 @@
           @click="onComboboxSelect(i)"
         >
           {{ item.number }}
-          <template #right>
+          <template #end>
             {{ item.type }}
           </template>
         </dt-list-item>

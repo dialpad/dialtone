@@ -196,7 +196,7 @@
         <template #subtitle>
           Started 10 minutes ago
         </template>
-        <template #bottom>
+        <template #blockEnd>
           <span class="d-fc-tertiary d-fs-100">8 people joined</span>
         </template>
         <template #end>
@@ -259,7 +259,7 @@
         <template #subtitle>
           Started 10 minutes ago
         </template>
-        <template #bottom>
+        <template #blockEnd>
           <span class="d-fc-tertiary d-fs-100">8 people joined</span>
         </template>
         <template #end>

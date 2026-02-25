@@ -177,6 +177,23 @@ describe('DtBadge Tests', () => {
           expect(wrapper.find('.d-badge__icon-right').exists()).toBe(true);
         });
       });
+
+      describe('When both startIcon and leftIcon slots are provided', () => {
+        it('should render the new startIcon content and suppress the deprecated leftIcon', () => {
+          mockSlots = {
+            startIcon: '<span>new</span>',
+            leftIcon: '<span>old</span>',
+          };
+
+          updateWrapper();
+
+          const leftIconWrapper = wrapper.find('.d-badge__icon-left');
+
+          expect(leftIconWrapper.exists()).toBe(true);
+          expect(leftIconWrapper.text()).toContain('new');
+          expect(leftIconWrapper.text()).not.toContain('old');
+        });
+      });
     });
 
     describe('When a decoration is provided via prop', () => {

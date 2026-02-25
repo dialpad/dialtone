@@ -304,6 +304,20 @@ describe('DtInput tests', () => {
           expect(wrapper.findComponent(DtIcon).exists()).toBe(true);
         });
       });
+
+      describe('When both startIcon and leftIcon slots are provided', () => {
+        it('should render the new startIcon content and suppress the deprecated leftIcon', () => {
+          mockSlots = {
+            startIcon: '<span>new</span>',
+            leftIcon: '<span>old</span>',
+          };
+
+          updateWrapper();
+
+          expect(leftIconWrapper.text()).toContain('new');
+          expect(leftIconWrapper.text()).not.toContain('old');
+        });
+      });
     });
 
     describe('When no validation message(s) are provided', () => {

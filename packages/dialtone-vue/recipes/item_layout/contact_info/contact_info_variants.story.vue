@@ -131,7 +131,7 @@
               />
             </dt-stack>
           </template>
-          <template #bottom>
+          <template #blockEnd>
             <dt-stack
               direction="row"
               align="center"
@@ -193,7 +193,7 @@
             />
           </dt-stack>
         </template>
-        <template #bottom>
+        <template #blockEnd>
           <dt-stack
             direction="row"
             align="center"
@@ -252,7 +252,7 @@
             />
           </dt-stack>
         </template>
-        <template #bottom>
+        <template #blockEnd>
           <dt-stack
             direction="row"
             align="center"
@@ -325,7 +325,7 @@
             </div>
           </dt-stack>
         </template>
-        <template #bottom>
+        <template #blockEnd>
           2 matches found.
           <dt-button
             link

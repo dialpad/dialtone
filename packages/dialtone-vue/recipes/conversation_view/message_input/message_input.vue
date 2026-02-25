@@ -11,7 +11,10 @@
     @mousedown="onMousedown"
   >
     <!-- @slot Renders above the input, but still within the borders. -->
-    <slot name="top" />
+    <slot name="blockStart">
+      <!-- @slot @deprecated Use blockStart -->
+      <slot name="top" />
+    </slot>
 
     <!-- set key to selectedText to force update. otherwise this component may not reflect the active selection -->
     <dt-recipe-message-input-topbar

@@ -6,7 +6,7 @@
     :content-class="$attrs.contentClass"
     :title-class="$attrs.titleClass"
     :subtitle-class="$attrs.subtitleClass"
-    :bottom-class="$attrs.bottomClass"
+    :block-end-class="$attrs.bottomClass"
     :end-class="$attrs.endClass"
     :selected-class="$attrs.selectedClass"
   >
@@ -26,7 +26,7 @@
         v-html="$attrs.subtitle"
       />
     </template>
-    <template #bottom>
+    <template #blockEnd>
       <span
         v-if="$attrs.bottom"
         v-html="$attrs.bottom"

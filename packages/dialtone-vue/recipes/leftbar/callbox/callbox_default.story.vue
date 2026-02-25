@@ -45,7 +45,7 @@
     </template>
     <template
       v-if="$attrs.bottom"
-      #bottom
+      #blockEnd
     >
       <div v-html="$attrs.bottom" />
     </template>

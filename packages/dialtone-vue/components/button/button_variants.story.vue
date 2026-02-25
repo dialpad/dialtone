@@ -125,8 +125,8 @@
       </dt-button>
 
       <!-- Icon Right -->
-      <dt-button icon-position="right">
-        <template #icon="{ iconSize }">
+      <dt-button>
+        <template #endIcon="{ iconSize }">
           <dt-icon
             name="download"
             :size="iconSize"
