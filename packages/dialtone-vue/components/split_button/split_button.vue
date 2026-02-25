@@ -16,15 +16,16 @@
       >
         <!-- @slot Start (left) button icon slot -->
         <slot
+          v-if="$slots.startIcon"
           name="startIcon"
           :size="iconSize"
-        >
-          <!-- @slot @deprecated Use startIcon -->
-          <slot
-            name="alphaIcon"
-            :size="iconSize"
-          />
-        </slot>
+        />
+        <!-- @slot @deprecated Use startIcon -->
+        <slot
+          v-else
+          name="alphaIcon"
+          :size="iconSize"
+        />
       </template>
       <template
         v-if="$slots.startEndIcon"
@@ -43,80 +44,87 @@
       >
         <!-- @slot Start (left) button icon slot -->
         <slot
+          v-if="$slots.startIcon"
           name="startIcon"
           :size="iconSize"
-        >
-          <!-- @slot @deprecated Use startIcon -->
-          <slot
-            name="alphaIcon"
-            :size="iconSize"
-          />
-        </slot>
+        />
+        <!-- @slot @deprecated Use startIcon -->
+        <slot
+          v-else
+          name="alphaIcon"
+          :size="iconSize"
+        />
       </template>
       <!-- @slot Default content slot -->
       <slot name="default" />
     </split-button-alpha>
     <!-- @slot End (right) content slot, overrides end button styling and functionality completely -->
-    <slot name="end">
-      <!-- @slot @deprecated Use end -->
-      <slot name="omega">
-        <dt-dropdown
-          v-if="$slots.dropdownList"
-          :placement="dropdownPlacement"
-          @click="isDropdownOpen = true"
-          @opened="open => isDropdownOpen = open"
-        >
-          <template #anchor="attrs">
-            <split-button-omega
-              v-bind="{ ...attrs, ...omegaButtonProps }"
-              :active="isDropdownOpen"
-              @click="onEndClick"
-            >
-              <template #icon="{ size: iconSize }">
-                <!-- @slot End (right) button icon slot -->
-                <slot
-                  name="endIcon"
-                  :size="iconSize"
-                >
-                  <!-- @slot @deprecated Use endIcon -->
-                  <slot
-                    name="omegaIcon"
-                    :size="iconSize"
-                  />
-                </slot>
-              </template>
-            </split-button-omega>
-          </template>
-          <template #list="{ close }">
-            <!-- @slot Built-in dropdown content slot, use of dt-list-item is highly recommended here. -->
-            <slot
-              name="dropdownList"
-              :close="close"
-            />
-          </template>
-        </dt-dropdown>
-
-        <split-button-omega
-          v-else
-          v-bind="omegaButtonProps"
-          @click="onEndClick"
-        >
-          <template #icon="{ size: iconSize }">
-            <!-- @slot End (right) button icon slot -->
-            <slot
-              name="endIcon"
-              :size="iconSize"
-            >
+    <template v-if="$slots.end">
+      <slot name="end" />
+    </template>
+    <!-- @slot @deprecated Use end -->
+    <template v-else-if="$slots.omega">
+      <slot name="omega" />
+    </template>
+    <template v-else>
+      <dt-dropdown
+        v-if="$slots.dropdownList"
+        :placement="dropdownPlacement"
+        @click="isDropdownOpen = true"
+        @opened="open => isDropdownOpen = open"
+      >
+        <template #anchor="attrs">
+          <split-button-omega
+            v-bind="{ ...attrs, ...omegaButtonProps }"
+            :active="isDropdownOpen"
+            @click="onEndClick"
+          >
+            <template #icon="{ size: iconSize }">
+              <!-- @slot End (right) button icon slot -->
+              <slot
+                v-if="$slots.endIcon"
+                name="endIcon"
+                :size="iconSize"
+              />
               <!-- @slot @deprecated Use endIcon -->
               <slot
+                v-else
                 name="omegaIcon"
                 :size="iconSize"
               />
-            </slot>
-          </template>
-        </split-button-omega>
-      </slot>
-    </slot>
+            </template>
+          </split-button-omega>
+        </template>
+        <template #list="{ close }">
+          <!-- @slot Built-in dropdown content slot, use of dt-list-item is highly recommended here. -->
+          <slot
+            name="dropdownList"
+            :close="close"
+          />
+        </template>
+      </dt-dropdown>
+
+      <split-button-omega
+        v-else
+        v-bind="omegaButtonProps"
+        @click="onEndClick"
+      >
+        <template #icon="{ size: iconSize }">
+          <!-- @slot End (right) button icon slot -->
+          <slot
+            v-if="$slots.endIcon"
+            name="endIcon"
+            :size="iconSize"
+          />
+          <!-- @slot @deprecated Use endIcon -->
+          <slot
+            v-else
+            name="omegaIcon"
+            :size="iconSize"
+          />
+        </template>
+      </split-button-omega>
+    </template>
   </span>
 </template>
 

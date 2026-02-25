@@ -119,6 +119,30 @@ describe('DtRecipeFeedItemPill Tests', function () {
         expect(wrapper.find('[data-qa="right-content"]').exists()).toBe(true);
       });
     });
+
+    describe('When the blockEnd slot is provided', () => {
+      beforeEach(async () => {
+        mockSlots = { blockEnd: '<div data-qa="block-end-content">Block end content</div>' };
+
+        await updateWrapper();
+      });
+
+      it('should render the blockEnd slot content', () => {
+        expect(wrapper.find('[data-qa="block-end-content"]').exists()).toBe(true);
+      });
+    });
+
+    describe('When the bottom slot is provided (backward compat)', () => {
+      beforeEach(async () => {
+        mockSlots = { bottom: '<div data-qa="bottom-content">Bottom content</div>' };
+
+        await updateWrapper();
+      });
+
+      it('should render the bottom slot content', () => {
+        expect(wrapper.find('[data-qa="bottom-content"]').exists()).toBe(true);
+      });
+    });
   });
 
   describe('Accessibility Tests', function () {

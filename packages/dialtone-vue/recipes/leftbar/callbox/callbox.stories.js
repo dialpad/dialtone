@@ -18,6 +18,11 @@ export const argTypesData = {
       disable: true,
     },
   },
+  bottom: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 const decorator = () => ({
@@ -61,7 +66,7 @@ export const Default = {
     badge: 'Badge slot',
     subtitle: 'Subtitle slot',
     end: 'End slot',
-    bottom: 'Bottom slot',
+    blockEnd: 'Block End slot',
   },
 
   parameters: {

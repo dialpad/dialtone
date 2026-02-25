@@ -73,7 +73,7 @@ export const argTypesData = {
       type: 'text',
     },
   },
-  bottom: {
+  blockEnd: {
     description: 'Slot for the content below the subtitle',
     table: {
       category: 'slots',
@@ -81,6 +81,11 @@ export const argTypesData = {
     },
     control: {
       type: 'text',
+    },
+  },
+  bottom: {
+    table: {
+      disable: true,
     },
   },
 
@@ -174,7 +179,7 @@ export const Default = {
     end: 'external-link',
     default: 'Default List Item',
     subtitle: 'Description',
-    bottom: '<span class="d-badge">Label</span>',
+    blockEnd: '<span class="d-badge">Label</span>',
     navigationType: LIST_ITEM_NAVIGATION_TYPES.TAB,
   },
 };

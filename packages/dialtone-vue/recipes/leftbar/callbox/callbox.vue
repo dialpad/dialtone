@@ -76,10 +76,15 @@
           class="d-recipe-callbox__right"
         >
           <!-- @slot Slot for end icons -->
-          <slot name="end">
-            <!-- @slot @deprecated Use end -->
-            <slot name="right" />
-          </slot>
+          <slot
+            v-if="$slots.end"
+            name="end"
+          />
+          <!-- @slot @deprecated Use end -->
+          <slot
+            v-else
+            name="right"
+          />
         </div>
       </div>
       <div
@@ -88,10 +93,15 @@
         class="d-recipe-callbox__main-content-bottom"
       >
         <!-- @slot Slot for block-end content -->
-        <slot name="blockEnd">
-          <!-- @slot @deprecated Use blockEnd -->
-          <slot name="bottom" />
-        </slot>
+        <slot
+          v-if="$slots.blockEnd"
+          name="blockEnd"
+        />
+        <!-- @slot @deprecated Use blockEnd -->
+        <slot
+          v-else
+          name="bottom"
+        />
       </div>
     </div>
   </div>

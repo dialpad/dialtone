@@ -12,12 +12,17 @@ export const argTypesData = {
       },
     },
   },
-  bottom: {
+  blockEnd: {
     control: 'text',
     table: {
       type: {
         summary: 'VNode',
       },
+    },
+  },
+  bottom: {
+    table: {
+      disable: true,
     },
   },
   start: {
@@ -75,6 +80,14 @@ export const argTypesData = {
       disable: true,
     },
   },
+  blockEndClass: {
+    control: 'text',
+  },
+  bottomClass: {
+    table: {
+      disable: true,
+    },
+  },
   endClass: {
     control: 'text',
   },
@@ -91,7 +104,7 @@ export const argsData = {
   end: 'End slot',
   default: 'Default slot',
   subtitle: 'Subtitle slot',
-  bottom: 'Bottom slot',
+  blockEnd: 'Block End slot',
   selected: 'Selected slot',
 };
 

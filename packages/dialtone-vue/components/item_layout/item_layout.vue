@@ -10,10 +10,15 @@
       :class="[resolvedStartClass, 'd-item-layout__left']"
     >
       <!-- @slot Slot for start content -->
-      <slot name="start">
-        <!-- @slot @deprecated Use start -->
-        <slot name="left" />
-      </slot>
+      <slot
+        v-if="$slots.start"
+        name="start"
+      />
+      <!-- @slot @deprecated Use start -->
+      <slot
+        v-else
+        name="left"
+      />
     </section>
     <section
       data-qa="dt-item-layout-content-wrapper"
@@ -45,10 +50,15 @@
         :class="[resolvedBlockEndClass, 'd-item-layout__bottom']"
       >
         <!-- @slot Slot for content below subtitle -->
-        <slot name="blockEnd">
-          <!-- @slot @deprecated Use blockEnd -->
-          <slot name="bottom" />
-        </slot>
+        <slot
+          v-if="$slots.blockEnd"
+          name="blockEnd"
+        />
+        <!-- @slot @deprecated Use blockEnd -->
+        <slot
+          v-else
+          name="bottom"
+        />
       </div>
     </section>
     <section
@@ -57,10 +67,15 @@
       :class="[resolvedEndClass, 'd-item-layout__right']"
     >
       <!-- @slot Slot for end content -->
-      <slot name="end">
-        <!-- @slot @deprecated Use end -->
-        <slot name="right" />
-      </slot>
+      <slot
+        v-if="$slots.end"
+        name="end"
+      />
+      <!-- @slot @deprecated Use end -->
+      <slot
+        v-else
+        name="right"
+      />
     </section>
     <section
       v-if="hasSlotContent($slots.selected)"

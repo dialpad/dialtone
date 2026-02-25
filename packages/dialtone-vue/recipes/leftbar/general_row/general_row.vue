@@ -23,42 +23,44 @@
         >
           <span /><span /><span />
         </div>
-        <slot
-          v-else
-          name="start"
-        >
-          <!-- @slot @deprecated Use start -->
-          <slot name="left">
-            <div
-              v-if="isDialbotType"
-              class="d-recipe-leftbar-general-row__icon"
-              data-qa="dt-recipe-leftbar-row-icon"
+        <!-- @slot Slot for start content -->
+        <template v-else-if="$slots.start">
+          <slot name="start" />
+        </template>
+        <!-- @slot @deprecated Use start -->
+        <template v-else-if="$slots.left">
+          <slot name="left" />
+        </template>
+        <template v-else>
+          <div
+            v-if="isDialbotType"
+            class="d-recipe-leftbar-general-row__icon"
+            data-qa="dt-recipe-leftbar-row-icon"
+          >
+            <dt-icon-dialbot size="500" />
+          </div>
+          <div
+            v-else-if="isContactCenterType"
+            :class="contactCenterIconClasses"
+            data-qa="dt-recipe-leftbar-row-icon"
+          />
+          <div
+            v-else
+            data-qa="dt-recipe-leftbar-row-icon"
+          >
+            <dt-avatar
+              icon-only
+              :size="avatarSize"
             >
-              <dt-icon-dialbot size="500" />
-            </div>
-            <div
-              v-else-if="isContactCenterType"
-              :class="contactCenterIconClasses"
-              data-qa="dt-recipe-leftbar-row-icon"
-            />
-            <div
-              v-else
-              data-qa="dt-recipe-leftbar-row-icon"
-            >
-              <dt-avatar
-                icon-only
-                :size="avatarSize"
-              >
-                <template #icon="{ iconSize: slotIconSize }">
-                  <component
-                    :is="getIconComponent"
-                    :size="slotIconSize"
-                  />
-                </template>
-              </dt-avatar>
-            </div>
-          </slot>
-        </slot>
+              <template #icon="{ iconSize: slotIconSize }">
+                <component
+                  :is="getIconComponent"
+                  :size="slotIconSize"
+                />
+              </template>
+            </dt-avatar>
+          </div>
+        </template>
       </div>
       <div
         class="d-recipe-leftbar-row__label"

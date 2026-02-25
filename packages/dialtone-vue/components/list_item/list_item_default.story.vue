@@ -19,7 +19,7 @@
         <span v-html="$attrs.subtitle" />
       </template>
       <template #blockEnd>
-        <span v-html="$attrs.bottom" />
+        <span v-html="$attrs.blockEnd" />
       </template>
       <template #end>
         <dt-icon :name="$attrs.end" />

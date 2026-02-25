@@ -20,15 +20,16 @@
     >
       <!-- @slot Slot for start icon, icon-size slot prop defaults to '200' -->
       <slot
+        v-if="$slots.startIcon"
         name="startIcon"
         :icon-size="iconSize"
-      >
-        <!-- @slot @deprecated Use startIcon -->
-        <slot
-          name="leftIcon"
-          :icon-size="iconSize"
-        />
-      </slot>
+      />
+      <!-- @slot @deprecated Use startIcon -->
+      <slot
+        v-else
+        name="leftIcon"
+        :icon-size="iconSize"
+      />
     </span>
     <span :class="['d-badge__label', labelClass]">
       <!-- @slot Slot for badge content, defaults to text prop -->
@@ -42,15 +43,16 @@
     >
       <!-- @slot Slot for end icon, icon-size slot prop defaults to '200' -->
       <slot
+        v-if="$slots.endIcon"
         name="endIcon"
         :icon-size="iconSize"
-      >
-        <!-- @slot @deprecated Use endIcon -->
-        <slot
-          name="rightIcon"
-          :icon-size="iconSize"
-        />
-      </slot>
+      />
+      <!-- @slot @deprecated Use endIcon -->
+      <slot
+        v-else
+        name="rightIcon"
+        :icon-size="iconSize"
+      />
     </span>
   </span>
 </template>

@@ -54,6 +54,13 @@ export const argTypesData = {
     },
   },
 
+  startTooltipText: {
+    control: 'text',
+  },
+  endTooltipText: {
+    control: 'text',
+  },
+
   // Deprecated props (hidden)
   alphaTooltipText: { table: { disable: true } },
   omegaTooltipText: { table: { disable: true } },

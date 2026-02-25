@@ -77,10 +77,10 @@
         <span v-html="$attrs.middle" />
       </template>
       <template
-        v-if="$attrs.top"
+        v-if="$attrs.blockStart"
         #blockStart
       >
-        <span v-html="$attrs.top" />
+        <span v-html="$attrs.blockStart" />
       </template>
       <template
         v-if="$attrs.sendIcon"

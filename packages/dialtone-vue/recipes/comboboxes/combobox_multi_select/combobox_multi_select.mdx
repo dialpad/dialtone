@@ -65,7 +65,7 @@ import { DtRecipeComboboxMultiSelect } from '@dialpad/dialtone-vue';
         @click="onSelect(i)"
       >
         {{ item.value }}
-        <template #right>
+        <template #end>
           {{ item.type }}
         </template>
       </dt-list-item>
@@ -117,7 +117,7 @@ Adds validation for max selection. Make sure to provide the following props:
         @click="onSelect(i)"
       >
         {{ item.value }}
-        <template #right>
+        <template #end>
           {{ item.type }}
         </template>
       </dt-list-item>

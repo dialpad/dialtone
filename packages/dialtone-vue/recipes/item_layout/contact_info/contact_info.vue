@@ -101,10 +101,15 @@
         data-qa="contact-info-bottom"
       >
         <!-- @slot Slot for block-end content -->
-        <slot name="blockEnd">
-          <!-- @slot @deprecated Use blockEnd -->
-          <slot name="bottom" />
-        </slot>
+        <slot
+          v-if="$slots.blockEnd"
+          name="blockEnd"
+        />
+        <!-- @slot @deprecated Use blockEnd -->
+        <slot
+          v-else
+          name="bottom"
+        />
       </div>
     </template>
 
@@ -114,10 +119,15 @@
     >
       <div data-qa="contact-info-right">
         <!-- @slot Slot for the end content -->
-        <slot name="end">
-          <!-- @slot @deprecated Use end -->
-          <slot name="right" />
-        </slot>
+        <slot
+          v-if="$slots.end"
+          name="end"
+        />
+        <!-- @slot @deprecated Use end -->
+        <slot
+          v-else
+          name="right"
+        />
       </div>
     </template>
   </dt-item-layout>

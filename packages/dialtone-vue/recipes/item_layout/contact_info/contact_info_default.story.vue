@@ -42,10 +42,10 @@
     </template>
 
     <template
-      v-if="$attrs.bottom"
+      v-if="$attrs.blockEnd"
       #blockEnd
     >
-      <span v-html="$attrs.bottom" />
+      <span v-html="$attrs.blockEnd" />
     </template>
   </dt-recipe-contact-info>
 </template>

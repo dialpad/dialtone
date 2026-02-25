@@ -61,15 +61,16 @@
         >
           <!-- @slot Slot for start icon -->
           <slot
+            v-if="$slots.startIcon"
             name="startIcon"
             :icon-size="iconSize"
-          >
-            <!-- @slot @deprecated Use startIcon -->
-            <slot
-              name="leftIcon"
-              :icon-size="iconSize"
-            />
-          </slot>
+          />
+          <!-- @slot @deprecated Use startIcon -->
+          <slot
+            v-else
+            name="leftIcon"
+            :icon-size="iconSize"
+          />
         </span>
         <textarea
           v-if="isTextarea"
@@ -104,17 +105,18 @@
         >
           <!-- @slot Slot for end icon -->
           <slot
+            v-if="$slots.endIcon"
             name="endIcon"
             :icon-size="iconSize"
             :clear="clearInput"
-          >
-            <!-- @slot @deprecated Use endIcon -->
-            <slot
-              name="rightIcon"
-              :icon-size="iconSize"
-              :clear="clearInput"
-            />
-          </slot>
+          />
+          <!-- @slot @deprecated Use endIcon -->
+          <slot
+            v-else
+            name="rightIcon"
+            :icon-size="iconSize"
+            :clear="clearInput"
+          />
         </span>
       </div>
     </label>

@@ -43,10 +43,16 @@
         v-if="!hideActions"
         class="d-recipe-leftbar-row__omega"
       >
-        <slot name="end">
-          <!-- @slot @deprecated Use end -->
-          <slot name="right" />
-        </slot>
+        <!-- @slot Slot for end content -->
+        <slot
+          v-if="$slots.end"
+          name="end"
+        />
+        <!-- @slot @deprecated Use end -->
+        <slot
+          v-else
+          name="right"
+        />
         <div class="d-recipe-leftbar-row__action-container">
           <dt-badge
             v-if="showUnreadCount"

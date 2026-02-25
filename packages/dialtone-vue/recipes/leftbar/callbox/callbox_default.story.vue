@@ -44,10 +44,10 @@
       />
     </template>
     <template
-      v-if="$attrs.bottom"
+      v-if="$attrs.blockEnd"
       #blockEnd
     >
-      <div v-html="$attrs.bottom" />
+      <div v-html="$attrs.blockEnd" />
     </template>
   </dt-recipe-callbox>
 </template>

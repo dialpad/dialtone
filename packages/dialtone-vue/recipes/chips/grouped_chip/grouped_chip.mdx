@@ -15,15 +15,15 @@ import * as GroupedChipStories from './grouped_chip.stories';
 Grouped chip component has related info split in two combination chips. Common use cases represented
 are split callbar timers showing call time and hold time on the left hand and right hand side respectively.
 
-This component has 4 slots: **leftIcon**, **leftContent**, **rightIcon** and **rightContent** slot.
+This component has 4 slots: **startIcon**, **startContent**, **endIcon** and **endContent** slot.
 
-**leftIcon** is used to display an icon that best represents the leftContent.
+**startIcon** is used to display an icon that best represents the startContent.
 
-**leftContent** is used to display content and is placed on the left hand side.
+**startContent** is used to display content and is placed on the start side.
 
-**rightIcon** is used to display an icon that best represents the rightContent.
+**endIcon** is used to display an icon that best represents the endContent.
 
-**rightContent** is used to display content and is placed on the right hand side.
+**endContent** is used to display content and is placed on the end side.
 
 <Canvas of={GroupedChipStories.Default} />
 
@@ -39,22 +39,22 @@ This component has 4 slots: **leftIcon**, **leftContent**, **rightIcon** and **r
 import { DtRecipeGroupedChip } from '@dialpad/dialtone-vue';
 ```
 
-### Split Combination Chip showing both left and right hand side content.
+### Split Combination Chip showing both start and end side content.
 
 ```html
 <dt-recipe-grouped-chip>
-  <template #leftIcon>
+  <template #startIcon>
     <dt-icon name="clock" />
   </template>
-  <template #leftContent>
+  <template #startContent>
     <div>
       0.15
     </div>
   </template>
-  <template #rightIcon>
+  <template #endIcon>
     <dt-icon name="pause" />
   </template>
-  <template #rightContent>
+  <template #endContent>
     <div>
       0.15
     </div>

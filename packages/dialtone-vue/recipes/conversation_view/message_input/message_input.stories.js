@@ -66,12 +66,17 @@ export const argTypesData = {
       },
     },
   },
-  top: {
+  blockStart: {
     table: {
       type: { summary: 'VNode' },
     },
     control: {
       type: 'text',
+    },
+  },
+  top: {
+    table: {
+      disable: true,
     },
   },
   sendButton: {
@@ -222,7 +227,7 @@ export const argTypesData = {
 // Set default values at the story level here.
 export const argsData = {
   modelValue: 'Always the Padawan, never the Jedi.',
-  top: '',
+  blockStart: '',
   middle: '',
   emojiGiphyPicker: '',
   customActionIcons: '',

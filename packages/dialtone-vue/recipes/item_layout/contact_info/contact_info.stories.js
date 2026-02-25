@@ -91,14 +91,19 @@ export const argTypesData = {
     },
   },
 
-  bottom: {
-    description: 'Slot for information at the bottom',
+  blockEnd: {
+    description: 'Slot for block-end content',
     control: 'text',
     table: {
       category: 'slots',
       type: {
         summary: 'VNode',
       },
+    },
+  },
+  bottom: {
+    table: {
+      disable: true,
     },
   },
 
@@ -168,7 +173,7 @@ export const Default = {
     presence: 'active',
     header: `<div class="d-fs-200 d-fw-bold" id="contact-name"> Joseph Lumaban </div>`,
     subtitle: `<div class="d-fs-100 d-mt2"> +1 (415) 123-4567 </div>`,
-    bottom: `<div data-qa="dt-stack" class="d-mtn6 d-stack d-stack--row d-stack--gap-0 d-stack--align-center d-stack--justify-start">
+    blockEnd: `<div data-qa="dt-stack" class="d-mtn6 d-stack d-stack--row d-stack--gap-0 d-stack--align-center d-stack--justify-start">
     <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">
       &nbsp;
     </div>
@@ -195,7 +200,7 @@ export const Default = {
     <template #subtitle>
       <div class="d-fs-100 d-mt2">+1 (415) 123-4567</div>
     </template>
-    <template #bottom>
+    <template #blockEnd>
       <dt-stack direction="row" align="center" class="d-mtn6">
         <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">&nbsp;</div>
         <div class="d-fs-100 d-mr4">Aerolabs Support</div>
@@ -280,7 +285,7 @@ export const Variants = {
               <dt-icon name="check-circle" size="200" class="d-fc-tertiary d-va-text-bottom" />
             </dt-stack>
           </template>
-          <template #bottom>
+          <template #blockEnd>
             <dt-stack direction="row" align="center" class="d-mtn6">
               <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">&nbsp;</div>
               <div class="d-fs-100 d-mr4">Aerolabs Support</div>
@@ -299,7 +304,7 @@ export const Variants = {
             <dt-icon name="check-circle" size="200" class="d-fc-tertiary d-va-text-bottom" />
           </dt-stack>
         </template>
-        <template #bottom>
+        <template #blockEnd>
           <dt-stack direction="row" align="center" class="d-mtn6">
             <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">&nbsp;</div>
             <div class="d-fs-100 d-mr4">Aerolabs Support</div>
@@ -323,7 +328,7 @@ export const Variants = {
             <dt-icon name="check-circle" size="200" class="d-fc-tertiary d-va-text-bottom" />
           </dt-stack>
         </template>
-        <template #bottom>
+        <template #blockEnd>
           <dt-stack direction="row" align="center" class="d-mtn6">
             <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">&nbsp;</div>
             <div class="d-fs-100 d-mr4">Aerolabs Support</div>
@@ -354,7 +359,7 @@ export const Variants = {
             <div class="d-m4">0:32</div>
           </dt-stack>
         </template>
-        <template #bottom>
+        <template #blockEnd>
           2 matches found.
           <dt-button link @click.stop="onConnectToARecord">Connect to a record</dt-button>
         </template>

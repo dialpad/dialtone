@@ -15,16 +15,20 @@ description: "Run Dialtone migration tools for token and utility renames. Use '/
 ## Usage
 
 ### `/dt-migrate`
+
 List all available migrations with descriptions.
 
 ### `/dt-migrate <name>`
+
 Run the specified migration:
+
 1. Confirm the target directory with the user (default: `./src`)
 2. Run `npx dialtone-migration-helper --cwd <dir>` and select the named config
 3. Report the number of files changed and matches replaced
 4. Suggest running linters after migration to catch remaining manual fixes
 
 ### `/dt-migrate <name> --dry-run`
+
 Preview changes without applying them.
 
 ### `/dt-migrate color-stops --merge-from staging`
@@ -55,6 +59,7 @@ node scripts/merge-migrate-color-stops.mjs --merge-from staging --dry-run --verb
 > Note: `scripts/merge-migrate-color-stops.mjs` is a temporary script for the staging→next migration period. Delete it once the migration is complete.
 
 ## Migration Helper Location
+
 Configs: `packages/dialtone-css/lib/build/js/dialtone_migration_helper/configs/`
 Tests: `packages/dialtone-css/lib/build/js/dialtone_migration_helper/tests/`
 

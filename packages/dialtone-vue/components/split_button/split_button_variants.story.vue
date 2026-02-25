@@ -56,8 +56,8 @@
                   size="xs"
                   :kind="kind"
                   :importance="importance"
-                  :omega-tooltip-text="omegaTooltipText"
-                  :omega-aria-label="omegaAriaLabel"
+                  :end-tooltip-text="endTooltipText"
+                  :end-aria-label="endAriaLabel"
                 >
                   Place call
                   <template #dropdownList>
@@ -96,8 +96,8 @@
           >
             <dt-split-button
               :size="size"
-              :omega-tooltip-text="omegaTooltipText"
-              :omega-aria-label="omegaAriaLabel"
+              :end-tooltip-text="endTooltipText"
+              :end-aria-label="endAriaLabel"
             >
               <span
                 class="d-tt-capitalize"
@@ -107,12 +107,12 @@
           </div>
         </dt-stack>
       </dt-stack>
-      <!-- With alpha icon  -->
+      <!-- With start icon  -->
       <dt-stack
         gap="500"
         class="d-br d-pr16"
       >
-        <h2>With alpha icon</h2>
+        <h2>With start icon</h2>
         <dt-stack gap="500">
           <div
             v-for="position in iconPositions"
@@ -121,15 +121,15 @@
           >
             <dt-split-button
               size="xs"
-              :alpha-icon-position="position"
-              :omega-tooltip-text="omegaTooltipText"
-              :omega-aria-label="omegaAriaLabel"
+              :start-icon-position="position"
+              :end-tooltip-text="endTooltipText"
+              :end-aria-label="endAriaLabel"
             >
               <span
                 class="d-tt-capitalize"
                 v-text="position"
               />
-              <template #alphaIcon>
+              <template #startIcon>
                 <dt-icon
                   name="accessibility"
                   size="300"
@@ -139,12 +139,12 @@
           </div>
         </dt-stack>
       </dt-stack>
-      <!-- With custom omega icon  -->
+      <!-- With custom end icon  -->
       <dt-stack
         gap="500"
         class="d-br d-pr16"
       >
-        <h2>With custom omega icon</h2>
+        <h2>With custom end icon</h2>
         <dt-stack gap="500">
           <div
             v-for="size in sizes"
@@ -153,11 +153,11 @@
           >
             <dt-split-button
               :size="size"
-              omega-tooltip-text="Close"
-              :omega-aria-label="omegaAriaLabel"
+              end-tooltip-text="Close"
+              :end-aria-label="endAriaLabel"
             >
               Place call
-              <template #omegaIcon="{ size: iconSize }">
+              <template #endIcon="{ size: iconSize }">
                 <dt-icon
                   name="close"
                   :size="iconSize"
@@ -176,35 +176,35 @@
         <dt-stack gap="500">
           <dt-split-button
             size="xs"
-            :alpha-active="true"
-            :omega-tooltip-text="omegaTooltipText"
-            :omega-aria-label="omegaAriaLabel"
+            :start-active="true"
+            :end-tooltip-text="endTooltipText"
+            :end-aria-label="endAriaLabel"
           >
-            Alpha active
+            Start active
           </dt-split-button>
           <dt-split-button
             size="xs"
-            :omega-active="true"
-            :omega-tooltip-text="omegaTooltipText"
-            :omega-aria-label="omegaAriaLabel"
+            :end-active="true"
+            :end-tooltip-text="endTooltipText"
+            :end-aria-label="endAriaLabel"
           >
-            Omega active
+            End active
           </dt-split-button>
           <dt-split-button
             size="xs"
-            :alpha-active="true"
-            :omega-active="true"
-            :omega-tooltip-text="omegaTooltipText"
-            :omega-aria-label="omegaAriaLabel"
+            :start-active="true"
+            :end-active="true"
+            :end-tooltip-text="endTooltipText"
+            :end-aria-label="endAriaLabel"
           >
             Both active
           </dt-split-button>
           <dt-split-button
             size="xs"
-            :alpha-loading="true"
-            alpha-aria-label="loading"
-            :omega-tooltip-text="omegaTooltipText"
-            :omega-aria-label="omegaAriaLabel"
+            :start-loading="true"
+            start-aria-label="loading"
+            :end-tooltip-text="endTooltipText"
+            :end-aria-label="endAriaLabel"
           />
         </dt-stack>
       </dt-stack>
@@ -217,25 +217,25 @@
         <dt-stack gap="500">
           <dt-split-button
             size="xs"
-            :alpha-disabled="true"
-            :omega-tooltip-text="omegaTooltipText"
-            :omega-aria-label="omegaAriaLabel"
+            :start-disabled="true"
+            :end-tooltip-text="endTooltipText"
+            :end-aria-label="endAriaLabel"
           >
-            Alpha disabled
+            Start disabled
           </dt-split-button>
           <dt-split-button
             size="xs"
-            :omega-disabled="true"
-            :omega-tooltip-text="omegaTooltipText"
-            :omega-aria-label="omegaAriaLabel"
+            :end-disabled="true"
+            :end-tooltip-text="endTooltipText"
+            :end-aria-label="endAriaLabel"
           >
-            Omega disabled
+            End disabled
           </dt-split-button>
           <dt-split-button
             size="xs"
             :disabled="true"
-            :omega-tooltip-text="omegaTooltipText"
-            :omega-aria-label="omegaAriaLabel"
+            :end-tooltip-text="endTooltipText"
+            :end-aria-label="endAriaLabel"
           >
             Both disabled
           </dt-split-button>
@@ -250,25 +250,25 @@
         <dt-stack gap="500">
           <dt-split-button
             size="xs"
-            :alpha-disabled="true"
-            :omega-tooltip-text="omegaTooltipText"
-            :omega-aria-label="omegaAriaLabel"
+            :start-disabled="true"
+            :end-tooltip-text="endTooltipText"
+            :end-aria-label="endAriaLabel"
           >
-            Alpha disabled
+            Start disabled
           </dt-split-button>
           <dt-split-button
             size="xs"
-            :omega-disabled="true"
-            :omega-tooltip-text="omegaTooltipText"
-            :omega-aria-label="omegaAriaLabel"
+            :end-disabled="true"
+            :end-tooltip-text="endTooltipText"
+            :end-aria-label="endAriaLabel"
           >
-            Omega disabled
+            End disabled
           </dt-split-button>
           <dt-split-button
             size="xs"
             :disabled="true"
-            :omega-tooltip-text="omegaTooltipText"
-            :omega-aria-label="omegaAriaLabel"
+            :end-tooltip-text="endTooltipText"
+            :end-aria-label="endAriaLabel"
           >
             Both disabled
           </dt-split-button>
@@ -283,24 +283,24 @@
         <dt-stack gap="500">
           <dt-split-button
             size="xs"
-            alpha-tooltip-text="Hover text"
-            :omega-tooltip-text="omegaTooltipText"
-            :omega-aria-label="omegaAriaLabel"
+            start-tooltip-text="Hover text"
+            :end-tooltip-text="endTooltipText"
+            :end-aria-label="endAriaLabel"
           >
             Hover me
           </dt-split-button>
           <dt-split-button
             size="xs"
-            :omega-tooltip-text="omegaTooltipText"
-            :omega-aria-label="omegaAriaLabel"
+            :end-tooltip-text="endTooltipText"
+            :end-aria-label="endAriaLabel"
           >
-            Hover omega
+            Hover end
           </dt-split-button>
           <dt-split-button
             size="xs"
-            alpha-tooltip-text="Alpha tooltip"
-            :omega-tooltip-text="omegaTooltipText"
-            :omega-aria-label="omegaAriaLabel"
+            start-tooltip-text="Start tooltip"
+            :end-tooltip-text="endTooltipText"
+            :end-aria-label="endAriaLabel"
           >
             Hover both
           </dt-split-button>
@@ -319,13 +319,13 @@
             class="d-ta-center"
           >
             <dt-split-button
-              alpha-tooltip-text="Call"
-              alpha-aria-label="Call"
-              :omega-tooltip-text="omegaTooltipText"
+              start-tooltip-text="Call"
+              start-aria-label="Call"
+              :end-tooltip-text="endTooltipText"
               :size="size"
-              :omega-aria-label="omegaAriaLabel"
+              :end-aria-label="endAriaLabel"
             >
-              <template #alphaIcon="{ size: iconSize }">
+              <template #startIcon="{ size: iconSize }">
                 <dt-icon
                   name="phone"
                   :size="iconSize"
@@ -340,10 +340,10 @@
         <h2>External anchor</h2>
         <div>
           <dt-split-button
-            omega-id="external-anchor-example"
-            omega-tooltip-text="Open popover"
-            :omega-aria-label="omegaAriaLabel"
-            @omega-clicked="isPopoverShown = true"
+            end-id="external-anchor-example"
+            end-tooltip-text="Open popover"
+            :end-aria-label="endAriaLabel"
+            @end-clicked="isPopoverShown = true"
           >
             External anchor example
           </dt-split-button>
@@ -407,8 +407,8 @@ export default {
       ],
 
       isPopoverShown: false,
-      omegaTooltipText: 'More calling options',
-      omegaAriaLabel: 'More calling options',
+      endTooltipText: 'More calling options',
+      endAriaLabel: 'More calling options',
     };
   },
 

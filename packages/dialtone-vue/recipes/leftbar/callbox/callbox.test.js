@@ -148,7 +148,17 @@ describe('DtRecipeCallbox Tests', () => {
         });
       });
 
-      describe('When bottom slot is provided', () => {
+      describe('When blockEnd slot is provided', () => {
+        it('Renders blockEnd slot content', () => {
+          mockSlots = { blockEnd: MOCK_BOTTOM_SLOT_CONTENT };
+
+          updateWrapper();
+
+          expect(bottomSlot.text()).toBe(MOCK_BOTTOM_SLOT_CONTENT);
+        });
+      });
+
+      describe('When bottom slot is provided (backward compat)', () => {
         it('Renders bottom slot content', () => {
           mockSlots = { bottom: MOCK_BOTTOM_SLOT_CONTENT };
 

@@ -40,12 +40,17 @@ const argTypes = {
       },
     },
   },
-  bottom: {
+  blockEnd: {
     control: 'text',
     table: {
       type: {
         summary: 'VNode',
       },
+    },
+  },
+  bottom: {
+    table: {
+      disable: true,
     },
   },
   end: {

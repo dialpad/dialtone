@@ -421,6 +421,26 @@ describe('DtSplitButton Tests', function () {
       });
     });
 
+    describe('When deprecated alphaAriaLabel prop is used', () => {
+      it('Should pass the aria-label to the alpha button', () => {
+        mockProps = { alphaAriaLabel: 'Call action' };
+
+        updateWrapper();
+
+        expect(alphaButton.attributes('aria-label')).toBe('Call action');
+      });
+    });
+
+    describe('When deprecated omegaAriaLabel prop is used', () => {
+      it('Should pass the aria-label to the omega button', () => {
+        mockProps = { omegaAriaLabel: 'More options' };
+
+        updateWrapper();
+
+        expect(omegaButton.attributes('aria-label')).toBe('More options');
+      });
+    });
+
     describe('When deprecated alphaIconPosition prop is used', () => {
       it('Should position the icon correctly', () => {
         mockSlots = { startIcon: '<dt-icon-send />' };
@@ -441,6 +461,58 @@ describe('DtSplitButton Tests', function () {
         const labelEl = alphaButton.find('[data-qa="dt-button-label"]');
 
         expect(labelEl.classes().includes('custom-label-class')).toBe(true);
+      });
+    });
+
+    describe('When both startIcon and alphaIcon slots are provided', () => {
+      it('Should render startIcon (new name takes precedence)', () => {
+        mockSlots = {
+          startIcon: '<dt-icon-send />',
+          alphaIcon: '<span data-qa="old-alpha-icon">Old</span>',
+        };
+
+        updateWrapper();
+
+        expect(alphaIconSlot.findComponent(DtIconSend).exists()).toBe(true);
+        expect(wrapper.find('[data-qa="old-alpha-icon"]').exists()).toBe(false);
+      });
+    });
+
+    describe('When both endIcon and omegaIcon slots are provided', () => {
+      it('Should render endIcon (new name takes precedence)', () => {
+        mockSlots = {
+          endIcon: '<dt-icon-send />',
+          omegaIcon: '<span data-qa="old-omega-icon">Old</span>',
+        };
+
+        updateWrapper();
+
+        expect(omegaIconSlot.findComponent(DtIconSend).exists()).toBe(true);
+        expect(wrapper.find('[data-qa="old-omega-icon"]').exists()).toBe(false);
+      });
+    });
+
+    describe('When both end and omega slots are provided', () => {
+      it('Should render end slot (new name takes precedence)', () => {
+        mockSlots = {
+          end: '<span data-qa="new-end">New end</span>',
+          omega: '<span data-qa="old-omega">Old omega</span>',
+        };
+
+        wrapper = mount(DtSplitButton, {
+          props: { ...baseProps, ...mockProps },
+          slots: { ...baseSlots, ...mockSlots },
+          global: {
+            stubs: { transition: false },
+            plugins: [DtTooltipDirective],
+            components: { SplitButtonAlpha, SplitButtonOmega, DtIconSend },
+          },
+          attrs: { ...baseAttrs, ...mockAttrs },
+          attachTo: document.body,
+        });
+
+        expect(wrapper.find('[data-qa="new-end"]').exists()).toBe(true);
+        expect(wrapper.find('[data-qa="old-omega"]').exists()).toBe(false);
       });
     });
 
