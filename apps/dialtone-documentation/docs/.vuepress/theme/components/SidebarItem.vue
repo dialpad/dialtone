@@ -45,7 +45,7 @@
               class="d-mr12 d-fc-muted"
             />
             {{ item.text }}
-            <template #icon="{ iconSize }">
+            <template #endIcon="{ iconSize }">
               <dt-icon
                 v-if="item.link"
                 :name="isOpen ? 'chevron-down' : 'chevron-right'"

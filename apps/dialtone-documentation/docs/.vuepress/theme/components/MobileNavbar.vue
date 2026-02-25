@@ -6,7 +6,7 @@
       :circle="true"
       @click="$emit('search')"
     >
-      <template #icon>
+      <template #startIcon>
         <dt-icon
           name="search"
           size="400"
@@ -19,7 +19,7 @@
       :circle="true"
       @click="toggleNavbar"
     >
-      <template #icon>
+      <template #startIcon>
         <dt-icon
           name="menu"
           size="500"
@@ -32,7 +32,7 @@
       :circle="true"
       @click="toggleNavbar"
     >
-      <template #icon>
+      <template #startIcon>
         <dt-icon name="close" />
       </template>
     </dt-button>

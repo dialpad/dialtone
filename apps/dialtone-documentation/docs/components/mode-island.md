@@ -22,7 +22,7 @@ keywords: ["theme island","mode override","d-mode-island","DtModeIsland","dt-mod
               <dt-text><dt-text strength="strong">Mode:</dt-text> {{ currentMode.charAt(0).toUpperCase() + currentMode.slice(1) }}</dt-text>
               <dt-text><dt-text strength="strong">Contrast:</dt-text> {{ currentContrast.charAt(0).toUpperCase() + currentContrast.slice(1) }}</dt-text>
             </dt-stack>
-            <template #icon>
+            <template #startIcon>
               <dt-icon
                 size="300"
                 :name="currentModeIconName"
@@ -371,7 +371,7 @@ vueCode='
       </dt-stack>
       <dt-stack>
         <dt-button class="d-p12" circle size="lg" kind="danger">
-          <template #icon> <dt-icon name="phone-hang-up" size="500" /> </template>
+          <template #startIcon> <dt-icon name="phone-hang-up" size="500" /> </template>
         </dt-button>
       </dt-stack>
     </dt-stack>
@@ -404,7 +404,7 @@ vueCode='
     </dt-stack>
     <dt-stack>
       <dt-button class="d-p12" circle size="lg" kind="danger">
-        <template #icon><dt-icon name="phone-hang-up" size="500" /></template>
+        <template #startIcon><dt-icon name="phone-hang-up" size="500" /></template>
       </dt-button>
     </dt-stack>
   </dt-stack>

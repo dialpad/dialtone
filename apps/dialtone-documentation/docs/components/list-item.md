@@ -155,7 +155,7 @@ When `type` is set to "custom" the list item will not render any styles or slots
             importance="clear"
             title="share"
           >
-            <template #icon>
+            <template #startIcon>
               <dt-icon
                 name="share-2"
                 size="200"
@@ -167,7 +167,7 @@ When `type` is set to "custom" the list item will not render any styles or slots
             importance="clear"
             title="star"
           >
-            <template #icon>
+            <template #startIcon>
               <dt-icon
                 name="star"
                 size="200"
@@ -179,7 +179,7 @@ When `type` is set to "custom" the list item will not render any styles or slots
             importance="clear"
             title="more"
           >
-            <template #icon>
+            <template #startIcon>
               <dt-icon
                 name="more-vertical"
                 size="200"
@@ -218,7 +218,7 @@ vueCode='
           importance="clear"
           title="share"
         >
-          <template #icon>
+          <template #startIcon>
             <dt-icon
               name="share-2"
               size="200"
@@ -230,7 +230,7 @@ vueCode='
           importance="clear"
           title="star"
         >
-          <template #icon>
+          <template #startIcon>
             <dt-icon
               name="star"
               size="200"
@@ -242,7 +242,7 @@ vueCode='
           importance="clear"
           title="more"
         >
-          <template #icon>
+          <template #startIcon>
             <dt-icon
               name="more-vertical"
               size="200"

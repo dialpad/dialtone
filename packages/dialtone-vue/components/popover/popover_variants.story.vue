@@ -160,7 +160,7 @@
             class="d-p6 d-bc-transparent"
             importance="outlined"
           >
-            <template #icon>
+            <template #startIcon>
               <dt-icon
                 name="external-link"
                 size="300"
@@ -173,7 +173,7 @@
             class="d-p6 d-bc-transparent"
             importance="outlined"
           >
-            <template #icon>
+            <template #startIcon>
               <dt-icon
                 name="more-vertical"
                 size="300"

@@ -145,11 +145,11 @@
               size="sm"
               importance="outlined"
               kind="muted"
-              omega-tooltip-text="More options"
-              alpha-aria-label="Copy Markdown"
-              @alpha-clicked="onCopyAsMarkdown()"
+              end-tooltip-text="More options"
+              start-aria-label="Copy Markdown"
+              @start-clicked="onCopyAsMarkdown()"
             >
-              <template #alphaIcon>
+              <template #startIcon>
                 <dt-icon
                   :name="showCopiedIcon ? 'check' : 'copy'"
                   size="200"

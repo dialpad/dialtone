@@ -134,7 +134,7 @@
           importance="clear"
           kind="muted"
         >
-          <template #icon>
+          <template #startIcon>
             <dt-icon
               size="400"
               name="satisfied-filled"
@@ -153,7 +153,7 @@
             @click="setTheme('dp')"
           >
             Dialpad (DP)
-            <template #right>
+            <template #end>
               <dt-icon :class="{ 'd-o0': currentTheme !== 'dp' }" name="check" size="200" />
             </template>
           </dt-list-item>
@@ -169,7 +169,7 @@
             @click="setTheme('tmo')"
           >
             T-Mobile (TMO)
-            <template #right>
+            <template #end>
               <dt-icon :class="{ 'd-o0': currentTheme !== 'tmo' }" name="check" size="200" />
             </template>
           </dt-list-item>
@@ -185,7 +185,7 @@
             @click="setTheme('prota-deuter')"
           >
             Prota-Deuter
-            <template #right>
+            <template #end>
               <dt-icon :class="{ 'd-o0': currentTheme !== 'prota-deuter' }" name="check" size="200" />
             </template>
           </dt-list-item>
@@ -195,7 +195,7 @@
             @click="setTheme('trita')"
           >
             Trita
-            <template #right>
+            <template #end>
               <dt-icon :class="{ 'd-o0': currentTheme !== 'trita' }" name="check" size="200" />
             </template>
           </dt-list-item>
@@ -213,7 +213,7 @@
             @click="setTheme(themeName)"
           >
             {{ formatThemeName(themeName) }}
-            <template #right>
+            <template #end>
               <dt-icon :class="{ 'd-o0': currentTheme !== themeName }" name="check" size="200" />
             </template>
           </dt-list-item>
@@ -231,7 +231,7 @@
             @click="setTheme(themeNum)"
           >
             Theme {{ themeNum }}
-            <template #right>
+            <template #end>
               <dt-icon :class="{ 'd-o0': currentTheme !== themeNum }" name="check" size="200" />
             </template>
           </dt-list-item>
@@ -246,7 +246,7 @@
           kind="muted"
           class="dialtone-shell-btn"
         >
-          <template #icon>
+          <template #startIcon>
             <dt-icon
               size="400"
               :name="currentModeIconName"
@@ -265,7 +265,7 @@
             @click="setMode('system')"
           >
             System
-            <template #right>
+            <template #end>
               <dt-icon :class="{ 'd-o0': currentMode !== 'system' }" name="check" size="200" />
             </template>
           </dt-list-item>
@@ -275,7 +275,7 @@
             @click="setMode('light')"
           >
             Light
-            <template #right>
+            <template #end>
               <dt-icon :class="{ 'd-o0': currentMode !== 'light' }" name="check" size="200" />
             </template>
           </dt-list-item>
@@ -285,7 +285,7 @@
             @click="setMode('dark')"
           >
             Dark
-            <template #right>
+            <template #end>
               <dt-icon :class="{ 'd-o0': currentMode !== 'dark' }" name="check" size="200" />
             </template>
           </dt-list-item>
@@ -301,7 +301,7 @@
             @click="setContrast('default')"
           >
             Default
-            <template #right>
+            <template #end>
               <dt-icon :class="{ 'd-o0': currentContrast !== 'default' }" name="check" size="200" />
             </template>
           </dt-list-item>
@@ -311,7 +311,7 @@
             @click="setContrast('high')"
           >
             High
-            <template #right>
+            <template #end>
               <dt-icon :class="{ 'd-o0': currentContrast !== 'high' }" name="check" size="200" />
             </template>
           </dt-list-item>
@@ -324,7 +324,7 @@
       kind="muted"
       @click="$emit('search')"
     >
-      <template #icon>
+      <template #startIcon>
         <dt-icon
           name="search"
           size="400"

@@ -494,7 +494,7 @@ Use `type="search"` with a clear button in the `icon` slot. When the input is no
           aria-label="Clear search"
           @click="clear"
         >
-          <template #icon="{ iconSize }">
+          <template #startIcon="{ iconSize }">
             <dt-icon name="close" :size="iconSize" />
           </template>
         </dt-button>
@@ -534,7 +534,7 @@ vueCode='
       aria-label="Clear search"
       @click="clear"
     >
-      <template #icon="{ iconSize }">
+      <template #startIcon="{ iconSize }">
         <dt-icon name="close" :size="iconSize" />
       </template>
     </dt-button>

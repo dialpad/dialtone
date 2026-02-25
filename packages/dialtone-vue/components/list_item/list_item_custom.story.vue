@@ -36,7 +36,7 @@
             title="share"
             @click.stop="() => {}"
           >
-            <template #icon>
+            <template #startIcon>
               <dt-icon
                 name="share-2"
                 size="200"
@@ -49,7 +49,7 @@
             title="star"
             @click.stop="() => {}"
           >
-            <template #icon>
+            <template #startIcon>
               <dt-icon
                 name="star"
                 size="200"
@@ -62,7 +62,7 @@
             title="more"
             @click.stop="() => {}"
           >
-            <template #icon>
+            <template #startIcon>
               <dt-icon
                 name="more-vertical"
                 size="200"

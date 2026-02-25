@@ -12,7 +12,7 @@
         importance="clear"
         @click="toggleEmojiPicker"
       >
-        <template #icon>
+        <template #startIcon>
           <dt-icon
             name="satisfied"
             size="300"

@@ -69,7 +69,7 @@
             circle
             importance="outlined"
           >
-            <template #icon>
+            <template #startIcon>
               <dt-icon
                 name="dp-phone"
                 size="300"

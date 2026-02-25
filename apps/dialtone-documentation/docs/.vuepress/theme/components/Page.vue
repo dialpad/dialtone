@@ -29,7 +29,7 @@
             size="lg"
             @click="navigate"
           >
-            <template #icon>
+            <template #startIcon>
               <dt-icon name="arrow-left" />
             </template>
             <dt-stack as="span" class="d-ta-left d-p8">

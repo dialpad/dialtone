@@ -9,10 +9,10 @@
         root-class="d-w332"
         @keydown.escape="handleEscapeKey"
       >
-        <template #leftIcon="{ iconSize }">
+        <template #startIcon="{ iconSize }">
           <dt-icon name="search" :size="iconSize" />
         </template>
-        <template v-if="inputSearchValue.length !== 0" #rightIcon>
+        <template v-if="inputSearchValue.length !== 0" #endIcon>
           <dt-stack class="d-pr1">
             <dt-button
               v-dt-tooltip="`Clear`"
@@ -22,7 +22,7 @@
               aria-label="Clear search"
               @click="clearSearch"
             >
-              <template #icon>
+              <template #startIcon>
                 <dt-icon name="close" size="100" />
               </template>
             </dt-button>
