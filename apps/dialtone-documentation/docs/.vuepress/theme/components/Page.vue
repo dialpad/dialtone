@@ -47,13 +47,12 @@
           <dt-button
             class="d-wmn40p"
             label-class="d-jc-space-between"
-            icon-position="right"
             importance="outlined"
             kind="muted"
             size="lg"
             @click="navigate"
           >
-            <template #icon>
+            <template #endIcon>
               <dt-icon name="arrow-right" />
             </template>
             <dt-stack as="span" class="d-ta-left d-p8">

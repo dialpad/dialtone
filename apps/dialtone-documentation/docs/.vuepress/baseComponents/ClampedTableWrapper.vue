@@ -58,12 +58,11 @@
         class="dialtone-doc-table-clamped__more-btn d-bgc-secondary d-bs-sm"
         kind="muted"
         importance="outlined"
-        icon-position="right"
         size="sm"
         @click="() => handleExpand(scrollRef)"
       >
         {{ buttonLabel }}
-        <template #icon="{ iconSize }">
+        <template #endIcon="{ iconSize }">
           <dt-icon :name="iconName" :size="iconSize" />
         </template>
       </dt-button>

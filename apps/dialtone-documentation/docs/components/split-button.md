@@ -467,19 +467,19 @@ showHtmlWarning />
       </template>
       Place call
     </dt-split-button>
-    <dt-split-button importance="outlined" start-icon-position="top" end-tooltip-text="More calling options">
+    <dt-split-button importance="outlined" start-icon-position="blockStart" end-tooltip-text="More calling options">
       <template #startIcon="{ size }">
         <dt-icon name="phone" :size="size" />
       </template>
       Place call
     </dt-split-button>
-    <dt-split-button importance="outlined" start-icon-position="right" end-tooltip-text="More calling options">
+    <dt-split-button importance="outlined" start-icon-position="end" end-tooltip-text="More calling options">
       <template #startIcon="{ size }">
         <dt-icon name="phone" :size="size" />
       </template>
       Place call
     </dt-split-button>
-    <dt-split-button importance="outlined" start-icon-position="bottom" end-tooltip-text="More calling options">
+    <dt-split-button importance="outlined" start-icon-position="blockEnd" end-tooltip-text="More calling options">
       <template #startIcon="{ size }">
         <dt-icon name="phone" :size="size" />
       </template>
@@ -542,19 +542,19 @@ vueCode='
   </template>
   Place call
 </dt-split-button>
-<dt-split-button importance="outlined" start-icon-position="top" end-tooltip-text="More calling options">
+<dt-split-button importance="outlined" start-icon-position="blockStart" end-tooltip-text="More calling options">
   <template #startIcon="{ size }">
     <dt-icon name="phone" :size="size" />
   </template>
   Place call
 </dt-split-button>
-<dt-split-button importance="outlined" start-icon-position="right" end-tooltip-text="More calling options">
+<dt-split-button importance="outlined" start-icon-position="end" end-tooltip-text="More calling options">
   <template #startIcon="{ size }">
     <dt-icon name="phone" :size="size" />
   </template>
   Place call
 </dt-split-button>
-<dt-split-button importance="outlined" start-icon-position="bottom" end-tooltip-text="More calling options">
+<dt-split-button importance="outlined" start-icon-position="blockEnd" end-tooltip-text="More calling options">
   <template #startIcon="{ size }">
     <dt-icon name="phone" :size="size" />
   </template>

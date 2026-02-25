@@ -675,23 +675,23 @@ Each Text Input size has a default icon size, keeping it proportional. While rar
 <code-well-header>
   <div class="d-stack16 d-w100p">
     <dt-input label="Small input with large icon" type="text" placeholder="Placeholder" size="sm">
-      <template #startIcon>
-        <dt-icon name="send" size="400" />
+      <template #startIcon="{ iconSize }">
+        <dt-icon name="send" :size="iconSize" />
       </template>
     </dt-input>
     <dt-input label="Medium input with extra large icon" type="text" placeholder="Placeholder">
-      <template #startIcon>
-        <dt-icon name="send" size="500" />
+      <template #startIcon="{ iconSize }">
+        <dt-icon name="send" :size="iconSize" />
       </template>
     </dt-input>
     <dt-input label="Extra large input with medium icon" type="text" placeholder="Placeholder" size="xl">
       <template #startIcon>
-        <dt-icon name="send" size="200" />
+        <dt-icon name="send" :size="iconSize" />
       </template>
     </dt-input>
     <dt-input label="Large textarea with medium icon" type="textarea" placeholder="Placeholder" icon-size="md" size="lg">
       <template #startIcon>
-        <dt-icon name="send" size="200" />
+        <dt-icon name="send" :size="iconSize" />
       </template>
     </dt-input>
   </div>

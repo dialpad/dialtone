@@ -60,12 +60,11 @@
         v-dt-tooltip:top-end="shareLinkTooltip"
         importance="clear"
         kind="muted"
-        icon-position="left"
         class="d-ml-auto"
         @click="copyURLToClipboard"
       >
         Share Search Filter
-        <template #icon="{ iconSize }">
+        <template #startIcon="{ iconSize }">
           <dt-icon
             name="link-2"
             :size="iconSize"
