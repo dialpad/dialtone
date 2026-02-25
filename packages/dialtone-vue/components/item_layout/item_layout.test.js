@@ -4,6 +4,7 @@ import DtItemLayout from './item_layout.vue';
 const baseSlots = {};
 
 let mockSlots = {};
+let mockProps = {};
 
 describe('DtItemLayout tests', () => {
   let wrapper;
@@ -14,6 +15,7 @@ describe('DtItemLayout tests', () => {
 
   const updateWrapper = () => {
     wrapper = mount(DtItemLayout, {
+      props: { ...mockProps },
       slots: { ...baseSlots, ...mockSlots },
     });
 
@@ -29,15 +31,16 @@ describe('DtItemLayout tests', () => {
 
   afterEach(() => {
     mockSlots = {};
+    mockProps = {};
   });
 
   describe('Presentation Tests', () => {
     describe('When none of the slot contents are provided', () => {
-      it('should not render the left slot wrapper', () => {
+      it('should not render the start slot wrapper', () => {
         expect(leftWrapper.exists()).toBe(false);
       });
 
-      it('should not render the right slot wrapper', () => {
+      it('should not render the end slot wrapper', () => {
         expect(rightWrapper.exists()).toBe(false);
       });
 
@@ -50,9 +53,9 @@ describe('DtItemLayout tests', () => {
       });
     });
 
-    describe('When left content is provided', () => {
+    describe('When start content is provided', () => {
       beforeEach(() => {
-        mockSlots = { left: 'left' };
+        mockSlots = { start: 'start content' };
 
         updateWrapper();
       });
@@ -62,13 +65,13 @@ describe('DtItemLayout tests', () => {
       });
 
       it('should render the provided content', () => {
-        expect(wrapper.text().includes('left')).toBe(true);
+        expect(wrapper.text().includes('start content')).toBe(true);
       });
     });
 
-    describe('When right content is provided', () => {
+    describe('When end content is provided', () => {
       beforeEach(() => {
-        mockSlots = { right: 'right' };
+        mockSlots = { end: 'end content' };
 
         updateWrapper();
       });
@@ -78,7 +81,7 @@ describe('DtItemLayout tests', () => {
       });
 
       it('should render the provided content', () => {
-        expect(wrapper.text().includes('right')).toBe(true);
+        expect(wrapper.text().includes('end content')).toBe(true);
       });
     });
 
@@ -123,6 +126,120 @@ describe('DtItemLayout tests', () => {
 
       it('should render the provided content', () => {
         expect(wrapper.text().includes('selected')).toBe(true);
+      });
+    });
+
+    describe('When startClass prop is provided', () => {
+      beforeEach(() => {
+        mockSlots = { start: 'start content' };
+        mockProps = { startClass: 'my-start-class' };
+
+        updateWrapper();
+      });
+
+      it('should apply the class to the start wrapper', () => {
+        expect(leftWrapper.classes()).toContain('my-start-class');
+      });
+    });
+
+    describe('When endClass prop is provided', () => {
+      beforeEach(() => {
+        mockSlots = { end: 'end content' };
+        mockProps = { endClass: 'my-end-class' };
+
+        updateWrapper();
+      });
+
+      it('should apply the class to the end wrapper', () => {
+        expect(rightWrapper.classes()).toContain('my-end-class');
+      });
+    });
+  });
+
+  describe('Backward Compatibility Tests', () => {
+    describe('When left slot is provided (deprecated)', () => {
+      beforeEach(() => {
+        mockSlots = { left: 'left content' };
+
+        updateWrapper();
+      });
+
+      it('should render the slot wrapper', () => {
+        expect(leftWrapper.exists()).toBe(true);
+      });
+
+      it('should render the provided content', () => {
+        expect(wrapper.text().includes('left content')).toBe(true);
+      });
+    });
+
+    describe('When right slot is provided (deprecated)', () => {
+      beforeEach(() => {
+        mockSlots = { right: 'right content' };
+
+        updateWrapper();
+      });
+
+      it('should render the slot wrapper', () => {
+        expect(rightWrapper.exists()).toBe(true);
+      });
+
+      it('should render the provided content', () => {
+        expect(wrapper.text().includes('right content')).toBe(true);
+      });
+    });
+
+    describe('When leftClass prop is provided (deprecated)', () => {
+      beforeEach(() => {
+        mockSlots = { start: 'start content' };
+        mockProps = { leftClass: 'my-left-class' };
+
+        updateWrapper();
+      });
+
+      it('should apply the class to the start wrapper', () => {
+        expect(leftWrapper.classes()).toContain('my-left-class');
+      });
+    });
+
+    describe('When rightClass prop is provided (deprecated)', () => {
+      beforeEach(() => {
+        mockSlots = { end: 'end content' };
+        mockProps = { rightClass: 'my-right-class' };
+
+        updateWrapper();
+      });
+
+      it('should apply the class to the end wrapper', () => {
+        expect(rightWrapper.classes()).toContain('my-right-class');
+      });
+    });
+
+    describe('When leftClass overrides startClass (deprecated takes precedence)', () => {
+      beforeEach(() => {
+        mockSlots = { start: 'start content' };
+        mockProps = { startClass: 'new-class', leftClass: 'old-class' };
+
+        updateWrapper();
+      });
+
+      it('should use leftClass value', () => {
+        expect(leftWrapper.classes()).toContain('old-class');
+        expect(leftWrapper.classes()).not.toContain('new-class');
+      });
+    });
+
+    describe('When rightClass overrides endClass (deprecated takes precedence)', () => {
+      beforeEach(() => {
+        mockSlots = { end: 'end content' };
+        mockProps = { endClass: 'new-class', rightClass: 'old-class' };
+
+        updateWrapper();
+      });
+
+      it('should use rightClass value', () => {
+        expect(rightWrapper.classes()).toContain('old-class');
+        expect(rightWrapper.classes()).not.toContain('new-class');
       });
     });
   });

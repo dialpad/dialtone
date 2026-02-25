@@ -41,7 +41,7 @@ keywords: ["theme island","mode override","d-mode-island","DtModeIsland","dt-mod
               @click="setMode('system')"
             >
               System
-              <template #right>
+              <template #end>
                 <dt-icon :class="{ 'd-o0': currentMode !== 'system' }" name="check" size="200" />
               </template>
             </dt-list-item>
@@ -51,7 +51,7 @@ keywords: ["theme island","mode override","d-mode-island","DtModeIsland","dt-mod
               @click="setMode('light')"
             >
               Light
-              <template #right>
+              <template #end>
                 <dt-icon :class="{ 'd-o0': currentMode !== 'light' }" name="check" size="200" />
               </template>
             </dt-list-item>
@@ -61,7 +61,7 @@ keywords: ["theme island","mode override","d-mode-island","DtModeIsland","dt-mod
               @click="setMode('dark')"
             >
               Dark
-              <template #right>
+              <template #end>
                 <dt-icon :class="{ 'd-o0': currentMode !== 'dark' }" name="check" size="200" />
               </template>
             </dt-list-item>
@@ -77,7 +77,7 @@ keywords: ["theme island","mode override","d-mode-island","DtModeIsland","dt-mod
               @click="setContrast('default')"
             >
               Default
-              <template #right>
+              <template #end>
                 <dt-icon :class="{ 'd-o0': currentContrast !== 'default' }" name="check" size="200" />
               </template>
             </dt-list-item>
@@ -87,7 +87,7 @@ keywords: ["theme island","mode override","d-mode-island","DtModeIsland","dt-mod
               @click="setContrast('high')"
             >
               High
-              <template #right>
+              <template #end>
                 <dt-icon :class="{ 'd-o0': currentContrast !== 'high' }" name="check" size="200" />
               </template>
             </dt-list-item>
@@ -513,9 +513,9 @@ showHtmlWarning />
       <dt-stack gap="400" direction="row">
         <dt-dropdown ref="dropdownDefault" navigation-type="arrow-keys" placement="bottom-start">
           <template #anchor="{ attrs }">
-            <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined" icon-position="right">
+            <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined">
               Default
-              <template #icon="{ iconSize }">
+              <template #endIcon="{ iconSize }">
                 <dt-icon name="chevron-down" :size="iconSize" />
               </template>
             </dt-button>
@@ -534,9 +534,9 @@ showHtmlWarning />
         </dt-dropdown>
         <dt-dropdown ref="dropdownInverted" navigation-type="arrow-keys" placement="bottom-start" listClass="d-m0" padding="small">
           <template #anchor="{ attrs }">
-            <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined" icon-position="right">
+            <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined">
               Inverted
-              <template #icon="{ iconSize }">
+              <template #endIcon="{ iconSize }">
                 <dt-icon name="chevron-down" :size="iconSize" />
               </template>
             </dt-button>
@@ -557,9 +557,9 @@ showHtmlWarning />
         </dt-dropdown>
         <dt-dropdown navigation-type="arrow-keys" placement="bottom-start" listClass="d-m0" padding="small">
           <template #anchor="{ attrs }">
-            <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined" icon-position="right">
+            <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined">
               Light
-              <template #icon="{ iconSize }">
+              <template #endIcon="{ iconSize }">
                 <dt-icon name="chevron-down" :size="iconSize" />
               </template>
             </dt-button>
@@ -580,9 +580,9 @@ showHtmlWarning />
         </dt-dropdown>
         <dt-dropdown navigation-type="arrow-keys" placement="bottom-start" listClass="d-m0" padding="small">
           <template #anchor="{ attrs }">
-            <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined" icon-position="right">
+            <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined">
               Dark
-              <template #icon="{ iconSize }">
+              <template #endIcon="{ iconSize }">
                 <dt-icon name="chevron-down" :size="iconSize" />
               </template>
             </dt-button>
@@ -633,9 +633,9 @@ vueCode='
 <!-- Dropdown -->
 <dt-dropdown navigation-type="arrow-keys" placement="bottom-start" listClass="d-m0" padding="small">
   <template #anchor="{ attrs }">
-    <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined" icon-position="right">
+    <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined">
       Inverted
-      <template #icon="{ iconSize }">
+      <template #endIcon="{ iconSize }">
         <dt-icon name="chevron-down" :size="iconSize" />
       </template>
     </dt-button>

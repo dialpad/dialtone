@@ -14,8 +14,8 @@ By default, item layout includes custom styling, like paddings, sizes, colors, e
 
 <code-well-header class="d-d-block">
 <dt-item-layout>
-  <template #left>
-      <dt-icon name="lock" />
+  <template #start>
+      <dt-icon size="300" name="lock" />
     </template>
     Layout title
     <template #subtitle>
@@ -24,11 +24,11 @@ By default, item layout includes custom styling, like paddings, sizes, colors, e
     <template #bottom>
       <dt-badge>Content</dt-badge>
     </template>
-    <template #right>
-      <dt-icon name="share" />
+    <template #end>
+      <dt-icon size="300" name="share" />
     </template>
     <template #selected>
-      <dt-icon name="check" />
+      <dt-icon size="300" name="check" />
     </template>
 </dt-item-layout>
 </code-well-header>
@@ -62,8 +62,8 @@ htmlCode='
 '
 vueCode='
 <dt-item-layout>
-  <template #left>
-    <dt-icon name="lock" />
+  <template #start>
+    <dt-icon size="300" name="lock" />
   </template>
   Layout title
   <template #subtitle>
@@ -72,11 +72,11 @@ vueCode='
   <template #bottom>
     <dt-badge>Content</dt-badge>
   </template>
-  <template #right>
-    <dt-icon name="share" />
+  <template #end>
+    <dt-icon size="300" name="share" />
   </template>
   <template #selected>
-    <dt-icon name="check" />
+    <dt-icon size="300" name="check" />
   </template>
 </dt-item-layout>
 '
@@ -90,8 +90,8 @@ This way you can utilize the layout and customize your own styling using utility
 
 <code-well-header class="d-d-block">
   <dt-item-layout unstyled ref="exampleUnstyled">
-    <template #left>
-        <dt-icon name="lock" />
+    <template #start>
+        <dt-icon size="300" name="lock" />
       </template>
       Layout title
       <template #subtitle>
@@ -100,11 +100,11 @@ This way you can utilize the layout and customize your own styling using utility
       <template #bottom>
         <dt-badge>Content</dt-badge>
       </template>
-      <template #right>
-        <dt-icon name="share" />
+      <template #end>
+        <dt-icon size="300" name="share" />
       </template>
       <template #selected>
-        <dt-icon name="check" />
+        <dt-icon size="300" name="check" />
       </template>
   </dt-item-layout>
 </code-well-header>
@@ -113,8 +113,8 @@ This way you can utilize the layout and customize your own styling using utility
 :htmlCode="() => $refs.exampleUnstyled"
 vueCode='
 <dt-item-layout unstyled>
-  <template #left>
-    <dt-icon name="lock" />
+  <template #start>
+    <dt-icon size="300" name="lock" />
   </template>
   Layout title
   <template #subtitle>
@@ -123,11 +123,11 @@ vueCode='
   <template #bottom>
     <dt-badge>Content</dt-badge>
   </template>
-  <template #right>
-    <dt-icon name="share" />
+  <template #end>
+    <dt-icon size="300" name="share" />
   </template>
   <template #selected>
-    <dt-icon name="check" />
+    <dt-icon size="300" name="check" />
   </template>
 </dt-item-layout>
 '

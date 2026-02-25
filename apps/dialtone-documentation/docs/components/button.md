@@ -310,7 +310,7 @@ The [Split Button](split-button.md) is its own component containing multiple but
 
 <code-well-header>
   <dt-split-button
-    omega-tooltip-text="More calling options"
+    end-tooltip-text="More calling options"
   >
     Place call
     <template #dropdownList>
@@ -361,6 +361,78 @@ vueCode='
 showHtmlWarning />
 
 ## Icon Support
+
+<dt-notice
+  kind="warning"
+  class="d-wmx100p d-my24"
+  hide-close
+  title="Deprecated: icon slot + icon-position"
+>
+  The <code class="d-bgc-transparent">#icon</code> slot and <code class="d-bgc-transparent">icon-position</code> prop are deprecated and will be sunset. Use the <code class="d-bgc-transparent">#startIcon</code> and <code class="d-bgc-transparent">#endIcon</code> slots instead, which support logical direction (LTR/RTL) and allow icons on both sides simultaneously.
+</dt-notice>
+
+### Start and End Icons
+
+Buttons support `startIcon` and `endIcon` slots for placing icons before and/or after the label. Both slots provide an `iconSize` slot prop.
+
+<code-well-header>
+  <dt-stack direction="row" gap="400" ref="startEndIconExample">
+    <span>
+      <dt-button importance="outlined">
+        <template #startIcon>
+          <dt-icon name="phone" size="300" />
+        </template>
+        Label
+      </dt-button>
+    </span>
+    <span>
+      <dt-button importance="outlined">
+        Label
+        <template #endIcon>
+          <dt-icon name="arrow-right" size="300" />
+        </template>
+      </dt-button>
+    </span>
+    <span>
+      <dt-button importance="outlined">
+        <template #startIcon>
+          <dt-icon name="phone" size="300" />
+        </template>
+        Label
+        <template #endIcon>
+          <dt-icon name="arrow-right" size="300" />
+        </template>
+      </dt-button>
+    </span>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.startEndIconExample'
+vueCode='
+<dt-button importance="outlined">
+  <template #startIcon>
+    <dt-icon name="phone" size="300" />
+  </template>
+  Label
+</dt-button>
+<dt-button importance="outlined">
+  Label
+  <template #endIcon>
+    <dt-icon name="arrow-right" size="300" />
+  </template>
+</dt-button>
+<dt-button importance="outlined">
+  <template #startIcon>
+    <dt-icon name="phone" size="300" />
+  </template>
+  Label
+  <template #endIcon>
+    <dt-icon name="arrow-right" size="300" />
+  </template>
+</dt-button>
+'
+showHtmlWarning />
 
 ### Icon and Label
 

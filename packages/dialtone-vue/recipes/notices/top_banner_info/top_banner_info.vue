@@ -5,7 +5,10 @@
     data-qa="banner-info"
   >
     <div class="d-recipe-top-banner-info__left">
-      <slot name="left" />
+      <slot name="start">
+        <!-- @slot @deprecated Use start -->
+        <slot name="left" />
+      </slot>
     </div>
 
     <div
@@ -16,7 +19,10 @@
     </div>
 
     <div class="d-recipe-top-banner-info__right">
-      <slot name="right" />
+      <slot name="end">
+        <!-- @slot @deprecated Use end -->
+        <slot name="right" />
+      </slot>
     </div>
   </div>
 </template>

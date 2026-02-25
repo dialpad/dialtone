@@ -25,9 +25,28 @@ export const argTypesData = {
       type: 'text',
     },
   },
-  left: {
+  start: {
     options: iconsList,
-    description: 'Slot for the left content',
+    description: 'Slot for the start content',
+    table: {
+      category: 'slots',
+      type: { summary: 'component' },
+    },
+    control: {
+      type: 'select',
+      labels: {
+        undefined: '(empty)',
+      },
+    },
+  },
+  left: {
+    table: {
+      disable: true,
+    },
+  },
+  end: {
+    options: iconsList,
+    description: 'Slot for the end content',
     table: {
       category: 'slots',
       type: { summary: 'component' },
@@ -40,17 +59,8 @@ export const argTypesData = {
     },
   },
   right: {
-    options: iconsList,
-    description: 'Slot for the right content',
     table: {
-      category: 'slots',
-      type: { summary: 'component' },
-    },
-    control: {
-      type: 'select',
-      labels: {
-        undefined: '(empty)',
-      },
+      disable: true,
     },
   },
   subtitle: {
@@ -160,8 +170,8 @@ export const Default = {
   render: DefaultTemplate,
 
   args: {
-    left: 'globe-2',
-    right: 'external-link',
+    start: 'globe-2',
+    end: 'external-link',
     default: 'Default List Item',
     subtitle: 'Description',
     bottom: '<span class="d-badge">Label</span>',

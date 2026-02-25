@@ -1,25 +1,25 @@
 <template>
   <dt-split-button
-    :alpha-active="$attrs.alphaActive"
-    :alpha-aria-label="$attrs.alphaAriaLabel"
-    :alpha-icon-position="$attrs.alphaIconPosition"
-    :alpha-label-class="$attrs.alphaLabelClass"
-    :alpha-loading="$attrs.alphaLoading"
-    :alpha-tooltip-text="$attrs.alphaTooltipText"
+    :start-active="$attrs.startActive"
+    :start-aria-label="$attrs.startAriaLabel"
+    :start-icon-position="$attrs.startIconPosition"
+    :start-label-class="$attrs.startLabelClass"
+    :start-loading="$attrs.startLoading"
+    :start-tooltip-text="$attrs.startTooltipText"
     :assertive-on-focus="$attrs.assertiveOnFocus"
     :disabled="$attrs.disabled"
     :dropdown-placement="$attrs.dropdownPlacement"
     :importance="$attrs.importance"
     :kind="$attrs.kind"
-    :omega-active="$attrs.omegaActive"
-    :omega-aria-label="$attrs.omegaAriaLabel"
-    :omega-id="$attrs.omegaId"
-    :omega-tooltip-text="$attrs.omegaTooltipText"
+    :end-active="$attrs.endActive"
+    :end-aria-label="$attrs.endAriaLabel"
+    :end-id="$attrs.endId"
+    :end-tooltip-text="$attrs.endTooltipText"
     :root-class="$attrs.rootClass"
     :size="$attrs.size"
     :width="$attrs.width"
-    @alpha-clicked="$attrs.onAlphaClicked"
-    @omega-clicked="$attrs.onOmegaClicked"
+    @start-clicked="$attrs.onStartClicked"
+    @end-clicked="$attrs.onEndClicked"
   >
     <template
       v-if="defaultSlot"
@@ -28,20 +28,20 @@
       {{ defaultSlot }}
     </template>
     <template
-      v-if="$attrs.alphaIcon"
-      #alphaIcon="{ size }"
+      v-if="$attrs.startIcon"
+      #startIcon="{ size }"
     >
       <dt-icon
-        :name="$attrs.alphaIcon"
+        :name="$attrs.startIcon"
         :size="size"
       />
     </template>
     <template
-      v-if="$attrs.omegaIcon"
-      #omegaIcon="{ size }"
+      v-if="$attrs.endIcon"
+      #endIcon="{ size }"
     >
       <dt-icon
-        :name="$attrs.omegaIcon"
+        :name="$attrs.endIcon"
         :size="size"
       />
     </template>
@@ -57,10 +57,10 @@
       </dt-list-item>
     </template>
     <template
-      v-if="$attrs.omega"
-      #omega
+      v-if="$attrs.end"
+      #end
     >
-      <span v-html="$attrs.omega" />
+      <span v-html="$attrs.end" />
     </template>
   </dt-split-button>
 </template>

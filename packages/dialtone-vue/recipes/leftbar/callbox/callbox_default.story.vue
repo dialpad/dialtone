@@ -36,11 +36,11 @@
       />
     </template>
     <template
-      v-if="$attrs.right"
-      #right
+      v-if="$attrs.end"
+      #end
     >
       <div
-        v-html="$attrs.right"
+        v-html="$attrs.end"
       />
     </template>
     <template

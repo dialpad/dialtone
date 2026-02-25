@@ -71,12 +71,15 @@
           </div>
         </div>
         <div
-          v-if="$slots.right"
+          v-if="$slots.end || $slots.right"
           data-qa="dt-recipe-callbox__right-wrapper"
           class="d-recipe-callbox__right"
         >
-          <!-- @slot Slot for right icons -->
-          <slot name="right" />
+          <!-- @slot Slot for end icons -->
+          <slot name="end">
+            <!-- @slot @deprecated Use end -->
+            <slot name="right" />
+          </slot>
         </div>
       </div>
       <div

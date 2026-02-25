@@ -288,7 +288,7 @@
         <template #subtitle>
           +1 (415) 123-4567
         </template>
-        <template #right>
+        <template #end>
           <dt-stack
             direction="row"
             align="center"

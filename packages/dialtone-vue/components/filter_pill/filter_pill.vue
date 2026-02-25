@@ -15,7 +15,7 @@
     >
       <template #anchor="{ attrs }">
         <dt-button
-          v-dt-tooltip="alphaTooltipText"
+          v-dt-tooltip="resolvedStartTooltipText"
           v-bind="attrs"
           :active="isActive"
           :class="[
@@ -81,7 +81,7 @@
     </dt-popover>
     <dt-button
       v-if="hasClear"
-      v-dt-tooltip="omegaTooltipText"
+      v-dt-tooltip="resolvedEndTooltipText"
       :active="isActive"
       :aria-label="clearButtonAriaLabel"
       :class="[
@@ -136,12 +136,20 @@ export default {
     },
 
     /**
-     * Text shown in tooltip when you hover the alpha button,
+     * Text shown in tooltip when you hover the start button,
      * required if no content is passed to default slot
+     */
+    startTooltipText: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * @deprecated Use startTooltipText
      */
     alphaTooltipText: {
       type: String,
-      default: '',
+      default: undefined,
     },
 
     /**
@@ -170,12 +178,20 @@ export default {
     },
 
     /**
-     * Text shown in tooltip when you hover the omega button,
+     * Text shown in tooltip when you hover the end button,
      * required as it is an icon only button
+     */
+    endTooltipText: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * @deprecated Use endTooltipText
      */
     omegaTooltipText: {
       type: String,
-      default: '',
+      default: undefined,
     },
 
     /**
@@ -298,12 +314,20 @@ export default {
       return this.isActive ? 'default': 'muted';
     },
 
+    resolvedStartTooltipText () {
+      return this.alphaTooltipText ?? this.startTooltipText;
+    },
+
+    resolvedEndTooltipText () {
+      return this.omegaTooltipText ?? this.endTooltipText;
+    },
+
     clearButtonAriaLabel () {
-      return this.omegaTooltipText || this.i18n.$t('DIALTONE_FILTER_PILL_CLEAR_BUTTON_LABEL');
+      return this.resolvedEndTooltipText || this.i18n.$t('DIALTONE_FILTER_PILL_CLEAR_BUTTON_LABEL');
     },
 
     clearButtonTitle () {
-      if (this.omegaTooltipText) return;
+      if (this.resolvedEndTooltipText) return;
 
       return this.clearButtonAriaLabel
     },

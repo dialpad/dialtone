@@ -8,6 +8,8 @@ const MOCK_CLEAR_STUB = vi.fn();
 const MOCK_LABEL = 'Filter pill label';
 const MOCK_CONTENT = 'Popover content';
 const MOCK_DEFAULT_SLOT = 'Default slot';
+const MOCK_START_TOOLTIP_TEXT = 'Start tooltip text';
+const MOCK_END_TOOLTIP_TEXT = 'End tooltip text';
 
 const MOCK_TEST_FILTERS = [
   { name: 'Test item 1' },
@@ -155,6 +157,78 @@ describe('DtFilterPill Tests', function () {
 
       it('Should emit "clear" event', () => {
         expect(wrapper.emitted()).toHaveProperty('clear');
+      });
+    });
+  });
+
+  describe('Tooltip Prop Tests', () => {
+    describe('When startTooltipText is set', () => {
+      it('Should resolve to the correct tooltip text', () => {
+        mockProps = { startTooltipText: MOCK_START_TOOLTIP_TEXT };
+
+        updateWrapper();
+
+        expect(wrapper.vm.resolvedStartTooltipText).toBe(MOCK_START_TOOLTIP_TEXT);
+      });
+    });
+
+    describe('When endTooltipText is set', () => {
+      it('Should resolve to the correct tooltip text', () => {
+        mockProps = { endTooltipText: MOCK_END_TOOLTIP_TEXT };
+
+        updateWrapper();
+
+        expect(wrapper.vm.resolvedEndTooltipText).toBe(MOCK_END_TOOLTIP_TEXT);
+      });
+    });
+
+    describe('When endTooltipText is set', () => {
+      it('Should use it as clear button aria-label', () => {
+        mockProps = {
+          modelValue: [{ name: 'Test item 1', active: true }],
+          endTooltipText: MOCK_END_TOOLTIP_TEXT,
+        };
+
+        updateWrapper();
+        clearButton = wrapper.find('[data-qa="dt-filter-pill__clear-button"]');
+
+        expect(clearButton.attributes('aria-label')).toBe(MOCK_END_TOOLTIP_TEXT);
+      });
+    });
+  });
+
+  describe('Backward Compatibility Tests', () => {
+    describe('When deprecated alphaTooltipText prop is used', () => {
+      it('Should resolve to the correct tooltip text', () => {
+        mockProps = { alphaTooltipText: MOCK_START_TOOLTIP_TEXT };
+
+        updateWrapper();
+
+        expect(wrapper.vm.resolvedStartTooltipText).toBe(MOCK_START_TOOLTIP_TEXT);
+      });
+    });
+
+    describe('When deprecated omegaTooltipText prop is used', () => {
+      it('Should resolve to the correct tooltip text', () => {
+        mockProps = { omegaTooltipText: MOCK_END_TOOLTIP_TEXT };
+
+        updateWrapper();
+
+        expect(wrapper.vm.resolvedEndTooltipText).toBe(MOCK_END_TOOLTIP_TEXT);
+      });
+    });
+
+    describe('When deprecated omegaTooltipText prop is used', () => {
+      it('Should use it as clear button aria-label', () => {
+        mockProps = {
+          modelValue: [{ name: 'Test item 1', active: true }],
+          omegaTooltipText: MOCK_END_TOOLTIP_TEXT,
+        };
+
+        updateWrapper();
+        clearButton = wrapper.find('[data-qa="dt-filter-pill__clear-button"]');
+
+        expect(clearButton.attributes('aria-label')).toBe(MOCK_END_TOOLTIP_TEXT);
       });
     });
   });

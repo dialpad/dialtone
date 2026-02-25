@@ -7,14 +7,14 @@
     :color-code="$attrs.colorCode"
   >
     <template
-      v-if="$attrs.left"
-      #left
+      v-if="$attrs.start"
+      #start
     >
-      <span v-html="$attrs.left" />
+      <span v-html="$attrs.start" />
     </template>
     <template
       v-else
-      #left
+      #start
     >
       <span class="d-fw-bold"> Active Call </span>
     </template>
@@ -26,14 +26,14 @@
       Aerolabs Support (415) 583-3482
     </span>
     <template
-      v-if="$attrs.right"
-      #right
+      v-if="$attrs.end"
+      #end
     >
-      <span v-html="$attrs.right" />
+      <span v-html="$attrs.end" />
     </template>
     <template
       v-else
-      #right
+      #end
     >
       <span class="d-fw-bold"> Recording ON </span>
     </template>

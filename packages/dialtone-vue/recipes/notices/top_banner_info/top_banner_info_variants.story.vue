@@ -8,7 +8,7 @@
       class=""
       color-code="gold200"
     >
-      <template #left>
+      <template #start>
         <span class="d-fw-bold"> Active Call </span> 3:21
       </template>
       <dt-button
@@ -31,14 +31,14 @@
       class=""
       color-code="red200"
     >
-      <template #left>
+      <template #start>
         <span class="d-fw-bold"> Active Call </span> 3:21
       </template>
       <span>
         <span class="d-fw-medium">Caller ID: </span>
         Aerolabs Support (415) 583-3482
       </span>
-      <template #right>
+      <template #end>
         <span class="d-fw-bold"> Admin is listening in </span> 0:21
       </template>
     </dt-recipe-top-banner-info>
@@ -46,7 +46,7 @@
       class=""
       color-code="black100"
     >
-      <template #left>
+      <template #start>
         <span class="d-fw-bold"> Connecting Call </span>
       </template>
       <span>
@@ -58,7 +58,7 @@
       class=""
       color-code="green100"
     >
-      <template #left>
+      <template #start>
         <span class="d-fw-bold"> Ringing... </span>
       </template>
       <span>
@@ -69,7 +69,7 @@
     <dt-recipe-top-banner-info
       color-code="gold100"
     >
-      <template #left>
+      <template #start>
         <span class="d-fw-bold">Joseph Lumaban</span>
         <div class="d-fc-critical-strong d-fw-semibold">
           On hold
@@ -115,7 +115,7 @@
           End Call
         </dt-button>
       </div>
-      <template #right>
+      <template #end>
         <dt-button
           importance="clear"
           icon-position="right"

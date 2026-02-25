@@ -9,14 +9,14 @@
     @click-menu="$attrs.clickMenu"
   >
     <template
-      v-if="$attrs.right"
-      #right
+      v-if="$attrs.end"
+      #end
     >
-      <span v-html="$attrs.right" />
+      <span v-html="$attrs.end" />
     </template>
     <template
       v-else
-      #right
+      #end
     >
       <dt-button
         size="sm"

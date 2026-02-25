@@ -12,9 +12,27 @@
     :aria-label="loading ? i18n.$t('DIALTONE_LOADING') : $attrs['aria-label']"
     v-on="buttonListeners"
   >
+    <!-- NEW: Start icon slot -->
+    <span
+      v-if="hasStartIcon"
+      data-qa="dt-button-start-icon"
+      :class="[
+        'base-button__icon',
+        {
+          'd-btn__icon': kind !== 'unstyled',
+          'd-btn__icon--left': kind !== 'unstyled',
+        },
+      ]"
+    >
+      <!-- @slot Icon displayed at the start (left in LTR) of the button -->
+      <slot
+        name="startIcon"
+        :icon-size="iconSize"
+      />
+    </span>
     <!-- NOTE(cormac): This span is needed since we can't apply styles to slots. -->
     <span
-      v-if="shouldRenderIcon()"
+      v-if="shouldRenderLegacyIcon()"
       data-qa="dt-button-icon"
       :class="[
         'base-button__icon',
@@ -41,6 +59,24 @@
     >
       <!-- @slot Content within button -->
       <slot />
+    </span>
+    <!-- NEW: End icon slot -->
+    <span
+      v-if="hasEndIcon"
+      data-qa="dt-button-end-icon"
+      :class="[
+        'base-button__icon',
+        {
+          'd-btn__icon': kind !== 'unstyled',
+          'd-btn__icon--right': kind !== 'unstyled',
+        },
+      ]"
+    >
+      <!-- @slot Icon displayed at the end (right in LTR) of the button -->
+      <slot
+        name="endIcon"
+        :icon-size="iconSize"
+      />
     </span>
   </button>
 </template>
@@ -84,11 +120,12 @@ export default {
 
     /**
      * The position of the icon slot within the button.
-     * @values left, right, top, bottom
+     * @deprecated Use startIcon / endIcon slots instead.
+     * @values start, end, left, right, top, bottom
      */
     iconPosition: {
       type: String,
-      default: 'left',
+      default: 'start',
       validator: (position) => Object.keys(ICON_POSITION_MODIFIERS).includes(position),
     },
 
@@ -292,6 +329,18 @@ export default {
     iconSize () {
       return BUTTON_ICON_SIZES[this.size];
     },
+
+    hasStartIcon () {
+      return hasSlotContent(this.$slots.startIcon);
+    },
+
+    hasEndIcon () {
+      return hasSlotContent(this.$slots.endIcon);
+    },
+
+    hasNewIconSlots () {
+      return this.hasStartIcon || this.hasEndIcon;
+    },
   },
 
   watch: {
@@ -353,16 +402,16 @@ export default {
       return true;
     },
 
-    shouldRenderIcon () {
-      return hasSlotContent(this.$slots.icon) && !this.link;
+    shouldRenderLegacyIcon () {
+      return hasSlotContent(this.$slots.icon) && !this.hasNewIconSlots && !this.link;
     },
 
     isIconOnly () {
-      return this.shouldRenderIcon() && !hasSlotContent(this.$slots.default);
+      return (this.hasNewIconSlots || this.shouldRenderLegacyIcon()) && !hasSlotContent(this.$slots.default);
     },
 
     isVerticalIconLayout () {
-      return !this.isIconOnly() && ['top', 'bottom'].includes(this.iconPosition);
+      return !this.isIconOnly() && !this.hasNewIconSlots && ['top', 'bottom'].includes(this.iconPosition);
     },
   },
 };

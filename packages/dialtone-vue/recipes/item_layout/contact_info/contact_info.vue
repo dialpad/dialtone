@@ -4,12 +4,12 @@
     data-qa="contact-info"
     class="d-recipe-contact-info"
     content-class="d-recipe-contact-info__content"
-    right-class="d-recipe-contact-info__right"
+    end-class="d-recipe-contact-info__right"
     unstyled
   >
     <template
       v-if="showAvatar"
-      #left
+      #start
     >
       <button
         class="d-recipe-contact-info__left"
@@ -106,12 +106,15 @@
     </template>
 
     <template
-      v-if="$slots.right"
-      #right
+      v-if="$slots.end || $slots.right"
+      #end
     >
       <div data-qa="contact-info-right">
-        <!-- @slot Slot for the right content -->
-        <slot name="right" />
+        <!-- @slot Slot for the end content -->
+        <slot name="end">
+          <!-- @slot @deprecated Use end -->
+          <slot name="right" />
+        </slot>
       </div>
     </template>
   </dt-item-layout>

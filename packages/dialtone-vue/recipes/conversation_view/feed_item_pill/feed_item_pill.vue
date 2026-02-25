@@ -21,7 +21,7 @@
               <slot name="title">
                 <span class="d-recipe-feed-item-pill__title">{{ title }}</span>
               </slot>
-              <template #left>
+              <template #start>
                 <div
                   class="d-recipe-feed-item-pill__icon"
                   data-qa="dt-recipe-feed-item-pill__icon"
@@ -31,12 +31,18 @@
                     v-if="showChevronIcon"
                     size="300"
                   />
-                  <!-- @slot Slot for left icon, icon-size slot prop defaults to '300' -->
+                  <!-- @slot Slot for start icon, icon-size slot prop defaults to '300' -->
                   <slot
                     v-else
-                    name="leftIcon"
+                    name="startIcon"
                     :icon-size="'300'"
-                  />
+                  >
+                    <!-- @slot @deprecated Use startIcon -->
+                    <slot
+                      name="leftIcon"
+                      :icon-size="'300'"
+                    />
+                  </slot>
                 </div>
               </template>
               <template
@@ -56,11 +62,14 @@
                 </div>
               </template>
               <template
-                v-if="$slots.right"
-                #right
+                v-if="$slots.end || $slots.right"
+                #end
               >
                 <div class="d-recipe-feed-item-pill__right">
-                  <slot name="right" />
+                  <slot name="end">
+                    <!-- @slot @deprecated Use end -->
+                    <slot name="right" />
+                  </slot>
                 </div>
               </template>
             </dt-item-layout>

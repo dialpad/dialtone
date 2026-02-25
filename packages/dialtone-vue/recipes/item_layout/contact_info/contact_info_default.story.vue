@@ -35,10 +35,10 @@
     </template>
 
     <template
-      v-if="$attrs.right"
-      #right
+      v-if="$attrs.end"
+      #end
     >
-      <span v-html="$attrs.right" />
+      <span v-html="$attrs.end" />
     </template>
 
     <template

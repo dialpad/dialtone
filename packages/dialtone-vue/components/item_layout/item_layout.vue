@@ -5,12 +5,15 @@
     :style="unstyled && dynamicGridTemplateColumns()"
   >
     <section
-      v-if="hasSlotContent($slots.left)"
+      v-if="hasSlotContent($slots.start) || hasSlotContent($slots.left)"
       data-qa="dt-item-layout-left-wrapper"
-      :class="[leftClass, 'd-item-layout__left']"
+      :class="[resolvedStartClass, 'd-item-layout__left']"
     >
-      <!-- @slot Slot for left content -->
-      <slot name="left" />
+      <!-- @slot Slot for start content -->
+      <slot name="start">
+        <!-- @slot @deprecated Use start -->
+        <slot name="left" />
+      </slot>
     </section>
     <section
       data-qa="dt-item-layout-content-wrapper"
@@ -46,12 +49,15 @@
       </div>
     </section>
     <section
-      v-if="hasSlotContent($slots.right)"
+      v-if="hasSlotContent($slots.end) || hasSlotContent($slots.right)"
       data-qa="dt-item-layout-right-wrapper"
-      :class="[rightClass, 'd-item-layout__right']"
+      :class="[resolvedEndClass, 'd-item-layout__right']"
     >
-      <!-- @slot Slot for right content -->
-      <slot name="right" />
+      <!-- @slot Slot for end content -->
+      <slot name="end">
+        <!-- @slot @deprecated Use end -->
+        <slot name="right" />
+      </slot>
     </section>
     <section
       v-if="hasSlotContent($slots.selected)"
@@ -94,11 +100,20 @@ export default {
     },
 
     /**
-     * Set the class for the left section.
+     * Set the class for the start section.
+     */
+    startClass: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Set the class for the start section.
+     * @deprecated Use startClass
      */
     leftClass: {
       type: String,
-      default: '',
+      default: undefined,
     },
 
     /**
@@ -134,11 +149,20 @@ export default {
     },
 
     /**
-     * Set the class for the right section.
+     * Set the class for the end section.
+     */
+    endClass: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Set the class for the end section.
+     * @deprecated Use endClass
      */
     rightClass: {
       type: String,
-      default: '',
+      default: undefined,
     },
 
     /**
@@ -150,13 +174,23 @@ export default {
     },
   },
 
+  computed: {
+    resolvedStartClass () {
+      return this.leftClass ?? this.startClass;
+    },
+
+    resolvedEndClass () {
+      return this.rightClass ?? this.endClass;
+    },
+  },
+
   methods: {
     /**
      * Generate dynamic grid template columns
      */
     dynamicGridTemplateColumns () {
-      const leftContentColumn = this.$slots.left ? 'auto' : '';
-      const rightContentColumn = this.$slots.right ? 'auto' : '';
+      const leftContentColumn = (this.$slots.start || this.$slots.left) ? 'auto' : '';
+      const rightContentColumn = (this.$slots.end || this.$slots.right) ? 'auto' : '';
       const selectedContentColumn = this.$slots.selected ? 'auto' : '';
 
       return `

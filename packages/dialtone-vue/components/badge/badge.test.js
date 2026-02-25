@@ -129,6 +129,56 @@ describe('DtBadge Tests', () => {
       });
     });
 
+    describe('When a startIcon slot is provided', () => {
+      beforeEach(() => {
+        mockSlots = { startIcon: '<dt-icon name="plus" />' };
+
+        updateWrapper();
+      });
+
+      it('should render the left icon wrapper', () => {
+        expect(wrapper.find('.d-badge__icon-left').exists()).toBe(true);
+      });
+    });
+
+    describe('When an endIcon slot is provided', () => {
+      beforeEach(() => {
+        mockSlots = { endIcon: '<dt-icon name="plus" />' };
+
+        updateWrapper();
+      });
+
+      it('should render the right icon wrapper', () => {
+        expect(wrapper.find('.d-badge__icon-right').exists()).toBe(true);
+      });
+    });
+
+    describe('Backward compatibility', () => {
+      describe('When leftIcon slot is provided (deprecated)', () => {
+        beforeEach(() => {
+          mockSlots = { leftIcon: '<dt-icon name="plus" />' };
+
+          updateWrapper();
+        });
+
+        it('should render the left icon wrapper', () => {
+          expect(wrapper.find('.d-badge__icon-left').exists()).toBe(true);
+        });
+      });
+
+      describe('When rightIcon slot is provided (deprecated)', () => {
+        beforeEach(() => {
+          mockSlots = { rightIcon: '<dt-icon name="plus" />' };
+
+          updateWrapper();
+        });
+
+        it('should render the right icon wrapper', () => {
+          expect(wrapper.find('.d-badge__icon-right').exists()).toBe(true);
+        });
+      });
+    });
+
     describe('When a decoration is provided via prop', () => {
       describe('When decoration is black-900', () => {
         it('should have correct decoration', async () => {

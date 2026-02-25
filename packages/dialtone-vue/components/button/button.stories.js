@@ -46,6 +46,30 @@ export const argTypesData = {
       },
     },
   },
+  startIcon: {
+    options: iconsList,
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'select',
+      labels: {
+        undefined: '(empty)',
+      },
+    },
+  },
+  endIcon: {
+    options: iconsList,
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'select',
+      labels: {
+        undefined: '(empty)',
+      },
+    },
+  },
 
   // Props
   active: {
@@ -93,6 +117,7 @@ export const argTypesData = {
   iconPosition: {
     control: 'select',
     options: Object.keys(ICON_POSITION_MODIFIERS),
+    table: { disable: true },
   },
   labelClass: {
     description: 'Pass through classes. Used to customize the label container',
@@ -174,4 +199,32 @@ export const Variants = {
   render: VariantsTemplate,
   parameters: { options: { showPanel: false }, controls: { disable: true } },
   args: {},
+};
+
+export const WithStartIcon = {
+  render: Template,
+
+  args: {
+    default: 'Start Icon',
+    startIcon: 'send',
+  },
+};
+
+export const WithEndIcon = {
+  render: Template,
+
+  args: {
+    default: 'End Icon',
+    endIcon: 'arrow-right',
+  },
+};
+
+export const WithBothIcons = {
+  render: Template,
+
+  args: {
+    default: 'Both Icons',
+    startIcon: 'send',
+    endIcon: 'arrow-right',
+  },
 };

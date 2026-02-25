@@ -2,18 +2,18 @@
   <dt-item-layout
     :as="$attrs.as"
     :unstyled="$attrs.unstyled"
-    :left-class="$attrs.leftClass"
+    :start-class="$attrs.startClass"
     :content-class="$attrs.contentClass"
     :title-class="$attrs.titleClass"
     :subtitle-class="$attrs.subtitleClass"
     :bottom-class="$attrs.bottomClass"
-    :right-class="$attrs.rightClass"
+    :end-class="$attrs.endClass"
     :selected-class="$attrs.selectedClass"
   >
-    <template #left>
+    <template #start>
       <span
-        v-if="$attrs.left"
-        v-html="$attrs.left"
+        v-if="$attrs.start"
+        v-html="$attrs.start"
       />
     </template>
     <span
@@ -32,10 +32,10 @@
         v-html="$attrs.bottom"
       />
     </template>
-    <template #right>
+    <template #end>
       <span
-        v-if="$attrs.right"
-        v-html="$attrs.right"
+        v-if="$attrs.end"
+        v-html="$attrs.end"
       />
     </template>
     <template #selected>

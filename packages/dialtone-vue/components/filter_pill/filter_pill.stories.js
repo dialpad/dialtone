@@ -54,6 +54,10 @@ export const argTypesData = {
     },
   },
 
+  // Deprecated props (hidden)
+  alphaTooltipText: { table: { disable: true } },
+  omegaTooltipText: { table: { disable: true } },
+
   // Events: Exclude this from the table as event names will automatically be added from the component itself.
   onClear: {
     action: 'clear',

@@ -20,7 +20,20 @@ export const argTypesData = {
       },
     },
   },
+  start: {
+    control: 'text',
+    table: {
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
   left: {
+    table: {
+      disable: true,
+    },
+  },
+  end: {
     control: 'text',
     table: {
       type: {
@@ -29,11 +42,8 @@ export const argTypesData = {
     },
   },
   right: {
-    control: 'text',
     table: {
-      type: {
-        summary: 'VNode',
-      },
+      disable: true,
     },
   },
   selected: {
@@ -56,12 +66,29 @@ export const argTypesData = {
   unstyled: {
     control: { type: 'boolean' },
   },
+
+  startClass: {
+    control: 'text',
+  },
+  leftClass: {
+    table: {
+      disable: true,
+    },
+  },
+  endClass: {
+    control: 'text',
+  },
+  rightClass: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 // Set default values at the story level here.
 export const argsData = {
-  left: 'Left slot',
-  right: 'Right slot',
+  start: 'Start slot',
+  end: 'End slot',
   default: 'Default slot',
   subtitle: 'Subtitle slot',
   bottom: 'Bottom slot',

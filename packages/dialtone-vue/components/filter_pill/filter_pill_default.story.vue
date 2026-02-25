@@ -1,10 +1,10 @@
 <template>
   <dt-filter-pill
     :model-value="$attrs.modelValue"
-    :alpha-tooltip-text="$attrs.alphaTooltipText"
+    :start-tooltip-text="$attrs.startTooltipText"
     :disabled="$attrs.disabled"
     :label="$attrs.label"
-    :omega-tooltip-text="$attrs.omegaTooltipText"
+    :end-tooltip-text="$attrs.endTooltipText"
     :popover-append-to="$attrs.popoverAppendTo"
     :popover-fallback-placements="$attrs.popoverFallbackPlacements"
     :popover-max-height="$attrs.popoverMaxHeight"

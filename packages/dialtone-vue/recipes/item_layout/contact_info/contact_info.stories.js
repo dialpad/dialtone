@@ -102,14 +102,20 @@ export const argTypesData = {
     },
   },
 
-  right: {
-    description: 'Slot for the right content',
+  end: {
+    description: 'Slot for the end content',
     control: 'text',
     table: {
       category: 'slots',
       type: {
         summary: 'VNode',
       },
+    },
+  },
+
+  right: {
+    table: {
+      disable: true,
     },
   },
 
@@ -333,7 +339,7 @@ export const Variants = {
       >
         <template #header><div class="d-fw-bold d-fs-200">Natalie Woods</div></template>
         <template #subtitle>+1 (415) 123-4567</template>
-        <template #right>
+        <template #end>
           <dt-stack direction="row" align="center" class="d-m8">
             <dt-button size="xs" :circle="true" importance="clear" aria-label="chat">
               <template #icon>

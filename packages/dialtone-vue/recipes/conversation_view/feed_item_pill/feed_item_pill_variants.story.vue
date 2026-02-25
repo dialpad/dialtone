@@ -12,7 +12,7 @@
         border-color="ai"
       >
         <template
-          #leftIcon="{ iconSize }"
+          #startIcon="{ iconSize }"
         >
           <dt-icon-phone-outgoing
             :size="iconSize"
@@ -21,7 +21,7 @@
         <template #subtitle>
           Lasted 8 min • Ended at 11:56 AM
         </template>
-        <template #right>
+        <template #end>
           <div>
             <dt-button
               aria-label="Open external link"
@@ -71,13 +71,13 @@
         :toggleable="false"
       >
         <template
-          #leftIcon="{ iconSize }"
+          #startIcon="{ iconSize }"
         >
           <dt-icon-phone-missed
             :size="iconSize"
           />
         </template>
-        <template #right>
+        <template #end>
           <div>
             <dt-button
               aria-label="Call Ben"
@@ -106,7 +106,7 @@
         :toggleable="false"
       >
         <template
-          #leftIcon="{ iconSize }"
+          #startIcon="{ iconSize }"
         >
           <dt-icon-voicemail
             :size="iconSize"
@@ -115,7 +115,7 @@
         <template #subtitle>
           From (800)504-9978
         </template>
-        <template #right>
+        <template #end>
           <div>
             <dt-button
               aria-label="Open external link"
@@ -145,13 +145,13 @@
         :toggleable="false"
       >
         <template
-          #leftIcon="{ iconSize }"
+          #startIcon="{ iconSize }"
         >
           <dt-icon-phone-incoming
             :size="iconSize"
           />
         </template>
-        <template #right>
+        <template #end>
           <div>
             <dt-button
               aria-label="Open external link"
@@ -187,7 +187,7 @@
         :default-toggled="true"
       >
         <template
-          #leftIcon="{ iconSize }"
+          #startIcon="{ iconSize }"
         >
           <dt-icon-video
             :size="iconSize"
@@ -199,7 +199,7 @@
         <template #bottom>
           <span class="d-fc-tertiary d-fs-100">8 people joined</span>
         </template>
-        <template #right>
+        <template #end>
           <div>
             <dt-button
               aria-label="Open external link"
@@ -250,7 +250,7 @@
         :toggleable="false"
       >
         <template
-          #leftIcon="{ iconSize }"
+          #startIcon="{ iconSize }"
         >
           <dt-icon-video
             :size="iconSize"
@@ -262,7 +262,7 @@
         <template #bottom>
           <span class="d-fc-tertiary d-fs-100">8 people joined</span>
         </template>
-        <template #right>
+        <template #end>
           <div>
             <dt-button
               aria-label="Open external link"

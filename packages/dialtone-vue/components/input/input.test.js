@@ -216,9 +216,9 @@ describe('DtInput tests', () => {
       });
     });
 
-    describe('When a left icon is provided', () => {
+    describe('When a start icon is provided', () => {
       beforeEach(() => {
-        mockSlots = { leftIcon: iconPlus };
+        mockSlots = { startIcon: iconPlus };
 
         updateWrapper();
       });
@@ -244,9 +244,9 @@ describe('DtInput tests', () => {
       });
     });
 
-    describe('When a right icon is provided', () => {
+    describe('When an end icon is provided', () => {
       beforeEach(() => {
-        mockSlots = { rightIcon: iconPlus };
+        mockSlots = { endIcon: iconPlus };
 
         updateWrapper();
       });
@@ -269,6 +269,40 @@ describe('DtInput tests', () => {
 
       it('should render the provided icon', () => {
         expect(wrapper.findComponent(DtIcon).exists()).toBe(true);
+      });
+    });
+
+    describe('Backward compatibility', () => {
+      describe('When leftIcon slot is provided (deprecated)', () => {
+        beforeEach(() => {
+          mockSlots = { leftIcon: iconPlus };
+
+          updateWrapper();
+        });
+
+        it('should render the icon wrapper', () => {
+          expect(leftIconWrapper.exists()).toBe(true);
+        });
+
+        it('should render the provided icon', () => {
+          expect(wrapper.findComponent(DtIcon).exists()).toBe(true);
+        });
+      });
+
+      describe('When rightIcon slot is provided (deprecated)', () => {
+        beforeEach(() => {
+          mockSlots = { rightIcon: iconPlus };
+
+          updateWrapper();
+        });
+
+        it('should render the icon wrapper', () => {
+          expect(rightIconWrapper.exists()).toBe(true);
+        });
+
+        it('should render the provided icon', () => {
+          expect(wrapper.findComponent(DtIcon).exists()).toBe(true);
+        });
       });
     });
 

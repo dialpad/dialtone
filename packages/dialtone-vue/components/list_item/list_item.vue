@@ -18,12 +18,12 @@
       v-if="isDefaultType"
       unstyled
       :class="['d-list-item__wrapper', wrapperClass]"
-      left-class="d-list-item__left"
+      start-class="d-list-item__left"
       content-class="d-list-item__content"
       title-class="d-list-item__title"
       subtitle-class="d-list-item__subtitle"
       bottom-class="d-list-item__bottom"
-      right-class="d-list-item__right"
+      end-class="d-list-item__right"
       selected-class="d-list-item__selected"
       data-qa="dt-list-item-wrapper"
     >

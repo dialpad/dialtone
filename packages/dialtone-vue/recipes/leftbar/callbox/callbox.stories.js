@@ -11,6 +11,13 @@ export const argTypesData = {
       disable: true,
     },
   },
+
+  // Deprecated slots
+  right: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 const decorator = () => ({
@@ -53,7 +60,7 @@ export const Default = {
     video: 'Video slot',
     badge: 'Badge slot',
     subtitle: 'Subtitle slot',
-    right: 'Right slot',
+    end: 'End slot',
     bottom: 'Bottom slot',
   },
 
