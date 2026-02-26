@@ -3,18 +3,19 @@
     :id="`dt-tab-${id}`"
     :class="[
       tabClass,
+      { 'd-btn--disabled': isDisabled },
     ]"
     :importance="buttonImportance"
     :kind="buttonKind"
     :active="buttonActive"
-    :size="groupContext.size"
+    :size="buttonSize"
     role="tab"
     :aria-selected="`${isSelected}`"
     :aria-controls="`dt-panel-${panelId}`"
     :aria-label="label"
+    :aria-disabled="isDisabled ? 'true' : undefined"
     data-qa="dt-tab"
     :tabindex="isSelected ? '0' : '-1'"
-    :disabled="groupContext.disabled || disabled"
     v-bind="$attrs"
     v-on="tabListeners"
   >
@@ -123,6 +124,15 @@ export default {
           this.$emit('focus', event);
         },
       };
+    },
+
+    isDisabled () {
+      return this.groupContext.disabled || this.disabled;
+    },
+
+    buttonSize () {
+      const size = this.groupContext.size;
+      return size === 'default' ? undefined : size;
     },
 
     isSelected () {

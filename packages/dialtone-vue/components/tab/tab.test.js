@@ -206,22 +206,40 @@ describe('DtTab Tests', () => {
   describe('Interactivity Tests', () => {
     describe('Disabled state', () => {
       describe('Disabled by inject', () => {
-        it('should be disabled', () => {
+        beforeEach(() => {
           mockProvide = { groupContext: { ...MOCK_GROUP_CONTEXT, disabled: true } };
-
           updateWrapper();
+        });
 
-          expect(tab.attributes('disabled')).toBe('');
+        it('should have aria-disabled="true"', () => {
+          expect(tab.attributes('aria-disabled')).toBe('true');
+        });
+
+        it('should have d-btn--disabled class', () => {
+          expect(tab.classes()).toContain('d-btn--disabled');
+        });
+
+        it('should not have native disabled attribute', () => {
+          expect(tab.attributes('disabled')).toBeUndefined();
         });
       });
 
       describe('Disabled by prop', () => {
-        it('disabled attribute should be "true"', () => {
+        beforeEach(() => {
           mockProps = { disabled: true };
-
           updateWrapper();
+        });
 
-          expect(tab.attributes('disabled')).toBe('');
+        it('should have aria-disabled="true"', () => {
+          expect(tab.attributes('aria-disabled')).toBe('true');
+        });
+
+        it('should have d-btn--disabled class', () => {
+          expect(tab.classes()).toContain('d-btn--disabled');
+        });
+
+        it('should not have native disabled attribute', () => {
+          expect(tab.attributes('disabled')).toBeUndefined();
         });
       });
     });

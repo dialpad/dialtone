@@ -273,7 +273,7 @@ export default {
             panelId: el.getAttribute('aria-controls')?.replace('dt-panel-', ''),
             tabId: el.getAttribute('id')?.replace('dt-tab-', ''),
             isSelected: el.getAttribute('aria-selected') === 'true',
-            isDisabled: el.hasAttribute('disabled'),
+            isDisabled: el.getAttribute('aria-disabled') === 'true',
           });
         });
     },
@@ -286,31 +286,27 @@ export default {
       const index = this.getFocusedTabIndex();
       if (index === -1) return;
 
-      const nextIndex = this.findNextEnabledTab(index, -1);
-      if (nextIndex !== -1) this.selectFocusOnTab(nextIndex);
+      const nextIndex = this.findNextTab(index, -1);
+      this.selectFocusOnTab(nextIndex);
     },
 
     tabRight () {
       const index = this.getFocusedTabIndex();
       if (index === -1) return;
 
-      const nextIndex = this.findNextEnabledTab(index, 1);
-      if (nextIndex !== -1) this.selectFocusOnTab(nextIndex);
+      const nextIndex = this.findNextTab(index, 1);
+      this.selectFocusOnTab(nextIndex);
     },
 
-    findNextEnabledTab (fromIndex, direction) {
+    findNextTab (fromIndex, direction) {
       const len = this.tabs.length;
-      for (let i = 1; i <= len; i++) {
-        const candidate = (fromIndex + i * direction + len) % len;
-        if (!this.tabs[candidate].isDisabled) return candidate;
-      }
-      return -1;
+      return (fromIndex + direction + len) % len;
     },
 
     selectFocusOnTab (index) {
-      const { context, panelId } = this.tabs[index];
+      const { context, panelId, isDisabled } = this.tabs[index];
       context.focus();
-      if (this.activationMode === 'auto') {
+      if (this.activationMode === 'auto' && !isDisabled) {
         this.provideObj.selected = panelId;
         this.onChange();
       }
@@ -319,10 +315,11 @@ export default {
     selectTab (event) {
       if (this.isSameTabClicked()) return;
 
+      const index = this.getFocusedTabIndex();
+      if (this.tabs[index]?.isDisabled) return;
+
       this.$emit('before-change', event);
       if (event.defaultPrevented) return;
-
-      const index = this.getFocusedTabIndex();
 
       this.selectTabByIndex(index);
       this.onChange();
@@ -346,18 +343,11 @@ export default {
     },
 
     onHomeButton () {
-      const index = this.tabs.findIndex(tab => !tab.isDisabled);
-      if (index !== -1) this.selectFocusOnTab(index);
+      if (this.tabs.length) this.selectFocusOnTab(0);
     },
 
     onEndButton () {
-      const len = this.tabs.length;
-      for (let i = len - 1; i >= 0; i--) {
-        if (!this.tabs[i].isDisabled) {
-          this.selectFocusOnTab(i);
-          return;
-        }
-      }
+      if (this.tabs.length) this.selectFocusOnTab(this.tabs.length - 1);
     },
 
     isSameTabClicked () {

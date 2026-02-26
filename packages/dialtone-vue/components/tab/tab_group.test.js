@@ -317,24 +317,43 @@ describe('DtTabGroup Tests', () => {
         _setWrappers();
       });
 
-      it('should skip disabled tab on keyup right', async () => {
+      it('should land on disabled tab on keyup right', async () => {
+        returnFirstEl(tabs.at(0).vm.$el).focus();
+        await tabList.trigger('keyup.right');
+
+        expect(document.activeElement.id).toBe('dt-tab-3');
+        expect(tabs.at(0).attributes('aria-selected')).toBe('true');
+      });
+
+      it('should land on disabled tab on keyup left', async () => {
+        returnFirstEl(tabs.at(2).vm.$el).focus();
+        await tabList.trigger('keyup.left');
+
+        expect(document.activeElement.id).toBe('dt-tab-3');
+        expect(tabs.at(0).attributes('aria-selected')).toBe('true');
+      });
+
+      it('should not select disabled tab on enter', async () => {
         returnFirstEl(tabs.at(0).vm.$el).focus();
         await tabList.trigger('keyup.right');
         await tabList.trigger('keyup.enter');
 
-        expect(tabs.at(2).attributes('aria-selected')).toBe('true');
+        expect(tabs.at(0).attributes('aria-selected')).toBe('true');
+        expect(tabs.at(1).attributes('aria-selected')).toBe('false');
+        expect(wrapper.emitted('change')).toBeUndefined();
       });
 
-      it('should skip disabled tab on keyup left', async () => {
-        returnFirstEl(tabs.at(2).vm.$el).focus();
-        await tabList.trigger('keyup.left');
+      it('should not select disabled tab on space', async () => {
+        returnFirstEl(tabs.at(0).vm.$el).focus();
+        await tabList.trigger('keyup.right');
         await tabList.trigger('keyup.space');
 
         expect(tabs.at(0).attributes('aria-selected')).toBe('true');
+        expect(tabs.at(1).attributes('aria-selected')).toBe('false');
+        expect(wrapper.emitted('change')).toBeUndefined();
       });
 
-      it('should skip disabled tab on home', async () => {
-        // Disable first, enable second for this sub-test
+      it('should focus first tab on home even if disabled', async () => {
         const firstDisabledTabs = {
           render () {
             return h('div', {}, [
@@ -358,12 +377,12 @@ describe('DtTabGroup Tests', () => {
 
         returnFirstEl(tabs.at(2).vm.$el).focus();
         await tabList.trigger('keydown.home');
-        await tabList.trigger('keyup.enter');
 
+        expect(document.activeElement.id).toBe('dt-tab-1');
         expect(tabs.at(1).attributes('aria-selected')).toBe('true');
       });
 
-      it('should skip disabled tab on end', async () => {
+      it('should focus last tab on end even if disabled', async () => {
         const lastDisabledTabs = {
           render () {
             return h('div', {}, [
@@ -387,9 +406,52 @@ describe('DtTabGroup Tests', () => {
 
         returnFirstEl(tabs.at(0).vm.$el).focus();
         await tabList.trigger('keydown.end');
-        await tabList.trigger('keyup.enter');
 
-        expect(tabs.at(1).attributes('aria-selected')).toBe('true');
+        expect(document.activeElement.id).toBe('dt-tab-5');
+        expect(tabs.at(0).attributes('aria-selected')).toBe('true');
+      });
+    });
+
+    describe('When a tab is disabled in auto activation mode', () => {
+      const disabledTabComponents = {
+        render () {
+          return h('div', {}, [
+            h(DtTab, { id: '1', panelId: '2', selected: true }, () => 'First'),
+            h(DtTab, { id: '3', panelId: '4', disabled: true }, () => 'Second'),
+            h(DtTab, { id: '5', panelId: '6' }, () => 'Third'),
+          ]);
+        },
+      };
+
+      beforeEach(() => {
+        wrapper = mount(DtTabGroup, {
+          attachTo: document.body,
+          props: { label: 'area-label', activationMode: 'auto' },
+          slots: {
+            tabs: disabledTabComponents,
+            default: tabPanelComponents,
+          },
+        });
+        _setWrappers();
+      });
+
+      it('should focus disabled tab but not auto-select it', async () => {
+        returnFirstEl(tabs.at(0).vm.$el).focus();
+        await tabList.trigger('keyup.right');
+
+        expect(document.activeElement.id).toBe('dt-tab-3');
+        expect(tabs.at(0).attributes('aria-selected')).toBe('true');
+        expect(wrapper.emitted('change')).toBeUndefined();
+      });
+
+      it('should auto-select enabled tab', async () => {
+        returnFirstEl(tabs.at(0).vm.$el).focus();
+        await tabList.trigger('keyup.right');
+        await tabList.trigger('keyup.right');
+
+        expect(document.activeElement.id).toBe('dt-tab-5');
+        expect(tabs.at(2).attributes('aria-selected')).toBe('true');
+        expect(wrapper.emitted('change').length).toBe(1);
       });
     });
 
