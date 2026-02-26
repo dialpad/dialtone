@@ -747,7 +747,7 @@ export default {
      */
     showFontStyleButton: {
       type: Boolean,
-      default: true,
+      default: false,
     },
 
     /**
@@ -755,7 +755,7 @@ export default {
      */
     showFontSizeButton: {
       type: Boolean,
-      default: true,
+      default: false,
     },
 
     /**
@@ -763,7 +763,7 @@ export default {
      */
     showFontColorButton: {
       type: Boolean,
-      default: true,
+      default: false,
     },
 
     /**

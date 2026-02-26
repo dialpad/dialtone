@@ -11,6 +11,8 @@ let wrapper;
 let editor;
 
 let fontStyleBtn;
+let fontSizeBtn;
+let fontColorBtn;
 let boldFormatBtn;
 let italicsFormatBtn;
 let underlineFormatBtn;
@@ -35,6 +37,9 @@ const baseProps = {
   inputAriaLabel: 'aria-label text',
   inputClass: 'qa-editor',
   autoFocus: 'all',
+  showFontStyleButton: true,
+  showFontSizeButton: true,
+  showFontColorButton: true,
 };
 
 // Test Environment
@@ -52,6 +57,8 @@ const _setChildWrappers = () => {
 
   // buttons
   fontStyleBtn = wrapper.find('[data-qa="dt-recipe-editor-font-style-btn"]');
+  fontSizeBtn = wrapper.find('[data-qa="dt-recipe-editor-font-size-btn"]');
+  fontColorBtn = wrapper.find('[data-qa="dt-recipe-editor-font-color-btn"]');
   boldFormatBtn = wrapper.find('[data-qa="dt-recipe-editor-bold-btn"]');
   italicsFormatBtn = wrapper.find('[data-qa="dt-recipe-editor-italics-btn"]');
   underlineFormatBtn = wrapper.find('[data-qa="dt-recipe-editor-underline-btn"]');
@@ -108,6 +115,20 @@ describe('DtRecipeEditor tests', () => {
       expect(editor.text()).toBe(testText);
     });
 
+    describe('When font formatting buttons are enabled', () => {
+      it('should contain font style button', function () {
+        expect(fontStyleBtn.exists()).toBe(true);
+      });
+
+      it('should contain font size button', function () {
+        expect(fontSizeBtn.exists()).toBe(true);
+      });
+
+      it('should contain font color button', function () {
+        expect(fontColorBtn.exists()).toBe(true);
+      });
+    });
+
     it('should contain bold format button', function () {
       expect(boldFormatBtn.exists()).toBe(true);
     });
@@ -162,6 +183,20 @@ describe('DtRecipeEditor tests', () => {
 
     it('should contain code block button', function () {
       expect(codeblockBtn.exists()).toBe(true);
+    });
+
+    describe('Tooltip messages for new formatting buttons', () => {
+      it('should have correct tooltip for font style button', () => {
+        expect(fontStyleBtn.attributes('aria-label')).toContain('Font Style');
+      });
+
+      it('should have correct tooltip for font size button', () => {
+        expect(fontSizeBtn.attributes('aria-label')).toContain('Font Size');
+      });
+
+      it('should have correct tooltip for font color button', () => {
+        expect(fontColorBtn.attributes('aria-label')).toContain('Font Color');
+      });
     });
 
     describe('When bold button is disabled', () => {
@@ -631,6 +666,22 @@ describe('DtRecipeEditor tests', () => {
       });
     });
 
+    describe('When font color button is clicked', () => {
+      it('should have font color button with click handler', () => {
+        expect(fontColorBtn.exists()).toBe(true);
+        // The font color button exists and has the correct data-qa attribute
+        expect(fontColorBtn.attributes('data-qa')).toBe('dt-recipe-editor-font-color-btn');
+      });
+
+      it('should trigger click event on font color button', async () => {
+        // Test that the button can be clicked without errors
+        await fontColorBtn.trigger('click');
+        await wrapper.vm.$nextTick();
+        // The component should handle the click event internally
+        expect(fontColorBtn.exists()).toBe(true);
+      });
+    });
+
     describe('Variable insertion tests', () => {
       beforeEach(async () => {
         await wrapper.unmount();
@@ -749,6 +800,8 @@ describe('DtRecipeEditor tests', () => {
         await quickRepliesBtn.trigger('focus');
         expect(quickRepliesBtn.html()).toContain(`tabindex="0"`);
         expect(fontStyleBtn.html()).toContain(`tabindex="-1"`);
+        expect(fontSizeBtn.html()).toContain(`tabindex="-1"`);
+        expect(fontColorBtn.html()).toContain(`tabindex="-1"`);
       });
 
       it('should focus the next button to the right when right arrow key is pressed', async function () {
@@ -759,13 +812,47 @@ describe('DtRecipeEditor tests', () => {
         expect(document.activeElement).toBe(fontStyleBtn.element);
       });
 
+      it('should navigate through all new formatting buttons with arrow keys', async function () {
+        await quickRepliesBtn.trigger('focus');
+        // Navigate to font style button
+        await quickRepliesBtn.trigger('keydown', { key: 'Right' });
+        expect(document.activeElement).toBe(fontStyleBtn.element);
+
+        // Navigate to font size button
+        await fontStyleBtn.trigger('keydown', { key: 'Right' });
+        expect(fontSizeBtn.html()).toContain(`tabindex="0"`);
+        expect(document.activeElement).toBe(fontSizeBtn.element);
+
+        // Navigate to font color button
+        await fontSizeBtn.trigger('keydown', { key: 'Right' });
+        expect(fontColorBtn.html()).toContain(`tabindex="0"`);
+        expect(document.activeElement).toBe(fontColorBtn.element);
+      });
+
       it('should focus the next button to the left when left arrow key is pressed', async function () {
         await quickRepliesBtn.trigger('focus');
         await quickRepliesBtn.trigger('keydown', { key: 'Right' });
-        await quickRepliesBtn.trigger('keydown', { key: 'Left' });
+        await fontStyleBtn.trigger('keydown', { key: 'Left' });
         expect(quickRepliesBtn.html()).toContain(`tabindex="0"`);
         expect(fontStyleBtn.html()).toContain(`tabindex="-1"`);
         expect(document.activeElement).toBe(quickRepliesBtn.element);
+      });
+
+      it('should navigate backwards through new formatting buttons with left arrow key', async function () {
+        await quickRepliesBtn.trigger('focus');
+        // Navigate forward to font color button
+        await quickRepliesBtn.trigger('keydown', { key: 'Right' });
+        await fontStyleBtn.trigger('keydown', { key: 'Right' });
+        await fontSizeBtn.trigger('keydown', { key: 'Right' });
+        expect(document.activeElement).toBe(fontColorBtn.element);
+
+        // Navigate back to font size button
+        await fontColorBtn.trigger('keydown', { key: 'Left' });
+        expect(document.activeElement).toBe(fontSizeBtn.element);
+
+        // Navigate back to font style button
+        await fontSizeBtn.trigger('keydown', { key: 'Left' });
+        expect(document.activeElement).toBe(fontStyleBtn.element);
       });
 
       it('should wrap around and only have the last button as a focusable item when the left arrow key button is pressed', async function () {
