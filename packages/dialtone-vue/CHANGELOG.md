@@ -1,3 +1,10 @@
+# [3.206.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.205.0...dialtone-vue/v3.206.0) (2026-02-26)
+
+
+### Features
+
+* DP-176835 tiptap v3 migration ([#1067](https://github.com/dialpad/dialtone/issues/1067)) ([4cfaebd](https://github.com/dialpad/dialtone/commit/4cfaebdeb5dfb4c23e5ba3f1669da55e799d4b85))
+
 # [3.205.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.204.1...dialtone-vue/v3.205.0) (2026-02-24)
 
 

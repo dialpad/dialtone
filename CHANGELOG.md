@@ -1,3 +1,16 @@
+# [9.162.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.161.0...dialtone/v9.162.0) (2026-02-26)
+
+
+### Bug Fixes
+
+* **Lint:** NO-JIRA fix typo in recommend-typography-style message ([#1076](https://github.com/dialpad/dialtone/issues/1076)) ([0af0da8](https://github.com/dialpad/dialtone/commit/0af0da85f35454e94f35574e4325f99e86746dd0))
+
+
+### Features
+
+* DP-176835 tiptap v3 migration ([#1067](https://github.com/dialpad/dialtone/issues/1067)) ([4cfaebd](https://github.com/dialpad/dialtone/commit/4cfaebdeb5dfb4c23e5ba3f1669da55e799d4b85))
+* **Icon:** DP-177193 add font-size ([#1078](https://github.com/dialpad/dialtone/issues/1078)) ([85f87c4](https://github.com/dialpad/dialtone/commit/85f87c4bae2713e71c28bd9687a1061fc7bde6a6))
+
 # [9.161.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.160.1...dialtone/v9.161.0) (2026-02-24)
 
 
