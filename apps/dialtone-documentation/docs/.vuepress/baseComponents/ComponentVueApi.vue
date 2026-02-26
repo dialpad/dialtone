@@ -109,6 +109,7 @@ const docProps = componentDocs.find(f => isSameComponentName(f.displayName))
       defaultValue: resolveDefaultValue(item?.defaultValue?.value, item?.values),
       values: item?.values,
       required: item?.required,
+      deprecated: !!item?.tags?.deprecated,
     };
   });
 

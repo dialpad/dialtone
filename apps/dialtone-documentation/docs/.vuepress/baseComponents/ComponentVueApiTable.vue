@@ -40,7 +40,7 @@
         </thead>
         <tbody>
           <tr
-            v-for="({ name, description, type, defaultValue, values, required }) in sortedTableDataByName"
+            v-for="({ name, description, type, defaultValue, values, required, deprecated }) in sortedTableDataByName"
             :key="name"
             class="d-va-baseline"
           >
@@ -57,6 +57,14 @@
                 >
                   required
                 </div>
+                <span>
+                  <dt-badge
+                    v-if="deprecated"
+                    type="critical"
+                    kind="label"
+                    text="Deprecated"
+                  />
+                </span>
               </dt-stack>
             </th>
 
