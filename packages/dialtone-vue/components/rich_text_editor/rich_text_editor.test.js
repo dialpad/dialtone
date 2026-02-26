@@ -711,6 +711,50 @@ describe('DtRichTextEditor tests', () => {
       });
     });
 
+    describe('Mention hover functionality', () => {
+      const mentionData = {
+        id: 'john.doe',
+        name: 'John Doe',
+        avatarSrc: 'avatar.jpg',
+        contactKey: 'contact-123',
+      };
+
+      beforeEach(async () => {
+        await wrapper.setProps({
+          mentionSuggestion: { items: vi.fn(() => [mentionData]) },
+        });
+
+        const editorInstance = wrapper.vm.editor;
+        const mentionNode = editorInstance.schema.nodes.mention.create(mentionData);
+        editorInstance.view.dispatch(editorInstance.state.tr.insert(0, mentionNode));
+        await wrapper.vm.$nextTick();
+      });
+
+      describe('When the cursor enters a mention', () => {
+        it('should emit mention-hover event with mention data and mouse event', async () => {
+          const mentionLink = wrapper.find('a.d-link');
+          await mentionLink.trigger('mouseenter');
+
+          const emitted = wrapper.emitted('mention-hover');
+          expect(emitted).toBeTruthy();
+          expect(emitted[0][0]).toMatchObject(mentionData);
+          expect(emitted[0][0].event).toBeInstanceOf(MouseEvent);
+        });
+      });
+
+      describe('When the cursor leaves a mention', () => {
+        it('should emit mention-leave event with mention data and mouse event', async () => {
+          const mentionLink = wrapper.find('a.d-link');
+          await mentionLink.trigger('mouseleave');
+
+          const emitted = wrapper.emitted('mention-leave');
+          expect(emitted).toBeTruthy();
+          expect(emitted[0][0]).toMatchObject(mentionData);
+          expect(emitted[0][0].event).toBeInstanceOf(MouseEvent);
+        });
+      });
+    });
+
     describe('Channel click functionality', () => {
       describe('When a channel is clicked', () => {
         it('should emit channel-click event with channel data', async () => {
