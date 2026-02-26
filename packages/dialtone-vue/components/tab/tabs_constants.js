@@ -14,3 +14,7 @@ export const TAB_LIST_KIND_MODIFIERS = {
 export const TAB_LIST_IMPORTANCE_MODIFIERS = {
   borderless: 'd-tablist--no-border',
 };
+
+export const TAB_ACTIVATION_MODES = ['auto', 'manual'];
+
+export const TAB_GROUP_KINDS = ['default', 'muted'];

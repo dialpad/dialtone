@@ -294,6 +294,105 @@ describe('DtTabGroup Tests', () => {
       });
     });
 
+    describe('When a tab is disabled', () => {
+      const disabledTabComponents = {
+        render () {
+          return h('div', {}, [
+            h(DtTab, { id: '1', panelId: '2', selected: true }, () => 'First'),
+            h(DtTab, { id: '3', panelId: '4', disabled: true }, () => 'Second'),
+            h(DtTab, { id: '5', panelId: '6' }, () => 'Third'),
+          ]);
+        },
+      };
+
+      beforeEach(() => {
+        wrapper = mount(DtTabGroup, {
+          attachTo: document.body,
+          props: { label: 'area-label' },
+          slots: {
+            tabs: disabledTabComponents,
+            default: tabPanelComponents,
+          },
+        });
+        _setWrappers();
+      });
+
+      it('should skip disabled tab on keyup right', async () => {
+        returnFirstEl(tabs.at(0).vm.$el).focus();
+        await tabList.trigger('keyup.right');
+        await tabList.trigger('keyup.enter');
+
+        expect(tabs.at(2).attributes('aria-selected')).toBe('true');
+      });
+
+      it('should skip disabled tab on keyup left', async () => {
+        returnFirstEl(tabs.at(2).vm.$el).focus();
+        await tabList.trigger('keyup.left');
+        await tabList.trigger('keyup.space');
+
+        expect(tabs.at(0).attributes('aria-selected')).toBe('true');
+      });
+
+      it('should skip disabled tab on home', async () => {
+        // Disable first, enable second for this sub-test
+        const firstDisabledTabs = {
+          render () {
+            return h('div', {}, [
+              h(DtTab, { id: '1', panelId: '2', disabled: true }, () => 'First'),
+              h(DtTab, { id: '3', panelId: '4', selected: true }, () => 'Second'),
+              h(DtTab, { id: '5', panelId: '6' }, () => 'Third'),
+            ]);
+          },
+        };
+
+        wrapper.unmount();
+        wrapper = mount(DtTabGroup, {
+          attachTo: document.body,
+          props: { label: 'area-label' },
+          slots: {
+            tabs: firstDisabledTabs,
+            default: tabPanelComponents,
+          },
+        });
+        _setWrappers();
+
+        returnFirstEl(tabs.at(2).vm.$el).focus();
+        await tabList.trigger('keydown.home');
+        await tabList.trigger('keyup.enter');
+
+        expect(tabs.at(1).attributes('aria-selected')).toBe('true');
+      });
+
+      it('should skip disabled tab on end', async () => {
+        const lastDisabledTabs = {
+          render () {
+            return h('div', {}, [
+              h(DtTab, { id: '1', panelId: '2', selected: true }, () => 'First'),
+              h(DtTab, { id: '3', panelId: '4' }, () => 'Second'),
+              h(DtTab, { id: '5', panelId: '6', disabled: true }, () => 'Third'),
+            ]);
+          },
+        };
+
+        wrapper.unmount();
+        wrapper = mount(DtTabGroup, {
+          attachTo: document.body,
+          props: { label: 'area-label' },
+          slots: {
+            tabs: lastDisabledTabs,
+            default: tabPanelComponents,
+          },
+        });
+        _setWrappers();
+
+        returnFirstEl(tabs.at(0).vm.$el).focus();
+        await tabList.trigger('keydown.end');
+        await tabList.trigger('keyup.enter');
+
+        expect(tabs.at(1).attributes('aria-selected')).toBe('true');
+      });
+    });
+
     describe('When before-change prevents default event', () => {
       beforeEach(async () => {
         attrs = {
@@ -310,6 +409,45 @@ describe('DtTabGroup Tests', () => {
       it('Should prevent the change event', async () => {
         expect(wrapper.emitted('change')).toBeUndefined();
       });
+    });
+  });
+
+  describe('Automatic activation mode', () => {
+    beforeEach(() => {
+      props.activationMode = 'auto';
+      _mountWrapper();
+    });
+
+    it('should select tab on arrow right', async () => {
+      returnFirstEl(tabs.at(0).vm.$el).focus();
+      await tabList.trigger('keyup.right');
+
+      expect(tabs.at(1).attributes('aria-selected')).toBe('true');
+      expect(wrapper.emitted('change').length).toBe(1);
+    });
+
+    it('should select tab on arrow left', async () => {
+      returnFirstEl(tabs.at(0).vm.$el).focus();
+      await tabList.trigger('keyup.left');
+
+      expect(tabs.at(2).attributes('aria-selected')).toBe('true');
+      expect(wrapper.emitted('change').length).toBe(1);
+    });
+
+    it('should select first tab on home', async () => {
+      returnFirstEl(tabs.at(2).vm.$el).focus();
+      await tabList.trigger('keydown.home');
+
+      expect(tabs.at(0).attributes('aria-selected')).toBe('true');
+      expect(wrapper.emitted('change').length).toBe(1);
+    });
+
+    it('should select last tab on end', async () => {
+      returnFirstEl(tabs.at(0).vm.$el).focus();
+      await tabList.trigger('keydown.end');
+
+      expect(tabs.at(2).attributes('aria-selected')).toBe('true');
+      expect(wrapper.emitted('change').length).toBe(1);
     });
   });
 
@@ -399,6 +537,32 @@ describe('DtTabGroup Tests', () => {
           },
         );
       });
+    });
+  });
+
+  describe('Kind prop', () => {
+    it('should default to "default"', () => {
+      expect(wrapper.vm.provideObj.kind).toBe('default');
+    });
+
+    it('should pass kind through groupContext', async () => {
+      props.kind = 'muted';
+      _mountWrapper();
+
+      expect(wrapper.vm.provideObj.kind).toBe('muted');
+    });
+  });
+
+  describe('Outlined prop', () => {
+    it('should default to false', () => {
+      expect(wrapper.vm.provideObj.outlined).toBe(false);
+    });
+
+    it('should pass outlined through groupContext', () => {
+      props.outlined = true;
+      _mountWrapper();
+
+      expect(wrapper.vm.provideObj.outlined).toBe(true);
     });
   });
 

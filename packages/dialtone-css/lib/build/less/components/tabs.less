@@ -15,17 +15,31 @@
 //  ----------------------------------------------------------------------------
 @layer dialtone.components {
 .d-tab-neux {
- > .d-tablist {
-    padding-block-end: var(--dt-size-350);
+    inline-size: 100%;
 
-    &--no-border {
-        padding-block-end: 0;
+    [role="tabpanel"] {
+        box-shadow: none;
     }
- }
 
- .d-tablist--no-border {
-    border-block-end: 0;
- }
+    > .d-tablist {
+        --tablist-padding-bottom: var(--dt-size-400);
+
+        padding-block-end: var(--tablist-padding-bottom);
+
+        &--xs { --tablist-padding-bottom: var(--dt-size-350); }
+        &--sm { --tablist-padding-bottom: var(--dt-size-400); }
+        &--md { /* default */ }
+        &--lg { --tablist-padding-bottom: var(--dt-size-400); }
+        &--xl { --tablist-padding-bottom: var(--dt-size-450); }
+
+        &--no-border {
+            padding-block-end: 0;
+        }
+    }
+
+    .d-tablist--no-border {
+        border-block-end: 0;
+    }
 }
 
 .d-tablist {

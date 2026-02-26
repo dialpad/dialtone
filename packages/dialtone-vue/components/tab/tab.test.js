@@ -86,31 +86,124 @@ describe('DtTab Tests', () => {
     });
   });
 
+  describe('Button styling', () => {
+    let button;
+
+    describe('When kind is default', () => {
+      describe('When selected', () => {
+        beforeEach(() => {
+          mockProvide = { groupContext: { ...MOCK_GROUP_CONTEXT, selected: MOCK_PANEL_ID, kind: 'default' } };
+          updateWrapper();
+          button = wrapper.findComponent({ name: 'DtButton' });
+        });
+
+        it('should set kind to default', () => {
+          expect(button.props('kind')).toBe('default');
+        });
+
+        it('should set importance to clear', () => {
+          expect(button.props('importance')).toBe('clear');
+        });
+
+        it('should not set active', () => {
+          expect(button.props('active')).toBe(false);
+        });
+      });
+
+      describe('When unselected', () => {
+        beforeEach(() => {
+          mockProvide = { groupContext: { ...MOCK_GROUP_CONTEXT, selected: '', kind: 'default' } };
+          updateWrapper();
+          button = wrapper.findComponent({ name: 'DtButton' });
+        });
+
+        it('should set kind to muted', () => {
+          expect(button.props('kind')).toBe('muted');
+        });
+
+        it('should set importance to clear', () => {
+          expect(button.props('importance')).toBe('clear');
+        });
+      });
+    });
+
+    describe('When kind is muted', () => {
+      describe('When selected', () => {
+        beforeEach(() => {
+          mockProvide = { groupContext: { ...MOCK_GROUP_CONTEXT, selected: MOCK_PANEL_ID, kind: 'muted' } };
+          updateWrapper();
+          button = wrapper.findComponent({ name: 'DtButton' });
+        });
+
+        it('should set kind to muted', () => {
+          expect(button.props('kind')).toBe('muted');
+        });
+
+        it('should set active', () => {
+          expect(button.props('active')).toBe(true);
+        });
+      });
+
+      describe('When unselected', () => {
+        beforeEach(() => {
+          mockProvide = { groupContext: { ...MOCK_GROUP_CONTEXT, selected: '', kind: 'muted' } };
+          updateWrapper();
+          button = wrapper.findComponent({ name: 'DtButton' });
+        });
+
+        it('should set kind to muted', () => {
+          expect(button.props('kind')).toBe('muted');
+        });
+
+        it('should not set active', () => {
+          expect(button.props('active')).toBe(false);
+        });
+      });
+    });
+
+    describe('When outlined', () => {
+      describe('When selected', () => {
+        beforeEach(() => {
+          mockProvide = { groupContext: { ...MOCK_GROUP_CONTEXT, selected: MOCK_PANEL_ID, kind: 'default', outlined: true } };
+          updateWrapper();
+          button = wrapper.findComponent({ name: 'DtButton' });
+        });
+
+        it('should set importance to outlined', () => {
+          expect(button.props('importance')).toBe('outlined');
+        });
+
+        it('should not set active', () => {
+          expect(button.props('active')).toBe(false);
+        });
+      });
+
+      describe('When unselected', () => {
+        beforeEach(() => {
+          mockProvide = { groupContext: { ...MOCK_GROUP_CONTEXT, selected: '', kind: 'default', outlined: true } };
+          updateWrapper();
+          button = wrapper.findComponent({ name: 'DtButton' });
+        });
+
+        it('should not mute the kind', () => {
+          expect(button.props('kind')).toBe('default');
+        });
+
+        it('should set importance to clear', () => {
+          expect(button.props('importance')).toBe('clear');
+        });
+      });
+
+      it('should preserve muted kind when group kind is muted', () => {
+        mockProvide = { groupContext: { ...MOCK_GROUP_CONTEXT, selected: '', kind: 'muted', outlined: true } };
+        updateWrapper();
+
+        expect(wrapper.findComponent({ name: 'DtButton' }).props('kind')).toBe('muted');
+      });
+    });
+  });
+
   describe('Interactivity Tests', () => {
-    describe('Selected state', () => {
-      it('should use default kind and importance when selected', () => {
-        mockProvide = { groupContext: { ...MOCK_GROUP_CONTEXT, selected: MOCK_PANEL_ID } };
-
-        updateWrapper();
-
-        const button = wrapper.findComponent({ name: 'DtButton' });
-        expect(button.props('kind')).toBe('');
-        expect(button.props('importance')).toBe('');
-      });
-    });
-
-    describe('Unselected state', () => {
-      it('should use muted kind and clear importance when unselected', () => {
-        mockProvide = { groupContext: { ...MOCK_GROUP_CONTEXT, selected: '' } };
-
-        updateWrapper();
-
-        const button = wrapper.findComponent({ name: 'DtButton' });
-        expect(button.props('kind')).toBe('muted');
-        expect(button.props('importance')).toBe('clear');
-      });
-    });
-
     describe('Disabled state', () => {
       describe('Disabled by inject', () => {
         it('should be disabled', () => {

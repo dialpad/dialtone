@@ -18,13 +18,14 @@
       v-bind="tabListChildProps"
       role="tablist"
       :aria-label="label"
+      aria-orientation="horizontal"
       @keyup.left="tabLeft"
       @keyup.right="tabRight"
       @keyup.enter="selectTab"
       @keyup.space="selectTab"
       @click="selectTab"
-      @keydown.home="onHomeButton"
-      @keydown.end="onEndButton"
+      @keydown.home.prevent="onHomeButton"
+      @keydown.end.prevent="onEndButton"
     >
       <!-- @slot Slot for Tabs -->
       <slot name="tabs" />
@@ -40,6 +41,8 @@ import {
   TAB_LIST_KIND_MODIFIERS,
   TAB_LIST_IMPORTANCE_MODIFIERS,
   TAB_LIST_SIZE_MODIFIERS,
+  TAB_ACTIVATION_MODES,
+  TAB_GROUP_KINDS,
 } from './tabs_constants';
 
 /**
@@ -129,6 +132,40 @@ export default {
       type: Object,
       default: () => ({}),
     },
+
+    /**
+     * The visual style kind applied to tabs within this group.
+     * Maps to specific DtButton kind/importance combinations for selected/unselected states.
+     * @values default, muted
+     */
+    kind: {
+      type: String,
+      default: 'default',
+      validator (value) {
+        return TAB_GROUP_KINDS.includes(value);
+      },
+    },
+
+    /**
+     * If true, the selected tab renders with outlined importance instead of clear.
+     * @values true, false
+     */
+    outlined: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Controls whether tabs are selected on focus (auto) or on click/keypress (manual)
+     * @values auto, manual
+     */
+    activationMode: {
+      type: String,
+      default: 'manual',
+      validator (value) {
+        return TAB_ACTIVATION_MODES.includes(value);
+      },
+    },
   },
 
   emits: [
@@ -155,6 +192,8 @@ export default {
         selected: '', // the currently displayed tab id
         disabled: false, // disable group
         size: 'default',
+        kind: 'default',
+        outlined: false,
       },
 
       focusId: null,
@@ -184,6 +223,20 @@ export default {
       immediate: true,
       handler () {
         this.provideObj.size = this.size;
+      },
+    },
+
+    kind: {
+      immediate: true,
+      handler () {
+        this.provideObj.kind = this.kind;
+      },
+    },
+
+    outlined: {
+      immediate: true,
+      handler () {
+        this.provideObj.outlined = this.outlined;
       },
     },
   },
@@ -220,6 +273,7 @@ export default {
             panelId: el.getAttribute('aria-controls')?.replace('dt-panel-', ''),
             tabId: el.getAttribute('id')?.replace('dt-tab-', ''),
             isSelected: el.getAttribute('aria-selected') === 'true',
+            isDisabled: el.hasAttribute('disabled'),
           });
         });
     },
@@ -232,21 +286,34 @@ export default {
       const index = this.getFocusedTabIndex();
       if (index === -1) return;
 
-      const indexElement = index - 1 < 0 ? this.tabs.length - 1 : index - 1;
-      this.selectFocusOnTab(indexElement);
+      const nextIndex = this.findNextEnabledTab(index, -1);
+      if (nextIndex !== -1) this.selectFocusOnTab(nextIndex);
     },
 
     tabRight () {
       const index = this.getFocusedTabIndex();
       if (index === -1) return;
 
-      const indexElement = index + 1 > this.tabs.length - 1 ? 0 : index + 1;
-      this.selectFocusOnTab(indexElement);
+      const nextIndex = this.findNextEnabledTab(index, 1);
+      if (nextIndex !== -1) this.selectFocusOnTab(nextIndex);
+    },
+
+    findNextEnabledTab (fromIndex, direction) {
+      const len = this.tabs.length;
+      for (let i = 1; i <= len; i++) {
+        const candidate = (fromIndex + i * direction + len) % len;
+        if (!this.tabs[candidate].isDisabled) return candidate;
+      }
+      return -1;
     },
 
     selectFocusOnTab (index) {
-      const { context } = this.tabs[index];
+      const { context, panelId } = this.tabs[index];
       context.focus();
+      if (this.activationMode === 'auto') {
+        this.provideObj.selected = panelId;
+        this.onChange();
+      }
     },
 
     selectTab (event) {
@@ -279,13 +346,18 @@ export default {
     },
 
     onHomeButton () {
-      if (this.tabs.length === 0) return;
-      this.tabs[0]?.context?.focus();
+      const index = this.tabs.findIndex(tab => !tab.isDisabled);
+      if (index !== -1) this.selectFocusOnTab(index);
     },
 
     onEndButton () {
-      if (this.tabs.length === 0) return;
-      this.tabs[this.tabs.length - 1]?.context?.focus();
+      const len = this.tabs.length;
+      for (let i = len - 1; i >= 0; i--) {
+        if (!this.tabs[i].isDisabled) {
+          this.selectFocusOnTab(i);
+          return;
+        }
+      }
     },
 
     isSameTabClicked () {

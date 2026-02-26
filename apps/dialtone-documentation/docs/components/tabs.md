@@ -39,7 +39,7 @@ showHtmlWarning />
 
 ### Borderless
 
-Add a `d-tablist--no-border` to remove the bottom border of any tablist. Handy for small tablists and tablists serving as subtabs to a larger menu.
+Remove the bottom border of any tablist.
 
 <code-well-header>
   <div class="d-w100p">
@@ -51,6 +51,71 @@ Add a `d-tablist--no-border` to remove the bottom border of any tablist. Handy f
 :htmlCode='() => $refs.borderlessTabsExample'
 vueCode='
 <dt-tab-group borderless>
+  ...
+</dt-tab-group>
+'
+showHtmlWarning />
+
+### Muted
+
+All tabs render as muted buttons. The selected tab is distinguished with active styling.
+
+<code-well-header>
+  <div class="d-w100p">
+    <example-tabs ref="mutedTabsExample" kind="muted" />
+  </div>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.mutedTabsExample'
+vueCode='
+<dt-tab-group kind="muted">
+  <template #tabs>
+    <dt-tab id="1" panel-id="2" selected>First</dt-tab>
+    <dt-tab id="3" panel-id="4">Second</dt-tab>
+    <dt-tab id="5" panel-id="6">Third</dt-tab>
+  </template>
+</dt-tab-group>
+'
+showHtmlWarning />
+
+### Outlined
+
+The selected tab renders with an outlined border instead of a filled style.
+
+<code-well-header>
+  <div class="d-w100p">
+    <example-tabs ref="outlinedTabsExample" outlined />
+  </div>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.outlinedTabsExample'
+vueCode='
+<dt-tab-group outlined>
+  <template #tabs>
+    <dt-tab id="1" panel-id="2" selected>First</dt-tab>
+    <dt-tab id="3" panel-id="4">Second</dt-tab>
+    <dt-tab id="5" panel-id="6">Third</dt-tab>
+  </template>
+</dt-tab-group>
+'
+showHtmlWarning />
+
+### Muted Outlined
+
+Combines muted kind with outlined selected state.
+
+<code-well-header>
+  <div class="d-w100p">
+    <example-tabs ref="mutedOutlinedTabsExample" kind="muted" outlined />
+  </div>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.mutedOutlinedTabsExample'
+vueCode='
+<dt-tab-group kind="muted" outlined>
   <template #tabs>
     <dt-tab id="1" panel-id="2" selected>First</dt-tab>
     <dt-tab id="3" panel-id="4">Second</dt-tab>
@@ -65,24 +130,25 @@ showHtmlWarning />
 Add `disabled` to a specific tab.
 
 <code-well-header>
-<dt-tab-group>
-  <template #tabs>
-    <dt-tab id="1" panel-id="2" selected>First</dt-tab>
-    <dt-tab id="3" panel-id="4">Second</dt-tab>
-    <dt-tab id="5" panel-id="6">Third</dt-tab>
-    <dt-tab id="5" panel-id="6" disabled>Fourth</dt-tab>
-  </template>
-</dt-tab-group>
+  <dt-tab-group>
+    <template #tabs>
+      <dt-tab id="1" panel-id="2" selected>First</dt-tab>
+      <dt-tab id="3" panel-id="4">Second</dt-tab>
+      <dt-tab id="5" panel-id="6">Third</dt-tab>
+      <dt-tab id="7" panel-id="8" disabled>Fourth</dt-tab>
+    </template>
+  </dt-tab-group>
 </code-well-header>
 
 <code-example-tabs
 :htmlCode='() => $refs.disabledTabsExample'
 vueCode='
-<dt-tab-group disabled>
+<dt-tab-group>
   <template #tabs>
     <dt-tab id="1" panel-id="2" selected>First</dt-tab>
     <dt-tab id="3" panel-id="4">Second</dt-tab>
     <dt-tab id="5" panel-id="6">Third</dt-tab>
+    <dt-tab id="7" panel-id="8" disabled>Fourth</dt-tab>
   </template>
 </dt-tab-group>
 '
@@ -137,15 +203,107 @@ showHtmlWarning />
 
 ## Sizes
 
+<code-well-header>
+  <dt-stack gap="500" class="d-w100p">
+    <dt-tab-group size="xs">
+      <template #tabs>
+        <dt-tab id="1" panel-id="2" selected>
+          First
+        </dt-tab>
+        <dt-tab id="3" panel-id="4">
+          Second
+        </dt-tab>
+        <dt-tab id="5" panel-id="6">
+          Third
+        </dt-tab>
+      </template>
+    </dt-tab-group>
+    <dt-tab-group size="sm">
+      <template #tabs>
+        <dt-tab id="1" panel-id="2" selected>
+          First
+        </dt-tab>
+        <dt-tab id="3" panel-id="4">
+          Second
+        </dt-tab>
+        <dt-tab id="5" panel-id="6">
+          Third
+        </dt-tab>
+      </template>
+    </dt-tab-group>
+    <dt-tab-group>
+      <template #tabs>
+        <dt-tab id="1" panel-id="2" selected>
+          First
+        </dt-tab>
+        <dt-tab id="3" panel-id="4">
+          Second
+        </dt-tab>
+        <dt-tab id="5" panel-id="6">
+          Third
+        </dt-tab>
+      </template>
+    </dt-tab-group>
+    <dt-tab-group size="lg">
+      <template #tabs>
+        <dt-tab id="1" panel-id="2" selected>
+          First
+        </dt-tab>
+        <dt-tab id="3" panel-id="4">
+          Second
+        </dt-tab>
+        <dt-tab id="5" panel-id="6">
+          Third
+        </dt-tab>
+      </template>
+    </dt-tab-group>
+    <dt-tab-group size="xl">
+      <template #tabs>
+        <dt-tab id="1" panel-id="2" selected>
+          First
+        </dt-tab>
+        <dt-tab id="3" panel-id="4">
+          Second
+        </dt-tab>
+        <dt-tab id="5" panel-id="6">
+          Third
+        </dt-tab>
+      </template>
+    </dt-tab-group>
+  </dt-stack>
+</code-well-header>
+
 <code-example-tabs
+:htmlCode='() => $refs.sizeTabsExample'
 vueCode='
-<dt-tab-group size="{{ size }}">
+<dt-tab-group size="xs|sm|md|lg|xl">
   ...
 </dt-tab-group>
 '
 showHtmlWarning />
 
 ## Advanced Usages
+
+### Automatic Mode
+
+By default, tabs use manual activation — the user must press `Enter` or `Space` after focusing a tab to select it. Set `activation-mode="auto"` to select tabs immediately on focus via arrow keys, following the <a class="d-link" href="https://www.w3.org/WAI/ARIA/apg/patterns/tabs/" target="_blank">WAI-ARIA Tabs pattern</a>.
+
+<code-well-header>
+  <example-tabs ref="autoActivationExample" activation-mode="auto" />
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.autoActivationExample'
+vueCode='
+<dt-tab-group activation-mode="auto">
+  <template #tabs>
+    <dt-tab id="1" panel-id="2" selected>First</dt-tab>
+    <dt-tab id="3" panel-id="4">Second</dt-tab>
+    <dt-tab id="5" panel-id="6">Third</dt-tab>
+  </template>
+</dt-tab-group>
+'
+showHtmlWarning />
 
 ### Validation Before Changing Tabs
 

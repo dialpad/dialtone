@@ -4,8 +4,9 @@
     :class="[
       tabClass,
     ]"
-    :importance="isSelected ? '' : 'clear'"
-    :kind="isSelected ? '' : 'muted'"
+    :importance="buttonImportance"
+    :kind="buttonKind"
+    :active="buttonActive"
     :size="groupContext.size"
     role="tab"
     :aria-selected="`${isSelected}`"
@@ -126,6 +127,33 @@ export default {
 
     isSelected () {
       return this.groupContext.selected === this.panelId;
+    },
+
+    buttonKind () {
+      if (this.groupContext.outlined) {
+        return this.groupContext.kind === 'muted' ? 'muted' : 'default';
+      }
+      if (this.groupContext.kind === 'muted') {
+        return 'muted';
+      }
+      return this.isSelected ? 'default' : 'muted';
+    },
+
+    buttonImportance () {
+      if (this.groupContext.outlined && this.isSelected) {
+        return 'outlined';
+      }
+      return 'clear';
+    },
+
+    buttonActive () {
+      if (this.groupContext.outlined) {
+        return false;
+      }
+      if (this.groupContext.kind === 'muted') {
+        return this.isSelected;
+      }
+      return false;
     },
   },
 
