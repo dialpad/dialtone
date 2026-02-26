@@ -9,7 +9,9 @@ keywords: ["tab panel", "tab navigation", "d-tabs", "DtTabs", "dt-tabs", "segmen
 ---
 
 <code-well-header>
-  <example-tabs />
+  <div class="d-w100p">
+    <example-tabs />
+  </div>
 </code-well-header>
 
 ## Variants
@@ -17,7 +19,9 @@ keywords: ["tab panel", "tab navigation", "d-tabs", "DtTabs", "dt-tabs", "segmen
 ### Default
 
 <code-well-header>
-  <example-tabs />
+  <div class="d-w100p">
+    <example-tabs />
+  </div>
 </code-well-header>
 
 <code-example-tabs

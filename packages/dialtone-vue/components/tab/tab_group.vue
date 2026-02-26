@@ -1,6 +1,7 @@
 <template>
   <div
     data-qa="dt-tab-group"
+    class="d-tab-neux"
   >
     <!-- eslint-disable-next-line vuejs-accessibility/interactive-supports-focus -->
     <div
@@ -103,7 +104,7 @@ export default {
 
     /**
      * If provided, applies size styles to the tab group
-     * @values default, sm
+     * @values default, xs, sm, lg, xl
      */
     size: {
       type: String,
@@ -153,6 +154,7 @@ export default {
       provideObj: {
         selected: '', // the currently displayed tab id
         disabled: false, // disable group
+        size: 'default',
       },
 
       focusId: null,
@@ -175,6 +177,13 @@ export default {
       immediate: true,
       handler () {
         this.provideObj.selected = this.selected;
+      },
+    },
+
+    size: {
+      immediate: true,
+      handler () {
+        this.provideObj.size = this.size;
       },
     },
   },
@@ -203,7 +212,7 @@ export default {
     },
 
     getTabChildren () {
-      const tabs = Array.from(this.$refs.tabs.querySelectorAll('.d-tab'));
+      const tabs = Array.from(this.$refs.tabs.querySelectorAll('[role="tab"]'));
       return tabs
         .map(el => {
           return ({

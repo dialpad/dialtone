@@ -1,6 +1,5 @@
 import { mount } from '@vue/test-utils';
 import DtTab from './tab.vue';
-import { TAB_IMPORTANCE_MODIFIERS } from './tabs_constants';
 
 const MOCK_PANEL_ID = '2';
 const MOCK_LABEL = 'area-label';
@@ -58,10 +57,6 @@ describe('DtTab Tests', () => {
       expect(wrapper.exists()).toBe(true);
     });
 
-    it('should have default class', () => {
-      expect(tab.classes('d-tab')).toBe(true);
-    });
-
     it('should render the slot', () => {
       expect(tab.text()).toBe(MOCK_DEFAULT_SLOT);
     });
@@ -93,22 +88,26 @@ describe('DtTab Tests', () => {
 
   describe('Interactivity Tests', () => {
     describe('Selected state', () => {
-      it('tab classes should content selected class', () => {
+      it('should use default kind and importance when selected', () => {
         mockProvide = { groupContext: { ...MOCK_GROUP_CONTEXT, selected: MOCK_PANEL_ID } };
 
         updateWrapper();
 
-        expect(tab.classes(TAB_IMPORTANCE_MODIFIERS.selected)).toBe(true);
+        const button = wrapper.findComponent({ name: 'DtButton' });
+        expect(button.props('kind')).toBe('');
+        expect(button.props('importance')).toBe('');
       });
     });
 
     describe('Unselected state', () => {
-      it('tab classes should not content selected class', () => {
+      it('should use muted kind and clear importance when unselected', () => {
         mockProvide = { groupContext: { ...MOCK_GROUP_CONTEXT, selected: '' } };
 
         updateWrapper();
 
-        expect(tab.classes(TAB_IMPORTANCE_MODIFIERS.selected)).toBe(false);
+        const button = wrapper.findComponent({ name: 'DtButton' });
+        expect(button.props('kind')).toBe('muted');
+        expect(button.props('importance')).toBe('clear');
       });
     });
 

@@ -2,12 +2,11 @@
   <dt-button
     :id="`dt-tab-${id}`"
     :class="[
-      'd-tab',
-      {
-        [TAB_IMPORTANCE_MODIFIERS.selected]: isSelected,
-      },
       tabClass,
     ]"
+    :importance="isSelected ? '' : 'clear'"
+    :kind="isSelected ? '' : 'muted'"
+    :size="groupContext.size"
     role="tab"
     :aria-selected="`${isSelected}`"
     :aria-controls="`dt-panel-${panelId}`"
@@ -24,7 +23,6 @@
 </template>
 
 <script>
-import { TAB_IMPORTANCE_MODIFIERS } from './tabs_constants';
 import { DtButton } from '../button';
 
 /**
@@ -111,12 +109,6 @@ export default {
      */
     'click',
   ],
-
-  data () {
-    return {
-      TAB_IMPORTANCE_MODIFIERS,
-    };
-  },
 
   computed: {
     tabListeners () {
