@@ -282,6 +282,64 @@ vueCode='
 '
 showHtmlWarning />
 
+## Icon Support
+
+Use the `#icon` slot on `dt-tab` to add an icon. The slot provides `iconSize` to match the tab's size.
+
+<code-well-header>
+  <div class="d-w100p">
+    <dt-tab-group>
+      <template #tabs>
+        <dt-tab id="1" panel-id="2" selected>
+          <template #icon="{ iconSize }">
+            <dt-icon name="sun" :size="iconSize" />
+          </template>
+          First
+        </dt-tab>
+        <dt-tab id="3" panel-id="4">
+          <template #icon="{ iconSize }">
+            <dt-icon name="moon" :size="iconSize" />
+          </template>
+          Second
+        </dt-tab>
+        <dt-tab id="5" panel-id="6">
+          <template #icon="{ iconSize }">
+            <dt-icon name="mic" :size="iconSize" />
+          </template>
+          Third
+        </dt-tab>
+      </template>
+    </dt-tab-group>
+  </div>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-tab-group>
+  <template #tabs>
+    <dt-tab id="1" panel-id="2" selected>
+      <template #icon="{ iconSize }">
+        <dt-icon name="sun" :size="iconSize" />
+      </template>
+      First
+    </dt-tab>
+    <dt-tab id="3" panel-id="4">
+      <template #icon="{ iconSize }">
+        <dt-icon name="moon" :size="iconSize" />
+      </template>
+      Second
+    </dt-tab>
+    <dt-tab id="5" panel-id="6">
+      <template #icon="{ iconSize }">
+        <dt-icon name="mic" :size="iconSize" />
+      </template>
+      Third
+    </dt-tab>
+  </template>
+</dt-tab-group>
+'
+showHtmlWarning />
+
 ## Advanced Usages
 
 ### Automatic Mode

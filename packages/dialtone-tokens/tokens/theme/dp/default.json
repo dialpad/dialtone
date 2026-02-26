@@ -3300,7 +3300,7 @@
           "type": "dimension"
         },
         "sm": {
-          "value": "{size.radius.400}",
+          "value": "{size.radius.350}",
           "type": "dimension"
         },
         "md": {
@@ -3324,7 +3324,7 @@
         "description": "Line height for extra small inputs (e.g. input and textarea)"
       },
       "sm": {
-        "value": "{font.lineHeight.200}",
+        "value": "{font.lineHeight.300}",
         "type": "dimension",
         "description": "Line height for small inputs (e.g. input and textarea)"
       },
@@ -3352,7 +3352,7 @@
           "description": "Font size for extra small inputs (e.g. input and textarea)"
         },
         "sm": {
-          "value": "{font.size.100}",
+          "value": "{font.size.125}",
           "type": "dimension",
           "description": "Font size for small inputs (e.g. input and textarea)"
         },
@@ -3367,7 +3367,7 @@
           "description": "Font size for large inputs (e.g. input and textarea)"
         },
         "xl": {
-          "value": "{font.size.400}",
+          "value": "{font.size.350}",
           "type": "dimension",
           "description": "Font size for extra large inputs (e.g. input and textarea)"
         }

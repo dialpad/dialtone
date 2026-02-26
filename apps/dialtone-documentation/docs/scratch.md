@@ -6,21 +6,283 @@ layout: Blank
 
 <script setup>
 import { ref } from 'vue';
+import { useThemeManager } from '@composables/useThemeManager';
+
+const {
+  currentMode,
+  currentContrast,
+  currentModeIconName,
+  setMode,
+  setContrast,
+} = useThemeManager();
+
+const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
 const borderless = ref(false);
 const outlined = ref(false);
 const muted = ref(false);
-const showIcon = ref(false);
+const showIcon = ref(true);
 const size = ref('md');
 const selectOnFocus = ref(false);
+const isDisabled = ref(false);
 </script>
 
 <dt-stack class="d-p32" gap="600">
+  <dt-stack direction="row" gap="400">
+    <dt-text as="h1" kind="headline" size="2xl">
+      Scratchpad
+    </dt-text>
+    <dt-dropdown navigation-type="arrow-keys" placement="bottom-start">
+      <template #anchor>
+        <dt-button
+          v-dt-tooltip:bottom="`Mode: ${capitalize(currentMode)}`"
+          importance="outlined"
+          size="sm"
+          kind="muted"
+          icon-position="right"
+          class="dialtone-shell-btn"
+        >
+          <template #icon="{ iconSize }">
+            <dt-icon :name="currentModeIconName" :size="iconSize" />
+          </template>
+        </dt-button>
+      </template>
+      <template #list>
+        <dt-list-item-group
+          heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+          heading="Mode"
+        >
+          <dt-list-item
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setMode('system')"
+          >
+            System
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentMode !== 'system' }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+          <dt-list-item
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setMode('light')"
+          >
+            Light
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentMode !== 'light' }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+          <dt-list-item
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setMode('dark')"
+          >
+            Dark
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentMode !== 'dark' }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+        </dt-list-item-group>
+        <dt-dropdown-separator />
+        <dt-list-item-group
+          heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+          heading="Contrast"
+        >
+          <dt-list-item
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setContrast('default')"
+          >
+            Default
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentContrast !== 'default' }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+          <dt-list-item
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setContrast('high')"
+          >
+            High
+            <template #right>
+              <dt-icon :class="{ 'd-o0': currentContrast !== 'high' }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+        </dt-list-item-group>
+      </template>
+    </dt-dropdown>
+  </dt-stack>
+  <dt-stack gap="500">
+    <dt-text as="h1" kind="headline" size="xl">
+      Disabled Button
+    </dt-text>
+    <dt-text as="p" kind="body" size="lg">
+      Not just a matter of applying opacity to whole button, but w/ combination of `color-mix()` and tweaking existing DtButton css variables via `oklch()` of specific properties – separate opacity and saturation for border, bgc, fc, etc.
+    </dt-text>
+    <dt-checkbox v-model="isDisabled">Disabled</dt-checkbox>
+    <dt-stack gap="400" ref="disabledAll">
+      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+        <dt-button :disabled="isDisabled"> Place Call <template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template></dt-button>
+        <dt-button :disabled="isDisabled" importance="outlined"> Place Call <template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template></dt-button>
+        <dt-button :disabled="isDisabled" importance="clear"> Place Call <template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template></dt-button>
+      </dt-stack>
+      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+        <dt-button :disabled="isDisabled" kind="danger"> Place Call <template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template></dt-button>
+        <dt-button :disabled="isDisabled" kind="danger" importance="outlined"> Place Call <template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template></dt-button>
+        <dt-button :disabled="isDisabled" kind="danger" importance="clear"> Place Call <template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template></dt-button>
+      </dt-stack>
+      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+        <dt-button :disabled="isDisabled" kind="positive">Place Call<template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template></dt-button>
+        <dt-button :disabled="isDisabled" kind="positive" importance="outlined">Place Call<template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template></dt-button>
+        <dt-button :disabled="isDisabled" kind="positive" importance="clear">Place Call<template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template></dt-button>
+      </dt-stack>
+      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+        <dt-button :disabled="isDisabled" kind="muted" importance="clear"> Place Call <template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template></dt-button>
+        <dt-button :disabled="isDisabled" kind="muted" importance="outlined"> Place Call <template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template></dt-button>
+      </dt-stack>
+    </dt-stack>
+  </dt-stack>
+  <dt-stack gap="500">
+    <dt-text as="h1" kind="headline" size="xl">
+      Sizing update: Button/Input/Select
+    </dt-text>
+    <dt-stack direction="row">
+      <dt-select-menu
+        size="xs"
+        :options="[
+              { value: ``, label: `Please select one` },
+              { value: `1`, label: `Option 1` },
+              { value: `2`, label: `Option 2` },
+              { value: `3`, label: `Option 3` },
+            ]"
+        :model-value="modelValue"
+        @input="onInput"
+        @change="onChange"
+      />
+      <dt-input type="text" placeholder="Placeholder" size="xs" />
+      <dt-button
+        icon-position="left"
+        kind="default"
+        importance="primary"
+        size="xs"
+      >
+        <template #icon="{ iconSize }">
+          <dt-icon name="sun" :size="iconSize" />
+        </template>
+        Button
+      </dt-button>
+    </dt-stack>
+    <dt-stack direction="row">
+      <dt-select-menu
+        size="sm"
+        :options="[
+              { value: ``, label: `Please select one` },
+              { value: `1`, label: `Option 1` },
+              { value: `2`, label: `Option 2` },
+              { value: `3`, label: `Option 3` },
+            ]"
+        :model-value="modelValue"
+        @input="onInput"
+        @change="onChange"
+      />
+      <dt-input type="text" placeholder="Placeholder" size="sm" />
+      <dt-button
+        icon-position="left"
+        kind="default"
+        importance="primary"
+        size="sm"
+      >
+        <template #icon="{ iconSize }">
+          <dt-icon name="sun" :size="iconSize" />
+        </template>
+        Button
+      </dt-button>
+    </dt-stack>
+    <dt-stack direction="row">
+      <dt-select-menu
+        size="md"
+        :options="[
+              { value: ``, label: `Please select one` },
+              { value: `1`, label: `Option 1` },
+              { value: `2`, label: `Option 2` },
+              { value: `3`, label: `Option 3` },
+            ]"
+        :model-value="modelValue"
+        @input="onInput"
+        @change="onChange"
+      />
+      <dt-input type="text" placeholder="Placeholder" size="md" />
+      <dt-button
+        icon-position="left"
+        kind="default"
+        importance="primary"
+        size="md"
+      >
+        <template #icon="{ iconSize }">
+          <dt-icon name="sun" :size="iconSize" />
+        </template>
+        Button
+      </dt-button>
+    </dt-stack>
+    <dt-stack direction="row">
+      <dt-select-menu
+        size="lg"
+        :options="[
+              { value: ``, label: `Please select one` },
+              { value: `1`, label: `Option 1` },
+              { value: `2`, label: `Option 2` },
+              { value: `3`, label: `Option 3` },
+            ]"
+        :model-value="modelValue"
+        @input="onInput"
+        @change="onChange"
+      />
+      <dt-input type="text" placeholder="Placeholder" size="lg" />
+      <dt-button
+        icon-position="left"
+        kind="default"
+        importance="primary"
+        size="lg"
+      >
+        <template #icon="{ iconSize }">
+          <dt-icon name="sun" :size="iconSize" />
+        </template>
+        Button
+      </dt-button>
+    </dt-stack>
+    <dt-stack direction="row">
+      <dt-select-menu
+        size="xl"
+        :options="[
+              { value: ``, label: `Please select one` },
+              { value: `1`, label: `Option 1` },
+              { value: `2`, label: `Option 2` },
+              { value: `3`, label: `Option 3` },
+            ]"
+        :model-value="modelValue"
+        @input="onInput"
+        @change="onChange"
+      />
+      <dt-input type="text" placeholder="Placeholder" size="xl" />
+      <dt-button
+        icon-position="left"
+        kind="default"
+        importance="primary"
+        size="xl"
+      >
+        <template #icon="{ iconSize }">
+          <dt-icon name="sun" :size="iconSize" />
+        </template>
+        Button
+      </dt-button>
+    </dt-stack>
+  </dt-stack>
   <dt-stack gap="500">
     <dt-text as="h1" kind="headline" size="xl">
       Tabs
     </dt-text>
     <dt-text as="p" kind="body" size="lg">
-      Just straight up refactor to use DtButton instead of custom markup/style. Use mix of DtButton variants depending on `active`.
+      Just straight up refactor to use DtButton instead of custom markup/style. Use mix of DtButton variants depending on `active`. Uses all DtButton sizes (currently at least).
     </dt-text>
     <dt-stack gap="500" direction="row">
       <dt-checkbox v-model="borderless">
