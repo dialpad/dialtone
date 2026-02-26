@@ -1,30 +1,32 @@
 <template>
   <div class="dialtone-wall">
     <template v-for="page in pages" :key="page.title">
-      <component
-        :is="cardElType(page)"
-        :to="page.link"
-        class="dialtone-wall__item"
-      >
-        <div v-if="page.thumb" class="dialtone-wall__image">
-          <svg-loader class="dialtone-wall__thumb" :name="page.fileName" />
-        </div>
-        <div class="dialtone-wall__details">
-          <div class="dialtone-wall__title">
-            <span class="dialtone-wall__title-text">{{ pageTitle(page) }}</span>
-            <span
-              v-if="page.status"
-              class="d-badge d-tt-capitalize"
-              :class="badgeKindClass(page.status)"
-            >
-              {{ page.status }}
-            </span>
+      <template v-if="page.status !== 'deprecated'">
+        <component
+          :is="cardElType(page)"
+          :to="page.link"
+          class="dialtone-wall__item"
+        >
+          <div v-if="page.thumb" class="dialtone-wall__image">
+            <svg-loader class="dialtone-wall__thumb" :name="page.fileName" />
           </div>
-          <div class="dialtone-wall__description">
-            {{ page.description }}
+          <div class="dialtone-wall__details">
+            <div class="dialtone-wall__title">
+              <span class="dialtone-wall__title-text">{{ pageTitle(page) }}</span>
+              <span
+                v-if="page.status"
+                class="d-badge d-tt-capitalize"
+                :class="badgeKindClass(page.status)"
+              >
+                {{ page.status }}
+              </span>
+            </div>
+            <div class="dialtone-wall__description">
+              {{ page.description }}
+            </div>
           </div>
-        </div>
-      </component>
+        </component>
+      </template>
     </template>
   </div>
 </template>
