@@ -131,6 +131,28 @@
             border-radius: var(--tab-border-radius);
         }
     }
+
+    .d-tablist--lg & {
+        --tab-padding-x: calc(var(--dt-size-500) - var(--dt-size-border-100));
+        --tab-padding-y: calc((var(--dt-size-400) + var(--dt-size-200)) - var(--dt-size-border-100));
+        --tab-border-radius: var(--dt-button-size-radius-lg);
+        --tab-font-style: var(--dt-typography-button-lg);
+
+        .d-tablist--no-border &:not(.d-tab--selected) {
+            border-radius: var(--tab-border-radius);
+        }
+    }
+
+    .d-tablist--xl & {
+        --tab-padding-x: calc(var(--dt-size-500) - var(--dt-size-border-100));
+        --tab-padding-y: calc(var(--dt-size-450) - var(--dt-size-border-100));
+        --tab-border-radius: var(--dt-button-size-radius-xl);
+        --tab-font-style: var(--dt-typography-button-xl);
+
+        .d-tablist--no-border &:not(.d-tab--selected) {
+            border-radius: var(--tab-border-radius);
+        }
+    }
 }
 
 //  ============================================================================

@@ -83,8 +83,8 @@ export default {
     },
 
     /**
-     * @ignore
      * If true, applies inverted styles to the tab group
+     * @deprecated
      * @values true, false
      */
     inverted: {
