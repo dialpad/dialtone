@@ -868,7 +868,6 @@ export default {
 
       currentFontColor: undefined,
       showLinkInput: false,
-      showFontStyleDropdown: false,
       fontStyleSearch: '',
       linkInput: '',
       currentButtonRefIndex: 0,
@@ -1375,13 +1374,11 @@ export default {
     },
 
     onFontSizeSelect (fontSize) {
-      // TODO: requires tiptap V3 for support
       this.$refs.richTextEditor?.editor?.chain().focus().setFontSize(fontSize).run();
       this.$refs.richTextEditor?.editor?.commands.focus();
     },
 
     isCurrentFontSize (fontSize) {
-      // TODO: requires tiptap V3 for support
       if (!fontSize) {
         return !this.$refs.richTextEditor?.editor?.getAttributes('textStyle')?.fontSize;
       }
