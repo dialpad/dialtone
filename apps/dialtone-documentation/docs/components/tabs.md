@@ -20,42 +20,19 @@ keywords: ["tab panel", "tab navigation", "d-tabs", "DtTabs", "dt-tabs", "segmen
 
 <code-well-header>
   <div class="d-w100p">
-    <example-tabs />
+    <example-tabs ref="defaultTabsExample" />
   </div>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-tablist" role="tablist" aria-label="Label Example Group" tabindex="0">
-  <button id="base-tab-0" class="d-tab d-tab--selected" role="tab" aria-selected="true" aria-controls="base-panel-0" tabindex="0">First tab </button>
-  <button id="base-tab-1" class="d-tab" role="tab" aria-selected="false" aria-controls="base-panel-1" tabindex="-1">Second tab </button>
-  <button id="base-tab-2" class="d-tab" role="tab" aria-selected="false" aria-controls="base-panel-2" tabindex="-1">Third tab </button>
-</div>
-'
+:htmlCode='() => $refs.defaultTabsExample'
 vueCode='
 <dt-tab-group>
   <template #tabs>
-    <dt-tab id="1" panel-id="2" selected>
-      First
-    </dt-tab>
-    <dt-tab id="3" panel-id="4">
-      Second
-    </dt-tab>
-    <dt-tab id="5`" panel-id="6">
-      Third
-    </dt-tab>
+    <dt-tab id="1" panel-id="2" selected>First</dt-tab>
+    <dt-tab id="3" panel-id="4">Second</dt-tab>
+    <dt-tab id="5" panel-id="6">Third</dt-tab>
   </template>
-  <div>
-    <dt-tab-panel id="2" tab-id="1">
-      <p>First Panel</p>
-    </dt-tab-panel>
-    <dt-tab-panel id="4" tab-id="3">
-      <p>Second Panel</p>
-    </dt-tab-panel>
-    <dt-tab-panel id="6" tab-id="5">
-      <p>Third Panel</p>
-    </dt-tab-panel>
-  </div>
 </dt-tab-group>
 '
 showHtmlWarning />
@@ -65,42 +42,67 @@ showHtmlWarning />
 Add a `d-tablist--no-border` to remove the bottom border of any tablist. Handy for small tablists and tablists serving as subtabs to a larger menu.
 
 <code-well-header>
-  <example-tabs borderless />
+  <div class="d-w100p">
+    <example-tabs ref="borderlessTabsExample" borderless />
+  </div>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-tablist d-tablist--no-border" role="tablist" aria-label="Label Example Group" tabindex="0">
-  <button id="base-tab-0" class="d-tab d-tab--selected" role="tab" aria-selected="true" aria-controls="base-panel-0" tabindex="0">First tab </button>
-  <button id="base-tab-1" class="d-tab" role="tab" aria-selected="false" aria-controls="base-panel-1" tabindex="-1">Second tab </button>
-  <button id="base-tab-2" class="d-tab" role="tab" aria-selected="false" aria-controls="base-panel-2" tabindex="-1">Third tab </button>
-</div>
-'
+:htmlCode='() => $refs.borderlessTabsExample'
 vueCode='
-<dt-tab-group :borderless="true">
+<dt-tab-group borderless>
   <template #tabs>
-    <dt-tab id="1" panel-id="2" selected>
-      First
-    </dt-tab>
-    <dt-tab id="3" panel-id="4">
-      Second
-    </dt-tab>
-    <dt-tab id="5`" panel-id="6">
-      Third
-    </dt-tab>
+    <dt-tab id="1" panel-id="2" selected>First</dt-tab>
+    <dt-tab id="3" panel-id="4">Second</dt-tab>
+    <dt-tab id="5" panel-id="6">Third</dt-tab>
   </template>
+</dt-tab-group>
+'
+showHtmlWarning />
 
-  <div>
-    <dt-tab-panel id="2" tab-id="1">
-      <p>First Panel</p>
-    </dt-tab-panel>
-    <dt-tab-panel id="4" tab-id="3">
-      <p>Second Panel</p>
-    </dt-tab-panel>
-    <dt-tab-panel id="6" tab-id="5">
-      <p>Third Panel</p>
-    </dt-tab-panel>
-  </div>
+### Disabled
+
+Add `disabled` to a specific tab.
+
+<code-well-header>
+<dt-tab-group>
+  <template #tabs>
+    <dt-tab id="1" panel-id="2" selected>First</dt-tab>
+    <dt-tab id="3" panel-id="4">Second</dt-tab>
+    <dt-tab id="5" panel-id="6">Third</dt-tab>
+    <dt-tab id="5" panel-id="6" disabled>Fourth</dt-tab>
+  </template>
+</dt-tab-group>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.disabledTabsExample'
+vueCode='
+<dt-tab-group disabled>
+  <template #tabs>
+    <dt-tab id="1" panel-id="2" selected>First</dt-tab>
+    <dt-tab id="3" panel-id="4">Second</dt-tab>
+    <dt-tab id="5" panel-id="6">Third</dt-tab>
+  </template>
+</dt-tab-group>
+'
+showHtmlWarning />
+
+Add `disabled` to the tab group to disable all.
+
+<code-well-header>
+  <example-tabs ref="disabledTabsExample" disabled />
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.disabledTabsExample'
+vueCode='
+<dt-tab-group disabled>
+  <template #tabs>
+    <dt-tab id="1" panel-id="2" selected>First</dt-tab>
+    <dt-tab id="3" panel-id="4">Second</dt-tab>
+    <dt-tab id="5" panel-id="6">Third</dt-tab>
+  </template>
 </dt-tab-group>
 '
 showHtmlWarning />
@@ -133,131 +135,12 @@ vueCode='
 '
 showHtmlWarning />
 
-### Disabled
-
-<code-well-header>
-  <example-tabs disabled />
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div class="d-tablist" role="tablist" aria-label="Label Example Group" tabindex="0">
-  <button id="base-tab-0" class="d-tab d-tab--selected" role="tab" disabled aria-selected="true" aria-controls="base-panel-0" tabindex="0">First tab </button>
-  <button id="base-tab-1" class="d-tab" role="tab" disabled aria-selected="false" aria-controls="base-panel-1" tabindex="-1">Second tab </button>
-  <button id="base-tab-2" class="d-tab" role="tab" disabled aria-selected="false" aria-controls="base-panel-2" tabindex="-1">Third tab </button>
-</div>
-'
-vueCode='
-<dt-tab-group :disabled="true">
-  <template #tabs>
-    <dt-tab id="1" panel-id="2" selected>
-      First
-    </dt-tab>
-    <dt-tab id="3" panel-id="4" disabled>
-      Second
-    </dt-tab>
-    <dt-tab id="5`" panel-id="6">
-      Third
-    </dt-tab>
-  </template>
-
-  <div>
-    <dt-tab-panel id="2" tab-id="1">
-      <p>First Panel</p>
-    </dt-tab-panel>
-    <dt-tab-panel id="4" tab-id="3">
-      <p>Second Panel</p>
-    </dt-tab-panel>
-    <dt-tab-panel id="6" tab-id="5">
-      <p>Third Panel</p>
-    </dt-tab-panel>
-  </div>
-</dt-tab-group>
-'
-/>
-
 ## Sizes
 
-### Default
-
-<code-well-header>
-  <example-tabs />
-</code-well-header>
-
 <code-example-tabs
-htmlCode='
-<div class="d-tablist" role="tablist" aria-label="Label Example Group" tabindex="0">
-  <button id="base-tab-0" class="d-tab d-tab--selected" role="tab" aria-selected="true" aria-controls="base-panel-0" tabindex="0">First tab </button>
-  <button id="base-tab-1" class="d-tab" role="tab" aria-selected="false" aria-controls="base-panel-1" tabindex="-1">Second tab </button>
-  <button id="base-tab-2" class="d-tab" role="tab" aria-selected="false" aria-controls="base-panel-2" tabindex="-1">Third tab </button>
-</div>
-'
 vueCode='
-<dt-tab-group>
-  <template #tabs>
-    <dt-tab id="1" panel-id="2" selected>
-      First
-    </dt-tab>
-    <dt-tab id="3" panel-id="4">
-      Second
-    </dt-tab>
-    <dt-tab id="5`" panel-id="6">
-      Third
-    </dt-tab>
-  </template>
-  <div>
-    <dt-tab-panel id="2" tab-id="1">
-      <p>First Panel</p>
-    </dt-tab-panel>
-    <dt-tab-panel id="4" tab-id="3">
-      <p>Second Panel</p>
-    </dt-tab-panel>
-    <dt-tab-panel id="6" tab-id="5">
-      <p>Third Panel</p>
-    </dt-tab-panel>
-  </div>
-</dt-tab-group>
-'
-showHtmlWarning />
-
-### Small
-
-<code-well-header>
-  <example-tabs size="sm" />
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div class="d-tablist d-tablist--sm" role="tablist" aria-label="Label Example Group" tabindex="0">
-  <button id="base-tab-0" class="d-tab d-tab--selected" role="tab" aria-selected="true" aria-controls="base-panel-0" tabindex="0">First tab </button>
-  <button id="base-tab-1" class="d-tab" role="tab" aria-selected="false" aria-controls="base-panel-1" tabindex="-1">Second tab </button>
-  <button id="base-tab-2" class="d-tab" role="tab" aria-selected="false" aria-controls="base-panel-2" tabindex="-1">Third tab </button>
-</div>'
-vueCode='
-<dt-tab-group size="sm">
-  <template #tabs>
-    <dt-tab id="1" panel-id="2" selected>
-      First
-    </dt-tab>
-    <dt-tab id="3" panel-id="4">
-      Second
-    </dt-tab>
-    <dt-tab id="5`" panel-id="6">
-      Third
-    </dt-tab>
-  </template>
-
-  <div>
-    <dt-tab-panel id="2" tab-id="1">
-      <p>First Panel</p>
-    </dt-tab-panel>
-    <dt-tab-panel id="4" tab-id="3">
-      <p>Second Panel</p>
-    </dt-tab-panel>
-    <dt-tab-panel id="6" tab-id="5">
-      <p>Third Panel</p>
-    </dt-tab-panel>
-  </div>
+<dt-tab-group size="{{ size }}">
+  ...
 </dt-tab-group>
 '
 showHtmlWarning />
@@ -269,44 +152,17 @@ showHtmlWarning />
 If you need to do some validation before changing tabs, you can use the `before-change` event. If the event handler is prevented, the tab change will be cancelled.
 
 <code-well-header>
-  <example-tabs validate />
+  <example-tabs ref="validateTabsExample" validate />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-tablist d-tablist--sm" role="tablist" aria-label="Label Example Group" tabindex="0">
-  <button id="base-tab-0" class="d-tab d-tab--selected" role="tab" aria-selected="true" aria-controls="base-panel-0" tabindex="0">First tab </button>
-  <button id="base-tab-1" class="d-tab" role="tab" aria-selected="false" aria-controls="base-panel-1" tabindex="-1">Second tab </button>
-  <button id="base-tab-2" class="d-tab" role="tab" aria-selected="false" aria-controls="base-panel-2" tabindex="-1">Third tab </button>
-</div>'
+:htmlCode='() => $refs.validateTabsExample'
 vueCode='
-<dt-tab-group
-  size="sm"
-  @before-change="confirmBeforeLeave"
->
+<dt-tab-group @before-change="confirmBeforeLeave">
   <template #tabs>
-    <dt-tab id="1" panel-id="2" selected>
-      First
-    </dt-tab>
-    <dt-tab id="3" panel-id="4">
-      Second
-    </dt-tab>
-    <dt-tab id="5`" panel-id="6">
-      Third
-    </dt-tab>
-  </template>
-  <template #default>
-    <div>
-      <dt-tab-panel id="2" tab-id="1">
-        <p>First Panel</p>
-      </dt-tab-panel>
-      <dt-tab-panel id="4" tab-id="3">
-        <p>Second Panel</p>
-      </dt-tab-panel>
-      <dt-tab-panel id="6" tab-id="5">
-        <p>Third Panel</p>
-      </dt-tab-panel>
-    </div>
+    <dt-tab id="1" panel-id="2" selected>First</dt-tab>
+    <dt-tab id="3" panel-id="4">Second</dt-tab>
+    <dt-tab id="5" panel-id="6">Third</dt-tab>
   </template>
 </dt-tab-group>
 <script setup>
