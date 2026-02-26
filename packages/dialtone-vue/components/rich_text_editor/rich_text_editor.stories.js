@@ -30,6 +30,8 @@ export const argsData = {
   onEditLink: action('edit-link'),
   onSelectedCommand: action('selected-command'),
   onMentionClick: action('mention-click'),
+  onMentionHover: action('mention-hover'),
+  onMentionLeave: action('mention-leave'),
   onChannelClick: action('channel-click'),
 };
 

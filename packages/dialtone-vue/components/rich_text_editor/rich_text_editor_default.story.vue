@@ -35,6 +35,8 @@
     @markdown-input="$attrs.onMarkdownInput"
     @selected-command="$attrs.onSelectedCommand"
     @mention-click="$attrs.onMentionClick"
+    @mention-hover="$attrs.onMentionHover"
+    @mention-leave="$attrs.onMentionLeave"
     @channel-click="$attrs.onChannelClick"
     @focus="$attrs.onFocus"
     @enter="$attrs.onEnter"

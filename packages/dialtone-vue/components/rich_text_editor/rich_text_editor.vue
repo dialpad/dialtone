@@ -526,6 +526,24 @@ export default {
     'mention-click',
 
     /**
+     * Event fired when the cursor enters a mention. The payload includes the
+     * mention data (name, id, avatarSrc, contactKey) plus the native MouseEvent
+     * as `event`, which can be used for positioning a hovercard.
+     * @event mention-hover
+     * @type {Object}
+     */
+    'mention-hover',
+
+    /**
+     * Event fired when the cursor leaves a mention. The payload includes the
+     * mention data (name, id, avatarSrc, contactKey) plus the native MouseEvent
+     * as `event`.
+     * @event mention-leave
+     * @type {Object}
+     */
+    'mention-leave',
+
+    /**
      * Event fired when a channel is clicked
      * @event channel-click
      * @type {Object}
@@ -1245,6 +1263,16 @@ export default {
       // Mention is clicked
       this.editor.on('mention-click', (mentionData) => {
         this.$emit('mention-click', mentionData);
+      });
+
+      // Cursor enters a mention
+      this.editor.on('mention-hover', (mentionData) => {
+        this.$emit('mention-hover', mentionData);
+      });
+
+      // Cursor leaves a mention
+      this.editor.on('mention-leave', (mentionData) => {
+        this.$emit('mention-leave', mentionData);
       });
 
       // Channel is clicked
