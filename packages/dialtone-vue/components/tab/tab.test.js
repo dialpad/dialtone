@@ -201,6 +201,36 @@ describe('DtTab Tests', () => {
         expect(wrapper.findComponent({ name: 'DtButton' }).props('kind')).toBe('muted');
       });
     });
+
+    describe('d-tab--is-selected class', () => {
+      it('should be present when default kind, not outlined, and selected', () => {
+        mockProvide = { groupContext: { ...MOCK_GROUP_CONTEXT, selected: MOCK_PANEL_ID, kind: 'default' } };
+        updateWrapper();
+
+        expect(tab.classes()).toContain('d-tab--is-selected');
+      });
+
+      it('should not be present when unselected', () => {
+        mockProvide = { groupContext: { ...MOCK_GROUP_CONTEXT, selected: '', kind: 'default' } };
+        updateWrapper();
+
+        expect(tab.classes()).not.toContain('d-tab--is-selected');
+      });
+
+      it('should not be present when outlined', () => {
+        mockProvide = { groupContext: { ...MOCK_GROUP_CONTEXT, selected: MOCK_PANEL_ID, kind: 'default', outlined: true } };
+        updateWrapper();
+
+        expect(tab.classes()).not.toContain('d-tab--is-selected');
+      });
+
+      it('should not be present when kind is muted', () => {
+        mockProvide = { groupContext: { ...MOCK_GROUP_CONTEXT, selected: MOCK_PANEL_ID, kind: 'muted' } };
+        updateWrapper();
+
+        expect(tab.classes()).not.toContain('d-tab--is-selected');
+      });
+    });
   });
 
   describe('Interactivity Tests', () => {

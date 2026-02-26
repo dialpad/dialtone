@@ -31,10 +31,6 @@
         &--md { /* default */ }
         &--lg { --tablist-padding-bottom: var(--dt-size-400); }
         &--xl { --tablist-padding-bottom: var(--dt-size-450); }
-
-        &--no-border {
-            padding-block-end: 0;
-        }
     }
 
     .d-tablist--no-border {
@@ -208,6 +204,20 @@
         .d-tablist--no-border & {
             background-color: var(--tab-color-background);
         }
+    }
+}
+
+.d-tab--is-selected {
+    position: relative;
+    z-index: var(--zi-selected);
+
+    &::after {
+        position: absolute;
+        background-color: var(--dt-action-color-foreground-base-default);
+        content: '';
+        block-size: var(--dt-size-200);
+        inset-block-start: calc(calc(100% + var(--tablist-padding-bottom)) - var(--dt-size-100));
+        inset-inline: 0;
     }
 }
 

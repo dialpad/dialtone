@@ -4,6 +4,7 @@
     :class="[
       tabClass,
       { 'd-btn--disabled': isDisabled },
+      { 'd-tab--is-selected': !groupContext.outlined && groupContext.kind !== 'muted' && isSelected },
     ]"
     :importance="buttonImportance"
     :kind="buttonKind"
@@ -19,6 +20,16 @@
     v-bind="$attrs"
     v-on="tabListeners"
   >
+    <!-- @slot Icon slot, passed through to DtButton's icon slot -->
+    <template
+      v-if="$slots.icon"
+      #icon="{ iconSize }"
+    >
+      <slot
+        name="icon"
+        :icon-size="iconSize"
+      />
+    </template>
     <!-- @slot default slot, defaults contains dt-button -->
     <slot />
   </dt-button>
