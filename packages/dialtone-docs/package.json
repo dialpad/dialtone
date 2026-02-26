@@ -1,0 +1,21 @@
+{
+  "name": "@dialpad/dialtone-docs",
+  "version": "1.0.0",
+  "description": "Documentation generation and validation for Dialtone",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "build": "node src/generators/build.mjs"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "glob": "^11.0.3",
+    "handlebars": "^4.7.8"
+  },
+  "devDependencies": {
+    "vitest": "^1.6.1"
+  },
+  "keywords": ["documentation", "ai", "dialtone"],
+  "license": "MIT"
+}
