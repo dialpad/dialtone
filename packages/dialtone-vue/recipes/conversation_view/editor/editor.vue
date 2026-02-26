@@ -141,6 +141,7 @@
               </dt-list-item>
             </template>
           </dt-popover>
+          <!-- fontColor button -->
           <dt-tooltip
             v-else-if="button.selector === 'fontColor'"
             :key="getButtonKey(buttonGroup.key, button.selector)"
@@ -174,6 +175,7 @@
                     size="sm"
                     type="color"
                     @input="onColorPickerInput"
+                    @click.stop
                   >
                     <template #icon>
                       <dt-icon-chevron-down size="200" />
