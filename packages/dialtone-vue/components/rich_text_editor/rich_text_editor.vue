@@ -373,6 +373,14 @@ export default {
     },
 
     /**
+     * Whether the input allows font size to be introduced in the text.
+     */
+    allowFontSize: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
      * Whether the input allows different font-families to be introduced in the text.
      */
     allowFontFamily: {
@@ -859,12 +867,12 @@ export default {
         extensions.push(ConfigurableImage);
       }
 
-      if (this.allowFontFamily || this.allowFontColor) {
+      if (this.allowFontFamily || this.allowFontColor || this.allowFontSize) {
         extensions.push(TextStyleKit.configure({
           color: this.allowFontColor,
           backgroundColor: false,
           fontFamily: this.allowFontFamily,
-          fontSize: false,
+          fontSize: this.allowFontSize,
           lineHeight: false,
         }));
       }

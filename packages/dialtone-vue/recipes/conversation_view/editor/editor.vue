@@ -410,6 +410,7 @@
         :allow-inline-images="true"
         :allow-line-breaks="true"
         :allow-variable="true"
+        :allow-font-size="showFontSizeButton"
         :variable-items="flattenedVariableItems"
         :hide-link-bubble-menu="true"
         :auto-focus="autoFocus"
@@ -473,6 +474,7 @@ import {
   DtIconBraces,
   DtIconSearch,
   DtIconChevronDown,
+  DtIconFontSize,
 } from '@dialpad/dialtone-icons/vue3';
 import { DialtoneLocalization } from '@/localization';
 
@@ -509,6 +511,7 @@ export default {
     DtIconType,
     DtIconBraces,
     DtIconChevronDown,
+    DtIconFontSize,
   },
 
   mixins: [],
@@ -952,7 +955,7 @@ export default {
         {
           showBtn: this.showFontSizeButton,
           selector: 'fontSize',
-          icon: DtIconType,
+          icon: DtIconFontSize,
           dataQA: 'dt-recipe-editor-font-size-btn',
           tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_FONT_SIZE_BUTTON_LABEL'),
         },
