@@ -7,15 +7,15 @@
           "type": "color"
         },
         "foreground": {
-          "value": "#EFECF9",
+          "value": "oklch(0.9492 0.0176 296.63)",
           "type": "color"
         },
         "border": {
-          "value": "#EFECF9",
+          "value": "oklch(0.9492 0.0176 296.63)",
           "type": "color"
         },
         "accent": {
-          "value": "#E2AAE5",
+          "value": "oklch(0.8086 0.1015 324.79)",
           "type": "color"
         },
         "action": {

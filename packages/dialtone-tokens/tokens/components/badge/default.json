@@ -45,7 +45,7 @@
           "type": "color"
         },
         "bulletin-subtle": {
-          "value": "{color.purple.550}",
+          "value": "{color.purple.900}",
           "type": "color"
         },
         "ai": {
@@ -66,7 +66,7 @@
               "modify": {
                 "type": "alpha",
                 "value": ".5",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }

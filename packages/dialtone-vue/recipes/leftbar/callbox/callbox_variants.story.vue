@@ -451,6 +451,6 @@ export default {
 }
 
 .voice-chat-icon {
-  color: var(--dt-color-purple-400);
+  color: var(--dt-color-link-primary);
 }
 </style>

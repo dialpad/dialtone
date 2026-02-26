@@ -16,7 +16,7 @@
               "modify": {
                 "type": "alpha",
                 "value": "1",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -24,14 +24,14 @@
       },
       "border": {
         "bulletin-subtle": {
-          "value": "{color.purple.400}",
+          "value": "{color.purple.600}",
           "type": "color",
           "$extensions": {
             "studio.tokens": {
               "modify": {
                 "type": "alpha",
                 "value": ".6",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }

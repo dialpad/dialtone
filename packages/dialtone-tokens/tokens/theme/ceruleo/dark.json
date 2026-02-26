@@ -15,23 +15,23 @@
           "type": "color"
         },
         "accent": {
-          "value": "{color.red.600}",
+          "value": "{color.red.800}",
           "type": "color"
         },
         "action": {
-          "value": "{color.blue.475}",
+          "value": "{color.blue.700}",
           "type": "color"
         },
         "status-positive": {
-          "value": "{color.green.475}",
+          "value": "{color.green.700}",
           "type": "color"
         },
         "status-critical": {
-          "value": "{color.red.600}",
+          "value": "{color.red.800}",
           "type": "color"
         },
         "status-warning": {
-          "value": "{color.gold.600}",
+          "value": "{color.gold.800}",
           "type": "color"
         }
       }

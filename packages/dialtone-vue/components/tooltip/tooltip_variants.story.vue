@@ -145,7 +145,7 @@
     <dt-stack
       direction="row"
       justify="center"
-      class="d-bgc-purple-600 d-pt64"
+      class="d-bgc-contrast d-pt64"
     >
       <div class="d-py64">
         <!-- Inverted state -->

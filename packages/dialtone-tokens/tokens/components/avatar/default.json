@@ -61,8 +61,80 @@
         }
       },
       "background": {
+        "100": {
+          "value": "oklch(0.6262 0.1776 147.03)",
+          "type": "color"
+        },
+        "200": {
+          "value": "oklch(0.9187 0.1785 136.65)",
+          "type": "color"
+        },
+        "300": {
+          "value": "oklch(0.8732 0.1422 134.52)",
+          "type": "color"
+        },
+        "400": {
+          "value": "oklch(0.8566 0.146 155.37)",
+          "type": "color"
+        },
+        "500": {
+          "value": "oklch(0.8654 0.1263 164.33)",
+          "type": "color"
+        },
+        "600": {
+          "value": "oklch(0.8436 0.0978 207.01)",
+          "type": "color"
+        },
+        "700": {
+          "value": "oklch(0.8281 0.1207 222.29)",
+          "type": "color"
+        },
+        "800": {
+          "value": "oklch(0.8856 0.0833 219.27)",
+          "type": "color"
+        },
+        "900": {
+          "value": "oklch(0.6991 0.159 254.31)",
+          "type": "color"
+        },
+        "1000": {
+          "value": "oklch(0.8523 0.0726 263.33)",
+          "type": "color"
+        },
+        "1100": {
+          "value": "oklch(0.8471 0.0921 331.77)",
+          "type": "color"
+        },
+        "1200": {
+          "value": "oklch(0.7241 0.1644 345.13)",
+          "type": "color"
+        },
+        "1300": {
+          "value": "oklch(0.7295 0.205 347.95)",
+          "type": "color"
+        },
+        "1400": {
+          "value": "oklch(0.7318 0.1496 21.4)",
+          "type": "color"
+        },
+        "1500": {
+          "value": "oklch(0.7857 0.103 56.37)",
+          "type": "color"
+        },
+        "1600": {
+          "value": "oklch(0.8407 0.1532 79.67)",
+          "type": "color"
+        },
+        "1700": {
+          "value": "oklch(0.8872 0.16 92.49)",
+          "type": "color"
+        },
+        "1800": {
+          "value": "oklch(0.8984 0.0527 78.31)",
+          "type": "color"
+        },
         "000": {
-          "value": "#E0E0E0",
+          "value": "oklch(0.9067 0 0)",
           "type": "color",
           "description": "Neutral gray fallback (manual assignment only)"
         }

@@ -3,8 +3,6 @@
 
 const TokensBaseLight = require('@dialpad/dialtone-tokens/dist/tokens-base-light.json');
 const TokensDpLight = require('@dialpad/dialtone-tokens/dist/tokens-dp-light.json');
-const TokensContrastHighLight = require('@dialpad/dialtone-tokens/dist/tokens-contrast-high-light.json');
-const TokensContrastHighDark = require('@dialpad/dialtone-tokens/dist/tokens-contrast-high-dark.json');
 
 const { Rule, AtRule } = require('postcss');
 
@@ -25,12 +23,11 @@ const {
   WIDTH_HEIGHTS_SPACING,
   WIDTH_HEIGHTS_LAYOUT,
   WIDTH_HEIGHTS_DEPRECATED,
-  HSLA_EXCLUDED_COLORS,
+  OKLCH_EXCLUDED_COLORS,
 } = require('./constants.cjs');
 const {
   appendHoverFocusSelectors,
   processColors,
-  generateTokenName,
 } = require('./helpers.cjs');
 // This constant determines the order in which classes are going to be added to the root CSS
 const generatedRules = {
@@ -127,73 +124,20 @@ function colorUtilities (clonedSource, declaration) {
   const borderColors = Object.entries(tokens).filter(([key]) => borderColorsRegex.test(key)).reduce(processColors, []);
   const chartColors = Object.entries(tokens).filter(([key]) => chartColorsRegex.test(key)).reduce(processColors, []);
 
-  /**
-   * High Contrast Color Utilities
-   *
-   * Problem: High contrast tokens redefine colors as complete hsl() values (e.g. hsl(0 0% 0% / 0.5)),
-   * but CSS utilities construct colors from HSLA split components:
-   *   - var(--dt-color-border-subtle-h)
-   *   - var(--dt-color-border-subtle-s)
-   *   - var(--dt-color-border-subtle-l)
-   *   - var(--dt-color-border-subtle-a)
-   *
-   * These split components don't exist in high contrast mode, causing utilities to fail.
-   *
-   * Solution: Generate [data-dt-contrast="high"] overrides that use the full token variable
-   * instead of constructing from splits. This ensures:
-   *   - Normal mode: HSLA splits work, opacity utilities (--fco, --bgo, --bco, --dco) functional
-   *   - High contrast mode: Full variable used, splits ignored
-   *
-   * The list of high contrast colors is dynamically extracted from token files to future-proof
-   * against token additions/removals. Only colors defined in high contrast token files receive
-   * override rules, minimizing CSS bloat (~14 rules for 10 colors).
-   */
-  const highContrastKeys = new Set([
-    ...Object.keys(TokensContrastHighLight),
-    ...Object.keys(TokensContrastHighDark),
-  ]);
-
-  // Only include semantic color tokens that are used in utilities
-  // Excludes brand, gradient, shell, and action colors which are handled differently
-  const HIGH_CONTRAST_COLORS = Array.from(highContrastKeys)
-    .filter(key =>
-      key.startsWith('dtColorForeground') ||
-      key.startsWith('dtColorBorder') ||
-      key.startsWith('dtColorSurface'),
-    )
-    .map(key => `--${generateTokenName(key)}`);
-
   function _generateColorNodes (token, prop, opacityVar) {
     return [
       declaration.clone({
-        prop: opacityVar,
-        value: HSLA_EXCLUDED_COLORS.includes(token)
-          ? `100%`
-          : `var(${token}-a)`,
-      }),
-      declaration.clone({
         prop,
-        // Use relative color syntax to apply opacity
-        // Extracts l, c, h from the token and applies the opacity variable to alpha
-        // Alpha channel accepts percentages directly (75% = 0.75 opacity)
-        value: HSLA_EXCLUDED_COLORS.includes(token)
+        // Use relative color syntax with `alpha` keyword as fallback.
+        // When no opacity utility is applied, `var(opacityVar)` is undefined so `alpha`
+        // preserves the source color's original alpha channel.
+        // When an opacity utility (e.g. .d-fco50) is applied, it sets the opacity var
+        // which overrides the alpha channel.
+        value: OKLCH_EXCLUDED_COLORS.includes(token)
           ? `var(${token}) !important`
-          : `oklch(from var(${token}) l c h / var(${opacityVar})) !important`,
+          : `oklch(from var(${token}) l c h / var(${opacityVar}, alpha)) !important`,
       }),
     ];
-  }
-
-  function _generateHighContrastColorNode (token, prop) {
-    return [
-      declaration.clone({
-        prop,
-        value: `var(${token}) !important`,
-      }),
-    ];
-  }
-
-  function _prependHighContrastSelector (selector) {
-    return selector.split(', ').map(s => `[data-dt-contrast="high"] ${s}`).join(', ');
   }
   function _generateForegroundColors (token, colorName) {
     generatedRules.fontColor.push(new Rule({
@@ -201,14 +145,6 @@ function colorUtilities (clonedSource, declaration) {
       selector: appendHoverFocusSelectors(`.d-fc-${colorName}`),
       nodes: _generateColorNodes(token, 'color', '--fco'),
     }));
-    // High contrast override (only for colors that have high contrast overrides)
-    if (HIGH_CONTRAST_COLORS.includes(token)) {
-      generatedRules.fontColor.push(new Rule({
-        source: clonedSource,
-        selector: _prependHighContrastSelector(appendHoverFocusSelectors(`.d-fc-${colorName}`)),
-        nodes: _generateHighContrastColorNode(token, 'color'),
-      }));
-    }
   }
   function _generateSurfaceColors (token, colorName) {
     generatedRules.backgroundColor.push(new Rule({
@@ -216,14 +152,6 @@ function colorUtilities (clonedSource, declaration) {
       selector: appendHoverFocusSelectors(`.d-bgc-${colorName}`),
       nodes: _generateColorNodes(token, 'background-color', '--bgo'),
     }));
-    // High contrast override (only for colors that have high contrast overrides)
-    if (HIGH_CONTRAST_COLORS.includes(token)) {
-      generatedRules.backgroundColor.push(new Rule({
-        source: clonedSource,
-        selector: _prependHighContrastSelector(appendHoverFocusSelectors(`.d-bgc-${colorName}`)),
-        nodes: _generateHighContrastColorNode(token, 'background-color'),
-      }));
-    }
   }
   function _generateBorderColors (token, colorName) {
     generatedRules.borderColor.push(new Rule({
@@ -231,14 +159,6 @@ function colorUtilities (clonedSource, declaration) {
       selector: appendHoverFocusSelectors(`.d-bc-${colorName}`),
       nodes: _generateColorNodes(token, 'border-color', '--bco'),
     }));
-    // High contrast override (only for colors that have high contrast overrides)
-    if (HIGH_CONTRAST_COLORS.includes(token)) {
-      generatedRules.borderColor.push(new Rule({
-        source: clonedSource,
-        selector: _prependHighContrastSelector(appendHoverFocusSelectors(`.d-bc-${colorName}`)),
-        nodes: _generateHighContrastColorNode(token, 'border-color'),
-      }));
-    }
   }
   function _generateDividerColors (token, colorName) {
     generatedRules.dividerColor.push(new Rule({
@@ -246,14 +166,6 @@ function colorUtilities (clonedSource, declaration) {
       selector: `.d-divide-${colorName} > * + *`,
       nodes: _generateColorNodes(token, 'border-color', '--dco'),
     }));
-    // High contrast override (only for colors that have high contrast overrides)
-    if (HIGH_CONTRAST_COLORS.includes(token)) {
-      generatedRules.dividerColor.push(new Rule({
-        source: clonedSource,
-        selector: `[data-dt-contrast="high"] .d-divide-${colorName} > * + *`,
-        nodes: _generateHighContrastColorNode(token, 'border-color'),
-      }));
-    }
   }
 
   baseColors.forEach(({ token, colorName }) => {
@@ -268,9 +180,9 @@ function colorUtilities (clonedSource, declaration) {
         ..._generateColorNodes(token, '--bgg-from', '--bgg-from-opacity'),
         declaration.clone({
           prop: '--bgg-to',
-          value: HSLA_EXCLUDED_COLORS.includes(token)
+          value: OKLCH_EXCLUDED_COLORS.includes(token)
             ? `var(${token}) !important`
-            : `hsl(var(${token}-h) var(${token}-s) var(${token}-l) / 0%) !important`,
+            : `oklch(from var(${token}) l c h / 0%) !important`,
         }),
       ],
     }));

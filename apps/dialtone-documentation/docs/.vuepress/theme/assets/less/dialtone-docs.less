@@ -468,7 +468,7 @@ code {
 }
 
 .d-docsite-code {
-  color: var(--dt-color-blue-500) !important;
+  color: var(--dt-color-blue-800) !important;
   font-weight: var(--dt-font-weight-normal) !important;
   user-select: all;
 }
@@ -558,7 +558,7 @@ code {
 
     &:hover,
     .dialtone-icon-card[data-selected='yes'] & {
-      background-color: hsl(var(--dt-color-neutral-black-h), var(--dt-color-neutral-black-s), var(--dt-color-neutral-black-l), 0.8);
+      background-color: oklch(from var(--dt-color-neutral-black) l c h / 0.8);
     }
 
     .dialtone-icon-card__name {
@@ -571,7 +571,7 @@ code {
 
     &:hover,
     .dialtone-icon-card[data-selected='yes'] & {
-      background-color: hsl(0deg, 0%, 91.37%, 0.4);
+      background-color: oklch(0.934 0 0deg / 0.4);
     }
 
     .dialtone-icon-card__name {
@@ -584,7 +584,7 @@ code {
 
     &:hover,
     .dialtone-icon-card[data-selected='yes'] & {
-      background-color: hsl(var(--dt-color-black-900-h), var(--dt-color-black-900-s), var(--dt-color-black-900-l), 0.8);
+      background-color: oklch(from var(--dt-color-black-900) l c h / 0.8);
     }
 
     .dialtone-icon-card__name {
@@ -710,6 +710,7 @@ code {
 .dialtone-page-title {
   font: var(--dt-text-headline-3xl);
   margin-block-end: var(--dt-size-400);
+  text-wrap: pretty;
 }
 
 //  ============================================================================

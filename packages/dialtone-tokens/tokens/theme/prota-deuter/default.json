@@ -11,7 +11,7 @@
           "type": "color"
         },
         "accent": {
-          "value": "#1E6EF4",
+          "value": "oklch(0.5734 0.215 260.57)",
           "type": "color"
         },
         "action": {
@@ -24,7 +24,7 @@
   "color": {
     "foreground": {
       "critical": {
-        "value": "{color.magenta.475}",
+        "value": "{color.magenta.700}",
         "type": "color"
       },
       "success": {
@@ -32,7 +32,7 @@
         "type": "color"
       },
       "warning": {
-        "value": "#D55E00",
+        "value": "oklch(0.6213 0.1705 47.51)",
         "type": "color"
       }
     }

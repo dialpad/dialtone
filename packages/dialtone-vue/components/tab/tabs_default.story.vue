@@ -1,7 +1,7 @@
 <template>
   <div
     :class="{
-      'd-bgc-purple-600': $attrs.inverted,
+      'd-bgc-contrast': $attrs.inverted,
     }"
   >
     <dt-tab-group

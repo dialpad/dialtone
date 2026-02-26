@@ -3,7 +3,7 @@
     "base": {
       "color": {
         "surface": {
-          "value": "{color.blue.600}",
+          "value": "{color.blue.900}",
           "type": "color"
         },
         "foreground": {
@@ -15,7 +15,7 @@
           "type": "color"
         },
         "accent": {
-          "value": "{color.red.400}",
+          "value": "{color.red.500}",
           "type": "color"
         },
         "action": {
@@ -39,11 +39,11 @@
     "logo": {
       "color": {
         "wordmark": {
-          "value": "#FFFFFF",
+          "value": "oklch(1 0 0)",
           "type": "color"
         },
         "star": {
-          "value": "#FFFFFF",
+          "value": "oklch(1 0 0)",
           "type": "color"
         }
       }

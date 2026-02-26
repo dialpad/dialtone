@@ -107,10 +107,10 @@
 .d-toast--viewing {
   --toast-border-radius: var(--dt-size-radius-200);
 
-  border-block-start: var(--dt-size-300) solid var(--dt-color-magenta-300);
+  border-block-start: var(--dt-size-300) solid var(--dt-color-magenta-400);
 
   .d-notice__icon {
-    color: var(--dt-color-magenta-300);
+    color: var(--dt-color-magenta-400);
   }
 }
 
@@ -126,7 +126,7 @@
 .d-toast-alternate {
   //  Component CSS Vars
   //  ------------------------------------------------------------------------
-  --toast-alternate-color-shadow: hsl(var(--dt-color-black-900-hsl) / 0.15);
+  --toast-alternate-color-shadow: oklch(from var(--dt-color-black-900) l c h / 0.15);
   --toast-alternate-box-shadow: 0 0 0 var(--dt-size-0) var(--toast-alternate-color-shadow) inset, var(--dt-shadow-medium);
   --toast-alternate-color-background: var(--dt-color-surface-primary);
   --toast-alternate-color-text: var(--dt-color-foreground-primary);

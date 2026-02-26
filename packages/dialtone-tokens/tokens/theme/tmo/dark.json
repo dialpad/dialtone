@@ -3,7 +3,7 @@
     "base": {
       "color": {
         "accent": {
-          "value": "#F49AC8",
+          "value": "oklch(0.7904 0.1208 348.23)",
           "type": "color"
         }
       }

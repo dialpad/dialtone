@@ -24,16 +24,9 @@
 
 
 @theme-vars: {
-    primary-color-h:                        var(--dt-color-purple-400-h);
-    primary-color-s:                        var(--dt-color-purple-400-s);
-    primary-color-l:                        var(--dt-color-purple-400-l);
-    primary-color-hsl:                      var(--primary-color-h) var(--primary-color-s) var(--primary-color-l);
-    primary-color:                          hsl(var(--primary-color-h) var(--primary-color-s) var(--primary-color-l));
-    primary-color-hover:                    hsl(var(--primary-color-h) var(--primary-color-s) calc(var(--primary-color-l) - 10%));
-    nav-background-color-h:                 var(--dt-color-purple-600-h);
-    nav-background-color-s:                 var(--dt-color-purple-600-s);
-    nav-background-color-l:                 var(--dt-color-purple-600-l);
-    nav-background-color:                   hsl(var(--nav-background-color-h) var(--nav-background-color-s) var(--nav-background-color-l));
+    primary-color:                          var(--dt-color-purple-600);
+    primary-color-hover:                    oklch(from var(--dt-color-purple-600) calc(l - 0.1) c h);
+    nav-background-color:                   var(--dt-color-purple-950);
 
     topbar-height:                                    var(--dt-size-700);
 
@@ -48,12 +41,6 @@
 //  ============================================================================
 @layer dialtone.base {
 body {
-    //  $$  COLOR VARS
-    //  ------------------------------------------------------------------------
-    --bgo: 100%;                // Background color opacity
-    --bco: 100%;                // Border color opacity
-    --fco: 100%;                // Font color opacity
-
     //  $$  VISUAL STYLES
     //  ------------------------------------------------------------------------
     each(@transition, {

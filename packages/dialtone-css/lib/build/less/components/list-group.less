@@ -34,16 +34,16 @@
 
     &:hover {
         color: var(--dt-color-foreground-primary);
-        background-color: hsl(var(--dt-color-purple-400-hsl) ~' / ' 85%);
+        background-color: oklch(from var(--dt-color-purple-600) l c h / 0.85);
     }
 
     &-selected {
         color: var(--dt-color-neutral-white);
-        background-color: var(--dt-color-purple-400);
+        background-color: var(--dt-color-purple-600);
 
         &:hover {
             color: var(--dt-color-neutral-white);
-            background-color: hsl(var(--dt-color-purple-400-h) var(--dt-color-purple-400-s) calc(var(--dt-color-purple-400-l) + 10%));
+            background-color: oklch(from var(--dt-color-purple-600) calc(l + 0.1) c h);
         }
     }
 }

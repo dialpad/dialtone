@@ -14,7 +14,7 @@
     >
       <div
         style="
-          background: linear-gradient(180deg, var(--dt-color-purple-550), var(--dt-color-purple-1000));
+          background: linear-gradient(180deg, var(--dt-color-purple-900), var(--dt-color-purple-1000));
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
         "
