@@ -9,11 +9,11 @@
     :outlined="$attrs.outlined"
   >
     <template
-      #leftIcon="{ iconSize }"
+      #startIcon="{ iconSize }"
     >
       <dt-icon
-        v-if="$attrs.leftIcon"
-        :name="$attrs.leftIcon"
+        v-if="$attrs.startIcon"
+        :name="$attrs.startIcon"
         :size="iconSize"
       />
     </template>
@@ -21,11 +21,11 @@
       {{ defaultSlot }}
     </template>
     <template
-      #rightIcon="{ iconSize }"
+      #endIcon="{ iconSize }"
     >
       <dt-icon
-        v-if="$attrs.rightIcon"
-        :name="$attrs.rightIcon"
+        v-if="$attrs.endIcon"
+        :name="$attrs.endIcon"
         :size="iconSize"
       />
     </template>

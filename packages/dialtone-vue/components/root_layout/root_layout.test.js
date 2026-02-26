@@ -98,15 +98,38 @@ describe('DtRootLayout Tests', () => {
       });
     });
 
-    describe('When sidebarPosition is set to left', () => {
-      it('Has correct class', async () => {
+    describe('When sidebarPosition is default (start)', () => {
+      it('should not apply inverted class', () => {
+        expect(wrapper.classes('d-root-layout--inverted')).toBe(false);
+      });
+    });
+
+    describe('When sidebarPosition is set to start', () => {
+      it('should not apply inverted class', async () => {
+        await wrapper.setProps({ sidebarPosition: ROOT_LAYOUT_SIDEBAR_POSITIONS.START });
+
+        expect(wrapper.classes('d-root-layout--inverted')).toBe(false);
+      });
+    });
+
+    describe('When sidebarPosition is set to end', () => {
+      it('should apply inverted class', async () => {
+        await wrapper.setProps({ sidebarPosition: ROOT_LAYOUT_SIDEBAR_POSITIONS.END });
+
+        expect(wrapper.classes('d-root-layout--inverted')).toBe(true);
+      });
+    });
+
+    describe('When sidebarPosition is set to left (deprecated)', () => {
+      it('should not apply inverted class', async () => {
         await wrapper.setProps({ sidebarPosition: ROOT_LAYOUT_SIDEBAR_POSITIONS.LEFT });
 
         expect(wrapper.classes('d-root-layout--inverted')).toBe(false);
       });
     });
-    describe('When sidebarPosition is set to right', () => {
-      it('Has correct class', async () => {
+
+    describe('When sidebarPosition is set to right (deprecated)', () => {
+      it('should apply inverted class', async () => {
         await wrapper.setProps({ sidebarPosition: ROOT_LAYOUT_SIDEBAR_POSITIONS.RIGHT });
 
         expect(wrapper.classes('d-root-layout--inverted')).toBe(true);

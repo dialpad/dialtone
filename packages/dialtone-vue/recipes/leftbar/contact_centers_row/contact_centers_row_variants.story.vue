@@ -7,7 +7,7 @@
       <dt-recipe-contact-centers-row
         description="Ai Contact Centers"
       >
-        <template #right>
+        <template #end>
           <dt-button
             importance="clear"
             kind="muted"
@@ -40,7 +40,7 @@
         description="Ai Contact Centers"
         selected
       >
-        <template #right>
+        <template #end>
           <dt-button
             importance="clear"
             kind="muted"
@@ -75,7 +75,7 @@
         unread-count="7"
         unread-count-tooltip="7 unread messages"
       >
-        <template #right>
+        <template #end>
           <dt-button
             importance="clear"
             kind="muted"
@@ -110,7 +110,7 @@
         selected
         unread-count="7"
       >
-        <template #right>
+        <template #end>
           <dt-button
             importance="clear"
             kind="muted"
@@ -144,7 +144,7 @@
         menu-button-aria-label="Menu button"
         :hide-actions="true"
       >
-        <template #right>
+        <template #end>
           <dt-button
             importance="clear"
             kind="muted"

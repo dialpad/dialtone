@@ -10,14 +10,14 @@
       @keydown.down.prevent="$emit('focus-emoji-selector')"
       @keydown.enter="$emit('select-first-emoji')"
     >
-      <template #leftIcon>
+      <template #startIcon>
         <dt-icon-search
           size="200"
         />
       </template>
       <template
         v-if="modelValue.length > 0"
-        #rightIcon
+        #endIcon
       >
         <dt-button
           importance="clear"

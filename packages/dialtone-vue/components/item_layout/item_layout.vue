@@ -5,12 +5,20 @@
     :style="unstyled && dynamicGridTemplateColumns()"
   >
     <section
-      v-if="hasSlotContent($slots.left)"
+      v-if="hasSlotContent($slots.start) || hasSlotContent($slots.left)"
       data-qa="dt-item-layout-left-wrapper"
-      :class="[leftClass, 'd-item-layout__left']"
+      :class="[resolvedStartClass, 'd-item-layout__left']"
     >
-      <!-- @slot Slot for left content -->
-      <slot name="left" />
+      <!-- @slot Slot for start content -->
+      <slot
+        v-if="$slots.start"
+        name="start"
+      />
+      <!-- @slot @deprecated Use start -->
+      <slot
+        v-else
+        name="left"
+      />
     </section>
     <section
       data-qa="dt-item-layout-content-wrapper"
@@ -37,21 +45,37 @@
         <slot name="subtitle" />
       </div>
       <div
-        v-if="hasSlotContent($slots.bottom)"
+        v-if="hasSlotContent($slots.blockEnd) || hasSlotContent($slots.bottom)"
         data-qa="dt-item-layout-bottom-wrapper"
-        :class="[bottomClass, 'd-item-layout__bottom']"
+        :class="[resolvedBlockEndClass, 'd-item-layout__bottom']"
       >
         <!-- @slot Slot for content below subtitle -->
-        <slot name="bottom" />
+        <slot
+          v-if="$slots.blockEnd"
+          name="blockEnd"
+        />
+        <!-- @slot @deprecated Use blockEnd -->
+        <slot
+          v-else
+          name="bottom"
+        />
       </div>
     </section>
     <section
-      v-if="hasSlotContent($slots.right)"
+      v-if="hasSlotContent($slots.end) || hasSlotContent($slots.right)"
       data-qa="dt-item-layout-right-wrapper"
-      :class="[rightClass, 'd-item-layout__right']"
+      :class="[resolvedEndClass, 'd-item-layout__right']"
     >
-      <!-- @slot Slot for right content -->
-      <slot name="right" />
+      <!-- @slot Slot for end content -->
+      <slot
+        v-if="$slots.end"
+        name="end"
+      />
+      <!-- @slot @deprecated Use end -->
+      <slot
+        v-else
+        name="right"
+      />
     </section>
     <section
       v-if="hasSlotContent($slots.selected)"
@@ -94,11 +118,20 @@ export default {
     },
 
     /**
-     * Set the class for the left section.
+     * Set the class for the start section.
+     */
+    startClass: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Set the class for the start section.
+     * @deprecated Use startClass
      */
     leftClass: {
       type: String,
-      default: '',
+      default: undefined,
     },
 
     /**
@@ -126,19 +159,37 @@ export default {
     },
 
     /**
-     * Set the class for the bottom section.
+     * Set the class for the block-end section.
      */
-    bottomClass: {
+    blockEndClass: {
       type: String,
       default: '',
     },
 
     /**
-     * Set the class for the right section.
+     * Set the class for the block-end section.
+     * @deprecated Use blockEndClass
+     */
+    bottomClass: {
+      type: String,
+      default: undefined,
+    },
+
+    /**
+     * Set the class for the end section.
+     */
+    endClass: {
+      type: String,
+      default: '',
+    },
+
+    /**
+     * Set the class for the end section.
+     * @deprecated Use endClass
      */
     rightClass: {
       type: String,
-      default: '',
+      default: undefined,
     },
 
     /**
@@ -150,13 +201,27 @@ export default {
     },
   },
 
+  computed: {
+    resolvedStartClass () {
+      return this.leftClass ?? this.startClass;
+    },
+
+    resolvedEndClass () {
+      return this.rightClass ?? this.endClass;
+    },
+
+    resolvedBlockEndClass () {
+      return this.bottomClass ?? this.blockEndClass;
+    },
+  },
+
   methods: {
     /**
      * Generate dynamic grid template columns
      */
     dynamicGridTemplateColumns () {
-      const leftContentColumn = this.$slots.left ? 'auto' : '';
-      const rightContentColumn = this.$slots.right ? 'auto' : '';
+      const leftContentColumn = (this.$slots.start || this.$slots.left) ? 'auto' : '';
+      const rightContentColumn = (this.$slots.end || this.$slots.right) ? 'auto' : '';
       const selectedContentColumn = this.$slots.selected ? 'auto' : '';
 
       return `

@@ -18,8 +18,15 @@
       v-if="hasLeftIcon"
       class="d-badge__icon-left"
     >
-      <!-- @slot Slot for left icon, icon-size slot prop defaults to '200' -->
+      <!-- @slot Slot for start icon, icon-size slot prop defaults to '200' -->
       <slot
+        v-if="$slots.startIcon"
+        name="startIcon"
+        :icon-size="iconSize"
+      />
+      <!-- @slot @deprecated Use startIcon -->
+      <slot
+        v-else
         name="leftIcon"
         :icon-size="iconSize"
       />
@@ -34,8 +41,15 @@
       v-if="hasRightIcon"
       class="d-badge__icon-right"
     >
-      <!-- @slot Slot for right icon, icon-size slot prop defaults to '200' -->
+      <!-- @slot Slot for end icon, icon-size slot prop defaults to '200' -->
       <slot
+        v-if="$slots.endIcon"
+        name="endIcon"
+        :icon-size="iconSize"
+      />
+      <!-- @slot @deprecated Use endIcon -->
+      <slot
+        v-else
         name="rightIcon"
         :icon-size="iconSize"
       />
@@ -145,11 +159,11 @@ export default {
 
   computed: {
     hasLeftIcon () {
-      return hasSlotContent(this.$slots.leftIcon);
+      return hasSlotContent(this.$slots.startIcon) || hasSlotContent(this.$slots.leftIcon);
     },
 
     hasRightIcon () {
-      return hasSlotContent(this.$slots.rightIcon);
+      return hasSlotContent(this.$slots.endIcon) || hasSlotContent(this.$slots.rightIcon);
     },
 
     hasIcons () {
@@ -184,7 +198,7 @@ export default {
       }
 
       if (this.hasIcons) {
-        console.error('DtBadge error: decoration prop cannot be used with leftIcon or rightIcon.');
+        console.error('DtBadge error: decoration prop cannot be used with startIcon or endIcon.');
       }
     },
   },

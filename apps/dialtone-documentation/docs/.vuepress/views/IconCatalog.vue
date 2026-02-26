@@ -14,10 +14,10 @@
         autocomplete="off"
         @keyup="searchIcon"
       >
-        <template #leftIcon>
+        <template #startIcon>
           <dt-icon name="search" size="300" />
         </template>
-        <template #rightIcon>
+        <template #endIcon>
           <dt-button
             v-if="!isSearchEmpty"
             id="search-input-button-close"
@@ -28,7 +28,7 @@
             aria-label="Clear filters"
             @click="resetSearch"
           >
-            <template #icon>
+            <template #startIcon>
               <dt-icon name="close" size="200" />
             </template>
           </dt-button>

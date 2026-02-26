@@ -271,12 +271,20 @@ showHtmlWarning />
 <code-well-header bgclass="d-bgc-primary">
   <dt-stack direction="row" gap="400">
     <dt-badge ref="iconExample" type="default" text="Label" kind="label">
-      <template #leftIcon="{ iconSize }">
+      <template #startIcon="{ iconSize }">
         <dt-icon-lightning-bolt :size="iconSize"></dt-icon-lightning-bolt>
       </template>
     </dt-badge>
     <dt-badge type="default" text="Label" kind="label">
-      <template #rightIcon="{ iconSize }">
+      <template #endIcon="{ iconSize }">
+        <dt-icon-lightning-bolt :size="iconSize"></dt-icon-lightning-bolt>
+      </template>
+    </dt-badge>
+    <dt-badge type="default" text="Label" kind="label">
+      <template #startIcon="{ iconSize }">
+        <dt-icon-lightning-bolt :size="iconSize"></dt-icon-lightning-bolt>
+      </template>
+      <template #endIcon="{ iconSize }">
         <dt-icon-lightning-bolt :size="iconSize"></dt-icon-lightning-bolt>
       </template>
     </dt-badge>
@@ -287,12 +295,20 @@ showHtmlWarning />
 :htmlCode='() => $refs.iconExample'
 vueCode='
 <dt-badge type="default" text="Label" kind="label">
-  <template #leftIcon="{ iconSize }">
+  <template #startIcon="{ iconSize }">
     <dt-icon-lightning-bolt :size="iconSize" />
   </template>
 </dt-badge>
 <dt-badge type="default" text="Label" kind="label">
-  <template #rightIcon="{ iconSize }">
+  <template #endIcon="{ iconSize }">
+    <dt-icon-lightning-bolt :size="iconSize" />
+  </template>
+</dt-badge>
+<dt-badge type="default" text="Label" kind="label">
+  <template #startIcon="{ iconSize }">
+    <dt-icon-lightning-bolt :size="iconSize" />
+  </template>
+  <template #endIcon="{ iconSize }">
     <dt-icon-lightning-bolt :size="iconSize" />
   </template>
 </dt-badge>
@@ -418,12 +434,12 @@ showHtmlWarning />
       <dt-badge text="Co-host"></dt-badge>
       <dt-badge text="Customer"></dt-badge>
       <dt-badge text="Locked">
-        <template #leftIcon="{ iconSize }">
+        <template #startIcon="{ iconSize }">
           <dt-icon-lock :size="iconSize"></dt-icon-lock>
         </template>
       </dt-badge>
       <dt-badge text="Chat log">
-        <template #leftIcon="{ iconSize }">
+        <template #startIcon="{ iconSize }">
           <dt-icon-message :size="iconSize"></dt-icon-message>
         </template>
       </dt-badge>
@@ -441,7 +457,7 @@ showHtmlWarning />
     </dt-stack>
     <dt-stack direction="row" gap="400">
       <dt-badge text="Recording" type="critical">
-        <template #leftIcon="{ iconSize }">
+        <template #startIcon="{ iconSize }">
           <dt-icon-record-filled :size="iconSize"></dt-icon-record-filled>
         </template>
       </dt-badge>
@@ -465,14 +481,14 @@ showHtmlWarning />
   <dt-stack gap="500">
     <dt-stack direction="row" gap="400">
       <dt-badge kind="count" type="success" text="5%">
-        <template #leftIcon="{ iconSize }">
+        <template #startIcon="{ iconSize }">
           <dt-icon-arrow-up :size="iconSize"></dt-icon-arrow-up>
         </template>
       </dt-badge>
     </dt-stack>
     <dt-stack direction="row" gap="400">
       <dt-badge kind="count" type="critical" text="-12%">
-        <template #leftIcon="{ iconSize }">
+        <template #startIcon="{ iconSize }">
           <dt-icon-arrow-down :size="iconSize"></dt-icon-arrow-down>
         </template>
       </dt-badge>

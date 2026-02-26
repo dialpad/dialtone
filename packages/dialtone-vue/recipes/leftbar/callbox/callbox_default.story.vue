@@ -36,18 +36,18 @@
       />
     </template>
     <template
-      v-if="$attrs.right"
-      #right
+      v-if="$attrs.end"
+      #end
     >
       <div
-        v-html="$attrs.right"
+        v-html="$attrs.end"
       />
     </template>
     <template
-      v-if="$attrs.bottom"
-      #bottom
+      v-if="$attrs.blockEnd"
+      #blockEnd
     >
-      <div v-html="$attrs.bottom" />
+      <div v-html="$attrs.blockEnd" />
     </template>
   </dt-recipe-callbox>
 </template>

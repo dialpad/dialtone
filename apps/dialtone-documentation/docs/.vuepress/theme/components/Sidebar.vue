@@ -17,10 +17,10 @@
         type="search"
         @input="focusedIndex = -1"
       >
-        <template #leftIcon="{ iconSize }">
+        <template #startIcon="{ iconSize }">
           <dt-icon name="search" :size="iconSize" />
         </template>
-        <template v-if="inputValue.length !== 0" #rightIcon="{ clear }">
+        <template v-if="inputValue.length !== 0" #endIcon="{ clear }">
           <dt-button
             v-dt-tooltip="'Clear search'"
             kind="muted"
@@ -29,7 +29,7 @@
             aria-label="Clear search"
             @click="clear"
           >
-            <template #icon="{ iconSize }">
+            <template #startIcon="{ iconSize }">
               <dt-icon name="close" :size="iconSize" />
             </template>
           </dt-button>

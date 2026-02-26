@@ -14,7 +14,6 @@
         <dt-button
           :importance="buttonImportance"
           kind="muted"
-          icon-position="top"
           :aria-disabled="disabled"
           :aria-label="ariaLabel"
           :label-class="callbarButtonTextClass"
@@ -24,7 +23,7 @@
           v-on="callbarButtonListeners"
         >
           <slot />
-          <template #icon>
+          <template #blockStartIcon>
             <slot name="icon" />
           </template>
         </dt-button>

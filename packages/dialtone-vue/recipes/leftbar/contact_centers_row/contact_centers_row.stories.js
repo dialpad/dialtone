@@ -14,15 +14,21 @@ export const argsData = {
 
 export const argTypesData = {
   // Slots
-  right: {
-    name: 'right',
-    description: 'Slot right hand side content. Ex. agent on duty status component',
+  end: {
+    name: 'end',
+    description: 'Slot end hand side content. Ex. agent on duty status component',
     table: {
       category: 'slots',
       type: { summary: 'VNode' },
     },
     control: {
       type: 'text',
+    },
+  },
+
+  right: {
+    table: {
+      disable: true,
     },
   },
 

@@ -17,7 +17,7 @@
         importance="clear"
         aria-label="Menu button"
       >
-        <template #icon>
+        <template #startIcon>
           <dt-icon
             name="more-vertical"
             size="100"

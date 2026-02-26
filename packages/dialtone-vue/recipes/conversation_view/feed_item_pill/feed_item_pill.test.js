@@ -72,7 +72,19 @@ describe('DtRecipeFeedItemPill Tests', function () {
       });
     });
 
-    describe('When the icon slot is provided', () => {
+    describe('When the startIcon slot is provided', () => {
+      beforeEach(async () => {
+        mockSlots = { startIcon: MOCK_ICON_SLOT };
+
+        await updateWrapper();
+      });
+
+      it('should render the icon', () => {
+        expect(icon.findComponent(DtIconVideo).exists()).toBe(true);
+      });
+    });
+
+    describe('When the leftIcon slot is provided (backward compat)', () => {
       beforeEach(async () => {
         mockSlots = { leftIcon: MOCK_ICON_SLOT };
 
@@ -81,6 +93,54 @@ describe('DtRecipeFeedItemPill Tests', function () {
 
       it('should render the icon', () => {
         expect(icon.findComponent(DtIconVideo).exists()).toBe(true);
+      });
+    });
+
+    describe('When the end slot is provided', () => {
+      beforeEach(async () => {
+        mockSlots = { end: '<div data-qa="end-content">End content</div>' };
+
+        await updateWrapper();
+      });
+
+      it('should render the end slot content', () => {
+        expect(wrapper.find('[data-qa="end-content"]').exists()).toBe(true);
+      });
+    });
+
+    describe('When the right slot is provided (backward compat)', () => {
+      beforeEach(async () => {
+        mockSlots = { right: '<div data-qa="right-content">Right content</div>' };
+
+        await updateWrapper();
+      });
+
+      it('should render the right slot content', () => {
+        expect(wrapper.find('[data-qa="right-content"]').exists()).toBe(true);
+      });
+    });
+
+    describe('When the blockEnd slot is provided', () => {
+      beforeEach(async () => {
+        mockSlots = { blockEnd: '<div data-qa="block-end-content">Block end content</div>' };
+
+        await updateWrapper();
+      });
+
+      it('should render the blockEnd slot content', () => {
+        expect(wrapper.find('[data-qa="block-end-content"]').exists()).toBe(true);
+      });
+    });
+
+    describe('When the bottom slot is provided (backward compat)', () => {
+      beforeEach(async () => {
+        mockSlots = { bottom: '<div data-qa="bottom-content">Bottom content</div>' };
+
+        await updateWrapper();
+      });
+
+      it('should render the bottom slot content', () => {
+        expect(wrapper.find('[data-qa="bottom-content"]').exists()).toBe(true);
       });
     });
   });

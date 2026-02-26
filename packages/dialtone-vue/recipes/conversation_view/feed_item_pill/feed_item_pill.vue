@@ -21,7 +21,7 @@
               <slot name="title">
                 <span class="d-recipe-feed-item-pill__title">{{ title }}</span>
               </slot>
-              <template #left>
+              <template #start>
                 <div
                   class="d-recipe-feed-item-pill__icon"
                   data-qa="dt-recipe-feed-item-pill__icon"
@@ -31,7 +31,13 @@
                     v-if="showChevronIcon"
                     size="300"
                   />
-                  <!-- @slot Slot for left icon, icon-size slot prop defaults to '300' -->
+                  <!-- @slot Slot for start icon, icon-size slot prop defaults to '300' -->
+                  <slot
+                    v-else-if="$slots.startIcon"
+                    name="startIcon"
+                    :icon-size="'300'"
+                  />
+                  <!-- @slot @deprecated Use startIcon -->
                   <slot
                     v-else
                     name="leftIcon"
@@ -48,19 +54,37 @@
                 </div>
               </template>
               <template
-                v-if="$slots.bottom"
-                #bottom
+                v-if="$slots.blockEnd || $slots.bottom"
+                #blockEnd
               >
                 <div class="d-recipe-feed-item-pill__bottom">
-                  <slot name="bottom" />
+                  <!-- @slot Slot for block-end content -->
+                  <slot
+                    v-if="$slots.blockEnd"
+                    name="blockEnd"
+                  />
+                  <!-- @slot @deprecated Use blockEnd -->
+                  <slot
+                    v-else
+                    name="bottom"
+                  />
                 </div>
               </template>
               <template
-                v-if="$slots.right"
-                #right
+                v-if="$slots.end || $slots.right"
+                #end
               >
                 <div class="d-recipe-feed-item-pill__right">
-                  <slot name="right" />
+                  <!-- @slot Slot for end content -->
+                  <slot
+                    v-if="$slots.end"
+                    name="end"
+                  />
+                  <!-- @slot @deprecated Use end -->
+                  <slot
+                    v-else
+                    name="right"
+                  />
                 </div>
               </template>
             </dt-item-layout>

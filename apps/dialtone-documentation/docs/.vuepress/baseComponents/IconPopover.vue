@@ -14,12 +14,11 @@
       <dt-button
         class="dialtone-icon-grid__item d-gg8"
         label-class="d-fl-grow-unset"
-        icon-position="top"
         importance="clear"
         kind="muted"
         :active="modelValue"
       >
-        <template #icon>
+        <template #blockStartIcon>
           <dt-icon
             :name="iconName"
             size="600"

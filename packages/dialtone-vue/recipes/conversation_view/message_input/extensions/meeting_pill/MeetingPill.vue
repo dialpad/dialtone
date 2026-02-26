@@ -4,7 +4,7 @@
       class="d-recipe-message-input-meeting-pill__layout"
       unstyled
     >
-      <template #left>
+      <template #start>
         <div class="d-recipe-message-input-meeting-pill__icon">
           <dt-icon-video
             size="400"
@@ -12,7 +12,7 @@
         </div>
       </template>
       {{ node.attrs.text }}
-      <template #right>
+      <template #end>
         <div class="d-recipe-message-input-meeting-pill__close">
           <dt-button
             circle

@@ -36,10 +36,9 @@
         <dt-button
           importance="clear"
           kind="muted"
-          icon-position="right"
         >
           Launch Expert
-          <template #icon>
+          <template #endIcon>
             <dt-icon-external-link size="300" />
           </template>
         </dt-button>
@@ -104,7 +103,7 @@
         @click="close"
       >
         Copy
-        <template #right>
+        <template #end>
           <dt-keyboard-shortcut
             screen-reader-text="Ctrl and C"
             shortcut="Ctrl + C"
@@ -117,7 +116,7 @@
         @click="close"
       >
         Delete
-        <template #right>
+        <template #end>
           <dt-keyboard-shortcut
             screen-reader-text="Delete"
             shortcut="Del"

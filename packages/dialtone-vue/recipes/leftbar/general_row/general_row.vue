@@ -23,10 +23,15 @@
         >
           <span /><span /><span />
         </div>
-        <slot
-          v-else
-          name="left"
-        >
+        <!-- @slot Slot for start content -->
+        <template v-else-if="$slots.start">
+          <slot name="start" />
+        </template>
+        <!-- @slot @deprecated Use start -->
+        <template v-else-if="$slots.left">
+          <slot name="left" />
+        </template>
+        <template v-else>
           <div
             v-if="isDialbotType"
             class="d-recipe-leftbar-general-row__icon"
@@ -55,7 +60,7 @@
               </template>
             </dt-avatar>
           </div>
-        </slot>
+        </template>
       </div>
       <div
         class="d-recipe-leftbar-row__label"
