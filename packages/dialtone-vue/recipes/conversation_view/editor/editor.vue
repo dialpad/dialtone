@@ -120,7 +120,6 @@
             kind="muted"
             importance="clear"
             size="xs"
-            icon-position="right"
             :active="$refs.richTextEditor?.editor?.isActive(button.selector)"
             :tabindex="canFocus(getButtonRef(buttonGroup.key, button.selector)) ? 0 : -1"
             :aria-label="button.tooltipMessage"
@@ -132,8 +131,9 @@
             <template #default>
               <dt-input
                 :value="currentFontColor"
+                root-class="d-w12 d-h12 d-my1"
                 input-class="colorPickerInput d-w100p d-h100p d-p0 d-bar0 d-c-pointer"
-                input-wrapper-class="d-w16 d-h16 d-mt4 d-bar4 d-ba-none"
+                input-wrapper-class="d-w12 d-h12 d-bar2 d-ba-none"
                 size="sm"
                 type="color"
                 @input="onColorPickerInput"
