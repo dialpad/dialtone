@@ -11,49 +11,37 @@
         direction="row"
         class="d-ps-relative"
       >
-        <router-link
-          v-slot="{ navigate, isExactActive }"
-          :to="item.link ?? ''"
-          custom
+        <dt-button
+          :id="labelId"
+          v-bind="attrs"
+          importance="clear"
+          kind="muted"
+          label-class="d-jc-flex-start d-ta-left d-fw-normal"
+          :size="depth === 0 ? 'lg' : undefined"
+          :tabindex="actionableTabIndex"
+          :class="[
+            'd-w100p dialtone-shell-btn',
+            {
+              'd-headline--eyebrow d-fw-semibold d-bgc-transparent d-c-default': !item.link,
+              'd-btn--active': isActiveLink(isExactActive, item.link, true),
+              'd-pr16': depth === 1,
+            },
+            {
+              'd-pl48': depth === 1,
+            },
+          ]"
+          :data-sidebar-link="item.link"
+          @click="handleClick($event, listeners, navigate, item.link)"
         >
-          <dt-button
-            :id="labelId"
-            v-bind="attrs"
-            importance="clear"
-            kind="muted"
-            label-class="d-jc-flex-start d-ta-left d-fw-normal"
-            :size="depth === 0 ? 'lg' : undefined"
-            :tabindex="actionableTabIndex"
-            :class="[
-              'd-w100p dialtone-shell-btn',
-              {
-                'd-headline--eyebrow d-fw-semibold d-bgc-transparent d-c-default': !item.link,
-                'd-btn--active': isActiveLink(isExactActive, item.link, true),
-                'd-pr16': depth === 1,
-              },
-              {
-                'd-pl48': depth === 1,
-              },
-            ]"
-            :data-sidebar-link="item.link"
-            @click="handleClick($event, listeners, navigate, item.link)"
-          >
+          {{ item.text }}
+          <template #endIcon="{ iconSize }">
             <dt-icon
-              v-if="depth === 0 && item.icon"
-              :name="item.icon"
-              size="400"
-              class="d-mr12 d-fc-muted"
+              v-if="item.link"
+              :name="isOpen ? 'chevron-down' : 'chevron-right'"
+              :size="iconSize"
             />
-            {{ item.text }}
-            <template #endIcon="{ iconSize }">
-              <dt-icon
-                v-if="item.link"
-                :name="isOpen ? 'chevron-down' : 'chevron-right'"
-                :size="iconSize"
-              />
-            </template>
-          </dt-button>
-        </router-link>
+          </template>
+        </dt-button>
       </dt-stack>
     </template>
     <template #content>
@@ -121,32 +109,22 @@
                 </dt-stack>
               </dt-button>
             </a>
-            <router-link
+            <dt-button
               v-else
-              v-slot="{ navigate, isExactActive }"
               :to="subItem.link"
-              custom
+              :active="isActiveLink(subItem.link)"
+              importance="clear"
+              kind="muted"
+              label-class="d-jc-flex-start"
+              :class="[
+                'd-w100p d-fw-normal',
+                {
+                  'd-mt2': (index === 0 && nested), // add margin top to first nested item
+                },
+              ]"
             >
-              <dt-button
-                importance="clear"
-                kind="muted"
-                label-class="d-jc-flex-start d-ta-left d-fw-normal"
-                :active="isActiveLink(isExactActive, subItem.link)"
-                :class="[
-                  'dialtone-shell-btn d-w100p',
-                  {
-                    'd-pl48': depth === 0,
-                  },
-                  {
-                    'd-pl64': depth === 1,
-                  },
-                ]"
-                :data-sidebar-link="subItem.link"
-                @click="navigate"
-              >
-                {{ subItem.text }}
-              </dt-button>
-            </router-link>
+              {{ subItem.text }}
+            </dt-button>
           </li>
         </dt-stack>
       </div>

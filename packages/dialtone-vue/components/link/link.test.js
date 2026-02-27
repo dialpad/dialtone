@@ -18,6 +18,8 @@ const baseSlots = {
 
 let mockProps = {};
 let mockSlots = {};
+let mockAttrs = {};
+let mockGlobal = {};
 
 describe('DtLink tests', () => {
   let wrapper;
@@ -27,6 +29,8 @@ describe('DtLink tests', () => {
     wrapper = mount(DtLink, {
       props: { ...baseProps, ...mockProps },
       slots: { ...baseSlots, ...mockSlots },
+      attrs: { ...mockAttrs },
+      global: { ...mockGlobal },
     });
 
     nativeLink = wrapper.find('[data-qa="dt-link"]');
@@ -39,6 +43,8 @@ describe('DtLink tests', () => {
   afterEach(() => {
     mockProps = {};
     mockSlots = {};
+    mockAttrs = {};
+    mockGlobal = {};
   });
 
   describe('Presentation Tests', () => {
@@ -159,6 +165,131 @@ describe('DtLink tests', () => {
     describe('When underline is true (default)', () => {
       it('should not have no-underline class', () => {
         expect(nativeLink.classes('d-link--no-underline')).toBe(false);
+      });
+    });
+  });
+
+  describe('Navigation Tests', () => {
+    describe('When href is provided', () => {
+      it('should render an anchor element', () => {
+        mockProps = { href: 'https://example.com' };
+
+        updateWrapper();
+
+        expect(nativeLink.element.tagName).toBe('A');
+        expect(nativeLink.attributes('href')).toBe('https://example.com');
+      });
+    });
+
+    describe('When neither href nor to is provided', () => {
+      it('should render an anchor with javascript:void(0) fallback', () => {
+        mockProps = { href: null };
+
+        updateWrapper();
+
+        expect(nativeLink.element.tagName).toBe('A');
+        expect(nativeLink.attributes('href')).toBe('javascript:void(0)');
+      });
+    });
+
+    describe('When to is provided', () => {
+      const RouterLinkStub = {
+        name: 'RouterLink',
+        template: '<a data-qa="dt-link" :href="to"><slot /></a>',
+        props: ['to', 'replace'],
+      };
+
+      it('should render a router-link', () => {
+        mockProps = { to: '/components/' };
+        mockGlobal = {
+          stubs: { RouterLink: RouterLinkStub },
+        };
+
+        updateWrapper();
+
+        const routerLink = wrapper.findComponent(RouterLinkStub);
+        expect(routerLink.exists()).toBe(true);
+        expect(routerLink.props('to')).toBe('/components/');
+      });
+
+      it('should pass replace prop to router-link', () => {
+        mockProps = { to: '/components/', replace: true };
+        mockGlobal = {
+          stubs: { RouterLink: RouterLinkStub },
+        };
+
+        updateWrapper();
+
+        const routerLink = wrapper.findComponent(RouterLinkStub);
+        expect(routerLink.props('replace')).toBe(true);
+      });
+
+      it('should default replace to false', () => {
+        mockProps = { to: '/components/' };
+        mockGlobal = {
+          stubs: { RouterLink: RouterLinkStub },
+        };
+
+        updateWrapper();
+
+        const routerLink = wrapper.findComponent(RouterLinkStub);
+        expect(routerLink.props('replace')).toBe(false);
+      });
+
+      it('should support object routes', () => {
+        const route = { name: 'components', params: { id: 1 } };
+        mockProps = { to: route };
+        mockGlobal = {
+          stubs: { RouterLink: RouterLinkStub },
+        };
+
+        updateWrapper();
+
+        const routerLink = wrapper.findComponent(RouterLinkStub);
+        expect(routerLink.props('to')).toEqual(route);
+      });
+    });
+
+    describe('When both to and href are provided', () => {
+      const RouterLinkStub = {
+        name: 'RouterLink',
+        template: '<a data-qa="dt-link"><slot /></a>',
+        props: ['to', 'replace'],
+      };
+
+      it('should render router-link (to takes precedence)', () => {
+        mockProps = { to: '/components/', href: 'https://example.com' };
+        mockGlobal = {
+          stubs: { RouterLink: RouterLinkStub },
+        };
+
+        updateWrapper();
+
+        const routerLink = wrapper.findComponent(RouterLinkStub);
+        expect(routerLink.exists()).toBe(true);
+        expect(routerLink.props('to')).toBe('/components/');
+      });
+    });
+
+    describe('When to is provided with kind', () => {
+      const RouterLinkStub = {
+        name: 'RouterLink',
+        template: '<a data-qa="dt-link" :class="$attrs.class"><slot /></a>',
+        props: ['to', 'replace'],
+      };
+
+      it('should apply link classes to the router-link', () => {
+        mockProps = { to: '/components/', kind: MUTED };
+        mockGlobal = {
+          stubs: { RouterLink: RouterLinkStub },
+        };
+
+        updateWrapper();
+
+        const routerLink = wrapper.findComponent(RouterLinkStub);
+        expect(routerLink.exists()).toBe(true);
+        expect(wrapper.find('[data-qa="dt-link"]').classes()).toContain('d-link');
+        expect(wrapper.find('[data-qa="dt-link"]').classes()).toContain(LINK_KIND_MODIFIERS[MUTED]);
       });
     });
   });

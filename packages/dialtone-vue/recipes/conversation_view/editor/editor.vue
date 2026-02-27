@@ -51,6 +51,81 @@
         <div class="d-recipe-editor__button-group-divider" />
       </dt-stack>
       <dt-stack
+        v-if="variableButton.showBtn"
+        direction="row"
+        gap="300"
+      >
+        <dt-popover
+          padding="small"
+          navigation-type="arrow-keys"
+          :modal="false"
+          placement="bottom-start"
+        >
+          <template #anchor="{ attrs }">
+            <dt-tooltip
+              :message="variableButton.tooltipMessage"
+              placement="top"
+            >
+              <template #anchor>
+                <dt-button
+                  v-bind="attrs"
+                  kind="muted"
+                  size="xs"
+                  importance="clear"
+                  :aria-label="variableButton.tooltipMessage"
+                  :data-qa="variableButton.dataQA"
+                  label-class="d-jc-flex-start"
+                >
+                  <template #icon>
+                    <component
+                      :is="variableButton.icon"
+                      size="200"
+                    />
+                  </template>
+                </dt-button>
+              </template>
+            </dt-tooltip>
+          </template>
+          <template #content="{ close }">
+            <dt-input
+              v-model="variableSearchValue"
+              root-class="d-p8 d-pb4 d-w264"
+              type="search"
+              :placeholder="i18n.$t('DIALTONE_EDITOR_VARIABLE_POPOVER_SEARCH_PLACEHOLDER')"
+              size="md"
+              role="menuitem"
+            >
+              <template #leftIcon="{ iconSize }">
+                <dt-icon-search :size="iconSize" />
+              </template>
+            </dt-input>
+            <dt-list-item-group
+              v-for="(category, index) in filteredCategories"
+              :key="category.name"
+              :heading="category.name"
+              heading-class="d-headline--sm-compact d-p8"
+            >
+              <dt-list-item
+                v-for="item in getFilteredItemsForCategory(category)"
+                :key="category.name + item.name"
+                role="menuitem"
+                navigation-type="arrow-keys"
+                @click="
+                  insertVariable(category.name, item);
+                  close();
+                "
+              >
+                {{ item.name }}
+              </dt-list-item>
+              <dt-dropdown-separator
+                v-if="index < filteredCategories.length - 1"
+              />
+            </dt-list-item-group>
+          </template>
+        </dt-popover>
+        <div class="d-recipe-editor__button-group-divider" />
+      </dt-stack>
+      <dt-stack
         v-if="linkButton.showBtn"
         direction="row"
         gap="300"
@@ -166,6 +241,8 @@
         :allow-font-family="true"
         :allow-inline-images="true"
         :allow-line-breaks="true"
+        :allow-variable="true"
+        :variable-items="flattenedVariableItems"
         :hide-link-bubble-menu="true"
         :auto-focus="autoFocus"
         :editable="editable"
@@ -204,6 +281,9 @@ import { DtPopover } from '@/components/popover';
 import { DtStack } from '@/components/stack';
 import { DtInput } from '@/components/input';
 import { DtTooltip } from '@/components/tooltip';
+import {DtListItem} from '@/components/list_item/index.js';
+import {DtDropdownSeparator} from '@/components/dropdown/index.js';
+import {DtListItemGroup} from '@/components/list_item_group/index.js';
 import {
   DtIconAlignCenter,
   DtIconAlignJustify,
@@ -220,6 +300,8 @@ import {
   DtIconQuote,
   DtIconStrikethrough,
   DtIconUnderline,
+  DtIconBraces,
+  DtIconSearch,
 } from '@dialpad/dialtone-icons/vue3';
 import { DialtoneLocalization } from '@/localization';
 
@@ -228,6 +310,9 @@ export default {
   name: 'DtRecipeEditor',
 
   components: {
+    DtListItemGroup,
+    DtDropdownSeparator,
+    DtListItem,
     DtRichTextEditor,
     DtButton,
     DtPopover,
@@ -249,6 +334,8 @@ export default {
     DtIconCodeBlock,
     DtIconLink2,
     DtIconImage,
+    DtIconBraces,
+    DtIconSearch,
   },
 
   mixins: [],
@@ -452,6 +539,22 @@ export default {
     },
 
     /**
+     * Show button to add a variable
+     */
+    showVariableButton: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Variable categories to display when variable button is clicked
+     */
+    variableCategories: {
+      type: Array,
+      default: () => [],
+    },
+
+    /**
      * Show add link default config.
      */
     showAddLink: {
@@ -540,6 +643,7 @@ export default {
       showLinkInput: false,
       linkInput: '',
       currentButtonRefIndex: 0,
+      variableSearchValue: '',
       i18n: new DialtoneLocalization(),
     };
   },
@@ -551,6 +655,13 @@ export default {
 
     htmlOutputFormat () {
       return RICH_TEXT_EDITOR_OUTPUT_FORMATS[2];
+    },
+
+    flattenedVariableItems () {
+      if (!this.variableCategories) return [];
+      return this.variableCategories.reduce((acc, category) => {
+        return acc.concat(category.items || []);
+      }, []);
     },
 
     showingTextFormatButtons () {
@@ -741,6 +852,17 @@ export default {
       };
     },
 
+    variableButton() {
+      return {
+        showBtn: this.showVariableButton,
+        selector: 'variable',
+        icon: DtIconBraces,
+        dataQA: 'dt-recipe-editor-variable-btn',
+        tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_VARIABLE_BUTTON_LABEL'),
+      }
+    },
+
+
     confirmSetLinkButtonLabels () {
       return this.i18n.$ta('DIALTONE_EDITOR_CONFIRM_SET_LINK_BUTTON');
     },
@@ -755,6 +877,12 @@ export default {
 
     showAddLinkButtonLabels () {
       return this.i18n.$ta('DIALTONE_EDITOR_ADD_LINK_BUTTON');
+    },
+
+    filteredCategories() {
+      return this.variableCategories.filter(
+        (category) => this.getFilteredItemsForCategory(category).length,
+      );
     },
   },
 
@@ -885,6 +1013,15 @@ export default {
       this.$emit('inline-image-click');
     },
 
+    insertVariable (categoryName, variableData) {
+      // Insert a variable using the custom command from the Variable extension
+      this.$refs.richTextEditor?.editor.chain().focus().insertVariable({
+        id: variableData.id,
+        placeholder: variableData.placeholder || '',
+        altText: '',
+      }).run();
+    },
+
     insertInlineImage (imageUrl) {
       this.$refs.richTextEditor?.editor.chain().focus().setImage({ src: imageUrl }).run();
     },
@@ -954,6 +1091,16 @@ export default {
       const currentActionBarBtn = Array.isArray(currentRef) ? currentRef[0] : currentRef;
       previousActionBarBtn.$el.blur();
       currentActionBarBtn.$el.focus();
+    },
+
+    getFilteredItemsForCategory(category) {
+      const searchValue = this.variableSearchValue.toLowerCase();
+      if (category.name.toLowerCase().includes(searchValue)) {
+        return category.items;
+      }
+      return category.items.filter((item) =>
+        item.name.toLowerCase().includes(searchValue),
+      );
     },
   },
 };

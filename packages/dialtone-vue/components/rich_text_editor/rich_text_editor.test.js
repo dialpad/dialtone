@@ -2,6 +2,10 @@ import { mount } from '@vue/test-utils';
 import DtRichTextEditor from './rich_text_editor.vue';
 import { EditorContent } from '@tiptap/vue-3';
 import { simulatePaste } from '../../tests/setupTests';
+import {
+  findVariable,
+  countVariables,
+} from '../../common/test_utils/node_traversal';
 
 // Wrappers
 let wrapper;
@@ -707,6 +711,50 @@ describe('DtRichTextEditor tests', () => {
       });
     });
 
+    describe('Mention hover functionality', () => {
+      const mentionData = {
+        id: 'john.doe',
+        name: 'John Doe',
+        avatarSrc: 'avatar.jpg',
+        contactKey: 'contact-123',
+      };
+
+      beforeEach(async () => {
+        await wrapper.setProps({
+          mentionSuggestion: { items: vi.fn(() => [mentionData]) },
+        });
+
+        const editorInstance = wrapper.vm.editor;
+        const mentionNode = editorInstance.schema.nodes.mention.create(mentionData);
+        editorInstance.view.dispatch(editorInstance.state.tr.insert(0, mentionNode));
+        await wrapper.vm.$nextTick();
+      });
+
+      describe('When the cursor enters a mention', () => {
+        it('should emit mention-hover event with mention data and mouse event', async () => {
+          const mentionLink = wrapper.find('a.d-link');
+          await mentionLink.trigger('mouseenter');
+
+          const emitted = wrapper.emitted('mention-hover');
+          expect(emitted).toBeTruthy();
+          expect(emitted[0][0]).toMatchObject(mentionData);
+          expect(emitted[0][0].event).toBeInstanceOf(MouseEvent);
+        });
+      });
+
+      describe('When the cursor leaves a mention', () => {
+        it('should emit mention-leave event with mention data and mouse event', async () => {
+          const mentionLink = wrapper.find('a.d-link');
+          await mentionLink.trigger('mouseleave');
+
+          const emitted = wrapper.emitted('mention-leave');
+          expect(emitted).toBeTruthy();
+          expect(emitted[0][0]).toMatchObject(mentionData);
+          expect(emitted[0][0].event).toBeInstanceOf(MouseEvent);
+        });
+      });
+    });
+
     describe('Channel click functionality', () => {
       describe('When a channel is clicked', () => {
         it('should emit channel-click event with channel data', async () => {
@@ -1053,6 +1101,234 @@ describe('DtRichTextEditor tests', () => {
         // Default props don't include slashCommandSuggestion
         const emittedEvents = wrapper.emitted('selected-command');
         expect(emittedEvents).toBeFalsy();
+      });
+    });
+  });
+
+  describe('Variable Extension Tests', function () {
+    describe('When allowVariable is true', function () {
+      const variableItems = [
+        { id: 'user_name', name: 'User Name', placeholder: 'User Name' },
+        { id: 'company_name', name: 'Company Name', placeholder: 'Company Name' },
+        { id: 'ticket_id', name: 'Ticket ID', placeholder: 'Ticket ID' },
+      ];
+
+      beforeEach(async function () {
+        await wrapper.setProps({
+          allowVariable: true,
+          variableItems,
+        });
+      });
+
+      it('should enable the variable extension', function () {
+        const editorInstance = wrapper.vm.editor;
+        const variableExtension = editorInstance.extensionManager.extensions.find(
+          ext => ext.name === 'variable',
+        );
+        expect(variableExtension).toBeDefined();
+      });
+
+      it('should have insertVariable command available', function () {
+        const editorInstance = wrapper.vm.editor;
+        expect(typeof editorInstance.commands.insertVariable).toBe('function');
+      });
+
+      it('should insert a variable with id and altText', async function () {
+        const editorInstance = wrapper.vm.editor;
+        editorInstance.commands.insertVariable({
+          id: 'user_name',
+          altText: 'John Doe',
+        });
+        await wrapper.vm.$nextTick();
+
+        const json = editorInstance.getJSON();
+        const variableNode = findVariable(json.content, 'user_name');
+        expect(variableNode).not.toBeNull();
+        expect(variableNode.attrs.altText).toBe('John Doe');
+      });
+
+      it('should render variables in HTML output', async function () {
+        await wrapper.setProps({ outputFormat: 'html' });
+
+        const editorInstance = wrapper.vm.editor;
+        editorInstance.commands.insertVariable({
+          id: 'company_name',
+          altText: 'Acme Corp',
+        });
+        await wrapper.vm.$nextTick();
+
+        const htmlOutput = wrapper.vm.getOutput();
+        expect(htmlOutput).toContain('data-variable-id="company_name"');
+        expect(htmlOutput).toContain('data-alt-text="Acme Corp"');
+      });
+
+      it('should render variables in JSON output', async function () {
+        await wrapper.setProps({ outputFormat: 'json' });
+
+        const editorInstance = wrapper.vm.editor;
+        editorInstance.commands.insertVariable({
+          id: 'ticket_id',
+          altText: '#12345',
+        });
+        await wrapper.vm.$nextTick();
+
+        const jsonOutput = wrapper.vm.getOutput();
+        expect(jsonOutput.content).toBeDefined();
+
+        const variableNode = findVariable(jsonOutput.content, 'ticket_id');
+        expect(variableNode).not.toBeNull();
+        expect(variableNode.attrs.altText).toBe('#12345');
+      });
+
+      it('should render variable altText in text output', async function () {
+        await wrapper.setProps({ outputFormat: 'text', modelValue: '' });
+
+        const editorInstance = wrapper.vm.editor;
+        editorInstance.commands.insertVariable({
+          id: 'user_name',
+          altText: 'Jane Smith',
+        });
+        await wrapper.vm.$nextTick();
+
+        const textOutput = wrapper.vm.getOutput();
+        expect(textOutput).toBe('Jane Smith');
+      });
+
+      it('should render variables in markdown output as comments', async function () {
+        await wrapper.setProps({ outputFormat: 'markdown', modelValue: '' });
+
+        const editorInstance = wrapper.vm.editor;
+        editorInstance.commands.insertContent('Hello ');
+        editorInstance.commands.insertVariable({
+          id: 'user_name',
+          altText: 'Bob',
+        });
+        editorInstance.commands.insertContent(' welcome!');
+        await wrapper.vm.$nextTick();
+
+        const markdownOutput = wrapper.vm.getOutput();
+        expect(markdownOutput).toBe('Hello {{user_name=Bob}} welcome!\n');
+      });
+
+      it('should insert multiple variables', async function () {
+        const editorInstance = wrapper.vm.editor;
+
+        editorInstance.commands.insertVariable({ id: 'user_name', altText: 'User' });
+        editorInstance.commands.insertContent(' from ');
+        editorInstance.commands.insertVariable({ id: 'company_name', altText: 'Company' });
+        await wrapper.vm.$nextTick();
+
+        const json = editorInstance.getJSON();
+        const variableCount = countVariables(json.content);
+        expect(variableCount).toBe(2);
+      });
+
+      it('should preserve variable items configuration', function () {
+        const editorInstance = wrapper.vm.editor;
+        const variableExtension = editorInstance.extensionManager.extensions.find(
+          ext => ext.name === 'variable',
+        );
+
+        expect(variableExtension.options.variableItems).toEqual(variableItems);
+      });
+
+      it('should handle variables with empty altText', async function () {
+        await wrapper.setProps({ outputFormat: 'text', modelValue: '' });
+
+        const editorInstance = wrapper.vm.editor;
+        editorInstance.commands.insertContent('Hello ');
+        editorInstance.commands.insertVariable({ id: 'user_name', altText: '' });
+        editorInstance.commands.insertContent(' there');
+        await wrapper.vm.$nextTick();
+
+        const textOutput = wrapper.vm.getOutput();
+        expect(textOutput).toBe('Hello  there');
+      });
+
+      it('should parse variables from HTML input', async function () {
+        const htmlWithVariable = '<p>Hello <variable data-variable-id="user_name" data-alt-text="Alice"></variable>!</p>';
+
+        await wrapper.setProps({
+          modelValue: htmlWithVariable,
+          outputFormat: 'json',
+        });
+        await wrapper.vm.$nextTick();
+
+        const jsonOutput = wrapper.vm.getOutput();
+        const variableNode = findVariable(jsonOutput.content, 'user_name');
+        expect(variableNode).not.toBeNull();
+        expect(variableNode.attrs.altText).toBe('Alice');
+      });
+    });
+
+    describe('When allowVariable is false', function () {
+      beforeEach(async function () {
+        await wrapper.setProps({
+          allowVariable: false,
+        });
+      });
+
+      it('should not enable the variable extension', function () {
+        const editorInstance = wrapper.vm.editor;
+        const variableExtension = editorInstance.extensionManager.extensions.find(
+          ext => ext.name === 'variable',
+        );
+        expect(variableExtension).toBeUndefined();
+      });
+
+      it('should not have insertVariable command available', function () {
+        const editorInstance = wrapper.vm.editor;
+        expect(editorInstance.commands.insertVariable).toBeUndefined();
+      });
+    });
+
+    describe('Variable with different output formats', function () {
+      beforeEach(async function () {
+        await wrapper.setProps({
+          allowVariable: true,
+          variableItems: [
+            { id: 'test_var', name: 'Test Variable', placeholder: 'Test' },
+          ],
+          modelValue: '',
+        });
+      });
+
+      it('should handle variables mixed with formatted text in markdown', async function () {
+        await wrapper.setProps({
+          outputFormat: 'markdown',
+          allowBold: true,
+          allowItalic: true,
+        });
+
+        const editorInstance = wrapper.vm.editor;
+        editorInstance.commands.insertContent('Hello ');
+        editorInstance.commands.insertVariable({ id: 'test_var', altText: 'Variable' });
+        editorInstance.commands.insertContent(' and ');
+        editorInstance.commands.toggleBold();
+        editorInstance.commands.insertContent('bold text');
+        await wrapper.vm.$nextTick();
+
+        const markdownOutput = wrapper.vm.getOutput();
+        expect(markdownOutput).toBe('Hello {{test_var=Variable}} and **bold text**\n');
+      });
+
+      it('should handle variables in complex document structure', async function () {
+        await wrapper.setProps({
+          outputFormat: 'json',
+          allowBulletList: true,
+        });
+
+        const editorInstance = wrapper.vm.editor;
+        editorInstance.commands.toggleBulletList();
+        editorInstance.commands.insertContent('Item with ');
+        editorInstance.commands.insertVariable({ id: 'test_var', altText: 'var' });
+        await wrapper.vm.$nextTick();
+
+        const jsonOutput = wrapper.vm.getOutput();
+        expect(jsonOutput.content[0].type).toBe('bulletList');
+
+        const hasVariables = countVariables(jsonOutput.content) > 0;
+        expect(hasVariables).toBe(true);
       });
     });
   });

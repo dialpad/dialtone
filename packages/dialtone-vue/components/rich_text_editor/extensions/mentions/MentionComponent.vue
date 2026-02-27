@@ -6,6 +6,10 @@
     <dt-link
       kind="mention"
       @click.prevent="handleClick"
+      @mouseenter="handleMouseEnter"
+      @mouseleave="handleMouseLeave"
+      @focusin="handleMouseEnter"
+      @focusout="handleMouseLeave"
     >
       {{ text }}
     </dt-link>
@@ -34,14 +38,25 @@ export default {
   },
 
   methods: {
-    handleClick () {
-      const mentionData = {
+    getMentionData () {
+      return {
         name: this.$props.node.attrs.name,
         id: this.$props.node.attrs.id,
         avatarSrc: this.$props.node.attrs.avatarSrc,
         contactKey: this.$props.node.attrs.contactKey,
       };
-      this.$props.editor.emit('mention-click', mentionData);
+    },
+
+    handleClick () {
+      this.$props.editor.emit('mention-click', this.getMentionData());
+    },
+
+    handleMouseEnter (event) {
+      this.$props.editor.emit('mention-hover', { ...this.getMentionData(), event });
+    },
+
+    handleMouseLeave (event) {
+      this.$props.editor.emit('mention-leave', { ...this.getMentionData(), event });
     },
   },
 };

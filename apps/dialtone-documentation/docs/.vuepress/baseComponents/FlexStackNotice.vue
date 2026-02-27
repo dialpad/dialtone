@@ -6,13 +6,13 @@
     title="Use DtStack in favor of Flex CSS Utilities"
   >
     Use the
-    <router-link class="d-link d-link--muted" to="/components/stack">
+    <dt-link to="/components/stack" kind="muted">
       DtStack
-    </router-link>
+    </dt-link>
     component for most Flex-based layout implementations. View
-    <router-link class="d-link d-link--muted" to="/about/whats-new/posts/2025-12-2">
+    <dt-link to="/about/whats-new/posts/2025-12-2" kind="muted">
       Migrating from Flex CSS Utilities to DtStack
-    </router-link>
+    </dt-link>
     for more details.
   </dt-notice>
 </template>
