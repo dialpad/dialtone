@@ -348,22 +348,16 @@ Use the `#leading` and `#trailing` slots on `dt-tab` to render content like badg
   <div class="d-w100p">
     <dt-tab-group>
       <template #tabs>
-        <dt-tab id="lt1" panel-id="lt2" selected leading-class="d-pl8" trailing-class="d-pr8">
-          <template #icon="{ iconSize }">
-            <dt-icon name="sun" :size="iconSize" />
-          </template>
+        <dt-tab id="lt1" panel-id="lt2" selected trailing-class="d-pr8">
           Inbox
-          <template #leading>
-            <dt-badge kind="count" text="3" />
-          </template>
           <template #trailing>
-            <dt-badge kind="count" text="12" />
+            <dt-badge kind="count" type="bulletin" text="9" />
           </template>
         </dt-tab>
         <dt-tab id="lt3" panel-id="lt4" trailing-class="d-pr8">
-          Sent
+          Archive
           <template #trailing>
-            <dt-badge kind="count" text="5" />
+            <dt-badge kind="count" text="99+" />
           </template>
         </dt-tab>
         <dt-tab id="lt5" panel-id="lt6">
@@ -378,22 +372,19 @@ Use the `#leading` and `#trailing` slots on `dt-tab` to render content like badg
 vueCode='
 <dt-tab-group>
   <template #tabs>
-    <dt-tab id="1" panel-id="2" selected trailing-class="d-pr8">
-      <template #icon="{ iconSize }">
-        <dt-icon name="sun" :size="iconSize" />
-      </template>
+    <dt-tab id="lt1" panel-id="lt2" selected trailing-class="d-pr8">
       Inbox
       <template #trailing>
-        <dt-badge kind="count" text="12" />
+        <dt-badge kind="count" type="bulletin" text="9" />
       </template>
     </dt-tab>
-    <dt-tab id="3" panel-id="4" trailing-class="d-pr8">
-      Sent
+    <dt-tab id="lt3" panel-id="lt4" trailing-class="d-pr8">
+      Archive
       <template #trailing>
-        <dt-badge kind="count" text="5" />
+        <dt-badge kind="count" text="99+" />
       </template>
     </dt-tab>
-    <dt-tab id="5" panel-id="6">
+    <dt-tab id="lt5" panel-id="lt6">
       Drafts
     </dt-tab>
   </template>
