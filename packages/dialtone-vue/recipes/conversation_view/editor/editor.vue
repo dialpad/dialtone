@@ -1136,18 +1136,21 @@ export default {
 .image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='bottom-right'] {
   width: 8px;
   height: 8px;
-  cursor: nwse-resize;
 }
 .image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='top-left'] {
+  cursor: nwse-resize;
   transform: translate(-50%, -50%);
 }
 .image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='top-right'] {
+  cursor: nesw-resize;
   transform: translate(50%, -50%);
 }
 .image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='bottom-left'] {
+  cursor: nesw-resize;
   transform: translate(-50%, 50%);
 }
 .image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='bottom-right'] {
+  cursor: nwse-resize;
   transform: translate(50%, 50%);
 }
 </style>
