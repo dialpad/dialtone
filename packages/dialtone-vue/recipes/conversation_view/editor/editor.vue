@@ -129,9 +129,6 @@
             @keydown.left.stop="shiftActionBarFocusLeft"
             @click="button.onClick()"
           >
-            <template #icon>
-              <dt-icon-chevron-down size="200" />
-            </template>
             <template #default>
               <dt-input
                 :value="currentFontColor"
@@ -141,11 +138,7 @@
                 type="color"
                 @input="onColorPickerInput"
                 @click.stop
-              >
-                <template #icon>
-                  <dt-icon-chevron-down size="200" />
-                </template>
-              </dt-input>
+              />
             </template>
           </dt-button>
 
@@ -1074,8 +1067,6 @@ export default {
         onClick: this.openLinkInput,
       };
     },
-
-
 
     confirmSetLinkButtonLabels () {
       return this.i18n.$ta('DIALTONE_EDITOR_CONFIRM_SET_LINK_BUTTON');
