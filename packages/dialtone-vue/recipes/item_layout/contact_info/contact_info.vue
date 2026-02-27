@@ -4,12 +4,12 @@
     data-qa="contact-info"
     class="d-recipe-contact-info"
     content-class="d-recipe-contact-info__content"
-    right-class="d-recipe-contact-info__right"
+    end-class="d-recipe-contact-info__right"
     unstyled
   >
     <template
       v-if="showAvatar"
-      #left
+      #start
     >
       <button
         class="d-recipe-contact-info__left"
@@ -93,25 +93,41 @@
     </template>
 
     <template
-      v-if="$slots.bottom"
-      #bottom
+      v-if="$slots.blockEnd || $slots.bottom"
+      #blockEnd
     >
       <div
         class="d-recipe-contact-info__bottom"
         data-qa="contact-info-bottom"
       >
-        <!-- @slot Slot for information at the bottom -->
-        <slot name="bottom" />
+        <!-- @slot Slot for block-end content -->
+        <slot
+          v-if="$slots.blockEnd"
+          name="blockEnd"
+        />
+        <!-- @slot @deprecated Use blockEnd -->
+        <slot
+          v-else
+          name="bottom"
+        />
       </div>
     </template>
 
     <template
-      v-if="$slots.right"
-      #right
+      v-if="$slots.end || $slots.right"
+      #end
     >
       <div data-qa="contact-info-right">
-        <!-- @slot Slot for the right content -->
-        <slot name="right" />
+        <!-- @slot Slot for the end content -->
+        <slot
+          v-if="$slots.end"
+          name="end"
+        />
+        <!-- @slot @deprecated Use end -->
+        <slot
+          v-else
+          name="right"
+        />
       </div>
     </template>
   </dt-item-layout>

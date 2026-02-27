@@ -129,6 +129,73 @@ describe('DtBadge Tests', () => {
       });
     });
 
+    describe('When a startIcon slot is provided', () => {
+      beforeEach(() => {
+        mockSlots = { startIcon: '<dt-icon name="plus" />' };
+
+        updateWrapper();
+      });
+
+      it('should render the left icon wrapper', () => {
+        expect(wrapper.find('.d-badge__icon-left').exists()).toBe(true);
+      });
+    });
+
+    describe('When an endIcon slot is provided', () => {
+      beforeEach(() => {
+        mockSlots = { endIcon: '<dt-icon name="plus" />' };
+
+        updateWrapper();
+      });
+
+      it('should render the right icon wrapper', () => {
+        expect(wrapper.find('.d-badge__icon-right').exists()).toBe(true);
+      });
+    });
+
+    describe('Backward compatibility', () => {
+      describe('When leftIcon slot is provided (deprecated)', () => {
+        beforeEach(() => {
+          mockSlots = { leftIcon: '<dt-icon name="plus" />' };
+
+          updateWrapper();
+        });
+
+        it('should render the left icon wrapper', () => {
+          expect(wrapper.find('.d-badge__icon-left').exists()).toBe(true);
+        });
+      });
+
+      describe('When rightIcon slot is provided (deprecated)', () => {
+        beforeEach(() => {
+          mockSlots = { rightIcon: '<dt-icon name="plus" />' };
+
+          updateWrapper();
+        });
+
+        it('should render the right icon wrapper', () => {
+          expect(wrapper.find('.d-badge__icon-right').exists()).toBe(true);
+        });
+      });
+
+      describe('When both startIcon and leftIcon slots are provided', () => {
+        it('should render the new startIcon content and suppress the deprecated leftIcon', () => {
+          mockSlots = {
+            startIcon: '<span>new</span>',
+            leftIcon: '<span>old</span>',
+          };
+
+          updateWrapper();
+
+          const leftIconWrapper = wrapper.find('.d-badge__icon-left');
+
+          expect(leftIconWrapper.exists()).toBe(true);
+          expect(leftIconWrapper.text()).toContain('new');
+          expect(leftIconWrapper.text()).not.toContain('old');
+        });
+      });
+    });
+
     describe('When a decoration is provided via prop', () => {
       describe('When decoration is black-900', () => {
         it('should have correct decoration', async () => {

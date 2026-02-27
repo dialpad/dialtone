@@ -79,37 +79,59 @@ const highlightedImport = computed(() => {
   return Prism.highlight(importStatement.value, Prism.languages.javascript, 'javascript');
 });
 
+const isDeprecated = (item) => {
+  return item.tags?.deprecated?.length > 0 ||
+    /(@deprecated|deprecated[,)])/i.test(item.description || '');
+};
+
+const deprecationMessage = (item) => {
+  const tag = item.tags?.deprecated?.[0]?.description;
+  if (tag) return tag;
+  const desc = item.description || '';
+  const match = desc.match(/deprecated,?\s*use\s+([\w.]+)/i) ||
+    desc.match(/@deprecated\s+Use\s+([\w.]+)/i);
+  return match ? `Use ${match[1]}` : null;
+};
+
 const docSlots = componentDocs.find(f => isSameComponentName(f.displayName))
   ?.slots?.map((item) => {
     return {
       name: item.name,
-      description: item.description,
+      description: isDeprecated(item) ? undefined : item.description,
+      deprecated: isDeprecated(item),
+      deprecatedMessage: deprecationMessage(item),
     };
   });
+
+const resolveConstantRef = (rawDefault, values) => {
+  const match = rawDefault.match(/^[A-Z][A-Z_]*\.[A-Z][A-Z_]*$/);
+  if (!match) return rawDefault;
+  const key = rawDefault.split('.')[1].toLowerCase().replace(/_/g, '-');
+  const found = values.find(v => v === key || v === key.replace(/-/g, '_'));
+  if (found) return found;
+  if (key === 'none' && values.includes('null')) return 'null';
+  return rawDefault;
+};
 
 const resolveDefaultValue = (rawDefault, values) => {
   if (!rawDefault) return rawDefault;
   if (rawDefault === 'undefined') return null;
   if (/getUniqueString\(\)/.test(rawDefault)) return 'generated unique ID';
   if (!values?.length) return rawDefault;
-  // Match constant references like DT_MODE_ISLAND_TYPES.INVERTED
-  const match = rawDefault.match(/^[A-Z][A-Z_]*\.[A-Z][A-Z_]*$/);
-  if (!match) return rawDefault;
-  const key = rawDefault.split('.')[1].toLowerCase().replace(/_/g, '-');
-  return values.find(v => v === key || v === key.replace(/-/g, '_'))
-    ?? (key === 'none' && values.includes('null') ? 'null' : rawDefault);
+  return resolveConstantRef(rawDefault, values);
 };
 
 const docProps = componentDocs.find(f => isSameComponentName(f.displayName))
   ?.props?.map((item) => {
     return {
-      name: item?.name,
-      description: item?.description,
-      type: item?.type?.name,
-      defaultValue: resolveDefaultValue(item?.defaultValue?.value, item?.values),
-      values: item?.values,
-      required: item?.required,
-      deprecated: !!item?.tags?.deprecated,
+      name: item.name,
+      description: item.description,
+      type: item.type?.name,
+      defaultValue: resolveDefaultValue(item.defaultValue?.value, item.values),
+      values: item.values,
+      required: item.required,
+      deprecated: isDeprecated(item),
+      deprecatedMessage: deprecationMessage(item),
     };
   });
 
@@ -119,6 +141,8 @@ const docEvents = componentDocs.find(f => isSameComponentName(f.displayName))
       name: item.name,
       description: item.description,
       type: item.type?.names.join(' '),
+      deprecated: isDeprecated(item),
+      deprecatedMessage: deprecationMessage(item),
     };
   });
 </script>

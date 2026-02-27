@@ -103,7 +103,7 @@
         circle
         aria-label="Icon only"
       >
-        <template #icon="{ iconSize }">
+        <template #startIcon="{ iconSize }">
           <dt-icon
             name="download"
             :size="iconSize"
@@ -112,18 +112,60 @@
       </dt-button>
       <!-- Icon only -->
       <dt-button aria-label="Icon only">
-        <template #icon="{ iconSize }">
+        <template #startIcon="{ iconSize }">
           <dt-icon
             name="download"
             :size="iconSize"
           />
         </template>
       </dt-button>
-    </dt-stack>
 
-    <!-- Loading -->
-    <h2>Loading</h2>
-    <div>
+      <!-- Icon Left -->
+      <dt-button>
+        <template #startIcon="{ iconSize }">
+          <dt-icon
+            name="download"
+            :size="iconSize"
+          />
+        </template>
+        Icon Left
+      </dt-button>
+
+      <!-- Icon Right -->
+      <dt-button>
+        <template #endIcon="{ iconSize }">
+          <dt-icon
+            name="download"
+            :size="iconSize"
+          />
+        </template>
+        Icon Right
+      </dt-button>
+
+      <!-- Icon Top -->
+      <dt-button>
+        <template #blockStartIcon="{ iconSize }">
+          <dt-icon
+            name="download"
+            :size="iconSize"
+          />
+        </template>
+        Icon Top
+      </dt-button>
+
+      <!-- Icon Bottom -->
+      <dt-button>
+        <template #blockEndIcon="{ iconSize }">
+          <dt-icon
+            name="download"
+            :size="iconSize"
+          />
+        </template>
+        Icon Bottom
+      </dt-button>
+    </dt-stack>
+    <div class="d-flow8">
+      <!-- Loading -->
       <dt-button loading>
         Button
       </dt-button>

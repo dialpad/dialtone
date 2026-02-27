@@ -5,14 +5,14 @@ import SplitButtonOmega from './split_button-omega.vue';
 import { DtIconSend } from '@dialpad/dialtone-icons/vue3';
 import { DtTooltipDirective } from '@/directives/tooltip_directive';
 
-const MOCK_ALPHA_BUTTON_STUB = vi.fn();
-const MOCK_OMEGA_BUTTON_STUB = vi.fn();
-const MOCK_ALPHA_TOOLTIP_TEXT = 'Alpha tooltip text';
-const MOCK_OMEGA_TOOLTIP_TEXT = 'Omega tooltip text';
+const MOCK_START_BUTTON_STUB = vi.fn();
+const MOCK_END_BUTTON_STUB = vi.fn();
+const MOCK_START_TOOLTIP_TEXT = 'Start tooltip text';
+const MOCK_END_TOOLTIP_TEXT = 'End tooltip text';
 const MOCK_ROOT_CLASS = 'custom-class';
 
 const baseProps = {
-  omegaTooltipText: MOCK_OMEGA_TOOLTIP_TEXT,
+  endTooltipText: MOCK_END_TOOLTIP_TEXT,
 };
 const baseSlots = {
   default: () => 'Button text',
@@ -117,9 +117,9 @@ describe('DtSplitButton Tests', function () {
       });
     });
 
-    describe('When loading is set to true', () => {
+    describe('When startLoading is set to true', () => {
       it('Should have loading class', async () => {
-        mockProps = { alphaLoading: true };
+        mockProps = { startLoading: true };
 
         updateWrapper();
 
@@ -127,9 +127,9 @@ describe('DtSplitButton Tests', function () {
       });
     });
 
-    describe('When alpha-disabled is set to true', () => {
-      it('Should disable only the alpha button', async () => {
-        mockProps = { alphaDisabled: true };
+    describe('When startDisabled is set to true', () => {
+      it('Should disable only the start button', async () => {
+        mockProps = { startDisabled: true };
 
         updateWrapper();
 
@@ -138,9 +138,9 @@ describe('DtSplitButton Tests', function () {
       });
     });
 
-    describe('When omega-disabled is set to true', () => {
-      it('Should disable only the omega button', async () => {
-        mockProps = { omegaDisabled: true };
+    describe('When endDisabled is set to true', () => {
+      it('Should disable only the end button', async () => {
+        mockProps = { endDisabled: true };
 
         updateWrapper();
 
@@ -160,9 +160,9 @@ describe('DtSplitButton Tests', function () {
       });
     });
 
-    describe('When alpha-active is set to true', () => {
+    describe('When startActive is set to true', () => {
       it('Should have active class', async () => {
-        mockProps = { alphaActive: true };
+        mockProps = { startActive: true };
 
         updateWrapper();
 
@@ -170,9 +170,9 @@ describe('DtSplitButton Tests', function () {
       });
     });
 
-    describe('When omega-active is set to true', () => {
+    describe('When endActive is set to true', () => {
       it('Should have active class', async () => {
-        mockProps = { omegaActive: true };
+        mockProps = { endActive: true };
 
         updateWrapper();
 
@@ -191,9 +191,9 @@ describe('DtSplitButton Tests', function () {
       });
     });
 
-    describe('When alphaIcon slot is set', () => {
+    describe('When startIcon slot is set', () => {
       beforeEach(() => {
-        mockSlots = { alphaIcon: '<dt-icon-send />' };
+        mockSlots = { startIcon: '<dt-icon-send />' };
 
         updateWrapper();
       });
@@ -206,9 +206,9 @@ describe('DtSplitButton Tests', function () {
         expect(alphaIconSlot.classes().includes('d-btn__icon--left')).toBe(true);
       });
 
-      describe('When alpha-icon-position is set to right', () => {
+      describe('When startIconPosition is set to right', () => {
         it('Should have correct class', () => {
-          mockProps = { alphaIconPosition: 'right' };
+          mockProps = { startIconPosition: 'right' };
 
           updateWrapper();
 
@@ -217,9 +217,31 @@ describe('DtSplitButton Tests', function () {
       });
     });
 
-    describe('When omegaIcon slot is set', () => {
+    describe('When startIcon and startEndIcon slots are both set (dual icons)', () => {
       beforeEach(() => {
-        mockSlots = { omegaIcon: '<dt-icon-send />' };
+        mockSlots = { startIcon: '<dt-icon-send />', startEndIcon: '<dt-icon-send />' };
+
+        updateWrapper();
+      });
+
+      it('Should render start icon in the alpha button at start position', () => {
+        const startIconSlot = alphaButton.find('[data-qa="dt-button-start-icon"]');
+
+        expect(startIconSlot.exists()).toBe(true);
+        expect(startIconSlot.findComponent(DtIconSend).exists()).toBe(true);
+      });
+
+      it('Should render end icon in the alpha button at end position', () => {
+        const endIconSlot = alphaButton.find('[data-qa="dt-button-end-icon"]');
+
+        expect(endIconSlot.exists()).toBe(true);
+        expect(endIconSlot.findComponent(DtIconSend).exists()).toBe(true);
+      });
+    });
+
+    describe('When endIcon slot is set', () => {
+      beforeEach(() => {
+        mockSlots = { endIcon: '<dt-icon-send />' };
 
         updateWrapper();
       });
@@ -229,37 +251,37 @@ describe('DtSplitButton Tests', function () {
       });
     });
 
-    describe('When alpha-tooltip-text is set', () => {
+    describe('When startTooltipText is set', () => {
       it('Should render the tooltip with correct text', async () => {
-        mockProps = { alphaTooltipText: MOCK_ALPHA_TOOLTIP_TEXT };
+        mockProps = { startTooltipText: MOCK_START_TOOLTIP_TEXT };
         await updateWrapper();
         await flushPromises();
         await alphaButton.trigger('mouseenter');
 
         const tooltip = document.body.querySelector('[data-qa="dt-tooltip"]');
 
-        expect(tooltip.textContent.trim()).toBe(MOCK_ALPHA_TOOLTIP_TEXT);
+        expect(tooltip.textContent.trim()).toBe(MOCK_START_TOOLTIP_TEXT);
       });
     });
 
-    describe('When omega-tooltip-text is set', () => {
+    describe('When endTooltipText is set', () => {
       it('Should render the tooltip with correct text', async () => {
-        mockProps = { omegaTooltipText: MOCK_OMEGA_TOOLTIP_TEXT };
+        mockProps = { endTooltipText: MOCK_END_TOOLTIP_TEXT };
         await updateWrapper();
         await flushPromises();
         await omegaButton.trigger('mouseenter');
 
         const tooltip = document.body.querySelector('[data-qa="dt-tooltip"]');
 
-        expect(tooltip.textContent.trim()).toBe(MOCK_OMEGA_TOOLTIP_TEXT);
+        expect(tooltip.textContent.trim()).toBe(MOCK_END_TOOLTIP_TEXT);
       });
     });
   });
 
   describe('Interactivity Tests', () => {
-    describe('When alpha button is clicked', () => {
+    describe('When start button is clicked', () => {
       beforeEach(async () => {
-        mockAttrs = { onAlphaClicked: MOCK_ALPHA_BUTTON_STUB };
+        mockAttrs = { onStartClicked: MOCK_START_BUTTON_STUB };
 
         updateWrapper();
 
@@ -267,17 +289,21 @@ describe('DtSplitButton Tests', function () {
       });
 
       it('Should call listener', async () => {
-        expect(MOCK_ALPHA_BUTTON_STUB).toHaveBeenCalledTimes(1);
+        expect(MOCK_START_BUTTON_STUB).toHaveBeenCalledTimes(1);
       });
 
-      it('Should emit alpha-clicked event', () => {
+      it('Should emit start-clicked event', () => {
+        expect(wrapper.emitted()).toHaveProperty('start-clicked');
+      });
+
+      it('Should also emit deprecated alpha-clicked event', () => {
         expect(wrapper.emitted()).toHaveProperty('alpha-clicked');
       });
     });
 
-    describe('When omega button is clicked', () => {
+    describe('When end button is clicked', () => {
       beforeEach(async () => {
-        mockAttrs = { onOmegaClicked: MOCK_OMEGA_BUTTON_STUB };
+        mockAttrs = { onEndClicked: MOCK_END_BUTTON_STUB };
 
         updateWrapper();
 
@@ -285,10 +311,246 @@ describe('DtSplitButton Tests', function () {
       });
 
       it('Should call listener', async () => {
-        expect(MOCK_OMEGA_BUTTON_STUB).toHaveBeenCalledTimes(1);
+        expect(MOCK_END_BUTTON_STUB).toHaveBeenCalledTimes(1);
       });
 
-      it('Should emit omega-clicked event', () => {
+      it('Should emit end-clicked event', () => {
+        expect(wrapper.emitted()).toHaveProperty('end-clicked');
+      });
+
+      it('Should also emit deprecated omega-clicked event', () => {
+        expect(wrapper.emitted()).toHaveProperty('omega-clicked');
+      });
+    });
+  });
+
+  describe('Backward Compatibility Tests', () => {
+    describe('When deprecated alphaActive prop is used', () => {
+      it('Should have active class', () => {
+        mockProps = { alphaActive: true };
+
+        updateWrapper();
+
+        expect(alphaButton.classes().includes('d-btn--active')).toBe(true);
+      });
+    });
+
+    describe('When deprecated omegaActive prop is used', () => {
+      it('Should have active class', () => {
+        mockProps = { omegaActive: true };
+
+        updateWrapper();
+
+        expect(omegaButton.classes().includes('d-btn--active')).toBe(true);
+      });
+    });
+
+    describe('When deprecated alphaLoading prop is used', () => {
+      it('Should have loading class', () => {
+        mockProps = { alphaLoading: true };
+
+        updateWrapper();
+
+        expect(alphaButton.classes().includes('d-btn--loading')).toBe(true);
+      });
+    });
+
+    describe('When deprecated alphaDisabled prop is used', () => {
+      it('Should disable only the start button', () => {
+        mockProps = { alphaDisabled: true };
+
+        updateWrapper();
+
+        expect(alphaButton.attributes('disabled')).toBeDefined();
+        expect(omegaButton.attributes('disabled')).toBeUndefined();
+      });
+    });
+
+    describe('When deprecated omegaDisabled prop is used', () => {
+      it('Should disable only the end button', () => {
+        mockProps = { omegaDisabled: true };
+
+        updateWrapper();
+
+        expect(alphaButton.attributes('disabled')).toBeUndefined();
+        expect(omegaButton.attributes('disabled')).toBeDefined();
+      });
+    });
+
+    describe('When deprecated alphaIcon slot is used', () => {
+      it('Should render the custom icon', () => {
+        mockSlots = { alphaIcon: '<dt-icon-send />' };
+
+        updateWrapper();
+
+        expect(alphaIconSlot.findComponent(DtIconSend).classes().includes('d-icon--send')).toBe(true);
+      });
+    });
+
+    describe('When deprecated omegaIcon slot is used', () => {
+      it('Should render the custom icon', () => {
+        mockSlots = { omegaIcon: '<dt-icon-send />' };
+
+        updateWrapper();
+
+        expect(omegaIconSlot.findComponent(DtIconSend).classes().includes('d-icon--send')).toBe(true);
+      });
+    });
+
+    describe('When deprecated alphaTooltipText prop is used', () => {
+      it('Should pass the tooltip text to the alpha button', () => {
+        mockProps = { alphaTooltipText: MOCK_START_TOOLTIP_TEXT };
+
+        updateWrapper();
+
+        const alphaComponent = wrapper.findComponent(SplitButtonAlpha);
+
+        expect(alphaComponent.props('tooltipText')).toBe(MOCK_START_TOOLTIP_TEXT);
+      });
+    });
+
+    describe('When deprecated omegaTooltipText prop is used', () => {
+      it('Should pass the tooltip text to the omega button', () => {
+        mockProps = { omegaTooltipText: MOCK_END_TOOLTIP_TEXT };
+
+        updateWrapper();
+
+        const omegaComponent = wrapper.findComponent(SplitButtonOmega);
+
+        expect(omegaComponent.props('tooltipText')).toBe(MOCK_END_TOOLTIP_TEXT);
+      });
+    });
+
+    describe('When deprecated alphaAriaLabel prop is used', () => {
+      it('Should pass the aria-label to the alpha button', () => {
+        mockProps = { alphaAriaLabel: 'Call action' };
+
+        updateWrapper();
+
+        expect(alphaButton.attributes('aria-label')).toBe('Call action');
+      });
+    });
+
+    describe('When deprecated omegaAriaLabel prop is used', () => {
+      it('Should pass the aria-label to the omega button', () => {
+        mockProps = { omegaAriaLabel: 'More options' };
+
+        updateWrapper();
+
+        expect(omegaButton.attributes('aria-label')).toBe('More options');
+      });
+    });
+
+    describe('When deprecated alphaIconPosition prop is used', () => {
+      it('Should position the icon correctly', () => {
+        mockSlots = { startIcon: '<dt-icon-send />' };
+        mockProps = { alphaIconPosition: 'right' };
+
+        updateWrapper();
+
+        expect(alphaIconSlot.classes().includes('d-btn__icon--right')).toBe(true);
+      });
+    });
+
+    describe('When deprecated alphaLabelClass prop is used', () => {
+      it('Should apply the label class', () => {
+        mockProps = { alphaLabelClass: 'custom-label-class' };
+
+        updateWrapper();
+
+        const labelEl = alphaButton.find('[data-qa="dt-button-label"]');
+
+        expect(labelEl.classes().includes('custom-label-class')).toBe(true);
+      });
+    });
+
+    describe('When both startIcon and alphaIcon slots are provided', () => {
+      it('Should render startIcon (new name takes precedence)', () => {
+        mockSlots = {
+          startIcon: '<dt-icon-send />',
+          alphaIcon: '<span data-qa="old-alpha-icon">Old</span>',
+        };
+
+        updateWrapper();
+
+        expect(alphaIconSlot.findComponent(DtIconSend).exists()).toBe(true);
+        expect(wrapper.find('[data-qa="old-alpha-icon"]').exists()).toBe(false);
+      });
+    });
+
+    describe('When both endIcon and omegaIcon slots are provided', () => {
+      it('Should render endIcon (new name takes precedence)', () => {
+        mockSlots = {
+          endIcon: '<dt-icon-send />',
+          omegaIcon: '<span data-qa="old-omega-icon">Old</span>',
+        };
+
+        updateWrapper();
+
+        expect(omegaIconSlot.findComponent(DtIconSend).exists()).toBe(true);
+        expect(wrapper.find('[data-qa="old-omega-icon"]').exists()).toBe(false);
+      });
+    });
+
+    describe('When both end and omega slots are provided', () => {
+      it('Should render end slot (new name takes precedence)', () => {
+        mockSlots = {
+          end: '<span data-qa="new-end">New end</span>',
+          omega: '<span data-qa="old-omega">Old omega</span>',
+        };
+
+        wrapper = mount(DtSplitButton, {
+          props: { ...baseProps, ...mockProps },
+          slots: { ...baseSlots, ...mockSlots },
+          global: {
+            stubs: { transition: false },
+            plugins: [DtTooltipDirective],
+            components: { SplitButtonAlpha, SplitButtonOmega, DtIconSend },
+          },
+          attrs: { ...baseAttrs, ...mockAttrs },
+          attachTo: document.body,
+        });
+
+        expect(wrapper.find('[data-qa="new-end"]').exists()).toBe(true);
+        expect(wrapper.find('[data-qa="old-omega"]').exists()).toBe(false);
+      });
+    });
+
+    describe('When deprecated omega slot is used', () => {
+      it('Should render the omega slot content', () => {
+        mockSlots = { omega: '<span data-qa="custom-omega">Custom omega</span>' };
+
+        wrapper = mount(DtSplitButton, {
+          props: { ...baseProps, ...mockProps },
+          slots: { ...baseSlots, ...mockSlots },
+          global: {
+            stubs: { transition: false },
+            plugins: [DtTooltipDirective],
+            components: { SplitButtonAlpha, SplitButtonOmega, DtIconSend },
+          },
+          attrs: { ...baseAttrs, ...mockAttrs },
+          attachTo: document.body,
+        });
+
+        const customOmega = wrapper.find('[data-qa="custom-omega"]');
+
+        expect(customOmega.exists()).toBe(true);
+        expect(customOmega.text()).toBe('Custom omega');
+      });
+    });
+
+    describe('When start button is clicked', () => {
+      it('Should emit deprecated alpha-clicked event', async () => {
+        await alphaButton.trigger('click');
+
+        expect(wrapper.emitted()).toHaveProperty('alpha-clicked');
+      });
+    });
+
+    describe('When end button is clicked', () => {
+      it('Should emit deprecated omega-clicked event', async () => {
+        await omegaButton.trigger('click');
+
         expect(wrapper.emitted()).toHaveProperty('omega-clicked');
       });
     });
@@ -305,9 +567,9 @@ describe('DtSplitButton Tests', function () {
       });
     });
 
-    describe('When alphaLeadingClass is provided', () => {
+    describe('When startLeadingClass is provided', () => {
       it('should apply custom class to the leading wrapper', () => {
-        mockProps = { alphaLeadingClass: 'custom-leading' };
+        mockProps = { startLeadingClass: 'custom-leading' };
         mockSlots = { leading: 'Leading content' };
 
         updateWrapper();
@@ -319,9 +581,9 @@ describe('DtSplitButton Tests', function () {
       });
     });
 
-    describe('When alphaTrailingClass is provided', () => {
+    describe('When startTrailingClass is provided', () => {
       it('should apply custom class to the trailing wrapper', () => {
-        mockProps = { alphaTrailingClass: 'custom-trailing' };
+        mockProps = { startTrailingClass: 'custom-trailing' };
         mockSlots = { trailing: 'Trailing content' };
 
         updateWrapper();

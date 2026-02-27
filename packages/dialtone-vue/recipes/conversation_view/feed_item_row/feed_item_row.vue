@@ -8,7 +8,7 @@
     v-on="feedListeners"
   >
     <!-- Avatar or time -->
-    <template #left>
+    <template #start>
       <div
         v-if="showHeader"
         class="d-recipe-feed-item-row__avatar-container"
@@ -83,7 +83,7 @@
       </div>
     </article>
 
-    <template #bottom>
+    <template #blockEnd>
       <!-- Reactions -->
       <div
         v-if="$slots.reactions"

@@ -50,7 +50,7 @@ This will usually be the [List Item component](/components/list-item.md).
           navigation-type="arrow-keys"
           @click="onListItemSelect(i)"
         >
-          <template #left>
+          <template #start>
             <dt-avatar
               :full-name="(i + 1).toString()"
               :seed="i.toString()"
@@ -146,7 +146,7 @@ vueCode='
         navigation-type="arrow-keys"
         @click="onListItemSelect(i)"
       >
-        <template #left>
+        <template #start>
           <dt-avatar
             :full-name="(i + 1).toString()"
             :seed="i.toString()"

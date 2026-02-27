@@ -68,12 +68,11 @@
         class="code-example-tab-group__more-btn d-bgc-secondary d-bs-sm"
         kind="muted"
         importance="outlined"
-        icon-position="right"
         size="sm"
         @click="expandCodeBlocks"
       >
         Show all
-        <template #icon="{ iconSize }">
+        <template #endIcon="{ iconSize }">
           <dt-icon name="arrow-down" :size="iconSize" />
         </template>
       </dt-button>

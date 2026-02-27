@@ -39,7 +39,7 @@
     >
       <span v-html="$attrs.description" />
     </template>
-    <template #leftIcon="{ iconSize }">
+    <template #startIcon="{ iconSize }">
       <dt-icon
         name="search"
         :size="iconSize"
@@ -47,7 +47,7 @@
     </template>
     <template
       v-if="inputValue.length !== 0"
-      #rightIcon="{ clear }"
+      #endIcon="{ clear }"
     >
       <dt-button
         kind="muted"
@@ -57,7 +57,7 @@
         aria-label="Clear search"
         @click="clear"
       >
-        <template #icon="{ iconSize }">
+        <template #startIcon="{ iconSize }">
           <dt-icon
             name="close"
             :size="iconSize"

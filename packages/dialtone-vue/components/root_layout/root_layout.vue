@@ -129,13 +129,12 @@ export default {
     },
 
     /**
-     * Whether the sidebar is on the left or right side
-     * Possible options: 'left', 'right'
-     * @values left, right
+     * Whether the sidebar is on the start or end side
+     * @values start, end, left, right
      */
     sidebarPosition: {
       type: String,
-      default: 'left',
+      default: 'start',
       validator: (s) => Object.values(ROOT_LAYOUT_SIDEBAR_POSITIONS).includes(s),
     },
 
@@ -169,7 +168,8 @@ export default {
 
   computed: {
     isInverted () {
-      return this.sidebarPosition === ROOT_LAYOUT_SIDEBAR_POSITIONS.RIGHT;
+      return this.sidebarPosition === ROOT_LAYOUT_SIDEBAR_POSITIONS.END ||
+        this.sidebarPosition === ROOT_LAYOUT_SIDEBAR_POSITIONS.RIGHT;
     },
 
     responsiveBreakpointClass () {

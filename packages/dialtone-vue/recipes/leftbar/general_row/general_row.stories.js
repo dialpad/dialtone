@@ -78,6 +78,21 @@ export const argTypesData = {
       type: { summary: 'event' },
     },
   },
+
+  // Slots
+  start: {
+    control: 'text',
+    table: {
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+  left: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 const decorator = () => ({

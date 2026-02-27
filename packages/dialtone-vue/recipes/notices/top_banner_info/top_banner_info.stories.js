@@ -55,8 +55,24 @@ export const argTypesData = {
     the same name. We provide the correct name of the slot using the name control attribute to ensure that the argument
     table and description within the controls accurately reflects the correct names of our component's props and slots.
   */
+  start: {
+    name: 'start',
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'text',
+    },
+  },
+
   left: {
-    name: 'left',
+    table: {
+      disable: true,
+    },
+  },
+
+  end: {
+    name: 'end',
     table: {
       type: { summary: 'VNode' },
     },
@@ -66,12 +82,8 @@ export const argTypesData = {
   },
 
   right: {
-    name: 'right',
     table: {
-      type: { summary: 'VNode' },
-    },
-    control: {
-      type: 'text',
+      disable: true,
     },
   },
 

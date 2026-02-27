@@ -43,20 +43,20 @@
       <span v-html="$attrs.description" />
     </template>
     <template
-      v-if="$attrs.leftIcon"
-      #leftIcon="{ iconSize }"
+      v-if="$attrs.startIcon"
+      #startIcon="{ iconSize }"
     >
       <dt-icon
-        :name="$attrs.leftIcon"
+        :name="$attrs.startIcon"
         :size="iconSize"
       />
     </template>
     <template
-      v-if="$attrs.rightIcon"
-      #rightIcon="{ iconSize }"
+      v-if="$attrs.endIcon"
+      #endIcon="{ iconSize }"
     >
       <dt-icon
-        :name="$attrs.rightIcon"
+        :name="$attrs.endIcon"
         :size="iconSize"
       />
     </template>

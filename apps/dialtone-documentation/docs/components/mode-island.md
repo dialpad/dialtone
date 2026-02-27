@@ -22,7 +22,7 @@ keywords: ["theme island","mode override","d-mode-island","DtModeIsland","dt-mod
               <dt-text><dt-text strength="strong">Mode:</dt-text> {{ currentMode.charAt(0).toUpperCase() + currentMode.slice(1) }}</dt-text>
               <dt-text><dt-text strength="strong">Contrast:</dt-text> {{ currentContrast.charAt(0).toUpperCase() + currentContrast.slice(1) }}</dt-text>
             </dt-stack>
-            <template #icon>
+            <template #startIcon>
               <dt-icon
                 size="300"
                 :name="currentModeIconName"
@@ -41,7 +41,7 @@ keywords: ["theme island","mode override","d-mode-island","DtModeIsland","dt-mod
               @click="setMode('system')"
             >
               System
-              <template #right>
+              <template #end>
                 <dt-icon :class="{ 'd-o0': currentMode !== 'system' }" name="check" size="200" />
               </template>
             </dt-list-item>
@@ -51,7 +51,7 @@ keywords: ["theme island","mode override","d-mode-island","DtModeIsland","dt-mod
               @click="setMode('light')"
             >
               Light
-              <template #right>
+              <template #end>
                 <dt-icon :class="{ 'd-o0': currentMode !== 'light' }" name="check" size="200" />
               </template>
             </dt-list-item>
@@ -61,7 +61,7 @@ keywords: ["theme island","mode override","d-mode-island","DtModeIsland","dt-mod
               @click="setMode('dark')"
             >
               Dark
-              <template #right>
+              <template #end>
                 <dt-icon :class="{ 'd-o0': currentMode !== 'dark' }" name="check" size="200" />
               </template>
             </dt-list-item>
@@ -77,7 +77,7 @@ keywords: ["theme island","mode override","d-mode-island","DtModeIsland","dt-mod
               @click="setContrast('default')"
             >
               Default
-              <template #right>
+              <template #end>
                 <dt-icon :class="{ 'd-o0': currentContrast !== 'default' }" name="check" size="200" />
               </template>
             </dt-list-item>
@@ -87,7 +87,7 @@ keywords: ["theme island","mode override","d-mode-island","DtModeIsland","dt-mod
               @click="setContrast('high')"
             >
               High
-              <template #right>
+              <template #end>
                 <dt-icon :class="{ 'd-o0': currentContrast !== 'high' }" name="check" size="200" />
               </template>
             </dt-list-item>
@@ -396,30 +396,30 @@ showHtmlWarning />
         </dt-stack>
       </dt-stack>
       <dt-stack class="d-fl1 d-jc-center" direction="row" gap="200">
-        <dt-button class="d-px8 d-w72" size="sm" kind="danger" icon-position="top">
-          <template #icon> <dt-icon name="mic" size="400" /> </template>
+        <dt-button class="d-px8 d-w72" size="sm" kind="danger">
+          <template #blockStartIcon> <dt-icon name="mic" size="400" /> </template>
           Unmute
         </dt-button>
-        <dt-button class="d-px8 d-w72" size="sm" kind="muted" importance="clear" icon-position="top">
-          <template #icon> <dt-icon name="record-filled" size="400" /> </template>
+        <dt-button class="d-px8 d-w72" size="sm" kind="muted" importance="clear">
+          <template #blockStartIcon> <dt-icon name="record-filled" size="400" /> </template>
           Record
         </dt-button>
-        <dt-button class="d-px8 d-w72" size="sm" kind="muted" importance="clear" icon-position="top">
-          <template #icon> <dt-icon name="keypad" size="400" /> </template>
+        <dt-button class="d-px8 d-w72" size="sm" kind="muted" importance="clear">
+          <template #blockStartIcon> <dt-icon name="keypad" size="400" /> </template>
           Keypad
         </dt-button>
-        <dt-button class="d-px8 d-w72" size="sm" kind="muted" importance="clear" icon-position="top">
-          <template #icon> <dt-icon name="user-plus" size="400" /> </template>
+        <dt-button class="d-px8 d-w72" size="sm" kind="muted" importance="clear">
+          <template #blockStartIcon> <dt-icon name="user-plus" size="400" /> </template>
           Add
         </dt-button>
-        <dt-button class="d-px8 d-w72" size="sm" kind="muted" importance="clear" icon-position="top">
-          <template #icon> <dt-icon name="more-horizontal" size="400" /> </template>
+        <dt-button class="d-px8 d-w72" size="sm" kind="muted" importance="clear">
+          <template #blockStartIcon> <dt-icon name="more-horizontal" size="400" /> </template>
           More
         </dt-button>
       </dt-stack>
       <dt-stack>
-        <dt-button class="d-p12 d-bar6" size="lg" kind="danger">
-          <template #icon> <dt-icon name="phone-hang-up" size="500" /> </template>
+        <dt-button class="d-p12" circle size="lg" kind="danger">
+          <template #startIcon> <dt-icon name="phone-hang-up" size="500" /> </template>
         </dt-button>
       </dt-stack>
     </dt-stack>
@@ -444,15 +444,15 @@ vueCode='
       </dt-stack>
     </dt-stack>
     <dt-stack class="d-fl1 d-jc-center" direction="row" gap="200">
-      <dt-button class="d-px8 d-w72" size="sm" kind="danger" icon-position="top">
-        <template #icon><dt-icon name="mic" size="400" /></template>
+      <dt-button class="d-px8 d-w72" size="sm" kind="danger">
+        <template #blockStartIcon><dt-icon name="mic" size="400" /></template>
         Unmute
       </dt-button>
       <!-- Additional buttons... -->
     </dt-stack>
     <dt-stack>
       <dt-button class="d-p12" circle size="lg" kind="danger">
-        <template #icon><dt-icon name="phone-hang-up" size="500" /></template>
+        <template #startIcon><dt-icon name="phone-hang-up" size="500" /></template>
       </dt-button>
     </dt-stack>
   </dt-stack>
@@ -561,9 +561,9 @@ showHtmlWarning />
       <dt-stack gap="400" direction="row">
         <dt-dropdown ref="dropdownDefault" navigation-type="arrow-keys" placement="bottom-start">
           <template #anchor="{ attrs }">
-            <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined" icon-position="right">
+            <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined">
               Default
-              <template #icon="{ iconSize }">
+              <template #endIcon="{ iconSize }">
                 <dt-icon name="chevron-down" :size="iconSize" />
               </template>
             </dt-button>
@@ -582,9 +582,9 @@ showHtmlWarning />
         </dt-dropdown>
         <dt-dropdown ref="dropdownInverted" navigation-type="arrow-keys" placement="bottom-start" listClass="d-m0" padding="small">
           <template #anchor="{ attrs }">
-            <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined" icon-position="right">
+            <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined">
               Inverted
-              <template #icon="{ iconSize }">
+              <template #endIcon="{ iconSize }">
                 <dt-icon name="chevron-down" :size="iconSize" />
               </template>
             </dt-button>
@@ -605,9 +605,9 @@ showHtmlWarning />
         </dt-dropdown>
         <dt-dropdown navigation-type="arrow-keys" placement="bottom-start" listClass="d-m0" padding="small">
           <template #anchor="{ attrs }">
-            <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined" icon-position="right">
+            <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined">
               Light
-              <template #icon="{ iconSize }">
+              <template #endIcon="{ iconSize }">
                 <dt-icon name="chevron-down" :size="iconSize" />
               </template>
             </dt-button>
@@ -628,9 +628,9 @@ showHtmlWarning />
         </dt-dropdown>
         <dt-dropdown navigation-type="arrow-keys" placement="bottom-start" listClass="d-m0" padding="small">
           <template #anchor="{ attrs }">
-            <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined" icon-position="right">
+            <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined">
               Dark
-              <template #icon="{ iconSize }">
+              <template #endIcon="{ iconSize }">
                 <dt-icon name="chevron-down" :size="iconSize" />
               </template>
             </dt-button>
@@ -681,9 +681,9 @@ vueCode='
 <!-- Dropdown -->
 <dt-dropdown navigation-type="arrow-keys" placement="bottom-start" listClass="d-m0" padding="small">
   <template #anchor="{ attrs }">
-    <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined" icon-position="right">
+    <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined">
       Inverted
-      <template #icon="{ iconSize }">
+      <template #endIcon="{ iconSize }">
         <dt-icon name="chevron-down" :size="iconSize" />
       </template>
     </dt-button>

@@ -18,7 +18,7 @@
           aria-label="Open datepicker"
           @click="toggleDatepicker"
         >
-          <template #icon>
+          <template #startIcon>
             <dt-icon
               name="calendar"
               size="300"

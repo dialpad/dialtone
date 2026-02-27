@@ -59,8 +59,15 @@
           data-qa="dt-input-left-icon-wrapper"
           @focusout="onBlur"
         >
-          <!-- @slot Slot for left icon -->
+          <!-- @slot Slot for start icon -->
           <slot
+            v-if="$slots.startIcon"
+            name="startIcon"
+            :icon-size="iconSize"
+          />
+          <!-- @slot @deprecated Use startIcon -->
+          <slot
+            v-else
             name="leftIcon"
             :icon-size="iconSize"
           />
@@ -96,8 +103,16 @@
           data-qa="dt-input-right-icon-wrapper"
           @focusout="onBlur"
         >
-          <!-- @slot Slot for right icon -->
+          <!-- @slot Slot for end icon -->
           <slot
+            v-if="$slots.endIcon"
+            name="endIcon"
+            :icon-size="iconSize"
+            :clear="clearInput"
+          />
+          <!-- @slot @deprecated Use endIcon -->
+          <slot
+            v-else
             name="rightIcon"
             :icon-size="iconSize"
             :clear="clearInput"
@@ -562,8 +577,8 @@ export default {
         this.inputComponent === 'input' ? 'd-input' : 'd-textarea',
         {
           [this.stateClass]: this.showInputState,
-          'd-input-icon--left': this.$slots.leftIcon,
-          'd-input-icon--right': this.$slots.rightIcon,
+          'd-input-icon--left': this.$slots.startIcon || this.$slots.leftIcon,
+          'd-input-icon--right': this.$slots.endIcon || this.$slots.rightIcon,
         },
         this.sizeModifierClass,
         this.inputClass,

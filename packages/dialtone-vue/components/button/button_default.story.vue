@@ -24,11 +24,47 @@
       v-html="defaultSlot"
     />
     <template
+      v-if="$attrs.startIcon"
+      #startIcon="{ iconSize }"
+    >
+      <dt-icon
+        :name="$attrs.startIcon"
+        :size="iconSize"
+      />
+    </template>
+    <template
       v-if="$attrs.icon"
       #icon="{ iconSize }"
     >
       <dt-icon
         :name="$attrs.icon"
+        :size="iconSize"
+      />
+    </template>
+    <template
+      v-if="$attrs.endIcon"
+      #endIcon="{ iconSize }"
+    >
+      <dt-icon
+        :name="$attrs.endIcon"
+        :size="iconSize"
+      />
+    </template>
+    <template
+      v-if="$attrs.blockStartIcon"
+      #blockStartIcon="{ iconSize }"
+    >
+      <dt-icon
+        :name="$attrs.blockStartIcon"
+        :size="iconSize"
+      />
+    </template>
+    <template
+      v-if="$attrs.blockEndIcon"
+      #blockEndIcon="{ iconSize }"
+    >
+      <dt-icon
+        :name="$attrs.blockEndIcon"
         :size="iconSize"
       />
     </template>

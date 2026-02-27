@@ -5,7 +5,16 @@
     data-qa="banner-info"
   >
     <div class="d-recipe-top-banner-info__left">
-      <slot name="left" />
+      <!-- @slot Slot for start content -->
+      <slot
+        v-if="$slots.start"
+        name="start"
+      />
+      <!-- @slot @deprecated Use start -->
+      <slot
+        v-else
+        name="left"
+      />
     </div>
 
     <div
@@ -16,7 +25,16 @@
     </div>
 
     <div class="d-recipe-top-banner-info__right">
-      <slot name="right" />
+      <!-- @slot Slot for end content -->
+      <slot
+        v-if="$slots.end"
+        name="end"
+      />
+      <!-- @slot @deprecated Use end -->
+      <slot
+        v-else
+        name="right"
+      />
     </div>
   </div>
 </template>

@@ -71,20 +71,37 @@
           </div>
         </div>
         <div
-          v-if="$slots.right"
+          v-if="$slots.end || $slots.right"
           data-qa="dt-recipe-callbox__right-wrapper"
           class="d-recipe-callbox__right"
         >
-          <!-- @slot Slot for right icons -->
-          <slot name="right" />
+          <!-- @slot Slot for end icons -->
+          <slot
+            v-if="$slots.end"
+            name="end"
+          />
+          <!-- @slot @deprecated Use end -->
+          <slot
+            v-else
+            name="right"
+          />
         </div>
       </div>
       <div
-        v-if="$slots.bottom"
+        v-if="$slots.blockEnd || $slots.bottom"
         data-qa="dt-recipe-callbox__bottom-wrapper"
         class="d-recipe-callbox__main-content-bottom"
       >
-        <slot name="bottom" />
+        <!-- @slot Slot for block-end content -->
+        <slot
+          v-if="$slots.blockEnd"
+          name="blockEnd"
+        />
+        <!-- @slot @deprecated Use blockEnd -->
+        <slot
+          v-else
+          name="bottom"
+        />
       </div>
     </div>
   </div>

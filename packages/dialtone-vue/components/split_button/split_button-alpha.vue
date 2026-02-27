@@ -16,7 +16,28 @@
     :loading="loading"
     :size="size"
   >
-    <template #icon>
+    <template
+      v-if="$slots.startIcon"
+      #startIcon
+    >
+      <slot
+        name="startIcon"
+        :size="BUTTON_ICON_SIZES[size]"
+      />
+    </template>
+    <template
+      v-if="$slots.endIcon"
+      #endIcon
+    >
+      <slot
+        name="endIcon"
+        :size="BUTTON_ICON_SIZES[size]"
+      />
+    </template>
+    <template
+      v-if="$slots.icon && !$slots.startIcon && !$slots.endIcon"
+      #icon
+    >
       <slot
         name="icon"
         :size="BUTTON_ICON_SIZES[size]"

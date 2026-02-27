@@ -12,8 +12,8 @@ keywords: ["list element", "d-list-item", "DtListItem", "dt-list-item"]
 <code-well-header class="d-d-block">
   <ul>
     <dt-list-item navigation-type="tab">
-      <template #left>
-        <dt-icon name="check" />
+      <template #start>
+        <dt-icon size="300" name="check" />
       </template>
       <span>Default List Item</span>
       <template #subtitle>
@@ -22,8 +22,8 @@ keywords: ["list element", "d-list-item", "DtListItem", "dt-list-item"]
       <template #bottom>
         <dt-badge text="Label" />
       </template>
-      <template #right>
-        <dt-icon name="external-link" />
+      <template #end>
+        <dt-icon size="300" name="external-link" />
       </template>
     </dt-list-item>
   </ul>
@@ -33,11 +33,11 @@ keywords: ["list element", "d-list-item", "DtListItem", "dt-list-item"]
 
 A list item provides accessibility controls and common functionality. The component uses child components that provide styling and slots for different types of list items. If you want to create a custom list item you can pass a type "custom", which will let you define the structure of the content.
 
-The default list item has 5 slots that can be used for the most common use cases, **left**, **right**, **default**, **subtitle** and **bottom** slot. All of the slots are optional.
+The default list item has 5 slots that can be used for the most common use cases, **start**, **end**, **default**, **subtitle** and **bottom** slot. All of the slots are optional.
 
-The **left** slot can contain content, such as an avatar, that will be positioned to the left of the main content.
+The **start** slot can contain content, such as an avatar, that will be positioned at the start (left in LTR) of the main content.
 
-The **right** slot works the same way, but its contents are placed to the right of the main slot.
+The **end** slot works the same way, but its contents are placed at the end (right in LTR) of the main slot.
 
 The **default** slot contains the main content of the list item.
 
@@ -48,8 +48,8 @@ The **bottom** slot can be used to display content below the subtitle slot.
 <code-well-header class="d-d-block">
   <ul>
     <dt-list-item navigation-type="tab">
-      <template #left>
-        <dt-icon name="check" />
+      <template #start>
+        <dt-icon size="300" name="check" />
       </template>
       <span>Default List Item</span>
       <template #subtitle>
@@ -58,8 +58,8 @@ The **bottom** slot can be used to display content below the subtitle slot.
       <template #bottom>
         <dt-badge text="Label" />
       </template>
-      <template #right>
-        <dt-icon name="external-link" />
+      <template #end>
+        <dt-icon size="300" name="external-link" />
       </template>
     </dt-list-item>
   </ul>
@@ -107,8 +107,8 @@ htmlCode='
 vueCode='
 <ul>
   <dt-list-item navigation-type="tab">
-    <template #left>
-      <dt-icon name="check" />
+    <template #start>
+      <dt-icon size="300" name="check" />
     </template>
     <span>Default List Item</span>
     <template #subtitle>
@@ -117,8 +117,8 @@ vueCode='
     <template #bottom>
       <dt-badge text="Label" />
     </template>
-    <template #right>
-      <dt-icon name="external-link" />
+    <template #end>
+      <dt-icon size="300" name="external-link" />
     </template>
   </dt-list-item>
 </ul>
@@ -155,7 +155,7 @@ When `type` is set to "custom" the list item will not render any styles or slots
             importance="clear"
             title="share"
           >
-            <template #icon>
+            <template #startIcon>
               <dt-icon
                 name="share-2"
                 size="200"
@@ -167,7 +167,7 @@ When `type` is set to "custom" the list item will not render any styles or slots
             importance="clear"
             title="star"
           >
-            <template #icon>
+            <template #startIcon>
               <dt-icon
                 name="star"
                 size="200"
@@ -179,7 +179,7 @@ When `type` is set to "custom" the list item will not render any styles or slots
             importance="clear"
             title="more"
           >
-            <template #icon>
+            <template #startIcon>
               <dt-icon
                 name="more-vertical"
                 size="200"
@@ -218,7 +218,7 @@ vueCode='
           importance="clear"
           title="share"
         >
-          <template #icon>
+          <template #startIcon>
             <dt-icon
               name="share-2"
               size="200"
@@ -230,7 +230,7 @@ vueCode='
           importance="clear"
           title="star"
         >
-          <template #icon>
+          <template #startIcon>
             <dt-icon
               name="star"
               size="200"
@@ -242,7 +242,7 @@ vueCode='
           importance="clear"
           title="more"
         >
-          <template #icon>
+          <template #startIcon>
             <dt-icon
               name="more-vertical"
               size="200"

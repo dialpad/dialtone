@@ -22,7 +22,6 @@
             importance="clear"
             kind="muted"
             label-class="d-jc-flex-start d-ta-left d-fw-normal"
-            icon-position="right"
             :size="depth === 0 ? 'lg' : undefined"
             :tabindex="actionableTabIndex"
             :class="[
@@ -46,7 +45,7 @@
               class="d-mr12 d-fc-muted"
             />
             {{ item.text }}
-            <template #icon="{ iconSize }">
+            <template #endIcon="{ iconSize }">
               <dt-icon
                 v-if="item.link"
                 :name="isOpen ? 'chevron-down' : 'chevron-right'"

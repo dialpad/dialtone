@@ -11,10 +11,10 @@
       autocomplete="off"
       @keyup="searchToken"
     >
-      <template #leftIcon>
+      <template #startIcon>
         <dt-icon name="search" size="300" />
       </template>
-      <template #rightIcon>
+      <template #endIcon>
         <dt-button
           v-if="hasSearchTerm"
           id="search-input-button-close"
@@ -25,7 +25,7 @@
           aria-label="Clear search"
           @click="resetSearch"
         >
-          <template #icon>
+          <template #startIcon>
             <dt-icon name="close" size="200" />
           </template>
         </dt-button>
@@ -60,12 +60,11 @@
         v-dt-tooltip:top-end="shareLinkTooltip"
         importance="clear"
         kind="muted"
-        icon-position="left"
         class="d-ml-auto"
         @click="copyURLToClipboard"
       >
         Share Search Filter
-        <template #icon="{ iconSize }">
+        <template #startIcon="{ iconSize }">
           <dt-icon
             name="link-2"
             :size="iconSize"

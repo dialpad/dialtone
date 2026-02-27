@@ -11,18 +11,18 @@
       :selected="$attrs.selected"
       :wrapper-class="$attrs.wrapperClass"
     >
-      <template #left>
-        <dt-icon :name="$attrs.left" />
+      <template #start>
+        <dt-icon :name="$attrs.start" />
       </template>
       <span v-html="defaultSlot" />
       <template #subtitle>
         <span v-html="$attrs.subtitle" />
       </template>
-      <template #bottom>
-        <span v-html="$attrs.bottom" />
+      <template #blockEnd>
+        <span v-html="$attrs.blockEnd" />
       </template>
-      <template #right>
-        <dt-icon :name="$attrs.right" />
+      <template #end>
+        <dt-icon :name="$attrs.end" />
       </template>
     </dt-list-item>
   </ul>

@@ -7,7 +7,7 @@ const iconsList = getIconNames();
 
 // Default Prop Values
 const args = {
-  leftIcon: 'video',
+  startIcon: 'video',
   title: 'This meeting has ended',
   wrapperClass: 'd-w628',
   buttonClass: 'd-bar24',
@@ -15,7 +15,7 @@ const args = {
 
 const argTypes = {
   // Slots
-  leftIcon: {
+  startIcon: {
     table: {
       type: { summary: 'VNode' },
     },
@@ -27,6 +27,11 @@ const argTypes = {
       },
     },
   },
+  leftIcon: {
+    table: {
+      disable: true,
+    },
+  },
   subtitle: {
     control: 'text',
     table: {
@@ -35,7 +40,20 @@ const argTypes = {
       },
     },
   },
+  blockEnd: {
+    control: 'text',
+    table: {
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
   bottom: {
+    table: {
+      disable: true,
+    },
+  },
+  end: {
     control: 'text',
     table: {
       type: {
@@ -44,11 +62,8 @@ const argTypes = {
     },
   },
   right: {
-    control: 'text',
     table: {
-      type: {
-        summary: 'VNode',
-      },
+      disable: true,
     },
   },
   content: {

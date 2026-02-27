@@ -69,6 +69,30 @@ describe('DtRecipeContactCentersRow Tests', () => {
       });
     });
 
+    describe('When end slot is provided', () => {
+      beforeEach(() => {
+        slots = { end: '<div data-qa="custom-end">End Content</div>' };
+        updateWrapper();
+      });
+
+      it('should render the end slot content', () => {
+        expect(wrapper.find('[data-qa="custom-end"]').exists()).toBe(true);
+        expect(wrapper.find('[data-qa="custom-end"]').text()).toBe('End Content');
+      });
+    });
+
+    describe('When right slot is provided (backward compat)', () => {
+      beforeEach(() => {
+        slots = { right: '<div data-qa="custom-right">Right Content</div>' };
+        updateWrapper();
+      });
+
+      it('should render the right slot content', () => {
+        expect(wrapper.find('[data-qa="custom-right"]').exists()).toBe(true);
+        expect(wrapper.find('[data-qa="custom-right"]').text()).toBe('Right Content');
+      });
+    });
+
     describe('When a unreadCount is provided', () => {
       // Test Environment
       const unreadCount = 25;

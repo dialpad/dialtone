@@ -38,7 +38,7 @@
           navigation-type="arrow-keys"
           @click="onListItemSelect(i)"
         >
-          <template #left>
+          <template #start>
             <dt-avatar
               :full-name="(i + 1).toString()"
               :seed="i.toString()"

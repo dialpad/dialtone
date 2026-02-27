@@ -40,26 +40,25 @@
         </thead>
         <tbody>
           <tr
-            v-for="({ name, description, type, defaultValue, values, required, deprecated }) in sortedTableDataByName"
-            :key="name"
+            v-for="item in sortedTableDataByName"
+            :key="item.name"
             class="d-va-baseline"
           >
             <th scope="row">
               <dt-stack gap="300">
                 <span>
                   <code class="d-code--sm d-docsite-code">
-                    {{ name }}
+                    {{ item.name }}
                   </code>
                 </span>
                 <div
-                  v-if="required"
+                  v-if="item.required"
                   class="d-fc-critical d-fw-normal"
                 >
                   required
                 </div>
-                <span>
+                <span v-if="item.deprecated">
                   <dt-badge
-                    v-if="deprecated"
                     type="critical"
                     kind="label"
                     text="Deprecated"
@@ -69,23 +68,23 @@
             </th>
 
             <td v-if="withDefault">
-              <code v-if="defaultValue" class="d-code--sm d-docsite-code">
-                {{ defaultValue }}
+              <code v-if="item.defaultValue" class="d-code--sm d-docsite-code">
+                {{ item.defaultValue }}
               </code>
             </td>
 
             <td class="vue-api-table">
               <dt-stack gap="350">
                 <dt-stack
-                  v-if="values"
+                  v-if="item.values"
                   direction="row"
                   align="baseline"
                   class="d-fw-wrap"
                   gap="350"
                 >
                   <template
-                    v-for="(value, index) in values"
-                    :key="`${name} ${value}`"
+                    v-for="(value, index) in item.values"
+                    :key="`${item.name} ${value}`"
                   >
                     <dt-text v-if="index > 0" tone="muted" as="span" kind="body" size="xs">
                       |
@@ -93,21 +92,30 @@
                     <code class="d-code--sm d-docsite-code">"{{ value }}"</code>
                   </template>
                 </dt-stack>
-                <span v-else-if="type">
+                <span v-else-if="item.type">
                   <code class="d-code--sm d-docsite-code">
-                    {{ type }}
+                    {{ item.type }}
                   </code>
                 </span>
                 <dt-text
-                  v-if="description"
+                  v-if="item.description"
                   as="p"
                   kind="body"
                   size="sm"
                   wrap="balance"
                 >
                   <markdown-render
-                    :markdown="description"
+                    :markdown="item.description"
                   />
+                </dt-text>
+                <dt-text
+                  v-if="item.deprecated && item.deprecatedMessage"
+                  as="p"
+                  kind="body"
+                  size="sm"
+                  class="d-fc-critical"
+                >
+                  {{ item.deprecatedMessage }}
                 </dt-text>
               </dt-stack>
             </td>
@@ -149,16 +157,14 @@ const sortDataByKey = (data, nameKey, requiredKey) => {
   return data.sort((a, b) => {
     const aIsRequired = !!a[requiredKey];
     const bIsRequired = !!b[requiredKey];
+    const aIsDeprecated = !!a.deprecated;
+    const bIsDeprecated = !!b.deprecated;
 
-    // always have required at top
-    if (aIsRequired && !bIsRequired) {
-      return -1;
-    } else if (!aIsRequired && bIsRequired) {
-      return 1;
-    } else {
-      if (a[nameKey] < b[nameKey]) return -1;
-      if (a[nameKey] > b[nameKey]) return 1;
-    }
+    // Required first, deprecated last, then alphabetical
+    if (aIsRequired !== bIsRequired) return aIsRequired ? -1 : 1;
+    if (aIsDeprecated !== bIsDeprecated) return aIsDeprecated ? 1 : -1;
+    if (a[nameKey] < b[nameKey]) return -1;
+    if (a[nameKey] > b[nameKey]) return 1;
     return 0;
   });
 };

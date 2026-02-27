@@ -91,8 +91,24 @@ export const argTypesData = {
     },
   },
 
+  blockEnd: {
+    description: 'Slot for block-end content',
+    control: 'text',
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
   bottom: {
-    description: 'Slot for information at the bottom',
+    table: {
+      disable: true,
+    },
+  },
+
+  end: {
+    description: 'Slot for the end content',
     control: 'text',
     table: {
       category: 'slots',
@@ -103,13 +119,8 @@ export const argTypesData = {
   },
 
   right: {
-    description: 'Slot for the right content',
-    control: 'text',
     table: {
-      category: 'slots',
-      type: {
-        summary: 'VNode',
-      },
+      disable: true,
     },
   },
 
@@ -162,7 +173,7 @@ export const Default = {
     presence: 'active',
     header: `<div class="d-fs-200 d-fw-bold" id="contact-name"> Joseph Lumaban </div>`,
     subtitle: `<div class="d-fs-100 d-mt2"> +1 (415) 123-4567 </div>`,
-    bottom: `<div data-qa="dt-stack" class="d-mtn6 d-stack d-stack--row d-stack--gap-0 d-stack--align-center d-stack--justify-start">
+    blockEnd: `<div data-qa="dt-stack" class="d-mtn6 d-stack d-stack--row d-stack--gap-0 d-stack--align-center d-stack--justify-start">
     <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">
       &nbsp;
     </div>
@@ -189,7 +200,7 @@ export const Default = {
     <template #subtitle>
       <div class="d-fs-100 d-mt2">+1 (415) 123-4567</div>
     </template>
-    <template #bottom>
+    <template #blockEnd>
       <dt-stack direction="row" align="center" class="d-mtn6">
         <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">&nbsp;</div>
         <div class="d-fs-100 d-mr4">Aerolabs Support</div>
@@ -274,7 +285,7 @@ export const Variants = {
               <dt-icon name="check-circle" size="200" class="d-fc-tertiary d-va-text-bottom" />
             </dt-stack>
           </template>
-          <template #bottom>
+          <template #blockEnd>
             <dt-stack direction="row" align="center" class="d-mtn6">
               <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">&nbsp;</div>
               <div class="d-fs-100 d-mr4">Aerolabs Support</div>
@@ -293,7 +304,7 @@ export const Variants = {
             <dt-icon name="check-circle" size="200" class="d-fc-tertiary d-va-text-bottom" />
           </dt-stack>
         </template>
-        <template #bottom>
+        <template #blockEnd>
           <dt-stack direction="row" align="center" class="d-mtn6">
             <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">&nbsp;</div>
             <div class="d-fs-100 d-mr4">Aerolabs Support</div>
@@ -317,7 +328,7 @@ export const Variants = {
             <dt-icon name="check-circle" size="200" class="d-fc-tertiary d-va-text-bottom" />
           </dt-stack>
         </template>
-        <template #bottom>
+        <template #blockEnd>
           <dt-stack direction="row" align="center" class="d-mtn6">
             <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">&nbsp;</div>
             <div class="d-fs-100 d-mr4">Aerolabs Support</div>
@@ -333,7 +344,7 @@ export const Variants = {
       >
         <template #header><div class="d-fw-bold d-fs-200">Natalie Woods</div></template>
         <template #subtitle>+1 (415) 123-4567</template>
-        <template #right>
+        <template #end>
           <dt-stack direction="row" align="center" class="d-m8">
             <dt-button size="xs" :circle="true" importance="clear" aria-label="chat">
               <template #icon>
@@ -348,7 +359,7 @@ export const Variants = {
             <div class="d-m4">0:32</div>
           </dt-stack>
         </template>
-        <template #bottom>
+        <template #blockEnd>
           2 matches found.
           <dt-button link @click.stop="onConnectToARecord">Connect to a record</dt-button>
         </template>

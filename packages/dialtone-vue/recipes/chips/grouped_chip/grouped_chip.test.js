@@ -5,10 +5,10 @@ import { DtIcon } from '@/components/icon';
 // Constants
 const baseProps = {};
 const baseSlotsData = {
-  leftIcon: '<dt-icon name="clock" />',
-  leftContent: `<div>0.13</div>`,
-  rightIcon: '<dt-icon name="pause" />',
-  rightContent: `<div>0.33</div>`,
+  startIcon: '<dt-icon name="clock" />',
+  startContent: `<div>0.13</div>`,
+  endIcon: '<dt-icon name="pause" />',
+  endContent: `<div>0.33</div>`,
 };
 
 describe('DtRecipeGroupedChip Tests', () => {
@@ -72,23 +72,51 @@ describe('DtRecipeGroupedChip Tests', () => {
         expect(rootElement.exists()).toBe(true);
       });
 
-      it('Should render left side chip icon element', () => {
+      it('Should render start side chip icon element', () => {
         expect(leftChipIconElement.findComponent(DtIcon).exists()).toBe(true);
       });
 
-      it('Should render left side chip content', () => {
+      it('Should render start side chip content', () => {
         expect(leftChipContentElement.text()).toBe('0.13');
       });
 
-      it('Should not render right side chip component', () => {
+      it('Should render end side chip component', () => {
         expect(rightChipIconElement.exists()).toBe(true);
       });
 
-      it('Should render right side chip icon element', () => {
+      it('Should render end side chip icon element', () => {
         expect(rightChipIconElement.findComponent(DtIcon).exists()).toBe(true);
       });
 
-      it('Should render right side chip content', () => {
+      it('Should render end side chip content', () => {
+        expect(rightChipContentElement.text()).toBe('0.33');
+      });
+    });
+
+    describe('Backward compat with old slot names', () => {
+      beforeEach(async () => {
+        slots = {
+          leftIcon: '<dt-icon name="clock" />',
+          leftContent: `<div>0.13</div>`,
+          rightIcon: '<dt-icon name="pause" />',
+          rightContent: `<div>0.33</div>`,
+        };
+        _setWrappers();
+      });
+
+      it('Should render left side chip icon element via leftIcon slot', () => {
+        expect(leftChipIconElement.findComponent(DtIcon).exists()).toBe(true);
+      });
+
+      it('Should render left side chip content via leftContent slot', () => {
+        expect(leftChipContentElement.text()).toBe('0.13');
+      });
+
+      it('Should render right side chip icon element via rightIcon slot', () => {
+        expect(rightChipIconElement.findComponent(DtIcon).exists()).toBe(true);
+      });
+
+      it('Should render right side chip content via rightContent slot', () => {
         expect(rightChipContentElement.text()).toBe('0.33');
       });
     });

@@ -11,29 +11,45 @@
       class="d-recipe-grouped-chip__content d-recipe-grouped-chip__content-left"
     >
       <template
-        v-if="hasSlotContent($slots.leftIcon)"
+        v-if="hasSlotContent($slots.startIcon) || hasSlotContent($slots.leftIcon)"
         #icon
       >
-        <!-- @slot Slot for left chip icon information -->
         <div
-          v-if="hasSlotContent($slots.leftIcon)"
+          v-if="hasSlotContent($slots.startIcon) || hasSlotContent($slots.leftIcon)"
           data-qa="left-grouped-chip-icon"
         >
-          <slot name="leftIcon" />
+          <!-- @slot Slot for start chip icon information -->
+          <slot
+            v-if="$slots.startIcon"
+            name="startIcon"
+          />
+          <!-- @slot @deprecated Use startIcon -->
+          <slot
+            v-else
+            name="leftIcon"
+          />
         </div>
       </template>
       <template #default>
         <div
-          v-if="hasSlotContent($slots.leftContent)"
+          v-if="hasSlotContent($slots.startContent) || hasSlotContent($slots.leftContent)"
           data-qa="left-grouped-chip-content"
         >
-          <!-- @slot Slot for left chip content information -->
-          <slot name="leftContent" />
+          <!-- @slot Slot for start chip content information -->
+          <slot
+            v-if="$slots.startContent"
+            name="startContent"
+          />
+          <!-- @slot @deprecated Use startContent -->
+          <slot
+            v-else
+            name="leftContent"
+          />
         </div>
       </template>
     </dt-chip>
 
-    <!-- Right side split chip -->
+    <!-- End side split chip -->
     <dt-chip
       :hide-close="true"
       :interactive="false"
@@ -43,20 +59,36 @@
     >
       <template #icon>
         <div
-          v-if="hasSlotContent($slots.rightIcon)"
+          v-if="hasSlotContent($slots.endIcon) || hasSlotContent($slots.rightIcon)"
           data-qa="right-grouped-chip-icon"
         >
-          <!-- @slot Slot for right chip content information -->
-          <slot name="rightIcon" />
+          <!-- @slot Slot for end chip icon information -->
+          <slot
+            v-if="$slots.endIcon"
+            name="endIcon"
+          />
+          <!-- @slot @deprecated Use endIcon -->
+          <slot
+            v-else
+            name="rightIcon"
+          />
         </div>
       </template>
       <template #default>
         <div
-          v-if="hasSlotContent($slots.rightContent)"
+          v-if="hasSlotContent($slots.endContent) || hasSlotContent($slots.rightContent)"
           data-qa="right-grouped-chip-content"
         >
-          <!-- @slot Slot for right chip content information -->
-          <slot name="rightContent" />
+          <!-- @slot Slot for end chip content information -->
+          <slot
+            v-if="$slots.endContent"
+            name="endContent"
+          />
+          <!-- @slot @deprecated Use endContent -->
+          <slot
+            v-else
+            name="rightContent"
+          />
         </div>
       </template>
     </dt-chip>

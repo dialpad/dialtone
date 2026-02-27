@@ -23,7 +23,7 @@
         :circle="true"
         @click="toggleSiteNav"
       >
-        <template #icon>
+        <template #startIcon>
           <dt-icon
             name="chevron-down"
           />

@@ -85,6 +85,56 @@ describe('DtRecipeTopBannerInfo Tests', function () {
     });
   });
 
+  describe('Slot Naming Tests', () => {
+    describe('When start slot is provided', () => {
+      beforeEach(() => {
+        slots = { ...baseSlots, start: '<div data-qa="custom-start">Start Content</div>' };
+        _setWrappers();
+      });
+
+      it('should render start slot content', () => {
+        expect(wrapper.find('[data-qa="custom-start"]').exists()).toBe(true);
+        expect(wrapper.find('[data-qa="custom-start"]').text()).toBe('Start Content');
+      });
+    });
+
+    describe('When left slot is provided (backward compat)', () => {
+      beforeEach(() => {
+        slots = { ...baseSlots, left: '<div data-qa="custom-left">Left Content</div>' };
+        _setWrappers();
+      });
+
+      it('should render left slot content', () => {
+        expect(wrapper.find('[data-qa="custom-left"]').exists()).toBe(true);
+        expect(wrapper.find('[data-qa="custom-left"]').text()).toBe('Left Content');
+      });
+    });
+
+    describe('When end slot is provided', () => {
+      beforeEach(() => {
+        slots = { ...baseSlots, end: '<div data-qa="custom-end">End Content</div>' };
+        _setWrappers();
+      });
+
+      it('should render end slot content', () => {
+        expect(wrapper.find('[data-qa="custom-end"]').exists()).toBe(true);
+        expect(wrapper.find('[data-qa="custom-end"]').text()).toBe('End Content');
+      });
+    });
+
+    describe('When right slot is provided (backward compat)', () => {
+      beforeEach(() => {
+        slots = { ...baseSlots, right: '<div data-qa="custom-right">Right Content</div>' };
+        _setWrappers();
+      });
+
+      it('should render right slot content', () => {
+        expect(wrapper.find('[data-qa="custom-right"]').exists()).toBe(true);
+        expect(wrapper.find('[data-qa="custom-right"]').text()).toBe('Right Content');
+      });
+    });
+  });
+
   describe('Validation Tests', () => {
     /*
      * Test(s) to ensure that custom validators are working as expected

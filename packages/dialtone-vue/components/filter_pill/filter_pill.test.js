@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils';
 import DtFilterPill from './filter_pill.vue';
 import { DtPopover } from '@/components/popover';
+import { DtTooltipDirective } from '@/directives/tooltip_directive';
 
 const MOCK_OPEN_STUB = vi.fn();
 const MOCK_CLEAR_STUB = vi.fn();
@@ -8,6 +9,8 @@ const MOCK_CLEAR_STUB = vi.fn();
 const MOCK_LABEL = 'Filter pill label';
 const MOCK_CONTENT = 'Popover content';
 const MOCK_DEFAULT_SLOT = 'Default slot';
+const MOCK_START_TOOLTIP_TEXT = 'Start tooltip text';
+const MOCK_END_TOOLTIP_TEXT = 'End tooltip text';
 
 const MOCK_TEST_FILTERS = [
   { name: 'Test item 1' },
@@ -44,6 +47,7 @@ describe('DtFilterPill Tests', function () {
         stubs: {
           transition: false,
         },
+        plugins: [DtTooltipDirective],
       },
       attrs: { ...baseAttrs, ...mockAttrs },
       attachTo: document.body,
@@ -155,6 +159,82 @@ describe('DtFilterPill Tests', function () {
 
       it('Should emit "clear" event', () => {
         expect(wrapper.emitted()).toHaveProperty('clear');
+      });
+    });
+  });
+
+  describe('Tooltip Prop Tests', () => {
+    describe('When startTooltipText is set', () => {
+      it('Should bind the tooltip directive on the main button', () => {
+        mockProps = { startTooltipText: MOCK_START_TOOLTIP_TEXT };
+
+        updateWrapper();
+
+        expect(button.attributes('data-dt-tooltip-id')).toBeDefined();
+      });
+    });
+
+    describe('When endTooltipText is set', () => {
+      it('Should use it as clear button aria-label', () => {
+        mockProps = {
+          modelValue: [{ name: 'Test item 1', active: true }],
+          endTooltipText: MOCK_END_TOOLTIP_TEXT,
+        };
+
+        updateWrapper();
+        clearButton = wrapper.find('[data-qa="dt-filter-pill__clear-button"]');
+
+        expect(clearButton.attributes('aria-label')).toBe(MOCK_END_TOOLTIP_TEXT);
+      });
+
+      it('Should bind the tooltip directive on the clear button', () => {
+        mockProps = {
+          modelValue: [{ name: 'Test item 1', active: true }],
+          endTooltipText: MOCK_END_TOOLTIP_TEXT,
+        };
+
+        updateWrapper();
+        clearButton = wrapper.find('[data-qa="dt-filter-pill__clear-button"]');
+
+        expect(clearButton.attributes('data-dt-tooltip-id')).toBeDefined();
+      });
+    });
+  });
+
+  describe('Backward Compatibility Tests', () => {
+    describe('When deprecated alphaTooltipText prop is used', () => {
+      it('Should bind the tooltip directive on the main button', () => {
+        mockProps = { alphaTooltipText: MOCK_START_TOOLTIP_TEXT };
+
+        updateWrapper();
+
+        expect(button.attributes('data-dt-tooltip-id')).toBeDefined();
+      });
+    });
+
+    describe('When deprecated omegaTooltipText prop is used', () => {
+      it('Should use it as clear button aria-label', () => {
+        mockProps = {
+          modelValue: [{ name: 'Test item 1', active: true }],
+          omegaTooltipText: MOCK_END_TOOLTIP_TEXT,
+        };
+
+        updateWrapper();
+        clearButton = wrapper.find('[data-qa="dt-filter-pill__clear-button"]');
+
+        expect(clearButton.attributes('aria-label')).toBe(MOCK_END_TOOLTIP_TEXT);
+      });
+
+      it('Should bind the tooltip directive on the clear button', () => {
+        mockProps = {
+          modelValue: [{ name: 'Test item 1', active: true }],
+          omegaTooltipText: MOCK_END_TOOLTIP_TEXT,
+        };
+
+        updateWrapper();
+        clearButton = wrapper.find('[data-qa="dt-filter-pill__clear-button"]');
+
+        expect(clearButton.attributes('data-dt-tooltip-id')).toBeDefined();
       });
     });
   });
