@@ -95,6 +95,22 @@ fieldset {
   margin-block: var(--dt-size-300-negative) var(--dt-size-300);
 }
 
+.d-input__label-text,
+.d-select__label-text {
+  display: flex;
+  flex: 1 0%;
+  align-items: baseline;
+  justify-content: space-between;
+  box-sizing: border-box;
+  margin-block-end: var(--dt-size-300);
+  overflow-wrap: break-word;
+}
+
+.d-input__label-text + .d-description,
+.d-select__label-text + .d-description {
+  margin-block: var(--dt-size-300-negative) var(--dt-size-300);
+}
+
 //  ============================================================================
 //  $   VALIDATION MESSAGES
 //  ----------------------------------------------------------------------------

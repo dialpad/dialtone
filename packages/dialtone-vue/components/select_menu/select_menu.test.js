@@ -1,6 +1,5 @@
 import { mount } from '@vue/test-utils';
 import {
-  LABEL_SIZE_MODIFIERS,
   DESCRIPTION_SIZE_MODIFIERS,
 } from '@/common/constants';
 import {
@@ -68,8 +67,8 @@ describe('DtSelectMenu Tests', () => {
         expect(label.text()).toBe(MOCK_LABEL);
       });
 
-      it('should have no size variant classes on the label', () => {
-        expect(label.classes().length).toBe(1);
+      it('should have the default label text class', () => {
+        expect(label.classes()).toContain('d-text-label--md');
       });
 
       it('should not render a description', () => {
@@ -169,7 +168,7 @@ describe('DtSelectMenu Tests', () => {
       });
 
       it('should have size variant class on the label', () => {
-        expect(label.classes(LABEL_SIZE_MODIFIERS[MOCK_SIZE])).toBe(true);
+        expect(label.classes()).toContain('d-text-label--lg');
       });
 
       it('should have size variant class on the description', () => {

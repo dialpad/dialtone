@@ -4,20 +4,20 @@
     v-bind="addClassStyleAttrs($attrs)"
   >
     <label>
-      <div
+      <dt-text
         v-if="hasSlotContent($slots.label) || label"
+        kind="label"
+        :size="labelTextSize"
+        tone="secondary"
+        as="div"
         :aria-details="labelAriaDetails"
-        :class="[
-          'd-label',
-          LABEL_SIZE_MODIFIERS[size],
-          labelClass,
-        ]"
+        :class="['d-select__label-text', labelClass]"
         v-bind="labelChildProps"
         data-qa="dt-select-label"
       >
         <!-- @slot Slot for label, defaults to label prop -->
         <slot name="label">{{ label }}</slot>
-      </div>
+      </dt-text>
       <div
         v-if="hasSlotContent($slots.description) || description"
         :id="descriptionKey"
@@ -81,9 +81,9 @@
 <script>
 import { warn } from 'vue';
 import {
-  LABEL_SIZE_MODIFIERS,
   DESCRIPTION_SIZE_MODIFIERS,
 } from '@/common/constants';
+import { DtText } from '@/components/text';
 import {
   SELECT_SIZE_MODIFIERS,
   SELECT_STATE_MODIFIERS,
@@ -110,7 +110,7 @@ export default {
   compatConfig: { MODE: 3 },
   name: 'DtSelectMenu',
 
-  components: { DtValidationMessages },
+  components: { DtValidationMessages, DtText },
 
   mixins: [MessagesMixin],
 
@@ -268,7 +268,6 @@ export default {
 
   data () {
     return {
-      LABEL_SIZE_MODIFIERS,
       DESCRIPTION_SIZE_MODIFIERS,
       SELECT_SIZE_MODIFIERS,
       SELECT_STATE_MODIFIERS,
@@ -277,6 +276,10 @@ export default {
   },
 
   computed: {
+    labelTextSize () {
+      return this.size === 'xl' ? 'lg' : this.size;
+    },
+
     selectListeners () {
       return {
         /*

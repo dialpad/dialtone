@@ -434,7 +434,7 @@ describe('DtInput tests', () => {
         });
 
         it('should add label size class', () => {
-          expect(label.classes().includes(`d-label--${MOCK_INPUT_SIZE_EXTRA_SMALL}`)).toBe(true);
+          expect(label.classes().includes(`d-text-label--${MOCK_INPUT_SIZE_EXTRA_SMALL}`)).toBe(true);
         });
 
         it('should add description size class', () => {
@@ -455,8 +455,8 @@ describe('DtInput tests', () => {
           expect(nativeInput.classes().includes(`d-input--${MOCK_INPUT_SIZE_EXTRA_LARGE}`)).toBe(true);
         });
 
-        it('should add label size class', () => {
-          expect(label.classes().includes(`d-label--${MOCK_INPUT_SIZE_EXTRA_LARGE}`)).toBe(true);
+        it('should add label size class (xl maps to lg)', () => {
+          expect(label.classes().includes('d-text-label--lg')).toBe(true);
         });
 
         it('should add description size class', () => {

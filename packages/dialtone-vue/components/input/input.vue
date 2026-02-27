@@ -12,18 +12,17 @@
     >
       <!-- @slot Slot for label, defaults to label prop -->
       <slot name="labelSlot">
-        <span
+        <dt-text
           v-if="labelVisible && label"
           ref="label"
           data-qa="dt-input-label"
-          :class="[
-            'd-input__label-text',
-            'd-label',
-            labelSizeClasses[size],
-          ]"
+          kind="label"
+          :size="labelTextSize"
+          tone="secondary"
+          class="d-input__label-text"
         >
           {{ label }}
-        </span>
+        </dt-text>
       </slot>
       <div
         v-if="hasSlotContent($slots.description) || description || shouldValidateLength"
@@ -140,7 +139,6 @@ import {
   INPUT_ICON_SIZES,
   INPUT_STATE_CLASSES,
   DESCRIPTION_SIZE_CLASSES,
-  LABEL_SIZE_CLASSES,
 } from './input_constants';
 import {
   getUniqueString,
@@ -150,6 +148,7 @@ import {
   addClassStyleAttrs,
 } from '@/common/utils';
 import { DtValidationMessages } from '@/components/validation_messages';
+import { DtText } from '@/components/text';
 import { MessagesMixin } from '@/common/mixins/input';
 
 /**
@@ -163,7 +162,7 @@ export default {
   compatConfig: { MODE: 3 },
   name: 'DtInput',
 
-  components: { DtValidationMessages },
+  components: { DtValidationMessages, DtText },
 
   mixins: [MessagesMixin],
 
@@ -519,6 +518,10 @@ export default {
       );
     },
 
+    labelTextSize () {
+      return this.size === 'xl' ? 'lg' : this.size;
+    },
+
     sizeModifierClass () {
       if (this.isDefaultSize || !this.isValidSize) {
         return '';
@@ -558,7 +561,6 @@ export default {
 
   beforeMount () {
     this.descriptionSizeClasses = DESCRIPTION_SIZE_CLASSES;
-    this.labelSizeClasses = LABEL_SIZE_CLASSES;
   },
 
   mounted () {
