@@ -187,7 +187,7 @@ describe('DtRecipeEditor tests', () => {
 
     describe('Tooltip messages for new formatting buttons', () => {
       it('should have correct tooltip for font style button', () => {
-        expect(fontStyleBtn.attributes('aria-label')).toContain('Font Style');
+        expect(fontStyleBtn.attributes('aria-label')).toContain('Font');
       });
 
       it('should have correct tooltip for font size button', () => {
@@ -195,7 +195,7 @@ describe('DtRecipeEditor tests', () => {
       });
 
       it('should have correct tooltip for font color button', () => {
-        expect(fontColorBtn.attributes('aria-label')).toContain('Font Color');
+        expect(fontColorBtn.attributes('aria-label')).toContain('Text Color');
       });
     });
 
