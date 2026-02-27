@@ -19,44 +19,20 @@
         gap="300"
       >
         <template v-for="button in buttonGroup.buttonGroup">
-          <!-- fontStyle button -->
-          <dt-popover
-            v-if="button.selector === 'fontStyle'"
+          <!-- Font Style Popover -->
+          <EditorToolbarPopoverButton
+            v-if="button.buttonType === 'popover' && button.selector === 'fontStyle'"
             :key="getButtonKey(buttonGroup.key, button.selector)"
-            data-qa="dt-recipe-editor-font-style-input-popover"
-            padding="small"
-            placement="bottom-start"
-            :modal="false"
+            :buttonRef="getButtonRef(buttonGroup.key, button.selector)"
+            :isActive="$refs.richTextEditor?.editor?.isActive(button.selector)"
+            :tooltipMessage="button.tooltipMessage"
+            :dataQA="button.dataQA"
+            :popoverDataQA="'dt-recipe-editor-font-style-input-popover'"
+            :tabindex="canFocus(getButtonRef(buttonGroup.key, button.selector)) ? 0 : -1"
+            :icon="button.icon"
+            @shift-focus-right="shiftActionBarFocusRight"
+            @shift-focus-left="shiftActionBarFocusLeft"
           >
-            <template #anchor="{ attrs }">
-              <dt-tooltip
-                :message="button.tooltipMessage"
-                placement="top"
-              >
-                <template #anchor>
-                  <dt-button
-                    v-bind="attrs"
-                    :ref="getButtonRef(buttonGroup.key, button.selector)"
-                    :active="$refs.richTextEditor?.editor?.isActive(button.selector)"
-                    :aria-label="button.tooltipMessage"
-                    :data-qa="button.dataQA"
-                    :tabindex="canFocus(getButtonRef(buttonGroup.key, button.selector)) ? 0 : -1"
-                    importance="clear"
-                    kind="muted"
-                    size="xs"
-                    @keydown.right.stop="shiftActionBarFocusRight"
-                    @keydown.left.stop="shiftActionBarFocusLeft"
-                  >
-                    <template #icon>
-                      <component
-                        :is="button.icon"
-                        size="200"
-                      />
-                    </template>
-                  </dt-button>
-                </template>
-              </dt-tooltip>
-            </template>
             <template #content="{ close }">
               <dt-input
                 v-model="fontStyleSearch"
@@ -85,51 +61,27 @@
                 {{ fontStyle.name }}
               </dt-list-item>
             </template>
-          </dt-popover>
-          <!-- fontSize button -->
-          <dt-popover
-            v-else-if="button.selector === 'fontSize'"
+          </EditorToolbarPopoverButton>
+
+          <!-- Font Size Popover -->
+          <EditorToolbarPopoverButton
+            v-else-if="button.buttonType === 'popover' && button.selector === 'fontSize'"
             :key="getButtonKey(buttonGroup.key, button.selector)"
-            data-qa="dt-recipe-editor-font-size-input-popover"
-            padding="small"
-            placement="bottom-start"
-            :modal="false"
+            :buttonRef="getButtonRef(buttonGroup.key, button.selector)"
+            :isActive="$refs.richTextEditor?.editor?.isActive(button.selector)"
+            :tooltipMessage="button.tooltipMessage"
+            :dataQA="button.dataQA"
+            :popoverDataQA="'dt-recipe-editor-font-size-input-popover'"
+            :tabindex="canFocus(getButtonRef(buttonGroup.key, button.selector)) ? 0 : -1"
+            :icon="button.icon"
+            @shift-focus-right="shiftActionBarFocusRight"
+            @shift-focus-left="shiftActionBarFocusLeft"
           >
-            <template #anchor="{ attrs }">
-              <dt-tooltip
-                :message="button.tooltipMessage"
-                placement="top"
-              >
-                <template #anchor>
-                  <dt-button
-                    v-bind="attrs"
-                    :ref="getButtonRef(buttonGroup.key, button.selector)"
-                    :active="$refs.richTextEditor?.editor?.isActive(button.selector)"
-                    :aria-label="button.tooltipMessage"
-                    :data-qa="button.dataQA"
-                    :tabindex="canFocus(getButtonRef(buttonGroup.key, button.selector)) ? 0 : -1"
-                    importance="clear"
-                    kind="muted"
-                    size="xs"
-                    @keydown.right.stop="shiftActionBarFocusRight"
-                    @keydown.left.stop="shiftActionBarFocusLeft"
-                  >
-                    <template #icon>
-                      <component
-                        :is="button.icon"
-                        size="200"
-                      />
-                    </template>
-                  </dt-button>
-                </template>
-              </dt-tooltip>
-            </template>
             <template #content="{ close }">
               <dt-list-item
                 v-for="fontSize in fontSizes"
                 :key="fontSize.name"
                 :selected="isCurrentFontSize(fontSize.value)"
-
                 role="menuitem"
                 navigation-type="arrow-keys"
                 @click="
@@ -140,122 +92,81 @@
                 <span :style="{ fontSize: fontSize.value }">{{ fontSize.name }}</span>
               </dt-list-item>
             </template>
-          </dt-popover>
-          <!-- fontColor button -->
-          <dt-tooltip
-            v-else-if="button.selector === 'fontColor'"
+          </EditorToolbarPopoverButton>
+
+          <!-- Font Color Button -->
+          <dt-button
+            v-else-if="button.buttonType === 'custom' && button.selector === 'fontColor'"
+            v-dt-tooltip="{ message: button.tooltipMessage, placement: 'top' }"
             :key="getButtonKey(buttonGroup.key, button.selector)"
-            data-qa="dt-recipe-editor-font-color-tooltip"
-            :message="button.tooltipMessage"
-            placement="top"
+            :ref="getButtonRef(buttonGroup.key, button.selector)"
+            kind="muted"
+            importance="clear"
+            size="xs"
+            icon-position="right"
+            :active="$refs.richTextEditor?.editor?.isActive(button.selector)"
+            :tabindex="canFocus(getButtonRef(buttonGroup.key, button.selector)) ? 0 : -1"
+            :aria-label="button.tooltipMessage"
+            :data-qa="button.dataQA"
+            @keydown.right.stop="shiftActionBarFocusRight"
+            @keydown.left.stop="shiftActionBarFocusLeft"
+            @click="button.onClick()"
           >
-            <template #anchor>
-              <dt-button
-                :ref="getButtonRef(buttonGroup.key, button.selector)"
-                kind="muted"
-                importance="clear"
-                size="xs"
-                icon-position="right"
-                :active="$refs.richTextEditor?.editor?.isActive(button.selector)"
-                :tabindex="canFocus(getButtonRef(buttonGroup.key, button.selector)) ? 0 : -1"
-                :aria-label="button.tooltipMessage"
-                :data-qa="button.dataQA"
-                @keydown.right.stop="shiftActionBarFocusRight"
-                @keydown.left.stop="shiftActionBarFocusLeft"
-                @click="button.onClick()"
+            <template #icon>
+              <dt-icon-chevron-down size="200" />
+            </template>
+            <template #default>
+              <dt-input
+                :value="currentFontColor"
+                input-class="colorPickerInput d-w100p d-h100p d-p0 d-bar0 d-c-pointer"
+                input-wrapper-class="d-w16 d-h16 d-mt4 d-bar4 d-ba-none"
+                size="sm"
+                type="color"
+                @input="onColorPickerInput"
+                @click.stop
               >
                 <template #icon>
                   <dt-icon-chevron-down size="200" />
                 </template>
-                <template #default>
-                  <dt-input
-                    :value="currentFontColor"
-                    input-class="colorPickerInput d-w100p d-h100p d-p0 d-bar0 d-c-pointer"
-                    input-wrapper-class="d-w16 d-h16 d-mt4 d-bar4 d-ba-none"
-                    size="sm"
-                    type="color"
-                    @input="onColorPickerInput"
-                    @click.stop
-                  >
-                    <template #icon>
-                      <dt-icon-chevron-down size="200" />
-                    </template>
-                  </dt-input>
-                </template>
-              </dt-button>
+              </dt-input>
             </template>
-          </dt-tooltip>
+          </dt-button>
 
-          <!-- Regular buttons -->
-          <dt-tooltip
-            v-else
+          <!-- Regular Toolbar Button -->
+          <EditorToolbarButton
+            v-else-if="button.buttonType === 'button'"
             :key="getButtonKey(buttonGroup.key, button.selector)"
-            :message="button.tooltipMessage"
-            placement="top"
-          >
-            <template #anchor>
-              <dt-button
-                :ref="getButtonRef(buttonGroup.key, button.selector)"
-                :active="$refs.richTextEditor?.editor?.isActive(button.selector)"
-                :aria-label="button.tooltipMessage"
-                :data-qa="button.dataQA"
-                :tabindex="canFocus(getButtonRef(buttonGroup.key, button.selector)) ? 0 : -1"
-                importance="clear"
-                kind="muted"
-                size="xs"
-                @click="button.onClick()"
-                @keydown.right.stop="shiftActionBarFocusRight"
-                @keydown.left.stop="shiftActionBarFocusLeft"
-              >
-                <template #icon>
-                  <component
-                    :is="button.icon"
-                    size="200"
-                  />
-                </template>
-                {{ button?.label }}
-              </dt-button>
-            </template>
-          </dt-tooltip>
+            :buttonRef="getButtonRef(buttonGroup.key, button.selector)"
+            :isActive="$refs.richTextEditor?.editor?.isActive(button.selector)"
+            :tooltipMessage="button.tooltipMessage"
+            :dataQA="button.dataQA"
+            :tabindex="canFocus(getButtonRef(buttonGroup.key, button.selector)) ? 0 : -1"
+            :icon="button.icon"
+            :label="button.label"
+            :onClick="button.onClick"
+            @shift-focus-right="shiftActionBarFocusRight"
+            @shift-focus-left="shiftActionBarFocusLeft"
+          />
         </template>
         <div class="d-recipe-editor__button-group-divider" />
       </dt-stack>
+      <!-- Variable Button -->
       <dt-stack
         v-if="variableButton.showBtn"
         direction="row"
         gap="300"
       >
-        <dt-popover
-          padding="small"
-          navigation-type="arrow-keys"
-          :modal="false"
-          placement="bottom-start"
+        <EditorToolbarPopoverButton
+          :buttonRef="getButtonRef('custom', 'variable')"
+          :isActive="false"
+          :tooltipMessage="variableButton.tooltipMessage"
+          :dataQA="variableButton.dataQA"
+          :popoverDataQA="'dt-recipe-editor-variable-popover'"
+          :tabindex="0"
+          :icon="variableButton.icon"
+          @shift-focus-right="shiftActionBarFocusRight"
+          @shift-focus-left="shiftActionBarFocusLeft"
         >
-          <template #anchor="{ attrs }">
-            <dt-tooltip
-              :message="variableButton.tooltipMessage"
-              placement="top"
-            >
-              <template #anchor>
-                <dt-button
-                  v-bind="attrs"
-                  kind="muted"
-                  size="xs"
-                  importance="clear"
-                  :aria-label="variableButton.tooltipMessage"
-                  :data-qa="variableButton.dataQA"
-                  label-class="d-jc-flex-start"
-                >
-                  <template #icon>
-                    <component
-                      :is="variableButton.icon"
-                      size="200"
-                    />
-                  </template>
-                </dt-button>
-              </template>
-            </dt-tooltip>
-          </template>
           <template #content="{ close }">
             <dt-input
               v-model="variableSearchValue"
@@ -292,7 +203,7 @@
               />
             </dt-list-item-group>
           </template>
-        </dt-popover>
+        </EditorToolbarPopoverButton>
         <div class="d-recipe-editor__button-group-divider" />
       </dt-stack>
       <dt-stack
@@ -456,6 +367,8 @@ import { DtTooltip } from '@/components/tooltip';
 import { DtListItem } from '@/components/list_item';
 import {DtDropdownSeparator} from '@/components/dropdown/index.js';
 import {DtListItemGroup} from '@/components/list_item_group/index.js';
+import EditorToolbarButton from './EditorToolbarButton.vue';
+import EditorToolbarPopoverButton from './EditorToolbarPopoverButton.vue';
 import {
   DtIconAlignCenter,
   DtIconAlignJustify,
@@ -494,6 +407,8 @@ export default {
     DtStack,
     DtInput,
     DtTooltip,
+    EditorToolbarButton,
+    EditorToolbarPopoverButton,
     DtIconQuickReply,
     DtIconBold,
     DtIconItalic,
@@ -934,6 +849,7 @@ export default {
       return [
         {
           showBtn: this.showQuickRepliesButton,
+          buttonType: 'button',
           label: this.i18n.$t('DIALTONE_EDITOR_QUICK_REPLY_BUTTON_LABEL'),
           selector: 'quickReplies',
           icon: DtIconQuickReply,
@@ -948,6 +864,7 @@ export default {
       return [
         {
           showBtn: this.showFontStyleButton,
+          buttonType: 'popover',
           selector: 'fontStyle',
           icon: DtIconType,
           dataQA: 'dt-recipe-editor-font-style-btn',
@@ -955,6 +872,7 @@ export default {
         },
         {
           showBtn: this.showFontSizeButton,
+          buttonType: 'popover',
           selector: 'fontSize',
           icon: DtIconFontSize,
           dataQA: 'dt-recipe-editor-font-size-btn',
@@ -962,6 +880,7 @@ export default {
         },
         {
           showBtn: this.showFontColorButton,
+          buttonType: 'custom',
           selector: 'fontColor',
           dataQA: 'dt-recipe-editor-font-color-btn',
           tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_FONT_COLOR_BUTTON_LABEL'),
@@ -969,6 +888,7 @@ export default {
         },
         {
           showBtn: this.showBoldButton,
+          buttonType: 'button',
           selector: 'bold',
           icon: DtIconBold,
           dataQA: 'dt-recipe-editor-bold-btn',
@@ -977,6 +897,7 @@ export default {
         },
         {
           showBtn: this.showItalicsButton,
+          buttonType: 'button',
           selector: 'italic',
           icon: DtIconItalic,
           dataQA: 'dt-recipe-editor-italics-btn',
@@ -985,6 +906,7 @@ export default {
         },
         {
           showBtn: this.showUnderlineButton,
+          buttonType: 'button',
           selector: 'underline',
           icon: DtIconUnderline,
           dataQA: 'dt-recipe-editor-underline-btn',
@@ -993,6 +915,7 @@ export default {
         },
         {
           showBtn: this.showStrikeButton,
+          buttonType: 'button',
           selector: 'strike',
           icon: DtIconStrikethrough,
           dataQA: 'dt-recipe-editor-strike-btn',
@@ -1006,6 +929,7 @@ export default {
       return [
         {
           showBtn: this.showAlignLeftButton,
+          buttonType: 'button',
           selector: { textAlign: 'left' },
           icon: DtIconAlignLeft,
           dataQA: 'dt-recipe-editor-align-left-btn',
@@ -1014,6 +938,7 @@ export default {
         },
         {
           showBtn: this.showAlignCenterButton,
+          buttonType: 'button',
           selector: { textAlign: 'center' },
           icon: DtIconAlignCenter,
           dataQA: 'dt-recipe-editor-align-center-btn',
@@ -1022,6 +947,7 @@ export default {
         },
         {
           showBtn: this.showAlignRightButton,
+          buttonType: 'button',
           selector: { textAlign: 'right' },
           icon: DtIconAlignRight,
           dataQA: 'dt-recipe-editor-align-right-btn',
@@ -1030,6 +956,7 @@ export default {
         },
         {
           showBtn: this.showAlignJustifyButton,
+          buttonType: 'button',
           selector: { textAlign: 'justify' },
           icon: DtIconAlignJustify,
           dataQA: 'dt-recipe-editor-align-justify-btn',
@@ -1043,6 +970,7 @@ export default {
       return [
         {
           showBtn: this.showListItemsButton,
+          buttonType: 'button',
           selector: 'bulletList',
           icon: DtIconListBullet,
           dataQA: 'dt-recipe-editor-list-items-btn',
@@ -1051,6 +979,7 @@ export default {
         },
         {
           showBtn: this.showOrderedListButton,
+          buttonType: 'button',
           selector: 'orderedList',
           icon: DtIconListOrdered,
           dataQA: 'dt-recipe-editor-ordered-list-items-btn',
@@ -1064,6 +993,7 @@ export default {
       return [
         {
           showBtn: this.showQuoteButton,
+          buttonType: 'button',
           selector: 'blockquote',
           icon: DtIconQuote,
           dataQA: 'dt-recipe-editor-blockquote-btn',
@@ -1072,6 +1002,7 @@ export default {
         },
         {
           showBtn: this.showCodeBlockButton,
+          buttonType: 'button',
           selector: 'codeBlock',
           icon: DtIconCodeBlock,
           dataQA: 'dt-recipe-editor-code-block-btn',
@@ -1080,6 +1011,7 @@ export default {
         },
         {
           showBtn: this.showInlineImageButton,
+          buttonType: 'button',
           selector: 'image',
           icon: DtIconImage,
           dataQA: 'dt-recipe-editor-inline-image-btn',
@@ -1093,6 +1025,7 @@ export default {
     linkButton () {
       return {
         showBtn: this.showAddLink.showAddLinkButton,
+        buttonType: 'custom',
         selector: 'link',
         icon: DtIconLink2,
         dataQA: 'dt-recipe-editor-add-link-btn',
@@ -1104,6 +1037,7 @@ export default {
     variableButton() {
       return {
         showBtn: this.showVariableButton,
+        buttonType: 'popover',
         selector: 'variable',
         icon: DtIconBraces,
         dataQA: 'dt-recipe-editor-variable-btn',
