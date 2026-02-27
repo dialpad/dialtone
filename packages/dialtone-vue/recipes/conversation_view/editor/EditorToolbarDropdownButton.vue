@@ -1,10 +1,9 @@
 <template>
-  <dt-popover
-    :data-qa="popoverDataQA || `${dataQA}-popover`"
+  <dt-dropdown
+    :data-qa="dropdownDataQA || `${dataQA}-dropdown`"
     padding="small"
     navigation-type="arrow-keys"
     placement="bottom-start"
-    :open-with-arrow-keys="true"
   >
     <template #anchor="{ attrs }">
       <dt-button
@@ -29,25 +28,25 @@
         </template>
       </dt-button>
     </template>
-    <template #content="{ close }">
+    <template #list="{ close }">
       <slot
-        name="content"
+        name="list"
         :close="close"
       />
     </template>
-  </dt-popover>
+  </dt-dropdown>
 </template>
 
 <script>
 import { DtButton } from '@/components/button';
-import { DtPopover } from '@/components/popover';
+import { DtDropdown } from '@/components/dropdown';
 
 export default {
-  name: 'EditorToolbarPopoverButton',
+  name: 'EditorToolbardropdownButton',
 
   components: {
     DtButton,
-    DtPopover,
+    DtDropdown,
   },
 
   props: {
@@ -76,9 +75,9 @@ export default {
     },
 
     /**
-     * Popover specific data QA attribute
+     * dropdown specific data QA attribute
      */
-    popoverDataQA: {
+    dropdownDataQA: {
       type: String,
       default: '',
     },

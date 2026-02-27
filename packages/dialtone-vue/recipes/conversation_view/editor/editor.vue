@@ -20,64 +20,81 @@
       >
         <template v-for="button in buttonGroup.buttonGroup">
           <!-- Font Style Popover -->
-          <EditorToolbarPopoverButton
+          <editor-toolbar-popover-button
             v-if="button.buttonType === 'popover' && button.selector === 'fontStyle'"
             :key="getButtonKey(buttonGroup.key, button.selector)"
-            :buttonRef="getButtonRef(buttonGroup.key, button.selector)"
-            :isActive="$refs.richTextEditor?.editor?.isActive(button.selector)"
-            :tooltipMessage="button.tooltipMessage"
-            :dataQA="button.dataQA"
-            :popoverDataQA="'dt-recipe-editor-font-style-input-popover'"
+            :ref="getButtonRef(buttonGroup.key, button.selector)"
+            :is-active="$refs.richTextEditor?.editor?.isActive(button.selector)"
+            :tooltip-message="button.tooltipMessage"
+            :data-q-a="button.dataQA"
+            :popover-data-q-a="'dt-recipe-editor-font-style-input-popover'"
             :tabindex="canFocus(getButtonRef(buttonGroup.key, button.selector)) ? 0 : -1"
             :icon="button.icon"
             @shift-focus-right="shiftActionBarFocusRight"
             @shift-focus-left="shiftActionBarFocusLeft"
           >
             <template #content="{ close }">
-              <dt-input
-                v-model="fontStyleSearch"
-                root-class="d-p8 d-pb4 d-w216"
-                type="search"
-                :placeholder="i18n.$t('DIALTONE_EDITOR_FONT_STYLE_SEARCH_PLACEHOLDER')"
-                size="sm"
-                role="menuitem"
+              <dt-combobox
+                label=""
+                :label-visible="false"
+                :show-list="true"
+                :click-on-select="true"
+                @escape="close()"
               >
-                <template #leftIcon="{ iconSize }">
-                  <dt-icon-search :size="iconSize" />
+                <template #input="{ inputProps }">
+                  <dt-input
+                    v-bind="inputProps"
+                    v-model="fontStyleSearch"
+                    root-class="d-p8 d-pb4 d-w216"
+                    type="search"
+                    :placeholder="i18n.$t('DIALTONE_EDITOR_FONT_STYLE_SEARCH_PLACEHOLDER')"
+                    size="sm"
+                    role="menuitem"
+                  >
+                    <template #leftIcon="{ iconSize }">
+                      <dt-icon-search :size="iconSize" />
+                    </template>
+                  </dt-input>
                 </template>
-              </dt-input>
-              <dt-list-item
-                v-for="fontStyle in filteredFontStyles"
-                :key="fontStyle.name"
-                :selected="isCurrentFontFamily(fontStyle.value)"
-                :style="{ fontFamily: fontStyle.value || 'inherit' }"
-                role="menuitem"
-                navigation-type="arrow-keys"
-                @click="
-                  close();
-                  onFontStyleSelect(fontStyle.value)
-                "
-              >
-                {{ fontStyle.name }}
-              </dt-list-item>
+                <template #list="{ listProps }">
+                  <ul
+                    v-bind="listProps"
+                  >
+                    <dt-list-item
+                      v-for="fontStyle in filteredFontStyles"
+                      :key="fontStyle.name"
+                      :selected="isCurrentFontFamily(fontStyle.value)"
+                      :style="{ fontFamily: fontStyle.value || 'inherit' }"
+                      role="option"
+                      navigation-type="arrow-keys"
+                      @click="
+                        close();
+                        onFontStyleSelect(fontStyle.value)
+                      "
+                    >
+                      {{ fontStyle.name }}
+                    </dt-list-item>
+                  </ul>
+                </template>
+              </dt-combobox>
             </template>
-          </EditorToolbarPopoverButton>
+          </editor-toolbar-popover-button>
 
-          <!-- Font Size Popover -->
-          <EditorToolbarPopoverButton
+          <!-- Font Size Dropdown -->
+          <editor-toolbar-dropdown-button
             v-else-if="button.buttonType === 'popover' && button.selector === 'fontSize'"
             :key="getButtonKey(buttonGroup.key, button.selector)"
-            :buttonRef="getButtonRef(buttonGroup.key, button.selector)"
-            :isActive="$refs.richTextEditor?.editor?.isActive(button.selector)"
-            :tooltipMessage="button.tooltipMessage"
-            :dataQA="button.dataQA"
-            :popoverDataQA="'dt-recipe-editor-font-size-input-popover'"
+            :ref="getButtonRef(buttonGroup.key, button.selector)"
+            :is-active="$refs.richTextEditor?.editor?.isActive(button.selector)"
+            :tooltip-message="button.tooltipMessage"
+            :data-q-a="button.dataQA"
+            :dropdown-data-q-a="'dt-recipe-editor-font-size-input-popover'"
             :tabindex="canFocus(getButtonRef(buttonGroup.key, button.selector)) ? 0 : -1"
             :icon="button.icon"
             @shift-focus-right="shiftActionBarFocusRight"
             @shift-focus-left="shiftActionBarFocusLeft"
           >
-            <template #content="{ close }">
+            <template #list="{ close }">
               <dt-list-item
                 v-for="fontSize in fontSizes"
                 :key="fontSize.name"
@@ -86,20 +103,20 @@
                 navigation-type="arrow-keys"
                 @click="
                   close();
-                  onFontSizeSelect(fontSize.value)
+                  onFontSizeSelect(fontSize.value, $event)
                 "
               >
                 <span :style="{ fontSize: fontSize.value }">{{ fontSize.name }}</span>
               </dt-list-item>
             </template>
-          </EditorToolbarPopoverButton>
+          </editor-toolbar-dropdown-button>
 
           <!-- Font Color Button -->
           <dt-button
             v-else-if="button.buttonType === 'custom' && button.selector === 'fontColor'"
-            v-dt-tooltip="{ message: button.tooltipMessage, placement: 'top' }"
             :key="getButtonKey(buttonGroup.key, button.selector)"
             :ref="getButtonRef(buttonGroup.key, button.selector)"
+            v-dt-tooltip="{ message: button.tooltipMessage, placement: 'top' }"
             kind="muted"
             importance="clear"
             size="xs"
@@ -132,78 +149,89 @@
             </template>
           </dt-button>
 
+          <!-- Variable Popover -->
+          <editor-toolbar-popover-button
+            v-else-if="button.buttonType === 'popover' && button.selector === 'variable'"
+            :key="getButtonKey(buttonGroup.key, button.selector)"
+            :ref="getButtonRef(buttonGroup.key, button.selector)"
+            :is-active="false"
+            :tooltip-message="button.tooltipMessage"
+            :data-q-a="button.dataQA"
+            :popover-data-q-a="'dt-recipe-editor-variable-popover'"
+            :tabindex="canFocus(getButtonRef(buttonGroup.key, button.selector)) ? 0 : -1"
+            :icon="button.icon"
+            @shift-focus-right="shiftActionBarFocusRight"
+            @shift-focus-left="shiftActionBarFocusLeft"
+          >
+            <template #content="{ close }">
+              <dt-combobox
+                label=""
+                :label-visible="false"
+                :show-list="true"
+                :click-on-select="true"
+                @escape="close()"
+              >
+                <template #input="{ inputProps }">
+                  <dt-input
+                    v-bind="inputProps"
+                    v-model="variableSearchValue"
+                    root-class="d-p8 d-pb4 d-w264"
+                    type="search"
+                    :placeholder="i18n.$t('DIALTONE_EDITOR_VARIABLE_POPOVER_SEARCH_PLACEHOLDER')"
+                    size="md"
+                    role="menuitem"
+                  >
+                    <template #leftIcon="{ iconSize }">
+                      <dt-icon-search :size="iconSize" />
+                    </template>
+                  </dt-input>
+                </template>
+                <template #list="{ listProps }">
+                  <div v-bind="listProps">
+                    <dt-list-item-group
+                      v-for="(category, index) in filteredCategories"
+                      :key="category.name"
+                      :heading="category.name"
+                      heading-class="d-headline--sm-compact d-p8"
+                    >
+                      <dt-list-item
+                        v-for="item in getFilteredItemsForCategory(category)"
+                        :key="category.name + item.name"
+                        role="option"
+                        navigation-type="arrow-keys"
+                        @click="
+                          insertVariable(category.name, item);
+                          close();
+                        "
+                      >
+                        {{ item.name }}
+                      </dt-list-item>
+                      <dt-dropdown-separator
+                        v-if="index < filteredCategories.length - 1"
+                      />
+                    </dt-list-item-group>
+                  </div>
+                </template>
+              </dt-combobox>
+            </template>
+          </editor-toolbar-popover-button>
+
           <!-- Regular Toolbar Button -->
-          <EditorToolbarButton
+          <editor-toolbar-button
             v-else-if="button.buttonType === 'button'"
             :key="getButtonKey(buttonGroup.key, button.selector)"
-            :buttonRef="getButtonRef(buttonGroup.key, button.selector)"
-            :isActive="$refs.richTextEditor?.editor?.isActive(button.selector)"
-            :tooltipMessage="button.tooltipMessage"
-            :dataQA="button.dataQA"
+            :ref="getButtonRef(buttonGroup.key, button.selector)"
+            :is-active="$refs.richTextEditor?.editor?.isActive(button.selector)"
+            :tooltip-message="button.tooltipMessage"
+            :data-q-a="button.dataQA"
             :tabindex="canFocus(getButtonRef(buttonGroup.key, button.selector)) ? 0 : -1"
             :icon="button.icon"
             :label="button.label"
-            :onClick="button.onClick"
+            :on-click="button.onClick"
             @shift-focus-right="shiftActionBarFocusRight"
             @shift-focus-left="shiftActionBarFocusLeft"
           />
         </template>
-        <div class="d-recipe-editor__button-group-divider" />
-      </dt-stack>
-      <!-- Variable Button -->
-      <dt-stack
-        v-if="variableButton.showBtn"
-        direction="row"
-        gap="300"
-      >
-        <EditorToolbarPopoverButton
-          :buttonRef="getButtonRef('custom', 'variable')"
-          :isActive="false"
-          :tooltipMessage="variableButton.tooltipMessage"
-          :dataQA="variableButton.dataQA"
-          :popoverDataQA="'dt-recipe-editor-variable-popover'"
-          :tabindex="0"
-          :icon="variableButton.icon"
-          @shift-focus-right="shiftActionBarFocusRight"
-          @shift-focus-left="shiftActionBarFocusLeft"
-        >
-          <template #content="{ close }">
-            <dt-input
-              v-model="variableSearchValue"
-              root-class="d-p8 d-pb4 d-w264"
-              type="search"
-              :placeholder="i18n.$t('DIALTONE_EDITOR_VARIABLE_POPOVER_SEARCH_PLACEHOLDER')"
-              size="md"
-              role="menuitem"
-            >
-              <template #leftIcon="{ iconSize }">
-                <dt-icon-search :size="iconSize" />
-              </template>
-            </dt-input>
-            <dt-list-item-group
-              v-for="(category, index) in filteredCategories"
-              :key="category.name"
-              :heading="category.name"
-              heading-class="d-headline--sm-compact d-p8"
-            >
-              <dt-list-item
-                v-for="item in getFilteredItemsForCategory(category)"
-                :key="category.name + item.name"
-                role="menuitem"
-                navigation-type="arrow-keys"
-                @click="
-                  insertVariable(category.name, item);
-                  close();
-                "
-              >
-                {{ item.name }}
-              </dt-list-item>
-              <dt-dropdown-separator
-                v-if="index < filteredCategories.length - 1"
-              />
-            </dt-list-item-group>
-          </template>
-        </EditorToolbarPopoverButton>
         <div class="d-recipe-editor__button-group-divider" />
       </dt-stack>
       <dt-stack
@@ -365,9 +393,12 @@ import { DtStack } from '@/components/stack';
 import { DtInput } from '@/components/input';
 import { DtTooltip } from '@/components/tooltip';
 import { DtListItem } from '@/components/list_item';
-import {DtDropdownSeparator} from '@/components/dropdown/index.js';
-import {DtListItemGroup} from '@/components/list_item_group/index.js';
+import { DtCombobox } from '@/components/combobox';
+
+import { DtDropdownSeparator } from '@/components/dropdown/index.js';
+import { DtListItemGroup } from '@/components/list_item_group/index.js';
 import EditorToolbarButton from './EditorToolbarButton.vue';
+import EditorToolbarDropdownButton from './EditorToolbarDropdownButton.vue';
 import EditorToolbarPopoverButton from './EditorToolbarPopoverButton.vue';
 import {
   DtIconAlignCenter,
@@ -407,7 +438,9 @@ export default {
     DtStack,
     DtInput,
     DtTooltip,
+    DtCombobox,
     EditorToolbarButton,
+    EditorToolbarDropdownButton,
     EditorToolbarPopoverButton,
     DtIconQuickReply,
     DtIconBold,
@@ -1019,6 +1052,14 @@ export default {
           // Handle getting image
           onClick: this.onInsertInlineImageClick,
         },
+        {
+          showBtn: this.showVariableButton,
+          buttonType: 'popover',
+          selector: 'variable',
+          icon: DtIconBraces,
+          dataQA: 'dt-recipe-editor-variable-btn',
+          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_VARIABLE_BUTTON_LABEL'),
+        },
       ].filter(button => button.showBtn);
     },
 
@@ -1034,16 +1075,6 @@ export default {
       };
     },
 
-    variableButton() {
-      return {
-        showBtn: this.showVariableButton,
-        buttonType: 'popover',
-        selector: 'variable',
-        icon: DtIconBraces,
-        dataQA: 'dt-recipe-editor-variable-btn',
-        tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_VARIABLE_BUTTON_LABEL'),
-      }
-    },
 
 
     confirmSetLinkButtonLabels () {
@@ -1078,6 +1109,13 @@ export default {
     colorPickerInput() {
       return document.querySelector('.colorPickerInput');
     },
+
+    actionBarBtn () {
+      const ref = this.$refs[this.orderedRefs[this.currentButtonRefIndex]][0]?.$refs?.buttonRef // get nested ref
+        || this.$refs[this.orderedRefs[this.currentButtonRefIndex]];
+      return Array.isArray(ref) ? ref[0] : ref;
+    },
+
   },
 
   watch: {
@@ -1281,12 +1319,11 @@ export default {
     },
 
     shiftButtonRefIndex (shiftAmount) {
-      const previousRef = this.$refs[this.orderedRefs[this.currentButtonRefIndex]];
-      const previousActionBarBtn = Array.isArray(previousRef) ? previousRef[0] : previousRef;
+      const previousActionBarBtn = this.actionBarBtn;
       const index = (this.currentButtonRefIndex + shiftAmount) % this.orderedRefs.length;
       this.currentButtonRefIndex = index >= 0 ? index : this.orderedRefs.length + index;
-      const currentRef = this.$refs[this.orderedRefs[this.currentButtonRefIndex]];
-      const currentActionBarBtn = Array.isArray(currentRef) ? currentRef[0] : currentRef;
+      const currentActionBarBtn = this.actionBarBtn;
+
       previousActionBarBtn.$el.blur();
       currentActionBarBtn.$el.focus();
     },

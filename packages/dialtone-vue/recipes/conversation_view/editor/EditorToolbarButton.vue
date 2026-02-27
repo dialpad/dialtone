@@ -1,5 +1,6 @@
 <template>
   <dt-button
+    ref="buttonRef"
     v-dt-tooltip="{ message: tooltipMessage, placement: 'top' }"
     :active="isActive"
     :aria-label="tooltipMessage"
@@ -33,14 +34,6 @@ export default {
   },
 
   props: {
-    /**
-     * Button reference key for focus management
-     */
-    buttonRef: {
-      type: String,
-      required: true,
-    },
-
     /**
      * Whether the button is active
      */
