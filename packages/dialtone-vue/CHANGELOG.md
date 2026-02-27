@@ -1,3 +1,10 @@
+# [3.208.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.207.0...dialtone-vue/v3.208.0) (2026-02-27)
+
+
+### Features
+
+* **Editor:** DLT-3003 add font size, font type, & font color to editor ([#1081](https://github.com/dialpad/dialtone/issues/1081)) ([1bb53e6](https://github.com/dialpad/dialtone/commit/1bb53e692beac43fcc7502df0de64b5f3bd95c0c))
+
 # [3.207.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.206.0...dialtone-vue/v3.207.0) (2026-02-27)
 
 
