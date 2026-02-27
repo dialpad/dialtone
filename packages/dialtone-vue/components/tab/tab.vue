@@ -23,13 +23,33 @@
     v-bind="$attrs"
     v-on="tabListeners"
   >
-    <!-- @slot Icon slot, passed through to DtButton's icon slot -->
+    <!-- @slot Icon displayed at the start (left in LTR) of the tab -->
     <template
-      v-if="$slots.icon"
-      #icon="{ iconSize }"
+      v-if="$slots.startIcon"
+      #startIcon="{ iconSize }"
+    >
+      <slot
+        name="startIcon"
+        :icon-size="iconSize"
+      />
+    </template>
+    <!-- @slot @deprecated Use startIcon -->
+    <template
+      v-else-if="$slots.icon"
+      #startIcon="{ iconSize }"
     >
       <slot
         name="icon"
+        :icon-size="iconSize"
+      />
+    </template>
+    <!-- @slot Icon displayed at the end (right in LTR) of the tab -->
+    <template
+      v-if="$slots.endIcon"
+      #endIcon="{ iconSize }"
+    >
+      <slot
+        name="endIcon"
         :icon-size="iconSize"
       />
     </template>

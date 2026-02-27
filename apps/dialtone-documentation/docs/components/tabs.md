@@ -284,27 +284,28 @@ showHtmlWarning />
 
 ## Icon Support
 
-Use the `#icon` slot on `dt-tab` to add an icon. The slot provides `iconSize` to match the tab's size.
+Use the `#startIcon` or `#endIcon` slot on `dt-tab` to add an icon. The slot provides `iconSize` to match the tab's size.
+
+<dt-notice title="Deprecated" kind="warning" class="d-wmx100p d-my16">
+  The <code>#icon</code> slot has been deprecated. Use <code>#startIcon</code> or <code>#endIcon</code> instead.
+</dt-notice>
 
 <code-well-header>
   <div class="d-w100p">
     <dt-tab-group>
       <template #tabs>
         <dt-tab id="1" panel-id="2" selected>
-          <template #icon="{ iconSize }">
-            <dt-icon name="sun" :size="iconSize" />
+          <template #startIcon="{ iconSize }">
+            <dt-icon name="box-select" :size="iconSize" />
           </template>
           First
         </dt-tab>
         <dt-tab id="3" panel-id="4">
-          <template #icon="{ iconSize }">
-            <dt-icon name="moon" :size="iconSize" />
-          </template>
           Second
         </dt-tab>
         <dt-tab id="5" panel-id="6">
-          <template #icon="{ iconSize }">
-            <dt-icon name="mic" :size="iconSize" />
+          <template #endIcon="{ iconSize }">
+            <dt-icon name="box-select" :size="iconSize" />
           </template>
           Third
         </dt-tab>
@@ -318,20 +319,17 @@ vueCode='
 <dt-tab-group>
   <template #tabs>
     <dt-tab id="1" panel-id="2" selected>
-      <template #icon="{ iconSize }">
-        <dt-icon name="sun" :size="iconSize" />
+      <template #startIcon="{ iconSize }">
+        <dt-icon name="box-select" :size="iconSize" />
       </template>
       First
     </dt-tab>
     <dt-tab id="3" panel-id="4">
-      <template #icon="{ iconSize }">
-        <dt-icon name="moon" :size="iconSize" />
-      </template>
       Second
     </dt-tab>
     <dt-tab id="5" panel-id="6">
-      <template #icon="{ iconSize }">
-        <dt-icon name="mic" :size="iconSize" />
+      <template #endIcon="{ iconSize }">
+        <dt-icon name="box-select" :size="iconSize" />
       </template>
       Third
     </dt-tab>

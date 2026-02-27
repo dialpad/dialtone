@@ -16,7 +16,7 @@
       :title="closeButtonTitle"
       @click="close"
     >
-      <template #icon>
+      <template #startIcon>
         <dt-icon-close
           size="200"
         />

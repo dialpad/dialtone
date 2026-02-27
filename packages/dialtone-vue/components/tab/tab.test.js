@@ -331,6 +331,47 @@ describe('DtTab Tests', () => {
     });
   });
 
+  describe('Icon slot tests', () => {
+    it('should render #startIcon through to DtButton start-icon slot', () => {
+      mockSlots = { startIcon: '<span data-qa="test-start-icon">S</span>' };
+
+      updateWrapper();
+
+      expect(tab.find('[data-qa="dt-button-start-icon"]').exists()).toBe(true);
+      expect(tab.find('[data-qa="test-start-icon"]').exists()).toBe(true);
+    });
+
+    it('should render #endIcon through to DtButton end-icon slot', () => {
+      mockSlots = { endIcon: '<span data-qa="test-end-icon">E</span>' };
+
+      updateWrapper();
+
+      expect(tab.find('[data-qa="dt-button-end-icon"]').exists()).toBe(true);
+      expect(tab.find('[data-qa="test-end-icon"]').exists()).toBe(true);
+    });
+
+    it('should render deprecated #icon through to DtButton start-icon slot', () => {
+      mockSlots = { icon: '<span data-qa="test-icon">I</span>' };
+
+      updateWrapper();
+
+      expect(tab.find('[data-qa="dt-button-start-icon"]').exists()).toBe(true);
+      expect(tab.find('[data-qa="test-icon"]').exists()).toBe(true);
+    });
+
+    it('should prefer #startIcon over deprecated #icon when both provided', () => {
+      mockSlots = {
+        startIcon: '<span data-qa="test-start-icon">S</span>',
+        icon: '<span data-qa="test-icon">I</span>',
+      };
+
+      updateWrapper();
+
+      expect(tab.find('[data-qa="test-start-icon"]').exists()).toBe(true);
+      expect(tab.find('[data-qa="test-icon"]').exists()).toBe(false);
+    });
+  });
+
   describe('Accessibility Tests', () => {
     describe('Default A11y Attrs', () => {
       it('aria-selected should be "false"', () => {
