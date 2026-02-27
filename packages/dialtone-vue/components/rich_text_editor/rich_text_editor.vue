@@ -429,6 +429,14 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Whether the input allows image resize to be introduced in the text.
+     */
+    allowImageResize: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: [
@@ -856,7 +864,12 @@ export default {
       }
 
       if (this.allowInlineImages) {
-        extensions.push(ConfigurableImage);
+        extensions.push(ConfigurableImage.configure({
+          resize: {
+            enabled: this.allowImageResize,
+            alwaysPreserveAspectRatio: true,
+          },
+        }));
       }
 
       if (this.allowFontFamily || this.allowFontColor) {

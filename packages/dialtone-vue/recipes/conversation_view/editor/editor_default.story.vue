@@ -29,6 +29,7 @@
       :show-variable-button="$attrs.showVariableButton"
       :variable-categories="$attrs.variableCategories"
       :allow-tables="$attrs.allowTables"
+      :allow-image-resize="$attrs.allowImageResize"
       @focus="$attrs.onFocus"
       @blur="$attrs.onBlur"
       @input="$attrs.onInput"

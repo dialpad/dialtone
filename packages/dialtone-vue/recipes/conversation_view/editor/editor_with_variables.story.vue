@@ -30,6 +30,7 @@
       :show-variable-button="showVariableButton"
       :variable-categories="variableCategories"
       :allow-tables="$attrs.allowTables"
+      :allow-image-resize="allowImageResize"
       @focus="$attrs.onFocus"
       @blur="$attrs.onBlur"
       @input="$attrs.onInput"
@@ -52,8 +53,9 @@ export default {
   data () {
     return {
       modelValue: this.$attrs.modelValue || '<p>Try inserting a variable using the button!</p>',
-      showVariableButton: true,
-      variableCategories: [
+      showVariableButton: this.$attrs.showVariableButton ?? true,
+      allowImageResize: this.$attrs.allowImageResize ?? true,
+      variableCategories: this.$attrs.variableCategories ?? [
         {
           name: 'Agent',
           items: [

@@ -232,7 +232,7 @@
     <!-- Some wrapper to restrict the height and show the scrollbar -->
     <div
       :style="{ 'max-height': maxHeight }"
-      class="d-recipe-editor__content"
+      :class="['d-recipe-editor__content', { 'image-resize': allowImageResize }]"
     >
       <dt-rich-text-editor
         ref="richTextEditor"
@@ -253,6 +253,7 @@
         :placeholder="placeholder"
         :use-div-tags="useDivTags"
         :allow-tables="allowTables"
+        :allow-image-resize="allowImageResize"
         data-qa="dt-rich-text-editor"
         v-bind="removeClassStyleAttrs($attrs)"
         @text-input="onTextInput"
@@ -576,6 +577,14 @@ export default {
      * Allow Tables to be used in to the editor
      */
     allowTables: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Allow image resizing
+     */
+    allowImageResize: {
       type: Boolean,
       default: false,
     },
@@ -1105,3 +1114,40 @@ export default {
   },
 };
 </script>
+
+<style>
+/* Image resizing classes - only active when allowImageResize is true */
+
+/* Image border */
+.image-resize .tiptap .ProseMirror-selectednode [data-resize-wrapper] {
+  outline: 1px solid var(--dt-color-chart-info-selected);
+}
+
+/* Corner handles */
+.image-resize .tiptap .ProseMirror-selectednode [data-resize-handle] {
+  position: absolute;
+  background: var(--dt-color-chart-info-selected);
+  z-index: 10;
+}
+
+.image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='top-left'],
+.image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='top-right'],
+.image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='bottom-left'],
+.image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='bottom-right'] {
+  width: 8px;
+  height: 8px;
+  cursor: nwse-resize;
+}
+.image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='top-left'] {
+  transform: translate(-50%, -50%);
+}
+.image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='top-right'] {
+  transform: translate(50%, -50%);
+}
+.image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='bottom-left'] {
+  transform: translate(-50%, 50%);
+}
+.image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='bottom-right'] {
+  transform: translate(50%, 50%);
+}
+</style>
