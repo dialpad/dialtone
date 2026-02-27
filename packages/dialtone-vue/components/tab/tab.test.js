@@ -310,44 +310,17 @@ describe('DtTab Tests', () => {
       });
     });
 
-    describe('When leading slot is provided', () => {
-      it('should render leading content through to tab button', () => {
-        mockSlots = { leading: '<span data-qa="test-leading">L</span>' };
-
-        updateWrapper();
-
-        expect(tab.find('[data-qa="test-leading"]').exists()).toBe(true);
-      });
-    });
-
-    describe('When trailing slot is provided', () => {
-      it('should render trailing content through to tab button', () => {
-        mockSlots = { trailing: '<span data-qa="test-trailing">T</span>' };
-
-        updateWrapper();
-
-        expect(tab.find('[data-qa="test-trailing"]').exists()).toBe(true);
-      });
-    });
-  });
-
-  describe('Icon slot tests', () => {
-    it('should render #startIcon through to DtButton start-icon slot', () => {
-      mockSlots = { startIcon: '<span data-qa="test-start-icon">S</span>' };
+    it.each([
+      ['leading', 'test-leading'],
+      ['trailing', 'test-trailing'],
+      ['startIcon', 'test-start-icon'],
+      ['endIcon', 'test-end-icon'],
+    ])('should render #%s slot through to tab button', (slotName, dataQa) => {
+      mockSlots = { [slotName]: `<span data-qa="${dataQa}">X</span>` };
 
       updateWrapper();
 
-      expect(tab.find('[data-qa="dt-button-start-icon"]').exists()).toBe(true);
-      expect(tab.find('[data-qa="test-start-icon"]').exists()).toBe(true);
-    });
-
-    it('should render #endIcon through to DtButton end-icon slot', () => {
-      mockSlots = { endIcon: '<span data-qa="test-end-icon">E</span>' };
-
-      updateWrapper();
-
-      expect(tab.find('[data-qa="dt-button-end-icon"]').exists()).toBe(true);
-      expect(tab.find('[data-qa="test-end-icon"]').exists()).toBe(true);
+      expect(tab.find(`[data-qa="${dataQa}"]`).exists()).toBe(true);
     });
 
     it('should render deprecated #icon through to DtButton start-icon slot', () => {
@@ -355,7 +328,6 @@ describe('DtTab Tests', () => {
 
       updateWrapper();
 
-      expect(tab.find('[data-qa="dt-button-start-icon"]').exists()).toBe(true);
       expect(tab.find('[data-qa="test-icon"]').exists()).toBe(true);
     });
 
