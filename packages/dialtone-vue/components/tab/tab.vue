@@ -15,6 +15,9 @@
     :aria-controls="`dt-panel-${panelId}`"
     :aria-label="label"
     :aria-disabled="isDisabled ? 'true' : undefined"
+    :label-class="labelClass"
+    :prefix-class="prefixClass"
+    :suffix-class="suffixClass"
     data-qa="dt-tab"
     :tabindex="isSelected ? '0' : '-1'"
     v-bind="$attrs"
@@ -29,6 +32,18 @@
         name="icon"
         :icon-size="iconSize"
       />
+    </template>
+    <template
+      v-if="$slots.prefix"
+      #prefix
+    >
+      <slot name="prefix" />
+    </template>
+    <template
+      v-if="$slots.suffix"
+      #suffix
+    >
+      <slot name="suffix" />
     </template>
     <!-- @slot default slot, defaults contains dt-button -->
     <slot />
@@ -100,6 +115,30 @@ export default {
      * Used to customize the tab element
      */
     tabClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Used to customize the label container
+     */
+    labelClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Used to customize the prefix container
+     */
+    prefixClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Used to customize the suffix container
+     */
+    suffixClass: {
       type: [String, Array, Object],
       default: '',
     },

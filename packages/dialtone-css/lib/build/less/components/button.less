@@ -270,6 +270,30 @@
 }
 
 //  ============================================================================
+//  $   BUTTON PREFIX/SUFFIX
+//  ----------------------------------------------------------------------------
+.d-btn__prefix,
+.d-btn__suffix {
+  display: inline-flex;
+  align-items: center;
+  align-self: stretch;
+  margin-block: calc(-1 * var(--button-padding-y));
+}
+
+.d-btn__prefix {
+  order: -1;
+  margin-inline: calc(-1 * var(--button-padding-x)) var(--dt-size-200);
+  border-start-start-radius: calc(var(--button-border-radius) - 1px);
+  border-end-start-radius: calc(var(--button-border-radius) - 1px);
+}
+
+.d-btn__suffix {
+  margin-inline: var(--dt-size-200) calc(-1 * var(--button-padding-x));
+  border-start-end-radius: calc(var(--button-border-radius) - 1px);
+  border-end-end-radius: calc(var(--button-border-radius) - 1px);
+}
+
+//  ============================================================================
 //  $   BUTTON LABEL
 //  ----------------------------------------------------------------------------
 .d-btn__label {

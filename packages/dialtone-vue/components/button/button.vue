@@ -12,6 +12,13 @@
     :aria-label="loading ? i18n.$t('DIALTONE_LOADING') : $attrs['aria-label']"
     v-on="buttonListeners"
   >
+    <!-- @slot Optional prefix content at the very start of the button -->
+    <span
+      v-if="hasSlotContent($slots.prefix)"
+      :class="['d-btn__prefix', prefixClass]"
+    >
+      <slot name="prefix" />
+    </span>
     <!-- NOTE(cormac): This span is needed since we can't apply styles to slots. -->
     <span
       v-if="shouldRenderIcon()"
@@ -41,6 +48,13 @@
     >
       <!-- @slot Content within button -->
       <slot />
+    </span>
+    <!-- @slot Optional suffix content at the very end of the button -->
+    <span
+      v-if="hasSlotContent($slots.suffix)"
+      :class="['d-btn__suffix', suffixClass]"
+    >
+      <slot name="suffix" />
     </span>
   </button>
 </template>
@@ -197,6 +211,22 @@ export default {
      * Used to customize the label container
      */
     labelClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Used to customize the prefix container
+     */
+    prefixClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Used to customize the suffix container
+     */
+    suffixClass: {
       type: [String, Array, Object],
       default: '',
     },

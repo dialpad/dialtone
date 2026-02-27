@@ -16,6 +16,20 @@
           :size="iconSize"
         />
       </template>
+      <template
+        v-if="$slots.prefix"
+        #prefix
+      >
+        <!-- @slot Prefix slot, forwarded to the alpha button's prefix slot -->
+        <slot name="prefix" />
+      </template>
+      <template
+        v-if="$slots.suffix"
+        #suffix
+      >
+        <!-- @slot Suffix slot, forwarded to the alpha button's suffix slot -->
+        <slot name="suffix" />
+      </template>
       <!-- @slot Default content slot -->
       <slot name="default" />
     </split-button-alpha>
@@ -124,6 +138,22 @@ export default {
      * Used to customize the alpha label container
      */
     alphaLabelClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Used to customize the alpha prefix container
+     */
+    alphaPrefixClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Used to customize the alpha suffix container
+     */
+    alphaSuffixClass: {
       type: [String, Array, Object],
       default: '',
     },
@@ -324,6 +354,8 @@ export default {
         disabled: this.disabled || this.alphaDisabled,
         iconPosition: this.alphaIconPosition,
         labelClass: this.alphaLabelClass,
+        prefixClass: this.alphaPrefixClass,
+        suffixClass: this.alphaSuffixClass,
         loading: this.alphaLoading,
         importance: this.importance,
         kind: this.kind,

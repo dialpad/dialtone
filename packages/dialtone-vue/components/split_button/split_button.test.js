@@ -304,5 +304,33 @@ describe('DtSplitButton Tests', function () {
         expect(wrapper.classes().includes(MOCK_ROOT_CLASS)).toBe(true);
       });
     });
+
+    describe('When alphaPrefixClass is provided', () => {
+      it('should apply custom class to the prefix wrapper', () => {
+        mockProps = { alphaPrefixClass: 'custom-prefix' };
+        mockSlots = { prefix: 'Prefix content' };
+
+        updateWrapper();
+
+        const prefix = alphaButton.find('.d-btn__prefix');
+
+        expect(prefix.exists()).toBe(true);
+        expect(prefix.classes()).toContain('custom-prefix');
+      });
+    });
+
+    describe('When alphaSuffixClass is provided', () => {
+      it('should apply custom class to the suffix wrapper', () => {
+        mockProps = { alphaSuffixClass: 'custom-suffix' };
+        mockSlots = { suffix: 'Suffix content' };
+
+        updateWrapper();
+
+        const suffix = alphaButton.find('.d-btn__suffix');
+
+        expect(suffix.exists()).toBe(true);
+        expect(suffix.classes()).toContain('custom-suffix');
+      });
+    });
   });
 });

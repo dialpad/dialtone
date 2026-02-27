@@ -11,6 +11,8 @@
     :importance="importance"
     :kind="kind"
     :label-class="labelClass"
+    :prefix-class="prefixClass"
+    :suffix-class="suffixClass"
     :loading="loading"
     :size="size"
   >
@@ -19,6 +21,18 @@
         name="icon"
         :size="BUTTON_ICON_SIZES[size]"
       />
+    </template>
+    <template
+      v-if="$slots.prefix"
+      #prefix
+    >
+      <slot name="prefix" />
+    </template>
+    <template
+      v-if="$slots.suffix"
+      #suffix
+    >
+      <slot name="suffix" />
     </template>
     <slot name="default" />
   </dt-button>
@@ -64,6 +78,22 @@ export default {
      * Used to customize the label container
      */
     labelClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Used to customize the prefix container
+     */
+    prefixClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Used to customize the suffix container
+     */
+    suffixClass: {
       type: [String, Array, Object],
       default: '',
     },

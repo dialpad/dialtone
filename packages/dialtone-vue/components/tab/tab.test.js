@@ -275,6 +275,36 @@ describe('DtTab Tests', () => {
     });
   });
 
+  describe('Extendability Tests', () => {
+    describe('When prefixClass is provided', () => {
+      it('should apply custom class to the prefix wrapper', () => {
+        mockProps = { prefixClass: 'custom-prefix' };
+        mockSlots = { prefix: 'Prefix content' };
+
+        updateWrapper();
+
+        const prefix = tab.find('.d-btn__prefix');
+
+        expect(prefix.exists()).toBe(true);
+        expect(prefix.classes()).toContain('custom-prefix');
+      });
+    });
+
+    describe('When suffixClass is provided', () => {
+      it('should apply custom class to the suffix wrapper', () => {
+        mockProps = { suffixClass: 'custom-suffix' };
+        mockSlots = { suffix: 'Suffix content' };
+
+        updateWrapper();
+
+        const suffix = tab.find('.d-btn__suffix');
+
+        expect(suffix.exists()).toBe(true);
+        expect(suffix.classes()).toContain('custom-suffix');
+      });
+    });
+  });
+
   describe('Accessibility Tests', () => {
     describe('Default A11y Attrs', () => {
       it('aria-selected should be "false"', () => {

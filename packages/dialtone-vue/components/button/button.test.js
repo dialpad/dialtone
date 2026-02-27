@@ -453,6 +453,49 @@ describe('DtButton Tests', () => {
     });
   });
 
+  describe('Prefix and suffix slots', () => {
+    it('should render prefix when provided', () => {
+      mockSlots = { prefix: '<span data-qa="test-prefix">P</span>' };
+
+      updateWrapper();
+
+      expect(wrapper.find('[data-qa="test-prefix"]').exists()).toBe(true);
+    });
+
+    it('should render suffix when provided', () => {
+      mockSlots = { suffix: '<span data-qa="test-suffix">S</span>' };
+
+      updateWrapper();
+
+      expect(wrapper.find('[data-qa="test-suffix"]').exists()).toBe(true);
+    });
+
+    it('should apply prefixClass to the prefix wrapper', () => {
+      mockProps = { prefixClass: 'my-prefix' };
+      mockSlots = { prefix: '<span>P</span>' };
+
+      updateWrapper();
+
+      expect(wrapper.find('.d-btn__prefix').classes()).toContain('my-prefix');
+    });
+
+    it('should apply suffixClass to the suffix wrapper', () => {
+      mockProps = { suffixClass: 'my-suffix' };
+      mockSlots = { suffix: '<span>S</span>' };
+
+      updateWrapper();
+
+      expect(wrapper.find('.d-btn__suffix').classes()).toContain('my-suffix');
+    });
+
+    it('should not render prefix or suffix by default', () => {
+      updateWrapper();
+
+      expect(wrapper.find('[data-qa="test-prefix"]').exists()).toBe(false);
+      expect(wrapper.find('[data-qa="test-suffix"]').exists()).toBe(false);
+    });
+  });
+
   describe('Accessibility Tests', () => {
     describe('When assertiveOnFocus is true', () => {
       beforeEach(async () => {
