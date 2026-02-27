@@ -5,7 +5,7 @@ keywords: ["scroll", "hidden", "auto", "clip", "scrollbar"]
 ---
 
 <dt-notice kind="info" class="d-wmx100p d-mt24" hideClose>
-Consider using the custom scrollbar first with the <router-link class="d-link d-link--muted" to="/components/scrollbar">Scrollbar Directive</router-link>.
+Consider using the custom scrollbar first with the <dt-link to="/components/scrollbar" kind="muted">Scrollbar Directive</dt-link>.
 </dt-notice>
 
 ## Examples

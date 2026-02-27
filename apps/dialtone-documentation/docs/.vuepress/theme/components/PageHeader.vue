@@ -20,14 +20,15 @@
           />
         </dt-stack>
         <dt-stack direction="row" gap="200">
-          <a
+          <dt-button
             v-if="$frontmatter.figma_url"
-            class="d-btn d-btn--muted d-btn--sm"
             :href="$frontmatter.figma_url"
             target="_blank"
             rel="noopener noreferrer"
+            kind="muted"
+            importance="clear"
           >
-            <span class="d-btn__icon d-btn__icon--left">
+            <template #icon>
               <svg
                 class="d-icon d-icon--size-200"
                 viewBox="0 0 24 24"
@@ -67,17 +68,18 @@
                   fill="#A259FF"
                 />
               </svg>
-            </span>
-            <span class="d-btn__label">Figma</span>
-          </a>
-          <a
+            </template>
+            Figma
+          </dt-button>
+          <dt-button
             v-if="$frontmatter.storybook && $frontmatter.storybook !== 'planned'"
-            class="d-btn d-btn--muted d-btn--muted d-btn--sm"
             :href="$frontmatter.storybook"
             target="_blank"
             rel="noopener noreferrer"
+            kind="muted"
+            importance="clear"
           >
-            <span class="d-btn__icon d-btn__icon--left">
+            <template #icon>
               <svg
                 class="d-icon d-icon--size-200"
                 viewBox="0 0 24 24"
@@ -108,17 +110,18 @@
                   fill="white"
                 />
               </svg>
-            </span>
-            <span class="d-btn__label">Storybook</span>
-          </a>
-          <a
+            </template>
+            Storybook
+          </dt-button>
+          <dt-button
             v-if="githubUrl"
-            class="d-btn d-btn--muted d-btn--sm"
             :href="githubUrl"
             target="_blank"
             rel="noopener noreferrer"
+            kind="muted"
+            importance="clear"
           >
-            <span class="d-btn__icon d-btn__icon--left">
+            <template #icon>
               <svg
                 class="d-icon d-icon--size-200"
                 viewBox="0 0 24 24"
@@ -137,9 +140,9 @@
                   fill="currentColor"
                 />
               </svg>
-            </span>
-            <span class="d-btn__label">GitHub</span>
-          </a>
+            </template>
+            GitHub
+          </dt-button>
           <span class="d-pl8">
             <dt-split-button
               size="sm"

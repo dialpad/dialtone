@@ -27,7 +27,7 @@ module.exports = {
     schema: [], // Add a schema if the rule has options
     messages: {
       recommendTypographyStyle: `Combining multiple typography utility categories (Font family, Font weight, Font size, Line height) is
-      discouraged in favor of composed typography utilities. Checkout the available classes here:
+      discouraged in favor of composed typography utilities. Check out the available classes here:
       https://dialtone.dialpad.com/design/typography/#api. There can be cases where using these utilities is intentional and valid,
       in which case you can ignore this lint warning.`,
       conflictingTypographyUtilities: `Conflicting typography utilities detected: multiple {{category}} classes found ({{classes}}).

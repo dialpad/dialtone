@@ -132,7 +132,7 @@
           />
           <dt-popover
             v-if="showEmojiPicker"
-            open.sync="emojiPickerOpened"
+            v-model:open="emojiPickerOpened"
             data-qa="dt-recipe-message-input-emoji-picker-popover"
             initial-focus-element="#searchInput"
             padding="none"

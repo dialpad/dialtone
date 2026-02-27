@@ -1,5 +1,10 @@
 import { mount } from '@vue/test-utils';
 import DtRecipeEditor from './editor.vue';
+import {
+  findVariable,
+  countVariables,
+  variableExists,
+} from '../../../common/test_utils/node_traversal';
 
 // Wrappers
 let wrapper;
@@ -19,6 +24,7 @@ let blockquoteBtn;
 let codeblockBtn;
 let quickRepliesBtn;
 let addLinkBtn;
+let variableBtn;
 
 const testText = 'In the beginning, it was a nice day.';
 
@@ -58,6 +64,7 @@ const _setChildWrappers = () => {
   blockquoteBtn = wrapper.find('[data-qa="dt-recipe-editor-blockquote-btn"]');
   codeblockBtn = wrapper.find('[data-qa="dt-recipe-editor-code-block-btn"]');
   quickRepliesBtn = wrapper.find('[data-qa="dt-recipe-editor-quick-replies-btn"]');
+  variableBtn = wrapper.find('[data-qa="dt-recipe-editor-variable-btn"]');
 };
 
 const _mountWrapper = () => {
@@ -427,6 +434,67 @@ describe('DtRecipeEditor tests', () => {
           .exists()).toBe(false);
       });
     });
+
+    describe('Variable functionality tests', () => {
+      describe('When variable button is enabled', () => {
+        beforeEach(async () => {
+          await wrapper.unmount();
+          propsData = {
+            ...baseProps,
+            showVariableButton: true,
+            variableCategories: [
+              {
+                name: 'Customer',
+                items: [
+                  { id: 'customer_name', name: 'Customer Name', placeholder: 'Customer Name' },
+                  { id: 'customer_email', name: 'Customer Email', placeholder: 'Customer Email' },
+                ],
+              },
+              {
+                name: 'Ticket',
+                items: [
+                  { id: 'ticket_id', name: 'Ticket ID', placeholder: 'Ticket ID' },
+                  { id: 'ticket_status', name: 'Ticket Status', placeholder: 'Ticket Status' },
+                ],
+              },
+            ],
+          };
+          _mountWrapper();
+          await wrapper.vm.$nextTick();
+          _setChildWrappers();
+        });
+
+        it('should display the variable button', () => {
+          expect(variableBtn.exists()).toBe(true);
+        });
+
+        it('should have correct aria-label for variable button', () => {
+          expect(variableBtn.attributes('aria-label')).toContain('Variable');
+        });
+
+        it('should have correct data-qa attribute', () => {
+          expect(variableBtn.attributes('data-qa')).toBe('dt-recipe-editor-variable-btn');
+        });
+      });
+
+      describe('When variable button is disabled', () => {
+        beforeEach(async () => {
+          await wrapper.unmount();
+          propsData = {
+            ...baseProps,
+            showVariableButton: false,
+            variableCategories: [],
+          };
+          _mountWrapper();
+          await wrapper.vm.$nextTick();
+          _setChildWrappers();
+        });
+
+        it('should not display the variable button', () => {
+          expect(variableBtn.exists()).toBe(false);
+        });
+      });
+    });
   });
 
   describe('Interactivity tests', function () {
@@ -561,10 +629,106 @@ describe('DtRecipeEditor tests', () => {
       });
     });
 
+    describe('Variable insertion tests', () => {
+      beforeEach(async () => {
+        await wrapper.unmount();
+        propsData = {
+          ...baseProps,
+          showVariableButton: true,
+          variableCategories: [
+            {
+              name: 'Customer',
+              items: [
+                { id: 'customer_name', name: 'Customer Name', placeholder: 'Customer Name' },
+                { id: 'customer_email', name: 'Customer Email', placeholder: 'Customer Email' },
+              ],
+            },
+            {
+              name: 'Ticket',
+              items: [
+                { id: 'ticket_id', name: 'Ticket ID', placeholder: 'Ticket ID' },
+                { id: 'ticket_status', name: 'Ticket Status', placeholder: 'Ticket Status' },
+              ],
+            },
+          ],
+        };
+        _mountWrapper();
+        await wrapper.vm.$nextTick();
+        _setChildWrappers();
+      });
+
+      it('should insert a variable when insertVariable is called', async () => {
+        wrapper.vm.insertVariable('Customer', {
+          id: 'customer_name',
+          placeholder: 'Customer Name',
+        });
+        await wrapper.vm.$nextTick();
+
+        const editorJSON = wrapper.vm.$refs.richTextEditor.editor.getJSON();
+        const variableFound = variableExists(editorJSON.content, 'customer_name');
+        expect(variableFound).toBe(true);
+      });
+
+      it('should insert multiple variables', async () => {
+        wrapper.vm.insertVariable('Customer', {
+          id: 'customer_name',
+          placeholder: 'Customer Name',
+        });
+        wrapper.vm.insertVariable('Ticket', {
+          id: 'ticket_id',
+          placeholder: 'Ticket ID',
+        });
+        await wrapper.vm.$nextTick();
+
+        const editorJSON = wrapper.vm.$refs.richTextEditor.editor.getJSON();
+        const variableCount = countVariables(editorJSON.content);
+        expect(variableCount).toBe(2);
+      });
+
+      it('should insert variable with correct attributes', async () => {
+        wrapper.vm.insertVariable('Customer', {
+          id: 'customer_email',
+          placeholder: 'Customer Email',
+        });
+        await wrapper.vm.$nextTick();
+
+        const editorJSON = wrapper.vm.$refs.richTextEditor.editor.getJSON();
+        const variableNode = findVariable(editorJSON.content, 'customer_email');
+        expect(variableNode).not.toBeNull();
+        expect(variableNode.attrs.id).toBe('customer_email');
+        expect(variableNode.attrs.altText).toBe('');
+      });
+
+      it('should render variables in HTML output', async () => {
+        wrapper.vm.insertVariable('Ticket', {
+          id: 'ticket_status',
+          placeholder: 'Ticket Status',
+        });
+        await wrapper.vm.$nextTick();
+
+        const html = wrapper.vm.$refs.richTextEditor.editor.getHTML();
+        expect(html).toContain('data-variable-id="ticket_status"');
+      });
+
+      it('should have flattened variable items computed correctly', () => {
+        const flattenedItems = wrapper.vm.flattenedVariableItems;
+        expect(flattenedItems).toHaveLength(4);
+        expect(flattenedItems.some(item => item.id === 'customer_name')).toBe(true);
+        expect(flattenedItems.some(item => item.id === 'customer_email')).toBe(true);
+        expect(flattenedItems.some(item => item.id === 'ticket_id')).toBe(true);
+        expect(flattenedItems.some(item => item.id === 'ticket_status')).toBe(true);
+      });
+    });
+
     describe('When use div tags is enabled', () => {
       beforeEach(async () => {
-        _mountWrapper();
-        await wrapper.setProps({ useDivTags: true });
+        wrapper = mount(DtRecipeEditor, {
+          propsData: {...propsData, useDivTags: true },
+          listeners,
+          slots,
+          localVue: testContext.localVue,
+          attachTo: document.body,
+        });
         await wrapper.vm.$nextTick();
         _setChildWrappers();
       });

@@ -5,7 +5,7 @@ keywords: ["border colour"]
 ---
 
 <dt-notice kind="warning" class="d-wmx100p d-mt24" hideClose>
-  Before using border color utilities, first consider <router-link class="d-link d-link--muted" to="/foundations/colors/palette/#borders">semantic border colors</router-link>.
+  Before using border color utilities, first consider <dt-link to="/design/colors/palette/#borders" kind="muted">semantic border colors</dt-link>.
 </dt-notice>
 
 ## Usage

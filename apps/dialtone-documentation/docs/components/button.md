@@ -17,7 +17,7 @@ keywords: ["btn","click","action","cta","d-button","DtButton","dt-button"]
 
 ## Usage
 
-- `<button>` and link (`<a>`) HTML elements each describe a specific intent. Understanding the distinction is important: if it goes somewhere, it's a link (`<a>`). If an action occurs, use a Button (`<button>`).
+- `<button>` and link (`<a>`) HTML elements each describe a specific intent. Understanding the distinction is important: if it goes somewhere, it's a link (`<a>`). If an action occurs, use a Button (`<button>`). When you need **button styling with navigation behavior** (CTAs, toolbar actions that navigate), use DtButton's `href` or `to` props — see [Navigation](#navigation).
 - Avoid using too many buttons on a page.
 - Set the `type` attribute to define its purpose: `submit`, `button`, or `reset`. Browsers default to `submit` if it isn't defined, and that cannot be assumed as the preferred behavior.
 
@@ -30,7 +30,7 @@ keywords: ["btn","click","action","cta","d-button","DtButton","dt-button"]
 </template>
 <template #dont>
 
-- Avoid using to navigate between destinations, deferring to a [Link](link.md) instead).
+- Avoid using to navigate between destinations, deferring to a [Link](link.md) instead. Exception: use DtButton with `href` or `to` when button styling is intentional (e.g. CTAs, toolbar actions).
 
 </template>
 </dialtone-usage>
@@ -303,6 +303,121 @@ vueCode='
 <dt-button kind="unstyled">Place Call</dt-button>
 '
 showHtmlWarning />
+
+## Navigation
+
+DtButton can render as an `<a>` or `<router-link>` for cases where you need button styling with navigation behavior.
+
+- **Navigating within the app?** Use `to`. Renders `<router-link>` for client-side navigation without page reloads.
+- **Linking to an external site?** Use `href`. Renders `<a>` for standard browser navigation.
+- **Triggering an action?** Use neither. Renders `<button>` (default).
+
+### href
+
+Pass `href` to render as an `<a>` element. Use `target="_blank"` and `rel="noopener noreferrer"` for external links.
+
+<code-well-header>
+  <dt-button
+    href="https://dialtone.dialpad.com"
+    target="_blank"
+    rel="noopener noreferrer"
+    kind="muted"
+    importance="outlined"
+    size="sm"
+    icon-position="right"
+    ref="hrefExample1"
+  >
+    <template #icon="{ iconSize }">
+      <dt-icon name="external-link" :size="iconSize" />
+    </template>
+    Dialtone
+  </dt-button>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.hrefExample1'
+vueCode='
+<dt-button
+  href="<https://dialtone.dialpad.com>"
+  target="_blank"
+  rel="noopener noreferrer"
+  kind="muted"
+  importance="outlined"
+  size="sm"
+  icon-position="right"
+>
+  <template #icon="{ iconSize }">
+    <dt-icon name="external-link" :size="iconSize" />
+  </template>
+  Dialtone
+</dt-button>
+'
+showHtmlWarning />
+
+### to
+
+Pass `to` to render as `<router-link>` for internal client-side SPA navigation. Use `replace` to navigate without adding a history entry.
+
+<code-well-header>
+  <dt-button to="/" kind="default" size="xs" ref="toExample2">
+    Home
+  </dt-button>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.toExample1'
+vueCode='
+<dt-button to="/" kind="default" size="xs">
+  Home
+</dt-button>
+'
+/>
+
+### Migration
+
+If you have existing `<a class="d-btn">` or `<router-link class="d-btn">` workarounds, replace them with DtButton props:
+
+<code-example-tabs
+vueCode='
+<!-- Before: raw <a> with manual d-btn classes -->
+<a
+  class="d-btn d-btn--primary d-btn--outlined d-btn--sm"
+  href="<https://example.com>"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  Link Text
+</a>
+
+<!-- After: DtButton with href prop -->
+<dt-button
+  href="<https://example.com>"
+  target="_blank"
+  rel="noopener noreferrer"
+  importance="outlined"
+  size="sm"
+>
+  Link Text
+</dt-button>
+'
+/>
+
+<code-example-tabs
+vueCode='
+<!-- Before: raw <router-link> with manual d-btn classes -->
+<router-link
+  class="d-btn d-btn--primary d-btn--sm"
+  :to="roomPath"
+>
+  Join Room
+</router-link>
+
+<!-- After: DtButton with to prop -->
+<dt-button :to="roomPath" size="sm">
+  Join Room
+</dt-button>
+'
+/>
 
 ## Split Button
 
@@ -1152,9 +1267,7 @@ We provide the following branded buttons for log-in and sign-up workflows.
   - Pressing the `Enter` or `Space` key should trigger the action.
   - Pressing the `Tab` key moves focus to the next focusable element.
   - Pressing the `Shift+Tab` key moves focus to the previous focusable element.
-- If a button cannot be used for an action and it must be an anchor link, two things are required:
-  - Add `role="button"` to the `<a>` to allow screenreaders to announce it as a `button`.
-  - Attach an event handler to detect Spacebar keypress. Buttons react to both Enter and Spacebar, but Link reacts only to Enter.
+- When using DtButton with `href` or `to`, the component automatically handles Spacebar activation and disabled state (`aria-disabled`, `tabindex="-1"`). Navigating elements keep their native link role — `role="button"` is not added because the element navigates rather than performing an in-page action.
 
 ## Classes
 

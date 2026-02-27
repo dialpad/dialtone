@@ -8,7 +8,8 @@
       v-if="editor && link && !hideLinkBubbleMenu"
       :editor="editor"
       :should-show="bubbleMenuShouldShow"
-      :tippy-options="tippyOptions"
+      :options="floatingOptions"
+      :append-to="appendTo"
       style="visibility: visible;"
     >
       <div class="d-popover__dialog">
@@ -53,7 +54,8 @@
 
 <script>
 /* eslint-disable max-lines */
-import { Editor, EditorContent, BubbleMenu } from '@tiptap/vue-3';
+import { Editor, EditorContent } from '@tiptap/vue-3';
+import { BubbleMenu } from '@tiptap/vue-3/menus';
 import { Extension } from '@tiptap/core';
 import { DtButton } from '../button';
 import { DtStack } from '../stack';
@@ -61,28 +63,19 @@ import Blockquote from '@tiptap/extension-blockquote';
 import CodeBlock from '@tiptap/extension-code-block';
 import Code from '@tiptap/extension-code';
 import Document from '@tiptap/extension-document';
-import Gapcursor from '@tiptap/extension-gapcursor';
+import { Placeholder, UndoRedo, Gapcursor } from '@tiptap/extensions';
 import HardBreak from '@tiptap/extension-hard-break';
 import Paragraph from '@tiptap/extension-paragraph';
-import Placeholder from '@tiptap/extension-placeholder';
 import Bold from '@tiptap/extension-bold';
-import BulletList from '@tiptap/extension-bullet-list';
+import { BulletList, OrderedList, ListItem } from '@tiptap/extension-list';
 import Italic from '@tiptap/extension-italic';
 import TipTapLink from '@tiptap/extension-link';
-import ListItem from '@tiptap/extension-list-item';
-import OrderedList from '@tiptap/extension-ordered-list';
 import Strike from '@tiptap/extension-strike';
 import Underline from '@tiptap/extension-underline';
 import Text from '@tiptap/extension-text';
 import TextAlign from '@tiptap/extension-text-align';
-import History from '@tiptap/extension-history';
-import Table from '@tiptap/extension-table';
-import TableCell from '@tiptap/extension-table-cell';
-import TableHeader from '@tiptap/extension-table-header';
-import TableRow from '@tiptap/extension-table-row';
-import TextStyle from '@tiptap/extension-text-style';
-import Color from '@tiptap/extension-color';
-import FontFamily from '@tiptap/extension-font-family';
+import { Table, TableRow, TableCell, TableHeader } from '@tiptap/extension-table';
+import { TextStyleKit } from '@tiptap/extension-text-style';
 import Emoji from './extensions/emoji';
 import CustomLink from './extensions/custom_link';
 import ConfigurableImage from './extensions/image';
@@ -90,6 +83,7 @@ import DivParagraph from './extensions/div';
 import { MentionPlugin } from './extensions/mentions/mention';
 import { ChannelPlugin } from './extensions/channels/channel';
 import { SlashCommandPlugin } from './extensions/slash_command/slash_command';
+import Variable from './extensions/variable';
 import {
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
@@ -387,6 +381,22 @@ export default {
     },
 
     /**
+     * Whether the input allows variables to be introduced in the text.
+     */
+    allowVariable: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Array of available variable items that can be inserted.
+     */
+    variableItems: {
+      type: Array,
+      default: () => [],
+    },
+
+    /**
      * Additional TipTap extensions to be added to the editor.
      */
     additionalExtensions: {
@@ -516,6 +526,24 @@ export default {
     'mention-click',
 
     /**
+     * Event fired when the cursor enters a mention. The payload includes the
+     * mention data (name, id, avatarSrc, contactKey) plus the native MouseEvent
+     * as `event`, which can be used for positioning a hovercard.
+     * @event mention-hover
+     * @type {Object}
+     */
+    'mention-hover',
+
+    /**
+     * Event fired when the cursor leaves a mention. The payload includes the
+     * mention data (name, id, avatarSrc, contactKey) plus the native MouseEvent
+     * as `event`.
+     * @event mention-leave
+     * @type {Object}
+     */
+    'mention-leave',
+
+    /**
      * Event fired when a channel is clicked
      * @event channel-click
      * @type {Object}
@@ -526,8 +554,8 @@ export default {
   data () {
     return {
       editor: null,
-      tippyOptions: {
-        appendTo: () => returnFirstEl(this.$refs.editor.$el).getRootNode()?.querySelector('body'),
+      appendTo: () => returnFirstEl(this.$refs.editor.$el).getRootNode()?.querySelector('body'),
+      floatingOptions: {
         placement: 'top-start',
       },
 
@@ -560,6 +588,7 @@ export default {
             channel: (node) => this.processChannelNode(node),
             'slash-commands': (node) => this.processSlashCommandsNode(node),
             emoji: (node) => this.processEmojiNode(node),
+            variable: (node) => this.processVariableNode(node),
           };
 
           const processor = nodeTypeMap[node.type];
@@ -638,6 +667,12 @@ export default {
           return node.attrs?.code || '';
         },
 
+        processVariableNode (node) {
+          const variableId = node.attrs?.id || '';
+          const altText = node.attrs?.altText || '';
+          return `{{${variableId}=${altText}}}`;
+        },
+
         processUnknownNode (node) {
           return this.processNodeContent(node);
         },
@@ -695,7 +730,7 @@ export default {
     // eslint-disable-next-line complexity
     extensions () {
       // These are the default extensions needed just for plain text.
-      const extensions = [Document, Text, History, HardBreak];
+      const extensions = [Document, Text, UndoRedo, HardBreak];
       extensions.push(this.useDivTags ? DivParagraph : Paragraph);
 
       // bold must come before blockquote due to keyboard shortcuts
@@ -808,6 +843,12 @@ export default {
         }));
       }
 
+      if (this.allowVariable) {
+        extensions.push(Variable.configure({
+          variableItems: this.variableItems,
+        }));
+      }
+
       // Emoji has some interactions with Enter key
       // hence this should be done last otherwise the enter wont add a emoji.
       extensions.push(Emoji);
@@ -837,15 +878,13 @@ export default {
       }
 
       if (this.allowFontFamily || this.allowFontColor) {
-        extensions.push(TextStyle);
-
-        if (this.allowFontColor) {
-          extensions.push(Color);
-        }
-
-        if (this.allowFontFamily) {
-          extensions.push(FontFamily);
-        }
+        extensions.push(TextStyleKit.configure({
+          color: this.allowFontColor,
+          backgroundColor: false,
+          fontFamily: this.allowFontFamily,
+          fontSize: false,
+          lineHeight: false,
+        }));
       }
 
       if (this.additionalExtensions.length) {
@@ -855,7 +894,6 @@ export default {
       if (this.allowTables) {
         extensions.push(Table.configure({ resizable: true }), TableRow, TableHeader, TableCell, Gapcursor)
       }
-
       return extensions;
     },
 
@@ -925,6 +963,7 @@ export default {
         content: this.modelValue,
         editable: this.editable,
         extensions: this.extensions,
+        shouldRerenderOnTransaction: false,
         parseOptions: {
           preserveWhitespace: 'full',
         },
@@ -1042,6 +1081,7 @@ export default {
 
 
     processValue (newValue, returnIfEqual = true) {
+      if (!this.editor) return;
       const currentValue = this.getOutput();
 
       if (returnIfEqual && deepEqual(newValue, currentValue)) {
@@ -1057,7 +1097,7 @@ export default {
       }
 
       // Otherwise replace the content (resets the cursor position).
-      this.editor.commands.setContent(newValue, false, { preserveWhitespace: 'full' });
+      this.editor.commands.setContent(newValue, { emitUpdate: false, parseOptions: { preserveWhitespace: 'full' }});
     },
 
     destroyEditor () {
@@ -1180,7 +1220,6 @@ export default {
       // Always output JSON in a separate event
       const jsonValue = this.editor.getJSON();
       this.$emit('json-input', jsonValue);
-
       // Always output HTML in a separate event
       const htmlValue = this.editor.getHTML();
       this.$emit('html-input', htmlValue);
@@ -1224,6 +1263,16 @@ export default {
       // Mention is clicked
       this.editor.on('mention-click', (mentionData) => {
         this.$emit('mention-click', mentionData);
+      });
+
+      // Cursor enters a mention
+      this.editor.on('mention-hover', (mentionData) => {
+        this.$emit('mention-hover', mentionData);
+      });
+
+      // Cursor leaves a mention
+      this.editor.on('mention-leave', (mentionData) => {
+        this.$emit('mention-leave', mentionData);
       });
 
       // Channel is clicked

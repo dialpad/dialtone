@@ -44,12 +44,12 @@ const isDateEqual = (date, dateToCompare) => {
 /**
  * Get days for the calendar to be displayed in a table grouped by weeks
  */
-export const getCalendarDays = (month, year, selectedDay, minDate = null, maxDate = null) => {
+export const getCalendarDays = (month, year, selectedDay, minDate = null, maxDate = null, weekStart = WEEK_START) => {
   const weeks = [];
   const firstDate = _parsedGetDate(new Date(year, month));
   const lastDate = _parsedGetDate(new Date(year, month + 1, 0));
 
-  const weekStartsOn = WEEK_START;
+  const weekStartsOn = weekStart;
 
   const firstDateInCalendar = startOfWeek(firstDate, { weekStartsOn });
 
@@ -78,8 +78,9 @@ export const getCalendarDays = (month, year, selectedDay, minDate = null, maxDat
  */
 export const getWeekDayNames = (locale, weekStart) => {
   // Get list in order from sun ... sat
+  const resolvedLocale = locale || undefined;
   const days = [1, 2, 3, 4, 5, 6, 7].map((day) => {
-    return new Intl.DateTimeFormat(locale, { weekday: 'short', timeZone: 'UTC' })
+    return new Intl.DateTimeFormat(resolvedLocale, { weekday: 'short', timeZone: 'UTC' })
       .format(new Date(`2017-01-0${day}T00:00:00+00:00`))
       .slice(0, 2);
   });

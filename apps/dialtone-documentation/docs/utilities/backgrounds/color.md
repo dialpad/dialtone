@@ -5,7 +5,7 @@ keywords: ["bg color","background colour","bgc"]
 ---
 
 <dt-notice kind="warning" class="d-wmx100p d-mt24" hideClose>
-  Before using background color utilities, first consider <router-link class="d-link d-link--muted" to="/foundations/colors/palette/#surface">semantic surface colors</router-link>.
+  Before using background color utilities, first consider <dt-link to="/design/colors/palette/#surface" kind="muted">semantic surface colors</dt-link>.
 </dt-notice>
 
 ## Usage

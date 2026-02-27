@@ -13,6 +13,7 @@ export const argsData = {
   opened: false,
   minDate: null,
   maxDate: null,
+  weekStartsOn: 0,
 };
 
 export const argTypesData = {
@@ -38,6 +39,12 @@ export const argTypesData = {
     table: {
       type: { summary: 'event' },
     },
+  },
+  weekStartsOn: {
+    control: { type: 'select' },
+    options: [0, 1, 2, 3, 4, 5, 6],
+    description: 'Day the week starts on. 0 = Sunday, 1 = Monday, … 6 = Saturday.',
+    table: { defaultValue: { summary: 0 } },
   },
 };
 

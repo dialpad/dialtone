@@ -67,6 +67,17 @@ const props = defineProps({
     type: Array,
     required: true,
   },
+
+  weekStartsOn: {
+    type: Number,
+    default: 0,
+    validator: (v) => Number.isInteger(v) && v >= 0 && v <= 6,
+  },
+
+  locale: {
+    type: String,
+    default: null,
+  },
 });
 
 const emits = defineEmits([
