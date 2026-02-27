@@ -54,12 +54,12 @@ export default {
   data () {
     return {
       modelValue: this.$attrs.modelValue || '<p>Try inserting a variable using the button!</p>',
-      showVariableButton: true,
-      showFontColorButton: true,
-      showFontStyleButton: true,
-      showFontSizeButton: true,
-      useDivTags: true,
-      variableCategories: [
+      showVariableButton: this.$attrs.showVariableButton ?? true,
+      showFontColorButton: this.$attrs.showFontColorButton ?? true,
+      showFontStyleButton: this.$attrs.showFontStyleButton ?? true,
+      showFontSizeButton: this.$attrs.showFontSizeButton ?? true,
+      useDivTags: this.$attrs.useDivTags ?? true,
+      variableCategories: this.$attrs.variableCategories ?? [
         {
           name: 'Agent',
           items: [
