@@ -24,27 +24,37 @@
         v-if="showDetails"
         direction="row"
         gap="300"
-        class="d-label--sm-plain"
       >
-        <span
+        <dt-text
           v-if="presenceText"
+          kind="label"
+          size="sm"
+          strength="normal"
           class="d-mention-suggestion__presence"
           :class="[presenceFontColorClass]"
         >
           {{ presenceText }}
-        </span>
-        <div
+        </dt-text>
+        <dt-text
           v-if="status && presenceText"
+          kind="label"
+          size="sm"
+          strength="normal"
+          as="div"
           class="d-mention-suggestion__divider"
         >
           •
-        </div>
-        <div
+        </dt-text>
+        <dt-text
           v-if="status"
+          kind="label"
+          size="sm"
+          strength="normal"
+          as="div"
           class="d-mention-suggestion__status"
         >
           {{ status }}
-        </div>
+        </dt-text>
       </dt-stack>
     </dt-stack>
   </dt-stack>
@@ -53,6 +63,7 @@
 <script>
 import { DtAvatar } from '@/components/avatar';
 import { DtStack } from '@/components/stack';
+import { DtText } from '@/components/text';
 
 export default {
   compatConfig: { MODE: 3 },
@@ -60,6 +71,7 @@ export default {
   components: {
     DtAvatar,
     DtStack,
+    DtText,
   },
 
   props: {
