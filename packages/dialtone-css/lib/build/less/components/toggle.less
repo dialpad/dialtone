@@ -19,12 +19,13 @@
 //  ============================================================================
 //  $   BASE STYLE
 //  ----------------------------------------------------------------------------
+@layer dialtone.components {
 .d-toggle {
   //  Component specific CSS Vars
   //  ------------------------------------------------------------------------
   --toggle-transition-timing-function: var(--ttf-out-quint);
   --toggle-transition-speed: var(--td300);
-  --toggle-color-background: hsl(var(--dt-color-surface-bold-h), var(--dt-color-surface-bold-s), 66.6666%);
+  --toggle-color-background: oklch(from var(--dt-color-surface-bold) 0.738deg c h);
   --toggle-size-height: var(--dt-size-550); // 24
   --toggle-size-width: var(--dt-size-650); // 48
   --toggle-size-icon: var(--dt-size-500); // 16
@@ -178,4 +179,5 @@
 .d-toggle-wrapper {
   display: flex;
   align-items: center;
+}
 }

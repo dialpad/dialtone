@@ -482,10 +482,10 @@ Use `type="search"` with a clear button in the `icon` slot. When the input is no
       type="search"
       v-model="inputSearchValue"
     >
-      <template #leftIcon="{ iconSize }">
+      <template #startIcon="{ iconSize }">
         <dt-icon name="search" :size="iconSize" />
       </template>
-      <template v-if="inputSearchValue.length !== 0" #rightIcon="{ clear }">
+      <template v-if="inputSearchValue.length !== 0" #endIcon="{ clear }">
         <dt-button
           v-dt-tooltip="'Clear search'"
           kind="muted"
@@ -494,7 +494,7 @@ Use `type="search"` with a clear button in the `icon` slot. When the input is no
           aria-label="Clear search"
           @click="clear"
         >
-          <template #icon="{ iconSize }">
+          <template #startIcon="{ iconSize }">
             <dt-icon name="close" :size="iconSize" />
           </template>
         </dt-button>
@@ -522,10 +522,10 @@ vueCode='
   type="search"
   v-model="inputValue"
 >
-  <template #leftIcon="{ iconSize }">
+  <template #startIcon="{ iconSize }">
     <dt-icon name="search" :size="iconSize" />
   </template>
-  <template v-if="inputValue.length !== 0" #rightIcon="{ clear }">
+  <template v-if="inputValue.length !== 0" #endIcon="{ clear }">
     <dt-button
       kind="muted"
       importance="clear"
@@ -534,7 +534,7 @@ vueCode='
       aria-label="Clear search"
       @click="clear"
     >
-      <template #icon="{ iconSize }">
+      <template #startIcon="{ iconSize }">
         <dt-icon name="close" :size="iconSize" />
       </template>
     </dt-button>
@@ -547,13 +547,21 @@ showHtmlWarning />
 
 <code-well-header>
   <div class="d-stack16 d-w100p">
-    <dt-input label="Left icon" type="text" placeholder="Placeholder">
-      <template #leftIcon="{ iconSize }">
+    <dt-input label="Start icon" type="text" placeholder="Placeholder">
+      <template #startIcon="{ iconSize }">
         <dt-icon name="send" :size="iconSize" />
       </template>
     </dt-input>
-    <dt-input label="Right icon" type="text" placeholder="Placeholder">
-      <template #rightIcon="{ iconSize }">
+    <dt-input label="End icon" type="text" placeholder="Placeholder">
+      <template #endIcon="{ iconSize }">
+        <dt-icon name="lock" :size="iconSize" />
+      </template>
+    </dt-input>
+    <dt-input label="Start and End icon" type="text" placeholder="Placeholder">
+      <template #startIcon="{ iconSize }">
+        <dt-icon name="send" :size="iconSize" />
+      </template>
+      <template #endIcon="{ iconSize }">
         <dt-icon name="lock" :size="iconSize" />
       </template>
     </dt-input>
@@ -582,13 +590,21 @@ htmlCode='
 </div>
 '
 vueCode='
-<dt-input label="Left icon" type="text" placeholder="Placeholder">
-  <template #leftIcon="{ iconSize }">
+<dt-input label="Start icon" type="text" placeholder="Placeholder">
+  <template #startIcon="{ iconSize }">
     <dt-icon name="send" :size="iconSize" />
   </template>
 </dt-input>
-<dt-input label="Right icon" type="text" placeholder="Placeholder">
-  <template #rightIcon="{ iconSize }">
+<dt-input label="End icon" type="text" placeholder="Placeholder">
+  <template #endIcon="{ iconSize }">
+    <dt-icon name="lock" :size="iconSize" />
+  </template>
+</dt-input>
+<dt-input label="Start and End icon" type="text" placeholder="Placeholder">
+  <template #startIcon="{ iconSize }">
+    <dt-icon name="send" :size="iconSize" />
+  </template>
+  <template #endIcon="{ iconSize }">
     <dt-icon name="lock" :size="iconSize" />
   </template>
 </dt-input>
@@ -597,13 +613,21 @@ showHtmlWarning />
 
 <code-well-header>
   <div class="d-stack16 d-w100p">
-    <dt-input label="Left icon" type="textarea" placeholder="Placeholder">
-      <template #leftIcon="{ iconSize }">
+    <dt-input label="Start icon" type="textarea" placeholder="Placeholder">
+      <template #startIcon="{ iconSize }">
         <dt-icon name="send" :size="iconSize" />
       </template>
     </dt-input>
-    <dt-input label="Right icon" type="textarea" placeholder="Placeholder">
-      <template #rightIcon="{ iconSize }">
+    <dt-input label="End icon" type="textarea" placeholder="Placeholder">
+      <template #endIcon="{ iconSize }">
+        <dt-icon name="lock" :size="iconSize" />
+      </template>
+    </dt-input>
+    <dt-input label="Start and End icon" type="textarea" placeholder="Placeholder">
+      <template #startIcon="{ iconSize }">
+        <dt-icon name="send" :size="iconSize" />
+      </template>
+      <template #endIcon="{ iconSize }">
         <dt-icon name="lock" :size="iconSize" />
       </template>
     </dt-input>
@@ -623,13 +647,21 @@ htmlCode='
 </div>
 '
 vueCode='
-<dt-input label="Left icon" type="textarea" placeholder="Placeholder">
-  <template #leftIcon="{ iconSize }">
+<dt-input label="Start icon" type="textarea" placeholder="Placeholder">
+  <template #startIcon="{ iconSize }">
     <dt-icon name="send" :size="iconSize" />
   </template>
 </dt-input>
-<dt-input label="Right icon" type="textarea" placeholder="Placeholder">
-  <template #rightIcon="{ iconSize }">
+<dt-input label="End icon" type="textarea" placeholder="Placeholder">
+  <template #endIcon="{ iconSize }">
+    <dt-icon name="lock" :size="iconSize" />
+  </template>
+</dt-input>
+<dt-input label="Start and End icon" type="textarea" placeholder="Placeholder">
+  <template #startIcon="{ iconSize }">
+    <dt-icon name="send" :size="iconSize" />
+  </template>
+  <template #endIcon="{ iconSize }">
     <dt-icon name="lock" :size="iconSize" />
   </template>
 </dt-input>
@@ -643,23 +675,23 @@ Each Text Input size has a default icon size, keeping it proportional. While rar
 <code-well-header>
   <div class="d-stack16 d-w100p">
     <dt-input label="Small input with large icon" type="text" placeholder="Placeholder" size="sm">
-      <template #leftIcon>
-        <dt-icon name="send" size="400" />
+      <template #startIcon="{ iconSize }">
+        <dt-icon name="send" :size="iconSize" />
       </template>
     </dt-input>
     <dt-input label="Medium input with extra large icon" type="text" placeholder="Placeholder">
-      <template #leftIcon>
-        <dt-icon name="send" size="500" />
+      <template #startIcon="{ iconSize }">
+        <dt-icon name="send" :size="iconSize" />
       </template>
     </dt-input>
     <dt-input label="Extra large input with medium icon" type="text" placeholder="Placeholder" size="xl">
-      <template #leftIcon>
-        <dt-icon name="send" size="200" />
+      <template #startIcon>
+        <dt-icon name="send" :size="iconSize" />
       </template>
     </dt-input>
     <dt-input label="Large textarea with medium icon" type="textarea" placeholder="Placeholder" icon-size="md" size="lg">
-      <template #leftIcon>
-        <dt-icon name="send" size="200" />
+      <template #startIcon>
+        <dt-icon name="send" :size="iconSize" />
       </template>
     </dt-input>
   </div>
@@ -714,22 +746,22 @@ htmlCode='
 '
 vueCode='
 <dt-input label="Small input with large icon" type="text" placeholder="Placeholder" size="sm">
-  <template #leftIcon>
+  <template #startIcon>
     <dt-icon name="send" size="400" />
   </template>
 </dt-input>
 <dt-input label="Medium input with extra large icon" type="text" placeholder="Placeholder">
-  <template #leftIcon>
+  <template #startIcon>
     <dt-icon name="send" size="500" />
   </template>
 </dt-input>
 <dt-input label="Extra large input with medium icon" type="text" placeholder="Placeholder" size="xl">
-  <template #leftIcon>
+  <template #startIcon>
     <dt-icon name="send" size="200" />
   </template>
 </dt-input>
 <dt-input label="Large textarea with medium icon" type="textarea" placeholder="Placeholder" size="lg">
-  <template #leftIcon>
+  <template #startIcon>
     <dt-icon name="send" size="200" />
   </template>
 </dt-input>

@@ -159,22 +159,34 @@ const addTokensToCategories = (token, format, structure) => {
     return;
   }
 
-  // SIZE
-  if (key.startsWith('size') && key.endsWith('negative')) {
-    structure.size.negative._children.push(displayToken);
+  // SPACING (0-64px)
+  if (key.startsWith('spacing') && key.endsWith('negative')) {
+    structure.spacing.negative._children.push(displayToken);
     return;
   }
 
-  if (key.startsWith('size') && key.endsWith('percent')) {
-    structure.size.percentage._children.push(displayToken);
+  if (key.startsWith('spacing')) {
+    structure.spacing.base._children.push(displayToken);
     return;
   }
 
-  if (key.startsWith('size') && SUBCATEGORY_MAP.size.includes(splitKeys[1])) {
-    addTokenToSubcategory(displayToken, 'size', SUBCATEGORY_MAP.size.find(sub => sub === splitKeys[1]), structure);
+  // LAYOUT (64px+)
+  if (key.startsWith('layout') && key.endsWith('negative')) {
+    structure.layout.negative._children.push(displayToken);
     return;
   }
 
+  if (key.startsWith('layout') && key.endsWith('percent')) {
+    structure.layout.percentage._children.push(displayToken);
+    return;
+  }
+
+  if (key.startsWith('layout')) {
+    structure.layout.base._children.push(displayToken);
+    return;
+  }
+
+  // SIZE (radius, border, and component-specific only)
   if (key.startsWith('size/radius')) {
     structure.size.radius._children.push(displayToken);
     return;
@@ -182,11 +194,6 @@ const addTokensToCategories = (token, format, structure) => {
 
   if (key.startsWith('size/border')) {
     structure.size.border._children.push(displayToken);
-    return;
-  }
-
-  if (key.startsWith('size')) {
-    structure.size.base._children.push(displayToken);
     return;
   }
 
@@ -199,8 +206,8 @@ const addTokensToCategories = (token, format, structure) => {
     return;
   }
 
-  // SPACE tokens are deprecated - they now alias to SIZE tokens
-  // Suppress them from the tokens page display
+  // Old size base/negative tokens are deprecated - suppress from display
+  // They are replaced by spacing (0-64px) and layout (64px+) tokens
 };
 
 const addTokenToSubcategory = (token, category, subcategory, structure) => {

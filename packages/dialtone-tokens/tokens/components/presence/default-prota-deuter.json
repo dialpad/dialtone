@@ -2,15 +2,15 @@
   "presence": {
     "color": {
       "available": {
-        "value": "#1E6EF4",
+        "value": "oklch(0.5734 0.215 260.57)",
         "type": "color"
       },
       "unavailable": {
-        "value": "{color.magenta.425}",
+        "value": "{color.magenta.600}",
         "type": "color"
       },
       "busy": {
-        "value": "{color.gold.400}",
+        "value": "{color.gold.500}",
         "type": "color"
       }
     }

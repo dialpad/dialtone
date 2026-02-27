@@ -40,6 +40,11 @@
     >
       <template #default="{ item }">
         <div class="user">
+          <dt-avatar
+            :seed="String(item.id)"
+            size="200"
+            :full-name="item.name"
+          />
           {{ item.name }}
         </div>
       </template>
@@ -49,6 +54,7 @@
 
 <script setup>
 import DtScroller from './scroller.vue';
+import { DtAvatar } from '@/components/avatar';
 import { nextTick, ref } from 'vue';
 
 const items = ref(Array.from({ length: 50 }, (_, i) => ({
@@ -116,6 +122,7 @@ function switchAutoScrolling () {
   padding: 0 12px;
   display: flex;
   align-items: center;
+  gap: 8px;
   border-block-end: 1px solid #eee;
 }
 

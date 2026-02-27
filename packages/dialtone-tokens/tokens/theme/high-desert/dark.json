@@ -11,7 +11,7 @@
           "type": "color"
         },
         "border": {
-          "value": "{color.gold.700}",
+          "value": "{color.gold.900}",
           "type": "color"
         },
         "accent": {

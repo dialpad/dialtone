@@ -148,7 +148,17 @@ describe('DtRecipeCallbox Tests', () => {
         });
       });
 
-      describe('When bottom slot is provided', () => {
+      describe('When blockEnd slot is provided', () => {
+        it('Renders blockEnd slot content', () => {
+          mockSlots = { blockEnd: MOCK_BOTTOM_SLOT_CONTENT };
+
+          updateWrapper();
+
+          expect(bottomSlot.text()).toBe(MOCK_BOTTOM_SLOT_CONTENT);
+        });
+      });
+
+      describe('When bottom slot is provided (backward compat)', () => {
         it('Renders bottom slot content', () => {
           mockSlots = { bottom: MOCK_BOTTOM_SLOT_CONTENT };
 
@@ -158,7 +168,17 @@ describe('DtRecipeCallbox Tests', () => {
         });
       });
 
-      describe('When right slot is provided', () => {
+      describe('When end slot is provided', () => {
+        it('Renders end slot content', () => {
+          mockSlots = { end: MOCK_RIGHT_SLOT_CONTENT };
+
+          updateWrapper();
+
+          expect(rightSlot.text()).toBe(MOCK_RIGHT_SLOT_CONTENT);
+        });
+      });
+
+      describe('When right slot is provided (backward compat)', () => {
         it('Renders right slot content', () => {
           mockSlots = { right: MOCK_RIGHT_SLOT_CONTENT };
 

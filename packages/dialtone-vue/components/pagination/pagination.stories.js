@@ -1,4 +1,4 @@
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtPagination from './pagination.vue';
 
@@ -101,7 +101,7 @@ export const Variants = {
     docs: {
       source: {
         code: `
-   <div class="d-divide-y d-divide-purple-400">
+   <div class="d-divide-y">
       <div class="d-m32">
         <p class="d-my16 d-fs-200 d-fw-bold">
           Separator in the end

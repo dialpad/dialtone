@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 import { DtIconUser } from '@dialpad/dialtone-icons/vue3';
 import DtAvatar from './avatar.vue';
-import { AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS } from './avatar_constants';
+import { AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS, colorToFamilyVariant } from './avatar_constants';
 import { extractInitialsFromName } from './utils';
 
 const MOCK_AVATAR_STUB = vi.fn();
@@ -55,6 +55,7 @@ describe('DtAvatar Tests', () => {
 
   afterEach(() => {
     mockProps = {};
+    mockAttrs = {};
     mockSlots = {};
   });
 
@@ -205,16 +206,19 @@ describe('DtAvatar Tests', () => {
 
     describe('When seed is set', () => {
       // note we keep these tests in sync with the android team, so do not change without communicating with them.
+      // The seed determines family (1-12) and variant (0-9) deterministically via getRandomFamilyVariant()
+      // Algorithm: hash seed string, family = (absHash % 12) + 1, variant = floor(absHash / 12) % 10
       it.each([
-        ['a', 'd-avatar--color-800'],
-        ['aaa', 'd-avatar--color-400'],
-        ['bbbbb', 'd-avatar--color-1100'],
-      ])('when seed is set to: %s color class: %s should be set on avatar', (seed, expectedClass) => {
+        ['a', '2', '8'],
+        ['aaa', '10', '6'],
+        ['bbbbb', '11', '0'],
+      ])('when seed is set to: %s data-avatar-family: %s and data-avatar-variant: %s should be set', (seed, expectedFamily, expectedVariant) => {
         mockProps = { seed };
 
         updateWrapper();
 
-        expect(wrapper.classes(expectedClass)).toBe(true);
+        expect(wrapper.attributes('data-avatar-family')).toBe(expectedFamily);
+        expect(wrapper.attributes('data-avatar-variant')).toBe(expectedVariant);
       });
     });
 
@@ -281,6 +285,20 @@ describe('DtAvatar Tests', () => {
 
         expect(presence.exists()).toBe(false);
         expect(wrapper.classes('d-avatar--presence')).toBe(false);
+      });
+    });
+
+    describe('When deactivated is provided', () => {
+      it('should apply deactivated class when true', async () => {
+        await wrapper.setProps({ deactivated: true });
+
+        expect(wrapper.classes('d-avatar--deactivated')).toBe(true);
+      });
+
+      it('should not apply deactivated class when false', async () => {
+        await wrapper.setProps({ deactivated: false });
+
+        expect(wrapper.classes('d-avatar--deactivated')).toBe(false);
       });
     });
   });
@@ -368,6 +386,177 @@ describe('DtAvatar Tests', () => {
 
         expect(wrapper.find('.my-custom-class').html()).toBe(MOCK_ELEMENT.html());
       });
+    });
+  });
+
+  describe('avatarStyles passthrough', () => {
+    it('should preserve incoming attrs.style object keys', () => {
+      mockAttrs = { style: { color: 'red', 'font-size': '14px' } };
+
+      updateWrapper();
+
+      const style = wrapper.attributes('style');
+      expect(style).toContain('color: red');
+      expect(style).toContain('font-size: 14px');
+    });
+
+    it('should preserve incoming attrs.style string', () => {
+      mockAttrs = { style: 'color: red; font-size: 14px' };
+
+      updateWrapper();
+
+      const style = wrapper.attributes('style');
+      expect(style).toContain('color: red');
+      expect(style).toContain('font-size: 14px');
+    });
+
+    it('should preserve incoming attrs.style array', () => {
+      mockAttrs = { style: [{ color: 'red' }, { 'font-size': '14px' }] };
+
+      updateWrapper();
+
+      const style = wrapper.attributes('style');
+      expect(style).toContain('color: red');
+      expect(style).toContain('font-size: 14px');
+    });
+  });
+
+  describe('When family and variant props are provided', () => {
+    it('should set data-avatar-family attribute', () => {
+      mockProps = { family: 5, variant: 3 };
+
+      updateWrapper();
+
+      expect(wrapper.attributes('data-avatar-family')).toBe('5');
+    });
+
+    it('should set data-avatar-variant attribute', () => {
+      mockProps = { family: 5, variant: 3 };
+
+      updateWrapper();
+
+      expect(wrapper.attributes('data-avatar-variant')).toBe('3');
+    });
+
+    it('should override seed-based color when explicit family/variant are set', () => {
+      mockProps = { seed: 'test-user', family: 12, variant: 0 };
+
+      updateWrapper();
+
+      expect(wrapper.attributes('data-avatar-family')).toBe('12');
+      expect(wrapper.attributes('data-avatar-variant')).toBe('0');
+    });
+  });
+
+  describe('When iconOnly is provided', () => {
+    it('should apply icon-only class when true', () => {
+      mockSlots = { icon: MOCK_ICON_SLOT };
+      mockProps = { iconOnly: true };
+
+      updateWrapper();
+
+      expect(wrapper.classes('d-avatar--icon-only')).toBe(true);
+    });
+
+    it('should omit data-avatar-family when iconOnly is true', () => {
+      mockSlots = { icon: MOCK_ICON_SLOT };
+      mockProps = { iconOnly: true, family: 5, variant: 3 };
+
+      updateWrapper();
+
+      expect(wrapper.attributes('data-avatar-family')).toBeUndefined();
+    });
+
+    it('should omit data-avatar-variant when iconOnly is true', () => {
+      mockSlots = { icon: MOCK_ICON_SLOT };
+      mockProps = { iconOnly: true, family: 5, variant: 3 };
+
+      updateWrapper();
+
+      expect(wrapper.attributes('data-avatar-variant')).toBeUndefined();
+    });
+  });
+
+  describe('When icon slot determines family/variant', () => {
+    it('should omit data-avatar-family when icon slot is provided', () => {
+      mockSlots = { icon: MOCK_ICON_SLOT };
+
+      updateWrapper();
+
+      expect(wrapper.attributes('data-avatar-family')).toBeUndefined();
+    });
+
+    it('should omit data-avatar-variant when icon slot is provided', () => {
+      mockSlots = { icon: MOCK_ICON_SLOT };
+
+      updateWrapper();
+
+      expect(wrapper.attributes('data-avatar-variant')).toBeUndefined();
+    });
+  });
+
+  describe('Group digit capping by size', () => {
+    it.each([
+      ['100', 10, '9+'],
+      ['150', 10, '9+'],
+      ['200', 10, '9+'],
+      ['250', 10, '9+'],
+    ])('size %s caps group %i to "%s"', (size, group, expected) => {
+      mockProps = { size, group };
+
+      updateWrapper();
+
+      const countEl = wrapper.find('[data-qa="dt-avatar-count"]');
+      expect(countEl.text()).toBe(expected);
+    });
+
+    it.each([
+      ['300', 10, '10'],
+      ['400', 99, '99'],
+      ['500', 100, '99+'],
+    ])('size %s shows group %i as "%s"', (size, group, expected) => {
+      mockProps = { size, group };
+
+      updateWrapper();
+
+      const countEl = wrapper.find('[data-qa="dt-avatar-count"]');
+      expect(countEl.text()).toBe(expected);
+    });
+
+    it('small sizes show single-digit groups without capping', () => {
+      mockProps = { size: '200', group: 5 };
+
+      updateWrapper();
+
+      const countEl = wrapper.find('[data-qa="dt-avatar-count"]');
+      expect(countEl.text()).toBe('5');
+    });
+  });
+
+  describe('colorToFamilyVariant mapping', () => {
+    it.each([
+      ['100', 1, 0],
+      ['540', 5, 4],
+      ['1020', 10, 2],
+      ['1290', 12, 9],
+    ])('maps color code "%s" to family %i, variant %i', (code, expectedFamily, expectedVariant) => {
+      const result = colorToFamilyVariant(code);
+      expect(result).toEqual({ family: expectedFamily, variant: expectedVariant });
+    });
+
+    it('returns null for invalid color codes', () => {
+      expect(colorToFamilyVariant('0')).toBeNull();
+      expect(colorToFamilyVariant('1305')).toBeNull();
+      expect(colorToFamilyVariant('abc')).toBeNull();
+    });
+
+    it('applies color prop correctly via the component', () => {
+      mockProps = { color: '540' };
+
+      updateWrapper();
+
+      expect(wrapper.attributes('data-avatar-family')).toBe('5');
+      expect(wrapper.attributes('data-avatar-variant')).toBe('4');
     });
   });
 

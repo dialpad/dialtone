@@ -101,6 +101,26 @@ describe('DtRecipeMessageInput tests', () => {
       expect(sendBtn.exists()).toBe(true);
     });
 
+    describe('When blockStart slot is provided', () => {
+      it('should render blockStart slot content', async () => {
+        slots = { ...baseSlots, blockStart: '<div data-qa="block-start-content">Block start</div>' };
+        _mountWrapper();
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.find('[data-qa="block-start-content"]').exists()).toBe(true);
+      });
+    });
+
+    describe('When top slot is provided (backward compat)', () => {
+      it('should render top slot content', async () => {
+        slots = { ...baseSlots, top: '<div data-qa="top-content">Top content</div>' };
+        _mountWrapper();
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.find('[data-qa="top-content"]').exists()).toBe(true);
+      });
+    });
+
     describe('When character Limit is disabled', () => {
       beforeEach(async () => {
         await wrapper.setProps({

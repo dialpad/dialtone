@@ -1,4 +1,4 @@
-import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/addon-docs/blocks';
 
 import * as ContactInfoStories from './contact_info.stories';
 
@@ -13,31 +13,27 @@ import * as ContactInfoStories from './contact_info.stories';
 ## Base Style
 
 The contact information component has 4 slots that can be used for the most common use cases,
-**header**, **subtitle**, **right** and **bottom** slot.
+**header**, **subtitle**, **end** and **blockEnd** slot.
 
 The **header** slot can be used to display html content or Vue component at header area.
 
 The **subtitle** slot can be used to display content below the header slot. The slot has smaller
 text size and lighter color than default slot.
 
-The **right** slot works the same way, but its contents are placed to the right of the main slot.
+The **end** slot works the same way, but its contents are placed to the end of the main slot.
 
-The **bottom** slot can be used to display content below the subtitle slot.
+The **blockEnd** slot can be used to display content below the subtitle slot.
 
 Avatar is optional. When `avatarSrc` is specified, the avatar image will be displayed on the left and,
 it is required to provide a value in `avatarFullName` to use in the alt attribute of the avatar image.
 If `avatarSrc` is empty, it will fall back to `avatarFullName`, and user initials will be displayed
 in avatar.
 
-<Canvas>
-  <Story of={ContactInfoStories.Default} />
-</Canvas>
+<Canvas of={ContactInfoStories.Default} />
 
 ## Variants
 
-<Canvas>
-  <Story of={ContactInfoStories.Variants} />
-</Canvas>
+<Canvas of={ContactInfoStories.Variants} />
 
 ## Slots, Props & Events
 
@@ -74,7 +70,7 @@ import { DtRecipeContactInfo } from '@dialpad/dialtone-vue';
       />
     </dt-stack>
   </template>
-  <template #bottom>
+  <template #blockEnd>
     <dt-stack direction="row" align="center" class="d-mtn6">
       <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">
         &nbsp;
@@ -155,7 +151,7 @@ import { DtRecipeContactInfo } from '@dialpad/dialtone-vue';
         />
       </dt-stack>
     </template>
-    <template #bottom>
+    <template #blockEnd>
       <dt-stack direction="row" align="center" class="d-mtn6">
         <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">
           &nbsp;
@@ -190,7 +186,7 @@ import { DtRecipeContactInfo } from '@dialpad/dialtone-vue';
       />
     </dt-stack>
   </template>
-  <template #bottom>
+  <template #blockEnd>
     <dt-stack direction="row" align="center" class="d-mtn6">
       <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">
         &nbsp;
@@ -230,7 +226,7 @@ import { DtRecipeContactInfo } from '@dialpad/dialtone-vue';
       />
     </dt-stack>
   </template>
-  <template #bottom>
+  <template #blockEnd>
     <dt-stack direction="row" align="center" class="d-mtn6">
       <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">
         &nbsp;
@@ -258,7 +254,7 @@ import { DtRecipeContactInfo } from '@dialpad/dialtone-vue';
   <template #subtitle>
     +1 (415) 123-4567
   </template>
-  <template #right>
+  <template #end>
     <dt-stack direction="row" align="center" class="d-m16">
       <dt-icon name="webchat" class="d-m4" />
       <dt-icon name="more-horizontal" class="d-m4" />
@@ -267,7 +263,7 @@ import { DtRecipeContactInfo } from '@dialpad/dialtone-vue';
       </div>
     </dt-stack>
   </template>
-  <template #bottom>
+  <template #blockEnd>
     2 matches found.
     <dt-button
       link

@@ -160,13 +160,13 @@ onMounted(() => {
 <style scoped>
 .showcase-carousel {
   overflow: hidden;
-  width: 100%;
-  max-width: 100vw;
+  inline-size: 100%;
+  max-inline-size: 100vw;
 }
 
 .showcase-carousel__track {
   will-change: transform;
   transition: none;
-  height: 732px;
+  block-size: 732px;
 }
 </style>

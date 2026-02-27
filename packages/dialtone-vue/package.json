@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-vue",
-  "version": "2.206.0-next.2",
+  "version": "3.202.0",
   "description": "Vue component library for Dialpad's design system Dialtone",
   "scripts": {
     "lint": "run-s lint:code lint:docs",
@@ -58,15 +58,17 @@
   "devDependencies": {
     "@dialpad/dialtone-css": "workspace:*",
     "@dialpad/generator-dialtone": "workspace:*",
-    "@storybook/addon-a11y": "7.6.20",
-    "@storybook/addon-essentials": "7.6.20",
-    "@storybook/addon-links": "7.6.20",
-    "@storybook/vue3": "7.6.20",
-    "@storybook/vue3-vite": "7.6.20",
+    "@storybook/addon-a11y": "10.2.6",
+    "@storybook/addon-docs": "10.2.6",
+    "@storybook/addon-links": "10.2.6",
+    "@storybook/test-runner": "^0.24.2",
+    "@storybook/vue3-vite": "10.2.6",
     "@vue/test-utils": "^2.4.0",
-    "react": "^18.3.1",
-    "storybook-dark-mode": "^3.0.3",
-    "vue": "^3.3.4"
+    "@vueless/storybook-dark-mode": "^10.0.7",
+    "storybook": "10.2.6",
+    "vue": "^3.3.4",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
   },
   "peerDependencies": {
     "@dialpad/dialtone-css": "workspace:^",

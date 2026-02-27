@@ -190,10 +190,10 @@ const tokenTests = [
   { query: 'color success', expect: '--dt-color' },
   { query: 'foreground primary', expect: '--dt-color-foreground-primary' },
 
-  // Space tokens
-  { query: 'space 400', expect: '--dt-space-400' },
-  { query: 'space 500', expect: '--dt-space-500' },
-  { query: 'space 100', expect: '--dt-space-100' },
+  // Spacing tokens
+  { query: 'spacing 100', expect: '--dt-spacing-100' },
+  { query: 'spacing 200', expect: '--dt-spacing-200' },
+  { query: 'spacing 50', expect: '--dt-spacing-50' },
 
   // Font tokens
   { query: 'font family', expect: '--dt-font-family' },

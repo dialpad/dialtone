@@ -10,6 +10,7 @@
 //  ============================================================================
 //  $   BASE STYLE
 //  ----------------------------------------------------------------------------
+@layer dialtone.components {
 .d-keyboard-shortcut {
   display: inline-flex;
   gap: var(--dt-size-200);
@@ -45,7 +46,7 @@
 
   &__icon,
   &__item {
-    min-height: 1lh;
+    min-block-size: 1lh;
     color: var(--dt-color-foreground-tertiary);
 
     &.d-icon--plus {
@@ -60,4 +61,5 @@
       color: var(--dt-color-foreground-secondary-inverted);
     }
   }
+}
 }

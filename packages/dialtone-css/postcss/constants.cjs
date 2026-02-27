@@ -6,9 +6,9 @@
  * This data shouldn't duplicate values under `/docs/_data/` folder
  */
 
-// @TODO: Move HSLA_EXCLUDED_COLORS to common/utils to share and sync it with dialtone-tokens/postcss/common.js
+// @TODO: Move OKLCH_EXCLUDED_COLORS to common/utils to share and sync it with dialtone-tokens/postcss/common.js
 module.exports = {
-  HSLA_EXCLUDED_COLORS: ['--dt-color-surface-ai', '--dt-color-gradient-gold-red-magenta-purple', '--dt-color-gradient-magenta-purple', '--dt-badge-color-background-ai', '--dt-color-border-ai'],
+  OKLCH_EXCLUDED_COLORS: ['--dt-color-surface-ai', '--dt-color-gradient-gold-red-magenta-purple', '--dt-color-gradient-magenta-purple', '--dt-badge-color-background-ai', '--dt-color-border-ai'],
   OPACITIES: [
     100,
     99,
@@ -48,6 +48,24 @@ module.exports = {
     48: '650',
     64: '700',
   },
+  // Gap spaces using new spacing tokens
+  GAP_SPACES_SPACING: {
+    0: '0',
+    1: '1',
+    2: '25',
+    4: '50',
+    6: '75',
+    8: '100',
+    10: '125',
+    12: '150',
+    14: '175',
+    16: '200',
+    20: '250',
+    24: '300',
+    32: '400',
+    48: '600',
+    64: '800',
+  },
   LAYOUT_SIZES: {
     0: '0',
     1: '100',
@@ -82,6 +100,50 @@ module.exports = {
     n96: '750-negative',
     n102: '760-negative',
   },
+  // Position sizes using new spacing tokens (0-64px) - EXACT MATCHES ONLY
+  POSITION_SIZES_SPACING: {
+    0: '0',
+    1: '1',
+    2: '25',
+    4: '50',
+    6: '75',
+    8: '100',
+    10: '125',
+    12: '150',
+    14: '175',
+    16: '200',
+    20: '250',
+    24: '300',
+    32: '400',
+    48: '600',
+    64: '800',
+    n1: '1-negative',
+    n2: '25-negative',
+    n4: '50-negative',
+    n6: '75-negative',
+    n8: '100-negative',
+    n10: '125-negative',
+    n12: '150-negative',
+    n14: '175-negative',
+    n16: '200-negative',
+    n24: '300-negative',
+    n32: '400-negative',
+    n48: '600-negative',
+    n64: '800-negative',
+  },
+  // Position sizes using layout tokens (64px+) - EXACT MATCHES ONLY
+  // Note: Negative layout utilities removed - not used in practice
+  POSITION_SIZES_LAYOUT: {
+    96: '150',
+  },
+  // Position sizes that don't have exact spacing/layout matches - use size tokens
+  // TODO: Migrate these once spacing/layout tokens are expanded
+  // Note: Negative position utilities for 72px+ removed - not used in practice
+  POSITION_SIZES_DEPRECATED: {
+    72: '720',
+    84: '730',
+    102: '760',
+  },
   PADDING_SIZES: {
     0: '0',
     1: '100',
@@ -98,6 +160,29 @@ module.exports = {
     64: '700',
     96: '750',
     128: '800',
+  },
+  // Padding sizes using new spacing tokens (0-64px)
+  PADDING_SIZES_SPACING: {
+    0: '0',
+    1: '1',
+    2: '25',
+    4: '50',
+    6: '75',
+    8: '100',
+    10: '125',
+    12: '150',
+    14: '175',
+    16: '200',
+    20: '250',
+    24: '300',
+    32: '400',
+    48: '600',
+    64: '800',
+  },
+  // Padding sizes using layout tokens (64px+)
+  PADDING_SIZES_LAYOUT: {
+    96: '150',
+    128: '200',
   },
   MARGIN_SIZES: {
     0: '0',
@@ -128,6 +213,43 @@ module.exports = {
     n64: '700-negative',
     n96: '750-negative',
     n128: '800-negative',
+  },
+  // Margin sizes using new spacing tokens (0-64px)
+  MARGIN_SIZES_SPACING: {
+    0: '0',
+    1: '1',
+    2: '25',
+    4: '50',
+    6: '75',
+    8: '100',
+    10: '125',
+    12: '150',
+    14: '175',
+    16: '200',
+    20: '250',
+    24: '300',
+    32: '400',
+    48: '600',
+    64: '800',
+    n1: '1-negative',
+    n2: '25-negative',
+    n4: '50-negative',
+    n6: '75-negative',
+    n8: '100-negative',
+    n10: '125-negative',
+    n12: '150-negative',
+    n14: '175-negative',
+    n16: '200-negative',
+    n24: '300-negative',
+    n32: '400-negative',
+    n48: '600-negative',
+    n64: '800-negative',
+  },
+  // Margin sizes using layout tokens (64px+)
+  // Note: Negative layout utilities removed - not used in practice
+  MARGIN_SIZES_LAYOUT: {
+    96: '150',
+    128: '200',
   },
   REGEX_OPTIONS: {
     COLORS: [
@@ -223,5 +345,81 @@ module.exports = {
     1140: '1115',
     1268: '1120',
     1340: '1130',
+  },
+  // Small sizes (0-42px) — deprecated backward-compat, to be removed in next major
+  // These sizes use calc() from layout base in the generator
+  WIDTH_HEIGHTS_SPACING: {
+    0: '0',
+    1: '1',
+    2: '25',
+    4: '50',
+    6: '75',
+    8: '100',
+    12: '150',
+    20: '250',
+    24: '300',
+    42: '525',
+  },
+  // Layout sizes (16px+) using layout tokens
+  // Maps pixel value to layout token number (base-64 scale with quarter + half stops)
+  WIDTH_HEIGHTS_LAYOUT: {
+    16: '25',
+    32: '50',
+    48: '75',
+    64: '100',
+    80: '125',
+    96: '150',
+    112: '175',
+    128: '200',
+    160: '250',
+    192: '300',
+    224: '350',
+    256: '400',
+    288: '450',
+    320: '500',
+    352: '550',
+    384: '600',
+    416: '650',
+    448: '700',
+    480: '750',
+    512: '800',
+    544: '850',
+    576: '900',
+    608: '950',
+    640: '1000',
+    672: '1050',
+    704: '1100',
+    736: '1150',
+    768: '1200',
+    800: '1250',
+    832: '1300',
+    864: '1350',
+    896: '1400',
+    928: '1450',
+    960: '1500',
+    992: '1550',
+    1024: '1600',
+  },
+  // Deprecated classes - old pixel values without layout token matches
+  // These use OLD size tokens and will be removed in Dialtone v11
+  // These classes maintain backwards compatibility for values that don't
+  // align with the new spacing/layout token system
+  WIDTH_HEIGHTS_DEPRECATED: {
+    72: '720',     // 72px → --dt-size-720
+    84: '730',     // 84px → --dt-size-730
+    102: '760',    // 102px → --dt-size-760
+    114: '775',    // 114px → --dt-size-775
+    164: '825',    // 164px → --dt-size-825
+    216: '875',    // 216px → --dt-size-875
+    264: '905',    // 264px → --dt-size-905
+    332: '925',    // 332px → --dt-size-925
+    464: '975',    // 464px → --dt-size-975
+    628: '1020',   // 628px → --dt-size-1020
+    764: '1040',   // 764px → --dt-size-1040
+    828: '1060',   // 828px → --dt-size-1060
+    912: '1080',   // 912px → --dt-size-1080
+    1140: '1115',  // 1140px → --dt-size-1115
+    1268: '1120',  // 1268px → --dt-size-1120
+    1340: '1130',  // 1340px → --dt-size-1130
   },
 };

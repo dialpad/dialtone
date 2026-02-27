@@ -1,4 +1,4 @@
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import DtButton from './button.vue';
 import {
   BUTTON_SIZE_MODIFIERS,
@@ -35,6 +35,54 @@ export const argTypesData = {
     },
   },
   icon: {
+    options: iconsList,
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'select',
+      labels: {
+        undefined: '(empty)',
+      },
+    },
+  },
+  startIcon: {
+    options: iconsList,
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'select',
+      labels: {
+        undefined: '(empty)',
+      },
+    },
+  },
+  endIcon: {
+    options: iconsList,
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'select',
+      labels: {
+        undefined: '(empty)',
+      },
+    },
+  },
+  blockStartIcon: {
+    options: iconsList,
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'select',
+      labels: {
+        undefined: '(empty)',
+      },
+    },
+  },
+  blockEndIcon: {
     options: iconsList,
     table: {
       type: { summary: 'VNode' },
@@ -93,6 +141,7 @@ export const argTypesData = {
   iconPosition: {
     control: 'select',
     options: Object.keys(ICON_POSITION_MODIFIERS),
+    table: { disable: true },
   },
   labelClass: {
     description: 'Pass through classes. Used to customize the label container',
@@ -174,4 +223,50 @@ export const Variants = {
   render: VariantsTemplate,
   parameters: { options: { showPanel: false }, controls: { disable: true } },
   args: {},
+};
+
+export const WithStartIcon = {
+  render: Template,
+
+  args: {
+    default: 'Start Icon',
+    startIcon: 'send',
+  },
+};
+
+export const WithEndIcon = {
+  render: Template,
+
+  args: {
+    default: 'End Icon',
+    endIcon: 'arrow-right',
+  },
+};
+
+export const WithBothIcons = {
+  render: Template,
+
+  args: {
+    default: 'Both Icons',
+    startIcon: 'send',
+    endIcon: 'arrow-right',
+  },
+};
+
+export const WithBlockStartIcon = {
+  render: Template,
+
+  args: {
+    default: 'Block Start Icon',
+    blockStartIcon: 'phone',
+  },
+};
+
+export const WithBlockEndIcon = {
+  render: Template,
+
+  args: {
+    default: 'Block End Icon',
+    blockEndIcon: 'phone',
+  },
 };

@@ -11,7 +11,15 @@
     @mousedown="onMousedown"
   >
     <!-- @slot Renders above the input, but still within the borders. -->
-    <slot name="top" />
+    <slot
+      v-if="$slots.blockStart"
+      name="blockStart"
+    />
+    <!-- @slot @deprecated Use blockStart -->
+    <slot
+      v-else
+      name="top"
+    />
 
     <!-- set key to selectedText to force update. otherwise this component may not reflect the active selection -->
     <dt-recipe-message-input-topbar
@@ -909,8 +917,11 @@ export default {
 
     // Checks if the node currently selected is active ex/ the bold button is active if the selected text is bold
 
+    // eslint-disable-next-line complexity
     isSelectionActive (type) {
       if (['bulletList', 'orderedList'].includes(type)) {
+        // List extensions are only loaded when richText is true
+        if (!this.richText) return false;
         return this.lastActiveNodes(this.$refs.richTextEditor?.editor?.state, [{ type: 'bulletList' }, { type: 'orderedList' }]).includes(type) && this.isFocused;
       }
       return this.$refs.richTextEditor?.editor?.isActive(type) && this.isFocused;

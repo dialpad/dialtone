@@ -271,6 +271,28 @@ describe('DtButton Tests', () => {
             expect(button.classes().includes('d-link--danger')).toBe(true);
           });
         });
+
+        describe('When underline is false', () => {
+          it('should have no-underline class', async () => {
+            await wrapper.setProps({ underline: false });
+
+            expect(button.classes().includes('d-link--no-underline')).toBe(true);
+          });
+        });
+
+        describe('When underline is true (default)', () => {
+          it('should not have no-underline class', () => {
+            expect(button.classes().includes('d-link--no-underline')).toBe(false);
+          });
+        });
+      });
+
+      describe('When underline is false and link is not set', () => {
+        it('should not have no-underline class', async () => {
+          await wrapper.setProps({ underline: false });
+
+          expect(button.classes().includes('d-link--no-underline')).toBe(false);
+        });
       });
 
       describe('When button has kind set to unstyled', () => {
@@ -381,6 +403,366 @@ describe('DtButton Tests', () => {
 
         expect(icon.classes().includes('d-btn__icon--bottom')).toBe(true);
         expect(button.classes().includes('d-btn--vertical')).toBe(true);
+      });
+    });
+
+    describe('With startIcon slot populated', () => {
+      it('Should render the start icon container', () => {
+        mockSlots = {
+          default: 'text',
+          startIcon: EmptyComponentFixture,
+        };
+
+        updateWrapper();
+
+        const startIcon = wrapper.find('[data-qa="dt-button-start-icon"]');
+
+        expect(startIcon.exists()).toBe(true);
+        expect(startIcon.classes().includes('d-btn__icon')).toBe(true);
+        expect(startIcon.classes().includes('d-btn__icon--left')).toBe(true);
+      });
+
+      it('Should not render legacy icon slot', () => {
+        mockSlots = {
+          default: 'text',
+          startIcon: EmptyComponentFixture,
+        };
+
+        updateWrapper();
+
+        expect(wrapper.find('[data-qa="dt-button-icon"]').exists()).toBe(false);
+      });
+
+      it('Should have icon-only class when no label is provided', () => {
+        mockSlots = {
+          startIcon: EmptyComponentFixture,
+        };
+
+        updateWrapper();
+
+        button = wrapper.find('.base-button__button');
+
+        expect(button.classes().includes('d-btn--icon-only')).toBe(true);
+      });
+    });
+
+    describe('With endIcon slot populated', () => {
+      it('Should render the end icon container', () => {
+        mockSlots = {
+          default: 'text',
+          endIcon: EmptyComponentFixture,
+        };
+
+        updateWrapper();
+
+        const endIcon = wrapper.find('[data-qa="dt-button-end-icon"]');
+
+        expect(endIcon.exists()).toBe(true);
+        expect(endIcon.classes().includes('d-btn__icon')).toBe(true);
+        expect(endIcon.classes().includes('d-btn__icon--right')).toBe(true);
+      });
+
+      it('Should not render legacy icon slot', () => {
+        mockSlots = {
+          default: 'text',
+          endIcon: EmptyComponentFixture,
+        };
+
+        updateWrapper();
+
+        expect(wrapper.find('[data-qa="dt-button-icon"]').exists()).toBe(false);
+      });
+
+      it('Should have icon-only class when no label is provided', () => {
+        mockSlots = {
+          endIcon: EmptyComponentFixture,
+        };
+
+        updateWrapper();
+
+        button = wrapper.find('.base-button__button');
+
+        expect(button.classes().includes('d-btn--icon-only')).toBe(true);
+      });
+    });
+
+    describe('With both startIcon and endIcon slots populated', () => {
+      it('Should render both icon containers', () => {
+        mockSlots = {
+          default: 'text',
+          startIcon: EmptyComponentFixture,
+          endIcon: EmptyComponentFixture,
+        };
+
+        updateWrapper();
+
+        const startIcon = wrapper.find('[data-qa="dt-button-start-icon"]');
+        const endIcon = wrapper.find('[data-qa="dt-button-end-icon"]');
+
+        expect(startIcon.exists()).toBe(true);
+        expect(endIcon.exists()).toBe(true);
+      });
+
+      it('Should suppress legacy icon slot even if provided', () => {
+        mockSlots = {
+          default: 'text',
+          startIcon: EmptyComponentFixture,
+          endIcon: EmptyComponentFixture,
+          icon: EmptyComponentFixture,
+        };
+
+        updateWrapper();
+
+        expect(wrapper.find('[data-qa="dt-button-icon"]').exists()).toBe(false);
+      });
+
+      it('Should not apply vertical layout', () => {
+        mockSlots = {
+          default: 'text',
+          startIcon: EmptyComponentFixture,
+          endIcon: EmptyComponentFixture,
+        };
+        mockProps = { iconPosition: 'top' };
+
+        updateWrapper();
+
+        button = wrapper.find('.base-button__button');
+
+        expect(button.classes().includes('d-btn--vertical')).toBe(false);
+      });
+    });
+
+    describe('With blockStartIcon slot populated', () => {
+      it('Should render the block-start icon container', () => {
+        mockSlots = {
+          default: 'text',
+          blockStartIcon: EmptyComponentFixture,
+        };
+
+        updateWrapper();
+
+        const blockStartIcon = wrapper.find('[data-qa="dt-button-block-start-icon"]');
+
+        expect(blockStartIcon.exists()).toBe(true);
+        expect(blockStartIcon.classes().includes('d-btn__icon')).toBe(true);
+        expect(blockStartIcon.classes().includes('d-btn__icon--top')).toBe(true);
+      });
+
+      it('Should not render legacy icon slot', () => {
+        mockSlots = {
+          default: 'text',
+          blockStartIcon: EmptyComponentFixture,
+        };
+
+        updateWrapper();
+
+        expect(wrapper.find('[data-qa="dt-button-icon"]').exists()).toBe(false);
+      });
+
+      it('Should apply vertical layout class', () => {
+        mockSlots = {
+          default: 'text',
+          blockStartIcon: EmptyComponentFixture,
+        };
+
+        updateWrapper();
+
+        button = wrapper.find('.base-button__button');
+
+        expect(button.classes().includes('d-btn--vertical')).toBe(true);
+      });
+
+      it('Should have icon-only class when no label is provided', () => {
+        mockSlots = {
+          blockStartIcon: EmptyComponentFixture,
+        };
+
+        updateWrapper();
+
+        button = wrapper.find('.base-button__button');
+
+        expect(button.classes().includes('d-btn--icon-only')).toBe(true);
+      });
+    });
+
+    describe('With blockEndIcon slot populated', () => {
+      it('Should render the block-end icon container', () => {
+        mockSlots = {
+          default: 'text',
+          blockEndIcon: EmptyComponentFixture,
+        };
+
+        updateWrapper();
+
+        const blockEndIcon = wrapper.find('[data-qa="dt-button-block-end-icon"]');
+
+        expect(blockEndIcon.exists()).toBe(true);
+        expect(blockEndIcon.classes().includes('d-btn__icon')).toBe(true);
+        expect(blockEndIcon.classes().includes('d-btn__icon--bottom')).toBe(true);
+      });
+
+      it('Should not render legacy icon slot', () => {
+        mockSlots = {
+          default: 'text',
+          blockEndIcon: EmptyComponentFixture,
+        };
+
+        updateWrapper();
+
+        expect(wrapper.find('[data-qa="dt-button-icon"]').exists()).toBe(false);
+      });
+
+      it('Should apply vertical layout class', () => {
+        mockSlots = {
+          default: 'text',
+          blockEndIcon: EmptyComponentFixture,
+        };
+
+        updateWrapper();
+
+        button = wrapper.find('.base-button__button');
+
+        expect(button.classes().includes('d-btn--vertical')).toBe(true);
+      });
+
+      it('Should have icon-only class when no label is provided', () => {
+        mockSlots = {
+          blockEndIcon: EmptyComponentFixture,
+        };
+
+        updateWrapper();
+
+        button = wrapper.find('.base-button__button');
+
+        expect(button.classes().includes('d-btn--icon-only')).toBe(true);
+      });
+    });
+
+    describe('With both blockStartIcon and blockEndIcon slots populated', () => {
+      it('Should render both icon containers', () => {
+        mockSlots = {
+          default: 'text',
+          blockStartIcon: EmptyComponentFixture,
+          blockEndIcon: EmptyComponentFixture,
+        };
+
+        updateWrapper();
+
+        const blockStartIcon = wrapper.find('[data-qa="dt-button-block-start-icon"]');
+        const blockEndIcon = wrapper.find('[data-qa="dt-button-block-end-icon"]');
+
+        expect(blockStartIcon.exists()).toBe(true);
+        expect(blockEndIcon.exists()).toBe(true);
+      });
+
+      it('Should suppress legacy icon slot even if provided', () => {
+        mockSlots = {
+          default: 'text',
+          blockStartIcon: EmptyComponentFixture,
+          blockEndIcon: EmptyComponentFixture,
+          icon: EmptyComponentFixture,
+        };
+
+        updateWrapper();
+
+        expect(wrapper.find('[data-qa="dt-button-icon"]').exists()).toBe(false);
+      });
+
+      it('Should apply vertical layout class', () => {
+        mockSlots = {
+          default: 'text',
+          blockStartIcon: EmptyComponentFixture,
+          blockEndIcon: EmptyComponentFixture,
+        };
+
+        updateWrapper();
+
+        button = wrapper.find('.base-button__button');
+
+        expect(button.classes().includes('d-btn--vertical')).toBe(true);
+      });
+    });
+
+    describe('With icon slot and iconPosition "blockStart"', () => {
+      it('Should map "blockStart" to d-btn__icon--top class', () => {
+        mockSlots = {
+          default: 'text',
+          icon: EmptyComponentFixture,
+        };
+        mockProps = { iconPosition: 'blockStart' };
+
+        updateWrapper();
+
+        icon = wrapper.find('[data-qa="dt-button-icon"]');
+
+        expect(icon.classes().includes('d-btn__icon--top')).toBe(true);
+      });
+    });
+
+    describe('With icon slot and iconPosition "blockEnd"', () => {
+      it('Should map "blockEnd" to d-btn__icon--bottom class', () => {
+        mockSlots = {
+          default: 'text',
+          icon: EmptyComponentFixture,
+        };
+        mockProps = { iconPosition: 'blockEnd' };
+
+        updateWrapper();
+
+        icon = wrapper.find('[data-qa="dt-button-icon"]');
+
+        expect(icon.classes().includes('d-btn__icon--bottom')).toBe(true);
+      });
+    });
+
+    describe('With icon slot and iconPosition "start"', () => {
+      it('Should map "start" to d-btn__icon--left class', () => {
+        mockSlots = {
+          default: 'text',
+          icon: EmptyComponentFixture,
+        };
+        mockProps = { iconPosition: 'start' };
+
+        updateWrapper();
+
+        icon = wrapper.find('[data-qa="dt-button-icon"]');
+
+        expect(icon.classes().includes('d-btn__icon--left')).toBe(true);
+      });
+    });
+
+    describe('With icon slot and iconPosition "end"', () => {
+      it('Should map "end" to d-btn__icon--right class', () => {
+        mockSlots = {
+          default: 'text',
+          icon: EmptyComponentFixture,
+        };
+        mockProps = { iconPosition: 'end' };
+
+        updateWrapper();
+
+        icon = wrapper.find('[data-qa="dt-button-icon"]');
+
+        expect(icon.classes().includes('d-btn__icon--right')).toBe(true);
+      });
+    });
+
+    describe('When both startIcon and icon slots are provided', () => {
+      it('should render startIcon and suppress the deprecated icon slot', () => {
+        mockSlots = {
+          default: 'Button Text',
+          startIcon: '<span>new</span>',
+          icon: '<span>old</span>',
+        };
+
+        updateWrapper();
+
+        const startIcon = wrapper.find('[data-qa="dt-button-start-icon"]');
+        const legacyIcon = wrapper.find('[data-qa="dt-button-icon"]');
+
+        expect(startIcon.exists()).toBe(true);
+        expect(startIcon.text()).toContain('new');
+        expect(legacyIcon.exists()).toBe(false);
       });
     });
 

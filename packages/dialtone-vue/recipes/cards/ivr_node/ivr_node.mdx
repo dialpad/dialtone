@@ -1,4 +1,4 @@
-import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/addon-docs/blocks';
 import * as IvrNodeStories from './ivr_node.stories';
 
 <Meta of={IvrNodeStories}/>
@@ -14,9 +14,7 @@ import * as IvrNodeStories from './ivr_node.stories';
 A node in IVR configuration has header and content. Header contains icon, label and three dot menu with card actions.
 The base style contains a top connector indicator.
 
-<Canvas>
-  <Story of={IvrNodeStories.Default} />
-</Canvas>
+<Canvas of={IvrNodeStories.Default} />
 
 ## Slots, Props & Events
 
@@ -34,9 +32,7 @@ import { DtRecipeIvrNode } from '@dialpad/dialtone-vue';
 
 A node in IVR configuration to configure DTMF types.
 
-<Canvas>
-    <Story of={IvrNodeStories.PromptMenu} />
-</Canvas>
+<Canvas of={IvrNodeStories.PromptMenu} />
 
 ```html
 <dt-recipe-ivr-node
@@ -55,9 +51,7 @@ A node in IVR configuration to configure DTMF types.
 
 A node in IVR configuration to collect data like input, number, etc.
 
-<Canvas>
-    <Story of={IvrNodeStories.PromptCollect} />
-</Canvas>
+<Canvas of={IvrNodeStories.PromptCollect} />
 
 ```html
 <dt-recipe-ivr-node
@@ -76,9 +70,7 @@ A node in IVR configuration to collect data like input, number, etc.
 
 A node in IVR configuration to play media.
 
-<Canvas>
-    <Story of={IvrNodeStories.PromptPlay} />
-</Canvas>
+<Canvas of={IvrNodeStories.PromptPlay} />
 
 ```html
 <dt-recipe-ivr-node
@@ -96,9 +88,7 @@ A node in IVR configuration to play media.
 
 A node in IVR used to integration DX expert view in iFrame to create complex flows.
 
-<Canvas>
-    <Story of={IvrNodeStories.Expert} />
-</Canvas>
+<Canvas of={IvrNodeStories.Expert} />
 
 ```html
 <dt-recipe-ivr-node
@@ -113,10 +103,9 @@ A node in IVR used to integration DX expert view in iFrame to create complex flo
   <dt-button
     importance="clear"
     kind="muted"
-    icon-position="right"
   >
     Launch Expert
-    <template #icon>
+    <template #endIcon>
       <dt-icon
         size="300"
         name="external-link"
@@ -130,9 +119,7 @@ A node in IVR used to integration DX expert view in iFrame to create complex flo
 
 A node in IVR used to step to another workflow or step in a workflow.
 
-<Canvas>
-    <Story of={IvrNodeStories.GoTo} />
-</Canvas>
+<Canvas of={IvrNodeStories.GoTo} />
 
 ```html
 <dt-recipe-ivr-node
@@ -151,9 +138,7 @@ A node in IVR used to step to another workflow or step in a workflow.
 
 A node in IVR used to step to another workflow or step in a workflow.
 
-<Canvas>
-    <Story of={IvrNodeStories.Branch} />
-</Canvas>
+<Canvas of={IvrNodeStories.Branch} />
 
 ```html
 <dt-recipe-ivr-node
@@ -172,9 +157,7 @@ A node in IVR used to step to another workflow or step in a workflow.
 
 A node in IVR used to assign variables that will be available for use throughout the workflow.
 
-<Canvas>
-    <Story of={IvrNodeStories.Assign} />
-</Canvas>
+<Canvas of={IvrNodeStories.Assign} />
 
 ```html
 <dt-recipe-ivr-node
@@ -193,9 +176,7 @@ A node in IVR used to assign variables that will be available for use throughout
 
 A node in IVR used to collect key value pair of data to be shown during the customer journeys.
 
-<Canvas>
-    <Story of={IvrNodeStories.CustomerData} />
-</Canvas>
+<Canvas of={IvrNodeStories.CustomerData} />
 
 ```html
 <dt-recipe-ivr-node
@@ -214,9 +195,7 @@ A node in IVR used to collect key value pair of data to be shown during the cust
 
 A node in IVR used to transfer to person, department, call center, etc.
 
-<Canvas>
-    <Story of={IvrNodeStories.Transfer} />
-</Canvas>
+<Canvas of={IvrNodeStories.Transfer} />
 
 ```html
 <dt-recipe-ivr-node
@@ -239,9 +218,7 @@ A node in IVR used to transfer to person, department, call center, etc.
 
 A node in IVR used to terminate the call.
 
-<Canvas>
-    <Story of={IvrNodeStories.Hangup} />
-</Canvas>
+<Canvas of={IvrNodeStories.Hangup} />
 
 ```html
 <dt-recipe-ivr-node
@@ -260,9 +237,7 @@ A node in IVR used to terminate the call.
 
 A node in IVR like branch that has a condition instead of dtmf connector.
 
-<Canvas>
-  <Story of={IvrNodeStories.NodeWithTopConnector} />
-</Canvas>
+<Canvas of={IvrNodeStories.NodeWithTopConnector} />
 
 ```html
 <dt-recipe-ivr-node

@@ -3,23 +3,23 @@
     "base": {
       "color": {
         "surface": {
-          "value": "#FFE0CF",
+          "value": "oklch(0.9278 0.0413 50.59)",
           "type": "color"
         },
         "foreground": {
-          "value": "#41222D",
+          "value": "oklch(0.2972 0.0499 357.87)",
           "type": "color"
         },
         "border": {
-          "value": "#41222D",
+          "value": "oklch(0.2972 0.0499 357.87)",
           "type": "color"
         },
         "accent": {
-          "value": "#FC9023",
+          "value": "oklch(0.7541 0.1693 58.64)",
           "type": "color"
         },
         "action": {
-          "value": "#FF6F98",
+          "value": "oklch(0.727 0.1787 4.84)",
           "type": "color"
         }
       }

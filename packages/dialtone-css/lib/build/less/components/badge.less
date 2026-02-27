@@ -17,6 +17,7 @@
 //  $   BASE STYLE
 //  ----------------------------------------------------------------------------
 
+@layer dialtone.components {
 .d-badge {
   //  COMPONENT CSS VARIABLES
   //  --------------------------------------------------------------------------
@@ -98,7 +99,7 @@
     --badge-color-text: var(--dt-badge-color-foreground-ai);
     --badge-color-background: var(--dt-color-brand-magenta); // fallback to gradient
 
-    text-shadow: var(--dt-size-50) var(--dt-size-50) 0 hsl(var(--dt-color-neutral-black-h), var(--dt-color-neutral-black-s), var(--dt-color-neutral-black-l), 0.6);
+    text-shadow: var(--dt-size-50) var(--dt-size-50) 0 oklch(from var(--dt-color-neutral-black) l c h / 0.6);
     background-image: var(--dt-badge-color-background-ai);
   }
 
@@ -160,4 +161,5 @@
   &__icon-right {
     padding-inline-end: var(--dt-size-100);
   }
+}
 }

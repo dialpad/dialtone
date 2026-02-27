@@ -10,6 +10,7 @@
 //  ============================================================================
 //  $   BASE STYLE
 //  ----------------------------------------------------------------------------
+@layer dialtone.components {
 .d-image-viewer__preview-button {
   padding: var(--dt-size-0);
   cursor: -webkit-zoom-in;
@@ -31,5 +32,6 @@
 .d-image-viewer__close-button {
   --fco: 100%;
 
-  color: hsl(var(--dt-color-neutral-white-h) var(--dt-color-neutral-white-s) var(--dt-color-neutral-white-l) / var(--fco));
+  color: oklch(from var(--dt-color-neutral-white) l c h / var(--fco, alpha));
+}
 }

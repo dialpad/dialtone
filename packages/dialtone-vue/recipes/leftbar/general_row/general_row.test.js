@@ -145,6 +145,30 @@ describe('DtRecipeGeneralRow Tests', () => {
       );
     });
 
+    describe('When start slot is provided', () => {
+      beforeEach(async () => {
+        slots = { start: '<div data-qa="custom-start">Custom Start</div>' };
+        await _setWrappers();
+      });
+
+      it('should render the start slot content', () => {
+        expect(wrapper.find('[data-qa="custom-start"]').exists()).toBe(true);
+        expect(wrapper.find('[data-qa="custom-start"]').text()).toBe('Custom Start');
+      });
+    });
+
+    describe('When left slot is provided (backward compat)', () => {
+      beforeEach(async () => {
+        slots = { left: '<div data-qa="custom-left">Custom Left</div>' };
+        await _setWrappers();
+      });
+
+      it('should render the left slot content', () => {
+        expect(wrapper.find('[data-qa="custom-left"]').exists()).toBe(true);
+        expect(wrapper.find('[data-qa="custom-left"]').text()).toBe('Custom Left');
+      });
+    });
+
     describe('When type is contact center and no color is provided', () => {
       // Test Environment
       let consoleErrorSpy;

@@ -1,4 +1,5 @@
 export { default as DtRecipeGeneralRow } from './general_row.vue';
+export { default as DtRecipeLeftbarGeneralRowIcon } from './leftbar_general_row_icon.vue';
 export {
   LEFTBAR_GENERAL_ROW_TYPES,
   LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS,

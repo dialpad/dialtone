@@ -3,13 +3,12 @@
     v-if="updateAvailable"
     importance="outlined"
     size="xs"
-    icon-position="right"
     class="d-recipe-settings-menu-button-update"
     :aria-label="ariaLabel"
     v-bind="$attrs"
   >
     <slot />
-    <template #icon>
+    <template #endIcon>
       <dt-icon-more-vertical
         size="300"
       />

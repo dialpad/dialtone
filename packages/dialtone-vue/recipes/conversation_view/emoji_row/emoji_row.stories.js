@@ -1,4 +1,4 @@
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeEmojiRow from './emoji_row.vue';
 import DtRecipeEmojiRowDefaultTemplate from './emoji_row_default.story.vue';

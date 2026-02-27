@@ -109,7 +109,7 @@ Search for design tokens (CSS variables).
 
 **Example queries:**
 - `color foreground primary` → --dt-color-foreground-primary
-- `space 400` → --dt-space-400, --dt-space-400-negative
+- `spacing 100` → --dt-spacing-100, --dt-spacing-100-negative
 - `font family` → --dt-font-family-body, --dt-font-family-expressive
 - `font weight bold` → --dt-font-weight-bold
 

@@ -1,4 +1,4 @@
-import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/addon-docs/blocks';
 import * as DtRecipeCallboxStories from './callbox.stories.js';
 
 <Meta of={DtRecipeCallboxStories}/>
@@ -36,7 +36,7 @@ import { DtRecipeCallbox } from '@dialpad/dialtone-vue';
   <template #subtitle>
     <span>06:01</span>
   </template>
-  <template #right>
+  <template #end>
     <dt-button
       aria-label="toggle dialpad ai"
       circle
@@ -76,7 +76,7 @@ import { DtRecipeCallbox } from '@dialpad/dialtone-vue';
   <template #subtitle>
     <span>06:01</span>
   </template>
-  <template #right>
+  <template #end>
     <dt-button
       aria-label="toggle mic"
       circle

@@ -1,5 +1,6 @@
 /* stylelint-disable meowtec/no-px */
 
+@layer dialtone.reset {
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
 /* Document
@@ -58,7 +59,7 @@ h1 {
 
 hr {
   box-sizing: content-box; /* 1 */
-  height: 0; /* 1 */
+  block-size: 0; /* 1 */
   overflow: visible; /* 2 */
 }
 
@@ -80,14 +81,14 @@ pre {
 
 a {
   background-color: transparent;
-  text-underline-offset: calc(var(--dt-size-border-300) - var(--dt-size-border-100));
-  text-decoration-thickness: var(--dt-size-border-50);
+  text-underline-offset: var(--dt-size-200);
+  text-decoration-thickness: var(--dt-size-border-100);
 }
 
 ins,
 u {
-  text-underline-offset: calc(var(--dt-size-border-300) - var(--dt-size-border-100));
-  text-decoration-thickness: var(--dt-size-border-50);
+  text-underline-offset: var(--dt-size-200);
+  text-decoration-thickness: var(--dt-size-border-100);
 }
 
 /**
@@ -99,7 +100,7 @@ abbr[title] {
   text-decoration: underline; /* 2 */
   text-decoration: underline dotted; /* 2 */
   border-block-end: none; /* 1 */
-  text-underline-offset: calc(var(--dt-size-border-300) - var(--dt-size-border-100));
+  text-underline-offset: var(--dt-size-200);
   text-decoration-thickness: var(--dt-size-border-100);
 }
 
@@ -265,7 +266,7 @@ fieldset {
 
 legend {
   display: table; /* 1 */
-  max-width: 100%; /* 1 */
+  max-inline-size: 100%; /* 1 */
   padding: 0; /* 3 */
   color: inherit; /* 2 */
   white-space: normal; /* 1 */
@@ -304,7 +305,7 @@ textarea {
 
 [type="number"]::-webkit-inner-spin-button,
 [type="number"]::-webkit-outer-spin-button {
-  height: auto;
+  block-size: auto;
 }
 
 /**
@@ -380,4 +381,5 @@ template {
 :focus-visible {
   outline: 0;
   box-shadow: var(--dt-shadow-focus);
+}
 }

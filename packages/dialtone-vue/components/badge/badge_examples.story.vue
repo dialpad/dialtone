@@ -15,14 +15,14 @@
       <dt-badge
         text="Locked"
       >
-        <template #leftIcon="{ iconSize }">
+        <template #startIcon="{ iconSize }">
           <dt-icon-lock :size="iconSize" />
         </template>
       </dt-badge>
       <dt-badge
         text="Chat log"
       >
-        <template #leftIcon="{ iconSize }">
+        <template #startIcon="{ iconSize }">
           <dt-icon-message :size="iconSize" />
         </template>
       </dt-badge>
@@ -92,7 +92,7 @@
         text="Recording"
         type="critical"
       >
-        <template #leftIcon="{ iconSize }">
+        <template #startIcon="{ iconSize }">
           <dt-icon-record-filled :size="iconSize" />
         </template>
       </dt-badge>
@@ -146,7 +146,7 @@
         kind="count"
         type="success"
       >
-        <template #leftIcon="{ iconSize }">
+        <template #startIcon="{ iconSize }">
           <dt-icon-arrow-up :size="iconSize" />
         </template>
       </dt-badge>
@@ -161,7 +161,7 @@
         kind="count"
         type="critical"
       >
-        <template #leftIcon="{ iconSize }">
+        <template #startIcon="{ iconSize }">
           <dt-icon-arrow-down :size="iconSize" />
         </template>
       </dt-badge>

@@ -37,6 +37,9 @@ export default defineUserConfig({
 
   bundler: viteBundler({
     viteOptions: {
+      define: {
+        __DIALTONE_DEPLOY_PREVIEW__: JSON.stringify(baseURL.includes('deploy-previews')),
+      },
       build: {
         sourcemap: true,
       },
@@ -47,9 +50,11 @@ export default defineUserConfig({
         devSourcemap: true,
       },
       server: {
+        // hmr: {
+        //   overlay: false,
+        // },
         watch: {
-          // Ignore packages directory to prevent rebuild loops
-          ignored: ['**/packages/**', '**/node_modules/**'],
+          ignored: ['**/node_modules/**'],
         },
       },
     },

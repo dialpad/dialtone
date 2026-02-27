@@ -1,4 +1,9 @@
+// This file has been automatically migrated to valid ESM format by Storybook.
+import { createRequire } from 'node:module';
+import { dirname, join } from 'node:path';
 import { mergeConfig } from 'vite';
+
+const require = createRequire(import.meta.url);
 
 /** @type { import('@storybook/vue3-vite').StorybookConfig } */
 const config = {
@@ -7,36 +12,35 @@ const config = {
     '../@(components|directives|docs|recipes|localization)/**/*.mdx',
     '../functions/*.mdx',
   ],
-  addons: ['@storybook/addon-links', '@storybook/addon-essentials', '@storybook/addon-a11y', 'storybook-dark-mode'],
+
+  addons: [
+    getAbsolutePath('@storybook/addon-links'),
+    getAbsolutePath('@storybook/addon-a11y'),
+    getAbsolutePath('@vueless/storybook-dark-mode'),
+    getAbsolutePath('@storybook/addon-docs'),
+  ],
+
   framework: {
-    name: '@storybook/vue3-vite',
+    name: getAbsolutePath('@storybook/vue3-vite'),
     options: {},
   },
-  docs: {
-    autodocs: false,
-  },
+
   async viteFinal (config) {
     // Merge custom configuration into the default config
-    const customConfig = {
+    return mergeConfig(config, {
       build: {
         sourcemap: true,
-        rollupOptions: {
-          external: (id) => {
-            // Don't try to bundle CSS files - they're handled separately
-            if (id.includes('.css')) return true;
-            // Don't bundle dialtone-tokens - let it resolve from node_modules via package.json exports
-            if (id.startsWith('@dialpad/dialtone-tokens')) return true;
-            return false;
-          },
-        },
       },
       css: {
         devSourcemap: true,
       },
-    };
-
-    return mergeConfig(config, customConfig);
+    });
   },
+
   staticDirs: ['../common/assets/'],
 };
 export default config;
+
+function getAbsolutePath(value) {
+  return dirname(require.resolve(join(value, 'package.json')));
+}

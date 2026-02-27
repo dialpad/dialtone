@@ -239,7 +239,7 @@
               <template #subtitle>
                 Lasted 8 min • Ended at 11:56 AM
               </template>
-              <template #right>
+              <template #end>
                 <div>
                   <dt-button
                     aria-label="Open external link"
@@ -317,7 +317,7 @@ const { mockReactions } = useMockReactions();
       }
     }
     &__thread{
-      height: 32px;
+      block-size: 32px;
     }
     &__reply{
       color: var(--dt-color-foreground-tertiary);

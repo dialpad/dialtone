@@ -1,5 +1,5 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import DtRecipeGeneralRow from './general_row.vue';
 
 import DtRecipeGeneralRowDefaultTemplate from './general_row_default.story.vue';
@@ -78,10 +78,25 @@ export const argTypesData = {
       type: { summary: 'event' },
     },
   },
+
+  // Slots
+  start: {
+    control: 'text',
+    table: {
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+  left: {
+    table: {
+      disable: true,
+    },
+  },
 };
 
 const decorator = () => ({
-  template: `<div style="background-color: var(--dt-shell-color-surface-default)" class="d-wmx264 d-p8"><story />
+  template: `<div style="background-color: var--dt-shell-color-surface-default" class="d-wmx264 d-p8"><story />
   </div>`,
 });
 

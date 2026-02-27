@@ -1,23 +1,36 @@
-# [9.154.0-next.5](https://github.com/dialpad/dialtone/compare/dialtone/v9.154.0-next.4...dialtone/v9.154.0-next.5) (2026-02-03)
+# [9.158.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.157.0...dialtone/v9.158.0) (2026-02-10)
+
+
+### Features
+
+* DLT-2903 storybook 10 ([#1043](https://github.com/dialpad/dialtone/issues/1043)) ([52b6d6c](https://github.com/dialpad/dialtone/commit/52b6d6ca90e91eed385404400af159a16c6ca128))
+
+# [9.157.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.156.1...dialtone/v9.157.0) (2026-02-03)
+
+
+### Features
+
+* DP-159552 editor table support when pasting ([#1034](https://github.com/dialpad/dialtone/issues/1034)) ([8ec5592](https://github.com/dialpad/dialtone/commit/8ec559290b2674eb3666e2f74627d91c23d8d257))
+
+## [9.156.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.156.0...dialtone/v9.156.1) (2026-01-30)
 
 
 ### Bug Fixes
 
-* **Tokens:** handle multi-layer box shadows correctly in postcss plugin ([feea7f1](https://github.com/dialpad/dialtone/commit/feea7f19f8f5380460db28eae0d51fab73413c24))
+* **Contact Info:** DLT-2904 remove min-width from left section ([#1032](https://github.com/dialpad/dialtone/issues/1032)) ([7dbc88d](https://github.com/dialpad/dialtone/commit/7dbc88d699e8adee9f86ace3cb31fab5930f5238))
+* **Tokens:** DP-173715 downgrade sd-transforms/colorjs.io ([#1039](https://github.com/dialpad/dialtone/issues/1039)) ([b0fbcd0](https://github.com/dialpad/dialtone/commit/b0fbcd0bc75478618a441b143b3a781761a6bd22))
 
-# [9.154.0-next.4](https://github.com/dialpad/dialtone/compare/dialtone/v9.154.0-next.3...dialtone/v9.154.0-next.4) (2026-02-03)
-
-
-### Bug Fixes
-
-* **Tokens:** NO-JIRA output line-height as unitless instead of percentages ([#1040](https://github.com/dialpad/dialtone/issues/1040)) ([33d8505](https://github.com/dialpad/dialtone/commit/33d850503133a0507968fadd73f0722b48a35e3e))
-
-# [9.154.0-next.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.154.0-next.2...dialtone/v9.154.0-next.3) (2026-01-30)
+# [9.156.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.155.4...dialtone/v9.156.0) (2026-01-29)
 
 
-### Code Refactoring
+### Documentation
 
-* **Text:** DLT-2883 rename headline sizes from xxl => 2xl, etc ([#1029](https://github.com/dialpad/dialtone/issues/1029)) ([0ac86f3](https://github.com/dialpad/dialtone/commit/0ac86f30fb59298942a633d0fc42e68ee3ff348f))
+* DLT-2854 add MCP Server guide to documentation ([#1035](https://github.com/dialpad/dialtone/issues/1035)) ([dd4ebb6](https://github.com/dialpad/dialtone/commit/dd4ebb6fe9c975494ee6a44742af748eecbd2432))
+
+
+### Features
+
+* NO-JIRA export everything from utils/constants ([#1038](https://github.com/dialpad/dialtone/issues/1038)) ([1aa0814](https://github.com/dialpad/dialtone/commit/1aa0814903d5a7417c52919aaac7959bf5b39456))
 
 ## [9.155.4](https://github.com/dialpad/dialtone/compare/dialtone/v9.155.3...dialtone/v9.155.4) (2026-01-22)
 

@@ -21,6 +21,7 @@
 //  $$  GENERIC LOADING
 //      This could be applied to an empty div or a psuedo element (ie ::before)
 //  ----------------------------------------------------------------------------
+@layer dialtone.utilities {
 @keyframes d-loading-circle {
     from {
         transform: rotate(0deg);
@@ -36,19 +37,19 @@
 /* stylelint-disable-next-line keyframes-name-pattern */
 @keyframes d-loading-bars__short {
   0% {
-    min-height: var(--dt-size-300);
+    min-block-size: var(--dt-size-300);
     transform: translateY(var(--dt-size-500-negative));
     opacity: 0;
   }
 
   5% {
-    min-height: var(--dt-size-300);
+    min-block-size: var(--dt-size-300);
     transform: translateY(var(--dt-size-500));
     opacity: 0.5;
   }
 
   10% {
-    min-height: 1rem;
+    min-block-size: 1rem;
     transform: translateY(var(--dt-size-200-negative));
     opacity: 1;
   }
@@ -60,26 +61,26 @@
 
   20%,
  70% {
-    min-height: 1rem;
+    min-block-size: 1rem;
     transform: translateY(0);
     opacity: 1;
   }
 
   75% {
-    min-height: 0.75rem;
+    min-block-size: 0.75rem;
     transform: translateY(1rem);
     opacity: 1;
   }
 
   80% {
-    min-height: var(--dt-size-300);
+    min-block-size: var(--dt-size-300);
     transform: translateY(var(--dt-size-300-negative));
     opacity: 0.5;
   }
 
   85%,
  100% {
-    min-height: var(--dt-size-300);
+    min-block-size: var(--dt-size-300);
     transform: translateY(var(--dt-size-500));
     opacity: 0;
   }
@@ -88,51 +89,51 @@
 /* stylelint-disable-next-line keyframes-name-pattern */
 @keyframes d-loading-bars__tall {
   0% {
-    min-height: var(--dt-size-300);
+    min-block-size: var(--dt-size-300);
     transform: translateY(var(--dt-size-500-negative));
     opacity: 0;
   }
 
   5% {
-    min-height: var(--dt-size-300);
+    min-block-size: var(--dt-size-300);
     transform: translateY(var(--dt-size-500));
     opacity: 0.5;
   }
 
   10% {
-    min-height: 1rem;
+    min-block-size: 1rem;
     transform: translateY(var(--dt-size-200-negative));
     opacity: 1;
   }
 
   15% {
-    min-height: 2.2rem;
+    min-block-size: 2.2rem;
     transform: translateY(var(--dt-size-100));
     opacity: 1;
   }
 
   20%,
  70% {
-    min-height: 2.2rem;
+    min-block-size: 2.2rem;
     transform: translateY(0);
     opacity: 1;
   }
 
   75% {
-    min-height: var(--dt-size-500);
+    min-block-size: var(--dt-size-500);
     transform: translateY(1rem);
     opacity: 1;
   }
 
   80% {
-    min-height: 1rem;
+    min-block-size: 1rem;
     transform: translateY(var(--dt-size-300-negative));
     opacity: 1;
   }
 
   85%,
  100% {
-    min-height: var(--dt-size-300);
+    min-block-size: var(--dt-size-300);
     transform: translateY(var(--dt-size-500));
     opacity: 0;
   }
@@ -207,3 +208,4 @@
 .d-t-delay150 { transition-delay: var(--td150) !important; }
 .d-t-delay200 { transition-delay: var(--td200) !important; }
 .d-t-delay300 { transition-delay: var(--td300) !important; }
+}

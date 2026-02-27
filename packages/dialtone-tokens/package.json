@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-tokens",
-  "version": "1.48.0-next.9",
+  "version": "1.47.3",
   "description": "Design tokens for Dialtone.",
   "type": "module",
   "scripts": {
@@ -13,17 +13,10 @@
   "exports": {
     "./*.css": "./dist/css/*.css",
     "./*.less": "./dist/less/*.less",
-    "./layered/*.css": "./dist/css/layered/*.css",
-    "./layered/themes/*.css": "./dist/css/layered/themes/*.css",
-    "./layered/contrast/*.css": "./dist/css/layered/contrast/*.css",
     "./postcss/*": {
       "types": "./dist/types/postcss/*.d.ts",
       "import": "./dist/postcss/*.js",
       "require": "./dist/postcss/*.cjs"
-    },
-    "./themes/layered/*": {
-      "import": "./dist/themes/layered/*.js",
-      "require": "./dist/themes/layered/*.cjs"
     },
     "./themes/*": {
       "types": "./dist/types/themes/*.d.ts",
@@ -43,16 +36,17 @@
   },
   "homepage": "https://dialtone.dialpad.com/",
   "devDependencies": {
-    "@tokens-studio/sd-transforms": "^1.2.3",
+    "@tokens-studio/sd-transforms": "1.2.3",
     "@types/node": "^22.8.4",
     "@typescript-eslint/eslint-plugin": "^8.44.1",
     "@typescript-eslint/parser": "^8.44.1",
     "axios": "^1.12.2",
+    "culori": "4.0.2",
     "dotenv": "^16.3.1",
     "maven": "^5.0.0",
     "postcss": "8.4.39",
     "postcss-cli": "11.0.0",
-    "style-dictionary": "^4.1.0",
+    "style-dictionary": "4.1.0",
     "tsx": "^4.19.0"
   },
   "peerDependencies": {

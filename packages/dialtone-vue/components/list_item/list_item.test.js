@@ -194,4 +194,78 @@ describe('DtListItem tests', () => {
       });
     });
   });
+
+  describe('Slot Forwarding Tests', () => {
+    describe('When start slot is provided', () => {
+      beforeEach(() => {
+        mockProps = {};
+        wrapper = mount(DtListItem, {
+          props: { ...baseProps },
+          attrs: { ...baseAttrs },
+          global: {
+            provide: { ...baseProvide },
+          },
+          slots: { start: 'start content' },
+        });
+      });
+
+      it('should forward start slot to item layout', () => {
+        expect(wrapper.text()).toContain('start content');
+      });
+    });
+
+    describe('When end slot is provided', () => {
+      beforeEach(() => {
+        mockProps = {};
+        wrapper = mount(DtListItem, {
+          props: { ...baseProps },
+          attrs: { ...baseAttrs },
+          global: {
+            provide: { ...baseProvide },
+          },
+          slots: { end: 'end content' },
+        });
+      });
+
+      it('should forward end slot to item layout', () => {
+        expect(wrapper.text()).toContain('end content');
+      });
+    });
+
+    describe('When left slot is provided (deprecated)', () => {
+      beforeEach(() => {
+        mockProps = {};
+        wrapper = mount(DtListItem, {
+          props: { ...baseProps },
+          attrs: { ...baseAttrs },
+          global: {
+            provide: { ...baseProvide },
+          },
+          slots: { left: 'left content' },
+        });
+      });
+
+      it('should forward left slot to item layout', () => {
+        expect(wrapper.text()).toContain('left content');
+      });
+    });
+
+    describe('When right slot is provided (deprecated)', () => {
+      beforeEach(() => {
+        mockProps = {};
+        wrapper = mount(DtListItem, {
+          props: { ...baseProps },
+          attrs: { ...baseAttrs },
+          global: {
+            provide: { ...baseProvide },
+          },
+          slots: { right: 'right content' },
+        });
+      });
+
+      it('should forward right slot to item layout', () => {
+        expect(wrapper.text()).toContain('right content');
+      });
+    });
+  });
 });

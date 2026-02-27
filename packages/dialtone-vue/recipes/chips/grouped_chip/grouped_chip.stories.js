@@ -12,62 +12,79 @@ export const argTypesData = {
   // Props
 
   // Slots
-  leftContent: {
+  startContent: {
     control: 'text',
-    description: 'Slot left hand side content. Ex. ongoing call time value',
+    description: 'Slot start hand side content. Ex. ongoing call time value',
     table: {
       category: 'slots',
       type: {
         summary: 'VNode',
       },
     },
+  },
+
+  startIcon: {
+    name: 'startIcon',
+    options: iconsList,
+    description: 'Slot for start hand chip icon',
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'Component',
+      },
+    },
+    control: {
+      type: 'select',
+      labels: {
+        undefined: '(empty)',
+      },
+    },
+  },
+
+  endContent: {
+    control: 'text',
+    description: 'Slot end hand side content. Ex. ongoing call hold time value',
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+
+  endIcon: {
+    name: 'endIcon',
+    options: iconsList,
+    description: 'Slot for end hand chip icon',
+    table: {
+      category: 'slots',
+      type: {
+        summary: 'Component',
+      },
+    },
+    control: {
+      type: 'select',
+      labels: {
+        undefined: '(empty)',
+      },
+    },
+  },
+
+  // Deprecated slots (hidden)
+  leftContent: {
+    table: { disable: true },
   },
 
   leftIcon: {
-    name: 'leftIcon',
-    options: iconsList,
-    description: 'Slot for left hand chip icon',
-    table: {
-      category: 'slots',
-      type: {
-        summary: 'Component',
-      },
-    },
-    control: {
-      type: 'select',
-      labels: {
-        undefined: '(empty)',
-      },
-    },
+    table: { disable: true },
   },
 
   rightContent: {
-    control: 'text',
-    description: 'Slot right hand side content. Ex. ongoing call hold time value',
-    table: {
-      category: 'slots',
-      type: {
-        summary: 'VNode',
-      },
-    },
+    table: { disable: true },
   },
 
   rightIcon: {
-    name: 'rightIcon',
-    options: iconsList,
-    description: 'Slot for right hand chip icon',
-    table: {
-      category: 'slots',
-      type: {
-        summary: 'Component',
-      },
-    },
-    control: {
-      type: 'select',
-      labels: {
-        undefined: '(empty)',
-      },
-    },
+    table: { disable: true },
   },
 };
 
@@ -88,15 +105,13 @@ export const Default = {
   render: DefaultTemplate,
 
   args: {
-    leftIcon: 'clock',
-    leftContent: `<div>
+    startIcon: 'clock',
+    startContent: `<div>
       2:50:13
   </div>`,
-    rightIcon: 'pause',
-    rightContent: `<div>
+    endIcon: 'pause',
+    endContent: `<div>
       0.25
   </div>`,
   },
-
-  parameters: {},
 };

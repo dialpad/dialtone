@@ -10,6 +10,7 @@
 
 //  @@  BASE STYLE
 //  ----------------------------------------------------------------------------
+@layer dialtone.components {
 .d-filter-pill {
   --filter-pill-color-background-selected-hover: color-mix(in srgb, var(--dt-action-color-background-base-active), var(--dt-action-color-foreground-base-active) 5%);
 
@@ -36,7 +37,7 @@
   &__label {
     display: flex;
     gap: var(--dt-size-300);
-    max-width: var(--dt-size-875);
+    max-inline-size: var(--dt-size-875);
     font-weight: var(--dt-font-weight-normal);
   }
 
@@ -77,4 +78,5 @@
       }
     }
   }
+}
 }

@@ -11,7 +11,7 @@
     v-bind="$attrs"
     v-on="contactRowListeners"
   >
-    <template #left>
+    <template #start>
       <dt-icon-users
         size="300"
       />

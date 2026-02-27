@@ -9,7 +9,7 @@
     >
       {{ kind }} link
     </dt-link>
-    <div class="d-bgc-purple-600">
+    <div class="d-bgc-contrast">
       <dt-link
         v-for="kind in LINK_VARIANTS"
         :key="kind"

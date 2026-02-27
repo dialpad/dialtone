@@ -23,17 +23,44 @@
         >
           <span /><span /><span />
         </div>
-        <slot
-          v-else
-          name="left"
-        >
-          <dt-recipe-leftbar-general-row-icon
-            :type="getIcon"
-            :color="color"
-            :icon-size="iconSize"
+        <!-- @slot Slot for start content -->
+        <template v-else-if="$slots.start">
+          <slot name="start" />
+        </template>
+        <!-- @slot @deprecated Use start -->
+        <template v-else-if="$slots.left">
+          <slot name="left" />
+        </template>
+        <template v-else>
+          <div
+            v-if="isDialbotType"
+            class="d-recipe-leftbar-general-row__icon"
+            data-qa="dt-recipe-leftbar-row-icon"
+          >
+            <dt-icon-dialbot size="500" />
+          </div>
+          <div
+            v-else-if="isContactCenterType"
+            :class="contactCenterIconClasses"
             data-qa="dt-recipe-leftbar-row-icon"
           />
-        </slot>
+          <div
+            v-else
+            data-qa="dt-recipe-leftbar-row-icon"
+          >
+            <dt-avatar
+              icon-only
+              :size="avatarSize"
+            >
+              <template #icon="{ iconSize: slotIconSize }">
+                <component
+                  :is="getIconComponent"
+                  :size="slotIconSize"
+                />
+              </template>
+            </dt-avatar>
+          </div>
+        </template>
       </div>
       <div
         class="d-recipe-leftbar-row__label"
@@ -153,13 +180,49 @@ import {
   LEFTBAR_GENERAL_ROW_ICON_SIZES,
 } from './general_row_constants';
 import { DtBadge } from '@/components/badge';
-import { DtIconPhone, DtIconWaveform } from '@dialpad/dialtone-icons/vue3';
+import {
+  DtIconPhone,
+  DtIconWaveform,
+  DtIconDialbot,
+  DtIconInbox,
+  DtIconContacts,
+  DtIconHash,
+  DtIconThread,
+  DtIconLayoutTemplate,
+  DtIconLock,
+  DtIconSparkle,
+  DtIconUsers,
+  DtIconExternalLink,
+  DtIconLockFilled,
+  DtIconHashBold,
+  DtIconAtSign,
+  DtIconLaptop2,
+  DtIconCalendarClock,
+} from '@dialpad/dialtone-icons/vue3';
 import { DtButton } from '@/components/button';
 import { DtTooltip } from '@/components/tooltip';
 import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
+import { DtAvatar } from '@/components/avatar';
 import DtRecipeLeftbarGeneralRowIcon from './leftbar_general_row_icon.vue';
 import { extractVueListeners, safeConcatStrings, removeClassStyleAttrs, returnFirstEl, addClassStyleAttrs } from '@/common/utils';
 import { DialtoneLocalization } from '@/localization';
+
+const TYPE_TO_ICON = new Map([
+  [LEFTBAR_GENERAL_ROW_TYPES.INBOX, DtIconInbox],
+  [LEFTBAR_GENERAL_ROW_TYPES.CONTACTS, DtIconContacts],
+  [LEFTBAR_GENERAL_ROW_TYPES.CHANNELS, DtIconHash],
+  [LEFTBAR_GENERAL_ROW_TYPES.THREADS, DtIconThread],
+  [LEFTBAR_GENERAL_ROW_TYPES.LAUNCHPAD, DtIconLayoutTemplate],
+  [LEFTBAR_GENERAL_ROW_TYPES.LOCKED_CHANNEL, DtIconLock],
+  [LEFTBAR_GENERAL_ROW_TYPES.QUICK_START, DtIconSparkle],
+  [LEFTBAR_GENERAL_ROW_TYPES.COACHING_GROUP, DtIconUsers],
+  [LEFTBAR_GENERAL_ROW_TYPES.COACHING_CENTER, DtIconExternalLink],
+  ['locked channel unread', DtIconLockFilled],
+  ['channel unread', DtIconHashBold],
+  [LEFTBAR_GENERAL_ROW_TYPES.ASSIGNED, DtIconAtSign],
+  [LEFTBAR_GENERAL_ROW_TYPES.DIGITAL, DtIconLaptop2],
+  [LEFTBAR_GENERAL_ROW_TYPES.SCHEDULED, DtIconCalendarClock],
+]);
 
 export default {
   compatConfig: { MODE: 3 },
@@ -172,6 +235,8 @@ export default {
     DtTooltip,
     DtIconPhone,
     DtIconWaveform,
+    DtIconDialbot,
+    DtAvatar,
     DtRecipeLeftbarGeneralRowIcon,
   },
 
@@ -356,6 +421,32 @@ export default {
           break;
       }
       return this.type;
+    },
+
+    getIconComponent () {
+      return TYPE_TO_ICON.get(this.getIcon);
+    },
+
+    isDialbotType () {
+      return this.type === LEFTBAR_GENERAL_ROW_TYPES.DIALBOT;
+    },
+
+    isContactCenterType () {
+      return this.type === LEFTBAR_GENERAL_ROW_TYPES.CONTACT_CENTER;
+    },
+
+    contactCenterIconClasses () {
+      return [
+        'd-recipe-leftbar-row__icon-cc',
+        LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS[this.color],
+      ];
+    },
+
+    avatarSize () {
+      // Map icon sizes to avatar sizes
+      // iconSize '300' -> avatar size 300
+      // iconSize '200' -> avatar size 200
+      return this.iconSize;
     },
 
     generalRowListeners () {

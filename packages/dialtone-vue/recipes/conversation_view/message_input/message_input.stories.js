@@ -1,4 +1,4 @@
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 import DtRecipeMessageInput from './message_input.vue';
 import DtRecipeMessageInputDefaultTemplate from './message_input_default.story.vue';
@@ -66,12 +66,17 @@ export const argTypesData = {
       },
     },
   },
-  top: {
+  blockStart: {
     table: {
       type: { summary: 'VNode' },
     },
     control: {
       type: 'text',
+    },
+  },
+  top: {
+    table: {
+      disable: true,
     },
   },
   sendButton: {
@@ -222,7 +227,7 @@ export const argTypesData = {
 // Set default values at the story level here.
 export const argsData = {
   modelValue: 'Always the Padawan, never the Jedi.',
-  top: '',
+  blockStart: '',
   middle: '',
   emojiGiphyPicker: '',
   customActionIcons: '',

@@ -14,7 +14,7 @@
       <dt-filter-pill
         v-model="contactCenters"
         label="Contact centers"
-        omega-tooltip-text="Remove"
+        end-tooltip-text="Remove"
       />
     </dt-stack>
     <!-- Selected, overflow, label tooltip, has clear -->
@@ -22,9 +22,9 @@
       <span class="d-label--sm">Selected, overflow, label tooltip, has clear</span>
       <dt-filter-pill
         v-model="merchandise"
-        alpha-tooltip-text="Disposition"
+        start-tooltip-text="Disposition"
         label="Merchandise Question (e.g. Size, Fit, etc)"
-        omega-tooltip-text="Remove"
+        end-tooltip-text="Remove"
       />
     </dt-stack>
     <!-- Selected, label, no clear -->

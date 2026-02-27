@@ -1,4 +1,4 @@
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeContactCentersRow from './contact_centers_row.vue';
 import DtRecipeContactCentersRowDefaultTemplate from './contact_centers_row_default.story.vue';
@@ -14,15 +14,21 @@ export const argsData = {
 
 export const argTypesData = {
   // Slots
-  right: {
-    name: 'right',
-    description: 'Slot right hand side content. Ex. agent on duty status component',
+  end: {
+    name: 'end',
+    description: 'Slot end hand side content. Ex. agent on duty status component',
     table: {
       category: 'slots',
       type: { summary: 'VNode' },
     },
     control: {
       type: 'text',
+    },
+  },
+
+  right: {
+    table: {
+      disable: true,
     },
   },
 

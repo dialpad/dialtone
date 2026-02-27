@@ -310,7 +310,7 @@ html body {
 
     position: fixed;
     z-index: 1;
-    max-width: calc(var(--dt-size-300) * 350);
+    max-inline-size: calc(var(--dt-size-300) * 350);
     border-radius: var(--dt-size-radius-450);
     /* stylelint-disable-next-line meowtec/no-px */
     box-shadow:
@@ -379,7 +379,7 @@ html body {
   border-block: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
 
   @media (min-width: 980px) {
-    margin-bottom: var(--dt-size-500);
+    margin-block-end: var(--dt-size-500);
     border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
     border-radius: var(--dt-size-radius-500);
     margin-inline: var(--dt-size-500);
@@ -495,7 +495,7 @@ code {
 }
 
 .d-docsite-code {
-  color: var(--dt-color-blue-500) !important;
+  color: var(--dt-color-blue-800) !important;
   font-weight: var(--dt-font-weight-normal) !important;
   user-select: all;
 }
@@ -587,13 +587,8 @@ code {
     background-color: var(--dt-color-neutral-black);
 
     &:hover,
-    .dialtone-icon-card[data-selected="yes"] & {
-      background-color: hsl(
-        var(--dt-color-neutral-black-h),
-        var(--dt-color-neutral-black-s),
-        var(--dt-color-neutral-black-l),
-        0.8
-      );
+    .dialtone-icon-card[data-selected='yes'] & {
+      background-color: oklch(from var(--dt-color-neutral-black) l c h / 0.8);
     }
 
     .dialtone-icon-card__name {
@@ -605,8 +600,8 @@ code {
     background-color: var(--dt-color-neutral-white);
 
     &:hover,
-    .dialtone-icon-card[data-selected="yes"] & {
-      background-color: hsl(0deg, 0%, 91.37%, 0.4);
+    .dialtone-icon-card[data-selected='yes'] & {
+      background-color: oklch(0.934 0 0deg / 0.4);
     }
 
     .dialtone-icon-card__name {
@@ -618,13 +613,8 @@ code {
     background-color: var(--dt-color-surface-contrast);
 
     &:hover,
-    .dialtone-icon-card[data-selected="yes"] & {
-      background-color: hsl(
-        var(--dt-color-black-900-h),
-        var(--dt-color-black-900-s),
-        var(--dt-color-black-900-l),
-        0.8
-      );
+    .dialtone-icon-card[data-selected='yes'] & {
+      background-color: oklch(from var(--dt-color-black-900) l c h / 0.8);
     }
 
     .dialtone-icon-card__name {
@@ -750,6 +740,7 @@ code {
 .dialtone-page-title {
   font: var(--dt-text-headline-3xl);
   margin-block-end: var(--dt-size-400);
+  text-wrap: pretty;
 }
 
 //  ============================================================================

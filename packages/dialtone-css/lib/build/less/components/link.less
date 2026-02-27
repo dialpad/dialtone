@@ -13,6 +13,7 @@
 //  ============================================================================
 //  $   BASE STYLE
 //  ----------------------------------------------------------------------------
+@layer dialtone.components {
 .d-link {
     --link-color-default: var(--dt-color-link-primary);
     --link-color-default-hover: var(--dt-color-link-primary-hover);
@@ -31,8 +32,8 @@
     color: var(--link-color-default);
     font: inherit;
     text-decoration: var(--link-text-decoration);
-    text-underline-offset: calc(var(--dt-size-border-300) - var(--dt-size-border-100));
-    text-decoration-thickness: var(--dt-size-border-50);
+    text-underline-offset: var(--dt-size-200);
+    text-decoration-thickness: var(--dt-size-border-100);
     background-color: var(--link-background-color);
     border: 0;
     transition-timing-function: var(--ttf-out-quint);
@@ -40,9 +41,7 @@
     transition-property: background-color, border, box-shadow;
 
     //  Reset button appearance
-    -webkit-appearance: none;
-       -moz-appearance: none;
-            appearance: none;
+    appearance: none;
     fill: currentColor;
 
     &:hover {
@@ -67,6 +66,16 @@
     //  ============================================================================
     //  $   ALTERNATE STYLES
     //  ============================================================================
+    //  $$  WARNING
+    //  ----------------------------------------------------------------------------
+    &--no-underline {
+        --link-text-decoration: none;
+
+        &:hover {
+            --link-text-decoration: underline;
+        }
+    }
+
     //  $$  WARNING
     //  ----------------------------------------------------------------------------
     &--warning {
@@ -166,7 +175,7 @@
         --link-color-default-hover: var(--dt-color-link-primary-inverted-hover);
         --link-text-decoration: none;
         --link-padding: 0 var(--dt-size-200);
-        --link-background-color: hsl(var(--dt-color-surface-brand-strong-hsl) / 0.3);
+        --link-background-color: oklch(from var(--dt-color-surface-brand-strong) l c h /0.3);
 
         line-height: var(--dt-font-line-height-200);
         border-radius: var(--dt-size-radius-200);
@@ -179,21 +188,22 @@
     &--mention {
         --link-text-decoration: none;
         --link-padding: 0 var(--dt-size-200);
-        --link-background-color: hsl(var(--dt-color-surface-brand-strong-hsl) / 0.1);
+        --link-background-color: oklch(from var(--dt-color-surface-brand-strong) l c h /0.1);
 
         line-height: var(--dt-font-line-height-200);
         border-radius: var(--dt-size-radius-200);
 
         &:hover {
             --link-text-decoration: underline;
-            --link-background-color: hsl(var(--dt-color-surface-brand-strong-hsl) / 0.25);
+            --link-background-color: oklch(from var(--dt-color-surface-brand-strong) l c h /0.25);
 
-            text-underline-offset: calc(var(--dt-size-border-300) - var(--dt-size-border-100));
-            text-decoration-thickness: var(--dt-size-border-50);
+            text-underline-offset: var(--dt-size-200);
+            text-decoration-thickness: var(--dt-size-border-100);
         }
 
         &:active {
-            --link-background-color: hsl(var(--dt-color-surface-brand-strong-hsl) / 0.1);
+            --link-background-color: oklch(from var(--dt-color-surface-brand-strong) l c h /0.1);
         }
     }
+}
 }

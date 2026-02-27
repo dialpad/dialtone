@@ -111,14 +111,17 @@ describe('DtRecipeContactInfo Tests', () => {
     describe('When `avatarColor` is defined', () => {
       beforeEach(async () => {
         await wrapper.setProps({
-          avatarColor: '000',
+          avatarColor: '540',
         });
+        _setChildWrappers();
       });
       it('Avatar should display', () => {
         expect(avatarElement.exists()).toBe(true);
       });
-      it('Should display correct color', () => {
-        expect(avatarElement.classes()).toContain('d-avatar--color-000');
+      it('Should display correct color via data-attributes', () => {
+        // color '540' = family 5, variant 4
+        expect(avatarElement.attributes('data-avatar-family')).toBe('5');
+        expect(avatarElement.attributes('data-avatar-variant')).toBe('4');
       });
     });
 
@@ -131,6 +134,54 @@ describe('DtRecipeContactInfo Tests', () => {
       });
       it('Should not display avatar', () => {
         expect(avatarElement.exists()).toBe(false);
+      });
+    });
+
+    describe('When new `end` slot is provided', () => {
+      beforeEach(() => {
+        slots = { end: '<span>end content</span>', header: 'header' };
+        _setWrappers();
+      });
+      it('Should render end slot content', () => {
+        const rightElement = wrapper.find('[data-qa="contact-info-right"]');
+        expect(rightElement.exists()).toBe(true);
+        expect(rightElement.text()).toBe('end content');
+      });
+    });
+
+    describe('When deprecated `right` slot is provided', () => {
+      beforeEach(() => {
+        slots = { right: '<span>right content</span>', header: 'header' };
+        _setWrappers();
+      });
+      it('Should render right slot content', () => {
+        const rightElement = wrapper.find('[data-qa="contact-info-right"]');
+        expect(rightElement.exists()).toBe(true);
+        expect(rightElement.text()).toBe('right content');
+      });
+    });
+
+    describe('When new `blockEnd` slot is provided', () => {
+      beforeEach(() => {
+        slots = { blockEnd: '<span>block end content</span>', header: 'header' };
+        _setWrappers();
+      });
+      it('Should render blockEnd slot content', () => {
+        const blockEndElement = wrapper.find('[data-qa="contact-info-bottom"]');
+        expect(blockEndElement.exists()).toBe(true);
+        expect(blockEndElement.text()).toBe('block end content');
+      });
+    });
+
+    describe('When deprecated `bottom` slot is provided', () => {
+      beforeEach(() => {
+        slots = { bottom: '<span>bottom content</span>', header: 'header' };
+        _setWrappers();
+      });
+      it('Should render bottom slot content', () => {
+        const blockEndElement = wrapper.find('[data-qa="contact-info-bottom"]');
+        expect(blockEndElement.exists()).toBe(true);
+        expect(blockEndElement.text()).toBe('bottom content');
       });
     });
   });

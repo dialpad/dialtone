@@ -2,11 +2,23 @@ import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeCallbox from './callbox.vue';
 import DtRecipeCallboxDefaultTemplate from './callbox_default.story.vue';
 import DtRecipeCallboxVariantsTemplate from './callbox_variants.story.vue';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 export const argTypesData = {
   // Action Event Handlers
   onClick: {
+    table: {
+      disable: true,
+    },
+  },
+
+  // Deprecated slots
+  right: {
+    table: {
+      disable: true,
+    },
+  },
+  bottom: {
     table: {
       disable: true,
     },
@@ -53,8 +65,8 @@ export const Default = {
     video: 'Video slot',
     badge: 'Badge slot',
     subtitle: 'Subtitle slot',
-    right: 'Right slot',
-    bottom: 'Bottom slot',
+    end: 'End slot',
+    blockEnd: 'Block End slot',
   },
 
   parameters: {

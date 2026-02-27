@@ -1,4 +1,4 @@
-import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/addon-docs/blocks';
 import * as ContactCentersRowStories from './contact_centers_row.stories.js';
 
 <Meta of={ContactCentersRowStories}/>
@@ -11,21 +11,15 @@ import * as ContactCentersRowStories from './contact_centers_row.stories.js';
 
 ## Base Style
 
-<Canvas>
-  <Story of={ContactCentersRowStories.Default} />
-</Canvas>
+<Canvas of={ContactCentersRowStories.Default} />
 
 ## Off duty agent
 
-<Canvas>
-  <Story of={ContactCentersRowStories.OffDuty} />
-</Canvas>
+<Canvas of={ContactCentersRowStories.OffDuty} />
 
 ## Variants
 
-<Canvas>
-  <Story of={ContactCentersRowStories.Variants} />
-</Canvas>
+<Canvas of={ContactCentersRowStories.Variants} />
 
 ## Slots, Props & Events
 

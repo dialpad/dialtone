@@ -12,7 +12,7 @@
     v-on="contactRowListeners"
     @call="$emit('call', $event)"
   >
-    <template #left>
+    <template #start>
       <dt-avatar
         :full-name="name"
         :image-src="avatarSrc"

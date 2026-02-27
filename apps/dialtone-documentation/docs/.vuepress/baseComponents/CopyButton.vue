@@ -11,7 +11,7 @@
         kind="muted"
         @click="copyToClipboard"
       >
-        <template #icon="{ iconSize }">
+        <template #startIcon="{ iconSize }">
           <dt-icon
             name="copy"
             :size="iconSize"

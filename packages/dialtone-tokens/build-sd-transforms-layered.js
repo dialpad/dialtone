@@ -120,7 +120,7 @@ StyleDictionary.registerAction({
 
 StyleDictionary.registerTransformGroup({
   name: 'custom/css/tokens-studio',
-  transforms: [...getTransforms({ platform: 'css' }), 'name/kebab', 'dt/size/pxToRem', 'dt/space/pxToRem', 'dt/lineHeight/percentToDecimal']
+  transforms: [...getTransforms({ platform: 'css' }), 'name/kebab', 'dt/size/pxToRem', 'dt/space/pxToRem', 'dt/lineHeight/percentToDecimal', 'dt/avatar/anchorHue']
     .filter(transform => !['name/camel', 'ts/size/px', 'ts/typography/css/fontFamily'].includes(transform)),
 });
 
@@ -193,6 +193,10 @@ async function buildLayeredTokensForBrand(brandName, lightThemeConfig, darkTheme
         theme: `${brandName}-light`,
         options: {
           outputReferences: (token) => {
+            // Don't output reference for avatar anchor hue - it needs to be a numeric value
+            if (token.path?.join('.') === 'avatar.anchor.hue') {
+              return false;
+            }
             if (token.$extensions?.['studio.tokens']?.modify ||
                 (token.$extensions?.['studio.tokens']?.originalType === 'boxShadow' && token.type === 'color')) {
               return false;
@@ -236,6 +240,10 @@ async function buildLayeredTokensForBrand(brandName, lightThemeConfig, darkTheme
         theme: `${brandName}-dark`,
         options: {
           outputReferences: (token) => {
+            // Don't output reference for avatar anchor hue - it needs to be a numeric value
+            if (token.path?.join('.') === 'avatar.anchor.hue') {
+              return false;
+            }
             if (token.$extensions?.['studio.tokens']?.modify ||
                 (token.$extensions?.['studio.tokens']?.originalType === 'boxShadow' && token.type === 'color')) {
               return false;
@@ -413,6 +421,10 @@ export async function runLayeredTokens() {
           theme: contrastTheme.name,
           options: {
             outputReferences: (token) => {
+              // Don't output reference for avatar anchor hue - it needs to be a numeric value
+              if (token.path?.join('.') === 'avatar.anchor.hue') {
+                return false;
+              }
               if (token.$extensions?.['studio.tokens']?.modify ||
                   (token.$extensions?.['studio.tokens']?.originalType === 'boxShadow' && token.type === 'color')) {
                 return false;

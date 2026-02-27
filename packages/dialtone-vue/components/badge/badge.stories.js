@@ -15,8 +15,8 @@ export const argsData = {
   type: 'default',
   kind: 'label',
   decoration: undefined,
-  leftIcon: undefined,
-  rightIcon: undefined,
+  startIcon: undefined,
+  endIcon: undefined,
 };
 
 export const argTypesData = {
@@ -29,7 +29,7 @@ export const argTypesData = {
       },
     },
   },
-  leftIcon: {
+  startIcon: {
     options: iconsList,
     table: {
       type: { summary: 'VNode' },
@@ -41,7 +41,7 @@ export const argTypesData = {
       },
     },
   },
-  rightIcon: {
+  endIcon: {
     options: iconsList,
     table: {
       type: { summary: 'VNode' },
@@ -51,6 +51,16 @@ export const argTypesData = {
       labels: {
         undefined: '(empty)',
       },
+    },
+  },
+  leftIcon: {
+    table: {
+      disable: true,
+    },
+  },
+  rightIcon: {
+    table: {
+      disable: true,
     },
   },
 

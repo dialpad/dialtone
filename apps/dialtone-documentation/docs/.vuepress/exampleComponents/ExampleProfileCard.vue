@@ -28,19 +28,19 @@
     </dt-stack>
     <dt-stack gap="400" direction="row" justify="between">
       <dt-button class="d-fl1" kind="muted" importance="outlined">
-        <template #icon="{ iconSize }">
+        <template #startIcon="{ iconSize }">
           <dt-icon-phone :size="iconSize" />
         </template>
         Call
       </dt-button>
       <dt-button class="d-fl1" kind="muted" importance="outlined">
-        <template #icon="{ iconSize }">
+        <template #startIcon="{ iconSize }">
           <dt-icon-quick-reply :size="iconSize" />
         </template>
         Message
       </dt-button>
       <dt-button class="d-fl1" kind="muted" importance="outlined">
-        <template #icon="{ iconSize }">
+        <template #startIcon="{ iconSize }">
           <dt-icon-video :size="iconSize" />
         </template>
         Meet

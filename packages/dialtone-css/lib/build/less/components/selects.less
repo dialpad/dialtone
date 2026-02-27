@@ -16,6 +16,7 @@
 //  ============================================================================
 //  $  SELECT MENU (NATIVE)
 //  ----------------------------------------------------------------------------
+@layer dialtone.components {
 .d-select {
   //  Component CSS Vars
   //  --------------------------------------------------------------------------
@@ -50,7 +51,7 @@
   --select-notch-padding-right: var(--dt-size-550);
 
   // Use shared style properties of d-input (<input>, <textarea>)
-  .d-input();
+  ._input();
 
   // select options can be styled on windows
   & option {
@@ -151,4 +152,5 @@
   &::after {
     opacity: 0.33;
   }
+}
 }

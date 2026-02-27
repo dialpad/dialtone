@@ -2,7 +2,7 @@
  * For more theme related documentation, please check out:
  * https://storybook.js.org/docs/react/configure/theming
  */
-import { create } from '@storybook/theming/create';
+import { create } from 'storybook/theming/create';
 import dialpadLogoWhite from '../common/assets/dialpad-logo-white.svg';
 import dialpadLogoBlack from '../common/assets/dialpad-logo-black.svg';
 
@@ -24,7 +24,7 @@ export const dialtoneDarkTheme = create({
 
   barBg: '#1B1B1B', // --dt-color-surface-secondary
 
-  colorSecondary: '#AB7EFF', // --dt-color-purple-400
+  colorSecondary: '#AB7EFF', // --dt-color-purple-600
 });
 export const dialtoneLightTheme = create({
   base: 'light',
@@ -38,5 +38,5 @@ export const dialtoneLightTheme = create({
 
   barBg: '#F9F9F9', // --dt-color-surface-secondary
 
-  colorSecondary: '#7C52FF', // --dt-color-purple-400
+  colorSecondary: '#7C52FF', // --dt-color-purple-600
 });

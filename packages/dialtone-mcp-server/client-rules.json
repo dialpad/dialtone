@@ -13,10 +13,10 @@
     "preference": "semantic-over-base",
     "details": {
       "semantic": "Prefer semantic color tokens (e.g., --dt-color-foreground-primary) over base colors",
-      "base": "Use base color tokens (e.g., --dt-color-purple-400) only when semantic colors don't fit the use case",
+      "base": "Use base color tokens (e.g., --dt-color-purple-600) only when semantic colors don't fit the use case",
       "examples": {
         "good": ["--dt-color-foreground-primary", "--dt-color-background-success", "--dt-color-border-critical"],
-        "avoid": ["--dt-color-purple-400", "--dt-color-red-500", "--dt-color-blue-300"]
+        "avoid": ["--dt-color-purple-600", "--dt-color-red-700", "--dt-color-blue-300"]
       }
     }
   },

@@ -6,6 +6,7 @@
 //  For further documentation of these and other classes,
 //  visit https://dialtone.dialpad.com/components/presence
 
+@layer dialtone.components {
 .d-presence {
   --presence-color-border-base: var(--dt-color-surface-secondary);
   --presence-color-border-offline: var(--dt-presence-color-offline);
@@ -13,15 +14,11 @@
   --presence-color-background-busy: var(--dt-presence-color-unavailable);
   --presence-color-background-away: var(--dt-presence-color-busy);
   --presence-color-background-offline: var(--dt-color-surface-primary);
-  --presence-border-size: var(--dt-size-border-200);
-  --presence-size: var(--dt-size-400);
+  --presence-border-radius: calc(var(--presence-size) * 0.208);
+  --presence-border-inner-width: calc(calc(var(--presence-size) - calc(var(--presence-size) * 0.556)) / 2);
+  --presence-size: var(--dt-spacing-150);
 
   display: inline-block;
-  box-sizing: border-box;
-  border-color: var(--presence-color-border-base);
-  border-style: solid;
-  border-width: var(--presence-border-size);
-  border-radius: var(--dt-size-radius-circle);
 
   .d-recipe-leftbar-row--selected & {
     --presence-color-border-base: var(--dt-color-surface-secondary);
@@ -36,7 +33,7 @@
     inline-size: var(--presence-size);
     block-size: var(--presence-size);
     border: none;
-    border-radius: 50%;
+    border-radius: var(--presence-border-radius);
 
     &--active {
       background-color: var(--presence-color-background-active);
@@ -51,10 +48,10 @@
     }
 
     &--offline {
-      background-color: var(--presence-color-background-offline);
       border-color: var(--presence-color-border-offline);
       border-style: solid;
-      border-width: var(--dt-size-border-200);
+      border-width: var(--presence-border-inner-width);
     }
   }
+}
 }

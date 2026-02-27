@@ -10,7 +10,7 @@
       <template #subtitle>
         <span class="d-fvn-tabular">06:01</span>
       </template>
-      <template #right>
+      <template #end>
         <dt-button
           aria-label="toggle dialpad ai"
           circle
@@ -39,7 +39,7 @@
       <template #subtitle>
         <span class="d-fvn-tabular">06:01</span>
       </template>
-      <template #right>
+      <template #end>
         <dt-button
           aria-label="toggle mic"
           circle
@@ -84,7 +84,7 @@
       <template #subtitle>
         <span class="d-fvn-tabular">06:01</span>
       </template>
-      <template #right>
+      <template #end>
         <dt-button
           aria-label="toggle mic"
           circle
@@ -126,7 +126,7 @@
       <template #subtitle>
         <span class="d-fvn-tabular">06:01</span>
       </template>
-      <template #right>
+      <template #end>
         <dt-button
           aria-label="toggle dialpad ai"
           circle
@@ -164,7 +164,7 @@
           <span class="d-fvn-tabular">06:01</span>
         </dt-stack>
       </template>
-      <template #right>
+      <template #end>
         <dt-button
           aria-label="share screen"
           circle
@@ -212,7 +212,7 @@
           <p>Screenshare</p>
         </dt-stack>
       </template>
-      <template #right>
+      <template #end>
         <dt-button
           aria-label="stop call"
           importance="clear"
@@ -267,7 +267,7 @@
           </dt-stack>
         </dt-stack>
       </template>
-      <template #right>
+      <template #end>
         <dt-button
           aria-label="toggle mic"
           importance="clear"
@@ -306,7 +306,7 @@
           <span class="d-fvn-tabular">06:01</span>
         </dt-stack>
       </template>
-      <template #right>
+      <template #end>
         <dt-button
           aria-label="toggle dialpad ai"
           circle
@@ -327,7 +327,7 @@
           </template>
         </dt-button>
       </template>
-      <template #bottom>
+      <template #blockEnd>
         <dt-item-layout
           class="d-py4 d-px8"
           content-class="d-ac-center"
@@ -347,7 +347,7 @@
               <span class="d-body--sm-compact">Sharing screen</span>
             </dt-stack>
           </template>
-          <template #right>
+          <template #end>
             <dt-button
               aria-label="stop call"
               importance="clear"
@@ -378,7 +378,7 @@
           <span class="d-fvn-tabular">06:01</span>
         </dt-stack>
       </template>
-      <template #right>
+      <template #end>
         <dt-button
           aria-label="hang call"
           circle
@@ -445,12 +445,12 @@ export default {
 
 <style lang="less" scoped>
 .callbox-image {
-  height: 140px;
+  block-size: 140px;
   object-fit: cover;
-  width: 100%;
+  inline-size: 100%;
 }
 
 .voice-chat-icon {
-  color: var(--dt-color-purple-400);
+  color: var(--dt-color-link-primary);
 }
 </style>

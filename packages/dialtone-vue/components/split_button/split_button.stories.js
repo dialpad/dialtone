@@ -1,4 +1,4 @@
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 import DtSplitButton from './split_button.vue';
 import DtSplitButtonDefaultTemplate from './split_button_default.story.vue';
@@ -15,19 +15,19 @@ const iconsList = getIconNames();
 
 // Set default values at the story level here.
 export const argsData = {
-  onAlphaClicked: action('alpha-clicked'),
-  onOmegaClicked: action('omega-clicked'),
-  omegaAriaLabel: 'Open dropdown',
+  onStartClicked: action('start-clicked'),
+  onEndClicked: action('end-clicked'),
+  endAriaLabel: 'Open dropdown',
   default: 'Place call',
   dropdownPlacement: 'bottom-end',
-  omegaTooltipText: 'More calling options',
-  alphaIcon: undefined,
-  omegaIcon: undefined,
+  endTooltipText: 'More calling options',
+  startIcon: undefined,
+  endIcon: undefined,
 };
 
 export const argTypesData = {
   // Slots
-  alphaIcon: {
+  startIcon: {
     options: iconsList,
     table: {
       type: { summary: 'VNode' },
@@ -46,13 +46,13 @@ export const argTypesData = {
     },
   },
 
-  omega: {
+  end: {
     table: {
       type: { summary: 'VNode' },
     },
   },
 
-  omegaIcon: {
+  endIcon: {
     options: iconsList,
     table: {
       type: { summary: 'VNode' },
@@ -70,6 +70,11 @@ export const argTypesData = {
       type: { summary: 'VNode' },
     },
   },
+
+  // Deprecated slots (hidden)
+  alphaIcon: { table: { disable: true } },
+  omega: { table: { disable: true } },
+  omegaIcon: { table: { disable: true } },
 
   // Props
   assertiveOnFocus: {
@@ -95,28 +100,28 @@ export const argTypesData = {
     options: Object.keys(BUTTON_SIZE_MODIFIERS),
   },
 
-  alphaActive: {
+  startActive: {
     control: 'boolean',
   },
 
-  alphaDisabled: {
+  startDisabled: {
     control: 'boolean',
   },
 
-  alphaIconPosition: {
+  startIconPosition: {
     control: 'select',
     options: Object.keys(ICON_POSITION_MODIFIERS),
   },
 
-  alphaLoading: {
+  startLoading: {
     control: 'boolean',
   },
 
-  omegaActive: {
+  endActive: {
     control: 'boolean',
   },
 
-  omegaDisabled: {
+  endDisabled: {
     control: 'boolean',
   },
 
@@ -132,7 +137,33 @@ export const argTypesData = {
     },
   },
 
+  // Deprecated props (hidden)
+  alphaActive: { table: { disable: true } },
+  alphaAriaLabel: { table: { disable: true } },
+  alphaDisabled: { table: { disable: true } },
+  alphaIconPosition: { table: { disable: true } },
+  alphaLabelClass: { table: { disable: true } },
+  alphaLoading: { table: { disable: true } },
+  alphaTooltipText: { table: { disable: true } },
+  omegaActive: { table: { disable: true } },
+  omegaAriaLabel: { table: { disable: true } },
+  omegaDisabled: { table: { disable: true } },
+  omegaId: { table: { disable: true } },
+  omegaTooltipText: { table: { disable: true } },
+
   // Action Event Handlers
+  onStartClicked: {
+    table: {
+      disable: true,
+    },
+  },
+
+  onEndClicked: {
+    table: {
+      disable: true,
+    },
+  },
+
   onAlphaClicked: {
     table: {
       disable: true,

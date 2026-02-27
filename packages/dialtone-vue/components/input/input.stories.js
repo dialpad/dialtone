@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 import DtInput from './input.vue';
 import { INPUT_SIZES, INPUT_TYPES } from './input_constants';
@@ -35,7 +35,7 @@ export const argTypesData = {
       type: 'text',
     },
   },
-  leftIcon: {
+  startIcon: {
     options: iconsList,
     table: {
       type: { summary: 'VNode' },
@@ -47,7 +47,7 @@ export const argTypesData = {
       },
     },
   },
-  rightIcon: {
+  endIcon: {
     options: iconsList,
     table: {
       type: { summary: 'VNode' },
@@ -57,6 +57,16 @@ export const argTypesData = {
       labels: {
         undefined: '(empty)',
       },
+    },
+  },
+  leftIcon: {
+    table: {
+      disable: true,
+    },
+  },
+  rightIcon: {
+    table: {
+      disable: true,
     },
   },
   labelSlot: {
@@ -259,25 +269,25 @@ export const WithDescription = {
   },
 };
 
-export const WithLeftIcon = {
+export const WithStartIcon = {
   ...Default,
   args: {
-    leftIcon: 'send',
+    startIcon: 'send',
   },
 };
 
-export const WithRightIcon = {
+export const WithEndIcon = {
   ...Default,
   args: {
-    rightIcon: 'lock-filled',
+    endIcon: 'lock-filled',
   },
 };
 
 export const WithBothIcons = {
   ...Default,
   args: {
-    leftIcon: 'send',
-    rightIcon: 'lock-filled',
+    startIcon: 'send',
+    endIcon: 'lock-filled',
   },
 };
 

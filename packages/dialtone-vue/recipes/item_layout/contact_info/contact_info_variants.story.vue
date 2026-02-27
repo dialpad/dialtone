@@ -1,5 +1,5 @@
 <template>
-  <div class="d-divide-y d-divide-purple-400">
+  <div class="d-divide-y">
     <div class="d-m32">
       <p class="d-my16 d-fs-200 d-fw-bold">
         Unknown contact (phone number only) with attestation
@@ -131,7 +131,7 @@
               />
             </dt-stack>
           </template>
-          <template #bottom>
+          <template #blockEnd>
             <dt-stack
               direction="row"
               align="center"
@@ -193,7 +193,7 @@
             />
           </dt-stack>
         </template>
-        <template #bottom>
+        <template #blockEnd>
           <dt-stack
             direction="row"
             align="center"
@@ -252,7 +252,7 @@
             />
           </dt-stack>
         </template>
-        <template #bottom>
+        <template #blockEnd>
           <dt-stack
             direction="row"
             align="center"
@@ -288,7 +288,7 @@
         <template #subtitle>
           +1 (415) 123-4567
         </template>
-        <template #right>
+        <template #end>
           <dt-stack
             direction="row"
             align="center"
@@ -325,7 +325,7 @@
             </div>
           </dt-stack>
         </template>
-        <template #bottom>
+        <template #blockEnd>
           2 matches found.
           <dt-button
             link

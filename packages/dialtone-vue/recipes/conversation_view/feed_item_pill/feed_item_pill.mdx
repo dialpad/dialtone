@@ -1,4 +1,4 @@
-import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/blocks';
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/addon-docs/blocks';
 
 import * as FeedItemPillStories from './feed_item_pill.stories';
 
@@ -12,15 +12,11 @@ import * as FeedItemPillStories from './feed_item_pill.stories';
 
 ## Base Style
 
-<Canvas>
-  <Story of={FeedItemPillStories.Default} />
-</Canvas>
+<Canvas of={FeedItemPillStories.Default} />
 
 ## Variants
 
-<Canvas>
-  <Story of={FeedItemPillStories.Variants} />
-</Canvas>
+<Canvas of={FeedItemPillStories.Variants} />
 
 ## Slots, Props & Events
 
@@ -49,10 +45,10 @@ import { DtRecipeFeedItemPill } from '@dialpad/dialtone-vue';
     <template #subtitle>
       Subtitle
     </template>
-    <template #bottom>
+    <template #blockEnd>
       <span class="d-fc-tertiary d-fs-100">Bottom</span>
     </template>
-    <template #right>
+    <template #end>
       <div>
         <dt-button
           kind="muted"

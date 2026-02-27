@@ -29,8 +29,7 @@
         "cwd": "{projectRoot}",
         "commands": [
           "rm -rf dist",
-          "node ./build.js",
-          "pnpm exec vite build"
+          "node ./build.js"
         ],
         "parallel": false
       }

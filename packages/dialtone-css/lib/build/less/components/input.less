@@ -18,12 +18,8 @@
 
 //  $  INPUTS
 //  ----------------------------------------------------------------------------
-.d-input,
-.d-input--md,
-.d-textarea,
-.d-textarea--md,
-.d-input__wrapper--md,
-.d-input__wrapper {
+//  Parametric mixin defined outside @layer for cross-file access (used by selects.less).
+._input() {
     //  Component CSS Vars
     //  ------------------------------------------------------------------------
     --input-color-border: var(--dt-inputs-color-border-default);
@@ -151,6 +147,16 @@
     input[type="search"]::-webkit-search-results-decoration {
         display: none;
     }
+}
+
+@layer dialtone.components {
+.d-input,
+.d-input--md,
+.d-textarea,
+.d-textarea--md,
+.d-input__wrapper--md,
+.d-input__wrapper {
+    ._input();
 }
 
 .d-input__length-description {
@@ -314,4 +320,5 @@
     &--left:not(:empty) {
         margin-inline-start: var(--dt-size-400);
     }
+}
 }

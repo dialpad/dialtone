@@ -12,7 +12,7 @@
         :class="[
           'd-mb8',
           {
-            'd-bgc-purple-600 d-p2': variant.propsToBind.inverted,
+            'd-bgc-contrast d-p2': variant.propsToBind.inverted,
           },
         ]"
       >

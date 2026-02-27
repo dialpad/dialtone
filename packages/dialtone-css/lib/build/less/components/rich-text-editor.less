@@ -1,3 +1,4 @@
+@layer dialtone.components {
 .d-rich-text-editor {
   &__code-block {
     padding: var(--dt-size-400);
@@ -41,6 +42,15 @@
       margin-inline-start: 0;
       padding-inline-start: var(--dt-size-400);
       border-inline-start: var(--dt-size-border-300) solid var(--dt-color-border-subtle);
+    }
+
+    table {
+      border-collapse: collapse;
+    }
+
+    td {
+      padding-inline-start: var(--dt-space-200);
+      border: var(--dt-size-border-100) solid var(--dt-color-foreground-primary);
     }
   }
 }
@@ -93,4 +103,5 @@
 
 .d-mention-suggestion__divider {
   color: var(--dt-color-foreground-tertiary);
+}
 }
