@@ -1121,6 +1121,7 @@ export default {
 /* Image border */
 .image-resize .tiptap .ProseMirror-selectednode [data-resize-wrapper] {
   outline: 1px solid var(--dt-color-chart-info-selected);
+  line-height: 0 !important;
 }
 
 /* Corner handles */
