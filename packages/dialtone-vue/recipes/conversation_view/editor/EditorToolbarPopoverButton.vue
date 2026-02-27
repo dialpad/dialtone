@@ -1,6 +1,6 @@
 <template>
   <dt-popover
-    :data-qa="popoverDataQA || `${dataQA}-popover`"
+    :data-qa="popoverDataQa || `${dataQa}-popover`"
     padding="small"
     navigation-type="arrow-keys"
     placement="bottom-start"
@@ -13,7 +13,7 @@
         v-bind="attrs"
         :active="isActive"
         :aria-label="tooltipMessage"
-        :data-qa="dataQA"
+        :data-qa="dataQa"
         :tabindex="tabindex"
         importance="clear"
         kind="muted"
@@ -70,7 +70,7 @@ export default {
     /**
      * Data QA attribute for testing
      */
-    dataQA: {
+    dataQa: {
       type: String,
       default: '',
     },
@@ -78,7 +78,7 @@ export default {
     /**
      * Popover specific data QA attribute
      */
-    popoverDataQA: {
+    popoverDataQa: {
       type: String,
       default: '',
     },

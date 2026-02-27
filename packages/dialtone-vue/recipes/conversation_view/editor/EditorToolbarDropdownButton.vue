@@ -1,6 +1,6 @@
 <template>
   <dt-dropdown
-    :data-qa="dropdownDataQA || `${dataQA}-dropdown`"
+    :data-qa="dropdownDataQa || `${dataQa}-dropdown`"
     padding="small"
     navigation-type="arrow-keys"
     placement="bottom-start"
@@ -12,7 +12,7 @@
         v-bind="attrs"
         :active="isActive"
         :aria-label="tooltipMessage"
-        :data-qa="dataQA"
+        :data-qa="dataQa"
         :tabindex="tabindex"
         importance="clear"
         kind="muted"
@@ -69,7 +69,7 @@ export default {
     /**
      * Data QA attribute for testing
      */
-    dataQA: {
+    dataQa: {
       type: String,
       default: '',
     },
@@ -77,7 +77,7 @@ export default {
     /**
      * dropdown specific data QA attribute
      */
-    dropdownDataQA: {
+    dropdownDataQa: {
       type: String,
       default: '',
     },
