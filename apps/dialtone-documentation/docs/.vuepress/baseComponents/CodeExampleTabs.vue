@@ -2,7 +2,6 @@
   <dt-tab-group
     class="code-example-tab-group"
     activation-mode="auto"
-    outlined
     size="sm"
     @change="selectedPanelId = $event.selected"
   >

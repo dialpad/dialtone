@@ -152,41 +152,36 @@ const isDisabled = ref(false);
       Freeform elements that are rendered before/after the button content.
     </dt-text>
     <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
-      <dt-button kind="muted" importance="outlined" size="xs">
+      <dt-button kind="muted" importance="outlined" size="xs" suffix-class="d-pr1">
         Place Call
-        <template #prefix> a </template>
         <template #suffix>
           <dt-badge text="Label" />
         </template>
         <template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template>
       </dt-button>
-      <dt-button kind="muted" importance="outlined" size="sm">
+      <dt-button kind="muted" importance="outlined" size="sm" suffix-class="d-pr4">
         Place Call
-        <template #prefix> a </template>
         <template #suffix>
           <dt-badge text="Label" />
         </template>
         <template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template>
       </dt-button>
-      <dt-button kind="muted" importance="outlined" size="md">
+      <dt-button kind="muted" importance="outlined" size="md" suffix-class="d-pr8">
         Place Call
-        <template #prefix> a </template>
         <template #suffix>
           <dt-badge text="Label" />
         </template>
         <template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template>
       </dt-button>
-      <dt-button kind="muted" importance="outlined" size="lg">
+      <dt-button kind="muted" importance="outlined" size="lg" suffix-class="d-pr10">
         Place Call
-        <template #prefix> a </template>
         <template #suffix>
           <dt-badge text="Label" />
         </template>
         <template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template>
       </dt-button>
-      <dt-button kind="muted" importance="outlined" size="xl">
+      <dt-button kind="muted" importance="outlined" size="xl" suffix-class="d-pr12">
         Place Call
-        <template #prefix> a </template>
         <template #suffix>
           <dt-badge text="Label" />
         </template>
@@ -372,7 +367,7 @@ const isDisabled = ref(false);
     </dt-stack>
     <dt-tab-group :borderless="borderless" :kind="muted ? 'muted' : 'default'" :outlined="outlined" :size="size" :activation-mode="selectOnFocus ? 'auto' : 'manual'">
       <template #tabs>
-        <dt-tab id="1" panel-id="2" selected>
+        <dt-tab id="1" panel-id="2" selected prefix-class="d-pl8" suffix-class="d-pr8">
           <template v-if="showIcon" #icon="{ iconSize }">
             <dt-icon name="sun" :size="iconSize" />
           </template>
@@ -384,7 +379,7 @@ const isDisabled = ref(false);
             <dt-badge kind="count" text="1" />
           </template>
         </dt-tab>
-        <dt-tab id="3" panel-id="4">
+        <dt-tab id="3" panel-id="4" prefix-class="d-pl8" suffix-class="d-pr8">
           <template v-if="showIcon" #icon="{ iconSize }">
             <dt-icon name="keypad" :size="iconSize" />
           </template>
