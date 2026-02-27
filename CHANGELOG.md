@@ -1,3 +1,10 @@
+# [9.164.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.163.0...dialtone/v9.164.0) (2026-02-27)
+
+
+### Features
+
+* **Editor:** DLT-3003 add font size, font type, & font color to editor ([#1081](https://github.com/dialpad/dialtone/issues/1081)) ([1bb53e6](https://github.com/dialpad/dialtone/commit/1bb53e692beac43fcc7502df0de64b5f3bd95c0c))
+
 # [9.163.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.162.0...dialtone/v9.163.0) (2026-02-27)
 
 
