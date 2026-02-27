@@ -177,6 +177,33 @@
             border-radius: var(--tab-border-radius);
         }
     }
+
+    //  ============================================================================
+    //  $   LABEL
+    //  ----------------------------------------------------------------------------
+    &__label {
+    //   font-weight: normal;
+
+      transition: font-weight var(--ttf-out) var(--td50);
+
+      .d-btn--active &,
+      .d-btn--outlined &,
+      .d-tab--is-selected & {
+        font-weight: var(--dt-font-weight-bold) !important;
+      }
+
+      &[data-content]::after {
+          display: block;
+          font-weight: var(--dt-font-weight-bold);
+          white-space: nowrap;
+          text-align: center;
+          background-color: #666;
+          visibility: hidden;
+          content: attr(data-content);
+          block-size: 0;
+      }
+    }
+
 }
 
 //  ============================================================================

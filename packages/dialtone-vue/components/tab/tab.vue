@@ -46,7 +46,12 @@
       <slot name="trailing" />
     </template>
     <!-- @slot default slot, defaults contains dt-button -->
-    <slot />
+    <span
+      ref="tabLabel"
+      class="d-tab__label"
+    >
+      <slot />
+    </span>
   </dt-button>
 </template>
 
@@ -218,9 +223,28 @@ export default {
   },
 
   mounted () {
+    this.syncDataContent();
     if (this.selected) {
       this.groupContext.selected = this.panelId;
     }
+  },
+
+  updated () {
+    this.syncDataContent();
+  },
+
+  methods: {
+    // Sets data-content to match the rendered label text so CSS can use
+    // `content: attr(data-content)` on a hidden ::after pseudo-element to
+    // hold the bold-width and prevent layout shift on selection.
+    syncDataContent () {
+      const el = this.$refs.tabLabel;
+      if (!el) return;
+      const text = el.textContent?.trim() || '';
+      if (el.getAttribute('data-content') !== text) {
+        el.setAttribute('data-content', text);
+      }
+    },
   },
 };
 </script>
