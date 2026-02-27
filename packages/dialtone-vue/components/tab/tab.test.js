@@ -276,31 +276,51 @@ describe('DtTab Tests', () => {
   });
 
   describe('Extendability Tests', () => {
-    describe('When prefixClass is provided', () => {
-      it('should apply custom class to the prefix wrapper', () => {
-        mockProps = { prefixClass: 'custom-prefix' };
-        mockSlots = { prefix: 'Prefix content' };
+    describe('When leadingClass is provided', () => {
+      it('should apply custom class to the leading wrapper', () => {
+        mockProps = { leadingClass: 'custom-leading' };
+        mockSlots = { leading: 'Leading content' };
 
         updateWrapper();
 
-        const prefix = tab.find('.d-btn__prefix');
+        const leading = tab.find('.d-btn__leading');
 
-        expect(prefix.exists()).toBe(true);
-        expect(prefix.classes()).toContain('custom-prefix');
+        expect(leading.exists()).toBe(true);
+        expect(leading.classes()).toContain('custom-leading');
       });
     });
 
-    describe('When suffixClass is provided', () => {
-      it('should apply custom class to the suffix wrapper', () => {
-        mockProps = { suffixClass: 'custom-suffix' };
-        mockSlots = { suffix: 'Suffix content' };
+    describe('When trailingClass is provided', () => {
+      it('should apply custom class to the trailing wrapper', () => {
+        mockProps = { trailingClass: 'custom-trailing' };
+        mockSlots = { trailing: 'Trailing content' };
 
         updateWrapper();
 
-        const suffix = tab.find('.d-btn__suffix');
+        const trailing = tab.find('.d-btn__trailing');
 
-        expect(suffix.exists()).toBe(true);
-        expect(suffix.classes()).toContain('custom-suffix');
+        expect(trailing.exists()).toBe(true);
+        expect(trailing.classes()).toContain('custom-trailing');
+      });
+    });
+
+    describe('When leading slot is provided', () => {
+      it('should render leading content through to tab button', () => {
+        mockSlots = { leading: '<span data-qa="test-leading">L</span>' };
+
+        updateWrapper();
+
+        expect(tab.find('[data-qa="test-leading"]').exists()).toBe(true);
+      });
+    });
+
+    describe('When trailing slot is provided', () => {
+      it('should render trailing content through to tab button', () => {
+        mockSlots = { trailing: '<span data-qa="test-trailing">T</span>' };
+
+        updateWrapper();
+
+        expect(tab.find('[data-qa="test-trailing"]').exists()).toBe(true);
       });
     });
   });

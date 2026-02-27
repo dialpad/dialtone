@@ -305,31 +305,51 @@ describe('DtSplitButton Tests', function () {
       });
     });
 
-    describe('When alphaPrefixClass is provided', () => {
-      it('should apply custom class to the prefix wrapper', () => {
-        mockProps = { alphaPrefixClass: 'custom-prefix' };
-        mockSlots = { prefix: 'Prefix content' };
+    describe('When alphaLeadingClass is provided', () => {
+      it('should apply custom class to the leading wrapper', () => {
+        mockProps = { alphaLeadingClass: 'custom-leading' };
+        mockSlots = { leading: 'Leading content' };
 
         updateWrapper();
 
-        const prefix = alphaButton.find('.d-btn__prefix');
+        const leading = alphaButton.find('.d-btn__leading');
 
-        expect(prefix.exists()).toBe(true);
-        expect(prefix.classes()).toContain('custom-prefix');
+        expect(leading.exists()).toBe(true);
+        expect(leading.classes()).toContain('custom-leading');
       });
     });
 
-    describe('When alphaSuffixClass is provided', () => {
-      it('should apply custom class to the suffix wrapper', () => {
-        mockProps = { alphaSuffixClass: 'custom-suffix' };
-        mockSlots = { suffix: 'Suffix content' };
+    describe('When alphaTrailingClass is provided', () => {
+      it('should apply custom class to the trailing wrapper', () => {
+        mockProps = { alphaTrailingClass: 'custom-trailing' };
+        mockSlots = { trailing: 'Trailing content' };
 
         updateWrapper();
 
-        const suffix = alphaButton.find('.d-btn__suffix');
+        const trailing = alphaButton.find('.d-btn__trailing');
 
-        expect(suffix.exists()).toBe(true);
-        expect(suffix.classes()).toContain('custom-suffix');
+        expect(trailing.exists()).toBe(true);
+        expect(trailing.classes()).toContain('custom-trailing');
+      });
+    });
+
+    describe('When leading slot is provided', () => {
+      it('should render leading content through to alpha button', () => {
+        mockSlots = { leading: '<span data-qa="test-leading">L</span>' };
+
+        updateWrapper();
+
+        expect(alphaButton.find('[data-qa="test-leading"]').exists()).toBe(true);
+      });
+    });
+
+    describe('When trailing slot is provided', () => {
+      it('should render trailing content through to alpha button', () => {
+        mockSlots = { trailing: '<span data-qa="test-trailing">T</span>' };
+
+        updateWrapper();
+
+        expect(alphaButton.find('[data-qa="test-trailing"]').exists()).toBe(true);
       });
     });
   });

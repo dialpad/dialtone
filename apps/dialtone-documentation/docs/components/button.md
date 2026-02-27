@@ -1120,6 +1120,69 @@ vueCode='
 '
 showHtmlWarning />
 
+## Leading & Trailing
+
+Use the `#leading` and `#trailing` slots to render freeform content at the start or end of a button — outside the label area but inside the button's border. Common use cases include badges, count indicators, or keyboard shortcut hints. Use `leading-class` and `trailing-class` to add padding or styling to the slot containers.
+
+<dt-notice
+  kind="info"
+  title="Info"
+>
+  This is not to be confused with `#icon` slots, which are specifically for icons. `leading` and `trailing` are essentially freeform.
+</dt-notice>
+
+### Leading
+
+<code-well-header>
+  <dt-button kind="muted" importance="outlined" leading-class="d-pl12" ref="leadingExample">
+    Caution
+    <template #leading>
+      <span class="d-bgc-critical-strong d-bar4 d-w12 d-h12"></span>
+    </template>
+  </dt-button>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.leadingExample'
+vueCode='
+<dt-button kind="muted" importance="outlined" leading-class="d-pl12">
+  Caution
+  <template #leading>
+    <span class="d-bgc-critical-strong d-bar4 d-w12 d-h12"></span>
+  </template>
+</dt-button>
+'
+showHtmlWarning />
+
+### Trailing
+
+<code-well-header>
+  <dt-button size="sm" kind="muted" importance="outlined" trailing-class="d-pr4" ref="trailingExample">
+    Copy
+    <template #icon="{ iconSize }">
+      <dt-icon name="copy" :size="iconSize" />
+    </template>
+    <template #trailing>
+      <dt-keyboard-shortcut shortcut="{cmd}+C" />
+    </template>
+  </dt-button>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.trailingExample'
+vueCode='
+<dt-button size="sm" kind="muted" importance="outlined" trailing-class="d-pr4">
+  Copy
+  <template #icon="{ iconSize }">
+    <dt-icon name="copy" :size="iconSize" />
+  </template>
+  <template #trailing>
+    <dt-keyboard-shortcut shortcut="{cmd}+C" />
+  </template>
+</dt-button>
+'
+showHtmlWarning />
+
 ## Split Button
 
 <dt-notice

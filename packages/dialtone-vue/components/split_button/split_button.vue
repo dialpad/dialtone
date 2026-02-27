@@ -17,18 +17,18 @@
         />
       </template>
       <template
-        v-if="$slots.prefix"
-        #prefix
+        v-if="$slots.leading"
+        #leading
       >
-        <!-- @slot Prefix slot, forwarded to the alpha button's prefix slot -->
-        <slot name="prefix" />
+        <!-- @slot Leading slot, forwarded to the alpha button's leading slot -->
+        <slot name="leading" />
       </template>
       <template
-        v-if="$slots.suffix"
-        #suffix
+        v-if="$slots.trailing"
+        #trailing
       >
-        <!-- @slot Suffix slot, forwarded to the alpha button's suffix slot -->
-        <slot name="suffix" />
+        <!-- @slot Trailing slot, forwarded to the alpha button's trailing slot -->
+        <slot name="trailing" />
       </template>
       <!-- @slot Default content slot -->
       <slot name="default" />
@@ -143,17 +143,17 @@ export default {
     },
 
     /**
-     * Used to customize the alpha prefix container
+     * Used to customize the alpha leading container
      */
-    alphaPrefixClass: {
+    alphaLeadingClass: {
       type: [String, Array, Object],
       default: '',
     },
 
     /**
-     * Used to customize the alpha suffix container
+     * Used to customize the alpha trailing container
      */
-    alphaSuffixClass: {
+    alphaTrailingClass: {
       type: [String, Array, Object],
       default: '',
     },
@@ -354,8 +354,8 @@ export default {
         disabled: this.disabled || this.alphaDisabled,
         iconPosition: this.alphaIconPosition,
         labelClass: this.alphaLabelClass,
-        prefixClass: this.alphaPrefixClass,
-        suffixClass: this.alphaSuffixClass,
+        leadingClass: this.alphaLeadingClass,
+        trailingClass: this.alphaTrailingClass,
         loading: this.alphaLoading,
         importance: this.importance,
         kind: this.kind,

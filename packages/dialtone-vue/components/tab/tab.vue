@@ -16,8 +16,8 @@
     :aria-label="label"
     :aria-disabled="isDisabled ? 'true' : undefined"
     :label-class="labelClass"
-    :prefix-class="prefixClass"
-    :suffix-class="suffixClass"
+    :leading-class="leadingClass"
+    :trailing-class="trailingClass"
     data-qa="dt-tab"
     :tabindex="isSelected ? '0' : '-1'"
     v-bind="$attrs"
@@ -34,16 +34,16 @@
       />
     </template>
     <template
-      v-if="$slots.prefix"
-      #prefix
+      v-if="$slots.leading"
+      #leading
     >
-      <slot name="prefix" />
+      <slot name="leading" />
     </template>
     <template
-      v-if="$slots.suffix"
-      #suffix
+      v-if="$slots.trailing"
+      #trailing
     >
-      <slot name="suffix" />
+      <slot name="trailing" />
     </template>
     <!-- @slot default slot, defaults contains dt-button -->
     <slot />
@@ -128,17 +128,17 @@ export default {
     },
 
     /**
-     * Used to customize the prefix container
+     * Used to customize the leading container
      */
-    prefixClass: {
+    leadingClass: {
       type: [String, Array, Object],
       default: '',
     },
 
     /**
-     * Used to customize the suffix container
+     * Used to customize the trailing container
      */
-    suffixClass: {
+    trailingClass: {
       type: [String, Array, Object],
       default: '',
     },

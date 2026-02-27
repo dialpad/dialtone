@@ -270,24 +270,29 @@
 }
 
 //  ============================================================================
-//  $   BUTTON PREFIX/SUFFIX
+//  $   BUTTON LEADING/TRAILING
 //  ----------------------------------------------------------------------------
-.d-btn__prefix,
-.d-btn__suffix {
+.d-btn__leading,
+.d-btn__trailing {
   display: inline-flex;
   align-items: center;
   align-self: stretch;
   margin-block: calc(-1 * var(--button-padding-y));
+
+  .d-btn:disabled &,
+  .d-btn--disabled & {
+    opacity: .6;
+  }
 }
 
-.d-btn__prefix {
+.d-btn__leading {
   order: -1;
   margin-inline: calc(-1 * var(--button-padding-x)) var(--dt-size-200);
   border-start-start-radius: calc(var(--button-border-radius) - 1px);
   border-end-start-radius: calc(var(--button-border-radius) - 1px);
 }
 
-.d-btn__suffix {
+.d-btn__trailing {
   margin-inline: var(--dt-size-200) calc(-1 * var(--button-padding-x));
   border-start-end-radius: calc(var(--button-border-radius) - 1px);
   border-end-end-radius: calc(var(--button-border-radius) - 1px);

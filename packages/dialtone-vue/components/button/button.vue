@@ -12,12 +12,12 @@
     :aria-label="loading ? i18n.$t('DIALTONE_LOADING') : $attrs['aria-label']"
     v-on="buttonListeners"
   >
-    <!-- @slot Optional prefix content at the very start of the button -->
     <span
-      v-if="hasSlotContent($slots.prefix)"
-      :class="['d-btn__prefix', prefixClass]"
+      v-if="hasSlotContent($slots.leading)"
+      :class="['d-btn__leading', leadingClass]"
     >
-      <slot name="prefix" />
+      <!-- @slot Optional leading content at the start of the button, such as badges or indicators -->
+      <slot name="leading" />
     </span>
     <!-- NOTE(cormac): This span is needed since we can't apply styles to slots. -->
     <span
@@ -49,12 +49,12 @@
       <!-- @slot Content within button -->
       <slot />
     </span>
-    <!-- @slot Optional suffix content at the very end of the button -->
     <span
-      v-if="hasSlotContent($slots.suffix)"
-      :class="['d-btn__suffix', suffixClass]"
+      v-if="hasSlotContent($slots.trailing)"
+      :class="['d-btn__trailing', trailingClass]"
     >
-      <slot name="suffix" />
+      <!-- @slot Optional trailing content at the end of the button, such as badges or indicators -->
+      <slot name="trailing" />
     </span>
   </button>
 </template>
@@ -216,17 +216,17 @@ export default {
     },
 
     /**
-     * Used to customize the prefix container
+     * Used to customize the leading container
      */
-    prefixClass: {
+    leadingClass: {
       type: [String, Array, Object],
       default: '',
     },
 
     /**
-     * Used to customize the suffix container
+     * Used to customize the trailing container
      */
-    suffixClass: {
+    trailingClass: {
       type: [String, Array, Object],
       default: '',
     },

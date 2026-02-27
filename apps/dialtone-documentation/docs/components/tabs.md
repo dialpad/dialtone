@@ -340,6 +340,67 @@ vueCode='
 '
 showHtmlWarning />
 
+## Leading & Trailing
+
+Use the `#leading` and `#trailing` slots on `dt-tab` to render content like badges or count indicators alongside tab labels. Use `leading-class` and `trailing-class` to adjust padding.
+
+<code-well-header>
+  <div class="d-w100p">
+    <dt-tab-group>
+      <template #tabs>
+        <dt-tab id="lt1" panel-id="lt2" selected leading-class="d-pl8" trailing-class="d-pr8">
+          <template #icon="{ iconSize }">
+            <dt-icon name="sun" :size="iconSize" />
+          </template>
+          Inbox
+          <template #leading>
+            <dt-badge kind="count" text="3" />
+          </template>
+          <template #trailing>
+            <dt-badge kind="count" text="12" />
+          </template>
+        </dt-tab>
+        <dt-tab id="lt3" panel-id="lt4" trailing-class="d-pr8">
+          Sent
+          <template #trailing>
+            <dt-badge kind="count" text="5" />
+          </template>
+        </dt-tab>
+        <dt-tab id="lt5" panel-id="lt6">
+          Drafts
+        </dt-tab>
+      </template>
+    </dt-tab-group>
+  </div>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-tab-group>
+  <template #tabs>
+    <dt-tab id="1" panel-id="2" selected trailing-class="d-pr8">
+      <template #icon="{ iconSize }">
+        <dt-icon name="sun" :size="iconSize" />
+      </template>
+      Inbox
+      <template #trailing>
+        <dt-badge kind="count" text="12" />
+      </template>
+    </dt-tab>
+    <dt-tab id="3" panel-id="4" trailing-class="d-pr8">
+      Sent
+      <template #trailing>
+        <dt-badge kind="count" text="5" />
+      </template>
+    </dt-tab>
+    <dt-tab id="5" panel-id="6">
+      Drafts
+    </dt-tab>
+  </template>
+</dt-tab-group>
+'
+showHtmlWarning />
+
 ## Advanced Usages
 
 ### Automatic Mode

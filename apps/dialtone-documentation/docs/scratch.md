@@ -22,8 +22,8 @@ const borderless = ref(false);
 const outlined = ref(false);
 const muted = ref(false);
 const showIcon = ref(true);
-const showPrefix = ref(true);
-const showSuffix = ref(true);
+const showLeading = ref(true);
+const showTrailing = ref(true);
 const size = ref('md');
 const selectOnFocus = ref(false);
 const isDisabled = ref(false);
@@ -146,43 +146,43 @@ const isDisabled = ref(false);
   </dt-stack>
   <dt-stack gap="500">
     <dt-text as="h1" kind="headline" size="xl">
-      Button: Prefix/Suffix
+      Button: Leading/Trailing
     </dt-text>
     <dt-text as="p" kind="body" size="lg">
       Freeform elements that are rendered before/after the button content.
     </dt-text>
     <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
-      <dt-button kind="muted" importance="outlined" size="xs" suffix-class="d-pr1">
+      <dt-button kind="muted" importance="outlined" size="xs" trailing-class="d-pr1">
         Place Call
-        <template #suffix>
+        <template #trailing>
           <dt-badge text="Label" />
         </template>
         <template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template>
       </dt-button>
-      <dt-button kind="muted" importance="outlined" size="sm" suffix-class="d-pr4">
+      <dt-button kind="muted" importance="outlined" size="sm" trailing-class="d-pr4">
         Place Call
-        <template #suffix>
+        <template #trailing>
           <dt-badge text="Label" />
         </template>
         <template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template>
       </dt-button>
-      <dt-button kind="muted" importance="outlined" size="md" suffix-class="d-pr8">
+      <dt-button kind="muted" importance="outlined" size="md" trailing-class="d-pr8">
         Place Call
-        <template #suffix>
+        <template #trailing>
           <dt-badge text="Label" />
         </template>
         <template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template>
       </dt-button>
-      <dt-button kind="muted" importance="outlined" size="lg" suffix-class="d-pr10">
+      <dt-button kind="muted" importance="outlined" size="lg" trailing-class="d-pr10">
         Place Call
-        <template #suffix>
+        <template #trailing>
           <dt-badge text="Label" />
         </template>
         <template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template>
       </dt-button>
-      <dt-button kind="muted" importance="outlined" size="xl" suffix-class="d-pr12">
+      <dt-button kind="muted" importance="outlined" size="xl" trailing-class="d-pr12">
         Place Call
-        <template #suffix>
+        <template #trailing>
           <dt-badge text="Label" />
         </template>
         <template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template>
@@ -344,11 +344,11 @@ const isDisabled = ref(false);
       <dt-checkbox v-model="showIcon">
         Show Icon
       </dt-checkbox>
-      <dt-checkbox v-model="showPrefix">
-        Show Prefix
+      <dt-checkbox v-model="showLeading">
+        Show Leading
       </dt-checkbox>
-      <dt-checkbox v-model="showSuffix">
-        Show Suffix
+      <dt-checkbox v-model="showTrailing">
+        Show Trailing
       </dt-checkbox>
       <dt-checkbox v-model="selectOnFocus">
         Select on focus
@@ -367,27 +367,27 @@ const isDisabled = ref(false);
     </dt-stack>
     <dt-tab-group :borderless="borderless" :kind="muted ? 'muted' : 'default'" :outlined="outlined" :size="size" :activation-mode="selectOnFocus ? 'auto' : 'manual'">
       <template #tabs>
-        <dt-tab id="1" panel-id="2" selected prefix-class="d-pl8" suffix-class="d-pr8">
+        <dt-tab id="1" panel-id="2" selected leading-class="d-pl8" trailing-class="d-pr8">
           <template v-if="showIcon" #icon="{ iconSize }">
             <dt-icon name="sun" :size="iconSize" />
           </template>
           Argentina
-          <template v-if="showPrefix" #prefix>
+          <template v-if="showLeading" #leading>
             <dt-badge kind="count" text="1" />
           </template>
-          <template v-if="showSuffix" #suffix>
+          <template v-if="showTrailing" #trailing>
             <dt-badge kind="count" text="1" />
           </template>
         </dt-tab>
-        <dt-tab id="3" panel-id="4" prefix-class="d-pl8" suffix-class="d-pr8">
+        <dt-tab id="3" panel-id="4" leading-class="d-pl8" trailing-class="d-pr8">
           <template v-if="showIcon" #icon="{ iconSize }">
             <dt-icon name="keypad" :size="iconSize" />
           </template>
           United States
-          <template v-if="showPrefix" #prefix>
+          <template v-if="showLeading" #leading>
             <dt-badge kind="count" text="1" />
           </template>
-          <template v-if="showSuffix" #suffix>
+          <template v-if="showTrailing" #trailing>
             <dt-badge kind="count" text="1" />
           </template>
         </dt-tab>

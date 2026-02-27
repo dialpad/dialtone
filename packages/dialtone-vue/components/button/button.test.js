@@ -453,46 +453,46 @@ describe('DtButton Tests', () => {
     });
   });
 
-  describe('Prefix and suffix slots', () => {
-    it('should render prefix when provided', () => {
-      mockSlots = { prefix: '<span data-qa="test-prefix">P</span>' };
+  describe('Leading and trailing slots', () => {
+    it('should render leading when provided', () => {
+      mockSlots = { leading: '<span data-qa="test-leading">L</span>' };
 
       updateWrapper();
 
-      expect(wrapper.find('[data-qa="test-prefix"]').exists()).toBe(true);
+      expect(wrapper.find('[data-qa="test-leading"]').exists()).toBe(true);
     });
 
-    it('should render suffix when provided', () => {
-      mockSlots = { suffix: '<span data-qa="test-suffix">S</span>' };
+    it('should render trailing when provided', () => {
+      mockSlots = { trailing: '<span data-qa="test-trailing">T</span>' };
 
       updateWrapper();
 
-      expect(wrapper.find('[data-qa="test-suffix"]').exists()).toBe(true);
+      expect(wrapper.find('[data-qa="test-trailing"]').exists()).toBe(true);
     });
 
-    it('should apply prefixClass to the prefix wrapper', () => {
-      mockProps = { prefixClass: 'my-prefix' };
-      mockSlots = { prefix: '<span>P</span>' };
+    it('should apply leadingClass to the leading wrapper', () => {
+      mockProps = { leadingClass: 'my-leading' };
+      mockSlots = { leading: '<span>L</span>' };
 
       updateWrapper();
 
-      expect(wrapper.find('.d-btn__prefix').classes()).toContain('my-prefix');
+      expect(wrapper.find('.d-btn__leading').classes()).toContain('my-leading');
     });
 
-    it('should apply suffixClass to the suffix wrapper', () => {
-      mockProps = { suffixClass: 'my-suffix' };
-      mockSlots = { suffix: '<span>S</span>' };
+    it('should apply trailingClass to the trailing wrapper', () => {
+      mockProps = { trailingClass: 'my-trailing' };
+      mockSlots = { trailing: '<span>T</span>' };
 
       updateWrapper();
 
-      expect(wrapper.find('.d-btn__suffix').classes()).toContain('my-suffix');
+      expect(wrapper.find('.d-btn__trailing').classes()).toContain('my-trailing');
     });
 
-    it('should not render prefix or suffix by default', () => {
+    it('should not render leading or trailing by default', () => {
       updateWrapper();
 
-      expect(wrapper.find('[data-qa="test-prefix"]').exists()).toBe(false);
-      expect(wrapper.find('[data-qa="test-suffix"]').exists()).toBe(false);
+      expect(wrapper.find('[data-qa="test-leading"]').exists()).toBe(false);
+      expect(wrapper.find('[data-qa="test-trailing"]').exists()).toBe(false);
     });
   });
 

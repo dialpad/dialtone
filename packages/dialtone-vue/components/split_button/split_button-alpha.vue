@@ -11,8 +11,8 @@
     :importance="importance"
     :kind="kind"
     :label-class="labelClass"
-    :prefix-class="prefixClass"
-    :suffix-class="suffixClass"
+    :leading-class="leadingClass"
+    :trailing-class="trailingClass"
     :loading="loading"
     :size="size"
   >
@@ -23,16 +23,16 @@
       />
     </template>
     <template
-      v-if="$slots.prefix"
-      #prefix
+      v-if="$slots.leading"
+      #leading
     >
-      <slot name="prefix" />
+      <slot name="leading" />
     </template>
     <template
-      v-if="$slots.suffix"
-      #suffix
+      v-if="$slots.trailing"
+      #trailing
     >
-      <slot name="suffix" />
+      <slot name="trailing" />
     </template>
     <slot name="default" />
   </dt-button>
@@ -83,17 +83,17 @@ export default {
     },
 
     /**
-     * Used to customize the prefix container
+     * Used to customize the leading container
      */
-    prefixClass: {
+    leadingClass: {
       type: [String, Array, Object],
       default: '',
     },
 
     /**
-     * Used to customize the suffix container
+     * Used to customize the trailing container
      */
-    suffixClass: {
+    trailingClass: {
       type: [String, Array, Object],
       default: '',
     },
