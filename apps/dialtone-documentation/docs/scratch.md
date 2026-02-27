@@ -146,6 +146,91 @@ const isDisabled = ref(false);
   </dt-stack>
   <dt-stack gap="500">
     <dt-text as="h1" kind="headline" size="xl">
+      Input/Select: change label size
+    </dt-text>
+    <dt-text as="p" kind="body" size="lg">
+      There's no current convenient way to change the label size of inputs/selects.
+    </dt-text>
+    <dt-stack direction="row" gap="500">
+      <dt-stack gap="400" class="d-fl1">
+        <dt-input label="Extra Small" type="text" placeholder="Placeholder" size="xs" />
+        <dt-input label="Small" type="text" placeholder="Placeholder" size="sm" />
+        <dt-input label="Medium" type="text" placeholder="Placeholder" size="md" />
+        <dt-input label="Large" type="text" placeholder="Placeholder" size="lg" />
+        <dt-input label="Extra large" type="text" placeholder="Placeholder" size="xl" />
+      </dt-stack>
+      <dt-stack gap="400" class="d-fl1">
+        <!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
+        <dt-select-menu
+          :options="[
+            { value: ``, label: `Please select one` },
+            { value: `1`, label: `Option 1` },
+            { value: `2`, label: `Option 2` },
+            { value: `3`, label: `Option 3` },
+          ]"
+          label="Label"
+          size="xs"
+          :model-value="modelValue"
+          @input="onInput"
+          @change="onChange"
+        />
+        <dt-select-menu
+          :options="[
+            { value: ``, label: `Please select one` },
+            { value: `1`, label: `Option 1` },
+            { value: `2`, label: `Option 2` },
+            { value: `3`, label: `Option 3` },
+          ]"
+          label="Label"
+          size="sm"
+          :model-value="modelValue"
+          @input="onInput"
+          @change="onChange"
+        />
+        <dt-select-menu
+          :options="[
+            { value: ``, label: `Please select one` },
+            { value: `1`, label: `Option 1` },
+            { value: `2`, label: `Option 2` },
+            { value: `3`, label: `Option 3` },
+          ]"
+          label="Label"
+          size="md"
+          :model-value="modelValue"
+          @input="onInput"
+          @change="onChange"
+        />
+        <dt-select-menu
+          :options="[
+            { value: ``, label: `Please select one` },
+            { value: `1`, label: `Option 1` },
+            { value: `2`, label: `Option 2` },
+            { value: `3`, label: `Option 3` },
+          ]"
+          label="Label"
+          size="lg"
+          :model-value="modelValue"
+          @input="onInput"
+          @change="onChange"
+        />
+        <dt-select-menu
+          :options="[
+            { value: ``, label: `Please select one` },
+            { value: `1`, label: `Option 1` },
+            { value: `2`, label: `Option 2` },
+            { value: `3`, label: `Option 3` },
+          ]"
+          label="Label"
+          size="xl"
+          :model-value="modelValue"
+          @input="onInput"
+          @change="onChange"
+        />
+      </dt-stack>
+    </dt-stack>
+  </dt-stack>
+  <dt-stack gap="500">
+    <dt-text as="h1" kind="headline" size="xl">
       Button: Leading/Trailing
     </dt-text>
     <dt-text as="p" kind="body" size="lg">

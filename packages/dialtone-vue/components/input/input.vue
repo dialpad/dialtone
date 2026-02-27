@@ -12,7 +12,7 @@
     >
       <!-- @slot Slot for label, defaults to label prop -->
       <slot name="labelSlot">
-        <div
+        <span
           v-if="labelVisible && label"
           ref="label"
           data-qa="dt-input-label"
@@ -23,7 +23,7 @@
           ]"
         >
           {{ label }}
-        </div>
+        </span>
       </slot>
       <div
         v-if="hasSlotContent($slots.description) || description || shouldValidateLength"
