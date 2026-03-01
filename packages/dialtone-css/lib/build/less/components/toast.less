@@ -38,7 +38,7 @@
     pointer-events: all;
 
     //  If there's a link in a toast, break the url so it wraps
-    > a {
+    > :where(a) {
         word-break: break-all;
     }
 
@@ -62,7 +62,7 @@
     display: flex;
     align-items: start;
 
-    .d-notice__actions button:first-child {
+    .d-notice__actions :where(button:first-child) {
         margin-inline-start: var(--dt-size-600); // 32
     }
 }
@@ -159,7 +159,7 @@
   pointer-events: all;
 
   //  If there's a link in a toast, break the url so it wraps
-  > a {
+  > :where(a) {
     word-break: break-all;
   }
 
@@ -211,7 +211,7 @@
   inline-size: var(--dt-size-100-percent);
 
 
-  .d-notice__actions button:first-child {
+  .d-notice__actions :where(button:first-child) {
     margin-inline-start: var(--dt-size-600); // 32
   }
 }
