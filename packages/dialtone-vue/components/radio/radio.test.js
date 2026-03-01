@@ -127,6 +127,26 @@ describe('DtRadio Tests', () => {
       });
     });
 
+    describe('When labelStrength is provided', () => {
+      it('should override the default label strength', () => {
+        mockProps = { labelStrength: 'bold' };
+
+        updateWrapper();
+
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.props('strength')).toBe('bold');
+      });
+
+      it('should default to normal strength when not provided', () => {
+        updateWrapper();
+
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.props('strength')).toBe('normal');
+      });
+    });
+
     describe('When labelSize is provided', () => {
       it('should override the default label size', () => {
         mockProps = { labelSize: 'lg' };

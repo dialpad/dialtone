@@ -22,7 +22,7 @@
         as="div"
         kind="label"
         :size="resolvedLabelSize"
-        strength="normal"
+        :strength="labelStrength ?? 'normal'"
         :tone="internalDisabled ? 'disabled' : 'primary'"
         :class="[labelClass, 'd-radio__copy d-radio__label']"
         v-bind="labelChildProps"
@@ -73,7 +73,7 @@ import {
 } from '@/common/mixins/input';
 import { RADIO_INPUT_VALIDATION_CLASSES } from './radio_constants';
 import { DtValidationMessages } from '../validation_messages';
-import { DtText, TEXT_SIZE_MODIFIERS } from '@/components/text';
+import { DtText, TEXT_SIZE_MODIFIERS, TEXT_STRENGTH_MODIFIERS } from '@/components/text';
 import { hasSlotContent, removeClassStyleAttrs, addClassStyleAttrs } from '@/common/utils';
 
 /**
@@ -117,6 +117,16 @@ export default {
       type: String,
       default: null,
       validator: (s) => TEXT_SIZE_MODIFIERS.label.includes(s),
+    },
+
+    /**
+     * Overrides the label font weight.
+     * @values bold, semibold, medium, normal
+     */
+    labelStrength: {
+      type: String,
+      default: null,
+      validator: (s) => Object.keys(TEXT_STRENGTH_MODIFIERS).includes(s),
     },
   },
 

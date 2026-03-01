@@ -23,7 +23,7 @@
         as="div"
         kind="label"
         :size="resolvedLabelSize"
-        strength="normal"
+        :strength="labelStrength ?? 'normal'"
         :tone="internalDisabled ? 'disabled' : 'primary'"
         :class="[labelClass, 'd-checkbox__copy d-checkbox__label']"
         v-bind="labelChildProps"
@@ -76,7 +76,7 @@ import {
 import { removeClassStyleAttrs, addClassStyleAttrs } from '@/common/utils';
 import { CHECKBOX_INPUT_VALIDATION_CLASSES } from './checkbox_constants';
 import { DtValidationMessages } from '../validation_messages';
-import { DtText, TEXT_SIZE_MODIFIERS } from '@/components/text';
+import { DtText, TEXT_SIZE_MODIFIERS, TEXT_STRENGTH_MODIFIERS } from '@/components/text';
 
 /**
  * Checkboxes are control elements that allow the user to make a selection.They are typically used in a
@@ -111,6 +111,16 @@ export default {
       type: String,
       default: null,
       validator: (s) => TEXT_SIZE_MODIFIERS.label.includes(s),
+    },
+
+    /**
+     * Overrides the label font weight.
+     * @values bold, semibold, medium, normal
+     */
+    labelStrength: {
+      type: String,
+      default: null,
+      validator: (s) => Object.keys(TEXT_STRENGTH_MODIFIERS).includes(s),
     },
   },
 
