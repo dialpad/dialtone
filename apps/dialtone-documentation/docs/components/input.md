@@ -50,16 +50,16 @@ We offer different sizes for instances in which the interface requires a smaller
 
 <code-well-header>
   <div class="d-d-grid d-g16 d-g-cols2 d-w100p">
-    <dt-input label="Extra Small" type="text" placeholder="Placeholder" size="xs" />
-    <dt-input label="Extra Small" type="textarea" placeholder="Placeholder" size="xs" />
-    <dt-input label="Small" type="text" placeholder="Placeholder" size="sm" />
-    <dt-input label="Small" type="textarea" placeholder="Placeholder" size="sm" />
-    <dt-input label="Medium" type="text" placeholder="Placeholder" size="md" />
-    <dt-input label="Medium" type="textarea" placeholder="Placeholder" size="md" />
-    <dt-input label="Large" type="text" placeholder="Placeholder" size="lg" />
-    <dt-input label="Large" type="textarea" placeholder="Placeholder" size="lg" />
-    <dt-input label="Extra large" type="text" placeholder="Placeholder" size="xl" />
-    <dt-input label="Extra large" type="textarea" placeholder="Placeholder" size="xl" />
+    <dt-input label="Label" type="text" placeholder="Placeholder" size="xs" />
+    <dt-input label="Label" type="textarea" placeholder="Placeholder" size="xs" />
+    <dt-input label="Label" type="text" placeholder="Placeholder" size="sm" />
+    <dt-input label="Label" type="textarea" placeholder="Placeholder" size="sm" />
+    <dt-input label="Label" type="text" placeholder="Placeholder" size="md" />
+    <dt-input label="Label" type="textarea" placeholder="Placeholder" size="md" />
+    <dt-input label="Label" type="text" placeholder="Placeholder" size="lg" />
+    <dt-input label="Label" type="textarea" placeholder="Placeholder" size="lg" />
+    <dt-input label="Label" type="text" placeholder="Placeholder" size="xl" />
+    <dt-input label="Label" type="textarea" placeholder="Placeholder" size="xl" />
   </div>
 </code-well-header>
 
