@@ -31,6 +31,8 @@ const labelSizeSelection = ref('default');
 const resolvedLabelSize = computed(() => labelSizeSelection.value === 'default' ? undefined : labelSizeSelection.value);
 const labelStrengthSelection = ref('default');
 const resolvedLabelStrength = computed(() => labelStrengthSelection.value === 'default' ? undefined : labelStrengthSelection.value);
+const showLabelClass = ref(false);
+const resolvedLabelClass = computed(() => showLabelClass.value ? 'd-bgc-warning' : undefined);
 </script>
 
 <dt-stack class="d-p32" gap="600">
@@ -334,7 +336,7 @@ const resolvedLabelStrength = computed(() => labelStrengthSelection.value === 'd
     <dt-text as="h1" kind="headline" size="xl">
       Label Size/Strength
     </dt-text>
-    <dt-stack gap="500" direction="row" class="d-bgc-moderate-opaque d-p12 d-bar8">
+    <dt-stack gap="500" direction="row" align="end" class="d-bgc-moderate-opaque d-p12 d-bar8">
       <dt-select-menu
         label="Label Size"
         :options="[
@@ -359,14 +361,15 @@ const resolvedLabelStrength = computed(() => labelStrengthSelection.value === 'd
         :model-value="labelStrengthSelection"
         @change="labelStrengthSelection = $event"
       />
+      <dt-button kind="muted" importance="outlined" @click="showLabelClass = !showLabelClass">Toggle `labelClass`</dt-button>
     </dt-stack>
     <dt-stack direction="row">
       <dt-stack gap="400" class="d-fl1">
-        <dt-input labelClass="d-ba" label="Extra Small" type="text" placeholder="Placeholder" size="xs" :label-size="resolvedLabelSize" :label-strength="resolvedLabelStrength" />
-        <dt-input label="Small" type="text" placeholder="Placeholder" size="sm" :label-size="resolvedLabelSize" :label-strength="resolvedLabelStrength" />
-        <dt-input label="Medium" type="text" placeholder="Placeholder" size="md" :label-size="resolvedLabelSize" :label-strength="resolvedLabelStrength" />
-        <dt-input label="Large" type="text" placeholder="Placeholder" size="lg" :label-size="resolvedLabelSize" :label-strength="resolvedLabelStrength" />
-        <dt-input label="Extra large" type="text" placeholder="Placeholder" size="xl" :label-size="resolvedLabelSize" :label-strength="resolvedLabelStrength" />
+        <dt-input label="Extra Small" type="text" placeholder="Placeholder" size="xs" :label-size="resolvedLabelSize" :label-strength="resolvedLabelStrength" :label-class="resolvedLabelClass" />
+        <dt-input label="Small" type="text" placeholder="Placeholder" size="sm" :label-size="resolvedLabelSize" :label-strength="resolvedLabelStrength" :label-class="resolvedLabelClass" />
+        <dt-input label="Medium" type="text" placeholder="Placeholder" size="md" :label-size="resolvedLabelSize" :label-strength="resolvedLabelStrength" :label-class="resolvedLabelClass" />
+        <dt-input label="Large" type="text" placeholder="Placeholder" size="lg" :label-size="resolvedLabelSize" :label-strength="resolvedLabelStrength" :label-class="resolvedLabelClass" />
+        <dt-input label="Extra large" type="text" placeholder="Placeholder" size="xl" :label-size="resolvedLabelSize" :label-strength="resolvedLabelStrength" :label-class="resolvedLabelClass" />
       </dt-stack>
       <dt-stack gap="400" class="d-fl1">
         <!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
@@ -381,6 +384,7 @@ const resolvedLabelStrength = computed(() => labelStrengthSelection.value === 'd
           size="xs"
           :label-size="resolvedLabelSize"
           :label-strength="resolvedLabelStrength"
+          :label-class="resolvedLabelClass"
           :model-value="modelValue"
           @input="onInput"
           @change="onChange"
@@ -396,6 +400,7 @@ const resolvedLabelStrength = computed(() => labelStrengthSelection.value === 'd
           size="sm"
           :label-size="resolvedLabelSize"
           :label-strength="resolvedLabelStrength"
+          :label-class="resolvedLabelClass"
           :model-value="modelValue"
           @input="onInput"
           @change="onChange"
@@ -411,6 +416,7 @@ const resolvedLabelStrength = computed(() => labelStrengthSelection.value === 'd
           size="md"
           :label-size="resolvedLabelSize"
           :label-strength="resolvedLabelStrength"
+          :label-class="resolvedLabelClass"
           :model-value="modelValue"
           @input="onInput"
           @change="onChange"
@@ -426,6 +432,7 @@ const resolvedLabelStrength = computed(() => labelStrengthSelection.value === 'd
           size="lg"
           :label-size="resolvedLabelSize"
           :label-strength="resolvedLabelStrength"
+          :label-class="resolvedLabelClass"
           :model-value="modelValue"
           @input="onInput"
           @change="onChange"
@@ -441,6 +448,7 @@ const resolvedLabelStrength = computed(() => labelStrengthSelection.value === 'd
           size="xl"
           :label-size="resolvedLabelSize"
           :label-strength="resolvedLabelStrength"
+          :label-class="resolvedLabelClass"
           :model-value="modelValue"
           @input="onInput"
           @change="onChange"
@@ -698,61 +706,64 @@ const resolvedLabelStrength = computed(() => labelStrengthSelection.value === 'd
     <dt-text as="p" kind="body" size="lg">
       Label size prop controls typography size via DtText. Alignment stays consistent across sizes.
     </dt-text>
-    <dt-stack gap="500" direction="row">
+    <dt-stack gap="500" direction="row" align="end" class="d-bgc-moderate-opaque d-p12 d-bar8">
+      <dt-button kind="muted" importance="outlined" @click="showLabelClass = !showLabelClass">Toggle `labelClass`</dt-button>
+    </dt-stack>
+    <dt-stack gap="500" direction="row" outline>
       <dt-stack gap="400" class="d-fl1">
         <dt-text as="h2" kind="headline" size="lg">Checkbox</dt-text>
-        <dt-checkbox label="Extra small label" label-size="xs" />
-        <dt-checkbox label="Small label" label-size="sm" />
-        <dt-checkbox label="Medium label (default)" />
-        <dt-checkbox label="Large label" label-size="lg" />
+        <dt-checkbox label="Extra small label" label-size="xs" :label-class="resolvedLabelClass" />
+        <dt-checkbox label="Small label" label-size="sm" :label-class="resolvedLabelClass" />
+        <dt-checkbox label="Medium label (default)" :label-class="resolvedLabelClass" />
+        <dt-checkbox label="Large label" label-size="lg" :label-class="resolvedLabelClass" />
       </dt-stack>
       <dt-stack gap="400" class="d-fl1">
         <dt-text as="h2" kind="headline" size="lg">Radio</dt-text>
-        <dt-radio label="Extra small label" value="1" label-size="xs" />
-        <dt-radio label="Small label" value="2" label-size="sm" />
-        <dt-radio label="Medium label (default)" value="3" />
-        <dt-radio label="Large label" value="4" label-size="lg" />
+        <dt-radio label="Extra small label" value="1" label-size="xs" :label-class="resolvedLabelClass" />
+        <dt-radio label="Small label" value="2" label-size="sm" :label-class="resolvedLabelClass" />
+        <dt-radio label="Medium label (default)" value="3" :label-class="resolvedLabelClass" />
+        <dt-radio label="Large label" value="4" label-size="lg" :label-class="resolvedLabelClass" />
       </dt-stack>
     </dt-stack>
-    <dt-stack gap="500">
+    <dt-stack gap="500" outline>
       <dt-text as="h2" kind="headline" size="lg">With descriptions</dt-text>
       <dt-stack gap="500" direction="row">
         <dt-stack gap="400" class="d-fl1">
-          <dt-checkbox label="Small label" label-size="sm">
+          <dt-checkbox label="Small label" label-size="sm" :label-class="resolvedLabelClass">
             <template #description>Description text alongside small label</template>
           </dt-checkbox>
-          <dt-checkbox label="Medium label">
+          <dt-checkbox label="Medium label" :label-class="resolvedLabelClass">
             <template #description>Description text alongside medium label</template>
           </dt-checkbox>
-          <dt-checkbox label="Large label" label-size="lg">
+          <dt-checkbox label="Large label" label-size="lg" :label-class="resolvedLabelClass">
             <template #description>Description text alongside large label</template>
           </dt-checkbox>
         </dt-stack>
         <dt-stack gap="400" class="d-fl1">
-          <dt-radio label="Small label" value="5" label-size="sm">
+          <dt-radio label="Small label" value="5" label-size="sm" :label-class="resolvedLabelClass">
             <template #description>Description text alongside small label</template>
           </dt-radio>
-          <dt-radio label="Medium label" value="6">
+          <dt-radio label="Medium label" value="6" :label-class="resolvedLabelClass">
             <template #description>Description text alongside medium label</template>
           </dt-radio>
-          <dt-radio label="Large label" value="7" label-size="lg">
+          <dt-radio label="Large label" value="7" label-size="lg" :label-class="resolvedLabelClass">
             <template #description>Description text alongside large label</template>
           </dt-radio>
         </dt-stack>
       </dt-stack>
     </dt-stack>
-    <dt-stack gap="500">
+    <dt-stack gap="500" outline>
       <dt-text as="h2" kind="headline" size="lg">Disabled</dt-text>
       <dt-stack gap="500" direction="row">
         <dt-stack gap="400" class="d-fl1">
-          <dt-checkbox label="Disabled small" label-size="sm" disabled />
-          <dt-checkbox label="Disabled medium" disabled />
-          <dt-checkbox label="Disabled large" label-size="lg" disabled />
+          <dt-checkbox label="Disabled small" label-size="sm" disabled :label-class="resolvedLabelClass" />
+          <dt-checkbox label="Disabled medium" disabled :label-class="resolvedLabelClass" />
+          <dt-checkbox label="Disabled large" label-size="lg" disabled :label-class="resolvedLabelClass" />
         </dt-stack>
         <dt-stack gap="400" class="d-fl1">
-          <dt-radio label="Disabled small" value="8" label-size="sm" disabled />
-          <dt-radio label="Disabled medium" value="9" disabled />
-          <dt-radio label="Disabled large" value="10" label-size="lg" disabled />
+          <dt-radio label="Disabled small" value="8" label-size="sm" disabled :label-class="resolvedLabelClass" />
+          <dt-radio label="Disabled medium" value="9" disabled :label-class="resolvedLabelClass" />
+          <dt-radio label="Disabled large" value="10" label-size="lg" disabled :label-class="resolvedLabelClass" />
         </dt-stack>
       </dt-stack>
     </dt-stack>
