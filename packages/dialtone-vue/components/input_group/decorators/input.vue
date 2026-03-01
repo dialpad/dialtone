@@ -18,7 +18,7 @@
         >
         <dt-text
           kind="label"
-          size="md"
+          :size="resolvedLabelSize"
           strength="normal"
           :tone="internalDisabled ? 'disabled' : 'primary'"
           class="d-radio__copy d-radio__label"
@@ -40,7 +40,7 @@ import {
   InputMixin,
   GroupableMixin,
 } from '@/common/mixins/input';
-import { DtText } from '@/components/text';
+import { DtText, TEXT_SIZE_MODIFIERS } from '@/components/text';
 
 export default {
   name: 'InputDecorator',
@@ -50,6 +50,18 @@ export default {
   mixins: [InputMixin, GroupableMixin],
 
   inheritAttrs: false,
+
+  props: {
+    /**
+     * Overrides the label text size.
+     * @values lg, md, sm, xs
+     */
+    labelSize: {
+      type: String,
+      default: null,
+      validator: (s) => TEXT_SIZE_MODIFIERS.label.includes(s),
+    },
+  },
 
   emits: [
     /**
@@ -69,6 +81,10 @@ export default {
   ],
 
   computed: {
+    resolvedLabelSize () {
+      return this.labelSize ?? 'md';
+    },
+
     inputValidationClass () {
       return RADIO_INPUT_VALIDATION_CLASSES[this.internalValidationState];
     },

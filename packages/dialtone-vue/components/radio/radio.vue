@@ -19,7 +19,7 @@
       <dt-text
         as="div"
         kind="label"
-        size="md"
+        :size="resolvedLabelSize"
         strength="normal"
         :tone="internalDisabled ? 'disabled' : 'primary'"
         :class="[labelClass, 'd-radio__copy d-radio__label']"
@@ -66,7 +66,7 @@ import {
 } from '@/common/mixins/input';
 import { RADIO_INPUT_VALIDATION_CLASSES } from './radio_constants';
 import { DtValidationMessages } from '../validation_messages';
-import { DtText } from '@/components/text';
+import { DtText, TEXT_SIZE_MODIFIERS } from '@/components/text';
 import { hasSlotContent, removeClassStyleAttrs, addClassStyleAttrs } from '@/common/utils';
 
 /**
@@ -91,6 +91,16 @@ export default {
     value: {
       type: [String, Number],
       default: '',
+    },
+
+    /**
+     * Overrides the label text size.
+     * @values lg, md, sm, xs
+     */
+    labelSize: {
+      type: String,
+      default: null,
+      validator: (s) => TEXT_SIZE_MODIFIERS.label.includes(s),
     },
   },
 
@@ -142,6 +152,10 @@ export default {
   },
 
   computed: {
+    resolvedLabelSize () {
+      return this.labelSize ?? 'md';
+    },
+
     inputValidationClass () {
       return RADIO_INPUT_VALIDATION_CLASSES[this.internalValidationState];
     },

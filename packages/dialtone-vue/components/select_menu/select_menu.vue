@@ -7,7 +7,7 @@
       <dt-text
         v-if="hasSlotContent($slots.label) || label"
         kind="label"
-        :size="labelTextSize"
+        :size="resolvedLabelSize"
         tone="secondary"
         as="div"
         :aria-details="labelAriaDetails"
@@ -83,7 +83,7 @@ import { warn } from 'vue';
 import {
   DESCRIPTION_SIZE_MODIFIERS,
 } from '@/common/constants';
-import { DtText } from '@/components/text';
+import { DtText, TEXT_SIZE_MODIFIERS } from '@/components/text';
 import {
   SELECT_SIZE_MODIFIERS,
   SELECT_STATE_MODIFIERS,
@@ -238,6 +238,17 @@ export default {
       type: [String, Number],
       default: '',
     },
+
+    /**
+     * Overrides the label text size. When not provided, the label size
+     * is derived from the component size prop.
+     * @values lg, md, sm, xs
+     */
+    labelSize: {
+      type: String,
+      default: null,
+      validator: (s) => TEXT_SIZE_MODIFIERS.label.includes(s),
+    },
   },
 
   emits: [
@@ -276,8 +287,8 @@ export default {
   },
 
   computed: {
-    labelTextSize () {
-      return this.size === 'xl' ? 'lg' : this.size;
+    resolvedLabelSize () {
+      return this.labelSize ?? (this.size === 'xl' ? 'lg' : this.size);
     },
 
     selectListeners () {

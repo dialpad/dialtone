@@ -591,6 +591,44 @@ vueCode='
 '
 showHtmlWarning />
 
+## Label size
+
+The label text size is automatically derived from the component's `size` prop. Use the `label-size` prop to override this when you need a different label size independent of the select size. For example, the default label size for a `size="md"` select menu is `md`, but you can override it from `xs` to `lg`.
+
+<code-well-header bgclass="d-bgc-primary" class="d-d-block">
+  <div class="d-stack16 d-w100p">
+    <example-select-menu label="Extra small label" label-size="xs" />
+    <example-select-menu label="Small label" label-size="sm" />
+    <example-select-menu label="Medium label (default)" label-size="md" />
+    <example-select-menu label="Large label" label-size="lg" />
+  </div>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-select-menu
+  :options="options"
+  label="Extra small label"
+  label-size="xs"
+/>
+<dt-select-menu
+  :options="options"
+  label="Small label"
+  label-size="sm"
+/>
+<dt-select-menu
+  :options="options"
+  label="Medium label (default)"
+  label-size="md"
+/>
+<dt-select-menu
+  :options="options"
+  label="Large label"
+  label-size="lg"
+/>
+'
+/>
+
 ## Accessibility
 
 - Make sure the `label` `for` attribute match the select `id`.

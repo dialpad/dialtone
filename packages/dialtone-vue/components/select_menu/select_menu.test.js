@@ -6,6 +6,7 @@ import {
   SELECT_SIZE_MODIFIERS,
   SELECT_STATE_MODIFIERS,
 } from './select_menu_constants';
+import { DtText } from '@/components/text';
 import DtSelectMenu from './select_menu.vue';
 
 const MOCK_LABEL = 'Label';
@@ -177,6 +178,28 @@ describe('DtSelectMenu Tests', () => {
 
       it('should have size variant class on select menu', () => {
         expect(selectWrapper.classes(SELECT_SIZE_MODIFIERS[MOCK_SIZE])).toBe(true);
+      });
+    });
+
+    describe('When labelSize is provided', () => {
+      it('should override the default label size', () => {
+        mockProps = { labelSize: 'xs' };
+
+        updateWrapper();
+
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.props('size')).toBe('xs');
+      });
+
+      it('should override the size-derived label size', () => {
+        mockProps = { size: 'xl', labelSize: 'sm' };
+
+        updateWrapper();
+
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.props('size')).toBe('sm');
       });
     });
 

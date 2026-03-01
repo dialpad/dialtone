@@ -21,7 +21,7 @@
         v-if="hasLabel"
         as="div"
         kind="label"
-        size="md"
+        :size="resolvedLabelSize"
         strength="normal"
         :tone="internalDisabled ? 'disabled' : 'primary'"
         :class="[labelClass, 'd-checkbox__copy d-checkbox__label']"
@@ -70,7 +70,7 @@ import {
 import { removeClassStyleAttrs, addClassStyleAttrs } from '@/common/utils';
 import { CHECKBOX_INPUT_VALIDATION_CLASSES } from './checkbox_constants';
 import { DtValidationMessages } from '../validation_messages';
-import { DtText } from '@/components/text';
+import { DtText, TEXT_SIZE_MODIFIERS } from '@/components/text';
 
 /**
  * Checkboxes are control elements that allow the user to make a selection.They are typically used in a
@@ -86,6 +86,18 @@ export default {
   mixins: [InputMixin, CheckableMixin, GroupableMixin, MessagesMixin],
 
   inheritAttrs: false,
+
+  props: {
+    /**
+     * Overrides the label text size.
+     * @values lg, md, sm, xs
+     */
+    labelSize: {
+      type: String,
+      default: null,
+      validator: (s) => TEXT_SIZE_MODIFIERS.label.includes(s),
+    },
+  },
 
   emits: [
     /**
@@ -121,6 +133,10 @@ export default {
   ],
 
   computed: {
+    resolvedLabelSize () {
+      return this.labelSize ?? 'md';
+    },
+
     inputValidationClass () {
       return CHECKBOX_INPUT_VALIDATION_CLASSES[this.internalValidationState];
     },

@@ -104,6 +104,24 @@ describe('DtCheckbox Tests', () => {
         expect(dtText.exists()).toBe(true);
         expect(dtText.props('tone')).toBe('primary');
       });
+
+      it('should render label DtText with default size="md"', () => {
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.props('size')).toBe('md');
+      });
+    });
+
+    describe('When labelSize is provided', () => {
+      it('should override the default label size', () => {
+        mockProps = { labelSize: 'lg' };
+
+        updateWrapper();
+
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.props('size')).toBe('lg');
+      });
     });
 
     describe('When a label prop is provided', () => {

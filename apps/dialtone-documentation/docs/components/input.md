@@ -768,6 +768,28 @@ vueCode='
 '
 showHtmlWarning />
 
+## Label size
+
+The label text size is automatically derived from the component's `size` prop. Use the `label-size` prop to override this when you need a different label size independent of the input size. For example, the default label size for a `size="md"` input is `md`, but you can override it from `xs` to `lg`.
+
+<code-well-header>
+  <div class="d-stack16 d-w100p">
+    <dt-input label="Extra small label" placeholder="Placeholder" label-size="xs" />
+    <dt-input label="Small label" placeholder="Placeholder" label-size="sm" />
+    <dt-input label="Medium label (default)" placeholder="Placeholder" label-size="md" />
+    <dt-input label="Large label" placeholder="Placeholder" label-size="lg" />
+  </div>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-input label="Extra small label" placeholder="Placeholder" label-size="xs" />
+<dt-input label="Small label" placeholder="Placeholder" label-size="sm" />
+<dt-input label="Medium label (default)" placeholder="Placeholder" label-size="md" />
+<dt-input label="Large label" placeholder="Placeholder" label-size="lg" />
+'
+/>
+
 ## Vue API
 
 <component-vue-api component-name="input" />

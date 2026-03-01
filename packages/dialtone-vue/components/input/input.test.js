@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils';
 import { INPUT_SIZES } from './input_constants';
 import { DtIcon } from '@/components/icon';
+import { DtText } from '@/components/text';
 import DtInput from './input.vue';
 
 const MOCK_INPUT_STUB = vi.fn();
@@ -462,6 +463,28 @@ describe('DtInput tests', () => {
         it('should add description size class', () => {
           expect(description.classes().includes(`d-description--${MOCK_INPUT_SIZE_EXTRA_LARGE}`)).toBe(true);
         });
+      });
+    });
+
+    describe('When labelSize is provided', () => {
+      it('should override the default label size', () => {
+        mockProps = { label: 'Label', labelSize: 'xs' };
+
+        updateWrapper();
+
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.props('size')).toBe('xs');
+      });
+
+      it('should override the size-derived label size', () => {
+        mockProps = { label: 'Label', size: 'xl', labelSize: 'sm' };
+
+        updateWrapper();
+
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.props('size')).toBe('sm');
       });
     });
 

@@ -17,7 +17,7 @@
           ref="label"
           data-qa="dt-input-label"
           kind="label"
-          :size="labelTextSize"
+          :size="resolvedLabelSize"
           tone="secondary"
           class="d-input__label-text"
         >
@@ -148,7 +148,7 @@ import {
   addClassStyleAttrs,
 } from '@/common/utils';
 import { DtValidationMessages } from '@/components/validation_messages';
-import { DtText } from '@/components/text';
+import { DtText, TEXT_SIZE_MODIFIERS } from '@/components/text';
 import { MessagesMixin } from '@/common/mixins/input';
 
 /**
@@ -307,6 +307,17 @@ export default {
     hidden: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * Overrides the label text size. When not provided, the label size
+     * is derived from the component size prop.
+     * @values lg, md, sm, xs
+     */
+    labelSize: {
+      type: String,
+      default: null,
+      validator: (s) => TEXT_SIZE_MODIFIERS.label.includes(s),
     },
   },
 
@@ -518,8 +529,8 @@ export default {
       );
     },
 
-    labelTextSize () {
-      return this.size === 'xl' ? 'lg' : this.size;
+    resolvedLabelSize () {
+      return this.labelSize ?? (this.size === 'xl' ? 'lg' : this.size);
     },
 
     sizeModifierClass () {

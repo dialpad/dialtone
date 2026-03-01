@@ -5,7 +5,7 @@ layout: Blank
 <!-- Just an empty utilitarian page to explore some in a completely blank context -->
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useThemeManager } from '@composables/useThemeManager';
 
 const {
@@ -27,6 +27,8 @@ const showTrailing = ref(true);
 const size = ref('md');
 const selectOnFocus = ref(false);
 const isDisabled = ref(false);
+const labelSizeSelection = ref('default');
+const resolvedLabelSize = computed(() => labelSizeSelection.value === 'default' ? undefined : labelSizeSelection.value);
 </script>
 
 <dt-stack class="d-p32" gap="600">
@@ -121,7 +123,9 @@ const isDisabled = ref(false);
     <dt-text as="p" kind="body" size="lg">
       Not just a matter of applying opacity to whole button, but w/ combination of `color-mix()` and tweaking existing DtButton css variables via `oklch()` of specific properties – separate opacity and saturation for border, bgc, fc, etc.
     </dt-text>
-    <dt-checkbox v-model="isDisabled">Disabled</dt-checkbox>
+    <dt-stack class="d-bgc-moderate-opaque d-p12 d-bar8">
+      <dt-checkbox v-model="isDisabled">Disabled</dt-checkbox>
+    </dt-stack>
     <dt-stack gap="400" ref="disabledAll">
       <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
         <dt-button :disabled="isDisabled"> Place Call <template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template></dt-button>
@@ -141,91 +145,6 @@ const isDisabled = ref(false);
       <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
         <dt-button :disabled="isDisabled" kind="muted" importance="clear"> Place Call <template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template></dt-button>
         <dt-button :disabled="isDisabled" kind="muted" importance="outlined"> Place Call <template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template></dt-button>
-      </dt-stack>
-    </dt-stack>
-  </dt-stack>
-  <dt-stack gap="500">
-    <dt-text as="h1" kind="headline" size="xl">
-      Input/Select: change label size
-    </dt-text>
-    <dt-text as="p" kind="body" size="lg">
-      There's no current convenient way to change the label size of inputs/selects.
-    </dt-text>
-    <dt-stack direction="row">
-      <dt-stack gap="400" class="d-fl1">
-        <dt-input label="Extra Small" type="text" placeholder="Placeholder" size="xs" />
-        <dt-input label="Small" type="text" placeholder="Placeholder" size="sm" />
-        <dt-input label="Medium" type="text" placeholder="Placeholder" size="md" />
-        <dt-input label="Large" type="text" placeholder="Placeholder" size="lg" />
-        <dt-input label="Extra large" type="text" placeholder="Placeholder" size="xl" />
-      </dt-stack>
-      <dt-stack gap="400" class="d-fl1">
-        <!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
-        <dt-select-menu
-          :options="[
-            { value: ``, label: `Please select one` },
-            { value: `1`, label: `Option 1` },
-            { value: `2`, label: `Option 2` },
-            { value: `3`, label: `Option 3` },
-          ]"
-          label="Label"
-          size="xs"
-          :model-value="modelValue"
-          @input="onInput"
-          @change="onChange"
-        />
-        <dt-select-menu
-          :options="[
-            { value: ``, label: `Please select one` },
-            { value: `1`, label: `Option 1` },
-            { value: `2`, label: `Option 2` },
-            { value: `3`, label: `Option 3` },
-          ]"
-          label="Label"
-          size="sm"
-          :model-value="modelValue"
-          @input="onInput"
-          @change="onChange"
-        />
-        <dt-select-menu
-          :options="[
-            { value: ``, label: `Please select one` },
-            { value: `1`, label: `Option 1` },
-            { value: `2`, label: `Option 2` },
-            { value: `3`, label: `Option 3` },
-          ]"
-          label="Label"
-          size="md"
-          :model-value="modelValue"
-          @input="onInput"
-          @change="onChange"
-        />
-        <dt-select-menu
-          :options="[
-            { value: ``, label: `Please select one` },
-            { value: `1`, label: `Option 1` },
-            { value: `2`, label: `Option 2` },
-            { value: `3`, label: `Option 3` },
-          ]"
-          label="Label"
-          size="lg"
-          :model-value="modelValue"
-          @input="onInput"
-          @change="onChange"
-        />
-        <dt-select-menu
-          :options="[
-            { value: ``, label: `Please select one` },
-            { value: `1`, label: `Option 1` },
-            { value: `2`, label: `Option 2` },
-            { value: `3`, label: `Option 3` },
-          ]"
-          label="Label"
-          size="xl"
-          :model-value="modelValue"
-          @input="onInput"
-          @change="onChange"
-        />
       </dt-stack>
     </dt-stack>
   </dt-stack>
@@ -411,12 +330,112 @@ const isDisabled = ref(false);
   </dt-stack>
   <dt-stack gap="500">
     <dt-text as="h1" kind="headline" size="xl">
+      Input/Select Label Size
+    </dt-text>
+    <dt-stack gap="500" direction="row" class="d-bgc-moderate-opaque d-p12 d-bar8">
+      <dt-select-menu
+        :options="[
+          { value: 'default', label: 'Default' },
+          { value: 'xs', label: 'xs' },
+          { value: 'sm', label: 'sm' },
+          { value: 'md', label: 'md' },
+          { value: 'lg', label: 'lg' },
+        ]"
+        :model-value="labelSizeSelection"
+        @change="labelSizeSelection = $event"
+      />
+    </dt-stack>
+    <dt-stack direction="row">
+      <dt-stack gap="400" class="d-fl1">
+        <dt-input label="Extra Small" type="text" placeholder="Placeholder" size="xs" :label-size="resolvedLabelSize" />
+        <dt-input label="Small" type="text" placeholder="Placeholder" size="sm" :label-size="resolvedLabelSize" />
+        <dt-input label="Medium" type="text" placeholder="Placeholder" size="md" :label-size="resolvedLabelSize" />
+        <dt-input label="Large" type="text" placeholder="Placeholder" size="lg" :label-size="resolvedLabelSize" />
+        <dt-input label="Extra large" type="text" placeholder="Placeholder" size="xl" :label-size="resolvedLabelSize" />
+      </dt-stack>
+      <dt-stack gap="400" class="d-fl1">
+        <!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
+        <dt-select-menu
+          :options="[
+            { value: ``, label: `Please select one` },
+            { value: `1`, label: `Option 1` },
+            { value: `2`, label: `Option 2` },
+            { value: `3`, label: `Option 3` },
+          ]"
+          label="Label"
+          size="xs"
+          :label-size="resolvedLabelSize"
+          :model-value="modelValue"
+          @input="onInput"
+          @change="onChange"
+        />
+        <dt-select-menu
+          :options="[
+            { value: ``, label: `Please select one` },
+            { value: `1`, label: `Option 1` },
+            { value: `2`, label: `Option 2` },
+            { value: `3`, label: `Option 3` },
+          ]"
+          label="Label"
+          size="sm"
+          :label-size="resolvedLabelSize"
+          :model-value="modelValue"
+          @input="onInput"
+          @change="onChange"
+        />
+        <dt-select-menu
+          :options="[
+            { value: ``, label: `Please select one` },
+            { value: `1`, label: `Option 1` },
+            { value: `2`, label: `Option 2` },
+            { value: `3`, label: `Option 3` },
+          ]"
+          label="Label"
+          size="md"
+          :label-size="resolvedLabelSize"
+          :model-value="modelValue"
+          @input="onInput"
+          @change="onChange"
+        />
+        <dt-select-menu
+          :options="[
+            { value: ``, label: `Please select one` },
+            { value: `1`, label: `Option 1` },
+            { value: `2`, label: `Option 2` },
+            { value: `3`, label: `Option 3` },
+          ]"
+          label="Label"
+          size="lg"
+          :label-size="resolvedLabelSize"
+          :model-value="modelValue"
+          @input="onInput"
+          @change="onChange"
+        />
+        <dt-select-menu
+          :options="[
+            { value: ``, label: `Please select one` },
+            { value: `1`, label: `Option 1` },
+            { value: `2`, label: `Option 2` },
+            { value: `3`, label: `Option 3` },
+          ]"
+          label="Label"
+          size="xl"
+          :label-size="resolvedLabelSize"
+          :model-value="modelValue"
+          @input="onInput"
+          @change="onChange"
+        />
+      </dt-stack>
+    </dt-stack>
+  </dt-stack>
+  <dt-stack gap="500">
+    <dt-text as="h1" kind="headline" size="xl">
       Tabs
     </dt-text>
     <dt-text as="p" kind="body" size="lg">
       Just straight up refactor to use DtButton instead of custom markup/style. Use mix of DtButton variants depending on `active`. Uses all DtButton sizes (currently at least).
     </dt-text>
-    <dt-stack gap="500" direction="row">
+    <dt-stack gap="500" direction="row" align="baseline" class="d-bgc-moderate-opaque d-p12 d-bar8">
       <dt-checkbox v-model="borderless">
         Borderless
       </dt-checkbox>
