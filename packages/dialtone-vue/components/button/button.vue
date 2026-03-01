@@ -21,7 +21,7 @@
     </span>
     <!-- NEW: Block-start icon slot (above label) -->
     <span
-      v-if="hasBlockStartIcon"
+      v-if="hasSlotContent($slots.blockStartIcon)"
       data-qa="dt-button-block-start-icon"
       :class="[
         'base-button__icon',
@@ -39,7 +39,7 @@
     </span>
     <!-- NEW: Start icon slot -->
     <span
-      v-if="hasStartIcon"
+      v-if="hasSlotContent($slots.startIcon)"
       data-qa="dt-button-start-icon"
       :class="[
         'base-button__icon',
@@ -85,16 +85,9 @@
       <!-- @slot Content within button -->
       <slot />
     </span>
-    <span
-      v-if="hasSlotContent($slots.trailing)"
-      :class="['d-btn__trailing', trailingClass]"
-    >
-      <!-- @slot Optional trailing content at the end of the button, such as badges or indicators -->
-      <slot name="trailing" />
-    </span>
     <!-- NEW: End icon slot -->
     <span
-      v-if="hasEndIcon"
+      v-if="hasSlotContent($slots.endIcon)"
       data-qa="dt-button-end-icon"
       :class="[
         'base-button__icon',
@@ -112,7 +105,7 @@
     </span>
     <!-- NEW: Block-end icon slot (below label) -->
     <span
-      v-if="hasBlockEndIcon"
+      v-if="hasSlotContent($slots.blockEndIcon)"
       data-qa="dt-button-block-end-icon"
       :class="[
         'base-button__icon',
@@ -127,6 +120,13 @@
         name="blockEndIcon"
         :icon-size="iconSize"
       />
+    </span>
+    <span
+      v-if="hasSlotContent($slots.trailing)"
+      :class="['d-btn__trailing', trailingClass]"
+    >
+      <!-- @slot Optional trailing content at the end of the button, such as badges or indicators -->
+      <slot name="trailing" />
     </span>
   </button>
 </template>
@@ -397,25 +397,6 @@ export default {
       return BUTTON_ICON_SIZES[this.size];
     },
 
-    hasStartIcon () {
-      return hasSlotContent(this.$slots.startIcon);
-    },
-
-    hasEndIcon () {
-      return hasSlotContent(this.$slots.endIcon);
-    },
-
-    hasBlockStartIcon () {
-      return hasSlotContent(this.$slots.blockStartIcon);
-    },
-
-    hasBlockEndIcon () {
-      return hasSlotContent(this.$slots.blockEndIcon);
-    },
-
-    hasNewIconSlots () {
-      return this.hasStartIcon || this.hasEndIcon || this.hasBlockStartIcon || this.hasBlockEndIcon;
-    },
   },
 
   watch: {
@@ -477,18 +458,38 @@ export default {
       return true;
     },
 
+    hasStartIcon () {
+      return hasSlotContent(this.$slots.startIcon);
+    },
+
+    hasEndIcon () {
+      return hasSlotContent(this.$slots.endIcon);
+    },
+
+    hasBlockStartIcon () {
+      return hasSlotContent(this.$slots.blockStartIcon);
+    },
+
+    hasBlockEndIcon () {
+      return hasSlotContent(this.$slots.blockEndIcon);
+    },
+
+    hasNewIconSlots () {
+      return this.hasStartIcon() || this.hasEndIcon() || this.hasBlockStartIcon() || this.hasBlockEndIcon();
+    },
+
     shouldRenderLegacyIcon () {
-      return hasSlotContent(this.$slots.icon) && !this.hasNewIconSlots && !this.link;
+      return hasSlotContent(this.$slots.icon) && !this.hasNewIconSlots() && !this.link;
     },
 
     isIconOnly () {
-      return (this.hasNewIconSlots || this.shouldRenderLegacyIcon()) && !hasSlotContent(this.$slots.default);
+      return (this.hasNewIconSlots() || this.shouldRenderLegacyIcon()) && !hasSlotContent(this.$slots.default);
     },
 
     isVerticalIconLayout () {
       if (this.isIconOnly()) return false;
-      if (this.hasBlockStartIcon || this.hasBlockEndIcon) return true;
-      return !this.hasNewIconSlots && ['top', 'bottom'].includes(this.iconPosition);
+      if (this.hasBlockStartIcon() || this.hasBlockEndIcon()) return true;
+      return !this.hasNewIconSlots() && ['top', 'bottom'].includes(this.iconPosition);
     },
   },
 };

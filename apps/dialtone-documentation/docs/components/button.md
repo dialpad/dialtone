@@ -1172,7 +1172,7 @@ showHtmlWarning />
 ### Trailing
 
 <code-well-header>
-  <dt-button size="sm" kind="muted" importance="outlined" trailing-class="d-pr4" ref="trailingExample">
+  <dt-button size="sm" kind="muted" importance="outlined" trailing-class="d-pr2" ref="trailingExample">
     Copy
     <template #icon="{ iconSize }">
       <dt-icon name="copy" :size="iconSize" />
@@ -1186,7 +1186,7 @@ showHtmlWarning />
 <code-example-tabs
 :htmlCode='() => $refs.trailingExample'
 vueCode='
-<dt-button size="sm" kind="muted" importance="outlined" trailing-class="d-pr4">
+<dt-button size="sm" kind="muted" importance="outlined" trailing-class="d-pr2">
   Copy
   <template #icon="{ iconSize }">
     <dt-icon name="copy" :size="iconSize" />
