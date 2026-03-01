@@ -63,6 +63,7 @@
             size="2xl"
             strength="medium"
             density="100"
+            text-box-trim="start"
             as="h2"
             class="d-modal__header"
             data-qa="dt-modal-title"
