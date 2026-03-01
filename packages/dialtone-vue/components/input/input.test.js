@@ -490,6 +490,28 @@ describe('DtInput tests', () => {
       });
     });
 
+    describe('When labelStrength is provided', () => {
+      it('should override the default label strength', () => {
+        mockProps = { label: 'Label', labelStrength: 'bold' };
+
+        updateWrapper();
+
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.props('strength')).toBe('bold');
+      });
+
+      it('should not set strength when not provided', () => {
+        mockProps = { label: 'Label' };
+
+        updateWrapper();
+
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.props('strength')).toBeNull();
+      });
+    });
+
     describe('When the length validation props are provided', () => {
       const MOCK_VALIDATE = {
         length: {

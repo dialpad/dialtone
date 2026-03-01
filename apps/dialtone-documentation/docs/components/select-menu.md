@@ -563,6 +563,29 @@ vueCode='
 '
 />
 
+## Label strength
+
+Override the label font weight independently of the label size. Valid values are `bold`, `semibold`, `medium`, and `normal`.
+
+<code-well-header bgclass="d-bgc-primary" class="d-d-block">
+  <div class="d-stack16 d-w100p">
+    <example-select-menu label="Bold label" label-strength="bold" />
+    <example-select-menu label="Semibold label" label-strength="semibold" />
+    <example-select-menu label="Medium label" label-strength="medium" />
+    <example-select-menu label="Normal label" label-strength="normal" />
+  </div>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-select-menu
+  :options="options"
+  label="Label"
+  label-strength="bold|semibold|medium|normal"
+/>
+'
+/>
+
 ## Accessibility
 
 - Make sure the `label` `for` attribute match the select `id`.

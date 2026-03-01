@@ -8,6 +8,7 @@
         v-if="hasSlotContent($slots.label) || label"
         kind="label"
         :size="resolvedLabelSize"
+        :strength="labelStrength"
         tone="secondary"
         as="div"
         :aria-details="labelAriaDetails"
@@ -84,7 +85,7 @@
 
 <script>
 import { warn } from 'vue';
-import { DtText, TEXT_SIZE_MODIFIERS } from '@/components/text';
+import { DtText, TEXT_SIZE_MODIFIERS, TEXT_STRENGTH_MODIFIERS } from '@/components/text';
 import {
   SELECT_SIZE_MODIFIERS,
   SELECT_STATE_MODIFIERS,
@@ -249,6 +250,16 @@ export default {
       type: String,
       default: null,
       validator: (s) => TEXT_SIZE_MODIFIERS.label.includes(s),
+    },
+
+    /**
+     * Overrides the label font weight.
+     * @values bold, semibold, medium, normal
+     */
+    labelStrength: {
+      type: String,
+      default: null,
+      validator: (s) => Object.keys(TEXT_STRENGTH_MODIFIERS).includes(s),
     },
   },
 

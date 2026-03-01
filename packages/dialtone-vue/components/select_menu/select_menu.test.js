@@ -202,6 +202,26 @@ describe('DtSelectMenu Tests', () => {
       });
     });
 
+    describe('When labelStrength is provided', () => {
+      it('should override the default label strength', () => {
+        mockProps = { labelStrength: 'bold' };
+
+        updateWrapper();
+
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.props('strength')).toBe('bold');
+      });
+
+      it('should not set strength when not provided', () => {
+        updateWrapper();
+
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.props('strength')).toBeNull();
+      });
+    });
+
     describe('When validation messages are provided', () => {
       beforeEach(() => {
         mockProps = { messages: ['Validation Message'] };

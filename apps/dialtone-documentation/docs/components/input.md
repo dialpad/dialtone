@@ -787,6 +787,25 @@ vueCode='
 '
 />
 
+## Label strength
+
+Override the label font weight independently of the label size. Valid values are `bold`, `semibold`, `medium`, and `normal`.
+
+<code-well-header>
+  <div class="d-stack16 d-w100p">
+    <dt-input label="Bold label" placeholder="Placeholder" label-strength="bold" />
+    <dt-input label="Semibold label" placeholder="Placeholder" label-strength="semibold" />
+    <dt-input label="Medium label" placeholder="Placeholder" label-strength="medium" />
+    <dt-input label="Normal label" placeholder="Placeholder" label-strength="normal" />
+  </div>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-input label="Label" placeholder="Placeholder" label-strength="bold|semibold|medium|normal" />
+'
+/>
+
 ## Vue API
 
 <component-vue-api component-name="input" />

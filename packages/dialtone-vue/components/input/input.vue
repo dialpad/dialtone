@@ -18,6 +18,7 @@
           data-qa="dt-input-label"
           kind="label"
           :size="resolvedLabelSize"
+          :strength="labelStrength"
           tone="secondary"
           class="d-input__label-text"
         >
@@ -151,7 +152,7 @@ import {
   addClassStyleAttrs,
 } from '@/common/utils';
 import { DtValidationMessages } from '@/components/validation_messages';
-import { DtText, TEXT_SIZE_MODIFIERS } from '@/components/text';
+import { DtText, TEXT_SIZE_MODIFIERS, TEXT_STRENGTH_MODIFIERS } from '@/components/text';
 import { MessagesMixin } from '@/common/mixins/input';
 
 /**
@@ -321,6 +322,16 @@ export default {
       type: String,
       default: null,
       validator: (s) => TEXT_SIZE_MODIFIERS.label.includes(s),
+    },
+
+    /**
+     * Overrides the label font weight.
+     * @values bold, semibold, medium, normal
+     */
+    labelStrength: {
+      type: String,
+      default: null,
+      validator: (s) => Object.keys(TEXT_STRENGTH_MODIFIERS).includes(s),
     },
   },
 

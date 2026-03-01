@@ -29,6 +29,8 @@ const selectOnFocus = ref(false);
 const isDisabled = ref(false);
 const labelSizeSelection = ref('default');
 const resolvedLabelSize = computed(() => labelSizeSelection.value === 'default' ? undefined : labelSizeSelection.value);
+const labelStrengthSelection = ref('default');
+const resolvedLabelStrength = computed(() => labelStrengthSelection.value === 'default' ? undefined : labelStrengthSelection.value);
 </script>
 
 <dt-stack class="d-p32" gap="600">
@@ -330,10 +332,11 @@ const resolvedLabelSize = computed(() => labelSizeSelection.value === 'default' 
   </dt-stack>
   <dt-stack gap="500">
     <dt-text as="h1" kind="headline" size="xl">
-      Input/Select Label Size
+      Label Size/Strength
     </dt-text>
     <dt-stack gap="500" direction="row" class="d-bgc-moderate-opaque d-p12 d-bar8">
       <dt-select-menu
+        label="Label Size"
         :options="[
           { value: 'default', label: 'Default' },
           { value: 'xs', label: 'xs' },
@@ -344,14 +347,26 @@ const resolvedLabelSize = computed(() => labelSizeSelection.value === 'default' 
         :model-value="labelSizeSelection"
         @change="labelSizeSelection = $event"
       />
+      <dt-select-menu
+        label="Label Strength"
+        :options="[
+          { value: 'default', label: 'Default' },
+          { value: 'bold', label: 'bold' },
+          { value: 'semibold', label: 'semibold' },
+          { value: 'medium', label: 'medium' },
+          { value: 'normal', label: 'normal' },
+        ]"
+        :model-value="labelStrengthSelection"
+        @change="labelStrengthSelection = $event"
+      />
     </dt-stack>
     <dt-stack direction="row">
       <dt-stack gap="400" class="d-fl1">
-        <dt-input label="Extra Small" type="text" placeholder="Placeholder" size="xs" :label-size="resolvedLabelSize" />
-        <dt-input label="Small" type="text" placeholder="Placeholder" size="sm" :label-size="resolvedLabelSize" />
-        <dt-input label="Medium" type="text" placeholder="Placeholder" size="md" :label-size="resolvedLabelSize" />
-        <dt-input label="Large" type="text" placeholder="Placeholder" size="lg" :label-size="resolvedLabelSize" />
-        <dt-input label="Extra large" type="text" placeholder="Placeholder" size="xl" :label-size="resolvedLabelSize" />
+        <dt-input labelClass="d-ba" label="Extra Small" type="text" placeholder="Placeholder" size="xs" :label-size="resolvedLabelSize" :label-strength="resolvedLabelStrength" />
+        <dt-input label="Small" type="text" placeholder="Placeholder" size="sm" :label-size="resolvedLabelSize" :label-strength="resolvedLabelStrength" />
+        <dt-input label="Medium" type="text" placeholder="Placeholder" size="md" :label-size="resolvedLabelSize" :label-strength="resolvedLabelStrength" />
+        <dt-input label="Large" type="text" placeholder="Placeholder" size="lg" :label-size="resolvedLabelSize" :label-strength="resolvedLabelStrength" />
+        <dt-input label="Extra large" type="text" placeholder="Placeholder" size="xl" :label-size="resolvedLabelSize" :label-strength="resolvedLabelStrength" />
       </dt-stack>
       <dt-stack gap="400" class="d-fl1">
         <!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
@@ -365,6 +380,7 @@ const resolvedLabelSize = computed(() => labelSizeSelection.value === 'default' 
           label="Label"
           size="xs"
           :label-size="resolvedLabelSize"
+          :label-strength="resolvedLabelStrength"
           :model-value="modelValue"
           @input="onInput"
           @change="onChange"
@@ -379,6 +395,7 @@ const resolvedLabelSize = computed(() => labelSizeSelection.value === 'default' 
           label="Label"
           size="sm"
           :label-size="resolvedLabelSize"
+          :label-strength="resolvedLabelStrength"
           :model-value="modelValue"
           @input="onInput"
           @change="onChange"
@@ -393,6 +410,7 @@ const resolvedLabelSize = computed(() => labelSizeSelection.value === 'default' 
           label="Label"
           size="md"
           :label-size="resolvedLabelSize"
+          :label-strength="resolvedLabelStrength"
           :model-value="modelValue"
           @input="onInput"
           @change="onChange"
@@ -407,6 +425,7 @@ const resolvedLabelSize = computed(() => labelSizeSelection.value === 'default' 
           label="Label"
           size="lg"
           :label-size="resolvedLabelSize"
+          :label-strength="resolvedLabelStrength"
           :model-value="modelValue"
           @input="onInput"
           @change="onChange"
@@ -421,6 +440,7 @@ const resolvedLabelSize = computed(() => labelSizeSelection.value === 'default' 
           label="Label"
           size="xl"
           :label-size="resolvedLabelSize"
+          :label-strength="resolvedLabelStrength"
           :model-value="modelValue"
           @input="onInput"
           @change="onChange"
