@@ -512,6 +512,18 @@ describe('DtInput tests', () => {
       });
     });
 
+    describe('When labelClass is provided', () => {
+      it('should apply custom class to the label', () => {
+        mockProps = { label: 'Label', labelClass: 'd-fc-success' };
+
+        updateWrapper();
+
+        const labelEl = wrapper.find('[data-qa="dt-input-label"]');
+
+        expect(labelEl.classes('d-fc-success')).toBe(true);
+      });
+    });
+
     describe('When the length validation props are provided', () => {
       const MOCK_VALIDATE = {
         length: {

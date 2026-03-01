@@ -20,7 +20,7 @@
           :size="resolvedLabelSize"
           :strength="labelStrength"
           tone="secondary"
-          class="d-input__label-text"
+          :class="['d-input__label-text', labelClass]"
         >
           {{ label }}
         </dt-text>
@@ -332,6 +332,14 @@ export default {
       type: String,
       default: null,
       validator: (s) => Object.keys(TEXT_STRENGTH_MODIFIERS).includes(s),
+    },
+
+    /**
+     * Used to customize the label container
+     */
+    labelClass: {
+      type: [String, Array, Object],
+      default: '',
     },
   },
 
