@@ -129,6 +129,30 @@ describe('DtInput tests', () => {
 
         expect(label.exists()).toBe(false);
       });
+
+      it('should set aria-label on the input', () => {
+        mockProps = { labelVisible: false };
+
+        updateWrapper();
+
+        expect(nativeInput.attributes('aria-label')).toBe(baseProps.label);
+      });
+
+      it('should set aria-label on the textarea', () => {
+        mockProps = { labelVisible: false, type: 'textarea' };
+
+        updateWrapper();
+
+        nativeTextarea = wrapper.find('textarea');
+
+        expect(nativeTextarea.attributes('aria-label')).toBe(baseProps.label);
+      });
+    });
+
+    describe('When labelVisible is true', () => {
+      it('should not set aria-label on the input', () => {
+        expect(nativeInput.attributes('aria-label')).toBeUndefined();
+      });
     });
 
     describe('When a label is not provided', () => {
@@ -689,6 +713,50 @@ describe('DtInput tests', () => {
             expect(wrapper.emitted()['update:invalid'][1][0]).toBe(false);
           });
         });
+      });
+    });
+  });
+
+  describe('Validation Tests', () => {
+    let consoleWarnSpy;
+
+    beforeEach(() => {
+      consoleWarnSpy = vi.spyOn(console, 'warn');
+    });
+
+    afterEach(() => {
+      consoleWarnSpy.mockRestore();
+    });
+
+    describe('When no label and no aria-label are provided', () => {
+      it('should warn about missing label', () => {
+        mockProps = { label: '' };
+
+        updateWrapper();
+
+        expect(console.warn).toHaveBeenCalled();
+        expect(console.warn.mock.calls[0]).toContain(
+          '[Vue warn]: A label is required for accessibility. Provide a label prop and use label-visible="false" to hide it visually.',
+        );
+      });
+    });
+
+    describe('When a label is provided', () => {
+      it('should not warn', () => {
+        updateWrapper();
+
+        expect(console.warn).not.toHaveBeenCalled();
+      });
+    });
+
+    describe('When no label but aria-label attr is provided', () => {
+      it('should not warn', () => {
+        mockProps = { label: '' };
+        mockAttrs = { 'aria-label': 'accessible label' };
+
+        updateWrapper();
+
+        expect(console.warn).not.toHaveBeenCalled();
       });
     });
   });

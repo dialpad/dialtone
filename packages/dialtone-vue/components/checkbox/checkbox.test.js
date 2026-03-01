@@ -124,6 +124,30 @@ describe('DtCheckbox Tests', () => {
       });
     });
 
+    describe('When labelVisible is false', () => {
+      beforeEach(() => {
+        mockProps = { labelVisible: false };
+
+        updateWrapper();
+      });
+
+      it('should not render a label', () => {
+        label = wrapper.find('[data-qa="checkbox-label"]');
+
+        expect(label.exists()).toBe(false);
+      });
+
+      it('should set aria-label on the input', () => {
+        expect(input.attributes('aria-label')).toBe(baseProps.label);
+      });
+    });
+
+    describe('When labelVisible is true', () => {
+      it('should not set aria-label on the input', () => {
+        expect(input.attributes('aria-label')).toBeUndefined();
+      });
+    });
+
     describe('When a label prop is provided', () => {
       it('should exist', () => {
         mockProps = { label: 'My Label' };

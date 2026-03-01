@@ -12,11 +12,13 @@
           :disabled="internalDisabled"
           type="radio"
           :class="['d-radio', inputValidationClass, inputClass]"
+          :aria-label="!labelVisible && label ? label : undefined"
           v-bind="removeClassStyleAttrs($attrs)"
           v-on="inputListeners"
         >
       </div>
       <dt-text
+        v-if="hasLabel"
         as="div"
         kind="label"
         :size="resolvedLabelSize"
@@ -62,6 +64,7 @@
 </template>
 
 <script>
+import { warn } from 'vue';
 import {
   InputMixin,
   CheckableMixin,
@@ -95,6 +98,15 @@ export default {
     value: {
       type: [String, Number],
       default: '',
+    },
+
+    /**
+     * Determines visibility of radio label.
+     * @values true, false
+     */
+    labelVisible: {
+      type: Boolean,
+      default: true,
     },
 
     /**
@@ -156,6 +168,14 @@ export default {
   },
 
   computed: {
+    hasLabelContent () {
+      return !!(this.$slots.default || this.label);
+    },
+
+    hasLabel () {
+      return this.labelVisible && this.hasLabelContent;
+    },
+
     resolvedLabelSize () {
       return this.labelSize ?? 'md';
     },
@@ -199,9 +219,23 @@ export default {
     },
   },
 
+  mounted () {
+    this.runValidations();
+  },
+
   methods: {
     removeClassStyleAttrs,
     addClassStyleAttrs,
+
+    runValidations () {
+      if (!this.hasLabelContent && !this.$attrs['aria-label']) {
+        warn(
+          'A label is required for accessibility. Provide a label prop and use label-visible="false" to hide it visually.',
+          this,
+        );
+      }
+    },
+
     emitValue (value) {
       if (value !== this.radioGroupValue) {
         // update provided value if injected

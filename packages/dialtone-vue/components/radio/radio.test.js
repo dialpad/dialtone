@@ -103,6 +103,30 @@ describe('DtRadio Tests', () => {
       });
     });
 
+    describe('When labelVisible is false', () => {
+      beforeEach(() => {
+        mockProps = { labelVisible: false };
+
+        updateWrapper();
+      });
+
+      it('should not render a label', () => {
+        const radioLabel = wrapper.find('[data-qa="radio-label"]');
+
+        expect(radioLabel.exists()).toBe(false);
+      });
+
+      it('should set aria-label on the input', () => {
+        expect(input.attributes('aria-label')).toBe(baseProps.label);
+      });
+    });
+
+    describe('When labelVisible is true', () => {
+      it('should not set aria-label on the input', () => {
+        expect(input.attributes('aria-label')).toBeUndefined();
+      });
+    });
+
     describe('When labelSize is provided', () => {
       it('should override the default label size', () => {
         mockProps = { labelSize: 'lg' };

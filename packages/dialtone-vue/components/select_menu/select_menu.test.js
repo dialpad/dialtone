@@ -107,6 +107,32 @@ describe('DtSelectMenu Tests', () => {
       });
     });
 
+    describe('When labelVisible is false', () => {
+      beforeEach(() => {
+        mockProps = { labelVisible: false };
+
+        updateWrapper();
+      });
+
+      it('should not render a label', () => {
+        label = wrapper.find('[data-qa="dt-select-label"]');
+
+        expect(label.exists()).toBe(false);
+      });
+
+      it('should set aria-label on the select', () => {
+        select = wrapper.find('[data-qa="dt-select"]');
+
+        expect(select.attributes('aria-label')).toBe(MOCK_LABEL);
+      });
+    });
+
+    describe('When labelVisible is true', () => {
+      it('should not set aria-label on the select', () => {
+        expect(select.attributes('aria-label')).toBeUndefined();
+      });
+    });
+
     describe('When a label is provided via slot', () => {
       it('should render the slotted label', () => {
         mockSlots = { label: 'Slotted Label' };
@@ -356,6 +382,40 @@ describe('DtSelectMenu Tests', () => {
       describe('when provided size is not in SELECT_SIZE_MODIFIERS', () => {
         it('fails custom prop validation', () => {
           expect(MOCK_PROP.validator(`NOT${SELECT_SIZE_MODIFIERS.md}`)).toBe(false);
+        });
+      });
+    });
+
+    describe('Label Validation', () => {
+      const MOCK_LABEL_WARNING = '[Vue warn]: A label is required for accessibility. Provide a label prop and use label-visible="false" to hide it visually.';
+
+      describe('When no label and no aria-label are provided', () => {
+        it('should warn about missing label', () => {
+          mockProps = { label: '', options: MOCK_OPTIONS };
+
+          updateWrapper();
+
+          expect(console.warn).toHaveBeenCalled();
+          expect(console.warn.mock.calls.some(call => call.includes(MOCK_LABEL_WARNING))).toBe(true);
+        });
+      });
+
+      describe('When a label is provided', () => {
+        it('should not warn about missing label', () => {
+          updateWrapper();
+
+          expect(console.warn.mock.calls.some(call => call.includes(MOCK_LABEL_WARNING))).toBe(false);
+        });
+      });
+
+      describe('When no label but aria-label attr is provided', () => {
+        it('should not warn about missing label', () => {
+          mockProps = { label: '', options: MOCK_OPTIONS };
+          mockAttrs = { 'aria-label': 'accessible label' };
+
+          updateWrapper();
+
+          expect(console.warn.mock.calls.some(call => call.includes(MOCK_LABEL_WARNING))).toBe(false);
         });
       });
     });

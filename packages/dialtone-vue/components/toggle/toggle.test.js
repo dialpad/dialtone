@@ -167,6 +167,18 @@ describe('DtToggle Tests', () => {
       });
     });
 
+    describe('When labelVisible is false', () => {
+      it('should not render a label', () => {
+        mockProps = { labelVisible: false };
+
+        updateWrapper();
+
+        label = wrapper.find('[data-qa="toggle-label"]');
+
+        expect(label.exists()).toBe(false);
+      });
+    });
+
     describe('Accessibility Tests', () => {
       describe('aria-label validations', () => {
         let MOCK_CONSOLE_ERROR_SPY;
@@ -195,6 +207,30 @@ describe('DtToggle Tests', () => {
         describe('should not throw a Vue error if a label is not provided, but an aria-label attr exists', () => {
           it('should not raise any warnings', () => {
             mockSlots = { default: '' };
+            mockAttrs = { 'aria-label': 'my label' };
+
+            updateWrapper();
+
+            expect(console.warn).not.toHaveBeenCalled();
+          });
+        });
+
+        describe('When labelVisible is false and no aria-label is provided', () => {
+          it('should warn about missing label', () => {
+            mockProps = { labelVisible: false };
+
+            updateWrapper();
+
+            expect(console.warn).toHaveBeenCalled();
+            expect(console.warn.mock.calls[0]).toContain(
+              '[Vue warn]: A label is required for accessibility. Provide a label and use label-visible="false" to hide it visually.',
+            );
+          });
+        });
+
+        describe('When labelVisible is false but aria-label is provided', () => {
+          it('should not warn', () => {
+            mockProps = { labelVisible: false };
             mockAttrs = { 'aria-label': 'my label' };
 
             updateWrapper();

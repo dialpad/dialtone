@@ -12,6 +12,7 @@
           :value="value"
           :disabled="internalDisabled"
           :class="['d-checkbox', inputValidationClass, inputClass]"
+          :aria-label="!labelVisible && label ? label : undefined"
           v-bind="removeClassStyleAttrs($attrs)"
           :indeterminate.prop="internalIndeterminate"
           v-on="inputListeners"
@@ -65,6 +66,7 @@
 
 <script>
 // Imports
+import { warn } from 'vue';
 import {
   InputMixin,
   CheckableMixin,
@@ -92,6 +94,15 @@ export default {
   inheritAttrs: false,
 
   props: {
+    /**
+     * Determines visibility of checkbox label.
+     * @values true, false
+     */
+    labelVisible: {
+      type: Boolean,
+      default: true,
+    },
+
     /**
      * Overrides the label text size.
      * @values lg, md, sm, xs
@@ -149,8 +160,12 @@ export default {
       return this.groupContext?.selectedValues?.includes(this.value) ?? false;
     },
 
-    hasLabel () {
+    hasLabelContent () {
       return !!(this.$slots.default || this.label);
+    },
+
+    hasLabel () {
+      return this.labelVisible && this.hasLabelContent;
     },
 
     hasMessages () {
@@ -210,7 +225,12 @@ export default {
     },
 
     runValidations () {
-      this.validateInputLabels(this.hasLabel, this.$attrs['aria-label']);
+      if (!this.hasLabelContent && !this.$attrs['aria-label']) {
+        warn(
+          'A label is required for accessibility. Provide a label prop and use label-visible="false" to hide it visually.',
+          this,
+        );
+      }
     },
   },
 };

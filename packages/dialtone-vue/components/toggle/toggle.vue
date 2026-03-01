@@ -4,7 +4,7 @@
     v-bind="addClassStyleAttrs($attrs)"
   >
     <label
-      v-if="hasSlotContent($slots.default)"
+      v-if="labelVisible && hasSlotContent($slots.default)"
       :class="labelClass"
       :for="id"
       v-bind="labelChildProps"
@@ -95,6 +95,15 @@ export default {
       type: String,
       default: 'md',
       validator: (s) => Object.keys(TOGGLE_SIZE_MODIFIERS).includes(s),
+    },
+
+    /**
+     * Determines visibility of toggle label.
+     * @values true, false
+     */
+    labelVisible: {
+      type: Boolean,
+      default: true,
     },
 
     /**
@@ -213,13 +222,10 @@ export default {
     },
 
     runValidations () {
-      this.validateInputLabels(this.hasSlotLabel(), this.$attrs['aria-label']);
-    },
-
-    validateInputLabels (hasLabel, ariaLabel) {
-      if (!hasLabel && !ariaLabel) {
+      const hasVisibleLabel = this.labelVisible && this.hasSlotLabel();
+      if (!hasVisibleLabel && !this.$attrs['aria-label']) {
         warn(
-          'You must provide an aria-label when there is no label passed',
+          'A label is required for accessibility. Provide a label and use label-visible="false" to hide it visually.',
           this,
         );
       }

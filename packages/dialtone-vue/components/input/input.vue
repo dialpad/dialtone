@@ -84,6 +84,7 @@
           :autocomplete="$attrs.autocomplete ?? 'off'"
           :class="inputClasses()"
           :maxlength="shouldLimitMaxLength ? validationProps.length.max : null"
+          :aria-label="!labelVisible && label ? label : undefined"
           data-qa="dt-input-input"
           v-bind="removeClassStyleAttrs($attrs)"
           v-on="inputListeners"
@@ -98,6 +99,7 @@
           :autocomplete="$attrs.autocomplete ?? 'off'"
           :class="inputClasses()"
           :maxlength="shouldLimitMaxLength ? validationProps.length.max : null"
+          :aria-label="!labelVisible && label ? label : undefined"
           data-qa="dt-input-input"
           v-bind="removeClassStyleAttrs($attrs)"
           v-on="inputListeners"
@@ -136,6 +138,7 @@
 
 <script>
 /* eslint-disable max-lines */
+import { warn } from 'vue';
 import { DESCRIPTION_SIZE_TYPES, VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import {
   INPUT_TYPES,
@@ -606,6 +609,7 @@ export default {
     if (this.isTextarea && this.$refs.input) {
       this.$refs.input.value = this.modelValue;
     }
+    this.runValidations();
   },
 
   methods: {
@@ -688,6 +692,15 @@ export default {
       this.$refs.input.value = '';
       this.$refs.input.focus();
       this.emitClearEvents();
+    },
+
+    runValidations () {
+      if (!this.label && !this.$attrs['aria-label']) {
+        warn(
+          'A label is required for accessibility. Provide a label prop and use label-visible="false" to hide it visually.',
+          this,
+        );
+      }
     },
   },
 };
