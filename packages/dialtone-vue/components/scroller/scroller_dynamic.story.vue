@@ -126,7 +126,7 @@ function replaceItems () {
 .autoscrolling{
   display: flex;
   align-items: center;
-  div {
+  :where(div) {
     background-color: red;
     inline-size: 5px;
     block-size: 5px;
