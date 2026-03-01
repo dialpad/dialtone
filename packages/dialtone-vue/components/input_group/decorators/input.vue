@@ -16,7 +16,11 @@
           v-bind="$attrs"
           v-on="inputListeners"
         >
-        <span
+        <dt-text
+          kind="label"
+          size="md"
+          strength="normal"
+          :tone="internalDisabled ? 'disabled' : 'primary'"
           class="d-radio__copy d-radio__label"
           :class="labelClass"
           v-bind="labelChildProps"
@@ -24,7 +28,7 @@
         >
           <!-- @slot slot for Input Decorator Label -->
           <slot>{{ label }}</slot>
-        </span>
+        </dt-text>
       </div>
     </label>
   </div>
@@ -36,9 +40,12 @@ import {
   InputMixin,
   GroupableMixin,
 } from '@/common/mixins/input';
+import { DtText } from '@/components/text';
 
 export default {
   name: 'InputDecorator',
+
+  components: { DtText },
 
   mixins: [InputMixin, GroupableMixin],
 

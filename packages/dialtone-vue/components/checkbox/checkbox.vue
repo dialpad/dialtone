@@ -17,15 +17,20 @@
           v-on="inputListeners"
         >
       </div>
-      <div
+      <dt-text
         v-if="hasLabel"
+        as="div"
+        kind="label"
+        size="md"
+        strength="normal"
+        :tone="internalDisabled ? 'disabled' : 'primary'"
         :class="[labelClass, 'd-checkbox__copy d-checkbox__label']"
         v-bind="labelChildProps"
         data-qa="checkbox-label"
       >
         <!-- @slot slot for Checkbox Label -->
         <slot>{{ label }}</slot>
-      </div>
+      </dt-text>
     </label>
     <div
       v-if="$slots.description || description || hasMessages"
@@ -65,6 +70,7 @@ import {
 import { removeClassStyleAttrs, addClassStyleAttrs } from '@/common/utils';
 import { CHECKBOX_INPUT_VALIDATION_CLASSES } from './checkbox_constants';
 import { DtValidationMessages } from '../validation_messages';
+import { DtText } from '@/components/text';
 
 /**
  * Checkboxes are control elements that allow the user to make a selection.They are typically used in a
@@ -75,7 +81,7 @@ export default {
   compatConfig: { MODE: 3 },
   name: 'DtCheckbox',
 
-  components: { DtValidationMessages },
+  components: { DtValidationMessages, DtText },
 
   mixins: [InputMixin, CheckableMixin, GroupableMixin, MessagesMixin],
 

@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import { RADIO_INPUT_VALIDATION_CLASSES } from './radio_constants';
 import DtRadio from './radio.vue';
+import { DtText } from '@/components/text';
 
 const MOCK_VALUE = 'Value';
 const MOCK_GROUP_NAME = 'radioGroup';
@@ -86,6 +87,13 @@ describe('DtRadio Tests', () => {
         it('should match provided label prop', () => {
           expect(radioLabel.text()).toBe(baseProps.label);
         });
+
+        it('should render label as DtText with tone="primary"', () => {
+          const dtText = wrapper.findComponent(DtText);
+
+          expect(dtText.exists()).toBe(true);
+          expect(dtText.props('tone')).toBe('primary');
+        });
       });
     });
 
@@ -159,6 +167,13 @@ describe('DtRadio Tests', () => {
 
       it('should have disabled class', () => {
         expect(wrapper.find('.d-radio-group--disabled').exists()).toBeTruthy();
+      });
+
+      it('should render label DtText with tone="disabled"', () => {
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.exists()).toBe(true);
+        expect(dtText.props('tone')).toBe('disabled');
       });
 
       describe('When clicked', () => {

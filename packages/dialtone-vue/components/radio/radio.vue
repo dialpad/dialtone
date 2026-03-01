@@ -16,14 +16,19 @@
           v-on="inputListeners"
         >
       </div>
-      <div
+      <dt-text
+        as="div"
+        kind="label"
+        size="md"
+        strength="normal"
+        :tone="internalDisabled ? 'disabled' : 'primary'"
         :class="[labelClass, 'd-radio__copy d-radio__label']"
         v-bind="labelChildProps"
         data-qa="radio-label"
       >
         <!-- @slot slot for Radio Label -->
         <slot>{{ label }}</slot>
-      </div>
+      </dt-text>
     </label>
     <div
       v-if="$slots.description || description || hasMessages"
@@ -61,6 +66,7 @@ import {
 } from '@/common/mixins/input';
 import { RADIO_INPUT_VALIDATION_CLASSES } from './radio_constants';
 import { DtValidationMessages } from '../validation_messages';
+import { DtText } from '@/components/text';
 import { hasSlotContent, removeClassStyleAttrs, addClassStyleAttrs } from '@/common/utils';
 
 /**
@@ -72,7 +78,7 @@ export default {
   compatConfig: { MODE: 3 },
   name: 'DtRadio',
 
-  components: { DtValidationMessages },
+  components: { DtValidationMessages, DtText },
 
   mixins: [InputMixin, CheckableMixin, GroupableMixin, MessagesMixin],
 

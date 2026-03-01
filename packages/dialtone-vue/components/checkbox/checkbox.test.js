@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils';
 import DtCheckbox from './checkbox.vue';
+import { DtText } from '@/components/text';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import { CHECKBOX_INPUT_VALIDATION_CLASSES } from '@/components/checkbox/checkbox_constants.js';
 
@@ -95,6 +96,13 @@ describe('DtCheckbox Tests', () => {
 
       it('should match provided label prop', () => {
         expect(label.text()).toBe(baseProps.label);
+      });
+
+      it('should render label as DtText with tone="primary"', () => {
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.exists()).toBe(true);
+        expect(dtText.props('tone')).toBe('primary');
       });
     });
 
@@ -194,6 +202,13 @@ describe('DtCheckbox Tests', () => {
 
       it('should have disabled class', () => {
         expect(wrapper.find('.d-checkbox-group--disabled').exists()).toBe(true);
+      });
+
+      it('should render label DtText with tone="disabled"', () => {
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.exists()).toBe(true);
+        expect(dtText.props('tone')).toBe('disabled');
       });
     });
 

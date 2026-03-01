@@ -151,7 +151,7 @@ const isDisabled = ref(false);
     <dt-text as="p" kind="body" size="lg">
       There's no current convenient way to change the label size of inputs/selects.
     </dt-text>
-    <dt-stack direction="row" gap="500">
+    <dt-stack direction="row">
       <dt-stack gap="400" class="d-fl1">
         <dt-input label="Extra Small" type="text" placeholder="Placeholder" size="xs" />
         <dt-input label="Small" type="text" placeholder="Placeholder" size="sm" />
