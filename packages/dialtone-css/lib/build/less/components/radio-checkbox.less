@@ -155,9 +155,15 @@
     flex: 1 auto;
     flex-direction: column;
     align-items: flex-start;
+    align-self: flex-end;
     color: var(--dt-color-foreground-primary);
-    font: var(--dt-typography-label-md-plain);
+    font: var(--dt-text-label-md);
+    font-weight: var(--dt-font-weight-normal) !important;
     cursor: pointer;
+
+    &.d-text-label--sm {
+        margin-block-start: var(--dt-size-100); // sue me
+    }
 }
 
 .d-checkbox__messages,

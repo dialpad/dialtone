@@ -531,59 +531,7 @@ vueCode='
     { value: `3`, label: `Option 3` },
   ]"
   label="Label"
-  size="xs"
-  :model-value="modelValue"
-  @input="onInput"
-  @change="onChange"
-/>
-<dt-select-menu
-  :options="[
-    { value: ``, label: `Please select one` },
-    { value: `1`, label: `Option 1` },
-    { value: `2`, label: `Option 2` },
-    { value: `3`, label: `Option 3` },
-  ]"
-  label="Label"
-  size="sm"
-  :model-value="modelValue"
-  @input="onInput"
-  @change="onChange"
-/>
-<dt-select-menu
-  :options="[
-    { value: ``, label: `Please select one` },
-    { value: `1`, label: `Option 1` },
-    { value: `2`, label: `Option 2` },
-    { value: `3`, label: `Option 3` },
-  ]"
-  label="Label"
-  size="md"
-  :model-value="modelValue"
-  @input="onInput"
-  @change="onChange"
-/>
-<dt-select-menu
-  :options="[
-    { value: ``, label: `Please select one` },
-    { value: `1`, label: `Option 1` },
-    { value: `2`, label: `Option 2` },
-    { value: `3`, label: `Option 3` },
-  ]"
-  label="Label"
-  size="lg"
-  :model-value="modelValue"
-  @input="onInput"
-  @change="onChange"
-/>
-<dt-select-menu
-  :options="[
-    { value: ``, label: `Please select one` },
-    { value: `1`, label: `Option 1` },
-    { value: `2`, label: `Option 2` },
-    { value: `3`, label: `Option 3` },
-  ]"
-  label="Label"
-  size="xl"
+  size="xs|sm|md|lg|xl"
   :model-value="modelValue"
   @input="onInput"
   @change="onChange"
@@ -608,23 +556,9 @@ The label text size is automatically derived from the component's `size` prop. U
 vueCode='
 <dt-select-menu
   :options="options"
-  label="Extra small label"
-  label-size="xs"
-/>
-<dt-select-menu
-  :options="options"
-  label="Small label"
-  label-size="sm"
-/>
-<dt-select-menu
-  :options="options"
-  label="Medium label (default)"
-  label-size="md"
-/>
-<dt-select-menu
-  :options="options"
-  label="Large label"
-  label-size="lg"
+  label="Label"
+  size="xs|sm|md|lg|xl"
+  label-size="xs|sm|md|lg"
 />
 '
 />

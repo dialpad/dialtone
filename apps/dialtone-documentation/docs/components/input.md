@@ -783,10 +783,7 @@ The label text size is automatically derived from the component's `size` prop. U
 
 <code-example-tabs
 vueCode='
-<dt-input label="Extra small label" placeholder="Placeholder" label-size="xs" />
-<dt-input label="Small label" placeholder="Placeholder" label-size="sm" />
-<dt-input label="Medium label (default)" placeholder="Placeholder" label-size="md" />
-<dt-input label="Large label" placeholder="Placeholder" label-size="lg" />
+<dt-input label="Extra small label" placeholder="Placeholder" label-size="xs|sm|md|lg" />
 '
 />
 
