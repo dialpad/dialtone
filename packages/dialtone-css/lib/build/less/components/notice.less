@@ -64,6 +64,10 @@
     align-items: center;
     align-self: start;
 
+    .d-banner & {
+        align-self: inherit;
+    }
+
     .d-btn {
         color: var(--notice-color-text);
     }
@@ -78,6 +82,25 @@
     margin-inline-end: var(--dt-size-450);
     color: var(--notice-color-icon);
 
+    // I feel so dirty writing this. There probably should be a conditional Vue thing
+    // to control this.
+    // EXPLANATION:
+    // When there are no actions present AND the notice contains only a title OR only a message
+    // (but not both), remove the top margin from the icon so it stays vertically centered.
+    // Each selector pair covers the two single-content cases:
+    //   1. Has a visible title, but no message
+    //   2. Has a message, but no visible title
+    // Both cases are repeated for .d-notice and .d-toast.
+    .d-notice:not(:has(.d-notice__actions)):has(.d-notice__title:not([hidden])):not(:has(.d-notice__message)) &,
+    .d-notice:not(:has(.d-notice__actions)):has(.d-notice__message):not(:has(.d-notice__title:not([hidden]))) &,
+    .d-toast:not(:has(.d-notice__actions)):has(.d-notice__title:not([hidden])):not(:has(.d-notice__message)) &,
+    .d-toast:not(:has(.d-notice__actions)):has(.d-notice__message):not(:has(.d-notice__title:not([hidden]))) & {
+        margin-block-start: var(--dt-size-0);
+    }
+
+    // When both a title AND a message are present, also remove the top margin.
+    // The icon needs to align to the top of the content stack in this case,
+    // which the default margin-block-start would offset incorrectly.
     .d-notice:has(.d-notice__content > .d-notice__message):has(.d-notice__title:not([hidden])) &,
     .d-toast:has(.d-notice__content > .d-notice__message):has(.d-notice__title:not([hidden])) & {
         margin-block-start: var(--dt-size-0);

@@ -18,12 +18,16 @@
         <!-- @slot Slot for label, defaults to label prop -->
         <slot name="label">{{ label }}</slot>
       </dt-text>
-      <div
+      <dt-text
         v-if="hasSlotContent($slots.description) || description"
         :id="descriptionKey"
+        kind="body"
+        :size="resolvedDescriptionSize"
+        tone="tertiary"
+        :density="resolvedDescriptionDensity"
+        as="div"
         :class="[
           'd-description',
-          DESCRIPTION_SIZE_MODIFIERS[size],
           descriptionClass,
         ]"
         v-bind="descriptionChildProps"
@@ -31,7 +35,7 @@
       >
         <!-- @slot Slot for description, defaults to description prop -->
         <slot name="description">{{ description }}</slot>
-      </div>
+      </dt-text>
       <div
         :class="[
           'd-select',
@@ -80,9 +84,6 @@
 
 <script>
 import { warn } from 'vue';
-import {
-  DESCRIPTION_SIZE_MODIFIERS,
-} from '@/common/constants';
 import { DtText, TEXT_SIZE_MODIFIERS } from '@/components/text';
 import {
   SELECT_SIZE_MODIFIERS,
@@ -279,7 +280,6 @@ export default {
 
   data () {
     return {
-      DESCRIPTION_SIZE_MODIFIERS,
       SELECT_SIZE_MODIFIERS,
       SELECT_STATE_MODIFIERS,
       hasSlotContent,
@@ -289,6 +289,15 @@ export default {
   computed: {
     resolvedLabelSize () {
       return this.labelSize ?? (this.size === 'xl' ? 'lg' : this.size);
+    },
+
+    resolvedDescriptionSize () {
+      const map = { xs: 'xs', sm: 'xs', md: 'sm', lg: 'sm', xl: 'md' };
+      return map[this.size] || 'sm';
+    },
+
+    resolvedDescriptionDensity () {
+      return this.size === 'xl' ? '300' : undefined;
     },
 
     selectListeners () {

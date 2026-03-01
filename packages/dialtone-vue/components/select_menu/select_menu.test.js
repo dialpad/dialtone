@@ -1,8 +1,5 @@
 import { mount } from '@vue/test-utils';
 import {
-  DESCRIPTION_SIZE_MODIFIERS,
-} from '@/common/constants';
-import {
   SELECT_SIZE_MODIFIERS,
   SELECT_STATE_MODIFIERS,
 } from './select_menu_constants';
@@ -132,7 +129,8 @@ describe('DtSelectMenu Tests', () => {
       });
 
       it('should have no size variant classes on the description', () => {
-        expect(description.classes().length).toBe(1);
+        const sizeClasses = description.classes().filter(c => c.startsWith('d-description--'));
+        expect(sizeClasses.length).toBe(0);
       });
     });
 
@@ -172,8 +170,9 @@ describe('DtSelectMenu Tests', () => {
         expect(label.classes()).toContain('d-text-label--lg');
       });
 
-      it('should have size variant class on the description', () => {
-        expect(description.classes(DESCRIPTION_SIZE_MODIFIERS[MOCK_SIZE])).toBe(true);
+      it('should have DtText size on the description', () => {
+        const descriptionText = description.findComponent(DtText);
+        expect(descriptionText.props('size')).toBe('sm');
       });
 
       it('should have size variant class on select menu', () => {

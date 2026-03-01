@@ -25,16 +25,29 @@
       gap="450"
       :class="['d-empty-state__content', contentClass]"
     >
-      <div :class="['d-empty-state__header-text', headlineClass]">
+      <dt-text
+        kind="headline"
+        :size="headlineSize"
+        :density="headlineDensity"
+        wrap="balance"
+        as="div"
+        class="d-empty-state__header-text"
+      >
         {{ headerText }}
-      </div>
+      </dt-text>
 
-      <p
+      <dt-text
         v-if="bodyText"
-        :class="['d-empty-state__body-text', bodyClass]"
+        kind="body"
+        :size="bodySize"
+        :density="bodyDensity"
+        tone="secondary"
+        wrap="balance"
+        as="p"
+        class="d-empty-state__body-text"
       >
         {{ bodyText }}
-      </p>
+      </dt-text>
     </dt-stack>
 
     <slot name="body" />
@@ -44,11 +57,14 @@
 <script setup>
 import { useSlots, computed, onMounted } from 'vue';
 import { DtStack } from '@/components/stack';
+import { DtText } from '@/components/text';
 import { hasSlotContent } from '@/common/utils';
 import {
-  EMPTY_STATE_BODY_SIZE_MODIFIERS,
+  EMPTY_STATE_BODY_DENSITIES,
+  EMPTY_STATE_BODY_SIZES,
   EMPTY_STATE_CONTENT_SIZE_MODIFIERS,
-  EMPTY_STATE_HEADLINE_SIZE_MODIFIERS,
+  EMPTY_STATE_HEADLINE_DENSITIES,
+  EMPTY_STATE_HEADLINE_SIZES,
   EMPTY_STATE_SIZE_MODIFIERS,
 } from './empty_state_constants.js';
 
@@ -108,9 +124,11 @@ const emptyStateClasses = computed(() => ['d-empty-state', sizeClass.value]);
 
 const contentClass = computed(() => EMPTY_STATE_CONTENT_SIZE_MODIFIERS[props.size]);
 
-const headlineClass = computed(() => EMPTY_STATE_HEADLINE_SIZE_MODIFIERS[props.size]);
+const headlineSize = computed(() => EMPTY_STATE_HEADLINE_SIZES[props.size]);
+const headlineDensity = computed(() => EMPTY_STATE_HEADLINE_DENSITIES[props.size]);
 
-const bodyClass = computed(() => EMPTY_STATE_BODY_SIZE_MODIFIERS[props.size]);
+const bodySize = computed(() => EMPTY_STATE_BODY_SIZES[props.size]);
+const bodyDensity = computed(() => EMPTY_STATE_BODY_DENSITIES[props.size]);
 
 onMounted(() => {
   if (!props.bodyText && !hasSlotContent(slots.body)) {

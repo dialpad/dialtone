@@ -438,8 +438,9 @@ describe('DtInput tests', () => {
           expect(label.classes().includes(`d-text-label--${MOCK_INPUT_SIZE_EXTRA_SMALL}`)).toBe(true);
         });
 
-        it('should add description size class', () => {
-          expect(description.classes().includes(`d-description--${MOCK_INPUT_SIZE_EXTRA_SMALL}`)).toBe(true);
+        it('should have DtText description size for xs', () => {
+          const descriptionText = description.findComponent(DtText);
+          expect(descriptionText.props('size')).toBe('xs');
         });
       });
 
@@ -460,8 +461,9 @@ describe('DtInput tests', () => {
           expect(label.classes().includes('d-text-label--lg')).toBe(true);
         });
 
-        it('should add description size class', () => {
-          expect(description.classes().includes(`d-description--${MOCK_INPUT_SIZE_EXTRA_LARGE}`)).toBe(true);
+        it('should have DtText description size for xl', () => {
+          const descriptionText = description.findComponent(DtText);
+          expect(descriptionText.props('size')).toBe('md');
         });
       });
     });

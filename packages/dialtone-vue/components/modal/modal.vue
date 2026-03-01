@@ -56,14 +56,19 @@
             <!-- @slot Slot for dialog header section, taking the place of any "title" text prop -->
             <slot name="header" />
           </div>
-          <h2
+          <dt-text
             v-else
             :id="labelledById"
+            kind="headline"
+            size="2xl"
+            strength="medium"
+            density="100"
+            as="h2"
             class="d-modal__header"
             data-qa="dt-modal-title"
           >
             {{ title }}
-          </h2>
+          </dt-text>
           <div
             v-if="hasSlotContent($slots.default)"
             :class="[
@@ -122,6 +127,7 @@
 <script>
 /* eslint-disable max-lines */
 import { DtButton } from '@/components/button';
+import { DtText } from '@/components/text';
 import { DtIconClose } from '@dialpad/dialtone-icons/vue3';
 import Modal from '@/common/mixins/modal';
 import {
@@ -148,6 +154,7 @@ export default {
   components: {
     DtLazyShow,
     DtButton,
+    DtText,
     DtIconClose,
     SrOnlyCloseButton,
   },

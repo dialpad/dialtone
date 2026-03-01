@@ -24,14 +24,18 @@
           {{ label }}
         </dt-text>
       </slot>
-      <div
+      <dt-text
         v-if="hasSlotContent($slots.description) || description || shouldValidateLength"
         :id="descriptionKey"
         ref="description"
+        kind="body"
+        :size="resolvedDescriptionSize"
+        tone="tertiary"
+        :density="resolvedDescriptionDensity"
+        as="div"
         :class="[
           'd-input__description',
           'd-description',
-          descriptionSizeClasses[size],
         ]"
         data-qa="dt-input-description"
       >
@@ -48,7 +52,7 @@
         >
           {{ validationProps.length.description }}
         </div>
-      </div>
+      </dt-text>
       <div
         :class="inputWrapperClasses()"
         :read-only="disabled === true ? true : undefined"
@@ -138,7 +142,6 @@ import {
   INPUT_SIZE_CLASSES,
   INPUT_ICON_SIZES,
   INPUT_STATE_CLASSES,
-  DESCRIPTION_SIZE_CLASSES,
 } from './input_constants';
 import {
   getUniqueString,
@@ -533,6 +536,15 @@ export default {
       return this.labelSize ?? (this.size === 'xl' ? 'lg' : this.size);
     },
 
+    resolvedDescriptionSize () {
+      const map = { xs: 'xs', sm: 'xs', md: 'sm', lg: 'sm', xl: 'md' };
+      return map[this.size] || 'sm';
+    },
+
+    resolvedDescriptionDensity () {
+      return this.size === 'xl' ? '300' : undefined;
+    },
+
     sizeModifierClass () {
       if (this.isDefaultSize || !this.isValidSize) {
         return '';
@@ -568,10 +580,6 @@ export default {
         }
       },
     },
-  },
-
-  beforeMount () {
-    this.descriptionSizeClasses = DESCRIPTION_SIZE_CLASSES;
   },
 
   mounted () {

@@ -18,7 +18,8 @@
   justify-content: center;
   box-sizing: border-box;
   padding-inline: var(--dt-size-350);
-  line-height: var(--dt-font-line-height-400);
+  font: var(--dt-typography-body-sm);
+  font-variant-numeric: tabular-nums;
   min-inline-size: 1lh;
   border: var(--dt-size-100) solid;
   border-color: var(--dt-color-border-default);
@@ -42,7 +43,8 @@
     clip-path: inset(50%);
   }
 
-  &__icon {
+  &__icon,
+  &__item {
     min-block-size: 1lh;
     color: var(--dt-color-foreground-tertiary);
 
@@ -59,8 +61,5 @@
     }
   }
 
-  &__item {
-    min-block-size: 1lh;
-  }
 }
 }

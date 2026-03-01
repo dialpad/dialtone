@@ -37,8 +37,12 @@
       class="d-checkbox__messages"
       data-qa="checkbox-description-messages"
     >
-      <div
+      <dt-text
         v-if="$slots.description || description"
+        kind="body"
+        size="sm"
+        tone="tertiary"
+        as="div"
         :class="['d-description', descriptionClass]"
         v-bind="descriptionChildProps"
         data-qa="checkbox-description"
@@ -47,7 +51,7 @@
         <slot name="description">
           {{ description }}
         </slot>
-      </div>
+      </dt-text>
       <dt-validation-messages
         :validation-messages="formattedMessages"
         :show-messages="showMessages"
