@@ -553,5 +553,189 @@ const resolvedLabelSize = computed(() => labelSizeSelection.value === 'default' 
       </div>
     </dt-tab-group>
   </dt-stack>
+  <dt-stack gap="500">
+    <dt-text as="h1" kind="headline" size="xl">
+      Notice / Banner / Toast
+    </dt-text>
+    <dt-text as="p" kind="body" size="lg">
+      Updated typography sizing and intelligent icon alignment. Icon margin adjusts based on content layout: title-only, message-only, or title+message.
+    </dt-text>
+    <dt-stack gap="500">
+      <dt-text as="h2" kind="headline" size="lg">
+        Notice
+      </dt-text>
+      <div class="d-d-grid d-g32 d-g-cols2">
+        <dt-stack gap="400">
+          <dt-text as="h3" kind="headline" size="md">Default</dt-text>
+          <dt-notice kind="success" title="Success" hide-action>
+            Action completed successfully.
+          </dt-notice>
+          <dt-notice kind="warning" title="Warning" hide-action>
+            Please review before proceeding.
+          </dt-notice>
+          <dt-notice kind="error" title="Error" hide-action>
+            Something went wrong. Please try again.
+          </dt-notice>
+          <dt-notice kind="base" title="Base" hide-action>
+            A neutral notice for general information.
+          </dt-notice>
+        </dt-stack>
+        <dt-stack gap="400">
+          <dt-text as="h3" kind="headline" size="md">Important</dt-text>
+          <dt-notice kind="info" title="Important info" :important="true" hide-action>
+            Visually prominent variant with filled background.
+          </dt-notice>
+          <dt-notice kind="success" title="Important success" :important="true" hide-action>
+            Visually prominent variant with filled background.
+          </dt-notice>
+          <dt-notice kind="warning" title="Important warning" :important="true" hide-action>
+            Visually prominent variant with filled background.
+          </dt-notice>
+          <dt-notice kind="error" title="Important error" :important="true" hide-action>
+            Visually prominent variant with filled background.
+          </dt-notice>
+        </dt-stack>
+        <dt-stack gap="400">
+          <dt-text as="h3" kind="headline" size="md">Alignment per internal parts</dt-text>
+          <dt-notice kind="info" title="Title only" hide-action />
+          <dt-notice kind="info" hide-action>
+            Message only — icon aligns to center when there is a single line of content.
+          </dt-notice>
+          <dt-notice kind="info" title="Title and message" hide-action>
+            When both title and message are present, the icon aligns to the top of the content stack.
+          </dt-notice>
+        </dt-stack>
+      </div>
+    </dt-stack>
+    <dt-stack gap="500">
+      <dt-text as="h2" kind="headline" size="lg">
+        Banner
+      </dt-text>
+      <dt-stack gap="400">
+        <dt-banner kind="info" title="Info banner" class="d-ps-relative d-zi-base">
+          Banners are more prominent than notices.
+        </dt-banner>
+        <dt-banner kind="success" title="Success banner" class="d-ps-relative d-zi-base">
+          Action completed successfully.
+        </dt-banner>
+        <dt-banner kind="warning" title="Warning banner" class="d-ps-relative d-zi-base">
+          Please review before proceeding.
+        </dt-banner>
+        <dt-banner kind="error" title="Error banner" class="d-ps-relative d-zi-base">
+          Something went wrong.
+        </dt-banner>
+      </dt-stack>
+      <dt-stack gap="400">
+        <dt-text as="h3" kind="headline" size="md">Important</dt-text>
+        <dt-banner kind="info" title="Info banner" :important="true" class="d-ps-relative d-zi-base">
+          Banners are more prominent than notices.
+        </dt-banner>
+        <dt-banner kind="success" title="Success banner" :important="true" class="d-ps-relative d-zi-base">
+          Action completed successfully.
+        </dt-banner>
+        <dt-banner kind="warning" title="Warning banner" :important="true" class="d-ps-relative d-zi-base">
+          Please review before proceeding.
+        </dt-banner>
+        <dt-banner kind="error" title="Error banner" :important="true" class="d-ps-relative d-zi-base">
+          Something went wrong.
+        </dt-banner>
+      </dt-stack>
+    </dt-stack>
+    <dt-stack gap="500">
+      <dt-text as="h2" kind="headline" size="lg">
+        Toast
+      </dt-text>
+      <div class="d-d-grid d-g32 d-g-cols2">
+        <dt-stack gap="400">
+          <dt-text as="h3" kind="headline" size="md">Default</dt-text>
+          <dt-toast :show="true" kind="info" title="Info toast" message="Informational message." :duration="null" />
+          <dt-toast :show="true" kind="success" title="Success toast" message="Action completed." :duration="null" />
+          <dt-toast :show="true" kind="warning" title="Warning toast" message="Review before proceeding." :duration="null" />
+          <dt-toast :show="true" kind="error" title="Error toast" message="Something went wrong." :duration="null" />
+          <dt-toast :show="true" kind="base" title="Base toast" message="Neutral notification." :duration="null" />
+        </dt-stack>
+        <dt-stack gap="400">
+          <dt-text as="h3" kind="headline" size="md">Important</dt-text>
+          <dt-toast :show="true" kind="info" title="Info toast" message="Informational message." :important="true" :duration="null" />
+          <dt-toast :show="true" kind="success" title="Success toast" message="Action completed." :important="true" :duration="null" />
+          <dt-toast :show="true" kind="warning" title="Warning toast" message="Review before proceeding." :important="true" :duration="null" />
+          <dt-toast :show="true" kind="error" title="Error toast" message="Something went wrong." :important="true" :duration="null" />
+          <dt-toast :show="true" kind="base" title="Base toast" message="Neutral notification." :important="true" :duration="null" />
+        </dt-stack>
+        <dt-stack gap="400">
+          <dt-text as="h3" kind="headline" size="md">Alignment per internal parts</dt-text>
+          <dt-toast :show="true" kind="info" title="Title only" :duration="null" />
+          <dt-toast :show="true" kind="info" message="Action completed." :duration="null" />
+          <dt-toast :show="true" kind="info" title="Title and message" message="Review before proceeding." :duration="null" />
+        </dt-stack>
+      </div>
+    </dt-stack>
+  </dt-stack>
+  <dt-stack gap="500">
+    <dt-text as="h1" kind="headline" size="xl">
+      Radio / Checkbox Label Sizes
+    </dt-text>
+    <dt-text as="p" kind="body" size="lg">
+      Label size prop controls typography size via DtText. Alignment stays consistent across sizes.
+    </dt-text>
+    <dt-stack gap="500" direction="row">
+      <dt-stack gap="400" class="d-fl1">
+        <dt-text as="h2" kind="headline" size="lg">Checkbox</dt-text>
+        <dt-checkbox label="Extra small label" label-size="xs" />
+        <dt-checkbox label="Small label" label-size="sm" />
+        <dt-checkbox label="Medium label (default)" />
+        <dt-checkbox label="Large label" label-size="lg" />
+      </dt-stack>
+      <dt-stack gap="400" class="d-fl1">
+        <dt-text as="h2" kind="headline" size="lg">Radio</dt-text>
+        <dt-radio label="Extra small label" value="1" label-size="xs" />
+        <dt-radio label="Small label" value="2" label-size="sm" />
+        <dt-radio label="Medium label (default)" value="3" />
+        <dt-radio label="Large label" value="4" label-size="lg" />
+      </dt-stack>
+    </dt-stack>
+    <dt-stack gap="500">
+      <dt-text as="h2" kind="headline" size="lg">With descriptions</dt-text>
+      <dt-stack gap="500" direction="row">
+        <dt-stack gap="400" class="d-fl1">
+          <dt-checkbox label="Small label" label-size="sm">
+            <template #description>Description text alongside small label</template>
+          </dt-checkbox>
+          <dt-checkbox label="Medium label">
+            <template #description>Description text alongside medium label</template>
+          </dt-checkbox>
+          <dt-checkbox label="Large label" label-size="lg">
+            <template #description>Description text alongside large label</template>
+          </dt-checkbox>
+        </dt-stack>
+        <dt-stack gap="400" class="d-fl1">
+          <dt-radio label="Small label" value="5" label-size="sm">
+            <template #description>Description text alongside small label</template>
+          </dt-radio>
+          <dt-radio label="Medium label" value="6">
+            <template #description>Description text alongside medium label</template>
+          </dt-radio>
+          <dt-radio label="Large label" value="7" label-size="lg">
+            <template #description>Description text alongside large label</template>
+          </dt-radio>
+        </dt-stack>
+      </dt-stack>
+    </dt-stack>
+    <dt-stack gap="500">
+      <dt-text as="h2" kind="headline" size="lg">Disabled</dt-text>
+      <dt-stack gap="500" direction="row">
+        <dt-stack gap="400" class="d-fl1">
+          <dt-checkbox label="Disabled small" label-size="sm" disabled />
+          <dt-checkbox label="Disabled medium" disabled />
+          <dt-checkbox label="Disabled large" label-size="lg" disabled />
+        </dt-stack>
+        <dt-stack gap="400" class="d-fl1">
+          <dt-radio label="Disabled small" value="8" label-size="sm" disabled />
+          <dt-radio label="Disabled medium" value="9" disabled />
+          <dt-radio label="Disabled large" value="10" label-size="lg" disabled />
+        </dt-stack>
+      </dt-stack>
+    </dt-stack>
+  </dt-stack>
 </dt-stack>
 <div class="d-h768"></div>
