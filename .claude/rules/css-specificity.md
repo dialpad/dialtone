@@ -90,3 +90,7 @@ All component styles are inside `@layer dialtone.components`. This means:
 - No bare element selectors without `:where()` wrapping
 - No `!important` in component styles (reserved for utility classes)
 - No qualifying element selectors on classes (e.g., `div.d-banner` — just use `.d-banner`)
+
+## Reference
+
+Use [Specificity Calculator](https://specificity.keegan.st/) to verify selector specificity values. It supports CSS Selectors Level 4 including `:where()`, `:is()`, and `:has()`.

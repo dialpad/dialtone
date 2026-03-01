@@ -110,6 +110,8 @@ Do **not** wrap the component class itself, BEM modifiers, or state pseudo-class
 | `.d-tablist--inverted .d-tab` | (0,2,0) | Acceptable — parent modifier affecting child |
 | `.d-notice.d-notice--truncate .d-notice__content .d-notice__title` | (0,4,0) | Avoid — refactor to use CSS custom properties |
 
+Use the [Specificity Calculator](https://specificity.keegan.st/) to verify selector specificity values when in doubt. It supports CSS Selectors Level 4 including `:where()`, `:is()`, and `:has()`.
+
 ### Immutable utility classes
 
 All of our utility classes are set to `!important`. This is because they are designed to be immutable, and `!important` is the best way we have of achieving immutability in CSS. Utility classes should only be applied at the application level and not within Dialtone Vue components.
