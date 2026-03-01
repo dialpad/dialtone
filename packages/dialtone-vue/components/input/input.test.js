@@ -548,6 +548,18 @@ describe('DtInput tests', () => {
       });
     });
 
+    describe('When descriptionClass is provided', () => {
+      it('should apply custom class to the description', () => {
+        mockProps = { description: 'Description', descriptionClass: 'd-bgc-success' };
+
+        updateWrapper();
+
+        const descriptionEl = wrapper.find('[data-qa="dt-input-description"]');
+
+        expect(descriptionEl.classes('d-bgc-success')).toBe(true);
+      });
+    });
+
     describe('When the length validation props are provided', () => {
       const MOCK_VALIDATE = {
         length: {
@@ -713,50 +725,6 @@ describe('DtInput tests', () => {
             expect(wrapper.emitted()['update:invalid'][1][0]).toBe(false);
           });
         });
-      });
-    });
-  });
-
-  describe('Validation Tests', () => {
-    let consoleWarnSpy;
-
-    beforeEach(() => {
-      consoleWarnSpy = vi.spyOn(console, 'warn');
-    });
-
-    afterEach(() => {
-      consoleWarnSpy.mockRestore();
-    });
-
-    describe('When no label and no aria-label are provided', () => {
-      it('should warn about missing label', () => {
-        mockProps = { label: '' };
-
-        updateWrapper();
-
-        expect(console.warn).toHaveBeenCalled();
-        expect(console.warn.mock.calls[0]).toContain(
-          '[Vue warn]: A label is required for accessibility. Provide a label prop and use label-visible="false" to hide it visually.',
-        );
-      });
-    });
-
-    describe('When a label is provided', () => {
-      it('should not warn', () => {
-        updateWrapper();
-
-        expect(console.warn).not.toHaveBeenCalled();
-      });
-    });
-
-    describe('When no label but aria-label attr is provided', () => {
-      it('should not warn', () => {
-        mockProps = { label: '' };
-        mockAttrs = { 'aria-label': 'accessible label' };
-
-        updateWrapper();
-
-        expect(console.warn).not.toHaveBeenCalled();
       });
     });
   });

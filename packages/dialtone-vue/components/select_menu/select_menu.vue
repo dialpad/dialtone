@@ -385,9 +385,8 @@ export default {
     runValidations () {
       const hasLabel = !!(this.$slots.label || this.label);
       if (!hasLabel && !this.$attrs['aria-label']) {
-        warn(
-          'A label is required for accessibility. Provide a label prop and use label-visible="false" to hide it visually.',
-          this,
+        console.info(
+          '[Dialtone] A label is required for accessibility. Provide a label prop and use label-visible="false" to hide it visually.',
         );
       }
     },

@@ -32,7 +32,6 @@
 </template>
 
 <script>
-import { warn } from 'vue';
 import { getUniqueString, hasSlotContent, removeClassStyleAttrs, addClassStyleAttrs } from '@/common/utils';
 import { TOGGLE_CHECKED_VALUES, TOGGLE_SIZE_MODIFIERS } from '@/components/toggle/toggle_constants';
 
@@ -224,9 +223,8 @@ export default {
     runValidations () {
       const hasVisibleLabel = this.labelVisible && this.hasSlotLabel();
       if (!hasVisibleLabel && !this.$attrs['aria-label']) {
-        warn(
-          'A label is required for accessibility. Provide a label and use label-visible="false" to hide it visually.',
-          this,
+        console.info(
+          '[Dialtone] A label is required for accessibility. Provide a label and use label-visible="false" to hide it visually.',
         );
       }
     },

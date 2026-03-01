@@ -21,9 +21,10 @@ const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 const borderless = ref(false);
 const outlined = ref(false);
 const muted = ref(false);
-const showIcon = ref(true);
-const showLeading = ref(true);
-const showTrailing = ref(true);
+const showIcon = ref(false);
+const showTabEndIcon = ref(false);
+const showLeading = ref(false);
+const showTrailing = ref(false);
 const size = ref('md');
 const selectOnFocus = ref(false);
 const isDisabled = ref(false);
@@ -33,6 +34,33 @@ const labelStrengthSelection = ref('default');
 const resolvedLabelStrength = computed(() => labelStrengthSelection.value === 'default' ? undefined : labelStrengthSelection.value);
 const showLabelClass = ref(false);
 const resolvedLabelClass = computed(() => showLabelClass.value ? 'd-bgc-warning' : undefined);
+const checkRadioLabelSize = ref('default');
+const resolvedCheckRadioLabelSize = computed(() => checkRadioLabelSize.value === 'default' ? undefined : checkRadioLabelSize.value);
+const checkRadioLabelStrength = ref('default');
+const resolvedCheckRadioLabelStrength = computed(() => checkRadioLabelStrength.value === 'default' ? undefined : checkRadioLabelStrength.value);
+const showBtnLeading = ref(false);
+const showBtnTrailing = ref(false);
+const showBtnStartIcon = ref(false);
+const showBtnEndIcon = ref(false);
+const showBtnLabelClass = ref(false);
+const resolvedBtnLabelClass = computed(() => showBtnLabelClass.value ? 'd-bgc-warning' : undefined);
+const showTabLabelClass = ref(false);
+const resolvedTabLabelClass = computed(() => showTabLabelClass.value ? 'd-bgc-warning' : undefined);
+const showInputDescription = ref(false);
+const showInputMessages = ref(false);
+const inputMessages = computed(() => showInputMessages.value ? [{ message: 'Error validation message', type: 'error' }] : []);
+const showInputMessagesClass = ref(false);
+const resolvedInputMessagesClass = computed(() => showInputMessagesClass.value ? 'd-bgc-critical' : undefined);
+const showInputDescriptionClass = ref(false);
+const resolvedInputDescriptionClass = computed(() => showInputDescriptionClass.value ? 'd-bgc-success' : undefined);
+const showDescription = ref(false);
+const showCheckRadioMessages = ref(false);
+const checkRadioMessages = computed(() => showCheckRadioMessages.value ? [{ message: 'Error validation message', type: 'error' }] : []);
+const showCheckRadioMessagesClass = ref(false);
+const resolvedCheckRadioMessagesClass = computed(() => showCheckRadioMessagesClass.value ? 'd-bgc-critical' : undefined);
+const showCheckRadioDescriptionClass = ref(false);
+const resolvedCheckRadioDescriptionClass = computed(() => showCheckRadioDescriptionClass.value ? 'd-bgc-success' : undefined);
+const checkRadioDisabled = ref(false);
 </script>
 
 <dt-stack class="d-p32" gap="600">
@@ -50,7 +78,7 @@ const resolvedLabelClass = computed(() => showLabelClass.value ? 'd-bgc-warning'
           icon-position="right"
           class="dialtone-shell-btn"
         >
-          <template #icon="{ iconSize }">
+          <template #startIcon="{ iconSize }">
             <dt-icon :name="currentModeIconName" :size="iconSize" />
           </template>
         </dt-button>
@@ -128,27 +156,29 @@ const resolvedLabelClass = computed(() => showLabelClass.value ? 'd-bgc-warning'
       Not just a matter of applying opacity to whole button, but w/ combination of `color-mix()` and tweaking existing DtButton css variables via `oklch()` of specific properties – separate opacity and saturation for border, bgc, fc, etc.
     </dt-text>
     <dt-stack class="d-bgc-moderate-opaque d-p12 d-bar8">
-      <dt-checkbox v-model="isDisabled">Disabled</dt-checkbox>
+      <span>
+        <dt-checkbox v-model="isDisabled">Disabled</dt-checkbox>
+      </span>
     </dt-stack>
     <dt-stack gap="400" ref="disabledAll">
       <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
-        <dt-button :disabled="isDisabled"> Place Call <template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template></dt-button>
-        <dt-button :disabled="isDisabled" importance="outlined"> Place Call <template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template></dt-button>
-        <dt-button :disabled="isDisabled" importance="clear"> Place Call <template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template></dt-button>
+        <dt-button :disabled="isDisabled"> Place Call <template #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template></dt-button>
+        <dt-button :disabled="isDisabled" importance="outlined"> Place Call <template #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template></dt-button>
+        <dt-button :disabled="isDisabled" importance="clear"> Place Call <template #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template></dt-button>
       </dt-stack>
       <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
-        <dt-button :disabled="isDisabled" kind="danger"> Place Call <template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template></dt-button>
-        <dt-button :disabled="isDisabled" kind="danger" importance="outlined"> Place Call <template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template></dt-button>
-        <dt-button :disabled="isDisabled" kind="danger" importance="clear"> Place Call <template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template></dt-button>
+        <dt-button :disabled="isDisabled" kind="danger"> Place Call <template #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template></dt-button>
+        <dt-button :disabled="isDisabled" kind="danger" importance="outlined"> Place Call <template #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template></dt-button>
+        <dt-button :disabled="isDisabled" kind="danger" importance="clear"> Place Call <template #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template></dt-button>
       </dt-stack>
       <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
-        <dt-button :disabled="isDisabled" kind="positive">Place Call<template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template></dt-button>
-        <dt-button :disabled="isDisabled" kind="positive" importance="outlined">Place Call<template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template></dt-button>
-        <dt-button :disabled="isDisabled" kind="positive" importance="clear">Place Call<template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template></dt-button>
+        <dt-button :disabled="isDisabled" kind="positive">Place Call<template #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template></dt-button>
+        <dt-button :disabled="isDisabled" kind="positive" importance="outlined">Place Call<template #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template></dt-button>
+        <dt-button :disabled="isDisabled" kind="positive" importance="clear">Place Call<template #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template></dt-button>
       </dt-stack>
       <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
-        <dt-button :disabled="isDisabled" kind="muted" importance="clear"> Place Call <template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template></dt-button>
-        <dt-button :disabled="isDisabled" kind="muted" importance="outlined"> Place Call <template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template></dt-button>
+        <dt-button :disabled="isDisabled" kind="muted" importance="clear"> Place Call <template #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template></dt-button>
+        <dt-button :disabled="isDisabled" kind="muted" importance="outlined"> Place Call <template #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template></dt-button>
       </dt-stack>
     </dt-stack>
   </dt-stack>
@@ -159,41 +189,78 @@ const resolvedLabelClass = computed(() => showLabelClass.value ? 'd-bgc-warning'
     <dt-text as="p" kind="body" size="lg">
       Freeform elements that are rendered before/after the button content.
     </dt-text>
-    <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
-      <dt-button kind="muted" importance="outlined" size="xs" trailing-class="d-pr1">
+    <dt-stack gap="500" direction="row" align="baseline" class="d-bgc-moderate-opaque d-p12 d-bar8">
+      <dt-checkbox v-model="showBtnLeading">
+        Leading
+      </dt-checkbox>
+      <dt-checkbox v-model="showBtnTrailing">
+        Trailing
+      </dt-checkbox>
+      <dt-checkbox v-model="showBtnStartIcon">
+        Start Icon
+      </dt-checkbox>
+      <dt-checkbox v-model="showBtnEndIcon">
+        End Icon
+      </dt-checkbox>
+      <dt-checkbox v-model="showBtnLabelClass">
+        `labelClass`
+      </dt-checkbox>
+    </dt-stack>
+    <dt-stack gap="400" direction="row">
+      <dt-button kind="muted" importance="outlined" size="xs" leading-class="d-pl2" trailing-class="d-pr1" :label-class="resolvedBtnLabelClass">
         Place Call
-        <template #trailing>
+        <template v-if="showBtnLeading" #leading>
+          <dt-badge kind="count" text="1" />
+        </template>
+        <template v-if="showBtnTrailing" #trailing>
           <dt-badge text="Label" />
         </template>
-        <template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template>
+        <template v-if="showBtnStartIcon" #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template>
+        <template v-if="showBtnEndIcon" #endIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template>
       </dt-button>
-      <dt-button kind="muted" importance="outlined" size="sm" trailing-class="d-pr4">
+      <dt-button kind="muted" importance="outlined" size="sm" leading-class="d-pl2" trailing-class="d-pr4" :label-class="resolvedBtnLabelClass">
         Place Call
-        <template #trailing>
+        <template v-if="showBtnLeading" #leading>
+          <dt-badge kind="count" text="1" />
+        </template>
+        <template v-if="showBtnTrailing" #trailing>
           <dt-badge text="Label" />
         </template>
-        <template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template>
+        <template v-if="showBtnStartIcon" #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template>
+        <template v-if="showBtnEndIcon" #endIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template>
       </dt-button>
-      <dt-button kind="muted" importance="outlined" size="md" trailing-class="d-pr8">
+      <dt-button kind="muted" importance="outlined" size="md" leading-class="d-pl4" trailing-class="d-pr8" :label-class="resolvedBtnLabelClass">
         Place Call
-        <template #trailing>
+        <template v-if="showBtnLeading" #leading>
+          <dt-badge kind="count" text="1" />
+        </template>
+        <template v-if="showBtnTrailing" #trailing>
           <dt-badge text="Label" />
         </template>
-        <template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template>
+        <template v-if="showBtnStartIcon" #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template>
+        <template v-if="showBtnEndIcon" #endIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template>
       </dt-button>
-      <dt-button kind="muted" importance="outlined" size="lg" trailing-class="d-pr10">
+      <dt-button kind="muted" importance="outlined" size="lg" leading-class="d-pl8" trailing-class="d-pr10" :label-class="resolvedBtnLabelClass">
         Place Call
-        <template #trailing>
+        <template v-if="showBtnLeading" #leading>
+          <dt-badge kind="count" text="1" />
+        </template>
+        <template v-if="showBtnTrailing" #trailing>
           <dt-badge text="Label" />
         </template>
-        <template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template>
+        <template v-if="showBtnStartIcon" #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template>
+        <template v-if="showBtnEndIcon" #endIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template>
       </dt-button>
-      <dt-button kind="muted" importance="outlined" size="xl" trailing-class="d-pr12">
+      <dt-button kind="muted" importance="outlined" size="xl" leading-class="d-pl8" trailing-class="d-pr12" :label-class="resolvedBtnLabelClass">
         Place Call
-        <template #trailing>
+        <template v-if="showBtnLeading" #leading>
+          <dt-badge kind="count" text="1" />
+        </template>
+        <template v-if="showBtnTrailing" #trailing>
           <dt-badge text="Label" />
         </template>
-        <template #icon="{ iconSize }"> <dt-icon name="sun" :size="iconSize" /> </template>
+        <template v-if="showBtnStartIcon" #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template>
+        <template v-if="showBtnEndIcon" #endIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template>
       </dt-button>
     </dt-stack>
   </dt-stack>
@@ -221,8 +288,8 @@ const resolvedLabelClass = computed(() => showLabelClass.value ? 'd-bgc-warning'
         importance="primary"
         size="xs"
       >
-        <template #icon="{ iconSize }">
-          <dt-icon name="sun" :size="iconSize" />
+        <template #startIcon="{ iconSize }">
+          <dt-icon name="box-select" :size="iconSize" />
         </template>
         Button
       </dt-button>
@@ -247,8 +314,8 @@ const resolvedLabelClass = computed(() => showLabelClass.value ? 'd-bgc-warning'
         importance="primary"
         size="sm"
       >
-        <template #icon="{ iconSize }">
-          <dt-icon name="sun" :size="iconSize" />
+        <template #startIcon="{ iconSize }">
+          <dt-icon name="box-select" :size="iconSize" />
         </template>
         Button
       </dt-button>
@@ -273,8 +340,8 @@ const resolvedLabelClass = computed(() => showLabelClass.value ? 'd-bgc-warning'
         importance="primary"
         size="md"
       >
-        <template #icon="{ iconSize }">
-          <dt-icon name="sun" :size="iconSize" />
+        <template #startIcon="{ iconSize }">
+          <dt-icon name="box-select" :size="iconSize" />
         </template>
         Button
       </dt-button>
@@ -299,8 +366,8 @@ const resolvedLabelClass = computed(() => showLabelClass.value ? 'd-bgc-warning'
         importance="primary"
         size="lg"
       >
-        <template #icon="{ iconSize }">
-          <dt-icon name="sun" :size="iconSize" />
+        <template #startIcon="{ iconSize }">
+          <dt-icon name="box-select" :size="iconSize" />
         </template>
         Button
       </dt-button>
@@ -325,8 +392,8 @@ const resolvedLabelClass = computed(() => showLabelClass.value ? 'd-bgc-warning'
         importance="primary"
         size="xl"
       >
-        <template #icon="{ iconSize }">
-          <dt-icon name="sun" :size="iconSize" />
+        <template #startIcon="{ iconSize }">
+          <dt-icon name="box-select" :size="iconSize" />
         </template>
         Button
       </dt-button>
@@ -334,11 +401,12 @@ const resolvedLabelClass = computed(() => showLabelClass.value ? 'd-bgc-warning'
   </dt-stack>
   <dt-stack gap="500">
     <dt-text as="h1" kind="headline" size="xl">
-      Label Size/Strength
+      Input / Select
     </dt-text>
-    <dt-stack gap="500" direction="row" align="end" class="d-bgc-moderate-opaque d-p12 d-bar8">
+    <dt-stack gap="500" direction="row" class="d-bgc-moderate-opaque d-p12 d-bar8">
       <dt-select-menu
         label="Label Size"
+        :label-visible="false"
         :options="[
           { value: 'default', label: 'Default' },
           { value: 'xs', label: 'xs' },
@@ -351,6 +419,7 @@ const resolvedLabelClass = computed(() => showLabelClass.value ? 'd-bgc-warning'
       />
       <dt-select-menu
         label="Label Strength"
+        :label-visible="false"
         :options="[
           { value: 'default', label: 'Default' },
           { value: 'bold', label: 'bold' },
@@ -361,15 +430,19 @@ const resolvedLabelClass = computed(() => showLabelClass.value ? 'd-bgc-warning'
         :model-value="labelStrengthSelection"
         @change="labelStrengthSelection = $event"
       />
-      <dt-button kind="muted" importance="outlined" @click="showLabelClass = !showLabelClass">Toggle `labelClass`</dt-button>
+      <dt-checkbox v-model="showLabelClass">`labelClass`</dt-checkbox>
+      <dt-checkbox v-model="showInputDescription">Description</dt-checkbox>
+      <dt-checkbox v-model="showInputMessages">Messages</dt-checkbox>
+      <dt-checkbox v-model="showInputMessagesClass">`messagesClass`</dt-checkbox>
+      <dt-checkbox v-model="showInputDescriptionClass">`descriptionClass`</dt-checkbox>
     </dt-stack>
-    <dt-stack direction="row">
+    <dt-stack direction="row" gap="600">
       <dt-stack gap="400" class="d-fl1">
-        <dt-input label="Extra Small" type="text" placeholder="Placeholder" size="xs" :label-size="resolvedLabelSize" :label-strength="resolvedLabelStrength" :label-class="resolvedLabelClass" />
-        <dt-input label="Small" type="text" placeholder="Placeholder" size="sm" :label-size="resolvedLabelSize" :label-strength="resolvedLabelStrength" :label-class="resolvedLabelClass" />
-        <dt-input label="Medium" type="text" placeholder="Placeholder" size="md" :label-size="resolvedLabelSize" :label-strength="resolvedLabelStrength" :label-class="resolvedLabelClass" />
-        <dt-input label="Large" type="text" placeholder="Placeholder" size="lg" :label-size="resolvedLabelSize" :label-strength="resolvedLabelStrength" :label-class="resolvedLabelClass" />
-        <dt-input label="Extra large" type="text" placeholder="Placeholder" size="xl" :label-size="resolvedLabelSize" :label-strength="resolvedLabelStrength" :label-class="resolvedLabelClass" />
+        <dt-input label="Extra Small" type="text" placeholder="Placeholder" size="xs" :label-size="resolvedLabelSize" :label-strength="resolvedLabelStrength" :label-class="resolvedLabelClass" :description="showInputDescription ? 'Description text' : undefined" :messages="inputMessages" :messages-class="resolvedInputMessagesClass" :description-class="resolvedInputDescriptionClass" />
+        <dt-input label="Small" type="text" placeholder="Placeholder" size="sm" :label-size="resolvedLabelSize" :label-strength="resolvedLabelStrength" :label-class="resolvedLabelClass" :description="showInputDescription ? 'Description text' : undefined" :messages="inputMessages" :messages-class="resolvedInputMessagesClass" :description-class="resolvedInputDescriptionClass" />
+        <dt-input label="Medium" type="text" placeholder="Placeholder" size="md" :label-size="resolvedLabelSize" :label-strength="resolvedLabelStrength" :label-class="resolvedLabelClass" :description="showInputDescription ? 'Description text' : undefined" :messages="inputMessages" :messages-class="resolvedInputMessagesClass" :description-class="resolvedInputDescriptionClass" />
+        <dt-input label="Large" type="text" placeholder="Placeholder" size="lg" :label-size="resolvedLabelSize" :label-strength="resolvedLabelStrength" :label-class="resolvedLabelClass" :description="showInputDescription ? 'Description text' : undefined" :messages="inputMessages" :messages-class="resolvedInputMessagesClass" :description-class="resolvedInputDescriptionClass" />
+        <dt-input label="Extra large" type="text" placeholder="Placeholder" size="xl" :label-size="resolvedLabelSize" :label-strength="resolvedLabelStrength" :label-class="resolvedLabelClass" :description="showInputDescription ? 'Description text' : undefined" :messages="inputMessages" :messages-class="resolvedInputMessagesClass" :description-class="resolvedInputDescriptionClass" />
       </dt-stack>
       <dt-stack gap="400" class="d-fl1">
         <!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
@@ -385,6 +458,10 @@ const resolvedLabelClass = computed(() => showLabelClass.value ? 'd-bgc-warning'
           :label-size="resolvedLabelSize"
           :label-strength="resolvedLabelStrength"
           :label-class="resolvedLabelClass"
+          :description="showInputDescription ? 'Description text' : undefined"
+          :messages="inputMessages"
+          :messages-class="resolvedInputMessagesClass"
+          :description-class="resolvedInputDescriptionClass"
           :model-value="modelValue"
           @input="onInput"
           @change="onChange"
@@ -401,6 +478,10 @@ const resolvedLabelClass = computed(() => showLabelClass.value ? 'd-bgc-warning'
           :label-size="resolvedLabelSize"
           :label-strength="resolvedLabelStrength"
           :label-class="resolvedLabelClass"
+          :description="showInputDescription ? 'Description text' : undefined"
+          :messages="inputMessages"
+          :messages-class="resolvedInputMessagesClass"
+          :description-class="resolvedInputDescriptionClass"
           :model-value="modelValue"
           @input="onInput"
           @change="onChange"
@@ -417,6 +498,10 @@ const resolvedLabelClass = computed(() => showLabelClass.value ? 'd-bgc-warning'
           :label-size="resolvedLabelSize"
           :label-strength="resolvedLabelStrength"
           :label-class="resolvedLabelClass"
+          :description="showInputDescription ? 'Description text' : undefined"
+          :messages="inputMessages"
+          :messages-class="resolvedInputMessagesClass"
+          :description-class="resolvedInputDescriptionClass"
           :model-value="modelValue"
           @input="onInput"
           @change="onChange"
@@ -433,6 +518,10 @@ const resolvedLabelClass = computed(() => showLabelClass.value ? 'd-bgc-warning'
           :label-size="resolvedLabelSize"
           :label-strength="resolvedLabelStrength"
           :label-class="resolvedLabelClass"
+          :description="showInputDescription ? 'Description text' : undefined"
+          :messages="inputMessages"
+          :messages-class="resolvedInputMessagesClass"
+          :description-class="resolvedInputDescriptionClass"
           :model-value="modelValue"
           @input="onInput"
           @change="onChange"
@@ -449,6 +538,10 @@ const resolvedLabelClass = computed(() => showLabelClass.value ? 'd-bgc-warning'
           :label-size="resolvedLabelSize"
           :label-strength="resolvedLabelStrength"
           :label-class="resolvedLabelClass"
+          :description="showInputDescription ? 'Description text' : undefined"
+          :messages="inputMessages"
+          :messages-class="resolvedInputMessagesClass"
+          :description-class="resolvedInputDescriptionClass"
           :model-value="modelValue"
           @input="onInput"
           @change="onChange"
@@ -474,16 +567,22 @@ const resolvedLabelClass = computed(() => showLabelClass.value ? 'd-bgc-warning'
         Muted
       </dt-checkbox>
       <dt-checkbox v-model="showIcon">
-        Show Icon
+        Start Icon
+      </dt-checkbox>
+      <dt-checkbox v-model="showTabEndIcon">
+        End Icon
       </dt-checkbox>
       <dt-checkbox v-model="showLeading">
-        Show Leading
+        Leading
       </dt-checkbox>
       <dt-checkbox v-model="showTrailing">
-        Show Trailing
+        Trailing
       </dt-checkbox>
       <dt-checkbox v-model="selectOnFocus">
         Select on focus
+      </dt-checkbox>
+      <dt-checkbox v-model="showTabLabelClass">
+        `labelClass`
       </dt-checkbox>
       <dt-select-menu
         :options="[
@@ -499,9 +598,12 @@ const resolvedLabelClass = computed(() => showLabelClass.value ? 'd-bgc-warning'
     </dt-stack>
     <dt-tab-group :borderless="borderless" :kind="muted ? 'muted' : 'default'" :outlined="outlined" :size="size" :activation-mode="selectOnFocus ? 'auto' : 'manual'">
       <template #tabs>
-        <dt-tab id="1" panel-id="2" selected leading-class="d-pl8" trailing-class="d-pr8">
-          <template v-if="showIcon" #icon="{ iconSize }">
-            <dt-icon name="sun" :size="iconSize" />
+        <dt-tab id="1" panel-id="2" selected leading-class="d-pl8" trailing-class="d-pr8" :label-class="resolvedTabLabelClass">
+          <template v-if="showIcon" #startIcon="{ iconSize }">
+            <dt-icon name="box-select" :size="iconSize" />
+          </template>
+          <template v-if="showTabEndIcon" #endIcon="{ iconSize }">
+            <dt-icon name="box-select" :size="iconSize" />
           </template>
           Argentina
           <template v-if="showLeading" #leading>
@@ -511,9 +613,12 @@ const resolvedLabelClass = computed(() => showLabelClass.value ? 'd-bgc-warning'
             <dt-badge kind="count" text="1" />
           </template>
         </dt-tab>
-        <dt-tab id="3" panel-id="4" leading-class="d-pl8" trailing-class="d-pr8">
-          <template v-if="showIcon" #icon="{ iconSize }">
-            <dt-icon name="keypad" :size="iconSize" />
+        <dt-tab id="3" panel-id="4" leading-class="d-pl8" trailing-class="d-pr8" :label-class="resolvedTabLabelClass">
+          <template v-if="showIcon" #startIcon="{ iconSize }">
+            <dt-icon name="box-select" :size="iconSize" />
+          </template>
+          <template v-if="showTabEndIcon" #endIcon="{ iconSize }">
+            <dt-icon name="box-select" :size="iconSize" />
           </template>
           United States
           <template v-if="showLeading" #leading>
@@ -523,21 +628,30 @@ const resolvedLabelClass = computed(() => showLabelClass.value ? 'd-bgc-warning'
             <dt-badge kind="count" text="1" />
           </template>
         </dt-tab>
-        <dt-tab id="5" panel-id="6">
-          <template v-if="showIcon" #icon="{ iconSize }">
-            <dt-icon name="moon" :size="iconSize" />
+        <dt-tab id="5" panel-id="6" :label-class="resolvedTabLabelClass">
+          <template v-if="showIcon" #startIcon="{ iconSize }">
+            <dt-icon name="box-select" :size="iconSize" />
+          </template>
+          <template v-if="showTabEndIcon" #endIcon="{ iconSize }">
+            <dt-icon name="box-select" :size="iconSize" />
           </template>
           United Kingdom
         </dt-tab>
-        <dt-tab id="7" panel-id="8">
-          <template v-if="showIcon" #icon="{ iconSize }">
-            <dt-icon name="mic" :size="iconSize" />
+        <dt-tab id="7" panel-id="8" :label-class="resolvedTabLabelClass">
+          <template v-if="showIcon" #startIcon="{ iconSize }">
+            <dt-icon name="box-select" :size="iconSize" />
+          </template>
+          <template v-if="showTabEndIcon" #endIcon="{ iconSize }">
+            <dt-icon name="box-select" :size="iconSize" />
           </template>
           India
         </dt-tab>
-        <dt-tab id="9" panel-id="10" disabled>
-          <template v-if="showIcon" #icon="{ iconSize }">
-            <dt-icon name="grid" :size="iconSize" />
+        <dt-tab id="9" panel-id="10" disabled :label-class="resolvedTabLabelClass">
+          <template v-if="showIcon" #startIcon="{ iconSize }">
+            <dt-icon name="box-select" :size="iconSize" />
+          </template>
+          <template v-if="showTabEndIcon" #endIcon="{ iconSize }">
+            <dt-icon name="box-select" :size="iconSize" />
           </template>
           Canada
         </dt-tab>
@@ -701,70 +815,54 @@ const resolvedLabelClass = computed(() => showLabelClass.value ? 'd-bgc-warning'
   </dt-stack>
   <dt-stack gap="500">
     <dt-text as="h1" kind="headline" size="xl">
-      Radio / Checkbox Label Sizes
+      Radio / Checkbox
     </dt-text>
-    <dt-text as="p" kind="body" size="lg">
-      Label size prop controls typography size via DtText. Alignment stays consistent across sizes.
-    </dt-text>
-    <dt-stack gap="500" direction="row" align="end" class="d-bgc-moderate-opaque d-p12 d-bar8">
-      <dt-button kind="muted" importance="outlined" @click="showLabelClass = !showLabelClass">Toggle `labelClass`</dt-button>
+    <dt-stack gap="500" direction="row" class="d-bgc-moderate-opaque d-p12 d-bar8">
+      <dt-select-menu
+        label="Label Size"
+        :label-visible="false"
+        :options="[
+          { value: 'default', label: 'Default' },
+          { value: 'xs', label: 'xs' },
+          { value: 'sm', label: 'sm' },
+          { value: 'md', label: 'md' },
+          { value: 'lg', label: 'lg' },
+        ]"
+        :model-value="checkRadioLabelSize"
+        @change="checkRadioLabelSize = $event"
+      />
+      <dt-select-menu
+        label="Label Strength"
+        :label-visible="false"
+        :options="[
+          { value: 'default', label: 'Default' },
+          { value: 'bold', label: 'bold' },
+          { value: 'semibold', label: 'semibold' },
+          { value: 'medium', label: 'medium' },
+          { value: 'normal', label: 'normal' },
+        ]"
+        :model-value="checkRadioLabelStrength"
+        @change="checkRadioLabelStrength = $event"
+      />
+      <dt-checkbox v-model="showDescription">Description</dt-checkbox>
+      <dt-checkbox v-model="checkRadioDisabled">Disabled</dt-checkbox>
+      <dt-checkbox v-model="showLabelClass">`labelClass`</dt-checkbox>
+      <dt-checkbox v-model="showCheckRadioMessages">Messages</dt-checkbox>
+      <dt-checkbox v-model="showCheckRadioMessagesClass">`messagesClass`</dt-checkbox>
+      <dt-checkbox v-model="showCheckRadioDescriptionClass">`descriptionClass`</dt-checkbox>
     </dt-stack>
-    <dt-stack gap="500" direction="row" outline>
+    <dt-stack gap="500" direction="row">
       <dt-stack gap="400" class="d-fl1">
         <dt-text as="h2" kind="headline" size="lg">Checkbox</dt-text>
-        <dt-checkbox label="Extra small label" label-size="xs" :label-class="resolvedLabelClass" />
-        <dt-checkbox label="Small label" label-size="sm" :label-class="resolvedLabelClass" />
-        <dt-checkbox label="Medium label (default)" :label-class="resolvedLabelClass" />
-        <dt-checkbox label="Large label" label-size="lg" :label-class="resolvedLabelClass" />
+        <dt-checkbox label="Checkbox label" :label-size="resolvedCheckRadioLabelSize" :label-strength="resolvedCheckRadioLabelStrength" :label-class="resolvedLabelClass" :disabled="checkRadioDisabled" :description="showDescription ? 'Description text for this checkbox' : undefined" :messages="checkRadioMessages" :messages-class="resolvedCheckRadioMessagesClass" :description-class="resolvedCheckRadioDescriptionClass" />
+        <dt-checkbox label="Checkbox label" :label-size="resolvedCheckRadioLabelSize" :label-strength="resolvedCheckRadioLabelStrength" :label-class="resolvedLabelClass" :disabled="checkRadioDisabled" :description="showDescription ? 'Description text for this checkbox' : undefined" :messages="checkRadioMessages" :messages-class="resolvedCheckRadioMessagesClass" :description-class="resolvedCheckRadioDescriptionClass" />
+        <dt-checkbox label="Checkbox label" :label-size="resolvedCheckRadioLabelSize" :label-strength="resolvedCheckRadioLabelStrength" :label-class="resolvedLabelClass" :disabled="checkRadioDisabled" :description="showDescription ? 'Description text for this checkbox' : undefined" :messages="checkRadioMessages" :messages-class="resolvedCheckRadioMessagesClass" :description-class="resolvedCheckRadioDescriptionClass" />
       </dt-stack>
       <dt-stack gap="400" class="d-fl1">
         <dt-text as="h2" kind="headline" size="lg">Radio</dt-text>
-        <dt-radio label="Extra small label" value="1" label-size="xs" :label-class="resolvedLabelClass" />
-        <dt-radio label="Small label" value="2" label-size="sm" :label-class="resolvedLabelClass" />
-        <dt-radio label="Medium label (default)" value="3" :label-class="resolvedLabelClass" />
-        <dt-radio label="Large label" value="4" label-size="lg" :label-class="resolvedLabelClass" />
-      </dt-stack>
-    </dt-stack>
-    <dt-stack gap="500" outline>
-      <dt-text as="h2" kind="headline" size="lg">With descriptions</dt-text>
-      <dt-stack gap="500" direction="row">
-        <dt-stack gap="400" class="d-fl1">
-          <dt-checkbox label="Small label" label-size="sm" :label-class="resolvedLabelClass">
-            <template #description>Description text alongside small label</template>
-          </dt-checkbox>
-          <dt-checkbox label="Medium label" :label-class="resolvedLabelClass">
-            <template #description>Description text alongside medium label</template>
-          </dt-checkbox>
-          <dt-checkbox label="Large label" label-size="lg" :label-class="resolvedLabelClass">
-            <template #description>Description text alongside large label</template>
-          </dt-checkbox>
-        </dt-stack>
-        <dt-stack gap="400" class="d-fl1">
-          <dt-radio label="Small label" value="5" label-size="sm" :label-class="resolvedLabelClass">
-            <template #description>Description text alongside small label</template>
-          </dt-radio>
-          <dt-radio label="Medium label" value="6" :label-class="resolvedLabelClass">
-            <template #description>Description text alongside medium label</template>
-          </dt-radio>
-          <dt-radio label="Large label" value="7" label-size="lg" :label-class="resolvedLabelClass">
-            <template #description>Description text alongside large label</template>
-          </dt-radio>
-        </dt-stack>
-      </dt-stack>
-    </dt-stack>
-    <dt-stack gap="500" outline>
-      <dt-text as="h2" kind="headline" size="lg">Disabled</dt-text>
-      <dt-stack gap="500" direction="row">
-        <dt-stack gap="400" class="d-fl1">
-          <dt-checkbox label="Disabled small" label-size="sm" disabled :label-class="resolvedLabelClass" />
-          <dt-checkbox label="Disabled medium" disabled :label-class="resolvedLabelClass" />
-          <dt-checkbox label="Disabled large" label-size="lg" disabled :label-class="resolvedLabelClass" />
-        </dt-stack>
-        <dt-stack gap="400" class="d-fl1">
-          <dt-radio label="Disabled small" value="8" label-size="sm" disabled :label-class="resolvedLabelClass" />
-          <dt-radio label="Disabled medium" value="9" disabled :label-class="resolvedLabelClass" />
-          <dt-radio label="Disabled large" value="10" label-size="lg" disabled :label-class="resolvedLabelClass" />
-        </dt-stack>
+        <dt-radio label="Radio label" value="1" :label-size="resolvedCheckRadioLabelSize" :label-strength="resolvedCheckRadioLabelStrength" :label-class="resolvedLabelClass" :disabled="checkRadioDisabled" :description="showDescription ? 'Description text for this radio' : undefined" :messages="checkRadioMessages" :messages-class="resolvedCheckRadioMessagesClass" :description-class="resolvedCheckRadioDescriptionClass" />
+        <dt-radio label="Radio label" value="2" :label-size="resolvedCheckRadioLabelSize" :label-strength="resolvedCheckRadioLabelStrength" :label-class="resolvedLabelClass" :disabled="checkRadioDisabled" :description="showDescription ? 'Description text for this radio' : undefined" :messages="checkRadioMessages" :messages-class="resolvedCheckRadioMessagesClass" :description-class="resolvedCheckRadioDescriptionClass" />
+        <dt-radio label="Radio label" value="3" :label-size="resolvedCheckRadioLabelSize" :label-strength="resolvedCheckRadioLabelStrength" :label-class="resolvedLabelClass" :disabled="checkRadioDisabled" :description="showDescription ? 'Description text for this radio' : undefined" :messages="checkRadioMessages" :messages-class="resolvedCheckRadioMessagesClass" :description-class="resolvedCheckRadioDescriptionClass" />
       </dt-stack>
     </dt-stack>
   </dt-stack>

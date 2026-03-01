@@ -64,7 +64,6 @@
 </template>
 
 <script>
-import { warn } from 'vue';
 import {
   InputMixin,
   CheckableMixin,
@@ -239,9 +238,8 @@ export default {
 
     runValidations () {
       if (!this.hasLabelContent && !this.$attrs['aria-label']) {
-        warn(
-          'A label is required for accessibility. Provide a label prop and use label-visible="false" to hide it visually.',
-          this,
+        console.info(
+          '[Dialtone] A label is required for accessibility. Provide a label prop and use label-visible="false" to hide it visually.',
         );
       }
     },

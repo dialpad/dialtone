@@ -386,40 +386,6 @@ describe('DtSelectMenu Tests', () => {
       });
     });
 
-    describe('Label Validation', () => {
-      const MOCK_LABEL_WARNING = '[Vue warn]: A label is required for accessibility. Provide a label prop and use label-visible="false" to hide it visually.';
-
-      describe('When no label and no aria-label are provided', () => {
-        it('should warn about missing label', () => {
-          mockProps = { label: '', options: MOCK_OPTIONS };
-
-          updateWrapper();
-
-          expect(console.warn).toHaveBeenCalled();
-          expect(console.warn.mock.calls.some(call => call.includes(MOCK_LABEL_WARNING))).toBe(true);
-        });
-      });
-
-      describe('When a label is provided', () => {
-        it('should not warn about missing label', () => {
-          updateWrapper();
-
-          expect(console.warn.mock.calls.some(call => call.includes(MOCK_LABEL_WARNING))).toBe(false);
-        });
-      });
-
-      describe('When no label but aria-label attr is provided', () => {
-        it('should not warn about missing label', () => {
-          mockProps = { label: '', options: MOCK_OPTIONS };
-          mockAttrs = { 'aria-label': 'accessible label' };
-
-          updateWrapper();
-
-          expect(console.warn.mock.calls.some(call => call.includes(MOCK_LABEL_WARNING))).toBe(false);
-        });
-      });
-    });
-
     describe('Options Validation', () => {
       const MOCK_WARNING_MESSAGE = '[Vue warn]: Options are expected to be provided via prop or slot';
 

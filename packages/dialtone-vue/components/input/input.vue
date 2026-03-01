@@ -37,6 +37,7 @@
         :class="[
           'd-input__description',
           'd-description',
+          descriptionClass,
         ]"
         data-qa="dt-input-description"
       >
@@ -138,7 +139,6 @@
 
 <script>
 /* eslint-disable max-lines */
-import { warn } from 'vue';
 import { DESCRIPTION_SIZE_TYPES, VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import {
   INPUT_TYPES,
@@ -235,6 +235,14 @@ export default {
      */
     description: {
       type: String,
+      default: '',
+    },
+
+    /**
+     * Used to customize the description container
+     */
+    descriptionClass: {
+      type: [String, Array, Object],
       default: '',
     },
 
@@ -696,9 +704,8 @@ export default {
 
     runValidations () {
       if (!this.label && !this.$attrs['aria-label']) {
-        warn(
-          'A label is required for accessibility. Provide a label prop and use label-visible="false" to hide it visually.',
-          this,
+        console.info(
+          '[Dialtone] A label is required for accessibility. Provide a label prop and use label-visible="false" to hide it visually.',
         );
       }
     },
