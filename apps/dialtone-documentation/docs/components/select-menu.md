@@ -83,7 +83,6 @@ htmlCode='
 </div>
 '
 vueCode='
-<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
 <dt-select-menu
   :options="[
         { value: ``, label: `Please select one` },
@@ -136,7 +135,6 @@ htmlCode='
 </div>
 '
 vueCode='
-<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
 <dt-select-menu
   :options="[
         { value: ``, label: `Please select one` },
@@ -226,7 +224,6 @@ htmlCode='
 </div>
 '
 vueCode='
-<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
 <dt-select-menu
   :options="[
     { value: ``, label: `Please select one` },
@@ -294,7 +291,6 @@ showHtmlWarning />
 <code-example-tabs
 :htmlCode="() => $refs.messagesHidden"
 vueCode='
-<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
 <dt-select-menu
   :options="[
     { value: ``, label: `Please select one` },
@@ -353,7 +349,6 @@ vueCode='
 <code-example-tabs
 :htmlCode="() => $refs.slottedLabel"
 vueCode='
-<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
 <dt-select-menu
   :options="[
     { value: ``, label: `Please select one` },
@@ -385,7 +380,6 @@ vueCode='
 <code-example-tabs
 :htmlCode="() => $refs.slottedDescription"
 vueCode='
-<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
 <dt-select-menu
   :options="[
     { value: ``, label: `Please select one` },
@@ -421,7 +415,6 @@ vueCode='
 <code-example-tabs
 :htmlCode="() => $refs.slottedOptions"
 vueCode='
-<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
 <dt-select-menu
   :model-value="modelValue"
   @input="onInput"
@@ -522,7 +515,6 @@ htmlCode='
 </div>
 '
 vueCode='
-<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
 <dt-select-menu
   :options="[
     { value: ``, label: `Please select one` },
