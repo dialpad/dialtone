@@ -42,6 +42,8 @@ const showBtnLeading = ref(false);
 const showBtnTrailing = ref(false);
 const showBtnStartIcon = ref(false);
 const showBtnEndIcon = ref(false);
+const removeBtnSlotClass = ref(false);
+const highlightBtnSlotClass = ref(false);
 const showBtnLabelClass = ref(false);
 const resolvedBtnLabelClass = computed(() => showBtnLabelClass.value ? 'd-bgc-warning' : undefined);
 const showTabLabelClass = ref(false);
@@ -205,9 +207,15 @@ const checkRadioDisabled = ref(false);
       <dt-checkbox v-model="showBtnLabelClass">
         `labelClass`
       </dt-checkbox>
+      <dt-checkbox v-model="removeBtnSlotClass">
+        Remove leading/trailing class
+      </dt-checkbox>
+      <dt-checkbox v-model="highlightBtnSlotClass">
+        Highlight leading/trailing
+      </dt-checkbox>
     </dt-stack>
     <dt-stack gap="400" direction="row">
-      <dt-button kind="muted" importance="outlined" size="xs" leading-class="d-pl2" trailing-class="d-pr1" :label-class="resolvedBtnLabelClass">
+      <dt-button kind="muted" importance="outlined" size="xs" :leading-class="[removeBtnSlotClass ? undefined : 'd-pl2', highlightBtnSlotClass ? 'd-bgc-warning' : undefined]" :trailing-class="[removeBtnSlotClass ? undefined : 'd-pr1', highlightBtnSlotClass ? 'd-bgc-warning' : undefined]" :label-class="resolvedBtnLabelClass">
         Place Call
         <template v-if="showBtnLeading" #leading>
           <dt-badge kind="count" text="1" />
@@ -218,7 +226,7 @@ const checkRadioDisabled = ref(false);
         <template v-if="showBtnStartIcon" #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template>
         <template v-if="showBtnEndIcon" #endIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template>
       </dt-button>
-      <dt-button kind="muted" importance="outlined" size="sm" leading-class="d-pl2" trailing-class="d-pr4" :label-class="resolvedBtnLabelClass">
+      <dt-button kind="muted" importance="outlined" size="sm" :leading-class="[removeBtnSlotClass ? undefined : 'd-pl2', highlightBtnSlotClass ? 'd-bgc-warning' : undefined]" :trailing-class="[removeBtnSlotClass ? undefined : 'd-pr4', highlightBtnSlotClass ? 'd-bgc-warning' : undefined]" :label-class="resolvedBtnLabelClass">
         Place Call
         <template v-if="showBtnLeading" #leading>
           <dt-badge kind="count" text="1" />
@@ -229,7 +237,7 @@ const checkRadioDisabled = ref(false);
         <template v-if="showBtnStartIcon" #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template>
         <template v-if="showBtnEndIcon" #endIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template>
       </dt-button>
-      <dt-button kind="muted" importance="outlined" size="md" leading-class="d-pl4" trailing-class="d-pr8" :label-class="resolvedBtnLabelClass">
+      <dt-button kind="muted" importance="outlined" size="md" :leading-class="[removeBtnSlotClass ? undefined : 'd-pl4', highlightBtnSlotClass ? 'd-bgc-warning' : undefined]" :trailing-class="[removeBtnSlotClass ? undefined : 'd-pr8', highlightBtnSlotClass ? 'd-bgc-warning' : undefined]" :label-class="resolvedBtnLabelClass">
         Place Call
         <template v-if="showBtnLeading" #leading>
           <dt-badge kind="count" text="1" />
@@ -240,7 +248,7 @@ const checkRadioDisabled = ref(false);
         <template v-if="showBtnStartIcon" #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template>
         <template v-if="showBtnEndIcon" #endIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template>
       </dt-button>
-      <dt-button kind="muted" importance="outlined" size="lg" leading-class="d-pl8" trailing-class="d-pr10" :label-class="resolvedBtnLabelClass">
+      <dt-button kind="muted" importance="outlined" size="lg" :leading-class="[removeBtnSlotClass ? undefined : 'd-pl8', highlightBtnSlotClass ? 'd-bgc-warning' : undefined]" :trailing-class="[removeBtnSlotClass ? undefined : 'd-pr10', highlightBtnSlotClass ? 'd-bgc-warning' : undefined]" :label-class="resolvedBtnLabelClass">
         Place Call
         <template v-if="showBtnLeading" #leading>
           <dt-badge kind="count" text="1" />
@@ -251,7 +259,7 @@ const checkRadioDisabled = ref(false);
         <template v-if="showBtnStartIcon" #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template>
         <template v-if="showBtnEndIcon" #endIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template>
       </dt-button>
-      <dt-button kind="muted" importance="outlined" size="xl" leading-class="d-pl8" trailing-class="d-pr12" :label-class="resolvedBtnLabelClass">
+      <dt-button kind="muted" importance="outlined" size="xl" :leading-class="[removeBtnSlotClass ? undefined : 'd-pl8', highlightBtnSlotClass ? 'd-bgc-warning' : undefined]" :trailing-class="[removeBtnSlotClass ? undefined : 'd-pr12', highlightBtnSlotClass ? 'd-bgc-warning' : undefined]" :label-class="resolvedBtnLabelClass">
         Place Call
         <template v-if="showBtnLeading" #leading>
           <dt-badge kind="count" text="1" />
