@@ -128,12 +128,17 @@
             @keydown.left.stop="shiftActionBarFocusLeft"
             @click="button.onClick()"
           >
-            <template #default>
+            <template #icon>
+              <component
+                :is="button.icon"
+                size="200"
+                :style="{ color: currentFontColor }"
+              />
               <dt-input
                 :value="currentFontColor"
-                root-class="d-w12 d-h12 d-my1"
-                input-class="colorPickerInput d-w100p d-h100p d-p0 d-bar0 d-c-pointer"
-                input-wrapper-class="d-w12 d-h12 d-bar2 d-ba-none"
+                root-class="d-w0 d-h0 d-of-hidden"
+                input-class="colorPickerInput d-w0 d-h0 d-p0 d-bar0"
+                input-wrapper-class="d-w0 d-h0 d-ba-none"
                 size="sm"
                 type="color"
                 @input="onColorPickerInput"
@@ -414,6 +419,7 @@ import {
   DtIconSearch,
   DtIconChevronDown,
   DtIconFontSize,
+  DtIconStopFilled,
 } from '@dialpad/dialtone-icons/vue3';
 import { DialtoneLocalization } from '@/localization';
 
@@ -455,6 +461,7 @@ export default {
     DtIconBraces,
     DtIconChevronDown,
     DtIconFontSize,
+    DtIconStopFilled,
   },
 
   mixins: [],
@@ -908,6 +915,7 @@ export default {
           showBtn: this.showFontColorButton,
           buttonType: 'custom',
           selector: 'fontColor',
+          icon: DtIconStopFilled,
           dataQA: 'dt-recipe-editor-font-color-btn',
           tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_FONT_COLOR_BUTTON_LABEL'),
           onClick: this.onColorPickerButtonClick,
@@ -1368,16 +1376,9 @@ export default {
     onColorPickerInput (fontColor) {
       this.$refs.richTextEditor?.editor?.chain().focus().setColor(fontColor).run();
       this.$refs.richTextEditor?.editor?.commands.focus();
+      this.updateFontColorInput();
     },
   },
 };
 </script>
 
-<style>
-.colorPickerInput::-webkit-color-swatch-wrapper {
-  padding: 0 !important;
-}
-.colorPickerInput::-webkit-color-swatch {
-  border: none !important;
-}
-</style>
