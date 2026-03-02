@@ -34,6 +34,12 @@
           :data-sidebar-link="item.link"
           @click="handleClick($event, listeners, item.link)"
         >
+          <dt-icon
+            v-if="depth === 0 && item.icon"
+            :name="item.icon"
+            size="400"
+            class="d-mr12 d-fc-muted"
+          />
           {{ item.text }}
           <template #endIcon="{ iconSize }">
             <dt-icon
@@ -119,6 +125,8 @@
               label-class="d-jc-flex-start"
               :class="[
                 'd-w100p d-fw-normal',
+                { 'd-pl48': depth === 0 },
+                { 'd-pl64': depth === 1 },
                 {
                   'd-mt2': (index === 0 && nested), // add margin top to first nested item
                 },

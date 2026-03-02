@@ -11,8 +11,9 @@
       :to="link.link"
       kind="muted"
       importance="clear"
+      size="lg"
       class="d-fw-normal"
-      :active="isActiveLink(link.text)"
+      :active="isActiveLink(link.link)"
     >
       {{ link.text }}
     </dt-button>

@@ -150,7 +150,7 @@
 /* border-color longhand */
 .test-border-longhand {
   border-color: var(--dt-color-red-600);
-  border-top-color: var(--dt-color-green-700);
+  border-block-start-color: var(--dt-color-green-700);
 }
 
 /* border shorthand with size token before color */

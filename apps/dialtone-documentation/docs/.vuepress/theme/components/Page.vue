@@ -18,7 +18,10 @@
         <dt-button
           v-if="prev"
           :to="prev.link"
-          importance="clear"
+          class="d-wmn40p"
+          label-class="d-jc-space-between"
+          importance="outlined"
+          kind="muted"
           size="lg"
         >
           <template #startIcon>
@@ -32,8 +35,11 @@
         <dt-button
           v-if="next"
           :to="next.link"
+          class="d-wmn40p"
+          label-class="d-jc-space-between"
           icon-position="right"
-          importance="clear"
+          importance="outlined"
+          kind="muted"
           size="lg"
         >
           <template #endIcon>
@@ -118,6 +124,9 @@ function detectTopLevelGroup(path) {
   }
   if (path.includes('/foundations/')) {
     return 'foundations';
+  }
+  if (path.includes('/ui-kits/')) {
+    return 'ui-kits';
   }
   if (path.includes('/careers/')) {
     return 'careers';
