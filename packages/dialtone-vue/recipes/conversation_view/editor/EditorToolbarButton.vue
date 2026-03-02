@@ -18,6 +18,7 @@
         :is="icon"
         size="200"
       />
+      <slot name="extra" />
     </template>
     {{ label }}
   </dt-button>
