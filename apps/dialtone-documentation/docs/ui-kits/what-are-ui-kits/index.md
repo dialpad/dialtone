@@ -7,7 +7,7 @@ prev:
 ---
 
 <dt-notice kind="info" hide-close>
-  UI Kit component details are currently being developed. For the most up-to-date details, see the #dialpad-uikits channel.
+  UI Kit component details are currently being developed. For the most up-to-date details and proposals, see the #dialpad-uikits channel.
 </dt-notice>
 
 ## Overview

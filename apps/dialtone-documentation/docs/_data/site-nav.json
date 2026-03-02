@@ -125,7 +125,7 @@
                 "text": "ChatKit",
                 "link": "https://uikits.dialpad.com/chatkit/",
                 "github_url": "https://github.com/dialpad/dialpad-uikits/tree/main/packages/chatkit",
-                "description": "Presentational components for conversation feeds and chatbots. Includes message rows, composers, and action sheets.",
+                "description": "Components for conversation feeds and chatbots. Includes message rows, composers, action sheets, and more.",
                 "status": "beta"
               },
               {
