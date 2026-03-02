@@ -22,12 +22,13 @@
         <dt-stack direction="row" gap="200">
           <dt-button
             v-if="$frontmatter.figma_url"
-            class="d-btn d-btn--muted d-btn--sm"
             :href="$frontmatter.figma_url"
             target="_blank"
             rel="noopener noreferrer"
+            kind="muted"
+            importance="clear"
           >
-            <span class="d-btn__icon d-btn__icon--left">
+            <template #icon>
               <svg
                 class="d-icon d-icon--size-200"
                 viewBox="0 0 24 24"
@@ -67,8 +68,8 @@
                   fill="#A259FF"
                 />
               </svg>
-            </span>
-            <span class="d-btn__label">Figma</span>
+            </template>
+            Figma
           </dt-button>
           <dt-button
             v-if="$frontmatter.storybook && $frontmatter.storybook !== 'planned'"
