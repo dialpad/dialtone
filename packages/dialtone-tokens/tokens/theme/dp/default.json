@@ -3785,7 +3785,7 @@
           },
           "outlined": {
             "default": {
-              "value": "{color.border.default-inverted}",
+              "value": "{color.border.moderate-inverted}",
               "type": "color"
             }
           }
@@ -3797,7 +3797,7 @@
           },
           "outlined": {
             "default": {
-              "value": "{color.border.default}",
+              "value": "{color.border.moderate}",
               "type": "color"
             }
           }
