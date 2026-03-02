@@ -1,3 +1,15 @@
+# [9.165.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.164.0...dialtone/v9.165.0) (2026-03-02)
+
+
+### Bug Fixes
+
+* **Editor:** NO-JIRA fix editor font color button UX ([#1086](https://github.com/dialpad/dialtone/issues/1086)) ([d73da4a](https://github.com/dialpad/dialtone/commit/d73da4aa34bf5456e462baf0cec721d7511c09f7))
+
+
+### Features
+
+* **Editor:** DP-176403 add image resizing for dialtone editor  ([#1085](https://github.com/dialpad/dialtone/issues/1085)) ([e69f0f1](https://github.com/dialpad/dialtone/commit/e69f0f1b9006117ede056d5c14b86feb9c9842c4))
+
 # [9.164.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.163.0...dialtone/v9.164.0) (2026-02-27)
 
 
