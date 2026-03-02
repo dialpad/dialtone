@@ -1,5 +1,5 @@
 <template>
-  <div class="dialtone-wall">
+  <div class="dialtone-wall dialtone-wall--ui-kits">
     <template v-for="kit in kits" :key="kit.text">
       <a
         v-if="kit.status !== 'planned'"

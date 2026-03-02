@@ -846,6 +846,34 @@ code {
       color: var(--dt-color-foreground-tertiary);
     }
   }
+
+  // UI Kits variant: keeps description visible and stays 2-column longer
+  &--ui-kits {
+    .dialtone-wall__description {
+      display: block;
+      color: var(--dt-color-foreground-tertiary);
+
+      @media screen and (max-width: 639px) {
+        display: none;
+      }
+    }
+
+    // Override default 3-column at 768px, keep at 2 columns
+    @media screen and (min-width: 768px) {
+      grid-template-columns: [full-start] repeat(
+          2,
+          [col-start] var(--col-width, minmax(0, 1fr)) [col-end]
+        ) [full-end] !important;
+    }
+
+    // Switch to 3 columns at a much larger breakpoint
+    @media screen and (min-width: 1280px) {
+      grid-template-columns: [full-start] repeat(
+          3,
+          [col-start] var(--col-width, minmax(0, 1fr)) [col-end]
+        ) [full-end] !important;
+    }
+  }
 }
 
 //  ============================================================================
