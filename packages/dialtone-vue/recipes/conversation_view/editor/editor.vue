@@ -232,7 +232,7 @@
     <!-- Some wrapper to restrict the height and show the scrollbar -->
     <div
       :style="{ 'max-height': maxHeight }"
-      :class="['d-recipe-editor__content', { 'image-resize': allowImageResize }]"
+      :class="['d-recipe-editor__content', { 'd-recipe-editor__content-image-resize': allowImageResize }]"
     >
       <dt-rich-text-editor
         ref="richTextEditor"
@@ -1119,38 +1119,38 @@ export default {
 /* Image resizing classes - only active when allowImageResize is true */
 
 /* Image border */
-.image-resize .tiptap .ProseMirror-selectednode [data-resize-wrapper] {
+.d-recipe-editor__content-image-resize .tiptap .ProseMirror-selectednode [data-resize-wrapper] {
   outline: 1px solid var(--dt-color-chart-info-selected);
   line-height: 0 !important;
 }
 
 /* Corner handles */
-.image-resize .tiptap .ProseMirror-selectednode [data-resize-handle] {
+.d-recipe-editor__content-image-resize .tiptap .ProseMirror-selectednode [data-resize-handle] {
   position: absolute;
   background: var(--dt-color-chart-info-selected);
   z-index: 10;
 }
 
-.image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='top-left'],
-.image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='top-right'],
-.image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='bottom-left'],
-.image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='bottom-right'] {
+.d-recipe-editor__content-image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='top-left'],
+.d-recipe-editor__content-image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='top-right'],
+.d-recipe-editor__content-image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='bottom-left'],
+.d-recipe-editor__content-image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='bottom-right'] {
   width: 8px;
   height: 8px;
 }
-.image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='top-left'] {
+.d-recipe-editor__content-image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='top-left'] {
   cursor: nwse-resize;
   transform: translate(-50%, -50%);
 }
-.image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='top-right'] {
+.d-recipe-editor__content-image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='top-right'] {
   cursor: nesw-resize;
   transform: translate(50%, -50%);
 }
-.image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='bottom-left'] {
+.d-recipe-editor__content-image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='bottom-left'] {
   cursor: nesw-resize;
   transform: translate(-50%, 50%);
 }
-.image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='bottom-right'] {
+.d-recipe-editor__content-image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='bottom-right'] {
   cursor: nwse-resize;
   transform: translate(50%, 50%);
 }
