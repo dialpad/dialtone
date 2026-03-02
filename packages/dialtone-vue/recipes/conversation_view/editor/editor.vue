@@ -132,7 +132,7 @@
               <component
                 :is="button.icon"
                 size="200"
-                :style="{ color: currentFontColor }"
+                :style="!isDefaultFontColor ? { color: currentFontColor } : {}"
               />
               <dt-input
                 :value="currentFontColor"
@@ -1107,6 +1107,10 @@ export default {
 
     colorPickerInput() {
       return document.querySelector('.colorPickerInput');
+    },
+
+    isDefaultFontColor() {
+      return this.currentFontColor === EDITOR_DEFAULT_FONT_COLOR;
     },
 
     actionBarBtn () {
