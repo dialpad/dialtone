@@ -339,7 +339,7 @@
     <!-- Some wrapper to restrict the height and show the scrollbar -->
     <div
       :style="{ 'max-height': maxHeight }"
-      class="d-recipe-editor__content"
+      :class="['d-recipe-editor__content', { 'd-recipe-editor__content-image-resize': allowImageResize }]"
     >
       <dt-rich-text-editor
         ref="richTextEditor"
@@ -361,6 +361,7 @@
         :placeholder="placeholder"
         :use-div-tags="useDivTags"
         :allow-tables="allowTables"
+        :allow-image-resize="allowImageResize"
         data-qa="dt-rich-text-editor"
         v-bind="removeClassStyleAttrs($attrs)"
         @text-input="onTextInput"
@@ -750,6 +751,14 @@ export default {
      * Allow Tables to be used in to the editor
      */
     allowTables: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Allow image resizing
+     */
+    allowImageResize: {
       type: Boolean,
       default: false,
     },
@@ -1386,3 +1395,43 @@ export default {
 };
 </script>
 
+<style>
+/* Image resizing classes - only active when allowImageResize is true */
+
+/* Image border */
+.d-recipe-editor__content-image-resize .tiptap .ProseMirror-selectednode [data-resize-wrapper] {
+  outline: 1px solid var(--dt-color-chart-info-selected);
+  line-height: 0 !important;
+}
+
+/* Corner handles */
+.d-recipe-editor__content-image-resize .tiptap .ProseMirror-selectednode [data-resize-handle] {
+  position: absolute;
+  background: var(--dt-color-chart-info-selected);
+  z-index: 10;
+}
+
+.d-recipe-editor__content-image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='top-left'],
+.d-recipe-editor__content-image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='top-right'],
+.d-recipe-editor__content-image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='bottom-left'],
+.d-recipe-editor__content-image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='bottom-right'] {
+  width: 8px;
+  height: 8px;
+}
+.d-recipe-editor__content-image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='top-left'] {
+  cursor: nwse-resize;
+  transform: translate(-50%, -50%);
+}
+.d-recipe-editor__content-image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='top-right'] {
+  cursor: nesw-resize;
+  transform: translate(50%, -50%);
+}
+.d-recipe-editor__content-image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='bottom-left'] {
+  cursor: nesw-resize;
+  transform: translate(-50%, 50%);
+}
+.d-recipe-editor__content-image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='bottom-right'] {
+  cursor: nwse-resize;
+  transform: translate(50%, 50%);
+}
+</style>
