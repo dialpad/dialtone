@@ -56,6 +56,7 @@ export default {
     return {
       modelValue: this.$attrs.modelValue || '<p>Try inserting a variable using the button!</p>',
       showVariableButton: this.$attrs.showVariableButton ?? true,
+      allowImageResize: this.$attrs.allowImageResize ?? true,
       showFontColorButton: this.$attrs.showFontColorButton ?? true,
       showFontStyleButton: this.$attrs.showFontStyleButton ?? true,
       showFontSizeButton: this.$attrs.showFontSizeButton ?? true,
