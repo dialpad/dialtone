@@ -11,6 +11,7 @@ export const INPUT_TYPES = {
   FILE: 'file',
   TEL: 'tel',
   SEARCH: 'search',
+  COLOR: 'color',
 };
 
 export const INPUT_SIZES = {

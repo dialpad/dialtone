@@ -8,11 +8,10 @@
       :auto-focus="$attrs.autoFocus"
       :editable="$attrs.editable"
       :input-class="$attrs.inputClass"
-      :link="$attrs.link"
       :placeholder="$attrs.placeholder"
       :max-height="$attrs.maxHeight"
       :show-add-link="$attrs.showAddLink"
-      :use-div-tags="$attrs.useDivTags"
+      :use-div-tags="useDivTags"
       :show-bold-button="$attrs.showBoldButton"
       :show-italics-button="$attrs.showItalicsButton"
       :show-strike-button="$attrs.showStrikeButton"
@@ -27,6 +26,9 @@
       :show-quick-replies-button="$attrs.showQuickRepliesButton"
       :show-code-block-button="$attrs.showCodeBlockButton"
       :show-inline-image-button="$attrs.showInlineImageButton"
+      :show-font-color-button="showFontColorButton"
+      :show-font-style-button="showFontStyleButton"
+      :show-font-size-button="showFontSizeButton"
       :show-variable-button="showVariableButton"
       :variable-categories="variableCategories"
       :allow-tables="$attrs.allowTables"
@@ -54,7 +56,10 @@ export default {
     return {
       modelValue: this.$attrs.modelValue || '<p>Try inserting a variable using the button!</p>',
       showVariableButton: this.$attrs.showVariableButton ?? true,
-      allowImageResize: this.$attrs.allowImageResize ?? true,
+      showFontColorButton: this.$attrs.showFontColorButton ?? true,
+      showFontStyleButton: this.$attrs.showFontStyleButton ?? true,
+      showFontSizeButton: this.$attrs.showFontSizeButton ?? true,
+      useDivTags: this.$attrs.useDivTags ?? true,
       variableCategories: this.$attrs.variableCategories ?? [
         {
           name: 'Agent',

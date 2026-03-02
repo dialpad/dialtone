@@ -1,3 +1,23 @@
+# [3.208.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.207.0...dialtone-vue/v3.208.0) (2026-02-27)
+
+
+### Features
+
+* **Editor:** DLT-3003 add font size, font type, & font color to editor ([#1081](https://github.com/dialpad/dialtone/issues/1081)) ([1bb53e6](https://github.com/dialpad/dialtone/commit/1bb53e692beac43fcc7502df0de64b5f3bd95c0c))
+
+# [3.207.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.206.0...dialtone-vue/v3.207.0) (2026-02-27)
+
+
+### Bug Fixes
+
+* **Input:** DP-173960 handle composition events ([#1082](https://github.com/dialpad/dialtone/issues/1082)) ([ff4a9a6](https://github.com/dialpad/dialtone/commit/ff4a9a67413101d26af698b8e4eb7d5400139758))
+* **Scroller:** NO-JIRA fix dynamic text ([#1083](https://github.com/dialpad/dialtone/issues/1083)) ([6db4e2b](https://github.com/dialpad/dialtone/commit/6db4e2b7029ba0e0f352c8b7e1934ccf3e88624f))
+
+
+### Features
+
+* **Rich Text Editor:** DP-175404 add hover event for mentions ([#1080](https://github.com/dialpad/dialtone/issues/1080)) ([9d1ba0b](https://github.com/dialpad/dialtone/commit/9d1ba0bde79603987da4ded886545bf983e0b511))
+
 # [3.206.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.205.0...dialtone-vue/v3.206.0) (2026-02-26)
 
 

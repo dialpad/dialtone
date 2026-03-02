@@ -373,6 +373,14 @@ export default {
     },
 
     /**
+     * Whether the input allows font size to be introduced in the text.
+     */
+    allowFontSize: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
      * Whether the input allows different font-families to be introduced in the text.
      */
     allowFontFamily: {
@@ -532,6 +540,24 @@ export default {
      * @type {Object}
      */
     'mention-click',
+
+    /**
+     * Event fired when the cursor enters a mention. The payload includes the
+     * mention data (name, id, avatarSrc, contactKey) plus the native MouseEvent
+     * as `event`, which can be used for positioning a hovercard.
+     * @event mention-hover
+     * @type {Object}
+     */
+    'mention-hover',
+
+    /**
+     * Event fired when the cursor leaves a mention. The payload includes the
+     * mention data (name, id, avatarSrc, contactKey) plus the native MouseEvent
+     * as `event`.
+     * @event mention-leave
+     * @type {Object}
+     */
+    'mention-leave',
 
     /**
      * Event fired when a channel is clicked
@@ -872,12 +898,12 @@ export default {
         }));
       }
 
-      if (this.allowFontFamily || this.allowFontColor) {
+      if (this.allowFontFamily || this.allowFontColor || this.allowFontSize) {
         extensions.push(TextStyleKit.configure({
           color: this.allowFontColor,
           backgroundColor: false,
           fontFamily: this.allowFontFamily,
-          fontSize: false,
+          fontSize: this.allowFontSize,
           lineHeight: false,
         }));
       }
@@ -1258,6 +1284,16 @@ export default {
       // Mention is clicked
       this.editor.on('mention-click', (mentionData) => {
         this.$emit('mention-click', mentionData);
+      });
+
+      // Cursor enters a mention
+      this.editor.on('mention-hover', (mentionData) => {
+        this.$emit('mention-hover', mentionData);
+      });
+
+      // Cursor leaves a mention
+      this.editor.on('mention-leave', (mentionData) => {
+        this.$emit('mention-leave', mentionData);
       });
 
       // Channel is clicked
