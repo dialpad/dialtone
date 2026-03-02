@@ -1,3 +1,11 @@
+# [1.3.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-mcp-server/v1.2.1...dialtone-mcp-server/v1.3.0-next.1) (2026-03-02)
+
+
+### Features
+
+* **Tokens:** DLT-2937 introduce spacing and layout token systems ([#1045](https://github.com/dialpad/dialtone/issues/1045)) ([de23e12](https://github.com/dialpad/dialtone/commit/de23e1260a2b2f7e96469255147c86e2522c632e))
+* **Tokens:** update color ramps and consumer color migration tools DLT-3004 DLT-3005 DLT-3006 DLT-3007 DLT-3008 ([#1054](https://github.com/dialpad/dialtone/issues/1054)) ([28cb1de](https://github.com/dialpad/dialtone/commit/28cb1de09ea18abd8ffa79e99d23866d861df111))
+
 ## [1.2.1](https://github.com/dialpad/dialtone/compare/dialtone-mcp-server/v1.2.0...dialtone-mcp-server/v1.2.1) (2026-01-08)
 
 
