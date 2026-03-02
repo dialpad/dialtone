@@ -4,7 +4,7 @@ description: Thanks for your interest in contributing to Dialpad UI Kits!
 ---
 
 <dt-notice kind="info" hide-close>
-  This is an abbreviated version of the <a href="/guides/contributing/" class="d-link d-link--muted">full contributing guide</a>. We encourage all potential contributors to read the full guide for more information.
+  This is an abbreviated version of the <a href="https://docs.google.com/document/d/1w4gXpZLkJ5tlT3Y_dCCU5laObliMUgucTVuH4auWtSA" class="d-link d-link--muted">full contributing guide</a>. We encourage all potential contributors to read the full guide for more information.
 </dt-notice>
 
 ## Proposing a new component or kit
@@ -16,12 +16,14 @@ description: Thanks for your interest in contributing to Dialpad UI Kits!
 
 ## Improvements and bug fixes
 
-1. **Reach out to the [codeowners](https://dialpad.atlassian.net)** to discuss contributing an improvement or bug fix for a specific kit or component. If you're unsure who to contact, please reach out in the `#dialpad-uikits` channel.
-2. **Open a pull request** in the [Dialpad UI Kits repository](https://github.com/dialpad/dialpad-uikits). Please check that your changes follow the design and coding guidelines as outlined in the [contributing guide](/guides/contributing/).
+1. **Reach out to the [codeowners](https://github.com/dialpad/dialpad-uikits/blob/main/CODEOWNERS)** to discuss contributing an improvement or bug fix for a specific kit or component. If you're unsure who to contact, please reach out in the `#dialpad-uikits` channel.
+2. **Open a pull request** in the [Dialpad UI Kits repository](https://github.com/dialpad/dialpad-uikits). Please check that your changes follow the design and coding guidelines as outlined in the [contributing guide](https://docs.google.com/document/d/1w4gXpZLkJ5tlT3Y_dCCU5laObliMUgucTVuH4auWtSA).
 
 ## Feature requests and bug reports
 
-If you find a bug or have a feature request, please reach out and let us know in the Dialpad app `#dialpad-uikits` or `#dialtone` channels. Use the links below to submit formal bug reports and feature requests once it has been discussed with the team:
+If you find a bug or have a feature request, please reach out and let us know in the Dialpad app `#dialpad-uikits` or `#dialtone` channels.
+
+<!-- Use the links below to submit formal bug reports and feature requests once it has been discussed with the team:
 
 - [Submit a bug report](https://dialpad.atlassian.net/)
-- [Submit a feature request](https://dialpad.atlassian.net/)
+- [Submit a feature request](https://dialpad.atlassian.net/) -->

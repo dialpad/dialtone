@@ -6,19 +6,23 @@ prev:
   link: /ui-kits/
 ---
 
+<dt-notice kind="info" hide-close>
+  UI Kit component details are currently being developed. For the most up-to-date details, see the #dialpad-uikits channel.
+</dt-notice>
+
 ## Overview
 
 UI Kits are reusable compositions that combine multiple atomic Dialtone components into production-ready patterns. While Dialtone provides the "atoms" (like buttons and inputs), UI Kits aim to provide the "compositions" specific to certain product domains, such as Messaging or Analytics. UI Kits are built with Vue 3 and are available as npm packages.
 
 ## Component Grouping
 
-Individual components (e.g., `DpDropdownField`, `DpInputTextField`) are grouped into kits (e.g., `FormKit`) based on their primary use case and are managed by the product teams closest to the feature domain.
+Individual components (e.g., `DtDropdownField`, `DtInputTextField`) are grouped into kits (e.g., `FormKit`) based on their primary use case and are managed by the product teams closest to the feature domain.
 
 Components can be imported into any Dialpad project via a package with the kit name:
 
 ```javascript
 import "@dialpad/formkit/vue3/css";
-import { DpInputTextField } from "@dialpad/formkit/vue3";
+import { DtInputTextField } from "@dialpad/formkit/vue3";
 ```
 
 ## Component Classification

@@ -23,7 +23,7 @@ Import the components you need from the kit and use them in your Vue templates:
 
 ```js
 import "@dialpad/formkit/vue3/css";
-import { DpInputTextField } from '@dialpad/formkit/vue3'
+import { DtInputTextField } from '@dialpad/formkit/vue3'
 ```
 
 ```js
