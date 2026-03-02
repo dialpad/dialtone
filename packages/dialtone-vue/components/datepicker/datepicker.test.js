@@ -343,6 +343,48 @@ describe('DtDatepicker Tests', () => {
     });
   });
 
+  describe('weekStartsOn prop', () => {
+    it('defaults to Sunday (0) — first weekday header is "Su"', async () => {
+      const weekDays = wrapper.findAll('.d-datepicker__weekday');
+
+      expect(weekDays.at(0).text()).toBe('Su');
+    });
+
+    it('weekStartsOn=1 — first weekday header is "Mo"', async () => {
+      mockProps = { weekStartsOn: 1 };
+      await updateWrapper();
+
+      const weekDays = wrapper.findAll('.d-datepicker__weekday');
+
+      expect(weekDays.at(0).text()).toBe('Mo');
+      expect(weekDays.at(6).text()).toBe('Su');
+    });
+
+    it('calendar grid starts on Monday when weekStartsOn=1', async () => {
+      // Jan 2023: Jan 1 is a Sunday
+      mockProps = {
+        selectedDate: new Date(2023, 0, 15),
+        weekStartsOn: 1,
+      };
+      await updateWrapper();
+
+      const days = wrapper.findAll('.d-datepicker__calendar button');
+
+      // With Monday start, the first row starts on Mon Dec 26.
+      // Jan 1 (Sunday) should be in the 7th cell (index 6) of the first week row.
+      expect(days.at(6).text()).toBe('1');
+    });
+
+    it('weekStartsOn=6 — first weekday header is "Sa"', async () => {
+      mockProps = { weekStartsOn: 6 };
+      await updateWrapper();
+
+      const weekDays = wrapper.findAll('.d-datepicker__weekday');
+
+      expect(weekDays.at(0).text()).toBe('Sa');
+    });
+  });
+
   describe('Min/Max Date Tests', () => {
     const MIN_DATE = new Date(MOCK_YEAR, MOCK_MONTH, 10);
     const MAX_DATE = new Date(MOCK_YEAR, MOCK_MONTH, 20);

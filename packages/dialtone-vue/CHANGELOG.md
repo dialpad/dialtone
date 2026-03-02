@@ -1,3 +1,79 @@
+# [3.207.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.206.0...dialtone-vue/v3.207.0) (2026-02-27)
+
+
+### Bug Fixes
+
+* **Input:** DP-173960 handle composition events ([#1082](https://github.com/dialpad/dialtone/issues/1082)) ([ff4a9a6](https://github.com/dialpad/dialtone/commit/ff4a9a67413101d26af698b8e4eb7d5400139758))
+* **Scroller:** NO-JIRA fix dynamic text ([#1083](https://github.com/dialpad/dialtone/issues/1083)) ([6db4e2b](https://github.com/dialpad/dialtone/commit/6db4e2b7029ba0e0f352c8b7e1934ccf3e88624f))
+
+
+### Features
+
+* **Rich Text Editor:** DP-175404 add hover event for mentions ([#1080](https://github.com/dialpad/dialtone/issues/1080)) ([9d1ba0b](https://github.com/dialpad/dialtone/commit/9d1ba0bde79603987da4ded886545bf983e0b511))
+
+# [3.206.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.205.0...dialtone-vue/v3.206.0) (2026-02-26)
+
+
+### Features
+
+* DP-176835 tiptap v3 migration ([#1067](https://github.com/dialpad/dialtone/issues/1067)) ([4cfaebd](https://github.com/dialpad/dialtone/commit/4cfaebdeb5dfb4c23e5ba3f1669da55e799d4b85))
+
+# [3.205.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.204.1...dialtone-vue/v3.205.0) (2026-02-24)
+
+
+### Bug Fixes
+
+* **Popover:** DLT-2870 fix initial focus logic ([#1070](https://github.com/dialpad/dialtone/issues/1070)) ([7bdb3d5](https://github.com/dialpad/dialtone/commit/7bdb3d5d8d7786ea12b60dd49456e45c716c7b90))
+
+
+### Documentation
+
+* DLT-3038 improve default storybook doc view with autodocs ([#1071](https://github.com/dialpad/dialtone/issues/1071)) ([e6f7ccb](https://github.com/dialpad/dialtone/commit/e6f7ccbc55cabc0e29e89c82a20eb39767dcb907))
+
+
+### Features
+
+* **Datepicker:** DLT-3015 add weekStartsOn prop for locale-aware week start ([#1072](https://github.com/dialpad/dialtone/issues/1072)) ([04d2218](https://github.com/dialpad/dialtone/commit/04d22187f9b0e42459acbf2b04c55ec32c41e65b))
+
+## [3.204.1](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.204.0...dialtone-vue/v3.204.1) (2026-02-23)
+
+
+### Bug Fixes
+
+* **Tooltip:** NO-JIRA fix docsite ([#1075](https://github.com/dialpad/dialtone/issues/1075)) ([7a097aa](https://github.com/dialpad/dialtone/commit/7a097aa48bccc3dbe7fa0d4ed5171c7080f64db7))
+
+# [3.204.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.203.0...dialtone-vue/v3.204.0) (2026-02-23)
+
+
+### Bug Fixes
+
+* **Message Input:** DLT-3000 incorrect syntax on emoji picker open ([#1068](https://github.com/dialpad/dialtone/issues/1068)) ([b4bce6e](https://github.com/dialpad/dialtone/commit/b4bce6eb0a10eda2a4cf61610b4313ae0e8e470b))
+* **Tooltip:** DLT-3029 render tooltip-directive with a singleton app ([#1066](https://github.com/dialpad/dialtone/issues/1066)) ([ac119b3](https://github.com/dialpad/dialtone/commit/ac119b3fe3117b57753b39cbbf56bdf198c5adb5))
+
+
+### Features
+
+* **Button:** DLT-3009 add support for anchor and router-link rendering ([#1055](https://github.com/dialpad/dialtone/issues/1055)) ([638f846](https://github.com/dialpad/dialtone/commit/638f84641d68a27a95d1fe1fa420e6a3ab01ea51))
+* **Editor:** DP-175971 added custom variable extension to rich text editor ([#1052](https://github.com/dialpad/dialtone/issues/1052)) ([a437509](https://github.com/dialpad/dialtone/commit/a4375091aebbea1e354367693a439a7d74692a37))
+* **Link:** DLT-3010 add router-link rendering support ([#1056](https://github.com/dialpad/dialtone/issues/1056)) ([a7c9d98](https://github.com/dialpad/dialtone/commit/a7c9d984c581a3695f4e12db600dbe9a7a0a8e37))
+
+# [3.203.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.202.0...dialtone-vue/v3.203.0) (2026-02-19)
+
+
+### Bug Fixes
+
+* **Message Input:** DP-174678 protect isSelectionActive ([#1063](https://github.com/dialpad/dialtone/issues/1063)) ([bea37e0](https://github.com/dialpad/dialtone/commit/bea37e0a77a90fc5825824fc2bc5d79363241546))
+
+
+### Code Refactoring
+
+* NO-JIRA export general-row icon from recipe for reuse in client ([#1062](https://github.com/dialpad/dialtone/issues/1062)) ([e268842](https://github.com/dialpad/dialtone/commit/e268842a0afa075da41ac9bee361e993b3f1d48c))
+
+
+### Features
+
+* **Datepicker:** DP-175969 add min and max date props ([#1053](https://github.com/dialpad/dialtone/issues/1053)) ([f3fa6e0](https://github.com/dialpad/dialtone/commit/f3fa6e08d060f520124f86d4712e97e61078acb0))
+
 # [3.202.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.201.0...dialtone-vue/v3.202.0) (2026-02-10)
 
 

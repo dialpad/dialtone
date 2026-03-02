@@ -1,3 +1,10 @@
+## [1.47.4](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.47.3...dialtone-tokens/v1.47.4) (2026-02-23)
+
+
+### Bug Fixes
+
+* **Message Input:** DLT-3000 incorrect syntax on emoji picker open ([#1068](https://github.com/dialpad/dialtone/issues/1068)) ([b4bce6e](https://github.com/dialpad/dialtone/commit/b4bce6eb0a10eda2a4cf61610b4313ae0e8e470b))
+
 ## [1.47.3](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.47.2...dialtone-tokens/v1.47.3) (2026-01-30)
 
 

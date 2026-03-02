@@ -836,4 +836,181 @@ describe('DtButton Tests', () => {
       });
     });
   });
+
+  describe('Navigation Tests', () => {
+    describe('When href is provided', () => {
+      beforeEach(() => {
+        mockProps = {
+          href: 'https://example.com',
+          target: '_blank',
+          rel: 'noopener noreferrer',
+        };
+
+        updateWrapper();
+
+        button = wrapper.find('[data-qa="dt-button"]');
+      });
+
+      it('Should render an <a> element', () => {
+        expect(button.element.tagName).toBe('A');
+      });
+
+      it('Should apply href, target, and rel attributes', () => {
+        expect(button.attributes('href')).toBe('https://example.com');
+        expect(button.attributes('target')).toBe('_blank');
+        expect(button.attributes('rel')).toBe('noopener noreferrer');
+      });
+
+      it('Should not apply role="button" (element navigates, native link role is correct)', () => {
+        expect(button.attributes('role')).toBeUndefined();
+      });
+    });
+
+    describe('When to is provided', () => {
+      const RouterLinkStub = {
+        name: 'RouterLink',
+        template: '<a data-qa="dt-button" :href="to"><slot /></a>',
+        props: ['to', 'replace'],
+      };
+
+      const updateWrapperWithRouter = (props = {}) => {
+        wrapper = mount(DtButton, {
+          propsData: { ...props },
+          global: {
+            stubs: {
+              RouterLink: RouterLinkStub,
+            },
+          },
+        });
+
+        button = wrapper.find('[data-qa="dt-button"]');
+      };
+
+      it('Should render a <router-link> component', () => {
+        updateWrapperWithRouter({ to: '/some-route' });
+
+        expect(wrapper.findComponent(RouterLinkStub).exists()).toBe(true);
+      });
+
+      it('Should pass to and replace props to <router-link>', () => {
+        updateWrapperWithRouter({ to: '/some-route', replace: true });
+
+        expect(wrapper.findComponent(RouterLinkStub).props('to')).toBe('/some-route');
+        expect(wrapper.findComponent(RouterLinkStub).props('replace')).toBe(true);
+      });
+
+      describe('When both to and href are provided', () => {
+        it('Should render <router-link> (to takes precedence)', () => {
+          updateWrapperWithRouter({ to: '/some-route', href: 'https://example.com' });
+
+          expect(wrapper.findComponent(RouterLinkStub).exists()).toBe(true);
+        });
+      });
+    });
+
+    describe('Disabled state', () => {
+      describe('When <a> is disabled', () => {
+        beforeEach(() => {
+          mockProps = {
+            href: 'https://example.com',
+            disabled: true,
+          };
+
+          updateWrapper();
+
+          button = wrapper.find('[data-qa="dt-button"]');
+        });
+
+        it('Should set aria-disabled="true" and tabindex="-1"', () => {
+          expect(button.attributes('aria-disabled')).toBe('true');
+          expect(button.attributes('tabindex')).toBe('-1');
+        });
+
+        it('Should not render href when disabled', () => {
+          expect(button.attributes('href')).toBeUndefined();
+        });
+
+        it('Should prevent click', async () => {
+          const clickHandler = vi.fn();
+          mockAttrs = { onClick: clickHandler };
+
+          updateWrapper();
+
+          button = wrapper.find('[data-qa="dt-button"]');
+          await button.trigger('click');
+
+          expect(clickHandler).not.toHaveBeenCalled();
+        });
+      });
+
+      describe('When <router-link> is disabled', () => {
+        it('Should set aria-disabled="true" and tabindex="-1"', () => {
+          const RouterLinkStub = {
+            name: 'RouterLink',
+            template: '<a data-qa="dt-button"><slot /></a>',
+            props: ['to', 'replace'],
+          };
+
+          wrapper = mount(DtButton, {
+            propsData: { to: '/some-route', disabled: true },
+            global: {
+              stubs: { RouterLink: RouterLinkStub },
+            },
+          });
+
+          button = wrapper.find('[data-qa="dt-button"]');
+
+          expect(button.attributes('aria-disabled')).toBe('true');
+          expect(button.attributes('tabindex')).toBe('-1');
+        });
+      });
+
+      describe('When <button> is disabled', () => {
+        it('Should use native disabled attribute', () => {
+          mockProps = { disabled: true };
+
+          updateWrapper();
+
+          button = wrapper.find('[data-qa="dt-button"]');
+
+          expect(button.attributes('disabled')).toBeDefined();
+          expect(button.attributes('aria-disabled')).toBeUndefined();
+        });
+      });
+    });
+
+    describe('Keyboard accessibility', () => {
+      describe('When <a> receives Space keydown', () => {
+        it('Should trigger click', async () => {
+          mockProps = { href: 'https://example.com' };
+
+          updateWrapper();
+
+          button = wrapper.find('[data-qa="dt-button"]');
+          const clickSpy = vi.fn();
+          button.element.addEventListener('click', clickSpy);
+
+          await button.trigger('keydown', { key: ' ' });
+
+          expect(clickSpy).toHaveBeenCalled();
+        });
+      });
+
+      describe('When disabled <a> receives Space keydown', () => {
+        it('Should not trigger click', async () => {
+          mockProps = { href: 'https://example.com', disabled: true };
+
+          updateWrapper();
+
+          button = wrapper.find('[data-qa="dt-button"]');
+          const clickSpy = vi.fn();
+          button.element.addEventListener('click', clickSpy);
+
+          await button.trigger('keydown', { key: ' ' });
+
+          expect(clickSpy).not.toHaveBeenCalled();
+        });
+      });
+    });
+  });
 });

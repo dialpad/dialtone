@@ -1439,6 +1439,10 @@
         "clear"
       ],
       "expert-node": [],
+      "font-size": [
+        "text",
+        "typography"
+      ],
       "image": [
         "picture",
         "photo"

@@ -1,16 +1,16 @@
 <template>
-  <button
+  <component
+    :is="computedTag"
     :class="[
       'base-button__button',
       buttonClasses(),
     ]"
     data-qa="dt-button"
-    :type="type"
-    :disabled="disabled"
     :style="{ width: width }"
     :aria-live="computedAriaLive"
     :aria-label="loading ? i18n.$t('DIALTONE_LOADING') : $attrs['aria-label']"
-    v-on="buttonListeners"
+    v-bind="computedAttrs"
+    v-on="computedListeners"
   >
     <!-- NEW: Block-start icon slot (above label) -->
     <span
@@ -114,11 +114,11 @@
         :icon-size="iconSize"
       />
     </span>
-  </button>
+  </component>
 </template>
 
 <script>
-import { warn } from 'vue';
+import { warn, resolveComponent } from 'vue';
 import { hasSlotContent } from '@/common/utils';
 
 import {
@@ -228,13 +228,7 @@ export default {
 
     /**
      * HTML button type attribute
-     * <a
-     *   class="d-link"
-     *   href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type"
-     *   target="_blank"
-     * >
-     *   (Reference)
-     * </a>
+     * <a class="d-link" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type" target="_blank">(Reference)</a>
      * @values button, submit, reset
      */
     type: {
@@ -245,10 +239,7 @@ export default {
 
     /**
      * Button width, accepts
-     * <a class="d-link" href="https://developer.mozilla.org/en-US/docs/Web/CSS/width" target="_blank">
-     *   CSS width attribute
-     * </a>
-     * values
+     * <a class="d-link" href="https://developer.mozilla.org/en-US/docs/Web/CSS/width" target="_blank">CSS width attribute</a> values
      */
     width: {
       type: String,
@@ -312,6 +303,51 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * vue-router `to` prop. When provided, renders a `<router-link>`
+     * for client-side SPA navigation.
+     * @see https://router.vuejs.org/api/interfaces/RouterLinkProps.html#to
+     */
+    to: {
+      type: [String, Object],
+      default: null,
+    },
+
+    /**
+     * When provided, renders an `<a>` element for standard browser navigation.
+     */
+    href: {
+      type: String,
+      default: null,
+    },
+
+    /**
+     * HTML anchor target attribute. Only applied when using the `href` prop.
+     * @values _self, _blank, _parent, _top
+     */
+    target: {
+      type: String,
+      default: null,
+    },
+
+    /**
+     * HTML anchor rel attribute. Only applied when using the `href` prop.
+     */
+    rel: {
+      type: String,
+      default: null,
+    },
+
+    /**
+     * vue-router `replace` prop. When true, navigation will not leave a
+     * history entry. Only applied when using the `to` prop.
+     * @values true, false
+     */
+    replace: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: [
@@ -343,9 +379,40 @@ export default {
   },
 
   computed: {
+    computedTag () {
+      if (this.to) return this.resolveRouterLink();
+      if (this.href) return 'a';
+      return 'button';
+    },
 
-    buttonListeners () {
+    isNativeButton () {
+      return !this.to && !this.href;
+    },
+
+    computedAttrs () {
+      if (this.to) {
+        return {
+          to: this.to,
+          replace: this.replace,
+          ...(this.disabled && { 'aria-disabled': 'true', tabindex: '-1' }),
+        };
+      }
+      if (this.href) {
+        return {
+          href: this.disabled ? null : this.href,
+          target: this.target,
+          rel: this.rel,
+          ...(this.disabled && { 'aria-disabled': 'true', tabindex: '-1' }),
+        };
+      }
       return {
+        type: this.type,
+        disabled: this.disabled,
+      };
+    },
+
+    computedListeners () {
+      const listeners = {
         focusin: (e) => {
           this.isInFocus = this.assertiveOnFocus;
           this.$emit('focusin', e);
@@ -356,6 +423,30 @@ export default {
           this.$emit('focusout', e);
         },
       };
+
+      if (!this.isNativeButton) {
+        // Prevent click when disabled for link elements.
+        // stopImmediatePropagation prevents parent onClick attrs from firing.
+        if (this.disabled) {
+          listeners.click = (e) => {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+          };
+        }
+
+        // Space key handler: <a> only responds to Enter natively,
+        // but buttons respond to both Enter and Space.
+        listeners.keydown = (e) => {
+          if (e.key === ' ' || e.code === 'Space') {
+            e.preventDefault();
+            if (!this.disabled) {
+              e.target.click();
+            }
+          }
+        };
+      }
+
+      return listeners;
     },
 
     computedAriaLive () {
@@ -404,6 +495,15 @@ export default {
   },
 
   methods: {
+    resolveRouterLink () {
+      try {
+        return resolveComponent('RouterLink');
+      } catch {
+        warn('DtButton: "to" prop requires vue-router. Falling back to <a>.');
+        return 'a';
+      }
+    },
+
     buttonClasses () {
       if (this.link) {
         return [
@@ -439,7 +539,7 @@ export default {
 
       for (const row of INVALID_COMBINATION) {
         if (circle === row.circle && kind === row.kind && importance === row.importance) {
-          console.warn(row.message);
+          warn(row.message);
           return false;
         }
       }

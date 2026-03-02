@@ -9,9 +9,7 @@ keywords: ["headline", "body", "label", "caption"]
   class="d-wmx100p d-my24"
 >
   <template #default>
-    You probably want to use the <router-link class="d-fw-semibold d-link d-link--muted" to="/components/text">
-      DtText
-    </router-link> component instead of typography styles, which have been moved to <router-link class="d-fw-semibold d-link d-link--muted" to="/design/typography/">Design Language > Typography</router-link>
+    <p class="d-body--md-compact"> Typography Styles have been moved to <dt-link to="/design/typography/" kind="muted" class="d-fw-semibold">Design Language > Typography</dt-link>.</p>
   </template>
 </dt-notice>
 

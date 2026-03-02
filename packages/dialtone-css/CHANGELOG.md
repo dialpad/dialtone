@@ -1,3 +1,11 @@
+# [8.73.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.72.0...dialtone-css/v8.73.0) (2026-02-19)
+
+
+### Features
+
+* **Css Utlility:** DLT-2984 add text-wrap ([#1057](https://github.com/dialpad/dialtone/issues/1057)) ([bed8fd1](https://github.com/dialpad/dialtone/commit/bed8fd100c2528931f95f263f78e5bde7cf29b6c))
+* **Datepicker:** DP-175969 add min and max date props ([#1053](https://github.com/dialpad/dialtone/issues/1053)) ([f3fa6e0](https://github.com/dialpad/dialtone/commit/f3fa6e08d060f520124f86d4712e97e61078acb0))
+
 # [8.72.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.71.7...dialtone-css/v8.72.0) (2026-02-03)
 
 

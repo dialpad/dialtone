@@ -162,6 +162,12 @@ const props = defineProps({
     type: Date,
     default: null,
   },
+
+  weekStartsOn: {
+    type: Number,
+    default: 0,
+    validator: (v) => Number.isInteger(v) && v >= 0 && v <= 6,
+  },
 });
 
 const emits = defineEmits([
