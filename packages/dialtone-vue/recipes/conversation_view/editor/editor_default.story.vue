@@ -34,6 +34,7 @@
       :font-styles="$attrs.fontStyles"
       :font-sizes="$attrs.fontSizes"
       :allow-tables="$attrs.allowTables"
+      :allow-image-resize="$attrs.allowImageResize"
       @focus="$attrs.onFocus"
       @blur="$attrs.onBlur"
       @input="$attrs.onInput"
