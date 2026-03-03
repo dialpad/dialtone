@@ -104,6 +104,12 @@
         <span v-html="$attrs.scheduleMessage" />
       </template>
       <template
+        v-if="$attrs.messagePolish"
+        #messagePolish
+      >
+        <span v-html="$attrs.messagePolish" />
+      </template>
+      <template
         v-if="$attrs.smsCount"
         #smsCount
       >
