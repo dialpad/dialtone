@@ -1263,6 +1263,7 @@ export default {
         id: variableData.id,
         placeholder: variableData.placeholder || '',
         altText: '',
+        enableAltText: variableData.enableAltText,
       }).run();
     },
 
