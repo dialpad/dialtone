@@ -23,8 +23,17 @@
           v-on="callbarButtonListeners"
         >
           <slot />
+          <!-- @slot Icon displayed above the button label (block-start) -->
           <template #blockStartIcon>
-            <slot name="icon" />
+            <slot
+              v-if="$slots.blockStartIcon"
+              name="blockStartIcon"
+            />
+            <!-- @slot @deprecated Use blockStartIcon -->
+            <slot
+              v-else
+              name="icon"
+            />
           </template>
         </dt-button>
       </span>

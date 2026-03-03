@@ -103,6 +103,35 @@ describe('DtRecipeCallbarButton Tests', () => {
     });
   });
 
+  describe('Icon slot tests', () => {
+    it('should render #blockStartIcon through to DtButton block-start-icon slot', () => {
+      slots = { blockStartIcon: '<span data-qa="test-block-start-icon">B</span>' };
+      _setWrappers();
+
+      expect(button.find('[data-qa="dt-button-block-start-icon"]').exists()).toBe(true);
+      expect(button.find('[data-qa="test-block-start-icon"]').exists()).toBe(true);
+    });
+
+    it('should render deprecated #icon through to DtButton block-start-icon slot', () => {
+      slots = { icon: '<span data-qa="test-icon">I</span>' };
+      _setWrappers();
+
+      expect(button.find('[data-qa="dt-button-block-start-icon"]').exists()).toBe(true);
+      expect(button.find('[data-qa="test-icon"]').exists()).toBe(true);
+    });
+
+    it('should prefer #blockStartIcon over deprecated #icon when both provided', () => {
+      slots = {
+        blockStartIcon: '<span data-qa="test-block-start-icon">B</span>',
+        icon: '<span data-qa="test-icon">I</span>',
+      };
+      _setWrappers();
+
+      expect(button.find('[data-qa="test-block-start-icon"]').exists()).toBe(true);
+      expect(button.find('[data-qa="test-icon"]').exists()).toBe(false);
+    });
+  });
+
   describe('Interactivity Tests', () => {
     describe('When clicking on the button', () => {
       it('should call the click event listener', async () => {

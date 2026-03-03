@@ -27,7 +27,7 @@
   --button-border-width: var(--dt-size-border-100);
   --button-typography: var(--dt-typography-button-md);
   --button-padding-y-xs: calc(
-    calc(var(--dt-size-400) - var(--dt-size-100)) - var(--button-border-width)
+    calc(var(--dt-size-350) - var(--dt-size-100)) - var(--button-border-width)
   ); // ((8 - 1) - border-width)
 
   --button-padding-x-xs: calc(
@@ -35,7 +35,7 @@
   ); // 8 minus border-width
 
   --button-padding-y-sm: calc(
-    var(--dt-size-400) - var(--button-border-width)
+    var(--dt-size-350) - var(--button-border-width)
   ); // 8 minus border-width
 
   --button-padding-x-sm: calc(
@@ -78,6 +78,7 @@
   padding: var(--button-padding-y) var(--button-padding-x);
   color: var(--button-color-text);
   font: var(--button-typography);
+  font-weight: var(--dt-font-weight-medium);
   text-transform: inherit;
   text-decoration: none;
   vertical-align: middle;
@@ -95,14 +96,14 @@
 
   //  --  STATES
   //  ------------------------------------------------------------------------
-  &:hover:not([disabled]) {
+  &:hover:not(:disabled, .d-btn--disabled) {
     --button-color-text: var(--dt-action-color-foreground-base-hover);
     --button-color-background: var(--dt-action-color-background-base-hover);
   }
 
-  &:active:not([disabled]),
-  &.d-btn--active:not([disabled]),
-  &.d-btn--active:active:not([disabled]) {
+  &:active:not(:disabled, .d-btn--disabled),
+  &.d-btn--active:not(:disabled, .d-btn--disabled),
+  &.d-btn--active:active:not(:disabled, .d-btn--disabled) {
     --button-color-text: var(--dt-action-color-foreground-base-active);
     --button-color-background: var(--dt-action-color-background-base-active);
   }
@@ -112,17 +113,30 @@
     box-shadow: var(--dt-shadow-focus);
   }
 
-  &[disabled] {
-    --button-color-border: transparent !important;
-    --button-color-text: var(
-      --dt-action-color-foreground-disabled-default
-    ) !important;
-    --button-color-background: var(
-      --dt-action-color-background-disabled-default
-    ) !important;
+  &--disabled,
+  &:disabled {
+    --chroma-adjust-text: .08;
+    --chroma-adjust-background: .08;
+    --chroma-adjust-border: .08;
+    --opacity-adjust-text: 65%;
+    --opacity-adjust-background: 65%;
+    --opacity-adjust-border: 40%;
 
+    color:            color-mix(in oklch, oklch( from var(--button-color-text)       l calc(c - var(--chroma-adjust-text)) h ) var(--opacity-adjust-text), transparent );
+    background-color: color-mix(in oklch, oklch( from var(--button-color-background) l calc(c - var(--chroma-adjust-background)) h ) var(--opacity-adjust-background), transparent );
+    border-color:     color-mix(in oklch, oklch( from var(--button-color-border)     l calc(c - var(--chroma-adjust-border)) h ) var(--opacity-adjust-border), transparent );
     cursor: not-allowed;
     transition: none;
+    pointer-events: none;
+
+    &.d-btn--primary {
+      --opacity-adjust-text: 80%;
+    }
+
+    &.d-btn--muted {
+      --opacity-adjust-text: 50%;
+      --opacity-adjust-border: 50%;
+    }
   }
 }
 
@@ -132,14 +146,14 @@
   --button-color-text: var(--dt-action-color-foreground-muted-default);
   --button-border-radius: var(--dt-size-radius-circle);
 
-  &:hover:not([disabled]) {
+  &:hover:not(:disabled, .d-btn--disabled) {
     --button-color-text: var(--dt-action-color-foreground-muted-hover);
     --button-color-background: var(--dt-action-color-background-muted-hover);
   }
 
-  &:active:not([disabled]),
-  &.d-btn--active:not([disabled]),
-  &.d-btn--active:active:not([disabled]) {
+  &:active:not(:disabled, .d-btn--disabled),
+  &.d-btn--active:not(:disabled, .d-btn--disabled),
+  &.d-btn--active:active:not(:disabled, .d-btn--disabled) {
     --button-color-text: var(--dt-action-color-foreground-muted-active);
     --button-color-background: var(--dt-action-color-background-muted-active);
   }
@@ -256,6 +270,36 @@
 }
 
 //  ============================================================================
+//  $   BUTTON LEADING/TRAILING
+//  ----------------------------------------------------------------------------
+.d-btn__leading,
+.d-btn__trailing {
+  display: inline-flex;
+  align-items: center;
+  align-self: stretch;
+  margin-block: calc(-1 * var(--button-padding-y));
+
+  .d-btn:disabled &,
+  .d-btn--disabled & {
+    opacity: .6;
+  }
+}
+
+.d-btn__leading {
+  order: -1;
+  margin-inline: calc(-1 * var(--button-padding-x)) var(--dt-size-200);
+  border-start-start-radius: calc(var(--button-border-radius) - 1px);
+  border-end-start-radius: calc(var(--button-border-radius) - 1px);
+}
+
+.d-btn__trailing {
+  margin-inline: var(--dt-size-200) calc(-1 * var(--button-padding-x));
+  border-start-end-radius: calc(var(--button-border-radius) - 1px);
+  border-end-end-radius: calc(var(--button-border-radius) - 1px);
+  order: 2;
+}
+
+//  ============================================================================
 //  $   BUTTON LABEL
 //  ----------------------------------------------------------------------------
 .d-btn__label {
@@ -325,16 +369,16 @@
     --dt-action-color-background-base-primary-default
   );
 
-  &:hover:not([disabled]) {
+  &:hover:not(:disabled, .d-btn--disabled) {
     --button-color-text: var(--dt-action-color-foreground-base-primary-default);
     --button-color-background: var(
       --dt-action-color-background-base-primary-hover
     );
   }
 
-  &:active:not([disabled]),
-  &.d-btn--active:not([disabled]),
-  &.d-btn--active:active:not([disabled]) {
+  &:active:not(:disabled, .d-btn--disabled),
+  &.d-btn--active:not(:disabled, .d-btn--disabled),
+  &.d-btn--active:active:not(:disabled, .d-btn--disabled) {
     --button-color-text: var(--dt-action-color-foreground-base-primary-default);
     --button-color-background: var(
       --dt-action-color-background-base-primary-active
@@ -348,14 +392,14 @@
   --button-color-text: var(--dt-action-color-foreground-muted-default);
   --button-color-border: var(--dt-action-color-border-muted-default);
 
-  &:hover:not([disabled]) {
+  &:hover:not(:disabled, .d-btn--disabled) {
     --button-color-text: var(--dt-action-color-foreground-muted-hover);
     --button-color-background: var(--dt-action-color-background-muted-hover);
   }
 
-  &:active:not([disabled]),
-  &.d-btn--active:not([disabled]),
-  &.d-btn--active:active:not([disabled]) {
+  &:active:not(:disabled, .d-btn--disabled),
+  &.d-btn--active:not(:disabled, .d-btn--disabled),
+  &.d-btn--active:active:not(:disabled, .d-btn--disabled) {
     --button-color-text: var(--dt-action-color-foreground-muted-active);
     --button-color-background: var(--dt-action-color-background-muted-active);
   }
@@ -372,14 +416,14 @@
   --button-color-background: var(--dt-action-color-background-critical-default);
   --button-color-border: var(--dt-action-color-border-critical-default);
 
-  &:hover:not([disabled]) {
+  &:hover:not(:disabled, .d-btn--disabled) {
     --button-color-text: var(--dt-action-color-foreground-critical-hover);
     --button-color-background: var(--dt-action-color-background-critical-hover);
   }
 
-  &:active:not([disabled]),
-  &.d-btn--active:not([disabled]),
-  &.d-btn--active:active:not([disabled]) {
+  &:active:not(:disabled, .d-btn--disabled),
+  &.d-btn--active:not(:disabled, .d-btn--disabled),
+  &.d-btn--active:active:not(:disabled, .d-btn--disabled) {
     --button-color-text: var(--dt-action-color-foreground-critical-active);
     --button-color-background: var(
       --dt-action-color-background-critical-active
@@ -400,7 +444,7 @@
       --dt-action-color-background-critical-primary-default
     );
 
-    &:hover:not([disabled]) {
+    &:hover:not(:disabled, .d-btn--disabled) {
       --button-color-text: var(
         --dt-action-color-foreground-critical-primary-default
       );
@@ -409,9 +453,9 @@
       );
     }
 
-    &:active:not([disabled]),
-    &.d-btn--active:not([disabled]),
-    &.d-btn--active:active:not([disabled]) {
+    &:active:not(:disabled, .d-btn--disabled),
+    &.d-btn--active:not(:disabled, .d-btn--disabled),
+    &.d-btn--active:active:not(:disabled, .d-btn--disabled) {
       --button-color-text: var(
         --dt-action-color-foreground-critical-primary-default
       );
@@ -429,14 +473,14 @@
   --button-color-background: var(--dt-action-color-background-positive-default);
   --button-color-border: var(--dt-action-color-border-positive-default);
 
-  &:hover:not([disabled]) {
+  &:hover:not(:disabled, .d-btn--disabled) {
     --button-color-text: var(--dt-action-color-foreground-positive-hover);
     --button-color-background: var(--dt-action-color-background-positive-hover);
   }
 
-  &:active:not([disabled]),
-  &.d-btn--active:not([disabled]),
-  &.d-btn--active:active:not([disabled]) {
+  &:active:not(:disabled, .d-btn--disabled),
+  &.d-btn--active:not(:disabled, .d-btn--disabled),
+  &.d-btn--active:active:not(:disabled, .d-btn--disabled) {
     --button-color-text: var(--dt-action-color-foreground-positive-active);
     --button-color-background: var(
       --dt-action-color-background-positive-active
@@ -457,7 +501,7 @@
       --dt-action-color-background-positive-primary-default
     );
 
-    &:hover:not([disabled]) {
+    &:hover:not(:disabled, .d-btn--disabled) {
       --button-color-text: var(
         --dt-action-color-foreground-positive-primary-default
       );
@@ -466,9 +510,9 @@
       );
     }
 
-    &:active:not([disabled]),
-    &.d-btn--active:not([disabled]),
-    &.d-btn--active:active:not([disabled]) {
+    &:active:not(:disabled, .d-btn--disabled),
+    &.d-btn--active:not(:disabled, .d-btn--disabled),
+    &.d-btn--active:active:not(:disabled, .d-btn--disabled) {
       --button-color-text: var(
         --dt-action-color-foreground-positive-primary-default
       );
@@ -487,14 +531,14 @@
   --button-color-background: var(--dt-action-color-background-inverted-default);
   --button-color-border: var(--dt-action-color-border-inverted-default);
 
-  &:hover:not([disabled]) {
+  &:hover:not(:disabled, .d-btn--disabled) {
     --button-color-text: var(--dt-action-color-foreground-inverted-hover);
     --button-color-background: var(--dt-action-color-background-inverted-hover);
   }
 
-  &:active:not([disabled]),
-  &.d-btn--active:not([disabled]),
-  &.d-btn--active:active:not([disabled]) {
+  &:active:not(:disabled, .d-btn--disabled),
+  &.d-btn--active:not(:disabled, .d-btn--disabled),
+  &.d-btn--active:active:not(:disabled, .d-btn--disabled) {
     --button-color-text: var(--dt-action-color-foreground-inverted-active);
     --button-color-background: var(
       --dt-action-color-background-inverted-active
@@ -517,7 +561,7 @@
       --dt-action-color-background-inverted-primary-default
     );
 
-    &:hover:not([disabled]) {
+    &:hover:not(:disabled, .d-btn--disabled) {
       --button-color-text: var(
         --dt-action-color-foreground-inverted-primary-hover
       );
@@ -526,9 +570,9 @@
       );
     }
 
-    &:active:not([disabled]),
-    &.d-btn--active:not([disabled]),
-    &.d-btn--active:active:not([disabled]) {
+    &:active:not(:disabled, .d-btn--disabled),
+    &.d-btn--active:not(:disabled, .d-btn--disabled),
+    &.d-btn--active:active:not(:disabled, .d-btn--disabled) {
       --button-color-text: var(
         --dt-action-color-foreground-inverted-primary-active
       );
@@ -582,22 +626,6 @@
   .d-btn-loading();
 }
 
-//  $$  DISABLED STATE
-//  ----------------------------------------------------------------------------
-.d-btn--disabled {
-  --button-color-text: var(
-    --dt-action-color-foreground-disabled-default
-  ) !important;
-  --button-color-background: var(
-    --dt-action-color-background-disabled-default
-  ) !important;
-  --button-color-border: transparent !important;
-
-  cursor: not-allowed;
-  transition: none;
-  pointer-events: none;
-}
-
 //  $$  BRAND BUTTONS
 //  ----------------------------------------------------------------------------
 .d-btn--brand {
@@ -606,8 +634,7 @@
 
   display: flex;
 
-  &:hover:not([disabled]),
-  &:active:not([disabled]) {
+  &:hover:not(:disabled, .d-btn--disabled) {
     --button-color-text: oklch(from var(--dt-color-neutral-white) l c h / 0.9);
     --button-color-background: oklch(from var(--brand-color) calc(l - 0.05) c h);
   }
@@ -618,7 +645,7 @@
       0 0 0 0.25em oklch(from var(--brand-color) l c h / 0.9);
   }
 
-  &:active:not([disabled]) {
+  &:active:not(:disabled, .d-btn--disabled) {
     --button-color-background: oklch(from var(--brand-color) calc(l - 0.1) c h);
   }
 
