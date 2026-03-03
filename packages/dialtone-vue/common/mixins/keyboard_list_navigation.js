@@ -193,6 +193,7 @@ export default ({
     },
 
     setHighlightId (id) {
+      if (!id) return;
       this[idKey] = id;
       this[indexKey] = this._getItemIndex(id);
 
