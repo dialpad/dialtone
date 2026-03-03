@@ -2,35 +2,36 @@
   <div>
     <dt-stack
       gap="400"
-      direction="row"
-      class="d-p8"
     >
-      <dt-link
-        v-for="kind in LINK_VARIANTS"
-        :key="kind"
-        href="#"
-        :kind="kind"
-      >
-        {{ kind }} link
-      </dt-link>
-    </dt-stack>
-    <div class="d-bgc-contrast">
       <dt-stack
-        gap="400"
+        class="d-fw-wrap"
         direction="row"
-        class="d-p8"
+        gap="400"
+        align="baseline"
       >
         <dt-link
           v-for="kind in LINK_VARIANTS"
           :key="kind"
-          inverted
           href="#"
           :kind="kind"
         >
-          {{ kind }} inverted
+          {{ kind }} link
         </dt-link>
       </dt-stack>
-    </div>
+      <dt-stack
+        class="d-fw-wrap"
+        direction="row"
+        gap="400"
+        align="baseline"
+      >
+        <dt-link
+          href="#"
+          :underline="false"
+        >
+          No underline {{ kind }} link
+        </dt-link>
+      </dt-stack>
+    </dt-stack>
   </div>
 </template>
 

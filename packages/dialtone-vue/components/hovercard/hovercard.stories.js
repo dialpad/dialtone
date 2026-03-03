@@ -172,11 +172,7 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 export const Default = {
   render: DefaultTemplate,
   decorators: [() => ({
-    template: `<dt-stack direction="row" justify="center" align="center" class="d-h464">
-      <div class="d-w164">
-        <story />
-      </div>
-    </dt-stack>`,
+    template: `<div> <story /> </div>`,
   })],
 
   args: {},
@@ -190,8 +186,7 @@ const ManyTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 export const Many = {
   render: ManyTemplate,
   decorators: [() => ({
-    template: `<div class="d-wmx464"><story />
-    </div>`,
+    template: `<div><story /></div>`,
   })],
   args: { ...Default.args, offset: [0, 5] },
 };
@@ -204,11 +199,7 @@ const InputTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 export const WithInput = {
   render: InputTemplate,
   decorators: [() => ({
-    template: `<dt-stack direction="row" justify="center" align="center" class="d-h464">
-      <div class="d-w164">
-        <story />
-      </div>
-    </dt-stack>`,
+    template: `<div><story /></div>`,
   })],
   args: { ...Default.args, offset: [0, 5] },
 };

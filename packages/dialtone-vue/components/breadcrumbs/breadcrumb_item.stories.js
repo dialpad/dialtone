@@ -22,6 +22,9 @@ export const argTypesData = {
     },
     control: 'text',
   },
+  inverted: {
+    table: { disable: true },
+  },
 };
 
 // Story Collection

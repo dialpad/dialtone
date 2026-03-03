@@ -308,7 +308,7 @@ const { mockReactions } = useMockReactions();
 <style lang="less" scoped>
   .feed-item-row {
     &__default-story {
-      p {
+      :where(p) {
         color: var(--dt-color-foreground-primary);
         font-size: 15px;
         font-style: normal;

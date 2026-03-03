@@ -176,7 +176,7 @@ html body {
     color: var(--dt-color-foreground-secondary);
     font-size: var(--dt-font-size-300);
 
-    strong {
+    :where(strong) {
       color: var(--dt-color-foreground-primary);
     }
   }
@@ -189,19 +189,19 @@ html body {
     padding-block-end: var(--dt-size-400);
   }
 
-  .DocSearch-Hits mark {
+  .DocSearch-Hits :where(mark) {
     padding: var(--dt-size-200);
     color: var(--dt-color-foreground-primary);
     background: var(--dt-color-surface-warning);
   }
 
-  .DocSearch-Hit a {
+  .DocSearch-Hit :where(a) {
     padding-inline: var(--dt-size-450) var(--dt-size-450);
     border-radius: var(--dt-size-radius-300);
   }
 
-  .DocSearch-Hit-action svg,
-  .DocSearch-Hit-icon svg {
+  .DocSearch-Hit-action :where(svg),
+  .DocSearch-Hit-icon :where(svg) {
     inline-size: var(--dt-icon-size-200);
     block-size: var(--dt-icon-size-200);
   }
@@ -216,7 +216,7 @@ html body {
     // no overrides
   }
 
-  .DocSearch-Hit[aria-selected="true"] mark {
+  .DocSearch-Hit[aria-selected="true"] :where(mark) {
     color: var(--dt-color-foreground-primary) !important;
     text-decoration: none;
   }
@@ -242,8 +242,8 @@ html body {
     // no overrides
   }
 
-  .DocSearch-Logo svg {
-    filter: saturate(0) contrast(0.25);
+  .DocSearch-Logo :where(svg) {
+    filter: saturate(0) contrast(.25);
   }
 
   .DocSearch-Commands {
@@ -273,7 +273,7 @@ html body {
     color: var(--dt-color-link-primary);
   }
 
-  .DocSearch-NoResults-Prefill-List li {
+  .DocSearch-NoResults-Prefill-List :where(li) {
     list-style-type: none;
   }
 }
@@ -293,15 +293,15 @@ html body {
   background-color: var(--dt-shell-color-surface-default);
   view-transition-name: dialtone-header;
 
-  > :first-child {
+  > :where(:first-child) {
     justify-self: start;
   }
 
-  > :nth-child(2) {
+  > :where(:nth-child(2)) {
     justify-self: center;
   }
 
-  > :last-child {
+  > :where(:last-child) {
     justify-self: end;
   }
 
@@ -417,7 +417,7 @@ a.header-anchor {
 
 .d-docsite--header-2,
 .d-docsite--header-3 {
-  &:hover a.header-anchor {
+  &:hover :where(a).header-anchor {
     opacity: 1;
   }
 }
@@ -457,7 +457,7 @@ a.header-anchor {
   }
 }
 
-code {
+:where(code) {
   .d-docsite--paragraph &,
   .d-docsite--unordered-list &,
   .d-docsite--ordered-list &,
@@ -563,7 +563,7 @@ code {
   .d-popover {
     block-size: 100%;
 
-    > div {
+    > :where(div) {
       block-size: 100%;
     }
   }
@@ -633,7 +633,7 @@ code {
   block-size: var(--dt-size-650);
   margin-block-end: var(--dt-size-300);
 
-  svg {
+  :where(svg) {
     inline-size: 100%;
     block-size: auto;
   }
@@ -642,7 +642,7 @@ code {
 .dialtone-icon-card__icon--autosize {
   margin-block-end: var(--dt-size-300);
 
-  svg {
+  :where(svg) {
     inline-size: 100%;
     block-size: auto;
   }
@@ -882,17 +882,17 @@ code {
 //  ----------------------------------------------------------------------------
 
 .dialtone-definition {
-  > dt {
+  > :where(dt) {
     margin-block-start: var(--dt-size-500);
     font-weight: var(--dt-font-weight-bold);
   }
 
-  > dd {
+  > :where(dd) {
     max-inline-size: 72ch;
     margin: 0;
   }
 
-  code {
+  :where(code) {
     font-weight: var(--dt-font-weight-normal);
   }
 }

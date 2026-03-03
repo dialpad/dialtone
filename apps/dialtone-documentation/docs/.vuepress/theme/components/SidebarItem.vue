@@ -99,7 +99,7 @@
                 kind="muted"
                 label-class="d-jc-flex-start d-ta-left d-fw-normal"
                 :class="[
-                  'dialtone-shell-btn d-w100p',
+                  'dialtone-shell-btn d-w100p d-tw-pretty',
                   { 'd-pl48': depth === 0 },
                   { 'd-pl64': depth === 1 },
                 ]"

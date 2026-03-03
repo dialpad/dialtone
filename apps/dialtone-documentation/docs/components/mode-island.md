@@ -273,7 +273,7 @@ vueCode='
 '
 showHtmlWarning />
 
-## Custom element
+## Render as
 
 Polymorphic rendering via `as` prop—controls which HTML element wraps content. Ensures proper document structure and semantic markup. Example values: `section` for thematic grouping, `article` for self-contained content. Defaults to `div` where semantics aren't a concern.
 
@@ -325,12 +325,60 @@ vueCode='
 '
 />
 
+## Custom background
+
+The background surface of a Mode Island defaults to the root surface color. To override, use a CSS Utility class.
+
+<code-well-header>
+  <dt-mode-island class="d-p16 d-bar8 d-w100p d-bgc-transparent" ref="customBackgroundExample">
+    <dt-stack gap="400">
+      <dt-text as="p" kind="code" size="xs" tone="tertiary">Transparent background, inverted mode island</dt-text>
+      <div>
+        <dt-button>Button</dt-button>
+      </div>
+    </dt-stack>
+  </dt-mode-island>
+  <dt-mode-island class="d-p16 d-bar8 d-w100p">
+    <dt-stack gap="400">
+      <dt-text as="p" kind="code" size="xs" tone="tertiary">Default background, inverted mode island</dt-text>
+      <div>
+        <dt-button>Button</dt-button>
+      </div>
+    </dt-stack>
+  </dt-mode-island>
+  <dt-mode-island mode="dark" class="d-p16 d-bar8 d-w100p d-bgc-warning">
+    <dt-stack gap="400">
+      <dt-text as="p" kind="code" size="xs" tone="tertiary">warning background, dark mode island</dt-text>
+      <div>
+        <dt-button>Button</dt-button>
+      </div>
+    </dt-stack>
+  </dt-mode-island>
+  <dt-mode-island mode="light" class="d-p16 d-bar8 d-w100p d-bgc-warning">
+    <dt-stack gap="400">
+      <dt-text as="p" kind="code" size="xs" tone="tertiary">warning background, light mode island</dt-text>
+      <div>
+        <dt-button>Button</dt-button>
+      </div>
+    </dt-stack>
+  </dt-mode-island>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.customBackgroundExample'
+vueCode='
+<dt-mode-island class="d-bgc-transparent">
+  <dt-button>Button</dt-button>
+</dt-mode-island>
+'
+showHtmlWarning />
+
 ## Examples
 
 ### Callbar
 
 <code-well-header>
-  <dt-mode-island ref="callbarExample" class="d-ba d-bc-subtle d-p8 d-py4 d-bar32 d-bs-md d-w100p">
+  <dt-mode-island ref="callbarExample" class="d-ba d-bc-subtle d-p8 d-py4 d-bar8 d-bs-md d-w100p">
     <dt-stack direction="row" gap="600">
       <dt-stack gap="400" direction="row">
         <dt-avatar
@@ -382,7 +430,7 @@ vueCode='
 <code-example-tabs
 :htmlCode='() => $refs.callbarExample'
 vueCode='
-<dt-mode-island class="d-ba d-bc-subtle d-p8 d-py4 d-bar32 d-bs-md d-w100p">
+<dt-mode-island class="d-ba d-bc-subtle d-p8 d-py4 d-bar8 d-bs-md d-w100p">
   <dt-stack direction="row" gap="600">
     <dt-stack gap="400" direction="row">
       <dt-avatar full-name="TA" seed="ted-anderson" size="lg" />
