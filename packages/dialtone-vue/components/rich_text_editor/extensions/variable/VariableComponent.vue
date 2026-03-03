@@ -55,6 +55,10 @@ export default {
       return this.variableItems.find(item => item.id === this.variableId);
     },
 
+    enableAltText() {
+      return this.node?.attrs?.enableAltText;
+    },
+
     badgeLabel() {
       return `{} ${this.placeholder}`;
     },
@@ -70,6 +74,7 @@ export default {
   <!-- eslint-disable vue/no-restricted-class -->
   <node-view-wrapper class="d-d-inline-block">
     <dt-popover
+      v-if="enableAltText"
       padding="small"
       navigation-type="arrow-keys"
       placement="top-start"
@@ -105,5 +110,10 @@ export default {
         />
       </template>
     </dt-popover>
+    <dt-badge
+      v-else
+      :text="badgeLabel"
+      contenteditable="false"
+    />
   </node-view-wrapper>
 </template>
