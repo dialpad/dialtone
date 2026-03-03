@@ -1,11 +1,16 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtProgress from './progress.vue';
+import { PROGRESS_SIZES } from './progress_constants';
 import DtProgressDefaultTemplate from './progress_default.story.vue';
 import DtProgressVariantsTemplate from './progress_variants.story.vue';
 
 export const argsData = { ariaLabel: 'Upload progress', progress: 50 };
 export const argTypesData = {
   progress: { control: { type: 'range', min: 0, max: 100, step: 1 } },
+  size: {
+    options: Object.keys(PROGRESS_SIZES),
+    control: { type: 'select' },
+  },
 };
 
 export default {

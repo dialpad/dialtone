@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils';
 import DtProgress from './progress.vue';
+import { PROGRESS_SIZES, PROGRESS_SIZE_DEFAULT } from './progress_constants';
 
 // jsdom does not implement getTotalLength — add it to Element.prototype so mounted() can call it
 beforeAll(() => {
@@ -43,6 +44,19 @@ describe('DtProgress Tests', () => {
     describe('When progress is 100', () => {
       beforeEach(() => { mockProps = { progress: 100 }; updateWrapper(); });
       it('has aria-valuenow 100', () => { expect(progress.attributes('aria-valuenow')).toBe('100'); });
+    });
+  });
+
+  describe('Size Tests', () => {
+    it('applies default size class', () => {
+      expect(wrapper.find('svg').classes()).toContain(PROGRESS_SIZES[PROGRESS_SIZE_DEFAULT]);
+    });
+
+    describe('When size is 200', () => {
+      beforeEach(() => { mockProps = { size: '200' }; updateWrapper(); });
+      it('applies size-200 class', () => {
+        expect(wrapper.find('svg').classes()).toContain(PROGRESS_SIZES[200]);
+      });
     });
   });
 

@@ -5,8 +5,19 @@
 //  https://dialtone.dialpad.com/components/progress
 
 .d-progress {
-  width: var(--dt-size-550);
-  height: var(--dt-size-550);
+  --progress-size: var(--dt-icon-size-500);
+
+  width: var(--progress-size);
+  height: var(--progress-size);
+
+  &--size-100 { --progress-size: var(--dt-icon-size-100); }
+  &--size-200 { --progress-size: var(--dt-icon-size-200); }
+  &--size-300 { --progress-size: var(--dt-icon-size-300); }
+  &--size-400 { --progress-size: var(--dt-icon-size-400); }
+  &--size-500 { --progress-size: var(--dt-icon-size-500); }
+  &--size-600 { --progress-size: var(--dt-icon-size-600); }
+  &--size-700 { --progress-size: var(--dt-icon-size-700); }
+  &--size-800 { --progress-size: var(--dt-icon-size-800); }
 }
 
 .d-progress__circle {
