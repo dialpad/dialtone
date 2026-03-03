@@ -75,11 +75,11 @@ describe('DtIllustration Tests', () => {
     });
 
     it('Should render correct headline classes in header text', () => {
-      expect(headerText.classes().includes('d-headline--xxl')).toBe(true);
+      expect(headerText.classes().includes('d-text-headline--2xl')).toBe(true);
     });
 
     it('Should render correct body classes in body text', () => {
-      expect(bodyText.classes().includes('d-body--md')).toBe(true);
+      expect(bodyText.classes().includes('d-text-body--lg')).toBe(true);
     });
   });
 
@@ -98,7 +98,7 @@ describe('DtIllustration Tests', () => {
 
         headerText = wrapper.find('.d-empty-state__header-text');
 
-        expect(headerText.classes().includes('d-headline--xl')).toBe(true);
+        expect(headerText.classes().includes('d-text-headline--xl')).toBe(true);
       });
 
       it('Should update body classes in body text', () => {
@@ -108,7 +108,7 @@ describe('DtIllustration Tests', () => {
 
         bodyText = wrapper.find('.d-empty-state__body-text');
 
-        expect(bodyText.classes().includes('d-body--sm')).toBe(true);
+        expect(bodyText.classes().includes('d-text-body--md')).toBe(true);
       });
     });
 

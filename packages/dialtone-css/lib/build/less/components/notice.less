@@ -21,7 +21,6 @@
     --notice-color-icon: var(--notice-color-text);
     --notice-color-shadow: var(--dt-color-border-subtle);
     --notice-padding: var(--dt-size-500);
-    --notice-font-size: var(--dt-font-size-200);
     --notice-line-height: var(--dt-font-line-height-300);
     --notice-border-radius: var(--dt-size-400);
     --notice-box-shadow: 0 0 0 var(--dt-size-100) var(--notice-color-shadow) inset;
@@ -29,13 +28,13 @@
     //  Base Styles
     //  ------------------------------------------------------------------------
     display: flex;
-    align-items: center;
+    align-items: start;
     box-sizing: border-box;
     inline-size: 100%;
     max-inline-size: var(--dt-size-1020);
     padding: var(--notice-padding);
     color: var(--notice-color-text);
-    font-size: var(--notice-font-size);
+    font: var(--dt-text-body-md);
     line-height: var(--notice-line-height);
     background-color: var(--notice-color-background);
     border-radius: var(--notice-border-radius);
@@ -52,6 +51,8 @@
     flex: 1 auto;
     flex-direction: column;
     margin-inline-end: var(--dt-size-500);
+    gap: var(--dt-size-300);
+    align-self: center;
 }
 
 //  $$  ACTIONS
@@ -61,6 +62,11 @@
     flex: 0 auto;
     gap: var(--dt-size-400);
     align-items: center;
+    align-self: start;
+
+    .d-banner & {
+        align-self: inherit;
+    }
 
     .d-btn {
         color: var(--notice-color-text);
@@ -72,8 +78,17 @@
 .d-notice__icon {
     display: flex;
     flex: 0 auto;
-    margin-inline-end: var(--dt-size-450);
     color: var(--notice-color-icon);
+    margin-inline-end: var(--dt-size-450);
+    margin-block-start: var(--dt-size-200);
+
+    // I feel so dirty writing this. There probably should be a conditional Vue way
+    // to control this.
+    // When both a title AND a message are present.
+    .d-notice:has(.d-notice__content > .d-notice__message):has(.d-notice__title:not([hidden])) &,
+    .d-toast:has(.d-notice__content > .d-notice__message):has(.d-notice__title:not([hidden])) & {
+        margin-block-start: var(--dt-size-0);
+    }
 
     .d-banner & {
         margin-inline-end: var(--dt-size-400);
@@ -84,14 +99,15 @@
 //  $   COPY STYLES
 //  ============================================================================
 .d-notice__title {
-    font-weight: var(--dt-font-weight-bold);
-    font-size: inherit;
+    font: var(--dt-text-headline-md);
+    line-height: var(--dt-font-line-height-200);
+    text-box-trim: trim-both;
 }
 
 .d-notice__message {
-    .d-notice__title:not([hidden]) + & {
-        font-size: var(--dt-font-size-100);
-    }
+    font: var(--dt-text-body-sm);
+    text-wrap: pretty;
+    text-box-trim: trim-both;
 }
 
 //  ============================================================================

@@ -5,9 +5,16 @@
       v-if="heading"
       direction="row"
       align="center"
-      class="dt-dropdown-list--header d-fs12 d-fc-black-400 d-fw-bold d-lh4 d-py4 d-px12"
+      class="dt-dropdown-list--header d-py4 d-px12"
     >
-      <span>{{ heading }}</span>
+      <dt-text
+        kind="label"
+        size="xs"
+        strength="bold"
+        tone="muted"
+      >
+        {{ heading }}
+      </dt-text>
     </dt-stack>
     <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events -->
     <ul
@@ -22,11 +29,12 @@
 
 <script>
 import { DtStack } from '@/components/stack';
+import { DtText } from '@/components/text';
 
 export default {
   compatConfig: { MODE: 3 },
   name: 'DtDropdownList',
-  components: { DtStack },
+  components: { DtStack, DtText },
   props: {
     /**
      * List's heading.

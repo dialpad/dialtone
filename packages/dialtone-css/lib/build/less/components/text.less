@@ -22,35 +22,72 @@
   //  $   TEXT STYLES
   //  ----------------------------------------------------------------------------
 
+  // the extra `.d-text` is to tick up specificity to (0,2,0), but not as high as
+  // as a CSS utility with `!important` which has specificity of (0,2,1)
+
   &-headline {
-      &--3xl  { font: var(--dt-text-headline-3xl); }
-      &--2xl  { font: var(--dt-text-headline-2xl); }
-      &--xl   { font: var(--dt-text-headline-xl); }
-      &--lg   { font: var(--dt-text-headline-lg); }
-      &--md   { font: var(--dt-text-headline-md); }
-      &--sm   { font: var(--dt-text-headline-sm); }
-      &--xs   { font: var(--dt-text-headline-xs); }
+      &--3xl,
+      &--3xl.d-text  { font: var(--dt-text-headline-3xl); }
+
+      &--2xl,
+      &--2xl.d-text  { font: var(--dt-text-headline-2xl); }
+
+      &--xl,
+      &--xl.d-text   { font: var(--dt-text-headline-xl); }
+
+      &--lg,
+      &--lg.d-text   { font: var(--dt-text-headline-lg); }
+
+      &--md,
+      &--md.d-text   { font: var(--dt-text-headline-md); }
+
+      &--sm,
+      &--sm.d-text   { font: var(--dt-text-headline-sm); }
+
+      &--xs,
+      &--xs.d-text   { font: var(--dt-text-headline-xs); }
   }
 
   &-body {
-      &--lg { font: var(--dt-text-body-lg); }
-      &--md { font: var(--dt-text-body-md); }
-      &--sm { font: var(--dt-text-body-sm); }
-      &--xs { font: var(--dt-text-body-xs); }
+      &--lg,
+      &--lg.d-text { font: var(--dt-text-body-lg); }
+
+      &--md,
+      &--md.d-text { font: var(--dt-text-body-md); }
+
+      &--sm,
+      &--sm.d-text { font: var(--dt-text-body-sm); }
+
+      &--xs,
+      &--xs.d-text { font: var(--dt-text-body-xs); }
   }
 
   &-label {
-      &--lg { font: var(--dt-text-label-lg); }
-      &--md { font: var(--dt-text-label-md); }
-      &--sm { font: var(--dt-text-label-sm); }
-      &--xs { font: var(--dt-text-label-xs); }
+      &--lg,
+      &--lg.d-text { font: var(--dt-text-label-lg); }
+
+      &--md,
+      &--md.d-text { font: var(--dt-text-label-md); }
+
+      &--sm,
+      &--sm.d-text { font: var(--dt-text-label-sm); }
+
+      &--xs,
+      &--xs.d-text { font: var(--dt-text-label-xs); }
   }
 
   &-code {
-      &--lg { font: var(--dt-text-code-lg); }
-      &--md { font: var(--dt-text-code-md); }
-      &--sm { font: var(--dt-text-code-sm); }
-      &--xs { font: var(--dt-text-code-xs); }
+      &--lg,
+      &--lg.d-text { font: var(--dt-text-code-lg); }
+
+      &--md,
+      &--md.d-text { font: var(--dt-text-code-md); }
+
+      &--sm,
+      &--sm.d-text { font: var(--dt-text-code-sm); }
+
+      &--xs,
+      &--xs.d-text { font: var(--dt-text-code-xs); }
   }
 
   //  ============================================================================
@@ -79,10 +116,10 @@
   //  $   NUMERIC
   //  ----------------------------------------------------------------------------
 
-  &--numeric {
-    &.d-text { // tick up specificity to overcome `font` property of `d-body-[variant]`, `d-header-[variant]`, etc.
-      font-variant-numeric: tabular-nums;
-    }
+  &--numeric,
+  &--numeric.d-text {
+    // tick up specificity to overcome `font` property of `d-body-[variant]`, `d-header-[variant]`, etc.
+    font-variant-numeric: tabular-nums;
   }
 
   //  ============================================================================
@@ -93,9 +130,9 @@
     --dt-text-line-clamp: 1;
 
     display: -webkit-box;
+    overflow: hidden;
     -webkit-line-clamp: var(--dt-text-line-clamp);
     -webkit-box-orient: vertical;
-    overflow: hidden;
   }
 
   //  ============================================================================
@@ -147,16 +184,35 @@
   //  $   FONT STYLE MODIFIERS
   //  ----------------------------------------------------------------------------
 
-  &--fw-bold { font-weight: var(--dt-font-weight-bold); }
-  &--fw-semibold { font-weight: var(--dt-font-weight-semi-bold); }
-  &--fw-medium { font-weight: var(--dt-font-weight-medium); }
-  &--fw-normal { font-weight: var(--dt-font-weight-normal); }
+  &--fw-bold,
+  &--fw-bold.d-text { font-weight: var(--dt-font-weight-bold); }
 
-  &--lh-100 { line-height: var(--dt-font-line-height-100); }
-  &--lh-200 { line-height: var(--dt-font-line-height-200); }
-  &--lh-300 { line-height: var(--dt-font-line-height-300); }
-  &--lh-400 { line-height: var(--dt-font-line-height-400); }
-  &--lh-500 { line-height: var(--dt-font-line-height-500); }
-  &--lh-600 { line-height: var(--dt-font-line-height-600); }
+  &--fw-semibold,
+  &--fw-semibold.d-text { font-weight: var(--dt-font-weight-semi-bold); }
+
+  &--fw-medium,
+  &--fw-medium.d-text { font-weight: var(--dt-font-weight-medium); }
+
+  &--fw-normal,
+  &--fw-normal.d-text { font-weight: var(--dt-font-weight-normal); }
+
+
+  &--lh-100,
+  &--lh-100.d-text { line-height: var(--dt-font-line-height-100); }
+
+  &--lh-200,
+  &--lh-200.d-text { line-height: var(--dt-font-line-height-200); }
+
+  &--lh-300,
+  &--lh-300.d-text { line-height: var(--dt-font-line-height-300); }
+
+  &--lh-400,
+  &--lh-400.d-text { line-height: var(--dt-font-line-height-400); }
+
+  &--lh-500,
+  &--lh-500.d-text { line-height: var(--dt-font-line-height-500); }
+
+  &--lh-600,
+  &--lh-600.d-text { line-height: var(--dt-font-line-height-600); }
 }
 }

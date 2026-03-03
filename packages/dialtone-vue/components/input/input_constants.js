@@ -52,16 +52,11 @@ export const INPUT_STATE_CLASSES = {
 };
 
 export const DESCRIPTION_SIZE_CLASSES = {
+  xs: 'd-description--xs',
+  sm: 'd-description--sm',
+  md: '',
   lg: 'd-description--lg',
   xl: 'd-description--xl',
-};
-
-export const LABEL_SIZE_CLASSES = {
-  xs: 'd-label--xs',
-  sm: 'd-label--sm',
-  md: 'd-label--md',
-  lg: 'd-label--lg',
-  xl: 'd-label--xl',
 };
 
 export default {
@@ -71,5 +66,4 @@ export default {
   INPUT_SIZE_CLASSES,
   INPUT_STATE_CLASSES,
   DESCRIPTION_SIZE_CLASSES,
-  LABEL_SIZE_CLASSES,
 };

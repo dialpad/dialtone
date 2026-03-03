@@ -1,5 +1,8 @@
 <template>
-  <div id="components-radio-group--variants-container">
+  <dt-stack
+    id="components-radio-group--variants-container"
+    gap="400"
+  >
     <!-- Default -->
     <dt-radio-group
       name="radio-group-default"
@@ -87,17 +90,18 @@
       <radios-decorator />
     </dt-radio-group>
     <!-- With Error Messages Hidden -->
-  </div>
+  </dt-stack>
 </template>
 
 <script>
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import RadiosDecorator from './radios_decorator.vue';
 import DtRadioGroup from './radio_group.vue';
+import DtStack from '../stack/stack.vue';
 
 export default {
   name: 'RadioGroupVariants',
-  components: { RadiosDecorator, DtRadioGroup },
+  components: { RadiosDecorator, DtRadioGroup, DtStack },
   setup () {
     return {
       VALIDATION_MESSAGE_TYPES,

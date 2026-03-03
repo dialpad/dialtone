@@ -293,6 +293,28 @@ vueCode='
 '
 />
 
+## Label size
+
+Use the `label-size` prop to override the default label size.
+
+<code-well-header>
+  <dt-stack gap="400">
+    <dt-radio name="labelSizeExample1" value="xs" label="Extra small label" label-size="xs" checked />
+    <dt-radio name="labelSizeExample1" value="sm" label="Small label" label-size="sm" />
+    <dt-radio name="labelSizeExample1" value="md" label="Medium label (default)" label-size="md" />
+    <dt-radio name="labelSizeExample1" value="lg" label="Large label" label-size="lg" />
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-radio name="labelSizeExample1" value="xs" label="Extra small label" label-size="xs" />
+<dt-radio name="labelSizeExample1" value="sm" label="Small label" label-size="sm" />
+<dt-radio name="labelSizeExample1" value="md" label="Medium label (default)" label-size="md" />
+<dt-radio name="labelSizeExample1" value="lg" label="Large label" label-size="lg" />
+'
+/>
+
 ## Classes
 
 <component-class-table component-name="radio" />

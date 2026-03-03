@@ -16,6 +16,9 @@ export const argTypesData = {
       ${SHORTCUTS_ALIASES_LIST.join(', ')}`,
     control: 'text',
   },
+  inverted: {
+    table: { disable: true },
+  },
 };
 
 // Story Collection

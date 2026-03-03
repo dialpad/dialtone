@@ -4,26 +4,31 @@
     v-bind="addClassStyleAttrs($attrs)"
   >
     <label>
-      <div
-        v-if="hasSlotContent($slots.label) || label"
+      <dt-text
+        v-if="labelVisible && (hasSlotContent($slots.label) || label)"
+        kind="label"
+        :size="resolvedLabelSize"
+        :strength="labelStrength"
+        tone="secondary"
+        as="div"
         :aria-details="labelAriaDetails"
-        :class="[
-          'd-label',
-          LABEL_SIZE_MODIFIERS[size],
-          labelClass,
-        ]"
+        :class="['d-select__label-text', labelClass]"
         v-bind="labelChildProps"
         data-qa="dt-select-label"
       >
         <!-- @slot Slot for label, defaults to label prop -->
         <slot name="label">{{ label }}</slot>
-      </div>
-      <div
+      </dt-text>
+      <dt-text
         v-if="hasSlotContent($slots.description) || description"
         :id="descriptionKey"
+        kind="body"
+        :size="resolvedDescriptionSize"
+        tone="tertiary"
+        :density="resolvedDescriptionDensity"
+        as="div"
         :class="[
           'd-description',
-          DESCRIPTION_SIZE_MODIFIERS[size],
           descriptionClass,
         ]"
         v-bind="descriptionChildProps"
@@ -31,7 +36,7 @@
       >
         <!-- @slot Slot for description, defaults to description prop -->
         <slot name="description">{{ description }}</slot>
-      </div>
+      </dt-text>
       <div
         :class="[
           'd-select',
@@ -47,6 +52,7 @@
             'd-select__input',
             SELECT_STATE_MODIFIERS[state],
           ]"
+          :aria-label="!labelVisible && label ? label : undefined"
           v-bind="removeClassStyleAttrs($attrs)"
           data-qa="dt-select"
           :disabled="disabled"
@@ -80,10 +86,7 @@
 
 <script>
 import { warn } from 'vue';
-import {
-  LABEL_SIZE_MODIFIERS,
-  DESCRIPTION_SIZE_MODIFIERS,
-} from '@/common/constants';
+import { DtText, TEXT_SIZE_MODIFIERS, TEXT_STRENGTH_MODIFIERS } from '@/components/text';
 import {
   SELECT_SIZE_MODIFIERS,
   SELECT_STATE_MODIFIERS,
@@ -110,7 +113,7 @@ export default {
   compatConfig: { MODE: 3 },
   name: 'DtSelectMenu',
 
-  components: { DtValidationMessages },
+  components: { DtValidationMessages, DtText },
 
   mixins: [MessagesMixin],
 
@@ -123,6 +126,15 @@ export default {
     label: {
       type: String,
       default: '',
+    },
+
+    /**
+     * Determines visibility of select label.
+     * @values true, false
+     */
+    labelVisible: {
+      type: Boolean,
+      default: true,
     },
 
     /**
@@ -238,6 +250,27 @@ export default {
       type: [String, Number],
       default: '',
     },
+
+    /**
+     * Overrides the label text size. When not provided, the label size
+     * is derived from the component size prop.
+     * @values lg, md, sm, xs
+     */
+    labelSize: {
+      type: String,
+      default: null,
+      validator: (s) => TEXT_SIZE_MODIFIERS.label.includes(s),
+    },
+
+    /**
+     * Overrides the label font weight.
+     * @values bold, semibold, medium, normal
+     */
+    labelStrength: {
+      type: String,
+      default: null,
+      validator: (s) => Object.keys(TEXT_STRENGTH_MODIFIERS).includes(s),
+    },
   },
 
   emits: [
@@ -268,8 +301,6 @@ export default {
 
   data () {
     return {
-      LABEL_SIZE_MODIFIERS,
-      DESCRIPTION_SIZE_MODIFIERS,
       SELECT_SIZE_MODIFIERS,
       SELECT_STATE_MODIFIERS,
       hasSlotContent,
@@ -277,6 +308,19 @@ export default {
   },
 
   computed: {
+    resolvedLabelSize () {
+      return this.labelSize ?? (this.size === 'xl' ? 'lg' : this.size);
+    },
+
+    resolvedDescriptionSize () {
+      const map = { xs: 'xs', sm: 'xs', md: 'sm', lg: 'sm', xl: 'md' };
+      return map[this.size] || 'sm';
+    },
+
+    resolvedDescriptionDensity () {
+      return this.size === 'xl' ? '300' : undefined;
+    },
+
     selectListeners () {
       return {
         /*
@@ -312,6 +356,7 @@ export default {
 
   mounted () {
     this.validateOptionsPresence();
+    this.runValidations();
   },
 
   beforeUpdate () {
@@ -334,6 +379,15 @@ export default {
     validateOptionsPresence () {
       if (this.options?.length < 1 && !this.$slots.default) {
         warn('Options are expected to be provided via prop or slot', this);
+      }
+    },
+
+    runValidations () {
+      const hasLabel = !!(this.$slots.label || this.label);
+      if (!hasLabel && !this.$attrs['aria-label']) {
+        console.info(
+          '[Dialtone] A label is required for accessibility. Provide a label prop and use label-visible="false" to hide it visually.',
+        );
       }
     },
   },
