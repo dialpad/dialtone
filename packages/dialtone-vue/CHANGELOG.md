@@ -1,3 +1,11 @@
+# [3.210.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.209.0...dialtone-vue/v3.210.0) (2026-03-03)
+
+
+### Features
+
+* **Editor:** DP-178474 added perameter to disabled variable alt text in editor ([#1089](https://github.com/dialpad/dialtone/issues/1089)) ([30f3aae](https://github.com/dialpad/dialtone/commit/30f3aaea98bca132e830707e17c8b43bdddd5d05))
+* **Message Input:** DLT-3051 add slot for message polish ([#1088](https://github.com/dialpad/dialtone/issues/1088)) ([6de2398](https://github.com/dialpad/dialtone/commit/6de23986057816d388962308b889a20114b2ce91))
+
 # [3.209.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.208.0...dialtone-vue/v3.209.0) (2026-03-02)
 
 
