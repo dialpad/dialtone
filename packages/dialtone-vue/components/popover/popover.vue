@@ -936,8 +936,8 @@ export default {
       } else {
         console.warn('Could not find the element specified in dt-popover prop "initialFocusElement". ' +
           'Defaulting to focusing the dialog.');
+        returnFirstEl(this.$refs.content?.$el)?.focus();
       }
-      result ? result.focus() : returnFirstEl(this.$refs.content?.$el).focus();
     },
 
     onResize () {

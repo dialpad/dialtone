@@ -1,3 +1,32 @@
+# [1.48.0-next.10](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.9...dialtone-tokens/v1.48.0-next.10) (2026-03-02)
+
+
+### Bug Fixes
+
+* **Message Input:** DLT-3000 incorrect syntax on emoji picker open ([#1068](https://github.com/dialpad/dialtone/issues/1068)) ([b4bce6e](https://github.com/dialpad/dialtone/commit/b4bce6eb0a10eda2a4cf61610b4313ae0e8e470b))
+* **Tokens:** DP-173715 downgrade sd-transforms/colorjs.io ([#1039](https://github.com/dialpad/dialtone/issues/1039)) ([b0fbcd0](https://github.com/dialpad/dialtone/commit/b0fbcd0bc75478618a441b143b3a781761a6bd22))
+* **Tokens:** NO-JIRA multi-layer box shadows processing ([#1033](https://github.com/dialpad/dialtone/issues/1033)) ([42d27bc](https://github.com/dialpad/dialtone/commit/42d27bcb42e29e995074ca94ffefef1256a4d931))
+
+
+### Code Refactoring
+
+* **Style:** DLT-3014 wrap all styles in css cascade layers ([#1061](https://github.com/dialpad/dialtone/issues/1061)) ([f8b3fed](https://github.com/dialpad/dialtone/commit/f8b3fedf8ecf8495a0867b7f42681076c18170a4))
+* **Tokens:** DLT-3013 convert color system from HSL to OKLCH ([#1060](https://github.com/dialpad/dialtone/issues/1060)) ([42dc418](https://github.com/dialpad/dialtone/commit/42dc4187e61904a9913cfff70603958a3b437ea2))
+
+
+### Features
+
+* **Avatar:** DLT-2942 updated avatar component ([#1047](https://github.com/dialpad/dialtone/issues/1047)) ([e50563d](https://github.com/dialpad/dialtone/commit/e50563ddd12d1bb30b49df362484734b291fba59))
+* **Tokens:** DLT-2937 introduce spacing and layout token systems ([#1045](https://github.com/dialpad/dialtone/issues/1045)) ([de23e12](https://github.com/dialpad/dialtone/commit/de23e1260a2b2f7e96469255147c86e2522c632e))
+* **Tokens:** update color ramps and consumer color migration tools DLT-3004 DLT-3005 DLT-3006 DLT-3007 DLT-3008 ([#1054](https://github.com/dialpad/dialtone/issues/1054)) ([28cb1de](https://github.com/dialpad/dialtone/commit/28cb1de09ea18abd8ffa79e99d23866d861df111))
+
+## [1.47.4](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.47.3...dialtone-tokens/v1.47.4) (2026-02-23)
+
+
+### Bug Fixes
+
+* **Message Input:** DLT-3000 incorrect syntax on emoji picker open ([#1068](https://github.com/dialpad/dialtone/issues/1068)) ([b4bce6e](https://github.com/dialpad/dialtone/commit/b4bce6eb0a10eda2a4cf61610b4313ae0e8e470b))
+
 ## [1.47.3](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.47.2...dialtone-tokens/v1.47.3) (2026-01-30)
 
 

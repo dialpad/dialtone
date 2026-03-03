@@ -121,12 +121,48 @@
             "link": "/ui-kits/",
             "icon": "box",
             "children": [
-              { "text": "ChatKit", "link": "https://uikits.dialpad.com/chatkit/", "description": "Chat and messaging UI components for building conversation experiences.", "status": "beta" },
-              { "text": "FormKit", "link": "https://uikits.dialpad.com/formkit/", "description": "Form and data entry components for building input-driven interfaces.", "status": "beta" },
-              { "text": "AnalyticsKit", "link": "https://uikits.dialpad.com/analyticskit/", "description": "Analytics and data visualization components for dashboards and reporting.", "status": "planned" },
-              { "text": "CallbarKit", "link": "https://uikits.dialpad.com/callbarkit/", "description": "Call bar and telephony UI components for voice and video experiences.", "status": "planned" },
-              { "text": "NavigationKit", "link": "https://uikits.dialpad.com/navigationkit/", "description": "Navigation and routing pattern components for consistent wayfinding.", "status": "planned" },
-              { "text": "WorkflowKit", "link": "https://uikits.dialpad.com/workflowkit/", "description": "Workflow and process UI components for multi-step task flows.", "status": "planned" }
+              {
+                "text": "ChatKit",
+                "link": "https://uikits.dialpad.com/chatkit/",
+                "github_url": "https://github.com/dialpad/dialpad-uikits/tree/main/packages/chatkit",
+                "description": "Components for conversation feeds and chatbots. Includes message rows, composers, action sheets, and more.",
+                "status": "beta"
+              },
+              {
+                "text": "FormKit",
+                "link": "https://uikits.dialpad.com/formkit/",
+                "github_url": "https://github.com/dialpad/dialpad-uikits/tree/main/packages/formkit",
+                "description": "Fieldsets for settings and admin pages. Includes text inputs, textareas, and repeating multi-field variants.",
+                "status": "beta"
+              },
+              {
+                "text": "AnalyticsKit",
+                "link": "https://uikits.dialpad.com/analyticskit/",
+                "github_url": "https://github.com/dialpad/dialpad-uikits/tree/main/packages/analyticskit",
+                "description": "Data visualization widgets for dashboards. Features dynamic charts, data tables, and metric summaries.",
+                "status": "planned"
+              },
+              {
+                "text": "CallbarKit",
+                "link": "https://uikits.dialpad.com/callbarkit/",
+                "github_url": "https://github.com/dialpad/dialpad-uikits/tree/main/packages/callbarkit",
+                "description": "Specialized building blocks for meeting and telephony controls. Includes callbar buttons, banners, and timers.",
+                "status": "planned"
+              },
+              {
+                "text": "NavigationKit",
+                "link": "https://uikits.dialpad.com/navigationkit/",
+                "github_url": "https://github.com/dialpad/dialpad-uikits/tree/main/packages/navigationkit",
+                "description": "Components appearing in the application shell (top and left navigation). Houses contact rows, unread pills, and menu buttons.",
+                "status": "planned"
+              },
+              {
+                "text": "WorkflowKit",
+                "link": "https://uikits.dialpad.com/workflowkit/",
+                "github_url": "https://github.com/dialpad/dialpad-uikits/tree/main/packages/workflowkit",
+                "description": "Visual workflow builder components. Centered around the IVR Node for telephony routing.",
+                "status": "planned"
+              }
             ]
           },
           {

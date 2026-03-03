@@ -1,6 +1,6 @@
 import { computed, ref, watch, nextTick } from 'vue';
 import { getWeekDayNames, calculateNextFocusDate, calculatePrevFocusDate, formatDate } from '../utils.js';
-import { INTL_MONTH_FORMAT, WEEK_START } from '../datepicker_constants.js';
+import { INTL_MONTH_FORMAT } from '../datepicker_constants.js';
 import { returnFirstEl } from '@/common/utils';
 import { DialtoneLocalization } from '@/localization';
 
@@ -11,7 +11,7 @@ export function useCalendar (props, emits) {
   const i18n = new DialtoneLocalization();
 
   const weekDays = computed(() => {
-    return getWeekDayNames(props.locale, WEEK_START);
+    return getWeekDayNames(i18n.currentLocale, props.weekStartsOn);
   });
 
   watch(() => props.calendarDays, () => {

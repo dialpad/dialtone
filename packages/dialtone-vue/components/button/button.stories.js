@@ -145,6 +145,22 @@ export const argTypesData = {
   labelClass: {
     description: 'Pass through classes. Used to customize the label container',
   },
+  to: {
+    control: 'text',
+  },
+  href: {
+    control: 'text',
+  },
+  target: {
+    control: 'select',
+    options: ['_self', '_blank', '_parent', '_top'],
+  },
+  rel: {
+    control: 'text',
+  },
+  replace: {
+    control: 'boolean',
+  },
 
   // HTML attributes
   disabled: {

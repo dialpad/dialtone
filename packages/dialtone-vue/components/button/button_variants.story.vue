@@ -260,8 +260,8 @@
 
 <script>
 import DtButton from './button.vue';
+import { DtStack } from '@/components/stack';
 import { DtIcon } from '@/components/icon';
-import DtStack from '../stack/stack.vue';
 import {
   BUTTON_IMPORTANCE_MODIFIERS,
   BUTTON_KIND_MODIFIERS,

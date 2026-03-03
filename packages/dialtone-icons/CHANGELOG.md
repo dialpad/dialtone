@@ -1,3 +1,17 @@
+## [4.48.1-next.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.48.0...dialtone-icons/v4.48.1-next.1) (2026-03-02)
+
+
+### Documentation
+
+* DLT-1510 DLT-1511 DLT-1512 site redesign and ia ([#968](https://github.com/dialpad/dialtone/issues/968)) ([6ea7eb9](https://github.com/dialpad/dialtone/commit/6ea7eb959f01bfb01c91c3b6a92465ed0c2e0f4b))
+
+# [4.48.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.47.2...dialtone-icons/v4.48.0) (2026-02-25)
+
+
+### Features
+
+* **Icon:** DP-177193 add font-size ([#1078](https://github.com/dialpad/dialtone/issues/1078)) ([85f87c4](https://github.com/dialpad/dialtone/commit/85f87c4bae2713e71c28bd9687a1061fc7bde6a6))
+
 ## [4.47.2](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.47.1...dialtone-icons/v4.47.2) (2026-01-15)
 
 ## [4.47.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.47.0...dialtone-icons/v4.47.1) (2026-01-13)

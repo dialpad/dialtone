@@ -15,52 +15,41 @@
         as="nav"
         gap="600"
       >
-        <router-link
+        <dt-button
           v-if="prev"
-          v-slot="{ navigate }"
           :to="prev.link"
-          custom
+          class="d-wmn40p"
+          label-class="d-jc-space-between"
+          importance="outlined"
+          kind="muted"
+          size="lg"
         >
-          <dt-button
-            class="d-wmn40p"
-            label-class="d-jc-space-between"
-            importance="outlined"
-            kind="muted"
-            size="lg"
-            @click="navigate"
-          >
-            <template #startIcon>
-              <dt-icon name="arrow-left" />
-            </template>
-            <dt-stack as="span" class="d-ta-left d-p8">
-              <span class="d-body--md-compact d-fc-muted">Previous</span>
-              <span>{{ prev.text }}</span>
-            </dt-stack>
-          </dt-button>
-        </router-link>
-        <router-link
+          <template #startIcon>
+            <dt-icon name="arrow-left" />
+          </template>
+          <dt-stack as="span" class="d-ta-left d-p8">
+            <span class="d-body--md-compact d-fc-muted">Previous</span>
+            <span>{{ prev.text }}</span>
+          </dt-stack>
+        </dt-button>
+        <dt-button
           v-if="next"
-          v-slot="{ navigate }"
           :to="next.link"
-          custom
+          class="d-wmn40p"
+          label-class="d-jc-space-between"
+          icon-position="right"
+          importance="outlined"
+          kind="muted"
+          size="lg"
         >
-          <dt-button
-            class="d-wmn40p"
-            label-class="d-jc-space-between"
-            importance="outlined"
-            kind="muted"
-            size="lg"
-            @click="navigate"
-          >
-            <template #endIcon>
-              <dt-icon name="arrow-right" />
-            </template>
-            <dt-stack as="span" class="d-ta-left d-p8">
-              <span class="d-body--md-compact d-fc-muted">Next</span>
-              <span>{{ next.text }}</span>
-            </dt-stack>
-          </dt-button>
-        </router-link>
+          <template #endIcon>
+            <dt-icon name="arrow-right" />
+          </template>
+          <dt-stack as="span" class="d-ta-left d-p8">
+            <span class="d-body--md-compact d-fc-muted">Next</span>
+            <span>{{ next.text }}</span>
+          </dt-stack>
+        </dt-button>
       </dt-stack>
       <footer class="d-mt16 d-mb16">
         <dt-text as="p" kind="body" size="sm" tone="muted">
@@ -135,6 +124,9 @@ function detectTopLevelGroup(path) {
   }
   if (path.includes('/foundations/')) {
     return 'foundations';
+  }
+  if (path.includes('/ui-kits/')) {
+    return 'ui-kits';
   }
   if (path.includes('/careers/')) {
     return 'careers';

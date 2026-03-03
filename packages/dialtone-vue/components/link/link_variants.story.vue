@@ -42,7 +42,7 @@ import { LINK_VARIANTS } from './link_constants';
 
 export default {
   name: 'DtLinkVariants',
-    components: { DtLink, DtStack },
+  components: { DtLink, DtStack },
   data () {
     return {
       LINK_VARIANTS,

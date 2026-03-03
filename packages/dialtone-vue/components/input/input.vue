@@ -431,6 +431,7 @@ export default {
       isInvalid: false,
       defaultLength: 0,
       hasSlotContent,
+      isComposing: false,
     };
   },
 
@@ -466,7 +467,16 @@ export default {
 
     inputListeners () {
       return {
+        compositionstart: () => {
+          this.isComposing = true;
+        },
+
+        compositionend: () => {
+          this.isComposing = false;
+        },
+
         input: async event => {
+          if (this.isComposing) return;
           let val = event.target.value;
           if (this.type === INPUT_TYPES.FILE) {
             const files = Array.from(event.target.files);
@@ -605,7 +615,8 @@ export default {
         }
 
         // Set textarea value programmatically to avoid attribute binding
-        if (this.isTextarea && this.$refs.input && this.$refs.input.value !== newValue) {
+        // Skip during IME composition to avoid interrupting in-progress input
+        if (this.isTextarea && this.$refs.input && this.$refs.input.value !== newValue && !this.isComposing) {
           this.$refs.input.value = newValue;
         }
       },

@@ -1,3 +1,10 @@
+## [1.2.4-next.1](https://github.com/dialpad/dialtone/compare/postcss-responsive-variations/v1.2.3...postcss-responsive-variations/v1.2.4-next.1) (2026-03-02)
+
+
+### Code Refactoring
+
+* **Style:** DLT-3014 wrap all styles in css cascade layers ([#1061](https://github.com/dialpad/dialtone/issues/1061)) ([f8b3fed](https://github.com/dialpad/dialtone/commit/f8b3fedf8ecf8495a0867b7f42681076c18170a4))
+
 ## [1.2.3](https://github.com/dialpad/dialtone/compare/postcss-responsive-variations/v1.2.2...postcss-responsive-variations/v1.2.3) (2025-09-23)
 
 

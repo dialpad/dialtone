@@ -49,13 +49,14 @@
                   </dt-text>
                 </dt-stack>
               </dt-stack>
-              <a
-                class="d-btn d-btn--muted"
+              <dt-button
                 :href="figmaLink"
                 target="_blank"
                 rel="noopener noreferrer"
+                kind="muted"
+                importance="clear"
               >
-                <span class="d-btn__icon d-btn__icon--left">
+                <template #icon>
                   <svg
                     class="d-icon d-icon--size-300"
                     viewBox="0 0 24 24"
@@ -105,9 +106,9 @@
                       fill="#A259FF"
                     />
                   </svg>
-                </span>
-                <span class="d-btn__label">Figma</span>
-              </a>
+                </template>
+                Figma
+              </dt-button>
             </dt-stack>
             <dt-stack direction="row" align="center">
               <dt-stack class="d-fl-grow5">

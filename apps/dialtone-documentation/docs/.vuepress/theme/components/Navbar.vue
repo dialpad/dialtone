@@ -5,35 +5,40 @@
     direction="row"
     gap="300"
   >
-    <router-link
+    <dt-button
       v-for="link in navItems"
       :key="link.text"
       :to="link.link"
-      class="d-btn d-btn--muted d-btn--lg dialtone-shell-btn"
-      :class="{ 'd-btn--active': isActiveLink(link.link) }"
+      kind="muted"
+      importance="clear"
+      size="lg"
+      class="d-fw-normal"
+      :active="isActiveLink(link.link)"
     >
-      <span class="d-btn__label">{{ link.text }}</span>
-    </router-link>
+      {{ link.text }}
+    </dt-button>
   </dt-stack>
   <dt-stack direction="row" gap="300">
-    <a
+    <dt-button
       v-dt-tooltip="'Storybook'"
       hidden
       class="d-btn d-btn--muted d-btn--icon-only dialtone-shell-btn"
       href="https://dialtone.dialpad.com/vue"
       target="_blank"
       rel="noreferrer noopener"
+      kind="muted"
+      importance="clear"
+      aria-label="Open Storybook"
     >
-      <span class="d-btn__icon d-btn__icon--left">
+      <template #startIcon>
         <svg
-          aria-labelledby="storybookIconTitle"
           class="d-icon d-icon--system d-icon--storybook d-icon--size-400"
           width="24"
           height="24"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
         >
-          <title id="storybookIconTitle">Open Storybook</title>
           <path
             fill-rule="evenodd"
             clip-rule="evenodd"
@@ -54,26 +59,28 @@
             11.4306 9.0798C11.4306 8.2798 12.0246 8.1738 12.3766 8.1738C12.7486 8.1738 13.4166 8.2388 13.3606 9.7318Z"
           />
         </svg>
-      </span>
-    </a>
-    <a
+      </template>
+    </dt-button>
+    <dt-button
       v-dt-tooltip="'Github Repository'"
       hidden
       class="d-btn d-btn--muted d-btn--icon-only dialtone-shell-btn"
       href="https://github.com/dialpad/dialtone"
       target="_blank"
       rel="noreferrer noopener"
+      kind="muted"
+      importance="clear"
+      aria-label="Open GitHub repository"
     >
-      <span class="d-btn__icon d-btn__icon--left">
+      <template #startIcon>
         <svg
-          aria-labelledby="githubIconTitle"
           class="d-icon d-icon--system d-icon--Github d-icon--size-400"
           height="24"
           viewBox="0 0 18 18"
           width="24"
           xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
         >
-          <title id="githubIconTitle">Open github repository</title>
           <path
             fill="currentColor"
             d="M9 1a8 8 0 00-2.53 15.59c.4.07.55-.17.55-.38l-.01-1.49c-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01
@@ -82,27 +89,29 @@
             3.95.29.25.54.73.54 1.48l-.01 2.2c0 .21.15.46.55.38A8.01 8.01 0 009 1z"
           />
         </svg>
-      </span>
-    </a>
-    <a
+      </template>
+    </dt-button>
+    <dt-button
       v-dt-tooltip="'Codepen Template'"
       hidden
       class="d-btn d-btn--muted d-btn--icon-only dialtone-shell-btn"
       href="https://codepen.io/pen?template=oNmoRqO"
       target="_blank"
       rel="noopener noreferrer"
+      kind="muted"
+      importance="clear"
+      aria-label="Open Codepen template"
     >
-      <span class="d-btn__icon d-btn__icon--left">
+      <template #startIcon>
         <svg
-          aria-labelledby="codepenIconTitle"
           role="img"
           class="d-icon d-icon--system d-icon--Codepen d-icon--size-400"
           height="24"
           viewBox="0 0 18 18"
           width="24"
           xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
         >
-          <title id="codepenIconTitle">Open codepen template</title>
           <path
             fill="currentColor"
             d="M12.67 8.17l-2.98-2v-3.2l5.38 3.6-2.4 1.6zM13.9 9l1.73-1.15v2.3L13.9 9zm-4.2 2.82l2.98-2 2.4
@@ -117,8 +126,8 @@
             .01-.1V6.57a.7.7 0 0 0 0-.09l-.01-.03z"
           />
         </svg>
-      </span>
-    </a>
+      </template>
+    </dt-button>
     <dt-dropdown
       id="theme-toggle-dropdown"
       :hidden="!showThemeSwitcher"

@@ -1,3 +1,15 @@
+# [1.2.0-next.1](https://github.com/dialpad/dialtone/compare/combinator/v1.1.2-next.1...combinator/v1.2.0-next.1) (2026-03-02)
+
+
+### Code Refactoring
+
+* **Style:** DLT-3014 wrap all styles in css cascade layers ([#1061](https://github.com/dialpad/dialtone/issues/1061)) ([f8b3fed](https://github.com/dialpad/dialtone/commit/f8b3fedf8ecf8495a0867b7f42681076c18170a4))
+
+
+### Features
+
+* **Tokens:** DLT-2937 introduce spacing and layout token systems ([#1045](https://github.com/dialpad/dialtone/issues/1045)) ([de23e12](https://github.com/dialpad/dialtone/commit/de23e1260a2b2f7e96469255147c86e2522c632e))
+
 ## [1.1.2-next.1](https://github.com/dialpad/dialtone/compare/combinator/v1.1.1...combinator/v1.1.2-next.1) (2025-09-17)
 
 

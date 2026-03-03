@@ -54,7 +54,7 @@ import { nextTick, ref } from 'vue';
 
 import defaultAvatar from './person.png';
 
- 
+
 const messages = [
   'lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor,nisl eget ultrices aliquam, nunc nisl aliquet nunc, eget aliquam nisl ni loremlorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultrices aliquam, nunc nisl aliquet nunc, eget aliquam nisl ni loremlorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultrices aliquam',
   'lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultrices aliquam, nunc nisl aliquet nunc, eget aliquam nisl',
@@ -69,7 +69,7 @@ const messages = [
 const dynamicItems = ref(Array.from({ length: 37 }, (_, index) => ({
   id: index,
   avatar: defaultAvatar,
-  message: messages[Math.floor(Math.random() * 8)],
+  message: messages[0],
 })));
 
 function updateItem (index) {

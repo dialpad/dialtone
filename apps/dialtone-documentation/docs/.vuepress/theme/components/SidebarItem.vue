@@ -11,49 +11,44 @@
         direction="row"
         class="d-ps-relative"
       >
-        <router-link
-          v-slot="{ navigate, isExactActive }"
-          :to="item.link ?? ''"
-          custom
+        <dt-button
+          :id="labelId"
+          v-bind="attrs"
+          :to="item.link || undefined"
+          :active="isActiveLink(item.link, true)"
+          importance="clear"
+          kind="muted"
+          label-class="d-jc-flex-start d-ta-left d-fw-normal"
+          :size="depth === 0 ? 'lg' : undefined"
+          :tabindex="actionableTabIndex"
+          :class="[
+            'd-w100p dialtone-shell-btn',
+            {
+              'd-headline--eyebrow d-fw-semibold d-bgc-transparent d-c-default': !item.link,
+              'd-pr16': depth === 1,
+            },
+            {
+              'd-pl48': depth === 1,
+            },
+          ]"
+          :data-sidebar-link="item.link"
+          @click="handleClick($event, listeners, item.link)"
         >
-          <dt-button
-            :id="labelId"
-            v-bind="attrs"
-            importance="clear"
-            kind="muted"
-            label-class="d-jc-flex-start d-ta-left d-fw-normal"
-            :size="depth === 0 ? 'lg' : undefined"
-            :tabindex="actionableTabIndex"
-            :class="[
-              'd-w100p dialtone-shell-btn d-tw-pretty',
-              {
-                'd-headline--eyebrow d-fw-semibold d-bgc-transparent d-c-default': !item.link,
-                'd-btn--active': isActiveLink(isExactActive, item.link, true),
-                'd-pr16': depth === 1,
-              },
-              {
-                'd-pl48': depth === 1,
-              },
-            ]"
-            :data-sidebar-link="item.link"
-            @click="handleClick($event, listeners, navigate, item.link)"
-          >
+          <dt-icon
+            v-if="depth === 0 && item.icon"
+            :name="item.icon"
+            size="400"
+            class="d-mr12 d-fc-muted"
+          />
+          {{ item.text }}
+          <template #endIcon="{ iconSize }">
             <dt-icon
-              v-if="depth === 0 && item.icon"
-              :name="item.icon"
-              size="400"
-              class="d-mr12 d-fc-muted"
+              v-if="item.link"
+              :name="isOpen ? 'chevron-down' : 'chevron-right'"
+              :size="iconSize"
             />
-            {{ item.text }}
-            <template #endIcon="{ iconSize }">
-              <dt-icon
-                v-if="item.link"
-                :name="isOpen ? 'chevron-down' : 'chevron-right'"
-                :size="iconSize"
-              />
-            </template>
-          </dt-button>
-        </router-link>
+          </template>
+        </dt-button>
       </dt-stack>
     </template>
     <template #content>
@@ -67,7 +62,7 @@
           }"
         >
           <li
-            v-for="subItem in subItems"
+            v-for="(subItem, index) in subItems"
             :key="subItem.text"
           >
             <sidebar-item
@@ -121,32 +116,24 @@
                 </dt-stack>
               </dt-button>
             </a>
-            <router-link
+            <dt-button
               v-else
-              v-slot="{ navigate, isExactActive }"
               :to="subItem.link"
-              custom
+              :active="isActiveLink(subItem.link)"
+              importance="clear"
+              kind="muted"
+              label-class="d-jc-flex-start"
+              :class="[
+                'd-w100p d-fw-normal',
+                { 'd-pl48': depth === 0 },
+                { 'd-pl64': depth === 1 },
+                {
+                  'd-mt2': (index === 0 && nested), // add margin top to first nested item
+                },
+              ]"
             >
-              <dt-button
-                importance="clear"
-                kind="muted"
-                label-class="d-jc-flex-start d-ta-left d-fw-normal"
-                :active="isActiveLink(isExactActive, subItem.link)"
-                :class="[
-                  'dialtone-shell-btn d-w100p d-tw-pretty',
-                  {
-                    'd-pl48': depth === 0,
-                  },
-                  {
-                    'd-pl64': depth === 1,
-                  },
-                ]"
-                :data-sidebar-link="subItem.link"
-                @click="navigate"
-              >
-                {{ subItem.text }}
-              </dt-button>
-            </router-link>
+              {{ subItem.text }}
+            </dt-button>
           </li>
         </dt-stack>
       </div>
@@ -158,35 +145,29 @@
     v-else
     class="dt-sidebar-item"
   >
-    <router-link
-      v-slot="{ navigate, isExactActive }"
-      :to="item.link ?? ''"
-      custom
+    <dt-button
+      :to="item.link || undefined"
+      :active="isActiveLink(item.link)"
+      importance="clear"
+      kind="muted"
+      label-class="d-jc-flex-start d-ta-left d-fw-normal"
+      :size="depth === 0 ? 'lg' : undefined"
+      :class="[
+        'd-w100p dialtone-shell-btn',
+        {
+          'd-headline--eyebrow d-fw-semibold d-bgc-transparent d-c-default': !item.link,
+        },
+      ]"
+      :data-sidebar-link="item.link"
     >
-      <dt-button
-        importance="clear"
-        kind="muted"
-        label-class="d-jc-flex-start d-ta-left d-fw-normal"
-        :size="depth === 0 ? 'lg' : undefined"
-        :active="isActiveLink(isExactActive, item.link)"
-        :class="[
-          'd-w100p dialtone-shell-btn d-tw-pretty',
-          {
-            'd-headline--eyebrow d-fw-semibold d-bgc-transparent d-c-default': !item.link,
-          },
-        ]"
-        :data-sidebar-link="item.link"
-        @click="navigate"
-      >
-        <dt-icon
-          v-if="depth === 0 && item.icon"
-          :name="item.icon"
-          size="400"
-          class="d-mr12 d-fc-muted"
-        />
-        {{ item.text }}
-      </dt-button>
-    </router-link>
+      <dt-icon
+        v-if="depth === 0 && item.icon"
+        :name="item.icon"
+        size="400"
+        class="d-mr12 d-fc-muted"
+      />
+      {{ item.text }}
+    </dt-button>
   </li>
 </template>
 
@@ -245,9 +226,10 @@ watch(route, (newRoute) => {
   hash.value = newRoute.hash;
 });
 
-// isExactActive from the router-link doesn't work with hashes,
-// that's why we need to check for the hash if it's a single page
-const isActiveLink = (isExactActive, link, isParentButton = false) => {
+// isExactActive from router-link doesn't work with hashes,
+// that's why we need to check for the hash if it's a single page.
+// Now computed from route directly instead of router-link's scoped slot.
+const isActiveLink = (link, isParentButton = false) => {
   if (!link) return false;
 
   // Check if this is a grouping-only parent (link matches first child)
@@ -265,10 +247,11 @@ const isActiveLink = (isExactActive, link, isParentButton = false) => {
     return true;
   }
 
+  const isExactActive = route.path === link;
   return props.isSinglePage ? hash.value === link : isExactActive;
 };
 
-function handleClick (event, listeners, navigate, link) {
+function handleClick (event, listeners, link) {
   const itemKey = props.item.link || props.item.text;
 
   // If we're already on this exact page, just toggle the collapsible
@@ -276,13 +259,6 @@ function handleClick (event, listeners, navigate, link) {
     event.preventDefault();
     // Only emit toggle to parent - don't call listeners to avoid double toggle
     emit('toggle', itemKey, !isOpen.value);
-    return;
-  }
-
-  // We're NOT on this page, so navigate
-  if (link && route.path !== link) {
-    navigate();
-    // Don't emit toggle - route watcher in Sidebar will handle it
     return;
   }
 

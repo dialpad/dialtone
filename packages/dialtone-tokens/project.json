@@ -29,7 +29,8 @@
         "cwd": "{projectRoot}",
         "commands": [
           "rm -rf dist",
-          "node ./build.js"
+          "git clean -fx themes/",
+          "node ./build.js",
         ],
         "parallel": false
       }

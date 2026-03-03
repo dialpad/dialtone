@@ -1,28 +1,22 @@
 <template>
-  <router-link
-    v-slot="{ navigate }"
+  <dt-link
     :to="`/dialtone/whats-new/posts/${format(posted, 'y-M-d')}`"
-    custom
+    class="d-fc-unset d-d-block d-bar8 d-td-none"
   >
-    <dt-link
-      class="d-fc-unset d-d-block d-bar8 d-td-none"
-      @click="(e) => { navigate(e); }"
+    <dt-card
+      class="d-mt16 d-bgc-primary d-bs-none h:d-bs-sm d-bar8 d-bbw1"
     >
-      <dt-card
-        class="d-mt16 d-bgc-primary d-bs-none h:d-bs-sm d-bar8 d-bbw1"
-      >
-        <template #content>
-          <blog-post
-            :author="author"
-            :heading="heading"
-            :posted="posted"
-            :is-preview="true"
-            :excerpt="excerpt"
-          />
-        </template>
-      </dt-card>
-    </dt-link>
-  </router-link>
+      <template #content>
+        <blog-post
+          :author="author"
+          :heading="heading"
+          :posted="posted"
+          :is-preview="true"
+          :excerpt="excerpt"
+        />
+      </template>
+    </dt-card>
+  </dt-link>
 </template>
 
 <script setup>
