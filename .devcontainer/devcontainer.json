@@ -29,7 +29,8 @@
         "stylelint.vscode-stylelint",
         "jock.svg",
         "vitest.explorer",
-        "vue.volar"
+        "vue.volar",
+        "johnsoncodehk.volarjs-labs"
       ]
     }
   }
