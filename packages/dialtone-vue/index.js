@@ -44,6 +44,7 @@ export * from './components/modal';
 export * from './components/notice';
 export * from './components/pagination';
 export * from './components/popover';
+export * from './components/progress';
 export * from './components/presence';
 export * from './components/radio';
 export * from './components/radio_group';

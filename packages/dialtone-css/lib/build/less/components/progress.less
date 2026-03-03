@@ -1,0 +1,27 @@
+//
+//  DIALTONE
+//  COMPONENTS: PROGRESS
+//
+//  https://dialtone.dialpad.com/components/progress
+
+.d-progress {
+  width: var(--dt-size-550);
+  height: var(--dt-size-550);
+}
+
+.d-progress__circle {
+  fill: none;
+  stroke-width: 2;
+  stroke-dasharray: var(--stroke-dasharray);
+}
+
+.d-progress__circle:nth-child(1) {
+  stroke: var(--dt-color-black-100);
+  stroke-dashoffset: 0;
+}
+
+.d-progress__circle:nth-child(2) {
+  transition: stroke-dashoffset 500ms linear;
+  stroke: var(--dt-color-purple-500);
+  stroke-dashoffset: var(--stroke-dashoffset);
+}
