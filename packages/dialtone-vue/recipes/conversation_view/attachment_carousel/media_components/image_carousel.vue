@@ -19,7 +19,8 @@
         <dt-progress-circle
           v-if="mediaItem.isUploading"
           kind="brand"
-          :progress="mediaItem.progress"
+          size="400"
+          :progress="66"
           :aria-label="i18n.$t('DIALTONE_IMAGE_CAROUSEL_PROGRESS_BAR_ARIA_LABEL')"
         />
       </span>
