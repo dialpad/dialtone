@@ -350,6 +350,8 @@
         :allow-line-breaks="true"
         :allow-variable="true"
         :allow-font-size="showFontSizeButton"
+        :allow-background-color="allowBackgroundColor"
+        :allow-line-height="allowLineHeight"
         :variable-items="flattenedVariableItems"
         :hide-link-bubble-menu="true"
         :auto-focus="autoFocus"
@@ -737,6 +739,22 @@ export default {
         { name: 'Large', value: '24px'},
         { name: 'Huge', value: '36px'},
       ],
+    },
+
+    /**
+     * Whether the input allows background color to be introduced in the text.
+     */
+    allowBackgroundColor: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Whether the input allows line height to be introduced in the text.
+     */
+    allowLineHeight: {
+      type: Boolean,
+      default: false,
     },
 
     /**

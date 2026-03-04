@@ -29,9 +29,11 @@
       :show-font-color-button="showFontColorButton"
       :show-font-style-button="showFontStyleButton"
       :show-font-size-button="showFontSizeButton"
+      :allow-background-color="allowBackgroundColor"
+      :allow-line-height="allowLineHeight"
       :show-variable-button="showVariableButton"
       :variable-categories="variableCategories"
-      :allow-tables="$attrs.allowTables"
+      :allow-tables="allowTables"
       :allow-image-resize="allowImageResize"
       @focus="$attrs.onFocus"
       @blur="$attrs.onBlur"
@@ -60,7 +62,10 @@ export default {
       showFontColorButton: this.$attrs.showFontColorButton ?? true,
       showFontStyleButton: this.$attrs.showFontStyleButton ?? true,
       showFontSizeButton: this.$attrs.showFontSizeButton ?? true,
+      allowBackgroundColor: this.$attrs.allowBackgroundColor ?? true,
+      allowLineHeight: this.$attrs.allowLineHeight ?? true,
       useDivTags: this.$attrs.useDivTags ?? true,
+      allowTables: this.$attrs.allowTables ?? true,
       variableCategories: this.$attrs.variableCategories ?? [
         {
           name: 'Agent',
