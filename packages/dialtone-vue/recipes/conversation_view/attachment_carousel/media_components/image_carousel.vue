@@ -13,12 +13,16 @@
     <div
       class="d-recipe-attachment-carousel__image-top-right"
     >
-      <dt-progress-circle
-        v-if="mediaItem.isUploading"
+      <span
         class="d-recipe-attachment-carousel__image-progress-bar"
-        :progress="mediaItem.progress"
-        :aria-label="i18n.$t('DIALTONE_IMAGE_CAROUSEL_PROGRESS_BAR_ARIA_LABEL')"
-      />
+      >
+        <dt-progress-circle
+          v-if="mediaItem.isUploading"
+          kind="brand"
+          :progress="mediaItem.progress"
+          :aria-label="i18n.$t('DIALTONE_IMAGE_CAROUSEL_PROGRESS_BAR_ARIA_LABEL')"
+        />
+      </span>
       <dt-button
         :id="`closeButton-${index}`"
         tabindex="0"
