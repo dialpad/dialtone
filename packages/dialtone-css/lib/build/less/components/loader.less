@@ -18,4 +18,15 @@
 
 .d-loader__icon {
   animation: d-loading-circle 900ms infinite linear;
+
+  // Comet fade. Black is an intentional choice and only used for masking.
+  mask-image: conic-gradient(
+    from 270deg,
+    black 0deg,
+    black 105deg,
+    transparent 170deg,
+    transparent 180deg,
+    black 234deg,
+    black 360deg
+  );
 }
