@@ -13,7 +13,7 @@
     <div
       class="d-recipe-attachment-carousel__image-top-right"
     >
-      <dt-progress
+      <dt-progress-circle
         v-if="mediaItem.isUploading"
         class="d-recipe-attachment-carousel__image-progress-bar"
         :progress="mediaItem.progress"
@@ -46,7 +46,7 @@ import { DtButton } from '@/components/button';
 import { DtIconClose } from '@dialpad/dialtone-icons/vue3';
 import { DialtoneLocalization } from '@/localization';
 
-import { DtProgress } from '@/components/progress';
+import { DtProgressCircle } from '@/components/progress_circle';
 
 export default {
   compatConfig: { MODE: 3 },
@@ -56,7 +56,7 @@ export default {
     DtImageViewer,
     DtButton,
     DtIconClose,
-    DtProgress,
+    DtProgressCircle,
   },
 
   props: {

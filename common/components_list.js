@@ -35,7 +35,7 @@ module.exports = [
   'notice.vue',
   'pagination.vue',
   'popover.vue',
-  'progress.vue',
+  'progress_circle.vue',
   'presence.vue',
   'radio.vue',
   'radio_group.vue',

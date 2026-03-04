@@ -706,8 +706,8 @@
           "link": "/components/popover.html"
         },
         {
-          "text": "Progress",
-          "link": "/components/progress.html"
+          "text": "Progress Circle",
+          "link": "/components/progress-circle.html"
         },
         {
           "text": "Presence",
