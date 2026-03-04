@@ -20,7 +20,7 @@
           v-if="mediaItem.isUploading"
           kind="brand"
           size="400"
-          :progress="66"
+          :progress="mediaItem.progress"
           :aria-label="i18n.$t('DIALTONE_IMAGE_CAROUSEL_PROGRESS_BAR_ARIA_LABEL')"
         />
       </span>
