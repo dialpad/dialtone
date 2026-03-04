@@ -45,6 +45,24 @@ describe('DtProgressCircle Tests', () => {
       beforeEach(() => { mockProps = { progress: 100 }; updateWrapper(); });
       it('has aria-valuenow 100', () => { expect(progressCircle.attributes('aria-valuenow')).toBe('100'); });
     });
+
+    describe('When progress is below minimum visual threshold (1–4)', () => {
+      beforeEach(() => { mockProps = { progress: 2 }; updateWrapper(); });
+
+      it('has aria-valuenow reflecting the real value', () => {
+        expect(progressCircle.attributes('aria-valuenow')).toBe('2');
+      });
+
+      it('renders the same fill as progress=5', () => {
+        const smallStyle = wrapper.find('.d-progress-circle__bar').attributes('style');
+
+        mockProps = { progress: 5 };
+        updateWrapper();
+        const fiveStyle = wrapper.find('.d-progress-circle__bar').attributes('style');
+
+        expect(smallStyle).toBe(fiveStyle);
+      });
+    });
   });
 
   describe('Size Tests', () => {
