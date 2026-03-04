@@ -4,37 +4,25 @@
     :aria-label="ariaLabel || 'loading'"
     data-qa="dt-loader"
   >
-    <svg
-      :class="['d-icon', `d-icon--size-${size}`, 'd-loader__icon']"
+    <!-- Localize the aria-label -->
+    <dt-icon-loading
+      class="d-loader__icon"
       data-qa="dt-loader-icon"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="
-          M0.0180664 12.0005
-          C0.0180664 5.38305 5.38305 0.0180664 12.0005 0.0180664
-          C12.8977 0.0183302 13.6255 0.745766 13.6255 1.64307
-          C13.6255 2.54037 12.8977 3.2678 12.0005 3.26807
-          C7.17797 3.26807 3.26807 7.17797 3.26807 12.0005
-          C3.26833 16.8228 7.17814 20.7319 12.0005 20.7319
-          C16.8226 20.7317 20.7317 16.8226 20.7319 12.0005
-          C20.7319 11.103 21.4595 10.3755 22.3569 10.3755
-          C23.2544 10.3755 23.9819 11.103 23.9819 12.0005
-          C23.9817 18.6175 18.6175 23.9817 12.0005 23.9819
-          C5.38321 23.9819 0.0183303 18.6177 0.0180664 12.0005Z
-        "
-      />
-    </svg>
+      :size="size"
+    />
   </div>
 </template>
 
 <script>
+import { DtIconLoading } from '@dialpad/dialtone-icons/vue3';
 import { ICON_SIZE_MODIFIERS } from '@/components/icon';
 
 export default {
   name: 'DtLoader',
+
+  components: {
+    DtIconLoading,
+  },
 
   props: {
     /**
