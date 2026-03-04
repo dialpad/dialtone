@@ -2,15 +2,6 @@ import { mount } from '@vue/test-utils';
 import DtProgressCircle from './progress_circle.vue';
 import { PROGRESS_CIRCLE_SIZES, PROGRESS_CIRCLE_SIZE_DEFAULT, PROGRESS_CIRCLE_KINDS } from './progress_circle_constants';
 
-// jsdom does not implement getTotalLength — add it to Element.prototype so mounted() can call it
-beforeAll(() => {
-  Object.defineProperty(Element.prototype, 'getTotalLength', {
-    value: vi.fn(() => 50),
-    writable: true,
-    configurable: true,
-  });
-});
-
 const baseProps = { ariaLabel: 'Upload progress' };
 let mockProps = {};
 
@@ -99,7 +90,7 @@ describe('DtProgressCircle Tests', () => {
     });
 
     describe('When kind is ai', () => {
-      beforeEach(() => { mockProps = { kind: 'ai' }; updateWrapper(); });
+      beforeEach(() => { mockProps = { kind: 'ai', progress: 50 }; updateWrapper(); });
       it('applies ai class', () => {
         expect(progressCircle.classes()).toContain(PROGRESS_CIRCLE_KINDS.ai);
       });
