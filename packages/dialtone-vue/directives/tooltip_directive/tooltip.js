@@ -7,14 +7,16 @@ export const DtTooltipDirective = {
   name: 'dt-tooltip-directive',
   install (app) {
     const DEFAULT_PLACEMENT = 'top';
-    let tooltipInstance = null;
+    const INSTANCE_KEY = '__DtTooltipDirectiveAppInstance';
+    const ROOT_NODE_KEY = '__DtTooltipRootNode';
+
+    function getTooltipInstance (anchor) {
+      const rootNode = anchor[ROOT_NODE_KEY] || anchor.getRootNode() || document.body;
+      return rootNode[INSTANCE_KEY];
+    }
 
     function ensureDirectiveApp (rootNode) {
-      const key = '__DtTooltipDirectiveAppInstance';
-      if (rootNode[key]) {
-        tooltipInstance = rootNode[key];
-        return;
-      }
+      if (rootNode[INSTANCE_KEY]) return;
 
       const DtTooltipDirectiveApp = createApp({
         name: 'DtTooltipDirectiveApp',
@@ -26,8 +28,7 @@ export const DtTooltipDirective = {
         },
 
         created () {
-          rootNode[key] = getCurrentInstance();
-          tooltipInstance = rootNode[key];
+          rootNode[INSTANCE_KEY] = getCurrentInstance();
         },
 
         methods: {
@@ -73,6 +74,7 @@ export const DtTooltipDirective = {
     app.directive('dt-tooltip', {
       beforeMount (anchor, binding) {
         const rootNode = anchor.getRootNode() || document.body;
+        anchor[ROOT_NODE_KEY] = rootNode;
         ensureDirectiveApp(rootNode);
         setupTooltip(anchor, binding);
       },
@@ -84,17 +86,19 @@ export const DtTooltipDirective = {
         }
       },
       unmounted (anchor) {
-        if (tooltipInstance) {
-          tooltipInstance.ctx.removeTooltip(anchor.getAttribute('data-dt-tooltip-id'));
+        const instance = getTooltipInstance(anchor);
+        if (instance) {
+          instance.ctx.removeTooltip(anchor.getAttribute('data-dt-tooltip-id'));
         }
       },
     });
 
     function setupTooltip (anchor, binding) {
+      const instance = getTooltipInstance(anchor);
       if (binding.value === null || binding.value === undefined) {
         const tooltipId = anchor.getAttribute('data-dt-tooltip-id');
-        if (tooltipId) {
-          tooltipInstance.ctx.removeTooltip(tooltipId);
+        if (tooltipId && instance) {
+          instance.ctx.removeTooltip(tooltipId);
         }
         return;
       }
@@ -136,7 +140,7 @@ export const DtTooltipDirective = {
       });
 
       anchor.setAttribute('data-dt-tooltip-id', tooltipId);
-      tooltipInstance.ctx.addOrUpdateTooltip(tooltipId, tooltipConfig);
+      instance.ctx.addOrUpdateTooltip(tooltipId, tooltipConfig);
     }
   },
 };
