@@ -706,6 +706,10 @@
           "link": "/components/popover.html"
         },
         {
+          "text": "Progress Circle",
+          "link": "/components/progress-circle.html"
+        },
+        {
           "text": "Presence",
           "link": "/components/presence.html"
         },
