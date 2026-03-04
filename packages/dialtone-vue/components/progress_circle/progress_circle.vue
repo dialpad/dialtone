@@ -182,7 +182,6 @@ export default {
         class="d-progress-circle__shape d-progress-circle__shape--fill"
         fill="none"
         :stroke-width="strokeWidth"
-        stroke-linecap="round"
         :style="fillStrokeStyle"
       />
     </svg>
