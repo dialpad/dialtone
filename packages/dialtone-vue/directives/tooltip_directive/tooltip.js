@@ -7,7 +7,15 @@ export const DtTooltipDirective = {
   name: 'dt-tooltip-directive',
   install (app) {
     const DEFAULT_PLACEMENT = 'top';
-    if (!globalThis.__DtTooltipDirectiveAppInstance) {
+    let tooltipInstance = null;
+
+    function ensureDirectiveApp (rootNode) {
+      const key = '__DtTooltipDirectiveAppInstance';
+      if (rootNode[key]) {
+        tooltipInstance = rootNode[key];
+        return;
+      }
+
       const DtTooltipDirectiveApp = createApp({
         name: 'DtTooltipDirectiveApp',
         components: { DtTooltip },
@@ -18,7 +26,8 @@ export const DtTooltipDirective = {
         },
 
         created () {
-          globalThis.__DtTooltipDirectiveAppInstance = getCurrentInstance();
+          rootNode[key] = getCurrentInstance();
+          tooltipInstance = rootNode[key];
         },
 
         methods: {
@@ -57,15 +66,14 @@ export const DtTooltipDirective = {
       });
 
       const mountPoint = document.createElement('div');
-      document.body.appendChild(mountPoint);
+      rootNode.appendChild(mountPoint);
       DtTooltipDirectiveApp.mount(mountPoint);
     }
 
-    const tooltipInstance = globalThis.__DtTooltipDirectiveAppInstance;
-
     app.directive('dt-tooltip', {
       beforeMount (anchor, binding) {
-        // Initial tooltip setup
+        const rootNode = anchor.getRootNode() || document.body;
+        ensureDirectiveApp(rootNode);
         setupTooltip(anchor, binding);
       },
       updated (anchor, binding) {
@@ -76,7 +84,9 @@ export const DtTooltipDirective = {
         }
       },
       unmounted (anchor) {
-        tooltipInstance.ctx.removeTooltip(anchor.getAttribute('data-dt-tooltip-id'));
+        if (tooltipInstance) {
+          tooltipInstance.ctx.removeTooltip(anchor.getAttribute('data-dt-tooltip-id'));
+        }
       },
     });
 

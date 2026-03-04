@@ -315,7 +315,9 @@ export default {
     },
 
     anchor () {
-      return this.externalAnchor ? document.body.querySelector(this.externalAnchor) : getAnchor(this.$refs.anchor);
+      return this.externalAnchor
+        ? (this.$el.getRootNode() || document.body).querySelector(this.externalAnchor)
+        : getAnchor(this.$refs.anchor);
     },
   },
 
