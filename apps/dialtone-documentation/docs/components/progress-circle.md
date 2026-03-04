@@ -58,11 +58,7 @@ Use a progress circle to communicate deterministic progress to the user — for 
 
 <code-example-tabs
 vueCode='
-<dt-progress-circle :progress="0" aria-label="0% complete" />
-<dt-progress-circle :progress="25" aria-label="25% complete" />
-<dt-progress-circle :progress="50" aria-label="50% complete" />
-<dt-progress-circle :progress="75" aria-label="75% complete" />
-<dt-progress-circle :progress="100" aria-label="100% complete" />
+<dt-progress-circle :progress="{value}" aria-label="{value} complete" />
 '
 showHtmlWarning />
 
@@ -80,10 +76,7 @@ The `size` prop controls the diameter of the progress circle, aligning to Dialto
 
 <code-example-tabs
 vueCode='
-<dt-progress-circle size="100" :progress="66" aria-label="size 100" />
-<dt-progress-circle size="300" :progress="66" aria-label="size 300" />
-<dt-progress-circle size="500" :progress="66" aria-label="size 500" />
-<dt-progress-circle size="800" :progress="66" aria-label="size 800" />
+<dt-progress-circle size="{size}" :progress="66" aria-label="value" />
 '
 showHtmlWarning />
 
@@ -101,13 +94,7 @@ The `kind` prop sets the color variant of the progress circle.
 
 <code-example-tabs
 vueCode='
-<dt-progress-circle kind="default" :progress="66" aria-label="default" />
-<dt-progress-circle kind="brand" :progress="66" aria-label="brand" />
-<dt-progress-circle kind="critical" :progress="66" aria-label="critical" />
-<dt-progress-circle kind="positive" :progress="66" aria-label="positive" />
-<dt-progress-circle kind="warning" :progress="66" aria-label="warning" />
-<dt-progress-circle kind="info" :progress="66" aria-label="info" />
-<dt-progress-circle kind="ai" :progress="66" aria-label="ai" />
+<dt-progress-circle kind="{kind}" :progress="66" aria-label="value" />
 '
 showHtmlWarning />
 
