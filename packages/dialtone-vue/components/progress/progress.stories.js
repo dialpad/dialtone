@@ -1,10 +1,10 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtProgress from './progress.vue';
-import { PROGRESS_SIZES } from './progress_constants';
+import { PROGRESS_SIZES, PROGRESS_SIZE_DEFAULT } from './progress_constants';
 import DtProgressDefaultTemplate from './progress_default.story.vue';
 import DtProgressVariantsTemplate from './progress_variants.story.vue';
 
-export const argsData = { ariaLabel: 'Upload progress', progress: 50 };
+export const argsData = { ariaLabel: 'Upload progress', progress: 50, size: PROGRESS_SIZE_DEFAULT };
 export const argTypesData = {
   progress: { control: { type: 'range', min: 0, max: 100, step: 1 } },
   size: {

@@ -3,7 +3,7 @@
  * Circular SVG progress indicator for determinate upload or processing progress.
  * @see https://dialtone.dialpad.com/components/progress.html
  */
-import { PROGRESS_SIZES, PROGRESS_SIZE_DEFAULT } from './progress_constants';
+import { PROGRESS_SIZES } from './progress_constants';
 
 export default {
   compatConfig: { MODE: 3 },
@@ -24,7 +24,7 @@ export default {
      */
     size: {
       type: String,
-      default: PROGRESS_SIZE_DEFAULT,
+      default: '500',
       validator: (s) => Object.keys(PROGRESS_SIZES).includes(s),
     },
   },
