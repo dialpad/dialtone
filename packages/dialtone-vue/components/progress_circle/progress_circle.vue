@@ -41,7 +41,6 @@ export default {
 
   data () {
     return {
-      circleCircumference: 50,
       strokeWidth: 3.25,
       uid: Math.random().toString(36).substring(2, 9),
     };
@@ -73,6 +72,10 @@ export default {
 
     circleRadius () {
       return 12 - (this.strokeWidth / 2);
+    },
+
+    circleCircumference () {
+      return 2 * Math.PI * this.circleRadius;
     },
 
     // Draws a full circle as two arcs so getTotalLength() returns the circumference.
@@ -112,9 +115,6 @@ export default {
     },
   },
 
-  mounted () {
-    this.circleCircumference = this.$refs.progressCircle.getTotalLength();
-  },
 };
 </script>
 
@@ -191,21 +191,21 @@ export default {
         </linearGradient>
       </defs>
       <path
-        ref="progressCircle"
+        v-if="progress <= 95"
         :d="circlePath"
         class="d-progress-circle__shape d-progress-circle__shape--track"
         fill="none"
         :stroke-width="strokeWidth"
         stroke-linecap="round"
-        :style="{ display: progress > 95 ? 'none' : undefined }"
       />
       <path
+        v-if="progress > 0"
         :d="circlePath"
         class="d-progress-circle__shape d-progress-circle__shape--fill"
         fill="none"
         :stroke-width="strokeWidth"
         stroke-linecap="round"
-        :style="{ ...fillStrokeStyle, display: progress <= 0 ? 'none' : undefined }"
+        :style="fillStrokeStyle"
       />
     </svg>
   </div>
