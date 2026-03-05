@@ -1,3 +1,10 @@
+# [3.208.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.208.0-next.1...dialtone-vue/v3.208.0-next.2) (2026-03-05)
+
+
+### Code Refactoring
+
+* **Combobox Multi Select:** NO-JIRA use logical css properties ([#1104](https://github.com/dialpad/dialtone/issues/1104)) ([a675daf](https://github.com/dialpad/dialtone/commit/a675daf9453c62afd3dd340cd0b75908aebcd176))
+
 # [3.208.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.207.0...dialtone-vue/v3.208.0-next.1) (2026-03-02)
 
 
