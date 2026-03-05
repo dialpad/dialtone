@@ -801,6 +801,61 @@ vueCode='
 '
 showHtmlWarning />
 
+## Leading & Trailing
+
+The `#leading` and `#trailing` slots are forwarded to the alpha button. Use `alpha-leading-class` and `alpha-trailing-class` to style the containers.
+
+<code-well-header>
+  <dt-stack direction="row" gap="400" ref="leadingTrailingExample">
+    <dt-split-button
+      importance="outlined"
+      omega-tooltip-text="More calling options"
+      alpha-trailing-class="d-pr8"
+    >
+      Place Call
+      <template #trailing>
+        <dt-keyboard-shortcut shortcut="{cmd}+N" />
+      </template>
+    </dt-split-button>
+    <dt-split-button
+      importance="outlined"
+      omega-tooltip-text="More calling options"
+      alpha-leading-class="d-pl8"
+    >
+      Place Call
+      <template #leading>
+        <dt-badge kind="count" text="3" />
+      </template>
+    </dt-split-button>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.leadingTrailingExample'
+vueCode='
+<dt-split-button
+  importance="outlined"
+  omega-tooltip-text="More options"
+  alpha-trailing-class="d-pr8"
+>
+  Place Call
+  <template #trailing>
+    <dt-badge text="Label" />
+  </template>
+</dt-split-button>
+<dt-split-button
+  importance="outlined"
+  omega-tooltip-text="More options"
+  alpha-leading-class="d-pl8"
+>
+  Place Call
+  <template #leading>
+    <dt-badge kind="count" text="3" />
+  </template>
+</dt-split-button>
+'
+showHtmlWarning />
+
 ## Vue API
 
 <component-vue-api component-name="splitButton" />

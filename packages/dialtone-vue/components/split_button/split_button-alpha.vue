@@ -11,6 +11,8 @@
     :importance="importance"
     :kind="kind"
     :label-class="labelClass"
+    :leading-class="leadingClass"
+    :trailing-class="trailingClass"
     :loading="loading"
     :size="size"
   >
@@ -40,6 +42,18 @@
         name="icon"
         :size="BUTTON_ICON_SIZES[size]"
       />
+    </template>
+    <template
+      v-if="$slots.leading"
+      #leading
+    >
+      <slot name="leading" />
+    </template>
+    <template
+      v-if="$slots.trailing"
+      #trailing
+    >
+      <slot name="trailing" />
     </template>
     <slot name="default" />
   </dt-button>
@@ -85,6 +99,22 @@ export default {
      * Used to customize the label container
      */
     labelClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Used to customize the leading container
+     */
+    leadingClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Used to customize the trailing container
+     */
+    trailingClass: {
       type: [String, Array, Object],
       default: '',
     },

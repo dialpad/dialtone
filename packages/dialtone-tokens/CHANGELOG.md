@@ -1,3 +1,15 @@
+# [1.48.0-next.11](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.10...dialtone-tokens/v1.48.0-next.11) (2026-03-05)
+
+
+### Bug Fixes
+
+* **Tokens:** DLT-3053 preserve root font size variable as reference ([#1093](https://github.com/dialpad/dialtone/issues/1093)) ([112ab4b](https://github.com/dialpad/dialtone/commit/112ab4bed25cbb4317d600908ad5fbb92533bb06))
+
+
+### Features
+
+* **Button,tabs,split Button:** visual refresh and slot updates DLT-2946 DLT-2947 DLT-2965 ([#1090](https://github.com/dialpad/dialtone/issues/1090)) ([ffdd56f](https://github.com/dialpad/dialtone/commit/ffdd56f534c0e3baab8badfe632df58ca9ea6160))
+
 # [1.48.0-next.10](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.9...dialtone-tokens/v1.48.0-next.10) (2026-03-02)
 
 

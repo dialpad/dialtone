@@ -55,6 +55,20 @@
           :size="iconSize"
         />
       </template>
+      <template
+        v-if="$slots.leading"
+        #leading
+      >
+        <!-- @slot Leading slot, forwarded to the alpha button's leading slot -->
+        <slot name="leading" />
+      </template>
+      <template
+        v-if="$slots.trailing"
+        #trailing
+      >
+        <!-- @slot Trailing slot, forwarded to the alpha button's trailing slot -->
+        <slot name="trailing" />
+      </template>
       <!-- @slot Default content slot -->
       <slot name="default" />
     </split-button-alpha>
@@ -216,6 +230,38 @@ export default {
     },
 
     /**
+     * Used to customize the start button leading container
+     */
+    startLeadingClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * @deprecated Use startLeadingClass
+     */
+    alphaLeadingClass: {
+      type: [String, Array, Object],
+      default: undefined,
+    },
+
+    /**
+     * Used to customize the start button trailing container
+     */
+    startTrailingClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * @deprecated Use startTrailingClass
+     */
+    alphaTrailingClass: {
+      type: [String, Array, Object],
+      default: undefined,
+    },
+
+    /**
      * @deprecated Use startLabelClass
      */
     alphaLabelClass: {
@@ -324,7 +370,7 @@ export default {
 
     /**
      * The color of the button.
-     * @values default, muted, danger, inverted
+     * @values default, muted, danger
      */
     kind: {
       type: String,
@@ -497,6 +543,8 @@ export default {
         disabled: this.disabled || (this.alphaDisabled ?? this.startDisabled),
         iconPosition: this.alphaIconPosition ?? this.startIconPosition,
         labelClass: this.alphaLabelClass ?? this.startLabelClass,
+        leadingClass: this.alphaLeadingClass ?? this.startLeadingClass,
+        trailingClass: this.alphaTrailingClass ?? this.startTrailingClass,
         loading: this.alphaLoading ?? this.startLoading,
         importance: this.importance,
         kind: this.kind,

@@ -14,6 +14,30 @@
 //  $   WRAPPERS
 //  ----------------------------------------------------------------------------
 @layer dialtone.components {
+.d-tab-neux {
+    inline-size: 100%;
+
+    [role="tabpanel"] {
+        box-shadow: none;
+    }
+
+    > .d-tablist {
+        --tablist-padding-bottom: var(--dt-size-400);
+
+        padding-block-end: var(--tablist-padding-bottom);
+
+        &--xs { --tablist-padding-bottom: var(--dt-size-350); }
+        &--sm { --tablist-padding-bottom: var(--dt-size-400); }
+        &--md { /* default */ }
+        &--lg { --tablist-padding-bottom: var(--dt-size-400); }
+        &--xl { --tablist-padding-bottom: var(--dt-size-450); }
+    }
+
+    .d-tablist--no-border {
+        border-block-end: 0;
+    }
+}
+
 .d-tablist {
     //  --  COMPONENT CSS VARS
     //  ------------------------------------------------------------------------
@@ -28,7 +52,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: var(--dt-size-300);
-    align-items: baseline;
+    align-items: center;
 
     &:focus {
         outline: 0;
@@ -131,6 +155,55 @@
             border-radius: var(--tab-border-radius);
         }
     }
+
+    .d-tablist--lg & {
+        --tab-padding-x: calc(var(--dt-size-500) - var(--dt-size-border-100));
+        --tab-padding-y: calc((var(--dt-size-400) + var(--dt-size-200)) - var(--dt-size-border-100));
+        --tab-border-radius: var(--dt-button-size-radius-lg);
+        --tab-font-style: var(--dt-typography-button-lg);
+
+        .d-tablist--no-border &:not(.d-tab--selected) {
+            border-radius: var(--tab-border-radius);
+        }
+    }
+
+    .d-tablist--xl & {
+        --tab-padding-x: calc(var(--dt-size-500) - var(--dt-size-border-100));
+        --tab-padding-y: calc(var(--dt-size-450) - var(--dt-size-border-100));
+        --tab-border-radius: var(--dt-button-size-radius-xl);
+        --tab-font-style: var(--dt-typography-button-xl);
+
+        .d-tablist--no-border &:not(.d-tab--selected) {
+            border-radius: var(--tab-border-radius);
+        }
+    }
+
+    //  ============================================================================
+    //  $   LABEL
+    //  ----------------------------------------------------------------------------
+    &__label {
+    //   font-weight: normal;
+
+      transition: font-weight var(--ttf-out) var(--td50);
+
+      .d-btn--active &,
+      .d-btn--outlined &,
+      .d-tab--is-selected & {
+        font-weight: var(--dt-font-weight-bold) !important;
+      }
+
+      &[data-content]::after {
+          display: block;
+          font-weight: var(--dt-font-weight-bold);
+          white-space: nowrap;
+          text-align: center;
+          background-color: #666;
+          visibility: hidden;
+          content: attr(data-content);
+          block-size: 0;
+      }
+    }
+
 }
 
 //  ============================================================================
@@ -158,6 +231,20 @@
         .d-tablist--no-border & {
             background-color: var(--tab-color-background);
         }
+    }
+}
+
+.d-tab--is-selected {
+    position: relative;
+    z-index: var(--zi-selected);
+
+    &::after {
+        position: absolute;
+        background-color: var(--dt-action-color-foreground-base-default);
+        content: '';
+        block-size: var(--dt-size-200);
+        inset-block-start: calc(calc(100% + var(--tablist-padding-bottom)) - var(--dt-size-100));
+        inset-inline: 0;
     }
 }
 

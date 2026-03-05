@@ -1,8 +1,14 @@
-# [3.208.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.207.0...dialtone-vue/v3.208.0-next.1) (2026-03-02)
+# [3.211.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.210.0...dialtone-vue/v3.211.0-next.1) (2026-03-05)
+
+
+### Bug Fixes
+
+* **Combobox:** DLT-3057 combobox errors when hovering over dt-dropdown-separator ([#1097](https://github.com/dialpad/dialtone/issues/1097)) ([4798e0e](https://github.com/dialpad/dialtone/commit/4798e0eaf24d9ce1043257f922f0d4563f193c1c))
 
 
 ### Code Refactoring
 
+* **Combobox Multi Select:** NO-JIRA use logical css properties ([#1104](https://github.com/dialpad/dialtone/issues/1104)) ([a675daf](https://github.com/dialpad/dialtone/commit/a675daf9453c62afd3dd340cd0b75908aebcd176))
 * **Components,recipes:** DLT-3043 DLT-3046 logical start/end naming with deprecated backward-compatible fallbacks ([#1079](https://github.com/dialpad/dialtone/issues/1079)) ([1d26a4e](https://github.com/dialpad/dialtone/commit/1d26a4e5200f3d3b55453411d4e95d393aa8154b))
 * **Tokens:** DLT-3013 convert color system from HSL to OKLCH ([#1060](https://github.com/dialpad/dialtone/issues/1060)) ([42dc418](https://github.com/dialpad/dialtone/commit/42dc4187e61904a9913cfff70603958a3b437ea2))
 
@@ -10,10 +16,45 @@
 ### Features
 
 * **Avatar:** DLT-2942 updated avatar component ([#1047](https://github.com/dialpad/dialtone/issues/1047)) ([e50563d](https://github.com/dialpad/dialtone/commit/e50563ddd12d1bb30b49df362484734b291fba59))
+* **Button,tabs,split Button:** visual refresh and slot updates DLT-2946 DLT-2947 DLT-2965 ([#1090](https://github.com/dialpad/dialtone/issues/1090)) ([ffdd56f](https://github.com/dialpad/dialtone/commit/ffdd56f534c0e3baab8badfe632df58ca9ea6160))
 * **Link,button:** DLT-3012 add underline prop ([#1059](https://github.com/dialpad/dialtone/issues/1059)) ([1cb91ea](https://github.com/dialpad/dialtone/commit/1cb91ea3e1c3e448fc13ba1c4a4cb57885561a75))
+* **Loader,progress Circle:** NO-JIRA polish DtProgressCircle visual and align DtLoader visual with DtProgressCircle ([#1102](https://github.com/dialpad/dialtone/issues/1102)) ([7b9e9b6](https://github.com/dialpad/dialtone/commit/7b9e9b6d699515805bec979c7ffdf5b5f737b316))
+* **Progress Circle:** DLT-2983 add progress-circle component ([#1098](https://github.com/dialpad/dialtone/issues/1098)) ([c0f0e40](https://github.com/dialpad/dialtone/commit/c0f0e403acfd76d8db7dbe002862330d71571d5f))
 * **Text:** export text component from dialtone-vue ([757fdb7](https://github.com/dialpad/dialtone/commit/757fdb7b51f5f450ef3737694ed7746d5598ef66))
 * **Tokens:** DLT-2937 introduce spacing and layout token systems ([#1045](https://github.com/dialpad/dialtone/issues/1045)) ([de23e12](https://github.com/dialpad/dialtone/commit/de23e1260a2b2f7e96469255147c86e2522c632e))
 * **Tokens:** update color ramps and consumer color migration tools DLT-3004 DLT-3005 DLT-3006 DLT-3007 DLT-3008 ([#1054](https://github.com/dialpad/dialtone/issues/1054)) ([28cb1de](https://github.com/dialpad/dialtone/commit/28cb1de09ea18abd8ffa79e99d23866d861df111))
+
+
+### Reverts
+
+* NO-JIRA revert progress circle polish commits for re-PR ([#1101](https://github.com/dialpad/dialtone/issues/1101)) ([a212c41](https://github.com/dialpad/dialtone/commit/a212c41e5c857ebabfacc9670e7a7054dcd9c6de))
+
+# [3.210.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.209.0...dialtone-vue/v3.210.0) (2026-03-03)
+
+
+### Features
+
+* **Editor:** DP-178474 added perameter to disabled variable alt text in editor ([#1089](https://github.com/dialpad/dialtone/issues/1089)) ([30f3aae](https://github.com/dialpad/dialtone/commit/30f3aaea98bca132e830707e17c8b43bdddd5d05))
+* **Message Input:** DLT-3051 add slot for message polish ([#1088](https://github.com/dialpad/dialtone/issues/1088)) ([6de2398](https://github.com/dialpad/dialtone/commit/6de23986057816d388962308b889a20114b2ce91))
+
+# [3.209.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.208.0...dialtone-vue/v3.209.0) (2026-03-02)
+
+
+### Bug Fixes
+
+* **Editor:** NO-JIRA fix editor font color button UX ([#1086](https://github.com/dialpad/dialtone/issues/1086)) ([d73da4a](https://github.com/dialpad/dialtone/commit/d73da4aa34bf5456e462baf0cec721d7511c09f7))
+
+
+### Features
+
+* **Editor:** DP-176403 add image resizing for dialtone editor  ([#1085](https://github.com/dialpad/dialtone/issues/1085)) ([e69f0f1](https://github.com/dialpad/dialtone/commit/e69f0f1b9006117ede056d5c14b86feb9c9842c4))
+
+# [3.208.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.207.0...dialtone-vue/v3.208.0) (2026-02-27)
+
+
+### Features
+
+* **Editor:** DLT-3003 add font size, font type, & font color to editor ([#1081](https://github.com/dialpad/dialtone/issues/1081)) ([1bb53e6](https://github.com/dialpad/dialtone/commit/1bb53e692beac43fcc7502df0de64b5f3bd95c0c))
 
 # [3.207.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.206.0...dialtone-vue/v3.207.0) (2026-02-27)
 

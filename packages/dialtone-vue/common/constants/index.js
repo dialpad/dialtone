@@ -22,8 +22,8 @@ export const DESCRIPTION_SIZE_TYPES = {
 
 // Description size variants
 export const DESCRIPTION_SIZE_MODIFIERS = {
-  xs: '',
-  sm: '',
+  xs: 'd-description--xs',
+  sm: 'd-description--sm',
   md: '',
   lg: 'd-description--lg',
   xl: 'd-description--xl',

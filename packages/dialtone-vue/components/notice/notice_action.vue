@@ -8,15 +8,15 @@
     <dt-button
       v-if="!hideClose"
       ref="closeButton"
-      :circle="true"
       data-qa="dt-notice-action-close-button"
       importance="clear"
+      kind="muted"
       size="sm"
       :aria-label="closeButtonTitle"
       :title="closeButtonTitle"
       @click="close"
     >
-      <template #icon>
+      <template #startIcon>
         <dt-icon-close
           size="200"
         />

@@ -8,11 +8,10 @@
       :auto-focus="$attrs.autoFocus"
       :editable="$attrs.editable"
       :input-class="$attrs.inputClass"
-      :link="$attrs.link"
       :placeholder="$attrs.placeholder"
       :max-height="$attrs.maxHeight"
       :show-add-link="$attrs.showAddLink"
-      :use-div-tags="$attrs.useDivTags"
+      :use-div-tags="useDivTags"
       :show-bold-button="$attrs.showBoldButton"
       :show-italics-button="$attrs.showItalicsButton"
       :show-strike-button="$attrs.showStrikeButton"
@@ -27,9 +26,13 @@
       :show-quick-replies-button="$attrs.showQuickRepliesButton"
       :show-code-block-button="$attrs.showCodeBlockButton"
       :show-inline-image-button="$attrs.showInlineImageButton"
+      :show-font-color-button="showFontColorButton"
+      :show-font-style-button="showFontStyleButton"
+      :show-font-size-button="showFontSizeButton"
       :show-variable-button="showVariableButton"
       :variable-categories="variableCategories"
       :allow-tables="$attrs.allowTables"
+      :allow-image-resize="allowImageResize"
       @focus="$attrs.onFocus"
       @blur="$attrs.onBlur"
       @input="$attrs.onInput"
@@ -52,8 +55,13 @@ export default {
   data () {
     return {
       modelValue: this.$attrs.modelValue || '<p>Try inserting a variable using the button!</p>',
-      showVariableButton: true,
-      variableCategories: [
+      showVariableButton: this.$attrs.showVariableButton ?? true,
+      allowImageResize: this.$attrs.allowImageResize ?? true,
+      showFontColorButton: this.$attrs.showFontColorButton ?? true,
+      showFontStyleButton: this.$attrs.showFontStyleButton ?? true,
+      showFontSizeButton: this.$attrs.showFontSizeButton ?? true,
+      useDivTags: this.$attrs.useDivTags ?? true,
+      variableCategories: this.$attrs.variableCategories ?? [
         {
           name: 'Agent',
           items: [
@@ -61,26 +69,31 @@ export default {
               id: 'agent-first-name',
               name: 'First name',
               placeholder: 'agent first name',
+              enableAltText: true,
             },
             {
               id: 'agent-last-name',
               name: 'Last name',
               placeholder: 'agent last name',
+              enableAltText: true,
             },
             {
               id: 'agent-full-name',
               name: 'Full name',
               placeholder: 'agent full name',
+              enableAltText: true,
             },
             {
               id: 'agent-phone-number',
               name: 'Phone number',
               placeholder: 'agent phone number',
+              enableAltText: true,
             },
             {
               id: 'agent-email-address',
               name: 'Email address',
               placeholder: 'agent email address',
+              enableAltText: true,
             },
           ],
         },
@@ -91,16 +104,19 @@ export default {
               id: 'company-name',
               name: 'Name',
               placeholder: 'company name',
+              enableAltText: true,
             },
             {
               id: 'company-email-address',
               name: 'Email address',
               placeholder: 'company email address',
+              enableAltText: false,
             },
             {
               id: 'company-website',
               name: 'Website',
               placeholder: 'company website',
+              enableAltText: true,
             },
           ],
         },

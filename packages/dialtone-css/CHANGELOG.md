@@ -1,3 +1,29 @@
+# [8.74.0-next.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.74.0-next.2...dialtone-css/v8.74.0-next.3) (2026-03-05)
+
+
+### Features
+
+* **Button,tabs,split Button:** visual refresh and slot updates DLT-2946 DLT-2947 DLT-2965 ([#1090](https://github.com/dialpad/dialtone/issues/1090)) ([ffdd56f](https://github.com/dialpad/dialtone/commit/ffdd56f534c0e3baab8badfe632df58ca9ea6160))
+* **Loader,progress Circle:** NO-JIRA polish DtProgressCircle visual and align DtLoader visual with DtProgressCircle ([#1102](https://github.com/dialpad/dialtone/issues/1102)) ([7b9e9b6](https://github.com/dialpad/dialtone/commit/7b9e9b6d699515805bec979c7ffdf5b5f737b316))
+* **Progress Circle:** DLT-2983 add progress-circle component ([#1098](https://github.com/dialpad/dialtone/issues/1098)) ([c0f0e40](https://github.com/dialpad/dialtone/commit/c0f0e403acfd76d8db7dbe002862330d71571d5f))
+
+
+### Reverts
+
+* NO-JIRA revert progress circle polish commits for re-PR ([#1101](https://github.com/dialpad/dialtone/issues/1101)) ([a212c41](https://github.com/dialpad/dialtone/commit/a212c41e5c857ebabfacc9670e7a7054dcd9c6de))
+
+# [8.74.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.74.0-next.1...dialtone-css/v8.74.0-next.2) (2026-03-05)
+
+
+### Bug Fixes
+
+* **Stylelint:** disable hue-degree-notation rule and update OKLCH color syntax ([81f886e](https://github.com/dialpad/dialtone/commit/81f886ef2d939d616bbf1a854acb6ea7446d4060))
+
+
+### Documentation
+
+* DLT-2908 ui kits landing page ([#1049](https://github.com/dialpad/dialtone/issues/1049)) ([d805b9d](https://github.com/dialpad/dialtone/commit/d805b9dd876bd86534042c4fbc7f5960efbc477e))
+
 # [8.74.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.73.0...dialtone-css/v8.74.0-next.1) (2026-03-02)
 
 

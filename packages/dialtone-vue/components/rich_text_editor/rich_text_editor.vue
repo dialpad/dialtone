@@ -373,6 +373,14 @@ export default {
     },
 
     /**
+     * Whether the input allows font size to be introduced in the text.
+     */
+    allowFontSize: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
      * Whether the input allows different font-families to be introduced in the text.
      */
     allowFontFamily: {
@@ -426,6 +434,14 @@ export default {
      * Allow Tables to be used in to the editor
      */
     allowTables: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Whether the input allows image resize to be introduced in the text.
+     */
+    allowImageResize: {
       type: Boolean,
       default: false,
     },
@@ -874,15 +890,20 @@ export default {
       }
 
       if (this.allowInlineImages) {
-        extensions.push(ConfigurableImage);
+        extensions.push(ConfigurableImage.configure({
+          resize: {
+            enabled: this.allowImageResize,
+            alwaysPreserveAspectRatio: true,
+          },
+        }));
       }
 
-      if (this.allowFontFamily || this.allowFontColor) {
+      if (this.allowFontFamily || this.allowFontColor || this.allowFontSize) {
         extensions.push(TextStyleKit.configure({
           color: this.allowFontColor,
           backgroundColor: false,
           fontFamily: this.allowFontFamily,
-          fontSize: false,
+          fontSize: this.allowFontSize,
           lineHeight: false,
         }));
       }

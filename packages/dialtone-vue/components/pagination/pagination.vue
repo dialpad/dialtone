@@ -13,7 +13,7 @@
       :disabled="isFirstPage"
       @click="changePage(currentPage - 1)"
     >
-      <template #icon>
+      <template #startIcon>
         <dt-icon-chevron-left
           size="300"
         />
@@ -56,7 +56,7 @@
       importance="clear"
       @click="changePage(currentPage + 1)"
     >
-      <template #icon>
+      <template #startIcon>
         <dt-icon-chevron-right
           size="300"
         />
