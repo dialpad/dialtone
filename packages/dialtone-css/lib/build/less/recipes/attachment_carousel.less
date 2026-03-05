@@ -18,11 +18,16 @@
 .d-recipe-attachment-carousel__arrow {
   position: absolute;
   top: var(--dt-space-30-percent);
-  background-color: var(--dt-color-neutral-white);
+  color: var(--dt-color-foreground-tertiary-inverted);
+  background-color: var(--dt-color-surface-strong);
   border: var(--dt-space-100) solid;
-  border-color: var(--bc-default);
+  border-color: var(--dt-color-border-moderate-inverted);
   border-width: var(--dt-size-100);
   opacity: 0;
+
+  &:hover {
+    color: var(--dt-color-foreground-primary-inverted);
+  }
 }
 
 .d-recipe-attachment-carousel:hover .d-recipe-attachment-carousel__arrow {
@@ -45,12 +50,13 @@
   position: absolute;
   top: inherit;
   right: inherit;
-  color: var(--dt-color-neutral-white);
-  background-color: var(--dt-color-black-400);
-  border: var(--dt-space-100) solid;
-  border-color: var(--dt-color-neutral-white);
-  border-width: var(--dt-size-200);
+  color: var(--dt-color-foreground-tertiary-inverted);
+  background-color: var(--dt-color-surface-strong);
   opacity: 0;
+
+  &:hover {
+    color: var(--dt-color-foreground-primary-inverted);
+  }
 }
 
 .d-recipe-attachment-carousel__image:focus-within .d-recipe-attachment-carousel__image-close-button, .d-recipe-attachment-carousel__image:hover .d-recipe-attachment-carousel__image-close-button {
@@ -78,11 +84,7 @@
   top: inherit;
   right: inherit;
   display: flex;
-  background-color: var(--dt-color-neutral-white);
-  border: var(--dt-space-100) solid;
-  border-color: var(--dt-color-border-subtle);
-  border-width: var(--dt-size-200);
-  border-radius: 50%;
-  transform: rotate(-90deg);
+  padding: var(--dt-space-300);
+  background-color: var(--dt-color-surface-moderate);
+  border-radius: var(--dt-size-radius-circle);
 }
-

@@ -39,13 +39,20 @@
 
 .d-progress-circle__shape {
   &--track {
+    transition: stroke-dasharray var(--td200) linear, stroke-dashoffset var(--td200) linear;
     stroke: color-mix(in oklch, var(--progress-color) 25%, var(--dt-color-surface-primary));
+    stroke-dasharray: var(--track-dasharray);
+    stroke-dashoffset: var(--track-dashoffset);
+    stroke-linecap: round;
   }
 
   &--fill {
-    stroke-dasharray: var(--stroke-dasharray);
+    transform: rotate(var(--fill-rotate));
+    transform-origin: center;
     transition: stroke-dashoffset var(--td200) linear;
     stroke: var(--progress-color);
-    stroke-dashoffset: var(--stroke-dashoffset);
+    stroke-dasharray: var(--stroke-dasharray);
+    stroke-dashoffset: var(--fill-dashoffset);
+    stroke-linecap: round;
   }
 }

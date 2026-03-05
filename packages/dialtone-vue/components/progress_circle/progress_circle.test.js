@@ -2,15 +2,6 @@ import { mount } from '@vue/test-utils';
 import DtProgressCircle from './progress_circle.vue';
 import { PROGRESS_CIRCLE_SIZES, PROGRESS_CIRCLE_SIZE_DEFAULT, PROGRESS_CIRCLE_KINDS } from './progress_circle_constants';
 
-// jsdom does not implement getTotalLength — add it to Element.prototype so mounted() can call it
-beforeAll(() => {
-  Object.defineProperty(Element.prototype, 'getTotalLength', {
-    value: vi.fn(() => 50),
-    writable: true,
-    configurable: true,
-  });
-});
-
 const baseProps = { ariaLabel: 'Upload progress' };
 let mockProps = {};
 
@@ -44,6 +35,24 @@ describe('DtProgressCircle Tests', () => {
     describe('When progress is 100', () => {
       beforeEach(() => { mockProps = { progress: 100 }; updateWrapper(); });
       it('has aria-valuenow 100', () => { expect(progressCircle.attributes('aria-valuenow')).toBe('100'); });
+    });
+
+    describe('When progress is below minimum visual threshold (1–4)', () => {
+      beforeEach(() => { mockProps = { progress: 2 }; updateWrapper(); });
+
+      it('has aria-valuenow reflecting the real value', () => {
+        expect(progressCircle.attributes('aria-valuenow')).toBe('2');
+      });
+
+      it('renders the same fill as progress=5', () => {
+        const smallStyle = wrapper.find('.d-progress-circle__bar').attributes('style');
+
+        mockProps = { progress: 5 };
+        updateWrapper();
+        const fiveStyle = wrapper.find('.d-progress-circle__bar').attributes('style');
+
+        expect(smallStyle).toBe(fiveStyle);
+      });
     });
   });
 
@@ -81,7 +90,7 @@ describe('DtProgressCircle Tests', () => {
     });
 
     describe('When kind is ai', () => {
-      beforeEach(() => { mockProps = { kind: 'ai' }; updateWrapper(); });
+      beforeEach(() => { mockProps = { kind: 'ai', progress: 50 }; updateWrapper(); });
       it('applies ai class', () => {
         expect(progressCircle.classes()).toContain(PROGRESS_CIRCLE_KINDS.ai);
       });

@@ -41,7 +41,6 @@ export default {
 
   data () {
     return {
-      circleCircumference: 50,
       strokeWidth: 3.25,
       uid: Math.random().toString(36).substring(2, 9),
     };
@@ -75,26 +74,47 @@ export default {
       return 12 - (this.strokeWidth / 2);
     },
 
+    circleCircumference () {
+      return 2 * Math.PI * this.circleRadius;
+    },
+
     // Draws a full circle as two arcs so getTotalLength() returns the circumference.
     circlePath () {
       const r = this.circleRadius;
       const top = 12 - r;
       const bottom = 12 + r;
-      return `M 12 ${top} A ${r} ${r} 0 0 1 12 ${bottom} A ${r} ${r} 0 0 1 12 ${top}`;
+      return `M 12 ${top} A ${r} ${r} 0 0 1 12 ${bottom} A ${r} ${r} 0 0 1 12 ${top} Z`;
     },
 
     // stroke-dasharray/offset control how much of the circle is visually "filled".
     cssVars () {
+      const C = this.circleCircumference;
+      const MIN_VISUAL_PROGRESS = 5;
+      const visualProgress = (this.progress > 0 && this.progress < MIN_VISUAL_PROGRESS)
+        ? MIN_VISUAL_PROGRESS
+        : this.progress;
+      const fillLength = C * visualProgress / 100;
+      const sw = this.strokeWidth;
+      const capArc = sw / 2;
+
+      // When both arcs are visible, round linecaps extend capArc past each endpoint.
+      // Shorten each arc by capArc at both ends (total sw per arc) so the caps meet
+      // exactly at each junction without overlapping. Rotate the fill forward by
+      // capArc so its start cap lands at 12 o'clock.
+      const both = this.progress > 0 && this.progress < 100;
+      const adj = both ? sw : 0;
+
       return {
-        '--stroke-dashoffset': this.circleCircumference - (this.circleCircumference * this.progress / 100),
-        '--stroke-dasharray': this.circleCircumference,
+        // Full-circle arcs use 'none' to avoid round-cap overlap at the path seam.
+        '--stroke-dasharray': (!both && this.progress >= 100) ? 'none' : C,
+        '--fill-dashoffset': C - Math.max(0, fillLength - adj),
+        '--fill-rotate': `${both ? (capArc / C * 360) : 0}deg`,
+        '--track-dasharray': (!both && this.progress <= 0) ? 'none' : `${Math.max(0, C - fillLength - adj)} ${C}`,
+        '--track-dashoffset': -(fillLength + (both ? capArc : 0)),
       };
     },
   },
 
-  mounted () {
-    this.circleCircumference = this.$refs.progressCircle.getTotalLength();
-  },
 };
 </script>
 
@@ -171,17 +191,20 @@ export default {
         </linearGradient>
       </defs>
       <path
-        ref="progressCircle"
+        v-if="progress <= 95"
         :d="circlePath"
         class="d-progress-circle__shape d-progress-circle__shape--track"
         fill="none"
         :stroke-width="strokeWidth"
+        stroke-linecap="round"
       />
       <path
+        v-if="progress > 0"
         :d="circlePath"
         class="d-progress-circle__shape d-progress-circle__shape--fill"
         fill="none"
         :stroke-width="strokeWidth"
+        stroke-linecap="round"
         :style="fillStrokeStyle"
       />
     </svg>
