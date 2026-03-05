@@ -1,6 +1,5 @@
 import { mount } from '@vue/test-utils';
 import DtTab from './tab.vue';
-import { TAB_IMPORTANCE_MODIFIERS } from './tabs_constants';
 
 const MOCK_PANEL_ID = '2';
 const MOCK_LABEL = 'area-label';
@@ -58,12 +57,14 @@ describe('DtTab Tests', () => {
       expect(wrapper.exists()).toBe(true);
     });
 
-    it('should have default class', () => {
-      expect(tab.classes('d-tab')).toBe(true);
-    });
-
     it('should render the slot', () => {
       expect(tab.text()).toBe(MOCK_DEFAULT_SLOT);
+    });
+
+    it('should set data-content to match the slot text', () => {
+      const label = tab.find('.d-tab__label');
+
+      expect(label.attributes('data-content')).toBe(MOCK_DEFAULT_SLOT);
     });
 
     describe('Selected Tab by default', () => {
@@ -91,47 +92,255 @@ describe('DtTab Tests', () => {
     });
   });
 
+  describe('Button styling', () => {
+    let button;
+
+    describe('When kind is default', () => {
+      describe('When selected', () => {
+        beforeEach(() => {
+          mockProvide = { groupContext: { ...MOCK_GROUP_CONTEXT, selected: MOCK_PANEL_ID, kind: 'default' } };
+          updateWrapper();
+          button = wrapper.findComponent({ name: 'DtButton' });
+        });
+
+        it('should set kind to default', () => {
+          expect(button.props('kind')).toBe('default');
+        });
+
+        it('should set importance to clear', () => {
+          expect(button.props('importance')).toBe('clear');
+        });
+
+        it('should not set active', () => {
+          expect(button.props('active')).toBe(false);
+        });
+      });
+
+      describe('When unselected', () => {
+        beforeEach(() => {
+          mockProvide = { groupContext: { ...MOCK_GROUP_CONTEXT, selected: '', kind: 'default' } };
+          updateWrapper();
+          button = wrapper.findComponent({ name: 'DtButton' });
+        });
+
+        it('should set kind to muted', () => {
+          expect(button.props('kind')).toBe('muted');
+        });
+
+        it('should set importance to clear', () => {
+          expect(button.props('importance')).toBe('clear');
+        });
+      });
+    });
+
+    describe('When kind is muted', () => {
+      describe('When selected', () => {
+        beforeEach(() => {
+          mockProvide = { groupContext: { ...MOCK_GROUP_CONTEXT, selected: MOCK_PANEL_ID, kind: 'muted' } };
+          updateWrapper();
+          button = wrapper.findComponent({ name: 'DtButton' });
+        });
+
+        it('should set kind to muted', () => {
+          expect(button.props('kind')).toBe('muted');
+        });
+
+        it('should set active', () => {
+          expect(button.props('active')).toBe(true);
+        });
+      });
+
+      describe('When unselected', () => {
+        beforeEach(() => {
+          mockProvide = { groupContext: { ...MOCK_GROUP_CONTEXT, selected: '', kind: 'muted' } };
+          updateWrapper();
+          button = wrapper.findComponent({ name: 'DtButton' });
+        });
+
+        it('should set kind to muted', () => {
+          expect(button.props('kind')).toBe('muted');
+        });
+
+        it('should not set active', () => {
+          expect(button.props('active')).toBe(false);
+        });
+      });
+    });
+
+    describe('When outlined', () => {
+      describe('When selected', () => {
+        beforeEach(() => {
+          mockProvide = { groupContext: { ...MOCK_GROUP_CONTEXT, selected: MOCK_PANEL_ID, kind: 'default', outlined: true } };
+          updateWrapper();
+          button = wrapper.findComponent({ name: 'DtButton' });
+        });
+
+        it('should set importance to outlined', () => {
+          expect(button.props('importance')).toBe('outlined');
+        });
+
+        it('should not set active', () => {
+          expect(button.props('active')).toBe(false);
+        });
+      });
+
+      describe('When unselected', () => {
+        beforeEach(() => {
+          mockProvide = { groupContext: { ...MOCK_GROUP_CONTEXT, selected: '', kind: 'default', outlined: true } };
+          updateWrapper();
+          button = wrapper.findComponent({ name: 'DtButton' });
+        });
+
+        it('should not mute the kind', () => {
+          expect(button.props('kind')).toBe('default');
+        });
+
+        it('should set importance to clear', () => {
+          expect(button.props('importance')).toBe('clear');
+        });
+      });
+
+      it('should preserve muted kind when group kind is muted', () => {
+        mockProvide = { groupContext: { ...MOCK_GROUP_CONTEXT, selected: '', kind: 'muted', outlined: true } };
+        updateWrapper();
+
+        expect(wrapper.findComponent({ name: 'DtButton' }).props('kind')).toBe('muted');
+      });
+    });
+
+    describe('d-tab--is-selected class', () => {
+      it('should be present when default kind, not outlined, and selected', () => {
+        mockProvide = { groupContext: { ...MOCK_GROUP_CONTEXT, selected: MOCK_PANEL_ID, kind: 'default' } };
+        updateWrapper();
+
+        expect(tab.classes()).toContain('d-tab--is-selected');
+      });
+
+      it('should not be present when unselected', () => {
+        mockProvide = { groupContext: { ...MOCK_GROUP_CONTEXT, selected: '', kind: 'default' } };
+        updateWrapper();
+
+        expect(tab.classes()).not.toContain('d-tab--is-selected');
+      });
+
+      it('should not be present when outlined', () => {
+        mockProvide = { groupContext: { ...MOCK_GROUP_CONTEXT, selected: MOCK_PANEL_ID, kind: 'default', outlined: true } };
+        updateWrapper();
+
+        expect(tab.classes()).not.toContain('d-tab--is-selected');
+      });
+
+      it('should not be present when kind is muted', () => {
+        mockProvide = { groupContext: { ...MOCK_GROUP_CONTEXT, selected: MOCK_PANEL_ID, kind: 'muted' } };
+        updateWrapper();
+
+        expect(tab.classes()).not.toContain('d-tab--is-selected');
+      });
+    });
+  });
+
   describe('Interactivity Tests', () => {
-    describe('Selected state', () => {
-      it('tab classes should content selected class', () => {
-        mockProvide = { groupContext: { ...MOCK_GROUP_CONTEXT, selected: MOCK_PANEL_ID } };
-
-        updateWrapper();
-
-        expect(tab.classes(TAB_IMPORTANCE_MODIFIERS.selected)).toBe(true);
-      });
-    });
-
-    describe('Unselected state', () => {
-      it('tab classes should not content selected class', () => {
-        mockProvide = { groupContext: { ...MOCK_GROUP_CONTEXT, selected: '' } };
-
-        updateWrapper();
-
-        expect(tab.classes(TAB_IMPORTANCE_MODIFIERS.selected)).toBe(false);
-      });
-    });
-
     describe('Disabled state', () => {
       describe('Disabled by inject', () => {
-        it('should be disabled', () => {
+        beforeEach(() => {
           mockProvide = { groupContext: { ...MOCK_GROUP_CONTEXT, disabled: true } };
-
           updateWrapper();
+        });
 
-          expect(tab.attributes('disabled')).toBe('');
+        it('should have aria-disabled="true"', () => {
+          expect(tab.attributes('aria-disabled')).toBe('true');
+        });
+
+        it('should have d-btn--disabled class', () => {
+          expect(tab.classes()).toContain('d-btn--disabled');
+        });
+
+        it('should not have native disabled attribute', () => {
+          expect(tab.attributes('disabled')).toBeUndefined();
         });
       });
 
       describe('Disabled by prop', () => {
-        it('disabled attribute should be "true"', () => {
+        beforeEach(() => {
           mockProps = { disabled: true };
-
           updateWrapper();
+        });
 
-          expect(tab.attributes('disabled')).toBe('');
+        it('should have aria-disabled="true"', () => {
+          expect(tab.attributes('aria-disabled')).toBe('true');
+        });
+
+        it('should have d-btn--disabled class', () => {
+          expect(tab.classes()).toContain('d-btn--disabled');
+        });
+
+        it('should not have native disabled attribute', () => {
+          expect(tab.attributes('disabled')).toBeUndefined();
         });
       });
+    });
+  });
+
+  describe('Extendability Tests', () => {
+    describe('When leadingClass is provided', () => {
+      it('should apply custom class to the leading wrapper', () => {
+        mockProps = { leadingClass: 'custom-leading' };
+        mockSlots = { leading: 'Leading content' };
+
+        updateWrapper();
+
+        const leading = tab.find('.d-btn__leading');
+
+        expect(leading.exists()).toBe(true);
+        expect(leading.classes()).toContain('custom-leading');
+      });
+    });
+
+    describe('When trailingClass is provided', () => {
+      it('should apply custom class to the trailing wrapper', () => {
+        mockProps = { trailingClass: 'custom-trailing' };
+        mockSlots = { trailing: 'Trailing content' };
+
+        updateWrapper();
+
+        const trailing = tab.find('.d-btn__trailing');
+
+        expect(trailing.exists()).toBe(true);
+        expect(trailing.classes()).toContain('custom-trailing');
+      });
+    });
+
+    it.each([
+      ['leading', 'test-leading'],
+      ['trailing', 'test-trailing'],
+      ['startIcon', 'test-start-icon'],
+      ['endIcon', 'test-end-icon'],
+    ])('should render #%s slot through to tab button', (slotName, dataQa) => {
+      mockSlots = { [slotName]: `<span data-qa="${dataQa}">X</span>` };
+
+      updateWrapper();
+
+      expect(tab.find(`[data-qa="${dataQa}"]`).exists()).toBe(true);
+    });
+
+    it('should render deprecated #icon through to DtButton start-icon slot', () => {
+      mockSlots = { icon: '<span data-qa="test-icon">I</span>' };
+
+      updateWrapper();
+
+      expect(tab.find('[data-qa="test-icon"]').exists()).toBe(true);
+    });
+
+    it('should prefer #startIcon over deprecated #icon when both provided', () => {
+      mockSlots = {
+        startIcon: '<span data-qa="test-start-icon">S</span>',
+        icon: '<span data-qa="test-icon">I</span>',
+      };
+
+      updateWrapper();
+
+      expect(tab.find('[data-qa="test-start-icon"]').exists()).toBe(true);
+      expect(tab.find('[data-qa="test-icon"]').exists()).toBe(false);
     });
   });
 

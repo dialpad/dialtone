@@ -92,7 +92,7 @@ export const argTypesData = {
 
   kind: {
     control: 'select',
-    options: Object.keys(BUTTON_KIND_MODIFIERS),
+    options: Object.keys(BUTTON_KIND_MODIFIERS).filter(k => k !== 'inverted'),
   },
 
   size: {

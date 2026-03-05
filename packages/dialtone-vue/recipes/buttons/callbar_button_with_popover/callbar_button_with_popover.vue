@@ -18,7 +18,16 @@
       class="d-recipe-callbar-button-with-popover--main-button"
       @click="buttonClick"
     >
-      <template #icon>
+      <template
+        v-if="$slots.blockStartIcon"
+        #blockStartIcon
+      >
+        <slot name="blockStartIcon" />
+      </template>
+      <template
+        v-if="$slots.icon"
+        #icon
+      >
         <slot name="icon" />
       </template>
       <template #tooltip>
@@ -55,7 +64,7 @@
           width="2rem"
           @click="arrowClick"
         >
-          <template #icon>
+          <template #startIcon>
             <dt-icon-chevron-up
               class="d-recipe-callbar-button-with-popover__arrow-icon"
               size="200"

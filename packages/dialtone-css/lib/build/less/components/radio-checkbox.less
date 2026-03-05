@@ -91,6 +91,7 @@
 .d-radio-group {
     display: inline-flex;
     gap: var(--dt-size-400); // 8
+    vertical-align: top;
     cursor: pointer;
 }
 //  --  Wrapper Disabled State
@@ -135,7 +136,7 @@
 .d-radio__input {
     display: flex;
     align-self: flex-start;
-    padding-block-start: var(--dt-size-300);
+    padding-block-start: calc(var(--dt-size-300) + var(--dt-size-50));
 }
 
 
@@ -155,9 +156,15 @@
     flex: 1 auto;
     flex-direction: column;
     align-items: flex-start;
+    align-self: flex-end;
     color: var(--dt-color-foreground-primary);
-    font: var(--dt-typography-label-md-plain);
+    font: var(--dt-text-label-md);
+    font-weight: var(--dt-font-weight-normal);
     cursor: pointer;
+
+    &.d-text-label--sm {
+        margin-block-start: var(--dt-size-100); // sue me
+    }
 }
 
 .d-checkbox__messages,

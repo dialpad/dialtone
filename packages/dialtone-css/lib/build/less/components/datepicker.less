@@ -32,7 +32,7 @@
 
   &__month-year-title {
     font-weight: var(--dt-font-weight-normal);
-    font-size: var(--dt-font-size-100);
+    font-size: var(--dt-font-size-150);
     line-height: var(--dt-font-line-height-300);
     text-transform: uppercase;
   }
@@ -40,11 +40,6 @@
   &__nav-btn {
     inline-size: var(--datepicker-button-size);
     block-size: var(--datepicker-button-size);
-
-    &:disabled {
-      background-color: var(--dt-color-neutral-transparent);
-      opacity: var(--dt-opacity-900);
-    }
   }
 
   &__weekday {
@@ -77,11 +72,6 @@
     &--selected {
       color: var(--dt-action-color-foreground-base-primary-default);
       background: var(--dt-action-color-background-base-primary-default);
-    }
-
-    &--disabled {
-      background-color: var(--dt-color-neutral-transparent);
-      opacity: var(--dt-opacity-900);
     }
   }
 }

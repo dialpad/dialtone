@@ -813,6 +813,49 @@ describe('DtButton Tests', () => {
     });
   });
 
+  describe('Leading and trailing slots', () => {
+    it('should render leading when provided', () => {
+      mockSlots = { leading: '<span data-qa="test-leading">L</span>' };
+
+      updateWrapper();
+
+      expect(wrapper.find('[data-qa="test-leading"]').exists()).toBe(true);
+    });
+
+    it('should render trailing when provided', () => {
+      mockSlots = { trailing: '<span data-qa="test-trailing">T</span>' };
+
+      updateWrapper();
+
+      expect(wrapper.find('[data-qa="test-trailing"]').exists()).toBe(true);
+    });
+
+    it('should apply leadingClass to the leading wrapper', () => {
+      mockProps = { leadingClass: 'my-leading' };
+      mockSlots = { leading: '<span>L</span>' };
+
+      updateWrapper();
+
+      expect(wrapper.find('.d-btn__leading').classes()).toContain('my-leading');
+    });
+
+    it('should apply trailingClass to the trailing wrapper', () => {
+      mockProps = { trailingClass: 'my-trailing' };
+      mockSlots = { trailing: '<span>T</span>' };
+
+      updateWrapper();
+
+      expect(wrapper.find('.d-btn__trailing').classes()).toContain('my-trailing');
+    });
+
+    it('should not render leading or trailing by default', () => {
+      updateWrapper();
+
+      expect(wrapper.find('[data-qa="test-leading"]').exists()).toBe(false);
+      expect(wrapper.find('[data-qa="test-trailing"]').exists()).toBe(false);
+    });
+  });
+
   describe('Accessibility Tests', () => {
     describe('When assertiveOnFocus is true', () => {
       beforeEach(async () => {

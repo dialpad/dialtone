@@ -47,7 +47,7 @@
       :tabindex="disabled ? -1 : null"
       @click="$emit('close')"
     >
-      <template #icon>
+      <template #startIcon>
         <dt-icon-close
           :size="closeButtonIconSize"
         />

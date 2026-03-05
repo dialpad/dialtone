@@ -53,6 +53,9 @@ export const argTypesData = {
       type: { summary: 'event' },
     },
   },
+  inverted: {
+    table: { disable: true },
+  },
 };
 
 // Story Collection
