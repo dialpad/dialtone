@@ -373,6 +373,14 @@ export default {
     },
 
     /**
+     * Whether the input allows background color to be introduced in the text.
+     */
+    allowBackgroundColor: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
      * Whether the input allows font size to be introduced in the text.
      */
     allowFontSize: {
@@ -384,6 +392,14 @@ export default {
      * Whether the input allows different font-families to be introduced in the text.
      */
     allowFontFamily: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Whether the input allows line height to be introduced in the text.
+     */
+    allowLineHeight: {
       type: Boolean,
       default: false,
     },
@@ -898,13 +914,17 @@ export default {
         }));
       }
 
-      if (this.allowFontFamily || this.allowFontColor || this.allowFontSize) {
+      if (this.allowFontFamily ||
+        this.allowFontColor ||
+        this.allowFontSize ||
+        this.allowBackgroundColor ||
+        this.allowLineHeight) {
         extensions.push(TextStyleKit.configure({
           color: this.allowFontColor,
-          backgroundColor: false,
+          backgroundColor: this.allowBackgroundColor,
           fontFamily: this.allowFontFamily,
           fontSize: this.allowFontSize,
-          lineHeight: false,
+          lineHeight: this.allowLineHeight,
         }));
       }
 
