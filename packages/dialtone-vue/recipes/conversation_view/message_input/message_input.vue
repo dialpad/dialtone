@@ -179,6 +179,8 @@
           <slot name="emojiGiphyPicker" />
           <!-- @slot Slot to add extra action icons next to default ones -->
           <slot name="customActionIcons" />
+          <!-- @slot Slot for message polish -->
+          <slot name="messagePolish" />
         </dt-stack>
       </div>
       <!-- Right content -->

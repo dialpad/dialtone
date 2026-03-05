@@ -10,4 +10,9 @@ if ! git diff --staged --quiet packages/dialtone-icons/src; then
   git add packages/dialtone-icons/src/keywords-*;
 fi
 
+if ! git diff --staged --quiet .vscode/extensions.json; then
+  echo "Syncing devcontainer extensions from extensions.json..."
+  node scripts/sync-vscode-extensions.mjs
+fi
+
 pnpm exec lint-staged --relative
