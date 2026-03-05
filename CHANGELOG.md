@@ -1,3 +1,21 @@
+# [9.164.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.164.0-next.1...dialtone/v9.164.0-next.2) (2026-03-05)
+
+
+### Bug Fixes
+
+* **Stylelint:** disable hue-degree-notation rule and update OKLCH color syntax ([81f886e](https://github.com/dialpad/dialtone/commit/81f886ef2d939d616bbf1a854acb6ea7446d4060))
+* **Stylelint:** disable hue-degree-notation rule and update OKLCH color syntax ([8721f43](https://github.com/dialpad/dialtone/commit/8721f430790cf78830b2fb5ef7b8cbd9cd0b9346))
+
+
+### Code Refactoring
+
+* **Combobox Multi Select:** NO-JIRA use logical css properties ([#1104](https://github.com/dialpad/dialtone/issues/1104)) ([a675daf](https://github.com/dialpad/dialtone/commit/a675daf9453c62afd3dd340cd0b75908aebcd176))
+
+
+### Documentation
+
+* DLT-2908 ui kits landing page ([#1049](https://github.com/dialpad/dialtone/issues/1049)) ([d805b9d](https://github.com/dialpad/dialtone/commit/d805b9dd876bd86534042c4fbc7f5960efbc477e))
+
 # [9.164.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.163.0...dialtone/v9.164.0-next.1) (2026-03-02)
 
 
