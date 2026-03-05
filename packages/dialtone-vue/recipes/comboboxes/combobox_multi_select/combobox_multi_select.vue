@@ -705,9 +705,9 @@ export default {
       // input.style.paddingLeft = left + 'px';
 
       if (spaceLeft > this.reservedRightSpace) {
-        input.style.paddingLeft = left + 'px';
+        input.style.paddingInlineStart = left + 'px';
       } else {
-        input.style.paddingLeft = '4px';
+        input.style.paddingInlineStart = '4px';
       }
 
       // Get the chip wrapper height minus the 4px padding
@@ -719,13 +719,13 @@ export default {
         ? lastChip.offsetTop + 2
         : (chipsWrapperHeight + lastChipHeight - 9);
 
-      input.style.paddingTop = `${top}px`;
+      input.style.paddingBlockStart = `${top}px`;
     },
 
     revertInputPadding (input) {
-      input.style.paddingLeft = '';
-      input.style.paddingTop = '';
-      input.style.paddingBottom = '';
+      input.style.paddingInlineStart = '';
+      input.style.paddingBlockStart = '';
+      input.style.paddingBlockEnd = '';
     },
 
     getFullWidth (el) {
