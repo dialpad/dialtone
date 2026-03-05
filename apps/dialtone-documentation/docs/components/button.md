@@ -128,27 +128,6 @@ vueCode='
 '
 showHtmlWarning />
 
-### Inverted
-
-The inverted button style is used to visually separate buttons set on darker backgrounds.
-
-<code-well-header bgclass="d-bgc-contrast">
-  <dt-stack direction="row" gap="400" ref="invertedExample">
-    <dt-button kind="inverted"> Place Call </dt-button>
-    <dt-button kind="inverted" importance="outlined"> Place Call </dt-button>
-    <dt-button kind="inverted" importance="clear"> Place Call </dt-button>
-  </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.invertedExample'
-vueCode='
-<dt-button kind="inverted"> Place Call </dt-button>
-<dt-button kind="inverted" importance="outlined"> Place Call </dt-button>
-<dt-button kind="inverted" importance="clear"> Place Call </dt-button>
-'
-showHtmlWarning />
-
 ### Muted
 
 The muted button style is used to communicate non-primary actions for contexts in which the base style may not work
@@ -172,8 +151,40 @@ showHtmlWarning />
 
 ### Disabled
 
-Buttons can be disabled using either the `disabled` attribute or a Dialtone class. Use the attribute when a button should appear disabled and not recieve focus; use the class when a button should appear disabled but still recieve focus (i.e. a disabled button with a tooltip). Using the class also requires `aria-disabled` and a wrapper to display the "not allowed" pointer. Additional javascript implementation is required to prevent the click event.
-All button styles and variations appear the same when disabled.
+<code-well-header>
+  <dt-toggle v-model="isDisabled" size="sm" wrapperClass="d-g8 d-m-auto d-pb8">Disabled</dt-toggle>
+  <dt-stack gap="400" ref="disabledAll">
+    <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+      <dt-button :disabled="isDisabled"> Place Call </dt-button>
+      <dt-button :disabled="isDisabled" importance="outlined"> Place Call </dt-button>
+      <dt-button :disabled="isDisabled" importance="clear"> Place Call </dt-button>
+    </dt-stack>
+    <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+      <dt-button :disabled="isDisabled" kind="danger"> Place Call </dt-button>
+      <dt-button :disabled="isDisabled" kind="danger" importance="outlined"> Place Call </dt-button>
+      <dt-button :disabled="isDisabled" kind="danger" importance="clear"> Place Call </dt-button>
+    </dt-stack>
+    <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+      <dt-button :disabled="isDisabled" kind="positive">Place Call</dt-button>
+      <dt-button :disabled="isDisabled" kind="positive" importance="outlined">Place Call</dt-button>
+      <dt-button :disabled="isDisabled" kind="positive" importance="clear">Place Call</dt-button>
+    </dt-stack>
+    <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+      <dt-button :disabled="isDisabled" kind="muted" importance="clear"> Place Call </dt-button>
+      <dt-button :disabled="isDisabled" kind="muted" importance="outlined"> Place Call </dt-button>
+    </dt-stack>
+  </dt-stack>
+</code-well-header>
+<code-example-tabs
+:htmlCode='() => $refs.disabledAll'
+vueCode='
+<dt-button disabled {props}>Place Call</dt-button>
+'
+showHtmlWarning />
+
+Buttons can be disabled using the `disabled` attribute or the Dialtone class, `d-btn--disabled`. Use the attribute when a button should appear disabled and not receive focus; use the class when a button should appear disabled but still receive focus (i.e. a disabled button with a tooltip).
+
+Using the class also requires `aria-disabled`, and additional javascript implementation is required to prevent events.
 
 <code-well-header>
   <dt-stack
@@ -185,8 +196,8 @@ All button styles and variations appear the same when disabled.
       <dt-button disabled>Place Call (disabled attribute)</dt-button>
     </span>
     <span>
-      <span class="d-c-not-allowed">
-        <dt-button class="d-btn--disabled">Place Call (disabled class)</dt-button>
+      <span v-dt-tooltip="`Tooltip example`">
+        <dt-button class="d-btn--disabled" aria-disabled="true">Place Call (disabled class)</dt-button>
       </span>
     </span>
   </dt-stack>
@@ -198,8 +209,8 @@ vueCode='
 <!-- disabled attribute -->
 <dt-button disabled>Place Call</dt-button>
 <!-- disabled class -->
-<span class="d-c-not-allowed">
-  <dt-button class="d-btn--disabled">Place Call</dt-button>
+<span v-dt-tooltip="`Tooltip example`">
+  <dt-button class="d-btn--disabled" aria-disabled="true">Place Call (disabled class)</dt-button>
 </span>
 '
 showHtmlWarning />
@@ -419,9 +430,17 @@ vueCode='
 '
 />
 
-## Split Button
+### Inverted
 
-The [Split Button](split-button.md) is its own component containing multiple buttons.
+<dt-notice
+  title="Deprecated"
+  kind="error"
+  class="d-wmx100p d-my16"
+>
+  <code>kind="inverted"</code> has been deprecated in favor of using <router-link to="mode-island.html"> <DtLink>DtModeIsland</DtLink> </router-link> as a wrapper.
+</dt-notice>
+
+In place of <code>kind="inverted"</code>, use the <router-link to="mode-island.html"> <DtLink>DtModeIsland</DtLink> </router-link> component as a wrapper.
 
 <code-well-header>
   <dt-split-button
@@ -435,6 +454,15 @@ The [Split Button](split-button.md) is its own component containing multiple but
     </template>
   </dt-split-button>
 </code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.modeIslandExample'
+vueCode='
+<dt-mode-island>
+  <dt-button {props}>Place Call</dt-button>
+</dt-mode-island>
+'
+showHtmlWarning />
 
 ## Sizes
 
@@ -1222,6 +1250,91 @@ vueCode='
 '
 showHtmlWarning />
 
+## Leading & Trailing
+
+Use the `#leading` and `#trailing` slots to render freeform content at the start or end of a button — outside the label area but inside the button's border. Common use cases include badges, count indicators, or keyboard shortcut hints. Use `leading-class` and `trailing-class` to add padding or styling to the slot containers.
+
+<dt-notice
+  kind="info"
+  title="Info"
+>
+  This is not to be confused with `#icon` slots, which are specifically for icons. `leading` and `trailing` are essentially freeform.
+</dt-notice>
+
+### Leading
+
+<code-well-header>
+  <dt-button kind="muted" importance="outlined" leading-class="d-pl12" ref="leadingExample">
+    Caution
+    <template #leading>
+      <span class="d-bgc-critical-strong d-bar4 d-w12 d-h12"></span>
+    </template>
+  </dt-button>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.leadingExample'
+vueCode='
+<dt-button kind="muted" importance="outlined" leading-class="d-pl12">
+  Caution
+  <template #leading>
+    <span class="d-bgc-critical-strong d-bar4 d-w12 d-h12"></span>
+  </template>
+</dt-button>
+'
+showHtmlWarning />
+
+### Trailing
+
+<code-well-header>
+  <dt-button size="sm" kind="muted" importance="outlined" trailing-class="d-pr2" ref="trailingExample">
+    Copy
+    <template #icon="{ iconSize }">
+      <dt-icon name="copy" :size="iconSize" />
+    </template>
+    <template #trailing>
+      <dt-keyboard-shortcut shortcut="{cmd}+C" />
+    </template>
+  </dt-button>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.trailingExample'
+vueCode='
+<dt-button size="sm" kind="muted" importance="outlined" trailing-class="d-pr2">
+  Copy
+  <template #icon="{ iconSize }">
+    <dt-icon name="copy" :size="iconSize" />
+  </template>
+  <template #trailing>
+    <dt-keyboard-shortcut shortcut="{cmd}+C" />
+  </template>
+</dt-button>
+'
+showHtmlWarning />
+
+## Split Button
+
+<dt-notice
+  kind="info"
+  class="d-wmx100p d-my16"
+>
+  <router-link to="split-button.html"> <DtLink>DtSplitButton</DtLink> </router-link> is its own component containing multiple DtButtons.
+</dt-notice>
+
+<code-well-header>
+  <dt-split-button
+    omega-tooltip-text="More calling options"
+  >
+    Place call
+    <template #dropdownList>
+      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>
+      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item>
+      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>
+    </template>
+  </dt-split-button>
+</code-well-header>
+
 ## Branded
 
 We provide the following branded buttons for log-in and sign-up workflows.
@@ -1274,5 +1387,8 @@ We provide the following branded buttons for log-in and sign-up workflows.
 <component-class-table component-name="button"></component-class-table>
 
 <script setup>
+import { ref } from 'vue';
 import ButtonVariantsTable from '@baseComponents/ButtonVariantsTable.vue';
+
+const isDisabled = ref(true);
 </script>

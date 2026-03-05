@@ -1,0 +1,60 @@
+//
+//  DIALTONE
+//  COMPONENTS: PROGRESS CIRCLE
+//
+//  https://dialtone.dialpad.com/components/progress-circle
+
+@layer dialtone.components {
+.d-progress-circle {
+  --progress-size: var(--dt-icon-size-500);
+  --progress-color: var(--dt-color-border-bold);
+  --progress-size-stroke: 3.25;
+
+  block-size: var(--progress-size);
+  inline-size: var(--progress-size);
+
+  &--size-100 { --progress-size: var(--dt-icon-size-100); }
+  &--size-200 { --progress-size: var(--dt-icon-size-200); }
+  &--size-300 { --progress-size: var(--dt-icon-size-300); }
+  &--size-400 { --progress-size: var(--dt-icon-size-400); }
+  &--size-500 { --progress-size: var(--dt-icon-size-500); }
+  &--size-600 { --progress-size: var(--dt-icon-size-600); }
+  &--size-700 { --progress-size: var(--dt-icon-size-700); }
+  &--size-800 { --progress-size: var(--dt-icon-size-800); }
+
+  &--brand { --progress-color: var(--dt-color-border-brand); }
+  &--critical { --progress-color: var(--dt-color-border-critical); }
+  &--positive { --progress-color: var(--dt-color-border-success); }
+  &--warning { --progress-color: var(--dt-color-border-warning); }
+  // AI fill gradient is an SVG <linearGradient> applied in the Vue component;
+  // the track intentionally keeps the default border color.
+  &--ai { --progress-color: var(--dt-color-border-bold); }
+  &--info { --progress-color: var(--dt-color-blue-600); } // TODO: I still have to create "info" design tokens
+}
+
+.d-progress-circle__bar {
+  display: block;
+  block-size: 100%;
+  inline-size: 100%;
+}
+
+.d-progress-circle__shape {
+  &--track {
+    transition: stroke-dasharray var(--td200) linear, stroke-dashoffset var(--td200) linear;
+    stroke: color-mix(in oklch, var(--progress-color) 25%, var(--dt-color-surface-primary));
+    stroke-dasharray: var(--track-dasharray);
+    stroke-dashoffset: var(--track-dashoffset);
+    stroke-linecap: round;
+  }
+
+  &--fill {
+    transform: rotate(var(--fill-rotate));
+    transform-origin: center;
+    transition: stroke-dashoffset var(--td200) linear;
+    stroke: var(--progress-color);
+    stroke-dasharray: var(--stroke-dasharray);
+    stroke-dashoffset: var(--fill-dashoffset);
+    stroke-linecap: round;
+  }
+}
+}

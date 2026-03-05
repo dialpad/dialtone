@@ -12,9 +12,16 @@
     v-bind="computedAttrs"
     v-on="computedListeners"
   >
+    <span
+      v-if="hasSlotContent($slots.leading)"
+      :class="['d-btn__leading', leadingClass]"
+    >
+      <!-- @slot Optional leading content at the start of the button, such as badges or indicators -->
+      <slot name="leading" />
+    </span>
     <!-- NEW: Block-start icon slot (above label) -->
     <span
-      v-if="hasBlockStartIcon"
+      v-if="hasSlotContent($slots.blockStartIcon)"
       data-qa="dt-button-block-start-icon"
       :class="[
         'base-button__icon',
@@ -32,7 +39,7 @@
     </span>
     <!-- NEW: Start icon slot -->
     <span
-      v-if="hasStartIcon"
+      v-if="hasSlotContent($slots.startIcon)"
       data-qa="dt-button-start-icon"
       :class="[
         'base-button__icon',
@@ -80,7 +87,7 @@
     </span>
     <!-- NEW: End icon slot -->
     <span
-      v-if="hasEndIcon"
+      v-if="hasSlotContent($slots.endIcon)"
       data-qa="dt-button-end-icon"
       :class="[
         'base-button__icon',
@@ -98,7 +105,7 @@
     </span>
     <!-- NEW: Block-end icon slot (below label) -->
     <span
-      v-if="hasBlockEndIcon"
+      v-if="hasSlotContent($slots.blockEndIcon)"
       data-qa="dt-button-block-end-icon"
       :class="[
         'base-button__icon',
@@ -113,6 +120,13 @@
         name="blockEndIcon"
         :icon-size="iconSize"
       />
+    </span>
+    <span
+      v-if="hasSlotContent($slots.trailing)"
+      :class="['d-btn__trailing', trailingClass]"
+    >
+      <!-- @slot Optional trailing content at the end of the button, such as badges or indicators -->
+      <slot name="trailing" />
     </span>
   </component>
 </template>
@@ -200,6 +214,7 @@ export default {
      * Determines whether the link should have inverted styling if the button is styled as a link.
      * @values true, false
      * @see DtLink
+     * @ignore
      */
     linkInverted: {
       type: Boolean,
@@ -265,6 +280,22 @@ export default {
     },
 
     /**
+     * Used to customize the leading container
+     */
+    leadingClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Used to customize the trailing container
+     */
+    trailingClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
      * Whether the button should display a loading animation or not.
      * @values true, false
      */
@@ -275,7 +306,7 @@ export default {
 
     /**
      * The color of the button.
-     * @values default, unstyled, muted, danger, positive, inverted
+     * @values default, unstyled, muted, danger, positive
      */
     kind: {
       type: String,
@@ -457,25 +488,6 @@ export default {
       return BUTTON_ICON_SIZES[this.size];
     },
 
-    hasStartIcon () {
-      return hasSlotContent(this.$slots.startIcon);
-    },
-
-    hasEndIcon () {
-      return hasSlotContent(this.$slots.endIcon);
-    },
-
-    hasBlockStartIcon () {
-      return hasSlotContent(this.$slots.blockStartIcon);
-    },
-
-    hasBlockEndIcon () {
-      return hasSlotContent(this.$slots.blockEndIcon);
-    },
-
-    hasNewIconSlots () {
-      return this.hasStartIcon || this.hasEndIcon || this.hasBlockStartIcon || this.hasBlockEndIcon;
-    },
   },
 
   watch: {
@@ -546,18 +558,38 @@ export default {
       return true;
     },
 
+    hasStartIcon () {
+      return hasSlotContent(this.$slots.startIcon);
+    },
+
+    hasEndIcon () {
+      return hasSlotContent(this.$slots.endIcon);
+    },
+
+    hasBlockStartIcon () {
+      return hasSlotContent(this.$slots.blockStartIcon);
+    },
+
+    hasBlockEndIcon () {
+      return hasSlotContent(this.$slots.blockEndIcon);
+    },
+
+    hasNewIconSlots () {
+      return this.hasStartIcon() || this.hasEndIcon() || this.hasBlockStartIcon() || this.hasBlockEndIcon();
+    },
+
     shouldRenderLegacyIcon () {
-      return hasSlotContent(this.$slots.icon) && !this.hasNewIconSlots && !this.link;
+      return hasSlotContent(this.$slots.icon) && !this.hasNewIconSlots() && !this.link;
     },
 
     isIconOnly () {
-      return (this.hasNewIconSlots || this.shouldRenderLegacyIcon()) && !hasSlotContent(this.$slots.default);
+      return (this.hasNewIconSlots() || this.shouldRenderLegacyIcon()) && !hasSlotContent(this.$slots.default);
     },
 
     isVerticalIconLayout () {
       if (this.isIconOnly()) return false;
-      if (this.hasBlockStartIcon || this.hasBlockEndIcon) return true;
-      return !this.hasNewIconSlots && ['top', 'bottom'].includes(this.iconPosition);
+      if (this.hasBlockStartIcon() || this.hasBlockEndIcon()) return true;
+      return !this.hasNewIconSlots() && ['top', 'bottom'].includes(this.iconPosition);
     },
   },
 };

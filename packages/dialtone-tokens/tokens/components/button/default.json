@@ -8,7 +8,7 @@
           "description": "Extra small Button text size"
         },
         "sm": {
-          "value": "{font.size.100}",
+          "value": "{font.size.125}",
           "type": "dimension",
           "description": "Small Button text size"
         },
@@ -23,7 +23,7 @@
           "description": "Large Button text size"
         },
         "xl": {
-          "value": "{font.size.400}",
+          "value": "{font.size.350}",
           "type": "dimension",
           "description": "Extra large Button text size"
         }
@@ -40,7 +40,7 @@
           "description": "Font weight for SM button"
         },
         "md": {
-          "value": "{font.weight.semiBold}",
+          "value": "{font.weight.medium}",
           "type": "fontWeight",
           "description": "Font weight for MD button"
         },
@@ -63,7 +63,7 @@
         "description": "Line-height for XS button"
       },
       "sm": {
-        "value": "{font.lineHeight.200}",
+        "value": "{font.lineHeight.300}",
         "type": "dimension",
         "description": "Line-height for SM button"
       },
@@ -91,7 +91,7 @@
           "description": "Border radius for extra small button"
         },
         "sm": {
-          "value": "{size.radius.400}",
+          "value": "{size.radius.350}",
           "type": "dimension",
           "description": "Border radius for small button"
         },

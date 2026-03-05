@@ -46,6 +46,7 @@ export * from './components/mode_island';
 export * from './components/notice';
 export * from './components/pagination';
 export * from './components/popover';
+export * from './components/progress_circle';
 export * from './components/presence';
 export * from './components/radio';
 export * from './components/radio_group';

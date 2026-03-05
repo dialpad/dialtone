@@ -46,6 +46,15 @@ export const Variable = Node.create({
           };
         },
       },
+      enableAltText: {
+        default: true,
+        parseHTML: element => element.getAttribute('data-enable-alt-text') === 'true',
+        renderHTML: attributes => {
+          return {
+            'data-enable-alt-text': String(attributes.enableAltText),
+          };
+        },
+      },
     };
   },
 
@@ -67,6 +76,7 @@ export const Variable = Node.create({
       mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {
         'data-variable-id': node.attrs.id,
         'data-alt-text': node.attrs.altText,
+        'data-enable-alt-text': String(node.attrs.enableAltText),
       }),
     ];
   },
@@ -79,6 +89,7 @@ export const Variable = Node.create({
           attrs: {
             id: options.id || null,
             altText: options.altText || '',
+            enableAltText: options.enableAltText,
           },
         });
       },

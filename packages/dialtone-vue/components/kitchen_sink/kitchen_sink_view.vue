@@ -254,6 +254,6 @@ onMounted(async () => {
 
 <style scoped>
 .kitchen-sink__section {
-  scroll-margin-top: var(--dt-size-750);
+  scroll-margin-block-start: var(--dt-size-750);
 }
 </style>

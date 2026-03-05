@@ -310,6 +310,70 @@ describe('DtRichTextEditor tests', () => {
             expect(output).toBe('This has **bold**, *italic*, ~~strikethrough~~, and a [link](https://example.com).\n');
           });
 
+          it('should handle text with font size applied', async () => {
+            await wrapper.setProps({ allowFontSize: true, outputFormat: 'html' });
+
+            const jsonInput = jsonInputBase([{
+              type: 'text',
+              text: 'Large text',
+              marks: [{ type: 'textStyle', attrs: { fontSize: '20px' } }],
+            }]);
+            
+            // Set content directly to editor
+            wrapper.vm.editor.commands.setContent(jsonInput);
+            await wrapper.vm.$nextTick();
+            
+            const output = wrapper.vm.getOutput();
+            expect(output).toContain('font-size: 20px');
+          });
+
+          it('should handle text with font color applied', async () => {
+            await wrapper.setProps({ allowFontColor: true, outputFormat: 'html' });
+
+            const jsonInput = jsonInputBase([{
+              type: 'text',
+              text: 'Colored text',
+              marks: [{ type: 'textStyle', attrs: { color: '#ff0000' } }],
+            }]);
+            
+            // Set content directly to editor
+            wrapper.vm.editor.commands.setContent(jsonInput);
+            await wrapper.vm.$nextTick();
+            
+            const output = wrapper.vm.getOutput();
+            // TipTap converts hex colors to RGB format
+            expect(output).toContain('color: rgb(255, 0, 0)');
+          });
+
+          it('should handle text with multiple text styles applied', async () => {
+            await wrapper.setProps({ 
+              allowFontSize: true, 
+              allowFontColor: true,
+              outputFormat: 'html', 
+            });
+
+            const jsonInput = jsonInputBase([{
+              type: 'text',
+              text: 'Styled text',
+              marks: [{ 
+                type: 'textStyle', 
+                attrs: { 
+                  fontSize: '18px',
+                  color: '#0000ff',
+                }, 
+              }],
+            }]);
+            
+            // Set content directly to editor
+            wrapper.vm.editor.commands.setContent(jsonInput);
+            await wrapper.vm.$nextTick();
+            
+            const output = wrapper.vm.getOutput();
+            expect(output).toContain('font-size: 18px');
+            // TipTap converts hex colors to RGB format
+            expect(output).toContain('color: rgb(0, 0, 255)');
+          });
+
           it('should handle nested formatting correctly', async () => {
             await wrapper.setProps({
                 allowBold: true,
@@ -677,6 +741,137 @@ describe('DtRichTextEditor tests', () => {
           const output = wrapper.vm.getOutput();
           // Check that single line breaks are converted to paragraphs (default TipTap behavior)
           expect(output).toBe('<p>Line 1</p><p>Line 2</p><p>Line 3</p>');
+        });
+      });
+    });
+
+    describe('Font styling tests', () => {
+      describe('When font size is enabled', () => {
+        beforeEach(async () => {
+          await wrapper.setProps({ 
+            allowFontSize: true,
+            outputFormat: 'html',
+            modelValue: 'Test text',
+          });
+        });
+
+        it('should preserve font size when pasting styled content', async () => {
+          // Remount with proper props for font size and rich text pasting
+          wrapper.unmount();
+          props = {
+            ...baseProps,
+            pasteRichText: true,
+            allowFontSize: true,
+            outputFormat: 'html',
+            modelValue: '',
+          };
+          _mountWrapper();
+          await wrapper.vm.$nextTick();
+          _setChildWrappers();
+          
+          const htmlContent = '<span style="font-size: 24px;">Large text</span>';
+          const textContent = 'Large text';
+          
+          const clipboardData = new DataTransfer();
+          clipboardData.setData('text/html', htmlContent);
+          clipboardData.setData('text/plain', textContent);
+
+          const pasteEvent = new ClipboardEvent('paste', {
+            clipboardData,
+            bubbles: true,
+            cancelable: true,
+          });
+
+          editorEl.dispatchEvent(pasteEvent);
+          await wrapper.vm.$nextTick();
+
+          const output = wrapper.vm.getOutput();
+          expect(output).toContain('font-size');
+        });
+      });
+
+      describe('When font color is enabled', () => {
+        beforeEach(async () => {
+          await wrapper.setProps({ 
+            allowFontColor: true,
+            outputFormat: 'html',
+            modelValue: 'Test text',
+          });
+        });
+
+        it('should preserve font color when pasting styled content', async () => {
+          // Remount with proper props for font color and rich text pasting
+          wrapper.unmount();
+          props = {
+            ...baseProps,
+            pasteRichText: true,
+            allowFontColor: true,
+            outputFormat: 'html',
+            modelValue: '',
+          };
+          _mountWrapper();
+          await wrapper.vm.$nextTick();
+          _setChildWrappers();
+          
+          const htmlContent = '<span style="color: rgb(255, 0, 0);">Red text</span>';
+          const textContent = 'Red text';
+          
+          const clipboardData = new DataTransfer();
+          clipboardData.setData('text/html', htmlContent);
+          clipboardData.setData('text/plain', textContent);
+
+          const pasteEvent = new ClipboardEvent('paste', {
+            clipboardData,
+            bubbles: true,
+            cancelable: true,
+          });
+
+          editorEl.dispatchEvent(pasteEvent);
+          await wrapper.vm.$nextTick();
+
+          const output = wrapper.vm.getOutput();
+          expect(output).toContain('color');
+        });
+      });
+
+      describe('When both font size and color are enabled', () => {
+        beforeEach(async () => {
+          await wrapper.setProps({ 
+            allowFontSize: true,
+            allowFontColor: true,
+            outputFormat: 'json',
+            modelValue: '',
+          });
+        });
+
+        it('should handle combined font styles in JSON output', async () => {
+          const content = {
+            type: 'doc',
+            content: [{
+              type: 'paragraph',
+              content: [{
+                type: 'text',
+                text: 'Styled text',
+                marks: [{
+                  type: 'textStyle',
+                  attrs: {
+                    fontSize: '16px',
+                    color: '#0000ff',
+                  },
+                }],
+              }],
+            }],
+          };
+
+          wrapper.vm.editor.commands.setContent(content);
+          await wrapper.vm.$nextTick();
+
+          const jsonOutput = wrapper.vm.getOutput();
+          const textNode = jsonOutput.content[0].content[0];
+          expect(textNode.marks).toBeDefined();
+          expect(textNode.marks[0].type).toBe('textStyle');
+          expect(textNode.marks[0].attrs.fontSize).toBe('16px');
+          expect(textNode.marks[0].attrs.color).toBe('#0000ff');
         });
       });
     });

@@ -9,12 +9,7 @@
       </p>
       <dt-tab-group
         v-bind="variant.propsToBind"
-        :class="[
-          'd-mb8',
-          {
-            'd-bgc-contrast d-p2': variant.propsToBind.inverted,
-          },
-        ]"
+        class="d-mb8"
       >
         <template #tabs>
           <dt-tab
@@ -39,11 +34,7 @@
           </dt-tab>
         </template>
 
-        <div
-          :class="{
-            'd-fc-primary-inverted': variant.propsToBind.inverted,
-          }"
-        >
+        <div>
           <dt-tab-panel
             :id="`${i}2`"
             :tab-id="`${i}1`"
@@ -82,12 +73,6 @@ export default {
         {
           description: 'Default tabs',
           propsToBind: {},
-        },
-        {
-          description: 'Inverted tabs',
-          propsToBind: {
-            inverted: true,
-          },
         },
         {
           description: 'Small size tabs',

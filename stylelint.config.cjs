@@ -39,6 +39,7 @@ module.exports = {
     'no-descending-specificity': null, // turn off for now, descending cases could be fixed on the last refactoring
     'function-calc-no-unspaced-operator': null, // otherwise it will be an error during build
     'alpha-value-notation': 'number',
+    'hue-degree-notation': null,
 
     // override stylelint-config-standard rules
     'color-function-notation': null,

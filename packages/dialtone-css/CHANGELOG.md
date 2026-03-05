@@ -1,3 +1,15 @@
+# [8.74.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.74.0-next.1...dialtone-css/v8.74.0-next.2) (2026-03-05)
+
+
+### Bug Fixes
+
+* **Stylelint:** disable hue-degree-notation rule and update OKLCH color syntax ([81f886e](https://github.com/dialpad/dialtone/commit/81f886ef2d939d616bbf1a854acb6ea7446d4060))
+
+
+### Documentation
+
+* DLT-2908 ui kits landing page ([#1049](https://github.com/dialpad/dialtone/issues/1049)) ([d805b9d](https://github.com/dialpad/dialtone/commit/d805b9dd876bd86534042c4fbc7f5960efbc477e))
+
 # [8.74.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.73.0...dialtone-css/v8.74.0-next.1) (2026-03-02)
 
 

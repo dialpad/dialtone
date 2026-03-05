@@ -2,29 +2,80 @@
   <dt-button
     :id="`dt-tab-${id}`"
     :class="[
-      'd-tab',
-      {
-        [TAB_IMPORTANCE_MODIFIERS.selected]: isSelected,
-      },
       tabClass,
+      { 'd-btn--disabled': isDisabled },
+      { 'd-tab--is-selected': !groupContext.outlined && groupContext.kind !== 'muted' && isSelected },
     ]"
+    :importance="buttonImportance"
+    :kind="buttonKind"
+    :active="buttonActive"
+    :size="buttonSize"
     role="tab"
     :aria-selected="`${isSelected}`"
     :aria-controls="`dt-panel-${panelId}`"
     :aria-label="label"
+    :aria-disabled="isDisabled ? 'true' : undefined"
+    :label-class="labelClass"
+    :leading-class="leadingClass"
+    :trailing-class="trailingClass"
     data-qa="dt-tab"
     :tabindex="isSelected ? '0' : '-1'"
-    :disabled="groupContext.disabled || disabled"
     v-bind="$attrs"
     v-on="tabListeners"
   >
+    <!-- @slot Icon displayed at the start (left in LTR) of the tab -->
+    <template
+      v-if="$slots.startIcon"
+      #startIcon="{ iconSize }"
+    >
+      <slot
+        name="startIcon"
+        :icon-size="iconSize"
+      />
+    </template>
+    <!-- @slot @deprecated Use startIcon -->
+    <template
+      v-else-if="$slots.icon"
+      #startIcon="{ iconSize }"
+    >
+      <slot
+        name="icon"
+        :icon-size="iconSize"
+      />
+    </template>
+    <!-- @slot Icon displayed at the end (right in LTR) of the tab -->
+    <template
+      v-if="$slots.endIcon"
+      #endIcon="{ iconSize }"
+    >
+      <slot
+        name="endIcon"
+        :icon-size="iconSize"
+      />
+    </template>
+    <template
+      v-if="$slots.leading"
+      #leading
+    >
+      <slot name="leading" />
+    </template>
+    <template
+      v-if="$slots.trailing"
+      #trailing
+    >
+      <slot name="trailing" />
+    </template>
     <!-- @slot default slot, defaults contains dt-button -->
-    <slot />
+    <span
+      ref="tabLabel"
+      class="d-tab__label"
+    >
+      <slot />
+    </span>
   </dt-button>
 </template>
 
 <script>
-import { TAB_IMPORTANCE_MODIFIERS } from './tabs_constants';
 import { DtButton } from '../button';
 
 /**
@@ -92,6 +143,30 @@ export default {
       type: [String, Array, Object],
       default: '',
     },
+
+    /**
+     * Used to customize the label container
+     */
+    labelClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Used to customize the leading container
+     */
+    leadingClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Used to customize the trailing container
+     */
+    trailingClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
   },
 
   emits: [
@@ -112,12 +187,6 @@ export default {
     'click',
   ],
 
-  data () {
-    return {
-      TAB_IMPORTANCE_MODIFIERS,
-    };
-  },
-
   computed: {
     tabListeners () {
       return {
@@ -132,15 +201,70 @@ export default {
       };
     },
 
+    isDisabled () {
+      return this.groupContext.disabled || this.disabled;
+    },
+
+    buttonSize () {
+      const size = this.groupContext.size;
+      return size === 'default' ? undefined : size;
+    },
+
     isSelected () {
       return this.groupContext.selected === this.panelId;
+    },
+
+    buttonKind () {
+      if (this.groupContext.outlined) {
+        return this.groupContext.kind === 'muted' ? 'muted' : 'default';
+      }
+      if (this.groupContext.kind === 'muted') {
+        return 'muted';
+      }
+      return this.isSelected ? 'default' : 'muted';
+    },
+
+    buttonImportance () {
+      if (this.groupContext.outlined && this.isSelected) {
+        return 'outlined';
+      }
+      return 'clear';
+    },
+
+    buttonActive () {
+      if (this.groupContext.outlined) {
+        return false;
+      }
+      if (this.groupContext.kind === 'muted') {
+        return this.isSelected;
+      }
+      return false;
     },
   },
 
   mounted () {
+    this.syncDataContent();
     if (this.selected) {
       this.groupContext.selected = this.panelId;
     }
+  },
+
+  updated () {
+    this.syncDataContent();
+  },
+
+  methods: {
+    // Sets data-content to match the rendered label text so CSS can use
+    // `content: attr(data-content)` on a hidden ::after pseudo-element to
+    // hold the bold-width and prevent layout shift on selection.
+    syncDataContent () {
+      const el = this.$refs.tabLabel;
+      if (!el) return;
+      const text = el.textContent?.trim() || '';
+      if (el.getAttribute('data-content') !== text) {
+        el.setAttribute('data-content', text);
+      }
+    },
   },
 };
 </script>
