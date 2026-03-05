@@ -6,7 +6,7 @@
     <div class="d-p48">
       <page-header />
       <!-- eslint-disable-next-line vue/no-undef-components -->
-      <content />
+      <content class="d-docsite-article" />
       <dt-stack
         direction="row"
         :justify="prev ? 'between' : 'end'"

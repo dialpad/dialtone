@@ -38,6 +38,7 @@ module.exports = [
   'pagination.vue',
   'popover.vue',
   'presence.vue',
+  'prose.vue',
   'radio.vue',
   'radio_group.vue',
   'rich_text_editor.vue',
