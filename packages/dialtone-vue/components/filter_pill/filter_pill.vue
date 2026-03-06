@@ -3,20 +3,15 @@
     class="d-filter-pill"
     data-qa="dt-filter-pill"
   >
-    <dt-popover
+    <component
+      :is="overlayComponent"
       v-model:open="isOpen"
-      :append-to="popoverAppendTo"
-      :fallback-placements="popoverFallbackPlacements"
-      :max-height="popoverMaxHeight"
-      :max-width="popoverMaxWidth"
-      :modal="false"
-      :padding="popoverPadding"
-      :placement="popoverPlacement"
+      v-bind="overlayProps"
     >
-      <template #anchor="{ attrs }">
+      <template #anchor="slotData">
         <dt-button
           v-dt-tooltip="resolvedStartTooltipText"
-          v-bind="attrs"
+          v-bind="useDropdown ? slotData : slotData.attrs"
           :active="isActive"
           :class="[
             'd-filter-pill__primary',
@@ -70,7 +65,10 @@
           </template>
         </dt-button>
       </template>
-      <template #content="{ close }">
+      <template
+        v-if="!useDropdown"
+        #content="{ close }"
+      >
         <!-- @slot Allows you to override the popover content, only use this if you need custom behavior -->
         <slot
           :close="close"
@@ -92,7 +90,28 @@
           </dt-checkbox-group>
         </slot>
       </template>
-    </dt-popover>
+      <template
+        v-if="useDropdown"
+        #list="{ close }"
+      >
+        <!-- @slot Allows you to override the dropdown content -->
+        <slot
+          :close="close"
+          name="content"
+        >
+          <dt-list-item
+            v-for="filter in filters"
+            :key="filter.name"
+            role="menuitem"
+            navigation-type="arrow-keys"
+            :selected="filter.active"
+            @click="selectFilter(filter, close)"
+          >
+            {{ filter.name }}
+          </dt-list-item>
+        </slot>
+      </template>
+    </component>
     <dt-button
       v-if="hasClear"
       v-dt-tooltip="resolvedEndTooltipText"
@@ -124,6 +143,8 @@ import { DtIconChevronDown, DtIconClose } from '@dialpad/dialtone-icons/vue3';
 import { DialtoneLocalization } from '@/localization';
 import { DtCheckbox } from '@/components/checkbox';
 import { DtCheckboxGroup } from '@/components/checkbox_group';
+import { DtDropdown } from '@/components/dropdown';
+import { DtListItem } from '@/components/list_item';
 
 export default {
   name: 'DtFilterPill',
@@ -135,11 +156,24 @@ export default {
     DtButton,
     DtIconClose,
     DtIconChevronDown,
+    DtDropdown,
+    DtListItem,
   },
 
   inheritAttrs: false,
 
   props: {
+    /**
+     * When true, uses DtDropdown instead of DtPopover as the overlay.
+     * Provides keyboard navigation (arrow keys) for list items.
+     * Default content renders DtListItem elements (single-select)
+     * instead of checkboxes (multi-select).
+     */
+    useDropdown: {
+      type: Boolean,
+      default: false,
+    },
+
     /**
      * Array of filters to display in the popover,
      * should be an array of objects with `name` and `active` properties
@@ -308,6 +342,25 @@ export default {
   },
 
   computed: {
+    overlayComponent () {
+      return this.useDropdown ? 'dt-dropdown' : 'dt-popover';
+    },
+
+    overlayProps () {
+      const props = {
+        'append-to': this.popoverAppendTo,
+        'fallback-placements': this.popoverFallbackPlacements,
+        'max-height': this.popoverMaxHeight,
+        'max-width': this.popoverMaxWidth,
+        modal: false,
+        placement: this.popoverPlacement,
+      };
+      if (!this.useDropdown) {
+        props.padding = this.popoverPadding;
+      }
+      return props;
+    },
+
     buttonKind () {
       return (this.isActive && !this.disabled) ? 'default' : 'muted';
     },
@@ -378,6 +431,16 @@ export default {
     clearFilter ($event) {
       this.filters.forEach(filter => delete filter.active);
       this.$emit('clear', $event)
+    },
+
+    selectFilter (selectedFilter, close) {
+      this.filters.forEach(filter => {
+        filter.active = filter === selectedFilter;
+      });
+      close();
+      this.$nextTick(() => {
+        this.$el.querySelector('[data-qa="dt-filter-pill__button"]')?.focus();
+      });
     },
   },
 };

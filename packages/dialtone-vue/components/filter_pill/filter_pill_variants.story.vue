@@ -92,6 +92,25 @@
         </template>
       </dt-filter-pill>
     </dt-stack>
+    <!-- Dropdown: single-select with list items -->
+    <dt-stack gap="300">
+      <span class="d-label--sm">Dropdown: conversation type</span>
+      <dt-filter-pill
+        v-model="dropdownConversationTypes"
+        :start-tooltip-text="selectedDropdownType !== 'All Conversations'
+          ? 'Conversation type'
+          : ''"
+        end-tooltip-text="Remove"
+        use-dropdown
+        @clear="resetDropdownType"
+      >
+        <template #default>
+          {{ selectedDropdownType === 'All Conversations'
+            ? 'Conversation type'
+            : selectedDropdownType }}
+        </template>
+      </dt-filter-pill>
+    </dt-stack>
     <!-- Disabled -->
     <dt-stack gap="300">
       <span class="d-label--sm">Disabled</span>
@@ -195,6 +214,13 @@ export default {
         { name: 'Only Digital' },
       ],
 
+      dropdownConversationTypes: [
+        { name: 'All Conversations' },
+        { name: 'Only Calls' },
+        { name: 'Only Meetings' },
+        { name: 'Only Digital' },
+      ],
+
       sizes: Object.keys(BUTTON_SIZE_MODIFIERS),
 
       sizeNames: {
@@ -220,6 +246,15 @@ export default {
       },
     },
 
+    selectedDropdownType () {
+      return this.dropdownConversationTypes.find(f => f.active)?.name || 'All Conversations';
+    },
+  },
+
+  methods: {
+    resetDropdownType () {
+      this.dropdownConversationTypes.forEach(f => { f.active = false; });
+    },
   },
 };
 </script>

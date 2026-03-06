@@ -215,6 +215,52 @@ vueCode='<dt-filter-pill v-model="filters" label="Contact centers" end-tooltip-t
 </dt-filter-pill>'
 showHtmlWarning />
 
+### With dropdown
+
+Setting `use-dropdown` switches the overlay from a popover to a dropdown with keyboard-navigable
+list items. This provides arrow key navigation, highlight management, and Enter/Space selection
+out of the box — ideal for single-select filter patterns.
+
+<code-well-header>
+  <dt-stack direction="row" gap="400">
+    <dt-filter-pill
+      v-model="dropdownTypes"
+      :start-tooltip-text="selectedDropdownType !== 'All Conversations'
+        ? 'Conversation type'
+        : ''"
+      end-tooltip-text="Remove"
+      use-dropdown
+      ref="dropdownExample"
+      @clear="resetDropdownType"
+    >
+      <template #default>
+        {{ selectedDropdownType === 'All Conversations'
+          ? 'Conversation type'
+          : selectedDropdownType }}
+      </template>
+    </dt-filter-pill>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.dropdownExample'
+vueCode='<dt-filter-pill
+  v-model="conversationTypes"
+  :start-tooltip-text="selectedType !== &apos;All Conversations&apos;
+    ? &apos;Conversation type&apos;
+    : &apos;&apos;"
+  end-tooltip-text="Remove"
+  use-dropdown
+  @clear="resetType"
+>
+  <template #default>
+    {{ selectedType === &apos;All Conversations&apos;
+      ? &apos;Conversation type&apos;
+      : selectedType }}
+  </template>
+</dt-filter-pill>'
+showHtmlWarning />
+
 ### With custom label (radio)
 
 Combining the "default" and "content" slots with a radio group creates a single-select filter.
@@ -341,6 +387,12 @@ const conversationTypes = ref([
   {name: 'Only Meetings'},
   {name: 'Only Digital'},
 ]);
+const dropdownTypes = ref([
+  {name: 'All Conversations'},
+  {name: 'Only Calls'},
+  {name: 'Only Meetings'},
+  {name: 'Only Digital'},
+]);
 const selectedConversationType = computed({
   get () {
     return conversationTypes.value.find(f => f.active)?.name || 'All Conversations';
@@ -351,6 +403,12 @@ const selectedConversationType = computed({
     });
   },
 });
+const selectedDropdownType = computed(() => {
+  return dropdownTypes.value.find(f => f.active)?.name || 'All Conversations';
+});
+function resetDropdownType () {
+  dropdownTypes.value.forEach(f => { f.active = false; });
+}
 const sizes = Object.keys(window.DIALTONE_CONSTANTS.BUTTON_SIZE_MODIFIERS);
 const sizeNames = {
   xs: 'Extra small',

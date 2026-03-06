@@ -1,6 +1,8 @@
 import { mount } from '@vue/test-utils';
 import DtFilterPill from './filter_pill.vue';
 import { DtPopover } from '@/components/popover';
+import { DtDropdown } from '@/components/dropdown';
+import { DtListItem } from '@/components/list_item';
 import { DtTooltipDirective } from '@/directives/tooltip_directive';
 
 const MOCK_OPEN_STUB = vi.fn();
@@ -269,6 +271,108 @@ describe('DtFilterPill Tests', function () {
 
       it('Renders the content on the popover', async () => {
         expect(content.html()).toContain(MOCK_CONTENT);
+      });
+    });
+  });
+
+  describe('Dropdown Mode Tests', () => {
+    const MOCK_DROPDOWN_FILTERS = [
+      { name: 'Option A' },
+      { name: 'Option B' },
+      { name: 'Option C' },
+    ];
+
+    describe('When useDropdown is true', () => {
+      beforeEach(() => {
+        mockProps = {
+          useDropdown: true,
+          modelValue: MOCK_DROPDOWN_FILTERS,
+        };
+
+        updateWrapper();
+      });
+
+      it('Should render DtDropdown', () => {
+        expect(wrapper.findComponent(DtDropdown).exists()).toBe(true);
+      });
+
+      it('Should render the pill button', () => {
+        expect(wrapper.find('[data-qa="dt-filter-pill__button"]').exists()).toBe(true);
+      });
+
+      it('Should render DtListItem elements when dropdown is open', async () => {
+        await wrapper.find('[data-qa="dt-filter-pill__button"]').trigger('click');
+
+        const listItems = wrapper.findAllComponents(DtListItem);
+
+        expect(listItems).toHaveLength(MOCK_DROPDOWN_FILTERS.length);
+      });
+    });
+
+    describe('When a list item is clicked in dropdown mode', () => {
+      it('Should set the clicked filter active and deactivate others', async () => {
+        const filters = [
+          { name: 'Option A' },
+          { name: 'Option B' },
+          { name: 'Option C' },
+        ];
+
+        mockProps = {
+          useDropdown: true,
+          modelValue: filters,
+        };
+
+        updateWrapper();
+
+        await wrapper.find('[data-qa="dt-filter-pill__button"]').trigger('click');
+
+        const listItems = wrapper.findAllComponents(DtListItem);
+        await listItems[1].trigger('click');
+
+        expect(filters[0].active).toBe(false);
+        expect(filters[1].active).toBe(true);
+        expect(filters[2].active).toBe(false);
+      });
+    });
+
+    describe('When content slot is used in dropdown mode', () => {
+      it('Should render custom content instead of default list items', async () => {
+        mockProps = {
+          useDropdown: true,
+          modelValue: MOCK_DROPDOWN_FILTERS,
+        };
+        mockSlots = { content: 'Custom dropdown content' };
+
+        updateWrapper();
+
+        await wrapper.find('[data-qa="dt-filter-pill__button"]').trigger('click');
+
+        const dropdownList = document.body.querySelector('[data-qa="dt-dropdown-list-wrapper"]');
+
+        expect(dropdownList.textContent).toContain('Custom dropdown content');
+        expect(wrapper.findAllComponents(DtListItem)).toHaveLength(0);
+      });
+    });
+
+    describe('When clear button is clicked in dropdown mode', () => {
+      it('Should emit clear event and reset filters', async () => {
+        const filters = [
+          { name: 'Option A', active: true },
+          { name: 'Option B' },
+        ];
+
+        mockProps = {
+          useDropdown: true,
+          modelValue: filters,
+        };
+
+        updateWrapper();
+
+        const clearBtn = wrapper.find('[data-qa="dt-filter-pill__clear-button"]');
+        await clearBtn.trigger('click');
+
+        expect(wrapper.emitted()).toHaveProperty('clear');
+        expect(filters[0].active).toBeUndefined();
       });
     });
   });
