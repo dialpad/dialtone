@@ -1137,7 +1137,7 @@ export default {
     },
 
     colorPickerInput() {
-      return document.querySelector('.colorPickerInput');
+      return this.$el.getRootNode().querySelector('.colorPickerInput');
     },
 
     isDefaultFontColor() {
