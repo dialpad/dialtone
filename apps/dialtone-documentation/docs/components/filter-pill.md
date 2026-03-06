@@ -181,6 +181,108 @@ vueCode='<dt-filter-pill label="..." v-model="[...]">
 </dt-filter-pill>'
 showHtmlWarning />
 
+### With custom label (count)
+
+Using the "default" scoped slot, you can display a count of active filters alongside the label.
+
+<code-well-header>
+  <dt-stack direction="row" gap="400">
+    <dt-filter-pill
+      v-model="contactCentersBadge"
+      label="Contact centers"
+      end-tooltip-text="Remove"
+      ref="badgeCountExample"
+    >
+      <template #default="{ label, filters, activeFilters }">
+        {{ label }}:
+        <strong v-if="activeFilters.length">
+          {{ activeFilters.length === filters.length ? 'All' : activeFilters.length }}
+        </strong>
+      </template>
+    </dt-filter-pill>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.badgeCountExample'
+vueCode='<dt-filter-pill v-model="filters" label="Contact centers" end-tooltip-text="Remove">
+  <template #default="{ label, filters, activeFilters }">
+    {{ label }}:
+    <strong v-if="activeFilters.length">
+      {{ activeFilters.length === filters.length ? &apos;All&apos; : activeFilters.length }}
+    </strong>
+  </template>
+</dt-filter-pill>'
+showHtmlWarning />
+
+### With custom label (radio)
+
+Combining the "default" and "content" slots with a radio group creates a single-select filter.
+The label updates to show the selected option, and a clear button resets to the default.
+
+<code-well-header>
+  <dt-stack direction="row" gap="400">
+    <dt-filter-pill
+      v-model="conversationTypes"
+      :start-tooltip-text="selectedConversationType !== 'All Conversations'
+        ? 'Conversation type'
+        : ''"
+      end-tooltip-text="Remove"
+      ref="radioExample"
+      @clear="selectedConversationType = 'All Conversations'"
+    >
+      <template #default>
+        {{ selectedConversationType === 'All Conversations'
+          ? 'Conversation type'
+          : selectedConversationType }}
+      </template>
+      <template #content>
+        <dt-radio-group
+          v-model="selectedConversationType"
+          name="conversation-type-doc-filter"
+        >
+          <dt-radio
+            v-for="filter in conversationTypes"
+            :key="filter.name"
+            :label="filter.name"
+            :value="filter.name"
+            @input="$event => selectedConversationType = $event"
+          />
+        </dt-radio-group>
+      </template>
+    </dt-filter-pill>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.radioExample'
+vueCode='<dt-filter-pill
+  v-model="conversationTypes"
+  :start-tooltip-text="selectedConversationType !== &apos;All Conversations&apos;
+    ? &apos;Conversation type&apos;
+    : &apos;&apos;"
+  end-tooltip-text="Remove"
+  @clear="selectedConversationType = &apos;All Conversations&apos;"
+>
+  <template #default>
+    {{ selectedConversationType === &apos;All Conversations&apos;
+      ? &apos;Conversation type&apos;
+      : selectedConversationType }}
+  </template>
+  <template #content>
+    <dt-radio-group v-model="selectedConversationType" name="conversation-type-filter">
+      <dt-radio
+        v-for="filter in conversationTypes"
+        :key="filter.name"
+        :label="filter.name"
+        :value="filter.name"
+        @input="$event => selectedConversationType = $event"
+      />
+    </dt-radio-group>
+  </template>
+</dt-filter-pill>'
+showHtmlWarning />
+
 ## Vue API
 
 <component-vue-api component-name="filterPill"></component-vue-api>
@@ -190,7 +292,7 @@ showHtmlWarning />
 <component-class-table component-name="filter-pill"></component-class-table>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { DtIconSearch, DtIconClose } from '@dialpad/dialtone-icons/vue3';
 
 const inputValue = ref('');
@@ -226,6 +328,29 @@ const contentSlotFilters = ref([
   {name: 'Option 1'},
   {name: 'Option 2'},
 ]);
+const contactCentersBadge = ref([
+  {name: 'Headquarters', active: true},
+  {name: 'Westside'},
+  {name: 'Downtown', active: true},
+  {name: 'Riverside'},
+  {name: 'Northgate'},
+]);
+const conversationTypes = ref([
+  {name: 'All Conversations'},
+  {name: 'Only Calls'},
+  {name: 'Only Meetings'},
+  {name: 'Only Digital'},
+]);
+const selectedConversationType = computed({
+  get () {
+    return conversationTypes.value.find(f => f.active)?.name || 'All Conversations';
+  },
+  set (newValue) {
+    conversationTypes.value.forEach(f => {
+      f.active = f.name === newValue && newValue !== 'All Conversations';
+    });
+  },
+});
 const sizes = Object.keys(window.DIALTONE_CONSTANTS.BUTTON_SIZE_MODIFIERS);
 const sizeNames = {
   xs: 'Extra small',

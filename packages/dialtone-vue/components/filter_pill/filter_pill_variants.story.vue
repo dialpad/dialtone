@@ -40,32 +40,6 @@
         end-tooltip-text="Remove"
       />
     </dt-stack>
-    <!-- Custom label: radio selection via scoped slot -->
-    <dt-stack gap="300">
-      <span class="d-label--sm">Custom label slot: radio selection</span>
-      <dt-filter-pill
-        v-model="internalExternal"
-        hide-clear
-      >
-        <template #default>
-          {{ selectedIEFilter || 'Internal and external' }}
-        </template>
-        <template #content>
-          <dt-radio-group
-            v-model="selectedIEFilter"
-            name="internal-external-filter"
-          >
-            <dt-radio
-              v-for="filter in internalExternal"
-              :key="filter.name"
-              :label="filter.name"
-              :value="filter.name"
-              @input="$event => selectedIEFilter = $event"
-            />
-          </dt-radio-group>
-        </template>
-      </dt-filter-pill>
-    </dt-stack>
     <!-- Custom label slot: conversation type -->
     <dt-stack gap="300">
       <span class="d-label--sm">Custom label slot: conversation type</span>
@@ -114,26 +88,6 @@
             numeric
           >
             {{ activeFilters.length === filters.length ? 'All' : activeFilters.length }}
-          </dt-text>
-        </template>
-      </dt-filter-pill>
-    </dt-stack>
-    <!-- Custom label: all/selected -->
-    <dt-stack gap="300">
-      <span class="d-label--sm">Custom label slot: all/selected</span>
-      <dt-filter-pill
-        v-model="channelsCustom"
-        label="Channel"
-        end-tooltip-text="Remove"
-      >
-        <template #default="{ label, filters, activeFilters, activeFilterList }">
-          {{ label }}:
-          <dt-text
-            v-if="activeFilters.length"
-            as="strong"
-            numeric
-          >
-            {{ activeFilters.length === filters.length ? 'All' : activeFilterList }}
           </dt-text>
         </template>
       </dt-filter-pill>
@@ -226,14 +180,6 @@ export default {
         { name: 'Northgate' },
       ],
 
-      channelsCustom: [
-        { name: 'Email', active: true },
-        { name: 'Phone', active: true },
-        { name: 'Chat', active: true },
-        { name: 'Social' },
-        { name: 'SMS' },
-      ],
-
       merchandise: [
         { name: 'Shirt', active: true },
         { name: 'Trousers' },
@@ -242,22 +188,11 @@ export default {
         { name: 'Accessories' },
       ],
 
-      internalExternal: [
-        { name: 'Internal and external', active: true },
-        { name: 'Internal only' },
-        { name: 'External only' },
-      ],
-
       conversationTypes: [
         { name: 'All Conversations' },
         { name: 'Only Calls' },
         { name: 'Only Meetings' },
         { name: 'Only Digital' },
-      ],
-
-      dropdownOptions: [
-        { name: 'Option 1' },
-        { name: 'Option 2', active: true },
       ],
 
       sizes: Object.keys(BUTTON_SIZE_MODIFIERS),
@@ -273,19 +208,6 @@ export default {
   },
 
   computed: {
-    selectedIEFilter: {
-      get () {
-        return this.internalExternal.find(f => f.active)?.name;
-      },
-
-      set (newValue) {
-        this.internalExternal = this.internalExternal.map(f => ({
-          ...f,
-          active: f.name === newValue,
-        }))
-      },
-    },
-
     selectedConversationType: {
       get () {
         return this.conversationTypes.find(f => f.active)?.name || 'All Conversations';
@@ -298,25 +220,6 @@ export default {
       },
     },
 
-    selectedDropdownFilter: {
-      get () {
-        return this.dropdownOptions.find(f => f.active)?.name;
-      },
-
-      set (newValue) {
-        this.dropdownOptions = this.dropdownOptions.map(f => ({
-          ...f,
-          active: f.name === newValue,
-        }))
-      },
-    },
-  },
-
-  methods: {
-    handleDropdownClick (filterName, close) {
-      this.selectedDropdownFilter = filterName;
-      close();
-    },
   },
 };
 </script>

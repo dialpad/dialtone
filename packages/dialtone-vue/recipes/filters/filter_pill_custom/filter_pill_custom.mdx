@@ -1,0 +1,187 @@
+import { Meta, Canvas, Source } from '@storybook/addon-docs/blocks';
+import * as FilterPillCustomStories from './filter_pill_custom.stories';
+
+<Meta of={FilterPillCustomStories} />
+
+# Filter Pill Custom Label
+
+These recipes show how to customize the Filter Pill label using the `default` slot, and optionally the `content` slot for custom popover content like radio groups.
+
+## Key concepts
+
+- **`default` slot** overrides the pill's label. It receives scoped data: `{ label, filters, activeFilters, activeFilterList }`.
+- **`content` slot** overrides the popover body, letting you replace the default checkbox list with any content (e.g., radio groups).
+- **`v-model`** expects an array of `{ name, active? }` objects. The pill is "active" when any item has `active: true`.
+- **In-place mutation**: The pill copies the `modelValue` array at mount. To keep the pill's active state in sync, mutate objects in-place with `forEach` rather than replacing the array with `map`. This is important for radio-style single-select patterns where active state toggles.
+
+## Radio selection (always active)
+
+One option is always selected. Uses `hide-clear` since there's no "none" state.
+
+<Source language="html" code={`<dt-filter-pill v-model="filters" hide-clear>
+  <template #default>
+    {{ selectedFilter || 'Default label' }}
+  </template>
+  <template #content>
+    <dt-radio-group v-model="selectedFilter" name="my-filter">
+      <dt-radio
+        v-for="filter in filters"
+        :key="filter.name"
+        :label="filter.name"
+        :value="filter.name"
+        @input="$event => selectedFilter = $event"
+      />
+    </dt-radio-group>
+  </template>
+</dt-filter-pill>`} />
+
+<Source language="js" code={`data () {
+  return {
+    filters: [
+      { name: 'Option A', active: true },
+      { name: 'Option B' },
+      { name: 'Option C' },
+    ],
+  };
+},
+
+computed: {
+  selectedFilter: {
+    get () {
+      return this.filters.find(f => f.active)?.name;
+    },
+    set (newValue) {
+      // Use map here — one option is always active,
+      // so replacing the array is fine.
+      this.filters = this.filters.map(f => ({
+        ...f,
+        active: f.name === newValue,
+      }));
+    },
+  },
+},`} />
+
+## Radio selection with conditional active state
+
+The pill starts inactive ("All Conversations") and becomes active only when a non-default option is selected.
+The tooltip only appears when the label changes from the default, avoiding redundancy.
+
+<Source language="html" code={`<dt-filter-pill
+  v-model="conversationTypes"
+  :start-tooltip-text="selectedConversationType !== 'All Conversations'
+    ? 'Conversation type'
+    : ''"
+  end-tooltip-text="Remove"
+  @clear="selectedConversationType = 'All Conversations'"
+>
+  <template #default>
+    {{ selectedConversationType === 'All Conversations'
+      ? 'Conversation type'
+      : selectedConversationType }}
+  </template>
+  <template #content>
+    <dt-radio-group
+      v-model="selectedConversationType"
+      name="conversation-type-filter"
+    >
+      <dt-radio
+        v-for="filter in conversationTypes"
+        :key="filter.name"
+        :label="filter.name"
+        :value="filter.name"
+        @input="$event => selectedConversationType = $event"
+      />
+    </dt-radio-group>
+  </template>
+</dt-filter-pill>`} />
+
+<Source language="js" code={`data () {
+  return {
+    conversationTypes: [
+      { name: 'All Conversations' },
+      { name: 'Only Calls' },
+      { name: 'Only Meetings' },
+      { name: 'Only Digital' },
+    ],
+  };
+},
+
+computed: {
+  selectedConversationType: {
+    get () {
+      return this.conversationTypes.find(f => f.active)?.name
+        || 'All Conversations';
+    },
+    set (newValue) {
+      // IMPORTANT: Use forEach to mutate in-place, not map.
+      // The pill copies the array at mount — replacing it
+      // with map breaks the internal active state tracking.
+      this.conversationTypes.forEach(f => {
+        f.active = f.name === newValue
+          && newValue !== 'All Conversations';
+      });
+    },
+  },
+},`} />
+
+## Badge count label
+
+Uses the scoped `default` slot to show `label: count` or `label: All`.
+
+<Source language="html" code={`<dt-filter-pill
+  v-model="filters"
+  label="Contact centers"
+  end-tooltip-text="Remove"
+>
+  <template #default="{ label, filters, activeFilters }">
+    {{ label }}:
+    <strong v-if="activeFilters.length">
+      {{ activeFilters.length === filters.length
+        ? 'All'
+        : activeFilters.length }}
+    </strong>
+  </template>
+</dt-filter-pill>`} />
+
+<Source language="js" code={`data () {
+  return {
+    filters: [
+      { name: 'Headquarters', active: true },
+      { name: 'Westside' },
+      { name: 'Downtown', active: true },
+      { name: 'Riverside' },
+      { name: 'Northgate' },
+    ],
+  };
+},`} />
+
+## Active filter list label
+
+Similar to badge count but shows the comma-separated list of active filter names using the `activeFilterList` scoped value.
+
+<Source language="html" code={`<dt-filter-pill
+  v-model="filters"
+  label="Channel"
+  end-tooltip-text="Remove"
+>
+  <template #default="{ label, filters, activeFilters, activeFilterList }">
+    {{ label }}:
+    <strong v-if="activeFilters.length">
+      {{ activeFilters.length === filters.length
+        ? 'All'
+        : activeFilterList }}
+    </strong>
+  </template>
+</dt-filter-pill>`} />
+
+<Source language="js" code={`data () {
+  return {
+    filters: [
+      { name: 'Email', active: true },
+      { name: 'Phone', active: true },
+      { name: 'Chat', active: true },
+      { name: 'Social' },
+      { name: 'SMS' },
+    ],
+  };
+},`} />
