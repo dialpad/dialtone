@@ -201,44 +201,6 @@ describe('DtFilterPill Tests', function () {
     });
   });
 
-  describe('Backward Compatibility Tests', () => {
-    describe('When deprecated alphaTooltipText prop is used', () => {
-      it('Should bind the tooltip directive on the main button', () => {
-        mockProps = { alphaTooltipText: MOCK_START_TOOLTIP_TEXT };
-
-        updateWrapper();
-
-        expect(button.attributes('data-dt-tooltip-id')).toBeDefined();
-      });
-    });
-
-    describe('When deprecated omegaTooltipText prop is used', () => {
-      it('Should use it as clear button aria-label', () => {
-        mockProps = {
-          modelValue: [{ name: 'Test item 1', active: true }],
-          omegaTooltipText: MOCK_END_TOOLTIP_TEXT,
-        };
-
-        updateWrapper();
-        clearButton = wrapper.find('[data-qa="dt-filter-pill__clear-button"]');
-
-        expect(clearButton.attributes('aria-label')).toBe(MOCK_END_TOOLTIP_TEXT);
-      });
-
-      it('Should bind the tooltip directive on the clear button', () => {
-        mockProps = {
-          modelValue: [{ name: 'Test item 1', active: true }],
-          omegaTooltipText: MOCK_END_TOOLTIP_TEXT,
-        };
-
-        updateWrapper();
-        clearButton = wrapper.find('[data-qa="dt-filter-pill__clear-button"]');
-
-        expect(clearButton.attributes('data-dt-tooltip-id')).toBeDefined();
-      });
-    });
-  });
-
   describe('Extendability Tests', () => {
     describe('When default slot is set', () => {
       it('Should render custom label', () => {
@@ -247,6 +209,44 @@ describe('DtFilterPill Tests', function () {
         updateWrapper();
 
         expect(wrapper.html()).toContain(MOCK_DEFAULT_SLOT);
+      });
+    });
+
+    describe('When default slot is set with scoped bindings', () => {
+      it('Should provide label, activeFilters, and activeFilterList', () => {
+        const slotBindings = {};
+        mockProps = {
+          label: 'Teams',
+          modelValue: [
+            { name: 'Team A', active: true },
+            { name: 'Team B', active: true },
+            { name: 'Team C' },
+          ],
+        };
+        mockSlots = {
+          default: (props) => {
+            Object.assign(slotBindings, props);
+            return 'custom label';
+          },
+        };
+
+        updateWrapper();
+
+        expect(slotBindings.label).toBe('Teams');
+        expect(slotBindings.activeFilters).toEqual(['Team A', 'Team B']);
+        expect(slotBindings.activeFilterList).toBe('Team A +1');
+      });
+    });
+
+    describe('When startIcon slot is set', () => {
+      it('Should render the start icon', () => {
+        mockSlots = {
+          startIcon: '<svg data-qa="mock-start-icon" />',
+        };
+
+        updateWrapper();
+
+        expect(wrapper.find('[data-qa="mock-start-icon"]').exists()).toBe(true);
       });
     });
 
