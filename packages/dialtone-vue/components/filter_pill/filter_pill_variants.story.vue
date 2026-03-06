@@ -5,7 +5,7 @@
       <span class="d-label--sm">No selection</span>
       <dt-filter-pill
         v-model="channels"
-        label="Channels"
+        label="Channel"
       >
         <template #startIcon="{ iconSize }">
           <dt-icon-filter :size="iconSize" />
@@ -66,6 +66,38 @@
         </template>
       </dt-filter-pill>
     </dt-stack>
+    <!-- Custom label slot: conversation type -->
+    <dt-stack gap="300">
+      <span class="d-label--sm">Custom label slot: conversation type</span>
+      <dt-filter-pill
+        v-model="conversationTypes"
+        :start-tooltip-text="selectedConversationType !== 'All Conversations'
+          ? 'Conversation type'
+          : ''"
+        end-tooltip-text="Remove"
+        @clear="selectedConversationType = 'All Conversations'"
+      >
+        <template #default>
+          {{ selectedConversationType === 'All Conversations'
+            ? 'Conversation type'
+            : selectedConversationType }}
+        </template>
+        <template #content>
+          <dt-radio-group
+            v-model="selectedConversationType"
+            name="conversation-type-filter"
+          >
+            <dt-radio
+              v-for="filter in conversationTypes"
+              :key="filter.name"
+              :label="filter.name"
+              :value="filter.name"
+              @input="$event => selectedConversationType = $event"
+            />
+          </dt-radio-group>
+        </template>
+      </dt-filter-pill>
+    </dt-stack>
     <!-- Custom label -->
     <dt-stack gap="300">
       <span class="d-label--sm">Custom label slot</span>
@@ -91,7 +123,7 @@
       <span class="d-label--sm">Custom label slot: all/selected</span>
       <dt-filter-pill
         v-model="channelsCustom"
-        label="Channels"
+        label="Channel"
         end-tooltip-text="Remove"
       >
         <template #default="{ label, filters, activeFilters, activeFilterList }">
@@ -216,6 +248,13 @@ export default {
         { name: 'External only' },
       ],
 
+      conversationTypes: [
+        { name: 'All Conversations' },
+        { name: 'Only Calls' },
+        { name: 'Only Meetings' },
+        { name: 'Only Digital' },
+      ],
+
       dropdownOptions: [
         { name: 'Option 1' },
         { name: 'Option 2', active: true },
@@ -244,6 +283,18 @@ export default {
           ...f,
           active: f.name === newValue,
         }))
+      },
+    },
+
+    selectedConversationType: {
+      get () {
+        return this.conversationTypes.find(f => f.active)?.name || 'All Conversations';
+      },
+
+      set (newValue) {
+        this.conversationTypes.forEach(f => {
+          f.active = f.name === newValue && newValue !== 'All Conversations';
+        });
       },
     },
 
