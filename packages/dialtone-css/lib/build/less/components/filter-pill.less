@@ -37,23 +37,23 @@
   &__label {
     display: flex;
     gap: var(--dt-size-300);
-    max-inline-size: var(--dt-size-875);
+    align-items: baseline;
     font-weight: var(--dt-font-weight-normal);
+    max-inline-size: var(--dt-size-875);
   }
 
-  &__label-alpha {
+  &__label-start {
     flex: 1;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
   }
 
-  &__label-omega {
+  &__label-end {
     display: flex;
     gap: var(--dt-size-300);
     align-items: center;
-    font-weight: var(--dt-font-weight-bold);
-    letter-spacing: var(--dt-size-50-negative);
+    font-weight: var(--dt-font-weight-semi-bold);
     font-variant-numeric: tabular-nums;
 
     &::before {
