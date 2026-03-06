@@ -32,16 +32,31 @@
           importance="outlined"
           @click="isOpen = true"
         >
+          <template
+            v-if="$slots.startIcon"
+            #startIcon="{ iconSize }"
+          >
+            <!-- @slot Icon displayed before the label -->
+            <slot
+              name="startIcon"
+              :icon-size="iconSize"
+            />
+          </template>
           <span class="d-filter-pill__label">
-            <!-- @slot Allows you to override the label behavior -->
-            <slot>
+            <!-- @slot Allows you to customize the label slot -->
+            <slot
+              :label="label"
+              :filters="filters"
+              :active-filters="activeFilters"
+              :active-filter-list="activeFilterList"
+            >
               <span
-                class="d-filter-pill__label-alpha"
+                class="d-filter-pill__label-start"
                 v-text="label"
               />
               <span
                 v-if="activeFilterList"
-                class="d-filter-pill__label-omega"
+                class="d-filter-pill__label-end"
                 v-text="activeFilterList"
               />
             </slot>
@@ -144,14 +159,6 @@ export default {
     },
 
     /**
-     * @deprecated Use startTooltipText
-     */
-    alphaTooltipText: {
-      type: String,
-      default: undefined,
-    },
-
-    /**
      * HTML disabled attribute
      */
     disabled: {
@@ -183,14 +190,6 @@ export default {
     endTooltipText: {
       type: String,
       default: '',
-    },
-
-    /**
-     * @deprecated Use endTooltipText
-     */
-    omegaTooltipText: {
-      type: String,
-      default: undefined,
     },
 
     /**
@@ -310,15 +309,15 @@ export default {
 
   computed: {
     buttonKind () {
-      return this.isActive ? 'default': 'muted';
+      return (this.isActive && !this.disabled) ? 'default' : 'muted';
     },
 
     resolvedStartTooltipText () {
-      return this.alphaTooltipText ?? this.startTooltipText;
+      return this.startTooltipText;
     },
 
     resolvedEndTooltipText () {
-      return this.omegaTooltipText ?? this.endTooltipText;
+      return this.endTooltipText;
     },
 
     clearButtonAriaLabel () {
@@ -336,11 +335,15 @@ export default {
     },
 
     activeFilterList () {
-      if (this.activeFilters.length <= 2) {
-        return this.activeFilters.join(', ');
+      if (this.activeFilters.length === this.filters.length && this.filters.length > 1) {
+        return 'All';
       }
 
-      return this.activeFilters.slice(0, 2).join(', ') + ', + ' + (this.activeFilters.length - 2);
+      if (this.activeFilters.length <= 1) {
+        return this.activeFilters.join('');
+      }
+
+      return this.activeFilters[0] + ' +' + (this.activeFilters.length - 1);
     },
 
     isActive () {
