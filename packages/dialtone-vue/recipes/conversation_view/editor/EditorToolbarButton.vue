@@ -1,7 +1,7 @@
 <template>
   <dt-button
     ref="buttonRef"
-    v-dt-tooltip="{ message: tooltipMessage, placement: 'top' }"
+    v-dt-tooltip="{ message: tooltipMessage, placement: 'top', externalAnchorElement: $refs.buttonRef?.$el }"
     :active="isActive"
     :aria-label="tooltipMessage"
     :data-qa="dataQA"

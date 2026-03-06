@@ -116,7 +116,11 @@
             v-else-if="button.buttonType === 'custom' && button.selector === 'fontColor'"
             :key="getButtonKey(buttonGroup.key, button.selector)"
             :ref="getButtonRef(buttonGroup.key, button.selector)"
-            v-dt-tooltip="{ message: button.tooltipMessage, placement: 'top' }"
+            v-dt-tooltip="{
+              message: button.tooltipMessage,
+              placement: 'top',
+              externalAnchorElement: $refs[getButtonRef(buttonGroup.key, button.selector)]?.$el, 
+            }"
             kind="muted"
             importance="clear"
             size="xs"
