@@ -82,11 +82,7 @@
     margin-inline-end: var(--dt-size-450);
     margin-block-start: var(--dt-size-200);
 
-    // I feel so dirty writing this. There probably should be a conditional Vue way
-    // to control this.
-    // When both a title AND a message are present.
-    .d-notice:has(.d-notice__content > .d-notice__message):has(.d-notice__title:not([hidden])) &,
-    .d-toast:has(.d-notice__content > .d-notice__message):has(.d-notice__title:not([hidden])) & {
+    &--has-title {
         margin-block-start: var(--dt-size-0);
     }
 
