@@ -61,9 +61,15 @@ export const argTypesData = {
     control: 'text',
   },
 
-  // Deprecated props (hidden)
-  alphaTooltipText: { table: { disable: true } },
-  omegaTooltipText: { table: { disable: true } },
+  // Deprecated props
+  alphaTooltipText: {
+    table: { category: 'Deprecated' },
+    description: 'Use `startTooltipText` instead.',
+  },
+  omegaTooltipText: {
+    table: { category: 'Deprecated' },
+    description: 'Use `endTooltipText` instead.',
+  },
 
   // Events: Exclude this from the table as event names will automatically be added from the component itself.
   onClear: {

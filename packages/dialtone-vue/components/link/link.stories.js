@@ -39,7 +39,8 @@ export const argTypesData = {
     },
   },
   inverted: {
-    table: { disable: true },
+    table: { category: 'Deprecated' },
+    description: 'Deprecated.',
   },
   href: {
     description: 'URL for anchor link navigation. Renders as a native <a> element.',

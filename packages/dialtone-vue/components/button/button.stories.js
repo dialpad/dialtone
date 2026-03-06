@@ -132,7 +132,8 @@ export const argTypesData = {
     options: Object.keys(LINK_KIND_MODIFIERS),
   },
   linkInverted: {
-    table: { disable: true },
+    table: { category: 'Deprecated' },
+    description: 'Deprecated.',
   },
   loading: {
     control: 'boolean',
@@ -140,7 +141,8 @@ export const argTypesData = {
   iconPosition: {
     control: 'select',
     options: Object.keys(ICON_POSITION_MODIFIERS),
-    table: { disable: true },
+    table: { category: 'Deprecated' },
+    description: 'Use `startIcon`/`endIcon`/`blockStartIcon`/`blockEndIcon` slots instead.',
   },
   labelClass: {
     description: 'Pass through classes. Used to customize the label container',
