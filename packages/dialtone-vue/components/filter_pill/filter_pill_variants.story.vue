@@ -36,7 +36,7 @@
       <dt-filter-pill
         v-model="merchandise"
         start-tooltip-text="Merchandise"
-        label="Merchandising where the real money is made"
+        label="Merchandise"
         end-tooltip-text="Remove"
       />
     </dt-stack>
@@ -214,8 +214,8 @@ export default {
       ],
 
       merchandise: [
-        { name: 'Shirt', active: true },
         { name: 'Trousers' },
+        { name: 'Shirt', active: true },
         { name: 'Jacket' },
         { name: 'Shoes' },
         { name: 'Accessories' },

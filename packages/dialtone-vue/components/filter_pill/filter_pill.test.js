@@ -236,7 +236,8 @@ describe('DtFilterPill Tests', function () {
 
         expect(slotBindings.label).toBe('Teams');
         expect(slotBindings.activeFilters).toEqual(['Team A', 'Team B']);
-        expect(slotBindings.activeFilterList).toBe('Team A +1');
+        expect(slotBindings.activeFilterList).toBe('Team A');
+        expect(slotBindings.activeFilterOverflow).toBe('+1');
       });
     });
 

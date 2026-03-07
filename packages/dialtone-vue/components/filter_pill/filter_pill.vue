@@ -46,15 +46,24 @@
               :filters="filters"
               :active-filters="activeFilters"
               :active-filter-list="activeFilterList"
+              :active-filter-overflow="activeFilterOverflow"
             >
               <span
                 class="d-filter-pill__label-start"
+                :title="label"
                 v-text="label"
               />
               <span
                 v-if="activeFilterList"
                 class="d-filter-pill__label-end"
+                :title="activeFilterList"
                 v-text="activeFilterList"
+              />
+              <span
+                v-if="activeFilterOverflow"
+                class="d-filter-pill__label-end-overflow"
+                :title="`plus ${activeFilters.length - 1} others`"
+                v-text="activeFilterOverflow"
               />
             </slot>
           </span>
@@ -394,11 +403,14 @@ export default {
         return 'All';
       }
 
-      if (this.activeFilters.length <= 1) {
-        return this.activeFilters.join('');
-      }
+      return this.activeFilters[0] ?? '';
+    },
 
-      return this.activeFilters[0] + ' +' + (this.activeFilters.length - 1);
+    activeFilterOverflow () {
+      if (this.activeFilters.length <= 1) return '';
+      if (this.activeFilters.length === this.filters.length && this.filters.length > 1) return '';
+
+      return '+' + (this.activeFilters.length - 1);
     },
 
     isActive () {

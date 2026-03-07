@@ -39,26 +39,36 @@
     gap: var(--dt-size-300);
     align-items: baseline;
     font-weight: var(--dt-font-weight-normal);
-    max-inline-size: var(--dt-size-875);
   }
 
   &__label-start {
-    flex: 1;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    max-inline-size: 20ch;
   }
 
   &__label-end {
-    display: flex;
-    gap: var(--dt-size-300);
     align-items: center;
+    overflow: hidden;
     font-weight: var(--dt-font-weight-semi-bold);
+    white-space: nowrap;
+    text-overflow: ellipsis;
     font-variant-numeric: tabular-nums;
+    max-inline-size: 20ch;
 
     &::before {
       content: "=";
+      margin-inline-end: var(--dt-size-300);
     }
+  }
+
+  &__label-end-overflow {
+    align-items: center;
+    overflow: hidden;
+    font-weight: var(--dt-font-weight-bold);
+    letter-spacing: var(--dt-size-100);
+    font-variant-numeric: tabular-nums;
   }
 
   &__clear {
