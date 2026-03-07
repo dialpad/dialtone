@@ -143,7 +143,7 @@ The starting stop (`d-bgg-from-{color}`) should be declared. Optionally an endin
                  </td>
              </tr>
          </tbody>
-       </div>
+       </template>
    </template>
  </utility-class-table>
 
