@@ -556,6 +556,74 @@ describe('DtSplitButton Tests', function () {
     });
   });
 
+  describe('Navigation Tests', () => {
+    describe('When startTo is provided', () => {
+      it('Should forward to prop to the alpha DtButton', () => {
+        mockProps = { startTo: '/some-route' };
+
+        updateWrapper();
+
+        const alphaComponent = wrapper.findComponent(SplitButtonAlpha);
+
+        expect(alphaComponent.props('to')).toBe('/some-route');
+      });
+    });
+
+    describe('When startTo is an object', () => {
+      it('Should forward the route object to the alpha DtButton', () => {
+        const route = { name: 'home', params: { id: 1 } };
+        mockProps = { startTo: route };
+
+        updateWrapper();
+
+        const alphaComponent = wrapper.findComponent(SplitButtonAlpha);
+
+        expect(alphaComponent.props('to')).toEqual(route);
+      });
+    });
+
+    describe('When startHref is provided', () => {
+      it('Should forward href prop to the alpha DtButton', () => {
+        mockProps = { startHref: 'https://example.com' };
+
+        updateWrapper();
+
+        const alphaComponent = wrapper.findComponent(SplitButtonAlpha);
+
+        expect(alphaComponent.props('href')).toBe('https://example.com');
+      });
+    });
+
+    describe('When startTarget and startRel are provided', () => {
+      it('Should forward target and rel props to the alpha DtButton', () => {
+        mockProps = {
+          startHref: 'https://example.com',
+          startTarget: '_blank',
+          startRel: 'noopener noreferrer',
+        };
+
+        updateWrapper();
+
+        const alphaComponent = wrapper.findComponent(SplitButtonAlpha);
+
+        expect(alphaComponent.props('target')).toBe('_blank');
+        expect(alphaComponent.props('rel')).toBe('noopener noreferrer');
+      });
+    });
+
+    describe('When startReplace is provided', () => {
+      it('Should forward replace prop to the alpha DtButton', () => {
+        mockProps = { startTo: '/some-route', startReplace: true };
+
+        updateWrapper();
+
+        const alphaComponent = wrapper.findComponent(SplitButtonAlpha);
+
+        expect(alphaComponent.props('replace')).toBe(true);
+      });
+    });
+  });
+
   describe('Extendability Tests', () => {
     describe('When a rootClass is provided', () => {
       it('should include the root class', () => {

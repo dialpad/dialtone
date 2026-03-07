@@ -498,6 +498,52 @@ export default {
       type: [String, Object, Array],
       default: '',
     },
+
+    /**
+     * Vue router `to` prop for the start button.
+     * When set, renders the start button as a `<router-link>`.
+     */
+    startTo: {
+      type: [String, Object],
+      default: null,
+    },
+
+    /**
+     * Whether to use `router.replace()` instead of `router.push()`
+     * when navigating via `startTo`.
+     * @values true, false
+     */
+    startReplace: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * HTML href for the start button.
+     * When set, renders the start button as an `<a>` element.
+     */
+    startHref: {
+      type: String,
+      default: null,
+    },
+
+    /**
+     * HTML target attribute for the start button link.
+     * Only applies when `startHref` is set.
+     */
+    startTarget: {
+      type: String,
+      default: null,
+    },
+
+    /**
+     * HTML rel attribute for the start button link.
+     * Only applies when `startHref` is set.
+     */
+    startRel: {
+      type: String,
+      default: null,
+    },
   },
 
   emits: [
@@ -550,6 +596,11 @@ export default {
         kind: this.kind,
         size: this.size,
         tooltipText: this.alphaTooltipText ?? this.startTooltipText,
+        to: this.startTo,
+        replace: this.startReplace,
+        href: this.startHref,
+        target: this.startTarget,
+        rel: this.startRel,
         class: this.$attrs.class,
         style: this.$attrs.style,
       };

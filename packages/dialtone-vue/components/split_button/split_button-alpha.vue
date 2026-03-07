@@ -15,6 +15,11 @@
     :trailing-class="trailingClass"
     :loading="loading"
     :size="size"
+    :to="to"
+    :replace="replace"
+    :href="href"
+    :target="target"
+    :rel="rel"
   >
     <template
       v-if="$slots.startIcon"
@@ -174,6 +179,46 @@ export default {
     size: {
       type: String,
       default: 'md',
+    },
+
+    /**
+     * Vue router `to` prop. When set, renders as a `<router-link>`.
+     */
+    to: {
+      type: [String, Object],
+      default: null,
+    },
+
+    /**
+     * Whether to use `router.replace()` instead of `router.push()`.
+     */
+    replace: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * HTML href. When set, renders as an `<a>` element.
+     */
+    href: {
+      type: String,
+      default: null,
+    },
+
+    /**
+     * HTML target attribute for the link.
+     */
+    target: {
+      type: String,
+      default: null,
+    },
+
+    /**
+     * HTML rel attribute for the link.
+     */
+    rel: {
+      type: String,
+      default: null,
     },
   },
 
