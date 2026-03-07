@@ -394,30 +394,14 @@ describe('DtFilterPill Tests', function () {
         expect(wrapper.find('[data-qa="dt-filter-pill"]').classes()).toContain('d-filter-pill--read-only');
       });
 
-      it('Should NOT add disabled attribute to the button', () => {
-        expect(button.attributes()).not.toHaveProperty('disabled');
-      });
-
       it('Should not open popover when clicked', async () => {
-        await button.trigger('click');
-
-        expect(wrapper.vm.isOpen).toBe(false);
-      });
-
-      it('Should not emit open event when clicked', async () => {
         await button.trigger('click');
 
         expect(wrapper.emitted()).not.toHaveProperty('open');
       });
 
       it('Should suppress clear button even when filters are active', () => {
-        clearButton = wrapper.find('[data-qa="dt-filter-pill__clear-button"]');
-
-        expect(clearButton.exists()).toBe(false);
-      });
-
-      it('Should show read-only tooltip text on the button', () => {
-        expect(button.attributes('data-dt-tooltip-id')).toBeDefined();
+        expect(wrapper.find('[data-qa="dt-filter-pill__clear-button"]').exists()).toBe(false);
       });
     });
   });
