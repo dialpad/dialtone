@@ -150,7 +150,7 @@ showHtmlWarning />
       <td>
         <dt-badge type="ai" text="Label" kind="label"></dt-badge>
       </td>
-      <td><abbr class="d-fc-black-400 d-td-none d-fs-100" title="Not applicable">N/A</abbr></td>
+      <td><abbr class="d-fc-muted d-td-none d-fs-100" title="Not applicable">N/A</abbr></td>
       <td>To call out Dialpad Ai features.</td>
     </tr>
   </tbody>

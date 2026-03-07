@@ -91,15 +91,15 @@ Use the `top|right|bottom|left|x|y|all` utility classes to absolutely position e
       <tbody>
         <tr v-for="{coordinate, suffix, combo, value } in coordinates">
           <th scope="row">{{ value }}</th>
-          <div v-for="{direction: dir, prefix: pre, percent} in coordinateDirections" style="display: contents">
-            <td v-if="percent === 'no' && combo === 'no'" class="d-o50 d-bgc-black-200 d-fc-black-400 d-fs-100 d-ta-center">
-              <em>N/A</em>
+          <template v-for="{direction: dir, prefix: pre, percent} in coordinateDirections">
+            <td v-if="percent === 'no' && combo === 'no'" class="d-fc-muted d-fs-100 d-ta-center">
+              N/A
             </td>
             <td v-else class="d-code--sm d-docsite-code">
               <span v-if="suffix === '-calc'">.d-{{ pre }}{{ coordinate }}{{ suffix }}</span>
               <span v-else>.d-{{ pre }}{{ coordinate }}</span>
             </td>
-          </div>
+          </template>
         </tr>
       </tbody>
     </table>
@@ -191,15 +191,15 @@ Use the `top|right|bottom|left|x|y|all` utility classes to absolutely position e
       <tbody>
         <tr v-for="{coordinate, suffix, combo, negative, value } in coordinates">
           <th v-if="negative === 'yes'" scope="row">{{ value }}</th>
-          <div v-if="negative === 'yes'" v-for="{direction: dir, prefix: pre, percent} in coordinateDirections" style="display: contents">
-            <td v-if="percent === 'no' && combo === 'no'" class="d-o50 d-bgc-black-200 d-fc-black-400 d-fs-100 d-ta-center">
-              <em>N/A</em>
+          <template v-if="negative === 'yes'" v-for="{direction: dir, prefix: pre, percent} in coordinateDirections">
+            <td v-if="percent === 'no' && combo === 'no'" class="d-fc-muted d-fs-100 d-ta-center">
+              N/A
             </td>
             <td v-else class="d-code--sm d-docsite-code">
               <span v-if="suffix === '-calc'">.d-{{ pre }}n{{ coordinate }}{{ suffix }}</span>
               <span v-else>.d-{{ pre }}n{{ coordinate }}</span>
             </td>
-          </div>
+          </template>
         </tr>
       </tbody>
     </table>
