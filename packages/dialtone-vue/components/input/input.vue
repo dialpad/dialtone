@@ -12,27 +12,32 @@
     >
       <!-- @slot Slot for label, defaults to label prop -->
       <slot name="labelSlot">
-        <div
+        <dt-text
           v-if="labelVisible && label"
           ref="label"
           data-qa="dt-input-label"
-          :class="[
-            'd-input__label-text',
-            'd-label',
-            labelSizeClasses[size],
-          ]"
+          kind="label"
+          :size="resolvedLabelSize"
+          :strength="labelStrength"
+          tone="secondary"
+          :class="['d-input__label-text', labelClass]"
         >
           {{ label }}
-        </div>
+        </dt-text>
       </slot>
-      <div
+      <dt-text
         v-if="hasSlotContent($slots.description) || description || shouldValidateLength"
         :id="descriptionKey"
         ref="description"
+        kind="body"
+        :size="resolvedDescriptionSize"
+        tone="tertiary"
+        :density="resolvedDescriptionDensity"
+        as="div"
         :class="[
           'd-input__description',
           'd-description',
-          descriptionSizeClasses[size],
+          descriptionClass,
         ]"
         data-qa="dt-input-description"
       >
@@ -49,7 +54,7 @@
         >
           {{ validationProps.length.description }}
         </div>
-      </div>
+      </dt-text>
       <div
         :class="inputWrapperClasses()"
         :read-only="disabled === true ? true : undefined"
@@ -80,6 +85,7 @@
           :autocomplete="$attrs.autocomplete ?? 'off'"
           :class="inputClasses()"
           :maxlength="shouldLimitMaxLength ? validationProps.length.max : null"
+          :aria-label="!labelVisible && label ? label : undefined"
           data-qa="dt-input-input"
           v-bind="removeClassStyleAttrs($attrs)"
           v-on="inputListeners"
@@ -94,6 +100,7 @@
           :autocomplete="$attrs.autocomplete ?? 'off'"
           :class="inputClasses()"
           :maxlength="shouldLimitMaxLength ? validationProps.length.max : null"
+          :aria-label="!labelVisible && label ? label : undefined"
           data-qa="dt-input-input"
           v-bind="removeClassStyleAttrs($attrs)"
           v-on="inputListeners"
@@ -139,8 +146,6 @@ import {
   INPUT_SIZE_CLASSES,
   INPUT_ICON_SIZES,
   INPUT_STATE_CLASSES,
-  DESCRIPTION_SIZE_CLASSES,
-  LABEL_SIZE_CLASSES,
 } from './input_constants';
 import {
   getUniqueString,
@@ -150,6 +155,7 @@ import {
   addClassStyleAttrs,
 } from '@/common/utils';
 import { DtValidationMessages } from '@/components/validation_messages';
+import { DtText, TEXT_SIZE_MODIFIERS, TEXT_STRENGTH_MODIFIERS } from '@/components/text';
 import { MessagesMixin } from '@/common/mixins/input';
 
 /**
@@ -163,7 +169,7 @@ export default {
   compatConfig: { MODE: 3 },
   name: 'DtInput',
 
-  components: { DtValidationMessages },
+  components: { DtValidationMessages, DtText },
 
   mixins: [MessagesMixin],
 
@@ -229,6 +235,14 @@ export default {
      */
     description: {
       type: String,
+      default: '',
+    },
+
+    /**
+     * Used to customize the description container
+     */
+    descriptionClass: {
+      type: [String, Array, Object],
       default: '',
     },
 
@@ -308,6 +322,35 @@ export default {
     hidden: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * Overrides the label text size. When not provided, the label size
+     * is derived from the component size prop.
+     * @values lg, md, sm, xs
+     */
+    labelSize: {
+      type: String,
+      default: null,
+      validator: (s) => TEXT_SIZE_MODIFIERS.label.includes(s),
+    },
+
+    /**
+     * Overrides the label font weight.
+     * @values bold, semibold, medium, normal
+     */
+    labelStrength: {
+      type: String,
+      default: null,
+      validator: (s) => Object.keys(TEXT_STRENGTH_MODIFIERS).includes(s),
+    },
+
+    /**
+     * Used to customize the label container
+     */
+    labelClass: {
+      type: [String, Array, Object],
+      default: '',
     },
   },
 
@@ -529,6 +572,19 @@ export default {
       );
     },
 
+    resolvedLabelSize () {
+      return this.labelSize ?? (this.size === 'xl' ? 'lg' : this.size);
+    },
+
+    resolvedDescriptionSize () {
+      const map = { xs: 'xs', sm: 'xs', md: 'sm', lg: 'sm', xl: 'md' };
+      return map[this.size] || 'sm';
+    },
+
+    resolvedDescriptionDensity () {
+      return this.size === 'xl' ? '300' : undefined;
+    },
+
     sizeModifierClass () {
       if (this.isDefaultSize || !this.isValidSize) {
         return '';
@@ -567,16 +623,12 @@ export default {
     },
   },
 
-  beforeMount () {
-    this.descriptionSizeClasses = DESCRIPTION_SIZE_CLASSES;
-    this.labelSizeClasses = LABEL_SIZE_CLASSES;
-  },
-
   mounted () {
     // Set initial textarea value programmatically
     if (this.isTextarea && this.$refs.input) {
       this.$refs.input.value = this.modelValue;
     }
+    this.runValidations();
   },
 
   methods: {
@@ -659,6 +711,14 @@ export default {
       this.$refs.input.value = '';
       this.$refs.input.focus();
       this.emitClearEvents();
+    },
+
+    runValidations () {
+      if (!this.label && !this.$attrs['aria-label']) {
+        console.info(
+          '[Dialtone] A label is required for accessibility. Provide a label prop and use label-visible="false" to hide it visually.',
+        );
+      }
     },
   },
 };

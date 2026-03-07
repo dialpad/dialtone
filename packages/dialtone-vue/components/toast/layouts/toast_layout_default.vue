@@ -14,6 +14,7 @@
       <dt-notice-icon
         v-if="!hideIcon"
         :kind="kind"
+        :class="{ 'd-notice__icon--has-title': title || $slots.titleOverride }"
         v-bind="toastListeners"
       >
         <!-- @slot Slot for custom icon -->

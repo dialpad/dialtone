@@ -83,7 +83,6 @@ htmlCode='
 </div>
 '
 vueCode='
-<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
 <dt-select-menu
   :options="[
         { value: ``, label: `Please select one` },
@@ -136,7 +135,6 @@ htmlCode='
 </div>
 '
 vueCode='
-<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
 <dt-select-menu
   :options="[
         { value: ``, label: `Please select one` },
@@ -226,7 +224,6 @@ htmlCode='
 </div>
 '
 vueCode='
-<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
 <dt-select-menu
   :options="[
     { value: ``, label: `Please select one` },
@@ -294,7 +291,6 @@ showHtmlWarning />
 <code-example-tabs
 :htmlCode="() => $refs.messagesHidden"
 vueCode='
-<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
 <dt-select-menu
   :options="[
     { value: ``, label: `Please select one` },
@@ -353,7 +349,6 @@ vueCode='
 <code-example-tabs
 :htmlCode="() => $refs.slottedLabel"
 vueCode='
-<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
 <dt-select-menu
   :options="[
     { value: ``, label: `Please select one` },
@@ -385,7 +380,6 @@ vueCode='
 <code-example-tabs
 :htmlCode="() => $refs.slottedDescription"
 vueCode='
-<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
 <dt-select-menu
   :options="[
     { value: ``, label: `Please select one` },
@@ -421,7 +415,6 @@ vueCode='
 <code-example-tabs
 :htmlCode="() => $refs.slottedOptions"
 vueCode='
-<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
 <dt-select-menu
   :model-value="modelValue"
   @input="onInput"
@@ -522,7 +515,6 @@ htmlCode='
 </div>
 '
 vueCode='
-<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
 <dt-select-menu
   :options="[
     { value: ``, label: `Please select one` },
@@ -531,65 +523,60 @@ vueCode='
     { value: `3`, label: `Option 3` },
   ]"
   label="Label"
-  size="xs"
-  :model-value="modelValue"
-  @input="onInput"
-  @change="onChange"
-/>
-<dt-select-menu
-  :options="[
-    { value: ``, label: `Please select one` },
-    { value: `1`, label: `Option 1` },
-    { value: `2`, label: `Option 2` },
-    { value: `3`, label: `Option 3` },
-  ]"
-  label="Label"
-  size="sm"
-  :model-value="modelValue"
-  @input="onInput"
-  @change="onChange"
-/>
-<dt-select-menu
-  :options="[
-    { value: ``, label: `Please select one` },
-    { value: `1`, label: `Option 1` },
-    { value: `2`, label: `Option 2` },
-    { value: `3`, label: `Option 3` },
-  ]"
-  label="Label"
-  size="md"
-  :model-value="modelValue"
-  @input="onInput"
-  @change="onChange"
-/>
-<dt-select-menu
-  :options="[
-    { value: ``, label: `Please select one` },
-    { value: `1`, label: `Option 1` },
-    { value: `2`, label: `Option 2` },
-    { value: `3`, label: `Option 3` },
-  ]"
-  label="Label"
-  size="lg"
-  :model-value="modelValue"
-  @input="onInput"
-  @change="onChange"
-/>
-<dt-select-menu
-  :options="[
-    { value: ``, label: `Please select one` },
-    { value: `1`, label: `Option 1` },
-    { value: `2`, label: `Option 2` },
-    { value: `3`, label: `Option 3` },
-  ]"
-  label="Label"
-  size="xl"
+  size="xs|sm|md|lg|xl"
   :model-value="modelValue"
   @input="onInput"
   @change="onChange"
 />
 '
 showHtmlWarning />
+
+## Label size
+
+The label text size is automatically derived from the component's `size` prop. Use the `label-size` prop to override this when you need a different label size independent of the select size. For example, the default label size for a `size="md"` select menu is `md`, but you can override it from `xs` to `lg`.
+
+<code-well-header bgclass="d-bgc-primary" class="d-d-block">
+  <div class="d-stack16 d-w100p">
+    <example-select-menu label="Extra small label" label-size="xs" />
+    <example-select-menu label="Small label" label-size="sm" />
+    <example-select-menu label="Medium label (default)" label-size="md" />
+    <example-select-menu label="Large label" label-size="lg" />
+  </div>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-select-menu
+  :options="options"
+  label="Label"
+  size="xs|sm|md|lg|xl"
+  label-size="xs|sm|md|lg"
+/>
+'
+/>
+
+## Label strength
+
+Override the label font weight independently of the label size. Valid values are `bold`, `semibold`, `medium`, and `normal`.
+
+<code-well-header bgclass="d-bgc-primary" class="d-d-block">
+  <div class="d-stack16 d-w100p">
+    <example-select-menu label="Bold label" label-strength="bold" />
+    <example-select-menu label="Semibold label" label-strength="semibold" />
+    <example-select-menu label="Medium label" label-strength="medium" />
+    <example-select-menu label="Normal label" label-strength="normal" />
+  </div>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-select-menu
+  :options="options"
+  label="Label"
+  label-strength="bold|semibold|medium|normal"
+/>
+'
+/>
 
 ## Accessibility
 

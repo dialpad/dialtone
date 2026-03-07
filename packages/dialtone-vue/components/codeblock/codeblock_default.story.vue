@@ -1,5 +1,9 @@
 <template>
-  <dt-codeblock :text="$attrs.text" />
+  <dt-codeblock
+    :text="$attrs.text"
+    :bordered="$attrs.bordered"
+    :size="$attrs.size"
+  />
 </template>
 
 <script>

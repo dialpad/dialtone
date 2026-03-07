@@ -1,7 +1,7 @@
 <template>
-  <div
+  <dt-stack
     id="components-select-menu--variants-container"
-    class="d-d-flex d-fd-column d-stack32"
+    gap="400"
   >
     <!-- Default -->
     <dt-select-menu
@@ -153,17 +153,18 @@
       size="xl"
     />
     <!-- Extra Large -->
-  </div>
+  </dt-stack>
 </template>
 
 <script>
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import DtSelectMenu from './select_menu.vue';
+import DtStack from '../stack/stack.vue';
 
 export default {
   name: 'DtSelectMenuVariants',
 
-  components: { DtSelectMenu },
+  components: { DtSelectMenu, DtStack },
 
   setup () {
     return {

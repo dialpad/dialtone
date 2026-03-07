@@ -16,9 +16,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  inline-size: 100%;
   padding: var(--dt-size-600);
   text-align: center;
+  inline-size: 100%;
+  margin-inline: auto;
 
   &__icon {
     color: var(--dt-color-foreground-muted);
@@ -30,7 +31,7 @@
   }
 
   &__content {
-     padding: var(--dt-size-600) 0;
+    padding: var(--dt-size-600) 0;
   }
 
   &__content--sm {
@@ -38,21 +39,22 @@
   }
 
   &__header-text {
-     text-wrap: balance;
+    text-wrap: balance;
+    max-inline-size: 52ch;
   }
 
   &__body-text {
     color: var(--dt-color-foreground-secondary);
     text-wrap: balance;
+    margin-inline: auto;
+    max-inline-size: 52ch;
   }
 
   &--size-sm {
-    inline-size: var(--dt-size-50-percent);
     padding: var(--dt-size-500);
   }
 
   &--size-md {
-    inline-size: var(--dt-size-70-percent);
     padding: var(--dt-size-500);
   }
 }

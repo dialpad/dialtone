@@ -573,6 +573,28 @@ vueCode='
 '
 showHtmlWarning />
 
+## Label size
+
+Use the `label-size` prop to override the default label size.
+
+<code-well-header>
+  <dt-stack gap="400">
+    <dt-checkbox name="sizeXs" value="Value" label="Extra small label" label-size="xs" />
+    <dt-checkbox name="sizeSm" value="Value" label="Small label" label-size="sm" />
+    <dt-checkbox name="sizeMd" value="Value" label="Medium label (default)" label-size="md" />
+    <dt-checkbox name="sizeLg" value="Value" label="Large label" label-size="lg" />
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-checkbox name="sizeXs" value="Value" label="Extra small label" label-size="xs" />
+<dt-checkbox name="sizeSm" value="Value" label="Small label" label-size="sm" />
+<dt-checkbox name="sizeMd" value="Value" label="Medium label (default)" label-size="md" />
+<dt-checkbox name="sizeLg" value="Value" label="Large label" label-size="lg" />
+'
+/>
+
 ## Vue API
 
 <component-vue-api component-name="checkbox" />

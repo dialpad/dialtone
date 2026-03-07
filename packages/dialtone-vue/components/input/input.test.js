@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils';
 import { INPUT_SIZES } from './input_constants';
 import { DtIcon } from '@/components/icon';
+import { DtText } from '@/components/text';
 import DtInput from './input.vue';
 
 const MOCK_INPUT_STUB = vi.fn();
@@ -127,6 +128,30 @@ describe('DtInput tests', () => {
         updateWrapper();
 
         expect(label.exists()).toBe(false);
+      });
+
+      it('should set aria-label on the input', () => {
+        mockProps = { labelVisible: false };
+
+        updateWrapper();
+
+        expect(nativeInput.attributes('aria-label')).toBe(baseProps.label);
+      });
+
+      it('should set aria-label on the textarea', () => {
+        mockProps = { labelVisible: false, type: 'textarea' };
+
+        updateWrapper();
+
+        nativeTextarea = wrapper.find('textarea');
+
+        expect(nativeTextarea.attributes('aria-label')).toBe(baseProps.label);
+      });
+    });
+
+    describe('When labelVisible is true', () => {
+      it('should not set aria-label on the input', () => {
+        expect(nativeInput.attributes('aria-label')).toBeUndefined();
       });
     });
 
@@ -434,11 +459,12 @@ describe('DtInput tests', () => {
         });
 
         it('should add label size class', () => {
-          expect(label.classes().includes(`d-label--${MOCK_INPUT_SIZE_EXTRA_SMALL}`)).toBe(true);
+          expect(label.classes().includes(`d-text-label--${MOCK_INPUT_SIZE_EXTRA_SMALL}`)).toBe(true);
         });
 
-        it('should not add description size class', () => {
-          expect(description.classes().includes(`d-description--${MOCK_INPUT_SIZE_EXTRA_SMALL}`)).toBe(false);
+        it('should have DtText description size for xs', () => {
+          const descriptionText = description.findComponent(DtText);
+          expect(descriptionText.props('size')).toBe('xs');
         });
       });
 
@@ -455,13 +481,82 @@ describe('DtInput tests', () => {
           expect(nativeInput.classes().includes(`d-input--${MOCK_INPUT_SIZE_EXTRA_LARGE}`)).toBe(true);
         });
 
-        it('should add label size class', () => {
-          expect(label.classes().includes(`d-label--${MOCK_INPUT_SIZE_EXTRA_LARGE}`)).toBe(true);
+        it('should add label size class (xl maps to lg)', () => {
+          expect(label.classes().includes('d-text-label--lg')).toBe(true);
         });
 
-        it('should add description size class', () => {
-          expect(description.classes().includes(`d-description--${MOCK_INPUT_SIZE_EXTRA_LARGE}`)).toBe(true);
+        it('should have DtText description size for xl', () => {
+          const descriptionText = description.findComponent(DtText);
+          expect(descriptionText.props('size')).toBe('md');
         });
+      });
+    });
+
+    describe('When labelSize is provided', () => {
+      it('should override the default label size', () => {
+        mockProps = { label: 'Label', labelSize: 'xs' };
+
+        updateWrapper();
+
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.props('size')).toBe('xs');
+      });
+
+      it('should override the size-derived label size', () => {
+        mockProps = { label: 'Label', size: 'xl', labelSize: 'sm' };
+
+        updateWrapper();
+
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.props('size')).toBe('sm');
+      });
+    });
+
+    describe('When labelStrength is provided', () => {
+      it('should override the default label strength', () => {
+        mockProps = { label: 'Label', labelStrength: 'bold' };
+
+        updateWrapper();
+
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.props('strength')).toBe('bold');
+      });
+
+      it('should not set strength when not provided', () => {
+        mockProps = { label: 'Label' };
+
+        updateWrapper();
+
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.props('strength')).toBeNull();
+      });
+    });
+
+    describe('When labelClass is provided', () => {
+      it('should apply custom class to the label', () => {
+        mockProps = { label: 'Label', labelClass: 'd-fc-success' };
+
+        updateWrapper();
+
+        const labelEl = wrapper.find('[data-qa="dt-input-label"]');
+
+        expect(labelEl.classes('d-fc-success')).toBe(true);
+      });
+    });
+
+    describe('When descriptionClass is provided', () => {
+      it('should apply custom class to the description', () => {
+        mockProps = { description: 'Description', descriptionClass: 'd-bgc-success' };
+
+        updateWrapper();
+
+        const descriptionEl = wrapper.find('[data-qa="dt-input-description"]');
+
+        expect(descriptionEl.classes('d-bgc-success')).toBe(true);
       });
     });
 
