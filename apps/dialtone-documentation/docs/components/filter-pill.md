@@ -8,23 +8,11 @@ keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFil
 ---
 
 <code-well-header>
-  <dt-stack direction="row" gap="400" align="start" class="d-w100p d-fw-wrap">
+  <dt-stack direction="row" gap="400">
     <dt-filter-pill
       v-model="heroChannels"
       label="Channel"
     />
-    <dt-filter-pill
-      v-model="heroContactCenters"
-      label="Contact centers"
-      end-tooltip-text="Remove"
-    >
-      <template #default="{ label, filters, activeFilters }">
-        {{ label }}<template v-if="activeFilters.length">:
-        <strong>
-          {{ activeFilters.length === filters.length ? 'All' : activeFilters.length }}
-        </strong></template>
-      </template>
-    </dt-filter-pill>
     <dt-filter-pill
       v-model="heroConversationTypes"
       :start-tooltip-text="selectedHeroConversationType !== 'All Conversations'
@@ -39,25 +27,30 @@ keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFil
           ? 'Conversation type'
           : selectedHeroConversationType }}
       </template>
-    </dt-filter-pill>
-    <dt-filter-pill
-      v-model="heroChannelOverflow"
-      start-tooltip-text="Channel"
-      label="Channel"
-      end-tooltip-text="Remove"
-    >
-      <template #default="{ label, filters, activeFilters, activeFilterList }">
-        {{ label }}<template v-if="activeFilters.length">:
-        <strong>
-          {{ activeFilters.length === filters.length ? 'All' : activeFilterList }}
-        </strong></template>
+      <template #content="{ close }">
+        <dt-list-item
+          v-for="filter in heroConversationTypes"
+          :key="filter.name"
+          role="menuitem"
+          navigation-type="arrow-keys"
+          :selected="filter.name === selectedHeroConversationType"
+          @click="selectHeroConversationType(filter.name, close)"
+        >
+          {{ filter.name }}
+        </dt-list-item>
       </template>
     </dt-filter-pill>
     <dt-filter-pill
-      v-model="heroReadOnly"
-      label="Past 30 days"
-      read-only
-    />
+      v-model="deferredFilters"
+      label="Channel"
+      end-tooltip-text="Remove"
+      defer-selection
+      ref="deferredExample"
+    >
+    </dt-filter-pill>
+    <dt-button size="sm" kind="muted" importance="outlined" :disabled="!heroHasActiveFilters" @click="resetHeroFilters">
+      Reset
+    </dt-button>
   </dt-stack>
 </code-well-header>
 
@@ -335,7 +328,7 @@ showHtmlWarning />
 
 ### Active filter list
 
-Shows the first active filter name using `activeFilterList`, with overflow count for remaining selections (e.g., "Email +2"). This matches the pattern used in Dialpad's analytics filters.
+Shows the first active filter name using `activeFilterList`, with overflow count for remaining selections (e.g., "Email +2").
 
 <code-well-header>
   <dt-stack direction="row" gap="400">
@@ -549,8 +542,24 @@ const heroConversationTypes = ref([
 const selectedHeroConversationType = computed(() => {
   return heroConversationTypes.value.find(f => f.active)?.name || 'All Conversations';
 });
+function selectHeroConversationType (name, close) {
+  heroConversationTypes.value.forEach(f => {
+    f.active = name !== 'All Conversations' && f.name === name;
+  });
+  close();
+}
 function resetHeroConversationType () {
   heroConversationTypes.value.forEach(f => { f.active = false; });
+}
+const heroHasActiveFilters = computed(() => {
+  return heroChannels.value.some(f => f.active) ||
+    selectedHeroConversationType.value !== 'All Conversations' ||
+    deferredFilters.value.some(f => f.active);
+});
+function resetHeroFilters () {
+  heroChannels.value.forEach(f => { delete f.active; });
+  heroConversationTypes.value.forEach(f => { f.active = false; });
+  deferredFilters.value.forEach(f => { delete f.active; });
 }
 const heroDuration = ref([
   {name: '0–5 min', active: true},
