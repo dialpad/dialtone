@@ -8,7 +8,7 @@
   >
     <component
       :is="overlayComponent"
-      :open="useDropdown ? null : isOpen"
+      :open="readOnly ? false : (useDropdown ? null : isOpen)"
       v-bind="overlayProps"
       @update:open="isOpen = $event"
     >
@@ -17,6 +17,7 @@
           v-dt-tooltip="resolvedStartTooltipText"
           v-bind="useDropdown ? slotData : slotData.attrs"
           :active="isActive"
+          :aria-disabled="readOnly || undefined"
           :class="[
             'd-filter-pill__primary',
             {
@@ -159,7 +160,7 @@
     </component>
     <dt-button
       v-if="hasClear"
-      v-dt-tooltip="resolvedEndTooltipText"
+      v-dt-tooltip="endTooltipText"
       :active="isActive"
       :aria-label="clearButtonAriaLabel"
       :class="[
@@ -446,16 +447,12 @@ export default {
       return this.startTooltipText;
     },
 
-    resolvedEndTooltipText () {
-      return this.endTooltipText;
-    },
-
     clearButtonAriaLabel () {
-      return this.resolvedEndTooltipText || this.i18n.$t('DIALTONE_FILTER_PILL_CLEAR_BUTTON_LABEL');
+      return this.endTooltipText || this.i18n.$t('DIALTONE_FILTER_PILL_CLEAR_BUTTON_LABEL');
     },
 
     clearButtonTitle () {
-      if (this.resolvedEndTooltipText) return;
+      if (this.endTooltipText) return;
 
       return this.clearButtonAriaLabel
     },

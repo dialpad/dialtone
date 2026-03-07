@@ -185,7 +185,6 @@ describe('DtFilterPill Tests', function () {
         };
 
         updateWrapper();
-        clearButton = wrapper.find('[data-qa="dt-filter-pill__clear-button"]');
 
         expect(clearButton.attributes('aria-label')).toBe(MOCK_END_TOOLTIP_TEXT);
       });
@@ -197,7 +196,6 @@ describe('DtFilterPill Tests', function () {
         };
 
         updateWrapper();
-        clearButton = wrapper.find('[data-qa="dt-filter-pill__clear-button"]');
 
         expect(clearButton.attributes('data-dt-tooltip-id')).toBeDefined();
       });
@@ -402,6 +400,10 @@ describe('DtFilterPill Tests', function () {
 
       it('Should suppress clear button even when filters are active', () => {
         expect(wrapper.find('[data-qa="dt-filter-pill__clear-button"]').exists()).toBe(false);
+      });
+
+      it('Should set aria-disabled on the primary button', () => {
+        expect(button.attributes('aria-disabled')).toBe('true');
       });
     });
   });
