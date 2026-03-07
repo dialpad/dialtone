@@ -1,11 +1,11 @@
 <template>
   <dt-button
     v-dt-tooltip="tooltipConfig"
-    data-qa="dt-split-button-alpha"
+    data-qa="dt-split-button-start"
     :active="active"
     :aria-label="ariaLabel"
     :assertive-on-focus="assertiveOnFocus"
-    :class="`d-split-btn__alpha d-split-btn__alpha--${size}`"
+    :class="`d-split-btn__start d-split-btn__start--${size}`"
     :disabled="disabled"
     :icon-position="iconPosition"
     :importance="importance"
@@ -69,7 +69,7 @@ import { BUTTON_ICON_SIZES, DtButton } from '@/components/button';
 
 export default {
   compatConfig: { MODE: 3 },
-  name: 'SplitButtonAlpha',
+  name: 'SplitButtonStart',
 
   components: {
     DtButton,

@@ -1,7 +1,7 @@
 import { flushPromises, mount } from '@vue/test-utils';
 import DtSplitButton from './split_button.vue';
-import SplitButtonAlpha from './split_button-alpha.vue';
-import SplitButtonOmega from './split_button-omega.vue';
+import SplitButtonStart from './split_button-start.vue';
+import SplitButtonEnd from './split_button-end.vue';
 import { DtIconSend } from '@dialpad/dialtone-icons/vue3';
 import { DtTooltipDirective } from '@/directives/tooltip_directive';
 
@@ -25,10 +25,10 @@ let mockAttrs = {};
 
 describe('DtSplitButton Tests', function () {
   let wrapper;
-  let alphaButton;
-  let omegaButton;
-  let alphaIconSlot;
-  let omegaIconSlot;
+  let startButton;
+  let endButton;
+  let startIconSlot;
+  let endIconSlot;
 
   const updateWrapper = () => {
     wrapper = mount(DtSplitButton, {
@@ -40,8 +40,8 @@ describe('DtSplitButton Tests', function () {
         },
         plugins: [DtTooltipDirective],
         components: {
-          SplitButtonAlpha,
-          SplitButtonOmega,
+          SplitButtonStart,
+          SplitButtonEnd,
           DtIconSend,
         },
       },
@@ -49,10 +49,10 @@ describe('DtSplitButton Tests', function () {
       attachTo: document.body,
     });
 
-    alphaButton = wrapper.find('[data-qa="dt-split-button-alpha"]');
-    alphaIconSlot = alphaButton.find('[data-qa="dt-button-icon"]');
-    omegaButton = wrapper.find('[data-qa="dt-split-button-omega"]');
-    omegaIconSlot = omegaButton.find('[data-qa="dt-button-icon"]');
+    startButton = wrapper.find('[data-qa="dt-split-button-start"]');
+    startIconSlot = startButton.find('[data-qa="dt-button-icon"]');
+    endButton = wrapper.find('[data-qa="dt-split-button-end"]');
+    endIconSlot = endButton.find('[data-qa="dt-button-icon"]');
   };
 
   beforeAll(() => {
@@ -83,15 +83,15 @@ describe('DtSplitButton Tests', function () {
     describe('When rendered with default props', () => {
       it('Should render the component', () => {
         expect(wrapper.exists()).toBe(true);
-        expect(alphaButton.exists()).toBe(true);
-        expect(omegaButton.exists()).toBe(true);
-        expect(omegaIconSlot.exists()).toBe(true);
+        expect(startButton.exists()).toBe(true);
+        expect(endButton.exists()).toBe(true);
+        expect(endIconSlot.exists()).toBe(true);
       });
 
       it('Should render primary by default', async () => {
         // Default (no props) button should be d-btn--primary
-        expect(alphaButton.classes().includes('d-btn--primary')).toBe(true);
-        expect(omegaButton.classes().includes('d-btn--primary')).toBe(true);
+        expect(startButton.classes().includes('d-btn--primary')).toBe(true);
+        expect(endButton.classes().includes('d-btn--primary')).toBe(true);
       });
     });
 
@@ -101,8 +101,8 @@ describe('DtSplitButton Tests', function () {
 
         updateWrapper();
 
-        expect(alphaButton.classes().includes('d-btn--danger')).toBe(true);
-        expect(omegaButton.classes().includes('d-btn--danger')).toBe(true);
+        expect(startButton.classes().includes('d-btn--danger')).toBe(true);
+        expect(endButton.classes().includes('d-btn--danger')).toBe(true);
       });
     });
 
@@ -112,8 +112,8 @@ describe('DtSplitButton Tests', function () {
 
         updateWrapper();
 
-        expect(alphaButton.classes().includes('d-btn--outlined')).toBe(true);
-        expect(omegaButton.classes().includes('d-btn--outlined')).toBe(true);
+        expect(startButton.classes().includes('d-btn--outlined')).toBe(true);
+        expect(endButton.classes().includes('d-btn--outlined')).toBe(true);
       });
     });
 
@@ -123,7 +123,7 @@ describe('DtSplitButton Tests', function () {
 
         updateWrapper();
 
-        expect(alphaButton.classes().includes('d-btn--loading')).toBe(true);
+        expect(startButton.classes().includes('d-btn--loading')).toBe(true);
       });
     });
 
@@ -133,8 +133,8 @@ describe('DtSplitButton Tests', function () {
 
         updateWrapper();
 
-        expect(alphaButton.attributes('disabled')).toBeDefined();
-        expect(omegaButton.attributes('disabled')).toBeUndefined();
+        expect(startButton.attributes('disabled')).toBeDefined();
+        expect(endButton.attributes('disabled')).toBeUndefined();
       });
     });
 
@@ -144,8 +144,8 @@ describe('DtSplitButton Tests', function () {
 
         updateWrapper();
 
-        expect(alphaButton.attributes('disabled')).toBeUndefined();
-        expect(omegaButton.attributes('disabled')).toBeDefined();
+        expect(startButton.attributes('disabled')).toBeUndefined();
+        expect(endButton.attributes('disabled')).toBeDefined();
       });
     });
 
@@ -155,8 +155,8 @@ describe('DtSplitButton Tests', function () {
 
         updateWrapper();
 
-        expect(alphaButton.attributes('disabled')).toBeDefined();
-        expect(omegaButton.attributes('disabled')).toBeDefined();
+        expect(startButton.attributes('disabled')).toBeDefined();
+        expect(endButton.attributes('disabled')).toBeDefined();
       });
     });
 
@@ -166,7 +166,7 @@ describe('DtSplitButton Tests', function () {
 
         updateWrapper();
 
-        expect(alphaButton.classes().includes('d-btn--active')).toBe(true);
+        expect(startButton.classes().includes('d-btn--active')).toBe(true);
       });
     });
 
@@ -176,7 +176,7 @@ describe('DtSplitButton Tests', function () {
 
         updateWrapper();
 
-        expect(omegaButton.classes().includes('d-btn--active')).toBe(true);
+        expect(endButton.classes().includes('d-btn--active')).toBe(true);
       });
     });
 
@@ -186,8 +186,8 @@ describe('DtSplitButton Tests', function () {
 
         updateWrapper();
 
-        expect(alphaButton.classes().includes('d-btn--xl')).toBe(true);
-        expect(omegaButton.classes().includes('d-btn--xl')).toBe(true);
+        expect(startButton.classes().includes('d-btn--xl')).toBe(true);
+        expect(endButton.classes().includes('d-btn--xl')).toBe(true);
       });
     });
 
@@ -199,11 +199,11 @@ describe('DtSplitButton Tests', function () {
       });
 
       it('Should render the custom icon', () => {
-        expect(alphaIconSlot.findComponent(DtIconSend).classes().includes('d-icon--send')).toBe(true);
+        expect(startIconSlot.findComponent(DtIconSend).classes().includes('d-icon--send')).toBe(true);
       });
 
       it('Should render left by default', () => {
-        expect(alphaIconSlot.classes().includes('d-btn__icon--left')).toBe(true);
+        expect(startIconSlot.classes().includes('d-btn__icon--left')).toBe(true);
       });
 
       describe('When startIconPosition is set to right', () => {
@@ -212,7 +212,7 @@ describe('DtSplitButton Tests', function () {
 
           updateWrapper();
 
-          expect(alphaIconSlot.classes().includes('d-btn__icon--right')).toBe(true);
+          expect(startIconSlot.classes().includes('d-btn__icon--right')).toBe(true);
         });
       });
     });
@@ -225,14 +225,14 @@ describe('DtSplitButton Tests', function () {
       });
 
       it('Should render start icon in the alpha button at start position', () => {
-        const startIconSlot = alphaButton.find('[data-qa="dt-button-start-icon"]');
+        const startIconSlot = startButton.find('[data-qa="dt-button-start-icon"]');
 
         expect(startIconSlot.exists()).toBe(true);
         expect(startIconSlot.findComponent(DtIconSend).exists()).toBe(true);
       });
 
       it('Should render end icon in the alpha button at end position', () => {
-        const endIconSlot = alphaButton.find('[data-qa="dt-button-end-icon"]');
+        const endIconSlot = startButton.find('[data-qa="dt-button-end-icon"]');
 
         expect(endIconSlot.exists()).toBe(true);
         expect(endIconSlot.findComponent(DtIconSend).exists()).toBe(true);
@@ -247,7 +247,7 @@ describe('DtSplitButton Tests', function () {
       });
 
       it('should render the custom icon', () => {
-        expect(omegaIconSlot.findComponent(DtIconSend).classes().includes('d-icon--send')).toBe(true);
+        expect(endIconSlot.findComponent(DtIconSend).classes().includes('d-icon--send')).toBe(true);
       });
     });
 
@@ -256,7 +256,7 @@ describe('DtSplitButton Tests', function () {
         mockProps = { startTooltipText: MOCK_START_TOOLTIP_TEXT };
         await updateWrapper();
         await flushPromises();
-        await alphaButton.trigger('mouseenter');
+        await startButton.trigger('mouseenter');
 
         const tooltip = document.body.querySelector('[data-qa="dt-tooltip"]');
 
@@ -269,7 +269,7 @@ describe('DtSplitButton Tests', function () {
         mockProps = { endTooltipText: MOCK_END_TOOLTIP_TEXT };
         await updateWrapper();
         await flushPromises();
-        await omegaButton.trigger('mouseenter');
+        await endButton.trigger('mouseenter');
 
         const tooltip = document.body.querySelector('[data-qa="dt-tooltip"]');
 
@@ -285,7 +285,7 @@ describe('DtSplitButton Tests', function () {
 
         updateWrapper();
 
-        await alphaButton.trigger('click');
+        await startButton.trigger('click');
       });
 
       it('Should call listener', async () => {
@@ -307,7 +307,7 @@ describe('DtSplitButton Tests', function () {
 
         updateWrapper();
 
-        await omegaButton.trigger('click');
+        await endButton.trigger('click');
       });
 
       it('Should call listener', async () => {
@@ -331,7 +331,7 @@ describe('DtSplitButton Tests', function () {
 
         updateWrapper();
 
-        expect(alphaButton.classes().includes('d-btn--active')).toBe(true);
+        expect(startButton.classes().includes('d-btn--active')).toBe(true);
       });
     });
 
@@ -341,7 +341,7 @@ describe('DtSplitButton Tests', function () {
 
         updateWrapper();
 
-        expect(omegaButton.classes().includes('d-btn--active')).toBe(true);
+        expect(endButton.classes().includes('d-btn--active')).toBe(true);
       });
     });
 
@@ -351,7 +351,7 @@ describe('DtSplitButton Tests', function () {
 
         updateWrapper();
 
-        expect(alphaButton.classes().includes('d-btn--loading')).toBe(true);
+        expect(startButton.classes().includes('d-btn--loading')).toBe(true);
       });
     });
 
@@ -361,8 +361,8 @@ describe('DtSplitButton Tests', function () {
 
         updateWrapper();
 
-        expect(alphaButton.attributes('disabled')).toBeDefined();
-        expect(omegaButton.attributes('disabled')).toBeUndefined();
+        expect(startButton.attributes('disabled')).toBeDefined();
+        expect(endButton.attributes('disabled')).toBeUndefined();
       });
     });
 
@@ -372,8 +372,8 @@ describe('DtSplitButton Tests', function () {
 
         updateWrapper();
 
-        expect(alphaButton.attributes('disabled')).toBeUndefined();
-        expect(omegaButton.attributes('disabled')).toBeDefined();
+        expect(startButton.attributes('disabled')).toBeUndefined();
+        expect(endButton.attributes('disabled')).toBeDefined();
       });
     });
 
@@ -383,7 +383,7 @@ describe('DtSplitButton Tests', function () {
 
         updateWrapper();
 
-        expect(alphaIconSlot.findComponent(DtIconSend).classes().includes('d-icon--send')).toBe(true);
+        expect(startIconSlot.findComponent(DtIconSend).classes().includes('d-icon--send')).toBe(true);
       });
     });
 
@@ -393,7 +393,7 @@ describe('DtSplitButton Tests', function () {
 
         updateWrapper();
 
-        expect(omegaIconSlot.findComponent(DtIconSend).classes().includes('d-icon--send')).toBe(true);
+        expect(endIconSlot.findComponent(DtIconSend).classes().includes('d-icon--send')).toBe(true);
       });
     });
 
@@ -403,9 +403,9 @@ describe('DtSplitButton Tests', function () {
 
         updateWrapper();
 
-        const alphaComponent = wrapper.findComponent(SplitButtonAlpha);
+        const startComponent = wrapper.findComponent(SplitButtonStart);
 
-        expect(alphaComponent.props('tooltipText')).toBe(MOCK_START_TOOLTIP_TEXT);
+        expect(startComponent.props('tooltipText')).toBe(MOCK_START_TOOLTIP_TEXT);
       });
     });
 
@@ -415,9 +415,9 @@ describe('DtSplitButton Tests', function () {
 
         updateWrapper();
 
-        const omegaComponent = wrapper.findComponent(SplitButtonOmega);
+        const endComponent = wrapper.findComponent(SplitButtonEnd);
 
-        expect(omegaComponent.props('tooltipText')).toBe(MOCK_END_TOOLTIP_TEXT);
+        expect(endComponent.props('tooltipText')).toBe(MOCK_END_TOOLTIP_TEXT);
       });
     });
 
@@ -427,7 +427,7 @@ describe('DtSplitButton Tests', function () {
 
         updateWrapper();
 
-        expect(alphaButton.attributes('aria-label')).toBe('Call action');
+        expect(startButton.attributes('aria-label')).toBe('Call action');
       });
     });
 
@@ -437,7 +437,7 @@ describe('DtSplitButton Tests', function () {
 
         updateWrapper();
 
-        expect(omegaButton.attributes('aria-label')).toBe('More options');
+        expect(endButton.attributes('aria-label')).toBe('More options');
       });
     });
 
@@ -448,7 +448,7 @@ describe('DtSplitButton Tests', function () {
 
         updateWrapper();
 
-        expect(alphaIconSlot.classes().includes('d-btn__icon--right')).toBe(true);
+        expect(startIconSlot.classes().includes('d-btn__icon--right')).toBe(true);
       });
     });
 
@@ -458,7 +458,7 @@ describe('DtSplitButton Tests', function () {
 
         updateWrapper();
 
-        const labelEl = alphaButton.find('[data-qa="dt-button-label"]');
+        const labelEl = startButton.find('[data-qa="dt-button-label"]');
 
         expect(labelEl.classes().includes('custom-label-class')).toBe(true);
       });
@@ -473,7 +473,7 @@ describe('DtSplitButton Tests', function () {
 
         updateWrapper();
 
-        expect(alphaIconSlot.findComponent(DtIconSend).exists()).toBe(true);
+        expect(startIconSlot.findComponent(DtIconSend).exists()).toBe(true);
         expect(wrapper.find('[data-qa="old-alpha-icon"]').exists()).toBe(false);
       });
     });
@@ -487,7 +487,7 @@ describe('DtSplitButton Tests', function () {
 
         updateWrapper();
 
-        expect(omegaIconSlot.findComponent(DtIconSend).exists()).toBe(true);
+        expect(endIconSlot.findComponent(DtIconSend).exists()).toBe(true);
         expect(wrapper.find('[data-qa="old-omega-icon"]').exists()).toBe(false);
       });
     });
@@ -505,7 +505,7 @@ describe('DtSplitButton Tests', function () {
           global: {
             stubs: { transition: false },
             plugins: [DtTooltipDirective],
-            components: { SplitButtonAlpha, SplitButtonOmega, DtIconSend },
+            components: { SplitButtonStart, SplitButtonEnd, DtIconSend },
           },
           attrs: { ...baseAttrs, ...mockAttrs },
           attachTo: document.body,
@@ -526,7 +526,7 @@ describe('DtSplitButton Tests', function () {
           global: {
             stubs: { transition: false },
             plugins: [DtTooltipDirective],
-            components: { SplitButtonAlpha, SplitButtonOmega, DtIconSend },
+            components: { SplitButtonStart, SplitButtonEnd, DtIconSend },
           },
           attrs: { ...baseAttrs, ...mockAttrs },
           attachTo: document.body,
@@ -541,7 +541,7 @@ describe('DtSplitButton Tests', function () {
 
     describe('When start button is clicked', () => {
       it('Should emit deprecated alpha-clicked event', async () => {
-        await alphaButton.trigger('click');
+        await startButton.trigger('click');
 
         expect(wrapper.emitted()).toHaveProperty('alpha-clicked');
       });
@@ -549,7 +549,7 @@ describe('DtSplitButton Tests', function () {
 
     describe('When end button is clicked', () => {
       it('Should emit deprecated omega-clicked event', async () => {
-        await omegaButton.trigger('click');
+        await endButton.trigger('click');
 
         expect(wrapper.emitted()).toHaveProperty('omega-clicked');
       });
@@ -563,9 +563,9 @@ describe('DtSplitButton Tests', function () {
 
         updateWrapper();
 
-        const alphaComponent = wrapper.findComponent(SplitButtonAlpha);
+        const startComponent = wrapper.findComponent(SplitButtonStart);
 
-        expect(alphaComponent.props('to')).toBe('/some-route');
+        expect(startComponent.props('to')).toBe('/some-route');
       });
     });
 
@@ -576,9 +576,9 @@ describe('DtSplitButton Tests', function () {
 
         updateWrapper();
 
-        const alphaComponent = wrapper.findComponent(SplitButtonAlpha);
+        const startComponent = wrapper.findComponent(SplitButtonStart);
 
-        expect(alphaComponent.props('to')).toEqual(route);
+        expect(startComponent.props('to')).toEqual(route);
       });
     });
 
@@ -588,9 +588,9 @@ describe('DtSplitButton Tests', function () {
 
         updateWrapper();
 
-        const alphaComponent = wrapper.findComponent(SplitButtonAlpha);
+        const startComponent = wrapper.findComponent(SplitButtonStart);
 
-        expect(alphaComponent.props('href')).toBe('https://example.com');
+        expect(startComponent.props('href')).toBe('https://example.com');
       });
     });
 
@@ -604,10 +604,10 @@ describe('DtSplitButton Tests', function () {
 
         updateWrapper();
 
-        const alphaComponent = wrapper.findComponent(SplitButtonAlpha);
+        const startComponent = wrapper.findComponent(SplitButtonStart);
 
-        expect(alphaComponent.props('target')).toBe('_blank');
-        expect(alphaComponent.props('rel')).toBe('noopener noreferrer');
+        expect(startComponent.props('target')).toBe('_blank');
+        expect(startComponent.props('rel')).toBe('noopener noreferrer');
       });
     });
 
@@ -617,9 +617,9 @@ describe('DtSplitButton Tests', function () {
 
         updateWrapper();
 
-        const alphaComponent = wrapper.findComponent(SplitButtonAlpha);
+        const startComponent = wrapper.findComponent(SplitButtonStart);
 
-        expect(alphaComponent.props('replace')).toBe(true);
+        expect(startComponent.props('replace')).toBe(true);
       });
     });
   });
@@ -642,7 +642,7 @@ describe('DtSplitButton Tests', function () {
 
         updateWrapper();
 
-        const leading = alphaButton.find('.d-btn__leading');
+        const leading = startButton.find('.d-btn__leading');
 
         expect(leading.exists()).toBe(true);
         expect(leading.classes()).toContain('custom-leading');
@@ -656,7 +656,7 @@ describe('DtSplitButton Tests', function () {
 
         updateWrapper();
 
-        const trailing = alphaButton.find('.d-btn__trailing');
+        const trailing = startButton.find('.d-btn__trailing');
 
         expect(trailing.exists()).toBe(true);
         expect(trailing.classes()).toContain('custom-trailing');
@@ -669,7 +669,7 @@ describe('DtSplitButton Tests', function () {
 
         updateWrapper();
 
-        expect(alphaButton.find('[data-qa="test-leading"]').exists()).toBe(true);
+        expect(startButton.find('[data-qa="test-leading"]').exists()).toBe(true);
       });
     });
 
@@ -679,7 +679,7 @@ describe('DtSplitButton Tests', function () {
 
         updateWrapper();
 
-        expect(alphaButton.find('[data-qa="test-trailing"]').exists()).toBe(true);
+        expect(startButton.find('[data-qa="test-trailing"]').exists()).toBe(true);
       });
     });
   });
