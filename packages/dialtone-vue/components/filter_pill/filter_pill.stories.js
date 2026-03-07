@@ -10,8 +10,10 @@ import { POPOVER_DIRECTIONS, POPOVER_PADDING_CLASSES } from '@/components/popove
 // Set default values at the story level here.
 export const argsData = {
   label: 'Fruit',
+  deferSelection: false,
   onOpen: action('open'),
   onClear: action('clear'),
+  onApply: action('apply'),
   onUpdateModelValue: action('update:modelValue'),
   modelValue: [
     { name: 'Orange', active: true },
@@ -71,6 +73,13 @@ export const argTypesData = {
 
   onOpen: {
     action: 'open',
+    table: {
+      disable: true,
+    },
+  },
+
+  onApply: {
+    action: 'apply',
     table: {
       disable: true,
     },

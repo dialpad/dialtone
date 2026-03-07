@@ -202,7 +202,7 @@ htmlCode='
     class="d-popover__dialog d-popover__dialog--modal"
     style="max-height: calc(100vh - var(--dt-size-300));"
   >
-    <div class="d-popover__header d-pl16">
+    <div class="d-popover__header d-px16">
       <div class="d-popover__header__content"><div class="d-w100p">This is the header</div></div>
     </div>
     <div class="d-popover__content d-p16">
@@ -294,7 +294,7 @@ htmlCode='
         </button>
       </div>
     </div>
-    <div class="d-popover__footer d-pl16">
+    <div class="d-popover__footer d-px16">
       <div class="d-popover__footer__content"><div class="d-w100p">This is the footer</div></div>
     </div>
   </div>

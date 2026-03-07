@@ -92,6 +92,52 @@
         </template>
       </dt-filter-pill>
     </dt-stack>
+    <!-- Radio selection: always active -->
+    <dt-stack gap="300">
+      <span class="d-label--sm">Radio selection (always active)</span>
+      <dt-filter-pill
+        v-model="internalExternal"
+        hide-clear
+      >
+        <template #default>
+          {{ selectedIEFilter || 'Internal and external' }}
+        </template>
+        <template #content>
+          <dt-radio-group
+            v-model="selectedIEFilter"
+            name="internal-external-filter"
+          >
+            <dt-radio
+              v-for="filter in internalExternal"
+              :key="filter.name"
+              :label="filter.name"
+              :value="filter.name"
+              @input="$event => selectedIEFilter = $event"
+            />
+          </dt-radio-group>
+        </template>
+      </dt-filter-pill>
+    </dt-stack>
+    <!-- All/selected list -->
+    <dt-stack gap="300">
+      <span class="d-label--sm">All/selected list</span>
+      <dt-filter-pill
+        v-model="channelsCustom"
+        label="Channel"
+        end-tooltip-text="Remove"
+      >
+        <template #default="{ label, filters, activeFilters, activeFilterList }">
+          {{ label }}:
+          <dt-text
+            v-if="activeFilters.length"
+            as="strong"
+            numeric
+          >
+            {{ activeFilters.length === filters.length ? 'All' : activeFilterList }}
+          </dt-text>
+        </template>
+      </dt-filter-pill>
+    </dt-stack>
     <!-- Dropdown: single-select with list items -->
     <dt-stack gap="300">
       <span class="d-label--sm">Dropdown: conversation type</span>
@@ -122,6 +168,16 @@
           </dt-list-item>
         </template>
       </dt-filter-pill>
+    </dt-stack>
+    <!-- Deferred selection -->
+    <dt-stack gap="300">
+      <span class="d-label--sm">Deferred selection (Apply/Cancel)</span>
+      <dt-filter-pill
+        v-model="deferredFilters"
+        label="Deferred"
+        end-tooltip-text="Remove"
+        defer-selection
+      />
     </dt-stack>
     <!-- Disabled -->
     <dt-stack gap="300">
@@ -228,6 +284,28 @@ export default {
         { name: 'Only Digital' },
       ],
 
+      internalExternal: [
+        { name: 'Internal and external', active: true },
+        { name: 'Internal only' },
+        { name: 'External only' },
+      ],
+
+      channelsCustom: [
+        { name: 'Email', active: true },
+        { name: 'Phone', active: true },
+        { name: 'Chat', active: true },
+        { name: 'Social' },
+        { name: 'SMS' },
+      ],
+
+      deferredFilters: [
+        { name: 'Email' },
+        { name: 'Phone' },
+        { name: 'Chat' },
+        { name: 'Social' },
+        { name: 'SMS' },
+      ],
+
       dropdownConversationTypes: [
         { name: 'All Conversations' },
         { name: 'Only Calls' },
@@ -257,6 +335,19 @@ export default {
         this.conversationTypes.forEach(f => {
           f.active = f.name === newValue && newValue !== 'All Conversations';
         });
+      },
+    },
+
+    selectedIEFilter: {
+      get () {
+        return this.internalExternal.find(f => f.active)?.name;
+      },
+
+      set (newValue) {
+        this.internalExternal = this.internalExternal.map(f => ({
+          ...f,
+          active: f.name === newValue,
+        }));
       },
     },
 

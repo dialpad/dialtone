@@ -1,4 +1,5 @@
 import { mount } from '@vue/test-utils';
+import { nextTick } from 'vue';
 import DtFilterPill from './filter_pill.vue';
 import { DtPopover } from '@/components/popover';
 import { DtDropdown } from '@/components/dropdown';
@@ -374,6 +375,134 @@ describe('DtFilterPill Tests', function () {
 
         expect(wrapper.emitted()).toHaveProperty('clear');
         expect(filters[0].active).toBeUndefined();
+      });
+    });
+  });
+
+  describe('Deferred Selection Tests', () => {
+    const MOCK_DEFERRED_FILTERS = [
+      { name: 'Item A' },
+      { name: 'Item B' },
+      { name: 'Item C' },
+    ];
+
+    describe('When deferSelection is true and popover is opened', () => {
+      beforeEach(async () => {
+        mockProps = {
+          deferSelection: true,
+          modelValue: MOCK_DEFERRED_FILTERS.map(f => ({ ...f })),
+        };
+
+        updateWrapper();
+
+        button = wrapper.find('[data-qa="dt-filter-pill__button"]');
+        await button.trigger('click');
+      });
+
+      it('Should render footer with Cancel and Apply buttons', () => {
+        const footer = document.querySelector('[data-qa="dt-filter-pill__deferred-footer"]');
+
+        expect(footer).not.toBeNull();
+
+        const cancelBtn = document.querySelector('[data-qa="dt-filter-pill__cancel-button"]');
+        const applyBtn = document.querySelector('[data-qa="dt-filter-pill__apply-button"]');
+
+        expect(cancelBtn).not.toBeNull();
+        expect(applyBtn).not.toBeNull();
+      });
+
+      it('Should not emit update:modelValue when checkbox is toggled', async () => {
+        wrapper.vm.$emit('update:modelValue');
+        await nextTick();
+        const emitCount = wrapper.emitted('update:modelValue')?.length ?? 0;
+
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        await checkboxes[0]?.click();
+        await nextTick();
+
+        const newEmitCount = wrapper.emitted('update:modelValue')?.length ?? 0;
+
+        expect(newEmitCount).toBe(emitCount);
+      });
+
+      it('Should commit changes and emit apply when Apply is clicked', async () => {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        await checkboxes[0]?.click();
+        await nextTick();
+
+        const applyBtn = document.querySelector('[data-qa="dt-filter-pill__apply-button"]');
+        await applyBtn.click();
+        await nextTick();
+
+        expect(wrapper.emitted()).toHaveProperty('apply');
+      });
+
+      it('Should close popover when Apply is clicked', async () => {
+        const applyBtn = document.querySelector('[data-qa="dt-filter-pill__apply-button"]');
+        await applyBtn.click();
+        await nextTick();
+
+        expect(wrapper.emitted('open').pop()[0]).toBe(false);
+      });
+
+      it('Should discard changes and close when Cancel is clicked', async () => {
+        const cancelBtn = document.querySelector('[data-qa="dt-filter-pill__cancel-button"]');
+        await cancelBtn.click();
+        await nextTick();
+
+        expect(wrapper.emitted('open').pop()[0]).toBe(false);
+        expect(wrapper.emitted()).not.toHaveProperty('apply');
+      });
+
+      it('Should show committed state in pill label while popover is open', () => {
+        const labelEl = wrapper.find('.d-filter-pill__label');
+
+        expect(labelEl.text()).not.toContain('Item A');
+      });
+    });
+
+    describe('When deferSelection is false', () => {
+      it('Should not render deferred footer', async () => {
+        mockProps = {
+          deferSelection: false,
+          modelValue: MOCK_DEFERRED_FILTERS.map(f => ({ ...f })),
+        };
+
+        updateWrapper();
+
+        button = wrapper.find('[data-qa="dt-filter-pill__button"]');
+        await button.trigger('click');
+
+        const footer = document.querySelector('[data-qa="dt-filter-pill__deferred-footer"]');
+
+        expect(footer).toBeNull();
+      });
+    });
+
+    describe('When content slot is used with deferSelection', () => {
+      it('Should provide apply, cancel, and pendingFilters bindings', async () => {
+        const slotBindings = {};
+        mockProps = {
+          deferSelection: true,
+          modelValue: MOCK_DEFERRED_FILTERS.map(f => ({ ...f })),
+        };
+        mockSlots = {
+          content: (props) => {
+            Object.assign(slotBindings, props);
+            return 'custom content';
+          },
+        };
+
+        updateWrapper();
+
+        button = wrapper.find('[data-qa="dt-filter-pill__button"]');
+        await button.trigger('click');
+
+        expect(slotBindings).toHaveProperty('apply');
+        expect(slotBindings).toHaveProperty('cancel');
+        expect(slotBindings).toHaveProperty('pendingFilters');
+        expect(typeof slotBindings.apply).toBe('function');
+        expect(typeof slotBindings.cancel).toBe('function');
       });
     });
   });

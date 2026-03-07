@@ -83,16 +83,19 @@
         <!-- @slot Allows you to override the popover content, only use this if you need custom behavior -->
         <slot
           :close="close"
+          :apply="applySelection"
+          :cancel="cancelSelection"
+          :pending-filters="pendingFilters"
           name="content"
         >
           <dt-checkbox-group
             v-if="modelValue?.length"
-            :selected-values="activeFilters"
+            :selected-values="deferSelection ? pendingActiveFilters : activeFilters"
             :aria-label="label"
             name="contact-centers"
           >
             <dt-checkbox
-              v-for="filter in filters"
+              v-for="filter in displayFilters"
               :key="filter.name"
               :label="filter.name"
               :value="filter.name"
@@ -100,6 +103,35 @@
             />
           </dt-checkbox-group>
         </slot>
+      </template>
+      <template
+        v-if="!useDropdown && deferSelection"
+        #footerContent
+      >
+        <dt-stack
+          direction="row"
+          gap="500"
+          justify="end"
+          data-qa="dt-filter-pill__deferred-footer"
+        >
+          <dt-button
+            importance="clear"
+            kind="muted"
+            size="sm"
+            data-qa="dt-filter-pill__cancel-button"
+            @click="cancelSelection"
+          >
+            {{ cancelButtonLabel }}
+          </dt-button>
+          <dt-button
+            importance="primary"
+            size="sm"
+            data-qa="dt-filter-pill__apply-button"
+            @click="applySelection"
+          >
+            {{ applyButtonLabel }}
+          </dt-button>
+        </dt-stack>
       </template>
       <template
         v-if="useDropdown"
@@ -156,6 +188,7 @@ import { DtCheckbox } from '@/components/checkbox';
 import { DtCheckboxGroup } from '@/components/checkbox_group';
 import { DtDropdown } from '@/components/dropdown';
 import { DtListItem } from '@/components/list_item';
+import { DtStack } from '@/components/stack';
 
 export default {
   name: 'DtFilterPill',
@@ -169,6 +202,7 @@ export default {
     DtIconChevronDown,
     DtDropdown,
     DtListItem,
+    DtStack,
   },
 
   inheritAttrs: false,
@@ -181,6 +215,16 @@ export default {
      * instead of checkboxes (multi-select).
      */
     useDropdown: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * When true, checkbox changes are held in a pending state until the user
+     * clicks Apply. Cancel or closing the popover discards pending changes.
+     * Only applies to popover mode (not useDropdown).
+     */
+    deferSelection: {
       type: Boolean,
       default: false,
     },
@@ -342,6 +386,13 @@ export default {
      * @type {Array}
      */
     'update:modelValue',
+
+    /**
+     * Emitted when deferred selection is applied
+     *
+     * @event apply
+     */
+    'apply',
   ],
 
   data () {
@@ -349,6 +400,7 @@ export default {
       isOpen: false,
       i18n: new DialtoneLocalization(),
       filters: this.modelValue,
+      pendingFilters: null,
     };
   },
 
@@ -420,11 +472,35 @@ export default {
     hasClear () {
       return !this.hideClear && this.activeFilterList.length > 0;
     },
+
+    displayFilters () {
+      return (this.deferSelection && this.pendingFilters) ? this.pendingFilters : this.filters;
+    },
+
+    pendingActiveFilters () {
+      if (!this.pendingFilters) return [];
+      return this.pendingFilters.filter(f => f.active).map(f => f.name);
+    },
+
+    cancelButtonLabel () {
+      return this.i18n.$t('DIALTONE_FILTER_PILL_CANCEL_BUTTON_LABEL');
+    },
+
+    applyButtonLabel () {
+      return this.i18n.$t('DIALTONE_FILTER_PILL_APPLY_BUTTON_LABEL');
+    },
   },
 
   watch: {
     isOpen (isOpen) {
       this.$emit('open', isOpen);
+      if (this.deferSelection) {
+        if (isOpen) {
+          this.pendingFilters = JSON.parse(JSON.stringify(this.filters));
+        } else {
+          this.pendingFilters = null;
+        }
+      }
     },
 
     filters: {
@@ -458,6 +534,23 @@ export default {
         filter.active = filter === selectedFilter;
       });
       close();
+    },
+
+    applySelection () {
+      if (!this.pendingFilters) return;
+      this.filters.forEach((filter, i) => {
+        if (this.pendingFilters[i]) {
+          filter.active = this.pendingFilters[i].active;
+        } else {
+          delete filter.active;
+        }
+      });
+      this.$emit('apply');
+      this.isOpen = false;
+    },
+
+    cancelSelection () {
+      this.isOpen = false;
     },
   },
 };

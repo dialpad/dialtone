@@ -1,20 +1,27 @@
-import { Meta, Canvas, Source } from '@storybook/addon-docs/blocks';
-import * as FilterPillCustomStories from './filter_pill_custom.stories';
+import { Meta, Canvas, Controls, Source } from '@storybook/addon-docs/blocks';
+import * as FilterPillStories from './filter_pill.stories';
 
-<Meta of={FilterPillCustomStories} />
+<Meta of={FilterPillStories} />
 
-# Filter Pill Custom Label
+# Filter Pill
 
-These recipes show how to customize the Filter Pill label using the `default` slot, and optionally the `content` slot for custom popover content like radio groups.
+<Canvas of={FilterPillStories.Default} />
 
-## Key concepts
+<Controls />
 
-- **`default` slot** overrides the pill's label. It receives scoped data: `{ label, filters, activeFilters, activeFilterList }`.
+## Custom Label Patterns
+
+These patterns show how to customize the Filter Pill label using the `default` slot, and optionally the `content` slot for custom popover content like radio groups.
+
+### Key concepts
+
+- **`default` slot** overrides the pill's label. It receives scoped data: `{ label, filters, activeFilters, activeFilterList, activeFilterOverflow }`.
 - **`content` slot** overrides the popover body, letting you replace the default checkbox list with any content (e.g., radio groups).
 - **`v-model`** expects an array of `{ name, active? }` objects. The pill is "active" when any item has `active: true`.
 - **In-place mutation**: The pill copies the `modelValue` array at mount. To keep the pill's active state in sync, mutate objects in-place with `forEach` rather than replacing the array with `map`. This is important for radio-style single-select patterns where active state toggles.
+- **`activeFilterList`** is the first active filter name (or `"All"` when every filter is active). Use **`activeFilterOverflow`** (e.g., `"+2"`) alongside it to show the remaining count.
 
-## Radio selection (always active)
+### Radio selection (always active)
 
 One option is always selected. Uses `hide-clear` since there's no "none" state.
 
@@ -61,7 +68,7 @@ computed: {
   },
 },`} />
 
-## Radio selection with conditional active state
+### Radio selection with conditional active state
 
 The pill starts inactive ("All Conversations") and becomes active only when a non-default option is selected.
 The tooltip only appears when the label changes from the default, avoiding redundancy.
@@ -124,7 +131,48 @@ computed: {
   },
 },`} />
 
-## Badge count label
+### Deferred selection (Apply / Cancel)
+
+Setting `defer-selection` holds checkbox changes in a pending state. The popover shows a footer with **Cancel** and **Apply** buttons. Changes only commit when Apply is clicked; closing the popover any other way (Cancel, Escape, click outside) discards pending changes.
+
+This is useful when users need to review multiple selections before committing.
+
+<Source language="html" code={`<dt-filter-pill
+  v-model="filters"
+  label="Channels"
+  end-tooltip-text="Remove"
+  defer-selection
+/>`} />
+
+<Source language="js" code={`data () {
+  return {
+    filters: [
+      { name: 'Email' },
+      { name: 'Phone' },
+      { name: 'Chat' },
+      { name: 'Social' },
+      { name: 'SMS' },
+    ],
+  };
+},`} />
+
+#### Custom content with deferred selection
+
+When using the `content` slot with `defer-selection`, the slot receives `apply`, `cancel`, and `pendingFilters` bindings so you can build custom UIs that integrate with the deferred workflow.
+
+<Source language="html" code={`<dt-filter-pill
+  v-model="filters"
+  label="Custom deferred"
+  defer-selection
+>
+  <template #content="{ apply, cancel, pendingFilters }">
+    <!-- Custom content here -->
+    <button @click="apply">Save</button>
+    <button @click="cancel">Discard</button>
+  </template>
+</dt-filter-pill>`} />
+
+### Badge count label
 
 Uses the scoped `default` slot to show `label: count` or `label: All`.
 
@@ -155,16 +203,16 @@ Uses the scoped `default` slot to show `label: count` or `label: All`.
   };
 },`} />
 
-## Active filter list label
+### Active filter list label
 
-Similar to badge count but shows the comma-separated list of active filter names using the `activeFilterList` scoped value.
+Similar to badge count but shows the first active filter name using `activeFilterList`, with `activeFilterOverflow` displaying the remaining count (e.g., "+2").
 
 <Source language="html" code={`<dt-filter-pill
   v-model="filters"
   label="Channel"
   end-tooltip-text="Remove"
 >
-  <template #default="{ label, filters, activeFilters, activeFilterList }">
+  <template #default="{ label, filters, activeFilters, activeFilterList, activeFilterOverflow }">
     {{ label }}:
     <strong v-if="activeFilters.length">
       {{ activeFilters.length === filters.length

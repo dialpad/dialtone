@@ -12,9 +12,11 @@
     :popover-padding="$attrs.popoverPadding"
     :popover-placement="$attrs.popoverPlacement"
     :hide-clear="$attrs.hideClear"
+    :defer-selection="$attrs.deferSelection"
     :size="$attrs.size"
     @clear="$attrs.onClear"
     @open="$attrs.onOpen"
+    @apply="$attrs.onApply"
     @update:model-value="$attrs.onUpdateModelValue"
   >
     <template v-if="defaultSlot">

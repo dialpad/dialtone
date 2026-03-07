@@ -127,6 +127,29 @@ showHtmlWarning />
 vueCode='<dt-filter-pill label="..." size="sm" />'
 showHtmlWarning />
 
+### Deferred selection
+
+Setting `defer-selection` holds checkbox changes in a pending state until Apply is clicked.
+Cancel, Escape, or clicking outside discards pending changes.
+
+<code-well-header>
+  <dt-stack direction="row" gap="400">
+    <dt-filter-pill
+      v-model="deferredFilters"
+      label="Deferred example"
+      end-tooltip-text="Remove"
+      defer-selection
+      ref="deferredExample"
+    >
+    </dt-filter-pill>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.deferredExample'
+vueCode='<dt-filter-pill v-model="[...]" label="..." defer-selection />'
+showHtmlWarning />
+
 ### With default slot
 
 Using the "default" slot, you're able to override the `label` prop
@@ -373,6 +396,13 @@ const defaultSlotFilters = ref([
 const contentSlotFilters = ref([
   {name: 'Option 1'},
   {name: 'Option 2'},
+]);
+const deferredFilters = ref([
+  {name: 'Email'},
+  {name: 'Phone'},
+  {name: 'Chat'},
+  {name: 'Social'},
+  {name: 'SMS'},
 ]);
 const contactCentersBadge = ref([
   {name: 'Headquarters', active: true},
