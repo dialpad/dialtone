@@ -1,6 +1,9 @@
 <template>
   <div
-    class="d-filter-pill"
+    :class="[
+      'd-filter-pill',
+      { 'd-filter-pill--read-only': readOnly },
+    ]"
     data-qa="dt-filter-pill"
   >
     <component
@@ -18,7 +21,6 @@
             'd-filter-pill__primary',
             {
               'd-filter-pill--selected': isActive,
-              'd-filter-pill__primary--has-clear': hasClear,
             },
           ]"
           :disabled="disabled"
@@ -256,6 +258,17 @@ export default {
     },
 
     /**
+     * When true, the pill cannot be interacted with but does not
+     * receive disabled styling. Adds `d-filter-pill--read-only` class.
+     * The clear button is suppressed and the tooltip shows a
+     * read-only message.
+     */
+    readOnly: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
      * Toggles the clear button visibility
      * @values true, false
      */
@@ -429,6 +442,7 @@ export default {
     },
 
     resolvedStartTooltipText () {
+      if (this.readOnly) return this.i18n.$t('DIALTONE_FILTER_PILL_READ_ONLY_TOOLTIP');
       return this.startTooltipText;
     },
 
@@ -470,7 +484,7 @@ export default {
     },
 
     hasClear () {
-      return !this.hideClear && this.activeFilterList.length > 0;
+      return !this.readOnly && !this.hideClear && this.activeFilterList.length > 0;
     },
 
     displayFilters () {
@@ -524,9 +538,8 @@ export default {
     },
 
     openPopover () {
-      if (!this.useDropdown) {
-        this.isOpen = true;
-      }
+      if (this.readOnly || this.useDropdown) return;
+      this.isOpen = true;
     },
 
     selectFilter (selectedFilter, close) {

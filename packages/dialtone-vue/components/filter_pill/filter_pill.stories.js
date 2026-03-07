@@ -11,6 +11,7 @@ import { POPOVER_DIRECTIONS, POPOVER_PADDING_CLASSES } from '@/components/popove
 export const argsData = {
   label: 'Fruit',
   deferSelection: false,
+  readOnly: false,
   onOpen: action('open'),
   onClear: action('clear'),
   onApply: action('apply'),

@@ -35,6 +35,26 @@ keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFil
 vueCode='<dt-filter-pill v-model="[...]" label="..."/>'
 showHtmlWarning />
 
+### Read only
+
+The pill looks normal but cannot be opened, cleared, or modified. A tooltip explains "Filter is disabled".
+
+<code-well-header>
+  <dt-stack direction="row" gap="400">
+    <dt-filter-pill
+      v-model="readOnlyFilters"
+      label="Read only filter"
+      read-only
+      ref="readOnlyExample"
+    ></dt-filter-pill>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.readOnlyExample'
+vueCode='<dt-filter-pill v-model="[...]" label="..." read-only />'
+showHtmlWarning />
+
 ### Disabled
 
 <code-well-header>
@@ -368,6 +388,11 @@ const inputValue = ref('');
 const exampleFilters = ref([
   {name: 'Option 1'},
   {name: 'Option 2'},
+]);
+const readOnlyFilters = ref([
+  {name: 'Option 1', active: true},
+  {name: 'Option 2'},
+  {name: 'Option 3'},
 ]);
 const baseFilters = ref([
   {name: 'Option 1'},

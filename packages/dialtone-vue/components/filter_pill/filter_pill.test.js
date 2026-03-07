@@ -379,6 +379,49 @@ describe('DtFilterPill Tests', function () {
     });
   });
 
+  describe('Read Only Tests', () => {
+    describe('When readOnly is true', () => {
+      beforeEach(() => {
+        mockProps = {
+          readOnly: true,
+          modelValue: [{ name: 'Test item 1', active: true }],
+        };
+
+        updateWrapper();
+      });
+
+      it('Should add d-filter-pill--read-only class', () => {
+        expect(wrapper.find('[data-qa="dt-filter-pill"]').classes()).toContain('d-filter-pill--read-only');
+      });
+
+      it('Should NOT add disabled attribute to the button', () => {
+        expect(button.attributes()).not.toHaveProperty('disabled');
+      });
+
+      it('Should not open popover when clicked', async () => {
+        await button.trigger('click');
+
+        expect(wrapper.vm.isOpen).toBe(false);
+      });
+
+      it('Should not emit open event when clicked', async () => {
+        await button.trigger('click');
+
+        expect(wrapper.emitted()).not.toHaveProperty('open');
+      });
+
+      it('Should suppress clear button even when filters are active', () => {
+        clearButton = wrapper.find('[data-qa="dt-filter-pill__clear-button"]');
+
+        expect(clearButton.exists()).toBe(false);
+      });
+
+      it('Should show read-only tooltip text on the button', () => {
+        expect(button.attributes('data-dt-tooltip-id')).toBeDefined();
+      });
+    });
+  });
+
   describe('Deferred Selection Tests', () => {
     const MOCK_DEFERRED_FILTERS = [
       { name: 'Item A' },

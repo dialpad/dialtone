@@ -13,6 +13,7 @@
     :popover-placement="$attrs.popoverPlacement"
     :hide-clear="$attrs.hideClear"
     :defer-selection="$attrs.deferSelection"
+    :read-only="$attrs.readOnly"
     :size="$attrs.size"
     @clear="$attrs.onClear"
     @open="$attrs.onOpen"

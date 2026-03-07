@@ -179,6 +179,22 @@
         defer-selection
       />
     </dt-stack>
+    <!-- Read only -->
+    <dt-stack gap="300">
+      <span class="d-label--sm">Read only</span>
+      <dt-filter-pill
+        read-only
+        label="Conversation type"
+      />
+    </dt-stack>
+    <dt-stack gap="300">
+      <span class="d-label--sm">Read only with selections</span>
+      <dt-filter-pill
+        v-model="readOnlySelections"
+        read-only
+        label="Contact centers"
+      />
+    </dt-stack>
     <!-- Disabled -->
     <dt-stack gap="300">
       <span class="d-label--sm">Disabled</span>
@@ -296,6 +312,12 @@ export default {
         { name: 'Chat', active: true },
         { name: 'Social' },
         { name: 'SMS' },
+      ],
+
+      readOnlySelections: [
+        { name: 'Headquarters', active: true },
+        { name: 'Westside', active: true },
+        { name: 'Downtown' },
       ],
 
       deferredFilters: [
