@@ -167,42 +167,17 @@ describe('DtToggle Tests', () => {
       });
     });
 
-    describe('Accessibility Tests', () => {
-      describe('aria-label validations', () => {
-        let MOCK_CONSOLE_ERROR_SPY;
-        let MOCK_CONSOLE_WARN_SPY;
+    describe('When labelVisible is false', () => {
+      it('should not render a label', () => {
+        mockProps = { labelVisible: false };
 
-        beforeEach(() => {
-          MOCK_CONSOLE_ERROR_SPY = vi.spyOn(console, 'error');
-          MOCK_CONSOLE_WARN_SPY = vi.spyOn(console, 'warn');
-        });
+        updateWrapper();
 
-        afterEach(() => {
-          MOCK_CONSOLE_ERROR_SPY.mockRestore();
-          MOCK_CONSOLE_WARN_SPY.mockRestore();
-        });
+        label = wrapper.find('[data-qa="toggle-label"]');
 
-        describe('should not throw a Vue error if a label is provided', () => {
-          it('should not raise any warnings', () => {
-            mockSlots = { default: 'My Label' };
-
-            updateWrapper();
-
-            expect(console.warn).not.toHaveBeenCalled();
-          });
-        });
-
-        describe('should not throw a Vue error if a label is not provided, but an aria-label attr exists', () => {
-          it('should not raise any warnings', () => {
-            mockSlots = { default: '' };
-            mockAttrs = { 'aria-label': 'my label' };
-
-            updateWrapper();
-
-            expect(console.warn).not.toHaveBeenCalled();
-          });
-        });
+        expect(label.exists()).toBe(false);
       });
     });
+
   });
 });

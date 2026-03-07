@@ -3,9 +3,12 @@
     class="d-input-group__fieldset"
     :data-qa="dataQaGroup"
   >
-    <legend
+    <dt-text
       v-if="hasSlotContent($slots.legend) || legend"
-      :class="['d-label', legendClass]"
+      kind="label"
+      as="legend"
+      tone="secondary"
+      :class="['d-input-group__legend-text', legendClass]"
       v-bind="legendChildProps"
       :data-qa="dataQaGroupLegend"
     >
@@ -13,7 +16,7 @@
       <slot name="legend">
         {{ legend }}
       </slot>
-    </legend>
+    </dt-text>
     <!-- @slot slot for Input Group Components -->
     <slot />
     <dt-validation-messages
@@ -29,6 +32,7 @@
 <script>
 import { InputGroupMixin } from '@/common/mixins/input_group';
 import { DtValidationMessages } from '../validation_messages';
+import { DtText } from '@/components/text';
 import { hasSlotContent } from '@/common/utils';
 
 /**
@@ -41,7 +45,7 @@ export default {
   compatConfig: { MODE: 3 },
   name: 'DtInputGroup',
 
-  components: { DtValidationMessages },
+  components: { DtValidationMessages, DtText },
 
   mixins: [InputGroupMixin],
 

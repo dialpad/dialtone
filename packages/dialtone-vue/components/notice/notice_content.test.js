@@ -1,5 +1,5 @@
 import DtNoticeContent from './notice_content.vue';
-import { shallowMount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 
 // Constants
 const baseProps = {
@@ -23,7 +23,7 @@ describe('DtNoticeContent tests', () => {
   const _setWrappers = () => {
     props = baseProps;
     slotsData = baseSlotsData;
-    wrapper = shallowMount(DtNoticeContent, {
+    wrapper = mount(DtNoticeContent, {
       props,
       slots: slotsData,
     });

@@ -12,28 +12,38 @@
           :value="value"
           :disabled="internalDisabled"
           :class="['d-checkbox', inputValidationClass, inputClass]"
+          :aria-label="!labelVisible && label ? label : undefined"
           v-bind="removeClassStyleAttrs($attrs)"
           :indeterminate.prop="internalIndeterminate"
           v-on="inputListeners"
         >
       </div>
-      <div
+      <dt-text
         v-if="hasLabel"
+        as="div"
+        kind="label"
+        :size="resolvedLabelSize"
+        :strength="labelStrength ?? 'normal'"
+        :tone="internalDisabled ? 'disabled' : 'primary'"
         :class="[labelClass, 'd-checkbox__copy d-checkbox__label']"
         v-bind="labelChildProps"
         data-qa="checkbox-label"
       >
         <!-- @slot slot for Checkbox Label -->
         <slot>{{ label }}</slot>
-      </div>
+      </dt-text>
     </label>
     <div
       v-if="$slots.description || description || hasMessages"
       class="d-checkbox__messages"
       data-qa="checkbox-description-messages"
     >
-      <div
+      <dt-text
         v-if="$slots.description || description"
+        kind="body"
+        size="sm"
+        tone="tertiary"
+        as="div"
         :class="['d-description', descriptionClass]"
         v-bind="descriptionChildProps"
         data-qa="checkbox-description"
@@ -42,7 +52,7 @@
         <slot name="description">
           {{ description }}
         </slot>
-      </div>
+      </dt-text>
       <dt-validation-messages
         :validation-messages="formattedMessages"
         :show-messages="showMessages"
@@ -65,6 +75,7 @@ import {
 import { removeClassStyleAttrs, addClassStyleAttrs } from '@/common/utils';
 import { CHECKBOX_INPUT_VALIDATION_CLASSES } from './checkbox_constants';
 import { DtValidationMessages } from '../validation_messages';
+import { DtText, TEXT_SIZE_MODIFIERS, TEXT_STRENGTH_MODIFIERS } from '@/components/text';
 
 /**
  * Checkboxes are control elements that allow the user to make a selection.They are typically used in a
@@ -75,11 +86,42 @@ export default {
   compatConfig: { MODE: 3 },
   name: 'DtCheckbox',
 
-  components: { DtValidationMessages },
+  components: { DtValidationMessages, DtText },
 
   mixins: [InputMixin, CheckableMixin, GroupableMixin, MessagesMixin],
 
   inheritAttrs: false,
+
+  props: {
+    /**
+     * Determines visibility of checkbox label.
+     * @values true, false
+     */
+    labelVisible: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Overrides the label text size.
+     * @values lg, md, sm, xs
+     */
+    labelSize: {
+      type: String,
+      default: null,
+      validator: (s) => TEXT_SIZE_MODIFIERS.label.includes(s),
+    },
+
+    /**
+     * Overrides the label font weight.
+     * @values bold, semibold, medium, normal
+     */
+    labelStrength: {
+      type: String,
+      default: null,
+      validator: (s) => Object.keys(TEXT_STRENGTH_MODIFIERS).includes(s),
+    },
+  },
 
   emits: [
     /**
@@ -115,6 +157,10 @@ export default {
   ],
 
   computed: {
+    resolvedLabelSize () {
+      return this.labelSize ?? 'md';
+    },
+
     inputValidationClass () {
       return CHECKBOX_INPUT_VALIDATION_CLASSES[this.internalValidationState];
     },
@@ -123,8 +169,12 @@ export default {
       return this.groupContext?.selectedValues?.includes(this.value) ?? false;
     },
 
-    hasLabel () {
+    hasLabelContent () {
       return !!(this.$slots.default || this.label);
+    },
+
+    hasLabel () {
+      return this.labelVisible && this.hasLabelContent;
     },
 
     hasMessages () {
@@ -184,7 +234,11 @@ export default {
     },
 
     runValidations () {
-      this.validateInputLabels(this.hasLabel, this.$attrs['aria-label']);
+      if (!this.hasLabelContent && !this.$attrs['aria-label']) {
+        console.warn(
+          '[Dialtone] A label is required for accessibility. Provide a label prop and use label-visible="false" to hide it visually.',
+        );
+      }
     },
   },
 };

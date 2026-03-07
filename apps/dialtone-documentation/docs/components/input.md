@@ -50,16 +50,16 @@ We offer different sizes for instances in which the interface requires a smaller
 
 <code-well-header>
   <div class="d-d-grid d-g16 d-g-cols2 d-w100p">
-    <dt-input label="Extra Small" type="text" placeholder="Placeholder" size="xs" />
-    <dt-input label="Extra Small" type="textarea" placeholder="Placeholder" size="xs" />
-    <dt-input label="Small" type="text" placeholder="Placeholder" size="sm" />
-    <dt-input label="Small" type="textarea" placeholder="Placeholder" size="sm" />
-    <dt-input label="Medium" type="text" placeholder="Placeholder" size="md" />
-    <dt-input label="Medium" type="textarea" placeholder="Placeholder" size="md" />
-    <dt-input label="Large" type="text" placeholder="Placeholder" size="lg" />
-    <dt-input label="Large" type="textarea" placeholder="Placeholder" size="lg" />
-    <dt-input label="Extra large" type="text" placeholder="Placeholder" size="xl" />
-    <dt-input label="Extra large" type="textarea" placeholder="Placeholder" size="xl" />
+    <dt-input label="Label" type="text" placeholder="Placeholder" size="xs" />
+    <dt-input label="Label" type="textarea" placeholder="Placeholder" size="xs" />
+    <dt-input label="Label" type="text" placeholder="Placeholder" size="sm" />
+    <dt-input label="Label" type="textarea" placeholder="Placeholder" size="sm" />
+    <dt-input label="Label" type="text" placeholder="Placeholder" size="md" />
+    <dt-input label="Label" type="textarea" placeholder="Placeholder" size="md" />
+    <dt-input label="Label" type="text" placeholder="Placeholder" size="lg" />
+    <dt-input label="Label" type="textarea" placeholder="Placeholder" size="lg" />
+    <dt-input label="Label" type="text" placeholder="Placeholder" size="xl" />
+    <dt-input label="Label" type="textarea" placeholder="Placeholder" size="xl" />
   </div>
 </code-well-header>
 
@@ -191,7 +191,6 @@ htmlCode='
 '
 vueCode='
 <dt-input label="Label" placeholder="Placeholder" />
-<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
 <dt-input label="Label" model-value="Value" />
 <dt-input label="Label" placeholder="Placeholder" disabled />
 '
@@ -222,7 +221,6 @@ htmlCode='
 '
 vueCode='
 <dt-input label="Label" placeholder="Placeholder" type="textarea" />
-<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
 <dt-input label="Label" type="textarea" model-value="Value" />
 <dt-input label="Label" placeholder="Placeholder" type="textarea" disabled />
 '
@@ -295,7 +293,6 @@ htmlCode='
 </div>
 '
 vueCode='
-<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
 <dt-input label="Label" type="email" model-value="Value" :messages="[messages.error]"/>
 <dt-input label="Label" type="email" model-value="Value" :messages="[messages.success]"/>
 <dt-input label="Label" type="email" model-value="Value" :messages="[messages.warning]"/>
@@ -329,7 +326,6 @@ htmlCode='
 </div>
 '
 vueCode='
-<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
 <dt-input label="Label" type="textarea" model-value="Value" :messages="[messages.error]"/>
 <dt-input label="Label" type="textarea" model-value="Value" :messages="[messages.success]"/>
 <dt-input label="Label" type="textarea" model-value="Value" :messages="[messages.warning]"/>
@@ -347,7 +343,6 @@ showHtmlWarning />
 <code-example-tabs
 :htmlCode='() => $refs.multipleMessages'
 vueCode='
-<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
 <dt-input label="Label" type="email" model-value="Value" :messages="multipleMessages" />
 '
 />
@@ -767,6 +762,44 @@ vueCode='
 </dt-input>
 '
 showHtmlWarning />
+
+## Label size
+
+The label text size is automatically derived from the component's `size` prop. Use the `label-size` prop to override this when you need a different label size independent of the input size. For example, the default label size for a `size="md"` input is `md`, but you can override it from `xs` to `lg`.
+
+<code-well-header>
+  <div class="d-stack16 d-w100p">
+    <dt-input label="Extra small label" placeholder="Placeholder" label-size="xs" />
+    <dt-input label="Small label" placeholder="Placeholder" label-size="sm" />
+    <dt-input label="Medium label (default)" placeholder="Placeholder" label-size="md" />
+    <dt-input label="Large label" placeholder="Placeholder" label-size="lg" />
+  </div>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-input label="Extra small label" placeholder="Placeholder" label-size="xs|sm|md|lg" />
+'
+/>
+
+## Label strength
+
+Override the label font weight independently of the label size. Valid values are `bold`, `semibold`, `medium`, and `normal`.
+
+<code-well-header>
+  <div class="d-stack16 d-w100p">
+    <dt-input label="Bold label" placeholder="Placeholder" label-strength="bold" />
+    <dt-input label="Semibold label" placeholder="Placeholder" label-strength="semibold" />
+    <dt-input label="Medium label" placeholder="Placeholder" label-strength="medium" />
+    <dt-input label="Normal label" placeholder="Placeholder" label-strength="normal" />
+  </div>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-input label="Label" placeholder="Placeholder" label-strength="bold|semibold|medium|normal" />
+'
+/>
 
 ## Vue API
 

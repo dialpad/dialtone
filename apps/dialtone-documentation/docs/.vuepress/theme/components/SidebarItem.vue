@@ -123,6 +123,7 @@
               importance="clear"
               kind="muted"
               label-class="d-jc-flex-start"
+              :data-sidebar-link="subItem.link"
               :class="[
                 'd-w100p d-fw-normal',
                 { 'd-pl48': depth === 0 },

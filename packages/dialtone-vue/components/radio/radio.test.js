@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import { RADIO_INPUT_VALIDATION_CLASSES } from './radio_constants';
 import DtRadio from './radio.vue';
+import { DtText } from '@/components/text';
 
 const MOCK_VALUE = 'Value';
 const MOCK_GROUP_NAME = 'radioGroup';
@@ -86,6 +87,75 @@ describe('DtRadio Tests', () => {
         it('should match provided label prop', () => {
           expect(radioLabel.text()).toBe(baseProps.label);
         });
+
+        it('should render label as DtText with tone="primary"', () => {
+          const dtText = wrapper.findComponent(DtText);
+
+          expect(dtText.exists()).toBe(true);
+          expect(dtText.props('tone')).toBe('primary');
+        });
+
+        it('should render label DtText with default size="md"', () => {
+          const dtText = wrapper.findComponent(DtText);
+
+          expect(dtText.props('size')).toBe('md');
+        });
+      });
+    });
+
+    describe('When labelVisible is false', () => {
+      beforeEach(() => {
+        mockProps = { labelVisible: false };
+
+        updateWrapper();
+      });
+
+      it('should not render a label', () => {
+        const radioLabel = wrapper.find('[data-qa="radio-label"]');
+
+        expect(radioLabel.exists()).toBe(false);
+      });
+
+      it('should set aria-label on the input', () => {
+        expect(input.attributes('aria-label')).toBe(baseProps.label);
+      });
+    });
+
+    describe('When labelVisible is true', () => {
+      it('should not set aria-label on the input', () => {
+        expect(input.attributes('aria-label')).toBeUndefined();
+      });
+    });
+
+    describe('When labelStrength is provided', () => {
+      it('should override the default label strength', () => {
+        mockProps = { labelStrength: 'bold' };
+
+        updateWrapper();
+
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.props('strength')).toBe('bold');
+      });
+
+      it('should default to normal strength when not provided', () => {
+        updateWrapper();
+
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.props('strength')).toBe('normal');
+      });
+    });
+
+    describe('When labelSize is provided', () => {
+      it('should override the default label size', () => {
+        mockProps = { labelSize: 'lg' };
+
+        updateWrapper();
+
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.props('size')).toBe('lg');
       });
     });
 
@@ -159,6 +229,13 @@ describe('DtRadio Tests', () => {
 
       it('should have disabled class', () => {
         expect(wrapper.find('.d-radio-group--disabled').exists()).toBeTruthy();
+      });
+
+      it('should render label DtText with tone="disabled"', () => {
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.exists()).toBe(true);
+        expect(dtText.props('tone')).toBe('disabled');
       });
 
       describe('When clicked', () => {
