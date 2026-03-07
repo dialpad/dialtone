@@ -21,7 +21,8 @@ keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFil
           {{ activeFilters.length === filters.length ? 'All' : activeFilters.length }}
         </strong></template>
       </template>
-    </dt-filter-pill>    <dt-filter-pill
+    </dt-filter-pill>
+    <dt-filter-pill
       v-model="heroConversationTypes"
       :start-tooltip-text="selectedHeroConversationType !== 'All Conversations'
         ? 'Conversation type'
@@ -147,7 +148,7 @@ showHtmlWarning />
 
 ### Read only
 
-The pill looks normal but cannot be opened, cleared, or modified. A tooltip explains "Filter is disabled".
+Its value is reflected in the filter set but cannot be opened, cleared, or modified. Functionally and visually distinct from disabled.
 
 <code-well-header>
   <dt-stack direction="row" gap="400">
@@ -165,23 +166,24 @@ The pill looks normal but cannot be opened, cleared, or modified. A tooltip expl
 vueCode='<dt-filter-pill v-model="[...]" label="Contact centers" read-only />'
 showHtmlWarning />
 
-### Sizes
+### Size
 
 <code-well-header>
-  <dt-stack direction="row" gap="300">
+  <dt-stack direction="row" gap="400">
     <dt-filter-pill
       v-for="size in sizes"
       :key="size"
       :label="size"
       :size="size"
-      ref="smExample"
+      label="Contact centers"
+      ref="sizeExample"
     ></dt-filter-pill>
   </dt-stack>
 </code-well-header>
 
 <code-example-tabs
-:htmlCode='() => $refs.smExample[1]'
-vueCode='<dt-filter-pill label="..." size="sm" />'
+:htmlCode='() => $refs.sizeExample[1]'
+vueCode='<dt-filter-pill label="..." size="{size}" />'
 showHtmlWarning />
 
 ## Interaction patterns
