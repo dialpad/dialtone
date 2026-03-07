@@ -83,10 +83,10 @@ keywords: ["data table", "grid", "rows", "d-table", "DtTable", "dt-table", "data
 ### Inverted Style
 
 <dt-notice title="Deprecated" kind="error" class="d-wmx100p d-my16">
-  The <code>d-table--inverted</code> modifier has been deprecated in favor of using <router-link to="mode-island.html"><DtLink>DtModeIsland</DtLink></router-link> as a wrapper.
+  The <code>d-table--inverted</code> modifier has been deprecated in favor of using <dt-link to="mode-island.html">DtModeIsland</dt-link> as a wrapper.
 </dt-notice>
 
-In place of the <code>d-table--inverted</code> modifier, wrap the table in the <router-link to="mode-island.html"><DtLink>DtModeIsland</DtLink></router-link> component.
+In place of the <code>d-table--inverted</code> modifier, wrap the table in the <dt-link to="mode-island.html">DtModeIsland</dt-link> component.
 
 <code-well-header>
   <dt-mode-island class="d-p16 d-bar8">

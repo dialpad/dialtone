@@ -55,16 +55,16 @@
         "
       :class="{ 'd-o0 d-d-none': !isMenuOpen }"
     >
-      <router-link
+      <dt-link
         v-for="link in items"
         :key="link"
         :to="link.link"
-        class="d-link d-mb12"
+        class="d-mb12"
         :class="{ 'router-link-active': isActiveLink(link.text) }"
         @click="toggleNavbar"
       >
         {{ link.text }}
-      </router-link>
+      </dt-link>
     </dt-stack>
   </dt-stack>
 </template>
