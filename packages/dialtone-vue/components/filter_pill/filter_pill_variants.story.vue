@@ -19,7 +19,11 @@
         v-model="contactCenters"
         label="Contact centers"
         end-tooltip-text="Remove"
-      />
+      >
+        <template #startIcon="{ iconSize }">
+          <dt-icon-box-select :size="iconSize" />
+        </template>
+      </dt-filter-pill>
     </dt-stack>
     <!-- Selected, show label/count, has clear -->
     <dt-stack gap="300">
@@ -236,6 +240,8 @@ import { DtStack } from '@/components/stack';
 import { DtRadioGroup } from '@/components/radio_group';
 import { DtRadio } from '@/components/radio';
 import { DtIconFilter } from '@dialpad/dialtone-icons/vue3';
+import { DtIconBoxSelect } from '@dialpad/dialtone-icons/vue3';
+
 import { DtText } from '../text/index';
 import { DtListItem } from '@/components/list_item';
 
@@ -247,6 +253,7 @@ export default {
     DtFilterPill,
     DtStack,
     DtIconFilter,
+    DtIconBoxSelect,
     DtText,
     DtListItem,
   },
