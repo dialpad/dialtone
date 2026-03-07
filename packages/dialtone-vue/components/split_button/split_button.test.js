@@ -224,14 +224,14 @@ describe('DtSplitButton Tests', function () {
         updateWrapper();
       });
 
-      it('Should render start icon in the alpha button at start position', () => {
+      it('Should render start icon in the start button at start position', () => {
         const startIconSlot = startButton.find('[data-qa="dt-button-start-icon"]');
 
         expect(startIconSlot.exists()).toBe(true);
         expect(startIconSlot.findComponent(DtIconSend).exists()).toBe(true);
       });
 
-      it('Should render end icon in the alpha button at end position', () => {
+      it('Should render end icon in the start button at end position', () => {
         const endIconSlot = startButton.find('[data-qa="dt-button-end-icon"]');
 
         expect(endIconSlot.exists()).toBe(true);
@@ -558,7 +558,7 @@ describe('DtSplitButton Tests', function () {
 
   describe('Navigation Tests', () => {
     describe('When startTo is provided', () => {
-      it('Should forward to prop to the alpha DtButton', () => {
+      it('Should forward to prop to the start DtButton', () => {
         mockProps = { startTo: '/some-route' };
 
         updateWrapper();
@@ -570,7 +570,7 @@ describe('DtSplitButton Tests', function () {
     });
 
     describe('When startTo is an object', () => {
-      it('Should forward the route object to the alpha DtButton', () => {
+      it('Should forward the route object to the start DtButton', () => {
         const route = { name: 'home', params: { id: 1 } };
         mockProps = { startTo: route };
 
@@ -583,7 +583,7 @@ describe('DtSplitButton Tests', function () {
     });
 
     describe('When startHref is provided', () => {
-      it('Should forward href prop to the alpha DtButton', () => {
+      it('Should forward href prop to the start DtButton', () => {
         mockProps = { startHref: 'https://example.com' };
 
         updateWrapper();
@@ -595,7 +595,7 @@ describe('DtSplitButton Tests', function () {
     });
 
     describe('When startTarget and startRel are provided', () => {
-      it('Should forward target and rel props to the alpha DtButton', () => {
+      it('Should forward target and rel props to the start DtButton', () => {
         mockProps = {
           startHref: 'https://example.com',
           startTarget: '_blank',
@@ -612,7 +612,7 @@ describe('DtSplitButton Tests', function () {
     });
 
     describe('When startReplace is provided', () => {
-      it('Should forward replace prop to the alpha DtButton', () => {
+      it('Should forward replace prop to the start DtButton', () => {
         mockProps = { startTo: '/some-route', startReplace: true };
 
         updateWrapper();
@@ -664,7 +664,7 @@ describe('DtSplitButton Tests', function () {
     });
 
     describe('When leading slot is provided', () => {
-      it('should render leading content through to alpha button', () => {
+      it('should render leading content through to start button', () => {
         mockSlots = { leading: '<span data-qa="test-leading">L</span>' };
 
         updateWrapper();
@@ -674,7 +674,7 @@ describe('DtSplitButton Tests', function () {
     });
 
     describe('When trailing slot is provided', () => {
-      it('should render trailing content through to alpha button', () => {
+      it('should render trailing content through to start button', () => {
         mockSlots = { trailing: '<span data-qa="test-trailing">T</span>' };
 
         updateWrapper();
