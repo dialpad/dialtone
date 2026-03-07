@@ -13,7 +13,6 @@ keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFil
       v-model="momentCount"
       label="Moment"
       end-tooltip-text="Remove"
-      ref="badgeCountExample"
     >
       <template #default="{ label, filters, activeFilters }">
         {{ label }}<template v-if="activeFilters.length">:
@@ -54,7 +53,6 @@ keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFil
       label="Channel"
       end-tooltip-text="Remove"
       defer-selection
-      ref="deferredExample"
     >
     </dt-filter-pill>
     <dt-button size="sm" kind="muted" importance="outlined" :disabled="!heroHasActiveFilters" @click="resetHeroFilters">
@@ -564,12 +562,12 @@ function resetHeroConversationType () {
   heroConversationTypes.value.forEach(f => { f.active = false; });
 }
 const heroHasActiveFilters = computed(() => {
-  return heroChannels.value.some(f => f.active) ||
+  return momentCount.value.some(f => f.active) ||
     selectedHeroConversationType.value !== 'All Conversations' ||
     deferredFilters.value.some(f => f.active);
 });
 function resetHeroFilters () {
-  heroChannels.value.forEach(f => { delete f.active; });
+  momentCount.value.forEach(f => { delete f.active; });
   heroConversationTypes.value.forEach(f => { f.active = false; });
   deferredFilters.value.forEach(f => { delete f.active; });
 }
