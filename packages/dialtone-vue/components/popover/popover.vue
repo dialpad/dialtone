@@ -281,10 +281,20 @@ export default {
     /**
      * External anchor id to use in those cases the anchor can't be provided via the slot.
      * For instance, using the combobox's input as the anchor for the popover.
+     * @deprecated Use externalAnchorElement instead for Shadow DOM compatibility.
      */
     externalAnchor: {
       type: String,
       default: '',
+    },
+
+    /**
+     * External anchor element reference. Use this instead of externalAnchor when
+     * the anchor may be inside a Shadow DOM, as querySelector cannot pierce shadow boundaries.
+     */
+    externalAnchorElement: {
+      type: HTMLElement,
+      default: null,
     },
 
     /**
@@ -642,6 +652,10 @@ export default {
       });
     },
 
+    externalAnchorElement () {
+      this.updateAnchorEl();
+    },
+
     placement (placement) {
       this.tip?.setProps({
         placement,
@@ -718,9 +732,10 @@ export default {
     },
 
     updateAnchorEl () {
-      const externalAnchorEl = this.externalAnchor
-        ? this.$refs.anchor.getRootNode().querySelector(`#${this.externalAnchor}`)
-        : null;
+      const externalAnchorEl = this.externalAnchorElement ||
+        (this.externalAnchor
+          ? this.$refs.anchor.getRootNode().querySelector(`#${this.externalAnchor}`)
+          : null);
       const anchorEl = externalAnchorEl ?? this.$refs.anchor.children[0];
       if (anchorEl === this.anchorEl) {
         return;
