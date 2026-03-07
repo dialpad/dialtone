@@ -457,16 +457,6 @@ a.header-anchor {
   }
 }
 
-:where(code) {
-  .d-docsite--paragraph &,
-  .d-docsite--unordered-list &,
-  .d-docsite--ordered-list &,
-  .d-docsite--list-element &,
-  .d-docsite--preview-header & {
-    font-size: 95%;
-  }
-}
-
 .d-docsite--unordered-list,
 .d-docsite--list-element,
 .d-docsite--ordered-list {
@@ -488,6 +478,14 @@ a.header-anchor {
   &:last-child {
     margin-block-end: 0;
   }
+}
+
+:where(:is(.d-docsite--paragraph, .d-docsite--unordered-list, .d-docsite--ordered-list, .d-docsite--list-element, .d-docsite--preview-header) > code) {
+	padding: var(--dt-size-200) var(--dt-size-300);
+	color: var(--dt-color-blue-800);
+	border-radius: var(--dt-size-200);
+	border: 1px solid var(--dt-color-border-subtle);
+	user-select: all;
 }
 
 .d-docsite--preview-header {
