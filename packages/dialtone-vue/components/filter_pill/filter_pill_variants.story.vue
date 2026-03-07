@@ -109,6 +109,18 @@
             ? 'Conversation type'
             : selectedDropdownType }}
         </template>
+        <template #content="{ close }">
+          <dt-list-item
+            v-for="filter in dropdownConversationTypes"
+            :key="filter.name"
+            role="menuitem"
+            navigation-type="arrow-keys"
+            :selected="filter.name === selectedDropdownType"
+            @click="selectDropdownType(filter.name, close)"
+          >
+            {{ filter.name }}
+          </dt-list-item>
+        </template>
       </dt-filter-pill>
     </dt-stack>
     <!-- Disabled -->
@@ -153,6 +165,7 @@ import { DtRadioGroup } from '@/components/radio_group';
 import { DtRadio } from '@/components/radio';
 import { DtIconFilter } from '@dialpad/dialtone-icons/vue3';
 import { DtText } from '../text/index';
+import { DtListItem } from '@/components/list_item';
 
 export default {
   name: 'DtFilterPillVariants',
@@ -163,6 +176,7 @@ export default {
     DtStack,
     DtIconFilter,
     DtText,
+    DtListItem,
   },
 
   data () {
@@ -252,6 +266,13 @@ export default {
   },
 
   methods: {
+    selectDropdownType (name, close) {
+      this.dropdownConversationTypes.forEach(f => {
+        f.active = name !== 'All Conversations' && f.name === name;
+      });
+      close();
+    },
+
     resetDropdownType () {
       this.dropdownConversationTypes.forEach(f => { f.active = false; });
     },
