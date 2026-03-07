@@ -10,10 +10,18 @@ keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFil
 <code-well-header>
   <dt-stack direction="row" gap="400">
     <dt-filter-pill
-      v-model="heroChannels"
-      label="Channel"
-    />
-    <dt-filter-pill
+      v-model="momentCount"
+      label="Moment"
+      end-tooltip-text="Remove"
+      ref="badgeCountExample"
+    >
+      <template #default="{ label, filters, activeFilters }">
+        {{ label }}<template v-if="activeFilters.length">:
+        <strong>
+          {{ activeFilters.length === filters.length ? 'All' : activeFilters.length }}
+        </strong></template>
+      </template>
+    </dt-filter-pill>    <dt-filter-pill
       v-model="heroConversationTypes"
       :start-tooltip-text="selectedHeroConversationType !== 'All Conversations'
         ? 'Conversation type'
@@ -292,14 +300,14 @@ showHtmlWarning />
 
 ## Custom labels
 
-### Badge count
+### Example: Count
 
 Using the `default` scoped slot, you can display a count of active filters alongside the label.
 
 <code-well-header>
   <dt-stack direction="row" gap="400">
     <dt-filter-pill
-      v-model="contactCentersBadge"
+      v-model="momentCount"
       label="Contact centers"
       end-tooltip-text="Remove"
       ref="badgeCountExample"
@@ -326,7 +334,7 @@ vueCode='<dt-filter-pill v-model="filters" label="Contact centers" end-tooltip-t
 </dt-filter-pill>'
 showHtmlWarning />
 
-### Active filter list
+### Example: Active filter list
 
 Shows the first active filter name using `activeFilterList`, with overflow count for remaining selections (e.g., "Email +2").
 
@@ -338,11 +346,12 @@ Shows the first active filter name using `activeFilterList`, with overflow count
       end-tooltip-text="Remove"
       ref="filterListExample"
     >
-      <template #default="{ label, filters, activeFilters, activeFilterList }">
+      <template #default="{ label, filters, activeFilters, activeFilterList, activeFilterOverflow }">
         {{ label }}<template v-if="activeFilters.length">:
         <strong>
           {{ activeFilters.length === filters.length ? 'All' : activeFilterList }}
-        </strong></template>
+        </strong>
+        <template v-if="activeFilterOverflow"> {{ activeFilterOverflow }}</template></template>
       </template>
     </dt-filter-pill>
   </dt-stack>
@@ -351,16 +360,17 @@ Shows the first active filter name using `activeFilterList`, with overflow count
 <code-example-tabs
 :htmlCode='() => $refs.filterListExample'
 vueCode='<dt-filter-pill v-model="filters" label="Channel" end-tooltip-text="Remove">
-  <template #default="{ label, filters, activeFilters, activeFilterList }">
+  <template #default="{ label, filters, activeFilters, activeFilterList, activeFilterOverflow }">
     {{ label }}<template v-if="activeFilters.length">:
     <strong>
       {{ activeFilters.length === filters.length ? &apos;All&apos; : activeFilterList }}
-    </strong></template>
+    </strong>
+    <template v-if="activeFilterOverflow"> {{ activeFilterOverflow }}</template></template>
   </template>
 </dt-filter-pill>'
 showHtmlWarning />
 
-### Radio selection
+### Example: Radio selection
 
 Combining the `default` and `content` slots with a radio group creates a single-select filter.
 The label updates to show the selected option, and a clear button resets to the default.
@@ -611,7 +621,7 @@ const nonClearableFilters = ref([
 ]);
 const deferredFilters = ref([
   {name: 'Email'},
-  {name: 'Phone'},
+  {name: 'Phone', active: true },
   {name: 'Chat'},
   {name: 'Social'},
   {name: 'SMS'},
@@ -627,12 +637,12 @@ const contentSlotFilters = ref([
   {name: 'Contains'},
   {name: 'Starts with'},
 ]);
-const contactCentersBadge = ref([
-  {name: 'Headquarters', active: true},
-  {name: 'Westside'},
-  {name: 'Downtown', active: true},
-  {name: 'Riverside'},
-  {name: 'Northgate'},
+const momentCount = ref([
+  {name: 'Address', active: true},
+  {name: 'Call Purpose', active: true},
+  {name: 'Action Item'},
+  {name: 'Negative Sentiment'},
+  {name: 'Warranty Inquiry', active: true },
 ]);
 const channelsFilterList = ref([
   {name: 'Email', active: true},
