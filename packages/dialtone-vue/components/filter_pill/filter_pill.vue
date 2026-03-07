@@ -5,8 +5,9 @@
   >
     <component
       :is="overlayComponent"
-      v-model:open="isOpen"
+      :open="useDropdown ? null : isOpen"
       v-bind="overlayProps"
+      @update:open="isOpen = $event"
     >
       <template #anchor="slotData">
         <dt-button
@@ -25,7 +26,8 @@
           :size="size"
           data-qa="dt-filter-pill__button"
           importance="outlined"
-          @click="isOpen = true"
+          @click="openPopover"
+          @keydown.up.down.prevent="openPopover"
         >
           <template
             v-if="$slots.startIcon"
@@ -352,7 +354,7 @@ export default {
         'fallback-placements': this.popoverFallbackPlacements,
         'max-height': this.popoverMaxHeight,
         'max-width': this.popoverMaxWidth,
-        modal: false,
+        modal: true,
         placement: this.popoverPlacement,
       };
       if (!this.useDropdown) {
@@ -433,14 +435,17 @@ export default {
       this.$emit('clear', $event)
     },
 
+    openPopover () {
+      if (!this.useDropdown) {
+        this.isOpen = true;
+      }
+    },
+
     selectFilter (selectedFilter, close) {
       this.filters.forEach(filter => {
         filter.active = filter === selectedFilter;
       });
       close();
-      this.$nextTick(() => {
-        this.$el.querySelector('[data-qa="dt-filter-pill__button"]')?.focus();
-      });
     },
   },
 };
