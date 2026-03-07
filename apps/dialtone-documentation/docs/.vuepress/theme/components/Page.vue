@@ -27,8 +27,10 @@
           <template #startIcon>
             <dt-icon name="arrow-left" />
           </template>
-          <dt-stack as="span" class="d-ta-left d-p8">
-            <span class="d-body--md-compact d-fc-muted">Previous</span>
+          <dt-stack as="span" class="d-p8">
+            <dt-text as="span" kind="body" size="md" tone="muted">
+              Previous
+            </dt-text>
             <span>{{ prev.text }}</span>
           </dt-stack>
         </dt-button>
@@ -37,7 +39,6 @@
           :to="next.link"
           class="d-wmn40p"
           label-class="d-jc-space-between"
-          icon-position="right"
           importance="outlined"
           kind="muted"
           size="lg"
@@ -45,8 +46,10 @@
           <template #endIcon>
             <dt-icon name="arrow-right" />
           </template>
-          <dt-stack as="span" class="d-ta-left d-p8">
-            <span class="d-body--md-compact d-fc-muted">Next</span>
+          <dt-stack as="span" class="d-p8">
+            <dt-text as="span" kind="body" size="md" tone="muted">
+              Next
+            </dt-text>
             <span>{{ next.text }}</span>
           </dt-stack>
         </dt-button>
