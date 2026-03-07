@@ -235,7 +235,7 @@ export default {
 
     runValidations () {
       if (!this.hasLabelContent && !this.$attrs['aria-label']) {
-        console.info(
+        console.warn(
           '[Dialtone] A label is required for accessibility. Provide a label prop and use label-visible="false" to hide it visually.',
         );
       }
