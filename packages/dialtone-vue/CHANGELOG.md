@@ -1,3 +1,10 @@
+# [3.212.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.211.0...dialtone-vue/v3.212.0) (2026-03-07)
+
+
+### Features
+
+* **Popover,hovercard:** DP-175404 support externalAnchorElement ([#1108](https://github.com/dialpad/dialtone/issues/1108)) ([bc23ca8](https://github.com/dialpad/dialtone/commit/bc23ca84adbbc05f33cc9b591d27d826886e5244))
+
 # [3.211.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.210.0...dialtone-vue/v3.211.0) (2026-03-06)
 
 
