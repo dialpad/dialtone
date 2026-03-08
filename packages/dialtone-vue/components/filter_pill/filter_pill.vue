@@ -70,7 +70,10 @@
               />
             </slot>
           </span>
-          <template #endIcon="{ iconSize }">
+          <template
+            v-if="!readOnly"
+            #endIcon="{ iconSize }"
+          >
             <dt-icon-chevron-down
               :size="iconSize"
               class="d-filter-pill__icon"
@@ -260,9 +263,9 @@ export default {
 
     /**
      * When true, the pill cannot be interacted with but does not
-     * receive disabled styling. Adds `d-filter-pill--read-only` class.
-     * The clear button is suppressed and the tooltip shows a
-     * read-only message.
+     * receive disabled visual styling. Adds `d-filter-pill--read-only`
+     * class and hides the chevron icon. The clear button is suppressed
+     * and the tooltip shows a read-only message.
      */
     readOnly: {
       type: Boolean,
