@@ -5,16 +5,13 @@ import DtModeIsland from '@/components/mode_island/mode_island.vue';
 describe('DtModeDirective Tests', () => {
   let wrapper;
 
-  afterEach(() => {
-    wrapper?.unmount();
-  });
-
   beforeEach(() => {
     document.documentElement.setAttribute('data-dt-mode', 'light');
     document.documentElement.setAttribute('data-dt-contrast', 'default');
   });
 
   afterEach(() => {
+    wrapper?.unmount();
     document.documentElement.removeAttribute('data-dt-mode');
     document.documentElement.removeAttribute('data-dt-contrast');
   });
