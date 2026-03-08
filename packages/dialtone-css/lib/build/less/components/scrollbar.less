@@ -1,4 +1,5 @@
-// not in a layer because it's based on external library variables
+/* validate-layers: off */
+// intentionally outside @layer to win specificity over imported library overlayscrollbars.css
 .d-scrollbar {
   .os-theme-dark {
     // main color for the scrollbars handle
@@ -26,7 +27,7 @@
       }
 
       &:active {
-        opacity: var(--dt-opacity-1000);
+        opacity: var(--dt-opacity-1100);
       }
     }
   }
