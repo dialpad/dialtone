@@ -252,9 +252,7 @@ Cancel, Escape, or clicking outside discards pending changes.
 vueCode='<dt-filter-pill v-model="[...]" label="Channel" defer-selection />'
 showHtmlWarning />
 
-## Overlay modes
-
-### With dropdown
+## With dropdown
 
 Setting `use-dropdown` switches the overlay from a popover to a dropdown with keyboard-navigable
 list items. This provides arrow key navigation, highlight management, and Enter/Space selection
@@ -277,6 +275,18 @@ out of the box — ideal for single-select filter patterns.
           ? 'Conversation type'
           : selectedDropdownType }}
       </template>
+      <template #content="{ close }">
+        <dt-list-item
+          v-for="filter in dropdownTypes"
+          :key="filter.name"
+          role="menuitem"
+          navigation-type="arrow-keys"
+          :selected="filter.name === selectedDropdownType"
+          @click="selectDropdownType(filter.name, close)"
+        >
+          {{ filter.name }}
+        </dt-list-item>
+      </template>
     </dt-filter-pill>
   </dt-stack>
 </code-well-header>
@@ -296,6 +306,18 @@ vueCode='<dt-filter-pill
     {{ selectedType === &apos;All Conversations&apos;
       ? &apos;Conversation type&apos;
       : selectedType }}
+  </template>
+  <template #content="{ close }">
+    <dt-list-item
+      v-for="filter in conversationTypes"
+      :key="filter.name"
+      role="menuitem"
+      navigation-type="arrow-keys"
+      :selected="filter.name === selectedType"
+      @click="selectType(filter.name, close)"
+    >
+      {{ filter.name }}
+    </dt-list-item>
   </template>
 </dt-filter-pill>'
 showHtmlWarning />
@@ -678,6 +700,12 @@ const selectedConversationType = computed({
 const selectedDropdownType = computed(() => {
   return dropdownTypes.value.find(f => f.active)?.name || 'All Conversations';
 });
+function selectDropdownType (name, close) {
+  dropdownTypes.value.forEach(f => {
+    f.active = name !== 'All Conversations' && f.name === name;
+  });
+  close();
+}
 function resetDropdownType () {
   dropdownTypes.value.forEach(f => { f.active = false; });
 }
