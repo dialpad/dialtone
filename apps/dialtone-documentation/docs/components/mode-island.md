@@ -1,8 +1,8 @@
 ---
 title: Mode Island
-description: Create independent sections with their own color modes.
+description: Apply light, dark, or inverted color mode to any element or region.
 status: beta
-keywords: ["theme island","mode override","d-mode-island","DtModeIsland","dt-mode-island"]
+keywords: ["theme island","mode override","v-dt-mode","directive","light","dark","inverted"]
 ---
 
 <code-well-header>
@@ -17,15 +17,28 @@ keywords: ["theme island","mode override","d-mode-island","DtModeIsland","dt-mod
           <dt-button
             importance="outlined"
             kind="muted"
+            size="sm"
           >
             <dt-stack gap="400" direction="row">
-              <dt-text><dt-text strength="strong">Mode:</dt-text> {{ currentMode.charAt(0).toUpperCase() + currentMode.slice(1) }}</dt-text>
-              <dt-text><dt-text strength="strong">Contrast:</dt-text> {{ currentContrast.charAt(0).toUpperCase() + currentContrast.slice(1) }}</dt-text>
+              <span>
+                <dt-text strength="bold">Mode:</dt-text>
+                <dt-text tone="tertiary">{{ currentMode.charAt(0).toUpperCase() + currentMode.slice(1) }}</dt-text>
+              </span>
+              <span>
+                <dt-text strength="bold">Contrast:</dt-text>
+                <dt-text tone="tertiary">{{ currentContrast.charAt(0).toUpperCase() + currentContrast.slice(1) }}</dt-text>
+              </span>
             </dt-stack>
-            <template #startIcon>
+            <template #startIcon="{ iconSize }">
               <dt-icon
-                size="300"
+                :size="iconSize"
                 :name="currentModeIconName"
+              />
+            </template>
+            <template #endIcon="{ iconSize }">
+              <dt-icon
+                :size="iconSize"
+                name="chevron-down"
               />
             </template>
           </dt-button>
@@ -96,7 +109,7 @@ keywords: ["theme island","mode override","d-mode-island","DtModeIsland","dt-mod
       </dt-dropdown>
     </dt-stack>
     <dt-stack :direction="{ 'default': 'column', 'md': 'row' }" gap="500" class="d-w100p">
-      <dt-mode-island class="d-p16 d-bar8 d-ba d-fl1">
+      <section v-dt-mode class="d-bgc-secondary d-p16 d-bar8 d-ba d-bc-default d-fl1">
         <dt-stack gap="400">
           <dt-stack direction="row" gap="400" class="d-jc-space-between">
             <dt-text as="h3" kind="headline" size="md" density="200">Inverted <dt-text strength="normal">(auto)</dt-text></dt-text>
@@ -115,8 +128,8 @@ keywords: ["theme island","mode override","d-mode-island","DtModeIsland","dt-mod
             <dt-button class="d-fl1" kind="danger">Button</dt-button>
           </dt-stack>
         </dt-stack>
-      </dt-mode-island>
-      <dt-mode-island mode="light" class="d-p16 d-bar8 d-ba d-fl1">
+      </section>
+      <section v-dt-mode:light class="d-bgc-secondary d-p16 d-bar8 d-ba d-bc-default d-fl1">
         <dt-stack gap="400">
           <dt-stack direction="row" gap="400" class="d-jc-space-between">
             <dt-text as="h3" kind="headline" size="md" density="200">Explicit light</dt-text>
@@ -135,8 +148,8 @@ keywords: ["theme island","mode override","d-mode-island","DtModeIsland","dt-mod
             <dt-button class="d-fl1" kind="danger">Button</dt-button>
           </dt-stack>
         </dt-stack>
-      </dt-mode-island>
-      <dt-mode-island mode="dark" class="d-p16 d-bar8 d-ba d-fl1">
+      </section>
+      <section v-dt-mode:dark class="d-bgc-secondary d-p16 d-bar8 d-ba d-bc-default d-fl1">
         <dt-stack gap="400">
           <dt-stack direction="row" gap="400" class="d-jc-space-between">
             <dt-text as="h3" kind="headline" size="md" density="200">Explicit dark</dt-text>
@@ -155,30 +168,98 @@ keywords: ["theme island","mode override","d-mode-island","DtModeIsland","dt-mod
             <dt-button class="d-fl1" kind="danger">Button</dt-button>
           </dt-stack>
         </dt-stack>
-      </dt-mode-island>
+      </section>
     </dt-stack>
   </dt-stack>
 </code-well-header>
 
 ## Usage
 
-Mode islands create isolated regions that may display in a different color mode, `light`, `dark`, or `inverted`. Useful for forcing a region to a controlled mode for a unique UI purpose.
+Use the `v-dt-mode` directive to control the color mode of a region, component, or element. It creates an scoped region with the specified mode. Descendant elements retain their original styling but are rendered with the specified mode.
 
-### Structure
+<code-well-header>
+  <dt-text v-dt-mode:dark tone="success"> Dark content </dt-text>
+  <dt-text v-dt-mode:light tone="success"> Light content </dt-text>
+  <dt-text v-dt-mode:invert tone="success"> Inverted — opposite of parent or root </dt-text>
+</code-well-header>
+<code-example-tabs
+vueCode='
+<dt-text v-dt-mode:dark tone="success"> Dark content </dt-text>
+<dt-text v-dt-mode:light tone="success"> Light content </dt-text>
+<dt-text v-dt-mode:invert tone="success"> Inverted — opposite of parent or root </dt-text>
+'
+/>
+
+### Inverting
+
+This effectively removes the need for `inverted` props or variants on elements or components.
+
+For example, instead of using `inverted` on a DtButton, use `v-dt-mode:invert`
 
 <code-example-tabs
 vueCode='
-<dt-mode-island>
-  Inverted
-</dt-mode-island>
-<dt-mode-island mode="light">
-  Light
-</dt-mode-island>
-<dt-mode-island mode="dark">
-  Dark
-</dt-mode-island>
+<dt-button>Button</dt-button>
+<dt-button v-dt-mode:invert>Button</dt-button>
 '
 />
+
+<code-well-header>
+  <dt-stack gap="400" direction="row">
+    <dt-button>Button</dt-button>
+    <dt-button v-dt-mode:invert>Button</dt-button>
+  </dt-stack>
+</code-well-header>
+
+### Dynamic mode
+
+Bind a reactive variable as the directive arg to switch modes at runtime.
+
+<code-well-header>
+  <dt-stack gap="500">
+    <dt-stack gap="400" direction="row">
+      <dt-button
+        kind="muted"
+        importance="outlined"
+        :active="dynamicMode === 'invert'"
+        @click="dynamicMode = 'invert'"
+      >
+        Invert
+        <template #startIcon="{ iconSize }">
+          <dt-icon name="circle-half-filled" :size="iconSize" />
+        </template>
+      </dt-button>
+      <dt-button
+        kind="muted"
+        importance="outlined"
+        :active="dynamicMode === 'light'"
+        @click="dynamicMode = 'light'"
+      >
+        Light
+        <template #startIcon="{ iconSize }">
+          <dt-icon name="sun" :size="iconSize" />
+        </template>
+      </dt-button>
+      <dt-button
+        kind="muted"
+        importance="outlined"
+        :active="dynamicMode === 'dark'"
+        @click="dynamicMode = 'dark'"
+      >
+        Dark
+        <template #startIcon="{ iconSize }">
+          <dt-icon name="moon" :size="iconSize" />
+        </template>
+      </dt-button>
+    </dt-stack>
+    <dt-text v-dt-mode:[dynamicMode] align="center" tone="success"> {{ dynamicMode }} mode </dt-text>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-text v-dt-mode:[dynamicMode] align="center" tone="success"> {{ dynamicMode }} mode content </dt-text>
+'
+showHtmlWarning />
 
 ### Guidance
 
@@ -195,43 +276,39 @@ vueCode='
 <template #dont>
 
 - Do not overuse mode islands, respect user theme preference
-- Do not use purely for decoration. Ensure Mode Island use serves a functional and unique purpose
+- Do not use purely for decoration. Ensure mode island use serves a functional and unique purpose
 - Avoid nesting deeply. Keep hierarchy shallow for maintainability
 
 </template>
 
 </dialtone-usage>
 
-### Reactive Mode Updates
+### How it works
 
-Inverted islands reactively track parent/root mode changes. User switches light ↔ dark → inverted islands flip automatically. Even directly modifying the `mode` attribute will also work.
-
-### Brand Theme Protection
-
-`data-dt-brand` (aka "Theme", e.g. "tmo", "sunflower", etc) can not be set on Mode Islands. Brand theme can only be set at root level and are inherited
-
-### Contrast Inheritance
-
-Contrast is not an option to set to a Mode Island. Contrast theme setting is inherited from the root element, i.e. `<html>`.
+- CSS tokens activate via `[data-dt-mode="light"]` and `[data-dt-mode="dark"]` attribute selectors
+- High-contrast tokens layer via `[data-dt-mode][data-dt-contrast="high"]`
+- Contrast is inherited from the root `<html>` element and kept in sync via MutationObserver
+- For `invert` mode, the directive reads the nearest ancestor's `data-dt-mode`, computes the opposite, and reacts when it changes
+- `data-dt-brand` (theme) cannot be set on mode islands — brand is root-level only
 
 ## Variants
 
 ### Inverted
 
-The default mode, inverts the container relative to the parent or root's mode. When `mode` attribute is omitted, it defaults to `inverted`.
+The default mode — inverts relative to the nearest parent mode boundary or the root. When no arg is provided, `v-dt-mode` defaults to invert.
 
 <code-well-header>
-  <dt-mode-island ref="invertedExample" class="d-p16 d-bar8">
-    <dt-text as="p">Inverted mode (opposite of parent)</dt-text>
-  </dt-mode-island>
+  <section ref="invertedExample" v-dt-mode class="d-p16 d-bar8">
+    <dt-text as="p" tone="success">Inverted mode (opposite of parent)</dt-text>
+  </section>
 </code-well-header>
 
 <code-example-tabs
 :htmlCode='() => $refs.invertedExample'
 vueCode='
-<dt-mode-island class="d-p16 d-bar8">
-  <dt-text as="p">Inverted mode (opposite of parent)</dt-text>
-</dt-mode-island>
+<section v-dt-mode class="d-p16 d-bar8">
+  <dt-text as="p" tone="success">Inverted mode (opposite of parent)</dt-text>
+</section>
 '
 showHtmlWarning />
 
@@ -240,17 +317,17 @@ showHtmlWarning />
 Explicitly set to light mode regardless of parent or root mode.
 
 <code-well-header>
-  <dt-mode-island ref="lightExample" mode="light" class="d-p16 d-bar8">
-    <dt-text as="p">Always light mode</dt-text>
-  </dt-mode-island>
+  <section ref="lightExample" v-dt-mode:light class="d-p16 d-bar8">
+    <dt-text as="p" tone="success">Always light mode</dt-text>
+  </section>
 </code-well-header>
 
 <code-example-tabs
 :htmlCode='() => $refs.lightExample'
 vueCode='
-<dt-mode-island mode="light" class="d-p16 d-bar8">
-  <dt-text as="p">Always light mode</dt-text>
-</dt-mode-island>
+<section v-dt-mode:light class="d-p16 d-bar8">
+  <dt-text as="p" tone="success">Always light mode</dt-text>
+</section>
 '
 showHtmlWarning />
 
@@ -259,69 +336,48 @@ showHtmlWarning />
 Explicitly set to dark mode regardless of parent or root mode.
 
 <code-well-header>
-  <dt-mode-island ref="darkExample" mode="dark" class="d-p16 d-bar8">
-    <dt-text as="p">Always dark mode</dt-text>
-  </dt-mode-island>
+  <section ref="darkExample" v-dt-mode:dark class="d-p16 d-bar8">
+    <dt-text as="p" tone="success">Always dark mode</dt-text>
+  </section>
 </code-well-header>
 
 <code-example-tabs
 :htmlCode='() => $refs.darkExample'
 vueCode='
-<dt-mode-island mode="dark" class="d-p16 d-bar8">
+<section v-dt-mode:dark class="d-p16 d-bar8">
   <dt-text as="p">Always dark mode</dt-text>
-</dt-mode-island>
+</section>
 '
 showHtmlWarning />
-
-## Custom element
-
-Polymorphic rendering via `as` prop—controls which HTML element wraps content. Ensures proper document structure and semantic markup. Example values: `section` for thematic grouping, `article` for self-contained content. Defaults to `div` where semantics aren't a concern.
-
-<code-well-header>
-  <dt-mode-island ref="sectionExample" as="section" mode="dark" class="d-p16 d-bar8">
-    <dt-text as="p">Rendered as section element</dt-text>
-  </dt-mode-island>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.sectionExample'
-vueCode='
-<dt-mode-island as="section" mode="dark" class="d-p16 d-bar8">
-  <dt-text as="p">Rendered as section element</dt-text>
-</dt-mode-island>
-'
-showHtmlWarning />
-
-**Common values:** `div` (default), `section`, `article`, `nav`, `aside`, `header`, `footer`, `main`
 
 ## Nesting
 
-Mode islands may be nested, though should rarely occur.
+Mode boundaries can be nested. Each `v-dt-mode:invert` reads the nearest parent boundary and flips. In this example the first level is explicitly set to light mode, the second level inverts against that, and the third level inverts again.
 
 <code-well-header>
-  <dt-mode-island ref="nestingExample" mode="light" class="d-p16 d-bar8">
-    <dt-text as="p">Light island</dt-text>
-    <dt-mode-island class="d-p16 d-bar8">
-      <dt-text as="p">Inverted → Dark island</dt-text>
-      <dt-mode-island class="d-p16 d-bar4">
-        <dt-text as="p">Inverted again → Light island</dt-text>
-      </dt-mode-island>
-    </dt-mode-island>
-  </dt-mode-island>
+  <dt-stack gap="400" ref="nestingExample" v-dt-mode:light class="d-p16 d-bar8 d-bgc-secondary d-ba">
+    <dt-text as="p" tone="success">Light</dt-text>
+    <dt-stack v-dt-mode gap="400" class="d-p16 d-bar8 d-bgc-secondary">
+      <dt-text as="p" tone="success">Inverted (Dark)</dt-text>
+      <dt-stack v-dt-mode gap="400" class="d-p16 d-bar4 d-bgc-secondary">
+        <dt-text as="p" tone="success">Inverted again (Light)</dt-text>
+      </dt-stack>
+    </dt-stack>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
 :htmlCode='() => $refs.nestingExample'
 vueCode='
-<dt-mode-island mode="light" class="d-p16 d-bar8">
-  <dt-text as="p">Light island</dt-text>
-  <dt-mode-island class="d-p16 d-bar8">
-    <dt-text as="p">Inverted → Dark island</dt-text>
-    <dt-mode-island class="d-p16 d-bar4">
-      <dt-text as="p">Inverted again → Light island</dt-text>
-    </dt-mode-island>
-  </dt-mode-island>
-</dt-mode-island>
+<dt-stack gap="400" v-dt-mode:light class="d-p16 d-bar8 d-bgc-secondary d-ba">
+  <dt-text as="p" tone="success">Light</dt-text>
+  <dt-stack v-dt-mode gap="400" class="d-p16 d-bar8 d-bgc-secondary">
+    <dt-text as="p" tone="success">Inverted (Dark)</dt-text>
+    <dt-stack v-dt-mode gap="400" class="d-p16 d-bar4 d-bgc-secondary">
+      <dt-text as="p" tone="success">Inverted again (Light)</dt-text>
+    </dt-stack>
+  </dt-stack>
+</dt-stack>
 '
 />
 
@@ -329,8 +385,10 @@ vueCode='
 
 ### Callbar
 
+A real-world pattern: the callbar container already exists as a semantic element. The directive applies mode theming directly — no wrapper needed.
+
 <code-well-header>
-  <dt-mode-island ref="callbarExample" class="d-ba d-bc-subtle d-p8 d-py4 d-bar32 d-bs-md d-w100p">
+  <nav ref="callbarExample" v-dt-mode class="d-ba d-bc-subtle d-bgc-secondary d-p8 d-py4 d-bar12 d-bs-md d-w100p">
     <dt-stack direction="row" gap="600">
       <dt-stack gap="400" direction="row">
         <dt-avatar
@@ -375,23 +433,23 @@ vueCode='
         </dt-button>
       </dt-stack>
     </dt-stack>
-  </dt-mode-island>
+  </nav>
   <dt-text as="p" tone="muted" class="d-mt8">* Not real, still just an example</dt-text>
 </code-well-header>
 
 <code-example-tabs
 :htmlCode='() => $refs.callbarExample'
 vueCode='
-<dt-mode-island class="d-ba d-bc-subtle d-p8 d-py4 d-bar32 d-bs-md d-w100p">
+<nav v-dt-mode class="d-ba d-bc-subtle d-p8 d-py4 d-bar32 d-bs-md d-w100p">
   <dt-stack direction="row" gap="600">
     <dt-stack gap="400" direction="row">
       <dt-avatar full-name="TA" seed="ted-anderson" size="lg" />
       <dt-stack gap="200">
         <dt-text kind="label" size="md" density="200">Ted Anderson</dt-text>
         <dt-stack direction="row" gap="300" align="baseline">
-          <dt-text kind="helper" size="sm" tone="tertiary" wrap="nowrap" numeric>(913) 555-6745</dt-text>
-          <dt-text kind="helper" size="sm" tone="muted">&bull;</dt-text>
-          <dt-text kind="helper" size="sm" tone="tertiary" numeric>21:18</dt-text>
+          <dt-text kind="body" size="xs" tone="tertiary" wrap="nowrap" numeric>(913) 555-6745</dt-text>
+          <dt-text kind="body" size="xs" tone="muted">&bull;</dt-text>
+          <dt-text kind="body" size="xs" tone="tertiary" numeric>21:18</dt-text>
         </dt-stack>
       </dt-stack>
     </dt-stack>
@@ -408,13 +466,13 @@ vueCode='
       </dt-button>
     </dt-stack>
   </dt-stack>
-</dt-mode-island>
+</nav>
 '
 showHtmlWarning />
 
 ### Positioned Components
 
-[Popovers](/components/popover.html), [Dropdowns](/components/dropdown.html), and [Hovercards](/components/hovercard.html) are typically rendered at the root element of the DOM tree, and thus inherit the page's mode by default. They can be forced to a specific mode by assigning a Mode Island to its content slot.
+[Popovers](/components/popover.html), [Dropdowns](/components/dropdown.html), and [Hovercards](/components/hovercard.html) render at the root of the DOM tree and inherit the page's mode. Use `v-dt-mode` on the slot content's container to override.
 
 <code-well-header>
   <dt-stack gap="500">
@@ -436,9 +494,9 @@ showHtmlWarning />
             <dt-button size="sm" kind="muted" importance="outlined">Inverted </dt-button>
           </template>
           <template #content>
-            <dt-mode-island class="d-p16 d-bgc-secondary">
+            <div v-dt-mode class="d-p16 d-bgc-secondary">
               <ExampleProfileCard />
-            </dt-mode-island>
+            </div>
           </template>
         </dt-hovercard>
         <dt-hovercard padding="none" placement="top-start">
@@ -446,9 +504,9 @@ showHtmlWarning />
             <dt-button size="sm" kind="muted" importance="outlined">Light </dt-button>
           </template>
           <template #content>
-            <dt-mode-island mode="light" class="d-p16 d-bgc-secondary">
+            <div v-dt-mode:light class="d-p16 d-bgc-secondary">
               <ExampleProfileCard />
-            </dt-mode-island>
+            </div>
           </template>
         </dt-hovercard>
         <dt-hovercard padding="none" placement="top-start">
@@ -456,9 +514,9 @@ showHtmlWarning />
             <dt-button size="sm" kind="muted" importance="outlined">Dark </dt-button>
           </template>
           <template #content>
-            <dt-mode-island mode="dark" class="d-p16 d-bgc-secondary">
+            <div v-dt-mode:dark class="d-p16 d-bgc-secondary">
               <ExampleProfileCard />
-            </dt-mode-island>
+            </div>
           </template>
         </dt-hovercard>
       </dt-stack>
@@ -481,9 +539,9 @@ showHtmlWarning />
             <dt-button size="sm" kind="muted" importance="outlined"> Inverted </dt-button>
           </template>
           <template #content="{ close }">
-            <dt-mode-island mode="inverted" class="d-p16 d-bgc-secondary">
+            <div v-dt-mode class="d-p16 d-bgc-secondary">
               <dt-text as="p">This Popover's content is in the <dt-text strength="strong">inverted</dt-text> mode.</dt-text>
-            </dt-mode-island>
+            </div>
           </template>
         </dt-popover>
         <dt-popover padding="none" placement="top-start" dialogClass="d-w216">
@@ -491,9 +549,9 @@ showHtmlWarning />
             <dt-button size="sm" kind="muted" importance="outlined"> Light </dt-button>
           </template>
           <template #content="{ close }">
-            <dt-mode-island mode="light" class="d-p16 d-bgc-secondary">
+            <div v-dt-mode:light class="d-p16 d-bgc-secondary">
               <dt-text as="p">This Popover's content is in explicit <dt-text strength="strong">light</dt-text> mode.</dt-text>
-            </dt-mode-island>
+            </div>
           </template>
         </dt-popover>
         <dt-popover padding="none" placement="top-start" dialogClass="d-w216">
@@ -501,9 +559,9 @@ showHtmlWarning />
             <dt-button size="sm" kind="muted" importance="outlined"> Dark </dt-button>
           </template>
           <template #content="{ close }">
-            <dt-mode-island mode="dark" class="d-p16 d-bgc-secondary">
+            <div v-dt-mode:dark class="d-p16 d-bgc-secondary">
               <dt-text as="p">This Popover's content is in explicit <dt-text strength="strong">dark</dt-text> mode.</dt-text>
-            </dt-mode-island>
+            </div>
           </template>
         </dt-popover>
       </dt-stack>
@@ -542,7 +600,7 @@ showHtmlWarning />
             </dt-button>
           </template>
           <template #list="{ close }">
-            <dt-mode-island class="d-bgc-secondary d-p4">
+            <div v-dt-mode class="d-bgc-secondary d-p4">
               <dt-list-item
                 v-for="item in items"
                 :key="item.id"
@@ -552,7 +610,7 @@ showHtmlWarning />
               >
                 {{ item.name }}
               </dt-list-item>
-            </dt-mode-island>
+            </div>
           </template>
         </dt-dropdown>
         <dt-dropdown navigation-type="arrow-keys" placement="bottom-start" listClass="d-m0" padding="small">
@@ -565,7 +623,7 @@ showHtmlWarning />
             </dt-button>
           </template>
           <template #list="{ close }">
-            <dt-mode-island mode="light" class="d-bgc-secondary d-p4">
+            <div v-dt-mode:light class="d-bgc-secondary d-p4">
               <dt-list-item
                 v-for="item in items"
                 :key="item.id"
@@ -575,7 +633,7 @@ showHtmlWarning />
               >
                 {{ item.name }}
               </dt-list-item>
-            </dt-mode-island>
+            </div>
           </template>
         </dt-dropdown>
         <dt-dropdown navigation-type="arrow-keys" placement="bottom-start" listClass="d-m0" padding="small">
@@ -588,7 +646,7 @@ showHtmlWarning />
             </dt-button>
           </template>
           <template #list="{ close }">
-            <dt-mode-island mode="dark" class="d-bgc-secondary d-p4">
+            <div v-dt-mode:dark class="d-bgc-secondary d-p4">
               <dt-list-item
                 v-for="item in items"
                 :key="item.id"
@@ -598,7 +656,7 @@ showHtmlWarning />
               >
                 {{ item.name }}
               </dt-list-item>
-            </dt-mode-island>
+            </div>
           </template>
         </dt-dropdown>
       </dt-stack>
@@ -614,9 +672,9 @@ vueCode='
     <dt-button size="sm" kind="muted" importance="outlined">Inverted</dt-button>
   </template>
   <template #content>
-    <dt-mode-island class="d-p16 d-bgc-secondary">
+    <div v-dt-mode class="d-p16 d-bgc-secondary">
       <ExampleProfileCard />
-    </dt-mode-island>
+    </div>
   </template>
 </dt-hovercard>
 <!-- Popover -->
@@ -625,9 +683,9 @@ vueCode='
     <dt-button size="sm" kind="muted" importance="outlined">Inverted</dt-button>
   </template>
   <template #content="{ close }">
-    <dt-mode-island mode="inverted" class="d-p16 d-bgc-secondary">
+    <div v-dt-mode class="d-p16 d-bgc-secondary">
       <dt-text as="p">This Popover content is in the <dt-text strength="strong">inverted</dt-text> mode.</dt-text>
-    </dt-mode-island>
+    </div>
   </template>
 </dt-popover>
 <!-- Dropdown -->
@@ -641,7 +699,7 @@ vueCode='
     </dt-button>
   </template>
   <template #list="{ close }">
-    <dt-mode-island class="d-bgc-secondary d-p4">
+    <div v-dt-mode class="d-bgc-secondary d-p4">
       <dt-list-item
         v-for="item in items"
         :key="item.id"
@@ -650,13 +708,55 @@ vueCode='
       >
         {{ item.name }}
       </dt-list-item>
-    </dt-mode-island>
+    </div>
   </template>
 </dt-dropdown>
 '
 />
 
+## Component
+
+The `<dt-mode-island>` component is the underlying abstraction that the directive builds on. It creates a wrapper element, sets `data-dt-mode` and `data-dt-contrast`, and applies the `d-mode-island` CSS class (which sets `color` and `background-color` from tokens).
+
+Use the component when no container element exists and you need one created for you.
+
+<code-example-tabs
+vueCode='
+<dt-mode-island>
+  Inverted (default)
+</dt-mode-island>
+<dt-mode-island mode="light">
+  Light
+</dt-mode-island>
+<dt-mode-island mode="dark">
+  Dark
+</dt-mode-island>
+<dt-mode-island as="section" mode="dark">
+  Rendered as a section element
+</dt-mode-island>
+'
+/>
+
+### When to use which
+
+| Scenario | Use |
+|----------|-----|
+| You already have a container element (`section`, `nav`, `div`, etc.) | `v-dt-mode` directive |
+| No container exists, you need a wrapper created | `<dt-mode-island>` component |
+| Inside slot content (popovers, dropdowns) | Either — directive preferred if a container element exists |
+
+Both set `data-dt-mode` on their element and are fully interoperable when nested.
+
 ## Vue API
+
+### Directive
+
+```js
+import { DtModeDirective } from '@dialpad/dialtone-vue';
+app.use(DtModeDirective);
+```
+
+### Component
 
 <component-vue-api component-name="modeisland" />
 
@@ -677,6 +777,8 @@ const {
   setMode,
   setContrast,
 } = useThemeManager({ includeThemes: false });
+
+const dynamicMode = ref('invert');
 
 const items = ref([
   { id: '1', name: 'Option 1' },
