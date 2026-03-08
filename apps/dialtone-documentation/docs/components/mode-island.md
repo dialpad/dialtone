@@ -219,6 +219,7 @@ Bind a reactive variable as the directive arg to switch modes at runtime.
     <dt-stack gap="400" direction="row">
       <dt-button
         kind="muted"
+        size="sm"
         importance="outlined"
         :active="dynamicMode === 'invert'"
         @click="dynamicMode = 'invert'"
@@ -230,6 +231,7 @@ Bind a reactive variable as the directive arg to switch modes at runtime.
       </dt-button>
       <dt-button
         kind="muted"
+        size="sm"
         importance="outlined"
         :active="dynamicMode === 'light'"
         @click="dynamicMode = 'light'"
@@ -241,6 +243,7 @@ Bind a reactive variable as the directive arg to switch modes at runtime.
       </dt-button>
       <dt-button
         kind="muted"
+        size="sm"
         importance="outlined"
         :active="dynamicMode === 'dark'"
         @click="dynamicMode = 'dark'"
