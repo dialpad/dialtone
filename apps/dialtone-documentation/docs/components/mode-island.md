@@ -2,13 +2,13 @@
 title: Mode Island
 description: Apply light, dark, or inverted color mode to any element or region.
 status: beta
-keywords: ["theme island","mode override","v-dt-mode","directive","light","dark","inverted"]
+keywords: ["theme island","mode override","v-dt-mode","directive","light","dark","invert","v-dt"]
 ---
 
 <code-well-header>
-  <dt-stack gap="500" class="d-ai-flex-start d-w100p">
-    <dt-stack direction="row" gap="500" class="d-jc-space-between d-w100p">
-      <dt-text as="h4" kind="headline" size="xl">Demo</dt-text>
+  <dt-stack gap="500">
+    <dt-stack direction="row" gap="500" justify="space-between" class="d-w100p">
+      <dt-text as="h4" kind="headline" size="lg">Demo</dt-text>
       <dt-dropdown
         navigation-type="arrow-keys"
         placement="bottom-end"
@@ -109,73 +109,61 @@ keywords: ["theme island","mode override","v-dt-mode","directive","light","dark"
       </dt-dropdown>
     </dt-stack>
     <dt-stack :direction="{ 'default': 'column', 'md': 'row' }" gap="500" class="d-w100p">
-      <section v-dt-mode class="d-bgc-secondary d-p16 d-bar8 d-ba d-bc-default d-fl1">
-        <dt-stack gap="400">
-          <dt-stack direction="row" gap="400" class="d-jc-space-between">
-            <dt-text as="h3" kind="headline" size="md" density="200">Inverted <dt-text strength="normal">(auto)</dt-text></dt-text>
+      <dt-stack gap="400" class="d-fl1">
+        <dt-text as="h3" kind="headline" size="md">Inverted <dt-text strength="normal">(auto)</dt-text></dt-text>
+        <dt-stack v-dt-mode:invert gap="400" class="d-bgc-secondary d-p16 d-bar8 d-ba d-bc-default">
+          <dt-stack gap="400" direction="row">
             <dt-icon name="circle-half-filled" size="300" class="d-fc-success" />
+            <dt-text as="p" kind="body" size="sm">Primary</dt-text>
+            <dt-text as="p" kind="body" size="sm" tone="muted">Muted</dt-text>
+            <dt-text as="p" kind="body" size="sm" tone="critical">Critical</dt-text>
+            <dt-link>Link</dt-link>
           </dt-stack>
-          <dt-stack gap="400" direction="row" class="d-py2 d-px8 d-bgc-moderate d-bar4 d-ba">
-            <dt-text as="p">Primary</dt-text>
-            <dt-text as="p" tone="tertiary">Tertiary</dt-text>
-            <dt-text as="p" tone="critical">Critical</dt-text>
-          </dt-stack>
-          <dt-text as="p">
-            <dt-link>Text link</dt-link>
-          </dt-text>
           <dt-stack direction="row" gap="400" class="d-100p">
-            <dt-button class="d-fl1">Button</dt-button>
-            <dt-button class="d-fl1" kind="danger">Button</dt-button>
+            <dt-button size="sm" class="d-fl1">Button</dt-button>
+            <dt-button size="sm" class="d-fl1" kind="danger">Button</dt-button>
           </dt-stack>
         </dt-stack>
-      </section>
-      <section v-dt-mode:light class="d-bgc-secondary d-p16 d-bar8 d-ba d-bc-default d-fl1">
-        <dt-stack gap="400">
-          <dt-stack direction="row" gap="400" class="d-jc-space-between">
-            <dt-text as="h3" kind="headline" size="md" density="200">Explicit light</dt-text>
+      </dt-stack>
+      <dt-stack gap="400" class="d-fl1">
+        <dt-text as="h3" kind="headline" size="md">Explicit light</dt-text>
+        <dt-stack v-dt-mode:light gap="400" class="d-bgc-secondary d-p16 d-bar8 d-ba d-bc-default">
+          <dt-stack gap="400" direction="row">
             <dt-icon name="sun" size="300" class="d-fc-success" />
+            <dt-text as="p" kind="body" size="sm">Primary</dt-text>
+            <dt-text as="p" kind="body" size="sm" tone="muted">Muted</dt-text>
+            <dt-text as="p" kind="body" size="sm" tone="critical">Critical</dt-text>
+            <dt-link>Link</dt-link>
           </dt-stack>
-          <dt-stack gap="400" direction="row" class="d-py2 d-px8 d-bgc-moderate d-bar4 d-ba">
-            <dt-text as="p">Primary</dt-text>
-            <dt-text as="p" tone="tertiary">Tertiary</dt-text>
-            <dt-text as="p" tone="critical">Critical</dt-text>
-          </dt-stack>
-          <dt-text as="p">
-            <dt-link>Text link</dt-link>
-          </dt-text>
           <dt-stack direction="row" gap="400" class="d-100p">
-            <dt-button class="d-fl1">Button</dt-button>
-            <dt-button class="d-fl1" kind="danger">Button</dt-button>
+            <dt-button size="sm" class="d-fl1">Button</dt-button>
+            <dt-button size="sm" class="d-fl1" kind="danger">Button</dt-button>
           </dt-stack>
         </dt-stack>
-      </section>
-      <section v-dt-mode:dark class="d-bgc-secondary d-p16 d-bar8 d-ba d-bc-default d-fl1">
-        <dt-stack gap="400">
-          <dt-stack direction="row" gap="400" class="d-jc-space-between">
-            <dt-text as="h3" kind="headline" size="md" density="200">Explicit dark</dt-text>
+      </dt-stack>
+      <dt-stack gap="400" class="d-fl1">
+        <dt-text as="h3" kind="headline" size="md">Explicit dark</dt-text>
+        <dt-stack v-dt-mode:dark gap="400" class="d-bgc-secondary d-p16 d-bar8 d-ba d-bc-default">
+          <dt-stack gap="400" direction="row">
             <dt-icon name="moon" size="300" class="d-fc-success" />
+            <dt-text as="p" kind="body" size="sm">Primary</dt-text>
+            <dt-text as="p" kind="body" size="sm" tone="muted">Muted</dt-text>
+            <dt-text as="p" kind="body" size="sm" tone="critical">Critical</dt-text>
+            <dt-link>Link</dt-link>
           </dt-stack>
-          <dt-stack gap="400" direction="row" class="d-py2 d-px8 d-bgc-moderate d-bar4 d-ba">
-            <dt-text as="p">Primary</dt-text>
-            <dt-text as="p" tone="tertiary">Tertiary</dt-text>
-            <dt-text as="p" tone="critical">Critical</dt-text>
-          </dt-stack>
-          <dt-text as="p">
-            <dt-link>Text link</dt-link>
-          </dt-text>
           <dt-stack direction="row" gap="400" class="d-100p">
-            <dt-button class="d-fl1">Button</dt-button>
-            <dt-button class="d-fl1" kind="danger">Button</dt-button>
+            <dt-button size="sm" class="d-fl1">Button</dt-button>
+            <dt-button size="sm" class="d-fl1" kind="danger">Button</dt-button>
           </dt-stack>
         </dt-stack>
-      </section>
+      </dt-stack>
     </dt-stack>
   </dt-stack>
 </code-well-header>
 
 ## Usage
 
-Use the `v-dt-mode` directive to control the color mode of a region, component, or element. It creates an scoped region with the specified mode. Descendant elements retain their original styling but are rendered with the specified mode.
+Use the `v-dt-mode` directive to control the color mode of a region, component, or element. It creates a scoped region with the specified mode. Descendant elements retain their original styling but are rendered with the specified mode.
 
 <code-well-header>
   <dt-text v-dt-mode:dark tone="success"> Dark content </dt-text>

@@ -1,10 +1,9 @@
-@layer dialtone.base {
-// intentionally on base layer
-[data-dt-mode] {
+@layer dialtone.components {
+:where([data-dt-mode]) {
   color: var(--dt-color-foreground-primary);
 }
 
-.d-mode-island {
+:where(.d-mode-island) {
   background-color: var(--dt-color-surface-primary);
 }
 }
