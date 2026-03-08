@@ -346,12 +346,12 @@ showHtmlWarning />
 Mode boundaries can be nested. Each `v-dt-mode:invert` reads the nearest parent boundary and flips. In this example the first level is explicitly set to light mode, the second level inverts against that, and the third level inverts again.
 
 <code-well-header>
-  <dt-stack gap="400" ref="nestingExample" v-dt-mode:light class="d-p16 d-bar8 d-bgc-secondary d-ba">
-    <dt-text as="p" tone="success">Light</dt-text>
-    <dt-stack v-dt-mode gap="400" class="d-p16 d-bar8 d-bgc-secondary">
-      <dt-text as="p" tone="success">Inverted (Dark)</dt-text>
-      <dt-stack v-dt-mode gap="400" class="d-p16 d-bar4 d-bgc-secondary">
-        <dt-text as="p" tone="success">Inverted again (Light)</dt-text>
+  <dt-stack gap="500" ref="nestingExample" v-dt-mode:light class="d-p16 d-bar8 d-bgc-secondary d-ba">
+    <dt-text as="p" tone="success" text-box-trim="both">Explicit Light</dt-text>
+    <dt-stack v-dt-mode gap="500" class="d-p16 d-bar8 d-bgc-secondary">
+      <dt-text as="p" tone="success" text-box-trim="both">Inverted (Dark)</dt-text>
+      <dt-stack v-dt-mode gap="500" class="d-p16 d-bar4 d-bgc-secondary">
+        <dt-text as="p" tone="success" text-box-trim="both">Inverted again (Light)</dt-text>
       </dt-stack>
     </dt-stack>
   </dt-stack>
@@ -360,12 +360,12 @@ Mode boundaries can be nested. Each `v-dt-mode:invert` reads the nearest parent 
 <code-example-tabs
 :htmlCode='() => $refs.nestingExample'
 vueCode='
-<dt-stack gap="400" v-dt-mode:light class="d-p16 d-bar8 d-bgc-secondary d-ba">
-  <dt-text as="p" tone="success">Light</dt-text>
-  <dt-stack v-dt-mode gap="400" class="d-p16 d-bar8 d-bgc-secondary">
-    <dt-text as="p" tone="success">Inverted (Dark)</dt-text>
-    <dt-stack v-dt-mode gap="400" class="d-p16 d-bar4 d-bgc-secondary">
-      <dt-text as="p" tone="success">Inverted again (Light)</dt-text>
+<dt-stack gap="500" ref="nestingExample" v-dt-mode:light class="d-p16 d-bar8 d-bgc-secondary d-ba">
+  <dt-text as="p" tone="success" text-box-trim="both">Explicit Light</dt-text>
+  <dt-stack v-dt-mode gap="500" class="d-p16 d-bar8 d-bgc-secondary">
+    <dt-text as="p" tone="success" text-box-trim="both">Inverted (Dark)</dt-text>
+    <dt-stack v-dt-mode gap="500" class="d-p16 d-bar4 d-bgc-secondary">
+      <dt-text as="p" tone="success" text-box-trim="both">Inverted again (Light)</dt-text>
     </dt-stack>
   </dt-stack>
 </dt-stack>
@@ -379,62 +379,13 @@ vueCode='
 A real-world pattern: the callbar container already exists as a semantic element. The directive applies mode theming directly — no wrapper needed.
 
 <code-well-header>
-  <nav ref="callbarExample" v-dt-mode class="d-ba d-bc-subtle d-bgc-secondary d-p8 d-py4 d-bar12 d-bs-md d-w100p">
-    <dt-stack direction="row" gap="600">
-      <dt-stack gap="400" direction="row">
-        <dt-avatar
-          full-name="TA"
-          seed="ted-anderson"
-          size="lg"
-        />
-        <dt-stack gap="200">
-          <dt-text kind="label" size="md" density="200">Ted Anderson</dt-text>
-          <dt-stack direction="row" gap="300" align="baseline">
-            <dt-text kind="body" size="xs" tone="tertiary" wrap="nowrap" numeric>(913) 555-6745</dt-text>
-            <dt-text kind="body" size="xs" tone="muted">&bull;</dt-text>
-            <dt-text kind="body" size="xs" tone="tertiary" numeric>21:18</dt-text>
-          </dt-stack>
-        </dt-stack>
-      </dt-stack>
-      <dt-stack class="d-fl1 d-jc-center" direction="row" gap="200">
-        <dt-button class="d-px8 d-w72" size="sm" kind="danger">
-          <template #blockStartIcon> <dt-icon name="mic" size="400" /> </template>
-          Unmute
-        </dt-button>
-        <dt-button class="d-px8 d-w72" size="sm" kind="muted" importance="clear">
-          <template #blockStartIcon> <dt-icon name="record-filled" size="400" /> </template>
-          Record
-        </dt-button>
-        <dt-button class="d-px8 d-w72" size="sm" kind="muted" importance="clear">
-          <template #blockStartIcon> <dt-icon name="keypad" size="400" /> </template>
-          Keypad
-        </dt-button>
-        <dt-button class="d-px8 d-w72" size="sm" kind="muted" importance="clear">
-          <template #blockStartIcon> <dt-icon name="user-plus" size="400" /> </template>
-          Add
-        </dt-button>
-        <dt-button class="d-px8 d-w72" size="sm" kind="muted" importance="clear">
-          <template #blockStartIcon> <dt-icon name="more-horizontal" size="400" /> </template>
-          More
-        </dt-button>
-      </dt-stack>
-      <dt-stack>
-        <dt-button class="d-p12" circle size="lg" kind="danger">
-          <template #startIcon> <dt-icon name="phone-hang-up" size="500" /> </template>
-        </dt-button>
-      </dt-stack>
-    </dt-stack>
-  </nav>
-  <dt-text as="p" tone="muted" class="d-mt8">* Not real, still just an example</dt-text>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.callbarExample'
-vueCode='
-<nav v-dt-mode class="d-ba d-bc-subtle d-p8 d-py4 d-bar32 d-bs-md d-w100p">
-  <dt-stack direction="row" gap="600">
+  <dt-stack ref="callbarExample" v-dt-mode class="d-ba d-bc-subtle d-bgc-secondary d-p6 d-py4 d-bar12 d-bs-md d-w100p" direction="row" gap="600">
     <dt-stack gap="400" direction="row">
-      <dt-avatar full-name="TA" seed="ted-anderson" size="lg" />
+      <dt-avatar
+        full-name="TA"
+        seed="ted-anderson"
+        size="lg"
+      />
       <dt-stack gap="200">
         <dt-text kind="label" size="md" density="200">Ted Anderson</dt-text>
         <dt-stack direction="row" gap="300" align="baseline">
@@ -444,20 +395,84 @@ vueCode='
         </dt-stack>
       </dt-stack>
     </dt-stack>
-    <dt-stack class="d-fl1 d-jc-center" direction="row" gap="200">
-      <dt-button class="d-px8 d-w72" size="sm" kind="danger">
-        <template #blockStartIcon><dt-icon name="mic" size="400" /></template>
+    <dt-stack class="d-fl1" direction="row" gap="200" justify="center">
+      <dt-button class="d-px8 d-w64 d-w64" size="xs" kind="danger">
+        <template #blockStartIcon> <dt-icon name="mic" size="300" /> </template>
         Unmute
       </dt-button>
-      <!-- Additional buttons... -->
+      <dt-button class="d-px8 d-w64 d-w64" size="xs" kind="muted" importance="clear">
+        <template #blockStartIcon> <dt-icon name="record-filled" size="300" /> </template>
+        Record
+      </dt-button>
+      <dt-button class="d-px8 d-w64 d-w64" size="xs" kind="muted" importance="clear">
+        <template #blockStartIcon> <dt-icon name="keypad" size="300" /> </template>
+        Keypad
+      </dt-button>
+      <dt-button class="d-px8 d-w64 d-w64" size="xs" kind="muted" importance="clear">
+        <template #blockStartIcon> <dt-icon name="user-plus" size="300" /> </template>
+        Add
+      </dt-button>
+      <dt-button class="d-px8 d-w64 d-w64" size="xs" kind="muted" importance="clear">
+        <template #blockStartIcon> <dt-icon name="more-horizontal" size="300" /> </template>
+        More
+      </dt-button>
     </dt-stack>
     <dt-stack>
       <dt-button class="d-p12" circle size="lg" kind="danger">
-        <template #startIcon><dt-icon name="phone-hang-up" size="500" /></template>
+        <template #startIcon> <dt-icon name="phone-hang-up" size="500" /> </template>
       </dt-button>
     </dt-stack>
   </dt-stack>
-</nav>
+  <dt-text as="p" kind="label" size="sm" tone="muted" class="d-mt8">* Not real, still just an example</dt-text>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.callbarExample'
+vueCode='
+<dt-stack v-dt-mode class="d-ba d-bc-subtle d-bgc-secondary d-p6 d-py4 d-bar12 d-bs-md d-w100p" direction="row" gap="600">
+  <dt-stack gap="400" direction="row">
+    <dt-avatar
+      full-name="TA"
+      seed="ted-anderson"
+      size="lg"
+    />
+    <dt-stack gap="200">
+      <dt-text kind="label" size="md" density="200">Ted Anderson</dt-text>
+      <dt-stack direction="row" gap="300" align="baseline">
+        <dt-text kind="body" size="xs" tone="tertiary" wrap="nowrap" numeric>(913) 555-6745</dt-text>
+        <dt-text kind="body" size="xs" tone="muted">&bull;</dt-text>
+        <dt-text kind="body" size="xs" tone="tertiary" numeric>21:18</dt-text>
+      </dt-stack>
+    </dt-stack>
+  </dt-stack>
+  <dt-stack class="d-fl1" direction="row" gap="200" justify="center">
+    <dt-button class="d-px8 d-w64 d-w64" size="xs" kind="danger">
+      <template #blockStartIcon> <dt-icon name="mic" size="300" /> </template>
+      Unmute
+    </dt-button>
+    <dt-button class="d-px8 d-w64 d-w64" size="xs" kind="muted" importance="clear">
+      <template #blockStartIcon> <dt-icon name="record-filled" size="300" /> </template>
+      Record
+    </dt-button>
+    <dt-button class="d-px8 d-w64 d-w64" size="xs" kind="muted" importance="clear">
+      <template #blockStartIcon> <dt-icon name="keypad" size="300" /> </template>
+      Keypad
+    </dt-button>
+    <dt-button class="d-px8 d-w64 d-w64" size="xs" kind="muted" importance="clear">
+      <template #blockStartIcon> <dt-icon name="user-plus" size="300" /> </template>
+      Add
+    </dt-button>
+    <dt-button class="d-px8 d-w64 d-w64" size="xs" kind="muted" importance="clear">
+      <template #blockStartIcon> <dt-icon name="more-horizontal" size="300" /> </template>
+      More
+    </dt-button>
+  </dt-stack>
+  <dt-stack>
+    <dt-button class="d-p12" circle size="lg" kind="danger">
+      <template #startIcon> <dt-icon name="phone-hang-up" size="500" /> </template>
+    </dt-button>
+  </dt-stack>
+</dt-stack>
 '
 showHtmlWarning />
 
