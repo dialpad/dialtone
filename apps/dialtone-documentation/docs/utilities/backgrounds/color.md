@@ -111,6 +111,10 @@ Use `d-bgo{stop}` to change an element's background color opacity. You can also 
 <p class="d-bgc-critical d-bgo0">...</p>
 ```
 
+<dt-notice title="Tip" kind="info" class="d-wmx100p d-my16">
+  Prefer using the <dt-link to="/components/mode-island.html#inverting">v-dt-mode directive</dt-link> with base utility classes instead of <code>-inverted</code> variants. For example, use <code>&lt;div v-dt-mode:invert class="d-bgc-critical"&gt;</code> instead of <code>&lt;div class="d-bgc-critical-inverted"&gt;</code>.
+</dt-notice>
+
 ## Classes
 
 <new-utility-class-table :classes="backgroundColors">

@@ -176,28 +176,28 @@ showHtmlWarning />
 ### Inverted
 
 <dt-notice title="Deprecated" kind="error" class="d-wmx100p d-my16">
-  The <code>inverted</code> prop has been deprecated in favor of using <dt-link to="mode-island.html">DtModeIsland</dt-link> as a wrapper.
+  The <code>inverted</code> prop has been deprecated. Use the <dt-link to="mode-island.html#inverting">v-dt-mode directive</dt-link> instead, or <dt-link to="mode-island.html#dtmodeisland-component">DtModeIsland</dt-link> when no natural container element exists.
 </dt-notice>
 
-In place of the <code>inverted</code> prop, use the <dt-link to="mode-island.html">DtModeIsland</dt-link> component as a wrapper.
+In place of the <code>inverted</code> prop, use the <dt-link to="mode-island.html#inverting">v-dt-mode directive</dt-link> on the component element.
 
 <code-well-header>
-  <dt-mode-island class="d-p16 d-bar8">
-    <example-tabs ref="invertedTabsExample" />
-  </dt-mode-island>
+  <div class="d-p8 d-bgc-contrast d-w100p">
+    <div v-dt-mode:invert class="d-p16 d-bar8">
+      <example-tabs ref="invertedTabsExample" />
+    </div>
+  </div>
 </code-well-header>
 
 <code-example-tabs
 :htmlCode='() => $refs.invertedTabsExample'
 vueCode='
-<dt-mode-island>
-  <dt-tab-group>
-    <template #tabs>
-      <dt-tab id="1" panel-id="2" selected>First</dt-tab>
-      <dt-tab id="3" panel-id="4">Second</dt-tab>
-    </template>
-  </dt-tab-group>
-</dt-mode-island>
+<dt-tab-group v-dt-mode:invert>
+  <template #tabs>
+    <dt-tab id="1" panel-id="2" selected>First</dt-tab>
+    <dt-tab id="3" panel-id="4">Second</dt-tab>
+  </template>
+</dt-tab-group>
 '
 showHtmlWarning />
 

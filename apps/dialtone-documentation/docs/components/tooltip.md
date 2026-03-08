@@ -135,6 +135,10 @@ showHtmlWarning />
 
 ### Inverted
 
+<dt-notice title="Note" kind="warning" class="d-wmx100p d-my16">
+  The <code>inverted</code> prop is still required for DtTooltip because the tooltip renders outside the normal DOM tree (via Tippy.js). The <code>v-dt-mode</code> directive cannot reach the tooltip shell. See <dt-link href="https://dialpad.atlassian.net/browse/DLT-3077">DLT-3077</dt-link> for follow-up.
+</dt-notice>
+
 <code-well-header bgclass="d-bgc-contrast" class="d-hmn164">
   <dt-tooltip inverted message="tooltip">
     <template #anchor>

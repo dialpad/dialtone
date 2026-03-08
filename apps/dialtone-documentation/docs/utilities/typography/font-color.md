@@ -126,6 +126,10 @@ Use `d-fco{n}` to change an element's text color opacity. You can also change fo
 <p class="d-fc-critical d-fco0">...</p>
 ```
 
+<dt-notice title="Tip" kind="info" class="d-wmx100p d-my16">
+  Prefer using the <dt-link to="/components/mode-island.html#inverting">v-dt-mode directive</dt-link> with base utility classes instead of <code>-inverted</code> variants. For example, use <code>&lt;dt-text v-dt-mode:invert tone="critical"&gt;</code> instead of <code>&lt;dt-text tone="critical-inverted"&gt;</code>.
+</dt-notice>
+
 ## Classes
 
 <new-utility-class-table :classes="fontColors">
