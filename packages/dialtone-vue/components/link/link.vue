@@ -40,7 +40,7 @@ export default {
      * Determines whether the link should have inverted styling
      * default is false.
      * @values true, false
-     * @ignore
+     * @deprecated Use v-dt-mode directive instead.
      */
     inverted: {
       type: Boolean,

@@ -41,8 +41,8 @@ export default {
 
   props: {
     /**
-     * @ignore
      * Passed through to link. If true, applies inverted styles to the link.
+     * @deprecated Use v-dt-mode directive instead.
      */
     inverted: {
       type: Boolean,
