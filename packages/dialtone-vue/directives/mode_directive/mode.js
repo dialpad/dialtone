@@ -52,12 +52,8 @@ export const DtModeDirective = {
       el.setAttribute('data-dt-contrast', getRootContrast());
 
       // Watch for contrast changes on root
-      state.contrastObserver = new MutationObserver((mutations) => {
-        for (const mutation of mutations) {
-          if (mutation.type === 'attributes' && mutation.attributeName === 'data-dt-contrast') {
-            el.setAttribute('data-dt-contrast', getRootContrast());
-          }
-        }
+      state.contrastObserver = new MutationObserver(() => {
+        el.setAttribute('data-dt-contrast', getRootContrast());
       });
       state.contrastObserver.observe(document.documentElement, {
         attributes: true,
