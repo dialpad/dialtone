@@ -1,4 +1,4 @@
-@layer dialtone.components {
+// not in a layer because it's based on external library variables
 .d-scrollbar {
   .os-theme-dark {
     // main color for the scrollbars handle
@@ -22,11 +22,11 @@
       opacity: var(--dt-opacity-700);
 
       &:hover {
-        opacity: var(--dt-opacity-800);
+        opacity: var(--dt-opacity-900);
       }
 
       &:active {
-        opacity: var(--dt-opacity-900);
+        opacity: var(--dt-opacity-1000);
       }
     }
   }
@@ -39,5 +39,4 @@
   & .os-scrollbar {
     display: none;
   }
-}
 }
