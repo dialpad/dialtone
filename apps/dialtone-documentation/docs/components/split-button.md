@@ -455,6 +455,71 @@ vueCode='
 '
 showHtmlWarning />
 
+## Navigation
+
+The start button supports navigation via `start-href` (renders as `<a>`) or `start-to` (renders as `<router-link>`). Navigation only applies to the start button — the end button is a dropdown trigger.
+
+### External Link
+
+<code-well-header>
+  <dt-split-button
+    start-href="https://dialpad.com"
+    start-target="_blank"
+    start-rel="noopener noreferrer"
+    end-tooltip-text="More options"
+  >
+    Visit Dialpad
+    <template #dropdownList>
+      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>
+      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item>
+    </template>
+  </dt-split-button>
+</code-well-header>
+
+<code-example-tabs
+htmlCode='
+<span class="d-split-btn">
+  <a class="base-button__button d-btn d-btn--primary d-split-btn__alpha d-split-btn__alpha--md" href="https://dialpad.com" target="_blank" rel="noopener noreferrer">
+    <span class="d-btn__label base-button__label"> Visit Dialpad </span>
+  </a>
+  <button class="base-button__button d-btn d-btn--primary d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
+    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
+  </button>
+</span>
+'
+vueCode='
+<dt-split-button
+  start-href="https://dialpad.com"
+  start-target="_blank"
+  start-rel="noopener noreferrer"
+  end-tooltip-text="More options"
+>
+  Visit Dialpad
+  <template #dropdownList>
+    <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>
+    <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item>
+  </template>
+</dt-split-button>
+'
+showHtmlWarning />
+
+### Router Link
+
+<code-example-tabs
+vueCode='
+<dt-split-button
+  start-to="/components/button"
+  end-tooltip-text="More options"
+>
+  Go to Button docs
+  <template #dropdownList>
+    <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>
+    <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item>
+  </template>
+</dt-split-button>
+'
+/>
+
 ## Icon Support
 
 ### Icon and Label

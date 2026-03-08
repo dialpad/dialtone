@@ -4,9 +4,9 @@
     :class="[rootClass, 'd-split-btn']"
     :style="{ width }"
   >
-    <split-button-alpha
-      v-bind="alphaButtonProps"
-      ref="alphaButton"
+    <split-button-start
+      v-bind="startButtonProps"
+      ref="startButton"
       @click="onStartClick"
     >
       <!-- Dual-icon path: when startEndIcon is provided, use DtButton's startIcon/endIcon -->
@@ -71,7 +71,7 @@
       </template>
       <!-- @slot Default content slot -->
       <slot name="default" />
-    </split-button-alpha>
+    </split-button-start>
     <!-- @slot End (right) content slot, overrides end button styling and functionality completely -->
     <template v-if="$slots.end">
       <slot name="end" />
@@ -88,8 +88,8 @@
         @opened="open => isDropdownOpen = open"
       >
         <template #anchor="attrs">
-          <split-button-omega
-            v-bind="{ ...attrs, ...omegaButtonProps }"
+          <split-button-end
+            v-bind="{ ...attrs, ...endButtonProps }"
             :active="isDropdownOpen"
             @click="onEndClick"
           >
@@ -107,7 +107,7 @@
                 :size="iconSize"
               />
             </template>
-          </split-button-omega>
+          </split-button-end>
         </template>
         <template #list="{ close }">
           <!-- @slot Built-in dropdown content slot, use of dt-list-item is highly recommended here. -->
@@ -118,9 +118,9 @@
         </template>
       </dt-dropdown>
 
-      <split-button-omega
+      <split-button-end
         v-else
-        v-bind="omegaButtonProps"
+        v-bind="endButtonProps"
         @click="onEndClick"
       >
         <template #icon="{ size: iconSize }">
@@ -137,7 +137,7 @@
             :size="iconSize"
           />
         </template>
-      </split-button-omega>
+      </split-button-end>
     </template>
   </span>
 </template>
@@ -149,8 +149,8 @@ import {
   BUTTON_SIZE_MODIFIERS,
   ICON_POSITION_MODIFIERS,
 } from '@/components/button';
-import SplitButtonAlpha from './split_button-alpha.vue';
-import SplitButtonOmega from './split_button-omega.vue';
+import SplitButtonStart from './split_button-start.vue';
+import SplitButtonEnd from './split_button-end.vue';
 import { DtDropdown } from '@/components/dropdown';
 import { hasSlotContent, warnIfUnmounted, returnFirstEl } from '@/common/utils';
 
@@ -159,9 +159,9 @@ export default {
   name: 'DtSplitButton',
 
   components: {
-    SplitButtonOmega,
+    SplitButtonEnd,
     DtDropdown,
-    SplitButtonAlpha,
+    SplitButtonStart,
   },
 
   inheritAttrs: false,
@@ -498,6 +498,52 @@ export default {
       type: [String, Object, Array],
       default: '',
     },
+
+    /**
+     * Vue router `to` prop for the start button.
+     * When set, renders the start button as a `<router-link>`.
+     */
+    startTo: {
+      type: [String, Object],
+      default: null,
+    },
+
+    /**
+     * Whether to use `router.replace()` instead of `router.push()`
+     * when navigating via `startTo`.
+     * @values true, false
+     */
+    startReplace: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * HTML href for the start button.
+     * When set, renders the start button as an `<a>` element.
+     */
+    startHref: {
+      type: String,
+      default: null,
+    },
+
+    /**
+     * HTML target attribute for the start button link.
+     * Only applies when `startHref` is set.
+     */
+    startTarget: {
+      type: String,
+      default: null,
+    },
+
+    /**
+     * HTML rel attribute for the start button link.
+     * Only applies when `startHref` is set.
+     */
+    startRel: {
+      type: String,
+      default: null,
+    },
   },
 
   emits: [
@@ -535,7 +581,7 @@ export default {
   },
 
   computed: {
-    alphaButtonProps () {
+    startButtonProps () {
       return {
         active: this.alphaActive ?? this.startActive,
         ariaLabel: this.alphaAriaLabel ?? this.startAriaLabel,
@@ -550,12 +596,17 @@ export default {
         kind: this.kind,
         size: this.size,
         tooltipText: this.alphaTooltipText ?? this.startTooltipText,
+        to: this.startTo,
+        replace: this.startReplace,
+        href: this.startHref,
+        target: this.startTarget,
+        rel: this.startRel,
         class: this.$attrs.class,
         style: this.$attrs.style,
       };
     },
 
-    omegaButtonProps () {
+    endButtonProps () {
       return {
         id: this.omegaId ?? this.endId,
         active: this.omegaActive ?? this.endActive,
@@ -595,11 +646,11 @@ export default {
     },
 
     validateProps () {
-      this.validateAlphaButtonProps();
-      this.validateOmegaButtonProps();
+      this.validateStartButtonProps();
+      this.validateEndButtonProps();
     },
 
-    validateAlphaButtonProps () {
+    validateStartButtonProps () {
       if (hasSlotContent(this.$slots.default)) return;
 
       if ((hasSlotContent(this.$slots.startIcon) || hasSlotContent(this.$slots.alphaIcon)) &&
@@ -608,7 +659,7 @@ export default {
       }
     },
 
-    validateOmegaButtonProps () {
+    validateEndButtonProps () {
       if (hasSlotContent(this.$slots.end) || hasSlotContent(this.$slots.omega)) return;
 
       if (!(this.omegaTooltipText ?? this.endTooltipText)) {

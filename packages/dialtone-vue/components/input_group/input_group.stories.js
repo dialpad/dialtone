@@ -71,6 +71,12 @@ export const argTypesData = {
       },
     },
   },
+  legendClass: {
+    control: 'text',
+  },
+  messagesClass: {
+    control: 'text',
+  },
 
   // Directives
   'v-model': {
@@ -100,6 +106,7 @@ export const argTypesData = {
 export default {
   title: 'Components/Input Group',
   component: DtInputGroup,
+  tags: ['!dev', '!autodocs'],
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,

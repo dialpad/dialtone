@@ -21,16 +21,16 @@
             v-for="(value, className) in classes"
             :key="className"
           >
-            <th
-              scope="row"
-              class="d-code--sm d-docsite-code"
-              v-text="className"
-            />
-            <td
-              class="d-code--sm d-ws-break-spaces"
-            >
+            <th scope="row">
+              <dt-text as="span" kind="code" size="xs" class="d-docsite-code">
+                {{ className }}
+              </dt-text>
+            </th>
+            <td class="d-ws-break-spaces">
               <dt-stack direction="row" justify="between" align="center" gap="500">
-                <span class="d-fl-grow1 d-code--sm" v-text="value" />
+                <dt-text as="span" kind="code" size="xs" class="d-fl-grow1">
+                  {{ value }}
+                </dt-text>
                 <slot name="example" :class-name="className" />
               </dt-stack>
             </td>

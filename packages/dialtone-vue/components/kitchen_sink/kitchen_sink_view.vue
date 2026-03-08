@@ -256,4 +256,7 @@ onMounted(async () => {
 .kitchen-sink__section {
   scroll-margin-block-start: var(--dt-size-750);
 }
+[outline] {
+  outline: 2px solid orangered;
+}
 </style>

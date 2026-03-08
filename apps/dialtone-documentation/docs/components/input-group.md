@@ -1,7 +1,7 @@
 ---
 title: Input Group
 description: Input Groups are convenience components for a grouping of related inputs. While each input within the group could be independent, the v-model on the group provides a convenient interface for determining the current state of the group.
-status: ready
+status: deprecated
 thumb: true
 image: assets/images/components/input.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-input-group--default

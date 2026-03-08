@@ -113,7 +113,7 @@ export const Default = {
   render: DefaultTemplate,
   decorators: [
     () => ({
-      template: `<div class="d-p64"><story /></div>`,
+      template: `<div><story /></div>`,
     }),
   ],
 };

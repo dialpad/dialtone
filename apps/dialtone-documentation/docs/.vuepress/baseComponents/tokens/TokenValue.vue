@@ -1,19 +1,19 @@
 <template>
-  <div class="d-code--sm d-docsite-code">
+  <dt-text as="div" kind="code" size="xs" class="d-docsite-code">
     <div v-if="isCompositionToken(tokenValue)">
       <span v-for="value in tokenValue" :key="value">
         <span
           v-dt-tooltip="getTooltipValue(value)"
-          :class="{ 'd-d-block h:d-fc-secondary d-c-default': getTooltipValue(value) }"
+          :class="{ 'd-d-block h:d-fc-primary d-c-default': getTooltipValue(value) }"
         >
           {{ value }}&nbsp;
         </span>
       </span>
     </div>
     <div v-else>
-      {{ tokenValue }}
+      {{ tokenValue }}s
     </div>
-  </div>
+  </dt-text>
 </template>
 
 <script setup>

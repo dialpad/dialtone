@@ -70,6 +70,7 @@ Dialtone provides five options for `kind`, with three levels of `importance`.
 The base button should be the go-to button for most of your needs. When in doubt, use this style. To help provide clarity to users, it is generally recommended to use only one primary button style within a section or page.
 
 <code-well-header>
+  <!-- asdfasdf -->
   <dt-stack direction="row" gap="400" ref="defaultExample">
       <dt-button> Place Call </dt-button>
       <dt-button importance="outlined"> Place Call </dt-button>
@@ -80,6 +81,7 @@ The base button should be the go-to button for most of your needs. When in doubt
 <code-example-tabs
 :htmlCode='() => $refs.defaultExample'
 vueCode='
+<!-- asdfasdf -->
 <dt-button> Place Call </dt-button>
 <dt-button importance="outlined"> Place Call </dt-button>
 <dt-button importance="clear"> Place Call </dt-button>
@@ -437,10 +439,10 @@ vueCode='
   kind="error"
   class="d-wmx100p d-my16"
 >
-  <code>kind="inverted"</code> has been deprecated in favor of using <router-link to="mode-island.html"> <DtLink>DtModeIsland</DtLink> </router-link> as a wrapper.
+  <code>kind="inverted"</code> has been deprecated in favor of using <dt-link to="mode-island.html">DtModeIsland</dt-link> as a wrapper.
 </dt-notice>
 
-In place of <code>kind="inverted"</code>, use the <router-link to="mode-island.html"> <DtLink>DtModeIsland</DtLink> </router-link> component as a wrapper.
+In place of <code>kind="inverted"</code>, use the <dt-link to="mode-island.html">DtModeIsland</dt-link> component as a wrapper.
 
 <code-well-header>
   <dt-split-button
@@ -1319,7 +1321,7 @@ showHtmlWarning />
   kind="info"
   class="d-wmx100p d-my16"
 >
-  <router-link to="split-button.html"> <DtLink>DtSplitButton</DtLink> </router-link> is its own component containing multiple DtButtons.
+  <dt-link to="split-button.html">DtSplitButton</dt-link> is its own component containing multiple DtButtons.
 </dt-notice>
 
 <code-well-header>

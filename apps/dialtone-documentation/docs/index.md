@@ -41,14 +41,12 @@ pageClass: dialpad-design-home
       <h2 class="d-headline--xxl d-ff-expressive" style="font-size: 48px;font-family:var(--dt-font-family-expressive); text-wrap: balance; max-width: 1400px; font-weight: var(--dt-font-weight-regular);">Foundations</h2>
       <p class="d-ta-center d-docsite--paragraph d-m0 d-wmx764" style="text-wrap: balance; font-size: 24px; font-family:var(--dt-font-family-expressive);">The building blocks of Dialtone... Color, Type, Icons, and more.</p>
       <p class="d-ta-center d-docsite--paragraph d-m0 d-wmx764">
-        <router-link to="./foundations/">
-          <dt-button size="lg" @click="navigate">
-            View Foundations
-            <template #endIcon>
-              <dt-icon name="arrow-right" size="300" />
-            </template>
-          </dt-button>
-        </router-link>
+        <dt-button size="lg" to="./foundations/">
+          View Foundations
+          <template #endIcon>
+            <dt-icon name="arrow-right" size="300" />
+          </template>
+        </dt-button>
       </p>
     </dt-stack>
   </dt-stack>
@@ -71,14 +69,12 @@ pageClass: dialpad-design-home
       <h2 class="d-headline--xxl d-ff-expressive" style="font-size: 48px;font-family:var(--dt-font-family-expressive); text-wrap: balance; max-width: 1400px; font-weight: var(--dt-font-weight-regular);">Design System</h2>
       <p class="d-ta-center d-docsite--paragraph d-m0 d-wmx764" style="text-wrap: balance;  font-size: 24px; font-family:var(--dt-font-family-expressive)">Build with Dialtone Components, Design Tokens, CSS Utilities, and more.</p>
       <p class="d-ta-center d-docsite--paragraph d-m0 d-wmx764">
-        <router-link to="./dialtone/">
-          <dt-button size="lg">
-            View all Documentation
-            <template #endIcon>
-              <dt-icon name="arrow-right" size="300" />
-            </template>
-          </dt-button>
-        </router-link>
+        <dt-button size="lg" to="./dialtone/">
+          View all Documentation
+          <template #endIcon>
+            <dt-icon name="arrow-right" size="300" />
+          </template>
+        </dt-button>
       </p>
     </dt-stack>
   </dt-stack>
@@ -87,14 +83,12 @@ pageClass: dialpad-design-home
       <h2 class="d-headline--xxl d-ff-expressive" style="font-size: 48px;font-family:var(--dt-font-family-expressive); text-wrap: balance; max-width: 1400px; font-weight: var(--dt-font-weight-regular);">What's New</h2>
       <p class="d-ta-center d-docsite--paragraph d-m0 d-wmx764" style="text-wrap: balance; font-size: 24px; font-family:var(--dt-font-family-expressive)">The latest from Dialpad Design.</p>
       <p class="d-ta-center d-docsite--paragraph d-m0 d-wmx764">
-        <router-link to="./dialtone/whats-new/">
-          <dt-button size="lg">
-            View all
-            <template #endIcon>
-              <dt-icon name="arrow-right" size="300" />
-            </template>
-          </dt-button>
-        </router-link>
+        <dt-button size="lg" to="./dialtone/whats-new/">
+          View all
+          <template #endIcon>
+            <dt-icon name="arrow-right" size="300" />
+          </template>
+        </dt-button>
       </p>
     </dt-stack>
     <dt-stack
