@@ -265,7 +265,8 @@ export default {
      * When true, the pill cannot be interacted with but does not
      * receive disabled visual styling. Adds `d-filter-pill--read-only`
      * class and hides the chevron icon. The clear button is suppressed
-     * and the tooltip shows a read-only message.
+     * and the tooltip falls back to a read-only message when
+     * startTooltipText is not provided.
      */
     readOnly: {
       type: Boolean,
@@ -446,7 +447,7 @@ export default {
     },
 
     resolvedStartTooltipText () {
-      if (this.readOnly) return this.i18n.$t('DIALTONE_FILTER_PILL_READ_ONLY_TOOLTIP');
+      if (this.readOnly) return this.startTooltipText || this.i18n.$t('DIALTONE_FILTER_PILL_READ_ONLY_TOOLTIP');
       return this.startTooltipText;
     },
 

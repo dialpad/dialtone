@@ -166,6 +166,8 @@ showHtmlWarning />
 
 ### Size
 
+`sm` is the default.
+
 <code-well-header>
   <dt-stack direction="row" gap="400">
     <dt-filter-pill
