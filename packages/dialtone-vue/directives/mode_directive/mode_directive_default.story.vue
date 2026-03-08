@@ -1,22 +1,22 @@
 <template>
   <dt-stack
-    gap="600"
-    class="d-m64"
+    gap="500"
+    class="d-p8"
   >
     <dt-text
       as="h3"
       kind="headline"
-      size="sm"
+      size="lg"
     >
       Explicit modes
     </dt-text>
     <dt-stack
-      gap="400"
+      gap="500"
       direction="row"
     >
       <section
         v-dt-mode:light
-        class="d-p16 d-ba d-bc-subtle d-bar8 d-w264"
+        class="d-bgc-secondary d-p16 d-ba d-bc-subtle d-bar8 d-fl1"
       >
         <dt-stack gap="400">
           <dt-text
@@ -38,7 +38,7 @@
       </section>
       <section
         v-dt-mode:dark
-        class="d-p16 d-ba d-bc-subtle d-bar8 d-w264"
+        class="d-bgc-secondary d-p16 d-ba d-bc-subtle d-bar8 d-fl1"
       >
         <dt-stack gap="400">
           <dt-text
@@ -63,13 +63,13 @@
     <dt-text
       as="h3"
       kind="headline"
-      size="sm"
+      size="lg"
     >
       Invert mode (default)
     </dt-text>
     <section
       v-dt-mode
-      class="d-p16 d-ba d-bc-subtle d-bar8 d-w264"
+      class="d-bgc-secondary d-p16 d-ba d-bc-subtle d-bar8 d-w264"
     >
       <dt-text
         kind="body"
@@ -82,13 +82,13 @@
     <dt-text
       as="h3"
       kind="headline"
-      size="sm"
+      size="lg"
     >
       Nested directives
     </dt-text>
     <div
       v-dt-mode:dark
-      class="d-p16 d-ba d-bc-subtle d-bar8"
+      class="d-bgc-secondary d-p16 d-ba d-bc-subtle d-bar8"
     >
       <dt-stack gap="400">
         <dt-text
@@ -99,7 +99,7 @@
         </dt-text>
         <div
           v-dt-mode:invert
-          class="d-p16 d-ba d-bc-subtle d-bar8"
+          class="d-bgc-secondary d-p16 d-ba d-bc-subtle d-bar8"
         >
           <dt-stack gap="400">
             <dt-text
@@ -110,7 +110,7 @@
             </dt-text>
             <div
               v-dt-mode:invert
-              class="d-p16 d-ba d-bc-subtle d-bar8"
+              class="d-bgc-secondary d-p16 d-ba d-bc-subtle d-bar8"
             >
               <dt-text
                 kind="body"
@@ -127,37 +127,21 @@
     <dt-text
       as="h3"
       kind="headline"
-      size="sm"
+      size="lg"
     >
       Dynamic arg
     </dt-text>
-    <dt-stack
-      gap="400"
-      direction="row"
-      class="d-ai-center"
-    >
-      <label
-        for="mode-select"
-        class="d-label"
-      >Mode</label>
-      <select
-        id="mode-select"
-        v-model="dynamicMode"
-        class="d-select d-w128"
-      >
-        <option value="light">
-          light
-        </option>
-        <option value="dark">
-          dark
-        </option>
-        <option value="invert">
-          invert
-        </option>
-      </select>
+    <dt-stack gap="400">
+      <span class="d-w128">
+        <dt-select-menu
+          v-model="dynamicMode"
+          label="Mode"
+          :options="modeOptions"
+        />
+      </span>
       <section
         v-dt-mode:[dynamicMode]
-        class="d-p16 d-ba d-bc-subtle d-bar8 d-w264"
+        class="d-bgc-secondary d-p16 d-ba d-bc-subtle d-bar8 d-w264"
       >
         <dt-text
           kind="body"
@@ -173,13 +157,19 @@
 <script>
 import DtStack from '@/components/stack/stack.vue';
 import DtText from '@/components/text/text.vue';
+import DtSelectMenu from '@/components/select_menu/select_menu.vue';
 
 export default {
   name: 'DtModeDirectiveDefault',
-  components: { DtStack, DtText },
+  components: { DtStack, DtText, DtSelectMenu },
   data () {
     return {
       dynamicMode: 'invert',
+      modeOptions: [
+        { value: 'invert', label: 'invert' },
+        { value: 'light', label: 'light' },
+        { value: 'dark', label: 'dark' },
+      ],
     };
   },
 };

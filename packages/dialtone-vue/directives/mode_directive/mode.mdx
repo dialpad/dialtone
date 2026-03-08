@@ -1,43 +1,9 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 import * as ModeDirectiveStories from './mode.stories.js';
+import RedirectToDocs from "@/common/snippets/redirect-to-docs.mdx"
 
 <Meta of={ModeDirectiveStories}/>
 
 # Mode directive
 
-Apply light, dark, or inverted color mode to any element without a wrapper component.
-For full documentation, see the [Mode Island page](/components/mode-island.html).
-
-## Usage
-
-Import the directive from dialtone-vue
-
-```js
-import { DtModeDirective } from "@dialpad/dialtone-vue";
-```
-
-Install the directive into vue instance
-
-```js
-Vue.use(DtModeDirective);
-```
-
-### Explicit modes
-
-```html
-<section v-dt-mode:dark>Dark mode content</section>
-<section v-dt-mode:light>Light mode content</section>
-```
-
-### Invert (default)
-
-```html
-<section v-dt-mode>Inverted from parent or root</section>
-<section v-dt-mode:invert>Same as above, explicit</section>
-```
-
-### Dynamic arg
-
-```html
-<section v-dt-mode:[dynamicMode]>Reactive mode</section>
-```
+<RedirectToDocs name="mode-island" />
