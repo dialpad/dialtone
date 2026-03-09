@@ -2,7 +2,7 @@
 type: architecture
 category: architecture
 keywords: [vuepress, documentation, vue-docgen-api, component-documentation, json-data, frontmatter, useComponentTableData, dialtone-documentation, manual-docs, auto-generated]
-ai_summary: How the Dialtone documentation system works across three layers: manual markdown, semi-auto JSON data files, and auto-generated Vue API docs.
+ai_summary: "How the Dialtone documentation system works across three layers: manual markdown, semi-auto JSON data, and auto-generated Vue API docs."
 last_updated: 2026-03-04
 related_packages: [dialtone-vue, dialtone-css, dialtone-tokens, dialtone-icons, dialtone-documentation]
 ---

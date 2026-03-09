@@ -2,7 +2,7 @@
 type: development
 category: development
 keywords: [design-tokens, style-dictionary, figma, tokens-json, semantic-tokens, raw-tokens, css-custom-properties, less, theme, build]
-ai_summary: How to add new design tokens to dialtone-tokens, the token file structure, reference syntax, semantic vs raw distinction, and the build steps required after changes.
+ai_summary: How to add design tokens to dialtone-tokens — file structure, reference syntax, semantic vs raw distinction, and build steps.
 last_updated: 2026-03-04
 related_packages: [dialtone-tokens, dialtone-css]
 ---

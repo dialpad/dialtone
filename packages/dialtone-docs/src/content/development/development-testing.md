@@ -2,7 +2,7 @@
 type: development
 category: development
 keywords: [vitest, testing, vue-test-utils, jsdom, coverage, mount, shallowMount, fixtures, assertions, dialtone-vue, co-located, thresholds]
-ai_summary: How testing works in dialtone-vue with Vitest and Vue Test Utils, covering file structure, coverage thresholds, the standard test pattern, and shared utilities.
+ai_summary: How testing works in dialtone-vue with Vitest and Vue Test Utils — file structure, coverage thresholds, test patterns, and utilities.
 last_updated: 2026-03-04
 related_packages: [dialtone-vue]
 ---

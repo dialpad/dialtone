@@ -2,7 +2,7 @@
 type: reference
 category: reference
 keywords: [accessibility, a11y, wcag, aria, focus-management, keyboard-navigation, screen-reader, data-qa, focus-visible, reduced-motion]
-ai_summary: Accessibility checklist for Dialtone components — ARIA patterns, focus management, keyboard navigation, and CSS utilities used across the design system.
+ai_summary: Accessibility checklist for Dialtone components — ARIA patterns, focus management, keyboard navigation, and CSS utilities.
 last_updated: 2026-03-09
 related_packages: [dialtone-vue, dialtone-css]
 ---

@@ -2,7 +2,7 @@
 type: workflow
 category: workflows
 keywords: [component-lifecycle, status, ready, beta, planned, deprecated, component-status, frontmatter, vuepress, dialtone-documentation]
-ai_summary: How component status works in Dialtone — the three status values (ready, beta, planned), what each means, where they are set, and how they appear in the documentation site.
+ai_summary: How component status works in Dialtone — ready, beta, and planned values, where they are set, and how they appear on the doc site.
 last_updated: 2026-03-04
 related_packages: [dialtone-vue, dialtone-documentation]
 ---

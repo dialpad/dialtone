@@ -2,7 +2,7 @@
 type: development
 category: development
 keywords: [icons, svg, dialtone-icons, gulp, vue-components, keywords, categories, accessibility, naming]
-ai_summary: How to add a new SVG icon to dialtone-icons, covering SVG requirements, category structure, keywords, the Gulp build pipeline, and how generated Vue components are exported.
+ai_summary: How to add SVG icons to dialtone-icons — SVG requirements, categories, keywords, Gulp pipeline, and generated Vue components.
 last_updated: 2026-03-04
 related_packages: [dialtone-icons, dialtone-vue]
 ---

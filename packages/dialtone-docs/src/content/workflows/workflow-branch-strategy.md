@@ -2,7 +2,7 @@
 type: workflow
 category: workflows
 keywords: [branch, staging, production, alpha, beta, PR, pull-request, merge, hotfix, deploy, preview, branch-naming]
-ai_summary: Dialtone branch strategy — staging is the main development branch, PRs always target staging, production is auto-updated from staging after each release.
+ai_summary: Dialtone branch strategy — staging as main dev branch, PRs target staging, production auto-updated after each release.
 last_updated: 2026-03-04
 related_packages: []
 ---

@@ -1,0 +1,57 @@
+---
+type: reference
+category: components
+keywords: [{{name}}, vue-component{{#each keywords}}, {{this}}{{/each}}]
+ai_summary: {{description}}
+component: true
+last_updated: {{date}}
+related_packages: [dialtone-vue]
+---
+
+# {{name}}
+
+> {{description}}
+
+## Props
+
+{{#each props}}
+### `{{@key}}`
+
+- **Type:** `{{this.type.name}}`
+{{#if this.required}}- **Required:** Yes
+{{/if}}{{#if this.defaultValue}}- **Default:** `{{this.defaultValue.value}}`
+{{/if}}- **Description:** {{this.description}}
+
+{{/each}}
+
+## Events
+
+{{#each events}}
+### `{{@key}}`
+
+{{this.description}}
+
+{{#if this.type}}**Payload:** `{{this.type.names}}`{{/if}}
+
+{{/each}}
+
+## Slots
+
+{{#each slots}}
+### `{{name}}`
+
+{{description}}
+
+{{/each}}
+
+## Usage
+
+```vue
+<template>
+  <{{kebabCase name}} />
+</template>
+
+<script setup>
+import { {{name}} } from '@dialpad/dialtone-vue';
+</script>
+```

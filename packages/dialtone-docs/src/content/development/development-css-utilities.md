@@ -2,7 +2,7 @@
 type: development
 category: development
 keywords: [css-utilities, less, postcss, gulp, responsive, utility-classes, dialtone-css, naming-convention, generators, breakpoints]
-ai_summary: How CSS utility classes are structured and added in dialtone-css, covering static LESS files, the PostCSS generator system, naming conventions, and the Gulp build pipeline.
+ai_summary: How CSS utility classes are structured and added in dialtone-css — static LESS files, PostCSS generators, naming conventions, and Gulp build.
 last_updated: 2026-03-04
 related_packages: [dialtone-css, dialtone-tokens, postcss-responsive-variations]
 ---

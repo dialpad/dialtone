@@ -2,7 +2,7 @@
 type: workflow
 category: workflows
 keywords: [release, semantic-release, versioning, changelog, tags, tuesday, cron, staging, production, npm-publish]
-ai_summary: How Dialtone releases work — Tuesday cron schedule, semantic-release per package, tag format, changelog generation, and the staging-to-production auto-merge.
+ai_summary: How Dialtone releases work — Tuesday cron, semantic-release per package, tag format, changelogs, and staging-to-production merge.
 last_updated: 2026-03-04
 related_packages: [dialtone-vue, dialtone-css, dialtone-tokens, dialtone-icons]
 ---
