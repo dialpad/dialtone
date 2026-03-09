@@ -610,6 +610,10 @@
           "link": "/components/combobox.html"
         },
         {
+          "text": "Combobox Multi-Select",
+          "link": "/components/combobox-multi-select.html"
+        },
+        {
           "text": "Datepicker",
           "link": "/components/datepicker.html"
         },
