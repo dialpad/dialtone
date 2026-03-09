@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="editorRoot"
     class="d-recipe-editor"
     v-bind="addClassStyleAttrs($attrs)"
     data-qa="dt-recipe-editor"
@@ -1137,7 +1138,7 @@ export default {
     },
 
     colorPickerInput() {
-      return this.$el.getRootNode().querySelector('.colorPickerInput');
+      return this.$refs.editorRoot?.querySelector('.colorPickerInput');
     },
 
     isDefaultFontColor() {
