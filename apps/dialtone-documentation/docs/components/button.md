@@ -1078,47 +1078,52 @@ Loading buttons are useful for communicating a delay between the button interact
 The width of the button remains determined by the length of the label, which is visually hidden in this state.
 
 <code-well-header>
-  <dt-stack
-    gap="600"
-    :direction="{ 'default': 'column', 'md': 'row' }"
-  >
-    <dt-stack direction="row" gap="400">
-      <dt-button loading> Place Call </dt-button>
-      <dt-button v-dt-tooltip="`Tooltip`" loading>
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-      </dt-button>
-      <dt-button v-dt-tooltip="`Tooltip`" circle loading>
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-      </dt-button>
-    </dt-stack>
-    <dt-stack direction="row" gap="400">
-      <dt-button kind="muted" importance="outlined" loading> Place Call </dt-button>
-      <dt-button kind="muted" importance="outlined" v-dt-tooltip="`Tooltip`" loading>
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-      </dt-button>
-      <dt-button kind="muted" importance="outlined" v-dt-tooltip="`Tooltip`" circle loading>
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-      </dt-button>
+  <dt-stack gap="500" align="center">
+    <dt-toggle size="sm" v-model="loading" wrapperClass="d-g8">
+      Loading
+    </dt-toggle>
+    <dt-stack
+      gap="600"
+      :direction="{ 'default': 'column', 'md': 'row' }"
+    >
+      <dt-stack direction="row" gap="400">
+        <dt-button :loading="loading"> Place Call </dt-button>
+        <dt-button v-dt-tooltip="`Tooltip`" :loading="loading">
+          <template #icon>
+            <dt-icon
+              name="phone"
+              size="300"
+            />
+          </template>
+        </dt-button>
+        <dt-button v-dt-tooltip="`Tooltip`" circle :loading="loading">
+          <template #icon>
+            <dt-icon
+              name="phone"
+              size="300"
+            />
+          </template>
+        </dt-button>
+      </dt-stack>
+      <dt-stack direction="row" gap="400">
+        <dt-button kind="muted" importance="outlined" :loading="loading"> Place Call </dt-button>
+        <dt-button kind="muted" importance="outlined" v-dt-tooltip="`Tooltip`" :loading="loading">
+          <template #icon>
+            <dt-icon
+              name="phone"
+              size="300"
+            />
+          </template>
+        </dt-button>
+        <dt-button kind="muted" importance="outlined" v-dt-tooltip="`Tooltip`" circle :loading="loading">
+          <template #icon>
+            <dt-icon
+              name="phone"
+              size="300"
+            />
+          </template>
+        </dt-button>
+      </dt-stack>
     </dt-stack>
   </dt-stack>
 </code-well-header>
@@ -1298,5 +1303,8 @@ We provide the following branded buttons for log-in and sign-up workflows.
 <component-class-table component-name="button"></component-class-table>
 
 <script setup>
+import { ref } from 'vue';
 import ButtonVariantsTable from '@baseComponents/ButtonVariantsTable.vue';
+
+const loading = ref(true);
 </script>
