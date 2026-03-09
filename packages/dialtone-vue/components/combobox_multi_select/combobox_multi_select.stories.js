@@ -140,7 +140,7 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Recipes/Comboboxes/Combobox Multi-Select',
+  title: 'Components/Combobox Multi-Select',
   component: DtComboboxMultiSelect,
   args: argsData,
   argTypes: argTypesData,
