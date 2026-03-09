@@ -8,7 +8,7 @@
     <template #anchor="{ attrs }">
       <dt-button
         ref="buttonRef"
-        v-dt-tooltip="{ message: tooltipMessage, placement: 'top' }"
+        v-dt-tooltip="{ message: tooltipMessage, placement: 'top', externalAnchorElement: $refs.buttonRef?.$el }"
         v-bind="attrs"
         :active="isActive"
         :aria-label="tooltipMessage"
