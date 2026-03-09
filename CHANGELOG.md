@@ -1,3 +1,15 @@
+# [9.169.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.168.0...dialtone/v9.169.0) (2026-03-09)
+
+
+### Bug Fixes
+
+* **Editor:** NO-JIRA fixed shadow dom issues with editor ([#1107](https://github.com/dialpad/dialtone/issues/1107)) ([82f8c72](https://github.com/dialpad/dialtone/commit/82f8c72e915ba2fec1209f1de9f5b9eb34165217))
+
+
+### Features
+
+* **Button:** DLT-3086 update loading state to use dt-loader component ([#1111](https://github.com/dialpad/dialtone/issues/1111)) ([621c49a](https://github.com/dialpad/dialtone/commit/621c49a451dd653ad24bb4641f5cff36501670e3))
+
 # [9.168.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.167.0...dialtone/v9.168.0) (2026-03-07)
 
 
