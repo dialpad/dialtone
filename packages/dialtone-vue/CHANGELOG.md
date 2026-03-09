@@ -1,3 +1,10 @@
+# [3.214.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.213.0...dialtone-vue/v3.214.0) (2026-03-09)
+
+
+### Features
+
+* **Hovercard:** DP-175404 expose functions to control hide/show ([#1113](https://github.com/dialpad/dialtone/issues/1113)) ([03c5524](https://github.com/dialpad/dialtone/commit/03c552453cb79318f2aaa9282764025a0e7af21b))
+
 # [3.213.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.212.0...dialtone-vue/v3.213.0) (2026-03-09)
 
 
