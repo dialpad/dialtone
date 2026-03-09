@@ -262,6 +262,8 @@ watch(() => props.open, (open) => {
   hovercardOpen.value = open;
 }, { immediate: true });
 
+defineExpose({ show: onMouseEnter, hide: onMouseLeave });
+
 function setInTimer () {
   if (props.open === null) {
     clearTimeout(outTimer.value);
