@@ -123,6 +123,5 @@ function onMentionEnter () {
 
 function onMentionLeave () {
   hovercard.value?.hide();
-  mentionElement.value = null;
 }
 </script>
