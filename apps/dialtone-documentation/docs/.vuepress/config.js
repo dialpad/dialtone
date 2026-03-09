@@ -123,7 +123,8 @@ export default defineUserConfig({
     const SITE_URL = 'https://dialtone.dialpad.com';
     const DEFAULT_IMAGE = `${SITE_URL}/assets/images/home-hero.png`;
 
-    const title = page.frontmatter.title || page.frontmatter.heading;
+    const title = page.frontmatter.title || page.frontmatter.heading || page.title || 'Dialtone Design System';
+    const seoTitle = title === 'Dialtone Design System' ? title : `${title} | Dialtone Design System`;
     const desc = page.frontmatter.description;
     const image = page.frontmatter.image
       ? `${SITE_URL}/${page.frontmatter.image}`
@@ -137,10 +138,9 @@ export default defineUserConfig({
       page.frontmatter.head.push(['meta', { property: 'og:description', content: desc }]);
       page.frontmatter.head.push(['meta', { name: 'twitter:description', content: desc }]);
     }
-    if (title) {
-      page.frontmatter.head.push(['meta', { property: 'og:title', content: `${title} | Dialtone Design System` }]);
-      page.frontmatter.head.push(['meta', { name: 'twitter:title', content: `${title} | Dialtone Design System` }]);
-    }
+
+    page.frontmatter.head.push(['meta', { property: 'og:title', content: seoTitle }]);
+    page.frontmatter.head.push(['meta', { name: 'twitter:title', content: seoTitle }]);
 
     page.frontmatter.head.push(
       ['meta', { property: 'og:url', content: url }],
