@@ -69,7 +69,7 @@
                       role="option"
                       navigation-type="arrow-keys"
                       @click="
-                        close();
+                        close(focusEditor);
                         onFontStyleSelect(fontStyle.value)
                       "
                     >
@@ -103,7 +103,7 @@
                 role="menuitem"
                 navigation-type="arrow-keys"
                 @click="
-                  close();
+                  close(focusEditor);
                   onFontSizeSelect(fontSize.value, $event)
                 "
               >
@@ -204,7 +204,7 @@
                         navigation-type="arrow-keys"
                         @click="
                           insertVariable(category.name, item);
-                          close();
+                          close(focusEditor);
                         "
                       >
                         {{ item.name }}
@@ -1175,6 +1175,10 @@ export default {
   methods: {
     removeClassStyleAttrs,
     addClassStyleAttrs,
+
+    focusEditor () {
+      this.$refs.richTextEditor?.editor?.commands.focus();
+    },
 
     onInputFocus (event) {
       event?.stopPropagation();

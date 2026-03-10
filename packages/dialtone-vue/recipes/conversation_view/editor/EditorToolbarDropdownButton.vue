@@ -4,6 +4,7 @@
     padding="small"
     navigation-type="arrow-keys"
     placement="bottom-start"
+    @opened="onDropdownOpened"
   >
     <template #anchor="{ attrs }">
       <dt-button
@@ -28,10 +29,10 @@
         </template>
       </dt-button>
     </template>
-    <template #list="{ close }">
+    <template #list="{ close: dropdownClose }">
       <slot
         name="list"
-        :close="close"
+        :close="(cb) => { pendingCallback = cb; dropdownClose(); }"
       />
     </template>
   </dt-dropdown>
@@ -110,5 +111,22 @@ export default {
      */
     'shift-focus-left',
   ],
+
+  data () {
+    return {
+      pendingCallback: null,
+    };
+  },
+
+  methods: {
+    // Wait until the dropdown is fully closed so the modal's anchor focus
+    // completes first, then the callback can override it (e.g. to focus the editor).
+    onDropdownOpened (isOpen) {
+      if (!isOpen && typeof this.pendingCallback === 'function') {
+        this.pendingCallback();
+        this.pendingCallback = null;
+      }
+    },
+  },
 };
 </script>
