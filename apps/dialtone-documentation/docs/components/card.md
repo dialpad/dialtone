@@ -15,7 +15,7 @@ keywords: ["panel", "container", "box", "d-card", "DtCard", "dt-card", "tile", "
       <dt-text as="p" kind="headline" size="md">
         Lorem ipsum
       </dt-text>
-      <button type="button" class="d-btn d-btn--xs d-btn--circle">
+      <button type="button" class="d-btn d-btn--xs d-btn--icon-only d-btn--muted">
         <dt-icon name="more-vertical" size="200" />
       </button>
     </div>
@@ -110,7 +110,7 @@ showHtmlWarning />
       <dt-text as="p" kind="headline" size="md">
         Lorem ipsum
       </dt-text>
-      <button type="button" class="d-btn d-btn--xs d-btn--circle">
+      <button type="button" class="d-btn d-btn--xs d-btn--icon-only d-btn--muted">
         <dt-icon name="more-vertical" size="200" />
       </button>
     </div>
@@ -127,7 +127,7 @@ htmlCode='
     <dt-text as="p" kind="headline" size="md">
       Lorem ipsum
     </dt-text>
-    <button type="button" class="d-btn d-btn--xs d-btn--circle">
+    <button type="button" class="d-btn d-btn--xs d-btn--icon-only d-btn--muted">
       <dt-icon name="more-vertical" size="200" />
     </button>
   </div>
@@ -240,7 +240,7 @@ showHtmlWarning />
       <dt-text as="p" kind="headline" size="md">
         Lorem ipsum
       </dt-text>
-      <button type="button" class="d-btn d-btn--xs d-btn--circle">
+      <button type="button" class="d-btn d-btn--xs d-btn--icon-only d-btn--muted">
         <dt-icon name="more-vertical" size="200" />
       </button>
     </div>
@@ -262,7 +262,7 @@ htmlCode='
     <dt-text as="p" kind="headline" size="md">
       Lorem ipsum
     </dt-text>
-    <button type="button" class="d-btn d-btn--xs d-btn--circle">
+    <button type="button" class="d-btn d-btn--xs d-btn--icon-only d-btn--muted">
       <dt-icon name="more-vertical" size="200" />
     </button>
   </div>
