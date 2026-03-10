@@ -221,6 +221,23 @@ describe('DtModeDirective Tests', () => {
   });
 
   describe('Validation Tests', () => {
+    it('should suggest "invert" when "inverted" is used', () => {
+      const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+      wrapper = mount({
+        template: '<section v-dt-mode:inverted data-qa="target">Content</section>',
+      }, {
+        global: { plugins: [DtModeDirective] },
+      });
+
+      expect(warnSpy).toHaveBeenCalledWith(
+        expect.stringContaining('Did you mean "invert"?'),
+      );
+      // Falls back to invert — root is light, so should be dark
+      expect(wrapper.find('[data-qa="target"]').attributes('data-dt-mode')).toBe('dark');
+      warnSpy.mockRestore();
+    });
+
     it('should warn and fall back to invert on invalid arg', () => {
       const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 

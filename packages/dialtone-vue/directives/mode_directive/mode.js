@@ -6,6 +6,10 @@ import {
 
 const VALID_MODES = ['light', 'dark', 'invert'];
 
+const SUGGESTIONS = {
+  inverted: 'invert',
+};
+
 export const DtModeDirective = {
   name: 'dt-mode-directive',
   install (app) {
@@ -36,6 +40,14 @@ export const DtModeDirective = {
     function resolveArg (arg) {
       if (!arg) return 'invert';
       if (VALID_MODES.includes(arg)) return arg;
+      if (SUGGESTIONS[arg]) {
+        // eslint-disable-next-line no-console
+        console.warn(
+          `[DtModeDirective] Invalid mode "${arg}". Did you mean "${SUGGESTIONS[arg]}"? Falling back to "${SUGGESTIONS[arg]}".`,
+        );
+        return SUGGESTIONS[arg];
+      }
+      // eslint-disable-next-line no-console
       console.warn(
         `[DtModeDirective] Invalid mode "${arg}". Valid modes: ${VALID_MODES.join(', ')}. Falling back to "invert".`,
       );
