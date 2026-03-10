@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/no-static-inline-styles -->
 <template>
-  <dt-recipe-combobox-with-popover
+  <dt-combobox-with-popover
     ref="comboboxWithPopover"
     :label="label"
     :show-list="showList"
@@ -18,13 +18,13 @@
     <template #input="{ onInput }">
       <span
         ref="inputSlotWrapper"
-        class="d-recipe-combobox-multi-select__input-wrapper"
+        class="d-combobox-multi-select__input-wrapper"
         @focusin="handleInputFocusIn"
         @focusout="handleInputFocusOut"
       >
         <span
           ref="chipsWrapper"
-          :class="['d-recipe-combobox-multi-select__chip-wrapper', chipWrapperClass]"
+          :class="['d-combobox-multi-select__chip-wrapper', chipWrapperClass]"
         >
           <dt-chip
             v-for="item in selectedItems"
@@ -32,8 +32,8 @@
             :key="item"
             :label-class="['d-chip__label']"
             :class="[
-              'd-recipe-combobox-multi-select__chip',
-              { 'd-recipe-combobox-multi-select__chip--truncate': !!chipMaxWidth },
+              'd-combobox-multi-select__chip',
+              { 'd-combobox-multi-select__chip--truncate': !!chipMaxWidth },
             ]"
             :style="{ maxWidth: chipMaxWidth }"
             :size="CHIP_SIZES[size]"
@@ -49,10 +49,10 @@
         <dt-input
           ref="input"
           v-model="value"
-          class="d-recipe-combobox-multi-select__input"
+          class="d-combobox-multi-select__input"
           :input-class="[
             inputClass, {
-              'd-recipe-combobox-multi-select__input--hidden': hideInputText,
+              'd-combobox-multi-select__input--hidden': hideInputText,
             }]"
           :input-wrapper-class="inputWrapperClass"
           :disabled="disabled"
@@ -88,7 +88,7 @@
     <template #list>
       <div
         ref="list"
-        class="d-recipe-combobox-multi-select__list"
+        class="d-combobox-multi-select__list"
         @mousedown.prevent
       >
         <slot
@@ -97,7 +97,7 @@
         />
         <div
           v-else
-          class="d-recipe-combobox-multi-select__list--loading"
+          class="d-combobox-multi-select__list--loading"
         >
           {{ loadingMessage }}
         </div>
@@ -113,12 +113,12 @@
         <slot name="footer" />
       </div>
     </template>
-  </dt-recipe-combobox-with-popover>
+  </dt-combobox-with-popover>
 </template>
 
 <script>
 /* eslint-disable max-lines */
-import DtRecipeComboboxWithPopover from '@/recipes/comboboxes/combobox_with_popover/combobox_with_popover.vue';
+import DtComboboxWithPopover from '@/components/combobox_with_popover/combobox_with_popover.vue';
 import DtInput from '@/components/input/input.vue';
 import DtChip from '@/components/chip/chip.vue';
 import DtValidationMessages from '@/components/validation_messages/validation_messages.vue';
@@ -135,10 +135,10 @@ import {
 
 export default {
   compatConfig: { MODE: 3 },
-  name: 'DtRecipeComboboxMultiSelect',
+  name: 'DtComboboxMultiSelect',
 
   components: {
-    DtRecipeComboboxWithPopover,
+    DtComboboxWithPopover,
     DtInput,
     DtChip,
     DtValidationMessages,
@@ -489,7 +489,7 @@ export default {
 
     chipWrapperClass () {
       return {
-        [`d-recipe-combobox-multi-select__chip-wrapper-${this.size}--collapsed`]: !this.inputFocused && this.collapseOnFocusOut,
+        [`d-combobox-multi-select__chip-wrapper-${this.size}--collapsed`]: !this.inputFocused && this.collapseOnFocusOut,
       };
     },
   },

@@ -1,5 +1,5 @@
 <template>
-  <dt-recipe-combobox-multi-select
+  <dt-combobox-multi-select
     ref="comboboxMultiSelect"
     :label="$attrs.label"
     :label-visible="$attrs.labelVisible"
@@ -62,18 +62,18 @@
     >
       <span v-html="$attrs.footer" />
     </template>
-  </dt-recipe-combobox-multi-select>
+  </dt-combobox-multi-select>
 </template>
 
 <script>
 import DtListItem from '@/components/list_item/list_item.vue';
-import DtRecipeComboboxMultiSelect from './combobox_multi_select.vue';
+import DtComboboxMultiSelect from './combobox_multi_select.vue';
 import { ITEMS_LIST_DATA } from './combobox_multi_select_story_constants';
 
 export default {
-  name: 'DtRecipeComboboxMultiSelectDefault',
+  name: 'DtComboboxMultiSelectDefault',
   components: {
-    DtRecipeComboboxMultiSelect,
+    DtComboboxMultiSelect,
     DtListItem,
   },
 
