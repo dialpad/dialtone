@@ -722,12 +722,22 @@ vueCode='
 
 ## Component
 
-The `<dt-mode-island>` component is the underlying abstraction that the directive builds on. It creates a wrapper element, sets `data-dt-mode` and `data-dt-contrast`, and applies the `d-mode-island` CSS class (which sets `color` and `background-color` from tokens).
+The `<dt-mode-island>` component is the underlying abstraction that the directive builds on. The key rendered difference is that it creates a wrapper element, while the directive attaches to mode to the existing element.
 
-Use the component when no container element exists and you need one created for you.
+<dt-notice
+  kind="info"
+  class="d-wmx100p d-mt24 d-mb24"
+  hide-close
+  title="Warning"
+>
+  The only real case where you might want to use the component is when you need to create a container element that doesn't already exist, but even then, you can create any kind of containing element with the directive e.g. <code>&lt;span v-dt-mode:invert"&gt;...&lt;/span&gt;</code>.
+</dt-notice>
 
 <code-example-tabs
 vueCode='
+<dt-mode-island as="section">
+  Rendered as a section element inverted
+</dt-mode-island>
 <dt-mode-island>
   Inverted (default)
 </dt-mode-island>
@@ -737,21 +747,8 @@ vueCode='
 <dt-mode-island mode="dark">
   Dark
 </dt-mode-island>
-<dt-mode-island as="section" mode="dark">
-  Rendered as a section element
-</dt-mode-island>
 '
 />
-
-### When to use which
-
-| Scenario | Use |
-|----------|-----|
-| You already have a container element (`section`, `nav`, `div`, etc.) | `v-dt-mode` directive |
-| No container exists, you need a wrapper created | `<dt-mode-island>` component |
-| Inside slot content (popovers, dropdowns) | Either — directive preferred if a container element exists |
-
-Both set `data-dt-mode` on their element and are fully interoperable when nested.
 
 ## Vue API
 
