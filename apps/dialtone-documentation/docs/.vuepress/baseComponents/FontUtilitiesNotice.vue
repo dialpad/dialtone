@@ -3,7 +3,7 @@
     kind="warning"
     hide-close
     class="d-wmx100p d-my16"
-    title="Use DtText in favor CSS Utilities"
+    title="Use DtText over CSS Utilities"
   >
     <template #default>
       Reach for the
