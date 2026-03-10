@@ -276,7 +276,7 @@ const checkRadioDisabled = ref(false);
     <dt-text as="h1" kind="headline" size="xl">
       Sizing update: Button/Input/Select
     </dt-text>
-    <dt-stack direction="row">
+    <dt-stack direction="row" align="end">
       <dt-select-menu
         size="xs"
         :options="[
@@ -302,7 +302,7 @@ const checkRadioDisabled = ref(false);
         Button
       </dt-button>
     </dt-stack>
-    <dt-stack direction="row">
+    <dt-stack direction="row" align="end">
       <dt-select-menu
         size="sm"
         :options="[
@@ -328,7 +328,7 @@ const checkRadioDisabled = ref(false);
         Button
       </dt-button>
     </dt-stack>
-    <dt-stack direction="row">
+    <dt-stack direction="row" align="end">
       <dt-select-menu
         size="md"
         :options="[
@@ -354,7 +354,7 @@ const checkRadioDisabled = ref(false);
         Button
       </dt-button>
     </dt-stack>
-    <dt-stack direction="row">
+    <dt-stack direction="row" align="end">
       <dt-select-menu
         size="lg"
         :options="[
@@ -380,7 +380,7 @@ const checkRadioDisabled = ref(false);
         Button
       </dt-button>
     </dt-stack>
-    <dt-stack direction="row">
+    <dt-stack direction="row" align="end">
       <dt-select-menu
         size="xl"
         :options="[

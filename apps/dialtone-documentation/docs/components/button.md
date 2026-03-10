@@ -319,13 +319,13 @@ showHtmlWarning />
 
 <dt-notice
   title="Deprecated"
-  kind="error"
+  kind="info"
   class="d-wmx100p d-my16"
 >
-  <code>kind="inverted"</code> has been deprecated. Use the <dt-link to="mode-island.html#inverting">v-dt-mode directive</dt-link> instead, or <dt-link to="mode-island.html#dtmodeisland-component">DtModeIsland</dt-link> when no natural container element exists.
+  <code>kind="inverted"</code> has been deprecated. Use the <dt-link to="mode-island.html#inverting">v-dt-mode directive</dt-link> instead, or <dt-link to="mode-island.html#dtmodeisland-component">DtModeIsland</dt-link>.
 </dt-notice>
 
-In place of `kind="inverted"`, use the [v-dt-mode directive](mode-island.html#inverting) on the component element. The previous `inverted` variant of DtButton was limited to a single presentation style. The directive now makes every combination available as an inverted style.
+Use the [v-dt-mode directive](mode-island.html#inverting) in place of `kind="inverted"` on the component element. The previous `inverted` variant of DtButton was limited to a single presentation style. The directive now makes every combination available as an inverted style.
 
 <code-well-header>
   <dt-toggle v-model="isInverted" size="sm" wrapperClass="d-g8 d-m-auto d-pb8">Inverted</dt-toggle>
