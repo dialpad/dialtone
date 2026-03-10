@@ -82,7 +82,7 @@ keywords: ["data table", "grid", "rows", "d-table", "DtTable", "dt-table", "data
 
 ### Inverted Style
 
-<dt-notice title="Deprecated" kind="error" class="d-wmx100p d-my16">
+<dt-notice title="Deprecated" kind="info" class="d-wmx100p d-my16">
   The <code>d-table--inverted</code> modifier has been deprecated. Use the <dt-link to="mode-island.html#inverting">v-dt-mode directive</dt-link> instead.
 </dt-notice>
 

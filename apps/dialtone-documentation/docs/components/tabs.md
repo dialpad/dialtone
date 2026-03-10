@@ -175,7 +175,7 @@ showHtmlWarning />
 
 ### Inverted
 
-<dt-notice title="Deprecated" kind="error" class="d-wmx100p d-my16">
+<dt-notice title="Deprecated" kind="info" class="d-wmx100p d-my16">
   The <code>inverted</code> prop has been deprecated. Use the <dt-link to="mode-island.html#inverting">v-dt-mode directive</dt-link> instead, or <dt-link to="mode-island.html#dtmodeisland-component">DtModeIsland</dt-link> when no natural container element exists.
 </dt-notice>
 
