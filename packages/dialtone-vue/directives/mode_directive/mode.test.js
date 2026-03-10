@@ -129,6 +129,51 @@ describe('DtModeDirective Tests', () => {
       expect(wrapper.find('[data-qa="target"]').attributes('data-dt-mode')).toBe('light');
     });
 
+    it('should not apply mode when value is false', () => {
+      wrapper = mount({
+        template: '<section v-dt-mode:invert="false" data-qa="target">Content</section>',
+      }, {
+        global: { plugins: [DtModeDirective] },
+      });
+
+      expect(wrapper.find('[data-qa="target"]').attributes('data-dt-mode')).toBeUndefined();
+      expect(wrapper.find('[data-qa="target"]').attributes('data-dt-contrast')).toBeUndefined();
+    });
+
+    it('should apply mode when value changes from false to true', async () => {
+      wrapper = mount({
+        template: '<section v-dt-mode:invert="enabled" data-qa="target">Content</section>',
+        data () {
+          return { enabled: false };
+        },
+      }, {
+        global: { plugins: [DtModeDirective] },
+      });
+
+      expect(wrapper.find('[data-qa="target"]').attributes('data-dt-mode')).toBeUndefined();
+
+      await wrapper.setData({ enabled: true });
+
+      expect(wrapper.find('[data-qa="target"]').attributes('data-dt-mode')).toBe('dark');
+    });
+
+    it('should remove mode when value changes from true to false', async () => {
+      wrapper = mount({
+        template: '<section v-dt-mode:invert="enabled" data-qa="target">Content</section>',
+        data () {
+          return { enabled: true };
+        },
+      }, {
+        global: { plugins: [DtModeDirective] },
+      });
+
+      expect(wrapper.find('[data-qa="target"]').attributes('data-dt-mode')).toBe('dark');
+
+      await wrapper.setData({ enabled: false });
+
+      expect(wrapper.find('[data-qa="target"]').attributes('data-dt-mode')).toBeUndefined();
+    });
+
     it('should re-initialize when dynamic arg changes', async () => {
       wrapper = mount({
         template: '<section v-dt-mode:[mode] data-qa="target">Content</section>',

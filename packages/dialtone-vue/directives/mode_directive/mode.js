@@ -17,22 +17,31 @@ export const DtModeDirective = {
 
     app.directive('dt-mode', {
       mounted (el, binding) {
+        if (binding.value === false) return;
         const mode = resolveArg(binding.arg);
         const state = applyMode(el, mode);
         instances.set(el, state);
       },
 
       updated (el, binding) {
-        if (binding.arg !== binding.oldArg) {
-          cleanup(instances.get(el));
-          const mode = resolveArg(binding.arg);
-          const state = applyMode(el, mode);
-          instances.set(el, state);
-        }
+        const valueChanged = binding.value !== binding.oldValue;
+        const argChanged = binding.arg !== binding.oldArg;
+        if (!valueChanged && !argChanged) return;
+
+        cleanup(instances.get(el));
+        removeAttributes(el);
+        instances.delete(el);
+
+        if (binding.value === false) return;
+
+        const mode = resolveArg(binding.arg);
+        const state = applyMode(el, mode);
+        instances.set(el, state);
       },
 
       unmounted (el) {
         cleanup(instances.get(el));
+        removeAttributes(el);
         instances.delete(el);
       },
     });
@@ -106,6 +115,11 @@ export const DtModeDirective = {
       }
 
       return state;
+    }
+
+    function removeAttributes (el) {
+      el.removeAttribute('data-dt-mode');
+      el.removeAttribute('data-dt-contrast');
     }
 
     function cleanup (state) {
