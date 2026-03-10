@@ -70,7 +70,6 @@ Dialtone provides five options for `kind`, with three levels of `importance`.
 The base button should be the go-to button for most of your needs. When in doubt, use this style. To help provide clarity to users, it is generally recommended to use only one primary button style within a section or page.
 
 <code-well-header>
-  <!-- asdfasdf -->
   <dt-stack direction="row" gap="400" ref="defaultExample">
       <dt-button> Place Call </dt-button>
       <dt-button importance="outlined"> Place Call </dt-button>
@@ -81,7 +80,6 @@ The base button should be the go-to button for most of your needs. When in doubt
 <code-example-tabs
 :htmlCode='() => $refs.defaultExample'
 vueCode='
-<!-- asdfasdf -->
 <dt-button> Place Call </dt-button>
 <dt-button importance="outlined"> Place Call </dt-button>
 <dt-button importance="clear"> Place Call </dt-button>
