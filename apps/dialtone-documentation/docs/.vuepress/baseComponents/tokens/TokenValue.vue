@@ -11,7 +11,7 @@
       </span>
     </div>
     <div v-else>
-      {{ tokenValue }}s
+      {{ tokenValue }}
     </div>
   </dt-text>
 </template>
