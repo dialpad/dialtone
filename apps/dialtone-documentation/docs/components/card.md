@@ -10,11 +10,16 @@ keywords: ["panel", "container", "box", "d-card", "DtCard", "dt-card", "tile", "
 ---
 
 <code-well-header>
-  <dt-card class="d-w264" header-class="d-bb d-bc-subtle d-py8 d-pr8" footer-class="d-bt d-bc-subtle d-py12">
+  <dt-card
+    class="d-w264"
+    header-class="d-bb d-bc-subtle d-py8 d-pr8"
+    content-class="d-pr0"
+    footer-class="d-bt d-bc-subtle d-py12"
+  >
     <template #header>
       <dt-stack gap="350" direction="row" align="center">
         <dt-icon class="d-fc-tertiary" name="branch" size="300" />
-        <dt-text as="h3" kind="headline" size="md" tone="secondary">Lorem ipsum</dt-text>
+        <dt-text as="h3" kind="headline" size="md" tone="secondary">Branch</dt-text>
       </dt-stack>
       <dt-dropdown navigation-type="arrow-keys" placement="bottom-end">
         <template #anchor="{ attrs }">
@@ -42,10 +47,15 @@ keywords: ["panel", "container", "box", "d-card", "DtCard", "dt-card", "tile", "
       </dt-dropdown>
     </template>
     <template #content>
-      <dt-stack gap="400">
-        <dt-text as="p" kind="body" text-box-trim="start">Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit, donec fermentum molestie semper.</dt-text>
-        <dt-text as="p" kind="body" text-box-trim="end">Morbi finibus nulla turpis, nec molestie mi rutrum</dt-text>
-      </dt-stack>
+      <div class="d-h216 d-pr16" v-dt-scrollbar:never>
+        <dt-stack gap="400">
+          <dt-text as="p" kind="body" text-box-trim="start">Main branch, last updated 2 days ago. Currently 3 commits ahead and 1 behind the upstream target.</dt-text>
+          <dt-text as="p" kind="body">All checks passing. Latest build completed in 4m 12s with no warnings or errors.</dt-text>
+          <dt-text as="p" kind="body">Open pull requests: 2 pending review, 1 approved and ready to merge.</dt-text>
+          <dt-text as="p" kind="body">Recent activity includes dependency updates, a hotfix for the login flow, and minor copy changes across settings pages.</dt-text>
+          <dt-text as="p" kind="body" text-box-trim="end">Protected branch rules are enforced. Requires at least one approval before merging.</dt-text>
+        </dt-stack>
+      </div>
     </template>
     <template #footer>
       <dt-button
