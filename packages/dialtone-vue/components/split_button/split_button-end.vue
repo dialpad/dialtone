@@ -2,10 +2,10 @@
   <dt-button
     :id="id"
     v-dt-tooltip="{ message: tooltipText, inverted: kind === 'inverted' }"
-    data-qa="dt-split-button-omega"
+    data-qa="dt-split-button-end"
     :active="active"
     :aria-label="ariaLabel"
-    :class="`d-split-btn__omega d-split-btn__omega--${size}`"
+    :class="`d-split-btn__end d-split-btn__end--${size}`"
     :disabled="disabled"
     :importance="importance"
     :kind="kind"
@@ -30,7 +30,7 @@ import { getUniqueString } from '@/common/utils';
 
 export default {
   compatConfig: { MODE: 3 },
-  name: 'SplitButtonOmega',
+  name: 'SplitButtonEnd',
   components: {
     DtButton,
     DtIconChevronDown,

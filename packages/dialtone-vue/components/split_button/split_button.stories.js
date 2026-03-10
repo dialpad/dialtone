@@ -134,6 +134,26 @@ export const argTypesData = {
     control: 'boolean',
   },
 
+  startTo: {
+    control: 'text',
+  },
+
+  startHref: {
+    control: 'text',
+  },
+
+  startTarget: {
+    control: 'text',
+  },
+
+  startRel: {
+    control: 'text',
+  },
+
+  startReplace: {
+    control: 'boolean',
+  },
+
   dropdownPlacement: {
     options: POPOVER_DIRECTIONS,
     control: {
@@ -244,6 +264,40 @@ const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 
 export const Default = {
   render: DefaultTemplate,
+
+  decorators: [
+    () => ({
+      template: `<dt-stack direction="row" justify="center" align="center" class="d-h164"><story /></dt-stack>`,
+    }),
+  ],
+};
+
+export const WithLink = {
+  render: DefaultTemplate,
+
+  args: {
+    ...argsData,
+    startHref: 'https://dialpad.com',
+    startTarget: '_blank',
+    startRel: 'noopener noreferrer',
+    default: 'Visit Dialpad',
+  },
+
+  decorators: [
+    () => ({
+      template: `<dt-stack direction="row" justify="center" align="center" class="d-h164"><story /></dt-stack>`,
+    }),
+  ],
+};
+
+export const WithRouterLink = {
+  render: DefaultTemplate,
+
+  args: {
+    ...argsData,
+    startTo: '/components/button',
+    default: 'Go to Button',
+  },
 
   decorators: [
     () => ({

@@ -1,3 +1,15 @@
+# [3.211.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.211.0-next.1...dialtone-vue/v3.211.0-next.2) (2026-03-10)
+
+
+### Code Refactoring
+
+* **Tokens,css,link,text,breadcrumbs,input Group,split Button:** tokens, CSS foundation, deprecations, tooling DLT-3011 DLT-2961 DLT-3068 DLT-3069 DLT-3070 DLT-3071 DLT-3072 ([#1092](https://github.com/dialpad/dialtone/issues/1092)) ([7783090](https://github.com/dialpad/dialtone/commit/7783090542b0f9c9564d9cc9f61a3abfe19edab8))
+
+
+### Features
+
+* **Banner, Notice, Toast, Breadcrumbs, Checkbox, Radio, Input, Select Menu, Empty State:** visual refresh, dt-text integration, form api parity DLT-2944 DLT-2945 DLT-2949 DLT-2959 DLT-2960 DLT-2957 ([#1091](https://github.com/dialpad/dialtone/issues/1091)) ([16e908a](https://github.com/dialpad/dialtone/commit/16e908a94c8b0522d64740add1878590ffb9bd04))
+
 # [3.211.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.210.0...dialtone-vue/v3.211.0-next.1) (2026-03-05)
 
 

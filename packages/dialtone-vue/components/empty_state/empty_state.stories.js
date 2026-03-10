@@ -1,6 +1,7 @@
 import { createTemplateFromVueFile, getIconNames, getIllustrationNames } from '@/common/storybook_utils';
 import DtEmptyState from './empty_state.vue';
 import DtEmptyStateDefaultTemplate from './empty_state_default.story.vue';
+import DtEmptyStateVariantsTemplate from './empty_state_variants.story.vue';
 import { EMPTY_STATE_SIZE_MODIFIERS } from './empty_state_constants.js';
 
 const illustrationsList = getIllustrationNames();
@@ -78,6 +79,18 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   argTypes,
   DtEmptyStateDefaultTemplate,
 );
+
+const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+  args,
+  argTypes,
+  DtEmptyStateVariantsTemplate,
+);
+
+export const Variants = {
+  render: VariantsTemplate,
+  parameters: { options: { showPanel: false }, controls: { disable: true } },
+  args: {},
+};
 
 export const Default = {
   render: DefaultTemplate,

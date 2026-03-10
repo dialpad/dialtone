@@ -7,7 +7,7 @@
       { [BREADCRUMBS_INVERTED_MODIFIER]: inverted },
     ]"
   >
-    <ol>
+    <ol :class="['d-breadcrumbs__list']">
       <!-- @slot default slot for breadcrumbs content -->
       <slot>
         <dt-breadcrumb-item
@@ -55,6 +55,7 @@ export default {
     },
 
     /**
+     * @ignore
      * Passed through to link. If true, applies inverted styles to the link.
      * @values true, false
      */

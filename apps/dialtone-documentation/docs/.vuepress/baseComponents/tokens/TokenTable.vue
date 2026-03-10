@@ -88,16 +88,15 @@
                 :tokens="tokens"
               />
             </th>
-            <td v-if="!isSmallDevice && showValue" class="d-text-code--md d-fc-blue-800 d-ta-right d-wmx164">
-              <token-value :token-value="valueToString(tokenValue)" :tokens="tokens" />
+            <td v-if="!isSmallDevice && showValue" class="d-ta-right d-wmx164">
+              <dt-text as="span" kind="code" size="md" class="d-fc-blue-800">
+                <token-value :token-value="valueToString(tokenValue)" :tokens="tokens" />
+              </dt-text>
             </td>
-            <td
-              v-if="!!tokenList"
-              class="d-text-code--md d-docsite-code"
-            >
-              <div class="d-wmx264">
+            <td v-if="!!tokenList">
+              <dt-text as="div" kind="code" size="md" class="d-docsite-code d-wmx264">
                 {{ remToPixels(tokenValue) }}
-              </div>
+              </dt-text>
             </td>
           </tr>
         </tbody>

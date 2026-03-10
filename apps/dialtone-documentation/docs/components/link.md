@@ -95,10 +95,10 @@ showHtmlWarning />
   kind="error"
   class="d-wmx100p d-my16"
 >
-  The <code>inverted</code> prop has been deprecated in favor of using <router-link to="mode-island.html"> <DtLink>DtModeIsland</DtLink> </router-link> as a wrapper.
+  The <code>inverted</code> prop has been deprecated in favor of using <dt-link to="mode-island.html">DtModeIsland</dt-link> as a wrapper.
 </dt-notice>
 
-In place of the <code>inverted</code> prop, use the <router-link to="mode-island.html"> <DtLink>DtModeIsland</DtLink> </router-link> component as a wrapper.
+In place of the <code>inverted</code> prop, use the <dt-link to="mode-island.html">DtModeIsland</dt-link> component as a wrapper.
 
 <code-well-header>
   <dt-mode-island class="d-p16 d-bar8">

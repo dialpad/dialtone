@@ -37,19 +37,34 @@
           >
             <th
               scope="row"
-              class="d-code--sm d-docsite-code"
-              v-text="className.startsWith('data-') ? className : `.${className}`"
-            />
-            <td class="d-code--sm">
-              <span
+            >
+              <dt-text
+                as="span"
+                kind="code"
+                size="xs"
+                class="d-docsite-code"
+              >
+                {{ className.startsWith('data-') ? className : `.${className}` }}
+              </dt-text>
+            </th>
+            <td>
+              <dt-text
+                as="code"
+                kind="code"
+                size="xs"
                 class="code-example--inline"
-                v-text="applies"
-              />
+              >
+                {{ applies }}
+              </dt-text>
             </td>
-            <td
-              class="d-fs-100 d-lh-300"
-              v-text="description"
-            />
+            <td>
+              <dt-text
+                kind="body"
+                size="xs"
+              >
+                {{ description }}
+              </dt-text>
+            </td>
           </tr>
         </tbody>
       </table>

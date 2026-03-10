@@ -1,12 +1,9 @@
 import { mount } from '@vue/test-utils';
 import {
-  LABEL_SIZE_MODIFIERS,
-  DESCRIPTION_SIZE_MODIFIERS,
-} from '@/common/constants';
-import {
   SELECT_SIZE_MODIFIERS,
   SELECT_STATE_MODIFIERS,
 } from './select_menu_constants';
+import { DtText } from '@/components/text';
 import DtSelectMenu from './select_menu.vue';
 
 const MOCK_LABEL = 'Label';
@@ -68,8 +65,8 @@ describe('DtSelectMenu Tests', () => {
         expect(label.text()).toBe(MOCK_LABEL);
       });
 
-      it('should have no size variant classes on the label', () => {
-        expect(label.classes().length).toBe(1);
+      it('should have the default label text class', () => {
+        expect(label.classes()).toContain('d-text-label--md');
       });
 
       it('should not render a description', () => {
@@ -110,6 +107,32 @@ describe('DtSelectMenu Tests', () => {
       });
     });
 
+    describe('When labelVisible is false', () => {
+      beforeEach(() => {
+        mockProps = { labelVisible: false };
+
+        updateWrapper();
+      });
+
+      it('should not render a label', () => {
+        label = wrapper.find('[data-qa="dt-select-label"]');
+
+        expect(label.exists()).toBe(false);
+      });
+
+      it('should set aria-label on the select', () => {
+        select = wrapper.find('[data-qa="dt-select"]');
+
+        expect(select.attributes('aria-label')).toBe(MOCK_LABEL);
+      });
+    });
+
+    describe('When labelVisible is true', () => {
+      it('should not set aria-label on the select', () => {
+        expect(select.attributes('aria-label')).toBeUndefined();
+      });
+    });
+
     describe('When a label is provided via slot', () => {
       it('should render the slotted label', () => {
         mockSlots = { label: 'Slotted Label' };
@@ -132,7 +155,8 @@ describe('DtSelectMenu Tests', () => {
       });
 
       it('should have no size variant classes on the description', () => {
-        expect(description.classes().length).toBe(1);
+        const sizeClasses = description.classes().filter(c => c.startsWith('d-description--'));
+        expect(sizeClasses.length).toBe(0);
       });
     });
 
@@ -169,15 +193,58 @@ describe('DtSelectMenu Tests', () => {
       });
 
       it('should have size variant class on the label', () => {
-        expect(label.classes(LABEL_SIZE_MODIFIERS[MOCK_SIZE])).toBe(true);
+        expect(label.classes()).toContain('d-text-label--lg');
       });
 
-      it('should have size variant class on the description', () => {
-        expect(description.classes(DESCRIPTION_SIZE_MODIFIERS[MOCK_SIZE])).toBe(true);
+      it('should have DtText size on the description', () => {
+        const descriptionText = description.findComponent(DtText);
+        expect(descriptionText.props('size')).toBe('sm');
       });
 
       it('should have size variant class on select menu', () => {
         expect(selectWrapper.classes(SELECT_SIZE_MODIFIERS[MOCK_SIZE])).toBe(true);
+      });
+    });
+
+    describe('When labelSize is provided', () => {
+      it('should override the default label size', () => {
+        mockProps = { labelSize: 'xs' };
+
+        updateWrapper();
+
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.props('size')).toBe('xs');
+      });
+
+      it('should override the size-derived label size', () => {
+        mockProps = { size: 'xl', labelSize: 'sm' };
+
+        updateWrapper();
+
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.props('size')).toBe('sm');
+      });
+    });
+
+    describe('When labelStrength is provided', () => {
+      it('should override the default label strength', () => {
+        mockProps = { labelStrength: 'bold' };
+
+        updateWrapper();
+
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.props('strength')).toBe('bold');
+      });
+
+      it('should not set strength when not provided', () => {
+        updateWrapper();
+
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.props('strength')).toBeNull();
       });
     });
 
