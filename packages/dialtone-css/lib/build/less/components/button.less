@@ -719,12 +719,15 @@
 
   .d-popover,
   .d-popover div,
-  .d-popover &__omega {
+  .d-popover &__omega,
+  .d-popover &__end {
     block-size: 100%;
   }
 
   &__alpha,
-  &__omega {
+  &__omega,
+  &__start,
+  &__end {
     position: relative;
 
     &:focus-visible {
@@ -732,12 +735,27 @@
     }
   }
 
-  &__alpha {
+  &__alpha,
+  &__start {
     flex-grow: 1;
     padding-inline-end: calc(var(--button-padding-x) + var(--dt-size-200));
+
+    &:not(.d-btn--outlined) {
+      border-inline-end: 0;
+    }
+
+    &:disabled:not(.d-btn--outlined),
+    &:disabled:not(.d-btn--primary),
+    &.d-btn--primary,
+    &.d-btn--outlined {
+      border-inline-end: 0;
+      border-start-end-radius: 0;
+      border-end-end-radius: 0;
+    }
   }
 
-  &__omega {
+  &__omega,
+  &__end {
     // vertical divider between the two buttons
     &::before {
       position: absolute;
@@ -751,20 +769,27 @@
       opacity: var(--dt-opacity-600); // soften it
       content: "";
 
-       // soften divider for muted outlined
-      .d-split-btn:has(.d-btn--outlined.d-btn--muted, .d-btn--outlined.d-btn--inverted) & {
+      // soften divider for muted outlined
+      .d-split-btn:has(.d-btn--outlined.d-btn--muted,
+      .d-btn--outlined.d-btn--inverted) & {
         opacity: var(--dt-opacity-300);
       }
 
       // hide divider line when hovering or focusing any button within the split button
-      .d-split-btn:has(:focus-visible, :hover, .d-btn--active) & {
+      .d-split-btn:has(:focus-visible,
+      :hover,
+      .d-btn--active) & {
         opacity: 0;
       }
 
       // DO NOT hide divider line for primary, outlined, or disabled buttons
       .d-split-btn:has(:disabled) &,
-      .d-split-btn:has(.d-btn--outlined:focus-visible, .d-btn--outlined:hover, .d-btn--outlined.d-btn--active) &,
-      .d-split-btn:has(.d-btn--primary:focus-visible, .d-btn--primary:hover, .d-btn--primary.d-btn--active) & {
+      .d-split-btn:has(.d-btn--outlined:focus-visible,
+      .d-btn--outlined:hover,
+      .d-btn--outlined.d-btn--active) &,
+      .d-split-btn:has(.d-btn--primary:focus-visible,
+      .d-btn--primary:hover,
+      .d-btn--primary.d-btn--active) & {
         opacity: var(--dt-opacity-600);
       }
     }
@@ -779,59 +804,51 @@
     &.d-btn--outlined::before {
       inset-block: var(--dt-size-50-negative);
     }
-  }
 
-  &__alpha:disabled:not(.d-btn--outlined),
-  &__alpha:disabled:not(.d-btn--primary),
-  &__alpha.d-btn--primary,
-  &__alpha.d-btn--outlined {
-    border-inline-end: 0;
-    border-start-end-radius: 0;
-    border-end-end-radius: 0;
-  }
+    &:not(.d-btn--outlined) {
+      border-inline-start: 0;
+    }
 
-  &__alpha:not(.d-btn--outlined) {
-    border-inline-end: 0;
-  }
+    &:not(.d-btn--outlined, .d-btn--primary) > * {
+      // yes, I'm pushing a half-pixel over just for this variant
+      // to ensure icon is centered
+      transform: translateX(var(--dt-size-50));
+    }
 
-  &__omega:not(.d-btn--outlined) {
-    border-inline-start: 0;
-  }
-
-  &__omega:not(.d-btn--outlined, .d-btn--primary) > * {
-    // yes, I'm pushing a half-pixel over just for this variant
-    // to ensure icon is centered
-    transform: translateX(var(--dt-size-50));
-  }
-
-  &__omega:disabled:not(.d-btn--outlined),
-  &__omega:disabled:not(.d-btn--primary),
-  &__omega.d-btn--primary,
-  &__omega.d-btn--outlined {
-    border-inline-start: 0;
-    border-start-start-radius: 0;
-    border-end-start-radius: 0;
+    &:disabled:not(.d-btn--outlined),
+    &:disabled:not(.d-btn--primary),
+    &.d-btn--primary,
+    &.d-btn--outlined {
+      border-inline-start: 0;
+      border-start-start-radius: 0;
+      border-end-start-radius: 0;
+    }
   }
 
   // adjust x-padding for icon-only button at each size
-  &__omega--xs.d-btn--icon-only {
-    --button-padding-x: var(--dt-size-300);
+  &__omega--xs,
+  &__end--xs {
+    &.d-btn--icon-only { --button-padding-x: var(--dt-size-300); }
   }
 
-  &__omega--sm.d-btn--icon-only {
-    --button-padding-x: var(--dt-size-300);
+  &__omega--sm,
+  &__end--sm {
+    &.d-btn--icon-only { --button-padding-x: var(--dt-size-300); }
   }
 
-  &__omega--md.d-btn--icon-only {
-    --button-padding-x: var(--dt-size-350);
+  &__omega--md,
+  &__end--md {
+    &.d-btn--icon-only { --button-padding-x: var(--dt-size-350); }
   }
 
-  &__omega--lg.d-btn--icon-only {
-    --button-padding-x: var(--dt-size-400);
+  &__omega--lg,
+  &__end--lg {
+    &.d-btn--icon-only { --button-padding-x: var(--dt-size-400); }
   }
 
-  &__omega--xl.d-btn--icon-only {
-    --button-padding-x: var(--dt-size-450);
+  &__omega--xl,
+  &__end--xl {
+    &.d-btn--icon-only { --button-padding-x: var(--dt-size-450); }
   }
 }
 

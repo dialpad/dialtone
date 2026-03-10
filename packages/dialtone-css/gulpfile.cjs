@@ -35,7 +35,7 @@ const path = require('path');
 //  @@ STYLES
 const postCSS = settings.styles ? require('gulp-postcss') : null;
 // crawls .less dependencies for incremental building
-const postCSSNano = settings.styles ? require('cssnano') : null;
+const postCSSNano = settings.styles ? require('cssnano')({ preset: ['default', { calc: false }] }) : null;
 const less = settings.styles ? require('gulp-less') : null;
 const postCSSDialtoneGenerator = settings.styles ? require('./postcss/dialtone-generators.cjs') : null;
 const sourcemaps = settings.styles ? require('gulp-sourcemaps') : null;
@@ -418,6 +418,9 @@ exports.watch = series(
   exports.buildWatch,
   watchFiles,
 );
+
+// start watching without a prior clean or full build (assumes build already ran).
+exports.startWatch = series(watchFiles);
 
 //  --  CONVERT WEBFONTS
 exports.fonts = series(

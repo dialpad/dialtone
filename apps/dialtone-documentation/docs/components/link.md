@@ -71,31 +71,6 @@ vueCode='
 '
 showHtmlWarning />
 
-### Inverted
-
-<code-well-header bgclass="d-bgc-contrast">
-  <DtStack gap="400" ref="linkExample2">
-    <dt-link href="#link" inverted>Inverted base link</dt-link>
-    <dt-link href="#link" kind="danger" inverted>Inverted danger link</dt-link>
-    <dt-link href="#link" kind="success" inverted>Inverted success link</dt-link>
-    <dt-link href="#link" kind="warning" inverted>Inverted warning link</dt-link>
-    <dt-link href="#link" kind="muted" inverted>Inverted muted link</dt-link>
-    <dt-link href="#link" kind="mention" inverted>Inverted mention link</dt-link>
-  </DtStack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.linkExample2'
-vueCode='
-<dt-link :href="#link" inverted>Inverted link</dt-link>
-<dt-link :href="#link" kind="danger" inverted>Inverted danger link</dt-link>
-<dt-link :href="#link" kind="success" inverted>Inverted success link</dt-link>
-<dt-link :href="#link" kind="warning" inverted>Inverted warning link</dt-link>
-<dt-link :href="#link" kind="muted" inverted>Inverted muted link</dt-link>
-<dt-link :href="#link" kind="mention" inverted>Inverted mention link</dt-link>
-'
-showHtmlWarning />
-
 ### No underline
 
 This inverts the underline behavior. With `underline="false"`, the link will not have an underline by default, but will show one on hover.
@@ -110,6 +85,40 @@ htmlCode='
 '
 vueCode='
 <dt-link href="#link" :underline="false">No underline link</dt-link>
+'
+showHtmlWarning />
+
+### Inverted
+
+<dt-notice
+  title="Deprecated"
+  kind="error"
+  class="d-wmx100p d-my16"
+>
+  The <code>inverted</code> prop has been deprecated in favor of using <dt-link to="mode-island.html">DtModeIsland</dt-link> as a wrapper.
+</dt-notice>
+
+In place of the <code>inverted</code> prop, use the <dt-link to="mode-island.html">DtModeIsland</dt-link> component as a wrapper.
+
+<code-well-header>
+  <dt-mode-island class="d-p16 d-bar8">
+    <DtStack gap="400" ref="linkInvertedExample">
+      <dt-link href="#link">Base link</dt-link>
+      <dt-link href="#link" kind="danger">Danger link</dt-link>
+      <dt-link href="#link" kind="success">Success link</dt-link>
+      <dt-link href="#link" kind="warning">Warning link</dt-link>
+      <dt-link href="#link" kind="muted">Muted link</dt-link>
+      <dt-link href="#link" kind="mention">Mention link</dt-link>
+    </DtStack>
+  </dt-mode-island>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.linkInvertedExample'
+vueCode='
+<dt-mode-island>
+  <dt-link {props}>Link</dt-link>
+</dt-mode-island>
 '
 showHtmlWarning />
 

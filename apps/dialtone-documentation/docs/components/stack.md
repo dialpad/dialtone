@@ -185,7 +185,7 @@ vueCode='
 '
 />
 
-## As
+## Render as
 
 The `as` prop controls which HTML element the Stack component renders as. Defaults to `<div>`, but can be declared as any valid HTML element to ensure semantic and accessible markup.
 

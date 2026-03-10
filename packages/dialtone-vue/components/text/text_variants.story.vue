@@ -228,24 +228,6 @@
               </dt-stack>
             </div>
           </div>
-
-          <div>
-            <div class="d-ba d-bc-default d-p16 d-bar8 d-bgc-primary-inverted">
-              <dt-stack
-                direction="row"
-                gap="400"
-                class="d-fw-wrap"
-              >
-                <dt-text
-                  v-for="tone in invertedToneExamples"
-                  :key="tone"
-                  :tone="tone"
-                >
-                  {{ tone }}
-                </dt-text>
-              </dt-stack>
-            </div>
-          </div>
         </dt-stack>
       </section>
 
@@ -400,7 +382,7 @@
             >
               {{ item.wrap.charAt(0).toUpperCase() + item.wrap.slice(1) }}
             </dt-text>
-            <div class="d-ba d-bc-default d-of-hidden d-p16 d-bar8 d-w192">
+            <div class="d-ba d-bc-default d-of-hidden d-p16 d-bar8">
               <dt-text
                 kind="headline"
                 size="md"

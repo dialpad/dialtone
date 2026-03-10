@@ -1,8 +1,12 @@
 <template>
   <div class="gradient-overlay" style="--overlay-opacity: 0; --text-opacity: .6;">
     <div class="gradient-overlay__overlay" />
-    <h1
-      class="d-headline--xxl d-h100p d-w100p d-d-grid d-plc-center d-ta-center d-fw-medium d-wmx1024 d-m-auto d-p32"
+    <dt-text
+      as="h1"
+      kind="headline"
+      size="2xl"
+      strength="medium"
+      class="d-h100p d-w100p d-d-grid d-plc-center d-ta-center d-wmx1024 d-m-auto d-p32"
       style="
         font-size: 64px;
         font-family: var(--dt-font-family-expressive);
@@ -21,7 +25,7 @@
       >
         Making every business, a better business through design.
       </div>
-    </h1>
+    </dt-text>
   </div>
 </template>
 

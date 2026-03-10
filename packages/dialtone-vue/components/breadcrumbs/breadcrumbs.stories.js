@@ -51,6 +51,9 @@ export const argTypesData = {
       },
     },
   },
+  inverted: {
+    table: { disable: true },
+  },
 };
 
 // Story Collection

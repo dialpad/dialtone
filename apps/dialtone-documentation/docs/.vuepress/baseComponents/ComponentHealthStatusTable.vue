@@ -64,12 +64,9 @@
         :key="component.name"
       >
         <th scope="row">
-          <router-link
-            class="d-link"
-            :to="component.url"
-          >
+          <dt-link :to="component.url">
             {{ component.name }}
-          </router-link>
+          </dt-link>
         </th>
         <td
           tabindex="0"

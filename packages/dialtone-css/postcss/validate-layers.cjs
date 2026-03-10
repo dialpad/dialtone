@@ -17,6 +17,12 @@ module.exports = ({
       const unlayeredRules = [];
       const validLayers = ['dialtone.reset', 'dialtone.base', 'dialtone.components', 'dialtone.utilities'];
 
+      // Check for file-level disable comment: /* validate-layers: off */
+      const fileDisabled = root.nodes.some(
+        n => n.type === 'comment' && n.text.trim() === 'validate-layers: off',
+      );
+      if (fileDisabled) return;
+
       root.walkRules(rule => {
         // Skip @font-face, @keyframes, etc - these are at-rules, not rules
         if (rule.parent.type === 'atrule' && ['font-face', 'keyframes'].includes(rule.parent.name)) {

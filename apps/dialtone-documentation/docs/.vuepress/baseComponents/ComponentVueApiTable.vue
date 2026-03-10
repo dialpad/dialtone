@@ -46,17 +46,16 @@
           >
             <th scope="row">
               <dt-stack gap="300">
-                <span>
-                  <code class="d-code--sm d-docsite-code">
-                    {{ item.name }}
-                  </code>
-                </span>
-                <div
+                <dt-text as="code" kind="code" size="xs" class="d-docsite-code">
+                  {{ item.name }}
+                </dt-text>
+                <dt-text
                   v-if="item.required"
-                  class="d-fc-critical d-fw-normal"
+                  tone="critical"
+                  strength="normal"
                 >
                   required
-                </div>
+                </dt-text>
                 <span v-if="item.deprecated">
                   <dt-badge
                     type="critical"
@@ -68,9 +67,9 @@
             </th>
 
             <td v-if="withDefault">
-              <code v-if="item.defaultValue" class="d-code--sm d-docsite-code">
+              <dt-text v-if="item.defaultValue" as="code" kind="code" size="xs" class="d-docsite-code">
                 {{ item.defaultValue }}
-              </code>
+              </dt-text>
             </td>
 
             <td class="vue-api-table">
@@ -89,14 +88,14 @@
                     <dt-text v-if="index > 0" tone="muted" as="span" kind="body" size="xs">
                       |
                     </dt-text>
-                    <code class="d-code--sm d-docsite-code">"{{ value }}"</code>
+                    <dt-text as="code" kind="code" size="xs" class="d-docsite-code">
+                      "{{ value }}"
+                    </dt-text>
                   </template>
                 </dt-stack>
-                <span v-else-if="item.type">
-                  <code class="d-code--sm d-docsite-code">
-                    {{ item.type }}
-                  </code>
-                </span>
+                <dt-text v-else-if="item.type" as="code" kind="code" size="xs" class="d-docsite-code">
+                  {{ item.type }}
+                </dt-text>
                 <dt-text
                   v-if="item.description"
                   as="p"
@@ -113,7 +112,7 @@
                   as="p"
                   kind="body"
                   size="sm"
-                  class="d-fc-critical"
+                  tone="critical"
                 >
                   {{ item.deprecatedMessage }}
                 </dt-text>
