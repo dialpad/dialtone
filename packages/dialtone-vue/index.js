@@ -72,7 +72,7 @@ export * from './recipes/buttons/callbar_button_with_dropdown';
 export * from './recipes/cards/ivr_node';
 export * from './recipes/chips/grouped_chip';
 export * from './recipes/comboboxes/combobox_multi_select';
-export * from './recipes/comboboxes/combobox_with_popover';
+export * from './components/combobox_with_popover';
 export * from './recipes/conversation_view/attachment_carousel';
 export * from './recipes/conversation_view/editor';
 export * from './recipes/conversation_view/emoji_row';
