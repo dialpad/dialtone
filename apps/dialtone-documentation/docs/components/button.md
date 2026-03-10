@@ -325,14 +325,34 @@ showHtmlWarning />
   <code>kind="inverted"</code> has been deprecated. Use the <dt-link to="mode-island.html#inverting">v-dt-mode directive</dt-link> instead, or <dt-link to="mode-island.html#dtmodeisland-component">DtModeIsland</dt-link> when no natural container element exists.
 </dt-notice>
 
-In place of <code>kind="inverted"</code>, use the <dt-link to="mode-island.html#inverting">v-dt-mode directive</dt-link> on the component element.
+In place of `kind="inverted"`, use the [v-dt-mode directive](mode-island.html#inverting) on the component element. The previous `inverted` variant of DtButton was limited to a single presentation style. The directive now makes every combination available as an inverted style.
 
 <code-well-header>
-  <dt-button v-dt-mode:invert>Place Call</dt-button>
+  <dt-toggle v-model="isInverted" size="sm" wrapperClass="d-g8 d-m-auto d-pb8">Inverted</dt-toggle>
+  <dt-stack gap="400" ref="invertedAll">
+    <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+      <dt-button v-dt-mode:invert="isInverted"> Place Call </dt-button>
+      <dt-button v-dt-mode:invert="isInverted" importance="outlined"> Place Call </dt-button>
+      <dt-button v-dt-mode:invert="isInverted" importance="clear"> Place Call </dt-button>
+    </dt-stack>
+    <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+      <dt-button v-dt-mode:invert="isInverted" kind="danger"> Place Call </dt-button>
+      <dt-button v-dt-mode:invert="isInverted" kind="danger" importance="outlined"> Place Call </dt-button>
+      <dt-button v-dt-mode:invert="isInverted" kind="danger" importance="clear"> Place Call </dt-button>
+    </dt-stack>
+    <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+      <dt-button v-dt-mode:invert="isInverted" kind="positive">Place Call</dt-button>
+      <dt-button v-dt-mode:invert="isInverted" kind="positive" importance="outlined">Place Call</dt-button>
+      <dt-button v-dt-mode:invert="isInverted" kind="positive" importance="clear">Place Call</dt-button>
+    </dt-stack>
+    <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+      <dt-button v-dt-mode:invert="isInverted" kind="muted" importance="clear"> Place Call </dt-button>
+      <dt-button v-dt-mode:invert="isInverted" kind="muted" importance="outlined"> Place Call </dt-button>
+    </dt-stack>
+  </dt-stack>
 </code-well-header>
-
 <code-example-tabs
-:htmlCode='() => $refs.modeIslandExample'
+:htmlCode='() => $refs.invertedAll'
 vueCode='
 <dt-button v-dt-mode:invert {props}>Place Call</dt-button>
 '
@@ -1280,4 +1300,5 @@ import { ref } from 'vue';
 import ButtonVariantsTable from '@baseComponents/ButtonVariantsTable.vue';
 
 const isDisabled = ref(true);
+const isInverted = ref(true);
 </script>

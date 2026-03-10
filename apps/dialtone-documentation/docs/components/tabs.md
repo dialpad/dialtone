@@ -179,7 +179,7 @@ showHtmlWarning />
   The <code>inverted</code> prop has been deprecated. Use the <dt-link to="mode-island.html#inverting">v-dt-mode directive</dt-link> instead, or <dt-link to="mode-island.html#dtmodeisland-component">DtModeIsland</dt-link> when no natural container element exists.
 </dt-notice>
 
-In place of the <code>inverted</code> prop, use the <dt-link to="mode-island.html#inverting">v-dt-mode directive</dt-link> on the component element.
+In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#inverting) on the component element.
 
 <code-well-header>
   <div class="d-p8 d-bgc-contrast d-w100p">

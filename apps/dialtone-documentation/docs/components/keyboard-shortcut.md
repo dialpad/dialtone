@@ -46,7 +46,7 @@ vueCode='
   when no natural container element exists.
 </dt-notice>
 
-In place of the <code>inverted</code> prop, use the <dt-link to="mode-island.html#inverting">v-dt-mode directive</dt-link> on the component element.
+In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#inverting) on the component element.
 
 <code-well-header>
   <div class="d-bgc-contrast d-p16">

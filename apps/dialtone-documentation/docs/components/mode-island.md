@@ -252,6 +252,14 @@ vueCode='
 '
 showHtmlWarning />
 
+### Conditional
+
+Pass a boolean value to conditionally apply or remove the directive. When `false`, mode attributes are removed entirely.
+
+```vue
+<dt-button v-dt-mode:invert="isInverted">Button</dt-button>
+```
+
 ### Guidance
 
 <dialtone-usage>
@@ -355,6 +363,60 @@ Mode boundaries can be nested. Each `v-dt-mode:invert` reads the nearest parent 
       </dt-stack>
     </dt-stack>
   </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.nestingExample'
+vueCode='
+<dt-stack gap="500" ref="nestingExample" v-dt-mode:light class="d-p16 d-bar8 d-bgc-secondary d-ba">
+  <dt-text as="p" tone="success" text-box-trim="both">Explicit Light</dt-text>
+  <dt-stack v-dt-mode gap="500" class="d-p16 d-bar8 d-bgc-secondary">
+    <dt-text as="p" tone="success" text-box-trim="both">Inverted (Dark)</dt-text>
+    <dt-stack v-dt-mode gap="500" class="d-p16 d-bar4 d-bgc-secondary">
+      <dt-text as="p" tone="success" text-box-trim="both">Inverted again (Light)</dt-text>
+    </dt-stack>
+  </dt-stack>
+</dt-stack>
+'
+/>
+
+## Custom background
+
+The background surface of a Mode Island defaults to the root surface color. To override, use a CSS Utility class.
+
+<code-well-header>
+  <dt-mode-island class="d-p16 d-bar8 d-w100p d-bgc-transparent" ref="customBackgroundExample">
+    <dt-stack gap="400">
+      <dt-text as="p" kind="code" size="xs" tone="tertiary">Transparent background, inverted mode island</dt-text>
+      <div>
+        <dt-button>Button</dt-button>
+      </div>
+    </dt-stack>
+  </dt-mode-island>
+  <dt-mode-island class="d-p16 d-bar8 d-w100p">
+    <dt-stack gap="400">
+      <dt-text as="p" kind="code" size="xs" tone="tertiary">Default background, inverted mode island</dt-text>
+      <div>
+        <dt-button>Button</dt-button>
+      </div>
+    </dt-stack>
+  </dt-mode-island>
+  <dt-mode-island mode="dark" class="d-p16 d-bar8 d-w100p d-bgc-critical">
+    <dt-stack gap="400">
+      <dt-text as="p" kind="code" size="xs" tone="tertiary">critical background, dark mode island</dt-text>
+      <div>
+        <dt-button>Button</dt-button>
+      </div>
+    </dt-stack>
+  </dt-mode-island>
+  <dt-mode-island mode="light" class="d-p16 d-bar8 d-w100p d-bgc-critical">
+    <dt-stack gap="400">
+      <dt-text as="p" kind="code" size="xs" tone="tertiary">critical background, light mode island</dt-text>
+      <div>
+        <dt-button>Button</dt-button>
+      </div>
+    </dt-stack>
+  </dt-mode-island>
 </code-well-header>
 
 <code-example-tabs
