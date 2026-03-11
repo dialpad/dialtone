@@ -98,7 +98,7 @@
             v-if="modelValue?.length"
             :selected-values="deferSelection ? pendingActiveFilters : activeFilters"
             :aria-label="label"
-            name="contact-centers"
+            :name="label || 'filter-pill'"
           >
             <dt-checkbox
               v-for="filter in displayFilters"

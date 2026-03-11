@@ -536,6 +536,87 @@ describe('DtFilterPill Tests', function () {
     });
   });
 
+  describe('Accessibility Tests', () => {
+    describe.each([
+      { mode: 'popover', props: {} },
+      { mode: 'dropdown', props: { useDropdown: true, modelValue: MOCK_TEST_FILTERS } },
+    ])('ARIA attributes on the primary button ($mode mode)', ({ props }) => {
+      beforeEach(() => {
+        mockProps = props;
+        updateWrapper();
+      });
+
+      it('Should have aria-haspopup', () => {
+        expect(button.attributes('aria-haspopup')).toBeTruthy();
+      });
+
+      it('Should have aria-expanded="false" by default', () => {
+        expect(button.attributes('aria-expanded')).toBe('false');
+      });
+
+      it('Should have aria-expanded="true" when open', async () => {
+        await button.trigger('click');
+
+        expect(button.attributes('aria-expanded')).toBe('true');
+      });
+
+      it('Should have aria-controls pointing to an id', () => {
+        expect(button.attributes('aria-controls')).toBeTruthy();
+      });
+    });
+
+    describe('Keyboard navigation', () => {
+      it.each(['ArrowDown', 'ArrowUp'])('Should open popover on %s', async (key) => {
+        await button.trigger('keydown', { key });
+
+        expect(wrapper.emitted('open')[0][0]).toBe(true);
+      });
+    });
+
+    describe('Checkbox group labelling', () => {
+      it('Should have aria-label matching the label prop', async () => {
+        mockProps = { label: MOCK_LABEL, modelValue: MOCK_TEST_FILTERS };
+        updateWrapper();
+        await button.trigger('click');
+
+        const checkboxGroup = document.querySelector('[data-qa="checkbox-group"]');
+
+        expect(checkboxGroup.getAttribute('aria-label')).toBe(MOCK_LABEL);
+      });
+    });
+
+    describe('Clear button accessible name', () => {
+      it('Should fall back to localized "Clear filter" when endTooltipText is empty', () => {
+        mockProps = { modelValue: [{ name: 'Test item 1', active: true }] };
+        updateWrapper();
+
+        expect(clearButton.attributes('aria-label')).toBe('Clear filter');
+      });
+    });
+
+    describe('Checkbox group name', () => {
+      it('Should use label prop as checkbox group name', async () => {
+        mockProps = { label: 'Teams', modelValue: MOCK_TEST_FILTERS };
+        updateWrapper();
+        await button.trigger('click');
+
+        const checkbox = document.querySelector('input[type="checkbox"]');
+
+        expect(checkbox.getAttribute('name')).toBe('Teams');
+      });
+
+      it('Should fall back to "filter-pill" when no label is provided', async () => {
+        mockProps = { modelValue: MOCK_TEST_FILTERS };
+        updateWrapper();
+        await button.trigger('click');
+
+        const checkbox = document.querySelector('input[type="checkbox"]');
+
+        expect(checkbox.getAttribute('name')).toBe('filter-pill');
+      });
+    });
+  });
+
   describe('Overlay Class Props Tests', () => {
     describe('When popover class props are set', () => {
       it.each([
