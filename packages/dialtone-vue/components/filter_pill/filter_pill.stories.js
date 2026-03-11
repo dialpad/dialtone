@@ -57,6 +57,22 @@ export const argTypesData = {
     },
   },
 
+  popoverContentClass: {
+    control: 'text',
+  },
+  popoverHeaderClass: {
+    control: 'text',
+  },
+  popoverFooterClass: {
+    control: 'text',
+  },
+  popoverDialogClass: {
+    control: 'text',
+  },
+  dropdownListClass: {
+    control: 'text',
+  },
+
   startTooltipText: {
     control: 'text',
   },

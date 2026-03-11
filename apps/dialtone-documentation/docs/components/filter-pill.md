@@ -517,6 +517,54 @@ vueCode='<dt-filter-pill label="Keyword" v-model="[...]">
 </dt-filter-pill>'
 showHtmlWarning />
 
+## Overlay customization
+
+### Header and footer slots
+
+The `headerContent` and `footerContent` slots let you customize the popover header and footer.
+Both receive a `close` binding; `footerContent` also provides `apply` and `cancel` for deferred-selection workflows.
+
+When `deferSelection` is true and no `#footerContent` slot is provided, the default Cancel/Apply footer renders as before.
+
+<code-well-header>
+  <dt-stack direction="row" gap="400">
+    <dt-filter-pill
+      v-model="overlayCustomFilters"
+      label="Custom overlay"
+      ref="overlayCustomExample"
+    >
+      <template #headerContent>
+        <strong class="d-pl16">Pick your filters</strong>
+      </template>
+      <template #footerContent="{ close }">
+        <div class="d-d-flex d-jc-flex-end d-pr16">
+          <dt-button size="sm" importance="primary" @click="close">Done</dt-button>
+        </div>
+      </template>
+    </dt-filter-pill>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.overlayCustomExample'
+vueCode='<dt-filter-pill v-model="[...]" label="Custom overlay">
+  <template #headerContent>
+    <strong>Pick your filters</strong>
+  </template>
+  <template #footerContent="{ close }">
+    <div class="d-d-flex d-jc-flex-end d-pr16">
+      <dt-button size="sm" importance="primary" @click="close">Done</dt-button>
+    </div>
+  </template>
+</dt-filter-pill>'
+showHtmlWarning />
+
+### Overlay class props
+
+Use `popoverContentClass`, `popoverHeaderClass`, `popoverFooterClass`, and `popoverDialogClass`
+to pass custom CSS classes to the underlying popover areas. In dropdown mode, use `dropdownListClass`
+to style the list wrapper.
+
 ## Vue API
 
 <component-vue-api component-name="filterPill"></component-vue-api>
@@ -660,6 +708,11 @@ const defaultSlotFilters = ref([
 const contentSlotFilters = ref([
   {name: 'Contains'},
   {name: 'Starts with'},
+]);
+const overlayCustomFilters = ref([
+  {name: 'Email'},
+  {name: 'Phone'},
+  {name: 'Chat'},
 ]);
 const momentCount = ref([
   {name: 'Address', active: true},

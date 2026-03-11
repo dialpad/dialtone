@@ -535,4 +535,160 @@ describe('DtFilterPill Tests', function () {
       });
     });
   });
+
+  describe('Overlay Class Props Tests', () => {
+    describe('When popover class props are set', () => {
+      it('Should forward popoverContentClass to DtPopover', () => {
+        mockProps = { popoverContentClass: 'custom-content-class' };
+
+        updateWrapper();
+
+        const popover = wrapper.findComponent(DtPopover);
+
+        expect(popover.props('contentClass')).toBe('custom-content-class');
+      });
+
+      it('Should forward popoverHeaderClass to DtPopover', () => {
+        mockProps = { popoverHeaderClass: 'custom-header-class' };
+
+        updateWrapper();
+
+        const popover = wrapper.findComponent(DtPopover);
+
+        expect(popover.props('headerClass')).toBe('custom-header-class');
+      });
+
+      it('Should forward popoverFooterClass to DtPopover', () => {
+        mockProps = { popoverFooterClass: 'custom-footer-class' };
+
+        updateWrapper();
+
+        const popover = wrapper.findComponent(DtPopover);
+
+        expect(popover.props('footerClass')).toBe('custom-footer-class');
+      });
+
+      it('Should forward popoverDialogClass to DtPopover', () => {
+        mockProps = { popoverDialogClass: 'custom-dialog-class' };
+
+        updateWrapper();
+
+        const popover = wrapper.findComponent(DtPopover);
+
+        expect(popover.props('dialogClass')).toBe('custom-dialog-class');
+      });
+    });
+
+    describe('When dropdownListClass is set', () => {
+      it('Should forward dropdownListClass to DtDropdown', () => {
+        mockProps = {
+          useDropdown: true,
+          modelValue: MOCK_TEST_FILTERS,
+          dropdownListClass: 'custom-list-class',
+        };
+
+        updateWrapper();
+
+        const dropdown = wrapper.findComponent(DtDropdown);
+
+        expect(dropdown.props('listClass')).toBe('custom-list-class');
+      });
+    });
+  });
+
+  describe('Header and Footer Slot Tests', () => {
+    describe('When footerContent slot is provided', () => {
+      it('Should render custom footer instead of default Cancel/Apply', async () => {
+        mockProps = {
+          deferSelection: true,
+          modelValue: MOCK_TEST_FILTERS.map(f => ({ ...f })),
+        };
+        mockSlots = {
+          footerContent: 'Custom footer content',
+        };
+
+        updateWrapper();
+
+        button = wrapper.find('[data-qa="dt-filter-pill__button"]');
+        await button.trigger('click');
+
+        const footer = document.querySelector('[data-qa="dt-filter-pill__deferred-footer"]');
+
+        expect(footer).toBeNull();
+        expect(document.body.textContent).toContain('Custom footer content');
+      });
+
+      it('Should render custom footer even when deferSelection is false', async () => {
+        mockProps = {
+          deferSelection: false,
+          modelValue: MOCK_TEST_FILTERS.map(f => ({ ...f })),
+        };
+        mockSlots = {
+          footerContent: 'Custom footer without defer',
+        };
+
+        updateWrapper();
+
+        button = wrapper.find('[data-qa="dt-filter-pill__button"]');
+        await button.trigger('click');
+
+        expect(document.body.textContent).toContain('Custom footer without defer');
+      });
+
+      it('Should provide apply, cancel, and close bindings to footerContent slot', async () => {
+        const slotBindings = {};
+        mockProps = {
+          deferSelection: true,
+          modelValue: MOCK_TEST_FILTERS.map(f => ({ ...f })),
+        };
+        mockSlots = {
+          footerContent: (props) => {
+            Object.assign(slotBindings, props);
+            return 'scoped footer';
+          },
+        };
+
+        updateWrapper();
+
+        button = wrapper.find('[data-qa="dt-filter-pill__button"]');
+        await button.trigger('click');
+
+        expect(typeof slotBindings.apply).toBe('function');
+        expect(typeof slotBindings.cancel).toBe('function');
+        expect(typeof slotBindings.close).toBe('function');
+      });
+    });
+
+    describe('When headerContent slot is provided', () => {
+      it('Should render header in popover mode', async () => {
+        mockProps = {
+          modelValue: MOCK_TEST_FILTERS.map(f => ({ ...f })),
+        };
+        mockSlots = {
+          headerContent: 'Custom header content',
+        };
+
+        updateWrapper();
+
+        button = wrapper.find('[data-qa="dt-filter-pill__button"]');
+        await button.trigger('click');
+
+        expect(document.body.textContent).toContain('Custom header content');
+      });
+
+      it('Should not render header in dropdown mode', () => {
+        mockProps = {
+          useDropdown: true,
+          modelValue: MOCK_TEST_FILTERS.map(f => ({ ...f })),
+        };
+        mockSlots = {
+          headerContent: 'Should not appear',
+        };
+
+        updateWrapper();
+
+        expect(document.body.textContent).not.toContain('Should not appear');
+      });
+    });
+  });
 });

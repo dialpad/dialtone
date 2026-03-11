@@ -111,33 +111,52 @@
         </slot>
       </template>
       <template
-        v-if="!useDropdown && deferSelection"
-        #footerContent
+        v-if="!useDropdown && $slots.headerContent"
+        #headerContent="{ close }"
       >
-        <dt-stack
-          direction="row"
-          gap="500"
-          justify="end"
-          data-qa="dt-filter-pill__deferred-footer"
+        <!-- @slot Allows you to customize the popover header -->
+        <slot
+          name="headerContent"
+          :close="close"
+        />
+      </template>
+      <template
+        v-if="!useDropdown && (deferSelection || $slots.footerContent)"
+        #footerContent="{ close }"
+      >
+        <!-- @slot Allows you to customize the popover footer. Receives { close, apply, cancel } bindings. -->
+        <slot
+          name="footerContent"
+          :close="close"
+          :apply="applySelection"
+          :cancel="cancelSelection"
         >
-          <dt-button
-            importance="clear"
-            kind="muted"
-            size="sm"
-            data-qa="dt-filter-pill__cancel-button"
-            @click="cancelSelection"
+          <dt-stack
+            v-if="deferSelection"
+            direction="row"
+            gap="400"
+            justify="end"
+            data-qa="dt-filter-pill__deferred-footer"
           >
-            {{ cancelButtonLabel }}
-          </dt-button>
-          <dt-button
-            importance="primary"
-            size="sm"
-            data-qa="dt-filter-pill__apply-button"
-            @click="applySelection"
-          >
-            {{ applyButtonLabel }}
-          </dt-button>
-        </dt-stack>
+            <dt-button
+              importance="clear"
+              kind="muted"
+              size="sm"
+              data-qa="dt-filter-pill__cancel-button"
+              @click="cancelSelection"
+            >
+              {{ cancelButtonLabel }}
+            </dt-button>
+            <dt-button
+              importance="primary"
+              size="sm"
+              data-qa="dt-filter-pill__apply-button"
+              @click="applySelection"
+            >
+              {{ applyButtonLabel }}
+            </dt-button>
+          </dt-stack>
+        </slot>
       </template>
       <template
         v-if="useDropdown"
@@ -372,6 +391,51 @@ export default {
     },
 
     /**
+     * Additional CSS class(es) applied to the popover content area.
+     * Only applies when useDropdown is false.
+     */
+    popoverContentClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional CSS class(es) applied to the popover header area.
+     * Only applies when useDropdown is false.
+     */
+    popoverHeaderClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional CSS class(es) applied to the popover footer area.
+     * Only applies when useDropdown is false.
+     */
+    popoverFooterClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional CSS class(es) applied to the popover dialog element.
+     * Only applies when useDropdown is false.
+     */
+    popoverDialogClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional CSS class(es) applied to the dropdown list wrapper.
+     * Only applies when useDropdown is true.
+     */
+    dropdownListClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
      * The size of the button.
      * @values xs, sm, md, lg, xl
      */
@@ -436,8 +500,14 @@ export default {
         modal: true,
         placement: this.popoverPlacement,
       };
-      if (!this.useDropdown) {
+      if (this.useDropdown) {
+        props['list-class'] = this.dropdownListClass;
+      } else {
         props.padding = this.popoverPadding;
+        props['content-class'] = this.popoverContentClass;
+        props['header-class'] = this.popoverHeaderClass;
+        props['footer-class'] = this.popoverFooterClass;
+        props['dialog-class'] = this.popoverDialogClass;
       }
       return props;
     },
