@@ -1,8 +1,8 @@
 import { action } from 'storybook/actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtRecipeComboboxMultiSelect from './combobox_multi_select.vue';
+import DtComboboxMultiSelect from './combobox_multi_select.vue';
 
-import DtRecipeComboboxMultiSelectDefaultTemplate from './combobox_multi_select_default.story.vue';
+import DtComboboxMultiSelectDefaultTemplate from './combobox_multi_select_default.story.vue';
 import { MULTI_SELECT_SIZES } from './combobox_multi_select_constants';
 import { ITEMS_LIST_DATA } from './combobox_multi_select_story_constants';
 
@@ -140,8 +140,8 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Recipes/Comboboxes/Combobox Multi-Select',
-  component: DtRecipeComboboxMultiSelect,
+  title: 'Components/Combobox Multi-Select',
+  component: DtComboboxMultiSelect,
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
@@ -151,7 +151,7 @@ export default {
 const Template = (args, { argTypes }) => createTemplateFromVueFile(
   args,
   argTypes,
-  DtRecipeComboboxMultiSelectDefaultTemplate,
+  DtComboboxMultiSelectDefaultTemplate,
 );
 
 export const Default = {

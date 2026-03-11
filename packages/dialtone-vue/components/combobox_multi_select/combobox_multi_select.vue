@@ -135,7 +135,7 @@ import {
 
 export default {
   compatConfig: { MODE: 3 },
-  name: 'DtRecipeComboboxMultiSelect',
+  name: 'DtComboboxMultiSelect',
 
   components: {
     DtRecipeComboboxWithPopover,
