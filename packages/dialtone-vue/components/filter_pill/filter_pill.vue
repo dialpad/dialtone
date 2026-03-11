@@ -400,7 +400,7 @@ export default {
     },
 
     /**
-     * Additional CSS class(es) applied to the popover header area.
+     * Additional CSS class(es) applied to the outer popover header element (`d-popover__header`).
      * Only applies when useDropdown is false.
      */
     popoverHeaderClass: {
@@ -409,7 +409,7 @@ export default {
     },
 
     /**
-     * Additional CSS class(es) applied to the popover footer area.
+     * Additional CSS class(es) applied to the outer popover footer element (`d-popover__footer`).
      * Only applies when useDropdown is false.
      */
     popoverFooterClass: {

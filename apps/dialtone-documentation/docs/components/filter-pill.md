@@ -52,7 +52,7 @@ keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFil
       v-model="deferredFilters"
       label="Channel"
       end-tooltip-text="Remove"
-      popover-footer-class="d-pr16"
+      popover-footer-class="d-pr16 d-py12"
       defer-selection
     >
     </dt-filter-pill>
@@ -176,7 +176,6 @@ showHtmlWarning />
       :key="size"
       :label="size"
       :size="size"
-      label="Contact centers"
       ref="sizeExample"
     ></dt-filter-pill>
   </dt-stack>
@@ -184,7 +183,7 @@ showHtmlWarning />
 
 <code-example-tabs
 :htmlCode='() => $refs.sizeExample[1]'
-vueCode='<dt-filter-pill label="..." size="{size}" />'
+vueCode='<dt-filter-pill label="{size}" size="{size}" />'
 showHtmlWarning />
 
 ## Interaction patterns
@@ -550,9 +549,11 @@ showHtmlWarning />
 
 ### Overlay class props
 
-Use `popoverContentClass`, `popoverHeaderClass`, `popoverFooterClass`, and `popoverDialogClass`
-to pass custom CSS classes to the underlying popover areas. In dropdown mode, use `dropdownListClass`
-to style the list wrapper.
+- Use `popoverHeaderClass` and `popoverFooterClass` to style the outer wrapper elements
+(`d-popover__header` / `d-popover__footer`), and `popoverContentClass` to style the inner content
+area. `popoverDialogClass` targets the dialog element itself.
+- In dropdown mode, use
+`dropdownListClass` to style the list wrapper.
 
 ## Vue API
 
@@ -590,20 +591,6 @@ The filter pill is built on `DtButton` and `DtPopover`/`DtDropdown`, inheriting 
 <script setup>
 import { ref, computed } from 'vue';
 
-const heroChannels = ref([
-  {name: 'Email'},
-  {name: 'Phone'},
-  {name: 'Chat'},
-  {name: 'Social'},
-  {name: 'SMS'},
-]);
-const heroContactCenters = ref([
-  {name: 'Headquarters', active: true},
-  {name: 'Westside'},
-  {name: 'Downtown', active: true},
-  {name: 'Riverside'},
-  {name: 'Northgate'},
-]);
 const heroConversationTypes = ref([
   {name: 'All Conversations'},
   {name: 'Only Calls'},
@@ -632,24 +619,6 @@ function resetHeroFilters () {
   heroConversationTypes.value.forEach(f => { f.active = false; });
   deferredFilters.value.forEach(f => { delete f.active; });
 }
-const heroDuration = ref([
-  {name: '0–5 min', active: true},
-  {name: '5–15 min'},
-  {name: '15–30 min'},
-  {name: '30+ min'},
-]);
-const heroChannelOverflow = ref([
-  {name: 'Email', active: true},
-  {name: 'Phone', active: true},
-  {name: 'Chat', active: true},
-  {name: 'Social'},
-  {name: 'SMS'},
-]);
-const heroReadOnly = ref([
-  {name: 'Past 7 days'},
-  {name: 'Past 30 days', active: true},
-  {name: 'Past 90 days'},
-]);
 const baseFilters = ref([
   {name: 'Email'},
   {name: 'Phone'},
