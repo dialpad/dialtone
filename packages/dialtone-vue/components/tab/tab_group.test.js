@@ -3,7 +3,7 @@ import DtTabGroup from './tab_group.vue';
 import DtTabPanel from './tab_panel.vue';
 import DtTab from './tab.vue';
 import { returnFirstEl } from '@/common/utils';
-import { TAB_LIST_KIND_MODIFIERS, TAB_LIST_SIZE_MODIFIERS, TAB_LIST_IMPORTANCE_MODIFIERS } from './tabs_constants';
+import { TAB_LIST_KIND_MODIFIERS, TAB_LIST_SIZE_MODIFIERS, TAB_LIST_IMPORTANCE_MODIFIERS, TAB_ORIENTATION_MODIFIERS } from './tabs_constants';
 import { h } from 'vue';
 
 const optionTabPanel = [
@@ -599,6 +599,132 @@ describe('DtTabGroup Tests', () => {
           },
         );
       });
+    });
+  });
+
+  describe('Vertical orientation', () => {
+    beforeEach(() => {
+      props.orientation = 'vertical';
+      _mountWrapper();
+    });
+
+    it('should render the vertical class on the tablist', () => {
+      expect(tabList.classes(TAB_ORIENTATION_MODIFIERS.vertical)).toBe(true);
+    });
+
+    it('should render the vertical class on the wrapper', () => {
+      expect(wrapper.find('[data-qa="dt-tab-group"]').classes('d-tab-neux--vertical')).toBe(true);
+    });
+
+    it('should set aria-orientation to vertical', () => {
+      expect(tabList.attributes('aria-orientation')).toBe('vertical');
+    });
+
+    describe('Keyboard navigation', () => {
+      it('should navigate to next tab on arrow down', async () => {
+        returnFirstEl(tabs.at(0).vm.$el).focus();
+        await tabList.trigger('keydown.down');
+        await tabList.trigger('keyup.enter');
+
+        expect(tabs.at(1).attributes('aria-selected')).toBe('true');
+        expect(tabPanels.at(1).attributes('aria-hidden')).toBe('false');
+      });
+
+      it('should navigate to previous tab on arrow up', async () => {
+        returnFirstEl(tabs.at(0).vm.$el).focus();
+        await tabList.trigger('keydown.up');
+        await tabList.trigger('keyup.space');
+
+        expect(tabs.at(2).attributes('aria-selected')).toBe('true');
+        expect(tabPanels.at(2).attributes('aria-hidden')).toBe('false');
+      });
+
+      it('should NOT navigate on arrow left', async () => {
+        returnFirstEl(tabs.at(0).vm.$el).focus();
+        await tabList.trigger('keyup.left');
+        await tabList.trigger('keyup.enter');
+
+        expect(wrapper.emitted('change')).toBeUndefined();
+      });
+
+      it('should NOT navigate on arrow right', async () => {
+        returnFirstEl(tabs.at(0).vm.$el).focus();
+        await tabList.trigger('keyup.right');
+        await tabList.trigger('keyup.enter');
+
+        expect(wrapper.emitted('change')).toBeUndefined();
+      });
+
+      it('should navigate to first tab on home', async () => {
+        returnFirstEl(tabs.at(2).vm.$el).focus();
+        await tabList.trigger('keydown.home');
+        await tabList.trigger('keyup.enter');
+
+        expect(tabs.at(0).attributes('aria-selected')).toBe('true');
+      });
+
+      it('should navigate to last tab on end', async () => {
+        returnFirstEl(tabs.at(0).vm.$el).focus();
+        await tabList.trigger('keydown.end');
+        await tabList.trigger('keyup.enter');
+
+        expect(tabs.at(2).attributes('aria-selected')).toBe('true');
+      });
+    });
+
+    describe('Auto activation mode', () => {
+      beforeEach(() => {
+        props.activationMode = 'auto';
+        props.orientation = 'vertical';
+        _mountWrapper();
+      });
+
+      it('should auto-select tab on arrow down', async () => {
+        returnFirstEl(tabs.at(0).vm.$el).focus();
+        await tabList.trigger('keydown.down');
+
+        expect(tabs.at(1).attributes('aria-selected')).toBe('true');
+        expect(wrapper.emitted('change').length).toBe(1);
+      });
+
+      it('should auto-select tab on arrow up', async () => {
+        returnFirstEl(tabs.at(0).vm.$el).focus();
+        await tabList.trigger('keydown.up');
+
+        expect(tabs.at(2).attributes('aria-selected')).toBe('true');
+        expect(wrapper.emitted('change').length).toBe(1);
+      });
+    });
+  });
+
+  describe('Horizontal orientation (default)', () => {
+    beforeEach(() => {
+      delete props.orientation;
+      _mountWrapper();
+    });
+
+    it('should set aria-orientation to horizontal by default', () => {
+      expect(tabList.attributes('aria-orientation')).toBe('horizontal');
+    });
+
+    it('should not render the vertical class', () => {
+      expect(tabList.classes(TAB_ORIENTATION_MODIFIERS.vertical)).toBe(false);
+    });
+
+    it('should NOT navigate on arrow up', async () => {
+      returnFirstEl(tabs.at(0).vm.$el).focus();
+      await tabList.trigger('keydown.up');
+      await tabList.trigger('keyup.enter');
+
+      expect(wrapper.emitted('change')).toBeUndefined();
+    });
+
+    it('should NOT navigate on arrow down', async () => {
+      returnFirstEl(tabs.at(0).vm.$el).focus();
+      await tabList.trigger('keydown.down');
+      await tabList.trigger('keyup.enter');
+
+      expect(wrapper.emitted('change')).toBeUndefined();
     });
   });
 

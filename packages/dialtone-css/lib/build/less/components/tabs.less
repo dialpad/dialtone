@@ -67,6 +67,27 @@
         block-size: var(--dt-size-border-100);
         background-color: var(--dt-color-border-default);
         content: '';
+
+    }
+
+    &.d-tablist--vertical:not(.d-tablist--no-border)::after {
+        block-size: auto;
+        inset-inline-start: calc(100% - var(--dt-size-200));
+        inline-size: var(--dt-size-border-100);
+        inset-block: 1px;
+    }
+
+
+    &__item {
+        text-align: start;
+
+        &--vertical {
+            inline-size: 100%;
+
+            > .d-btn__label {
+                justify-content: flex-start;
+            }
+        }
     }
 }
 
@@ -178,32 +199,6 @@
         }
     }
 
-    //  ============================================================================
-    //  $   LABEL
-    //  ----------------------------------------------------------------------------
-    &__label {
-    //   font-weight: normal;
-
-      transition: font-weight var(--ttf-out) var(--td50);
-
-      .d-btn--active &,
-      .d-btn--outlined &,
-      .d-tab--is-selected & {
-        font-weight: var(--dt-font-weight-bold) !important;
-      }
-
-      &[data-content]::after {
-          display: block;
-          font-weight: var(--dt-font-weight-bold);
-          white-space: nowrap;
-          text-align: center;
-          background-color: #666;
-          visibility: hidden;
-          content: attr(data-content);
-          block-size: 0;
-      }
-    }
-
 }
 
 //  ============================================================================
@@ -245,7 +240,34 @@
         block-size: var(--dt-size-200);
         inset-block-start: calc(calc(100% + var(--tablist-padding-bottom)) - var(--dt-size-100));
         inset-inline: 0;
+
+        .d-tablist--vertical & {
+            inset-block: 0;
+            inset-inline: auto 0;
+            inset-inline-start: calc(100% + var(--dt-size-350));
+            block-size: auto;
+            inline-size: var(--dt-size-200);
+        }
     }
+}
+
+//  ============================================================================
+//  $   VERTICAL ORIENTATION
+//  ----------------------------------------------------------------------------
+.d-tab-neux--vertical {
+    display: flex;
+
+    > .d-tablist {
+        --tablist-padding-bottom: 0;
+
+        padding-block-end: 0;
+        padding-inline-end: var(--dt-size-400);
+    }
+}
+
+.d-tablist--vertical {
+    flex-flow: column nowrap;
+    align-items: flex-start;
 }
 
 //  ============================================================================
