@@ -538,44 +538,19 @@ describe('DtFilterPill Tests', function () {
 
   describe('Overlay Class Props Tests', () => {
     describe('When popover class props are set', () => {
-      it('Should forward popoverContentClass to DtPopover', () => {
-        mockProps = { popoverContentClass: 'custom-content-class' };
+      it.each([
+        ['popoverContentClass', 'contentClass', 'custom-content-class'],
+        ['popoverHeaderClass', 'headerWrapperClass', 'custom-header-class'],
+        ['popoverFooterClass', 'footerWrapperClass', 'custom-footer-class'],
+        ['popoverDialogClass', 'dialogClass', 'custom-dialog-class'],
+      ])('Should forward %s to DtPopover', (propName, popoverPropName, className) => {
+        mockProps = { [propName]: className };
 
         updateWrapper();
 
         const popover = wrapper.findComponent(DtPopover);
 
-        expect(popover.props('contentClass')).toBe('custom-content-class');
-      });
-
-      it('Should forward popoverHeaderClass to DtPopover', () => {
-        mockProps = { popoverHeaderClass: 'custom-header-class' };
-
-        updateWrapper();
-
-        const popover = wrapper.findComponent(DtPopover);
-
-        expect(popover.props('headerClass')).toBe('custom-header-class');
-      });
-
-      it('Should forward popoverFooterClass to DtPopover', () => {
-        mockProps = { popoverFooterClass: 'custom-footer-class' };
-
-        updateWrapper();
-
-        const popover = wrapper.findComponent(DtPopover);
-
-        expect(popover.props('footerClass')).toBe('custom-footer-class');
-      });
-
-      it('Should forward popoverDialogClass to DtPopover', () => {
-        mockProps = { popoverDialogClass: 'custom-dialog-class' };
-
-        updateWrapper();
-
-        const popover = wrapper.findComponent(DtPopover);
-
-        expect(popover.props('dialogClass')).toBe('custom-dialog-class');
+        expect(popover.props(popoverPropName)).toBe(className);
       });
     });
 

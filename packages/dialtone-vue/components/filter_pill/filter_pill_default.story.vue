@@ -1,6 +1,7 @@
 <template>
   <dt-filter-pill
     :model-value="$attrs.modelValue"
+    :use-dropdown="$attrs.useDropdown"
     :start-tooltip-text="$attrs.startTooltipText"
     :disabled="$attrs.disabled"
     :label="$attrs.label"

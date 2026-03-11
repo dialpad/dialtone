@@ -52,6 +52,7 @@ keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFil
       v-model="deferredFilters"
       label="Channel"
       end-tooltip-text="Remove"
+      popover-footer-class="d-pr16"
       defer-selection
     >
     </dt-filter-pill>
@@ -252,7 +253,7 @@ Cancel, Escape, or clicking outside discards pending changes.
 vueCode='<dt-filter-pill v-model="[...]" label="Channel" defer-selection />'
 showHtmlWarning />
 
-## With dropdown
+### Dropdown
 
 Setting `use-dropdown` switches the overlay from a popover to a dropdown with keyboard-navigable
 list items. This provides arrow key navigation, highlight management, and Enter/Space selection
@@ -322,9 +323,13 @@ vueCode='<dt-filter-pill
 </dt-filter-pill>'
 showHtmlWarning />
 
-## Custom labels
+## Slots
 
-### Example: Count
+### Default
+
+Using the `default` slot, you can override the `label` prop.
+
+#### Example: Count
 
 Using the `default` scoped slot, you can display a count of active filters alongside the label.
 
@@ -358,7 +363,7 @@ vueCode='<dt-filter-pill v-model="filters" label="Contact centers" end-tooltip-t
 </dt-filter-pill>'
 showHtmlWarning />
 
-### Example: Active filter list
+#### Example: Active filter list
 
 Shows the first active filter name using `activeFilterList`, with overflow count for remaining selections (e.g., "Email +2").
 
@@ -394,7 +399,7 @@ vueCode='<dt-filter-pill v-model="filters" label="Channel" end-tooltip-text="Rem
 </dt-filter-pill>'
 showHtmlWarning />
 
-### Example: Radio selection
+#### Example: Radio selection
 
 Combining the `default` and `content` slots with a radio group creates a single-select filter.
 The label updates to show the selected option, and a clear button resets to the default.
@@ -462,35 +467,7 @@ vueCode='<dt-filter-pill
 </dt-filter-pill>'
 showHtmlWarning />
 
-## Slots
-
-### Default slot
-
-Using the `default` slot, you can override the `label` prop.
-
-<code-well-header>
-  <dt-stack direction="row" gap="400">
-    <dt-filter-pill
-      ref="defaultSlotExample"
-      v-model="defaultSlotFilters"
-    >
-      <template #default>
-        CSAT score
-      </template>
-    </dt-filter-pill>
-  </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.defaultSlotExample'
-vueCode='<dt-filter-pill v-model="[...]">
-  <template #default>
-    CSAT score
-  </template>
-</dt-filter-pill>'
-showHtmlWarning />
-
-### Content slot
+### Content
 
 Using the `content` slot, you can override the popover content with custom markup.
 
@@ -517,9 +494,7 @@ vueCode='<dt-filter-pill label="Keyword" v-model="[...]">
 </dt-filter-pill>'
 showHtmlWarning />
 
-## Overlay customization
-
-### Header and footer slots
+### Header and footer
 
 The `headerContent` and `footerContent` slots let you customize the popover header and footer.
 Both receive a `close` binding; `footerContent` also provides `apply` and `cancel` for deferred-selection workflows.
@@ -527,36 +502,50 @@ Both receive a `close` binding; `footerContent` also provides `apply` and `cance
 When `deferSelection` is true and no `#footerContent` slot is provided, the default Cancel/Apply footer renders as before.
 
 <code-well-header>
-  <dt-stack direction="row" gap="400">
-    <dt-filter-pill
-      v-model="overlayCustomFilters"
-      label="Custom overlay"
-      ref="overlayCustomExample"
-    >
-      <template #headerContent>
-        <strong class="d-pl16">Pick your filters</strong>
-      </template>
-      <template #footerContent="{ close }">
-        <div class="d-d-flex d-jc-flex-end d-pr16">
-          <dt-button size="sm" importance="primary" @click="close">Done</dt-button>
-        </div>
-      </template>
-    </dt-filter-pill>
-  </dt-stack>
+  <dt-filter-pill
+    v-model="overlayCustomFilters"
+    label="Custom overlay"
+    ref="overlayCustomExample"
+    popover-header-class="d-p32 d-baw0 d-bgc-warning"
+    popover-content-class="d-p32 d-baw0 d-bgc-success"
+    popover-footer-class="d-p32 d-baw0 d-bgc-critical"
+    popover-padding="none"
+  >
+    <template #headerContent>
+      #headerContent
+    </template>
+    <template #content>
+      #content
+    </template>
+    <template #footerContent>
+      #footerContent
+    </template>
+  </dt-filter-pill>
 </code-well-header>
 
 <code-example-tabs
 :htmlCode='() => $refs.overlayCustomExample'
-vueCode='<dt-filter-pill v-model="[...]" label="Custom overlay">
+vueCode='
+<dt-filter-pill
+  v-model="overlayCustomFilters"
+  label="Custom overlay"
+  ref="overlayCustomExample"
+  popover-header-class="d-p32 d-baw0 d-bgc-warning"
+  popover-content-class="d-p32 d-baw0 d-bgc-success"
+  popover-footer-class="d-p32 d-baw0 d-bgc-critical"
+  popover-padding="none"
+>
   <template #headerContent>
-    <strong>Pick your filters</strong>
+    #headerContent
   </template>
-  <template #footerContent="{ close }">
-    <div class="d-d-flex d-jc-flex-end d-pr16">
-      <dt-button size="sm" importance="primary" @click="close">Done</dt-button>
-    </div>
+  <template #content>
+    #content
   </template>
-</dt-filter-pill>'
+  <template #footerContent>
+    #footerContent
+  </template>
+</dt-filter-pill>
+'
 showHtmlWarning />
 
 ### Overlay class props

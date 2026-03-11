@@ -10,6 +10,7 @@ import { POPOVER_DIRECTIONS, POPOVER_PADDING_CLASSES } from '@/components/popove
 // Set default values at the story level here.
 export const argsData = {
   label: 'Fruit',
+  useDropdown: false,
   deferSelection: false,
   readOnly: false,
   onOpen: action('open'),

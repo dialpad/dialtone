@@ -69,7 +69,7 @@
         <popover-header-footer
           v-if="hasSlotContent($slots.headerContent) || showCloseButton"
           ref="popover__header"
-          :class="POPOVER_HEADER_FOOTER_PADDING_CLASSES[padding]"
+          :class="[POPOVER_HEADER_FOOTER_PADDING_CLASSES[padding], headerWrapperClass]"
           :content-class="headerClass"
           type="header"
           :show-close-button="showCloseButton"
@@ -102,7 +102,7 @@
           v-if="hasSlotContent($slots.footerContent)"
           ref="popover__footer"
           type="footer"
-          :class="POPOVER_HEADER_FOOTER_PADDING_CLASSES[padding]"
+          :class="[POPOVER_HEADER_FOOTER_PADDING_CLASSES[padding], footerWrapperClass]"
           :content-class="footerClass"
         >
           <template #content>
@@ -437,9 +437,25 @@ export default {
     },
 
     /**
+     * Additional class name for the header element (d-popover__header).
+     */
+    headerWrapperClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
      * Additional class name for the header content wrapper element.
      */
     headerClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the footer element (d-popover__footer).
+     */
+    footerWrapperClass: {
       type: [String, Array, Object],
       default: '',
     },

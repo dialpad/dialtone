@@ -505,8 +505,8 @@ export default {
       } else {
         props.padding = this.popoverPadding;
         props['content-class'] = this.popoverContentClass;
-        props['header-class'] = this.popoverHeaderClass;
-        props['footer-class'] = this.popoverFooterClass;
+        props['header-wrapper-class'] = this.popoverHeaderClass;
+        props['footer-wrapper-class'] = this.popoverFooterClass;
         props['dialog-class'] = this.popoverDialogClass;
       }
       return props;
