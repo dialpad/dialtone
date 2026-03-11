@@ -229,7 +229,7 @@ Setting the `hide-clear` prop hides the reset/clear button.
 vueCode='<dt-filter-pill label="Duration" v-model="[...]" hide-clear />'
 showHtmlWarning />
 
-### Deferred selection
+### Defer selection
 
 Setting `defer-selection` holds checkbox changes in a pending state until Apply is clicked.
 Cancel, Escape, or clicking outside discards pending changes.
@@ -237,11 +237,12 @@ Cancel, Escape, or clicking outside discards pending changes.
 <code-well-header>
   <dt-stack direction="row" gap="400">
     <dt-filter-pill
+      ref="deferredExample"
       v-model="deferredFilters"
       label="Channel"
       end-tooltip-text="Remove"
       defer-selection
-      ref="deferredExample"
+      popover-footer-class="d-pr16 d-py12"
     >
     </dt-filter-pill>
   </dt-stack>
