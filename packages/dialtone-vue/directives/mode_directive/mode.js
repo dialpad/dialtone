@@ -24,18 +24,19 @@ export const DtModeDirective = {
       },
 
       updated (el, binding) {
+        const prev = instances.get(el);
         const valueChanged = binding.value !== binding.oldValue;
-        const argChanged = binding.arg !== binding.oldArg;
+        const resolvedArg = resolveArg(binding.arg);
+        const argChanged = resolvedArg !== prev?.arg;
         if (!valueChanged && !argChanged) return;
 
-        cleanup(instances.get(el));
+        cleanup(prev);
         removeAttributes(el);
         instances.delete(el);
 
         if (binding.value === false) return;
 
-        const mode = resolveArg(binding.arg);
-        const state = applyMode(el, mode);
+        const state = applyMode(el, resolvedArg);
         instances.set(el, state);
       },
 
@@ -65,6 +66,7 @@ export const DtModeDirective = {
 
     function applyMode (el, mode) {
       const state = {
+        arg: mode,
         contrastObserver: null,
         modeObserver: null,
       };

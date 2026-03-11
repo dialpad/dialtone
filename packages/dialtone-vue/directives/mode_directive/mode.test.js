@@ -174,6 +174,27 @@ describe('DtModeDirective Tests', () => {
       expect(wrapper.find('[data-qa="target"]').attributes('data-dt-mode')).toBeUndefined();
     });
 
+    it('should not teardown observers on re-render when arg is unchanged', async () => {
+      const disconnectSpy = vi.spyOn(MutationObserver.prototype, 'disconnect');
+
+      wrapper = mount({
+        template: '<section v-dt-mode:dark data-qa="target">{{ count }}</section>',
+        data () {
+          return { count: 0 };
+        },
+      }, {
+        global: { plugins: [DtModeDirective] },
+      });
+
+      disconnectSpy.mockClear();
+
+      // Trigger a re-render without changing the directive arg or value
+      await wrapper.setData({ count: 1 });
+
+      expect(disconnectSpy).not.toHaveBeenCalled();
+      disconnectSpy.mockRestore();
+    });
+
     it('should re-initialize when dynamic arg changes', async () => {
       wrapper = mount({
         template: '<section v-dt-mode:[mode] data-qa="target">Content</section>',
