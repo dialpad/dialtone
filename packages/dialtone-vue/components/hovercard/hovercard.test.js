@@ -144,6 +144,20 @@ describe('DtHovercard Tests', () => {
       });
     });
 
+    describe('When anchor is removed from DOM', () => {
+      it('hovercardOpen is set to false', async () => {
+        vi.useFakeTimers();
+        await anchor.trigger('mouseenter');
+        await vi.runAllTimers();
+
+        // Remove anchor from DOM
+        anchor.element.parentNode.removeChild(anchor.element);
+        // Advance timers to allow hovercard to react
+        await vi.runAllTimers();
+
+        expect(wrapper.vm.hovercardOpen).toBe(false);
+      });
+    });
   });
 
   describe('With externalAnchorElement — show/hide API Tests', () => {
