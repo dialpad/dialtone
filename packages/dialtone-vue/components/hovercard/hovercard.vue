@@ -2,7 +2,6 @@
 <template>
   <dt-popover
     :id="id"
-    ref="popover"
     :open="hovercardOpen"
     :placement="placement"
     :content-class="contentClass"
@@ -55,7 +54,7 @@
 </template>
 
 <script setup>
-import { ref, watch, nextTick, onMounted, onBeforeUnmount } from 'vue';
+import { ref, watch } from 'vue';
 import { POPOVER_APPEND_TO_VALUES, POPOVER_PADDING_CLASSES, DtPopover } from '@/components/popover/index.js';
 import { TOOLTIP_DIRECTIONS, TOOLTIP_DELAY_MS } from '@/components/tooltip/index.js';
 import { getUniqueString } from '@/common/utils';
@@ -230,34 +229,7 @@ const contentFocused = ref(false);
 const mouseOverHovercard = ref(false);
 const inTimer = ref(null);
 const outTimer = ref(null);
-const anchorEl = ref(null);
-const observer = ref(null);
-const popover = ref(null);
 
-onMounted(() => {
-  nextTick(() => {
-    anchorEl.value = popover.value?.$refs?.anchor?.firstElementChild;
-
-    observer.value = new MutationObserver(() => {
-      if (anchorEl.value && !anchorEl.value.isConnected) {
-        hovercardOpen.value = false;
-      }
-    });
-
-    observer.value.observe(document.body, {
-      childList: true,
-      subtree: true,
-    });
-  });
-});
-
-onBeforeUnmount(() => {
-  if (observer.value) {
-    observer.value.disconnect();
-  }
-  clearTimeout(inTimer);
-  clearTimeout(outTimer);
-});
 watch(() => props.open, (open) => {
   hovercardOpen.value = open;
 }, { immediate: true });
