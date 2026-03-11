@@ -4,6 +4,7 @@ import DtHovercardDefaultTemplate from './hovercard_default.story.vue';
 import DtHovercardManyTemplate from './hovercard_many.story.vue';
 import DtHovercardWithInputTemplate from './hovercard_with_input.story.vue';
 import DtHovercardExternalAnchorTemplate from './hovercard_external_anchor.story.vue';
+import DtHovercardAnchorRemovalTemplate from './hovercard_anchor_removal.story.vue';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { action } from 'storybook/actions';
 import {
@@ -236,6 +237,31 @@ export const ExternalAnchor = {
           'This pattern is used when the anchor lives outside the hovercard\'s DOM scope (e.g. inside a Shadow DOM), ' +
           'so the hovercard cannot detect hover events automatically. ' +
           'The parent listens for hover events and calls <code>show()</code>/<code>hide()</code> directly on the hovercard ref.',
+      },
+    },
+  },
+};
+
+const AnchorRemovalTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+  args,
+  argTypes,
+  DtHovercardAnchorRemovalTemplate,
+);
+export const AnchorRemoval = {
+  render: AnchorRemovalTemplate,
+  decorators: [() => ({
+    template: `<dt-stack direction="row" justify="center" align="center" class="d-h464">
+      <div class="d-w332">
+        <story />
+      </div>
+    </dt-stack>`,
+  })],
+  args: { ...Default.args },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Demonstrates anchor removal behavior (DP-142048). Hover to open the hovercard, then click "Remove anchor" to remove it from the DOM. ' +
+          'The hovercard should close automatically via the MutationObserver.',
       },
     },
   },
