@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import DtRecipeComboboxWithPopover from './combobox_with_popover.vue';
+import DtComboboxWithPopover from './combobox_with_popover.vue';
 import DtInput from '@/components/input/input.vue';
 import DtPopover from '@/components/popover/popover.vue';
 
@@ -14,7 +14,7 @@ const baseProps = {
   showList: null,
 };
 
-describe('DtRecipeComboboxWithPopover Tests', () => {
+describe('DtComboboxWithPopover Tests', () => {
   // Wrappers
   let wrapper;
   let inputWrapper;
@@ -42,7 +42,7 @@ describe('DtRecipeComboboxWithPopover Tests', () => {
   };
 
   const _mountWrapper = () => {
-    wrapper = mount(DtRecipeComboboxWithPopover, {
+    wrapper = mount(DtComboboxWithPopover, {
       props,
       slots,
       attrs,
