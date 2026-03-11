@@ -38,7 +38,7 @@
             align="center"
             class="d-p16 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn96"
           >
-            <dt-recipe-motion-text
+            <dt-motion-text
               :ref="el => { if (el) speedRefs[speed.value] = el }"
               text="Quick brown fox jumps"
               animation-mode="gradient-in"
@@ -86,7 +86,7 @@
             align="center"
             class="d-p16 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn96"
           >
-            <dt-recipe-motion-text
+            <dt-motion-text
               :ref="el => { if (el) sizeRefs[size.class] = el }"
               text="Animated text"
               animation-mode="fade-in"
@@ -109,7 +109,7 @@
         align="center"
         class="d-p24 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn128"
       >
-        <dt-recipe-motion-text
+        <dt-motion-text
           text="This text loops continuously"
           animation-mode="slide-in"
           speed="sm"
@@ -174,7 +174,7 @@
           align="center"
           class="d-p24 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn128"
         >
-          <dt-recipe-motion-text
+          <dt-motion-text
             ref="manualRef"
             text="Control me with the buttons above"
             animation-mode="gradient-in"
@@ -189,14 +189,14 @@
 </template>
 
 <script>
-import { DtRecipeMotionText, MOTION_TEXT_SPEEDS } from '@/recipes/motion/motion_text';
+import { DtMotionText, MOTION_TEXT_SPEEDS } from '@/components/motion_text';
 import { DtButton } from '@/components/button';
 import { DtStack } from '@/components/stack';
 
 export default {
-  name: 'DtRecipeMotionTextVariantsStory',
+  name: 'DtMotionTextVariantsStory',
   components: {
-    DtRecipeMotionText,
+    DtMotionText,
     DtButton,
     DtStack,
   },
