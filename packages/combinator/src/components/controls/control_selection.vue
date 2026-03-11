@@ -1,6 +1,6 @@
 <template>
   <dt-select-menu
-    :value="value"
+    :model-value="value"
     :options="options"
     :disabled="disabled"
     size="sm"

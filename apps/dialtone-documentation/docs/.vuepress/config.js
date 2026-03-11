@@ -106,5 +106,8 @@ export default defineUserConfig({
     '@projectRoot': path.resolve(__dirname, '../../'),
     '@': path.resolve(__dirname, '../'),
     '@workspaceRoot': path.resolve(__dirname, '../../../../'),
+    // The combinator's DtcNode uses runtime template compilation (h({ template: '...' })),
+    // which requires the full Vue build including the compiler.
+    'vue': 'vue/dist/vue.esm-bundler.js',
   },
 });

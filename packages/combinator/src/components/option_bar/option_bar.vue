@@ -13,7 +13,7 @@
           class="d-fl1"
           :class="isFullscreen ? 'd-headline--lg' : 'd-headline--md'"
         >
-          Button
+          {{ component.name }}
         </h2>
         <dt-button
           v-dt-tooltip="`Fullscreen`"

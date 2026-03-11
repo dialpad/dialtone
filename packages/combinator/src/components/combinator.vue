@@ -19,7 +19,13 @@
       />
     </div>
     <div class="dialtone-playground__end">
-      <!-- <dtc-code-example :component="library" /> -->
+      <dtc-code-panel
+        ref="codePanel"
+        :info="info"
+        :options="options"
+        :settings="settings"
+        @update:options="e => e(options)"
+      />
     </div>
   </div>
 </template>
@@ -41,9 +47,9 @@ import {
   SETTINGS_VERBOSE_KEY,
 } from '@/src/lib/constants';
 import defaultSettings from '@/src/settings.json';
+import DtcCodePanel from './code_panel/code_panel.vue';
 // import supportedComponents from '@/src/supported_components.json';
 // import DtcCodeExample from './code_example/code_example.vue';
-// import DtcCodePanel from './code_panel/code_panel.vue';
 // import DtcSettingsMenu from './settings_menu/settings_menu.vue';
 // import DtcHeader from '@/src/components/header/header.vue';
 // import { DtNotice } from '@dialpad/dialtone-vue';
@@ -263,7 +269,7 @@ function getInitialValues (info) {
 // }
 
 function triggerEvent (event, value) {
-  codePanel.value.trigger(event, value);
+  codePanel.value?.trigger(event, value);
 }
 
 function toggleFullScreen ($event) {

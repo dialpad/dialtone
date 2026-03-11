@@ -3,10 +3,13 @@
     :component="component"
     :library="library"
     :documentation="componentDocumentation"
+    :variants="componentVariants"
   />
 </template>
 
 <script>
+import { variantBank } from '@dialpad/dialtone-combinator';
+
 export default {
   name: 'ComponentCombinator',
 
@@ -38,6 +41,10 @@ export default {
       return this.dialtoneComponentsDocumentation.find(
         componentInfo => componentInfo.displayName === this.componentName,
       );
+    },
+
+    componentVariants () {
+      return variantBank()[this.componentName] ?? {};
     },
 
     library () {
