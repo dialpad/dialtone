@@ -102,7 +102,16 @@ export function extractSections(markdown, options = {}) {
   for (let i = 0; i < headings.length; i++) {
     const h = headings[i];
     const start = h.index + getHeadingLineLength(body, h.index);
-    const end = i + 1 < headings.length ? headings[i + 1].index : body.length;
+
+    // Find the next heading at the same or higher (lower number) level.
+    let end = body.length;
+    for (let j = i + 1; j < headings.length; j++) {
+      if (headings[j].level <= h.level) {
+        end = headings[j].index;
+        break;
+      }
+    }
+
     sections.push({
       heading: { level: h.level, text: h.text, slug: h.slug },
       body: body.slice(start, end).trim(),
