@@ -11,6 +11,7 @@
       :placeholder="$attrs.placeholder"
       :max-height="$attrs.maxHeight"
       :show-add-link="$attrs.showAddLink"
+      :preserve-whitespace="preserveWhitespace"
       :use-div-tags="useDivTags"
       :show-bold-button="$attrs.showBoldButton"
       :show-italics-button="$attrs.showItalicsButton"
@@ -66,6 +67,7 @@ export default {
       allowLineHeight: this.$attrs.allowLineHeight ?? true,
       useDivTags: this.$attrs.useDivTags ?? true,
       allowTables: this.$attrs.allowTables ?? true,
+      preserveWhitespace: this.$attrs.preserveWhitespace ?? false,
       variableCategories: this.$attrs.variableCategories ?? [
         {
           name: 'Agent',

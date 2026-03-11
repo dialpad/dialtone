@@ -366,6 +366,7 @@
         :link="true"
         :output-format="htmlOutputFormat"
         :placeholder="placeholder"
+        :preserve-whitespace="preserveWhitespace"
         :use-div-tags="useDivTags"
         :allow-tables="allowTables"
         :allow-image-resize="allowImageResize"
@@ -760,6 +761,18 @@ export default {
     allowLineHeight: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * Controls how whitespace is handled when parsing HTML content.
+     * - 'full': All whitespace is preserved
+     * - true: Whitespace in inline content is preserved, whitespace-only nodes between blocks are removed
+     * - false: Standard HTML whitespace collapsing
+     * @values full, true, false
+     */
+    preserveWhitespace: {
+      type: [Boolean, String],
+      default: 'full',
     },
 
     /**

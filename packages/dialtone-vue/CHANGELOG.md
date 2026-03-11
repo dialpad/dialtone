@@ -1,3 +1,10 @@
+# [3.215.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.214.0...dialtone-vue/v3.215.0) (2026-03-10)
+
+
+### Features
+
+* **Editor:** NO-JIRA add preserveWhitespace prop ([#1115](https://github.com/dialpad/dialtone/issues/1115)) ([aad7f29](https://github.com/dialpad/dialtone/commit/aad7f299d88dd72effdd958248b2d58a1aca4e60))
+
 # [3.214.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.213.0...dialtone-vue/v3.214.0) (2026-03-09)
 
 

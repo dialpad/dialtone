@@ -24,6 +24,7 @@
     :allow-underline="$attrs.allowUnderline"
     :additional-extensions="$attrs.additionalExtensions"
     :hide-link-bubble-menu="$attrs.hideLinkBubbleMenu"
+    :preserve-whitespace="$attrs.preserveWhitespace"
     :use-div-tags="$attrs.useDivTags"
     :allow-tables="$attrs.allowTables"
     :custom-link="$attrs.customLink"
