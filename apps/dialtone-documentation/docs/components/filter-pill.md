@@ -494,7 +494,7 @@ vueCode='<dt-filter-pill label="Keyword" v-model="[...]">
 </dt-filter-pill>'
 showHtmlWarning />
 
-### Header and footer
+### Header and Footer
 
 The `headerContent` and `footerContent` slots let you customize the popover header and footer.
 Both receive a `close` binding; `footerContent` also provides `apply` and `cancel` for deferred-selection workflows.
