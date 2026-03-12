@@ -330,8 +330,12 @@ export default {
 <style lang="less">
 .dialtone-playground {
   & {
-    display: flex;
+    display:none;
     flex-direction: column;
+
+    @media screen and (min-width: 640px) {
+      display: flex;
+    }
   }
 
   &__start {
@@ -378,16 +382,13 @@ export default {
   }
 
   &__controls {
-
-    @media screen and (min-width: 640px) {
-      inline-size: var(--dt-size-875);
-      max-block-size: var(--dt-size-950);
-    }
+    inline-size: var(--dt-size-875);
+    max-block-size: var(--dt-size-950);
 
     :where(.dialtone-playground--fullscreen) & {
       @media screen and (min-width: 640px) {
         max-block-size: 100%;
-        inline-size: var(--dt-size-900);
+        inline-size: var(--dt-layout-600);
       }
     }
 

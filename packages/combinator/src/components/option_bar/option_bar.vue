@@ -40,14 +40,18 @@
         v-dt-scrollbar
         class="d-fl1 d-px16 d-pb16"
       >
-        <dt-stack gap="500">
+        <dt-stack
+          gap="500"
+          :direction="isFullscreen ? 'row' : ''"
+          :align="isFullscreen ? 'start' : ''"
+        >
           <dt-stack>
             <dt-text
               tone="secondary"
               as="h2"
               kind="headline"
               :size="isFullscreen ? 'md' : 'sm'"
-              class="d-ps-sticky d-t0 d-bgc-secondary d-zi-base1 d-py4"
+              class="d-ps-sticky d-t0 d-bgc-secondary d-zi-base1 d-pt0 d-pb2"
             >
               Props
             </dt-text>
@@ -68,7 +72,7 @@
               as="h2"
               kind="headline"
               :size="isFullscreen ? 'md' : 'sm'"
-              class="d-ps-sticky d-t0 d-bgc-secondary d-zi-base1 d-py4"
+              class="d-ps-sticky d-t0 d-bgc-secondary d-zi-base1 d-pt0 d-pb2"
             >
               Slots
             </dt-text>
