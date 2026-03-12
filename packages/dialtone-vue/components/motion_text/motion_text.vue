@@ -10,7 +10,7 @@
     <!-- Screen reader content -->
     <span
       v-if="screenReaderText"
-      class="dt-recipe-motion-text__sr-only"
+      class="d-motion-text__sr-only"
     >
       {{ screenReaderText }}
     </span>
@@ -25,7 +25,7 @@
     <span
       v-else
       :key="animationKey"
-      class="dt-recipe-motion-text__content"
+      class="d-motion-text__content"
       :aria-hidden="isAnimating"
     >
       <template
@@ -33,11 +33,11 @@
         :key="`${animationKey}-${wordIdx}`"
       >
         <Transition
-          :name="`dt-recipe-motion-text-word-${animationMode}`"
+          :name="`d-motion-text-word-${animationMode}`"
         >
           <span
             v-if="wordIdx < visibleWordCount"
-            class="dt-recipe-motion-text__word"
+            class="d-motion-text__word"
             :data-text-content="word.text"
             :style="{ '--word-index': wordIdx }"
           >
@@ -46,11 +46,11 @@
               :key="`${animationKey}-${wordIdx}-${charIdx}`"
             >
               <Transition
-                :name="`dt-recipe-motion-text-char-${animationMode}`"
+                :name="`d-motion-text-char-${animationMode}`"
               >
                 <span
                   v-if="charIdx < visibleCharsPerWord[wordIdx]"
-                  class="dt-recipe-motion-text__char"
+                  class="d-motion-text__char"
                   :style="{
                     '--char-index': charIdx,
                     '--char-delay': `${charIdx * timing.characterDelay}ms`,
@@ -66,7 +66,7 @@
     <!-- Fallback slot content -->
     <span
       v-if="!words.length && !text && !isStaticAnimationMode"
-      class="dt-recipe-motion-text__fallback"
+      class="d-motion-text__fallback"
     >
       <slot />
     </span>
@@ -78,7 +78,7 @@ import { MOTION_TEXT_ANIMATION_MODES, MOTION_TEXT_SPEEDS, MOTION_TEXT_TIMING_PRE
 
 export default {
   compatConfig: { MODE: 3 },
-  name: 'DtRecipeMotionText',
+  name: 'DtMotionText',
 
   inheritAttrs: false,
 
@@ -210,9 +210,9 @@ export default {
      */
     componentStyles () {
       return {
-        '--dt-recipe-motion-text-duration': `${this.timing.duration}ms`,
-        '--dt-recipe-motion-text-char-duration': `${this.timing.duration}ms`,
-        '--dt-recipe-motion-text-word-duration': `${this.timing.duration * 2}ms`,
+        '--d-motion-text-duration': `${this.timing.duration}ms`,
+        '--d-motion-text-char-duration': `${this.timing.duration}ms`,
+        '--d-motion-text-word-duration': `${this.timing.duration * 2}ms`,
       };
     },
 
@@ -228,12 +228,12 @@ export default {
      */
     motionTextClasses () {
       return [
-        'dt-recipe-motion-text',
-        `dt-recipe-motion-text--${this.animationMode}`,
+        'd-motion-text',
+        `d-motion-text--${this.animationMode}`,
         {
-          'dt-recipe-motion-text--animating': this.isAnimating,
-          'dt-recipe-motion-text--paused': this.isPaused,
-          'dt-recipe-motion-text--looped': this.isLooped,
+          'd-motion-text--animating': this.isAnimating,
+          'd-motion-text--paused': this.isPaused,
+          'd-motion-text--looped': this.isLooped,
         },
         this.$attrs.class,
       ];

@@ -702,6 +702,10 @@
           "link": "/components/modal.html"
         },
         {
+          "text": "Motion Text",
+          "link": "/components/motion-text.html"
+        },
+        {
           "text": "Notice",
           "link": "/components/notice.html"
         },
