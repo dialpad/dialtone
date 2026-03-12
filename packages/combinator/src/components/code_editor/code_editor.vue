@@ -28,6 +28,8 @@
               <dtc-code-editor-slot
                 v-if="value && !disabledMembers.has(slot)"
                 :name="slot"
+                :bindings="slotBindingsMap[slot]"
+                :content="value"
                 @update:options="e => emit(OPTIONS_UPDATE_EVENT, e)"
               >
                 <span class="dtc-theme-popover">{{ value }}</span>
@@ -138,6 +140,15 @@ const indent = computed(() => {
 provide(SETTINGS_INDENT_KEY, indent);
 
 const tagName = computed(() => paramCase(props.info.displayName));
+
+const slotBindingsMap = computed(() => {
+  if (!props.info.slots) return {};
+  return Object.fromEntries(
+    props.info.slots
+      .filter(slot => slot.bindings?.length)
+      .map(slot => [slot.name, slot.bindings]),
+  );
+});
 
 const hasSlotContent = computed(() => {
   return props.options.slots
