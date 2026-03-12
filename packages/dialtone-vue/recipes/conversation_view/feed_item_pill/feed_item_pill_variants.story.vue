@@ -297,7 +297,7 @@ import {
   DtIconPhoneIncoming,
   DtIconVideo,
   DtIconVoicemail,
-} from '@dialpad/dialtone-icons/vue3';
+} from '@dialpad/dialtone-icons/vue';
 export default {
   name: 'DtRecipeFeedItemPillVariants',
 

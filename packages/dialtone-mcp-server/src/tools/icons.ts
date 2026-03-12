@@ -102,7 +102,7 @@ export function formatIconResults(results: SearchResult[], query: string): strin
 
   output += `**Usage:**\n`;
   output += `\`\`\`vue\n`;
-  output += `import { ${componentName} } from '@dialpad/dialtone-icons/vue3'\n`;
+  output += `import { ${componentName} } from '@dialpad/dialtone-icons/vue'\n`;
   output += `\`\`\`\n`;
 
   return output;

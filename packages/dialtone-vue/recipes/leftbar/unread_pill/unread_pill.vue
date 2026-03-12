@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { DtIconArrowUp, DtIconArrowDown } from '@dialpad/dialtone-icons/vue3';
+import { DtIconArrowUp, DtIconArrowDown } from '@dialpad/dialtone-icons/vue';
 import { UNREAD_PILL_DIRECTIONS, UNREAD_PILL_KINDS } from './unread_pill_constants';
 import { DialtoneLocalization } from '@/localization';
 

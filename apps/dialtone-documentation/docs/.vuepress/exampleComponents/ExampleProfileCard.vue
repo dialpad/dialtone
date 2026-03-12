@@ -50,5 +50,5 @@
 </template>
 
 <script setup>
-import { DtIconPhone, DtIconQuickReply, DtIconVideo } from '@dialpad/dialtone-icons/vue3';
+import { DtIconPhone, DtIconQuickReply, DtIconVideo } from '@dialpad/dialtone-icons/vue';
 </script>

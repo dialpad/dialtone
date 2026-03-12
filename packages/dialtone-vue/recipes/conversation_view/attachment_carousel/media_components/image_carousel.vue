@@ -48,7 +48,7 @@
 <script>
 import { DtImageViewer } from '@/components/image_viewer';
 import { DtButton } from '@/components/button';
-import { DtIconClose } from '@dialpad/dialtone-icons/vue3';
+import { DtIconClose } from '@dialpad/dialtone-icons/vue';
 import { DialtoneLocalization } from '@/localization';
 
 import { DtProgressCircle } from '@/components/progress_circle';

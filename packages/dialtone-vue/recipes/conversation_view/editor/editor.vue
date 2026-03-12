@@ -429,7 +429,7 @@ import {
   DtIconChevronDown,
   DtIconFontSize,
   DtIconStopFilled,
-} from '@dialpad/dialtone-icons/vue3';
+} from '@dialpad/dialtone-icons/vue';
 import { DialtoneLocalization } from '@/localization';
 
 export default {

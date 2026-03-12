@@ -129,7 +129,7 @@
 /* eslint-disable max-lines */
 import { DtButton } from '@/components/button';
 import { DtText } from '@/components/text';
-import { DtIconClose } from '@dialpad/dialtone-icons/vue3';
+import { DtIconClose } from '@dialpad/dialtone-icons/vue';
 import Modal from '@/common/mixins/modal';
 import {
   MODAL_BANNER_KINDS,
