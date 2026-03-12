@@ -1,4 +1,4 @@
-import { describe, test, expect } from 'vitest';
+import { beforeAll, describe, test, expect } from 'vitest';
 import { findFiles, readFile } from '@helpers/fileReader.js';
 import { parseFrontmatter, validateRequiredFields } from '@helpers/frontmatterParser.js';
 
@@ -8,14 +8,15 @@ const ALLOWED_TYPES = ['architecture', 'development', 'workflow', 'reference', '
 describe('Frontmatter validation', () => {
   let contentFiles;
 
-  test('finds content markdown files', async () => {
+  beforeAll(async () => {
     contentFiles = await findFiles('src/content/**/*.md');
+  });
+
+  test('finds content markdown files', () => {
     expect(contentFiles.length).toBeGreaterThan(0);
   });
 
-  test('all docs have YAML frontmatter', async () => {
-    contentFiles = contentFiles || await findFiles('src/content/**/*.md');
-
+  test('all docs have YAML frontmatter', () => {
     for (const file of contentFiles) {
       const content = readFile(file);
       const parsed = parseFrontmatter(content);
@@ -23,9 +24,7 @@ describe('Frontmatter validation', () => {
     }
   });
 
-  test('all docs have required fields', async () => {
-    contentFiles = contentFiles || await findFiles('src/content/**/*.md');
-
+  test('all docs have required fields', () => {
     for (const file of contentFiles) {
       const content = readFile(file);
       const parsed = parseFrontmatter(content);
@@ -34,9 +33,7 @@ describe('Frontmatter validation', () => {
     }
   });
 
-  test('type field uses allowed values', async () => {
-    contentFiles = contentFiles || await findFiles('src/content/**/*.md');
-
+  test('type field uses allowed values', () => {
     for (const file of contentFiles) {
       const content = readFile(file);
       const { data } = parseFrontmatter(content);
@@ -47,9 +44,7 @@ describe('Frontmatter validation', () => {
     }
   });
 
-  test('keywords array has 3+ items', async () => {
-    contentFiles = contentFiles || await findFiles('src/content/**/*.md');
-
+  test('keywords array has 3+ items', () => {
     for (const file of contentFiles) {
       const content = readFile(file);
       const { data } = parseFrontmatter(content);
@@ -61,9 +56,7 @@ describe('Frontmatter validation', () => {
     }
   });
 
-  test('ai_summary is <= 150 characters', async () => {
-    contentFiles = contentFiles || await findFiles('src/content/**/*.md');
-
+  test('ai_summary is <= 150 characters', () => {
     for (const file of contentFiles) {
       const content = readFile(file);
       const { data } = parseFrontmatter(content);

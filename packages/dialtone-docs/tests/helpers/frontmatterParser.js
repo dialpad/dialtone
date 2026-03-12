@@ -5,11 +5,11 @@ import fs from 'fs';
  * Parse YAML frontmatter from markdown content or file
  * @param {string} source - Either file path or markdown content string
  * @param {Object} options - Configuration options
- * @param {boolean} options.isFilePath - If true, treats source as file path. Default: auto-detect
+ * @param {boolean} options.isFilePath - If true, treats source as file path. Default: false
  * @returns {Object} Parsed result with { data, content, isEmpty, excerpt }
  */
 export function parseFrontmatter(source, options = {}) {
-  const { isFilePath = isLikelyFilePath(source) } = options;
+  const { isFilePath = false } = options;
 
   let content;
 
@@ -45,7 +45,7 @@ function normalizeMatterResult(parsed, raw) {
  */
 export function validateRequiredFields(frontmatter, requiredFields = []) {
   const data = frontmatter.data || frontmatter;
-  const missing = requiredFields.filter(field => !data[field]);
+  const missing = requiredFields.filter(field => data[field] == null);
 
   return {
     valid: missing.length === 0,
@@ -77,16 +77,3 @@ export function hasField(frontmatter, fieldName) {
   return data[fieldName] !== undefined;
 }
 
-/**
- * Auto-detect if source is a file path
- * @private
- * @param {string} source - Source string to check
- * @returns {boolean} True if likely a file path
- */
-function isLikelyFilePath(source) {
-  // Simple heuristic: file paths typically have extensions and path separators
-  // and don't contain newlines
-  return !source.includes('\n') &&
-         (source.includes('/') || source.includes('\\')) &&
-         (source.endsWith('.md') || source.endsWith('.markdown'));
-}
