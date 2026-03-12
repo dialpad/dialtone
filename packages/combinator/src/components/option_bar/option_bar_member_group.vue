@@ -20,7 +20,7 @@
           :locked="member.lockControl"
           :disabled="member.disableControl"
           :args="{
-            defaultValue: member.defaultValue,
+            defaultValue: member.defaultValue ?? member.initialValue,
             validValues: member.values,
             validTypes: member.types,
             tags: member.tags,
