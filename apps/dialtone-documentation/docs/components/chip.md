@@ -9,7 +9,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["tag", "pill", "token", "badge", "d-chip", "DtChip", "dt-chip", "filter chip", "choice chip"]
 ---
 
-<code-well-header>
+<!-- <code-well-header>
   <dt-stack direction="row" gap="400">
     <dt-chip size="sm" :hide-close="true" :interactive="false">Chip</dt-chip>
     <dt-chip size="sm" :interactive="false">Chip</dt-chip>
@@ -37,9 +37,9 @@ keywords: ["tag", "pill", "token", "badge", "d-chip", "DtChip", "dt-chip", "filt
       </template>
     </dt-chip>
   </dt-stack>
-</code-well-header>
+</code-well-header> -->
 
-<!-- <component-combinator component-name="DtChip" /> -->
+<component-combinator component-name="DtChip" />
 
 ## Variants and Examples
 

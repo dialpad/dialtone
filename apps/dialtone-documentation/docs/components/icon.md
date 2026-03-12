@@ -9,9 +9,7 @@ figma_url: https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT-Core%3A-Icons-7?
 keywords: ["svg","glyph","symbol","d-icon","DtIcon","dt-icon"]
 ---
 
-<code-well-header>
-  <dt-icon-user-plus />
-</code-well-header>
+<component-combinator component-name="DtIcon" />
 
 Check out our complete icon collection in the [icon catalog](/foundations/icons/index.md#icon-catalog).
 
