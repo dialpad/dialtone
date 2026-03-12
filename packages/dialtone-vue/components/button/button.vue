@@ -160,7 +160,7 @@ export default {
 
   props: {
     /**
-     * Whether the button is a circle or not.
+     * Whether the button is a circle or not. Use only with icon-only buttons.
      * @values true, false
      */
     circle: {
