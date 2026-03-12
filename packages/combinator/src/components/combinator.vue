@@ -351,14 +351,14 @@ export default {
       flex-direction: row;
     }
 
-    .dialtone-playground--fullscreen & {
+    :where(.dialtone-playground--fullscreen) & {
       border-block-end: var(--dt-size-border-100) solid var(--dt-color-border-subtle)
     }
   }
 
   &__end {
-    .dialtone-playground--fullscreen & {
-      background-color: var(--dt-color-surface-secondary-opaque);
+    background-color: var(--dt-color-surface-secondary-opaque);
+    :where(.dialtone-playground--fullscreen) & {
       block-size: 33vh;
     }
   }
@@ -392,7 +392,7 @@ export default {
       max-block-size: var(--dt-size-950);
     }
 
-    .dialtone-playground--fullscreen & {
+    :where(.dialtone-playground--fullscreen) & {
       @media screen and (min-width: 640px) {
         max-block-size: 100%;
         inline-size: var(--dt-size-900);

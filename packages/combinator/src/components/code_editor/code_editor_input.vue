@@ -21,11 +21,11 @@ export default {
 
 <style lang="less">
 .dtc-code-editor-input {
-  padding: var(--dt-spacing-25) var(--dt-spacing-50) var(--dt-spacing-25) var(--dt-spacing-50);
-  border-radius: var(--dt-spacing-75);
-  border: solid var(--dt-spacing-1);
-  border-color: var(--dtc-theme-color-background-lighten);
-  background-color: var(--dtc-theme-color-background-darken);
+  border: solid var(--dt-spacing-1) transparent;
+  background-color: transparent;
   outline: none;
+  &:hover {
+    border-color: var(--dt-color-border-moderate);
+  }
 }
 </style>

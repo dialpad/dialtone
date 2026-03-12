@@ -142,8 +142,13 @@ const controlComponent = computed(() => {
  * @type {ComputedRef<object>}
  */
 const controlArgs = computed(() => {
+  const isInactive = props.disabled && !props.locked;
+  const displayValue = isInactive
+    ? props.controlData.component.props?.value?.default?.() ?? controlValue.value
+    : controlValue.value;
+
   return {
-    value: controlValue.value,
+    value: displayValue,
     disabled: props.locked || props.disabled,
     tags: props.tags,
     ...props.args,

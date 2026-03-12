@@ -1,11 +1,14 @@
 <template>
-  <div
+  <dt-stack
     ref="editor"
-    class="dtc-code-editor d-d-flex d-fl-grow1"
+    class="dtc-code-editor d-w100p"
+    direction="row"
+    gap="300"
+    align="start"
   >
     <div
       ref="code"
-      class="d-fl-grow1"
+      class="d-fl1"
     >
       <dtc-code-editor-element
         :tag-name="tagName"
@@ -39,46 +42,33 @@
         </template>
       </dtc-code-editor-element>
     </div>
-    <dt-popover
-      :class="[
-        `dtc-theme--${theme}`,
-        'd-ps-sticky',
-        'd-t0',
-      ]"
-      content-class="dtc-theme__popover"
-      transition="pop"
-      :modal="false"
-      :open="showCopyPopover"
+    <dt-button
+      class="dtc-theme__button d-ps-sticky d-t0 d-r0"
+      kind="muted"
+      importance="clear"
+      size="xs"
+      @click="copy"
     >
-      <template #anchor="{ attrs }">
-        <dt-button
-          class="dtc-theme__button d-ps-sticky d-t0"
-          v-bind="attrs"
-          importance="clear"
-          size="lg"
-          @click="copy"
-        >
-          <template #default>
-            Copy
-          </template>
-          <template #icon="{ iconSize }">
-            <dt-icon-copy :size="iconSize" />
-          </template>
-        </dt-button>
+      <template #default>
+        {{ copied ? 'Copied!' : 'Copy' }}
       </template>
-      <template #content>
-        <span>Copied to clipboard</span>
+      <template #icon="{ iconSize }">
+        <component
+          :is="copied ? DtIconCheck : DtIconCopy"
+          :size="iconSize"
+          :class="{ 'd-fc-success': copied }"
+        />
       </template>
-    </dt-popover>
-  </div>
+    </dt-button>
+  </dt-stack>
 </template>
 
 <script setup>
 import DtcCodeEditorTagAttributes from './code_editor_tag_attributes.vue';
 import DtcCodeEditorElement from './code_editor_element.vue';
 import DtcCodeEditorSlot from './code_editor_slot.vue';
-import { DtIconCopy } from '@dialpad/dialtone-icons/vue3';
-import { DtButton, DtPopover } from '@dialpad/dialtone-vue';
+import { DtIconCheck, DtIconCopy } from '@dialpad/dialtone-icons/vue3';
+import { DtButton, DtStack } from '@dialpad/dialtone-vue';
 
 import { OPTIONS_UPDATE_EVENT, SETTINGS_INDENT_KEY } from '@/src/lib/constants';
 import { ref, computed, provide } from 'vue';
@@ -157,7 +147,7 @@ const hasSlotContent = computed(() => {
 });
 
 const code = ref();
-const showCopyPopover = ref(false);
+const copied = ref(false);
 
 async function copy () {
   let text = code.value.innerText;
@@ -170,9 +160,9 @@ async function copy () {
 
   await navigator.clipboard.writeText(text);
 
-  showCopyPopover.value = true;
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  showCopyPopover.value = false;
+  copied.value = true;
+  await new Promise(resolve => setTimeout(resolve, 2000));
+  copied.value = false;
 }
 </script>
 
@@ -187,6 +177,11 @@ export default {
 </script>
 
 <style>
+.dtc-code-editor {
+  font: var(--dt-text-code-sm);
+  line-height: var(--dt-font-line-height-400);
+}
+
 .dtc-code-editor__margin {
   border-inline-start: var(--dtc-theme-color-background-darken) solid 1px;
 }
