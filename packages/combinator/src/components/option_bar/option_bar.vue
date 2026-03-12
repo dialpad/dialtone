@@ -92,6 +92,7 @@ import DtcOptionBarMemberGroup from './option_bar_member_group.vue';
 import { ref } from 'vue';
 import { OPTIONS_UPDATE_EVENT } from '@/src/lib/constants';
 import { getControlByMemberType, getControlByValue } from '@/src/lib/control';
+import { isIconSlot } from '@/src/lib/icons';
 import { DtButton, DtStack, DtText } from '@dialpad/dialtone-vue';
 import DtIconMinimize from '@dialpad/dialtone-icons/vue3/minimize';
 import DtIconExpand from '@dialpad/dialtone-icons/vue3/expand';
@@ -159,7 +160,10 @@ function getBindingControls (binding, value, ...controls) {
   ];
 }
 
-function getSlotControls () {
+function getSlotControls (member) {
+  if (isIconSlot(member)) {
+    return getStaticControl('icon-slot');
+  }
   return getStaticControl('slot');
 }
 

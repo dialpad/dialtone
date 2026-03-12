@@ -12,10 +12,15 @@ export default {
       type: Object,
       default: () => {},
     },
+    scope: {
+      type: Object,
+      default: () => ({}),
+    },
   },
   render (props) {
     return h({
       components: props.library,
+      data () { return { ...props.scope }; },
       template: props.template,
     });
   },

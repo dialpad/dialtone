@@ -24,6 +24,7 @@
             validValues: member.values,
             validTypes: member.types,
             tags: member.tags,
+            bindings: member.bindings,
           }"
           @update:value="e => updateMember(e, key)"
           @update:control="e => updateControl(e, key)"

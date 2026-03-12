@@ -9,11 +9,12 @@
     <template
       v-for="(slot, name) in renderedSlots"
       :key="name"
-      #[name]
+      #[name]="slotBindings"
     >
       <dtc-node
         :template="slot"
         :library="library"
+        :scope="slotBindings"
       />
     </template>
   </dtc-renderer-target>
