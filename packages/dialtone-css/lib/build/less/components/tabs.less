@@ -7,37 +7,46 @@
 //  visit https://dialtone.dialpad.com/components/tabs
 //
 //  TABLE OF CONTENTS
-//  • BASE STYLE
-//  • ALTERNATE STYLES
+//  • WRAPPER
+//  • TABLIST
+//  • TABLIST SIZES
+//  • TAB BASE
+//  • TAB SELECTED (CSS-only legacy, used by emoji-picker)
+//  • TAB INDICATOR (Vue component indicator line)
+//  • NO-BORDER
+//  • VERTICAL
+//  • INVERTED
 //
 //  ============================================================================
-//  $   WRAPPERS
+//  $   WRAPPER
 //  ----------------------------------------------------------------------------
 @layer dialtone.components {
 .d-tab-neux {
+    --tablist-padding-bottom: var(--dt-size-400);
+
     inline-size: 100%;
 
-    [role="tabpanel"] {
+    :where([role="tabpanel"]) {
         box-shadow: none;
     }
 
-    > .d-tablist {
-        --tablist-padding-bottom: var(--dt-size-400);
-
+    :where(> .d-tablist) {
         padding-block-end: var(--tablist-padding-bottom);
-
-        &--xs { --tablist-padding-bottom: var(--dt-size-350); }
-        &--sm { --tablist-padding-bottom: var(--dt-size-400); }
-        &--md { /* default */ }
-        &--lg { --tablist-padding-bottom: var(--dt-size-400); }
-        &--xl { --tablist-padding-bottom: var(--dt-size-450); }
     }
+
+    > :where(.d-tablist--xs) { --tablist-padding-bottom: var(--dt-size-350); }
+    > :where(.d-tablist--sm) { --tablist-padding-bottom: var(--dt-size-400); }
+    > :where(.d-tablist--lg) { --tablist-padding-bottom: var(--dt-size-400); }
+    > :where(.d-tablist--xl) { --tablist-padding-bottom: var(--dt-size-450); }
 
     .d-tablist--no-border {
         border-block-end: 0;
     }
 }
 
+//  ============================================================================
+//  $   TABLIST
+//  ----------------------------------------------------------------------------
 .d-tablist {
     //  --  COMPONENT CSS VARS
     //  ------------------------------------------------------------------------
@@ -48,35 +57,45 @@
     --tab-padding-x: calc(var(--dt-size-450) - var(--dt-size-border-100));
     --tab-padding-y: calc(var(--dt-size-400) - var(--dt-size-border-100));
 
+    //  --  CSS VARS: border opacity (toggled by --no-border)
+    --tablist-border-opacity: 1;
+
+    //  --  CSS VARS: border-radius end corners (toggled by --no-border / --selected)
+    --tab-border-radius-end: 0;
+
+    //  --  CSS VARS: ::after cover-up background (toggled by --no-border / --selected)
+    --tab-after-bg: var(--tab-color-background);
+
+    //  --  CSS VARS: state colors (overridden by --inverted)
+    --tab-color-text-hover: var(--dt-action-color-foreground-muted-hover);
+    --tab-color-background-hover: var(--dt-action-color-background-muted-hover);
+    --tab-color-text-active: var(--dt-action-color-foreground-muted-active);
+    --tab-color-background-active: var(--dt-action-color-background-muted-active);
+    --tab-color-text-disabled: var(--dt-action-color-foreground-disabled-default);
+    --tab-color-text-selected: var(--dt-action-color-foreground-base-default);
+    --tab-selected-indicator: var(--dt-action-color-foreground-base-default);
+
     position: relative;
     display: flex;
     flex-wrap: wrap;
     gap: var(--dt-size-300);
     align-items: center;
+    padding-block-end: var(--tablist-padding-bottom);
 
     &:focus {
         outline: 0;
     }
 
-    // Add a bottom border unless no border is requested
-    &:not(.d-tablist--no-border)::after {
+    &::after {
         position: absolute;
         inset-inline: 0;
         inset-block-end: 0;
         z-index: var(--zi-base1);
         block-size: var(--dt-size-border-100);
         background-color: var(--dt-color-border-default);
+        opacity: var(--tablist-border-opacity);
         content: '';
-
     }
-
-    &.d-tablist--vertical:not(.d-tablist--no-border)::after {
-        block-size: auto;
-        inset-inline-start: calc(100% - var(--dt-size-200));
-        inline-size: var(--dt-size-border-100);
-        inset-block: 1px;
-    }
-
 
     &__item {
         text-align: start;
@@ -84,7 +103,7 @@
         &--vertical {
             inline-size: 100%;
 
-            > .d-btn__label {
+            > :where(.d-btn__label) {
                 justify-content: flex-start;
             }
         }
@@ -92,7 +111,30 @@
 }
 
 //  ============================================================================
-//  $   BASE STYLE
+//  $   TABLIST SIZES
+//  ----------------------------------------------------------------------------
+.d-tablist--sm {
+    --tab-padding-x: calc(var(--dt-size-400) - var(--dt-size-border-100));
+    --tab-border-radius: var(--dt-button-size-radius-xs);
+    --tab-font-style: var(--dt-typography-button-xs);
+}
+
+.d-tablist--lg {
+    --tab-padding-x: calc(var(--dt-size-500) - var(--dt-size-border-100));
+    --tab-padding-y: calc((var(--dt-size-400) + var(--dt-size-200)) - var(--dt-size-border-100));
+    --tab-border-radius: var(--dt-button-size-radius-lg);
+    --tab-font-style: var(--dt-typography-button-lg);
+}
+
+.d-tablist--xl {
+    --tab-padding-x: calc(var(--dt-size-500) - var(--dt-size-border-100));
+    --tab-padding-y: calc(var(--dt-size-450) - var(--dt-size-border-100));
+    --tab-border-radius: var(--dt-button-size-radius-xl);
+    --tab-font-style: var(--dt-typography-button-xl);
+}
+
+//  ============================================================================
+//  $   TAB BASE
 //  ----------------------------------------------------------------------------
 .d-tab {
     position: relative;
@@ -106,36 +148,29 @@
     font: var(--tab-font-style);
     background-color: var(--tab-color-background);
     border: var(--dt-size-border-100) solid var(--dt-action-color-border-base-default);
-    border-radius: var(--tab-border-radius) var(--tab-border-radius) 0 0;
+    border-radius: var(--tab-border-radius) var(--tab-border-radius) var(--tab-border-radius-end) var(--tab-border-radius-end);
     cursor: pointer;
     transition-timing-function: var(--ttf-out-quint);
     transition-duration: var(--td100);
     transition-property: background-color, border, color, box-shadow;
     fill: currentColor;
 
-    .d-tablist--no-border &:not(.d-tab--selected) {
-        border-radius: var(--tab-border-radius);
-    }
-
-    &:first-of-type {
+    &:where(:first-of-type) {
         margin-inline-start: 0;
     }
 
-    &:last-of-type {
+    &:where(:last-of-type) {
         margin-inline-end: 0;
     }
 
+    // Cover-up pseudo-element that hides the tablist border behind the active tab
     &::after {
         position: absolute;
         block-size: var(--dt-size-border-200);
-        background-color: var(--tab-color-background);
+        background-color: var(--tab-after-bg);
         content: '';
         inset-inline: var(--dt-size-100-negative) var(--dt-size-100-negative);
         inset-block-end: var(--dt-size-100-negative);
-
-        .d-tablist--no-border & {
-            background-color: transparent;
-        }
     }
 
     &:focus-visible {
@@ -144,68 +179,34 @@
     }
 
     &:disabled {
-        --tab-color-text: var(--dt-action-color-foreground-disabled-default);
+        --tab-color-text: var(--tab-color-text-disabled);
 
         cursor: not-allowed;
     }
 
     &:not(:disabled):hover {
-        --tab-color-background: var(--dt-action-color-background-muted-hover);
-        --tab-color-text: var(--dt-action-color-foreground-muted-hover);
+        --tab-color-background: var(--tab-color-background-hover);
+        --tab-color-text: var(--tab-color-text-hover);
     }
 
     &:not(:disabled):active {
-        --tab-color-background: var(--dt-action-color-background-muted-active);
-        --tab-color-text: var(--dt-action-color-foreground-muted-active);
+        --tab-color-background: var(--tab-color-background-active);
+        --tab-color-text: var(--tab-color-text-active);
     }
 
     //  Turn off animations if someone doesn't want them.
     @media (prefers-reduced-motion) {
         transition: none;
     }
-
-    //  ============================================================================
-    //  $   SIZES
-    //  ----------------------------------------------------------------------------
-    .d-tablist--sm & {
-        --tab-padding-x: calc(var(--dt-size-400) - var(--dt-size-border-100));
-        --tab-border-radius: var(--dt-button-size-radius-xs);
-        --tab-font-style: var(--dt-typography-button-xs);
-
-        .d-tablist--no-border &:not(.d-tab--selected) {
-            border-radius: var(--tab-border-radius);
-        }
-    }
-
-    .d-tablist--lg & {
-        --tab-padding-x: calc(var(--dt-size-500) - var(--dt-size-border-100));
-        --tab-padding-y: calc((var(--dt-size-400) + var(--dt-size-200)) - var(--dt-size-border-100));
-        --tab-border-radius: var(--dt-button-size-radius-lg);
-        --tab-font-style: var(--dt-typography-button-lg);
-
-        .d-tablist--no-border &:not(.d-tab--selected) {
-            border-radius: var(--tab-border-radius);
-        }
-    }
-
-    .d-tablist--xl & {
-        --tab-padding-x: calc(var(--dt-size-500) - var(--dt-size-border-100));
-        --tab-padding-y: calc(var(--dt-size-450) - var(--dt-size-border-100));
-        --tab-border-radius: var(--dt-button-size-radius-xl);
-        --tab-font-style: var(--dt-typography-button-xl);
-
-        .d-tablist--no-border &:not(.d-tab--selected) {
-            border-radius: var(--tab-border-radius);
-        }
-    }
-
 }
 
 //  ============================================================================
-//  $   SELECTED STYLE
+//  $   TAB SELECTED (CSS-only legacy, used by emoji-picker)
 //  ----------------------------------------------------------------------------
 .d-tab--selected {
-    --tab-color-text: var(--dt-action-color-foreground-base-default);
+    --tab-color-text: var(--tab-color-text-selected);
+    --tab-border-radius-end: 0;
+    --tab-after-bg: var(--tab-selected-indicator);
 
     z-index: var(--zi-selected);
 
@@ -218,46 +219,42 @@
         --tab-color-background: var(--dt-action-color-background-base-active);
         --tab-color-text: var(--dt-action-color-foreground-base-active);
     }
-
-    &::after,
-    &:hover::after {
-        --tab-color-background: var(--dt-action-color-foreground-base-default);
-
-        .d-tablist--no-border & {
-            background-color: var(--tab-color-background);
-        }
-    }
 }
 
+//  ============================================================================
+//  $   TAB INDICATOR (Vue component indicator line)
+//  ----------------------------------------------------------------------------
 .d-tab--is-selected {
     position: relative;
     z-index: var(--zi-selected);
 
     &::after {
         position: absolute;
-        background-color: var(--dt-action-color-foreground-base-default);
+        background-color: var(--tab-selected-indicator);
         content: '';
         block-size: var(--dt-size-200);
         inset-block-start: calc(calc(100% + var(--tablist-padding-bottom)) - var(--dt-size-100));
         inset-inline: 0;
-
-        .d-tablist--vertical & {
-            inset-block: 0;
-            inset-inline: auto 0;
-            inset-inline-start: calc(100% + var(--dt-size-350));
-            block-size: auto;
-            inline-size: var(--dt-size-200);
-        }
     }
 }
 
 //  ============================================================================
-//  $   VERTICAL ORIENTATION
+//  $   NO-BORDER
+//  ----------------------------------------------------------------------------
+.d-tablist--no-border {
+    --tablist-border-opacity: 0;
+    --tab-border-radius-end: var(--tab-border-radius);
+    --tab-after-bg: transparent;
+}
+
+//  ============================================================================
+//  $   VERTICAL
 //  ----------------------------------------------------------------------------
 .d-tab-neux--vertical {
     display: flex;
+    padding-block-end: 0;
 
-    > .d-tablist {
+    > :where(.d-tablist) {
         --tablist-padding-bottom: 0;
 
         padding-block-end: 0;
@@ -268,48 +265,37 @@
 .d-tablist--vertical {
     flex-flow: column nowrap;
     align-items: flex-start;
+
+    &::after {
+        block-size: auto;
+        inset-inline-start: calc(100% - var(--dt-size-200));
+        inline-size: var(--dt-size-border-100);
+        inset-block: 1px;
+    }
+}
+
+:where(.d-tablist--vertical) .d-tab--is-selected::after {
+    inset-block: 0;
+    inset-inline: auto 0;
+    inset-inline-start: calc(100% + var(--dt-size-350));
+    block-size: auto;
+    inline-size: var(--dt-size-200);
 }
 
 //  ============================================================================
-//  $   INVERTED STYLE
+//  $   INVERTED
 //  ----------------------------------------------------------------------------
 .d-tablist--inverted {
     --tab-color-text: var(--dt-action-color-foreground-inverted-default);
+    --tab-color-text-hover: var(--dt-action-color-foreground-inverted-hover);
+    --tab-color-background-hover: var(--dt-action-color-background-inverted-hover);
+    --tab-color-text-active: var(--dt-action-color-foreground-inverted-active);
+    --tab-color-background-active: var(--dt-action-color-background-inverted-active);
+    --tab-color-text-selected: var(--dt-action-color-foreground-inverted-default);
+    --tab-selected-indicator: currentColor;
 
     &::after {
-        background-color: var(--dt-color-border-moderate-inverted);
-    }
-
-    &:not(.d-tablist--no-border)::after {
         background-color: var(--dt-color-foreground-primary-inverted);
-    }
-
-    .d-tab {
-        --tab-color-text: var(--dt-action-color-foreground-inverted-default);
-
-        &:not(:disabled):hover {
-            --tab-color-text: var(--dt-action-color-foreground-inverted-hover);
-            --tab-color-background: var(--dt-action-color-background-inverted-hover);
-        }
-
-        &:not(:disabled):active {
-            --tab-color-text: var(--dt-action-color-foreground-inverted-active);
-            --tab-color-background: var(--dt-action-color-background-inverted-active);
-        }
-
-        &:disabled {
-            --tab-color-text: var(--dt-action-color-foreground-disabled-default);
-
-            cursor: not-allowed;
-        }
-    }
-
-    .d-tab--selected {
-        --tab-color-text: var(--dt-action-color-foreground-inverted-default);
-
-        &::after {
-            --tab-color-background: currentColor;
-        }
     }
 }
 }
