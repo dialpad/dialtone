@@ -7,20 +7,13 @@
 //  visit https://dialtone.dialpad.com/components/tabs
 //
 //  TABLE OF CONTENTS
-//  • WRAPPER
-//  • TABLIST
-//  • TABLIST SIZES
-//  • TAB BASE
-//  • TAB SELECTED (CSS-only legacy, used by emoji-picker)
-//  • TAB INDICATOR (Vue component indicator line)
-//  • NO-BORDER
-//  • VERTICAL
-//  • INVERTED
+//  • .d-tab-neux   — wrapper + --vertical
+//  • .d-tablist    — tablist + sizes, no-border, vertical, inverted
+//  • .d-tab        — tab base + --selected, --is-selected
 //
-//  ============================================================================
-//  $   WRAPPER
-//  ----------------------------------------------------------------------------
 @layer dialtone.components {
+
+//  WRAPPER
 .d-tab-neux {
     --tablist-padding-bottom: var(--dt-size-400);
 
@@ -30,7 +23,7 @@
         box-shadow: none;
     }
 
-    :where(> .d-tablist) {
+    > :where(.d-tablist) {
         padding-block-end: var(--tablist-padding-bottom);
     }
 
@@ -42,11 +35,22 @@
     .d-tablist--no-border {
         border-block-end: 0;
     }
+
+    //  Vertical
+    &--vertical {
+        display: flex;
+        padding-block-end: 0;
+
+        > :where(.d-tablist) {
+            --tablist-padding-bottom: 0;
+
+            padding-block-end: 0;
+            padding-inline-end: var(--dt-size-400);
+        }
+    }
 }
 
-//  ============================================================================
-//  $   TABLIST
-//  ----------------------------------------------------------------------------
+//  TABLIST
 .d-tablist {
     //  --  COMPONENT CSS VARS
     //  ------------------------------------------------------------------------
@@ -108,34 +112,65 @@
             }
         }
     }
+
+    //  Sizes
+    &--sm {
+        --tab-padding-x: calc(var(--dt-size-400) - var(--dt-size-border-100));
+        --tab-border-radius: var(--dt-button-size-radius-xs);
+        --tab-font-style: var(--dt-typography-button-xs);
+    }
+
+    &--lg {
+        --tab-padding-x: calc(var(--dt-size-500) - var(--dt-size-border-100));
+        --tab-padding-y: calc((var(--dt-size-400) + var(--dt-size-200)) - var(--dt-size-border-100));
+        --tab-border-radius: var(--dt-button-size-radius-lg);
+        --tab-font-style: var(--dt-typography-button-lg);
+    }
+
+    &--xl {
+        --tab-padding-x: calc(var(--dt-size-500) - var(--dt-size-border-100));
+        --tab-padding-y: calc(var(--dt-size-450) - var(--dt-size-border-100));
+        --tab-border-radius: var(--dt-button-size-radius-xl);
+        --tab-font-style: var(--dt-typography-button-xl);
+    }
+
+    //  No-border
+    &--no-border {
+        --tablist-border-opacity: 0;
+        --tab-border-radius-end: var(--tab-border-radius);
+        --tab-after-bg: transparent;
+    }
+
+    //  Vertical
+    &--vertical {
+        flex-flow: column nowrap;
+        align-items: flex-start;
+
+        &::after {
+            block-size: auto;
+            inset-inline-start: calc(100% - var(--dt-size-200));
+            inline-size: var(--dt-size-border-100);
+            inset-block: 1px;
+        }
+    }
+
+    //  Inverted
+    &--inverted {
+        --tab-color-text: var(--dt-action-color-foreground-inverted-default);
+        --tab-color-text-hover: var(--dt-action-color-foreground-inverted-hover);
+        --tab-color-background-hover: var(--dt-action-color-background-inverted-hover);
+        --tab-color-text-active: var(--dt-action-color-foreground-inverted-active);
+        --tab-color-background-active: var(--dt-action-color-background-inverted-active);
+        --tab-color-text-selected: var(--dt-action-color-foreground-inverted-default);
+        --tab-selected-indicator: currentColor;
+
+        &::after {
+            background-color: var(--dt-color-foreground-primary-inverted);
+        }
+    }
 }
 
-//  ============================================================================
-//  $   TABLIST SIZES
-//  ----------------------------------------------------------------------------
-.d-tablist--sm {
-    --tab-padding-x: calc(var(--dt-size-400) - var(--dt-size-border-100));
-    --tab-border-radius: var(--dt-button-size-radius-xs);
-    --tab-font-style: var(--dt-typography-button-xs);
-}
-
-.d-tablist--lg {
-    --tab-padding-x: calc(var(--dt-size-500) - var(--dt-size-border-100));
-    --tab-padding-y: calc((var(--dt-size-400) + var(--dt-size-200)) - var(--dt-size-border-100));
-    --tab-border-radius: var(--dt-button-size-radius-lg);
-    --tab-font-style: var(--dt-typography-button-lg);
-}
-
-.d-tablist--xl {
-    --tab-padding-x: calc(var(--dt-size-500) - var(--dt-size-border-100));
-    --tab-padding-y: calc(var(--dt-size-450) - var(--dt-size-border-100));
-    --tab-border-radius: var(--dt-button-size-radius-xl);
-    --tab-font-style: var(--dt-typography-button-xl);
-}
-
-//  ============================================================================
-//  $   TAB BASE
-//  ----------------------------------------------------------------------------
+//  TAB
 .d-tab {
     position: relative;
     display: inline-flex;
@@ -198,105 +233,50 @@
     @media (prefers-reduced-motion) {
         transition: none;
     }
-}
 
-//  ============================================================================
-//  $   TAB SELECTED (CSS-only legacy, used by emoji-picker)
-//  ----------------------------------------------------------------------------
-.d-tab--selected {
-    --tab-color-text: var(--tab-color-text-selected);
-    --tab-border-radius-end: 0;
-    --tab-after-bg: var(--tab-selected-indicator);
+    //  Selected (CSS-only legacy, used by emoji-picker)
+    &--selected {
+        --tab-color-text: var(--tab-color-text-selected);
+        --tab-border-radius-end: 0;
+        --tab-after-bg: var(--tab-selected-indicator);
 
-    z-index: var(--zi-selected);
+        z-index: var(--zi-selected);
 
-    &:not(:disabled):hover {
-        --tab-color-background: var(--dt-action-color-background-base-hover);
-        --tab-color-text: var(--dt-action-color-foreground-base-hover);
+        &:not(:disabled):hover {
+            --tab-color-background: var(--dt-action-color-background-base-hover);
+            --tab-color-text: var(--dt-action-color-foreground-base-hover);
+        }
+
+        &:not(:disabled):active {
+            --tab-color-background: var(--dt-action-color-background-base-active);
+            --tab-color-text: var(--dt-action-color-foreground-base-active);
+        }
     }
 
-    &:not(:disabled):active {
-        --tab-color-background: var(--dt-action-color-background-base-active);
-        --tab-color-text: var(--dt-action-color-foreground-base-active);
-    }
-}
+    //  Is-selected (Vue component indicator line)
+    &--is-selected {
+        position: relative;
+        z-index: var(--zi-selected);
 
-//  ============================================================================
-//  $   TAB INDICATOR (Vue component indicator line)
-//  ----------------------------------------------------------------------------
-.d-tab--is-selected {
-    position: relative;
-    z-index: var(--zi-selected);
+        &::after {
+            position: absolute;
+            background-color: var(--tab-selected-indicator);
+            border-radius: var(--dt-size-radius-pill);
+            content: '';
+            block-size: var(--dt-size-200);
+            inset-block-start: calc(calc(100% + var(--tablist-padding-bottom)) - var(--dt-size-100));
+            inset-inline: var(--dt-size-100-negative);
+        }
 
-    &::after {
-        position: absolute;
-        background-color: var(--tab-selected-indicator);
-        border-radius: var(--dt-size-radius-pill);
-        content: '';
-        block-size: var(--dt-size-200);
-        inset-block-start: calc(calc(100% + var(--tablist-padding-bottom)) - var(--dt-size-100));
-        inset-inline: var(--dt-size-100-negative);
-    }
-}
-
-//  ============================================================================
-//  $   NO-BORDER
-//  ----------------------------------------------------------------------------
-.d-tablist--no-border {
-    --tablist-border-opacity: 0;
-    --tab-border-radius-end: var(--tab-border-radius);
-    --tab-after-bg: transparent;
-}
-
-//  ============================================================================
-//  $   VERTICAL
-//  ----------------------------------------------------------------------------
-.d-tab-neux--vertical {
-    display: flex;
-    padding-block-end: 0;
-
-    > :where(.d-tablist) {
-        --tablist-padding-bottom: 0;
-
-        padding-block-end: 0;
-        padding-inline-end: var(--dt-size-400);
+        // Vertical context override
+        :where(.d-tablist--vertical) &::after {
+            inset-block: var(--dt-size-100-negative);
+            inset-inline: auto 0;
+            inset-inline-start: calc(100% + var(--dt-size-350));
+            block-size: auto;
+            inline-size: var(--dt-size-200);
+        }
     }
 }
 
-.d-tablist--vertical {
-    flex-flow: column nowrap;
-    align-items: flex-start;
-
-    &::after {
-        block-size: auto;
-        inset-inline-start: calc(100% - var(--dt-size-200));
-        inline-size: var(--dt-size-border-100);
-        inset-block: 1px;
-    }
-}
-
-:where(.d-tablist--vertical) .d-tab--is-selected::after {
-    inset-block: var(--dt-size-100-negative);
-    inset-inline: auto 0;
-    inset-inline-start: calc(100% + var(--dt-size-350));
-    block-size: auto;
-    inline-size: var(--dt-size-200);
-}
-
-//  ============================================================================
-//  $   INVERTED
-//  ----------------------------------------------------------------------------
-.d-tablist--inverted {
-    --tab-color-text: var(--dt-action-color-foreground-inverted-default);
-    --tab-color-text-hover: var(--dt-action-color-foreground-inverted-hover);
-    --tab-color-background-hover: var(--dt-action-color-background-inverted-hover);
-    --tab-color-text-active: var(--dt-action-color-foreground-inverted-active);
-    --tab-color-background-active: var(--dt-action-color-background-inverted-active);
-    --tab-color-text-selected: var(--dt-action-color-foreground-inverted-default);
-    --tab-selected-indicator: currentColor;
-
-    &::after {
-        background-color: var(--dt-color-foreground-primary-inverted);
-    }
-}
-}
+} // end @layer
