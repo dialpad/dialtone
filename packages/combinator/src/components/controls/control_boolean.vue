@@ -13,7 +13,7 @@
         kind="label"
         size="xs"
         tone="secondary"
-        class="d-input__label-text"
+        class="d-input__label-text d-mb0"
       >
         <slot />
       </dt-text>

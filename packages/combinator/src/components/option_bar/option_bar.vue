@@ -7,19 +7,21 @@
       <dt-stack
         gap="500"
         direction="row"
-        class="d-mtn8 d-mbn8 d-mrn4 d-d-none md:d-d-flex"
       >
-        <h2
+        <dt-text
+          as="h2"
+          kind="headline"
+          text-box-trim="both"
+          :size="isFullscreen ? 'lg' : 'md'"
           class="d-fl1"
-          :class="isFullscreen ? 'd-headline--lg' : 'd-headline--md'"
         >
           {{ component.name }}
-        </h2>
+        </dt-text>
         <dt-button
           v-dt-tooltip="`Fullscreen`"
           kind="muted"
           importance="clear"
-          size="sm"
+          size="xs"
           @click="toggleFullScreen"
         >
           <template #icon="{ iconSize }">
@@ -37,21 +39,35 @@
       <dt-stack
         gap="500"
       >
-        <!-- Slots -->
-        <dtc-option-bar-member-group
-          :component="component"
-          :control-selector="getSlotControls"
-          :members="info.slots"
-          :values="options.slots"
-          @update:member="updateSlots"
-        />
-        <!-- Props -->
+        <dt-text
+          as="h2"
+          kind="headline"
+          text-box-trim="both"
+          :size="isFullscreen ? 'md' : 'sm'"
+        >
+          Props
+        </dt-text>
         <dtc-option-bar-member-group
           :component="component"
           :control-selector="(prop, value) => getBindingControls(prop, value, 'null')"
           :members="info.props"
           :values="options.props"
           @update:member="updateProps"
+        />
+        <dt-text
+          as="h2"
+          kind="headline"
+          text-box-trim="both"
+          :size="isFullscreen ? 'md' : 'sm'"
+        >
+          Slots
+        </dt-text>
+        <dtc-option-bar-member-group
+          :component="component"
+          :control-selector="getSlotControls"
+          :members="info.slots"
+          :values="options.slots"
+          @update:member="updateSlots"
         />
         <!-- Events -->
         <!--<dtc-option-bar-member-group
@@ -70,7 +86,7 @@ import DtcOptionBarMemberGroup from './option_bar_member_group.vue';
 import { ref } from 'vue';
 import { OPTIONS_UPDATE_EVENT } from '@/src/lib/constants';
 import { getControlByMemberType, getControlByValue } from '@/src/lib/control';
-import { DtButton, DtStack } from '@dialpad/dialtone-vue';
+import { DtButton, DtStack, DtText } from '@dialpad/dialtone-vue';
 import DtIconMinimize from '@dialpad/dialtone-icons/vue3/minimize';
 import DtIconExpand from '@dialpad/dialtone-icons/vue3/expand';
 

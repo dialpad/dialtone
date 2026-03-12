@@ -7,14 +7,7 @@
     @input="e => emit(VALUE_UPDATE_EVENT, e)"
   >
     <template #label>
-      <dt-text
-        kind="label"
-        size="xs"
-        tone="secondary"
-        class="d-input__label-text"
-      >
-        <slot />
-      </dt-text>
+      <slot />
     </template>
   </dt-select-menu>
 </template>
