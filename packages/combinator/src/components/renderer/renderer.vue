@@ -3,6 +3,7 @@
     :component="component"
     :bindings="options.bindings.get()"
     :events="info.events"
+    :disabled-members="disabledMembers"
     @event="(event, value) => emit('event', event, value)"
   >
     <template
@@ -58,6 +59,13 @@ const props = defineProps({
   library: {
     type: Object,
     required: true,
+  },
+  /**
+   * Set of member names that are currently disabled.
+   */
+  disabledMembers: {
+    type: Set,
+    default: () => new Set(),
   },
 });
 

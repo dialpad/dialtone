@@ -1,45 +1,29 @@
 <template>
-  <dt-stack
-    direction="row"
-    align="end"
+  <dt-input
+    :model-value="value"
+    :disabled="disabled"
+    type="number"
+    size="sm"
+    @input="e => emit(VALUE_UPDATE_EVENT, parseInt(e))"
   >
-    <div class="d-fl-grow1">
-      <dt-input
-        :model-value="inputValue"
-        :disabled="disabled || isNaN(value)"
-        type="number"
+    <template #labelSlot>
+      <dt-text
+        kind="label"
         size="sm"
-        @input="e => emit(VALUE_UPDATE_EVENT, parseInt(e))"
+        tone="secondary"
+        class="d-input__label-text"
       >
-        <template #labelSlot>
-          <dt-text
-            kind="label"
-            size="sm"
-            tone="secondary"
-            class="d-input__label-text"
-          >
-            <slot />
-          </dt-text>
-        </template>
-      </dt-input>
-    </div>
-    <div class="d-pl6">
-      <dt-checkbox
-        label="NaN"
-        :model-value="isNaN(value)"
-        :disabled="disabled"
-        @input="toggleNaN"
-      />
-    </div>
-  </dt-stack>
+        <slot />
+      </dt-text>
+    </template>
+  </dt-input>
 </template>
 
 <script setup>
-import { DtInput, DtCheckbox, DtText } from '@dialpad/dialtone-vue';
+import { DtInput, DtText } from '@dialpad/dialtone-vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
-import { computed } from 'vue';
 
-const props = defineProps({
+defineProps({
   value: {
     type: Number,
     default: () => Number(),
@@ -49,18 +33,6 @@ const props = defineProps({
     default: false,
   },
 });
-
-function isNaN (value) {
-  return Number.isNaN(value);
-}
-
-const inputValue = computed(() => {
-  return isNaN(props.value) ? null : props.value;
-});
-
-function toggleNaN (e) {
-  emit(VALUE_UPDATE_EVENT, e ? NaN : 0);
-}
 
 const emit = defineEmits([VALUE_UPDATE_EVENT]);
 </script>

@@ -34,6 +34,14 @@ const props = defineProps({
     type: undefined,
     required: true,
   },
+
+  /**
+   * Set of member names that are currently disabled.
+   */
+  disabledMembers: {
+    type: Set,
+    default: () => new Set(),
+  },
 });
 
 const emit = defineEmits([
@@ -86,9 +94,13 @@ function nextContainer () {
 function renderTarget () {
   const container = nextContainer();
 
+  const filteredBindings = Object.fromEntries(
+    Object.entries(props.bindings).filter(([name]) => !props.disabledMembers.has(name)),
+  );
+
   try {
     render(h(props.component, {
-      ...props.bindings,
+      ...filteredBindings,
       ...events.value,
     }, slots), container);
   } catch (e) {

@@ -8,6 +8,7 @@
         :info="info"
         :options="options"
         :library="library"
+        :disabled-members="disabledMembers"
         @event="(event, value) => triggerEvent(event, value)"
       />
       <dtc-option-bar
