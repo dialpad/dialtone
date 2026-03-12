@@ -1,12 +1,12 @@
 <template>
   <section
-    v-dt-scrollbar
     class="dialtone-playground__controls"
   >
-    <dt-stack gap="500">
+    <dt-stack class="d-h100p">
       <dt-stack
         gap="500"
         direction="row"
+        class="d-ps-sticky d-t0 d-bgc-secondary d-zi-base1 d-p16 d-pb8"
       >
         <dt-text
           as="h2"
@@ -37,51 +37,60 @@
         </dt-button>
       </dt-stack>
       <dt-stack
-        gap="500"
+        v-dt-scrollbar
+        class="d-fl1 d-px16 d-pb16"
       >
-        <dt-text
-          as="h2"
-          kind="headline"
-          text-box-trim="both"
-          :size="isFullscreen ? 'md' : 'sm'"
-        >
-          Props
-        </dt-text>
-        <dtc-option-bar-member-group
-          :component="component"
-          :control-selector="(prop, value) => getBindingControls(prop, value, 'null')"
-          :members="info.props"
-          :values="options.props"
-          :exclusion-rules="info.exclusions"
-          :prop-values="options.props"
-          member-group="props"
-          @update:member="updateProps"
-        />
-        <dt-text
-          as="h2"
-          kind="headline"
-          text-box-trim="both"
-          :size="isFullscreen ? 'md' : 'sm'"
-        >
-          Slots
-        </dt-text>
-        <dtc-option-bar-member-group
-          :component="component"
-          :control-selector="getSlotControls"
-          :members="info.slots"
-          :values="options.slots"
-          :exclusion-rules="info.exclusions"
-          :prop-values="options.props"
-          member-group="slots"
-          @update:member="updateSlots"
-        />
-        <!-- Events -->
-        <!--<dtc-option-bar-member-group
-          :component="component"
-          :members="info.events"
-          :values="options.events"
-          :control-selector="getEventControls"
-        />-->
+        <dt-stack gap="500">
+          <dt-stack>
+            <dt-text
+              tone="secondary"
+              as="h2"
+              kind="headline"
+              :size="isFullscreen ? 'md' : 'sm'"
+              class="d-ps-sticky d-t0 d-bgc-secondary d-zi-base1 d-py4"
+            >
+              Props
+            </dt-text>
+            <dtc-option-bar-member-group
+              :component="component"
+              :control-selector="(prop, value) => getBindingControls(prop, value, 'null')"
+              :members="info.props"
+              :values="options.props"
+              :exclusion-rules="info.exclusions"
+              :prop-values="options.props"
+              member-group="props"
+              @update:member="updateProps"
+            />
+          </dt-stack>
+          <dt-stack>
+            <dt-text
+              tone="secondary"
+              as="h2"
+              kind="headline"
+              :size="isFullscreen ? 'md' : 'sm'"
+              class="d-ps-sticky d-t0 d-bgc-secondary d-zi-base1 d-py4"
+            >
+              Slots
+            </dt-text>
+            <dtc-option-bar-member-group
+              :component="component"
+              :control-selector="getSlotControls"
+              :members="info.slots"
+              :values="options.slots"
+              :exclusion-rules="info.exclusions"
+              :prop-values="options.props"
+              member-group="slots"
+              @update:member="updateSlots"
+            />
+          </dt-stack>
+          <!-- Events -->
+          <!--<dtc-option-bar-member-group
+            :component="component"
+            :members="info.events"
+            :values="options.events"
+            :control-selector="getEventControls"
+          />-->
+        </dt-stack>
       </dt-stack>
     </dt-stack>
   </section>

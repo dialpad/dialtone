@@ -9,7 +9,6 @@
         :options="options"
         :library="library"
         :disabled-members="disabledMembers"
-
       />
       <dtc-option-bar
         v-if="!blueprint"
@@ -379,8 +378,6 @@ export default {
   }
 
   &__controls {
-    padding: var(--dt-spacing-200);
-    background-color: var(--dt-color-surface-secondary-opaque);
 
     @media screen and (min-width: 640px) {
       inline-size: var(--dt-size-875);
