@@ -52,6 +52,9 @@
           :control-selector="(prop, value) => getBindingControls(prop, value, 'null')"
           :members="info.props"
           :values="options.props"
+          :exclusion-rules="info.exclusions"
+          :prop-values="options.props"
+          member-group="props"
           @update:member="updateProps"
         />
         <dt-text
@@ -67,6 +70,9 @@
           :control-selector="getSlotControls"
           :members="info.slots"
           :values="options.slots"
+          :exclusion-rules="info.exclusions"
+          :prop-values="options.props"
+          member-group="slots"
           @update:member="updateSlots"
         />
         <!-- Events -->

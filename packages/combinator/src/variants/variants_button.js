@@ -1,4 +1,25 @@
 export default {
+  exclusions: [
+    {
+      when: { link: true },
+      hide: {
+        props: ['importance', 'kind', 'circle', 'loading', 'active', 'type', 'size'],
+      },
+    },
+    {
+      when: { kind: 'unstyled' },
+      hide: { props: ['importance'] },
+    },
+    {
+      when: { href: v => !!v },
+      hide: { props: ['type'] },
+    },
+    {
+      when: { to: v => !!v },
+      hide: { props: ['target', 'rel', 'type'] },
+    },
+  ],
+
   default: {
     slots: {
       default: {

@@ -238,6 +238,7 @@ function initializeInfo () {
 
   if (variantInfo) {
     Object.entries(variantInfo).forEach(([memberGroup, members]) => {
+      if (memberGroup === 'exclusions') return;
       Object.entries(members).forEach(([memberName, member]) => {
         const infoMember = info[memberGroup].find(infoMember => infoMember.name === memberName);
         if (infoMember) {
@@ -246,6 +247,8 @@ function initializeInfo () {
       });
     });
   }
+
+  info.exclusions = props.variants?.exclusions ?? [];
 
   return info;
 }

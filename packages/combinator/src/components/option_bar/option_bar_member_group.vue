@@ -18,6 +18,7 @@
           :v-model="isVModel(member)"
           :required="member.required"
           :locked="member.lockControl"
+          :disabled="member.disableControl"
           :args="{
             defaultValue: member.defaultValue,
             validValues: member.values,
@@ -39,6 +40,7 @@ import { computed, reactive } from 'vue';
 import { convert } from '@/src/lib/convert';
 import { controlMap } from '@/src/lib/control';
 import { buildDependencyMap, shouldHideProp } from '@/src/lib/prop_dependencies';
+import { shouldExclude } from '@/src/lib/exclusion_rules';
 
 const props = defineProps({
   /**
@@ -69,6 +71,27 @@ const props = defineProps({
   controlSelector: {
     type: Function,
     required: true,
+  },
+  /**
+   * Exclusion rules from the variant file.
+   */
+  exclusionRules: {
+    type: Array,
+    default: () => [],
+  },
+  /**
+   * Current prop values, used to evaluate exclusion rule conditions.
+   */
+  propValues: {
+    type: Object,
+    default: () => ({}),
+  },
+  /**
+   * The member group identifier ('props' or 'slots').
+   */
+  memberGroup: {
+    type: String,
+    default: 'props',
   },
 });
 
@@ -156,11 +179,15 @@ function extendMember (member) {
   const isDeprecated = !!member.tags?.deprecated
     || member.description?.startsWith('@deprecated');
 
+  const isExcluded = !member.required
+    && shouldExclude(key, props.memberGroup, props.exclusionRules, props.propValues);
+
   return {
     ...member,
     control,
     validControls,
-    hideControl: member.hideControl || dynamicHide || isDeprecated,
+    hideControl: member.hideControl || isDeprecated,
+    disableControl: dynamicHide || isExcluded,
   };
 }
 

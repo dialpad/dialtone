@@ -1,3 +1,4 @@
+import DtAvatar from './variants_avatar.js';
 import DtBadge from './variants_badge.js';
 import DtButton from './variants_button.js';
 import DtBreadcrumbs from './variants_breadcrumbs.js';
@@ -13,6 +14,7 @@ import DtToggle from './variants_toggle.js';
 
 export default function variants () {
   return {
+    DtAvatar,
     DtBadge,
     DtButton,
     DtBreadcrumbs,

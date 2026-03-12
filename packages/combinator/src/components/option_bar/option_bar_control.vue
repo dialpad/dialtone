@@ -6,12 +6,14 @@
       @update:value="updateValue"
     >
       <span v-dt-tooltip="description">
-        <span
+        <dt-text
+          as="span"
           class="d-tt-capitalize"
+          :tone="disabled ? 'muted' : undefined"
           data-qa="dtc-option-bar-control-label"
         >
           {{ controlLabel }}
-        </span>
+        </dt-text>
         <dt-icon-lock
           v-if="locked"
           class="d-pr4 d-fs10 d-ps-relative d-t1"
@@ -41,7 +43,7 @@
 
 <script setup>
 import DtIconLock from '@dialpad/dialtone-icons/vue3/lock';
-import { DtBadge } from '@dialpad/dialtone-vue';
+import { DtBadge, DtText } from '@dialpad/dialtone-vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { computed } from 'vue';
 import { deserializeControlValue, serializeControlValue } from '@/src/lib/control';
@@ -104,6 +106,13 @@ const props = defineProps({
     default: false,
   },
   /**
+   * Disable the control due to exclusion rules.
+   */
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  /**
    * Optional args to bind directly to the control.
    */
   args: {
@@ -135,7 +144,7 @@ const controlComponent = computed(() => {
 const controlArgs = computed(() => {
   return {
     value: controlValue.value,
-    disabled: props.locked,
+    disabled: props.locked || props.disabled,
     tags: props.tags,
     ...props.args,
   };
