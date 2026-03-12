@@ -38,6 +38,7 @@ import { MEMBER_UPDATE_EVENT } from '@/src/lib/constants';
 import { computed, reactive } from 'vue';
 import { convert } from '@/src/lib/convert';
 import { controlMap } from '@/src/lib/control';
+import { buildDependencyMap, shouldHideProp } from '@/src/lib/prop_dependencies';
 
 const props = defineProps({
   /**
@@ -72,6 +73,8 @@ const props = defineProps({
 });
 
 const emit = defineEmits([MEMBER_UPDATE_EVENT]);
+
+const dependencyMap = computed(() => buildDependencyMap(props.members));
 
 /**
  * The member map is a reactive data object that wraps each member and
@@ -147,10 +150,17 @@ function extendMember (member) {
 
   const [validControls, control] = props.controlSelector(member, value);
 
+  const dynamicHide = !member.required
+    && shouldHideProp(key, dependencyMap.value, props.values);
+
+  const isDeprecated = !!member.tags?.deprecated
+    || member.description?.startsWith('@deprecated');
+
   return {
     ...member,
     control,
     validControls,
+    hideControl: member.hideControl || dynamicHide || isDeprecated,
   };
 }
 
