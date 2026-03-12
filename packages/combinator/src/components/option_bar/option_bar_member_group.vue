@@ -46,6 +46,31 @@ import { isIconSlot } from '@/src/lib/icons';
 
 const ICON_SLOT_ORDER = ['startIcon', 'endIcon', 'blockStartIcon', 'blockEndIcon', 'icon'];
 
+const PROP_PRIORITY = [
+  'title', 'as', 'label', 'size', 'kind',
+  'importance', 'placement', 'tone', 'align', 'density', 'strength',
+  'type', 'underline', 'selected', 'active', 'disabled', 'color', 'description',
+];
+
+const SLOT_PRIORITY = ['start', 'end', 'inlineStart', 'inlineEnd', 'blockStart', 'blockEnd', 'leading', 'trailing'];
+
+function getPropTier (member) {
+  const priorityIdx = PROP_PRIORITY.indexOf(member.name);
+  if (priorityIdx !== -1) return [0, priorityIdx];
+  if (member.name?.startsWith('aria')) return [1, 0];
+  if (member.types?.includes('boolean')) return [2, 0];
+  if (member.name?.endsWith('Class')) return [4, 0];
+  return [3, 0];
+}
+
+function getSlotTier (member) {
+  if (member.name === 'default') return [0, 0];
+  if (isIconSlot(member)) return [1, ICON_SLOT_ORDER.indexOf(member.name)];
+  const priorityIdx = SLOT_PRIORITY.indexOf(member.name);
+  if (priorityIdx !== -1) return [2, priorityIdx];
+  return [3, 0];
+}
+
 const props = defineProps({
   /**
    * Target component.
@@ -114,18 +139,12 @@ const memberMap = computed(() => {
   const depMap = dependencyMap.value;
   const childSet = new Set(depMap.keys());
 
+  const getTier = props.memberGroup === 'slots' ? getSlotTier : getPropTier;
   const sortFn = (a, b) => {
-    if (a.name === 'default') return -1;
-    if (b.name === 'default') return 1;
-    if (a.required !== b.required) return a.required ? -1 : 1;
-
-    const aIcon = isIconSlot(a);
-    const bIcon = isIconSlot(b);
-    if (aIcon && bIcon) {
-      return ICON_SLOT_ORDER.indexOf(a.name) - ICON_SLOT_ORDER.indexOf(b.name);
-    }
-    if (aIcon !== bIcon) return aIcon ? -1 : 1;
-
+    const [aTier, aIdx] = getTier(a);
+    const [bTier, bIdx] = getTier(b);
+    if (aTier !== bTier) return aTier - bTier;
+    if (aIdx !== bIdx) return aIdx - bIdx;
     return (a.name ?? '').localeCompare(b.name ?? '');
   };
 
