@@ -9,7 +9,7 @@
         :options="options"
         :library="library"
         :disabled-members="disabledMembers"
-        @event="(event, value) => triggerEvent(event, value)"
+
       />
       <dtc-option-bar
         v-if="!blueprint"
@@ -21,7 +21,7 @@
     </div>
     <div class="dialtone-playground__end">
       <dtc-code-panel
-        ref="codePanel"
+
         :info="info"
         :options="options"
         :settings="settings"
@@ -112,7 +112,6 @@ const props = defineProps({
 const selectedVariant = ref('default');
 const isFullScreen = ref(false);
 // const showUnsupportedWarning = ref(!supportedComponents.includes(props.component?.name));
-const codePanel = ref();
 
 /**
  * Container for all extended component information for the target component.
@@ -274,10 +273,6 @@ function getInitialValues (info) {
 // function hideUnsupportedMessage () {
 //   showUnsupportedWarning.value = false;
 // }
-
-function triggerEvent (event, value) {
-  codePanel.value?.trigger(event, value);
-}
 
 function toggleFullScreen ($event) {
   if ($event) {

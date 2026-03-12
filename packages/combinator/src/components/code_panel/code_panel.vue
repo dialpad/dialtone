@@ -7,26 +7,19 @@
     ]"
   >
     <template #content>
-      <div class="dtc-theme__canvas">
-        <dtc-tab-panel
-          selected="code"
-          :generate-label="generateLabel"
-        >
-          <template #code>
-            <dtc-code-editor
-              :info="info"
-              :options="options"
-              :theme="settings.root.theme"
-              :verbose="settings.code.verbose"
-              :indent-spaces="settings.code.indent"
-              :disabled-members="disabledMembers"
-              @update:options="e => emit(OPTIONS_UPDATE_EVENT, e)"
-            />
-          </template>
-          <template #events>
-            <dtc-event-console ref="eventConsole" />
-          </template>
-        </dtc-tab-panel>
+      <div
+        v-dt-scrollbar
+        class="dtc-theme__canvas d-py8 d-px16 d-hmx216"
+      >
+        <dtc-code-editor
+          :info="info"
+          :options="options"
+          :theme="settings.root.theme"
+          :verbose="settings.code.verbose"
+          :indent-spaces="settings.code.indent"
+          :disabled-members="disabledMembers"
+          @update:options="e => emit(OPTIONS_UPDATE_EVENT, e)"
+        />
       </div>
     </template>
     <template #overlay>
@@ -45,13 +38,10 @@
 </template>
 
 <script setup>
-import DtcTabPanel from '@/src/components/tools/tab_panel.vue';
-import DtcEventConsole from '@/src/components/event_console/event_console.vue';
 import DtcCodeEditor from '@/src/components/code_editor/code_editor.vue';
 import DtcOverlay from '@/src/components/tools/overlay.vue';
 
 import { OPTIONS_UPDATE_EVENT } from '@/src/lib/constants';
-import { ref } from 'vue';
 
 defineProps({
   /**
@@ -88,18 +78,6 @@ const emit = defineEmits([
   OPTIONS_UPDATE_EVENT,
 ]);
 
-const eventConsole = ref();
-defineExpose({
-  trigger: (event, value) => eventConsole.value.trigger(event, value),
-});
-
-function generateLabel (slot, capitalCase) {
-  const label = capitalCase(slot);
-  switch (slot) {
-    case 'events': return `${label} (${eventConsole.value?.entryCount})`;
-    default: return label;
-  }
-}
 </script>
 
 <script>
