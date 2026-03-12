@@ -17,24 +17,43 @@
         >
           {{ component.name }}
         </dt-text>
-        <dt-button
-          v-dt-tooltip="`Fullscreen`"
-          kind="muted"
-          importance="clear"
-          size="xs"
-          @click="toggleFullScreen"
+        <dt-stack
+          direction="row"
+          gap="200"
         >
-          <template #icon="{ iconSize }">
-            <dt-icon-minimize
-              v-if="isFullscreen"
-              :size="iconSize"
-            />
-            <dt-icon-expand
-              v-else
-              :size="iconSize"
-            />
-          </template>
-        </dt-button>
+          <dt-button
+            v-if="hasChanges"
+            v-dt-tooltip="`Reset`"
+            kind="muted"
+            importance="clear"
+            size="xs"
+            @click="resetOptions"
+          >
+            <template #icon="{ iconSize }">
+              <dt-icon-refresh
+                :size="iconSize"
+              />
+            </template>
+          </dt-button>
+          <dt-button
+            v-dt-tooltip="`Fullscreen`"
+            kind="muted"
+            importance="clear"
+            size="xs"
+            @click="toggleFullScreen"
+          >
+            <template #icon="{ iconSize }">
+              <dt-icon-minimize
+                v-if="isFullscreen"
+                :size="iconSize"
+              />
+              <dt-icon-expand
+                v-else
+                :size="iconSize"
+              />
+            </template>
+          </dt-button>
+        </dt-stack>
       </dt-stack>
       <dt-stack
         v-dt-scrollbar
@@ -45,7 +64,10 @@
           :direction="isFullscreen ? 'row' : ''"
           :align="isFullscreen ? 'start' : ''"
         >
-          <dt-stack>
+          <dt-stack
+            v-if="info.props?.length"
+            gap="300"
+          >
             <dt-text
               tone="secondary"
               as="h3"
@@ -68,7 +90,10 @@
               />
             </dt-stack>
           </dt-stack>
-          <dt-stack>
+          <dt-stack
+            v-if="info.slots?.length"
+            gap="300"
+          >
             <dt-text
               tone="secondary"
               as="h3"
@@ -106,15 +131,16 @@
 
 <script setup>
 import DtcOptionBarMemberGroup from './option_bar_member_group.vue';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { OPTIONS_UPDATE_EVENT } from '@/src/lib/constants';
 import { getControlByMemberType, getControlByValue } from '@/src/lib/control';
 import { isIconSlot } from '@/src/lib/icons';
 import { DtButton, DtStack, DtText } from '@dialpad/dialtone-vue';
 import DtIconMinimize from '@dialpad/dialtone-icons/vue3/minimize';
 import DtIconExpand from '@dialpad/dialtone-icons/vue3/expand';
+import DtIconRefresh from '@dialpad/dialtone-icons/vue3/refresh';
 
-defineProps({
+const props = defineProps({
   /**
    * Component to render.
    */
@@ -141,6 +167,18 @@ defineProps({
 const emit = defineEmits([OPTIONS_UPDATE_EVENT, 'toggle-full-screen']);
 
 const isFullscreen = ref(false);
+
+const hasChanges = computed(() => {
+  const memberGroups = ['props', 'slots', 'attributes'];
+  for (const group of memberGroups) {
+    const members = props.info[group];
+    if (!members) continue;
+    for (const member of members) {
+      if (props.options[group]?.[member.name] !== member.initialValue) return true;
+    }
+  }
+  return false;
+});
 
 const toggleFullScreen = () => {
   isFullscreen.value = !isFullscreen.value;
@@ -213,6 +251,19 @@ function getStaticControl (control) {
 function updateMember (memberGroup, { member, value }) {
   emit(OPTIONS_UPDATE_EVENT, (options) => {
     options[memberGroup][member] = value;
+  });
+}
+
+function resetOptions () {
+  const memberGroups = ['props', 'slots', 'attributes'];
+  emit(OPTIONS_UPDATE_EVENT, (options) => {
+    for (const group of memberGroups) {
+      const members = props.info[group];
+      if (!members) continue;
+      for (const member of members) {
+        options[group][member.name] = member.initialValue;
+      }
+    }
   });
 }
 

@@ -332,6 +332,7 @@ export default {
   & {
     display:none;
     flex-direction: column;
+    margin-block-start: var(--dt-spacing-200);
 
     @media screen and (min-width: 640px) {
       display: flex;
