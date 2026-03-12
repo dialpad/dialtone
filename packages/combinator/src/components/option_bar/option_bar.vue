@@ -6,7 +6,7 @@
       <dt-stack
         gap="500"
         direction="row"
-        class="d-ps-sticky d-t0 d-bgc-secondary d-zi-base1 d-p16 d-pb8"
+        class="d-ps-sticky d-t0 d-bgc-secondary d-zi-base1 d-p16 d-pb4"
       >
         <dt-text
           as="h2"
@@ -48,44 +48,48 @@
           <dt-stack>
             <dt-text
               tone="secondary"
-              as="h2"
+              as="h3"
               kind="headline"
-              :size="isFullscreen ? 'md' : 'sm'"
+              size="sm"
               class="d-ps-sticky d-t0 d-bgc-secondary d-zi-base1 d-pt0 d-pb2"
             >
               Props
             </dt-text>
-            <dtc-option-bar-member-group
-              :component="component"
-              :control-selector="(prop, value) => getBindingControls(prop, value, 'null')"
-              :members="info.props"
-              :values="options.props"
-              :exclusion-rules="info.exclusions"
-              :prop-values="options.props"
-              member-group="props"
-              @update:member="updateProps"
-            />
+            <dt-stack gap="450">
+              <dtc-option-bar-member-group
+                :component="component"
+                :control-selector="(prop, value) => getBindingControls(prop, value, 'null')"
+                :members="info.props"
+                :values="options.props"
+                :exclusion-rules="info.exclusions"
+                :prop-values="options.props"
+                member-group="props"
+                @update:member="updateProps"
+              />
+            </dt-stack>
           </dt-stack>
           <dt-stack>
             <dt-text
               tone="secondary"
-              as="h2"
+              as="h3"
               kind="headline"
-              :size="isFullscreen ? 'md' : 'sm'"
+              size="sm"
               class="d-ps-sticky d-t0 d-bgc-secondary d-zi-base1 d-pt0 d-pb2"
             >
               Slots
             </dt-text>
-            <dtc-option-bar-member-group
-              :component="component"
-              :control-selector="getSlotControls"
-              :members="info.slots"
-              :values="options.slots"
-              :exclusion-rules="info.exclusions"
-              :prop-values="options.props"
-              member-group="slots"
-              @update:member="updateSlots"
-            />
+            <dt-stack gap="450">
+              <dtc-option-bar-member-group
+                :component="component"
+                :control-selector="getSlotControls"
+                :members="info.slots"
+                :values="options.slots"
+                :exclusion-rules="info.exclusions"
+                :prop-values="options.props"
+                member-group="slots"
+                @update:member="updateSlots"
+              />
+            </dt-stack>
           </dt-stack>
           <!-- Events -->
           <!--<dtc-option-bar-member-group

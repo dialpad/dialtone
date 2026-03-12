@@ -1,37 +1,34 @@
 <template>
-  <div>
-    <template
-      v-for="(member, key) in memberMap"
-      :key="key"
+  <template
+    v-for="(member, key) in memberMap"
+    :key="key"
+  >
+    <div
+      v-if="!member.hideControl"
+      data-qa="dtc-option-bar-member-group-control"
     >
-      <div
-        v-if="!member.hideControl"
-        class="d-py6"
-        data-qa="dtc-option-bar-member-group-control"
-      >
-        <dtc-option-bar-control
-          :value="values[key]"
-          :label="member.label"
-          :control-data="getControlData(member)"
-          :valid-controls="member.validControls"
-          :description="member.description"
-          :v-model="isVModel(member)"
-          :required="member.required"
-          :locked="member.lockControl"
-          :disabled="member.disableControl"
-          :args="{
-            defaultValue: member.defaultValue ?? member.initialValue,
-            validValues: member.values,
-            validTypes: member.types,
-            tags: member.tags,
-            bindings: member.bindings,
-          }"
-          @update:value="e => updateMember(e, key)"
-          @update:control="e => updateControl(e, key)"
-        />
-      </div>
-    </template>
-  </div>
+      <dtc-option-bar-control
+        :value="values[key]"
+        :label="member.label"
+        :control-data="getControlData(member)"
+        :valid-controls="member.validControls"
+        :description="member.description"
+        :v-model="isVModel(member)"
+        :required="member.required"
+        :locked="member.lockControl"
+        :disabled="member.disableControl"
+        :args="{
+          defaultValue: member.defaultValue ?? member.initialValue,
+          validValues: member.values,
+          validTypes: member.types,
+          tags: member.tags,
+          bindings: member.bindings,
+        }"
+        @update:value="e => updateMember(e, key)"
+        @update:control="e => updateControl(e, key)"
+      />
+    </div>
+  </template>
 </template>
 
 <script setup>
@@ -43,6 +40,7 @@ import { controlMap } from '@/src/lib/control';
 import { buildDependencyMap, shouldHideProp } from '@/src/lib/prop_dependencies';
 import { shouldExclude } from '@/src/lib/exclusion_rules';
 import { isIconSlot } from '@/src/lib/icons';
+import { DtStack } from '@dialpad/dialtone-vue';
 
 const ICON_SLOT_ORDER = ['startIcon', 'endIcon', 'blockStartIcon', 'blockEndIcon', 'icon'];
 
