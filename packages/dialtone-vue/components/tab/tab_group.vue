@@ -20,8 +20,8 @@
       role="tablist"
       :aria-label="label"
       :aria-orientation="orientation"
-      @keyup.left="tabLeft"
-      @keyup.right="tabRight"
+      @keydown.left="tabLeft"
+      @keydown.right="tabRight"
       @keydown.up="tabUp"
       @keydown.down="tabDown"
       @keyup.enter="selectTab"
@@ -129,7 +129,7 @@ export default {
     size: {
       type: String,
       default: 'default',
-      validate (size) {
+      validator (size) {
         return TAB_LIST_SIZES.includes(size);
       },
     },

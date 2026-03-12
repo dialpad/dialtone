@@ -71,6 +71,7 @@
     <span
       ref="tabLabel"
       class="d-tablist__item-label"
+      data-qa="dt-tab-label"
     >
       <slot />
     </span>
