@@ -42,6 +42,9 @@ import { convert } from '@/src/lib/convert';
 import { controlMap } from '@/src/lib/control';
 import { buildDependencyMap, shouldHideProp } from '@/src/lib/prop_dependencies';
 import { shouldExclude } from '@/src/lib/exclusion_rules';
+import { isIconSlot } from '@/src/lib/icons';
+
+const ICON_SLOT_ORDER = ['startIcon', 'endIcon', 'blockStartIcon', 'blockEndIcon', 'icon'];
 
 const props = defineProps({
   /**
@@ -108,12 +111,41 @@ const dependencyMap = computed(() => buildDependencyMap(props.members));
  * @type {object}
  */
 const memberMap = computed(() => {
-  const sorted = [...props.members].sort((a, b) => {
+  const depMap = dependencyMap.value;
+  const childSet = new Set(depMap.keys());
+
+  const sortFn = (a, b) => {
     if (a.name === 'default') return -1;
     if (b.name === 'default') return 1;
     if (a.required !== b.required) return a.required ? -1 : 1;
+
+    const aIcon = isIconSlot(a);
+    const bIcon = isIconSlot(b);
+    if (aIcon && bIcon) {
+      return ICON_SLOT_ORDER.indexOf(a.name) - ICON_SLOT_ORDER.indexOf(b.name);
+    }
+    if (aIcon !== bIcon) return aIcon ? -1 : 1;
+
     return (a.name ?? '').localeCompare(b.name ?? '');
-  });
+  };
+
+  // Sort non-child members normally
+  const parents = [...props.members]
+    .filter(m => !childSet.has(m.name))
+    .sort(sortFn);
+
+  // Build parent → children map, sorted alphabetically
+  const childrenByParent = new Map();
+  for (const [child, parent] of depMap) {
+    if (!childrenByParent.has(parent)) childrenByParent.set(parent, []);
+    childrenByParent.get(parent).push(
+      props.members.find(m => m.name === child),
+    );
+  }
+  childrenByParent.forEach(arr => arr.sort(sortFn));
+
+  // Flatten: each parent followed by its children
+  const sorted = parents.flatMap(m => [m, ...(childrenByParent.get(m.name) || [])]);
   return reactive({
     ...Object.fromEntries(
       sorted.map(member => {
