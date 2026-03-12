@@ -9,7 +9,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["profile picture", "user image", "profile image", "d-avatar", "DtAvatar", "dt-avatar", "initials", "user icon", "persona"]
 ---
 
-<code-well-header>
+<!-- <code-well-header>
   <dt-stack direction="row" align="center" gap="500">
     <dt-avatar size="lg">
       <template #icon>
@@ -19,9 +19,9 @@ keywords: ["profile picture", "user image", "profile image", "d-avatar", "DtAvat
     <dt-avatar size="lg" full-name="dp" seed="user-123" presence="busy" />
     <dt-avatar size="lg" image-src="/assets/images/person.png" image-alt="avatar user" presence="active" />
   </dt-stack>
-</code-well-header>
+</code-well-header> -->
 
-<!-- <component-combinator component-name="DtAvatar" /> -->
+<component-combinator component-name="DtAvatar" />
 
 ## Usage
 

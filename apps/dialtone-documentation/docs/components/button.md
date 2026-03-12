@@ -9,11 +9,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["btn","click","action","cta","d-button","DtButton","dt-button"]
 ---
 
-<code-well-header>
-  <dt-button> Place Call </dt-button>
-</code-well-header>
-
-<!-- <component-combinator component-name="DtButton" /> -->
+<component-combinator component-name="DtButton" />
 
 ## Usage
 
