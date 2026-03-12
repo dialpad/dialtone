@@ -604,6 +604,33 @@ const checkRadioDisabled = ref(false);
         @change="size = $event"
       />
     </dt-stack>
+    <dt-stack gap="200" hidden>
+      <dt-text as="h3" kind="headline" size="md">
+        Backwards-compatible old tabs html
+      </dt-text>
+      <div>
+        <div class="d-tablist" role="tablist" aria-label=""><button
+            class="base-button__button d-btn d-btn--primary d-tab d-tab--selected" data-qa="dt-tab" aria-label=""
+            type="button" id="dt-tab-1" role="tab" aria-selected="true" aria-controls="dt-panel-2"
+            tabindex="0"><!----><!----><span data-qa="dt-button-label" class="base-button__label d-btn__label">
+              <p>
+                First tab
+              </p>
+            </span></button> <button class="base-button__button d-btn d-btn--primary d-tab" data-qa="dt-tab" aria-label=""
+            type="button" id="dt-tab-3" role="tab" aria-selected="false" aria-controls="dt-panel-4"
+            tabindex="-1"><!----><!----><span data-qa="dt-button-label" class="base-button__label d-btn__label">
+              <p>
+                Second tab
+              </p>
+            </span></button> <button class="base-button__button d-btn d-btn--primary d-tab" data-qa="dt-tab"
+            aria-label="Third Label" type="button" id="dt-tab-5" role="tab" aria-selected="false" aria-controls="dt-panel-6"
+            tabindex="-1"><!----><!----><span data-qa="dt-button-label" class="base-button__label d-btn__label">
+              <p>
+                Third tab
+              </p>
+            </span></button></div>
+      </div>
+    </dt-stack>
     <dt-tab-group :borderless="borderless" :kind="muted ? 'muted' : 'default'" :outlined="outlined" :size="size" :activation-mode="selectOnFocus ? 'auto' : 'manual'">
       <template #tabs>
         <dt-tab id="1" panel-id="2" selected leading-class="d-pl8" trailing-class="d-pr8" :label-class="resolvedTabLabelClass">
