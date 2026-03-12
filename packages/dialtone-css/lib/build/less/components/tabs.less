@@ -231,10 +231,11 @@
     &::after {
         position: absolute;
         background-color: var(--tab-selected-indicator);
+        border-radius: var(--dt-size-radius-pill);
         content: '';
         block-size: var(--dt-size-200);
         inset-block-start: calc(calc(100% + var(--tablist-padding-bottom)) - var(--dt-size-100));
-        inset-inline: 0;
+        inset-inline: var(--dt-size-100-negative);
     }
 }
 
@@ -275,7 +276,7 @@
 }
 
 :where(.d-tablist--vertical) .d-tab--is-selected::after {
-    inset-block: 0;
+    inset-block: var(--dt-size-100-negative);
     inset-inline: auto 0;
     inset-inline-start: calc(100% + var(--dt-size-350));
     block-size: auto;
