@@ -216,7 +216,7 @@ describe('DtTabGroup Tests', () => {
       describe('On keyup left', () => {
         beforeEach(async () => {
           returnFirstEl(tabs.at(0).vm.$el).focus();
-          await tabList.trigger('keyup.left');
+          await tabList.trigger('keydown.left');
           await tabList.trigger('keyup.space');
         });
 
@@ -229,8 +229,8 @@ describe('DtTabGroup Tests', () => {
       describe('On double keyup left and space', () => {
         beforeEach(async () => {
           returnFirstEl(tabs.at(0).vm.$el).focus();
-          await tabList.trigger('keyup.left');
-          await tabList.trigger('keyup.left');
+          await tabList.trigger('keydown.left');
+          await tabList.trigger('keydown.left');
           await tabList.trigger('keyup.space');
         });
 
@@ -243,7 +243,7 @@ describe('DtTabGroup Tests', () => {
       describe('On right and enter', () => {
         beforeEach(async () => {
           returnFirstEl(tabs.at(0).vm.$el).focus();
-          await tabList.trigger('keyup.right');
+          await tabList.trigger('keydown.right');
           await tabList.trigger('keyup.enter');
         });
 
@@ -256,8 +256,8 @@ describe('DtTabGroup Tests', () => {
       describe('On double keyup right and enter', () => {
         beforeEach(async () => {
           returnFirstEl(tabs.at(0).vm.$el).focus();
-          await tabList.trigger('keyup.right');
-          await tabList.trigger('keyup.right');
+          await tabList.trigger('keydown.right');
+          await tabList.trigger('keydown.right');
           await tabList.trigger('keyup.enter');
         });
 
@@ -319,7 +319,7 @@ describe('DtTabGroup Tests', () => {
 
       it('should land on disabled tab on keyup right', async () => {
         returnFirstEl(tabs.at(0).vm.$el).focus();
-        await tabList.trigger('keyup.right');
+        await tabList.trigger('keydown.right');
 
         expect(document.activeElement.id).toBe('dt-tab-3');
         expect(tabs.at(0).attributes('aria-selected')).toBe('true');
@@ -327,7 +327,7 @@ describe('DtTabGroup Tests', () => {
 
       it('should land on disabled tab on keyup left', async () => {
         returnFirstEl(tabs.at(2).vm.$el).focus();
-        await tabList.trigger('keyup.left');
+        await tabList.trigger('keydown.left');
 
         expect(document.activeElement.id).toBe('dt-tab-3');
         expect(tabs.at(0).attributes('aria-selected')).toBe('true');
@@ -335,7 +335,7 @@ describe('DtTabGroup Tests', () => {
 
       it('should not select disabled tab on enter', async () => {
         returnFirstEl(tabs.at(0).vm.$el).focus();
-        await tabList.trigger('keyup.right');
+        await tabList.trigger('keydown.right');
         await tabList.trigger('keyup.enter');
 
         expect(tabs.at(0).attributes('aria-selected')).toBe('true');
@@ -345,7 +345,7 @@ describe('DtTabGroup Tests', () => {
 
       it('should not select disabled tab on space', async () => {
         returnFirstEl(tabs.at(0).vm.$el).focus();
-        await tabList.trigger('keyup.right');
+        await tabList.trigger('keydown.right');
         await tabList.trigger('keyup.space');
 
         expect(tabs.at(0).attributes('aria-selected')).toBe('true');
@@ -437,7 +437,7 @@ describe('DtTabGroup Tests', () => {
 
       it('should focus disabled tab but not auto-select it', async () => {
         returnFirstEl(tabs.at(0).vm.$el).focus();
-        await tabList.trigger('keyup.right');
+        await tabList.trigger('keydown.right');
 
         expect(document.activeElement.id).toBe('dt-tab-3');
         expect(tabs.at(0).attributes('aria-selected')).toBe('true');
@@ -446,8 +446,8 @@ describe('DtTabGroup Tests', () => {
 
       it('should auto-select enabled tab', async () => {
         returnFirstEl(tabs.at(0).vm.$el).focus();
-        await tabList.trigger('keyup.right');
-        await tabList.trigger('keyup.right');
+        await tabList.trigger('keydown.right');
+        await tabList.trigger('keydown.right');
 
         expect(document.activeElement.id).toBe('dt-tab-5');
         expect(tabs.at(2).attributes('aria-selected')).toBe('true');
@@ -482,7 +482,7 @@ describe('DtTabGroup Tests', () => {
 
     it('should select tab on arrow right', async () => {
       returnFirstEl(tabs.at(0).vm.$el).focus();
-      await tabList.trigger('keyup.right');
+      await tabList.trigger('keydown.right');
 
       expect(tabs.at(1).attributes('aria-selected')).toBe('true');
       expect(wrapper.emitted('change').length).toBe(1);
@@ -490,7 +490,7 @@ describe('DtTabGroup Tests', () => {
 
     it('should select tab on arrow left', async () => {
       returnFirstEl(tabs.at(0).vm.$el).focus();
-      await tabList.trigger('keyup.left');
+      await tabList.trigger('keydown.left');
 
       expect(tabs.at(2).attributes('aria-selected')).toBe('true');
       expect(wrapper.emitted('change').length).toBe(1);
@@ -534,7 +534,7 @@ describe('DtTabGroup Tests', () => {
         let lastPanel;
         beforeEach(async () => {
           returnFirstEl(tabs.at(0).vm.$el).focus();
-          await tabList.trigger('keyup.left');
+          await tabList.trigger('keydown.left');
           await tabList.trigger('keyup.space');
           lastTab = tabs.at(2).attributes();
           lastPanel = tabPanels.at(2).attributes();
@@ -549,7 +549,7 @@ describe('DtTabGroup Tests', () => {
       describe('attributes after keyup right', () => {
         beforeEach(async () => {
           returnFirstEl(tabs.at(0).vm.$el).focus();
-          await tabList.trigger('keyup.right');
+          await tabList.trigger('keydown.right');
           await tabList.trigger('keyup.enter');
         });
 
@@ -641,7 +641,7 @@ describe('DtTabGroup Tests', () => {
 
       it('should NOT navigate on arrow left', async () => {
         returnFirstEl(tabs.at(0).vm.$el).focus();
-        await tabList.trigger('keyup.left');
+        await tabList.trigger('keydown.left');
         await tabList.trigger('keyup.enter');
 
         expect(wrapper.emitted('change')).toBeUndefined();
@@ -649,7 +649,7 @@ describe('DtTabGroup Tests', () => {
 
       it('should NOT navigate on arrow right', async () => {
         returnFirstEl(tabs.at(0).vm.$el).focus();
-        await tabList.trigger('keyup.right');
+        await tabList.trigger('keydown.right');
         await tabList.trigger('keyup.enter');
 
         expect(wrapper.emitted('change')).toBeUndefined();
