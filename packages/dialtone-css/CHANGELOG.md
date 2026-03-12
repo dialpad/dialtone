@@ -1,3 +1,31 @@
+## [8.75.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.75.0...dialtone-css/v8.75.1) (2026-03-12)
+
+
+### Bug Fixes
+
+* **Popover:** DP-175009 revert visibility CSS that caused tippy-box click stealing ([#1119](https://github.com/dialpad/dialtone/issues/1119)) ([82ffcb6](https://github.com/dialpad/dialtone/commit/82ffcb64c3dbd4d80a170385cdcc4aa4b5218a83))
+
+# [8.75.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.74.0...dialtone-css/v8.75.0) (2026-03-09)
+
+
+### Features
+
+* **Button:** DLT-3086 update loading state to use dt-loader component ([#1111](https://github.com/dialpad/dialtone/issues/1111)) ([621c49a](https://github.com/dialpad/dialtone/commit/621c49a451dd653ad24bb4641f5cff36501670e3))
+
+# [8.74.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.73.0...dialtone-css/v8.74.0) (2026-03-06)
+
+
+### Features
+
+* **Loader,progress Circle:** NO-JIRA polish DtProgressCircle visual and align DtLoader visual with DtProgressCircle ([#1102](https://github.com/dialpad/dialtone/issues/1102)) ([7b9e9b6](https://github.com/dialpad/dialtone/commit/7b9e9b6d699515805bec979c7ffdf5b5f737b316))
+* **Progress Circle:** DLT-2983 add progress-circle component ([#1098](https://github.com/dialpad/dialtone/issues/1098)) ([c0f0e40](https://github.com/dialpad/dialtone/commit/c0f0e403acfd76d8db7dbe002862330d71571d5f))
+
+
+### Reverts
+
+* NO-JIRA revert progress circle polish commits for re-PR ([#1101](https://github.com/dialpad/dialtone/issues/1101)) ([a212c41](https://github.com/dialpad/dialtone/commit/a212c41e5c857ebabfacc9670e7a7054dcd9c6de))
+
+
 # [8.74.0-next.4](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.74.0-next.3...dialtone-css/v8.74.0-next.4) (2026-03-10)
 
 
@@ -71,6 +99,7 @@
 * **Tokens:** DLT-2937 introduce spacing and layout token systems ([#1045](https://github.com/dialpad/dialtone/issues/1045)) ([de23e12](https://github.com/dialpad/dialtone/commit/de23e1260a2b2f7e96469255147c86e2522c632e))
 * **Tokens:** update color ramps and consumer color migration tools DLT-3004 DLT-3005 DLT-3006 DLT-3007 DLT-3008 ([#1054](https://github.com/dialpad/dialtone/issues/1054)) ([28cb1de](https://github.com/dialpad/dialtone/commit/28cb1de09ea18abd8ffa79e99d23866d861df111))
 * **Typography, Tokens:** DLT-2856 DLT-2857 next typography system ([#994](https://github.com/dialpad/dialtone/issues/994)) ([d744e97](https://github.com/dialpad/dialtone/commit/d744e97e86796a4de2153e43fa521384da8e8848))
+
 
 # [8.73.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.72.0...dialtone-css/v8.73.0) (2026-02-19)
 

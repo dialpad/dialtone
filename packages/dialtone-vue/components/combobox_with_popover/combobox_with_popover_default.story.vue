@@ -1,5 +1,5 @@
 <template>
-  <dt-recipe-combobox-with-popover
+  <dt-combobox-with-popover
     ref="comboboxWithPopover"
     :label="$attrs.label"
     :label-visible="$attrs.labelVisible"
@@ -76,20 +76,20 @@
         <dt-checkbox label="Apply primary number to assigned Contact Centers" />
       </dt-stack>
     </template>
-  </dt-recipe-combobox-with-popover>
+  </dt-combobox-with-popover>
 </template>
 
 <script>
-import DtRecipeComboboxWithPopover from './combobox_with_popover.vue';
+import DtComboboxWithPopover from './combobox_with_popover.vue';
 import DtInput from '@/components/input/input.vue';
 import DtListItem from '@/components/list_item/list_item.vue';
 import DtCheckbox from '@/components/checkbox/checkbox.vue';
 import { DtStack } from '@/components/stack';
 
 export default {
-  name: 'DtRecipeComboboxWithPopoverDefault',
+  name: 'DtComboboxWithPopoverDefault',
   components: {
-    DtRecipeComboboxWithPopover,
+    DtComboboxWithPopover,
     DtInput,
     DtListItem,
     DtCheckbox,

@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import DtRecipeMotionText from './motion_text.vue';
+import DtMotionText from './motion_text.vue';
 
 // Constants
 const baseProps = {
@@ -7,7 +7,7 @@ const baseProps = {
   autoStart: false,
 };
 
-describe('DtRecipeMotionText Tests', () => {
+describe('DtMotionText Tests', () => {
   // Wrappers
   let wrapper;
 
@@ -18,7 +18,7 @@ describe('DtRecipeMotionText Tests', () => {
 
   // Helpers
   const _setWrappers = () => {
-    wrapper = mount(DtRecipeMotionText, {
+    wrapper = mount(DtMotionText, {
       props,
       attrs,
       slots,
@@ -59,43 +59,43 @@ describe('DtRecipeMotionText Tests', () => {
       });
 
       it('should have base class', () => {
-        expect(wrapper.classes()).toContain('dt-recipe-motion-text');
+        expect(wrapper.classes()).toContain('d-motion-text');
       });
 
       it('should apply default animation mode class', () => {
-        expect(wrapper.classes()).toContain('dt-recipe-motion-text--gradient-in');
+        expect(wrapper.classes()).toContain('d-motion-text--gradient-in');
       });
     });
 
     describe('Animation mode variants', () => {
       it('should apply gradient-in class', async () => {
         await wrapper.setProps({ animationMode: 'gradient-in' });
-        expect(wrapper.classes()).toContain('dt-recipe-motion-text--gradient-in');
+        expect(wrapper.classes()).toContain('d-motion-text--gradient-in');
       });
 
       it('should apply fade-in class', async () => {
         await wrapper.setProps({ animationMode: 'fade-in' });
-        expect(wrapper.classes()).toContain('dt-recipe-motion-text--fade-in');
+        expect(wrapper.classes()).toContain('d-motion-text--fade-in');
       });
 
       it('should apply slide-in class', async () => {
         await wrapper.setProps({ animationMode: 'slide-in' });
-        expect(wrapper.classes()).toContain('dt-recipe-motion-text--slide-in');
+        expect(wrapper.classes()).toContain('d-motion-text--slide-in');
       });
 
       it('should apply gradient-sweep class', async () => {
         await wrapper.setProps({ animationMode: 'gradient-sweep' });
-        expect(wrapper.classes()).toContain('dt-recipe-motion-text--gradient-sweep');
+        expect(wrapper.classes()).toContain('d-motion-text--gradient-sweep');
       });
 
       it('should apply shimmer class', async () => {
         await wrapper.setProps({ animationMode: 'shimmer' });
-        expect(wrapper.classes()).toContain('dt-recipe-motion-text--shimmer');
+        expect(wrapper.classes()).toContain('d-motion-text--shimmer');
       });
 
       it('should apply none class', async () => {
         await wrapper.setProps({ animationMode: 'none' });
-        expect(wrapper.classes()).toContain('dt-recipe-motion-text--none');
+        expect(wrapper.classes()).toContain('d-motion-text--none');
       });
     });
 
@@ -125,9 +125,9 @@ describe('DtRecipeMotionText Tests', () => {
     describe('CSS custom properties', () => {
       it('should set duration CSS variables', () => {
         const style = wrapper.attributes('style');
-        expect(style).toContain('--dt-recipe-motion-text-duration');
-        expect(style).toContain('--dt-recipe-motion-text-char-duration');
-        expect(style).toContain('--dt-recipe-motion-text-word-duration');
+        expect(style).toContain('--d-motion-text-duration');
+        expect(style).toContain('--d-motion-text-char-duration');
+        expect(style).toContain('--d-motion-text-word-duration');
       });
     });
 
@@ -135,13 +135,13 @@ describe('DtRecipeMotionText Tests', () => {
       it('should add looped class when loop is true', async () => {
         await wrapper.setProps({ loop: true });
         await wrapper.vm.$nextTick();
-        expect(wrapper.classes()).toContain('dt-recipe-motion-text--looped');
+        expect(wrapper.classes()).toContain('d-motion-text--looped');
       });
 
       it('should not add looped class when loop is false', async () => {
         await wrapper.setProps({ loop: false });
         await wrapper.vm.$nextTick();
-        expect(wrapper.classes()).not.toContain('dt-recipe-motion-text--looped');
+        expect(wrapper.classes()).not.toContain('d-motion-text--looped');
       });
     });
   });
@@ -225,7 +225,7 @@ describe('DtRecipeMotionText Tests', () => {
     it('should add animating class when animating', async () => {
       wrapper.vm.start();
       await wrapper.vm.$nextTick();
-      expect(wrapper.classes()).toContain('dt-recipe-motion-text--animating');
+      expect(wrapper.classes()).toContain('d-motion-text--animating');
     });
 
     it('should add paused class when paused', async () => {
@@ -233,7 +233,7 @@ describe('DtRecipeMotionText Tests', () => {
       await wrapper.vm.$nextTick();
       wrapper.vm.pause();
       await wrapper.vm.$nextTick();
-      expect(wrapper.classes()).toContain('dt-recipe-motion-text--paused');
+      expect(wrapper.classes()).toContain('d-motion-text--paused');
     });
   });
 
@@ -256,7 +256,7 @@ describe('DtRecipeMotionText Tests', () => {
 
     it('should render screen reader text', async () => {
       await wrapper.setProps({ screenReaderText: 'Alternative text' });
-      const srText = wrapper.find('.dt-recipe-motion-text__sr-only');
+      const srText = wrapper.find('.d-motion-text__sr-only');
       expect(srText.exists()).toBe(true);
       expect(srText.text()).toBe('Alternative text');
     });
@@ -294,7 +294,7 @@ describe('DtRecipeMotionText Tests', () => {
 
     it('should not process text into words for static modes', async () => {
       // Create a fresh wrapper with static mode from the start
-      const staticWrapper = mount(DtRecipeMotionText, {
+      const staticWrapper = mount(DtMotionText, {
         props: {
           text: 'Static text',
           animationMode: 'gradient-sweep',

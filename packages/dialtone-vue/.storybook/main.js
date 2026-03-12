@@ -34,6 +34,9 @@ const config = {
       css: {
         devSourcemap: true,
       },
+      optimizeDeps: {
+        include: ['react-dom/client'],
+      },
     });
   },
 

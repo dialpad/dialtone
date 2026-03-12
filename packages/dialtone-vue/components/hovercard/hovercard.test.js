@@ -160,6 +160,58 @@ describe('DtHovercard Tests', () => {
     });
   });
 
+  describe('With externalAnchorElement — show/hide API Tests', () => {
+    let externalAnchorWrapper;
+
+    beforeEach(() => {
+      vi.useFakeTimers();
+
+      const externalEl = document.createElement('span');
+      document.body.appendChild(externalEl);
+
+      externalAnchorWrapper = mount(DtHovercard, {
+        props: {
+          ...baseProps,
+          id: 'hovercard-external',
+          externalAnchorElement: externalEl,
+        },
+        slots: { content: MOCK_DEFAULT_SLOT_MESSAGE },
+        global: { stubs: { transition: false } },
+        attachTo: document.body,
+      });
+    });
+
+    afterEach(() => {
+      externalAnchorWrapper.unmount();
+    });
+
+    describe('When show() is called', () => {
+      beforeEach(() => {
+        externalAnchorWrapper.vm.show();
+        vi.runAllTimers();
+      });
+
+      it('should show the hovercard after the enter delay', () => {
+        content = getHovercardContent();
+        expect(content.textContent).toBe(MOCK_DEFAULT_SLOT_MESSAGE);
+      });
+    });
+
+    describe('When hide() is called after show()', () => {
+      beforeEach(() => {
+        externalAnchorWrapper.vm.show();
+        vi.runAllTimers();
+        externalAnchorWrapper.vm.hide();
+        vi.runAllTimers();
+      });
+
+      it('should hide the hovercard after the leave delay', () => {
+        content = getHovercardContent();
+        expect(content).toBeNull();
+      });
+    });
+  });
+
   describe('Accessibility Tests', () => {
     describe('When hovercard is open', () => {
       beforeEach(async () => {
