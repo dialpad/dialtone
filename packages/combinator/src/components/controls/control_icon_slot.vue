@@ -20,16 +20,30 @@
             <slot />
           </template>
           <template #icon="{ iconSize }">
+            <dt-button
+              v-if="isModified"
+              kind="muted"
+              importance="clear"
+              size="xs"
+              class="d-p2"
+              @click.stop="onReset"
+            >
+              <template #icon>
+                <dt-icon-close size="100" />
+              </template>
+            </dt-button>
             <component
               :is="DtIconChevronsUpDown"
+              v-else
               :size="iconSize"
+              class="d-fc-muted"
             />
           </template>
         </dtc-control-string>
       </template>
       <template #list="{ listProps }">
         <ul
-          class="d-p0"
+          class="d-p4"
           v-bind="listProps"
         >
           <dt-list-item
@@ -49,8 +63,8 @@
 
 <script setup>
 import DtcControlString from './control_string.vue';
-import { DtRecipeComboboxWithPopover, DtListItem } from '@dialpad/dialtone-vue';
-import { DtIconChevronsUpDown } from '@dialpad/dialtone-icons/vue3';
+import { DtButton, DtRecipeComboboxWithPopover, DtListItem } from '@dialpad/dialtone-vue';
+import { DtIconChevronsUpDown, DtIconClose } from '@dialpad/dialtone-icons/vue3';
 
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { computed, ref, watch } from 'vue';
@@ -76,6 +90,10 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+  defaultValue: {
+    type: undefined,
+    default: () => null,
+  },
 });
 
 const emit = defineEmits([VALUE_UPDATE_EVENT]);
@@ -85,6 +103,8 @@ const searchText = ref(templateToIconName(props.value) ?? '');
 watch(() => props.value, (newVal) => {
   searchText.value = templateToIconName(newVal) ?? '';
 });
+
+const isModified = computed(() => props.value !== props.defaultValue);
 
 const allIcons = computed(() => [NONE_OPTION, ...iconNames]);
 
@@ -119,8 +139,16 @@ function onSelect (iconName) {
   emit(VALUE_UPDATE_EVENT, iconNameToTemplate(iconName, isScoped));
 }
 
+function onReset () {
+  searchText.value = templateToIconName(props.defaultValue) ?? '';
+  emit(VALUE_UPDATE_EVENT, props.defaultValue);
+}
+
 function onInputInternal (value, onInput) {
   searchText.value = value;
+  if (!value) {
+    emit(VALUE_UPDATE_EVENT, null);
+  }
   onInput(value);
 }
 </script>
