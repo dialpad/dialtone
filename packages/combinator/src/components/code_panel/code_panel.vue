@@ -99,16 +99,25 @@ export default {
 }
 
 .dtc-code-panel-scheme--highlight {
-@import "@/src/assets/themes/scheme/highlight.less";
+  --dtc-scheme-color-identifier: var(--dt-color-blue-800);
+  --dtc-scheme-color-class: var(--dt-color-green-900);
+  --dtc-scheme-color-string: var(--dt-color-purple-900);
+  --dtc-scheme-color-value: var(--dt-color-red-900);
+  --dtc-scheme-color-function: var(--dt-color-gold-900);
 }
 
 .dtc-code-panel-scheme--highlight--light {
-@import "@/src/assets/themes/scheme/highlight_light.less";
+  --dtc-scheme-color-identifier: var(--dt-color-blue-800);
+  --dtc-scheme-color-class: var(--dt-color-green-900);
+  --dtc-scheme-color-string: var(--dt-color-purple-900);
+  --dtc-scheme-color-value: var(--dt-color-red-900);
+  --dtc-scheme-color-function: var(--dt-color-gold-900);
 }
 
 .dtc-code-panel {
   display: grid;
   grid-template-columns: 1fr;
+  color: var(--dt-color-foreground-secondary);
 }
 
 .dtc-code-panel > * {
