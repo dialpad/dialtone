@@ -160,36 +160,6 @@ keywords: ["data table", "grid", "rows", "d-table", "DtTable", "dt-table", "data
 </table>
 ```
 
-<code-well-header>
-  <dt-mode-island class="d-p16 d-bar8">
-    <table class="d-table dialtone-doc-table d-table--striped">
-      <caption class="d-table__caption">Office List</caption>
-      <thead>
-        <tr>
-          <th scope="col">Office</th>
-          <th scope="col">Country</th>
-          <th scope="col" width="10%">Employees</th>
-          <th scope="col">Contact</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="i in examples">
-          <th scope="row">{{ i.office }}</th>
-          <td>{{ i.country }}</td>
-          <td>{{ i.size }}</td>
-          <td>{{ i.contact }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </dt-mode-island>
-</code-well-header>
-
-```html
-<dt-mode-island>
-  <table class="d-table d-table--striped">...</table>
-</dt-mode-island>
-```
-
 ## Classes
 
 <component-class-table component-name="table" />
