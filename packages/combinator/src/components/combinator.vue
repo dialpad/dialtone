@@ -24,6 +24,7 @@
         :info="info"
         :options="options"
         :settings="settings"
+        :disabled-members="disabledMembers"
         @update:options="e => e(options)"
       />
     </div>
@@ -34,6 +35,8 @@
 import DtcOptionBar from './option_bar/option_bar.vue';
 import DtcRenderer from './renderer/renderer.vue';
 import { enumerateGroups } from '@/src/lib/utils';
+import { shouldExclude } from '@/src/lib/exclusion_rules';
+import { buildDependencyMap, shouldHideProp } from '@/src/lib/prop_dependencies';
 import { computed, onErrorCaptured, reactive, ref } from 'vue';
 import { cachedRef, computedModel } from '@/src/lib/utils_vue';
 import { getComponentInfo } from '@/src/lib/info';
@@ -284,6 +287,34 @@ function toggleFullScreen ($event) {
 
   isFullScreen.value = $event;
 }
+
+/**
+ * Set of member names that are currently disabled via exclusion rules or prop dependencies.
+ * Passed to the code panel so disabled members are suppressed from the code snippet.
+ *
+ * @type {ComputedRef<Set<string>>}
+ */
+const disabledMembers = computed(() => {
+  const disabled = new Set();
+  const exclusions = info.value.exclusions;
+  const propValues = options.value.props;
+  const depMap = buildDependencyMap(info.value.props);
+
+  for (const member of info.value.props) {
+    if (member.required) continue;
+    if (shouldExclude(member.name, 'props', exclusions, propValues) ||
+      shouldHideProp(member.name, depMap, propValues)) {
+      disabled.add(member.name);
+    }
+  }
+  for (const member of (info.value.slots ?? [])) {
+    if (member.required) continue;
+    if (shouldExclude(member.name, 'slots', exclusions, propValues)) {
+      disabled.add(member.name);
+    }
+  }
+  return disabled;
+});
 
 onErrorCaptured((exception) => {
   console.error('Internal vue error: \n', exception);

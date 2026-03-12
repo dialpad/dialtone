@@ -16,6 +16,7 @@
             :info-bindings="info.bindings.get()"
             :option-bindings="options.bindings.get()"
             :verbose="verbose"
+            :disabled-members="disabledMembers"
           />
         </template>
         <template #default>
@@ -25,7 +26,7 @@
               :key="slot"
             >
               <dtc-code-editor-slot
-                v-if="value"
+                v-if="value && !disabledMembers.has(slot)"
                 :name="slot"
                 @update:options="e => emit(OPTIONS_UPDATE_EVENT, e)"
               >
@@ -116,6 +117,13 @@ const props = defineProps({
   indentSpaces: {
     type: Number,
     required: true,
+  },
+  /**
+   * Set of member names that are currently disabled.
+   */
+  disabledMembers: {
+    type: Set,
+    default: () => new Set(),
   },
 });
 

@@ -19,6 +19,7 @@
               :theme="settings.root.theme"
               :verbose="settings.code.verbose"
               :indent-spaces="settings.code.indent"
+              :disabled-members="disabledMembers"
               @update:options="e => emit(OPTIONS_UPDATE_EVENT, e)"
             />
           </template>
@@ -73,6 +74,13 @@ defineProps({
   settings: {
     type: Object,
     required: true,
+  },
+  /**
+   * Set of member names that are currently disabled.
+   */
+  disabledMembers: {
+    type: Set,
+    default: () => new Set(),
   },
 });
 
