@@ -258,6 +258,7 @@ onBeforeUnmount(() => {
   clearTimeout(inTimer);
   clearTimeout(outTimer);
 });
+
 watch(() => props.open, (open) => {
   hovercardOpen.value = open;
 }, { immediate: true });
