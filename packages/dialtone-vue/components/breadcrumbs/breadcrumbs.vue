@@ -55,7 +55,7 @@ export default {
     },
 
     /**
-     * @ignore
+     * @deprecated Use v-dt-mode instead.
      * Passed through to link. If true, applies inverted styles to the link.
      * @values true, false
      */

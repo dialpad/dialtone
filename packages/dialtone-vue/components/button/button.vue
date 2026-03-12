@@ -214,7 +214,7 @@ export default {
      * Determines whether the link should have inverted styling if the button is styled as a link.
      * @values true, false
      * @see DtLink
-     * @ignore
+     * @deprecated Use v-dt-mode instead.
      */
     linkInverted: {
       type: Boolean,
