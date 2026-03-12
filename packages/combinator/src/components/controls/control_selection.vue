@@ -4,7 +4,7 @@
     :options="options"
     :disabled="disabled"
     size="xs"
-    @input="e => emit(VALUE_UPDATE_EVENT, e)"
+    @input="onInput"
   >
     <template #label>
       <slot />
@@ -23,6 +23,10 @@ const props = defineProps({
     type: undefined,
     required: true,
   },
+  defaultValue: {
+    type: undefined,
+    default: undefined,
+  },
   validValues: {
     type: Array,
     default: undefined,
@@ -39,10 +43,19 @@ const props = defineProps({
 
 const emit = defineEmits([VALUE_UPDATE_EVENT]);
 
+function onInput (e) {
+  emit(VALUE_UPDATE_EVENT, e === 'null' ? null : e);
+}
+
 const options = computed(() => {
-  return props.validValues?.map(selection => {
+  const valueOptions = props.validValues?.map(selection => {
     return { value: selection, label: props.generateLabel(selection) };
-  });
+  }) ?? [];
+
+  if (props.defaultValue === null || props.defaultValue === undefined) {
+    return [{ value: null, label: 'null' }, ...valueOptions];
+  }
+  return valueOptions;
 });
 </script>
 

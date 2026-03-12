@@ -142,14 +142,20 @@ const toggleFullScreen = () => {
  * @returns {Array} Array of a default control and valid controls.
  */
 function getBindingControls (binding, value, ...controls) {
+  const typeControls = binding.types?.map(type => getControlByMemberType(type, binding)) ?? [];
   const validControls = [
-    ...(binding.types?.map(type => getControlByMemberType(type, binding)) ?? []),
+    ...typeControls,
     ...controls,
   ];
 
+  const valueControl = getControlByValue(value);
+  const defaultControl = valueControl === 'null' && typeControls.length > 0
+    ? typeControls[0]
+    : validControls.find(control => control === valueControl) ?? validControls[0];
+
   return [
     validControls,
-    validControls.find(control => control === getControlByValue(value)) ?? validControls[0],
+    defaultControl,
   ];
 }
 
