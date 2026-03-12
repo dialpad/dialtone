@@ -1,21 +1,26 @@
 <template>
   <dt-input
-    :value="value"
+    :model-value="value"
     :disabled="disabled"
     spellcheck="false"
-    size="sm"
+    size="xs"
     @input="updateValue"
   >
     <template #labelSlot>
-      <span class="d-input__label-text d-label--sm">
+      <dt-text
+        kind="label"
+        size="xs"
+        tone="secondary"
+        class="d-input__label-text"
+      >
         <slot />
-      </span>
+      </dt-text>
     </template>
   </dt-input>
 </template>
 
 <script setup>
-import { DtInput } from '@dialpad/dialtone-vue';
+import { DtInput, DtText } from '@dialpad/dialtone-vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 
 defineProps({

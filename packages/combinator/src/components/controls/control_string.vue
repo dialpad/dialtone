@@ -1,24 +1,29 @@
 <template>
   <dt-input
-    :value="value"
+    :model-value="value"
     :disabled="disabled"
     :messages="messages"
-    size="sm"
+    size="xs"
     @input="e => emit(VALUE_UPDATE_EVENT, e)"
   >
     <template #labelSlot>
-      <span class="d-input__label-text d-label--sm">
+      <dt-text
+        kind="label"
+        size="xs"
+        tone="secondary"
+        class="d-input__label-text"
+      >
         <slot />
-      </span>
+      </dt-text>
     </template>
-    <template #rightIcon>
+    <template #endIcon>
       <slot name="icon" />
     </template>
   </dt-input>
 </template>
 
 <script setup>
-import { DtInput, VALIDATION_MESSAGE_TYPES } from '@dialpad/dialtone-vue';
+import { DtInput, DtText, VALIDATION_MESSAGE_TYPES } from '@dialpad/dialtone-vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { computed } from 'vue';
 

@@ -5,23 +5,28 @@
   >
     <div class="d-fl-grow1">
       <dt-input
-        :value="inputValue"
+        :model-value="inputValue"
         :disabled="disabled || isNaN(value)"
         type="number"
         size="sm"
         @input="e => emit(VALUE_UPDATE_EVENT, parseInt(e))"
       >
         <template #labelSlot>
-          <span class="d-input__label-text d-label--sm">
+          <dt-text
+            kind="label"
+            size="sm"
+            tone="secondary"
+            class="d-input__label-text"
+          >
             <slot />
-          </span>
+          </dt-text>
         </template>
       </dt-input>
     </div>
     <div class="d-pl6">
       <dt-checkbox
         label="NaN"
-        :checked="isNaN(value)"
+        :model-value="isNaN(value)"
         :disabled="disabled"
         @input="toggleNaN"
       />
@@ -30,7 +35,7 @@
 </template>
 
 <script setup>
-import { DtInput, DtCheckbox } from '@dialpad/dialtone-vue';
+import { DtInput, DtCheckbox, DtText } from '@dialpad/dialtone-vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { computed } from 'vue';
 

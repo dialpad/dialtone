@@ -3,11 +3,18 @@
     :model-value="value"
     :options="options"
     :disabled="disabled"
-    size="sm"
+    size="xs"
     @input="e => emit(VALUE_UPDATE_EVENT, e)"
   >
     <template #label>
-      <slot />
+      <dt-text
+        kind="label"
+        size="xs"
+        tone="secondary"
+        class="d-input__label-text"
+      >
+        <slot />
+      </dt-text>
     </template>
   </dt-select-menu>
 </template>
