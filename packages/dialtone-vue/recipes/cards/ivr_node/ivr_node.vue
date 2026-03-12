@@ -101,7 +101,7 @@ import {
   DtIconPhoneHangUp,
   DtIconMoreVertical,
   DtIconListBullet,
-} from '@dialpad/dialtone-icons/vue3';
+} from '@dialpad/dialtone-icons/vue';
 import {
   IVR_NODE_CLASS_MAPPING,
   IVR_NODE_PROMPT_MENU,

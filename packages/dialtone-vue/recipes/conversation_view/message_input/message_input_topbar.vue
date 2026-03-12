@@ -150,7 +150,7 @@ import {
   DtIconQuote,
   DtIconCode,
   DtIconCodeBlock,
-} from '@dialpad/dialtone-icons/vue3';
+} from '@dialpad/dialtone-icons/vue';
 import DtRecipeMessageInputButton from './message_input_button.vue';
 import { DialtoneLocalization } from '@/localization';
 

@@ -81,7 +81,7 @@
 <script>
 import { DtButton } from '@/components/button';
 import { DtDropdown } from '@/components/dropdown';
-import { DtIconChevronUp } from '@dialpad/dialtone-icons/vue3';
+import { DtIconChevronUp } from '@dialpad/dialtone-icons/vue';
 import { DtRecipeCallbarButton, CALLBAR_BUTTON_VALID_WIDTH_SIZE } from '../callbar_button';
 import utils, { warnIfUnmounted, removeClassStyleAttrs, addClassStyleAttrs, returnFirstEl } from '@/common/utils';
 import { DialtoneLocalization } from '@/localization';

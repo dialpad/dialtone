@@ -18,5 +18,5 @@
 
 <script setup>
 import { DtButton } from '@/components/button';
-import { DtIconDoubleCheck } from '@dialpad/dialtone-icons/vue3';
+import { DtIconDoubleCheck } from '@dialpad/dialtone-icons/vue';
 </script>
