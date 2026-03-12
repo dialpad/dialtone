@@ -11,9 +11,9 @@ keywords: ["hover tooltip", "popover", "card overlay", "d-hovercard", "DtHoverca
 
 The hovercard will appear upon the mouse entering the anchor, with a delay of 300 milliseconds. It will remain open as long as the mouse cursor is over either the open card or the anchor.
 
-<!-- <code-well-header>
+<code-well-header>
   <example-hovercard />
-</code-well-header> -->
+</code-well-header>
 
 <code-example-tabs
 htmlCode='
@@ -66,7 +66,7 @@ vueCode='
 '
 showHtmlWarning />
 
-<component-combinator component-name="DtHovercard" />
+<!-- <component-combinator component-name="DtHovercard" /> -->
 
 ## Variants
 

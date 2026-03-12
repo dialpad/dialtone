@@ -9,13 +9,13 @@ figma: planned
 keywords: ["loading placeholder", "shimmer", "ghost", "d-skeleton", "DtSkeleton", "dt-skeleton", "content loader", "placeholder ui"]
 ---
 
-<!-- <code-well-header>
+<code-well-header>
   <div class="d-w50p">
     <dt-skeleton :animate="false" />
   </div>
-</code-well-header> -->
+</code-well-header>
 
-<component-combinator component-name="DtSkeleton" />
+<!-- <component-combinator component-name="DtSkeleton" /> -->
 
 ## Skeleton vs Loader
 

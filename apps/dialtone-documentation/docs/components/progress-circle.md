@@ -6,11 +6,11 @@ thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-progress-circle--default
 ---
 
-<!-- <code-well-header>
+<code-well-header>
   <dt-progress-circle aria-label="Upload progress" :progress="66" />
-</code-well-header> -->
+</code-well-header>
 
-<component-combinator component-name="DtProgressCircle" />
+<!-- <component-combinator component-name="DtProgressCircle" /> -->
 
 ## Usage
 

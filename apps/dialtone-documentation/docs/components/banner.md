@@ -9,7 +9,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["alert","notification","message","d-banner","DtBanner","dt-banner"]
 ---
 
-<!-- <code-well-header class="d-p0">
+<code-well-header class="d-p0">
     <dt-stack gap="500" class="d-w100p" align="center">
       <dt-banner title="Example banner" kind="info" class="d-ps-relative d-zi-base">
           Message body with a <dt-link kind="muted">Link</dt-link>
@@ -21,9 +21,9 @@ keywords: ["alert","notification","message","d-banner","DtBanner","dt-banner"]
           <dt-button @click="toggleBanner('example-pinned')">Pin to top</dt-button>
       </dt-stack>
     </dt-stack>
-</code-well-header> -->
+</code-well-header>
 
-<component-combinator component-name="DtBanner" />
+<!-- <component-combinator component-name="DtBanner" /> -->
 
 ## Usage
 

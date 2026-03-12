@@ -7,7 +7,7 @@ status: beta
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-emoji-picker--default
 ---
 
-<!-- <code-well-header>
+<code-well-header>
   <dt-emoji-picker
       skin-tone="Default"
       skin-selector-button-tooltip-label="Change default skin tone"
@@ -27,9 +27,9 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-emoji-picker
       search-no-results-label="No results"
       search-placeholder-label="Search..."
     />
-</code-well-header> -->
+</code-well-header>
 
-<component-combinator component-name="DtEmojiPicker" />
+<!-- <component-combinator component-name="DtEmojiPicker" /> -->
 
 ## Variants and Examples
 

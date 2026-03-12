@@ -8,7 +8,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-input-group-
 keywords: ["input addon", "input prefix", "input suffix", "d-input-group", "DtInputGroup", "dt-input-group", "compound input", "prepend append"]
 ---
 
-<!-- <code-well-header>
+<code-well-header>
   <dt-input-group
     name="fruits-input-group"
     legend="Fruits"
@@ -17,9 +17,9 @@ keywords: ["input addon", "input prefix", "input suffix", "d-input-group", "DtIn
     <dt-radio value="banana"><span>Banana</span></dt-radio>
     <dt-radio value="other"><span>Other</span></dt-radio>
   </dt-input-group>
-</code-well-header> -->
+</code-well-header>
 
-<component-combinator component-name="DtInputGroup" />
+<!-- <component-combinator component-name="DtInputGroup" /> -->
 
 ## Default
 

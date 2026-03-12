@@ -7,7 +7,7 @@ description: A table is a pattern for organizing data sets. While data visualiza
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=5544-21729
 keywords: ["data table", "grid", "rows", "d-table", "DtTable", "dt-table", "datagrid", "data list"]
 ---
-<!-- <code-well-header bgclass="d-bgc-primary">
+<code-well-header bgclass="d-bgc-primary">
   <table class="d-table dialtone-doc-table">
     <caption class="d-table__caption">Office List</caption>
     <thead>
@@ -27,12 +27,12 @@ keywords: ["data table", "grid", "rows", "d-table", "DtTable", "dt-table", "data
       </tr>
     </tbody>
   </table>
-</code-well-header> -->
+</code-well-header>
 
 [//]: # (## Usage)
 [//]: # (Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi massa ante, tempus vitae lacus id, luctus tristique lorem. Mauris feugiat massa ex, id aliquet mi tempor non. Curabitur non tristique lectus. Fusce ut nisl non diam dignissim viverra. In posuere dui arcu, sed eleifend massa faucibus sed. Phasellus quis leo vitae erat pellentesque venenatis id vitae lectus. Suspendisse convallis, metus a congue tincidunt, velit sem tincidunt dui, eget auctor ipsum ipsum in ex. Nullam lobortis, mauris vel vestibulum rutrum, lorem elit vehicula est, nec viverra ante erat nec dolor. Proin at placerat tortor. Nam ullamcorper metus et eros porta, at lacinia leo scelerisque. Curabitur finibus sollicitudin odio tempor finibus. Donec lobortis metus vitae mollis gravida.)
 
-<component-combinator component-name="DtTable" />
+<!-- <component-combinator component-name="DtTable" /> -->
 
 ## Variants and Examples
 

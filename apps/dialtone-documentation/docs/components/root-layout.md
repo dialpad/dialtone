@@ -8,7 +8,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-root-layout-
 keywords: ["app layout","page layout","d-root-layout","DtRootLayout","dt-root-layout"]
 ---
 
-<!-- <code-well-header>
+<code-well-header>
 <dt-root-layout
   :fixed="false"
   class="d-w100p d-h332"
@@ -30,9 +30,9 @@ keywords: ["app layout","page layout","d-root-layout","DtRootLayout","dt-root-la
     <div class="d-h64 d-bgc-gold-100">Footer</div>
   </template>
 </dt-root-layout>
-</code-well-header> -->
+</code-well-header>
 
-<component-combinator component-name="DtRootLayout" />
+<!-- <component-combinator component-name="DtRootLayout" /> -->
 
 ## Base Style
 

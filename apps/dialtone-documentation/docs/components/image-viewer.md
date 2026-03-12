@@ -7,7 +7,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-image-viewer
 keywords: ["lightbox", "image modal", "photo viewer", "d-image-viewer", "DtImageViewer", "dt-image-viewer", "gallery", "carousel"]
 ---
 
-<!-- <code-well-header>
+<code-well-header>
   <dt-image-viewer
     :image-src="$withBase('/assets/images/test.jpg')"
     image-alt="Image Alt Text"
@@ -15,9 +15,9 @@ keywords: ["lightbox", "image modal", "photo viewer", "d-image-viewer", "DtImage
     aria-label="Click to open image"
     close-aria-label="Close"
   />
-</code-well-header> -->
+</code-well-header>
 
-<component-combinator component-name="DtImageViewer" />
+<!-- <component-combinator component-name="DtImageViewer" /> -->
 
 ## Examples
 

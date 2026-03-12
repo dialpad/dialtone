@@ -9,7 +9,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["no results", "blank slate", "zero state", "d-empty-state", "DtEmptyState", "dt-empty-state", "placeholder", "empty view"]
 ---
 
-<!-- <code-well-header>
+<code-well-header>
   <dt-empty-state
     header-text="Nothing to see here"
     body-text="Looks like there is no data to display here."
@@ -24,9 +24,9 @@ keywords: ["no results", "blank slate", "zero state", "d-empty-state", "DtEmptyS
       <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
     </template>
   </dt-empty-state>
-</code-well-header> -->
+</code-well-header>
 
-<component-combinator component-name="DtEmptyState" />
+<!-- <component-combinator component-name="DtEmptyState" /> -->
 
 ## Anatomy
 

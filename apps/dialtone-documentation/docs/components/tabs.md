@@ -8,13 +8,13 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["tab panel", "tab navigation", "d-tabs", "DtTabs", "dt-tabs", "segmented control", "tabbar"]
 ---
 
-<!-- <code-well-header>
+<code-well-header>
   <div class="d-w100p">
     <example-tabs />
   </div>
-</code-well-header> -->
+</code-well-header>
 
-<component-combinator component-name="DtTabs" />
+<!-- <component-combinator component-name="DtTabs" /> -->
 
 ## Variants
 

@@ -5,7 +5,7 @@ status: beta
 keywords: ["theme island","mode override","d-mode-island","DtModeIsland","dt-mode-island"]
 ---
 
-<!-- <code-well-header>
+<code-well-header>
   <dt-stack gap="500" class="d-ai-flex-start d-w100p">
     <dt-stack direction="row" gap="500" class="d-jc-space-between d-w100p">
       <dt-text as="h4" kind="headline" size="xl">Demo</dt-text>
@@ -158,9 +158,9 @@ keywords: ["theme island","mode override","d-mode-island","DtModeIsland","dt-mod
       </dt-mode-island>
     </dt-stack>
   </dt-stack>
-</code-well-header> -->
+</code-well-header>
 
-<component-combinator component-name="DtModeIsland" />
+<!-- <component-combinator component-name="DtModeIsland" /> -->
 
 ## Usage
 

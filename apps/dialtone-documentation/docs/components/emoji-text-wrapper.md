@@ -8,15 +8,15 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-emoji-text-w
 keywords: ["emoji support","emoticon wrapper","d-emoji-text-wrapper","DtEmojiTextWrapper","dt-emoji-text-wrapper"]
 ---
 
-<!-- <code-well-header>
+<code-well-header>
   <dt-text kind="body" size="md">
     <dt-emoji-text-wrapper>
       Some text with :invalid-emoji: :smile: :cry: and 😄, and custom emojis :octocat: :shipit:
     </dt-emoji-text-wrapper>
   </dt-text>
-</code-well-header> -->
+</code-well-header>
 
-<component-combinator component-name="DtEmojiTextWrapper" />
+<!-- <component-combinator component-name="DtEmojiTextWrapper" /> -->
 
 ## Variants and Examples
 

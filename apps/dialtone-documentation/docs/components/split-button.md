@@ -9,7 +9,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["dropdown button", "button with menu", "d-split-button", "DtSplitButton", "dt-split-button", "menu button", "combo button"]
 ---
 
-<!-- <code-well-header>
+<code-well-header>
   <dt-split-button
     end-tooltip-text="More calling options"
   >
@@ -20,9 +20,9 @@ keywords: ["dropdown button", "button with menu", "d-split-button", "DtSplitButt
       <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>
     </template>
   </dt-split-button>
-</code-well-header> -->
+</code-well-header>
 
-<component-combinator component-name="DtSplitButton" />
+<!-- <component-combinator component-name="DtSplitButton" /> -->
 
 ## Usage
 

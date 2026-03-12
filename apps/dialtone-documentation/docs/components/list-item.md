@@ -9,7 +9,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["list element", "d-list-item", "DtListItem", "dt-list-item"]
 ---
 
-<!-- <code-well-header class="d-d-block">
+<code-well-header class="d-d-block">
   <ul>
     <dt-list-item navigation-type="tab">
       <template #start>
@@ -27,9 +27,9 @@ keywords: ["list element", "d-list-item", "DtListItem", "dt-list-item"]
       </template>
     </dt-list-item>
   </ul>
-</code-well-header> -->
+</code-well-header>
 
-<component-combinator component-name="DtListItem" />
+<!-- <component-combinator component-name="DtListItem" /> -->
 
 ## Base Style
 

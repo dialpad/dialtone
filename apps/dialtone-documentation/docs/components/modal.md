@@ -8,11 +8,11 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-modal--defau
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=4454-10944
 keywords: ["dialog", "popup", "overlay", "lightbox", "d-modal", "DtModal", "dt-modal", "alert dialog", "sheet"]
 ---
-<!-- <code-well-header>
+<code-well-header>
   <example-modal />
-</code-well-header> -->
+</code-well-header>
 
-<component-combinator component-name="DtModal" />
+<!-- <component-combinator component-name="DtModal" /> -->
 
 ## Usage
 

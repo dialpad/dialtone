@@ -9,11 +9,11 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-emoji--defau
 keywords: ["emoticon","smiley","d-emoji","DtEmoji","dt-emoji"]
 ---
 
-<!-- <code-well-header>
+<code-well-header>
   <dt-emoji code=":smile:" />
-</code-well-header> -->
+</code-well-header>
 
-<component-combinator component-name="DtEmoji" />
+<!-- <component-combinator component-name="DtEmoji" /> -->
 
 ## Variants and Examples
 

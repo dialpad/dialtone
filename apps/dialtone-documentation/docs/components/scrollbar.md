@@ -7,7 +7,7 @@ image: assets/images/components/scrollbar.png
 keywords: ["scrollable", "d-scrollbar", "DtScrollbar", "dt-scrollbar", "custom scrollbar", "scroll container"]
 ---
 
-<component-combinator component-name="DtScrollbar" />
+<!-- <component-combinator component-name="DtScrollbar" /> -->
 
 ## Scrollbar Directive
 

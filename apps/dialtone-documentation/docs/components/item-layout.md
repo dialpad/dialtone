@@ -8,7 +8,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-item-layout-
 keywords: ["list layout","item structure","d-item-layout","DtItemLayout","dt-item-layout"]
 ---
 
-<component-combinator component-name="DtItemLayout" />
+<!-- <component-combinator component-name="DtItemLayout" /> -->
 
 ## With Default Styling
 
