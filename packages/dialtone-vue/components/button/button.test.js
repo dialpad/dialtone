@@ -272,24 +272,24 @@ describe('DtButton Tests', () => {
           });
         });
 
-        describe('When underline is false', () => {
+        describe('When linkUnderline is false', () => {
           it('should have no-underline class', async () => {
-            await wrapper.setProps({ underline: false });
+            await wrapper.setProps({ linkUnderline: false });
 
             expect(button.classes().includes('d-link--no-underline')).toBe(true);
           });
         });
 
-        describe('When underline is true (default)', () => {
+        describe('When linkUnderline is true (default)', () => {
           it('should not have no-underline class', () => {
             expect(button.classes().includes('d-link--no-underline')).toBe(false);
           });
         });
       });
 
-      describe('When underline is false and link is not set', () => {
+      describe('When linkUnderline is false and link is not set', () => {
         it('should not have no-underline class', async () => {
-          await wrapper.setProps({ underline: false });
+          await wrapper.setProps({ linkUnderline: false });
 
           expect(button.classes().includes('d-link--no-underline')).toBe(false);
         });
