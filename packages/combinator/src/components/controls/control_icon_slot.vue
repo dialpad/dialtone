@@ -3,8 +3,9 @@
     <dt-recipe-combobox-with-popover
       ref="combobox"
       label="Icon"
-      max-height="512px"
-      append-to="parent"
+      max-height="320px"
+      list-class="d-w216"
+      size="xs"
       @select="e => onSelect(filteredIcons[e])"
       @opened="onOpen"
     >
@@ -20,7 +21,7 @@
           </template>
           <template #icon="{ iconSize }">
             <component
-              :is="open ? DtIconChevronDown : DtIconChevronRight"
+              :is="DtIconChevronsUpDown"
               :size="iconSize"
             />
           </template>
