@@ -105,7 +105,7 @@
 <script>
 import { DtPopover, POPOVER_APPEND_TO_VALUES, POPOVER_PADDING_CLASSES } from '@/components/popover';
 import { BUTTON_SIZE_MODIFIERS, DtButton } from '@/components/button';
-import { DtIconChevronDown, DtIconClose } from '@dialpad/dialtone-icons/vue3';
+import { DtIconChevronDown, DtIconClose } from '@dialpad/dialtone-icons/vue';
 import { DialtoneLocalization } from '@/localization';
 import { DtCheckbox } from '@/components/checkbox';
 import { DtCheckboxGroup } from '@/components/checkbox_group';

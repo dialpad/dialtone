@@ -191,7 +191,7 @@ showHtmlWarning />
 
 <script setup>
 import { ref } from 'vue';
-import { DtIconSearch, DtIconClose } from '@dialpad/dialtone-icons/vue3';
+import { DtIconSearch, DtIconClose } from '@dialpad/dialtone-icons/vue';
 
 const inputValue = ref('');
 const exampleFilters = ref([

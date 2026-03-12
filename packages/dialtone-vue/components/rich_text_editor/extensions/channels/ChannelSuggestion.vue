@@ -17,8 +17,8 @@
 
 <script>
 import { DtStack } from '@/components/stack';
-import DtIconHash from '@dialpad/dialtone-icons/vue3/hash';
-import DtIconLock from '@dialpad/dialtone-icons/vue3/lock';
+import DtIconHash from '@dialpad/dialtone-icons/vue/hash';
+import DtIconLock from '@dialpad/dialtone-icons/vue/lock';
 
 export default {
   compatConfig: { MODE: 3 },

@@ -19,7 +19,7 @@ import {
   DtIconAlertTriangle,
   DtIconBell,
   DtIconSparkle,
-} from '@dialpad/dialtone-icons/vue3';
+} from '@dialpad/dialtone-icons/vue';
 import { TOAST_ALTERNATE_KINDS } from '../toast_constants.js';
 import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants.js';
 

@@ -406,7 +406,7 @@ import {
   DtIconMic,
   DtIconUsers,
   DtIconWaveform,
-} from '@dialpad/dialtone-icons/vue3';
+} from '@dialpad/dialtone-icons/vue';
 import DtItemLayout from '@/components/item_layout/item_layout.vue';
 import DtStack from '@/components/stack/stack.vue';
 import chattingPersonImage from '@/common/assets/chatting-person-example.png';

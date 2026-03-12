@@ -81,7 +81,7 @@ import { extractVueListeners, getUniqueString, hasSlotContent } from '@/common/u
 import DtCollapsibleLazyShow from './collapsible_lazy_show.vue';
 import { DtButton } from '@/components/button';
 import { DtLazyShow } from '@/components/lazy_show';
-import { DtIconChevronDown, DtIconChevronRight } from '@dialpad/dialtone-icons/vue3';
+import { DtIconChevronDown, DtIconChevronRight } from '@dialpad/dialtone-icons/vue';
 
 /**
  * A collapsible is a component consisting of an interactive anchor that toggled the expandable/collapsible element.

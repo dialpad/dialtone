@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import { DtIconArrowRight, DtIconArrowLeft } from '@dialpad/dialtone-icons/vue3';
+import { DtIconArrowRight, DtIconArrowLeft } from '@dialpad/dialtone-icons/vue';
 import { DtButton } from '@/components/button';
 import { DialtoneLocalization } from '@/localization';
 

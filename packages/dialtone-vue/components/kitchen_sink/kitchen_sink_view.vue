@@ -144,7 +144,7 @@ import { ref, h, onErrorCaptured, onMounted, defineComponent, markRaw } from 'vu
 import { DtLink } from '@/components/link';
 import { DtStack } from '@/components/stack';
 import { DtText } from '@/components/text';
-import { DtIconExternalLink } from '@dialpad/dialtone-icons/vue3';
+import { DtIconExternalLink } from '@dialpad/dialtone-icons/vue';
 
 const props = defineProps({
   title: {

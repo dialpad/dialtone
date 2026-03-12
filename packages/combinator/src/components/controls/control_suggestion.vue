@@ -57,7 +57,7 @@ import { DtRecipeComboboxWithPopover, DtListItem } from '@dialpad/dialtone-vue';
 
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { computed, ref } from 'vue';
-import { DtIconChevronDown, DtIconChevronRight } from '@dialpad/dialtone-icons/vue3';
+import { DtIconChevronDown, DtIconChevronRight } from '@dialpad/dialtone-icons/vue';
 
 const WARNING_MESSAGE = 'Unexpected value';
 

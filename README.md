@@ -157,12 +157,12 @@ setTheme(DpLight, document.querySelector('#my-shadow-root-host'));
 
 ```js
 // Named import
-import { DtIconArrowUp } from '@dialpad/dialtone-icons/vue3';
-import { DtIllustrationBlankSpace } from '@dialpad/dialtone-icons/vue3';
+import { DtIconArrowUp } from '@dialpad/dialtone-icons/vue';
+import { DtIllustrationBlankSpace } from '@dialpad/dialtone-icons/vue';
 
 // Default import (Preferred if using webpack as it is tree-shakeable by default)
-import DtIconArrowUp from '@dialpad/dialtone-icons/vue3/arrow-up';
-import DtIllustrationBlankSpace from '@dialpad/dialtone-icons/vue3/blank-space';
+import DtIconArrowUp from '@dialpad/dialtone-icons/vue/arrow-up';
+import DtIllustrationBlankSpace from '@dialpad/dialtone-icons/vue/blank-space';
 ```
 
 #### Dialtone Vue components

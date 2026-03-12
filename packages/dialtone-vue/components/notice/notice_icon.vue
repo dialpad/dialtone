@@ -21,7 +21,7 @@ import {
   DtIconAlertTriangle,
   DtIconAlertCircle,
   DtIconBell,
-} from '@dialpad/dialtone-icons/vue3';
+} from '@dialpad/dialtone-icons/vue';
 import { NOTICE_KINDS } from './notice_constants.js';
 import { hasSlotContent } from '@/common/utils';
 
