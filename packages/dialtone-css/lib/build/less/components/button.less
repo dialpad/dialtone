@@ -636,10 +636,10 @@
   //  Pseudo-element spinner (fallback for raw HTML consumers)
   &::before {
     position: absolute;
-    width: var(--dt-size-500);
-    height: var(--dt-size-500);
+    inline-size: var(--dt-size-500);
+    block-size: var(--dt-size-500);
     border: var(--dt-size-200) solid currentColor;
-    border-left-color: transparent !important;
+    border-inline-start-color: transparent !important;
     border-radius: var(--dt-size-radius-circle);
     animation: d-loading-circle 900ms infinite linear;
     content: "";
