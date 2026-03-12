@@ -16,8 +16,8 @@
         <slot />
       </dt-text>
     </template>
-    <template #endIcon>
-      <slot name="icon" />
+    <template #endIcon="{ iconSize }">
+      <slot name="icon" :icon-size="iconSize" />
     </template>
   </dt-input>
 </template>
