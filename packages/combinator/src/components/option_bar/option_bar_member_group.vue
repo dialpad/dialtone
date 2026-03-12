@@ -81,9 +81,15 @@ const emit = defineEmits([MEMBER_UPDATE_EVENT]);
  * @type {object}
  */
 const memberMap = computed(() => {
+  const sorted = [...props.members].sort((a, b) => {
+    if (a.name === 'default') return -1;
+    if (b.name === 'default') return 1;
+    if (a.required !== b.required) return a.required ? -1 : 1;
+    return (a.name ?? '').localeCompare(b.name ?? '');
+  });
   return reactive({
     ...Object.fromEntries(
-      props.members.map(member => {
+      sorted.map(member => {
         return [getMemberKey(member), extendMember(member)];
       }),
     ),
