@@ -8,7 +8,7 @@ figma: planned
 keywords: ["definition list", "key value", "dl", "d-description-list", "DtDescriptionList", "dt-description-list", "metadata list", "property list"]
 ---
 
-<code-well-header>
+<!-- <code-well-header>
   <div class="d-w332">
     <dt-description-list
       gap="400"
@@ -16,7 +16,9 @@ keywords: ["definition list", "key value", "dl", "d-description-list", "DtDescri
       direction="row"
     />
   </div>
-</code-well-header>
+</code-well-header> -->
+
+<component-combinator component-name="DtDescriptionList" />
 
 ## Variants and Examples
 

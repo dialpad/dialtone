@@ -7,9 +7,11 @@ image: assets/images/components/scroller.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-scroller--default
 ---
 
+<component-combinator component-name="DtScroller" />
+
 #### Default Scroller
 
-<code-well-header>
+<!-- <code-well-header>
  <dt-scroller
       style="
       margin: 20px 0;
@@ -95,7 +97,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-scroller--de
               </div>
       </template>
 </dt-scroller>
-</code-well-header>
+</code-well-header> -->
 
 <br>
 
@@ -116,7 +118,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-scroller--de
 
 #### Dynamic Scroller
 
-<code-well-header>
+<!-- <code-well-header>
  <dt-scroller
       :items="[
               {
@@ -168,7 +170,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-scroller--de
         </div>
       </template>
     </dt-scroller>
-</code-well-header>
+</code-well-header> -->
 
 <br>
 

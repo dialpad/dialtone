@@ -7,6 +7,8 @@ image: assets/images/components/scrollbar.png
 keywords: ["scrollable", "d-scrollbar", "DtScrollbar", "dt-scrollbar", "custom scrollbar", "scroll container"]
 ---
 
+<component-combinator component-name="DtScrollbar" />
+
 ## Scrollbar Directive
 
 Allows to add overlay scrollbars that will look the same for every browser. The directive sets up the scrollbars from the library [OverlayScrollbars](https://kingsora.github.io/OverlayScrollbars/).

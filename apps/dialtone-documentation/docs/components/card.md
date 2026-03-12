@@ -9,7 +9,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-card--defaul
 keywords: ["panel", "container", "box", "d-card", "DtCard", "dt-card", "tile", "surface"]
 ---
 
-<code-well-header>
+<!-- <code-well-header>
   <div class="d-card d-w264">
     <div class="d-card__header">
       <dt-text as="p" kind="headline" size="md">
@@ -28,7 +28,9 @@ keywords: ["panel", "container", "box", "d-card", "DtCard", "dt-card", "tile", "
       </dt-stack>
     </div>
   </div>
-</code-well-header>
+</code-well-header> -->
+
+<component-combinator component-name="DtCard" />
 
 ## Usage
 

@@ -9,11 +9,11 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["anchor", "hyperlink", "url", "d-link", "DtLink", "dt-link", "text link", "href"]
 ---
 
-<code-well-header>
+<!-- <code-well-header>
   <dt-link href="#link">Base link</dt-link>
-</code-well-header>
+</code-well-header> -->
 
-<!-- <component-combinator component-name="DtLink" /> -->
+<component-combinator component-name="DtLink" />
 
 ## Usage
 

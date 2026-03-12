@@ -7,13 +7,15 @@ status: beta
 keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFilterPill", "dt-filter-pill", "removable tag", "dismissible chip"]
 ---
 
-<code-well-header>
+<!-- <code-well-header>
   <dt-filter-pill
     v-model="exampleFilters"
     label="With header, content and footer"
   >
   </dt-filter-pill>
-</code-well-header>
+</code-well-header> -->
+
+<component-combinator component-name="DtFilterPill" />
 
 ## Variants
 

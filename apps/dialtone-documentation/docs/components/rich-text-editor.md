@@ -6,9 +6,11 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-rich-text-ed
 keywords: ["rte", "wysiwyg", "markdown", "d-rte", "DtRichTextEditor", "dt-rich-text-editor", "content editor", "rich editor"]
 ---
 
-<code-well-header>
+<!-- <code-well-header>
   <example-rich-text-editor :modelValue="defaultValue" />
-</code-well-header>
+</code-well-header> -->
+
+<component-combinator component-name="DtRichTextEditor" />
 
 ## Base Style
 

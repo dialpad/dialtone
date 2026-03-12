@@ -9,9 +9,11 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["hotkey", "key binding", "shortcut key", "d-kbd", "DtKeyboardShortcut", "dt-keyboard-shortcut", "kbd", "accelerator"]
 ---
 
-<code-well-header>
+<!-- <code-well-header>
   <dt-keyboard-shortcut shortcut="{cmd}+Ctrl+X"/>
-</code-well-header>
+</code-well-header> -->
+
+<component-combinator component-name="DtKeyboardShortcut" />
 
 ## Base
 

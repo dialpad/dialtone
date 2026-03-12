@@ -10,7 +10,7 @@ keywords: ["checkboxes","multi select","form fields","d-checkbox-group","DtCheck
 
 Checkbox Groups are typically paired with a legend which identifies the group. If no legend is provided then it is expected that an `aria-label` will be given in order to provide an invisible label to screen readers. Each Checkbox Group should contain one or more Checkboxes which users can make selections from.
 
-<code-well-header>
+<!-- <code-well-header>
   <dt-checkbox-group
     name="fruits-checkbox-group"
     class="d-input-group__fieldset"
@@ -21,7 +21,9 @@ Checkbox Groups are typically paired with a legend which identifies the group. I
     <dt-checkbox value="banana"><span>Banana</span></dt-checkbox>
     <dt-checkbox value="other"><span>Other</span></dt-checkbox>
   </dt-checkbox-group>
-</code-well-header>
+</code-well-header> -->
+
+<component-combinator component-name="DtCheckboxGroup" />
 
 ## Variants
 

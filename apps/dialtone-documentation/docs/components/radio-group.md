@@ -8,7 +8,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-radio-group-
 keywords: ["radio buttons","radio options","form fields","d-radio-group","DtRadioGroup","dt-radio-group"]
 ---
 
-<code-well-header>
+<!-- <code-well-header>
   <dt-radio-group
     model-value=""
     class="d-input-group__fieldset"
@@ -19,7 +19,9 @@ keywords: ["radio buttons","radio options","form fields","d-radio-group","DtRadi
     <dt-radio value="banana"><span>Banana</span></dt-radio>
     <dt-radio value="other"><span>Other</span></dt-radio>
   </dt-radio-group>
-</code-well-header>
+</code-well-header> -->
+
+<component-combinator component-name="DtRadioGroup" />
 
 ## Variants
 

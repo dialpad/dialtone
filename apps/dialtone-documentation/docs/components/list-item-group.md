@@ -6,7 +6,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-list-item-gr
 keywords: ["list group", "list items", "d-list-item-group", "DtListItemGroup", "dt-list-item-group", "menu list", "option list"]
 ---
 
-<code-well-header>
+<!-- <code-well-header>
   <dt-list-item-group
     heading="Example Heading"
     heading-class="d-fw-bold"
@@ -27,7 +27,9 @@ keywords: ["list group", "list items", "d-list-item-group", "DtListItemGroup", "
       item3
     </dt-list-item>
   </dt-list-item-group>
-</code-well-header>
+</code-well-header> -->
+
+<component-combinator component-name="DtListItemGroup" />
 
 ## Base Style
 

@@ -9,9 +9,11 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["hint", "help text", "d-tooltip", "DtTooltip", "dt-tooltip"]
 ---
 
-<code-well-header>
+<!-- <code-well-header>
   <dt-button v-dt-tooltip="`Simple tooltip`">Hover me</dt-button>
-</code-well-header>
+</code-well-header> -->
+
+<component-combinator component-name="DtTooltip" />
 
 ## Tooltip as a Directive
 
