@@ -23,7 +23,7 @@ keywords: ["alert","notification","message","d-banner","DtBanner","dt-banner"]
     </dt-stack>
 </code-well-header>
 
-<!-- <component-combinator component-name="DtBanner" /> -->
+<component-combinator component-name="DtBanner" />
 
 ## Usage
 

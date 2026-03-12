@@ -15,6 +15,8 @@ keywords: ["pager", "page navigation", "page numbers", "d-pagination", "DtPagina
   />
 </code-well-header>
 
+<component-combinator component-name="DtPagination" />
+
 <code-example-tabs
 htmlCode='
 <nav aria-label="Pagination" class="d-pagination">

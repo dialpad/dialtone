@@ -10,7 +10,7 @@ keywords: ["rte", "wysiwyg", "markdown", "d-rte", "DtRichTextEditor", "dt-rich-t
   <example-rich-text-editor :modelValue="defaultValue" />
 </code-well-header>
 
-<!-- <component-combinator component-name="DtRichTextEditor" /> -->
+<component-combinator component-name="DtRichTextEditor" />
 
 ## Base Style
 

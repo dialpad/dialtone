@@ -12,7 +12,7 @@ keywords: ["dialog", "popup", "overlay", "lightbox", "d-modal", "DtModal", "dt-m
   <example-modal />
 </code-well-header>
 
-<!-- <component-combinator component-name="DtModal" /> -->
+<component-combinator component-name="DtModal" />
 
 ## Usage
 

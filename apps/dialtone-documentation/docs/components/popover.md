@@ -12,7 +12,7 @@ keywords: ["popup", "overlay", "floating", "d-popover", "DtPopover", "dt-popover
   <example-popover modal />
 </code-well-header>
 
-<!-- <component-combinator component-name="DtPopover" /> -->
+<component-combinator component-name="DtPopover" />
 
 ## Usage
 

@@ -30,7 +30,7 @@ keywords: ["panel", "container", "box", "d-card", "DtCard", "dt-card", "tile", "
   </div>
 </code-well-header>
 
-<!-- <component-combinator component-name="DtCard" /> -->
+<component-combinator component-name="DtCard" />
 
 ## Usage
 

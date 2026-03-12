@@ -22,7 +22,7 @@ keywords: ["dropdown button", "button with menu", "d-split-button", "DtSplitButt
   </dt-split-button>
 </code-well-header>
 
-<!-- <component-combinator component-name="DtSplitButton" /> -->
+<component-combinator component-name="DtSplitButton" />
 
 ## Usage
 
@@ -491,7 +491,7 @@ htmlCode='
 '
 vueCode='
 <dt-split-button
-  start-href="https://dialpad.com"
+  start-href="<https://dialpad.com>"
   start-target="_blank"
   start-rel="noopener noreferrer"
   end-tooltip-text="More options"

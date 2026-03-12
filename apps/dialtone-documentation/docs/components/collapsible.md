@@ -33,7 +33,7 @@ keywords: ["accordion", "expand", "collapse", "toggle content", "d-collapsible",
   </div>
 </code-well-header>
 
-<!-- <component-combinator component-name="DtCollapsible" /> -->
+<component-combinator component-name="DtCollapsible" />
 
 The collapsible component consists of two parts: the anchor and the content. If the anchor slot is not filled, the anchor will default to a basic button with text. The content must be provided and is the element that can be hidden or shown when the anchor is clicked.
 

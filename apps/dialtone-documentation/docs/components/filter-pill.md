@@ -15,7 +15,7 @@ keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFil
   </dt-filter-pill>
 </code-well-header>
 
-<!-- <component-combinator component-name="DtFilterPill" /> -->
+<component-combinator component-name="DtFilterPill" />
 
 ## Variants
 

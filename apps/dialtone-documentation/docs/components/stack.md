@@ -42,7 +42,7 @@ keywords: ["layout", "vertical", "horizontal", "d-stack", "DtStack", "dt-stack",
   </dt-stack>
 </code-well-header>
 
-<!-- <component-combinator component-name="DtStack" /> -->
+<component-combinator component-name="DtStack" />
 
 ## Direction
 

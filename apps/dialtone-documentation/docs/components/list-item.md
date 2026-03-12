@@ -29,7 +29,7 @@ keywords: ["list element", "d-list-item", "DtListItem", "dt-list-item"]
   </ul>
 </code-well-header>
 
-<!-- <component-combinator component-name="DtListItem" /> -->
+<component-combinator component-name="DtListItem" />
 
 ## Base Style
 

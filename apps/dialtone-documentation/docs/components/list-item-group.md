@@ -29,7 +29,7 @@ keywords: ["list group", "list items", "d-list-item-group", "DtListItemGroup", "
   </dt-list-item-group>
 </code-well-header>
 
-<!-- <component-combinator component-name="DtListItemGroup" /> -->
+<component-combinator component-name="DtListItemGroup" />
 
 ## Base Style
 

@@ -15,7 +15,7 @@ image: assets/images/components/text.png
   </dt-stack>
 </code-well-header>
 
-<!-- <component-combinator component-name="DtText" /> -->
+<component-combinator component-name="DtText" />
 
 ## Usage
 

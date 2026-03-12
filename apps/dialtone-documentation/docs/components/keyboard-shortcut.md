@@ -13,7 +13,7 @@ keywords: ["hotkey", "key binding", "shortcut key", "d-kbd", "DtKeyboardShortcut
   <dt-keyboard-shortcut shortcut="{cmd}+Ctrl+X"/>
 </code-well-header>
 
-<!-- <component-combinator component-name="DtKeyboardShortcut" /> -->
+<component-combinator component-name="DtKeyboardShortcut" />
 
 ## Base
 
