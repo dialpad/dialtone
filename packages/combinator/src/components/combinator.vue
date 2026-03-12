@@ -364,7 +364,7 @@ export default {
   &--fullscreen {
     position: fixed;
     inset: 0;
-    z-index: var(--zi-modal-element);
+    z-index: var(--zi-popover);
     background-color: var(--dt-color-surface-secondary);
   }
 

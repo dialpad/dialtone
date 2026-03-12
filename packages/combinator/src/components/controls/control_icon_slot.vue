@@ -6,7 +6,6 @@
       max-height="320px"
       list-class="d-w216"
       size="xs"
-      append-to="parent"
       @select="e => onSelect(filteredIcons[e])"
       @opened="onOpen"
     >
