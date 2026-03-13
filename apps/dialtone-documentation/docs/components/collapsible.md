@@ -9,9 +9,16 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-collapsible-
 keywords: ["accordion", "expand", "collapse", "toggle content", "d-collapsible", "DtCollapsible", "dt-collapsible", "disclosure", "expandable"]
 ---
 
-<code-well-header>
+<component-combinator component-name="DtCollapsible" />
+
+The collapsible component consists of two parts: the anchor and the content. If the anchor slot is not filled, the anchor will default to a basic button with text. The content must be provided and is the element that can be hidden or shown when the anchor is clicked.
+
+### Basic Usage Without Anchor Slot
+
+<code-well-header class="d-d-block">
   <div>
     <dt-collapsible
+      refexample-collapsible
       class="d-fc-primary"
       anchorText="Label 1"
       maxWidth="340px"
@@ -33,33 +40,30 @@ keywords: ["accordion", "expand", "collapse", "toggle content", "d-collapsible",
   </div>
 </code-well-header>
 
-<component-combinator component-name="DtCollapsible" />
-
-The collapsible component consists of two parts: the anchor and the content. If the anchor slot is not filled, the anchor will default to a basic button with text. The content must be provided and is the element that can be hidden or shown when the anchor is clicked.
-
-### Basic Usage Without Anchor Slot
-
-<code-well-header class="d-d-block">
-  <dt-collapsible
-    anchorText="Click me to toggle Content"
-    ref="example-collapsible"
-    >
-    <template #content>
-      <div>Content slot</div>
-    </template>
-  </dt-collapsible>
-</code-well-header>
-
 <code-example-tabs
 :htmlCode="() => $refs['example-collapsible']"
 vueCode='
-<dt-collapsible
-  anchorText="Click me to toggle Content"
->
-  <template #content>
-    <div>Content slot</div>
-  </template>
-</dt-collapsible>
+<div>
+  <dt-collapsible
+    class="d-fc-primary"
+    anchorText="Label 1"
+    maxWidth="340px"
+    initial-focus-element="first"
+    >
+    <template #content>
+      <div class="d-ta-center d-ba d-bc-warning d-bgc-warning d-bas-dotted d-baw2 d-p8 d-code--sm">(content slot)</div>
+    </template>
+  </dt-collapsible>
+  <dt-collapsible
+    anchorText="Label 2"
+    maxWidth="340px"
+    initial-focus-element="first"
+  >
+    <template #content>
+      <div class="d-ta-center d-ba d-bc-warning d-bgc-warning d-bas-dotted d-baw2 d-p8 d-code--sm">(content slot)</div>
+    </template>
+  </dt-collapsible>
+</div>
 '
 />
 

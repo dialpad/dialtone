@@ -5,7 +5,7 @@
     <dt-tab-group
       size="xs"
       borderless
-      outlined
+      kind="muted"
       activation-mode="auto"
       class="d-d-flex d-fd-column d-h100p"
       tab-list-class="d-ps-sticky d-t0 d-zi-base1 d-pr16 d-pt16 d-pb4"

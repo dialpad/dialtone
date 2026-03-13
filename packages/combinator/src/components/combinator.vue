@@ -28,7 +28,7 @@
         :model-value="selectedVariant"
         @update:model-value="updateVariant"
       />
-      <div class="d-js-end">
+      <div class="d-js-end d-as-center">
         <dt-stack
           gap="400"
           direction="row"
@@ -78,6 +78,7 @@
         :library="library"
         :disabled-members="disabledMembers"
       />
+      <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -->
       <div
         class="dialtone-playground__resizer"
         @pointerdown="startResize"
