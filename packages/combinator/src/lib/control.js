@@ -100,12 +100,11 @@ export function getControlByValue (value) {
 }
 
 export function getControlByMemberType (type, args) {
+  if (args?.values?.length > 0) {
+    return 'selection';
+  }
   switch (type) {
-    case 'string': {
-      return args?.values && args.values.length > 0
-        ? 'selection'
-        : 'string';
-    }
+    case 'string': return 'string';
     default: return type;
   }
 }
