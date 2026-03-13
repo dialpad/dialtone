@@ -10,6 +10,27 @@ const SUGGESTIONS = {
   inverted: 'invert',
 };
 
+/**
+ * v-dt-mode directive — applies a color mode (light, dark, or invert) to an element.
+ *
+ * Sets `data-dt-mode` and `data-dt-contrast` attributes so descendant token-based
+ * styles (`d-fc-primary`, `d-bgc-secondary`, etc.) resolve to the correct palette.
+ *
+ * @example
+ * // Explicit modes
+ * <section v-dt-mode:dark>Dark content</section>
+ * <section v-dt-mode:light>Light content</section>
+ *
+ * // Invert nearest parent mode (default when no arg)
+ * <section v-dt-mode>Inverted content</section>
+ * <section v-dt-mode:invert>Same as above</section>
+ *
+ * // Dynamic arg
+ * <section v-dt-mode:[reactiveMode]>Reactive mode</section>
+ *
+ * // Disable with false value
+ * <section v-dt-mode:dark="false">No mode applied</section>
+ */
 export const DtModeDirective = {
   name: 'dt-mode-directive',
   install (app) {
