@@ -33,6 +33,7 @@ import DtSelectMenu from './variants_select_menu.js';
 import DtSkeleton from './variants_skeleton.js';
 import DtSplitButton from './variants_split_button.js';
 import DtStack from './variants_stack.js';
+import DtTabGroup from './variants_tab_group.js';
 import DtText from './variants_text.js';
 import DtToast from './variants_toast.js';
 import DtToggle from './variants_toggle.js';
@@ -76,6 +77,7 @@ export default function variants () {
     DtSkeleton,
     DtSplitButton,
     DtStack,
+    DtTabGroup,
     DtText,
     DtToast,
     DtToggle,
