@@ -1,3 +1,4 @@
+ 
 export default {
   exclusions: [
     {
@@ -23,6 +24,43 @@ export default {
       default: {
         initialValue: 'Badge',
       },
+    },
+  },
+
+  'label with icon': {
+    props: {
+      type: { initialValue: 'default' },
+      text: { initialValue: 'Label' },
+      kind: { initialValue: 'label' },
+    },
+    slots: {
+      startIcon: { initialValue: '<dt-icon-lightning-bolt :size="iconSize" />' },
+    },
+  },
+
+  ai: {
+    props: {
+      type: { initialValue: 'ai' },
+    },
+    slots: {
+      default: { initialValue: 'AI Notes' },
+    },
+  },
+
+  locked: {
+    slots: {
+      startIcon: { initialValue: '<dt-icon-lock :size="iconSize" />' },
+      default: { initialValue: 'Locked' },
+    },
+  },
+
+  'count bulletin': {
+    props: {
+      kind: { initialValue: 'count' },
+      type: { initialValue: 'bulletin' },
+    },
+    slots: {
+      default: { initialValue: '9' },
     },
   },
 };

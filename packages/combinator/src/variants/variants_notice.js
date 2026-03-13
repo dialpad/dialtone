@@ -13,6 +13,29 @@ export default {
     },
   },
 
+  'info with action': {
+    props: {
+      title: { initialValue: 'Info title (optional)' },
+      kind: { initialValue: 'info' },
+    },
+    slots: {
+      default: { initialValue: 'Message body with <a href="#" class="d-link">a link</a>.' },
+      action: { initialValue: '<dt-button size="sm" importance="outlined" kind="muted">Action</dt-button>' },
+    },
+  },
+
+  'important warning': {
+    props: {
+      title: { initialValue: 'Warning title (optional)' },
+      kind: { initialValue: 'warning' },
+      important: { initialValue: true },
+    },
+    slots: {
+      default: { initialValue: 'Message body with <a href="#" class="d-link">a link</a>.' },
+      action: { initialValue: '<dt-button size="sm" importance="outlined" kind="inverted">Action</dt-button>' },
+    },
+  },
+
   truncated: {
     props: {
       truncateText: {

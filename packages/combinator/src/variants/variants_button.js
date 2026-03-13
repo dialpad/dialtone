@@ -1,4 +1,5 @@
  
+ 
 export default {
   exclusions: [
     {
@@ -105,6 +106,55 @@ export default {
       endIcon: {
         initialValue: '<dt-loader :size="iconSize" />',
       },
+    },
+  },
+
+  link: {
+    props: {
+      href: { initialValue: 'https://dialtone.dialpad.com' },
+      target: { initialValue: '_blank' },
+      rel: { initialValue: 'noopener noreferrer' },
+      kind: { initialValue: 'muted' },
+      importance: { initialValue: 'outlined' },
+      size: { initialValue: 'sm' },
+      iconPosition: { initialValue: 'right' },
+    },
+    slots: {
+      icon: { initialValue: '<dt-icon name="external-link" :size="iconSize" />' },
+      default: { initialValue: 'Dialtone' },
+    },
+  },
+
+  'router link': {
+    props: {
+      to: { initialValue: '/' },
+      kind: { initialValue: 'default' },
+      size: { initialValue: 'xs' },
+    },
+    slots: {
+      default: { initialValue: 'Home' },
+    },
+  },
+
+  'block start icon': {
+    props: {
+      importance: { initialValue: 'outlined' },
+    },
+    slots: {
+      blockStartIcon: { initialValue: '<dt-icon name="phone" :size="iconSize" />' },
+      default: { initialValue: 'Label' },
+    },
+  },
+
+  leading: {
+    props: {
+      kind: { initialValue: 'muted' },
+      importance: { initialValue: 'outlined' },
+      leadingClass: { initialValue: 'd-pl12' },
+    },
+    slots: {
+      default: { initialValue: 'Caution' },
+      leading: { initialValue: '<span class="d-bgc-critical-strong d-bar4 d-w12 d-h12"></span>' },
     },
   },
 

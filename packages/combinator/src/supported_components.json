@@ -9,6 +9,7 @@
   "DtInput",
   "DtKeyboardShortcut",
   "DtLazyShow",
+  "DtDropdown",
   "DtLink",
   "DtListItem", "ListItem",
   "DtNotice",

@@ -12,4 +12,14 @@ export default {
       },
     },
   },
+
+  'bold heading': {
+    props: {
+      heading: { initialValue: 'Example Heading' },
+      headingClass: { initialValue: 'd-fw-bold' },
+    },
+    slots: {
+      default: { initialValue: '<dt-list-item navigation-type="tab">item1</dt-list-item><dt-list-item navigation-type="tab">item2</dt-list-item><dt-list-item navigation-type="tab">item3</dt-list-item>' },
+    },
+  },
 };

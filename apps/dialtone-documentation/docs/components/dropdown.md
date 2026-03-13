@@ -9,7 +9,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["select","menu","picker","d-dropdown","DtDropdown","dt-dropdown"]
 ---
 
-<code-well-header>
+<!-- <code-well-header>
   <dt-dropdown navigation-type="arrow-keys">
     <template #anchor="{ attrs }">
       <dt-button v-bind="attrs">
@@ -52,9 +52,9 @@ keywords: ["select","menu","picker","d-dropdown","DtDropdown","dt-dropdown"]
       </dt-list-item-group>
     </template>
   </dt-dropdown>
-</code-well-header>
+</code-well-header> -->
 
-<!-- <component-combinator component-name="DtDropdown" /> -->
+<component-combinator component-name="DtDropdown" />
 
 ## Usage
 

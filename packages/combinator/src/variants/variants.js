@@ -8,6 +8,7 @@ import DtCard from './variants_card.js';
 import DtCheckbox from './variants_checkbox.js';
 import DtChip from './variants_chip.js';
 import DtCollapsible from './variants_collapsible.js';
+import DtDropdown from './variants_dropdown.js';
 import DtFilterPill from './variants_filter_pill.js';
 import DtIcon from './variants_icon.js';
 import DtImageViewer from './variants_image_viewer.js';
@@ -50,6 +51,7 @@ export default function variants () {
     DtCheckbox,
     DtChip,
     DtCollapsible,
+    DtDropdown,
     DtFilterPill,
     DtIcon,
     DtImageViewer,
