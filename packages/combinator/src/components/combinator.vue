@@ -1,5 +1,19 @@
 <template>
   <div :class="['dialtone-playground', { 'dialtone-playground--fullscreen': isFullScreen }]">
+    <div class="d-py16 d-px16 d-pb0">
+      <dt-select-menu
+        :options="[
+          { value: ``, label: `Please select one` },
+          { value: `1`, label: `Option 1` },
+          { value: `2`, label: `Option 2` },
+          { value: `3`, label: `Option 3` },
+        ]"
+        size="sm"
+        :label-visible="false"
+        label="Preset"
+        :model-value="modelValue"
+      />
+    </div>
     <div class="dialtone-playground__start">
       <dtc-renderer
         v-model:settings="settings"
@@ -223,9 +237,9 @@ const settings = computedModel(
   },
 );
 
-// function updateVariant (e) {
-//   selectedVariant.value = e;
-// }
+function updateVariant (e) {
+  selectedVariant.value = e;
+}
 
 /**
  * Gets a new instantiation of an info object.
