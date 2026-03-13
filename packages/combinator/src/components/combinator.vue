@@ -1,11 +1,26 @@
 <template>
   <div :class="['dialtone-playground', { 'dialtone-playground--fullscreen': isFullScreen }]">
-    <dt-stack
-      v-if="variantOptions.length > 1"
-      as="div"
-      class="d-p16 d-bb d-bc-subtle"
+    <div
+      class="
+        d-p16
+        d-bb
+        d-bc-subtle
+        d-d-grid
+        d-g16
+        d-ai-baseline
+      "
+      :class="variantOptions.length > 1 ? 'd-g-cols3' : 'd-g-cols2'"
     >
+      <dt-text
+        kind="code"
+        size="md"
+        tone="tertiary"
+      >
+        <span aria-hidden="true">&lt;</span>{{ component.name }}<span aria-hidden="true">&gt;</span>
+      </dt-text>
       <dt-select-menu
+        v-if="variantOptions.length > 1"
+        v-dt-tooltip="'Presets'"
         :options="variantOptions"
         size="sm"
         :label-visible="false"
@@ -13,7 +28,46 @@
         :model-value="selectedVariant"
         @update:model-value="updateVariant"
       />
-    </dt-stack>
+      <div class="d-js-end">
+        <dt-stack
+          gap="400"
+          direction="row"
+        >
+          <dt-button
+            v-if="hasChanges"
+            v-dt-tooltip="`Reset`"
+            kind="muted"
+            importance="clear"
+            size="sm"
+            @click="resetOptions"
+          >
+            <template #icon="{ iconSize }">
+              <dt-icon-refresh
+                :size="iconSize"
+              />
+            </template>
+          </dt-button>
+          <dt-button
+            v-dt-tooltip="`Fullscreen`"
+            kind="muted"
+            importance="clear"
+            size="sm"
+            @click="toggleFullScreen"
+          >
+            <template #icon="{ iconSize }">
+              <dt-icon-minimize
+                v-if="isFullScreen"
+                :size="iconSize"
+              />
+              <dt-icon-expand
+                v-else
+                :size="iconSize"
+              />
+            </template>
+          </dt-button>
+        </dt-stack>
+      </div>
+    </div>
     <div class="dialtone-playground__start">
       <dtc-renderer
         v-model:settings="settings"
@@ -24,19 +78,21 @@
         :library="library"
         :disabled-members="disabledMembers"
       />
+      <div
+        class="dialtone-playground__resizer"
+        @pointerdown="startResize"
+        @dblclick="optionBarWidth = null"
+      />
       <dtc-option-bar
         v-if="!blueprint"
         v-model:options="options"
         :component="component"
         :info="info"
-        :default-info="defaultInfo"
-        @toggle-full-screen="toggleFullScreen"
-        @reset="updateVariant('default')"
+        :style="optionBarWidth ? { 'inline-size': optionBarWidth } : {}"
       />
     </div>
     <div class="dialtone-playground__end">
       <dtc-code-panel
-
         :info="info"
         :options="options"
         :settings="settings"
@@ -67,6 +123,9 @@ import {
 } from '@/src/lib/constants';
 import defaultSettings from '@/src/settings.json';
 import DtcCodePanel from './code_panel/code_panel.vue';
+import DtIconMinimize from '@dialpad/dialtone-icons/vue/minimize';
+import DtIconExpand from '@dialpad/dialtone-icons/vue/expand';
+import DtIconRefresh from '@dialpad/dialtone-icons/vue/refresh';
 // import supportedComponents from '@/src/supported_components.json';
 // import DtcCodeExample from './code_example/code_example.vue';
 // import DtcSettingsMenu from './settings_menu/settings_menu.vue';
@@ -127,6 +186,7 @@ const props = defineProps({
 const selectedVariant = ref('default');
 const activeVariant = ref('default');
 const isFullScreen = ref(false);
+const optionBarWidth = ref(null);
 let _presetChanging = false;
 const _forceReset = ref(0);
 // const showUnsupportedWarning = ref(!supportedComponents.includes(props.component?.name));
@@ -348,14 +408,49 @@ function getInitialValues (info) {
 //   showUnsupportedWarning.value = false;
 // }
 
-function toggleFullScreen ($event) {
-  if ($event) {
+const hasChanges = computed(() => {
+  const referenceInfo = defaultInfo.value ?? info.value;
+  const memberGroups = ['props', 'slots', 'attributes'];
+  for (const group of memberGroups) {
+    const members = referenceInfo[group];
+    if (!members) continue;
+    for (const member of members) {
+      if (options.value[group]?.[member.name] !== member.initialValue) return true;
+    }
+  }
+  return false;
+});
+
+function resetOptions () {
+  updateVariant('default');
+}
+
+function startResize (e) {
+  e.preventDefault();
+  const startX = e.clientX;
+  const startWidth = document.querySelector('.dialtone-playground__controls')?.offsetWidth ?? 0;
+
+  function onMove (e) {
+    const delta = startX - e.clientX;
+    optionBarWidth.value = Math.max(200, startWidth + delta) + 'px';
+  }
+
+  function onUp () {
+    document.removeEventListener('pointermove', onMove);
+    document.removeEventListener('pointerup', onUp);
+  }
+
+  document.addEventListener('pointermove', onMove);
+  document.addEventListener('pointerup', onUp);
+}
+
+function toggleFullScreen () {
+  isFullScreen.value = !isFullScreen.value;
+  if (isFullScreen.value) {
     document.body.classList.add('d-of-hidden', 'd-h100vh');
   } else {
     document.body.classList.remove('d-of-hidden', 'd-h100vh');
   }
-
-  isFullScreen.value = $event;
 }
 
 /**
@@ -448,6 +543,8 @@ export default {
 
   &__component {
     padding: var(--dt-spacing-200);
+    padding-inline-end: 0;
+    padding-inline-start: var(--dt-spacing-400);
     display: grid;
     flex: 1;
     align-items: center;
@@ -459,8 +556,31 @@ export default {
     }
   }
 
+  &__resizer {
+    inline-size: 32px;
+    cursor: col-resize;
+    flex-shrink: 0;
+    position: relative;
+
+    &::before {
+      inline-size: 3px;
+      content: '';
+      position: absolute;
+      inset-block: 0;
+      inset-inline-start: 50%;
+      background-color: transparent;
+      transition: background-color 0.25s ease-in;
+    }
+    &:hover::before,
+    &:active::before {
+      background-color: var(--dt-color-border-focus);
+    }
+  }
+
   &__controls {
     inline-size: var(--dt-size-875);
+    max-inline-size: var(--dt-size-1000);
+    flex-shrink: 0;
     max-block-size: var(--dt-size-950);
 
     :where(.dialtone-playground--fullscreen) & {

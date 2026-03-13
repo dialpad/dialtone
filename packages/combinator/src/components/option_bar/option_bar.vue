@@ -26,44 +26,6 @@
         >
           Slots
         </dt-tab>
-        <dt-stack
-          gap="400"
-          direction="row"
-          class="d-ml-auto"
-        >
-          <dt-button
-            v-if="hasChanges"
-            v-dt-tooltip="`Reset`"
-            kind="muted"
-            importance="clear"
-            size="xs"
-            @click="resetOptions"
-          >
-            <template #icon="{ iconSize }">
-              <dt-icon-refresh
-                :size="iconSize"
-              />
-            </template>
-          </dt-button>
-          <dt-button
-            v-dt-tooltip="`Fullscreen`"
-            kind="muted"
-            importance="clear"
-            size="xs"
-            @click="toggleFullScreen"
-          >
-            <template #icon="{ iconSize }">
-              <dt-icon-minimize
-                v-if="isFullscreen"
-                :size="iconSize"
-              />
-              <dt-icon-expand
-                v-else
-                :size="iconSize"
-              />
-            </template>
-          </dt-button>
-        </dt-stack>
       </template>
       <div
         v-dt-scrollbar
@@ -133,14 +95,11 @@
 
 <script setup>
 import DtcOptionBarMemberGroup from './option_bar_member_group.vue';
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 import { OPTIONS_UPDATE_EVENT } from '@/src/lib/constants';
 import { getControlByMemberType, getControlByValue } from '@/src/lib/control';
 import { isIconSlot } from '@/src/lib/icons';
-import { DtButton, DtStack, DtTabGroup, DtTab, DtTabPanel } from '@dialpad/dialtone-vue';
-import DtIconMinimize from '@dialpad/dialtone-icons/vue/minimize';
-import DtIconExpand from '@dialpad/dialtone-icons/vue/expand';
-import DtIconRefresh from '@dialpad/dialtone-icons/vue/refresh';
+import { DtStack, DtTabGroup, DtTab, DtTabPanel } from '@dialpad/dialtone-vue';
 
 const props = defineProps({
   /**
@@ -164,36 +123,9 @@ const props = defineProps({
     type: Object,
     required: true,
   },
-  /**
-   * Info for the default variant, used as the reference for reset and change detection.
-   */
-  defaultInfo: {
-    type: Object,
-    default: null,
-  },
 });
 
-const emit = defineEmits([OPTIONS_UPDATE_EVENT, 'toggle-full-screen', 'reset']);
-
-const isFullscreen = ref(false);
-
-const hasChanges = computed(() => {
-  const referenceInfo = props.defaultInfo ?? props.info;
-  const memberGroups = ['props', 'slots', 'attributes'];
-  for (const group of memberGroups) {
-    const members = referenceInfo[group];
-    if (!members) continue;
-    for (const member of members) {
-      if (props.options[group]?.[member.name] !== member.initialValue) return true;
-    }
-  }
-  return false;
-});
-
-const toggleFullScreen = () => {
-  isFullscreen.value = !isFullscreen.value;
-  emit('toggle-full-screen', isFullscreen.value);
-}
+const emit = defineEmits([OPTIONS_UPDATE_EVENT]);
 
 /**
  * Gets an array of controls for a binding.
@@ -262,10 +194,6 @@ function updateMember (memberGroup, { member, value }) {
   emit(OPTIONS_UPDATE_EVENT, (options) => {
     options[memberGroup][member] = value;
   });
-}
-
-function resetOptions () {
-  emit('reset');
 }
 
 function updateSlots (e) {
