@@ -133,7 +133,7 @@ import { ref, computed } from 'vue';
 import { OPTIONS_UPDATE_EVENT } from '@/src/lib/constants';
 import { getControlByMemberType, getControlByValue } from '@/src/lib/control';
 import { isIconSlot } from '@/src/lib/icons';
-import { DtButton, DtStack, DtText, DtTabGroup, DtTab, DtTabPanel } from '@dialpad/dialtone-vue';
+import { DtButton, DtStack, DtTabGroup, DtTab, DtTabPanel } from '@dialpad/dialtone-vue';
 import DtIconMinimize from '@dialpad/dialtone-icons/vue3/minimize';
 import DtIconExpand from '@dialpad/dialtone-icons/vue3/expand';
 import DtIconRefresh from '@dialpad/dialtone-icons/vue3/refresh';

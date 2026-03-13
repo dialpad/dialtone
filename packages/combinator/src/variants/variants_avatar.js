@@ -12,5 +12,14 @@ export default {
     },
   ],
 
-  default: {},
+  default: {
+    props: {
+      fullName: {
+        initialValue: 'DP',
+      },
+      seed: {
+        initialValue: 'user-unique-id',
+      },
+    },
+  },
 };
