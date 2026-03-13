@@ -1,5 +1,3 @@
- 
- 
 export default {
   exclusions: [
     {
@@ -98,10 +96,28 @@ export default {
     },
   },
 
-  loading: {
+  'loading': {
+    props: {
+      loading: {
+        initialValue: true,
+      },
+    },
     slots: {
       default: {
-        initialValue: 'Validating',
+        initialValue: 'Add contact',
+      },
+    },
+  },
+
+  'loading with label, disabled': {
+    props: {
+      disabled: {
+        initialValue: true,
+      },
+    },
+    slots: {
+      default: {
+        initialValue: 'Add contact',
       },
       endIcon: {
         initialValue: '<dt-loader :size="iconSize" />',
@@ -109,7 +125,7 @@ export default {
     },
   },
 
-  link: {
+  'render as anchor element': {
     props: {
       href: { initialValue: 'https://dialtone.dialpad.com' },
       target: { initialValue: '_blank' },
@@ -136,6 +152,16 @@ export default {
     },
   },
 
+  'render as warning link text': {
+    props: {
+      link: { initialValue: true },
+      linkKind: { initialValue: 'warning' },
+    },
+    slots: {
+      default: { initialValue: 'Warning link text' },
+    },
+  },
+
   'block start icon': {
     props: {
       importance: { initialValue: 'outlined' },
@@ -146,7 +172,7 @@ export default {
     },
   },
 
-  leading: {
+  'with leading slot': {
     props: {
       kind: { initialValue: 'muted' },
       importance: { initialValue: 'outlined' },
@@ -158,7 +184,7 @@ export default {
     },
   },
 
-  'with trailing': {
+  'with trailing slot': {
     props: {
       size: {
         initialValue: 'sm',

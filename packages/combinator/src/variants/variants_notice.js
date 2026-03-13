@@ -3,7 +3,7 @@ export default {
   default: {
     slots: {
       default: {
-        initialValue: 'Message body with <a href="#" class="d-link">a link</a>.',
+        initialValue: 'Message body with <dt-link to="/path/to/">a link</dt-link>.',
       },
     },
     props: {
@@ -19,7 +19,7 @@ export default {
       kind: { initialValue: 'info' },
     },
     slots: {
-      default: { initialValue: 'Message body with <a href="#" class="d-link">a link</a>.' },
+      default: { initialValue: 'Message body with <dt-link to="/path/to/">a link</dt-link>.' },
       action: { initialValue: '<dt-button size="sm" importance="outlined" kind="muted">Action</dt-button>' },
     },
   },
@@ -31,7 +31,7 @@ export default {
       important: { initialValue: true },
     },
     slots: {
-      default: { initialValue: 'Message body with <a href="#" class="d-link">a link</a>.' },
+      default: { initialValue: 'Message body with <dt-link v-dt-mode:invert to="/path/to/">a link</dt-link>.' },
       action: { initialValue: '<dt-button size="sm" importance="outlined" kind="inverted">Action</dt-button>' },
     },
   },

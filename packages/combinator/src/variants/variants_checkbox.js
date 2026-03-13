@@ -1,4 +1,4 @@
- 
+/* eslint-disable max-len */
 export default {
   default: {
     props: {
@@ -12,6 +12,14 @@ export default {
     props: {
       label: { initialValue: 'Block callers not already in contacts list' },
       description: { initialValue: 'You get enough calls. Free up some of your time.' },
+    },
+  },
+
+  'with validation': {
+    props: {
+      label: { initialValue: 'Block callers not already in contacts list' },
+      validationState: { initialValue: 'warning' },
+      messages: { initialValue: [{ message: 'Select how phone numbers you dont know should be handled.', type: 'warning' }] },
     },
   },
 };

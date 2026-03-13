@@ -1,6 +1,10 @@
 /* eslint-disable max-len */
 export default {
   default: {
+    props: {
+      interactive: { initialValue: false },
+      size: { initialValue: 'xs' },
+    },
     slots: {
       default: {
         initialValue: 'Chip',
@@ -8,13 +12,13 @@ export default {
     },
   },
 
-  'non-interactive': {
+  'interactive': {
     props: {
-      interactive: { initialValue: false },
+      interactive: { initialValue: true },
       size: { initialValue: 'xs' },
     },
     slots: {
-      default: { initialValue: 'chip' },
+      default: { initialValue: 'Chip' },
     },
   },
 
