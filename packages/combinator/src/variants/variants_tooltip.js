@@ -24,7 +24,6 @@ export default {
       },
       inverted: {
         initialValue: true,
-        lockControl: true,
       },
     },
     slots: {

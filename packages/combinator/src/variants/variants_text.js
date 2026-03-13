@@ -20,7 +20,6 @@ export default {
     props: {
       kind: {
         initialValue: 'headline',
-        lockControl: true,
       },
       size: {
         initialValue: 'xl',
@@ -39,7 +38,6 @@ export default {
     props: {
       kind: {
         initialValue: 'body',
-        lockControl: true,
       },
       size: {
         initialValue: 'md',
@@ -58,7 +56,6 @@ export default {
     props: {
       kind: {
         initialValue: 'label',
-        lockControl: true,
       },
       size: {
         initialValue: 'sm',
@@ -74,7 +71,6 @@ export default {
     props: {
       kind: {
         initialValue: 'code',
-        lockControl: true,
       },
       size: {
         initialValue: 'xs',

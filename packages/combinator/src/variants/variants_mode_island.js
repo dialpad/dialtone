@@ -10,7 +10,6 @@ export default {
     props: {
       mode: {
         initialValue: 'light',
-        lockControl: true,
       },
     },
     slots: {
@@ -23,7 +22,6 @@ export default {
     props: {
       mode: {
         initialValue: 'dark',
-        lockControl: true,
       },
     },
     slots: {

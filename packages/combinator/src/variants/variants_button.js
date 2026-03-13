@@ -1,3 +1,4 @@
+ 
 export default {
   exclusions: [
     {
@@ -27,107 +28,110 @@ export default {
       },
     },
   },
-  primary: {
-    slots: {
-      default: {
-        initialValue: 'Primary',
-      },
-    },
-    props: {
-      importance: {
-        initialValue: 'primary',
-        lockControl: true,
-      },
-    },
-  },
-  outlined: {
-    slots: {
-      default: {
-        initialValue: 'Outlined',
-      },
-    },
+
+  'start icon': {
     props: {
       importance: {
         initialValue: 'outlined',
-        lockControl: true,
+      },
+    },
+    slots: {
+      default: {
+        initialValue: 'Label',
+      },
+      startIcon: {
+        initialValue: '<dt-icon-phone :size="iconSize" />',
       },
     },
   },
-  clear: {
+
+  'end icon': {
     slots: {
       default: {
-        initialValue: 'Clear',
+        initialValue: 'Label',
+      },
+      endIcon: {
+        initialValue: '<dt-icon-arrow-right :size="iconSize" />',
       },
     },
+  },
+
+  'small muted': {
     props: {
       importance: {
+        initialValue: 'outlined',
+      },
+      kind: {
+        initialValue: 'muted',
+      },
+      size: {
+        initialValue: 'sm',
+      },
+    },
+    slots: {
+      default: {
+        initialValue: 'Label',
+      },
+      startIcon: {
+        initialValue: '<dt-icon-phone :size="iconSize" />',
+      },
+      endIcon: {
+        initialValue: '<dt-icon-arrow-right :size="iconSize" />',
+      },
+    },
+  },
+
+  'icon only': {
+    props: {
+      kind: {
+        initialValue: 'muted',
+      },
+      importance: {
         initialValue: 'clear',
-        lockControl: true,
       },
     },
-  },
-  danger: {
     slots: {
-      default: {
-        initialValue: 'Danger',
-      },
-    },
-    props: {
-      kind: {
-        initialValue: 'danger',
-        lockControl: true,
+      startIcon: {
+        initialValue: '<dt-icon-phone :size="iconSize" />',
       },
     },
   },
-  inverted: {
-    slots: {
-      default: {
-        initialValue: 'Inverted',
-      },
-    },
-    props: {
-      kind: {
-        initialValue: 'inverted',
-        lockControl: true,
-      },
-    },
-  },
-  disabled: {
-    slots: {
-      default: {
-        initialValue: 'Disabled',
-      },
-    },
-    attributes: {
-      disabled: {
-        initialValue: true,
-        lockControl: true,
-      },
-    },
-  },
-  link: {
-    slots: {
-      default: {
-        initialValue: 'Link',
-      },
-    },
-    props: {
-      link: {
-        initialValue: true,
-        lockControl: true,
-      },
-    },
-  },
+
   loading: {
     slots: {
       default: {
-        initialValue: 'Loading',
+        initialValue: 'Validating',
+      },
+      endIcon: {
+        initialValue: '<dt-loader :size="iconSize" />',
       },
     },
+  },
+
+  'with trailing': {
     props: {
-      loading: {
-        initialValue: true,
-        lockControl: true,
+      size: {
+        initialValue: 'sm',
+      },
+      kind: {
+        initialValue: 'muted',
+      },
+      importance: {
+        initialValue: 'outlined',
+      },
+      trailingClass: {
+        initialValue: 'd-pr2',
+      },
+    },
+    slots: {
+      default: {
+        initialValue: 'Copy',
+      },
+      icon: {
+        initialValue: '<dt-icon-copy :size="iconSize" />',
+      },
+      trailing: {
+        initialValue: '<dt-keyboard-shortcut shortcut="{cmd}+C" />',
       },
     },
   },

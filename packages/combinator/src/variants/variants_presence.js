@@ -10,7 +10,6 @@ export default {
     props: {
       presence: {
         initialValue: 'busy',
-        lockControl: true,
       },
     },
   },
@@ -18,7 +17,6 @@ export default {
     props: {
       presence: {
         initialValue: 'away',
-        lockControl: true,
       },
     },
   },
@@ -26,7 +24,6 @@ export default {
     props: {
       presence: {
         initialValue: 'offline',
-        lockControl: true,
       },
     },
   },
