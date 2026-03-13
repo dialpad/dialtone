@@ -1,4 +1,4 @@
- 
+
 export default {
   default: {
     slots: {
@@ -12,7 +12,7 @@ export default {
       },
     },
   },
-  headline: {
+  'Extra large headline': {
     slots: {
       default: {
         initialValue: 'Extra large headline',
@@ -30,7 +30,7 @@ export default {
       },
     },
   },
-  body: {
+  'Medium body': {
     slots: {
       default: {
         initialValue: 'Medium body',
@@ -48,7 +48,7 @@ export default {
       },
     },
   },
-  label: {
+  'Small label': {
     slots: {
       default: {
         initialValue: 'Small label',
@@ -63,7 +63,7 @@ export default {
       },
     },
   },
-  code: {
+  'Extra small code': {
     slots: {
       default: {
         initialValue: 'Extra small code',
