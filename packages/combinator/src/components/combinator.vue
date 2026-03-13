@@ -333,6 +333,8 @@ export default {
     display:none;
     flex-direction: column;
     margin-block-start: var(--dt-spacing-200);
+    background-color: var(--dt-color-surface-secondary);
+    border-radius: var(--dt-size-radius-400);
 
     @media screen and (min-width: 640px) {
       display: flex;
@@ -341,8 +343,6 @@ export default {
 
   &__start {
     flex-grow: 1;
-    background-color: var(--dt-color-surface-secondary);
-    border-radius: var(--dt-size-radius-400);
 
     @media screen and (min-width: 640px) {
       display: flex;
@@ -356,7 +356,7 @@ export default {
   }
 
   &__end {
-    background-color: var(--dt-color-surface-secondary-opaque);
+    border-block-start: 1px solid var(--dt-color-border-subtle);
     :where(.dialtone-playground--fullscreen) & {
       block-size: 33vh;
     }
