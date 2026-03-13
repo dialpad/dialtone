@@ -3,7 +3,7 @@
     <dt-stack
       v-if="variantOptions.length > 1"
       as="div"
-      class="d-py16 d-px16 d-pb0"
+      class="d-p16 d-bb d-bc-subtle"
     >
       <dt-select-menu
         :options="variantOptions"
@@ -439,7 +439,7 @@ export default {
   }
 
   &__end {
-    border-block-start: var(--dt-size-border-50) solid var(--dt-color-border-subtle);
+    border-block-start: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
     :where(.dialtone-playground--fullscreen) & {
       block-size: 33vh;
       max-block-size: none;

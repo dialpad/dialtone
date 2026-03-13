@@ -2,40 +2,6 @@
   <section
     class="dialtone-playground__controls d-ps-relative"
   >
-    <div class="d-ps-absolute d-t16 d-r16 d-zi-navigation d-d-flex d-g4">
-      <dt-button
-        v-if="hasChanges"
-        v-dt-tooltip="`Reset`"
-        kind="muted"
-        importance="clear"
-        size="xs"
-        @click="resetOptions"
-      >
-        <template #icon="{ iconSize }">
-          <dt-icon-refresh
-            :size="iconSize"
-          />
-        </template>
-      </dt-button>
-      <dt-button
-        v-dt-tooltip="`Fullscreen`"
-        kind="muted"
-        importance="clear"
-        size="xs"
-        @click="toggleFullScreen"
-      >
-        <template #icon="{ iconSize }">
-          <dt-icon-minimize
-            v-if="isFullscreen"
-            :size="iconSize"
-          />
-          <dt-icon-expand
-            v-else
-            :size="iconSize"
-          />
-        </template>
-      </dt-button>
-    </div>
     <dt-tab-group
       size="xs"
       borderless
@@ -60,6 +26,44 @@
         >
           Slots
         </dt-tab>
+        <dt-stack
+          gap="400"
+          direction="row"
+          class="d-ml-auto"
+        >
+          <dt-button
+            v-if="hasChanges"
+            v-dt-tooltip="`Reset`"
+            kind="muted"
+            importance="clear"
+            size="xs"
+            @click="resetOptions"
+          >
+            <template #icon="{ iconSize }">
+              <dt-icon-refresh
+                :size="iconSize"
+              />
+            </template>
+          </dt-button>
+          <dt-button
+            v-dt-tooltip="`Fullscreen`"
+            kind="muted"
+            importance="clear"
+            size="xs"
+            @click="toggleFullScreen"
+          >
+            <template #icon="{ iconSize }">
+              <dt-icon-minimize
+                v-if="isFullscreen"
+                :size="iconSize"
+              />
+              <dt-icon-expand
+                v-else
+                :size="iconSize"
+              />
+            </template>
+          </dt-button>
+        </dt-stack>
       </template>
       <div
         v-dt-scrollbar
