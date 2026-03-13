@@ -9,27 +9,6 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-card--defaul
 keywords: ["panel", "container", "box", "d-card", "DtCard", "dt-card", "tile", "surface"]
 ---
 
-<code-well-header>
-  <div class="d-card d-w264">
-    <div class="d-card__header">
-      <dt-text as="p" kind="headline" size="md">
-        Lorem ipsum
-      </dt-text>
-      <button type="button" class="d-btn d-btn--xs d-btn--circle">
-        <dt-icon name="more-vertical" size="200" />
-      </button>
-    </div>
-    <div class="d-card__content">
-      Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
-    </div>
-    <div class="d-card__footer">
-      <dt-stack direction="row" gap="400">
-        <button type="button" class="d-btn d-btn--sm d-btn--outlined">Button</button>
-      </dt-stack>
-    </div>
-  </div>
-</code-well-header>
-
 <component-combinator component-name="DtCard" />
 
 ## Usage
