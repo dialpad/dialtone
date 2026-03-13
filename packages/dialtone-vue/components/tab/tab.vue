@@ -2,7 +2,9 @@
   <dt-button
     :id="`dt-tab-${id}`"
     :class="[
+      'd-tablist__item',
       tabClass,
+      { 'd-tablist__item--vertical': groupContext.orientation === 'vertical' },
       { 'd-btn--disabled': isDisabled },
       { 'd-tab--is-selected': !groupContext.outlined && groupContext.kind !== 'muted' && isSelected },
     ]"
@@ -68,7 +70,8 @@
     <!-- @slot default slot, defaults contains dt-button -->
     <span
       ref="tabLabel"
-      class="d-tab__label"
+      class="d-tablist__item-label"
+      data-qa="dt-tab-label"
     >
       <slot />
     </span>

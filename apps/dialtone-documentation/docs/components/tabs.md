@@ -9,9 +9,10 @@ keywords: ["tab panel", "tab navigation", "d-tabs", "DtTabs", "dt-tabs", "segmen
 ---
 
 <code-well-header>
-  <div class="d-w100p">
+  <dt-stack class="d-w100p" gap="500">
     <example-tabs />
-  </div>
+    <example-tabs ref="verticalTabsExample" orientation="vertical" />
+  </dt-stack>
 </code-well-header>
 
 ## Variants
@@ -282,7 +283,9 @@ vueCode='
 '
 showHtmlWarning />
 
-## Icon Support
+## Slots
+
+### Icon
 
 Use the `#startIcon` or `#endIcon` slot on `dt-tab` to add an icon. The slot provides `iconSize` to match the tab's size.
 
@@ -292,22 +295,28 @@ Use the `#startIcon` or `#endIcon` slot on `dt-tab` to add an icon. The slot pro
 
 <code-well-header>
   <div class="d-w100p">
-    <dt-tab-group>
+    <dt-tab-group ref="iconTabsExample">
       <template #tabs>
         <dt-tab id="1" panel-id="2" selected>
+          First
           <template #startIcon="{ iconSize }">
             <dt-icon name="box-select" :size="iconSize" />
           </template>
-          First
         </dt-tab>
         <dt-tab id="3" panel-id="4">
           Second
-        </dt-tab>
-        <dt-tab id="5" panel-id="6">
+          <template #startIcon="{ iconSize }">
+            <dt-icon name="box-select" :size="iconSize" />
+          </template>
           <template #endIcon="{ iconSize }">
             <dt-icon name="box-select" :size="iconSize" />
           </template>
+        </dt-tab>
+        <dt-tab id="5" panel-id="6">
           Third
+          <template #endIcon="{ iconSize }">
+            <dt-icon name="box-select" :size="iconSize" />
+          </template>
         </dt-tab>
       </template>
     </dt-tab-group>
@@ -315,36 +324,43 @@ Use the `#startIcon` or `#endIcon` slot on `dt-tab` to add an icon. The slot pro
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.iconTabsExample'
 vueCode='
 <dt-tab-group>
   <template #tabs>
     <dt-tab id="1" panel-id="2" selected>
+      First
       <template #startIcon="{ iconSize }">
         <dt-icon name="box-select" :size="iconSize" />
       </template>
-      First
     </dt-tab>
     <dt-tab id="3" panel-id="4">
       Second
-    </dt-tab>
-    <dt-tab id="5" panel-id="6">
+      <template #startIcon="{ iconSize }">
+        <dt-icon name="box-select" :size="iconSize" />
+      </template>
       <template #endIcon="{ iconSize }">
         <dt-icon name="box-select" :size="iconSize" />
       </template>
+    </dt-tab>
+    <dt-tab id="5" panel-id="6">
       Third
+      <template #endIcon="{ iconSize }">
+        <dt-icon name="box-select" :size="iconSize" />
+      </template>
     </dt-tab>
   </template>
 </dt-tab-group>
 '
 showHtmlWarning />
 
-## Leading & Trailing
+### Leading & Trailing
 
 Use the `#leading` and `#trailing` slots on `dt-tab` to render content like badges or count indicators alongside tab labels. Use `leading-class` and `trailing-class` to adjust padding.
 
 <code-well-header>
   <div class="d-w100p">
-    <dt-tab-group>
+    <dt-tab-group ref="leadingTrailingTabsExample">
       <template #tabs>
         <dt-tab id="lt1" panel-id="lt2" selected trailing-class="d-pr8">
           Inbox
@@ -367,6 +383,7 @@ Use the `#leading` and `#trailing` slots on `dt-tab` to render content like badg
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.leadingTrailingTabsExample'
 vueCode='
 <dt-tab-group>
   <template #tabs>
@@ -385,6 +402,27 @@ vueCode='
     <dt-tab id="lt5" panel-id="lt6">
       Drafts
     </dt-tab>
+  </template>
+</dt-tab-group>
+'
+showHtmlWarning />
+
+## Orientation
+
+Set `orientation="vertical"` to stack tabs vertically alongside the panel.
+
+<code-well-header>
+  <example-tabs ref="verticalTabsExample" orientation="vertical" />
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.verticalTabsExample'
+vueCode='
+<dt-tab-group orientation="vertical">
+  <template #tabs>
+    <dt-tab id="1" panel-id="2" selected>First</dt-tab>
+    <dt-tab id="3" panel-id="4">Second</dt-tab>
+    <dt-tab id="5" panel-id="6">Third</dt-tab>
   </template>
 </dt-tab-group>
 '

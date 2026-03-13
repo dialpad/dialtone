@@ -2,7 +2,7 @@
   <dt-tab-group
     class="code-example-tab-group"
     activation-mode="auto"
-    size="sm"
+    size="xs"
     @change="selectedPanelId = $event.selected"
   >
     <template #tabs>
@@ -38,7 +38,7 @@
       :id="vuePanelId"
       :tab-id="vueTabId"
     >
-      <div ref="vuePanelRef" v-dt-scrollbar class="language-html d-hmx332" data-ext="html">
+      <div ref="vuePanelRef" v-dt-scrollbar class="language-html d-hmx164" data-ext="html">
         <pre class="language-html" v-html="highlightedVue" />
       </div>
     </dt-tab-panel>
@@ -55,20 +55,20 @@
       >
         Raw HTML renders visuals only. You may need to add JS to replicate its functionality.
       </dt-banner>
-      <div ref="htmlPanelRef" v-dt-scrollbar class="language-html d-hmx332" data-ext="html">
+      <div ref="htmlPanelRef" v-dt-scrollbar class="language-html d-hmx164" data-ext="html">
         <pre class="language-html" v-html="highlightedHtml" />
       </div>
     </dt-tab-panel>
     <div
       v-if="shouldShowButton"
-      class="code-example-tab-group__more d-ps-absolute d-bn16 d-l50p"
+      class="code-example-tab-group__more d-ps-absolute d-bn8 d-l50p"
       aria-hidden="true"
     >
       <dt-button
         class="code-example-tab-group__more-btn d-bgc-secondary d-bs-sm"
         kind="muted"
         importance="outlined"
-        size="sm"
+        size="xs"
         @click="expandCodeBlocks"
       >
         Show all
@@ -148,7 +148,7 @@ const selectedPanelId = ref(vuePanelId);
 const vuePanelRef = ref(null);
 const htmlPanelRef = ref(null);
 const { shouldShowButton, handleExpand, initExpandable } = useDocExpandable({
-  maxHeightClass: 'd-hmx332',
+  maxHeightClass: 'd-hmx164',
 });
 
 /**
