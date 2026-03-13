@@ -134,9 +134,9 @@ import { OPTIONS_UPDATE_EVENT } from '@/src/lib/constants';
 import { getControlByMemberType, getControlByValue } from '@/src/lib/control';
 import { isIconSlot } from '@/src/lib/icons';
 import { DtButton, DtStack, DtTabGroup, DtTab, DtTabPanel } from '@dialpad/dialtone-vue';
-import DtIconMinimize from '@dialpad/dialtone-icons/vue3/minimize';
-import DtIconExpand from '@dialpad/dialtone-icons/vue3/expand';
-import DtIconRefresh from '@dialpad/dialtone-icons/vue3/refresh';
+import DtIconMinimize from '@dialpad/dialtone-icons/vue/minimize';
+import DtIconExpand from '@dialpad/dialtone-icons/vue/expand';
+import DtIconRefresh from '@dialpad/dialtone-icons/vue/refresh';
 
 const props = defineProps({
   /**

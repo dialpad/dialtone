@@ -46,7 +46,7 @@ import { DtIconCreditCard } from '@dialpad/dialtone-icons/vue2';
 ### Vue 3
 
 ```js
-import { DtIconCreditCard } from '@dialpad/dialtone-icons/vue3';
+import { DtIconCreditCard } from '@dialpad/dialtone-icons/vue';
 <dt-icon-credit-card size="500" aria-label="Description" />
 ```
 

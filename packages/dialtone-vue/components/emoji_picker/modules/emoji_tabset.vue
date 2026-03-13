@@ -43,7 +43,7 @@ import {
   DtIconHeart,
   DtIconFlag,
   DtIconDialpadStar,
-} from '@dialpad/dialtone-icons/vue3';
+} from '@dialpad/dialtone-icons/vue';
 
 const props = defineProps({
   /**

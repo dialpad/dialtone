@@ -42,7 +42,7 @@
 </template>
 
 <script setup>
-import DtIconLock from '@dialpad/dialtone-icons/vue3/lock';
+import DtIconLock from '@dialpad/dialtone-icons/vue/lock';
 import { DtBadge, DtText } from '@dialpad/dialtone-vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { computed } from 'vue';

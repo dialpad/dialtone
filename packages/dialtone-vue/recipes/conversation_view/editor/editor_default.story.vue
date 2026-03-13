@@ -11,6 +11,7 @@
       :placeholder="$attrs.placeholder"
       :max-height="$attrs.maxHeight"
       :show-add-link="$attrs.showAddLink"
+      :preserve-whitespace="$attrs.preserveWhitespace"
       :use-div-tags="$attrs.useDivTags"
       :show-bold-button="$attrs.showBoldButton"
       :show-italics-button="$attrs.showItalicsButton"

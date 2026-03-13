@@ -66,7 +66,7 @@
 import DtcCodeEditorTagAttributes from './code_editor_tag_attributes.vue';
 import DtcCodeEditorElement from './code_editor_element.vue';
 import DtcCodeEditorSlot from './code_editor_slot.vue';
-import { DtIconCheck, DtIconCopy } from '@dialpad/dialtone-icons/vue3';
+import { DtIconCheck, DtIconCopy } from '@dialpad/dialtone-icons/vue';
 import { DtButton, DtStack } from '@dialpad/dialtone-vue';
 
 import { OPTIONS_UPDATE_EVENT, SETTINGS_INDENT_KEY, DEFAULT_SLOT_NAME } from '@/src/lib/constants';

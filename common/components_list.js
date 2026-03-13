@@ -12,6 +12,7 @@ module.exports = [
   'chip.vue',
   'codeblock.vue',
   'collapsible.vue',
+  'motion_text.vue',
   'combobox.vue',
   'description_list.vue',
   'dropdown.vue',

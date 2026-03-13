@@ -623,7 +623,38 @@
 //  $$  LOADING STATE
 //  ----------------------------------------------------------------------------
 .d-btn--loading {
-  .d-btn-loading();
+  //  Disable clicking while the loader is in place
+  pointer-events: none;
+
+  //  Hide anything that was there before
+  .d-btn__icon,
+  .d-btn__label {
+    opacity: 0;
+    transition: opacity 50ms var(--ttf-in-out);
+  }
+
+  //  Pseudo-element spinner (fallback for raw HTML consumers)
+  &::before {
+    position: absolute;
+    inline-size: var(--dt-size-500);
+    block-size: var(--dt-size-500);
+    border: var(--dt-size-200) solid currentColor;
+    border-inline-start-color: transparent !important;
+    border-radius: var(--dt-size-radius-circle);
+    animation: d-loading-circle 900ms infinite linear;
+    content: "";
+  }
+
+  // When a real DtLoader element is present, suppress the pseudo-element.
+  // Back-compat with old class name.
+  &:has(> .d-btn__loader)::before {
+    content: none;
+  }
+
+  //  Position the DtLoader element within the button
+  > :where(.d-btn__loader) {
+    position: absolute;
+  }
 }
 
 //  $$  BRAND BUTTONS
@@ -677,35 +708,6 @@
   --brand-color: oklch(0.4578 0.0962 234.27deg);
 }
 
-//  ============================================================================
-//  @   BUTTON LOADER
-//      Changes the button
-//  ----------------------------------------------------------------------------
-//  @@  BASE STYLE
-//  ----------------------------------------------------------------------------
-.d-btn-loading() {
-  //  Disable clicking while the loader is in place
-  pointer-events: none;
-
-  //  Hide anything that was there before
-  .d-btn__icon,
-  .d-btn__label {
-    opacity: 0;
-    transition: opacity 50ms var(--ttf-in-out);
-  }
-
-  //  Show the loading animation
-  &::before {
-    position: absolute;
-    inline-size: var(--dt-size-500);
-    block-size: var(--dt-size-500);
-    border: var(--dt-size-200) solid currentColor;
-    border-inline-start-color: transparent !important;
-    border-radius: var(--dt-size-radius-circle);
-    animation: d-loading-circle 900ms infinite linear;
-    content: "";
-  }
-}
 
 //  ============================================================================
 //  $   SPLIT BUTTON

@@ -37,7 +37,7 @@
 
 <script setup>
 import { DtButton, DtInput, DtText } from '@dialpad/dialtone-vue';
-import { DtIconClose } from '@dialpad/dialtone-icons/vue3';
+import { DtIconClose } from '@dialpad/dialtone-icons/vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { computed } from 'vue';
 

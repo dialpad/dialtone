@@ -63,6 +63,8 @@ export * from './components/toast';
 export * from './components/toggle';
 export * from './components/tooltip';
 export * from './components/validation_messages';
+export * from './components/combobox_multi_select';
+export * from './components/combobox_with_popover';
 
 // Directives
 export * from './directives/tooltip_directive';
@@ -74,8 +76,6 @@ export * from './recipes/buttons/callbar_button_with_popover';
 export * from './recipes/buttons/callbar_button_with_dropdown';
 export * from './recipes/cards/ivr_node';
 export * from './recipes/chips/grouped_chip';
-export * from './recipes/comboboxes/combobox_multi_select';
-export * from './recipes/comboboxes/combobox_with_popover';
 export * from './recipes/conversation_view/attachment_carousel';
 export * from './recipes/conversation_view/editor';
 export * from './recipes/conversation_view/emoji_row';
@@ -91,7 +91,7 @@ export * from './recipes/leftbar/contact_row';
 export * from './recipes/leftbar/general_row';
 export * from './recipes/leftbar/group_row';
 export * from './recipes/leftbar/unread_pill';
-export * from './recipes/motion/motion_text';
+export * from './components/motion_text';
 export * from './recipes/notices/top_banner_info';
 
 export { DialtoneLocalization } from './localization';

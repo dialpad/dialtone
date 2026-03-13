@@ -20,7 +20,7 @@ Here is an example that demonstrates how you can use the icon component in your 
 ### With Tree Shaking (Preferred)
 
 ```js
-import { DtIconUserPlus } from '@dialpad/dialtone-icons/vue3';
+import { DtIconUserPlus } from '@dialpad/dialtone-icons/vue';
 
 <dt-icon-user-plus size="500" />
 ```
@@ -198,7 +198,7 @@ Dialtone provides eight sizes for icons. Each of the sizes represents the width 
 <script setup>
   import { ref } from 'vue';
   import sizes from '@data/icons-sizes.json';
-  import { DtIconUserPlus, DtIconSettings } from '@dialpad/dialtone-icons/vue3';
+  import { DtIconUserPlus, DtIconSettings } from '@dialpad/dialtone-icons/vue';
 
   const sizeValues = sizes.map(item => ({ value: item.size, label: item.size }));
 

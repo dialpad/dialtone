@@ -64,7 +64,7 @@
 <script setup>
 import DtcControlString from './control_string.vue';
 import { DtButton, DtRecipeComboboxWithPopover, DtListItem } from '@dialpad/dialtone-vue';
-import { DtIconChevronsUpDown, DtIconClose } from '@dialpad/dialtone-icons/vue3';
+import { DtIconChevronsUpDown, DtIconClose } from '@dialpad/dialtone-icons/vue';
 
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { computed, ref, watch } from 'vue';

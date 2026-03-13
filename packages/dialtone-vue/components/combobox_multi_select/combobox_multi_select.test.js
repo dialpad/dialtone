@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import DtRecipeComboboxMultiSelect from './combobox_multi_select.vue';
+import DtComboboxMultiSelect from './combobox_multi_select.vue';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import { flushPromises } from '@/common/utils';
 import SrOnlyCloseButtonComponent from '@/common/sr_only_close_button.vue';
@@ -10,7 +10,7 @@ const baseProps = {
   label: 'Label Text',
 };
 
-describe('DtRecipeComboboxMultiSelect Tests', () => {
+describe('DtComboboxMultiSelect Tests', () => {
   // Wrappers
   let wrapper;
   let chips;
@@ -39,7 +39,7 @@ describe('DtRecipeComboboxMultiSelect Tests', () => {
   };
 
   const _setWrappers = () => {
-    wrapper = mount(DtRecipeComboboxMultiSelect, {
+    wrapper = mount(DtComboboxMultiSelect, {
       props,
       slots,
       attrs,

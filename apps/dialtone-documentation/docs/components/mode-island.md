@@ -715,7 +715,7 @@ vueCode='
 Purely visual. No semantic HTML impact. Supports high contrast mode via auto contrast inheritance.
 
 <script setup>
-import { DtIconPhone, DtIconQuickReply, DtIconVideo } from '@dialpad/dialtone-icons/vue3';
+import { DtIconPhone, DtIconQuickReply, DtIconVideo } from '@dialpad/dialtone-icons/vue';
 import ExampleProfileCard from '@exampleComponents/ExampleProfileCard.vue';
 import { useThemeManager } from '@composables/useThemeManager';
 import { ref } from 'vue';

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { icons } from '@dialpad/dialtone-icons/vue3';
+import { icons } from '@dialpad/dialtone-icons/vue';
 import { ICON_SIZE_MODIFIERS, ICON_NAMES } from './icon_constants';
 // import { DialtoneLocalization } from '@/localization';
 // import { toFluentKeyString } from '@/common/utils';

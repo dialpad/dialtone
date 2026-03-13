@@ -572,5 +572,5 @@ At a minimum, empty state requires a body of content. It can optionally contain 
 import {
   DtIllustrationNothingToSeeHere,
   DtIconBox,
-} from '@dialpad/dialtone-icons/vue3';
+} from '@dialpad/dialtone-icons/vue';
 </script>

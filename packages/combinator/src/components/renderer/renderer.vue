@@ -94,18 +94,7 @@ const renderedSlots = computed(() => {
 //     default: return props.settings.root.theme;
 //   }
 // });
-const background = computed(() => getSetting('background'));
-const positioning = computed(() => getSetting('positioning'));
 
-const backgroundColorMap = {
-  black: 'd-bgc-black-900',
-  white: 'd-bgc-white',
-  theme: `dtc-theme__canvas`,
-};
-
-function getSetting (setting) {
-  return props.settings.renderer[setting];
-}
 
 // function updateSettings (setting, e) {
 //   emit(SETTINGS_UPDATE_EVENT, (model) => {

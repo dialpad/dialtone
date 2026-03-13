@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/no-static-inline-styles -->
 <template>
-  <dt-recipe-combobox-with-popover
+  <dt-combobox-with-popover
     ref="comboboxWithPopover"
     :label="label"
     :show-list="showList"
@@ -113,12 +113,12 @@
         <slot name="footer" />
       </div>
     </template>
-  </dt-recipe-combobox-with-popover>
+  </dt-combobox-with-popover>
 </template>
 
 <script>
 /* eslint-disable max-lines */
-import DtRecipeComboboxWithPopover from '@/recipes/comboboxes/combobox_with_popover/combobox_with_popover.vue';
+import DtComboboxWithPopover from '@/components/combobox_with_popover/combobox_with_popover.vue';
 import DtInput from '@/components/input/input.vue';
 import DtChip from '@/components/chip/chip.vue';
 import DtValidationMessages from '@/components/validation_messages/validation_messages.vue';
@@ -135,10 +135,10 @@ import {
 
 export default {
   compatConfig: { MODE: 3 },
-  name: 'DtRecipeComboboxMultiSelect',
+  name: 'DtComboboxMultiSelect',
 
   components: {
-    DtRecipeComboboxWithPopover,
+    DtComboboxWithPopover,
     DtInput,
     DtChip,
     DtValidationMessages,
