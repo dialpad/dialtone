@@ -128,6 +128,7 @@ const selectedVariant = ref('default');
 const activeVariant = ref('default');
 const isFullScreen = ref(false);
 let _presetChanging = false;
+const _forceReset = ref(0);
 // const showUnsupportedWarning = ref(!supportedComponents.includes(props.component?.name));
 
 const variantOptions = computed(() => {
@@ -183,6 +184,7 @@ const info = computed(() => {
  */
 const options = computedModel(
   computed(() => {
+    _forceReset.value; // force recompute on reset
     return reactive({
       ...getInitialValues(info.value),
       bindings: {
@@ -259,6 +261,7 @@ function updateVariant (e) {
   selectedVariant.value = e;
   if (e !== '') {
     activeVariant.value = e;
+    _forceReset.value++;
   }
   nextTick(() => { _presetChanging = false; });
 }
