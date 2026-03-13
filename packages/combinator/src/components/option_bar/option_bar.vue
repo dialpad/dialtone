@@ -1,131 +1,129 @@
 <template>
   <section
-    class="dialtone-playground__controls"
+    class="dialtone-playground__controls d-ps-relative"
   >
-    <dt-stack class="d-h100p">
-      <dt-stack
-        gap="500"
-        direction="row"
-        class="d-ps-sticky d-t0 d-bgc-secondary d-zi-base1 d-p16 d-pb4"
+    <div class="d-ps-absolute d-t16 d-r16 d-zi-navigation d-d-flex d-g4">
+      <dt-button
+        v-if="hasChanges"
+        v-dt-tooltip="`Reset`"
+        kind="muted"
+        importance="clear"
+        size="xs"
+        @click="resetOptions"
       >
-        <dt-text
-          as="h2"
-          kind="headline"
-          text-box-trim="both"
-          :size="isFullscreen ? 'lg' : 'md'"
-          class="d-fl1"
+        <template #icon="{ iconSize }">
+          <dt-icon-refresh
+            :size="iconSize"
+          />
+        </template>
+      </dt-button>
+      <dt-button
+        v-dt-tooltip="`Fullscreen`"
+        kind="muted"
+        importance="clear"
+        size="xs"
+        @click="toggleFullScreen"
+      >
+        <template #icon="{ iconSize }">
+          <dt-icon-minimize
+            v-if="isFullscreen"
+            :size="iconSize"
+          />
+          <dt-icon-expand
+            v-else
+            :size="iconSize"
+          />
+        </template>
+      </dt-button>
+    </div>
+    <dt-tab-group
+      size="xs"
+      borderless
+      outlined
+      activation-mode="auto"
+      class="d-d-flex d-fd-column d-h100p"
+      tab-list-class="d-ps-sticky d-t0 d-zi-base1 d-px16 d-pt16 d-pb4"
+    >
+      <template #tabs>
+        <dt-tab
+          v-if="info.props?.length"
+          id="tab-props"
+          panel-id="panel-props"
+          selected
         >
-          {{ component.name }}
-        </dt-text>
-        <dt-stack
-          direction="row"
-          gap="200"
+          Props
+        </dt-tab>
+        <dt-tab
+          v-if="info.slots?.length"
+          id="tab-slots"
+          panel-id="panel-slots"
         >
-          <dt-button
-            v-if="hasChanges"
-            v-dt-tooltip="`Reset`"
-            kind="muted"
-            importance="clear"
-            size="xs"
-            @click="resetOptions"
-          >
-            <template #icon="{ iconSize }">
-              <dt-icon-refresh
-                :size="iconSize"
-              />
-            </template>
-          </dt-button>
-          <dt-button
-            v-dt-tooltip="`Fullscreen`"
-            kind="muted"
-            importance="clear"
-            size="xs"
-            @click="toggleFullScreen"
-          >
-            <template #icon="{ iconSize }">
-              <dt-icon-minimize
-                v-if="isFullscreen"
-                :size="iconSize"
-              />
-              <dt-icon-expand
-                v-else
-                :size="iconSize"
-              />
-            </template>
-          </dt-button>
-        </dt-stack>
-      </dt-stack>
-      <dt-stack
+          Slots
+        </dt-tab>
+      </template>
+      <div
         v-dt-scrollbar
-        class="d-fl1 d-px16 d-pb16"
+        class="d-fl1 d-pt8"
       >
         <dt-stack
-          gap="500"
-          :direction="isFullscreen ? 'row' : ''"
-          :align="isFullscreen ? 'start' : ''"
+          class="d-fl1 d-px16 d-pb16"
         >
-          <dt-stack
+          <dt-tab-panel
             v-if="info.props?.length"
-            gap="300"
+            id="panel-props"
+            tab-id="tab-props"
           >
-            <dt-text
-              tone="secondary"
-              as="h3"
-              kind="headline"
-              size="sm"
-              class="d-ps-sticky d-t0 d-bgc-secondary d-zi-base1 d-pt0 d-pb2"
+            <dt-stack
+              v-if="info.props?.length"
+              gap="300"
             >
-              Props
-            </dt-text>
-            <dt-stack gap="450">
-              <dtc-option-bar-member-group
-                :component="component"
-                :control-selector="(prop, value) => getBindingControls(prop, value, 'null')"
-                :members="info.props"
-                :values="options.props"
-                :exclusion-rules="info.exclusions"
-                :prop-values="options.props"
-                member-group="props"
-                @update:member="updateProps"
-              />
+              <dt-stack gap="450">
+                <dtc-option-bar-member-group
+                  :component="component"
+                  :control-selector="(prop, value) => getBindingControls(prop, value, 'null')"
+                  :members="info.props"
+                  :values="options.props"
+                  :exclusion-rules="info.exclusions"
+                  :prop-values="options.props"
+                  member-group="props"
+                  @update:member="updateProps"
+                />
+              </dt-stack>
             </dt-stack>
-          </dt-stack>
-          <dt-stack
+          </dt-tab-panel>
+          <dt-tab-panel
             v-if="info.slots?.length"
-            gap="300"
+            id="panel-slots"
+            tab-id="tab-slots"
           >
-            <dt-text
-              tone="secondary"
-              as="h3"
-              kind="headline"
-              size="sm"
-              class="d-ps-sticky d-t0 d-bgc-secondary d-zi-base1 d-pt0 d-pb2"
+            <dt-stack
+              v-if="info.slots?.length"
+              gap="300"
             >
-              Slots
-            </dt-text>
-            <dt-stack gap="450">
-              <dtc-option-bar-member-group
-                :component="component"
-                :control-selector="getSlotControls"
-                :members="info.slots"
-                :values="options.slots"
-                :exclusion-rules="info.exclusions"
-                :prop-values="options.props"
-                member-group="slots"
-                @update:member="updateSlots"
-              />
+              <dt-stack gap="450">
+                <dtc-option-bar-member-group
+                  :component="component"
+                  :control-selector="getSlotControls"
+                  :members="info.slots"
+                  :values="options.slots"
+                  :exclusion-rules="info.exclusions"
+                  :prop-values="options.props"
+                  member-group="slots"
+                  @update:member="updateSlots"
+                />
+              </dt-stack>
             </dt-stack>
-          </dt-stack>
+          </dt-tab-panel>
           <!-- Events -->
-          <!--<dtc-option-bar-member-group
+          <dtc-option-bar-member-group
             :component="component"
             :members="info.events"
             :values="options.events"
             :control-selector="getEventControls"
-          />-->
+          />
         </dt-stack>
-      </dt-stack>
-    </dt-stack>
+      </div>
+    </dt-tab-group>
   </section>
 </template>
 
@@ -135,7 +133,7 @@ import { ref, computed } from 'vue';
 import { OPTIONS_UPDATE_EVENT } from '@/src/lib/constants';
 import { getControlByMemberType, getControlByValue } from '@/src/lib/control';
 import { isIconSlot } from '@/src/lib/icons';
-import { DtButton, DtStack, DtText } from '@dialpad/dialtone-vue';
+import { DtButton, DtStack, DtText, DtTabGroup, DtTab, DtTabPanel } from '@dialpad/dialtone-vue';
 import DtIconMinimize from '@dialpad/dialtone-icons/vue3/minimize';
 import DtIconExpand from '@dialpad/dialtone-icons/vue3/expand';
 import DtIconRefresh from '@dialpad/dialtone-icons/vue3/refresh';

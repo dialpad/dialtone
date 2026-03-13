@@ -341,6 +341,14 @@ export default {
     }
   }
 
+  &--fullscreen {
+    margin-block-start: 0;
+    position: fixed;
+    inset: 0;
+    z-index: var(--zi-popover);
+    background-color: var(--dt-color-surface-secondary);
+  }
+
   &__start {
     flex-grow: 1;
 
@@ -356,17 +364,10 @@ export default {
   }
 
   &__end {
-    border-block-start: 1px solid var(--dt-color-border-subtle);
+    border-block-start: var(--dt-size-border-50) solid var(--dt-color-border-subtle);
     :where(.dialtone-playground--fullscreen) & {
       block-size: 33vh;
     }
-  }
-
-  &--fullscreen {
-    position: fixed;
-    inset: 0;
-    z-index: var(--zi-popover);
-    background-color: var(--dt-color-surface-secondary);
   }
 
   &__component {
@@ -389,7 +390,6 @@ export default {
     :where(.dialtone-playground--fullscreen) & {
       @media screen and (min-width: 640px) {
         max-block-size: 100%;
-        inline-size: var(--dt-layout-600);
       }
     }
 
