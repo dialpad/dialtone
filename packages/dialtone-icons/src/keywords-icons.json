@@ -259,6 +259,7 @@
       ],
       "evernote": [],
       "facebook": [],
+      "figma": [],
       "freshdesk": [],
       "freshsales-crm": [],
       "front": [],
@@ -301,6 +302,7 @@
       "servicenow": [],
       "slack": [],
       "snapchat": [],
+      "storybook-color": [],
       "t-mobile": [
         "tmo"
       ],
@@ -342,6 +344,7 @@
       "coaching-hub": [
         "brand"
       ],
+      "codepen": [],
       "default-ai-agent-fab": [
         "fab",
         "brand",
@@ -394,6 +397,8 @@
         "dialpad",
         "brand"
       ],
+      "github": [],
+      "storybook": [],
       "waveform": [
         "brand"
       ],
