@@ -30,11 +30,6 @@ jobs:
       cancel-in-progress: true
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-
       - name: Resolve PR number
         id: pr
         run: |
@@ -43,6 +38,12 @@ jobs:
           else
             echo "number=${{ github.event.pull_request.number }}" >> $GITHUB_OUTPUT
           fi
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          ref: ${{ github.event_name == 'workflow_dispatch' && format('refs/pull/{0}/merge', steps.pr.outputs.number) || '' }}
 
       - name: Run Claude Code Review
         uses: anthropics/claude-code-action@v1
