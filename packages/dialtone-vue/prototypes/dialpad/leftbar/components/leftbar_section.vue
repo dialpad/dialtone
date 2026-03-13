@@ -41,7 +41,7 @@
 <script setup>
 import { DtCollapsible } from '@/components/collapsible';
 import { DtButton } from '@/components/button';
-import { DtIconChevronDown, DtIconChevronRight } from '@dialpad/dialtone-icons/vue3';
+import { DtIconChevronDown, DtIconChevronRight } from '@dialpad/dialtone-icons/vue';
 import { ref } from 'vue';
 
 const props = defineProps({

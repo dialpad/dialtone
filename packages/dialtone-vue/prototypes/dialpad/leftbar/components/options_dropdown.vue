@@ -49,7 +49,7 @@
 import { DtDropdown, DtDropdownSeparator } from '@/components/dropdown';
 import { DtListItem } from '@/components/list_item';
 import { DtButton } from '@/components/button';
-import { DtIconMoreVertical } from '@dialpad/dialtone-icons/vue3';
+import { DtIconMoreVertical } from '@dialpad/dialtone-icons/vue';
 
 const emits = defineEmits(['select-menu-option', 'open-dropdown']);
 

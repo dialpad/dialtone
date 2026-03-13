@@ -12,6 +12,12 @@
     v-bind="computedAttrs"
     v-on="computedListeners"
   >
+    <dt-loader
+      v-if="loading && kind !== 'unstyled'"
+      class="d-btn__loader"
+      :size="loaderSize"
+      aria-hidden="true"
+    />
     <span
       v-if="hasSlotContent($slots.leading)"
       :class="['d-btn__leading', leadingClass]"
@@ -134,6 +140,7 @@
 <script>
 import { warn, resolveComponent } from 'vue';
 import { hasSlotContent } from '@/common/utils';
+import DtLoader from '@/components/loader/loader.vue';
 
 import {
   BUTTON_SIZE_MODIFIERS,
@@ -157,6 +164,8 @@ import { DialtoneLocalization } from '@/localization';
 export default {
   compatConfig: { MODE: 3 },
   name: 'DtButton',
+
+  components: { DtLoader },
 
   props: {
     /**
@@ -489,6 +498,9 @@ export default {
       return BUTTON_ICON_SIZES[this.size];
     },
 
+    loaderSize () {
+      return BUTTON_ICON_SIZES[this.size];
+    },
   },
 
   watch: {

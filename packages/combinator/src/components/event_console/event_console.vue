@@ -31,7 +31,7 @@
 import DtcEventConsolePair from '@/src/components/event_console/event_console_pair.vue';
 
 import { computed, ref } from 'vue';
-import { DtIconArrowRight } from '@dialpad/dialtone-icons/vue3';
+import { DtIconArrowRight } from '@dialpad/dialtone-icons/vue';
 
 defineProps({
   /**

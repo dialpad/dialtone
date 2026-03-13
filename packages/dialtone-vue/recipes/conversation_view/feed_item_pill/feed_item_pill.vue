@@ -107,7 +107,7 @@
 import { FEED_ITEM_PILL_BORDER_COLORS } from './feed_item_pill_constants';
 import { DtItemLayout } from '@/components/item_layout';
 import { DtCollapsible } from '@/components/collapsible';
-import { DtIconChevronDown, DtIconChevronRight } from '@dialpad/dialtone-icons/vue3';
+import { DtIconChevronDown, DtIconChevronRight } from '@dialpad/dialtone-icons/vue';
 import { DialtoneLocalization } from '@/localization';
 
 export default {

@@ -1,3 +1,10 @@
+# [1.48.0-next.12](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.11...dialtone-tokens/v1.48.0-next.12) (2026-03-10)
+
+
+### Code Refactoring
+
+* **Tokens,css,link,text,breadcrumbs,input Group,split Button:** tokens, CSS foundation, deprecations, tooling DLT-3011 DLT-2961 DLT-3068 DLT-3069 DLT-3070 DLT-3071 DLT-3072 ([#1092](https://github.com/dialpad/dialtone/issues/1092)) ([7783090](https://github.com/dialpad/dialtone/commit/7783090542b0f9c9564d9cc9f61a3abfe19edab8))
+
 # [1.48.0-next.11](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.10...dialtone-tokens/v1.48.0-next.11) (2026-03-05)
 
 

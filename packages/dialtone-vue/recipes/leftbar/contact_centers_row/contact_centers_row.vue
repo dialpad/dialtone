@@ -91,7 +91,7 @@ import { extractVueListeners, safeConcatStrings, removeClassStyleAttrs, returnFi
 import { DtBadge } from '@/components/badge';
 import { DtButton } from '@/components/button';
 import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
-import { DtIconChevronDown, DtIconHeadphones } from '@dialpad/dialtone-icons/vue3';
+import { DtIconChevronDown, DtIconHeadphones } from '@dialpad/dialtone-icons/vue';
 import { DialtoneLocalization } from '@/localization';
 
 export default {

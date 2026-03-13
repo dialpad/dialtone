@@ -36,7 +36,7 @@ import {
   DtIconAtSign,
   DtIconLaptop2,
   DtIconCalendarClock,
-} from '@dialpad/dialtone-icons/vue3';
+} from '@dialpad/dialtone-icons/vue';
 import {
   LEFTBAR_GENERAL_ROW_TYPES as TYPES,
   LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS as COLORS,

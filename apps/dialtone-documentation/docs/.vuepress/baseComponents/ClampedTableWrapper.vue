@@ -51,14 +51,14 @@
     </div>
     <div
       v-if="shouldShowButton"
-      class="dialtone-doc-table-clamped__more d-ps-absolute d-bn16 d-l50p"
+      class="dialtone-doc-table-clamped__more d-ps-absolute d-bn8 d-l50p"
       aria-hidden="true"
     >
       <dt-button
         class="dialtone-doc-table-clamped__more-btn d-bgc-secondary d-bs-sm"
         kind="muted"
         importance="outlined"
-        size="sm"
+        size="xs"
         @click="() => handleExpand(scrollRef)"
       >
         {{ buttonLabel }}

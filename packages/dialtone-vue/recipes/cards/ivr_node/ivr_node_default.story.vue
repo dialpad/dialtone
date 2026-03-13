@@ -142,7 +142,7 @@ import {
   IVR_NODE_PROMPT_PLAY,
   IVR_NODE_TRANSFER,
 } from './ivr_node_constants';
-import { DtIconExternalLink } from '@dialpad/dialtone-icons/vue3';
+import { DtIconExternalLink } from '@dialpad/dialtone-icons/vue';
 import { DtButton } from '@/components/button';
 import { DtStack } from '@/components/stack';
 import { DtAvatar } from '@/components/avatar';

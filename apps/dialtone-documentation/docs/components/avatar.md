@@ -636,7 +636,7 @@ The group count badge includes `role="img"` and an `aria-label` (e.g., "3 partic
 For more guidance, see the [WCAG images tutorial](https://www.w3.org/WAI/tutorials/images/decorative/).
 
 <script setup>
-import { DtIconUser, DtIconHear } from '@dialpad/dialtone-icons/vue3';
+import { DtIconUser, DtIconHear } from '@dialpad/dialtone-icons/vue';
 
 const seeds = ['alice', 'bob', 'carol', 'david', 'eve', 'frank', 'grace', 'henry', 'iris', 'jack', 'kate', 'leo', 'mia', 'noah', 'olive', 'paul', 'quinn', 'ruby'];
 const sizes = ['100', '150', '200', '250', '300', '400', '500', '600', '700', '800', '900'];

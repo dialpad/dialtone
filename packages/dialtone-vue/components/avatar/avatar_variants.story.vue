@@ -277,7 +277,7 @@ import {
   DtIconLockFilled,
   DtIconInbox,
   DtIconContacts,
-} from '@dialpad/dialtone-icons/vue3';
+} from '@dialpad/dialtone-icons/vue';
 import DtAvatar from './avatar.vue';
 import { AVATAR_PRESENCE_STATES, AVATAR_SIZE_MODIFIERS } from './avatar_constants.js';
 

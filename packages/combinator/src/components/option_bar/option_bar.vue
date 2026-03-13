@@ -71,8 +71,8 @@ import { ref } from 'vue';
 import { OPTIONS_UPDATE_EVENT } from '@/src/lib/constants';
 import { getControlByMemberType, getControlByValue } from '@/src/lib/control';
 import { DtButton, DtStack } from '@dialpad/dialtone-vue';
-import DtIconMinimize from '@dialpad/dialtone-icons/vue3/minimize';
-import DtIconExpand from '@dialpad/dialtone-icons/vue3/expand';
+import DtIconMinimize from '@dialpad/dialtone-icons/vue/minimize';
+import DtIconExpand from '@dialpad/dialtone-icons/vue/expand';
 
 defineProps({
   /**

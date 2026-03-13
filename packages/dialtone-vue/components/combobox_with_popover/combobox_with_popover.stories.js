@@ -1,8 +1,8 @@
 import { action } from 'storybook/actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtRecipeComboboxWithPopover from './combobox_with_popover.vue';
+import DtComboboxWithPopover from './combobox_with_popover.vue';
 
-import DtRecipeComboboxWithPopoverDefaultTemplate from './combobox_with_popover_default.story.vue';
+import DtComboboxWithPopoverDefaultTemplate from './combobox_with_popover_default.story.vue';
 import { POPOVER_CONTENT_WIDTHS } from '@/components/popover/popover_constants';
 import { DROPDOWN_PADDING_CLASSES } from '@/components/dropdown/dropdown_constants';
 import { COMBOBOX_LABEL_SIZES } from '@/components/combobox';
@@ -210,8 +210,8 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Recipes/Comboboxes/Combobox With Popover',
-  component: DtRecipeComboboxWithPopover,
+  title: 'Components/Combobox With Popover',
+  component: DtComboboxWithPopover,
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
@@ -221,7 +221,7 @@ export default {
 const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
   argTypes,
-  DtRecipeComboboxWithPopoverDefaultTemplate,
+  DtComboboxWithPopoverDefaultTemplate,
 );
 
 export const Default = {
