@@ -9,7 +9,7 @@
     <template #content>
       <div
         v-dt-scrollbar
-        class="dtc-theme__canvas d-p16 d-hmx216"
+        class="dtc-theme__canvas d-p16"
       >
         <dtc-code-editor
           :info="info"

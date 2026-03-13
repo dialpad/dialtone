@@ -367,6 +367,7 @@ export default {
     border-block-start: var(--dt-size-border-50) solid var(--dt-color-border-subtle);
     :where(.dialtone-playground--fullscreen) & {
       block-size: 33vh;
+      max-block-size: none;
     }
   }
 
