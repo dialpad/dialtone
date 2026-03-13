@@ -20,13 +20,19 @@ fi
 is_push=false
 is_pr=false
 
-if echo "$command" | grep -qE '(^|\s|&&|\|)git\s+.*push(\s|$)'; then
-    if echo "$command" | grep -qE 'git\s+stash\s+push'; then
-        is_push=false
-    else
+# Split on && and || to check each command in the chain independently
+# This prevents "git stash push && git push" from being classified as stash-only
+IFS=$'\n'
+for cmd_part in $(echo "$command" | sed 's/&&/\n/g; s/||/\n/g; s/|/\n/g'); do
+    # Skip stash push commands
+    if echo "$cmd_part" | grep -qE 'git\s+stash\s+push'; then
+        continue
+    fi
+    if echo "$cmd_part" | grep -qE 'git\s+.*push(\s|$)'; then
         is_push=true
     fi
-fi
+done
+unset IFS
 
 if echo "$command" | grep -qE '(^|\s|&&|\|)gh\s+.*pr\s+create(\s|$)'; then
     is_pr=true
@@ -46,8 +52,15 @@ else
     marker_file="$marker_dir/push-done"
 fi
 
+# If marker exists, check if new edits happened after it was created
 if [[ -f "$marker_file" ]]; then
-    exit 0
+    log_file_check="$marker_dir/edited-files.log"
+    if [[ -f "$log_file_check" ]] && [[ "$log_file_check" -nt "$marker_file" ]]; then
+        # New edits since last check — remove marker and re-run
+        rm -f "$marker_file"
+    else
+        exit 0
+    fi
 fi
 
 # Read edit tracker
