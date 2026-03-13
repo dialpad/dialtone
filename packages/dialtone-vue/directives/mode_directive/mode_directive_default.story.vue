@@ -129,6 +129,48 @@
       kind="headline"
       size="lg"
     >
+      Disabled (value = false)
+    </dt-text>
+    <dt-stack
+      gap="400"
+      direction="row"
+    >
+      <section
+        v-dt-mode:invert="false"
+        class="d-bgc-secondary d-p16 d-ba d-bc-subtle d-bar8 d-fl1"
+      >
+        <dt-text
+          kind="body"
+          tone="primary"
+        >
+          v-dt-mode:invert="false" — no mode applied
+        </dt-text>
+      </section>
+      <section
+        v-dt-mode:dark="enabled"
+        class="d-bgc-secondary d-p16 d-ba d-bc-subtle d-bar8 d-fl1"
+      >
+        <dt-stack gap="400">
+          <dt-text
+            kind="body"
+            tone="primary"
+          >
+            v-dt-mode:dark="{{ enabled }}" — toggle to compare
+          </dt-text>
+          <dt-toggle
+            :checked="enabled"
+            label="Enable mode"
+            @update:checked="enabled = $event"
+          />
+        </dt-stack>
+      </section>
+    </dt-stack>
+
+    <dt-text
+      as="h3"
+      kind="headline"
+      size="lg"
+    >
       Dynamic arg
     </dt-text>
     <dt-stack gap="400">
@@ -158,12 +200,14 @@
 import DtStack from '@/components/stack/stack.vue';
 import DtText from '@/components/text/text.vue';
 import DtSelectMenu from '@/components/select_menu/select_menu.vue';
+import DtToggle from '@/components/toggle/toggle.vue';
 
 export default {
   name: 'DtModeDirectiveDefault',
-  components: { DtStack, DtText, DtSelectMenu },
+  components: { DtStack, DtText, DtSelectMenu, DtToggle },
   data () {
     return {
+      enabled: true,
       dynamicMode: 'invert',
       modeOptions: [
         { value: 'invert', label: 'invert' },
