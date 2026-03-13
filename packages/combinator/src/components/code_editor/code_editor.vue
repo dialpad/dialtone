@@ -7,7 +7,6 @@
     align="start"
   >
     <div
-      ref="code"
       class="d-fl1"
     >
       <dtc-code-editor-element
@@ -70,9 +69,10 @@ import DtcCodeEditorSlot from './code_editor_slot.vue';
 import { DtIconCheck, DtIconCopy } from '@dialpad/dialtone-icons/vue3';
 import { DtButton, DtStack } from '@dialpad/dialtone-vue';
 
-import { OPTIONS_UPDATE_EVENT, SETTINGS_INDENT_KEY } from '@/src/lib/constants';
+import { OPTIONS_UPDATE_EVENT, SETTINGS_INDENT_KEY, DEFAULT_SLOT_NAME } from '@/src/lib/constants';
+import { stringifyDocValue } from '@/src/lib/parse';
 import { ref, computed, provide } from 'vue';
-import { paramCase } from 'change-case';
+import { paramCase, camelCase } from 'change-case';
 
 const props = defineProps({
   /**
@@ -146,38 +146,86 @@ const hasSlotContent = computed(() => {
     : false;
 });
 
-const code = ref();
 const copied = ref(false);
 
-async function copy () {
-  let text = code.value.innerText;
+/**
+ * Generates plain-text copy of the code from component data.
+ * Bypasses DOM/innerText entirely to avoid flex layout indentation issues.
+ */
+const copyText = computed(() => {
+  const pad = ' '.repeat(props.indentSpaces);
+  const name = tagName.value;
+  const lines = [];
 
-  // Convert nbsp to regular spaces
-  text = text.replace(/\xA0/g, ' ');
+  // Visible bindings (same filter logic as code_editor_tag_attributes)
+  const infoBindings = props.info.bindings.get();
+  const optionBindings = props.options.bindings.get();
+  const visibleBindings = Object.entries(optionBindings)
+    .map(([bindingName, value]) => {
+      const info = infoBindings.find(b => b.name === bindingName);
+      return { ...info, name: bindingName, value };
+    })
+    .filter(member => {
+      if (props.disabledMembers.has(member.name)) return false;
+      if (props.verbose) return true;
+      return JSON.stringify(member.defaultValue) !== JSON.stringify(member.value);
+    });
 
-  // The flex-row indent component causes innerText to put the indent
-  // (spaces from nbsp) on its own line, followed by the attribute lines
-  // without indent. Fix: treat whitespace-only lines as an indent marker
-  // and prepend that indent to all subsequent content lines.
-  const lines = text.split('\n');
-  const result = [];
-  let currentIndent = '';
+  // Format each attribute
+  const attrLines = visibleBindings.map(member => {
+    const v = member.value;
+    if (v === true) return pad + member.label;
+    const isBind = typeof v !== 'string';
+    const prefix = isBind ? ':' : '';
+    const str = isBind ? stringifyDocValue(v) : v.toString();
+    return pad + prefix + member.label + '="' + str + '"';
+  });
 
-  for (const line of lines) {
-    if (line.length > 0 && line.trim() === '') {
-      // Whitespace-only = indent marker from nbsp
-      currentIndent = line;
-    } else if (line.startsWith('<') || line === '>' || line === '/>') {
-      // Tag boundary, output as-is and reset indent
-      currentIndent = '';
-      result.push(line);
-    } else if (line.trim() !== '') {
-      // Content line, prepend current indent
-      result.push(currentIndent + line);
-    }
+  // Visible slots
+  const slotEntries = props.options.slots
+    ? Object.entries(props.options.slots)
+      .filter(([slot, value]) => value && !props.disabledMembers.has(slot))
+    : [];
+
+  const hasContent = slotEntries.length > 0;
+
+  // Opening tag
+  if (attrLines.length === 0 && !hasContent) {
+    lines.push('<' + name + ' />');
+  } else if (attrLines.length === 0) {
+    lines.push('<' + name + '>');
+  } else {
+    lines.push('<' + name);
+    lines.push(...attrLines);
+    lines.push(hasContent ? '>' : '/>');
   }
 
-  await navigator.clipboard.writeText(result.join('\n'));
+  // Slot content
+  if (hasContent) {
+    for (const [slot, value] of slotEntries) {
+      if (slot === DEFAULT_SLOT_NAME) {
+        lines.push(pad + value);
+      } else {
+        const slotInfo = props.info.slots?.find(s => s.name === slot);
+        const usedBindings = (slotInfo?.bindings || [])
+          .map(b => camelCase(b.name))
+          .filter(n => value.includes(n));
+        const scope = usedBindings.length > 0
+          ? '="{ ' + usedBindings.join(', ') + ' }"'
+          : '';
+        lines.push(pad + '<template #' + slot + scope + '>');
+        lines.push(pad + pad + value);
+        lines.push(pad + '</template>');
+      }
+    }
+    lines.push('</' + name + '>');
+  }
+
+  return lines.join('\n');
+});
+
+async function copy () {
+  await navigator.clipboard.writeText(copyText.value);
 
   copied.value = true;
   await new Promise(resolve => setTimeout(resolve, 2000));
