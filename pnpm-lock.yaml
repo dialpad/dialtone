@@ -568,7 +568,13 @@ importers:
         specifier: ^4.17.21
         version: 4.17.23
 
-  packages/dialtone-icons/vue:
+  packages/dialtone-icons/vue2:
+    devDependencies:
+      vue:
+        specifier: ^2.7.16
+        version: 2.7.16
+
+  packages/dialtone-icons/vue3:
     devDependencies:
       '@vue/compiler-sfc':
         specifier: ^3.4.15
@@ -576,12 +582,6 @@ importers:
       vue:
         specifier: ^3.4.15
         version: 3.5.29(typescript@5.9.3)
-
-  packages/dialtone-icons/vue2:
-    devDependencies:
-      vue:
-        specifier: ^2.7.16
-        version: 2.7.16
 
   packages/dialtone-mcp-server:
     dependencies:
