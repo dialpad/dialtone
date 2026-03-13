@@ -152,13 +152,32 @@ const copied = ref(false);
 async function copy () {
   let text = code.value.innerText;
 
-  // Remove nbsp char
-  text = text.replace(/\xA0/g, '');
+  // Convert nbsp to regular spaces
+  text = text.replace(/\xA0/g, ' ');
 
-  // Remove empty lines
-  text = text.replace(/^\s*[\r\n]/gm, '');
+  // The flex-row indent component causes innerText to put the indent
+  // (spaces from nbsp) on its own line, followed by the attribute lines
+  // without indent. Fix: treat whitespace-only lines as an indent marker
+  // and prepend that indent to all subsequent content lines.
+  const lines = text.split('\n');
+  const result = [];
+  let currentIndent = '';
 
-  await navigator.clipboard.writeText(text);
+  for (const line of lines) {
+    if (line.length > 0 && line.trim() === '') {
+      // Whitespace-only = indent marker from nbsp
+      currentIndent = line;
+    } else if (line.startsWith('<') || line === '>' || line === '/>') {
+      // Tag boundary, output as-is and reset indent
+      currentIndent = '';
+      result.push(line);
+    } else if (line.trim() !== '') {
+      // Content line, prepend current indent
+      result.push(currentIndent + line);
+    }
+  }
+
+  await navigator.clipboard.writeText(result.join('\n'));
 
   copied.value = true;
   await new Promise(resolve => setTimeout(resolve, 2000));
