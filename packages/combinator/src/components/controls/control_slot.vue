@@ -2,6 +2,8 @@
   <dt-input
     :model-value="value"
     :disabled="disabled"
+    type="textarea"
+    input-class="d-pr32"
     spellcheck="false"
     size="xs"
     @input="updateValue"
@@ -22,7 +24,7 @@
         kind="muted"
         importance="clear"
         size="xs"
-        class="d-p2"
+        class="d-p2 d-mrn16"
         @click.stop="onReset"
       >
         <template #icon>

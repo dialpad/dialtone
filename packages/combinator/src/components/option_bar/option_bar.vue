@@ -42,7 +42,7 @@
       outlined
       activation-mode="auto"
       class="d-d-flex d-fd-column d-h100p"
-      tab-list-class="d-ps-sticky d-t0 d-zi-base1 d-px16 d-pt16 d-pb4"
+      tab-list-class="d-ps-sticky d-t0 d-zi-base1 d-pr16 d-pt16 d-pb4"
     >
       <template #tabs>
         <dt-tab
@@ -66,7 +66,7 @@
         class="d-fl1 d-pt8"
       >
         <dt-stack
-          class="d-fl1 d-px16 d-pb16"
+          class="d-fl1 d-pr16 d-pb16"
         >
           <dt-tab-panel
             v-if="info.props?.length"
