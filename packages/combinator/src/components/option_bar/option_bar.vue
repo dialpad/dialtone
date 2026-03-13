@@ -160,16 +160,24 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  /**
+   * Info for the default variant, used as the reference for reset and change detection.
+   */
+  defaultInfo: {
+    type: Object,
+    default: null,
+  },
 });
 
-const emit = defineEmits([OPTIONS_UPDATE_EVENT, 'toggle-full-screen']);
+const emit = defineEmits([OPTIONS_UPDATE_EVENT, 'toggle-full-screen', 'reset']);
 
 const isFullscreen = ref(false);
 
 const hasChanges = computed(() => {
+  const referenceInfo = props.defaultInfo ?? props.info;
   const memberGroups = ['props', 'slots', 'attributes'];
   for (const group of memberGroups) {
-    const members = props.info[group];
+    const members = referenceInfo[group];
     if (!members) continue;
     for (const member of members) {
       if (props.options[group]?.[member.name] !== member.initialValue) return true;
@@ -253,16 +261,7 @@ function updateMember (memberGroup, { member, value }) {
 }
 
 function resetOptions () {
-  const memberGroups = ['props', 'slots', 'attributes'];
-  emit(OPTIONS_UPDATE_EVENT, (options) => {
-    for (const group of memberGroups) {
-      const members = props.info[group];
-      if (!members) continue;
-      for (const member of members) {
-        options[group][member.name] = member.initialValue;
-      }
-    }
-  });
+  emit('reset');
 }
 
 function updateSlots (e) {

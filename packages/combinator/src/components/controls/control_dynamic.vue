@@ -30,7 +30,7 @@ import DtcControlSelection from './control_selection.vue';
 
 import { controlMap, getControlByValue, UNSET } from '@/src/lib/control';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 
 const props = defineProps({
   value: {
@@ -93,6 +93,10 @@ const controlSelectionMap = {
 
 const controlSelections = computed(() => Object.keys(controlSelectionMap));
 const selectedControl = ref(getControl());
+
+watch(() => props.value, () => {
+  selectedControl.value = getControl();
+});
 
 const controlComponent = computed(() => {
   return controlSelectionMap[selectedControl.value].component;

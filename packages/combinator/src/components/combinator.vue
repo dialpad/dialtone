@@ -1,19 +1,19 @@
 <template>
   <div :class="['dialtone-playground', { 'dialtone-playground--fullscreen': isFullScreen }]">
-    <div class="d-py16 d-px16 d-pb0">
+    <dt-stack
+      v-if="variantOptions.length > 1"
+      as="div"
+      class="d-py16 d-px16 d-pb0"
+    >
       <dt-select-menu
-        :options="[
-          { value: ``, label: `Please select one` },
-          { value: `1`, label: `Option 1` },
-          { value: `2`, label: `Option 2` },
-          { value: `3`, label: `Option 3` },
-        ]"
+        :options="variantOptions"
         size="sm"
         :label-visible="false"
         label="Preset"
-        :model-value="modelValue"
+        :model-value="selectedVariant"
+        @update:model-value="updateVariant"
       />
-    </div>
+    </dt-stack>
     <div class="dialtone-playground__start">
       <dtc-renderer
         v-model:settings="settings"
@@ -29,7 +29,9 @@
         v-model:options="options"
         :component="component"
         :info="info"
+        :default-info="defaultInfo"
         @toggle-full-screen="toggleFullScreen"
+        @reset="updateVariant('default')"
       />
     </div>
     <div class="dialtone-playground__end">
@@ -51,7 +53,7 @@ import DtcRenderer from './renderer/renderer.vue';
 import { enumerateGroups } from '@/src/lib/utils';
 import { shouldExclude } from '@/src/lib/exclusion_rules';
 import { buildDependencyMap, shouldHideProp } from '@/src/lib/prop_dependencies';
-import { computed, onErrorCaptured, reactive, ref } from 'vue';
+import { computed, nextTick, onErrorCaptured, reactive, ref } from 'vue';
 import { cachedRef, computedModel } from '@/src/lib/utils_vue';
 import { getComponentInfo } from '@/src/lib/info';
 import {
@@ -123,8 +125,20 @@ const props = defineProps({
 });
 
 const selectedVariant = ref('default');
+const activeVariant = ref('default');
 const isFullScreen = ref(false);
+let _presetChanging = false;
 // const showUnsupportedWarning = ref(!supportedComponents.includes(props.component?.name));
+
+const variantOptions = computed(() => {
+  const presets = Object.keys(props.variants)
+    .filter(key => key !== 'exclusions')
+    .map(key => ({ value: key, label: key }));
+  if (presets.length > 1) {
+    presets.unshift({ value: '', label: 'Choose one' });
+  }
+  return presets;
+});
 
 /**
  * Container for all extended component information for the target component.
@@ -197,6 +211,9 @@ const options = computedModel(
   (e, model) => {
     try {
       e(model);
+      if (!_presetChanging) {
+        selectedVariant.value = '';
+      }
     } catch (exception) {
       console.warn('Update options warning: \n', exception);
     }
@@ -238,7 +255,46 @@ const settings = computedModel(
 );
 
 function updateVariant (e) {
+  _presetChanging = true;
   selectedVariant.value = e;
+  if (e !== '') {
+    activeVariant.value = e;
+  }
+  nextTick(() => { _presetChanging = false; });
+}
+
+const defaultInfo = computed(() => {
+  const info = cloneInfoMembers(
+    getComponentInfo(props.component, props.documentation),
+  );
+  const defaultVariant = props.variants?.default;
+  if (defaultVariant) {
+    Object.entries(defaultVariant).forEach(([memberGroup, members]) => {
+      if (memberGroup === 'exclusions') return;
+      Object.entries(members).forEach(([memberName, member]) => {
+        const infoMember = info[memberGroup]?.find(m => m.name === memberName);
+        if (infoMember) Object.assign(infoMember, member);
+      });
+    });
+  }
+  return info;
+});
+
+/**
+ * Shallow-clones member arrays and their objects so that variant overrides
+ * never mutate the shared documentation prop.
+ *
+ * @param {object} info - The info object to clone.
+ * @returns {object} A cloned info object.
+ */
+function cloneInfoMembers (info) {
+  const cloned = { ...info };
+  for (const group of ['props', 'slots', 'attributes', 'events']) {
+    if (cloned[group]) {
+      cloned[group] = cloned[group].map(m => ({ ...m }));
+    }
+  }
+  return cloned;
 }
 
 /**
@@ -248,15 +304,17 @@ function updateVariant (e) {
  * @returns {object} The newly instantiated info object.
  */
 function initializeInfo () {
-  const info = getComponentInfo(props.component, props.documentation);
+  const info = cloneInfoMembers(
+    getComponentInfo(props.component, props.documentation),
+  );
 
-  const variantInfo = props.variants?.[selectedVariant.value];
+  const variantInfo = props.variants?.[activeVariant.value];
 
   if (variantInfo) {
     Object.entries(variantInfo).forEach(([memberGroup, members]) => {
       if (memberGroup === 'exclusions') return;
       Object.entries(members).forEach(([memberName, member]) => {
-        const infoMember = info[memberGroup].find(infoMember => infoMember.name === memberName);
+        const infoMember = info[memberGroup]?.find(m => m.name === memberName);
         if (infoMember) {
           Object.assign(infoMember, member);
         }
