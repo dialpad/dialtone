@@ -32,11 +32,44 @@
           kind="muted"
           importance="clear"
           size="xs"
+          @click="toggleSearch"
         >
           <template #icon="{ iconSize }">
             <dt-icon-search :size="iconSize" />
           </template>
         </dt-button>
+        <dt-input
+          v-if="showSearch"
+          ref="searchInput"
+          type="search"
+          placeholder="Search"
+          size="xs"
+          root-class="d-w100p"
+        >
+          <template #startIcon="{ iconSize }">
+            <dt-icon
+              name="search"
+              :size="iconSize"
+            />
+          </template>
+          <template #endIcon="{ clear }">
+            <dt-button
+              kind="muted"
+              importance="clear"
+              size="xs"
+              class="d-p2"
+              aria-label="Clear search"
+              @click="clear"
+            >
+              <template #startIcon>
+                <dt-icon
+                  name="close"
+                  size="100"
+                />
+              </template>
+            </dt-button>
+          </template>
+        </dt-input>
       </template>
       <div
         v-dt-scrollbar
@@ -106,7 +139,7 @@
 
 <script setup>
 import DtcOptionBarMemberGroup from './option_bar_member_group.vue';
-import { computed } from 'vue';
+import { ref, nextTick } from 'vue';
 import { OPTIONS_UPDATE_EVENT } from '@/src/lib/constants';
 import { getControlByMemberType, getControlByValue } from '@/src/lib/control';
 import { isIconSlot } from '@/src/lib/icons';
@@ -138,6 +171,17 @@ const props = defineProps({
 });
 
 const emit = defineEmits([OPTIONS_UPDATE_EVENT]);
+
+const showSearch = ref(false);
+const searchInput = ref(null);
+
+async function toggleSearch () {
+  showSearch.value = !showSearch.value;
+  if (showSearch.value) {
+    await nextTick();
+    searchInput.value?.$el?.querySelector('input')?.focus();
+  }
+}
 
 /**
  * Gets an array of controls for a binding.
