@@ -32,7 +32,7 @@ keywords: ["app layout","page layout","d-root-layout","DtRootLayout","dt-root-la
 </dt-root-layout>
 </code-well-header>
 
-<component-combinator component-name="DtRootLayout" />
+<!-- <component-combinator component-name="DtRootLayout" /> -->
 
 ## Base Style
 
