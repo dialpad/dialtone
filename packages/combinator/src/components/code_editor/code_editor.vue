@@ -280,9 +280,38 @@ function serializeAsVariantPreset () {
   return preset;
 }
 
+function formatJsValue (value, indent) {
+  if (typeof value === 'string') return `'${value.replace(/'/g, '\\\'')}'`;
+  if (typeof value === 'boolean' || typeof value === 'number') return String(value);
+  if (Array.isArray(value)) return JSON.stringify(value);
+  if (typeof value === 'object' && value !== null) {
+    const entries = Object.entries(value);
+    if (entries.length === 0) return '{}';
+    const inner = entries
+      .map(([k, v]) => `${indent}  ${k}: ${formatJsValue(v, indent + '  ')}`)
+      .join(',\n');
+    return `{\n${inner},\n${indent}}`;
+  }
+  return String(value);
+}
+
+function formatPresetAsJs (preset) {
+  const pad = '  ';
+  const sections = [];
+
+  for (const [group, members] of Object.entries(preset)) {
+    const entries = Object.entries(members)
+      .map(([name, obj]) => `${pad}${pad}${pad}${name}: { initialValue: ${formatJsValue(obj.initialValue, pad + pad + pad)} }`)
+      .join(',\n');
+    sections.push(`${pad}${pad}${group}: {\n${entries},\n${pad}${pad}}`);
+  }
+
+  return `\n${pad}'⚡️ UNNAMED PRESET': {\n${sections.join(',\n')},\n${pad}},`;
+}
+
 async function copyJson () {
   const preset = serializeAsVariantPreset();
-  const text = JSON.stringify(preset, null, 2);
+  const text = formatPresetAsJs(preset);
   await navigator.clipboard.writeText(text);
   copiedJson.value = true;
   await new Promise(resolve => setTimeout(resolve, 2000));
