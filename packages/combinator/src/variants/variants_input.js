@@ -1,4 +1,5 @@
- 
+/* eslint-disable max-len */
+
 export default {
   exclusions: [
     {
@@ -81,6 +82,30 @@ export default {
     },
     attributes: {
       placeholder: { initialValue: 'Placeholder' },
+    },
+  },
+
+  'search, with clear button': {
+    props: {
+      type: {
+        initialValue: 'search',
+      },
+    },
+    attributes: {
+      'aria-label': {
+        initialValue: 'Search items',
+      },
+      placeholder: {
+        initialValue: 'Search Items',
+      },
+    },
+    slots: {
+      startIcon: {
+        initialValue: '<dt-icon name="search" :size="iconSize" />',
+      },
+      endIcon: {
+        initialValue: '<dt-stack class="d-pr2"><dt-button kind="muted" importance="clear" size="xs" aria-label="Clear search" @click="clear"><template #startIcon="{ iconSize }"><dt-icon name="close" :size="iconSize" /></template></dt-button></dt-stack>',
+      },
     },
   },
 

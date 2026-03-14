@@ -481,35 +481,26 @@ Use `type="search"` with a clear button in the `icon` slot. When the input is no
         <dt-icon name="search" :size="iconSize" />
       </template>
       <template v-if="inputSearchValue.length !== 0" #endIcon="{ clear }">
-        <dt-button
-          v-dt-tooltip="'Clear search'"
-          kind="muted"
-          importance="clear"
-          size="xs"
-          aria-label="Clear search"
-          @click="clear"
-        >
-          <template #startIcon="{ iconSize }">
-            <dt-icon name="close" :size="iconSize" />
-          </template>
-        </dt-button>
+        <dt-stack class="d-pr2">
+          <dt-button
+            v-dt-tooltip="'Clear search'"
+            kind="muted"
+            importance="clear"
+            size="xs"
+            aria-label="Clear search"
+            @click="clear"
+          >
+            <template #startIcon="{ iconSize }">
+              <dt-icon name="close" :size="iconSize" />
+            </template>
+          </dt-button>
+        </dt-stack>
       </template>
     </dt-input>
   </div>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-input__wrapper">
-  <span class="base-input__icon--left d-input-icon--left d-input-icon">...</span>
-  <input type="search" autocomplete="off" class="base-input__input d-input d-input-icon--left d-input-icon--right" placeholder="Search Items">
-  <span class="base-input__icon--right d-input-icon--right d-input-icon undefined" data-qa="dt-input-right-icon-wrapper">
-    <button class="base-button__button d-btn d-btn--muted d-btn--xs d-btn--circle d-btn--icon-only" data-qa="dt-button" type="button" aria-label="Clear search">
-      <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-    </button>
-  </span>
-</div>
-'
 vueCode='
 <dt-input
   aria-label="Search items"
@@ -521,18 +512,20 @@ vueCode='
     <dt-icon name="search" :size="iconSize" />
   </template>
   <template v-if="inputValue.length !== 0" #endIcon="{ clear }">
-    <dt-button
-      kind="muted"
-      importance="clear"
-      size="xs"
-      circle
-      aria-label="Clear search"
-      @click="clear"
-    >
-      <template #startIcon="{ iconSize }">
-        <dt-icon name="close" :size="iconSize" />
-      </template>
-    </dt-button>
+    <dt-stack class="d-pr2">
+      <dt-button
+        v-dt-tooltip="Clear search"
+        kind="muted"
+        importance="clear"
+        size="xs"
+        aria-label="Clear search"
+        @click="clear"
+      >
+        <template #startIcon="{ iconSize }">
+          <dt-icon name="close" :size="iconSize" />
+        </template>
+      </dt-button>
+    </dt-stack>
   </template>
 </dt-input>
 '
