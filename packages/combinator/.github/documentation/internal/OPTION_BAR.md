@@ -2,7 +2,7 @@
 
 The option bar is responsible for providing a user interface to interact and change the state of the target component.
 
-It consists of multiple 'section' components containing 'member group' components 
+It consists of multiple 'section' components containing 'member group' components
 that generate controls for each member.
 
 The primary task for the option bar is to handle input and output between the 'member group' components
@@ -22,17 +22,19 @@ a single control (Slots, events). However, for other member groups we want to al
 member data such a valid types (Props, attributes).
 
 The `controlSelector` prop is a function that provides a parameter for the current member, and expects an array
-with the first item as the initial control string, and the second item is an array of string values for all 
+with the first item as the initial control string, and the second item is an array of string values for all
 the possible controls based on this member as a return value. The string values
 represent a key for a control in the 'control map'.
 
 Example:
+
 ```vue
 <dtc-option-bar-member-group
   :control-selector="getMemberControls"
   ...
 />
 ```
+
 ```js
 function getMemberControls (member) {
     return [
@@ -45,26 +47,27 @@ function getMemberControls (member) {
     ];
 }
 ```
-_Example of a member group that will generate a control for 'null', 'string' and 
+
+_Example of a member group that will generate a control for 'null', 'string' and
 a variable control for each member based on its `specialControlType` value. The initial
 control will be the 'string' control._
 
 ## Member Group
 
 The member group receives a group of members and their respective values. It is responsible
-for rendering 'option bar control' components for each member. It also renders the 'option bar control selector' 
+for rendering 'option bar control' components for each member. It also renders the 'option bar control selector'
 for each member.
 
 ### Member Map
 
-The member map is a reactive data object that wraps each member and can provide additional data that the 
+The member map is a reactive data object that wraps each member and can provide additional data that the
 'option bar control' component needs without affecting the original member data object.
 
 It adds an additional `validControls` field that is created based on the `controlSelector` prop. Most importantly,
 it adds an additional `control` field to that is the determining value for what control is currently active
 for the member.
 
-The `control` field is passed as a prop to the 'option bar control' component and 
+The `control` field is passed as a prop to the 'option bar control' component and
 updated when the `@update:control` event is emitted from the 'option bar control selector' component.
 
 ### Member Values
@@ -81,7 +84,7 @@ The args prop is an object that contains data to be directly attached to the und
 
 ## Control Selector
 
-The option bar control selector creates buttons above the control based on the `validControls` prop to allow 
+The option bar control selector creates buttons above the control based on the `validControls` prop to allow
 selection of a control from a variety of control selections for a single member.
 
 ## Option Bar Control
@@ -91,11 +94,11 @@ and decouple the reliance on the option bar and members from individual 'control
 
 ### Control Component
 
-The option bar control receives a 'control' as a prop and finds the corresponding 'control' component 
+The option bar control receives a 'control' as a prop and finds the corresponding 'control' component
 in the 'control map'. It renders the component with a dynamic component (`<component />`).
 
 ### Extended Args
 
-The `args` prop is used to pass data to bind directly to the underlying control using `v-bind`. 
-However, some explicitly declared props on this component are required as well. 
+The `args` prop is used to pass data to bind directly to the underlying control using `v-bind`.
+However, some explicitly declared props on this component are required as well.
 The `controlArgs` computed value introduces some additional values to pass to the control.
