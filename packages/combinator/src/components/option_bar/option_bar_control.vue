@@ -1,12 +1,19 @@
 <template>
   <div>
     <component
-      :is="controlComponent"
-      v-bind="controlBindings"
+      :is="rawMode ? 'dt-text' : controlComponent"
+      v-bind="rawMode ? { as: 'div', kind: 'label', size: 'xs', tone: 'secondary' } : controlBindings"
       @update:value="updateValue"
     >
-      <span v-dt-tooltip="{ message: description, placement: 'left' }">
+      <dt-stack
+        as="div"
+        direction="row"
+        gap="200"
+        justify="space-between"
+        align="baseline"
+      >
         <dt-text
+          v-dt-tooltip="{ message: description, placement: 'left' }"
           as="span"
           class="d-tt-capitalize"
           :tone="disabled ? 'muted' : undefined"
@@ -36,17 +43,38 @@
             color="black-700"
           />
         </span>
-      </span>
+        <dt-button
+          v-if="showRawToggle"
+          v-dt-tooltip="'Edit as JSON'"
+          link
+          link-underline="false"
+          class="d-ml-auto d-fw-normal"
+          :active="rawMode"
+          @click="toggleRawMode"
+        >
+          Raw
+        </dt-button>
+      </dt-stack>
+      <dt-input
+        v-if="rawMode"
+        v-model="rawText"
+        type="textarea"
+        size="xs"
+        spellcheck="false"
+        root-class="d-mt6"
+      />
     </component>
   </div>
 </template>
 
 <script setup>
 import DtIconLock from '@dialpad/dialtone-icons/vue/lock';
-import { DtBadge, DtText } from '@dialpad/dialtone-vue';
+import DtIconBraces from '@dialpad/dialtone-icons/vue/braces';
+import { DtBadge, DtButton, DtInput, DtText } from '@dialpad/dialtone-vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
-import { computed } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { deserializeControlValue, serializeControlValue } from '@/src/lib/control';
+import { stringifyDocValue, parseDocValue } from '@/src/lib/parse';
 
 const props = defineProps({
   /**
@@ -184,6 +212,36 @@ function updateValue (e) {
     : e;
   emit(VALUE_UPDATE_EVENT, value);
 }
+
+const showRawToggle = computed(() => {
+  const name = props.controlData.component?.name;
+  return name === 'DtcControlArray' || name === 'DtcControlObject';
+});
+
+const rawMode = ref(false);
+const rawText = ref('');
+
+watch(() => props.value, (val) => {
+  if (rawMode.value) {
+    rawText.value = stringifyDocValue(val);
+  }
+}, { deep: true });
+
+function toggleRawMode () {
+  rawMode.value = !rawMode.value;
+  if (rawMode.value) {
+    rawText.value = stringifyDocValue(props.value);
+  }
+}
+
+watch(rawText, (val) => {
+  try {
+    const parsed = parseDocValue(val);
+    emit(VALUE_UPDATE_EVENT, parsed);
+  } catch {
+    // Invalid JSON5 — don't emit until syntax is valid
+  }
+});
 </script>
 
 <script>
