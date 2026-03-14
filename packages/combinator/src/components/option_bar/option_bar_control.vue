@@ -5,7 +5,7 @@
       v-bind="controlBindings"
       @update:value="updateValue"
     >
-      <span v-dt-tooltip="description">
+      <span v-dt-tooltip="{ message: description, placement: 'left' }">
         <dt-text
           as="span"
           class="d-tt-capitalize"
