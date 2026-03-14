@@ -26,6 +26,17 @@
         >
           Slots
         </dt-tab>
+        <dt-button
+          v-dt-tooltip="'Search'"
+          class="d-ml-auto"
+          kind="muted"
+          importance="clear"
+          size="xs"
+        >
+          <template #icon="{ iconSize }">
+            <dt-icon-search :size="iconSize" />
+          </template>
+        </dt-button>
       </template>
       <div
         v-dt-scrollbar
@@ -100,6 +111,7 @@ import { OPTIONS_UPDATE_EVENT } from '@/src/lib/constants';
 import { getControlByMemberType, getControlByValue } from '@/src/lib/control';
 import { isIconSlot } from '@/src/lib/icons';
 import { DtStack, DtTabGroup, DtTab, DtTabPanel } from '@dialpad/dialtone-vue';
+import { DtIconSearch } from '@dialpad/dialtone-icons/vue';
 
 const props = defineProps({
   /**
