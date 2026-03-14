@@ -219,9 +219,10 @@ const showRawToggle = computed(() => {
 
 const rawMode = ref(false);
 const rawText = ref('');
+let rawEditInProgress = false;
 
 watch(() => props.value, (val) => {
-  if (rawMode.value) {
+  if (rawMode.value && !rawEditInProgress) {
     rawText.value = stringifyDocValue(val);
   }
 }, { deep: true });
@@ -235,10 +236,13 @@ function toggleRawMode () {
 
 watch(rawText, (val) => {
   try {
+    rawEditInProgress = true;
     const parsed = parseDocValue(val);
     emit(VALUE_UPDATE_EVENT, parsed);
   } catch {
     // Invalid JSON5 — don't emit until syntax is valid
+  } finally {
+    rawEditInProgress = false;
   }
 });
 </script>
