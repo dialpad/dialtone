@@ -98,6 +98,8 @@
         :options="options"
         :settings="settings"
         :disabled-members="disabledMembers"
+        :dev-mode="devMode"
+        :has-changes="hasChanges"
         @update:options="e => e(options)"
       />
     </div>
@@ -181,6 +183,10 @@ const props = defineProps({
   headerClass: {
     type: String,
     default: '',
+  },
+  devMode: {
+    type: Boolean,
+    default: false,
   },
 });
 

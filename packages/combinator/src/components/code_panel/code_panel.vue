@@ -18,6 +18,8 @@
           :verbose="settings.code.verbose"
           :indent-spaces="settings.code.indent"
           :disabled-members="disabledMembers"
+          :dev-mode="devMode"
+          :has-changes="hasChanges"
           @update:options="e => emit(OPTIONS_UPDATE_EVENT, e)"
         />
       </div>
@@ -71,6 +73,14 @@ defineProps({
   disabledMembers: {
     type: Set,
     default: () => new Set(),
+  },
+  devMode: {
+    type: Boolean,
+    default: false,
+  },
+  hasChanges: {
+    type: Boolean,
+    default: false,
   },
 });
 

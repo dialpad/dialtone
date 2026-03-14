@@ -4,6 +4,7 @@
     :library="library"
     :documentation="componentDocumentation"
     :variants="componentVariants"
+    :dev-mode="isDev"
   />
 </template>
 
@@ -53,6 +54,11 @@ export default {
         ...this.dialtoneIcons,
         ...this.dialtoneIllustrations,
       };
+    },
+
+    isDev () {
+      return typeof __VUEPRESS_DEV__ !== 'undefined'
+        && (__VUEPRESS_DEV__ || __DIALTONE_DEPLOY_PREVIEW__);
     },
   },
 };

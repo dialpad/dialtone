@@ -41,24 +41,49 @@
         </template>
       </dtc-code-editor-element>
     </div>
-    <dt-button
-      class="dtc-theme__button d-ps-sticky d-t0 d-r0"
-      kind="muted"
-      importance="clear"
-      size="xs"
-      @click="copy"
+    <dt-stack
+      direction="row"
+      gap="200"
+      class="d-ps-sticky d-t0 d-r0"
     >
-      <template #default>
-        {{ copied ? 'Copied!' : 'Copy' }}
-      </template>
-      <template #icon="{ iconSize }">
-        <component
-          :is="copied ? DtIconCheck : DtIconCopy"
-          :size="iconSize"
-          :class="{ 'd-fc-success': copied }"
-        />
-      </template>
-    </dt-button>
+      <dt-button
+        v-if="devMode && hasChanges"
+        class="dtc-theme__button"
+        kind="muted"
+        importance="clear"
+        size="xs"
+        @click="copyJson"
+      >
+        <template #default>
+          {{ copiedJson ? 'Copied!' : 'Copy JSON' }}
+        </template>
+        <template #icon="{ iconSize }">
+          <component
+            :is="copiedJson ? DtIconCheck : DtIconBraces"
+            :size="iconSize"
+            :class="{ 'd-fc-success': copiedJson }"
+          />
+        </template>
+      </dt-button>
+      <dt-button
+        class="dtc-theme__button"
+        kind="muted"
+        importance="clear"
+        size="xs"
+        @click="copy"
+      >
+        <template #default>
+          {{ copied ? 'Copied!' : 'Copy' }}
+        </template>
+        <template #icon="{ iconSize }">
+          <component
+            :is="copied ? DtIconCheck : DtIconCopy"
+            :size="iconSize"
+            :class="{ 'd-fc-success': copied }"
+          />
+        </template>
+      </dt-button>
+    </dt-stack>
   </dt-stack>
 </template>
 
@@ -66,7 +91,7 @@
 import DtcCodeEditorTagAttributes from './code_editor_tag_attributes.vue';
 import DtcCodeEditorElement from './code_editor_element.vue';
 import DtcCodeEditorSlot from './code_editor_slot.vue';
-import { DtIconCheck, DtIconCopy } from '@dialpad/dialtone-icons/vue';
+import { DtIconCheck, DtIconCopy, DtIconBraces } from '@dialpad/dialtone-icons/vue';
 import { DtButton, DtStack } from '@dialpad/dialtone-vue';
 
 import { OPTIONS_UPDATE_EVENT, SETTINGS_INDENT_KEY, DEFAULT_SLOT_NAME } from '@/src/lib/constants';
@@ -117,6 +142,14 @@ const props = defineProps({
     type: Set,
     default: () => new Set(),
   },
+  devMode: {
+    type: Boolean,
+    default: false,
+  },
+  hasChanges: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits([
@@ -147,6 +180,7 @@ const hasSlotContent = computed(() => {
 });
 
 const copied = ref(false);
+const copiedJson = ref(false);
 
 /**
  * Generates plain-text copy of the code from component data.
@@ -223,6 +257,37 @@ const copyText = computed(() => {
 
   return lines.join('\n');
 });
+
+function serializeAsVariantPreset () {
+  const preset = {};
+  const memberGroups = ['props', 'slots', 'attributes'];
+
+  for (const group of memberGroups) {
+    const infoMembers = props.info[group];
+    const optionValues = props.options[group];
+    if (!infoMembers || !optionValues) continue;
+
+    for (const member of infoMembers) {
+      const value = optionValues[member.name];
+      if (props.disabledMembers.has(member.name)) continue;
+      if (value === undefined || value === null || value === '') continue;
+
+      if (!preset[group]) preset[group] = {};
+      preset[group][member.name] = { initialValue: value };
+    }
+  }
+
+  return preset;
+}
+
+async function copyJson () {
+  const preset = serializeAsVariantPreset();
+  const text = JSON.stringify(preset, null, 2);
+  await navigator.clipboard.writeText(text);
+  copiedJson.value = true;
+  await new Promise(resolve => setTimeout(resolve, 2000));
+  copiedJson.value = false;
+}
 
 async function copy () {
   await navigator.clipboard.writeText(copyText.value);
