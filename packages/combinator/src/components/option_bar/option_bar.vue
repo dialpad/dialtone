@@ -147,7 +147,7 @@ import { isIconSlot } from '@/src/lib/icons';
 import { DtStack, DtTabGroup, DtTab, DtTabPanel } from '@dialpad/dialtone-vue';
 import { DtIconSearch } from '@dialpad/dialtone-icons/vue';
 
-const props = defineProps({
+defineProps({
   /**
    * Component to render.
    */

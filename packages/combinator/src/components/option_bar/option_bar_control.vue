@@ -69,7 +69,6 @@
 
 <script setup>
 import DtIconLock from '@dialpad/dialtone-icons/vue/lock';
-import DtIconBraces from '@dialpad/dialtone-icons/vue/braces';
 import { DtBadge, DtButton, DtInput, DtText } from '@dialpad/dialtone-vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { computed, ref, watch } from 'vue';
