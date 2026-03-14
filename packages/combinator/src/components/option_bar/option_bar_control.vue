@@ -12,49 +12,54 @@
         justify="space-between"
         align="baseline"
       >
-        <dt-text
-          v-dt-tooltip="{ message: description, placement: 'left' }"
-          as="span"
-          class="d-tt-capitalize"
-          :tone="disabled ? 'muted' : undefined"
-          data-qa="dtc-option-bar-control-label"
-        >
-          {{ controlLabel }}
-        </dt-text>
-        <dt-icon-lock
-          v-if="locked"
-          size="100"
-        />
-        <span
-          v-if="required"
-          class="d-ml-auto"
+        <dt-stack
+          direction="row"
+          gap="300"
+          align="baseline"
         >
           <dt-text
+            v-dt-tooltip="{ message: description, placement: 'left' }"
+            as="span"
+            class="d-tt-capitalize"
+            :tone="disabled ? 'muted' : undefined"
+            data-qa="dtc-option-bar-control-label"
+          >
+            {{ controlLabel }}
+          </dt-text>
+          <dt-icon-lock
+            v-if="locked"
+            size="100"
+          />
+          <dt-text
+            v-if="required"
             size="xs"
             kind="label"
             strength="normal"
             tone="critical"
-          >Required</dt-text>
-        </span>
-        <span
-          v-if="vModel"
-          class="d-pl2 d-ps-relative d-b2"
-        >
-          <dt-badge
-            text="v-model"
-            color="black-700"
-          />
-        </span>
+            class="d-fs-50"
+          >
+            Required
+          </dt-text>
+          <span
+            v-if="vModel"
+            class="d-pl2 d-ps-relative d-b2"
+          >
+            <dt-badge
+              text="v-model"
+              color="black-700"
+            />
+          </span>
+        </dt-stack>
         <dt-button
           v-if="showRawToggle"
           v-dt-tooltip="'Edit as JSON'"
           link
           link-underline="false"
-          class="d-ml-auto d-fw-normal"
+          class="d-ml-auto d-fw-normal d-fs-50"
           :active="rawMode"
           @click="toggleRawMode"
         >
-          Raw
+          RAW
         </dt-button>
       </dt-stack>
       <dt-input
