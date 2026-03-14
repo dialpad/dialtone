@@ -41,10 +41,11 @@
         <dt-input
           v-if="showSearch"
           ref="searchInput"
+          v-model="searchQuery"
           type="search"
           placeholder="Search"
           size="xs"
-          root-class="d-w100p"
+          root-class="d-w100p d-mt2"
         >
           <template #startIcon="{ iconSize }">
             <dt-icon
@@ -91,7 +92,7 @@
                 <dtc-option-bar-member-group
                   :component="component"
                   :control-selector="(prop, value) => getBindingControls(prop, value, 'null')"
-                  :members="info.props"
+                  :members="filterMembers(info.props)"
                   :values="options.props"
                   :exclusion-rules="info.exclusions"
                   :prop-values="options.props"
@@ -114,7 +115,7 @@
                 <dtc-option-bar-member-group
                   :component="component"
                   :control-selector="getSlotControls"
-                  :members="info.slots"
+                  :members="filterMembers(info.slots)"
                   :values="options.slots"
                   :exclusion-rules="info.exclusions"
                   :prop-values="options.props"
@@ -174,13 +175,26 @@ const emit = defineEmits([OPTIONS_UPDATE_EVENT]);
 
 const showSearch = ref(false);
 const searchInput = ref(null);
+const searchQuery = ref('');
 
 async function toggleSearch () {
   showSearch.value = !showSearch.value;
   if (showSearch.value) {
     await nextTick();
     searchInput.value?.$el?.querySelector('input')?.focus();
+  } else {
+    searchQuery.value = '';
   }
+}
+
+function normalizeForSearch (str) {
+  return str.toLowerCase().replace(/[\s\-_]/g, '');
+}
+
+function filterMembers (members) {
+  const q = normalizeForSearch(searchQuery.value);
+  if (q.length < 2) return members;
+  return members.filter(m => normalizeForSearch(m.name).includes(q));
 }
 
 /**
