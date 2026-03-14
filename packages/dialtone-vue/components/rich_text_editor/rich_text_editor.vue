@@ -45,7 +45,7 @@
     <editor-content
       ref="editor"
       :editor="editor"
-      class="d-rich-text-editor"
+      :class="['d-rich-text-editor', { 'd-rich-text-editor--custom-tables': allowCustomTables }]"
       data-qa="dt-rich-text-editor"
       v-bind="attrs"
     />
@@ -75,6 +75,8 @@ import Underline from '@tiptap/extension-underline';
 import Text from '@tiptap/extension-text';
 import TextAlign from '@tiptap/extension-text-align';
 import { Table, TableRow, TableCell, TableHeader } from '@tiptap/extension-table';
+import { CustomTable, CustomTableRow, CustomTableCell, CustomTableHeader } from './extensions/table/table';
+import { CustomTextStyle } from './extensions/text_style/text_style';
 import { TextStyleKit } from '@tiptap/extension-text-style';
 import Emoji from './extensions/emoji';
 import CustomLink from './extensions/custom_link';
@@ -450,6 +452,15 @@ export default {
      * Allow Tables to be used in to the editor
      */
     allowTables: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Use custom table extensions that preserve additional HTML attributes
+     * such as border, cellpadding, cellspacing, style, valign, and width.
+     */
+    allowCustomTables: {
       type: Boolean,
       default: false,
     },
@@ -926,6 +937,7 @@ export default {
           fontSize: this.allowFontSize,
           lineHeight: this.allowLineHeight,
         }));
+        extensions.push(CustomTextStyle);
       }
 
       if (this.additionalExtensions.length) {
@@ -933,7 +945,13 @@ export default {
       }
 
       if (this.allowTables) {
-        extensions.push(Table.configure({ resizable: true }), TableRow, TableHeader, TableCell, Gapcursor)
+        if (this.allowCustomTables) {
+          extensions.push(CustomTable.configure({ resizable: true }),
+            CustomTableRow, CustomTableHeader, CustomTableCell, Gapcursor);
+        }
+        else {
+          extensions.push(Table.configure({resizable: true}), TableRow, TableHeader, TableCell, Gapcursor);
+        }
       }
       return extensions;
     },
