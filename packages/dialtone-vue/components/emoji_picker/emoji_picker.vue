@@ -83,6 +83,10 @@ import { DtButton } from '../button';
 import { computed, ref, watch } from 'vue';
 import { DialtoneLocalization } from '@/localization';
 
+defineOptions({
+  name: 'DtEmojiPicker',
+});
+
 const props = defineProps({
   /**
    * The array with recently used  emoji object

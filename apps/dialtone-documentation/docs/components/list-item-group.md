@@ -6,29 +6,6 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-list-item-gr
 keywords: ["list group", "list items", "d-list-item-group", "DtListItemGroup", "dt-list-item-group", "menu list", "option list"]
 ---
 
-<code-well-header>
-  <dt-list-item-group
-    heading="Example Heading"
-    heading-class="d-fw-bold"
-  >
-    <dt-list-item
-      navigation-type="tab"
-    >
-      item1
-    </dt-list-item>
-    <dt-list-item
-      navigation-type="tab"
-    >
-      item2
-    </dt-list-item>
-    <dt-list-item
-      navigation-type="tab"
-    >
-      item3
-    </dt-list-item>
-  </dt-list-item-group>
-</code-well-header>
-
 <component-combinator component-name="DtListItemGroup" />
 
 ## Base Style

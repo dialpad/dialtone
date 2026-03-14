@@ -9,7 +9,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox--de
 keywords: ["autocomplete","typeahead","search select","d-combobox","DtCombobox","dt-combobox"]
 ---
 
-<!-- <component-combinator component-name="DtCombobox" /> -->
+<component-combinator component-name="DtCombobox" />
 
 ## Base Style
 

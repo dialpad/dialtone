@@ -21,7 +21,7 @@ keywords: ["radio buttons","radio options","form fields","d-radio-group","DtRadi
   </dt-radio-group>
 </code-well-header>
 
-<!-- <component-combinator component-name="DtRadioGroup" /> -->
+<component-combinator component-name="DtRadioGroup" />
 
 ## Variants
 

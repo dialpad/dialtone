@@ -19,7 +19,7 @@ keywords: ["input addon", "input prefix", "input suffix", "d-input-group", "DtIn
   </dt-input-group>
 </code-well-header>
 
-<!-- <component-combinator component-name="DtInputGroup" /> -->
+<component-combinator component-name="DtInputGroup" />
 
 ## Default
 

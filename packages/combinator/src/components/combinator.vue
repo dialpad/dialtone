@@ -503,7 +503,7 @@ export default {
   & {
     display:none;
     flex-direction: column;
-    margin-block-start: var(--dt-spacing-200);
+    margin-block: var(--dt-spacing-200);
     background-color: var(--dt-color-surface-secondary);
     border-radius: var(--dt-size-radius-400);
 
@@ -513,7 +513,7 @@ export default {
   }
 
   &--fullscreen {
-    margin-block-start: 0;
+    margin-block: 0;
     position: fixed;
     inset: 0;
     z-index: var(--zi-popover);

@@ -60,6 +60,10 @@ import { POPOVER_APPEND_TO_VALUES, POPOVER_PADDING_CLASSES, DtPopover } from '@/
 import { TOOLTIP_DIRECTIONS, TOOLTIP_DELAY_MS } from '@/components/tooltip/index.js';
 import { getUniqueString } from '@/common/utils';
 
+defineOptions({
+  name: 'DtHovercard',
+});
+
 const props = defineProps({
   /**
      * Fade transition when the content display is toggled.

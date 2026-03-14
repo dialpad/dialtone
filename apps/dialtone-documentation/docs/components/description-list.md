@@ -18,7 +18,7 @@ keywords: ["definition list", "key value", "dl", "d-description-list", "DtDescri
   </div>
 </code-well-header>
 
-<!-- <component-combinator component-name="DtDescriptionList" /> -->
+<component-combinator component-name="DtDescriptionList" />
 
 ## Variants and Examples
 

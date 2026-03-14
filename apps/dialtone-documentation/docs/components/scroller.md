@@ -7,7 +7,7 @@ image: assets/images/components/scroller.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-scroller--default
 ---
 
-<!-- <component-combinator component-name="DtScroller" /> -->
+<component-combinator component-name="DtScroller" />
 
 #### Default Scroller
 

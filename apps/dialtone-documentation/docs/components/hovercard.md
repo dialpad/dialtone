@@ -66,7 +66,7 @@ vueCode='
 '
 showHtmlWarning />
 
-<!-- <component-combinator component-name="DtHovercard" /> -->
+<component-combinator component-name="DtHovercard" />
 
 ## Variants
 

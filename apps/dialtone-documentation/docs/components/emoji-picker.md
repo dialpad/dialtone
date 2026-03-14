@@ -7,29 +7,7 @@ status: beta
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-emoji-picker--default
 ---
 
-<code-well-header>
-  <dt-emoji-picker
-      skin-tone="Default"
-      skin-selector-button-tooltip-label="Change default skin tone"
-      :tab-set-labels="[
-        'Most recently used',
-        'Smileys and people',
-        'Nature',
-        'Food',
-        'Activity',
-        'Travel',
-        'Objects',
-        'Symbols',
-        'Flags',
-      ]"
-      :recently-used-emojis="recentlyUsedEmojis"
-      search-results-label="Search results"
-      search-no-results-label="No results"
-      search-placeholder-label="Search..."
-    />
-</code-well-header>
-
-<!-- <component-combinator component-name="DtEmojiPicker" /> -->
+<component-combinator component-name="DtEmojiPicker" />
 
 ## Variants and Examples
 

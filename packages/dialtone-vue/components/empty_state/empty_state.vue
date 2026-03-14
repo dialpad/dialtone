@@ -68,6 +68,10 @@ import {
   EMPTY_STATE_SIZE_MODIFIERS,
 } from './empty_state_constants.js';
 
+defineOptions({
+  name: 'DtEmptyState',
+});
+
 const slots = useSlots();
 
 const props = defineProps({
