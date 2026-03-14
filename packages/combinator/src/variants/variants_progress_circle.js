@@ -1,4 +1,4 @@
- 
+
 export default {
   default: {
     props: {
@@ -11,7 +11,7 @@ export default {
     },
   },
 
-  critical: {
+  'critical at 99% progress': {
     props: {
       ariaLabel: { initialValue: 'Upload progress' },
       progress: { initialValue: 99 },
@@ -23,7 +23,7 @@ export default {
   positive: {
     props: {
       ariaLabel: { initialValue: 'Upload progress' },
-      progress: { initialValue: 99 },
+      progress: { initialValue: 81 },
       size: { initialValue: '600' },
       kind: { initialValue: 'positive' },
     },
@@ -38,12 +38,21 @@ export default {
     },
   },
 
-  info: {
+  'info at 10% progress': {
     props: {
       ariaLabel: { initialValue: 'Upload progress' },
       progress: { initialValue: 10 },
       size: { initialValue: '400' },
       kind: { initialValue: 'info' },
+    },
+  },
+
+  'warning at 1% progress': {
+    props: {
+      ariaLabel: { initialValue: 'Upload progress' },
+      progress: { initialValue: 1 },
+      size: { initialValue: '400' },
+      kind: { initialValue: 'warning' },
     },
   },
 };

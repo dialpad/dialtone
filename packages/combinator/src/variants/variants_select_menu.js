@@ -1,4 +1,5 @@
  
+
 export default {
   exclusions: [
     {
@@ -55,10 +56,10 @@ export default {
     },
   },
 
-  'small label': {
+  'with custom label size and strength': {
     props: {
       label: { initialValue: 'Label' },
-      labelSize: { initialValue: 'sm' },
+      labelSize: { initialValue: 'xs' },
       labelStrength: { initialValue: 'normal' },
       options: {
         initialValue: [

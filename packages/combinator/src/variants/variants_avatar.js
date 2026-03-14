@@ -1,4 +1,4 @@
- 
+
 export default {
   exclusions: [
     {
@@ -58,7 +58,7 @@ export default {
     },
   },
 
-  presence: {
+  'with presence': {
     props: {
       size: { initialValue: 'sm' },
       presence: { initialValue: 'away' },
@@ -67,7 +67,7 @@ export default {
     },
   },
 
-  'overlay icon': {
+  'with overlay icon': {
     props: {
       size: { initialValue: 'lg' },
       imageSrc: { initialValue: '/assets/images/person.png' },

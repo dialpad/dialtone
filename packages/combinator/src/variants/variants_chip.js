@@ -18,13 +18,13 @@ export default {
       size: { initialValue: 'xs' },
     },
     slots: {
-      default: { initialValue: 'Chip' },
+      default: { initialValue: 'I can be clicked' },
     },
   },
 
   'with icon': {
     slots: {
-      icon: { initialValue: '<dt-icon-phone size="200" />' },
+      icon: { initialValue: '<dt-icon-box-select size="200" />' },
       default: { initialValue: 'Chip' },
     },
   },

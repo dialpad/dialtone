@@ -55,7 +55,7 @@ export default {
     },
   },
 
-  'small muted': {
+  'small muted outlined with start and end icon': {
     props: {
       importance: {
         initialValue: 'outlined',
@@ -72,10 +72,10 @@ export default {
         initialValue: 'Label',
       },
       startIcon: {
-        initialValue: '<dt-icon-phone :size="iconSize" />',
+        initialValue: '<dt-icon-box-select :size="iconSize" />',
       },
       endIcon: {
-        initialValue: '<dt-icon-arrow-right :size="iconSize" />',
+        initialValue: '<dt-icon-box-select :size="iconSize" />',
       },
     },
   },
@@ -137,7 +137,7 @@ export default {
     },
     slots: {
       icon: { initialValue: '<dt-icon name="external-link" :size="iconSize" />' },
-      default: { initialValue: 'Dialtone' },
+      default: { initialValue: 'Dialtone Doc Site' },
     },
   },
 

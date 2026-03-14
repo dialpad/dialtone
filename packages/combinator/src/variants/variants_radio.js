@@ -1,4 +1,4 @@
- 
+
 export default {
   default: {
     props: {
@@ -15,7 +15,7 @@ export default {
     },
   },
 
-  warning: {
+  'with warning validation message': {
     props: {
       name: { initialValue: 'warning-radio' },
       value: { initialValue: 'voicemail' },
@@ -33,6 +33,14 @@ export default {
     },
     slots: {
       description: { initialValue: 'Slotted Description' },
+    },
+  },
+
+  'with custom label size and strength': {
+    props: {
+      label: { initialValue: 'Radio label' },
+      labelSize: { initialValue: 'xs' },
+      labelStrength: { initialValue: 'bold' },
     },
   },
 };

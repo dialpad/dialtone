@@ -1,4 +1,4 @@
- 
+
 export default {
   exclusions: [
     {
@@ -48,9 +48,23 @@ export default {
   },
 
   locked: {
+    iconSize: {
+      initialValue: '100',
+    },
     slots: {
       startIcon: { initialValue: '<dt-icon-lock :size="iconSize" />' },
       default: { initialValue: 'Locked' },
+    },
+  },
+
+  recording: {
+    props: {
+      iconSize: { initialValue: '100' },
+      type: { initialValue: 'critical' },
+    },
+    slots: {
+      startIcon: { initialValue: '<dt-icon-record-filled :size="iconSize" />' },
+      default: { initialValue: 'Recording' },
     },
   },
 
