@@ -8,7 +8,7 @@
       <dt-stack
         as="div"
         direction="row"
-        gap="200"
+        gap="300"
         justify="space-between"
         align="baseline"
       >
@@ -23,16 +23,18 @@
         </dt-text>
         <dt-icon-lock
           v-if="locked"
-          class="d-pr4 d-fs10 d-ps-relative d-t1"
+          size="100"
         />
         <span
           v-if="required"
-          class="d-pl2 d-ps-relative d-b2"
+          class="d-ml-auto"
         >
-          <dt-badge
-            text="required"
-            color="black-700"
-          />
+          <dt-text
+            size="xs"
+            kind="label"
+            strength="normal"
+            tone="critical"
+          >Required</dt-text>
         </span>
         <span
           v-if="vModel"

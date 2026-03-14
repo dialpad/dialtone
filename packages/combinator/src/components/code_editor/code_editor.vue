@@ -55,7 +55,7 @@
         @click="copyJson"
       >
         <template #default>
-          {{ copiedJson ? 'Copied!' : 'Copy JSON' }}
+          {{ copiedJson ? 'Copied!' : 'Copy&nbsp;JSON' }}
         </template>
         <template #icon="{ iconSize }">
           <component
