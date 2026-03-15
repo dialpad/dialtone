@@ -1,73 +1,104 @@
 <template>
   <div :class="['dialtone-playground', { 'dialtone-playground--fullscreen': isFullScreen }]">
-    <div
+    <dt-stack
+      direction="row"
+      gap="500"
+      justify="between"
       class="
-        d-p16
+        d-p8
+        d-pr16
         d-bb
         d-bc-subtle
-        d-d-grid
-        d-g16
-        d-ai-baseline
       "
       :class="variantOptions.length > 1 ? 'd-g-cols3' : 'd-g-cols2'"
     >
-      <dt-text
-        kind="code"
-        size="md"
-        tone="tertiary"
-      >
-        <span aria-hidden="true">&lt;</span>{{ component.name }}<span aria-hidden="true">&gt;</span>
-      </dt-text>
-      <dt-select-menu
+      <dt-dropdown
         v-if="variantOptions.length > 1"
-        v-dt-tooltip="'Presets'"
-        :options="variantOptions"
-        size="sm"
-        :label-visible="false"
-        label="Preset"
-        :model-value="selectedVariant"
-        @update:model-value="updateVariant"
-      />
-      <div class="d-js-end d-as-center">
-        <dt-stack
-          gap="400"
-          direction="row"
+        navigation-type="arrow-keys"
+        placement="bottom-start"
+        content-class="d-wmn332"
+      >
+        <template #anchor="{ attrs }">
+          <dt-button
+            v-dt-tooltip="'Presets'"
+            v-bind="attrs"
+            importance="clear"
+            kind="muted"
+            :size="isFullScreen ? 'lg' : 'md'"
+            leading-class="d-pt1 d-pl12 d-mrn2"
+          >
+            <template #leading>
+              <dt-text
+                kind="code"
+                tone="primary"
+                strength="semibold"
+                class="d-fs-inherit"
+              >
+                {{ component.name }}:
+              </dt-text>
+            </template>
+            {{ selectedVariant || 'custom' }}
+            <template #endIcon="{ iconSize }">
+              <dt-icon-chevron-down :size="iconSize" />
+            </template>
+          </dt-button>
+        </template>
+        <template #list="{ close }">
+          <dt-list-item
+            v-for="option in variantOptions"
+            :key="option.value"
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="updateVariant(option.value); close()"
+          >
+            {{ option.label }}
+            <template #end>
+              <dt-icon-check
+                size="200"
+                :class="option.value === selectedVariant ? 'd-o100' : 'd-o0'"
+              />
+            </template>
+          </dt-list-item>
+        </template>
+      </dt-dropdown>
+      <dt-stack
+        gap="400"
+        direction="row"
+      >
+        <dt-button
+          v-if="hasChanges"
+          v-dt-tooltip="`Reset`"
+          kind="muted"
+          importance="clear"
+          size="sm"
+          @click="resetOptions"
         >
-          <dt-button
-            v-if="hasChanges"
-            v-dt-tooltip="`Reset`"
-            kind="muted"
-            importance="clear"
-            size="sm"
-            @click="resetOptions"
-          >
-            <template #icon="{ iconSize }">
-              <dt-icon-refresh
-                :size="iconSize"
-              />
-            </template>
-          </dt-button>
-          <dt-button
-            v-dt-tooltip="`Fullscreen`"
-            kind="muted"
-            importance="clear"
-            size="sm"
-            @click="toggleFullScreen"
-          >
-            <template #icon="{ iconSize }">
-              <dt-icon-minimize
-                v-if="isFullScreen"
-                :size="iconSize"
-              />
-              <dt-icon-expand
-                v-else
-                :size="iconSize"
-              />
-            </template>
-          </dt-button>
-        </dt-stack>
-      </div>
-    </div>
+          <template #icon="{ iconSize }">
+            <dt-icon-refresh
+              :size="iconSize"
+            />
+          </template>
+        </dt-button>
+        <dt-button
+          v-dt-tooltip="`Fullscreen`"
+          kind="muted"
+          importance="clear"
+          size="sm"
+          @click="toggleFullScreen"
+        >
+          <template #icon="{ iconSize }">
+            <dt-icon-minimize
+              v-if="isFullScreen"
+              :size="iconSize"
+            />
+            <dt-icon-expand
+              v-else
+              :size="iconSize"
+            />
+          </template>
+        </dt-button>
+      </dt-stack>
+    </dt-stack>
     <div class="dialtone-playground__start">
       <dtc-renderer
         v-model:settings="settings"
@@ -129,6 +160,8 @@ import DtcCodePanel from './code_panel/code_panel.vue';
 import DtIconMinimize from '@dialpad/dialtone-icons/vue/minimize';
 import DtIconExpand from '@dialpad/dialtone-icons/vue/expand';
 import DtIconRefresh from '@dialpad/dialtone-icons/vue/refresh';
+import DtIconChevronDown from '@dialpad/dialtone-icons/vue/chevron-down';
+import DtIconCheck from '@dialpad/dialtone-icons/vue/check';
 
 const props = defineProps({
   /**
@@ -193,13 +226,9 @@ let _presetChanging = false;
 const _forceReset = ref(0);
 
 const variantOptions = computed(() => {
-  const presets = Object.keys(props.variants)
+  return Object.keys(props.variants)
     .filter(key => key !== 'exclusions')
     .map(key => ({ value: key, label: key }));
-  if (presets.length > 1) {
-    presets.unshift({ value: '', label: 'Choose one' });
-  }
-  return presets;
 });
 
 /**

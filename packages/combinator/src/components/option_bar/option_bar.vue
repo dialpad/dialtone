@@ -32,6 +32,7 @@
           kind="muted"
           importance="clear"
           size="xs"
+          :active="showSearch"
           @click="toggleSearch"
         >
           <template #icon="{ iconSize }">
