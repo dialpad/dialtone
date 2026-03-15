@@ -4,7 +4,7 @@
       ref="combobox"
       label="Icon"
       max-height="320px"
-      list-class="d-w216"
+      list-class="d-wmn164 d-hmx216"
       size="xs"
       @select="e => onSelect(filteredIcons[e])"
       @opened="onOpen"

@@ -4,6 +4,7 @@
       ref="combobox"
       label="Valid values"
       max-height="512px"
+      list-class="d-wmn164 d-hmx216"
       @select="e => onUpdate(suggestions[e])"
       @opened="onOpen"
     >

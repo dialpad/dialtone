@@ -39,7 +39,7 @@
             </template>
             {{ selectedVariant || 'custom' }}
             <template #endIcon="{ iconSize }">
-              <dt-icon-chevron-down :size="iconSize" />
+              <dt-icon-chevrons-up-down :size="iconSize" />
             </template>
           </dt-button>
         </template>
@@ -160,7 +160,7 @@ import DtcCodePanel from './code_panel/code_panel.vue';
 import DtIconMinimize from '@dialpad/dialtone-icons/vue/minimize';
 import DtIconExpand from '@dialpad/dialtone-icons/vue/expand';
 import DtIconRefresh from '@dialpad/dialtone-icons/vue/refresh';
-import DtIconChevronDown from '@dialpad/dialtone-icons/vue/chevron-down';
+import DtIconChevronsUpDown from '@dialpad/dialtone-icons/vue/chevrons-up-down';
 import DtIconCheck from '@dialpad/dialtone-icons/vue/check';
 
 const props = defineProps({
