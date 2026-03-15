@@ -598,7 +598,10 @@ export default {
 
   mounted () {
     if (!(this.modelValue?.length || (this.$slots.content && this.$slots.content()))) {
-      console.warn('Please provide content through the v-model or the "content" slot.')
+      console.warn('Please provide content through the v-model or the "content" slot.');
+    }
+    if (this.deferSelection && this.useDropdown) {
+      console.warn('deferSelection has no effect when useDropdown is true.');
     }
   },
 
