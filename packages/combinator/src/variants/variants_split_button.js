@@ -1,4 +1,5 @@
- 
+/* eslint-disable max-len */
+
 export default {
   default: {
     props: {
@@ -10,6 +11,9 @@ export default {
       default: {
         initialValue: 'Place call',
       },
+      dropdownList: {
+        initialValue: '<dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item> <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item> <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>',
+      },
     },
   },
 
@@ -20,6 +24,9 @@ export default {
     },
     slots: {
       default: { initialValue: 'Place Call' },
+      dropdownList: {
+        initialValue: '<dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item> <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item> <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>',
+      },
     },
   },
 
@@ -31,6 +38,9 @@ export default {
     },
     slots: {
       default: { initialValue: 'Place Call' },
+      dropdownList: {
+        initialValue: '<dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item> <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item> <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>',
+      },
     },
   },
 
@@ -41,6 +51,9 @@ export default {
     },
     slots: {
       default: { initialValue: 'End disabled' },
+      dropdownList: {
+        initialValue: '<dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item> <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item> <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>',
+      },
     },
   },
 
@@ -51,6 +64,9 @@ export default {
     },
     slots: {
       default: { initialValue: 'xs' },
+      dropdownList: {
+        initialValue: '<dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item> <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item> <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>',
+      },
     },
   },
 
@@ -62,6 +78,9 @@ export default {
     },
     slots: {
       default: { initialValue: 'Place call' },
+      dropdownList: {
+        initialValue: '<dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item> <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item> <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>',
+      },
     },
   },
 
@@ -97,6 +116,9 @@ export default {
     slots: {
       default: { initialValue: 'Place Call' },
       leading: { initialValue: '<dt-badge kind="count" text="3" />' },
+      dropdownList: {
+        initialValue: '<dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item> <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item> <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>',
+      },
     },
   },
 };
