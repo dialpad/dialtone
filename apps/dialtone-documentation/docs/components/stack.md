@@ -1575,7 +1575,7 @@ vueCode='
   import {
     DtIconMessage,
     DtIconLock,
-  } from '@dialpad/dialtone-icons/vue3';
+  } from '@dialpad/dialtone-icons/vue';
   import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
   import ExampleProfileCard from '@exampleComponents/ExampleProfileCard.vue';
 

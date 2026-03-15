@@ -1,3 +1,75 @@
+## [9.171.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.171.0...dialtone/v9.171.1) (2026-03-12)
+
+
+### Bug Fixes
+
+* **Editor:** DP-179668 some toolbar buttons not returning focus to editor ([#1117](https://github.com/dialpad/dialtone/issues/1117)) ([67a2a64](https://github.com/dialpad/dialtone/commit/67a2a64a0ca8a8cdd5b291f4f756ca6d348f006c))
+* **Popover:** DP-175009 revert visibility CSS that caused tippy-box click stealing ([#1119](https://github.com/dialpad/dialtone/issues/1119)) ([82ffcb6](https://github.com/dialpad/dialtone/commit/82ffcb64c3dbd4d80a170385cdcc4aa4b5218a83))
+
+# [9.171.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.170.0...dialtone/v9.171.0) (2026-03-10)
+
+
+### Documentation
+
+* DLT-3087 improve SEO meta tags, OG, canonical, robots.txt ([#1114](https://github.com/dialpad/dialtone/issues/1114)) ([16730b5](https://github.com/dialpad/dialtone/commit/16730b5778865aab4a3833322fa83347ba52c1f4))
+
+
+### Features
+
+* **Editor:** NO-JIRA add preserveWhitespace prop ([#1115](https://github.com/dialpad/dialtone/issues/1115)) ([aad7f29](https://github.com/dialpad/dialtone/commit/aad7f299d88dd72effdd958248b2d58a1aca4e60))
+
+# [9.170.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.169.0...dialtone/v9.170.0) (2026-03-09)
+
+
+### Features
+
+* **Hovercard:** DP-175404 expose functions to control hide/show ([#1113](https://github.com/dialpad/dialtone/issues/1113)) ([03c5524](https://github.com/dialpad/dialtone/commit/03c552453cb79318f2aaa9282764025a0e7af21b))
+
+# [9.169.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.168.0...dialtone/v9.169.0) (2026-03-09)
+
+
+### Bug Fixes
+
+* **Editor:** NO-JIRA fixed shadow dom issues with editor ([#1107](https://github.com/dialpad/dialtone/issues/1107)) ([82f8c72](https://github.com/dialpad/dialtone/commit/82f8c72e915ba2fec1209f1de9f5b9eb34165217))
+
+
+### Features
+
+* **Button:** DLT-3086 update loading state to use dt-loader component ([#1111](https://github.com/dialpad/dialtone/issues/1111)) ([621c49a](https://github.com/dialpad/dialtone/commit/621c49a451dd653ad24bb4641f5cff36501670e3))
+
+# [9.168.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.167.0...dialtone/v9.168.0) (2026-03-07)
+
+
+### Features
+
+* **Popover,hovercard:** DP-175404 support externalAnchorElement ([#1108](https://github.com/dialpad/dialtone/issues/1108)) ([bc23ca8](https://github.com/dialpad/dialtone/commit/bc23ca84adbbc05f33cc9b591d27d826886e5244))
+
+# [9.167.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.166.0...dialtone/v9.167.0) (2026-03-06)
+
+
+### Bug Fixes
+
+* **Combobox:** DLT-3057 combobox errors when hovering over dt-dropdown-separator ([#1097](https://github.com/dialpad/dialtone/issues/1097)) ([4798e0e](https://github.com/dialpad/dialtone/commit/4798e0eaf24d9ce1043257f922f0d4563f193c1c))
+* **Tooltip:** NO-JIRA add Shadow DOM support for DtTooltipDirective ([#1100](https://github.com/dialpad/dialtone/issues/1100)) ([121ffa2](https://github.com/dialpad/dialtone/commit/121ffa2b6269e1a79e80517f4e77f19104cb4e0c))
+
+
+### Code Refactoring
+
+* **Progress Circle:** NO-JIRA update ai gradient with css variables and fewer stops ([#1105](https://github.com/dialpad/dialtone/issues/1105)) ([8dd19ea](https://github.com/dialpad/dialtone/commit/8dd19ead3a1a969bc39e5a7582e4da7dd175a820))
+
+
+### Features
+
+* **Editor:** NO-JIRA added props allowBackgroundColor & allowLineHeight ([#1103](https://github.com/dialpad/dialtone/issues/1103)) ([7c90308](https://github.com/dialpad/dialtone/commit/7c90308dad6576accd241152cb8ea2a8a7e00d62))
+* **Loader,progress Circle:** NO-JIRA polish DtProgressCircle visual and align DtLoader visual with DtProgressCircle ([#1102](https://github.com/dialpad/dialtone/issues/1102)) ([7b9e9b6](https://github.com/dialpad/dialtone/commit/7b9e9b6d699515805bec979c7ffdf5b5f737b316))
+* **Progress Circle:** DLT-2983 add progress-circle component ([#1098](https://github.com/dialpad/dialtone/issues/1098)) ([c0f0e40](https://github.com/dialpad/dialtone/commit/c0f0e403acfd76d8db7dbe002862330d71571d5f))
+
+
+### Reverts
+
+* NO-JIRA revert progress circle polish commits for re-PR ([#1101](https://github.com/dialpad/dialtone/issues/1101)) ([a212c41](https://github.com/dialpad/dialtone/commit/a212c41e5c857ebabfacc9670e7a7054dcd9c6de))
+
+
 # [9.167.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.167.0-next.1...dialtone/v9.167.0-next.2) (2026-03-10)
 
 
@@ -73,6 +145,7 @@
 ### Reverts
 
 * NO-JIRA revert progress circle polish commits for re-PR ([#1101](https://github.com/dialpad/dialtone/issues/1101)) ([a212c41](https://github.com/dialpad/dialtone/commit/a212c41e5c857ebabfacc9670e7a7054dcd9c6de))
+
 
 # [9.166.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.165.0...dialtone/v9.166.0) (2026-03-03)
 

@@ -175,7 +175,7 @@
 <script>
 import { DtButton } from '@/components/button';
 import { DtStack } from '@/components/stack';
-import DtIconBellRing from '@dialpad/dialtone-icons/vue3/bell-ring';
+import DtIconBellRing from '@dialpad/dialtone-icons/vue/bell-ring';
 import DtRecipeContactCentersRow from './contact_centers_row.vue';
 
 export default {

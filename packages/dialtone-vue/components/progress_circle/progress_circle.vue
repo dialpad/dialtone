@@ -146,47 +146,19 @@ export default {
           <!-- This emulates the AI gradient, for which each color isn't directly mappable to a CSS variable -->
           <stop
             offset="0%"
-            stop-color="oklch(0.3328 0.079 261.93)"
+            stop-color="var(--dt-color-brand-gold)"
           />
           <stop
-            offset="3.08%"
-            stop-color="oklch(0.3745 0.0869 263.76)"
+            offset="33%"
+            stop-color="var(--dt-color-brand-red)"
           />
           <stop
-            offset="14.48%"
-            stop-color="oklch(0.4561 0.0924 291.07)"
-          />
-          <stop
-            offset="23.67%"
-            stop-color="oklch(0.4911 0.1003 307.79)"
-          />
-          <stop
-            offset="35.5%"
-            stop-color="oklch(0.5278 0.1347 342.65)"
-          />
-          <stop
-            offset="48.3%"
-            stop-color="oklch(0.587 0.1705 357.19)"
-          />
-          <stop
-            offset="60.29%"
-            stop-color="oklch(0.6192 0.1989 6.7)"
-          />
-          <stop
-            offset="70.08%"
-            stop-color="oklch(0.6541 0.2066 15.56)"
-          />
-          <stop
-            offset="90.02%"
-            stop-color="oklch(0.7086 0.1887 25.9)"
-          />
-          <stop
-            offset="97.29%"
-            stop-color="oklch(0.7524 0.1596 36.19)"
+            offset="66%"
+            stop-color="var(--dt-color-brand-magenta)"
           />
           <stop
             offset="100%"
-            stop-color="oklch(0.7524 0.1596 36.19)"
+            stop-color="var(--dt-color-brand-purple)"
           />
         </linearGradient>
       </defs>

@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { DtIconClose } from '@dialpad/dialtone-icons/vue3';
+import { DtIconClose } from '@dialpad/dialtone-icons/vue';
 import { DtButton } from '@/components/button';
 import { DialtoneLocalization } from '@/localization';
 

@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { DtIconClose } from '@dialpad/dialtone-icons/vue3';
+import { DtIconClose } from '@dialpad/dialtone-icons/vue';
 import { DtButton } from '@/components/button';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
 import { DialtoneLocalization } from '@/localization';

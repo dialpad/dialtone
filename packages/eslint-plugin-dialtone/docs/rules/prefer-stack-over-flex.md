@@ -109,6 +109,7 @@ Some flex utilities don't have DtStack prop equivalents. Keep these as classes o
 ### Migration Examples
 
 **Before:**
+
 ```vue
 <div class="d-d-flex d-ai-center d-jc-space-between d-g16">
   <span>Left</span>
@@ -117,6 +118,7 @@ Some flex utilities don't have DtStack prop equivalents. Keep these as classes o
 ```
 
 **After:**
+
 ```vue
 <dt-stack direction="row" align="center" justify="between" gap="500">
   <span>Left</span>
@@ -127,6 +129,7 @@ Some flex utilities don't have DtStack prop equivalents. Keep these as classes o
 ---
 
 **Before:**
+
 ```vue
 <div class="d-d-flex d-fw-wrap d-ai-center d-g8">
   <badge v-for="item in items" :key="item.id">{{ item.name }}</badge>
@@ -134,6 +137,7 @@ Some flex utilities don't have DtStack prop equivalents. Keep these as classes o
 ```
 
 **After:**
+
 ```vue
 <dt-stack direction="row" align="center" gap="400" class="d-fw-wrap">
   <badge v-for="item in items" :key="item.id">{{ item.name }}</badge>
@@ -143,6 +147,7 @@ Some flex utilities don't have DtStack prop equivalents. Keep these as classes o
 ---
 
 **Before:**
+
 ```vue
 <div class="d-d-flex d-fd-column d-g32 d-fl-grow1">
   <section>...</section>
@@ -151,6 +156,7 @@ Some flex utilities don't have DtStack prop equivalents. Keep these as classes o
 ```
 
 **After:**
+
 ```vue
 <dt-stack direction="column" gap="600" class="d-fl-grow1">
   <section>...</section>

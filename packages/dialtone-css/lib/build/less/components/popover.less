@@ -49,7 +49,6 @@
     border: var(--popover-border-width) solid var(--popover-color-border);
     border-radius: var(--popover-border-radius);
     box-shadow: var(--popover-shadow);
-    visibility: visible;
 
     // to be set on the dialog when it is modal
     &--modal {
@@ -98,12 +97,6 @@
   &__footer {
     grid-row: 3;
     border-block-start: var(--popover-border-width) solid var(--popover-color-border);
-  }
-}
-
-.tippy-box[data-popper-reference-hidden] {
-  .d-popover__dialog {
-    visibility: hidden;
   }
 }
 }

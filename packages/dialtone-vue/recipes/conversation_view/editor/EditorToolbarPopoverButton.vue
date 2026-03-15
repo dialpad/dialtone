@@ -5,11 +5,12 @@
     navigation-type="arrow-keys"
     placement="bottom-start"
     :open-with-arrow-keys="true"
+    @opened="onPopoverOpened"
   >
     <template #anchor="{ attrs }">
       <dt-button
         ref="buttonRef"
-        v-dt-tooltip="{ message: tooltipMessage, placement: 'top' }"
+        v-dt-tooltip="{ message: tooltipMessage, placement: 'top', externalAnchorElement: $refs.buttonRef?.$el }"
         v-bind="attrs"
         :active="isActive"
         :aria-label="tooltipMessage"
@@ -29,10 +30,10 @@
         </template>
       </dt-button>
     </template>
-    <template #content="{ close }">
+    <template #content="{ close: popoverClose }">
       <slot
         name="content"
-        :close="close"
+        :close="(cb) => { pendingCallback = cb; popoverClose(); }"
       />
     </template>
   </dt-popover>
@@ -111,5 +112,22 @@ export default {
      */
     'shift-focus-left',
   ],
+
+  data () {
+    return {
+      pendingCallback: null,
+    };
+  },
+
+  methods: {
+    // Wait until the dropdown is fully closed so the modal's anchor focus
+    // completes first, then the callback can override it (e.g. to focus the editor).
+    onPopoverOpened (isOpen) {
+      if (!isOpen && typeof this.pendingCallback === 'function') {
+        this.pendingCallback();
+        this.pendingCallback = null;
+      }
+    },
+  },
 };
 </script>

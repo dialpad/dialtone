@@ -52,7 +52,7 @@ import {
   LIST_ITEM_NAVIGATION_TYPES,
 } from './list_item_constants';
 import utils from '@/common/utils';
-import { DtIconCheck } from '@dialpad/dialtone-icons/vue3';
+import { DtIconCheck } from '@dialpad/dialtone-icons/vue';
 import { DtItemLayout } from '@/components/item_layout';
 
 const ROLES = ['listitem', 'menuitem', 'option'];

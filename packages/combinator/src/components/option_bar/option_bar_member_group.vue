@@ -100,15 +100,6 @@ function getMemberKey (member) {
   return member.name;
 }
 
-/**
- * Determines if the member has a default value.
- *
- * @param member
- * @returns {boolean} If the member has default value.
- */
-function hasDefaultValue (member) {
-  return 'defaultValue' in member;
-}
 
 /**
  * Attempts to get the control data for a given control.

@@ -568,13 +568,7 @@ importers:
         specifier: ^4.17.21
         version: 4.17.23
 
-  packages/dialtone-icons/vue2:
-    devDependencies:
-      vue:
-        specifier: ^2.7.16
-        version: 2.7.16
-
-  packages/dialtone-icons/vue3:
+  packages/dialtone-icons/vue:
     devDependencies:
       '@vue/compiler-sfc':
         specifier: ^3.4.15
@@ -582,6 +576,12 @@ importers:
       vue:
         specifier: ^3.4.15
         version: 3.5.29(typescript@5.9.3)
+
+  packages/dialtone-icons/vue2:
+    devDependencies:
+      vue:
+        specifier: ^2.7.16
+        version: 2.7.16
 
   packages/dialtone-mcp-server:
     dependencies:
@@ -1261,11 +1261,11 @@ packages:
       postcss-selector-parser: ^7.0.0
 
   '@dialpad/conventional-changelog-angular@1.1.1':
-    resolution: {integrity: sha512-TLsyNwTUmGK6TtvdoC4SE/13Ae501pdzhSIyOV9V3HOVf8YrVTOgLUJ/l97kZSxcTOeRbFeRjbWfH7W3ixn36g==, tarball: https://npm.pkg.github.com/download/@dialpad/conventional-changelog-angular/1.1.1/1c54240f941b2d02d73e4ca2d4e53420d128bbf6}
+    resolution: {integrity: sha512-qUT8qgaypYlGPXDO5HqYdq0Q670fqAxr5AaJUo3AOzBJ6IRTcG48kXo6Z9GRVgqrL21jd6MS+fx5nu1wKM0W0w==}
     engines: {node: '>=10'}
 
   '@dialpad/i18n-services@1.11.0':
-    resolution: {integrity: sha512-NzGie5sIbfW/AyJwtIRZOumhAiXP6329VNBOrVerXgGrXqbTacTAuXPPVSgprFol5kWdbV34QtAlKN5OY11WEw==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n-services/1.11.0/20198484967555617ab62da6ad3c276265ee232d}
+    resolution: {integrity: sha512-vXXU2I7oJ+06yoMYBpBVYEZo+hubHgUsK+8yydFzOxNbIs7KOuH8s0gT36hdWdkM0kPWKUn3X/TaMcTu+At9Ww==}
     hasBin: true
     peerDependencies:
       '@vue/composition-api': '*'
@@ -1275,12 +1275,12 @@ packages:
         optional: true
 
   '@dialpad/i18n@1.22.3':
-    resolution: {integrity: sha512-vIviaCpnXRyd/CegJw4jlcdB9Zbgmml0gmHr9cNXUtJuC+DEOtwadVtq7qpUedggKMltg7VlMkC38U85C6W/yw==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n/1.22.3/fcdcd6ab6ab141035696d71caf35b3554b64c726}
+    resolution: {integrity: sha512-vIviaCpnXRyd/CegJw4jlcdB9Zbgmml0gmHr9cNXUtJuC+DEOtwadVtq7qpUedggKMltg7VlMkC38U85C6W/yw==}
     peerDependencies:
       vue: ^3.0.0
 
   '@dialpad/semantic-release-changelog-json@1.0.0':
-    resolution: {integrity: sha512-RIk5Wkco9pTucCO5Pi+4kx2CtmaDzY94V77bK/gluhb3IEDVktnzpS5SIWV+dTKtXUrHweoSXjCH+1cSifgefw==, tarball: https://npm.pkg.github.com/download/@dialpad/semantic-release-changelog-json/1.0.0/40fb236ee722da99879010c02f12b95cb2635ddc}
+    resolution: {integrity: sha512-9bbDAiJR2MHI6M5KNsLQGebmg1d1exXP9O8lET6SIVWeaq6bIJrWM7WRqyohkBpq3Ad2ZPc0Rq6zCY0UC/wiVQ==}
     engines: {node: '>=14.17'}
     peerDependencies:
       semantic-release: '>=18.0.0'

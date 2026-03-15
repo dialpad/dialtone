@@ -43,7 +43,7 @@
 
 <script>
 import { DtButton } from '@/components/button';
-import { DtIconClose } from '@dialpad/dialtone-icons/vue3';
+import { DtIconClose } from '@dialpad/dialtone-icons/vue';
 import { hasSlotContent, returnFirstEl } from '@/common/utils';
 import { DialtoneLocalization } from '@/localization';
 

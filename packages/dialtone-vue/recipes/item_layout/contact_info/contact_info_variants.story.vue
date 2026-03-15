@@ -419,7 +419,7 @@ import { DtStack } from '@/components/stack';
 
 import avatar1 from '@/common/assets/avatar1.png?url';
 import avatar2 from '@/common/assets/avatar2.png?url';
-import { DtIconHear, DtIconUser } from '@dialpad/dialtone-icons/vue3';
+import { DtIconHear, DtIconUser } from '@dialpad/dialtone-icons/vue';
 
 export default {
   name: 'DtRecipeContactInfoVariants',

@@ -135,7 +135,7 @@ import {
   DtIconChevronsLeft,
   DtIconChevronRight,
   DtIconChevronsRight,
-} from '@dialpad/dialtone-icons/vue3';
+} from '@dialpad/dialtone-icons/vue';
 import { DtStack } from '@/components/stack';
 import { DtButton } from '@/components/button';
 import { DtTooltip } from '@/components/tooltip';

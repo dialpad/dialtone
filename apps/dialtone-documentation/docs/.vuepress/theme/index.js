@@ -261,6 +261,12 @@ export const dialtoneVuepressTheme = (options) => ({
       }),
       sitemapPlugin({
         hostname: 'https://dialtone.dialpad.com',
+        changefreq: 'weekly',
+        modifyTimeGetter: (page) =>
+          page.git?.updatedTime
+            ? new Date(page.git.updatedTime).toISOString()
+            : new Date().toISOString(),
+        excludePaths: ['/404.html'],
       }),
     ],
 

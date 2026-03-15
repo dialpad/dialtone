@@ -23,7 +23,7 @@
 
 <script>
 import { nodeViewProps, NodeViewWrapper } from '@tiptap/vue-3';
-import { DtIconLock } from '@dialpad/dialtone-icons/vue3';
+import { DtIconLock } from '@dialpad/dialtone-icons/vue';
 import { DtStack } from '@/components/stack';
 
 import { DtLink } from '@/components/link';

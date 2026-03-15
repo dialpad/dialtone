@@ -517,5 +517,5 @@ showHtmlWarning />
     DtIconRecordFilled,
     DtIconArrowUp,
     DtIconArrowDown,
-  } from '@dialpad/dialtone-icons/vue3';
+  } from '@dialpad/dialtone-icons/vue';
 </script>
