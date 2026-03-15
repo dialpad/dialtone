@@ -39,7 +39,10 @@
             </template>
             {{ selectedVariant || 'custom' }}
             <template #endIcon="{ iconSize }">
-              <dt-icon-chevrons-up-down :size="iconSize" />
+              <dt-icon-chevrons-up-down
+                class="d-fc-muted"
+                :size="iconSize"
+              />
             </template>
           </dt-button>
         </template>

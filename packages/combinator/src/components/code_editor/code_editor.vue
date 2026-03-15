@@ -22,22 +22,20 @@
           />
         </template>
         <template #default>
-          <div>
-            <template
-              v-for="(value, slot) in options.slots"
-              :key="slot"
+          <template
+            v-for="(value, slot) in options.slots"
+            :key="slot"
+          >
+            <dtc-code-editor-slot
+              v-if="value && !disabledMembers.has(slot)"
+              :name="slot"
+              :bindings="slotBindingsMap[slot]"
+              :content="value"
+              @update:options="e => emit(OPTIONS_UPDATE_EVENT, e)"
             >
-              <dtc-code-editor-slot
-                v-if="value && !disabledMembers.has(slot)"
-                :name="slot"
-                :bindings="slotBindingsMap[slot]"
-                :content="value"
-                @update:options="e => emit(OPTIONS_UPDATE_EVENT, e)"
-              >
-                <span class="dtc-theme-popover">{{ value }}</span>
-              </dtc-code-editor-slot>
-            </template>
-          </div>
+              <span class="dtc-theme-popover">{{ value }}</span>
+            </dtc-code-editor-slot>
+          </template>
         </template>
       </dtc-code-editor-element>
     </div>

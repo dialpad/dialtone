@@ -1,27 +1,24 @@
 <template>
-  <div>
-    <slot />
-    <div data-qa="dtc-control-dynamic-selection">
-      <dtc-control-selection
-        :value="selectedControl"
-        :valid-values="controlSelections"
-        :disabled="disabled"
-        @update:value="updateControl"
-      />
-    </div>
-    <div
-      class="d-ps-relative d-b1"
-      :class="inputClass"
-      data-qa="dtc-control-dynamic-value"
-    >
-      <component
-        :is="controlComponent"
-        v-if="controlComponent"
-        v-bind="bindings"
-        :value="value"
-        @update:value="updateValue"
-      />
-    </div>
+  <slot />
+  <div data-qa="dtc-control-dynamic-selection">
+    <dtc-control-selection
+      :value="selectedControl"
+      :valid-values="controlSelections"
+      :disabled="disabled"
+      @update:value="updateControl"
+    />
+  </div>
+  <div
+    :class="inputClass"
+    data-qa="dtc-control-dynamic-value"
+  >
+    <component
+      :is="controlComponent"
+      v-if="controlComponent"
+      v-bind="bindings"
+      :value="value"
+      @update:value="updateValue"
+    />
   </div>
 </template>
 

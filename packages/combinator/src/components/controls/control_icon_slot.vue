@@ -1,64 +1,63 @@
 <template>
-  <div>
-    <dt-recipe-combobox-with-popover
-      ref="combobox"
-      label="Icon"
-      max-height="320px"
-      list-class="d-wmn164 d-hmx216"
-      size="xs"
-      @select="e => onSelect(filteredIcons[e])"
-      @opened="onOpen"
-    >
-      <template #input="{ inputProps, onInput }">
-        <dtc-control-string
-          v-bind="inputProps"
-          :value="searchText"
-          :disabled="disabled"
-          @input="e => onInputInternal(e, onInput)"
-        >
-          <template #default>
-            <slot />
-          </template>
-          <template #icon="{ iconSize }">
-            <dt-button
-              v-if="isModified"
-              kind="muted"
-              importance="clear"
-              size="xs"
-              class="d-p2"
-              @click.stop="onReset"
-            >
-              <template #icon>
-                <dt-icon-close size="100" />
-              </template>
-            </dt-button>
-            <component
-              :is="DtIconChevronsUpDown"
-              v-else
-              :size="iconSize"
-              class="d-fc-muted"
-            />
-          </template>
-        </dtc-control-string>
-      </template>
-      <template #list="{ listProps }">
-        <ul
-          class="d-p4"
-          v-bind="listProps"
-        >
-          <dt-list-item
-            v-for="(item, i) in filteredIcons"
-            :key="item"
-            navigation-type="arrow-keys"
-            role="option"
-            @click="onSelectInternal(i)"
+  <dt-recipe-combobox-with-popover
+    ref="combobox"
+    label="Icon"
+    max-height="320px"
+    list-class="d-w164 d-hmx216"
+    size="xs"
+    append-to="body"
+    @select="e => onSelect(filteredIcons[e])"
+    @opened="onOpen"
+  >
+    <template #input="{ inputProps, onInput }">
+      <dtc-control-string
+        v-bind="inputProps"
+        :value="searchText"
+        :disabled="disabled"
+        @input="e => onInputInternal(e, onInput)"
+      >
+        <template #default>
+          <slot />
+        </template>
+        <template #icon="{ iconSize }">
+          <dt-button
+            v-if="isModified"
+            kind="muted"
+            importance="clear"
+            size="xs"
+            class="d-p2"
+            @click.stop="onReset"
           >
-            {{ item }}
-          </dt-list-item>
-        </ul>
-      </template>
-    </dt-recipe-combobox-with-popover>
-  </div>
+            <template #icon>
+              <dt-icon-close size="100" />
+            </template>
+          </dt-button>
+          <component
+            :is="DtIconChevronsUpDown"
+            v-else
+            :size="iconSize"
+            class="d-fc-muted"
+          />
+        </template>
+      </dtc-control-string>
+    </template>
+    <template #list="{ listProps }">
+      <ul
+        class="d-p4"
+        v-bind="listProps"
+      >
+        <dt-list-item
+          v-for="(item, i) in filteredIcons"
+          :key="item"
+          navigation-type="arrow-keys"
+          role="option"
+          @click="onSelectInternal(i)"
+        >
+          {{ item }}
+        </dt-list-item>
+      </ul>
+    </template>
+  </dt-recipe-combobox-with-popover>
 </template>
 
 <script setup>

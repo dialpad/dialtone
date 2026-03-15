@@ -1,53 +1,54 @@
 <template>
-  <div>
-    <dt-text
-      kind="label"
-      size="xs"
-      tone="secondary"
-      class="d-input__label-text d-c-default"
-    >
-      <slot />
-    </dt-text>
-    <dt-dropdown
-      navigation-type="arrow-keys"
-      placement="bottom-start"
-      content-class="d-wmn164 d-hmx216"
-    >
-      <template #anchor="{ attrs }">
-        <dt-button
-          v-bind="attrs"
-          importance="outlined"
-          kind="muted"
-          size="xs"
-          :disabled="disabled"
-          class="d-w100p"
-          label-class="d-jc-space-between d-fw-normal"
-        >
-          {{ selectedLabel }}<span aria-hidden="true">&thinsp;<!-- hold the space --></span>
-          <template #endIcon="{ iconSize }">
-            <dt-icon-chevrons-up-down :size="iconSize" />
-          </template>
-        </dt-button>
-      </template>
-      <template #list="{ close }">
-        <dt-list-item
-          v-for="option in options"
-          :key="option.value"
-          role="menuitem"
-          navigation-type="arrow-keys"
-          @click="onInput(option.value); close()"
-        >
-          {{ option.label }}
-          <template #end>
-            <dt-icon-check
-              size="200"
-              :class="option.value === value ? 'd-o100' : 'd-o0'"
-            />
-          </template>
-        </dt-list-item>
-      </template>
-    </dt-dropdown>
-  </div>
+  <dt-text
+    kind="label"
+    size="xs"
+    tone="secondary"
+    class="d-input__label-text d-c-default"
+  >
+    <slot />
+  </dt-text>
+  <dt-dropdown
+    navigation-type="arrow-keys"
+    placement="bottom-start"
+    content-class="d-w164 d-hmx216"
+  >
+    <template #anchor="{ attrs }">
+      <dt-button
+        v-bind="attrs"
+        importance="outlined"
+        kind="muted"
+        size="xs"
+        :disabled="disabled"
+        class="d-w100p"
+        label-class="d-jc-space-between d-fw-normal"
+      >
+        {{ selectedLabel }}<span aria-hidden="true">&thinsp;<!-- hold the space --></span>
+        <template #endIcon="{ iconSize }">
+          <dt-icon-chevrons-up-down
+            class="d-fc-muted"
+            :size="iconSize"
+          />
+        </template>
+      </dt-button>
+    </template>
+    <template #list="{ close }">
+      <dt-list-item
+        v-for="option in options"
+        :key="option.value"
+        role="menuitem"
+        navigation-type="arrow-keys"
+        @click="onInput(option.value); close()"
+      >
+        {{ option.label }}
+        <template #end>
+          <dt-icon-check
+            size="200"
+            :class="option.value === value ? 'd-o100' : 'd-o0'"
+          />
+        </template>
+      </dt-list-item>
+    </template>
+  </dt-dropdown>
 </template>
 
 <script setup>

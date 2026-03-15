@@ -55,9 +55,9 @@
           v-if="showRawToggle"
           v-dt-tooltip="'Edit as JSON'"
           link
-          link-underline="false"
-          class="d-ml-auto d-fw-normal d-fs-50"
-          :active="rawMode"
+          :link-underline="false"
+          class="d-ml-auto d-fw-normal d-fs-50 d-px2 d-bar2 h:d-td-none "
+          :class="{ 'd-bgc-bold d-fc-secondary h:d-fc-primary': rawMode }"
           @click="toggleRawMode"
         >
           RAW
