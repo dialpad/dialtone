@@ -13,7 +13,7 @@ keywords: ["hint", "help text", "d-tooltip", "DtTooltip", "dt-tooltip"]
   <dt-button v-dt-tooltip="`Simple tooltip`">Hover me</dt-button>
 </code-well-header>
 
-<component-combinator component-name="DtTooltip" />
+<!-- <component-combinator component-name="DtTooltip" /> -->
 
 ## Tooltip as a Directive
 
