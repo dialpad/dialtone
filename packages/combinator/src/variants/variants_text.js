@@ -160,4 +160,20 @@ export default {
       },
     },
   },
+  'with numeric (tabular-nums)': {
+    slots: {
+      default: {
+        initialValue: '01:17:19',
+      },
+    },
+    props: {
+      kind: {
+        initialValue: 'body',
+      },
+      numeric: {
+        initialValue: true,
+      },
+    },
+  },
+
 };
