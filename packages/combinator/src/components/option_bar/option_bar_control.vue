@@ -81,7 +81,8 @@ import { DtBadge, DtButton, DtInput, DtText } from '@dialpad/dialtone-vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { computed, ref, watch } from 'vue';
 import { deserializeControlValue, serializeControlValue } from '@/src/lib/control';
-import { stringifyDocValue, parseDocValue } from '@/src/lib/parse';
+import { parseDocValue } from '@/src/lib/parse';
+import JSON5 from 'json5-with-undefined';
 
 const props = defineProps({
   /**
@@ -229,16 +230,20 @@ const rawMode = ref(false);
 const rawText = ref('');
 let rawEditInProgress = false;
 
+function formatRawValue (val) {
+  return JSON5.stringify(val, null, 2);
+}
+
 watch(() => props.value, (val) => {
   if (rawMode.value && !rawEditInProgress) {
-    rawText.value = stringifyDocValue(val);
+    rawText.value = formatRawValue(val);
   }
 }, { deep: true });
 
 function toggleRawMode () {
   rawMode.value = !rawMode.value;
   if (rawMode.value) {
-    rawText.value = stringifyDocValue(props.value);
+    rawText.value = formatRawValue(props.value);
   }
 }
 

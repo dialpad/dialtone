@@ -108,18 +108,11 @@ export default {
 @import "@/src/assets/themes/scheme/mono.less";
 }
 
-.dtc-code-panel-scheme--highlight {
-  --dtc-scheme-color-identifier: var(--dt-color-blue-800);
-  --dtc-scheme-color-class: var(--dt-color-green-900);
-  --dtc-scheme-color-string: var(--dt-color-purple-900);
-  --dtc-scheme-color-value: var(--dt-color-red-900);
-  --dtc-scheme-color-function: var(--dt-color-gold-900);
-}
-
+.dtc-code-panel-scheme--highlight,
 .dtc-code-panel-scheme--highlight--light {
   --dtc-scheme-color-identifier: var(--dt-color-blue-800);
-  --dtc-scheme-color-class: var(--dt-color-green-900);
-  --dtc-scheme-color-string: var(--dt-color-purple-900);
+  --dtc-scheme-color-class: var(--dt-color-purple-900);
+  --dtc-scheme-color-string: var(--dt-color-green-900);
   --dtc-scheme-color-value: var(--dt-color-red-900);
   --dtc-scheme-color-function: var(--dt-color-gold-900);
 }

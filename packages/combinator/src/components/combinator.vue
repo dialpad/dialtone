@@ -12,8 +12,19 @@
       "
       :class="variantOptions.length > 1 ? 'd-g-cols3' : 'd-g-cols2'"
     >
+      <dt-text
+        v-if="variantOptions.length < 2"
+        kind="code"
+        tone="primary"
+        strength="semibold"
+        size="md"
+        as="div"
+        class="d-px12 d-py8"
+      >
+        {{ component.name }}
+      </dt-text>
       <dt-dropdown
-        v-if="variantOptions.length > 1"
+        v-else
         navigation-type="arrow-keys"
         placement="bottom-start"
         content-class="d-wmn332"
