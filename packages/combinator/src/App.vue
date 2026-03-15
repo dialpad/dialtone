@@ -1,7 +1,7 @@
 <template>
   <dt-stack
     gap="500"
-    class="d-ai-center d-p16"
+    class="d-ai-center d-p64"
   >
     <dtc-suggestion
       :value="component.name"
@@ -28,7 +28,7 @@
     </dtc-suggestion>
     <Combinator
       :key="componentKey"
-      class="d-wmn80p"
+      class="d-w100p"
       :component="component"
       :variants="variants"
       :documentation="componentDocumentation"

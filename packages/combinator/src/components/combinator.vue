@@ -546,7 +546,6 @@ export default {
     margin-block: var(--dt-spacing-200);
     background-color: var(--dt-color-surface-secondary);
     border-radius: var(--dt-size-radius-400);
-    font: var(--dt-text-body-sm);
 
     @media screen and (min-width: 640px) {
       display: flex;
@@ -577,6 +576,7 @@ export default {
 
   &__end {
     border-block-start: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
+
     :where(.dialtone-playground--fullscreen) & {
       block-size: 33vh;
       max-block-size: none;
@@ -624,6 +624,7 @@ export default {
     max-inline-size: var(--dt-size-1000);
     flex-shrink: 0;
     max-block-size: var(--dt-size-950);
+    font: var(--dt-text-body-sm);
 
     :where(.dialtone-playground--fullscreen) & {
       @media screen and (min-width: 640px) {
