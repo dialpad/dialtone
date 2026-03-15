@@ -160,7 +160,7 @@ keywords: ["theme island","mode override","d-mode-island","DtModeIsland","dt-mod
   </dt-stack>
 </code-well-header>
 
-<component-combinator component-name="DtModeIsland" />
+<!-- <component-combinator component-name="DtModeIsland" /> -->
 
 ## Usage
 
