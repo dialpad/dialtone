@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import { capitalize, computed, h, onMounted, onUpdated, ref, render, useSlots } from 'vue';
+import { capitalize, computed, h, nextTick, onMounted, onUpdated, ref, render, useSlots } from 'vue';
 import { DtNotice } from '@dialpad/dialtone-vue';
 
 const ERROR_MESSAGE = 'Error rendering component';
@@ -67,7 +67,10 @@ const events = computed(() => {
   );
 });
 
-onMounted(renderTarget);
+onMounted(() => {
+  renderTarget();
+  nextTick(renderTarget);
+});
 onUpdated(renderTarget);
 
 const wrapper = ref();
