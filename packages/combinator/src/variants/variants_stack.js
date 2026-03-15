@@ -44,4 +44,23 @@ export default {
       },
     },
   },
+
+  'row, align baseline': {
+    props: {
+      direction: {
+        initialValue: 'row',
+      },
+      gap: {
+        initialValue: '500',
+      },
+      align: {
+        initialValue: 'baseline',
+      },
+    },
+    slots: {
+      default: {
+        initialValue: '<div class="d-bgc-moderate-opaque d-p16 d-bar8"> <dt-text kind="body" size="xs">Small body</dt-text> </div> <div class="d-bgc-moderate-opaque d-p16 d-bar8"> <dt-text kind="headline" size="2xl">Large headline</dt-text> </div>',
+      },
+    },
+  },
 };

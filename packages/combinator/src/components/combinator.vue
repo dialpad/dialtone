@@ -512,6 +512,7 @@ export default {
     margin-block: var(--dt-spacing-200);
     background-color: var(--dt-color-surface-secondary);
     border-radius: var(--dt-size-radius-400);
+    font: var(--dt-text-body-sm);
 
     @media screen and (min-width: 640px) {
       display: flex;
