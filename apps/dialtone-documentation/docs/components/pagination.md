@@ -9,11 +9,11 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["pager", "page navigation", "page numbers", "d-pagination", "DtPagination", "dt-pagination", "paging", "page control"]
 ---
 
-<code-well-header>
+<!-- <code-well-header>
   <dt-pagination
     :total-pages="25"
   />
-</code-well-header>
+</code-well-header> -->
 
 <component-combinator component-name="DtPagination" />
 

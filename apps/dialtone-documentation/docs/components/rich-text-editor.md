@@ -9,6 +9,7 @@ keywords: ["rte", "wysiwyg", "markdown", "d-rte", "DtRichTextEditor", "dt-rich-t
 <dt-notice
   title="Note"
   kind="info"
+  class="d-wmx100p d-mt24"
 >
   <span>Not a standalone component, please use Message Input instead</span>
   <template #action>
