@@ -4,7 +4,7 @@
       ref="combobox"
       label="Valid values"
       max-height="512px"
-      list-class="d-w164 d-hmx216"
+      list-class="d-hmx216"
       append-to="body"
       @select="e => onUpdate(suggestions[e])"
       @opened="onOpen"
@@ -20,10 +20,10 @@
           <template #default>
             <slot />
           </template>
-          <template #icon="{ iconSize }">
+          <template #icon>
             <component
-              :is="open ? DtIconChevronDown : DtIconChevronRight"
-              :size="iconSize"
+              :is="DtIconChevronDown"
+              size="200"
             />
           </template>
         </dtc-control-string>
