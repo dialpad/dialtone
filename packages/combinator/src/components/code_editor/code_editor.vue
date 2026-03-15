@@ -300,8 +300,12 @@ function formatPresetAsJs (preset) {
   const sections = [];
 
   for (const [group, members] of Object.entries(preset)) {
+    const indent = pad + pad + pad;
     const entries = Object.entries(members)
-      .map(([name, obj]) => `${pad}${pad}${pad}${name}: { initialValue: ${formatJsValue(obj.initialValue, pad + pad + pad)} }`)
+      .map(([name, obj]) => {
+        const val = formatJsValue(obj.initialValue, indent);
+        return `${indent}${name}: { initialValue: ${val} }`;
+      })
       .join(',\n');
     sections.push(`${pad}${pad}${group}: {\n${entries},\n${pad}${pad}}`);
   }

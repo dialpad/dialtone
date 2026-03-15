@@ -92,7 +92,7 @@
                 <dtc-option-bar-member-group
                   :component="component"
                   :control-selector="(prop, value) => getBindingControls(prop, value, 'null')"
-                  :members="filterMembers(info.props)"
+                  :members="filteredProps"
                   :values="options.props"
                   :exclusion-rules="info.exclusions"
                   :prop-values="options.props"
@@ -115,7 +115,7 @@
                 <dtc-option-bar-member-group
                   :component="component"
                   :control-selector="getSlotControls"
-                  :members="filterMembers(info.slots)"
+                  :members="filteredSlots"
                   :values="options.slots"
                   :exclusion-rules="info.exclusions"
                   :prop-values="options.props"
@@ -140,14 +140,14 @@
 
 <script setup>
 import DtcOptionBarMemberGroup from './option_bar_member_group.vue';
-import { ref, nextTick } from 'vue';
+import { computed, ref, nextTick } from 'vue';
 import { OPTIONS_UPDATE_EVENT } from '@/src/lib/constants';
 import { getControlByMemberType, getControlByValue } from '@/src/lib/control';
 import { isIconSlot } from '@/src/lib/icons';
 import { DtStack, DtTabGroup, DtTab, DtTabPanel } from '@dialpad/dialtone-vue';
 import { DtIconSearch } from '@dialpad/dialtone-icons/vue';
 
-defineProps({
+const props = defineProps({
   /**
    * Component to render.
    */
@@ -197,6 +197,9 @@ function filterMembers (members) {
   return members.filter(m => normalizeForSearch(m.name).includes(q));
 }
 
+const filteredProps = computed(() => filterMembers(props.info.props));
+const filteredSlots = computed(() => filterMembers(props.info.slots));
+
 /**
  * Gets an array of controls for a binding.
  * Calls the utility function `getControlByMemberType(...)` which converts
@@ -233,10 +236,6 @@ function getSlotControls (member) {
   }
   return getStaticControl('slot');
 }
-
-// function getEventControls () {
-//   return getStaticControl('event');
-// }
 
 /**
  * Forces a singular default control and valid control.

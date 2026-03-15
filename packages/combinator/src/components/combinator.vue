@@ -129,11 +129,6 @@ import DtcCodePanel from './code_panel/code_panel.vue';
 import DtIconMinimize from '@dialpad/dialtone-icons/vue/minimize';
 import DtIconExpand from '@dialpad/dialtone-icons/vue/expand';
 import DtIconRefresh from '@dialpad/dialtone-icons/vue/refresh';
-// import supportedComponents from '@/src/supported_components.json';
-// import DtcCodeExample from './code_example/code_example.vue';
-// import DtcSettingsMenu from './settings_menu/settings_menu.vue';
-// import DtcHeader from '@/src/components/header/header.vue';
-// import { DtNotice } from '@dialpad/dialtone-vue';
 
 const props = defineProps({
   /**
@@ -196,7 +191,6 @@ const isFullScreen = ref(false);
 const optionBarWidth = ref(null);
 let _presetChanging = false;
 const _forceReset = ref(0);
-// const showUnsupportedWarning = ref(!supportedComponents.includes(props.component?.name));
 
 const variantOptions = computed(() => {
   const presets = Object.keys(props.variants)
@@ -411,9 +405,6 @@ function getInitialValues (info) {
   return options;
 }
 
-// function hideUnsupportedMessage () {
-//   showUnsupportedWarning.value = false;
-// }
 
 const hasChanges = computed(() => {
   const referenceInfo = defaultInfo.value ?? info.value;
