@@ -1,4 +1,4 @@
- 
+
 export default {
   default: {
     props: {
@@ -11,7 +11,7 @@ export default {
         initialValue: '<dt-button>View Popover</dt-button>',
       },
       content: {
-        initialValue: '<p class="d-mb4">This is content rendered within the popover.</p>',
+        initialValue: '<p>This is content rendered within the popover.</p>',
       },
     },
   },
@@ -23,7 +23,7 @@ export default {
     slots: {
       anchor: { initialValue: '<dt-button>View Popover</dt-button>' },
       headerContent: { initialValue: '<div class="d-w100p">This is the header</div>' },
-      content: { initialValue: '<p class="d-mb4">This is content rendered within the popover.</p>' },
+      content: { initialValue: '<p>This is content rendered within the popover.</p>' },
     },
   },
 
@@ -34,7 +34,7 @@ export default {
     },
     slots: {
       anchor: { initialValue: '<dt-button>fallback placement: top</dt-button>' },
-      content: { initialValue: '<p class="d-mb4">This is content rendered within the popover.</p>' },
+      content: { initialValue: '<p>This is content rendered within the popover.</p>' },
     },
   },
 
@@ -45,7 +45,7 @@ export default {
     },
     slots: {
       anchor: { initialValue: '<dt-button>View Popover</dt-button>' },
-      content: { initialValue: '<p class="d-mb4">This is content rendered within the popover.</p>' },
+      content: { initialValue: '<p>This is content rendered within the popover.</p>' },
     },
   },
 };

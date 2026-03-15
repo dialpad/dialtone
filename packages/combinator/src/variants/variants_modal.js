@@ -2,9 +2,6 @@
 export default {
   default: {
     props: {
-      show: {
-        initialValue: true,
-      },
       title: {
         initialValue: 'Example title',
       },
@@ -20,9 +17,6 @@ export default {
   },
   danger: {
     props: {
-      show: {
-        initialValue: true,
-      },
       title: {
         initialValue: 'Example title',
       },

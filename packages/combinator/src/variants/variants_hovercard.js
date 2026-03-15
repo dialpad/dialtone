@@ -2,6 +2,9 @@
 export default {
   default: {
     props: {
+      open: {
+        initialValue: true,
+      },
       placement: {
         initialValue: 'bottom',
       },

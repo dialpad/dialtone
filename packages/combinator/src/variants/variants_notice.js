@@ -1,4 +1,4 @@
-/* eslint-disable max-len */
+ 
 export default {
   default: {
     slots: {
@@ -8,15 +8,16 @@ export default {
     },
     props: {
       title: {
-        initialValue: 'Base title (optional)',
+        initialValue: 'Base title',
       },
     },
   },
 
-  'info with action': {
+  'info with action and hide close': {
     props: {
-      title: { initialValue: 'Info title (optional)' },
+      title: { initialValue: 'Info title' },
       kind: { initialValue: 'info' },
+      hideClose: { initialValue: true },
     },
     slots: {
       default: { initialValue: 'Message body with <dt-link to="/path/to/">a link</dt-link>.' },
@@ -24,31 +25,11 @@ export default {
     },
   },
 
-  'important warning': {
+  'important warning with no message': {
     props: {
-      title: { initialValue: 'Warning title (optional)' },
+      title: { initialValue: 'Warning title' },
       kind: { initialValue: 'warning' },
       important: { initialValue: true },
-    },
-    slots: {
-      default: { initialValue: 'Message body with <dt-link v-dt-mode:invert to="/path/to/">a link</dt-link>.' },
-      action: { initialValue: '<dt-button size="sm" importance="outlined" kind="inverted">Action</dt-button>' },
-    },
-  },
-
-  truncated: {
-    props: {
-      truncateText: {
-        initialValue: true,
-      },
-      title: {
-        initialValue: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-      },
-    },
-    slots: {
-      default: {
-        initialValue: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-      },
     },
   },
 };

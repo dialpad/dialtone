@@ -21,7 +21,7 @@ export default {
     },
   },
 
-  'with icon': {
+  'with start icon': {
     props: {
       label: {
         initialValue: 'Start icon',
@@ -37,18 +37,45 @@ export default {
     },
     slots: {
       startIcon: {
-        initialValue: '<dt-icon-send :size="iconSize" />',
+        initialValue: '<dt-icon-box-select :size="iconSize" />',
       },
     },
   },
 
-  'bold label': {
+  'with start and end icon': {
+    props: {
+      label: {
+        initialValue: 'Start and end icon',
+      },
+      type: {
+        initialValue: 'text',
+      },
+    },
+    attributes: {
+      placeholder: {
+        initialValue: 'Placeholder',
+      },
+    },
+    slots: {
+      startIcon: {
+        initialValue: '<dt-icon-box-select :size="iconSize" />',
+      },
+      endIcon: {
+        initialValue: '<dt-icon-box-select :size="iconSize" />',
+      },
+    },
+  },
+
+  'with custom label size and strength': {
     props: {
       label: {
         initialValue: 'Label',
       },
       labelStrength: {
         initialValue: 'bold',
+      },
+      labelSize: {
+        initialValue: 'xs',
       },
     },
     attributes: {
@@ -89,6 +116,15 @@ export default {
     props: {
       type: {
         initialValue: 'search',
+      },
+      modelValue: {
+        initialValue: 'Tokens',
+      },
+      label: {
+        initialValue: 'Search',
+      },
+      labelVisible: {
+        initialValue: false,
       },
     },
     attributes: {
