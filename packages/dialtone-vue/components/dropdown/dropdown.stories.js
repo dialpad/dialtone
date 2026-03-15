@@ -8,6 +8,7 @@ import { LIST_ITEM_NAVIGATION_TYPES } from '../list_item/list_item_constants';
 import { POPOVER_CONTENT_WIDTHS } from '../popover';
 import { DROPDOWN_PADDING_CLASSES } from './dropdown_constants';
 import { POPOVER_DIRECTIONS } from '../popover/popover_constants';
+import { CONTENT_MODE_VALUES } from '@/common/mode_constants';
 
 // Default Prop Values
 export const argsData = {
@@ -57,6 +58,17 @@ export const argTypesData = {
   },
 
   // Props
+  contentMode: {
+    options: [null, ...CONTENT_MODE_VALUES],
+    control: {
+      type: 'select',
+      labels: { null: '(none)' },
+    },
+    table: {
+      category: 'props',
+      defaultValue: { summary: 'null' },
+    },
+  },
   navigationType: {
     table: {
       type: { summary: 'string' },

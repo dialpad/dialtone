@@ -12,6 +12,7 @@ import { createTemplateFromVueFile } from '@/common/storybook_utils';
 
 import { action } from 'storybook/actions';
 import { POPOVER_DIRECTIONS, POPOVER_STICKY_VALUES } from './popover_constants';
+import { CONTENT_MODE_VALUES } from '@/common/mode_constants';
 
 // Default Props for all variations
 export const argsData = {
@@ -98,6 +99,17 @@ export const argTypesData = {
       defaultValue: {
         summary: 'bottom-end',
       },
+    },
+  },
+  contentMode: {
+    options: [null, ...CONTENT_MODE_VALUES],
+    control: {
+      type: 'select',
+      labels: { null: '(none)' },
+    },
+    table: {
+      category: 'props',
+      defaultValue: { summary: 'null' },
     },
   },
   contentWidth: {

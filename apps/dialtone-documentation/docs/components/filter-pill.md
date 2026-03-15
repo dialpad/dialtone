@@ -181,6 +181,22 @@ vueCode='<dt-filter-pill label="..." v-model="[...]">
 </dt-filter-pill>'
 showHtmlWarning />
 
+## Content Mode
+
+Filter Pill popover content renders outside the DOM tree. Use the `contentMode` prop to apply color mode (invert, light, dark) to the positioned content. See [Positioned Components](/components/mode-island.html#positioned-components) for details.
+
+<code-well-header>
+  <dt-filter-pill content-mode="invert" label="Inverted" :model-value="[{ name: 'Orange', active: true }, { name: 'Apple' }]" />
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-filter-pill content-mode="invert">...</dt-filter-pill>
+<dt-filter-pill content-mode="dark">...</dt-filter-pill>
+<dt-filter-pill content-mode="light">...</dt-filter-pill>
+'
+/>
+
 ## Vue API
 
 <component-vue-api component-name="filterPill"></component-vue-api>

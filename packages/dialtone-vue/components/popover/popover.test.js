@@ -305,6 +305,28 @@ describe('DtPopover Tests', () => {
     });
   });
 
+  describe('contentMode Tests', () => {
+    it('should set data-dt-mode on dialog when contentMode is set', () => {
+      mockProps = { contentMode: 'dark' };
+      updateWrapper();
+      popoverWindow = wrapper.findComponent({ ref: 'content' });
+
+      expect(popoverWindow.attributes('data-dt-mode')).toBe('dark');
+    });
+
+    it('should invert root mode when contentMode is invert', async () => {
+      document.documentElement.setAttribute('data-dt-mode', 'light');
+      mockProps = { contentMode: 'invert' };
+      updateWrapper();
+      await wrapper.vm.$nextTick();
+      popoverWindow = wrapper.findComponent({ ref: 'content' });
+
+      expect(popoverWindow.attributes('data-dt-mode')).toBe('dark');
+
+      document.documentElement.removeAttribute('data-dt-mode');
+    });
+  });
+
   describe('When anchor slot content changes', () => {
     it('should attach the tippy instance to the new DOM node', async () => {
       const component = {

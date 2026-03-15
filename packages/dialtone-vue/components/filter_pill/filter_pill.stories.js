@@ -6,6 +6,7 @@ import DtFilterPillVariantsTemplate from './filter_pill_variants.story.vue';
 import { action } from 'storybook/actions';
 import { BUTTON_SIZE_MODIFIERS } from '@/components/button';
 import { POPOVER_DIRECTIONS, POPOVER_PADDING_CLASSES } from '@/components/popover/index.js';
+import { CONTENT_MODE_VALUES } from '@/common/mode_constants';
 
 // Set default values at the story level here.
 export const argsData = {
@@ -34,6 +35,17 @@ export const argTypesData = {
   },
 
   // Props
+  contentMode: {
+    options: [null, ...CONTENT_MODE_VALUES],
+    control: {
+      type: 'select',
+      labels: { null: '(none)' },
+    },
+    table: {
+      category: 'props',
+      defaultValue: { summary: 'null' },
+    },
+  },
   size: {
     control: 'select',
     options: Object.keys(BUTTON_SIZE_MODIFIERS),

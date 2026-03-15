@@ -6,6 +6,7 @@
     <dt-popover
       v-model:open="isOpen"
       :append-to="popoverAppendTo"
+      :content-mode="contentMode"
       :fallback-placements="popoverFallbackPlacements"
       :max-height="popoverMaxHeight"
       :max-width="popoverMaxWidth"
@@ -104,6 +105,7 @@
 
 <script>
 import { DtPopover, POPOVER_APPEND_TO_VALUES, POPOVER_PADDING_CLASSES } from '@/components/popover';
+import { CONTENT_MODE_VALUES } from '@/common/mode_constants';
 import { BUTTON_SIZE_MODIFIERS, DtButton } from '@/components/button';
 import { DtIconChevronDown, DtIconClose } from '@dialpad/dialtone-icons/vue';
 import { DialtoneLocalization } from '@/localization';
@@ -263,6 +265,16 @@ export default {
     popoverPlacement: {
       type: String,
       default: 'bottom-start',
+    },
+
+    /**
+     * Applies a color mode to the positioned content element.
+     * @values light, dark, invert
+     */
+    contentMode: {
+      type: String,
+      default: null,
+      validator: (v) => v === null || CONTENT_MODE_VALUES.includes(v),
     },
 
     /**

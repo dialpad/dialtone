@@ -540,51 +540,43 @@ showHtmlWarning />
 
 ### Positioned Components
 
-[Popovers](/components/popover.html), [Dropdowns](/components/dropdown.html), and [Hovercards](/components/hovercard.html) render at the root of the DOM tree and inherit the page's mode. Use `v-dt-mode` on the slot content's container to override.
+[Popovers](/components/popover.html), [Dropdowns](/components/dropdown.html), [Modals](/components/modal.html), and [Hovercards](/components/hovercard.html) render their content *outside* the normal DOM tree, so `v-dt-mode` on the component itself won't reach the positioned element. These components provide a `contentMode` prop that applies the mode directly to the positioned content.
 
 <code-well-header>
   <dt-stack gap="500">
     <dt-stack gap="200">
       <dt-text as="p" kind="headline" size="md">Hovercard</dt-text>
       <dt-stack gap="400" direction="row">
-        <dt-hovercard ref="hovercardDefault" padding="none" placement="top-start">
+        <dt-hovercard ref="hovercardDefault" placement="top-start">
           <template #anchor>
             <dt-button size="sm" kind="muted" importance="outlined">Default </dt-button>
           </template>
           <template #content>
-            <div class="d-p16 d-bgc-secondary">
-              <ExampleProfileCard />
-            </div>
+            <ExampleProfileCard />
           </template>
         </dt-hovercard>
-        <dt-hovercard padding="none" placement="top-start">
+        <dt-hovercard content-mode="invert" placement="top-start">
           <template #anchor>
             <dt-button size="sm" kind="muted" importance="outlined">Inverted </dt-button>
           </template>
           <template #content>
-            <div v-dt-mode class="d-p16 d-bgc-secondary">
-              <ExampleProfileCard />
-            </div>
+            <ExampleProfileCard />
           </template>
         </dt-hovercard>
-        <dt-hovercard padding="none" placement="top-start">
+        <dt-hovercard content-mode="light" placement="top-start">
           <template #anchor>
             <dt-button size="sm" kind="muted" importance="outlined">Light </dt-button>
           </template>
           <template #content>
-            <div v-dt-mode:light class="d-p16 d-bgc-secondary">
-              <ExampleProfileCard />
-            </div>
+            <ExampleProfileCard />
           </template>
         </dt-hovercard>
-        <dt-hovercard padding="none" placement="top-start">
+        <dt-hovercard content-mode="dark" placement="top-start">
           <template #anchor>
             <dt-button size="sm" kind="muted" importance="outlined">Dark </dt-button>
           </template>
           <template #content>
-            <div v-dt-mode:dark class="d-p16 d-bgc-secondary">
-              <ExampleProfileCard />
-            </div>
+            <ExampleProfileCard />
           </template>
         </dt-hovercard>
       </dt-stack>
@@ -592,44 +584,36 @@ showHtmlWarning />
     <dt-stack gap="200">
       <dt-text as="p" kind="headline" size="md">Popover</dt-text>
       <dt-stack gap="400" direction="row">
-        <dt-popover ref="popoverDefault" padding="none" placement="top-start" dialogClass="d-w216">
+        <dt-popover ref="popoverDefault" placement="top-start" dialogClass="d-w216">
           <template #anchor>
             <dt-button size="sm" kind="muted" importance="outlined"> Default </dt-button>
           </template>
           <template #content="{ close }">
-            <div class="d-p16">
-              <dt-text as="p">This is just a default Popover, and does not use Mode Island.</dt-text>
-            </div>
+            <dt-text as="p">This is just a default Popover, and does not use Mode Island.</dt-text>
           </template>
         </dt-popover>
-        <dt-popover ref="popoverInverted" padding="none" placement="top-start" dialogClass="d-w216">
+        <dt-popover ref="popoverInverted" content-mode="invert" placement="top-start" dialogClass="d-w216">
           <template #anchor>
             <dt-button size="sm" kind="muted" importance="outlined"> Inverted </dt-button>
           </template>
           <template #content="{ close }">
-            <div v-dt-mode class="d-p16 d-bgc-secondary">
-              <dt-text as="p">This Popover's content is in the <dt-text strength="strong">inverted</dt-text> mode.</dt-text>
-            </div>
+            <dt-text as="p">This Popover's content is in the <dt-text strength="strong">inverted</dt-text> mode.</dt-text>
           </template>
         </dt-popover>
-        <dt-popover padding="none" placement="top-start" dialogClass="d-w216">
+        <dt-popover content-mode="light" placement="top-start" dialogClass="d-w216">
           <template #anchor>
             <dt-button size="sm" kind="muted" importance="outlined"> Light </dt-button>
           </template>
           <template #content="{ close }">
-            <div v-dt-mode:light class="d-p16 d-bgc-secondary">
-              <dt-text as="p">This Popover's content is in explicit <dt-text strength="strong">light</dt-text> mode.</dt-text>
-            </div>
+            <dt-text as="p">This Popover's content is in explicit <dt-text strength="strong">light</dt-text> mode.</dt-text>
           </template>
         </dt-popover>
-        <dt-popover padding="none" placement="top-start" dialogClass="d-w216">
+        <dt-popover content-mode="dark" placement="top-start" dialogClass="d-w216">
           <template #anchor>
             <dt-button size="sm" kind="muted" importance="outlined"> Dark </dt-button>
           </template>
           <template #content="{ close }">
-            <div v-dt-mode:dark class="d-p16 d-bgc-secondary">
-              <dt-text as="p">This Popover's content is in explicit <dt-text strength="strong">dark</dt-text> mode.</dt-text>
-            </div>
+            <dt-text as="p">This Popover's content is in explicit <dt-text strength="strong">dark</dt-text> mode.</dt-text>
           </template>
         </dt-popover>
       </dt-stack>
@@ -658,7 +642,7 @@ showHtmlWarning />
             </dt-list-item>
           </template>
         </dt-dropdown>
-        <dt-dropdown ref="dropdownInverted" navigation-type="arrow-keys" placement="bottom-start" listClass="d-m0" padding="small">
+        <dt-dropdown ref="dropdownInverted" content-mode="invert" navigation-type="arrow-keys" placement="bottom-start">
           <template #anchor="{ attrs }">
             <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined">
               Inverted
@@ -668,20 +652,18 @@ showHtmlWarning />
             </dt-button>
           </template>
           <template #list="{ close }">
-            <div v-dt-mode class="d-bgc-secondary d-p4">
-              <dt-list-item
-                v-for="item in items"
-                :key="item.id"
-                role="menuitem"
-                :navigation-type="arrow - keys"
-                @click="close"
-              >
-                {{ item.name }}
-              </dt-list-item>
-            </div>
+            <dt-list-item
+              v-for="item in items"
+              :key="item.id"
+              role="menuitem"
+              :navigation-type="arrow - keys"
+              @click="close"
+            >
+              {{ item.name }}
+            </dt-list-item>
           </template>
         </dt-dropdown>
-        <dt-dropdown navigation-type="arrow-keys" placement="bottom-start" listClass="d-m0" padding="small">
+        <dt-dropdown content-mode="light" navigation-type="arrow-keys" placement="bottom-start">
           <template #anchor="{ attrs }">
             <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined">
               Light
@@ -691,20 +673,18 @@ showHtmlWarning />
             </dt-button>
           </template>
           <template #list="{ close }">
-            <div v-dt-mode:light class="d-bgc-secondary d-p4">
-              <dt-list-item
-                v-for="item in items"
-                :key="item.id"
-                role="menuitem"
-                :navigation-type="arrow - keys"
-                @click="close"
-              >
-                {{ item.name }}
-              </dt-list-item>
-            </div>
+            <dt-list-item
+              v-for="item in items"
+              :key="item.id"
+              role="menuitem"
+              :navigation-type="arrow - keys"
+              @click="close"
+            >
+              {{ item.name }}
+            </dt-list-item>
           </template>
         </dt-dropdown>
-        <dt-dropdown navigation-type="arrow-keys" placement="bottom-start" listClass="d-m0" padding="small">
+        <dt-dropdown content-mode="dark" navigation-type="arrow-keys" placement="bottom-start">
           <template #anchor="{ attrs }">
             <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined">
               Dark
@@ -714,17 +694,15 @@ showHtmlWarning />
             </dt-button>
           </template>
           <template #list="{ close }">
-            <div v-dt-mode:dark class="d-bgc-secondary d-p4">
-              <dt-list-item
-                v-for="item in items"
-                :key="item.id"
-                role="menuitem"
-                :navigation-type="arrow - keys"
-                @click="close"
-              >
-                {{ item.name }}
-              </dt-list-item>
-            </div>
+            <dt-list-item
+              v-for="item in items"
+              :key="item.id"
+              role="menuitem"
+              :navigation-type="arrow - keys"
+              @click="close"
+            >
+              {{ item.name }}
+            </dt-list-item>
           </template>
         </dt-dropdown>
       </dt-stack>
@@ -735,29 +713,25 @@ showHtmlWarning />
 <code-example-tabs
 vueCode='
 <!-- Hovercard -->
-<dt-hovercard padding="none" placement="top-start">
+<dt-hovercard ref="hovercardDefault" placement="top-start" content-mode="invert">
   <template #anchor>
-    <dt-button size="sm" kind="muted" importance="outlined">Inverted</dt-button>
+    <dt-button size="sm" kind="muted" importance="outlined">Default</dt-button>
   </template>
   <template #content>
-    <div v-dt-mode class="d-p16 d-bgc-secondary">
-      <ExampleProfileCard />
-    </div>
+    <ExampleProfileCard />
   </template>
 </dt-hovercard>
 <!-- Popover -->
-<dt-popover padding="none" placement="top-start" dialogClass="d-w216">
+<dt-popover ref="popoverInverted" content-mode="invert" placement="top-start" dialogClass="d-w216">
   <template #anchor>
-    <dt-button size="sm" kind="muted" importance="outlined">Inverted</dt-button>
+    <dt-button size="sm" kind="muted" importance="outlined"> Inverted </dt-button>
   </template>
   <template #content="{ close }">
-    <div v-dt-mode class="d-p16 d-bgc-secondary">
-      <dt-text as="p">This Popover content is in the <dt-text strength="strong">inverted</dt-text> mode.</dt-text>
-    </div>
+    <dt-text as="p">This Popover content is in the <dt-text strength="strong">inverted</dt-text> mode.</dt-text>
   </template>
 </dt-popover>
 <!-- Dropdown -->
-<dt-dropdown navigation-type="arrow-keys" placement="bottom-start" listClass="d-m0" padding="small">
+<dt-dropdown ref="dropdownInverted" content-mode="invert" navigation-type="arrow-keys" placement="bottom-start">
   <template #anchor="{ attrs }">
     <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined">
       Inverted
@@ -767,16 +741,15 @@ vueCode='
     </dt-button>
   </template>
   <template #list="{ close }">
-    <div v-dt-mode class="d-bgc-secondary d-p4">
-      <dt-list-item
-        v-for="item in items"
-        :key="item.id"
-        role="menuitem"
-        @click="close"
-      >
-        {{ item.name }}
-      </dt-list-item>
-    </div>
+    <dt-list-item
+      v-for="item in items"
+      :key="item.id"
+      role="menuitem"
+      :navigation-type="arrow - keys"
+      @click="close"
+    >
+      {{ item.name }}
+    </dt-list-item>
   </template>
 </dt-dropdown>
 '
@@ -790,7 +763,7 @@ The `<dt-mode-island>` component is the underlying abstraction that the directiv
   kind="info"
   class="d-wmx100p d-mt24 d-mb24"
   hide-close
-  title="Warning"
+  title="Note"
 >
   The only real case where you might want to use the component is when you need to create a container element that doesn't already exist, but even then, you can create any kind of containing element with the directive e.g. <code>&lt;span v-dt-mode:invert"&gt;...&lt;/span&gt;</code>.
 </dt-notice>
