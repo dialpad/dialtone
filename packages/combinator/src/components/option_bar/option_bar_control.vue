@@ -40,15 +40,16 @@
           >
             Required
           </dt-text>
-          <span
+          <dt-text
             v-if="vModel"
-            class="d-pl2 d-ps-relative d-b2"
+            size="xs"
+            kind="label"
+            strength="normal"
+            tone="muted"
+            class="d-fs-50"
           >
-            <dt-badge
-              text="v-model"
-              color="black-700"
-            />
-          </span>
+            v-model
+          </dt-text>
         </dt-stack>
         <dt-button
           v-if="showRawToggle"
