@@ -100,6 +100,7 @@ export function getControlByValue (value) {
 }
 
 export function getControlByMemberType (type, args) {
+  if (type === 'boolean') return 'boolean';
   if (args?.values?.length > 0) {
     return 'selection';
   }
