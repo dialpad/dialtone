@@ -972,6 +972,349 @@ describe('DtRichTextEditor tests', () => {
           expect(output).toContain('<table><tbody>');
         });
 
+        it('should apply d-rich-text-editor--custom-tables class when allowCustomTables is true', async () => {
+          wrapper.unmount();
+          props['allowTables'] = true;
+          props['allowCustomTables'] = true;
+          editorEl?.remove();
+          wrapper = mount(DtRichTextEditor, {
+            props,
+            components: { EditorContent },
+            listeners,
+            attrs,
+            slots,
+            attachTo: document.body,
+          });
+          await wrapper.vm.$nextTick();
+
+          const editorContent = wrapper.find('[data-qa="dt-rich-text-editor"]');
+          expect(editorContent.classes()).toContain('d-rich-text-editor--custom-tables');
+        });
+
+        it('should not apply d-rich-text-editor--custom-tables class when allowCustomTables is false', async () => {
+          wrapper.unmount();
+          props['allowTables'] = true;
+          props['allowCustomTables'] = false;
+          editorEl?.remove();
+          wrapper = mount(DtRichTextEditor, {
+            props,
+            components: { EditorContent },
+            listeners,
+            attrs,
+            slots,
+            attachTo: document.body,
+          });
+          await wrapper.vm.$nextTick();
+
+          const editorContent = wrapper.find('[data-qa="dt-rich-text-editor"]');
+          expect(editorContent.classes()).not.toContain('d-rich-text-editor--custom-tables');
+        });
+
+        it('should preserve nested tables when pasted with custom tables', async () => {
+          wrapper.unmount();
+          props['outputFormat'] = 'html';
+          props['modelValue'] = '';
+          props['allowTables'] = true;
+          props['allowCustomTables'] = true;
+          editorEl?.remove();
+          wrapper = mount(DtRichTextEditor, {
+            props,
+            components: { EditorContent },
+            listeners,
+            attrs,
+            slots,
+            attachTo: document.body,
+          });
+          await wrapper.vm.$nextTick();
+          editor = wrapper.find('[data-qa="dt-rich-text-editor"]').find('div[contenteditable]');
+          editorEl = document.getElementsByClassName('qa-editor')[0];
+
+          const clipboardData = new DataTransfer();
+          clipboardData.setData('text/plain', 'OuterInner');
+          clipboardData.setData('text/html',
+            '<table border="0" style="width: 100%;">' +
+            '<tr><td style="padding: 10px;">' +
+            '<table border="1" style="width: 50%;">' +
+            '<tr><td style="padding: 5px;">Inner</td></tr>' +
+            '</table>' +
+            '</td></tr>' +
+            '</table>',
+          );
+
+          const pasteEvent = new ClipboardEvent('paste', {
+            clipboardData,
+            bubbles: true,
+            cancelable: true,
+          });
+
+          editorEl.dispatchEvent(pasteEvent);
+          await wrapper.vm.$nextTick();
+          const output = wrapper.vm.getOutput();
+          // Outer table attributes
+          expect(output).toContain('border="0"');
+          expect(output).toContain('width: 100%');
+          // Inner table attributes
+          expect(output).toContain('border="1"');
+          expect(output).toContain('width: 50%');
+          // Cell padding
+          expect(output).toContain('padding: 10px');
+          expect(output).toContain('padding: 5px');
+        });
+
+        it('should preserve colspan and rowspan in custom table mode', async () => {
+          wrapper.unmount();
+          props['outputFormat'] = 'html';
+          props['modelValue'] = '';
+          props['allowTables'] = true;
+          props['allowCustomTables'] = true;
+          editorEl?.remove();
+          wrapper = mount(DtRichTextEditor, {
+            props,
+            components: { EditorContent },
+            listeners,
+            attrs,
+            slots,
+            attachTo: document.body,
+          });
+          await wrapper.vm.$nextTick();
+          editor = wrapper.find('[data-qa="dt-rich-text-editor"]').find('div[contenteditable]');
+          editorEl = document.getElementsByClassName('qa-editor')[0];
+
+          const clipboardData = new DataTransfer();
+          clipboardData.setData('text/plain', 'HeaderCell 1Cell 2');
+          clipboardData.setData('text/html',
+            '<table>' +
+            '<tr><td colspan="2">Header</td></tr>' +
+            '<tr><td>Cell 1</td><td>Cell 2</td></tr>' +
+            '</table>',
+          );
+
+          const pasteEvent = new ClipboardEvent('paste', {
+            clipboardData,
+            bubbles: true,
+            cancelable: true,
+          });
+
+          editorEl.dispatchEvent(pasteEvent);
+          await wrapper.vm.$nextTick();
+          const output = wrapper.vm.getOutput();
+          expect(output).toContain('colspan="2"');
+        });
+
+        it('should handle multiple tables in a single paste with custom tables', async () => {
+          wrapper.unmount();
+          props['outputFormat'] = 'html';
+          props['modelValue'] = '';
+          props['allowTables'] = true;
+          props['allowCustomTables'] = true;
+          editorEl?.remove();
+          wrapper = mount(DtRichTextEditor, {
+            props,
+            components: { EditorContent },
+            listeners,
+            attrs,
+            slots,
+            attachTo: document.body,
+          });
+          await wrapper.vm.$nextTick();
+          editor = wrapper.find('[data-qa="dt-rich-text-editor"]').find('div[contenteditable]');
+          editorEl = document.getElementsByClassName('qa-editor')[0];
+
+          const clipboardData = new DataTransfer();
+          clipboardData.setData('text/plain', 'Table1Table2');
+          clipboardData.setData('text/html',
+            '<table border="1"><tr><td>Table1</td></tr></table>' +
+            '<p>Separator</p>' +
+            '<table border="2"><tr><td>Table2</td></tr></table>',
+          );
+
+          const pasteEvent = new ClipboardEvent('paste', {
+            clipboardData,
+            bubbles: true,
+            cancelable: true,
+          });
+
+          editorEl.dispatchEvent(pasteEvent);
+          await wrapper.vm.$nextTick();
+          const output = wrapper.vm.getOutput();
+          expect(output).toContain('border="1"');
+          expect(output).toContain('border="2"');
+          expect(output).toContain('Table1');
+          expect(output).toContain('Table2');
+          expect(output).toContain('Separator');
+        });
+
+        it('should handle table with empty cells in custom table mode', async () => {
+          wrapper.unmount();
+          props['outputFormat'] = 'html';
+          props['modelValue'] = '';
+          props['allowTables'] = true;
+          props['allowCustomTables'] = true;
+          editorEl?.remove();
+          wrapper = mount(DtRichTextEditor, {
+            props,
+            components: { EditorContent },
+            listeners,
+            attrs,
+            slots,
+            attachTo: document.body,
+          });
+          await wrapper.vm.$nextTick();
+          editor = wrapper.find('[data-qa="dt-rich-text-editor"]').find('div[contenteditable]');
+          editorEl = document.getElementsByClassName('qa-editor')[0];
+
+          const clipboardData = new DataTransfer();
+          clipboardData.setData('text/plain', 'Content');
+          clipboardData.setData('text/html',
+            '<table border="0" style="width: 100%;">' +
+            '<tr><td style="padding: 5px;">Content</td><td></td></tr>' +
+            '</table>',
+          );
+
+          const pasteEvent = new ClipboardEvent('paste', {
+            clipboardData,
+            bubbles: true,
+            cancelable: true,
+          });
+
+          editorEl.dispatchEvent(pasteEvent);
+          await wrapper.vm.$nextTick();
+          const output = wrapper.vm.getOutput();
+          expect(output).toContain('<table');
+          expect(output).toContain('border="0"');
+          expect(output).toContain('Content');
+        });
+
+        it('should preserve custom table attributes when setting content programmatically', async () => {
+          wrapper.unmount();
+          props['outputFormat'] = 'html';
+          props['modelValue'] = '';
+          props['allowTables'] = true;
+          props['allowCustomTables'] = true;
+          editorEl?.remove();
+          wrapper = mount(DtRichTextEditor, {
+            props,
+            components: { EditorContent },
+            listeners,
+            attrs,
+            slots,
+            attachTo: document.body,
+          });
+          await wrapper.vm.$nextTick();
+
+          const tableHTML =
+            '<table border="0" cellpadding="5" cellspacing="0" style="border-collapse: collapse;">' +
+            '<tbody>' +
+            '<tr style="background-color: #eee;">' +
+            '<td style="padding: 10px;" valign="top" width="200">Cell content</td>' +
+            '</tr>' +
+            '</tbody>' +
+            '</table>';
+
+          wrapper.vm.editor.commands.setContent(tableHTML);
+          await wrapper.vm.$nextTick();
+
+          const output = wrapper.vm.getOutput();
+          expect(output).toContain('border="0"');
+          expect(output).toContain('cellpadding="5"');
+          expect(output).toContain('cellspacing="0"');
+          expect(output).toContain('border-collapse: collapse');
+          expect(output).toContain('background-color: rgb(238, 238, 238)');
+          expect(output).toContain('valign="top"');
+          expect(output).toContain('width="200"');
+          expect(output).toContain('padding: 10px');
+        });
+
+        it('should handle table with no custom attributes gracefully in custom mode', async () => {
+          wrapper.unmount();
+          props['outputFormat'] = 'html';
+          props['modelValue'] = '';
+          props['allowTables'] = true;
+          props['allowCustomTables'] = true;
+          editorEl?.remove();
+          wrapper = mount(DtRichTextEditor, {
+            props,
+            components: { EditorContent },
+            listeners,
+            attrs,
+            slots,
+            attachTo: document.body,
+          });
+          await wrapper.vm.$nextTick();
+          editor = wrapper.find('[data-qa="dt-rich-text-editor"]').find('div[contenteditable]');
+          editorEl = document.getElementsByClassName('qa-editor')[0];
+
+          const clipboardData = new DataTransfer();
+          clipboardData.setData('text/plain', 'AB');
+          clipboardData.setData('text/html', '<table><tr><td>A</td><td>B</td></tr></table>');
+
+          const pasteEvent = new ClipboardEvent('paste', {
+            clipboardData,
+            bubbles: true,
+            cancelable: true,
+          });
+
+          editorEl.dispatchEvent(pasteEvent);
+          await wrapper.vm.$nextTick();
+          const output = wrapper.vm.getOutput();
+          // Should render a clean table without colgroup/min-width and without extraneous null attributes
+          expect(output).toContain('<table><tbody>');
+          expect(output).not.toContain('colgroup');
+          expect(output).not.toContain('min-width');
+          expect(output).not.toContain('border=');
+          expect(output).not.toContain('cellpadding=');
+          expect(output).not.toContain('cellspacing=');
+          expect(output).toContain('A');
+          expect(output).toContain('B');
+        });
+
+        it('should preserve styles from div tags inside table cells via CustomTextStyle', async () => {
+          wrapper.unmount();
+          props['outputFormat'] = 'html';
+          props['modelValue'] = '';
+          props['allowTables'] = true;
+          props['allowCustomTables'] = true;
+          props['allowFontSize'] = true;
+          props['allowFontColor'] = true;
+          editorEl?.remove();
+          wrapper = mount(DtRichTextEditor, {
+            props,
+            components: { EditorContent },
+            listeners,
+            attrs,
+            slots,
+            attachTo: document.body,
+          });
+          await wrapper.vm.$nextTick();
+          editor = wrapper.find('[data-qa="dt-rich-text-editor"]').find('div[contenteditable]');
+          editorEl = document.getElementsByClassName('qa-editor')[0];
+
+          const clipboardData = new DataTransfer();
+          clipboardData.setData('text/plain', 'NameTitle');
+          clipboardData.setData('text/html',
+            '<table>' +
+            '<tr><td>' +
+            '<div style="font-size: 16pt; color: #111111;">Name</div>' +
+            '<div style="font-size: 10pt; color: #888888;">Title</div>' +
+            '</td></tr>' +
+            '</table>',
+          );
+
+          const pasteEvent = new ClipboardEvent('paste', {
+            clipboardData,
+            bubbles: true,
+            cancelable: true,
+          });
+
+          editorEl.dispatchEvent(pasteEvent);
+          await wrapper.vm.$nextTick();
+          const output = wrapper.vm.getOutput();
+          expect(output).toContain('font-size: 16pt');
+          expect(output).toContain('font-size: 10pt');
+          expect(output).toContain('color: rgb(17, 17, 17)');
+          expect(output).toContain('color: rgb(136, 136, 136)');
+        });
+
         it('should not preserve tables when pasted without allow tables', async () => {
           await wrapper.setProps({
             pasteRichText: false,
