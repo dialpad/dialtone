@@ -1,4 +1,4 @@
-import { CONTENT_MODE_VALUES } from '@/common/mode_constants';
+import { CONTENT_MODE_PROP } from '@/common/mode_constants';
 import {
   getOppositeMode,
   getRootContrast,
@@ -27,16 +27,12 @@ export default {
      * opposite of the nearest ancestor's mode and stays reactive.
      * @values light, dark, invert
      */
-    contentMode: {
-      type: String,
-      default: null,
-      validator: (v) => v === null || CONTENT_MODE_VALUES.includes(v),
-    },
+    contentMode: CONTENT_MODE_PROP,
   },
 
   data () {
     return {
-      modeContrast: getRootContrast(),
+      modeContrast: 'default',
       modeResolved: null,
     };
   },

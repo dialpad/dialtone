@@ -105,7 +105,7 @@
 
 <script>
 import { DtPopover, POPOVER_APPEND_TO_VALUES, POPOVER_PADDING_CLASSES } from '@/components/popover';
-import { CONTENT_MODE_VALUES } from '@/common/mode_constants';
+import { CONTENT_MODE_PROP } from '@/common/mode_constants';
 import { BUTTON_SIZE_MODIFIERS, DtButton } from '@/components/button';
 import { DtIconChevronDown, DtIconClose } from '@dialpad/dialtone-icons/vue';
 import { DialtoneLocalization } from '@/localization';
@@ -271,11 +271,7 @@ export default {
      * Applies a color mode to the positioned content element.
      * @values light, dark, invert
      */
-    contentMode: {
-      type: String,
-      default: null,
-      validator: (v) => v === null || CONTENT_MODE_VALUES.includes(v),
-    },
+    contentMode: CONTENT_MODE_PROP,
 
     /**
      * The size of the button.

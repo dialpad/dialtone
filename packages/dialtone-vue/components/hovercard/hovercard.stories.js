@@ -10,7 +10,7 @@ import {
   POPOVER_DIRECTIONS,
   POPOVER_PADDING_CLASSES,
 } from '@/components/popover/index.js';
-import { CONTENT_MODE_VALUES } from '@/common/mode_constants';
+import { CONTENT_MODE_ARG_TYPE } from '@/common/mode_constants';
 
 export const argTypesData = {
   // Slots
@@ -53,17 +53,7 @@ export const argTypesData = {
   },
 
   // Props
-  contentMode: {
-    options: [null, ...CONTENT_MODE_VALUES],
-    control: {
-      type: 'select',
-      labels: { null: '(none)' },
-    },
-    table: {
-      category: 'props',
-      defaultValue: { summary: 'null' },
-    },
-  },
+  contentMode: CONTENT_MODE_ARG_TYPE,
   open: {
     control: {
       type: 'boolean',

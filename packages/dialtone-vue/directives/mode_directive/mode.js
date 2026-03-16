@@ -3,8 +3,9 @@ import {
   getRootContrast,
   findParentMode,
 } from '@/components/mode_island/utils';
+import { CONTENT_MODE_VALUES } from '@/common/mode_constants';
 
-const VALID_MODES = ['light', 'dark', 'invert'];
+const VALID_MODES = CONTENT_MODE_VALUES;
 
 const SUGGESTIONS = {
   inverted: 'invert',
