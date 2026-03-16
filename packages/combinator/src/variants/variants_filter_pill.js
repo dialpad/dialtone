@@ -12,6 +12,9 @@ export default {
           { name: 'Option 3', active: true },
         ],
       },
+      endTooltipText: {
+        initialValue: 'Remove',
+      },
     },
   },
 
@@ -26,6 +29,9 @@ export default {
           { name: 'Option 2' },
           { name: 'Option 3' },
         ],
+      },
+      endTooltipText: {
+        initialValue: 'Remove',
       },
     },
   },
@@ -45,6 +51,9 @@ export default {
       hideClear: {
         initialValue: true,
       },
+      endTooltipText: {
+        initialValue: 'Remove',
+      },
     },
   },
 
@@ -63,22 +72,8 @@ export default {
       disabled: {
         initialValue: true,
       },
-    },
-  },
-
-  'content mode invert': {
-    props: {
-      label: {
-        initialValue: 'Inverted',
-      },
-      modelValue: {
-        initialValue: [
-          { name: 'Orange', active: true },
-          { name: 'Apple' },
-        ],
-      },
-      contentMode: {
-        initialValue: 'invert',
+      endTooltipText: {
+        initialValue: 'Remove',
       },
     },
   },
