@@ -40,7 +40,7 @@ export const CustomTable = Table.extend({
     };
   },
 
-  renderHTML ({HTMLAttributes }) {
+  renderHTML({ HTMLAttributes }) {
     return ['table', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes), ['tbody', 0]];
   },
 });
