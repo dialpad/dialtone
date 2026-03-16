@@ -62,7 +62,7 @@ keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFil
   </dt-stack>
 </code-well-header>
 
-<!-- ## Usage
+## Usage
 
 ### Key concepts
 
@@ -77,20 +77,18 @@ keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFil
 - Use to filter a list, table, or other data set by a specific attribute (e.g., channel, contact center, date range).
 - Use the default checkbox popover for multi-select filters where several options can be active at once.
 - Use `use-dropdown` for single-select filters where only one option applies at a time (e.g., conversation type).
-- Keep labels short and scannable — a noun describing the category ("Channel", "Duration", "CSAT").
 - Provide `end-tooltip-text` on the clear button so it has an accessible name for screen readers.
 </template>
 
 <template #dont>
 
 - Don't use as a general-purpose action button — filter pills are for narrowing data, not triggering commands.
-- Don't use for binary on/off settings — use a [Toggle](toggle.md) instead.
-- Don't nest filter pills inside another filter pill's popover.
+- Don't use for binary on/off settings — use a [Toggle](toggle.md).
 - Don't omit `label` and the `default` slot — the pill must always have visible text identifying the filter category.
 - Don't replace the array with `map` when toggling active state — mutate objects in-place with `forEach` to keep the pill's internal copy in sync.
 </template>
 
-</dialtone-usage> -->
+</dialtone-usage>
 
 ## Variants
 
