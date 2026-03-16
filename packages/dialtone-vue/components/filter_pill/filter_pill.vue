@@ -15,7 +15,7 @@
       <template #anchor="slotData">
         <dt-button
           v-dt-tooltip="resolvedStartTooltipText"
-          v-bind="useDropdown ? slotData : slotData.attrs"
+          v-bind="slotData.attrs"
           :active="isActive"
           :aria-disabled="readOnly || undefined"
           :class="[
@@ -619,7 +619,7 @@ export default {
     },
 
     openPopover () {
-      if (this.readOnly || this.useDropdown) return;
+      if (this.readOnly) return;
       this.isOpen = true;
     },
 
