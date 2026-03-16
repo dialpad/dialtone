@@ -76,6 +76,29 @@ showHtmlWarning />
   </dt-stack>
 </code-well-header>
 
+## Content Mode
+
+Hovercard content renders outside the DOM tree. Use the `contentMode` prop to apply color mode (invert, light, dark) to the positioned content. See [Positioned Components](/components/mode-island.html#positioned-components) for details.
+
+<code-well-header>
+  <dt-hovercard content-mode="invert" placement="bottom-start">
+    <template #anchor>
+      <dt-button size="sm" kind="muted" importance="outlined">Hover for Inverted Hovercard</dt-button>
+    </template>
+    <template #content>
+      <dt-text as="p">This hovercard content is in the <dt-text strength="strong">inverted</dt-text> mode.</dt-text>
+    </template>
+  </dt-hovercard>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-hovercard content-mode="invert">...</dt-hovercard>
+<dt-hovercard content-mode="dark">...</dt-hovercard>
+<dt-hovercard content-mode="light">...</dt-hovercard>
+'
+/>
+
 ## Vue API
 
 <component-vue-api component-name="hovercard" />

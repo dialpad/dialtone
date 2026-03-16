@@ -494,67 +494,21 @@ vueCode='<dt-filter-pill label="Keyword" v-model="[...]">
 </dt-filter-pill>'
 showHtmlWarning />
 
-### Header and Footer
+## Content Mode
 
-The `headerContent` and `footerContent` slots let you customize the popover header and footer.
-Both receive a `close` binding; `footerContent` also provides `apply` and `cancel` for deferred-selection workflows.
-
-When `deferSelection` is true and no `#footerContent` slot is provided, the default Cancel/Apply footer renders as before.
+Filter Pill popover content renders outside the DOM tree. Use the `contentMode` prop to apply color mode (invert, light, dark) to the positioned content. See [Positioned Components](/components/mode-island.html#positioned-components) for details.
 
 <code-well-header>
-  <dt-filter-pill
-    v-model="overlayCustomFilters"
-    label="Custom overlay"
-    ref="overlayCustomExample"
-    popover-header-class="d-p32 d-baw0 d-bgc-warning"
-    popover-content-class="d-p32 d-baw0 d-bgc-success"
-    popover-footer-class="d-p32 d-baw0 d-bgc-critical"
-    popover-padding="none"
-  >
-    <template #headerContent>
-      #headerContent
-    </template>
-    <template #content>
-      #content
-    </template>
-    <template #footerContent>
-      #footerContent
-    </template>
-  </dt-filter-pill>
+  <dt-filter-pill content-mode="invert" label="Inverted" :model-value="[{ name: 'Orange', active: true }, { name: 'Apple' }]" />
 </code-well-header>
 
 <code-example-tabs
-:htmlCode='() => $refs.overlayCustomExample'
 vueCode='
-<dt-filter-pill
-  v-model="overlayCustomFilters"
-  label="Custom overlay"
-  ref="overlayCustomExample"
-  popover-header-class="d-p32 d-baw0 d-bgc-warning"
-  popover-content-class="d-p32 d-baw0 d-bgc-success"
-  popover-footer-class="d-p32 d-baw0 d-bgc-critical"
-  popover-padding="none"
->
-  <template #headerContent>
-    #headerContent
-  </template>
-  <template #content>
-    #content
-  </template>
-  <template #footerContent>
-    #footerContent
-  </template>
-</dt-filter-pill>
+<dt-filter-pill content-mode="invert">...</dt-filter-pill>
+<dt-filter-pill content-mode="dark">...</dt-filter-pill>
+<dt-filter-pill content-mode="light">...</dt-filter-pill>
 '
-showHtmlWarning />
-
-### Overlay class props
-
-- Use `popoverHeaderClass` and `popoverFooterClass` to style the outer wrapper elements
-(`d-popover__header` / `d-popover__footer`), and `popoverContentClass` to style the inner content
-area. `popoverDialogClass` targets the dialog element itself.
-- In dropdown mode, use
-`dropdownListClass` to style the list wrapper.
+/>
 
 ## Vue API
 

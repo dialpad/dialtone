@@ -7,6 +7,7 @@ import DtTooltipChangeOnClick from './tooltip_change_on_click.story.vue';
 import { action } from 'storybook/actions';
 
 import { TOOLTIP_DIRECTIONS, TOOLTIP_STICKY_VALUES } from './tooltip_constants';
+import { CONTENT_MODE_ARG_TYPE } from '@/common/mode_constants';
 
 // Default Prop Values
 export const argsData = {
@@ -73,6 +74,8 @@ export const argTypesData = {
     options: [null, true, false],
     type: 'select',
   },
+
+  contentMode: CONTENT_MODE_ARG_TYPE,
 
   inverted: {
     type: 'boolean',

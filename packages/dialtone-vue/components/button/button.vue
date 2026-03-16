@@ -315,6 +315,7 @@ export default {
 
     /**
      * The color of the button.
+     * The inverted value is deprecated — use v-dt-mode directive instead.
      * @values default, unstyled, muted, danger, positive
      */
     kind: {

@@ -308,6 +308,26 @@ vueCode='
 <dt-text tone="critical-strong">critical-strong</dt-text>
 '/>
 
+### Inverted
+
+Rather than use the `-inverted` tone variants, use the [v-dt-mode](/components/mode-island.html) directive.
+
+<code-well-header>
+  <dt-stack gap="300" class="d-py8 d-px16 d-bar4">
+    <div class="d-p8 d-bgc-transparent">
+      <dt-text tone="critical">critical tone on default surface</dt-text>
+    </div>
+    <div class="d-p8 d-bgc-contrast">
+      <dt-text v-dt-mode:invert tone="critical">critical tone on contrasting surface</dt-text>
+    </div>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-text v-dt-mode:invert tone="critical">critical tone on contrasting surface</dt-text>
+'/>
+
 ## Render as
 
 Use `as` to declare the underlying HTML tag that the component should render, independent of the visual styling. Defaults to `span`.

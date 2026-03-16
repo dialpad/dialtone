@@ -180,6 +180,38 @@ vueCode='
 '
 />
 
+## Content Mode
+
+Combobox popover content renders outside the DOM tree. Use the `contentMode` prop to apply color mode (invert, light, dark) to the positioned content. See [Positioned Components](/components/mode-island.html#positioned-components) for details.
+
+<code-well-header>
+  <dt-combobox-with-popover
+    content-mode="invert"
+    label="Inverted Combobox"
+    content-width="anchor"
+    max-height="300px"
+  >
+    <template #input="{ inputProps }">
+      <dt-input placeholder="Type to search..." v-bind="inputProps" />
+    </template>
+    <template #list="{ listProps }">
+      <ul v-bind="listProps">
+        <dt-list-item navigation-type="arrow-keys" role="option">Option 1</dt-list-item>
+        <dt-list-item navigation-type="arrow-keys" role="option">Option 2</dt-list-item>
+        <dt-list-item navigation-type="arrow-keys" role="option">Option 3</dt-list-item>
+      </ul>
+    </template>
+  </dt-combobox-with-popover>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-combobox-with-popover content-mode="invert">...</dt-combobox-with-popover>
+<dt-combobox-with-popover content-mode="dark">...</dt-combobox-with-popover>
+<dt-combobox-with-popover content-mode="light">...</dt-combobox-with-popover>
+'
+/>
+
 ## Vue API
 
 <component-vue-api component-name="comboboxwithpopover" />

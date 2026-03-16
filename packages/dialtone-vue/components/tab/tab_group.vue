@@ -93,7 +93,7 @@ export default {
 
     /**
      * If true, applies inverted styles to the tab group
-     * @deprecated
+     * @deprecated Use v-dt-mode directive instead.
      * @values true, false
      */
     inverted: {

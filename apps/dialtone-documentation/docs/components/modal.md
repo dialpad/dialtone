@@ -540,6 +540,29 @@ vueCode='
 '
 />
 
+## Content Mode
+
+Modal content renders outside the DOM tree. Use the `contentMode` prop to apply color mode (invert, light, dark) to the positioned content. See [Positioned Components](/components/mode-island.html#positioned-components) for details.
+
+<code-well-header>
+  <dt-button @click="invertedModalOpen = true">Open Inverted Modal</dt-button>
+  <dt-modal
+    content-mode="invert"
+    title="Inverted Modal"
+    copy="This modal's content is in the inverted mode."
+    :show="invertedModalOpen"
+    @update:show="invertedModalOpen = $event"
+  />
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-modal content-mode="invert">...</dt-modal>
+<dt-modal content-mode="dark">...</dt-modal>
+<dt-modal content-mode="light">...</dt-modal>
+'
+/>
+
 ## Vue API
 
 <component-vue-api component-name="modal" />
@@ -555,6 +578,7 @@ At minimum, modals contain a title and one button. They could also contain body 
   import { ref } from 'vue';
 
   const isOpen = ref(false);
+  const invertedModalOpen = ref(false);
   const selectedBannerKind = ref('success');
   const fixedHeaderFooterCopy = ref(`Sed at orci quis nunc finibus gravida eget vitae est. Praesent
           ac laoreet mi. Cras porttitor mauris ex. Integer convallis tellus a ex egestas, id laoreet elit mollis. Mauris

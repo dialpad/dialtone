@@ -17,6 +17,7 @@
       :fixed-header-footer="$attrs.fixedHeaderFooter"
       :close-on-click="$attrs.closeOnClick"
       :append-to="$attrs.appendTo"
+      :content-mode="$attrs.contentMode"
       @update:show="close"
     >
       <template

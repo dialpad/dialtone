@@ -1,14 +1,14 @@
 ---
 title: Mode Island
-description: Create independent sections with their own color modes.
+description: Apply light, dark, or inverted color mode to any element or region.
 status: beta
-keywords: ["theme island","mode override","d-mode-island","DtModeIsland","dt-mode-island"]
+keywords: ["theme island","mode override","v-dt-mode","directive","light","dark","invert","v-dt"]
 ---
 
 <code-well-header>
-  <dt-stack gap="500" class="d-ai-flex-start d-w100p">
-    <dt-stack direction="row" gap="500" class="d-jc-space-between d-w100p">
-      <dt-text as="h4" kind="headline" size="xl">Demo</dt-text>
+  <dt-stack gap="500">
+    <dt-stack direction="row" gap="500" justify="space-between" class="d-w100p">
+      <dt-text as="h4" kind="headline" size="lg">Demo</dt-text>
       <dt-dropdown
         navigation-type="arrow-keys"
         placement="bottom-end"
@@ -17,15 +17,28 @@ keywords: ["theme island","mode override","d-mode-island","DtModeIsland","dt-mod
           <dt-button
             importance="outlined"
             kind="muted"
+            size="sm"
           >
             <dt-stack gap="400" direction="row">
-              <dt-text><dt-text strength="strong">Mode:</dt-text> {{ currentMode.charAt(0).toUpperCase() + currentMode.slice(1) }}</dt-text>
-              <dt-text><dt-text strength="strong">Contrast:</dt-text> {{ currentContrast.charAt(0).toUpperCase() + currentContrast.slice(1) }}</dt-text>
+              <span>
+                <dt-text strength="bold">Mode:</dt-text>
+                <dt-text tone="tertiary">{{ currentMode.charAt(0).toUpperCase() + currentMode.slice(1) }}</dt-text>
+              </span>
+              <span>
+                <dt-text strength="bold">Contrast:</dt-text>
+                <dt-text tone="tertiary">{{ currentContrast.charAt(0).toUpperCase() + currentContrast.slice(1) }}</dt-text>
+              </span>
             </dt-stack>
-            <template #startIcon>
+            <template #startIcon="{ iconSize }">
               <dt-icon
-                size="300"
+                :size="iconSize"
                 :name="currentModeIconName"
+              />
+            </template>
+            <template #endIcon="{ iconSize }">
+              <dt-icon
+                :size="iconSize"
+                name="chevron-down"
               />
             </template>
           </dt-button>
@@ -96,89 +109,156 @@ keywords: ["theme island","mode override","d-mode-island","DtModeIsland","dt-mod
       </dt-dropdown>
     </dt-stack>
     <dt-stack :direction="{ 'default': 'column', 'md': 'row' }" gap="500" class="d-w100p">
-      <dt-mode-island class="d-p16 d-bar8 d-ba d-fl1">
-        <dt-stack gap="400">
-          <dt-stack direction="row" gap="400" class="d-jc-space-between">
-            <dt-text as="h3" kind="headline" size="md" density="200">Inverted <dt-text strength="normal">(auto)</dt-text></dt-text>
+      <dt-stack gap="400" class="d-fl1">
+        <dt-text as="h3" kind="headline" size="md">Inverted <dt-text strength="normal">(auto)</dt-text></dt-text>
+        <dt-stack v-dt-mode:invert gap="400" class="d-bgc-secondary d-p16 d-bar8 d-ba d-bc-default">
+          <dt-stack gap="400" direction="row">
             <dt-icon name="circle-half-filled" size="300" class="d-fc-success" />
+            <dt-text as="p" kind="body" size="sm">Primary</dt-text>
+            <dt-text as="p" kind="body" size="sm" tone="muted">Muted</dt-text>
+            <dt-text as="p" kind="body" size="sm" tone="critical">Critical</dt-text>
+            <dt-link>Link</dt-link>
           </dt-stack>
-          <dt-stack gap="400" direction="row" class="d-py2 d-px8 d-bgc-moderate d-bar4 d-ba">
-            <dt-text as="p">Primary</dt-text>
-            <dt-text as="p" tone="tertiary">Tertiary</dt-text>
-            <dt-text as="p" tone="critical">Critical</dt-text>
-          </dt-stack>
-          <dt-text as="p">
-            <dt-link>Text link</dt-link>
-          </dt-text>
           <dt-stack direction="row" gap="400" class="d-100p">
-            <dt-button class="d-fl1">Button</dt-button>
-            <dt-button class="d-fl1" kind="danger">Button</dt-button>
+            <dt-button size="sm" class="d-fl1">Button</dt-button>
+            <dt-button size="sm" class="d-fl1" kind="danger">Button</dt-button>
           </dt-stack>
         </dt-stack>
-      </dt-mode-island>
-      <dt-mode-island mode="light" class="d-p16 d-bar8 d-ba d-fl1">
-        <dt-stack gap="400">
-          <dt-stack direction="row" gap="400" class="d-jc-space-between">
-            <dt-text as="h3" kind="headline" size="md" density="200">Explicit light</dt-text>
+      </dt-stack>
+      <dt-stack gap="400" class="d-fl1">
+        <dt-text as="h3" kind="headline" size="md">Explicit light</dt-text>
+        <dt-stack v-dt-mode:light gap="400" class="d-bgc-secondary d-p16 d-bar8 d-ba d-bc-default">
+          <dt-stack gap="400" direction="row">
             <dt-icon name="sun" size="300" class="d-fc-success" />
+            <dt-text as="p" kind="body" size="sm">Primary</dt-text>
+            <dt-text as="p" kind="body" size="sm" tone="muted">Muted</dt-text>
+            <dt-text as="p" kind="body" size="sm" tone="critical">Critical</dt-text>
+            <dt-link>Link</dt-link>
           </dt-stack>
-          <dt-stack gap="400" direction="row" class="d-py2 d-px8 d-bgc-moderate d-bar4 d-ba">
-            <dt-text as="p">Primary</dt-text>
-            <dt-text as="p" tone="tertiary">Tertiary</dt-text>
-            <dt-text as="p" tone="critical">Critical</dt-text>
-          </dt-stack>
-          <dt-text as="p">
-            <dt-link>Text link</dt-link>
-          </dt-text>
           <dt-stack direction="row" gap="400" class="d-100p">
-            <dt-button class="d-fl1">Button</dt-button>
-            <dt-button class="d-fl1" kind="danger">Button</dt-button>
+            <dt-button size="sm" class="d-fl1">Button</dt-button>
+            <dt-button size="sm" class="d-fl1" kind="danger">Button</dt-button>
           </dt-stack>
         </dt-stack>
-      </dt-mode-island>
-      <dt-mode-island mode="dark" class="d-p16 d-bar8 d-ba d-fl1">
-        <dt-stack gap="400">
-          <dt-stack direction="row" gap="400" class="d-jc-space-between">
-            <dt-text as="h3" kind="headline" size="md" density="200">Explicit dark</dt-text>
+      </dt-stack>
+      <dt-stack gap="400" class="d-fl1">
+        <dt-text as="h3" kind="headline" size="md">Explicit dark</dt-text>
+        <dt-stack v-dt-mode:dark gap="400" class="d-bgc-secondary d-p16 d-bar8 d-ba d-bc-default">
+          <dt-stack gap="400" direction="row">
             <dt-icon name="moon" size="300" class="d-fc-success" />
+            <dt-text as="p" kind="body" size="sm">Primary</dt-text>
+            <dt-text as="p" kind="body" size="sm" tone="muted">Muted</dt-text>
+            <dt-text as="p" kind="body" size="sm" tone="critical">Critical</dt-text>
+            <dt-link>Link</dt-link>
           </dt-stack>
-          <dt-stack gap="400" direction="row" class="d-py2 d-px8 d-bgc-moderate d-bar4 d-ba">
-            <dt-text as="p">Primary</dt-text>
-            <dt-text as="p" tone="tertiary">Tertiary</dt-text>
-            <dt-text as="p" tone="critical">Critical</dt-text>
-          </dt-stack>
-          <dt-text as="p">
-            <dt-link>Text link</dt-link>
-          </dt-text>
           <dt-stack direction="row" gap="400" class="d-100p">
-            <dt-button class="d-fl1">Button</dt-button>
-            <dt-button class="d-fl1" kind="danger">Button</dt-button>
+            <dt-button size="sm" class="d-fl1">Button</dt-button>
+            <dt-button size="sm" class="d-fl1" kind="danger">Button</dt-button>
           </dt-stack>
         </dt-stack>
-      </dt-mode-island>
+      </dt-stack>
     </dt-stack>
   </dt-stack>
 </code-well-header>
 
 ## Usage
 
-Mode islands create isolated regions that may display in a different color mode, `light`, `dark`, or `inverted`. Useful for forcing a region to a controlled mode for a unique UI purpose.
+Use the `v-dt-mode` directive to control the color mode of a region, component, or element. It creates a scoped region with the specified mode. Descendant elements retain their original styling but are rendered with the specified mode.
 
-### Structure
+<code-well-header>
+  <dt-text v-dt-mode:dark tone="success"> Dark content </dt-text>
+  <dt-text v-dt-mode:light tone="success"> Light content </dt-text>
+  <dt-text v-dt-mode:invert tone="success"> Inverted — opposite of parent or root </dt-text>
+</code-well-header>
+<code-example-tabs
+vueCode='
+<dt-text v-dt-mode:dark tone="success"> Dark content </dt-text>
+<dt-text v-dt-mode:light tone="success"> Light content </dt-text>
+<dt-text v-dt-mode:invert tone="success"> Inverted — opposite of parent or root </dt-text>
+'
+/>
+
+### Inverting
+
+This effectively removes the need for `inverted` props or variants on elements or components.
+
+For example, instead of using `inverted` on a DtButton, use `v-dt-mode:invert`
 
 <code-example-tabs
 vueCode='
-<dt-mode-island>
-  Inverted
-</dt-mode-island>
-<dt-mode-island mode="light">
-  Light
-</dt-mode-island>
-<dt-mode-island mode="dark">
-  Dark
-</dt-mode-island>
+<dt-button>Button</dt-button>
+<dt-button v-dt-mode:invert>Button</dt-button>
 '
 />
+
+<code-well-header>
+  <dt-stack gap="400" direction="row">
+    <dt-button>Button</dt-button>
+    <dt-button v-dt-mode:invert>Button</dt-button>
+  </dt-stack>
+</code-well-header>
+
+### Dynamic mode
+
+Bind a reactive variable as the directive arg to switch modes at runtime.
+
+<code-well-header>
+  <dt-stack gap="500">
+    <dt-stack gap="400" direction="row">
+      <dt-button
+        kind="muted"
+        size="sm"
+        importance="outlined"
+        :active="dynamicMode === 'invert'"
+        @click="dynamicMode = 'invert'"
+      >
+        Invert
+        <template #startIcon="{ iconSize }">
+          <dt-icon name="circle-half-filled" :size="iconSize" />
+        </template>
+      </dt-button>
+      <dt-button
+        kind="muted"
+        size="sm"
+        importance="outlined"
+        :active="dynamicMode === 'light'"
+        @click="dynamicMode = 'light'"
+      >
+        Light
+        <template #startIcon="{ iconSize }">
+          <dt-icon name="sun" :size="iconSize" />
+        </template>
+      </dt-button>
+      <dt-button
+        kind="muted"
+        size="sm"
+        importance="outlined"
+        :active="dynamicMode === 'dark'"
+        @click="dynamicMode = 'dark'"
+      >
+        Dark
+        <template #startIcon="{ iconSize }">
+          <dt-icon name="moon" :size="iconSize" />
+        </template>
+      </dt-button>
+    </dt-stack>
+    <dt-text v-dt-mode:[dynamicMode] align="center" tone="success"> {{ dynamicMode }} mode </dt-text>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-text v-dt-mode:[dynamicMode] align="center" tone="success"> {{ dynamicMode }} mode content </dt-text>
+'
+showHtmlWarning />
+
+### Conditional
+
+Pass a boolean value to conditionally apply or remove the directive. When `false`, mode attributes are removed entirely.
+
+```vue
+<dt-button v-dt-mode:invert="isInverted">Button</dt-button>
+```
 
 ### Guidance
 
@@ -195,43 +275,39 @@ vueCode='
 <template #dont>
 
 - Do not overuse mode islands, respect user theme preference
-- Do not use purely for decoration. Ensure Mode Island use serves a functional and unique purpose
+- Do not use purely for decoration. Ensure mode island use serves a functional and unique purpose
 - Avoid nesting deeply. Keep hierarchy shallow for maintainability
 
 </template>
 
 </dialtone-usage>
 
-### Reactive Mode Updates
+### How it works
 
-Inverted islands reactively track parent/root mode changes. User switches light ↔ dark → inverted islands flip automatically. Even directly modifying the `mode` attribute will also work.
-
-### Brand Theme Protection
-
-`data-dt-brand` (aka "Theme", e.g. "tmo", "sunflower", etc) can not be set on Mode Islands. Brand theme can only be set at root level and are inherited
-
-### Contrast Inheritance
-
-Contrast is not an option to set to a Mode Island. Contrast theme setting is inherited from the root element, i.e. `<html>`.
+- CSS tokens activate via `[data-dt-mode="light"]` and `[data-dt-mode="dark"]` attribute selectors
+- High-contrast tokens layer via `[data-dt-mode][data-dt-contrast="high"]`
+- Contrast is inherited from the root `<html>` element and kept in sync via MutationObserver
+- For `invert` mode, the directive reads the nearest ancestor's `data-dt-mode`, computes the opposite, and reacts when it changes
+- `data-dt-brand` (theme) cannot be set on mode islands — brand is root-level only
 
 ## Variants
 
 ### Inverted
 
-The default mode, inverts the container relative to the parent or root's mode. When `mode` attribute is omitted, it defaults to `inverted`.
+The default mode — inverts relative to the nearest parent mode boundary or the root. When no arg is provided, `v-dt-mode` defaults to invert.
 
 <code-well-header>
-  <dt-mode-island ref="invertedExample" class="d-p16 d-bar8">
-    <dt-text as="p">Inverted mode (opposite of parent)</dt-text>
-  </dt-mode-island>
+  <section ref="invertedExample" v-dt-mode class="d-p16 d-bar8">
+    <dt-text as="p" tone="success">Inverted mode (opposite of parent)</dt-text>
+  </section>
 </code-well-header>
 
 <code-example-tabs
 :htmlCode='() => $refs.invertedExample'
 vueCode='
-<dt-mode-island class="d-p16 d-bar8">
-  <dt-text as="p">Inverted mode (opposite of parent)</dt-text>
-</dt-mode-island>
+<section v-dt-mode class="d-p16 d-bar8">
+  <dt-text as="p" tone="success">Inverted mode (opposite of parent)</dt-text>
+</section>
 '
 showHtmlWarning />
 
@@ -240,17 +316,17 @@ showHtmlWarning />
 Explicitly set to light mode regardless of parent or root mode.
 
 <code-well-header>
-  <dt-mode-island ref="lightExample" mode="light" class="d-p16 d-bar8">
-    <dt-text as="p">Always light mode</dt-text>
-  </dt-mode-island>
+  <section ref="lightExample" v-dt-mode:light class="d-p16 d-bar8">
+    <dt-text as="p" tone="success">Always light mode</dt-text>
+  </section>
 </code-well-header>
 
 <code-example-tabs
 :htmlCode='() => $refs.lightExample'
 vueCode='
-<dt-mode-island mode="light" class="d-p16 d-bar8">
-  <dt-text as="p">Always light mode</dt-text>
-</dt-mode-island>
+<section v-dt-mode:light class="d-p16 d-bar8">
+  <dt-text as="p" tone="success">Always light mode</dt-text>
+</section>
 '
 showHtmlWarning />
 
@@ -259,69 +335,48 @@ showHtmlWarning />
 Explicitly set to dark mode regardless of parent or root mode.
 
 <code-well-header>
-  <dt-mode-island ref="darkExample" mode="dark" class="d-p16 d-bar8">
-    <dt-text as="p">Always dark mode</dt-text>
-  </dt-mode-island>
+  <section ref="darkExample" v-dt-mode:dark class="d-p16 d-bar8">
+    <dt-text as="p" tone="success">Always dark mode</dt-text>
+  </section>
 </code-well-header>
 
 <code-example-tabs
 :htmlCode='() => $refs.darkExample'
 vueCode='
-<dt-mode-island mode="dark" class="d-p16 d-bar8">
+<section v-dt-mode:dark class="d-p16 d-bar8">
   <dt-text as="p">Always dark mode</dt-text>
-</dt-mode-island>
+</section>
 '
 showHtmlWarning />
-
-## Render as
-
-Polymorphic rendering via `as` prop—controls which HTML element wraps content. Ensures proper document structure and semantic markup. Example values: `section` for thematic grouping, `article` for self-contained content. Defaults to `div` where semantics aren't a concern.
-
-<code-well-header>
-  <dt-mode-island ref="sectionExample" as="section" mode="dark" class="d-p16 d-bar8">
-    <dt-text as="p">Rendered as section element</dt-text>
-  </dt-mode-island>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.sectionExample'
-vueCode='
-<dt-mode-island as="section" mode="dark" class="d-p16 d-bar8">
-  <dt-text as="p">Rendered as section element</dt-text>
-</dt-mode-island>
-'
-showHtmlWarning />
-
-**Common values:** `div` (default), `section`, `article`, `nav`, `aside`, `header`, `footer`, `main`
 
 ## Nesting
 
-Mode islands may be nested, though should rarely occur.
+Mode boundaries can be nested. Each `v-dt-mode:invert` reads the nearest parent boundary and flips. In this example the first level is explicitly set to light mode, the second level inverts against that, and the third level inverts again.
 
 <code-well-header>
-  <dt-mode-island ref="nestingExample" mode="light" class="d-p16 d-bar8">
-    <dt-text as="p">Light island</dt-text>
-    <dt-mode-island class="d-p16 d-bar8">
-      <dt-text as="p">Inverted → Dark island</dt-text>
-      <dt-mode-island class="d-p16 d-bar4">
-        <dt-text as="p">Inverted again → Light island</dt-text>
-      </dt-mode-island>
-    </dt-mode-island>
-  </dt-mode-island>
+  <dt-stack gap="500" ref="nestingExample" v-dt-mode:light class="d-p16 d-bar8 d-bgc-secondary d-ba">
+    <dt-text as="p" tone="success" text-box-trim="both">Explicit Light</dt-text>
+    <dt-stack v-dt-mode gap="500" class="d-p16 d-bar8 d-bgc-secondary">
+      <dt-text as="p" tone="success" text-box-trim="both">Inverted (Dark)</dt-text>
+      <dt-stack v-dt-mode gap="500" class="d-p16 d-bar4 d-bgc-secondary">
+        <dt-text as="p" tone="success" text-box-trim="both">Inverted again (Light)</dt-text>
+      </dt-stack>
+    </dt-stack>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
 :htmlCode='() => $refs.nestingExample'
 vueCode='
-<dt-mode-island mode="light" class="d-p16 d-bar8">
-  <dt-text as="p">Light island</dt-text>
-  <dt-mode-island class="d-p16 d-bar8">
-    <dt-text as="p">Inverted → Dark island</dt-text>
-    <dt-mode-island class="d-p16 d-bar4">
-      <dt-text as="p">Inverted again → Light island</dt-text>
-    </dt-mode-island>
-  </dt-mode-island>
-</dt-mode-island>
+<dt-stack gap="500" ref="nestingExample" v-dt-mode:light class="d-p16 d-bar8 d-bgc-secondary d-ba">
+  <dt-text as="p" tone="success" text-box-trim="both">Explicit Light</dt-text>
+  <dt-stack v-dt-mode gap="500" class="d-p16 d-bar8 d-bgc-secondary">
+    <dt-text as="p" tone="success" text-box-trim="both">Inverted (Dark)</dt-text>
+    <dt-stack v-dt-mode gap="500" class="d-p16 d-bar4 d-bgc-secondary">
+      <dt-text as="p" tone="success" text-box-trim="both">Inverted again (Light)</dt-text>
+    </dt-stack>
+  </dt-stack>
+</dt-stack>
 '
 />
 
@@ -346,17 +401,17 @@ The background surface of a Mode Island defaults to the root surface color. To o
       </div>
     </dt-stack>
   </dt-mode-island>
-  <dt-mode-island mode="dark" class="d-p16 d-bar8 d-w100p d-bgc-warning">
+  <dt-mode-island mode="dark" class="d-p16 d-bar8 d-w100p d-bgc-critical">
     <dt-stack gap="400">
-      <dt-text as="p" kind="code" size="xs" tone="tertiary">warning background, dark mode island</dt-text>
+      <dt-text as="p" kind="code" size="xs" tone="tertiary">critical background, dark mode island</dt-text>
       <div>
         <dt-button>Button</dt-button>
       </div>
     </dt-stack>
   </dt-mode-island>
-  <dt-mode-island mode="light" class="d-p16 d-bar8 d-w100p d-bgc-warning">
+  <dt-mode-island mode="light" class="d-p16 d-bar8 d-w100p d-bgc-critical">
     <dt-stack gap="400">
-      <dt-text as="p" kind="code" size="xs" tone="tertiary">warning background, light mode island</dt-text>
+      <dt-text as="p" kind="code" size="xs" tone="tertiary">critical background, light mode island</dt-text>
       <div>
         <dt-button>Button</dt-button>
       </div>
@@ -365,148 +420,163 @@ The background surface of a Mode Island defaults to the root surface color. To o
 </code-well-header>
 
 <code-example-tabs
-:htmlCode='() => $refs.customBackgroundExample'
+:htmlCode='() => $refs.nestingExample'
 vueCode='
-<dt-mode-island class="d-bgc-transparent">
-  <dt-button>Button</dt-button>
-</dt-mode-island>
+<dt-stack gap="500" ref="nestingExample" v-dt-mode:light class="d-p16 d-bar8 d-bgc-secondary d-ba">
+  <dt-text as="p" tone="success" text-box-trim="both">Explicit Light</dt-text>
+  <dt-stack v-dt-mode gap="500" class="d-p16 d-bar8 d-bgc-secondary">
+    <dt-text as="p" tone="success" text-box-trim="both">Inverted (Dark)</dt-text>
+    <dt-stack v-dt-mode gap="500" class="d-p16 d-bar4 d-bgc-secondary">
+      <dt-text as="p" tone="success" text-box-trim="both">Inverted again (Light)</dt-text>
+    </dt-stack>
+  </dt-stack>
+</dt-stack>
 '
-showHtmlWarning />
+/>
 
 ## Examples
 
 ### Callbar
 
+A real-world pattern: the callbar container already exists as a semantic element. The directive applies mode theming directly — no wrapper needed.
+
 <code-well-header>
-  <dt-mode-island ref="callbarExample" class="d-ba d-bc-subtle d-p8 d-py4 d-bar8 d-bs-md d-w100p">
-    <dt-stack direction="row" gap="600">
-      <dt-stack gap="400" direction="row">
-        <dt-avatar
-          full-name="TA"
-          seed="ted-anderson"
-          size="lg"
-        />
-        <dt-stack gap="200">
-          <dt-text kind="label" size="md" density="200">Ted Anderson</dt-text>
-          <dt-stack direction="row" gap="300" align="baseline">
-            <dt-text kind="body" size="xs" tone="tertiary" wrap="nowrap" numeric>(913) 555-6745</dt-text>
-            <dt-text kind="body" size="xs" tone="muted">&bull;</dt-text>
-            <dt-text kind="body" size="xs" tone="tertiary" numeric>21:18</dt-text>
-          </dt-stack>
+  <dt-stack ref="callbarExample" v-dt-mode class="d-ba d-bc-subtle d-bgc-secondary d-p6 d-py4 d-bar12 d-bs-md d-w100p" direction="row" gap="600">
+    <dt-stack gap="400" direction="row">
+      <dt-avatar
+        full-name="TA"
+        seed="ted-anderson"
+        size="lg"
+      />
+      <dt-stack gap="200">
+        <dt-text kind="label" size="md" density="200">Ted Anderson</dt-text>
+        <dt-stack direction="row" gap="300" align="baseline">
+          <dt-text kind="body" size="xs" tone="tertiary" wrap="nowrap" numeric>(913) 555-6745</dt-text>
+          <dt-text kind="body" size="xs" tone="muted">&bull;</dt-text>
+          <dt-text kind="body" size="xs" tone="tertiary" numeric>21:18</dt-text>
         </dt-stack>
       </dt-stack>
-      <dt-stack class="d-fl1 d-jc-center" direction="row" gap="200">
-        <dt-button class="d-px8 d-w72" size="sm" kind="danger">
-          <template #blockStartIcon> <dt-icon name="mic" size="400" /> </template>
-          Unmute
-        </dt-button>
-        <dt-button class="d-px8 d-w72" size="sm" kind="muted" importance="clear">
-          <template #blockStartIcon> <dt-icon name="record-filled" size="400" /> </template>
-          Record
-        </dt-button>
-        <dt-button class="d-px8 d-w72" size="sm" kind="muted" importance="clear">
-          <template #blockStartIcon> <dt-icon name="keypad" size="400" /> </template>
-          Keypad
-        </dt-button>
-        <dt-button class="d-px8 d-w72" size="sm" kind="muted" importance="clear">
-          <template #blockStartIcon> <dt-icon name="user-plus" size="400" /> </template>
-          Add
-        </dt-button>
-        <dt-button class="d-px8 d-w72" size="sm" kind="muted" importance="clear">
-          <template #blockStartIcon> <dt-icon name="more-horizontal" size="400" /> </template>
-          More
-        </dt-button>
-      </dt-stack>
-      <dt-stack>
-        <dt-button class="d-p12" circle size="lg" kind="danger">
-          <template #startIcon> <dt-icon name="phone-hang-up" size="500" /> </template>
-        </dt-button>
-      </dt-stack>
     </dt-stack>
-  </dt-mode-island>
-  <dt-text as="p" tone="muted" class="d-mt8">* Not real, still just an example</dt-text>
+    <dt-stack class="d-fl1" direction="row" gap="200" justify="center">
+      <dt-button class="d-px8 d-w64 d-w64" size="xs" kind="danger">
+        <template #blockStartIcon> <dt-icon name="mic" size="300" /> </template>
+        Unmute
+      </dt-button>
+      <dt-button class="d-px8 d-w64 d-w64" size="xs" kind="muted" importance="clear">
+        <template #blockStartIcon> <dt-icon name="record-filled" size="300" /> </template>
+        Record
+      </dt-button>
+      <dt-button class="d-px8 d-w64 d-w64" size="xs" kind="muted" importance="clear">
+        <template #blockStartIcon> <dt-icon name="keypad" size="300" /> </template>
+        Keypad
+      </dt-button>
+      <dt-button class="d-px8 d-w64 d-w64" size="xs" kind="muted" importance="clear">
+        <template #blockStartIcon> <dt-icon name="user-plus" size="300" /> </template>
+        Add
+      </dt-button>
+      <dt-button class="d-px8 d-w64 d-w64" size="xs" kind="muted" importance="clear">
+        <template #blockStartIcon> <dt-icon name="more-horizontal" size="300" /> </template>
+        More
+      </dt-button>
+    </dt-stack>
+    <dt-stack>
+      <dt-button class="d-p12" circle size="lg" kind="danger">
+        <template #startIcon> <dt-icon name="phone-hang-up" size="500" /> </template>
+      </dt-button>
+    </dt-stack>
+  </dt-stack>
+  <dt-text as="p" kind="label" size="sm" tone="muted" class="d-mt8">* Not real, still just an example</dt-text>
 </code-well-header>
 
 <code-example-tabs
 :htmlCode='() => $refs.callbarExample'
 vueCode='
-<dt-mode-island class="d-ba d-bc-subtle d-p8 d-py4 d-bar8 d-bs-md d-w100p">
-  <dt-stack direction="row" gap="600">
-    <dt-stack gap="400" direction="row">
-      <dt-avatar full-name="TA" seed="ted-anderson" size="lg" />
-      <dt-stack gap="200">
-        <dt-text kind="label" size="md" density="200">Ted Anderson</dt-text>
-        <dt-stack direction="row" gap="300" align="baseline">
-          <dt-text kind="helper" size="sm" tone="tertiary" wrap="nowrap" numeric>(913) 555-6745</dt-text>
-          <dt-text kind="helper" size="sm" tone="muted">&bull;</dt-text>
-          <dt-text kind="helper" size="sm" tone="tertiary" numeric>21:18</dt-text>
-        </dt-stack>
+<dt-stack v-dt-mode class="d-ba d-bc-subtle d-bgc-secondary d-p6 d-py4 d-bar12 d-bs-md d-w100p" direction="row" gap="600">
+  <dt-stack gap="400" direction="row">
+    <dt-avatar
+      full-name="TA"
+      seed="ted-anderson"
+      size="lg"
+    />
+    <dt-stack gap="200">
+      <dt-text kind="label" size="md" density="200">Ted Anderson</dt-text>
+      <dt-stack direction="row" gap="300" align="baseline">
+        <dt-text kind="body" size="xs" tone="tertiary" wrap="nowrap" numeric>(913) 555-6745</dt-text>
+        <dt-text kind="body" size="xs" tone="muted">&bull;</dt-text>
+        <dt-text kind="body" size="xs" tone="tertiary" numeric>21:18</dt-text>
       </dt-stack>
     </dt-stack>
-    <dt-stack class="d-fl1 d-jc-center" direction="row" gap="200">
-      <dt-button class="d-px8 d-w72" size="sm" kind="danger">
-        <template #blockStartIcon><dt-icon name="mic" size="400" /></template>
-        Unmute
-      </dt-button>
-      <!-- Additional buttons... -->
-    </dt-stack>
-    <dt-stack>
-      <dt-button class="d-p12" circle size="lg" kind="danger">
-        <template #startIcon><dt-icon name="phone-hang-up" size="500" /></template>
-      </dt-button>
-    </dt-stack>
   </dt-stack>
-</dt-mode-island>
+  <dt-stack class="d-fl1" direction="row" gap="200" justify="center">
+    <dt-button class="d-px8 d-w64 d-w64" size="xs" kind="danger">
+      <template #blockStartIcon> <dt-icon name="mic" size="300" /> </template>
+      Unmute
+    </dt-button>
+    <dt-button class="d-px8 d-w64 d-w64" size="xs" kind="muted" importance="clear">
+      <template #blockStartIcon> <dt-icon name="record-filled" size="300" /> </template>
+      Record
+    </dt-button>
+    <dt-button class="d-px8 d-w64 d-w64" size="xs" kind="muted" importance="clear">
+      <template #blockStartIcon> <dt-icon name="keypad" size="300" /> </template>
+      Keypad
+    </dt-button>
+    <dt-button class="d-px8 d-w64 d-w64" size="xs" kind="muted" importance="clear">
+      <template #blockStartIcon> <dt-icon name="user-plus" size="300" /> </template>
+      Add
+    </dt-button>
+    <dt-button class="d-px8 d-w64 d-w64" size="xs" kind="muted" importance="clear">
+      <template #blockStartIcon> <dt-icon name="more-horizontal" size="300" /> </template>
+      More
+    </dt-button>
+  </dt-stack>
+  <dt-stack>
+    <dt-button class="d-p12" circle size="lg" kind="danger">
+      <template #startIcon> <dt-icon name="phone-hang-up" size="500" /> </template>
+    </dt-button>
+  </dt-stack>
+</dt-stack>
 '
 showHtmlWarning />
 
 ### Positioned Components
 
-[Popovers](/components/popover.html), [Dropdowns](/components/dropdown.html), and [Hovercards](/components/hovercard.html) are typically rendered at the root element of the DOM tree, and thus inherit the page's mode by default. They can be forced to a specific mode by assigning a Mode Island to its content slot.
+[Popovers](/components/popover.html), [Dropdowns](/components/dropdown.html), [Modals](/components/modal.html), and [Hovercards](/components/hovercard.html) render their content *outside* the normal DOM tree, so `v-dt-mode` on the component itself won't reach the positioned element. These components provide a `contentMode` prop that applies the mode directly to the positioned content.
 
 <code-well-header>
   <dt-stack gap="500">
     <dt-stack gap="200">
       <dt-text as="p" kind="headline" size="md">Hovercard</dt-text>
       <dt-stack gap="400" direction="row">
-        <dt-hovercard ref="hovercardDefault" padding="none" placement="top-start">
+        <dt-hovercard ref="hovercardDefault" placement="top-start">
           <template #anchor>
             <dt-button size="sm" kind="muted" importance="outlined">Default </dt-button>
           </template>
           <template #content>
-            <div class="d-p16 d-bgc-secondary">
-              <ExampleProfileCard />
-            </div>
+            <ExampleProfileCard />
           </template>
         </dt-hovercard>
-        <dt-hovercard padding="none" placement="top-start">
+        <dt-hovercard content-mode="invert" placement="top-start">
           <template #anchor>
             <dt-button size="sm" kind="muted" importance="outlined">Inverted </dt-button>
           </template>
           <template #content>
-            <dt-mode-island class="d-p16 d-bgc-secondary">
-              <ExampleProfileCard />
-            </dt-mode-island>
+            <ExampleProfileCard />
           </template>
         </dt-hovercard>
-        <dt-hovercard padding="none" placement="top-start">
+        <dt-hovercard content-mode="light" placement="top-start">
           <template #anchor>
             <dt-button size="sm" kind="muted" importance="outlined">Light </dt-button>
           </template>
           <template #content>
-            <dt-mode-island mode="light" class="d-p16 d-bgc-secondary">
-              <ExampleProfileCard />
-            </dt-mode-island>
+            <ExampleProfileCard />
           </template>
         </dt-hovercard>
-        <dt-hovercard padding="none" placement="top-start">
+        <dt-hovercard content-mode="dark" placement="top-start">
           <template #anchor>
             <dt-button size="sm" kind="muted" importance="outlined">Dark </dt-button>
           </template>
           <template #content>
-            <dt-mode-island mode="dark" class="d-p16 d-bgc-secondary">
-              <ExampleProfileCard />
-            </dt-mode-island>
+            <ExampleProfileCard />
           </template>
         </dt-hovercard>
       </dt-stack>
@@ -514,44 +584,36 @@ showHtmlWarning />
     <dt-stack gap="200">
       <dt-text as="p" kind="headline" size="md">Popover</dt-text>
       <dt-stack gap="400" direction="row">
-        <dt-popover ref="popoverDefault" padding="none" placement="top-start" dialogClass="d-w216">
+        <dt-popover ref="popoverDefault" placement="top-start" dialogClass="d-w216">
           <template #anchor>
             <dt-button size="sm" kind="muted" importance="outlined"> Default </dt-button>
           </template>
           <template #content="{ close }">
-            <div class="d-p16">
-              <dt-text as="p">This is just a default Popover, and does not use Mode Island.</dt-text>
-            </div>
+            <dt-text as="p">This is just a default Popover, and does not use Mode Island.</dt-text>
           </template>
         </dt-popover>
-        <dt-popover ref="popoverInverted" padding="none" placement="top-start" dialogClass="d-w216">
+        <dt-popover ref="popoverInverted" content-mode="invert" placement="top-start" dialogClass="d-w216">
           <template #anchor>
             <dt-button size="sm" kind="muted" importance="outlined"> Inverted </dt-button>
           </template>
           <template #content="{ close }">
-            <dt-mode-island mode="inverted" class="d-p16 d-bgc-secondary">
-              <dt-text as="p">This Popover's content is in the <dt-text strength="strong">inverted</dt-text> mode.</dt-text>
-            </dt-mode-island>
+            <dt-text as="p">This Popover's content is in the <dt-text strength="strong">inverted</dt-text> mode.</dt-text>
           </template>
         </dt-popover>
-        <dt-popover padding="none" placement="top-start" dialogClass="d-w216">
+        <dt-popover content-mode="light" placement="top-start" dialogClass="d-w216">
           <template #anchor>
             <dt-button size="sm" kind="muted" importance="outlined"> Light </dt-button>
           </template>
           <template #content="{ close }">
-            <dt-mode-island mode="light" class="d-p16 d-bgc-secondary">
-              <dt-text as="p">This Popover's content is in explicit <dt-text strength="strong">light</dt-text> mode.</dt-text>
-            </dt-mode-island>
+            <dt-text as="p">This Popover's content is in explicit <dt-text strength="strong">light</dt-text> mode.</dt-text>
           </template>
         </dt-popover>
-        <dt-popover padding="none" placement="top-start" dialogClass="d-w216">
+        <dt-popover content-mode="dark" placement="top-start" dialogClass="d-w216">
           <template #anchor>
             <dt-button size="sm" kind="muted" importance="outlined"> Dark </dt-button>
           </template>
           <template #content="{ close }">
-            <dt-mode-island mode="dark" class="d-p16 d-bgc-secondary">
-              <dt-text as="p">This Popover's content is in explicit <dt-text strength="strong">dark</dt-text> mode.</dt-text>
-            </dt-mode-island>
+            <dt-text as="p">This Popover's content is in explicit <dt-text strength="strong">dark</dt-text> mode.</dt-text>
           </template>
         </dt-popover>
       </dt-stack>
@@ -580,7 +642,7 @@ showHtmlWarning />
             </dt-list-item>
           </template>
         </dt-dropdown>
-        <dt-dropdown ref="dropdownInverted" navigation-type="arrow-keys" placement="bottom-start" listClass="d-m0" padding="small">
+        <dt-dropdown ref="dropdownInverted" content-mode="invert" navigation-type="arrow-keys" placement="bottom-start">
           <template #anchor="{ attrs }">
             <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined">
               Inverted
@@ -590,20 +652,18 @@ showHtmlWarning />
             </dt-button>
           </template>
           <template #list="{ close }">
-            <dt-mode-island class="d-bgc-secondary d-p4">
-              <dt-list-item
-                v-for="item in items"
-                :key="item.id"
-                role="menuitem"
-                :navigation-type="arrow - keys"
-                @click="close"
-              >
-                {{ item.name }}
-              </dt-list-item>
-            </dt-mode-island>
+            <dt-list-item
+              v-for="item in items"
+              :key="item.id"
+              role="menuitem"
+              :navigation-type="arrow - keys"
+              @click="close"
+            >
+              {{ item.name }}
+            </dt-list-item>
           </template>
         </dt-dropdown>
-        <dt-dropdown navigation-type="arrow-keys" placement="bottom-start" listClass="d-m0" padding="small">
+        <dt-dropdown content-mode="light" navigation-type="arrow-keys" placement="bottom-start">
           <template #anchor="{ attrs }">
             <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined">
               Light
@@ -613,20 +673,18 @@ showHtmlWarning />
             </dt-button>
           </template>
           <template #list="{ close }">
-            <dt-mode-island mode="light" class="d-bgc-secondary d-p4">
-              <dt-list-item
-                v-for="item in items"
-                :key="item.id"
-                role="menuitem"
-                :navigation-type="arrow - keys"
-                @click="close"
-              >
-                {{ item.name }}
-              </dt-list-item>
-            </dt-mode-island>
+            <dt-list-item
+              v-for="item in items"
+              :key="item.id"
+              role="menuitem"
+              :navigation-type="arrow - keys"
+              @click="close"
+            >
+              {{ item.name }}
+            </dt-list-item>
           </template>
         </dt-dropdown>
-        <dt-dropdown navigation-type="arrow-keys" placement="bottom-start" listClass="d-m0" padding="small">
+        <dt-dropdown content-mode="dark" navigation-type="arrow-keys" placement="bottom-start">
           <template #anchor="{ attrs }">
             <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined">
               Dark
@@ -636,17 +694,15 @@ showHtmlWarning />
             </dt-button>
           </template>
           <template #list="{ close }">
-            <dt-mode-island mode="dark" class="d-bgc-secondary d-p4">
-              <dt-list-item
-                v-for="item in items"
-                :key="item.id"
-                role="menuitem"
-                :navigation-type="arrow - keys"
-                @click="close"
-              >
-                {{ item.name }}
-              </dt-list-item>
-            </dt-mode-island>
+            <dt-list-item
+              v-for="item in items"
+              :key="item.id"
+              role="menuitem"
+              :navigation-type="arrow - keys"
+              @click="close"
+            >
+              {{ item.name }}
+            </dt-list-item>
           </template>
         </dt-dropdown>
       </dt-stack>
@@ -657,29 +713,25 @@ showHtmlWarning />
 <code-example-tabs
 vueCode='
 <!-- Hovercard -->
-<dt-hovercard padding="none" placement="top-start">
+<dt-hovercard ref="hovercardDefault" placement="top-start" content-mode="invert">
   <template #anchor>
-    <dt-button size="sm" kind="muted" importance="outlined">Inverted</dt-button>
+    <dt-button size="sm" kind="muted" importance="outlined">Default</dt-button>
   </template>
   <template #content>
-    <dt-mode-island class="d-p16 d-bgc-secondary">
-      <ExampleProfileCard />
-    </dt-mode-island>
+    <ExampleProfileCard />
   </template>
 </dt-hovercard>
 <!-- Popover -->
-<dt-popover padding="none" placement="top-start" dialogClass="d-w216">
+<dt-popover ref="popoverInverted" content-mode="invert" placement="top-start" dialogClass="d-w216">
   <template #anchor>
-    <dt-button size="sm" kind="muted" importance="outlined">Inverted</dt-button>
+    <dt-button size="sm" kind="muted" importance="outlined"> Inverted </dt-button>
   </template>
   <template #content="{ close }">
-    <dt-mode-island mode="inverted" class="d-p16 d-bgc-secondary">
-      <dt-text as="p">This Popover content is in the <dt-text strength="strong">inverted</dt-text> mode.</dt-text>
-    </dt-mode-island>
+    <dt-text as="p">This Popover content is in the <dt-text strength="strong">inverted</dt-text> mode.</dt-text>
   </template>
 </dt-popover>
 <!-- Dropdown -->
-<dt-dropdown navigation-type="arrow-keys" placement="bottom-start" listClass="d-m0" padding="small">
+<dt-dropdown ref="dropdownInverted" content-mode="invert" navigation-type="arrow-keys" placement="bottom-start">
   <template #anchor="{ attrs }">
     <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined">
       Inverted
@@ -689,22 +741,60 @@ vueCode='
     </dt-button>
   </template>
   <template #list="{ close }">
-    <dt-mode-island class="d-bgc-secondary d-p4">
-      <dt-list-item
-        v-for="item in items"
-        :key="item.id"
-        role="menuitem"
-        @click="close"
-      >
-        {{ item.name }}
-      </dt-list-item>
-    </dt-mode-island>
+    <dt-list-item
+      v-for="item in items"
+      :key="item.id"
+      role="menuitem"
+      :navigation-type="arrow - keys"
+      @click="close"
+    >
+      {{ item.name }}
+    </dt-list-item>
   </template>
 </dt-dropdown>
 '
 />
 
+## Component
+
+The `<dt-mode-island>` component is the underlying abstraction that the directive builds on. The key rendered difference is that it creates a wrapper element, while the directive attaches to mode to the existing element.
+
+<dt-notice
+  kind="info"
+  class="d-wmx100p d-mt24 d-mb24"
+  hide-close
+  title="Note"
+>
+  The only real case where you might want to use the component is when you need to create a container element that doesn't already exist, but even then, you can create any kind of containing element with the directive e.g. <code>&lt;span v-dt-mode:invert"&gt;...&lt;/span&gt;</code>.
+</dt-notice>
+
+<code-example-tabs
+vueCode='
+<dt-mode-island as="section">
+  Rendered as a section element inverted
+</dt-mode-island>
+<dt-mode-island>
+  Inverted (default)
+</dt-mode-island>
+<dt-mode-island mode="light">
+  Light
+</dt-mode-island>
+<dt-mode-island mode="dark">
+  Dark
+</dt-mode-island>
+'
+/>
+
 ## Vue API
+
+### Directive
+
+```js
+import { DtModeDirective } from '@dialpad/dialtone-vue';
+app.use(DtModeDirective);
+```
+
+### Component
 
 <component-vue-api component-name="modeisland" />
 
@@ -725,6 +815,8 @@ const {
   setMode,
   setContrast,
 } = useThemeManager({ includeThemes: false });
+
+const dynamicMode = ref('invert');
 
 const items = ref([
   { id: '1', name: 'Option 1' },

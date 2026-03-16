@@ -1,6 +1,6 @@
 <template>
-  <dt-mode-island
-    :mode="mode"
+  <div
+    v-dt-mode:[mode]
     class="d-p16 d-bgc-secondary"
   >
     <dt-stack as="section" gap="500">
@@ -14,7 +14,7 @@
         />
       </div>
     </dt-stack>
-  </dt-mode-island>
+  </div>
 </template>
 
 <script setup>

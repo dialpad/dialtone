@@ -340,6 +340,36 @@ vueCode='
 '
 />
 
+## Content Mode
+
+Dropdown content renders outside the DOM tree. Use the `contentMode` prop to apply color mode (invert, light, dark) to the positioned content. See [Positioned Components](/components/mode-island.html#positioned-components) for details.
+
+<code-well-header>
+  <dt-dropdown content-mode="invert" navigation-type="arrow-keys" placement="bottom-start">
+    <template #anchor="{ attrs }">
+      <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined">
+        Inverted Dropdown
+        <template #endIcon="{ iconSize }">
+          <dt-icon name="chevron-down" :size="iconSize" />
+        </template>
+      </dt-button>
+    </template>
+    <template #list="{ close }">
+      <dt-list-item role="menuitem" @click="close">Option 1</dt-list-item>
+      <dt-list-item role="menuitem" @click="close">Option 2</dt-list-item>
+      <dt-list-item role="menuitem" @click="close">Option 3</dt-list-item>
+    </template>
+  </dt-dropdown>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-dropdown content-mode="invert">...</dt-dropdown>
+<dt-dropdown content-mode="dark">...</dt-dropdown>
+<dt-dropdown content-mode="light">...</dt-dropdown>
+'
+/>
+
 ## Vue API
 
 <component-vue-api component-name="dropdown" :also-import="['dropdownseparator']" />

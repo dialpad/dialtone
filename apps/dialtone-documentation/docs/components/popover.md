@@ -418,6 +418,29 @@ const e = new Event('dt-popover-close');
 window.dispatchEvent(e);
 ```
 
+## Content Mode
+
+Popover content renders outside the DOM tree. Use the `contentMode` prop to apply color mode (invert, light, dark) to the positioned content. See [Positioned Components](/components/mode-island.html#positioned-components) for details.
+
+<code-well-header>
+  <dt-popover content-mode="invert" placement="bottom-start" dialogClass="d-w216">
+    <template #anchor>
+      <dt-button size="sm" kind="muted" importance="outlined">Inverted Popover</dt-button>
+    </template>
+    <template #content="{ close }">
+      <dt-text as="p">This Popover's content is in the <dt-text strength="strong">inverted</dt-text> mode.</dt-text>
+    </template>
+  </dt-popover>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-popover content-mode="invert">...</dt-popover>
+<dt-popover content-mode="dark">...</dt-popover>
+<dt-popover content-mode="light">...</dt-popover>
+'
+/>
+
 ## Vue API
 
 <component-vue-api component-name="popover" />

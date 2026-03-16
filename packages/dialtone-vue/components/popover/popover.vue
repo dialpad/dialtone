@@ -62,6 +62,7 @@
         }"
         :css="$attrs.css"
         :tabindex="contentTabindex"
+        v-bind="modeAttrs"
         v-on="popoverListeners"
         @mouseenter="onMouseEnterAnchor"
         @mouseleave="onMouseLeaveAnchor"
@@ -136,6 +137,7 @@ import {
 import { getUniqueString, hasSlotContent, isOutOfViewPort, warnIfUnmounted, disableRootScrolling, enableRootScrolling, returnFirstEl } from '@/common/utils';
 import { DtLazyShow } from '@/components/lazy_show';
 import ModalMixin from '@/common/mixins/modal';
+import ModeMixin from '@/common/mixins/mode';
 import { createTippyPopover, getPopperOptions } from './tippy_utils';
 import PopoverHeaderFooter from './popover_header_footer.vue';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
@@ -157,7 +159,7 @@ export default {
     PopoverHeaderFooter,
   },
 
-  mixins: [ModalMixin],
+  mixins: [ModalMixin, ModeMixin],
 
   props: {
     /**
@@ -739,6 +741,10 @@ export default {
    *     METHODS    *
    ******************/
   methods: {
+
+    getModeReferenceEl () {
+      return this.$refs.anchor;
+    },
 
     hasIntersectedViewport (entries) {
       const dialog = entries?.[0]?.target;
