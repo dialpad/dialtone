@@ -18,30 +18,24 @@ Once installed, you can import icons and illustrations in a couple different way
 
 ```js
 // named import (preferred on vite)
-import { DtIconAccessibility } from '@dialpad/dialtone-icons/vue2'; // Vue 2.6+
-import { DtIconAccessibility } from '@dialpad/dialtone-icons/vue3'; // Vue 3+
-import { DtIllustrationBlankSpace } from '@dialpad/dialtone-icons/vue2'; // Vue 2.6+
-import { DtIllustrationBlankSpace } from '@dialpad/dialtone-icons/vue3'; // Vue 3+
+import { DtIconAccessibility } from '@dialpad/dialtone-icons/vue';
+import { DtIllustrationBlankSpace } from '@dialpad/dialtone-icons/vue';
 
 // default import (preferred on webpack)
-import DtIconAccessibility from '@dialpad/dialtone-icons/vue2/accessibility'; // Vue 2.6+
-import DtIconAccessibility from '@dialpad/dialtone-icons/vue3/accessibility'; // Vue 3+
-import DtIllustrationBlankSpace from '@dialpad/dialtone-icons/vue2/blank-space'; // Vue 2.6+
-import DtIllustrationBlankSpace from '@dialpad/dialtone-icons/vue3/blank-space'; // Vue 3+
+import DtIconAccessibility from '@dialpad/dialtone-icons/vue/accessibility';
+import DtIllustrationBlankSpace from '@dialpad/dialtone-icons/vue/blank-space';
 ```
 
 - All the icon components:
 
 ```js
-import { icons } from '@dialpad/dialtone-icons/vue2'; // Vue 2.6+
-import { icons } from '@dialpad/dialtone-icons/vue3'; // Vue 3+
+import { icons } from '@dialpad/dialtone-icons/vue';
 ```
 
 - All the illustration components:
 
 ```js
-import { illustrations } from '@dialpad/dialtone-icons/vue2'; // Vue 2.6+
-import { illustrations } from '@dialpad/dialtone-icons/vue3'; // Vue 3+
+import { illustrations } from '@dialpad/dialtone-icons/vue';
 ```
 
 - Importing icon related data

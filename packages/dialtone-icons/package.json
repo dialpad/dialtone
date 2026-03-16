@@ -7,6 +7,25 @@
     "vue3/dist"
   ],
   "exports": {
+    "./vue": {
+      "types": "./vue3/dist/types/index.d.ts",
+      "import": "./vue3/dist/dialtone-icons.js",
+      "require": "./vue3/dist/dialtone-icons.cjs"
+    },
+    "./vue/*": {
+      "types": [
+        "./vue3/dist/types/src/icons/*.vue.d.ts",
+        "./vue3/dist/types/src/illustrations/*.vue.d.ts"
+      ],
+      "import": [
+        "./vue3/dist/components/icons/*.js",
+        "./vue3/dist/components/illustrations/*.js"
+      ],
+      "require": [
+        "./vue3/dist/components/icons/*.cjs",
+        "./vue3/dist/components/illustrations/*.cjs"
+      ]
+    },
     "./vue3": {
       "types": "./vue3/dist/types/index.d.ts",
       "import": "./vue3/dist/dialtone-icons.js",

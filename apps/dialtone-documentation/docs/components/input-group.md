@@ -61,7 +61,7 @@ The Vue model is dependant on the child component(s) implementing the provided `
 import {
   DtInputMixin,
   DtGroupableInputMixin,
-} from '@dialpad/dialtone/vue3';
+} from '@dialpad/dialtone/vue';
 
 export default {
   name: 'MyInputElement',
@@ -279,7 +279,7 @@ If your input(s) require additional logic in order to be grouped then you can ex
 
 ```vue
 <script>
-import { DtInputGroup } from '@dialpad/dialtone/vue3';
+import { DtInputGroup } from '@dialpad/dialtone/vue';
 
 export default {
   name: "MyComponent",

@@ -167,7 +167,7 @@ Find Vue components from Dialtone's component library with props, events, and sl
 
 **Tool:** `search_icons`
 
-Find icons from Dialtone's icon library and learn how to use icon components. Icons are imported from `@dialpad/dialtone-icons/vue3`, not `@dialpad/dialtone-vue`.
+Find icons from Dialtone's icon library and learn how to use icon components. Icons are imported from `@dialpad/dialtone-icons/vue`, not `@dialpad/dialtone-vue`.
 
 **Example queries:**
 
@@ -232,7 +232,7 @@ When adding icons to your interface:
 User: "Show me all notification-related icons"
 Claude: [Uses search_icons tool]
 Result: bell, bell-ring, bell-off, bell-plus, bell-minus
-        Import: import { IconBell } from '@dialpad/dialtone-icons/vue3'
+        Import: import { IconBell } from '@dialpad/dialtone-icons/vue'
 ```
 
 ## Configuration

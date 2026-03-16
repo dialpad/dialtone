@@ -105,25 +105,25 @@ import "@dialpad/dialtone/tokens/tokens-dp-light.css" // Dialpad light brand
 
 ```js
 // Named import
-import { DtIconArrowUp } from '@dialpad/dialtone-icons/vue3';
-import { DtIllustrationBlankSpace } from '@dialpad/dialtone-icons/vue3';
+import { DtIconArrowUp } from '@dialpad/dialtone-icons/vue';
+import { DtIllustrationBlankSpace } from '@dialpad/dialtone-icons/vue';
 
 // Default import (Preferred if using webpack as it is tree-shakeable by default)
-import DtIconArrowUp from '@dialpad/dialtone-icons/vue3/arrow-up';
-import DtIllustrationBlankSpace from '@dialpad/dialtone-icons/vue3/blank-space';
+import DtIconArrowUp from '@dialpad/dialtone-icons/vue/arrow-up';
+import DtIllustrationBlankSpace from '@dialpad/dialtone-icons/vue/blank-space';
 ```
 
 #### Dialtone Vue components
 
 ```js
 // Named import
-import { DtButton } from "@dialpad/dialtone/vue3"
+import { DtButton } from "@dialpad/dialtone/vue"
 
 // Default import (Preferred if using webpack as it is tree-shakeable by default)
-import { DtButton } from "@dialpad/dialtone/vue3/lib/button"
+import { DtButton } from "@dialpad/dialtone/vue/lib/button"
 ```
 
-> **Note:** Dialtone Vue 2 has been deprecated. Please migrate to Dialtone Vue 3. The latest version of Dialtone that still supports Vue 2 is 9.154.0.
+> **Note:** Dialtone Vue 2 has been deprecated. Please migrate to Dialtone Vue. The latest version of Dialtone that still supports Vue 2 is 9.154.0.
 
 #### Dialtone MCP Server
 
@@ -186,7 +186,7 @@ they have the same package name e.g: `@dialpad/dialtone-vue`.
 
 - Dialtone CSS
 - Dialtone Tokens
-- Dialtone Vue 3
+- Dialtone Vue
 
 ### Tree-shaking
 
@@ -218,9 +218,9 @@ Packages expose ESM for bundlers to statically analyze and tree-shake, with CJS 
 Exports maps expose subpath entries so consumers can import only what they need (which aids tree-shaking and avoids
 pulling entire bundles):
 
-- `@dialpad/dialtone` exposes `./vue3/lib/*` map to individual component imports.
+- `@dialpad/dialtone` exposes `./vue/lib/*` map to individual component imports.
 - `@dialpad/dialtone-vue` exposes `./lib/*` for individual component imports.
-- `@dialpad/dialtone-icons` exposes `./vue3/*` for individual icon/illustration imports.
+- `@dialpad/dialtone-icons` exposes `./vue/*` for individual icon/illustration imports.
 
 ### Available packages
 
@@ -231,7 +231,7 @@ pulling entire bundles):
 | [Dialtone emojis](packages/dialtone-emojis/README.md)            | Emoji assets                                                                                                                                       | ![NPM Version](https://img.shields.io/npm/v/%40dialpad%2Fdialtone-emojis?logo=npm&color=7C52FF)           |
 | [Dialtone icons](packages/dialtone-icons/README.md)              | Resources needed to implement icons on your application that conform to Dialpad’s design principles and best practices                             | ![NPM Version](https://img.shields.io/npm/v/%40dialpad%2Fdialtone-icons?logo=npm&color=7C52FF)            |
 | [Dialtone tokens](packages/dialtone-tokens/README.md)            | Design tokens for Dialpad's design system Dialtone and everything related to building and publishing them                                          | ![NPM Version](https://img.shields.io/npm/v/%40dialpad%2Fdialtone-tokens?logo=npm&color=7C52FF)           |
-| [Dialtone vue](packages/dialtone-vue/README.md)               | Vue components library to simplify and standardize the use of common UI patterns and behaviour across all Dialpad projects (compatible with Vue 3) | ![NPM Version](https://img.shields.io/npm/v/%40dialpad%2Fdialtone-vue?logo=npm&color=7C52FF)         |
+| [Dialtone Vue](packages/dialtone-vue/README.md)                  | Vue components library to simplify and standardize the use of common UI patterns and behaviour across all Dialpad projects                         | ![NPM Version](https://img.shields.io/npm/v/%40dialpad%2Fdialtone-vue?logo=npm&color=7C52FF)              |
 | [ESlint plugin](packages/eslint-plugin-dialtone/README.md)       | ESLint plugin containing rules to help developers maintain dialtone recommended practices                                                          | ![NPM Version](https://img.shields.io/npm/v/%40dialpad%2Feslint-plugin-dialtone?logo=npm&color=7C52FF)    |
 | [Stylelint plugin](packages/stylelint-plugin-dialtone/README.md) | StyleLint plugin containing rules to help developers maintain dialtone recommended practices for CSS                                               | ![NPM Version](https://img.shields.io/npm/v/%40dialpad%2Fstylelint-plugin-dialtone?logo=npm&color=7C52FF) |
 
@@ -349,13 +349,13 @@ This will start the documentation site and watch the library for changes, it wil
 
 Access the local server at `http://localhost:4000`
 
-##### Dialtone Vue 3 storybook
+##### Dialtone Vue storybook
 
 ```bash
 nx run dialtone-vue:start
 ```
 
-Access the local storybook server for Dialtone Vue 3 via `http://localhost:9011/`
+Access the local storybook server for Dialtone Vue via `http://localhost:9011/`
 
 #### Common Commands
 

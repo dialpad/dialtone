@@ -61,7 +61,7 @@ vueCode='
 Import the directive and styling from dialtone
 
 ```javascript
-import { DtScrollbarDirective } from "@dialpad/dialtone/vue3";
+import { DtScrollbarDirective } from "@dialpad/dialtone/vue";
 
 // Import styling
 import 'overlayscrollbars/overlayscrollbars.css';

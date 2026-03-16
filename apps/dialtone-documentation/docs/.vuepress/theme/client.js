@@ -135,7 +135,7 @@ async function registerDialtoneCombinator (app) {
 }
 
 async function registerDialtoneIcons (app) {
-  const icons = await import('@dialpad/dialtone-icons/vue3');
+  const icons = await import('@dialpad/dialtone-icons/vue');
 
   const dialtoneIcons = [];
   const dialtoneIllustrations = [];

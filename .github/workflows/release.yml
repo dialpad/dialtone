@@ -16,7 +16,7 @@ on:
           - icons
           - language-server
           - tokens
-          - vue3
+          - vue
           - eslint-plugin
           - stylelint-plugin
           - postcss-responsive-variations
@@ -99,7 +99,7 @@ jobs:
         run: pnpm nx run dialtone-tokens:release
 
       - name: Release Dialtone Vue ${{ env.RELEASE_TAG }}
-        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'vue3' }}
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'vue' }}
         run: pnpm nx run dialtone-vue:release
 
       - name: Release Dialtone ESLint Plugin ${{ env.RELEASE_TAG }}
