@@ -25,7 +25,7 @@ keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFil
   <dt-stack direction="row" gap="400">
       <dt-filter-pill
         label="Simple example"
-        v-model="baseFilters"
+        :model-value="[{ name: 'Option 1' }, { name: 'Option 2' }, { name: 'Option 3' }]"
         ref="simpleExample"
       >
       </dt-filter-pill>
@@ -34,20 +34,29 @@ keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFil
 
 <code-example-tabs
 :htmlCode='() => $refs.simpleExample'
-vueCode='<dt-filter-pill v-model="[...]" label="..."/>'
+vueCode='<dt-filter-pill
+  v-model="filters"
+  label="Simple example"
+/>
+// filters = [{ name: &quot;Option 1&quot; }, { name: &quot;Option 2&quot; }, { name: &quot;Option 3&quot; }]'
 showHtmlWarning />
 
 ### Disabled
 
 <code-well-header>
   <dt-stack direction="row" gap="400">
-    <dt-filter-pill label="Disabled filter" disabled ref="disabledFilter"></dt-filter-pill>
+    <dt-filter-pill label="Disabled filter" disabled :model-value="[{ name: 'Option 1' }, { name: 'Option 2' }, { name: 'Option 3' }]" ref="disabledFilter"></dt-filter-pill>
   </dt-stack>
 </code-well-header>
 
 <code-example-tabs
 :htmlCode='() => $refs.disabledFilter'
-vueCode='<dt-filter-pill v-model="[...]" label="..." disabled/>'
+vueCode='<dt-filter-pill
+  v-model="filters"
+  label="Disabled filter"
+  disabled
+/>
+// filters = [{ name: &quot;Option 1&quot; }, { name: &quot;Option 2&quot; }, { name: &quot;Option 3&quot; }]'
 showHtmlWarning />
 
 ### Active
@@ -56,7 +65,7 @@ showHtmlWarning />
   <dt-stack direction="row" gap="400">
       <dt-filter-pill
         label="Active example"
-        v-model="activeFilters"
+        :model-value="[{ name: 'Option 1' }, { name: 'Option 2' }, { name: 'Option 3', active: true }]"
         ref="activeExample"
       >
       </dt-filter-pill>
@@ -65,7 +74,11 @@ showHtmlWarning />
 
 <code-example-tabs
 :htmlCode='() => $refs.activeExample'
-vueCode='<dt-filter-pill v-model="[...]" label="..."/>'
+vueCode='<dt-filter-pill
+  v-model="filters"
+  label="Active example"
+/>
+// filters = [{ name: &quot;Option 1&quot; }, { name: &quot;Option 2&quot; }, { name: &quot;Option 3&quot;, active: true }]'
 showHtmlWarning />
 
 ### Clearable
@@ -78,7 +91,7 @@ It will emit the `reset` event when clicked.
     <dt-filter-pill
       label="Clearable example"
       ref="clearableExample"
-      v-model="clearableFilters"
+      :model-value="[{ name: 'Option 1' }, { name: 'Option 2', active: true }, { name: 'Option 3' }]"
     >
     </dt-filter-pill>
   </dt-stack>
@@ -86,7 +99,11 @@ It will emit the `reset` event when clicked.
 
 <code-example-tabs
 :htmlCode='() => $refs.clearableExample'
-vueCode='<dt-filter-pill label="..." v-model="[...]" />'
+vueCode='<dt-filter-pill
+  v-model="filters"
+  label="Clearable example"
+/>
+// filters = [{ name: &quot;Option 1&quot; }, { name: &quot;Option 2&quot;, active: true }, { name: &quot;Option 3&quot; }]'
 showHtmlWarning />
 
 ### Non Clearable
@@ -97,8 +114,8 @@ Setting the `hide-clear` prop will hide the reset/clear button in case you don't
   <dt-stack direction="row" gap="400">
     <dt-filter-pill
       label="Non Clearable example"
-      ref="clearableExample"
-      v-model="nonClearableFilters"
+      ref="nonClearableExample"
+      :model-value="[{ name: 'Option 1', active: true }, { name: 'Option 2' }, { name: 'Option 3' }]"
       hide-clear
     >
     </dt-filter-pill>
@@ -106,8 +123,13 @@ Setting the `hide-clear` prop will hide the reset/clear button in case you don't
 </code-well-header>
 
 <code-example-tabs
-:htmlCode='() => $refs.clearableExample'
-vueCode='<dt-filter-pill label="..." v-model="[...]" hide-clear />'
+:htmlCode='() => $refs.nonClearableExample'
+vueCode='<dt-filter-pill
+  v-model="filters"
+  label="Non Clearable example"
+  hide-clear
+/>
+// filters = [{ name: &quot;Option 1&quot;, active: true }, { name: &quot;Option 2&quot; }, { name: &quot;Option 3&quot; }]'
 showHtmlWarning />
 
 ### Sizes
@@ -136,8 +158,8 @@ Using the "default" slot, you're able to override the `label` prop
 <code-well-header>
   <dt-stack direction="row" gap="400">
     <dt-filter-pill
-      ref="clearableExample"
-      v-model="defaultSlotFilters"
+      ref="defaultSlotExample"
+      :model-value="[{ name: 'Option 1' }, { name: 'Option 2' }]"
     >
       <template #default>
         With Default slot
@@ -147,12 +169,13 @@ Using the "default" slot, you're able to override the `label` prop
 </code-well-header>
 
 <code-example-tabs
-:htmlCode='() => $refs.clearableExample'
-vueCode='<dt-filter-pill label="..." v-model="[...]">
+:htmlCode='() => $refs.defaultSlotExample'
+vueCode='<dt-filter-pill v-model="filters">
   <template #default>
     With Default slot
   </template>
-</dt-filter-pill>'
+</dt-filter-pill>
+// filters = [{ name: &quot;Option 1&quot; }, { name: &quot;Option 2&quot; }]'
 showHtmlWarning />
 
 ### With content slot
@@ -164,8 +187,8 @@ to create custom filter pill.
   <dt-stack direction="row" gap="400">
     <dt-filter-pill
       label="With content slot"
-      ref="clearableExample"
-      v-model="contentSlotFilters"
+      ref="contentSlotExample"
+      :model-value="[{ name: 'Option 1' }, { name: 'Option 2' }]"
     >
       <template #content>
         Content slot example
@@ -175,12 +198,13 @@ to create custom filter pill.
 </code-well-header>
 
 <code-example-tabs
-:htmlCode='() => $refs.clearableExample'
-vueCode='<dt-filter-pill label="..." v-model="[...]">
+:htmlCode='() => $refs.contentSlotExample'
+vueCode='<dt-filter-pill v-model="filters" label="With content slot">
   <template #content>
     Content slot example
   </template>
-</dt-filter-pill>'
+</dt-filter-pill>
+// filters = [{ name: &quot;Option 1&quot; }, { name: &quot;Option 2&quot; }]'
 showHtmlWarning />
 
 ## Content Mode
@@ -208,48 +232,5 @@ vueCode='
 <component-class-table component-name="filter-pill"></component-class-table>
 
 <script setup>
-import { ref } from 'vue';
-import { DtIconSearch, DtIconClose } from '@dialpad/dialtone-icons/vue';
-
-const inputValue = ref('');
-const exampleFilters = ref([
-  {name: 'Option 1'},
-  {name: 'Option 2'},
-]);
-const baseFilters = ref([
-  {name: 'Option 1'},
-  {name: 'Option 2'},
-  {name: 'Option 3'},
-]);
-const activeFilters = ref([
-  {name: 'Option 1'},
-  {name: 'Option 2'},
-  {name: 'Option 3', active: true}
-]);
-const clearableFilters = ref([
-  {name: 'Option 1'},
-  {name: 'Option 2', active: true},
-  {name: 'Option 3'}
-]);
-const nonClearableFilters = ref([
-  {name: 'Option 1', active: true},
-  {name: 'Option 2'},
-  {name: 'Option 3'}
-]);
-const defaultSlotFilters = ref([
-  {name: 'Option 1'},
-  {name: 'Option 2'},
-]);
-const contentSlotFilters = ref([
-  {name: 'Option 1'},
-  {name: 'Option 2'},
-]);
 const sizes = Object.keys(window.DIALTONE_CONSTANTS.BUTTON_SIZE_MODIFIERS);
-const sizeNames = {
-  xs: 'Extra small',
-  sm: 'Small',
-  md: 'Medium',
-  lg: 'Large',
-  xl: 'Extra Large',
-};
 </script>
