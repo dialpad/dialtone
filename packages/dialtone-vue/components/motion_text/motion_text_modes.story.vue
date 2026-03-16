@@ -34,7 +34,7 @@
         align="center"
         class="d-p24 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn128"
       >
-        <dt-recipe-motion-text
+        <dt-motion-text
           :ref="el => { if (el) modeRefs[mode.value] = el }"
           :text="exampleText"
           :animation-mode="mode.value"
@@ -49,14 +49,14 @@
 </template>
 
 <script>
-import { DtRecipeMotionText, MOTION_TEXT_ANIMATION_MODES } from '@/recipes/motion/motion_text';
+import { DtMotionText, MOTION_TEXT_ANIMATION_MODES } from '@/components/motion_text';
 import { DtButton } from '@/components/button';
 import { DtStack } from '@/components/stack';
 
 export default {
-  name: 'DtRecipeMotionTextModesStory',
+  name: 'DtMotionTextModesStory',
   components: {
-    DtRecipeMotionText,
+    DtMotionText,
     DtButton,
     DtStack,
   },

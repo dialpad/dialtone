@@ -441,6 +441,18 @@ export default {
     },
 
     /**
+     * Controls how whitespace is handled when parsing HTML content.
+     * - 'full': All whitespace is preserved
+     * - true: Whitespace in inline content is preserved, whitespace-only nodes between blocks are removed
+     * - false: Standard HTML whitespace collapsing
+     * @values full, true, false
+     */
+    preserveWhitespace: {
+      type: [Boolean, String],
+      default: 'full',
+    },
+
+    /**
      * Show text in HTML div tags instead of paragraph tags
      */
     useDivTags: {
@@ -1024,7 +1036,7 @@ export default {
         extensions: this.extensions,
         shouldRerenderOnTransaction: false,
         parseOptions: {
-          preserveWhitespace: 'full',
+          preserveWhitespace: this.preserveWhitespace,
         },
 
         editorProps: {
@@ -1156,7 +1168,10 @@ export default {
       }
 
       // Otherwise replace the content (resets the cursor position).
-      this.editor.commands.setContent(newValue, { emitUpdate: false, parseOptions: { preserveWhitespace: 'full' }});
+      this.editor.commands.setContent(newValue, {
+        emitUpdate: false, 
+        parseOptions: { preserveWhitespace: this.preserveWhitespace },
+      });
     },
 
     destroyEditor () {

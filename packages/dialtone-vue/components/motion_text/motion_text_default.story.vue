@@ -4,7 +4,7 @@
     align="center"
     class="d-hmn256 d-p24"
   >
-    <dt-recipe-motion-text
+    <dt-motion-text
       ref="motionText"
       :text="text"
       :animation-mode="animationMode"
@@ -24,13 +24,13 @@
 </template>
 
 <script>
-import { DtRecipeMotionText } from '@/recipes/motion/motion_text';
+import { DtMotionText } from '@/components/motion_text';
 import { DtStack } from '@/components/stack';
 
 export default {
-  name: 'DtRecipeMotionTextDefaultStory',
+  name: 'DtMotionTextDefaultStory',
   components: {
-    DtRecipeMotionText,
+    DtMotionText,
     DtStack,
   },
 

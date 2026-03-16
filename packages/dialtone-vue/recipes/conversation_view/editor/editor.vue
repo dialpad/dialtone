@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="editorRoot"
     class="d-recipe-editor"
     v-bind="addClassStyleAttrs($attrs)"
     data-qa="dt-recipe-editor"
@@ -68,7 +69,7 @@
                       role="option"
                       navigation-type="arrow-keys"
                       @click="
-                        close();
+                        close(focusEditor);
                         onFontStyleSelect(fontStyle.value)
                       "
                     >
@@ -102,7 +103,7 @@
                 role="menuitem"
                 navigation-type="arrow-keys"
                 @click="
-                  close();
+                  close(focusEditor);
                   onFontSizeSelect(fontSize.value, $event)
                 "
               >
@@ -116,7 +117,11 @@
             v-else-if="button.buttonType === 'custom' && button.selector === 'fontColor'"
             :key="getButtonKey(buttonGroup.key, button.selector)"
             :ref="getButtonRef(buttonGroup.key, button.selector)"
-            v-dt-tooltip="{ message: button.tooltipMessage, placement: 'top' }"
+            v-dt-tooltip="{
+              message: button.tooltipMessage,
+              placement: 'top',
+              externalAnchorElement: $refs[getButtonRef(buttonGroup.key, button.selector)]?.$el, 
+            }"
             kind="muted"
             importance="clear"
             size="xs"
@@ -199,7 +204,7 @@
                         navigation-type="arrow-keys"
                         @click="
                           insertVariable(category.name, item);
-                          close();
+                          close(focusEditor);
                         "
                       >
                         {{ item.name }}
@@ -361,6 +366,7 @@
         :link="true"
         :output-format="htmlOutputFormat"
         :placeholder="placeholder"
+        :preserve-whitespace="preserveWhitespace"
         :use-div-tags="useDivTags"
         :allow-tables="allowTables"
         :allow-custom-tables="allowCustomTables"
@@ -759,6 +765,18 @@ export default {
     },
 
     /**
+     * Controls how whitespace is handled when parsing HTML content.
+     * - 'full': All whitespace is preserved
+     * - true: Whitespace in inline content is preserved, whitespace-only nodes between blocks are removed
+     * - false: Standard HTML whitespace collapsing
+     * @values full, true, false
+     */
+    preserveWhitespace: {
+      type: [Boolean, String],
+      default: 'full',
+    },
+
+    /**
      * Use div tags instead of paragraph tags to show text
      */
     useDivTags: {
@@ -1143,7 +1161,7 @@ export default {
     },
 
     colorPickerInput() {
-      return document.querySelector('.colorPickerInput');
+      return this.$refs.editorRoot?.querySelector('.colorPickerInput');
     },
 
     isDefaultFontColor() {
@@ -1167,6 +1185,10 @@ export default {
   methods: {
     removeClassStyleAttrs,
     addClassStyleAttrs,
+
+    focusEditor () {
+      this.$refs.richTextEditor?.editor?.commands.focus();
+    },
 
     onInputFocus (event) {
       event?.stopPropagation();

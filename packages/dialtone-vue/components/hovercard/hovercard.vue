@@ -16,6 +16,7 @@
     :header-class="headerClass"
     :footer-class="footerClass"
     :append-to="appendTo"
+    :external-anchor-element="externalAnchorElement"
     data-qa="dt-hovercard"
     :enter-delay="enterDelay"
     :leave-delay="leaveDelay"
@@ -203,6 +204,15 @@ const props = defineProps({
     type: Number,
     default: TOOLTIP_DELAY_MS,
   },
+
+  /**
+   * External anchor element reference. Use this instead of the anchor slot when
+   * the anchor may be inside a Shadow DOM, as querySelector cannot pierce shadow boundaries.
+   */
+  externalAnchorElement: {
+    type: HTMLElement,
+    default: null,
+  },
 });
 
 defineEmits([
@@ -248,9 +258,12 @@ onBeforeUnmount(() => {
   clearTimeout(inTimer);
   clearTimeout(outTimer);
 });
+
 watch(() => props.open, (open) => {
   hovercardOpen.value = open;
 }, { immediate: true });
+
+defineExpose({ show: onMouseEnter, hide: onMouseLeave });
 
 function setInTimer () {
   if (props.open === null) {

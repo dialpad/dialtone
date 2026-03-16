@@ -1,14 +1,14 @@
 import { action } from 'storybook/actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtRecipeMotionText from './motion_text.vue';
+import DtMotionText from './motion_text.vue';
 import {
   MOTION_TEXT_ANIMATION_MODES,
   MOTION_TEXT_SPEEDS,
 } from './motion_text_constants';
 
-import DtRecipeMotionTextDefaultTemplate from './motion_text_default.story.vue';
-import DtRecipeMotionTextModesTemplate from './motion_text_modes.story.vue';
-import DtRecipeMotionTextVariantsTemplate from './motion_text_variants.story.vue';
+import DtMotionTextDefaultTemplate from './motion_text_default.story.vue';
+import DtMotionTextModesTemplate from './motion_text_modes.story.vue';
+import DtMotionTextVariantsTemplate from './motion_text_variants.story.vue';
 
 // Default Prop Values
 export const argsData = {
@@ -202,8 +202,8 @@ export const argTypesData = {
 
 // Story Collection
 export default {
-  title: 'Recipes/Motion/Motion Text',
-  component: DtRecipeMotionText,
+  title: 'Components/Motion Text',
+  component: DtMotionText,
   args: argsData,
   argTypes: argTypesData,
   excludeStories: /.*Data$/,
@@ -213,19 +213,19 @@ export default {
 const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
   argTypes,
-  DtRecipeMotionTextDefaultTemplate,
+  DtMotionTextDefaultTemplate,
 );
 
 const ModesTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
   argTypes,
-  DtRecipeMotionTextModesTemplate,
+  DtMotionTextModesTemplate,
 );
 
 const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
   argTypes,
-  DtRecipeMotionTextVariantsTemplate,
+  DtMotionTextVariantsTemplate,
 );
 
 export const Default = {

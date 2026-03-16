@@ -37,13 +37,13 @@ See full [Keyboard Support](?path=/docs/components-popover--default#keyboard-sup
 ### Import
 
 ```jsx
-import { DtRecipeComboboxMultiSelect } from '@dialpad/dialtone-vue';
+import { DtComboboxMultiSelect } from '@dialpad/dialtone-vue';
 ```
 
 ### Basic usage
 
 ```html
-<dt-recipe-combobox-multi-select
+<dt-combobox-multi-select
   ref="comboboxMultiSelect"
   :loading-message="loadingMessage"
   :selected-items="selectedItems"
@@ -71,7 +71,7 @@ import { DtRecipeComboboxMultiSelect } from '@dialpad/dialtone-vue';
       </dt-list-item>
     </ul>
   </template>
-</dt-recipe-combobox-multi-select>
+</dt-combobox-multi-select>
 ```
 
 When not passing `showList` and `hasSuggestionList` is `true`,
@@ -94,7 +94,7 @@ Adds validation for max selection. Make sure to provide the following props:
 - `maxSelectedMessage` should be the message that shown if max selection has been reached
 
 ```html
-<dt-recipe-combobox-multi-select
+<dt-combobox-multi-select
   ref="comboboxMultiSelect"
   :selected-items="selectedItems"
   :max-selected="maxSelected"
@@ -123,5 +123,5 @@ Adds validation for max selection. Make sure to provide the following props:
       </dt-list-item>
     </ul>
   </template>
-</dt-recipe-combobox-multi-select>
+</dt-combobox-multi-select>
 ```
