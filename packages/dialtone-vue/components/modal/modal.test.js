@@ -219,5 +219,16 @@ describe('DtModal Tests', () => {
 
       expect(banner.classes(MODAL_BANNER_KINDS.info)).toBe(true);
     });
+
+    it('should set data-dt-mode on dialog when contentMode is set', () => {
+      document.documentElement.setAttribute('data-dt-mode', 'light');
+      mockProps = { contentMode: 'dark' };
+      updateWrapper();
+
+      const modal = wrapper.find('[data-qa="dt-modal"]');
+      expect(modal.attributes('data-dt-mode')).toBe('dark');
+
+      document.documentElement.removeAttribute('data-dt-mode');
+    });
   });
 });

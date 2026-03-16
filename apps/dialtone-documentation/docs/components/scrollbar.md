@@ -4,7 +4,7 @@ description: A directive that adds a custom overlay scrollbar to any scrollable 
 status: beta
 thumb: true
 image: assets/images/components/scrollbar.png
-keywords: ["scrollable", "d-scrollbar", "DtScrollbar", "dt-scrollbar", "custom scrollbar", "scroll container"]
+keywords: ["scrollable", "d-scrollbar", "DtScrollbar", "dt-scrollbar", "custom scrollbar", "scroll container", "v-dt", "directive"]
 ---
 
 <!-- <component-combinator component-name="DtScrollbar" /> -->
@@ -97,10 +97,6 @@ To customize the behavior of the scrollbar, you can use different arguments with
 
 Show the scrollbar when the mouse enters the scrollable area. This is the default option, so no argument is needed.
 
-```javascript
-<div v-dt-scrollbar></div>
-```
-
 <code-well-header>
   <div class="d-hmx164 d-w30p d-bar8 d-ba" v-dt-scrollbar>
     <dt-stack>
@@ -111,13 +107,15 @@ Show the scrollbar when the mouse enters the scrollable area. This is the defaul
   </div>
 </code-well-header>
 
+<code-example-tabs
+vueCode='
+<div v-dt-scrollbar></div>
+'
+/>
+
 ### Always
 
 Always show the scrollbar if the region is overflowing the available space.
-
-```javascript
-<div v-dt-scrollbar:never></div>
-```
 
 <code-well-header>
   <div class="d-hmx164 d-w30p d-bar8 d-ba" v-dt-scrollbar:never>
@@ -129,13 +127,15 @@ Always show the scrollbar if the region is overflowing the available space.
   </div>
 </code-well-header>
 
+<code-example-tabs
+vueCode='
+<div v-dt-scrollbar:never></div>
+'
+/>
+
 ### Scroll
 
 Show the scrollbar on scroll.
-
-```javascript
-<div v-dt-scrollbar:scroll></div>
-```
 
 <code-well-header>
   <div class="d-hmx164 d-w30p d-bar8 d-ba" v-dt-scrollbar:scroll>
@@ -147,13 +147,15 @@ Show the scrollbar on scroll.
   </div>
 </code-well-header>
 
+<code-example-tabs
+vueCode='
+<div v-dt-scrollbar:scroll></div>
+'
+/>
+
 ### Move
 
 Show the scrollbar when the mouse moves inside the scrollable area.
-
-```javascript
-<div v-dt-scrollbar:move></div>
-```
 
 <code-well-header>
   <div class="d-hmx164 d-w30p d-bar8 d-ba" v-dt-scrollbar:move>
@@ -164,6 +166,12 @@ Show the scrollbar when the mouse moves inside the scrollable area.
     </dt-stack>
   </div>
 </code-well-header>
+
+<code-example-tabs
+vueCode='
+<div v-dt-scrollbar:move></div>
+'
+/>
 
 ## Limitations
 

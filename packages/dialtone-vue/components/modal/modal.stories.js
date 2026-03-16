@@ -5,6 +5,7 @@ import { MODAL_KIND_MODIFIERS, MODAL_SIZE_MODIFIERS } from './modal_constants';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { action } from 'storybook/actions';
 import { NOTICE_KINDS } from '@/components/notice';
+import { CONTENT_MODE_ARG_TYPE } from '@/common/mode_constants';
 
 // Default Props for all variations
 export const argsData = {
@@ -56,6 +57,7 @@ export const argTypesData = {
   },
 
   // Props
+  contentMode: CONTENT_MODE_ARG_TYPE,
   size: {
     options: Object.keys(MODAL_SIZE_MODIFIERS),
     control: {

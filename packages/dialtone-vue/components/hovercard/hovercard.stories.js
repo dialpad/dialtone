@@ -10,6 +10,7 @@ import {
   POPOVER_DIRECTIONS,
   POPOVER_PADDING_CLASSES,
 } from '@/components/popover/index.js';
+import { CONTENT_MODE_ARG_TYPE } from '@/common/mode_constants';
 
 export const argTypesData = {
   // Slots
@@ -52,6 +53,7 @@ export const argTypesData = {
   },
 
   // Props
+  contentMode: CONTENT_MODE_ARG_TYPE,
   open: {
     control: {
       type: 'boolean',

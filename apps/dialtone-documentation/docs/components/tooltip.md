@@ -68,6 +68,24 @@ It's possible to change any property of the tooltip with object syntax.
 <dt-button v-dt-tooltip="{ message: 'Tooltip text', placement: 'bottom-start', delay: false }">Placeholder Button</dt-button>
 ```
 
+#### Content Mode
+
+Tooltip content renders outside the DOM tree via Tippy.js. Use the `contentMode` modifier or object property to apply a color mode to the tooltip content. See [Positioned Components](/components/mode-island.html#positioned-components) for details.
+
+<code-well-header class="d-hmn164 d-bgc-contrast">
+  <dt-stack direction="row" gap="400">
+    <dt-button v-dt-tooltip.invert="`Tooltip`">Inverted</dt-button>
+    <dt-button v-dt-tooltip="{ message: 'Tooltip', contentMode: 'invert' }">Invert</dt-button>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-button v-dt-tooltip.invert="`Tooltip`">Modifier</dt-button>
+<dt-button v-dt-tooltip="{ message: `Tooltip`, contentMode: `invert` }">Object</dt-button>
+'
+/>
+
 ### Import
 
 Import the directive from dialtone-vue
@@ -126,47 +144,6 @@ htmlCode='
 '
 vueCode='
 <dt-tooltip message="tooltip">
-  <template #anchor>
-    <dt-button>
-      Hover me
-    </dt-button>
-  </template>
-</dt-tooltip>
-'
-showHtmlWarning />
-
-### Inverted
-
-<code-well-header bgclass="d-bgc-contrast" class="d-hmn164">
-  <dt-tooltip inverted message="tooltip">
-    <template #anchor>
-      <dt-button>
-        Hover me
-      </dt-button>
-    </template>
-  </dt-tooltip>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div>
-  <span>
-    <button type="button" class="base-button__button d-btn d-btn--primary" aria-describedby="tippy-1">
-      <span class="d-btn__label base-button__label"> Hover to show tooltip </span>
-    </button>
-  </span>
-</div>
-<div data-tippy-root="" id="tippy-1" style="pointer-events: none; z-index: 400; visibility: visible; position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(129px, -322px, 0px);">
-  <div class="tippy-box" data-state="visible" tabindex="-1" data-animation="fade" role="tooltip" data-placement="top" data-theme="inverted" style="max-width: 350px; transition-duration: 180ms;">
-    <div class="tippy-content" data-state="visible" style="transition-duration: 180ms;"><div id="dt0" class="d-tooltip d-tooltip--inverted">tooltip</div></div>
-    <div class="tippy-svg-arrow" style="position: absolute; left: 0px; transform: translate3d(23.5px, 0px, 0px);">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="7"><path d="M 14.5,7 8,0 1.5,7 Z"></path></svg>
-    </div>
-  </div>
-</div>
-'
-vueCode='
-<dt-tooltip inverted message="tooltip">
   <template #anchor>
     <dt-button>
       Hover me
@@ -235,6 +212,32 @@ The tooltip uses [headless-tippy](https://atomiks.github.io/tippyjs/v6/headless-
 [popper](https://popper.js.org/docs/v2/modifiers/flip/), if the tooltip opens in a placement where it will
 be clipped, it will move to a new position. It will do this automatically by default, but if you want to
 manually specify which position it will move to in what order you can do so via the fallbackPlacements prop.
+
+### Content Mode
+
+Tooltip content renders outside the DOM tree via Tippy.js. Use the `contentMode` prop to apply a color mode to the tooltip content. See [Positioned Components](/components/mode-island.html#positioned-components) for details.
+
+<code-well-header bgclass="d-bgc-contrast" class="d-hmn164">
+  <dt-tooltip content-mode="invert" message="Inverted tooltip">
+    <template #anchor>
+      <dt-button>
+        Inverted
+      </dt-button>
+    </template>
+  </dt-tooltip>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-tooltip content-mode="invert|dark|light" message="Tooltip">
+  <template #anchor>
+    <dt-button>
+      Anchor
+    </dt-button>
+  </template>
+</dt-tooltip>
+'
+/>
 
 ## Vue API
 

@@ -43,6 +43,7 @@
         :max-width="maxWidth"
         :offset="popoverOffset"
         :sticky="popoverSticky"
+        :content-mode="contentMode"
         placement="bottom-start"
         initial-focus-element="none"
         padding="none"
@@ -119,6 +120,7 @@ import { DtCombobox, COMBOBOX_LABEL_SIZES } from '@/components/combobox';
 import { DtPopover, POPOVER_APPEND_TO_VALUES, POPOVER_CONTENT_WIDTHS } from '@/components/popover';
 import { getUniqueString, hasSlotContent } from '@/common/utils';
 import { DROPDOWN_PADDING_CLASSES } from '@/components/dropdown';
+import { CONTENT_MODE_PROP } from '@/common/mode_constants';
 
 export default {
   compatConfig: { MODE: 3 },
@@ -132,6 +134,12 @@ export default {
   },
 
   props: {
+    /**
+     * Applies a color mode to the positioned content element.
+     * @values light, dark, invert
+     */
+    contentMode: CONTENT_MODE_PROP,
+
     /**
      * String to use for the input label.
      */

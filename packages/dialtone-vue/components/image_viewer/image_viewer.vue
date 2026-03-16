@@ -21,6 +21,7 @@
         :aria-hidden="!isOpen ? 'true' : 'false'"
         class="d-modal"
         data-qa="dt-modal"
+        v-bind="modeAttrs"
         v-on="modalListeners"
         @mouseover="showCloseButton = true"
         @mouseleave="showCloseButton = false"
@@ -72,6 +73,7 @@
 
 <script>
 import Modal from '@/common/mixins/modal';
+import ModeMixin from '@/common/mixins/mode';
 import { returnFirstEl } from '@/common/utils';
 import { EVENT_KEYNAMES } from '@/common/constants';
 import { DtIconClose } from '@dialpad/dialtone-icons/vue';
@@ -89,7 +91,7 @@ export default {
     DtIconClose,
   },
 
-  mixins: [Modal],
+  mixins: [Modal, ModeMixin],
 
   props: {
     /**

@@ -84,15 +84,13 @@ keywords: ["data table", "grid", "rows", "d-table", "DtTable", "dt-table", "data
 
 ### Inverted Style
 
-<dt-notice title="Deprecated" kind="error" class="d-wmx100p d-my16">
-  The <code>d-table--inverted</code> modifier has been deprecated in favor of using <dt-link to="mode-island.html">DtModeIsland</dt-link> as a wrapper.
+<dt-notice title="Deprecated" kind="info" class="d-wmx100p d-my16" hide-close>
+  The <code>d-table--inverted</code> modifier has been deprecated. Use the <dt-link to="mode-island.html#inverting">v-dt-mode directive</dt-link> instead.
 </dt-notice>
 
-In place of the <code>d-table--inverted</code> modifier, wrap the table in the <dt-link to="mode-island.html">DtModeIsland</dt-link> component.
-
 <code-well-header>
-  <dt-mode-island class="d-p16 d-bar8">
-    <table class="d-table dialtone-doc-table">
+  <div class="d-p8 d-bgc-contrast">
+    <table v-dt-mode:invert class="d-table dialtone-doc-table d-p16 d-bar8">
       <caption class="d-table__caption">Office List</caption>
       <thead>
         <tr>
@@ -111,13 +109,11 @@ In place of the <code>d-table--inverted</code> modifier, wrap the table in the <
         </tr>
       </tbody>
     </table>
-  </dt-mode-island>
+  </div>
 </code-well-header>
 
 ```html
-<dt-mode-island>
-  <table class="d-table">...</table>
-</dt-mode-island>
+<table v-dt-mode:invert class="d-table">...</table>
 ```
 
 ### Striped
@@ -164,36 +160,6 @@ In place of the <code>d-table--inverted</code> modifier, wrap the table in the <
     </tr>
   </tbody>
 </table>
-```
-
-<code-well-header>
-  <dt-mode-island class="d-p16 d-bar8">
-    <table class="d-table dialtone-doc-table d-table--striped">
-      <caption class="d-table__caption">Office List</caption>
-      <thead>
-        <tr>
-          <th scope="col">Office</th>
-          <th scope="col">Country</th>
-          <th scope="col" width="10%">Employees</th>
-          <th scope="col">Contact</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="i in examples">
-          <th scope="row">{{ i.office }}</th>
-          <td>{{ i.country }}</td>
-          <td>{{ i.size }}</td>
-          <td>{{ i.contact }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </dt-mode-island>
-</code-well-header>
-
-```html
-<dt-mode-island>
-  <table class="d-table d-table--striped">...</table>
-</dt-mode-island>
 ```
 
 ## Classes

@@ -116,6 +116,7 @@ export default {
      * @deprecated Use v-dt-mode instead.
      * If true, applies inverted styles.
      * @values true, false
+     * @deprecated Use v-dt-mode directive instead.
      */
     inverted: {
       type: Boolean,
