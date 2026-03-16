@@ -1,42 +1,23 @@
 import { mergeAttributes } from '@tiptap/core';
 import { Table, TableRow, TableCell, TableHeader } from '@tiptap/extension-table';
 
+const createAttribute = (name) => ({
+  default: null,
+  parseHTML: element => element.getAttribute(name),
+  renderHTML: attributes => {
+    if (!attributes[name]) return {};
+    return { [name]: attributes[name] };
+  },
+});
+
 export const CustomTable = Table.extend({
   addAttributes () {
     return {
       ...this.parent?.(),
-      border: {
-        default: null,
-        parseHTML: element => element.getAttribute('border'),
-        renderHTML: attributes => {
-          if (!attributes.border) return {};
-          return { border: attributes.border };
-        },
-      },
-      cellpadding: {
-        default: null,
-        parseHTML: element => element.getAttribute('cellpadding'),
-        renderHTML: attributes => {
-          if (!attributes.cellpadding) return {};
-          return { cellpadding: attributes.cellpadding };
-        },
-      },
-      cellspacing: {
-        default: null,
-        parseHTML: element => element.getAttribute('cellspacing'),
-        renderHTML: attributes => {
-          if (!attributes.cellspacing) return {};
-          return { cellspacing: attributes.cellspacing };
-        },
-      },
-      style: {
-        default: null,
-        parseHTML: element => element.getAttribute('style'),
-        renderHTML: attributes => {
-          if (!attributes.style) return {};
-          return { style: attributes.style };
-        },
-      },
+      border: createAttribute('border'),
+      cellpadding: createAttribute('cellpadding'),
+      cellspacing: createAttribute('cellspacing'),
+      style: createAttribute('style'),
     };
   },
 
@@ -49,43 +30,15 @@ export const CustomTableRow = TableRow.extend({
   addAttributes () {
     return {
       ...this.parent?.(),
-      style: {
-        default: null,
-        parseHTML: element => element.getAttribute('style'),
-        renderHTML: attributes => {
-          if (!attributes.style) return {};
-          return { style: attributes.style };
-        },
-      },
+      style: createAttribute('style'),
     };
   },
 });
 
 const tableCellAttributes = {
-  style: {
-    default: null,
-    parseHTML: element => element.getAttribute('style'),
-    renderHTML: attributes => {
-      if (!attributes.style) return {};
-      return { style: attributes.style };
-    },
-  },
-  valign: {
-    default: null,
-    parseHTML: element => element.getAttribute('valign'),
-    renderHTML: attributes => {
-      if (!attributes.valign) return {};
-      return { valign: attributes.valign };
-    },
-  },
-  width: {
-    default: null,
-    parseHTML: element => element.getAttribute('width'),
-    renderHTML: attributes => {
-      if (!attributes.width) return {};
-      return { width: attributes.width };
-    },
-  },
+  style: createAttribute('style'),
+  valign: createAttribute('valign'),
+  width: createAttribute('width'),
 };
 
 export const CustomTableCell = TableCell.extend({
