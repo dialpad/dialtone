@@ -6,6 +6,7 @@ import DtComboboxWithPopoverDefaultTemplate from './combobox_with_popover_defaul
 import { POPOVER_CONTENT_WIDTHS } from '@/components/popover/popover_constants';
 import { DROPDOWN_PADDING_CLASSES } from '@/components/dropdown/dropdown_constants';
 import { COMBOBOX_LABEL_SIZES } from '@/components/combobox';
+import { CONTENT_MODE_ARG_TYPE } from '@/common/mode_constants';
 
 // Default Prop Values
 export const argsData = {
@@ -68,6 +69,7 @@ export const argTypesData = {
   },
 
   // Props
+  contentMode: CONTENT_MODE_ARG_TYPE,
   label: {
     control: {
       type: 'text',

@@ -168,6 +168,10 @@ You can also change the border color opacity value on `:hover`
 </dt-button>
 ```
 
+<dt-notice title="Tip" kind="info" class="d-wmx100p d-my16">
+  Prefer using the <dt-link to="/components/mode-island.html#inverting">v-dt-mode directive</dt-link> with base utility classes instead of <code>-inverted</code> variants. For example, use <code>&lt;div v-dt-mode:invert class="d-bc-critical"&gt;</code> instead of <code>&lt;div class="d-bc-critical-inverted"&gt;</code>.
+</dt-notice>
+
 ## Classes
 
 <new-utility-class-table :classes="borderColors">

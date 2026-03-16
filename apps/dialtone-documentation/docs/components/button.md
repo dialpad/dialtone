@@ -229,7 +229,6 @@ Buttons can be set to active state using the `active` prop or `.d-btn--active` D
     <dt-button active>Place Call</dt-button>
     <dt-button kind="danger" importance="clear" active>Place Call</dt-button>
     <dt-button kind="positive" importance="clear" active>Place Call</dt-button>
-    <dt-button kind="inverted" active>Place Call</dt-button>
     <dt-button kind="muted" active>Place Call</dt-button>
   </dt-stack>
 </code-well-header>
@@ -241,7 +240,6 @@ vueCode='
 <dt-button active>Place Call</dt-button>
 <dt-button kind="danger" importance="clear" active>Place Call</dt-button>
 <dt-button kind="positive" importance="clear" active>Place Call</dt-button>
-<dt-button kind="inverted" active>Place Call</dt-button>
 <dt-button kind="muted" active>Place Call</dt-button>
 '
 showHtmlWarning />
@@ -312,6 +310,50 @@ The unstyled button removes all default Dialtone styling while preserving the se
 :htmlCode='() => $refs.unstyledExample'
 vueCode='
 <dt-button kind="unstyled">Place Call</dt-button>
+'
+showHtmlWarning />
+
+### Inverted
+
+<dt-notice
+  title="Deprecated"
+  kind="info"
+  class="d-wmx100p d-my16"
+  hide-close
+>
+  <code>kind="inverted"</code> has been deprecated. Use the <dt-link to="mode-island.html#inverting">v-dt-mode directive</dt-link> instead, or <dt-link to="mode-island.html#dtmodeisland-component">DtModeIsland</dt-link>.
+</dt-notice>
+
+Use the [v-dt-mode directive](mode-island.html#inverting) in place of `kind="inverted"` on the component element. The previous `inverted` variant of DtButton was limited to a single presentation style. The directive now makes every combination available as an inverted style.
+
+<code-well-header>
+  <dt-toggle v-model="isInverted" size="sm" wrapperClass="d-g8 d-m-auto d-pb8">Inverted</dt-toggle>
+  <dt-stack gap="400" ref="invertedAll">
+    <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+      <dt-button v-dt-mode:invert="isInverted"> Place Call </dt-button>
+      <dt-button v-dt-mode:invert="isInverted" importance="outlined"> Place Call </dt-button>
+      <dt-button v-dt-mode:invert="isInverted" importance="clear"> Place Call </dt-button>
+    </dt-stack>
+    <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+      <dt-button v-dt-mode:invert="isInverted" kind="danger"> Place Call </dt-button>
+      <dt-button v-dt-mode:invert="isInverted" kind="danger" importance="outlined"> Place Call </dt-button>
+      <dt-button v-dt-mode:invert="isInverted" kind="danger" importance="clear"> Place Call </dt-button>
+    </dt-stack>
+    <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+      <dt-button v-dt-mode:invert="isInverted" kind="positive">Place Call</dt-button>
+      <dt-button v-dt-mode:invert="isInverted" kind="positive" importance="outlined">Place Call</dt-button>
+      <dt-button v-dt-mode:invert="isInverted" kind="positive" importance="clear">Place Call</dt-button>
+    </dt-stack>
+    <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+      <dt-button v-dt-mode:invert="isInverted" kind="muted" importance="clear"> Place Call </dt-button>
+      <dt-button v-dt-mode:invert="isInverted" kind="muted" importance="outlined"> Place Call </dt-button>
+    </dt-stack>
+  </dt-stack>
+</code-well-header>
+<code-example-tabs
+:htmlCode='() => $refs.invertedAll'
+vueCode='
+<dt-button v-dt-mode:invert {props}>Place Call</dt-button>
 '
 showHtmlWarning />
 
@@ -429,40 +471,6 @@ vueCode='
 </dt-button>
 '
 />
-
-### Inverted
-
-<dt-notice
-  title="Deprecated"
-  kind="error"
-  class="d-wmx100p d-my16"
->
-  <code>kind="inverted"</code> has been deprecated in favor of using <dt-link to="mode-island.html">DtModeIsland</dt-link> as a wrapper.
-</dt-notice>
-
-In place of <code>kind="inverted"</code>, use the <dt-link to="mode-island.html">DtModeIsland</dt-link> component as a wrapper.
-
-<code-well-header>
-  <dt-split-button
-    end-tooltip-text="More calling options"
-  >
-    Place call
-    <template #dropdownList>
-      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>
-      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item>
-      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>
-    </template>
-  </dt-split-button>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.modeIslandExample'
-vueCode='
-<dt-mode-island>
-  <dt-button {props}>Place Call</dt-button>
-</dt-mode-island>
-'
-showHtmlWarning />
 
 ## Sizes
 
@@ -742,32 +750,6 @@ Icon-only buttons are commonly used for toggling actions, navigation, or closing
         </template>
       </dt-button>
     </dt-stack>
-    <dt-stack direction="row" gap="400" class="d-bgc-contrast d-p8">
-      <dt-button v-dt-tooltip="`Tooltip`" kind="inverted" importance="clear">
-        <template #startIcon="{ iconSize }">
-          <dt-icon
-            name="phone"
-            :size="iconSize"
-          />
-        </template>
-      </dt-button>
-      <dt-button v-dt-tooltip="`Tooltip`" kind="inverted" importance="outlined">
-        <template #startIcon="{ iconSize }">
-          <dt-icon
-            name="phone"
-            :size="iconSize"
-          />
-        </template>
-      </dt-button>
-      <dt-button v-dt-tooltip="`Tooltip`" kind="inverted">
-        <template #startIcon="{ iconSize }">
-          <dt-icon
-            name="phone"
-            :size="iconSize"
-          />
-        </template>
-      </dt-button>
-    </dt-stack>
   </dt-stack>
 </code-well-header>
 
@@ -862,30 +844,6 @@ vueCode='
     />
   </template>
 </dt-button>
-<dt-button v-dt-tooltip="`Tooltip`" kind="inverted" importance="clear">
-  <template #startIcon="{ iconSize }">
-    <dt-icon
-      name="phone"
-      :size="iconSize"
-    />
-  </template>
-</dt-button>
-<dt-button v-dt-tooltip="`Tooltip`" kind="inverted" importance="outlined">
-  <template #startIcon="{ iconSize }">
-    <dt-icon
-      name="phone"
-      :size="iconSize"
-    />
-  </template>
-</dt-button>
-<dt-button v-dt-tooltip="`Tooltip`" kind="inverted">
-  <template #startIcon="{ iconSize }">
-    <dt-icon
-      name="phone"
-      :size="iconSize"
-    />
-  </template>
-</dt-button>
 '
 showHtmlWarning />
 
@@ -969,32 +927,6 @@ The following styles are available as a circle shape.
         </template>
       </dt-button>
     </dt-stack>
-    <dt-stack direction="row" gap="400" class="d-bgc-contrast d-p8">
-      <dt-button v-dt-tooltip="`Tooltip`" circle kind="inverted" importance="clear">
-        <template #startIcon="{ iconSize }">
-          <dt-icon
-            name="phone"
-            :size="iconSize"
-          />
-        </template>
-      </dt-button>
-      <dt-button v-dt-tooltip="`Tooltip`" circle kind="inverted" importance="outlined">
-        <template #startIcon="{ iconSize }">
-          <dt-icon
-            name="phone"
-            :size="iconSize"
-          />
-        </template>
-      </dt-button>
-      <dt-button v-dt-tooltip="`Tooltip`" circle kind="inverted">
-        <template #startIcon="{ iconSize }">
-          <dt-icon
-            name="phone"
-            :size="iconSize"
-          />
-        </template>
-      </dt-button>
-    </dt-stack>
   </dt-stack>
 </code-well-header>
 
@@ -1058,30 +990,6 @@ vueCode='
   </template>
 </dt-button>
 <dt-button v-dt-tooltip="`Tooltip`" circle kind="positive">
-  <template #startIcon="{ iconSize }">
-    <dt-icon
-      name="phone"
-      :size="iconSize"
-    />
-  </template>
-</dt-button>
-<dt-button v-dt-tooltip="`Tooltip`" circle kind="inverted" importance="clear">
-  <template #startIcon="{ iconSize }">
-    <dt-icon
-      name="phone"
-      :size="iconSize"
-    />
-  </template>
-</dt-button>
-<dt-button v-dt-tooltip="`Tooltip`" circle kind="inverted" importance="outlined">
-  <template #startIcon="{ iconSize }">
-    <dt-icon
-      name="phone"
-      :size="iconSize"
-    />
-  </template>
-</dt-button>
-<dt-button v-dt-tooltip="`Tooltip`" circle kind="inverted">
   <template #startIcon="{ iconSize }">
     <dt-icon
       name="phone"
@@ -1396,4 +1304,5 @@ import ButtonVariantsTable from '@baseComponents/ButtonVariantsTable.vue';
 
 const isDisabled = ref(true);
 const loading = ref(true);
+const isInverted = ref(true);
 </script>

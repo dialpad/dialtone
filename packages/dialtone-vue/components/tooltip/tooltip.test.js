@@ -114,6 +114,24 @@ describe('DtTooltip tests', () => {
         });
       });
 
+      describe('When contentMode is set', () => {
+        it('should set data-dt-mode on tooltip content', async () => {
+          await wrapper.setProps({ show: true, contentMode: 'dark' });
+
+          expect(tooltip.getAttribute('data-dt-mode')).toBe('dark');
+        });
+
+        it('should invert root mode when contentMode is invert', async () => {
+          document.documentElement.setAttribute('data-dt-mode', 'light');
+          await wrapper.setProps({ show: true, contentMode: 'invert' });
+          await wrapper.vm.$nextTick();
+
+          expect(tooltip.getAttribute('data-dt-mode')).toBe('dark');
+
+          document.documentElement.removeAttribute('data-dt-mode');
+        });
+      });
+
       it.each(TOOLTIP_DIRECTIONS)('when placement is %s should have correct data-placement attribute', async (placement) => {
         wrapper.unmount();
         mockProps = { show: true, placement, fallbackPlacements: [] };

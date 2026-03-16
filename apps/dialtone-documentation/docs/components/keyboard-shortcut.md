@@ -39,24 +39,24 @@ vueCode='
 
 ### Inverted
 
-<dt-notice title="Deprecated" kind="error" class="d-wmx100p d-my16">
-  The <code>inverted</code> prop has been deprecated in favor of using <dt-link to="mode-island.html">DtModeIsland</dt-link> as a wrapper.
+<dt-notice title="Deprecated" kind="info" class="d-wmx100p d-my16" hide-close>
+  The <code>inverted</code> prop has been deprecated. Use the
+  <dt-link to="mode-island.html#inverting">v-dt-mode directive</dt-link>
+  instead.
 </dt-notice>
 
-In place of the <code>inverted</code> prop, use the <dt-link to="mode-island.html">DtModeIsland</dt-link> component as a wrapper.
+In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#inverting) on the component element.
 
 <code-well-header>
-  <dt-mode-island class="d-p16 d-bar8">
-    <dt-keyboard-shortcut ref="invertedExample" shortcut="{cmd}+Ctrl+X" />
-  </dt-mode-island>
+  <div class="d-bgc-contrast d-p16">
+    <dt-keyboard-shortcut v-dt-mode:invert ref="invertedExample" shortcut="{cmd}+Ctrl+X" />
+  </div>
 </code-well-header>
 
 <code-example-tabs
 :htmlCode='() => $refs.invertedExample'
 vueCode='
-<dt-mode-island>
-  <dt-keyboard-shortcut shortcut="{cmd}+Ctrl+X" />
-</dt-mode-island>
+<dt-keyboard-shortcut v-dt-mode:invert shortcut="{cmd}+Ctrl+X" />
 '
 showHtmlWarning />
 

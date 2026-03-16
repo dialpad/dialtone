@@ -6,6 +6,7 @@
     :open="hovercardOpen"
     :placement="placement"
     :content-class="contentClass"
+    :content-mode="contentMode"
     :dialog-class="dialogClass"
     :fallback-placements="fallbackPlacements"
     :padding="padding"
@@ -59,8 +60,15 @@ import { ref, watch, nextTick, onMounted, onBeforeUnmount } from 'vue';
 import { POPOVER_APPEND_TO_VALUES, POPOVER_PADDING_CLASSES, DtPopover } from '@/components/popover/index.js';
 import { TOOLTIP_DIRECTIONS, TOOLTIP_DELAY_MS } from '@/components/tooltip/index.js';
 import { getUniqueString } from '@/common/utils';
+import { CONTENT_MODE_PROP } from '@/common/mode_constants';
 
 const props = defineProps({
+  /**
+     * Applies a color mode to the positioned content element.
+     * @values light, dark, invert
+     */
+  contentMode: CONTENT_MODE_PROP,
+
   /**
      * Fade transition when the content display is toggled.
      * @type boolean

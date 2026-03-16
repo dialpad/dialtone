@@ -95,30 +95,28 @@ showHtmlWarning />
   kind="error"
   class="d-wmx100p d-my16"
 >
-  The <code>inverted</code> prop has been deprecated in favor of using <dt-link to="mode-island.html">DtModeIsland</dt-link> as a wrapper.
+  The <code>inverted</code> prop has been deprecated. Use the
+  <dt-link to="mode-island.html#inverting">v-dt-mode directive</dt-link>
+  instead.
 </dt-notice>
 
-In place of the <code>inverted</code> prop, use the <dt-link to="mode-island.html">DtModeIsland</dt-link> component as a wrapper.
+In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#inverting) on the component element.
 
 <code-well-header>
-  <dt-mode-island class="d-p16 d-bar8">
-    <DtStack gap="400" ref="linkInvertedExample">
-      <dt-link href="#link">Base link</dt-link>
-      <dt-link href="#link" kind="danger">Danger link</dt-link>
-      <dt-link href="#link" kind="success">Success link</dt-link>
-      <dt-link href="#link" kind="warning">Warning link</dt-link>
-      <dt-link href="#link" kind="muted">Muted link</dt-link>
-      <dt-link href="#link" kind="mention">Mention link</dt-link>
-    </DtStack>
-  </dt-mode-island>
+  <DtStack gap="400" ref="linkInvertedExample" class="d-bgc-contrast d-p8">
+    <dt-link v-dt-mode:invert href="#link">Base link</dt-link>
+    <dt-link v-dt-mode:invert href="#link" kind="danger">Danger link</dt-link>
+    <dt-link v-dt-mode:invert href="#link" kind="success">Success link</dt-link>
+    <dt-link v-dt-mode:invert href="#link" kind="warning">Warning link</dt-link>
+    <dt-link v-dt-mode:invert href="#link" kind="muted">Muted link</dt-link>
+    <dt-link v-dt-mode:invert href="#link" kind="mention">Mention link</dt-link>
+  </DtStack>
 </code-well-header>
 
 <code-example-tabs
 :htmlCode='() => $refs.linkInvertedExample'
 vueCode='
-<dt-mode-island>
-  <dt-link {props}>Link</dt-link>
-</dt-mode-island>
+<dt-link v-dt-mode:invert {props}>Link</dt-link>
 '
 showHtmlWarning />
 
