@@ -105,12 +105,12 @@ import "@dialpad/dialtone/tokens/tokens-dp-light.css" // Dialpad light brand
 
 ```js
 // Named import
-import { DtIconArrowUp } from '@dialpad/dialtone-icons/vue';
-import { DtIllustrationBlankSpace } from '@dialpad/dialtone-icons/vue';
+import { DtIconArrowUp } from '@dialpad/dialtone-icons/vue3';
+import { DtIllustrationBlankSpace } from '@dialpad/dialtone-icons/vue3';
 
 // Default import (Preferred if using webpack as it is tree-shakeable by default)
-import DtIconArrowUp from '@dialpad/dialtone-icons/vue/arrow-up';
-import DtIllustrationBlankSpace from '@dialpad/dialtone-icons/vue/blank-space';
+import DtIconArrowUp from '@dialpad/dialtone-icons/vue3/arrow-up';
+import DtIllustrationBlankSpace from '@dialpad/dialtone-icons/vue3/blank-space';
 ```
 
 #### Dialtone Vue components
@@ -220,7 +220,7 @@ pulling entire bundles):
 
 - `@dialpad/dialtone` exposes `./vue/lib/*` map to individual component imports.
 - `@dialpad/dialtone-vue` exposes `./lib/*` for individual component imports.
-- `@dialpad/dialtone-icons` exposes `./vue/*` for individual icon/illustration imports.
+- `@dialpad/dialtone-icons` exposes `./vue3/*` for individual icon/illustration imports.
 
 ### Available packages
 

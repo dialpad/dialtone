@@ -40,7 +40,7 @@ For detailed instructions on using the icons, check the [Icon component](/compon
 </code-well-header>
 
 ```js
-import { DtIconCreditCard } from '@dialpad/dialtone-icons/vue';
+import { DtIconCreditCard } from '@dialpad/dialtone-icons/vue3';
 <dt-icon-credit-card size="500" aria-label="Description" />
 ```
 

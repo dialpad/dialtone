@@ -530,7 +530,7 @@ to [WCAG](https://www.w3.org/WAI/tutorials/images/decorative) references for
 your specific usage.
 
 <script setup>
-import { DtIconUser, DtIconHear } from '@dialpad/dialtone-icons/vue';
+import { DtIconUser, DtIconHear } from '@dialpad/dialtone-icons/vue3';
 
 const colors = ['100', '200', '300', '400', '500', '600', '700', '800', '900', '1000', '1100', '1200', '1300', '1400', '1500', '1600', '1700', '1800'];
 const sizes = ['xs', 'sm', 'md', 'lg', 'xl'];

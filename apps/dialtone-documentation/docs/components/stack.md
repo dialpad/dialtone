@@ -1467,7 +1467,7 @@ View the [Migrating from Flex CSS Utilities to DtStack](/about/whats-new/posts/2
   import {
     DtIconMessage,
     DtIconLock,
-  } from '@dialpad/dialtone-icons/vue';
+  } from '@dialpad/dialtone-icons/vue3';
   import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
 
   const selectedGap = ref('400');
