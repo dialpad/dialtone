@@ -2,6 +2,7 @@ import { DtTooltip, TOOLTIP_DIRECTIONS } from '@/components/tooltip';
 import { getUniqueString } from '@/common/utils';
 import { createApp, h } from 'vue';
 import deepEqual from 'deep-equal';
+import { CONTENT_MODE_VALUES } from '@/common/mode_constants';
 
 export const DtTooltipDirective = {
   name: 'dt-tooltip-directive',
@@ -118,7 +119,9 @@ export const DtTooltipDirective = {
             tooltipConfig.transition = false;
             break;
           default:
-            if (TOOLTIP_DIRECTIONS.includes(modifier)) {
+            if (CONTENT_MODE_VALUES.includes(modifier)) {
+              tooltipConfig.contentMode = modifier;
+            } else if (TOOLTIP_DIRECTIONS.includes(modifier)) {
               tooltipConfig.placement = modifier;
             }
             break;
