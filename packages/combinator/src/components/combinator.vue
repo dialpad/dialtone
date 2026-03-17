@@ -197,8 +197,7 @@ const props = defineProps({
    */
   library: {
     type: Object,
-    default: () => {
-    },
+    default: () => ({}),
   },
   /**
    * The variants to select.
@@ -207,8 +206,7 @@ const props = defineProps({
    */
   variants: {
     type: Object,
-    default: () => {
-    },
+    default: () => ({}),
   },
   /**
    * Activate 'blueprint' mode, to use a simple version of the combinator.
