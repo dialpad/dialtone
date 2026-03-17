@@ -15,7 +15,7 @@
       <template #anchor="slotData">
         <dt-button
           v-dt-tooltip="resolvedStartTooltipText"
-          v-bind="slotData.attrs"
+          v-bind="useDropdown ? slotData : slotData.attrs"
           :active="isActive"
           :aria-disabled="readOnly || undefined"
           :class="[
