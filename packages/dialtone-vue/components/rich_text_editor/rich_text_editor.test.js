@@ -571,8 +571,12 @@ describe('DtRichTextEditor tests', () => {
           editorEl.dispatchEvent(pasteEvent);
           await wrapper.vm.$nextTick();
           const output = wrapper.vm.getOutput();
-          // Check that the table has been converted to a table with the enforced styling
-          expect(output).toBe(`<table style="min-width: 50px;"><colgroup><col style="min-width: 25px;"><col style="min-width: 25px;"></colgroup><tbody><tr><td colspan="1" rowspan="1"><p>test</p></td><td colspan="1" rowspan="1"><p>test</p></td></tr><tr><td colspan="1" rowspan="1"><p>test</p></td><td colspan="1" rowspan="1"><p>test</p></td></tr></tbody></table>`);
+          // Check that the table has been preserved using custom table rendering
+          expect(output).toContain('<table>');
+          expect(output).toContain('<tbody>');
+          expect(output).toContain('test');
+          expect(output).not.toContain('colgroup');
+          expect(output).not.toContain('min-width');
         });
 
         it('should preserve text mark styles inside table cells when pasted', async () => {
@@ -580,7 +584,7 @@ describe('DtRichTextEditor tests', () => {
           props['outputFormat'] = 'html';
           props['modelValue'] = '';
           props['allowTables'] = true;
-          props['allowCustomTables'] = true;
+
           props['allowFontSize'] = true;
           props['allowFontColor'] = true;
           editorEl?.remove();
@@ -618,7 +622,7 @@ describe('DtRichTextEditor tests', () => {
           props['outputFormat'] = 'html';
           props['modelValue'] = '';
           props['allowTables'] = true;
-          props['allowCustomTables'] = true;
+
           editorEl?.remove();
           wrapper = mount(DtRichTextEditor, {
             props,
@@ -655,7 +659,7 @@ describe('DtRichTextEditor tests', () => {
           props['outputFormat'] = 'html';
           props['modelValue'] = '';
           props['allowTables'] = true;
-          props['allowCustomTables'] = true;
+
           editorEl?.remove();
           wrapper = mount(DtRichTextEditor, {
             props,
@@ -691,7 +695,7 @@ describe('DtRichTextEditor tests', () => {
           props['outputFormat'] = 'html';
           props['modelValue'] = '';
           props['allowTables'] = true;
-          props['allowCustomTables'] = true;
+
           editorEl?.remove();
           wrapper = mount(DtRichTextEditor, {
             props,
@@ -726,7 +730,7 @@ describe('DtRichTextEditor tests', () => {
           props['outputFormat'] = 'html';
           props['modelValue'] = '';
           props['allowTables'] = true;
-          props['allowCustomTables'] = true;
+
           editorEl?.remove();
           wrapper = mount(DtRichTextEditor, {
             props,
@@ -763,7 +767,7 @@ describe('DtRichTextEditor tests', () => {
           props['outputFormat'] = 'html';
           props['modelValue'] = '';
           props['allowTables'] = true;
-          props['allowCustomTables'] = true;
+
           editorEl?.remove();
           wrapper = mount(DtRichTextEditor, {
             props,
@@ -799,7 +803,7 @@ describe('DtRichTextEditor tests', () => {
           props['outputFormat'] = 'html';
           props['modelValue'] = '';
           props['allowTables'] = true;
-          props['allowCustomTables'] = true;
+
           props['allowFontSize'] = true;
           props['allowFontColor'] = true;
           editorEl?.remove();
@@ -837,7 +841,7 @@ describe('DtRichTextEditor tests', () => {
           props['outputFormat'] = 'html';
           props['modelValue'] = '';
           props['allowTables'] = true;
-          props['allowCustomTables'] = true;
+
           props['allowFontSize'] = true;
           props['allowFontColor'] = true;
           editorEl?.remove();
@@ -897,125 +901,12 @@ describe('DtRichTextEditor tests', () => {
           expect(output).toContain('color: rgb(102, 102, 102)');
         });
 
-        it('should use default TipTap table rendering when allowCustomTables is false', async () => {
+        it('should preserve nested tables when pasted', async () => {
           wrapper.unmount();
           props['outputFormat'] = 'html';
           props['modelValue'] = '';
           props['allowTables'] = true;
-          props['allowCustomTables'] = false;
-          editorEl?.remove();
-          wrapper = mount(DtRichTextEditor, {
-            props,
-            components: { EditorContent },
-            listeners,
-            attrs,
-            slots,
-            attachTo: document.body,
-          });
-          await wrapper.vm.$nextTick();
-          editor = wrapper.find('[data-qa="dt-rich-text-editor"]').find('div[contenteditable]');
-          editorEl = document.getElementsByClassName('qa-editor')[0];
 
-          const clipboardData = new DataTransfer();
-          clipboardData.setData('text/plain', 'testtesttesttest');
-          clipboardData.setData('text/html', '<table><tr><td>test</td><td>test</td></tr><tr><td>test</td><td>test</td></tr></table>');
-
-          const pasteEvent = new ClipboardEvent('paste', {
-            clipboardData,
-            bubbles: true,
-            cancelable: true,
-          });
-
-          editorEl.dispatchEvent(pasteEvent);
-          await wrapper.vm.$nextTick();
-          const output = wrapper.vm.getOutput();
-          // Default TipTap table includes colgroup and min-width styles
-          expect(output).toContain('colgroup');
-          expect(output).toContain('min-width');
-        });
-
-        it('should use custom table rendering without colgroup when allowCustomTables is true', async () => {
-          wrapper.unmount();
-          props['outputFormat'] = 'html';
-          props['modelValue'] = '';
-          props['allowTables'] = true;
-          props['allowCustomTables'] = true;
-          editorEl?.remove();
-          wrapper = mount(DtRichTextEditor, {
-            props,
-            components: { EditorContent },
-            listeners,
-            attrs,
-            slots,
-            attachTo: document.body,
-          });
-          await wrapper.vm.$nextTick();
-          editor = wrapper.find('[data-qa="dt-rich-text-editor"]').find('div[contenteditable]');
-          editorEl = document.getElementsByClassName('qa-editor')[0];
-
-          const clipboardData = new DataTransfer();
-          clipboardData.setData('text/plain', 'testtesttesttest');
-          clipboardData.setData('text/html', '<table><tr><td>test</td><td>test</td></tr><tr><td>test</td><td>test</td></tr></table>');
-
-          const pasteEvent = new ClipboardEvent('paste', {
-            clipboardData,
-            bubbles: true,
-            cancelable: true,
-          });
-
-          editorEl.dispatchEvent(pasteEvent);
-          await wrapper.vm.$nextTick();
-          const output = wrapper.vm.getOutput();
-          // Custom table rendering does not include colgroup or min-width styles
-          expect(output).not.toContain('colgroup');
-          expect(output).not.toContain('min-width');
-          expect(output).toContain('<table><tbody>');
-        });
-
-        it('should apply d-rich-text-editor--custom-tables class when allowCustomTables is true', async () => {
-          wrapper.unmount();
-          props['allowTables'] = true;
-          props['allowCustomTables'] = true;
-          editorEl?.remove();
-          wrapper = mount(DtRichTextEditor, {
-            props,
-            components: { EditorContent },
-            listeners,
-            attrs,
-            slots,
-            attachTo: document.body,
-          });
-          await wrapper.vm.$nextTick();
-
-          const editorContent = wrapper.find('[data-qa="dt-rich-text-editor"]');
-          expect(editorContent.classes()).toContain('d-rich-text-editor--custom-tables');
-        });
-
-        it('should not apply d-rich-text-editor--custom-tables class when allowCustomTables is false', async () => {
-          wrapper.unmount();
-          props['allowTables'] = true;
-          props['allowCustomTables'] = false;
-          editorEl?.remove();
-          wrapper = mount(DtRichTextEditor, {
-            props,
-            components: { EditorContent },
-            listeners,
-            attrs,
-            slots,
-            attachTo: document.body,
-          });
-          await wrapper.vm.$nextTick();
-
-          const editorContent = wrapper.find('[data-qa="dt-rich-text-editor"]');
-          expect(editorContent.classes()).not.toContain('d-rich-text-editor--custom-tables');
-        });
-
-        it('should preserve nested tables when pasted with custom tables', async () => {
-          wrapper.unmount();
-          props['outputFormat'] = 'html';
-          props['modelValue'] = '';
-          props['allowTables'] = true;
-          props['allowCustomTables'] = true;
           editorEl?.remove();
           wrapper = mount(DtRichTextEditor, {
             props,
@@ -1066,7 +957,7 @@ describe('DtRichTextEditor tests', () => {
           props['outputFormat'] = 'html';
           props['modelValue'] = '';
           props['allowTables'] = true;
-          props['allowCustomTables'] = true;
+
           editorEl?.remove();
           wrapper = mount(DtRichTextEditor, {
             props,
@@ -1106,7 +997,7 @@ describe('DtRichTextEditor tests', () => {
           props['outputFormat'] = 'html';
           props['modelValue'] = '';
           props['allowTables'] = true;
-          props['allowCustomTables'] = true;
+
           editorEl?.remove();
           wrapper = mount(DtRichTextEditor, {
             props,
@@ -1149,7 +1040,7 @@ describe('DtRichTextEditor tests', () => {
           props['outputFormat'] = 'html';
           props['modelValue'] = '';
           props['allowTables'] = true;
-          props['allowCustomTables'] = true;
+
           editorEl?.remove();
           wrapper = mount(DtRichTextEditor, {
             props,
@@ -1190,7 +1081,7 @@ describe('DtRichTextEditor tests', () => {
           props['outputFormat'] = 'html';
           props['modelValue'] = '';
           props['allowTables'] = true;
-          props['allowCustomTables'] = true;
+
           editorEl?.remove();
           wrapper = mount(DtRichTextEditor, {
             props,
@@ -1230,7 +1121,7 @@ describe('DtRichTextEditor tests', () => {
           props['outputFormat'] = 'html';
           props['modelValue'] = '';
           props['allowTables'] = true;
-          props['allowCustomTables'] = true;
+
           editorEl?.remove();
           wrapper = mount(DtRichTextEditor, {
             props,
@@ -1273,7 +1164,7 @@ describe('DtRichTextEditor tests', () => {
           props['outputFormat'] = 'html';
           props['modelValue'] = '';
           props['allowTables'] = true;
-          props['allowCustomTables'] = true;
+
           props['allowFontSize'] = true;
           props['allowFontColor'] = true;
           editorEl?.remove();

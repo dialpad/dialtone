@@ -369,7 +369,6 @@
         :preserve-whitespace="preserveWhitespace"
         :use-div-tags="useDivTags"
         :allow-tables="allowTables"
-        :allow-custom-tables="allowCustomTables"
         :allow-image-resize="allowImageResize"
         data-qa="dt-rich-text-editor"
         v-bind="removeClassStyleAttrs($attrs)"
@@ -788,15 +787,6 @@ export default {
      * Allow Tables to be used in to the editor
      */
     allowTables: {
-      type: Boolean,
-      default: false,
-    },
-
-    /**
-     * Use custom table extensions that preserve additional HTML attributes
-     * such as border, cellpadding, cellspacing, style, valign, and width.
-     */
-    allowCustomTables: {
       type: Boolean,
       default: false,
     },
