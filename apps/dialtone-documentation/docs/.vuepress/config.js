@@ -49,6 +49,14 @@ export default defineUserConfig({
       css: {
         devSourcemap: true,
       },
+      resolve: {
+        alias: [
+          // The combinator's DtcNode uses runtime template compilation (h({ template: '...' })),
+          // which requires the full Vue build including the compiler.
+          // Exact match only — must not rewrite vue/server-renderer etc. during SSR build.
+          { find: /^vue$/, replacement: 'vue/dist/vue.esm-bundler.js' },
+        ],
+      },
       server: {
         // hmr: {
         //   overlay: false,
@@ -124,9 +132,6 @@ export default defineUserConfig({
     '@projectRoot': path.resolve(__dirname, '../../'),
     '@': path.resolve(__dirname, '../'),
     '@workspaceRoot': path.resolve(__dirname, '../../../../'),
-    // The combinator's DtcNode uses runtime template compilation (h({ template: '...' })),
-    // which requires the full Vue build including the compiler.
-    'vue': 'vue/dist/vue.esm-bundler.js',
   },
 
   extendsPage: (page) => {
