@@ -1,3 +1,10 @@
+# [9.172.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.171.1...dialtone/v9.172.0) (2026-03-17)
+
+
+### Features
+
+* **Icon:** DLT-3136 convert docs inline svgs to components ([#1123](https://github.com/dialpad/dialtone/issues/1123)) ([8bae326](https://github.com/dialpad/dialtone/commit/8bae326eda78aaee3632464068113a748d6c3e69))
+
 ## [9.171.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.171.0...dialtone/v9.171.1) (2026-03-12)
 
 
