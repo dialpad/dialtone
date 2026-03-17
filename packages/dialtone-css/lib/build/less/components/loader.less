@@ -14,10 +14,12 @@
 //  ----------------------------------------------------------------------------
 @layer dialtone.components {
 .d-loader {
-  display: inline-flex;
+  display: inline-grid;
 }
 
 .d-loader__icon {
+  grid-area: 1 / 1;
+  opacity: var(--dt-opacity-1000);
   animation: d-loading-circle 900ms infinite linear;
 
   // Comet fade. Black is an intentional choice and only used for masking.
@@ -30,5 +32,10 @@
     black 234deg,
     black 360deg
   );
+}
+
+.d-loader__icon-track {
+  grid-area: 1 / 1;
+  opacity: var(--dt-opacity-200);
 }
 }
