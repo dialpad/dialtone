@@ -92,6 +92,7 @@
         <dt-stack
           gap="200"
           direction="row"
+          class="d-recipe-message-input__bottom-section-left-stack"
         >
           <dt-button
             v-if="showImagePicker"
