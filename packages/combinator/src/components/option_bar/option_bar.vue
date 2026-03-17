@@ -126,13 +126,7 @@
               </dt-stack>
             </dt-stack>
           </dt-tab-panel>
-          <!-- Events -->
-          <dtc-option-bar-member-group
-            :component="component"
-            :members="info.events"
-            :values="options.events"
-            :control-selector="getEventControls"
-          />
+          <!-- Events suppressed — not interactive in the playground -->
         </dt-stack>
       </div>
     </dt-tab-group>
@@ -229,10 +223,6 @@ function getBindingControls (binding, value, ...controls) {
     validControls,
     defaultControl,
   ];
-}
-
-function getEventControls () {
-  return getStaticControl('event');
 }
 
 function getSlotControls (member) {
