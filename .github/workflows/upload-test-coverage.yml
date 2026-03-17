@@ -26,7 +26,7 @@ jobs:
       - name: Setup Environment
         uses: ./.github/actions/setup-environment
 
-      - name: Run test coverage for Vue3
+      - name: Run test coverage for Vue
         run: pnpm nx run dialtone-vue:test:coverage
 
       - id: auth
