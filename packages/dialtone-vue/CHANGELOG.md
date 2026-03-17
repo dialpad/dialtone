@@ -1,3 +1,11 @@
+# [3.216.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.215.1...dialtone-vue/v3.216.0) (2026-03-17)
+
+
+### Features
+
+* **Editor:** DP-175912 extend table extension for table styling ([#1130](https://github.com/dialpad/dialtone/issues/1130)) ([b3793e7](https://github.com/dialpad/dialtone/commit/b3793e7976baba98ca84ada303c87e8e0935c1de))
+* **Loader:** DLT-2963 add track to loader ([#1133](https://github.com/dialpad/dialtone/issues/1133)) ([48a7a52](https://github.com/dialpad/dialtone/commit/48a7a527432f5e450d6dd9b12b4d64f8ef86bd2c))
+
 ## [3.215.1](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.215.0...dialtone-vue/v3.215.1) (2026-03-12)
 
 
