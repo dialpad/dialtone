@@ -38,7 +38,7 @@ htmlCode='
     <div data-qa="dt-hovercard-content" class="d-popover__content d-p16">
       <div>Content</div>
     </div>
-    <div data-qa="dt-popover-header-footer" class="d-popover__footer d-pl16">
+    <div data-qa="dt-popover-header-footer" class="d-popover__footer d-px16">
       <div data-qa="dt-popover-header-footer-content" class="d-popover__footer__content">
         <div>Footer</div>
       </div>
