@@ -239,8 +239,8 @@ import { BUTTON_SIZE_MODIFIERS } from '@/components/button';
 import { DtStack } from '@/components/stack';
 import { DtRadioGroup } from '@/components/radio_group';
 import { DtRadio } from '@/components/radio';
-import { DtIconFilter } from '@dialpad/dialtone-icons/vue3';
-import { DtIconBoxSelect } from '@dialpad/dialtone-icons/vue3';
+import { DtIconFilter } from '@dialpad/dialtone-icons/vue';
+import { DtIconBoxSelect } from '@dialpad/dialtone-icons/vue';
 
 import { DtText } from '../text/index';
 import { DtListItem } from '@/components/list_item';
