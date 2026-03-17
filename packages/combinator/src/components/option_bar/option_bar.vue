@@ -231,6 +231,10 @@ function getBindingControls (binding, value, ...controls) {
   ];
 }
 
+function getEventControls () {
+  return getStaticControl('event');
+}
+
 function getSlotControls (member) {
   if (isIconSlot(member)) {
     return getStaticControl('icon-slot');
