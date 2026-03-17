@@ -1,3 +1,16 @@
+# [9.173.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.172.0...dialtone/v9.173.0) (2026-03-17)
+
+
+### Bug Fixes
+
+* **Docs:** NO-JIRA fix dt-select-menu value on modal docs page ([#1132](https://github.com/dialpad/dialtone/issues/1132)) ([1be6fe0](https://github.com/dialpad/dialtone/commit/1be6fe025b7aab5c388c05c327772944f9f73240))
+
+
+### Features
+
+* **Editor:** DP-175912 extend table extension for table styling ([#1130](https://github.com/dialpad/dialtone/issues/1130)) ([b3793e7](https://github.com/dialpad/dialtone/commit/b3793e7976baba98ca84ada303c87e8e0935c1de))
+* **Loader:** DLT-2963 add track to loader ([#1133](https://github.com/dialpad/dialtone/issues/1133)) ([48a7a52](https://github.com/dialpad/dialtone/commit/48a7a527432f5e450d6dd9b12b4d64f8ef86bd2c))
+
 # [9.172.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.171.1...dialtone/v9.172.0) (2026-03-17)
 
 
