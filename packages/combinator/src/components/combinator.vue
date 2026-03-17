@@ -240,7 +240,7 @@ let _presetChanging = false;
 const _forceReset = ref(0);
 
 const variantOptions = computed(() => {
-  return Object.keys(props.variants)
+  return Object.keys(props.variants ?? {})
     .filter(key => key !== 'exclusions')
     .map(key => ({ value: key, label: key }));
 });
