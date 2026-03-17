@@ -377,10 +377,9 @@ Pass `href` to render as an `<a>` element. Use `target="_blank"` and `rel="noope
     kind="muted"
     importance="outlined"
     size="sm"
-    icon-position="right"
     ref="hrefExample1"
   >
-    <template #icon="{ iconSize }">
+    <template #endIcon="{ iconSize }">
       <dt-icon name="external-link" :size="iconSize" />
     </template>
     Dialtone
@@ -397,9 +396,8 @@ vueCode='
   kind="muted"
   importance="outlined"
   size="sm"
-  icon-position="right"
 >
-  <template #icon="{ iconSize }">
+  <template #endIcon="{ iconSize }">
     <dt-icon name="external-link" :size="iconSize" />
   </template>
   Dialtone
@@ -483,19 +481,44 @@ The default button size is `md`, but does not need to be explicitly specified.
     ref="sizesExample"
   >
     <span>
-      <dt-button size="xs"> Place Call </dt-button>
+      <dt-button size="xs" kind="muted" importance="outlined">
+        Call
+        <template #startIcon="{ iconSize }">
+          <dt-icon name="phone" :size="iconSize" />
+        </template>
+      </dt-button>
     </span>
     <span>
-      <dt-button size="sm"> Place Call </dt-button>
+      <dt-button size="sm" kind="muted" importance="outlined">
+        Call
+        <template #startIcon="{ iconSize }">
+          <dt-icon name="phone" :size="iconSize" />
+        </template>
+      </dt-button>
     </span>
     <span>
-      <dt-button> Place Call </dt-button>
+      <dt-button kind="muted" importance="outlined">
+        Call
+        <template #startIcon="{ iconSize }">
+          <dt-icon name="phone" :size="iconSize" />
+        </template>
+      </dt-button>
     </span>
     <span>
-      <dt-button size="lg"> Place Call </dt-button>
+      <dt-button size="lg" kind="muted" importance="outlined">
+        Call
+        <template #startIcon="{ iconSize }">
+          <dt-icon name="phone" :size="iconSize" />
+        </template>
+      </dt-button>
     </span>
     <span>
-      <dt-button size="xl"> Place Call </dt-button>
+      <dt-button size="xl" kind="muted" importance="outlined">
+        Call
+        <template #startIcon="{ iconSize }">
+          <dt-icon name="phone" :size="iconSize" />
+        </template>
+      </dt-button>
     </span>
   </dt-stack>
 </code-well-header>
@@ -503,11 +526,36 @@ The default button size is `md`, but does not need to be explicitly specified.
 <code-example-tabs
 :htmlCode='() => $refs.sizesExample'
 vueCode='
-<dt-button size="xs"> Place Call </dt-button>
-<dt-button size="sm"> Place Call </dt-button>
-<dt-button> Place Call </dt-button>
-<dt-button size="lg"> Place Call </dt-button>
-<dt-button size="xl"> Place Call </dt-button>
+<dt-button size="xs">
+  Place Call
+  <template #startIcon="{ iconSize }">
+    <dt-icon name="phone" :size="iconSize" />
+  </template>
+</dt-button>
+<dt-button size="sm">
+  Place Call
+  <template #startIcon="{ iconSize }">
+    <dt-icon name="phone" :size="iconSize" />
+  </template>
+</dt-button>
+<dt-button>
+  Place Call
+  <template #startIcon="{ iconSize }">
+    <dt-icon name="phone" :size="iconSize" />
+  </template>
+</dt-button>
+<dt-button size="lg">
+  Place Call
+  <template #startIcon="{ iconSize }">
+    <dt-icon name="phone" :size="iconSize" />
+  </template>
+</dt-button>
+<dt-button size="xl">
+  Place Call
+  <template #startIcon="{ iconSize }">
+    <dt-icon name="phone" :size="iconSize" />
+  </template>
+</dt-button>
 '
 showHtmlWarning />
 
@@ -1201,7 +1249,7 @@ showHtmlWarning />
 <code-well-header>
   <dt-button size="sm" kind="muted" importance="outlined" trailing-class="d-pr2" ref="trailingExample">
     Copy
-    <template #icon="{ iconSize }">
+    <template #startIcon="{ iconSize }">
       <dt-icon name="copy" :size="iconSize" />
     </template>
     <template #trailing>
@@ -1215,7 +1263,7 @@ showHtmlWarning />
 vueCode='
 <dt-button size="sm" kind="muted" importance="outlined" trailing-class="d-pr2">
   Copy
-  <template #icon="{ iconSize }">
+  <template #startIcon="{ iconSize }">
     <dt-icon name="copy" :size="iconSize" />
   </template>
   <template #trailing>

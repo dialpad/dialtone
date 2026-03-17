@@ -52,7 +52,8 @@ export const argTypesData = {
     },
   },
   inverted: {
-    table: { disable: true },
+    table: { category: 'Deprecated' },
+    description: 'Deprecated.',
   },
 };
 

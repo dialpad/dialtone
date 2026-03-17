@@ -71,10 +71,19 @@ export const argTypesData = {
     },
   },
 
-  // Deprecated slots (hidden)
-  alphaIcon: { table: { disable: true } },
-  omega: { table: { disable: true } },
-  omegaIcon: { table: { disable: true } },
+  // Deprecated slots
+  alphaIcon: {
+    table: { category: 'Deprecated' },
+    description: 'Use `startIcon` instead.',
+  },
+  omega: {
+    table: { category: 'Deprecated' },
+    description: 'Use `end` instead.',
+  },
+  omegaIcon: {
+    table: { category: 'Deprecated' },
+    description: 'Use `endIcon` instead.',
+  },
 
   // Props
   assertiveOnFocus: {
@@ -157,19 +166,55 @@ export const argTypesData = {
     },
   },
 
-  // Deprecated props (hidden)
-  alphaActive: { table: { disable: true } },
-  alphaAriaLabel: { table: { disable: true } },
-  alphaDisabled: { table: { disable: true } },
-  alphaIconPosition: { table: { disable: true } },
-  alphaLabelClass: { table: { disable: true } },
-  alphaLoading: { table: { disable: true } },
-  alphaTooltipText: { table: { disable: true } },
-  omegaActive: { table: { disable: true } },
-  omegaAriaLabel: { table: { disable: true } },
-  omegaDisabled: { table: { disable: true } },
-  omegaId: { table: { disable: true } },
-  omegaTooltipText: { table: { disable: true } },
+  // Deprecated props
+  alphaActive: {
+    table: { category: 'Deprecated' },
+    description: 'Use `startActive` instead.',
+  },
+  alphaAriaLabel: {
+    table: { category: 'Deprecated' },
+    description: 'Use `startAriaLabel` instead.',
+  },
+  alphaDisabled: {
+    table: { category: 'Deprecated' },
+    description: 'Use `startDisabled` instead.',
+  },
+  alphaIconPosition: {
+    table: { category: 'Deprecated' },
+    description: 'Use `startIconPosition` instead.',
+  },
+  alphaLabelClass: {
+    table: { category: 'Deprecated' },
+    description: 'Use `startLabelClass` instead.',
+  },
+  alphaLoading: {
+    table: { category: 'Deprecated' },
+    description: 'Use `startLoading` instead.',
+  },
+  alphaTooltipText: {
+    table: { category: 'Deprecated' },
+    description: 'Use `startTooltipText` instead.',
+  },
+  omegaActive: {
+    table: { category: 'Deprecated' },
+    description: 'Use `endActive` instead.',
+  },
+  omegaAriaLabel: {
+    table: { category: 'Deprecated' },
+    description: 'Use `endAriaLabel` instead.',
+  },
+  omegaDisabled: {
+    table: { category: 'Deprecated' },
+    description: 'Use `endDisabled` instead.',
+  },
+  omegaId: {
+    table: { category: 'Deprecated' },
+    description: 'Use `endId` instead.',
+  },
+  omegaTooltipText: {
+    table: { category: 'Deprecated' },
+    description: 'Use `endTooltipText` instead.',
+  },
 
   // Action Event Handlers
   onStartClicked: {
@@ -185,15 +230,13 @@ export const argTypesData = {
   },
 
   onAlphaClicked: {
-    table: {
-      disable: true,
-    },
+    table: { category: 'Deprecated' },
+    description: 'Use `onStartClicked` instead.',
   },
 
   onOmegaClicked: {
-    table: {
-      disable: true,
-    },
+    table: { category: 'Deprecated' },
+    description: 'Use `onEndClicked` instead.',
   },
 };
 

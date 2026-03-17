@@ -52,7 +52,7 @@
                     size="sm"
                     role="menuitem"
                   >
-                    <template #leftIcon="{ iconSize }">
+                    <template #startIcon="{ iconSize }">
                       <dt-icon-search :size="iconSize" />
                     </template>
                   </dt-input>
@@ -184,7 +184,7 @@
                     size="md"
                     role="menuitem"
                   >
-                    <template #leftIcon="{ iconSize }">
+                    <template #startIcon="{ iconSize }">
                       <dt-icon-search :size="iconSize" />
                     </template>
                   </dt-input>

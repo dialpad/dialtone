@@ -38,7 +38,7 @@
         v-if="selected"
         #selected
       >
-        <dt-icon-check size="400" />
+        <dt-icon-check size="200" />
       </template>
     </dt-item-layout>
     <!-- @slot slot for the main content -->
