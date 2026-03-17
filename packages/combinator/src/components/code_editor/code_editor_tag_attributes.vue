@@ -98,6 +98,7 @@ const bindingMap = computed(() => {
  */
 function isMemberVisible (name, member) {
   if (props.disabledMembers.has(name)) { return false; }
+  if (member.value === null || (typeof member.value === 'number' && isNaN(member.value))) { return false; }
   if (props.verbose) { return true; }
 
   const defaultString = JSON.stringify(member.defaultValue);

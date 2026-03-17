@@ -4,7 +4,7 @@
     :disabled="disabled"
     type="number"
     size="xs"
-    @input="e => emit(VALUE_UPDATE_EVENT, parseInt(e))"
+    @input="e => emit(VALUE_UPDATE_EVENT, e === '' ? undefined : parseInt(e))"
   >
     <template #labelSlot>
       <dt-text

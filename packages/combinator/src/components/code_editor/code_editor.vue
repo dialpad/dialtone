@@ -199,6 +199,7 @@ const copyText = computed(() => {
     })
     .filter(member => {
       if (props.disabledMembers.has(member.name)) return false;
+      if (member.value === null || (typeof member.value === 'number' && isNaN(member.value))) return false;
       if (props.verbose) return true;
       return JSON.stringify(member.defaultValue) !== JSON.stringify(member.value);
     });
