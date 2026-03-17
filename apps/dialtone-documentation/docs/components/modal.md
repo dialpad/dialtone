@@ -402,16 +402,9 @@ When there is a need of more context information regarding the content of the Mo
     <dt-select-menu
       label="Kind of Banner"
       size="md"
-      @change="changeBannerKind"
-    >
-      <option
-        v-for="option in bannerKinds()"
-        :key="option"
-        :selected="option === selectedBannerKind"
-        :value="option"
-        v-text="option"
-      />
-    </dt-select-menu>
+      :options="bannerKinds"
+      v-model="selectedBannerKind"
+    />
     <example-modal kind="default" :banner-kind="selectedBannerKind" banner-title="This banner can have different kinds." />
   </dt-stack>
 </code-well-header>
@@ -569,11 +562,6 @@ At minimum, modals contain a title and one button. They could also contain body 
     if (!value) isOpen.value = false;
   };
 
-  const changeBannerKind = (kind) => {
-    selectedBannerKind.value = kind;
-  };
-
-  const bannerKinds = () => {
-    return Object.keys(window.DIALTONE_CONSTANTS.MODAL_BANNER_KINDS);
-  };
+  const bannerKinds = Object.keys(window.DIALTONE_CONSTANTS.MODAL_BANNER_KINDS)
+    .map(kind => ({ value: kind, label: kind }));
 </script>
