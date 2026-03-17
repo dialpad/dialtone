@@ -10,7 +10,7 @@ keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFil
 <code-well-header>
   <dt-stack direction="row" gap="400">
     <dt-filter-pill
-      v-model="momentCount"
+      :model-value="[{name: 'Address', active: true}, {name: 'Call Purpose', active: true}, {name: 'Action Item'}, {name: 'Negative Sentiment'}, {name: 'Warranty Inquiry', active: true}]"
       label="Moment"
       end-tooltip-text="Remove"
     >
@@ -49,7 +49,7 @@ keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFil
       </template>
     </dt-filter-pill>
     <dt-filter-pill
-      v-model="deferredFilters"
+      :model-value="[{name: 'Email'}, {name: 'Phone', active: true}, {name: 'Chat'}, {name: 'Social'}, {name: 'SMS'}]"
       label="Channel"
       end-tooltip-text="Remove"
       popover-footer-class="d-pr16 d-py12"
@@ -61,6 +61,8 @@ keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFil
     </dt-button>
   </dt-stack>
 </code-well-header>
+
+<component-combinator component-name="DtFilterPill" />
 
 ## Usage
 
@@ -90,8 +92,6 @@ keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFil
 
 </dialtone-usage>
 
-<component-combinator component-name="DtFilterPill" />
-
 ## Variants
 
 ### Base
@@ -99,8 +99,8 @@ keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFil
 <code-well-header>
   <dt-stack direction="row" gap="400">
       <dt-filter-pill
+        :model-value="[{name: 'Email'}, {name: 'Phone'}, {name: 'Chat'}, {name: 'Social'}, {name: 'SMS'}]"
         label="Channel"
-        v-model="baseFilters"
         ref="simpleExample"
       >
       </dt-filter-pill>
@@ -109,7 +109,7 @@ keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFil
 
 <code-example-tabs
 :htmlCode='() => $refs.simpleExample'
-vueCode='<dt-filter-pill v-model="[...]" label="Channel" />'
+vueCode='<dt-filter-pill :model-value="[{name: &apos;Email&apos;}, {name: &apos;Phone&apos;}, {name: &apos;Chat&apos;}, {name: &apos;Social&apos;}, {name: &apos;SMS&apos;}]" label="Channel" />'
 showHtmlWarning />
 
 ### Active
@@ -119,8 +119,8 @@ The pill becomes active when any filter item has `active: true`.
 <code-well-header>
   <dt-stack direction="row" gap="400">
       <dt-filter-pill
+        :model-value="[{name: 'Headquarters', active: true}, {name: 'Westside'}, {name: 'Downtown'}]"
         label="Contact centers"
-        v-model="activeFilters"
         ref="activeExample"
       >
       </dt-filter-pill>
@@ -129,7 +129,7 @@ The pill becomes active when any filter item has `active: true`.
 
 <code-example-tabs
 :htmlCode='() => $refs.activeExample'
-vueCode='<dt-filter-pill v-model="[...]" label="Contact centers" />'
+vueCode='<dt-filter-pill :model-value="[{name: &apos;Headquarters&apos;, active: true}, {name: &apos;Westside&apos;}, {name: &apos;Downtown&apos;}]" label="Contact centers" />'
 showHtmlWarning />
 
 ### Disabled
@@ -152,7 +152,7 @@ Its value is reflected in the filter set but cannot be opened, cleared, or modif
 <code-well-header>
   <dt-stack direction="row" gap="400">
     <dt-filter-pill
-      v-model="readOnlyFilters"
+      :model-value="[{name: 'Headquarters', active: true}, {name: 'Westside', active: true}, {name: 'Downtown'}]"
       label="Contact centers"
       read-only
       ref="readOnlyExample"
@@ -162,7 +162,7 @@ Its value is reflected in the filter set but cannot be opened, cleared, or modif
 
 <code-example-tabs
 :htmlCode='() => $refs.readOnlyExample'
-vueCode='<dt-filter-pill v-model="[...]" label="Contact centers" read-only />'
+vueCode='<dt-filter-pill :model-value="[{name: &apos;Headquarters&apos;, active: true}, {name: &apos;Westside&apos;, active: true}, {name: &apos;Downtown&apos;}]" label="Contact centers" read-only />'
 showHtmlWarning />
 
 ### Size
@@ -206,7 +206,7 @@ A clear button appears when any filter is active. It emits the `reset` event whe
 
 <code-example-tabs
 :htmlCode='() => $refs.clearableExample'
-vueCode='<dt-filter-pill label="Channel" v-model="[...]" />'
+vueCode='<dt-filter-pill label="Channel" :model-value="[{name: &apos;Option 1&apos;}, {name: &apos;Option 2&apos;, active: true}, {name: &apos;Option 3&apos;}]" end-tooltip-text="Remove" />'
 showHtmlWarning />
 
 ### Non clearable
@@ -216,9 +216,9 @@ Setting the `hide-clear` prop hides the reset/clear button.
 <code-well-header>
   <dt-stack direction="row" gap="400">
     <dt-filter-pill
+      :model-value="[{name: '0–5 min', active: true}, {name: '5–15 min'}, {name: '15–30 min'}, {name: '30+ min'}]"
       label="Duration"
       ref="nonClearableExample"
-      v-model="nonClearableFilters"
       hide-clear
     >
     </dt-filter-pill>
@@ -227,7 +227,7 @@ Setting the `hide-clear` prop hides the reset/clear button.
 
 <code-example-tabs
 :htmlCode='() => $refs.nonClearableExample'
-vueCode='<dt-filter-pill label="Duration" v-model="[...]" hide-clear />'
+vueCode='<dt-filter-pill label="Duration" :model-value="[{name: &apos;0–5 min&apos;, active: true}, {name: &apos;5–15 min&apos;}, {name: &apos;15–30 min&apos;}, {name: &apos;30+ min&apos;}]" hide-clear />'
 showHtmlWarning />
 
 ### Defer selection
@@ -238,8 +238,8 @@ Cancel, Escape, or clicking outside discards pending changes.
 <code-well-header>
   <dt-stack direction="row" gap="400">
     <dt-filter-pill
+      :model-value="[{name: 'Email'}, {name: 'Phone', active: true}, {name: 'Chat'}, {name: 'Social'}, {name: 'SMS'}]"
       ref="deferredExample"
-      v-model="deferredFilters"
       label="Channel"
       end-tooltip-text="Remove"
       defer-selection
@@ -251,7 +251,7 @@ Cancel, Escape, or clicking outside discards pending changes.
 
 <code-example-tabs
 :htmlCode='() => $refs.deferredExample'
-vueCode='<dt-filter-pill v-model="[...]" label="Channel" defer-selection />'
+vueCode='<dt-filter-pill :model-value="[{name: &apos;Email&apos;}, {name: &apos;Phone&apos;, active: true}, {name: &apos;Chat&apos;}, {name: &apos;Social&apos;}, {name: &apos;SMS&apos;}]" label="Channel" defer-selection />'
 showHtmlWarning />
 
 ### Dropdown
@@ -296,7 +296,7 @@ out of the box — ideal for single-select filter patterns.
 <code-example-tabs
 :htmlCode='() => $refs.dropdownExample'
 vueCode='<dt-filter-pill
-  v-model="conversationTypes"
+  :model-value="[{name: &apos;All Conversations&apos;}, {name: &apos;Only Calls&apos;}, {name: &apos;Only Meetings&apos;}, {name: &apos;Only Digital&apos;}]"
   :start-tooltip-text="selectedType !== &apos;All Conversations&apos;
     ? &apos;Conversation type&apos;
     : &apos;&apos;"
@@ -337,7 +337,7 @@ Using the `default` scoped slot, you can display a count of active filters along
 <code-well-header>
   <dt-stack direction="row" gap="400">
     <dt-filter-pill
-      v-model="momentCount"
+      :model-value="[{name: 'Address', active: true}, {name: 'Call Purpose', active: true}, {name: 'Action Item'}, {name: 'Negative Sentiment'}, {name: 'Warranty Inquiry', active: true}]"
       label="Contact centers"
       end-tooltip-text="Remove"
       ref="badgeCountExample"
@@ -354,7 +354,7 @@ Using the `default` scoped slot, you can display a count of active filters along
 
 <code-example-tabs
 :htmlCode='() => $refs.badgeCountExample'
-vueCode='<dt-filter-pill v-model="filters" label="Contact centers" end-tooltip-text="Remove">
+vueCode='<dt-filter-pill :model-value="[{name: &apos;Address&apos;, active: true}, {name: &apos;Call Purpose&apos;, active: true}, {name: &apos;Action Item&apos;}, {name: &apos;Negative Sentiment&apos;}, {name: &apos;Warranty Inquiry&apos;, active: true}]" label="Contact centers" end-tooltip-text="Remove">
   <template #default="{ label, filters, activeFilters }">
     {{ label }}<template v-if="activeFilters.length">:
     <strong>
@@ -371,7 +371,7 @@ Shows the first active filter name using `activeFilterList`, with overflow count
 <code-well-header>
   <dt-stack direction="row" gap="400">
     <dt-filter-pill
-      v-model="channelsFilterList"
+      :model-value="[{name: 'Email', active: true}, {name: 'Phone', active: true}, {name: 'Chat', active: true}, {name: 'Social'}, {name: 'SMS'}]"
       label="Channel"
       end-tooltip-text="Remove"
       ref="filterListExample"
@@ -389,7 +389,7 @@ Shows the first active filter name using `activeFilterList`, with overflow count
 
 <code-example-tabs
 :htmlCode='() => $refs.filterListExample'
-vueCode='<dt-filter-pill v-model="filters" label="Channel" end-tooltip-text="Remove">
+vueCode='<dt-filter-pill :model-value="[{name: &apos;Email&apos;, active: true}, {name: &apos;Phone&apos;, active: true}, {name: &apos;Chat&apos;, active: true}, {name: &apos;Social&apos;}, {name: &apos;SMS&apos;}]" label="Channel" end-tooltip-text="Remove">
   <template #default="{ label, filters, activeFilters, activeFilterList, activeFilterOverflow }">
     {{ label }}<template v-if="activeFilters.length">:
     <strong>
@@ -408,7 +408,7 @@ The label updates to show the selected option, and a clear button resets to the 
 <code-well-header>
   <dt-stack direction="row" gap="400">
     <dt-filter-pill
-      v-model="conversationTypes"
+      :model-value="[{name: 'All Conversations'}, {name: 'Only Calls'}, {name: 'Only Meetings'}, {name: 'Only Digital'}]"
       :start-tooltip-text="selectedConversationType !== 'All Conversations'
         ? 'Conversation type'
         : ''"
@@ -442,7 +442,7 @@ The label updates to show the selected option, and a clear button resets to the 
 <code-example-tabs
 :htmlCode='() => $refs.radioExample'
 vueCode='<dt-filter-pill
-  v-model="conversationTypes"
+  :model-value="[{name: &apos;All Conversations&apos;}, {name: &apos;Only Calls&apos;}, {name: &apos;Only Meetings&apos;}, {name: &apos;Only Digital&apos;}]"
   :start-tooltip-text="selectedConversationType !== &apos;All Conversations&apos;
     ? &apos;Conversation type&apos;
     : &apos;&apos;"
@@ -476,9 +476,9 @@ Using the `content` slot, you can override the popover content with custom marku
 <code-well-header>
   <dt-stack direction="row" gap="400">
     <dt-filter-pill
+      :model-value="[{name: 'Contains'}, {name: 'Starts with'}]"
       label="Keyword"
       ref="contentSlotExample"
-      v-model="contentSlotFilters"
     >
       <template #content>
         Enter a keyword to filter results
@@ -489,12 +489,11 @@ Using the `content` slot, you can override the popover content with custom marku
 
 <code-example-tabs
 :htmlCode='() => $refs.contentSlotExample'
-vueCode='<dt-filter-pill label="Keyword" v-model="[...]">
+vueCode='<dt-filter-pill label="Keyword" :model-value="[{name: &apos;Contains&apos;}, {name: &apos;Starts with&apos;}]">
   <template #content>
     Enter a keyword to filter results
   </template>
-</dt-filter-pill>
-// filters = [{ name: &quot;Option 1&quot; }, { name: &quot;Option 2&quot; }]'
+</dt-filter-pill>'
 showHtmlWarning />
 
 ## Content Mode
