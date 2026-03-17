@@ -1,0 +1,145 @@
+name: Claude Code Review
+
+on:
+  pull_request:
+    types: [opened, ready_for_review]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'PR number to review'
+        required: true
+        type: number
+
+jobs:
+  claude-review:
+    name: Claude Code Review
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    if: |
+      (github.event_name == 'workflow_dispatch') ||
+      (!github.event.pull_request.draft && github.actor != 'gha-automation-app[bot]')
+
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+      id-token: write
+
+    concurrency:
+      group: claude-review-${{ github.event.pull_request.number || inputs.pr_number }}
+      cancel-in-progress: true
+
+    steps:
+      - name: Resolve PR number
+        id: pr
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "number=${{ inputs.pr_number }}" >> $GITHUB_OUTPUT
+          else
+            echo "number=${{ github.event.pull_request.number }}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          ref: ${{ github.event_name == 'workflow_dispatch' && format('refs/pull/{0}/merge', steps.pr.outputs.number) || '' }}
+
+      - name: Run Claude Code Review
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          claude_args: '--max-turns 20 --allowed-tools "Bash(gh pr diff:*),Bash(gh pr view:*),Bash(gh api:*),Bash(cat:*),Bash(find:*),Bash(ls:*),Bash(grep:*),Read"'
+          prompt: |
+            You are reviewing a pull request for Dialtone, Dialpad's public design system monorepo.
+            Breaking changes here have blast radius across all Dialpad products and external consumers.
+
+            PR NUMBER: ${{ steps.pr.outputs.number }}
+            REPO: ${{ github.repository }}
+
+            ## Steps
+
+            1. Get the diff: `gh pr diff ${{ steps.pr.outputs.number }}`
+            2. Read relevant source files for full context on changed code
+            3. Read project standards:
+               - `cat CLAUDE.md`
+               - Read any `.claude/rules/*.md` files relevant to the changed packages
+            4. Post inline review comments using the PR Review API (see format below)
+            5. If the PR has NO issues, post nothing. Do not comment just to say "looks good".
+
+            ## What to check
+
+            ### Design System Rules (CRITICAL — this is a public npm library)
+
+            - **Breaking changes**: Flag any prop/event/slot removal or rename, CSS class changes,
+              token name changes, or public API changes that lack a `BREAKING CHANGE:` footer
+              in the commit message. Uncategorized breaking changes ship as patches and silently
+              break consumers.
+            - **Design token usage**: Flag raw hex/rgb/hsl color values, px values, hardcoded z-index,
+              or border-radius in CSS/LESS that should use `--dt-color-*`, `--dt-space-*`,
+              `--dt-size-*`, `--dt-z-index-*`, or `--dt-radius-*` tokens.
+            - **Component API consistency**: New components must use `is/has/show` boolean prop
+              prefixes, kebab-case event names, `update:modelValue` for v-model, explicit TypeScript
+              types on all props, and `defineOptions({ name: 'DtXxx' })` with the `Dt` prefix.
+            - **Accessibility**: Beyond automated axe tests — review ARIA attribute correctness,
+              keyboard navigation, focus management in modals/overlays, and screen reader
+              announcements via `aria-live`.
+            - **Storybook/docs parity**: Flag new or modified props without argTypes updates,
+              new variants without a Story, or new features without MDX documentation.
+            - **Deprecation patterns**: Deprecations must include `console.warn` with migration
+              message, remain functional, have a story badge, use `feat: deprecate X` commit type,
+              and document the replacement in CHANGELOG.
+            - **Theme coverage**: New design tokens must be defined across all 8 themes
+              (Dialpad Light/Dark, T-Mobile Light/Dark, Expressive Light/Dark,
+              Expressive Small Light/Dark).
+            - **Localization**: New user-facing strings must reference FTL localization keys.
+              Flag hardcoded English strings. Flag if not all 10 locale FTL files were updated.
+
+            ### Monorepo Rules
+
+            - **Cross-package impact**: Flag changes in one package with undeclared impact on another
+              (e.g., token rename not reflected in dialtone-css, component change not reflected in
+              dialtone-documentation or dialtone-mcp-server data).
+            - **Semantic versioning**: Commit type must match actual impact — removals and renames
+              require `BREAKING CHANGE:`, new exported APIs require `feat:`, not `fix:`.
+            - **Bundle size**: Flag non-tree-shakeable imports added to entry points, side effects
+              preventing tree-shaking, or heavy dependencies added without justification.
+            - **Migration path**: Breaking changes must have a clear CHANGELOG entry or migration
+              guide sufficient for downstream consumers to act on.
+
+            ### General Code Quality
+
+            - Bugs, logic errors, incorrect conditionals, promise handling mistakes
+            - Performance issues (unnecessary re-renders, missing `v-memo`, heavy watchers)
+            - Security (XSS via `v-html`, unsafe `innerHTML`, exposed secrets)
+            - Dead code, unused variables, unnecessary complexity
+            - Test coverage for new or modified functionality
+
+            ## Review format — INLINE ONLY
+
+            Post inline review comments on the exact lines where issues occur using the GitHub PR Review API. Do NOT post summary comments.
+
+            ```bash
+            gh api repos/${{ github.repository }}/pulls/${{ steps.pr.outputs.number }}/reviews \
+              --method POST \
+              --input - <<'EOF'
+            {
+              "event": "COMMENT",
+              "body": "",
+              "comments": [
+                {
+                  "path": "packages/dialtone-vue/components/example/example.vue",
+                  "line": 42,
+                  "body": "🔴 **CRITICAL** — description of the issue\n\nSuggested fix: ..."
+                }
+              ]
+            }
+            EOF
+            ```
+
+            IMPORTANT:
+            - Only comment on lines that appear in the diff. Use line numbers from the NEW side of the diff (lines with `+` prefix). Commenting on lines not in the diff returns a 422 error.
+            - Batch all inline comments into a single review API call.
+            - Prefix each comment body with severity: 🔴 CRITICAL / 🟡 MAJOR / 🟢 MINOR
+            - Be specific and constructive. Only flag real issues visible in the diff.
+            - If there are no issues, do nothing — no "looks good" comments.
