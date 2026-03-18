@@ -204,7 +204,7 @@ showHtmlWarning />
 
 ## Spread
 
-Control how tabs distribute available horizontal space within the tab list.
+Control how tabs distribute available horizontal space within the tab list. It only applies to horizontal tabs, and has no effect with `orientation="vertical"`.
 
 ### Grow
 
