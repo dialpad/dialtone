@@ -8,6 +8,7 @@
     append-to="body"
     @select="e => onSelect(filteredIcons[e])"
     @opened="onOpen"
+    @focusout="onFocusOut"
   >
     <template #input="{ inputProps, onInput }">
       <dtc-control-string
@@ -120,6 +121,14 @@ const open = ref(false);
 
 function onOpen (e) {
   open.value = e;
+}
+
+function onFocusOut (e) {
+  if (e.relatedTarget?.closest('[data-tippy-root]')) return;
+  if (combobox.value?.$el?.contains(e.relatedTarget)) return;
+  if (open.value) {
+    combobox.value?.closeComboboxList();
+  }
 }
 
 function onSelectInternal (i) {
