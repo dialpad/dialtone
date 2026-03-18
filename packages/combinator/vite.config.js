@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 
 export default defineConfig({
   build: {
-    target: 'modules',
+    target: 'es2020',
     sourcemap: true,
     minify: false,
     rolldownOptions: {

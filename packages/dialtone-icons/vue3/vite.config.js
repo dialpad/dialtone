@@ -18,7 +18,7 @@ const illustrationEntries = glob.sync('../src/illustrations/*.vue').reduce((entr
 }, {});
 export default defineConfig({
   build: {
-    target: 'modules',
+    target: 'es2020',
     sourcemap: true,
     lib: {
       entry: {
