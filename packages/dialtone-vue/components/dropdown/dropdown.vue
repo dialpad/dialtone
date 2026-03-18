@@ -206,6 +206,7 @@ export default {
 
     /**
      * The direction the dropdown displays relative to the anchor.
+     * @values top, top-start, top-end, right, right-start, right-end, left, left-start, left-end, bottom, bottom-start, bottom-end, auto, auto-start, auto-end
      */
     placement: {
       type: String,
