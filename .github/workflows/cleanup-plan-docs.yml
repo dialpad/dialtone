@@ -1,0 +1,39 @@
+name: Cleanup Plan Docs
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [staging]
+
+jobs:
+  cleanup:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: ${{ github.workflow }}
+      cancel-in-progress: false
+    steps:
+      - name: Checkout staging
+        uses: actions/checkout@v4
+        with:
+          ref: staging
+          token: ${{ github.token }}
+
+      - name: Configure Git User
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Remove planning docs
+        run: |
+          git rm -f PLAN-*.md --ignore-unmatch
+          git rm -rf docs/plans/ --ignore-unmatch
+
+      - name: Commit and push if changed
+        run: |
+          if ! git diff --cached --quiet --exit-code; then
+            git commit -m "chore: remove planning docs post-merge [skip ci]"
+            git push origin staging
+          fi

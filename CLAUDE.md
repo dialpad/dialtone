@@ -111,6 +111,36 @@ When creating or updating a component, ALL must stay in sync:
 - Workflow: feature branch → PR to `staging` → semantic-release → `production` fast-forward
 - Config: `release-ci.config.cjs` per package
 
+## Doc Sync Tooling
+
+Hooks and tools that keep `packages/dialtone-docs/src/content/` in sync with source code changes. Requires the `dialtone-docs` package (PR #1051) to be merged.
+
+### How it works
+
+1. **Edit tracker** (`.claude/hooks/post-tool-use-tracker.sh`) — PostToolUse hook that silently logs every file edit to `.claude/tsc-cache/<session>/edited-files.log` with affected packages and NX commands.
+2. **Pre-push guard** (`.claude/hooks/pre-push-pr-guard.sh`) — PreToolUse hook on Bash that fires on `git push` / `gh pr create`. Maps source packages to doc content files. Denies push if docs are missing and triggers the enforcer.
+3. **Doc sync enforcer** — Skill (`/doc-sync-enforcer`) that reads the edit log, maps changes to `dialtone-docs` content files, and updates them.
+4. **Doc janitor** — Agent (`/doc-janitor`) that sweeps stale artifacts (plan files, session files, backups) before merging.
+
+### Package → doc mapping
+
+| Source package | Doc content file |
+| --- | --- |
+| `packages/dialtone-tokens/` | `development-design-tokens.md`, `architecture-design-token-pipeline.md` |
+| `packages/dialtone-css/` | `development-css-utilities.md` |
+| `packages/dialtone-vue/` | `development-component-workflow.md`, `reference-component-api-patterns.md` |
+| `packages/dialtone-icons/` | `development-icons.md` |
+| `.github/workflows/` | `workflow-ci-pipeline.md` |
+
+### Session cache
+
+All tracking data lives in `.claude/tsc-cache/<session>/` (gitignored):
+- `edited-files.log` — tab-separated: `timestamp\tfilepath\trepo`
+- `affected-repos.txt` — one package per line
+- `commands.txt` — NX build/test commands for affected packages
+- `missing-docs.txt` — written by the guard when docs are missing
+- `push-done` / `pr-create-done` — marker files to avoid re-checking
+
 ## Key Files Reference
 
 | File | Purpose |

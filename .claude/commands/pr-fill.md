@@ -60,13 +60,16 @@ When this command is used, Claude should:
 8. **Detect cross-package impact:**
    When changes span multiple packages, add a "Cross-Package Impact" section noting affected packages and downstream effects per the dependency graph (`tokens --> CSS --> Vue --> docs / MCP / language-server`).
 
-9. **Flag documentation artifacts:**
-   Check all 6 documentation artifacts are updated (see CLAUDE.md Documentation Pipeline). Add a "Documentation Artifacts" section listing which are relevant to the changes. Mark artifacts already updated with a checkmark and those needing attention with a flag.
+9. **Suggest doc-janitor cleanup:**
+   Before generating the PR body, check for stale work artifacts (PLAN-*.md, SESSION_*.md, *.backup, etc.) in the working tree. If any are found, suggest running `/doc-janitor` to clean them up before opening the PR. Do not block — just inform the user and continue.
 
-10. **Strip Co-Authored-By lines:**
+10. **Flag documentation artifacts:**
+    Check all 6 documentation artifacts are updated (see CLAUDE.md Documentation Pipeline). Add a "Documentation Artifacts" section listing which are relevant to the changes. Mark artifacts already updated with a checkmark and those needing attention with a flag.
+
+11. **Strip Co-Authored-By lines:**
     Before writing the final PR body, remove any `Co-Authored-By:` lines from the generated content. These must never appear in PR descriptions.
 
-11. **Update the PR:**
+12. **Update the PR:**
     - Use `gh pr edit <PR_NUMBER> --body "<DESCRIPTION>"` to update
     - Confirm update: `gh pr view <PR_NUMBER> --json title,body,url`
     - Display success message with PR URL
