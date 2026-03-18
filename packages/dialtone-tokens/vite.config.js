@@ -23,7 +23,7 @@ export default defineConfig({
       },
       formats: ['es', 'cjs'],
     },
-    rollupOptions: {
+    rolldownOptions: {
       output: {
         minifyInternalExports: true,
         chunkFileNames: () => 'themes/chunks/[name]-[hash].js',

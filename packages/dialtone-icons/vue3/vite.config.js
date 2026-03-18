@@ -27,7 +27,7 @@ export default defineConfig({
       },
       formats: ['es', 'cjs'],
     },
-    rollupOptions: {
+    rolldownOptions: {
       external: ['vue'],
       output: {
         minifyInternalExports: true,

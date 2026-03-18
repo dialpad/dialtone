@@ -42,7 +42,7 @@ export default defineConfig({
   build: {
     sourcemap: true,
     minify: true,
-    rollupOptions: {
+    rolldownOptions: {
       external: [
         /^@dialpad/,
         /^@tiptap\/(?!vue-3)/,
@@ -132,7 +132,6 @@ export default defineConfig({
         '.storybook/**',
         'storybook-static/**',
       ],
-      all: true, // include all files in coverage report
       clean: true, // clean coverage directory before running tests
       skipFull: true, // skip full coverage report
       thresholds: { // will fail the build if coverage is below these thresholds

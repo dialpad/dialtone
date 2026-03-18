@@ -6,7 +6,7 @@ export default defineConfig({
   build: {
     sourcemap: true,
     minify: false,
-    rollupOptions: {
+    rolldownOptions: {
       external: [
         /^@dialpad/,
         'change-case',

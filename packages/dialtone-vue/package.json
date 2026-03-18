@@ -60,15 +60,15 @@
   "devDependencies": {
     "@dialpad/dialtone-css": "workspace:*",
     "@dialpad/generator-dialtone": "workspace:*",
-    "@storybook/addon-a11y": "10.2.6",
-    "@storybook/addon-docs": "10.2.6",
-    "@storybook/addon-links": "10.2.6",
+    "@storybook/addon-a11y": "10.3.0",
+    "@storybook/addon-docs": "10.3.0",
+    "@storybook/addon-links": "10.3.0",
     "@storybook/test-runner": "^0.24.2",
-    "@storybook/vue3-vite": "10.2.6",
+    "@storybook/vue3-vite": "10.3.0",
     "@vue/test-utils": "^2.4.0",
     "@vueless/storybook-dark-mode": "^10.0.7",
     "react": "19.2.4",
-    "storybook": "10.2.6",
+    "storybook": "10.3.0",
     "vue": "^3.3.4"
   },
   "peerDependencies": {
