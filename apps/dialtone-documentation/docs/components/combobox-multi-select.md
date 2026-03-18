@@ -35,7 +35,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox-mul
   </dt-combobox-multi-select>
 </code-well-header>
 
-<component-combinator component-name="DtComboboxMultiSelect" />
+<!-- <component-combinator component-name="DtComboboxMultiSelect" /> -->
 
 <code-example-tabs
 vueCode='
