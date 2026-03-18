@@ -149,6 +149,11 @@ describe('DtTabGroup Tests', () => {
     });
 
     describe('Correct spread modifiers', () => {
+      afterEach(() => {
+        delete props.spread;
+        delete props.orientation;
+      });
+
       it('should apply spread modifier when spread is grow', () => {
         props.spread = 'grow';
         _mountWrapper();
@@ -161,6 +166,14 @@ describe('DtTabGroup Tests', () => {
         _mountWrapper();
 
         expect(tabList.classes(TAB_SPREAD_MODIFIERS.equal)).toBe(true);
+      });
+
+      it('should not apply spread modifier when orientation is vertical', () => {
+        props.spread = 'grow';
+        props.orientation = 'vertical';
+        _mountWrapper();
+
+        expect(tabList.classes(TAB_SPREAD_MODIFIERS.grow)).toBe(false);
       });
     });
   });
