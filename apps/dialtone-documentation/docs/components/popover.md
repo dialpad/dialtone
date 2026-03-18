@@ -12,6 +12,8 @@ keywords: ["popup", "overlay", "floating", "d-popover", "DtPopover", "dt-popover
   <example-popover modal />
 </code-well-header>
 
+<component-combinator component-name="DtPopover" />
+
 ## Usage
 
 A Popover contains a dialog that will appear above other content when activated. It will always appear in a location relative to the anchor.

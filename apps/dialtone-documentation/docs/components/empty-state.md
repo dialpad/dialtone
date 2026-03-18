@@ -26,6 +26,8 @@ keywords: ["no results", "blank slate", "zero state", "d-empty-state", "DtEmptyS
   </dt-empty-state>
 </code-well-header>
 
+<component-combinator component-name="DtEmptyState" />
+
 ## Anatomy
 
 <div class="d-d-grid d-g-cols3 d-ba d-bc-subtle d-mb16 d-bar8 d-bgc-secondary">

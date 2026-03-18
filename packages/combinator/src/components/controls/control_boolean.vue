@@ -1,7 +1,7 @@
 <template>
   <div class="dtc-control-boolean">
     <dt-toggle
-      :value="value"
+      :model-value="value"
       :disabled="disabled"
       label-class="d-label--sm d-fc-secondary"
       size="sm"
@@ -9,7 +9,14 @@
       data-qa="dtc-control-boolean-input"
       @change="e => emit(VALUE_UPDATE_EVENT, e)"
     >
-      <slot />
+      <dt-text
+        kind="label"
+        size="xs"
+        tone="secondary"
+        class="d-input__label-text d-mb0"
+      >
+        <slot />
+      </dt-text>
     </dt-toggle>
   </div>
 </template>

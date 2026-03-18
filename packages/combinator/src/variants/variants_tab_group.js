@@ -1,0 +1,110 @@
+/* eslint-disable max-len */
+export default {
+  default: {
+    props: {
+      selected: { initialValue: 'panel-1' },
+      tabListClass: {
+        initialValue: 'd-w384',
+      },
+    },
+    slots: {
+      tabs: {
+        initialValue: '<dt-tab id="tab-1" panel-id="panel-1" selected>First</dt-tab><dt-tab id="tab-2" panel-id="panel-2">Second</dt-tab><dt-tab id="tab-3" panel-id="panel-3">Third</dt-tab>',
+      },
+      default: {
+        initialValue: '<div class="d-ba d-baw2 d-bas-dashed d-bc-subtle d-w100p d-py48"><dt-tab-panel id="panel-1" tab-id="tab-1"><dt-text as="p" kind="code" size="xs" tone="muted" align="center" class="d-p16"> <strong>First</strong> tab content panel </dt-text></dt-tab-panel><dt-tab-panel id="panel-2" tab-id="tab-2"><dt-text as="p" kind="code" size="xs" tone="muted" align="center" class="d-p16"> <strong>Second</strong> tab content panel </dt-text></dt-tab-panel><dt-tab-panel id="panel-3" tab-id="tab-3"><dt-text as="p" kind="code" size="xs" tone="muted" align="center" class="d-p16"> <strong>Third</strong> tab content panel </dt-text></dt-tab-panel></div>',
+      },
+    },
+  },
+
+  'muted, small': {
+    props: {
+      kind: { initialValue: 'muted' },
+      selected: { initialValue: 'panel-1' },
+      size: { initialValue: 'sm' },
+      tabListClass: {
+        initialValue: 'd-w384',
+      },
+    },
+    slots: {
+      tabs: {
+        initialValue: '<dt-tab id="tab-1" panel-id="panel-1" selected>First</dt-tab><dt-tab id="tab-2" panel-id="panel-2">Second</dt-tab><dt-tab id="tab-3" panel-id="panel-3">Third</dt-tab>',
+      },
+      default: {
+        initialValue: '<div class="d-ba d-baw2 d-bas-dashed d-bc-subtle d-w100p d-py48"><dt-tab-panel id="panel-1" tab-id="tab-1"><dt-text as="p" kind="code" size="xs" tone="muted" align="center" class="d-p16"> <strong>First</strong> tab content panel </dt-text></dt-tab-panel><dt-tab-panel id="panel-2" tab-id="tab-2"><dt-text as="p" kind="code" size="xs" tone="muted" align="center" class="d-p16"> <strong>Second</strong> tab content panel </dt-text></dt-tab-panel><dt-tab-panel id="panel-3" tab-id="tab-3"><dt-text as="p" kind="code" size="xs" tone="muted" align="center" class="d-p16"> <strong>Third</strong> tab content panel </dt-text></dt-tab-panel></div>',
+      },
+    },
+  },
+
+  'outlined, extra small, borderless': {
+    props: {
+      outlined: { initialValue: true },
+      selected: { initialValue: 'panel-1' },
+      size: { initialValue: 'xs' },
+      borderless: { initialValue: true },
+      tabListClass: {
+        initialValue: 'd-w384',
+      },
+    },
+    slots: {
+      tabs: {
+        initialValue: '<dt-tab id="tab-1" panel-id="panel-1" selected>First</dt-tab><dt-tab id="tab-2" panel-id="panel-2">Second</dt-tab><dt-tab id="tab-3" panel-id="panel-3">Third</dt-tab>',
+      },
+      default: {
+        initialValue: '<div><dt-tab-panel id="panel-1" tab-id="tab-1"><dt-text as="p" kind="code" size="xs" tone="muted" class="d-py8"> <strong>First</strong> content panel </dt-text></dt-tab-panel><dt-tab-panel id="panel-2" tab-id="tab-2"><dt-text as="p" kind="code" size="xs" tone="muted" class="d-py8"> <strong>Second</strong> content panel </dt-text></dt-tab-panel><dt-tab-panel id="panel-3" tab-id="tab-3"><dt-text as="p" kind="code" size="xs" tone="muted" class="d-py8"> <strong>Third</strong> content panel </dt-text></dt-tab-panel></div>',
+      },
+    },
+  },
+
+  'vertical': {
+    props: {
+      orientation: { initialValue: 'vertical' },
+      selected: { initialValue: 'panel-1' },
+      tabListClass: {
+        initialValue: 'd-w128',
+      },
+    },
+    slots: {
+      tabs: {
+        initialValue: '<dt-tab id="tab-1" panel-id="panel-1" selected>First</dt-tab><dt-tab id="tab-2" panel-id="panel-2">Second</dt-tab><dt-tab id="tab-3" panel-id="panel-3">Third</dt-tab>',
+      },
+      default: {
+        initialValue: '<div class="d-ba d-baw2 d-bas-dashed d-bc-subtle d-w100p d-py48"><dt-tab-panel id="panel-1" tab-id="tab-1"><dt-text as="p" kind="code" size="xs" tone="muted" align="center" class="d-p16"> <strong>First</strong> tab content panel </dt-text></dt-tab-panel><dt-tab-panel id="panel-2" tab-id="tab-2"><dt-text as="p" kind="code" size="xs" tone="muted" align="center" class="d-p16"> <strong>Second</strong> tab content panel </dt-text></dt-tab-panel><dt-tab-panel id="panel-3" tab-id="tab-3"><dt-text as="p" kind="code" size="xs" tone="muted" align="center" class="d-p16"> <strong>Third</strong> tab content panel </dt-text></dt-tab-panel></div>',
+      },
+    },
+  },
+
+  'with icons': {
+    props: {
+      selected: { initialValue: 'panel-1' },
+      tabListClass: {
+        initialValue: 'd-w384',
+      },
+    },
+    slots: {
+      tabs: {
+        initialValue: '<dt-tab id="tab-1" panel-id="panel-1" selected>First<template #startIcon="{ iconSize }"><dt-icon name="box-select" :size="iconSize" /></template></dt-tab><dt-tab id="tab-2" panel-id="panel-2">Second<template #startIcon="{ iconSize }"><dt-icon name="box-select" :size="iconSize" /></template></dt-tab><dt-tab id="tab-3" panel-id="panel-3">Third</dt-tab>',
+      },
+      default: {
+        initialValue: '<div class="d-ba d-baw2 d-bas-dashed d-bc-subtle d-w100p d-py48"><dt-tab-panel id="panel-1" tab-id="tab-1"><dt-text as="p" kind="code" size="xs" tone="muted" align="center" class="d-p16"> <strong>First</strong> tab content panel </dt-text></dt-tab-panel><dt-tab-panel id="panel-2" tab-id="tab-2"><dt-text as="p" kind="code" size="xs" tone="muted" align="center" class="d-p16"> <strong>Second</strong> tab content panel </dt-text></dt-tab-panel><dt-tab-panel id="panel-3" tab-id="tab-3"><dt-text as="p" kind="code" size="xs" tone="muted" align="center" class="d-p16"> <strong>Third</strong> tab content panel </dt-text></dt-tab-panel></div>',
+      },
+    },
+  },
+
+  'with badges': {
+    props: {
+      selected: { initialValue: 'panel-1' },
+      tabListClass: {
+        initialValue: 'd-w384',
+      },
+    },
+    slots: {
+      tabs: {
+        initialValue: '<dt-tab id="tab-1" panel-id="panel-1" selected trailing-class="d-pr8">Inbox<template #trailing><dt-badge kind="count" type="bulletin" text="9" /></template></dt-tab><dt-tab id="tab-2" panel-id="panel-2" trailing-class="d-pr8">Archive<template #trailing><dt-badge kind="count" text="99+" /></template></dt-tab><dt-tab id="tab-3" panel-id="panel-3">Drafts</dt-tab>',
+      },
+      default: {
+        initialValue: '<div class="d-ba d-baw2 d-bas-dashed d-bc-subtle d-w100p d-py48"><dt-tab-panel id="panel-1" tab-id="tab-1"><dt-text as="p" kind="code" size="xs" tone="muted" align="center" class="d-p16"> <strong>Inbox</strong> tab content panel </dt-text></dt-tab-panel><dt-tab-panel id="panel-2" tab-id="tab-2"><dt-text as="p" kind="code" size="xs" tone="muted" align="center" class="d-p16"> <strong>Archive</strong> tab content panel </dt-text></dt-tab-panel><dt-tab-panel id="panel-3" tab-id="tab-3"><dt-text as="p" kind="code" size="xs" tone="muted" align="center" class="d-p16"> <strong>Drafts</strong> tab content panel </dt-text></dt-tab-panel></div>',
+      },
+    },
+  },
+};

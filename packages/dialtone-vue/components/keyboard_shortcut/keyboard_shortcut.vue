@@ -113,6 +113,7 @@ export default {
 
   props: {
     /**
+     * @deprecated Use v-dt-mode instead.
      * If true, applies inverted styles.
      * @values true, false
      * @deprecated Use v-dt-mode directive instead.

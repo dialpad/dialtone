@@ -23,6 +23,8 @@ keywords: ["alert","notification","message","d-banner","DtBanner","dt-banner"]
     </dt-stack>
 </code-well-header>
 
+<!-- <component-combinator component-name="DtBanner" /> -->
+
 ## Usage
 
 System banners are used for **system** messaging. They are full-width notices placed in one of two locations:

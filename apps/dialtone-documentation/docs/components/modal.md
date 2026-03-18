@@ -12,6 +12,8 @@ keywords: ["dialog", "popup", "overlay", "lightbox", "d-modal", "DtModal", "dt-m
   <example-modal />
 </code-well-header>
 
+<!-- <component-combinator component-name="DtModal" /> -->
+
 ## Usage
 
 Modals disable underlying content and are used to present a short-term task the user needs to perform without losing the context of the underlying page. Users won't be able to interact with the page until they close the modal.

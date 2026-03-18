@@ -3,10 +3,14 @@
     :component="component"
     :library="library"
     :documentation="componentDocumentation"
+    :variants="componentVariants"
+    :dev-mode="isDev"
   />
 </template>
 
 <script>
+import { variantBank } from '@dialpad/dialtone-combinator';
+
 export default {
   name: 'ComponentCombinator',
 
@@ -40,12 +44,21 @@ export default {
       );
     },
 
+    componentVariants () {
+      return variantBank()[this.componentName] ?? {};
+    },
+
     library () {
       return {
         ...this.dialtoneComponents,
         ...this.dialtoneIcons,
         ...this.dialtoneIllustrations,
       };
+    },
+
+    isDev () {
+      return typeof __VUEPRESS_DEV__ !== 'undefined'
+        && (__VUEPRESS_DEV__ || __DIALTONE_DEPLOY_PREVIEW__);
     },
   },
 };

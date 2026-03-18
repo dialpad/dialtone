@@ -33,6 +33,8 @@ export default {
      * By default, for the column direction it will have `justify-content: flex-start`
      * and for the row direction `align-items: center`. This can be overridden
      * using the `align` and `justify` props.
+     *
+     * @values column, row, row-reverse, column-reverse
      */
     direction: {
       type: [String, Object],
@@ -54,7 +56,7 @@ export default {
      * All the undefined breakpoints will have the 'default' value.
      * You can override the default gap with 'default' key.
      * In case of string, it will be applied to all the breakpoints.
-     * Valid values are '0', '50', '100', '200', '300', '350', '400', '450', '500', '525', '550', '600', '625', '650', '700'.
+     * @values 0, 50, 100, 200, 300, 350, 400, 450, 500, 525, 550, 600, 625, 650, 700
      */
     gap: {
       type: [String, Object],
@@ -70,7 +72,7 @@ export default {
      * In case of string, it will be applied to all the breakpoints.
      * If not specified, alignment uses CSS defaults: stretch for column direction,
      * center for row/row-reverse directions (set by CSS).
-     * Valid values are 'start', 'center', 'end', 'stretch', 'baseline'.
+     * @values start, center, end, stretch, baseline
      */
     align: {
       type: [String, Object],
@@ -83,7 +85,7 @@ export default {
      * All the undefined breakpoints will have the 'default' value.
      * You can override the default justify with 'default' key.
      * In case of string, it will be applied to all the breakpoints.
-     * Valid values are 'start', 'center', 'end', 'space-around', 'space-between', 'space-evenly'.
+     * @values start, center, end, space-around, space-between, space-evenly
      */
     justify: {
       type: [String, Object],

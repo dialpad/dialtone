@@ -39,6 +39,10 @@ import { DtStack } from '@/components/stack';
 import { returnFirstEl, warnIfUnmounted } from '@/common/utils';
 import { onMounted, ref, getCurrentInstance } from 'vue';
 
+defineOptions({
+  name: 'DtDatepicker',
+});
+
 defineProps({
   /**
      * Selected date

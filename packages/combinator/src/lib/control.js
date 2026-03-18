@@ -13,6 +13,7 @@ import DtcControlSelection from '@/src/components/controls/control_selection.vue
 import DtcControlString from '@/src/components/controls/control_string.vue';
 import DtcControlNullish from '@/src/components/controls/control_nullish.vue';
 import DtcControlBase from '@/src/components/controls/control_base.vue';
+import DtcControlIconSlot from '@/src/components/controls/control_icon_slot.vue';
 
 import { typeOfMemberValue } from '@/src/lib/utils';
 
@@ -78,6 +79,10 @@ export const controlMap = Object.freeze({
     component: DtcControlBase,
     default () { return getControlDataDefault(this); },
   },
+  'icon-slot': {
+    component: DtcControlIconSlot,
+    default () { return null; },
+  },
 });
 
 function getControlDataDefault (controlData) {
@@ -95,12 +100,12 @@ export function getControlByValue (value) {
 }
 
 export function getControlByMemberType (type, args) {
+  if (type === 'boolean') return 'boolean';
+  if (args?.values?.length > 0) {
+    return 'selection';
+  }
   switch (type) {
-    case 'string': {
-      return args?.values && args.values.length > 0
-        ? 'selection'
-        : 'string';
-    }
+    case 'string': return 'string';
     default: return type;
   }
 }

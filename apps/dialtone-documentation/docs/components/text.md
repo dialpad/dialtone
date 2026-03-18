@@ -6,16 +6,16 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-text--defaul
 image: assets/images/components/text.png
 ---
 
-<code-well-header>
+<!-- <code-well-header>
   <dt-stack direction="row" gap="500" align="baseline">
     <dt-text kind="headline" size="xl" as="h2">Extra large headline</dt-text>
     <dt-text kind="body" size="md" as="p">Medium body</dt-text>
     <dt-text kind="label" size="sm" as="p">Small label</dt-text>
     <dt-text kind="code" size="xs" as="p">Extra small code</dt-text>
   </dt-stack>
-</code-well-header>
+</code-well-header> -->
 
-<!-- <component-combinator component-name="DtText" /> -->
+<component-combinator component-name="DtText" />
 
 ## Usage
 

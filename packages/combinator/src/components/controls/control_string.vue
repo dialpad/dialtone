@@ -1,24 +1,46 @@
 <template>
   <dt-input
-    :value="value"
+    :model-value="value"
     :disabled="disabled"
     :messages="messages"
-    size="sm"
+    size="xs"
     @input="e => emit(VALUE_UPDATE_EVENT, e)"
   >
     <template #labelSlot>
-      <span class="d-input__label-text d-label--sm">
+      <dt-text
+        kind="label"
+        size="xs"
+        tone="secondary"
+        class="d-input__label-text"
+      >
         <slot />
-      </span>
+      </dt-text>
     </template>
-    <template #rightIcon>
-      <slot name="icon" />
+    <template #endIcon="{ iconSize }">
+      <dt-button
+        v-if="isModified && !$slots.icon"
+        kind="muted"
+        importance="clear"
+        size="xs"
+        class="d-p2"
+        @click.stop="onReset"
+      >
+        <template #icon>
+          <dt-icon-close size="100" />
+        </template>
+      </dt-button>
+      <slot
+        v-else
+        name="icon"
+        :icon-size="iconSize"
+      />
     </template>
   </dt-input>
 </template>
 
 <script setup>
-import { DtInput, VALIDATION_MESSAGE_TYPES } from '@dialpad/dialtone-vue';
+import { DtButton, DtInput, DtText, VALIDATION_MESSAGE_TYPES } from '@dialpad/dialtone-vue';
+import { DtIconClose } from '@dialpad/dialtone-icons/vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { computed } from 'vue';
 
@@ -35,9 +57,15 @@ const props = defineProps({
     type: String,
     default: undefined,
   },
+  defaultValue: {
+    type: String,
+    default: () => String(),
+  },
 });
 
 const emit = defineEmits([VALUE_UPDATE_EVENT]);
+
+const isModified = computed(() => props.value !== props.defaultValue);
 
 const messages = computed(() => {
   const messages = [];
@@ -49,6 +77,10 @@ const messages = computed(() => {
   }
   return messages;
 });
+
+function onReset () {
+  emit(VALUE_UPDATE_EVENT, props.defaultValue);
+}
 </script>
 
 <script>

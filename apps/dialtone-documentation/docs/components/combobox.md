@@ -9,6 +9,8 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox--de
 keywords: ["autocomplete","typeahead","search select","d-combobox","DtCombobox","dt-combobox"]
 ---
 
+<component-combinator component-name="DtCombobox" />
+
 ## Base Style
 
 A combobox provides accessibility controls and common functionality. It does not render any functioning UI on it's own, but it depends on the elements passed to it via slots.

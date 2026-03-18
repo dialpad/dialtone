@@ -62,6 +62,10 @@ import { TOOLTIP_DIRECTIONS, TOOLTIP_DELAY_MS } from '@/components/tooltip/index
 import { getUniqueString } from '@/common/utils';
 import { CONTENT_MODE_PROP } from '@/common/mode_constants';
 
+defineOptions({
+  name: 'DtHovercard',
+});
+
 const props = defineProps({
   /**
      * Applies a color mode to the positioned content element.

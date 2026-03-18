@@ -9,64 +9,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-card--defaul
 keywords: ["panel", "container", "box", "d-card", "DtCard", "dt-card", "tile", "surface"]
 ---
 
-<code-well-header>
-  <dt-card
-    class="d-w264"
-    header-class="d-bb d-bc-subtle d-py8 d-pr8"
-    content-class="d-pr0"
-    footer-class="d-bt d-bc-subtle d-py12"
-  >
-    <template #header>
-      <dt-stack gap="350" direction="row" align="center">
-        <dt-icon class="d-fc-tertiary" name="branch" size="300" />
-        <dt-text as="h3" kind="headline" size="md" tone="secondary">Branch</dt-text>
-      </dt-stack>
-      <dt-dropdown navigation-type="arrow-keys" placement="bottom-end">
-        <template #anchor="{ attrs }">
-          <dt-button
-            v-bind="attrs"
-            size="sm"
-            importance="clear"
-            kind="muted"
-            aria-label="Menu button"
-          >
-            <template #startIcon>
-              <dt-icon
-                name="more-vertical"
-                size="100"
-              />
-            </template>
-          </dt-button>
-        </template>
-        <template #list="{ close }">
-          <dt-list-item role="menuitem" navigation-type="arrow-keys" @click="close">Edit</dt-list-item>
-          <dt-list-item role="menuitem" navigation-type="arrow-keys" @click="close">Share</dt-list-item>
-          <dt-dropdown-separator />
-          <dt-list-item role="menuitem" navigation-type="arrow-keys" @click="close">Delete</dt-list-item>
-        </template>
-      </dt-dropdown>
-    </template>
-    <template #content>
-      <div class="d-h216 d-pr16" v-dt-scrollbar:never>
-        <dt-stack gap="400">
-          <dt-text as="p" kind="body" text-box-trim="start">Main branch, last updated 2 days ago. Currently 3 commits ahead and 1 behind the upstream target.</dt-text>
-          <dt-text as="p" kind="body">All checks passing. Latest build completed in 4m 12s with no warnings or errors.</dt-text>
-          <dt-text as="p" kind="body">Open pull requests: 2 pending review, 1 approved and ready to merge.</dt-text>
-          <dt-text as="p" kind="body">Recent activity includes dependency updates, a hotfix for the login flow, and minor copy changes across settings pages.</dt-text>
-          <dt-text as="p" kind="body" text-box-trim="end">Protected branch rules are enforced. Requires at least one approval before merging.</dt-text>
-        </dt-stack>
-      </div>
-    </template>
-    <template #footer>
-      <dt-button
-        importance="outlined"
-        size="sm"
-      >
-        Button
-      </dt-button>
-    </template>
-  </dt-card>
-</code-well-header>
+<component-combinator component-name="DtCard" />
 
 ## Usage
 

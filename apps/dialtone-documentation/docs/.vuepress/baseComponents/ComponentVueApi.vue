@@ -113,6 +113,16 @@ const resolveConstantRef = (rawDefault, values) => {
   return rawDefault;
 };
 
+const extractRawDefault = (defaultValue) => {
+  // vue-docgen-api produces { func, value } objects, but Vite's JSON import
+  // may evaluate them to direct JS values at runtime. Handle both formats.
+  if (defaultValue != null && typeof defaultValue === 'object' && 'value' in defaultValue) {
+    return defaultValue.value;
+  }
+  if (defaultValue === undefined) return undefined;
+  return String(defaultValue);
+};
+
 const resolveDefaultValue = (rawDefault, values) => {
   if (!rawDefault) return rawDefault;
   if (rawDefault === 'undefined') return null;
@@ -127,7 +137,7 @@ const docProps = componentDocs.find(f => isSameComponentName(f.displayName))
       name: item.name,
       description: item.description,
       type: item.type?.name,
-      defaultValue: resolveDefaultValue(item.defaultValue?.value, item.values),
+      defaultValue: resolveDefaultValue(extractRawDefault(item.defaultValue), item.values),
       values: item.values,
       required: item.required,
       deprecated: isDeprecated(item),

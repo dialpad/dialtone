@@ -8,13 +8,13 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-toggle--defa
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=8272-20496
 keywords: ["switch", "checkbox", "on off", "d-toggle", "DtToggle", "dt-toggle", "flip switch"]
 ---
-<code-well-header>
+<!-- <code-well-header>
   <dt-stack direction="row" align="center" class="d-toggle-group">
     <dt-toggle label-class="d-mr6">Label</dt-toggle>
   </dt-stack>
-</code-well-header>
+</code-well-header> -->
 
-<!-- <component-combinator component-name="DtToggle" /> -->
+<component-combinator component-name="DtToggle" />
 
 ## Usage
 

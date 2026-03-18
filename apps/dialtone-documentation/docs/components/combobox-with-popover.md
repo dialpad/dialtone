@@ -43,6 +43,8 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox-wit
   </dt-combobox-with-popover>
 </code-well-header>
 
+<!-- <component-combinator component-name="DtComboboxWithPopover" /> -->
+
 <code-example-tabs
 vueCode='
 <dt-combobox-with-popover

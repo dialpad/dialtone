@@ -8,6 +8,8 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-item-layout-
 keywords: ["list layout","item structure","d-item-layout","DtItemLayout","dt-item-layout"]
 ---
 
+<component-combinator component-name="DtItemLayout" />
+
 ## With Default Styling
 
 By default, item layout includes custom styling, like paddings, sizes, colors, etc.

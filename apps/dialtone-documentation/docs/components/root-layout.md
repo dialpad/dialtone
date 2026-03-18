@@ -32,6 +32,8 @@ keywords: ["app layout","page layout","d-root-layout","DtRootLayout","dt-root-la
 </dt-root-layout>
 </code-well-header>
 
+<!-- <component-combinator component-name="DtRootLayout" /> -->
+
 ## Base Style
 
 A root layout consists of a header, body, sidebar and footer. Content can optionally be passed into the slots which
