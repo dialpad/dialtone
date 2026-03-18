@@ -67,7 +67,10 @@ const events = computed(() => {
   );
 });
 
+let currentContainer = null;
+
 onMounted(() => {
+  currentContainer = freshContainer();
   renderTarget();
   nextTick(renderTarget);
 });
@@ -76,13 +79,15 @@ onUpdated(renderTarget);
 const wrapper = ref();
 
 /**
- * Destroys any old containers in the wrapper and appends a new one.
- * Not completely sure why this has to be done, but it is buggy
- * if this method is not used.
+ * Properly unmounts any existing component, clears the wrapper,
+ * and creates a fresh container element for rendering.
  *
  * @returns {HTMLDivElement} Instantiated container for rendering.
  */
-function nextContainer () {
+function freshContainer () {
+  if (wrapper.value.firstChild) {
+    render(null, wrapper.value.firstChild);
+  }
   wrapper.value.replaceChildren();
   return wrapper.value.appendChild(document.createElement('div'));
 }
@@ -90,12 +95,15 @@ function nextContainer () {
 /**
  * Need to render manually to catch DOM exception errors.
  *
- * Attempts to render the target component, if there is
- * an error a warning will be logged and a 'notice' component
- * will be rendered to inform the user.
+ * Renders the target component into the current container.
+ * Reuses the existing container so Vue patches the component
+ * instance (preserving DOM and Floating UI state) rather than
+ * unmounting and remounting on every prop change.
  */
 function renderTarget () {
-  const container = nextContainer();
+  if (!currentContainer) {
+    currentContainer = freshContainer();
+  }
 
   const filteredBindings = Object.fromEntries(
     Object.entries(props.bindings).filter(([name]) => !props.disabledMembers.has(name)),
@@ -105,10 +113,11 @@ function renderTarget () {
     render(h(props.component, {
       ...filteredBindings,
       ...events.value,
-    }, slots), container);
+    }, slots), currentContainer);
   } catch (e) {
     console.warn('Rendering warning: \n', e);
-    renderError(e, container);
+    currentContainer = freshContainer();
+    renderError(e, currentContainer);
   }
 }
 
