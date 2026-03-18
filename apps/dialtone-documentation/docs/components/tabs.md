@@ -202,6 +202,56 @@ vueCode='
 '
 showHtmlWarning />
 
+## Spread
+
+Control how tabs distribute available horizontal space within the tab list.
+
+### Grow
+
+Tabs expand proportionally to fill the container. Longer labels receive more space.
+
+<code-well-header>
+  <div class="d-w100p">
+    <example-tabs ref="spreadGrowExample" spread="grow" />
+  </div>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.spreadGrowExample'
+vueCode='
+<dt-tab-group spread="grow">
+  <template #tabs>
+    <dt-tab id="1" panel-id="2" selected>First</dt-tab>
+    <dt-tab id="3" panel-id="4">Second</dt-tab>
+    <dt-tab id="5" panel-id="6">Third</dt-tab>
+  </template>
+</dt-tab-group>
+'
+showHtmlWarning />
+
+### Equal
+
+All tabs share the same width, regardless of label length.
+
+<code-well-header>
+  <div class="d-w100p">
+    <example-tabs ref="spreadEqualExample" spread="equal" />
+  </div>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.spreadEqualExample'
+vueCode='
+<dt-tab-group spread="equal">
+  <template #tabs>
+    <dt-tab id="1" panel-id="2" selected>First</dt-tab>
+    <dt-tab id="3" panel-id="4">Second</dt-tab>
+    <dt-tab id="5" panel-id="6">Third</dt-tab>
+  </template>
+</dt-tab-group>
+'
+showHtmlWarning />
+
 ## Sizes
 
 <code-well-header>

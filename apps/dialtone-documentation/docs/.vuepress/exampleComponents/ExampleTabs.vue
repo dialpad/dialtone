@@ -6,6 +6,7 @@
     :inverted="inverted"
     :borderless="borderless"
     :disabled="disabled"
+    :spread="spread"
     :orientation="orientation"
     :tab-list-class="orientation === 'vertical' ? 'd-w264' : undefined"
     :activation-mode="activationMode"
@@ -17,26 +18,20 @@
         panel-id="2"
         selected
       >
-        <p>
-          First tab
-        </p>
+        First tab
       </dt-tab>
       <dt-tab
         id="3"
         panel-id="4"
       >
-        <p>
-          Second tab
-        </p>
+        Second tab
       </dt-tab>
       <dt-tab
         id="5"
         panel-id="6"
         label="Third Label"
       >
-        <p>
-          Third tab
-        </p>
+        Third tab
       </dt-tab>
     </template>
     <div
@@ -116,6 +111,11 @@ export default {
     activationMode: {
       type: String,
       default: 'manual',
+    },
+
+    spread: {
+      type: String,
+      default: 'none',
     },
 
     orientation: {

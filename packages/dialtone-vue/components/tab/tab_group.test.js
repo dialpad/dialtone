@@ -3,7 +3,7 @@ import DtTabGroup from './tab_group.vue';
 import DtTabPanel from './tab_panel.vue';
 import DtTab from './tab.vue';
 import { returnFirstEl } from '@/common/utils';
-import { TAB_LIST_KIND_MODIFIERS, TAB_LIST_SIZE_MODIFIERS, TAB_LIST_IMPORTANCE_MODIFIERS, TAB_ORIENTATION_MODIFIERS } from './tabs_constants';
+import { TAB_LIST_KIND_MODIFIERS, TAB_LIST_SIZE_MODIFIERS, TAB_LIST_IMPORTANCE_MODIFIERS, TAB_ORIENTATION_MODIFIERS, TAB_SPREAD_MODIFIERS } from './tabs_constants';
 import { h } from 'vue';
 
 const optionTabPanel = [
@@ -145,6 +145,22 @@ describe('DtTabGroup Tests', () => {
 
       it('should have correct importance modifier', () => {
         expect(tabList.classes(TAB_LIST_IMPORTANCE_MODIFIERS.borderless)).toBe(true);
+      });
+    });
+
+    describe('Correct spread modifiers', () => {
+      it('should apply spread modifier when spread is grow', () => {
+        props.spread = 'grow';
+        _mountWrapper();
+
+        expect(tabList.classes(TAB_SPREAD_MODIFIERS.grow)).toBe(true);
+      });
+
+      it('should apply spread-equal modifier when spread is equal', () => {
+        props.spread = 'equal';
+        _mountWrapper();
+
+        expect(tabList.classes(TAB_SPREAD_MODIFIERS.equal)).toBe(true);
       });
     });
   });
@@ -751,6 +767,15 @@ describe('DtTabGroup Tests', () => {
       _mountWrapper();
 
       expect(wrapper.vm.provideObj.outlined).toBe(true);
+    });
+  });
+
+  describe('Spread prop', () => {
+    it('should pass spread through groupContext', () => {
+      props.spread = 'grow';
+      _mountWrapper();
+
+      expect(wrapper.vm.provideObj.spread).toBe('grow');
     });
   });
 

@@ -10,6 +10,7 @@
         'd-tablist',
         TAB_LIST_SIZE_MODIFIERS[size],
         TAB_ORIENTATION_MODIFIERS[orientation],
+        TAB_SPREAD_MODIFIERS[spread],
         {
           [TAB_LIST_KIND_MODIFIERS.inverted]: inverted,
           [TAB_LIST_IMPORTANCE_MODIFIERS.borderless]: borderless,
@@ -48,6 +49,8 @@ import {
   TAB_ORIENTATION_MODIFIERS,
   TAB_ACTIVATION_MODES,
   TAB_GROUP_KINDS,
+  TAB_SPREADS,
+  TAB_SPREAD_MODIFIERS,
 } from './tabs_constants';
 
 /**
@@ -108,6 +111,18 @@ export default {
     borderless: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * Controls how tabs distribute available space within the tab list.
+     * @values none, grow, equal
+     */
+    spread: {
+      type: String,
+      default: 'none',
+      validator (value) {
+        return TAB_SPREADS.includes(value);
+      },
     },
 
     /**
@@ -212,6 +227,7 @@ export default {
         kind: 'default',
         outlined: false,
         orientation: 'horizontal',
+        spread: 'none',
       },
 
       focusId: null,
@@ -220,6 +236,7 @@ export default {
       TAB_LIST_KIND_MODIFIERS,
       TAB_LIST_IMPORTANCE_MODIFIERS,
       TAB_ORIENTATION_MODIFIERS,
+      TAB_SPREAD_MODIFIERS,
     };
   },
 
@@ -263,6 +280,13 @@ export default {
       immediate: true,
       handler () {
         this.provideObj.orientation = this.orientation;
+      },
+    },
+
+    spread: {
+      immediate: true,
+      handler () {
+        this.provideObj.spread = this.spread;
       },
     },
   },
