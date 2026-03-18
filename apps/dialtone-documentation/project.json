@@ -43,7 +43,7 @@
             "command": "nx run dialtone-css:startWatch"
           },
           {
-            "command": "nx watch --projects=dialtone-tokens,dialtone-vue -- nx run \\$NX_PROJECT_NAME:build"
+            "command": "nx watch --projects=dialtone-tokens,dialtone-vue,dialtone-combinator -- nx run \\$NX_PROJECT_NAME:build"
           },
           {
             "command": "node scripts/generate-raw-markdown.mjs && vuepress dev docs"

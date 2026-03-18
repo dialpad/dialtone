@@ -1,35 +1,34 @@
 <template>
-  <div>
-    <template
-      v-for="(member, key) in memberMap"
-      :key="key"
+  <template
+    v-for="(member, key) in memberMap"
+    :key="key"
+  >
+    <div
+      v-if="!member.hideControl"
+      data-qa="dtc-option-bar-member-group-control"
     >
-      <div
-        v-if="!member.hideControl"
-        class="d-py6"
-        data-qa="dtc-option-bar-member-group-control"
-      >
-        <dtc-option-bar-control
-          :value="values[key]"
-          :label="member.label"
-          :control-data="getControlData(member)"
-          :valid-controls="member.validControls"
-          :description="member.description"
-          :v-model="isVModel(member)"
-          :required="member.required"
-          :locked="member.lockControl"
-          :args="{
-            defaultValue: member.defaultValue,
-            validValues: member.values,
-            validTypes: member.types,
-            tags: member.tags,
-          }"
-          @update:value="e => updateMember(e, key)"
-          @update:control="e => updateControl(e, key)"
-        />
-      </div>
-    </template>
-  </div>
+      <dtc-option-bar-control
+        :value="values[key]"
+        :label="member.label"
+        :control-data="getControlData(member)"
+        :valid-controls="member.validControls"
+        :description="member.description"
+        :v-model="isVModel(member)"
+        :required="member.required"
+        :locked="member.lockControl"
+        :disabled="member.disableControl"
+        :args="{
+          defaultValue: member.defaultValue ?? member.initialValue,
+          validValues: member.values,
+          validTypes: member.types,
+          tags: member.tags,
+          bindings: member.bindings,
+        }"
+        @update:value="e => updateMember(e, key)"
+        @update:control="e => updateControl(e, key)"
+      />
+    </div>
+  </template>
 </template>
 
 <script setup>
@@ -38,6 +37,37 @@ import { MEMBER_UPDATE_EVENT } from '@/src/lib/constants';
 import { computed, reactive } from 'vue';
 import { convert } from '@/src/lib/convert';
 import { controlMap } from '@/src/lib/control';
+import { buildDependencyMap, shouldHideProp } from '@/src/lib/prop_dependencies';
+import { shouldExclude } from '@/src/lib/exclusion_rules';
+import { isIconSlot } from '@/src/lib/icons';
+import { DtStack } from '@dialpad/dialtone-vue';
+
+const ICON_SLOT_ORDER = ['startIcon', 'endIcon', 'blockStartIcon', 'blockEndIcon', 'icon'];
+
+const PROP_PRIORITY = [
+  'title', 'as', 'label', 'size', 'kind',
+  'importance', 'placement', 'tone', 'align', 'density', 'strength',
+  'type', 'underline', 'selected', 'active', 'disabled', 'color', 'description',
+];
+
+const SLOT_PRIORITY = ['start', 'end', 'inlineStart', 'inlineEnd', 'blockStart', 'blockEnd', 'leading', 'trailing'];
+
+function getPropTier (member) {
+  const priorityIdx = PROP_PRIORITY.indexOf(member.name);
+  if (priorityIdx !== -1) return [0, priorityIdx];
+  if (member.name?.startsWith('aria')) return [1, 0];
+  if (member.types?.includes('boolean')) return [2, 0];
+  if (member.name?.endsWith('Class')) return [4, 0];
+  return [3, 0];
+}
+
+function getSlotTier (member) {
+  if (member.name === 'default') return [0, 0];
+  if (isIconSlot(member)) return [1, ICON_SLOT_ORDER.indexOf(member.name)];
+  const priorityIdx = SLOT_PRIORITY.indexOf(member.name);
+  if (priorityIdx !== -1) return [2, priorityIdx];
+  return [3, 0];
+}
 
 const props = defineProps({
   /**
@@ -69,9 +99,32 @@ const props = defineProps({
     type: Function,
     required: true,
   },
+  /**
+   * Exclusion rules from the variant file.
+   */
+  exclusionRules: {
+    type: Array,
+    default: () => [],
+  },
+  /**
+   * Current prop values, used to evaluate exclusion rule conditions.
+   */
+  propValues: {
+    type: Object,
+    default: () => ({}),
+  },
+  /**
+   * The member group identifier ('props' or 'slots').
+   */
+  memberGroup: {
+    type: String,
+    default: 'props',
+  },
 });
 
 const emit = defineEmits([MEMBER_UPDATE_EVENT]);
+
+const dependencyMap = computed(() => buildDependencyMap(props.members));
 
 /**
  * The member map is a reactive data object that wraps each member and
@@ -81,9 +134,39 @@ const emit = defineEmits([MEMBER_UPDATE_EVENT]);
  * @type {object}
  */
 const memberMap = computed(() => {
+  if (!props.members?.length) return reactive({});
+  const depMap = dependencyMap.value;
+  const childSet = new Set(depMap.keys());
+
+  const getTier = props.memberGroup === 'slots' ? getSlotTier : getPropTier;
+  const sortFn = (a, b) => {
+    const [aTier, aIdx] = getTier(a);
+    const [bTier, bIdx] = getTier(b);
+    if (aTier !== bTier) return aTier - bTier;
+    if (aIdx !== bIdx) return aIdx - bIdx;
+    return (a.name ?? '').localeCompare(b.name ?? '');
+  };
+
+  // Sort non-child members normally
+  const parents = [...props.members]
+    .filter(m => !childSet.has(m.name))
+    .sort(sortFn);
+
+  // Build parent → children map, sorted alphabetically
+  const childrenByParent = new Map();
+  for (const [child, parent] of depMap) {
+    if (!childrenByParent.has(parent)) childrenByParent.set(parent, []);
+    childrenByParent.get(parent).push(
+      props.members.find(m => m.name === child),
+    );
+  }
+  childrenByParent.forEach(arr => arr.sort(sortFn));
+
+  // Flatten: each parent followed by its children
+  const sorted = parents.flatMap(m => [m, ...(childrenByParent.get(m.name) || [])]);
   return reactive({
     ...Object.fromEntries(
-      props.members.map(member => {
+      sorted.map(member => {
         return [getMemberKey(member), extendMember(member)];
       }),
     ),
@@ -132,10 +215,21 @@ function extendMember (member) {
 
   const [validControls, control] = props.controlSelector(member, value);
 
+  const dynamicHide = !member.required
+    && shouldHideProp(key, dependencyMap.value, props.values);
+
+  const isDeprecated = !!member.tags?.deprecated
+    || member.description?.startsWith('@deprecated');
+
+  const isExcluded = !member.required
+    && shouldExclude(key, props.memberGroup, props.exclusionRules, props.propValues);
+
   return {
     ...member,
     control,
     validControls,
+    hideControl: member.hideControl || isDeprecated,
+    disableControl: dynamicHide || isExcluded,
   };
 }
 

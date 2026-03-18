@@ -17,26 +17,20 @@
         panel-id="2"
         selected
       >
-        <p>
-          First tab
-        </p>
+        First tab
       </dt-tab>
       <dt-tab
         id="3"
         panel-id="4"
       >
-        <p>
-          Second tab
-        </p>
+        Second tab
       </dt-tab>
       <dt-tab
         id="5"
         panel-id="6"
         label="Third Label"
       >
-        <p>
-          Third tab
-        </p>
+        Third tab
       </dt-tab>
     </template>
     <div

@@ -1,26 +1,23 @@
 <template>
-  <dt-tooltip
-    :message="message"
-    :sticky="true"
+  <dt-button
+    :aria-label="ariaLabel"
+    size="xs"
+    importance="clear"
+    kind="muted"
+    @click="copyToClipboard"
   >
-    <template #anchor>
-      <dt-button
-        :aria-label="ariaLabel"
-        size="xs"
-        importance="clear"
-        kind="muted"
-        @click="copyToClipboard"
-      >
-        <template #startIcon="{ iconSize }">
-          <dt-icon
-            name="copy"
-            :size="iconSize"
-          />
-        </template>
-        <slot />
-      </dt-button>
+    <template #startIcon="{ iconSize }">
+      <dt-icon
+        :name="copied ? 'check' : 'copy'"
+        :size="iconSize"
+        :class="{ 'd-fc-success': copied }"
+      />
     </template>
-  </dt-tooltip>
+    <template v-if="copied">
+      Copied!
+    </template>
+    <slot v-else />
+  </dt-button>
 </template>
 
 <script setup>
@@ -30,13 +27,13 @@ const props = defineProps({
   text: { type: String, required: true },
   ariaLabel: { type: String, required: true },
 });
-const message = ref(props.ariaLabel);
+const copied = ref(false);
 const copyToClipboard = async () => {
   try {
     await navigator.clipboard.writeText(props.text);
-    message.value = 'Copied';
-    await new Promise(resolve => setTimeout(resolve, 750));
-    message.value = props.ariaLabel;
+    copied.value = true;
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    copied.value = false;
   } catch {
     console.error('Error copying to clipboard', props.text);
   }

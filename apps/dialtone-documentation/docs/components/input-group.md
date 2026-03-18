@@ -19,6 +19,8 @@ keywords: ["input addon", "input prefix", "input suffix", "d-input-group", "DtIn
   </dt-input-group>
 </code-well-header>
 
+<component-combinator component-name="DtInputGroup" />
+
 ## Default
 
 Input Groups are typically paired with a legend which identifies the group. If no legend is provided then it is expected that an `aria-label` will be given in order to provide an invisible label to screen readers. Each Input Group should contain one or more inputs which users can interact with.

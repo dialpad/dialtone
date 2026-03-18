@@ -17,6 +17,8 @@ keywords: ["lightbox", "image modal", "photo viewer", "d-image-viewer", "DtImage
   />
 </code-well-header>
 
+<component-combinator component-name="DtImageViewer" />
+
 ## Examples
 
 ### JPG Image

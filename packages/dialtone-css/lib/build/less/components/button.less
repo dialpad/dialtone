@@ -319,11 +319,10 @@
 
 .d-btn__icon {
   display: flex;
-  // background-color: rgba(0,0,0,.5);
 
-  .d-icon {
-    // outline: 1px solid red;
-    // opacity: 0;
+  :where(.d-btn--disabled) & ,
+  :where(.d-btn:disabled)  & {
+    opacity: var(--dt-opacity-600);
   }
 }
 
@@ -860,6 +859,7 @@
 
 .d-btn-group {
   display: flex;
+  gap: var(--dt-spacing-100);
 
   &--start {
     justify-content: flex-start;

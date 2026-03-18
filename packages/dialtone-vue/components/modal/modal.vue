@@ -274,7 +274,7 @@ export default {
     bannerKind: {
       type: String,
       default: 'warning',
-      validate (kind) {
+      validator (kind) {
         return NOTICE_KINDS.includes(kind);
       },
     },

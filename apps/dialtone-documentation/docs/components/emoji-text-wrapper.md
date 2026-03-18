@@ -16,6 +16,8 @@ keywords: ["emoji support","emoticon wrapper","d-emoji-text-wrapper","DtEmojiTex
   </dt-text>
 </code-well-header>
 
+<!-- <component-combinator component-name="DtEmojiTextWrapper" /> -->
+
 ## Variants and Examples
 
 ### Text Only

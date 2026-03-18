@@ -157,9 +157,10 @@ export default {
     },
 
     /**
-     * **Legacy.** Avatar color code for backward compatibility. Converted internally
+     * Avatar color code for backward compatibility. Converted internally
      * to family/variant. For new code, use `seed` (recommended) or `family`/`variant`.
      * Format: family (1-12) * 100 + variant (0-9) * 10, e.g., '540' = family 5, variant 4.
+     * @deprecated Use seed or family/variant instead.
      */
     color: {
       type: String,

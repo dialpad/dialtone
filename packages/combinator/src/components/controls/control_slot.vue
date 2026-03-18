@@ -1,24 +1,47 @@
 <template>
   <dt-input
-    :value="value"
+    :model-value="value"
     :disabled="disabled"
+    type="textarea"
+    input-class="d-pr32"
     spellcheck="false"
-    size="sm"
+    size="xs"
     @input="updateValue"
   >
     <template #labelSlot>
-      <span class="d-input__label-text d-label--sm">
+      <dt-text
+        kind="label"
+        size="xs"
+        tone="secondary"
+        class="d-input__label-text"
+      >
         <slot />
-      </span>
+      </dt-text>
+    </template>
+    <template #endIcon>
+      <dt-button
+        v-if="isModified"
+        kind="muted"
+        importance="clear"
+        size="xs"
+        class="d-p2 d-mrn16"
+        @click.stop="onReset"
+      >
+        <template #icon>
+          <dt-icon-close size="100" />
+        </template>
+      </dt-button>
     </template>
   </dt-input>
 </template>
 
 <script setup>
-import { DtInput } from '@dialpad/dialtone-vue';
+import { DtButton, DtInput, DtText } from '@dialpad/dialtone-vue';
+import { DtIconClose } from '@dialpad/dialtone-icons/vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
+import { computed } from 'vue';
 
-defineProps({
+const props = defineProps({
   value: {
     type: undefined,
     default: () => null,
@@ -27,13 +50,23 @@ defineProps({
     type: Boolean,
     default: false,
   },
+  defaultValue: {
+    type: undefined,
+    default: () => null,
+  },
 });
 
 const emit = defineEmits([VALUE_UPDATE_EVENT]);
 
+const isModified = computed(() => props.value !== props.defaultValue);
+
 function updateValue (e) {
   const value = e || null;
   emit(VALUE_UPDATE_EVENT, value);
+}
+
+function onReset () {
+  emit(VALUE_UPDATE_EVENT, props.defaultValue);
 }
 </script>
 

@@ -309,6 +309,11 @@
         align-items: center;
     }
 
+    :where(.d-input__root:has(.d-input:disabled)) & {
+        opacity: var(--dt-opacity-700);
+        pointer-events: none;
+    }
+
     &--right:not(:empty) {
         margin-inline-end: var(--dt-size-400);
 

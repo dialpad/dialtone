@@ -9,14 +9,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["label","tag","indicator","count","d-badge","DtBadge","dt-badge"]
 ---
 
-<code-well-header>
-  <dt-stack direction="row" gap="400" align="center">
-    <dt-badge text="Label"></dt-badge>
-    <dt-badge kind="count" text="1"></dt-badge>
-  </dt-stack>
-</code-well-header>
-
-<!-- <component-combinator component-name="DtBadge" /> -->
+<component-combinator component-name="DtBadge" />
 
 ## Usage
 

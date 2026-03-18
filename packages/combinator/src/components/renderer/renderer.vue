@@ -3,16 +3,18 @@
     :component="component"
     :bindings="options.bindings.get()"
     :events="info.events"
+    :disabled-members="disabledMembers"
     @event="(event, value) => emit('event', event, value)"
   >
     <template
       v-for="(slot, name) in renderedSlots"
       :key="name"
-      #[name]
+      #[name]="slotBindings"
     >
       <dtc-node
         :template="slot"
         :library="library"
+        :scope="slotBindings"
       />
     </template>
   </dtc-renderer-target>
@@ -58,6 +60,13 @@ const props = defineProps({
   library: {
     type: Object,
     required: true,
+  },
+  /**
+   * Set of member names that are currently disabled.
+   */
+  disabledMembers: {
+    type: Set,
+    default: () => new Set(),
   },
 });
 

@@ -9,9 +9,11 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["date picker", "calendar", "date selector", "d-datepicker", "DtDatepicker", "dt-datepicker", "date input", "schedule"]
 ---
 
-<code-well-header>
+<!-- <code-well-header>
   <dt-datepicker></dt-datepicker>
-</code-well-header>
+</code-well-header> -->
+
+<component-combinator component-name="DtDatepicker" />
 
 ## Usage
 
@@ -35,127 +37,6 @@ With this we accomplish the requirement to have the previous year button focused
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-stack d-stack--gap-400 d-datepicker">
-  <div class="d-datepicker__hd">
-    <div class="d-stack d-stack--row d-stack--gap-300 d-datepicker__month-year">
-      <nav class="d-stack d-stack--row d-stack--gap-200 d-datepicker__nav">
-        <div data-qa="dt-tooltip-container">
-          <span data-qa="dt-tooltip-anchor">
-            <button class="base-button__button d-btn d-btn--muted d-btn--xs d-btn--circle d-datepicker__nav-btn" data-qa="dt-button" type="button" aria-label="Change to Previous year 2023" id="prevYearButton">
-              <span data-qa="dt-button-label" class="d-btn__label base-button__label">
-                <svg>...</svg>
-              </span>
-            </button>
-          </span>
-        </div>
-        <div data-qa="dt-tooltip-container">
-          <span data-qa="dt-tooltip-anchor">
-            <button class="base-button__button d-btn d-btn--muted d-btn--xs d-btn--circle d-datepicker__nav-btn" data-qa="dt-button" type="button" aria-label="Change to Previous month February" id="prevMonthButton">
-              <span data-qa="dt-button-label" class="d-btn__label base-button__label">
-                <svg>...</svg>
-              </span>
-            </button>
-          </span>
-        </div>
-      </nav>
-      <div id="calendar-heading" class="d-datepicker__month-year-title">March 2024</div>
-      <nav class="d-stack d-stack--row d-stack--gap-200 d-datepicker__nav">
-        <div data-qa="dt-tooltip-container">
-          <span data-qa="dt-tooltip-anchor">
-            <button class="base-button__button d-btn d-btn--muted d-btn--xs d-btn--circle d-datepicker__nav-btn" data-qa="dt-button" type="button" aria-label="Change to Next month April" id="nextMonthButton">
-              <span data-qa="dt-button-label" class="d-btn__label base-button__label">
-                <svg>...</svg>
-              </span>
-            </button>
-          </span>
-        </div>
-        <div data-qa="dt-tooltip-container">
-          <span data-qa="dt-tooltip-anchor">
-            <button class="base-button__button d-btn d-btn--muted d-btn--xs d-btn--circle d-datepicker__nav-btn" data-qa="dt-button" type="button" aria-label="Change to Next year 2025" id="nextYearButton">
-              <span data-qa="dt-button-label" class="d-btn__label base-button__label">
-                <svg>...</svg>
-              </span>
-            </button>
-          </span>
-        </div>
-      </nav>
-    </div>
-  </div>
-  <div class="d-datepicker__bd">
-    <table class="d-datepicker__calendar" aria-labelledby="calendar-heading">
-      <thead>
-        <tr>
-          <th scope="col" class="d-datepicker__cell d-datepicker__cell--header"><span class="d-datepicker__weekday" title="Su" aria-label="Su">Su</span></th>
-          <th scope="col" class="d-datepicker__cell d-datepicker__cell--header"><span class="d-datepicker__weekday" title="Mo" aria-label="Mo">Mo</span></th>
-          ...
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="d-datepicker__cell" role="listbox">
-            <button class="base-button__button d-btn d-btn--sm d-btn--circle d-datepicker__day d-datepicker__day--disabled" data-qa="dt-button" type="button" disabled="" aria-label="Select day 25 February 2024" aria-selected="false" role="option">
-              <span data-qa="dt-button-label" class="d-btn__label base-button__label">25</span>
-            </button>
-          </td>
-          <td class="d-datepicker__cell" role="listbox">
-            <button class="base-button__button d-btn d-btn--sm d-btn--circle d-datepicker__day d-datepicker__day--disabled" data-qa="dt-button" type="button" disabled="" aria-label="Select day 26 February 2024" aria-selected="false" role="option">
-              <span data-qa="dt-button-label" class="d-btn__label base-button__label">26</span>
-            </button>
-          </td>
-          <td class="d-datepicker__cell" role="listbox">
-            <button class="base-button__button d-btn d-btn--sm d-btn--circle d-datepicker__day d-datepicker__day--disabled" data-qa="dt-button" type="button" disabled="" aria-label="Select day 27 February 2024" aria-selected="false" role="option">
-              <span data-qa="dt-button-label" class="d-btn__label base-button__label">27</span>
-            </button>
-          </td>
-          <td class="d-datepicker__cell" role="listbox">
-            <button class="base-button__button d-btn d-btn--sm d-btn--circle d-datepicker__day d-datepicker__day--disabled" data-qa="dt-button" type="button" disabled="" aria-label="Select day 28 February 2024" aria-selected="false" role="option">
-              <span data-qa="dt-button-label" class="d-btn__label base-button__label">28</span>
-            </button>
-          </td>
-          <td class="d-datepicker__cell" role="listbox">
-            <button class="base-button__button d-btn d-btn--sm d-btn--circle d-datepicker__day d-datepicker__day--disabled" data-qa="dt-button" type="button" disabled="" aria-label="Select day 29 February 2024" aria-selected="false" role="option">
-              <span data-qa="dt-button-label" class="d-btn__label base-button__label">29</span>
-            </button>
-          </td>
-          <td class="d-datepicker__cell" role="listbox">
-            <button class="base-button__button d-btn d-btn--sm d-btn--circle d-datepicker__day" data-qa="dt-button" type="button" aria-label="Select day 1 March 2024" aria-selected="false" role="option">
-              <span data-qa="dt-button-label" class="d-btn__label base-button__label">1</span>
-            </button>
-          </td>
-          <td class="d-datepicker__cell" role="listbox">
-            <button class="base-button__button d-btn d-btn--sm d-btn--circle d-datepicker__day" data-qa="dt-button" type="button" aria-label="Select day 2 March 2024" aria-selected="false" role="option">
-              <span data-qa="dt-button-label" class="d-btn__label base-button__label">2</span>
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td class="d-datepicker__cell" role="listbox">
-            <button class="base-button__button d-btn d-btn--sm d-btn--circle d-datepicker__day" data-qa="dt-button" type="button" aria-label="Select day 3 March 2024" aria-selected="false" role="option">
-              <span data-qa="dt-button-label" class="d-btn__label base-button__label">3</span>
-            </button>
-          </td>
-          <td class="d-datepicker__cell" role="listbox">
-            <button class="base-button__button d-btn d-btn--sm d-btn--circle d-datepicker__day" data-qa="dt-button" type="button" aria-label="Select day 4 March 2024" aria-selected="false" role="option">
-              <span data-qa="dt-button-label" class="d-btn__label base-button__label">4</span>
-            </button>
-          </td>
-          <td class="d-datepicker__cell" role="listbox">
-            <button class="base-button__button d-btn d-btn--sm d-btn--circle d-datepicker__day" data-qa="dt-button" type="button" aria-label="Select day 5 March 2024" aria-selected="false" role="option">
-              <span data-qa="dt-button-label" class="d-btn__label base-button__label">5</span>
-            </button>
-          </td>
-          ...
-        </tr>
-        <tr>
-          ...
-        </tr>
-        ...
-      </tbody>
-    </table>
-  </div>
-</div>
-'
 vueCode='
 <dt-datepicker :selected-date="new Date()"></dt-datepicker>
 '
@@ -194,117 +75,6 @@ showHtmlWarning />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div data-qa="dt-popover-content" class="d-popover__content">
-  <div class="d-stack d-stack--gap-400 d-datepicker">
-    <div class="d-datepicker__hd">
-      <div class="d-stack d-stack--row d-stack--gap-300 d-datepicker__month-year">
-        <nav class="d-stack d-stack--row d-stack--gap-200 d-datepicker__nav">
-          <div>
-            <span>
-              <button
-                class="base-button__button d-btn d-btn--muted d-btn--xs d-btn--circle d-datepicker__nav-btn"
-                type="button"
-                aria-label="Change to Previous year 2023"
-              >
-                <span class="d-btn__label base-button__label">
-                  <svg>...</svg>
-                </span>
-              </button>
-            </span>
-          </div>
-          <div>
-            <span>
-              <button
-                class="base-button__button d-btn d-btn--muted d-btn--xs d-btn--circle d-datepicker__nav-btn"
-                type="button"
-                aria-label="Change to Previous month June"
-              >
-                <span class="d-btn__label base-button__label">
-                  <svg>...</svg>
-                </span>
-              </button>
-            </span>
-          </div>
-        </nav>
-        <div class="d-datepicker__month-year-title">July 2024</div>
-        <nav class="d-stack d-stack--row d-stack--gap-200 d-datepicker__nav">
-          <div>
-            <span>
-              <button
-                class="base-button__button d-btn d-btn--muted d-btn--xs d-btn--circle d-datepicker__nav-btn"
-                type="button"
-                aria-label="Change to Next month August"
-              >
-                <span class="d-btn__label base-button__label">
-                  <svg>...</svg>
-                </span>
-              </button>
-            </span>
-          </div>
-          <div>
-            <span>
-              <button
-                class="base-button__button d-btn d-btn--muted d-btn--xs d-btn--circle d-datepicker__nav-btn"
-                type="button"
-                aria-label="Change to Next year 2025"
-              >
-                <span class="d-btn__label base-button__label">
-                  <svg>...</svg>
-                </span>
-              </button>
-            </span>
-          </div>
-        </nav>
-      </div>
-    </div>
-    <div class="d-datepicker__bd">
-      <table class="d-datepicker__calendar" aria-labelledby="calendar-heading">
-        <thead>
-          <tr>
-            <th scope="col" class="d-datepicker__cell d-datepicker__cell--header">
-              <span class="d-datepicker__weekday" title="Su" aria-label="Su">
-                Su
-              </span>
-            </th>
-            <th scope="col" class="d-datepicker__cell d-datepicker__cell--header">
-              <span class="d-datepicker__weekday" title="Mo" aria-label="Mo">
-                Mo
-              </span>
-            </th>
-            <th scope="col" class="d-datepicker__cell d-datepicker__cell--header">
-              <span class="d-datepicker__weekday" title="Tu" aria-label="Tu">
-                Tu
-              </span>
-            </th>
-            <th scope="col" class="d-datepicker__cell d-datepicker__cell--header">
-              <span class="d-datepicker__weekday" title="We" aria-label="We">
-                We
-              </span>
-            </th>
-            <th scope="col" class="d-datepicker__cell d-datepicker__cell--header">
-              <span class="d-datepicker__weekday" title="Th" aria-label="Th">
-                Th
-              </span>
-            </th>
-            <th scope="col" class="d-datepicker__cell d-datepicker__cell--header">
-              <span class="d-datepicker__weekday" title="Fr" aria-label="Fr">
-                Fr
-              </span>
-            </th>
-            <th scope="col" class="d-datepicker__cell d-datepicker__cell--header">
-              <span class="d-datepicker__weekday" title="Sa" aria-label="Sa">
-                Sa
-              </span>
-            </th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
-  </div>
-</div>
-'
 vueCode='
 <dt-popover
   :open="datepickerOpened"
@@ -389,34 +159,36 @@ The following functions are available for date formatting.
       </dt-text>
     </dt-stack>
     <table class="d-table d-bt d-fl1">
-      <tr>
-        <th class="d-pl0" scope="row"><dt-text as="code" kind="code" size="xs" class="d-bgc-transparent">formatLong</dt-text></th>
-        <td><dt-text kind="body" size="xs">{{ formatLong(currentSelectedDate) }}</dt-text></td>
-      </tr>
-      <tr>
-        <th class="d-pl0" scope="row"><dt-text as="code" kind="code" size="xs" class="d-bgc-transparent">formatMedium</dt-text></th>
-        <td><dt-text kind="body" size="xs">{{ formatMedium(currentSelectedDate) }}</dt-text></td>
-      </tr>
-      <tr>
-        <th class="d-pl0" scope="row"><dt-text as="code" kind="code" size="xs" class="d-bgc-transparent">formatShort</dt-text></th>
-        <td><dt-text kind="body" size="xs">{{ formatShort(currentSelectedDate) }}</dt-text></td>
-      </tr>
-      <tr>
-        <th class="d-pl0" scope="row"><dt-text as="code" kind="code" size="xs" class="d-bgc-transparent">formatShort (no weekday)</dt-text></th>
-        <td><dt-text kind="body" size="xs">{{ formatShort(currentSelectedDate, false) }}</dt-text></td>
-      </tr>
-      <tr>
-        <th class="d-pl0" scope="row"><dt-text as="code" kind="code" size="xs" class="d-bgc-transparent">formatNoYear</dt-text></th>
-        <td><dt-text kind="body" size="xs">{{ formatNoYear(currentSelectedDate) }}</dt-text></td>
-      </tr>
-      <tr>
-        <th class="d-pl0" scope="row"><dt-text as="code" kind="code" size="xs" class="d-bgc-transparent">formatNoYear (abbreviated)</dt-text></th>
-        <td><dt-text kind="body" size="xs">{{ formatNoYear(currentSelectedDate, true) }}</dt-text></td>
-      </tr>
-      <tr>
-        <th class="d-pl0" scope="row"><dt-text as="code" kind="code" size="xs" class="d-bgc-transparent">formatNumerical</dt-text></th>
-        <td><dt-text kind="body" size="xs">{{ formatNumerical(currentSelectedDate) }}</dt-text></td>
-      </tr>
+      <tbody>
+        <tr>
+          <th class="d-pl0" scope="row"><dt-text as="code" kind="code" size="xs" class="d-bgc-transparent">formatLong</dt-text></th>
+          <td><dt-text kind="body" size="xs">{{ formatLong(currentSelectedDate) }}</dt-text></td>
+        </tr>
+        <tr>
+          <th class="d-pl0" scope="row"><dt-text as="code" kind="code" size="xs" class="d-bgc-transparent">formatMedium</dt-text></th>
+          <td><dt-text kind="body" size="xs">{{ formatMedium(currentSelectedDate) }}</dt-text></td>
+        </tr>
+        <tr>
+          <th class="d-pl0" scope="row"><dt-text as="code" kind="code" size="xs" class="d-bgc-transparent">formatShort</dt-text></th>
+          <td><dt-text kind="body" size="xs">{{ formatShort(currentSelectedDate) }}</dt-text></td>
+        </tr>
+        <tr>
+          <th class="d-pl0" scope="row"><dt-text as="code" kind="code" size="xs" class="d-bgc-transparent">formatShort (no weekday)</dt-text></th>
+          <td><dt-text kind="body" size="xs">{{ formatShort(currentSelectedDate, false) }}</dt-text></td>
+        </tr>
+        <tr>
+          <th class="d-pl0" scope="row"><dt-text as="code" kind="code" size="xs" class="d-bgc-transparent">formatNoYear</dt-text></th>
+          <td><dt-text kind="body" size="xs">{{ formatNoYear(currentSelectedDate) }}</dt-text></td>
+        </tr>
+        <tr>
+          <th class="d-pl0" scope="row"><dt-text as="code" kind="code" size="xs" class="d-bgc-transparent">formatNoYear (abbreviated)</dt-text></th>
+          <td><dt-text kind="body" size="xs">{{ formatNoYear(currentSelectedDate, true) }}</dt-text></td>
+        </tr>
+        <tr>
+          <th class="d-pl0" scope="row"><dt-text as="code" kind="code" size="xs" class="d-bgc-transparent">formatNumerical</dt-text></th>
+          <td><dt-text kind="body" size="xs">{{ formatNumerical(currentSelectedDate) }}</dt-text></td>
+        </tr>
+      </tbody>
     </table>
   </dt-stack>
 </div>

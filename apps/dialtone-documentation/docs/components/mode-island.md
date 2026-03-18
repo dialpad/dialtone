@@ -161,6 +161,8 @@ keywords: ["theme island","mode override","v-dt-mode","directive","light","dark"
   </dt-stack>
 </code-well-header>
 
+<!-- <component-combinator component-name="DtModeIsland" /> -->
+
 ## Usage
 
 Use the `v-dt-mode` directive to control the color mode of a region, component, or element. It creates a scoped region with the specified mode. Descendant elements retain their original styling but are rendered with the specified mode.

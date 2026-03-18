@@ -9,18 +9,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["dropdown button", "button with menu", "d-split-button", "DtSplitButton", "dt-split-button", "menu button", "combo button"]
 ---
 
-<code-well-header>
-  <dt-split-button
-    end-tooltip-text="More calling options"
-  >
-    Place call
-    <template #dropdownList>
-      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>
-      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item>
-      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>
-    </template>
-  </dt-split-button>
-</code-well-header>
+<component-combinator component-name="DtSplitButton" />
 
 ## Usage
 
@@ -53,9 +42,30 @@ In addition to the [Button component's](button.md) documentation:
 
 <code-well-header>
   <dt-stack direction="row" gap="400">
-      <dt-split-button end-tooltip-text="More calling options"> Place Call </dt-split-button>
-      <dt-split-button importance="outlined" end-tooltip-text="More calling options"> Place Call </dt-split-button>
-      <dt-split-button importance="clear" end-tooltip-text="More calling options"> Place Call </dt-split-button>
+    <dt-split-button end-tooltip-text="More calling options">
+      Place Call
+      <template #dropdownList>
+        <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>
+        <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item>
+        <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>
+      </template>
+    </dt-split-button>
+    <dt-split-button importance="outlined" end-tooltip-text="More calling options">
+      Place Call
+      <template #dropdownList>
+        <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>
+        <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item>
+        <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>
+      </template>
+    </dt-split-button>
+    <dt-split-button importance="clear" end-tooltip-text="More calling options">
+      Place Call
+      <template #dropdownList>
+        <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>
+        <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item>
+        <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>
+      </template>
+    </dt-split-button>
   </dt-stack>
 </code-well-header>
 
@@ -87,9 +97,30 @@ htmlCode='
 </span>
 '
 vueCode='
-<dt-split-button end-tooltip-text="More calling options"> Place Call </dt-split-button>
-<dt-split-button importance="outlined" end-tooltip-text="More calling options"> Place Call </dt-split-button>
-<dt-split-button importance="clear" end-tooltip-text="More calling options"> Place Call </dt-split-button>
+<dt-split-button end-tooltip-text="More calling options">
+  Place Call
+  <template #dropdownList>
+    <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>
+    <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item>
+    <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>
+  </template>
+</dt-split-button>
+<dt-split-button importance="outlined" end-tooltip-text="More calling options">
+  Place Call
+  <template #dropdownList>
+    <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>
+    <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item>
+    <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>
+  </template>
+</dt-split-button>
+<dt-split-button importance="clear" end-tooltip-text="More calling options">
+  Place Call
+  <template #dropdownList>
+    <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>
+    <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item>
+    <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>
+  </template>
+</dt-split-button>
 '
 showHtmlWarning />
 
@@ -97,9 +128,30 @@ showHtmlWarning />
 
 <code-well-header>
   <dt-stack direction="row" gap="400">
-      <dt-split-button kind="danger" end-tooltip-text="More calling options"> Place Call </dt-split-button>
-      <dt-split-button importance="outlined" kind="danger" end-tooltip-text="More calling options"> Place Call </dt-split-button>
-      <dt-split-button importance="clear" kind="danger" end-tooltip-text="More calling options"> Place Call </dt-split-button>
+    <dt-split-button kind="danger" end-tooltip-text="More calling options">
+      Place Call
+      <template #dropdownList>
+        <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>
+        <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item>
+        <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>
+      </template>
+    </dt-split-button>
+    <dt-split-button importance="outlined" kind="danger" end-tooltip-text="More calling options">
+      Place Call
+      <template #dropdownList>
+        <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>
+        <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item>
+        <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>
+      </template>
+    </dt-split-button>
+    <dt-split-button importance="clear" kind="danger" end-tooltip-text="More calling options">
+      Place Call
+      <template #dropdownList>
+        <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>
+        <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item>
+        <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>
+      </template>
+    </dt-split-button>
   </dt-stack>
 </code-well-header>
 
@@ -131,9 +183,30 @@ htmlCode='
 </span>
 '
 vueCode='
-<dt-split-button kind="danger" end-tooltip-text="More calling options"> Place Call </dt-split-button>
-<dt-split-button importance="outlined" kind="danger" end-tooltip-text="More calling options"> Place Call </dt-split-button>
-<dt-split-button importance="clear" kind="danger" end-tooltip-text="More calling options"> Place Call </dt-split-button>
+<dt-split-button kind="danger" end-tooltip-text="More calling options">
+  Place Call
+  <template #dropdownList>
+    <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>
+    <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item>
+    <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>
+  </template>
+</dt-split-button>
+<dt-split-button importance="outlined" kind="danger" end-tooltip-text="More calling options">
+  Place Call
+  <template #dropdownList>
+    <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>
+    <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item>
+    <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>
+  </template>
+</dt-split-button>
+<dt-split-button importance="clear" kind="danger" end-tooltip-text="More calling options">
+  Place Call
+  <template #dropdownList>
+    <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>
+    <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item>
+    <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>
+  </template>
+</dt-split-button>
 '
 showHtmlWarning />
 
@@ -489,7 +562,7 @@ htmlCode='
 '
 vueCode='
 <dt-split-button
-  start-href="https://dialpad.com"
+  start-href="<https://dialpad.com>"
   start-target="_blank"
   start-rel="noopener noreferrer"
   end-tooltip-text="More options"

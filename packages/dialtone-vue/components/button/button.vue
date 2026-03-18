@@ -169,7 +169,7 @@ export default {
 
   props: {
     /**
-     * Whether the button is a circle or not.
+     * Whether the button is a circle or not. Use only with icon-only buttons.
      * @values true, false
      */
     circle: {
@@ -223,7 +223,7 @@ export default {
      * Determines whether the link should have inverted styling if the button is styled as a link.
      * @values true, false
      * @see DtLink
-     * @ignore
+     * @deprecated Use v-dt-mode instead.
      */
     linkInverted: {
       type: Boolean,
@@ -235,9 +235,18 @@ export default {
      * Only applies when the link prop is true.
      * @values true, false
      */
-    underline: {
+    linkUnderline: {
       type: Boolean,
       default: true,
+    },
+
+    /**
+     * @deprecated Use linkUnderline instead.
+     * @values true, false
+     */
+    underline: {
+      type: Boolean,
+      default: null,
     },
 
     /**
@@ -420,6 +429,10 @@ export default {
   },
 
   computed: {
+    resolvedUnderline () {
+      return this.underline ?? this.linkUnderline;
+    },
+
     computedTag () {
       if (this.to) return this.resolveRouterLink();
       if (this.href) return 'a';
@@ -535,7 +548,7 @@ export default {
           'd-link',
           getLinkKindModifier(this.linkKind, this.linkInverted),
           BUTTON_SIZE_MODIFIERS[this.size],
-          { 'd-link--no-underline': !this.underline },
+          { 'd-link--no-underline': !this.resolvedUnderline },
         ];
       }
       if (this.kind === 'unstyled') {
