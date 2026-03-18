@@ -109,10 +109,13 @@ function renderTarget () {
     Object.entries(props.bindings).filter(([name]) => !props.disabledMembers.has(name)),
   );
 
+  const slotKey = Object.keys(slots).sort().join(',');
+
   try {
     render(h(props.component, {
       ...filteredBindings,
       ...events.value,
+      key: slotKey,
     }, slots), currentContainer);
   } catch (e) {
     console.warn('Rendering warning: \n', e);
