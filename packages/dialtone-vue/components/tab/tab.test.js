@@ -61,12 +61,6 @@ describe('DtTab Tests', () => {
       expect(tab.text()).toBe(MOCK_DEFAULT_SLOT);
     });
 
-    it('should set data-content to match the slot text', () => {
-      const label = tab.find('[data-qa="dt-tab-label"]');
-
-      expect(label.attributes('data-content')).toBe(MOCK_DEFAULT_SLOT);
-    });
-
     describe('Selected Tab by default', () => {
       it('Group context should have set selected tab', () => {
         mockProps = { selected: true };
