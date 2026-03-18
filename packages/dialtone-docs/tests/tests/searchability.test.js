@@ -1,18 +1,16 @@
-import { describe, test, expect } from 'vitest';
+import { describe, test, expect, beforeAll } from 'vitest';
 import { findFiles, readFile } from '@helpers/fileReader.js';
 
 describe('Searchability — content uses actual names', () => {
   let allContent;
 
-  async function getAllContent() {
-    if (allContent) return allContent;
+  beforeAll(async () => {
     const files = await findFiles('src/content/**/*.md', { ignore: ['**/INDEX.md', '**/node_modules/**'] });
     allContent = files.map(f => readFile(f)).join('\n');
-    return allContent;
-  }
+  });
 
-  test('documentation mentions actual package names', async () => {
-    const content = await getAllContent();
+  test('documentation mentions actual package names', () => {
+    const content = allContent;
     const packages = ['dialtone-vue', 'dialtone-css', 'dialtone-tokens', 'dialtone-icons'];
 
     for (const pkg of packages) {
@@ -20,8 +18,8 @@ describe('Searchability — content uses actual names', () => {
     }
   });
 
-  test('documentation mentions technical terms', async () => {
-    const content = await getAllContent();
+  test('documentation mentions technical terms', () => {
+    const content = allContent;
     const terms = ['pnpm', 'NX', 'monorepo', 'Vue'];
 
     for (const term of terms) {

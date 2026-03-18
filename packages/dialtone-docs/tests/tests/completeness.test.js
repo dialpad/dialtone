@@ -53,6 +53,8 @@ describe('Completeness — required docs exist', () => {
       'src/content/workflows/workflow-branch-strategy.md',
       'src/content/workflows/workflow-conventional-commits.md',
       'src/content/workflows/workflow-ci-pipeline.md',
+      'src/content/workflows/workflow-component-lifecycle.md',
+      'src/content/workflows/workflow-figma-sync.md',
     ];
     for (const file of required) {
       expect(fileExists(file), `${file} missing`).toBe(true);
