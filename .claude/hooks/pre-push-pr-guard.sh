@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e
+
 # PreToolUse hook — checks documentation before push and PR creation
 # Uses the edit tracker to see if code files were touched without doc updates
 # Maps package source paths to dialtone-docs content files
@@ -71,7 +73,7 @@ if [[ ! -f "$log_file" ]]; then
     exit 0
 fi
 
-edited_files=$(cat "$log_file" | cut -d: -f2)
+edited_files=$(cut -d$'\t' -f2 < "$log_file")
 
 # Dialtone docs content path
 docs_content="packages/dialtone-docs/src/content"
@@ -162,13 +164,9 @@ if [[ "$is_pr" == "true" ]]; then
           "systemMessage": ("Code files were edited this session but the corresponding dialtone-docs content was not updated.\n\nMissing doc updates:\n" + $missing + "\nRun the doc-sync-enforcer skill now. For each mapping above:\n1. Read the source files that were changed (listed in " + $log_file + ")\n2. Read the corresponding doc file in packages/dialtone-docs/src/content/\n3. Update the doc file to reflect the source code changes — update relevant sections, examples, and the last_updated frontmatter field\n4. If the change is trivial (bug fix, formatting only), note that and skip the doc update\n\nAfter the enforcer finishes, ask the user: \"Want me to run /doc-janitor to clean up stale artifacts before the PR?\"\nIf yes, launch the doc-janitor agent.\nIf no, skip.\n\nThen run:\n  mkdir -p " + $marker_dir + " && touch " + $marker_file + "\n\nThen retry the PR creation.")
         }'
     else
-        jq -n \
-          --arg marker_dir "$marker_dir" \
-          --arg marker_file "$marker_file" \
-        '{
-          "hookSpecificOutput": { "permissionDecision": "deny" },
-          "systemMessage": ("PR creation check: docs look up to date.\n\nAsk the user: \"Want me to run /doc-janitor to clean up stale artifacts before the PR?\"\nIf yes, launch the doc-janitor agent.\nIf no, skip.\n\nThen run:\n  mkdir -p " + $marker_dir + " && touch " + $marker_file + "\n\nThen retry the PR creation.")
-        }'
+        # Docs are up to date — allow PR creation (pr-fill already suggests /doc-janitor)
+        touch "$marker_file"
+        exit 0
     fi
 else
     # Push: only block if docs are missing

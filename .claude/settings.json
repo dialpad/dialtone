@@ -2,7 +2,7 @@
   "permissions": {
     "allow": [
       "Skill(doc-sync-enforcer)",
-      "Skill(doc-janitor)"
+      "Agent(doc-janitor)"
     ]
   },
   "hooks": {
