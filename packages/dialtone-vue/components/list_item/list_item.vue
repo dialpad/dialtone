@@ -88,6 +88,7 @@ export default {
 
     /**
      * String to use for the item's role.
+     * @values listitem, menuitem, option
      */
     role: {
       type: String,

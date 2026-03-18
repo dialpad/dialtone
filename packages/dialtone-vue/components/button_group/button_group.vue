@@ -21,6 +21,7 @@ export default {
   props: {
     /**
      * Alignment of the buttons inside the container
+     * @values start, end, space-between
      */
     alignment: {
       type: String,

@@ -277,7 +277,8 @@ export default {
     },
 
     /**
-     * Size of the chip, one of `xs`, `sm`, `md`
+     * Size of the chip.
+     * @values xs, sm, md
      */
     size: {
       type: String,

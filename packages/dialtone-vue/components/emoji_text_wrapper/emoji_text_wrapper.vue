@@ -28,7 +28,8 @@ export default {
     },
 
     /**
-     * The icon size to render the emojis at: 100 to 800
+     * The icon size to render the emojis at.
+     * @values 100, 200, 300, 400, 500, 600, 700, 800
      */
     size: {
       type: String,
