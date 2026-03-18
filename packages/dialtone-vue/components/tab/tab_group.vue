@@ -10,7 +10,7 @@
         'd-tablist',
         TAB_LIST_SIZE_MODIFIERS[size],
         TAB_ORIENTATION_MODIFIERS[orientation],
-        TAB_SPREAD_MODIFIERS[spread],
+        orientation !== 'vertical' && TAB_SPREAD_MODIFIERS[spread],
         {
           [TAB_LIST_KIND_MODIFIERS.inverted]: inverted,
           [TAB_LIST_IMPORTANCE_MODIFIERS.borderless]: borderless,
