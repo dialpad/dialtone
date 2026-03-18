@@ -40,6 +40,7 @@ const recipeEntries = _getEntries('lib', 'recipes/**/*.{js,vue}');
 export default defineConfig({
   assetsInclude: ['**/*.ftl'],
   build: {
+    target: 'modules',
     sourcemap: true,
     minify: true,
     rolldownOptions: {

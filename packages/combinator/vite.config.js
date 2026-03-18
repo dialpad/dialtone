@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url';
 
 export default defineConfig({
   build: {
+    target: 'modules',
     sourcemap: true,
     minify: false,
     rolldownOptions: {

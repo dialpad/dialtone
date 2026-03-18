@@ -15,6 +15,7 @@ const postcssEntries = glob.sync('./postcss/*.js').reduce((entries, path) => {
 // https://vitejs.dev/config/
 export default defineConfig({
   build: {
+    target: 'modules',
     emptyOutDir: false,
     lib: {
       entry: {
