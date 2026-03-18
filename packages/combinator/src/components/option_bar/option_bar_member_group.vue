@@ -134,6 +134,7 @@ const dependencyMap = computed(() => buildDependencyMap(props.members));
  * @type {object}
  */
 const memberMap = computed(() => {
+  if (!props.members?.length) return reactive({});
   const depMap = dependencyMap.value;
   const childSet = new Set(depMap.keys());
 
