@@ -3,7 +3,7 @@ export default {
   default: {
     props: {
       open: {
-        initialValue: true,
+        initialValue: false,
       },
     },
     slots: {
@@ -18,7 +18,7 @@ export default {
 
   'with header': {
     props: {
-      open: { initialValue: true },
+      open: { initialValue: false },
     },
     slots: {
       anchor: { initialValue: '<dt-button>View Popover</dt-button>' },
@@ -29,7 +29,7 @@ export default {
 
   'fallback placement': {
     props: {
-      open: { initialValue: true },
+      open: { initialValue: false },
       fallbackPlacements: { initialValue: ['top'] },
     },
     slots: {
@@ -40,7 +40,7 @@ export default {
 
   'small padding': {
     props: {
-      open: { initialValue: true },
+      open: { initialValue: false },
       padding: { initialValue: 'small' },
     },
     slots: {

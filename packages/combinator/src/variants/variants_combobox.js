@@ -3,7 +3,7 @@ export default {
   default: {
     props: {
       showList: {
-        initialValue: true,
+        initialValue: false,
       },
       label: {
         initialValue: 'Label Text',

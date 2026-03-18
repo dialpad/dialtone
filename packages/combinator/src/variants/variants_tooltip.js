@@ -3,7 +3,7 @@ export default {
   default: {
     props: {
       show: {
-        initialValue: true,
+        initialValue: false,
       },
       message: {
         initialValue: 'This is a tooltip',
@@ -18,7 +18,7 @@ export default {
   inverted: {
     props: {
       show: {
-        initialValue: true,
+        initialValue: false,
       },
       message: {
         initialValue: 'This is a tooltip',

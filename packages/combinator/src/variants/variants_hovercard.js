@@ -3,7 +3,7 @@ export default {
   default: {
     props: {
       open: {
-        initialValue: true,
+        initialValue: false,
       },
       placement: {
         initialValue: 'bottom',

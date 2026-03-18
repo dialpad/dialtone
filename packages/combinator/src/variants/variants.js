@@ -10,6 +10,7 @@ import DtCheckboxGroup from './variants_checkbox_group.js';
 import DtChip from './variants_chip.js';
 import DtCollapsible from './variants_collapsible.js';
 import DtCombobox from './variants_combobox.js';
+import DtComboboxWithPopover from './variants_combobox_with_popover.js';
 import DtDatepicker from './variants_datepicker.js';
 import DtDescriptionList from './variants_description_list.js';
 import DtDropdown from './variants_dropdown.js';
@@ -68,6 +69,7 @@ export default function variants () {
     DtChip,
     DtCollapsible,
     DtCombobox,
+    DtComboboxWithPopover,
     DtDatepicker,
     DtDescriptionList,
     DtDropdown,

@@ -3,7 +3,7 @@ export default {
   default: {
     props: {
       navigationType: { initialValue: 'arrow-keys' },
-      open: { initialValue: true },
+      open: { initialValue: false },
       modal: { initialValue: false },
     },
     slots: {
@@ -15,7 +15,7 @@ export default {
   'with groups': {
     props: {
       navigationType: { initialValue: 'arrow-keys' },
-      open: { initialValue: true },
+      open: { initialValue: false },
       modal: { initialValue: false },
     },
     slots: {
