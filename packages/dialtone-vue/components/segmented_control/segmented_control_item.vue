@@ -1,0 +1,133 @@
+<template>
+  <dt-button
+    class="d-segmented-control__item"
+    role="radio"
+    :aria-checked="String(isSelected)"
+    :tabindex="isSelected ? '0' : '-1'"
+    :active="isSelected"
+    :disabled="isDisabled"
+    :aria-disabled="isDisabled ? 'true' : undefined"
+    :aria-label="label"
+    :label-class="resolvedLabelClass"
+    :data-value="value"
+    kind="muted"
+    importance="clear"
+    :size="buttonSize"
+    data-qa="dt-segmented-control-item"
+    v-bind="$attrs"
+    @click="handleClick"
+    @focus="handleFocus"
+  >
+    <template
+      v-if="$slots.startIcon"
+      #startIcon="{ iconSize }"
+    >
+      <slot
+        name="startIcon"
+        :icon-size="iconSize"
+      />
+    </template>
+    <template
+      v-if="$slots.endIcon"
+      #endIcon="{ iconSize }"
+    >
+      <slot
+        name="endIcon"
+        :icon-size="iconSize"
+      />
+    </template>
+    <template
+      v-if="$slots.leading"
+      #leading
+    >
+      <slot name="leading" />
+    </template>
+    <template
+      v-if="$slots.trailing"
+      #trailing
+    >
+      <slot name="trailing" />
+    </template>
+    <!-- @slot Label text content -->
+    <slot />
+  </dt-button>
+</template>
+
+<script setup>
+import { computed, inject } from 'vue';
+import { DtButton } from '@/components/button';
+import {
+  SEGMENTED_CONTROL_CONTEXT_KEY,
+  SEGMENTED_CONTROL_SELECT_KEY,
+  SEGMENTED_CONTROL_FOCUS_KEY,
+} from './segmented_control_constants.js';
+
+defineOptions({
+  name: 'DtSegmentedControlItem',
+  inheritAttrs: false,
+});
+
+const props = defineProps({
+  /**
+   * Unique value for this item, used for selection matching with v-model.
+   */
+  value: {
+    type: String,
+    required: true,
+  },
+
+  /**
+   * Accessible label for the button (aria-label).
+   * Visible text comes from the default slot, not this prop.
+   * Required for icon-only items.
+   */
+  label: {
+    type: String,
+    default: undefined,
+  },
+
+  /**
+   * Disables this individual item.
+   */
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+
+  /**
+   * Custom class for this item's label container.
+   * Overrides the parent's labelClass when provided.
+   */
+  labelClass: {
+    type: [String, Array, Object],
+    default: undefined,
+  },
+});
+
+const groupContext = inject(SEGMENTED_CONTROL_CONTEXT_KEY);
+const selectValue = inject(SEGMENTED_CONTROL_SELECT_KEY);
+const setFocus = inject(SEGMENTED_CONTROL_FOCUS_KEY);
+
+const isSelected = computed(() => groupContext.selected === props.value);
+const isDisabled = computed(() => groupContext.disabled || props.disabled);
+
+const buttonSize = computed(() => {
+  const size = groupContext.size;
+  return size === 'default' ? undefined : size;
+});
+
+const resolvedLabelClass = computed(() => {
+  const base = 'd-segmented-control__item-label';
+  const custom = props.labelClass ?? groupContext.labelClass;
+  return custom ? `${base} ${custom}` : base;
+});
+
+function handleClick () {
+  if (isDisabled.value) return;
+  selectValue(props.value);
+}
+
+function handleFocus () {
+  setFocus(props.value);
+}
+</script>

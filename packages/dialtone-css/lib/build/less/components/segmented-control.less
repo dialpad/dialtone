@@ -12,10 +12,45 @@
 //  ----------------------------------------------------------------------------
 @layer dialtone.components {
 .d-segmented-control {
-  padding: var(--dt-space-100);
+  --border-size: var(--dt-size-border-100);
+  --padding-segmented-control: var(--dt-size-200);
+  --radius-segmented-control: var(--dt-size-radius-300);
+
+  padding: var(--padding-segmented-control);
   background-color: var(--dt-color-surface-primary);
-  border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
-  border-radius: var(--dt-size-radius-300);
+  border: var(--border-size) solid var(--dt-color-border-subtle);
+  border-radius: var(--radius-segmented-control);
+
+  &--spread-evenly {
+    > .d-segmented-control__item {
+      flex: 1;
+    }
+  }
+
+  &--xs {
+    --padding-segmented-control: var(--dt-size-50);
+    // --radius-segmented-control: var(--dt-size-radius-200);
+  }
+
+  &--sm {
+    --padding-segmented-control: var(--dt-size-100);
+    // --radius-segmented-control: var(--dt-size-radius-200);
+  }
+
+  &--md {
+    --padding-segmented-control: var(--dt-size-200);
+    // --radius-segmented-control: var(--dt-size-radius-300);
+  }
+
+  &--lg {
+    --padding-segmented-control: var(--dt-size-300);
+    // --radius-segmented-control: var(--dt-size-radius-300);
+  }
+
+  &--xl {
+    --padding-segmented-control: var(--dt-size-400);
+    // --radius-segmented-control: var(--dt-size-radius-300);
+  }
 
   &__item {
     flex: 1 1 auto;
@@ -23,7 +58,6 @@
 
   &__item-label {
     flex: 0 0 auto;
-    // white-space: nowrap;
   }
 }
 }

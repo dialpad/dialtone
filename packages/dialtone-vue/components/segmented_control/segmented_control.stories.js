@@ -6,6 +6,7 @@ import {
   SEGMENTED_CONTROL_SIZES,
   SEGMENTED_CONTROL_ORIENTATIONS,
   SEGMENTED_CONTROL_ACTIVATION_MODES,
+  SEGMENTED_CONTROL_SPREADS,
 } from './segmented_control_constants';
 
 export const argsData = {
@@ -13,6 +14,7 @@ export const argsData = {
   size: 'default',
   activationMode: 'manual',
   disabled: false,
+  spread: 'grow',
   gap: '300',
   labelClass: '',
 };
@@ -23,12 +25,6 @@ export const argTypesData = {
     control: 'text',
     table: {
       type: { summary: 'String' },
-    },
-  },
-  options: {
-    control: 'object',
-    table: {
-      type: { summary: 'Array' },
     },
   },
   ariaLabel: {
@@ -55,8 +51,21 @@ export const argTypesData = {
   disabled: {
     control: 'boolean',
   },
+  spread: {
+    defaultValue: 'grow',
+    control: 'select',
+    options: SEGMENTED_CONTROL_SPREADS,
+  },
   labelClass: {
     control: 'text',
+  },
+
+  // Slots
+  default: {
+    control: 'text',
+    table: {
+      type: { summary: 'VNode' },
+    },
   },
 
   // Events

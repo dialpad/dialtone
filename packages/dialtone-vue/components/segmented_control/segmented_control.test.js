@@ -1,32 +1,41 @@
 import { mount } from '@vue/test-utils';
+import { h } from 'vue';
 import DtSegmentedControl from './segmented_control.vue';
+import DtSegmentedControlItem from './segmented_control_item.vue';
 import {
   SEGMENTED_CONTROL_SIZES,
   SEGMENTED_CONTROL_ORIENTATIONS,
   SEGMENTED_CONTROL_ACTIVATION_MODES,
+  SEGMENTED_CONTROL_SPREADS,
 } from './segmented_control_constants';
 
-const baseOptions = [
-  { value: 'all', label: 'All' },
-  { value: 'favorites', label: 'Favorites' },
-  { value: 'recent', label: 'Recent' },
-  { value: 'groups', label: 'Groups' },
+const ITEMS = [
+  { value: 'all', text: 'All' },
+  { value: 'favorites', text: 'Favorites' },
+  { value: 'recent', text: 'Recent' },
 ];
+
+const defaultSlot = (overrides = []) => () => ITEMS.map((item, i) => {
+  const itemOverrides = overrides[i] || {};
+  return h(DtSegmentedControlItem, {
+    value: item.value,
+    ...itemOverrides,
+  }, () => item.text);
+});
 
 const baseProps = {
   modelValue: 'all',
-  options: baseOptions,
   ariaLabel: 'Test segmented control',
 };
 
 describe('DtSegmentedControl Tests', () => {
   let wrapper;
 
-  const _setWrapper = (props = {}, attrs = {}, slots = {}) => {
+  const _setWrapper = (props = {}, slots = {}) => {
     wrapper = mount(DtSegmentedControl, {
       props: { ...baseProps, ...props },
-      attrs: { ...attrs },
-      slots: { ...slots },
+      slots: { default: slots.default || defaultSlot() },
+      attachTo: document.body,
     });
   };
 
@@ -35,45 +44,45 @@ describe('DtSegmentedControl Tests', () => {
   });
 
   describe('Presentation Tests', () => {
-    it('renders all options', () => {
+    it('renders all items', () => {
       _setWrapper();
 
-      const buttons = wrapper.findAll('[data-qa="dt-segmented-control__option"]');
-      expect(buttons.length).toBe(baseOptions.length);
+      const items = wrapper.findAll('[data-qa="dt-segmented-control-item"]');
+      expect(items.length).toBe(ITEMS.length);
     });
 
-    it('applies active class to selected option', () => {
+    it('applies active class to selected item', () => {
       _setWrapper({ modelValue: 'favorites' });
 
-      const buttons = wrapper.findAll('[data-qa="dt-segmented-control__option"]');
-      expect(buttons[1].classes()).toContain('d-btn--active');
+      const items = wrapper.findAll('[data-qa="dt-segmented-control-item"]');
+      expect(items[1].classes()).toContain('d-btn--active');
     });
 
-    it('disables all buttons when disabled prop is true', () => {
+    it('disables all items when disabled prop is true', () => {
       _setWrapper({ disabled: true });
 
-      const buttons = wrapper.findAll('[data-qa="dt-segmented-control__option"]');
-      buttons.forEach(button => {
-        expect(button.attributes('disabled')).toBeDefined();
+      const items = wrapper.findAll('[data-qa="dt-segmented-control-item"]');
+      items.forEach(item => {
+        expect(item.attributes('disabled')).toBeDefined();
       });
     });
   });
 
   describe('Interactivity Tests', () => {
-    it('emits update:modelValue on click', async () => {
+    it('emits update:modelValue on child click', async () => {
       _setWrapper();
 
-      const buttons = wrapper.findAll('[data-qa="dt-segmented-control__option"]');
-      await buttons[2].trigger('click');
+      const items = wrapper.findAll('[data-qa="dt-segmented-control-item"]');
+      await items[2].trigger('click');
 
       expect(wrapper.emitted('update:modelValue')[0]).toEqual(['recent']);
     });
 
-    it('does not emit on click when disabled', async () => {
+    it('does not emit when group is disabled', async () => {
       _setWrapper({ disabled: true });
 
-      const buttons = wrapper.findAll('[data-qa="dt-segmented-control__option"]');
-      await buttons[1].trigger('click');
+      const items = wrapper.findAll('[data-qa="dt-segmented-control-item"]');
+      await items[1].trigger('click');
 
       expect(wrapper.emitted('update:modelValue')).toBeUndefined();
     });
@@ -81,8 +90,8 @@ describe('DtSegmentedControl Tests', () => {
     it('emits on Enter key', async () => {
       _setWrapper();
 
-      const buttons = wrapper.findAll('[data-qa="dt-segmented-control__option"]');
-      await buttons[2].trigger('keydown', { key: 'Enter' });
+      const items = wrapper.findAll('[data-qa="dt-segmented-control-item"]');
+      await items[2].trigger('keydown', { key: 'Enter' });
 
       expect(wrapper.emitted('update:modelValue')[0]).toEqual(['recent']);
     });
@@ -90,8 +99,8 @@ describe('DtSegmentedControl Tests', () => {
     it('emits on arrow nav when activationMode is auto', async () => {
       _setWrapper({ activationMode: 'auto' });
 
-      const buttons = wrapper.findAll('[data-qa="dt-segmented-control__option"]');
-      await buttons[0].trigger('keydown', { key: 'ArrowRight' });
+      const items = wrapper.findAll('[data-qa="dt-segmented-control-item"]');
+      await items[0].trigger('keydown', { key: 'ArrowRight' });
 
       expect(wrapper.emitted('update:modelValue')[0]).toEqual(['favorites']);
     });
@@ -99,8 +108,8 @@ describe('DtSegmentedControl Tests', () => {
     it('does not emit on arrow nav when activationMode is manual', async () => {
       _setWrapper({ activationMode: 'manual' });
 
-      const buttons = wrapper.findAll('[data-qa="dt-segmented-control__option"]');
-      await buttons[0].trigger('keydown', { key: 'ArrowRight' });
+      const items = wrapper.findAll('[data-qa="dt-segmented-control-item"]');
+      await items[0].trigger('keydown', { key: 'ArrowRight' });
 
       expect(wrapper.emitted('update:modelValue')).toBeUndefined();
     });
@@ -115,35 +124,34 @@ describe('DtSegmentedControl Tests', () => {
       expect(container.attributes('aria-label')).toBe('My control');
     });
 
-    it('sets role="radio" and aria-checked on each option', () => {
+    it('items have role="radio" and aria-checked', () => {
       _setWrapper({ modelValue: 'favorites' });
 
-      const buttons = wrapper.findAll('[data-qa="dt-segmented-control__option"]');
-      expect(buttons[0].attributes('role')).toBe('radio');
-      expect(buttons[0].attributes('aria-checked')).toBe('false');
-      expect(buttons[1].attributes('aria-checked')).toBe('true');
+      const items = wrapper.findAll('[data-qa="dt-segmented-control-item"]');
+      expect(items[0].attributes('role')).toBe('radio');
+      expect(items[0].attributes('aria-checked')).toBe('false');
+      expect(items[1].attributes('aria-checked')).toBe('true');
     });
 
     it('selected item has tabindex 0, others have -1', () => {
       _setWrapper({ modelValue: 'favorites' });
 
-      const buttons = wrapper.findAll('[data-qa="dt-segmented-control__option"]');
-      expect(buttons[0].attributes('tabindex')).toBe('-1');
-      expect(buttons[1].attributes('tabindex')).toBe('0');
-      expect(buttons[2].attributes('tabindex')).toBe('-1');
-      expect(buttons[3].attributes('tabindex')).toBe('-1');
+      const items = wrapper.findAll('[data-qa="dt-segmented-control-item"]');
+      expect(items[0].attributes('tabindex')).toBe('-1');
+      expect(items[1].attributes('tabindex')).toBe('0');
+      expect(items[2].attributes('tabindex')).toBe('-1');
     });
 
-    it('sets aria-disabled on disabled options', () => {
-      const options = [
-        { value: 'a', label: 'A' },
-        { value: 'b', label: 'B', disabled: true },
-        { value: 'c', label: 'C' },
+    it('sets aria-disabled on disabled items', () => {
+      const slot = () => [
+        h(DtSegmentedControlItem, { value: 'a' }, () => 'A'),
+        h(DtSegmentedControlItem, { value: 'b', disabled: true }, () => 'B'),
+        h(DtSegmentedControlItem, { value: 'c' }, () => 'C'),
       ];
-      _setWrapper({ options, modelValue: 'a' });
+      _setWrapper({ modelValue: 'a' }, { default: slot });
 
-      const buttons = wrapper.findAll('[data-qa="dt-segmented-control__option"]');
-      expect(buttons[1].attributes('aria-disabled')).toBe('true');
+      const items = wrapper.findAll('[data-qa="dt-segmented-control-item"]');
+      expect(items[1].attributes('aria-disabled')).toBe('true');
     });
   });
 
@@ -163,6 +171,12 @@ describe('DtSegmentedControl Tests', () => {
     it('validates activationMode prop', () => {
       const validator = DtSegmentedControl.props.activationMode.validator;
       expect(validator(SEGMENTED_CONTROL_ACTIVATION_MODES[0])).toBe(true);
+      expect(validator('INVALID')).toBe(false);
+    });
+
+    it('validates spread prop', () => {
+      const validator = DtSegmentedControl.props.spread.validator;
+      expect(validator(SEGMENTED_CONTROL_SPREADS[0])).toBe(true);
       expect(validator('INVALID')).toBe(false);
     });
   });
