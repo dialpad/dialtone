@@ -80,6 +80,7 @@
         v-model="selectedVertical"
         orientation="vertical"
         aria-label="Vertical example"
+        class="d-w164"
       >
         <dt-segmented-control-item value="all">
           All
