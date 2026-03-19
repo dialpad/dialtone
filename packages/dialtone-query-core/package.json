@@ -1,0 +1,32 @@
+{
+  "name": "@dialpad/dialtone-query-core",
+  "version": "1.0.0",
+  "description": "Core search and query engine for Dialtone Design System",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "type": "module",
+  "files": [
+    "build"
+  ],
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@dialpad/dialtone-css": "workspace:*",
+    "@dialpad/dialtone-icons": "workspace:*",
+    "@dialpad/dialtone-vue": "workspace:^3",
+    "@types/node": "24.3.1",
+    "typescript": "^5.2"
+  },
+  "keywords": [
+    "dialtone",
+    "design-system",
+    "search"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dialpad/dialtone.git",
+    "directory": "packages/dialtone-query-core"
+  },
+  "license": "MIT"
+}

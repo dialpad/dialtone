@@ -1,10 +1,11 @@
 {
-  "name": "@dialpad/dialtone-mcp-server",
-  "version": "1.2.1",
+  "name": "@dialpad/dialtone-cli",
+  "version": "1.0.0",
+  "description": "CLI for searching and exploring the Dialtone Design System",
   "main": "build/index.js",
   "type": "module",
   "bin": {
-    "dialtone-mcp-server": "build/index.js"
+    "dialtone": "build/index.js"
   },
   "files": [
     "build"
@@ -12,41 +13,33 @@
   "scripts": {
     "build": "rollup -c",
     "start": "node build/index.js",
-    "dev": "tsx src/index.ts",
-    "test": "node test-search.js",
-    "interactive": "tsx interactive-search.ts",
-    "inspect": "npx @modelcontextprotocol/inspector npm run start"
+    "dev": "tsx src/index.ts"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "1.18.0",
-    "zod": "3.25.76"
+    "citty": "^0.1.6"
   },
   "devDependencies": {
     "@dialpad/dialtone-css": "workspace:*",
     "@dialpad/dialtone-icons": "workspace:*",
     "@dialpad/dialtone-query-core": "workspace:*",
     "@dialpad/dialtone-vue": "workspace:^3",
-    "@modelcontextprotocol/inspector": "0.16.7",
     "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-node-resolve": "^15.2.0",
     "@rollup/plugin-typescript": "^11.1.0",
     "@types/node": "24.3.1",
     "rollup": "^4.0.0",
-    "ts-node": "10.9.2",
     "tsx": "^4.0.0",
     "typescript": "^5.2"
   },
   "keywords": [
-    "mcp",
     "dialtone",
     "design-system",
-    "model-context-protocol"
+    "cli"
   ],
-  "description": "MCP Server for Dialtone Design System",
   "repository": {
     "type": "git",
     "url": "https://github.com/dialpad/dialtone.git",
-    "directory": "packages/dialtone-mcp-server"
+    "directory": "packages/dialtone-cli"
   },
   "license": "MIT"
 }

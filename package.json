@@ -83,6 +83,7 @@
   "dependencies": {
     "@dialpad/dialtone-emojis": "workspace:*",
     "@dialpad/dialtone-icons": "workspace:*",
+    "@dialpad/dialtone-cli": "workspace:*",
     "@dialpad/dialtone-mcp-server": "workspace:*",
     "@dialpad/dialtone-tokens": "workspace:*",
     "@floating-ui/dom": "^1.6.0",
