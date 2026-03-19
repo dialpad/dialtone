@@ -1,3 +1,10 @@
+# [8.77.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.76.0...dialtone-css/v8.77.0) (2026-03-19)
+
+
+### Features
+
+* DLT-3144 support truncation within message input bottom btns ([#1134](https://github.com/dialpad/dialtone/issues/1134)) ([22175f5](https://github.com/dialpad/dialtone/commit/22175f59d8b6e270f30992a31cd8604aaeed4984))
+
 # [8.76.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.75.1...dialtone-css/v8.76.0) (2026-03-17)
 
 
