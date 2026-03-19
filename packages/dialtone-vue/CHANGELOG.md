@@ -1,3 +1,15 @@
+# [3.217.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.216.0...dialtone-vue/v3.217.0) (2026-03-19)
+
+
+### Bug Fixes
+
+* **Editor:** NO-JIRA empty div issue with nested block elements ([#1121](https://github.com/dialpad/dialtone/issues/1121)) ([a9bb763](https://github.com/dialpad/dialtone/commit/a9bb763285440a7c8352767eee6980c1b44b0942))
+
+
+### Features
+
+* DLT-3144 support truncation within message input bottom btns ([#1134](https://github.com/dialpad/dialtone/issues/1134)) ([22175f5](https://github.com/dialpad/dialtone/commit/22175f59d8b6e270f30992a31cd8604aaeed4984))
+
 # [3.216.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.215.1...dialtone-vue/v3.216.0) (2026-03-17)
 
 
