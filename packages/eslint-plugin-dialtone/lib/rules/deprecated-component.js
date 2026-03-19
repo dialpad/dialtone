@@ -67,10 +67,16 @@ module.exports = {
     return {
       ImportDeclaration(node) {
         let foundIndex;
+        const importPath = node.source.value.toLowerCase();
+
+        // Skip Dialtone's own component imports to avoid false positives
+        if (importPath.includes('@dialpad/dialtone')) {
+          return;
+        }
 
         deprecatedComponents.forEach(item => {
           const regex = new RegExp(`^.*/${item.fileName}(?:\\.vue)?$`, 'g');
-          foundIndex = node.source.value.toLowerCase().search(regex);
+          foundIndex = importPath.search(regex);
 
           if (foundIndex !== -1) {
             context.report({
