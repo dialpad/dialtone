@@ -1,6 +1,7 @@
 import { defineCommand } from 'citty';
-import { searchUtilityClasses, utilityClasses } from '@dialpad/dialtone-query-core';
+import { searchUtilityClasses } from '@dialpad/dialtone-query-core';
 import type { SearchResult, ValueObject } from '@dialpad/dialtone-query-core';
+import { getContext } from '../context.js';
 import { type Format } from '../formatters.js';
 
 export const utilityCommand = defineCommand({
@@ -13,6 +14,7 @@ export const utilityCommand = defineCommand({
   run({ args }) {
     const format = (args.format || 'minimal') as Format;
     const limit = Number(args.limit);
+    const { utilityClasses } = getContext();
     const { results, notes } = searchUtilityClasses(args.query, utilityClasses);
 
     if (results.length === 0) {
@@ -55,7 +57,7 @@ export const utilityCommand = defineCommand({
       console.log('---------------------------------------------------------------');
     }
 
-    if (format !== 'json' && notes.length > 0) {
+    if (notes.length > 0) {
       console.log('');
       notes.forEach(n => console.log(`Note: ${n}`));
     }

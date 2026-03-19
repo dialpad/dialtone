@@ -1,6 +1,7 @@
 import { defineCommand } from 'citty';
-import { searchComponents, components } from '@dialpad/dialtone-query-core';
+import { searchComponents } from '@dialpad/dialtone-query-core';
 import type { ComponentProp } from '@dialpad/dialtone-query-core';
+import { getContext } from '../context.js';
 import { formatComponentOutput, propsTable, eventsTable, slotsTable, type Format } from '../formatters.js';
 
 function formatSingleProp(prop: ComponentProp): string {
@@ -32,6 +33,7 @@ export const componentCommand = defineCommand({
   },
   run({ args }) {
     const format = (args.format || 'minimal') as Format;
+    const { components } = getContext();
     const { results } = searchComponents(args.name, components);
 
     if (results.length === 0) {

@@ -1,6 +1,7 @@
 import { defineCommand } from 'citty';
-import { searchTokens, tokens } from '@dialpad/dialtone-query-core';
+import { searchTokens } from '@dialpad/dialtone-query-core';
 import type { TokensData, SearchResult } from '@dialpad/dialtone-query-core';
+import { getContext } from '../context.js';
 import { formatTokenOutput, type Format } from '../formatters.js';
 
 export const tokenCommand = defineCommand({
@@ -15,6 +16,7 @@ export const tokenCommand = defineCommand({
   run({ args }) {
     const format = (args.format || 'minimal') as Format;
     const limit = Number(args.limit);
+    const { tokens } = getContext();
     const { results } = searchTokens(args.name, tokens as TokensData, { includeHsl: args.all });
 
     if (results.length === 0) {
