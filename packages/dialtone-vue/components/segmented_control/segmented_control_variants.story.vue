@@ -163,6 +163,42 @@
 
     <dt-stack>
       <p class="d-fw-bold d-mb8">
+        With trailing slot
+      </p>
+      <dt-segmented-control
+        v-model="selectedTrailing"
+        aria-label="Fruit counts"
+      >
+        <dt-segmented-control-item value="apples">
+          Apples
+          <template #trailing>
+            <dt-badge kind="count">
+              24
+            </dt-badge>
+          </template>
+        </dt-segmented-control-item>
+        <dt-segmented-control-item value="oranges">
+          Oranges
+          <template #trailing>
+            <dt-badge kind="count">
+              8
+            </dt-badge>
+          </template>
+        </dt-segmented-control-item>
+        <dt-segmented-control-item value="bananas">
+          Bananas
+          <template #trailing>
+            <dt-badge kind="count">
+              15
+            </dt-badge>
+          </template>
+        </dt-segmented-control-item>
+      </dt-segmented-control>
+    </dt-stack>
+
+
+    <dt-stack>
+      <p class="d-fw-bold d-mb8">
         Sizes
       </p>
       <dt-stack gap="400">
@@ -435,8 +471,11 @@
 
 <script>
 import DtSegmentedControl from './segmented_control.vue';
+
 import DtSegmentedControlItem from './segmented_control_item.vue';
 import { DtStack } from '../stack';
+import DtBadge from '../badge/badge.vue';
+
 import {
   DtIconListSpacingCompact,
   DtIconListSpacingRegular,
@@ -460,6 +499,7 @@ export default {
     DtIconSun,
     DtIconMoon,
     DtIconBoxSelect,
+    DtBadge,
   },
 
   data () {
@@ -468,6 +508,7 @@ export default {
       selectedSpread: '1',
       selectedVertical: 'all',
       selectedIcons: 'compact',
+      selectedTrailing: 'apples',
       selectedIconOnly: 'system',
       selectedSize: 'option1',
       selectedDisabled: 'all',
