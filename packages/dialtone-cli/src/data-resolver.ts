@@ -3,6 +3,11 @@
 // Resolves Dialtone data from the local project's installed packages or
 // falls back to the bundled data (CLI version).
 //
+// Resolution order:
+// 1. Individual packages (@dialpad/dialtone-css, dialtone-vue, dialtone-icons)
+// 2. Umbrella package (@dialpad/dialtone/dist/css/*, dist/vue3/*)
+// 3. Bundled data (compiled into the CLI at build time)
+//
 // Uses Node's module resolution (via createRequire) to find packages,
 // which works with pnpm virtual stores, workspace links, and npm hoisting.
 // ============================================================================
@@ -44,35 +49,80 @@ function tryResolveAndRead(localRequire: NodeRequire, specifier: string): unknow
   }
 }
 
-export function resolveData(forceBundled = false): ResolvedData {
-  if (forceBundled) return BUNDLED;
+function tryResolveVersion(localRequire: NodeRequire, specifier: string): string | undefined {
+  try {
+    const pkgPath = localRequire.resolve(specifier);
+    const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
+    return pkg.version;
+  } catch {
+    return undefined;
+  }
+}
 
-  // Create a require function rooted at cwd so it uses the project's node_modules
-  const localRequire = createRequire(join(process.cwd(), 'package.json'));
+// Individual packages: @dialpad/dialtone-css, dialtone-vue, dialtone-icons
+function tryIndividualPackages(localRequire: NodeRequire): ResolvedData | null {
+  const utilityClasses = tryResolveAndRead(localRequire, '@dialpad/dialtone-css/lib/dist/dialtone-docs.json');
+  const tokens = tryResolveAndRead(localRequire, '@dialpad/dialtone-css/lib/dist/tokens-docs.json');
+  const components = tryResolveAndRead(localRequire, '@dialpad/dialtone-vue/component-documentation.json');
+  const icons = tryResolveAndRead(localRequire, '@dialpad/dialtone-icons/keywords-icons.json');
 
-  const localUtilityClasses = tryResolveAndRead(localRequire, '@dialpad/dialtone-css/lib/dist/dialtone-docs.json');
-  const localTokens = tryResolveAndRead(localRequire, '@dialpad/dialtone-css/lib/dist/tokens-docs.json');
-  const localComponents = tryResolveAndRead(localRequire, '@dialpad/dialtone-vue/component-documentation.json');
-  const localIcons = tryResolveAndRead(localRequire, '@dialpad/dialtone-icons/keywords-icons.json');
+  if (utilityClasses && tokens && components && icons) {
+    return {
+      utilityClasses: utilityClasses as UtilityClassesData,
+      tokens: tokens as TokensData,
+      components: components as Component[],
+      icons: icons as IconsData,
+      source: 'local',
+      version: tryResolveVersion(localRequire, '@dialpad/dialtone-css/package.json'),
+    };
+  }
+  return null;
+}
 
-  // All four must be present to use local data
-  if (localUtilityClasses && localTokens && localComponents && localIcons) {
+// Umbrella package: @dialpad/dialtone
+// The exports map "./*" → "./dist/*" means specifiers omit the "dist/" prefix.
+function tryUmbrellaPackage(localRequire: NodeRequire): ResolvedData | null {
+  const utilityClasses = tryResolveAndRead(localRequire, '@dialpad/dialtone/css/dialtone-docs.json');
+  const tokens = tryResolveAndRead(localRequire, '@dialpad/dialtone/css/tokens-docs.json');
+  const components = tryResolveAndRead(localRequire, '@dialpad/dialtone/vue3/component-documentation.json');
+  // Icons aren't copied to the umbrella dist — fall back to bundled
+  const icons = tryResolveAndRead(localRequire, '@dialpad/dialtone/icons/keywords-icons.json');
+
+  if (utilityClasses && tokens && components) {
+    // Version: read package.json via direct file path since it's not in exports
     let version: string | undefined;
     try {
-      const pkgPath = localRequire.resolve('@dialpad/dialtone-css/package.json');
-      const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
+      const dialtoneDir = localRequire.resolve('@dialpad/dialtone/css/dialtone-docs.json');
+      // Walk up from .../dist/css/dialtone-docs.json to package root
+      const pkgDir = dialtoneDir.replace(/\/dist\/css\/dialtone-docs\.json$/, '');
+      const pkg = JSON.parse(readFileSync(join(pkgDir, 'package.json'), 'utf-8'));
       version = pkg.version;
     } catch { /* ignore */ }
 
     return {
-      utilityClasses: localUtilityClasses as UtilityClassesData,
-      tokens: localTokens as TokensData,
-      components: localComponents as Component[],
-      icons: localIcons as IconsData,
+      utilityClasses: utilityClasses as UtilityClassesData,
+      tokens: tokens as TokensData,
+      components: components as Component[],
+      icons: (icons as IconsData) || bundledIcons,
       source: 'local',
       version,
     };
   }
+  return null;
+}
+
+export function resolveData(forceBundled = false): ResolvedData {
+  if (forceBundled) return BUNDLED;
+
+  const localRequire = createRequire(join(process.cwd(), 'package.json'));
+
+  // Try individual packages first (most precise version match)
+  const individual = tryIndividualPackages(localRequire);
+  if (individual) return individual;
+
+  // Try umbrella package
+  const umbrella = tryUmbrellaPackage(localRequire);
+  if (umbrella) return umbrella;
 
   return BUNDLED;
 }
