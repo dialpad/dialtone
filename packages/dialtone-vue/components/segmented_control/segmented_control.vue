@@ -5,6 +5,7 @@
     :direction="stackDirection"
     role="radiogroup"
     :aria-label="ariaLabel"
+    :aria-orientation="orientation"
     @keydown="handleKeyDown"
   >
     <!-- @slot DtSegmentedControlItem children -->
