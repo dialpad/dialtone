@@ -15,7 +15,6 @@ export const argsData = {
   activationMode: 'manual',
   disabled: false,
   spread: 'grow',
-  gap: '300',
   labelClass: '',
 };
 
@@ -28,9 +27,6 @@ export const argTypesData = {
     },
   },
   ariaLabel: {
-    control: 'text',
-  },
-  gap: {
     control: 'text',
   },
   orientation: {

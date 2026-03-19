@@ -12,13 +12,14 @@
 //  ----------------------------------------------------------------------------
 @layer dialtone.components {
 .d-segmented-control {
-  --border-size: var(--dt-size-border-100);
   --padding-segmented-control: var(--dt-size-200);
-  --radius-segmented-control: var(--dt-size-radius-300);
+  --radius-segmented-control-item: var(--dt-button-size-radius-md);
+  --radius-segmented-control: calc(var(--radius-segmented-control-item) + var(--padding-segmented-control));
 
+  gap: var(--padding-segmented-control);
   padding: var(--padding-segmented-control);
   background-color: var(--dt-color-surface-primary);
-  border: var(--border-size) solid var(--dt-color-border-subtle);
+  border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
   border-radius: var(--radius-segmented-control);
 
   &--spread-evenly {
@@ -28,32 +29,33 @@
   }
 
   &--xs {
-    --padding-segmented-control: var(--dt-size-50);
-    // --radius-segmented-control: var(--dt-size-radius-200);
+    --padding-segmented-control: var(--dt-size-100);
+    --radius-segmented-control-item: var(--dt-button-size-radius-xs);
   }
 
   &--sm {
-    --padding-segmented-control: var(--dt-size-100);
-    // --radius-segmented-control: var(--dt-size-radius-200);
+    --padding-segmented-control: var(--dt-size-200);
+    --radius-segmented-control-item: var(--dt-button-size-radius-sm);
   }
 
   &--md {
     --padding-segmented-control: var(--dt-size-200);
-    // --radius-segmented-control: var(--dt-size-radius-300);
+    --radius-segmented-control-item: var(--dt-button-size-radius-md);
   }
 
   &--lg {
     --padding-segmented-control: var(--dt-size-300);
-    // --radius-segmented-control: var(--dt-size-radius-300);
+    --radius-segmented-control-item: var(--dt-button-size-radius-lg);
   }
 
   &--xl {
-    --padding-segmented-control: var(--dt-size-400);
-    // --radius-segmented-control: var(--dt-size-radius-300);
+    --padding-segmented-control: var(--dt-size-300);
+    --radius-segmented-control-item: var(--dt-button-size-radius-xl);
   }
 
   &__item {
     flex: 1 1 auto;
+    border-radius: var(--radius-segmented-control-item);
   }
 
   &__item-label {

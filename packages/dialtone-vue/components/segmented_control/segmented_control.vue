@@ -3,7 +3,6 @@
     ref="container"
     :class="containerClasses"
     :direction="stackDirection"
-    :gap="gap"
     role="radiogroup"
     :aria-label="ariaLabel"
     @keydown="handleKeyDown"
@@ -44,14 +43,6 @@ const props = defineProps({
   ariaLabel: {
     type: String,
     default: undefined,
-  },
-
-  /**
-   * DtStack gap between items.
-   */
-  gap: {
-    type: String,
-    default: '100',
   },
 
   /**

@@ -5,7 +5,6 @@
     :size="$attrs.size"
     :activation-mode="$attrs.activationMode"
     :disabled="$attrs.disabled"
-    :gap="$attrs.gap"
     :spread="$attrs.spread"
     :label-class="$attrs.labelClass"
     aria-label="View filter"
