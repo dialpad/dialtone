@@ -22,9 +22,10 @@ jobs:
     permissions:
       contents: read
       pull-requests: write
+      id-token: write
 
     concurrency:
-      group: claude-review-${{ github.event.pull_request.number || inputs.pr_number }}
+      group: claude-review-${{ github.event.pull_request.number || inputs.pr_number }}-${{ github.event.label.name || 'manual' }}
       cancel-in-progress: true
 
     steps:
