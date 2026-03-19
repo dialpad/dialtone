@@ -1,0 +1,29 @@
+//
+//  DIALTONE
+//  COMPONENTS: SEGMENTED CONTROL
+//
+//  These are the styles for segmented-control component.
+//
+//
+//  TABLE OF CONTENTS
+//  • BASE STYLE
+
+//  @@  BASE STYLE
+//  ----------------------------------------------------------------------------
+@layer dialtone.components {
+.d-segmented-control {
+  padding: var(--dt-space-100);
+  background-color: var(--dt-color-surface-primary);
+  border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
+  border-radius: var(--dt-size-radius-300);
+
+  &__item {
+    flex: 1 1 auto;
+  }
+
+  &__item-label {
+    flex: 0 0 auto;
+    // white-space: nowrap;
+  }
+}
+}
