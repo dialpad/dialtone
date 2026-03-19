@@ -117,9 +117,7 @@ const buttonSize = computed(() => {
 });
 
 const resolvedLabelClass = computed(() => {
-  const base = 'd-segmented-control__item-label';
-  const custom = props.labelClass ?? groupContext.labelClass;
-  return custom ? `${base} ${custom}` : base;
+  return ['d-segmented-control__item-label', props.labelClass ?? groupContext.labelClass].filter(Boolean);
 });
 
 function handleClick () {

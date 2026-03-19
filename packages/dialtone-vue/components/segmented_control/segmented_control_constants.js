@@ -14,6 +14,9 @@ export const SEGMENTED_CONTROL_ACTIVATION_MODES = ['auto', 'manual'];
 
 export const SEGMENTED_CONTROL_SPREADS = ['grow', 'evenly'];
 
+export const SEGMENTED_CONTROL_ITEM_SELECTOR = '[role="radio"]';
+export const SEGMENTED_CONTROL_DATA_VALUE_ATTR = 'data-value';
+
 export const SEGMENTED_CONTROL_CONTEXT_KEY = Symbol('DtSegmentedControlContext');
 export const SEGMENTED_CONTROL_SELECT_KEY = Symbol('DtSegmentedControlSelect');
 export const SEGMENTED_CONTROL_FOCUS_KEY = Symbol('DtSegmentedControlFocus');

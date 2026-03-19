@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import { ref, computed, reactive, watch, provide } from 'vue';
+import { ref, computed, reactive, watchEffect, provide } from 'vue';
 import { DtStack } from '@/components/stack';
 import {
   SEGMENTED_CONTROL_SIZES,
@@ -24,6 +24,8 @@ import {
   SEGMENTED_CONTROL_CONTEXT_KEY,
   SEGMENTED_CONTROL_SELECT_KEY,
   SEGMENTED_CONTROL_FOCUS_KEY,
+  SEGMENTED_CONTROL_ITEM_SELECTOR,
+  SEGMENTED_CONTROL_DATA_VALUE_ATTR,
 } from './segmented_control_constants.js';
 
 defineOptions({ name: 'DtSegmentedControl' });
@@ -129,10 +131,12 @@ const groupContext = reactive({
   labelClass: props.labelClass,
 });
 
-watch(() => props.modelValue, (v) => { groupContext.selected = v; });
-watch(() => props.disabled, (v) => { groupContext.disabled = v; });
-watch(() => props.size, (v) => { groupContext.size = v; });
-watch(() => props.labelClass, (v) => { groupContext.labelClass = v; });
+watchEffect(() => {
+  groupContext.selected = props.modelValue;
+  groupContext.disabled = props.disabled;
+  groupContext.size = props.size;
+  groupContext.labelClass = props.labelClass;
+});
 
 provide(SEGMENTED_CONTROL_CONTEXT_KEY, groupContext);
 provide(SEGMENTED_CONTROL_SELECT_KEY, selectValue);
@@ -140,7 +144,7 @@ provide(SEGMENTED_CONTROL_FOCUS_KEY, setFocus);
 
 function getItems () {
   const el = container.value?.$el || container.value;
-  return el ? Array.from(el.querySelectorAll('[role="radio"]')) : [];
+  return el ? Array.from(el.querySelectorAll(SEGMENTED_CONTROL_ITEM_SELECTOR)) : [];
 }
 
 function setFocus (value) {
@@ -155,7 +159,7 @@ function selectValue (value) {
 function getFocusedIndex (items, event) {
   // First check event.target — the element that actually has focus
   if (event) {
-    const target = event.target.closest('[role="radio"]');
+    const target = event.target.closest(SEGMENTED_CONTROL_ITEM_SELECTOR);
     if (target) {
       const targetIdx = items.indexOf(target);
       if (targetIdx !== -1) return targetIdx;
@@ -163,7 +167,7 @@ function getFocusedIndex (items, event) {
   }
   // Fall back to tracked focusedValue, then aria-checked
   const idx = items.findIndex(el => {
-    const value = el.getAttribute('data-value');
+    const value = el.getAttribute(SEGMENTED_CONTROL_DATA_VALUE_ATTR);
     return focusedValue.value ? value === focusedValue.value : el.getAttribute('aria-checked') === 'true';
   });
   return idx === -1 ? 0 : idx;
@@ -171,7 +175,7 @@ function getFocusedIndex (items, event) {
 
 function activateItem (item) {
   if (isItemDisabled(item)) return;
-  selectValue(item.getAttribute('data-value'));
+  selectValue(item.getAttribute(SEGMENTED_CONTROL_DATA_VALUE_ATTR));
 }
 
 function isItemDisabled (item) {
