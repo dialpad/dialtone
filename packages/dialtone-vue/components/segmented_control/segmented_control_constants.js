@@ -1,9 +1,9 @@
-export const SEGMENTED_CONTROL_SIZES = ['default', 'xs', 'sm', 'lg', 'xl'];
+export const SEGMENTED_CONTROL_SIZES = ['xs', 'sm', 'md', 'lg', 'xl'];
 
 export const SEGMENTED_CONTROL_SIZE_MODIFIERS = {
-  default: 'd-segmented-control--md',
   xs: 'd-segmented-control--xs',
   sm: 'd-segmented-control--sm',
+  md: 'd-segmented-control--md',
   lg: 'd-segmented-control--lg',
   xl: 'd-segmented-control--xl',
 };

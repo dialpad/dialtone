@@ -11,7 +11,7 @@ import {
 
 export const argsData = {
   orientation: 'horizontal',
-  size: 'default',
+  size: 'sm',
   activationMode: 'manual',
   disabled: false,
   borderless: false,
@@ -36,7 +36,7 @@ export const argTypesData = {
     options: SEGMENTED_CONTROL_ORIENTATIONS,
   },
   size: {
-    defaultValue: 'default',
+    defaultValue: 'sm',
     control: 'select',
     options: SEGMENTED_CONTROL_SIZES,
   },

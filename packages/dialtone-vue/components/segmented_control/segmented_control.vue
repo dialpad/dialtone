@@ -61,11 +61,11 @@ const props = defineProps({
 
   /**
    * DtButton size for all items. Inherited by children via provide.
-   * @values default, xs, sm, lg, xl
+   * @values xs, sm, md, lg, xl
    */
   size: {
     type: String,
-    default: 'default',
+    default: 'sm',
     validator: (v) => SEGMENTED_CONTROL_SIZES.includes(v),
   },
 

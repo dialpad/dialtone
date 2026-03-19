@@ -111,10 +111,7 @@ const setFocus = inject(SEGMENTED_CONTROL_FOCUS_KEY);
 const isSelected = computed(() => groupContext.selected === props.value);
 const isDisabled = computed(() => groupContext.disabled || props.disabled);
 
-const buttonSize = computed(() => {
-  const size = groupContext.size;
-  return size === 'default' ? undefined : size;
-});
+const buttonSize = computed(() => groupContext.size);
 
 const resolvedLabelClass = computed(() => {
   return ['d-segmented-control__item-label', props.labelClass ?? groupContext.labelClass].filter(Boolean);
