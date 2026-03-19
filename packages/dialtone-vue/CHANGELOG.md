@@ -1,3 +1,10 @@
+## [3.217.1](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.217.0...dialtone-vue/v3.217.1) (2026-03-19)
+
+
+### Bug Fixes
+
+* **Combobox Multi Select:** DP-180791 cursor position ([#1141](https://github.com/dialpad/dialtone/issues/1141)) ([bbf4cd1](https://github.com/dialpad/dialtone/commit/bbf4cd11c91a7e06f40f3bb9fea23171f52e4945))
+
 # [3.217.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.216.0...dialtone-vue/v3.217.0) (2026-03-19)
 
 
