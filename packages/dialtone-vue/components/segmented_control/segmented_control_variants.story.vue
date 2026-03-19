@@ -1,3 +1,4 @@
+<!-- eslint-disable max-lines -->
 <template>
   <dt-stack gap="600">
     <dt-stack>
@@ -7,6 +8,30 @@
       <dt-segmented-control
         v-model="selectedHorizontal"
         aria-label="Horizontal example"
+      >
+        <dt-segmented-control-item value="all">
+          All
+        </dt-segmented-control-item>
+        <dt-segmented-control-item value="favorites">
+          Favorites
+        </dt-segmented-control-item>
+        <dt-segmented-control-item value="recent">
+          Recent
+        </dt-segmented-control-item>
+        <dt-segmented-control-item value="groups">
+          Groups
+        </dt-segmented-control-item>
+      </dt-segmented-control>
+    </dt-stack>
+
+    <dt-stack>
+      <p class="d-fw-bold d-mb8">
+        Borderless
+      </p>
+      <dt-segmented-control
+        v-model="selectedHorizontal"
+        borderless
+        aria-label="Borderless example"
       >
         <dt-segmented-control-item value="all">
           All

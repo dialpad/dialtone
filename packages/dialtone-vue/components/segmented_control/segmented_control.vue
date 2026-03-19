@@ -88,6 +88,14 @@ const props = defineProps({
   },
 
   /**
+   * Removes the border and padding from the container.
+   */
+  borderless: {
+    type: Boolean,
+    default: false,
+  },
+
+  /**
    * Controls how items distribute space.
    * 'grow' (default): items size to their content.
    * 'evenly': items share space equally.
@@ -118,6 +126,7 @@ const stackDirection = computed(() => props.orientation === 'vertical' ? 'column
 const containerClasses = computed(() => [
   'd-segmented-control',
   SEGMENTED_CONTROL_SIZE_MODIFIERS[props.size],
+  props.borderless ? 'd-segmented-control--borderless' : null,
   props.spread === 'evenly' && props.orientation === 'horizontal'
     ? 'd-segmented-control--spread-evenly'
     : null,

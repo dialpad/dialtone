@@ -5,6 +5,7 @@
     :size="$attrs.size"
     :activation-mode="$attrs.activationMode"
     :disabled="$attrs.disabled"
+    :borderless="$attrs.borderless"
     :spread="$attrs.spread"
     :label-class="$attrs.labelClass"
     aria-label="View filter"

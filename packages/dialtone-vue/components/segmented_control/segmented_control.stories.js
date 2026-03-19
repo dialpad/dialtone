@@ -14,6 +14,7 @@ export const argsData = {
   size: 'default',
   activationMode: 'manual',
   disabled: false,
+  borderless: false,
   spread: 'grow',
   labelClass: '',
 };
@@ -45,6 +46,9 @@ export const argTypesData = {
     options: SEGMENTED_CONTROL_ACTIVATION_MODES,
   },
   disabled: {
+    control: 'boolean',
+  },
+  borderless: {
     control: 'boolean',
   },
   spread: {
