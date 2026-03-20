@@ -14,7 +14,7 @@ export const argsData = {
   size: 'sm',
   activationMode: 'manual',
   disabled: false,
-  noDivider: false,
+  hideDivider: false,
   borderless: false,
   spread: 'grow',
   labelClass: '',
@@ -49,7 +49,7 @@ export const argTypesData = {
   disabled: {
     control: 'boolean',
   },
-  noDivider: {
+  hideDivider: {
     control: 'boolean',
   },
   borderless: {

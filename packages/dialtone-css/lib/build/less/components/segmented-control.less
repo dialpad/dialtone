@@ -68,7 +68,7 @@
 
   //  --  DIVIDERS
   //  Base styles shared by both orientations
-  &:where(:not(&--no-divider)) > :where(&__item:not(:first-child))::before {
+  &:where(:not(&--hide-divider)) > :where(&__item:not(:first-child))::before {
     position: absolute;
     background-color: var(--dt-color-border-subtle);
     border-radius: var(--radius-segmented-control-item);

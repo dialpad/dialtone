@@ -113,7 +113,7 @@ Hide the dividers between items.
 
 <code-well-header>
   <div class="d-w100p">
-    <dt-segmented-control v-model="selected" no-divider aria-label="View filter">
+    <dt-segmented-control v-model="selected" hide-divider aria-label="View filter">
       <dt-segmented-control-item value="all">All</dt-segmented-control-item>
       <dt-segmented-control-item value="favorites">Favorites</dt-segmented-control-item>
       <dt-segmented-control-item value="recent">Recent</dt-segmented-control-item>
@@ -124,7 +124,7 @@ Hide the dividers between items.
 
 <code-example-tabs
 vueCode='
-<dt-segmented-control v-model="selected" no-divider>
+<dt-segmented-control v-model="selected" hide-divider>
   ...
 </dt-segmented-control>
 ' />
@@ -157,7 +157,7 @@ Add `disabled` to the group to disable all items.
 
 <code-well-header>
   <div class="d-w100p">
-    <dt-segmented-control v-model="selected" disabled aria-label="Disabled example" no-divider>
+    <dt-segmented-control v-model="selected" disabled aria-label="Disabled example" hide-divider>
       <dt-segmented-control-item value="all">All</dt-segmented-control-item>
       <dt-segmented-control-item value="favorites">Favorites</dt-segmented-control-item>
       <dt-segmented-control-item value="recent">Recent</dt-segmented-control-item>

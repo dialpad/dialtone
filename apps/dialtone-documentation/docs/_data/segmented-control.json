@@ -16,7 +16,7 @@
       "description": "Removes the border and padding from the container."
     },
     {
-      "class": "d-segmented-control--no-divider",
+      "class": "d-segmented-control--hide-divider",
       "applies": ".d-segmented-control",
       "description": "Hides the dividers between items."
     },

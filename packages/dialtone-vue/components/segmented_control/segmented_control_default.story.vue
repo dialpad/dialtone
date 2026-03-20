@@ -5,7 +5,7 @@
     :size="$attrs.size"
     :activation-mode="$attrs.activationMode"
     :disabled="$attrs.disabled"
-    :no-divider="$attrs.noDivider"
+    :hide-divider="$attrs.hideDivider"
     :borderless="$attrs.borderless"
     :spread="$attrs.spread"
     :label-class="$attrs.labelClass"

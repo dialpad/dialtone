@@ -117,7 +117,7 @@ export default {
     props: {
       modelValue: { initialValue: 'all' },
       ariaLabel: { initialValue: 'View filter' },
-      noDivider: { initialValue: true },
+      hideDivider: { initialValue: true },
     },
   },
 

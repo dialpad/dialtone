@@ -56,7 +56,7 @@
       <div>
         <dt-segmented-control
           v-model="selectedHorizontal"
-          no-divider
+          hide-divider
           aria-label="No divider example"
         >
           <dt-segmented-control-item value="all">

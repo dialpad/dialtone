@@ -108,9 +108,9 @@ const props = defineProps({
   },
 });
 
-const groupContext = inject(SEGMENTED_CONTROL_CONTEXT_KEY);
-const selectValue = inject(SEGMENTED_CONTROL_SELECT_KEY);
-const setFocus = inject(SEGMENTED_CONTROL_FOCUS_KEY);
+const groupContext = inject(SEGMENTED_CONTROL_CONTEXT_KEY, { selected: '', disabled: false, size: 'sm', labelClass: '' });
+const selectValue = inject(SEGMENTED_CONTROL_SELECT_KEY, () => {});
+const setFocus = inject(SEGMENTED_CONTROL_FOCUS_KEY, () => {});
 
 const isSelected = computed(() => groupContext.selected === props.value);
 const isDisabled = computed(() => groupContext.disabled || props.disabled);
