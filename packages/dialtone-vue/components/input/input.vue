@@ -415,6 +415,9 @@ export default {
 
         compositionend: () => {
           this.isComposing = false;
+          const val = this.$refs.input.value;
+          this.$emit('input', val);
+          this.$emit('update:modelValue', val);
         },
 
         input: async event => {

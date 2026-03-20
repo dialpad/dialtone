@@ -598,11 +598,9 @@ describe('DtInput tests', () => {
 
       it('should emit input and update:modelValue after composition ends', async () => {
         await nativeInput.trigger('compositionstart');
-        await nativeInput.trigger('input');
-
         nativeInput.element.value = 'か';
-        await nativeInput.trigger('compositionend');
-        await nativeInput.trigger('input');
+        await nativeInput.trigger('input'); // Chrome: input fires before compositionend (blocked)
+        await nativeInput.trigger('compositionend'); // compositionend emits the committed value
 
         expect(wrapper.emitted().input[0][0]).toBe('か');
         expect(wrapper.emitted()['update:modelValue'][0][0]).toBe('か');
@@ -610,13 +608,13 @@ describe('DtInput tests', () => {
 
       it('should resume normal emission after composition ends', async () => {
         await nativeInput.trigger('compositionstart');
-        await nativeInput.trigger('input');
         await nativeInput.trigger('compositionend');
 
         nativeInput.element.value = 'hello';
         await nativeInput.trigger('input');
 
-        expect(wrapper.emitted().input[0][0]).toBe('hello');
+        const inputEmissions = wrapper.emitted().input;
+        expect(inputEmissions[inputEmissions.length - 1][0]).toBe('hello');
       });
     });
 
@@ -636,11 +634,9 @@ describe('DtInput tests', () => {
 
       it('should emit input and update:modelValue after composition ends', async () => {
         await nativeTextarea.trigger('compositionstart');
-        await nativeTextarea.trigger('input');
-
         nativeTextarea.element.value = 'か';
-        await nativeTextarea.trigger('compositionend');
-        await nativeTextarea.trigger('input');
+        await nativeTextarea.trigger('input'); // Chrome: input fires before compositionend (blocked)
+        await nativeTextarea.trigger('compositionend'); // compositionend emits the committed value
 
         expect(wrapper.emitted().input[0][0]).toBe('か');
         expect(wrapper.emitted()['update:modelValue'][0][0]).toBe('か');
