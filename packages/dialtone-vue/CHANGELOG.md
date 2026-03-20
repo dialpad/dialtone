@@ -1,3 +1,10 @@
+# [3.218.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.217.1...dialtone-vue/v3.218.0) (2026-03-20)
+
+
+### Features
+
+* **Editor:** DP-181154 replacing 0 width tables with full width ([#1145](https://github.com/dialpad/dialtone/issues/1145)) ([6aa8a1d](https://github.com/dialpad/dialtone/commit/6aa8a1d0a06531a5abf2691138b331c2d241702e))
+
 ## [3.217.1](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.217.0...dialtone-vue/v3.217.1) (2026-03-19)
 
 
