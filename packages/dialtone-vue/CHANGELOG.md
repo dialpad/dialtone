@@ -1,3 +1,10 @@
+## [3.218.1](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.218.0...dialtone-vue/v3.218.1) (2026-03-20)
+
+
+### Bug Fixes
+
+* **Input:** revert DP-173960 handle composition events ([#1082](https://github.com/dialpad/dialtone/issues/1082)) ([ba81d87](https://github.com/dialpad/dialtone/commit/ba81d87b1a2e64672aab5d22d2b8f4e3774994b2))
+
 # [3.218.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.217.1...dialtone-vue/v3.218.0) (2026-03-20)
 
 
