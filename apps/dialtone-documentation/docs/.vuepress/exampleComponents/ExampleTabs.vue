@@ -6,6 +6,7 @@
     :inverted="inverted"
     :borderless="borderless"
     :disabled="disabled"
+    :spread="spread"
     :orientation="orientation"
     :tab-list-class="orientation === 'vertical' ? 'd-w264' : undefined"
     :activation-mode="activationMode"
@@ -110,6 +111,11 @@ export default {
     activationMode: {
       type: String,
       default: 'manual',
+    },
+
+    spread: {
+      type: String,
+      default: 'none',
     },
 
     orientation: {

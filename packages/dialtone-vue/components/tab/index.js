@@ -8,4 +8,5 @@ export {
   TAB_LIST_SIZE_MODIFIERS,
   TAB_ACTIVATION_MODES,
   TAB_GROUP_KINDS,
+  TAB_SPREADS,
 } from './tabs_constants';

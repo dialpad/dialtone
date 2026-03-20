@@ -17,6 +17,46 @@ export default {
     },
   },
 
+  'spread tabs: equal': {
+    props: {
+      selected: { initialValue: 'panel-1' },
+      tabListClass: {
+        initialValue: 'd-w384',
+      },
+      spread: {
+        initialValue: 'equal',
+      },
+    },
+    slots: {
+      tabs: {
+        initialValue: '<dt-tab id="tab-1" panel-id="panel-1" selected>Tab 1</dt-tab><dt-tab id="tab-2" panel-id="panel-2">Tab 2</dt-tab><dt-tab id="tab-3" panel-id="panel-3">Tab the third</dt-tab>',
+      },
+      default: {
+        initialValue: '<div class="d-ba d-baw2 d-bas-dashed d-bc-subtle d-w100p d-py48"><dt-tab-panel id="panel-1" tab-id="tab-1"><dt-text as="p" kind="code" size="xs" tone="muted" align="center" class="d-p16"> <strong>First</strong> tab content panel </dt-text></dt-tab-panel><dt-tab-panel id="panel-2" tab-id="tab-2"><dt-text as="p" kind="code" size="xs" tone="muted" align="center" class="d-p16"> <strong>Second</strong> tab content panel </dt-text></dt-tab-panel><dt-tab-panel id="panel-3" tab-id="tab-3"><dt-text as="p" kind="code" size="xs" tone="muted" align="center" class="d-p16"> <strong>Third</strong> tab content panel </dt-text></dt-tab-panel></div>',
+      },
+    },
+  },
+
+  'spread tabs: grow': {
+    props: {
+      selected: { initialValue: 'panel-1' },
+      tabListClass: {
+        initialValue: 'd-w384',
+      },
+      spread: {
+        initialValue: 'grow',
+      },
+    },
+    slots: {
+      tabs: {
+        initialValue: '<dt-tab id="tab-1" panel-id="panel-1" selected>Tab 1</dt-tab><dt-tab id="tab-2" panel-id="panel-2">Tab the second</dt-tab><dt-tab id="tab-3" panel-id="panel-3">Tab the third</dt-tab>',
+      },
+      default: {
+        initialValue: '<div class="d-ba d-baw2 d-bas-dashed d-bc-subtle d-w100p d-py48"><dt-tab-panel id="panel-1" tab-id="tab-1"><dt-text as="p" kind="code" size="xs" tone="muted" align="center" class="d-p16"> <strong>First</strong> tab content panel </dt-text></dt-tab-panel><dt-tab-panel id="panel-2" tab-id="tab-2"><dt-text as="p" kind="code" size="xs" tone="muted" align="center" class="d-p16"> <strong>Second</strong> tab content panel </dt-text></dt-tab-panel><dt-tab-panel id="panel-3" tab-id="tab-3"><dt-text as="p" kind="code" size="xs" tone="muted" align="center" class="d-p16"> <strong>Third</strong> tab content panel </dt-text></dt-tab-panel></div>',
+      },
+    },
+  },
+
   'muted, small': {
     props: {
       kind: { initialValue: 'muted' },

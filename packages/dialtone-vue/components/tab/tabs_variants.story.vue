@@ -92,6 +92,18 @@ export default {
             disabled: true,
           },
         },
+        {
+          description: 'Spread grow tabs',
+          propsToBind: {
+            spread: 'grow',
+          },
+        },
+        {
+          description: 'Spread equal tabs',
+          propsToBind: {
+            spread: 'equal',
+          },
+        },
       ],
     };
   },

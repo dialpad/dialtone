@@ -24,3 +24,10 @@ export const TAB_ORIENTATION_MODIFIERS = {
 export const TAB_ACTIVATION_MODES = ['auto', 'manual'];
 
 export const TAB_GROUP_KINDS = ['default', 'muted'];
+
+export const TAB_SPREADS = ['none', 'grow', 'equal'];
+
+export const TAB_SPREAD_MODIFIERS = {
+  grow: 'd-tablist--spread-grow',
+  equal: 'd-tablist--spread-equal',
+};

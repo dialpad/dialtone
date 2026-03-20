@@ -154,6 +154,27 @@
         }
     }
 
+    //  Spread — shared
+    &--spread-grow,
+    &--spread-equal {
+        flex-wrap: nowrap;
+    }
+
+    //  Spread grow — tabs grow proportionally to fill space
+    &--spread-grow {
+        > :where(.d-tablist__item) {
+            flex: 1 1 auto;
+        }
+    }
+
+    //  Spread equal — all tabs are the same width
+    &--spread-equal {
+        > :where(.d-tablist__item) {
+            flex: 1 1 0;
+            min-inline-size: 0;
+        }
+    }
+
     //  Inverted
     &--inverted {
         --tab-color-text: var(--dt-action-color-foreground-inverted-default);

@@ -3,6 +3,7 @@
     <dt-tab-group
       :selected="selectedTab"
       size="sm"
+      spread="equal"
       tab-list-class="d-emoji-picker__tabset-list"
     >
       <template #tabs>
