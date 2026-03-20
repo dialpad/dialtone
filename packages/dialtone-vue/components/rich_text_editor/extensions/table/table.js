@@ -20,10 +20,11 @@ const createTableStyleAttribute = () => {
 };
 
 function replaceZeroWidth(style) {
-  return style.replace(/width\s*:\s*([^;]+);/gi, (match, value) => {
-    return /^\s*0\s*[a-z%]*\s*$/i.test(value) ? 'width: 100%;' : match;
+  return style.replace(/(?<![a-z-])width\s*:\s*([^;]+);?/gi, (match, value) => {
+    return /^\s*0\s*[a-z%]*\s*(!important)?\s*$/i.test(value) ? 'width: 100%;' : match;
   });
 }
+
 export const CustomTable = Table.extend({
   addAttributes () {
     return {
