@@ -14,6 +14,7 @@ export const argsData = {
   size: 'sm',
   activationMode: 'manual',
   disabled: false,
+  noDivider: false,
   borderless: false,
   spread: 'grow',
   labelClass: '',
@@ -46,6 +47,9 @@ export const argTypesData = {
     options: SEGMENTED_CONTROL_ACTIVATION_MODES,
   },
   disabled: {
+    control: 'boolean',
+  },
+  noDivider: {
     control: 'boolean',
   },
   borderless: {

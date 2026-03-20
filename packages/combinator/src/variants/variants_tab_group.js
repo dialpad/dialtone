@@ -91,7 +91,7 @@ export default {
     },
   },
 
-  'with badges': {
+  'with trailing slot': {
     props: {
       selected: { initialValue: 'panel-1' },
       tabListClass: {
