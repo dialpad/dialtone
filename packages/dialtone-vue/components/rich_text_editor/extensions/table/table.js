@@ -10,6 +10,20 @@ const createAttribute = (name) => ({
   },
 });
 
+const createTableStyleAttribute = () => {
+  let attribute = createAttribute('style');
+  attribute.renderHTML = (attributes) => {
+    if (!attributes['style']) return {};
+    return { ['style']: replaceZeroWidth(attributes['style']) };
+  }
+  return attribute;
+};
+
+function replaceZeroWidth(style) {
+  return style.replace(/width\s*:\s*([^;]+);/gi, (match, value) => {
+    return /^\s*0\s*[a-z%]*\s*$/i.test(value) ? 'width: 100%;' : match;
+  });
+}
 export const CustomTable = Table.extend({
   addAttributes () {
     return {
@@ -17,7 +31,7 @@ export const CustomTable = Table.extend({
       border: createAttribute('border'),
       cellpadding: createAttribute('cellpadding'),
       cellspacing: createAttribute('cellspacing'),
-      style: createAttribute('style'),
+      style: createTableStyleAttribute(),
     };
   },
 
