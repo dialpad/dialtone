@@ -437,12 +437,12 @@ vueCode='
 
 ## Advanced Usages
 
-### Automatic Mode
+### Manual Activation Mode
 
-By default, items use manual activation — the user must press `Enter` or `Space` after focusing an item to select it. Set `activation-mode="auto"` to select items immediately on focus via arrow keys, following the <a class="d-link" href="https://www.w3.org/WAI/ARIA/apg/patterns/radio/" target="_blank">WAI-ARIA Radio Group pattern</a>.
+By default, items select immediately on focus via arrow keys, following the <a class="d-link" href="https://www.w3.org/WAI/ARIA/apg/patterns/radio/" target="_blank">WAI-ARIA Radio Group pattern</a>. Set `activation-mode="manual"` to require an explicit `Enter` or `Space` keypress after focusing an item.
 
 <code-well-header>
-  <dt-segmented-control v-model="selected" activation-mode="auto" aria-label="Auto activation">
+  <dt-segmented-control v-model="selected" activation-mode="manual" aria-label="Manual activation">
     <dt-segmented-control-item value="all">All</dt-segmented-control-item>
     <dt-segmented-control-item value="favorites">Favorites</dt-segmented-control-item>
     <dt-segmented-control-item value="recent">Recent</dt-segmented-control-item>
@@ -451,7 +451,7 @@ By default, items use manual activation — the user must press `Enter` or `Spac
 
 <code-example-tabs
 vueCode='
-<dt-segmented-control v-model="selected" activation-mode="auto">
+<dt-segmented-control v-model="selected" activation-mode="manual">
   ...
 </dt-segmented-control>
 ' />

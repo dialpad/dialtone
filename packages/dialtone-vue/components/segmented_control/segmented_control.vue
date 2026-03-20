@@ -75,7 +75,7 @@ const props = defineProps({
    */
   activationMode: {
     type: String,
-    default: 'manual',
+    default: 'auto',
     validator: (v) => SEGMENTED_CONTROL_ACTIVATION_MODES.includes(v),
   },
 

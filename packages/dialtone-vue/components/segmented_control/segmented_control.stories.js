@@ -12,7 +12,7 @@ import {
 export const argsData = {
   orientation: 'horizontal',
   size: 'sm',
-  activationMode: 'manual',
+  activationMode: 'auto',
   disabled: false,
   hideDivider: false,
   borderless: false,
@@ -42,7 +42,7 @@ export const argTypesData = {
     options: SEGMENTED_CONTROL_SIZES,
   },
   activationMode: {
-    defaultValue: 'manual',
+    defaultValue: 'auto',
     control: 'select',
     options: SEGMENTED_CONTROL_ACTIVATION_MODES,
   },
