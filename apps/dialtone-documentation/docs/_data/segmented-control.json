@@ -1,0 +1,101 @@
+{
+  "classes": [
+    {
+      "class": "d-segmented-control",
+      "applies": "N/A",
+      "description": "Container class for the segmented control."
+    },
+    {
+      "class": "d-segmented-control--vertical",
+      "applies": ".d-segmented-control",
+      "description": "Stacks items vertically."
+    },
+    {
+      "class": "d-segmented-control--borderless",
+      "applies": ".d-segmented-control",
+      "description": "Removes the border and padding from the container."
+    },
+    {
+      "class": "d-segmented-control--no-divider",
+      "applies": ".d-segmented-control",
+      "description": "Hides the dividers between items."
+    },
+    {
+      "class": "d-segmented-control--spread-evenly",
+      "applies": ".d-segmented-control",
+      "description": "Distributes items equally across the container width."
+    },
+    {
+      "class": "d-segmented-control--xs",
+      "applies": ".d-segmented-control",
+      "description": "Extra small size."
+    },
+    {
+      "class": "d-segmented-control--sm",
+      "applies": ".d-segmented-control",
+      "description": "Small size (default)."
+    },
+    {
+      "class": "d-segmented-control--md",
+      "applies": ".d-segmented-control",
+      "description": "Medium size."
+    },
+    {
+      "class": "d-segmented-control--lg",
+      "applies": ".d-segmented-control",
+      "description": "Large size."
+    },
+    {
+      "class": "d-segmented-control--xl",
+      "applies": ".d-segmented-control",
+      "description": "Extra large size."
+    },
+    {
+      "class": "d-segmented-control__item",
+      "applies": "N/A",
+      "description": "Styles each item within the segmented control."
+    },
+    {
+      "class": "d-segmented-control__item-label",
+      "applies": "N/A",
+      "description": "Styles the label container within each item."
+    }
+  ],
+  "accessible": [
+    {
+      "item": "role=\"radiogroup\"",
+      "applies": ".d-segmented-control",
+      "description": "Identifies the container as a group of radio controls. (<a class=\"d-link\" href=\"https://www.w3.org/TR/wai-aria-1.2/#radiogroup\" target=\"_blank\" rel=\"noopener noreferrer\">Source</a>)"
+    },
+    {
+      "item": "aria-label",
+      "applies": ".d-segmented-control",
+      "description": "Provides an accessible name for the radio group."
+    },
+    {
+      "item": "aria-orientation",
+      "applies": ".d-segmented-control",
+      "description": "Indicates whether the control is horizontal or vertical, informing screen readers of the expected keyboard navigation direction."
+    },
+    {
+      "item": "role=\"radio\"",
+      "applies": ".d-segmented-control__item",
+      "description": "Identifies each item as a radio button within the group. (<a class=\"d-link\" href=\"https://www.w3.org/TR/wai-aria-1.2/#radio\" target=\"_blank\" rel=\"noopener noreferrer\">Source</a>)"
+    },
+    {
+      "item": "aria-checked",
+      "applies": ".d-segmented-control__item",
+      "description": "Set to \"true\" on the selected item, \"false\" on all others."
+    },
+    {
+      "item": "tabindex",
+      "applies": ".d-segmented-control__item",
+      "description": "Roving tabindex: the selected item has tabindex=\"0\", all others have tabindex=\"-1\". Arrow keys move focus between items."
+    },
+    {
+      "item": "aria-disabled",
+      "applies": ".d-segmented-control__item",
+      "description": "Set to \"true\" on disabled items. Arrow key navigation skips disabled items."
+    }
+  ]
+}

@@ -22,6 +22,7 @@
       v-if="$slots.startIcon"
       #startIcon="{ iconSize }"
     >
+      <!-- @slot Icon displayed at the inline-start of the label. Provides { iconSize } scoped binding. -->
       <slot
         name="startIcon"
         :icon-size="iconSize"
@@ -31,6 +32,7 @@
       v-if="$slots.endIcon"
       #endIcon="{ iconSize }"
     >
+      <!-- @slot Icon displayed at the inline-end of the label. Provides { iconSize } scoped binding. -->
       <slot
         name="endIcon"
         :icon-size="iconSize"
@@ -40,12 +42,14 @@
       v-if="$slots.leading"
       #leading
     >
+      <!-- @slot Content rendered before the label (e.g. badges, indicators). -->
       <slot name="leading" />
     </template>
     <template
       v-if="$slots.trailing"
       #trailing
     >
+      <!-- @slot Content rendered after the label (e.g. badges, counts). -->
       <slot name="trailing" />
     </template>
     <!-- @slot Label text content -->
