@@ -1,3 +1,10 @@
+## [9.171.2-beta.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.171.1...dialtone/v9.171.2-beta.1) (2026-03-20)
+
+
+### Reverts
+
+* Revert "fix(input): DP-173960 handle composition events (#1082)" ([5cbb865](https://github.com/dialpad/dialtone/commit/5cbb865af388a76f8778e5ab50e313620eba57b1)), closes [#1082](https://github.com/dialpad/dialtone/issues/1082)
+
 ## [9.171.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.171.0...dialtone/v9.171.1) (2026-03-12)
 
 
