@@ -224,8 +224,10 @@ export function formatPrompt(component: Component): string {
   lines.push(`<${component.displayName}>`);
 
   if (component.description) {
-    // Truncate description to one sentence
-    const firstSentence = component.description.split(/\.\s/)[0];
+    // Truncate to first sentence. Use a lookbehind to avoid splitting on
+    // abbreviations like "e.g.", "i.e.", "etc." — only split after a period
+    // followed by a space and an uppercase letter (actual sentence boundary).
+    const firstSentence = component.description.split(/\.(?=\s+[A-Z])/)[0];
     lines.push(firstSentence.endsWith('.') ? firstSentence : firstSentence + '.');
   }
 

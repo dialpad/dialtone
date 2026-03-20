@@ -58,10 +58,11 @@ export function searchTokens(query: string, data: TokensData, options?: { includ
       continue;
     }
 
-    // Skip HSL decomposition tokens (-h, -s, -l, -a, -hsl, -hsla suffixes).
-    // These are machine-generated for programmatic color manipulation and
-    // will be removed in a future release.
-    if (!options?.includeHsl && /-(h|s|l|a|hsl|hsla)$/.test(tokenName)) {
+    // Skip HSL decomposition tokens. These are machine-generated for
+    // programmatic color manipulation and will be removed in a future release.
+    // Pattern: base token + one of (-h, -s, -l, -a, -hsl, -hsla)
+    // Only filter color tokens to avoid false positives on non-color tokens.
+    if (!options?.includeHsl && /^--dt-.*color.*-(h|s|l|a|hsl|hsla)$/.test(tokenName)) {
       continue;
     }
 
