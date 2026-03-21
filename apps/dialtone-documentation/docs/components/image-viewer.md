@@ -7,7 +7,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-image-viewer
 keywords: ["lightbox", "image modal", "photo viewer", "d-image-viewer", "DtImageViewer", "dt-image-viewer", "gallery", "carousel"]
 ---
 
-<code-well-header>
+<code-example only-show="demo">
   <dt-image-viewer
     :image-src="$withBase('/assets/images/test.jpg')"
     image-alt="Image Alt Text"
@@ -15,7 +15,7 @@ keywords: ["lightbox", "image modal", "photo viewer", "d-image-viewer", "DtImage
     aria-label="Click to open image"
     close-aria-label="Close"
   />
-</code-well-header>
+</code-example>
 
 <component-combinator component-name="DtImageViewer" />
 
@@ -23,20 +23,7 @@ keywords: ["lightbox", "image modal", "photo viewer", "d-image-viewer", "DtImage
 
 ### JPG Image
 
-<code-well-header>
-  <dt-image-viewer
-    ref="jpgExample"
-    :image-src="$withBase('/assets/images/test.jpg')"
-    image-alt="Image Alt Text"
-    image-button-class="d-wmn64 d-hmn64 w-wmx332 d-hmx332"
-    aria-label="Click to open image"
-    close-aria-label="Close"
-  />
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.jpgExample'
-vueCode='
+<code-example vueCode='
 <dt-image-viewer
   image-src="url/to/image"
   image-alt="Image Alt Text"
@@ -44,25 +31,19 @@ vueCode='
   aria-label="Click to open image"
   close-aria-label="Close"
 />
-'
-/>
-
-### GIF Image
-
-<code-well-header>
+'>
   <dt-image-viewer
-    ref="gifExample"
-    :image-src="$withBase('/assets/images/fry.gif')"
+    :image-src="$withBase('/assets/images/test.jpg')"
     image-alt="Image Alt Text"
     image-button-class="d-wmn64 d-hmn64 w-wmx332 d-hmx332"
     aria-label="Click to open image"
     close-aria-label="Close"
   />
-</code-well-header>
+</code-example>
 
-<code-example-tabs
-:htmlCode='() => $refs.gifExample'
-vueCode='
+### GIF Image
+
+<code-example vueCode='
 <dt-image-viewer
   image-src="/url/to/gif"
   image-alt="Image Alt Text"
@@ -70,8 +51,15 @@ vueCode='
   aria-label="Click to open image"
   close-aria-label="Close"
 />
-'
-/>
+'>
+  <dt-image-viewer
+    :image-src="$withBase('/assets/images/fry.gif')"
+    image-alt="Image Alt Text"
+    image-button-class="d-wmn64 d-hmn64 w-wmx332 d-hmx332"
+    aria-label="Click to open image"
+    close-aria-label="Close"
+  />
+</code-example>
 
 ## Vue API
 

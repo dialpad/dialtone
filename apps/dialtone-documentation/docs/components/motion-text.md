@@ -6,8 +6,15 @@ thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-motion-text--default
 ---
 
-<code-well-header class="d-d-block">
-  <dt-stack ref="defaultExample" direction="row" align="center" class="d-hmn128 d-p24">
+<code-example vueCode='
+<dt-motion-text
+  text="Welcome to Dialtone Motion Text"
+  animation-mode="gradient-in"
+  speed="md"
+  class="d-headline--lg"
+/>
+'>
+  <dt-stack direction="row" align="center" class="d-hmn128 d-p24">
     <dt-motion-text
       text="Welcome to Dialtone Motion Text"
       animation-mode="gradient-in"
@@ -16,19 +23,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-motion-text-
       class="d-headline--lg"
     />
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.defaultExample'
-vueCode='
-<dt-motion-text
-  text="Welcome to Dialtone Motion Text"
-  animation-mode="gradient-in"
-  speed="md"
-  class="d-headline--lg"
-/>
-'
-showHtmlWarning />
+</code-example>
 
 ## Usage
 
@@ -45,8 +40,14 @@ The component supports six different animation modes:
 - **shimmer**: Static text with an animated shimmer effect (loops automatically)
 - **none**: Instant text display without animation
 
-<code-well-header class="d-d-block">
-  <dt-stack ref="gradientInExample" gap="400" class="d-p24">
+<code-example vueCode='
+<dt-motion-text
+  text="Gradient In Animation"
+  animation-mode="gradient-in"
+  speed="md"
+/>
+'>
+  <dt-stack gap="400" class="d-p24">
     <dt-motion-text
       text="Gradient In Animation"
       animation-mode="gradient-in"
@@ -55,18 +56,7 @@ The component supports six different animation modes:
       class="d-headline--md"
     />
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.gradientInExample'
-vueCode='
-<dt-motion-text
-  text="Gradient In Animation"
-  animation-mode="gradient-in"
-  speed="md"
-/>
-'
-showHtmlWarning />
+</code-example>
 
 ### Speed Control
 
@@ -76,27 +66,25 @@ Use t-shirt sizing (sm, md, lg) to control animation speed:
 - **md**: Medium animation (default)
 - **lg**: Slow animation
 
-<code-example-tabs
-vueCode='
-<dt-motion-text
-  text="Fast animation"
-  animation-mode="fade-in"
-  speed="sm"
-/>
+<code-example only-show="code">
+  <dt-motion-text
+    text="Fast animation"
+    animation-mode="fade-in"
+    speed="sm"
+  />
 
-<dt-motion-text
-  text="Medium animation"
-  animation-mode="fade-in"
-  speed="md"
-/>
+  <dt-motion-text
+    text="Medium animation"
+    animation-mode="fade-in"
+    speed="md"
+  />
 
-<dt-motion-text
-  text="Slow animation"
-  animation-mode="fade-in"
-  speed="lg"
-/>
-'
-/>
+  <dt-motion-text
+    text="Slow animation"
+    animation-mode="fade-in"
+    speed="lg"
+  />
+</code-example>
 
 ### Manual Control
 
@@ -135,29 +123,25 @@ export default {
 
 Perfect for attention-grabbing headers or hero sections:
 
-<code-example-tabs
-vueCode='
-<dt-motion-text
-  text="Continuous animation"
-  animation-mode="slide-in"
-  :loop="true"
-  speed="sm"
-/>
-'
-/>
+<code-example only-show="code">
+  <dt-motion-text
+    text="Continuous animation"
+    animation-mode="slide-in"
+    :loop="true"
+    speed="sm"
+  />
+</code-example>
 
 ### Using Slots
 
 You can also use the default slot instead of the text prop:
 
-<code-example-tabs
-vueCode='
-<dt-motion-text animation-mode="fade-in">
-  <span>Animated </span>
-  <strong>text</strong>
-</dt-motion-text>
-'
-/>
+<code-example only-show="code">
+  <dt-motion-text animation-mode="fade-in">
+    <span>Animated </span>
+    <strong>text</strong>
+  </dt-motion-text>
+</code-example>
 
 ## Vue API
 

@@ -7,39 +7,9 @@ thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox-multi-select--default
 ---
 
-<code-well-header class="d-d-block">
-  <dt-combobox-multi-select
-    ref="defaultExample"
-    label="Label Text"
-    :selected-items="selectedItems"
-    @input="onComboboxInput"
-    @select="onComboboxSelect"
-    @remove="onComboboxRemove"
-  >
-    <template #list>
-      <dt-stack as="ul" class="d-ps-relative d-m4 d-px0">
-        <dt-list-item
-          v-for="(item, i) in items"
-          :key="item.id"
-          role="option"
-          navigation-type="arrow-keys"
-          @click="onComboboxSelect(i)"
-        >
-          {{ item.value }}
-          <template #right>
-            <span class="d-fc-secondary">{{ item.type }}</span>
-          </template>
-        </dt-list-item>
-      </dt-stack>
-    </template>
-  </dt-combobox-multi-select>
-</code-well-header>
-
 <!-- <component-combinator component-name="DtComboboxMultiSelect" /> -->
 
-<code-example-tabs
-:htmlCode='() => $refs.defaultExample'
-vueCode='
+<code-example bgclass="d-d-block" vueCode='
 <dt-combobox-multi-select
   ref="comboboxMultiSelect"
   label="Label Text"
@@ -65,8 +35,32 @@ vueCode='
     </dt-stack>
   </template>
 </dt-combobox-multi-select>
-'
-showHtmlWarning />
+'>
+  <dt-combobox-multi-select
+    label="Label Text"
+    :selected-items="selectedItems"
+    @input="onComboboxInput"
+    @select="onComboboxSelect"
+    @remove="onComboboxRemove"
+  >
+    <template #list>
+      <dt-stack as="ul" class="d-ps-relative d-m4 d-px0">
+        <dt-list-item
+          v-for="(item, i) in items"
+          :key="item.id"
+          role="option"
+          navigation-type="arrow-keys"
+          @click="onComboboxSelect(i)"
+        >
+          {{ item.value }}
+          <template #right>
+            <span class="d-fc-secondary">{{ item.type }}</span>
+          </template>
+        </dt-list-item>
+      </dt-stack>
+    </template>
+  </dt-combobox-multi-select>
+</code-example>
 
 ## Usage
 
@@ -91,9 +85,38 @@ Adds validation for max selection. Make sure to provide the following props:
 - `maxSelected` the maximum number of selections you can make. 0 is unlimited
 - `maxSelectedMessage` should be the message that shown if max selection has been reached
 
-<code-well-header class="d-d-block">
+<code-example bgclass="d-d-block" vueCode='
+<dt-combobox-multi-select
+  ref="comboboxMultiSelect"
+  label="Label Text"
+  description="Select up to 2 options."
+  :selected-items="selectedItems"
+  :max-selected="2"
+  :max-selected-message="[{ message: `More than 2 selected`, type: `error` }]"
+  @input="onInput"
+  @select="onSelect"
+  @remove="onRemove"
+  @max-selected="onMaxSelected"
+>
+  <template #list>
+    <dt-stack as="ul" class="d-ps-relative d-m4 d-px0">
+      <dt-list-item
+        v-for="(item, i) in items"
+        :key="item.id"
+        role="option"
+        navigation-type="arrow-keys"
+        @click="onSelect(i)"
+      >
+        {{ item.value }}
+        <template #right>
+          <span class="d-fc-secondary">{{ item.type }}</span>
+        </template>
+      </dt-list-item>
+    </dt-stack>
+  </template>
+</dt-combobox-multi-select>
+'>
   <dt-combobox-multi-select
-    ref="maxSelectExample"
     label="Label Text"
     description="Select up to 2 options."
     :selected-items="maxSelectedItems"
@@ -121,42 +144,7 @@ Adds validation for max selection. Make sure to provide the following props:
       </dt-stack>
     </template>
   </dt-combobox-multi-select>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.maxSelectExample'
-vueCode='
-<dt-combobox-multi-select
-  ref="comboboxMultiSelect"
-  label="Label Text"
-  description="Select up to 2 options."
-  :selected-items="selectedItems"
-  :max-selected="2"
-  :max-selected-message="[{ message: &apos;More than 2 selected&apos;, type: &apos;error&apos; }]"
-  @input="onInput"
-  @select="onSelect"
-  @remove="onRemove"
-  @max-selected="onMaxSelected"
->
-  <template #list>
-    <dt-stack as="ul" class="d-ps-relative d-m4 d-px0">
-      <dt-list-item
-        v-for="(item, i) in items"
-        :key="item.id"
-        role="option"
-        navigation-type="arrow-keys"
-        @click="onSelect(i)"
-      >
-        {{ item.value }}
-        <template #right>
-          <span class="d-fc-secondary">{{ item.type }}</span>
-        </template>
-      </dt-list-item>
-    </dt-stack>
-  </template>
-</dt-combobox-multi-select>
-'
-showHtmlWarning />
+</code-example>
 
 ## Vue API
 

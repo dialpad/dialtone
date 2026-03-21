@@ -21,53 +21,7 @@ It has 2 core required slots:
 2. `list`: the list of items to display responding to `input`'s value. Almost always this will be a list of `dt-list-item`.
 This will usually be the [List Item component](/components/list-item.md).
 
-<code-well-header class="d-d-block">
-  <dt-combobox
-    :show-list="!!value"
-    label="Label Text"
-    @escape="onComboboxEscape"
-    @select="onComboboxSelect"
-    ref="defaultExample"
-  >
-    <template
-      #input="{ inputProps }"
-    >
-      <dt-input
-        placeholder="Type to show the items"
-        v-model="value"
-        v-bind="inputProps"
-      />
-    </template>
-    <template
-      #list="{ listProps }"
-    >
-      <ol
-        v-bind="listProps"
-        class="d-p0 d-mt8 d-hmx332 d-of-y-auto"
-      >
-        <dt-list-item
-          v-for="(item, i) in items"
-          :key="item.id"
-          role="option"
-          navigation-type="arrow-keys"
-          @click="onListItemSelect(i)"
-        >
-          <template #start>
-            <dt-avatar
-              :full-name="(i + 1).toString()"
-              :seed="i.toString()"
-            />
-          </template>
-          {{ item.name }}
-        </dt-list-item>
-      </ol>
-    </template>
-  </dt-combobox>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.defaultExample'
-vueCode='
+<code-example bgclass="d-d-block" vueCode='
 <dt-combobox
   :show-list="!!value"
   label="Label Text"
@@ -108,19 +62,12 @@ vueCode='
     </ol>
   </template>
 </dt-combobox>
-'
-showHtmlWarning />
-
-## With Empty List Item
-
-<code-well-header class="d-d-block">
+'>
   <dt-combobox
     :show-list="!!value"
     label="Label Text"
     @escape="onComboboxEscape"
     @select="onComboboxSelect"
-    :empty-list="true"
-    ref="emptyListExample"
   >
     <template
       #input="{ inputProps }"
@@ -131,15 +78,36 @@ showHtmlWarning />
         v-bind="inputProps"
       />
     </template>
-    <template #emptyListItem>
-      <div class="d-py8 d-fc-tertiary">No matches found.</div>
+    <template
+      #list="{ listProps }"
+    >
+      <ol
+        v-bind="listProps"
+        class="d-p0 d-mt8 d-hmx332 d-of-y-auto"
+      >
+        <dt-list-item
+          v-for="(item, i) in items"
+          :key="item.id"
+          role="option"
+          navigation-type="arrow-keys"
+          @click="onListItemSelect(i)"
+        >
+          <template #start>
+            <dt-avatar
+              :full-name="(i + 1).toString()"
+              :seed="i.toString()"
+            />
+          </template>
+          {{ item.name }}
+        </dt-list-item>
+      </ol>
     </template>
   </dt-combobox>
-</code-well-header>
+</code-example>
 
-<code-example-tabs
-:htmlCode='() => $refs.emptyListExample'
-vueCode='
+## With Empty List Item
+
+<code-example bgclass="d-d-block" vueCode='
 <dt-combobox
   :show-list="!!value"
   label="Label Text"
@@ -160,8 +128,28 @@ vueCode='
     <div class="d-py8 d-fc-tertiary">No matches found.</div>
   </template>
 </dt-combobox>
-'
-/>
+'>
+  <dt-combobox
+    :show-list="!!value"
+    label="Label Text"
+    @escape="onComboboxEscape"
+    @select="onComboboxSelect"
+    :empty-list="true"
+  >
+    <template
+      #input="{ inputProps }"
+    >
+      <dt-input
+        placeholder="Type to show the items"
+        v-model="value"
+        v-bind="inputProps"
+      />
+    </template>
+    <template #emptyListItem>
+      <div class="d-py8 d-fc-tertiary">No matches found.</div>
+    </template>
+  </dt-combobox>
+</code-example>
 
 ## Accessibility
 

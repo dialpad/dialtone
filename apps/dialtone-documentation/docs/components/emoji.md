@@ -19,57 +19,30 @@ keywords: ["emoticon","smiley","d-emoji","DtEmoji","dt-emoji"]
 
 ### With Shortcode
 
-<code-well-header>
-  <dt-emoji ref="shortcodeExample" code=":smile:" />
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.shortcodeExample'
-vueCode='
+<code-example vueCode='
 <dt-emoji
   code="smile"
   size="500"
 />
-'
-showHtmlWarning />
+'>
+  <dt-emoji code=":smile:" />
+</code-example>
 
 ### With Unicode
 
-<code-well-header>
-  <dt-emoji code="😉" ref="exampleUnicode" />
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs['exampleUnicode']"
-vueCode='
-<dt-emoji code="😉" />
-'
-/>
+<code-example>
+  <dt-emoji code="😉" />
+</code-example>
 
 ### With Skin Tone
 
-<code-well-header>
-  <dt-emoji code=":raised_hand_tone4:" ref="exampleSkinTone" />
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs.exampleSkinTone"
-vueCode='
-<dt-emoji code=":raised_hand_tone4:" />
-'
-/>
+<code-example>
+  <dt-emoji code=":raised_hand_tone4:" />
+</code-example>
 
 ### Sizes
 
-<code-well-header>
-  <dt-stack direction="row" gap="400" class="d-ai-center" ref="exampleSizes">
-    <dt-emoji v-for="size in sizes" :size="size" code=":smile:" />
-  </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs.exampleSizes"
-vueCode='
+<code-example vueCode='
 <dt-emoji size="100" code=":smile:" />
 <dt-emoji size="200" code=":smile:" />
 <dt-emoji size="300" code=":smile:" />
@@ -78,8 +51,11 @@ vueCode='
 <dt-emoji size="600" code=":smile:" />
 <dt-emoji size="700" code=":smile:" />
 <dt-emoji size="800" code=":smile:" />
-'
-/>
+'>
+  <dt-stack direction="row" gap="400" align="center">
+    <dt-emoji v-for="size in sizes" :size="size" code=":smile:" />
+  </dt-stack>
+</code-example>
 
 ## Vue API
 
@@ -114,16 +90,9 @@ setCustomEmojiUrl('https://my.example.website.com/images/icons/emoji/');
 setCustomEmojiJson(customEmojiJson);
 ```
 
-<code-well-header>
-  <dt-emoji code=":shipit:" ref="customExample" />
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs.customExample"
-vueCode='
-<dt-emoji code=":shipit:" />
-'
-/>
+<code-example>
+  <dt-emoji code=":shipit:" />
+</code-example>
 
 In this example, the emoji with the :shipit: shortcode from the custom emoji provided will be rendered. Take into account that a custom emoji can only be referenced by the shortcode as no Unicode character is associated with it.
 

@@ -34,29 +34,13 @@ They should be easy to scan for relevant and actionable information. Elements, l
 
 - It should only contain a single idea that may feature a call-to-action, or the option to navigate to more detailed content.
 - The content of a card should be concise and offer only a preview of detailed content.
-- The headings should set clear expectations about the card’s purpose.
+- The headings should set clear expectations about the card's purpose.
 
 ## Variants and Examples
 
 ### Base
 
-<code-well-header>
-  <dt-card ref="baseExample" class="d-w264" header-class="h:d-bgc-moderate-opaque" content-class="h:d-bgc-moderate-opaque" footer-class="h:d-bgc-moderate-opaque">
-    <template #header>
-      (header slot)
-    </template>
-    <template #content>
-      (content slot)
-    </template>
-    <template #footer>
-      (footer slot)
-    </template>
-  </dt-card>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.baseExample'
-vueCode='
+<code-example vueCode='
 <dt-card class="d-w264">
   <template #header>
     (header slot)
@@ -68,13 +52,24 @@ vueCode='
     (footer slot)
   </template>
 </dt-card>
-'
-showHtmlWarning />
+'>
+  <dt-card class="d-w264" header-class="h:d-bgc-moderate-opaque" content-class="h:d-bgc-moderate-opaque" footer-class="h:d-bgc-moderate-opaque">
+    <template #header>
+      (header slot)
+    </template>
+    <template #content>
+      (content slot)
+    </template>
+    <template #footer>
+      (footer slot)
+    </template>
+  </dt-card>
+</code-example>
 
 ### With Header
 
-<code-well-header>
-  <dt-card ref="headerExample" class="d-w264">
+<code-example>
+  <dt-card class="d-w264">
     <template #header>
       <dt-text as="p" kind="headline" size="md">Lorem ipsum</dt-text>
       <dt-button
@@ -95,39 +90,12 @@ showHtmlWarning />
       Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
     </template>
   </dt-card>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.headerExample'
-vueCode='
-<dt-card class="d-w264">
-  <template #header>
-    <dt-text as="p" kind="headline" size="md">Lorem ipsum</dt-text>
-    <dt-button
-      size="xs"
-      importance="clear"
-      kind="muted"
-      aria-label="Menu button"
-    >
-      <template #startIcon>
-        <dt-icon
-          name="more-vertical"
-          size="100"
-        />
-      </template>
-    </dt-button>
-  </template>
-  <template #content>
-    Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
-  </template>
-</dt-card>
-'
-showHtmlWarning />
+</code-example>
 
 ### With Footer
 
-<code-well-header>
-  <dt-card ref="footerExample" class="d-w264">
+<code-example>
+  <dt-card class="d-w264">
     <template #content>
       Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
     </template>
@@ -140,52 +108,22 @@ showHtmlWarning />
       </dt-button>
     </template>
   </dt-card>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.footerExample'
-vueCode='
-<dt-card class="d-w264">
-  <template #content>
-    Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
-  </template>
-  <template #footer>
-    <dt-button
-      importance="outlined"
-      size="sm"
-    >
-      Button
-    </dt-button>
-  </template>
-</dt-card>
-'
-showHtmlWarning />
+</code-example>
 
 ### Content Only
 
-<code-well-header>
-  <dt-card ref="contentOnlyExample" class="d-w264">
+<code-example>
+  <dt-card class="d-w264">
     <template #content>
       Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
     </template>
   </dt-card>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.contentOnlyExample'
-vueCode='
-<dt-card class="d-w264">
-  <template #content>
-    Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
-  </template>
-</dt-card>
-'
-showHtmlWarning />
+</code-example>
 
 ### With Header, Footer and Scrollable Content
 
-<code-well-header>
-  <dt-card ref="scrollableExample" class="d-w264" content-class="d-pr0">
+<code-example>
+  <dt-card class="d-w264" content-class="d-pr0">
     <template #header>
       <dt-text as="p" kind="headline" size="md">Lorem ipsum</dt-text>
       <dt-button
@@ -214,42 +152,7 @@ showHtmlWarning />
       </dt-button>
     </template>
   </dt-card>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.scrollableExample'
-vueCode='
-<dt-card class="d-w264" content-class="d-pr0">
-  <template #header>
-    <dt-text as="p" kind="headline" size="md">Lorem ipsum</dt-text>
-    <dt-button
-      size="xs"
-      importance="clear"
-      kind="muted"
-      aria-label="Menu button"
-    >
-      <template #startIcon>
-        <dt-icon
-          name="more-vertical"
-          size="100"
-        />
-      </template>
-    </dt-button>
-  </template>
-  <template #content>
-    <div class="d-h72 d-pr16" v-dt-scrollbar:never>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
-  </template>
-  <template #footer>
-    <dt-button
-      importance="outlined"
-      size="sm"
-    >
-      Button
-    </dt-button>
-  </template>
-</dt-card>
-'
-showHtmlWarning />
+</code-example>
 
 ## Vue API
 

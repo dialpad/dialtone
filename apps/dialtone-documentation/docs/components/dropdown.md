@@ -69,8 +69,8 @@ Use the Dropdown component when you have a list of links or actions that can be 
 
 ### Default
 
-<code-well-header>
-  <dt-dropdown ref="defaultExample" navigation-type="arrow-keys">
+<code-example>
+  <dt-dropdown navigation-type="arrow-keys">
     <template #anchor="{ attrs }">
       <dt-button v-bind="attrs">
         Click to open
@@ -88,36 +88,12 @@ Use the Dropdown component when you have a list of links or actions that can be 
       </dt-list-item>
     </template>
   </dt-dropdown>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.defaultExample'
-vueCode='
-<dt-dropdown navigation-type="arrow-keys">
-  <template #anchor="{ attrs }">
-    <dt-button v-bind="attrs">
-      Click to open
-    </dt-button>
-  </template>
-  <template #list="{ close }">
-    <dt-list-item
-      v-for="(item) in items"
-      :key="item.id"
-      role="menuitem"
-      :navigation-type="arrow-keys"
-      @click="close"
-    >
-      {{ item.name }}
-    </dt-list-item>
-  </template>
-</dt-dropdown>
-'
-/>
+</code-example>
 
 ### With Sections and Headings
 
-<code-well-header>
-  <dt-dropdown ref="sectionsExample" navigation-type="arrow-keys">
+<code-example>
+  <dt-dropdown navigation-type="arrow-keys">
     <template #anchor="{ attrs }">
       <dt-button v-bind="attrs">
         Click to open
@@ -159,62 +135,14 @@ vueCode='
       </dt-list-item-group>
     </template>
   </dt-dropdown>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.sectionsExample'
-vueCode='
-<dt-dropdown navigation-type="arrow-keys">
-  <template #anchor="{ attrs }">
-    <dt-button v-bind="attrs">
-      Click to open
-    </dt-button>
-  </template>
-  <template #list="{ close }">
-    <dt-list-item-group
-      heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
-      heading="Menu Heading A"
-    >
-      <dt-list-item
-        role="menuitem"
-        navigation-type="arrow-keys"
-        @click="close"
-      >
-        Menu Item 1
-      </dt-list-item>
-      <dt-dropdown-separator />
-      <dt-list-item
-        role="menuitem"
-        navigation-type="arrow-keys"
-        @click="close"
-      >
-        Menu Item 2
-      </dt-list-item>
-    </dt-list-item-group>
-    <dt-dropdown-separator />
-    <dt-list-item-group
-      heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
-      heading="Menu Heading B"
-    >
-      <dt-list-item
-        role="menuitem"
-        navigation-type="arrow-keys"
-        @click="close"
-      >
-        Menu Item 3
-      </dt-list-item>
-    </dt-list-item-group>
-  </template>
-</dt-dropdown>
-'
-showHtmlWarning />
+</code-example>
 
 ### Context Menu
 
 Set `openOnContext=true` to open the menu on right-click (context menu) and disable the default trigger behavior.
 
-<code-well-header>
-  <dt-dropdown ref="contextMenuExample" navigation-type="arrow-keys" :open-on-context="true">
+<code-example>
+  <dt-dropdown navigation-type="arrow-keys" :open-on-context="true">
     <template #anchor="{ attrs }">
       <div
         v-bind="attrs"
@@ -235,42 +163,18 @@ Set `openOnContext=true` to open the menu on right-click (context menu) and disa
       </dt-list-item>
     </template>
   </dt-dropdown>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.contextMenuExample'
-showHtmlWarning
-vueCode='
-<dt-dropdown navigation-type="arrow-keys" :open-on-context="true">
-  <template #anchor="{ attrs }">
-    <div
-      v-bind="attrs"
-      class="d-ba d-bas-dashed d-w264 d-py48 d-ta-center d-bgc-black-300"
-    >
-      Right click to open
-    </div>
-  </template>
-  <template #list="{ close }">
-    <dt-list-item
-      v-for="(item) in items"
-      :key="item.id"
-      role="menuitem"
-      :navigation-type="arrow-keys"
-      @click="close"
-    >
-      {{ item.name }}
-    </dt-list-item>
-  </template>
-</dt-dropdown>
-'
-/>
+</code-example>
 
 ## Content Mode
 
 Dropdown content renders outside the DOM tree. Use the `contentMode` prop to apply color mode (invert, light, dark) to the positioned content. See [Positioned Components](/components/mode-island.html#positioned-components) for details.
 
-<code-well-header>
-  <dt-dropdown ref="contentModeExample" content-mode="invert" navigation-type="arrow-keys" placement="bottom-start">
+<code-example vueCode='
+<dt-dropdown content-mode="invert">...</dt-dropdown>
+<dt-dropdown content-mode="dark">...</dt-dropdown>
+<dt-dropdown content-mode="light">...</dt-dropdown>
+'>
+  <dt-dropdown content-mode="invert" navigation-type="arrow-keys" placement="bottom-start">
     <template #anchor="{ attrs }">
       <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined">
         Inverted Dropdown
@@ -285,17 +189,7 @@ Dropdown content renders outside the DOM tree. Use the `contentMode` prop to app
       <dt-list-item role="menuitem" @click="close">Option 3</dt-list-item>
     </template>
   </dt-dropdown>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.contentModeExample'
-showHtmlWarning
-vueCode='
-<dt-dropdown content-mode="invert">...</dt-dropdown>
-<dt-dropdown content-mode="dark">...</dt-dropdown>
-<dt-dropdown content-mode="light">...</dt-dropdown>
-'
-/>
+</code-example>
 
 ## Vue API
 

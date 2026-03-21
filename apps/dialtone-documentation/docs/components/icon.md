@@ -122,8 +122,8 @@ When setting the color of an icon take these into consideration:
 </dt-stack>
 </dt-stack>
 
-- Don’t use different colors for text and icons.
-- Don’t use more than one color within an icon.
+- Don't use different colors for text and icons.
+- Don't use more than one color within an icon.
 
 </div>
 </div>

@@ -32,53 +32,15 @@ With this we accomplish the requirement to have the previous year button focused
 
 ### Default
 
-<code-well-header>
-  <dt-datepicker ref="defaultExample"></dt-datepicker>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.defaultExample'
-vueCode='
+<code-example vueCode='
 <dt-datepicker :selected-date="new Date()"></dt-datepicker>
-'
-showHtmlWarning />
+'>
+  <dt-datepicker></dt-datepicker>
+</code-example>
 
 ### With Popover
 
-<code-well-header>
-  <dt-popover
-    ref="popoverExample"
-    :open="datepickerOpened"
-    initial-focus-element="#prevYearButton"
-    padding="none"
-    @opened="(open) => { datepickerOpened = open }"
-    placement="bottom-start"
-  >
-    <template #anchor>
-      <dt-button
-        size="sm"
-        circle
-        importance="clear"
-        aria-label="Open datepicker"
-        @click="toggleDatepicker"
-      >
-        <template #startIcon>
-          <dt-icon
-            name="calendar"
-            size="300"
-          />
-        </template>
-      </dt-button>
-    </template>
-    <template #content>
-      <dt-datepicker></dt-datepicker>
-    </template>
-  </dt-popover>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.popoverExample'
-vueCode='
+<code-example vueCode='
 <dt-popover
   :open="datepickerOpened"
   initial-focus-element="#prevYearButton"
@@ -106,26 +68,41 @@ vueCode='
     <dt-datepicker></dt-datepicker>
   </template>
 </dt-popover>
-'
-/>
+'>
+  <dt-popover
+    :open="datepickerOpened"
+    initial-focus-element="#prevYearButton"
+    padding="none"
+    @opened="(open) => { datepickerOpened = open }"
+    placement="bottom-start"
+  >
+    <template #anchor>
+      <dt-button
+        size="sm"
+        circle
+        importance="clear"
+        aria-label="Open datepicker"
+        @click="toggleDatepicker"
+      >
+        <template #startIcon>
+          <dt-icon
+            name="calendar"
+            size="300"
+          />
+        </template>
+      </dt-button>
+    </template>
+    <template #content>
+      <dt-datepicker></dt-datepicker>
+    </template>
+  </dt-popover>
+</code-example>
 
 ### With min/max date
 
 Constrain the selectable date range by providing `min-date` and/or `max-date` props. Days outside the range are disabled and navigation buttons are disabled when the target month is fully out of range.
 
-<code-well-header>
-  <dt-datepicker
-    ref="minMaxExample"
-    :selected-date="currentSelectedDate"
-    :min-date="minDate"
-    :max-date="maxDate"
-    @selected-date="currentSelectedDate = $event;"
-  />
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.minMaxExample'
-vueCode='
+<code-example vueCode='
 <script setup>
 const today = new Date();
 const minDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 5);
@@ -137,8 +114,14 @@ const maxDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() 
   :min-date="minDate"
   :max-date="maxDate"
 />
-'
-showHtmlWarning />
+'>
+  <dt-datepicker
+    :selected-date="currentSelectedDate"
+    :min-date="minDate"
+    :max-date="maxDate"
+    @selected-date="currentSelectedDate = $event;"
+  />
+</code-example>
 
 ## Vue API
 

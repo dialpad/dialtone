@@ -27,7 +27,18 @@ The rule of thumb: if every item in your list is the same height, use fixed. If 
 
 Use when all items share a known, uniform height. Set `:item-size` to that height in pixels.
 
-<code-well-header>
+<code-example vueCode='<dt-scroller
+  :items="[{ id: 1, name: &apos;User 1&apos; }, { id: 2, name: &apos;User 2&apos; }, ...]"
+  :item-size="32"
+  :scroller-height="200"
+  list-tag="div"
+  item-tag="div"
+  direction="vertical"
+>
+  <template #default="{ item }">
+    <dt-text class="d-px4">{{ item.name }}</dt-text>
+  </template>
+</dt-scroller>'>
   <dt-scroller
     :items="[
       { id: 1, name: 'James Cooper' }, { id: 2, name: 'Sarah Mitchell' }, { id: 3, name: 'Tyler Brooks' },
@@ -59,28 +70,31 @@ Use when all items share a known, uniform height. Set `:item-size` to that heigh
       <dt-text class="d-px4">{{ item.name }}</dt-text>
     </template>
   </dt-scroller>
-</code-well-header>
-
-<code-example-tabs
-vueCode='<dt-scroller
-  :items="[{ id: 1, name: &apos;User 1&apos; }, { id: 2, name: &apos;User 2&apos; }, ...]"
-  :item-size="32"
-  :scroller-height="200"
-  list-tag="div"
-  item-tag="div"
-  direction="vertical"
->
-  <template #default="{ item }">
-    <dt-text class="d-px4">{{ item.name }}</dt-text>
-  </template>
-</dt-scroller>'
-/>
+</code-example>
 
 ### Variable height items
 
 Use when item heights depend on their content. Set `dynamic="true"` and `:min-item-size` to the smallest expected item height — the component measures actual sizes after render.
 
-<code-well-header>
+<code-example vueCode='<dt-scroller
+  :items="[{ id: &apos;Mary Johnson&apos;, message: &apos;...&apos; }, ...]"
+  :min-item-size="54"
+  :scroller-height="300"
+  list-tag="div"
+  item-tag="div"
+  direction="vertical"
+  :dynamic="true"
+>
+  <template #default="{ item }">
+    <dt-stack gap="400" direction="row" align="start" class="d-p4">
+      <dt-avatar size="md" :full-name="item.id" />
+      <dt-stack>
+        <dt-text kind="headline" size="sm" tone="secondary">{{ item.id }}</dt-text>
+        <dt-text kind="body" size="sm" tone="primary">{{ item.message }}</dt-text>
+      </dt-stack>
+    </dt-stack>
+  </template>
+</dt-scroller>'>
   <dt-scroller
     :items="[
       { id: 'J.C.', message: 'Lorem ipsum dolor sit amet' },
@@ -144,36 +158,26 @@ Use when item heights depend on their content. Set `dynamic="true"` and `:min-it
       </dt-stack>
     </template>
   </dt-scroller>
-</code-well-header>
-
-<code-example-tabs
-vueCode='<dt-scroller
-  :items="[{ id: &apos;Mary Johnson&apos;, message: &apos;...&apos; }, ...]"
-  :min-item-size="54"
-  :scroller-height="300"
-  list-tag="div"
-  item-tag="div"
-  direction="vertical"
-  :dynamic="true"
->
-  <template #default="{ item }">
-    <dt-stack gap="400" direction="row" align="start" class="d-p4">
-      <dt-avatar size="md" :full-name="item.id" />
-      <dt-stack>
-        <dt-text kind="headline" size="sm" tone="secondary">{{ item.id }}</dt-text>
-        <dt-text kind="body" size="sm" tone="primary">{{ item.message }}</dt-text>
-      </dt-stack>
-    </dt-stack>
-  </template>
-</dt-scroller>'
-/>
+</code-example>
 
 
 ### Direction
 
 Defaults to `vertical`. Set to `horizontal` for a horizontal scroller.
 
-<code-well-header>
+<code-example vueCode='<dt-scroller
+  :items="[{ id: 1, name: &apos;JC&apos; }, { id: 2, name: &apos;SM&apos; }, ...]"
+  :item-size="50"
+  :scroller-height="56"
+  list-tag="div"
+  item-tag="div"
+  direction="horizontal"
+  class="d-ba d-bar8 d-p4"
+  >
+  <template #default="{ item }">
+    <dt-stack class="d-p12 d-ba h:d-bgc-secondary d-bc-subtle d-bar4 d-c-default" align="center" justify="center"><dt-text kind="code">{{ item.name }}</dt-text></dt-stack>
+  </template>
+</dt-scroller>'>
   <dt-scroller
     :items="[
       { id: 1, name: 'JC' }, { id: 2, name: 'SM' }, { id: 3, name: 'TB' },
@@ -205,23 +209,7 @@ Defaults to `vertical`. Set to `horizontal` for a horizontal scroller.
       <dt-stack class="d-p12 d-ba h:d-bgc-secondary d-bc-subtle d-bar4 d-c-default" align="center" justify="center"><dt-text kind="code">{{ item.name }}</dt-text></dt-stack>
     </template>
   </dt-scroller>
-</code-well-header>
-
-<code-example-tabs
-vueCode='<dt-scroller
-  :items="[{ id: 1, name: &apos;JC&apos; }, { id: 2, name: &apos;SM&apos; }, ...]"
-  :item-size="50"
-  :scroller-height="56"
-  list-tag="div"
-  item-tag="div"
-  direction="horizontal"
-  class="d-ba d-bar8 d-p4"
-  >
-  <template #default="{ item }">
-    <dt-stack class="d-p12 d-ba h:d-bgc-secondary d-bc-subtle d-bar4 d-c-default" align="center" justify="center"><dt-text kind="code">{{ item.name }}</dt-text></dt-stack>
-  </template>
-</dt-scroller>'
-/>
+</code-example>
 
 ## Vue API
 

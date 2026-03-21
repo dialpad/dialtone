@@ -13,32 +13,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-emoji-picker
 
 ### Default
 
-<code-well-header>
-  <dt-emoji-picker
-      ref="defaultExample"
-      skin-tone="Default"
-      skin-selector-button-tooltip-label="Change default skin tone"
-      :tab-set-labels="[
-        'Most recently used',
-        'Smileys and people',
-        'Nature',
-        'Food',
-        'Activity',
-        'Travel',
-        'Objects',
-        'Symbols',
-        'Flags',
-      ]"
-      :recently-used-emojis="recentlyUsedEmojis"
-      search-results-label="Search results"
-      search-no-results-label="No results"
-      search-placeholder-label="Search..."
-    />
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.defaultExample'
-vueCode='
+<code-example vueCode='
 <dt-emoji-picker
   :skin-tone="Default"
   skin-selector-button-tooltip-label="Change default skin tone"
@@ -65,61 +40,31 @@ vueCode='
   @skin-tone="skinTone = $event"
   @selected-emoji="selectedEmoji"
 />
-'
-showHtmlWarning />
+'>
+  <dt-emoji-picker
+    skin-tone="Default"
+    skin-selector-button-tooltip-label="Change default skin tone"
+    :tab-set-labels="[
+      'Most recently used',
+      'Smileys and people',
+      'Nature',
+      'Food',
+      'Activity',
+      'Travel',
+      'Objects',
+      'Symbols',
+      'Flags',
+    ]"
+    :recently-used-emojis="recentlyUsedEmojis"
+    search-results-label="Search results"
+    search-no-results-label="No results"
+    search-placeholder-label="Search..."
+  />
+</code-example>
 
 ### With Popover
 
-<code-well-header>
-  <dt-popover
-    ref="withPopoverExample"
-    :open="emojiPickerOpened"
-    initial-focus-element="#searchInput"
-    padding="none"
-    @opened="(open) => { emojiPickerOpened = open }"
-  >
-    <template #anchor>
-      <dt-button
-        size="sm"
-        circle
-        importance="clear"
-        @click="toggleEmojiPicker"
-      >
-        <template #startIcon>
-          <dt-icon
-            name="satisfied"
-            size="300"
-          />
-        </template>
-      </dt-button>
-    </template>
-    <template #content>
-      <dt-emoji-picker
-        skin-tone="Default"
-        skin-selector-button-tooltip-label="Change default skin tone"
-        :tab-set-labels="[
-          'Most recently used',
-          'Smileys and people',
-          'Nature',
-          'Food',
-          'Activity',
-          'Travel',
-          'Objects',
-          'Symbols',
-          'Flags',
-        ]"
-        :recently-used-emojis="recentlyUsedEmojis"
-        search-results-label="Search results"
-        search-no-results-label="No results"
-        search-placeholder-label="Search..."
-      />
-    </template>
-  </dt-popover>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.withPopoverExample'
-vueCode='
+<code-example vueCode='
 <dt-popover
   :open="emojiPickerOpened"
   initial-focus-element="#searchInput"
@@ -163,8 +108,51 @@ vueCode='
     />
   </template>
 </dt-popover>
-'
-showHtmlWarning />
+'>
+  <dt-popover
+    :open="emojiPickerOpened"
+    initial-focus-element="#searchInput"
+    padding="none"
+    @opened="(open) => { emojiPickerOpened = open }"
+  >
+    <template #anchor>
+      <dt-button
+        size="sm"
+        circle
+        importance="clear"
+        @click="toggleEmojiPicker"
+      >
+        <template #startIcon>
+          <dt-icon
+            name="satisfied"
+            size="300"
+          />
+        </template>
+      </dt-button>
+    </template>
+    <template #content>
+      <dt-emoji-picker
+        skin-tone="Default"
+        skin-selector-button-tooltip-label="Change default skin tone"
+        :tab-set-labels="[
+          'Most recently used',
+          'Smileys and people',
+          'Nature',
+          'Food',
+          'Activity',
+          'Travel',
+          'Objects',
+          'Symbols',
+          'Flags',
+        ]"
+        :recently-used-emojis="recentlyUsedEmojis"
+        search-results-label="Search results"
+        search-no-results-label="No results"
+        search-placeholder-label="Search..."
+      />
+    </template>
+  </dt-popover>
+</code-example>
 
 ## Vue API
 

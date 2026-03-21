@@ -34,7 +34,7 @@ Use a progress circle to communicate deterministic progress to the user — for 
 
 ## Demo
 
-<code-well-header>
+<code-example only-show="demo">
   <dt-stack gap="500" align="center">
     <dt-progress-circle size="800" :progress="demoProgress" :aria-label="`${demoProgress}% complete`" />
     <dt-stack direction="row" gap="400">
@@ -44,64 +44,49 @@ Use a progress circle to communicate deterministic progress to the user — for 
       <dt-button size="sm" kind="muted" importance="outlined" :disabled="atMax" @click="setProgress(100)">100%</dt-button>
     </dt-stack>
   </dt-stack>
-</code-well-header>
+</code-example>
 
 ## Variants
 
 ### Progress
 
-<code-well-header>
-  <dt-stack ref="progressExample" direction="row" gap="500">
+<code-example vueCode='
+<dt-progress-circle :progress="{value}" aria-label="{value} complete" />
+'>
+  <dt-stack direction="row" gap="500">
     <dt-stack v-for="v in [0, 25, 50, 75, 100]" :key="v" gap="200">
       <dt-progress-circle :progress="v" :aria-label="`${v}% complete`" />
     </dt-stack>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.progressExample'
-vueCode='
-<dt-progress-circle :progress="{value}" aria-label="{value} complete" />
-'
-showHtmlWarning />
+</code-example>
 
 ### Sizes
 
 The `size` prop controls the diameter of the progress circle, aligning to Dialtone icon sizes.
 
-<code-well-header>
-  <dt-stack ref="sizesExample" direction="row" gap="500">
+<code-example vueCode='
+<dt-progress-circle size="{size}" :progress="66" aria-label="value" />
+'>
+  <dt-stack direction="row" gap="500">
     <dt-stack v-for="s in ['100', '200', '300', '400', '500', '600', '700', '800']" :key="s" gap="200">
       <dt-progress-circle :size="s" :progress="66" :aria-label="`size ${s}`" />
     </dt-stack>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.sizesExample'
-vueCode='
-<dt-progress-circle size="{size}" :progress="66" aria-label="value" />
-'
-showHtmlWarning />
+</code-example>
 
 ### Kinds
 
 The `kind` prop sets the color variant of the progress circle.
 
-<code-well-header>
-  <dt-stack ref="kindsExample" direction="row" gap="500">
+<code-example vueCode='
+<dt-progress-circle kind="{kind}" :progress="66" aria-label="value" />
+'>
+  <dt-stack direction="row" gap="500">
     <dt-stack v-for="k in ['default', 'brand', 'critical', 'positive', 'warning', 'info', 'ai']" :key="k" gap="200">
       <dt-progress-circle :kind="k" :progress="66" :aria-label="`kind ${k}`" />
     </dt-stack>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.kindsExample'
-vueCode='
-<dt-progress-circle kind="{kind}" :progress="66" aria-label="value" />
-'
-showHtmlWarning />
+</code-example>
 
 ## Vue API
 

@@ -24,83 +24,45 @@ keywords: ["definition list", "key value", "dl", "d-description-list", "DtDescri
 
 ### Default
 
-<code-well-header>
+<code-example>
   <div class="d-w332">
     <dt-description-list
-      ref="exampleDefault"
       gap="400"
       :items="items"
       direction="row"
     />
   </div>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs.exampleDefault"
-vueCode='
-<dt-description-list
-  ref="descriptionList"
-  gap="400"
-  :items="items"
-  direction="row"
-/>
-'
-/>
+</code-example>
 
 ### Column Direction
 
-<code-well-header>
+<code-example>
   <div class="d-w332">
     <dt-description-list
-      ref="exampleColumn"
       gap="400"
       :items="items"
       direction="column"
     />
   </div>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs.exampleColumn"
-vueCode='
-<dt-description-list
-  gap="400"
-  :items="items"
-  direction="column"
-/>
-'
-/>
+</code-example>
 
 ### Long Text
 
-<code-well-header>
+<code-example>
   <div class="d-w332">
     <dt-description-list
-      ref="exampleLongText"
       gap="400"
       :items="longTextItems"
       direction="row"
     />
   </div>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs.exampleLongText"
-vueCode='
-<dt-description-list
-  gap="400"
-  :items="longTextItems"
-  direction="row"
-/>
-'
-/>
+</code-example>
 
 ### With Term and Description Styles
 
-<code-well-header>
+<code-example>
   <div class="d-w332">
     <dt-description-list
-      ref="exampleWithStyles"
       gap="400"
       :items="items"
       direction="row"
@@ -108,21 +70,7 @@ vueCode='
       :descriptionClass="[`d-fc-success`]"
     />
   </div>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs.exampleWithStyles"
-vueCode='
-<dt-description-list
-  ref="exampleWithStyles"
-  gap="400"
-  :items="items"
-  direction="row"
-  :termClass="[`d-fc-critical`, `d-fw-bold`]"
-  :descriptionClass="[`d-fc-success`]"
-/>
-'
-/>
+</code-example>
 
 ## Vue API
 

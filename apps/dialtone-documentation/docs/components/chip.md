@@ -47,70 +47,34 @@ keywords: ["tag", "pill", "token", "badge", "d-chip", "DtChip", "dt-chip", "filt
 
 Add `:interactive="false"` to make it a read-only, non-interactive Chip. This changes it from a `<button>` to a non-interactive, read-only Chip with no events or hover/active state. Note that this does not effect the interactivity of its `×` remove button.
 
-<code-well-header>
-  <dt-chip ref="nonInteractiveExample" :interactive="false">Chip</dt-chip>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.nonInteractiveExample'
-vueCode='
-<dt-chip :interactive="false">
-  Chip
-</dt-chip>
-'
-showHtmlWarning />
+<code-example>
+  <dt-chip :interactive="false">Chip</dt-chip>
+</code-example>
 
 ### Default
 
-<code-well-header>
-  <dt-chip ref="defaultExample">Chip</dt-chip>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.defaultExample'
-vueCode='
-<dt-chip>
-  Chip
-</dt-chip>
-'
-showHtmlWarning />
+<code-example>
+  <dt-chip>Chip</dt-chip>
+</code-example>
 
 ### Disabled
 
 Use the `disabled` prop to disable both the Chip and its close button. This sets `aria-disabled="true"` and `tabindex="-1"` on the interactive elements and applies disabled styles, preventing pointer and keyboard interaction.
 
-<code-well-header>
-  <dt-chip disabled ref="example-disabled">Chip</dt-chip>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs['example-disabled']"
-vueCode='
-<dt-chip disabled>
-  Chip
-</dt-chip>
-'
-showHtmlWarning />
+<code-example>
+  <dt-chip disabled>Chip</dt-chip>
+</code-example>
 
 ### Without Close Button
 
-<code-well-header>
-  <dt-chip ref="withoutCloseExample" :hide-close="true">Chip</dt-chip>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.withoutCloseExample'
-vueCode='
-<dt-chip :hide-close="true">
-  Chip
-</dt-chip>
-'
-showHtmlWarning />
+<code-example>
+  <dt-chip :hide-close="true">Chip</dt-chip>
+</code-example>
 
 ### With Icon
 
-<code-well-header>
-  <dt-chip ref="withIconExample" with-icon :hide-close="true">
+<code-example>
+  <dt-chip :hide-close="true">
     <template #icon>
       <dt-icon
         name="phone"
@@ -121,29 +85,12 @@ showHtmlWarning />
       Chip
     </template>
   </dt-chip>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.withIconExample'
-vueCode='
-<dt-chip :hide-close="true">
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="200"
-    />
-  </template>
-  <template #default>
-    Chip
-  </template>
-</dt-chip>
-'
-showHtmlWarning />
+</code-example>
 
 ### With Icon and Close Button
 
-<code-well-header>
-  <dt-chip ref="withIconAndCloseExample">
+<code-example>
+  <dt-chip>
     <template #icon>
       <dt-icon
         name="phone"
@@ -154,29 +101,12 @@ showHtmlWarning />
       Chip
     </template>
   </dt-chip>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.withIconAndCloseExample'
-vueCode='
-<dt-chip>
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="200"
-    />
-  </template>
-  <template #default>
-    Chip
-  </template>
-</dt-chip>
-'
-showHtmlWarning />
+</code-example>
 
 ### With Avatar and Close Button
 
-<code-well-header>
-  <dt-chip ref="withAvatarAndCloseExample">
+<code-example>
+  <dt-chip>
     <template #avatar>
       <dt-avatar
         image-src="/assets/images/person.png"
@@ -188,25 +118,7 @@ showHtmlWarning />
       Chip
     </template>
   </dt-chip>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.withAvatarAndCloseExample'
-vueCode='
-<dt-chip>
-  <template #avatar>
-    <dt-avatar
-      image-src="/assets/images/person.png"
-      image-alt="Jaqueline Nackos"
-      full-name="Jaqueline Nackos"
-    />
-  </template>
-  <template #default>
-    Chip
-  </template>
-</dt-chip>
-'
-showHtmlWarning />
+</code-example>
 
 ### Truncated
 
@@ -230,28 +142,13 @@ showHtmlWarning />
 
 ### Sizes
 
-<code-well-header>
-  <dt-stack ref="sizesExample" direction="row" gap="400">
+<code-example>
+  <dt-stack direction="row" gap="400">
     <dt-chip :interactive="false" size="xs">Chip</dt-chip>
     <dt-chip :interactive="false" size="sm">Chip</dt-chip>
     <dt-chip :interactive="false">Chip</dt-chip>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.sizesExample'
-vueCode='
-<dt-chip :interactive="false" size="xs">
-  chip
-</dt-chip>
-<dt-chip :interactive="false" size="sm">
-  chip
-</dt-chip>
-<dt-chip :interactive="false">
-  chip
-</dt-chip>
-'
-showHtmlWarning />
+</code-example>
 
 ## Vue API
 

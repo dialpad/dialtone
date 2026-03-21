@@ -8,9 +8,9 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-popover--def
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=7298-20354
 keywords: ["popup", "overlay", "floating", "d-popover", "DtPopover", "dt-popover", "flyout", "tooltip panel"]
 ---
-<code-well-header>
+<code-example only-show="demo">
   <example-popover modal />
-</code-well-header>
+</code-example>
 
 <component-combinator component-name="DtPopover" />
 
@@ -65,13 +65,7 @@ The content slot will be rendered lazily when the popover is open. By default, t
 
 ### Popover - Modal
 
-<code-well-header>
-  <example-popover ref="modalExample" modal />
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.modalExample'
-vueCode='
+<code-example vueCode='
 <dt-popover
   :open="onOpen"
 >
@@ -95,18 +89,13 @@ vueCode='
     </div>
   </template>
 </dt-popover>
-'
-showHtmlWarning />
+'>
+  <example-popover modal />
+</code-example>
 
 ### Popover - Non Modal
 
-<code-well-header>
-  <example-popover ref="nonModalExample" />
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.nonModalExample'
-vueCode='
+<code-example vueCode='
 <dt-popover
   :open="onOpen"
   :modal="false"
@@ -131,22 +120,13 @@ vueCode='
     </div>
   </template>
 </dt-popover>
-'
-showHtmlWarning />
+'>
+  <example-popover />
+</code-example>
 
 ### With Header - Modal
 
-<code-well-header>
-  <example-popover ref="withHeaderExample" modal header>
-    <template #content>
-      <div class="d-mb8">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae.<br></div>
-    </template>
-  </example-popover>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.withHeaderExample'
-vueCode='
+<code-example vueCode='
 <dt-popover
   :open="onOpen"
 >
@@ -175,22 +155,17 @@ vueCode='
     </div>
   </template>
 </dt-popover>
-'
-showHtmlWarning />
-
-### With Footer - Modal
-
-<code-well-header>
-  <example-popover ref="withFooterExample" modal footer>
+'>
+  <example-popover modal header>
     <template #content>
       <div class="d-mb8">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae.<br></div>
     </template>
   </example-popover>
-</code-well-header>
+</code-example>
 
-<code-example-tabs
-:htmlCode='() => $refs.withFooterExample'
-vueCode='
+### With Footer - Modal
+
+<code-example vueCode='
 <dt-popover
   :open="onOpen"
 >
@@ -219,8 +194,13 @@ vueCode='
     </div>
   </template>
 </dt-popover>
-'
-showHtmlWarning />
+'>
+  <example-popover modal footer>
+    <template #content>
+      <div class="d-mb8">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae.<br></div>
+    </template>
+  </example-popover>
+</code-example>
 
 ### Fallback Placements
 
@@ -229,13 +209,7 @@ The popover uses [headless-tippy](https://atomiks.github.io/tippyjs/v6/headless-
 be clipped, it will move to a new position. It will do this automatically by default, but if you want to
 manually specify which position it will move to in what order you can do so via the `fallbackPlacements` prop.
 
-<code-well-header>
-  <example-popover ref="fallbackPlacementsExample" :fallback-placements="['top']" button-text="Fallback placement: top" />
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.fallbackPlacementsExample'
-vueCode='
+<code-example vueCode='
 <dt-popover
   :open="onOpen"
   :fallback-placements="[`top`]"
@@ -260,20 +234,15 @@ vueCode='
     </div>
   </template>
 </dt-popover>
-'
-showHtmlWarning />
+'>
+  <example-popover :fallback-placements="['top']" button-text="Fallback placement: top" />
+</code-example>
 
 ### Padding
 
 Padding options for the popover content are provided via size classes "small", "medium" or "large" in order to standardize the look of the popover content between usages. To remove the padding from the content, you can pass "none". Setting none will also allow you to set custom padding via utility classes (Ex: you only want padding on the left.).
 
-<code-well-header>
-  <example-popover ref="paddingExample" padding="small" />
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.paddingExample'
-vueCode='
+<code-example vueCode='
 <dt-popover
   :open="onOpen"
   padding="small"
@@ -298,8 +267,9 @@ vueCode='
     </div>
   </template>
 </dt-popover>
-'
-showHtmlWarning />
+'>
+  <example-popover padding="small" />
+</code-example>
 
 ### Force Close All Opened Instances
 
@@ -314,8 +284,12 @@ window.dispatchEvent(e);
 
 Popover content renders outside the DOM tree. Use the `contentMode` prop to apply color mode (invert, light, dark) to the positioned content. See [Positioned Components](/components/mode-island.html#positioned-components) for details.
 
-<code-well-header>
-  <dt-popover ref="contentModeExample" content-mode="invert" placement="bottom-start" dialogClass="d-w216">
+<code-example vueCode='
+<dt-popover content-mode="invert">...</dt-popover>
+<dt-popover content-mode="dark">...</dt-popover>
+<dt-popover content-mode="light">...</dt-popover>
+'>
+  <dt-popover content-mode="invert" placement="bottom-start" dialogClass="d-w216">
     <template #anchor>
       <dt-button size="sm" kind="muted" importance="outlined">Inverted Popover</dt-button>
     </template>
@@ -323,16 +297,7 @@ Popover content renders outside the DOM tree. Use the `contentMode` prop to appl
       <dt-text as="p">This Popover's content is in the <dt-text strength="strong">inverted</dt-text> mode.</dt-text>
     </template>
   </dt-popover>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.contentModeExample'
-vueCode='
-<dt-popover content-mode="invert">...</dt-popover>
-<dt-popover content-mode="dark">...</dt-popover>
-<dt-popover content-mode="light">...</dt-popover>
-'
-showHtmlWarning />
+</code-example>
 
 ## Vue API
 

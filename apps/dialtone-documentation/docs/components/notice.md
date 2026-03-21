@@ -25,21 +25,139 @@ A notice delivers informational and assistive messages that inform the user abou
 
 Used in most scenarios when the message should be noticeable but not dominate.
 
-<code-well-header bgclass="d-bgc-primary">
-  <dt-stack ref="baseStylesExample" gap="400">
+<code-example bgclass="d-bgc-primary" vueCode='
+<dt-notice
+  title="Base title (optional)"
+>
+  <span>
+    Message body with
+    <a
+      href="#"
+      class="d-link"
+      :class="linkClass"
+    >a link</a>.
+  </span>
+  <template #action>
+    <dt-button
+      size="sm"
+      importance="outlined"
+      kind="muted"
+      @click="onClick"
+    >
+      Action
+    </dt-button>
+  </template>
+</dt-notice>
+<dt-notice
+  title="Info title (optional)"
+  kind="info"
+>
+  <span>
+    Message body with
+    <a
+      href="#"
+      class="d-link"
+      :class="linkClass"
+    >a link</a>.
+  </span>
+  <template #action>
+    <dt-button
+      size="sm"
+      importance="outlined"
+      kind="muted"
+      @click="onClick"
+    >
+      Action
+    </dt-button>
+  </template>
+</dt-notice>
+<dt-notice
+  title="Error title (optional)"
+  kind="error"
+>
+  <span>
+    Message body with
+    <a
+      href="#"
+      class="d-link"
+      :class="linkClass"
+    >a link</a>.
+  </span>
+  <template #action>
+    <dt-button
+      size="sm"
+      importance="outlined"
+      kind="muted"
+      @click="onClick"
+    >
+      Action
+    </dt-button>
+  </template>
+</dt-notice>
+<dt-notice
+  title="Success title (optional)"
+  kind="success"
+>
+  <span>
+    Message body with
+    <a
+      href="#"
+      class="d-link"
+      :class="linkClass"
+    >a link</a>.
+  </span>
+  <template #action>
+    <dt-button
+      size="sm"
+      importance="outlined"
+      kind="muted"
+      @click="onClick"
+    >
+      Action
+    </dt-button>
+  </template>
+</dt-notice>
+<dt-notice
+  title="Warning title (optional)"
+  kind="warning"
+>
+  <span>
+    Message body with
+    <a
+      href="#"
+      class="d-link"
+      :class="linkClass"
+    >a link</a>.
+  </span>
+  <template #action>
+    <dt-button
+      size="sm"
+      importance="outlined"
+      kind="muted"
+      @click="onClick"
+    >
+      Action
+    </dt-button>
+  </template>
+</dt-notice>
+'>
+  <dt-stack gap="400">
     <example-notice kind="base" title="Base title (optional)" />
     <example-notice kind="error" title="Error title (optional)" />
     <example-notice kind="info" title="Info title (optional)" />
     <example-notice kind="success" title="Success title (optional)" />
     <example-notice kind="warning" title="Warning title (optional)" />
   </dt-stack>
-</code-well-header>
+</code-example>
 
-<code-example-tabs
-:htmlCode='() => $refs.baseStylesExample'
-vueCode='
+### Important
+
+Used occasionally in scenarios when the message needs to dominate.
+
+<code-example vueCode='
 <dt-notice
   title="Base title (optional)"
+  important
 >
   <span>
     Message body with
@@ -53,7 +171,7 @@ vueCode='
     <dt-button
       size="sm"
       importance="outlined"
-      kind="muted"
+      kind="inverted"
       @click="onClick"
     >
       Action
@@ -63,6 +181,7 @@ vueCode='
 <dt-notice
   title="Info title (optional)"
   kind="info"
+  important
 >
   <span>
     Message body with
@@ -76,7 +195,7 @@ vueCode='
     <dt-button
       size="sm"
       importance="outlined"
-      kind="muted"
+      kind="inverted"
       @click="onClick"
     >
       Action
@@ -86,6 +205,7 @@ vueCode='
 <dt-notice
   title="Error title (optional)"
   kind="error"
+  important
 >
   <span>
     Message body with
@@ -99,7 +219,7 @@ vueCode='
     <dt-button
       size="sm"
       importance="outlined"
-      kind="muted"
+      kind="inverted"
       @click="onClick"
     >
       Action
@@ -109,6 +229,7 @@ vueCode='
 <dt-notice
   title="Success title (optional)"
   kind="success"
+  important
 >
   <span>
     Message body with
@@ -122,7 +243,7 @@ vueCode='
     <dt-button
       size="sm"
       importance="outlined"
-      kind="muted"
+      kind="inverted"
       @click="onClick"
     >
       Action
@@ -132,6 +253,7 @@ vueCode='
 <dt-notice
   title="Warning title (optional)"
   kind="warning"
+  important
 >
   <span>
     Message body with
@@ -145,162 +267,29 @@ vueCode='
     <dt-button
       size="sm"
       importance="outlined"
-      kind="muted"
+      kind="inverted"
       @click="onClick"
     >
       Action
     </dt-button>
   </template>
 </dt-notice>
-'
-showHtmlWarning />
-
-### Important
-
-Used occasionally in scenarios when the message needs to dominate.
-
-<code-well-header>
-  <dt-stack ref="importantExample" gap="400">
+'>
+  <dt-stack gap="400">
     <example-notice important kind="base" title="Base title (optional)" />
     <example-notice important kind="error" title="Error title (optional)" />
     <example-notice important kind="info" title="Info title (optional)" />
     <example-notice important kind="success" title="Success title (optional)" />
     <example-notice important kind="warning" title="Warning title (optional)" />
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.importantExample'
-vueCode='
-<dt-notice
-  title="Base title (optional)"
-  important
->
-  <span>
-    Message body with
-    <a
-      href="#"
-      class="d-link"
-      :class="linkClass"
-    >a link</a>.
-  </span>
-  <template #action>
-    <dt-button
-      size="sm"
-      importance="outlined"
-      kind="inverted"
-      @click="onClick"
-    >
-      Action
-    </dt-button>
-  </template>
-</dt-notice>
-<dt-notice
-  title="Info title (optional)"
-  kind="info"
-  important
->
-  <span>
-    Message body with
-    <a
-      href="#"
-      class="d-link"
-      :class="linkClass"
-    >a link</a>.
-  </span>
-  <template #action>
-    <dt-button
-      size="sm"
-      importance="outlined"
-      kind="inverted"
-      @click="onClick"
-    >
-      Action
-    </dt-button>
-  </template>
-</dt-notice>
-<dt-notice
-  title="Error title (optional)"
-  kind="error"
-  important
->
-  <span>
-    Message body with
-    <a
-      href="#"
-      class="d-link"
-      :class="linkClass"
-    >a link</a>.
-  </span>
-  <template #action>
-    <dt-button
-      size="sm"
-      importance="outlined"
-      kind="inverted"
-      @click="onClick"
-    >
-      Action
-    </dt-button>
-  </template>
-</dt-notice>
-<dt-notice
-  title="Success title (optional)"
-  kind="success"
-  important
->
-  <span>
-    Message body with
-    <a
-      href="#"
-      class="d-link"
-      :class="linkClass"
-    >a link</a>.
-  </span>
-  <template #action>
-    <dt-button
-      size="sm"
-      importance="outlined"
-      kind="inverted"
-      @click="onClick"
-    >
-      Action
-    </dt-button>
-  </template>
-</dt-notice>
-<dt-notice
-  title="Warning title (optional)"
-  kind="warning"
-  important
->
-  <span>
-    Message body with
-    <a
-      href="#"
-      class="d-link"
-      :class="linkClass"
-    >a link</a>.
-  </span>
-  <template #action>
-    <dt-button
-      size="sm"
-      importance="outlined"
-      kind="inverted"
-      @click="onClick"
-    >
-      Action
-    </dt-button>
-  </template>
-</dt-notice>
-'
-showHtmlWarning />
+</code-example>
 
 ### Truncate Text
 
 Truncates the text instead of wrapping it. Useful when the Notice needs to have a fixed height.
 
-<code-well-header bgclass="d-bgc-primary">
+<code-example bgclass="d-bgc-primary">
   <dt-notice
-    ref="htmlTruncateText"
     :truncate-text="true"
     title="Lorem ipsum dolor sit amet, consectetur adipiscing elit,
       sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
@@ -310,23 +299,7 @@ Truncates the text instead of wrapping it. Useful when the Notice needs to have 
       esse cillum dolore eu fugiat nulla pariatur.
     </span>
   </dt-notice>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.htmlTruncateText'
-vueCode='
-<dt-notice
-  :truncate-text="true"
-  title="Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
->
-  <span>
-    Duis aute irure dolor in reprehenderit in voluptate velit
-    esse cillum dolore eu fugiat nulla pariatur.
-  </span>
-</dt-notice>
-'
-/>
+</code-example>
 
 ## Vue API
 

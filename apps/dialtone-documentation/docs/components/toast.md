@@ -19,29 +19,7 @@ keywords: ["notification", "snackbar", "alert", "message", "d-toast", "DtToast",
 
 ## Variants and Examples
 
-<code-well-header>
-    <dt-stack direction="row" gap="400" align="end" class="d-w100p">
-        <div class="d-fl-grow1">
-            <dt-select-menu label="Style" :options="toastOptions" v-model="selectedKind" />
-        </div>
-        <dt-checkbox value="important" @input="toggleImportant">Important</dt-checkbox>
-        <dt-button @click="toggleToast">Toggle Example</dt-button>
-    </dt-stack>
-</code-well-header>
-
-<example-toast
-  ref="variantsExample"
-  class="d-zi-notification"
-  :show="showToast"
-  title="Title"
-  :important="important"
-  :kind="selectedKind"
-  @close="toggleToast"
-/>
-
-<code-example-tabs
-:htmlCode='() => $refs.variantsExample'
-vueCode='
+<code-example vueCode='
 <dt-toast
   title="Title"
   :show="showToast"
@@ -63,30 +41,31 @@ vueCode='
     </dt-button>
   </template>
 </dt-toast>
-'
-showHtmlWarning />
+'>
+  <dt-stack direction="row" gap="400" align="end" class="d-w100p">
+    <div class="d-fl-grow1">
+      <dt-select-menu label="Style" :options="toastOptions" v-model="selectedKind" />
+    </div>
+    <dt-checkbox value="important" @input="toggleImportant">Important</dt-checkbox>
+    <dt-button @click="toggleToast">Toggle Example</dt-button>
+  </dt-stack>
+</code-example>
+
+<example-toast
+  class="d-zi-notification"
+  :show="showToast"
+  title="Title"
+  :important="important"
+  :kind="selectedKind"
+  @close="toggleToast"
+/>
 
 ### With Duration
 
 It's recommended to use a time of at least 6000 ms (minimum duration validated in the component) to give users enough time to read the toast. Take into account that the time necessary to read and comprehend the message could vary in users. For instance, users using assistive technology, or users with language barriers could potentially need more time to read and understand the message.
 If the duration is not provided the toast won't disappear automatically.
 
-<code-well-header>
-  <dt-button @click="toggleDurationToast(true)">Show Example</dt-button>
-  <example-toast
-    ref="durationExample"
-    class="d-zi-notification"
-    :show="showDurationToast"
-    title="Title"
-    @close="toggleDurationToast(false)"
-    @update:show="updateShow"
-    :duration="6000"
-  />
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.durationExample'
-vueCode='
+<code-example vueCode='
 <dt-toast
   title="Title"
   :show="showDurationToast"
@@ -107,8 +86,17 @@ vueCode='
     </dt-button>
   </template>
 </dt-toast>
-'
-showHtmlWarning />
+'>
+  <dt-button @click="toggleDurationToast(true)">Show Example</dt-button>
+  <example-toast
+    class="d-zi-notification"
+    :show="showDurationToast"
+    title="Title"
+    @close="toggleDurationToast(false)"
+    @update:show="updateShow"
+    :duration="6000"
+  />
+</code-example>
 
 ### With Self-Positioning
 

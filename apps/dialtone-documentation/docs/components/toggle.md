@@ -47,21 +47,7 @@ The Toggle component acts as a way to allow the User to switch between two mutua
 
 ### Base Styles
 
-<code-well-header>
-  <dt-stack ref="baseStylesExample" as="fieldset" gap="400">
-    <dt-toggle label-class="d-mr6">Unchecked Toggle</dt-toggle>
-    <dt-toggle :model-value="true" label-class="d-mr6">Checked Toggle</dt-toggle>
-    <dt-toggle disabled label-class="d-mr6">Unchecked Disabled</dt-toggle>
-    <dt-toggle :model-value="true" disabled label-class="d-mr6">Checked Disabled</dt-toggle>
-    <dt-toggle :model-value="mixed" label-class="d-mr6">Indeterminate Toggle</dt-toggle>
-    <dt-toggle :model-value="mixed" label-class="d-mr6" disabled>Indeterminate Disabled</dt-toggle>
-    <dt-toggle label-class="d-mr6" :show-icon="false">Without icon</dt-toggle>
-  </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.baseStylesExample'
-vueCode='
+<code-example vueCode='
 <dt-toggle>
   Unchecked Toggle
 </dt-toggle>
@@ -83,46 +69,45 @@ vueCode='
 <dt-toggle :show-icon="false">
   Without icon
 </dt-toggle>
-'
-showHtmlWarning />
+'>
+  <dt-stack as="fieldset" gap="400">
+    <dt-toggle label-class="d-mr6">Unchecked Toggle</dt-toggle>
+    <dt-toggle :model-value="true" label-class="d-mr6">Checked Toggle</dt-toggle>
+    <dt-toggle disabled label-class="d-mr6">Unchecked Disabled</dt-toggle>
+    <dt-toggle :model-value="true" disabled label-class="d-mr6">Checked Disabled</dt-toggle>
+    <dt-toggle :model-value="mixed" label-class="d-mr6">Indeterminate Toggle</dt-toggle>
+    <dt-toggle :model-value="mixed" label-class="d-mr6" disabled>Indeterminate Disabled</dt-toggle>
+    <dt-toggle label-class="d-mr6" :show-icon="false">Without icon</dt-toggle>
+  </dt-stack>
+</code-example>
 
 ### Sizes
 
-<code-well-header>
-  <dt-stack ref="sizesExample" as="fieldset" gap="400">
-    <dt-toggle size="sm" label-class="d-mr6">Small size</dt-toggle>
-    <dt-toggle label-class="d-mr6">Default size</dt-toggle>
-  </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.sizesExample'
-vueCode='
+<code-example vueCode='
 <dt-toggle>
   Default size
 </dt-toggle>
 <dt-toggle size="sm">
   Small size
 </dt-toggle>
-'
-showHtmlWarning />
+'>
+  <dt-stack as="fieldset" gap="400">
+    <dt-toggle size="sm" label-class="d-mr6">Small size</dt-toggle>
+    <dt-toggle label-class="d-mr6">Default size</dt-toggle>
+  </dt-stack>
+</code-example>
 
 ### With v-model
 
-<code-well-header>
-  <dt-stack as="fieldset" gap="400">
-    <dt-toggle v-model="checked" label-class="d-mr6" ref="vModelExample">Toggle</dt-toggle>
-  </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs.vModelExample"
-vueCode='
+<code-example vueCode='
 <dt-toggle v-model="checked">
   Toggle
 </dt-toggle>
-'
-/>
+'>
+  <dt-stack as="fieldset" gap="400">
+    <dt-toggle v-model="checked" label-class="d-mr6">Toggle</dt-toggle>
+  </dt-stack>
+</code-example>
 
 ## Vue API
 
@@ -138,11 +123,11 @@ This component uses a native button element under the hood that has a role `swit
 [See W3C guidelines](https://www.w3.org/TR/2021/NOTE-wai-aria-practices-1.2-20211129/examples/switch/switch-button.html)
 for more information.
 
-The best accessibility is semantic HTML. Most screen readers understand how to parse buttons if they’re correctly formatted. When it comes to toggles, there are a few things to keep in mind:
+The best accessibility is semantic HTML. Most screen readers understand how to parse buttons if they're correctly formatted. When it comes to toggles, there are a few things to keep in mind:
 
 - All toggle buttons should have an `id` attribute.
 - Associate toggle labels with their buttons using the `for` attribute. This correlates with the toggle's `id`.
-- If you have a group of related toggles, use a `fieldset` to group them and a `legend` to title the group. For further information, please visit Gov.UK’s article, ["Using the fieldset and legend elements"](https://accessibility.blog.gov.uk/2016/07/22/using-the-fieldset-and-legend-elements).
+- If you have a group of related toggles, use a `fieldset` to group them and a `legend` to title the group. For further information, please visit Gov.UK's article, ["Using the fieldset and legend elements"](https://accessibility.blog.gov.uk/2016/07/22/using-the-fieldset-and-legend-elements).
 
 ### Button
 

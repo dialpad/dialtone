@@ -64,31 +64,31 @@ The icon size is defined based on the context and text size next to it. These ar
 </div>
 
 <dt-stack direction="row" gap="500" class="d-gc1 d-bgc-secondary d-p16 d-px32 d-bar16 d-ai-flex-start d-jc-space-between">
-  <dt-stack gap="500" class="d-ai-center">
+  <dt-stack gap="500" align="center">
     <code>200</code>
     <dt-icon name="food" size="200" />
   </dt-stack>
-  <dt-stack gap="500" class="d-ai-center">
+  <dt-stack gap="500" align="center">
     <code>300</code>
     <dt-icon name="food" size="300" />
   </dt-stack>
-  <dt-stack gap="500" class="d-ai-center">
+  <dt-stack gap="500" align="center">
     <code>400</code>
     <dt-icon name="food" size="400" />
   </dt-stack>
-  <dt-stack gap="500" class="d-ai-center">
+  <dt-stack gap="500" align="center">
     <code>500</code>
     <dt-icon name="food" size="500" />
   </dt-stack>
-  <dt-stack gap="500" class="d-ai-center">
+  <dt-stack gap="500" align="center">
     <code>600</code>
     <dt-icon name="food" size="600" />
   </dt-stack>
-  <dt-stack gap="500" class="d-ai-center">
+  <dt-stack gap="500" align="center">
     <code>700</code>
     <dt-icon name="food" size="700" />
   </dt-stack>
-  <dt-stack gap="500" class="d-ai-center">
+  <dt-stack gap="500" align="center">
     <code>800</code>
     <dt-icon name="food" size="800" />
   </dt-stack>

@@ -9,7 +9,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["list element", "d-list-item", "DtListItem", "dt-list-item"]
 ---
 
-<code-well-header class="d-d-block">
+<code-example only-show="demo" class="d-d-block">
   <ul>
     <dt-list-item navigation-type="tab">
       <template #start>
@@ -27,7 +27,7 @@ keywords: ["list element", "d-list-item", "DtListItem", "dt-list-item"]
       </template>
     </dt-list-item>
   </ul>
-</code-well-header>
+</code-example>
 
 <!-- <component-combinator component-name="DtListItem" /> -->
 
@@ -47,8 +47,8 @@ The **subtitle** slot can be used to display content below the default slot. The
 
 The **bottom** slot can be used to display content below the subtitle slot.
 
-<code-well-header class="d-d-block">
-  <ul ref="baseStyleExample">
+<code-example>
+  <ul class="d-d-block">
     <dt-list-item navigation-type="tab">
       <template #start>
         <dt-icon size="300" name="check" />
@@ -65,30 +65,7 @@ The **bottom** slot can be used to display content below the subtitle slot.
       </template>
     </dt-list-item>
   </ul>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.baseStyleExample'
-vueCode='
-<ul>
-  <dt-list-item navigation-type="tab">
-    <template #start>
-      <dt-icon size="300" name="check" />
-    </template>
-    <span>Default List Item</span>
-    <template #subtitle>
-      Description
-    </template>
-    <template #bottom>
-      <dt-badge text="Label" />
-    </template>
-    <template #end>
-      <dt-icon size="300" name="external-link" />
-    </template>
-  </dt-list-item>
-</ul>
-'
-showHtmlWarning />
+</code-example>
 
 ## Variants
 
@@ -96,8 +73,8 @@ showHtmlWarning />
 
 When `type` is set to "custom" the list item will not render any styles or slots. This type can be used when the list item has to support content that does not work with the default structure.
 
-<code-well-header class="d-d-block">
-  <ul ref="customListItem">
+<code-example>
+  <ul class="d-d-block">
     <dt-list-item
       navigation-type="tab"
       type="custom"
@@ -155,71 +132,7 @@ When `type` is set to "custom" the list item will not render any styles or slots
       </dt-stack>
     </dt-list-item>
   </ul>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.customListItem'
-vueCode='
-<ul>
-  <dt-list-item
-    navigation-type="tab"
-    type="custom"
-  >
-    <dt-stack direction="row" align="center" justify="between" class="d-py8 d-px12">
-      <div>
-        <time
-          class="d-fs-100 d-pr12"
-          datetime="10:00"
-        >
-          10:00
-        </time>
-        <span class="d-fs-200">
-          Custom List Item Example
-        </span>
-      </div>
-      <dt-stack direction="row" class="d-p6 d-tn8 d-r12 d-bgc-white d-bar4 d-bs-md">
-        <dt-button
-          class="d-p4 d-py8"
-          importance="clear"
-          title="share"
-        >
-          <template #startIcon>
-            <dt-icon
-              name="share-2"
-              size="200"
-            />
-          </template>
-        </dt-button>
-        <dt-button
-          class="d-p4 d-py8 d-ml4"
-          importance="clear"
-          title="star"
-        >
-          <template #startIcon>
-            <dt-icon
-              name="star"
-              size="200"
-            />
-          </template>
-        </dt-button>
-        <dt-button
-          class="d-p4 d-py8 d-ml4"
-          importance="clear"
-          title="more"
-        >
-          <template #startIcon>
-            <dt-icon
-              name="more-vertical"
-              size="200"
-            />
-          </template>
-        </dt-button>
-      </dt-stack>
-      </dt-stack>
-  </dt-list-item>
-</ul>
-'
-/>
+</code-example>
 
 ## Vue API
 

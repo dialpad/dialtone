@@ -8,13 +8,13 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-emoji-text-w
 keywords: ["emoji support","emoticon wrapper","d-emoji-text-wrapper","DtEmojiTextWrapper","dt-emoji-text-wrapper"]
 ---
 
-<code-well-header>
+<code-example only-show="demo">
   <dt-text kind="body" size="md">
     <dt-emoji-text-wrapper>
       Some text with :invalid-emoji: :smile: :cry: and 😄, and custom emojis :octocat: :shipit:
     </dt-emoji-text-wrapper>
   </dt-text>
-</code-well-header>
+</code-example>
 
 <!-- <component-combinator component-name="DtEmojiTextWrapper" /> -->
 
@@ -22,29 +22,18 @@ keywords: ["emoji support","emoticon wrapper","d-emoji-text-wrapper","DtEmojiTex
 
 ### Text Only
 
-<code-well-header>
-  <dt-text ref="textOnlyExample" kind="body" size="md">
+<code-example>
+  <dt-text kind="body" size="md">
     <dt-emoji-text-wrapper>
       Some text with :invalid-emoji: :smile: :cry: and 😄, and custom emojis :octocat: :shipit:
     </dt-emoji-text-wrapper>
   </dt-text>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.textOnlyExample'
-vueCode='
-<dt-text kind="body" size="md">
-  <dt-emoji-text-wrapper>
-    Some text with :invalid-emoji: :smile: :cry: and 😄, and custom emojis :octocat: :shipit:
-  </dt-emoji-text-wrapper>
-</dt-text
-'
-showHtmlWarning />
+</code-example>
 
 ### Variants
 
-<code-well-header>
-  <dt-stack gap="500" ref="variantsExample">
+<code-example>
+  <dt-stack gap="500">
     <dt-emoji-text-wrapper>
       <dt-button kind="primary" importance="primary" color="danger">
         Button with shortcode :cry: emoji
@@ -71,40 +60,7 @@ showHtmlWarning />
       </dt-emoji-text-wrapper>
     </dt-text>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs.variantsExample"
-vueCode='
-<dt-stack gap="500" ref="variantsExample">
-  <dt-emoji-text-wrapper>
-    <dt-button kind="primary" importance="primary" color="danger">
-      Button with shortcode :cry: emoji
-    </dt-button>
-  </dt-emoji-text-wrapper>
-  <dt-text kind="body" size="md">
-    <dt-emoji-text-wrapper>
-      Text only with unicode 😃 emoji
-    </dt-emoji-text-wrapper>
-  </dt-text>
-  <dt-emoji-text-wrapper>
-    <dt-button kind="primary">
-      Button wrapper :smile:
-    </dt-button>
-  </dt-emoji-text-wrapper>
-  <dt-text kind="body" size="md">
-    <dt-emoji-text-wrapper size="800">
-      Bigger emoji size :smile:
-    </dt-emoji-text-wrapper>
-  </dt-text>
-  <dt-text kind="body" size="md">
-    <dt-emoji-text-wrapper size="300">
-      Smaller emoji size :smile:
-    </dt-emoji-text-wrapper>
-  </dt-text>
-</dt-stack>
-'
-showHtmlWarning />
+</code-example>
 
 ## Vue API
 

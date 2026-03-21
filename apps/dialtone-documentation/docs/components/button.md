@@ -101,7 +101,7 @@ The positive button style is used to communicate positive actions.
 
 The muted button style is used to communicate non-primary actions for contexts in which the base style may not work
 (e.g. colored backgrounds, validation components, etc).
-This style’s use should be rare. When in doubt, use the [default button style](#default).
+This style's use should be rare. When in doubt, use the [default button style](#default).
 
 <code-example>
   <dt-stack direction="row" gap="400">

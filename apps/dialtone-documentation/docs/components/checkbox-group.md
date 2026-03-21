@@ -28,9 +28,8 @@ Checkbox Groups are typically paired with a legend which identifies the group. I
 
 ### Default
 
-<code-well-header>
+<code-example>
   <dt-checkbox-group
-    ref="defaultExample"
     name="fruits-checkbox-group"
     legend="Fruits"
     :selectedValues="[]"
@@ -39,30 +38,15 @@ Checkbox Groups are typically paired with a legend which identifies the group. I
     <dt-checkbox value="banana"><span>Banana</span></dt-checkbox>
     <dt-checkbox value="other"><span>Other</span></dt-checkbox>
   </dt-checkbox-group>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.defaultExample'
-vueCode='
-<dt-checkbox-group
-  name="fruits-checkbox-group"
-  legend="Fruits"
->
-  <dt-checkbox value="apple"><span>Apple</span></dt-checkbox>
-  <dt-checkbox value="banana"><span>Banana</span></dt-checkbox>
-  <dt-checkbox value="other"><span>Other</span></dt-checkbox>
-</dt-checkbox-group>
-'
-showHtmlWarning />
+</code-example>
 
 ### With Selected Values
 
-<code-well-header>
+<code-example>
   <dt-checkbox-group
     name="my-group-name"
     legend="My Legend"
     :selected-values="['option1']"
-    ref="with-selected-values"
   >
     <dt-checkbox
       value="option1"
@@ -73,36 +57,15 @@ showHtmlWarning />
       label="Option 2"
     />
   </dt-checkbox-group>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs['with-selected-values']"
-vueCode='
-<dt-checkbox-group
-  name="my-group-name"
-  legend="My Legend"
-  :selected-values="[`option1`]"
->
-  <dt-checkbox
-    value="option1"
-    label="Option 1"
-  />
-  <dt-checkbox
-    value="option2"
-    label="Option 2"
-  />
-</dt-checkbox-group>
-'
-/>
+</code-example>
 
 ### Disabled
 
-<code-well-header>
+<code-example>
   <dt-checkbox-group
     name="my-group-name"
     legend="My Legend"
     disabled
-    ref="example-disabled"
   >
     <dt-checkbox
       value="option1"
@@ -113,71 +76,11 @@ vueCode='
       label="Option 2"
     />
   </dt-checkbox-group>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs['example-disabled']"
-vueCode='
-<dt-checkbox-group
-  name="my-group-name"
-  legend="My Legend"
-  disabled
->
-  <dt-checkbox
-    value="option1"
-    label="Option 1"
-  />
-  <dt-checkbox
-    value="option2"
-    label="Option 2"
-  />
-</dt-checkbox-group>
-'
-/>
+</code-example>
 
 ### With Validation States
 
-<code-well-header>
-  <dt-stack ref="validationStatesExample" gap="500">
-    <div>
-      <dt-checkbox-group
-        name="checkbox-group-with-success-message"
-        legend="Fruits"
-        :messages='[{"message":"Success validation message","type":"success"}]'
-      >
-        <dt-checkbox value="apple"><span>Apple</span></dt-checkbox>
-        <dt-checkbox value="banana"><span>Banana</span></dt-checkbox>
-        <dt-checkbox value="other"><span>Other</span></dt-checkbox>
-      </dt-checkbox-group>
-    </div>
-    <div>
-      <dt-checkbox-group
-        name="checkbox-group-with-warning-message"
-        legend="Fruits"
-        :messages='[{"message":"Warning validation message","type":"warning"}]'
-      >
-        <dt-checkbox value="apple"><span>Apple</span></dt-checkbox>
-        <dt-checkbox value="banana"><span>Banana</span></dt-checkbox>
-        <dt-checkbox value="other"><span>Other</span></dt-checkbox>
-      </dt-checkbox-group>
-    </div>
-    <div>
-      <dt-checkbox-group
-      name="checkbox-group-with-error-message"
-      legend="Fruits"
-      :messages='[{"message":"Error validation message","type":"error"}]'
-      >
-        <dt-checkbox value="apple"><span>Apple</span></dt-checkbox>
-        <dt-checkbox value="banana"><span>Banana</span></dt-checkbox>
-        <dt-checkbox value="other"><span>Other</span></dt-checkbox>
-      </dt-checkbox-group>
-    </div>
-  </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.validationStatesExample'
-vueCode='
+<code-example vueCode='
 <dt-checkbox-group
   name="fruits-checkbox-group"
   legend="Fruits"
@@ -208,33 +111,47 @@ vueCode='
   <dt-checkbox value="banana"><span>Banana</span></dt-checkbox>
   <dt-checkbox value="other"><span>Other</span></dt-checkbox>
 </dt-checkbox-group>
-'
-showHtmlWarning />
+'>
+  <dt-stack gap="500">
+    <div>
+      <dt-checkbox-group
+        name="checkbox-group-with-success-message"
+        legend="Fruits"
+        :messages='[{"message":"Success validation message","type":"success"}]'
+      >
+        <dt-checkbox value="apple"><span>Apple</span></dt-checkbox>
+        <dt-checkbox value="banana"><span>Banana</span></dt-checkbox>
+        <dt-checkbox value="other"><span>Other</span></dt-checkbox>
+      </dt-checkbox-group>
+    </div>
+    <div>
+      <dt-checkbox-group
+        name="checkbox-group-with-warning-message"
+        legend="Fruits"
+        :messages='[{"message":"Warning validation message","type":"warning"}]'
+      >
+        <dt-checkbox value="apple"><span>Apple</span></dt-checkbox>
+        <dt-checkbox value="banana"><span>Banana</span></dt-checkbox>
+        <dt-checkbox value="other"><span>Other</span></dt-checkbox>
+      </dt-checkbox-group>
+    </div>
+    <div>
+      <dt-checkbox-group
+        name="checkbox-group-with-error-message"
+        legend="Fruits"
+        :messages='[{"message":"Error validation message","type":"error"}]'
+      >
+        <dt-checkbox value="apple"><span>Apple</span></dt-checkbox>
+        <dt-checkbox value="banana"><span>Banana</span></dt-checkbox>
+        <dt-checkbox value="other"><span>Other</span></dt-checkbox>
+      </dt-checkbox-group>
+    </div>
+  </dt-stack>
+</code-example>
 
 ### With Validation Messages Hidden
 
-<code-well-header>
-  <dt-checkbox-group
-    name="my-group-name"
-    legend="My Legend"
-    :messages="[{ message: 'My Success Message', type: `success` }]"
-    :show-messages="false"
-    ref="with-messages-hidden"
-  >
-    <dt-checkbox
-      value="option1"
-      label="Option 1"
-    />
-    <dt-checkbox
-      value="option2"
-      label="Option 2"
-    />
-  </dt-checkbox-group>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs['with-messages-hidden']"
-vueCode='
+<code-example vueCode='
 <dt-checkbox-group
   name="my-group-name"
   legend="My Legend"
@@ -250,8 +167,23 @@ vueCode='
     label="Option 2"
   />
 </dt-checkbox-group>
-'
-/>
+'>
+  <dt-checkbox-group
+    name="my-group-name"
+    legend="My Legend"
+    :messages="[{ message: 'My Success Message', type: `success` }]"
+    :show-messages="false"
+  >
+    <dt-checkbox
+      value="option1"
+      label="Option 1"
+    />
+    <dt-checkbox
+      value="option2"
+      label="Option 2"
+    />
+  </dt-checkbox-group>
+</code-example>
 
 ## Vue API
 

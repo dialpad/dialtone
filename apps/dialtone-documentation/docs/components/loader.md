@@ -35,24 +35,16 @@ keywords: ["spinner", "loading", "progress", "d-loader", "DtLoader", "dt-loader"
 
 The base loader should be the go-to loader for most of your needs. When in doubt, use this style.
 
-<code-well-header>
-  <dt-loader ref="defaultExample"></dt-loader>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.defaultExample'
-vueCode='
-<dt-loader />
-'
-showHtmlWarning />
+<code-example>
+  <dt-loader></dt-loader>
+</code-example>
 
 ## Sizes
 
 The base loader size is 24px and should be used in most cases.
 
-<code-well-header>
+<code-example>
   <dt-stack
-    ref="sizesExample"
     gap="400"
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
@@ -65,21 +57,7 @@ The base loader size is 24px and should be used in most cases.
     <dt-loader size="700"></dt-loader>
     <dt-loader size="800"></dt-loader>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.sizesExample'
-vueCode='
-<dt-loader size="100"></dt-loader>
-<dt-loader size="200"></dt-loader>
-<dt-loader size="300"></dt-loader>
-<dt-loader size="400"></dt-loader>
-<dt-loader></dt-loader>
-<dt-loader size="600"></dt-loader>
-<dt-loader size="700"></dt-loader>
-<dt-loader size="800"></dt-loader>
-'
-showHtmlWarning />
+</code-example>
 
 ## Vue API
 

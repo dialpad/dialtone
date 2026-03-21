@@ -26,63 +26,30 @@ Validation messages are typically paired with an input element. They are current
 
 ### Success / Positive
 
-<code-well-header>
+<code-example>
   <dt-validation-messages
-    ref="successExample"
     id="sample--02"
     :validationMessages='[{"message":"Positive validation message","type":"success"}]'
   />
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.successExample'
-vueCode='
-<dt-validation-messages
-  id="sample--02"
-  :validationMessages=`[{"message":"Positive validation message","type":"success"}]`
-/>
-'
-showHtmlWarning />
+</code-example>
 
 ### Critical / Error
 
-<code-well-header>
+<code-example>
   <dt-validation-messages
-    ref="errorExample"
     id="sample--03"
     :validationMessages='[{"message":"Critical validation message","type":"error"}]'
   />
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.errorExample'
-vueCode='
-<dt-validation-messages
-  id="sample--03"
-  :validationMessages=`[{"message":"Critical validation message","type":"error"}]`
-/>
-'
-showHtmlWarning />
+</code-example>
 
 ### Warning
 
-<code-well-header>
+<code-example>
   <dt-validation-messages
-    ref="warningExample"
     id="sample--04"
     :validationMessages='[{"message":"Warning validation message","type":"warning"}]'
   />
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.warningExample'
-vueCode='
-<dt-validation-messages
-  id="sample--04"
-  :validationMessages=`[{"message":"Warning validation message","type":"warning"}]`
-/>
-'
-showHtmlWarning />
+</code-example>
 
 ## Vue API
 

@@ -34,13 +34,13 @@ keywords: ["anchor", "hyperlink", "url", "d-link", "DtLink", "dt-link", "text li
 
 ### Best Practices
 
-- Use useful, actionable, and descriptive text clearly conveying the hyperlink’s destination. For example, a generic label like "click here" doesn’t convey its target content.
+- Use useful, actionable, and descriptive text clearly conveying the hyperlink's destination. For example, a generic label like "click here" doesn't convey its target content.
 - Too many links can be overwhelming. Be selective about the number of links in a context.
 - Clearly identify links that target an external source.
 
 ## Accessibility
 
-- Allow keyboard navigation. Users must be able to navigate between links, i.e. keypress of tab, and activate it by pressing ‘Enter’.
+- Allow keyboard navigation. Users must be able to navigate between links, i.e. keypress of tab, and activate it by pressing 'Enter'.
 - Users must be able to identify links without relying on color alone.
 - Users must be able to activate hover and focus states with both a mouse and a keyboard.
 
@@ -48,8 +48,8 @@ keywords: ["anchor", "hyperlink", "url", "d-link", "DtLink", "dt-link", "text li
 
 ### Default
 
-<code-well-header>
-  <DtStack gap="400" ref="linkExample1">
+<code-example>
+  <DtStack gap="400">
     <dt-link href="#link">Base link</dt-link>
     <dt-link href="#link" kind="danger">Danger link</dt-link>
     <dt-link href="#link" kind="muted">Muted link</dt-link>
@@ -57,34 +57,15 @@ keywords: ["anchor", "hyperlink", "url", "d-link", "DtLink", "dt-link", "text li
     <dt-link href="#link" kind="warning">Warning link</dt-link>
     <dt-link href="#link" kind="mention">Mention link</dt-link>
   </DtStack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.linkExample1'
-vueCode='
-<dt-link :href="#link">Link</dt-link>
-<dt-link :href="#link" kind="danger">Danger link</dt-link>
-<dt-link :href="#link" kind="muted">Muted link</dt-link>
-<dt-link :href="#link" kind="success">Success link</dt-link>
-<dt-link :href="#link" kind="warning">Warning link</dt-link>
-<dt-link :href="#link" kind="mention">Mention link</dt-link>
-'
-showHtmlWarning />
+</code-example>
 
 ### No underline
 
 This inverts the underline behavior. With `underline="false"`, the link will not have an underline by default, but will show one on hover.
 
-<code-well-header>
-  <dt-link ref="noUnderlineExample" href="#link" :underline="false">No underline link</dt-link>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.noUnderlineExample'
-vueCode='
-<dt-link href="#link" :underline="false">No underline link</dt-link>
-'
-showHtmlWarning />
+<code-example>
+  <dt-link href="#link" :underline="false">No underline link</dt-link>
+</code-example>
 
 ### Inverted
 
@@ -100,8 +81,10 @@ showHtmlWarning />
 
 In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#inverting) on the component element.
 
-<code-well-header>
-  <DtStack gap="400" ref="linkInvertedExample" class="d-bgc-contrast d-p8">
+<code-example vueCode='
+<dt-link v-dt-mode:invert {props}>Link</dt-link>
+'>
+  <DtStack gap="400" class="d-bgc-contrast d-p8">
     <dt-link v-dt-mode:invert href="#link">Base link</dt-link>
     <dt-link v-dt-mode:invert href="#link" kind="danger">Danger link</dt-link>
     <dt-link v-dt-mode:invert href="#link" kind="success">Success link</dt-link>
@@ -109,14 +92,7 @@ In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#
     <dt-link v-dt-mode:invert href="#link" kind="muted">Muted link</dt-link>
     <dt-link v-dt-mode:invert href="#link" kind="mention">Mention link</dt-link>
   </DtStack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.linkInvertedExample'
-vueCode='
-<dt-link v-dt-mode:invert {props}>Link</dt-link>
-'
-showHtmlWarning />
+</code-example>
 
 ## Navigation
 
@@ -126,36 +102,30 @@ DtLink supports both external links and internal SPA navigation via Vue Router.
 
 Use `href` for standard anchor links — external URLs, hash links, etc.
 
-<code-example-tabs
-vueCode='
-<dt-link href="https://github.com/dialpad/dialtone" target="_blank" rel="noopener noreferrer">
-  GitHub
-</dt-link>
-<dt-link href="#section">Jump to section</dt-link>
-'
-showHtmlWarning />
+<code-example only-show="code">
+  <dt-link href="https://github.com/dialpad/dialtone" target="_blank" rel="noopener noreferrer">
+    GitHub
+  </dt-link>
+  <dt-link href="#section">Jump to section</dt-link>
+</code-example>
 
 ### to
 
 Use `to` for Vue Router navigation. DtLink renders as a `<router-link>` when `to` is provided.
 
-<code-example-tabs
-vueCode='
-<dt-link to="/components/">Browse Components</dt-link>
-<dt-link to="/components/button">Button docs</dt-link>
-<dt-link :to="{ name: &apos;component&apos;, params: { id: &apos;button&apos; } }">Button docs</dt-link>
-'
-showHtmlWarning />
+<code-example only-show="code">
+  <dt-link to="/components/">Browse Components</dt-link>
+  <dt-link to="/components/button">Button docs</dt-link>
+  <dt-link :to="{ name: 'component', params: { id: 'button' } }">Button docs</dt-link>
+</code-example>
 
 ### Replace history
 
 Use the `replace` prop to replace the current history entry instead of pushing a new one. Only applies when `to` is provided.
 
-<code-example-tabs
-vueCode='
-<dt-link to="/components/" replace>Browse Components</dt-link>
-'
-showHtmlWarning />
+<code-example only-show="code">
+  <dt-link to="/components/" replace>Browse Components</dt-link>
+</code-example>
 
 ## Vue API
 

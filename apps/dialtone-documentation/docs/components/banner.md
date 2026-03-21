@@ -9,7 +9,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["alert","notification","message","d-banner","DtBanner","dt-banner"]
 ---
 
-<code-well-header class="d-p0">
+<code-example only-show="demo" class="d-p0">
     <dt-stack gap="500" class="d-w100p" align="center">
       <dt-banner title="Example banner" kind="info" class="d-ps-relative d-zi-base">
           Message body with a <dt-link kind="muted">Link</dt-link>
@@ -21,7 +21,7 @@ keywords: ["alert","notification","message","d-banner","DtBanner","dt-banner"]
           <dt-button @click="toggleBanner('example-pinned')">Pin to top</dt-button>
       </dt-stack>
     </dt-stack>
-</code-well-header>
+</code-example>
 
 <!-- <component-combinator component-name="DtBanner" /> -->
 
@@ -38,7 +38,7 @@ Banners are a type of notice and so you can use the following [Notice](notice.md
 
 ### Kind
 
-<code-well-header>
+<code-example only-show="demo">
     <dt-stack direction="row" gap="400" align="end" class="d-w100p">
         <div class="d-fl-grow1">
             <dt-select-menu label="Style" :options="bannerOptions" v-model="selectedKind" />
@@ -46,10 +46,9 @@ Banners are a type of notice and so you can use the following [Notice](notice.md
         <dt-checkbox value="important" @input="toggleImportant">Important</dt-checkbox>
         <dt-button @click="toggleBanner('example-kind')">Toggle Example</dt-button>
     </dt-stack>
-</code-well-header>
+</code-example>
 
 <dt-banner
-  ref="kindExample"
   :pinned="pinned"
   :important="important"
   :kind="selectedKind"
@@ -60,9 +59,7 @@ Banners are a type of notice and so you can use the following [Notice](notice.md
   Message body
 </dt-banner>
 
-<code-example-tabs
-:htmlCode='() => $refs.kindExample'
-vueCode='
+<code-example only-show="code">
 <dt-banner kind="base" title="Optional banner title"> Message body </dt-banner>
 <dt-banner kind="error" title="Optional banner title"> Message body </dt-banner>
 <dt-banner kind="info" title="Optional banner title"> Message body </dt-banner>
@@ -71,21 +68,19 @@ vueCode='
 <dt-banner background-image="{$background-image}" background-size="contain"> Message body </dt-banner>
 <dt-banner pinned="true" kind="warning" title="Optional banner title"> Message body </dt-banner>
 <dt-banner important="true" kind="warning" title="Optional banner title"> Message body </dt-banner>
-'
-/>
+</code-example>
 
 ### Pinned
 
 Pins the banner to the top of the window.
 
-<code-well-header>
+<code-example only-show="demo">
     <dt-stack direction="row">
         <dt-button @click="toggleBanner('example-pinned')">Toggle Example</dt-button>
     </dt-stack>
-</code-well-header>
+</code-example>
 
 <dt-banner
-  ref="pinnedExample"
   :pinned="true"
   title="Optional banner title"
   v-show="shownBanner === 'example-pinned'"
@@ -97,9 +92,7 @@ Pins the banner to the top of the window.
   </template>
 </dt-banner>
 
-<code-example-tabs
-:htmlCode='() => $refs.pinnedExample'
-vueCode='
+<code-example only-show="code">
 <dt-banner
   :pinned="true"
   title="Optional banner title"
@@ -109,8 +102,7 @@ vueCode='
     <dt-button size="sm" kind="muted" importance="outlined">Action</dt-button>
   </template>
 </dt-banner>
-'
-/>
+</code-example>
 
 ## Vue API
 

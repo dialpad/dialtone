@@ -17,13 +17,11 @@ keywords: ["pager", "page navigation", "page numbers", "d-pagination", "DtPagina
 
 <component-combinator component-name="DtPagination" />
 
-<code-example-tabs
-vueCode='
-<dt-pagination
-  :total-pages="25"
-/>
-'
-/>
+<code-example only-show="code">
+  <dt-pagination
+    :total-pages="25"
+  />
+</code-example>
 
 <!-- <component-combinator component-name="DtPagination" /> -->
 
@@ -31,43 +29,21 @@ vueCode='
 
 ### With Active Page
 
-<code-well-header>
+<code-example>
   <dt-pagination
-    ref="activePage"
     :total-pages="25"
     :active-page="5"
   />
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.activePage'
-vueCode='
-<dt-pagination
-  :total-pages="25"
-  :active-page="5"
-/>
-'
-/>
+</code-example>
 
 ### With Max-Visible
 
-<code-well-header>
+<code-example>
   <dt-pagination
-    ref="maxVisible"
     :total-pages="25"
     :max-visible="7"
   />
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.maxVisible'
-vueCode='
-<dt-pagination
-  :total-pages="25"
-  :max-visible="7"
-/>
-'
-/>
+</code-example>
 
 ## Vue API
 
