@@ -232,6 +232,122 @@ showHtmlWarning />
     });
   });
 
+  describe('Quote-tracking for multi-line vueCode', () => {
+    it('does not false-positive on > inside quoted vueCode attribute', () => {
+      const content = `
+<code-well-header>
+  <dt-button ref="example">Click</dt-button>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.example'
+vueCode='
+<dt-button>
+  <template #startIcon>
+    <dt-icon name="phone" />
+  </template>
+  Click
+</dt-button>
+'
+showHtmlWarning />
+`;
+      const violations = lintContent('button.md', content);
+      assert.equal(violations.length, 0);
+    });
+
+    it('correctly detects tag close after multi-line quoted attrs end', () => {
+      const content = `
+<code-well-header>
+  <dt-notice kind="base" title="Base" />
+</code-well-header>
+
+<code-example-tabs
+htmlCode='
+<aside>...</aside>
+'
+vueCode='
+<dt-notice kind="base" />
+'
+showHtmlWarning />
+`;
+      const violations = lintContent('notice.md', content);
+      assert.equal(violations.length, 1);
+      assert.equal(violations[0].check, 'static-htmlCode');
+    });
+  });
+
+  describe('Base component class detection (no BEM modifier)', () => {
+    it('flags base component class without __ or -- modifier', () => {
+      const content = `
+<code-well-header>
+  <div class="d-badge">Label</div>
+</code-well-header>
+`;
+      const violations = lintContent('badge.md', content);
+      const rawViolations = violations.filter(v => v.check === 'raw-html-in-header');
+      assert.ok(rawViolations.length > 0, 'Should flag base component class d-badge');
+    });
+
+    it('does not flag utility classes that start like a component name', () => {
+      const content = `
+<code-well-header>
+  <div class="d-w100p d-p16 d-bgc-secondary">
+    <dt-button>Click</dt-button>
+  </div>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode='() => $refs.example'
+vueCode='<dt-button>Click</dt-button>'
+showHtmlWarning />
+`;
+      const violations = lintContent('button.md', content);
+      const rawViolations = violations.filter(v => v.check === 'raw-html-in-header');
+      assert.equal(rawViolations.length, 0);
+    });
+  });
+
+  describe('Disable comment window', () => {
+    it('does not disable a block more than 2 lines away', () => {
+      const content = `
+<code-well-header>
+  <dt-notice kind="base" title="Base" />
+</code-well-header>
+
+<!-- lint-doc-examples-disable -->
+
+
+<code-example-tabs
+htmlCode='
+<aside class="d-notice">...</aside>
+'
+vueCode='<dt-notice />'
+showHtmlWarning />
+`;
+      const violations = lintContent('notice.md', content);
+      // The disable comment is 3+ lines before the tag — should NOT be suppressed
+      assert.ok(violations.length > 0, 'Disable comment too far away should not suppress');
+    });
+
+    it('disables when comment is immediately before the block', () => {
+      const content = `
+<code-well-header>
+  <dt-notice kind="base" title="Base" />
+</code-well-header>
+
+<!-- lint-doc-examples-disable -->
+<code-example-tabs
+htmlCode='
+<aside class="d-notice">...</aside>
+'
+vueCode='<dt-notice />'
+showHtmlWarning />
+`;
+      const violations = lintContent('notice.md', content);
+      assert.equal(violations.length, 0, 'Disable comment on previous line should suppress');
+    });
+  });
+
   describe('Multiple blocks in one file', () => {
     it('detects violations in multiple blocks independently', () => {
       const content = `

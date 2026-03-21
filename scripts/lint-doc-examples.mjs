@@ -9,14 +9,15 @@
  * 3. No raw HTML component representations in code-well-header
  *
  * Usage:
- *   node scripts/lint-doc-examples.mjs [--warn] [--fix-list]
+ *   node scripts/lint-doc-examples.mjs [--warn] [--fix-list] [file ...]
  *   --warn      Print warnings but exit 0 (default: exit 1 on violations)
  *   --fix-list  Print a machine-readable list of files needing fixes
+ *   file ...    Lint only specific files (used by lint-staged)
  */
 
 import { createRequire } from 'node:module';
 import { readFileSync, readdirSync } from 'node:fs';
-import { join, basename } from 'node:path';
+import { join, basename, resolve } from 'node:path';
 
 const DOCS_DIR = join(import.meta.dirname, '..', 'apps', 'dialtone-documentation', 'docs', 'components');
 
@@ -48,9 +49,12 @@ const componentPrefixes = COMPONENTS_LIST.map(filename => {
 });
 
 const prefixAlternation = componentPrefixes.join('|');
+// Match component classes with or without BEM modifiers (d-card, d-card__content, d-btn--primary)
 const COMPONENT_CLASS_PATTERN = new RegExp(
-  `class="[^"]*\\bd-(?:${prefixAlternation})(?:__|--)[^"]*"`,
+  `class="[^"]*\\bd-(?:${prefixAlternation})(?:__|--|\\b)[^"]*"`,
 );
+
+const STATIC_HTMLCODE_RE = /(?<![:])\bhtmlCode='/;
 
 function findDisabledLines (lines) {
   const disabled = new Set();
@@ -63,7 +67,8 @@ function findDisabledLines (lines) {
 }
 
 function isDisabledNearLine (disabledLines, lineIndex) {
-  for (let d = lineIndex - 1; d >= Math.max(0, lineIndex - 5); d--) {
+  // Check only the 2 lines immediately before (tighter than 5)
+  for (let d = lineIndex - 1; d >= Math.max(0, lineIndex - 2); d--) {
     if (disabledLines.has(d)) return true;
   }
   return false;
@@ -72,6 +77,7 @@ function isDisabledNearLine (disabledLines, lineIndex) {
 function checkCodeExampleTabs (lines, filename, disabledLines) {
   const violations = [];
   let inTag = false;
+  let inQuotedAttr = false;
   let tagStartLine = 0;
   let tagContent = '';
   let lastHeaderEndLine = -1;
@@ -85,6 +91,7 @@ function checkCodeExampleTabs (lines, filename, disabledLines) {
 
     if (trimmed.startsWith('<code-example-tabs')) {
       inTag = true;
+      inQuotedAttr = false;
       tagStartLine = i;
       tagContent = '';
     }
@@ -92,12 +99,17 @@ function checkCodeExampleTabs (lines, filename, disabledLines) {
     if (inTag) {
       tagContent += lines[i] + '\n';
 
-      if (trimmed.includes('/>') || (trimmed.includes('>') && !trimmed.startsWith('<code-example-tabs'))) {
+      // Track single-quote state to avoid false positives on > inside quoted attrs
+      const singleQuotes = (trimmed.match(/'/g) || []).length;
+      if (singleQuotes % 2 !== 0) inQuotedAttr = !inQuotedAttr;
+
+      // Only detect tag close when not inside a quoted attribute
+      if (!inQuotedAttr && (trimmed === '/>' || trimmed.endsWith('/>'))) {
         inTag = false;
 
         if (isDisabledNearLine(disabledLines, tagStartLine)) continue;
 
-        if (tagContent.match(/(?<![:])\bhtmlCode='/)) {
+        if (STATIC_HTMLCODE_RE.test(tagContent)) {
           violations.push({
             file: filename,
             line: tagStartLine + 1,
@@ -176,20 +188,31 @@ function lintFile (filepath) {
 }
 
 function main () {
-  const args = process.argv.slice(2);
-  const warnOnly = args.includes('--warn');
-  const fixList = args.includes('--fix-list');
+  const flags = [];
+  const fileArgs = [];
+  for (const arg of process.argv.slice(2)) {
+    if (arg.startsWith('--')) flags.push(arg);
+    else fileArgs.push(arg);
+  }
 
+  const warnOnly = flags.includes('--warn');
+  const fixList = flags.includes('--fix-list');
+
+  // Use file args from lint-staged if provided, otherwise scan the directory
   let files;
-  try {
-    files = readdirSync(DOCS_DIR)
-      .filter(f => f.endsWith('.md'))
-      .map(f => join(DOCS_DIR, f))
-      .sort();
-  } catch (err) {
-    console.error(`Error reading docs directory: ${DOCS_DIR}`);
-    console.error(err.message);
-    process.exit(1);
+  if (fileArgs.length > 0) {
+    files = fileArgs.map(f => resolve(f)).filter(f => f.endsWith('.md'));
+  } else {
+    try {
+      files = readdirSync(DOCS_DIR)
+        .filter(f => f.endsWith('.md'))
+        .map(f => join(DOCS_DIR, f))
+        .sort();
+    } catch (err) {
+      console.error(`Error reading docs directory: ${DOCS_DIR}`);
+      console.error(err.message);
+      process.exit(1);
+    }
   }
 
   const allViolations = [];
