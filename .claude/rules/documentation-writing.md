@@ -54,12 +54,27 @@ Prefer the unified `<code-example>` component. The slot content is the single so
 
 ### When to use `vueCode` override
 
-Only add an explicit `vueCode` prop when the displayed code is genuinely different from the slot:
-- The slot has **interactive state** (v-model, toggles) that the code should simplify
-- The slot uses a **custom example wrapper** (`<example-modal>`) that the code should expand
-- The structure is **fundamentally different** (e.g., a `<table>` demo vs a flat component list)
+Only add `vueCode` when the code tab must show something **genuinely different** from the slot:
 
-Do NOT use `vueCode` just because the slot has a `<dt-stack>` wrapper — that's useful context for users.
+**Valid reasons for override:**
+
+- Slot uses a **custom example wrapper** (`<example-modal>`, `<example-popover>`, `<ExampleProfileCard>`) — code expands to real component markup
+- Slot has **interactive page state** (v-model, toggles, event handlers) — code shows simplified static version
+- Slot uses **v-for with page data** — code shows single static example
+- Code uses **placeholder syntax** (`{{props}}`, `....`) for API reference
+- Slot has **demo-only styling on child elements** (e.g., `d-bgc-moderate-opaque d-p16 d-bar8` on each child to make items visible) — code shows clean API
+
+**NOT valid reasons (remove the vueCode):**
+
+- Slot is wrapped in a clean `<dt-stack>` / `<div>` with layout props — the wrapper IS useful context
+- Only difference is `class="d-w100p"` or similar layout constraint on the wrapper
+- Only difference is formatting, whitespace, or self-closing style
+- vueCode strips the wrapper but the inner components are identical
+
+**Never:**
+
+- Use `vueCode` with an empty slot — slot must always have content
+- Self-close `<code-example />` — always use `</code-example>`
 
 ### Rules
 
@@ -71,6 +86,7 @@ Do NOT use `vueCode` just because the slot has a `<dt-stack>` wrapper — that's
 ### Legacy pattern (still supported)
 
 The old `<code-well-header>` + `<code-example-tabs>` pattern still works. When using it:
+
 - Add `ref="descriptiveName"` to the outermost element in `<code-well-header>`
 - Bind `:htmlCode='() => $refs.refName'` — never static inline HTML strings
 - Always include `showHtmlWarning`
