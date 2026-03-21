@@ -32,43 +32,13 @@ With this we accomplish the requirement to have the previous year button focused
 
 ### Default
 
-<code-example vueCode='
-<dt-datepicker :selected-date="new Date()"></dt-datepicker>
-'>
+<code-example>
   <dt-datepicker></dt-datepicker>
 </code-example>
 
 ### With Popover
 
-<code-example vueCode='
-<dt-popover
-  :open="datepickerOpened"
-  initial-focus-element="#prevYearButton"
-  padding="none"
-  @opened="(open) => { datepickerOpened = open }"
-  placement="bottom-start"
->
-  <template #anchor>
-    <dt-button
-      size="sm"
-      circle
-      importance="clear"
-      aria-label="Open datepicker"
-      @click="toggleDatepicker"
-    >
-      <template #startIcon>
-        <dt-icon
-          name="calendar"
-          size="300"
-        />
-      </template>
-    </dt-button>
-  </template>
-  <template #content>
-    <dt-datepicker></dt-datepicker>
-  </template>
-</dt-popover>
-'>
+<code-example>
   <dt-popover
     :open="datepickerOpened"
     initial-focus-element="#prevYearButton"

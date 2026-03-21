@@ -61,9 +61,7 @@ keywords: ["loading placeholder", "shimmer", "ghost", "d-skeleton", "DtSkeleton"
 
 ### Default
 
-<code-example vueCode='
-<dt-skeleton :animate="false" arial-label="Loading" />
-'>
+<code-example>
   <div class="d-w50p">
     <dt-skeleton :animate="false" arial-label="Loading" />
   </div>
@@ -71,9 +69,7 @@ keywords: ["loading placeholder", "shimmer", "ghost", "d-skeleton", "DtSkeleton"
 
 ### Animation
 
-<code-example vueCode='
-<dt-skeleton arial-label="Loading" />
-'>
+<code-example>
   <div class="d-w50p">
     <dt-skeleton arial-label="Loading" />
   </div>
@@ -83,15 +79,7 @@ keywords: ["loading placeholder", "shimmer", "ghost", "d-skeleton", "DtSkeleton"
 
 To customize a non-animating Skeleton background color modify the `--placeholder-from-color` variable with an inline `style`.
 
-<code-example vueCode='
-<dt-skeleton
-  :animate="false"
-  :text-option="{
-    style: `--placeholder-from-color: var(--dt-color-blue-400)`,
-  }"
-  arial-label="Loading"
-/>
-'>
+<code-example>
   <div class="d-w50p">
     <dt-skeleton
       :animate="false"
@@ -105,14 +93,7 @@ To customize a non-animating Skeleton background color modify the `--placeholder
 
 Customize an animating Skeleton by modifying the `--placeholder-from-color` and `--placeholder-to-color` variables with an inline `style`.
 
-<code-example vueCode='
-<dt-skeleton
-  :text-option="{
-    style: `--placeholder-from-color: var(--dt-color-blue-400); --placeholder-to-color: var(--dt-color-blue-200);`,
-  }"
-  arial-label="Loading"
-/>
-'>
+<code-example>
   <div class="d-w50p">
     <dt-skeleton
       :text-option="{
@@ -129,11 +110,7 @@ Customize an animating Skeleton by modifying the `--placeholder-from-color` and 
 
 Default sizes match the avatar size. Size is customizable when needed.
 
-<code-example bgclass="d-ai-flex-start" vueCode='
-<dt-skeleton :shape-option="{ shape: `circle`, size: `sm` }" :animate="false" />
-<dt-skeleton :shape-option="{ shape: `circle` }" :animate="false" />
-<dt-skeleton :shape-option="{ shape: `circle`, size: `lg` }" :animate="false" />
-'>
+<code-example bgclass="d-ai-flex-start">
   <div>
     <p>S (24x24px)</p>
     <dt-skeleton :shape-option="{ shape: 'circle', size: 'sm' }" :animate="false" />
@@ -146,11 +123,7 @@ Default sizes match the avatar size. Size is customizable when needed.
 
 ### Image / Icon
 
-<code-example bgclass="d-ai-flex-start" vueCode='
-<dt-skeleton :shape-option="{ shape: `square`, size: `sm` }" :animate="false" />
-<dt-skeleton :shape-option="{ shape: `square` }" :animate="false" />
-<dt-skeleton :shape-option="{ shape: `square`, size: `lg` }" :animate="false" />
-'>
+<code-example bgclass="d-ai-flex-start">
   <div>
     <p>S (24x24px)</p>
     <dt-skeleton :shape-option="{ shape: 'square', size: 'sm' }" :animate="false" />
@@ -163,11 +136,7 @@ Default sizes match the avatar size. Size is customizable when needed.
 
 ### Headings
 
-<code-example bgclass="d-ai-flex-start" vueCode='
-<dt-skeleton :text-option="{ type: `heading`, headingHeight: `sm`, width: `160px` }" :animate="false" />
-<dt-skeleton :text-option="{ type: `heading`, width: `240px` }" :animate="false" />
-<dt-skeleton :text-option="{ type: `heading`, headingHeight: `lg`, width: `320px` }" :animate="false" />
-'>
+<code-example bgclass="d-ai-flex-start">
   <div>
     <p>Small</p>
     <dt-skeleton :text-option="{ type: 'heading', headingHeight: 'sm', width: '160px' }" :animate="false" />
@@ -182,15 +151,7 @@ Default sizes match the avatar size. Size is customizable when needed.
 
 ### Paragraphs
 
-<code-example vueCode='
-<dt-skeleton
-  :paragraph-option="{
-    rows: 5,
-    randomWidth: true,
-  }"
-  :animate="false"
-/>
-'>
+<code-example>
   <div class="d-w50p">
     <dt-skeleton :paragraph-option="{ rows: 5, randomWidth: true }" :animate="false" />
   </div>
@@ -198,16 +159,7 @@ Default sizes match the avatar size. Size is customizable when needed.
 
 ### Avatar + Name
 
-<code-example vueCode='
-<dt-skeleton
-  :list-item-option="{
-    shapeSize: `sm`,
-    paragraphs: {
-      rows: 1,
-    },
-  }"
-/>
-'>
+<code-example>
   <div class="d-w50p">
     <dt-skeleton
       :list-item-option="{ shapeSize: 'sm', paragraphs: { rows: 1 } }"
@@ -217,17 +169,7 @@ Default sizes match the avatar size. Size is customizable when needed.
 
 ### Icon + Text
 
-<code-example vueCode='
-<dt-skeleton
-  :list-item-option="{
-    shapeSize: `2rem`,
-    shape: `square`,
-    paragraphs: {
-      rows: 1,
-    },
-  }"
-/>
-'>
+<code-example>
   <div class="d-w50p">
     <dt-skeleton
       :list-item-option="{
@@ -243,19 +185,7 @@ Default sizes match the avatar size. Size is customizable when needed.
 
 ### Messages / Transcript / Comment
 
-<code-example vueCode='
-<dt-skeleton
-  :list-item-option="{
-    shapeSize: `3.6rem`,
-    paragraphs: {
-      rows: 4,
-      width: [
-        `120px`, `311px`, `371px`, `279px`,
-      ],
-    },
-  }"
-/>
-'>
+<code-example>
   <div class="d-w50p">
     <dt-skeleton
       :list-item-option="{

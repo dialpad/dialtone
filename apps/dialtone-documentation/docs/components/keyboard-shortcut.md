@@ -42,9 +42,7 @@ Keyboard shortcut outlines a key combination with a border to represent a keyboa
 
 In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#inverting) on the component element.
 
-<code-example vueCode='
-<dt-keyboard-shortcut v-dt-mode:invert shortcut="{cmd}+Ctrl+X" />
-'>
+<code-example>
   <div class="d-bgc-contrast d-p16">
     <dt-keyboard-shortcut v-dt-mode:invert shortcut="{cmd}+Ctrl+X" />
   </div>

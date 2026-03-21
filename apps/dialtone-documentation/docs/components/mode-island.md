@@ -167,11 +167,7 @@ keywords: ["theme island","mode override","v-dt-mode","directive","light","dark"
 
 Use the `v-dt-mode` directive to control the color mode of a region, component, or element. It creates a scoped region with the specified mode. Descendant elements retain their original styling but are rendered with the specified mode.
 
-<code-example vueCode='
-<dt-text v-dt-mode:dark tone="success"> Dark content </dt-text>
-<dt-text v-dt-mode:light tone="success"> Light content </dt-text>
-<dt-text v-dt-mode:invert tone="success"> Inverted — opposite of parent or root </dt-text>
-'>
+<code-example>
   <dt-stack gap="400">
     <dt-text v-dt-mode:dark tone="success"> Dark content </dt-text>
     <dt-text v-dt-mode:light tone="success"> Light content </dt-text>
@@ -185,12 +181,7 @@ This effectively removes the need for `inverted` props or variants on elements o
 
 For example, instead of using `inverted` on a DtButton, use `v-dt-mode:invert`
 
-<code-example only-show="code">
-  <dt-button>Button</dt-button>
-  <dt-button v-dt-mode:invert>Button</dt-button>
-</code-example>
-
-<code-example only-show="demo">
+<code-example>
   <dt-stack gap="400" direction="row">
     <dt-button>Button</dt-button>
     <dt-button v-dt-mode:invert>Button</dt-button>
@@ -201,9 +192,7 @@ For example, instead of using `inverted` on a DtButton, use `v-dt-mode:invert`
 
 Bind a reactive variable as the directive arg to switch modes at runtime.
 
-<code-example vueCode='
-<dt-text v-dt-mode:[dynamicMode] align="center" tone="success"> {{ dynamicMode }} mode content </dt-text>
-'>
+<code-example>
   <dt-stack gap="500">
     <dt-stack gap="400" direction="row">
       <dt-button
@@ -311,11 +300,7 @@ Explicitly set to light mode regardless of parent or root mode.
 
 Explicitly set to dark mode regardless of parent or root mode.
 
-<code-example vueCode='
-<section v-dt-mode:dark class="d-p16 d-bar8">
-  <dt-text as="p">Always dark mode</dt-text>
-</section>
-'>
+<code-example>
   <section v-dt-mode:dark class="d-p16 d-bar8">
     <dt-text as="p" tone="success">Always dark mode</dt-text>
   </section>
@@ -341,20 +326,7 @@ Mode boundaries can be nested. Each `v-dt-mode:invert` reads the nearest parent 
 
 The background surface of a Mode Island defaults to the root surface color. To override, use a CSS Utility class.
 
-<code-example vueCode='
-<dt-mode-island class="d-p16 d-bar8 d-w100p d-bgc-transparent">
-  <dt-button>Button</dt-button>
-</dt-mode-island>
-<dt-mode-island class="d-p16 d-bar8 d-w100p">
-  <dt-button>Button</dt-button>
-</dt-mode-island>
-<dt-mode-island mode="dark" class="d-p16 d-bar8 d-w100p d-bgc-critical">
-  <dt-button>Button</dt-button>
-</dt-mode-island>
-<dt-mode-island mode="light" class="d-p16 d-bar8 d-w100p d-bgc-critical">
-  <dt-button>Button</dt-button>
-</dt-mode-island>
-'>
+<code-example>
   <dt-mode-island class="d-p16 d-bar8 d-w100p d-bgc-transparent">
     <dt-stack gap="400">
       <dt-text as="p" kind="code" size="xs" tone="tertiary">Transparent background, inverted mode island</dt-text>
@@ -395,52 +367,7 @@ The background surface of a Mode Island defaults to the root surface color. To o
 
 A real-world pattern: the callbar container already exists as a semantic element. The directive applies mode theming directly — no wrapper needed.
 
-<code-example vueCode='
-<dt-stack v-dt-mode class="d-ba d-bc-subtle d-bgc-secondary d-p6 d-py4 d-bar12 d-bs-md d-w100p" direction="row" gap="600">
-  <dt-stack gap="400" direction="row">
-    <dt-avatar
-      full-name="TA"
-      seed="ted-anderson"
-      size="lg"
-    />
-    <dt-stack gap="200">
-      <dt-text kind="label" size="md" density="200">Ted Anderson</dt-text>
-      <dt-stack direction="row" gap="300" align="baseline">
-        <dt-text kind="body" size="xs" tone="tertiary" wrap="nowrap" numeric>(913) 555-6745</dt-text>
-        <dt-text kind="body" size="xs" tone="muted">&bull;</dt-text>
-        <dt-text kind="body" size="xs" tone="tertiary" numeric>21:18</dt-text>
-      </dt-stack>
-    </dt-stack>
-  </dt-stack>
-  <dt-stack class="d-fl1" direction="row" gap="200" justify="center">
-    <dt-button class="d-px8 d-w64 d-w64" size="xs" kind="danger">
-      <template #blockStartIcon> <dt-icon name="mic" size="300" /> </template>
-      Unmute
-    </dt-button>
-    <dt-button class="d-px8 d-w64 d-w64" size="xs" kind="muted" importance="clear">
-      <template #blockStartIcon> <dt-icon name="record-filled" size="300" /> </template>
-      Record
-    </dt-button>
-    <dt-button class="d-px8 d-w64 d-w64" size="xs" kind="muted" importance="clear">
-      <template #blockStartIcon> <dt-icon name="keypad" size="300" /> </template>
-      Keypad
-    </dt-button>
-    <dt-button class="d-px8 d-w64 d-w64" size="xs" kind="muted" importance="clear">
-      <template #blockStartIcon> <dt-icon name="user-plus" size="300" /> </template>
-      Add
-    </dt-button>
-    <dt-button class="d-px8 d-w64 d-w64" size="xs" kind="muted" importance="clear">
-      <template #blockStartIcon> <dt-icon name="more-horizontal" size="300" /> </template>
-      More
-    </dt-button>
-  </dt-stack>
-  <dt-stack>
-    <dt-button class="d-p12" circle size="lg" kind="danger">
-      <template #startIcon> <dt-icon name="phone-hang-up" size="500" /> </template>
-    </dt-button>
-  </dt-stack>
-</dt-stack>
-'>
+<code-example>
   <dt-stack v-dt-mode class="d-ba d-bc-subtle d-bgc-secondary d-p6 d-py4 d-bar12 d-bs-md d-w100p" direction="row" gap="600">
     <dt-stack gap="400" direction="row">
       <dt-avatar
