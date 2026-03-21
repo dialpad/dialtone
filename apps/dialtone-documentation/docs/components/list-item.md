@@ -48,7 +48,7 @@ The **subtitle** slot can be used to display content below the default slot. The
 The **bottom** slot can be used to display content below the subtitle slot.
 
 <code-well-header class="d-d-block">
-  <ul>
+  <ul ref="baseStyleExample">
     <dt-list-item navigation-type="tab">
       <template #start>
         <dt-icon size="300" name="check" />
@@ -68,44 +68,7 @@ The **bottom** slot can be used to display content below the subtitle slot.
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<ul>
-  <li id="dt4" class="d-list-item d-list-item--focusable" tabindex="0" role="listitem">
-    <div class="d-item-layout">
-      <section class="d-item-layout--left">
-        <span class="d-icon__wrapper">
-          <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-500" style="display: none;">
-            <div
-              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
-              style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-            ></div>
-          </div>
-          <svg>...</svg>
-        </span>
-      </section>
-      <section class="d-item-layout--content">
-        <div class="d-item-layout--subtitle">
-          {subtitle}
-        </div>
-        <div class="d-item-layout--bottom">
-          {bottom}
-        </div>
-      </section>
-      <section class="d-item-layout--right">
-        <span class="d-icon__wrapper">
-          <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-500" style="display: none;">
-            <div
-              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
-              style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-            ></div>
-          </div>
-          <svg>...</svg>
-        </span>
-      </section>
-    </div>
-  </li>
-</ul>
-'
+:htmlCode='() => $refs.baseStyleExample'
 vueCode='
 <ul>
   <dt-list-item navigation-type="tab">
@@ -125,7 +88,7 @@ vueCode='
   </dt-list-item>
 </ul>
 '
-/>
+showHtmlWarning />
 
 ## Variants
 

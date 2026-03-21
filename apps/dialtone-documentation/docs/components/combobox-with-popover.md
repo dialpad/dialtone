@@ -8,7 +8,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox-wit
 
 <code-well-header class="d-d-block">
   <dt-combobox-with-popover
-    ref="example-combobox"
+    ref="defaultExample"
     label="Label Text"
     :show-list="showList"
     content-width="anchor"
@@ -46,6 +46,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox-wit
 <!-- <component-combinator component-name="DtComboboxWithPopover" /> -->
 
 <code-example-tabs
+:htmlCode='() => $refs.defaultExample'
 vueCode='
 <dt-combobox-with-popover
   ref="comboboxWithPopover"
@@ -79,7 +80,7 @@ vueCode='
   </template>
 </dt-combobox-with-popover>
 '
-/>
+showHtmlWarning />
 
 ## Usage
 
@@ -107,7 +108,7 @@ You can add header and footer content to the popover using the `header` and `foo
 
 <code-well-header class="d-d-block">
   <dt-combobox-with-popover
-    ref="example-combobox-header-footer"
+    ref="headerFooterExample"
     label="Label Text"
     :show-list="showListHeaderFooter"
     content-width="anchor"
@@ -149,6 +150,7 @@ You can add header and footer content to the popover using the `header` and `foo
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.headerFooterExample'
 vueCode='
 <dt-combobox-with-popover
   label="Label Text"
@@ -180,7 +182,7 @@ vueCode='
   </template>
 </dt-combobox-with-popover>
 '
-/>
+showHtmlWarning />
 
 ## Content Mode
 
@@ -188,6 +190,7 @@ Combobox popover content renders outside the DOM tree. Use the `contentMode` pro
 
 <code-well-header>
   <dt-combobox-with-popover
+    ref="contentModeExample"
     content-mode="invert"
     label="Inverted Combobox"
     content-width="anchor"
@@ -207,12 +210,13 @@ Combobox popover content renders outside the DOM tree. Use the `contentMode` pro
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.contentModeExample'
 vueCode='
 <dt-combobox-with-popover content-mode="invert">...</dt-combobox-with-popover>
 <dt-combobox-with-popover content-mode="dark">...</dt-combobox-with-popover>
 <dt-combobox-with-popover content-mode="light">...</dt-combobox-with-popover>
 '
-/>
+showHtmlWarning />
 
 ## Vue API
 

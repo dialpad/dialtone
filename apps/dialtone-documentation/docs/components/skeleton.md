@@ -221,11 +221,12 @@ vueCode='
 
 <code-well-header>
   <div class="d-w50p">
-    <dt-skeleton :paragraph-option="{ rows: 5, randomWidth: true }" :animate="false" />
+    <dt-skeleton ref="paragraphsExample" :paragraph-option="{ rows: 5, randomWidth: true }" :animate="false" />
   </div>
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.paragraphsExample'
 vueCode='
 <dt-skeleton
   :paragraph-option="{
@@ -235,19 +236,21 @@ vueCode='
   :animate="false"
 />
 '
-/>
+showHtmlWarning />
 
 ### Avatar + Name
 
 <code-well-header>
   <div class="d-w50p">
     <dt-skeleton
+      ref="avatarNameExample"
       :list-item-option="{ shapeSize: 'sm', paragraphs: { rows: 1 } }"
     />
   </div>
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.avatarNameExample'
 vueCode='
 <dt-skeleton
   :list-item-option="{
@@ -258,13 +261,14 @@ vueCode='
   }"
 />
 '
-/>
+showHtmlWarning />
 
 ### Icon + Text
 
 <code-well-header>
   <div class="d-w50p">
     <dt-skeleton
+      ref="iconTextExample"
       :list-item-option="{
         shapeSize: '2rem',
         shape: 'square',
@@ -277,6 +281,7 @@ vueCode='
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.iconTextExample'
 vueCode='
 <dt-skeleton
   :list-item-option="{
@@ -288,13 +293,14 @@ vueCode='
   }"
 />
 '
-/>
+showHtmlWarning />
 
 ### Messages / Transcript / Comment
 
 <code-well-header>
   <div class="d-w50p">
     <dt-skeleton
+      ref="messagesExample"
       :list-item-option="{
         shapeSize: '3.6rem',
         paragraphs: {
@@ -309,6 +315,7 @@ vueCode='
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.messagesExample'
 vueCode='
 <dt-skeleton
   :list-item-option="{
@@ -322,7 +329,7 @@ vueCode='
   }"
 />
 '
-/>
+showHtmlWarning />
 
 ## Accessibility
 

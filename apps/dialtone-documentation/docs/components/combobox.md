@@ -66,58 +66,7 @@ This will usually be the [List Item component](/components/list-item.md).
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div>
-  <div class="base-input">
-    <label class="base-input__label">
-      <div class="base-input__label-text d-label">Label Text</div>
-      <div class="d-input__wrapper">
-        <input
-          name=""
-          type="text"
-          autocomplete="off"
-          class="base-input__input d-input"
-          placeholder="Type to show the items"
-          role="combobox"
-          aria-label="Label Text"
-          aria-expanded="true"
-          aria-owns="dt618"
-          aria-haspopup="listbox"
-          aria-controls="dt618"
-        />
-      </div>
-    </label>
-  </div>
-  <div>
-    <ol
-      role="listbox"
-      class="d-ps-relative d-p0 d-mt8 d-hmx332 d-of-y-auto"
-      aria-label="Label Text"
-    >
-      <li
-        class="d-list-item"
-        tabindex="-1"
-        role="option"
-        aria-selected="false"
-      >
-        <div class="d-item-layout">
-          <section class="d-item-layout--left">
-            <div class="d-avatar d-avatar--md" data-avatar-family="5" data-avatar-variant="3">
-              <div class="d-avatar__canvas">
-                <span class="d-avatar__initials">1</span>
-              </div>
-            </div>
-          </section>
-          <section class="d-item-layout--content">
-            <div class="d-item-layout--title">combobox item 1</div>
-          </section>
-        </div>
-      </li>
-      ...
-    </ol>
-  </div>
-</div>
-'
+:htmlCode="() => $refs['example-combobox']"
 vueCode='
 <dt-combobox
   :show-list="!!value"
@@ -160,7 +109,7 @@ vueCode='
   </template>
 </dt-combobox>
 '
-/>
+showHtmlWarning />
 
 ## With Empty List Item
 

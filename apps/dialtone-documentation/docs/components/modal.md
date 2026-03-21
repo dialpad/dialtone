@@ -68,49 +68,11 @@ Although highly versatile, this doesn't mean modal dialogs are fit for all purpo
 ### Base Style
 
 <code-well-header>
-  <example-modal />
+  <example-modal ref="baseExample" />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<button type="button" class="base-button__button d-btn d-btn--primary">
-  <span class="d-btn__label base-button__label"> Click to open </span>
-</button>
-<aside id="modal-base" class="d-modal d-m0 d-modal--animate-in" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-describedby="modal-description" aria-hidden="false">
-  <div class="d-modal__dialog d-modal__dialog--animate-in" role="document">
-    <h2 class="d-modal__header">
-      Example title
-    </h2>
-    <div class="d-modal__content">
-      <p id="modal-description">
-        Sed at orci quis nunc finibus gravida eget vitae est...
-      </p>
-      <p class="d-mt16"><a href="#" class="d-link">Show me a modal banner</a></p>
-    </div>
-    <footer class="d-modal__footer">
-      <button class="d-btn d-btn--primary" type="button">
-        Save changes
-      </button>
-      <button class="d-btn" type="button">
-        Cancel
-      </button>
-    </footer>
-    <button class="d-modal__close d-btn d-btn--circle d-btn--lg" aria-label="Close">
-      <span class="d-btn__icon">
-        <span class="d-icon__wrapper">
-          <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-300" style="display: none;">
-            <div
-              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
-              style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-            ></div>
-          </div>
-          <svg>...</svg>
-        </span>
-      </span>
-    </button>
-  </div>
-</aside>
-'
+:htmlCode='() => $refs.baseExample'
 vueCode='
 <dt-modal
   title="Example title"
@@ -150,49 +112,11 @@ showHtmlWarning />
 This is the default behavior that adds the scroll automatically in the modal content and leaves the header and footer fixed.
 
 <code-well-header>
-  <example-modal fixed-header-footer :copy="fixedHeaderFooterCopy" />
+  <example-modal ref="fixedHeaderFooterExample" fixed-header-footer :copy="fixedHeaderFooterCopy" />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<button type="button" class="base-button__button d-btn d-btn--primary">
-  <span class="d-btn__label base-button__label"> Click to open </span>
-</button>
-<aside id="modal-base" class="d-modal d-m0 d-modal--animate-in" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-describedby="modal-description" aria-hidden="false">
-  <div class="d-modal__dialog d-modal__dialog--animate-in d-modal__dialog--scrollable d-hmx764" role="document">
-    <h2 class="d-modal__header">
-      Example title
-    </h2>
-    <div class="d-modal__content">
-      <p id="modal-description">
-        Sed at orci quis nunc finibus gravida eget vitae est...
-      </p>
-      <p class="d-mt16"><a href="#" class="d-link">Show me a modal banner</a></p>
-    </div>
-    <footer class="d-modal__footer">
-      <button class="d-btn d-btn--primary" type="button">
-        Save changes
-      </button>
-      <button class="d-btn" type="button">
-        Cancel
-      </button>
-    </footer>
-    <button class="d-modal__close d-btn d-btn--circle d-btn--lg" aria-label="Close">
-      <span class="d-btn__icon">
-        <span class="d-icon__wrapper">
-          <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-300" style="display: none;">
-            <div
-              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
-              style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-            ></div>
-          </div>
-          <svg>...</svg>
-        </span>
-      </span>
-    </button>
-  </div>
-</aside>
-'
+:htmlCode='() => $refs.fixedHeaderFooterExample'
 vueCode='
 <dt-modal
   title="Example title"
@@ -234,49 +158,11 @@ showHtmlWarning />
 A modal style for destructive or irreversible actions.
 
 <code-well-header>
-  <example-modal kind="danger" />
+  <example-modal ref="dangerExample" kind="danger" />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<button type="button" class="base-button__button d-btn d-btn--primary">
-  <span class="d-btn__label base-button__label"> Click to open </span>
-</button>
-<aside id="modal-base" class="d-modal d-m0 d-modal--danger d-modal--animate-in" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-describedby="modal-description" aria-hidden="false">
-  <div class="d-modal__dialog d-modal__dialog--animate-in" role="document">
-    <h2 class="d-modal__header">
-      Example title
-    </h2>
-    <div class="d-modal__content">
-      <p id="modal-description">
-        Sed at orci quis nunc finibus gravida eget vitae est...
-      </p>
-      <p class="d-mt16"><a href="#" class="d-link">Show me a modal banner</a></p>
-    </div>
-    <footer class="d-modal__footer">
-      <button class="d-btn d-btn--primary d-btn--danger" type="button">
-        Save changes
-      </button>
-      <button class="d-btn d-btn--muted" type="button">
-        Cancel
-      </button>
-    </footer>
-    <button class="d-modal__close d-btn d-btn--circle d-btn--lg" aria-label="Close">
-      <span class="d-btn__icon">
-        <span class="d-icon__wrapper">
-          <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-300" style="display: none;">
-            <div
-              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
-              style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-            ></div>
-          </div>
-          <svg>...</svg>
-        </span>
-      </span>
-    </button>
-  </div>
-</aside>
-'
+:htmlCode='() => $refs.dangerExample'
 vueCode='
 <dt-modal
   title="Example title"
@@ -318,49 +204,11 @@ showHtmlWarning />
 To make this modal take up as much of the screen as possible.
 
 <code-well-header>
-  <example-modal size="full" />
+  <example-modal ref="fullScreenExample" size="full" />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<button type="button" class="base-button__button d-btn d-btn--primary">
-  <span class="d-btn__label base-button__label"> Click to open </span>
-</button>
-<aside id="modal-base" class="d-modal d-m0 d-modal--full d-modal--animate-in" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-describedby="modal-description" aria-hidden="false">
-  <div class="d-modal__dialog d-modal__dialog--animate-in" role="document">
-    <h2 class="d-modal__header">
-      Example title
-    </h2>
-    <div class="d-modal__content">
-      <p id="modal-description">
-        Sed at orci quis nunc finibus gravida eget vitae est...
-      </p>
-      <p class="d-mt16"><a href="#" class="d-link">Show me a modal banner</a></p>
-    </div>
-    <footer class="d-modal__footer">
-      <button class="d-btn d-btn--primary" type="button">
-        Save changes
-      </button>
-      <button class="d-btn" type="button">
-        Cancel
-      </button>
-    </footer>
-    <button class="d-modal__close d-btn d-btn--circle d-btn--lg" aria-label="Close">
-      <span class="d-btn__icon">
-        <span class="d-icon__wrapper">
-          <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-300" style="display: none;">
-            <div
-              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
-              style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-            ></div>
-          </div>
-          <svg>...</svg>
-        </span>
-      </span>
-    </button>
-  </div>
-</aside>
-'
+:htmlCode='() => $refs.fullScreenExample'
 vueCode='
 <dt-modal
   title="Example title"
@@ -401,7 +249,7 @@ showHtmlWarning />
 When there is a need of more context information regarding the content of the Modal
 
 <code-well-header>
-  <dt-stack direction="row" gap="500" align="end">
+  <dt-stack ref="hasBannerExample" direction="row" gap="500" align="end">
     <dt-select-menu
       label="Kind of Banner"
       size="md"
@@ -420,45 +268,7 @@ When there is a need of more context information regarding the content of the Mo
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<button type="button" class="base-button__button d-btn d-btn--primary">
-  <span class="d-btn__label base-button__label"> Click to open </span>
-</button>
-<aside id="modal-base" class="d-modal d-m0 d-modal--animate-in" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-describedby="modal-description" aria-hidden="false">
-  <div class="d-modal__banner d-modal__banner--success">This banner can have different kinds.</div>
-  <div class="d-modal__dialog d-modal__dialog--animate-in" role="document">
-    <h2 class="d-modal__header">
-      Example title
-    </h2>
-    <div class="d-modal__content">
-      <p id="modal-description">
-        Sed at orci quis nunc finibus gravida eget vitae est...
-      </p>
-    </div>
-    <footer class="d-modal__footer">
-      <button class="d-btn d-btn--primary" type="button">
-        Save changes
-      </button>
-      <button class="d-btn" type="button">
-        Cancel
-      </button>
-    </footer>
-    <button class="d-modal__close d-btn d-btn--circle d-btn--lg" aria-label="Close">
-      <span class="d-btn__icon">
-        <span class="d-icon__wrapper">
-          <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-300" style="display: none;">
-            <div
-              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
-              style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-            ></div>
-          </div>
-          <svg>...</svg>
-        </span>
-      </span>
-    </button>
-  </div>
-</aside>
-'
+:htmlCode='() => $refs.hasBannerExample'
 vueCode='
 <dt-modal
   title="Example title"
@@ -504,27 +314,30 @@ In addition to the footer, custom elements can be inserted into the header and b
 **Please note:** supplied header or body slots will take the place of any provided "title" or "copy" text, respectively.
 
 <code-well-header>
-  <dt-modal
-    :show="isOpen"
-    @update:show="updateShow"
-  >
-    <template #header>
-      <dt-stack direction="row" align="center" justify="center" class="d-p12 d-bgc-purple-100">
-        <div>Custom header</div>
+  <div ref="customHeaderExample">
+    <dt-modal
+      :show="isOpen"
+      @update:show="updateShow"
+    >
+      <template #header>
+        <dt-stack direction="row" align="center" justify="center" class="d-p12 d-bgc-purple-100">
+          <div>Custom header</div>
+        </dt-stack>
+      </template>
+      <dt-stack direction="row" align="center" justify="center" class="d-p32 d-bgc-gold-200">
+        <h2>Custom content</h2>
       </dt-stack>
-    </template>
-    <dt-stack direction="row" align="center" justify="center" class="d-p32 d-bgc-gold-200">
-      <h2>Custom content</h2>
-    </dt-stack>
-  </dt-modal>
-  <dt-button
-    @click="openModal"
-  >
-    Click to open
-  </dt-button>
+    </dt-modal>
+    <dt-button
+      @click="openModal"
+    >
+      Click to open
+    </dt-button>
+  </div>
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.customHeaderExample'
 vueCode='
 <dt-modal
   :show="isOpen"
@@ -540,30 +353,33 @@ vueCode='
   </dt-stack>
 </dt-modal>
 '
-/>
+showHtmlWarning />
 
 ## Content Mode
 
 Modal content renders outside the DOM tree. Use the `contentMode` prop to apply color mode (invert, light, dark) to the positioned content. See [Positioned Components](/components/mode-island.html#positioned-components) for details.
 
 <code-well-header>
-  <dt-button @click="invertedModalOpen = true">Open Inverted Modal</dt-button>
-  <dt-modal
-    content-mode="invert"
-    title="Inverted Modal"
-    copy="This modal's content is in the inverted mode."
-    :show="invertedModalOpen"
-    @update:show="invertedModalOpen = $event"
-  />
+  <div ref="contentModeExample">
+    <dt-button @click="invertedModalOpen = true">Open Inverted Modal</dt-button>
+    <dt-modal
+      content-mode="invert"
+      title="Inverted Modal"
+      copy="This modal's content is in the inverted mode."
+      :show="invertedModalOpen"
+      @update:show="invertedModalOpen = $event"
+    />
+  </div>
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.contentModeExample'
 vueCode='
 <dt-modal content-mode="invert">...</dt-modal>
 <dt-modal content-mode="dark">...</dt-modal>
 <dt-modal content-mode="light">...</dt-modal>
 '
-/>
+showHtmlWarning />
 
 ## Vue API
 

@@ -15,28 +15,21 @@ keywords: ["lazy load","conditional render","d-lazy-show","DtLazyShow","dt-lazy-
 The lazy show wraps the slot in a parent `div` in order to achieve this. It also wraps the `v-show` in a `transition`, so you can pass any valid Vue transition class to control the enter/leave transitions.
 
 <code-well-header>
-  <dt-button @click="isShown = !isShown">
-    Toggle
-  </dt-button>
-  <dt-lazy-show
-    transition="fade"
-    :show="isShown"
-  >
-    I'm Lazy!
-  </dt-lazy-show>
+  <div ref="defaultExample">
+    <dt-button @click="isShown = !isShown">
+      Toggle
+    </dt-button>
+    <dt-lazy-show
+      transition="fade"
+      :show="isShown"
+    >
+      I'm Lazy!
+    </dt-lazy-show>
+  </div>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<button class="base-button__button d-btn d-btn--primary" type="button">
-  <span class="d-btn__label base-button__label">
-    Toggle
-  </span>
-</button>
-<div>
-  Im Lazy!
-</div>
-'
+:htmlCode='() => $refs.defaultExample'
 vueCode='
 <dt-button @click="isShown = !isShown">
   Toggle

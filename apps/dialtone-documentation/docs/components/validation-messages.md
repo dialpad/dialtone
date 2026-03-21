@@ -28,19 +28,14 @@ Validation messages are typically paired with an input element. They are current
 
 <code-well-header>
   <dt-validation-messages
+    ref="successExample"
     id="sample--02"
     :validationMessages='[{"message":"Positive validation message","type":"success"}]'
   />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="base-input__messages d-validation-message__container">
-  <div role="status" aria-live="polite" class="base-input__message d-validation-message base-input__message--success d-validation-message--success">
-    <p>Positive validation message</p>
-  </div>
-</div>
-'
+:htmlCode='() => $refs.successExample'
 vueCode='
 <dt-validation-messages
   id="sample--02"
@@ -53,19 +48,14 @@ showHtmlWarning />
 
 <code-well-header>
   <dt-validation-messages
+    ref="errorExample"
     id="sample--03"
     :validationMessages='[{"message":"Critical validation message","type":"error"}]'
   />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="base-input__messages d-validation-message__container">
-  <div role="status" aria-live="polite" class="base-input__message d-validation-message base-input__message--error d-validation-message--error">
-    <p>Critical validation message</p>
-  </div>
-</div>
-'
+:htmlCode='() => $refs.errorExample'
 vueCode='
 <dt-validation-messages
   id="sample--03"
@@ -78,19 +68,14 @@ showHtmlWarning />
 
 <code-well-header>
   <dt-validation-messages
+    ref="warningExample"
     id="sample--04"
     :validationMessages='[{"message":"Warning validation message","type":"warning"}]'
   />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="base-input__messages d-validation-message__container">
-  <div role="status" aria-live="polite" class="base-input__message d-validation-message base-input__message--warning d-validation-message--warning">
-    <p>Warning validation message</p>
-  </div>
-</div>
-'
+:htmlCode='() => $refs.warningExample'
 vueCode='
 <dt-validation-messages
   id="sample--04"

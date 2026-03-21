@@ -48,40 +48,14 @@ keywords: ["dropdown", "picker", "d-select-menu", "DtSelectMenu", "dt-select-men
 A select is normally paired with a label, but there are times when it can be used without a label. Don't rely on the placeholder text as a label.
 
 <code-well-header bgclass="d-bgc-primary" class="d-d-block">
-  <div class="d-stack16 d-w100p">
+  <dt-stack ref="baseExample" gap="500" class="d-w100p">
     <example-select-menu label="Default" />
     <example-select-menu label="Disabled" disabled />
-  </div>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div>
-  <label>
-    <div class="d-select">
-      <select class="d-select__input">
-        <option value=""> Please select one </option>
-        <option value="1"> Option 1 </option>
-        <option value="2"> Option 2 </option>
-        <option value="3"> Option 3 </option>
-      </select>
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-label">Disabled</div>
-    <div class="d-select d-select--disabled">
-      <select disabled="disabled" class="d-select__input">
-        <option class="" value=""> Please select one </option>
-        <option class="" value="1"> Option 1 </option>
-        <option class="" value="2"> Option 2 </option>
-        <option class="" value="3"> Option 3 </option>
-      </select>
-    </div>
-  </label>
-</div>
-'
+:htmlCode='() => $refs.baseExample'
 vueCode='
 <dt-select-menu
   :options="[
@@ -114,26 +88,11 @@ showHtmlWarning />
 ### With Description Text
 
 <code-well-header bgclass="d-bgc-primary" class="d-d-block">
-  <example-select-menu label="Label" description="Optional description text" />
+  <example-select-menu ref="withDescriptionExample" label="Label" description="Optional description text" />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div>
-  <label>
-    <div aria-details="select-dt0-description" class="d-label">Label</div>
-    <div id="select-dt0-description" class="d-description">Optional description text</div>
-    <div class="d-select">
-      <select class="d-select__input">
-        <option class="" value=""> Please select one </option>
-        <option class="" value="1"> Option 1 </option>
-        <option class="" value="2"> Option 2 </option>
-        <option class="" value="3"> Option 3 </option>
-      </select>
-    </div>
-  </label>
-</div>
-'
+:htmlCode='() => $refs.withDescriptionExample'
 vueCode='
 <dt-select-menu
   :options="[
@@ -156,7 +115,7 @@ showHtmlWarning />
 Provides feedback to the user based on their interaction, or lack thereof, with a select.
 
 <code-well-header bgclass="d-bgc-primary" class="d-d-block">
-  <div class="d-stack16 d-w100p">
+  <dt-stack ref="validationStatesExample" gap="500" class="d-w100p">
     <example-select-menu
       label="Label"
       :messages='[{"message":"Error validation message","type":"error"}]'
@@ -169,60 +128,11 @@ Provides feedback to the user based on their interaction, or lack thereof, with 
       label="Label"
       :messages='[{"message":"Warning validation message","type":"warning"}]'
     />
-  </div>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div>
-  <label>
-    <div class="d-label">Label</div>
-    <div class="d-select">
-      <select class="d-select__input d-select__input--error">
-        <option class="" value=""> Please select one </option>
-        <option class="" value="1"> Option 1 </option>
-        <option class="" value="2"> Option 2 </option>
-        <option class="" value="3"> Option 3 </option>
-      </select>
-    </div>
-  </label>
-  <div class="base-input__messages d-validation-message__container">
-    <div role="status" aria-live="polite" class="base-input__message d-validation-message base-input__message--error d-validation-message--error"><p>Error validation message</p></div>
-  </div>
-</div>
-<div>
-  <label>
-    <div class="d-label">Label</div>
-    <div class="d-select">
-      <select class="d-select__input d-select__input--success">
-        <option class="" value=""> Please select one </option>
-        <option class="" value="1"> Option 1 </option>
-        <option class="" value="2"> Option 2 </option>
-        <option class="" value="3"> Option 3 </option>
-      </select>
-    </div>
-  </label>
-  <div class="base-input__messages d-validation-message__container">
-    <div role="status" aria-live="polite" class="base-input__message d-validation-message base-input__message--success d-validation-message--success"><p>Success validation message</p></div>
-  </div>
-</div>
-<div>
-  <label>
-    <div class="d-label">Label</div>
-    <div class="d-select">
-      <select class="d-select__input d-select__input--warning">
-        <option class="" value=""> Please select one </option>
-        <option class="" value="1"> Option 1 </option>
-        <option class="" value="2"> Option 2 </option>
-        <option class="" value="3"> Option 3 </option>
-      </select>
-    </div>
-  </label>
-  <div class="base-input__messages d-validation-message__container">
-    <div role="status" aria-live="polite" class="base-input__message d-validation-message base-input__message--warning d-validation-message--warning"><p>Warning validation message</p></div>
-  </div>
-</div>
-'
+:htmlCode='() => $refs.validationStatesExample'
 vueCode='
 <dt-select-menu
   :options="[
@@ -269,7 +179,7 @@ showHtmlWarning />
 ### With Validation States Hidden
 
 <code-well-header bgclass="d-bgc-primary" class="d-d-block">
-  <div class="d-stack16 d-w100p" ref="messagesHidden">
+  <dt-stack gap="500" class="d-w100p" ref="messagesHidden">
     <example-select-menu
       label="Label"
       :messages='[{"message":"Error validation message","type":"error"}]'
@@ -285,7 +195,7 @@ showHtmlWarning />
       :messages='[{"message":"Warning validation message","type":"warning"}]'
       :show-messages="false"
     />
-  </div>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
@@ -438,82 +348,17 @@ vueCode='
 We offer different sizes for instances in which the interface requires a smaller or larger select. In general, though, use the base (medium) size select as much as possible, especially in forms.
 
 <code-well-header bgclass="d-bgc-primary" class="d-d-block">
-  <div class="d-stack16 d-w100p">
+  <dt-stack ref="sizesExample" gap="500" class="d-w100p">
     <example-select-menu label="Label" size="xs" />
     <example-select-menu label="Label" size="sm" />
     <example-select-menu label="Label" size="md" />
     <example-select-menu label="Label" size="lg" />
     <example-select-menu label="Label" size="xl" />
-  </div>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div>
-  <label>
-    <div class="d-label d-label--xs">Label</div>
-    <div class="d-select d-select--xs">
-      <select class="d-select__input">
-        <option class="" value=""> Please select one </option>
-        <option class="" value="1"> Option 1 </option>
-        <option class="" value="2"> Option 2 </option>
-        <option class="" value="3"> Option 3 </option>
-      </select>
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-label d-label--sm">Label</div>
-    <div class="d-select d-select--sm">
-      <select class="d-select__input">
-        <option class="" value=""> Please select one </option>
-        <option class="" value="1"> Option 1 </option>
-        <option class="" value="2"> Option 2 </option>
-        <option class="" value="3"> Option 3 </option>
-      </select>
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-label d-label--md">Label</div>
-    <div class="d-select d-select--md">
-      <select class="d-select__input">
-        <option class="" value=""> Please select one </option>
-        <option class="" value="1"> Option 1 </option>
-        <option class="" value="2"> Option 2 </option>
-        <option class="" value="3"> Option 3 </option>
-      </select>
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-label d-label--lg">Label</div>
-    <div class="d-select d-select--lg">
-      <select class="d-select__input">
-        <option class="" value=""> Please select one </option>
-        <option class="" value="1"> Option 1 </option>
-        <option class="" value="2"> Option 2 </option>
-        <option class="" value="3"> Option 3 </option>
-      </select>
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-label d-label--xl">Label</div>
-    <div class="d-select d-select--xl">
-      <select class="" value=""> Please select one </option>
-        <option class="" value="1"> Option 1 </option>
-        <option class="" value="2"> Option 2 </option>
-        <option class="" value="3"> Option 3 </option>
-      </select>
-    </div>
-  </label>
-</div>
-'
+:htmlCode='() => $refs.sizesExample'
 vueCode='
 <dt-select-menu
   :options="[
@@ -536,15 +381,16 @@ showHtmlWarning />
 The label text size is automatically derived from the component's `size` prop. Use the `label-size` prop to override this when you need a different label size independent of the select size. For example, the default label size for a `size="md"` select menu is `md`, but you can override it from `xs` to `lg`.
 
 <code-well-header bgclass="d-bgc-primary" class="d-d-block">
-  <div class="d-stack16 d-w100p">
+  <dt-stack ref="labelSizeExample" gap="500" class="d-w100p">
     <example-select-menu label="Extra small label" label-size="xs" />
     <example-select-menu label="Small label" label-size="sm" />
     <example-select-menu label="Medium label (default)" label-size="md" />
     <example-select-menu label="Large label" label-size="lg" />
-  </div>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.labelSizeExample'
 vueCode='
 <dt-select-menu
   :options="options"
@@ -553,22 +399,23 @@ vueCode='
   label-size="xs|sm|md|lg"
 />
 '
-/>
+showHtmlWarning />
 
 ## Label strength
 
 Override the label font weight independently of the label size. Valid values are `bold`, `semibold`, `medium`, and `normal`.
 
 <code-well-header bgclass="d-bgc-primary" class="d-d-block">
-  <div class="d-stack16 d-w100p">
+  <dt-stack ref="labelStrengthExample" gap="500" class="d-w100p">
     <example-select-menu label="Bold label" label-strength="bold" />
     <example-select-menu label="Semibold label" label-strength="semibold" />
     <example-select-menu label="Medium label" label-strength="medium" />
     <example-select-menu label="Normal label" label-strength="normal" />
-  </div>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.labelStrengthExample'
 vueCode='
 <dt-select-menu
   :options="options"
@@ -576,7 +423,7 @@ vueCode='
   label-strength="bold|semibold|medium|normal"
 />
 '
-/>
+showHtmlWarning />
 
 ## Accessibility
 

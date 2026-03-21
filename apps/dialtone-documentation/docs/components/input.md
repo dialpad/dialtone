@@ -49,7 +49,7 @@ This component combines both the `input` and `textarea` elements as options with
 We offer different sizes for instances in which the interface requires a smaller or larger input. In general, though, use the base (medium) size input as much as possible, especially in forms.
 
 <code-well-header>
-  <div class="d-d-grid d-g16 d-g-cols2 d-w100p">
+  <div class="d-d-grid d-g16 d-g-cols2 d-w100p" ref="sizesExample">
     <dt-input label="Label" type="text" placeholder="Placeholder" size="xs" />
     <dt-input label="Label" type="textarea" placeholder="Placeholder" size="xs" />
     <dt-input label="Label" type="text" placeholder="Placeholder" size="sm" />
@@ -64,88 +64,7 @@ We offer different sizes for instances in which the interface requires a smaller
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div>
-  <label>
-    <div class="d-label d-label--xs">Extra small</div>
-    <div class="d-input__wrapper">
-      <input type="text" class="d-input d-input--xs" placeholder="Placeholder">
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-label d-label--sm">Small</div>
-    <div class="d-input__wrapper">
-      <input type="text" class="d-input d-input--sm" placeholder="Placeholder">
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-label d-label--md">Medium</div>
-    <div class="d-input__wrapper">
-      <input type="text" class="d-input" placeholder="Placeholder">
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-label d-label--lg">Large</div>
-    <div class="d-input__wrapper">
-      <input type="text" class="d-input d-input--lg" placeholder="Placeholder">
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-label d-label--xl">Extra large</div>
-    <div class="d-input__wrapper">
-      <input type="text" class="d-input d-input--xl" placeholder="Placeholder">
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-label d-label--xs">Extra small</div>
-    <div class="d-input__wrapper">
-      <textarea class="d-textarea d-textarea--xs" placeholder="Placeholder" />
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-label d-label--sm">Small</div>
-    <div class="d-input__wrapper">
-      <textarea class="d-textarea d-textarea--sm" placeholder="Placeholder" />
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-label d-label--md">Medium</div>
-    <div class="d-input__wrapper">
-      <textarea class="d-textarea" placeholder="Placeholder" />
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-label d-label--lg">Large</div>
-    <div class="d-input__wrapper">
-      <textarea class="d-textarea d-textarea--lg" placeholder="Placeholder" />
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-label d-label--xl">Extra large</div>
-    <div class="d-input__wrapper">
-      <textarea class="d-textarea d-textarea--xl" placeholder="Placeholder" />
-    </div>
-  </label>
-</div>
-'
+:htmlCode='() => $refs.sizesExample'
 vueCode='
 <dt-input label="Extra Small" type="text" placeholder="Placeholder" size="xs" />
 <dt-input label="Extra Small" type="textarea" placeholder="Placeholder" size="xs" />
@@ -167,28 +86,15 @@ showHtmlWarning />
 An input is normally paired with a label, but there are times when it can be used without a label.  Placeholder text should primarily be used as a content prompt and only provided when needed.
 
 <code-well-header>
-  <div class="d-stack16 d-w100p">
+  <dt-stack gap="500" class="d-w100p" ref="baseStylesExample">
     <dt-input label="Label" placeholder="Placeholder" />
     <dt-input label="Label" value="Value" />
     <dt-input label="Label" placeholder="Placeholder" disabled />
-  </div>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div>
-  <label class="d-label" for="Dialtone--InputExample1a">...</label>
-  <input class="d-input" id="Dialtone--InputExample1a" type="text" placeholder="..." />
-</div>
-<div>
-  <label class="d-label" for="Dialtone--InputExample1c">Label</label>
-  <input class="d-input" id="Dialtone--InputExample1c" type="text" value="Value" />
-</div>
-<div>
-  <label class="d-label" for="Dialtone--InputExample1b">...</label>
-  <input class="d-input" id="Dialtone--InputExample1b" type="text" placeholder="..." disabled />
-</div>
-'
+:htmlCode='() => $refs.baseStylesExample'
 vueCode='
 <dt-input label="Label" placeholder="Placeholder" />
 <dt-input label="Label" model-value="Value" />
@@ -197,28 +103,15 @@ vueCode='
 showHtmlWarning />
 
 <code-well-header>
-  <div class="d-stack16 d-w100p">
+  <dt-stack gap="500" class="d-w100p" ref="textareaExample">
     <dt-input label="Label" placeholder="Placeholder" type="textarea" />
     <dt-input label="Label" type="textarea" value="Value" />
     <dt-input label="Label" placeholder="Placeholder" type="textarea" disabled />
-  </div>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div>
-  <label class="d-label" for="Dialtone--TextareaExample1a">...</label>
-  <textarea class="d-textarea" id="Dialtone--TextareaExample1a" type="text" placeholder="..."></textarea>
-</div>
-<div>
-  <label class="d-label" for="Dialtone--TextareaExample1c">Label</label>
-  <textarea class="d-textarea" id="Dialtone--TextareaExample1c" type="text">Value</textarea>
-</div>
-<div>
-  <label class="d-label" for="Dialtone--TextareaExample1b">...</label>
-  <textarea class="d-textarea" id="Dialtone--TextareaExample1b" type="text" placeholder="..." disabled></textarea>
-</div>
-'
+:htmlCode='() => $refs.textareaExample'
 vueCode='
 <dt-input label="Label" placeholder="Placeholder" type="textarea" />
 <dt-input label="Label" type="textarea" model-value="Value" />
@@ -229,34 +122,26 @@ showHtmlWarning />
 ### With Description Text
 
 <code-well-header>
-  <div class="d-w100p">
+  <div class="d-w100p" ref="descriptionExample">
     <dt-input label="Label" description="Helpful description text" placeholder="Placeholder"/>
   </div>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<label class="d-label" for="Dialtone--InputExample2">...</label>
-<span class="d-description">...</span>
-<input class="d-input" id="Dialtone--InputExample2" type="text" placeholder="..." />
-'
+:htmlCode='() => $refs.descriptionExample'
 vueCode='
 <dt-input label="Label" description="Helpful description text" placeholder="Placeholder"/>
 '
 showHtmlWarning />
 
 <code-well-header>
-  <div class="d-w100p">
+  <div class="d-w100p" ref="descriptionTextareaExample">
     <dt-input label="Label" description="Helpful description text" type="textarea" placeholder="Placeholder"/>
   </div>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<label class="d-label" for="Dialtone--TextareaExample">...</label>
-<span class="d-description">...</span>
-<textarea class="d-textarea" id="Dialtone--TextareaExample" type="text" placeholder="..."></textarea>
-'
+:htmlCode='() => $refs.descriptionTextareaExample'
 vueCode='
 <dt-input label="Label" description="Helpful description text" type="textarea" placeholder="Placeholder"/>
 '
@@ -267,31 +152,15 @@ showHtmlWarning />
 Provides feedback to the user based on their interaction, or lack thereof, with an input.
 
 <code-well-header>
-  <div class="d-stack16 d-w100p">
+  <dt-stack gap="500" class="d-w100p" ref="validationExample">
     <dt-input label="Label" type="email" value="Value" :messages="[messages.error]"/>
     <dt-input label="Label" type="email" value="Value" :messages="[messages.success]"/>
     <dt-input label="Label" type="email" value="Value" :messages="[messages.warning]"/>
-  </div>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div>
-  <label class="d-label" for="Dialtone--InputExample3">...</label>
-  <input class="d-input d-input--error" id="Dialtone--InputExample3" type="email" placeholder="..." value="..." />
-  <span class="d-validation-message d-validation-message--error">...</span>
-</div>
-<div>
-  <label class="d-label" for="Dialtone--InputExample4">...</label>
-  <input class="d-input d-input--success" id="Dialtone--InputExample4" type="email" placeholder="..." value="..." />
-  <span class="d-validation-message d-validation-message--success">...</span>
-</div>
-<div>
-  <label class="d-label" for="Dialtone--InputExample5">...</label>
-  <input class="d-input d-input--warning" id="Dialtone--InputExample5" type="email" placeholder="..." value="..." />
-  <span class="d-validation-message d-validation-message--warning">...</span>
-</div>
-'
+:htmlCode='() => $refs.validationExample'
 vueCode='
 <dt-input label="Label" type="email" model-value="Value" :messages="[messages.error]"/>
 <dt-input label="Label" type="email" model-value="Value" :messages="[messages.success]"/>
@@ -300,31 +169,15 @@ vueCode='
 showHtmlWarning />
 
 <code-well-header>
-  <div class="d-stack16 d-w100p">
+  <dt-stack gap="500" class="d-w100p" ref="validationTextareaExample">
     <dt-input label="Label" type="textarea" value="Value" :messages="[messages.error]"/>
     <dt-input label="Label" type="textarea" value="Value" :messages="[messages.success]"/>
     <dt-input label="Label" type="textarea" value="Value" :messages="[messages.warning]"/>
-  </div>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div>
-  <label class="d-label" for="Dialtone--TextareaExample3">...</label>
-  <textarea class="d-textarea d-textarea--error" id="Dialtone--TextareaExample3" type="email" placeholder="..." value="..."></textarea>
-  <span class="d-validation-message d-validation-message--error">...</span>
-</div>
-<div>
-  <label class="d-label" for="Dialtone--TextareaExample4">...</label>
-  <textarea class="d-textarea d-textarea--success" id="Dialtone--TextareaExample4" type="email" placeholder="..." value="..."></textarea>
-  <span class="d-validation-message d-validation-message--success">...</span>
-</div>
-<div>
-  <label class="d-label" for="Dialtone--TextareaExample5">...</label>
-  <textarea class="d-textarea d-textarea--warning" id="Dialtone--TextareaExample5" type="email" placeholder="..." value="..."></textarea>
-  <span class="d-validation-message d-validation-message--warning">...</span>
-</div>
-'
+:htmlCode='() => $refs.validationTextareaExample'
 vueCode='
 <dt-input label="Label" type="textarea" model-value="Value" :messages="[messages.error]"/>
 <dt-input label="Label" type="textarea" model-value="Value" :messages="[messages.success]"/>
@@ -345,7 +198,7 @@ showHtmlWarning />
 vueCode='
 <dt-input label="Label" type="email" model-value="Value" :messages="multipleMessages" />
 '
-/>
+showHtmlWarning />
 
 ### With Maximum Length Validation
 
@@ -409,12 +262,12 @@ vueCode='
   }"
 />
 '
-/>
+showHtmlWarning />
 
 ### With Custom Maximum Length Validation Message
 
 <code-well-header>
-  <div class="d-w100p">
+  <div class="d-w100p" ref="customMaxLengthExample">
     <dt-input
       v-model="inputValue"
       label="Label"
@@ -425,6 +278,7 @@ vueCode='
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.customMaxLengthExample'
 vueCode='
 <dt-input
   label="Label"
@@ -433,7 +287,7 @@ vueCode='
   v-model="inputValue"
 />
 '
-/>
+showHtmlWarning />
 
 ```js
 const validateData = {
@@ -470,7 +324,7 @@ const validate = () => {
 Use `type="search"` with a clear button in the `icon` slot. When the input is not empty, the clear button will render and will clear the input field when triggered.
 
 <code-well-header>
-  <div class="d-w100p">
+  <div class="d-w100p" ref="searchExample">
     <dt-input
       aria-label="Search items"
       placeholder="Search Items"
@@ -501,6 +355,7 @@ Use `type="search"` with a clear button in the `icon` slot. When the input is no
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.searchExample'
 vueCode='
 <dt-input
   aria-label="Search items"
@@ -534,7 +389,7 @@ showHtmlWarning />
 ## Icon Support
 
 <code-well-header>
-  <div class="d-stack16 d-w100p">
+  <dt-stack gap="500" class="d-w100p" ref="iconsExample">
     <dt-input label="Start icon" type="text" placeholder="Placeholder">
       <template #startIcon="{ iconSize }">
         <dt-icon name="send" :size="iconSize" />
@@ -553,30 +408,11 @@ showHtmlWarning />
         <dt-icon name="lock" :size="iconSize" />
       </template>
     </dt-input>
-  </div>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div>
-  <label class="d-label" for="Dialtone--InputExample--IconLeft">Label</label>
-  <div class="d-input__wrapper">
-    <span class="d-input-icon d-input-icon--left">
-      <svg class="d-icon d-icon--size-200">...</svg>
-    </span>
-    <input class="d-input" id="Dialtone--InputExample--IconLeft" type="text" placeholder="Placeholder" />
-  </div>
-</div>
-<div>
-  <label class="d-label" for="Dialtone--InputExample--IconRight">Label</label>
-  <div class="d-input__wrapper">
-    <input class="d-input" id="Dialtone--InputExample--IconRight" type="text" placeholder="Placeholder" />
-    <span class="d-input-icon d-input-icon--right">
-      <svg class="d-icon d-icon--size-200">...</svg>
-    </span>
-  </div>
-</div>
-'
+:htmlCode='() => $refs.iconsExample'
 vueCode='
 <dt-input label="Start icon" type="text" placeholder="Placeholder">
   <template #startIcon="{ iconSize }">
@@ -600,7 +436,7 @@ vueCode='
 showHtmlWarning />
 
 <code-well-header>
-  <div class="d-stack16 d-w100p">
+  <dt-stack gap="500" class="d-w100p" ref="iconsTextareaExample">
     <dt-input label="Start icon" type="textarea" placeholder="Placeholder">
       <template #startIcon="{ iconSize }">
         <dt-icon name="send" :size="iconSize" />
@@ -619,21 +455,11 @@ showHtmlWarning />
         <dt-icon name="lock" :size="iconSize" />
       </template>
     </dt-input>
-  </div>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div>
-  <label class="d-label" for="Dialtone--InputExample--IconLeft">...</label>
-  <div class="d-input__wrapper">
-    <span class="d-input-icon d-input-icon--left">
-      <svg class="d-icon d-icon--size-200">...</svg>
-    </span>
-    <textarea class="d-textarea" id="Dialtone--InputExample--IconLeft" type="text" placeholder="..."></textarea>
-  </div>
-</div>
-'
+:htmlCode='() => $refs.iconsTextareaExample'
 vueCode='
 <dt-input label="Start icon" type="textarea" placeholder="Placeholder">
   <template #startIcon="{ iconSize }">
@@ -661,7 +487,7 @@ showHtmlWarning />
 Each Text Input size has a default icon size, keeping it proportional. While rare, customizing the icon size is possible.
 
 <code-well-header>
-  <div class="d-stack16 d-w100p">
+  <dt-stack gap="500" class="d-w100p" ref="iconSizesExample">
     <dt-input label="Small input with large icon" type="text" placeholder="Placeholder" size="sm">
       <template #startIcon="{ iconSize }">
         <dt-icon name="send" :size="iconSize" />
@@ -682,56 +508,11 @@ Each Text Input size has a default icon size, keeping it proportional. While rar
         <dt-icon name="send" :size="iconSize" />
       </template>
     </dt-input>
-  </div>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div>
-  <div>
-    <label class="d-label" for="Dialtone--InputExample--IconLeft">Input:sm Icon:lg</label>
-  </div>
-  <div class="d-input__wrapper">
-    <span class="d-input-icon d-input-icon--left">
-      <svg class="d-icon d-icon--size-400">...</svg>
-    </span>
-    <input class="d-input d-input--sm" id="Dialtone--InputExample--IconLeft-sm-lg" type="text" placeholder="Placeholder" />
-  </div>
-</div>
-<div>
-  <div>
-    <label class="d-label" for="Dialtone--InputExample--IconLeft">Input:md(default), Icon:xl</label>
-  </div>
-  <div class="d-input__wrapper">
-    <span class="d-input-icon d-input-icon--left">
-      <svg class="d-icon d-icon--size-500">...</svg>
-    </span>
-    <input class="d-input" id="Dialtone--InputExample--IconLeft-md-xl" type="text" placeholder="Placeholder" />
-  </div>
-</div>
-<div>
-  <div>
-    <label class="d-label" for="Dialtone--InputExample--IconLeft">Input:xl Icon:md(default)</label>
-  </div>
-  <div class="d-input__wrapper">
-    <span class="d-input-icon d-input-icon--left">
-      <svg class="d-icon d-icon--size-200">...</svg>
-    </span>
-    <input class="d-input d-input--xl" id="Dialtone--InputExample--IconLeft-xl-md" type="text" placeholder="Placeholder" />
-  </div>
-</div>
-<div>
-  <div>
-    <label class="d-label" for="Dialtone--InputExample--IconLeft">Textarea:lg Icon:md(default)</label>
-  </div>
-  <div class="d-input__wrapper">
-    <span class="d-input-icon d-input-icon--left">
-      <svg class="d-icon d-icon--size-200">...</svg>
-    </span>
-    <textarea class="d-textarea d-textarea--lg" id="Dialtone--TextareaExample--IconLeft-lg-md" type="text" placeholder="Placeholder"></textarea>
-  </div>
-</div>
-'
+:htmlCode='() => $refs.iconSizesExample'
 vueCode='
 <dt-input label="Small input with large icon" type="text" placeholder="Placeholder" size="sm">
   <template #startIcon>
@@ -761,38 +542,40 @@ showHtmlWarning />
 The label text size is automatically derived from the component's `size` prop. Use the `label-size` prop to override this when you need a different label size independent of the input size. For example, the default label size for a `size="md"` input is `md`, but you can override it from `xs` to `lg`.
 
 <code-well-header>
-  <div class="d-stack16 d-w100p">
+  <dt-stack gap="500" class="d-w100p" ref="labelSizeExample">
     <dt-input label="Extra small label" placeholder="Placeholder" label-size="xs" />
     <dt-input label="Small label" placeholder="Placeholder" label-size="sm" />
     <dt-input label="Medium label (default)" placeholder="Placeholder" label-size="md" />
     <dt-input label="Large label" placeholder="Placeholder" label-size="lg" />
-  </div>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.labelSizeExample'
 vueCode='
 <dt-input label="Extra small label" placeholder="Placeholder" label-size="xs|sm|md|lg" />
 '
-/>
+showHtmlWarning />
 
 ## Label strength
 
 Override the label font weight independently of the label size. Valid values are `bold`, `semibold`, `medium`, and `normal`.
 
 <code-well-header>
-  <div class="d-stack16 d-w100p">
+  <dt-stack gap="500" class="d-w100p" ref="labelStrengthExample">
     <dt-input label="Bold label" placeholder="Placeholder" label-strength="bold" />
     <dt-input label="Semibold label" placeholder="Placeholder" label-strength="semibold" />
     <dt-input label="Medium label" placeholder="Placeholder" label-strength="medium" />
     <dt-input label="Normal label" placeholder="Placeholder" label-strength="normal" />
-  </div>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.labelStrengthExample'
 vueCode='
 <dt-input label="Label" placeholder="Placeholder" label-strength="bold|semibold|medium|normal" />
 '
-/>
+showHtmlWarning />
 
 ## Vue API
 

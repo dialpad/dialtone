@@ -33,10 +33,11 @@ With this we accomplish the requirement to have the previous year button focused
 ### Default
 
 <code-well-header>
-  <dt-datepicker></dt-datepicker>
+  <dt-datepicker ref="defaultExample"></dt-datepicker>
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.defaultExample'
 vueCode='
 <dt-datepicker :selected-date="new Date()"></dt-datepicker>
 '
@@ -46,6 +47,7 @@ showHtmlWarning />
 
 <code-well-header>
   <dt-popover
+    ref="popoverExample"
     :open="datepickerOpened"
     initial-focus-element="#prevYearButton"
     padding="none"
@@ -75,6 +77,7 @@ showHtmlWarning />
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.popoverExample'
 vueCode='
 <dt-popover
   :open="datepickerOpened"
@@ -112,6 +115,7 @@ Constrain the selectable date range by providing `min-date` and/or `max-date` pr
 
 <code-well-header>
   <dt-datepicker
+    ref="minMaxExample"
     :selected-date="currentSelectedDate"
     :min-date="minDate"
     :max-date="maxDate"
@@ -120,6 +124,7 @@ Constrain the selectable date range by providing `min-date` and/or `max-date` pr
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.minMaxExample'
 vueCode='
 <script setup>
 const today = new Date();

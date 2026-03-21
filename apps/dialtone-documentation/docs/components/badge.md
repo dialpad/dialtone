@@ -41,12 +41,11 @@ keywords: ["label","tag","indicator","count","d-badge","DtBadge","dt-badge"]
 ### Label
 
 <code-well-header bgclass="d-bgc-primary">
-  <dt-badge text="Label"></dt-badge>
+  <dt-badge ref="labelExample" text="Label"></dt-badge>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<span class="d-badge"><span class="d-badge__label">Label</span></span>'
+:htmlCode='() => $refs.labelExample'
 vueCode='
 <dt-badge text="Label" />
 '
@@ -55,12 +54,11 @@ showHtmlWarning />
 ### Count
 
 <code-well-header bgclass="d-bgc-primary">
-  <dt-badge kind="count" text="1"></dt-badge>
+  <dt-badge ref="countExample" kind="count" text="1"></dt-badge>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<span class="d-badge d-badge--count"><span class="d-badge__label">1</span></span>'
+:htmlCode='() => $refs.countExample'
 vueCode='
 <dt-badge kind="count" text="1" />
 '
@@ -68,7 +66,7 @@ showHtmlWarning />
 
 ## Type
 
-<table class="d-table dialtone-doc-table d-mb16">
+<table ref="typeVariantsExample" class="d-table dialtone-doc-table d-mb16">
   <thead>
     <tr>
       <th>Type</th>
@@ -96,7 +94,7 @@ showHtmlWarning />
       <td>
         <dt-badge kind="count" type="info" text="2"></dt-badge>
       </td>
-      <td>Used to convey general information that isn’t critical or requires action on the user's part.</td>
+      <td>Used to convey general information that isn't critical or requires action on the user's part.</td>
     </tr>
     <tr>
       <th class="d-ta-left">Success</th>
@@ -150,26 +148,7 @@ showHtmlWarning />
 </table>
 
 <code-example-tabs
-htmlCode='
-<span class="d-badge"><span class="d-badge__label">Label</span></span>
-<span class="d-badge d-badge--info"><span class="d-badge__label">Label</span></span>
-<span class="d-badge d-badge--success"><span class="d-badge__label">Label</span></span>
-<span class="d-badge d-badge--warning"><span class="d-badge__label">Label</span></span>
-<span class="d-badge d-badge--critical"><span class="d-badge__label">Label</span></span>
-<span class="d-badge d-badge--bulletin"><span class="d-badge__label">Label</span></span>
-<span class="d-badge d-badge--ai">
-  <span class="d-badge__icon-left">
-    <dt-icon name="lightning-bolt" size="200" />
-  </span>
-  <span class="d-badge__label">Label</span>
-</span>
-<span class="d-badge d-badge--count"><span class="d-badge__label">1</span></span>
-<span class="d-badge d-badge--count d-badge--info"><span class="d-badge__label">2</span></span>
-<span class="d-badge d-badge--count d-badge--success"><span class="d-badge__label">3</span></span>
-<span class="d-badge d-badge--count d-badge--warning"><span class="d-badge__label">4</span></span>
-<span class="d-badge d-badge--count d-badge--critical"><span class="d-badge__label">5</span></span>
-<span class="d-badge d-badge--count d-badge--bulletin"><span class="d-badge__label">6</span></span>
-'
+:htmlCode='() => $refs.typeVariantsExample'
 vueCode='
 <dt-badge kind="label" text="Label" />
 <dt-badge type="info" kind="label" text="Label" />
@@ -190,7 +169,7 @@ showHtmlWarning />
 ## Outlined
 
 <code-well-header bgclass="d-bgc-primary">
-  <dt-stack direction="row" gap="400">
+  <dt-stack ref="outlinedExample" direction="row" gap="400">
     <dt-badge text="Label" outlined></dt-badge>
     <dt-badge text="Label" type="info" outlined></dt-badge>
     <dt-badge text="Label" type="success" outlined></dt-badge>
@@ -205,18 +184,7 @@ showHtmlWarning />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<span class="d-badge d-badge--outlined"><span class="d-badge__label">Label</span></span>
-<span class="d-badge d-badge--info d-badge--outlined"><span class="d-badge__label">Label</span></span>
-<span class="d-badge d-badge--success d-badge--outlined"><span class="d-badge__label">Label</span></span>
-<span class="d-badge d-badge--warning d-badge--outlined"><span class="d-badge__label">Label</span></span>
-<span class="d-badge d-badge--critical d-badge--outlined"><span class="d-badge__label">Label</span></span>
-<span class="d-badge d-badge--count d-badge--outlined"><span class="d-badge__label">1</span></span>
-<span class="d-badge d-badge--info d-badge--count d-badge--outlined"><span class="d-badge__label">1</span></span>
-<span class="d-badge d-badge--success d-badge--count d-badge--outlined"><span class="d-badge__label">1</span></span>
-<span class="d-badge d-badge--warning d-badge--count d-badge--outlined"><span class="d-badge__label">1</span></span>
-<span class="d-badge d-badge--critical d-badge--count d-badge--outlined"><span class="d-badge__label">1</span></span>
-'
+:htmlCode='() => $refs.outlinedExample'
 vueCode='
 <dt-badge text="Label" outlined />
 <dt-badge text="Label" type="info" outlined />
@@ -236,7 +204,7 @@ showHtmlWarning />
 At the moment, only the `bulletin` type has a subtle variant.
 
 <code-well-header>
-  <dt-stack direction="row" gap="400">
+  <dt-stack ref="subtleExample" direction="row" gap="400">
     <dt-badge text="Label" type="bulletin" subtle></dt-badge>
     <dt-badge text="Label" type="bulletin" subtle outlined></dt-badge>
     <dt-badge text="1" type="bulletin" subtle kind="count"></dt-badge>
@@ -245,12 +213,7 @@ At the moment, only the `bulletin` type has a subtle variant.
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<span class="d-badge d-badge--bulletin d-badge--subtle"><span class="d-badge__label">Label</span></span>
-<span class="d-badge d-badge--bulletin d-badge--subtle d-badge--outlined"><span class="d-badge__label">Label</span></span>
-<span class="d-badge d-badge--bulletin d-badge--subtle d-badge--count"><span class="d-badge__label">1</span></span>
-<span class="d-badge d-badge--bulletin d-badge--subtle d-badge--count d-badge--outlined"><span class="d-badge__label">1</span></span>
-'
+:htmlCode='() => $refs.subtleExample'
 vueCode='
 <dt-badge text="Label" type="bulletin" subtle />
 <dt-badge text="Label" type="bulletin" subtle outlined />
@@ -313,7 +276,7 @@ showHtmlWarning />
 Decorative badges label and classify items for quick recognition.
 
 <code-well-header bgclass="d-bgc-primary">
-  <dt-stack direction="row" gap="500" align="baseline">
+  <dt-stack ref="decorativeExample" direction="row" gap="500" align="baseline">
     <dt-stack gap="500">
       <dt-text kind="label" size="md" density="200">Black</dt-text>
       <dt-badge text="Label" decoration="black-400"></dt-badge>
@@ -361,12 +324,7 @@ Decorative badges label and classify items for quick recognition.
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<span class="d-badge d-badge--decorate-{$color}">
-  <span class="d-badge__decorative"></span>
-  <span class="d-badge__label">Label</span>
-</span>
-'
+:htmlCode='() => $refs.decorativeExample'
 vueCode='
 <dt-badge text="Label" decoration="black-400" />
 <dt-badge text="Label" decoration="black-500" />

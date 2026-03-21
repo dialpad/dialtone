@@ -30,6 +30,7 @@ keywords: ["notification", "snackbar", "alert", "message", "d-toast", "DtToast",
 </code-well-header>
 
 <example-toast
+  ref="variantsExample"
   class="d-zi-notification"
   :show="showToast"
   title="Title"
@@ -39,33 +40,7 @@ keywords: ["notification", "snackbar", "alert", "message", "d-toast", "DtToast",
 />
 
 <code-example-tabs
-htmlCode='
-<aside class="d-toast-wrapper">
-  <div class="d-toast d-toast--base" role="status" aria-hidden="true">
-    <div class="d-toast__dialog">
-      <div class="d-notice__icon">...</div>
-      <div class="d-notice__content">
-        <h2 class="d-notice__title">...</h2>
-        <p class="d-notice__message">...</p>
-      </div>
-      <div class="d-notice__actions">...</div>
-    </div>
-  </div>
-</aside>
-
-<aside class="d-toast-wrapper">
-  <div class="d-toast d-toast--error" role="status" aria-hidden="true">...</div>
-</aside>
-<aside class="d-toast-wrapper">
-  <div class="d-toast d-toast--info" role="status" aria-hidden="true">...</div>
-</aside>
-<aside class="d-toast-wrapper">
-  <div class="d-toast d-toast--success" role="status" aria-hidden="true">...</div>
-</aside>
-<aside class="d-toast-wrapper">
-  <div class="d-toast d-toast--warning" role="status" aria-hidden="true">...</div>
-</aside>
-'
+:htmlCode='() => $refs.variantsExample'
 vueCode='
 <dt-toast
   title="Title"
@@ -99,6 +74,7 @@ If the duration is not provided the toast won't disappear automatically.
 <code-well-header>
   <dt-button @click="toggleDurationToast(true)">Show Example</dt-button>
   <example-toast
+    ref="durationExample"
     class="d-zi-notification"
     :show="showDurationToast"
     title="Title"
@@ -109,6 +85,7 @@ If the duration is not provided the toast won't disappear automatically.
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.durationExample'
 vueCode='
 <dt-toast
   title="Title"
@@ -131,7 +108,7 @@ vueCode='
   </template>
 </dt-toast>
 '
-/>
+showHtmlWarning />
 
 ### With Self-Positioning
 

@@ -1462,10 +1462,11 @@ View the [Migrating from Flex CSS Utilities to DtStack](/about/whats-new/posts/2
 ### Profile Card
 
 <code-well-header>
-  <ExampleProfileCard />
+  <ExampleProfileCard ref="profileCardExample" />
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.profileCardExample'
 vueCode='
 <dt-stack gap="500">
   <dt-stack gap="400" class="d-jc-space-between">
@@ -1521,7 +1522,7 @@ vueCode='
 ### Call Log
 
 <code-well-header>
-  <dt-stack gap="400" class="d-w100p">
+  <dt-stack ref="callLogExample" gap="400" class="d-w100p">
     <dt-text as="h2" kind="headline" size="lg">Saturday, May 24, 2025</dt-text>
     <dt-stack direction="row" gap="450" class="d-w100p">
       <dt-avatar full-name="Ashanti Trevor" />
@@ -1543,6 +1544,7 @@ vueCode='
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.callLogExample'
 vueCode='
 <dt-text as="h2" kind="headline" size="lg">Saturday, May 24, 2025</dt-text>
 <dt-stack direction="row" gap="450" class="d-w100p">

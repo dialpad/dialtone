@@ -52,46 +52,15 @@ Radio buttons are a common way to allow users to make a single selection from a 
 ### Base Styles
 
 <code-well-header>
-  <fieldset class="d-input-group__fieldset d-stack8">
+  <dt-stack ref="baseStylesExample" gap="400">
     <dt-radio name="Value" value="Value" label="Radio label"/>
     <dt-radio name="Disabled" value="Disabled" label="Radio label thats been disabled" disabled/>
     <dt-radio name="CheckedDisabled" value="Checked" label="Radio label thats been disabled & checked" :model-value="true" disabled />
-  </fieldset>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div>
-  <label>
-    <div class="d-radio-group">
-      <div class="d-radio__input"><input name="Value" type="radio" class="d-radio" value="Value" /></div>
-      <div class="d-radio__copy d-radio__label">
-        <div>Radio label</div>
-      </div>
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-radio-group d-radio-group--disabled">
-      <div class="d-radio__input"><input name="Disabled" disabled="disabled" type="radio" class="d-radio" value="Disabled" /></div>
-      <div class="d-radio__copy d-radio__label">
-        <div>Radio label thats been disabled</div>
-      </div>
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-radio-group d-radio-group--disabled">
-      <div class="d-radio__input"><input name="CheckedDisabled" disabled="disabled" type="radio" class="d-radio" value="Checked" /></div>
-      <div class="d-radio__copy d-radio__label">
-        <div>Radio label thats been disabled &amp; checked</div>
-      </div>
-    </div>
-  </label>
-</div>
-'
+:htmlCode='() => $refs.baseStylesExample'
 vueCode='
 <dt-radio name="Value" value="Value" label="Radio label"/>
 <dt-radio name="Disabled" value="Disabled" label="Radio label thats been disabled" disabled/>
@@ -102,49 +71,26 @@ showHtmlWarning />
 ### With Description Text
 
 <code-well-header>
-  <fieldset class="d-input-group__fieldset d-stack8">
-    <legend class="d-label">Advanced missed call routing</legend>
+  <dt-radio-group ref="descriptionExample" legend="Advanced missed call routing" model-value="">
     <dt-radio name="ValueWDesc" value="Value" label="To voicemail" description="So they can hear your voice"/>
     <dt-radio name="DisabledWDesc" value="Disabled" label="Disabled" description="With Description" disabled />
-  </fieldset>
+  </dt-radio-group>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div>
-  <label>
-    <div class="d-radio-group">
-      <div class="d-radio__input"><input name="ValueWDesc" type="radio" class="d-radio" value="Value" /></div>
-      <div class="d-radio__copy d-radio__label">
-        <div>To voicemail</div>
-        <div class="d-description">So they can hear your voice</div>
-      </div>
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-radio-group d-radio-group--disabled">
-      <div class="d-radio__input"><input name="DisabledWDesc" type="radio" class="d-radio" value="Disabled" disabled="disabled" /></div>
-      <div class="d-radio__copy d-radio__label">
-        <div>Disabled</div>
-        <div class="d-description">With Description</div>
-      </div>
-    </div>
-  </label>
-</div>
-'
+:htmlCode='() => $refs.descriptionExample'
 vueCode='
-<dt-radio name="ValueWDesc" value="Value" label="To voicemail" description="So they can hear your voice"/>
-<dt-radio name="DisabledWDesc" value="Disabled" label="Disabled" description="With Description" disabled />
+<dt-radio-group legend="Advanced missed call routing" model-value="">
+  <dt-radio name="ValueWDesc" value="Value" label="To voicemail" description="So they can hear your voice"/>
+  <dt-radio name="DisabledWDesc" value="Disabled" label="Disabled" description="With Description" disabled />
+</dt-radio-group>
 '
 showHtmlWarning />
 
 ### With Validation States
 
 <code-well-header>
-  <fieldset class="d-input-group__fieldset d-stack8">
-    <legend class="d-label">Advanced missed call routing</legend>
+  <dt-radio-group ref="validationStatesExample" legend="Advanced missed call routing" model-value="">
     <dt-radio
       name="ValidationMessages"
       value="Validation Message Warning"
@@ -166,76 +112,34 @@ showHtmlWarning />
       validation-state="success"
       :messages="[{ message: `Because someone else might be able to talk to them.`, type: `success` }]"
     />
-  </fieldset>
+  </dt-radio-group>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div>
-  <label>
-    <div class="d-radio-group">
-      <div class="d-radio__input"><input name="ValidationMessageWarning" type="radio" class="d-radio d-radio--warning" value="Validation Message Warning" /></div>
-      <div class="d-radio__copy d-radio__label">
-        <div>To voicemail</div>
-        <div class="base-input__messages d-validation-message__container">
-          <div role="status" aria-live="polite" class="base-input__message d-validation-message base-input__message--warning d-validation-message--warning"><p>So they can hear your voice</p></div>
-        </div>
-      </div>
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-radio-group">
-      <div class="d-radio__input"><input name="ValidationMessageError" type="radio" class="d-radio d-radio--error" value="Validation Message Error" /></div>
-      <div class="d-radio__copy d-radio__label">
-        <div>To a message (no voicemail)</div>
-        <div class="base-input__messages d-validation-message__container">
-          <div role="status" aria-live="polite" class="base-input__message d-validation-message base-input__message--error d-validation-message--error">
-            <p>Because they probably dont need to leave a message anyway.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-radio-group">
-      <div class="d-radio__input"><input name="ValidationMessageSuccess" type="radio" class="d-radio d-radio--success" value="Validation Message Success" /></div>
-      <div class="d-radio__copy d-radio__label">
-        <div>To a team member or room phone</div>
-        <div class="base-input__messages d-validation-message__container">
-          <div role="status" aria-live="polite" class="base-input__message d-validation-message base-input__message--success d-validation-message--success">
-            <p>Because someone else might be able to talk to them.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </label>
-</div>
-'
+:htmlCode='() => $refs.validationStatesExample'
 vueCode='
-<dt-radio
-  name="ValidationMessageWarning"
-  value="Validation Message Warning"
-  label="To voicemail"
-  validation-state="warning"
-  :messages="[{ message: `So they can hear your voice`, type: `warning` }]"
-/>
-<dt-radio
-  name="ValidationMessageError"
-  value="Validation Message Error"
-  label="To a message (no voicemail)"
-  validation-state="error"
-/>
-<dt-radio
-  name="ValidationMessageSuccess"
-  value="Validation Message Success"
-  label="To a team member or room phone"
-  validation-state="success"
-  :messages="[{ message: `Because someone else might be able to talk to them.`, type: `success` }]"
-/>
+<dt-radio-group legend="Advanced missed call routing" model-value="">
+  <dt-radio
+    name="ValidationMessageWarning"
+    value="Validation Message Warning"
+    label="To voicemail"
+    validation-state="warning"
+    :messages="[{ message: `So they can hear your voice`, type: `warning` }]"
+  />
+  <dt-radio
+    name="ValidationMessageError"
+    value="Validation Message Error"
+    label="To a message (no voicemail)"
+    validation-state="error"
+  />
+  <dt-radio
+    name="ValidationMessageSuccess"
+    value="Validation Message Success"
+    label="To a team member or room phone"
+    validation-state="success"
+    :messages="[{ message: `Because someone else might be able to talk to them.`, type: `success` }]"
+  />
+</dt-radio-group>
 '
 showHtmlWarning />
 
@@ -298,7 +202,7 @@ vueCode='
 Use the `label-size` prop to override the default label size.
 
 <code-well-header>
-  <dt-stack gap="400">
+  <dt-stack ref="labelSizeExample" gap="400">
     <dt-radio name="labelSizeExample1" value="xs" label="Extra small label" label-size="xs" checked />
     <dt-radio name="labelSizeExample1" value="sm" label="Small label" label-size="sm" />
     <dt-radio name="labelSizeExample1" value="md" label="Medium label (default)" label-size="md" />
@@ -307,6 +211,8 @@ Use the `label-size` prop to override the default label size.
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.labelSizeExample'
+showHtmlWarning
 vueCode='
 <dt-radio name="labelSizeExample1" value="xs" label="Extra small label" label-size="xs" />
 <dt-radio name="labelSizeExample1" value="sm" label="Small label" label-size="sm" />

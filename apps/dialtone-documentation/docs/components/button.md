@@ -406,19 +406,19 @@ showHtmlWarning />
 Pass `to` to render as `<router-link>` for internal client-side SPA navigation. Use `replace` to navigate without adding a history entry.
 
 <code-well-header>
-  <dt-button to="/" kind="default" size="xs" ref="toExample2">
+  <dt-button to="/" kind="default" size="xs" ref="toExample">
     Home
   </dt-button>
 </code-well-header>
 
 <code-example-tabs
-:htmlCode='() => $refs.toExample1'
+:htmlCode='() => $refs.toExample'
 vueCode='
 <dt-button to="/" kind="default" size="xs">
   Home
 </dt-button>
 '
-/>
+showHtmlWarning />
 
 ### Migration
 
@@ -1053,7 +1053,7 @@ Loading buttons are useful for communicating a delay between the button interact
 The width of the button remains determined by the length of the label, which is visually hidden in this state.
 
 <code-well-header>
-  <dt-stack gap="500" align="center">
+  <dt-stack ref="loadingExample" gap="500" align="center">
     <dt-toggle size="sm" v-model="loading" wrapperClass="d-g8">
       Loading
     </dt-toggle>
@@ -1295,6 +1295,7 @@ showHtmlWarning />
 
 We provide the following branded buttons for log-in and sign-up workflows.
 
+<!-- lint-doc-examples-disable -->
 <code-well-header>
   <dt-stack
     gap="400"

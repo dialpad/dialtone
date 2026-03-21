@@ -41,7 +41,7 @@ In addition to the [Button component's](button.md) documentation:
 ### Base
 
 <code-well-header>
-  <dt-stack direction="row" gap="400">
+  <dt-stack direction="row" gap="400" ref="baseExample">
     <dt-split-button end-tooltip-text="More calling options">
       Place Call
       <template #dropdownList>
@@ -70,32 +70,7 @@ In addition to the [Button component's](button.md) documentation:
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--primary d-split-btn__alpha d-split-btn__alpha--md" type="button">
-    <span class="d-btn__label base-button__label"> Place Call </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--primary d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--outlined d-split-btn__alpha d-split-btn__alpha--md" type="button">
-    <span class="d-btn__label base-button__label"> Place Call </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--outlined d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-split-btn__alpha d-split-btn__alpha--md" type="button">
-    <span class="d-btn__label base-button__label"> Place Call </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-'
+:htmlCode='() => $refs.baseExample'
 vueCode='
 <dt-split-button end-tooltip-text="More calling options">
   Place Call
@@ -127,7 +102,7 @@ showHtmlWarning />
 ### Danger
 
 <code-well-header>
-  <dt-stack direction="row" gap="400">
+  <dt-stack direction="row" gap="400" ref="dangerExample">
     <dt-split-button kind="danger" end-tooltip-text="More calling options">
       Place Call
       <template #dropdownList>
@@ -156,32 +131,7 @@ showHtmlWarning />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--primary d-btn--danger d-split-btn__alpha d-split-btn__alpha--md" type="button">
-    <span class="d-btn__label base-button__label"> Place Call </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--primary d-btn--danger d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--outlined d-btn--danger d-split-btn__alpha d-split-btn__alpha--md" type="button">
-    <span class="d-btn__label base-button__label"> Place Call </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--outlined d-btn--danger d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--danger d-split-btn__alpha d-split-btn__alpha--md" type="button">
-    <span class="d-btn__label base-button__label"> Place Call </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--danger d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-'
+:htmlCode='() => $refs.dangerExample'
 vueCode='
 <dt-split-button kind="danger" end-tooltip-text="More calling options">
   Place Call
@@ -213,7 +163,7 @@ showHtmlWarning />
 ### Positive
 
 <code-well-header>
-  <dt-stack direction="row" gap="400">
+  <dt-stack direction="row" gap="400" ref="positiveExample">
       <dt-split-button kind="positive" end-tooltip-text="More calling options"> Place Call </dt-split-button>
       <dt-split-button importance="outlined" kind="positive" end-tooltip-text="More calling options"> Place Call </dt-split-button>
       <dt-split-button importance="clear" kind="positive" end-tooltip-text="More calling options"> Place Call </dt-split-button>
@@ -221,32 +171,7 @@ showHtmlWarning />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<span class="d-split-btn">
-<button class="base-button__button d-btn d-btn--primary d-btn--positive d-split-btn__alpha d-split-btn__alpha--md" type="button">
-<span class="d-btn__label base-button__label"> Place Call </span>
-</button>
-<button class="base-button__button d-btn d-btn--primary d-btn--positive d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-<span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-</button>
-</span>
-<span class="d-split-btn">
-<button class="base-button__button d-btn d-btn--outlined d-btn--positive d-split-btn__alpha d-split-btn__alpha--md" type="button">
-<span class="d-btn__label base-button__label"> Place Call </span>
-</button>
-<button class="base-button__button d-btn d-btn--outlined d-btn--positive d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-<span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-</button>
-</span>
-<span class="d-split-btn">
-<button class="base-button__button d-btn d-btn--positive d-split-btn__alpha d-split-btn__alpha--md" type="button">
-<span class="d-btn__label base-button__label"> Place Call </span>
-</button>
-<button class="base-button__button d-btn d-btn--positive d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-<span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-</button>
-</span>
-'
+:htmlCode='() => $refs.positiveExample'
 vueCode='
 <dt-split-button kind="positive" end-tooltip-text="More calling options"> Place Call </dt-split-button>
 <dt-split-button kind="positive" importance="outlined" end-tooltip-text="More calling options"> Place Call </dt-split-button>
@@ -257,7 +182,7 @@ showHtmlWarning />
 ### Inverted
 
 <code-well-header bgclass="d-bgc-contrast">
-  <dt-stack direction="row" gap="400">
+  <dt-stack direction="row" gap="400" ref="invertedExample">
       <dt-split-button kind="inverted" end-tooltip-text="More calling options"> Place Call </dt-split-button>
       <dt-split-button importance="outlined" kind="inverted" end-tooltip-text="More calling options"> Place Call </dt-split-button>
       <dt-split-button importance="clear" kind="inverted" end-tooltip-text="More calling options"> Place Call </dt-split-button>
@@ -265,32 +190,7 @@ showHtmlWarning />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--primary d-btn--inverted d-split-btn__alpha d-split-btn__alpha--md" type="button">
-    <span class="d-btn__label base-button__label"> Place Call </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--primary d-btn--inverted d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--outlined d-btn--inverted d-split-btn__alpha d-split-btn__alpha--md" type="button">
-    <span class="d-btn__label base-button__label"> Place Call </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--outlined d-btn--inverted d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--inverted d-split-btn__alpha d-split-btn__alpha--md" type="button">
-    <span class="d-btn__label base-button__label"> Place Call </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--inverted d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-'
+:htmlCode='() => $refs.invertedExample'
 vueCode='
 <dt-split-button kind="inverted" end-tooltip-text="More calling options"> Place Call </dt-split-button>
 <dt-split-button importance="outlined" kind="inverted" end-tooltip-text="More calling options"> Place Call </dt-split-button>
@@ -301,31 +201,14 @@ showHtmlWarning />
 ### Muted
 
 <code-well-header>
-  <dt-stack direction="row" gap="400">
+  <dt-stack direction="row" gap="400" ref="mutedExample">
       <dt-split-button importance="outlined" kind="muted" end-tooltip-text="More calling options"> Place Call </dt-split-button>
       <dt-split-button importance="clear" kind="muted" end-tooltip-text="More calling options"> Place Call </dt-split-button>
   </dt-stack>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--outlined d-btn--muted d-split-btn__alpha d-split-btn__alpha--md" type="button">
-    <span class="d-btn__label base-button__label"> Place Call </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--outlined d-btn--muted d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--muted d-split-btn__alpha d-split-btn__alpha--md" type="button">
-    <span class="d-btn__label base-button__label"> Place Call </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--muted d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-'
+:htmlCode='() => $refs.mutedExample'
 vueCode='
 <dt-split-button importance="outlined" kind="muted" end-tooltip-text="More calling options"> Place Call </dt-split-button>
 <dt-split-button importance="clear" kind="muted" end-tooltip-text="More calling options"> Place Call </dt-split-button>
@@ -337,7 +220,7 @@ showHtmlWarning />
 Use the `disabled` prop to disable both buttons, or use `start-disabled` and `end-disabled` to disable each button independently.
 
 <code-well-header>
-  <dt-stack direction="row" gap="400">
+  <dt-stack direction="row" gap="400" ref="disabledExample">
       <dt-split-button disabled end-tooltip-text="More calling options"> Both disabled </dt-split-button>
       <dt-split-button start-disabled end-tooltip-text="More calling options"> Start disabled </dt-split-button>
       <dt-split-button end-disabled end-tooltip-text="More calling options"> End disabled </dt-split-button>
@@ -345,32 +228,7 @@ Use the `disabled` prop to disable both buttons, or use `start-disabled` and `en
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--primary d-split-btn__alpha d-split-btn__alpha--md" type="button" disabled>
-    <span class="d-btn__label base-button__label"> Both disabled </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--primary d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button" disabled>
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--primary d-split-btn__alpha d-split-btn__alpha--md" type="button" disabled>
-    <span class="d-btn__label base-button__label"> Start disabled </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--primary d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--primary d-split-btn__alpha d-split-btn__alpha--md" type="button">
-    <span class="d-btn__label base-button__label"> End disabled </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--primary d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button" disabled>
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-'
+:htmlCode='() => $refs.disabledExample'
 vueCode='
 <dt-split-button disabled end-tooltip-text="More calling options"> Both disabled </dt-split-button>
 <dt-split-button start-disabled end-tooltip-text="More calling options"> Start disabled </dt-split-button>
@@ -381,39 +239,14 @@ showHtmlWarning />
 ### Active
 
 <code-well-header>
-  <dt-stack direction="row" gap="400">
+  <dt-stack direction="row" gap="400" ref="activeExample">
     <dt-split-button start-active end-tooltip-text="More calling options"> Start active </dt-split-button>
     <dt-split-button end-active end-tooltip-text="More calling options"> End active </dt-split-button>
   </dt-stack>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--primary d-btn--active d-split-btn__alpha d-split-btn__alpha--md" type="button">
-    <span class="d-btn__label base-button__label"> Place Call </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--primary d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--primary d-split-btn__alpha d-split-btn__alpha--md" type="button">
-    <span class="d-btn__label base-button__label"> Place Call </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--primary d-btn--active d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--primary d-btn--active d-split-btn__alpha d-split-btn__alpha--md" type="button">
-    <span class="d-btn__label base-button__label"> Place Call </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--primary d-btn--active d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-'
+:htmlCode='() => $refs.activeExample'
 vueCode='
 <dt-split-button start-active end-tooltip-text="More calling options"> Start active </dt-split-button>
 <dt-split-button end-active end-tooltip-text="More calling options"> End active </dt-split-button>
@@ -423,7 +256,7 @@ showHtmlWarning />
 ## Sizes
 
 <code-well-header>
-  <dt-stack direction="row" gap="400">
+  <dt-stack direction="row" gap="400" ref="sizesExample">
     <dt-split-button size="xs" end-tooltip-text="More calling options"> xs </dt-split-button>
     <dt-split-button size="sm" end-tooltip-text="More calling options"> sm </dt-split-button>
     <dt-split-button size="md" end-tooltip-text="More calling options"> md </dt-split-button>
@@ -433,48 +266,7 @@ showHtmlWarning />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--primary d-btn--xs d-split-btn__alpha d-split-btn__alpha--xs" type="button">
-    <span class="d-btn__label base-button__label"> Place Call </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--primary d-btn--xs d-btn--icon-only d-split-btn__omega d-split-btn__omega--xs" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--primary d-btn--sm d-split-btn__alpha d-split-btn__alpha--sm" type="button">
-    <span class="d-btn__label base-button__label"> Place Call </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--primary d-btn--sm d-btn--icon-only d-split-btn__omega d-split-btn__omega--sm" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--primary d-split-btn__alpha d-split-btn__alpha--md" type="button">
-    <span class="d-btn__label base-button__label"> Place Call </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--primary d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--primary d-btn--lg d-split-btn__alpha d-split-btn__alpha--lg" type="button">
-    <span class="d-btn__label base-button__label"> Place Call </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--primary d-btn--lg d-btn--icon-only d-split-btn__omega d-split-btn__omega--lg" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--primary d-btn--xl d-split-btn__alpha d-split-btn__alpha--xl" type="button">
-    <span class="d-btn__label base-button__label"> Place Call </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--primary d-btn--xl d-btn--icon-only d-split-btn__omega d-split-btn__omega--xl" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-'
+:htmlCode='() => $refs.sizesExample'
 vueCode='
 <dt-split-button size="xs" end-tooltip-text="More calling options"> xs </dt-split-button>
 <dt-split-button size="sm" end-tooltip-text="More calling options"> sm </dt-split-button>
@@ -487,7 +279,7 @@ showHtmlWarning />
 ## Loading
 
 <code-well-header>
-  <dt-stack direction="row" gap="400">
+  <dt-stack direction="row" gap="400" ref="loadingExample">
     <dt-split-button start-loading end-tooltip-text="More calling options"> Place call </dt-split-button>
     <dt-split-button start-loading importance="outlined" end-tooltip-text="More calling options"> Place call </dt-split-button>
     <dt-split-button start-loading importance="clear" end-tooltip-text="More calling options"> Place call </dt-split-button>
@@ -495,32 +287,7 @@ showHtmlWarning />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--primary d-btn--loading d-split-btn__alpha d-split-btn__alpha--md" type="button">
-    <span class="d-btn__label base-button__label"> Place Call </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--primary d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--outlined d-btn--loading d-split-btn__alpha d-split-btn__alpha--md" type="button">
-    <span class="d-btn__label base-button__label"> Place Call </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--outlined d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--loading d-split-btn__alpha d-split-btn__alpha--md" type="button">
-    <span class="d-btn__label base-button__label"> Place Call </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-'
+:htmlCode='() => $refs.loadingExample'
 vueCode='
 <dt-split-button start-loading end-tooltip-text="More calling options"> Place call </dt-split-button>
 <dt-split-button start-loading importance="outlined" end-tooltip-text="More calling options"> Place call </dt-split-button>
@@ -536,6 +303,7 @@ The start button supports navigation via `start-href` (renders as `<a>`) or `sta
 
 <code-well-header>
   <dt-split-button
+    ref="externalLinkExample"
     start-href="https://dialpad.com"
     start-target="_blank"
     start-rel="noopener noreferrer"
@@ -550,16 +318,7 @@ The start button supports navigation via `start-href` (renders as `<a>`) or `sta
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<span class="d-split-btn">
-  <a class="base-button__button d-btn d-btn--primary d-split-btn__alpha d-split-btn__alpha--md" href="https://dialpad.com" target="_blank" rel="noopener noreferrer">
-    <span class="d-btn__label base-button__label"> Visit Dialpad </span>
-  </a>
-  <button class="base-button__button d-btn d-btn--primary d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-'
+:htmlCode='() => $refs.externalLinkExample'
 vueCode='
 <dt-split-button
   start-href="<https://dialpad.com>"
@@ -598,7 +357,7 @@ vueCode='
 ### Icon and Label
 
 <code-well-header>
-  <dt-stack direction="row" gap="400" class="d-fw-wrap">
+  <dt-stack direction="row" gap="400" class="d-fw-wrap" ref="iconLabelExample">
     <dt-split-button importance="outlined" end-tooltip-text="More calling options">
       <template #startIcon="{ size }">
         <dt-icon name="phone" :size="size" />
@@ -627,52 +386,7 @@ vueCode='
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--outlined d-split-btn__alpha d-split-btn__alpha--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">
-      <svg class="d-icon--size-300 d-icon">...</svg>
-    </span>
-    <span class="d-btn__label base-button__label"> Place Call </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--outlined d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--outlined d-split-btn__alpha d-split-btn__alpha--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--top">
-      <svg class="d-icon--size-300 d-icon">...</svg>
-    </span>
-    <span class="d-btn__label base-button__label"> Place Call </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--outlined d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--outlined d-split-btn__alpha d-split-btn__alpha--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--right">
-      <svg class="d-icon--size-300 d-icon">...</svg>
-    </span>
-    <span class="d-btn__label base-button__label"> Place Call </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--outlined d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--outlined d-split-btn__alpha d-split-btn__alpha--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--bottom">
-      <svg class="d-icon--size-300 d-icon">...</svg>
-    </span>
-    <span class="d-btn__label base-button__label"> Place Call </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--outlined d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-'
+:htmlCode='() => $refs.iconLabelExample'
 vueCode='
 <dt-split-button importance="outlined" end-tooltip-text="More calling options">
   <template #startIcon="{ size }">
@@ -707,7 +421,7 @@ Use `#startIcon` and `#startEndIcon` together to place icons at both the start a
 within the start button. This uses the same dual-icon pattern as [DtButton](/components/button.html#start-and-end-icons).
 
 <code-well-header>
-  <dt-split-button importance="outlined" end-tooltip-text="More calling options">
+  <dt-split-button ref="dualIconsExample" importance="outlined" end-tooltip-text="More calling options">
     <template #startIcon="{ size }">
       <dt-icon name="phone" :size="size" />
     </template>
@@ -719,22 +433,7 @@ within the start button. This uses the same dual-icon pattern as [DtButton](/com
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--outlined d-split-btn__alpha d-split-btn__alpha--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">
-      <svg class="d-icon--size-300 d-icon">...</svg>
-    </span>
-    <span class="d-btn__label base-button__label"> Place call </span>
-    <span class="base-button__icon d-btn__icon d-btn__icon--right">
-      <svg class="d-icon--size-300 d-icon">...</svg>
-    </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--outlined d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-'
+:htmlCode='() => $refs.dualIconsExample'
 vueCode='
 <dt-split-button importance="outlined" end-tooltip-text="More calling options">
   <template #startIcon="{ size }">
@@ -753,7 +452,7 @@ showHtmlWarning />
 Use `#endIcon` to replace the default chevron icon on the end (omega) button.
 
 <code-well-header>
-  <dt-split-button importance="outlined" end-tooltip-text="More calling options">
+  <dt-split-button ref="customEndIconExample" importance="outlined" end-tooltip-text="More calling options">
     <template #startIcon="{ size }">
       <dt-icon name="phone" :size="size" />
     </template>
@@ -765,21 +464,7 @@ Use `#endIcon` to replace the default chevron icon on the end (omega) button.
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--outlined d-split-btn__alpha d-split-btn__alpha--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">
-      <svg class="d-icon--size-300 d-icon">...</svg>
-    </span>
-    <span class="d-btn__label base-button__label"> Place call </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--outlined d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">
-      <svg class="d-icon--size-300 d-icon">...</svg>
-    </span>
-  </button>
-</span>
-'
+:htmlCode='() => $refs.customEndIconExample'
 vueCode='
 <dt-split-button importance="outlined" end-tooltip-text="More calling options">
   <template #startIcon="{ size }">
@@ -796,7 +481,7 @@ showHtmlWarning />
 ### Icon Only
 
 <code-well-header>
-  <dt-stack direction="row" gap="400">
+  <dt-stack direction="row" gap="400" ref="iconOnlyExample">
     <dt-split-button end-tooltip-text="More calling options" start-tooltip-text="Place call">
       <template #startIcon="{ size }">
         <dt-icon name="phone" :size="size" />
@@ -816,38 +501,7 @@ showHtmlWarning />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--primary d-split-btn__alpha d-split-btn__alpha--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">
-      <svg class="d-icon--size-300 d-icon">...</svg>
-    </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--outlined d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--outlined d-split-btn__alpha d-split-btn__alpha--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">
-      <svg class="d-icon--size-300 d-icon">...</svg>
-    </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--outlined d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--danger d-split-btn__alpha d-split-btn__alpha--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">
-      <svg class="d-icon--size-300 d-icon">...</svg>
-    </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--outlined d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-'
+:htmlCode='() => $refs.iconOnlyExample'
 vueCode='
 <dt-split-button end-tooltip-text="More calling options" start-tooltip-text="Place call">
   <template #startIcon="{ size }">
@@ -868,7 +522,7 @@ vueCode='
 showHtmlWarning />
 
 <code-well-header bgclass="d-bgc-contrast">
-  <dt-stack direction="row" gap="400">
+  <dt-stack direction="row" gap="400" ref="iconOnlyInvertedExample">
     <dt-split-button kind="inverted" end-tooltip-text="More calling options" start-tooltip-text="Place call">
       <template #startIcon="{ size }">
         <dt-icon name="phone" :size="size" />
@@ -888,38 +542,7 @@ showHtmlWarning />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--primary d-btn--inverted d-split-btn__alpha d-split-btn__alpha--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">
-      <svg class="d-icon--size-300 d-icon">...</svg>
-    </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--primary d-btn--inverted d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--outlined d-btn--inverted d-split-btn__alpha d-split-btn__alpha--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">
-      <svg class="d-icon--size-300 d-icon">...</svg>
-    </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--outlined d-btn--inverted d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-<span class="d-split-btn">
-  <button class="base-button__button d-btn d-btn--inverted d-split-btn__alpha d-split-btn__alpha--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">
-      <svg class="d-icon--size-300 d-icon">...</svg>
-    </span>
-  </button>
-  <button class="base-button__button d-btn d-btn--inverted d-btn--icon-only d-split-btn__omega d-split-btn__omega--md" type="button">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-  </button>
-</span>
-'
+:htmlCode='() => $refs.iconOnlyInvertedExample'
 vueCode='
 <dt-split-button kind="inverted" end-tooltip-text="More calling options" start-tooltip-text="Place call">
   <template #startIcon="{ size }">

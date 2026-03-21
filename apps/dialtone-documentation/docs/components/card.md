@@ -41,7 +41,7 @@ They should be easy to scan for relevant and actionable information. Elements, l
 ### Base
 
 <code-well-header>
-  <dt-card class="d-w264" header-class="h:d-bgc-moderate-opaque" content-class="h:d-bgc-moderate-opaque" footer-class="h:d-bgc-moderate-opaque">
+  <dt-card ref="baseExample" class="d-w264" header-class="h:d-bgc-moderate-opaque" content-class="h:d-bgc-moderate-opaque" footer-class="h:d-bgc-moderate-opaque">
     <template #header>
       (header slot)
     </template>
@@ -55,6 +55,7 @@ They should be easy to scan for relevant and actionable information. Elements, l
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.baseExample'
 vueCode='
 <dt-card class="d-w264">
   <template #header>
@@ -73,7 +74,7 @@ showHtmlWarning />
 ### With Header
 
 <code-well-header>
-  <dt-card class="d-w264">
+  <dt-card ref="headerExample" class="d-w264">
     <template #header>
       <dt-text as="p" kind="headline" size="md">Lorem ipsum</dt-text>
       <dt-button
@@ -97,6 +98,7 @@ showHtmlWarning />
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.headerExample'
 vueCode='
 <dt-card class="d-w264">
   <template #header>
@@ -125,7 +127,7 @@ showHtmlWarning />
 ### With Footer
 
 <code-well-header>
-  <dt-card class="d-w264">
+  <dt-card ref="footerExample" class="d-w264">
     <template #content>
       Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
     </template>
@@ -141,6 +143,7 @@ showHtmlWarning />
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.footerExample'
 vueCode='
 <dt-card class="d-w264">
   <template #content>
@@ -161,21 +164,15 @@ showHtmlWarning />
 ### Content Only
 
 <code-well-header>
-  <div class="d-card d-w264">
-    <div class="d-card__content">
+  <dt-card ref="contentOnlyExample" class="d-w264">
+    <template #content>
       Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
-    </div>
-  </div>
+    </template>
+  </dt-card>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-card d-w264">
-  <div class="d-card__content">
-    Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
-  </div>
-</div>
-'
+:htmlCode='() => $refs.contentOnlyExample'
 vueCode='
 <dt-card class="d-w264">
   <template #content>
@@ -188,7 +185,7 @@ showHtmlWarning />
 ### With Header, Footer and Scrollable Content
 
 <code-well-header>
-  <dt-card class="d-w264" content-class="d-pr0">
+  <dt-card ref="scrollableExample" class="d-w264" content-class="d-pr0">
     <template #header>
       <dt-text as="p" kind="headline" size="md">Lorem ipsum</dt-text>
       <dt-button
@@ -220,6 +217,7 @@ showHtmlWarning />
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.scrollableExample'
 vueCode='
 <dt-card class="d-w264" content-class="d-pr0">
   <template #header>

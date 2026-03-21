@@ -48,7 +48,7 @@ The Toggle component acts as a way to allow the User to switch between two mutua
 ### Base Styles
 
 <code-well-header>
-  <dt-stack as="fieldset" gap="400">
+  <dt-stack ref="baseStylesExample" as="fieldset" gap="400">
     <dt-toggle label-class="d-mr6">Unchecked Toggle</dt-toggle>
     <dt-toggle :model-value="true" label-class="d-mr6">Checked Toggle</dt-toggle>
     <dt-toggle disabled label-class="d-mr6">Unchecked Disabled</dt-toggle>
@@ -60,35 +60,7 @@ The Toggle component acts as a way to allow the User to switch between two mutua
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-toggle-wrapper">
-  <label for="dt3"> Unchecked Toggle </label><button id="dt3" role="switch" type="button" aria-checked="false" aria-disabled="false" class="d-toggle"><span class="d-toggle__inner"></span></button>
-</div>
-<div class="d-toggle-wrapper">
-  <label for="dt4"> Checked Toggle </label>
-  <button id="dt4" role="switch" type="button" aria-checked="true" aria-disabled="false" class="d-toggle d-toggle--checked"><span class="d-toggle__inner"></span></button>
-</div>
-<div class="d-toggle-wrapper">
-  <label for="dt5"> Unchecked Disabled </label>
-  <button id="dt5" role="switch" type="button" aria-checked="false" aria-disabled="true" class="d-toggle d-toggle--disabled" disabled="disabled"><span class="d-toggle__inner"></span></button>
-</div>
-<div class="d-toggle-wrapper">
-  <label for="dt6"> Checked Disabled </label>
-  <button id="dt6" role="switch" type="button" aria-checked="true" disabled="disabled" aria-disabled="true" class="d-toggle d-toggle--checked d-toggle--disabled"><span class="d-toggle__inner"></span></button>
-</div>
-<div class="d-toggle-wrapper">
-  <label for="dt7"> Indeterminate Toggle </label>
-  <button id="dt7" role="checkbox" type="button" aria-checked="mixed" aria-disabled="false" class="d-toggle d-toggle--indeterminate"><span class="d-toggle__inner"></span></button>
-</div>
-<div class="d-toggle-wrapper">
-  <label for="dt8"> Indeterminate Disabled </label>
-  <button id="dt8" role="checkbox" type="button" aria-checked="mixed" disabled="disabled" aria-disabled="true" class="d-toggle d-toggle--disabled d-toggle--indeterminate"><span class="d-toggle__inner"></span></button>
-</div>
-<div class="d-toggle-wrapper">
-  <label for="dt14">Without icon</label>
-  <button id="dt14" role="switch" type="button" aria-checked="false" aria-disabled="false" class="d-toggle"></button>
-</div>
-'
+:htmlCode='() => $refs.baseStylesExample'
 vueCode='
 <dt-toggle>
   Unchecked Toggle
@@ -117,21 +89,14 @@ showHtmlWarning />
 ### Sizes
 
 <code-well-header>
-  <dt-stack as="fieldset" gap="400">
+  <dt-stack ref="sizesExample" as="fieldset" gap="400">
     <dt-toggle size="sm" label-class="d-mr6">Small size</dt-toggle>
     <dt-toggle label-class="d-mr6">Default size</dt-toggle>
   </dt-stack>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-toggle-wrapper">
-  <label for="dt3"> Default size </label><button id="dt3" role="switch" type="button" aria-checked="false" aria-disabled="false" class="d-toggle"><span class="d-toggle__inner"></span></button>
-</div>
-<div class="d-toggle-wrapper">
-  <label for="dt14"> Small size </label><button id="dt14" role="switch" type="button" aria-checked="false" aria-disabled="false" class="d-toggle d-toggle--small"><span class="d-toggle__inner"></span></button>
-</div>
-'
+:htmlCode='() => $refs.sizesExample'
 vueCode='
 <dt-toggle>
   Default size

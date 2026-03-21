@@ -76,13 +76,11 @@ showHtmlWarning />
 This inverts the underline behavior. With `underline="false"`, the link will not have an underline by default, but will show one on hover.
 
 <code-well-header>
-  <dt-link href="#link" :underline="false">No underline link</dt-link>
+  <dt-link ref="noUnderlineExample" href="#link" :underline="false">No underline link</dt-link>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<a href="#link" class="d-link d-link--no-underline">No underline link</a>
-'
+:htmlCode='() => $refs.noUnderlineExample'
 vueCode='
 <dt-link href="#link" :underline="false">No underline link</dt-link>
 '

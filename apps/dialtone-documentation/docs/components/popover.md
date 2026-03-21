@@ -66,31 +66,11 @@ The content slot will be rendered lazily when the popover is open. By default, t
 ### Popover - Modal
 
 <code-well-header>
-  <example-popover modal />
+  <example-popover ref="modalExample" modal />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-popover">
-  <div id="DtPopover__anchor1">
-    <button type="button" class="base-button__button d-btn d-btn--primary" aria-expanded="false">
-      <span class="d-btn__label base-button__label"> View Popover </span>
-    </button>
-  </div>
-</div>
-<div class="tippy-box d-ps-absolute" id="tippy-1" style="z-index: 650; position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(-593px, 197px, 0px);" data-popper-placement="bottom-end">
-  <div id="dt0" role="dialog" aria-hidden="false" aria-labelledby="DtPopover__anchor1" aria-modal="false" tabindex="-1" class="d-popover__dialog d-popover__dialog--modal" style="">
-    <div class="d-popover__content d-p16">
-      <div>
-        <p class="d-mb4">This is content rendered within the popover.</p>
-        <button type="button" class="base-button__button d-btn d-btn--primary">
-          <span class="d-btn__label base-button__label"> Button </span>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-'
+:htmlCode='() => $refs.modalExample'
 vueCode='
 <dt-popover
   :open="onOpen"
@@ -121,31 +101,11 @@ showHtmlWarning />
 ### Popover - Non Modal
 
 <code-well-header>
-  <example-popover />
+  <example-popover ref="nonModalExample" />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-popover">
-  <div id="DtPopover__anchor1">
-    <button type="button" class="base-button__button d-btn d-btn--primary" aria-expanded="false">
-      <span class="d-btn__label base-button__label"> View Popover </span>
-    </button>
-  </div>
-</div>
-<div class="tippy-box d-ps-absolute" data-tippy-root="" id="tippy-1" data-popper-placement="bottom-end" style="z-index: 300; position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(-593px, 197px, 0px);">
-  <div id="dt0" role="dialog" aria-hidden="false" aria-labelledby="DtPopover__anchor1" aria-modal="true" tabindex="-1" class="d-popover__dialog" style="">
-    <div class="d-popover__content d-p16">
-      <div>
-        <p class="d-mb4">This is content rendered within the popover.</p>
-        <button type="button" class="base-button__button d-btn d-btn--primary">
-          <span class="d-btn__label base-button__label"> Button </span>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-'
+:htmlCode='() => $refs.nonModalExample'
 vueCode='
 <dt-popover
   :open="onOpen"
@@ -177,7 +137,7 @@ showHtmlWarning />
 ### With Header - Modal
 
 <code-well-header>
-  <example-popover modal header>
+  <example-popover ref="withHeaderExample" modal header>
     <template #content>
       <div class="d-mb8">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae.<br></div>
     </template>
@@ -185,43 +145,7 @@ showHtmlWarning />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-popover">
-  <div id="DtPopover__anchor1">
-    <button type="button" class="base-button__button d-btn d-btn--primary" aria-expanded="false">
-      <span class="d-btn__label base-button__label"> View Popover </span>
-    </button>
-  </div>
-</div>
-<div class="tippy-box d-ps-absolute" data-tippy-root="" id="tippy-1" data-popper-placement="bottom-end" style="z-index: 650; position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(5px, 197px, 0px);">
-  <div
-    id="dt0"
-    role="dialog"
-    aria-hidden="false"
-    aria-labelledby="DtPopover__anchor1"
-    aria-modal="false"
-    tabindex="-1"
-    class="d-popover__dialog d-popover__dialog--modal"
-    style="max-height: calc(100vh - var(--dt-size-300));"
-  >
-    <div class="d-popover__header d-px16">
-      <div class="d-popover__header__content"><div class="d-w100p">This is the header</div></div>
-    </div>
-    <div class="d-popover__content d-p16">
-      <div>
-        <div class="d-mb8">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam
-          repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis
-          obcaecati quibusdam repudiandae.<br />
-        </div>
-        <button type="button" class="base-button__button d-btn d-btn--primary">
-          <span class="d-btn__label base-button__label"> Button </span>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-'
+:htmlCode='() => $refs.withHeaderExample'
 vueCode='
 <dt-popover
   :open="onOpen"
@@ -257,7 +181,7 @@ showHtmlWarning />
 ### With Footer - Modal
 
 <code-well-header>
-  <example-popover modal footer>
+  <example-popover ref="withFooterExample" modal footer>
     <template #content>
       <div class="d-mb8">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae.<br></div>
     </template>
@@ -265,43 +189,7 @@ showHtmlWarning />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-popover">
-  <div id="DtPopover__anchor1">
-    <button type="button" class="base-button__button d-btn d-btn--primary" aria-expanded="false">
-      <span class="d-btn__label base-button__label"> View Popover </span>
-    </button>
-  </div>
-</div>
-<div class="tippy-box d-ps-absolute" data-tippy-root="" id="tippy-5" style="z-index: 650; position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(5px, 197px, 0px);" data-popper-placement="bottom-end">
-  <div
-    id="dt0"
-    role="dialog"
-    aria-hidden="false"
-    aria-labelledby="DtPopover__anchor1"
-    aria-modal="false"
-    tabindex="-1"
-    class="d-popover__dialog d-popover__dialog--modal"
-    style="max-height: calc(100vh - var(--dt-size-300));"
-  >
-    <div class="d-popover__content d-p16">
-      <div>
-        <div class="d-mb8">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam
-          repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis
-          obcaecati quibusdam repudiandae.<br />
-        </div>
-        <button type="button" class="base-button__button d-btn d-btn--primary">
-          <span class="d-btn__label base-button__label"> Button </span>
-        </button>
-      </div>
-    </div>
-    <div class="d-popover__footer d-px16">
-      <div class="d-popover__footer__content"><div class="d-w100p">This is the footer</div></div>
-    </div>
-  </div>
-</div>
-'
+:htmlCode='() => $refs.withFooterExample'
 vueCode='
 <dt-popover
   :open="onOpen"
@@ -342,10 +230,11 @@ be clipped, it will move to a new position. It will do this automatically by def
 manually specify which position it will move to in what order you can do so via the `fallbackPlacements` prop.
 
 <code-well-header>
-  <example-popover :fallback-placements="['top']" button-text="Fallback placement: top" />
+  <example-popover ref="fallbackPlacementsExample" :fallback-placements="['top']" button-text="Fallback placement: top" />
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.fallbackPlacementsExample'
 vueCode='
 <dt-popover
   :open="onOpen"
@@ -372,17 +261,18 @@ vueCode='
   </template>
 </dt-popover>
 '
-/>
+showHtmlWarning />
 
 ### Padding
 
 Padding options for the popover content are provided via size classes "small", "medium" or "large" in order to standardize the look of the popover content between usages. To remove the padding from the content, you can pass "none". Setting none will also allow you to set custom padding via utility classes (Ex: you only want padding on the left.).
 
 <code-well-header>
-  <example-popover padding="small" />
+  <example-popover ref="paddingExample" padding="small" />
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.paddingExample'
 vueCode='
 <dt-popover
   :open="onOpen"
@@ -409,7 +299,7 @@ vueCode='
   </template>
 </dt-popover>
 '
-/>
+showHtmlWarning />
 
 ### Force Close All Opened Instances
 
@@ -425,7 +315,7 @@ window.dispatchEvent(e);
 Popover content renders outside the DOM tree. Use the `contentMode` prop to apply color mode (invert, light, dark) to the positioned content. See [Positioned Components](/components/mode-island.html#positioned-components) for details.
 
 <code-well-header>
-  <dt-popover content-mode="invert" placement="bottom-start" dialogClass="d-w216">
+  <dt-popover ref="contentModeExample" content-mode="invert" placement="bottom-start" dialogClass="d-w216">
     <template #anchor>
       <dt-button size="sm" kind="muted" importance="outlined">Inverted Popover</dt-button>
     </template>
@@ -436,12 +326,13 @@ Popover content renders outside the DOM tree. Use the `contentMode` prop to appl
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.contentModeExample'
 vueCode='
 <dt-popover content-mode="invert">...</dt-popover>
 <dt-popover content-mode="dark">...</dt-popover>
 <dt-popover content-mode="light">...</dt-popover>
 '
-/>
+showHtmlWarning />
 
 ## Vue API
 

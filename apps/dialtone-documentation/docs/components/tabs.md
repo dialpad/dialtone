@@ -133,7 +133,7 @@ showHtmlWarning />
 Add `disabled` to a specific tab.
 
 <code-well-header>
-  <dt-tab-group>
+  <dt-tab-group ref="disabledSingleTabExample">
     <template #tabs>
       <dt-tab id="1" panel-id="2" selected>First</dt-tab>
       <dt-tab id="3" panel-id="4">Second</dt-tab>
@@ -144,7 +144,7 @@ Add `disabled` to a specific tab.
 </code-well-header>
 
 <code-example-tabs
-:htmlCode='() => $refs.disabledTabsExample'
+:htmlCode='() => $refs.disabledSingleTabExample'
 vueCode='
 <dt-tab-group>
   <template #tabs>
@@ -214,7 +214,7 @@ Tabs expand proportionally to fill the container. Longer labels receive more spa
 
 <code-well-header>
   <div class="d-w100p">
-    <dt-tab-group spread="grow">
+    <dt-tab-group ref="growExample" spread="grow">
       <template #tabs>
         <dt-tab id="sg1" panel-id="sg2" selected>Tab 1</dt-tab>
         <dt-tab id="sg3" panel-id="sg4">Tab the second</dt-tab>
@@ -225,6 +225,7 @@ Tabs expand proportionally to fill the container. Longer labels receive more spa
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.growExample'
 vueCode='
 <dt-tab-group spread="grow">
   <template #tabs>
@@ -242,7 +243,7 @@ All tabs share the same width, regardless of label length.
 
 <code-well-header>
   <div class="d-w100p">
-    <dt-tab-group spread="equal">
+    <dt-tab-group ref="equalExample" spread="equal">
       <template #tabs>
         <dt-tab id="se1" panel-id="se2" selected>Tab 1</dt-tab>
         <dt-tab id="se3" panel-id="se4">Tab the second</dt-tab>
@@ -253,6 +254,7 @@ All tabs share the same width, regardless of label length.
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.equalExample'
 vueCode='
 <dt-tab-group spread="equal">
   <template #tabs>
@@ -267,7 +269,7 @@ showHtmlWarning />
 ## Sizes
 
 <code-well-header>
-  <dt-stack gap="500" class="d-w100p">
+  <dt-stack ref="sizeTabsExample" gap="500" class="d-w100p">
     <dt-tab-group size="xs">
       <template #tabs>
         <dt-tab id="1" panel-id="2" selected>

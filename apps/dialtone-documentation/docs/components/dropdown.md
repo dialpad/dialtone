@@ -70,7 +70,7 @@ Use the Dropdown component when you have a list of links or actions that can be 
 ### Default
 
 <code-well-header>
-  <dt-dropdown navigation-type="arrow-keys">
+  <dt-dropdown ref="defaultExample" navigation-type="arrow-keys">
     <template #anchor="{ attrs }">
       <dt-button v-bind="attrs">
         Click to open
@@ -91,33 +91,7 @@ Use the Dropdown component when you have a list of links or actions that can be 
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div>
-  <div class="d-popover">
-    <div id="DtPopover__anchor2">
-      <button class="base-button__button d-btn d-btn--primary">
-        <span class="d-btn__label base-button__label"> Click to open </span>
-      </button>
-    </div>
-  </div>
-</div>
-<div class="tippy-box d-ps-absolute" data-tippy-root="" id="tippy-13" data-popper-placement="bottom" style="...">
-  <div id="dt7" role="menu" aria-hidden="false" aria-labelledby="DtPopover__anchor8" aria-modal="false" class="d-popover__dialog d-popover__dialog--modal" tabindex="-1" style="...">
-    <div class="d-popover__content">
-      <ul id="dt6" class="d-dropdown-list d-py0">
-        <li class="d-list-item" tabindex="-1" role="menuitem" aria-selected="false">
-          <div class="d-item-layout">
-            <section class="d-item-layout--content">
-              <div class="d-item-layout--title">Menu Item 1</div>
-            </section>
-          </div>
-        </li>
-        ...
-      </ul>
-    </div>
-  </div>
-</div>
-'
+:htmlCode='() => $refs.defaultExample'
 vueCode='
 <dt-dropdown navigation-type="arrow-keys">
   <template #anchor="{ attrs }">
@@ -143,7 +117,7 @@ vueCode='
 ### With Sections and Headings
 
 <code-well-header>
-  <dt-dropdown navigation-type="arrow-keys">
+  <dt-dropdown ref="sectionsExample" navigation-type="arrow-keys">
     <template #anchor="{ attrs }">
       <dt-button v-bind="attrs">
         Click to open
@@ -188,60 +162,7 @@ vueCode='
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div>
-  <div class="d-popover">
-    <div id="DtPopover__anchor2">
-      <button class="base-button__button d-btn d-btn--primary">
-        <span class="d-btn__label base-button__label"> Click to open </span>
-      </button>
-    </div>
-  </div>
-</div>
-<div class="tippy-box d-ps-absolute" data-tippy-root="" id="tippy-13" data-popper-placement="bottom" style="...">
-  <div id="dt7" role="menu" aria-hidden="false" aria-labelledby="DtPopover__anchor8" aria-modal="false" class="d-popover__dialog d-popover__dialog--modal" tabindex="-1" style="...">
-    <div class="d-popover__content">
-      <ul id="dt6" class="d-dropdown-list d-py0">
-        <ul id="dt16" class="d-list-item-group" role="group" aria-labelledby="dt16-heading">
-          <li id="dt16-heading" role="presentation" class="dt-dropdown-list--header d-py4 d-px8 d-fw-semibold d-c-default">Menu Heading A</li>
-          <li id="dt17" class="d-list-item d-list-item--static" tabindex="-1" role="listitem">
-            <div class="d-item-layout">
-              <section class="d-item-layout--content">
-                <div class="d-item-layout--title">
-                  Menu Item 1
-                </div>
-              </section>
-            </div>
-          </li>
-          <li aria-hidden="true" class="d-list-item-separator"></li>
-          <li id="dt18" class="d-list-item d-list-item--static" tabindex="-1" role="listitem">
-            <div class="d-item-layout">
-              <section class="d-item-layout--content">
-                <div class="d-item-layout--title">
-                  Menu Item 2
-                </div>
-              </section>
-            </div>
-          </li>
-        </ul>
-        <li aria-hidden="true" class="d-list-item-separator"></li>
-        <ul id="dt19" class="d-list-item-group" role="group" aria-labelledby="dt19-heading">
-          <li id="dt19-heading" role="presentation" class="dt-dropdown-list--header d-py4 d-px8 d-fw-semibold d-c-default">Menu Heading B</li>
-          <li id="dt20" class="d-list-item d-list-item--static" tabindex="-1" role="listitem">
-            <div class="d-item-layout">
-              <section class="d-item-layout--content">
-                <div class="d-item-layout--title">
-                  Menu Item 3
-                </div>
-              </section>
-            </div>
-          </li>
-        </ul>
-      </ul>
-    </div>
-  </div>
-</div>
-'
+:htmlCode='() => $refs.sectionsExample'
 vueCode='
 <dt-dropdown navigation-type="arrow-keys">
   <template #anchor="{ attrs }">
@@ -293,7 +214,7 @@ showHtmlWarning />
 Set `openOnContext=true` to open the menu on right-click (context menu) and disable the default trigger behavior.
 
 <code-well-header>
-  <dt-dropdown navigation-type="arrow-keys" :open-on-context="true">
+  <dt-dropdown ref="contextMenuExample" navigation-type="arrow-keys" :open-on-context="true">
     <template #anchor="{ attrs }">
       <div
         v-bind="attrs"
@@ -317,6 +238,8 @@ Set `openOnContext=true` to open the menu on right-click (context menu) and disa
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.contextMenuExample'
+showHtmlWarning
 vueCode='
 <dt-dropdown navigation-type="arrow-keys" :open-on-context="true">
   <template #anchor="{ attrs }">
@@ -347,7 +270,7 @@ vueCode='
 Dropdown content renders outside the DOM tree. Use the `contentMode` prop to apply color mode (invert, light, dark) to the positioned content. See [Positioned Components](/components/mode-island.html#positioned-components) for details.
 
 <code-well-header>
-  <dt-dropdown content-mode="invert" navigation-type="arrow-keys" placement="bottom-start">
+  <dt-dropdown ref="contentModeExample" content-mode="invert" navigation-type="arrow-keys" placement="bottom-start">
     <template #anchor="{ attrs }">
       <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined">
         Inverted Dropdown
@@ -365,6 +288,8 @@ Dropdown content renders outside the DOM tree. Use the `contentMode` prop to app
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.contentModeExample'
+showHtmlWarning
 vueCode='
 <dt-dropdown content-mode="invert">...</dt-dropdown>
 <dt-dropdown content-mode="dark">...</dt-dropdown>

@@ -57,7 +57,7 @@ Checkboxes are an easily understandable way to indicate that users can select on
 ### Base Styles
 
 <code-well-header>
-  <fieldset class="d-input-group__fieldset d-stack8">
+  <dt-stack ref="baseStylesExample" gap="400">
     <!-- Default -->
     <dt-checkbox
       name="default"
@@ -86,60 +86,11 @@ Checkboxes are an easily understandable way to indicate that users can select on
       checked
       disabled
     />
-  </fieldset>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div>
-  <label>
-    <div class="d-checkbox-group">
-      <div class="d-checkbox__input">
-        <input type="checkbox" name="default" class="d-checkbox" value="Value">
-      </div>
-      <div class="d-checkbox__copy d-checkbox__label">
-        <div class="">Checkbox label</div>
-      </div>
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-checkbox-group">
-      <div class="d-checkbox__input">
-        <input type="checkbox" name="checked" class="d-checkbox" value="Value">
-      </div>
-      <div class="d-checkbox__copy d-checkbox__label">
-        <div class="">Checkbox label</div>
-      </div>
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-checkbox-group d-checkbox-group--disabled">
-      <div class="d-checkbox__input">
-        <input type="checkbox" name="disabled" disabled="disabled" class="d-checkbox" value="Value">
-      </div>
-      <div class="d-checkbox__copy d-checkbox__label">
-        <div class="">Checkbox label</div>
-      </div>
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-checkbox-group d-checkbox-group--disabled">
-      <div class="d-checkbox__input">
-        <input type="checkbox" name="disabled-checked" disabled="disabled" class="d-checkbox" value="Value">
-      </div>
-      <div class="d-checkbox__copy d-checkbox__label">
-        <div class="">Checkbox label</div>
-      </div>
-    </div>
-  </label>
-</div>
-'
+:htmlCode='() => $refs.baseStylesExample'
 vueCode='
 <!-- Default -->
 <dt-checkbox
@@ -175,7 +126,7 @@ showHtmlWarning />
 ### Indeterminate
 
 <code-well-header>
-  <fieldset class="d-input-group__fieldset d-stack8">
+  <dt-stack ref="indeterminateExample" gap="400">
     <dt-checkbox
       name="indeterminate"
       value="Value"
@@ -191,36 +142,11 @@ showHtmlWarning />
       disabled
       indeterminate
     />
-  </fieldset>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div>
-  <label>
-    <div class="d-checkbox-group">
-      <div class="d-checkbox__input">
-        <input type="checkbox" name="indeterminate" class="d-checkbox" value="Value">
-      </div>
-      <div class="d-checkbox__copy d-checkbox__label">
-        <div class="">Indeterminate checkbox</div>
-      </div>
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-checkbox-group d-checkbox-group--disabled">
-      <div class="d-checkbox__input">
-        <input type="checkbox" name="indeterminate-disabled" disabled="disabled" class="d-checkbox" value="Value">
-      </div>
-      <div class="d-checkbox__copy d-checkbox__label">
-        <div class="">Indeterminate checkbox disabled</div>
-      </div>
-    </div>
-  </label>
-</div>
-'
+:htmlCode='() => $refs.indeterminateExample'
 vueCode='
 <!-- Indeterminate -->
 <dt-checkbox
@@ -244,8 +170,7 @@ showHtmlWarning />
 ### Stacked Group
 
 <code-well-header>
-  <fieldset class="d-input-group__fieldset d-stack8">
-    <legend class="d-label">Call Blocking & Spam Protection</legend>
+  <dt-checkbox-group ref="stackedGroupExample" legend="Call Blocking & Spam Protection" :selectedValues="[]">
     <dt-checkbox
       name="option1"
       value="Value"
@@ -261,66 +186,13 @@ showHtmlWarning />
       value="Value"
       label="Block callers with a high spam score"
     />
-  </fieldset>
+  </dt-checkbox-group>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-stack d-stack--gap-400">
-  <p> Call Blocking &amp; Spam Protection </p>
-  <div>
-    <label>
-      <div class="d-checkbox-group">
-        <div class="d-checkbox__input">
-          <input
-            type="checkbox"
-            name="option1"
-            class="d-checkbox"
-            value="Value">
-        </div>
-        <div class="d-checkbox__copy d-checkbox__label">
-          <div class="">Anonymous callers</div>
-        </div>
-      </div>
-    </label>
-  </div>
-  <div>
-    <label>
-      <div class="d-checkbox-group">
-        <div class="d-checkbox__input">
-          <input
-            type="checkbox"
-            name="option2"
-            class="d-checkbox"
-            value="Value">
-        </div>
-        <div class="d-checkbox__copy d-checkbox__label">
-          <div class="">Block callers not already in contacts list</div>
-        </div>
-      </div>
-    </label>
-  </div>
-  <div>
-    <label>
-      <div class="d-checkbox-group">
-        <div class="d-checkbox__input">
-          <input
-            type="checkbox"
-            name="option3"
-            class="d-checkbox"
-            value="Value">
-        </div>
-        <div class="d-checkbox__copy d-checkbox__label">
-          <div class="">Block callers with a high spam score</div>
-        </div>
-      </div>
-    </label>
-  </div>
-</div>
-'
+:htmlCode='() => $refs.stackedGroupExample'
 vueCode='
-<dt-stack gap="400">
-  <p>...</p>
+<dt-checkbox-group legend="Call Blocking & Spam Protection" :selectedValues="[]">
   <dt-checkbox
     name="option1"
     value="Value"
@@ -336,15 +208,14 @@ vueCode='
     value="Value"
     label="Block callers with a high spam score"
   />
-</dt-stack>
+</dt-checkbox-group>
 '
 showHtmlWarning />
 
 ### With Description Text
 
 <code-well-header>
-  <fieldset class="d-input-group__fieldset d-stack8">
-    <legend class="d-label">Call Blocking & Spam Protection</legend>
+  <dt-checkbox-group ref="withDescriptionExample" legend="Call Blocking & Spam Protection" :selectedValues="[]">
     <dt-checkbox
       name="option1"
       value="Value"
@@ -363,69 +234,13 @@ showHtmlWarning />
       label="Block callers with a high spam score"
       description="We will only let the legitimate callers through to bother you."
     />
-  </fieldset>
+  </dt-checkbox-group>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-stack d-stack--gap-400">
-  <p> Call Blocking &amp; Spam Protection </p>
-  <div>
-    <label>
-      <div class="d-checkbox-group">
-        <div class="d-checkbox__input">
-          <input
-            type="checkbox"
-            name="option1"
-            class="d-checkbox"
-            value="Value">
-        </div>
-        <div class="d-checkbox__copy d-checkbox__label">
-          <div class="">Anonymous callers</div>
-          <div class="d-description">Select how phone numbers you dont know should be handled.</div>
-        </div>
-      </div>
-    </label>
-  </div>
-  <div>
-    <label>
-      <div class="d-checkbox-group">
-        <div class="d-checkbox__input">
-          <input
-            type="checkbox"
-            name="option2"
-            class="d-checkbox"
-            value="Value">
-        </div>
-        <div class="d-checkbox__copy d-checkbox__label">
-          <div class="">Block callers not already in contacts list</div>
-          <div class="d-description">You get enough calls. Free up some of your time.</div>
-        </div>
-      </div>
-    </label>
-  </div>
-  <div>
-    <label>
-      <div class="d-checkbox-group">
-        <div class="d-checkbox__input">
-          <input
-            type="checkbox"
-            name="option3"
-            class="d-checkbox"
-            value="Value">
-        </div>
-        <div class="d-checkbox__copy d-checkbox__label">
-          <div class="">Block callers with a high spam score</div>
-          <div class="d-description">We will only let the legitimate callers through to bother you.</div>
-        </div>
-      </div>
-    </label>
-  </div>
-</div>
-'
+:htmlCode='() => $refs.withDescriptionExample'
 vueCode='
-<dt-stack gap="400">
-  <p>...</p>
+<dt-checkbox-group legend="Call Blocking & Spam Protection" :selectedValues="[]">
   <dt-checkbox
     name="option1"
     value="Value"
@@ -444,15 +259,14 @@ vueCode='
     label="Block callers with a high spam score"
     description="We will only let the legitimate callers through to bother you."
   />
-</dt-stack>
+</dt-checkbox-group>
 '
 showHtmlWarning />
 
 ### With Validation States
 
 <code-well-header>
-  <fieldset class="d-input-group__fieldset d-stack8">
-    <legend class="d-label">Call Blocking & Spam Protection</legend>
+  <dt-checkbox-group ref="validationStatesExample" legend="Call Blocking & Spam Protection" :selectedValues="[]">
     <dt-checkbox
       name="option1"
       value="Value"
@@ -474,81 +288,13 @@ showHtmlWarning />
       validation-state="success"
       :messages="[{ message: `We will only let the legitimate callers through to bother you.`, type: `success` }]"
     />
-  </fieldset>
+  </dt-checkbox-group>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-stack d-stack--gap-400">
-  <p> Call Blocking &amp; Spam Protection </p>
-  <div>
-    <label>
-      <div class="d-checkbox-group">
-        <div class="d-checkbox__input">
-          <input
-            type="checkbox"
-            name="option1"
-            class="d-checkbox"
-            value="Value">
-        </div>
-        <div class="d-checkbox__copy d-checkbox__label">
-          <div class="">Anonymous callers</div>
-          <div class="base-input__messages d-validation-message__container">
-            <div role="status" aria-live="polite" class="base-input__message d-validation-message base-input__message--warning d-validation-message--warning">
-              <p>Select how phone numbers you dont know should be handled.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </label>
-  </div>
-  <div>
-    <label>
-      <div class="d-checkbox-group">
-        <div class="d-checkbox__input">
-          <input
-            type="checkbox"
-            name="option2"
-            class="d-checkbox"
-            value="Value">
-        </div>
-        <div class="d-checkbox__copy d-checkbox__label">
-          <div class="">Block callers not already in contacts list</div>
-          <div class="base-input__messages d-validation-message__container">
-            <div role="status" aria-live="polite" class="base-input__message d-validation-message base-input__message--error d-validation-message--error">
-              <p>You get enough calls. Free up some of your time.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </label>
-  </div>
-  <div>
-    <label>
-      <div class="d-checkbox-group">
-        <div class="d-checkbox__input">
-          <input
-            type="checkbox"
-            name="option3"
-            class="d-checkbox"
-            value="Value">
-        </div>
-        <div class="d-checkbox__copy d-checkbox__label">
-          <div class="">Block callers with a high spam score</div>
-          <div class="base-input__messages d-validation-message__container">
-            <div role="status" aria-live="polite" class="base-input__message d-validation-message base-input__message--success d-validation-message--success">
-              <p>We will only let the legitimate callers through to bother you.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </label>
-  </div>
-</div>
-'
+:htmlCode='() => $refs.validationStatesExample'
 vueCode='
-<dt-stack gap="400">
-  <p>...</p>
+<dt-checkbox-group legend="Call Blocking & Spam Protection" :selectedValues="[]">
   <dt-checkbox
     name="option1"
     value="Value"
@@ -570,7 +316,7 @@ vueCode='
     validation-state="success"
     :messages="[{ message: `We will only let the legitimate callers through to bother you.`, type: `success` }]"
   />
-</dt-stack>
+</dt-checkbox-group>
 '
 showHtmlWarning />
 
@@ -579,7 +325,7 @@ showHtmlWarning />
 Use the `label-size` prop to override the default label size.
 
 <code-well-header>
-  <dt-stack gap="400">
+  <dt-stack ref="labelSizeExample" gap="400">
     <dt-checkbox name="sizeXs" value="Value" label="Extra small label" label-size="xs" />
     <dt-checkbox name="sizeSm" value="Value" label="Small label" label-size="sm" />
     <dt-checkbox name="sizeMd" value="Value" label="Medium label (default)" label-size="md" />
@@ -588,13 +334,14 @@ Use the `label-size` prop to override the default label size.
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.labelSizeExample'
 vueCode='
 <dt-checkbox name="sizeXs" value="Value" label="Extra small label" label-size="xs" />
 <dt-checkbox name="sizeSm" value="Value" label="Small label" label-size="sm" />
 <dt-checkbox name="sizeMd" value="Value" label="Medium label (default)" label-size="md" />
 <dt-checkbox name="sizeLg" value="Value" label="Large label" label-size="lg" />
 '
-/>
+showHtmlWarning />
 
 ## Vue API
 

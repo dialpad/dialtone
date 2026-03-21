@@ -51,7 +51,7 @@ Use a progress circle to communicate deterministic progress to the user — for 
 ### Progress
 
 <code-well-header>
-  <dt-stack direction="row" gap="500">
+  <dt-stack ref="progressExample" direction="row" gap="500">
     <dt-stack v-for="v in [0, 25, 50, 75, 100]" :key="v" gap="200">
       <dt-progress-circle :progress="v" :aria-label="`${v}% complete`" />
     </dt-stack>
@@ -59,6 +59,7 @@ Use a progress circle to communicate deterministic progress to the user — for 
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.progressExample'
 vueCode='
 <dt-progress-circle :progress="{value}" aria-label="{value} complete" />
 '
@@ -69,7 +70,7 @@ showHtmlWarning />
 The `size` prop controls the diameter of the progress circle, aligning to Dialtone icon sizes.
 
 <code-well-header>
-  <dt-stack direction="row" gap="500">
+  <dt-stack ref="sizesExample" direction="row" gap="500">
     <dt-stack v-for="s in ['100', '200', '300', '400', '500', '600', '700', '800']" :key="s" gap="200">
       <dt-progress-circle :size="s" :progress="66" :aria-label="`size ${s}`" />
     </dt-stack>
@@ -77,6 +78,7 @@ The `size` prop controls the diameter of the progress circle, aligning to Dialto
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.sizesExample'
 vueCode='
 <dt-progress-circle size="{size}" :progress="66" aria-label="value" />
 '
@@ -87,7 +89,7 @@ showHtmlWarning />
 The `kind` prop sets the color variant of the progress circle.
 
 <code-well-header>
-  <dt-stack direction="row" gap="500">
+  <dt-stack ref="kindsExample" direction="row" gap="500">
     <dt-stack v-for="k in ['default', 'brand', 'critical', 'positive', 'warning', 'info', 'ai']" :key="k" gap="200">
       <dt-progress-circle :kind="k" :progress="66" :aria-label="`kind ${k}`" />
     </dt-stack>
@@ -95,6 +97,7 @@ The `kind` prop sets the color variant of the progress circle.
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.kindsExample'
 vueCode='
 <dt-progress-circle kind="{kind}" :progress="66" aria-label="value" />
 '

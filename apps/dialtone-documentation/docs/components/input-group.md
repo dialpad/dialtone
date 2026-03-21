@@ -47,7 +47,7 @@ vueCode='
   <dt-radio value="other"><span>Other</span></dt-radio>
 </dt-input-group>
 '
-/>
+showHtmlWarning />
 
 ## Model
 
@@ -114,6 +114,7 @@ export default {
 
 <code-well-header>
   <dt-input-group
+    ref="withLegendExample"
     name="input-group-with-legend"
     legend="With Legend"
   >
@@ -124,6 +125,7 @@ export default {
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.withLegendExample'
 vueCode='
 <dt-input-group
   name="input-group-with-legend"
@@ -132,12 +134,12 @@ vueCode='
   <!-- Input Elements -->
 </dt-input-group>
 '
-/>
+showHtmlWarning />
 
 ### With Slotted Legend
 
 <code-well-header>
-  <dt-input-group name="input-group-with-slotted-legend">
+  <dt-input-group ref="withSlottedLegendExample" name="input-group-with-slotted-legend">
     <dt-radio value="apple"><span>Apple</span></dt-radio>
     <dt-radio value="banana"><span>Banana</span></dt-radio>
     <dt-radio value="other"><span>Other</span></dt-radio>
@@ -148,6 +150,7 @@ vueCode='
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.withSlottedLegendExample'
 vueCode='
 <dt-input-group
   name="input-group-with-legend"
@@ -158,12 +161,13 @@ vueCode='
   </template>
 </dt-input-group>
 '
-/>
+showHtmlWarning />
 
 ### Disabled
 
 <code-well-header>
   <dt-input-group
+    ref="disabledExample"
     name="input-group-disabled"
     legend="Disabled"
     disabled
@@ -175,6 +179,7 @@ vueCode='
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.disabledExample'
 vueCode='
 <dt-input-group
   name="input-group-disabled"
@@ -184,12 +189,12 @@ vueCode='
   <!-- Input Elements -->
 </dt-input-group>
 '
-/>
+showHtmlWarning />
 
 ### With Validation Messages
 
 <code-well-header>
-  <div class="d-stack16">
+  <dt-stack ref="validationMessagesExample" gap="500">
     <dt-input-group
       name="input-group-with-success-message"
       legend="With Success Message"
@@ -217,10 +222,11 @@ vueCode='
       <dt-radio value="banana"><span>Banana</span></dt-radio>
       <dt-radio value="other"><span>Other</span></dt-radio>
     </dt-input-group>
-  </div>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.validationMessagesExample'
 vueCode='
 <dt-input-group
   name="input-group-with-success-message"
@@ -244,12 +250,13 @@ vueCode='
   <!-- Input Elements -->
 </dt-input-group>
 '
-/>
+showHtmlWarning />
 
 ### With Validation Messages Hidden
 
 <code-well-header>
   <dt-input-group
+    ref="messagesHiddenExample"
     name="input-group-with-error-messages-hidden"
     legend="With Error Messages Hidden"
     :messages="[{ message: 'Error', type: 'error' }]"
@@ -262,6 +269,7 @@ vueCode='
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.messagesHiddenExample'
 vueCode='
 <dt-input-group
   name="input-group-with-error-messages-hidden"
@@ -272,7 +280,7 @@ vueCode='
   <!-- Input Elements -->
 </dt-input-group>
 '
-/>
+showHtmlWarning />
 
 ## Extending
 

@@ -9,7 +9,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox-mul
 
 <code-well-header class="d-d-block">
   <dt-combobox-multi-select
-    ref="example-combobox-multi-select"
+    ref="defaultExample"
     label="Label Text"
     :selected-items="selectedItems"
     @input="onComboboxInput"
@@ -17,7 +17,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox-mul
     @remove="onComboboxRemove"
   >
     <template #list>
-      <ul class="d-ps-relative d-stack2 d-m4 d-px0">
+      <dt-stack as="ul" class="d-ps-relative d-m4 d-px0">
         <dt-list-item
           v-for="(item, i) in items"
           :key="item.id"
@@ -30,7 +30,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox-mul
             <span class="d-fc-secondary">{{ item.type }}</span>
           </template>
         </dt-list-item>
-      </ul>
+      </dt-stack>
     </template>
   </dt-combobox-multi-select>
 </code-well-header>
@@ -38,6 +38,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox-mul
 <!-- <component-combinator component-name="DtComboboxMultiSelect" /> -->
 
 <code-example-tabs
+:htmlCode='() => $refs.defaultExample'
 vueCode='
 <dt-combobox-multi-select
   ref="comboboxMultiSelect"
@@ -48,7 +49,7 @@ vueCode='
   @remove="onRemove"
 >
   <template #list>
-    <ul class="d-ps-relative d-stack2 d-m4 d-px0">
+    <dt-stack as="ul" class="d-ps-relative d-m4 d-px0">
       <dt-list-item
         v-for="(item, i) in items"
         :key="item.id"
@@ -61,11 +62,11 @@ vueCode='
           <span class="d-fc-secondary">{{ item.type }}</span>
         </template>
       </dt-list-item>
-    </ul>
+    </dt-stack>
   </template>
 </dt-combobox-multi-select>
 '
-/>
+showHtmlWarning />
 
 ## Usage
 
@@ -92,7 +93,7 @@ Adds validation for max selection. Make sure to provide the following props:
 
 <code-well-header class="d-d-block">
   <dt-combobox-multi-select
-    ref="example-max-select"
+    ref="maxSelectExample"
     label="Label Text"
     description="Select up to 2 options."
     :selected-items="maxSelectedItems"
@@ -104,7 +105,7 @@ Adds validation for max selection. Make sure to provide the following props:
     @max-selected="onMaxSelected"
   >
     <template #list>
-      <ul class="d-ps-relative d-stack2 d-m4 d-px0">
+      <dt-stack as="ul" class="d-ps-relative d-m4 d-px0">
         <dt-list-item
           v-for="(item, i) in maxSelectItems"
           :key="item.id"
@@ -117,12 +118,13 @@ Adds validation for max selection. Make sure to provide the following props:
             <span class="d-fc-secondary">{{ item.type }}</span>
           </template>
         </dt-list-item>
-      </ul>
+      </dt-stack>
     </template>
   </dt-combobox-multi-select>
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.maxSelectExample'
 vueCode='
 <dt-combobox-multi-select
   ref="comboboxMultiSelect"
@@ -137,7 +139,7 @@ vueCode='
   @max-selected="onMaxSelected"
 >
   <template #list>
-    <ul class="d-ps-relative d-stack2 d-m4 d-px0">
+    <dt-stack as="ul" class="d-ps-relative d-m4 d-px0">
       <dt-list-item
         v-for="(item, i) in items"
         :key="item.id"
@@ -150,11 +152,11 @@ vueCode='
           <span class="d-fc-secondary">{{ item.type }}</span>
         </template>
       </dt-list-item>
-    </ul>
+    </dt-stack>
   </template>
 </dt-combobox-multi-select>
 '
-/>
+showHtmlWarning />
 
 ## Vue API
 

@@ -49,6 +49,7 @@ Banners are a type of notice and so you can use the following [Notice](notice.md
 </code-well-header>
 
 <dt-banner
+  ref="kindExample"
   :pinned="pinned"
   :important="important"
   :kind="selectedKind"
@@ -60,22 +61,7 @@ Banners are a type of notice and so you can use the following [Notice](notice.md
 </dt-banner>
 
 <code-example-tabs
-htmlCode='
-<aside class="d-banner d-banner--base" role="alert" aria-hidden="false">
-  <div class="d-banner__dialog" role="alertdialog" aria-labelledy="info-alert-title" aria-describedby="info-alert-desc">
-    <div class="d-notice__icon">...</div>
-    <div class="d-notice__content">
-      <h2 class="d-notice__title" id="info-alert-title">...</h2>
-      <p class="d-notice__message" id="info-alert-desc">...</p>
-    </div>
-  <div class="d-notice__actions">...</div>
-</aside>
-
-<aside class="d-banner d-banner--error" role="alert" aria-hidden="false">...</aside>
-<aside class="d-banner d-banner--info" role="alert" aria-hidden="false">...</aside>
-<aside class="d-banner d-banner--success" role="alert" aria-hidden="false">...</aside>
-<aside class="d-banner d-banner--warning" role="alert" aria-hidden="false">...</aside>
-'
+:htmlCode='() => $refs.kindExample'
 vueCode='
 <dt-banner kind="base" title="Optional banner title"> Message body </dt-banner>
 <dt-banner kind="error" title="Optional banner title"> Message body </dt-banner>
@@ -99,6 +85,7 @@ Pins the banner to the top of the window.
 </code-well-header>
 
 <dt-banner
+  ref="pinnedExample"
   :pinned="true"
   title="Optional banner title"
   v-show="shownBanner === 'example-pinned'"
@@ -111,9 +98,7 @@ Pins the banner to the top of the window.
 </dt-banner>
 
 <code-example-tabs
-htmlCode='
-<aside class="d-banner d-banner--base d-banner--pinned" role="alert" aria-hidden="false">...</aside>
-'
+:htmlCode='() => $refs.pinnedExample'
 vueCode='
 <dt-banner
   :pinned="true"

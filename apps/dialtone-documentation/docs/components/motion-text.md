@@ -7,9 +7,8 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-motion-text-
 ---
 
 <code-well-header class="d-d-block">
-  <dt-stack direction="row" align="center" class="d-hmn128 d-p24">
+  <dt-stack ref="defaultExample" direction="row" align="center" class="d-hmn128 d-p24">
     <dt-motion-text
-      ref="example-motion-text"
       text="Welcome to Dialtone Motion Text"
       animation-mode="gradient-in"
       speed="md"
@@ -20,6 +19,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-motion-text-
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.defaultExample'
 vueCode='
 <dt-motion-text
   text="Welcome to Dialtone Motion Text"
@@ -28,7 +28,7 @@ vueCode='
   class="d-headline--lg"
 />
 '
-/>
+showHtmlWarning />
 
 ## Usage
 
@@ -46,7 +46,7 @@ The component supports six different animation modes:
 - **none**: Instant text display without animation
 
 <code-well-header class="d-d-block">
-  <dt-stack gap="400" class="d-p24">
+  <dt-stack ref="gradientInExample" gap="400" class="d-p24">
     <dt-motion-text
       text="Gradient In Animation"
       animation-mode="gradient-in"
@@ -58,6 +58,7 @@ The component supports six different animation modes:
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.gradientInExample'
 vueCode='
 <dt-motion-text
   text="Gradient In Animation"
@@ -65,7 +66,7 @@ vueCode='
   speed="md"
 />
 '
-/>
+showHtmlWarning />
 
 ### Speed Control
 

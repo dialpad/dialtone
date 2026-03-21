@@ -18,80 +18,12 @@ keywords: ["pager", "page navigation", "page numbers", "d-pagination", "DtPagina
 <component-combinator component-name="DtPagination" />
 
 <code-example-tabs
-htmlCode='
-<nav aria-label="Pagination" class="d-pagination">
-  <button class="base-button__button d-btn d-btn--primary d-btn--icon-only d-pagination__button d-fco50 d-fc-disabled d-bgc-transparent" type="button" disabled="" aria-label="Previous page">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">
-      <span class="d-icon__wrapper">
-        <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-300" style="display: none;">
-          <div
-            class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
-            style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-          ></div>
-        </div>
-        <svg>...</svg>
-      </span>
-    </span>
-  </button>
-  <div class="">
-    <button class="base-button__button d-btn d-btn--primary" type="button">
-        <span class="d-btn__label base-button__label">1</span>
-    </button>
-  </div>
-  <div class="">
-    <button class="base-button__button d-btn d-btn--muted" type="button">
-        <span class="d-btn__label base-button__label">2</span>
-    </button>
-  </div>
-  <div class="">
-    <button class="base-button__button d-btn d-btn--muted" type="button">
-        <span class="d-btn__label base-button__label">3</span>
-    </button>
-  </div>
-  <div class="">
-    <button class="base-button__button d-btn d-btn--muted" type="button">
-        <span class="d-btn__label base-button__label">4</span>
-    </button>
-  </div>
-  <div class="d-pagination__separator">
-    <div class="d-pagination__separator-icon" >
-      <span class="d-icon__wrapper">
-        <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-300" style="display: none;">
-          <div
-            class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
-            style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-          ></div>
-        </div>
-        <svg>...</svg>
-      </span>
-    </div>
-  </div>
-  <div class="">
-    <button class="base-button__button d-btn d-btn--muted" type="button">
-        <span class="d-btn__label base-button__label">25</span>
-    </button>
-  </div>
-  <button class="base-button__button d-btn d-btn--muted d-btn--icon-only d-pagination__button d-fc-tertiary" type="button" aria-label="Next page">
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">
-      <span class="d-icon__wrapper">
-        <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-300" style="display: none;">
-          <div
-            class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
-            style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-          ></div>
-        </div>
-        <svg>...</svg>
-      </span>
-    </span>
-  </button>
-</nav>
-'
 vueCode='
 <dt-pagination
   :total-pages="25"
 />
 '
-showHtmlWarning />
+/>
 
 <!-- <component-combinator component-name="DtPagination" /> -->
 

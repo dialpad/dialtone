@@ -36,15 +36,11 @@ keywords: ["spinner", "loading", "progress", "d-loader", "DtLoader", "dt-loader"
 The base loader should be the go-to loader for most of your needs. When in doubt, use this style.
 
 <code-well-header>
-  <dt-loader></dt-loader>
+  <dt-loader ref="defaultExample"></dt-loader>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div aria-label="loading" class="d-loader" size="500">
-  <svg class="d-icon d-loader__icon d-icon--size-500">...</svg>
-</div>
-'
+:htmlCode='() => $refs.defaultExample'
 vueCode='
 <dt-loader />
 '
@@ -56,6 +52,7 @@ The base loader size is 24px and should be used in most cases.
 
 <code-well-header>
   <dt-stack
+    ref="sizesExample"
     gap="400"
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
@@ -71,32 +68,7 @@ The base loader size is 24px and should be used in most cases.
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div aria-label="loading" class="d-loader" size="100">
-  <svg class="d-icon d-loader__icon d-icon--size-100">...</svg>
-</div>
-<div aria-label="loading" class="d-loader" size="200">
-  <svg class="d-icon d-loader__icon d-icon--size-200">...</svg>
-</div>
-<div aria-label="loading" class="d-loader" size="300">
-  <svg class="d-icon d-loader__icon d-icon--size-300">...</svg>
-</div>
-<div aria-label="loading" class="d-loader" size="400">
-  <svg class="d-icon d-loader__icon d-icon--size-400">...</svg>
-</div>
-<div aria-label="loading" class="d-loader" size="500">
-  <svg class="d-icon d-loader__icon d-icon--size-500">...</svg>
-</div>
-<div aria-label="loading" class="d-loader" size="600">
-  <svg class="d-icon d-loader__icon d-icon--size-600">...</svg>
-</div>
-<div aria-label="loading" class="d-loader" size="700">
-  <svg class="d-icon d-loader__icon d-icon--size-700">...</svg>
-</div>
-<div aria-label="loading" class="d-loader" size="800">
-  <svg class="d-icon d-loader__icon d-icon--size-800">...</svg>
-</div>
-'
+:htmlCode='() => $refs.sizesExample'
 vueCode='
 <dt-loader size="100"></dt-loader>
 <dt-loader size="200"></dt-loader>

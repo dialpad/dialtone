@@ -31,10 +31,11 @@ keywords: ["rte", "wysiwyg", "markdown", "d-rte", "DtRichTextEditor", "dt-rich-t
 The editor itself is without any styling and the intention is to wrap it with another component, such as Message Input, that provides the UI.
 
 <code-well-header>
-  <example-rich-text-editor :modelValue="defaultValue" />
+  <example-rich-text-editor ref="baseStyleExample" :modelValue="defaultValue" />
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.baseStyleExample'
 vueCode='
 <dt-rich-text-editor
   v-model="value"
@@ -47,7 +48,7 @@ vueCode='
   :link="true"
 />
 '
-/>
+showHtmlWarning />
 
 ## With Links
 
@@ -123,12 +124,14 @@ To see it in action type char '@' into rich editor With channel mentions.
 
 <code-well-header>
   <example-rich-text-editor
+    ref="mentionExample"
     modelValue="<p>The editor can also suggest mentions: <mention-component name='Test Person' avatarsrc='' id='test.person'></mention-component>, <mention-component name='Test Person 2' avatarsrc='' id='test.person2'></mention-component>! The suggestions dropdown will wait 1000ms to simulate an API call.</p>"
     :mentionSuggestion="{ items }"
   />
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.mentionExample'
 vueCode='
 <dt-rich-text-editor
   v-model="value"
@@ -142,7 +145,7 @@ vueCode='
   :mentionSuggestion="{ items }"
 />
 '
-/>
+showHtmlWarning />
 
 ## Vue API
 

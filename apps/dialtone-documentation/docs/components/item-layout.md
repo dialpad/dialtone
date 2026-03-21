@@ -15,7 +15,7 @@ keywords: ["list layout","item structure","d-item-layout","DtItemLayout","dt-ite
 By default, item layout includes custom styling, like paddings, sizes, colors, etc.
 
 <code-well-header class="d-d-block">
-<dt-item-layout>
+<dt-item-layout ref="defaultExample">
   <template #start>
       <dt-icon size="300" name="lock" />
     </template>
@@ -36,32 +36,7 @@ By default, item layout includes custom styling, like paddings, sizes, colors, e
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-item-layout">
-  <section class="d-item-layout--left">
-    <svg>...</svg>
-  </section>
-  <section class="d-item-layout--content">
-    <div class="d-item-layout--title">
-      Layout title
-    </div>
-    <div class="d-item-layout--subtitle d-item-layout--subtitle--with-title">
-      Subtitle
-    </div>
-    <div class="d-item-layout--bottom">
-      <span class="d-badge">
-        <span class="d-badge__label">Content</span>
-      </span>
-    </div>
-  </section>
-  <section class="d-item-layout--right">
-    <svg>...</svg>
-  </section>
-  <section class="d-item-layout--selected">
-    <svg>...</svg>
-  </section>
-</div>
-'
+:htmlCode='() => $refs.defaultExample'
 vueCode='
 <dt-item-layout>
   <template #start>

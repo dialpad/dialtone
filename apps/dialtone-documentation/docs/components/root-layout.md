@@ -42,6 +42,7 @@ body according to the `responsiveBreakpoint` prop.
 
 <code-well-header>
 <dt-root-layout
+  ref="baseExample"
   :fixed="false"
   class="d-w100p d-h332"
 >
@@ -65,20 +66,7 @@ body according to the `responsiveBreakpoint` prop.
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="root-layout d-root-layout d-w100p d-h332">
-  <header class="d-root-layout__header"><div class="d-h64 d-bgc-purple-100">Header</div></header>
-  <aside tabindex="0" class="d-root-layout__sidebar">
-    <div class="d-w128 d-h100p d-bgc-black-100">
-      <div>Sidebar item 1</div>
-      <div>Sidebar item 2</div>
-      <div>Sidebar item 3</div>
-    </div>
-  </aside>
-  <main class="d-root-layout__content" tabindex="0"><div class="d-bgc-green-100 d-w100p d-h100p">Content</div></main>
-  <footer class="d-root-layout__footer"><div class="d-h64 d-bgc-gold-100">Footer</div></footer>
-</div>
-'
+:htmlCode='() => $refs.baseExample'
 vueCode='
 <dt-root-layout
   :fixed="false"
@@ -109,6 +97,7 @@ showHtmlWarning />
 ### Header Sticky
 
 <div
+  ref="headerStickyExample"
   class="d-h332 d-of-scroll"
 >
   <dt-root-layout
@@ -135,22 +124,7 @@ showHtmlWarning />
 </div>
 
 <code-example-tabs
-htmlCode='
-<div class="d-h332 d-of-scroll">
-  <div class="root-layout d-root-layout d-root-layout--fixed d-w100p d-h332">
-    <header class="d-root-layout__header d-root-layout__header--sticky"><div class="d-h64 d-bgc-purple-100">Header</div></header>
-    <aside tabindex="0" class="d-root-layout__sidebar">
-      <div class="d-w128 d-h100p d-bgc-black-100">
-        <div>Sidebar item 1</div>
-        <div>Sidebar item 2</div>
-        <div>Sidebar item 3</div>
-      </div>
-    </aside>
-    <main class="d-root-layout__content" tabindex="0"><div class="d-bgc-green-100 d-w100p d-h100p">Content</div></main>
-    <footer class="d-root-layout__footer"><div class="d-h64 d-bgc-gold-100">Footer</div></footer>
-  </div>
-</div>
-'
+:htmlCode='() => $refs.headerStickyExample'
 vueCode='
 <div
   class="d-h332 d-of-scroll"

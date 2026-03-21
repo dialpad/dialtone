@@ -168,17 +168,20 @@ keywords: ["theme island","mode override","v-dt-mode","directive","light","dark"
 Use the `v-dt-mode` directive to control the color mode of a region, component, or element. It creates a scoped region with the specified mode. Descendant elements retain their original styling but are rendered with the specified mode.
 
 <code-well-header>
-  <dt-text v-dt-mode:dark tone="success"> Dark content </dt-text>
-  <dt-text v-dt-mode:light tone="success"> Light content </dt-text>
-  <dt-text v-dt-mode:invert tone="success"> Inverted — opposite of parent or root </dt-text>
+  <dt-stack ref="usageExample" gap="400">
+    <dt-text v-dt-mode:dark tone="success"> Dark content </dt-text>
+    <dt-text v-dt-mode:light tone="success"> Light content </dt-text>
+    <dt-text v-dt-mode:invert tone="success"> Inverted — opposite of parent or root </dt-text>
+  </dt-stack>
 </code-well-header>
 <code-example-tabs
+:htmlCode='() => $refs.usageExample'
 vueCode='
 <dt-text v-dt-mode:dark tone="success"> Dark content </dt-text>
 <dt-text v-dt-mode:light tone="success"> Light content </dt-text>
 <dt-text v-dt-mode:invert tone="success"> Inverted — opposite of parent or root </dt-text>
 '
-/>
+showHtmlWarning />
 
 ### Inverting
 
@@ -205,7 +208,7 @@ vueCode='
 Bind a reactive variable as the directive arg to switch modes at runtime.
 
 <code-well-header>
-  <dt-stack gap="500">
+  <dt-stack ref="dynamicModeExample" gap="500">
     <dt-stack gap="400" direction="row">
       <dt-button
         kind="muted"
@@ -249,6 +252,7 @@ Bind a reactive variable as the directive arg to switch modes at runtime.
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.dynamicModeExample'
 vueCode='
 <dt-text v-dt-mode:[dynamicMode] align="center" tone="success"> {{ dynamicMode }} mode content </dt-text>
 '
@@ -545,7 +549,7 @@ showHtmlWarning />
 [Popovers](/components/popover.html), [Dropdowns](/components/dropdown.html), [Modals](/components/modal.html), and [Hovercards](/components/hovercard.html) render their content *outside* the normal DOM tree, so `v-dt-mode` on the component itself won't reach the positioned element. These components provide a `contentMode` prop that applies the mode directly to the positioned content.
 
 <code-well-header>
-  <dt-stack gap="500">
+  <dt-stack ref="positionedComponentsExample" gap="500">
     <dt-stack gap="200">
       <dt-text as="p" kind="headline" size="md">Hovercard</dt-text>
       <dt-stack gap="400" direction="row">
@@ -713,6 +717,7 @@ showHtmlWarning />
 </code-well-header>
 
 <code-example-tabs
+:htmlCode='() => $refs.positionedComponentsExample'
 vueCode='
 <!-- Hovercard -->
 <dt-hovercard ref="hovercardDefault" placement="top-start" content-mode="invert">
@@ -755,7 +760,7 @@ vueCode='
   </template>
 </dt-dropdown>
 '
-/>
+showHtmlWarning />
 
 ## Component
 

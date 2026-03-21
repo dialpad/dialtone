@@ -48,22 +48,11 @@ keywords: ["tag", "pill", "token", "badge", "d-chip", "DtChip", "dt-chip", "filt
 Add `:interactive="false"` to make it a read-only, non-interactive Chip. This changes it from a `<button>` to a non-interactive, read-only Chip with no events or hover/active state. Note that this does not effect the interactivity of its `×` remove button.
 
 <code-well-header>
-  <dt-chip :interactive="false">Chip</dt-chip>
+  <dt-chip ref="nonInteractiveExample" :interactive="false">Chip</dt-chip>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<span class="d-chip">
-  <span class="d-chip__label">
-    <span class="d-chip__text">Chip</span>
-  </span>
-  <button class="d-chip__close" type="button" aria-label="close">
-    <span class="d-btn__icon">
-      <svg>...</svg>
-    </span>
-  </button>
-</span>
-'
+:htmlCode='() => $refs.nonInteractiveExample'
 vueCode='
 <dt-chip :interactive="false">
   Chip
@@ -74,22 +63,11 @@ showHtmlWarning />
 ### Default
 
 <code-well-header>
-  <dt-chip>Chip</dt-chip>
+  <dt-chip ref="defaultExample">Chip</dt-chip>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<span class="d-chip">
-  <button type="button" aria-labelledby="dt0-content" aria-label="" class="d-chip__label">
-    <span class="d-chip__text"> Chip </span>
-  </button>
-  <button type="button" aria-label="close" class="base-button__button d-btn d-btn--primary d-btn--icon-only d-chip__close">
-    <span data-qa="dt-button-icon" class="base-button__icon d-btn__icon d-btn__icon--left">
-      <svg>...</svg>
-    </span>
-  </button>
-</span>
-'
+:htmlCode='() => $refs.defaultExample'
 vueCode='
 <dt-chip>
   Chip
@@ -117,17 +95,11 @@ showHtmlWarning />
 ### Without Close Button
 
 <code-well-header>
-  <dt-chip :hide-close="true">Chip</dt-chip>
+  <dt-chip ref="withoutCloseExample" :hide-close="true">Chip</dt-chip>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<span class="d-chip">
-  <button class="d-chip__label" type="button">
-    <span class="d-chip__text">Chip</span>
-  </button>
-</span>
-'
+:htmlCode='() => $refs.withoutCloseExample'
 vueCode='
 <dt-chip :hide-close="true">
   Chip
@@ -138,7 +110,7 @@ showHtmlWarning />
 ### With Icon
 
 <code-well-header>
-  <dt-chip with-icon :hide-close="true">
+  <dt-chip ref="withIconExample" with-icon :hide-close="true">
     <template #icon>
       <dt-icon
         name="phone"
@@ -152,16 +124,7 @@ showHtmlWarning />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<span class="d-chip">
-  <button class="d-chip__label" type="button">
-    <span class="d-chip__icon">
-      <svg>...</svg>
-    </span>
-    <span class="d-chip__text">Chip</span>
-  </button>
-</span>
-'
+:htmlCode='() => $refs.withIconExample'
 vueCode='
 <dt-chip :hide-close="true">
   <template #icon>
@@ -180,7 +143,7 @@ showHtmlWarning />
 ### With Icon and Close Button
 
 <code-well-header>
-  <dt-chip>
+  <dt-chip ref="withIconAndCloseExample">
     <template #icon>
       <dt-icon
         name="phone"
@@ -194,21 +157,7 @@ showHtmlWarning />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<span class="d-chip">
-  <button class="d-chip__label" type="button">
-    <span class="d-chip__icon">
-      <svg>...</svg>
-    </span>
-    <span class="d-chip__text">Chip</span>
-  </button>
-  <button class="d-chip__close" type="button" aria-label="close">
-    <span class="d-btn__icon">
-      <svg>...</svg>
-    </span>
-  </button>
-</span>
-'
+:htmlCode='() => $refs.withIconAndCloseExample'
 vueCode='
 <dt-chip>
   <template #icon>
@@ -227,7 +176,7 @@ showHtmlWarning />
 ### With Avatar and Close Button
 
 <code-well-header>
-  <dt-chip>
+  <dt-chip ref="withAvatarAndCloseExample">
     <template #avatar>
       <dt-avatar
         image-src="/assets/images/person.png"
@@ -242,19 +191,7 @@ showHtmlWarning />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<span class="d-chip">
-  <button class="d-chip__label" type="button">
-    <span class="d-avatar">...</span>
-    <span class="d-chip__text">Chip</span>
-  </button>
-  <button class="d-chip__close" type="button" aria-label="close">
-    <span class="d-btn__icon">
-      <svg>...</svg>
-    </span>
-  </button>
-</span>
-'
+:htmlCode='() => $refs.withAvatarAndCloseExample'
 vueCode='
 <dt-chip>
   <template #avatar>
@@ -275,25 +212,15 @@ showHtmlWarning />
 
 To truncate text, add `.d-truncate` to the content element, and set the width of the `.d-chip` element.
 
+<!-- lint-doc-examples-disable -->
 <code-well-header>
-  <dt-chip content-class="d-w102">
+  <dt-chip ref="truncatedExample" content-class="d-w102">
     <span class="d-chip__text d-truncate">Chip loooooong name</span>
   </dt-chip>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<span class="d-chip">
-  <button class="d-chip__label d-w102" type="button">
-    <span class="d-chip__text d-truncate">Chip loooooong name</span>
-  </button>
-  <button class="d-chip__close" type="button" aria-label="close">
-    <span class="d-btn__icon">
-      <svg>...</svg>
-    </span>
-  </button>
-</span>
-'
+:htmlCode='() => $refs.truncatedExample'
 vueCode='
 <dt-chip content-class="d-w102">
   <span class="d-chip__text d-truncate">Chip loooooong name</span>
@@ -304,7 +231,7 @@ showHtmlWarning />
 ### Sizes
 
 <code-well-header>
-  <dt-stack direction="row" gap="400">
+  <dt-stack ref="sizesExample" direction="row" gap="400">
     <dt-chip :interactive="false" size="xs">Chip</dt-chip>
     <dt-chip :interactive="false" size="sm">Chip</dt-chip>
     <dt-chip :interactive="false">Chip</dt-chip>
@@ -312,45 +239,7 @@ showHtmlWarning />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<span class="d-chip">
-  <button class="d-chip__label d-chip__label--xs" type="button">
-    <span class="d-chip__icon">
-      <svg>...</svg>
-    </span>
-    <span class="d-chip__text">Chip</span>
-  </button>
-  <button class="d-chip__close d-chip__close--xs" type="button" aria-label="close">
-    <span class="d-btn__icon">
-      <svg>...</svg>
-    </span>
-  </button>
-</span>
-<span class="d-chip">
-  <button class="d-chip__label d-chip__label--sm" type="button">
-    <span class="d-avatar">...</span>
-    <span class="d-chip__text">Chip</span>
-  </button>
-  <button class="d-chip__close d-chip__close--sm" type="button" aria-label="close">
-    <span class="d-btn__icon">
-      <svg>...</svg>
-    </span>
-  </button>
-</span>
-<span class="d-chip">
-  <button class="d-chip__label" type="button">
-    <span class="d-chip__icon">
-      <svg>...</svg>
-    </span>
-    <span class="d-chip__text">Chip</span>
-  </button>
-  <button class="d-chip__close" type="button" aria-label="close">
-    <span class="d-btn__icon">
-      <svg>...</svg>
-    </span>
-  </button>
-</span>
-'
+:htmlCode='() => $refs.sizesExample'
 vueCode='
 <dt-chip :interactive="false" size="xs">
   chip

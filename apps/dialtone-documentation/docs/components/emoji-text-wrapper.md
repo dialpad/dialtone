@@ -23,7 +23,7 @@ keywords: ["emoji support","emoticon wrapper","d-emoji-text-wrapper","DtEmojiTex
 ### Text Only
 
 <code-well-header>
-  <dt-text kind="body" size="md">
+  <dt-text ref="textOnlyExample" kind="body" size="md">
     <dt-emoji-text-wrapper>
       Some text with :invalid-emoji: :smile: :cry: and 😄, and custom emojis :octocat: :shipit:
     </dt-emoji-text-wrapper>
@@ -31,32 +31,7 @@ keywords: ["emoji support","emoticon wrapper","d-emoji-text-wrapper","DtEmojiTex
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-emoji-text-wrapper">
-  <span> Some text with :invalid-emoji: </span>
-  <span class="d-emoji d-icon d-icon--size-500">
-    <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-500" style="display: none;">
-      <div class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate" style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"></div>
-    </div>
-    <img class="d-icon d-icon--size-500" aria-label="grinning face with smiling eyes" alt="😄" title="grinning face with smiling eyes" src="https://cdn.jsdelivr.net/joypixels/assets/8.0/png/unicode/32/1f604.png" style="" />
-  </span>
-  <span> </span>
-  <span class="d-emoji d-icon d-icon--size-500">
-    <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-500" style="display: none;">
-      <div class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate" style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"></div>
-    </div>
-    <img class="d-icon d-icon--size-500" aria-label="crying face" alt="😢" title="crying face" src="https://cdn.jsdelivr.net/joypixels/assets/8.0/png/unicode/32/1f622.png" style="" />
-  </span>
-  <span> and </span>
-  <span class="d-emoji d-icon d-icon--size-500">
-    <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-500" style="display: none;">
-      <div class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate" style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"></div>
-    </div>
-    <img class="d-icon d-icon--size-500" aria-label="grinning face with smiling eyes" alt="😄" title="grinning face with smiling eyes" src="https://cdn.jsdelivr.net/joypixels/assets/8.0/png/unicode/32/1f604.png" style="" />
-  </span>
-  <span>, and custom emojis :octocat: :shipit: </span>
-</div>
-'
+:htmlCode='() => $refs.textOnlyExample'
 vueCode='
 <dt-text kind="body" size="md">
   <dt-emoji-text-wrapper>
@@ -71,9 +46,9 @@ showHtmlWarning />
 <code-well-header>
   <dt-stack gap="500" ref="variantsExample">
     <dt-emoji-text-wrapper>
-      <button class="d-btn d-btn--primary d-btn--danger">
+      <dt-button kind="primary" importance="primary" color="danger">
         Button with shortcode :cry: emoji
-      </button>
+      </dt-button>
     </dt-emoji-text-wrapper>
     <dt-text kind="body" size="md">
       <dt-emoji-text-wrapper>
@@ -81,9 +56,9 @@ showHtmlWarning />
       </dt-emoji-text-wrapper>
     </dt-text>
     <dt-emoji-text-wrapper>
-      <button class="d-btn d-btn--primary">
+      <dt-button kind="primary">
         Button wrapper :smile:
-      </button>
+      </dt-button>
     </dt-emoji-text-wrapper>
     <dt-text kind="body" size="md">
       <dt-emoji-text-wrapper size="800">
@@ -103,9 +78,9 @@ showHtmlWarning />
 vueCode='
 <dt-stack gap="500" ref="variantsExample">
   <dt-emoji-text-wrapper>
-    <button class="d-btn d-btn--primary d-btn--danger">
+    <dt-button kind="primary" importance="primary" color="danger">
       Button with shortcode :cry: emoji
-    </button>
+    </dt-button>
   </dt-emoji-text-wrapper>
   <dt-text kind="body" size="md">
     <dt-emoji-text-wrapper>
@@ -113,9 +88,9 @@ vueCode='
     </dt-emoji-text-wrapper>
   </dt-text>
   <dt-emoji-text-wrapper>
-    <button class="d-btn d-btn--primary">
+    <dt-button kind="primary">
       Button wrapper :smile:
-    </button>
+    </dt-button>
   </dt-emoji-text-wrapper>
   <dt-text kind="body" size="md">
     <dt-emoji-text-wrapper size="800">
@@ -129,7 +104,7 @@ vueCode='
   </dt-text>
 </dt-stack>
 '
-/>
+showHtmlWarning />
 
 ## Vue API
 

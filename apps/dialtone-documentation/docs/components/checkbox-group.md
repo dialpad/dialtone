@@ -11,7 +11,6 @@ keywords: ["checkboxes","multi select","form fields","d-checkbox-group","DtCheck
 <!-- <code-well-header>
   <dt-checkbox-group
     name="fruits-checkbox-group"
-    class="d-input-group__fieldset"
     legend="Fruits"
     :selectedValues="[]"
   >
@@ -31,8 +30,8 @@ Checkbox Groups are typically paired with a legend which identifies the group. I
 
 <code-well-header>
   <dt-checkbox-group
+    ref="defaultExample"
     name="fruits-checkbox-group"
-    class="d-input-group__fieldset"
     legend="Fruits"
     :selectedValues="[]"
   >
@@ -43,78 +42,10 @@ Checkbox Groups are typically paired with a legend which identifies the group. I
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<fieldset
-  class="d-input-group__fieldset"
-  legend="Fruits"
-  name="fruits-checkbox-group"
->
-  <legend class="d-label">
-    Fruits
-  </legend>
-  <div>
-    <label>
-      <div class="d-checkbox-group">
-        <div class="d-checkbox__input">
-          <input
-            type="checkbox"
-            name="fruits-checkbox-group"
-            class="d-checkbox"
-            value="apple"
-          >
-        </div>
-        <div class="d-checkbox__copy d-checkbox__label">
-          <div class="">
-            <span>Apple</span>
-          </div>
-        </div>
-      </div>
-    </label>
-  </div>
-  <div>
-    <label>
-      <div class="d-checkbox-group">
-        <div class="d-checkbox__input">
-          <input
-            type="checkbox"
-            name="fruits-checkbox-group"
-            class="d-checkbox"
-            value="banana"
-          >
-        </div>
-        <div class="d-checkbox__copy d-checkbox__label">
-          <div class="">
-            <span>Banana</span>
-          </div>
-        </div>
-      </div>
-    </label>
-  </div>
-  <div>
-    <label>
-      <div class="d-checkbox-group">
-        <div class="d-checkbox__input">
-          <input
-            type="checkbox"
-            name="fruits-checkbox-group"
-            class="d-checkbox"
-            value="other"
-          >
-        </div>
-        <div class="d-checkbox__copy d-checkbox__label">
-          <div class="">
-            <span>Other</span>
-          </div>
-        </div>
-      </div>
-    </label>
-  </div>
-</fieldset>
-'
+:htmlCode='() => $refs.defaultExample'
 vueCode='
 <dt-checkbox-group
   name="fruits-checkbox-group"
-  class="d-input-group__fieldset"
   legend="Fruits"
 >
   <dt-checkbox value="apple"><span>Apple</span></dt-checkbox>
@@ -207,12 +138,11 @@ vueCode='
 ### With Validation States
 
 <code-well-header>
-  <div class="d-stack16">
+  <dt-stack ref="validationStatesExample" gap="500">
     <div>
       <dt-checkbox-group
         name="checkbox-group-with-success-message"
         legend="Fruits"
-        class="d-input-group__fieldset"
         :messages='[{"message":"Success validation message","type":"success"}]'
       >
         <dt-checkbox value="apple"><span>Apple</span></dt-checkbox>
@@ -224,7 +154,6 @@ vueCode='
       <dt-checkbox-group
         name="checkbox-group-with-warning-message"
         legend="Fruits"
-        class="d-input-group__fieldset"
         :messages='[{"message":"Warning validation message","type":"warning"}]'
       >
         <dt-checkbox value="apple"><span>Apple</span></dt-checkbox>
@@ -236,7 +165,6 @@ vueCode='
       <dt-checkbox-group
       name="checkbox-group-with-error-message"
       legend="Fruits"
-      class="d-input-group__fieldset"
       :messages='[{"message":"Error validation message","type":"error"}]'
       >
         <dt-checkbox value="apple"><span>Apple</span></dt-checkbox>
@@ -244,87 +172,14 @@ vueCode='
         <dt-checkbox value="other"><span>Other</span></dt-checkbox>
       </dt-checkbox-group>
     </div>
-  </div>
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<fieldset
-  class="d-input-group__fieldset"
-  legend="Fruits"
-  name="fruits-checkbox-group"
->
-  <legend class="d-label">
-    Fruits
-  </legend>
-  <div>
-    <label>
-      <div class="d-checkbox-group">
-        <div class="d-checkbox__input">
-          <input
-            type="checkbox"
-            name="fruits-checkbox-group"
-            class="d-checkbox"
-            value="apple"
-          >
-        </div>
-        <div class="d-checkbox__copy d-checkbox__label">
-          <div class="">
-            <span>Apple</span>
-          </div>
-        </div>
-      </div>
-    </label>
-  </div>
-  <div>
-    <label>
-      <div class="d-checkbox-group">
-        <div class="d-checkbox__input">
-          <input
-            type="checkbox"
-            name="fruits-checkbox-group"
-            class="d-checkbox"
-            value="banana"
-          >
-        </div>
-        <div class="d-checkbox__copy d-checkbox__label">
-          <div class="">
-            <span>Banana</span>
-          </div>
-        </div>
-      </div>
-    </label>
-  </div>
-  <div>
-    <label>
-      <div class="d-checkbox-group">
-        <div class="d-checkbox__input">
-          <input
-            type="checkbox"
-            name="fruits-checkbox-group"
-            class="d-checkbox"
-            value="other"
-          >
-        </div>
-        <div class="d-checkbox__copy d-checkbox__label">
-          <div class="">
-            <span>Other</span>
-          </div>
-        </div>
-      </div>
-    </label>
-  </div>
-  <div class="base-input__messages d-validation-message__container">
-    <div role="status" aria-live="polite" class="base-input__message d-validation-message base-input__message--success d-validation-message--success">
-      <p>Success validation message.</p>
-    </div>
-  </div>
-</fieldset>
-'
+:htmlCode='() => $refs.validationStatesExample'
 vueCode='
 <dt-checkbox-group
   name="fruits-checkbox-group"
-  class="d-input-group__fieldset"
   legend="Fruits"
   validation-state="success"
   :messages="[{ message: `Success validation message.`, type: `success` }]"
@@ -335,7 +190,6 @@ vueCode='
 </dt-checkbox-group>
 <dt-checkbox-group
   name="fruits-checkbox-group"
-  class="d-input-group__fieldset"
   legend="Fruits"
   validation-state="warning"
   :messages="[{ message: `Warning validation message.`, type: `warning` }]"
@@ -346,7 +200,6 @@ vueCode='
 </dt-checkbox-group>
 <dt-checkbox-group
   name="fruits-checkbox-group"
-  class="d-input-group__fieldset"
   legend="Fruits"
   validation-state="error"
   :messages="[{ message: `Error validation message.`, type: `error` }]"
