@@ -48,7 +48,8 @@ In `<code-example-tabs>`, always use the ref-based pattern for `htmlCode`:
 - If a `<dt-stack>` or other wrapper surrounds multiple items, put the `ref` on the wrapper
 - If there is no `<code-well-header>` (code-only snippet), omit `htmlCode` entirely
 - Never use raw HTML with component CSS classes (e.g., `<div class="d-card">`) inside `<code-well-header>` — always use the Vue component (`<dt-card>`)
-- Layout utility classes (`d-stack16`, `d-w100p`, `d-d-grid`) on wrapper `<div>` elements are fine
+- Use `<dt-stack>` for spacing wrappers — never `<div class="d-stack*">` or `<div class="d-flow*">` (these CSS utilities are deprecated)
+- Layout utility classes like `d-w100p` and `d-d-grid` on wrapper `<div>` elements are fine (no Vue equivalent exists)
 
 ### Anti-patterns (DO NOT)
 

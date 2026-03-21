@@ -27,7 +27,7 @@ This will usually be the [List Item component](/components/list-item.md).
     label="Label Text"
     @escape="onComboboxEscape"
     @select="onComboboxSelect"
-    ref="example-combobox"
+    ref="defaultExample"
   >
     <template
       #input="{ inputProps }"
@@ -66,7 +66,7 @@ This will usually be the [List Item component](/components/list-item.md).
 </code-well-header>
 
 <code-example-tabs
-:htmlCode="() => $refs['example-combobox']"
+:htmlCode='() => $refs.defaultExample'
 vueCode='
 <dt-combobox
   :show-list="!!value"
@@ -120,7 +120,7 @@ showHtmlWarning />
     @escape="onComboboxEscape"
     @select="onComboboxSelect"
     :empty-list="true"
-    ref="example-with-empty-list"
+    ref="emptyListExample"
   >
     <template
       #input="{ inputProps }"
@@ -138,7 +138,7 @@ showHtmlWarning />
 </code-well-header>
 
 <code-example-tabs
-:htmlCode="() => $refs['example-with-empty-list']"
+:htmlCode='() => $refs.emptyListExample'
 vueCode='
 <dt-combobox
   :show-list="!!value"

@@ -25,12 +25,14 @@ A notice delivers informational and assistive messages that inform the user abou
 
 Used in most scenarios when the message should be noticeable but not dominate.
 
-<code-well-header ref="baseStylesExample" bgclass="d-bgc-primary">
-  <example-notice kind="base" title="Base title (optional)" />
-  <example-notice kind="error" title="Error title (optional)" />
-  <example-notice kind="info" title="Info title (optional)" />
-  <example-notice kind="success" title="Success title (optional)" />
-  <example-notice kind="warning" title="Warning title (optional)" />
+<code-well-header bgclass="d-bgc-primary">
+  <dt-stack ref="baseStylesExample" gap="400">
+    <example-notice kind="base" title="Base title (optional)" />
+    <example-notice kind="error" title="Error title (optional)" />
+    <example-notice kind="info" title="Info title (optional)" />
+    <example-notice kind="success" title="Success title (optional)" />
+    <example-notice kind="warning" title="Warning title (optional)" />
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
@@ -157,12 +159,14 @@ showHtmlWarning />
 
 Used occasionally in scenarios when the message needs to dominate.
 
-<code-well-header ref="importantExample">
-  <example-notice important kind="base" title="Base title (optional)" />
-  <example-notice important kind="error" title="Error title (optional)" />
-  <example-notice important kind="info" title="Info title (optional)" />
-  <example-notice important kind="success" title="Success title (optional)" />
-  <example-notice important kind="warning" title="Warning title (optional)" />
+<code-well-header>
+  <dt-stack ref="importantExample" gap="400">
+    <example-notice important kind="base" title="Base title (optional)" />
+    <example-notice important kind="error" title="Error title (optional)" />
+    <example-notice important kind="info" title="Info title (optional)" />
+    <example-notice important kind="success" title="Success title (optional)" />
+    <example-notice important kind="warning" title="Warning title (optional)" />
+  </dt-stack>
 </code-well-header>
 
 <code-example-tabs
