@@ -35,9 +35,10 @@
     "Vuepress"
   ],
   "scripts": {
-    "lint": "run-s lint:docs lint:code",
+    "lint": "run-s lint:docs lint:code lint:examples",
     "lint:code": "eslint '**/*.{js,vue}'",
-    "lint:docs": "markdownlint '**/*.md'"
+    "lint:docs": "markdownlint '**/*.md'",
+    "lint:examples": "node ../../scripts/lint-doc-examples.mjs"
   },
   "type": "module",
   "devDependencies": {

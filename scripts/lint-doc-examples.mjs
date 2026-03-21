@@ -1,0 +1,235 @@
+#!/usr/bin/env node
+
+/**
+ * Lint documentation component examples for consistent code-example-tabs patterns.
+ *
+ * Checks:
+ * 1. No static inline htmlCode strings (must use ref-based :htmlCode)
+ * 2. code-example-tabs after code-well-header must have htmlCode
+ * 3. No raw HTML component representations in code-well-header
+ *
+ * Usage:
+ *   node scripts/lint-doc-examples.mjs [--warn] [--fix-list]
+ *   --warn      Print warnings but exit 0 (default: exit 1 on violations)
+ *   --fix-list  Print a machine-readable list of files needing fixes
+ */
+
+import { createRequire } from 'node:module';
+import { readFileSync, readdirSync } from 'node:fs';
+import { join, basename } from 'node:path';
+
+const DOCS_DIR = join(import.meta.dirname, '..', 'apps', 'dialtone-documentation', 'docs', 'components');
+
+// Files intentionally exempt from checks
+const ALLOWLIST = new Set([
+  'text.md',    // Intentionally omits htmlCode to discourage manual CSS
+  'table.md',   // CSS-only, uses fenced code blocks
+  'icon.md',    // No code-example-tabs
+  'illustration.md', // No code-example-tabs
+  'scroller.md',     // No code-example-tabs
+  'index.md',        // Directory listing page
+]);
+
+// Inline disable comment: <!-- lint-doc-examples-disable -->
+const DISABLE_COMMENT = 'lint-doc-examples-disable';
+
+// Derive component CSS class prefixes from the canonical components list.
+const require = createRequire(import.meta.url);
+const COMPONENTS_LIST = require('../common/components_list.js');
+
+const CSS_PREFIX_OVERRIDES = {
+  button: 'btn',
+  split_button: 'split-btn',
+};
+
+const componentPrefixes = COMPONENTS_LIST.map(filename => {
+  const name = filename.replace('.vue', '');
+  return CSS_PREFIX_OVERRIDES[name] ?? name.replace(/_/g, '-');
+});
+
+const prefixAlternation = componentPrefixes.join('|');
+const COMPONENT_CLASS_PATTERN = new RegExp(
+  `class="[^"]*\\bd-(?:${prefixAlternation})(?:__|--)[^"]*"`,
+);
+
+function findDisabledLines (lines) {
+  const disabled = new Set();
+  for (let i = 0; i < lines.length; i++) {
+    if (lines[i].includes(DISABLE_COMMENT)) {
+      disabled.add(i);
+    }
+  }
+  return disabled;
+}
+
+function isDisabledNearLine (disabledLines, lineIndex) {
+  for (let d = lineIndex - 1; d >= Math.max(0, lineIndex - 5); d--) {
+    if (disabledLines.has(d)) return true;
+  }
+  return false;
+}
+
+function checkCodeExampleTabs (lines, filename, disabledLines) {
+  const violations = [];
+  let inTag = false;
+  let tagStartLine = 0;
+  let tagContent = '';
+  let lastHeaderEndLine = -1;
+
+  for (let i = 0; i < lines.length; i++) {
+    const trimmed = lines[i].trim();
+
+    if (trimmed.includes('</code-well-header>') && !trimmed.startsWith('<!--') && !trimmed.includes('-->')) {
+      lastHeaderEndLine = i;
+    }
+
+    if (trimmed.startsWith('<code-example-tabs')) {
+      inTag = true;
+      tagStartLine = i;
+      tagContent = '';
+    }
+
+    if (inTag) {
+      tagContent += lines[i] + '\n';
+
+      if (trimmed.includes('/>') || (trimmed.includes('>') && !trimmed.startsWith('<code-example-tabs'))) {
+        inTag = false;
+
+        if (isDisabledNearLine(disabledLines, tagStartLine)) continue;
+
+        if (tagContent.match(/(?<![:])\bhtmlCode='/)) {
+          violations.push({
+            file: filename,
+            line: tagStartLine + 1,
+            check: 'static-htmlCode',
+            message: 'Static inline htmlCode string detected. Use :htmlCode=\'() => $refs.refName\' instead.',
+          });
+        }
+
+        if (!tagContent.includes('htmlCode') && lastHeaderEndLine >= 0) {
+          const gap = tagStartLine - lastHeaderEndLine;
+          if (gap > 0 && gap <= 10) {
+            violations.push({
+              file: filename,
+              line: tagStartLine + 1,
+              check: 'missing-htmlCode',
+              message: 'code-example-tabs after code-well-header is missing htmlCode. Add :htmlCode=\'() => $refs.refName\'.',
+            });
+          }
+        }
+      }
+    }
+  }
+
+  return violations;
+}
+
+function checkRawHtmlInHeaders (lines, filename, disabledLines) {
+  const violations = [];
+  let inHeader = false;
+
+  for (let i = 0; i < lines.length; i++) {
+    const trimmed = lines[i].trim();
+
+    if (trimmed.startsWith('<code-well-header')) {
+      inHeader = !isDisabledNearLine(disabledLines, i);
+    }
+
+    if (inHeader && !trimmed.startsWith('<code-well-header') && !trimmed.startsWith('</code-well-header')) {
+      const isVueOrTemplate = trimmed.startsWith('<dt-') || trimmed.startsWith('</dt-') ||
+        trimmed.startsWith('<template') || trimmed.startsWith('</template');
+
+      if (!isVueOrTemplate && trimmed.startsWith('<') && COMPONENT_CLASS_PATTERN.test(lines[i])) {
+        violations.push({
+          file: filename,
+          line: i + 1,
+          check: 'raw-html-in-header',
+          message: 'Raw HTML with component CSS classes in code-well-header. Use the equivalent Vue component instead.',
+        });
+      }
+    }
+
+    if (trimmed.includes('</code-well-header>')) {
+      inHeader = false;
+    }
+  }
+
+  return violations;
+}
+
+export function lintContent (filename, content) {
+  if (ALLOWLIST.has(filename)) return [];
+
+  const lines = content.split('\n');
+  const disabledLines = findDisabledLines(lines);
+
+  return [
+    ...checkCodeExampleTabs(lines, filename, disabledLines),
+    ...checkRawHtmlInHeaders(lines, filename, disabledLines),
+  ];
+}
+
+function lintFile (filepath) {
+  const filename = basename(filepath);
+  const content = readFileSync(filepath, 'utf-8');
+  return lintContent(filename, content).map(v => ({ ...v, file: filepath }));
+}
+
+function main () {
+  const args = process.argv.slice(2);
+  const warnOnly = args.includes('--warn');
+  const fixList = args.includes('--fix-list');
+
+  let files;
+  try {
+    files = readdirSync(DOCS_DIR)
+      .filter(f => f.endsWith('.md'))
+      .map(f => join(DOCS_DIR, f))
+      .sort();
+  } catch (err) {
+    console.error(`Error reading docs directory: ${DOCS_DIR}`);
+    console.error(err.message);
+    process.exit(1);
+  }
+
+  const allViolations = [];
+
+  for (const file of files) {
+    allViolations.push(...lintFile(file));
+  }
+
+  if (allViolations.length === 0) {
+    console.log('All component doc examples follow the ref-based pattern.');
+    process.exit(0);
+  }
+
+  if (fixList) {
+    const uniqueFiles = [...new Set(allViolations.map(v => basename(v.file)))].sort();
+    console.log(uniqueFiles.join('\n'));
+    process.exit(warnOnly ? 0 : 1);
+  }
+
+  const byFile = {};
+  for (const v of allViolations) {
+    const name = basename(v.file);
+    if (!byFile[name]) byFile[name] = [];
+    byFile[name].push(v);
+  }
+
+  const prefix = warnOnly ? 'warning' : 'error';
+
+  for (const [file, violations] of Object.entries(byFile).sort()) {
+    for (const v of violations) {
+      console.log(`${prefix}: ${file}:${v.line} [${v.check}] ${v.message}`);
+    }
+  }
+
+  console.log(`\n${allViolations.length} violation(s) in ${Object.keys(byFile).length} file(s).`);
+  process.exit(warnOnly ? 0 : 1);
+}
+
+// Only run when executed directly, not when imported for testing
+import { fileURLToPath } from 'node:url';
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  main();
+}
