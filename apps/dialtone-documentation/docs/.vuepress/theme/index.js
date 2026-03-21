@@ -272,6 +272,10 @@ export const dialtoneVuepressTheme = (options) => ({
 
   extendsMarkdown: (md) => {
       md.use(markdownItClass, mapping);
+
+      // Auto-extract slot source from <code-example> blocks for the Vue code tab
+      const codeExampleSourcePlugin = require('../plugins/markdown-it-code-example-source.js');
+      md.use(codeExampleSourcePlugin.default ?? codeExampleSourcePlugin);
     },
 
     onInitialized (app) {

@@ -89,60 +89,37 @@ The component prioritizes different sources for content display, sequentially ch
 
 ### Icon
 
-<code-well-header>
-  <dt-avatar ref="iconExample">
+<code-example>
+  <dt-avatar>
     <template #icon>
       <dt-icon-user />
     </template>
   </dt-avatar>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.iconExample'
-vueCode='
-<dt-avatar>
-  <template #icon>
-    <dt-icon-user />
-  </template>
-</dt-avatar>
-'
-showHtmlWarning />
+</code-example>
 
 ### Initials
 
 Unless otherwise specified via the `color` prop, a background color will be provided based on the `seed` prop. This background is based on a hashed version of the user ID, allowing the colors to be consistent across sessions. Colors are dynamically computed using OKLCH and adapt to the current theme.
 
-<code-well-header>
-    <dt-stack ref="initialsExample" direction="row" gap="500" class="d-wmx50p d-fw-wrap">
-      <dt-avatar v-for="seed in seeds" :seed="seed" full-name="DP" />
-    </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.initialsExample'
-vueCode='
+<code-example vueCode='
 <!-- Use seed for consistent random colors per user -->
 <dt-avatar
   full-name="DP"
   seed="user-unique-id"
 />
-'
-showHtmlWarning />
+'>
+  <dt-stack direction="row" gap="500" class="d-wmx50p d-fw-wrap">
+    <dt-avatar v-for="seed in seeds" :seed="seed" full-name="DP" />
+  </dt-stack>
+</code-example>
 
 ### Image
 
 If `image-src` is not provided, or if image fails to load, the avatar will fall back to the initials extracted from the `full-name`.
 
-<code-well-header>
-  <dt-avatar ref="imageExample" image-src="/assets/images/person.png" image-alt="avatar user" />
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.imageExample'
-vueCode='
-<dt-avatar image-src="/assets/images/person.png" image-alt="avatar user" />
-'
-showHtmlWarning />
+<code-example>
+  <dt-avatar image-src="/assets/images/person.png" image-alt="avatar user" />
+</code-example>
 
 ### Sizes
 
@@ -162,149 +139,65 @@ Avatar supports a 100-based sizing scale. T-shirt sizes (`xs`, `sm`, `md`, `lg`,
 | `800` | — | 128px |
 | `900` | — | 256px |
 
-<code-well-header>
-    <dt-stack ref="sizesExample" direction="row" align="center" gap="500" class="d-fw-wrap">
-        <dt-avatar v-for="size in sizes" :size="size">
-          <template #icon>
-            <dt-icon-user />
-          </template>
-        </dt-avatar>
-    </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.sizesExample'
-vueCode='
-<dt-avatar size="100">
-  <template #icon>
-    <dt-icon-user />
-  </template>
-</dt-avatar>
-<dt-avatar size="150">
-  <template #icon>
-    <dt-icon-user />
-  </template>
-</dt-avatar>
-<dt-avatar size="200">
-  <template #icon>
-    <dt-icon-user />
-  </template>
-</dt-avatar>
-<dt-avatar size="250">
-  <template #icon>
-    <dt-icon-user />
-  </template>
-</dt-avatar>
+<code-example vueCode='
 <dt-avatar size="300">
   <template #icon>
     <dt-icon-user />
   </template>
 </dt-avatar>
-<dt-avatar size="400">
-  <template #icon>
-    <dt-icon-user />
-  </template>
-</dt-avatar>
-<dt-avatar size="500">
-  <template #icon>
-    <dt-icon-user />
-  </template>
-</dt-avatar>
-<dt-avatar size="600">
-  <template #icon>
-    <dt-icon-user />
-  </template>
-</dt-avatar>
-<dt-avatar size="700">
-  <template #icon>
-    <dt-icon-user />
-  </template>
-</dt-avatar>
-<dt-avatar size="800">
-  <template #icon>
-    <dt-icon-user />
-  </template>
-</dt-avatar>
-<dt-avatar size="900">
-  <template #icon>
-    <dt-icon-user />
-  </template>
-</dt-avatar>
-'
-showHtmlWarning />
+'>
+  <dt-stack direction="row" align="center" gap="500" class="d-fw-wrap">
+    <dt-avatar v-for="size in sizes" :size="size">
+      <template #icon>
+        <dt-icon-user />
+      </template>
+    </dt-avatar>
+  </dt-stack>
+</code-example>
 
 ### Group
 
 The group avatar is used to represent group discussions in a compact form. A count badge is added on top of the avatar. The avatar shown is the last person to send a message in the group. The group avatar is available only from sizes 100-500. At size 100, only the count badge is shown.
 
-<code-well-header>
-    <dt-stack ref="groupExample" direction="row" align="center" gap="500">
-        <dt-avatar size="100" :group="3" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar size="150" :group="5" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar size="200" :group="12" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar size="250" :group="8" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar size="300" :group="24" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar size="400" :group="100" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar size="500" :group="7" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-    </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.groupExample'
-vueCode='
-<dt-avatar size="100" :group="3" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-<dt-avatar size="150" :group="5" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-<dt-avatar size="200" :group="12" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-<dt-avatar size="250" :group="8" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-<dt-avatar size="300" :group="24" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-<dt-avatar size="400" :group="100" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-<dt-avatar size="500" :group="7" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-'
-showHtmlWarning />
+<code-example>
+  <dt-stack direction="row" align="center" gap="500">
+    <dt-avatar size="100" :group="3" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+    <dt-avatar size="150" :group="5" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+    <dt-avatar size="200" :group="12" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+    <dt-avatar size="250" :group="8" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+    <dt-avatar size="300" :group="24" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+    <dt-avatar size="400" :group="100" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+    <dt-avatar size="500" :group="7" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+  </dt-stack>
+</code-example>
 
 ### Presence
 
 Provides the user's current [presence](/components/presence.md), positioned in the bottom right corner.
 
-<code-well-header>
-  <dt-stack ref="presenceExample" gap="400">
-      <dt-stack direction="row" align="center" gap="400">
-          <dt-avatar size="xs" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-          <dt-avatar size="sm" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-          <dt-avatar size="md" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-          <dt-avatar size="lg" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-          <dt-avatar size="500" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-      </dt-stack>
-      <dt-stack direction="row" align="center" gap="400">
-          <dt-avatar size="xs" presence="active" seed="user-1" full-name="Test Name" />
-          <dt-avatar size="sm" presence="away" seed="user-2" full-name="William Steele" />
-          <dt-avatar size="md" presence="busy" seed="user-3" full-name="Frank Richard" />
-          <dt-avatar size="lg" presence="offline" seed="user-4" full-name="John Hawkins" />
-          <dt-avatar size="500" presence="active" seed="user-5" full-name="Alice Edwards" />
-      </dt-stack>
+<code-example>
+  <dt-stack gap="400">
+    <dt-stack direction="row" align="center" gap="400">
+      <dt-avatar size="xs" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar size="sm" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar size="md" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar size="lg" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar size="500" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+    </dt-stack>
+    <dt-stack direction="row" align="center" gap="400">
+      <dt-avatar size="xs" presence="active" seed="user-1" full-name="Test Name" />
+      <dt-avatar size="sm" presence="away" seed="user-2" full-name="William Steele" />
+      <dt-avatar size="md" presence="busy" seed="user-3" full-name="Frank Richard" />
+      <dt-avatar size="lg" presence="offline" seed="user-4" full-name="John Hawkins" />
+      <dt-avatar size="500" presence="active" seed="user-5" full-name="Alice Edwards" />
+    </dt-stack>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.presenceExample'
-vueCode='
-<dt-avatar size="xs" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-<dt-avatar size="sm" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-<dt-avatar size="md" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-<dt-avatar size="lg" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-<dt-avatar size="500" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-<dt-avatar size="xs" presence="active" seed="user-1" full-name="Test Name" />
-<dt-avatar size="sm" presence="away" seed="user-2" full-name="William Steele" />
-<dt-avatar size="md" presence="busy" seed="user-3" full-name="Frank Richard" />
-<dt-avatar size="lg" presence="offline" seed="user-4" full-name="John Hawkins" />
-<dt-avatar size="500" presence="active" seed="user-5" full-name="Alice Edwards" />
-'
-showHtmlWarning />
+</code-example>
 
 ### Overlay
 
-<code-well-header>
-  <dt-stack ref="overlayExample" direction="row" align="center" gap="500">
+<code-example>
+  <dt-stack direction="row" align="center" gap="500">
     <dt-avatar size="lg" image-src="/assets/images/person.png" image-alt="avatar user">
       <template #overlayIcon>
         <dt-icon-hear />
@@ -312,19 +205,7 @@ showHtmlWarning />
     </dt-avatar>
     <dt-avatar size="lg" image-src="/assets/images/person.png" image-alt="avatar user" overlay-text="+3" />
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.overlayExample'
-vueCode='
-<dt-avatar size="lg" image-src="/assets/images/person.png" image-alt="avatar user">
-  <template #overlayIcon>
-    <dt-icon-hear />
-  </template>
-</dt-avatar>
-<dt-avatar size="lg" image-src="/assets/images/person.png" image-alt="avatar user" overlay-text="+3" />
-'
-showHtmlWarning />
+</code-example>
 
 ### Clickable
 
@@ -332,33 +213,20 @@ Avatars that appear alongside a visible label (e.g., a user's name) are decorati
 
 Avatars that convey meaning on their own — such as navigation or actions — should be made interactive using the `clickable` prop. This renders the avatar as a `<button>` with visible focus ring and keyboard activation via Enter and Space. Provide an accessible name via `icon-aria-label` (for icon avatars), `full-name` (for initials avatars), or `image-alt` (for image avatars).
 
-<code-well-header>
-  <dt-stack direction="row" align="center" gap="500">
-    <dt-avatar clickable icon-aria-label="user" ref="example-clickable">
-      <template #icon>
-        <dt-icon-user />
-      </template>
-    </dt-avatar>
-  </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs['example-clickable']"
-vueCode='
-<dt-avatar clickable icon-aria-label="user">
-  <template #icon>
-    <dt-icon-user />
-  </template>
-</dt-avatar>
-'
-showHtmlWarning />
+<code-example>
+  <dt-avatar clickable icon-aria-label="user">
+    <template #icon>
+      <dt-icon-user />
+    </template>
+  </dt-avatar>
+</code-example>
 
 ### Deactivated
 
 Use the `deactivated` prop to render the avatar in a desaturated/washed-out state. This is useful to indicate that a user is deactivated or inactive.
 
-<code-well-header>
-  <dt-stack ref="deactivatedExample" direction="row" align="center" gap="500">
+<code-example>
+  <dt-stack direction="row" align="center" gap="500">
     <dt-avatar deactivated image-src="/assets/images/person.png" image-alt="Deactivated user" />
     <dt-avatar deactivated full-name="Deactivated User" seed="user-deactivated" />
     <dt-avatar deactivated>
@@ -367,20 +235,7 @@ Use the `deactivated` prop to render the avatar in a desaturated/washed-out stat
       </template>
     </dt-avatar>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.deactivatedExample'
-vueCode='
-<dt-avatar deactivated image-src="/assets/images/person.png" image-alt="Deactivated user" />
-<dt-avatar deactivated full-name="Deactivated User" seed="user-deactivated" />
-<dt-avatar deactivated>
-  <template #icon>
-    <dt-icon-user />
-  </template>
-</dt-avatar>
-'
-showHtmlWarning />
+</code-example>
 
 ## Vue API
 

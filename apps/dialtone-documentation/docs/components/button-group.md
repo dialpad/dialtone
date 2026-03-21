@@ -23,62 +23,33 @@ The alignment and the order of buttons within it can be customized to suit the s
 ### Start
 
 When aligned to `start`, the `primary` button is on the **left** side of the group.
-<code-well-header class="d-d-block">
-  <dt-button-group ref="startExample" alignment="start">
+
+<code-example class="d-d-block">
+  <dt-button-group alignment="start">
     <dt-button importance="primary">Confirm</dt-button>
     <dt-button importance="outlined">Cancel</dt-button>
   </dt-button-group>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.startExample'
-vueCode='
-<dt-button-group>
-  <dt-button importance="primary">Confirm</dt-button>
-  <dt-button importance="outlined">Cancel</dt-button>
-</dt-button-group>
-'
-showHtmlWarning />
+</code-example>
 
 ### End
 
 When aligned to `end`, the `primary` button is on the **right** side of the group.
-<code-well-header class="d-d-block">
-  <dt-button-group ref="endExample" alignment="end">
+<code-example class="d-d-block">
+  <dt-button-group alignment="end">
     <dt-button importance="outlined">Cancel</dt-button>
     <dt-button importance="primary">Confirm</dt-button>
   </dt-button-group>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.endExample'
-vueCode='
-<dt-button-group alignment="end">
-  <dt-button importance="primary">Confirm</dt-button>
-  <dt-button importance="outlined">Cancel</dt-button>
-</dt-button-group>
-'
-showHtmlWarning />
+</code-example>
 
 ### Space-Between
 
 When set to `space-between`, the elements are evenly distributed within the row, creating a directional flow where the `primary` button is either on the **left** (regressive) or on the **right** (progressive).
-<code-well-header class="d-d-block">
-  <dt-button-group ref="spaceBetweenExample" alignment="space-between">
+<code-example class="d-d-block">
+  <dt-button-group alignment="space-between">
     <dt-button importance="outlined">Previous</dt-button>
     <dt-button importance="primary">Next</dt-button>
   </dt-button-group>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.spaceBetweenExample'
-vueCode='
-<dt-button-group alignment="space-between">
-  <dt-button importance="outlined">Previous</dt-button>
-  <dt-button importance="primary">Next</dt-button>
-</dt-button-group>
-'
-showHtmlWarning />
+</code-example>
 
 ## Vue API
 

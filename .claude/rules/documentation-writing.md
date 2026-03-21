@@ -25,74 +25,62 @@ paths:
 - Never write TODO, TBD, "Coming soon", or empty sections
 - If content isn't ready, omit the section entirely
 
-## HTML Code Examples Must Use Refs
+## Code Examples: Use `<code-example>`
 
-In `<code-example-tabs>`, always use the ref-based pattern for `htmlCode`:
+Prefer the unified `<code-example>` component. The slot content is the single source of truth — a build-time plugin auto-extracts it as the Vue code tab.
 
 ```html
-<code-well-header>
-  <dt-notice ref="baseExample" kind="base" title="Base title" />
-</code-well-header>
+<!-- Default: demo + code tabs, auto-extracted -->
+<code-example>
+  <dt-notice kind="base" title="Base title" />
+</code-example>
 
-<code-example-tabs
-  :htmlCode='() => $refs.baseExample'
-  vueCode='<dt-notice kind="base" title="Base title" />'
-  showHtmlWarning />
+<!-- Demo only -->
+<code-example only-show="demo">
+  <dt-notice kind="base" title="Base title" />
+</code-example>
+
+<!-- Code only -->
+<code-example only-show="code">
+  <dt-notice kind="base" title="Base title" />
+</code-example>
+
+<!-- Override vueCode ONLY when the code tab genuinely differs -->
+<code-example vueCode='<dt-button disabled>Click</dt-button>'>
+  <dt-toggle v-model="isDisabled" />
+  <dt-button :disabled="isDisabled">Click</dt-button>
+</code-example>
 ```
+
+### When to use `vueCode` override
+
+Only add an explicit `vueCode` prop when the displayed code is genuinely different from the slot:
+- The slot has **interactive state** (v-model, toggles) that the code should simplify
+- The slot uses a **custom example wrapper** (`<example-modal>`) that the code should expand
+- The structure is **fundamentally different** (e.g., a `<table>` demo vs a flat component list)
+
+Do NOT use `vueCode` just because the slot has a `<dt-stack>` wrapper — that's useful context for users.
 
 ### Rules
 
-- Add `ref="descriptiveName"` to the outermost rendered element inside `<code-well-header>`
-- Bind `:htmlCode='() => $refs.refName'` — never use static inline HTML strings (`htmlCode='<div>...'`)
-- Always include `showHtmlWarning` when using the ref pattern
-- If a `<dt-stack>` or other wrapper surrounds multiple items, put the `ref` on the wrapper
-- If there is no `<code-well-header>` (code-only snippet), omit `htmlCode` entirely
-- Never use raw HTML with component CSS classes (e.g., `<div class="d-card">`) inside `<code-well-header>` — always use the Vue component (`<dt-card>`)
-- Use `<dt-stack>` for spacing wrappers — never `<div class="d-stack*">` or `<div class="d-flow*">` (these CSS utilities are deprecated)
-- Layout utility classes like `d-w100p` and `d-d-grid` on wrapper `<div>` elements are fine (no Vue equivalent exists)
+- Never use raw HTML with component CSS classes (e.g., `<div class="d-card">`) — always use the Vue component (`<dt-card>`)
+- Use `<dt-stack>` for spacing wrappers — never `<div class="d-stack*">` or `<div class="d-flow*">` (deprecated)
+- Layout utility classes like `d-w100p` and `d-d-grid` on wrapper `<div>` elements are fine
+- Use `bgclass` prop for custom background: `<code-example bgclass="d-bgc-primary">`
 
-### Anti-patterns (DO NOT)
+### Legacy pattern (still supported)
 
-```html
-<!-- BAD: static inline HTML string -->
-<code-example-tabs
-  htmlCode='<aside class="d-notice">...</aside>'
-  vueCode='<dt-notice />'
-  showHtmlWarning />
-
-<!-- BAD: raw HTML component in code-well-header -->
-<code-well-header>
-  <div class="d-card d-w264">
-    <div class="d-card__content">...</div>
-  </div>
-</code-well-header>
-
-<!-- BAD: missing htmlCode when code-well-header exists -->
-<code-well-header>
-  <dt-notice kind="base" title="Base title" />
-</code-well-header>
-<code-example-tabs
-  vueCode='<dt-notice kind="base" title="Base title" />' />
-```
-
-### Edge cases
-
-- `text.md` intentionally omits htmlCode to discourage manual CSS — this is allowlisted
-- `table.md` is CSS-only with fenced code blocks — no code-example-tabs
-- When `vueCode` intentionally differs from `code-well-header` (simplified for copy-paste), keep vueCode as-is — the ref captures the actual rendered output
-- Custom example wrappers (`<example-modal>`, `<example-toast>`) — put ref on the custom component
-- Interactive state headers (toggles, v-model controls) — put ref on the inner content, not controls
+The old `<code-well-header>` + `<code-example-tabs>` pattern still works. When using it:
+- Add `ref="descriptiveName"` to the outermost element in `<code-well-header>`
+- Bind `:htmlCode='() => $refs.refName'` — never static inline HTML strings
+- Always include `showHtmlWarning`
 
 ### Pre-submission checklist
 
-Before considering doc changes complete, verify:
-
-1. Every `<code-example-tabs>` following a `</code-well-header>` has `:htmlCode='() => $refs.refName'`
-2. The matching `<code-well-header>` contains `ref="refName"` on the outermost rendered element
-3. No static inline HTML strings exist (`htmlCode='<...`)
-4. `showHtmlWarning` is present on all ref-based blocks
-5. No raw HTML component classes in `<code-well-header>` bodies
-6. Run: `node scripts/lint-doc-examples.mjs` — should pass with 0 violations
+1. No static inline HTML strings (`htmlCode='<...`)
+2. No raw HTML component classes in demo areas
+3. `vueCode` override only used when genuinely needed
+4. Run: `node scripts/lint-doc-examples.mjs` — should pass with 0 violations
 
 ## Component Doc Pages (VuePress)
 
