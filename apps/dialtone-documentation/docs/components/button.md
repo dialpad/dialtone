@@ -167,6 +167,7 @@ Buttons can be set to active state using the `active` prop or `.d-btn--active` D
   <dt-stack
     gap="400"
     :direction="{ 'default': 'column', 'md': 'row' }"
+    data-demo-wrapper
   >
     <dt-button importance="clear" active>Place Call</dt-button>
     <dt-button active>Place Call</dt-button>
@@ -184,6 +185,7 @@ Buttons can be styled as a [Link](link.md) in situations for which you need the 
   <dt-stack
     gap="400"
     :direction="{ 'default': 'column', 'md': 'row' }"
+    data-demo-wrapper
   >
     <dt-button link>Place Call</dt-button>
     <dt-button link linkKind="warning">Place Call</dt-button>
@@ -202,6 +204,7 @@ This inverts the underline behavior. With `underline="false"`, the link will not
   <dt-stack
     gap="400"
     :direction="{ 'default': 'column', 'md': 'row' }"
+    data-demo-wrapper
   >
     <dt-button link :underline="false">Place Call</dt-button>
     <dt-button link linkKind="danger" :underline="false">Place Call</dt-button>
@@ -213,7 +216,7 @@ This inverts the underline behavior. With `underline="false"`, the link will not
 The unstyled button removes all default Dialtone styling while preserving the semantic HTML `<button>` element and maintaining proper button behavior and accessibility.
 
 <code-example>
-    <dt-button kind="unstyled">Place Call</dt-button>
+  <dt-button kind="unstyled">Place Call</dt-button>
 </code-example>
 
 ### Inverted
@@ -344,47 +347,38 @@ The default button size is `md`, but does not need to be explicitly specified.
   <dt-stack
     gap="400"
     :direction="{ 'default': 'column', 'md': 'row' }"
+    data-demo-wrapper
   >
-    <span>
-      <dt-button size="xs" kind="muted" importance="outlined">
-        Call
-        <template #startIcon="{ iconSize }">
-          <dt-icon name="phone" :size="iconSize" />
-        </template>
-      </dt-button>
-    </span>
-    <span>
-      <dt-button size="sm" kind="muted" importance="outlined">
-        Call
-        <template #startIcon="{ iconSize }">
-          <dt-icon name="phone" :size="iconSize" />
-        </template>
-      </dt-button>
-    </span>
-    <span>
-      <dt-button kind="muted" importance="outlined">
-        Call
-        <template #startIcon="{ iconSize }">
-          <dt-icon name="phone" :size="iconSize" />
-        </template>
-      </dt-button>
-    </span>
-    <span>
-      <dt-button size="lg" kind="muted" importance="outlined">
-        Call
-        <template #startIcon="{ iconSize }">
-          <dt-icon name="phone" :size="iconSize" />
-        </template>
-      </dt-button>
-    </span>
-    <span>
-      <dt-button size="xl" kind="muted" importance="outlined">
-        Call
-        <template #startIcon="{ iconSize }">
-          <dt-icon name="phone" :size="iconSize" />
-        </template>
-      </dt-button>
-    </span>
+    <dt-button size="xs" kind="muted" importance="outlined">
+      Call
+      <template #startIcon="{ iconSize }">
+        <dt-icon name="phone" :size="iconSize" />
+      </template>
+    </dt-button>
+    <dt-button size="sm" kind="muted" importance="outlined">
+      Call
+      <template #startIcon="{ iconSize }">
+        <dt-icon name="phone" :size="iconSize" />
+      </template>
+    </dt-button>
+    <dt-button kind="muted" importance="outlined">
+      Call
+      <template #startIcon="{ iconSize }">
+        <dt-icon name="phone" :size="iconSize" />
+      </template>
+    </dt-button>
+    <dt-button size="lg" kind="muted" importance="outlined">
+      Call
+      <template #startIcon="{ iconSize }">
+        <dt-icon name="phone" :size="iconSize" />
+      </template>
+    </dt-button>
+    <dt-button size="xl" kind="muted" importance="outlined">
+      Call
+      <template #startIcon="{ iconSize }">
+        <dt-icon name="phone" :size="iconSize" />
+      </template>
+    </dt-button>
   </dt-stack>
 </code-example>
 
@@ -443,29 +437,26 @@ Place icons above or below the label with `blockStartIcon` and `blockEndIcon` sl
   <dt-stack
     gap="400"
     :direction="{ 'default': 'column', 'md': 'row' }"
+    data-demo-wrapper
   >
-    <span>
-      <dt-button importance="outlined">
-        <template #blockStartIcon="{ iconSize }">
-          <dt-icon
-            name="phone"
-            :size="iconSize"
-          />
-        </template>
-        Label
-      </dt-button>
-    </span>
-    <span>
-      <dt-button importance="outlined">
-        <template #blockEndIcon="{ iconSize }">
-          <dt-icon
-            name="phone"
-            :size="iconSize"
-          />
-        </template>
-        Label
-      </dt-button>
-    </span>
+    <dt-button importance="outlined">
+      <template #blockStartIcon="{ iconSize }">
+        <dt-icon
+          name="phone"
+          :size="iconSize"
+        />
+      </template>
+      Label
+    </dt-button>
+    <dt-button importance="outlined">
+      <template #blockEndIcon="{ iconSize }">
+        <dt-icon
+          name="phone"
+          :size="iconSize"
+        />
+      </template>
+      Label
+    </dt-button>
   </dt-stack>
 </code-example>
 
@@ -477,6 +468,7 @@ Icon-only buttons are commonly used for toggling actions, navigation, or closing
   <dt-stack
     gap="600"
     :direction="{ 'default': 'column', 'md': 'row' }"
+    data-demo-wrapper
   >
     <dt-stack direction="row" gap="400">
       <dt-button v-dt-tooltip="`Tooltip`" kind="muted" importance="clear">
@@ -585,6 +577,7 @@ The following styles are available as a circle shape.
   <dt-stack
     gap="600"
     :direction="{ 'default': 'column', 'md': 'row' }"
+    data-demo-wrapper
   >
     <dt-stack direction="row" gap="400">
       <dt-button v-dt-tooltip="`Tooltip`" circle kind="muted" importance="clear">
@@ -876,10 +869,11 @@ We provide the following branded buttons for log-in and sign-up workflows.
   <dt-stack
     gap="400"
     :direction="{ 'default': 'column', 'md': 'row' }"
+    data-demo-wrapper
   >
-    <span><button class="d-btn d-btn--brand d-btn--google d-w100p" type="button"><span class="d-btn__icon"><dt-icon name="google-glyph" /></span><span class="d-btn__label">Log in with Google</span></button></span>
-    <span><button class="d-btn d-btn--brand d-btn--o365 d-w100p" type="button"><span class="d-btn__icon"><dt-icon name="office-365" /></span><span class="d-btn__label">Log in with Office365</span></button></span>
-    <span><button class="d-btn d-btn--brand d-btn--linkedin d-w100p" type="button"><span class="d-btn__icon"><dt-icon name="linkedin" /></span><span class="d-btn__label">Log in with LinkedIn</span></button></span>
+    <button class="d-btn d-btn--brand d-btn--google d-w100p" type="button"><span class="d-btn__icon"><dt-icon name="google-glyph" /></span><span class="d-btn__label">Log in with Google</span></button>
+    <button class="d-btn d-btn--brand d-btn--o365 d-w100p" type="button"><span class="d-btn__icon"><dt-icon name="office-365" /></span><span class="d-btn__label">Log in with Office365</span></button>
+    <button class="d-btn d-btn--brand d-btn--linkedin d-w100p" type="button"><span class="d-btn__icon"><dt-icon name="linkedin" /></span><span class="d-btn__label">Log in with LinkedIn</span></button>
   </dt-stack>
 </code-example>
 
