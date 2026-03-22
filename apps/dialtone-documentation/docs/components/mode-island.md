@@ -108,7 +108,7 @@ keywords: ["theme island","mode override","v-dt-mode","directive","light","dark"
         </template>
       </dt-dropdown>
     </dt-stack>
-    <dt-stack :direction="{ 'default': 'column', 'md': 'row' }" gap="500" class="d-w100p">
+    <dt-stack :direction="{ 'default': 'column', 'lg': 'row' }" gap="500" class="d-w100p">
       <dt-stack gap="400" class="d-fl1">
         <dt-text as="h3" kind="headline" size="md">Inverted <dt-text strength="normal">(auto)</dt-text></dt-text>
         <dt-stack v-dt-mode:invert gap="400" class="d-bgc-secondary d-p16 d-bar8 d-ba d-bc-default">

@@ -47,8 +47,8 @@ The **subtitle** slot can be used to display content below the default slot. The
 
 The **bottom** slot can be used to display content below the subtitle slot.
 
-<code-example>
-  <ul class="d-d-block">
+<code-example class="d-d-block">
+  <ul>
     <dt-list-item navigation-type="tab">
       <template #start>
         <dt-icon size="300" name="check" />
@@ -73,58 +73,63 @@ The **bottom** slot can be used to display content below the subtitle slot.
 
 When `type` is set to "custom" the list item will not render any styles or slots. This type can be used when the list item has to support content that does not work with the default structure.
 
-<code-example>
-  <ul class="d-d-block">
+<code-example class="d-d-block">
+  <ul>
     <dt-list-item
       navigation-type="tab"
       type="custom"
     >
-      <dt-stack direction="row" align="center" justify="between" class="d-py8 d-px12">
-        <div>
-          <time
-            class="d-fs-100 d-pr12"
+      <dt-stack direction="row" align="start" justify="between" gap="500" class="d-py8 d-px12 d-pr8">
+        <dt-stack align="baseline" direction="row" gap="400">
+          <dt-text
+            kind="body"
+            tone="muted"
+            size="xs"
             datetime="10:00"
           >
             10:00
-          </time>
-          <span class="d-fs-200">
-            Custom List Item Example
-          </span>
-        </div>
-        <dt-stack direction="row" class="d-p6 d-tn8 d-r12 d-bgc-white d-bar4 d-bs-md">
+          </dt-text>
+          <dt-text size="md" density="300" kind="body" tone="secondary">
+            Custom list item example lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+          </dt-text>
+        </dt-stack>
+        <dt-stack direction="row">
           <dt-button
-            class="d-p4 d-py8"
+            size="xs"
+            kind="muted"
             importance="clear"
             title="share"
           >
-            <template #startIcon>
+            <template #startIcon="{ iconSize }">
               <dt-icon
-                name="share-2"
-                size="200"
+                name="share"
+                :size="iconSize"
               />
             </template>
           </dt-button>
           <dt-button
-            class="d-p4 d-py8 d-ml4"
+            size="xs"
+            kind="muted"
             importance="clear"
             title="star"
           >
-            <template #startIcon>
+            <template #startIcon="{ iconSize }">
               <dt-icon
                 name="star"
-                size="200"
+                :size="iconSize"
               />
             </template>
           </dt-button>
           <dt-button
-            class="d-p4 d-py8 d-ml4"
+            size="xs"
+            kind="muted"
             importance="clear"
             title="more"
           >
-            <template #startIcon>
+            <template #startIcon="{ iconSize }">
               <dt-icon
                 name="more-vertical"
-                size="200"
+                :size="iconSize"
               />
             </template>
           </dt-button>

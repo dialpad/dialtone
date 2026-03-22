@@ -69,7 +69,7 @@ With this we accomplish the requirement to have the previous year button focused
 Constrain the selectable date range by providing `min-date` and/or `max-date` props. Days outside the range are disabled and navigation buttons are disabled when the target month is fully out of range.
 
 <code-example vueCode='
-<script setup>
+<script>
 const today = new Date();
 const minDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 5);
 const maxDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 15);

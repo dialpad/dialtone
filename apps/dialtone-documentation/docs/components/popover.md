@@ -8,6 +8,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-popover--def
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=7298-20354
 keywords: ["popup", "overlay", "floating", "d-popover", "DtPopover", "dt-popover", "flyout", "tooltip panel"]
 ---
+
 <code-example only-show="demo">
   <example-popover modal />
 </code-example>

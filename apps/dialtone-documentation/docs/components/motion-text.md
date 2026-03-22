@@ -6,23 +6,15 @@ thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-motion-text--default
 ---
 
-<code-example vueCode='
-<dt-motion-text
-  text="Welcome to Dialtone Motion Text"
-  animation-mode="gradient-in"
-  speed="md"
-  class="d-headline--lg"
-/>
-'>
-  <dt-stack direction="row" align="center" class="d-hmn128 d-p24">
+<code-example>
+  <dt-text kind="headline" size="2xl">
     <dt-motion-text
       text="Welcome to Dialtone Motion Text"
-      animation-mode="gradient-in"
-      speed="md"
+      animation-mode="shimmer"
       :auto-start="true"
-      class="d-headline--lg"
+      loop
     />
-  </dt-stack>
+  </dt-text>
 </code-example>
 
 ## Usage
@@ -40,21 +32,42 @@ The component supports six different animation modes:
 - **shimmer**: Static text with an animated shimmer effect (loops automatically)
 - **none**: Instant text display without animation
 
-<code-example vueCode='
-<dt-motion-text
-  text="Gradient In Animation"
-  animation-mode="gradient-in"
-  speed="md"
-/>
-'>
-  <dt-stack gap="400" class="d-p24">
-    <dt-motion-text
-      text="Gradient In Animation"
-      animation-mode="gradient-in"
-      speed="md"
-      :auto-start="true"
-      class="d-headline--md"
-    />
+<code-example only-show="demo">
+  <dt-stack gap="400" align="center">
+    <span>
+      <dt-button kind="muted" importance="outlined" size="sm" @click="toggleAll">
+        <template #startIcon="{ iconSize }">
+          <dt-icon name="play" :size="iconSize" />
+        </template>
+      </dt-button>
+    </span>
+    <dt-text kind="headline" size="lg">
+      <dt-motion-text
+        ref="slideInRef"
+        text="Slide In Animation"
+        animation-mode="slide-in"
+        speed="md"
+        :auto-start="false"
+      />
+    </dt-text>
+    <dt-text kind="headline" size="lg">
+      <dt-motion-text
+        ref="fadeInRef"
+        text="Fade In Animation"
+        animation-mode="fade-in"
+        speed="md"
+        :auto-start="false"
+      />
+    </dt-text>
+    <dt-text kind="headline" size="lg">
+      <dt-motion-text
+        ref="gradientInRef"
+        text="Gradient In Animation"
+        animation-mode="gradient-in"
+        speed="md"
+        :auto-start="false"
+      />
+    </dt-text>
   </dt-stack>
 </code-example>
 
@@ -186,3 +199,19 @@ The component automatically includes proper ARIA attributes:
 3. **Consider context**: Hero sections work well with `gradient-in`, while body text might be better with `fade-in`
 4. **Test with reduced motion**: Always ensure your UI works with animations disabled
 5. **Provide screen reader text**: If using emojis or special characters, always include alternative text
+
+<script setup>
+import { ref } from 'vue';
+
+const slideInRef = ref(null);
+const fadeInRef = ref(null);
+const gradientInRef = ref(null);
+
+function toggleAll () {
+  for (const r of [slideInRef, fadeInRef, gradientInRef]) {
+    if (!r.value) continue;
+    r.value.reset();
+    r.value.start();
+  }
+}
+</script>

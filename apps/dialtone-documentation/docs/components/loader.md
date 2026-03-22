@@ -39,9 +39,11 @@ The base loader should be the go-to loader for most of your needs. When in doubt
 
 The base loader size is 24px and should be used in most cases.
 
-<code-example>
+<code-example vueCode='
+<dt-loader size="100|200|300|400|500|600|700|800"></dt-loader>
+'>
   <dt-stack
-    gap="400"
+    gap="500"
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
     <dt-loader size="100"></dt-loader>

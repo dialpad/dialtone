@@ -57,19 +57,21 @@ In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#
 
 <code-example>
   <dt-keyboard-shortcut
-    shortcut="{cmd}+{opt}+{win}+{arrow-right}+{arrow-left}+{arrow-up}+{arrow-down}"
+    shortcut="{cmd}+{opt}+{win}+{arrow-right}+{arrow-left}+{arrow-up}+{arrow-down}+A"
   />
 </code-example>
 
 ### Inline with Text and Screen Reader Text
 
 <code-example>
-  Press
-  <dt-keyboard-shortcut
-    screen-reader-text="Control plus F5"
-    shortcut="Ctrl + F5"
-  />
-  to hard refresh the page.
+  <dt-text kind="body" size="md">
+    Press
+    <dt-keyboard-shortcut
+      screen-reader-text="Control plus F5"
+      shortcut="Ctrl + F5"
+    />
+    to hard refresh the page.
+  </dt-text>
 </code-example>
 
 ## Accessibility

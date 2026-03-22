@@ -14,7 +14,7 @@ keywords: ["scrollable", "d-scrollbar", "DtScrollbar", "dt-scrollbar", "custom s
 Allows to add overlay scrollbars that will look the same for every browser. The directive sets up the scrollbars from the library [OverlayScrollbars](https://kingsora.github.io/OverlayScrollbars/).
 
 <code-example>
-  <div class="d-hmx164 d-w30p d-bar8 d-ba" v-dt-scrollbar>
+  <div class="d-hmx164 d-w264 d-bar8 d-ba" v-dt-scrollbar>
     <dt-stack>
       <div v-for="item in items" class="item">
         {{ item}}
@@ -61,10 +61,8 @@ To customize the behavior of the scrollbar, you can use different arguments with
 
 Show the scrollbar when the mouse enters the scrollable area. This is the default option, so no argument is needed.
 
-<code-example vueCode='
-<div v-dt-scrollbar></div>
-'>
-  <div class="d-hmx164 d-w30p d-bar8 d-ba" v-dt-scrollbar>
+<code-example>
+  <div class="d-hmx164 d-w264 d-bar8 d-ba" v-dt-scrollbar>
     <dt-stack>
       <div v-for="item in items" class="item">
         {{ item}}
@@ -77,10 +75,8 @@ Show the scrollbar when the mouse enters the scrollable area. This is the defaul
 
 Always show the scrollbar if the region is overflowing the available space.
 
-<code-example vueCode='
-<div v-dt-scrollbar:never></div>
-'>
-  <div class="d-hmx164 d-w30p d-bar8 d-ba" v-dt-scrollbar:never>
+<code-example>
+  <div class="d-hmx164 d-w264 d-bar8 d-ba" v-dt-scrollbar:never>
     <dt-stack>
       <div v-for="item in items" class="item">
         {{ item}}
@@ -93,10 +89,8 @@ Always show the scrollbar if the region is overflowing the available space.
 
 Show the scrollbar on scroll.
 
-<code-example vueCode='
-<div v-dt-scrollbar:scroll></div>
-'>
-  <div class="d-hmx164 d-w30p d-bar8 d-ba" v-dt-scrollbar:scroll>
+<code-example>
+  <div class="d-hmx164 d-w264 d-bar8 d-ba" v-dt-scrollbar:scroll>
     <dt-stack>
       <div v-for="item in items" class="item">
         {{ item}}
@@ -109,10 +103,8 @@ Show the scrollbar on scroll.
 
 Show the scrollbar when the mouse moves inside the scrollable area.
 
-<code-example vueCode='
-<div v-dt-scrollbar:move></div>
-'>
-  <div class="d-hmx164 d-w30p d-bar8 d-ba" v-dt-scrollbar:move>
+<code-example>
+  <div class="d-hmx164 d-w264 d-bar8 d-ba" v-dt-scrollbar:move>
     <dt-stack>
       <div v-for="item in items" class="item">
         {{ item}}

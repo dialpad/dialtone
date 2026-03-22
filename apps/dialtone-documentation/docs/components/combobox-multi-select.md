@@ -9,7 +9,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox-mul
 
 <!-- <component-combinator component-name="DtComboboxMultiSelect" /> -->
 
-<code-example bgclass="d-d-block" vueCode='
+<code-example class="d-d-block" vueCode='
 <dt-combobox-multi-select
   ref="comboboxMultiSelect"
   label="Label Text"
@@ -85,7 +85,7 @@ Adds validation for max selection. Make sure to provide the following props:
 - `maxSelected` the maximum number of selections you can make. 0 is unlimited
 - `maxSelectedMessage` should be the message that shown if max selection has been reached
 
-<code-example bgclass="d-d-block" vueCode='
+<code-example class="d-d-block" vueCode='
 <dt-combobox-multi-select
   ref="comboboxMultiSelect"
   label="Label Text"

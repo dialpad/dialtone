@@ -98,11 +98,11 @@ keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFil
 
 <code-example>
   <dt-stack direction="row" gap="400">
-      <dt-filter-pill
-        :model-value="[{name: 'Email'}, {name: 'Phone'}, {name: 'Chat'}, {name: 'Social'}, {name: 'SMS'}]"
-        label="Channel"
-      >
-      </dt-filter-pill>
+    <dt-filter-pill
+      :model-value="[{name: 'Email'}, {name: 'Phone'}, {name: 'Chat'}, {name: 'Social'}, {name: 'SMS'}]"
+      label="Channel"
+    >
+    </dt-filter-pill>
   </dt-stack>
 </code-example>
 
@@ -112,11 +112,11 @@ The pill becomes active when any filter item has `active: true`.
 
 <code-example>
   <dt-stack direction="row" gap="400">
-      <dt-filter-pill
-        :model-value="[{name: 'Headquarters', active: true}, {name: 'Westside'}, {name: 'Downtown'}]"
-        label="Contact centers"
-      >
-      </dt-filter-pill>
+    <dt-filter-pill
+      :model-value="[{name: 'Headquarters', active: true}, {name: 'Westside'}, {name: 'Downtown'}]"
+      label="Contact centers"
+    >
+    </dt-filter-pill>
   </dt-stack>
 </code-example>
 

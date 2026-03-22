@@ -15,7 +15,7 @@ The collapsible component consists of two parts: the anchor and the content. If 
 
 ### Basic Usage Without Anchor Slot
 
-<code-example bgclass="d-d-block">
+<code-example class="d-d-block">
   <div>
     <dt-collapsible
       class="d-fc-primary"
@@ -41,7 +41,7 @@ The collapsible component consists of two parts: the anchor and the content. If 
 
 ### With Anchor Slot
 
-<code-example bgclass="d-d-block">
+<code-example class="d-d-block">
   <dt-collapsible :open="isOpen">
     <template #anchor>
       <dt-button @click="toggleIsOpen">

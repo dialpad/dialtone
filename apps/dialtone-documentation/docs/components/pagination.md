@@ -11,14 +11,6 @@ keywords: ["pager", "page navigation", "page numbers", "d-pagination", "DtPagina
 
 <component-combinator component-name="DtPagination" />
 
-<code-example only-show="code">
-  <dt-pagination
-    :total-pages="25"
-  />
-</code-example>
-
-<!-- <component-combinator component-name="DtPagination" /> -->
-
 ## Variants
 
 ### With Active Page

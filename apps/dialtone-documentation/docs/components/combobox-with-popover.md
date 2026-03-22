@@ -6,74 +6,40 @@ thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox-with-popover--default
 ---
 
-<code-example vueCode='
-<dt-combobox-with-popover
-  ref="comboboxWithPopover"
-  label="Label Text"
-  content-width="anchor"
-  max-height="300px"
-  @escape="onEscape"
-  @highlight="onHighlight"
-  @select="onSelect"
->
-  <template #input="{ inputProps, onInput }">
-    <dt-input
-      v-model="inputValue"
-      placeholder="Select one or start typing"
-      v-bind="inputProps"
-      @input="onInput"
-    />
-  </template>
-  <template #list="{ listProps }">
-    <ul v-bind="listProps">
-      <dt-list-item
-        v-for="(item, i) in items"
-        :key="item.id"
-        navigation-type="arrow-keys"
-        role="option"
-        @click="onSelect(i)"
-      >
-        {{ item.name }}
-      </dt-list-item>
-    </ul>
-  </template>
-</dt-combobox-with-popover>
-'>
-  <div class="d-d-block">
-    <dt-combobox-with-popover
-      label="Label Text"
-      :show-list="showList"
-      content-width="anchor"
-      max-height="300px"
-      @select="onSelect"
-      @opened="onOpened"
-    >
-      <template #input="{ inputProps, onInput }">
-        <dt-input
-          v-model="inputValue"
-          placeholder="Select one or start typing"
-          v-bind="inputProps"
-          @input="onInput"
-        />
-      </template>
-      <template #list="{ listProps }">
-        <ul v-bind="listProps" class="d-p4">
-          <dt-list-item
-            v-for="(item, i) in items"
-            :key="item.id"
-            role="option"
-            navigation-type="arrow-keys"
-            @click="onSelect(i)"
-          >
-            {{ item.number }}
-            <template #right>
-              <span class="d-fc-secondary">{{ item.type }}</span>
-            </template>
-          </dt-list-item>
-        </ul>
-      </template>
-    </dt-combobox-with-popover>
-  </div>
+<code-example>
+  <dt-combobox-with-popover
+    label="Label Text"
+    :show-list="showList"
+    content-width="anchor"
+    max-height="300px"
+    @select="onSelect"
+    @opened="onOpened"
+  >
+    <template #input="{ inputProps, onInput }">
+      <dt-input
+        v-model="inputValue"
+        placeholder="Select one or start typing"
+        v-bind="inputProps"
+        @input="onInput"
+      />
+    </template>
+    <template #list="{ listProps }">
+      <ul v-bind="listProps" class="d-p4">
+        <dt-list-item
+          v-for="(item, i) in items"
+          :key="item.id"
+          role="option"
+          navigation-type="arrow-keys"
+          @click="onSelect(i)"
+        >
+          {{ item.number }}
+          <template #right>
+            <span class="d-fc-secondary">{{ item.type }}</span>
+          </template>
+        </dt-list-item>
+      </ul>
+    </template>
+  </dt-combobox-with-popover>
 </code-example>
 
 <!-- <component-combinator component-name="DtComboboxWithPopover" /> -->
@@ -102,78 +68,46 @@ methods: {
 
 You can add header and footer content to the popover using the `header` and `footer` slots.
 
-<code-example vueCode='
-<dt-combobox-with-popover
-  label="Label Text"
-  @escape="onEscape"
-  @highlight="onHighlight"
-  @select="onSelect"
->
-  <template #header>
-    <div class="d-px12 d-py8 d-fw-semibold">Select an option</div>
-  </template>
-  <template #input="{ inputProps, onInput }">
-    <dt-input v-bind="inputProps" @input="onInput" />
-  </template>
-  <template #list="{ listProps }">
-    <ul v-bind="listProps">
-      <dt-list-item
-        v-for="(item, i) in items"
-        :key="item.id"
-        navigation-type="arrow-keys"
-        role="option"
-        @click="onSelect(i)"
-      >
-        {{ item.name }}
-      </dt-list-item>
-    </ul>
-  </template>
-  <template #footer>
-    <div class="d-px12 d-py8 d-fc-tertiary">Footer content</div>
-  </template>
-</dt-combobox-with-popover>
-'>
-  <div class="d-d-block">
-    <dt-combobox-with-popover
-      label="Label Text"
-      :show-list="showListHeaderFooter"
-      content-width="anchor"
-      max-height="300px"
-      @select="onSelectHeaderFooter"
-      @opened="onOpenedHeaderFooter"
-    >
-      <template #header>
-        <div class="d-px12 d-py8 d-fw-semibold">Select an option</div>
-      </template>
-      <template #input="{ inputProps, onInput }">
-        <dt-input
-          v-model="inputValueHeaderFooter"
-          placeholder="Select one or start typing"
-          v-bind="inputProps"
-          @input="onInput"
-        />
-      </template>
-      <template #list="{ listProps }">
-        <ul v-bind="listProps" class="d-p4">
-          <dt-list-item
-            v-for="(item, i) in items"
-            :key="item.id"
-            role="option"
-            navigation-type="arrow-keys"
-            @click="onSelectHeaderFooter(i)"
-          >
-            {{ item.number }}
-            <template #right>
-              <span class="d-fc-secondary">{{ item.type }}</span>
-            </template>
-          </dt-list-item>
-        </ul>
-      </template>
-      <template #footer>
-        <div class="d-px12 d-py8 d-fc-tertiary">Footer content</div>
-      </template>
-    </dt-combobox-with-popover>
-  </div>
+<code-example>
+  <dt-combobox-with-popover
+    label="Label Text"
+    :show-list="showListHeaderFooter"
+    content-width="anchor"
+    max-height="300px"
+    @select="onSelectHeaderFooter"
+    @opened="onOpenedHeaderFooter"
+  >
+    <template #header>
+      <div class="d-px12 d-py8 d-fw-semibold">Select an option</div>
+    </template>
+    <template #input="{ inputProps, onInput }">
+      <dt-input
+        v-model="inputValueHeaderFooter"
+        placeholder="Select one or start typing"
+        v-bind="inputProps"
+        @input="onInput"
+      />
+    </template>
+    <template #list="{ listProps }">
+      <ul v-bind="listProps" class="d-p4">
+        <dt-list-item
+          v-for="(item, i) in items"
+          :key="item.id"
+          role="option"
+          navigation-type="arrow-keys"
+          @click="onSelectHeaderFooter(i)"
+        >
+          {{ item.number }}
+          <template #right>
+            <span class="d-fc-secondary">{{ item.type }}</span>
+          </template>
+        </dt-list-item>
+      </ul>
+    </template>
+    <template #footer>
+      <div class="d-px12 d-py8 d-fc-tertiary">Footer content</div>
+    </template>
+  </dt-combobox-with-popover>
 </code-example>
 
 ## Content Mode

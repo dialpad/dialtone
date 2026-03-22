@@ -34,21 +34,21 @@ keywords: ["emoji support","emoticon wrapper","d-emoji-text-wrapper","DtEmojiTex
 
 <code-example>
   <dt-stack gap="500">
-    <dt-emoji-text-wrapper>
-      <dt-button kind="primary" importance="primary" color="danger">
+    <dt-button>
+      <dt-emoji-text-wrapper>
         Button with shortcode :cry: emoji
-      </dt-button>
-    </dt-emoji-text-wrapper>
+      </dt-emoji-text-wrapper>
+    </dt-button>
     <dt-text kind="body" size="md">
       <dt-emoji-text-wrapper>
         Text only with unicode 😃 emoji
       </dt-emoji-text-wrapper>
     </dt-text>
-    <dt-emoji-text-wrapper>
-      <dt-button kind="primary">
+    <dt-button>
+      <dt-emoji-text-wrapper>
         Button wrapper :smile:
-      </dt-button>
-    </dt-emoji-text-wrapper>
+      </dt-emoji-text-wrapper>
+    </dt-button>
     <dt-text kind="body" size="md">
       <dt-emoji-text-wrapper size="800">
         Bigger emoji size :smile:

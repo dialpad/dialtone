@@ -21,7 +21,7 @@ It has 2 core required slots:
 2. `list`: the list of items to display responding to `input`'s value. Almost always this will be a list of `dt-list-item`.
 This will usually be the [List Item component](/components/list-item.md).
 
-<code-example bgclass="d-d-block">
+<code-example class="d-d-block">
   <dt-combobox
     :show-list="!!value"
     label="Label Text"
@@ -66,7 +66,7 @@ This will usually be the [List Item component](/components/list-item.md).
 
 ## With Empty List Item
 
-<code-example bgclass="d-d-block">
+<code-example class="d-d-block">
   <dt-combobox
     :show-list="!!value"
     label="Label Text"

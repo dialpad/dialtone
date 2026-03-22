@@ -9,23 +9,6 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["no results", "blank slate", "zero state", "d-empty-state", "DtEmptyState", "dt-empty-state", "placeholder", "empty view"]
 ---
 
-<code-example only-show="demo">
-  <dt-empty-state
-    header-text="Nothing to see here"
-    body-text="Looks like there is no data to display here."
-  >
-    <template #body>
-      <dt-stack direction="row" gap="300">
-        <dt-button importance="clear">Action</dt-button>
-        <dt-button>Action</dt-button>
-      </dt-stack>
-    </template>
-    <template #illustration>
-      <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
-    </template>
-  </dt-empty-state>
-</code-example>
-
 <component-combinator component-name="DtEmptyState" />
 
 ## Anatomy

@@ -8,7 +8,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-root-layout-
 keywords: ["app layout","page layout","d-root-layout","DtRootLayout","dt-root-layout"]
 ---
 
-<code-example only-show="demo">
+<code-example class="d-d-block" only-show="demo">
 <dt-root-layout
   :fixed="false"
   class="d-w100p d-h332"
@@ -40,7 +40,7 @@ A root layout consists of a header, body, sidebar and footer. Content can option
 will be displayed in the respective area. The sidebar is designed to be responsive and will reposition above the
 body according to the `responsiveBreakpoint` prop.
 
-<code-example>
+<code-example class="d-d-block">
 <dt-root-layout
   :fixed="false"
   class="d-w100p d-h332"
@@ -68,7 +68,7 @@ body according to the `responsiveBreakpoint` prop.
 
 ### Header Sticky
 
-<code-example>
+<code-example class="d-d-block">
   <div
     class="d-h332 d-of-scroll"
   >

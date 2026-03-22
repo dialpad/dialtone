@@ -38,6 +38,8 @@ The hovercard will appear upon the mouse entering the anchor, with a delay of 30
 
 ### Many Hovercards
 
+After opening one hovercard, moving to another skips the entrance delay — a "warm-up" pattern for faster navigation between targets.
+
 <code-example only-show="demo">
   <dt-stack direction="row" gap="500">
     <example-hovercard v-for="data in exampleData" :label="data.label" :content="data.content" />

@@ -15,13 +15,8 @@ keywords: ["emoticon","smiley","d-emoji","DtEmoji","dt-emoji"]
 
 ### With Shortcode
 
-<code-example vueCode='
-<dt-emoji
-  code="smile"
-  size="500"
-/>
-'>
-  <dt-emoji code=":smile:" />
+<code-example>
+  <dt-emoji code=":smile:" size="500" />
 </code-example>
 
 ### With Unicode
@@ -39,14 +34,7 @@ keywords: ["emoticon","smiley","d-emoji","DtEmoji","dt-emoji"]
 ### Sizes
 
 <code-example vueCode='
-<dt-emoji size="100" code=":smile:" />
-<dt-emoji size="200" code=":smile:" />
-<dt-emoji size="300" code=":smile:" />
-<dt-emoji size="400" code=":smile:" />
-<dt-emoji size="500" code=":smile:" />
-<dt-emoji size="600" code=":smile:" />
-<dt-emoji size="700" code=":smile:" />
-<dt-emoji size="800" code=":smile:" />
+<dt-emoji size="100|200|300|400|500|600|700|800" code=":smile:" />
 '>
   <dt-stack direction="row" gap="400" align="center">
     <dt-emoji v-for="size in sizes" :size="size" code=":smile:" />

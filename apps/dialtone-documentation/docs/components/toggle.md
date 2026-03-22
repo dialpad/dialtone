@@ -41,66 +41,31 @@ The Toggle component acts as a way to allow the User to switch between two mutua
 
 ### Base Styles
 
-<code-example vueCode='
-<dt-toggle>
-  Unchecked Toggle
-</dt-toggle>
-<dt-toggle :model-value="true">
-  Checked Toggle
-</dt-toggle>
-<dt-toggle :disabled="true">
-  Unchecked Disabled
-</dt-toggle>
-<dt-toggle :model-value="true" :disabled="true">
-  Checked Disabled
-</dt-toggle>
-<dt-toggle model-value="mixed">
-  Indeterminate Toggle
-</dt-toggle>
-<dt-toggle model-value="mixed" :disabled="true">
-  Indeterminate Disabled
-</dt-toggle>
-<dt-toggle :show-icon="false">
-  Without icon
-</dt-toggle>
-'>
+<code-example>
   <dt-stack as="fieldset" gap="400">
-    <dt-toggle label-class="d-mr6">Unchecked Toggle</dt-toggle>
-    <dt-toggle :model-value="true" label-class="d-mr6">Checked Toggle</dt-toggle>
-    <dt-toggle disabled label-class="d-mr6">Unchecked Disabled</dt-toggle>
-    <dt-toggle :model-value="true" disabled label-class="d-mr6">Checked Disabled</dt-toggle>
-    <dt-toggle :model-value="mixed" label-class="d-mr6">Indeterminate Toggle</dt-toggle>
-    <dt-toggle :model-value="mixed" label-class="d-mr6" disabled>Indeterminate Disabled</dt-toggle>
-    <dt-toggle label-class="d-mr6" :show-icon="false">Without icon</dt-toggle>
+    <dt-toggle wrapper-class="d-g16">Unchecked Toggle</dt-toggle>
+    <dt-toggle :model-value="true" wrapper-class="d-g16">Checked Toggle</dt-toggle>
+    <dt-toggle disabled wrapper-class="d-g16">Unchecked Disabled</dt-toggle>
+    <dt-toggle :model-value="true" disabled wrapper-class="d-g16">Checked Disabled</dt-toggle>
+    <dt-toggle :model-value="mixed" wrapper-class="d-g16">Indeterminate Toggle</dt-toggle>
+    <dt-toggle :model-value="mixed" wrapper-class="d-g16" disabled>Indeterminate Disabled</dt-toggle>
+    <dt-toggle wrapper-class="d-g16" :show-icon="false">Without icon</dt-toggle>
   </dt-stack>
 </code-example>
 
 ### Sizes
 
-<code-example vueCode='
-<dt-toggle>
-  Default size
-</dt-toggle>
-<dt-toggle size="sm">
-  Small size
-</dt-toggle>
-'>
+<code-example>
   <dt-stack as="fieldset" gap="400">
-    <dt-toggle size="sm" label-class="d-mr6">Small size</dt-toggle>
-    <dt-toggle label-class="d-mr6">Default size</dt-toggle>
+    <dt-toggle size="sm" wrapper-class="d-g16">Small size</dt-toggle>
+    <dt-toggle wrapper-class="d-g16">Default size</dt-toggle>
   </dt-stack>
 </code-example>
 
 ### With v-model
 
-<code-example vueCode='
-<dt-toggle v-model="checked">
-  Toggle
-</dt-toggle>
-'>
-  <dt-stack as="fieldset" gap="400">
-    <dt-toggle v-model="checked" label-class="d-mr6">Toggle</dt-toggle>
-  </dt-stack>
+<code-example>
+  <dt-toggle v-model="checked" wrapper-class="d-g16">Toggle</dt-toggle>
 </code-example>
 
 ## Vue API

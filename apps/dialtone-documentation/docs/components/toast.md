@@ -36,9 +36,9 @@ keywords: ["notification", "snackbar", "alert", "message", "d-toast", "DtToast",
   </template>
 </dt-toast>
 '>
-  <dt-stack direction="row" gap="400" align="end" class="d-w100p">
+  <dt-stack direction="row" gap="500" class="d-w100p">
     <div class="d-fl-grow1">
-      <dt-select-menu label="Style" :options="toastOptions" v-model="selectedKind" />
+      <dt-select-menu :label-visible="false" label="Style" :options="toastOptions" v-model="selectedKind" />
     </div>
     <dt-checkbox value="important" @input="toggleImportant">Important</dt-checkbox>
     <dt-button @click="toggleToast">Toggle Example</dt-button>
@@ -96,15 +96,15 @@ If the duration is not provided the toast won't disappear automatically.
 
 If you need to self-position the toast at the top center, use the `d-toast-wrapper` Dialtone class:
 
-```html
-<aside class="d-toast-wrapper">
-  <dt-toast
-    :title="title"
-    :message="message"
-    :show="isShown"
-  ></dt-toast>
-</aside>
-```
+<code-example only-show="code">
+  <aside class="d-toast-wrapper">
+    <dt-toast
+      :title="title"
+      :message="message"
+      :show="isShown"
+    ></dt-toast>
+  </aside>
+</code-example>
 
 ## Vue API
 

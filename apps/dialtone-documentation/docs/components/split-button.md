@@ -110,16 +110,6 @@ In addition to the [Button component's](button.md) documentation:
   </dt-stack>
 </code-example>
 
-### Inverted
-
-<code-example bgclass="d-bgc-contrast">
-  <dt-stack direction="row" gap="400">
-      <dt-split-button kind="inverted" end-tooltip-text="More calling options"> Place Call </dt-split-button>
-      <dt-split-button importance="outlined" kind="inverted" end-tooltip-text="More calling options"> Place Call </dt-split-button>
-      <dt-split-button importance="clear" kind="inverted" end-tooltip-text="More calling options"> Place Call </dt-split-button>
-  </dt-stack>
-</code-example>
-
 ### Muted
 
 <code-example>
@@ -195,12 +185,12 @@ The start button supports navigation via `start-href` (renders as `<a>`) or `sta
 
 ### Router Link
 
-<code-example only-show="code">
+<code-example>
   <dt-split-button
     start-to="/components/button"
     end-tooltip-text="More options"
   >
-    Go to Button docs
+    Go to DtButton docs
     <template #dropdownList>
       <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>
       <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item>

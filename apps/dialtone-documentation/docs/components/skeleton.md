@@ -10,7 +10,7 @@ keywords: ["loading placeholder", "shimmer", "ghost", "d-skeleton", "DtSkeleton"
 ---
 
 <code-example only-show="demo">
-  <div class="d-w50p">
+  <div class="d-w264">
     <dt-skeleton :animate="false" />
   </div>
 </code-example>
@@ -62,7 +62,7 @@ keywords: ["loading placeholder", "shimmer", "ghost", "d-skeleton", "DtSkeleton"
 ### Default
 
 <code-example>
-  <div class="d-w50p">
+  <div class="d-w264">
     <dt-skeleton :animate="false" arial-label="Loading" />
   </div>
 </code-example>
@@ -70,7 +70,7 @@ keywords: ["loading placeholder", "shimmer", "ghost", "d-skeleton", "DtSkeleton"
 ### Animation
 
 <code-example>
-  <div class="d-w50p">
+  <div class="d-w264">
     <dt-skeleton arial-label="Loading" />
   </div>
 </code-example>
@@ -80,7 +80,7 @@ keywords: ["loading placeholder", "shimmer", "ghost", "d-skeleton", "DtSkeleton"
 To customize a non-animating Skeleton background color modify the `--placeholder-from-color` variable with an inline `style`.
 
 <code-example>
-  <div class="d-w50p">
+  <div class="d-w264">
     <dt-skeleton
       :animate="false"
       :text-option="{
@@ -94,7 +94,7 @@ To customize a non-animating Skeleton background color modify the `--placeholder
 Customize an animating Skeleton by modifying the `--placeholder-from-color` and `--placeholder-to-color` variables with an inline `style`.
 
 <code-example>
-  <div class="d-w50p">
+  <div class="d-w264">
     <dt-skeleton
       :text-option="{
         style: '--placeholder-from-color: var(--dt-color-blue-400); --placeholder-to-color: var(--dt-color-blue-200);',
@@ -110,41 +110,41 @@ Customize an animating Skeleton by modifying the `--placeholder-from-color` and 
 
 Default sizes match the avatar size. Size is customizable when needed.
 
-<code-example bgclass="d-ai-flex-start">
-  <div>
+<code-example>
+  <dt-stack gap="400">
     <p>S (24x24px)</p>
     <dt-skeleton :shape-option="{ shape: 'circle', size: 'sm' }" :animate="false" />
     <p>M (32x32px)</p>
     <dt-skeleton :shape-option="{ shape: 'circle' }" :animate="false" />
     <p>L (48x48px)</p>
     <dt-skeleton :shape-option="{ shape: 'circle', size: 'lg' }" :animate="false" />
-  </div>
+  </dt-stack>
 </code-example>
 
 ### Image / Icon
 
-<code-example bgclass="d-ai-flex-start">
-  <div>
+<code-example>
+  <dt-stack>
     <p>S (24x24px)</p>
     <dt-skeleton :shape-option="{ shape: 'square', size: 'sm' }" :animate="false" />
     <p>M (32x32px)</p>
     <dt-skeleton :shape-option="{ shape: 'square' }" :animate="false" />
     <p>L (48x48px)</p>
     <dt-skeleton :shape-option="{ shape: 'square', size: 'lg' }" :animate="false" />
-  </div>
+  </dt-stack>
 </code-example>
 
 ### Headings
 
-<code-example bgclass="d-ai-flex-start">
-  <div>
+<code-example>
+  <dt-stack>
     <p>Small</p>
     <dt-skeleton :text-option="{ type: 'heading', headingHeight: 'sm', width: '160px' }" :animate="false" />
     <p>Medium</p>
     <dt-skeleton :text-option="{ type: 'heading', width: '240px' }" :animate="false" />
     <p>Large</p>
     <dt-skeleton :text-option="{ type: 'heading', headingHeight: 'lg', width: '320px' }" :animate="false" />
-  </div>
+  </dt-stack>
 </code-example>
 
 ## Prefabricated Combinations
@@ -152,7 +152,7 @@ Default sizes match the avatar size. Size is customizable when needed.
 ### Paragraphs
 
 <code-example>
-  <div class="d-w50p">
+  <div class="d-w264">
     <dt-skeleton :paragraph-option="{ rows: 5, randomWidth: true }" :animate="false" />
   </div>
 </code-example>
@@ -160,7 +160,7 @@ Default sizes match the avatar size. Size is customizable when needed.
 ### Avatar + Name
 
 <code-example>
-  <div class="d-w50p">
+  <div class="d-w264">
     <dt-skeleton
       :list-item-option="{ shapeSize: 'sm', paragraphs: { rows: 1 } }"
     />
@@ -170,7 +170,7 @@ Default sizes match the avatar size. Size is customizable when needed.
 ### Icon + Text
 
 <code-example>
-  <div class="d-w50p">
+  <div class="d-w264">
     <dt-skeleton
       :list-item-option="{
         shapeSize: '2rem',
@@ -186,7 +186,7 @@ Default sizes match the avatar size. Size is customizable when needed.
 ### Messages / Transcript / Comment
 
 <code-example>
-  <div class="d-w50p">
+  <div class="d-w264">
     <dt-skeleton
       :list-item-option="{
         shapeSize: '3.6rem',
