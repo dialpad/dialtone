@@ -75,6 +75,7 @@ Only add `vueCode` when the code tab must show something **genuinely different**
 
 - Use `vueCode` with an empty slot — slot must always have content
 - Self-close `<code-example />` — always use `</code-example>`
+- Put empty lines inside `<code-example>` — markdown-it splits the block at blank lines, breaking source extraction
 
 ### Rules
 
