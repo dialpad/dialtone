@@ -879,8 +879,7 @@ Use the `#leading` and `#trailing` slots to render freeform content at the start
 
 We provide the following branded buttons for log-in and sign-up workflows.
 
-<!-- lint-doc-examples-disable -->
-<code-well-header>
+<code-example>
   <dt-stack
     gap="400"
     :direction="{ 'default': 'column', 'md': 'row' }"
@@ -889,22 +888,7 @@ We provide the following branded buttons for log-in and sign-up workflows.
     <span><button class="d-btn d-btn--brand d-btn--o365 d-w100p" type="button"><span class="d-btn__icon"><dt-icon name="office-365" /></span><span class="d-btn__label">Log in with Office365</span></button></span>
     <span><button class="d-btn d-btn--brand d-btn--linkedin d-w100p" type="button"><span class="d-btn__icon"><dt-icon name="linkedin" /></span><span class="d-btn__label">Log in with LinkedIn</span></button></span>
   </dt-stack>
-</code-well-header>
-
-```html
-<button class="d-btn d-btn--brand d-btn--google" type="button">
-  <span class="d-btn__icon"><icon-google-glyph /></span>
-  <span class="d-btn__label">Log in with Google</span>
-</button>
-<button class="d-btn d-btn--brand d-btn--o365" type="button">
-  <span class="d-btn__icon"><icon-google-glyph /></span>
-  <span class="d-btn__label">Log in with Office365</span>
-</button>
-<button class="d-btn d-btn--brand d-btn--linkedin" type="button">
-  <span class="d-btn__icon"><icon-google-glyph /></span>
-  <span class="d-btn__label">Log in with LinkedIn</span>
-</button>
-```
+</code-example>
 
 ## Vue API
 

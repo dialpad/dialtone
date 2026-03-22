@@ -346,29 +346,19 @@ Since `DtText`'s default element is a `<span>`, which is inline by default, the 
 Since `DtText`'s default element is a `<span>`, the `truncate` will only work if its element is in block or inline-block context, e.g. `<div>...</div>`.
 
 <code-example>
-  <dt-stack class="d-w100p">
+  <div class="d-w332">
     <dt-text as="p" truncate>Welcome to Dialpad, the most modern, AI-powered business communications platform. We've taken every form of communication that you rely on and unified it into one app.</dt-text>
-  </dt-stack>
+  </div>
 </code-example>
 
 ## Max Lines
 
-<code-example vueCode='
-<dt-text as="p" :max-lines="maxLines">....</dt-text>
-'>
-  <dt-stack class="d-w100p" align="start" gap="500" :direction="{ 'default': 'column', 'md': 'row' }">
-    <dt-text as="p" :maxLines="2">Welcome to Dialpad, the most modern, AI-powered business communications platform. We've taken every form of communication that you rely on and unified it into one app. Calling a client? Meeting with your team? Texting a colleague? It's all here, on all your devices. AI is by your side to transform your conversations into something you can see and use, giving you and your team a deeper look into action items and insights. Dialpad AI does the legwork to capture the details that matter most while you make and receive calls, send messages, and join meetings in an instant.</dt-text>
-    <dt-text as="p" :maxLines="4">Welcome to Dialpad, the most modern, AI-powered business communications platform. We've taken every form of communication that you rely on and unified it into one app. Calling a client? Meeting with your team? Texting a colleague? It's all here, on all your devices. AI is by your side to transform your conversations into something you can see and use, giving you and your team a deeper look into action items and insights. Dialpad AI does the legwork to capture the details that matter most while you make and receive calls, send messages, and join meetings in an instant.</dt-text>
-    <dt-text as="p" :maxLines="6">Welcome to Dialpad, the most modern, AI-powered business communications platform. We've taken every form of communication that you rely on and unified it into one app. Calling a client? Meeting with your team? Texting a colleague? It's all here, on all your devices. AI is by your side to transform your conversations into something you can see and use, giving you and your team a deeper look into action items and insights. Dialpad AI does the legwork to capture the details that matter most while you make and receive calls, send messages, and join meetings in an instant.</dt-text>
-  </dt-stack>
-</code-example>
-
 <code-example only-show="demo">
   <dt-stack gap="400">
-    <dt-stack direction="row" gap="400" justify="space-between" align="center">
-      <dt-text kind="headline" size="lg" as="h3">Demo</dt-text>
-      <dt-stack direction="row" gap="400" align="center">
-        <dt-text v-if="state.isApplied" as="code" kind="code" size="xs">
+    <dt-stack direction="row" gap="500" justify="space-between" align="center">
+      <dt-text kind="headline" size="lg" as="h3" tone="secondary">Demo</dt-text>
+      <dt-stack direction="row" gap="500" align="center">
+        <dt-text v-if="state.isApplied" as="code" kind="code" size="xs" tone="tertiary">
           max-lines="<strong>{{ state.value }}</strong>"
         </dt-text>
         <dt-stack direction="row" gap="200" align="center">
@@ -418,6 +408,10 @@ Since `DtText`'s default element is a `<span>`, the `truncate` will only work if
   </dt-stack>
 </code-example>
 
+<code-example only-show="code">
+  <dt-text as="p" :max-lines="4">....</dt-text>
+</code-example>
+
 ## Wrap
 
 Control text wrapping behavior. Particularly useful for headlines where balanced line lengths improve readability.
@@ -430,13 +424,11 @@ Since `DtText`'s default element is a `<span>`, which is inline by default, the 
 <dt-text wrap="pretty">....</dt-text>
 <dt-text wrap="nowrap">....</dt-text>
 '>
-  <dt-stack class="d-w100p" gap="500">
-    <dt-stack gap="600" align="start">
-      <dt-text as="p"><strong>Default</strong>. Lorem ipsum dolor sit amet consectetur adipisicing consequatur deleniti non doloremque autem adipisci in omnis voluptatibus </dt-text>
-      <dt-text as="p" wrap="balance"><strong>Balance</strong>. Lorem ipsum dolor sit amet consectetur adipisicing consequatur deleniti non doloremque autem adipisci in omnis voluptatibus </dt-text>
-      <dt-text as="p" wrap="pretty"><strong>Pretty</strong>. Lorem ipsum dolor sit amet consectetur adipisicing consequatur deleniti non doloremque autem adipisci in omnis voluptatibus </dt-text>
-      <dt-text as="p" wrap="nowrap"><strong>No Wrap</strong>. Lorem ipsum dolor sit amet consectetur adipisicing consequatur deleniti non doloremque autem adipisci in omnis voluptatibus </dt-text>
-    </dt-stack>
+  <dt-stack gap="600" align="start" class="d-w332">
+    <dt-text as="p"><strong>Default</strong>. Lorem ipsum dolor sit amet consectetur adipisicing consequatur deleniti non doloremque autem adipisci in omnis voluptatibus </dt-text>
+    <dt-text as="p" wrap="balance"><strong>Balance</strong>. Lorem ipsum dolor sit amet consectetur adipisicing consequatur deleniti non doloremque autem adipisci in omnis voluptatibus </dt-text>
+    <dt-text as="p" wrap="pretty"><strong>Pretty</strong>. Lorem ipsum dolor sit amet consectetur adipisicing consequatur deleniti non doloremque autem adipisci in omnis voluptatibus </dt-text>
+    <dt-text as="p" wrap="nowrap"><strong>No Wrap</strong>. Lorem ipsum dolor sit amet consectetur adipisicing consequatur deleniti non doloremque autem adipisci in omnis voluptatibus </dt-text>
   </dt-stack>
 </code-example>
 
@@ -514,7 +506,7 @@ Text box trim will only affect elements with block or inline-block styled contex
       </dt-text>
     </dt-stack>
   </dt-stack>
-  <dt-stack gap="400" direction="row" justify="space-between">
+  <dt-stack gap="400" direction="row" class="d-jc-space-between">
     <dt-button class="d-fl1" kind="muted" importance="outlined">
       <template #startIcon="{ iconSize }">
         <dt-icon-phone :size="iconSize" />
