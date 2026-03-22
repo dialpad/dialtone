@@ -40,19 +40,7 @@ They should be easy to scan for relevant and actionable information. Elements, l
 
 ### Base
 
-<code-example vueCode='
-<dt-card class="d-w264">
-  <template #header>
-    (header slot)
-  </template>
-  <template #content>
-    (content slot)
-  </template>
-  <template #footer>
-    (footer slot)
-  </template>
-</dt-card>
-'>
+<code-example>
   <dt-card class="d-w264" header-class="h:d-bgc-moderate-opaque" content-class="h:d-bgc-moderate-opaque" footer-class="h:d-bgc-moderate-opaque">
     <template #header>
       (header slot)

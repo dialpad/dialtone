@@ -18,7 +18,7 @@ The alignment and the order of buttons within it can be customized to suit the s
 When aligned to `start`, the `primary` button is on the **left** side of the group.
 
 <code-example class="d-d-block">
-  <dt-button-group alignment="start">
+  <dt-button-group alignment="start" class="d-ba d-bas-dashed">
     <dt-button importance="primary">Confirm</dt-button>
     <dt-button importance="outlined">Cancel</dt-button>
   </dt-button-group>
@@ -27,8 +27,9 @@ When aligned to `start`, the `primary` button is on the **left** side of the gro
 ### End
 
 When aligned to `end`, the `primary` button is on the **right** side of the group.
+
 <code-example class="d-d-block">
-  <dt-button-group alignment="end">
+  <dt-button-group alignment="end" class="d-ba d-bas-dashed">
     <dt-button importance="outlined">Cancel</dt-button>
     <dt-button importance="primary">Confirm</dt-button>
   </dt-button-group>
@@ -38,7 +39,7 @@ When aligned to `end`, the `primary` button is on the **right** side of the grou
 
 When set to `space-between`, the elements are evenly distributed within the row, creating a directional flow where the `primary` button is either on the **left** (regressive) or on the **right** (progressive).
 <code-example class="d-d-block">
-  <dt-button-group alignment="space-between">
+  <dt-button-group alignment="space-between" class="d-ba d-bas-dashed">
     <dt-button importance="outlined">Previous</dt-button>
     <dt-button importance="primary">Next</dt-button>
   </dt-button-group>

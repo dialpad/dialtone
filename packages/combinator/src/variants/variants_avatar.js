@@ -16,7 +16,7 @@ export default {
   default: {
     props: {
       fullName: {
-        initialValue: 'DP',
+        initialValue: 'Daniel Parker',
       },
       seed: {
         initialValue: 'user-unique-id',
@@ -26,6 +26,9 @@ export default {
 
   image: {
     props: {
+      fullName: {
+        initialValue: 'Daniel Parker',
+      },
       imageSrc: { initialValue: '/assets/images/person.png' },
       imageAlt: { initialValue: 'Avatar user' },
     },
