@@ -386,4 +386,87 @@ vueCode='<dt-badge>Missing</dt-badge>' />
       assert.equal(violations[1].check, 'missing-htmlCode');
     });
   });
+
+  describe('Check 4: self-closing code-example', () => {
+    it('flags self-closing <code-example />', () => {
+      const content = `
+<code-example only-show="code"
+vueCode='
+<dt-button>Click</dt-button>
+'
+/>
+`;
+      const violations = lintContent('button.md', content);
+      const selfClosing = violations.filter(v => v.check === 'self-closing-code-example');
+      assert.ok(selfClosing.length > 0, 'Should flag self-closing code-example');
+    });
+
+    it('allows properly closed code-example', () => {
+      const content = `
+<code-example>
+  <dt-button>Click</dt-button>
+</code-example>
+`;
+      const violations = lintContent('button.md', content);
+      const selfClosing = violations.filter(v => v.check === 'self-closing-code-example');
+      assert.equal(selfClosing.length, 0);
+    });
+  });
+
+  describe('Check 5: empty lines in code-example', () => {
+    it('flags empty lines inside code-example', () => {
+      const content = `
+<code-example only-show="code">
+  <a href="#">Link</a>
+
+  <dt-button>Click</dt-button>
+</code-example>
+`;
+      const violations = lintContent('button.md', content);
+      const emptyLine = violations.filter(v => v.check === 'empty-line-in-code-example');
+      assert.ok(emptyLine.length > 0, 'Should flag empty line inside code-example');
+    });
+
+    it('allows code-example without empty lines', () => {
+      const content = `
+<code-example>
+  <dt-stack gap="400">
+    <dt-button>One</dt-button>
+    <dt-button>Two</dt-button>
+  </dt-stack>
+</code-example>
+`;
+      const violations = lintContent('button.md', content);
+      const emptyLine = violations.filter(v => v.check === 'empty-line-in-code-example');
+      assert.equal(emptyLine.length, 0);
+    });
+  });
+
+  describe('Check 6: vueCode without slot', () => {
+    it('flags vueCode with empty slot', () => {
+      const content = `
+<code-example vueCode='
+<dt-button>Click</dt-button>
+'>
+</code-example>
+`;
+      const violations = lintContent('button.md', content);
+      const noSlot = violations.filter(v => v.check === 'vuecode-without-slot');
+      assert.ok(noSlot.length > 0, 'Should flag vueCode without slot content');
+    });
+
+    it('allows vueCode with slot content', () => {
+      const content = `
+<code-example vueCode='
+<dt-button disabled>Click</dt-button>
+'>
+  <dt-toggle v-model="isDisabled" />
+  <dt-button :disabled="isDisabled">Click</dt-button>
+</code-example>
+`;
+      const violations = lintContent('button.md', content);
+      const noSlot = violations.filter(v => v.check === 'vuecode-without-slot');
+      assert.equal(noSlot.length, 0);
+    });
+  });
 });

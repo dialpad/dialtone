@@ -7,6 +7,9 @@
  * 1. No static inline htmlCode strings (must use ref-based :htmlCode)
  * 2. code-example-tabs after code-well-header must have htmlCode
  * 3. No raw HTML component representations in code-well-header
+ * 4. No self-closing <code-example /> tags
+ * 5. No empty lines inside <code-example> blocks
+ * 6. No vueCode with empty/missing slot content
  *
  * Usage:
  *   node scripts/lint-doc-examples.mjs [--warn] [--fix-list] [file ...]
@@ -169,6 +172,90 @@ function checkRawHtmlInHeaders (lines, filename, disabledLines) {
   return violations;
 }
 
+function checkCodeExampleStructure (lines, filename) {
+  const violations = [];
+  let inCodeExample = false;
+  let inQuotedAttr = false;
+  let codeExampleStartLine = 0;
+  let hasSlotContent = false;
+  let hasVueCode = false;
+  let openTagClosed = false;
+
+  for (let i = 0; i < lines.length; i++) {
+    const trimmed = lines[i].trim();
+
+    // Detect opening tag (not code-example-tabs)
+    if (trimmed.startsWith('<code-example') && !trimmed.startsWith('<code-example-tabs')) {
+      inCodeExample = true;
+      inQuotedAttr = false;
+      codeExampleStartLine = i;
+      hasSlotContent = false;
+      hasVueCode = trimmed.includes('vueCode=');
+      openTagClosed = false;
+    }
+
+    if (inCodeExample && !openTagClosed) {
+      if (!hasVueCode && lines[i].includes('vueCode=')) hasVueCode = true;
+
+      // Track single-quote state for multi-line attributes
+      const quotes = (trimmed.match(/'/g) || []).length;
+      if (quotes % 2 !== 0) inQuotedAttr = !inQuotedAttr;
+
+      if (!inQuotedAttr) {
+        // Check 4: self-closing
+        if (trimmed.endsWith('/>')) {
+          violations.push({
+            file: filename,
+            line: i + 1,
+            check: 'self-closing-code-example',
+            message: 'Self-closing <code-example /> is not allowed. Use <code-example>...</code-example> with slot content.',
+          });
+          inCodeExample = false;
+          continue;
+        }
+
+        if (trimmed.endsWith('>') || trimmed === '>') {
+          openTagClosed = true;
+        }
+      }
+      continue;
+    }
+
+    if (inCodeExample && openTagClosed) {
+      // Check 5: empty lines
+      if (trimmed === '' && !trimmed.startsWith('</code-example')) {
+        violations.push({
+          file: filename,
+          line: i + 1,
+          check: 'empty-line-in-code-example',
+          message: 'Empty line inside <code-example> causes markdown-it to split the block. Remove the blank line.',
+        });
+      }
+
+      // Track slot content (any non-empty, non-closing line)
+      if (trimmed !== '' && trimmed !== '</code-example>') {
+        hasSlotContent = true;
+      }
+
+      // Detect closing tag
+      if (trimmed === '</code-example>') {
+        // Check 6: vueCode without slot content
+        if (hasVueCode && !hasSlotContent) {
+          violations.push({
+            file: filename,
+            line: codeExampleStartLine + 1,
+            check: 'vuecode-without-slot',
+            message: 'vueCode used without slot content. Move the code into the slot and remove vueCode, or add meaningful slot content.',
+          });
+        }
+        inCodeExample = false;
+      }
+    }
+  }
+
+  return violations;
+}
+
 export function lintContent (filename, content) {
   if (ALLOWLIST.has(filename)) return [];
 
@@ -178,6 +265,7 @@ export function lintContent (filename, content) {
   return [
     ...checkCodeExampleTabs(lines, filename, disabledLines),
     ...checkRawHtmlInHeaders(lines, filename, disabledLines),
+    ...checkCodeExampleStructure(lines, filename),
   ];
 }
 
