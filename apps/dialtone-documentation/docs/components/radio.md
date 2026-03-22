@@ -63,30 +63,7 @@ Radio buttons are a common way to allow users to make a single selection from a 
 
 ### With Validation States
 
-<code-example vueCode='
-<dt-radio-group legend="Advanced missed call routing" model-value="">
-  <dt-radio
-    name="ValidationMessageWarning"
-    value="Validation Message Warning"
-    label="To voicemail"
-    validation-state="warning"
-    :messages="[{ message: `So they can hear your voice`, type: `warning` }]"
-  />
-  <dt-radio
-    name="ValidationMessageError"
-    value="Validation Message Error"
-    label="To a message (no voicemail)"
-    validation-state="error"
-  />
-  <dt-radio
-    name="ValidationMessageSuccess"
-    value="Validation Message Success"
-    label="To a team member or room phone"
-    validation-state="success"
-    :messages="[{ message: `Because someone else might be able to talk to them.`, type: `success` }]"
-  />
-</dt-radio-group>
-'>
+<code-example>
   <dt-radio-group legend="Advanced missed call routing" model-value="">
     <dt-radio
       name="ValidationMessages"

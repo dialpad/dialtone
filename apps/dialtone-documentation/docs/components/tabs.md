@@ -156,15 +156,7 @@ Control how tabs distribute available horizontal space within the tab list. It o
 
 Tabs expand proportionally to fill the container. Longer labels receive more space.
 
-<code-example vueCode='
-<dt-tab-group spread="grow">
-  <template #tabs>
-    <dt-tab id="1" panel-id="2" selected>Tab 1</dt-tab>
-    <dt-tab id="3" panel-id="4">Tab the second</dt-tab>
-    <dt-tab id="5" panel-id="6">Tab the third</dt-tab>
-  </template>
-</dt-tab-group>
-'>
+<code-example>
   <div class="d-w100p">
     <dt-tab-group spread="grow">
       <template #tabs>
@@ -180,15 +172,7 @@ Tabs expand proportionally to fill the container. Longer labels receive more spa
 
 All tabs share the same width, regardless of label length.
 
-<code-example vueCode='
-<dt-tab-group spread="equal">
-  <template #tabs>
-    <dt-tab id="1" panel-id="2" selected>Tab 1</dt-tab>
-    <dt-tab id="3" panel-id="4">Tab the second</dt-tab>
-    <dt-tab id="5" panel-id="6">Tab the third</dt-tab>
-  </template>
-</dt-tab-group>
-'>
+<code-example>
   <div class="d-w100p">
     <dt-tab-group spread="equal">
       <template #tabs>
@@ -286,33 +270,7 @@ Use the `#startIcon` or `#endIcon` slot on `dt-tab` to add an icon. The slot pro
   The <code>#icon</code> slot has been deprecated. Use <code>#startIcon</code> or <code>#endIcon</code> instead.
 </dt-notice>
 
-<code-example vueCode='
-<dt-tab-group>
-  <template #tabs>
-    <dt-tab id="1" panel-id="2" selected>
-      First
-      <template #startIcon="{ iconSize }">
-        <dt-icon name="box-select" :size="iconSize" />
-      </template>
-    </dt-tab>
-    <dt-tab id="3" panel-id="4">
-      Second
-      <template #startIcon="{ iconSize }">
-        <dt-icon name="box-select" :size="iconSize" />
-      </template>
-      <template #endIcon="{ iconSize }">
-        <dt-icon name="box-select" :size="iconSize" />
-      </template>
-    </dt-tab>
-    <dt-tab id="5" panel-id="6">
-      Third
-      <template #endIcon="{ iconSize }">
-        <dt-icon name="box-select" :size="iconSize" />
-      </template>
-    </dt-tab>
-  </template>
-</dt-tab-group>
-'>
+<code-example>
   <div class="d-w100p">
     <dt-tab-group>
       <template #tabs>
@@ -346,27 +304,7 @@ Use the `#startIcon` or `#endIcon` slot on `dt-tab` to add an icon. The slot pro
 
 Use the `#leading` and `#trailing` slots on `dt-tab` to render content like badges or count indicators alongside tab labels. Use `leading-class` and `trailing-class` to adjust padding.
 
-<code-example vueCode='
-<dt-tab-group>
-  <template #tabs>
-    <dt-tab id="lt1" panel-id="lt2" selected trailing-class="d-pr8">
-      Inbox
-      <template #trailing>
-        <dt-badge kind="count" type="bulletin" text="9" />
-      </template>
-    </dt-tab>
-    <dt-tab id="lt3" panel-id="lt4" trailing-class="d-pr8">
-      Archive
-      <template #trailing>
-        <dt-badge kind="count" text="99+" />
-      </template>
-    </dt-tab>
-    <dt-tab id="lt5" panel-id="lt6">
-      Drafts
-    </dt-tab>
-  </template>
-</dt-tab-group>
-'>
+<code-example>
   <div class="d-w100p">
     <dt-tab-group>
       <template #tabs>

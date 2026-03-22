@@ -325,31 +325,7 @@ Shows the first active filter name using `activeFilterList`, with overflow count
 Combining the `default` and `content` slots with a radio group creates a single-select filter.
 The label updates to show the selected option, and a clear button resets to the default.
 
-<code-example vueCode='<dt-filter-pill
-  :model-value="[{name: &apos;All Conversations&apos;}, {name: &apos;Only Calls&apos;}, {name: &apos;Only Meetings&apos;}, {name: &apos;Only Digital&apos;}]"
-  :start-tooltip-text="selectedConversationType !== &apos;All Conversations&apos;
-    ? &apos;Conversation type&apos;
-    : &apos;&apos;"
-  end-tooltip-text="Remove"
-  @clear="selectedConversationType = &apos;All Conversations&apos;"
->
-  <template #default>
-    {{ selectedConversationType === &apos;All Conversations&apos;
-      ? &apos;Conversation type&apos;
-      : selectedConversationType }}
-  </template>
-  <template #content>
-    <dt-radio-group v-model="selectedConversationType" name="conversation-type-filter">
-      <dt-radio
-        v-for="filter in conversationTypes"
-        :key="filter.name"
-        :label="filter.name"
-        :value="filter.name"
-        @input="$event => selectedConversationType = $event"
-      />
-    </dt-radio-group>
-  </template>
-</dt-filter-pill>'>
+<code-example>
   <dt-stack direction="row" gap="400">
     <dt-filter-pill
       :model-value="[{name: 'All Conversations'}, {name: 'Only Calls'}, {name: 'Only Meetings'}, {name: 'Only Digital'}]"

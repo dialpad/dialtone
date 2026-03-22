@@ -139,23 +139,7 @@ Checkbox Groups are typically paired with a legend which identifies the group. I
 
 ### With Validation Messages Hidden
 
-<code-example vueCode='
-<dt-checkbox-group
-  name="my-group-name"
-  legend="My Legend"
-  :messages="[{ message: `My Success Message`, type: VALIDATION_MESSAGE_TYPES.SUCCESS }]"
-  :show-messages="false"
->
-  <dt-checkbox
-    value="option1"
-    label="Option 1"
-  />
-  <dt-checkbox
-    value="option2"
-    label="Option 2"
-  />
-</dt-checkbox-group>
-'>
+<code-example>
   <dt-checkbox-group
     name="my-group-name"
     legend="My Legend"

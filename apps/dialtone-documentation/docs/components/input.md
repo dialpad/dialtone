@@ -41,29 +41,18 @@ This component combines both the `input` and `textarea` elements as options with
 
 We offer different sizes for instances in which the interface requires a smaller or larger input. In general, though, use the base (medium) size input as much as possible, especially in forms.
 
-<code-example vueCode='
-<dt-input label="Extra Small" type="text" placeholder="Placeholder" size="xs" />
-<dt-input label="Extra Small" type="textarea" placeholder="Placeholder" size="xs" />
-<dt-input label="Small" type="text" placeholder="Placeholder" size="sm" />
-<dt-input label="Small" type="textarea" placeholder="Placeholder" size="sm" />
-<dt-input label="Medium" type="text" placeholder="Placeholder" size="md" />
-<dt-input label="Medium" type="textarea" placeholder="Placeholder" size="md" />
-<dt-input label="Large" type="text" placeholder="Placeholder" size="lg" />
-<dt-input label="Large" type="textarea" placeholder="Placeholder" size="lg" />
-<dt-input label="Extra large" type="text" placeholder="Placeholder" size="xl" />
-<dt-input label="Extra large" type="textarea" placeholder="Placeholder" size="xl" />
-'>
+<code-example>
   <div class="d-d-grid d-g16 d-g-cols2 d-w100p">
-    <dt-input label="Label" type="text" placeholder="Placeholder" size="xs" />
-    <dt-input label="Label" type="textarea" placeholder="Placeholder" size="xs" />
-    <dt-input label="Label" type="text" placeholder="Placeholder" size="sm" />
-    <dt-input label="Label" type="textarea" placeholder="Placeholder" size="sm" />
-    <dt-input label="Label" type="text" placeholder="Placeholder" size="md" />
-    <dt-input label="Label" type="textarea" placeholder="Placeholder" size="md" />
-    <dt-input label="Label" type="text" placeholder="Placeholder" size="lg" />
-    <dt-input label="Label" type="textarea" placeholder="Placeholder" size="lg" />
-    <dt-input label="Label" type="text" placeholder="Placeholder" size="xl" />
-    <dt-input label="Label" type="textarea" placeholder="Placeholder" size="xl" />
+    <dt-input label="Extra Small" type="text" placeholder="Placeholder" size="xs" />
+    <dt-input label="Extra Small" type="textarea" placeholder="Placeholder" size="xs" />
+    <dt-input label="Small" type="text" placeholder="Placeholder" size="sm" />
+    <dt-input label="Small" type="textarea" placeholder="Placeholder" size="sm" />
+    <dt-input label="Medium" type="text" placeholder="Placeholder" size="md" />
+    <dt-input label="Medium" type="textarea" placeholder="Placeholder" size="md" />
+    <dt-input label="Large" type="text" placeholder="Placeholder" size="lg" />
+    <dt-input label="Large" type="textarea" placeholder="Placeholder" size="lg" />
+    <dt-input label="Extra large" type="text" placeholder="Placeholder" size="xl" />
+    <dt-input label="Extra large" type="textarea" placeholder="Placeholder" size="xl" />
   </div>
 </code-example>
 
@@ -73,11 +62,7 @@ We offer different sizes for instances in which the interface requires a smaller
 
 An input is normally paired with a label, but there are times when it can be used without a label.  Placeholder text should primarily be used as a content prompt and only provided when needed.
 
-<code-example vueCode='
-<dt-input label="Label" placeholder="Placeholder" />
-<dt-input label="Label" model-value="Value" />
-<dt-input label="Label" placeholder="Placeholder" disabled />
-'>
+<code-example>
   <dt-stack gap="500" class="d-w100p">
     <dt-input label="Label" placeholder="Placeholder" />
     <dt-input label="Label" value="Value" />
@@ -85,11 +70,7 @@ An input is normally paired with a label, but there are times when it can be use
   </dt-stack>
 </code-example>
 
-<code-example vueCode='
-<dt-input label="Label" placeholder="Placeholder" type="textarea" />
-<dt-input label="Label" type="textarea" model-value="Value" />
-<dt-input label="Label" placeholder="Placeholder" type="textarea" disabled />
-'>
+<code-example>
   <dt-stack gap="500" class="d-w100p">
     <dt-input label="Label" placeholder="Placeholder" type="textarea" />
     <dt-input label="Label" type="textarea" value="Value" />
@@ -111,36 +92,26 @@ An input is normally paired with a label, but there are times when it can be use
 
 Provides feedback to the user based on their interaction, or lack thereof, with an input.
 
-<code-example vueCode='
-<dt-input label="Label" type="email" model-value="Value" :messages="[messages.error]"/>
-<dt-input label="Label" type="email" model-value="Value" :messages="[messages.success]"/>
-<dt-input label="Label" type="email" model-value="Value" :messages="[messages.warning]"/>
-'>
+<code-example>
   <dt-stack gap="500" class="d-w100p">
-    <dt-input label="Label" type="email" value="Value" :messages="[messages.error]"/>
-    <dt-input label="Label" type="email" value="Value" :messages="[messages.success]"/>
-    <dt-input label="Label" type="email" value="Value" :messages="[messages.warning]"/>
+    <dt-input label="Label" type="email" model-value="Value" :messages="[messages.error]"/>
+    <dt-input label="Label" type="email" model-value="Value" :messages="[messages.success]"/>
+    <dt-input label="Label" type="email" model-value="Value" :messages="[messages.warning]"/>
   </dt-stack>
 </code-example>
 
-<code-example vueCode='
-<dt-input label="Label" type="textarea" model-value="Value" :messages="[messages.error]"/>
-<dt-input label="Label" type="textarea" model-value="Value" :messages="[messages.success]"/>
-<dt-input label="Label" type="textarea" model-value="Value" :messages="[messages.warning]"/>
-'>
+<code-example>
   <dt-stack gap="500" class="d-w100p">
-    <dt-input label="Label" type="textarea" value="Value" :messages="[messages.error]"/>
-    <dt-input label="Label" type="textarea" value="Value" :messages="[messages.success]"/>
-    <dt-input label="Label" type="textarea" value="Value" :messages="[messages.warning]"/>
+    <dt-input label="Label" type="textarea" model-value="Value" :messages="[messages.error]"/>
+    <dt-input label="Label" type="textarea" model-value="Value" :messages="[messages.success]"/>
+    <dt-input label="Label" type="textarea" model-value="Value" :messages="[messages.warning]"/>
   </dt-stack>
 </code-example>
 
 ### With Multiple Validation Messages
 
-<code-example vueCode='
-<dt-input label="Label" type="email" model-value="Value" :messages="multipleMessages" />
-'>
-  <dt-input label="Label" type="email" value="Value" :messages="multipleMessages" />
+<code-example>
+  <dt-input label="Label" type="email" model-value="Value" :messages="multipleMessages" />
 </code-example>
 
 ### With Maximum Length Validation
@@ -168,23 +139,9 @@ length: {
 
 If the input is invalid due to the validation, the validation message will be shown even when the input lost focus, otherwise the validation message will be hidden when the user unfocuses the input.
 
-<code-example vueCode='
-<dt-input
-  label="Label"
-  placeholder="placeholder"
-  :validate="{
-    length: {
-      description: `Max 25 characters.`,
-      message: `Max 25 characters allowed.`,
-      max: 25,
-      warn: 15,
-      limitMaxLength: false,
-    }
-  }"
-/>
-'>
+<code-example>
   <dt-input
-    v-model="inputValue"
+    model-value="Value"
     label="Label"
     placeholder="placeholder"
     :validate="{
@@ -201,16 +158,9 @@ If the input is invalid due to the validation, the validation message will be sh
 
 ### With Custom Maximum Length Validation Message
 
-<code-example vueCode='
-<dt-input
-  label="Label"
-  placeholder="placeholder"
-  :validate="validate()"
-  v-model="inputValue"
-/>
-'>
+<code-example>
   <dt-input
-    v-model="inputValue"
+    model-value="Value"
     label="Label"
     placeholder="placeholder"
     :validate="validate()"
@@ -251,39 +201,12 @@ const validate = () => {
 
 Use `type="search"` with a clear button in the `icon` slot. When the input is not empty, the clear button will render and will clear the input field when triggered.
 
-<code-example vueCode='
-<dt-input
-  aria-label="Search items"
-  placeholder="Search Items"
-  type="search"
-  v-model="inputValue"
->
-  <template #startIcon="{ iconSize }">
-    <dt-icon name="search" :size="iconSize" />
-  </template>
-  <template v-if="inputValue.length !== 0" #endIcon="{ clear }">
-    <dt-stack class="d-pr2">
-      <dt-button
-        v-dt-tooltip="Clear search"
-        kind="muted"
-        importance="clear"
-        size="xs"
-        aria-label="Clear search"
-        @click="clear"
-      >
-        <template #startIcon="{ iconSize }">
-          <dt-icon name="close" :size="iconSize" />
-        </template>
-      </dt-button>
-    </dt-stack>
-  </template>
-</dt-input>
-'>
+<code-example>
   <dt-input
     aria-label="Search items"
     placeholder="Search Items"
     type="search"
-    v-model="inputSearchValue"
+    model-value="Search Value"
   >
     <template #startIcon="{ iconSize }">
       <dt-icon name="search" :size="iconSize" />
@@ -360,24 +283,9 @@ Use `type="search"` with a clear button in the `icon` slot. When the input is no
 Each Text Input size has a default icon size, keeping it proportional. While rare, customizing the icon size is possible.
 
 <code-example vueCode='
-<dt-input label="Small input with large icon" type="text" placeholder="Placeholder" size="sm">
-  <template #startIcon>
-    <dt-icon name="send" size="400" />
-  </template>
-</dt-input>
-<dt-input label="Medium input with extra large icon" type="text" placeholder="Placeholder">
-  <template #startIcon>
-    <dt-icon name="send" size="500" />
-  </template>
-</dt-input>
-<dt-input label="Extra large input with medium icon" type="text" placeholder="Placeholder" size="xl">
-  <template #startIcon>
-    <dt-icon name="send" size="200" />
-  </template>
-</dt-input>
-<dt-input label="Large textarea with medium icon" type="textarea" placeholder="Placeholder" size="lg">
-  <template #startIcon>
-    <dt-icon name="send" size="200" />
+<dt-input label="Small input with large icon" type="text" placeholder="Placeholder" size="{size}">
+  <template #startIcon="{ iconSize }">
+    <dt-icon name="send" :size="iconSize" />
   </template>
 </dt-input>
 '>

@@ -48,36 +48,7 @@ Checkboxes are an easily understandable way to indicate that users can select on
 
 ### Base Styles
 
-<code-example vueCode='
-<!-- Default -->
-<dt-checkbox
-  name="default"
-  value="Value"
-  label="Checkbox label"
-/>
-<!-- Checked -->
-<dt-checkbox
-  name="checked"
-  value="Value"
-  label="Checkbox label"
-  :model-value="true"
-/>
-<!-- Disabled -->
-<dt-checkbox
-  name="disabled"
-  value="Value"
-  label="Checkbox label"
-  disabled
-/>
-<!-- Disabled Checked -->
-<dt-checkbox
-  name="disabled-checked"
-  value="Value"
-  label="Checkbox label"
-  :model-value="true"
-  disabled
-/>
-'>
+<code-example>
   <dt-stack gap="400">
     <!-- Default -->
     <dt-checkbox
@@ -112,25 +83,9 @@ Checkboxes are an easily understandable way to indicate that users can select on
 
 ### Indeterminate
 
-<code-example vueCode='
-<!-- Indeterminate -->
-<dt-checkbox
-  name="indeterminate"
-  value="Value"
-  label="Indeterminate checkbox"
-  indeterminate
-/>
-<!-- Indeterminate disabled -->
-<dt-checkbox
-  name="indeterminate-disabled"
-  value="Value"
-  label="Indeterminate checkbox disabled"
-  :model-value="true"
-  disabled
-  indeterminate
-/>
-'>
+<code-example>
   <dt-stack gap="400">
+    <!-- Indeterminate -->
     <dt-checkbox
       name="indeterminate"
       value="Value"
