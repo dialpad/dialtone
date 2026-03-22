@@ -178,10 +178,11 @@ function dedent (text) {
 
 /**
  * Find the end of the opening <code-example ...> tag, handling multi-line
- * attributes with single-quoted values (which may contain > characters).
+ * attributes with quoted values (which may contain > characters).
  */
 function findOpenTagEnd (block) {
-  let inQuote = false;
+  let inSingleQuote = false;
+  let inDoubleQuote = false;
   let i = block.indexOf('<code-example');
   if (i === -1) return -1;
 
@@ -190,11 +191,11 @@ function findOpenTagEnd (block) {
   for (; i < block.length; i++) {
     const ch = block[i];
 
-    if (ch === '\'' && !inQuote) {
-      inQuote = true;
-    } else if (ch === '\'' && inQuote) {
-      inQuote = false;
-    } else if (ch === '>' && !inQuote) {
+    if (ch === '\'' && !inDoubleQuote) {
+      inSingleQuote = !inSingleQuote;
+    } else if (ch === '"' && !inSingleQuote) {
+      inDoubleQuote = !inDoubleQuote;
+    } else if (ch === '>' && !inSingleQuote && !inDoubleQuote) {
       return i + 1;
     }
   }

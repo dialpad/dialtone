@@ -5,6 +5,7 @@ import { backToTopPlugin } from '@vuepress/plugin-back-to-top';
 import { gitPlugin } from '@vuepress/plugin-git';
 import { sitemapPlugin } from 'vuepress-plugin-sitemap2';
 import markdownItClass from '@toycode/markdown-it-class';
+import codeExampleSourcePlugin from '../plugins/markdown-it-code-example-source.js';
 import { getDirname, path } from 'vuepress/utils'
 
 const __dirname = getDirname(import.meta.url);
@@ -274,8 +275,7 @@ export const dialtoneVuepressTheme = (options) => ({
       md.use(markdownItClass, mapping);
 
       // Auto-extract slot source from <code-example> blocks for the Vue code tab
-      const codeExampleSourcePlugin = require('../plugins/markdown-it-code-example-source.js');
-      md.use(codeExampleSourcePlugin.default ?? codeExampleSourcePlugin);
+      md.use(codeExampleSourcePlugin);
     },
 
     onInitialized (app) {
