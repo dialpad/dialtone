@@ -9,13 +9,6 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["radio button", "option", "form field", "d-radio", "DtRadio", "dt-radio", "option selector"]
 ---
 
-<!-- <code-well-header>
-  <dt-radio
-    value="optionValue"
-    label="Radio label"
-  />
-</code-well-header> -->
-
 <component-combinator component-name="DtRadio" />
 
 ## Usage

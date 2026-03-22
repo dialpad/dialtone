@@ -8,13 +8,6 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["tab panel", "tab navigation", "d-tabs", "DtTabs", "dt-tabs", "segmented control", "tabbar"]
 ---
 
-<!-- <code-well-header>
-  <dt-stack class="d-w100p" gap="500">
-    <example-tabs />
-    <example-tabs ref="verticalTabsExample" orientation="vertical" />
-  </dt-stack>
-</code-well-header> -->
-
 <component-combinator component-name="DtTabGroup" />
 
 ## Variants

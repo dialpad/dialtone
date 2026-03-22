@@ -9,51 +9,6 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["select","menu","picker","d-dropdown","DtDropdown","dt-dropdown"]
 ---
 
-<!-- <code-well-header>
-  <dt-dropdown navigation-type="arrow-keys">
-    <template #anchor="{ attrs }">
-      <dt-button v-bind="attrs">
-        Click to Open
-      </dt-button>
-    </template>
-    <template #list="{ close }">
-      <dt-list-item-group
-        heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
-        heading="Menu Heading A"
-      >
-        <dt-list-item
-          role="menuitem"
-          navigation-type="arrow-keys"
-          @click="close"
-        >
-          Menu Item 1
-        </dt-list-item>
-        <dt-dropdown-separator />
-        <dt-list-item
-          role="menuitem"
-          navigation-type="arrow-keys"
-          @click="close"
-        >
-          Menu Item 2
-        </dt-list-item>
-      </dt-list-item-group>
-      <dt-dropdown-separator />
-      <dt-list-item-group
-        heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
-        heading="Menu Heading B"
-      >
-        <dt-list-item
-          role="menuitem"
-          navigation-type="arrow-keys"
-          @click="close"
-        >
-          Menu Item 3
-        </dt-list-item>
-      </dt-list-item-group>
-    </template>
-  </dt-dropdown>
-</code-well-header> -->
-
 <component-combinator component-name="DtDropdown" />
 
 ## Usage

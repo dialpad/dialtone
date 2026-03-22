@@ -7,10 +7,6 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-loader--defa
 keywords: ["spinner", "loading", "progress", "d-loader", "DtLoader", "dt-loader", "activity indicator", "spin"]
 ---
 
-<!-- <code-well-header>
-  <dt-loader></dt-loader>
-</code-well-header> -->
-
 <component-combinator component-name="DtLoader" />
 
 ## Loader vs Skeleton

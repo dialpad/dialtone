@@ -9,12 +9,6 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["notification", "snackbar", "alert", "message", "d-toast", "DtToast", "dt-toast", "flash message"]
 ---
 
-<!-- <code-well-header>
-  <dt-stack direction="row" justify="center">
-    <example-toast show title="Title" class="d-ps-relative d-zi-base d-t0" :fixed="false" />
-  </dt-stack>
-</code-well-header> -->
-
 <component-combinator component-name="DtToast" />
 
 ## Variants and Examples

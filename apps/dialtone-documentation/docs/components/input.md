@@ -9,13 +9,6 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["text field", "form field", "textbox", "d-input", "DtInput", "dt-input", "text input", "form input"]
 ---
 
-<!-- <code-well-header>
-  <div class="d-d-grid d-g16 d-g-cols2 d-w100p">
-    <dt-input label="Label" placeholder="Placeholder" />
-    <dt-input label="Label" type="textarea" placeholder="Placeholder" />
-  </div>
-</code-well-header> -->
-
 <component-combinator component-name="DtInput" />
 
 ## Usage

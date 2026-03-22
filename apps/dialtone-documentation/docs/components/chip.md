@@ -9,36 +9,6 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["tag", "pill", "token", "badge", "d-chip", "DtChip", "dt-chip", "filter chip", "choice chip"]
 ---
 
-<!-- <code-well-header>
-  <dt-stack direction="row" gap="400">
-    <dt-chip size="sm" :hide-close="true" :interactive="false">Chip</dt-chip>
-    <dt-chip size="sm" :interactive="false">Chip</dt-chip>
-    <dt-chip size="sm">
-      <template #avatar>
-        <dt-avatar
-          image-src="/assets/images/person.png"
-          image-alt="Jaqueline Nackos"
-          full-name="Jaqueline Nackos"
-        />
-      </template>
-      <template #default>
-        Chip
-      </template>
-    </dt-chip>
-    <dt-chip size="sm">
-      <template #icon>
-        <dt-icon
-          name="phone"
-          size="200"
-        />
-      </template>
-      <template #default>
-        Chip
-      </template>
-    </dt-chip>
-  </dt-stack>
-</code-well-header> -->
-
 <component-combinator component-name="DtChip" />
 
 ## Variants and Examples

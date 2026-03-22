@@ -9,10 +9,6 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["alert", "message", "notification", "d-notice", "DtNotice", "dt-notice", "callout", "inline alert"]
 ---
 
-<!-- <code-well-header bgclass="d-bgc-primary">
-  <example-notice kind="base" title="Base title (optional)" />
-</code-well-header> -->
-
 <component-combinator component-name="DtNotice" />
 
 ## Usage

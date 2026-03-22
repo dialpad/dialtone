@@ -9,18 +9,6 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["navigation", "path", "d-breadcrumbs", "DtBreadcrumbs", "dt-breadcrumbs", "trail", "path navigation"]
 ---
 
-<!-- <code-well-header>
-  <dt-breadcrumbs
-    :breadcrumbs="[
-      { href: '#', label: 'Root' },
-      { href: '#', label: 'Section' },
-      { href: '#', label: 'Section' },
-      { href: '#', label: 'Section' },
-      { href: '#', label: 'Current Page', selected: true },
-    ]"
-  />
-</code-well-header> -->
-
 <component-combinator component-name="DtBreadcrumbs" />
 
 ## Usage

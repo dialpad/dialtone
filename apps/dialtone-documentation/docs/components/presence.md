@@ -9,15 +9,6 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["status", "online", "availability", "d-presence", "DtPresence", "dt-presence", "status indicator", "status dot"]
 ---
 
-<!-- <code-well-header>
-  <dt-stack direction="row" gap="500">
-    <example-presence presence="active"/>
-    <example-presence presence="away"/>
-    <example-presence presence="busy"/>
-    <example-presence presence="offline"/>
-  </dt-stack>
-</code-well-header> -->
-
 <component-combinator component-name="DtPresence" />
 
 ## Usage

@@ -7,13 +7,6 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-button-group
 keywords: ["button set", "btn group", "action group", "d-btn-group", "DtButtonGroup", "dt-button-group", "toolbar", "segmented button"]
 ---
 
-<!-- <code-well-header class="d-d-block">
-  <dt-button-group alignment="start">
-    <dt-button importance="primary">Confirm</dt-button>
-    <dt-button importance="outlined">Cancel</dt-button>
-  </dt-button-group>
-</code-well-header> -->
-
 <component-combinator component-name="DtButtonGroup" />
 
 ## Variants

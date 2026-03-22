@@ -9,10 +9,6 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["dropdown", "picker", "d-select-menu", "DtSelectMenu", "dt-select-menu", "native select", "listbox"]
 ---
 
-<!-- <code-well-header class="d-d-block">
-  <example-select-menu label="Label" />
-</code-well-header> -->
-
 <component-combinator component-name="DtSelectMenu" />
 
 ## Usage

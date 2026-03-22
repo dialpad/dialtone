@@ -9,10 +9,6 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["date picker", "calendar", "date selector", "d-datepicker", "DtDatepicker", "dt-datepicker", "date input", "schedule"]
 ---
 
-<!-- <code-well-header>
-  <dt-datepicker></dt-datepicker>
-</code-well-header> -->
-
 <component-combinator component-name="DtDatepicker" />
 
 ## Usage

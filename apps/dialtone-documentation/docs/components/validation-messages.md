@@ -9,13 +9,6 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["error message", "form validation", "field error", "d-validation-messages", "DtValidationMessages", "dt-validation-messages", "inline validation", "form errors"]
 ---
 
-<!-- <code-well-header>
-  <dt-validation-messages
-    id="sample--01"
-    :validationMessages='[{"message":"Positive validation message","type":"success"}]'
-  />
-</code-well-header> -->
-
 <component-combinator component-name="DtValidationMessages" />
 
 ## Usage
