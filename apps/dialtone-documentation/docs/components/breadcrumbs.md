@@ -51,11 +51,7 @@ Breadcrumbs are always treated as secondary and should not entirely replace the 
 
 In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#inverting) on the component element.
 
-<code-example vueCode='
-<div class="d-bgc-contrast">
-  <dt-breadcrumbs v-dt-mode:invert :breadcrumbs="breadcrumbs" />
-</div>
-'>
+<code-example>
   <div class="d-bgc-contrast">
     <dt-breadcrumbs
       v-dt-mode:invert

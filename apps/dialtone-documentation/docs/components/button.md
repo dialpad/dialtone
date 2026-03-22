@@ -115,26 +115,28 @@ This style's use should be rare. When in doubt, use the [default button style](#
 <code-example vueCode='
 <dt-button disabled {props}>Place Call</dt-button>
 '>
-  <dt-toggle v-model="isDisabled" size="sm" wrapperClass="d-g8 d-m-auto d-pb8">Disabled</dt-toggle>
   <dt-stack gap="400">
-    <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
-      <dt-button :disabled="isDisabled"> Place Call </dt-button>
-      <dt-button :disabled="isDisabled" importance="outlined"> Place Call </dt-button>
-      <dt-button :disabled="isDisabled" importance="clear"> Place Call </dt-button>
-    </dt-stack>
-    <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
-      <dt-button :disabled="isDisabled" kind="danger"> Place Call </dt-button>
-      <dt-button :disabled="isDisabled" kind="danger" importance="outlined"> Place Call </dt-button>
-      <dt-button :disabled="isDisabled" kind="danger" importance="clear"> Place Call </dt-button>
-    </dt-stack>
-    <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
-      <dt-button :disabled="isDisabled" kind="positive">Place Call</dt-button>
-      <dt-button :disabled="isDisabled" kind="positive" importance="outlined">Place Call</dt-button>
-      <dt-button :disabled="isDisabled" kind="positive" importance="clear">Place Call</dt-button>
-    </dt-stack>
-    <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
-      <dt-button :disabled="isDisabled" kind="muted" importance="clear"> Place Call </dt-button>
-      <dt-button :disabled="isDisabled" kind="muted" importance="outlined"> Place Call </dt-button>
+    <dt-toggle v-model="isDisabled" size="sm" wrapperClass="d-g8 d-m-auto d-pb8">Disabled</dt-toggle>
+    <dt-stack gap="400">
+      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+        <dt-button :disabled="isDisabled"> Place Call </dt-button>
+        <dt-button :disabled="isDisabled" importance="outlined"> Place Call </dt-button>
+        <dt-button :disabled="isDisabled" importance="clear"> Place Call </dt-button>
+      </dt-stack>
+      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+        <dt-button :disabled="isDisabled" kind="danger"> Place Call </dt-button>
+        <dt-button :disabled="isDisabled" kind="danger" importance="outlined"> Place Call </dt-button>
+        <dt-button :disabled="isDisabled" kind="danger" importance="clear"> Place Call </dt-button>
+      </dt-stack>
+      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+        <dt-button :disabled="isDisabled" kind="positive">Place Call</dt-button>
+        <dt-button :disabled="isDisabled" kind="positive" importance="outlined">Place Call</dt-button>
+        <dt-button :disabled="isDisabled" kind="positive" importance="clear">Place Call</dt-button>
+      </dt-stack>
+      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+        <dt-button :disabled="isDisabled" kind="muted" importance="clear"> Place Call </dt-button>
+        <dt-button :disabled="isDisabled" kind="muted" importance="outlined"> Place Call </dt-button>
+      </dt-stack>
     </dt-stack>
   </dt-stack>
 </code-example>
@@ -143,25 +145,16 @@ Buttons can be disabled using the `disabled` attribute or the Dialtone class, `d
 
 Using the class also requires `aria-disabled`, and additional javascript implementation is required to prevent events.
 
-<code-example vueCode='
-<!-- disabled attribute -->
-<dt-button disabled>Place Call</dt-button>
-<!-- disabled class -->
-<span v-dt-tooltip="`Tooltip example`">
-  <dt-button class="d-btn--disabled" aria-disabled="true">Place Call (disabled class)</dt-button>
-</span>
-'>
+<code-example>
   <dt-stack
     gap="400"
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
-    <span>
-      <dt-button disabled>Place Call (disabled attribute)</dt-button>
-    </span>
-    <span>
-      <span v-dt-tooltip="`Tooltip example`">
-        <dt-button class="d-btn--disabled" aria-disabled="true">Place Call (disabled class)</dt-button>
-      </span>
+    <!-- disabled attribute -->
+    <dt-button disabled>Place Call (disabled attribute)</dt-button>
+    <!-- disabled class -->
+    <span v-dt-tooltip="`Tooltip example`" tabindex="0">
+      <dt-button class="d-btn--disabled" aria-disabled="true" tabindex="-1">Place Call (disabled class)</dt-button>
     </span>
   </dt-stack>
 </code-example>
@@ -239,26 +232,28 @@ Use the [v-dt-mode directive](mode-island.html#inverting) in place of `kind="inv
 <code-example vueCode='
 <dt-button v-dt-mode:invert {props}>Place Call</dt-button>
 '>
-  <dt-toggle v-model="isInverted" size="sm" wrapperClass="d-g8 d-m-auto d-pb8">Inverted</dt-toggle>
   <dt-stack gap="400">
-    <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
-      <dt-button v-dt-mode:invert="isInverted"> Place Call </dt-button>
-      <dt-button v-dt-mode:invert="isInverted" importance="outlined"> Place Call </dt-button>
-      <dt-button v-dt-mode:invert="isInverted" importance="clear"> Place Call </dt-button>
-    </dt-stack>
-    <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
-      <dt-button v-dt-mode:invert="isInverted" kind="danger"> Place Call </dt-button>
-      <dt-button v-dt-mode:invert="isInverted" kind="danger" importance="outlined"> Place Call </dt-button>
-      <dt-button v-dt-mode:invert="isInverted" kind="danger" importance="clear"> Place Call </dt-button>
-    </dt-stack>
-    <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
-      <dt-button v-dt-mode:invert="isInverted" kind="positive">Place Call</dt-button>
-      <dt-button v-dt-mode:invert="isInverted" kind="positive" importance="outlined">Place Call</dt-button>
-      <dt-button v-dt-mode:invert="isInverted" kind="positive" importance="clear">Place Call</dt-button>
-    </dt-stack>
-    <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
-      <dt-button v-dt-mode:invert="isInverted" kind="muted" importance="clear"> Place Call </dt-button>
-      <dt-button v-dt-mode:invert="isInverted" kind="muted" importance="outlined"> Place Call </dt-button>
+    <dt-toggle v-model="isInverted" size="sm" wrapperClass="d-g8 d-m-auto d-pb8">Inverted</dt-toggle>
+    <dt-stack gap="400">
+      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+        <dt-button v-dt-mode:invert="isInverted"> Place Call </dt-button>
+        <dt-button v-dt-mode:invert="isInverted" importance="outlined"> Place Call </dt-button>
+        <dt-button v-dt-mode:invert="isInverted" importance="clear"> Place Call </dt-button>
+      </dt-stack>
+      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+        <dt-button v-dt-mode:invert="isInverted" kind="danger"> Place Call </dt-button>
+        <dt-button v-dt-mode:invert="isInverted" kind="danger" importance="outlined"> Place Call </dt-button>
+        <dt-button v-dt-mode:invert="isInverted" kind="danger" importance="clear"> Place Call </dt-button>
+      </dt-stack>
+      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+        <dt-button v-dt-mode:invert="isInverted" kind="positive">Place Call</dt-button>
+        <dt-button v-dt-mode:invert="isInverted" kind="positive" importance="outlined">Place Call</dt-button>
+        <dt-button v-dt-mode:invert="isInverted" kind="positive" importance="clear">Place Call</dt-button>
+      </dt-stack>
+      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+        <dt-button v-dt-mode:invert="isInverted" kind="muted" importance="clear"> Place Call </dt-button>
+        <dt-button v-dt-mode:invert="isInverted" kind="muted" importance="outlined"> Place Call </dt-button>
+      </dt-stack>
     </dt-stack>
   </dt-stack>
 </code-example>
@@ -306,26 +301,25 @@ Pass `to` to render as `<router-link>` for internal client-side SPA navigation. 
 If you have existing `<a class="d-btn">` or `<router-link class="d-btn">` workarounds, replace them with DtButton props:
 
 <code-example only-show="code">
-<!-- Before: raw <a> with manual d-btn classes -->
-<a
-  class="d-btn d-btn--primary d-btn--outlined d-btn--sm"
-  href="<https://example.com>"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  Link Text
-</a>
-
-<!-- After: DtButton with href prop -->
-<dt-button
-  href="<https://example.com>"
-  target="_blank"
-  rel="noopener noreferrer"
-  importance="outlined"
-  size="sm"
->
-  Link Text
-</dt-button>
+  <!-- Before: raw <a> with manual d-btn classes -->
+  <a
+    class="d-btn d-btn--primary d-btn--outlined d-btn--sm"
+    href="<https://example.com>"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Link Text
+  </a>
+  <!-- After: DtButton with href prop -->
+  <dt-button
+    href="<https://example.com>"
+    target="_blank"
+    rel="noopener noreferrer"
+    importance="outlined"
+    size="sm"
+  >
+    Link Text
+  </dt-button>
 </code-example>
 
 <code-example only-show="code">
@@ -336,7 +330,6 @@ If you have existing `<a class="d-btn">` or `<router-link class="d-btn">` workar
 >
   Join Room
 </router-link>
-
 <!-- After: DtButton with to prop -->
 <dt-button :to="roomPath" size="sm">
   Join Room

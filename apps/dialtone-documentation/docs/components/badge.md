@@ -40,13 +40,13 @@ keywords: ["label","tag","indicator","count","d-badge","DtBadge","dt-badge"]
 
 ### Label
 
-<code-example bgclass="d-bgc-primary">
+<code-example>
   <dt-badge text="Label" />
 </code-example>
 
 ### Count
 
-<code-example bgclass="d-bgc-primary">
+<code-example>
   <dt-badge kind="count" text="1" />
 </code-example>
 
@@ -133,7 +133,7 @@ keywords: ["label","tag","indicator","count","d-badge","DtBadge","dt-badge"]
   </tbody>
 </table>
 
-<code-example bgclass="d-bgc-primary" only-show="code">
+<code-example only-show="code">
   <dt-badge kind="label" text="Label" />
   <dt-badge type="info" kind="label" text="Label" />
   <dt-badge type="success" kind="label" text="Label" />
@@ -151,7 +151,7 @@ keywords: ["label","tag","indicator","count","d-badge","DtBadge","dt-badge"]
 
 ## Outlined
 
-<code-example bgclass="d-bgc-primary">
+<code-example>
   <dt-stack direction="row" gap="400">
     <dt-badge text="Label" outlined />
     <dt-badge text="Label" type="info" outlined />
@@ -181,7 +181,7 @@ At the moment, only the `bulletin` type has a subtle variant.
 
 ## Icon
 
-<code-example bgclass="d-bgc-primary">
+<code-example>
   <dt-stack direction="row" gap="400">
     <dt-badge type="default" text="Label" kind="label">
       <template #startIcon="{ iconSize }">
@@ -208,7 +208,7 @@ At the moment, only the `bulletin` type has a subtle variant.
 
 Decorative badges label and classify items for quick recognition.
 
-<code-example bgclass="d-bgc-primary" vueCode='
+<code-example vueCode='
 <dt-badge text="Label" decoration="black-400" />
 <dt-badge text="Label" decoration="black-500" />
 <dt-badge text="Label" decoration="black-900" />
@@ -290,7 +290,7 @@ Decorative badges label and classify items for quick recognition.
 
 ### Label
 
-<code-example only-show="demo" bgclass="d-bgc-primary">
+<code-example only-show="demo">
   <dt-stack gap="500">
     <dt-stack direction="row" gap="400">
       <dt-badge text="Co-host" />
@@ -339,7 +339,7 @@ Decorative badges label and classify items for quick recognition.
 
 ### Count
 
-<code-example only-show="demo" bgclass="d-bgc-primary">
+<code-example only-show="demo">
   <dt-stack gap="500">
     <dt-stack direction="row" gap="400">
       <dt-badge kind="count" type="success" text="5%">

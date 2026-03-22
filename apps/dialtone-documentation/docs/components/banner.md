@@ -39,13 +39,11 @@ Banners are a type of notice and so you can use the following [Notice](notice.md
 ### Kind
 
 <code-example only-show="demo">
-    <dt-stack direction="row" gap="400" align="end" class="d-w100p">
-        <div class="d-fl-grow1">
-            <dt-select-menu label="Style" :options="bannerOptions" v-model="selectedKind" />
-        </div>
-        <dt-checkbox value="important" @input="toggleImportant">Important</dt-checkbox>
-        <dt-button @click="toggleBanner('example-kind')">Toggle Example</dt-button>
-    </dt-stack>
+  <dt-stack direction="row" gap="500">
+    <dt-select-menu :label-visible="false" label="Style" :options="bannerOptions" v-model="selectedKind" />
+    <dt-checkbox value="important" @input="toggleImportant">Important</dt-checkbox>
+    <dt-button @click="toggleBanner('example-kind')">Toggle Example</dt-button>
+  </dt-stack>
 </code-example>
 
 <dt-banner
@@ -60,14 +58,14 @@ Banners are a type of notice and so you can use the following [Notice](notice.md
 </dt-banner>
 
 <code-example only-show="code">
-<dt-banner kind="base" title="Optional banner title"> Message body </dt-banner>
-<dt-banner kind="error" title="Optional banner title"> Message body </dt-banner>
-<dt-banner kind="info" title="Optional banner title"> Message body </dt-banner>
-<dt-banner kind="success" title="Optional banner title"> Message body </dt-banner>
-<dt-banner kind="warning" title="Optional banner title"> Message body </dt-banner>
-<dt-banner background-image="{$background-image}" background-size="contain"> Message body </dt-banner>
-<dt-banner pinned="true" kind="warning" title="Optional banner title"> Message body </dt-banner>
-<dt-banner important="true" kind="warning" title="Optional banner title"> Message body </dt-banner>
+  <dt-banner kind="base" title="Optional banner title"> Message body </dt-banner>
+  <dt-banner kind="error" title="Optional banner title"> Message body </dt-banner>
+  <dt-banner kind="info" title="Optional banner title"> Message body </dt-banner>
+  <dt-banner kind="success" title="Optional banner title"> Message body </dt-banner>
+  <dt-banner kind="warning" title="Optional banner title"> Message body </dt-banner>
+  <dt-banner background-image="{$background-image}" background-size="contain"> Message body </dt-banner>
+  <dt-banner pinned="true" kind="warning" title="Optional banner title"> Message body </dt-banner>
+  <dt-banner important="true" kind="warning" title="Optional banner title"> Message body </dt-banner>
 </code-example>
 
 ### Pinned
@@ -75,9 +73,9 @@ Banners are a type of notice and so you can use the following [Notice](notice.md
 Pins the banner to the top of the window.
 
 <code-example only-show="demo">
-    <dt-stack direction="row">
-        <dt-button @click="toggleBanner('example-pinned')">Toggle Example</dt-button>
-    </dt-stack>
+  <dt-stack direction="row">
+    <dt-button @click="toggleBanner('example-pinned')">Toggle Example</dt-button>
+  </dt-stack>
 </code-example>
 
 <dt-banner
@@ -93,15 +91,15 @@ Pins the banner to the top of the window.
 </dt-banner>
 
 <code-example only-show="code">
-<dt-banner
-  :pinned="true"
-  title="Optional banner title"
->
-  Detailed description goes here.
-  <template #action>
-    <dt-button size="sm" kind="muted" importance="outlined">Action</dt-button>
-  </template>
-</dt-banner>
+  <dt-banner
+    :pinned="true"
+    title="Optional banner title"
+  >
+    Detailed description goes here.
+    <template #action>
+      <dt-button size="sm" kind="muted" importance="outlined">Action</dt-button>
+    </template>
+  </dt-banner>
 </code-example>
 
 ## Vue API

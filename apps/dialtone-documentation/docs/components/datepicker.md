@@ -74,7 +74,6 @@ const today = new Date();
 const minDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 5);
 const maxDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 15);
 </script>
-
 <dt-datepicker
   :selected-date="new Date()"
   :min-date="minDate"

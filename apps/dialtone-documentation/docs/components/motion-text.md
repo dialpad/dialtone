@@ -72,13 +72,11 @@ Use t-shirt sizing (sm, md, lg) to control animation speed:
     animation-mode="fade-in"
     speed="sm"
   />
-
   <dt-motion-text
     text="Medium animation"
     animation-mode="fade-in"
     speed="md"
   />
-
   <dt-motion-text
     text="Slow animation"
     animation-mode="fade-in"

@@ -51,7 +51,7 @@ The component prioritizes different sources for content display, sequentially ch
         </tr>
         <tr>
             <td>
-                <dt-avatar full-name="DP" seed="user-456" />
+                <dt-avatar full-name="Daniel Parker" seed="user-456" />
             </td>
             <th class="d-ta-left"><a class="d-link" href="#initials">Initials</a></th>
             <td>When the user's name is known.</td>
@@ -92,12 +92,12 @@ Unless otherwise specified via the `color` prop, a background color will be prov
 <code-example vueCode='
 <!-- Use seed for consistent random colors per user -->
 <dt-avatar
-  full-name="DP"
+  full-name="Daniel Parker"
   seed="user-unique-id"
 />
 '>
-  <dt-stack direction="row" gap="500" class="d-wmx50p d-fw-wrap">
-    <dt-avatar v-for="seed in seeds" :seed="seed" full-name="DP" />
+  <dt-stack direction="row" gap="500" class="d-w332 d-fw-wrap">
+    <dt-avatar v-for="seed in seeds" :seed="seed" full-name="Daniel Parker" />
   </dt-stack>
 </code-example>
 
@@ -106,7 +106,10 @@ Unless otherwise specified via the `color` prop, a background color will be prov
 If `image-src` is not provided, or if image fails to load, the avatar will fall back to the initials extracted from the `full-name`.
 
 <code-example>
-  <dt-avatar image-src="/assets/images/person.png" image-alt="avatar user" />
+  <dt-stack direction="row" gap="400">
+    <dt-avatar image-src="/assets/images/person.png" full-name="Daniel Parker" image-alt="avatar user" />
+    <dt-avatar image-src="/assets/images/broken-image.png" full-name="Daniel Parker" image-alt="avatar user" />
+  </dt-stack>
 </code-example>
 
 ### Sizes
@@ -128,13 +131,13 @@ Avatar supports a 100-based sizing scale. T-shirt sizes (`xs`, `sm`, `md`, `lg`,
 | `900` | — | 256px |
 
 <code-example vueCode='
-<dt-avatar size="300">
+<dt-avatar size="{size}">
   <template #icon>
     <dt-icon-user />
   </template>
 </dt-avatar>
 '>
-  <dt-stack direction="row" align="center" gap="500" class="d-fw-wrap">
+  <dt-stack direction="row" align="center" justify="center" gap="500" class="d-fw-wrap">
     <dt-avatar v-for="size in sizes" :size="size">
       <template #icon>
         <dt-icon-user />

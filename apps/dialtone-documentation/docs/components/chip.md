@@ -94,21 +94,11 @@ Use the `disabled` prop to disable both the Chip and its close button. This sets
 
 To truncate text, add `.d-truncate` to the content element, and set the width of the `.d-chip` element.
 
-<!-- lint-doc-examples-disable -->
-<code-well-header>
-  <dt-chip ref="truncatedExample" content-class="d-w102">
+<code-example>
+  <dt-chip content-class="d-w102">
     <span class="d-chip__text d-truncate">Chip loooooong name</span>
   </dt-chip>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.truncatedExample'
-vueCode='
-<dt-chip content-class="d-w102">
-  <span class="d-chip__text d-truncate">Chip loooooong name</span>
-</dt-chip>
-'
-showHtmlWarning />
+</code-example>
 
 ### Sizes
 

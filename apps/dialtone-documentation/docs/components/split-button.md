@@ -195,20 +195,18 @@ The start button supports navigation via `start-href` (renders as `<a>`) or `sta
 
 ### Router Link
 
-<code-example only-show="code"
-vueCode='
-<dt-split-button
-  start-to="/components/button"
-  end-tooltip-text="More options"
->
-  Go to Button docs
-  <template #dropdownList>
-    <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>
-    <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item>
-  </template>
-</dt-split-button>
-'
-/>
+<code-example only-show="code">
+  <dt-split-button
+    start-to="/components/button"
+    end-tooltip-text="More options"
+  >
+    Go to Button docs
+    <template #dropdownList>
+      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>
+      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item>
+    </template>
+  </dt-split-button>
+</code-example>
 
 ## Icon Support
 
