@@ -50,6 +50,14 @@ Prefer the unified `<code-example>` component. The slot content is the single so
   <dt-toggle v-model="isDisabled" />
   <dt-button :disabled="isDisabled">Click</dt-button>
 </code-example>
+
+<!-- Strip a demo-only layout wrapper from the code tab -->
+<code-example>
+  <dt-stack direction="row" gap="400" data-demo-wrapper>
+    <dt-button> Place Call </dt-button>
+    <dt-button importance="outlined"> Place Call </dt-button>
+  </dt-stack>
+</code-example>
 ```
 
 ### When to use `vueCode` override
@@ -76,6 +84,13 @@ Only add `vueCode` when the code tab must show something **genuinely different**
 - Use `vueCode` with an empty slot — slot must always have content
 - Self-close `<code-example />` — always use `</code-example>`
 - Put empty lines inside `<code-example>` — markdown-it splits the block at blank lines, breaking source extraction
+
+### Demo-only wrappers (`data-demo-wrapper`)
+
+When a `<code-example>` slot needs a layout wrapper (e.g., `<dt-stack direction="row">`) purely for the demo but users shouldn't copy it, add `data-demo-wrapper` to that element. The build plugin strips the wrapper from the code tab, showing only its children.
+
+- Use when the wrapper is purely for demo layout (direction, gap, alignment)
+- Do NOT use when the wrapper is meaningful structure users should copy (e.g., stack.md's own examples, nested layout patterns)
 
 ### Rules
 

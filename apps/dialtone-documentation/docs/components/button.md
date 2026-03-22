@@ -66,7 +66,7 @@ Dialtone provides five options for `kind`, with three levels of `importance`.
 The base button should be the go-to button for most of your needs. When in doubt, use this style. To help provide clarity to users, it is generally recommended to use only one primary button style within a section or page.
 
 <code-example>
-  <dt-stack direction="row" gap="400">
+  <dt-stack direction="row" gap="400" data-demo-wrapper>
     <dt-button> Place Call </dt-button>
     <dt-button importance="outlined"> Place Call </dt-button>
     <dt-button importance="clear"> Place Call </dt-button>
@@ -78,7 +78,7 @@ The base button should be the go-to button for most of your needs. When in doubt
 The danger button style is used to communicate critical or destructive actions such as deleting content, accounts, or canceling services.
 
 <code-example>
-  <dt-stack direction="row" gap="400">
+  <dt-stack direction="row" gap="400" data-demo-wrapper>
     <dt-button kind="danger"> Place Call </dt-button>
     <dt-button kind="danger" importance="outlined"> Place Call </dt-button>
     <dt-button kind="danger" importance="clear"> Place Call </dt-button>
@@ -90,7 +90,7 @@ The danger button style is used to communicate critical or destructive actions s
 The positive button style is used to communicate positive actions.
 
 <code-example>
-  <dt-stack direction="row" gap="400">
+  <dt-stack direction="row" gap="400" data-demo-wrapper>
     <dt-button kind="positive">Place Call</dt-button>
     <dt-button kind="positive" importance="outlined">Place Call</dt-button>
     <dt-button kind="positive" importance="clear">Place Call</dt-button>
@@ -104,7 +104,7 @@ The muted button style is used to communicate non-primary actions for contexts i
 This style's use should be rare. When in doubt, use the [default button style](#default).
 
 <code-example>
-  <dt-stack direction="row" gap="400">
+  <dt-stack direction="row" gap="400" data-demo-wrapper>
     <dt-button kind="muted" importance="clear"> Place Call </dt-button>
     <dt-button kind="muted" importance="outlined"> Place Call </dt-button>
   </dt-stack>
@@ -404,7 +404,7 @@ The default button size is `md`, but does not need to be explicitly specified.
 Place icons before and/or after inline of the label with `startIcon` and `endIcon` slots.
 
 <code-example>
-  <dt-stack direction="row" gap="400">
+  <dt-stack direction="row" gap="400" data-demo-wrapper>
     <span>
       <dt-button importance="outlined">
         <template #startIcon="{ iconSize }">

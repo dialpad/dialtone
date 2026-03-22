@@ -98,14 +98,53 @@ function processCodeExample (block) {
   if (closeTagStart === -1) return block;
 
   const innerContent = block.slice(openTagEnd, closeTagStart);
-  const dedented = dedent(innerContent.replace(/^\n+|\n+$/g, ''));
-  if (!dedented) return block;
+  let extracted = dedent(innerContent.replace(/^\n+|\n+$/g, ''));
+  if (!extracted) return block;
 
-  const encoded = encodeForAttr(dedented);
+  // Strip wrapper element marked with data-demo-wrapper
+  extracted = stripMarkedWrapper(extracted);
+
+  const encoded = encodeForAttr(extracted);
 
   return block.slice(0, openTagEnd - 1) +
     ` source-code='${encoded}'` +
     block.slice(openTagEnd - 1);
+}
+
+/**
+ * If the content starts with an element that has `data-demo-wrapper`,
+ * remove the opening and closing tags of that element, keeping only the children.
+ */
+export function stripMarkedWrapper (content) {
+  const trimmed = content.trim();
+  if (!trimmed.includes('data-demo-wrapper')) return content;
+
+  // Find the end of the opening tag (first > not inside quotes)
+  const openEnd = findFirstUnquotedClose(trimmed);
+  if (openEnd === -1) return content;
+
+  // Find the last closing tag (e.g., </dt-stack> or </div>)
+  const lastCloseStart = trimmed.lastIndexOf('</');
+  if (lastCloseStart === -1 || lastCloseStart <= openEnd) return content;
+
+  // Extract children between the opening and closing tags
+  const children = trimmed.slice(openEnd + 1, lastCloseStart);
+  return dedent(children.replace(/^\n+|\n+$/g, ''));
+}
+
+/**
+ * Find the index of the first `>` not inside a quoted attribute value.
+ */
+function findFirstUnquotedClose (str) {
+  let inQuote = false;
+  for (let i = 0; i < str.length; i++) {
+    if (str[i] === '\'' && !inQuote) inQuote = true;
+    else if (str[i] === '\'' && inQuote) inQuote = false;
+    else if (str[i] === '"' && !inQuote) inQuote = true;
+    else if (str[i] === '"' && inQuote) inQuote = false;
+    else if (str[i] === '>' && !inQuote) return i;
+  }
+  return -1;
 }
 
 /**
