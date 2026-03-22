@@ -15,7 +15,7 @@ keywords: ["list layout","item structure","d-item-layout","DtItemLayout","dt-ite
 By default, item layout includes custom styling, like paddings, sizes, colors, etc.
 
 <code-example>
-  <div class="d-d-block d-w332">
+  <div class="d-d-block d-w332" data-demo-wrapper>
     <dt-item-layout>
       <template #start>
         <dt-icon size="300" name="lock" />
@@ -44,7 +44,7 @@ Setting the `unstyled` property will add `d-item-layout--custom` class. This wil
 This way you can utilize the layout and customize your own styling using utility classes.
 
 <code-example>
-  <div class="d-d-block d-w332">
+  <div class="d-d-block d-w332" data-demo-wrapper>
     <dt-item-layout unstyled>
       <template #start>
         <dt-icon size="300" name="lock" />

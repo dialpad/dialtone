@@ -157,7 +157,7 @@ Control how tabs distribute available horizontal space within the tab list. It o
 Tabs expand proportionally to fill the container. Longer labels receive more space.
 
 <code-example>
-  <div class="d-w100p">
+  <div class="d-w100p" data-demo-wrapper>
     <dt-tab-group spread="grow">
       <template #tabs>
         <dt-tab id="sg1" panel-id="sg2" selected>Tab 1</dt-tab>
@@ -173,7 +173,7 @@ Tabs expand proportionally to fill the container. Longer labels receive more spa
 All tabs share the same width, regardless of label length.
 
 <code-example>
-  <div class="d-w100p">
+  <div class="d-w100p" data-demo-wrapper>
     <dt-tab-group spread="equal">
       <template #tabs>
         <dt-tab id="se1" panel-id="se2" selected>Tab 1</dt-tab>
@@ -271,7 +271,7 @@ Use the `#startIcon` or `#endIcon` slot on `dt-tab` to add an icon. The slot pro
 </dt-notice>
 
 <code-example>
-  <div class="d-w100p">
+  <div class="d-w100p" data-demo-wrapper>
     <dt-tab-group>
       <template #tabs>
         <dt-tab id="1" panel-id="2" selected>
@@ -305,7 +305,7 @@ Use the `#startIcon` or `#endIcon` slot on `dt-tab` to add an icon. The slot pro
 Use the `#leading` and `#trailing` slots on `dt-tab` to render content like badges or count indicators alongside tab labels. Use `leading-class` and `trailing-class` to adjust padding.
 
 <code-example>
-  <div class="d-w100p">
+  <div class="d-w100p" data-demo-wrapper>
     <dt-tab-group>
       <template #tabs>
         <dt-tab id="lt1" panel-id="lt2" selected trailing-class="d-pr8">

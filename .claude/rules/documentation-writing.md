@@ -74,7 +74,7 @@ Only add `vueCode` when the code tab must show something **genuinely different**
 
 **NOT valid reasons (remove the vueCode):**
 
-- Slot is wrapped in a clean `<dt-stack>` / `<div>` with layout props — the wrapper IS useful context
+- Slot is wrapped in a layout wrapper — use `data-demo-wrapper` to strip it from the code tab instead
 - Only difference is `class="d-w100p"` or similar layout constraint on the wrapper
 - Only difference is formatting, whitespace, or self-closing style
 - vueCode strips the wrapper but the inner components are identical

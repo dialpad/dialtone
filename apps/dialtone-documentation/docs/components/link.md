@@ -45,7 +45,7 @@ keywords: ["anchor", "hyperlink", "url", "d-link", "DtLink", "dt-link", "text li
 ### Default
 
 <code-example>
-  <DtStack gap="400">
+  <DtStack gap="400" data-demo-wrapper>
     <dt-link href="#link">Base link</dt-link>
     <dt-link href="#link" kind="danger">Danger link</dt-link>
     <dt-link href="#link" kind="muted">Muted link</dt-link>

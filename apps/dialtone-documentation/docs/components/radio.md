@@ -45,7 +45,7 @@ Radio buttons are a common way to allow users to make a single selection from a 
 ### Base Styles
 
 <code-example>
-  <dt-stack gap="400">
+  <dt-stack gap="400" data-demo-wrapper>
     <dt-radio name="Value" value="Value" label="Radio label"/>
     <dt-radio name="Disabled" value="Disabled" label="Radio label thats been disabled" disabled/>
     <dt-radio name="CheckedDisabled" value="Checked" label="Radio label thats been disabled & checked" :model-value="true" disabled />
@@ -119,7 +119,7 @@ Radio buttons are a common way to allow users to make a single selection from a 
 Use the `label-size` prop to override the default label size.
 
 <code-example>
-  <dt-stack gap="400">
+  <dt-stack gap="400" data-demo-wrapper>
     <dt-radio name="labelSizeExample1" value="xs" label="Extra small label" label-size="xs" checked />
     <dt-radio name="labelSizeExample1" value="sm" label="Small label" label-size="sm" />
     <dt-radio name="labelSizeExample1" value="md" label="Medium label (default)" label-size="md" />

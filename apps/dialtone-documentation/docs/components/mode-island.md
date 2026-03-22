@@ -168,7 +168,7 @@ keywords: ["theme island","mode override","v-dt-mode","directive","light","dark"
 Use the `v-dt-mode` directive to control the color mode of a region, component, or element. It creates a scoped region with the specified mode. Descendant elements retain their original styling but are rendered with the specified mode.
 
 <code-example>
-  <dt-stack gap="400">
+  <dt-stack gap="400" data-demo-wrapper>
     <dt-text v-dt-mode:dark tone="success"> Dark content </dt-text>
     <dt-text v-dt-mode:light tone="success"> Light content </dt-text>
     <dt-text v-dt-mode:invert tone="success"> Inverted — opposite of parent or root </dt-text>
@@ -182,7 +182,7 @@ This effectively removes the need for `inverted` props or variants on elements o
 For example, instead of using `inverted` on a DtButton, use `v-dt-mode:invert`
 
 <code-example>
-  <dt-stack gap="400" direction="row">
+  <dt-stack gap="400" direction="row" data-demo-wrapper>
     <dt-button>Button</dt-button>
     <dt-button v-dt-mode:invert>Button</dt-button>
   </dt-stack>

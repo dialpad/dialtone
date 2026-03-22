@@ -51,7 +51,7 @@ Use in place of manually applying Text Styles. Examples of manual application **
 Declare the role of the content. Default will inherit styles from the parent.
 
 <code-example>
-  <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }" align="baseline">
+  <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }" align="baseline" data-demo-wrapper>
     <dt-text kind="headline" as="span">Headline</dt-text>
     <dt-text kind="body">Body</dt-text>
     <dt-text kind="label">Label</dt-text>

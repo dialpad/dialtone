@@ -10,17 +10,17 @@ keywords: ["alert","notification","message","d-banner","DtBanner","dt-banner"]
 ---
 
 <code-example only-show="demo" class="d-p0">
-    <dt-stack gap="500" class="d-w100p" align="center">
-      <dt-banner title="Example banner" kind="info" class="d-ps-relative d-zi-base">
-          Message body with a <dt-link kind="muted">Link</dt-link>
-          <template #action>
-            <dt-button size="sm" kind="muted" importance="outlined">Action</dt-button>
-          </template>
-      </dt-banner>
-      <dt-stack direction="row">
-          <dt-button @click="toggleBanner('example-pinned')">Pin to top</dt-button>
-      </dt-stack>
+  <dt-stack gap="500" class="d-w100p" align="center">
+    <dt-banner title="Example banner" kind="info" class="d-ps-relative d-zi-base">
+      Message body with a <dt-link kind="muted">Link</dt-link>
+      <template #action>
+        <dt-button size="sm" kind="muted" importance="outlined">Action</dt-button>
+      </template>
+    </dt-banner>
+    <dt-stack direction="row">
+      <dt-button @click="toggleBanner('example-pinned')">Pin to top</dt-button>
     </dt-stack>
+  </dt-stack>
 </code-example>
 
 <!-- <component-combinator component-name="DtBanner" /> -->

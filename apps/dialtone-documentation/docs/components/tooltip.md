@@ -48,7 +48,7 @@ It's possible to change any property of the tooltip with object syntax.
 Tooltip content renders outside the DOM tree via Tippy.js. Use the `contentMode` modifier or object property to apply a color mode to the tooltip content. See [Positioned Components](/components/mode-island.html#positioned-components) for details.
 
 <code-example bgclass="d-bgc-contrast d-py64">
-  <dt-stack direction="row" gap="400">
+  <dt-stack direction="row" gap="400" data-demo-wrapper>
     <dt-button v-dt-tooltip.invert="`Tooltip`">Invert via Modifier</dt-button>
     <dt-button v-dt-tooltip="{ message: 'Tooltip', contentMode: 'invert' }">Invert via Object</dt-button>
   </dt-stack>

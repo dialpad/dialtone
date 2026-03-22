@@ -152,7 +152,7 @@ keywords: ["label","tag","indicator","count","d-badge","DtBadge","dt-badge"]
 ## Outlined
 
 <code-example>
-  <dt-stack direction="row" gap="400">
+  <dt-stack direction="row" gap="400" data-demo-wrapper>
     <dt-badge text="Label" outlined />
     <dt-badge text="Label" type="info" outlined />
     <dt-badge text="Label" type="success" outlined />
@@ -171,7 +171,7 @@ keywords: ["label","tag","indicator","count","d-badge","DtBadge","dt-badge"]
 At the moment, only the `bulletin` type has a subtle variant.
 
 <code-example>
-  <dt-stack direction="row" gap="400">
+  <dt-stack direction="row" gap="400" data-demo-wrapper>
     <dt-badge text="Label" type="bulletin" subtle />
     <dt-badge text="Label" type="bulletin" subtle outlined />
     <dt-badge text="1" type="bulletin" subtle kind="count" />
@@ -182,7 +182,7 @@ At the moment, only the `bulletin` type has a subtle variant.
 ## Icon
 
 <code-example>
-  <dt-stack direction="row" gap="400">
+  <dt-stack direction="row" gap="400" data-demo-wrapper>
     <dt-badge type="default" text="Label" kind="label">
       <template #startIcon="{ iconSize }">
         <dt-icon-lightning-bolt :size="iconSize" />
