@@ -26,15 +26,26 @@ const wrapMark = (text, open, close) => {
  * @returns {string}
  */
 export function renderEditorToMarkdown (jsonContent, extensions) {
-  return renderToMarkdown({
+  const output = renderToMarkdown({
     extensions,
     content: jsonContent,
     options: {
       nodeMapping: {
-        // Override blockquote: built-in omits trailing newline
+        // Override blockquote: built-in omits trailing newline (causes lazy continuation).
+        // Since we replace the built-in entirely, we must add the '> ' prefix ourselves.
         blockquote ({ children }) {
-          const text = joinChildren(children);
-          return text.endsWith('\n') ? text : text + '\n';
+          const text = joinChildren(children).trim();
+          const quoted = text
+            .split('\n')
+            .map(line => line ? `> ${line}` : '>')
+            .join('\n');
+          return quoted + '\n';
+        },
+
+        // Override codeBlock: built-in passes null language through literally
+        codeBlock ({ node, children }) {
+          const lang = node.attrs?.language || '';
+          return `\`\`\`${lang}\n${joinChildren(children)}\n\`\`\`\n`;
         },
 
         // Custom Dialtone node types
@@ -102,4 +113,8 @@ export function renderEditorToMarkdown (jsonContent, extensions) {
       },
     },
   });
+  // Collapse 3+ consecutive newlines to 2 (CommonMark ignores extra blank
+  // lines between blocks), and strip the leading newline that the built-in
+  // paragraph renderer always prepends to the first node.
+  return output.replace(/\n{3,}/g, '\n\n').replace(/^\n+|\n+$/g, '');
 }
