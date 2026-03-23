@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import { ref, computed, reactive, watchEffect, provide } from 'vue';
+import { ref, computed, reactive, watchEffect, watch, provide, onMounted } from 'vue';
 import { getUniqueString } from '@/common/utils';
 import { DtStack } from '@/components/stack';
 import {
@@ -199,6 +199,22 @@ watchEffect(() => {
 provide(SEGMENTED_CONTROL_CONTEXT_KEY, groupContext);
 provide(SEGMENTED_CONTROL_SELECT_KEY, selectValue);
 provide(SEGMENTED_CONTROL_FOCUS_KEY, setFocus);
+
+// Ensures at least one enabled item is tabbable (WAI-ARIA radiogroup requirement).
+// Items set tabindex based on isSelected && !isDisabled. If the selected item is disabled
+// or modelValue doesn't match any item, no item has tabindex="0". This fallback sets
+// tabindex="0" on the first enabled item so keyboard users can reach the control.
+function ensureTabbable () {
+  const items = getItems();
+  if (!items.length) return;
+  const hasTabbable = items.some(el => el.getAttribute('tabindex') === '0');
+  if (hasTabbable) return;
+  const firstEnabled = items.find(el => !isItemDisabled(el));
+  if (firstEnabled) firstEnabled.setAttribute('tabindex', '0');
+}
+
+onMounted(ensureTabbable);
+watch(() => [props.modelValue, props.disabled], ensureTabbable, { flush: 'post' });
 
 function getItems () {
   const el = container.value?.$el || container.value;

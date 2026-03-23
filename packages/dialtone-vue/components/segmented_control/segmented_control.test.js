@@ -249,6 +249,36 @@ describe('DtSegmentedControl Tests', () => {
     });
   });
 
+  describe('Tabbable Fallback Tests', () => {
+    it('falls back to first enabled item when selected item is disabled', () => {
+      const slot = () => [
+        h(DtSegmentedControlItem, { value: 'a', disabled: true }, () => 'A'),
+        h(DtSegmentedControlItem, { value: 'b' }, () => 'B'),
+        h(DtSegmentedControlItem, { value: 'c' }, () => 'C'),
+      ];
+      _setWrapper({ modelValue: 'a' }, { default: slot });
+
+      const items = wrapper.findAll('[data-qa="dt-segmented-control-item"]');
+      expect(items[1].attributes('tabindex')).toBe('0');
+    });
+
+    it('falls back to first enabled item when modelValue matches no item', () => {
+      _setWrapper({ modelValue: 'nonexistent' });
+
+      const items = wrapper.findAll('[data-qa="dt-segmented-control-item"]');
+      expect(items[0].attributes('tabindex')).toBe('0');
+    });
+
+    it('no item is tabbable when group is disabled', () => {
+      _setWrapper({ disabled: true });
+
+      const items = wrapper.findAll('[data-qa="dt-segmented-control-item"]');
+      items.forEach(item => {
+        expect(item.attributes('tabindex')).toBe('-1');
+      });
+    });
+  });
+
   describe('Validation Tests', () => {
     it('validates size prop', () => {
       const validator = DtSegmentedControl.props.size.validator;

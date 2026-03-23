@@ -3,7 +3,7 @@
     class="d-segmented-control__item"
     role="radio"
     :aria-checked="String(isSelected)"
-    :tabindex="isSelected ? '0' : '-1'"
+    :tabindex="isSelected && !isDisabled ? '0' : '-1'"
     :active="isSelected"
     :disabled="isDisabled"
     :aria-disabled="isDisabled ? 'true' : undefined"
