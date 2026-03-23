@@ -27,9 +27,9 @@
           :class="['d-recipe-combobox-multi-select__chip-wrapper', chipWrapperClass]"
         >
           <dt-chip
-            v-for="item in selectedItems"
+            v-for="(item, index) in selectedItems"
             ref="chips"
-            :key="item"
+            :key="`${index}-${item}`"
             :label-class="['d-chip__label']"
             :class="[
               'd-recipe-combobox-multi-select__chip',
@@ -586,11 +586,18 @@ export default {
     getChips () {
       if (!this.selectedItems.length || !this.$refs.chips) return null;
 
-      // use the order from selectedItems to not rely on DOM order which may be stale
+      // Use the order from selectedItems to not rely on DOM order which may be stale.
+      // Track matched indices to handle duplicate item names correctly.
+      const matched = new Set();
       const chips = this.selectedItems.map(item => {
-        return this.$refs.chips.find(chip => {
+        return this.$refs.chips.find((chip, index) => {
+          if (matched.has(index)) return false;
           const chipLabel = returnFirstEl(chip.$el)?.querySelector('.d-chip__label')?.textContent?.trim();
-          return chipLabel === item;
+          if (chipLabel === item) {
+            matched.add(index);
+            return true;
+          }
+          return false;
         });
       });
       return chips.filter(Boolean).map(chip => returnFirstEl(chip.$el));
