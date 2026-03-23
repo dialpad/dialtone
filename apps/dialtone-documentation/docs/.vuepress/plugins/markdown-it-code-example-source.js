@@ -19,11 +19,11 @@ export default function codeExampleSourcePlugin (md) {
   md.renderer.rules.html_block = function (tokens, idx, options, env, self) {
     const token = tokens[idx];
 
-    if (token.content.includes('vueCode=\'')) {
-      token.content = encodeVueCodeAttr(token.content);
-    }
-
-    if (token.content.includes('<code-example')) {
+    // Only process <code-example> blocks, not <code-example-tabs> (legacy pattern)
+    if (token.content.includes('<code-example') && !token.content.includes('<code-example-tabs')) {
+      if (token.content.includes('vueCode=\'')) {
+        token.content = encodeVueCodeAttr(token.content);
+      }
       token.content = processCodeExample(token.content);
     }
 
