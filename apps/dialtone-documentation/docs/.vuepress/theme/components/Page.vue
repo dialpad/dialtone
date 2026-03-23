@@ -6,7 +6,6 @@
     <div class="d-p48">
       <page-header />
       <article class="dialtone-content__article">
-        <!-- eslint-disable-next-line vue/no-undef-components -->
         <div
           v-if="$page.path.startsWith('/components') && !$frontmatter.no_preview"
           id="preview-header"
