@@ -4,19 +4,23 @@ import DtSegmentedControlDefaultTemplate from './segmented_control_default.story
 import DtSegmentedControlVariantsTemplate from './segmented_control_variants.story.vue';
 import {
   SEGMENTED_CONTROL_SIZES,
+  SEGMENTED_CONTROL_SIZE_DEFAULT,
   SEGMENTED_CONTROL_ORIENTATIONS,
+  SEGMENTED_CONTROL_ORIENTATION_DEFAULT,
   SEGMENTED_CONTROL_ACTIVATION_MODES,
+  SEGMENTED_CONTROL_ACTIVATION_MODE_DEFAULT,
   SEGMENTED_CONTROL_SPREADS,
+  SEGMENTED_CONTROL_SPREAD_DEFAULT,
 } from './segmented_control_constants';
 
 export const argsData = {
-  orientation: 'horizontal',
-  size: 'sm',
-  activationMode: 'auto',
+  orientation: SEGMENTED_CONTROL_ORIENTATION_DEFAULT,
+  size: SEGMENTED_CONTROL_SIZE_DEFAULT,
+  activationMode: SEGMENTED_CONTROL_ACTIVATION_MODE_DEFAULT,
   disabled: false,
   hideDivider: false,
   borderless: false,
-  spread: 'grow',
+  spread: SEGMENTED_CONTROL_SPREAD_DEFAULT,
   labelClass: '',
 };
 
@@ -32,17 +36,17 @@ export const argTypesData = {
     control: 'text',
   },
   orientation: {
-    defaultValue: 'horizontal',
+    defaultValue: SEGMENTED_CONTROL_ORIENTATION_DEFAULT,
     control: 'select',
     options: SEGMENTED_CONTROL_ORIENTATIONS,
   },
   size: {
-    defaultValue: 'sm',
+    defaultValue: SEGMENTED_CONTROL_SIZE_DEFAULT,
     control: 'select',
     options: SEGMENTED_CONTROL_SIZES,
   },
   activationMode: {
-    defaultValue: 'auto',
+    defaultValue: SEGMENTED_CONTROL_ACTIVATION_MODE_DEFAULT,
     control: 'select',
     options: SEGMENTED_CONTROL_ACTIVATION_MODES,
   },
@@ -56,7 +60,7 @@ export const argTypesData = {
     control: 'boolean',
   },
   spread: {
-    defaultValue: 'grow',
+    defaultValue: SEGMENTED_CONTROL_SPREAD_DEFAULT,
     control: 'select',
     options: SEGMENTED_CONTROL_SPREADS,
   },
@@ -75,6 +79,18 @@ export const argTypesData = {
   // Events
   'update:modelValue': {
     action: 'update:modelValue',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+  change: {
+    action: 'change',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+  'before-change': {
+    action: 'before-change',
     table: {
       type: { summary: 'event' },
     },

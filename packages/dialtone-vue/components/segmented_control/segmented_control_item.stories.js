@@ -3,6 +3,7 @@ import {
   SEGMENTED_CONTROL_CONTEXT_KEY,
   SEGMENTED_CONTROL_SELECT_KEY,
   SEGMENTED_CONTROL_FOCUS_KEY,
+  SEGMENTED_CONTROL_SIZE_DEFAULT,
 } from './segmented_control_constants';
 import { action } from 'storybook/actions';
 
@@ -43,7 +44,7 @@ export const SegmentedControlItem = {
       [SEGMENTED_CONTROL_CONTEXT_KEY]: {
         selected: 'option1',
         disabled: false,
-        size: 'default',
+        size: SEGMENTED_CONTROL_SIZE_DEFAULT,
         labelClass: '',
       },
       [SEGMENTED_CONTROL_SELECT_KEY]: action('selectValue'),
