@@ -155,6 +155,91 @@ describe('DtSegmentedControl Tests', () => {
     });
   });
 
+  describe('Change Event Tests', () => {
+    it('emits change event on child click', async () => {
+      _setWrapper();
+
+      const items = wrapper.findAll('[data-qa="dt-segmented-control-item"]');
+      await items[2].trigger('click');
+
+      expect(wrapper.emitted('change')[0]).toEqual(['recent']);
+    });
+
+    it('does not emit change when group is disabled', async () => {
+      _setWrapper({ disabled: true });
+
+      const items = wrapper.findAll('[data-qa="dt-segmented-control-item"]');
+      await items[1].trigger('click');
+
+      expect(wrapper.emitted('change')).toBeUndefined();
+    });
+  });
+
+  describe('Before-Change Event Tests', () => {
+    it('emits before-change on child click', async () => {
+      _setWrapper();
+
+      const items = wrapper.findAll('[data-qa="dt-segmented-control-item"]');
+      await items[1].trigger('click');
+
+      expect(wrapper.emitted('before-change')).toBeDefined();
+    });
+
+    it('prevents selection when before-change is cancelled', async () => {
+      const onBeforeChange = vi.fn((event) => {
+        event.preventDefault();
+      });
+      _setWrapper({ onBeforeChange });
+
+      const items = wrapper.findAll('[data-qa="dt-segmented-control-item"]');
+      await items[1].trigger('click');
+
+      expect(wrapper.emitted('update:modelValue')).toBeUndefined();
+    });
+  });
+
+  describe('Item Click/Focus Event Tests', () => {
+    it('emits click event on item', async () => {
+      _setWrapper();
+
+      const itemComponents = wrapper.findAllComponents(DtSegmentedControlItem);
+      await wrapper.findAll('[data-qa="dt-segmented-control-item"]')[1].trigger('click');
+
+      expect(itemComponents[1].emitted('click')).toBeDefined();
+    });
+
+    it('emits focus event on item', async () => {
+      _setWrapper();
+
+      const itemComponents = wrapper.findAllComponents(DtSegmentedControlItem);
+      await wrapper.findAll('[data-qa="dt-segmented-control-item"]')[1].trigger('focus');
+
+      expect(itemComponents[1].emitted('focus')).toBeDefined();
+    });
+  });
+
+  describe('Id Prop Tests', () => {
+    it('auto-generates an id when not provided', () => {
+      _setWrapper();
+
+      expect(wrapper.find('[role="radiogroup"]').attributes('id')).toBeDefined();
+    });
+
+    it('uses provided id', () => {
+      _setWrapper({ id: 'my-segmented-control' });
+
+      expect(wrapper.find('[role="radiogroup"]').attributes('id')).toBe('my-segmented-control');
+    });
+  });
+
+  describe('Data-QA Tests', () => {
+    it('has data-qa on the container', () => {
+      _setWrapper();
+
+      expect(wrapper.find('[data-qa="dt-segmented-control"]').exists()).toBe(true);
+    });
+  });
+
   describe('Validation Tests', () => {
     it('validates size prop', () => {
       const validator = DtSegmentedControl.props.size.validator;

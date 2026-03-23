@@ -1,11 +1,13 @@
 <template>
   <dt-stack
+    :id="id"
     ref="container"
     :class="containerClasses"
     :direction="stackDirection"
     role="radiogroup"
     :aria-label="ariaLabel"
     :aria-orientation="orientation"
+    data-qa="dt-segmented-control"
     @keydown="handleKeyDown"
   >
     <!-- @slot DtSegmentedControlItem children -->
@@ -15,13 +17,18 @@
 
 <script setup>
 import { ref, computed, reactive, watchEffect, provide } from 'vue';
+import { getUniqueString } from '@/common/utils';
 import { DtStack } from '@/components/stack';
 import {
   SEGMENTED_CONTROL_SIZES,
+  SEGMENTED_CONTROL_SIZE_DEFAULT,
   SEGMENTED_CONTROL_SIZE_MODIFIERS,
   SEGMENTED_CONTROL_ORIENTATIONS,
+  SEGMENTED_CONTROL_ORIENTATION_DEFAULT,
   SEGMENTED_CONTROL_ACTIVATION_MODES,
+  SEGMENTED_CONTROL_ACTIVATION_MODE_DEFAULT,
   SEGMENTED_CONTROL_SPREADS,
+  SEGMENTED_CONTROL_SPREAD_DEFAULT,
   SEGMENTED_CONTROL_CONTEXT_KEY,
   SEGMENTED_CONTROL_SELECT_KEY,
   SEGMENTED_CONTROL_FOCUS_KEY,
@@ -32,6 +39,15 @@ import {
 defineOptions({ name: 'DtSegmentedControl' });
 
 const props = defineProps({
+  /**
+   * Element ID for the radiogroup container.
+   * Auto-generated if not provided.
+   */
+  id: {
+    type: String,
+    default () { return getUniqueString(); },
+  },
+
   /**
    * The currently selected value (v-model).
    */
@@ -55,7 +71,7 @@ const props = defineProps({
    */
   orientation: {
     type: String,
-    default: 'horizontal',
+    default: SEGMENTED_CONTROL_ORIENTATION_DEFAULT,
     validator: (v) => SEGMENTED_CONTROL_ORIENTATIONS.includes(v),
   },
 
@@ -65,7 +81,7 @@ const props = defineProps({
    */
   size: {
     type: String,
-    default: 'sm',
+    default: SEGMENTED_CONTROL_SIZE_DEFAULT,
     validator: (v) => SEGMENTED_CONTROL_SIZES.includes(v),
   },
 
@@ -75,7 +91,7 @@ const props = defineProps({
    */
   activationMode: {
     type: String,
-    default: 'auto',
+    default: SEGMENTED_CONTROL_ACTIVATION_MODE_DEFAULT,
     validator: (v) => SEGMENTED_CONTROL_ACTIVATION_MODES.includes(v),
   },
 
@@ -112,7 +128,7 @@ const props = defineProps({
    */
   spread: {
     type: String,
-    default: 'grow',
+    default: SEGMENTED_CONTROL_SPREAD_DEFAULT,
     validator: (v) => SEGMENTED_CONTROL_SPREADS.includes(v),
   },
 
@@ -125,7 +141,29 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits([
+  /**
+   * v-model event. Emitted when the selected value changes.
+   * @event update:modelValue
+   * @type {String}
+   */
+  'update:modelValue',
+
+  /**
+   * Emitted when the user selects an item (click, Enter, Space, or arrow in auto mode).
+   * Not emitted for programmatic modelValue changes.
+   * @event change
+   * @type {String}
+   */
+  'change',
+
+  /**
+   * Emitted before a selection change. Call event.preventDefault() to cancel the change.
+   * @event before-change
+   * @type {Event}
+   */
+  'before-change',
+]);
 
 const container = ref(null);
 const focusedValue = ref(null);
@@ -173,7 +211,11 @@ function setFocus (value) {
 
 function selectValue (value) {
   if (props.disabled) return;
+  const beforeChangeEvent = new Event('before-change', { cancelable: true });
+  emit('before-change', beforeChangeEvent);
+  if (beforeChangeEvent.defaultPrevented) return;
   emit('update:modelValue', value);
+  emit('change', value);
 }
 
 function getFocusedIndex (items, event) {

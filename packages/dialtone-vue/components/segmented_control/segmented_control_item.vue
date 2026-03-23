@@ -64,6 +64,7 @@ import {
   SEGMENTED_CONTROL_CONTEXT_KEY,
   SEGMENTED_CONTROL_SELECT_KEY,
   SEGMENTED_CONTROL_FOCUS_KEY,
+  SEGMENTED_CONTROL_SIZE_DEFAULT,
 } from './segmented_control_constants.js';
 
 defineOptions({
@@ -108,7 +109,23 @@ const props = defineProps({
   },
 });
 
-const groupContext = inject(SEGMENTED_CONTROL_CONTEXT_KEY, { selected: '', disabled: false, size: 'sm', labelClass: '' });
+const emit = defineEmits([
+  /**
+   * Native button click event.
+   * @event click
+   * @type {PointerEvent | KeyboardEvent}
+   */
+  'click',
+
+  /**
+   * Native button focus event.
+   * @event focus
+   * @type {FocusEvent}
+   */
+  'focus',
+]);
+
+const groupContext = inject(SEGMENTED_CONTROL_CONTEXT_KEY, { selected: '', disabled: false, size: SEGMENTED_CONTROL_SIZE_DEFAULT, labelClass: '' });
 const selectValue = inject(SEGMENTED_CONTROL_SELECT_KEY, () => {});
 const setFocus = inject(SEGMENTED_CONTROL_FOCUS_KEY, () => {});
 
@@ -121,12 +138,14 @@ const resolvedLabelClass = computed(() => {
   return ['d-segmented-control__item-label', props.labelClass ?? groupContext.labelClass].filter(Boolean);
 });
 
-function handleClick () {
+function handleClick (event) {
+  emit('click', event);
   if (isDisabled.value) return;
   selectValue(props.value);
 }
 
-function handleFocus () {
+function handleFocus (event) {
+  emit('focus', event);
   setFocus(props.value);
 }
 </script>
