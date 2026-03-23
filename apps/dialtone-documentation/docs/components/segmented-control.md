@@ -1,10 +1,10 @@
 ---
 title: Segmented Control
-description: A single-select control where all options are visible, commonly used for view modes, filters, and settings. Implements the roving tabindex pattern with full keyboard navigation.
+description: Single-select, all-options-visible control for switching views, scopes, or modes within the same context.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-segmented-control--default
-keywords: ["segmented control", "toggle group", "button toggle", "radio group", "d-segmented-control", "DtSegmentedControl", "dt-segmented-control", "scoped", "select"]
+keywords: ["segmented control", "toggle group", "button toggle", "radio group", "d-segmented-control", "DtSegmentedControl", "dt-segmented-control", "select", "scope", "content switcher"]
 ---
 
 <code-well-header>
