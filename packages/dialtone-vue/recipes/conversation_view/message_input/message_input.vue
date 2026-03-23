@@ -13,10 +13,8 @@
     <!-- @slot Renders above the input, but still within the borders. -->
     <slot name="top" />
 
-    <!-- set key to selectedText to force update. otherwise this component may not reflect the active selection -->
     <dt-recipe-message-input-topbar
       v-if="richText"
-      :key="selectedText"
       :bold-button-options="boldButtonOptions"
       :italic-button-options="italicButtonOptions"
       :strike-button-options="strikeButtonOptions"
@@ -824,6 +822,20 @@ export default {
       );
     },
 
+    // Returns a new function reference when selectedText changes, which causes the topbar
+    // to re-render (prop update) without destroying/recreating it (no key change).
+    isSelectionActive () {
+      // eslint-disable-next-line no-unused-vars
+      const _dep = this.selectedText;
+      return (type) => {
+        if (['bulletList', 'orderedList'].includes(type)) {
+          if (!this.richText) return false;
+          return this.lastActiveNodes(this.$refs.richTextEditor?.editor?.state, [{ type: 'bulletList' }, { type: 'orderedList' }]).includes(type) && this.isFocused;
+        }
+        return this.$refs.richTextEditor?.editor?.isActive(type) && this.isFocused;
+      };
+    },
+
     isSendDisabled () {
       return (
         this.disableSend ||
@@ -908,18 +920,6 @@ export default {
       if (editor && typeToCommandMap[type]) {
         typeToCommandMap[type]();
       }
-    },
-
-    // Checks if the node currently selected is active ex/ the bold button is active if the selected text is bold
-
-    // eslint-disable-next-line complexity
-    isSelectionActive (type) {
-      if (['bulletList', 'orderedList'].includes(type)) {
-        // List extensions are only loaded when richText is true
-        if (!this.richText) return false;
-        return this.lastActiveNodes(this.$refs.richTextEditor?.editor?.state, [{ type: 'bulletList' }, { type: 'orderedList' }]).includes(type) && this.isFocused;
-      }
-      return this.$refs.richTextEditor?.editor?.isActive(type) && this.isFocused;
     },
 
     initLinkDialog () {
