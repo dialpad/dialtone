@@ -5,8 +5,10 @@
   >
     <div class="d-p48">
       <page-header />
-      <!-- eslint-disable-next-line vue/no-undef-components -->
-      <content />
+      <article class="dialtone-content__article">
+        <!-- eslint-disable-next-line vue/no-undef-components -->
+        <content />
+      </article>
       <dt-stack
         direction="row"
         :justify="prev ? 'between' : 'end'"

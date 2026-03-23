@@ -89,26 +89,36 @@ const blogLink = computed(() => {
     margin-block-start: var(--dt-size-500);
   }
   > table:not([class]) {
-    border: 1px solid var(--dt-color-border-subtle);
+    color: var(--dt-color-foreground-tertiary);
+    border: 1px solid var(--dt-color-border-default);
     border-collapse: collapse;
-    margin: var(--dt-size-200) 0;
+    margin: var(--dt-size-500) 0;
     inline-size: 100%;
+    font: var(--dt-text-body-sm);
 
-    th {
-      font: var(--dt-text-label-sm);
+    :where(th) {
+      font: var(--dt-text-label-xs);
       color: var(--dt-color-foreground-secondary);
+      text-transform: uppercase;
+      line-height: var(--dt-font-line-height-100);
     }
 
-    th, td {
+
+    :where(th, td) {
       text-align: start;
-      border: 1px solid var(--dt-color-border-subtle);
+      border: 1px solid var(--dt-color-border-default);
       border-inline: 0;
-      padding: var(--dt-size-400);
+      padding: var(--dt-size-500);
+      vertical-align: baseline;
     }
 
-    code {
+    :where(thead th) {
+      border-block-end-width: 3px;
+    }
+
+    :where(code, kbd) {
       background-color: var(--dt-color-background-default);
-      padding: var(--dt-size-200);
+      color: var(--dt-color-blue-800);
       font: var(--dt-text-code-xs);
     }
   }
