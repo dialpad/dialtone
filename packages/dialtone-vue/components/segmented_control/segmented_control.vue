@@ -211,6 +211,7 @@ function setFocus (value) {
 
 function selectValue (value) {
   if (props.disabled) return;
+  if (value === props.modelValue) return;
   const beforeChangeEvent = new Event('before-change', { cancelable: true });
   emit('before-change', beforeChangeEvent);
   if (beforeChangeEvent.defaultPrevented) return;

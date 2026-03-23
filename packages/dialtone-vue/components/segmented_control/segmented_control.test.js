@@ -165,6 +165,15 @@ describe('DtSegmentedControl Tests', () => {
       expect(wrapper.emitted('change')[0]).toEqual(['recent']);
     });
 
+    it('does not emit change when clicking the already-selected item', async () => {
+      _setWrapper({ modelValue: 'all' });
+
+      const items = wrapper.findAll('[data-qa="dt-segmented-control-item"]');
+      await items[0].trigger('click');
+
+      expect(wrapper.emitted('change')).toBeUndefined();
+    });
+
     it('does not emit change when group is disabled', async () => {
       _setWrapper({ disabled: true });
 
