@@ -92,14 +92,14 @@
                 gap="400"
               >
                 <dt-button
-                  width="var(--dt-size-100-percent)"
+                  width="var(--dt-layout-100-percent)"
                   importance="outlined"
                   kind="muted"
                 >
                   Call
                 </dt-button>
                 <dt-button
-                  width="var(--dt-size-100-percent)"
+                  width="var(--dt-layout-100-percent)"
                   importance="outlined"
                   kind="muted"
                 >

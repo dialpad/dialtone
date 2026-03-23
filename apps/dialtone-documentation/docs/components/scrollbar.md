@@ -198,7 +198,7 @@ This can make it challenging to use with components that rely on event listeners
 
 <style lang="less" scoped>
 .item {
-  padding: var(--dt-size-300) var(--dt-size-400);
+  padding: var(--dt-spacing-50) var(--dt-spacing-100);
   border-block-end: var(--dt-size-border-100) solid var(--dt-color-border-default);
   &:last-child {
     border-block-end: none;

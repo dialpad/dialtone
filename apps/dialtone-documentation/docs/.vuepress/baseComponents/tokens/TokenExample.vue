@@ -131,7 +131,7 @@ const getBorderStyle = () => {
       borderColor: 'transparent',
     };
   }
-  return { border: `var(--dt-size-200) solid ${props.value}` };
+  return { border: `var(--dt-size-border-200) solid ${props.value}` };
 };
 
 const foregroundBackgroundColor = computed(() => {
@@ -169,13 +169,13 @@ const getShadowStyle = computed(() => {
 const getSizeStyle = computed(() => {
   if (props.name.includes('radius')) {
     if (props.name.includes('circle')) {
-      return { 'inline-size': 'var(--dt-size-600)', borderRadius: props.value };
+      return { 'inline-size': 'var(--dt-layout-50)', borderRadius: props.value };
     }
-    return { 'inline-size': 'var(--dt-size-100-percent)', borderRadius: props.value };
+    return { 'inline-size': 'var(--dt-layout-100-percent)', borderRadius: props.value };
   }
   if (props.name.includes('border')) {
     return {
-      'inline-size': 'var(--dt-size-100-percent)',
+      'inline-size': 'var(--dt-layout-100-percent)',
       backgroundColor: 'var(--dt-color-neutral-transparent)',
       border: `${props.value} solid var(--dt-color-border-brand)`,
     };
@@ -202,19 +202,19 @@ const isPercentage = computed(() => props.value.endsWith('%'));
 }
 
 .link-example {
-  border-block-end: var(--dt-size-200) solid;
+  border-block-end: var(--dt-size-border-200) solid;
   line-height: initial;
 }
 
 .sizeRectangle {
-  block-size: var(--dt-size-600);
+  block-size: var(--dt-layout-50);
   background-color: var(--dt-color-surface-brand-strong);
   border-radius: var(--dt-size-radius-300);
   inline-size: 0;
 }
 
 .spaceRectangle {
-  block-size: var(--dt-size-600);
+  block-size: var(--dt-layout-50);
   background-color: var(--dt-color-surface-brand-strong);
   inline-size: 0;
 }
@@ -225,15 +225,15 @@ const isPercentage = computed(() => props.value.endsWith('%'));
 }
 
 .spaceReference {
-  block-size: var(--dt-size-600);
-  inline-size: var(--dt-size-500);
+  block-size: var(--dt-layout-50);
+  inline-size: var(--dt-layout-25);
   background-color: var(--dt-color-surface-moderate);
   display: flex;
   align-items: center;
   justify-content: center;
   font: var(--dt-typography-body-sm);
   color: var(--dt-color-foreground-muted);
-  padding: var(--dt-size-400) var(--dt-size-200);
+  padding: var(--dt-spacing-100) var(--dt-spacing-25);
   border-start-end-radius: var(--dt-size-radius-300);
   border-end-end-radius: var(--dt-size-radius-300);
   &.spaceBefore {

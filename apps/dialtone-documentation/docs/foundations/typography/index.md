@@ -417,7 +417,7 @@ Each typography style is expressed through a shorthand `font` property, and its 
       position: absolute;
       inset-inline-end: 0;
       background-color: var(--dt-color-surface-secondary);
-      padding-inline-start: var(--dt-size-300);
+      padding-inline-start: var(--dt-spacing-50);
 
       .dialtone-copy-utility:hover & {
         display: block;

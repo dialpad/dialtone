@@ -59,7 +59,7 @@ const defaultToggleOpen = () => {
 <style lang="less" scoped>
 .leftbar-section-header__action {
     position: absolute;
-    inset-inline-end: var(--dt-size-300);
+    inset-inline-end: var(--dt-spacing-50);
     inset-block-start: 50%;
     transform: translateY(-50%);
 }

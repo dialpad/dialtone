@@ -1,17 +1,17 @@
 @layer dialtone.components {
 .d-recipe-combobox-multi-select__chip {
   z-index: var(--zi-base1);
-  max-inline-size: var(--dt-size-100-percent);
-  margin-block-start: var(--dt-size-300);
-  margin-inline: var(--dt-size-200);
+  max-inline-size: var(--dt-layout-100-percent);
+  margin-block-start: var(--dt-spacing-50);
+  margin-inline: var(--dt-spacing-25);
 }
 
 .d-recipe-combobox-multi-select__chip-wrapper {
   position: absolute;
-  max-inline-size: calc(var(--dt-size-100-percent) - var(--dt-size-400));
+  max-inline-size: calc(var(--dt-layout-100-percent) - var(--dt-spacing-50));
   max-block-size: initial;
-  margin-inline: var(--dt-size-200);
-  padding-inline-start: var(--dt-size-100);
+  margin-inline: var(--dt-spacing-25);
+  padding-inline-start: var(--dt-spacing-1);
   overflow-block: visible;
 }
 
@@ -45,12 +45,12 @@
 }
 
 .d-recipe-combobox-multi-select__list .d-list-item__content {
-  min-block-size: calc(var(--dt-size-550) + var(--dt-size-300));
+  min-block-size: calc(var(--dt-layout-25) * 1.75);
 }
 
 
 .d-recipe-combobox-multi-select__list--loading {
-  padding-block: var(--dt-size-500);
+  padding-block: var(--dt-spacing-200);
   text-align: center;
 }
 }

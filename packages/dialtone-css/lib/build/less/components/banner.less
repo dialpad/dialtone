@@ -16,8 +16,8 @@
     //  ------------------------------------------------------------------------
     --banner-color-border: var(--dt-color-border-default);
     --banner-line-height: var(--dt-font-line-height-200);
-    --banner-dialog-padding-y: var(--dt-size-400);
-    --banner-dialog-padding-x: var(--dt-size-500);
+    --banner-dialog-padding-y: var(--dt-spacing-100);
+    --banner-dialog-padding-x: var(--dt-layout-25);
 
     position: fixed;
     inset-block-start: 0;
@@ -54,17 +54,17 @@
     display: flex;
     align-items: center;
     inline-size: 100%;
-    min-block-size: calc(var(--dt-size-650) + var(--dt-size-200));
+    min-block-size: calc(var(--dt-layout-75) + var(--dt-spacing-25));
     margin: 0 auto;
     padding: var(--banner-dialog-padding-y) var(--banner-dialog-padding-x);
 
     .d-notice__icon {
-        margin-block-start: var(--dt-size-0);
+        margin-block-start: var(--dt-spacing-0);
     }
 
     .d-notice__content {
         flex-direction: row;
-        gap: var(--dt-size-350);
+        gap: var(--dt-spacing-75);
         align-items: baseline;
     }
 

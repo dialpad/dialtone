@@ -49,19 +49,19 @@
         font-size: var(--breadcrumbs-font-size);
         line-height: var(--breadcrumbs-line-height);
         list-style: none;
-        margin-inline: var(--dt-size-400) 0;
+        margin-inline: var(--dt-spacing-100) 0;
         margin-block: 0;
 
         //  Provide a forward slash with each element except when it's the last one.
         &:not(:last-of-type) {
-            margin-inline-end: var(--dt-size-450);
+            margin-inline-end: var(--dt-spacing-150);
 
             &::before {
                 position: absolute;
                 color: var(--breadcrumbs-color-separator);
                 content: '/';
-                inset-inline-end: var(--dt-size-450-negative);
-                margin-block-start: var(--dt-size-100-negative);
+                inset-inline-end: var(--dt-spacing-150-negative);
+                margin-block-start: var(--dt-spacing-1-negative);
             }
         }
 

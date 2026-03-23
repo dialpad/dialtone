@@ -421,7 +421,7 @@ onBeforeUnmount(() => {
   }
 
   &__more {
-    transform: translateX(calc(var(--dt-size-50-percent) * -1)); // Transform kept as custom
+    transform: translateX(calc(var(--dt-layout-50-percent) * -1)); // Transform kept as custom
   }
 
 }

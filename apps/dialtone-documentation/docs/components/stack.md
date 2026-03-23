@@ -360,10 +360,10 @@ vueCode='
       <tbody>
         <tr>
           <th scope="row" class="d-code--sm d-docsite-code">
-              0
+            0
           </th>
           <td>
-            <strong>var(--dt-size-0)</strong>
+            <strong>var(--dt-spacing-0)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             0.0rem
@@ -374,24 +374,10 @@ vueCode='
         </tr>
         <tr>
           <th scope="row" class="d-code--sm d-docsite-code">
-             50
+            1
           </th>
           <td>
-            <strong>var(--dt-size-50)</strong>
-          </td>
-          <td class="d-code--sm d-docsite-code d-ta-right">
-            0.05rem
-          </td>
-          <td class="d-code--sm d-docsite-code d-ta-right">
-            .5px
-          </td>
-        </tr>
-        <tr>
-          <th scope="row" class="d-code--sm d-docsite-code">
-            100
-          </th>
-          <td>
-            <strong>var(--dt-size-100)</strong>
+            <strong>var(--dt-spacing-1)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             0.1rem
@@ -402,10 +388,10 @@ vueCode='
         </tr>
         <tr>
           <th scope="row" class="d-code--sm d-docsite-code">
-            200
+            25
           </th>
           <td>
-            <strong>var(--dt-size-200)</strong>
+            <strong>var(--dt-spacing-25)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             0.2rem
@@ -416,10 +402,10 @@ vueCode='
         </tr>
         <tr>
           <th scope="row" class="d-code--sm d-docsite-code">
-            300
+            50
           </th>
           <td>
-            <strong>var(--dt-size-300)</strong>
+            <strong>var(--dt-spacing-50)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             0.4rem
@@ -430,10 +416,10 @@ vueCode='
         </tr>
         <tr>
           <th scope="row" class="d-code--sm d-docsite-code">
-            350
+            75
           </th>
           <td>
-            <strong>var(--dt-size-350)</strong>
+            <strong>var(--dt-spacing-75)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             0.6rem
@@ -444,10 +430,10 @@ vueCode='
         </tr>
         <tr>
           <th scope="row" class="d-code--sm d-docsite-code">
-            400
+            100
           </th>
           <td>
-            <strong>var(--dt-size-400)</strong>
+            <strong>var(--dt-spacing-100)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             0.8rem
@@ -458,10 +444,10 @@ vueCode='
         </tr>
         <tr>
           <th scope="row" class="d-code--sm d-docsite-code">
-            450
+            150
           </th>
           <td>
-            <strong>var(--dt-size-450)</strong>
+            <strong>var(--dt-spacing-150)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             1.2rem
@@ -472,10 +458,10 @@ vueCode='
         </tr>
         <tr>
           <th scope="row" class="d-code--sm d-docsite-code">
-            500
+            200
           </th>
           <td>
-            <strong>var(--dt-size-500)</strong>
+            <strong>var(--dt-spacing-200)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             1.6rem
@@ -486,10 +472,10 @@ vueCode='
         </tr>
         <tr>
           <th scope="row" class="d-code--sm d-docsite-code">
-            525
+            250
           </th>
           <td>
-            <strong>var(--dt-size-525)</strong>
+            <strong>var(--dt-spacing-250)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             2.0rem
@@ -500,10 +486,10 @@ vueCode='
         </tr>
         <tr>
           <th scope="row" class="d-code--sm d-docsite-code">
-            550
+            300
           </th>
           <td>
-            <strong>var(--dt-size-550)</strong>
+            <strong>var(--dt-spacing-300)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             2.4rem
@@ -514,10 +500,24 @@ vueCode='
         </tr>
         <tr>
           <th scope="row" class="d-code--sm d-docsite-code">
-            600
+            350
           </th>
           <td>
-            <strong>var(--dt-size-600)</strong>
+            <strong>var(--dt-spacing-350)</strong>
+          </td>
+          <td class="d-code--sm d-docsite-code d-ta-right">
+            2.8rem
+          </td>
+          <td class="d-code--sm d-docsite-code d-ta-right">
+            28px
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" class="d-code--sm d-docsite-code">
+            400
+          </th>
+          <td>
+            <strong>var(--dt-spacing-400)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             3.2rem
@@ -528,10 +528,38 @@ vueCode='
         </tr>
         <tr>
           <th scope="row" class="d-code--sm d-docsite-code">
-            625
+            450
           </th>
           <td>
-            <strong>var(--dt-size-625)</strong>
+            <strong>var(--dt-spacing-450)</strong>
+          </td>
+          <td class="d-code--sm d-docsite-code d-ta-right">
+            3.6rem
+          </td>
+          <td class="d-code--sm d-docsite-code d-ta-right">
+            36px
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" class="d-code--sm d-docsite-code">
+            500
+          </th>
+          <td>
+            <strong>var(--dt-spacing-500)</strong>
+          </td>
+          <td class="d-code--sm d-docsite-code d-ta-right">
+            4.0rem
+          </td>
+          <td class="d-code--sm d-docsite-code d-ta-right">
+            40px
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" class="d-code--sm d-docsite-code">
+            525
+          </th>
+          <td>
+            <strong>var(--dt-spacing-525)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             4.2rem
@@ -542,10 +570,24 @@ vueCode='
         </tr>
         <tr>
           <th scope="row" class="d-code--sm d-docsite-code">
-            650
+            550
           </th>
           <td>
-            <strong>var(--dt-size-650)</strong>
+            <strong>var(--dt-spacing-550)</strong>
+          </td>
+          <td class="d-code--sm d-docsite-code d-ta-right">
+            4.4rem
+          </td>
+          <td class="d-code--sm d-docsite-code d-ta-right">
+            44px
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" class="d-code--sm d-docsite-code">
+            600
+          </th>
+          <td>
+            <strong>var(--dt-spacing-600)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             4.8rem
@@ -556,10 +598,52 @@ vueCode='
         </tr>
         <tr>
           <th scope="row" class="d-code--sm d-docsite-code">
+            650
+          </th>
+          <td>
+            <strong>var(--dt-spacing-650)</strong>
+          </td>
+          <td class="d-code--sm d-docsite-code d-ta-right">
+            5.2rem
+          </td>
+          <td class="d-code--sm d-docsite-code d-ta-right">
+            52px
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" class="d-code--sm d-docsite-code">
             700
           </th>
           <td>
-            <strong>var(--dt-size-700)</strong>
+            <strong>var(--dt-spacing-700)</strong>
+          </td>
+          <td class="d-code--sm d-docsite-code d-ta-right">
+            5.6rem
+          </td>
+          <td class="d-code--sm d-docsite-code d-ta-right">
+            56px
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" class="d-code--sm d-docsite-code">
+            750
+          </th>
+          <td>
+            <strong>var(--dt-spacing-750)</strong>
+          </td>
+          <td class="d-code--sm d-docsite-code d-ta-right">
+            6.0rem
+          </td>
+          <td class="d-code--sm d-docsite-code d-ta-right">
+            60px
+          </td>
+        </tr>
+        <tr>
+          <th scope="row" class="d-code--sm d-docsite-code">
+            800
+          </th>
+          <td>
+            <strong>var(--dt-spacing-800)</strong>
           </td>
           <td class="d-code--sm d-docsite-code d-ta-right">
             6.4rem
@@ -1662,8 +1746,8 @@ vueCode='
 
 <style scoped lang="less">
   .axis-outline {
-    --axis-size: var(--dt-size-200);
-    --axis-offset: var(--dt-size-200-negative);
+    --axis-size: var(--dt-spacing-25);
+    --axis-offset: var(--dt-spacing-25-negative);
     --axis-color: var(--dt-color-border-critical);
     --axis-opacity: var(--dt-opacity-800);
     --axis-pattern-vertical: repeating-linear-gradient(
@@ -1777,7 +1861,7 @@ vueCode='
 
     // Special case for baseline
     &--baseline::before {
-      inset-block-end: calc(var(--dt-size-500) + var(--dt-size-400));
+      inset-block-end: calc(var(--dt-spacing-200) + var(--dt-spacing-100));
       block-size: var(--axis-size);
       inline-size: 100%;
       background-image: var(--axis-pattern-horizontal);

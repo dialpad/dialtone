@@ -341,8 +341,10 @@ When creating a custom theme, it is important to ensure that the colors used are
 
 <style scoped>
 .color-swatch {
-  inline-size: var(--dt-size-550);
-  block-size: var(--dt-size-550);
+  --color-swatch-size: calc(var(--dt-layout-25) * 1.5);
+
+  inline-size: var(--color-swatch-size);
+  block-size: var(--color-swatch-size);
   border-radius: var(--dt-size-radius-300);
   border: var(--dt-size-border-100) solid var(--dt-color-border-default);
   flex-shrink: 0;

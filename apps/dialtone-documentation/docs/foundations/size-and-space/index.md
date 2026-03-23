@@ -32,8 +32,8 @@ When assigning a size or spacing to an element, use [Size Tokens](#tokens).
 
 ```css
 width: var(--dt-size-400);
-padding: var(--dt-size-500);
-gap: var(--dt-size-400);
+padding: var(--dt-spacing-200);
+gap: var(--dt-spacing-100);
 ```
 
 </div>
@@ -68,7 +68,7 @@ gap: var(--dt-size-400);
 When setting the gap between elements, use size tokens for the gap value.
 
 ```css
-gap: var(--dt-size-400);
+gap: var(--dt-spacing-100);
 ```
 
 </div>
@@ -90,7 +90,7 @@ gap: var(--dt-size-400);
 ```html
 <style>
 .wrapper {
-  gap: var(--dt-size-400);
+  gap: var(--dt-spacing-100);
 }
 </style>
 <div class="wrapper">
@@ -114,7 +114,7 @@ gap: var(--dt-size-400);
 When adding space between elements, both vertically and horizontally, use either `space-between` or `gap` to define the space that separates each element.
 
 - For gaps inside a box/container, such as between headings, text, and buttons, use values like `var(--dt-size-0)` to `var(--dt-size-550)`
-- For spaces between different boxes/containers on a page, choose values from `var(--dt-size-600)` to `var(--dt-size-700)`
+- For spaces between different boxes/containers on a page, choose values from `var(--dt-layout-50)` to `var(--dt-layout-100)`
 
 </div>
  <dt-stack direction="column" gap="500">
@@ -211,7 +211,7 @@ Adapting to different devices, sizes should be fluid across breakpoints. While m
 
 <div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols1">
 
-To ensure clickable and interactive areas are easily accessible, we recommend a minimum area of `var(--dt-size-300)`, except for links within text. In Dialtone we've applied these to components such as buttons, toggles, checkboxes, radio buttons, dropdowns, and inputs.
+To ensure clickable and interactive areas are easily accessible, we recommend a minimum area of `var(--dt-size-radius-300)`, except for links within text. In Dialtone we've applied these to components such as buttons, toggles, checkboxes, radio buttons, dropdowns, and inputs.
 
 </div>
 
@@ -293,15 +293,15 @@ const tokens = Object.keys(tokensJson[theme] ?? {}).reduce((acc, curr) => {
 
 const sizeValues = [
   { value: 'var(--dt-size-720)', label: 'var(--dt-size-720)' },
-  { value: 'var(--dt-size-800)', label: 'var(--dt-size-800)' },
-  { value: 'var(--dt-size-825)', label: 'var(--dt-size-825)' },
+  { value: 'var(--dt-layout-200)', label: 'var(--dt-layout-200)' },
+  { value: 'var(--dt-layout-250)', label: 'var(--dt-layout-250)' },
 ];
 
 const gapValues = [
   { value: 'var(--dt-size-300)', label: 'var(--dt-size-300)' },
   { value: 'var(--dt-size-400)', label: 'var(--dt-size-400)' },
-  { value: 'var(--dt-size-500)', label: 'var(--dt-size-500)' },
-  { value: 'var(--dt-size-600)', label: 'var(--dt-size-600)' },
+  { value: 'var(--dt-layout-25)', label: 'var(--dt-layout-25)' },
+  { value: 'var(--dt-layout-50)', label: 'var(--dt-layout-50)' },
 ];
 
 const selectedSize = ref('var(--dt-size-720)');

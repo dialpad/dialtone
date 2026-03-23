@@ -10,18 +10,18 @@
   cursor: pointer;
 
   .d-card {
-    inline-size: var(--dt-size-100-percent);
+    inline-size: var(--dt-layout-100-percent);
   }
 
   .d-card__header {
-    margin-block-start: var(--dt-size-100-negative);
-    padding: var(--dt-size-0);
+    margin-block-start: var(--dt-spacing-1-negative);
+    padding: var(--dt-spacing-0);
     border-start-start-radius: var(--dt-size-border-300);
     border-start-end-radius: var(--dt-size-border-300);
   }
 
   .d-card__content {
-    padding: var(--dt-size-400) var(--dt-size-450) var(--dt-size-450);
+    padding: var(--dt-spacing-100) var(--dt-spacing-150) var(--dt-spacing-150);
     border-block-start: var(--dt-size-border-100) solid var(--dt-color-black-300);
   }
 }
@@ -88,27 +88,27 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  inline-size: var(--dt-size-400);
-  block-size: var(--dt-size-400);
-  margin-block-end: var(--dt-size-300-negative);
+  inline-size: calc(var(--dt-layout-25) / 2);
+  block-size: calc(var(--dt-layout-25) / 2);
+  margin-block-end: var(--dt-spacing-50-negative);
   background-color: var(--dt-color-purple-950);
   border-color: var(--dt-color-purple-950);
   border-radius: var(--dt-size-radius-circle);
 }
 
 .d-recipe-ivr-node__connector--selected {
-  margin-block-end: var(--dt-size-400-negative);
+  margin-block-end: var(--dt-spacing-100-negative);
 }
 
 .d-recipe-ivr-node__connector-dtmf {
-  inline-size: var(--dt-size-550);
-  block-size: var(--dt-size-550);
-  margin-block-end: var(--dt-size-450-negative);
+  inline-size: calc(var(--dt-layout-25) * 1.5);
+  block-size: calc(var(--dt-layout-25) * 1.5);
+  margin-block-end: var(--dt-spacing-150-negative);
   color: var(--dt-color-foreground-primary-inverted);
   font-size: var(--dt-font-size-200);
 
   .d-recipe-ivr-node__connector--selected {
-    margin-block-end: var(--dt-size-500-negative);
+    margin-block-end: var(--dt-spacing-200-negative);
   }
 }
 
@@ -127,7 +127,7 @@
 }
 
 .d-recipe-ivr-node__dropdown-list {
-  inline-size: var(--dt-size-825);
+  inline-size: var(--dt-layout-250);
 }
 
 .d-recipe-ivr-node__goto-icon {

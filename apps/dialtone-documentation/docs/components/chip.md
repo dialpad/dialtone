@@ -233,6 +233,7 @@ showHtmlWarning />
         image-src="/assets/images/person.png"
         image-alt="Jaqueline Nackos"
         full-name="Jaqueline Nackos"
+        size="100"
       />
     </template>
     <template #default>

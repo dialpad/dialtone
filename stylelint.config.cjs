@@ -77,8 +77,8 @@ module.exports = {
     'meowtec/no-px': [
       true,
       {
-        message: 'Use dialtone tokens such as line-height: var(--dt-size-200) or width: var(--dt-size-600) or ' +
-        'padding: var(--dt-size-400) rather than directly setting px. See https://dialtone.dialpad.com/tokens/',
+        message: 'Use dialtone tokens such as line-height: var(--dt-spacing-200) or inline-size: var(--dt-layout-600) or ' +
+        'padding: var(--dt-spacing-100) rather than directly setting px. See https://dialtone.dialpad.com/tokens/',
       },
     ],
 

@@ -78,8 +78,8 @@ function isItemActive (item) {
 
 <style lang="less" scoped>
 .dialtone-toc {
-  inline-size: var(--dt-size-850);
-  block-size: calc(100vh - var(--dt-size-700));
-  inset-block-start: var(--dt-size-700);
+  inline-size: var(--dt-layout-300);
+  block-size: calc(100vh - var(--dt-layout-100));
+  inset-block-start: var(--dt-layout-100);
 }
 </style>

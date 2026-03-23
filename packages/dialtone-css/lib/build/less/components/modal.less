@@ -95,7 +95,7 @@
     //  Component CSS Vars
     //  ------------------------------------------------------------------------
     --modal-backdrop-color-background: var(--dt-color-surface-backdrop);
-    --modal-dialog-padding: var(--dt-size-600);
+    --modal-dialog-padding: var(--dt-spacing-400);
     --modal-dialog-color-background: var(--dt-color-surface-primary);
     --modal-dialog-color-border: var(--dt-color-border-subtle);
     --modal-dialog-color-text: var(--dt-color-foreground-primary);
@@ -111,7 +111,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: var(--dt-size-600); // 32
+    padding: var(--dt-spacing-400); // 32
     background-color: var(--modal-backdrop-color-background);
     backface-visibility: hidden;
     visibility: hidden;
@@ -141,10 +141,10 @@
   z-index: var(--zi-hide);
   display: flex;
   flex-direction: column;
-  gap: var(--dt-size-500); //
+  gap: var(--dt-spacing-200); //
   box-sizing: border-box;
   inline-size: 100%;
-  max-inline-size: var(--dt-size-1020); // 628
+  max-inline-size: var(--dt-layout-1000); // 628
   max-block-size: 100%;
   padding: var(--modal-dialog-padding); // 32
   overflow-block: auto;
@@ -152,8 +152,8 @@
   font-size: var(--dt-font-size-200);
   line-height: var(--dt-font-line-height-400);
   background-color: var(--modal-dialog-color-background);
-  border: var(--dt-size-100) solid var(--modal-dialog-color-border);
-  border-radius: var(--dt-size-500);
+  border: var(--dt-size-border-100) solid var(--modal-dialog-color-border);
+  border-radius: var(--dt-layout-25);
   box-shadow: var(--modal-dialog-shadow);
   transform: translate3d(0, 30%, 0) scale3d(0.75, 0.75, 0.75);
   backface-visibility: hidden;
@@ -184,11 +184,11 @@
 //  $   MODAL AREAS
 //  ----------------------------------------------------------------------------
 .d-modal__footer {
-  --modal-footer-padding: var(--dt-size-550); // 24
+  --modal-footer-padding: var(--dt-spacing-300); // 24
 
   display: flex;
   flex-direction: row-reverse;
-  gap: var(--dt-size-400);
+  gap: var(--dt-spacing-100);
   align-items: center;
 }
 
@@ -199,7 +199,7 @@
 //  $$  HEADER
 //  ----------------------------------------------------------------------------
 .d-modal__header {
-  --modal-header-padding: var(--dt-size-550); // 24
+  --modal-header-padding: var(--dt-spacing-300); // 24
 
   margin: 0 !important;
   padding-inline-end: var(--modal-header-padding);
@@ -221,8 +221,8 @@
 //  ----------------------------------------------------------------------------
 .d-modal__close {
   position: absolute;
-  inset-block-start: var(--dt-size-400);
-  inset-inline-end: var(--dt-size-400);
+  inset-block-start: var(--dt-spacing-100);
+  inset-inline-end: var(--dt-spacing-100);
   margin: 0 !important;
 }
 
@@ -231,22 +231,22 @@
 //  $   BANNERS
 //  ----------------------------------------------------------------------------
 .d-modal__banner {
-  --modal-banner-padding-y: var(--dt-size-500);
-  --modal-banner-padding-x: var(--dt-size-600);
+  --modal-banner-padding-y: var(--dt-layout-25);
+  --modal-banner-padding-x: var(--dt-layout-50);
   --modal-banner-color-background: var(--dt-color-surface-warning);
 
   position: relative;
   box-sizing: border-box;
   inline-size: 100%;
-  max-inline-size: var(--dt-size-1020); // 628
+  max-inline-size: var(--dt-layout-1000); // 628
   padding: var(--modal-banner-padding-y) var(--modal-banner-padding-x); // 16 32
   color: var(--dt-color-foreground-primary);
   font-size: var(--dt-font-size-200);
   line-height: var(--dt-font-line-height-300);
   background-color: var(--modal-banner-color-background);
-  border: var(--dt-size-100) solid var(--modal-dialog-color-border);
+  border: var(--dt-size-border-100) solid var(--modal-dialog-color-border);
   border-block-end-width: 0;
-  border-radius: var(--dt-size-500) var(--dt-size-500) 0 0;
+  border-radius: var(--dt-layout-25) var(--dt-layout-25) 0 0;
   box-shadow: var(--modal-dialog-shadow);
 
   &--warning {
@@ -310,21 +310,21 @@
   }
 
   .d-modal__header {
-    padding: var(--dt-size-600) var(--dt-size-600) 0; // 32
+    padding: var(--dt-spacing-400) var(--dt-layout-50) 0; // 32
   }
 
   .d-modal__content {
-    padding-inline: var(--dt-size-600) 0; // 32
+    padding-inline: var(--dt-spacing-400) 0; // 32
   }
 
   .d-modal__footer {
     margin-block-start: auto !important;
-    padding: 0 var(--dt-size-550) var(--dt-size-600) var(--dt-size-600); // 0 24 32 32
+    padding: 0 var(--dt-spacing-300) var(--dt-layout-50) var(--dt-layout-50); // 0 24 32 32
   }
 
   .d-modal__banner {
     max-inline-size: unset;
-    padding: var(--dt-size-450) var(--dt-size-600); // 12 32
+    padding: var(--dt-spacing-150) var(--dt-layout-50); // 12 32
     border-radius: 0;
   }
 }

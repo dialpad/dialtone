@@ -36,8 +36,8 @@
 
   &__label {
     display: flex;
-    gap: var(--dt-size-300);
-    max-inline-size: var(--dt-size-875);
+    gap: var(--dt-spacing-50);
+    max-inline-size: var(--dt-layout-350);
     font-weight: var(--dt-font-weight-normal);
   }
 
@@ -50,10 +50,10 @@
 
   &__label-omega {
     display: flex;
-    gap: var(--dt-size-300);
+    gap: var(--dt-spacing-50);
     align-items: center;
     font-weight: var(--dt-font-weight-bold);
-    letter-spacing: var(--dt-size-50-negative);
+    letter-spacing: calc(var(--dt-spacing-1-negative) / 2);
     font-variant-numeric: tabular-nums;
 
     &::before {
@@ -62,7 +62,7 @@
   }
 
   &__clear {
-    --button-padding-x: var(--dt-size-350) !important;
+    --button-padding-x: var(--dt-spacing-75) !important;
 
     border-inline-start-width: 0;
     border-start-start-radius: 0;

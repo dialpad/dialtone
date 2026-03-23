@@ -338,7 +338,7 @@ export default {
     position: relative;
 
     @media screen and (min-width: 640px) {
-      min-block-size: var(--dt-size-925);
+      min-block-size: var(--dt-layout-500);
     }
   }
 
@@ -347,14 +347,14 @@ export default {
     background-color: var(--dt-color-surface-secondary-opaque);
 
     @media screen and (min-width: 640px) {
-      inline-size: var(--dt-size-875);
-      max-block-size: var(--dt-size-950);
+      inline-size: var(--dt-layout-350);
+      max-block-size: var(--dt-layout-600);
     }
 
     .dialtone-playground--fullscreen & {
       @media screen and (min-width: 640px) {
         max-block-size: 100%;
-        inline-size: var(--dt-size-900);
+        inline-size: var(--dt-layout-400);
       }
     }
 

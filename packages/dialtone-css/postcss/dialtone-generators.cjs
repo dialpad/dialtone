@@ -291,7 +291,7 @@ function flexColumnsUtilities (clonedSource, declaration) {
       source: clonedSource,
       selector: `.d-fl-col${i} > *`,
       nodes: [
-        declaration.clone({ prop: '--fl-gap', value: 'var(--dt-size-0)' }),
+        declaration.clone({ prop: '--fl-gap', value: 'var(--dt-spacing-0)' }),
         declaration.clone({ prop: '--fl-basis', value: `calc(100% / ${i})` }),
         declaration.clone({ prop: 'display', value: 'inline-flex' }),
         declaration.clone({ prop: 'margin', value: 'var(--fl-gap)' }),
@@ -302,7 +302,7 @@ function flexColumnsUtilities (clonedSource, declaration) {
       source: clonedSource,
       selector: `.d-fl-col${i} > *:nth-child(-n + ${i})`,
       nodes: [
-        declaration.clone({ prop: 'margin-block-start', value: 'var(--dt-size-0)' }),
+        declaration.clone({ prop: 'margin-block-start', value: 'var(--dt-spacing-0)' }),
       ],
     }));
     generatedRules.flexDirectionColumn.push(new Rule({

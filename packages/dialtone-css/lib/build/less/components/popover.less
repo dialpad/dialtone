@@ -26,8 +26,8 @@
     //  $$  CSS CUSTOM PROPERTIES
     //  ----------------------------------------------------------------------------
     --popover-color-background: var(--dt-color-surface-secondary);
-    --popover-border-width: var(--dt-size-100);
-    --popover-border-radius: var(--dt-size-400);
+    --popover-border-width: var(--dt-size-border-100);
+    --popover-border-radius: var(--dt-size-radius-400);
     --popover-color-border: var(--dt-color-border-subtle);
     --popover-shadow: var(--dt-shadow-card);
 
@@ -73,8 +73,8 @@
     align-items: center;
     justify-content: flex-end;
     inline-size: 100%;
-    min-block-size: var(--dt-size-650);
-    padding-block: var(--dt-size-350) var(--dt-size-350);
+    min-block-size: var(--dt-layout-75);
+    padding-block: var(--dt-spacing-75) var(--dt-spacing-75);
     overflow: auto;
     font-weight: var(--dt-font-weight-semi-bold);
     font-size: var(--dt-font-size-200);
@@ -85,8 +85,8 @@
     }
 
     &__close-button {
-      margin-inline-end: var(--dt-size-350);
-      padding: var(--dt-size-350);
+      margin-inline-end: var(--dt-spacing-75);
+      padding: var(--dt-spacing-75);
       border-color: transparent;
     }
   }

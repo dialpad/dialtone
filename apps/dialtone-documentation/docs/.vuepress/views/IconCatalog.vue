@@ -277,6 +277,6 @@ onMounted(() => {
 <style scoped>
   /* more or less a hack, 🤷‍♂️ */
   #search-input-button-close {
-    margin-inline-end: var(--dt-size-350-negative);
+    margin-inline-end: var(--dt-spacing-75-negative);
   }
 </style>

@@ -4,15 +4,15 @@
  */
 
 div[class*="language-"] {
-	margin: var(--dt-size-500) 0;
-	padding: var(--dt-size-500);
+	margin: var(--dt-spacing-200) 0;
+	padding: var(--dt-spacing-200);
 	background-color: var(--dt-color-surface-secondary);
-	border-radius: var(--dt-size-500);
+	border-radius: var(--dt-spacing-200);
 
 	& pre {
 		margin: 0;
-		padding: var(--dt-size-450);
-    padding-block-start: var(--dt-size-550);
+		padding: var(--dt-spacing-150);
+    padding-block-start: var(--dt-spacing-300);
 
 		& code {
 			padding: 0;
@@ -22,8 +22,8 @@ div[class*="language-"] {
 	}
 
 	&[class*="html"] {
-		margin-block-start: var(--dt-size-400-negative);
-		border-radius: 0 0 var(--dt-size-400) var(--dt-size-400) !important;
+		margin-block-start: var(--dt-spacing-100-negative);
+		border-radius: 0 0 var(--dt-spacing-100) var(--dt-spacing-100) !important;
 	}
 
   &::before {
@@ -34,10 +34,10 @@ div[class*="language-"] {
 }
 
 code:not(.d-code--md, .d-code--sm) {
-	padding: var(--dt-size-200) var(--dt-size-300);
+	padding: var(--dt-spacing-25) var(--dt-spacing-50);
 	color: var(--dt-color-blue-800);
 	background-color: var(--dt-color-surface-info);
-	border-radius: var(--dt-size-100);
+	border-radius: var(--dt-spacing-1);
 	user-select: all;
 }
 
@@ -68,13 +68,13 @@ pre[class*="language-"] {
 
 /* Code blocks */
 pre[class*="language-"] {
-	padding: var(--dt-size-100);
+	padding: var(--dt-spacing-1);
 	overflow: auto;
 }
 
 /* Inline code */
 :not(pre) > code[class*="language-"] {
-	padding: var(--dt-size-100);
+	padding: var(--dt-spacing-1);
 	white-space: normal;
 }
 
@@ -152,7 +152,7 @@ pre[class*="language-"] {
 
 pre[class*="language-"].line-numbers {
 	position: relative;
-	padding-inline-start: var(--dt-size-600);
+	padding-inline-start: var(--dt-size-radius-600);
 	counter-reset: linenumber;
 }
 
@@ -164,11 +164,11 @@ pre[class*="language-"].line-numbers > code {
 .line-numbers .line-numbers-rows {
 	position: absolute;
 	inset-block-start: 0;
-	inset-inline-start: var(--dt-size-negative-600);
-	inline-size: var(--dt-size-600);
+	inset-inline-start: var(--dt-spacing-400-negative);
+	inline-size: var(--dt-layout-50);
 	font-size: 100%;
-	letter-spacing: var(--dt-size-negative-100);
-	border-inline-end: var(--dt-size-100) solid var(--dt-color-black-600);
+	letter-spacing: var(--dt-spacing-1-negative);
+	border-inline-end: var(--dt-size-border-100) solid var(--dt-color-black-600);
 	user-select: none;
 	pointer-events: none;
 }
@@ -179,7 +179,7 @@ pre[class*="language-"].line-numbers > code {
 
   &::before {
     display: block;
-    padding-inline-end: var(--dt-size-400);
+    padding-inline-end: var(--dt-spacing-100);
     color: var(--dt-color-black-600);
     text-align: end;
     content: counter(linenumber);
@@ -189,17 +189,17 @@ pre[class*="language-"].line-numbers > code {
 .command-line-prompt {
 	display: block;
 	float: inline-start;
-	margin-inline-end: var(--dt-size-negative-450);
+	margin-inline-end: var(--dt-spacing-150-negative);
 	font-size: 100%;
-	letter-spacing: var(--dt-size-negative-100);
-	border-inline-end: var(--dt-size-100) solid var(--dt-color-black-600);
+	letter-spacing: var(--dt-spacing-1-negative);
+	border-inline-end: var(--dt-size-border-100) solid var(--dt-color-black-600);
 	user-select: none;
 	pointer-events: none;
 }
 
 .command-line-prompt > span::before {
 	display: block;
-	padding-inline-end: var(--dt-size-400);
+	padding-inline-end: var(--dt-spacing-100);
 	color: var(--dt-color-black-600);
 	content: ' ';
 }

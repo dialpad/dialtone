@@ -35,7 +35,7 @@
 
     // Caption styles
     .d-table__caption {
-      margin-block-end: var(--dt-size-400); // 8
+      margin-block-end: var(--dt-spacing-100); // 8
       color: var(--table-th-color-text);
       font-weight: var(--dt-font-weight-bold);
       font-size: var(--table-font-size);
@@ -44,7 +44,7 @@
 
     // Table Head Styles
     thead {
-        border-block-end: var(--dt-size-200) solid var(--table-color-border);
+        border-block-end: var(--dt-size-border-200) solid var(--table-color-border);
 
         // Column Header Styles
         th {
@@ -68,9 +68,9 @@
     // Header & Cell Styles
     th,
     td {
-        padding: var(--dt-size-500); // 16
+        padding: var(--dt-spacing-200); // 16
         text-align: start;
-        border-block-end: var(--dt-size-100) solid var(--table-color-border);
+        border-block-end: var(--dt-size-border-100) solid var(--table-color-border);
     }
 
     // Nested Table Body, First Row Styles, used internally on the Dialtone site
@@ -78,7 +78,7 @@
         // Header & Cell Styles
         td,
         th {
-            border-block-start: var(--dt-size-200) solid var(--table-color-border);
+            border-block-start: var(--dt-size-border-200) solid var(--table-color-border);
         }
     }
 
