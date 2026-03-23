@@ -7,6 +7,15 @@
       <page-header />
       <article class="dialtone-content__article">
         <!-- eslint-disable-next-line vue/no-undef-components -->
+        <div
+          v-if="$page.path.startsWith('/components') && !$frontmatter.no_preview"
+          id="preview-header"
+        >
+          <h2 class="d-vi-visible-sr">
+            Preview
+          </h2>
+        </div>
+        <!-- eslint-disable-next-line vue/no-undef-components -->
         <content />
       </article>
       <dt-stack
