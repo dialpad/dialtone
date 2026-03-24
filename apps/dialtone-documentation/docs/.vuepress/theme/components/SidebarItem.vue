@@ -56,7 +56,7 @@
         <dt-stack
           as="ul"
           :aria-labelledby="labelId"
-          gap="200"
+          gap="25"
           :class="{
             'd-pt4': depth === 0 || depth === 1,
           }"
