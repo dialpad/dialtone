@@ -606,6 +606,20 @@ describe('DtInput tests', () => {
         expect(wrapper.emitted()['update:modelValue'][0][0]).toBe('か');
       });
 
+      it('should not double-emit when input fires after compositionend (Firefox order)', async () => {
+        await nativeInput.trigger('compositionstart');
+        nativeInput.element.value = 'か';
+        // Firefox fires compositionend then input — dispatch both synchronously
+        // before the microtask that clears justEndedComposition can run
+        nativeInput.element.dispatchEvent(new Event('compositionend', { bubbles: true }));
+        nativeInput.element.dispatchEvent(new Event('input', { bubbles: true }));
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.emitted().input).toHaveLength(1);
+        expect(wrapper.emitted()['update:modelValue']).toHaveLength(1);
+        expect(wrapper.emitted().input[0][0]).toBe('か');
+      });
+
       it('should resume normal emission after composition ends', async () => {
         await nativeInput.trigger('compositionstart');
         await nativeInput.trigger('compositionend');
@@ -640,6 +654,18 @@ describe('DtInput tests', () => {
 
         expect(wrapper.emitted().input[0][0]).toBe('か');
         expect(wrapper.emitted()['update:modelValue'][0][0]).toBe('か');
+      });
+
+      it('should not double-emit when input fires after compositionend (Firefox order)', async () => {
+        await nativeTextarea.trigger('compositionstart');
+        nativeTextarea.element.value = 'か';
+        nativeTextarea.element.dispatchEvent(new Event('compositionend', { bubbles: true }));
+        nativeTextarea.element.dispatchEvent(new Event('input', { bubbles: true }));
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.emitted().input).toHaveLength(1);
+        expect(wrapper.emitted()['update:modelValue']).toHaveLength(1);
+        expect(wrapper.emitted().input[0][0]).toBe('か');
       });
 
       it('should not override textarea value via modelValue watcher while composing', async () => {
