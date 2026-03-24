@@ -194,8 +194,11 @@ function searchBySlots(regexArray: RegExp[], components: Component[]): SearchRes
 export function searchComponents(query: string, components: Component[]): { results: SearchResult[]; notes: string[] } {
   console.error(`\n[COMPONENT SEARCH DEBUG] Query: "${query}"`);
 
-  // Normalize query: lowercase, replace hyphens/slashes with spaces
-  const normalized = query.toLowerCase().replace(/[/-]/g, ' ');
+  // Normalize query: split camelCase, lowercase, replace hyphens/slashes with spaces
+  const normalized = query
+    .replace(/([a-z])([A-Z])/g, '$1 $2')  // split camelCase: DtButton → Dt Button
+    .toLowerCase()
+    .replace(/[/-]/g, ' ');
   const words = normalized.split(/\s+/).filter(w => w.length > 0);
 
   // Create regex for each word with WORD BOUNDARIES
