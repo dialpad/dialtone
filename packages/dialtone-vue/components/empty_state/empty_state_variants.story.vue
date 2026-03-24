@@ -1,5 +1,5 @@
 <template>
-  <dt-stack gap="700">
+  <dt-stack gap="800">
     <!-- Large -->
     <section>
       <p class="d-label-sm d-fc-tertiary d-mb8">
@@ -14,7 +14,7 @@
           <dt-illustration name="mind" />
         </template>
         <template #body>
-          <div class="d-mt8 d-stack d-stack--row d-stack--gap-300">
+          <div class="d-mt8 d-stack d-stack--row d-stack--gap-50">
             <button class="d-btn">
               Cancel
             </button>

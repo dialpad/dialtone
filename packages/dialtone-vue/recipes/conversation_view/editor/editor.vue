@@ -10,13 +10,13 @@
     <dt-stack
       class="d-recipe-editor__top-bar"
       direction="row"
-      gap="450"
+      gap="150"
     >
       <dt-stack
         v-for="buttonGroup in buttonGroups"
         :key="buttonGroup.key"
         direction="row"
-        gap="300"
+        gap="50"
       >
         <template v-for="button in buttonGroup.buttonGroup">
           <!-- Font Style Popover -->
@@ -235,7 +235,7 @@
       <dt-stack
         v-if="linkButton.showBtn"
         direction="row"
-        gap="300"
+        gap="50"
       >
         <dt-popover
           :open="showLinkInput"
@@ -299,7 +299,7 @@
           <template #footerContent>
             <dt-stack
               direction="row"
-              gap="300"
+              gap="50"
               class="d-recipe-editor__popover-footer"
             >
               <dt-button

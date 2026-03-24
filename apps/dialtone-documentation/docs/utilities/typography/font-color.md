@@ -11,8 +11,8 @@ keywords: ["text color", "foreground color", "font colour"]
 Use [DtText's](/components/text.html#tone) `tone` prop to declare the text's tone, which will map to a foreground color. By default, the tone is inherited from its parent.
 
 <code-well-header>
-  <dt-stack gap="500" direction="row">
-    <dt-stack gap="300" class="d-py8 d-px16 d-bgc-primary d-bar4">
+  <dt-stack gap="200" direction="row">
+    <dt-stack gap="50" class="d-py8 d-px16 d-bgc-primary d-bar4">
       <dt-text>primary</dt-text>
       <dt-text tone="secondary">secondary</dt-text>
       <dt-text tone="tertiary">tertiary</dt-text>
@@ -25,7 +25,7 @@ Use [DtText's](/components/text.html#tone) `tone` prop to declare the text's ton
       <dt-text tone="critical">critical</dt-text>
       <dt-text tone="critical-strong">critical-strong</dt-text>
     </dt-stack>
-    <dt-stack gap="300" class="d-py8 d-px16 d-bgc-primary-inverted d-bar4">
+    <dt-stack gap="50" class="d-py8 d-px16 d-bgc-primary-inverted d-bar4">
       <dt-text tone="primary-inverted">primary-inverted</dt-text>
       <dt-text tone="secondary-inverted">secondary-inverted</dt-text>
       <dt-text tone="tertiary-inverted">tertiary-inverted</dt-text>

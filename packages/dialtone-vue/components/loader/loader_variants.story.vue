@@ -1,14 +1,14 @@
 <template>
   <dt-stack
     class="d-br d-pr16"
-    gap="500"
+    gap="200"
   >
     <h2>Sizes</h2>
     <dt-stack
       v-for="size in sizes"
       :key="size"
       direction="row"
-      gap="500"
+      gap="200"
     >
       {{ size }}
       <dt-loader

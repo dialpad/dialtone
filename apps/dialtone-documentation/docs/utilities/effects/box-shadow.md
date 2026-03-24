@@ -10,7 +10,7 @@ Use `d-bs-{n}` to add an outer box shadow to an element.
 
 <code-well-header>
   <dt-stack
-    gap="600"
+    gap="400"
     :direction="{ 'default': 'column', 'lg': 'row' }"
   >
     <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bar8 d-bgc-primary" v-for="className in boxShadowSizes" :class="`d-bs-${className}`">d-bs-{{ className }}</dt-stack>

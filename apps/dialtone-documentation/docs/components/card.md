@@ -23,7 +23,7 @@ keywords: ["panel", "container", "box", "d-card", "DtCard", "dt-card", "tile", "
       Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
     </div>
     <div class="d-card__footer">
-      <dt-stack direction="row" gap="400">
+      <dt-stack direction="row" gap="100">
         <button type="button" class="d-btn d-btn--sm d-btn--outlined">Button</button>
       </dt-stack>
     </div>
@@ -168,7 +168,7 @@ showHtmlWarning />
       Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
     </div>
     <div class="d-card__footer">
-      <dt-stack direction="row" gap="400">
+      <dt-stack direction="row" gap="100">
         <button type="button" class="d-btn d-btn--sm d-btn--outlined">Button</button>
       </dt-stack>
     </div>
@@ -182,7 +182,7 @@ htmlCode='
     Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
   </div>
   <div class="d-card__footer">
-    <dt-stack direction="row" gap="400">
+    <dt-stack direction="row" gap="100">
       <button type="button" class="d-btn d-btn--sm d-btn--outlined">Button</button>
     </dt-stack>
   </div>
@@ -248,7 +248,7 @@ showHtmlWarning />
       Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
     </div>
     <div class="d-card__footer">
-      <dt-stack direction="row" gap="400">
+      <dt-stack direction="row" gap="100">
         <button type="button" class="d-btn d-btn--sm d-btn--outlined">Button</button>
       </dt-stack>
     </div>
@@ -270,7 +270,7 @@ htmlCode='
     Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
   </div>
   <div class="d-card__footer">
-    <dt-stack direction="row" gap="400">
+    <dt-stack direction="row" gap="100">
       <button type="button" class="d-btn d-btn--sm d-btn--outlined">Button</button>
     </dt-stack>
   </div>

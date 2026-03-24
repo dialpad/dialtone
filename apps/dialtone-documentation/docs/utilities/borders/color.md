@@ -14,7 +14,7 @@ Use `d-bc-{color}` to set an element's border color.
 
 <code-well-header>
   <dt-stack
-    gap="500"
+    gap="200"
     :direction="{ 'default': 'column', 'md': 'row' }"
     class="d-fw-wrap"
   >
@@ -37,7 +37,7 @@ Use `d-bc-{color}` to set an element's border color.
 Use `h:d-bc-{color}` to change an element's border color spot on `:hover`.
 
 <code-well-header>
-  <dt-stack direction="row" gap="500">
+  <dt-stack direction="row" gap="200">
     <dt-button kind="unstyled" class="d-p16 d-ba d-baw2 h:d-bc-moderate">
       Hover over me
     </dt-button>
@@ -61,7 +61,7 @@ Use `h:d-bc-{color}` to change an element's border color spot on `:hover`.
 Use `f:d-bc-{color}` to change an element's border color when in `:focus` or `:focus-within` states.
 
 <code-well-header>
-  <dt-stack direction="row" gap="500">
+  <dt-stack direction="row" gap="200">
     <dt-button kind="unstyled" class="d-p16 d-ba d-baw2 f:d-bc-moderate">
       Focus me
     </dt-button>
@@ -86,7 +86,7 @@ Use `fv:d-bc-{color}` to change an element's border color when in `:focus-visibl
 .
 
 <code-well-header>
-  <dt-stack direction="row" gap="500">
+  <dt-stack direction="row" gap="200">
     <dt-button kind="unstyled" class="d-p16 d-ba d-baw2 fv:d-bc-moderate">
       Keyboard focus me
     </dt-button>
@@ -111,7 +111,7 @@ Use `d-bco{n}` to change the border color opacity value.
 
 <code-well-header>
   <dt-stack
-    gap="500"
+    gap="200"
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
     <div
@@ -141,7 +141,7 @@ You can also change the border color opacity value on `:hover`
 
 <code-well-header>
   <dt-stack
-    gap="500"
+    gap="200"
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
     <dt-button kind="unstyled" class="d-p16 d-ba d-baw2 d-bc-critical h:d-bco50">

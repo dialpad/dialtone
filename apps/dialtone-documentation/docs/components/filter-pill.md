@@ -20,7 +20,7 @@ keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFil
 ### Base
 
 <code-well-header>
-  <dt-stack direction="row" gap="400">
+  <dt-stack direction="row" gap="100">
       <dt-filter-pill
         label="Simple example"
         v-model="baseFilters"
@@ -38,7 +38,7 @@ showHtmlWarning />
 ### Disabled
 
 <code-well-header>
-  <dt-stack direction="row" gap="400">
+  <dt-stack direction="row" gap="100">
     <dt-filter-pill label="Disabled filter" disabled ref="disabledFilter"></dt-filter-pill>
   </dt-stack>
 </code-well-header>
@@ -51,7 +51,7 @@ showHtmlWarning />
 ### Active
 
 <code-well-header>
-  <dt-stack direction="row" gap="400">
+  <dt-stack direction="row" gap="100">
       <dt-filter-pill
         label="Active example"
         v-model="activeFilters"
@@ -72,7 +72,7 @@ You can handle the filter resetting, the button will show whenever an active fil
 It will emit the `reset` event when clicked.
 
 <code-well-header>
-  <dt-stack direction="row" gap="400">
+  <dt-stack direction="row" gap="100">
     <dt-filter-pill
       label="Clearable example"
       ref="clearableExample"
@@ -92,7 +92,7 @@ showHtmlWarning />
 Setting the `hide-clear` prop will hide the reset/clear button in case you don't want your filter be reset.
 
 <code-well-header>
-  <dt-stack direction="row" gap="400">
+  <dt-stack direction="row" gap="100">
     <dt-filter-pill
       label="Non Clearable example"
       ref="clearableExample"
@@ -111,7 +111,7 @@ showHtmlWarning />
 ### Sizes
 
 <code-well-header>
-  <dt-stack direction="row" gap="300">
+  <dt-stack direction="row" gap="50">
     <dt-filter-pill
       v-for="size in sizes"
       :key="size"
@@ -132,7 +132,7 @@ showHtmlWarning />
 Using the "default" slot, you're able to override the `label` prop
 
 <code-well-header>
-  <dt-stack direction="row" gap="400">
+  <dt-stack direction="row" gap="100">
     <dt-filter-pill
       ref="clearableExample"
       v-model="defaultSlotFilters"
@@ -159,7 +159,7 @@ Using the "content" slot, you're able to override the popover content, this enab
 to create custom filter pill.
 
 <code-well-header>
-  <dt-stack direction="row" gap="400">
+  <dt-stack direction="row" gap="100">
     <dt-filter-pill
       label="With content slot"
       ref="clearableExample"

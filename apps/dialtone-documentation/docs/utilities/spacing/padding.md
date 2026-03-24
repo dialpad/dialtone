@@ -21,7 +21,7 @@ keywords: ["inner spacing", "inset"]
 ## Add Padding to a Single Side
 
 <code-well-header>
-  <dt-stack direction="row" justify="center" gap="550" class="d-fw-wrap d-w100p">
+  <dt-stack direction="row" justify="center" gap="300" class="d-fw-wrap d-w100p">
     <div class="d-as-center d-pt12 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bbr4 d-code--md">d-pt12</dt-stack></div>
     <div class="d-as-center d-pr16 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-brl4 d-code--md">d-pr16</dt-stack></div>
     <div class="d-as-center d-pb24 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-btr4 d-code--md">d-pb24</dt-stack></div>

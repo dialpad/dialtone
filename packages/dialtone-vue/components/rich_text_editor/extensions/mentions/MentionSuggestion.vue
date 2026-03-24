@@ -2,7 +2,7 @@
   <dt-stack
     direction="row"
     class="d-mention-suggestion__container"
-    gap="400"
+    gap="100"
   >
     <dt-avatar
       :full-name="name"
@@ -14,7 +14,7 @@
     />
     <dt-stack
       class="d-mention-suggestion__details-container"
-      gap="100"
+      gap="1"
     >
       <!-- eslint-disable-next-line vue/no-restricted-class -->
       <span class="d-mention-suggestion__name">
@@ -23,7 +23,7 @@
       <dt-stack
         v-if="showDetails"
         direction="row"
-        gap="300"
+        gap="50"
       >
         <dt-text
           v-if="presenceText"

@@ -10,7 +10,7 @@ keywords: ["label","tag","indicator","count","d-badge","DtBadge","dt-badge"]
 ---
 
 <code-well-header>
-  <dt-stack direction="row" gap="400" align="center">
+  <dt-stack direction="row" gap="100" align="center">
     <dt-badge text="Label"></dt-badge>
     <dt-badge kind="count" text="1"></dt-badge>
   </dt-stack>
@@ -197,7 +197,7 @@ showHtmlWarning />
 ## Outlined
 
 <code-well-header bgclass="d-bgc-primary">
-  <dt-stack direction="row" gap="400">
+  <dt-stack direction="row" gap="100">
     <dt-badge text="Label" outlined></dt-badge>
     <dt-badge text="Label" type="info" outlined></dt-badge>
     <dt-badge text="Label" type="success" outlined></dt-badge>
@@ -243,7 +243,7 @@ showHtmlWarning />
 At the moment, only the `bulletin` type has a subtle variant.
 
 <code-well-header>
-  <dt-stack direction="row" gap="400">
+  <dt-stack direction="row" gap="100">
     <dt-badge text="Label" type="bulletin" subtle></dt-badge>
     <dt-badge text="Label" type="bulletin" subtle outlined></dt-badge>
     <dt-badge text="1" type="bulletin" subtle kind="count"></dt-badge>
@@ -269,7 +269,7 @@ showHtmlWarning />
 ## Icon
 
 <code-well-header bgclass="d-bgc-primary">
-  <dt-stack direction="row" gap="400">
+  <dt-stack direction="row" gap="100">
     <dt-badge ref="iconExample" type="default" text="Label" kind="label">
       <template #startIcon="{ iconSize }">
         <dt-icon-lightning-bolt :size="iconSize"></dt-icon-lightning-bolt>
@@ -320,45 +320,45 @@ showHtmlWarning />
 Decorative badges label and classify items for quick recognition.
 
 <code-well-header bgclass="d-bgc-primary">
-  <dt-stack direction="row" gap="500" align="baseline">
-    <dt-stack gap="500">
+  <dt-stack direction="row" gap="200" align="baseline">
+    <dt-stack gap="200">
       <dt-text kind="label" size="md" density="200">Black</dt-text>
       <dt-badge text="Label" decoration="black-400"></dt-badge>
       <dt-badge text="Label" decoration="black-500"></dt-badge>
       <dt-badge text="Label" decoration="black-900"></dt-badge>
     </dt-stack>
-    <dt-stack gap="500">
+    <dt-stack gap="200">
       <dt-text kind="label" size="md" density="200">Red</dt-text>
       <dt-badge text="Label" decoration="red-200"></dt-badge>
       <dt-badge text="Label" decoration="red-300"></dt-badge>
       <dt-badge text="Label" decoration="red-400"></dt-badge>
     </dt-stack>
-    <dt-stack gap="500">
+    <dt-stack gap="200">
       <dt-text kind="label" size="md" density="200">Purple</dt-text>
       <dt-badge text="Label" decoration="purple-200"></dt-badge>
       <dt-badge text="Label" decoration="purple-300"></dt-badge>
       <dt-badge text="Label" decoration="purple-400"></dt-badge>
       <dt-badge text="Label" decoration="purple-500"></dt-badge>
     </dt-stack>
-    <dt-stack gap="500">
+    <dt-stack gap="200">
       <dt-text kind="label" size="md" density="200">Blue</dt-text>
       <dt-badge text="Label" decoration="blue-200"></dt-badge>
       <dt-badge text="Label" decoration="blue-300"></dt-badge>
       <dt-badge text="Label" decoration="blue-400"></dt-badge>
     </dt-stack>
-    <dt-stack gap="500">
+    <dt-stack gap="200">
       <dt-text kind="label" size="md" density="200">Green</dt-text>
       <dt-badge text="Label" decoration="green-300"></dt-badge>
       <dt-badge text="Label" decoration="green-400"></dt-badge>
       <dt-badge text="Label" decoration="green-500"></dt-badge>
     </dt-stack>
-    <dt-stack gap="500">
+    <dt-stack gap="200">
       <dt-text kind="label" size="md" density="200">Gold</dt-text>
       <dt-badge text="Label" decoration="gold-300"></dt-badge>
       <dt-badge text="Label" decoration="gold-400"></dt-badge>
       <dt-badge text="Label" decoration="gold-500"></dt-badge>
     </dt-stack>
-    <dt-stack gap="500">
+    <dt-stack gap="200">
       <dt-text kind="label" size="md" density="200">Magenta</dt-text>
       <dt-badge text="Label" decoration="magenta-200"></dt-badge>
       <dt-badge text="Label" decoration="magenta-300"></dt-badge>
@@ -429,8 +429,8 @@ showHtmlWarning />
 ### Label
 
 <code-well-header bgclass="d-bgc-primary">
-  <dt-stack gap="500">
-    <dt-stack direction="row" gap="400">
+  <dt-stack gap="200">
+    <dt-stack direction="row" gap="100">
       <dt-badge text="Co-host"></dt-badge>
       <dt-badge text="Customer"></dt-badge>
       <dt-badge text="Locked">
@@ -444,29 +444,29 @@ showHtmlWarning />
         </template>
       </dt-badge>
     </dt-stack>
-    <dt-stack direction="row" gap="400">
+    <dt-stack direction="row" gap="100">
       <dt-badge text="In progress" type="info"></dt-badge>
       <dt-badge text="Beta" type="info"></dt-badge>
       <dt-badge text="Draft" type="info"></dt-badge>
     </dt-stack>
-    <dt-stack direction="row" gap="400">
+    <dt-stack direction="row" gap="100">
       <dt-badge text="Overdue" type="warning"></dt-badge>
     </dt-stack>
-    <dt-stack direction="row" gap="400">
+    <dt-stack direction="row" gap="100">
       <dt-badge text="Resolved" type="success"></dt-badge>
     </dt-stack>
-    <dt-stack direction="row" gap="400">
+    <dt-stack direction="row" gap="100">
       <dt-badge text="Recording" type="critical">
         <template #startIcon="{ iconSize }">
           <dt-icon-record-filled :size="iconSize"></dt-icon-record-filled>
         </template>
       </dt-badge>
     </dt-stack>
-    <dt-stack direction="row" gap="400">
+    <dt-stack direction="row" gap="100">
       <dt-badge text="Live" type="bulletin"></dt-badge>
       <dt-badge text="Presenter" type="bulletin"></dt-badge>
     </dt-stack>
-    <dt-stack direction="row" gap="400">
+    <dt-stack direction="row" gap="100">
       <dt-badge type="ai" text="Ai Notes"></dt-badge>
       <dt-badge type="ai" text="Ai Suggestion"></dt-badge>
       <dt-badge type="ai" text="Ai enabled"></dt-badge>
@@ -478,22 +478,22 @@ showHtmlWarning />
 ### Count
 
 <code-well-header bgclass="d-bgc-primary">
-  <dt-stack gap="500">
-    <dt-stack direction="row" gap="400">
+  <dt-stack gap="200">
+    <dt-stack direction="row" gap="100">
       <dt-badge kind="count" type="success" text="5%">
         <template #startIcon="{ iconSize }">
           <dt-icon-arrow-up :size="iconSize"></dt-icon-arrow-up>
         </template>
       </dt-badge>
     </dt-stack>
-    <dt-stack direction="row" gap="400">
+    <dt-stack direction="row" gap="100">
       <dt-badge kind="count" type="critical" text="-12%">
         <template #startIcon="{ iconSize }">
           <dt-icon-arrow-down :size="iconSize"></dt-icon-arrow-down>
         </template>
       </dt-badge>
     </dt-stack>
-    <dt-stack direction="row" gap="400">
+    <dt-stack direction="row" gap="100">
       <dt-badge kind="count" type="bulletin" text="1"></dt-badge>
       <dt-badge kind="count" type="bulletin" text="18"></dt-badge>
       <dt-badge kind="count" type="bulletin" text="99+"></dt-badge>

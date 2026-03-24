@@ -26,11 +26,11 @@
           d-mxn10
           d-bs-card
         "
-        gap="400"
+        gap="100"
       >
         <dt-stack
           class="d-px8"
-          gap="400"
+          gap="100"
           direction="row"
           justify="between"
           align="baseline"
@@ -52,7 +52,7 @@
               rel="noopener noreferrer"
             >
               <dt-stack
-                gap="300"
+                gap="50"
                 direction="row"
               >
                 Open in new window
@@ -66,7 +66,7 @@
         >
           <dt-stack
             direction="row"
-            gap="400"
+            gap="100"
             class="d-pb8 d-px8"
           >
             <dt-link
@@ -92,11 +92,11 @@
           :id="`ks-${section.id}`"
           :key="section.id"
           as="section"
-          gap="500"
+          gap="200"
           class="d-py32 kitchen-sink__section"
         >
           <dt-stack
-            gap="400"
+            gap="100"
             direction="row"
             justify="between"
             align="baseline"
@@ -118,7 +118,7 @@
             v-for="variant in section.variants"
             :key="variant.name"
             class="d-ba d-bc-subtle d-p16"
-            gap="400"
+            gap="100"
           >
             <dt-text
               size="xs"

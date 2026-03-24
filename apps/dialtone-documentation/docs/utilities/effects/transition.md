@@ -21,7 +21,7 @@ Use `d-t` to add a transition to an element.
 Use `d-td{n}` change an element's `transition-delay` from it's default `50ms` length.
 
 <code-well-header>
-  <dt-stack direction="row" gap="500">
+  <dt-stack direction="row" gap="200">
     <dt-button kind="unstyled" class="d-p16 d-bar8 d-bgc-moderate h:d-bgc-critical h:d-bs-md h:d-fc-critical d-t d-td0  ">0ms</dt-button>
     <dt-button kind="unstyled" class="d-p16 d-bar8 d-bgc-moderate h:d-bgc-critical h:d-bs-md h:d-fc-critical d-t        ">50ms</dt-button>
     <dt-button kind="unstyled" class="d-p16 d-bar8 d-bgc-moderate h:d-bgc-critical h:d-bs-md h:d-fc-critical d-t d-td100">100ms</dt-button>
@@ -45,7 +45,7 @@ Use `d-td{n}` change an element's `transition-delay` from it's default `50ms` le
 Use `d-ttf-{n}` change an element's `transition-timing-function` (aka easing) from it's default Quad Ease In, Ease Out value.
 
 <code-well-header>
-  <dt-stack direction="row" gap="500">
+  <dt-stack direction="row" gap="200">
     <dt-button kind="unstyled" class="d-p16 d-bar8 d-bgc-moderate h:d-bgc-critical h:d-bs-md h:d-fc-critical d-t d-td300                ">Ease In, Ease Out</dt-button>
     <dt-button kind="unstyled" class="d-p16 d-bar8 d-bgc-moderate h:d-bgc-critical h:d-bs-md h:d-fc-critical d-t d-td300 d-ttf-out      ">Ease Out</dt-button>
     <dt-button kind="unstyled" class="d-p16 d-bar8 d-bgc-moderate h:d-bgc-critical h:d-bs-md h:d-fc-critical d-t d-td300 d-ttf-out-quint">Ease Out Quint</dt-button>
@@ -63,7 +63,7 @@ Use `d-ttf-{n}` change an element's `transition-timing-function` (aka easing) fr
 Use `d-tp-{n}` change an what items within an element are transitioned.
 
 <code-well-header>
-  <dt-stack direction="row" gap="500">
+  <dt-stack direction="row" gap="200">
     <dt-button kind="unstyled" class="d-p16 d-bar8 d-bgc-moderate h:d-bgc-critical h:d-bs-md h:d-fc-critical d-t d-td300 d-ttf-out-quint ">All</dt-button>
     <dt-button kind="unstyled" class="d-p16 d-bar8 d-bgc-moderate h:d-bgc-critical h:d-bs-md h:d-fc-critical d-t d-td300 d-ttf-out-quint h:d-o50 d-tp-o">Opacity</dt-button>
     <dt-button kind="unstyled" class="d-p16 d-bar8 d-bgc-moderate h:d-bgc-critical h:d-bs-md h:d-fc-critical d-t d-td300 d-ttf-out-quint d-tp-bs">Box shadow</dt-button>

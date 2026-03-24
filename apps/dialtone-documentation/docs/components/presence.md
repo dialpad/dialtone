@@ -10,7 +10,7 @@ keywords: ["status", "online", "availability", "d-presence", "DtPresence", "dt-p
 ---
 
 <code-well-header>
-  <dt-stack direction="row" gap="500">
+  <dt-stack direction="row" gap="200">
     <example-presence presence="active"/>
     <example-presence presence="away"/>
     <example-presence presence="busy"/>

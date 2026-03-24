@@ -7,7 +7,7 @@ keywords: ["click through", "mouse events", "touch events"]
 ## Pointer Event Classes
 
 <code-well-header>
-  <dt-stack direction="row" gap="400">
+  <dt-stack direction="row" gap="100">
     <div class="d-p16 d-bgc-moderate d-code--sm" v-for="{ class: className } in pointerEvents.slice(0, 3)" :class="className">.{{ className }}</div>
   </dt-stack>
 </code-well-header>
@@ -23,9 +23,9 @@ keywords: ["click through", "mouse events", "touch events"]
 Use the `user-select` property to control whether the user can select text.
 
 <code-well-header>
-  <dt-stack direction="row" gap="400">
+  <dt-stack direction="row" gap="100">
     <div v-for="{ class: className } in pointerEvents.slice(3)" class="d-p16 d-bgc-moderate d-code--sm" :class="className">
-      <dt-stack gap="400" class="d-ta-center">
+      <dt-stack gap="100" class="d-ta-center">
         <div>.{{ className }}</div>
         <div>Try to select my text.</div>
       </dt-stack>

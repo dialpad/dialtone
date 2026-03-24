@@ -40,7 +40,7 @@ Text opacity CSS Utilities won't be inherited by its children. A font-color util
 
 <div class="d-d-grid d-g16 lg:d-g-cols2">
   <div>
-    <dt-stack direction="row" gap="400" class="d-fc-warning d-mb8">
+    <dt-stack direction="row" gap="100" class="d-fc-warning d-mb8">
       <dt-icon name="alert-triangle" size="400" />
       <strong>Text opacity utility classes don't inherit colors.</strong>
     </dt-stack>
@@ -61,7 +61,7 @@ Text opacity CSS Utilities won't be inherited by its children. A font-color util
 
   </div>
   <div>
-<dt-stack direction="row" gap="400" class="d-fc-success d-mb8">
+<dt-stack direction="row" gap="100" class="d-fc-success d-mb8">
   <dt-icon name="check-circle" size="400" />
   <strong>Apply each utility class to the same element</strong>
 </dt-stack>

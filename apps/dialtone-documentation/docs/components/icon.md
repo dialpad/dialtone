@@ -68,7 +68,7 @@ The icon's color inherits from the parent's foreground color.
 <code-well-header>
 <div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols2 d-w100p">
   <dt-stack direction="row" align="center" justify="center">
-    <dt-stack :class="selectedColor" direction="row" as="div" gap="300">
+    <dt-stack :class="selectedColor" direction="row" as="div" gap="50">
       <dt-icon-settings size="300" />
       <dt-text>Settings</dt-text>
     </dt-stack>
@@ -93,12 +93,12 @@ When setting the color of an icon take these into consideration:
 
 <div class="d-gc1">
 <dt-stack direction="row" align="center" class="d-p16 d-hmn164 d-bar8" style="background: var(--dt-color-purple-100)">
-<dt-stack direction="row" as="section" gap="100" class="d-bgc-primary d-bc-default d-bar32 d-py8 d-px16 d-w100p">
-<dt-stack direction="row" as="section" gap="300" class="d-fl1">
+<dt-stack direction="row" as="section" gap="1" class="d-bgc-primary d-bc-default d-bar32 d-py8 d-px16 d-w100p">
+<dt-stack direction="row" as="section" gap="50" class="d-fl1">
 <dt-icon name="headphones" size="300" ariaLabel="Headphones icon" />
 <dt-text kind="body" truncate class="d-w100p d-wmx102">Ai Contact Center</dt-text>
 </dt-stack>
-<dt-stack direction="row" as="section" gap="300">
+<dt-stack direction="row" as="section" gap="50">
 <dt-icon class="d-fc-success" name="bell" size="200" ariaLabel="Bell Icon" />
 <dt-text kind="body" size="sm" tone="success">Available</dt-text>
 </dt-stack>
@@ -112,12 +112,12 @@ When setting the color of an icon take these into consideration:
 
 <div class="d-gc1">
 <dt-stack direction="row" align="center" class="d-bgc-critical-subtle-opaque d-p16 d-hmn164 d-bar8">
-<dt-stack direction="row" as="section" gap="100" class="d-bgc-primary d-bc-default d-bar32 d-py8 d-px16 d-w100p">
-<dt-stack direction="row" as="section" gap="300" class="d-fl1">
+<dt-stack direction="row" as="section" gap="1" class="d-bgc-primary d-bc-default d-bar32 d-py8 d-px16 d-w100p">
+<dt-stack direction="row" as="section" gap="50" class="d-fl1">
 <dt-icon name="headphones" size="300" ariaLabel="Headphones icon" />
 <dt-text kind="body" truncate class="d-w100p d-wmx102">Ai Contact Center</dt-text>
 </dt-stack>
-<dt-stack direction="row" as="section" gap="300">
+<dt-stack direction="row" as="section" gap="50">
 <dt-icon class="d-fc-critical" name="bell" size="200" ariaLabel="Bell Icon" />
 <dt-text kind="body" size="sm" tone="success">Available</dt-text>
 </dt-stack>
@@ -140,7 +140,7 @@ We encourage utilizing the [Stack component](/components/stack.md) for aligning 
 <code-well-header>
   <div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols2 d-w100p">
     <dt-stack direction="row" align="center" justify="center">
-      <dt-stack :direction="selectedDirection" class="d-fl-center" gap="300">
+      <dt-stack :direction="selectedDirection" class="d-fl-center" gap="50">
       <dt-icon-settings size="300" />
       <dt-text>Settings</dt-text>
       </dt-stack>
@@ -150,7 +150,7 @@ We encourage utilizing the [Stack component](/components/stack.md) for aligning 
 </code-well-header>
 
 ```html
-<dt-stack direction="row" class="d-fl-center" gap="300">
+<dt-stack direction="row" class="d-fl-center" gap="50">
   <dt-icon-settings size="300" />
   <dt-text>Settings</dt-text>
 </dt-stack>

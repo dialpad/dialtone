@@ -11,7 +11,7 @@ keywords: ["definition list", "key value", "dl", "d-description-list", "DtDescri
 <code-well-header>
   <div class="d-w332">
     <dt-description-list
-      gap="400"
+      gap="100"
       :items="items"
       direction="row"
     />
@@ -26,7 +26,7 @@ keywords: ["definition list", "key value", "dl", "d-description-list", "DtDescri
   <div class="d-w332">
     <dt-description-list
       ref="exampleDefault"
-      gap="400"
+      gap="100"
       :items="items"
       direction="row"
     />
@@ -38,7 +38,7 @@ keywords: ["definition list", "key value", "dl", "d-description-list", "DtDescri
 vueCode='
 <dt-description-list
   ref="descriptionList"
-  gap="400"
+  gap="100"
   :items="items"
   direction="row"
 />
@@ -51,7 +51,7 @@ vueCode='
   <div class="d-w332">
     <dt-description-list
       ref="exampleColumn"
-      gap="400"
+      gap="100"
       :items="items"
       direction="column"
     />
@@ -62,7 +62,7 @@ vueCode='
 :htmlCode="() => $refs.exampleColumn"
 vueCode='
 <dt-description-list
-  gap="400"
+  gap="100"
   :items="items"
   direction="column"
 />
@@ -75,7 +75,7 @@ vueCode='
   <div class="d-w332">
     <dt-description-list
       ref="exampleLongText"
-      gap="400"
+      gap="100"
       :items="longTextItems"
       direction="row"
     />
@@ -86,7 +86,7 @@ vueCode='
 :htmlCode="() => $refs.exampleLongText"
 vueCode='
 <dt-description-list
-  gap="400"
+  gap="100"
   :items="longTextItems"
   direction="row"
 />
@@ -99,7 +99,7 @@ vueCode='
   <div class="d-w332">
     <dt-description-list
       ref="exampleWithStyles"
-      gap="400"
+      gap="100"
       :items="items"
       direction="row"
       :termClass="[`d-fc-critical`, `d-fw-bold`]"
@@ -113,7 +113,7 @@ vueCode='
 vueCode='
 <dt-description-list
   ref="exampleWithStyles"
-  gap="400"
+  gap="100"
   :items="items"
   direction="row"
   :termClass="[`d-fc-critical`, `d-fw-bold`]"

@@ -49,7 +49,7 @@ keywords: ["anchor", "hyperlink", "url", "d-link", "DtLink", "dt-link", "text li
 ### Default
 
 <code-well-header>
-  <DtStack gap="400" ref="linkExample1">
+  <DtStack gap="100" ref="linkExample1">
     <dt-link href="#link">Base link</dt-link>
     <dt-link href="#link" kind="danger">Danger link</dt-link>
     <dt-link href="#link" kind="muted">Muted link</dt-link>
@@ -74,7 +74,7 @@ showHtmlWarning />
 ### Inverted
 
 <code-well-header bgclass="d-bgc-contrast">
-  <DtStack gap="400" ref="linkExample2">
+  <DtStack gap="100" ref="linkExample2">
     <dt-link href="#link" inverted>Inverted base link</dt-link>
     <dt-link href="#link" kind="danger" inverted>Inverted danger link</dt-link>
     <dt-link href="#link" kind="success" inverted>Inverted success link</dt-link>

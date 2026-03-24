@@ -67,7 +67,7 @@ showHtmlWarning />
 ### Variants
 
 <code-well-header>
-  <dt-stack gap="500" ref="variantsExample">
+  <dt-stack gap="200" ref="variantsExample">
     <dt-emoji-text-wrapper>
       <button class="d-btn d-btn--primary d-btn--danger">
         Button with shortcode :cry: emoji
@@ -99,7 +99,7 @@ showHtmlWarning />
 <code-example-tabs
 :htmlCode="() => $refs.variantsExample"
 vueCode='
-<dt-stack gap="500" ref="variantsExample">
+<dt-stack gap="200" ref="variantsExample">
   <dt-emoji-text-wrapper>
     <button class="d-btn d-btn--primary d-btn--danger">
       Button with shortcode :cry: emoji

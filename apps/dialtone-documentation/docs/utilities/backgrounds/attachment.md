@@ -10,7 +10,7 @@ This is the default behavior. Use `d-bga-scroll` to fix the <dt-link href="/asse
 
 <code-well-header>
   <div class="d-bar8 d-p16 d-w100p d-h216 d-bgr-none d-bgs-cover d-bga-scroll d-w100p d-of-auto" style="background-image: url('/assets/images/dp-sample-gradient.png')">
-    <dt-stack gap="400" class="d-fc-neutral-white">
+    <dt-stack gap="100" class="d-fc-neutral-white">
       <p>Curved rhythms often accompany lateral decisions, especially when considering the abstract potential of non-specific alignments. While typically unnoticed, these gentle shifts can accumulate meaning when framed in a context that remains undefined.</p>
       <p>Momentum builds where it doesn't, anchoring intent to unmeasured goals. As frameworks iterate without resolution, the pattern repeats—not identically, but recognizably. Every nuance appears significant until it drifts, leaving behind the shape of intent without its content. That distinction matters only when observation persists without anchoring.</p>
       <p>Transitions feel deliberate, though no threshold is ever clearly crossed. Echoes outlast their origin, and yet no moment stands alone when layered against ambient expectation.</p>
@@ -33,7 +33,7 @@ Use `d-bga-fixed` to fix the <dt-link href="/assets/images/dp-sample-gradient.pn
 
 <code-well-header>
   <div class="d-bar8 d-p16 d-w100p d-h216 d-bgr-none d-bgs-cover d-bga-fixed d-w100p d-of-auto" style="background-image: url('/assets/images/dp-sample-gradient.png')">
-    <dt-stack gap="400" class="d-fc-neutral-white">
+    <dt-stack gap="100" class="d-fc-neutral-white">
       <p>Curved rhythms often accompany lateral decisions, especially when considering the abstract potential of non-specific alignments. While typically unnoticed, these gentle shifts can accumulate meaning when framed in a context that remains undefined.</p>
       <p>Momentum builds where it doesn't, anchoring intent to unmeasured goals. As frameworks iterate without resolution, the pattern repeats—not identically, but recognizably. Every nuance appears significant until it drifts, leaving behind the shape of intent without its content. That distinction matters only when observation persists without anchoring.</p>
       <p>Transitions feel deliberate, though no threshold is ever clearly crossed. Echoes outlast their origin, and yet no moment stands alone when layered against ambient expectation.</p>
@@ -58,7 +58,7 @@ of the element rather than the viewable box.
 
 <code-well-header>
   <div class="d-bar8 d-p16 d-w100p d-h216 d-bgr-none d-bgs-cover d-bga-local d-w100p d-of-auto" style="background-image: url('/assets/images/dp-sample-gradient.png')">
-    <dt-stack gap="400" class="d-fc-neutral-white">
+    <dt-stack gap="100" class="d-fc-neutral-white">
       <p>Curved rhythms often accompany lateral decisions, especially when considering the abstract potential of non-specific alignments. While typically unnoticed, these gentle shifts can accumulate meaning when framed in a context that remains undefined.</p>
       <p>Momentum builds where it doesn't, anchoring intent to unmeasured goals. As frameworks iterate without resolution, the pattern repeats—not identically, but recognizably. Every nuance appears significant until it drifts, leaving behind the shape of intent without its content. That distinction matters only when observation persists without anchoring.</p>
       <p>Transitions feel deliberate, though no threshold is ever clearly crossed. Echoes outlast their origin, and yet no moment stands alone when layered against ambient expectation.</p>

@@ -265,7 +265,7 @@ showHtmlWarning />
 
 <code-example-tabs
 htmlCode='
-<div class="d-stack d-stack--gap-400">
+<div class="d-stack d-stack--gap-100">
   <p> Call Blocking &amp; Spam Protection </p>
   <div>
     <label>
@@ -318,7 +318,7 @@ htmlCode='
 </div>
 '
 vueCode='
-<dt-stack gap="400">
+<dt-stack gap="100">
   <p>...</p>
   <dt-checkbox
     name="option1"
@@ -367,7 +367,7 @@ showHtmlWarning />
 
 <code-example-tabs
 htmlCode='
-<div class="d-stack d-stack--gap-400">
+<div class="d-stack d-stack--gap-100">
   <p> Call Blocking &amp; Spam Protection </p>
   <div>
     <label>
@@ -423,7 +423,7 @@ htmlCode='
 </div>
 '
 vueCode='
-<dt-stack gap="400">
+<dt-stack gap="100">
   <p>...</p>
   <dt-checkbox
     name="option1"
@@ -478,7 +478,7 @@ showHtmlWarning />
 
 <code-example-tabs
 htmlCode='
-<div class="d-stack d-stack--gap-400">
+<div class="d-stack d-stack--gap-100">
   <p> Call Blocking &amp; Spam Protection </p>
   <div>
     <label>
@@ -546,7 +546,7 @@ htmlCode='
 </div>
 '
 vueCode='
-<dt-stack gap="400">
+<dt-stack gap="100">
   <p>...</p>
   <dt-checkbox
     name="option1"
@@ -578,7 +578,7 @@ showHtmlWarning />
 Use the `label-size` prop to override the default label size.
 
 <code-well-header>
-  <dt-stack gap="400">
+  <dt-stack gap="100">
     <dt-checkbox name="sizeXs" value="Value" label="Extra small label" label-size="xs" />
     <dt-checkbox name="sizeSm" value="Value" label="Small label" label-size="sm" />
     <dt-checkbox name="sizeMd" value="Value" label="Medium label (default)" label-size="md" />

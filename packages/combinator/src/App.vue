@@ -1,6 +1,6 @@
 <template>
   <dt-stack
-    gap="500"
+    gap="200"
     class="d-ai-center"
   >
     <dtc-suggestion

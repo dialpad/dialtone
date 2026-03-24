@@ -55,7 +55,7 @@ Use `d-ls-reset` to reset the margin, padding, and list-style-type of a list. Re
 Use `d-lst-{none|disc|circle|decimal|content|none}` to change a list item's bullet styling.
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
-  <dt-stack gap="400">
+  <dt-stack gap="100">
     <p>Paragraph of text.</p>
     <ul class="d-pl16">
       <li class="d-lst-disc"><strong>disc</strong> list item</li>
@@ -85,7 +85,7 @@ Use `d-lst-{none|disc|circle|decimal|content|none}` to change a list item's bull
 </code-well-header>
 
 ```html
-<dt-stack gap="400">
+<dt-stack gap="100">
   <p>Paragraph of text.</p>
   <ul class="d-pl16">
     <li class="d-lst-disc"><strong>disc</strong> list item</li>
@@ -119,7 +119,7 @@ Use `d-lst-{none|disc|circle|decimal|content|none}` to change a list item's bull
 Use the `start` attribute for an `<ol>` to set its starting number.
 
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
-  <dt-stack gap="400">
+  <dt-stack gap="100">
     <p>Paragraph of text.</p>
     <ol class="d-pl24">
       <li class="d-lst-decimal">Decimal list item</li>
@@ -137,7 +137,7 @@ Use the `start` attribute for an `<ol>` to set its starting number.
 
 ```html
 <code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
-  <dt-stack gap="400">
+  <dt-stack gap="100">
     <p>Paragraph of text.</p>
     <ol class="d-pl24">
       <li class="d-lst-decimal">Decimal list item</li>

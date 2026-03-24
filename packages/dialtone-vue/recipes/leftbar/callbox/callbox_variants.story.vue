@@ -157,7 +157,7 @@
       <template #subtitle>
         <dt-stack
           direction="row"
-          gap="300"
+          gap="50"
           class="d-ai-center"
         >
           <dt-icon-share-screen size="100" />
@@ -205,7 +205,7 @@
       <template #subtitle>
         <dt-stack
           direction="row"
-          gap="300"
+          gap="50"
           class="d-ai-center"
         >
           <dt-icon-share-screen size="100" />
@@ -235,7 +235,7 @@
       <template #subtitle>
         <dt-stack
           direction="row"
-          gap="300"
+          gap="50"
         >
           <dt-stack
             direction="row"
@@ -299,7 +299,7 @@
       <template #subtitle>
         <dt-stack
           direction="row"
-          gap="300"
+          gap="50"
           class="d-ai-center"
         >
           <dt-icon-share-screen size="100" />
@@ -336,7 +336,7 @@
           <template #default>
             <dt-stack
               direction="row"
-              gap="400"
+              gap="100"
               class="d-pl2"
             >
               <dt-stack
@@ -371,7 +371,7 @@
       <template #subtitle>
         <dt-stack
           direction="row"
-          gap="300"
+          gap="50"
           class="d-ai-center"
         >
           <dt-icon-share-screen size="100" />

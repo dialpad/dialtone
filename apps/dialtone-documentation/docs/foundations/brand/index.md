@@ -8,7 +8,7 @@ keywords: ["brand", "branding", "identity", "mark", "dialpad logo"]
 ---
 
 
-<dt-stack gap="650" class="d-mt48">
+<dt-stack gap="600" class="d-mt48">
   <svg-loader name="logo--negative-space" class="d-bar16" />
   <div>
 <h2 class="d-docsite--header-3">the Spark</h2>

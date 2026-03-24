@@ -1,19 +1,19 @@
 <template>
   <dt-stack
     direction="column"
-    gap="500"
+    gap="200"
   >
     <dt-stack>
       <h4>Value</h4>
       <dt-stack
         direction="row"
-        gap="500"
+        gap="200"
         align="center"
       >
         <dt-stack
           v-for="v in [0, 25, 50, 75, 100]"
           :key="v"
-          gap="300"
+          gap="50"
           align="center"
         >
           <span class="d-code--sm">{{ v }}%</span>
@@ -28,13 +28,13 @@
       <h4>Size</h4>
       <dt-stack
         direction="row"
-        gap="500"
+        gap="200"
         align="start"
       >
         <dt-stack
           v-for="size in Object.keys(PROGRESS_CIRCLE_SIZES)"
           :key="size"
-          gap="300"
+          gap="50"
           align="center"
         >
           <span class="d-code--sm">{{ size }}</span>
@@ -50,13 +50,13 @@
       <h4>Kind</h4>
       <dt-stack
         direction="row"
-        gap="500"
+        gap="200"
         align="center"
       >
         <dt-stack
           v-for="kind in Object.keys(PROGRESS_CIRCLE_KINDS)"
           :key="kind"
-          gap="300"
+          gap="50"
           align="center"
         >
           <span class="d-code--sm">{{ kind }}</span>

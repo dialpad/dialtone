@@ -1,7 +1,7 @@
 <template>
   <div>
     <dt-stack
-      gap="700"
+      gap="800"
       class="d-p32"
     >
       <!-- Direction Examples -->
@@ -10,7 +10,7 @@
           Direction Examples
         </h3>
         <dt-stack
-          gap="500"
+          gap="200"
         >
           <div>
             <h4 class="d-headline--lg d-mb8">
@@ -19,7 +19,7 @@
             <div class="d-ba d-bc-default d-p16 d-bar8">
               <dt-stack
                 direction="column"
-                gap="400"
+                gap="100"
               >
                 <dt-stack class="d-bgc-moderate-opaque d-bar8 d-p8">
                   Stack item 1
@@ -42,7 +42,7 @@
             <div class="d-ba d-bc-default d-p16 d-bar8">
               <dt-stack
                 direction="row"
-                gap="400"
+                gap="100"
               >
                 <dt-stack class="d-bgc-moderate-opaque d-bar8 d-p8">
                   Stack item 1
@@ -65,7 +65,7 @@
             <div class="d-ba d-bc-default d-p16 d-bar8">
               <dt-stack
                 direction="column-reverse"
-                gap="400"
+                gap="100"
               >
                 <dt-stack class="d-bgc-moderate-opaque d-bar8 d-p8">
                   Stack item 1
@@ -88,7 +88,7 @@
             <div class="d-ba d-bc-default d-p16 d-bar8">
               <dt-stack
                 direction="row-reverse"
-                gap="400"
+                gap="100"
               >
                 <dt-stack class="d-bgc-moderate-opaque d-bar8 d-p8">
                   Stack item 1
@@ -111,7 +111,7 @@
         <h3 class="d-headline--xl d-mb8">
           Gap Examples
         </h3>
-        <dt-stack gap="500">
+        <dt-stack gap="200">
           <div>
             <h4 class="d-headline--lg d-mb8">
               Gap: 0
@@ -140,7 +140,7 @@
             </h4>
             <div class="d-ba d-bc-default d-p16 d-bar8">
               <dt-stack
-                gap="200"
+                gap="25"
               >
                 <dt-stack class="d-bgc-moderate-opaque d-bar8 d-p8">
                   Stack item 1
@@ -162,7 +162,7 @@
             </h4>
             <div class="d-ba d-bc-default d-p16 d-bar8">
               <dt-stack
-                gap="400"
+                gap="100"
               >
                 <dt-stack class="d-bgc-moderate-opaque d-bar8 d-p8">
                   Stack item 1
@@ -184,7 +184,7 @@
             </h4>
             <div class="d-ba d-bc-default d-p16 d-bar8">
               <dt-stack
-                gap="600"
+                gap="400"
               >
                 <dt-stack class="d-bgc-moderate-opaque d-bar8 d-p8">
                   Stack item 1
@@ -207,7 +207,7 @@
         <h3 class="d-headline--xl d-mb8">
           Align Examples (Row Direction)
         </h3>
-        <dt-stack gap="500">
+        <dt-stack gap="200">
           <div>
             <h4 class="d-headline--lg d-mb8">
               Default (no align specified - uses CSS implicit: center for row)
@@ -215,7 +215,7 @@
             <div class="d-ba d-bc-default d-p16 d-bar8">
               <dt-stack
                 direction="row"
-                gap="400"
+                gap="100"
               >
                 <dt-stack class="d-bgc-moderate-opaque d-bar8 d-p8">
                   Stack item 1
@@ -238,7 +238,7 @@
             <div class="d-ba d-bc-default d-p16 d-bar8">
               <dt-stack
                 direction="row"
-                gap="400"
+                gap="100"
                 align="start"
               >
                 <dt-stack class="d-bgc-moderate-opaque d-bar8 d-p8">
@@ -262,7 +262,7 @@
             <div class="d-ba d-bc-default d-p16 d-bar8">
               <dt-stack
                 direction="row"
-                gap="400"
+                gap="100"
                 align="center"
               >
                 <dt-stack class="d-bgc-moderate-opaque d-bar8 d-p8">
@@ -286,7 +286,7 @@
             <div class="d-ba d-bc-default d-p16 d-bar8">
               <dt-stack
                 direction="row"
-                gap="400"
+                gap="100"
                 align="end"
               >
                 <dt-stack class="d-bgc-moderate-opaque d-bar8 d-p8">
@@ -310,7 +310,7 @@
             <div class="d-ba d-bc-default d-p16 d-bar8">
               <dt-stack
                 direction="row"
-                gap="400"
+                gap="100"
                 align="stretch"
               >
                 <dt-stack class="d-bgc-moderate-opaque d-bar8 d-p8">
@@ -334,7 +334,7 @@
             <div class="d-ba d-bc-default d-p16 d-bar8">
               <dt-stack
                 direction="row"
-                gap="400"
+                gap="100"
                 align="baseline"
               >
                 <dt-stack class="d-bgc-moderate-opaque d-bar8 d-p8">
@@ -358,7 +358,7 @@
         <h3 class="d-headline--xl d-mb8">
           Justify Examples (Row Direction)
         </h3>
-        <dt-stack gap="500">
+        <dt-stack gap="200">
           <div>
             <h4 class="d-headline--lg d-mb8">
               Start (default)
@@ -366,7 +366,7 @@
             <div class="d-ba d-bc-default d-p16 d-bar8">
               <dt-stack
                 direction="row"
-                gap="400"
+                gap="100"
                 justify="start"
               >
                 <dt-stack class="d-bgc-moderate-opaque d-bar8 d-p8">
@@ -390,7 +390,7 @@
             <div class="d-ba d-bc-default d-p16 d-bar8">
               <dt-stack
                 direction="row"
-                gap="400"
+                gap="100"
                 justify="center"
               >
                 <dt-stack class="d-bgc-moderate-opaque d-bar8 d-p8">
@@ -414,7 +414,7 @@
             <div class="d-ba d-bc-default d-p16 d-bar8">
               <dt-stack
                 direction="row"
-                gap="400"
+                gap="100"
                 justify="end"
               >
                 <dt-stack class="d-bgc-moderate-opaque d-bar8 d-p8">
@@ -438,7 +438,7 @@
             <div class="d-ba d-bc-default d-p16 d-bar8">
               <dt-stack
                 direction="row"
-                gap="400"
+                gap="100"
                 justify="space-around"
               >
                 <dt-stack class="d-bgc-moderate-opaque d-bar8 d-p8">
@@ -462,7 +462,7 @@
             <div class="d-ba d-bc-default d-p16 d-bar8">
               <dt-stack
                 direction="row"
-                gap="400"
+                gap="100"
                 justify="space-between"
               >
                 <dt-stack class="d-bgc-moderate-opaque d-bar8 d-p8">
@@ -486,7 +486,7 @@
             <div class="d-ba d-bc-default d-p16 d-bar8">
               <dt-stack
                 direction="row"
-                gap="400"
+                gap="100"
                 justify="space-evenly"
               >
                 <dt-stack class="d-bgc-moderate-opaque d-bar8 d-p8">
@@ -513,7 +513,7 @@
         <p class="d-body--md d-fc-secondary d-mb8">
           Resize your browser to see these examples change at different breakpoints
         </p>
-        <dt-stack gap="500">
+        <dt-stack gap="200">
           <div>
             <h4 class="d-headline--lg d-mb8">
               Responsive Direction (column → row @md)
@@ -521,7 +521,7 @@
             <div class="d-ba d-bc-default d-p16 d-bar8">
               <dt-stack
                 :direction="{ default: 'column', md: 'row' }"
-                gap="400"
+                gap="100"
               >
                 <dt-stack class="d-bgc-moderate-opaque d-bar8 d-p8">
                   Stack item 1
@@ -567,7 +567,7 @@
             <div class="d-ba d-bc-default d-p16 d-bar8">
               <dt-stack
                 direction="row"
-                gap="400"
+                gap="100"
                 :align="{ default: 'start', md: 'center', lg: 'end' }"
               >
                 <dt-stack class="d-bgc-moderate-opaque d-bar8 d-p8">
@@ -591,7 +591,7 @@
             <div class="d-ba d-bc-default d-p16 d-bar8">
               <dt-stack
                 direction="row"
-                gap="400"
+                gap="100"
                 :justify="{ default: 'start', md: 'center', lg: 'space-between' }"
               >
                 <dt-stack class="d-bgc-moderate-opaque d-bar8 d-p8">

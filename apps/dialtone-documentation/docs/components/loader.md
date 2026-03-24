@@ -54,7 +54,7 @@ The base loader size is 24px and should be used in most cases.
 
 <code-well-header>
   <dt-stack
-    gap="400"
+    gap="100"
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
     <dt-loader size="100"></dt-loader>

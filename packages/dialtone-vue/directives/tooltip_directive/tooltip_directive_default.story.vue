@@ -1,7 +1,7 @@
 <template>
   <dt-stack
     direction="row"
-    gap="600"
+    gap="400"
     class="d-m64"
   >
     <span v-dt-tooltip="'Default placement'">Span with tooltip</span>

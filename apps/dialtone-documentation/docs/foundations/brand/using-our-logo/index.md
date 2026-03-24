@@ -7,7 +7,7 @@ keywords: ["logo usage","logo guidelines","brand guidelines"]
 
 ## For Brand
 
-<dt-stack gap="650" class="d-mt48">
+<dt-stack gap="600" class="d-mt48">
   <div class="d-d-grid d-g48 d-g-cols1 md:d-g-cols2 d-ai-center">
     <div>
       <svg-loader name="logo--primary-color-light" class="d-bar16" />

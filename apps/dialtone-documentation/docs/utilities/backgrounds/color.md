@@ -14,7 +14,7 @@ Use `d-bgc-{color}` to set an element's background color.
 
 <code-well-header>
   <dt-stack
-    gap="500"
+    gap="200"
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
     <div
@@ -86,7 +86,7 @@ Use `d-bgo{stop}` to change an element's background color opacity. You can also 
 
 <code-well-header>
   <dt-stack
-    gap="500"
+    gap="200"
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
     <div

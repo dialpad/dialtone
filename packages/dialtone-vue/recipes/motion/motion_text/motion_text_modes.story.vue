@@ -1,12 +1,12 @@
 <template>
   <dt-stack
-    gap="550"
+    gap="300"
     class="d-p24"
   >
     <dt-stack
       v-for="mode in animationModes"
       :key="mode.value"
-      gap="400"
+      gap="100"
     >
       <dt-stack
         direction="row"

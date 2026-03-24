@@ -47,7 +47,7 @@
         <dt-stack
           direction="row"
           align="center"
-          gap="400"
+          gap="100"
         >
           <dt-avatar
             full-name="Person Avatar"

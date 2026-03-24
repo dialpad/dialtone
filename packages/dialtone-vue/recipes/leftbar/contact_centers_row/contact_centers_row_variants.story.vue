@@ -1,5 +1,5 @@
 <template>
-  <dt-stack gap="600">
+  <dt-stack gap="400">
     <div>
       <h3 class="d-mb8">
         Ai Contact Centers leftbar

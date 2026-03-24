@@ -23,7 +23,7 @@ export default {
 <template>
   <dt-stack
     direction="row"
-    gap="300"
+    gap="50"
   >
     <span>{{ i18n.$t('STORYBOOK_SET_LANGUAGE') }}: </span>
     <dt-button

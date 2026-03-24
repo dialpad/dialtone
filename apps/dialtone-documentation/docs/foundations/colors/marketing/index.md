@@ -4,7 +4,7 @@ description: Guidelines for using Dialpad's color palette in marketing materials
 keywords: ["brand colors","marketing colors","purple"]
 ---
 
-<dt-stack gap="650" class="d-mt48">
+<dt-stack gap="600" class="d-mt48">
   <div>
     <h2 class="d-docsite--header-3 d-mt0 d-mt0">Core Color</h2>
     <p class="d-docsite--paragraph">Dialpad’s color theory is organized into three schemes depending on usage.</p>

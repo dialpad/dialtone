@@ -10,7 +10,7 @@ Use `d-ba` to add a border to all sides of your element.
 
 <code-well-header>
   <dt-stack
-    gap="500"
+    gap="200"
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
     <div
@@ -36,7 +36,7 @@ Use `d-b{t|r|b|l|x|y}` to add a border to only specific sides of your element.
 
 <code-well-header>
   <dt-stack
-    gap="500"
+    gap="200"
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
     <div

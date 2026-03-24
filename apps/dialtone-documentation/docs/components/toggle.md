@@ -48,7 +48,7 @@ The Toggle component acts as a way to allow the User to switch between two mutua
 ### Base Styles
 
 <code-well-header>
-  <dt-stack as="fieldset" gap="400">
+  <dt-stack as="fieldset" gap="100">
     <dt-toggle label-class="d-mr6">Unchecked Toggle</dt-toggle>
     <dt-toggle :model-value="true" label-class="d-mr6">Checked Toggle</dt-toggle>
     <dt-toggle disabled label-class="d-mr6">Unchecked Disabled</dt-toggle>
@@ -117,7 +117,7 @@ showHtmlWarning />
 ### Sizes
 
 <code-well-header>
-  <dt-stack as="fieldset" gap="400">
+  <dt-stack as="fieldset" gap="100">
     <dt-toggle size="sm" label-class="d-mr6">Small size</dt-toggle>
     <dt-toggle label-class="d-mr6">Default size</dt-toggle>
   </dt-stack>
@@ -145,7 +145,7 @@ showHtmlWarning />
 ### With v-model
 
 <code-well-header>
-  <dt-stack as="fieldset" gap="400">
+  <dt-stack as="fieldset" gap="100">
     <dt-toggle v-model="checked" label-class="d-mr6" ref="vModelExample">Toggle</dt-toggle>
   </dt-stack>
 </code-well-header>

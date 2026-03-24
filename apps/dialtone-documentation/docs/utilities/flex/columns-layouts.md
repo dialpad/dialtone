@@ -11,7 +11,7 @@ keywords: ["flexbox","flex columns","flex layout","column layout"]
 Use `d-fl-col{n}` to create uniformly sized children within an element.
 
 <code-well-header>
-  <dt-stack gap="500" class="d-w100p">
+  <dt-stack gap="200" class="d-w100p">
     <div v-for="(i, index) in columns" class="d-p8 d-bar8 d-bgc-moderate d-w100p">
       <code class="d-bgc-transparent">.d-fl-col{{i}}</code>
       <div class="d-cg8 d-of-auto" :class="`d-fl-col${i}`">
@@ -41,8 +41,8 @@ Use `d-fl-col{n}` to create uniformly sized children within an element.
 Use `d-cg{n}` to create uniform gaps between flex columns within an element.
 
 <code-well-header>
-  <dt-stack gap="500" class="d-w100p">
-    <dt-stack v-for="i in gaps" gap="400" class="d-p8 d-bar8 d-bgc-moderate d-w100p">
+  <dt-stack gap="200" class="d-w100p">
+    <dt-stack v-for="i in gaps" gap="100" class="d-p8 d-bar8 d-bgc-moderate d-w100p">
       <code class="d-bgc-transparent">.d-cg{{ i }}</code>
       <div class="d-fl-col3 d-of-auto" :class="`d-cg${i}`">
         <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bar4 d-bgc-moderate-opaque">1</dt-stack>

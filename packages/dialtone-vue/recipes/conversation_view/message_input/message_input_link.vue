@@ -26,7 +26,7 @@
     </template>
 
     <template #content>
-      <dt-stack gap="500">
+      <dt-stack gap="200">
         <div
           class="d-recipe-message-input__link-dialog-title"
         >
@@ -72,7 +72,7 @@
           </dt-button>
           <dt-stack
             direction="row"
-            gap="400"
+            gap="100"
           >
             <dt-button
               :aria-label="cancelButtonLabel"

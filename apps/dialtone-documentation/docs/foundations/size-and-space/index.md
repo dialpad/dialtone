@@ -117,14 +117,14 @@ When adding space between elements, both vertically and horizontally, use either
 - For spaces between different boxes/containers on a page, choose values from `var(--dt-layout-50)` to `var(--dt-layout-100)`
 
 </div>
- <dt-stack direction="column" gap="500">
+ <dt-stack direction="column" gap="200">
   <iframe class="d-bgc-contrast" style="border: 0px; border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FQe6cz41vPBozP4PhgGqFin/Docs-Protos?page-id=0%3A1&type=design&node-id=5-15958&viewport=702%2C117%2C0.97&t=LxszUdOGsEU9l3I5-8&scaling=min-zoom&starting-point-node-id=5%3A15958&hotspot-hints=0&hide-ui=1"></iframe>
 <div>
 <strong>Vertical stacking</strong>
 <dt-text as="p" kind="body" tone="tertiary">Set the space-between/gap groups vertically.</dt-text>
 </div>
   </dt-stack>
-  <dt-stack direction="column" gap="500">
+  <dt-stack direction="column" gap="200">
   <iframe class="d-bgc-contrast" style="border: 0px; border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FQe6cz41vPBozP4PhgGqFin/Docs-Protos?page-id=0%3A1&type=design&node-id=5-15997&viewport=702%2C117%2C0.97&t=LxszUdOGsEU9l3I5-8&scaling=min-zoom&starting-point-node-id=5%3A15997&hotspot-hints=0&hide-ui=1"></iframe>
   <div>
   <strong>Horizontal stacking</strong>
@@ -143,7 +143,7 @@ When adding space around an element, use `padding` to create breathing room.
 Avoid using `margin`, which adds space outside the element and can affect the layout. In that case, follow the [stacking](#stacking) approach.
 
 </div>
-<dt-stack class="d-gc2" direction="column" gap="500">
+<dt-stack class="d-gc2" direction="column" gap="200">
 
  <iframe class="d-bgc-contrast" style="border: 0px; border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FQe6cz41vPBozP4PhgGqFin/Docs-Protos?page-id=0%3A1&type=design&node-id=5-16168&viewport=702%2C117%2C0.97&t=LxszUdOGsEU9l3I5-8&scaling=min-zoom&starting-point-node-id=5%3A16168&hotspot-hints=0&hide-ui=1"></iframe>
 <div>
@@ -155,7 +155,7 @@ Avoid using `margin`, which adds space outside the element and can affect the la
 ### Widths and Heights
 
 <div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
-<dt-stack direction="column" gap="100">
+<dt-stack direction="column" gap="1">
 <p>
 
 For optimal layout flexibility and responsiveness, generally avoid using fixed `widths` or `heights` when defining element sizes. Instead, use percentages values or set `min-width` or `min-height`. This allows the elements to adjust naturally to different screen sizes.
@@ -166,7 +166,7 @@ Exceptions exist for select elements like Avatars, Icons, and Toggles. These ele
 </dt-text>
 </dt-stack>
 
-<dt-stack class="d-gc2" direction="column" gap="500">
+<dt-stack class="d-gc2" direction="column" gap="200">
 <iframe class="d-bgc-contrast" style="border: 0px solid rgba(0, 0, 0, 0.1); border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FQe6cz41vPBozP4PhgGqFin/Docs-Protos?page-id=0%3A1&type=design&node-id=5-25635&viewport=-1055%2C122%2C0.69&t=iCwsUiY6dBufHiTQ-8&scaling=min-zoom&starting-point-node-id=5%3A25635&hotspot-hints=0&hide-ui=1"></iframe>
 <div>
 <dt-text as="p" kind="body" tone="tertiary">Text elements typically occupy 100% of their allocated space, allowing text to flow freely within the designated area or until truncated.</dt-text>
@@ -182,11 +182,11 @@ Exceptions exist for select elements like Avatars, Icons, and Toggles. These ele
 The size of some components is determined by their content. Most expand vertically, while a select few expand horizontally.
 
 </div>
-<dt-stack direction="column" gap="500">
+<dt-stack direction="column" gap="200">
 <iframe class="d-bgc-contrast" style="border: 0px solid rgba(0, 0, 0, 0.1); border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FQe6cz41vPBozP4PhgGqFin/Docs-Protos?page-id=0%3A1&type=design&node-id=5-25749&viewport=-1055%2C122%2C0.69&t=iCwsUiY6dBufHiTQ-8&scaling=min-zoom&starting-point-node-id=5%3A25739&hotspot-hints=0&hide-ui=1"></iframe>
 <dt-text as="p" kind="body" tone="tertiary">This tooltip has a `min-width`, and its height depends on its content.</dt-text>
 </dt-stack>
-<dt-stack direction="column" gap="500">
+<dt-stack direction="column" gap="200">
 <iframe class="d-bgc-contrast" style="border: 0px solid rgba(0, 0, 0, 0.1); border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FQe6cz41vPBozP4PhgGqFin/Docs-Protos?page-id=0%3A1&type=design&node-id=5-25744&viewport=-1055%2C122%2C0.69&t=iCwsUiY6dBufHiTQ-8&scaling=min-zoom&starting-point-node-id=5%3A25744&hotspot-hints=0&hide-ui=1"></iframe>
 <dt-text as="p" kind="body" tone="tertiary">This button has a fixed `height`, a `min-width` and grows horizontally depending on its content.</dt-text>
 </dt-stack>
@@ -200,7 +200,7 @@ The size of some components is determined by their content. Most expand vertical
 Adapting to different devices, sizes should be fluid across breakpoints. While most Dialtone components are responsive, their fluidity depends on the layout they live within.
 
 </div>
-<dt-stack class="d-gc2" direction="column" gap="500">
+<dt-stack class="d-gc2" direction="column" gap="200">
 <div>
 <iframe class="d-bgc-contrast" style="border: 0px solid rgba(0, 0, 0, 0.1); border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FQe6cz41vPBozP4PhgGqFin/Docs-Protos?page-id=0%3A1&type=design&node-id=5-25679&viewport=-722%2C-310%2C0.54&t=rVgNK5NwIXaPxkHq-8&scaling=min-zoom&starting-point-node-id=5%3A25663&hotspot-hints=0&hide-ui=1"></iframe>
 </div>
@@ -221,12 +221,12 @@ To ensure clickable and interactive areas are easily accessible, we recommend a 
 
 <div class="d-d-grid d-g16 d-g-cols1 md:d-g-cols3" >
   <div>
-<dt-stack direction="column" gap="400">
+<dt-stack direction="column" gap="100">
 <p>Group and adjust the distance between elements to guide users understanding of their relationships. Closer elements appear more connected, while larger gaps indicate less association.</p>
 <dt-text as="p" kind="body">Consistent and intentional spacing decisions across pages create a predictable layout, reducing cognitive load and allowing users to focus on the content rather than the layout.</dt-text>
     </dt-stack>
   </div>
-  <dt-stack class="d-gc2" direction="column" gap="500">
+  <dt-stack class="d-gc2" direction="column" gap="200">
     <iframe class="d-bgc-contrast" style="border: 0px; border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FQe6cz41vPBozP4PhgGqFin/Docs-Protos?page-id=0%3A1&type=design&node-id=5-16175&viewport=702%2C117%2C0.97&t=LxszUdOGsEU9l3I5-8&scaling=min-zoom&starting-point-node-id=5%3A16175&hotspot-hints=0&hide-ui=1"></iframe>
     <dt-text as="p" kind="body" tone="tertiary">
     <dt-text strength="strong">Proximity groups</dt-text> are formed by placing elements close together. <dt-text strength="strong">Delimited groups,</dt-text> on the other hand, are defined by clear visual boundaries, such as borders.
@@ -238,7 +238,7 @@ To ensure clickable and interactive areas are easily accessible, we recommend a 
 
 <div class="d-d-grid d-g16 d-g-cols1 md:d-g-cols3" >
   <div>
-    <dt-stack direction="column" gap="400">
+    <dt-stack direction="column" gap="100">
       <div>
         <p>Control the amount of space around an element to affect its visual importance. Use larger spaces for more prominent elements and smaller for those of lower importance. Keep in mind the position of the elements will benefit the order of reading.
       </p>

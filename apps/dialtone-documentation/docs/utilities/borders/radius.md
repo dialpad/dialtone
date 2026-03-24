@@ -10,7 +10,7 @@ Use `d-bar{n}` to change the border radius on all corners of your element.
 
 <code-well-header>
   <dt-stack
-    gap="400"
+    gap="100"
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
     <div
@@ -41,7 +41,7 @@ Use `d-b{t|r|b|l}r{n}` to change the border radius on a side of your element.
 
 <code-well-header>
   <dt-stack
-    gap="400"
+    gap="100"
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
     <div
@@ -67,7 +67,7 @@ Use `d-b{a|t|r|b|l}r-pill` to change the border radius of your element to a pill
 
 <code-well-header>
   <dt-stack
-    gap="400"
+    gap="100"
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
     <div class="d-p16 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-pill">
@@ -86,7 +86,7 @@ Use `d-b{a|t|r|b|l}r-circle` to change the border radius of your element to a ci
 
 <code-well-header>
   <dt-stack
-    gap="400"
+    gap="100"
     :direction="{ 'default': 'column', 'md': 'row' }"
    >
     <dt-stack direction="row" align="center" justify="center" class="d-p16 d-h128 d-w128 d-ba d-baw2 d-bc-default d-bgc-primary d-ws-nowrap d-bar-circle">

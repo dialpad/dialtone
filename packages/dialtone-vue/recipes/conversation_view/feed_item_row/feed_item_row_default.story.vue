@@ -47,11 +47,11 @@
     >
       <dt-stack
         direction="row"
-        gap="400"
+        gap="100"
       >
         <dt-stack
           direction="row"
-          gap="300"
+          gap="50"
         >
           <dt-avatar
             v-for="person of persons"
@@ -63,7 +63,7 @@
         </dt-stack>
         <dt-stack
           direction="row"
-          gap="400"
+          gap="100"
         >
           <dt-stack
             direction="row"

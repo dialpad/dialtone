@@ -49,7 +49,7 @@ Dialtone's CSS library offers a framework of [CSS Utilities](/utilities/) classe
 <code-well-header>
   <dt-stack
     direction="row"
-    gap="400"
+    gap="100"
     justify="between"
     class="
       d-w100p
@@ -76,7 +76,7 @@ Dialtone's CSS library offers a framework of [CSS Utilities](/utilities/) classe
 ```html
 <dt-stack
   direction="row"
-  gap="400"
+  gap="100"
   justify="between"
   class="
     d-w100p

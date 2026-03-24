@@ -1,6 +1,6 @@
 <template>
-  <dt-stack gap="400">
-    <dt-stack gap="200">
+  <dt-stack gap="100">
+    <dt-stack gap="25">
       <dt-recipe-general-row
         v-for="item in mainOptions"
         :key="item.description"
@@ -8,11 +8,11 @@
       />
     </dt-stack>
     <dt-stack
-      gap="200"
+      gap="25"
     >
       <leftbar-section title="Favorites">
         <template #items>
-          <dt-stack gap="200">
+          <dt-stack gap="25">
             <dt-recipe-general-row
               v-for="channel in favoriteChannels"
               :key="channel.description"
@@ -37,7 +37,7 @@
 
       <leftbar-section title="Contact centers Contact centers">
         <template #items>
-          <dt-stack gap="200">
+          <dt-stack gap="25">
             <dt-recipe-general-row
               v-for="contactCenter in contactCenters"
               :key="contactCenter.description"
@@ -64,7 +64,7 @@
 
       <leftbar-section title="Channels">
         <template #items>
-          <dt-stack gap="200">
+          <dt-stack gap="25">
             <dt-recipe-general-row
               v-for="channel in channels"
               :key="channel.description"
@@ -79,7 +79,7 @@
 
       <leftbar-section title="Recents">
         <template #items>
-          <dt-stack gap="200">
+          <dt-stack gap="25">
             <dt-recipe-general-row
               v-for="group in groups"
               :key="group.description"

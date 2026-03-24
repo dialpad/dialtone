@@ -12,7 +12,7 @@ keywords: ["font family", "font weight", "font size", "line height", "system fon
 
 Dialtone's product UI font stack defers to the user's default system font, ensuring a seamless native experience.
 
-<dt-stack direction="row" gap="500" class="d-wmx764">
+<dt-stack direction="row" gap="200" class="d-wmx764">
   <svg-loader class="d-fl1" name="ff-appleSF" />
   <svg-loader class="d-fl1" name="ff-windows" />
   <svg-loader class="d-fl1" name="ff-roboto" />
@@ -23,7 +23,7 @@ Dialtone's product UI font stack defers to the user's default system font, ensur
 
 Four weights for clear hierarchy and visual contrast among different elements.
 
-<dt-stack direction="row" gap="500" class="d-wmx764">
+<dt-stack direction="row" gap="200" class="d-wmx764">
   <svg-loader name="fw-regular" />
   <svg-loader name="fw-medium" />
   <svg-loader name="fw-semibold" />
@@ -34,15 +34,15 @@ Four weights for clear hierarchy and visual contrast among different elements.
 
 Dictates the scale of text, enhancing readability and defining information hierarchy across content.
 
-<dt-stack gap="500">
-  <dt-stack direction="row" gap="500">
+<dt-stack gap="200">
+  <dt-stack direction="row" gap="200">
     <svg-loader name="fs12" style="max-width: 140px" /> <!--lazy inline style until we redesign this whole page -->
     <svg-loader name="fs14" style="max-width: 140px" />
     <svg-loader name="fs16" style="max-width: 140px" />
     <svg-loader name="fs18" style="max-width: 140px" />
     <svg-loader name="fs20" style="max-width: 140px" />
   </dt-stack>
-  <dt-stack direction="row" gap="500">
+  <dt-stack direction="row" gap="200">
     <svg-loader name="fs28" style="max-width: 140px" />
     <svg-loader name="fs32" style="max-width: 140px" />
   </dt-stack>
@@ -52,13 +52,13 @@ Dictates the scale of text, enhancing readability and defining information hiera
 
 Adjusts vertical spacing between lines of text, optimizing legibility and text flow.
 
-<dt-stack direction="column" gap="500">
-  <dt-stack direction="row" gap="500" class="d-wmx764">
+<dt-stack direction="column" gap="200">
+  <dt-stack direction="row" gap="200" class="d-wmx764">
     <svg-loader name="lh-100" />
     <svg-loader name="lh-200" />
     <svg-loader name="lh-300" />
   </dt-stack>
-  <dt-stack direction="row" gap="500" class="d-wmx764">
+  <dt-stack direction="row" gap="200" class="d-wmx764">
     <svg-loader name="lh-400" />
     <svg-loader name="lh-500" />
     <svg-loader name="lh-600" />
@@ -98,7 +98,7 @@ Titles and headings to establish hierarchy and set the tone of contextual groupi
             <div :class="[varName]">{{ example }}</div>
           </td>
           <td class="d-p4 d-ws-nowrap">
-            <dt-stack direction="row" as="code" gap="300" class="d-text-code--sm d-bgc-transparent d-ta-center d-c-default">
+            <dt-stack direction="row" as="code" gap="50" class="d-text-code--sm d-bgc-transparent d-ta-center d-c-default">
               <span v-dt-tooltip="`Font Size`">{{ getStyles('headlines', index).fontSize }}</span>
               /
               <span v-dt-tooltip="`Line Height`">{{ getStyles('headlines', index).lineHeight }}</span>
@@ -132,7 +132,7 @@ Default text style for longer-form prose content, designed for comfort and clari
           <div :class="[varName]">{{ example }}</div>
         </td>
         <td class="d-p4 d-ws-nowrap">
-          <dt-stack direction="row" as="code" gap="300" class="d-text-code--sm d-bgc-transparent d-ta-center d-c-default">
+          <dt-stack direction="row" as="code" gap="50" class="d-text-code--sm d-bgc-transparent d-ta-center d-c-default">
             <span v-dt-tooltip="`Font Size`">{{ getStyles('body', index).fontSize }}</span>
             /
             <span v-dt-tooltip="`Line Height`">{{ getStyles('body', index).lineHeight }}</span>
@@ -166,7 +166,7 @@ interaction.
           <div :class="[varName]">{{ example }}</div>
         </td>
         <td class="d-p4 d-ws-nowrap">
-          <dt-stack direction="row" as="code" gap="300" class="d-text-code--sm d-bgc-transparent d-ta-center d-c-default">
+          <dt-stack direction="row" as="code" gap="50" class="d-text-code--sm d-bgc-transparent d-ta-center d-c-default">
             <span v-dt-tooltip="`Font Size`">{{ getStyles('label', index).fontSize }}</span>
             /
             <span v-dt-tooltip="`Line Height`">{{ getStyles('label', index).lineHeight }}</span>
@@ -199,7 +199,7 @@ Code snippets, technical commands, or data values rendered as a monospaced font.
           <div :class="[varName]">{{ example }}</div>
         </td>
         <td class="d-p4 d-ws-nowrap">
-          <dt-stack direction="row" as="code" gap="300" class="d-text-code--sm d-bgc-transparent d-ta-center d-c-default">
+          <dt-stack direction="row" as="code" gap="50" class="d-text-code--sm d-bgc-transparent d-ta-center d-c-default">
             <span v-dt-tooltip="`Font Size`">{{ getStyles('code', index).fontSize }}</span>
             /
             <span v-dt-tooltip="`Line Height`">{{ getStyles('code', index).lineHeight }}</span>
@@ -230,13 +230,13 @@ Code snippets, technical commands, or data values rendered as a monospaced font.
 
 <code-example-tabs
 vueCode='
-<dt-stack gap="500">
-  <dt-stack gap="400" class="d-jc-space-between">
+<dt-stack gap="200">
+  <dt-stack gap="100" class="d-jc-space-between">
     <dt-stack>
       <dt-text as="h2" kind="headline" size="xl" strength="medium" density="200" class="d-fs-400">
         Katie Rodriguez
       </dt-text>
-      <dt-stack direction="row" gap="350">
+      <dt-stack direction="row" gap="75">
         <dt-text tone="success">
           Available
         </dt-text>
@@ -246,7 +246,7 @@ vueCode='
         </dt-text>
       </dt-stack>
     </dt-stack>
-    <dt-stack gap="200">
+    <dt-stack gap="25">
       <dt-text kind="body" size="md" density="200" strength="semibold" tone="tertiary">
         Chief Customer Success Officer
       </dt-text>
@@ -257,7 +257,7 @@ vueCode='
       </dt-text>
     </dt-stack>
   </dt-stack>
-  <dt-stack gap="400" direction="row" class="d-jc-space-between">
+  <dt-stack gap="100" direction="row" class="d-jc-space-between">
     <dt-button class="d-fl1" kind="muted" importance="outlined">
       <template #startIcon="{ iconSize }">
         <dt-icon-phone :size="iconSize" />
@@ -284,12 +284,12 @@ vueCode='
 ### Hero
 
 <code-well-header class="d-pb32">
-  <dt-stack gap="500">
+  <dt-stack gap="200">
     <dt-stack>
       <dt-text as="h2" kind="headline" size="2xl">AI that works for you</dt-text>
       <dt-text kind="body" size="lg">Support customers, drive sales, and collaborate with your team—all in one, beautiful AI-powered app.</dt-text>
     </dt-stack>
-    <dt-stack :direction="{ 'default': 'column', 'md': 'row' }" gap="500" align="start">
+    <dt-stack :direction="{ 'default': 'column', 'md': 'row' }" gap="200" align="start">
       <dt-stack>
         <dt-text as="h3" kind="headline" size="xl">AI Contact Center</dt-text>
         <dt-text as="p" kind="body" size="md">The world’s most advanced customer engagement platform</dt-text>
@@ -308,12 +308,12 @@ vueCode='
 
 <code-example-tabs
 vueCode='
-<dt-stack gap="500">
+<dt-stack gap="200">
   <dt-stack>
     <dt-text as="h2" kind="headline" size="2xl">AI that works for you</dt-text>
     <dt-text kind="body" size="lg">Support customers, drive sales, and collaborate with your team—all in one, beautiful AI-powered app.</dt-text>
   </dt-stack>
-  <dt-stack direction="row" gap="500" align="start">
+  <dt-stack direction="row" gap="200" align="start">
     <dt-stack>
       <dt-text as="h3" kind="headline" size="xl">AI Contact Center</dt-text>
       <dt-text as="p" kind="body" size="md">The world’s most advanced customer engagement platform</dt-text>

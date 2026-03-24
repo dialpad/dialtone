@@ -204,7 +204,7 @@ showHtmlWarning />
 ## Sizes
 
 <code-well-header>
-  <dt-stack gap="500" class="d-w100p">
+  <dt-stack gap="200" class="d-w100p">
     <dt-tab-group size="xs">
       <template #tabs>
         <dt-tab id="1" panel-id="2" selected>

@@ -10,7 +10,7 @@ Use `d-b{a|t|r|b|l}s-dashed` to change the border style to dashed on your elemen
 
 <code-well-header>
   <dt-stack
-    gap="400"
+    gap="100"
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
     <div
@@ -37,7 +37,7 @@ Use `d-b{a|t|r|b|l}s-dotted` to change the border style to dotted on your elemen
 
 <code-well-header>
   <dt-stack
-    gap="400"
+    gap="100"
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
     <div

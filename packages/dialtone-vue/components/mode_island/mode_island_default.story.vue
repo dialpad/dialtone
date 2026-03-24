@@ -4,9 +4,9 @@
     :mode="$attrs.mode"
     class="d-p16 d-ba d-bc-subtle d-bar8"
   >
-    <dt-stack gap="500">
+    <dt-stack gap="200">
       <dt-stack
-        gap="400"
+        gap="100"
         direction="row"
       >
         <span class="d-fc-primary">
@@ -23,7 +23,7 @@
         </span>
       </dt-stack>
       <dt-stack
-        gap="400"
+        gap="100"
         direction="row"
       >
         <div class="d-bgc-secondary d-p16 d-py8 d-ba d-bc-subtle">

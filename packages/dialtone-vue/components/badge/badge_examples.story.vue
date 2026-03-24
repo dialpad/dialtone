@@ -3,7 +3,7 @@
     <h2>Kind: Label</h2>
     <dt-stack
       direction="row"
-      gap="400"
+      gap="100"
       align="center"
     >
       <dt-badge
@@ -29,7 +29,7 @@
     </dt-stack>
     <dt-stack
       direction="row"
-      gap="400"
+      gap="100"
       align="center"
     >
       <dt-badge
@@ -47,7 +47,7 @@
     </dt-stack>
     <dt-stack
       direction="row"
-      gap="400"
+      gap="100"
       align="center"
     >
       <dt-badge
@@ -65,7 +65,7 @@
     </dt-stack>
     <dt-stack
       direction="row"
-      gap="400"
+      gap="100"
       align="center"
     >
       <dt-badge
@@ -75,7 +75,7 @@
     </dt-stack>
     <dt-stack
       direction="row"
-      gap="400"
+      gap="100"
       align="center"
     >
       <dt-badge
@@ -85,7 +85,7 @@
     </dt-stack>
     <dt-stack
       direction="row"
-      gap="400"
+      gap="100"
       align="center"
     >
       <dt-badge
@@ -99,7 +99,7 @@
     </dt-stack>
     <dt-stack
       direction="row"
-      gap="400"
+      gap="100"
       align="center"
     >
       <dt-badge
@@ -113,7 +113,7 @@
     </dt-stack>
     <dt-stack
       direction="row"
-      gap="400"
+      gap="100"
       align="center"
     >
       <dt-badge
@@ -138,7 +138,7 @@
     </h2>
     <dt-stack
       direction="row"
-      gap="400"
+      gap="100"
       align="center"
     >
       <dt-badge
@@ -153,7 +153,7 @@
     </dt-stack>
     <dt-stack
       direction="row"
-      gap="400"
+      gap="100"
       align="center"
     >
       <dt-badge
@@ -168,7 +168,7 @@
     </dt-stack>
     <dt-stack
       direction="row"
-      gap="400"
+      gap="100"
       align="center"
     >
       <dt-badge

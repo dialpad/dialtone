@@ -80,7 +80,7 @@ export const NestedIslands = {
     template: `
       <div>
         <h3 class="d-headline--md d-mb16">Nested Mode Islands</h3>
-        <dt-stack gap="500" direction="row">
+        <dt-stack gap="200" direction="row">
           <dt-mode-island class="d-fl1 d-p16 d-ba d-bc-subtle d-bar8">
             <p class="d-body--lg d-fw-semibold d-mb16">Inverted Mode Island (Parent)</p>
             <dt-mode-island class="d-p16 d-ba d-bc-subtle d-bar8">
@@ -119,7 +119,7 @@ export const WithCustomElement = {
         <h3 class="d-headline--md d-mb16">
           Custom HTML Elements <span class="d-body--md">via <code class="d-fw-bold">as</code> prop</span>
         </h3>
-        <dt-stack gap="400" direction="row">
+        <dt-stack gap="100" direction="row">
           <dt-mode-island as="section" class="d-p16 d-ba d-bc-subtle d-bar8">
             <p class="d-body--md">This is a <code>&lt;section&gt;</code> element</p>
           </dt-mode-island>

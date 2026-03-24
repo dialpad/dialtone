@@ -1,6 +1,6 @@
 <!-- Use this template story to allow the user control the component's props and slots -->
 <template>
-  <dt-stack gap="600">
+  <dt-stack gap="400">
     <div>
       <h3>Feed item with showHeader as False and isActive true</h3>
       <ul class="d-py8">
@@ -29,11 +29,11 @@
             <dt-stack
               class="feed-item-row__thread d-d-flex d-ai-center"
               direction="row"
-              gap="400"
+              gap="100"
             >
               <dt-stack
                 direction="row"
-                gap="300"
+                gap="50"
               >
                 <dt-avatar
                   v-for="person of persons"
@@ -45,7 +45,7 @@
               </dt-stack>
               <dt-stack
                 direction="row"
-                gap="400"
+                gap="100"
               >
                 <dt-stack
                   direction="row"

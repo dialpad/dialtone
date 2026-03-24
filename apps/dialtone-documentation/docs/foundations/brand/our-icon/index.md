@@ -5,7 +5,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["app icon","favicon","brand mark"]
 ---
 
-<dt-stack gap="650" class="d-mt48">
+<dt-stack gap="600" class="d-mt48">
   <figure class="d-bar16 d-of-hidden">
     <svg-loader name="icon--billboard" class="d-bar16" />
   </figure>

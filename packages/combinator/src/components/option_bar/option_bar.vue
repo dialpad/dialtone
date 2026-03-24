@@ -3,9 +3,9 @@
     v-dt-scrollbar
     class="dialtone-playground__controls"
   >
-    <dt-stack gap="500">
+    <dt-stack gap="200">
       <dt-stack
-        gap="500"
+        gap="200"
         direction="row"
         class="d-mtn8 d-mbn8 d-mrn4 d-d-none md:d-d-flex"
       >
@@ -35,7 +35,7 @@
         </dt-button>
       </dt-stack>
       <dt-stack
-        gap="500"
+        gap="200"
       >
         <!-- Slots -->
         <dtc-option-bar-member-group

@@ -39,7 +39,7 @@ Use `d-h{n}p` to set a percentage height for an element.
 Use `d-h{n}` to set a fixed height for an element.
 
 <code-well-header class="d-d-flex d-p24 d-bgc-secondary d-w100p d-hmx512 d-flow16 d-of-scroll d-ta-center" v-dt-scrollbar:never custom>
-  <dt-stack gap="400" class="d-pls-start" v-for="(i, index) in fixed" :key="index">
+  <dt-stack gap="100" class="d-pls-start" v-for="(i, index) in fixed" :key="index">
     <span class="d-code--md">d-h{{i}}</span>
     <dt-stack direction="row" align="center" justify="center" class="d-w64 d-bgc-bold d-bar4" :class="`d-h${i}`"></dt-stack>
   </dt-stack>

@@ -98,7 +98,7 @@
       <!-- Left content -->
       <div class="d-recipe-message-input__bottom-section-left">
         <dt-stack
-          gap="200"
+          gap="25"
           direction="row"
         >
           <dt-button
@@ -187,7 +187,7 @@
       <div class="d-recipe-message-input__bottom-section-right">
         <dt-stack
           direction="row"
-          gap="300"
+          gap="50"
         >
           <!-- @slot Slot for schedule message -->
           <div class="d-recipe-message-input__schedule-message">

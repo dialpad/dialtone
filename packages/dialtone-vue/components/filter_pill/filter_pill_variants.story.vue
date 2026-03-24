@@ -1,7 +1,7 @@
 <template>
-  <dt-stack gap="500">
+  <dt-stack gap="200">
     <!-- No selection -->
-    <dt-stack gap="300">
+    <dt-stack gap="50">
       <span class="d-label--sm">No selection</span>
       <dt-filter-pill
         v-model="channels"
@@ -9,7 +9,7 @@
       />
     </dt-stack>
     <!-- Selected, show label/count, has clear -->
-    <dt-stack gap="300">
+    <dt-stack gap="50">
       <span class="d-label--sm">Selected, show label/count, has clear</span>
       <dt-filter-pill
         v-model="contactCenters"
@@ -18,7 +18,7 @@
       />
     </dt-stack>
     <!-- Selected, overflow, label tooltip, has clear -->
-    <dt-stack gap="300">
+    <dt-stack gap="50">
       <span class="d-label--sm">Selected, overflow, label tooltip, has clear</span>
       <dt-filter-pill
         v-model="merchandise"
@@ -28,7 +28,7 @@
       />
     </dt-stack>
     <!-- Selected, label, no clear -->
-    <dt-stack gap="300">
+    <dt-stack gap="50">
       <span class="d-label--sm">Selected, label, no clear</span>
       <dt-filter-pill
         v-model="internalExternal"
@@ -54,7 +54,7 @@
       </dt-filter-pill>
     </dt-stack>
     <!-- Disabled -->
-    <dt-stack gap="300">
+    <dt-stack gap="50">
       <span class="d-label--sm">Disabled</span>
       <dt-filter-pill
         disabled
@@ -62,7 +62,7 @@
       />
     </dt-stack>
     <!-- Sizes -->
-    <dt-stack gap="500">
+    <dt-stack gap="200">
       <h3>Sizes</h3>
       <dt-filter-pill
         v-for="size in sizes"

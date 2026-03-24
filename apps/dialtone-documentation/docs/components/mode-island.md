@@ -6,8 +6,8 @@ keywords: ["theme island","mode override","d-mode-island","DtModeIsland","dt-mod
 ---
 
 <code-well-header>
-  <dt-stack gap="500" class="d-ai-flex-start d-w100p">
-    <dt-stack direction="row" gap="500" class="d-jc-space-between d-w100p">
+  <dt-stack gap="200" class="d-ai-flex-start d-w100p">
+    <dt-stack direction="row" gap="200" class="d-jc-space-between d-w100p">
       <dt-text as="h4" kind="headline" size="xl">Demo</dt-text>
       <dt-dropdown
         navigation-type="arrow-keys"
@@ -18,7 +18,7 @@ keywords: ["theme island","mode override","d-mode-island","DtModeIsland","dt-mod
             importance="outlined"
             kind="muted"
           >
-            <dt-stack gap="400" direction="row">
+            <dt-stack gap="100" direction="row">
               <dt-text><dt-text strength="strong">Mode:</dt-text> {{ currentMode.charAt(0).toUpperCase() + currentMode.slice(1) }}</dt-text>
               <dt-text><dt-text strength="strong">Contrast:</dt-text> {{ currentContrast.charAt(0).toUpperCase() + currentContrast.slice(1) }}</dt-text>
             </dt-stack>
@@ -95,14 +95,14 @@ keywords: ["theme island","mode override","d-mode-island","DtModeIsland","dt-mod
         </template>
       </dt-dropdown>
     </dt-stack>
-    <dt-stack :direction="{ 'default': 'column', 'md': 'row' }" gap="500" class="d-w100p">
+    <dt-stack :direction="{ 'default': 'column', 'md': 'row' }" gap="200" class="d-w100p">
       <dt-mode-island class="d-p16 d-bar8 d-ba d-fl1">
-        <dt-stack gap="400">
-          <dt-stack direction="row" gap="400" class="d-jc-space-between">
+        <dt-stack gap="100">
+          <dt-stack direction="row" gap="100" class="d-jc-space-between">
             <dt-text as="h3" kind="headline" size="md" density="200">Inverted <dt-text strength="normal">(auto)</dt-text></dt-text>
             <dt-icon name="circle-half-filled" size="300" class="d-fc-success" />
           </dt-stack>
-          <dt-stack gap="400" direction="row" class="d-py2 d-px8 d-bgc-moderate d-bar4 d-ba">
+          <dt-stack gap="100" direction="row" class="d-py2 d-px8 d-bgc-moderate d-bar4 d-ba">
             <dt-text as="p">Primary</dt-text>
             <dt-text as="p" tone="tertiary">Tertiary</dt-text>
             <dt-text as="p" tone="critical">Critical</dt-text>
@@ -110,19 +110,19 @@ keywords: ["theme island","mode override","d-mode-island","DtModeIsland","dt-mod
           <dt-text as="p">
             <dt-link>Text link</dt-link>
           </dt-text>
-          <dt-stack direction="row" gap="400" class="d-100p">
+          <dt-stack direction="row" gap="100" class="d-100p">
             <dt-button class="d-fl1">Button</dt-button>
             <dt-button class="d-fl1" kind="danger">Button</dt-button>
           </dt-stack>
         </dt-stack>
       </dt-mode-island>
       <dt-mode-island mode="light" class="d-p16 d-bar8 d-ba d-fl1">
-        <dt-stack gap="400">
-          <dt-stack direction="row" gap="400" class="d-jc-space-between">
+        <dt-stack gap="100">
+          <dt-stack direction="row" gap="100" class="d-jc-space-between">
             <dt-text as="h3" kind="headline" size="md" density="200">Explicit light</dt-text>
             <dt-icon name="sun" size="300" class="d-fc-success" />
           </dt-stack>
-          <dt-stack gap="400" direction="row" class="d-py2 d-px8 d-bgc-moderate d-bar4 d-ba">
+          <dt-stack gap="100" direction="row" class="d-py2 d-px8 d-bgc-moderate d-bar4 d-ba">
             <dt-text as="p">Primary</dt-text>
             <dt-text as="p" tone="tertiary">Tertiary</dt-text>
             <dt-text as="p" tone="critical">Critical</dt-text>
@@ -130,19 +130,19 @@ keywords: ["theme island","mode override","d-mode-island","DtModeIsland","dt-mod
           <dt-text as="p">
             <dt-link>Text link</dt-link>
           </dt-text>
-          <dt-stack direction="row" gap="400" class="d-100p">
+          <dt-stack direction="row" gap="100" class="d-100p">
             <dt-button class="d-fl1">Button</dt-button>
             <dt-button class="d-fl1" kind="danger">Button</dt-button>
           </dt-stack>
         </dt-stack>
       </dt-mode-island>
       <dt-mode-island mode="dark" class="d-p16 d-bar8 d-ba d-fl1">
-        <dt-stack gap="400">
-          <dt-stack direction="row" gap="400" class="d-jc-space-between">
+        <dt-stack gap="100">
+          <dt-stack direction="row" gap="100" class="d-jc-space-between">
             <dt-text as="h3" kind="headline" size="md" density="200">Explicit dark</dt-text>
             <dt-icon name="moon" size="300" class="d-fc-success" />
           </dt-stack>
-          <dt-stack gap="400" direction="row" class="d-py2 d-px8 d-bgc-moderate d-bar4 d-ba">
+          <dt-stack gap="100" direction="row" class="d-py2 d-px8 d-bgc-moderate d-bar4 d-ba">
             <dt-text as="p">Primary</dt-text>
             <dt-text as="p" tone="tertiary">Tertiary</dt-text>
             <dt-text as="p" tone="critical">Critical</dt-text>
@@ -150,7 +150,7 @@ keywords: ["theme island","mode override","d-mode-island","DtModeIsland","dt-mod
           <dt-text as="p">
             <dt-link>Text link</dt-link>
           </dt-text>
-          <dt-stack direction="row" gap="400" class="d-100p">
+          <dt-stack direction="row" gap="100" class="d-100p">
             <dt-button class="d-fl1">Button</dt-button>
             <dt-button class="d-fl1" kind="danger">Button</dt-button>
           </dt-stack>
@@ -331,23 +331,23 @@ vueCode='
 
 <code-well-header>
   <dt-mode-island ref="callbarExample" class="d-ba d-bc-subtle d-p8 d-py4 d-bar32 d-bs-md d-w100p">
-    <dt-stack direction="row" gap="600">
-      <dt-stack gap="400" direction="row">
+    <dt-stack direction="row" gap="400">
+      <dt-stack gap="100" direction="row">
         <dt-avatar
           full-name="TA"
           seed="ted-anderson"
           size="lg"
         />
-        <dt-stack gap="200">
+        <dt-stack gap="25">
           <dt-text kind="label" size="md" density="200">Ted Anderson</dt-text>
-          <dt-stack direction="row" gap="300" align="baseline">
+          <dt-stack direction="row" gap="50" align="baseline">
             <dt-text kind="body" size="xs" tone="tertiary" wrap="nowrap" numeric>(913) 555-6745</dt-text>
             <dt-text kind="body" size="xs" tone="muted">&bull;</dt-text>
             <dt-text kind="body" size="xs" tone="tertiary" numeric>21:18</dt-text>
           </dt-stack>
         </dt-stack>
       </dt-stack>
-      <dt-stack class="d-fl1 d-jc-center" direction="row" gap="200">
+      <dt-stack class="d-fl1 d-jc-center" direction="row" gap="25">
         <dt-button class="d-px8 d-w72" size="sm" kind="danger">
           <template #blockStartIcon> <dt-icon name="mic" size="400" /> </template>
           Unmute
@@ -383,19 +383,19 @@ vueCode='
 :htmlCode='() => $refs.callbarExample'
 vueCode='
 <dt-mode-island class="d-ba d-bc-subtle d-p8 d-py4 d-bar32 d-bs-md d-w100p">
-  <dt-stack direction="row" gap="600">
-    <dt-stack gap="400" direction="row">
+  <dt-stack direction="row" gap="400">
+    <dt-stack gap="100" direction="row">
       <dt-avatar full-name="TA" seed="ted-anderson" size="lg" />
-      <dt-stack gap="200">
+      <dt-stack gap="25">
         <dt-text kind="label" size="md" density="200">Ted Anderson</dt-text>
-        <dt-stack direction="row" gap="300" align="baseline">
+        <dt-stack direction="row" gap="50" align="baseline">
           <dt-text kind="helper" size="sm" tone="tertiary" wrap="nowrap" numeric>(913) 555-6745</dt-text>
           <dt-text kind="helper" size="sm" tone="muted">&bull;</dt-text>
           <dt-text kind="helper" size="sm" tone="tertiary" numeric>21:18</dt-text>
         </dt-stack>
       </dt-stack>
     </dt-stack>
-    <dt-stack class="d-fl1 d-jc-center" direction="row" gap="200">
+    <dt-stack class="d-fl1 d-jc-center" direction="row" gap="25">
       <dt-button class="d-px8 d-w72" size="sm" kind="danger">
         <template #blockStartIcon><dt-icon name="mic" size="400" /></template>
         Unmute
@@ -417,10 +417,10 @@ showHtmlWarning />
 [Popovers](/components/popover.html), [Dropdowns](/components/dropdown.html), and [Hovercards](/components/hovercard.html) are typically rendered at the root element of the DOM tree, and thus inherit the page's mode by default. They can be forced to a specific mode by assigning a Mode Island to its content slot.
 
 <code-well-header>
-  <dt-stack gap="500">
-    <dt-stack gap="200">
+  <dt-stack gap="200">
+    <dt-stack gap="25">
       <dt-text as="p" kind="headline" size="md">Hovercard</dt-text>
-      <dt-stack gap="400" direction="row">
+      <dt-stack gap="100" direction="row">
         <dt-hovercard ref="hovercardDefault" padding="none" placement="top-start">
           <template #anchor>
             <dt-button size="sm" kind="muted" importance="outlined">Default </dt-button>
@@ -463,9 +463,9 @@ showHtmlWarning />
         </dt-hovercard>
       </dt-stack>
     </dt-stack>
-    <dt-stack gap="200">
+    <dt-stack gap="25">
       <dt-text as="p" kind="headline" size="md">Popover</dt-text>
-      <dt-stack gap="400" direction="row">
+      <dt-stack gap="100" direction="row">
         <dt-popover ref="popoverDefault" padding="none" placement="top-start" dialogClass="d-w216">
           <template #anchor>
             <dt-button size="sm" kind="muted" importance="outlined"> Default </dt-button>
@@ -508,9 +508,9 @@ showHtmlWarning />
         </dt-popover>
       </dt-stack>
     </dt-stack>
-    <dt-stack gap="200">
+    <dt-stack gap="25">
       <dt-text as="p" kind="headline" size="md">Dropdown</dt-text>
-      <dt-stack gap="400" direction="row">
+      <dt-stack gap="100" direction="row">
         <dt-dropdown ref="dropdownDefault" navigation-type="arrow-keys" placement="bottom-start">
           <template #anchor="{ attrs }">
             <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined">

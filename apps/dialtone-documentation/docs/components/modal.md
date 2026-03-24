@@ -399,7 +399,7 @@ showHtmlWarning />
 When there is a need of more context information regarding the content of the Modal
 
 <code-well-header>
-  <dt-stack direction="row" gap="500" align="end">
+  <dt-stack direction="row" gap="200" align="end">
     <dt-select-menu
       label="Kind of Banner"
       size="md"

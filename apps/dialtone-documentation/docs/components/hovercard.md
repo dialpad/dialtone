@@ -71,7 +71,7 @@ showHtmlWarning />
 ### Many Hovercards
 
 <code-well-header>
-  <dt-stack direction="row" gap="500">
+  <dt-stack direction="row" gap="200">
     <example-hovercard v-for="data in exampleData" :label="data.label" :content="data.content" />
   </dt-stack>
 </code-well-header>

@@ -9,7 +9,7 @@ keywords: ["focus ring", "focus outline", "focus style"]
 Use `d-ol-{focusring|focusring-inset|none}` to change an elements' outline.
 
 <code-well-header>
-  <dt-stack direction="row" gap="500">
+  <dt-stack direction="row" gap="200">
     <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-code--sm d-ol-focusring">
       .d-ol-focusring
     </dt-stack>

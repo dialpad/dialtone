@@ -8,7 +8,7 @@ keywords: ["font", "typography", "typeface", "text", "season"]
 
 <svg-loader name="type-billboard" class="d-bar16 d-mt48" />
 
-<dt-stack gap="650" class="d-mt48">
+<dt-stack gap="600" class="d-mt48">
   <div class="d-d-grid d-g48 d-g-cols1 md:d-g-cols3 d-ai-center">
     <div>
       <p class="d-docsite--paragraph">The Seasons type family is built to have a shared character and proportions between the Sans and Mix versions.</p>

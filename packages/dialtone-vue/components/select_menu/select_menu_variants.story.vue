@@ -1,7 +1,7 @@
 <template>
   <dt-stack
     id="components-select-menu--variants-container"
-    gap="400"
+    gap="100"
   >
     <!-- Default -->
     <dt-select-menu

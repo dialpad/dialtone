@@ -45,13 +45,13 @@ This improves:
 
 <dt-stack direction="row">...</dt-stack>
 
-<dt-stack gap="500">...</dt-stack>
+<dt-stack gap="200">...</dt-stack>
 
-<dt-stack class="d-p16" align="start" direction="row" gap="500">...</dt-stack>
+<dt-stack class="d-p16" align="start" direction="row" gap="200">...</dt-stack>
 
 <dt-stack
   :direction="{ 'default': 'column', 'md': 'row' }"
-  gap="600"
+  gap="400"
   align="start"
 >
   ...
@@ -98,12 +98,12 @@ Only gap utilities with DtStack equivalents are flagged. Gap utilities larger th
 | CSS Utility | Prop Value |
 |-------------|------------|
 | `d-g0` | `gap="0"` |
-| `d-g8` | `gap="400"` |
-| `d-g16` | `gap="500"` |
-| `d-g24` | `gap="550"` |
-| `d-g32` | `gap="600"` |
-| `d-g48` | `gap="650"` |
-| `d-g64` | `gap="700"` |
+| `d-g8` | `gap="100"` |
+| `d-g16` | `gap="200"` |
+| `d-g24` | `gap="300"` |
+| `d-g32` | `gap="400"` |
+| `d-g48` | `gap="600"` |
+| `d-g64` | `gap="800"` |
 
 ### Redundant `d-d-flex`
 

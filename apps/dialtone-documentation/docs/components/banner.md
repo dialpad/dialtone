@@ -10,7 +10,7 @@ keywords: ["alert","notification","message","d-banner","DtBanner","dt-banner"]
 ---
 
 <code-well-header class="d-p0">
-    <dt-stack gap="500" class="d-w100p" align="center">
+    <dt-stack gap="200" class="d-w100p" align="center">
       <dt-banner title="Example banner" kind="info" class="d-ps-relative d-zi-base">
           Message body with a <dt-link kind="muted">Link</dt-link>
           <template #action>
@@ -37,7 +37,7 @@ Banners are a type of notice and so you can use the following [Notice](notice.md
 ### Kind
 
 <code-well-header>
-    <dt-stack direction="row" gap="400" align="end" class="d-w100p">
+    <dt-stack direction="row" gap="100" align="end" class="d-w100p">
         <div class="d-fl-grow1">
             <dt-select-menu label="Style" :options="bannerOptions" v-model="selectedKind" />
         </div>

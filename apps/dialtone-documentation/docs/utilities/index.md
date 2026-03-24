@@ -289,19 +289,19 @@ Add some [icons](/design/icons/index.md).
 
 <code-well-header>
   <dt-stack direction="row" class="d-bgc-primary-inverted d-fc-primary-inverted d-divide-x d-divide-moderate-inverted">
-    <dt-stack direction="row" gap="400" class="d-p8">
+    <dt-stack direction="row" gap="100" class="d-p8">
       <dt-icon name="alert-triangle" size="200" />
       <dt-text>Box 1</dt-text>
     </dt-stack>
-    <dt-stack direction="row" gap="400" class="d-p8">
+    <dt-stack direction="row" gap="100" class="d-p8">
       <dt-icon name="info" size="200" />
       <dt-text>Box the 2nd</dt-text>
     </dt-stack>
-    <dt-stack direction="row" gap="400" class="d-p8">
+    <dt-stack direction="row" gap="100" class="d-p8">
       <dt-icon name="alert-circle" size="200" />
       <dt-text>Box third</dt-text>
     </dt-stack>
-    <dt-stack direction="row" gap="400" class="d-p8">
+    <dt-stack direction="row" gap="100" class="d-p8">
       <dt-icon name="check-circle" size="200" />
       <dt-text>Box IV</dt-text>
     </dt-stack>
@@ -310,19 +310,19 @@ Add some [icons](/design/icons/index.md).
 
 ```html
 <dt-stack direction="row" class="d-bgc-primary-inverted d-fc-primary-inverted d-divide-x d-divide-moderate-inverted">
-  <dt-stack direction="row" gap="400" class="d-p8">
+  <dt-stack direction="row" gap="100" class="d-p8">
     <dt-icon name="alert-triangle" size="200" />
     <dt-text>Box 1</dt-text>
   </dt-stack>
-  <dt-stack direction="row" gap="400" class="d-p8">
+  <dt-stack direction="row" gap="100" class="d-p8">
     <dt-icon name="info" size="200" />
     <dt-text>Box the 2nd</dt-text>
   </dt-stack>
-  <dt-stack direction="row" gap="400" class="d-p8">
+  <dt-stack direction="row" gap="100" class="d-p8">
     <dt-icon name="alert-circle" size="200" />
     <dt-text>Box third</dt-text>
   </dt-stack>
-  <dt-stack direction="row" gap="400" class="d-p8">
+  <dt-stack direction="row" gap="100" class="d-p8">
     <dt-icon name="check-circle" size="200" />
     <dt-text>Box IV</dt-text>
   </dt-stack>
@@ -334,16 +334,16 @@ Add some [icons](/design/icons/index.md).
 Apply a [semantic surface color](/utilities/backgrounds/color.md) to convey some meaning to them, e.g. `d-bgc-critical-strong`.
 
 <code-well-header>
-  <dt-stack direction="row" gap="400" class="d-fc-primary-inverted">
-    <dt-stack direction="row" gap="400" class="d-bgc-critical-strong d-p8">
+  <dt-stack direction="row" gap="100" class="d-fc-primary-inverted">
+    <dt-stack direction="row" gap="100" class="d-bgc-critical-strong d-p8">
       <dt-icon name="alert-triangle" size="200" />
       <dt-text>Critical</dt-text>
     </dt-stack>
-    <dt-stack direction="row" gap="400" class="d-bgc-info-strong d-p8">
+    <dt-stack direction="row" gap="100" class="d-bgc-info-strong d-p8">
       <dt-icon name="alert-circle" size="200" />
       <dt-text>Info</dt-text>
     </dt-stack>
-    <dt-stack direction="row" gap="400" class="d-bgc-success-strong d-p8">
+    <dt-stack direction="row" gap="100" class="d-bgc-success-strong d-p8">
       <dt-icon name="check-circle" size="200" />
       <dt-text>Success</dt-text>
     </dt-stack>
@@ -351,16 +351,16 @@ Apply a [semantic surface color](/utilities/backgrounds/color.md) to convey some
 </code-well-header>
 
 ```html
-<dt-stack direction="row" gap="400" class="d-fc-primary-inverted">
-  <dt-stack direction="row" gap="400" class="d-bgc-critical-strong d-p8">
+<dt-stack direction="row" gap="100" class="d-fc-primary-inverted">
+  <dt-stack direction="row" gap="100" class="d-bgc-critical-strong d-p8">
     <dt-icon name="alert-triangle" size="200" />
     <dt-text>Critical</dt-text>
   </dt-stack>
-  <dt-stack direction="row" gap="400" class="d-bgc-info-strong d-p8">
+  <dt-stack direction="row" gap="100" class="d-bgc-info-strong d-p8">
     <dt-icon name="alert-circle" size="200" />
     <dt-text>Info</dt-text>
   </dt-stack>
-  <dt-stack direction="row" gap="400" class="d-bgc-success-strong d-p8">
+  <dt-stack direction="row" gap="100" class="d-bgc-success-strong d-p8">
     <dt-icon name="check-circle" size="200" />
     <dt-text>Success</dt-text>
   </dt-stack>
@@ -372,16 +372,16 @@ Apply a [semantic surface color](/utilities/backgrounds/color.md) to convey some
 Use the [DtText](/components/text.html) component for text styling. It provides a semantic, prop-driven API for typography.
 
 <code-well-header>
-  <dt-stack direction="row" gap="400" class="d-fc-primary-inverted">
-    <dt-stack direction="row" gap="400" class="d-bgc-critical-strong d-p8">
+  <dt-stack direction="row" gap="100" class="d-fc-primary-inverted">
+    <dt-stack direction="row" gap="100" class="d-bgc-critical-strong d-p8">
       <dt-icon name="alert-triangle" size="200" />
       <dt-text kind="label" size="sm">Critical</dt-text>
     </dt-stack>
-    <dt-stack direction="row" gap="400" class="d-bgc-info-strong d-p8">
+    <dt-stack direction="row" gap="100" class="d-bgc-info-strong d-p8">
       <dt-icon name="alert-circle" size="200" />
       <dt-text kind="label" size="sm">Info</dt-text>
     </dt-stack>
-    <dt-stack direction="row" gap="400" class="d-bgc-success-strong d-p8">
+    <dt-stack direction="row" gap="100" class="d-bgc-success-strong d-p8">
       <dt-icon name="check-circle" size="200" />
       <dt-text kind="label" size="sm">Success</dt-text>
     </dt-stack>
@@ -389,16 +389,16 @@ Use the [DtText](/components/text.html) component for text styling. It provides 
 </code-well-header>
 
 ```html
-<dt-stack direction="row" gap="400" class="d-fc-primary-inverted">
-  <dt-stack direction="row" gap="400" class="d-bgc-critical-strong d-p8">
+<dt-stack direction="row" gap="100" class="d-fc-primary-inverted">
+  <dt-stack direction="row" gap="100" class="d-bgc-critical-strong d-p8">
     <dt-icon name="alert-triangle" size="200" />
     <dt-text kind="label" size="sm">Critical</dt-text>
   </dt-stack>
-  <dt-stack direction="row" gap="400" class="d-bgc-info-strong d-p8">
+  <dt-stack direction="row" gap="100" class="d-bgc-info-strong d-p8">
     <dt-icon name="alert-circle" size="200" />
     <dt-text kind="label" size="sm">Info</dt-text>
   </dt-stack>
-  <dt-stack direction="row" gap="400" class="d-bgc-success-strong d-p8">
+  <dt-stack direction="row" gap="100" class="d-bgc-success-strong d-p8">
     <dt-icon name="check-circle" size="200" />
     <dt-text kind="label" size="sm">Success</dt-text>
   </dt-stack>
@@ -410,16 +410,16 @@ Use the [DtText](/components/text.html) component for text styling. It provides 
 Refine the spacing by adjusting the [Stack](/components/stack.md) `gap` prop and padding utilities for horizontal and vertical padding.
 
 <code-well-header>
-  <dt-stack direction="row" gap="400" class="d-fc-primary-inverted">
-    <dt-stack direction="row" gap="300" class="d-bgc-critical-strong d-py4 d-px8">
+  <dt-stack direction="row" gap="100" class="d-fc-primary-inverted">
+    <dt-stack direction="row" gap="50" class="d-bgc-critical-strong d-py4 d-px8">
       <dt-icon name="alert-triangle" size="200" />
       <dt-text kind="label" size="sm">Critical</dt-text>
     </dt-stack>
-    <dt-stack direction="row" gap="300" class="d-bgc-info-strong d-py4 d-px8">
+    <dt-stack direction="row" gap="50" class="d-bgc-info-strong d-py4 d-px8">
       <dt-icon name="alert-circle" size="200" />
       <dt-text kind="label" size="sm">Info</dt-text>
     </dt-stack>
-    <dt-stack direction="row" gap="300" class="d-bgc-success-strong d-py4 d-px8">
+    <dt-stack direction="row" gap="50" class="d-bgc-success-strong d-py4 d-px8">
       <dt-icon name="check-circle" size="200" />
       <dt-text kind="label" size="sm">Success</dt-text>
     </dt-stack>
@@ -427,16 +427,16 @@ Refine the spacing by adjusting the [Stack](/components/stack.md) `gap` prop and
 </code-well-header>
 
 ```html
-<dt-stack direction="row" gap="400" class="d-fc-primary-inverted">
-  <dt-stack direction="row" gap="300" class="d-bgc-critical-strong d-py4 d-px8">
+<dt-stack direction="row" gap="100" class="d-fc-primary-inverted">
+  <dt-stack direction="row" gap="50" class="d-bgc-critical-strong d-py4 d-px8">
     <dt-icon name="alert-triangle" size="200" />
     <dt-text kind="label" size="sm">Critical</dt-text>
   </dt-stack>
-  <dt-stack direction="row" gap="300" class="d-bgc-info-strong d-py4 d-px8">
+  <dt-stack direction="row" gap="50" class="d-bgc-info-strong d-py4 d-px8">
     <dt-icon name="alert-circle" size="200" />
     <dt-text kind="label" size="sm">Info</dt-text>
   </dt-stack>
-  <dt-stack direction="row" gap="300" class="d-bgc-success-strong d-py4 d-px8">
+  <dt-stack direction="row" gap="50" class="d-bgc-success-strong d-py4 d-px8">
     <dt-icon name="check-circle" size="200" />
     <dt-text kind="label" size="sm">Success</dt-text>
   </dt-stack>
@@ -448,16 +448,16 @@ Refine the spacing by adjusting the [Stack](/components/stack.md) `gap` prop and
 Add `d-bar4` to each item for subtle rounded corners.
 
 <code-well-header>
-  <dt-stack direction="row" gap="400" class="d-fc-primary-inverted">
-    <dt-stack direction="row" gap="300" class="d-bar4 d-bgc-critical-strong d-py4 d-px8">
+  <dt-stack direction="row" gap="100" class="d-fc-primary-inverted">
+    <dt-stack direction="row" gap="50" class="d-bar4 d-bgc-critical-strong d-py4 d-px8">
       <dt-icon name="alert-triangle" size="200" />
       <dt-text kind="label" size="sm">Critical</dt-text>
     </dt-stack>
-    <dt-stack direction="row" gap="300" class="d-bar4 d-bgc-info-strong d-py4 d-px8">
+    <dt-stack direction="row" gap="50" class="d-bar4 d-bgc-info-strong d-py4 d-px8">
       <dt-icon name="alert-circle" size="200" />
       <dt-text kind="label" size="sm">Info</dt-text>
     </dt-stack>
-    <dt-stack direction="row" gap="300" class="d-bar4 d-bgc-success-strong d-py4 d-px8">
+    <dt-stack direction="row" gap="50" class="d-bar4 d-bgc-success-strong d-py4 d-px8">
       <dt-icon name="check-circle" size="200" />
       <dt-text kind="label" size="sm">Success</dt-text>
     </dt-stack>
@@ -465,16 +465,16 @@ Add `d-bar4` to each item for subtle rounded corners.
 </code-well-header>
 
 ```html
-<dt-stack direction="row" gap="400" class="d-fc-primary-inverted">
-  <dt-stack direction="row" gap="300" class="d-bar4 d-bgc-critical-strong d-py4 d-px8">
+<dt-stack direction="row" gap="100" class="d-fc-primary-inverted">
+  <dt-stack direction="row" gap="50" class="d-bar4 d-bgc-critical-strong d-py4 d-px8">
     <dt-icon name="alert-triangle" size="200" />
     <dt-text kind="label" size="sm">Critical</dt-text>
   </dt-stack>
-  <dt-stack direction="row" gap="300" class="d-bar4 d-bgc-info-strong d-py4 d-px8">
+  <dt-stack direction="row" gap="50" class="d-bar4 d-bgc-info-strong d-py4 d-px8">
     <dt-icon name="alert-circle" size="200" />
     <dt-text kind="label" size="sm">Info</dt-text>
   </dt-stack>
-  <dt-stack direction="row" gap="300" class="d-bar4 d-bgc-success-strong d-py4 d-px8">
+  <dt-stack direction="row" gap="50" class="d-bar4 d-bgc-success-strong d-py4 d-px8">
     <dt-icon name="check-circle" size="200" />
     <dt-text kind="label" size="sm">Success</dt-text>
   </dt-stack>

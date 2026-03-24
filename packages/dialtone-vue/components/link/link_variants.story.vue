@@ -1,7 +1,7 @@
 <template>
   <div>
     <dt-stack
-      gap="400"
+      gap="100"
       direction="row"
       class="d-p8"
     >
@@ -16,7 +16,7 @@
     </dt-stack>
     <div class="d-bgc-contrast">
       <dt-stack
-        gap="400"
+        gap="100"
         direction="row"
         class="d-p8"
       >

@@ -1,6 +1,6 @@
 <template>
   <dt-stack
-    gap="600"
+    gap="400"
     class="d-p24"
   >
     <!-- Speed Variants -->
@@ -9,12 +9,12 @@
         Speed Variants
       </h2>
       <dt-stack
-        gap="500"
+        gap="200"
       >
         <dt-stack
           v-for="speed in speeds"
           :key="speed.value"
-          gap="400"
+          gap="100"
         >
           <dt-stack
             direction="row"
@@ -57,12 +57,12 @@
         Text Size Variants
       </h2>
       <dt-stack
-        gap="500"
+        gap="200"
       >
         <dt-stack
           v-for="size in textSizes"
           :key="size.class"
-          gap="400"
+          gap="100"
         >
           <dt-stack
             direction="row"
@@ -126,11 +126,11 @@
         Manual Controls
       </h2>
       <dt-stack
-        gap="500"
+        gap="200"
       >
         <dt-stack
           direction="row"
-          gap="400"
+          gap="100"
           class="d-fw-wrap"
         >
           <dt-button

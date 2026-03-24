@@ -36,10 +36,10 @@ With this we accomplish the requirement to have the previous year button focused
 
 <code-example-tabs
 htmlCode='
-<div class="d-stack d-stack--gap-400 d-datepicker">
+<div class="d-stack d-stack--gap-100 d-datepicker">
   <div class="d-datepicker__hd">
-    <div class="d-stack d-stack--row d-stack--gap-300 d-datepicker__month-year">
-      <nav class="d-stack d-stack--row d-stack--gap-200 d-datepicker__nav">
+    <div class="d-stack d-stack--row d-stack--gap-50 d-datepicker__month-year">
+      <nav class="d-stack d-stack--row d-stack--gap-25 d-datepicker__nav">
         <div data-qa="dt-tooltip-container">
           <span data-qa="dt-tooltip-anchor">
             <button class="base-button__button d-btn d-btn--muted d-btn--xs d-btn--circle d-datepicker__nav-btn" data-qa="dt-button" type="button" aria-label="Change to Previous year 2023" id="prevYearButton">
@@ -60,7 +60,7 @@ htmlCode='
         </div>
       </nav>
       <div id="calendar-heading" class="d-datepicker__month-year-title">March 2024</div>
-      <nav class="d-stack d-stack--row d-stack--gap-200 d-datepicker__nav">
+      <nav class="d-stack d-stack--row d-stack--gap-25 d-datepicker__nav">
         <div data-qa="dt-tooltip-container">
           <span data-qa="dt-tooltip-anchor">
             <button class="base-button__button d-btn d-btn--muted d-btn--xs d-btn--circle d-datepicker__nav-btn" data-qa="dt-button" type="button" aria-label="Change to Next month April" id="nextMonthButton">
@@ -196,10 +196,10 @@ showHtmlWarning />
 <code-example-tabs
 htmlCode='
 <div data-qa="dt-popover-content" class="d-popover__content">
-  <div class="d-stack d-stack--gap-400 d-datepicker">
+  <div class="d-stack d-stack--gap-100 d-datepicker">
     <div class="d-datepicker__hd">
-      <div class="d-stack d-stack--row d-stack--gap-300 d-datepicker__month-year">
-        <nav class="d-stack d-stack--row d-stack--gap-200 d-datepicker__nav">
+      <div class="d-stack d-stack--row d-stack--gap-50 d-datepicker__month-year">
+        <nav class="d-stack d-stack--row d-stack--gap-25 d-datepicker__nav">
           <div>
             <span>
               <button
@@ -228,7 +228,7 @@ htmlCode='
           </div>
         </nav>
         <div class="d-datepicker__month-year-title">July 2024</div>
-        <nav class="d-stack d-stack--row d-stack--gap-200 d-datepicker__nav">
+        <nav class="d-stack d-stack--row d-stack--gap-25 d-datepicker__nav">
           <div>
             <span>
               <button
@@ -376,7 +376,7 @@ The following functions are available for date formatting.
 <div class="d-bgc-secondary d-bar8 d-p16">
   <dt-stack
     :direction="{ 'default': 'column', 'md': 'row' }"
-    gap="600"
+    gap="400"
     align="start"
   >
     <dt-stack align="center">
