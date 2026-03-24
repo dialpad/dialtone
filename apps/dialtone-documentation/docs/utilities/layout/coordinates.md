@@ -96,7 +96,8 @@ Use the `top|right|bottom|left|x|y|all` utility classes to absolutely position e
               <em>N/A</em>
             </td>
             <td v-else class="d-code--sm d-docsite-code">
-              .d-{{ pre }}-{{ coordinate }}
+              <span v-if="/^\d+$/.test(coordinate)">.d-{{ pre }}-{{ coordinate }}</span>
+              <span v-else>.d-{{ pre }}{{ coordinate }}</span>
             </td>
           </div>
         </tr>
@@ -195,7 +196,8 @@ Use the `top|right|bottom|left|x|y|all` utility classes to absolutely position e
               <em>N/A</em>
             </td>
             <td v-else class="d-code--sm d-docsite-code">
-              .d-{{ pre }}-n{{ coordinate }}
+              <span v-if="/^\d+$/.test(coordinate)">.d-{{ pre }}-n{{ coordinate }}</span>
+              <span v-else>.d-{{ pre }}n{{ coordinate }}</span>
             </td>
           </div>
         </tr>

@@ -189,6 +189,24 @@
       "negative": "yes",
       "combo": "yes",
       "value": "64px"
+    },
+    {
+      "coordinate": "50p",
+      "negative": "yes",
+      "combo": "no",
+      "value": "50%"
+    },
+    {
+      "coordinate": "100p",
+      "negative": "yes",
+      "combo": "no",
+      "value": "100%"
+    },
+    {
+      "coordinate": "100p-calc",
+      "negative": "yes",
+      "combo": "no",
+      "value": "calc(100% + 8px)"
     }
   ]
 }
