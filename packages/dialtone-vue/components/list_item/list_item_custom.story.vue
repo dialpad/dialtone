@@ -15,10 +15,10 @@
         v-else
         direction="row"
         align="center"
-        class="custom-list-item d-ps-relative d-py8 d-px12"
+        class="custom-list-item d-ps-relative d-py-100 d-px-150"
       >
         <time
-          class="custom-list-item--time d-fs-100 d-pr12"
+          class="custom-list-item--time d-fs-100 d-pr-150"
           datetime="10:00"
         >
           10:00
@@ -28,10 +28,10 @@
         </span>
         <dt-stack
           direction="row"
-          class="custom-list-item--actions d-ps-absolute d-p6 d-tn8 d-r12 d-bgc-white d-bar4 d-bs-md"
+          class="custom-list-item--actions d-ps-absolute d-p-75 d-t-n100 d-r-150 d-bgc-white d-bar4 d-bs-md"
         >
           <dt-button
-            class="d-p4 d-py8"
+            class="d-p-50 d-py-100"
             importance="clear"
             title="share"
             @click.stop="() => {}"
@@ -44,7 +44,7 @@
             </template>
           </dt-button>
           <dt-button
-            class="d-p4 d-py8 d-ml4"
+            class="d-p-50 d-py-100 d-ml-50"
             importance="clear"
             title="star"
             @click.stop="() => {}"
@@ -57,7 +57,7 @@
             </template>
           </dt-button>
           <dt-button
-            class="d-p4 d-py8 d-ml4"
+            class="d-p-50 d-py-100 d-ml-50"
             importance="clear"
             title="more"
             @click.stop="() => {}"

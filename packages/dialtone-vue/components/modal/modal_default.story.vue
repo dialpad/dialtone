@@ -55,7 +55,7 @@
           <dt-button
             :kind="$attrs.kind"
             importance="primary"
-            class="d-ml6"
+            class="d-ml-75"
           >
             Confirm
           </dt-button>

@@ -78,9 +78,9 @@ htmlCode='
 </div>
 <div class="tippy-box d-ps-absolute" id="tippy-1" style="z-index: 650; position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(-593px, 197px, 0px);" data-popper-placement="bottom-end">
   <div id="dt0" role="dialog" aria-hidden="false" aria-labelledby="DtPopover__anchor1" aria-modal="false" tabindex="-1" class="d-popover__dialog d-popover__dialog--modal" style="">
-    <div class="d-popover__content d-p16">
+    <div class="d-popover__content d-p-200">
       <div>
-        <p class="d-mb4">This is content rendered within the popover.</p>
+        <p class="d-mb-50">This is content rendered within the popover.</p>
         <button type="button" class="base-button__button d-btn d-btn--primary">
           <span class="d-btn__label base-button__label"> Button </span>
         </button>
@@ -102,7 +102,7 @@ vueCode='
     #content="{ close }"
   >
     <div>
-      <p class="d-mb4">
+      <p class="d-mb-50">
         This is content rendered within the popover.
       </p>
       <dt-button
@@ -133,9 +133,9 @@ htmlCode='
 </div>
 <div class="tippy-box d-ps-absolute" data-tippy-root="" id="tippy-1" data-popper-placement="bottom-end" style="z-index: 300; position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(-593px, 197px, 0px);">
   <div id="dt0" role="dialog" aria-hidden="false" aria-labelledby="DtPopover__anchor1" aria-modal="true" tabindex="-1" class="d-popover__dialog" style="">
-    <div class="d-popover__content d-p16">
+    <div class="d-popover__content d-p-200">
       <div>
-        <p class="d-mb4">This is content rendered within the popover.</p>
+        <p class="d-mb-50">This is content rendered within the popover.</p>
         <button type="button" class="base-button__button d-btn d-btn--primary">
           <span class="d-btn__label base-button__label"> Button </span>
         </button>
@@ -158,7 +158,7 @@ vueCode='
     #content="{ close }"
   >
     <div>
-      <p class="d-mb4">
+      <p class="d-mb-50">
         This is content rendered within the popover.
       </p>
       <dt-button
@@ -177,7 +177,7 @@ showHtmlWarning />
 <code-well-header>
   <example-popover modal header>
     <template #content>
-      <div class="d-mb8">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae.<br></div>
+      <div class="d-mb-100">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae.<br></div>
     </template>
   </example-popover>
 </code-well-header>
@@ -202,12 +202,12 @@ htmlCode='
     class="d-popover__dialog d-popover__dialog--modal"
     style="max-height: calc(100vh - var(--dt-spacing-50));"
   >
-    <div class="d-popover__header d-pl16">
+    <div class="d-popover__header d-pl-200">
       <div class="d-popover__header__content"><div class="d-w100p">This is the header</div></div>
     </div>
-    <div class="d-popover__content d-p16">
+    <div class="d-popover__content d-p-200">
       <div>
-        <div class="d-mb8">
+        <div class="d-mb-100">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam
           repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis
           obcaecati quibusdam repudiandae.<br />
@@ -238,7 +238,7 @@ vueCode='
     #content="{ close }"
   >
     <div>
-      <div class="d-mb8">
+      <div class="d-mb-100">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae.<br>
       </div>
       <dt-button
@@ -257,7 +257,7 @@ showHtmlWarning />
 <code-well-header>
   <example-popover modal footer>
     <template #content>
-      <div class="d-mb8">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae.<br></div>
+      <div class="d-mb-100">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae.<br></div>
     </template>
   </example-popover>
 </code-well-header>
@@ -282,9 +282,9 @@ htmlCode='
     class="d-popover__dialog d-popover__dialog--modal"
     style="max-height: calc(100vh - var(--dt-spacing-50));"
   >
-    <div class="d-popover__content d-p16">
+    <div class="d-popover__content d-p-200">
       <div>
-        <div class="d-mb8">
+        <div class="d-mb-100">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam
           repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis
           obcaecati quibusdam repudiandae.<br />
@@ -294,7 +294,7 @@ htmlCode='
         </button>
       </div>
     </div>
-    <div class="d-popover__footer d-pl16">
+    <div class="d-popover__footer d-pl-200">
       <div class="d-popover__footer__content"><div class="d-w100p">This is the footer</div></div>
     </div>
   </div>
@@ -313,7 +313,7 @@ vueCode='
     #content="{ close }"
   >
     <div>
-      <div class="d-mb8">
+      <div class="d-mb-100">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae.<br>
       </div>
       <dt-button
@@ -358,7 +358,7 @@ vueCode='
     #content="{ close }"
   >
     <div>
-      <p class="d-mb4">
+      <p class="d-mb-50">
         This is content rendered within the popover.
       </p>
       <dt-button
@@ -395,7 +395,7 @@ vueCode='
     #content="{ close }"
   >
     <div>
-      <p class="d-mb4">
+      <p class="d-mb-50">
         This is content rendered within the popover.
       </p>
       <dt-button

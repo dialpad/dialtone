@@ -22,12 +22,12 @@
         size="sm"
         kind="muted"
         importance="clear"
-        class="d-bar-pill d-py4 d-fc-critical d-to-ellipsis"
+        class="d-bar-pill d-py-50 d-fc-critical d-to-ellipsis"
       >
         <template #icon>
           <dt-icon-bell-ring size="100" />
         </template>
-        <span class="d-truncate d-wmx128">
+        <span class="d-truncate d-wmx-200">
           Off duty
         </span>
       </dt-button>
@@ -37,7 +37,7 @@
         direction="row"
         justify="between"
         align="center"
-        class="d-p8"
+        class="d-p-100"
       >
         <div class="d-headline--xl">
           01:15

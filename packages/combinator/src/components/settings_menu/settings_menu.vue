@@ -18,8 +18,8 @@
       </dt-button>
     </template>
     <template #content>
-      <div class="d-px8">
-        <section class="d-p8">
+      <div class="d-px-100">
+        <section class="d-p-100">
           <dt-radio-group
             name="theme-radio-group"
             legend="Theme"
@@ -34,7 +34,7 @@
             </dt-radio>
           </dt-radio-group>
         </section>
-        <section class="d-p8">
+        <section class="d-p-100">
           <dt-radio-group
             name="scheme-radio-group"
             legend="Scheme"
@@ -49,7 +49,7 @@
             </dt-radio>
           </dt-radio-group>
         </section>
-        <section class="d-p8">
+        <section class="d-p-100">
           <dt-radio-group
             name="sidebar-radio-group"
             legend="Sidebar Position"
@@ -64,7 +64,7 @@
             </dt-radio>
           </dt-radio-group>
         </section>
-        <section class="d-p8">
+        <section class="d-p-100">
           <dt-input
             :key="indentKey"
             type="number"
@@ -73,7 +73,7 @@
             @input="updateIndent"
           />
         </section>
-        <section class="d-p8">
+        <section class="d-p-100">
           <dt-checkbox
             :checked="settings.code.verbose"
             @input="e => updateSettings('code', 'verbose', e)"

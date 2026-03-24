@@ -4,7 +4,7 @@ description: Utilities for setting the background color.
 keywords: ["bg color","background colour","bgc"]
 ---
 
-<dt-notice kind="warning" class="d-wmx100p d-mt24" hideClose>
+<dt-notice kind="warning" class="d-wmx100p d-mt-300" hideClose>
   Before using background color utilities, first consider <dt-link to="/design/colors/palette/#surface" kind="muted">semantic surface colors</dt-link>.
 </dt-notice>
 
@@ -19,7 +19,7 @@ Use `d-bgc-{color}` to set an element's background color.
   >
     <div
       v-for="color in ['primary', 'critical']"
-      class="d-p16 d-bar4"
+      class="d-p-200 d-bar4"
       :class="`d-bgc-${color}`"
     >
       {{ color.charAt(0).toUpperCase() + color.slice(1) }}
@@ -37,13 +37,13 @@ Use `d-bgc-{color}` to set an element's background color.
 Use `h:d-bgc-{color}` to change an element's `:hover` state background color.
 
 <code-well-header>
-  <dt-button kind="unstyled" class="d-p16 d-bgc-primary h:d-bgc-critical">
+  <dt-button kind="unstyled" class="d-p-200 d-bgc-primary h:d-bgc-critical">
     Hover over me
   </dt-button>
 </code-well-header>
 
 ```html
-<dt-button kind="unstyled" class="d-p16 d-bgc-primary h:d-bgc-critical">
+<dt-button kind="unstyled" class="d-p-200 d-bgc-primary h:d-bgc-critical">
   Hover over me
 </dt-button>
 ```
@@ -53,13 +53,13 @@ Use `h:d-bgc-{color}` to change an element's `:hover` state background color.
 Use `f:d-bgc-{color}` to change an element's `:focus` and `:focus-within` state background color.
 
 <code-well-header>
-  <dt-button kind="unstyled" class="d-p16 d-bgc-primary f:d-bgc-critical">
+  <dt-button kind="unstyled" class="d-p-200 d-bgc-primary f:d-bgc-critical">
     Focus me
   </dt-button>
 </code-well-header>
 
 ```html
-<dt-button kind="unstyled" class="d-p16 d-bgc-primary f:d-bgc-critical">
+<dt-button kind="unstyled" class="d-p-200 d-bgc-primary f:d-bgc-critical">
   Focus me
 </dt-button>
 ```
@@ -69,13 +69,13 @@ Use `f:d-bgc-{color}` to change an element's `:focus` and `:focus-within` state 
 Use `fv:d-bgc-{color}` to change an element's `:focus-visible` state background color [only when focused by keyboard].
 
 <code-well-header>
-  <dt-button kind="unstyled" class="d-p16 d-bgc-primary fv:d-bgc-critical">
+  <dt-button kind="unstyled" class="d-p-200 d-bgc-primary fv:d-bgc-critical">
     Keyboard focus me
   </dt-button>
 </code-well-header>
 
 ```html
-<dt-button kind="unstyled" class="d-p16 d-bgc-primary fv:d-bgc-critical">
+<dt-button kind="unstyled" class="d-p-200 d-bgc-primary fv:d-bgc-critical">
   Keyboard focus me
 </dt-button>
 ```
@@ -91,7 +91,7 @@ Use `d-bgo{stop}` to change an element's background color opacity. You can also 
   >
     <div
       v-for="opacity in [100, 99, 95, 90, 75, 50, 25, 10, 0]"
-      class="d-p8 d-bgc-critical d-bar4"
+      class="d-p-100 d-bgc-critical d-bar4"
       :class="`d-bgo${opacity}`"
     >
       {{ opacity }}%

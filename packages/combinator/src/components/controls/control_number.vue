@@ -18,7 +18,7 @@
         </template>
       </dt-input>
     </div>
-    <div class="d-pl6">
+    <div class="d-pl-75">
       <dt-checkbox
         label="NaN"
         :checked="isNaN(value)"

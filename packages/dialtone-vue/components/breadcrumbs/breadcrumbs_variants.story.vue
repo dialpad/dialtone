@@ -1,10 +1,10 @@
 <template>
   <div>
     <dt-breadcrumbs
-      class="d-py16 d-px12"
+      class="d-py-200 d-px-150"
       :breadcrumbs="$attrs.breadcrumbs"
     />
-    <div class="d-bgc-contrast d-py16 d-px12">
+    <div class="d-bgc-contrast d-py-200 d-px-150">
       <dt-breadcrumbs
         inverted
         :breadcrumbs="$attrs.breadcrumbs"
@@ -12,7 +12,7 @@
     </div>
 
     <dt-breadcrumbs
-      class="d-py16 d-px12"
+      class="d-py-200 d-px-150"
     >
       <dt-breadcrumb-item
         v-for="(breadcrumb, idx) in $attrs.breadcrumbs"

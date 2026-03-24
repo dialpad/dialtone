@@ -7,7 +7,7 @@
       <dt-stack
         gap="200"
         direction="row"
-        class="d-mtn8 d-mbn8 d-mrn4 d-d-none md:d-d-flex"
+        class="d-mt-n100 d-mb-n100 d-mr-n50 d-d-none md:d-d-flex"
       >
         <h2
           class="d-fl1"

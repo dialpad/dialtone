@@ -1,7 +1,7 @@
 <template>
   <dt-stack
     gap="200"
-    class="d-px8"
+    class="d-px-100"
   >
     <h2>Variants</h2>
     <table class="d-table d-bt d-bb d-bbw2">

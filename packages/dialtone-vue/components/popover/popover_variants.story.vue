@@ -1,6 +1,6 @@
 <!-- eslint-disable max-lines -->
 <template>
-  <div class="d-d-flex d-jc-space-between d-fw-wrap d-w100p d-cg12 d-fl-col2">
+  <div class="d-d-flex d-jc-space-between d-fw-wrap d-w100p d-cg-150 d-fl-col2">
     <dt-popover
       :open="$attrs.open"
       :modal="$attrs.modal"
@@ -9,7 +9,7 @@
       width-content="anchor"
       placement="bottom-start"
       initial-focus-element="first"
-      class="d-mb128"
+      class="d-mb-200"
     >
       <template
         #anchor="{ attrs }"
@@ -22,7 +22,7 @@
       </template>
       <template #content="{ close }">
         <div>
-          <p class="d-mb4">
+          <p class="d-mb-50">
             I will be displayed in the popover!
           </p>
           <dt-button
@@ -40,7 +40,7 @@
       :transition="$attrs.transition"
       width-content="anchor"
       initial-focus-element="first"
-      class="d-mb128 d-jc-flex-end"
+      class="d-mb-200 d-jc-flex-end"
     >
       <template
         #anchor="{ attrs }"
@@ -53,7 +53,7 @@
       </template>
       <template #content="{ close }">
         <div>
-          <p class="d-mb4">
+          <p class="d-mb-50">
             I will be displayed in the popover!
           </p>
           <dt-button
@@ -72,7 +72,7 @@
       padding="none"
       width-content="anchor"
       initial-focus-element="first"
-      class="d-mb128"
+      class="d-mb-200"
     >
       <template
         #anchor="{ attrs }"
@@ -84,7 +84,7 @@
         </dt-button>
       </template>
       <template #content="{ close }">
-        <div class="d-fs-200 d-m0">
+        <div class="d-fs-200 d-m-0">
           <div>
             <dt-button
               @click="close"
@@ -114,7 +114,7 @@
       </template>
       <template #content="{ close }">
         <div>
-          <p class="d-mb4">
+          <p class="d-mb-50">
             I will be displayed in the popover!
           </p>
           <dt-button
@@ -130,7 +130,7 @@
       :modal="$attrs.modal"
       :hide-on-click="$attrs.hideOnClick"
       :transition="$attrs.transition"
-      class="d-mb128"
+      class="d-mb-200"
       :show-close-button="true"
       placement="bottom-start"
       header-class="d-d-flex d-ai-center d-jc-space-between"
@@ -157,7 +157,7 @@
         <div>
           <dt-button
             circle
-            class="d-p6 d-bc-transparent"
+            class="d-p-75 d-bc-transparent"
             importance="outlined"
           >
             <template #startIcon>
@@ -170,7 +170,7 @@
 
           <dt-button
             circle
-            class="d-p6 d-bc-transparent"
+            class="d-p-75 d-bc-transparent"
             importance="outlined"
           >
             <template #startIcon>
@@ -202,7 +202,7 @@
       :modal="$attrs.modal"
       :hide-on-click="$attrs.hideOnClick"
       :transition="$attrs.transition"
-      class="d-mb128 d-jc-flex-end"
+      class="d-mb-200 d-jc-flex-end"
       :show-close-button="true"
       max-height="20rem"
       max-width="50rem"
@@ -235,7 +235,7 @@
       :modal="$attrs.modal"
       :transition="$attrs.transition"
       :hide-on-click="$attrs.hideOnClick"
-      class="d-my128"
+      class="d-my-200"
       max-height="20rem"
       max-width="50rem"
       initial-focus-element="first"
@@ -270,9 +270,9 @@
       :modal="$attrs.modal"
       :transition="$attrs.transition"
       :hide-on-click="$attrs.hideOnClick"
-      content-class="d-pl12 d-pr16"
+      content-class="d-pl-150 d-pr-200"
       initial-focus-element="first"
-      class="d-my128 d-jc-flex-end"
+      class="d-my-200 d-jc-flex-end"
       max-height="15rem"
       max-width="50rem"
     >
@@ -359,8 +359,8 @@
       :modal="$attrs.modal"
       :transition="$attrs.transition"
       :hide-on-click="$attrs.hideOnClick"
-      content-class="d-pl12 d-pr16"
-      class="d-my128"
+      content-class="d-pl-150 d-pr-200"
+      class="d-my-200"
       initial-focus-element="first"
       max-height="20rem"
       max-width="50rem"
@@ -393,8 +393,8 @@
       :modal="false"
       :hide-on-click="$attrs.hideOnClick"
       :transition="$attrs.transition"
-      content-class="d-pl12 d-pr16"
-      class="d-my128 d-jc-flex-end"
+      content-class="d-pl-150 d-pr-200"
+      class="d-my-200 d-jc-flex-end"
       max-height="20rem"
       max-width="50rem"
     >

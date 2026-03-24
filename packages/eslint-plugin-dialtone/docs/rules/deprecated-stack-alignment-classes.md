@@ -27,13 +27,13 @@ This improves:
 <dt-stack class="d-fd-row">...</dt-stack>
 
 <!-- Use gap prop instead of d-g* -->
-<dt-stack class="d-g16">...</dt-stack>
+<dt-stack class="d-g-200">...</dt-stack>
 
 <!-- Remove redundant d-d-flex -->
 <dt-stack class="d-d-flex d-ai-center">...</dt-stack>
 
 <!-- Multiple violations -->
-<dt-stack class="d-p16 d-ai-flex-start d-fd-row d-g16">...</dt-stack>
+<dt-stack class="d-p-200 d-ai-flex-start d-fd-row d-g-200">...</dt-stack>
 ```
 
 ### Examples of correct code
@@ -47,7 +47,7 @@ This improves:
 
 <dt-stack gap="200">...</dt-stack>
 
-<dt-stack class="d-p16" align="start" direction="row" gap="200">...</dt-stack>
+<dt-stack class="d-p-200" align="start" direction="row" gap="200">...</dt-stack>
 
 <dt-stack
   :direction="{ 'default': 'column', 'md': 'row' }"
@@ -126,7 +126,7 @@ This rule only applies to `<dt-stack>` components. Regular HTML elements using t
 ```vue
 <div class="d-d-flex d-ai-center">...</div>
 <div class="d-jc-space-between">...</div>
-<div class="d-fd-row d-g16">...</div>
+<div class="d-fd-row d-g-200">...</div>
 ```
 
 ## Further Reading

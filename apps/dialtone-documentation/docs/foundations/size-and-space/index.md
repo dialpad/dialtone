@@ -25,7 +25,7 @@ Size tokens can be used with any CSS property that accepts a dimensional value:
 
 ### Setting a Specific Size
 
-<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
+<div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols3">
 <div>
 
 When assigning a size or spacing to an element, use [Size Tokens](#tokens).
@@ -39,7 +39,7 @@ gap: var(--dt-spacing-100);
 </div>
 <div class="d-gc2">
 <code-well-header>
-  <div class="d-d-grid d-g24 d-g-cols2 md:d-g-cols1 d-w100p">
+  <div class="d-d-grid d-g-300 d-g-cols2 md:d-g-cols1 d-w100p">
     <dt-stack direction="row" align="center" justify="center" class="d-ba d-bc-default d-js-center" :style="{ width: 'fit-content', minWidth: selectedSize }">
       Box
     </dt-stack>
@@ -61,7 +61,7 @@ gap: var(--dt-spacing-100);
 
 ### Setting Gaps Between Elements
 
-<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
+<div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols3">
 
 <div>
 
@@ -74,7 +74,7 @@ gap: var(--dt-spacing-100);
 </div>
 <div class="d-gc2">
 <code-well-header>
-  <div class="d-d-grid d-g24 d-g-cols2 md:d-g-cols1 d-w100p">
+  <div class="d-d-grid d-g-300 d-g-cols2 md:d-g-cols1 d-w100p">
     <dt-stack direction="row" :style="{ gap: selectedGap }">
       <dt-stack direction="row" align="center" justify="center" class="d-ba d-bc-default d-w100p">
         Element A
@@ -108,7 +108,7 @@ gap: var(--dt-spacing-100);
 
 ### Stacking
 
-<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
+<div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols3">
 <div>
 
 When adding space between elements, both vertically and horizontally, use either `space-between` or `gap` to define the space that separates each element.
@@ -135,7 +135,7 @@ When adding space between elements, both vertically and horizontally, use either
 
 ### Padding
 
-<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
+<div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols3">
 <div>
 
 When adding space around an element, use `padding` to create breathing room.
@@ -154,7 +154,7 @@ Avoid using `margin`, which adds space outside the element and can affect the la
 
 ### Widths and Heights
 
-<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
+<div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols3">
 <dt-stack direction="column" gap="1">
 <p>
 
@@ -176,7 +176,7 @@ Exceptions exist for select elements like Avatars, Icons, and Toggles. These ele
 
 ### Variable Sizing
 
-<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
+<div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols3">
 <div>
 
 The size of some components is determined by their content. Most expand vertically, while a select few expand horizontally.
@@ -194,7 +194,7 @@ The size of some components is determined by their content. Most expand vertical
 
 ### Responsiveness
 
-<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
+<div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols3">
 <div>
 
 Adapting to different devices, sizes should be fluid across breakpoints. While most Dialtone components are responsive, their fluidity depends on the layout they live within.
@@ -209,7 +209,7 @@ Adapting to different devices, sizes should be fluid across breakpoints. While m
 
 ### Accessibility
 
-<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols1">
+<div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols1">
 
 To ensure clickable and interactive areas are easily accessible, we recommend a minimum area of `var(--dt-size-radius-300)`, except for links within text. In Dialtone we've applied these to components such as buttons, toggles, checkboxes, radio buttons, dropdowns, and inputs.
 
@@ -219,7 +219,7 @@ To ensure clickable and interactive areas are easily accessible, we recommend a 
 
 ### Grouping
 
-<div class="d-d-grid d-g16 d-g-cols1 md:d-g-cols3" >
+<div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols3" >
   <div>
 <dt-stack direction="column" gap="100">
 <p>Group and adjust the distance between elements to guide users understanding of their relationships. Closer elements appear more connected, while larger gaps indicate less association.</p>
@@ -236,7 +236,7 @@ To ensure clickable and interactive areas are easily accessible, we recommend a 
 
 ### Guiding the Eye
 
-<div class="d-d-grid d-g16 d-g-cols1 md:d-g-cols3" >
+<div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols3" >
   <div>
     <dt-stack direction="column" gap="100">
       <div>

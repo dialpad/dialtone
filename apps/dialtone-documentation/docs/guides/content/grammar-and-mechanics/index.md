@@ -535,7 +535,7 @@ For calls, meetings, or any other session-based interaction, we show the duratio
   <tbody>
     <tr>
       <td>
-        <p class="d-mb2"><b>Maximum space</b></p>
+        <p class="d-mb-25"><b>Maximum space</b></p>
         <p>Write out the time identifiers fully when space allows.</p>
       </td>
       <td>[ NN hour(s) NN minutes ]</td>
@@ -543,7 +543,7 @@ For calls, meetings, or any other session-based interaction, we show the duratio
     </tr>
     <tr>
       <td>
-        <p class="d-mb2"><b>Limited space</b></p>
+        <p class="d-mb-25"><b>Limited space</b></p>
         <p>When space is somewhat limited, abbreviate the time identifiers.</p>
       </td>
       <td>[ NN hr NN min ]</td>
@@ -551,7 +551,7 @@ For calls, meetings, or any other session-based interaction, we show the duratio
     </tr>
     <tr>
       <td>
-        <p class="d-mb2"><b>Minimal space</b></p>
+        <p class="d-mb-25"><b>Minimal space</b></p>
         <p>For tabular data instances, durations can be represented in absolute numerical values. Leading zeros must be present.</p>
       </td>
       <td>[ DD : HH : MM : SS ]</td>

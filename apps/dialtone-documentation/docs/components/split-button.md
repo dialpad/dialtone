@@ -810,7 +810,7 @@ The `#leading` and `#trailing` slots are forwarded to the alpha button. Use `alp
     <dt-split-button
       importance="outlined"
       omega-tooltip-text="More calling options"
-      alpha-trailing-class="d-pr8"
+      alpha-trailing-class="d-pr-100"
     >
       Place Call
       <template #trailing>
@@ -820,7 +820,7 @@ The `#leading` and `#trailing` slots are forwarded to the alpha button. Use `alp
     <dt-split-button
       importance="outlined"
       omega-tooltip-text="More calling options"
-      alpha-leading-class="d-pl8"
+      alpha-leading-class="d-pl-100"
     >
       Place Call
       <template #leading>
@@ -836,7 +836,7 @@ vueCode='
 <dt-split-button
   importance="outlined"
   omega-tooltip-text="More options"
-  alpha-trailing-class="d-pr8"
+  alpha-trailing-class="d-pr-100"
 >
   Place Call
   <template #trailing>
@@ -846,7 +846,7 @@ vueCode='
 <dt-split-button
   importance="outlined"
   omega-tooltip-text="More options"
-  alpha-leading-class="d-pl8"
+  alpha-leading-class="d-pl-100"
 >
   Place Call
   <template #leading>

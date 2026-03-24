@@ -3,7 +3,7 @@
     <dt-stack
       gap="100"
       direction="row"
-      class="d-p8"
+      class="d-p-100"
     >
       <dt-link
         v-for="kind in LINK_VARIANTS"
@@ -18,7 +18,7 @@
       <dt-stack
         gap="100"
         direction="row"
-        class="d-p8"
+        class="d-p-100"
       >
         <dt-link
           v-for="kind in LINK_VARIANTS"

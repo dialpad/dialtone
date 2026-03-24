@@ -8,8 +8,8 @@ keywords: ["minimum height", "mnh"]
 
 Use `d-hmn{n}p` to set a minimum height percentage for an element. This can be combined with `d-h{n}p` and `d-hmx{n}` to have an element fill a certain height range.
 
-<code-well-header class="d-d-flex d-jc-center d-p24 d-bgc-secondary d-bgo50 d-w100p d-h216 d-flow16" custom>
-  <dt-stack direction="row" align="center" justify="center" class="d-py16 d-px8 d-w100p d-hmn100p d-bgc-moderate d-bar4 d-ta-center">1</dt-stack>
+<code-well-header class="d-d-flex d-jc-center d-p-300 d-bgc-secondary d-bgo50 d-w100p d-h216 d-flow16" custom>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100p d-hmn100p d-bgc-moderate d-bar4 d-ta-center">1</dt-stack>
 </code-well-header>
 
 ```html
@@ -22,15 +22,15 @@ Use `d-hmn{n}p` to set a minimum height percentage for an element. This can be c
 
 Use `d-hmn{n}` to set a fixed minimum height for an element. This can be combined with `d-h{n}p` and `d-hmx{n}` to have an element fill a certain height range.
 
-<code-well-header class="d-d-flex d-jc-center d-p24 d-bgc-secondary d-w100p d-hmn264 d-flow16 d-of-y-scroll" custom>
-  <dt-stack direction="row" align="center" justify="center" class="d-py16 d-px8 d-w64 d-h48 d-hmn64 d-bgc-moderate d-bar4 d-ta-center">1</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-py16 d-px8 d-w64 d-h48 d-hmn96 d-bgc-moderate d-bar4 d-ta-center">2</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-py16 d-px8 d-w64 d-hmn332 d-bgc-moderate d-bar4 d-ta-center">3</dt-stack>
+<code-well-header class="d-d-flex d-jc-center d-p-300 d-bgc-secondary d-w100p d-hmn264 d-flow16 d-of-y-scroll" custom>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w-100 d-h-75 d-hmn-100 d-bgc-moderate d-bar4 d-ta-center">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w-100 d-h-75 d-hmn-150 d-bgc-moderate d-bar4 d-ta-center">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w-100 d-hmn332 d-bgc-moderate d-bar4 d-ta-center">3</dt-stack>
 </code-well-header>
 
 ```html
-<div class="d-hmn64">1</div>
-<div class="d-hmn96">2</div>
+<div class="d-hmn-100">1</div>
+<div class="d-hmn-150">2</div>
 <div class="d-hmn332">3</div>
 ```
 
@@ -44,10 +44,10 @@ Use `d-hmn{n}` to set a fixed minimum height for an element. This can be combine
 <clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
-      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t-0">
         <tr>
-          <th scope="col" class="d-p0 d-bbw0 d-w30p"><div class="d-p16 d-bb d-bbw1">Class</div></th>
-          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bbw1">Output</div></th>
+          <th scope="col" class="d-p-0 d-bbw0 d-w30p"><div class="d-p-200 d-bb d-bbw1">Class</div></th>
+          <th scope="col" class="d-p-0 d-bbw0"><div class="d-p-200 d-bb d-bbw1">Output</div></th>
         </tr>
       </thead>
       <tbody>

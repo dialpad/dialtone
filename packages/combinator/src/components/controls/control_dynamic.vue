@@ -10,7 +10,7 @@
       />
     </div>
     <div
-      class="d-ps-relative d-b1"
+      class="d-ps-relative d-b-1"
       :class="inputClass"
       data-qa="dtc-control-dynamic-value"
     >

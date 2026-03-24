@@ -8,9 +8,9 @@ keywords: ["bg position", "center", "top", "bottom"]
 
 Use `d-bgp-{position}` to control where an element's background image is placed.
 
-<code-well-header class="d-fl-col5 d-fw-wrap d-g16 d-p16 d-bgc-secondary" custom>
-  <dt-stack align="center" class="d-g4" v-for="{ className } in positions">
-      <dt-stack direction="row" align="center" justify="center" class="d-w128 d-h128 d-bgc-moderate d-bar8 d-of-hidden d-bgr-none d-bgs-var" style="--bgg-size: 65% 65%; background-image: url('/assets/images/puffin.jpg');"
+<code-well-header class="d-fl-col5 d-fw-wrap d-g-200 d-p-200 d-bgc-secondary" custom>
+  <dt-stack align="center" class="d-g-50" v-for="{ className } in positions">
+      <dt-stack direction="row" align="center" justify="center" class="d-w-200 d-h-200 d-bgc-moderate d-bar8 d-of-hidden d-bgr-none d-bgs-var" style="--bgg-size: 65% 65%; background-image: url('/assets/images/puffin.jpg');"
         :class="`d-bgp-${className}`">
       </dt-stack>
       <code class="d-code--sm d-bgc-transparent">.d-bgp-{{ className }}</code>

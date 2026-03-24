@@ -7,7 +7,7 @@
       :key="slot"
     >
       <dt-button
-        class="d-px24"
+        class="d-px-300"
         importance="clear"
         :active="slot === value"
         @click="() => emit('click', slot)"

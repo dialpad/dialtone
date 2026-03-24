@@ -3,7 +3,7 @@
   <dt-stack gap="400">
     <div>
       <h3>Feed item with showHeader as False and isActive true</h3>
-      <ul class="d-py8">
+      <ul class="d-py-100">
         <dt-recipe-feed-item-row
           :show-header="false"
           :avatar-image-url="$attrs.avatarImageUrl"
@@ -52,7 +52,7 @@
                   align="center"
                   class="d-fs-100 d-lh200"
                 >
-                  <a class="d-link d-pr4">3 replies</a>
+                  <a class="d-link d-pr-50">3 replies</a>
                   <span class="feed-item-row__reply">Last reply an hour ago</span>
                 </dt-stack>
               </dt-stack>
@@ -98,7 +98,7 @@
     </div>
     <div>
       <h3>Feed item with image attachment</h3>
-      <ul class="d-py8">
+      <ul class="d-py-100">
         <dt-recipe-feed-item-row
           :show-header="true"
           :avatar-image-url="$attrs.avatarImageUrl"
@@ -115,7 +115,7 @@
               :image-src="fryImage"
               image-alt="Alt Text"
               close-aria-label="Close"
-              image-button-class="d-recipe-feed-item-row__image d-wmn64 d-hmn64 w-wmx332 d-hmx332"
+              image-button-class="d-recipe-feed-item-row__image d-wmn-100 d-hmn-100 w-wmx332 d-hmx332"
               aria-label="Click to open image"
             />
           </template>
@@ -131,7 +131,7 @@
     </div>
     <div>
       <h3>With video attachment</h3>
-      <ul class="d-py8">
+      <ul class="d-py-100">
         <dt-recipe-feed-item-row
           ref="feedItemRowFade"
           :show-header="false"
@@ -162,7 +162,7 @@
     </div>
     <div>
       <h3>Feed item state "error"</h3>
-      <ul class="d-py8">
+      <ul class="d-py-100">
         <dt-recipe-feed-item-row
           :show-header="false"
           :avatar-image-url="$attrs.avatarImageUrl"
@@ -192,7 +192,7 @@
       >
         Click to fade
       </dt-button>
-      <ul class="d-py8">
+      <ul class="d-py-100">
         <dt-recipe-feed-item-row
           ref="feedItemRowFade"
           :show-header="false"
@@ -218,7 +218,7 @@
     </div>
     <div class="d-h332">
       <h3>Feed item pill within</h3>
-      <ul class="d-py8">
+      <ul class="d-py-100">
         <dt-recipe-feed-item-row
           ref="feedItemRowFade"
           :show-header="false"
@@ -258,21 +258,21 @@
                 </div>
               </template>
               <template #content>
-                <div class="d-p16">
+                <div class="d-p-200">
                   <p>
                     The agent from Dialpad called to follow up on a support ticket
                     that Jeff was handling for them regarding Dialpad CTI. They apologized
                     for calling outside of the requested time and expressed that they had
                     asked the team to look into the issue and would email them after the call.
                   </p>
-                  <p class="d-fs-100 d-mt12">
+                  <p class="d-fs-100 d-mt-150">
                     <strong>Actions items</strong>
                   </p>
                   <dt-stack
                     as="p"
                     direction="row"
                   >
-                    <strong class="d-mr4">1. </strong>
+                    <strong class="d-mr-50">1. </strong>
                     The agent needs to inform the team to check on Vijay's request or ticket regarding Dialpad CTI.
                   </dt-stack>
                 </div>

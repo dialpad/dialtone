@@ -13,11 +13,11 @@
       >
         <dt-stack
           direction="row"
-          class="d-my1"
+          class="d-my-1"
         >
           <div class="d-fl-grow1">
             <dt-list-item
-              class="d-p6 d-pl0"
+              class="d-p-75 d-pl-0"
               navigation-type="tab"
               type="custom"
             >
@@ -30,7 +30,7 @@
           </div>
           <div>
             <dt-button
-              class="dtc-icon d-px0 d-py6 d-ps-relative d-t6"
+              class="dtc-icon d-px-0 d-py-75 d-ps-relative d-t-75"
               importance="clear"
               size="xs"
               :disabled="disabled"
@@ -43,7 +43,7 @@
       </template>
       <div>
         <dt-button
-          class="dtc-icon d-p0 d-mt8"
+          class="dtc-icon d-p-0 d-mt-100"
           importance="clear"
           :disabled="disabled"
           @click="addItem"

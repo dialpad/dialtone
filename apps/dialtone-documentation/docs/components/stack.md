@@ -14,13 +14,13 @@ keywords: ["layout", "vertical", "horizontal", "d-stack", "DtStack", "dt-stack",
       gap="200"
       class="d-bgc-moderate-opaque d-bar8"
     >
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Stack item 1
       </div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Stack item 2
       </div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Stack item 3
       </div>
     </dt-stack>
@@ -29,13 +29,13 @@ keywords: ["layout", "vertical", "horizontal", "d-stack", "DtStack", "dt-stack",
       direction="row"
       class="d-bgc-moderate-opaque d-bar8"
     >
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Stack item 1
       </div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Stack item 2
       </div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Stack item 3
       </div>
     </dt-stack>
@@ -54,13 +54,13 @@ keywords: ["layout", "vertical", "horizontal", "d-stack", "DtStack", "dt-stack",
     class="d-bgc-moderate-opaque d-bar8"
     ref="columnExample"
   >
-    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+    <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
       Stack item 1
     </div>
-    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+    <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
       Stack item 2
     </div>
-    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+    <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
       Stack item 3
     </div>
   </dt-stack>
@@ -90,13 +90,13 @@ vueCode='
     class="d-bgc-moderate-opaque d-bar8"
     ref="rowExample"
   >
-    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+    <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
       Stack item 1
     </div>
-    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+    <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
       Stack item 2
     </div>
-    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+    <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
       Stack item 3
     </div>
   </dt-stack>
@@ -125,13 +125,13 @@ showHtmlWarning />
     class="d-bgc-moderate-opaque d-bar8"
     ref="rowReverseExample"
   >
-    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+    <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
       Stack item 1
     </div>
-    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+    <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
       Stack item 2
     </div>
-    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+    <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
       Stack item 3
     </div>
   </dt-stack>
@@ -159,13 +159,13 @@ vueCode='
     class="d-bgc-moderate-opaque d-bar8"
     ref="columnReverseExample"
   >
-    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+    <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
       Stack item 1
     </div>
-    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+    <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
       Stack item 2
     </div>
-    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+    <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
       Stack item 3
     </div>
   </dt-stack>
@@ -204,9 +204,9 @@ Use `as="section"` to create a thematic grouping of content.
     class="d-bgc-moderate-opaque d-bar8"
     ref="asSectionExample"
   >
-    <div class="d-bgc-moderate-opaque d-bar8 d-p16">Stack item 1</div>
-    <div class="d-bgc-moderate-opaque d-bar8 d-p16">Stack item 2</div>
-    <div class="d-bgc-moderate-opaque d-bar8 d-p16">Stack item 3</div>
+    <div class="d-bgc-moderate-opaque d-bar8 d-p-200">Stack item 1</div>
+    <div class="d-bgc-moderate-opaque d-bar8 d-p-200">Stack item 2</div>
+    <div class="d-bgc-moderate-opaque d-bar8 d-p-200">Stack item 3</div>
   </dt-stack>
 </code-well-header>
 
@@ -236,9 +236,9 @@ Use `as="span"` when you need an inline container.
     class="d-bgc-moderate-opaque d-bar8"
     ref="asSpanExample"
   >
-    <span class="d-bgc-moderate-opaque d-bar8 d-p16">Inline item 1</span>
-    <span class="d-bgc-moderate-opaque d-bar8 d-p16">Inline item 2<br>with a second line</span>
-    <span class="d-bgc-moderate-opaque d-bar8 d-p16">Inline item 3</span>
+    <span class="d-bgc-moderate-opaque d-bar8 d-p-200">Inline item 1</span>
+    <span class="d-bgc-moderate-opaque d-bar8 d-p-200">Inline item 2<br>with a second line</span>
+    <span class="d-bgc-moderate-opaque d-bar8 d-p-200">Inline item 3</span>
   </dt-stack>
 </code-well-header>
 
@@ -266,7 +266,7 @@ showHtmlWarning />
       <dt-stack
         :direction="{ 'default': 'column', 'md': 'row' }"
         gap="25"
-        class="d-ba d-bc-subtle d-p2 d-bar8"
+        class="d-ba d-bc-subtle d-p-25 d-bar8"
         role="group"
         aria-labelledby="interactive-gap-label"
         @keydown="handleGapButtonKeydown"
@@ -301,9 +301,9 @@ showHtmlWarning />
           ref="gapExample"
           class="d-bgc-moderate-opaque d-t d-td300 d-bar8 d-ttf-quint"
         >
-          <div class="d-bgc-moderate-opaque d-bar8 d-p16">Stack item 1</div>
-          <div class="d-bgc-moderate-opaque d-bar8 d-p16">Stack item 2</div>
-          <div class="d-bgc-moderate-opaque d-bar8 d-p16">Stack item 3</div>
+          <div class="d-bgc-moderate-opaque d-bar8 d-p-200">Stack item 1</div>
+          <div class="d-bgc-moderate-opaque d-bar8 d-p-200">Stack item 2</div>
+          <div class="d-bgc-moderate-opaque d-bar8 d-p-200">Stack item 3</div>
         </dt-stack>
       </dt-stack>
       <dt-stack class="d-w100p md:d-w50p" gap="50">
@@ -314,9 +314,9 @@ showHtmlWarning />
           ref="gapExample"
           class="d-bgc-moderate-opaque d-t d-td300 d-bar8 d-ttf-quint"
         >
-          <div class="d-bgc-moderate-opaque d-bar8 d-p16 d-fl1">Stack item 1</div>
-          <div class="d-bgc-moderate-opaque d-bar8 d-p16 d-fl1">Stack item 2</div>
-          <div class="d-bgc-moderate-opaque d-bar8 d-p16 d-fl1">Stack item 3</div>
+          <div class="d-bgc-moderate-opaque d-bar8 d-p-200 d-fl1">Stack item 1</div>
+          <div class="d-bgc-moderate-opaque d-bar8 d-p-200 d-fl1">Stack item 2</div>
+          <div class="d-bgc-moderate-opaque d-bar8 d-p-200 d-fl1">Stack item 3</div>
         </dt-stack>
       </dt-stack>
     </dt-stack>
@@ -341,19 +341,19 @@ vueCode='
 <clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
-      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t-0">
         <tr>
-          <th scope="col" class="d-p0 d-bbw0">
-            <div class="d-p16 d-bb d-bbw1">Size</div>
+          <th scope="col" class="d-p-0 d-bbw0">
+            <div class="d-p-200 d-bb d-bbw1">Size</div>
           </th>
-          <th scope="col" class="d-p0 d-bbw0">
-            <div class="d-p16 d-bb d-bbw1">Design Token</div>
+          <th scope="col" class="d-p-0 d-bbw0">
+            <div class="d-p-200 d-bb d-bbw1">Design Token</div>
           </th>
-          <th scope="col" class="d-ta-right d-p0 d-bbw0">
-            <div class="d-p16 d-bb d-bbw1">REM</div>
+          <th scope="col" class="d-ta-right d-p-0 d-bbw0">
+            <div class="d-p-200 d-bb d-bbw1">REM</div>
           </th>
-          <th scope="col" class="d-ta-right d-p0 d-bbw0">
-            <div class="d-p16 d-bb d-bbw1">PX</div>
+          <th scope="col" class="d-ta-right d-p-0 d-bbw0">
+            <div class="d-p-200 d-bb d-bbw1">PX</div>
           </th>
         </tr>
       </thead>
@@ -676,14 +676,14 @@ The `align` prop is optional. Unless specified, it will default vertical stacks 
     <dt-stack
       class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-stretch"
     >
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Short
       </div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Taller item<br>
         with more content
       </div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Short
       </div>
     </dt-stack>
@@ -691,14 +691,14 @@ The `align` prop is optional. Unless specified, it will default vertical stacks 
       direction="row"
       class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
     >
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Short
       </div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Taller item<br>
         with more content
       </div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Short
       </div>
     </dt-stack>
@@ -742,14 +742,14 @@ Align items to the start of the cross-axis.
       align="start"
       class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-start"
     >
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Short
       </div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Taller item<br>
         with more content
       </div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Short
       </div>
     </dt-stack>
@@ -759,14 +759,14 @@ Align items to the start of the cross-axis.
       align="start"
       class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-start"
     >
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Short
       </div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Taller item<br>
         with more content
       </div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Short
       </div>
     </dt-stack>
@@ -817,14 +817,14 @@ Center items along the cross-axis.
       align="center"
       class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-center"
     >
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Short
       </div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Taller item<br>
         with more content
       </div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Short
       </div>
     </dt-stack>
@@ -834,14 +834,14 @@ Center items along the cross-axis.
       align="center"
       class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
     >
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Short
       </div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Taller item<br>
         with more content
       </div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Short
       </div>
     </dt-stack>
@@ -881,14 +881,14 @@ Align items to the end of the cross-axis.
       align="end"
       class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-end"
     >
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Short
       </div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Taller item<br>
         with more content
       </div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Short
       </div>
     </dt-stack>
@@ -898,14 +898,14 @@ Align items to the end of the cross-axis.
       align="end"
       class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-end"
     >
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Short
       </div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Taller item<br>
         with more content
       </div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Short
       </div>
     </dt-stack>
@@ -956,14 +956,14 @@ Stretch items to fill the container height.
       align="stretch"
       class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-stretch"
     >
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Short
       </div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Taller item<br>
         with more content
       </div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Short
       </div>
     </dt-stack>
@@ -973,14 +973,14 @@ Stretch items to fill the container height.
       align="stretch"
       class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-stretch"
     >
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Short
       </div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Taller item<br>
         with more content
       </div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
         Short
       </div>
     </dt-stack>
@@ -1017,13 +1017,13 @@ Align items along their text baselines.
     class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--baseline"
     ref="alignBaselineExample"
   >
-    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+    <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
       <dt-text kind="body" size="xs">Small body</dt-text>
     </div>
-    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+    <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
       <dt-text kind="body" size="md">Medium body</dt-text>
     </div>
-    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+    <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
       <dt-text kind="headline" size="2xl">Large headline</dt-text>
     </div>
   </dt-stack>
@@ -1067,9 +1067,9 @@ Align items to the start of the main axis (default).
       justify="start"
       class="d-w100p d-h332 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-start"
     >
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 1</div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 2</div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 3</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 1</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 2</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 3</div>
     </dt-stack>
     <dt-stack
       direction="row"
@@ -1077,9 +1077,9 @@ Align items to the start of the main axis (default).
       justify="start"
       class="d-w100p d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-start"
     >
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 1</div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 2</div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 3</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 1</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 2</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 3</div>
     </dt-stack>
   </dt-stack>
 </code-well-header>
@@ -1113,9 +1113,9 @@ Center items along the main axis.
       justify="center"
       class="d-w100p d-h332 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
     >
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 1</div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 2</div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 3</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 1</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 2</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 3</div>
     </dt-stack>
     <dt-stack
       direction="row"
@@ -1123,9 +1123,9 @@ Center items along the main axis.
       justify="center"
       class="d-w100p d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-center"
     >
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 1</div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 2</div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 3</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 1</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 2</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 3</div>
     </dt-stack>
   </dt-stack>
 </code-well-header>
@@ -1159,9 +1159,9 @@ Align items to the end of the main axis.
       justify="end"
       class="d-w100p d-h332 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-end"
     >
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 1</div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 2</div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 3</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 1</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 2</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 3</div>
     </dt-stack>
     <dt-stack
       direction="row"
@@ -1169,9 +1169,9 @@ Align items to the end of the main axis.
       justify="end"
       class="d-w100p d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-end"
     >
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 1</div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 2</div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 3</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 1</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 2</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 3</div>
     </dt-stack>
   </dt-stack>
 </code-well-header>
@@ -1205,9 +1205,9 @@ Distribute items with equal space around each item.
       justify="space-around"
       class="d-w100p d-h332 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
     >
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 1</div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 2</div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 3</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 1</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 2</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 3</div>
     </dt-stack>
     <dt-stack
       direction="row"
@@ -1215,9 +1215,9 @@ Distribute items with equal space around each item.
       justify="space-around"
       class="d-w100p d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-center"
     >
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 1</div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 2</div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 3</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 1</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 2</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 3</div>
     </dt-stack>
   </dt-stack>
 </code-well-header>
@@ -1251,9 +1251,9 @@ Distribute items with space between them, edges flush to container.
       justify="space-between"
       class="d-w100p d-h332 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
     >
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 1</div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 2</div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 3</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 1</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 2</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 3</div>
     </dt-stack>
     <dt-stack
       direction="row"
@@ -1261,9 +1261,9 @@ Distribute items with space between them, edges flush to container.
       justify="space-between"
       class="d-w100p d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-center"
     >
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 1</div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 2</div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 3</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 1</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 2</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 3</div>
     </dt-stack>
   </dt-stack>
 </code-well-header>
@@ -1300,9 +1300,9 @@ Distribute items with equal space between all items, including edges.
       justify="space-evenly"
       class="d-w100p d-h332 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
     >
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 1</div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 2</div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 3</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 1</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 2</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 3</div>
     </dt-stack>
     <dt-stack
       direction="row"
@@ -1310,9 +1310,9 @@ Distribute items with equal space between all items, including edges.
       justify="space-evenly"
       class="d-w100p d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-center"
     >
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 1</div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 2</div>
-      <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 3</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 1</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 2</div>
+      <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 3</div>
     </dt-stack>
   </dt-stack>
 </code-well-header>
@@ -1343,13 +1343,13 @@ Stacks column at small screen size and column reverse at large screen
     class="d-bgc-moderate-opaque"
     ref="responsiveDirectionExample"
   >
-    <div class="d-bgc-moderate-opaque d-bar8 d-p16">
+    <div class="d-bgc-moderate-opaque d-bar8 d-p-200">
       Stack item 1
     </div>
-    <div class="d-bgc-moderate-opaque d-bar8 d-p16">
+    <div class="d-bgc-moderate-opaque d-bar8 d-p-200">
       Stack item 2
     </div>
-    <div class="d-bgc-moderate-opaque d-bar8 d-p16">
+    <div class="d-bgc-moderate-opaque d-bar8 d-p-200">
       Stack item 3
     </div>
   </dt-stack>
@@ -1383,13 +1383,13 @@ Set `200` as the default gap, `300` for small and larger, `400` for medium, `500
     class="d-bgc-moderate-opaque"
     ref="responsiveGapExample"
   >
-    <div class="d-bgc-moderate-opaque d-bar8 d-p16">
+    <div class="d-bgc-moderate-opaque d-bar8 d-p-200">
       Stack item 1
     </div>
-    <div class="d-bgc-moderate-opaque d-bar8 d-p16">
+    <div class="d-bgc-moderate-opaque d-bar8 d-p-200">
       Stack item 2
     </div>
-    <div class="d-bgc-moderate-opaque d-bar8 d-p16">
+    <div class="d-bgc-moderate-opaque d-bar8 d-p-200">
       Stack item 3
     </div>
   </dt-stack>
@@ -1418,17 +1418,17 @@ Stacks row with gap 500 and stacks in row reverse the nested stack with gap 500.
     ref="nestedStackExample"
     class="d-bgc-moderate-opaque d-bar8"
   >
-    <dt-stack class="d-bgc-moderate-opaque d-bar8 d-p16">
+    <dt-stack class="d-bgc-moderate-opaque d-bar8 d-p-200">
       Stack item 1
     </dt-stack>
     <dt-stack gap="200" class="d-bgc-moderate-opaque">
-      <div class="d-bgc-moderate-opaque d-bar8 d-p16">Stack item 2</div>
+      <div class="d-bgc-moderate-opaque d-bar8 d-p-200">Stack item 2</div>
       <dt-stack
         direction="row-reverse"
         gap="200"
       >
-        <div class="d-bgc-moderate-opaque d-bar8 d-p16">Stack item 3<br>with multiple lines</div>
-        <div class="d-bgc-moderate-opaque d-bar8 d-p16">Stack item 4</div>
+        <div class="d-bgc-moderate-opaque d-bar8 d-p-200">Stack item 3<br>with multiple lines</div>
+        <div class="d-bgc-moderate-opaque d-bar8 d-p-200">Stack item 4</div>
       </dt-stack>
     </dt-stack>
   </dt-stack>
@@ -1471,14 +1471,14 @@ Like `direction` and `gap`, the `align` and `justify` props support responsive o
     class="d-bgc-moderate-opaque d-bar8"
     ref="responsiveAlignExample"
   >
-    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+    <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
       Short
     </div>
-    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+    <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
       Taller<br>
       item
     </div>
-    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+    <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
       Short
     </div>
   </dt-stack>
@@ -1512,9 +1512,9 @@ Resize your browser to see the alignment change at different breakpoints.
     class="d-w100p d-bgc-moderate-opaque d-bar8"
     ref="responsiveJustifyExample"
   >
-    <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 1</div>
-    <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 2</div>
-    <div class="d-bgc-moderate-opaque d-p16 d-bar8">Item 3</div>
+    <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 1</div>
+    <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 2</div>
+    <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 3</div>
   </dt-stack>
 </code-well-header>
 

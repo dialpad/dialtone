@@ -3,9 +3,9 @@
     <dt-stack
       direction="row"
       align="center"
-      class="d-p8"
+      class="d-p-100"
     >
-      <h1 class="d-fs-200 d-mx4">
+      <h1 class="d-fs-200 d-mx-50">
         Active
       </h1>
       <dt-presence
@@ -16,9 +16,9 @@
     <dt-stack
       direction="row"
       align="center"
-      class="d-p8"
+      class="d-p-100"
     >
-      <h1 class="d-fs-200 d-mx4">
+      <h1 class="d-fs-200 d-mx-50">
         Away
       </h1>
       <dt-presence
@@ -29,9 +29,9 @@
     <dt-stack
       direction="row"
       align="center"
-      class="d-p8"
+      class="d-p-100"
     >
-      <h1 class="d-fs-200 d-mx4">
+      <h1 class="d-fs-200 d-mx-50">
         Busy
       </h1>
       <dt-presence
@@ -42,9 +42,9 @@
     <dt-stack
       direction="row"
       align="center"
-      class="d-p8"
+      class="d-p-100"
     >
-      <h1 class="d-fs-200 d-mx4">
+      <h1 class="d-fs-200 d-mx-50">
         Offline
       </h1>
       <dt-presence

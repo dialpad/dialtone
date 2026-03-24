@@ -2,13 +2,13 @@
 <template>
   <div
     :class="[
-      'd-fl-center d-fd-column d-pt64',
+      'd-fl-center d-fd-column d-pt-800',
       {
-        'd-bgc-contrast d-pb64': $attrs.inverted,
+        'd-bgc-contrast d-pb-800': $attrs.inverted,
       },
     ]"
   >
-    <div class="d-pt16">
+    <div class="d-pt-200">
       <dt-tooltip
         :id="$attrs.id"
         :placement="$attrs.placement"

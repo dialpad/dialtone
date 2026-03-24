@@ -22,7 +22,7 @@
             :disabled="disabled"
             @update:value="e => updateKey(e, item[1], update)"
           />
-          <span class="d-px6 d-ps-relative d-t6">:</span>
+          <span class="d-px-75 d-ps-relative d-t-75">:</span>
         </div>
         <div
           class="dtc-control-object__contents"

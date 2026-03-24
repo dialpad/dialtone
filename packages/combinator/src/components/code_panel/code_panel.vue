@@ -35,7 +35,7 @@
         justify="end"
         class="d-h100p"
       >
-        <div class="d-pr32 d-pb16 d-pe-auto">
+        <div class="d-pr-400 d-pb-200 d-pe-auto">
           <slot name="overlay" />
         </div>
       </dt-stack>

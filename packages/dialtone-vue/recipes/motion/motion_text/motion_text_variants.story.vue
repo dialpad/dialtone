@@ -1,11 +1,11 @@
 <template>
   <dt-stack
     gap="400"
-    class="d-p24"
+    class="d-p-300"
   >
     <!-- Speed Variants -->
     <section>
-      <h2 class="d-headline--lg d-mb16">
+      <h2 class="d-headline--lg d-mb-200">
         Speed Variants
       </h2>
       <dt-stack
@@ -36,7 +36,7 @@
           <dt-stack
             direction="row"
             align="center"
-            class="d-p16 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn96"
+            class="d-p-200 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn-150"
           >
             <dt-recipe-motion-text
               :ref="el => { if (el) speedRefs[speed.value] = el }"
@@ -53,7 +53,7 @@
 
     <!-- Text Size Variants -->
     <section>
-      <h2 class="d-headline--lg d-mb16">
+      <h2 class="d-headline--lg d-mb-200">
         Text Size Variants
       </h2>
       <dt-stack
@@ -84,7 +84,7 @@
           <dt-stack
             direction="row"
             align="center"
-            class="d-p16 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn96"
+            class="d-p-200 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn-150"
           >
             <dt-recipe-motion-text
               :ref="el => { if (el) sizeRefs[size.class] = el }"
@@ -101,13 +101,13 @@
 
     <!-- Looping Animation -->
     <section>
-      <h2 class="d-headline--lg d-mb16">
+      <h2 class="d-headline--lg d-mb-200">
         Looping Animation
       </h2>
       <dt-stack
         direction="row"
         align="center"
-        class="d-p24 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn128"
+        class="d-p-300 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn-200"
       >
         <dt-recipe-motion-text
           text="This text loops continuously"
@@ -122,7 +122,7 @@
 
     <!-- Manual Controls -->
     <section>
-      <h2 class="d-headline--lg d-mb16">
+      <h2 class="d-headline--lg d-mb-200">
         Manual Controls
       </h2>
       <dt-stack
@@ -172,7 +172,7 @@
         <dt-stack
           direction="row"
           align="center"
-          class="d-p24 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn128"
+          class="d-p-300 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn-200"
         >
           <dt-recipe-motion-text
             ref="manualRef"

@@ -9,16 +9,16 @@ keywords: ["css grid","grid gap","gutter","spacing"]
 Use `d-g{#}` to universally change the row and column gap space in grid layouts.
 
 <code-well-header>
-  <div class="d-d-grid d-g16 d-g-cols2 d-w100p d-bar8 d-bgc-bold">
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4">3</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4">4</dt-stack>
+  <div class="d-d-grid d-g-200 d-g-cols2 d-w100p d-bar8 d-bgc-bold">
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">4</dt-stack>
   </div>
 </code-well-header>
 
 ```html
-<div class="d-d-grid d-g16 d-g-cols2">
+<div class="d-d-grid d-g-200 d-g-cols2">
   <div>1</div>
   <div>2</div>
   <div>3</div>
@@ -31,21 +31,21 @@ Use `d-g{#}` to universally change the row and column gap space in grid layouts.
 Use `d-cg{#}` or `d-rg{#}` to independently change the row and column gap space in grid layouts.
 
 <code-well-header>
-  <div class="d-d-grid d-cg24 d-rg8 d-g-cols3 d-w100p d-bar8 d-bgc-bold">
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4">3</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4">4</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4">5</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4">6</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4">7</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4">8</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bar4">9</dt-stack>
+  <div class="d-d-grid d-cg-300 d-rg-100 d-g-cols3 d-w100p d-bar8 d-bgc-bold">
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">4</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">5</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">6</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">7</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">8</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">9</dt-stack>
   </div>
 </code-well-header>
 
 ```html
-<div class="d-d-grid d-cg24 d-rg8 d-g-cols3">
+<div class="d-d-grid d-cg-300 d-rg-100 d-g-cols3">
   <div>1</div>
   <div>2</div>
   <div>3</div>

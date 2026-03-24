@@ -31,11 +31,11 @@ When writing Less, you can set an element's z-index by using a variable (`var(--
 <clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
-      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t-0">
         <tr>
-          <th scope="col" class="d-p0 d-bbw0 d-w25p"><div class="d-p16 d-bb d-bbw1">Variable</div></th>
-          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bbw1">Output</div></th>
-          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bbw1">Description</div></th>
+          <th scope="col" class="d-p-0 d-bbw0 d-w25p"><div class="d-p-200 d-bb d-bbw1">Variable</div></th>
+          <th scope="col" class="d-p-0 d-bbw0"><div class="d-p-200 d-bb d-bbw1">Output</div></th>
+          <th scope="col" class="d-p-0 d-bbw0"><div class="d-p-200 d-bb d-bbw1">Description</div></th>
         </tr>
       </thead>
       <tbody>

@@ -11,7 +11,7 @@ keywords: ["left", "center", "right", "justify"]
 Use `d-ta-{n}` to change an element's text alignment.
 
 <code-well-header class="d-w100p">
-  <div class="d-w100p d-d-grid d-g16 d-ai-center lg:d-fs-100" style="grid-template-columns: auto 1fr">
+  <div class="d-w100p d-d-grid d-g-200 d-ai-center lg:d-fs-100" style="grid-template-columns: auto 1fr">
     <div class="d-code--sm d-docsite-code d-ws-nowrap">.d-ta-left</div>
     <div><p class="d-bgc-moderate d-ta-left">The quick brown fox jumps over the lazy dog.</p></div>
     <div class="d-code--sm d-docsite-code d-ws-nowrap">.d-ta-center</div>

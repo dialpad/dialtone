@@ -8,27 +8,27 @@ keywords: ["minimum width", "mnw"]
 
 Use `d-wmn{n}p` to set a minimum width percentage for an element. This can be combined with `d-w{n}p` and `d-wmx{n}` to have an element fill a certain height range.
 
-<code-well-header class="d-d-flex d-jc-center d-p24 d-bgc-secondary d-w100p d-flow16" custom>
-  <dt-stack direction="row" align="center" justify="center" class="d-py16 d-px8 d-w64 d-wmn50p d-bgc-moderate d-bar4 d-ta-center">1</dt-stack>
+<code-well-header class="d-d-flex d-jc-center d-p-300 d-bgc-secondary d-w100p d-flow16" custom>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w-100 d-wmn50p d-bgc-moderate d-bar4 d-ta-center">1</dt-stack>
 </code-well-header>
 
 ```html
-<div class="d-w64 d-wmn50p">1</div>
+<div class="d-w-100 d-wmn50p">1</div>
 ```
 
 ## Fixed
 
 Use `d-wmn{n}` to set a fixed minimum width for an element. This can be combined with `d-w{n}p` and `d-wmx{n}` to have an element fill a certain height range.
 
-<code-well-header class="d-d-flex d-jc-center d-p24 d-bgc-secondary d-w100p d-flow16 d-of-x-scroll" custom>
-  <dt-stack direction="row" align="center" justify="center" class="d-py16 d-px8 d-w64 d-h64 d-wmn64 d-bgc-moderate d-bar4">1</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-py16 d-px8 d-w64 d-h64 d-wmn96 d-bgc-moderate d-bar4">2</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-py16 d-px8 d-w64 d-h64 d-wmn332 d-bgc-moderate d-bar4">3</dt-stack>
+<code-well-header class="d-d-flex d-jc-center d-p-300 d-bgc-secondary d-w100p d-flow16 d-of-x-scroll" custom>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w-100 d-h-100 d-wmn-100 d-bgc-moderate d-bar4">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w-100 d-h-100 d-wmn-150 d-bgc-moderate d-bar4">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w-100 d-h-100 d-wmn332 d-bgc-moderate d-bar4">3</dt-stack>
 </code-well-header>
 
 ```html
-<div class="d-wmn64">1</div>
-<div class="d-wmn96">2</div>
+<div class="d-wmn-100">1</div>
+<div class="d-wmn-150">2</div>
 <div class="d-wmn332">3</div>
 ```
 
@@ -42,10 +42,10 @@ Use `d-wmn{n}` to set a fixed minimum width for an element. This can be combined
 <clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
-      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t-0">
         <tr>
-          <th scope="col" class="d-p0 d-bbw0 d-w30p"><div class="d-p16 d-bb d-bbw1">Class</div></th>
-          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bbw1">Output</div></th>
+          <th scope="col" class="d-p-0 d-bbw0 d-w30p"><div class="d-p-200 d-bb d-bbw1">Class</div></th>
+          <th scope="col" class="d-p-0 d-bbw0"><div class="d-p-200 d-bb d-bbw1">Output</div></th>
         </tr>
       </thead>
       <tbody>

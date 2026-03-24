@@ -175,14 +175,14 @@ showHtmlWarning />
 
 ### Inverted
 
-<dt-notice title="Deprecated" kind="error" class="d-wmx100p d-my16">
+<dt-notice title="Deprecated" kind="error" class="d-wmx100p d-my-200">
   The <code>inverted</code> prop has been deprecated in favor of using <router-link to="mode-island.html"><DtLink>DtModeIsland</DtLink></router-link> as a wrapper.
 </dt-notice>
 
 In place of the <code>inverted</code> prop, use the <router-link to="mode-island.html"><DtLink>DtModeIsland</DtLink></router-link> component as a wrapper.
 
 <code-well-header>
-  <dt-mode-island class="d-p16 d-bar8">
+  <dt-mode-island class="d-p-200 d-bar8">
     <example-tabs ref="invertedTabsExample" />
   </dt-mode-island>
 </code-well-header>
@@ -286,7 +286,7 @@ showHtmlWarning />
 
 Use the `#startIcon` or `#endIcon` slot on `dt-tab` to add an icon. The slot provides `iconSize` to match the tab's size.
 
-<dt-notice title="Deprecated" kind="warning" class="d-wmx100p d-my16">
+<dt-notice title="Deprecated" kind="warning" class="d-wmx100p d-my-200">
   The <code>#icon</code> slot has been deprecated. Use <code>#startIcon</code> or <code>#endIcon</code> instead.
 </dt-notice>
 
@@ -346,13 +346,13 @@ Use the `#leading` and `#trailing` slots on `dt-tab` to render content like badg
   <div class="d-w100p">
     <dt-tab-group>
       <template #tabs>
-        <dt-tab id="lt1" panel-id="lt2" selected trailing-class="d-pr8">
+        <dt-tab id="lt1" panel-id="lt2" selected trailing-class="d-pr-100">
           Inbox
           <template #trailing>
             <dt-badge kind="count" type="bulletin" text="9" />
           </template>
         </dt-tab>
-        <dt-tab id="lt3" panel-id="lt4" trailing-class="d-pr8">
+        <dt-tab id="lt3" panel-id="lt4" trailing-class="d-pr-100">
           Archive
           <template #trailing>
             <dt-badge kind="count" text="99+" />
@@ -370,13 +370,13 @@ Use the `#leading` and `#trailing` slots on `dt-tab` to render content like badg
 vueCode='
 <dt-tab-group>
   <template #tabs>
-    <dt-tab id="lt1" panel-id="lt2" selected trailing-class="d-pr8">
+    <dt-tab id="lt1" panel-id="lt2" selected trailing-class="d-pr-100">
       Inbox
       <template #trailing>
         <dt-badge kind="count" type="bulletin" text="9" />
       </template>
     </dt-tab>
-    <dt-tab id="lt3" panel-id="lt4" trailing-class="d-pr8">
+    <dt-tab id="lt3" panel-id="lt4" trailing-class="d-pr-100">
       Archive
       <template #trailing>
         <dt-badge kind="count" text="99+" />

@@ -12,9 +12,9 @@ Use `d-jc-flex-start` to justify items against the start of the element's main a
 
 <code-well-header>
   <dt-stack direction="row" gap="100" class="d-jc-flex-start d-w100p d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">3</dt-stack>
   </dt-stack>
 </code-well-header>
 
@@ -32,9 +32,9 @@ Use `d-jc-center` to justify items along the center of the element's main axis.
 
 <code-well-header>
   <dt-stack direction="row" gap="100" class="d-jc-center d-w100p d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">3</dt-stack>
   </dt-stack>
 </code-well-header>
 
@@ -52,9 +52,9 @@ Use `d-jc-flex-end` to justify items against the end of the element's main axis.
 
 <code-well-header>
   <dt-stack direction="row" gap="100" class="d-jc-flex-end d-w100p d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">3</dt-stack>
   </dt-stack>
 </code-well-header>
 
@@ -72,9 +72,9 @@ Use `d-jc-space-around` to justify items along the element's main axis so that t
 
 <code-well-header>
   <dt-stack direction="row" gap="100" class="d-jc-space-around d-w100p d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">3</dt-stack>
   </dt-stack>
 </code-well-header>
 
@@ -92,9 +92,9 @@ Use `d-jc-space-between` to justify items along the element's main axis so that 
 
 <code-well-header>
   <dt-stack direction="row" gap="100" class="d-jc-space-between d-w100p d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">3</dt-stack>
   </dt-stack>
 </code-well-header>
 
@@ -112,9 +112,9 @@ Use `d-jc-space-evenly` to justify items along the element's main axis so that t
 
 <code-well-header>
   <dt-stack direction="row" gap="100" class="d-jc-space-evenly d-w100p d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">3</dt-stack>
   </dt-stack>
 </code-well-header>
 

@@ -4,14 +4,14 @@
     <dt-image-viewer
       :image-src="test"
       image-alt="Alt Text"
-      image-button-class="d-wmn64 d-hmn64 w-wmx332 d-hmx332"
+      image-button-class="d-wmn-100 d-hmn-100 w-wmx332 d-hmx332"
       aria-label="Click to open image"
     />
 
     <dt-image-viewer
       :image-src="fry"
       image-alt="Alt Text"
-      image-button-class="d-wmn64 d-hmn64 w-wmx332 d-hmx332"
+      image-button-class="d-wmn-100 d-hmn-100 w-wmx332 d-hmx332"
       aria-label="Click to open image"
     />
   </div>

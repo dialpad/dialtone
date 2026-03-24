@@ -40,7 +40,7 @@
       </div>
     </template>
     <template #content>
-      <span class="d-p16">
+      <span class="d-p-200">
         The agent from Dialpad called to follow up on a support ticket
         that Jeff was handling for them regarding Dialpad CTI. They apologized
         for calling outside of the requested time and expressed that they had

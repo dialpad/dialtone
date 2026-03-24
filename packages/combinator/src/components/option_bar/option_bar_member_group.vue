@@ -6,7 +6,7 @@
     >
       <div
         v-if="!member.hideControl"
-        class="d-py6"
+        class="d-py-75"
         data-qa="dtc-option-bar-member-group-control"
       >
         <dtc-option-bar-control

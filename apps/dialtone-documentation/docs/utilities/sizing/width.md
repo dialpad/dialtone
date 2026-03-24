@@ -8,11 +8,11 @@ keywords: ["size", "wide", "vw", "viewport width"]
 
 Use `d-w{n}p` to set a percentage width for an element.
 
-<code-well-header class="d-d-flex d-fd-column d-p24 d-bgc-secondary d-w100p d-hmx332 d-stack16 d-code--md d-ta-center d-of-y-scroll" v-dt-scrollbar:never custom>
+<code-well-header class="d-d-flex d-fd-column d-p-300 d-bgc-secondary d-w100p d-hmx332 d-stack16 d-code--md d-ta-center d-of-y-scroll" v-dt-scrollbar:never custom>
   <dt-stack direction="row" align="center" justify="center" class="d-ps-relative" v-for="i in percentage">
-    <dt-stack as="span" direction="row" align="center" class="d-zi-active d-h64">d-w{{i}}p</dt-stack>
-    <div class="d-w100p d-h64 d-ps-absolute d-bgc-moderate">
-      <div class="d-h64 d-bgc-moderate-opaque d-bar4" :class="`d-w${i}p`"></div>
+    <dt-stack as="span" direction="row" align="center" class="d-zi-active d-h-100">d-w{{i}}p</dt-stack>
+    <div class="d-w100p d-h-100 d-ps-absolute d-bgc-moderate">
+      <div class="d-h-100 d-bgc-moderate-opaque d-bar4" :class="`d-w${i}p`"></div>
     </div>
   </dt-stack>
 </code-well-header>
@@ -36,10 +36,10 @@ Use `d-w{n}p` to set a percentage width for an element.
 
 Use `d-w{n}` to set a fixed width for an element.
 
-<code-well-header class="d-d-flex d-fd-column d-p24 d-bgc-secondary d-w100p d-hmx332 d-stack16 d-ta-center d-of-scroll" v-dt-scrollbar:never custom>
+<code-well-header class="d-d-flex d-fd-column d-p-300 d-bgc-secondary d-w100p d-hmx332 d-stack16 d-ta-center d-of-scroll" v-dt-scrollbar:never custom>
   <dt-stack direction="row" align="center" class="d-pls-start" v-for="(i, index) in fixed">
     <span class="d-w72">d-w{{i}}</span>
-    <div class="d-h64 d-bgc-moderate d-bar4" :class="`d-w${i}`"></div>
+    <div class="d-h-100 d-bgc-moderate d-bar4" :class="`d-w${i}`"></div>
   </dt-stack>
 </code-well-header>
 
@@ -51,30 +51,30 @@ Use `d-w{n}` to set a fixed width for an element.
 <div class="d-w6">...</div>
 <div class="d-w8">...</div>
 <div class="d-w12">...</div>
-<div class="d-w16">...</div>
+<div class="d-w-25">...</div>
 <div class="d-w20">...</div>
 <div class="d-w24">...</div>
-<div class="d-w32">...</div>
+<div class="d-w-50">...</div>
 <div class="d-w42">...</div>
-<div class="d-w48">...</div>
-<div class="d-w64">...</div>
+<div class="d-w-75">...</div>
+<div class="d-w-100">...</div>
 <div class="d-w72">...</div>
 <div class="d-w84">...</div>
-<div class="d-w96">...</div>
+<div class="d-w-150">...</div>
 <div class="d-w102">...</div>
 <div class="d-w114">...</div>
-<div class="d-w128">...</div>
+<div class="d-w-200">...</div>
 <div class="d-w164">...</div>
 <div class="d-w216">...</div>
 <div class="d-w264">...</div>
 <div class="d-w332">...</div>
 <div class="d-w464">...</div>
-<div class="d-w512">...</div>
+<div class="d-w-800">...</div>
 <div class="d-w628">...</div>
 <div class="d-w764">...</div>
 <div class="d-w828">...</div>
 <div class="d-w912">...</div>
-<div class="d-w1024">...</div>
+<div class="d-w-1600">...</div>
 <div class="d-w1140">...</div>
 <div class="d-w1268">...</div>
 <div class="d-w1340">...</div>
@@ -84,8 +84,8 @@ Use `d-w{n}` to set a fixed width for an element.
 
 Use `d-w100vw` to have an element cover the user's viewport.
 
-<code-well-header class="d-ps-relative d-d-flex d-jc-center d-p24 d-bgc-secondary d-w100p d-h3 d-stack16 d-of-y-scroll" custom>
-  <dt-stack direction="row" align="center" justify="center" class="d-py16 d-px8 d-w100vw d-h100vh d-bgc-moderate d-bar4 d-ta-center">Viewport</dt-stack>
+<code-well-header class="d-ps-relative d-d-flex d-jc-center d-p-300 d-bgc-secondary d-w100p d-h3 d-stack16 d-of-y-scroll" custom>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100vw d-h100vh d-bgc-moderate d-bar4 d-ta-center">Viewport</dt-stack>
 </code-well-header>
 
 ```html
@@ -96,8 +96,8 @@ Use `d-w100vw` to have an element cover the user's viewport.
 
 Use `d-w-auto` have the browser calculate and select a width.
 
-<code-well-header class="d-ps-relative d-d-flex d-jc-center d-p24 d-bgc-secondary d-w100p d-hmn102 d-stack16" custom>
-  <dt-stack direction="row" align="center" justify="center" class="d-py16 d-px8 d-h72 d-w-auto d-bgc-moderate d-bar4 d-ta-center">Auto</dt-stack>
+<code-well-header class="d-ps-relative d-d-flex d-jc-center d-p-300 d-bgc-secondary d-w100p d-hmn102 d-stack16" custom>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-h72 d-w-auto d-bgc-moderate d-bar4 d-ta-center">Auto</dt-stack>
 </code-well-header>
 
 ```html
@@ -114,10 +114,10 @@ Use `d-w-auto` have the browser calculate and select a width.
 <clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
-      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t-0">
         <tr>
-          <th scope="col" class="d-p0 d-bbw0 d-w30p"><div class="d-p16 d-bb d-bbw1">Class</div></th>
-          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bbw1">Output</div></th>
+          <th scope="col" class="d-p-0 d-bbw0 d-w30p"><div class="d-p-200 d-bb d-bbw1">Class</div></th>
+          <th scope="col" class="d-p-0 d-bbw0"><div class="d-p-200 d-bb d-bbw1">Output</div></th>
         </tr>
       </thead>
       <tbody>

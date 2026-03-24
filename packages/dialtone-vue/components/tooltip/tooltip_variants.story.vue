@@ -2,12 +2,12 @@
 <template>
   <div
     id="forms-radio--variants-container"
-    class="d-pt128 d-px64"
+    class="d-pt-200 d-px-800"
   >
     <dt-stack
       direction="row"
       justify="center"
-      class="d-w100p d-mb64 d-mt32"
+      class="d-w100p d-mb-800 d-mt-400"
     >
       <dt-button
         id="external-tooltip-anchor"
@@ -23,7 +23,7 @@
       direction="row"
       justify="center"
       align="center"
-      class="d-mb128"
+      class="d-mb-200"
     >
       <div
         v-for="direction in rowDirection"
@@ -35,12 +35,12 @@
           :placement="direction"
           :message="localMessage"
           :show="$attrs.showTooltip"
-          class="d-mx64"
+          class="d-mx-800"
         >
           <template #anchor>
             <dt-button
               importance="outlined"
-              class="d-w128"
+              class="d-w-200"
             >
               {{ direction }}
             </dt-button>
@@ -58,7 +58,7 @@
         Circle button tooltip
       </div>
       <dt-tooltip
-        class="d-ml4"
+        class="d-ml-50"
         :transition="transition"
         :message="localMessage"
         :show="$attrs.showTooltip"
@@ -86,7 +86,7 @@
     >
       <!-- Text -->
       <dt-tooltip
-        class="d-mb64 d-mt64"
+        class="d-mb-800 d-mt-800"
         :transition="$attrs.transition"
         :message="localMessage"
         :show="$attrs.showTooltip"
@@ -105,7 +105,7 @@
     >
       <!-- Open state -->
       <dt-tooltip
-        class="d-mb64 d-mt32"
+        class="d-mb-800 d-mt-400"
         :transition="$attrs.transition"
         :message="localMessage"
         :show="show1"
@@ -127,7 +127,7 @@
     >
       <!-- Custom Theme -->
       <dt-tooltip
-        class="d-mb64 d-mt32"
+        class="d-mb-800 d-mt-400"
         theme="purple"
         :transition="$attrs.transition"
         :message="localMessage"
@@ -145,9 +145,9 @@
     <dt-stack
       direction="row"
       justify="center"
-      class="d-bgc-contrast d-pt64"
+      class="d-bgc-contrast d-pt-800"
     >
-      <div class="d-py64">
+      <div class="d-py-800">
         <!-- Inverted state -->
         <dt-tooltip
           :inverted="true"

@@ -2,7 +2,7 @@
   <dt-mode-island
     :as="$attrs.as"
     :mode="$attrs.mode"
-    class="d-p16 d-ba d-bc-subtle d-bar8"
+    class="d-p-200 d-ba d-bc-subtle d-bar8"
   >
     <dt-stack gap="200">
       <dt-stack
@@ -26,16 +26,16 @@
         gap="100"
         direction="row"
       >
-        <div class="d-bgc-secondary d-p16 d-py8 d-ba d-bc-subtle">
+        <div class="d-bgc-secondary d-p-200 d-py-100 d-ba d-bc-subtle">
           Secondary Surface
         </div>
-        <div class="d-bgc-moderate d-p16 d-py8 d-ba d-bc-subtle">
+        <div class="d-bgc-moderate d-p-200 d-py-100 d-ba d-bc-subtle">
           Moderate Surface
         </div>
-        <div class="d-bgc-critical d-p16 d-py8 d-ba d-bc-subtle">
+        <div class="d-bgc-critical d-p-200 d-py-100 d-ba d-bc-subtle">
           Critical Surface
         </div>
-        <div class="d-bgc-success d-p16 d-py8 d-ba d-bc-subtle">
+        <div class="d-bgc-success d-p-200 d-py-100 d-ba d-bc-subtle">
           Success Surface
         </div>
       </dt-stack>

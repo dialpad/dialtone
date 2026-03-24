@@ -11,7 +11,7 @@ keywords: ["notification", "snackbar", "alert", "message", "d-toast", "DtToast",
 
 <code-well-header>
   <dt-stack direction="row" justify="center">
-    <example-toast show title="Title" class="d-ps-relative d-zi-base d-t0" :fixed="false" />
+    <example-toast show title="Title" class="d-ps-relative d-zi-base d-t-0" :fixed="false" />
   </dt-stack>
 </code-well-header>
 

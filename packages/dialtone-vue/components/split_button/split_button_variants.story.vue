@@ -1,7 +1,7 @@
 <template>
   <dt-stack
     gap="200"
-    class="d-px8"
+    class="d-px-100"
   >
     <h2>Variants</h2>
     <table class="d-table d-bt d-bb d-bbw2">
@@ -81,7 +81,7 @@
       <!-- Sizes  -->
       <dt-stack
         gap="200"
-        class="d-br d-pr16"
+        class="d-br d-pr-200"
       >
         <h2>Sizes</h2>
         <dt-stack gap="200">
@@ -106,7 +106,7 @@
       <!-- With start icon  -->
       <dt-stack
         gap="200"
-        class="d-br d-pr16"
+        class="d-br d-pr-200"
       >
         <h2>With start icon</h2>
         <dt-stack gap="200">
@@ -138,7 +138,7 @@
       <!-- With custom end icon  -->
       <dt-stack
         gap="200"
-        class="d-br d-pr16"
+        class="d-br d-pr-200"
       >
         <h2>With custom end icon</h2>
         <dt-stack gap="200">
@@ -166,7 +166,7 @@
       <!-- Status  -->
       <dt-stack
         gap="200"
-        class="d-br d-pr16"
+        class="d-br d-pr-200"
       >
         <h2>Status</h2>
         <dt-stack gap="200">
@@ -207,7 +207,7 @@
       <!-- Disabled  -->
       <dt-stack
         gap="200"
-        class="d-br d-bc-default d-pr16"
+        class="d-br d-bc-default d-pr-200"
       >
         <h2>Disabled</h2>
         <dt-stack gap="200">
@@ -240,7 +240,7 @@
       <!-- With tooltip -->
       <dt-stack
         gap="200"
-        class="d-br d-bc-default d-pr16"
+        class="d-br d-bc-default d-pr-200"
       >
         <h2>Disabled</h2>
         <dt-stack gap="200">
@@ -273,7 +273,7 @@
       <!-- With tooltip -->
       <dt-stack
         gap="200"
-        class="d-br d-pr16"
+        class="d-br d-pr-200"
       >
         <h2>With tooltip</h2>
         <dt-stack gap="200">
@@ -305,7 +305,7 @@
       <!-- Icon-only  -->
       <dt-stack
         gap="200"
-        class="d-br d-pr16"
+        class="d-br d-pr-200"
       >
         <h2>Icon only</h2>
         <dt-stack gap="200">

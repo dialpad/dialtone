@@ -89,15 +89,15 @@ Text Style CSS utilities should be considered a last resort or as a fallback for
 
 Titles and headings to establish hierarchy and set the tone of contextual groupings.
 
-<code-well-header class="d-p16 d-bgc-secondary" custom>
+<code-well-header class="d-p-200 d-bgc-secondary" custom>
   <table class="d-w100p">
     <tbody>
       <template v-for="({ var: varName }, index) in typographyStylesHeadlines" :key="varName">
         <tr>
-          <td class="d-p4 d-lc-1">
+          <td class="d-p-50 d-lc-1">
             <div :class="[varName]">{{ example }}</div>
           </td>
-          <td class="d-p4 d-ws-nowrap">
+          <td class="d-p-50 d-ws-nowrap">
             <dt-stack direction="row" as="code" gap="50" class="d-text-code--sm d-bgc-transparent d-ta-center d-c-default">
               <span v-dt-tooltip="`Font Size`">{{ getStyles('headlines', index).fontSize }}</span>
               /
@@ -106,7 +106,7 @@ Titles and headings to establish hierarchy and set the tone of contextual groupi
               <span v-dt-tooltip="`Font Weight`">{{ getStyles('headlines', index).fontWeightName }}</span>
             </dt-stack>
           </td>
-          <td class="d-p4 d-ws-nowrap">
+          <td class="d-p-50 d-ws-nowrap">
             <dt-stack direction="row" justify="between" class="dialtone-copy-utility">
               <code class="dialtone-copy-utility__utility d-bgc-transparent d-text-code--sm">{{ varName }}</code>
               <div class="dialtone-copy-utility__btn">
@@ -124,14 +124,14 @@ Titles and headings to establish hierarchy and set the tone of contextual groupi
 
 Default text style for longer-form prose content, designed for comfort and clarity in reading varying lengths.
 
-<code-well-header class="d-p16 d-bgc-secondary" custom>
+<code-well-header class="d-p-200 d-bgc-secondary" custom>
   <table class="d-w100p">
     <tbody>
       <tr v-for="({ var: varName }, index) in typographyStylesBody" :key="varName">
-        <td class="d-p4 d-lc-1">
+        <td class="d-p-50 d-lc-1">
           <div :class="[varName]">{{ example }}</div>
         </td>
-        <td class="d-p4 d-ws-nowrap">
+        <td class="d-p-50 d-ws-nowrap">
           <dt-stack direction="row" as="code" gap="50" class="d-text-code--sm d-bgc-transparent d-ta-center d-c-default">
             <span v-dt-tooltip="`Font Size`">{{ getStyles('body', index).fontSize }}</span>
             /
@@ -140,7 +140,7 @@ Default text style for longer-form prose content, designed for comfort and clari
             <span v-dt-tooltip="`Font Weight`">{{ getStyles('body', index).fontWeightName }}</span>
           </dt-stack>
         </td>
-        <td class="d-p4 d-ws-nowrap">
+        <td class="d-p-50 d-ws-nowrap">
           <dt-stack direction="row" justify="between" class="dialtone-copy-utility">
             <code class="dialtone-copy-utility__utility d-bgc-transparent d-text-code--sm">{{ varName }}</code>
             <div class="dialtone-copy-utility__btn">
@@ -158,14 +158,14 @@ Default text style for longer-form prose content, designed for comfort and clari
 Shorter-length copy like form fields, buttons, and other UI-labeling elements, ensuring clear navigation and
 interaction.
 
-<code-well-header class="d-p16 d-bgc-secondary" custom>
+<code-well-header class="d-p-200 d-bgc-secondary" custom>
   <table class="d-w100p">
     <tbody>
       <tr v-for="({ var: varName }, index) in typographyStylesLabel" :key="varName">
-        <td class="d-p4 d-lc-1">
+        <td class="d-p-50 d-lc-1">
           <div :class="[varName]">{{ example }}</div>
         </td>
-        <td class="d-p4 d-ws-nowrap">
+        <td class="d-p-50 d-ws-nowrap">
           <dt-stack direction="row" as="code" gap="50" class="d-text-code--sm d-bgc-transparent d-ta-center d-c-default">
             <span v-dt-tooltip="`Font Size`">{{ getStyles('label', index).fontSize }}</span>
             /
@@ -174,7 +174,7 @@ interaction.
             <span v-dt-tooltip="`Font Weight`">{{ getStyles('label', index).fontWeightName }}</span>
           </dt-stack>
         </td>
-        <td class="d-p4 d-ws-nowrap">
+        <td class="d-p-50 d-ws-nowrap">
           <dt-stack direction="row" justify="between" class="dialtone-copy-utility">
             <code class="dialtone-copy-utility__utility d-bgc-transparent d-text-code--sm">{{ varName }}</code>
             <div class="dialtone-copy-utility__btn">
@@ -191,14 +191,14 @@ interaction.
 
 Code snippets, technical commands, or data values rendered as a monospaced font.
 
-<code-well-header class="d-p16 d-bgc-secondary" custom>
+<code-well-header class="d-p-200 d-bgc-secondary" custom>
   <table class=d-w100p>
     <tbody>
       <tr v-for="({ var: varName }, index) in typographyStylesCode" :key="varName">
-        <td class="d-p4 d-lc-1">
+        <td class="d-p-50 d-lc-1">
           <div :class="[varName]">{{ example }}</div>
         </td>
-        <td class="d-p4 d-ws-nowrap">
+        <td class="d-p-50 d-ws-nowrap">
           <dt-stack direction="row" as="code" gap="50" class="d-text-code--sm d-bgc-transparent d-ta-center d-c-default">
             <span v-dt-tooltip="`Font Size`">{{ getStyles('code', index).fontSize }}</span>
             /
@@ -207,7 +207,7 @@ Code snippets, technical commands, or data values rendered as a monospaced font.
             <span v-dt-tooltip="`Font Weight`">{{ getStyles('code', index).fontWeightName }}</span>
           </dt-stack>
         </td>
-        <td class="d-p4 d-ws-nowrap">
+        <td class="d-p-50 d-ws-nowrap">
           <dt-stack direction="row" justify="between" class="dialtone-copy-utility">
             <code class="dialtone-copy-utility__utility d-bgc-transparent d-text-code--sm">{{ varName }}</code>
             <div class="dialtone-copy-utility__btn">
@@ -283,7 +283,7 @@ vueCode='
 
 ### Hero
 
-<code-well-header class="d-pb32">
+<code-well-header class="d-pb-400">
   <dt-stack gap="200">
     <dt-stack>
       <dt-text as="h2" kind="headline" size="2xl">AI that works for you</dt-text>
@@ -338,10 +338,10 @@ Each typography style is expressed through a shorthand `font` property, and its 
 <clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
-      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t-0">
         <tr>
-          <th scope="col" class="d-w40p  d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Class</div></th>
-          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Output</div></th>
+          <th scope="col" class="d-w40p  d-p-0 d-bbw0"><div class="d-p-200 d-bb d-bc-default d-bbw1">Class</div></th>
+          <th scope="col" class="d-p-0 d-bbw0"><div class="d-p-200 d-bb d-bc-default d-bbw1">Output</div></th>
         </tr>
       </thead>
       <tbody>

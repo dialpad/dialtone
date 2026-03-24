@@ -8,8 +8,8 @@ keywords: ["maximum height", "mxh"]
 
 Use `d-hmx{n}p` or `d-hmx{n}` to set a maximum height percentage for an element. This can be combined with `d-h{n}p` and `d-hmn{n}` to have an element fill a certain height range.
 
-<code-well-header class="d-d-flex d-jc-center d-p24 d-bgc-secondary d-w100p d-hmx216" custom>
-  <dt-stack direction="row" align="center" justify="center" class="d-py16 d-px8 d-w100p d-h72 d-hmx100p d-bgc-moderate d-bar4 d-ta-center">1</dt-stack>
+<code-well-header class="d-d-flex d-jc-center d-p-300 d-bgc-secondary d-w100p d-hmx216" custom>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100p d-h72 d-hmx100p d-bgc-moderate d-bar4 d-ta-center">1</dt-stack>
 </code-well-header>
 
 ```html
@@ -28,10 +28,10 @@ Use `d-hmx{n}p` or `d-hmx{n}` to set a maximum height percentage for an element.
 <clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
-      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t-0">
         <tr>
-          <th scope="col" class="d-p0 d-bbw0 d-w30p"><div class="d-p16 d-bb d-bbw1">Class</div></th>
-          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bbw1">Output</div></th>
+          <th scope="col" class="d-p-0 d-bbw0 d-w30p"><div class="d-p-200 d-bb d-bbw1">Class</div></th>
+          <th scope="col" class="d-p-0 d-bbw0"><div class="d-p-200 d-bb d-bbw1">Output</div></th>
         </tr>
       </thead>
       <tbody>

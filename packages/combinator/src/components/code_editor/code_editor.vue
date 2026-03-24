@@ -40,7 +40,7 @@
       :class="[
         `dtc-theme--${theme}`,
         'd-ps-sticky',
-        'd-t0',
+        'd-t-0',
       ]"
       content-class="dtc-theme__popover"
       transition="pop"
@@ -49,7 +49,7 @@
     >
       <template #anchor="{ attrs }">
         <dt-button
-          class="dtc-theme__button d-ps-sticky d-t0"
+          class="dtc-theme__button d-ps-sticky d-t-0"
           v-bind="attrs"
           importance="clear"
           size="lg"

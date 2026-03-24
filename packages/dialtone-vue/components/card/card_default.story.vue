@@ -55,7 +55,7 @@
       <dt-button>
         Button 1
       </dt-button>
-      <dt-button class="d-ml8">
+      <dt-button class="d-ml-100">
         Button 2
       </dt-button>
     </template>

@@ -4,56 +4,56 @@ description: Utilities to adjust an element's exterior spacing between other obj
 keywords: ["outer spacing", "gap", "offset"]
 ---
 
-<dt-notice kind="warning" class="d-wmx100p d-mt24" hideClose>
+<dt-notice kind="warning" class="d-wmx100p d-mt-300" hideClose>
   Avoid applying margins directly. Lean toward using layout components like <dt-link to="/components/stack/" kind="muted">Stack</dt-link> for consistent and maintainable spacing <strong>between</strong> elements.
 </dt-notice>
 
 ## Add Margin to All Sides
 
 <code-well-header>
-  <div class="d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p16 d-m24 d-bgc-moderate d-bar4 d-code--md">d-m24</dt-stack></div>
+  <div class="d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-m-300 d-bgc-moderate d-bar4 d-code--md">d-m24</dt-stack></div>
 </code-well-header>
 
 ```html
-<div class="d-m24 ...">d-m24</div>
+<div class="d-m-300 ...">d-m24</div>
 ```
 
 ## Add Margin to a Single Side
 
 <code-well-header>
   <dt-stack direction="row" justify="center" gap="300" class="d-w100p">
-    <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mt12 d-p16 d-bgc-moderate d-bbr4 d-code--md">d-mt12</dt-stack></div>
-    <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mr16 d-p16 d-bgc-moderate d-brl4 d-code--md">d-mr16</dt-stack></div>
-    <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mb24 d-p16 d-bgc-moderate d-btr4 d-code--md">d-mb24</dt-stack></div>
-    <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-ml32 d-p16 d-bgc-moderate d-brr4 d-code--md">d-ml32</dt-stack></div>
+    <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mt-150 d-p-200 d-bgc-moderate d-bbr4 d-code--md">d-mt12</dt-stack></div>
+    <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mr-200 d-p-200 d-bgc-moderate d-brl4 d-code--md">d-mr16</dt-stack></div>
+    <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mb-300 d-p-200 d-bgc-moderate d-btr4 d-code--md">d-mb24</dt-stack></div>
+    <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-ml-400 d-p-200 d-bgc-moderate d-brr4 d-code--md">d-ml32</dt-stack></div>
   </dt-stack>
 </code-well-header>
 
 ```html
-<div class="d-mt12 ...">d-mt12</div>
-<div class="d-mr16 ...">d-mr16</div>
-<div class="d-mb24 ...">d-mb24</div>
-<div class="d-ml32 ...">d-ml32</div>
+<div class="d-mt-150 ...">d-mt12</div>
+<div class="d-mr-200 ...">d-mr16</div>
+<div class="d-mb-300 ...">d-mb24</div>
+<div class="d-ml-400 ...">d-ml32</div>
 ```
 
 ## Add Horizontal Margins
 
 <code-well-header>
-  <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mx16 d-p16 d-bgc-moderate d-code--md">d-mx16</dt-stack></div>
+  <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mx-200 d-p-200 d-bgc-moderate d-code--md">d-mx16</dt-stack></div>
 </code-well-header>
 
 ```html
-<div class="d-mx24 ...">d-mx24</div>
+<div class="d-mx-300 ...">d-mx24</div>
 ```
 
 ## Add Vertical Margins
 
 <code-well-header>
-  <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-my16 d-p16 d-bgc-moderate d-code--sm">d-my16</dt-stack></div>
+  <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-my-200 d-p-200 d-bgc-moderate d-code--sm">d-my16</dt-stack></div>
 </code-well-header>
 
 ```html
-<div class="d-my24 ...">d-my24</div>
+<div class="d-my-300 ...">d-my24</div>
 ```
 
 ## Auto Margins
@@ -62,9 +62,9 @@ Auto margins allow an element to fill a remaining space within an object. This i
 
 <code-well-header>
   <dt-stack gap="200" class="d-w100p">
-    <dt-stack direction="row" class="d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mx-auto d-p16 d-bgc-moderate d-code--md">d-mx-auto</dt-stack></dt-stack>
-    <dt-stack direction="row" class="d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-ml-auto d-p16 d-bgc-moderate d-code--md">d-ml-auto</dt-stack></dt-stack>
-    <dt-stack direction="row" class="d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mr-auto d-p16 d-bgc-moderate d-code--md">d-mr-auto</dt-stack></dt-stack>
+    <dt-stack direction="row" class="d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mx-auto d-p-200 d-bgc-moderate d-code--md">d-mx-auto</dt-stack></dt-stack>
+    <dt-stack direction="row" class="d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-ml-auto d-p-200 d-bgc-moderate d-code--md">d-ml-auto</dt-stack></dt-stack>
+    <dt-stack direction="row" class="d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mr-auto d-p-200 d-bgc-moderate d-code--md">d-mr-auto</dt-stack></dt-stack>
   </dt-stack>
 </code-well-header>
 

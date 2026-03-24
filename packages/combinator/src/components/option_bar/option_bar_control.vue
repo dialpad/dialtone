@@ -14,11 +14,11 @@
         </span>
         <dt-icon-lock
           v-if="locked"
-          class="d-pr4 d-fs10 d-ps-relative d-t1"
+          class="d-pr-50 d-fs10 d-ps-relative d-t-1"
         />
         <span
           v-if="required"
-          class="d-pl2 d-ps-relative d-b2"
+          class="d-pl-25 d-ps-relative d-b-25"
         >
           <dt-badge
             text="required"
@@ -27,7 +27,7 @@
         </span>
         <span
           v-if="vModel"
-          class="d-pl2 d-ps-relative d-b2"
+          class="d-pl-25 d-ps-relative d-b-25"
         >
           <dt-badge
             text="v-model"

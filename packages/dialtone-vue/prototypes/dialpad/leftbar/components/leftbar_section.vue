@@ -7,7 +7,7 @@
       <div class="d-ps-relative">
         <dt-button
           v-bind="attrs"
-          class="d-bar-pill d-py4 d-w100p d-baw0"
+          class="d-bar-pill d-py-50 d-w100p d-baw0"
           label-class="d-jc-flex-start d-w100p"
           importance="clear"
           kind="muted"
@@ -25,7 +25,7 @@
               />
             </div>
           </template>
-          <span class="d-truncate d-lh12 d-headline--sm d-fc-tertiary d-us-none d-wmx128 d-ta-left">{{ title }}</span>
+          <span class="d-truncate d-lh12 d-headline--sm d-fc-tertiary d-us-none d-wmx-200 d-ta-left">{{ title }}</span>
         </dt-button>
         <div class="leftbar-section-header__action">
           <slot name="action" />

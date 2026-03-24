@@ -5,7 +5,7 @@ no_preview: true
 keywords: ["dark mode","light mode","color scheme"]
 ---
 
-<div class="d-m32"></div>
+<div class="d-m-400"></div>
 
 ## Overview
 
@@ -302,7 +302,7 @@ These are the core reference colors for the shell. They are directly linked to t
 
 <div class="d-bgc-secondary d-bar8"><svg-loader class="d-fl1" name="base-tokens" /></div>
 
-<div class="d-m32"></div>
+<div class="d-m-400"></div>
 
 ### Shell Modifier Tokens
 
@@ -310,18 +310,18 @@ These tokens, such as `shell-action...`, `shell-status...` `shell-mention...`, i
 
 <div class="d-bgc-secondary d-bar8"><svg-loader class="d-fl1" name="base-shell-token" /></div>
 
-<div class="d-m32"></div>
+<div class="d-m-400"></div>
 
 This structure allows for a cascading effect: changing a shell base token automatically updates all related shell modifier tokens, making it simple to create and manage custom themes for the application's shell.
 <div class="d-bgc-secondary d-bar8"><svg-loader class="d-fl1" name="token-structure" /></div>
 
-<div class="d-m32"></div>
+<div class="d-m-400"></div>
 
 ## Accessibility
 
 When creating a custom theme, it is important to ensure that the colors used are accessible. This means that the colors should be easy to read and contrast well with the background.
 
-<dialtone-usage class="d-d-grid d-g24 d-g-cols2">
+<dialtone-usage class="d-d-grid d-g-300 d-g-cols2">
   <template #do>
     <div class="d-bgc-secondary d-bar8">
       <svg-loader class="d-fl1" name="theme-contrast-do" />

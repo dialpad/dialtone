@@ -5,14 +5,14 @@
       :key="category"
     >
       <h2
-        class="d-tt-capitalize d-my8"
+        class="d-tt-capitalize d-my-100"
         v-text="category"
       />
       <dt-icon
         v-for="icon in Object.keys(icons).slice(0, $attrs.limit)"
         :key="`${category}-${icon}`"
         :name="icon"
-        class="d-m8"
+        class="d-m-100"
       />
     </template>
   </div>

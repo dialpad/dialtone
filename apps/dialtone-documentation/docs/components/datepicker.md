@@ -373,7 +373,7 @@ showHtmlWarning />
 
 The following functions are available for date formatting.
 
-<div class="d-bgc-secondary d-bar8 d-p16">
+<div class="d-bgc-secondary d-bar8 d-p-200">
   <dt-stack
     :direction="{ 'default': 'column', 'md': 'row' }"
     gap="400"
@@ -390,31 +390,31 @@ The following functions are available for date formatting.
     </dt-stack>
     <table class="d-table d-bt d-fl1">
       <tr>
-        <th class="d-pl0" scope="row"><dt-text as="code" kind="code" size="xs" class="d-bgc-transparent">formatLong</dt-text></th>
+        <th class="d-pl-0" scope="row"><dt-text as="code" kind="code" size="xs" class="d-bgc-transparent">formatLong</dt-text></th>
         <td><dt-text kind="body" size="xs">{{ formatLong(currentSelectedDate) }}</dt-text></td>
       </tr>
       <tr>
-        <th class="d-pl0" scope="row"><dt-text as="code" kind="code" size="xs" class="d-bgc-transparent">formatMedium</dt-text></th>
+        <th class="d-pl-0" scope="row"><dt-text as="code" kind="code" size="xs" class="d-bgc-transparent">formatMedium</dt-text></th>
         <td><dt-text kind="body" size="xs">{{ formatMedium(currentSelectedDate) }}</dt-text></td>
       </tr>
       <tr>
-        <th class="d-pl0" scope="row"><dt-text as="code" kind="code" size="xs" class="d-bgc-transparent">formatShort</dt-text></th>
+        <th class="d-pl-0" scope="row"><dt-text as="code" kind="code" size="xs" class="d-bgc-transparent">formatShort</dt-text></th>
         <td><dt-text kind="body" size="xs">{{ formatShort(currentSelectedDate) }}</dt-text></td>
       </tr>
       <tr>
-        <th class="d-pl0" scope="row"><dt-text as="code" kind="code" size="xs" class="d-bgc-transparent">formatShort (no weekday)</dt-text></th>
+        <th class="d-pl-0" scope="row"><dt-text as="code" kind="code" size="xs" class="d-bgc-transparent">formatShort (no weekday)</dt-text></th>
         <td><dt-text kind="body" size="xs">{{ formatShort(currentSelectedDate, false) }}</dt-text></td>
       </tr>
       <tr>
-        <th class="d-pl0" scope="row"><dt-text as="code" kind="code" size="xs" class="d-bgc-transparent">formatNoYear</dt-text></th>
+        <th class="d-pl-0" scope="row"><dt-text as="code" kind="code" size="xs" class="d-bgc-transparent">formatNoYear</dt-text></th>
         <td><dt-text kind="body" size="xs">{{ formatNoYear(currentSelectedDate) }}</dt-text></td>
       </tr>
       <tr>
-        <th class="d-pl0" scope="row"><dt-text as="code" kind="code" size="xs" class="d-bgc-transparent">formatNoYear (abbreviated)</dt-text></th>
+        <th class="d-pl-0" scope="row"><dt-text as="code" kind="code" size="xs" class="d-bgc-transparent">formatNoYear (abbreviated)</dt-text></th>
         <td><dt-text kind="body" size="xs">{{ formatNoYear(currentSelectedDate, true) }}</dt-text></td>
       </tr>
       <tr>
-        <th class="d-pl0" scope="row"><dt-text as="code" kind="code" size="xs" class="d-bgc-transparent">formatNumerical</dt-text></th>
+        <th class="d-pl-0" scope="row"><dt-text as="code" kind="code" size="xs" class="d-bgc-transparent">formatNumerical</dt-text></th>
         <td><dt-text kind="body" size="xs">{{ formatNumerical(currentSelectedDate) }}</dt-text></td>
       </tr>
     </table>

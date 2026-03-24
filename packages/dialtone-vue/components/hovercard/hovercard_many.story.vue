@@ -1,5 +1,5 @@
 <template>
-  <ul class="d-mb4">
+  <ul class="d-mb-50">
     <dt-recipe-feed-item-row
       v-for="data in cardData"
       :key="data.name"

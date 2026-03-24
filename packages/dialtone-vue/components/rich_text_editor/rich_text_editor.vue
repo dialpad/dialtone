@@ -164,7 +164,7 @@ export default {
     /**
      * Additional class name for the input element. Only accepts a String value
      * because this is passed to the editor via options. For multiple classes,
-     * join them into one string, e.g. "d-p8 d-hmx96"
+     * join them into one string, e.g. "d-p-100 d-hmx-150"
      */
     inputClass: {
       type: String,

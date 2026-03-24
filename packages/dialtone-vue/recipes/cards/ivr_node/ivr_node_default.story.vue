@@ -11,7 +11,7 @@
       #connector
     >
       <div
-        class="d-recipe-ivr-node__connector d-w-auto d-px8 d-h24 d-bar-pill d-mbn12 d-fc-primary-inverted d-fs-100"
+        class="d-recipe-ivr-node__connector d-w-auto d-px-100 d-h24 d-bar-pill d-mb-n150 d-fc-primary-inverted d-fs-100"
       >
         Add branch
       </div>

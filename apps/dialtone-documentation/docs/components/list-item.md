@@ -137,10 +137,10 @@ When `type` is set to "custom" the list item will not render any styles or slots
       navigation-type="tab"
       type="custom"
     >
-      <dt-stack direction="row" align="center" justify="between" class="d-py8 d-px12">
+      <dt-stack direction="row" align="center" justify="between" class="d-py-100 d-px-150">
         <div>
           <time
-            class="d-fs-100 d-pr12"
+            class="d-fs-100 d-pr-150"
             datetime="10:00"
           >
             10:00
@@ -149,9 +149,9 @@ When `type` is set to "custom" the list item will not render any styles or slots
             Custom List Item Example
           </span>
         </div>
-        <dt-stack direction="row" class="d-p6 d-tn8 d-r12 d-bgc-white d-bar4 d-bs-md">
+        <dt-stack direction="row" class="d-p-75 d-t-n100 d-r-150 d-bgc-white d-bar4 d-bs-md">
           <dt-button
-            class="d-p4 d-py8"
+            class="d-p-50 d-py-100"
             importance="clear"
             title="share"
           >
@@ -163,7 +163,7 @@ When `type` is set to "custom" the list item will not render any styles or slots
             </template>
           </dt-button>
           <dt-button
-            class="d-p4 d-py8 d-ml4"
+            class="d-p-50 d-py-100 d-ml-50"
             importance="clear"
             title="star"
           >
@@ -175,7 +175,7 @@ When `type` is set to "custom" the list item will not render any styles or slots
             </template>
           </dt-button>
           <dt-button
-            class="d-p4 d-py8 d-ml4"
+            class="d-p-50 d-py-100 d-ml-50"
             importance="clear"
             title="more"
           >
@@ -200,10 +200,10 @@ vueCode='
     navigation-type="tab"
     type="custom"
   >
-    <dt-stack direction="row" align="center" justify="between" class="d-py8 d-px12">
+    <dt-stack direction="row" align="center" justify="between" class="d-py-100 d-px-150">
       <div>
         <time
-          class="d-fs-100 d-pr12"
+          class="d-fs-100 d-pr-150"
           datetime="10:00"
         >
           10:00
@@ -212,9 +212,9 @@ vueCode='
           Custom List Item Example
         </span>
       </div>
-      <dt-stack direction="row" class="d-p6 d-tn8 d-r12 d-bgc-white d-bar4 d-bs-md">
+      <dt-stack direction="row" class="d-p-75 d-t-n100 d-r-150 d-bgc-white d-bar4 d-bs-md">
         <dt-button
-          class="d-p4 d-py8"
+          class="d-p-50 d-py-100"
           importance="clear"
           title="share"
         >
@@ -226,7 +226,7 @@ vueCode='
           </template>
         </dt-button>
         <dt-button
-          class="d-p4 d-py8 d-ml4"
+          class="d-p-50 d-py-100 d-ml-50"
           importance="clear"
           title="star"
         >
@@ -238,7 +238,7 @@ vueCode='
           </template>
         </dt-button>
         <dt-button
-          class="d-p4 d-py8 d-ml4"
+          class="d-p-50 d-py-100 d-ml-50"
           importance="clear"
           title="more"
         >

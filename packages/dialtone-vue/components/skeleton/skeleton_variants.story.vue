@@ -1,16 +1,16 @@
 <template>
   <div>
-    <h2 class="d-mb32">
+    <h2 class="d-mb-400">
       Prefabricated shapes
     </h2>
     <dt-stack
       as="section"
       direction="row"
-      class="d-mb64"
+      class="d-mb-800"
     >
-      <div class="d-p4 d-fl1 d-w25p">
+      <div class="d-p-50 d-fl1 d-w25p">
         <h3>Avatars</h3>
-        <p class="d-mb24">
+        <p class="d-mb-300">
           Default sizes matches avatar.
           Size is customizable when needed.
         </p>
@@ -21,7 +21,7 @@
             shape: 'circle',
           }"
           :animate="$attrs.animate"
-          class="d-mb24"
+          class="d-mb-300"
           :aria-label="$attrs.ariaLabel"
         />
         <p>M (32x32px)</p>
@@ -30,7 +30,7 @@
             shape: 'circle',
           }"
           :animate="$attrs.animate"
-          class="d-mb24"
+          class="d-mb-300"
           :aria-label="$attrs.ariaLabel"
         />
         <p>L (48x48px)</p>
@@ -43,9 +43,9 @@
           :aria-label="$attrs.ariaLabel"
         />
       </div>
-      <div class="d-p4 d-fl1 d-w25p">
+      <div class="d-p-50 d-fl1 d-w25p">
         <h3>Image / Icon</h3>
-        <p class="d-mb24">
+        <p class="d-mb-300">
           Size is customizable.
         </p>
         <dt-skeleton
@@ -53,13 +53,13 @@
             shape: 'square',
           }"
           :animate="$attrs.animate"
-          class="d-mb24"
+          class="d-mb-300"
           :aria-label="$attrs.ariaLabel"
         />
       </div>
-      <div class="d-p4 d-fl1 d-w25p">
+      <div class="d-p-50 d-fl1 d-w25p">
         <h3>Text: Body</h3>
-        <p class="d-mb24" />
+        <p class="d-mb-300" />
         <dt-skeleton
           :aria-label="$attrs.ariaLabel"
           :animate="$attrs.animate"
@@ -69,9 +69,9 @@
           :offset="0.5"
         />
       </div>
-      <div class="d-p4 d-fl1 d-w25p">
+      <div class="d-p-50 d-fl1 d-w25p">
         <h3>Text: Headings</h3>
-        <p class="d-mb24">
+        <p class="d-mb-300">
           Line-lengths is customizable.
         </p>
         <p>S (height: 16px)</p>
@@ -82,7 +82,7 @@
             headingHeight: 'sm',
           }"
           :animate="$attrs.animate"
-          class="d-mb24"
+          class="d-mb-300"
           :aria-label="$attrs.ariaLabel"
         />
         <p>M (height: 24px)</p>
@@ -93,7 +93,7 @@
             width: '240px',
           }"
           :animate="$attrs.animate"
-          class="d-mb24"
+          class="d-mb-300"
           :aria-label="$attrs.ariaLabel"
         />
         <p>L (height: 32px)</p>
@@ -108,17 +108,17 @@
         />
       </div>
     </dt-stack>
-    <h2 class="d-mb32">
+    <h2 class="d-mb-400">
       Prefabricated combinations
     </h2>
     <dt-stack
       as="section"
       direction="row"
-      class="d-mb64"
+      class="d-mb-800"
     >
-      <div class="d-p4 d-fl1 d-w50p">
+      <div class="d-p-50 d-fl1 d-w50p">
         <h3>Text List</h3>
-        <p class="d-mb24" />
+        <p class="d-mb-300" />
         <dt-skeleton
           :aria-label="$attrs.ariaLabel"
           :text-option="{
@@ -126,7 +126,7 @@
           }"
           :animate="$attrs.animate"
           :offset="0.5"
-          class="d-mb16"
+          class="d-mb-200"
         />
         <dt-skeleton
           :aria-label="$attrs.ariaLabel"
@@ -135,7 +135,7 @@
           }"
           :animate="$attrs.animate"
           :offset="0.5"
-          class="d-mb16"
+          class="d-mb-200"
         />
         <dt-skeleton
           :aria-label="$attrs.ariaLabel"
@@ -144,7 +144,7 @@
           }"
           :animate="$attrs.animate"
           :offset="0.5"
-          class="d-mb16"
+          class="d-mb-200"
         />
         <dt-skeleton
           :aria-label="$attrs.ariaLabel"
@@ -153,13 +153,13 @@
           }"
           :animate="$attrs.animate"
           :offset="0.5"
-          class="d-mb16"
+          class="d-mb-200"
         />
 
-        <h3 class="d-pt16">
+        <h3 class="d-pt-200">
           Avatar + Name
         </h3>
-        <p class="d-mb24" />
+        <p class="d-mb-300" />
 
         <dt-skeleton
           :offset="0.6"
@@ -173,10 +173,10 @@
           :aria-label="$attrs.ariaLabel"
         />
 
-        <h3 class="d-pt16">
+        <h3 class="d-pt-200">
           Icon + Text
         </h3>
-        <p class="d-mb24" />
+        <p class="d-mb-300" />
 
         <dt-skeleton
           :offset="0.6"
@@ -190,10 +190,10 @@
           :animate="$attrs.animate"
           :aria-label="$attrs.ariaLabel"
         />
-        <h3 class="d-pt16">
+        <h3 class="d-pt-200">
           Messages / Transcript / Comment
         </h3>
-        <p class="d-mb24" />
+        <p class="d-mb-300" />
         <dt-skeleton
           :offset="0.6"
           :list-item-option="{
@@ -209,9 +209,9 @@
           :aria-label="$attrs.ariaLabel"
         />
       </div>
-      <div class="d-p4 d-fl1 d-w50p">
+      <div class="d-p-50 d-fl1 d-w50p">
         <h3>Text: Paragraphs</h3>
-        <p class="d-mb24">
+        <p class="d-mb-300">
           Line-lengths and amount of lines are customizable.
         </p>
         <dt-skeleton

@@ -25,7 +25,7 @@ The DtStack component provides a semantic, prop-based API for flex layouts. Usin
 <div class="d-d-flex d-jc-space-between">...</div>
 
 <!-- Flex with direction and gap -->
-<div class="d-d-flex d-fd-column d-g16">...</div>
+<div class="d-d-flex d-fd-column d-g-200">...</div>
 
 <!-- Flex with wrap (keep as class on dt-stack) -->
 <div class="d-d-flex d-fw-wrap">...</div>
@@ -110,7 +110,7 @@ Some flex utilities don't have DtStack prop equivalents. Keep these as classes o
 
 **Before:**
 ```vue
-<div class="d-d-flex d-ai-center d-jc-space-between d-g16">
+<div class="d-d-flex d-ai-center d-jc-space-between d-g-200">
   <span>Left</span>
   <span>Right</span>
 </div>
@@ -128,7 +128,7 @@ Some flex utilities don't have DtStack prop equivalents. Keep these as classes o
 
 **Before:**
 ```vue
-<div class="d-d-flex d-fw-wrap d-ai-center d-g8">
+<div class="d-d-flex d-fw-wrap d-ai-center d-g-100">
   <badge v-for="item in items" :key="item.id">{{ item.name }}</badge>
 </div>
 ```
@@ -144,7 +144,7 @@ Some flex utilities don't have DtStack prop equivalents. Keep these as classes o
 
 **Before:**
 ```vue
-<div class="d-d-flex d-fd-column d-g32 d-fl-grow1">
+<div class="d-d-flex d-fd-column d-g-400 d-fl-grow1">
   <section>...</section>
   <section>...</section>
 </div>

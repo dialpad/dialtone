@@ -5,7 +5,7 @@
       v-if="heading"
       direction="row"
       align="center"
-      class="dt-dropdown-list--header d-py4 d-px12"
+      class="dt-dropdown-list--header d-py-50 d-px-150"
     >
       <dt-text
         kind="label"
@@ -18,7 +18,7 @@
     </dt-stack>
     <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events -->
     <ul
-      :class="['d-ps-relative', 'd-stack2', 'd-px0', listClass]"
+      :class="['d-ps-relative', 'd-stack2', 'd-px-0', listClass]"
       data-qa="dt-dropdown-list-wrapper"
     >
       <!-- @slot Slot for the list component -->

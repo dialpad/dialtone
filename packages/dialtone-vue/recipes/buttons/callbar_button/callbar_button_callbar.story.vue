@@ -3,7 +3,7 @@
   <div class="d-stack16">
     <h3>Normal</h3>
     <div class="d-d-flex d-flow16 d-fw-wrap d-stack16">
-      <dt-recipe-callbar-button class="d-mt16">
+      <dt-recipe-callbar-button class="d-mt-200">
         Screenshare
         <template #icon>
           <dt-icon name="share-screen" />
@@ -99,7 +99,7 @@
       <dt-recipe-callbar-button
         active
         danger
-        class="d-mt16"
+        class="d-mt-200"
       >
         Stop
         <template #icon>

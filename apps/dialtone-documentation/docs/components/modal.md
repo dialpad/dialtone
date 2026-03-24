@@ -74,7 +74,7 @@ htmlCode='
 <button type="button" class="base-button__button d-btn d-btn--primary">
   <span class="d-btn__label base-button__label"> Click to open </span>
 </button>
-<aside id="modal-base" class="d-modal d-m0 d-modal--animate-in" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-describedby="modal-description" aria-hidden="false">
+<aside id="modal-base" class="d-modal d-m-0 d-modal--animate-in" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-describedby="modal-description" aria-hidden="false">
   <div class="d-modal__dialog d-modal__dialog--animate-in" role="document">
     <h2 class="d-modal__header">
       Example title
@@ -83,7 +83,7 @@ htmlCode='
       <p id="modal-description">
         Sed at orci quis nunc finibus gravida eget vitae est...
       </p>
-      <p class="d-mt16"><a href="#" class="d-link">Show me a modal banner</a></p>
+      <p class="d-mt-200"><a href="#" class="d-link">Show me a modal banner</a></p>
     </div>
     <footer class="d-modal__footer">
       <button class="d-btn d-btn--primary" type="button">
@@ -129,7 +129,7 @@ vueCode='
     <dt-button
       id="confirm-button"
       importance="primary"
-      class="d-ml6"
+      class="d-ml-75"
     >
       Confirm
     </dt-button>
@@ -156,7 +156,7 @@ htmlCode='
 <button type="button" class="base-button__button d-btn d-btn--primary">
   <span class="d-btn__label base-button__label"> Click to open </span>
 </button>
-<aside id="modal-base" class="d-modal d-m0 d-modal--animate-in" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-describedby="modal-description" aria-hidden="false">
+<aside id="modal-base" class="d-modal d-m-0 d-modal--animate-in" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-describedby="modal-description" aria-hidden="false">
   <div class="d-modal__dialog d-modal__dialog--animate-in d-modal__dialog--scrollable d-hmx764" role="document">
     <h2 class="d-modal__header">
       Example title
@@ -165,7 +165,7 @@ htmlCode='
       <p id="modal-description">
         Sed at orci quis nunc finibus gravida eget vitae est...
       </p>
-      <p class="d-mt16"><a href="#" class="d-link">Show me a modal banner</a></p>
+      <p class="d-mt-200"><a href="#" class="d-link">Show me a modal banner</a></p>
     </div>
     <footer class="d-modal__footer">
       <button class="d-btn d-btn--primary" type="button">
@@ -213,7 +213,7 @@ vueCode='
     <dt-button
       id="confirm-button"
       importance="primary"
-      class="d-ml6"
+      class="d-ml-75"
     >
       Confirm
     </dt-button>
@@ -240,7 +240,7 @@ htmlCode='
 <button type="button" class="base-button__button d-btn d-btn--primary">
   <span class="d-btn__label base-button__label"> Click to open </span>
 </button>
-<aside id="modal-base" class="d-modal d-m0 d-modal--danger d-modal--animate-in" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-describedby="modal-description" aria-hidden="false">
+<aside id="modal-base" class="d-modal d-m-0 d-modal--danger d-modal--animate-in" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-describedby="modal-description" aria-hidden="false">
   <div class="d-modal__dialog d-modal__dialog--animate-in" role="document">
     <h2 class="d-modal__header">
       Example title
@@ -249,7 +249,7 @@ htmlCode='
       <p id="modal-description">
         Sed at orci quis nunc finibus gravida eget vitae est...
       </p>
-      <p class="d-mt16"><a href="#" class="d-link">Show me a modal banner</a></p>
+      <p class="d-mt-200"><a href="#" class="d-link">Show me a modal banner</a></p>
     </div>
     <footer class="d-modal__footer">
       <button class="d-btn d-btn--primary d-btn--danger" type="button">
@@ -297,7 +297,7 @@ vueCode='
       id="confirm-button"
       kind="danger"
       importance="primary"
-      class="d-ml6"
+      class="d-ml-75"
     >
       Confirm
     </dt-button>
@@ -324,7 +324,7 @@ htmlCode='
 <button type="button" class="base-button__button d-btn d-btn--primary">
   <span class="d-btn__label base-button__label"> Click to open </span>
 </button>
-<aside id="modal-base" class="d-modal d-m0 d-modal--full d-modal--animate-in" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-describedby="modal-description" aria-hidden="false">
+<aside id="modal-base" class="d-modal d-m-0 d-modal--full d-modal--animate-in" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-describedby="modal-description" aria-hidden="false">
   <div class="d-modal__dialog d-modal__dialog--animate-in" role="document">
     <h2 class="d-modal__header">
       Example title
@@ -333,7 +333,7 @@ htmlCode='
       <p id="modal-description">
         Sed at orci quis nunc finibus gravida eget vitae est...
       </p>
-      <p class="d-mt16"><a href="#" class="d-link">Show me a modal banner</a></p>
+      <p class="d-mt-200"><a href="#" class="d-link">Show me a modal banner</a></p>
     </div>
     <footer class="d-modal__footer">
       <button class="d-btn d-btn--primary" type="button">
@@ -380,7 +380,7 @@ vueCode='
     <dt-button
       id="confirm-button"
       importance="primary"
-      class="d-ml6"
+      class="d-ml-75"
     >
       Confirm
     </dt-button>
@@ -422,7 +422,7 @@ htmlCode='
 <button type="button" class="base-button__button d-btn d-btn--primary">
   <span class="d-btn__label base-button__label"> Click to open </span>
 </button>
-<aside id="modal-base" class="d-modal d-m0 d-modal--animate-in" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-describedby="modal-description" aria-hidden="false">
+<aside id="modal-base" class="d-modal d-m-0 d-modal--animate-in" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-describedby="modal-description" aria-hidden="false">
   <div class="d-modal__banner d-modal__banner--success">This banner can have different kinds.</div>
   <div class="d-modal__dialog d-modal__dialog--animate-in" role="document">
     <h2 class="d-modal__header">
@@ -479,7 +479,7 @@ vueCode='
     <dt-button
       id="confirm-button"
       importance="primary"
-      class="d-ml6"
+      class="d-ml-75"
     >
       Confirm
     </dt-button>
@@ -507,11 +507,11 @@ In addition to the footer, custom elements can be inserted into the header and b
     @update:show="updateShow"
   >
     <template #header>
-      <dt-stack direction="row" align="center" justify="center" class="d-p12 d-bgc-purple-100">
+      <dt-stack direction="row" align="center" justify="center" class="d-p-150 d-bgc-purple-100">
         <div>Custom header</div>
       </dt-stack>
     </template>
-    <dt-stack direction="row" align="center" justify="center" class="d-p32 d-bgc-gold-200">
+    <dt-stack direction="row" align="center" justify="center" class="d-p-400 d-bgc-gold-200">
       <h2>Custom content</h2>
     </dt-stack>
   </dt-modal>
@@ -529,11 +529,11 @@ vueCode='
   @update:show="updateShow"
 >
   <template #header>
-    <dt-stack direction="row" align="center" justify="center" class="d-p12 d-bgc-purple-100">
+    <dt-stack direction="row" align="center" justify="center" class="d-p-150 d-bgc-purple-100">
       <div>Custom header</div>
     </dt-stack>
   </template>
-  <dt-stack direction="row" align="center" justify="center" class="d-p32 d-bgc-gold-200">
+  <dt-stack direction="row" align="center" justify="center" class="d-p-400 d-bgc-gold-200">
     <h2>Custom content</h2>
   </dt-stack>
 </dt-modal>

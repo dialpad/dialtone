@@ -177,11 +177,11 @@ describe('DtModeIsland Tests', () => {
 
   describe('Attribute Passthrough Tests', () => {
     it('should pass through class attribute', () => {
-      mockAttrs = { class: 'd-p16 d-bgc-primary' };
+      mockAttrs = { class: 'd-p-200 d-bgc-primary' };
 
       updateWrapper();
 
-      expect(wrapper.classes()).toContain('d-p16');
+      expect(wrapper.classes()).toContain('d-p-200');
       expect(wrapper.classes()).toContain('d-bgc-primary');
     });
 

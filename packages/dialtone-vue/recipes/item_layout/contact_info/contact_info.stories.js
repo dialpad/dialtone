@@ -172,12 +172,12 @@ export const Default = {
     avatarColor: '',
     presence: 'active',
     header: `<div class="d-fs-200 d-fw-bold" id="contact-name"> Joseph Lumaban </div>`,
-    subtitle: `<div class="d-fs-100 d-mt2"> +1 (415) 123-4567 </div>`,
-    blockEnd: `<div data-qa="dt-stack" class="d-mtn6 d-stack d-stack--row d-stack--gap-0 d-stack--align-center d-stack--justify-start">
-    <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">
+    subtitle: `<div class="d-fs-100 d-mt-25"> +1 (415) 123-4567 </div>`,
+    blockEnd: `<div data-qa="dt-stack" class="d-mt-n75 d-stack d-stack--row d-stack--gap-0 d-stack--align-center d-stack--justify-start">
+    <div class="d-w8 d-h8 d-mr-50 d-bgc-magenta-200">
       &nbsp;
     </div>
-    <div class="d-fs-100 d-mr4">
+    <div class="d-fs-100 d-mr-50">
       Aerolabs Support
     </div>
   </div>`,
@@ -195,15 +195,15 @@ export const Default = {
     :presence="presence"
   >
     <template #header>
-      <div class="d-fs-200 d-fw-bold d-mr4">Joseph Lumaban</div>
+      <div class="d-fs-200 d-fw-bold d-mr-50">Joseph Lumaban</div>
     </template>
     <template #subtitle>
-      <div class="d-fs-100 d-mt2">+1 (415) 123-4567</div>
+      <div class="d-fs-100 d-mt-25">+1 (415) 123-4567</div>
     </template>
     <template #blockEnd>
-      <dt-stack direction="row" align="center" class="d-mtn6">
-        <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">&nbsp;</div>
-        <div class="d-fs-100 d-mr4">Aerolabs Support</div>
+      <dt-stack direction="row" align="center" class="d-mt-n75">
+        <div class="d-w8 d-h8 d-mr-50 d-bgc-magenta-200">&nbsp;</div>
+        <div class="d-fs-100 d-mr-50">Aerolabs Support</div>
       </dt-stack>
     </template>
   </dt-recipe-contact-info>
@@ -243,24 +243,24 @@ export const Variants = {
       source: {
         code: `
   <div class="d-divide-y">
-    <div class="d-m32">
-      <p class="d-my16 d-fs-200 d-fw-bold">Unknown contact (phone number only) with attestation</p>
+    <div class="d-m-400">
+      <p class="d-my-200 d-fs-200 d-fw-bold">Unknown contact (phone number only) with attestation</p>
       <dt-recipe-contact-info>
         <template #header>
-          <dt-stack direction="row" align="center" class="d-mb2">
-            <div class="d-fs-200 d-fw-bold d-mr4">+1 (415) 123-4567</div>
+          <dt-stack direction="row" align="center" class="d-mb-25">
+            <div class="d-fs-200 d-fw-bold d-mr-50">+1 (415) 123-4567</div>
             <dt-icon name="check-circle" size="200" class="d-fc-tertiary" />
           </dt-stack>
         </template>
         <template #subtitle>San Francisco, California</template>
       </dt-recipe-contact-info>
     </div>
-    <div class="d-m32">
-      <p class="d-my16 d-fs-200 d-fw-bold">Unknown contact with "marked as spam" button</p>
+    <div class="d-m-400">
+      <p class="d-my-200 d-fs-200 d-fw-bold">Unknown contact with "marked as spam" button</p>
       <dt-recipe-contact-info>
         <template #header>
-          <dt-stack direction="row" align="center" class="d-mb2">
-            <div class="d-fs-200 d-fw-bold d-mr4">+1 (415) 123-4567</div>
+          <dt-stack direction="row" align="center" class="d-mb-25">
+            <div class="d-fs-200 d-fw-bold d-mr-50">+1 (415) 123-4567</div>
           </dt-stack>
         </template>
         <template #subtitle>
@@ -268,8 +268,8 @@ export const Variants = {
         </template>
       </dt-recipe-contact-info>
     </div>
-    <div class="d-m32">
-      <p class="d-my16 d-fs-200 d-fw-bold">Clickable Group contact</p>
+    <div class="d-m-400">
+      <p class="d-my-200 d-fs-200 d-fw-bold">Clickable Group contact</p>
       <dt-button
         importance="clear"
         kind="muted"
@@ -277,67 +277,67 @@ export const Variants = {
       >
         <dt-recipe-contact-info>
           <template #header>
-            <div class="d-fs-200 d-fw-bold d-mr4">Joseph Lumaban</div>
+            <div class="d-fs-200 d-fw-bold d-mr-50">Joseph Lumaban</div>
           </template>
           <template #subtitle>
             <dt-stack direction="row" align="center">
-              <div class="d-fs-100 d-mt2">+1 (415) 123-4567</div>
+              <div class="d-fs-100 d-mt-25">+1 (415) 123-4567</div>
               <dt-icon name="check-circle" size="200" class="d-fc-tertiary d-va-text-bottom" />
             </dt-stack>
           </template>
           <template #blockEnd>
-            <dt-stack direction="row" align="center" class="d-mtn6">
-              <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">&nbsp;</div>
-              <div class="d-fs-100 d-mr4">Aerolabs Support</div>
+            <dt-stack direction="row" align="center" class="d-mt-n75">
+              <div class="d-w8 d-h8 d-mr-50 d-bgc-magenta-200">&nbsp;</div>
+              <div class="d-fs-100 d-mr-50">Aerolabs Support</div>
             </dt-stack>
           </template>
         </dt-recipe-contact-info>
       </dt-button>
     </div>
-    <div class="d-m32">
-      <p class="d-my16 d-fs-200 d-fw-bold">Group contact with transfer info</p>
+    <div class="d-m-400">
+      <p class="d-my-200 d-fs-200 d-fw-bold">Group contact with transfer info</p>
       <dt-recipe-contact-info>
-        <template #header><div class="d-fs-200 d-fw-bold d-mr4">Joseph Lumaban</div></template>
+        <template #header><div class="d-fs-200 d-fw-bold d-mr-50">Joseph Lumaban</div></template>
         <template #subtitle>
           <dt-stack direction="row" align="center">
-            <div class="d-fs-100 d-mt2">+1 (415) 123-4567</div>
+            <div class="d-fs-100 d-mt-25">+1 (415) 123-4567</div>
             <dt-icon name="check-circle" size="200" class="d-fc-tertiary d-va-text-bottom" />
           </dt-stack>
         </template>
         <template #blockEnd>
-          <dt-stack direction="row" align="center" class="d-mtn6">
-            <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">&nbsp;</div>
-            <div class="d-fs-100 d-mr4">Aerolabs Support</div>
+          <dt-stack direction="row" align="center" class="d-mt-n75">
+            <div class="d-w8 d-h8 d-mr-50 d-bgc-magenta-200">&nbsp;</div>
+            <div class="d-fs-100 d-mr-50">Aerolabs Support</div>
             <div class="d-fw-bold d-fs-100">• Transfer from Billing Support</div>
           </dt-stack>
         </template>
       </dt-recipe-contact-info>
     </div>
-    <div class="d-m32">
-      <p class="d-my16 d-fs-200 d-fw-bold">Admin view / listening in</p>
+    <div class="d-m-400">
+      <p class="d-my-200 d-fs-200 d-fw-bold">Admin view / listening in</p>
       <dt-recipe-contact-info>
         <template #header>
-          <dt-stack direction="row" align="center" class="d-mb2">
+          <dt-stack direction="row" align="center" class="d-mb-25">
             <div class="d-fw-bold d-fs-200">Joseph Lumaban & Justin H.</div>
             <div class="d-fs-200">(Agent)</div>
           </dt-stack>
         </template>
         <template #subtitle>
           <dt-stack direction="row" align="center">
-            <div class="d-fs-100 d-mt2">+1 (415) 123-4567</div>
+            <div class="d-fs-100 d-mt-25">+1 (415) 123-4567</div>
             <dt-icon name="check-circle" size="200" class="d-fc-tertiary d-va-text-bottom" />
           </dt-stack>
         </template>
         <template #blockEnd>
-          <dt-stack direction="row" align="center" class="d-mtn6">
-            <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">&nbsp;</div>
-            <div class="d-fs-100 d-mr4">Aerolabs Support</div>
+          <dt-stack direction="row" align="center" class="d-mt-n75">
+            <div class="d-w8 d-h8 d-mr-50 d-bgc-magenta-200">&nbsp;</div>
+            <div class="d-fs-100 d-mr-50">Aerolabs Support</div>
           </dt-stack>
         </template>
       </dt-recipe-contact-info>
     </div>
-    <div class="d-m32">
-      <p class="d-my16 d-fs-200 d-fw-bold">Contact with items in right slot</p>
+    <div class="d-m-400">
+      <p class="d-my-200 d-fs-200 d-fw-bold">Contact with items in right slot</p>
       <dt-recipe-contact-info
         :avatar-full-name="avatarFullName"
         :avatar-seed="avatarSeed"
@@ -345,7 +345,7 @@ export const Variants = {
         <template #header><div class="d-fw-bold d-fs-200">Natalie Woods</div></template>
         <template #subtitle>+1 (415) 123-4567</template>
         <template #end>
-          <dt-stack direction="row" align="center" class="d-m8">
+          <dt-stack direction="row" align="center" class="d-m-100">
             <dt-button size="xs" :circle="true" importance="clear" aria-label="chat">
               <template #icon>
                 <dt-icon size="400" name="webchat" />
@@ -356,7 +356,7 @@ export const Variants = {
                 <dt-icon size="400" name="more-horizontal" />
               </template>
             </dt-button>
-            <div class="d-m4">0:32</div>
+            <div class="d-m-50">0:32</div>
           </dt-stack>
         </template>
         <template #blockEnd>

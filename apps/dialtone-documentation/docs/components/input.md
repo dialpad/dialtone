@@ -10,7 +10,7 @@ keywords: ["text field", "form field", "textbox", "d-input", "DtInput", "dt-inpu
 ---
 
 <code-well-header>
-  <div class="d-d-grid d-g16 d-g-cols2 d-w100p">
+  <div class="d-d-grid d-g-200 d-g-cols2 d-w100p">
     <dt-input label="Label" placeholder="Placeholder" />
     <dt-input label="Label" type="textarea" placeholder="Placeholder" />
   </div>
@@ -49,7 +49,7 @@ This component combines both the `input` and `textarea` elements as options with
 We offer different sizes for instances in which the interface requires a smaller or larger input. In general, though, use the base (medium) size input as much as possible, especially in forms.
 
 <code-well-header>
-  <div class="d-d-grid d-g16 d-g-cols2 d-w100p">
+  <div class="d-d-grid d-g-200 d-g-cols2 d-w100p">
     <dt-input label="Label" type="text" placeholder="Placeholder" size="xs" />
     <dt-input label="Label" type="textarea" placeholder="Placeholder" size="xs" />
     <dt-input label="Label" type="text" placeholder="Placeholder" size="sm" />

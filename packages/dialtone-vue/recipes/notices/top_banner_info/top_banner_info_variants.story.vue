@@ -15,7 +15,7 @@
         importance="clear"
         size="xs"
         kind="muted"
-        class="d-px4 d-py0"
+        class="d-px-50 d-py-0"
       >
         Show 2 calls on hold
         <template #endIcon>
@@ -119,7 +119,7 @@
           importance="clear"
           size="xs"
           kind="muted"
-          class="d-fc-primary d-p0 d-fw-bold"
+          class="d-fc-primary d-p-0 d-fw-bold"
         >
           Click to answer
         </dt-button>

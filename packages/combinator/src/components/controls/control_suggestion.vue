@@ -28,7 +28,7 @@
       </template>
       <template #list="{ listProps }">
         <ul
-          class="d-p0"
+          class="d-p-0"
           v-bind="listProps"
         >
           <dt-list-item

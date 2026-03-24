@@ -15,7 +15,7 @@ Use `d-bar{n}` to change the border radius on all corners of your element.
   >
     <div
       v-for="r in [0, 1, 2, 4, 8, 12, 16, 24, 32]"
-      class="d-p16 d-ba d-baw2 d-bgc-primary d-ws-nowrap"
+      class="d-p-200 d-ba d-baw2 d-bgc-primary d-ws-nowrap"
       :class="`d-bar${r}`"
     >
       d-bar{{ r }}
@@ -46,7 +46,7 @@ Use `d-b{t|r|b|l}r{n}` to change the border radius on a side of your element.
   >
     <div
       v-for="r in [4, 8, 12, 16]"
-      class="d-p16 d-ba d-baw2 d-bgc-primary d-ws-nowrap"
+      class="d-p-200 d-ba d-baw2 d-bgc-primary d-ws-nowrap"
       :class="`d-btr${r}`"
     >
       d-btr{{ r }}
@@ -70,7 +70,7 @@ Use `d-b{a|t|r|b|l}r-pill` to change the border radius of your element to a pill
     gap="100"
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
-    <div class="d-p16 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-pill">
+    <div class="d-p-200 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-pill">
       d-bar-pill
     </div>
   </dt-stack>
@@ -89,7 +89,7 @@ Use `d-b{a|t|r|b|l}r-circle` to change the border radius of your element to a ci
     gap="100"
     :direction="{ 'default': 'column', 'md': 'row' }"
    >
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-h128 d-w128 d-ba d-baw2 d-bc-default d-bgc-primary d-ws-nowrap d-bar-circle">
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-200 d-w-200 d-ba d-baw2 d-bc-default d-bgc-primary d-ws-nowrap d-bar-circle">
       d-bar-circle
     </dt-stack>
   </dt-stack>
@@ -134,8 +134,8 @@ Use `d-b{a|t|r|b|l}r-circle` to change the border radius of your element to a ci
               </span>
             </div>
             <div
-              class="d-fl-shrink0 d-m4 d-ml16 d-h32 d-bgc-black-300"
-              :class="[val === '-circle' ? 'd-w32' : 'd-w64', `d-b${i}r${val}`]"
+              class="d-fl-shrink0 d-m-50 d-ml-200 d-h-50 d-bgc-black-300"
+              :class="[val === '-circle' ? 'd-w-50' : 'd-w-100', `d-b${i}r${val}`]"
             >
             </div>
           </dt-stack>

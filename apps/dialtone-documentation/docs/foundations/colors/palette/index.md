@@ -18,7 +18,7 @@ Colors for text and icons
     />
     <span
       :class="[
-        'd-fl0 d-fs-300 d-p6 d-fw-medium',
+        'd-fl0 d-fs-300 d-p-75 d-fw-medium',
         color.utilityClass,
         { 'd-bgc-contrast': color.utilityClass.endsWith('inverted') },
       ]"
@@ -40,7 +40,7 @@ Foreground colors distinguishing important information with a status role.
     />
     <span
       :class="[
-        'd-fl0 d-fs-300 d-p6 d-fw-medium',
+        'd-fl0 d-fs-300 d-p-75 d-fw-medium',
         color.utilityClass,
         { 'd-bgc-contrast': color.utilityClass.endsWith('inverted') },
       ]"
@@ -71,7 +71,7 @@ Define the edge of key content area, components, or surfaces.
   <template #example="{color}">
     <div
       :class="[
-        'd-d-inline-flex d-p4 d-bar-pill',
+        'd-d-inline-flex d-p-50 d-bar-pill',
         { 'd-bgc-contrast': color.utilityClass.includes('inverted') },
       ]"
     >

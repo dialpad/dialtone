@@ -4,15 +4,15 @@ description: Utilities for controlling how an element handles content that is to
 keywords: ["scroll", "hidden", "auto", "clip", "scrollbar"]
 ---
 
-<dt-notice kind="info" class="d-wmx100p d-mt24" hideClose>
+<dt-notice kind="info" class="d-wmx100p d-mt-300" hideClose>
 Consider using the custom scrollbar first with the <dt-link to="/components/scrollbar" kind="muted">Scrollbar Directive</dt-link>.
 </dt-notice>
 
 ## Examples
 
 <code-well-header>
-    <div class="d-d-grid d-g-cols4 d-g16">
-        <div v-for="{ class: className } in overflow" class="d-h216 d-p12 d-bar4 d-bgc-moderate" :class="`d-of-${className}`">
+    <div class="d-d-grid d-g-cols4 d-g-200">
+        <div v-for="{ class: className } in overflow" class="d-h216 d-p-150 d-bar4 d-bgc-moderate" :class="`d-of-${className}`">
             <code>.d-of-{{ className }}</code>
             <p class="d-w216">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend rutrum auctor. Phasellus convallis sagittis augue ut ornare. Vestibulum et gravida lectus, sed ultrices sapien. Nullam aliquet elit dui, vitae hendrerit lectus volutpat eget.
@@ -49,11 +49,11 @@ The `overflow` CSS shorthand property sets the desired behavior for how content 
 <clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
-        <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+        <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t-0">
             <tr>
-                <th scope="col" class="d-p0 d-bbw0 d-w20p"><div class="d-p16 d-bb d-bbw1">Class</div></th>
-                <th scope="col" class="d-p0 d-bbw0 d-w20p"><div class="d-p16 d-bb d-bbw1">Output</div></th>
-                <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bbw1">Description</div></th>
+                <th scope="col" class="d-p-0 d-bbw0 d-w20p"><div class="d-p-200 d-bb d-bbw1">Class</div></th>
+                <th scope="col" class="d-p-0 d-bbw0 d-w20p"><div class="d-p-200 d-bb d-bbw1">Output</div></th>
+                <th scope="col" class="d-p-0 d-bbw0"><div class="d-p-200 d-bb d-bbw1">Description</div></th>
             </tr>
         </thead>
         <tbody>

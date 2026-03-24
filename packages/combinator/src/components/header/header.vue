@@ -2,18 +2,18 @@
   <dt-stack
     direction="row"
     align="stretch"
-    class="dtc-theme__canvas d-pl12"
+    class="dtc-theme__canvas d-pl-150"
   >
     <h1 class="d-headline32 d-as-center">
       {{ component.name }}
     </h1>
-    <div class="d-fl-grow1 d-ml12 d-bl">
+    <div class="d-fl-grow1 d-ml-150 d-bl">
       <dt-stack
         direction="row"
         align="center"
         class="dtc-header__variant d-h100p"
       >
-        <div class="d-pl6 d-pt2 d-fl-grow1">
+        <div class="d-pl-75 d-pt-25 d-fl-grow1">
           <dt-select-menu
             class="d-ba-none"
             select-class="dtc-header__select"

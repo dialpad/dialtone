@@ -10,7 +10,7 @@ keywords: ["switch", "checkbox", "on off", "d-toggle", "DtToggle", "dt-toggle", 
 ---
 <code-well-header>
   <dt-stack direction="row" align="center" class="d-toggle-group">
-    <dt-toggle label-class="d-mr6">Label</dt-toggle>
+    <dt-toggle label-class="d-mr-75">Label</dt-toggle>
   </dt-stack>
 </code-well-header>
 
@@ -49,13 +49,13 @@ The Toggle component acts as a way to allow the User to switch between two mutua
 
 <code-well-header>
   <dt-stack as="fieldset" gap="100">
-    <dt-toggle label-class="d-mr6">Unchecked Toggle</dt-toggle>
-    <dt-toggle :model-value="true" label-class="d-mr6">Checked Toggle</dt-toggle>
-    <dt-toggle disabled label-class="d-mr6">Unchecked Disabled</dt-toggle>
-    <dt-toggle :model-value="true" disabled label-class="d-mr6">Checked Disabled</dt-toggle>
-    <dt-toggle :model-value="mixed" label-class="d-mr6">Indeterminate Toggle</dt-toggle>
-    <dt-toggle :model-value="mixed" label-class="d-mr6" disabled>Indeterminate Disabled</dt-toggle>
-    <dt-toggle label-class="d-mr6" :show-icon="false">Without icon</dt-toggle>
+    <dt-toggle label-class="d-mr-75">Unchecked Toggle</dt-toggle>
+    <dt-toggle :model-value="true" label-class="d-mr-75">Checked Toggle</dt-toggle>
+    <dt-toggle disabled label-class="d-mr-75">Unchecked Disabled</dt-toggle>
+    <dt-toggle :model-value="true" disabled label-class="d-mr-75">Checked Disabled</dt-toggle>
+    <dt-toggle :model-value="mixed" label-class="d-mr-75">Indeterminate Toggle</dt-toggle>
+    <dt-toggle :model-value="mixed" label-class="d-mr-75" disabled>Indeterminate Disabled</dt-toggle>
+    <dt-toggle label-class="d-mr-75" :show-icon="false">Without icon</dt-toggle>
   </dt-stack>
 </code-well-header>
 
@@ -118,8 +118,8 @@ showHtmlWarning />
 
 <code-well-header>
   <dt-stack as="fieldset" gap="100">
-    <dt-toggle size="sm" label-class="d-mr6">Small size</dt-toggle>
-    <dt-toggle label-class="d-mr6">Default size</dt-toggle>
+    <dt-toggle size="sm" label-class="d-mr-75">Small size</dt-toggle>
+    <dt-toggle label-class="d-mr-75">Default size</dt-toggle>
   </dt-stack>
 </code-well-header>
 
@@ -146,7 +146,7 @@ showHtmlWarning />
 
 <code-well-header>
   <dt-stack as="fieldset" gap="100">
-    <dt-toggle v-model="checked" label-class="d-mr6" ref="vModelExample">Toggle</dt-toggle>
+    <dt-toggle v-model="checked" label-class="d-mr-75" ref="vModelExample">Toggle</dt-toggle>
   </dt-stack>
 </code-well-header>
 

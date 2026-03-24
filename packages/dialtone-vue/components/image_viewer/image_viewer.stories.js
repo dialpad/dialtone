@@ -12,7 +12,7 @@ export const argsData = {
   onOpened: action('opened'),
   imageSrc: defaultImage,
   imageAlt: 'Image Alt Text',
-  imageButtonClass: 'd-wmn64 d-hmn64 w-wmx332 d-hmx332',
+  imageButtonClass: 'd-wmn-100 d-hmn-100 w-wmx332 d-hmx332',
   ariaLabel: 'Click to open image',
 };
 
@@ -137,7 +137,7 @@ export const Default = {
   args: {
     imageSrc: defaultImage,
     imageAlt: 'Image Alt Text',
-    imageButtonClass: 'd-wmn64 d-hmn64 w-wmx332 d-hmx332',
+    imageButtonClass: 'd-wmn-100 d-hmn-100 w-wmx332 d-hmx332',
     ariaLabel: 'Click to open image',
   },
 };

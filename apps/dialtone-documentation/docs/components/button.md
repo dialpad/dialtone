@@ -152,7 +152,7 @@ showHtmlWarning />
 ### Disabled
 
 <code-well-header>
-  <dt-toggle v-model="isDisabled" size="sm" wrapperClass="d-g8 d-m-auto d-pb8">Disabled</dt-toggle>
+  <dt-toggle v-model="isDisabled" size="sm" wrapperClass="d-g-100 d-m-auto d-pb-100">Disabled</dt-toggle>
   <dt-stack gap="100" ref="disabledAll">
     <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
       <dt-button :disabled="isDisabled"> Place Call </dt-button>
@@ -435,7 +435,7 @@ vueCode='
 <dt-notice
   title="Deprecated"
   kind="error"
-  class="d-wmx100p d-my16"
+  class="d-wmx100p d-my-200"
 >
   <code>kind="inverted"</code> has been deprecated in favor of using <router-link to="mode-island.html"> <DtLink>DtModeIsland</DtLink> </router-link> as a wrapper.
 </dt-notice>
@@ -507,7 +507,7 @@ showHtmlWarning />
 
 <dt-notice
   kind="info"
-  class="d-wmx100p d-my24"
+  class="d-wmx100p d-my-300"
   hide-close
   title="Note"
 >
@@ -742,7 +742,7 @@ Icon-only buttons are commonly used for toggling actions, navigation, or closing
         </template>
       </dt-button>
     </dt-stack>
-    <dt-stack direction="row" gap="100" class="d-bgc-contrast d-p8">
+    <dt-stack direction="row" gap="100" class="d-bgc-contrast d-p-100">
       <dt-button v-dt-tooltip="`Tooltip`" kind="inverted" importance="clear">
         <template #startIcon="{ iconSize }">
           <dt-icon
@@ -969,7 +969,7 @@ The following styles are available as a circle shape.
         </template>
       </dt-button>
     </dt-stack>
-    <dt-stack direction="row" gap="100" class="d-bgc-contrast d-p8">
+    <dt-stack direction="row" gap="100" class="d-bgc-contrast d-p-100">
       <dt-button v-dt-tooltip="`Tooltip`" circle kind="inverted" importance="clear">
         <template #startIcon="{ iconSize }">
           <dt-icon
@@ -1264,7 +1264,7 @@ Use the `#leading` and `#trailing` slots to render freeform content at the start
 ### Leading
 
 <code-well-header>
-  <dt-button kind="muted" importance="outlined" leading-class="d-pl12" ref="leadingExample">
+  <dt-button kind="muted" importance="outlined" leading-class="d-pl-150" ref="leadingExample">
     Caution
     <template #leading>
       <span class="d-bgc-critical-strong d-bar4 d-w12 d-h12"></span>
@@ -1275,7 +1275,7 @@ Use the `#leading` and `#trailing` slots to render freeform content at the start
 <code-example-tabs
 :htmlCode='() => $refs.leadingExample'
 vueCode='
-<dt-button kind="muted" importance="outlined" leading-class="d-pl12">
+<dt-button kind="muted" importance="outlined" leading-class="d-pl-150">
   Caution
   <template #leading>
     <span class="d-bgc-critical-strong d-bar4 d-w12 d-h12"></span>
@@ -1287,7 +1287,7 @@ showHtmlWarning />
 ### Trailing
 
 <code-well-header>
-  <dt-button size="sm" kind="muted" importance="outlined" trailing-class="d-pr2" ref="trailingExample">
+  <dt-button size="sm" kind="muted" importance="outlined" trailing-class="d-pr-25" ref="trailingExample">
     Copy
     <template #icon="{ iconSize }">
       <dt-icon name="copy" :size="iconSize" />
@@ -1301,7 +1301,7 @@ showHtmlWarning />
 <code-example-tabs
 :htmlCode='() => $refs.trailingExample'
 vueCode='
-<dt-button size="sm" kind="muted" importance="outlined" trailing-class="d-pr2">
+<dt-button size="sm" kind="muted" importance="outlined" trailing-class="d-pr-25">
   Copy
   <template #icon="{ iconSize }">
     <dt-icon name="copy" :size="iconSize" />
@@ -1317,7 +1317,7 @@ showHtmlWarning />
 
 <dt-notice
   kind="info"
-  class="d-wmx100p d-my16"
+  class="d-wmx100p d-my-200"
 >
   <router-link to="split-button.html"> <DtLink>DtSplitButton</DtLink> </router-link> is its own component containing multiple DtButtons.
 </dt-notice>

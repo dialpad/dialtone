@@ -8,7 +8,7 @@ keywords: ["size", "tall", "vh", "viewport height"]
 
 Use `d-h{n}p` to set a percentage height for an element.
 
-<code-well-header class="d-d-flex d-p24 d-bgc-secondary d-w100p d-h332 d-flow16 d-code--md d-ta-center" v-dt-scrollbar:never custom>
+<code-well-header class="d-d-flex d-p-300 d-bgc-secondary d-w100p d-h332 d-flow16 d-code--md d-ta-center" v-dt-scrollbar:never custom>
   <dt-stack direction="row" align="center" justify="center" class="d-h100p d-ps-relative" v-for="i in percentage">
     <span class="d-zi-active d-w72">d-h{{i}}p</span>
     <div class="d-w72 d-h216 d-ps-absolute d-bgc-moderate">
@@ -38,10 +38,10 @@ Use `d-h{n}p` to set a percentage height for an element.
 
 Use `d-h{n}` to set a fixed height for an element.
 
-<code-well-header class="d-d-flex d-p24 d-bgc-secondary d-w100p d-hmx512 d-flow16 d-of-scroll d-ta-center" v-dt-scrollbar:never custom>
+<code-well-header class="d-d-flex d-p-300 d-bgc-secondary d-w100p d-hmx-800 d-flow16 d-of-scroll d-ta-center" v-dt-scrollbar:never custom>
   <dt-stack gap="100" class="d-pls-start" v-for="(i, index) in fixed" :key="index">
     <span class="d-code--md">d-h{{i}}</span>
-    <dt-stack direction="row" align="center" justify="center" class="d-w64 d-bgc-bold d-bar4" :class="`d-h${i}`"></dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-w-100 d-bgc-bold d-bar4" :class="`d-h${i}`"></dt-stack>
   </dt-stack>
 </code-well-header>
 
@@ -54,30 +54,30 @@ Use `d-h{n}` to set a fixed height for an element.
   <div class="d-h6">...</div>
   <div class="d-h8">...</div>
   <div class="d-h12">...</div>
-  <div class="d-h16">...</div>
+  <div class="d-h-25">...</div>
   <div class="d-h20">...</div>
   <div class="d-h24">...</div>
-  <div class="d-h32">...</div>
+  <div class="d-h-50">...</div>
   <div class="d-h42">...</div>
-  <div class="d-h48">...</div>
-  <div class="d-h64">...</div>
+  <div class="d-h-75">...</div>
+  <div class="d-h-100">...</div>
   <div class="d-h72">...</div>
   <div class="d-h84">...</div>
-  <div class="d-h96">...</div>
+  <div class="d-h-150">...</div>
   <div class="d-h102">...</div>
   <div class="d-h114">...</div>
-  <div class="d-h128">...</div>
+  <div class="d-h-200">...</div>
   <div class="d-h164">...</div>
   <div class="d-h216">...</div>
   <div class="d-h264">...</div>
   <div class="d-h332">...</div>
   <div class="d-h464">...</div>
-  <div class="d-h512">...</div>
+  <div class="d-h-800">...</div>
   <div class="d-h628">...</div>
   <div class="d-h764">...</div>
   <div class="d-h828">...</div>
   <div class="d-h912">...</div>
-  <div class="d-h1024">...</div>
+  <div class="d-h-1600">...</div>
   <div class="d-h1140">...</div>
   <div class="d-h1268">...</div>
   <div class="d-h1340">...</div>
@@ -88,8 +88,8 @@ Use `d-h{n}` to set a fixed height for an element.
 
 Use `d-h100vh` to have an element cover the user's viewport.
 
-<code-well-header class="d-ps-relative d-d-flex d-jc-center d-p24 d-bgc-secondary d-w100p d-h3 d-flow16 d-of-y-scroll" custom>
-  <dt-stack direction="row" align="center" justify="center" class="d-py16 d-px8 d-w100vw d-h100vh d-bgc-moderate d-bar4 d-ta-center">Viewport</dt-stack>
+<code-well-header class="d-ps-relative d-d-flex d-jc-center d-p-300 d-bgc-secondary d-w100p d-h3 d-flow16 d-of-y-scroll" custom>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100vw d-h100vh d-bgc-moderate d-bar4 d-ta-center">Viewport</dt-stack>
 </code-well-header>
 
 ```html
@@ -100,8 +100,8 @@ Use `d-h100vh` to have an element cover the user's viewport.
 
 Use `d-h-auto` have the browser calculate and select a height.
 
-<code-well-header class="d-ps-relative d-d-flex d-jc-center d-p24 d-bgc-secondary d-w100p d-hmn216 d-flow16" custom>
-  <dt-stack direction="row" align="center" justify="center" class="d-py16 d-px8 d-w100p d-h-auto d-bgc-moderate d-bar4 d-ta-center">Auto</dt-stack>
+<code-well-header class="d-ps-relative d-d-flex d-jc-center d-p-300 d-bgc-secondary d-w100p d-hmn216 d-flow16" custom>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100p d-h-auto d-bgc-moderate d-bar4 d-ta-center">Auto</dt-stack>
 </code-well-header>
 
 ```html
@@ -118,10 +118,10 @@ Use `d-h-auto` have the browser calculate and select a height.
 <clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
-      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t-0">
         <tr>
-          <th scope="col" class="d-p0 d-bbw0 d-w30p"><div class="d-p16 d-bb d-bbw1">Class</div></th>
-          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bbw1">Output</div></th>
+          <th scope="col" class="d-p-0 d-bbw0 d-w30p"><div class="d-p-200 d-bb d-bbw1">Class</div></th>
+          <th scope="col" class="d-p-0 d-bbw0"><div class="d-p-200 d-bb d-bbw1">Output</div></th>
         </tr>
       </thead>
       <tbody>

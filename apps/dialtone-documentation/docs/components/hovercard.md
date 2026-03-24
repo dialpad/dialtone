@@ -30,15 +30,15 @@ htmlCode='
 </div>
 <div class="tippy-box d-ps-absolute" data-tippy-root="" id="tippy-11" style="z-index: 300; position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(874px, 365px, 0px);" data-popper-placement="bottom-start">
   <div id="dt20" role="dialog" data-qa="dt-hovercard__dialog" aria-hidden="false" aria-labelledby="DtPopover__anchor21" aria-modal="true" class="d-popover__dialog" tabindex="-1" style="">
-    <div data-qa="dt-popover-header-footer" class="d-popover__header d-pl16">
+    <div data-qa="dt-popover-header-footer" class="d-popover__header d-pl-200">
       <div data-qa="dt-popover-header-footer-content" class="d-popover__header__content">
         <div>Header</div>
       </div>
     </div>
-    <div data-qa="dt-hovercard-content" class="d-popover__content d-p16">
+    <div data-qa="dt-hovercard-content" class="d-popover__content d-p-200">
       <div>Content</div>
     </div>
-    <div data-qa="dt-popover-header-footer" class="d-popover__footer d-pl16">
+    <div data-qa="dt-popover-header-footer" class="d-popover__footer d-pl-200">
       <div data-qa="dt-popover-header-footer-content" class="d-popover__footer__content">
         <div>Footer</div>
       </div>

@@ -3,7 +3,7 @@
   <div>
     <dt-stack
       gap="800"
-      class="d-p32"
+      class="d-p-400"
     >
       <!-- Kind Examples -->
       <section>
@@ -23,7 +23,7 @@
             >
               Headline
             </dt-text>
-            <div class="d-ba d-bc-default d-p16 d-bar8">
+            <div class="d-ba d-bc-default d-p-200 d-bar8">
               <dt-stack
                 gap="100"
                 direction="row"
@@ -49,7 +49,7 @@
             >
               Body
             </dt-text>
-            <div class="d-ba d-bc-default d-p16 d-bar8">
+            <div class="d-ba d-bc-default d-p-200 d-bar8">
               <dt-stack
                 gap="100"
                 direction="row"
@@ -75,7 +75,7 @@
             >
               Label
             </dt-text>
-            <div class="d-ba d-bc-default d-p16 d-bar8">
+            <div class="d-ba d-bc-default d-p-200 d-bar8">
               <dt-stack
                 gap="100"
                 direction="row"
@@ -101,7 +101,7 @@
             >
               Code
             </dt-text>
-            <div class="d-ba d-bc-default d-p16 d-bar8">
+            <div class="d-ba d-bc-default d-p-200 d-bar8">
               <dt-stack
                 gap="100"
                 direction="row"
@@ -139,7 +139,7 @@
             >
               Font Weight Modifiers
             </dt-text>
-            <div class="d-ba d-bc-default d-p16 d-bar8">
+            <div class="d-ba d-bc-default d-p-200 d-bar8">
               <dt-stack
                 direction="row"
                 gap="200"
@@ -178,7 +178,7 @@
             >
               Line Height Modifiers
             </dt-text>
-            <div class="d-ba d-bc-default d-p16 d-bar8">
+            <div class="d-ba d-bc-default d-p-200 d-bar8">
               <dt-stack
                 gap="100"
                 direction="row"
@@ -212,7 +212,7 @@
         </dt-text>
         <dt-stack gap="200">
           <div>
-            <div class="d-ba d-bc-default d-p16 d-bar8">
+            <div class="d-ba d-bc-default d-p-200 d-bar8">
               <dt-stack
                 direction="row"
                 gap="100"
@@ -230,7 +230,7 @@
           </div>
 
           <div>
-            <div class="d-ba d-bc-default d-p16 d-bar8 d-bgc-primary-inverted">
+            <div class="d-ba d-bc-default d-p-200 d-bar8 d-bgc-primary-inverted">
               <dt-stack
                 direction="row"
                 gap="100"
@@ -270,7 +270,7 @@
             >
               {{ item.align.charAt(0).toUpperCase() + item.align.slice(1) }}
             </dt-text>
-            <div class="d-ba d-bc-default d-p16 d-bar8">
+            <div class="d-ba d-bc-default d-p-200 d-bar8">
               <dt-text
                 as="div"
                 :align="item.align"
@@ -300,7 +300,7 @@
             >
               Single Line (truncate)
             </dt-text>
-            <div class="d-ba d-bc-default d-p16 d-bar8">
+            <div class="d-ba d-bc-default d-p-200 d-bar8">
               <dt-text
                 as="p"
                 truncate
@@ -326,13 +326,13 @@
               Multi Line (maxLines)
             </dt-text>
             <dt-stack
-              class="d-ba d-bc-default d-p16 d-bar8"
+              class="d-ba d-bc-default d-p-200 d-bar8"
               gap="200"
             >
               <dt-text
                 as="div"
                 :max-lines="4"
-                class="d-w256"
+                class="d-w-400"
               >
                 <strong>4 lines:</strong> Clamp multi-line content to three lines for summary views.
                 This text will be truncated after three lines with an ellipsis
@@ -347,7 +347,7 @@
               <dt-text
                 as="div"
                 :max-lines="3"
-                class="d-w256"
+                class="d-w-400"
               >
                 <strong>3 lines:</strong> Clamp multi-line content to three lines for summary views.
                 This text will be truncated after three lines with an ellipsis
@@ -362,7 +362,7 @@
               <dt-text
                 as="div"
                 :max-lines="2"
-                class="d-w256"
+                class="d-w-400"
               >
                 <strong>2 lines:</strong> Clamp multi-line content to three lines for summary views.
                 This text will be truncated after three lines with an ellipsis
@@ -400,7 +400,7 @@
             >
               {{ item.wrap.charAt(0).toUpperCase() + item.wrap.slice(1) }}
             </dt-text>
-            <div class="d-ba d-bc-default d-of-hidden d-p16 d-bar8 d-w192">
+            <div class="d-ba d-bc-default d-of-hidden d-p-200 d-bar8 d-w-300">
               <dt-text
                 kind="headline"
                 size="md"
@@ -432,7 +432,7 @@
         <dt-stack
           gap="200"
           direction="row"
-          class="d-ba d-bc-default d-p16 d-bar8"
+          class="d-ba d-bc-default d-p-200 d-bar8"
         >
           <template
             v-for="item in textBoxTrimExamples"
@@ -468,7 +468,7 @@
             >
               Tabular Figures
             </dt-text>
-            <div class="d-ba d-bc-default d-p16 d-bar8">
+            <div class="d-ba d-bc-default d-p-200 d-bar8">
               <dt-stack gap="25">
                 <dt-text numeric>
                   00123456789 (numeric)

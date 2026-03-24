@@ -36,9 +36,9 @@ The component prioritizes different sources for content display, sequentially ch
 `full-name: "10"` will result in: `10`.
 * If full-name is not provided, the result will be an empty string.
 
-<table class="d-table dialtone-doc-table d-mb16">
+<table class="d-table dialtone-doc-table d-mb-200">
     <colgroup>
-        <col class="d-w64">
+        <col class="d-w-100">
         <col>
         <col>
         <col>

@@ -4,12 +4,12 @@
       v-for="(variant, i) in variantsTabs"
       :key="i"
     >
-      <p class="d-fw-bold d-mb8">
+      <p class="d-fw-bold d-mb-100">
         {{ variant.description }}
       </p>
       <dt-tab-group
         v-bind="variant.propsToBind"
-        class="d-mb8"
+        class="d-mb-100"
       >
         <template #tabs>
           <dt-tab

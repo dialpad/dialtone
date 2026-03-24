@@ -18,7 +18,7 @@ keywords: ["select","menu","picker","d-dropdown","DtDropdown","dt-dropdown"]
     </template>
     <template #list="{ close }">
       <dt-list-item-group
-        heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+        heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
         heading="Menu Heading A"
       >
         <dt-list-item
@@ -39,7 +39,7 @@ keywords: ["select","menu","picker","d-dropdown","DtDropdown","dt-dropdown"]
       </dt-list-item-group>
       <dt-dropdown-separator />
       <dt-list-item-group
-        heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+        heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
         heading="Menu Heading B"
       >
         <dt-list-item
@@ -102,7 +102,7 @@ htmlCode='
 <div class="tippy-box d-ps-absolute" data-tippy-root="" id="tippy-13" data-popper-placement="bottom" style="...">
   <div id="dt7" role="menu" aria-hidden="false" aria-labelledby="DtPopover__anchor8" aria-modal="false" class="d-popover__dialog d-popover__dialog--modal" tabindex="-1" style="...">
     <div class="d-popover__content">
-      <ul id="dt6" class="d-dropdown-list d-py0">
+      <ul id="dt6" class="d-dropdown-list d-py-0">
         <li class="d-list-item" tabindex="-1" role="menuitem" aria-selected="false">
           <div class="d-item-layout">
             <section class="d-item-layout--content">
@@ -149,7 +149,7 @@ vueCode='
     </template>
     <template #list="{ close }">
       <dt-list-item-group
-        heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+        heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
         heading="Menu Heading A"
       >
         <dt-list-item
@@ -170,7 +170,7 @@ vueCode='
       </dt-list-item-group>
       <dt-dropdown-separator />
       <dt-list-item-group
-        heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+        heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
         heading="Menu Heading B"
       >
         <dt-list-item
@@ -199,9 +199,9 @@ htmlCode='
 <div class="tippy-box d-ps-absolute" data-tippy-root="" id="tippy-13" data-popper-placement="bottom" style="...">
   <div id="dt7" role="menu" aria-hidden="false" aria-labelledby="DtPopover__anchor8" aria-modal="false" class="d-popover__dialog d-popover__dialog--modal" tabindex="-1" style="...">
     <div class="d-popover__content">
-      <ul id="dt6" class="d-dropdown-list d-py0">
+      <ul id="dt6" class="d-dropdown-list d-py-0">
         <ul id="dt16" class="d-list-item-group" role="group" aria-labelledby="dt16-heading">
-          <li id="dt16-heading" role="presentation" class="dt-dropdown-list--header d-py4 d-px8 d-fw-semibold d-c-default">Menu Heading A</li>
+          <li id="dt16-heading" role="presentation" class="dt-dropdown-list--header d-py-50 d-px-100 d-fw-semibold d-c-default">Menu Heading A</li>
           <li id="dt17" class="d-list-item d-list-item--static" tabindex="-1" role="listitem">
             <div class="d-item-layout">
               <section class="d-item-layout--content">
@@ -224,7 +224,7 @@ htmlCode='
         </ul>
         <li aria-hidden="true" class="d-list-item-separator"></li>
         <ul id="dt19" class="d-list-item-group" role="group" aria-labelledby="dt19-heading">
-          <li id="dt19-heading" role="presentation" class="dt-dropdown-list--header d-py4 d-px8 d-fw-semibold d-c-default">Menu Heading B</li>
+          <li id="dt19-heading" role="presentation" class="dt-dropdown-list--header d-py-50 d-px-100 d-fw-semibold d-c-default">Menu Heading B</li>
           <li id="dt20" class="d-list-item d-list-item--static" tabindex="-1" role="listitem">
             <div class="d-item-layout">
               <section class="d-item-layout--content">
@@ -249,7 +249,7 @@ vueCode='
   </template>
   <template #list="{ close }">
     <dt-list-item-group
-      heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+      heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
       heading="Menu Heading A"
     >
       <dt-list-item
@@ -270,7 +270,7 @@ vueCode='
     </dt-list-item-group>
     <dt-dropdown-separator />
     <dt-list-item-group
-      heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+      heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
       heading="Menu Heading B"
     >
       <dt-list-item
@@ -295,7 +295,7 @@ Set `openOnContext=true` to open the menu on right-click (context menu) and disa
     <template #anchor="{ attrs }">
       <div
         v-bind="attrs"
-        class="d-ba d-bas-dashed d-w264 d-py48 d-ta-center d-bgc-black-300"
+        class="d-ba d-bas-dashed d-w264 d-py-600 d-ta-center d-bgc-black-300"
       >
         Right click to open
       </div>
@@ -320,7 +320,7 @@ vueCode='
   <template #anchor="{ attrs }">
     <div
       v-bind="attrs"
-      class="d-ba d-bas-dashed d-w264 d-py48 d-ta-center d-bgc-black-300"
+      class="d-ba d-bas-dashed d-w264 d-py-600 d-ta-center d-bgc-black-300"
     >
       Right click to open
     </div>

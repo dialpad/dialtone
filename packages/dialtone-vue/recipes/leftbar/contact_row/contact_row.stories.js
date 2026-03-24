@@ -68,7 +68,7 @@ export const argTypesData = {
 };
 
 const decorator = () => ({
-  template: `<div style="background-color: var(--dt-shell-color-surface-default)" class="d-wmx264 d-p8"><story />
+  template: `<div style="background-color: var(--dt-shell-color-surface-default)" class="d-wmx264 d-p-100"><story />
   </div>`,
 });
 

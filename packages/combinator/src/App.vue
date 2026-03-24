@@ -14,7 +14,7 @@
           <span>{{ value }}</span>
           <dt-badge
             v-if="!isSupportedComponent(value)"
-            class="d-ml6"
+            class="d-ml-75"
             color="yellow-300"
           >
             Unsupported

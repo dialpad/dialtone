@@ -243,7 +243,7 @@
           >
             <dt-icon-users
               size="100"
-              class="d-mr2"
+              class="d-mr-25"
             />
             <span>3</span>
           </dt-stack>
@@ -329,7 +329,7 @@
       </template>
       <template #blockEnd>
         <dt-item-layout
-          class="d-py4 d-px8"
+          class="d-py-50 d-px-100"
           content-class="d-ac-center"
           unstyled
         >
@@ -337,7 +337,7 @@
             <dt-stack
               direction="row"
               gap="100"
-              class="d-pl2"
+              class="d-pl-25"
             >
               <dt-stack
                 class="d-ai-center d-w24"

@@ -7,7 +7,7 @@ keywords: ["how to use icons","icon guidelines"]
 
 ## In Figma
 
-<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
+<div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols3">
 
 Find a list of available icons in [DT Core: Icons](https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT8-Icon-Library), or search the icons in the search library within your Figma file.
 
@@ -19,13 +19,13 @@ Find a list of available icons in [DT Core: Icons](https://www.figma.com/file/zz
 
 ## In Vue
 
-<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
+<div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols3">
 
 For detailed instructions on using the icons, check the [DtIcon component](/components/icon.md).
 
 <div class="d-gc2">
 <code-well-header>
-  <div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3 d-w100p">
+  <div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols3 d-w100p">
     <div class="d-fl-center">
       <dt-icon :name="selectedIcon" :size="selectedSize" />
     </div>
@@ -63,7 +63,7 @@ Some icons are linked to specific actions, like the Settings gear <dt-icon name=
 The icon size is defined based on the context and text size next to it. These are the only available size options and no overrides should be needed to properly size the icons.
 </div>
 
-<dt-stack direction="row" gap="200" class="d-gc1 d-bgc-secondary d-p16 d-px32 d-bar16 d-ai-flex-start d-jc-space-between">
+<dt-stack direction="row" gap="200" class="d-gc1 d-bgc-secondary d-p-200 d-px-400 d-bar16 d-ai-flex-start d-jc-space-between">
   <dt-stack gap="200" class="d-ai-center">
     <code>200</code>
     <dt-icon name="food" size="200" />

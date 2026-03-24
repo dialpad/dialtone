@@ -203,7 +203,7 @@
           :group="3"
         />
       </div>
-      <div class="d-flow16 d-d-flex d-ai-center d-mt8">
+      <div class="d-flow16 d-d-flex d-ai-center d-mt-100">
         <dt-avatar
           v-for="size in groupSizes"
           :key="`group-initials-${size}`"
@@ -228,7 +228,7 @@
           :group="12"
         />
       </div>
-      <div class="d-flow16 d-d-flex d-ai-center d-mt8">
+      <div class="d-flow16 d-d-flex d-ai-center d-mt-100">
         <dt-avatar
           v-for="size in groupSizes"
           :key="`group-double-initials-${size}`"
@@ -253,7 +253,7 @@
           :group="120"
         />
       </div>
-      <div class="d-flow16 d-d-flex d-ai-center d-mt8">
+      <div class="d-flow16 d-d-flex d-ai-center d-mt-100">
         <dt-avatar
           v-for="size in groupSizes"
           :key="`group-triple-initials-${size}`"

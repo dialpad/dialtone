@@ -1,7 +1,7 @@
 <template>
   <dt-stack gap="400">
     <div>
-      <h3 class="d-mb8">
+      <h3 class="d-mb-100">
         Channel with unread messages
       </h3>
       <dt-recipe-general-row
@@ -10,13 +10,13 @@
         type="channels"
         unread-count="29"
       />
-      <div class="d-mt8 d-fc-secondary d-fs-100">
+      <div class="d-mt-100 d-fc-secondary d-fs-100">
         <strong>Note:</strong> the unread count is not limited to 99 or any number so make sure to add the necessary
         logic to limit the number of unread messages if needed.
       </div>
     </div>
     <div>
-      <h3 class="d-mb8">
+      <h3 class="d-mb-100">
         Contact Center
       </h3>
       <dt-recipe-general-row
@@ -26,7 +26,7 @@
       />
     </div>
     <div>
-      <h3 class="d-mb8">
+      <h3 class="d-mb-100">
         Dialbot
       </h3>
       <dt-recipe-general-row

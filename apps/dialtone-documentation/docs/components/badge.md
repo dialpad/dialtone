@@ -75,7 +75,7 @@ showHtmlWarning />
 
 ## Type
 
-<table class="d-table dialtone-doc-table d-mb16">
+<table class="d-table dialtone-doc-table d-mb-200">
   <thead>
     <tr>
       <th>Type</th>

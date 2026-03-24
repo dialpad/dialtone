@@ -2,7 +2,7 @@
   <dt-stack
     direction="row"
     align="center"
-    class="d-hmn256 d-p24"
+    class="d-hmn-400 d-p-300"
   >
     <dt-recipe-motion-text
       ref="motionText"

@@ -55,7 +55,7 @@ Dialtone's CSS library offers a framework of [CSS Utilities](/utilities/) classe
       d-w100p
       d-bar8
       d-fc-tertiary
-      d-p16
+      d-p-200
       d-bgc-moderate
       d-ba
       d-bc-subtle
@@ -82,7 +82,7 @@ Dialtone's CSS library offers a framework of [CSS Utilities](/utilities/) classe
     d-w100p
     d-bar8
     d-fc-tertiary
-    d-p16
+    d-p-200
     d-bgc-moderate
     d-ba
     d-bc-subtle
