@@ -42,7 +42,7 @@ This component combines both the `input` and `textarea` elements as options with
 We offer different sizes for instances in which the interface requires a smaller or larger input. In general, though, use the base (medium) size input as much as possible, especially in forms.
 
 <code-example>
-  <div class="d-d-grid d-g16 d-g-cols2 d-w100p" data-demo-wrapper>
+  <div class="d-d-grid d-g16 d-g-cols2" data-demo-wrapper>
     <dt-input label="Extra Small" type="text" placeholder="Placeholder" size="xs" />
     <dt-input label="Extra Small" type="textarea" placeholder="Placeholder" size="xs" />
     <dt-input label="Small" type="text" placeholder="Placeholder" size="sm" />
@@ -63,29 +63,23 @@ We offer different sizes for instances in which the interface requires a smaller
 An input is normally paired with a label, but there are times when it can be used without a label.  Placeholder text should primarily be used as a content prompt and only provided when needed.
 
 <code-example>
-  <dt-stack gap="500" class="d-w100p" data-demo-wrapper>
+  <div class="d-d-grid d-g16 d-g-cols3" data-demo-wrapper>
     <dt-input label="Label" placeholder="Placeholder" />
-    <dt-input label="Label" value="Value" />
+    <dt-input label="Label" model-value="Value" />
     <dt-input label="Label" placeholder="Placeholder" disabled />
-  </dt-stack>
-</code-example>
-
-<code-example>
-  <dt-stack gap="500" class="d-w100p" data-demo-wrapper>
     <dt-input label="Label" placeholder="Placeholder" type="textarea" />
-    <dt-input label="Label" type="textarea" value="Value" />
+    <dt-input label="Label" type="textarea" model-value="Value" />
     <dt-input label="Label" placeholder="Placeholder" type="textarea" disabled />
-  </dt-stack>
+  </div>
 </code-example>
 
 ### With Description Text
 
 <code-example>
-  <dt-input label="Label" description="Helpful description text" placeholder="Placeholder"/>
-</code-example>
-
-<code-example>
-  <dt-input label="Label" description="Helpful description text" type="textarea" placeholder="Placeholder"/>
+  <div class="d-d-grid d-g16 d-g-cols2" data-demo-wrapper>
+    <dt-input label="Label" description="Helpful description text" placeholder="Placeholder"/>
+    <dt-input label="Label" description="Helpful description text" type="textarea" placeholder="Placeholder"/>
+  </div>
 </code-example>
 
 ### With Validation States
@@ -93,19 +87,14 @@ An input is normally paired with a label, but there are times when it can be use
 Provides feedback to the user based on their interaction, or lack thereof, with an input.
 
 <code-example>
-  <dt-stack gap="500" class="d-w100p" data-demo-wrapper>
+  <div class="d-d-grid d-g16 d-g-cols3" data-demo-wrapper>
     <dt-input label="Label" type="email" model-value="Value" :messages="[messages.error]"/>
     <dt-input label="Label" type="email" model-value="Value" :messages="[messages.success]"/>
     <dt-input label="Label" type="email" model-value="Value" :messages="[messages.warning]"/>
-  </dt-stack>
-</code-example>
-
-<code-example>
-  <dt-stack gap="500" class="d-w100p" data-demo-wrapper>
     <dt-input label="Label" type="textarea" model-value="Value" :messages="[messages.error]"/>
     <dt-input label="Label" type="textarea" model-value="Value" :messages="[messages.success]"/>
     <dt-input label="Label" type="textarea" model-value="Value" :messages="[messages.warning]"/>
-  </dt-stack>
+  </div>
 </code-example>
 
 ### With Multiple Validation Messages
@@ -233,7 +222,7 @@ Use `type="search"` with a clear button in the `icon` slot. When the input is no
 ## Icon Support
 
 <code-example>
-  <dt-stack gap="500" class="d-w100p" data-demo-wrapper>
+  <div class="d-d-grid d-g16 d-g-cols3" data-demo-wrapper>
     <dt-input label="Start icon" type="text" placeholder="Placeholder">
       <template #startIcon="{ iconSize }">
         <dt-icon name="send" :size="iconSize" />
@@ -252,11 +241,6 @@ Use `type="search"` with a clear button in the `icon` slot. When the input is no
         <dt-icon name="lock" :size="iconSize" />
       </template>
     </dt-input>
-  </dt-stack>
-</code-example>
-
-<code-example>
-  <dt-stack gap="500" class="d-w100p" data-demo-wrapper>
     <dt-input label="Start icon" type="textarea" placeholder="Placeholder">
       <template #startIcon="{ iconSize }">
         <dt-icon name="send" :size="iconSize" />
@@ -275,7 +259,7 @@ Use `type="search"` with a clear button in the `icon` slot. When the input is no
         <dt-icon name="lock" :size="iconSize" />
       </template>
     </dt-input>
-  </dt-stack>
+  </div>
 </code-example>
 
 ### Icon Sizes
