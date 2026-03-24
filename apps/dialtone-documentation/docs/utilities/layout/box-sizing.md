@@ -10,9 +10,9 @@ All examples below have a 128px height and width. You can see how `.d-box-border
 
 <code-well-header>
   <div class="d-fl-center d-w100p d-flow16">
-    <dt-stack direction="row" align="center" justify="center" class="d-h-200 d-w-200 d-p-100 d-ba d-baw4 d-bas-dashed d-bar4 d-bc-default d-bgc-moderate d-box-border"><dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p-100 d-bgc-moderate-opaque d-bar2 d-code--sm">d-box-border</dt-stack></dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-h-200 d-w-200 d-p-100 d-ba d-baw4 d-bas-dashed d-bar4 d-bc-default d-bgc-moderate d-box-content"><dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p-100 d-bgc-moderate-opaque d-bar2 d-code--sm">d-box-content</dt-stack></dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-h-200 d-w-200 d-p-100 d-ba d-baw4 d-bas-dashed d-bar4 d-bc-default d-bgc-moderate d-box-unset"><dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p-100 d-bgc-moderate-opaque d-bar2 d-code--sm">d-box-unset</dt-stack></dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-size-200 d-p-100 d-ba d-baw4 d-bas-dashed d-bar4 d-bc-default d-bgc-moderate d-box-border"><dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p-100 d-bgc-moderate-opaque d-bar2 d-code--sm">d-box-border</dt-stack></dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-size-200 d-p-100 d-ba d-baw4 d-bas-dashed d-bar4 d-bc-default d-bgc-moderate d-box-content"><dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p-100 d-bgc-moderate-opaque d-bar2 d-code--sm">d-box-content</dt-stack></dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-size-200 d-p-100 d-ba d-baw4 d-bas-dashed d-bar4 d-bc-default d-bgc-moderate d-box-unset"><dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p-100 d-bgc-moderate-opaque d-bar2 d-code--sm">d-box-unset</dt-stack></dt-stack>
   </div>
 </code-well-header>
 

@@ -89,7 +89,7 @@ Use `d-b{a|t|r|b|l}r-circle` to change the border radius of your element to a ci
     gap="100"
     :direction="{ 'default': 'column', 'md': 'row' }"
    >
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-200 d-w-200 d-ba d-baw2 d-bc-default d-bgc-primary d-ws-nowrap d-bar-circle">
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-size-200 d-ba d-baw2 d-bc-default d-bgc-primary d-ws-nowrap d-bar-circle">
       d-bar-circle
     </dt-stack>
   </dt-stack>

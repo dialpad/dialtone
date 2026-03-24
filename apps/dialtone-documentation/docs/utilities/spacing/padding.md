@@ -11,7 +11,7 @@ keywords: ["inner spacing", "inset"]
 ## Add Padding to All Sides
 
 <code-well-header>
-  <div class="d-h-200 d-w-200 d-p-200 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-fl1 d-h100p d-bgc-moderate d-bar4 d-code--md">d-p16</dt-stack></div>
+  <div class="d-size-200 d-p-200 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-fl1 d-h100p d-bgc-moderate d-bar4 d-code--md">d-p16</dt-stack></div>
 </code-well-header>
 
 ```html
