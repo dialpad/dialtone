@@ -9,7 +9,7 @@ keywords: ["definition list", "key value", "dl", "d-description-list", "DtDescri
 ---
 
 <code-well-header>
-  <div class="d-w332">
+  <div class="d-w-500">
     <dt-description-list
       gap="100"
       :items="items"
@@ -23,7 +23,7 @@ keywords: ["definition list", "key value", "dl", "d-description-list", "DtDescri
 ### Default
 
 <code-well-header>
-  <div class="d-w332">
+  <div class="d-w-500">
     <dt-description-list
       ref="exampleDefault"
       gap="100"
@@ -48,7 +48,7 @@ vueCode='
 ### Column Direction
 
 <code-well-header>
-  <div class="d-w332">
+  <div class="d-w-500">
     <dt-description-list
       ref="exampleColumn"
       gap="100"
@@ -72,7 +72,7 @@ vueCode='
 ### Long Text
 
 <code-well-header>
-  <div class="d-w332">
+  <div class="d-w-500">
     <dt-description-list
       ref="exampleLongText"
       gap="100"
@@ -96,7 +96,7 @@ vueCode='
 ### With Term and Description Styles
 
 <code-well-header>
-  <div class="d-w332">
+  <div class="d-w-500">
     <dt-description-list
       ref="exampleWithStyles"
       gap="100"

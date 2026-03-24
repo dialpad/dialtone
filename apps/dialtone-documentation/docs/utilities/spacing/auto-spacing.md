@@ -13,7 +13,7 @@ keywords: ["margin","padding","gap","whitespace"]
 ## Adding Space Vertically
 
 <code-well-header>
-  <div class="d-bgc-bold d-stack16 d-bar8 lg:d-w96 d-w-200">
+  <div class="d-bgc-bold d-stack16 d-bar8 lg:d-w-150 d-w-200">
     <div class="d-p-200 d-bar8 d-bgc-moderate d-ta-center">1</div>
     <div class="d-p-200 d-bar8 d-bgc-moderate d-ta-center">2</div>
     <div class="d-p-200 d-bar8 d-bgc-moderate d-ta-center">3</div>
@@ -32,9 +32,9 @@ keywords: ["margin","padding","gap","whitespace"]
 
 <code-well-header>
   <div class="d-fl-center d-bgc-bold d-flow24 d-bar8 d-ta-center">
-    <div class="lg:d-w96 d-w-200 d-p-200 d-bar8 d-bgc-moderate">1</div>
-    <div class="lg:d-w96 d-w-200 d-p-200 d-bar8 d-bgc-moderate">2</div>
-    <div class="lg:d-w96 d-w-200 d-p-200 d-bar8 d-bgc-moderate">3</div>
+    <div class="lg:d-w-150 d-w-200 d-p-200 d-bar8 d-bgc-moderate">1</div>
+    <div class="lg:d-w-150 d-w-200 d-p-200 d-bar8 d-bgc-moderate">2</div>
+    <div class="lg:d-w-150 d-w-200 d-p-200 d-bar8 d-bgc-moderate">3</div>
   </div>
 </code-well-header>
 

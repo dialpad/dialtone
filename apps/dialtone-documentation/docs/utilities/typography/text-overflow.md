@@ -9,7 +9,7 @@ keywords: ["ellipsis", "truncate", "clip"]
 Use `d-truncate` to truncate an element's text to a single line with an ellipsis (`...`) if needed. Note that while CSS Utilities are fundamentally a single CSS property, this utility combines three: `overflow`, `text-overflow`, and `white-space` to achieve the effect.
 
 <code-well-header>
-  <div class="d-bgc-moderate d-py-100 d-px-200 d-bar8 d-w332">
+  <div class="d-bgc-moderate d-py-100 d-px-200 d-bar8 d-w-500">
     <p class="d-truncate">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiisitaquequodpraesentiumexplicaboincidunt? Dolores beatae nam at sed dolorum ratione dolorem nisi velit dolor.</p>
   </div>
 </code-well-header>
@@ -23,7 +23,7 @@ Use `d-truncate` to truncate an element's text to a single line with an ellipsis
 Use `d-to-ellipsis`, combined with `d-of-hidden` to truncate an element's overflowing text with an ellipsis (`...`) if needed.
 
 <code-well-header>
-  <div class="d-bgc-moderate d-py-100 d-px-200 d-bar8 d-w332">
+  <div class="d-bgc-moderate d-py-100 d-px-200 d-bar8 d-w-500">
     <p class="d-of-hidden d-to-ellipsis">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiisitaquequodpraesentiumexplicaboincidunt? Dolores beatae nam at sed dolorum ratione dolorem nisi velit dolor.</p>
   </div>
 </code-well-header>
@@ -37,7 +37,7 @@ Use `d-to-ellipsis`, combined with `d-of-hidden` to truncate an element's overfl
 Use `d-to-clip` to clip an element's overflowing text if needed.
 
 <code-well-header>
-  <div class="d-bgc-moderate d-py-100 d-px-200 d-bar8 d-w332">
+  <div class="d-bgc-moderate d-py-100 d-px-200 d-bar8 d-w-500">
     <p class="d-of-hidden d-to-clip">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiisitaquequodpraesentiumexplicaboincidunt? Dolores beatae nam at sed dolorum ratione dolorem nisi velit dolor.</p>
   </div>
 </code-well-header>

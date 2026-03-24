@@ -9,7 +9,7 @@ keywords: ["relative", "absolute", "fixed", "sticky", "static"]
 <code-well-header>
   <div class="d-ps-relative d-w100p">
     <code class="d-bgc-transparent">Relative Parent</code>
-    <div class="d-ps-static d-bgc-moderate-opaque d-p-200 d-h464 d-bar8">
+    <div class="d-ps-static d-bgc-moderate-opaque d-p-200 d-h-700 d-bar8">
       <code class="d-bgc-transparent">Static Parent</code>
       <dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-t-0 d-r-150 d-size-200 d-p-100 d-bar8 d-bgc-moderate-opaque d-code--sm">.d-ps-absolute<br>.d-t0<br>.d-r12</dt-stack>
       <dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-b-0 d-r-n150 d-size-200 d-p-100 d-bar8 d-bgc-moderate-opaque d-code--sm">.d-ps-absolute<br>.d-b0<br>.d-rn12</dt-stack>

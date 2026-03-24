@@ -19,7 +19,7 @@ Use `d-ta-{n}` to change an element's text alignment.
     <div class="d-code--sm d-docsite-code d-ws-nowrap">.d-ta-right</div>
     <div><p class="d-bgc-moderate d-ta-right">The quick brown fox jumps over the lazy dog.</p></div>
     <div class="d-code--sm d-docsite-code d-ws-nowrap">.d-ta-justify</div>
-    <div><p class="d-bgc-moderate d-ta-justify d-w332">The quick brown fox jumps over the lazy dog. This needs a width applied to it to work.</p></div>
+    <div><p class="d-bgc-moderate d-ta-justify d-w-500">The quick brown fox jumps over the lazy dog. This needs a width applied to it to work.</p></div>
     <div class="d-code--sm d-docsite-code d-ws-nowrap">.d-ta-unset</div>
     <div><p class="d-bgc-moderate d-ta-unset">The quick brown fox jumps over the lazy dog.</p></div>
   </div>
@@ -29,7 +29,7 @@ Use `d-ta-{n}` to change an element's text alignment.
 <p class="d-ta-left">...</p>
 <p class="d-ta-center">...</p>
 <p class="d-ta-right">...</p>
-<p class="d-ta-justify d-w332">...</p>
+<p class="d-ta-justify d-w-500">...</p>
 <p class="d-ta-unset">...</p>
 ```
 

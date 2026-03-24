@@ -1065,7 +1065,7 @@ Align items to the start of the main axis (default).
     <dt-stack
       gap="100"
       justify="start"
-      class="d-w100p d-h332 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-start"
+      class="d-w100p d-h-500 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-start"
     >
       <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 1</div>
       <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 2</div>
@@ -1111,7 +1111,7 @@ Center items along the main axis.
     <dt-stack
       gap="100"
       justify="center"
-      class="d-w100p d-h332 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
+      class="d-w100p d-h-500 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
     >
       <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 1</div>
       <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 2</div>
@@ -1157,7 +1157,7 @@ Align items to the end of the main axis.
     <dt-stack
       gap="100"
       justify="end"
-      class="d-w100p d-h332 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-end"
+      class="d-w100p d-h-500 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-end"
     >
       <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 1</div>
       <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 2</div>
@@ -1203,7 +1203,7 @@ Distribute items with equal space around each item.
     <dt-stack
       gap="100"
       justify="space-around"
-      class="d-w100p d-h332 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
+      class="d-w100p d-h-500 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
     >
       <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 1</div>
       <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 2</div>
@@ -1249,7 +1249,7 @@ Distribute items with space between them, edges flush to container.
     <dt-stack
       gap="100"
       justify="space-between"
-      class="d-w100p d-h332 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
+      class="d-w100p d-h-500 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
     >
       <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 1</div>
       <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 2</div>
@@ -1298,7 +1298,7 @@ Distribute items with equal space between all items, including edges.
     <dt-stack
       gap="100"
       justify="space-evenly"
-      class="d-w100p d-h332 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
+      class="d-w100p d-h-500 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
     >
       <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 1</div>
       <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 2</div>

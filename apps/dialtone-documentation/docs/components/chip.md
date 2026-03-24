@@ -277,7 +277,7 @@ showHtmlWarning />
 To truncate text, add `.d-truncate` to the content element, and set the width of the `.d-chip` element.
 
 <code-well-header>
-  <dt-chip content-class="d-w102">
+  <dt-chip content-class="d-w-150">
     <span class="d-chip__text d-truncate">Chip loooooong name</span>
   </dt-chip>
 </code-well-header>
@@ -285,7 +285,7 @@ To truncate text, add `.d-truncate` to the content element, and set the width of
 <code-example-tabs
 htmlCode='
 <span class="d-chip">
-  <button class="d-chip__label d-w102" type="button">
+  <button class="d-chip__label d-w-150" type="button">
     <span class="d-chip__text d-truncate">Chip loooooong name</span>
   </button>
   <button class="d-chip__close" type="button" aria-label="close">
@@ -296,7 +296,7 @@ htmlCode='
 </span>
 '
 vueCode='
-<dt-chip content-class="d-w102">
+<dt-chip content-class="d-w-150">
   <span class="d-chip__text d-truncate">Chip loooooong name</span>
 </dt-chip>
 '

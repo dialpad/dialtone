@@ -348,23 +348,23 @@ vueCode='
         </dt-stack>
       </dt-stack>
       <dt-stack class="d-fl1 d-jc-center" direction="row" gap="25">
-        <dt-button class="d-px-100 d-w72" size="sm" kind="danger">
+        <dt-button class="d-px-100 d-w-100" size="sm" kind="danger">
           <template #blockStartIcon> <dt-icon name="mic" size="400" /> </template>
           Unmute
         </dt-button>
-        <dt-button class="d-px-100 d-w72" size="sm" kind="muted" importance="clear">
+        <dt-button class="d-px-100 d-w-100" size="sm" kind="muted" importance="clear">
           <template #blockStartIcon> <dt-icon name="record-filled" size="400" /> </template>
           Record
         </dt-button>
-        <dt-button class="d-px-100 d-w72" size="sm" kind="muted" importance="clear">
+        <dt-button class="d-px-100 d-w-100" size="sm" kind="muted" importance="clear">
           <template #blockStartIcon> <dt-icon name="keypad" size="400" /> </template>
           Keypad
         </dt-button>
-        <dt-button class="d-px-100 d-w72" size="sm" kind="muted" importance="clear">
+        <dt-button class="d-px-100 d-w-100" size="sm" kind="muted" importance="clear">
           <template #blockStartIcon> <dt-icon name="user-plus" size="400" /> </template>
           Add
         </dt-button>
-        <dt-button class="d-px-100 d-w72" size="sm" kind="muted" importance="clear">
+        <dt-button class="d-px-100 d-w-100" size="sm" kind="muted" importance="clear">
           <template #blockStartIcon> <dt-icon name="more-horizontal" size="400" /> </template>
           More
         </dt-button>
@@ -396,7 +396,7 @@ vueCode='
       </dt-stack>
     </dt-stack>
     <dt-stack class="d-fl1 d-jc-center" direction="row" gap="25">
-      <dt-button class="d-px-100 d-w72" size="sm" kind="danger">
+      <dt-button class="d-px-100 d-w-100" size="sm" kind="danger">
         <template #blockStartIcon><dt-icon name="mic" size="400" /></template>
         Unmute
       </dt-button>
@@ -466,7 +466,7 @@ showHtmlWarning />
     <dt-stack gap="25">
       <dt-text as="p" kind="headline" size="md">Popover</dt-text>
       <dt-stack gap="100" direction="row">
-        <dt-popover ref="popoverDefault" padding="none" placement="top-start" dialogClass="d-w216">
+        <dt-popover ref="popoverDefault" padding="none" placement="top-start" dialogClass="d-w-350">
           <template #anchor>
             <dt-button size="sm" kind="muted" importance="outlined"> Default </dt-button>
           </template>
@@ -476,7 +476,7 @@ showHtmlWarning />
             </div>
           </template>
         </dt-popover>
-        <dt-popover ref="popoverInverted" padding="none" placement="top-start" dialogClass="d-w216">
+        <dt-popover ref="popoverInverted" padding="none" placement="top-start" dialogClass="d-w-350">
           <template #anchor>
             <dt-button size="sm" kind="muted" importance="outlined"> Inverted </dt-button>
           </template>
@@ -486,7 +486,7 @@ showHtmlWarning />
             </dt-mode-island>
           </template>
         </dt-popover>
-        <dt-popover padding="none" placement="top-start" dialogClass="d-w216">
+        <dt-popover padding="none" placement="top-start" dialogClass="d-w-350">
           <template #anchor>
             <dt-button size="sm" kind="muted" importance="outlined"> Light </dt-button>
           </template>
@@ -496,7 +496,7 @@ showHtmlWarning />
             </dt-mode-island>
           </template>
         </dt-popover>
-        <dt-popover padding="none" placement="top-start" dialogClass="d-w216">
+        <dt-popover padding="none" placement="top-start" dialogClass="d-w-350">
           <template #anchor>
             <dt-button size="sm" kind="muted" importance="outlined"> Dark </dt-button>
           </template>
@@ -620,7 +620,7 @@ vueCode='
   </template>
 </dt-hovercard>
 <!-- Popover -->
-<dt-popover padding="none" placement="top-start" dialogClass="d-w216">
+<dt-popover padding="none" placement="top-start" dialogClass="d-w-350">
   <template #anchor>
     <dt-button size="sm" kind="muted" importance="outlined">Inverted</dt-button>
   </template>

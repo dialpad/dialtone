@@ -13,7 +13,7 @@ Colors for text and icons
 <DesignColorTable :excluded-colors="textColorsExclusionList" class-prefix="d-fc-">
   <template #example="{color}">
     <div
-      class="d-bar-circle d-w42 d-h42 d-ba d-bc-moderate d-bas-dashed"
+      class="d-bar-circle d-w-75 d-h-75 d-ba d-bc-moderate d-bas-dashed"
       :style="`background-color: var(${color.tokenName})`"
     />
     <span
@@ -35,7 +35,7 @@ Foreground colors distinguishing important information with a status role.
 <DesignColorTable :excluded-colors="statusTextColorsExclusionList" class-prefix="d-fc-">
   <template #example="{color}">
     <div
-      class="d-bar-circle d-w42 d-h42 d-ba d-bc-moderate d-bas-dashed"
+      class="d-bar-circle d-w-75 d-h-75 d-ba d-bc-moderate d-bas-dashed"
       :style="`background-color: var(${color.tokenName})`"
     />
     <span
@@ -57,7 +57,7 @@ Background colors for application UI surfaces. Surface colors are container bloc
 <DesignColorTable :excluded-colors="surfaceColorsExclusionList" class-prefix="d-bgc-">
   <template #example="{color}">
     <div
-      class="d-bar-circle d-w42 d-h42 d-ba d-bc-moderate d-bas-dashed"
+      class="d-bar-circle d-w-75 d-h-75 d-ba d-bc-moderate d-bas-dashed"
       :style="`background: var(${color.tokenName})`"
     />
   </template>
@@ -75,7 +75,7 @@ Define the edge of key content area, components, or surfaces.
         { 'd-bgc-contrast': color.utilityClass.includes('inverted') },
       ]"
     >
-      <div :class="`d-bar-circle d-w42 d-h42 d-ba d-bas-solid d-baw4 ${color.utilityClass}`"></div>
+      <div :class="`d-bar-circle d-w-75 d-h-75 d-ba d-bas-solid d-baw4 ${color.utilityClass}`"></div>
     </div>
   </template>
 </DesignColorTable>

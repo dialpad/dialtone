@@ -6,7 +6,7 @@ keywords: ["maximum width", "mxw"]
 
 ## Percentages
 
-Use `d-wmx{n}p` to set a minimum width percentage for an element. This can be combined with `d-w{n}p` and `d-wmn{n}` to have an element fill a certain height range.
+Use `d-wmx{n}p` to set a maximum width percentage for an element. This can be combined with `d-w{n}p` and `d-wmn-{stop}` to have an element fill a certain width range.
 
 <code-well-header class="d-d-flex d-jc-center d-p-300 d-bgc-secondary d-w100p d-flow16" custom>
   <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100p d-wmx50p d-bgc-moderate d-bar4 d-ta-center">1</dt-stack>
@@ -18,22 +18,22 @@ Use `d-wmx{n}p` to set a minimum width percentage for an element. This can be co
 
 ## Fixed
 
-Use `d-wmx{n}` to set a fixed minimum width for an element. This can be combined with `d-w{n}p` and `d-wmn{n}` to have an element fill a certain height range.
+Use `d-wmx-{stop}` to set a fixed maximum width for an element using layout token stops. This can be combined with `d-w{n}p` and `d-wmn-{stop}` to have an element fill a certain width range.
 
 <code-well-header class="d-d-flex d-jc-center d-p-300 d-bgc-secondary d-w100p d-flow16 d-of-y-scroll" custom>
   <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100p d-h-100 d-wmx-100 d-bgc-moderate d-bar4 d-ta-center">1</dt-stack>
   <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100p d-h-100 d-wmx-150 d-bgc-moderate d-bar4 d-ta-center">2</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100p d-h-100 d-wmx332 d-bgc-moderate d-bar4 d-ta-center">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100p d-h-100 d-wmx-500 d-bgc-moderate d-bar4 d-ta-center">3</dt-stack>
 </code-well-header>
 
 ```html
 <div class="d-w100p d-wmx-100">1</div>
 <div class="d-w100p d-wmx-150">2</div>
-<div class="d-w100p d-wmx332">3</div>
+<div class="d-w100p d-wmx-500">3</div>
 ```
 
 <script setup>
-  import { percentage, fixed, other } from '@data/width-height.json';
+  import { percentage, layout, other } from '@data/width-height.json';
   import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
 </script>
 
@@ -55,9 +55,9 @@ Use `d-wmx{n}` to set a fixed minimum width for an element. This can be combined
         </tr>
       </tbody>
       <tbody>
-        <tr v-for="i in fixed">
-          <th scope="row" class="d-code--sm d-docsite-code">.d-wmx{{ i }}</th>
-          <td class="d-code--sm">max-inline-size: {{ i }}px !important;</td>
+        <tr v-for="i in layout">
+          <th scope="row" class="d-code--sm d-docsite-code">.d-wmx-{{ i.stop }}</th>
+          <td class="d-code--sm">max-inline-size: var(--dt-layout-{{ i.stop }}) !important; <span class="d-fc-tertiary">/* {{ i.px }}px */</span></td>
         </tr>
       </tbody>
       <tbody>

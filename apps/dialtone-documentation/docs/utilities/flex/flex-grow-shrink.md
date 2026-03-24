@@ -104,7 +104,7 @@ The `flex-grow` sets the flex container’s grow factor relative to the parent's
 The `flex-shrink` sets the flex container’s shrink factor relative to the parent's main size. The default value is 1.
 
 <code-well-header>
-  <dt-stack direction="row" class="d-w5 d-bar8 d-bgc-moderate">
+  <dt-stack direction="row" class="d-w-25 d-bar8 d-bgc-moderate">
     <div class="d-fl-none d-p-200">Longer text that cannot flex</div>
     <div class="d-fl-shrink1 d-p-200 d-bgc-moderate-opaque">Text that will shrink even if it causes text to wrap</div>
     <div class="d-fl-none d-p-200">Longer text that cannot flex</div>

@@ -6,7 +6,7 @@ keywords: ["minimum width", "mnw"]
 
 ## Percentages
 
-Use `d-wmn{n}p` to set a minimum width percentage for an element. This can be combined with `d-w{n}p` and `d-wmx{n}` to have an element fill a certain height range.
+Use `d-wmn{n}p` to set a minimum width percentage for an element. This can be combined with `d-w{n}p` and `d-wmx-{stop}` to have an element fill a certain width range.
 
 <code-well-header class="d-d-flex d-jc-center d-p-300 d-bgc-secondary d-w100p d-flow16" custom>
   <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w-100 d-wmn50p d-bgc-moderate d-bar4 d-ta-center">1</dt-stack>
@@ -18,22 +18,22 @@ Use `d-wmn{n}p` to set a minimum width percentage for an element. This can be co
 
 ## Fixed
 
-Use `d-wmn{n}` to set a fixed minimum width for an element. This can be combined with `d-w{n}p` and `d-wmx{n}` to have an element fill a certain height range.
+Use `d-wmn-{stop}` to set a fixed minimum width for an element using layout token stops. This can be combined with `d-w{n}p` and `d-wmx-{stop}` to have an element fill a certain width range.
 
 <code-well-header class="d-d-flex d-jc-center d-p-300 d-bgc-secondary d-w100p d-flow16 d-of-x-scroll" custom>
   <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w-100 d-h-100 d-wmn-100 d-bgc-moderate d-bar4">1</dt-stack>
   <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w-100 d-h-100 d-wmn-150 d-bgc-moderate d-bar4">2</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w-100 d-h-100 d-wmn332 d-bgc-moderate d-bar4">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w-100 d-h-100 d-wmn-500 d-bgc-moderate d-bar4">3</dt-stack>
 </code-well-header>
 
 ```html
 <div class="d-wmn-100">1</div>
 <div class="d-wmn-150">2</div>
-<div class="d-wmn332">3</div>
+<div class="d-wmn-500">3</div>
 ```
 
 <script setup>
-  import { percentage, fixed, other } from '@data/width-height.json';
+  import { percentage, layout, other } from '@data/width-height.json';
   import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
 </script>
 
@@ -55,9 +55,9 @@ Use `d-wmn{n}` to set a fixed minimum width for an element. This can be combined
         </tr>
       </tbody>
       <tbody>
-        <tr v-for="i in fixed">
-          <th scope="row" class="d-code--sm d-docsite-code">.d-wmn{{ i }}</th>
-          <td class="d-code--sm">min-inline-size: {{ i }}px !important;</td>
+        <tr v-for="i in layout">
+          <th scope="row" class="d-code--sm d-docsite-code">.d-wmn-{{ i.stop }}</th>
+          <td class="d-code--sm">min-inline-size: var(--dt-layout-{{ i.stop }}) !important; <span class="d-fc-tertiary">/* {{ i.px }}px */</span></td>
         </tr>
       </tbody>
       <tbody>

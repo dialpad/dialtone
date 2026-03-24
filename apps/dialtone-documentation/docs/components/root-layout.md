@@ -11,7 +11,7 @@ keywords: ["app layout","page layout","d-root-layout","DtRootLayout","dt-root-la
 <code-well-header>
 <dt-root-layout
   :fixed="false"
-  class="d-w100p d-h332"
+  class="d-w100p d-h-500"
 >
   <template
     #header
@@ -41,7 +41,7 @@ body according to the `responsiveBreakpoint` prop.
 <code-well-header>
 <dt-root-layout
   :fixed="false"
-  class="d-w100p d-h332"
+  class="d-w100p d-h-500"
 >
   <template
     #header
@@ -64,7 +64,7 @@ body according to the `responsiveBreakpoint` prop.
 
 <code-example-tabs
 htmlCode='
-<div class="root-layout d-root-layout d-w100p d-h332">
+<div class="root-layout d-root-layout d-w100p d-h-500">
   <header class="d-root-layout__header"><div class="d-h-100 d-bgc-purple-100">Header</div></header>
   <aside tabindex="0" class="d-root-layout__sidebar">
     <div class="d-w-200 d-h100p d-bgc-black-100">
@@ -80,7 +80,7 @@ htmlCode='
 vueCode='
 <dt-root-layout
   :fixed="false"
-  class="d-w100p d-h332"
+  class="d-w100p d-h-500"
 >
   <template
     #header
@@ -107,11 +107,11 @@ showHtmlWarning />
 ### Header Sticky
 
 <div
-  class="d-h332 d-of-scroll"
+  class="d-h-500 d-of-scroll"
 >
   <dt-root-layout
     header-sticky
-    class="d-w100p d-h332"
+    class="d-w100p d-h-500"
   >
     <template
       #header
@@ -134,8 +134,8 @@ showHtmlWarning />
 
 <code-example-tabs
 htmlCode='
-<div class="d-h332 d-of-scroll">
-  <div class="root-layout d-root-layout d-root-layout--fixed d-w100p d-h332">
+<div class="d-h-500 d-of-scroll">
+  <div class="root-layout d-root-layout d-root-layout--fixed d-w100p d-h-500">
     <header class="d-root-layout__header d-root-layout__header--sticky"><div class="d-h-100 d-bgc-purple-100">Header</div></header>
     <aside tabindex="0" class="d-root-layout__sidebar">
       <div class="d-w-200 d-h100p d-bgc-black-100">
@@ -151,11 +151,11 @@ htmlCode='
 '
 vueCode='
 <div
-  class="d-h332 d-of-scroll"
+  class="d-h-500 d-of-scroll"
 >
   <dt-root-layout
     header-sticky
-    class="d-w100p d-h332"
+    class="d-w100p d-h-500"
   >
     <template
       #header

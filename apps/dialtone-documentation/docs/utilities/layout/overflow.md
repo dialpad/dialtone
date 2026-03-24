@@ -12,9 +12,9 @@ Consider using the custom scrollbar first with the <dt-link to="/components/scro
 
 <code-well-header>
     <div class="d-d-grid d-g-cols4 d-g-200">
-        <div v-for="{ class: className } in overflow" class="d-h216 d-p-150 d-bar4 d-bgc-moderate" :class="`d-of-${className}`">
+        <div v-for="{ class: className } in overflow" class="d-h-350 d-p-150 d-bar4 d-bgc-moderate" :class="`d-of-${className}`">
             <code>.d-of-{{ className }}</code>
-            <p class="d-w216">
+            <p class="d-w-350">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend rutrum auctor. Phasellus convallis sagittis augue ut ornare. Vestibulum et gravida lectus, sed ultrices sapien. Nullam aliquet elit dui, vitae hendrerit lectus volutpat eget.
             </p>
         </div>

@@ -116,7 +116,7 @@ Use `d-bgo{stop}` to change an element's background color opacity. You can also 
 <new-utility-class-table :classes="backgroundColors">
   <template #example="{ className }">
     <div
-      class="d-fl-shrink0 d-h42 d-w42 d-bar-circle d-ba d-bc-moderate"
+      class="d-fl-shrink0 d-h-75 d-w-75 d-bar-circle d-ba d-bc-moderate"
       :class="className"
     />
   </template>

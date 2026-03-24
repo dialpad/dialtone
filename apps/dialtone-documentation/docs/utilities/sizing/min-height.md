@@ -6,36 +6,36 @@ keywords: ["minimum height", "mnh"]
 
 ## Percentages
 
-Use `d-hmn{n}p` to set a minimum height percentage for an element. This can be combined with `d-h{n}p` and `d-hmx{n}` to have an element fill a certain height range.
+Use `d-hmn{n}p` to set a minimum height percentage for an element. This can be combined with `d-h{n}p` and `d-hmx-{stop}` to have an element fill a certain height range.
 
-<code-well-header class="d-d-flex d-jc-center d-p-300 d-bgc-secondary d-bgo50 d-w100p d-h216 d-flow16" custom>
+<code-well-header class="d-d-flex d-jc-center d-p-300 d-bgc-secondary d-bgo50 d-w100p d-h-350 d-flow16" custom>
   <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100p d-hmn100p d-bgc-moderate d-bar4 d-ta-center">1</dt-stack>
 </code-well-header>
 
 ```html
-<div class="d-h216">
+<div class="d-h-350">
     <div class="d-hmn100p">1</div>
 </div>
 ```
 
 ## Fixed
 
-Use `d-hmn{n}` to set a fixed minimum height for an element. This can be combined with `d-h{n}p` and `d-hmx{n}` to have an element fill a certain height range.
+Use `d-hmn-{stop}` to set a fixed minimum height for an element using layout token stops. This can be combined with `d-h{n}p` and `d-hmx-{stop}` to have an element fill a certain height range.
 
-<code-well-header class="d-d-flex d-jc-center d-p-300 d-bgc-secondary d-w100p d-hmn264 d-flow16 d-of-y-scroll" custom>
+<code-well-header class="d-d-flex d-jc-center d-p-300 d-bgc-secondary d-w100p d-hmn-400 d-flow16 d-of-y-scroll" custom>
   <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w-100 d-h-75 d-hmn-100 d-bgc-moderate d-bar4 d-ta-center">1</dt-stack>
   <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w-100 d-h-75 d-hmn-150 d-bgc-moderate d-bar4 d-ta-center">2</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w-100 d-hmn332 d-bgc-moderate d-bar4 d-ta-center">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w-100 d-hmn-500 d-bgc-moderate d-bar4 d-ta-center">3</dt-stack>
 </code-well-header>
 
 ```html
 <div class="d-hmn-100">1</div>
 <div class="d-hmn-150">2</div>
-<div class="d-hmn332">3</div>
+<div class="d-hmn-500">3</div>
 ```
 
 <script setup>
-  import { percentage, fixed, other } from '@data/width-height.json';
+  import { percentage, layout, other } from '@data/width-height.json';
   import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
 </script>
 
@@ -57,9 +57,9 @@ Use `d-hmn{n}` to set a fixed minimum height for an element. This can be combine
         </tr>
       </tbody>
       <tbody>
-        <tr v-for="i in fixed">
-          <th scope="row" class="d-code--sm d-docsite-code">.d-hmn{{ i }}</th>
-          <td class="d-code--sm">min-block-size: {{ i }}px !important;</td>
+        <tr v-for="i in layout">
+          <th scope="row" class="d-code--sm d-docsite-code">.d-hmn-{{ i.stop }}</th>
+          <td class="d-code--sm">min-block-size: var(--dt-layout-{{ i.stop }}) !important; <span class="d-fc-tertiary">/* {{ i.px }}px */</span></td>
         </tr>
       </tbody>
       <tbody>

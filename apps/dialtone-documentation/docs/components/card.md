@@ -10,7 +10,7 @@ keywords: ["panel", "container", "box", "d-card", "DtCard", "dt-card", "tile", "
 ---
 
 <code-well-header>
-  <div class="d-card d-w264">
+  <div class="d-card d-w-400">
     <div class="d-card__header">
       <dt-text as="p" kind="headline" size="md">
         Lorem ipsum
@@ -60,7 +60,7 @@ They should be easy to scan for relevant and actionable information. Elements, l
 ### Base
 
 <code-well-header>
-  <div class="d-card d-w264">
+  <div class="d-card d-w-400">
     <div class="d-card__header">
       <div>(header slot)</div>
     </div>
@@ -75,7 +75,7 @@ They should be easy to scan for relevant and actionable information. Elements, l
 
 <code-example-tabs
 htmlCode='
-<div class="d-card d-w264">
+<div class="d-card d-w-400">
   <div class="d-card__header">
     <div>(header slot)</div>
   </div>
@@ -88,7 +88,7 @@ htmlCode='
 </div>
 '
 vueCode='
-<dt-card class="d-w264">
+<dt-card class="d-w-400">
   <template #header>
     (header slot)
   </template>
@@ -105,7 +105,7 @@ showHtmlWarning />
 ### With Header
 
 <code-well-header>
-  <div class="d-card d-w264">
+  <div class="d-card d-w-400">
     <div class="d-card__header">
       <dt-text as="p" kind="headline" size="md">
         Lorem ipsum
@@ -122,7 +122,7 @@ showHtmlWarning />
 
 <code-example-tabs
 htmlCode='
-<div class="d-card d-w264">
+<div class="d-card d-w-400">
   <div class="d-card__header">
     <dt-text as="p" kind="headline" size="md">
       Lorem ipsum
@@ -137,7 +137,7 @@ htmlCode='
 </div>
 '
 vueCode='
-<dt-card class="d-w264">
+<dt-card class="d-w-400">
   <template #header>
     <dt-text as="p" kind="headline" size="md">Lorem ipsum</dt-text>
     <dt-button
@@ -163,7 +163,7 @@ showHtmlWarning />
 ### With Footer
 
 <code-well-header>
-  <div class="d-card d-w264">
+  <div class="d-card d-w-400">
     <div class="d-card__content">
       Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
     </div>
@@ -177,7 +177,7 @@ showHtmlWarning />
 
 <code-example-tabs
 htmlCode='
-<div class="d-card d-w264">
+<div class="d-card d-w-400">
   <div class="d-card__content">
     Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
   </div>
@@ -189,7 +189,7 @@ htmlCode='
 </div>
 '
 vueCode='
-<dt-card class="d-w264">
+<dt-card class="d-w-400">
   <template #content>
     Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
   </template>
@@ -208,7 +208,7 @@ showHtmlWarning />
 ### Content Only
 
 <code-well-header>
-  <div class="d-card d-w264">
+  <div class="d-card d-w-400">
     <div class="d-card__content">
       Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
     </div>
@@ -217,14 +217,14 @@ showHtmlWarning />
 
 <code-example-tabs
 htmlCode='
-<div class="d-card d-w264">
+<div class="d-card d-w-400">
   <div class="d-card__content">
     Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
   </div>
 </div>
 '
 vueCode='
-<dt-card class="d-w264">
+<dt-card class="d-w-400">
   <template #content>
     Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
   </template>
@@ -235,7 +235,7 @@ showHtmlWarning />
 ### With Header, Footer and Scrollable Content
 
 <code-well-header>
-  <div class="d-card d-w264">
+  <div class="d-card d-w-400">
     <div class="d-card__header">
       <dt-text as="p" kind="headline" size="md">
         Lorem ipsum
@@ -244,7 +244,7 @@ showHtmlWarning />
         <dt-icon name="more-vertical" size="200" />
       </button>
     </div>
-    <div class="d-card__content d-h72">
+    <div class="d-card__content d-h-100">
       Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
     </div>
     <div class="d-card__footer">
@@ -257,7 +257,7 @@ showHtmlWarning />
 
 <code-example-tabs
 htmlCode='
-<div class="d-card d-w264">
+<div class="d-card d-w-400">
   <div class="d-card__header">
     <dt-text as="p" kind="headline" size="md">
       Lorem ipsum
@@ -266,7 +266,7 @@ htmlCode='
       <dt-icon name="more-vertical" size="200" />
     </button>
   </div>
-  <div class="d-card__content d-h84">
+  <div class="d-card__content d-h-125">
     Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
   </div>
   <div class="d-card__footer">
@@ -277,7 +277,7 @@ htmlCode='
 </div>
 '
 vueCode='
-<dt-card max-height="50px" class="d-w264">
+<dt-card max-height="50px" class="d-w-400">
   <template #header>
     <dt-text as="p" kind="headline" size="md">Lorem ipsum</dt-text>
     <dt-button

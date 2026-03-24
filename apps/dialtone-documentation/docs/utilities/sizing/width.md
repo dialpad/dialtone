@@ -8,7 +8,7 @@ keywords: ["size", "wide", "vw", "viewport width"]
 
 Use `d-w{n}p` to set a percentage width for an element.
 
-<code-well-header class="d-d-flex d-fd-column d-p-300 d-bgc-secondary d-w100p d-hmx332 d-stack16 d-code--md d-ta-center d-of-y-scroll" v-dt-scrollbar:never custom>
+<code-well-header class="d-d-flex d-fd-column d-p-300 d-bgc-secondary d-w100p d-hmx-500 d-stack16 d-code--md d-ta-center d-of-y-scroll" v-dt-scrollbar:never custom>
   <dt-stack direction="row" align="center" justify="center" class="d-ps-relative" v-for="i in percentage">
     <dt-stack as="span" direction="row" align="center" class="d-zi-active d-h-100">d-w{{i}}p</dt-stack>
     <div class="d-w100p d-h-100 d-ps-absolute d-bgc-moderate">
@@ -34,57 +34,59 @@ Use `d-w{n}p` to set a percentage width for an element.
 
 ## Fixed
 
-Use `d-w{n}` to set a fixed width for an element.
+Use `d-w-{stop}` to set a fixed width for an element using layout token stops.
 
-<code-well-header class="d-d-flex d-fd-column d-p-300 d-bgc-secondary d-w100p d-hmx332 d-stack16 d-ta-center d-of-scroll" v-dt-scrollbar:never custom>
-  <dt-stack direction="row" align="center" class="d-pls-start" v-for="(i, index) in fixed">
-    <span class="d-w72">d-w{{i}}</span>
-    <div class="d-h-100 d-bgc-moderate d-bar4" :class="`d-w${i}`"></div>
+<code-well-header class="d-d-flex d-fd-column d-p-300 d-bgc-secondary d-w100p d-hmx-500 d-stack16 d-ta-center d-of-scroll" v-dt-scrollbar:never custom>
+  <dt-stack direction="row" align="center" class="d-pls-start" v-for="(i, index) in layout">
+    <span class="d-w-100">d-w-{{i.stop}}</span>
+    <div class="d-h-100 d-bgc-moderate d-bar4" :class="`d-w-${i.stop}`"></div>
   </dt-stack>
 </code-well-header>
 
 ```html
-<div class="d-w0">...</div>
-<div class="d-w1">...</div>
-<div class="d-w2">...</div>
-<div class="d-w4">...</div>
-<div class="d-w6">...</div>
-<div class="d-w8">...</div>
-<div class="d-w12">...</div>
 <div class="d-w-25">...</div>
-<div class="d-w20">...</div>
-<div class="d-w24">...</div>
 <div class="d-w-50">...</div>
-<div class="d-w42">...</div>
 <div class="d-w-75">...</div>
 <div class="d-w-100">...</div>
-<div class="d-w72">...</div>
-<div class="d-w84">...</div>
+<div class="d-w-125">...</div>
 <div class="d-w-150">...</div>
-<div class="d-w102">...</div>
-<div class="d-w114">...</div>
+<div class="d-w-175">...</div>
 <div class="d-w-200">...</div>
-<div class="d-w164">...</div>
-<div class="d-w216">...</div>
-<div class="d-w264">...</div>
-<div class="d-w332">...</div>
-<div class="d-w464">...</div>
+<div class="d-w-250">...</div>
+<div class="d-w-300">...</div>
+<div class="d-w-350">...</div>
+<div class="d-w-400">...</div>
+<div class="d-w-450">...</div>
+<div class="d-w-500">...</div>
+<div class="d-w-550">...</div>
+<div class="d-w-600">...</div>
+<div class="d-w-650">...</div>
+<div class="d-w-700">...</div>
+<div class="d-w-750">...</div>
 <div class="d-w-800">...</div>
-<div class="d-w628">...</div>
-<div class="d-w764">...</div>
-<div class="d-w828">...</div>
-<div class="d-w912">...</div>
+<div class="d-w-850">...</div>
+<div class="d-w-900">...</div>
+<div class="d-w-950">...</div>
+<div class="d-w-1000">...</div>
+<div class="d-w-1050">...</div>
+<div class="d-w-1100">...</div>
+<div class="d-w-1150">...</div>
+<div class="d-w-1200">...</div>
+<div class="d-w-1250">...</div>
+<div class="d-w-1300">...</div>
+<div class="d-w-1350">...</div>
+<div class="d-w-1400">...</div>
+<div class="d-w-1450">...</div>
+<div class="d-w-1500">...</div>
+<div class="d-w-1550">...</div>
 <div class="d-w-1600">...</div>
-<div class="d-w1140">...</div>
-<div class="d-w1268">...</div>
-<div class="d-w1340">...</div>
 ```
 
 ## Screen
 
 Use `d-w100vw` to have an element cover the user's viewport.
 
-<code-well-header class="d-ps-relative d-d-flex d-jc-center d-p-300 d-bgc-secondary d-w100p d-h3 d-stack16 d-of-y-scroll" custom>
+<code-well-header class="d-ps-relative d-d-flex d-jc-center d-p-300 d-bgc-secondary d-w100p d-h-25 d-stack16 d-of-y-scroll" custom>
   <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100vw d-h100vh d-bgc-moderate d-bar4 d-ta-center">Viewport</dt-stack>
 </code-well-header>
 
@@ -96,8 +98,8 @@ Use `d-w100vw` to have an element cover the user's viewport.
 
 Use `d-w-auto` have the browser calculate and select a width.
 
-<code-well-header class="d-ps-relative d-d-flex d-jc-center d-p-300 d-bgc-secondary d-w100p d-hmn102 d-stack16" custom>
-  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-h72 d-w-auto d-bgc-moderate d-bar4 d-ta-center">Auto</dt-stack>
+<code-well-header class="d-ps-relative d-d-flex d-jc-center d-p-300 d-bgc-secondary d-w100p d-hmn-150 d-stack16" custom>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-h-100 d-w-auto d-bgc-moderate d-bar4 d-ta-center">Auto</dt-stack>
 </code-well-header>
 
 ```html
@@ -105,7 +107,7 @@ Use `d-w-auto` have the browser calculate and select a width.
 ```
 
 <script setup>
-  import { percentage, fixed, other } from '@data/width-height.json';
+  import { percentage, layout, other } from '@data/width-height.json';
   import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
 </script>
 
@@ -127,9 +129,9 @@ Use `d-w-auto` have the browser calculate and select a width.
         </tr>
       </tbody>
       <tbody>
-        <tr v-for="i in fixed">
-          <th scope="row" class="d-code--sm d-docsite-code">.d-w{{ i }}</th>
-          <td class="d-code--sm">inline-size: {{ i }}px !important;</td>
+        <tr v-for="i in layout">
+          <th scope="row" class="d-code--sm d-docsite-code">.d-w-{{ i.stop }}</th>
+          <td class="d-code--sm">inline-size: var(--dt-layout-{{ i.stop }}) !important; <span class="d-fc-tertiary">/* {{ i.px }}px */</span></td>
         </tr>
       </tbody>
       <tbody>
