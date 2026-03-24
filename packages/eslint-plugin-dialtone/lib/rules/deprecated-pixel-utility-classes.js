@@ -10,6 +10,8 @@
 //------------------------------------------------------------------------------
 
 // Pixel values that have token-stop equivalents
+// MUST STAY IN SYNC with WIDTH_HEIGHTS_LAYOUT, MARGIN_SIZES_SPACING, MARGIN_SIZES_LAYOUT,
+// and NEGATIVE_SPACING_MAP in dialtone-css/postcss/constants.cjs
 // Sizing: layout stops (16px+)
 const SIZING_PIXELS = '16|32|48|64|80|96|112|128|160|192|224|256|288|320|352|384|416|448|480|512|544|576|608|640|672|704|736|768|800|832|864|896|928|960|992|1024';
 // Spacing: spacing stops (0-64px) + layout stops for margin/padding (96, 128)

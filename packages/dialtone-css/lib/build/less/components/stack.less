@@ -40,13 +40,9 @@
 }
 
 .gap-options() {
-  &-gap-1 {
-    --stack-gap: var(--dt-spacing-1);
-  }
-
-  &-gap-525 {
-    --stack-gap: var(--dt-spacing-525);
-  }
+  // Stops outside both range() sequences: 1 (not a multiple of 25), 525 (not a multiple of 50)
+  &-gap-1 { --stack-gap: var(--dt-spacing-1); }
+  &-gap-525 { --stack-gap: var(--dt-spacing-525); }
 
   each(range(0, 200, 25), {
     &-gap-@{value} {
@@ -203,6 +199,7 @@
 //  ============================================================================
 //  $   SIZES
 //  ----------------------------------------------------------------------------
+// Stops outside both range() sequences: 1 (not a multiple of 25), 525 (not a multiple of 50)
 .d-stack--gap-1 { --stack-gap: var(--dt-spacing-1); }
 .d-stack--gap-525 { --stack-gap: var(--dt-spacing-525); }
 each(range(0, 200, 25), {

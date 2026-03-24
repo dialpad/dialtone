@@ -2,7 +2,7 @@
 // e.g. d-h16 → d-h-25, d-p8 → d-p-100, d-m8 → d-m-100
 
 // Sizing: pixel value → layout token stop
-// From WIDTH_HEIGHTS_LAYOUT in constants.cjs
+// MUST STAY IN SYNC with WIDTH_HEIGHTS_LAYOUT in dialtone-css/postcss/constants.cjs
 const SIZING_MAP = {
   16: '25', 32: '50', 48: '75', 64: '100', 80: '125', 96: '150',
   112: '175', 128: '200', 160: '250', 192: '300', 224: '350', 256: '400',
@@ -19,7 +19,7 @@ const SIZING_MAP = {
 // or left as-is since the old classes still work.
 
 // Spacing: pixel value → spacing token stop
-// From GAP_SPACES_SPACING / MARGIN_SIZES_SPACING / PADDING_SIZES_SPACING in constants.cjs
+// MUST STAY IN SYNC with GAP_SPACES_SPACING / MARGIN_SIZES_SPACING / PADDING_SIZES_SPACING in dialtone-css/postcss/constants.cjs
 const SPACING_MAP = {
   0: '0', 1: '1', 2: '25', 4: '50', 6: '75', 8: '100',
   10: '125', 12: '150', 14: '175', 16: '200', 20: '250', 24: '300',
