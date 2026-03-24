@@ -13,51 +13,15 @@ keywords: ["scrollable", "d-scrollbar", "DtScrollbar", "dt-scrollbar", "custom s
 
 Allows to add overlay scrollbars that will look the same for every browser. The directive sets up the scrollbars from the library [OverlayScrollbars](https://kingsora.github.io/OverlayScrollbars/).
 
-<code-well-header>
-  <div class="d-hmx164 d-w30p d-bar8 d-ba" v-dt-scrollbar>
+<code-example>
+  <div class="d-hmx164 d-w264 d-bar8 d-ba" v-dt-scrollbar>
     <dt-stack>
       <div v-for="item in items" class="item">
         {{ item}}
       </div>
     </dt-stack>
   </div>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div class="d-hmx164 d-w30p d-bar8 d-ba d-scrollbar" data-overlayscrollbars="host"
-  data-overlayscrollbars-initialize="true">
-  <div class="os-size-observer">
-    <div class="os-size-observer-listener"></div>
-  </div>
-  <div data-overlayscrollbars-viewport="scrollbarHidden overflowXHidden overflowYScroll" tabindex="-1">
-    <div class="item">user 1</div>
-    ...
-  </div>
-  <div class="os-scrollbar os-scrollbar-horizontal os-theme-dark os-scrollbar-auto-hide
-  os-scrollbar-handle-interactive os-scrollbar-cornerless os-scrollbar-unusable">
-    <div class="os-scrollbar-track">
-      <div class="os-scrollbar-handle"></div>
-    </div>
-  </div>
-  <div class="os-scrollbar os-scrollbar-vertical os-theme-dark os-scrollbar-auto-hide
-  os-scrollbar-handle-interactive os-scrollbar-visible os-scrollbar-cornerless">
-    <div class="os-scrollbar-track">
-      <div class="os-scrollbar-handle"></div>
-    </div>
-  </div>
-</div>
-'
-vueCode='
-<div class="d-hmx164 d-w30p d-bar8 d-ba" v-dt-scrollbar>
-  <dt-stack>
-    <div v-for="item in items" class="item">
-      {{ item}}
-    </div>
-  </dt-stack>
-</div>
-'
-/>
+</code-example>
 
 ## Usage
 
@@ -97,81 +61,57 @@ To customize the behavior of the scrollbar, you can use different arguments with
 
 Show the scrollbar when the mouse enters the scrollable area. This is the default option, so no argument is needed.
 
-<code-well-header>
-  <div class="d-hmx164 d-w30p d-bar8 d-ba" v-dt-scrollbar>
+<code-example>
+  <div class="d-hmx164 d-w264 d-bar8 d-ba" v-dt-scrollbar>
     <dt-stack>
       <div v-for="item in items" class="item">
         {{ item}}
       </div>
     </dt-stack>
   </div>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<div v-dt-scrollbar></div>
-'
-/>
+</code-example>
 
 ### Always
 
 Always show the scrollbar if the region is overflowing the available space.
 
-<code-well-header>
-  <div class="d-hmx164 d-w30p d-bar8 d-ba" v-dt-scrollbar:never>
+<code-example>
+  <div class="d-hmx164 d-w264 d-bar8 d-ba" v-dt-scrollbar:never>
     <dt-stack>
       <div v-for="item in items" class="item">
         {{ item}}
       </div>
     </dt-stack>
   </div>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<div v-dt-scrollbar:never></div>
-'
-/>
+</code-example>
 
 ### Scroll
 
 Show the scrollbar on scroll.
 
-<code-well-header>
-  <div class="d-hmx164 d-w30p d-bar8 d-ba" v-dt-scrollbar:scroll>
+<code-example>
+  <div class="d-hmx164 d-w264 d-bar8 d-ba" v-dt-scrollbar:scroll>
     <dt-stack>
       <div v-for="item in items" class="item">
         {{ item}}
       </div>
     </dt-stack>
   </div>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<div v-dt-scrollbar:scroll></div>
-'
-/>
+</code-example>
 
 ### Move
 
 Show the scrollbar when the mouse moves inside the scrollable area.
 
-<code-well-header>
-  <div class="d-hmx164 d-w30p d-bar8 d-ba" v-dt-scrollbar:move>
+<code-example>
+  <div class="d-hmx164 d-w264 d-bar8 d-ba" v-dt-scrollbar:move>
     <dt-stack>
       <div v-for="item in items" class="item">
         {{ item}}
       </div>
     </dt-stack>
   </div>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<div v-dt-scrollbar:move></div>
-'
-/>
+</code-example>
 
 ## Limitations
 

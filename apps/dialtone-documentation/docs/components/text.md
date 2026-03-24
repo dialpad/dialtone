@@ -6,23 +6,13 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-text--defaul
 image: assets/images/components/text.png
 ---
 
-<!-- <code-well-header>
-  <dt-stack direction="row" gap="500" align="baseline">
-    <dt-text kind="headline" size="xl" as="h2">Extra large headline</dt-text>
-    <dt-text kind="body" size="md" as="p">Medium body</dt-text>
-    <dt-text kind="label" size="sm" as="p">Small label</dt-text>
-    <dt-text kind="code" size="xs" as="p">Extra small code</dt-text>
-  </dt-stack>
-</code-well-header> -->
-
 <component-combinator component-name="DtText" />
 
 ## Usage
 
-<code-example-tabs
-vueCode='
-<dt-text {{props}}> ... </dt-text>
-'/>
+<code-example only-show="code">
+  <dt-text> ... </dt-text>
+</code-example>
 
 Use in place of manually applying Text Styles. Examples of manual application **you should avoid** include:
 
@@ -60,30 +50,23 @@ Use in place of manually applying Text Styles. Examples of manual application **
 
 Declare the role of the content. Default will inherit styles from the parent.
 
-<code-well-header>
-  <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }" align="baseline">
+<code-example>
+  <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }" align="baseline" data-demo-wrapper>
     <dt-text kind="headline" as="span">Headline</dt-text>
     <dt-text kind="body">Body</dt-text>
     <dt-text kind="label">Label</dt-text>
     <dt-text kind="code">Code</dt-text>
     <dt-text>Default (inherits)</dt-text>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-text kind="headline">Headline</dt-text>
-<dt-text kind="body">Body</dt-text>
-<dt-text kind="label">Label</dt-text>
-<dt-text kind="code">Code</dt-text>
-<dt-text>Default (inherits)</dt-text>
-'/>
+</code-example>
 
 ### Size
 
 All kinds support `size` prop, but not all sizes are available for each kind. When `kind` is set, size defaults to `md` if not specified.
 
-<code-well-header>
+<code-example vueCode='
+<dt-text kind="{{kind}}" size="{{size}}">....</dt-text>
+'>
   <dt-stack class="d-w100p d-ba d-bar4 d-of-auto">
     <table class="d-w100p d-table">
       <tr class="d-va-baseline">
@@ -198,20 +181,17 @@ All kinds support `size` prop, but not all sizes are available for each kind. Wh
       </tr>
     </table>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-text kind="{{kind}}" size="{{size}}">....</dt-text>
-'/>
+</code-example>
 
 ### Numeric
 
 The `numeric` prop applies styles that ensure that each number is set with consistent width, making them align properly when displayed together. Ideal for displaying aligned data such as phone numbers or numbers in a table.
 
-<code-well-header>
+<code-example vueCode='
+<dt-text numeric>(913) 555-3170</dt-text>
+'>
   <dt-stack direction="row" gap="500">
-    <dt-stack gap="500" class="d-jc-space-between d-ai-baseline">
+    <dt-stack gap="500" justify="space-between" align="baseline">
       <dt-text kind="label" size="sm" tone="critical">Without numeric</dt-text>
       <dt-text>(913) 555-3170</dt-text>
       <dt-text>(908) 555-1111</dt-text>
@@ -219,7 +199,7 @@ The `numeric` prop applies styles that ensure that each number is set with consi
       <dt-text>(816) 555-1203</dt-text>
       <dt-text>(886) 555-8888</dt-text>
     </dt-stack>
-    <dt-stack gap="500" class="d-jc-space-between d-ai-baseline">
+    <dt-stack gap="500" justify="space-between" align="baseline">
       <dt-text kind="label" size="sm" tone="success">With numeric</dt-text>
       <dt-text numeric>(913) 555-3170</dt-text>
       <dt-text numeric>(908) 555-1111</dt-text>
@@ -228,36 +208,30 @@ The `numeric` prop applies styles that ensure that each number is set with consi
       <dt-text numeric>(886) 555-8888</dt-text>
     </dt-stack>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-text numeric>(913) 555-3170</dt-text>
-'/>
+</code-example>
 
 ### Strength
 
 Override the font-weight of the text. Applies to any kind/size combination. If omitted, the default weight from the typography token is used.
 
-<code-well-header>
+<code-example vueCode='
+<dt-text strength="{{strength}}">...</dt-text>
+'>
   <dt-stack :direction="{ 'default': 'column', 'md': 'row' }" gap="500" class="d-fw-wrap">
     <dt-text strength="bold">Bold</dt-text>
     <dt-text strength="semibold">Semibold</dt-text>
     <dt-text strength="medium">Medium</dt-text>
     <dt-text strength="normal">Normal</dt-text>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-text strength="{{strength}}">...</dt-text>
-'/>
+</code-example>
 
 ### Density
 
 Override the line-height of the text. Applies to any kind/size combination. If omitted, the default line-height from the typography token is used.
 
-<code-well-header>
+<code-example vueCode='
+<dt-text density="{{density}}">...</dt-text>
+'>
   <dt-stack gap="400">
     <dt-text kind="body" as="p" density="100" class="d-bgc-moderate-opaque"><dt-text kind="code" as="code" size="sm" class="d-bgc-transparent">100</dt-text> The quick brown fox jumped over the lazy dog.</dt-text>
     <dt-text kind="body" as="p" density="200" class="d-bgc-moderate-opaque"><dt-text kind="code" as="code" size="sm" class="d-bgc-transparent">200</dt-text> The quick brown fox jumped over the lazy dog.</dt-text>
@@ -266,18 +240,13 @@ Override the line-height of the text. Applies to any kind/size combination. If o
     <dt-text kind="body" as="p" density="500" class="d-bgc-moderate-opaque"><dt-text kind="code" as="code" size="sm" class="d-bgc-transparent">500</dt-text> The quick brown fox jumped over the lazy dog.</dt-text>
     <dt-text kind="body" as="p" density="600" class="d-bgc-moderate-opaque"><dt-text kind="code" as="code" size="sm" class="d-bgc-transparent">600</dt-text> The quick brown fox jumped over the lazy dog.</dt-text>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-text density="{{density}}">...</dt-text>
-'/>
+</code-example>
 
 ## Tone
 
 Use `tone` to declare the text's tone, which will map to a foreground color. By default, the tone is inherited from its parent.
 
-<code-well-header>
+<code-example>
   <dt-stack gap="300" class="d-py8 d-px16 d-bar4">
     <dt-text>primary</dt-text>
     <dt-text tone="secondary">secondary</dt-text>
@@ -291,28 +260,15 @@ Use `tone` to declare the text's tone, which will map to a foreground color. By 
     <dt-text tone="critical">critical</dt-text>
     <dt-text tone="critical-strong">critical-strong</dt-text>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-text>primary</dt-text>
-<dt-text tone="secondary">secondary</dt-text>
-<dt-text tone="tertiary">tertiary</dt-text>
-<dt-text tone="muted">muted</dt-text>
-<dt-text tone="disabled">disabled</dt-text>
-<dt-text tone="placeholder">placeholder</dt-text>
-<dt-text tone="success">success</dt-text>
-<dt-text tone="success-strong">success-strong</dt-text>
-<dt-text tone="warning">warning</dt-text>
-<dt-text tone="critical">critical</dt-text>
-<dt-text tone="critical-strong">critical-strong</dt-text>
-'/>
+</code-example>
 
 ### Inverted
 
 Rather than use the `-inverted` tone variants, use the [v-dt-mode](/components/mode-island.html) directive.
 
-<code-well-header>
+<code-example vueCode='
+<dt-text v-dt-mode:invert tone="critical">critical tone on contrasting surface</dt-text>
+'>
   <dt-stack gap="300" class="d-py8 d-px16 d-bar4">
     <div class="d-p8 d-bgc-transparent">
       <dt-text tone="critical">critical tone on default surface</dt-text>
@@ -321,24 +277,19 @@ Rather than use the `-inverted` tone variants, use the [v-dt-mode](/components/m
       <dt-text v-dt-mode:invert tone="critical">critical tone on contrasting surface</dt-text>
     </div>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-text v-dt-mode:invert tone="critical">critical tone on contrasting surface</dt-text>
-'/>
+</code-example>
 
 ## Render as
 
 Use `as` to declare the underlying HTML tag that the component should render, independent of the visual styling. Defaults to `span`.
 
-<code-well-header>
+<code-example>
   <dt-stack class="d-w100p" gap="500">
     <dt-stack gap="400">
       <dt-text kind="headline" as="h1" size="2xl">The Complete Agentic AI Platform</dt-text>
       <dt-text kind="body" as="p" size="lg">Our AI Agents come equipped with the core skills businesses need to deliver seamless customer experiences.</dt-text>
     </dt-stack>
-    <dt-stack :direction="{ 'default': 'column', 'md': 'row' }" gap="500" class="d-ai-flex-start">
+    <dt-stack :direction="{ 'default': 'column', 'md': 'row' }" gap="500" align="start">
       <dt-stack gap="400">
         <dt-text kind="headline" as="h2" size="xl">Try before you AI</dt-text>
         <dt-text kind="body" as="p">Build, run and optimize your agents - no code, just your expertise and our built-in intelligence.</dt-text>
@@ -353,25 +304,18 @@ Use `as` to declare the underlying HTML tag that the component should render, in
       </dt-stack>
     </dt-stack>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-text kind="headline" as="h1" size="2xl">...</dt-text>
-<dt-text kind="body" as="p" size="lg">...</dt-text>
-<dt-text kind="headline" as="h2" size="xl">...</dt-text>
-<dt-text kind="body" as="p">...</dt-text>
-<dt-text kind="headline" as="h2" size="xl">...</dt-text>
-<dt-text kind="body" as="p">...</dt-text>
-<dt-text kind="headline" as="h2" size="xl">...</dt-text>
-<dt-text kind="body" as="p">...</dt-text>
-'/>
+</code-example>
 
 ## Align
 
 Since `DtText`'s default element is a `<span>`, which is inline by default, the `align` prop will only work if its element is styled in a block context.
 
-<code-well-header>
+<code-example vueCode='
+<dt-text align="start">....</dt-text>
+<dt-text align="center">....</dt-text>
+<dt-text align="end">....</dt-text>
+<dt-text align="justify">....</dt-text>
+'>
   <dt-stack class="d-w100p" gap="600">
     <div class="d-bgc-moderate-opaque">
       <dt-text as="p" align="start">Welcome to Dialpad, the most modern, AI-powered business communications platform. We've taken every form of communication that you rely on and unified it into one app. </dt-text>
@@ -386,52 +330,26 @@ Since `DtText`'s default element is a `<span>`, which is inline by default, the 
       <dt-text as="p" align="justify">Welcome to Dialpad, the most modern, AI-powered business communications platform. We've taken every form of communication that you rely on and unified it into one app. </dt-text>
     </div>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-text align="start">....</dt-text>
-<dt-text align="center">....</dt-text>
-<dt-text align="end">....</dt-text>
-<dt-text align="justify">....</dt-text>
-'/>
+</code-example>
 
 ## Truncate
 
 Since `DtText`'s default element is a `<span>`, the `truncate` will only work if its element is in block or inline-block context, e.g. `<div>...</div>`.
 
-<code-well-header>
-  <dt-stack class="d-w100p">
+<code-example>
+  <div class="d-w332">
     <dt-text as="p" truncate>Welcome to Dialpad, the most modern, AI-powered business communications platform. We've taken every form of communication that you rely on and unified it into one app.</dt-text>
-  </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-text as="p" truncate>....</dt-text>
-'/>
+  </div>
+</code-example>
 
 ## Max Lines
 
-<code-well-header>
-  <dt-stack class="d-w100p" align="start" gap="500" :direction="{ 'default': 'column', 'md': 'row' }">
-    <dt-text as="p" :maxLines="2">Welcome to Dialpad, the most modern, AI-powered business communications platform. We’ve taken every form of communication that you rely on and unified it into one app. Calling a client? Meeting with your team? Texting a colleague? It’s all here, on all your devices. AI is by your side to transform your conversations into something you can see and use, giving you and your team a deeper look into action items and insights. Dialpad AI does the legwork to capture the details that matter most while you make and receive calls, send messages, and join meetings in an instant.</dt-text>
-    <dt-text as="p" :maxLines="4">Welcome to Dialpad, the most modern, AI-powered business communications platform. We’ve taken every form of communication that you rely on and unified it into one app. Calling a client? Meeting with your team? Texting a colleague? It’s all here, on all your devices. AI is by your side to transform your conversations into something you can see and use, giving you and your team a deeper look into action items and insights. Dialpad AI does the legwork to capture the details that matter most while you make and receive calls, send messages, and join meetings in an instant.</dt-text>
-    <dt-text as="p" :maxLines="6">Welcome to Dialpad, the most modern, AI-powered business communications platform. We’ve taken every form of communication that you rely on and unified it into one app. Calling a client? Meeting with your team? Texting a colleague? It’s all here, on all your devices. AI is by your side to transform your conversations into something you can see and use, giving you and your team a deeper look into action items and insights. Dialpad AI does the legwork to capture the details that matter most while you make and receive calls, send messages, and join meetings in an instant.</dt-text>
-  </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-text as="p" :max-lines="maxLines">....</dt-text>
-'/>
-
-<code-well-header>
+<code-example only-show="demo">
   <dt-stack gap="400">
-    <dt-stack direction="row" gap="400" class="d-jc-space-between d-ai-center">
-      <dt-text kind="headline" size="lg" as="h3">Demo</dt-text>
-      <dt-stack direction="row" gap="400" align="center">
-        <dt-text v-if="state.isApplied" as="code" kind="code" size="xs">
+    <dt-stack direction="row" gap="500" justify="space-between" align="center">
+      <dt-text kind="headline" size="lg" as="h3" tone="secondary">Demo</dt-text>
+      <dt-stack direction="row" gap="500" align="center">
+        <dt-text v-if="state.isApplied" as="code" kind="code" size="xs" tone="tertiary">
           max-lines="<strong>{{ state.value }}</strong>"
         </dt-text>
         <dt-stack direction="row" gap="200" align="center">
@@ -475,11 +393,15 @@ vueCode='
         </dt-stack>
       </dt-stack>
     </dt-stack>
-    <dt-stack class="d-w100p d-ai-flex-start" gap="500">
-      <dt-text :max-lines="maxLinesBinding" as="p">Welcome to Dialpad, the most modern, AI-powered business communications platform. We’ve taken every form of communication that you rely on and unified it into one app. Calling a client? Meeting with your team? Texting a colleague? It’s all here, on all your devices. AI is by your side to transform your conversations into something you can see and use, giving you and your team a deeper look into action items and insights. Dialpad AI does the legwork to capture the details that matter most while you make and receive calls, send messages, and join meetings in an instant. Welcome to Dialpad, the most modern, AI-powered business communications platform. We’ve taken every form of communication that you rely on and unified it into one app. Calling a client? Meeting with your team? Texting a colleague? It’s all here, on all your devices. AI is by your side to transform your conversations into something you can see and use, giving you and your team a deeper look into action items and insights. Dialpad AI does the legwork to capture the details that matter most while you make and receive calls, send messages, and join meetings in an instant. Welcome to Dialpad, the most modern, AI-powered business communications platform. We’ve taken every form of communication that you rely on and unified it into one app. Calling a client? Meeting with your team? Texting a colleague? It’s all here, on all your devices. AI is by your side to transform your conversations into something you can see and use, giving you and your team a deeper look into action items and insights. Dialpad AI does the legwork to capture the details that matter most while you make and receive calls, send messages, and join meetings in an instant.</dt-text>
+    <dt-stack justify="start" gap="500">
+      <dt-text :max-lines="maxLinesBinding" as="p">Welcome to Dialpad, the most modern, AI-powered business communications platform. We've taken every form of communication that you rely on and unified it into one app. Calling a client? Meeting with your team? Texting a colleague? It's all here, on all your devices. AI is by your side to transform your conversations into something you can see and use, giving you and your team a deeper look into action items and insights. Dialpad AI does the legwork to capture the details that matter most while you make and receive calls, send messages, and join meetings in an instant. Welcome to Dialpad, the most modern, AI-powered business communications platform. We've taken every form of communication that you rely on and unified it into one app. Calling a client? Meeting with your team? Texting a colleague? It's all here, on all your devices. AI is by your side to transform your conversations into something you can see and use, giving you and your team a deeper look into action items and insights. Dialpad AI does the legwork to capture the details that matter most while you make and receive calls, send messages, and join meetings in an instant. Welcome to Dialpad, the most modern, AI-powered business communications platform. We've taken every form of communication that you rely on and unified it into one app. Calling a client? Meeting with your team? Texting a colleague? It's all here, on all your devices. AI is by your side to transform your conversations into something you can see and use, giving you and your team a deeper look into action items and insights. Dialpad AI does the legwork to capture the details that matter most while you make and receive calls, send messages, and join meetings in an instant.</dt-text>
     </dt-stack>
   </dt-stack>
-</code-well-header>
+</code-example>
+
+<code-example only-show="code">
+  <dt-text as="p" :max-lines="4">....</dt-text>
+</code-example>
 
 ## Wrap
 
@@ -487,24 +409,19 @@ Control text wrapping behavior. Particularly useful for headlines where balanced
 
 Since `DtText`'s default element is a `<span>`, which is inline by default, the `wrap` prop will only work if its element is styled in a block context.
 
-<code-well-header>
-  <dt-stack class="d-w100p" gap="500">
-    <dt-stack gap="600" align="start">
-      <dt-text as="p"><strong>Default</strong>. Lorem ipsum dolor sit amet consectetur adipisicing consequatur deleniti non doloremque autem adipisci in omnis voluptatibus </dt-text>
-      <dt-text as="p" wrap="balance"><strong>Balance</strong>. Lorem ipsum dolor sit amet consectetur adipisicing consequatur deleniti non doloremque autem adipisci in omnis voluptatibus </dt-text>
-      <dt-text as="p" wrap="pretty"><strong>Pretty</strong>. Lorem ipsum dolor sit amet consectetur adipisicing consequatur deleniti non doloremque autem adipisci in omnis voluptatibus </dt-text>
-      <dt-text as="p" wrap="nowrap"><strong>No Wrap</strong>. Lorem ipsum dolor sit amet consectetur adipisicing consequatur deleniti non doloremque autem adipisci in omnis voluptatibus </dt-text>
-    </dt-stack>
-  </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
+<code-example vueCode='
 <dt-text>....</dt-text>
 <dt-text wrap="balance">....</dt-text>
 <dt-text wrap="pretty">....</dt-text>
 <dt-text wrap="nowrap">....</dt-text>
-'/>
+'>
+  <dt-stack gap="600" align="start" class="d-w332">
+    <dt-text as="p"><strong>Default</strong>. Lorem ipsum dolor sit amet consectetur adipisicing consequatur deleniti non doloremque autem adipisci in omnis voluptatibus </dt-text>
+    <dt-text as="p" wrap="balance"><strong>Balance</strong>. Lorem ipsum dolor sit amet consectetur adipisicing consequatur deleniti non doloremque autem adipisci in omnis voluptatibus </dt-text>
+    <dt-text as="p" wrap="pretty"><strong>Pretty</strong>. Lorem ipsum dolor sit amet consectetur adipisicing consequatur deleniti non doloremque autem adipisci in omnis voluptatibus </dt-text>
+    <dt-text as="p" wrap="nowrap"><strong>No Wrap</strong>. Lorem ipsum dolor sit amet consectetur adipisicing consequatur deleniti non doloremque autem adipisci in omnis voluptatibus </dt-text>
+  </dt-stack>
+</code-example>
 
 ## Text Box Trim
 
@@ -512,21 +429,18 @@ Remove extra leading space above and/or below text. Useful for tight component l
 
 Text box trim will only affect elements with block or inline-block styled context. It may have no effect on elements with inline or flex context.
 
-<code-well-header>
+<code-example vueCode='
+<dt-text as="p" text-box-trim="start">....</dt-text>
+<dt-text as="p" text-box-trim="end">....</dt-text>
+<dt-text as="p" text-box-trim="both">....</dt-text>
+'>
   <dt-stack gap="500" :direction="{ 'default': 'column', 'md': 'row' }">
     <dt-text as="p" class="d-bgc-moderate-opaque"><strong>No trim:</strong> lorem ipsum dolor sit amet</dt-text>
     <dt-text as="p" text-box-trim="start" class="d-bgc-moderate-opaque"><strong>Trim start:</strong> lorem ipsum dolor sit amet</dt-text>
     <dt-text as="p" text-box-trim="end" class="d-bgc-moderate-opaque"><strong>Trim end:</strong> lorem ipsum dolor sit amet</dt-text>
     <dt-text as="p" text-box-trim="both" class="d-bgc-moderate-opaque"><strong>Trim both:</strong> lorem ipsum dolor sit amet</dt-text>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-text as="p" text-box-trim="start">....</dt-text>
-<dt-text as="p" text-box-trim="end">....</dt-text>
-<dt-text as="p" text-box-trim="both">....</dt-text>
-'/>
+</code-example>
 
 <dialtone-usage>
 <template #do>
@@ -555,14 +469,9 @@ vueCode='
 
 ### Profile Card
 
-<code-well-header>
-  <ExampleProfileCard />
-</code-well-header>
-
-<code-example-tabs
-vueCode='
+<code-example vueCode='
 <dt-stack gap="500">
-  <dt-stack gap="400" class="d-jc-space-between">
+  <dt-stack gap="400" justify="space-between">
     <dt-stack>
       <dt-text as="h2" kind="headline" size="xl" strength="medium" density="200" class="d-fs-400">
         Katie Rodriguez
@@ -609,12 +518,13 @@ vueCode='
     </dt-button>
   </dt-stack>
 </dt-stack>
-'
-/>
+'>
+  <ExampleProfileCard />
+</code-example>
 
 ### Call Log
 
-<code-well-header>
+<code-example>
   <dt-stack gap="400" class="d-w100p">
     <dt-text as="h2" kind="headline" size="lg">Saturday, May 24, 2025</dt-text>
     <dt-stack direction="row" gap="450" class="d-w100p">
@@ -634,29 +544,7 @@ vueCode='
       <dt-badge kind="count" type="bulletin" text="6" />
     </dt-stack>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-text as="h2" kind="headline" size="lg">Saturday, May 24, 2025</dt-text>
-<dt-stack direction="row" gap="450" class="d-w100p">
-  <dt-avatar full-name="Ashanti Trevor" />
-  <dt-stack class="d-fl1">
-    <dt-text kind="body" size="sm" strength="bold">Ashanti Trevor</dt-text>
-    <dt-stack direction="row" gap="300">
-      <dt-stack direction="row" gap="400">
-        <dt-icon name="phone-outgoing" size="200" class="d-fc-tertiary" />
-        <dt-text kind="body" size="xs" tone="tertiary">Outgoing call</dt-text>
-      </dt-stack>
-      <dt-text kind="body" size="xs" tone="tertiary">&bull;</dt-text>
-      <dt-text kind="body" size="xs" tone="tertiary">2 minutes 10 seconds</dt-text>
-    </dt-stack>
-  </dt-stack>
-  <dt-text kind="body" size="sm" tone="tertiary">3:23 pm</dt-text>
-  <dt-badge kind="count" type="bulletin" text="6" />
-</dt-stack>
-'
-/>
+</code-example>
 
 ## Accessibility
 

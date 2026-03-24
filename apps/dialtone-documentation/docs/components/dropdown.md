@@ -9,51 +9,6 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["select","menu","picker","d-dropdown","DtDropdown","dt-dropdown"]
 ---
 
-<!-- <code-well-header>
-  <dt-dropdown navigation-type="arrow-keys">
-    <template #anchor="{ attrs }">
-      <dt-button v-bind="attrs">
-        Click to Open
-      </dt-button>
-    </template>
-    <template #list="{ close }">
-      <dt-list-item-group
-        heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
-        heading="Menu Heading A"
-      >
-        <dt-list-item
-          role="menuitem"
-          navigation-type="arrow-keys"
-          @click="close"
-        >
-          Menu Item 1
-        </dt-list-item>
-        <dt-dropdown-separator />
-        <dt-list-item
-          role="menuitem"
-          navigation-type="arrow-keys"
-          @click="close"
-        >
-          Menu Item 2
-        </dt-list-item>
-      </dt-list-item-group>
-      <dt-dropdown-separator />
-      <dt-list-item-group
-        heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
-        heading="Menu Heading B"
-      >
-        <dt-list-item
-          role="menuitem"
-          navigation-type="arrow-keys"
-          @click="close"
-        >
-          Menu Item 3
-        </dt-list-item>
-      </dt-list-item-group>
-    </template>
-  </dt-dropdown>
-</code-well-header> -->
-
 <component-combinator component-name="DtDropdown" />
 
 ## Usage
@@ -69,7 +24,7 @@ Use the Dropdown component when you have a list of links or actions that can be 
 
 ### Default
 
-<code-well-header>
+<code-example>
   <dt-dropdown navigation-type="arrow-keys">
     <template #anchor="{ attrs }">
       <dt-button v-bind="attrs">
@@ -88,61 +43,11 @@ Use the Dropdown component when you have a list of links or actions that can be 
       </dt-list-item>
     </template>
   </dt-dropdown>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div>
-  <div class="d-popover">
-    <div id="DtPopover__anchor2">
-      <button class="base-button__button d-btn d-btn--primary">
-        <span class="d-btn__label base-button__label"> Click to open </span>
-      </button>
-    </div>
-  </div>
-</div>
-<div class="tippy-box d-ps-absolute" data-tippy-root="" id="tippy-13" data-popper-placement="bottom" style="...">
-  <div id="dt7" role="menu" aria-hidden="false" aria-labelledby="DtPopover__anchor8" aria-modal="false" class="d-popover__dialog d-popover__dialog--modal" tabindex="-1" style="...">
-    <div class="d-popover__content">
-      <ul id="dt6" class="d-dropdown-list d-py0">
-        <li class="d-list-item" tabindex="-1" role="menuitem" aria-selected="false">
-          <div class="d-item-layout">
-            <section class="d-item-layout--content">
-              <div class="d-item-layout--title">Menu Item 1</div>
-            </section>
-          </div>
-        </li>
-        ...
-      </ul>
-    </div>
-  </div>
-</div>
-'
-vueCode='
-<dt-dropdown navigation-type="arrow-keys">
-  <template #anchor="{ attrs }">
-    <dt-button v-bind="attrs">
-      Click to open
-    </dt-button>
-  </template>
-  <template #list="{ close }">
-    <dt-list-item
-      v-for="(item) in items"
-      :key="item.id"
-      role="menuitem"
-      :navigation-type="arrow-keys"
-      @click="close"
-    >
-      {{ item.name }}
-    </dt-list-item>
-  </template>
-</dt-dropdown>
-'
-/>
+</code-example>
 
 ### With Sections and Headings
 
-<code-well-header>
+<code-example>
   <dt-dropdown navigation-type="arrow-keys">
     <template #anchor="{ attrs }">
       <dt-button v-bind="attrs">
@@ -185,114 +90,13 @@ vueCode='
       </dt-list-item-group>
     </template>
   </dt-dropdown>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div>
-  <div class="d-popover">
-    <div id="DtPopover__anchor2">
-      <button class="base-button__button d-btn d-btn--primary">
-        <span class="d-btn__label base-button__label"> Click to open </span>
-      </button>
-    </div>
-  </div>
-</div>
-<div class="tippy-box d-ps-absolute" data-tippy-root="" id="tippy-13" data-popper-placement="bottom" style="...">
-  <div id="dt7" role="menu" aria-hidden="false" aria-labelledby="DtPopover__anchor8" aria-modal="false" class="d-popover__dialog d-popover__dialog--modal" tabindex="-1" style="...">
-    <div class="d-popover__content">
-      <ul id="dt6" class="d-dropdown-list d-py0">
-        <ul id="dt16" class="d-list-item-group" role="group" aria-labelledby="dt16-heading">
-          <li id="dt16-heading" role="presentation" class="dt-dropdown-list--header d-py4 d-px8 d-fw-semibold d-c-default">Menu Heading A</li>
-          <li id="dt17" class="d-list-item d-list-item--static" tabindex="-1" role="listitem">
-            <div class="d-item-layout">
-              <section class="d-item-layout--content">
-                <div class="d-item-layout--title">
-                  Menu Item 1
-                </div>
-              </section>
-            </div>
-          </li>
-          <li aria-hidden="true" class="d-list-item-separator"></li>
-          <li id="dt18" class="d-list-item d-list-item--static" tabindex="-1" role="listitem">
-            <div class="d-item-layout">
-              <section class="d-item-layout--content">
-                <div class="d-item-layout--title">
-                  Menu Item 2
-                </div>
-              </section>
-            </div>
-          </li>
-        </ul>
-        <li aria-hidden="true" class="d-list-item-separator"></li>
-        <ul id="dt19" class="d-list-item-group" role="group" aria-labelledby="dt19-heading">
-          <li id="dt19-heading" role="presentation" class="dt-dropdown-list--header d-py4 d-px8 d-fw-semibold d-c-default">Menu Heading B</li>
-          <li id="dt20" class="d-list-item d-list-item--static" tabindex="-1" role="listitem">
-            <div class="d-item-layout">
-              <section class="d-item-layout--content">
-                <div class="d-item-layout--title">
-                  Menu Item 3
-                </div>
-              </section>
-            </div>
-          </li>
-        </ul>
-      </ul>
-    </div>
-  </div>
-</div>
-'
-vueCode='
-<dt-dropdown navigation-type="arrow-keys">
-  <template #anchor="{ attrs }">
-    <dt-button v-bind="attrs">
-      Click to open
-    </dt-button>
-  </template>
-  <template #list="{ close }">
-    <dt-list-item-group
-      heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
-      heading="Menu Heading A"
-    >
-      <dt-list-item
-        role="menuitem"
-        navigation-type="arrow-keys"
-        @click="close"
-      >
-        Menu Item 1
-      </dt-list-item>
-      <dt-dropdown-separator />
-      <dt-list-item
-        role="menuitem"
-        navigation-type="arrow-keys"
-        @click="close"
-      >
-        Menu Item 2
-      </dt-list-item>
-    </dt-list-item-group>
-    <dt-dropdown-separator />
-    <dt-list-item-group
-      heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
-      heading="Menu Heading B"
-    >
-      <dt-list-item
-        role="menuitem"
-        navigation-type="arrow-keys"
-        @click="close"
-      >
-        Menu Item 3
-      </dt-list-item>
-    </dt-list-item-group>
-  </template>
-</dt-dropdown>
-'
-showHtmlWarning />
+</code-example>
 
 ### Context Menu
 
 Set `openOnContext=true` to open the menu on right-click (context menu) and disable the default trigger behavior.
 
-<code-well-header>
+<code-example>
   <dt-dropdown navigation-type="arrow-keys" :open-on-context="true">
     <template #anchor="{ attrs }">
       <div
@@ -314,39 +118,17 @@ Set `openOnContext=true` to open the menu on right-click (context menu) and disa
       </dt-list-item>
     </template>
   </dt-dropdown>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-dropdown navigation-type="arrow-keys" :open-on-context="true">
-  <template #anchor="{ attrs }">
-    <div
-      v-bind="attrs"
-      class="d-ba d-bas-dashed d-w264 d-py48 d-ta-center d-bgc-black-300"
-    >
-      Right click to open
-    </div>
-  </template>
-  <template #list="{ close }">
-    <dt-list-item
-      v-for="(item) in items"
-      :key="item.id"
-      role="menuitem"
-      :navigation-type="arrow-keys"
-      @click="close"
-    >
-      {{ item.name }}
-    </dt-list-item>
-  </template>
-</dt-dropdown>
-'
-/>
+</code-example>
 
 ## Content Mode
 
 Dropdown content renders outside the DOM tree. Use the `contentMode` prop to apply color mode (invert, light, dark) to the positioned content. See [Positioned Components](/components/mode-island.html#positioned-components) for details.
 
-<code-well-header>
+<code-example vueCode='
+<dt-dropdown content-mode="invert">...</dt-dropdown>
+<dt-dropdown content-mode="dark">...</dt-dropdown>
+<dt-dropdown content-mode="light">...</dt-dropdown>
+'>
   <dt-dropdown content-mode="invert" navigation-type="arrow-keys" placement="bottom-start">
     <template #anchor="{ attrs }">
       <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined">
@@ -362,15 +144,7 @@ Dropdown content renders outside the DOM tree. Use the `contentMode` prop to app
       <dt-list-item role="menuitem" @click="close">Option 3</dt-list-item>
     </template>
   </dt-dropdown>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-dropdown content-mode="invert">...</dt-dropdown>
-<dt-dropdown content-mode="dark">...</dt-dropdown>
-<dt-dropdown content-mode="light">...</dt-dropdown>
-'
-/>
+</code-example>
 
 ## Vue API
 

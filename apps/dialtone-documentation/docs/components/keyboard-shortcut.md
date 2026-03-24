@@ -9,26 +9,15 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["hotkey", "key binding", "shortcut key", "d-kbd", "DtKeyboardShortcut", "dt-keyboard-shortcut", "kbd", "accelerator"]
 ---
 
-<!-- <code-well-header>
-  <dt-keyboard-shortcut shortcut="{cmd}+Ctrl+X"/>
-</code-well-header> -->
-
 <component-combinator component-name="DtKeyboardShortcut" />
 
 ## Base
 
 Keyboard shortcut outlines a key combination with a border to represent a keyboard shortcut. `+` will be rendered as an icon rather than text. Supported symbol tags can be used in the shortcut prop, see the [Props, Slots & Events](#vue-api) section.
 
-<code-well-header>
-  <dt-keyboard-shortcut ref="baseExample" shortcut="{cmd}+Ctrl+X"/>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs.baseExample"
-vueCode='
-<dt-keyboard-shortcut shortcut="{cmd}+Ctrl+X"/>
-'
-/>
+<code-example>
+  <dt-keyboard-shortcut shortcut="{cmd}+Ctrl+X"/>
+</code-example>
 
 ## Usage
 
@@ -49,78 +38,41 @@ vueCode='
 
 In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#inverting) on the component element.
 
-<code-well-header>
+<code-example>
   <div class="d-bgc-contrast d-p16">
-    <dt-keyboard-shortcut v-dt-mode:invert ref="invertedExample" shortcut="{cmd}+Ctrl+X" />
+    <dt-keyboard-shortcut v-dt-mode:invert shortcut="{cmd}+Ctrl+X" />
   </div>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.invertedExample'
-vueCode='
-<dt-keyboard-shortcut v-dt-mode:invert shortcut="{cmd}+Ctrl+X" />
-'
-showHtmlWarning />
+</code-example>
 
 ### Shortcut Size Variation
 
-<code-well-header>
+<code-example>
   <dt-keyboard-shortcut
     class="d-fs-200"
     shortcut="{cmd}+Y"
-    ref="sizeExample"
   />
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs.sizeExample"
-vueCode='
-<dt-keyboard-shortcut class="d-fs-200" shortcut="{cmd}+Y" />
-'
-/>
+</code-example>
 
 ### All Available Shortcut Aliases
 
-<code-well-header>
+<code-example>
   <dt-keyboard-shortcut
-    ref="allShortcuts"
-    shortcut="{cmd}+{opt}+{win}+{arrow-right}+{arrow-left}+{arrow-up}+{arrow-down}"
+    shortcut="{cmd}+{opt}+{win}+{arrow-right}+{arrow-left}+{arrow-up}+{arrow-down}+A"
   />
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs.allShortcuts"
-vueCode='
-<dt-keyboard-shortcut
-  shortcut="{cmd}+{opt}+{win}+{arrow-right}+{arrow-left}+{arrow-up}+{arrow-down}"
-/>
-'
-/>
+</code-example>
 
 ### Inline with Text and Screen Reader Text
 
-<code-well-header>
-  <div ref="inlineExample">
-  Press
-  <dt-keyboard-shortcut
-    screen-reader-text="Control plus F5"
-    shortcut="Ctrl + F5"
-  />
-  to hard refresh the page.
-  </div>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs.inlineExample"
-vueCode='
-Press
-<dt-keyboard-shortcut
-  screen-reader-text="Control plus F5"
-  shortcut="Ctrl + F5"
-/>
-to hard refresh the page.
-'
-/>
+<code-example>
+  <dt-text kind="body" size="md">
+    Press
+    <dt-keyboard-shortcut
+      screen-reader-text="Control plus F5"
+      shortcut="Ctrl + F5"
+    />
+    to hard refresh the page.
+  </dt-text>
+</code-example>
 
 ## Accessibility
 

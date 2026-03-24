@@ -7,7 +7,7 @@ status: beta
 keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFilterPill", "dt-filter-pill", "removable tag", "dismissible chip"]
 ---
 
-<code-well-header>
+<code-example only-show="demo">
   <dt-stack direction="row" gap="400">
     <dt-filter-pill
       :model-value="[{name: 'Address', active: true}, {name: 'Call Purpose', active: true}, {name: 'Action Item'}, {name: 'Negative Sentiment'}, {name: 'Warranty Inquiry', active: true}]"
@@ -60,7 +60,7 @@ keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFil
       Reset
     </dt-button>
   </dt-stack>
-</code-well-header>
+</code-example>
 
 <component-combinator component-name="DtFilterPill" />
 
@@ -96,95 +96,66 @@ keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFil
 
 ### Base
 
-<code-well-header>
-  <dt-stack direction="row" gap="400">
-      <dt-filter-pill
-        :model-value="[{name: 'Email'}, {name: 'Phone'}, {name: 'Chat'}, {name: 'Social'}, {name: 'SMS'}]"
-        label="Channel"
-        ref="simpleExample"
-      >
-      </dt-filter-pill>
+<code-example>
+  <dt-stack direction="row" gap="400" data-demo-wrapper>
+    <dt-filter-pill
+      :model-value="[{name: 'Email'}, {name: 'Phone'}, {name: 'Chat'}, {name: 'Social'}, {name: 'SMS'}]"
+      label="Channel"
+    >
+    </dt-filter-pill>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.simpleExample'
-vueCode='<dt-filter-pill :model-value="[{name: &apos;Email&apos;}, {name: &apos;Phone&apos;}, {name: &apos;Chat&apos;}, {name: &apos;Social&apos;}, {name: &apos;SMS&apos;}]" label="Channel" />'
-showHtmlWarning />
+</code-example>
 
 ### Active
 
 The pill becomes active when any filter item has `active: true`.
 
-<code-well-header>
-  <dt-stack direction="row" gap="400">
-      <dt-filter-pill
-        :model-value="[{name: 'Headquarters', active: true}, {name: 'Westside'}, {name: 'Downtown'}]"
-        label="Contact centers"
-        ref="activeExample"
-      >
-      </dt-filter-pill>
+<code-example>
+  <dt-stack direction="row" gap="400" data-demo-wrapper>
+    <dt-filter-pill
+      :model-value="[{name: 'Headquarters', active: true}, {name: 'Westside'}, {name: 'Downtown'}]"
+      label="Contact centers"
+    >
+    </dt-filter-pill>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.activeExample'
-vueCode='<dt-filter-pill :model-value="[{name: &apos;Headquarters&apos;, active: true}, {name: &apos;Westside&apos;}, {name: &apos;Downtown&apos;}]" label="Contact centers" />'
-showHtmlWarning />
+</code-example>
 
 ### Disabled
 
-<code-well-header>
-  <dt-stack direction="row" gap="400">
-    <dt-filter-pill label="Conversation type" disabled ref="disabledFilter"></dt-filter-pill>
+<code-example>
+  <dt-stack direction="row" gap="400" data-demo-wrapper>
+    <dt-filter-pill label="Conversation type" disabled></dt-filter-pill>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.disabledFilter'
-vueCode='<dt-filter-pill label="Conversation type" disabled />'
-showHtmlWarning />
+</code-example>
 
 ### Read only
 
 Its value is reflected in the filter set but cannot be opened, cleared, or modified. Functionally and visually distinct from disabled.
 
-<code-well-header>
-  <dt-stack direction="row" gap="400">
+<code-example>
+  <dt-stack direction="row" gap="400" data-demo-wrapper>
     <dt-filter-pill
       :model-value="[{name: 'Headquarters', active: true}, {name: 'Westside', active: true}, {name: 'Downtown'}]"
       label="Contact centers"
       read-only
-      ref="readOnlyExample"
     ></dt-filter-pill>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.readOnlyExample'
-vueCode='<dt-filter-pill :model-value="[{name: &apos;Headquarters&apos;, active: true}, {name: &apos;Westside&apos;, active: true}, {name: &apos;Downtown&apos;}]" label="Contact centers" read-only />'
-showHtmlWarning />
+</code-example>
 
 ### Size
 
 `sm` is the default.
 
-<code-well-header>
+<code-example vueCode='<dt-filter-pill label="{size}" size="{size}" />'>
   <dt-stack direction="row" gap="400">
     <dt-filter-pill
       v-for="size in sizes"
       :key="size"
       :label="size"
       :size="size"
-      ref="sizeExample"
     ></dt-filter-pill>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.sizeExample[1]'
-vueCode='<dt-filter-pill label="{size}" size="{size}" />'
-showHtmlWarning />
+</code-example>
 
 ## Interaction patterns
 
@@ -192,54 +163,41 @@ showHtmlWarning />
 
 A clear button appears when any filter is active. It emits the `reset` event when clicked.
 
-<code-well-header>
-  <dt-stack direction="row" gap="400">
+<code-example>
+  <dt-stack direction="row" gap="400" data-demo-wrapper>
     <dt-filter-pill
       label="Channel"
-      ref="clearableExample"
       :model-value="[{ name: 'Option 1' }, { name: 'Option 2', active: true }, { name: 'Option 3' }]"
       end-tooltip-text="Remove"
     >
     </dt-filter-pill>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.clearableExample'
-vueCode='<dt-filter-pill label="Channel" :model-value="[{name: &apos;Option 1&apos;}, {name: &apos;Option 2&apos;, active: true}, {name: &apos;Option 3&apos;}]" end-tooltip-text="Remove" />'
-showHtmlWarning />
+</code-example>
 
 ### Non clearable
 
 Setting the `hide-clear` prop hides the reset/clear button.
 
-<code-well-header>
-  <dt-stack direction="row" gap="400">
+<code-example>
+  <dt-stack direction="row" gap="400" data-demo-wrapper>
     <dt-filter-pill
       :model-value="[{name: '0–5 min', active: true}, {name: '5–15 min'}, {name: '15–30 min'}, {name: '30+ min'}]"
       label="Duration"
-      ref="nonClearableExample"
       hide-clear
     >
     </dt-filter-pill>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.nonClearableExample'
-vueCode='<dt-filter-pill label="Duration" :model-value="[{name: &apos;0–5 min&apos;, active: true}, {name: &apos;5–15 min&apos;}, {name: &apos;15–30 min&apos;}, {name: &apos;30+ min&apos;}]" hide-clear />'
-showHtmlWarning />
+</code-example>
 
 ### Defer selection
 
 Setting `defer-selection` holds checkbox changes in a pending state until Apply is clicked.
 Cancel, Escape, or clicking outside discards pending changes.
 
-<code-well-header>
-  <dt-stack direction="row" gap="400">
+<code-example>
+  <dt-stack direction="row" gap="400" data-demo-wrapper>
     <dt-filter-pill
       :model-value="[{name: 'Email'}, {name: 'Phone', active: true}, {name: 'Chat'}, {name: 'Social'}, {name: 'SMS'}]"
-      ref="deferredExample"
       label="Channel"
       end-tooltip-text="Remove"
       defer-selection
@@ -247,12 +205,7 @@ Cancel, Escape, or clicking outside discards pending changes.
     >
     </dt-filter-pill>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.deferredExample'
-vueCode='<dt-filter-pill :model-value="[{name: &apos;Email&apos;}, {name: &apos;Phone&apos;, active: true}, {name: &apos;Chat&apos;}, {name: &apos;Social&apos;}, {name: &apos;SMS&apos;}]" label="Channel" defer-selection />'
-showHtmlWarning />
+</code-example>
 
 ### Dropdown
 
@@ -260,42 +213,7 @@ Setting `use-dropdown` switches the overlay from a popover to a dropdown with ke
 list items. This provides arrow key navigation, highlight management, and Enter/Space selection
 out of the box — ideal for single-select filter patterns.
 
-<code-well-header>
-  <dt-stack direction="row" gap="400">
-    <dt-filter-pill
-      v-model="dropdownTypes"
-      :start-tooltip-text="selectedDropdownType !== 'All Conversations'
-        ? 'Conversation type'
-        : ''"
-      end-tooltip-text="Remove"
-      use-dropdown
-      ref="dropdownExample"
-      @clear="resetDropdownType"
-    >
-      <template #default>
-        {{ selectedDropdownType === 'All Conversations'
-          ? 'Conversation type'
-          : selectedDropdownType }}
-      </template>
-      <template #content="{ close }">
-        <dt-list-item
-          v-for="filter in dropdownTypes"
-          :key="filter.name"
-          role="menuitem"
-          navigation-type="arrow-keys"
-          :selected="filter.name === selectedDropdownType"
-          @click="selectDropdownType(filter.name, close)"
-        >
-          {{ filter.name }}
-        </dt-list-item>
-      </template>
-    </dt-filter-pill>
-  </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.dropdownExample'
-vueCode='<dt-filter-pill
+<code-example vueCode='<dt-filter-pill
   :model-value="[{name: &apos;All Conversations&apos;}, {name: &apos;Only Calls&apos;}, {name: &apos;Only Meetings&apos;}, {name: &apos;Only Digital&apos;}]"
   :start-tooltip-text="selectedType !== &apos;All Conversations&apos;
     ? &apos;Conversation type&apos;
@@ -321,8 +239,37 @@ vueCode='<dt-filter-pill
       {{ filter.name }}
     </dt-list-item>
   </template>
-</dt-filter-pill>'
-showHtmlWarning />
+</dt-filter-pill>'>
+  <dt-stack direction="row" gap="400">
+    <dt-filter-pill
+      v-model="dropdownTypes"
+      :start-tooltip-text="selectedDropdownType !== 'All Conversations'
+        ? 'Conversation type'
+        : ''"
+      end-tooltip-text="Remove"
+      use-dropdown
+      @clear="resetDropdownType"
+    >
+      <template #default>
+        {{ selectedDropdownType === 'All Conversations'
+          ? 'Conversation type'
+          : selectedDropdownType }}
+      </template>
+      <template #content="{ close }">
+        <dt-list-item
+          v-for="filter in dropdownTypes"
+          :key="filter.name"
+          role="menuitem"
+          navigation-type="arrow-keys"
+          :selected="filter.name === selectedDropdownType"
+          @click="selectDropdownType(filter.name, close)"
+        >
+          {{ filter.name }}
+        </dt-list-item>
+      </template>
+    </dt-filter-pill>
+  </dt-stack>
+</code-example>
 
 ## Slots
 
@@ -334,13 +281,12 @@ Using the `default` slot, you can override the `label` prop.
 
 Using the `default` scoped slot, you can display a count of active filters alongside the label.
 
-<code-well-header>
-  <dt-stack direction="row" gap="400">
+<code-example>
+  <dt-stack direction="row" gap="400" data-demo-wrapper>
     <dt-filter-pill
       :model-value="[{name: 'Address', active: true}, {name: 'Call Purpose', active: true}, {name: 'Action Item'}, {name: 'Negative Sentiment'}, {name: 'Warranty Inquiry', active: true}]"
       label="Contact centers"
       end-tooltip-text="Remove"
-      ref="badgeCountExample"
     >
       <template #default="{ label, filters, activeFilters }">
         {{ label }}<template v-if="activeFilters.length">:
@@ -350,31 +296,18 @@ Using the `default` scoped slot, you can display a count of active filters along
       </template>
     </dt-filter-pill>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.badgeCountExample'
-vueCode='<dt-filter-pill :model-value="[{name: &apos;Address&apos;, active: true}, {name: &apos;Call Purpose&apos;, active: true}, {name: &apos;Action Item&apos;}, {name: &apos;Negative Sentiment&apos;}, {name: &apos;Warranty Inquiry&apos;, active: true}]" label="Contact centers" end-tooltip-text="Remove">
-  <template #default="{ label, filters, activeFilters }">
-    {{ label }}<template v-if="activeFilters.length">:
-    <strong>
-      {{ activeFilters.length === filters.length ? &apos;All&apos; : activeFilters.length }}
-    </strong></template>
-  </template>
-</dt-filter-pill>'
-showHtmlWarning />
+</code-example>
 
 #### Example: Active filter list
 
 Shows the first active filter name using `activeFilterList`, with overflow count for remaining selections (e.g., "Email +2").
 
-<code-well-header>
-  <dt-stack direction="row" gap="400">
+<code-example>
+  <dt-stack direction="row" gap="400" data-demo-wrapper>
     <dt-filter-pill
       :model-value="[{name: 'Email', active: true}, {name: 'Phone', active: true}, {name: 'Chat', active: true}, {name: 'Social'}, {name: 'SMS'}]"
       label="Channel"
       end-tooltip-text="Remove"
-      ref="filterListExample"
     >
       <template #default="{ label, filters, activeFilters, activeFilterList, activeFilterOverflow }">
         {{ label }}<template v-if="activeFilters.length">:
@@ -385,35 +318,21 @@ Shows the first active filter name using `activeFilterList`, with overflow count
       </template>
     </dt-filter-pill>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.filterListExample'
-vueCode='<dt-filter-pill :model-value="[{name: &apos;Email&apos;, active: true}, {name: &apos;Phone&apos;, active: true}, {name: &apos;Chat&apos;, active: true}, {name: &apos;Social&apos;}, {name: &apos;SMS&apos;}]" label="Channel" end-tooltip-text="Remove">
-  <template #default="{ label, filters, activeFilters, activeFilterList, activeFilterOverflow }">
-    {{ label }}<template v-if="activeFilters.length">:
-    <strong>
-      {{ activeFilters.length === filters.length ? &apos;All&apos; : activeFilterList }}
-    </strong>
-    <template v-if="activeFilterOverflow"> {{ activeFilterOverflow }}</template></template>
-  </template>
-</dt-filter-pill>'
-showHtmlWarning />
+</code-example>
 
 #### Example: Radio selection
 
 Combining the `default` and `content` slots with a radio group creates a single-select filter.
 The label updates to show the selected option, and a clear button resets to the default.
 
-<code-well-header>
-  <dt-stack direction="row" gap="400">
+<code-example>
+  <dt-stack direction="row" gap="400" data-demo-wrapper>
     <dt-filter-pill
       :model-value="[{name: 'All Conversations'}, {name: 'Only Calls'}, {name: 'Only Meetings'}, {name: 'Only Digital'}]"
       :start-tooltip-text="selectedConversationType !== 'All Conversations'
         ? 'Conversation type'
         : ''"
       end-tooltip-text="Remove"
-      ref="radioExample"
       @clear="selectedConversationType = 'All Conversations'"
     >
       <template #default>
@@ -437,80 +356,36 @@ The label updates to show the selected option, and a clear button resets to the 
       </template>
     </dt-filter-pill>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.radioExample'
-vueCode='<dt-filter-pill
-  :model-value="[{name: &apos;All Conversations&apos;}, {name: &apos;Only Calls&apos;}, {name: &apos;Only Meetings&apos;}, {name: &apos;Only Digital&apos;}]"
-  :start-tooltip-text="selectedConversationType !== &apos;All Conversations&apos;
-    ? &apos;Conversation type&apos;
-    : &apos;&apos;"
-  end-tooltip-text="Remove"
-  @clear="selectedConversationType = &apos;All Conversations&apos;"
->
-  <template #default>
-    {{ selectedConversationType === &apos;All Conversations&apos;
-      ? &apos;Conversation type&apos;
-      : selectedConversationType }}
-  </template>
-  <template #content>
-    <dt-radio-group v-model="selectedConversationType" name="conversation-type-filter">
-      <dt-radio
-        v-for="filter in conversationTypes"
-        :key="filter.name"
-        :label="filter.name"
-        :value="filter.name"
-        @input="$event => selectedConversationType = $event"
-      />
-    </dt-radio-group>
-  </template>
-</dt-filter-pill>
-// filters = [{ name: &quot;Option 1&quot; }, { name: &quot;Option 2&quot; }]'
-showHtmlWarning />
+</code-example>
 
 ### Content
 
 Using the `content` slot, you can override the popover content with custom markup.
 
-<code-well-header>
-  <dt-stack direction="row" gap="400">
+<code-example>
+  <dt-stack direction="row" gap="400" data-demo-wrapper>
     <dt-filter-pill
       :model-value="[{name: 'Contains'}, {name: 'Starts with'}]"
       label="Keyword"
-      ref="contentSlotExample"
     >
       <template #content>
         Enter a keyword to filter results
       </template>
     </dt-filter-pill>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.contentSlotExample'
-vueCode='<dt-filter-pill label="Keyword" :model-value="[{name: &apos;Contains&apos;}, {name: &apos;Starts with&apos;}]">
-  <template #content>
-    Enter a keyword to filter results
-  </template>
-</dt-filter-pill>'
-showHtmlWarning />
+</code-example>
 
 ## Content Mode
 
 Filter Pill popover content renders outside the DOM tree. Use the `contentMode` prop to apply color mode (invert, light, dark) to the positioned content. See [Positioned Components](/components/mode-island.html#positioned-components) for details.
 
-<code-well-header>
-  <dt-filter-pill content-mode="invert" label="Inverted" :model-value="[{ name: 'Orange', active: true }, { name: 'Apple' }]" end-tooltip-text="Remove" />
-</code-well-header>
-
-<code-example-tabs
-vueCode='
+<code-example vueCode='
 <dt-filter-pill content-mode="invert">...</dt-filter-pill>
 <dt-filter-pill content-mode="dark">...</dt-filter-pill>
 <dt-filter-pill content-mode="light">...</dt-filter-pill>
-'
-/>
+'>
+  <dt-filter-pill content-mode="invert" label="Inverted" :model-value="[{ name: 'Orange', active: true }, { name: 'Apple' }]" end-tooltip-text="Remove" />
+</code-example>
 
 ## Vue API
 
@@ -576,36 +451,6 @@ function resetHeroFilters () {
   heroConversationTypes.value.forEach(f => { f.active = false; });
   deferredFilters.value.forEach(f => { delete f.active; });
 }
-const baseFilters = ref([
-  {name: 'Email'},
-  {name: 'Phone'},
-  {name: 'Chat'},
-  {name: 'Social'},
-  {name: 'SMS'},
-]);
-const activeFilters = ref([
-  {name: 'Headquarters', active: true},
-  {name: 'Westside'},
-  {name: 'Downtown'},
-]);
-const readOnlyFilters = ref([
-  {name: 'Headquarters', active: true},
-  {name: 'Westside', active: true},
-  {name: 'Downtown'},
-]);
-const clearableFilters = ref([
-  {name: 'Email', active: true},
-  {name: 'Phone'},
-  {name: 'Chat'},
-  {name: 'Social'},
-  {name: 'SMS'},
-]);
-const nonClearableFilters = ref([
-  {name: '0–5 min', active: true},
-  {name: '5–15 min'},
-  {name: '15–30 min'},
-  {name: '30+ min'},
-]);
 const deferredFilters = ref([
   {name: 'Email'},
   {name: 'Phone', active: true },
@@ -613,35 +458,12 @@ const deferredFilters = ref([
   {name: 'Social'},
   {name: 'SMS'},
 ]);
-const defaultSlotFilters = ref([
-  {name: '1 Star'},
-  {name: '2 Stars'},
-  {name: '3 Stars'},
-  {name: '4 Stars'},
-  {name: '5 Stars'},
-]);
-const contentSlotFilters = ref([
-  {name: 'Contains'},
-  {name: 'Starts with'},
-]);
-const overlayCustomFilters = ref([
-  {name: 'Email'},
-  {name: 'Phone'},
-  {name: 'Chat'},
-]);
 const momentCount = ref([
   {name: 'Address', active: true},
   {name: 'Call Purpose', active: true},
   {name: 'Action Item'},
   {name: 'Negative Sentiment'},
   {name: 'Warranty Inquiry', active: true },
-]);
-const channelsFilterList = ref([
-  {name: 'Email', active: true},
-  {name: 'Phone', active: true},
-  {name: 'Chat', active: true},
-  {name: 'Social'},
-  {name: 'SMS'},
 ]);
 const conversationTypes = ref([
   {name: 'All Conversations'},

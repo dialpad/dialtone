@@ -7,14 +7,14 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-segmented-co
 keywords: ["segmented control", "toggle group", "button toggle", "radio group", "d-segmented-control", "DtSegmentedControl", "dt-segmented-control", "select", "scope", "content switcher"]
 ---
 
-<code-well-header>
+<code-example only-show="demo">
   <dt-segmented-control v-model="selected" aria-label="View filter">
     <dt-segmented-control-item value="all">All</dt-segmented-control-item>
     <dt-segmented-control-item value="favorites">Favorites</dt-segmented-control-item>
     <dt-segmented-control-item value="recent">Recent</dt-segmented-control-item>
     <dt-segmented-control-item value="groups">Groups</dt-segmented-control-item>
   </dt-segmented-control>
-</code-well-header>
+</code-example>
 
 <component-combinator component-name="DtSegmentedControl" />
 
@@ -64,8 +64,8 @@ Each `dt-segmented-control-item` wraps a `DtButton` internally and inherits its 
 
 ### Default
 
-<code-well-header>
-  <div class="d-w100p">
+<code-example>
+  <div class="d-w100p" data-demo-wrapper>
     <dt-segmented-control v-model="selected" aria-label="View filter">
       <dt-segmented-control-item value="all">All</dt-segmented-control-item>
       <dt-segmented-control-item value="favorites">Favorites</dt-segmented-control-item>
@@ -73,24 +73,18 @@ Each `dt-segmented-control-item` wraps a `DtButton` internally and inherits its 
       <dt-segmented-control-item value="groups">Groups</dt-segmented-control-item>
     </dt-segmented-control>
   </div>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-segmented-control v-model="selected" aria-label="View filter">
-  <dt-segmented-control-item value="all">All</dt-segmented-control-item>
-  <dt-segmented-control-item value="favorites">Favorites</dt-segmented-control-item>
-  <dt-segmented-control-item value="recent">Recent</dt-segmented-control-item>
-  <dt-segmented-control-item value="groups">Groups</dt-segmented-control-item>
-</dt-segmented-control>
-' />
+</code-example>
 
 ### Borderless
 
 Remove the border and padding from the container.
 
-<code-well-header>
-  <div class="d-w100p">
+<code-example vueCode='
+<dt-segmented-control v-model="selected" borderless>
+  ...
+</dt-segmented-control>
+'>
+  <div class="d-w100p" data-demo-wrapper>
     <dt-segmented-control v-model="selected" borderless aria-label="View filter">
       <dt-segmented-control-item value="all">All</dt-segmented-control-item>
       <dt-segmented-control-item value="favorites">Favorites</dt-segmented-control-item>
@@ -98,19 +92,16 @@ Remove the border and padding from the container.
       <dt-segmented-control-item value="groups">Groups</dt-segmented-control-item>
     </dt-segmented-control>
   </div>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-segmented-control v-model="selected" borderless>
-  ...
-</dt-segmented-control>
-' />
+</code-example>
 
 ### Hide Divider
 
-<code-well-header>
-  <div class="d-w100p">
+<code-example vueCode='
+<dt-segmented-control v-model="selected" hide-divider>
+  ...
+</dt-segmented-control>
+'>
+  <div class="d-w100p" data-demo-wrapper>
     <dt-segmented-control v-model="selected" hide-divider aria-label="View filter">
       <dt-segmented-control-item value="all">All</dt-segmented-control-item>
       <dt-segmented-control-item value="favorites">Favorites</dt-segmented-control-item>
@@ -118,21 +109,18 @@ vueCode='
       <dt-segmented-control-item value="groups">Groups</dt-segmented-control-item>
     </dt-segmented-control>
   </div>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-segmented-control v-model="selected" hide-divider>
-  ...
-</dt-segmented-control>
-' />
+</code-example>
 
 ### Spread Evenly
 
 Items share space equally. Only applies in horizontal orientation.
 
-<code-well-header>
-  <div class="d-w100p">
+<code-example vueCode='
+<dt-segmented-control v-model="selected" spread="evenly">
+  ...
+</dt-segmented-control>
+'>
+  <div class="d-w464" data-demo-wrapper>
     <dt-segmented-control v-model="spreadSelected" spread="evenly" aria-label="Spread example">
       <dt-segmented-control-item value="1">1</dt-segmented-control-item>
       <dt-segmented-control-item value="two">Two</dt-segmented-control-item>
@@ -140,40 +128,30 @@ Items share space equally. Only applies in horizontal orientation.
       <dt-segmented-control-item value="four">Four long label</dt-segmented-control-item>
     </dt-segmented-control>
   </div>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-segmented-control v-model="selected" spread="evenly">
-  ...
-</dt-segmented-control>
-' />
+</code-example>
 
 ### Disabled
 
 Add `disabled` to the group to disable all items.
 
-<code-well-header>
-  <div class="d-w100p">
+<code-example vueCode='
+<dt-segmented-control v-model="selected" disabled>
+  ...
+</dt-segmented-control>
+'>
+  <div class="d-w100p" data-demo-wrapper>
     <dt-segmented-control v-model="selected" disabled aria-label="Disabled example" hide-divider>
       <dt-segmented-control-item value="all">All</dt-segmented-control-item>
       <dt-segmented-control-item value="favorites">Favorites</dt-segmented-control-item>
       <dt-segmented-control-item value="recent">Recent</dt-segmented-control-item>
     </dt-segmented-control>
   </div>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-segmented-control v-model="selected" disabled>
-  ...
-</dt-segmented-control>
-' />
+</code-example>
 
 Add `disabled` to an individual item.
 
-<code-well-header>
-  <div class="d-w100p">
+<code-example>
+  <div class="d-w100p" data-demo-wrapper>
     <dt-segmented-control v-model="selected" aria-label="Individual disabled example">
       <dt-segmented-control-item value="all">All</dt-segmented-control-item>
       <dt-segmented-control-item value="favorites" disabled>Favorites</dt-segmented-control-item>
@@ -181,21 +159,16 @@ Add `disabled` to an individual item.
       <dt-segmented-control-item value="groups">Groups</dt-segmented-control-item>
     </dt-segmented-control>
   </div>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-segmented-control v-model="selected">
-  <dt-segmented-control-item value="all">All</dt-segmented-control-item>
-  <dt-segmented-control-item value="favorites" disabled>Favorites</dt-segmented-control-item>
-  <dt-segmented-control-item value="recent">Recent</dt-segmented-control-item>
-</dt-segmented-control>
-' />
+</code-example>
 
 ## Sizes
 
-<code-well-header>
-  <dt-stack gap="400" class="d-w100p">
+<code-example vueCode='
+<dt-segmented-control v-model="selected" size="xs|sm|md|lg|xl">
+  ...
+</dt-segmented-control>
+'>
+  <dt-stack gap="400" class="d-w100p" data-demo-wrapper>
     <dt-segmented-control v-model="selected" size="xs" aria-label="Extra small">
       <dt-segmented-control-item value="all">All</dt-segmented-control-item>
       <dt-segmented-control-item value="favorites">Favorites</dt-segmented-control-item>
@@ -222,14 +195,7 @@ vueCode='
       <dt-segmented-control-item value="recent">Recent</dt-segmented-control-item>
     </dt-segmented-control>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-segmented-control v-model="selected" size="xs|sm|md|lg|xl">
-  ...
-</dt-segmented-control>
-' />
+</code-example>
 
 ## Slots
 
@@ -237,8 +203,8 @@ vueCode='
 
 Use the `#startIcon` or `#endIcon` slot on `dt-segmented-control-item` to add an icon. The slot provides `iconSize` to match the control's size.
 
-<code-well-header>
-  <div class="d-w100p">
+<code-example>
+  <div class="d-w100p" data-demo-wrapper>
     <dt-segmented-control v-model="iconSelected" aria-label="List spacing">
       <dt-segmented-control-item value="compact">
         <template #startIcon="{ iconSize }">
@@ -260,91 +226,60 @@ Use the `#startIcon` or `#endIcon` slot on `dt-segmented-control-item` to add an
       </dt-segmented-control-item>
     </dt-segmented-control>
   </div>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-segmented-control v-model="selected" aria-label="List spacing">
-  <dt-segmented-control-item value="compact">
-    <template #startIcon="{ iconSize }">
-      <dt-icon name="list-spacing-compact" :size="iconSize" />
-    </template>
-    Compact
-  </dt-segmented-control-item>
-  ...
-</dt-segmented-control>
-' />
+</code-example>
 
 ### Icon Only
 
 Omit the default slot text to create icon-only items. Use the `label` prop for accessibility.
 
-<code-well-header>
-  <div class="d-w100p">
-    <dt-segmented-control v-model="iconOnlySelected" aria-label="Appearance mode">
-      <dt-segmented-control-item value="system" label="System">
-        <template #startIcon="{ iconSize }">
-          <dt-icon name="laptop-2" :size="iconSize" />
-        </template>
-      </dt-segmented-control-item>
-      <dt-segmented-control-item value="light" label="Light">
-        <template #startIcon="{ iconSize }">
-          <dt-icon name="sun" :size="iconSize" />
-        </template>
-      </dt-segmented-control-item>
-      <dt-segmented-control-item value="dark" label="Dark">
-        <template #startIcon="{ iconSize }">
-          <dt-icon name="moon" :size="iconSize" />
-        </template>
-      </dt-segmented-control-item>
-    </dt-segmented-control>
-  </div>
-  <div>
-    <dt-segmented-control v-model="iconOnlySelected" aria-label="Appearance mode" class="d-d-inline-flex">
-      <dt-segmented-control-item value="system" label="System">
-        <template #startIcon="{ iconSize }">
-          <dt-icon name="laptop-2" :size="iconSize" />
-        </template>
-      </dt-segmented-control-item>
-      <dt-segmented-control-item value="light" label="Light">
-        <template #startIcon="{ iconSize }">
-          <dt-icon name="sun" :size="iconSize" />
-        </template>
-      </dt-segmented-control-item>
-      <dt-segmented-control-item value="dark" label="Dark">
-        <template #startIcon="{ iconSize }">
-          <dt-icon name="moon" :size="iconSize" />
-        </template>
-      </dt-segmented-control-item>
-    </dt-segmented-control>
-  </div>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-segmented-control v-model="selected" aria-label="Appearance mode">
-  <dt-segmented-control-item value="system" label="System">
-    <template #startIcon="{ iconSize }">
-      <dt-icon name="laptop-2" :size="iconSize" />
-    </template>
-  </dt-segmented-control-item>
-  ...
-</dt-segmented-control>
-<dt-segmented-control v-model="selected" aria-label="Appearance mode" class="d-d-inline-flex">
-  <dt-segmented-control-item value="system" label="System">
-    <template #startIcon="{ iconSize }">
-      <dt-icon name="laptop-2" :size="iconSize" />
-    </template>
-  </dt-segmented-control-item>
-  ...
-</dt-segmented-control>
-' />
+<code-example>
+  <dt-stack gap="400" class="d-w464" data-demo-wrapper>
+    <div>
+      <dt-segmented-control v-model="iconOnlySelected" aria-label="Appearance mode">
+        <dt-segmented-control-item value="system" label="System">
+          <template #startIcon="{ iconSize }">
+            <dt-icon name="laptop-2" :size="iconSize" />
+          </template>
+        </dt-segmented-control-item>
+        <dt-segmented-control-item value="light" label="Light">
+          <template #startIcon="{ iconSize }">
+            <dt-icon name="sun" :size="iconSize" />
+          </template>
+        </dt-segmented-control-item>
+        <dt-segmented-control-item value="dark" label="Dark">
+          <template #startIcon="{ iconSize }">
+            <dt-icon name="moon" :size="iconSize" />
+          </template>
+        </dt-segmented-control-item>
+      </dt-segmented-control>
+    </div>
+    <div>
+      <dt-segmented-control v-model="iconOnlySelected" aria-label="Appearance mode" class="d-d-inline-flex">
+        <dt-segmented-control-item value="system" label="System">
+          <template #startIcon="{ iconSize }">
+            <dt-icon name="laptop-2" :size="iconSize" />
+          </template>
+        </dt-segmented-control-item>
+        <dt-segmented-control-item value="light" label="Light">
+          <template #startIcon="{ iconSize }">
+            <dt-icon name="sun" :size="iconSize" />
+          </template>
+        </dt-segmented-control-item>
+        <dt-segmented-control-item value="dark" label="Dark">
+          <template #startIcon="{ iconSize }">
+            <dt-icon name="moon" :size="iconSize" />
+          </template>
+        </dt-segmented-control-item>
+      </dt-segmented-control>
+    </div>
+  </dt-stack>
+</code-example>
 
 ### Leading & Trailing
 
 Use the `#leading` and `#trailing` slots on `dt-segmented-control-item` to render content alongside labels, such as badges or count indicators.
 
-<code-well-header>
+<code-example>
   <dt-segmented-control v-model="trailingSelected" aria-label="Fruit counts">
     <dt-segmented-control-item value="apples" trailingClass="d-pr8">
       Apples
@@ -365,26 +300,17 @@ Use the `#leading` and `#trailing` slots on `dt-segmented-control-item` to rende
       </template>
     </dt-segmented-control-item>
   </dt-segmented-control>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-segmented-control v-model="selected" aria-label="Fruit counts">
-  <dt-segmented-control-item value="apples" trailingClass="d-pr8">
-    Apples
-    <template #trailing>
-      <dt-badge kind="count">24</dt-badge>
-    </template>
-  </dt-segmented-control-item>
-  ...
-</dt-segmented-control>
-' />
+</code-example>
 
 ## Orientation
 
 Set `orientation="vertical"` to stack items vertically.
 
-<code-well-header>
+<code-example vueCode='
+<dt-segmented-control v-model="selected" orientation="vertical">
+  ...
+</dt-segmented-control>
+'>
   <dt-stack direction="row" gap="500" align="start">
     <div class="d-w164">
       <dt-segmented-control v-model="selected" orientation="vertical" aria-label="Vertical example">
@@ -426,14 +352,7 @@ Set `orientation="vertical"` to stack items vertically.
       </dt-segmented-control-item>
     </dt-segmented-control>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-segmented-control v-model="selected" orientation="vertical">
-  ...
-</dt-segmented-control>
-' />
+</code-example>
 
 ## Advanced Usages
 
@@ -441,20 +360,17 @@ vueCode='
 
 By default, items select immediately on focus via arrow keys, following the <a class="d-link" href="https://www.w3.org/WAI/ARIA/apg/patterns/radio/" target="_blank">WAI-ARIA Radio Group pattern</a>. Set `activation-mode="manual"` to require an explicit `Enter` or `Space` keypress after focusing an item.
 
-<code-well-header>
+<code-example vueCode='
+<dt-segmented-control v-model="selected" activation-mode="manual">
+  ...
+</dt-segmented-control>
+'>
   <dt-segmented-control v-model="selected" activation-mode="manual" aria-label="Manual activation">
     <dt-segmented-control-item value="all">All</dt-segmented-control-item>
     <dt-segmented-control-item value="favorites">Favorites</dt-segmented-control-item>
     <dt-segmented-control-item value="recent">Recent</dt-segmented-control-item>
   </dt-segmented-control>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-segmented-control v-model="selected" activation-mode="manual">
-  ...
-</dt-segmented-control>
-' />
+</code-example>
 
 ## Vue API
 

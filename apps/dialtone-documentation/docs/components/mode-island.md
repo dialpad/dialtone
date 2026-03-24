@@ -5,7 +5,7 @@ status: beta
 keywords: ["theme island","mode override","v-dt-mode","directive","light","dark","invert","v-dt"]
 ---
 
-<code-well-header>
+<code-example only-show="demo">
   <dt-stack gap="500">
     <dt-stack direction="row" gap="500" justify="space-between" class="d-w100p">
       <dt-text as="h4" kind="headline" size="lg">Demo</dt-text>
@@ -108,7 +108,7 @@ keywords: ["theme island","mode override","v-dt-mode","directive","light","dark"
         </template>
       </dt-dropdown>
     </dt-stack>
-    <dt-stack :direction="{ 'default': 'column', 'md': 'row' }" gap="500" class="d-w100p">
+    <dt-stack :direction="{ 'default': 'column', 'lg': 'row' }" gap="500" class="d-w100p">
       <dt-stack gap="400" class="d-fl1">
         <dt-text as="h3" kind="headline" size="md">Inverted <dt-text strength="normal">(auto)</dt-text></dt-text>
         <dt-stack v-dt-mode:invert gap="400" class="d-bgc-secondary d-p16 d-bar8 d-ba d-bc-default">
@@ -159,7 +159,7 @@ keywords: ["theme island","mode override","v-dt-mode","directive","light","dark"
       </dt-stack>
     </dt-stack>
   </dt-stack>
-</code-well-header>
+</code-example>
 
 <!-- <component-combinator component-name="DtModeIsland" /> -->
 
@@ -167,18 +167,13 @@ keywords: ["theme island","mode override","v-dt-mode","directive","light","dark"
 
 Use the `v-dt-mode` directive to control the color mode of a region, component, or element. It creates a scoped region with the specified mode. Descendant elements retain their original styling but are rendered with the specified mode.
 
-<code-well-header>
-  <dt-text v-dt-mode:dark tone="success"> Dark content </dt-text>
-  <dt-text v-dt-mode:light tone="success"> Light content </dt-text>
-  <dt-text v-dt-mode:invert tone="success"> Inverted — opposite of parent or root </dt-text>
-</code-well-header>
-<code-example-tabs
-vueCode='
-<dt-text v-dt-mode:dark tone="success"> Dark content </dt-text>
-<dt-text v-dt-mode:light tone="success"> Light content </dt-text>
-<dt-text v-dt-mode:invert tone="success"> Inverted — opposite of parent or root </dt-text>
-'
-/>
+<code-example>
+  <dt-stack gap="400" data-demo-wrapper>
+    <dt-text v-dt-mode:dark tone="success"> Dark content </dt-text>
+    <dt-text v-dt-mode:light tone="success"> Light content </dt-text>
+    <dt-text v-dt-mode:invert tone="success"> Inverted — opposite of parent or root </dt-text>
+  </dt-stack>
+</code-example>
 
 ### Inverting
 
@@ -186,25 +181,18 @@ This effectively removes the need for `inverted` props or variants on elements o
 
 For example, instead of using `inverted` on a DtButton, use `v-dt-mode:invert`
 
-<code-example-tabs
-vueCode='
-<dt-button>Button</dt-button>
-<dt-button v-dt-mode:invert>Button</dt-button>
-'
-/>
-
-<code-well-header>
-  <dt-stack gap="400" direction="row">
+<code-example>
+  <dt-stack gap="400" direction="row" data-demo-wrapper>
     <dt-button>Button</dt-button>
     <dt-button v-dt-mode:invert>Button</dt-button>
   </dt-stack>
-</code-well-header>
+</code-example>
 
 ### Dynamic mode
 
 Bind a reactive variable as the directive arg to switch modes at runtime.
 
-<code-well-header>
+<code-example>
   <dt-stack gap="500">
     <dt-stack gap="400" direction="row">
       <dt-button
@@ -246,13 +234,7 @@ Bind a reactive variable as the directive arg to switch modes at runtime.
     </dt-stack>
     <dt-text v-dt-mode:[dynamicMode] align="center" tone="success"> {{ dynamicMode }} mode </dt-text>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-text v-dt-mode:[dynamicMode] align="center" tone="success"> {{ dynamicMode }} mode content </dt-text>
-'
-showHtmlWarning />
+</code-example>
 
 ### Conditional
 
@@ -298,65 +280,38 @@ Pass a boolean value to conditionally apply or remove the directive. When `false
 
 The default mode — inverts relative to the nearest parent mode boundary or the root. When no arg is provided, `v-dt-mode` defaults to invert.
 
-<code-well-header>
-  <section ref="invertedExample" v-dt-mode class="d-p16 d-bar8">
+<code-example>
+  <section v-dt-mode class="d-p16 d-bar8">
     <dt-text as="p" tone="success">Inverted mode (opposite of parent)</dt-text>
   </section>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.invertedExample'
-vueCode='
-<section v-dt-mode class="d-p16 d-bar8">
-  <dt-text as="p" tone="success">Inverted mode (opposite of parent)</dt-text>
-</section>
-'
-showHtmlWarning />
+</code-example>
 
 ### Light
 
 Explicitly set to light mode regardless of parent or root mode.
 
-<code-well-header>
-  <section ref="lightExample" v-dt-mode:light class="d-p16 d-bar8">
+<code-example>
+  <section v-dt-mode:light class="d-p16 d-bar8">
     <dt-text as="p" tone="success">Always light mode</dt-text>
   </section>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.lightExample'
-vueCode='
-<section v-dt-mode:light class="d-p16 d-bar8">
-  <dt-text as="p" tone="success">Always light mode</dt-text>
-</section>
-'
-showHtmlWarning />
+</code-example>
 
 ### Dark
 
 Explicitly set to dark mode regardless of parent or root mode.
 
-<code-well-header>
-  <section ref="darkExample" v-dt-mode:dark class="d-p16 d-bar8">
+<code-example>
+  <section v-dt-mode:dark class="d-p16 d-bar8">
     <dt-text as="p" tone="success">Always dark mode</dt-text>
   </section>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.darkExample'
-vueCode='
-<section v-dt-mode:dark class="d-p16 d-bar8">
-  <dt-text as="p">Always dark mode</dt-text>
-</section>
-'
-showHtmlWarning />
+</code-example>
 
 ## Nesting
 
 Mode boundaries can be nested. Each `v-dt-mode:invert` reads the nearest parent boundary and flips. In this example the first level is explicitly set to light mode, the second level inverts against that, and the third level inverts again.
 
-<code-well-header>
-  <dt-stack gap="500" ref="nestingExample" v-dt-mode:light class="d-p16 d-bar8 d-bgc-secondary d-ba">
+<code-example>
+  <dt-stack gap="500" v-dt-mode:light class="d-p16 d-bar8 d-bgc-secondary d-ba">
     <dt-text as="p" tone="success" text-box-trim="both">Explicit Light</dt-text>
     <dt-stack v-dt-mode gap="500" class="d-p16 d-bar8 d-bgc-secondary">
       <dt-text as="p" tone="success" text-box-trim="both">Inverted (Dark)</dt-text>
@@ -365,29 +320,14 @@ Mode boundaries can be nested. Each `v-dt-mode:invert` reads the nearest parent 
       </dt-stack>
     </dt-stack>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.nestingExample'
-vueCode='
-<dt-stack gap="500" ref="nestingExample" v-dt-mode:light class="d-p16 d-bar8 d-bgc-secondary d-ba">
-  <dt-text as="p" tone="success" text-box-trim="both">Explicit Light</dt-text>
-  <dt-stack v-dt-mode gap="500" class="d-p16 d-bar8 d-bgc-secondary">
-    <dt-text as="p" tone="success" text-box-trim="both">Inverted (Dark)</dt-text>
-    <dt-stack v-dt-mode gap="500" class="d-p16 d-bar4 d-bgc-secondary">
-      <dt-text as="p" tone="success" text-box-trim="both">Inverted again (Light)</dt-text>
-    </dt-stack>
-  </dt-stack>
-</dt-stack>
-'
-/>
+</code-example>
 
 ## Custom background
 
 The background surface of a Mode Island defaults to the root surface color. To override, use a CSS Utility class.
 
-<code-well-header>
-  <dt-mode-island class="d-p16 d-bar8 d-w100p d-bgc-transparent" ref="customBackgroundExample">
+<code-example>
+  <dt-mode-island class="d-p16 d-bar8 d-w100p d-bgc-transparent">
     <dt-stack gap="400">
       <dt-text as="p" kind="code" size="xs" tone="tertiary">Transparent background, inverted mode island</dt-text>
       <div>
@@ -419,22 +359,7 @@ The background surface of a Mode Island defaults to the root surface color. To o
       </div>
     </dt-stack>
   </dt-mode-island>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.nestingExample'
-vueCode='
-<dt-stack gap="500" ref="nestingExample" v-dt-mode:light class="d-p16 d-bar8 d-bgc-secondary d-ba">
-  <dt-text as="p" tone="success" text-box-trim="both">Explicit Light</dt-text>
-  <dt-stack v-dt-mode gap="500" class="d-p16 d-bar8 d-bgc-secondary">
-    <dt-text as="p" tone="success" text-box-trim="both">Inverted (Dark)</dt-text>
-    <dt-stack v-dt-mode gap="500" class="d-p16 d-bar4 d-bgc-secondary">
-      <dt-text as="p" tone="success" text-box-trim="both">Inverted again (Light)</dt-text>
-    </dt-stack>
-  </dt-stack>
-</dt-stack>
-'
-/>
+</code-example>
 
 ## Examples
 
@@ -442,8 +367,8 @@ vueCode='
 
 A real-world pattern: the callbar container already exists as a semantic element. The directive applies mode theming directly — no wrapper needed.
 
-<code-well-header>
-  <dt-stack ref="callbarExample" v-dt-mode class="d-ba d-bc-subtle d-bgc-secondary d-p6 d-py4 d-bar12 d-bs-md d-w100p" direction="row" gap="600">
+<code-example>
+  <dt-stack v-dt-mode class="d-ba d-bc-subtle d-bgc-secondary d-p6 d-py4 d-bar12 d-bs-md d-w100p" direction="row" gap="600">
     <dt-stack gap="400" direction="row">
       <dt-avatar
         full-name="TA"
@@ -488,68 +413,59 @@ A real-world pattern: the callbar container already exists as a semantic element
     </dt-stack>
   </dt-stack>
   <dt-text as="p" kind="label" size="sm" tone="muted" class="d-mt8">* Not real, still just an example</dt-text>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.callbarExample'
-vueCode='
-<dt-stack v-dt-mode class="d-ba d-bc-subtle d-bgc-secondary d-p6 d-py4 d-bar12 d-bs-md d-w100p" direction="row" gap="600">
-  <dt-stack gap="400" direction="row">
-    <dt-avatar
-      full-name="TA"
-      seed="ted-anderson"
-      size="lg"
-    />
-    <dt-stack gap="200">
-      <dt-text kind="label" size="md" density="200">Ted Anderson</dt-text>
-      <dt-stack direction="row" gap="300" align="baseline">
-        <dt-text kind="body" size="xs" tone="tertiary" wrap="nowrap" numeric>(913) 555-6745</dt-text>
-        <dt-text kind="body" size="xs" tone="muted">&bull;</dt-text>
-        <dt-text kind="body" size="xs" tone="tertiary" numeric>21:18</dt-text>
-      </dt-stack>
-    </dt-stack>
-  </dt-stack>
-  <dt-stack class="d-fl1" direction="row" gap="200" justify="center">
-    <dt-button class="d-px8 d-w64 d-w64" size="xs" kind="danger">
-      <template #blockStartIcon> <dt-icon name="mic" size="300" /> </template>
-      Unmute
-    </dt-button>
-    <dt-button class="d-px8 d-w64 d-w64" size="xs" kind="muted" importance="clear">
-      <template #blockStartIcon> <dt-icon name="record-filled" size="300" /> </template>
-      Record
-    </dt-button>
-    <dt-button class="d-px8 d-w64 d-w64" size="xs" kind="muted" importance="clear">
-      <template #blockStartIcon> <dt-icon name="keypad" size="300" /> </template>
-      Keypad
-    </dt-button>
-    <dt-button class="d-px8 d-w64 d-w64" size="xs" kind="muted" importance="clear">
-      <template #blockStartIcon> <dt-icon name="user-plus" size="300" /> </template>
-      Add
-    </dt-button>
-    <dt-button class="d-px8 d-w64 d-w64" size="xs" kind="muted" importance="clear">
-      <template #blockStartIcon> <dt-icon name="more-horizontal" size="300" /> </template>
-      More
-    </dt-button>
-  </dt-stack>
-  <dt-stack>
-    <dt-button class="d-p12" circle size="lg" kind="danger">
-      <template #startIcon> <dt-icon name="phone-hang-up" size="500" /> </template>
-    </dt-button>
-  </dt-stack>
-</dt-stack>
-'
-showHtmlWarning />
+</code-example>
 
 ### Positioned Components
 
 [Popovers](/components/popover.html), [Dropdowns](/components/dropdown.html), [Modals](/components/modal.html), and [Hovercards](/components/hovercard.html) render their content *outside* the normal DOM tree, so `v-dt-mode` on the component itself won't reach the positioned element. These components provide a `contentMode` prop that applies the mode directly to the positioned content.
 
-<code-well-header>
+<code-example vueCode='
+<!-- Hovercard -->
+<dt-hovercard placement="top-start" content-mode="invert">
+  <template #anchor>
+    <dt-button size="sm" kind="muted" importance="outlined">Default</dt-button>
+  </template>
+  <template #content>
+    <ExampleProfileCard />
+  </template>
+</dt-hovercard>
+<!-- Popover -->
+<dt-popover content-mode="invert" placement="top-start" dialogClass="d-w216">
+  <template #anchor>
+    <dt-button size="sm" kind="muted" importance="outlined"> Inverted </dt-button>
+  </template>
+  <template #content="{ close }">
+    <dt-text as="p">This Popover content is in the <dt-text strength="strong">inverted</dt-text> mode.</dt-text>
+  </template>
+</dt-popover>
+<!-- Dropdown -->
+<dt-dropdown content-mode="invert" navigation-type="arrow-keys" placement="bottom-start">
+  <template #anchor="{ attrs }">
+    <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined">
+      Inverted
+      <template #endIcon="{ iconSize }">
+        <dt-icon name="chevron-down" :size="iconSize" />
+      </template>
+    </dt-button>
+  </template>
+  <template #list="{ close }">
+    <dt-list-item
+      v-for="item in items"
+      :key="item.id"
+      role="menuitem"
+      :navigation-type="arrow - keys"
+      @click="close"
+    >
+      {{ item.name }}
+    </dt-list-item>
+  </template>
+</dt-dropdown>
+'>
   <dt-stack gap="500">
     <dt-stack gap="200">
       <dt-text as="p" kind="headline" size="md">Hovercard</dt-text>
       <dt-stack gap="400" direction="row">
-        <dt-hovercard ref="hovercardDefault" placement="top-start">
+        <dt-hovercard placement="top-start">
           <template #anchor>
             <dt-button size="sm" kind="muted" importance="outlined">Default </dt-button>
           </template>
@@ -586,7 +502,7 @@ showHtmlWarning />
     <dt-stack gap="200">
       <dt-text as="p" kind="headline" size="md">Popover</dt-text>
       <dt-stack gap="400" direction="row">
-        <dt-popover ref="popoverDefault" placement="top-start" dialogClass="d-w216">
+        <dt-popover placement="top-start" dialogClass="d-w216">
           <template #anchor>
             <dt-button size="sm" kind="muted" importance="outlined"> Default </dt-button>
           </template>
@@ -594,7 +510,7 @@ showHtmlWarning />
             <dt-text as="p">This is just a default Popover, and does not use Mode Island.</dt-text>
           </template>
         </dt-popover>
-        <dt-popover ref="popoverInverted" content-mode="invert" placement="top-start" dialogClass="d-w216">
+        <dt-popover content-mode="invert" placement="top-start" dialogClass="d-w216">
           <template #anchor>
             <dt-button size="sm" kind="muted" importance="outlined"> Inverted </dt-button>
           </template>
@@ -623,7 +539,7 @@ showHtmlWarning />
     <dt-stack gap="200">
       <dt-text as="p" kind="headline" size="md">Dropdown</dt-text>
       <dt-stack gap="400" direction="row">
-        <dt-dropdown ref="dropdownDefault" navigation-type="arrow-keys" placement="bottom-start">
+        <dt-dropdown navigation-type="arrow-keys" placement="bottom-start">
           <template #anchor="{ attrs }">
             <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined">
               Default
@@ -644,7 +560,7 @@ showHtmlWarning />
             </dt-list-item>
           </template>
         </dt-dropdown>
-        <dt-dropdown ref="dropdownInverted" content-mode="invert" navigation-type="arrow-keys" placement="bottom-start">
+        <dt-dropdown content-mode="invert" navigation-type="arrow-keys" placement="bottom-start">
           <template #anchor="{ attrs }">
             <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined">
               Inverted
@@ -710,52 +626,7 @@ showHtmlWarning />
       </dt-stack>
     </dt-stack>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<!-- Hovercard -->
-<dt-hovercard ref="hovercardDefault" placement="top-start" content-mode="invert">
-  <template #anchor>
-    <dt-button size="sm" kind="muted" importance="outlined">Default</dt-button>
-  </template>
-  <template #content>
-    <ExampleProfileCard />
-  </template>
-</dt-hovercard>
-<!-- Popover -->
-<dt-popover ref="popoverInverted" content-mode="invert" placement="top-start" dialogClass="d-w216">
-  <template #anchor>
-    <dt-button size="sm" kind="muted" importance="outlined"> Inverted </dt-button>
-  </template>
-  <template #content="{ close }">
-    <dt-text as="p">This Popover content is in the <dt-text strength="strong">inverted</dt-text> mode.</dt-text>
-  </template>
-</dt-popover>
-<!-- Dropdown -->
-<dt-dropdown ref="dropdownInverted" content-mode="invert" navigation-type="arrow-keys" placement="bottom-start">
-  <template #anchor="{ attrs }">
-    <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined">
-      Inverted
-      <template #endIcon="{ iconSize }">
-        <dt-icon name="chevron-down" :size="iconSize" />
-      </template>
-    </dt-button>
-  </template>
-  <template #list="{ close }">
-    <dt-list-item
-      v-for="item in items"
-      :key="item.id"
-      role="menuitem"
-      :navigation-type="arrow - keys"
-      @click="close"
-    >
-      {{ item.name }}
-    </dt-list-item>
-  </template>
-</dt-dropdown>
-'
-/>
+</code-example>
 
 ## Component
 
@@ -770,22 +641,20 @@ The `<dt-mode-island>` component is the underlying abstraction that the directiv
   The only real case where you might want to use the component is when you need to create a container element that doesn't already exist, but even then, you can create any kind of containing element with the directive e.g. <code>&lt;span v-dt-mode:invert"&gt;...&lt;/span&gt;</code>.
 </dt-notice>
 
-<code-example-tabs
-vueCode='
-<dt-mode-island as="section">
-  Rendered as a section element inverted
-</dt-mode-island>
-<dt-mode-island>
-  Inverted (default)
-</dt-mode-island>
-<dt-mode-island mode="light">
-  Light
-</dt-mode-island>
-<dt-mode-island mode="dark">
-  Dark
-</dt-mode-island>
-'
-/>
+<code-example only-show="code">
+  <dt-mode-island as="section">
+    Rendered as a section element inverted
+  </dt-mode-island>
+  <dt-mode-island>
+    Inverted (default)
+  </dt-mode-island>
+  <dt-mode-island mode="light">
+    Light
+  </dt-mode-island>
+  <dt-mode-island mode="dark">
+    Dark
+  </dt-mode-island>
+</code-example>
 
 ## Vue API
 

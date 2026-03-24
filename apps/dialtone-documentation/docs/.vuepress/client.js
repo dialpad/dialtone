@@ -16,6 +16,7 @@ import ComponentVueApi from './baseComponents/ComponentVueApi.vue';
 import ComponentAccessibleTable from './baseComponents/ComponentAccessibleTable.vue';
 import ComponentCombinator from './baseComponents/ComponentCombinator.vue';
 import CodeExampleTabs from './baseComponents/CodeExampleTabs.vue';
+import CodeExample from './baseComponents/CodeExample.vue';
 import SvgLoader from './baseComponents/SvgLoader.vue';
 import DialtoneUsage from './baseComponents/DialtoneUsage.vue';
 import FlexStackNotice from './baseComponents/FlexStackNotice.vue';
@@ -38,6 +39,7 @@ export default defineClientConfig({
     app.component('ComponentAccessibleTable', ComponentAccessibleTable);
     app.component('ComponentCombinator', ComponentCombinator);
     app.component('CodeExampleTabs', CodeExampleTabs);
+    app.component('CodeExample', CodeExample);
     app.component('SvgLoader', SvgLoader);
     app.component('DialtoneUsage', DialtoneUsage);
     app.component('FlexStackNotice', FlexStackNotice);

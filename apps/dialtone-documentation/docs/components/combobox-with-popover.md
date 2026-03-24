@@ -6,9 +6,8 @@ thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox-with-popover--default
 ---
 
-<code-well-header class="d-d-block">
+<code-example>
   <dt-combobox-with-popover
-    ref="example-combobox"
     label="Label Text"
     :show-list="showList"
     content-width="anchor"
@@ -41,45 +40,9 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox-wit
       </ul>
     </template>
   </dt-combobox-with-popover>
-</code-well-header>
+</code-example>
 
 <!-- <component-combinator component-name="DtComboboxWithPopover" /> -->
-
-<code-example-tabs
-vueCode='
-<dt-combobox-with-popover
-  ref="comboboxWithPopover"
-  label="Label Text"
-  content-width="anchor"
-  max-height="300px"
-  @escape="onEscape"
-  @highlight="onHighlight"
-  @select="onSelect"
->
-  <template #input="{ inputProps, onInput }">
-    <dt-input
-      v-model="inputValue"
-      placeholder="Select one or start typing"
-      v-bind="inputProps"
-      @input="onInput"
-    />
-  </template>
-  <template #list="{ listProps }">
-    <ul v-bind="listProps">
-      <dt-list-item
-        v-for="(item, i) in items"
-        :key="item.id"
-        navigation-type="arrow-keys"
-        role="option"
-        @click="onSelect(i)"
-      >
-        {{ item.name }}
-      </dt-list-item>
-    </ul>
-  </template>
-</dt-combobox-with-popover>
-'
-/>
 
 ## Usage
 
@@ -105,9 +68,8 @@ methods: {
 
 You can add header and footer content to the popover using the `header` and `footer` slots.
 
-<code-well-header class="d-d-block">
+<code-example>
   <dt-combobox-with-popover
-    ref="example-combobox-header-footer"
     label="Label Text"
     :show-list="showListHeaderFooter"
     content-width="anchor"
@@ -146,47 +108,17 @@ You can add header and footer content to the popover using the `header` and `foo
       <div class="d-px12 d-py8 d-fc-tertiary">Footer content</div>
     </template>
   </dt-combobox-with-popover>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-combobox-with-popover
-  label="Label Text"
-  @escape="onEscape"
-  @highlight="onHighlight"
-  @select="onSelect"
->
-  <template #header>
-    <div class="d-px12 d-py8 d-fw-semibold">Select an option</div>
-  </template>
-  <template #input="{ inputProps, onInput }">
-    <dt-input v-bind="inputProps" @input="onInput" />
-  </template>
-  <template #list="{ listProps }">
-    <ul v-bind="listProps">
-      <dt-list-item
-        v-for="(item, i) in items"
-        :key="item.id"
-        navigation-type="arrow-keys"
-        role="option"
-        @click="onSelect(i)"
-      >
-        {{ item.name }}
-      </dt-list-item>
-    </ul>
-  </template>
-  <template #footer>
-    <div class="d-px12 d-py8 d-fc-tertiary">Footer content</div>
-  </template>
-</dt-combobox-with-popover>
-'
-/>
+</code-example>
 
 ## Content Mode
 
 Combobox popover content renders outside the DOM tree. Use the `contentMode` prop to apply color mode (invert, light, dark) to the positioned content. See [Positioned Components](/components/mode-island.html#positioned-components) for details.
 
-<code-well-header>
+<code-example vueCode='
+<dt-combobox-with-popover content-mode="invert">...</dt-combobox-with-popover>
+<dt-combobox-with-popover content-mode="dark">...</dt-combobox-with-popover>
+<dt-combobox-with-popover content-mode="light">...</dt-combobox-with-popover>
+'>
   <dt-combobox-with-popover
     content-mode="invert"
     label="Inverted Combobox"
@@ -204,15 +136,7 @@ Combobox popover content renders outside the DOM tree. Use the `contentMode` pro
       </ul>
     </template>
   </dt-combobox-with-popover>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-combobox-with-popover content-mode="invert">...</dt-combobox-with-popover>
-<dt-combobox-with-popover content-mode="dark">...</dt-combobox-with-popover>
-<dt-combobox-with-popover content-mode="light">...</dt-combobox-with-popover>
-'
-/>
+</code-example>
 
 ## Vue API
 

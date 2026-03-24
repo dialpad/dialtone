@@ -221,15 +221,6 @@
       </dt-text>
     </header>
     <slot name="content-bottom" />
-    <div
-      v-if="$page.path.startsWith('/components') && !$frontmatter.no_preview"
-      id="preview-header"
-      class="d-docsite--preview-header"
-    >
-      <h2 class="d-vi-visible-sr">
-        Preview
-      </h2>
-    </div>
   </section>
 </template>
 

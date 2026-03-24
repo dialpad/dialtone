@@ -9,23 +9,6 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["no results", "blank slate", "zero state", "d-empty-state", "DtEmptyState", "dt-empty-state", "placeholder", "empty view"]
 ---
 
-<code-well-header>
-  <dt-empty-state
-    header-text="Nothing to see here"
-    body-text="Looks like there is no data to display here."
-  >
-    <template #body>
-      <dt-stack direction="row" gap="300">
-        <dt-button importance="clear">Action</dt-button>
-        <dt-button>Action</dt-button>
-      </dt-stack>
-    </template>
-    <template #illustration>
-      <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
-    </template>
-  </dt-empty-state>
-</code-well-header>
-
 <component-combinator component-name="DtEmptyState" />
 
 ## Anatomy
@@ -155,9 +138,8 @@ A few rules to keep in nothing-to-see-here when choosing a size variant.
 
 ### Large with Illustration
 
-<code-well-header>
+<code-example>
   <dt-empty-state
-    ref="largeIllustrationExample"
     header-text="Nothing to see here"
     body-text="Looks like there is no data to display here."
   >
@@ -171,33 +153,12 @@ A few rules to keep in nothing-to-see-here when choosing a size variant.
       <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
     </template>
   </dt-empty-state>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.largeIllustrationExample'
-vueCode='
-<dt-empty-state
-  header-text="Nothing to see here"
-  body-text="Looks like there is no data to display here."
->
-  <template #body>
-    <dt-stack direction="row" gap="300">
-      <dt-button importance="clear">Action</dt-button>
-      <dt-button>Action</dt-button>
-    </dt-stack>
-  </template>
-  <template #illustration>
-    <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
-  </template>
-</dt-empty-state>
-'
-showHtmlWarning />
+</code-example>
 
 ### Large with Icon
 
-<code-well-header>
+<code-example>
   <dt-empty-state
-    ref="largeIconExample"
     header-text="Nothing to see here"
     body-text="Looks like there is no data to display here."
   >
@@ -211,33 +172,12 @@ showHtmlWarning />
       <dt-icon-box :size="iconSize"></dt-icon-box>
     </template>
   </dt-empty-state>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.largeIconExample'
-vueCode='
-<dt-empty-state
-  header-text="Nothing to see here"
-  body-text="Looks like there is no data to display here."
->
-  <template #body>
-    <dt-stack direction="row" gap="300">
-      <dt-button importance="clear">Action</dt-button>
-      <dt-button>Action</dt-button>
-    </dt-stack>
-  </template>
-  <template #icon="{ iconSize }">
-    <dt-icon-box :size="iconSize"></dt-icon-box>
-  </template>
-</dt-empty-state>
-'
-showHtmlWarning />
+</code-example>
 
 ### Medium with Illustration
 
-<code-well-header>
+<code-example>
   <dt-empty-state
-    ref="mediumIllustrationExample"
     size="md"
     header-text="Nothing to see here"
     body-text="Looks like there is no data to display here."
@@ -252,34 +192,12 @@ showHtmlWarning />
       <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
     </template>
   </dt-empty-state>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.mediumIllustrationExample'
-vueCode='
-<dt-empty-state
-  size="md"
-  header-text="Nothing to see here"
-  body-text="Looks like there is no data to display here."
->
-  <template #body>
-    <dt-stack direction="row" gap="300">
-      <dt-button importance="clear">Action</dt-button>
-      <dt-button>Action</dt-button>
-    </dt-stack>
-  </template>
-  <template #illustration>
-    <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
-  </template>
-</dt-empty-state>
-'
-showHtmlWarning />
+</code-example>
 
 ### Medium with Icon
 
-<code-well-header>
+<code-example>
   <dt-empty-state
-    ref="mediumIconExample"
     size="md"
     header-text="Nothing to see here"
     body-text="Looks like there is no data to display here."
@@ -294,34 +212,12 @@ showHtmlWarning />
       <dt-icon-box :size="iconSize"></dt-icon-box>
     </template>
   </dt-empty-state>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.mediumIconExample'
-vueCode='
-<dt-empty-state
-  size="md"
-  header-text="Nothing to see here"
-  body-text="Looks like there is no data to display here."
->
-  <template #body>
-    <dt-stack direction="row" gap="300">
-      <dt-button importance="clear">Action</dt-button>
-      <dt-button>Action</dt-button>
-    </dt-stack>
-  </template>
-  <template #icon="{ iconSize }">
-    <dt-icon-box :size="iconSize"></dt-icon-box>
-  </template>
-</dt-empty-state>
-'
-showHtmlWarning />
+</code-example>
 
 ### Small
 
-<code-well-header>
+<code-example>
   <dt-empty-state
-    ref="smallExample"
     size="sm"
     header-text="Nothing to see here"
     body-text="Looks like there is no data to display here."
@@ -336,36 +232,14 @@ showHtmlWarning />
       <dt-icon-box :size="iconSize"></dt-icon-box>
     </template>
   </dt-empty-state>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.smallExample'
-vueCode='
-<dt-empty-state
-  size="sm"
-  header-text="Nothing to see here"
-  body-text="Looks like there is no data to display here."
->
-  <template #body>
-    <dt-stack direction="row" gap="300">
-      <dt-button importance="clear">Action</dt-button>
-      <dt-button>Action</dt-button>
-    </dt-stack>
-  </template>
-  <template #icon="{ iconSize }">
-    <dt-icon-box :size="iconSize"></dt-icon-box>
-  </template>
-</dt-empty-state>
-'
-showHtmlWarning />
+</code-example>
 
 ## Examples
 
 ### No Actions
 
-<code-well-header>
+<code-example>
   <dt-empty-state
-    ref="noActionsExample"
     header-text="Nothing to see here"
     body-text="Looks like there is no data to display here."
   >
@@ -373,53 +247,24 @@ showHtmlWarning />
       <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
     </template>
   </dt-empty-state>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.noActionsExample'
-vueCode='
-<dt-empty-state
-  header-text="Nothing to see here"
-  body-text="Looks like there is no data to display here."
->
-  <template #illustration>
-    <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
-  </template>
-</dt-empty-state>
-'
-showHtmlWarning />
+</code-example>
 
 ### No Description
 
-<code-well-header>
+<code-example>
   <dt-empty-state
-    ref="noDescriptionExample"
     header-text="Nothing to see here"
   >
     <template #illustration>
       <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
     </template>
   </dt-empty-state>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.noDescriptionExample'
-vueCode='
-<dt-empty-state
-  header-text="Nothing to see here"
->
-  <template #illustration>
-    <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
-  </template>
-</dt-empty-state>
-'
-showHtmlWarning />
+</code-example>
 
 ### Everything
 
-<code-well-header>
+<code-example>
   <dt-empty-state
-    ref="everythingExample"
     header-text="Nothing to see here"
     body-text="Looks like there is no data to display here."
   >
@@ -433,33 +278,12 @@ showHtmlWarning />
       <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
     </template>
   </dt-empty-state>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.everythingExample'
-vueCode='
-<dt-empty-state
-  header-text="Nothing to see here"
-  body-text="Looks like there is no data to display here."
->
-  <template #body>
-    <dt-stack direction="row" gap="300">
-      <dt-button importance="clear">Action</dt-button>
-      <dt-button>Action</dt-button>
-    </dt-stack>
-  </template>
-  <template #illustration>
-    <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
-  </template>
-</dt-empty-state>
-'
-showHtmlWarning />
+</code-example>
 
 ### Small, with Muted Actions
 
-<code-well-header>
+<code-example>
   <dt-empty-state
-    ref="smallMutedActionsExample"
     size="sm"
     header-text="Nothing to see here"
     body-text="Looks like there is no data to display here."
@@ -474,28 +298,7 @@ showHtmlWarning />
       <dt-icon-box :size="iconSize"></dt-icon-box>
     </template>
   </dt-empty-state>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.smallMutedActionsExample'
-vueCode='
-<dt-empty-state
-  size="sm"
-  header-text="Nothing to see here"
-  body-text="Looks like there is no data to display here."
->
-  <template #body>
-    <dt-stack direction="row" gap="300">
-      <dt-button kind="muted" size="sm" importance="clear">Action</dt-button>
-      <dt-button kind="muted" importance="outlined" size="sm">Action</dt-button>
-    </dt-stack>
-  </template>
-  <template #icon="{ iconSize }">
-    <dt-icon-box :size="iconSize"></dt-icon-box>
-  </template>
-</dt-empty-state>
-'
-showHtmlWarning />
+</code-example>
 
 ## Writing Guidelines
 
@@ -531,7 +334,7 @@ Action: [Show me how]
 
 #### No Results
 
-Consider the user’s intent and provide guidance to resolve in a useful result.
+Consider the user's intent and provide guidance to resolve in a useful result.
 
 ```text
 Title: No matching results
