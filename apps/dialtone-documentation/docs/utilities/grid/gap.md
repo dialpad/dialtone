@@ -4,9 +4,11 @@ description: Utilities to control the spacing between columns, rows, or both in 
 keywords: ["css grid","grid gap","gutter","spacing"]
 ---
 
+Use `d-g-{stop}` to set gap using spacing token stops. The number references the spacing token (`d-g-100` = `--dt-spacing-100` = 8px). These classes work with both flex and grid layouts.
+
 ## Adding Universal Row and Column Gaps
 
-Use `d-g{#}` to universally change the row and column gap space in grid layouts.
+Use `d-g-{stop}` to universally change the row and column gap space in grid layouts.
 
 <code-well-header>
   <div class="d-d-grid d-g-200 d-g-cols2 d-w100p d-bar8 d-bgc-bold">
@@ -28,7 +30,7 @@ Use `d-g{#}` to universally change the row and column gap space in grid layouts.
 
 ## Independently Changing Row and Column Gaps
 
-Use `d-cg{#}` or `d-rg{#}` to independently change the row and column gap space in grid layouts.
+Use `d-cg-{stop}` or `d-rg-{stop}` to independently change the row and column gap space in grid layouts.
 
 <code-well-header>
   <div class="d-d-grid d-cg-300 d-rg-100 d-g-cols3 d-w100p d-bar8 d-bgc-bold">
@@ -67,16 +69,31 @@ Use `d-cg{#}` or `d-rg{#}` to independently change the row and column gap space 
 <utility-class-table>
   <template #content>
     <tbody v-for="dir in directions">
-      <tr v-for="{ output: rem, value: px } in values">
+      <tr v-for="{ stop, px } in values">
         <th scope="row" class="d-code--sm d-docsite-code">
-          <span v-if="dir === 'both'">.d-g{{ px }}</span>
-          <span v-else-if="dir === 'column'">.d-cg{{ px }}</span>
-          <span v-else-if="dir === 'row'">.d-rg{{ px }}</span>
+          <span v-if="dir === 'both'">.d-g-{{ stop }}</span>
+          <span v-else-if="dir === 'column'">.d-cg-{{ stop }}</span>
+          <span v-else-if="dir === 'row'">.d-rg-{{ stop }}</span>
         </th>
         <td class="d-code--sm">
-          <span v-if="dir !== 'both'">{{ dir }}-gap: {{ rem }}</span>
-          <span v-else>gap: {{ rem }}</span>
+          <span v-if="dir !== 'both'">{{ dir }}-gap: var(--dt-spacing-{{ stop }}) !important;</span>
+          <span v-else>gap: var(--dt-spacing-{{ stop }}) !important;</span>
+          <span class="d-fc-tertiary"> /* {{ px }} */</span>
         </td>
+      </tr>
+    </tbody>
+    <tbody>
+      <tr>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-g-unset</th>
+        <td class="d-code--sm">gap: unset !important;</td>
+      </tr>
+      <tr>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-cg-unset</th>
+        <td class="d-code--sm">column-gap: unset !important;</td>
+      </tr>
+      <tr>
+        <th scope="row" class="d-code--sm d-docsite-code">.d-rg-unset</th>
+        <td class="d-code--sm">row-gap: unset !important;</td>
       </tr>
     </tbody>
   </template>
