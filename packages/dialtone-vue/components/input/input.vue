@@ -555,7 +555,7 @@ export default {
 
         // Set textarea value programmatically to avoid attribute binding
         // Skip during IME composition to avoid interrupting in-progress input
-        if (this.isTextarea && this.$refs.input && this.$refs.input.value !== newValue && !this.isComposing) {
+        if (this.isTextarea && !this.isComposing && this.$refs.input && this.$refs.input.value !== newValue) {
           this.$refs.input.value = newValue;
         }
       },
