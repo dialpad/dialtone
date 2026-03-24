@@ -136,31 +136,31 @@
                 "status": "beta"
               },
               {
-                "text": "AnalyticsKit",
-                "link": "https://uikits.dialpad.com/analyticskit/",
-                "github_url": "https://github.com/dialpad/dialpad-uikits/tree/main/packages/analyticskit",
-                "description": "Data visualization widgets for dashboards. Features dynamic charts, data tables, and metric summaries.",
-                "status": "planned"
-              },
-              {
                 "text": "CallbarKit",
                 "link": "https://uikits.dialpad.com/callbarkit/",
                 "github_url": "https://github.com/dialpad/dialpad-uikits/tree/main/packages/callbarkit",
                 "description": "Specialized building blocks for meeting and telephony controls. Includes callbar buttons, banners, and timers.",
-                "status": "planned"
+                "status": "beta"
               },
               {
                 "text": "NavigationKit",
                 "link": "https://uikits.dialpad.com/navigationkit/",
                 "github_url": "https://github.com/dialpad/dialpad-uikits/tree/main/packages/navigationkit",
                 "description": "Components appearing in the application shell (top and left navigation). Houses contact rows, unread pills, and menu buttons.",
-                "status": "planned"
+                "status": "beta"
               },
               {
                 "text": "WorkflowKit",
                 "link": "https://uikits.dialpad.com/workflowkit/",
                 "github_url": "https://github.com/dialpad/dialpad-uikits/tree/main/packages/workflowkit",
-                "description": "Visual workflow builder components. Centered around the IVR Node for telephony routing.",
+                "description": "Visual workflow builder components. Currently used for card-based steps in the IVR Workflow configuration.",
+                "status": "beta"
+              },
+              {
+                "text": "AnalyticsKit",
+                "link": "https://uikits.dialpad.com/analyticskit/",
+                "github_url": "https://github.com/dialpad/dialpad-uikits/tree/main/packages/analyticskit",
+                "description": "Data visualization widgets for dashboards. Features dynamic charts, data tables, and metric summaries.",
                 "status": "planned"
               }
             ]
