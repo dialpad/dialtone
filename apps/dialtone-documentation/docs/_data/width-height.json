@@ -1,5 +1,5 @@
 {
-    "percentage": [10, 20, 25, 30, 40, 50, 60, 70, 75, 80, 90, 100],
+    "percentage": [10, 15, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 85, 90, 100],
     "layout": [
         { "stop": "25", "px": 16 },
         { "stop": "50", "px": 32 },
@@ -38,5 +38,10 @@
         { "stop": "1550", "px": 992 },
         { "stop": "1600", "px": 1024 }
     ],
-    "other": ["auto", "unset", "fit-content", "max-content", "min-content"]
+    "viewport": {
+        "height": ["100vh", "dvh", "svh", "lvh"],
+        "width": ["100vw", "dvw", "svw", "lvw"]
+    },
+    "characterWidth": ["60ch", "75ch", "90ch"],
+    "keywords": ["auto", "unset", "fit-content", "max-content", "min-content"]
 }

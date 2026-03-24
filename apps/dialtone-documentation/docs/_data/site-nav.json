@@ -735,6 +735,10 @@
                     "link": "/utilities/sizing/min-height.html"
                   },
                   {
+                    "text": "Size",
+                    "link": "/utilities/sizing/size.html"
+                  },
+                  {
                     "text": "Width",
                     "link": "/utilities/sizing/width.html"
                   },
