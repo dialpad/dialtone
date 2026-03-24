@@ -16,13 +16,15 @@
     "dev": "tsx src/index.ts"
   },
   "dependencies": {
-    "citty": "^0.1.6"
+    "citty": "^0.1.6",
+    "cli-table3": "^0.6.5"
   },
   "devDependencies": {
     "@dialpad/dialtone-css": "workspace:*",
     "@dialpad/dialtone-icons": "workspace:*",
     "@dialpad/dialtone-query-core": "workspace:*",
     "@dialpad/dialtone-vue": "workspace:^3",
+    "@rollup/plugin-commonjs": "^28.0.0",
     "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-node-resolve": "^15.2.0",
     "@rollup/plugin-typescript": "^11.1.0",

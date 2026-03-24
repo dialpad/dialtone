@@ -2,6 +2,7 @@
 // OUTPUT FORMATTERS
 // ============================================================================
 
+import Table from 'cli-table3';
 import type {
   SearchResult,
   ComponentProp,
@@ -14,40 +15,17 @@ import type {
 
 export type Format = 'minimal' | 'markdown' | 'json';
 
-// ── Table helpers ───────────────────────────────────────────────────────────
+// ── Table helper ────────────────────────────────────────────────────────────
 
-function truncate(str: string, max: number): string {
-  if (str.length <= max) return str;
-  return str.slice(0, max - 1) + '…';
-}
-
-function borderedTable(headers: string[], rows: string[][], maxWidths?: number[]): string {
-  // Calculate column widths
-  const widths = headers.map((h, i) => {
-    const contentMax = Math.max(h.length, ...rows.map(r => (r[i] || '').length));
-    return maxWidths?.[i] ? Math.min(contentMax, maxWidths[i]) : contentMax;
+function makeTable(head: string[], rows: string[][], colWidths?: number[]): string {
+  const table = new Table({
+    head,
+    ...(colWidths ? { colWidths } : {}),
+    wordWrap: true,
+    wrapOnWordBoundary: true,
   });
-
-  // Box-drawing characters
-  const topBorder    = '┌' + widths.map(w => '─'.repeat(w + 2)).join('┬') + '┐';
-  const headerSep    = '├' + widths.map(w => '─'.repeat(w + 2)).join('┼') + '┤';
-  const rowSep       = '├' + widths.map(w => '─'.repeat(w + 2)).join('┼') + '┤';
-  const bottomBorder = '└' + widths.map(w => '─'.repeat(w + 2)).join('┴') + '┘';
-
-  const formatRow = (cells: string[]) =>
-    '│ ' + cells.map((c, i) => {
-      const val = maxWidths?.[i] ? truncate(c, maxWidths[i]) : c;
-      return val.padEnd(widths[i]);
-    }).join(' │ ') + ' │';
-
-  const lines: string[] = [topBorder, formatRow(headers), headerSep];
-  rows.forEach((r, i) => {
-    lines.push(formatRow(r));
-    if (i < rows.length - 1) lines.push(rowSep);
-  });
-  lines.push(bottomBorder);
-
-  return lines.join('\n');
+  rows.forEach(r => table.push(r));
+  return table.toString();
 }
 
 // ── Props / Events / Slots tables ───────────────────────────────────────────
@@ -56,39 +34,37 @@ export function propsTable(props: ComponentProp[], describe = false): string {
   if (!props.length) return 'No props.';
 
   if (describe) {
-    const headers = ['Prop', 'Type', 'Description', 'Values'];
-    const rows = props.map(p => [
-      p.name,
-      p.type?.name || '',
-      (p.description || '').replace(/\n/g, ' '),
-      p.values?.join(', ') || '',
-    ]);
-    return borderedTable(headers, rows, [20, 20, 50, 30]);
+    return makeTable(
+      ['Prop', 'Type', 'Description', 'Values'],
+      props.map(p => [
+        p.name,
+        p.type?.name || '',
+        (p.description || '').replace(/\n/g, ' '),
+        p.values?.join(', ') || '',
+      ]),
+      [22, 22, 52, 32],
+    );
   }
 
-  const headers = ['Prop', 'Type', 'Values'];
-  const rows = props.map(p => [
-    p.name,
-    p.type?.name || '',
-    p.values?.join(', ') || '',
-  ]);
-  return borderedTable(headers, rows, [20, 20, 40]);
+  return makeTable(
+    ['Prop', 'Type', 'Values'],
+    props.map(p => [
+      p.name,
+      p.type?.name || '',
+      p.values?.join(', ') || '',
+    ]),
+    [22, 22, 42],
+  );
 }
 
 export function eventsTable(events: ComponentEvent[]): string {
   if (!events.length) return 'No events.';
-
-  const headers = ['Event'];
-  const rows = events.map(e => [e.name]);
-  return borderedTable(headers, rows);
+  return makeTable(['Event'], events.map(e => [e.name]));
 }
 
 export function slotsTable(slots: ComponentSlot[]): string {
   if (!slots.length) return 'No slots.';
-
-  const headers = ['Slot'];
-  const rows = slots.map(s => [s.name]);
-  return borderedTable(headers, rows);
+  return makeTable(['Slot'], slots.map(s => [s.name]));
 }
 
 // ── Minimal (plain text) formatters ─────────────────────────────────────────
@@ -166,6 +142,17 @@ function markdownSearchResults(results: SearchResult[]): string {
   }).join('\n');
 }
 
+function markdownPropsTable(props: ComponentProp[]): string {
+  const lines = ['| Prop | Type | Description | Values |', '|------|------|-------------|--------|'];
+  props.forEach((p: ComponentProp) => {
+    const type = p.type?.name || 'unknown';
+    const desc = (p.description || '').replace(/\|/g, '\\|').replace(/\n/g, ' ');
+    const values = (p.values || []).join(', ').replace(/\|/g, '\\|');
+    lines.push(`| ${p.name} | ${type} | ${desc} | ${values} |`);
+  });
+  return lines.join('\n');
+}
+
 function markdownComponent(result: SearchResult): string {
   const lines: string[] = [];
   lines.push(`# ${result.name}`);
@@ -175,14 +162,7 @@ function markdownComponent(result: SearchResult): string {
 
   if (result.details.props?.length) {
     lines.push('', '## Props', '');
-    lines.push('| Prop | Type | Description | Values |');
-    lines.push('|------|------|-------------|--------|');
-    result.details.props.forEach((p: ComponentProp) => {
-      const type = p.type?.name || 'unknown';
-      const desc = (p.description || '').replace(/\|/g, '\\|').replace(/\n/g, ' ');
-      const values = (p.values || []).join(', ').replace(/\|/g, '\\|');
-      lines.push(`| ${p.name} | ${type} | ${desc} | ${values} |`);
-    });
+    lines.push(markdownPropsTable(result.details.props));
   }
 
   if (result.details.events?.length) {
@@ -224,9 +204,9 @@ export function formatPrompt(component: Component): string {
   lines.push(`<${component.displayName}>`);
 
   if (component.description) {
-    // Truncate to first sentence. Use a lookbehind to avoid splitting on
-    // abbreviations like "e.g.", "i.e.", "etc." — only split after a period
-    // followed by a space and an uppercase letter (actual sentence boundary).
+    // Truncate to first sentence. Only split after a period followed by
+    // whitespace and an uppercase letter (actual sentence boundary).
+    // Avoids splitting on abbreviations like "e.g.", "i.e.", "etc."
     const firstSentence = component.description.split(/\.(?=\s+[A-Z])/)[0];
     lines.push(firstSentence.endsWith('.') ? firstSentence : firstSentence + '.');
   }
@@ -270,16 +250,7 @@ export function formatComponentOutput(result: SearchResult, format: Format, filt
   }
 
   if (filter === 'props') {
-    if (format === 'markdown') {
-      const lines = ['| Prop | Type | Description | Values |', '|------|------|-------------|--------|'];
-      (result.details.props || []).forEach((p: ComponentProp) => {
-        const type = p.type?.name || 'unknown';
-        const desc = (p.description || '').replace(/\|/g, '\\|').replace(/\n/g, ' ');
-        const values = (p.values || []).join(', ').replace(/\|/g, '\\|');
-        lines.push(`| ${p.name} | ${type} | ${desc} | ${values} |`);
-      });
-      return lines.join('\n');
-    }
+    if (format === 'markdown') return markdownPropsTable(result.details.props || []);
     return propsTable(result.details.props || [], options?.describe);
   }
 
