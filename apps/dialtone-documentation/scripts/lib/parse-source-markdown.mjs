@@ -7,6 +7,7 @@
  *   FRONTMATTER     — inside YAML --- block
  *   FENCED_CODE     — inside ``` fenced code block (highest priority)
  *   CODE_WELL_HEADER — inside <code-well-header>...</code-well-header> (remove)
+ *   CODE_EXAMPLE    — inside <code-example>...</code-example> (extract slot as code)
  *   CODE_EXAMPLE_TABS — accumulating <code-example-tabs ... /> lines
  *   DIALTONE_USAGE  — inside <dialtone-usage>...</dialtone-usage>
  *   UTILITY_CLASS_TABLE — inside <utility-class-table> or <new-utility-class-table>
@@ -38,6 +39,7 @@ const S = {
   HTML_COMMENT: 'HTML_COMMENT',
   ICONS_BLOCK: 'ICONS_BLOCK',
   DT_NOTICE: 'DT_NOTICE',
+  CODE_EXAMPLE: 'CODE_EXAMPLE',
 };
 
 /**
@@ -160,6 +162,56 @@ function handleUtilityClassTableState (ctx) {
   }
 }
 
+// ── State handler: CODE_EXAMPLE ────────────────────────────────────
+function handleCodeExampleState (ctx) {
+  ctx.accumulator.push(ctx.line);
+  if (ctx.trimmed === '</code-example>') {
+    if (!ctx.codeExampleDemoOnly) {
+      ctx.output.push(...transformCodeExample(ctx.accumulator));
+    }
+    ctx.accumulator = [];
+    ctx.state = S.NORMAL;
+  }
+}
+
+/**
+ * Extract slot content from accumulated <code-example> lines.
+ * Ignores vueCode attribute — always uses the slot.
+ * Returns a fenced ```vue block.
+ */
+function transformCodeExample (lines) {
+  const joined = lines.join('\n');
+
+  // Find the end of the opening tag (track quotes to handle multi-line attrs)
+  let inSQ = false;
+  let inDQ = false;
+  let openTagEnd = -1;
+  const tagStart = joined.indexOf('<code-example');
+  for (let i = tagStart + '<code-example'.length; i < joined.length; i++) {
+    const ch = joined[i];
+    if (ch === '\'' && !inDQ) inSQ = !inSQ;
+    else if (ch === '"' && !inSQ) inDQ = !inDQ;
+    else if (ch === '>' && !inSQ && !inDQ) { openTagEnd = i + 1; break; }
+  }
+  if (openTagEnd === -1) return [];
+
+  const closeTagStart = joined.lastIndexOf('</code-example>');
+  if (closeTagStart === -1) return [];
+
+  const slotContent = joined.slice(openTagEnd, closeTagStart).replace(/^\n+|\n+$/g, '');
+  if (!slotContent.trim()) return [];
+
+  // Dedent
+  const slotLines = slotContent.split('\n');
+  const nonEmpty = slotLines.filter(l => l.trim().length > 0);
+  if (nonEmpty.length === 0) return [];
+  const minIndent = Math.min(...nonEmpty.map(l => l.match(/^(\s*)/)[1].length));
+  const dedented = slotLines.map(l => l.slice(minIndent)).join('\n').trim();
+
+  if (!dedented) return [];
+  return ['', '```vue', dedented, '```', ''];
+}
+
 // ── State handler: CODE_EXAMPLE_TABS ──────────────────────────────
 function handleCodeExampleTabsState (ctx) {
   ctx.accumulator.push(ctx.line);
@@ -235,6 +287,14 @@ function tryDetectUtilityClassTable (ctx) {
     return true;
   }
   ctx.state = S.UTILITY_CLASS_TABLE;
+  return true;
+}
+
+function tryDetectCodeExample (ctx) {
+  if (!ctx.trimmed.startsWith('<code-example') || ctx.trimmed.startsWith('<code-example-tabs')) return false;
+  ctx.accumulator = [ctx.line];
+  ctx.codeExampleDemoOnly = ctx.trimmed.includes('only-show="demo"') || ctx.trimmed.includes('only-show=\'demo\'');
+  ctx.state = S.CODE_EXAMPLE;
   return true;
 }
 
@@ -484,6 +544,7 @@ const NORMAL_DETECTORS = [
   tryDetectScriptOrStyle,
   tryDetectCodeWellHeader,
   tryDetectUtilityClassTable,
+  tryDetectCodeExample,
   tryDetectCodeExampleTabs,
   tryDetectDialtoneUsage,
   tryDetectHtmlTable,
@@ -515,6 +576,7 @@ const STATE_HANDLERS = {
   [S.STYLE_BLOCK]: (ctx) => handleSkipUntilClose(ctx, '</style>', S.NORMAL),
   [S.CODE_WELL_HEADER]: (ctx) => handleSkipUntilClose(ctx, '</code-well-header>', S.NORMAL),
   [S.UTILITY_CLASS_TABLE]: handleUtilityClassTableState,
+  [S.CODE_EXAMPLE]: handleCodeExampleState,
   [S.CODE_EXAMPLE_TABS]: handleCodeExampleTabsState,
   [S.DIALTONE_USAGE]: handleDialtoneUsageState,
   [S.HTML_TABLE]: handleHtmlTableState,
