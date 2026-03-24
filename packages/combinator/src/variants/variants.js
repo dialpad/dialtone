@@ -44,6 +44,7 @@ import DtRadioGroup from './variants_radio_group.js';
 import DtRichTextEditor from './variants_rich_text_editor.js';
 import DtRootLayout from './variants_root_layout.js';
 import DtScroller from './variants_scroller.js';
+import DtSegmentedControl from './variants_segmented_control.js';
 import DtSelectMenu from './variants_select_menu.js';
 import DtSkeleton from './variants_skeleton.js';
 import DtSplitButton from './variants_split_button.js';
@@ -103,6 +104,7 @@ export default function variants () {
     DtRichTextEditor,
     DtRootLayout,
     DtScroller,
+    DtSegmentedControl,
     DtSelectMenu,
     DtSkeleton,
     DtSplitButton,

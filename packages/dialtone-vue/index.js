@@ -53,6 +53,7 @@ export * from './components/radio_group';
 export * from './components/rich_text_editor';
 export * from './components/root_layout';
 export * from './components/scroller';
+export * from './components/segmented_control';
 export * from './components/select_menu';
 export * from './components/skeleton';
 export * from './components/split_button';

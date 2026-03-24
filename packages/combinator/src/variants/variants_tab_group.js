@@ -123,7 +123,15 @@ export default {
     },
     slots: {
       tabs: {
-        initialValue: '<dt-tab id="tab-1" panel-id="panel-1" selected>First<template #startIcon="{ iconSize }"><dt-icon name="box-select" :size="iconSize" /></template></dt-tab><dt-tab id="tab-2" panel-id="panel-2">Second<template #startIcon="{ iconSize }"><dt-icon name="box-select" :size="iconSize" /></template></dt-tab><dt-tab id="tab-3" panel-id="panel-3">Third</dt-tab>',
+        initialValue: `<dt-tab id="tab-1" panel-id="panel-1" selected>
+  <template #startIcon="{ iconSize }"><dt-icon name="box-select" :size="iconSize" /></template>
+  First
+</dt-tab>
+<dt-tab id="tab-2" panel-id="panel-2">
+  <template #startIcon="{ iconSize }"><dt-icon name="box-select" :size="iconSize" /></template>
+  Second
+</dt-tab>
+<dt-tab id="tab-3" panel-id="panel-3">Third</dt-tab>`,
       },
       default: {
         initialValue: '<div class="d-ba d-baw2 d-bas-dashed d-bc-subtle d-w100p d-py48"><dt-tab-panel id="panel-1" tab-id="tab-1"><dt-text as="p" kind="code" size="xs" tone="muted" align="center" class="d-p16"> <strong>First</strong> tab content panel </dt-text></dt-tab-panel><dt-tab-panel id="panel-2" tab-id="tab-2"><dt-text as="p" kind="code" size="xs" tone="muted" align="center" class="d-p16"> <strong>Second</strong> tab content panel </dt-text></dt-tab-panel><dt-tab-panel id="panel-3" tab-id="tab-3"><dt-text as="p" kind="code" size="xs" tone="muted" align="center" class="d-p16"> <strong>Third</strong> tab content panel </dt-text></dt-tab-panel></div>',
@@ -131,7 +139,7 @@ export default {
     },
   },
 
-  'with badges': {
+  'with trailing slot': {
     props: {
       selected: { initialValue: 'panel-1' },
       tabListClass: {
@@ -140,7 +148,15 @@ export default {
     },
     slots: {
       tabs: {
-        initialValue: '<dt-tab id="tab-1" panel-id="panel-1" selected trailing-class="d-pr8">Inbox<template #trailing><dt-badge kind="count" type="bulletin" text="9" /></template></dt-tab><dt-tab id="tab-2" panel-id="panel-2" trailing-class="d-pr8">Archive<template #trailing><dt-badge kind="count" text="99+" /></template></dt-tab><dt-tab id="tab-3" panel-id="panel-3">Drafts</dt-tab>',
+        initialValue: `<dt-tab id="tab-1" panel-id="panel-1" selected trailing-class="d-pr8">
+  <template #trailing><dt-badge kind="count" type="bulletin" text="9" /></template>
+  Inbox
+</dt-tab>
+<dt-tab id="tab-2" panel-id="panel-2" trailing-class="d-pr8">
+  <template #trailing><dt-badge kind="count" text="99+" /></template>
+  Archive
+</dt-tab>
+<dt-tab id="tab-3" panel-id="panel-3">Drafts</dt-tab>`,
       },
       default: {
         initialValue: '<div class="d-ba d-baw2 d-bas-dashed d-bc-subtle d-w100p d-py48"><dt-tab-panel id="panel-1" tab-id="tab-1"><dt-text as="p" kind="code" size="xs" tone="muted" align="center" class="d-p16"> <strong>Inbox</strong> tab content panel </dt-text></dt-tab-panel><dt-tab-panel id="panel-2" tab-id="tab-2"><dt-text as="p" kind="code" size="xs" tone="muted" align="center" class="d-p16"> <strong>Archive</strong> tab content panel </dt-text></dt-tab-panel><dt-tab-panel id="panel-3" tab-id="tab-3"><dt-text as="p" kind="code" size="xs" tone="muted" align="center" class="d-p16"> <strong>Drafts</strong> tab content panel </dt-text></dt-tab-panel></div>',
