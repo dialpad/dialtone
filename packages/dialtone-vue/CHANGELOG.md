@@ -1,3 +1,10 @@
+## [3.218.2](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.218.1...dialtone-vue/v3.218.2) (2026-03-24)
+
+
+### Bug Fixes
+
+* **Input:** DP-180970 ime composition bug ([#1146](https://github.com/dialpad/dialtone/issues/1146)) ([af6afdd](https://github.com/dialpad/dialtone/commit/af6afddfa04a13bf63885972797bece8815e2a5d))
+
 ## [3.218.1](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.218.0...dialtone-vue/v3.218.1) (2026-03-20)
 
 
