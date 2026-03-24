@@ -223,7 +223,7 @@ function checkCodeExampleStructure (lines, filename) {
 
     if (inCodeExample && openTagClosed) {
       // Check 5: empty lines
-      if (trimmed === '' && !trimmed.startsWith('</code-example')) {
+      if (trimmed === '') {
         violations.push({
           file: filename,
           line: i + 1,

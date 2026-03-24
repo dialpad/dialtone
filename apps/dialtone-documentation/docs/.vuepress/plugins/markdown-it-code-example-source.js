@@ -48,16 +48,16 @@ function encodeVueCodeAttr (content) {
 
     const valueStart = start + 'vueCode=\''.length;
 
-    // Find the closing ' by checking the next character is a tag-level delimiter
+    // Find the closing ' using stateful double-quote tracking.
+    // Inside the single-quoted vueCode value, double quotes toggle freely
+    // (e.g., :class="{'active': true}"). We only match an unescaped ' that
+    // is NOT inside a double-quoted substring.
     let end = -1;
+    let inDoubleQuote = false;
     for (let i = valueStart; i < result.length; i++) {
-      if (result[i] === '\'' && (
-        i + 1 >= result.length ||
-        result[i + 1] === '>' ||
-        result[i + 1] === ' ' ||
-        result[i + 1] === '\n' ||
-        result[i + 1] === '/'
-      )) {
+      if (result[i] === '"') {
+        inDoubleQuote = !inDoubleQuote;
+      } else if (result[i] === '\'' && !inDoubleQuote) {
         end = i;
         break;
       }
@@ -136,13 +136,12 @@ export function stripMarkedWrapper (content) {
  * Find the index of the first `>` not inside a quoted attribute value.
  */
 function findFirstUnquotedClose (str) {
-  let inQuote = false;
+  let inSingleQuote = false;
+  let inDoubleQuote = false;
   for (let i = 0; i < str.length; i++) {
-    if (str[i] === '\'' && !inQuote) inQuote = true;
-    else if (str[i] === '\'' && inQuote) inQuote = false;
-    else if (str[i] === '"' && !inQuote) inQuote = true;
-    else if (str[i] === '"' && inQuote) inQuote = false;
-    else if (str[i] === '>' && !inQuote) return i;
+    if (str[i] === '\'' && !inDoubleQuote) inSingleQuote = !inSingleQuote;
+    else if (str[i] === '"' && !inSingleQuote) inDoubleQuote = !inDoubleQuote;
+    else if (str[i] === '>' && !inSingleQuote && !inDoubleQuote) return i;
   }
   return -1;
 }

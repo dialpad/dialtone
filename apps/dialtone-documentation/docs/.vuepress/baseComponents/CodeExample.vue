@@ -30,6 +30,8 @@ export default {
     CodeExampleTabs,
   },
 
+  inheritAttrs: false,
+
   props: {
     /**
      * Auto-injected by markdown-it plugin. Raw slot source extracted at build time.
