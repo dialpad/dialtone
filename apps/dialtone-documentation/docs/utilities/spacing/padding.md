@@ -8,52 +8,54 @@ keywords: ["inner spacing", "inset"]
   Padding CSS Utilities are most appropriate for padding on the <strong>sides</strong> of an element. Avoiding using it to create spacing <strong>between</strong> elements. Instead, favor the <dt-link to="/components/stack/" kind="muted">Stack</dt-link> component and its <code>gap</code> property for spacing between. It can still be combined with flex utilities to create more complex layouts.
 </dt-notice>
 
+Use `d-p-{stop}` to set padding using spacing token stops. The number references the spacing token (`d-p-100` = `--dt-spacing-100` = 8px).
+
 ## Add Padding to All Sides
 
 <code-well-header>
-  <div class="d-size-200 d-p-200 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-fl1 d-h100p d-bgc-moderate d-bar4 d-code--md">d-p16</dt-stack></div>
+  <div class="d-size-200 d-p-200 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-fl1 d-h100p d-bgc-moderate d-bar4 d-code--md">d-p-200</dt-stack></div>
 </code-well-header>
 
 ```html
-<div class="d-p-100 ...">d-p8</div>
+<div class="d-p-200 ...">d-p-200</div>
 ```
 
 ## Add Padding to a Single Side
 
 <code-well-header>
   <dt-stack direction="row" justify="center" gap="300" class="d-fw-wrap d-w100p">
-    <div class="d-as-center d-pt-150 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bbr4 d-code--md">d-pt12</dt-stack></div>
-    <div class="d-as-center d-pr-200 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-brl4 d-code--md">d-pr16</dt-stack></div>
-    <div class="d-as-center d-pb-300 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-btr4 d-code--md">d-pb24</dt-stack></div>
-    <div class="d-as-center d-pl-400 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-brr4 d-code--md">d-pl32</dt-stack></div>
+    <div class="d-as-center d-pt-150 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bbr4 d-code--md">d-pt-150</dt-stack></div>
+    <div class="d-as-center d-pr-200 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-brl4 d-code--md">d-pr-200</dt-stack></div>
+    <div class="d-as-center d-pb-300 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-btr4 d-code--md">d-pb-300</dt-stack></div>
+    <div class="d-as-center d-pl-400 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-brr4 d-code--md">d-pl-400</dt-stack></div>
   </dt-stack>
 </code-well-header>
 
 ```html
-<div class="d-pt-150 ...">d-pt12</div>
-<div class="d-pr-200 ...">d-pr16</div>
-<div class="d-pb-300 ...">d-pb24</div>
-<div class="d-pl-400 ...">d-pl32</div>
+<div class="d-pt-150 ...">d-pt-150</div>
+<div class="d-pr-200 ...">d-pr-200</div>
+<div class="d-pb-300 ...">d-pb-300</div>
+<div class="d-pl-400 ...">d-pl-400</div>
 ```
 
 ## Add Horizontal Padding
 
 <code-well-header>
-  <div class="d-as-center d-px-200 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-code--md">d-px16</dt-stack></div>
+  <div class="d-as-center d-px-200 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-code--md">d-px-200</dt-stack></div>
 </code-well-header>
 
 ```html
-<div class="d-px-200 ...">d-px16</div>
+<div class="d-px-200 ...">d-px-200</div>
 ```
 
 ## Add Vertical Padding
 
 <code-well-header>
-  <div class="d-as-center d-py-200 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-code--md">d-py16</dt-stack></div>
+  <div class="d-as-center d-py-300 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-code--md">d-py-300</dt-stack></div>
 </code-well-header>
 
 ```html
-<div class="d-py-300 ...">d-py24</div>
+<div class="d-py-300 ...">d-py-300</div>
 ```
 
 <script setup>
@@ -62,7 +64,7 @@ keywords: ["inner spacing", "inset"]
 
 ## Classes
 
-Padding can be added to an element by using a utility class (i.e. `.d-p[#]`) or by using a directional class (i.e. `.d-p{t|r|b|l|y|x}[#]`).
+Padding can be added to an element by using `d-p-{stop}` or a directional class like `d-p{t|r|b|l|y|x}-{stop}`. Logical property aliases are also available: `d-pbs-{stop}` (padding-block-start), `d-pbe-{stop}` (padding-block-end), `d-pis-{stop}` (padding-inline-start), `d-pie-{stop}` (padding-inline-end).
 
 <utility-class-table>
   <template #content>
