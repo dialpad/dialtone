@@ -43,7 +43,7 @@ keywords: ["dropdown", "picker", "d-select-menu", "DtSelectMenu", "dt-select-men
 
 A select is normally paired with a label, but there are times when it can be used without a label. Don't rely on the placeholder text as a label.
 
-<code-example bgclass="d-bgc-primary" vueCode='
+<code-example vueCode='
 <dt-select-menu
   :options="[
         { value: ``, label: `Please select one` },
@@ -70,15 +70,15 @@ A select is normally paired with a label, but there are times when it can be use
   @change="onChange"
 />
 '>
-  <dt-stack gap="500" class="d-w100p">
+  <div class="d-d-grid d-g16 d-g-cols2">
     <example-select-menu label="Default" />
     <example-select-menu label="Disabled" disabled />
-  </dt-stack>
+  </div>
 </code-example>
 
 ### With Description Text
 
-<code-example bgclass="d-bgc-primary" vueCode='
+<code-example vueCode='
 <dt-select-menu
   :options="[
         { value: ``, label: `Please select one` },
@@ -100,7 +100,7 @@ A select is normally paired with a label, but there are times when it can be use
 
 Provides feedback to the user based on their interaction, or lack thereof, with a select.
 
-<code-example bgclass="d-bgc-primary" vueCode='
+<code-example vueCode='
 <dt-select-menu
   :options="[
     { value: ``, label: `Please select one` },
@@ -141,7 +141,7 @@ Provides feedback to the user based on their interaction, or lack thereof, with 
   @change="onChange"
 />
 '>
-  <dt-stack gap="500" class="d-w100p">
+  <div class="d-d-grid d-g16 d-g-cols3">
     <example-select-menu
       label="Label"
       :messages='[{"message":"Error validation message","type":"error"}]'
@@ -154,12 +154,12 @@ Provides feedback to the user based on their interaction, or lack thereof, with 
       label="Label"
       :messages='[{"message":"Warning validation message","type":"warning"}]'
     />
-  </dt-stack>
+  </div>
 </code-example>
 
 ### With Validation States Hidden
 
-<code-example bgclass="d-bgc-primary" vueCode='
+<code-example vueCode='
 <dt-select-menu
   :options="[
     { value: ``, label: `Please select one` },
@@ -203,7 +203,7 @@ Provides feedback to the user based on their interaction, or lack thereof, with 
   :show-messages="false"
 />
 '>
-  <dt-stack gap="500" class="d-w100p">
+  <div class="d-d-grid d-g16 d-g-cols3">
     <example-select-menu
       label="Label"
       :messages='[{"message":"Error validation message","type":"error"}]'
@@ -219,7 +219,7 @@ Provides feedback to the user based on their interaction, or lack thereof, with 
       :messages='[{"message":"Warning validation message","type":"warning"}]'
       :show-messages="false"
     />
-  </dt-stack>
+  </div>
 </code-example>
 
 ### With Slotted Label
@@ -307,7 +307,7 @@ Provides feedback to the user based on their interaction, or lack thereof, with 
 
 We offer different sizes for instances in which the interface requires a smaller or larger select. In general, though, use the base (medium) size select as much as possible, especially in forms.
 
-<code-example bgclass="d-bgc-primary" vueCode='
+<code-example vueCode='
 <dt-select-menu
   :options="[
     { value: ``, label: `Please select one` },
@@ -322,7 +322,7 @@ We offer different sizes for instances in which the interface requires a smaller
   @change="onChange"
 />
 '>
-  <dt-stack gap="500" class="d-w100p">
+  <dt-stack gap="500">
     <example-select-menu label="Label" size="xs" />
     <example-select-menu label="Label" size="sm" />
     <example-select-menu label="Label" size="md" />
@@ -335,7 +335,7 @@ We offer different sizes for instances in which the interface requires a smaller
 
 The label text size is automatically derived from the component's `size` prop. Use the `label-size` prop to override this when you need a different label size independent of the select size. For example, the default label size for a `size="md"` select menu is `md`, but you can override it from `xs` to `lg`.
 
-<code-example bgclass="d-bgc-primary" vueCode='
+<code-example vueCode='
 <dt-select-menu
   :options="options"
   label="Label"
@@ -343,7 +343,7 @@ The label text size is automatically derived from the component's `size` prop. U
   label-size="xs|sm|md|lg"
 />
 '>
-  <dt-stack gap="500" class="d-w100p">
+  <dt-stack gap="500">
     <example-select-menu label="Extra small label" label-size="xs" />
     <example-select-menu label="Small label" label-size="sm" />
     <example-select-menu label="Medium label (default)" label-size="md" />
@@ -355,14 +355,14 @@ The label text size is automatically derived from the component's `size` prop. U
 
 Override the label font weight independently of the label size. Valid values are `bold`, `semibold`, `medium`, and `normal`.
 
-<code-example bgclass="d-bgc-primary" vueCode='
+<code-example vueCode='
 <dt-select-menu
   :options="options"
   label="Label"
   label-strength="bold|semibold|medium|normal"
 />
 '>
-  <dt-stack gap="500" class="d-w100p">
+  <dt-stack gap="500">
     <example-select-menu label="Bold label" label-strength="bold" />
     <example-select-menu label="Semibold label" label-strength="semibold" />
     <example-select-menu label="Medium label" label-strength="medium" />
