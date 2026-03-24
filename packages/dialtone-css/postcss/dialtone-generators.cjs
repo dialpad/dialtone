@@ -23,6 +23,8 @@ const {
   WIDTH_HEIGHTS_SPACING,
   WIDTH_HEIGHTS_LAYOUT,
   WIDTH_HEIGHTS_DEPRECATED,
+  LAYOUT_STOPS,
+  SPACING_STOPS,
   OKLCH_EXCLUDED_COLORS,
 } = require('./constants.cjs');
 const {
@@ -95,6 +97,42 @@ const generatedRules = {
   paddingRight: [],
   paddingBottom: [],
   paddingLeft: [],
+  // Token-stop-based classes (d-h-{stop}, d-w-{stop}, d-size-{stop})
+  tokenFixedHeight: [],
+  tokenMaxHeight: [],
+  tokenMinHeight: [],
+  tokenFixedWidth: [],
+  tokenMinWidth: [],
+  tokenMaxWidth: [],
+  tokenSize: [],
+  // Token-stop-based margin classes (d-m-{stop}, d-mt-{stop}/d-mbs-{stop}, etc.)
+  tokenMarginAll: [],
+  tokenMarginTop: [],
+  tokenMarginRight: [],
+  tokenMarginBottom: [],
+  tokenMarginLeft: [],
+  tokenMarginHorizontal: [],
+  tokenMarginVertical: [],
+  // Token-stop-based padding classes (d-p-{stop}, d-pt-{stop}/d-pbs-{stop}, etc.)
+  tokenPaddingAll: [],
+  tokenPaddingTop: [],
+  tokenPaddingRight: [],
+  tokenPaddingBottom: [],
+  tokenPaddingLeft: [],
+  tokenPaddingHorizontal: [],
+  tokenPaddingVertical: [],
+  // Token-stop-based gap classes (d-g-{stop}, d-rg-{stop}, d-cg-{stop})
+  tokenGap: [],
+  tokenRowGap: [],
+  tokenColumnGap: [],
+  // Token-stop-based position classes (d-t-{stop}, d-r-{stop}, etc.)
+  tokenPositionAll: [],
+  tokenPositionHorizontal: [],
+  tokenPositionVertical: [],
+  tokenPositionTop: [],
+  tokenPositionRight: [],
+  tokenPositionBottom: [],
+  tokenPositionLeft: [],
 };
 
 //    Utility classes generation      //
@@ -810,6 +848,400 @@ function paddingUtilities (clonedSource, declaration) {
 }
 
 /**
+ * Generate token-stop-based sizing utility classes.
+ * These use the layout token stop as the class name (d-h-25 = var(--dt-layout-25) = 16px).
+ * Hyphen between prefix and stop distinguishes from pixel-based classes (d-h25 = 25px).
+ * @param { Source } clonedSource
+ * @param { Declaration } declaration
+ */
+function tokenSizingUtilities (clonedSource, declaration) {
+  LAYOUT_STOPS.forEach(stop => {
+    const tokenVar = `var(--dt-layout-${stop})`;
+
+    generatedRules.tokenFixedHeight.push(new Rule({
+      source: clonedSource,
+      selector: `.d-h-${stop}`,
+      nodes: [
+        declaration.clone({ prop: 'block-size', value: `${tokenVar} !important` }),
+      ],
+    }));
+    generatedRules.tokenMinHeight.push(new Rule({
+      source: clonedSource,
+      selector: `.d-hmn-${stop}`,
+      nodes: [
+        declaration.clone({ prop: 'min-block-size', value: `${tokenVar} !important` }),
+      ],
+    }));
+    generatedRules.tokenMaxHeight.push(new Rule({
+      source: clonedSource,
+      selector: `.d-hmx-${stop}`,
+      nodes: [
+        declaration.clone({ prop: 'max-block-size', value: `${tokenVar} !important` }),
+      ],
+    }));
+    generatedRules.tokenFixedWidth.push(new Rule({
+      source: clonedSource,
+      selector: `.d-w-${stop}`,
+      nodes: [
+        declaration.clone({ prop: 'inline-size', value: `${tokenVar} !important` }),
+      ],
+    }));
+    generatedRules.tokenMinWidth.push(new Rule({
+      source: clonedSource,
+      selector: `.d-wmn-${stop}`,
+      nodes: [
+        declaration.clone({ prop: 'min-inline-size', value: `${tokenVar} !important` }),
+      ],
+    }));
+    generatedRules.tokenMaxWidth.push(new Rule({
+      source: clonedSource,
+      selector: `.d-wmx-${stop}`,
+      nodes: [
+        declaration.clone({ prop: 'max-inline-size', value: `${tokenVar} !important` }),
+      ],
+    }));
+    generatedRules.tokenSize.push(new Rule({
+      source: clonedSource,
+      selector: `.d-size-${stop}`,
+      nodes: [
+        declaration.clone({ prop: 'inline-size', value: `${tokenVar} !important` }),
+        declaration.clone({ prop: 'block-size', value: `${tokenVar} !important` }),
+      ],
+    }));
+  });
+}
+
+/**
+ * Generate token-stop-based margin utility classes with logical property aliases.
+ * Physical and logical names are comma-grouped (d-mt-100, d-mbs-100 share one rule).
+ * Negative margins use d-mt-n{stop} / d-mbs-n{stop} notation.
+ * @param { Source } clonedSource
+ * @param { Declaration } declaration
+ */
+function tokenMarginUtilities (clonedSource, declaration) {
+  SPACING_STOPS.forEach(stop => {
+    const tokenVar = `var(--dt-spacing-${stop})`;
+
+    generatedRules.tokenMarginAll.push(new Rule({
+      source: clonedSource,
+      selector: `.d-m-${stop}`,
+      nodes: [
+        declaration.clone({ prop: 'margin', value: `${tokenVar} !important` }),
+      ],
+    }));
+    generatedRules.tokenMarginTop.push(new Rule({
+      source: clonedSource,
+      selector: `.d-mt-${stop}, .d-mbs-${stop}`,
+      nodes: [
+        declaration.clone({ prop: 'margin-block-start', value: `${tokenVar} !important` }),
+      ],
+    }));
+    generatedRules.tokenMarginRight.push(new Rule({
+      source: clonedSource,
+      selector: `.d-mr-${stop}, .d-mie-${stop}`,
+      nodes: [
+        declaration.clone({ prop: 'margin-inline-end', value: `${tokenVar} !important` }),
+      ],
+    }));
+    generatedRules.tokenMarginBottom.push(new Rule({
+      source: clonedSource,
+      selector: `.d-mb-${stop}, .d-mbe-${stop}`,
+      nodes: [
+        declaration.clone({ prop: 'margin-block-end', value: `${tokenVar} !important` }),
+      ],
+    }));
+    generatedRules.tokenMarginLeft.push(new Rule({
+      source: clonedSource,
+      selector: `.d-ml-${stop}, .d-mis-${stop}`,
+      nodes: [
+        declaration.clone({ prop: 'margin-inline-start', value: `${tokenVar} !important` }),
+      ],
+    }));
+    generatedRules.tokenMarginHorizontal.push(new Rule({
+      source: clonedSource,
+      selector: `.d-mx-${stop}`,
+      nodes: [
+        declaration.clone({ prop: 'margin-inline', value: `${tokenVar} !important` }),
+      ],
+    }));
+    generatedRules.tokenMarginVertical.push(new Rule({
+      source: clonedSource,
+      selector: `.d-my-${stop}`,
+      nodes: [
+        declaration.clone({ prop: 'margin-block', value: `${tokenVar} !important` }),
+      ],
+    }));
+
+    // Negative margins (skip 0)
+    if (stop !== 0) {
+      const negTokenVar = `var(--dt-spacing-${stop}-negative)`;
+
+      generatedRules.tokenMarginAll.push(new Rule({
+        source: clonedSource,
+        selector: `.d-m-n${stop}`,
+        nodes: [
+          declaration.clone({ prop: 'margin', value: `${negTokenVar} !important` }),
+        ],
+      }));
+      generatedRules.tokenMarginTop.push(new Rule({
+        source: clonedSource,
+        selector: `.d-mt-n${stop}, .d-mbs-n${stop}`,
+        nodes: [
+          declaration.clone({ prop: 'margin-block-start', value: `${negTokenVar} !important` }),
+        ],
+      }));
+      generatedRules.tokenMarginRight.push(new Rule({
+        source: clonedSource,
+        selector: `.d-mr-n${stop}, .d-mie-n${stop}`,
+        nodes: [
+          declaration.clone({ prop: 'margin-inline-end', value: `${negTokenVar} !important` }),
+        ],
+      }));
+      generatedRules.tokenMarginBottom.push(new Rule({
+        source: clonedSource,
+        selector: `.d-mb-n${stop}, .d-mbe-n${stop}`,
+        nodes: [
+          declaration.clone({ prop: 'margin-block-end', value: `${negTokenVar} !important` }),
+        ],
+      }));
+      generatedRules.tokenMarginLeft.push(new Rule({
+        source: clonedSource,
+        selector: `.d-ml-n${stop}, .d-mis-n${stop}`,
+        nodes: [
+          declaration.clone({ prop: 'margin-inline-start', value: `${negTokenVar} !important` }),
+        ],
+      }));
+      generatedRules.tokenMarginHorizontal.push(new Rule({
+        source: clonedSource,
+        selector: `.d-mx-n${stop}`,
+        nodes: [
+          declaration.clone({ prop: 'margin-inline', value: `${negTokenVar} !important` }),
+        ],
+      }));
+      generatedRules.tokenMarginVertical.push(new Rule({
+        source: clonedSource,
+        selector: `.d-my-n${stop}`,
+        nodes: [
+          declaration.clone({ prop: 'margin-block', value: `${negTokenVar} !important` }),
+        ],
+      }));
+    }
+  });
+}
+
+/**
+ * Generate token-stop-based padding utility classes with logical property aliases.
+ * Physical and logical names are comma-grouped (d-pt-100, d-pbs-100 share one rule).
+ * @param { Source } clonedSource
+ * @param { Declaration } declaration
+ */
+function tokenPaddingUtilities (clonedSource, declaration) {
+  SPACING_STOPS.forEach(stop => {
+    const tokenVar = `var(--dt-spacing-${stop})`;
+
+    generatedRules.tokenPaddingAll.push(new Rule({
+      source: clonedSource,
+      selector: `.d-p-${stop}`,
+      nodes: [
+        declaration.clone({ prop: 'padding', value: `${tokenVar} !important` }),
+      ],
+    }));
+    generatedRules.tokenPaddingTop.push(new Rule({
+      source: clonedSource,
+      selector: `.d-pt-${stop}, .d-pbs-${stop}`,
+      nodes: [
+        declaration.clone({ prop: 'padding-block-start', value: `${tokenVar} !important` }),
+      ],
+    }));
+    generatedRules.tokenPaddingRight.push(new Rule({
+      source: clonedSource,
+      selector: `.d-pr-${stop}, .d-pie-${stop}`,
+      nodes: [
+        declaration.clone({ prop: 'padding-inline-end', value: `${tokenVar} !important` }),
+      ],
+    }));
+    generatedRules.tokenPaddingBottom.push(new Rule({
+      source: clonedSource,
+      selector: `.d-pb-${stop}, .d-pbe-${stop}`,
+      nodes: [
+        declaration.clone({ prop: 'padding-block-end', value: `${tokenVar} !important` }),
+      ],
+    }));
+    generatedRules.tokenPaddingLeft.push(new Rule({
+      source: clonedSource,
+      selector: `.d-pl-${stop}, .d-pis-${stop}`,
+      nodes: [
+        declaration.clone({ prop: 'padding-inline-start', value: `${tokenVar} !important` }),
+      ],
+    }));
+    generatedRules.tokenPaddingHorizontal.push(new Rule({
+      source: clonedSource,
+      selector: `.d-px-${stop}`,
+      nodes: [
+        declaration.clone({ prop: 'padding-inline', value: `${tokenVar} !important` }),
+      ],
+    }));
+    generatedRules.tokenPaddingVertical.push(new Rule({
+      source: clonedSource,
+      selector: `.d-py-${stop}`,
+      nodes: [
+        declaration.clone({ prop: 'padding-block', value: `${tokenVar} !important` }),
+      ],
+    }));
+  });
+}
+
+/**
+ * Generate token-stop-based gap utility classes.
+ * @param { Source } clonedSource
+ * @param { Declaration } declaration
+ */
+function tokenGapUtilities (clonedSource, declaration) {
+  SPACING_STOPS.forEach(stop => {
+    const tokenVar = `var(--dt-spacing-${stop})`;
+
+    generatedRules.tokenGap.push(new Rule({
+      source: clonedSource,
+      selector: `.d-g-${stop}`,
+      nodes: [
+        declaration.clone({ prop: 'gap', value: `${tokenVar} !important` }),
+      ],
+    }));
+    generatedRules.tokenRowGap.push(new Rule({
+      source: clonedSource,
+      selector: `.d-rg-${stop}`,
+      nodes: [
+        declaration.clone({ prop: 'row-gap', value: `${tokenVar} !important` }),
+      ],
+    }));
+    generatedRules.tokenColumnGap.push(new Rule({
+      source: clonedSource,
+      selector: `.d-cg-${stop}`,
+      nodes: [
+        declaration.clone({ prop: 'column-gap', value: `${tokenVar} !important` }),
+      ],
+    }));
+  });
+}
+
+/**
+ * Generate token-stop-based position (inset) utility classes.
+ * Negative variants use d-t-n{stop} notation.
+ * @param { Source } clonedSource
+ * @param { Declaration } declaration
+ */
+function tokenPositionUtilities (clonedSource, declaration) {
+  SPACING_STOPS.forEach(stop => {
+    const tokenVar = `var(--dt-spacing-${stop})`;
+
+    generatedRules.tokenPositionTop.push(new Rule({
+      source: clonedSource,
+      selector: `.d-t-${stop}, .d-ibs-${stop}`,
+      nodes: [
+        declaration.clone({ prop: 'inset-block-start', value: `${tokenVar} !important` }),
+      ],
+    }));
+    generatedRules.tokenPositionRight.push(new Rule({
+      source: clonedSource,
+      selector: `.d-r-${stop}, .d-iie-${stop}`,
+      nodes: [
+        declaration.clone({ prop: 'inset-inline-end', value: `${tokenVar} !important` }),
+      ],
+    }));
+    generatedRules.tokenPositionBottom.push(new Rule({
+      source: clonedSource,
+      selector: `.d-b-${stop}, .d-ibe-${stop}`,
+      nodes: [
+        declaration.clone({ prop: 'inset-block-end', value: `${tokenVar} !important` }),
+      ],
+    }));
+    generatedRules.tokenPositionLeft.push(new Rule({
+      source: clonedSource,
+      selector: `.d-l-${stop}, .d-iis-${stop}`,
+      nodes: [
+        declaration.clone({ prop: 'inset-inline-start', value: `${tokenVar} !important` }),
+      ],
+    }));
+    generatedRules.tokenPositionVertical.push(new Rule({
+      source: clonedSource,
+      selector: `.d-y-${stop}`,
+      nodes: [
+        declaration.clone({ prop: 'inset-block', value: `${tokenVar} !important` }),
+      ],
+    }));
+    generatedRules.tokenPositionHorizontal.push(new Rule({
+      source: clonedSource,
+      selector: `.d-x-${stop}`,
+      nodes: [
+        declaration.clone({ prop: 'inset-inline', value: `${tokenVar} !important` }),
+      ],
+    }));
+    generatedRules.tokenPositionAll.push(new Rule({
+      source: clonedSource,
+      selector: `.d-all-${stop}`,
+      nodes: [
+        declaration.clone({ prop: 'inset', value: `${tokenVar} !important` }),
+      ],
+    }));
+
+    // Negative positions (skip 0)
+    if (stop !== 0) {
+      const negTokenVar = `var(--dt-spacing-${stop}-negative)`;
+
+      generatedRules.tokenPositionTop.push(new Rule({
+        source: clonedSource,
+        selector: `.d-t-n${stop}, .d-ibs-n${stop}`,
+        nodes: [
+          declaration.clone({ prop: 'inset-block-start', value: `${negTokenVar} !important` }),
+        ],
+      }));
+      generatedRules.tokenPositionRight.push(new Rule({
+        source: clonedSource,
+        selector: `.d-r-n${stop}, .d-iie-n${stop}`,
+        nodes: [
+          declaration.clone({ prop: 'inset-inline-end', value: `${negTokenVar} !important` }),
+        ],
+      }));
+      generatedRules.tokenPositionBottom.push(new Rule({
+        source: clonedSource,
+        selector: `.d-b-n${stop}, .d-ibe-n${stop}`,
+        nodes: [
+          declaration.clone({ prop: 'inset-block-end', value: `${negTokenVar} !important` }),
+        ],
+      }));
+      generatedRules.tokenPositionLeft.push(new Rule({
+        source: clonedSource,
+        selector: `.d-l-n${stop}, .d-iis-n${stop}`,
+        nodes: [
+          declaration.clone({ prop: 'inset-inline-start', value: `${negTokenVar} !important` }),
+        ],
+      }));
+      generatedRules.tokenPositionVertical.push(new Rule({
+        source: clonedSource,
+        selector: `.d-y-n${stop}`,
+        nodes: [
+          declaration.clone({ prop: 'inset-block', value: `${negTokenVar} !important` }),
+        ],
+      }));
+      generatedRules.tokenPositionHorizontal.push(new Rule({
+        source: clonedSource,
+        selector: `.d-x-n${stop}`,
+        nodes: [
+          declaration.clone({ prop: 'inset-inline', value: `${negTokenVar} !important` }),
+        ],
+      }));
+      generatedRules.tokenPositionAll.push(new Rule({
+        source: clonedSource,
+        selector: `.d-all-n${stop}`,
+        nodes: [
+          declaration.clone({ prop: 'inset', value: `${negTokenVar} !important` }),
+        ],
+      }));
+    }
+  });
+}
+
+/**
  *
  * @param { Source } clonedSource
  * @param { Declaration } declaration
@@ -826,6 +1258,11 @@ function _generateUtilities (clonedSource, declaration) {
   sizingUtilities(clonedSource, declaration);
   marginUtilities(clonedSource, declaration);
   paddingUtilities(clonedSource, declaration);
+  tokenSizingUtilities(clonedSource, declaration);
+  tokenMarginUtilities(clonedSource, declaration);
+  tokenPaddingUtilities(clonedSource, declaration);
+  tokenGapUtilities(clonedSource, declaration);
+  tokenPositionUtilities(clonedSource, declaration);
 }
 
 //        Selector variations         //
