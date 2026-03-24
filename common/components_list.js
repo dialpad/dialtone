@@ -45,6 +45,8 @@ module.exports = [
   'rich_text_editor.vue',
   'root_layout.vue',
   'scroller.vue',
+  'segmented_control.vue',
+  'segmented_control_item.vue',
   'select_menu.vue',
   'skeleton.vue',
   'split_button.vue',
