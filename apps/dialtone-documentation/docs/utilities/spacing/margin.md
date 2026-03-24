@@ -87,8 +87,8 @@ It is highly recommended to use the [stack component](/components/stack.md) or t
     <tbody v-for="i in directions">
       <tr v-for="{ value: val, output } in values">
         <th scope="row" class="d-code--sm d-docsite-code">
-          <span v-if="i !== 'All'">.d-m{{ i[0] }}{{ val }}</span>
-          <span v-else>.d-m{{ val }}</span>
+          <span v-if="i !== 'All'">.d-m{{ i[0] }}-{{ val }}</span>
+          <span v-else>.d-m-{{ val }}</span>
         </th>
         <td class="d-code--sm">
           <span v-if="i == 'y'">
@@ -110,8 +110,8 @@ It is highly recommended to use the [stack component](/components/stack.md) or t
     <tbody v-for="i in directions">
       <tr v-for="{ value: val, output } in values.slice(1)">
         <th scope="row" class="d-code--sm d-docsite-code">
-          <span v-if="i !== 'All'">.d-m{{ i[0] }}n{{ val }}</span>
-          <span v-else>.d-mn{{ val }}</span>
+          <span v-if="i !== 'All'">.d-m{{ i[0] }}-n{{ val }}</span>
+          <span v-else>.d-m-n{{ val }}</span>
         </th>
         <td class="d-code--sm">
           <span v-if="i == 'y'">

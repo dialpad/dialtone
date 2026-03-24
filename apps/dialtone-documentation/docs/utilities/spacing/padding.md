@@ -70,8 +70,8 @@ Padding can be added to an element by using a utility class (i.e. `.d-p[#]`) or 
     <tbody v-for="i in directions">
         <tr v-for="{ value: val, output } in values">
             <th scope="row" class="d-code--sm d-docsite-code">
-              <span v-if="i !== 'All'">.d-p{{ i[0] }}{{ val }}</span>
-              <span v-else>.d-p{{ val }}</span>
+              <span v-if="i !== 'All'">.d-p{{ i[0] }}-{{ val }}</span>
+              <span v-else>.d-p-{{ val }}</span>
             </th>
             <td class="d-code--sm">
                 <span v-if="i == 'y'">
