@@ -4,7 +4,7 @@ description: Utilities to adjust an element's exterior spacing between other obj
 keywords: ["outer spacing", "gap", "offset"]
 ---
 
-<dt-notice kind="warning" class="d-wmx100p d-mt-300" hideClose>
+<dt-notice kind="warning" class="d-wmx100p d-my-300" hideClose>
   Avoid applying margins directly. Lean toward using layout components like <dt-link to="/components/stack/" kind="muted">Stack</dt-link> for consistent and maintainable spacing <strong>between</strong> elements.
 </dt-notice>
 
