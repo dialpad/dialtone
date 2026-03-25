@@ -2,6 +2,7 @@
 // For tokens used in spacing context (padding, margin, gap, inset, etc.)
 const SPACING_MAP = {
   0: 'spacing-0',     // 0px
+  50: 'spacing-1',    // 0.5px → 1px (nearest non-subpixel)
   100: 'spacing-1',   // 1px
   200: 'spacing-25',  // 2px
   300: 'spacing-50',  // 4px
@@ -44,6 +45,11 @@ const LAYOUT_MAP = {
   1040: '1200', // 764px → 768px (Δ4px)
   1060: '1300', // 828px → 832px (Δ4px)
   1080: '1400', // 912px → 896px (Δ16px)
+  // Previously missing — these old stops silently passed through
+  720: '100',   // 72px → 64px (Δ8px)
+  730: '125',   // 84px → 80px (Δ4px)
+  760: '150',   // 102px → 96px (Δ6px)
+  775: '175',   // 114px → 112px (Δ2px)
 };
 
 // Tokens that exceed the --dt-layout-* scale (max 1024px at layout-1600).

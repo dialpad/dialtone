@@ -19,13 +19,29 @@ const GAP_MAP = {
   // 50 (0.5px) maps to 1 (1px) — closest non-subpixel stop
 };
 
+// Values that only exist in the NEW system — if a file contains these,
+// it has already been migrated. Used to detect and skip double-migration.
+const NEW_ONLY_VALUES = new Set(['25', '75', '150', '250', '525']);
+
+function isAlreadyMigrated (content) {
+  // Check for gap values that only exist in the new system
+  // If any are found, this file was already migrated
+  return [...NEW_ONLY_VALUES].some(v =>
+    content.includes(`gap="${v}"`) ||
+    content.includes(`gap="'${v}'"`) ||
+    content.includes(`d-stack--gap-${v}`) ||
+    content.includes(`d-description-list--gap-${v}`),
+  );
+}
+
 export default {
   description:
     'Migrates DtStack and DtDescriptionList gap prop values from old size stops to new spacing stops.\n' +
     '- Replaces gap="400" with gap="100" (8px)\n' +
     '- Replaces :gap="\'400\'" with :gap="\'100\'" (8px)\n' +
     '- Also handles d-stack--gap-* and d-description-list--gap-* CSS class references.\n' +
-    '- gap="50" (0.5px) maps to gap="1" (1px) — closest non-subpixel stop.\n',
+    '- gap="50" (0.5px) maps to gap="1" (1px) — closest non-subpixel stop.\n' +
+    '- SAFE TO RE-RUN: detects already-migrated files by checking for new-only values (25, 75, 150, 250, 525).\n',
   patterns: ['**/*.{vue,html,js,ts,jsx,tsx,md}'],
   globbyConfig: {
     ignore: ['**/dialtone_migration_helper/tests/**'],
@@ -64,4 +80,9 @@ export default {
       },
     },
   ],
+  // Called by the migration helper before processing each file.
+  // Return false to skip the file (already migrated).
+  shouldProcessFile (content) {
+    return !isAlreadyMigrated(content);
+  },
 };

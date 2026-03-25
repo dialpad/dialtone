@@ -28,7 +28,8 @@ const ruleFunction = (primary) => {
     if (!validOptions) return;
 
     root.walkDecls((declaration) => {
-      const sizeTokenMatches = declaration.value.match(/var\(--dt-size-[^)]+\)/g);
+      // Match --dt-size-{number} but NOT --dt-size-border-* or --dt-size-radius-* (those are valid)
+      const sizeTokenMatches = declaration.value.match(/var\(--dt-size-(?!border-|radius-)[^)]+\)/g);
       if (sizeTokenMatches) {
         sizeTokenMatches.forEach(() => {
           report({
