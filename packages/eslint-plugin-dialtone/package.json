@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/eslint-plugin-dialtone",
-  "version": "1.11.2",
+  "version": "1.11.3-next.1",
   "description": "dialtone eslint plugin",
   "keywords": [
     "Dialpad",
