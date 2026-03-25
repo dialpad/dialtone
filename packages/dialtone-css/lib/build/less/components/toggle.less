@@ -79,8 +79,8 @@
     position: absolute;
     inset-block-start: var(--dt-spacing-1); // 1
     inset-inline-start: var(--dt-spacing-1); // 1
-    inline-size: calc(var(--toggle-size-icon) + var(--dt-spacing-50));
-    block-size: calc(var(--toggle-size-icon) + var(--dt-spacing-50));
+    inline-size: var(--dt-icon-size-400);
+    block-size: var(--dt-icon-size-400);
     background-color: var(--dt-color-surface-primary);
     border-radius: var(--dt-size-radius-circle);
     cursor: pointer;
@@ -93,7 +93,7 @@
   &--small {
     --toggle-size-height: calc(var(--dt-layout-25) + var(--dt-spacing-25)); // 18
     --toggle-size-width: calc(var(--dt-layout-50) + var(--dt-spacing-50)); // 36
-    --toggle-size-icon: calc(var(--dt-layout-25) - var(--dt-spacing-25)); // 14
+    --toggle-size-icon: var(--dt-icon-size-200); // 14
 
     &::before {
       position: absolute;
@@ -103,8 +103,8 @@
   }
 
   &--small::after {
-    inline-size: var(--toggle-size-icon);
-    block-size: var(--toggle-size-icon);
+    inline-size: var(--dt-icon-size-200);
+    block-size: var(--dt-icon-size-200);
   }
 
   //  $$  CHECKED TOGGLE
