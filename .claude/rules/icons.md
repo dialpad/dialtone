@@ -15,11 +15,11 @@ Standard icons use `12x12` viewBox. Full-color gradient icons in `brand-full-col
 
 Always source from the Figma component's **12px size** (size 100).
 
+**Note:** Icons in the `brand-full-color` category are exempt from the cleanup rules below. They may use solid brand hex colors (e.g., `#5059C9`), gradients, and other attributes that should be preserved as-is.
+
 ### Fill color normalization
 
 The build pipeline only replaces these fill values with `currentColor`: `black`, `#000`, `#000000`, `#0D0C0F`, `#222`, `#222222`. Figma commonly exports `fill="#1C1C1C"` or other near-black hex values that will NOT be converted, causing icons to render as hardcoded colors instead of inheriting CSS color. **Normalize any non-standard dark fill to `fill="black"`.**
-
-Full-color icons with gradient fills (`fill="url(#...)"`) are preserved as-is — do not normalize these.
 
 ### Fill-based only (no strokes)
 
@@ -29,9 +29,9 @@ Icons must use fills, not strokes. In Figma, run **"Outline Stroke"** before exp
 
 Figma adds `<g clip-path="url(#...)">` with a `<clipPath><rect width="12" height="12">` when "Clip content" is enabled on the frame. This clips to the full viewBox — a no-op. Strip the `<g>` wrapper, the `<defs>`, and the `<clipPath>`. This also avoids unnecessary `uniqueID` handling in the generated Vue component.
 
-### Combine path elements
+### Consider combining path elements
 
-Multiple `<path>` elements with the same `fill` attribute should be combined into a single `<path>` by concatenating their `d` values (space-separated). **Exception:** paths with different gradient fills must remain separate.
+If multiple `<path>` elements share all attributes (fill, fill-rule, clip-rule, opacity, transform, etc.), consider combining them into a single `<path>` by concatenating their `d` values (space-separated). Do not combine paths that differ in any attribute beyond `d`.
 
 ### Required SVG attributes
 

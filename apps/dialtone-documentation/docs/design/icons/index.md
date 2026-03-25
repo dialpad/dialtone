@@ -105,11 +105,12 @@ Go to the [Icon Builder page](https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/
 </dt-notice>
 
 1. [Create a new branch](https://github.com/dialpad/dialtone/tree/staging/packages/dialtone-css/.github/CONTRIBUTING.md#making-a-pull-request) in [dialtone](https://github.com/dialpad/dialtone/tree/staging) repo starting with "dlt-xxxx-" in the name.
-2. Export the SVG from the **12px (size 100)** Figma component. Prepare the SVG before placing it:
+2. Export the SVG from the **12px (size 100)** Figma component. For standard icons (all categories except `brand-full-color`), prepare the SVG before placing it:
    - Run **Edit > Outline Stroke** in Figma to ensure the icon is fill-based (no strokes).
-   - Normalize fill colors to `fill="black"`. Figma often exports `fill="#1C1C1C"` or other near-black hex values that the build pipeline won't convert to `currentColor`. Full-color gradient fills (`fill="url(#...)"`) should be left as-is.
+   - Normalize fill colors to `fill="black"`. Figma often exports `fill="#1C1C1C"` or other near-black hex values that the build pipeline won't convert to `currentColor`.
    - Remove no-op `<clipPath>` wrappers — Figma adds these when "Clip content" is enabled, but they are unnecessary when the clip rect matches the viewBox.
-   - Combine multiple `<path>` elements with the same `fill` into a single `<path>` where possible. Exception: paths with different gradient fills must remain separate.
+   - Consider combining multiple `<path>` elements into a single `<path>` where they share all attributes (fill, fill-rule, opacity, etc.). Do not combine paths that differ in any attribute beyond `d`.
+   - Icons in `brand-full-color` may use solid brand hex colors, gradients, and other attributes — preserve these as-is.
 3. Place the exported SVG file(s) in the appropriate folder category inside `./src/svg/`, file names should be in kebab-case.
 4. Run `nx run dialtone-icons:build`
 5. Add keywords related to the icon(s) in the `packages/dialtone-icons/src/keywords-icons.json` file.
