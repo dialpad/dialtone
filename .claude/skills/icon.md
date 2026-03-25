@@ -35,7 +35,7 @@ File name must be **kebab-case**.
 
 ### 4. Add Keywords
 
-Add an entry to `packages/dialtone-icons/src/keywords-icons.json` under the correct category:
+Add an entry to `packages/dialtone-icons/src/keywords-icons.json` under the correct category, keeping them alphabetically sorted:
 
 ```json
 "<category>": {
