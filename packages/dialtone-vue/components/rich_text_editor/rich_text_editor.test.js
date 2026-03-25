@@ -162,7 +162,6 @@ describe('DtRichTextEditor tests', () => {
 
         describe('When using markdown output', () => {
 
-          let jsonToMarkdownConverter;
           const jsonInputBase = (innerContent) => {
             return {
               type: 'doc',
@@ -173,10 +172,14 @@ describe('DtRichTextEditor tests', () => {
             }
           };
 
+          const getMarkdownOutput = async (jsonInput) => {
+            wrapper.vm.editor.commands.setContent(jsonInput);
+            await wrapper.vm.$nextTick();
+            return wrapper.vm.getOutput();
+          };
+
           beforeEach(async () => {
             await wrapper.setProps({ outputFormat: 'markdown' });
-            // Test jsonToMarkdownConverter directly
-            jsonToMarkdownConverter = wrapper.vm.jsonToMarkdownConverter;
           });
 
           it('should convert JSON to markdown correctly', async () => {
@@ -185,34 +188,28 @@ describe('DtRichTextEditor tests', () => {
               text: 'bold text',
               marks: [{ type: 'bold' }],
             }]);
-            const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
-            expect(output).toBe('**bold text**\n');
+            const output = await getMarkdownOutput(jsonInput);
+            expect(output).toBe('**bold text**');
           });
 
           it('should convert italic text to markdown correctly', async () => {
-            await wrapper.setProps({ allowItalic: true });
-
             const jsonInput = jsonInputBase([{
               type: 'text',
               text: 'italic text',
               marks: [{ type: 'italic' }],
             }]);
-            const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
-            expect(output).toBe('*italic text*\n');
+            const output = await getMarkdownOutput(jsonInput);
+            expect(output).toBe('*italic text*');
           });
 
           it('should convert strikethrough text to markdown correctly', async () => {
-            await wrapper.setProps({ allowStrike: true });
-
-            // Test jsonToMarkdownConverter directly
-            const jsonToMarkdownConverter = wrapper.vm.jsonToMarkdownConverter;
             const jsonInput = jsonInputBase([{
               type: 'text',
               text: 'strikethrough text',
               marks: [{ type: 'strike' }],
             }]);
-            const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
-            expect(output).toBe('~~strikethrough text~~\n');
+            const output = await getMarkdownOutput(jsonInput);
+            expect(output).toBe('~~strikethrough text~~');
           });
 
           it('should convert links to markdown correctly', async () => {
@@ -223,8 +220,8 @@ describe('DtRichTextEditor tests', () => {
               text: 'link text',
               marks: [{ type: 'link', attrs: { href: 'https://example.com' } }],
             }]);
-            const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
-            expect(output).toBe('[link text](https://example.com)\n');
+            const output = await getMarkdownOutput(jsonInput);
+            expect(output).toBe('[link text](https://example.com)');
           });
 
           it('should convert bullet lists to markdown without extra newlines', async () => {
@@ -250,12 +247,12 @@ describe('DtRichTextEditor tests', () => {
                 ],
               }],
             };
-            const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
-            expect(output).toBe('- First item\n- Second item\n- Third item\n');
+            const output = await getMarkdownOutput(jsonInput);
+            expect(output).toBe('- First item\n- Second item\n- Third item');
           });
 
           it('should convert bullet lists with formatting to markdown correctly', async () => {
-            await wrapper.setProps({ allowBulletList: true, allowBold: true, allowItalic: true });
+            await wrapper.setProps({ allowBulletList: true });
             const jsonInput = {
               type: 'doc',
               content: [{
@@ -284,17 +281,12 @@ describe('DtRichTextEditor tests', () => {
                 ],
               }],
             };
-            const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
-            expect(output).toBe('- Item with **bold** text\n- Item with *italic* text\n- Regular item\n');
+            const output = await getMarkdownOutput(jsonInput);
+            expect(output).toBe('- Item with **bold** text\n- Item with *italic* text\n- Regular item');
           });
 
           it('should convert mixed formatting to markdown correctly', async () => {
-            await wrapper.setProps({
-                allowBold: true,
-                allowItalic: true,
-                allowStrike: true,
-                link: true,
-            });
+            await wrapper.setProps({ link: true });
             const jsonInput = jsonInputBase([
               { type: 'text', text: 'This has ' },
               { type: 'text', text: 'bold', marks: [{ type: 'bold' }] },
@@ -306,8 +298,8 @@ describe('DtRichTextEditor tests', () => {
               { type: 'text', text: 'link', marks: [{ type: 'link', attrs: { href: 'https://example.com' } }] },
               { type: 'text', text: '.' },
             ]);
-            const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
-            expect(output).toBe('This has **bold**, *italic*, ~~strikethrough~~, and a [link](https://example.com).\n');
+            const output = await getMarkdownOutput(jsonInput);
+            expect(output).toBe('This has **bold**, *italic*, ~~strikethrough~~, and a [link](https://example.com).');
           });
 
           it('should handle text with font size applied', async () => {
@@ -318,11 +310,11 @@ describe('DtRichTextEditor tests', () => {
               text: 'Large text',
               marks: [{ type: 'textStyle', attrs: { fontSize: '20px' } }],
             }]);
-            
+
             // Set content directly to editor
             wrapper.vm.editor.commands.setContent(jsonInput);
             await wrapper.vm.$nextTick();
-            
+
             const output = wrapper.vm.getOutput();
             expect(output).toContain('font-size: 20px');
           });
@@ -335,39 +327,39 @@ describe('DtRichTextEditor tests', () => {
               text: 'Colored text',
               marks: [{ type: 'textStyle', attrs: { color: '#ff0000' } }],
             }]);
-            
+
             // Set content directly to editor
             wrapper.vm.editor.commands.setContent(jsonInput);
             await wrapper.vm.$nextTick();
-            
+
             const output = wrapper.vm.getOutput();
             // TipTap converts hex colors to RGB format
             expect(output).toContain('color: rgb(255, 0, 0)');
           });
 
           it('should handle text with multiple text styles applied', async () => {
-            await wrapper.setProps({ 
-              allowFontSize: true, 
+            await wrapper.setProps({
+              allowFontSize: true,
               allowFontColor: true,
-              outputFormat: 'html', 
+              outputFormat: 'html',
             });
 
             const jsonInput = jsonInputBase([{
               type: 'text',
               text: 'Styled text',
-              marks: [{ 
-                type: 'textStyle', 
-                attrs: { 
+              marks: [{
+                type: 'textStyle',
+                attrs: {
                   fontSize: '18px',
                   color: '#0000ff',
-                }, 
+                },
               }],
             }]);
-            
+
             // Set content directly to editor
             wrapper.vm.editor.commands.setContent(jsonInput);
             await wrapper.vm.$nextTick();
-            
+
             const output = wrapper.vm.getOutput();
             expect(output).toContain('font-size: 18px');
             // TipTap converts hex colors to RGB format
@@ -375,21 +367,41 @@ describe('DtRichTextEditor tests', () => {
           });
 
           it('should handle nested formatting correctly', async () => {
-            await wrapper.setProps({
-                allowBold: true,
-                allowItalic: true,
-            });
-
             const jsonInput = jsonInputBase([
               { type: 'text', text: 'Bold and ', marks: [{ type: 'bold' }] },
               { type: 'text', text: 'italic', marks: [{ type: 'bold' }, { type: 'italic' }] },
               { type: 'text', text: ' nested', marks: [{ type: 'bold' }] },
             ]);
-            const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
-            expect(output).toBe('**Bold and *****italic***** nested**\n');
+            const output = await getMarkdownOutput(jsonInput);
+            expect(output).toBe('**Bold and** ***italic*** **nested**');
+          });
+
+          it('should place spaces outside mark delimiters for CommonMark compatibility', async () => {
+            // When switching styles (e.g. bold → italic), TipTap may include the space
+            // inside one of the mark boundaries, producing invalid CommonMark like "**bold **".
+            // The renderer must move boundary spaces outside the delimiters.
+            const jsonInput = jsonInputBase([
+              { type: 'text', text: 'bold ', marks: [{ type: 'bold' }] },
+              { type: 'text', text: 'italic', marks: [{ type: 'italic' }] },
+            ]);
+            const output = await getMarkdownOutput(jsonInput);
+            expect(output).toBe('**bold** *italic*');
+          });
+
+          it('should place leading spaces outside mark delimiters for CommonMark compatibility', async () => {
+            const jsonInput = jsonInputBase([
+              { type: 'text', text: 'bold', marks: [{ type: 'bold' }] },
+              { type: 'text', text: ' italic', marks: [{ type: 'italic' }] },
+            ]);
+            const output = await getMarkdownOutput(jsonInput);
+            expect(output).toBe('**bold** *italic*');
           });
 
           it('should convert mentions to markdown comments correctly', async () => {
+            await wrapper.setProps({
+              mentionSuggestion: { items: vi.fn(() => []) },
+            });
+
             const jsonInput = jsonInputBase([
               { type: 'text', text: 'Hello ' },
               {
@@ -402,11 +414,15 @@ describe('DtRichTextEditor tests', () => {
               },
               { type: 'text', text: ' how are you?' },
             ]);
-            const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
-            expect(output).toBe('Hello <!-- @mention: {"id": "john.doe", "contactKey": "contact-123", "name": "John Doe"} --> how are you?\n');
+            const output = await getMarkdownOutput(jsonInput);
+            expect(output).toBe('Hello <!-- @mention: {"id": "john.doe", "contactKey": "contact-123", "name": "John Doe"} --> how are you?');
           });
 
           it('should convert channels to markdown comments correctly', async () => {
+            await wrapper.setProps({
+              channelSuggestion: { items: vi.fn(() => []) },
+            });
+
             const jsonInput = jsonInputBase([
               { type: 'text', text: 'Check out ' },
               {
@@ -419,11 +435,15 @@ describe('DtRichTextEditor tests', () => {
               },
               { type: 'text', text: ' channel' },
             ]);
-            const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
-            expect(output).toBe('Check out <!-- @channel: {"id": "general", "channelKey": "", "name": "general", "locked": "false"} --> channel\n');
+            const output = await getMarkdownOutput(jsonInput);
+            expect(output).toBe('Check out <!-- @channel: {"id": "general", "channelKey": "", "name": "general", "locked": "false"} --> channel');
           });
 
           it('should convert locked channels to markdown comments correctly', async () => {
+            await wrapper.setProps({
+              channelSuggestion: { items: vi.fn(() => []) },
+            });
+
             const jsonInput = jsonInputBase([
               { type: 'text', text: 'Check out ' },
               {
@@ -436,11 +456,15 @@ describe('DtRichTextEditor tests', () => {
               },
               { type: 'text', text: ' channel' },
             ]);
-            const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
-            expect(output).toBe('Check out <!-- @channel: {"id": "dialtone-internal", "channelKey": "", "name": "dialtone-internal", "locked": "true"} --> channel\n');
+            const output = await getMarkdownOutput(jsonInput);
+            expect(output).toBe('Check out <!-- @channel: {"id": "dialtone-internal", "channelKey": "", "name": "dialtone-internal", "locked": "true"} --> channel');
           });
 
           it('should convert channels with channelKey to markdown comments correctly', async () => {
+            await wrapper.setProps({
+              channelSuggestion: { items: vi.fn(() => []) },
+            });
+
             const jsonInput = jsonInputBase([
               { type: 'text', text: 'Check out ' },
               {
@@ -454,8 +478,8 @@ describe('DtRichTextEditor tests', () => {
               },
               { type: 'text', text: ' channel' },
             ]);
-            const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
-            expect(output).toBe('Check out <!-- @channel: {"id": "general", "channelKey": "channel-456", "name": "general", "locked": "false"} --> channel\n');
+            const output = await getMarkdownOutput(jsonInput);
+            expect(output).toBe('Check out <!-- @channel: {"id": "general", "channelKey": "channel-456", "name": "general", "locked": "false"} --> channel');
           });
         });
       });
@@ -571,8 +595,639 @@ describe('DtRichTextEditor tests', () => {
           editorEl.dispatchEvent(pasteEvent);
           await wrapper.vm.$nextTick();
           const output = wrapper.vm.getOutput();
-          // Check that the table has been converted to a table with the enforced styling
-          expect(output).toBe(`<table style="min-width: 50px;"><colgroup><col style="min-width: 25px;"><col style="min-width: 25px;"></colgroup><tbody><tr><td colspan="1" rowspan="1"><p>test</p></td><td colspan="1" rowspan="1"><p>test</p></td></tr><tr><td colspan="1" rowspan="1"><p>test</p></td><td colspan="1" rowspan="1"><p>test</p></td></tr></tbody></table>`);
+          // Check that the table has been preserved using custom table rendering
+          expect(output).toContain('<table>');
+          expect(output).toContain('<tbody>');
+          expect(output).toContain('test');
+          expect(output).not.toContain('colgroup');
+          expect(output).not.toContain('min-width');
+        });
+
+        it('should preserve text mark styles inside table cells when pasted', async () => {
+          wrapper.unmount();
+          props['outputFormat'] = 'html';
+          props['modelValue'] = '';
+          props['allowTables'] = true;
+
+          props['allowFontSize'] = true;
+          props['allowFontColor'] = true;
+          editorEl?.remove();
+          wrapper = mount(DtRichTextEditor, {
+            props,
+            components: { EditorContent },
+            listeners,
+            attrs,
+            slots,
+            attachTo: document.body,
+          });
+          await wrapper.vm.$nextTick();
+          editor = wrapper.find('[data-qa="dt-rich-text-editor"]').find('div[contenteditable]');
+          editorEl = document.getElementsByClassName('qa-editor')[0];
+
+          const clipboardData = new DataTransfer();
+          clipboardData.setData('text/plain', 'Customer Support');
+          clipboardData.setData('text/html', '<table><tr><td><div style="font-size:10pt; color:#002968; font-weight:bold;">Customer Support</div></td></tr></table>');
+
+          const pasteEvent = new ClipboardEvent('paste', {
+            clipboardData,
+            bubbles: true,
+            cancelable: true,
+          });
+
+          editorEl.dispatchEvent(pasteEvent);
+          await wrapper.vm.$nextTick();
+          const output = wrapper.vm.getOutput();
+          expect(output).toContain('color: rgb(0, 41, 104)');
+          expect(output).toContain('font-size: 10pt');
+        });
+
+        it('should preserve table border, cellpadding, and cellspacing attributes when pasted', async () => {
+          wrapper.unmount();
+          props['outputFormat'] = 'html';
+          props['modelValue'] = '';
+          props['allowTables'] = true;
+
+          editorEl?.remove();
+          wrapper = mount(DtRichTextEditor, {
+            props,
+            components: { EditorContent },
+            listeners,
+            attrs,
+            slots,
+            attachTo: document.body,
+          });
+          await wrapper.vm.$nextTick();
+          editor = wrapper.find('[data-qa="dt-rich-text-editor"]').find('div[contenteditable]');
+          editorEl = document.getElementsByClassName('qa-editor')[0];
+
+          const clipboardData = new DataTransfer();
+          clipboardData.setData('text/plain', 'Cell');
+          clipboardData.setData('text/html', '<table border="0" cellpadding="5" cellspacing="0"><tr><td>Cell</td></tr></table>');
+
+          const pasteEvent = new ClipboardEvent('paste', {
+            clipboardData,
+            bubbles: true,
+            cancelable: true,
+          });
+
+          editorEl.dispatchEvent(pasteEvent);
+          await wrapper.vm.$nextTick();
+          const output = wrapper.vm.getOutput();
+          expect(output).toContain('border="0"');
+          expect(output).toContain('cellpadding="5"');
+          expect(output).toContain('cellspacing="0"');
+        });
+
+        it('should preserve table inline style attribute when pasted', async () => {
+          wrapper.unmount();
+          props['outputFormat'] = 'html';
+          props['modelValue'] = '';
+          props['allowTables'] = true;
+
+          editorEl?.remove();
+          wrapper = mount(DtRichTextEditor, {
+            props,
+            components: { EditorContent },
+            listeners,
+            attrs,
+            slots,
+            attachTo: document.body,
+          });
+          await wrapper.vm.$nextTick();
+          editor = wrapper.find('[data-qa="dt-rich-text-editor"]').find('div[contenteditable]');
+          editorEl = document.getElementsByClassName('qa-editor')[0];
+
+          const clipboardData = new DataTransfer();
+          clipboardData.setData('text/plain', 'Cell');
+          clipboardData.setData('text/html', '<table style="border-collapse: collapse; width: 100%;"><tr><td>Cell</td></tr></table>');
+
+          const pasteEvent = new ClipboardEvent('paste', {
+            clipboardData,
+            bubbles: true,
+            cancelable: true,
+          });
+
+          editorEl.dispatchEvent(pasteEvent);
+          await wrapper.vm.$nextTick();
+          const output = wrapper.vm.getOutput();
+          expect(output).toContain('border-collapse: collapse');
+          expect(output).toContain('width: 100%');
+        });
+
+        it('should preserve table row style attribute when pasted', async () => {
+          wrapper.unmount();
+          props['outputFormat'] = 'html';
+          props['modelValue'] = '';
+          props['allowTables'] = true;
+
+          editorEl?.remove();
+          wrapper = mount(DtRichTextEditor, {
+            props,
+            components: { EditorContent },
+            listeners,
+            attrs,
+            slots,
+            attachTo: document.body,
+          });
+          await wrapper.vm.$nextTick();
+          editor = wrapper.find('[data-qa="dt-rich-text-editor"]').find('div[contenteditable]');
+          editorEl = document.getElementsByClassName('qa-editor')[0];
+
+          const clipboardData = new DataTransfer();
+          clipboardData.setData('text/plain', 'Cell');
+          clipboardData.setData('text/html', '<table><tr style="background-color: #f0f0f0;"><td>Cell</td></tr></table>');
+
+          const pasteEvent = new ClipboardEvent('paste', {
+            clipboardData,
+            bubbles: true,
+            cancelable: true,
+          });
+
+          editorEl.dispatchEvent(pasteEvent);
+          await wrapper.vm.$nextTick();
+          const output = wrapper.vm.getOutput();
+          expect(output).toContain('background-color: rgb(240, 240, 240)');
+        });
+
+        it('should preserve table cell style, valign, and width attributes when pasted', async () => {
+          wrapper.unmount();
+          props['outputFormat'] = 'html';
+          props['modelValue'] = '';
+          props['allowTables'] = true;
+
+          editorEl?.remove();
+          wrapper = mount(DtRichTextEditor, {
+            props,
+            components: { EditorContent },
+            listeners,
+            attrs,
+            slots,
+            attachTo: document.body,
+          });
+          await wrapper.vm.$nextTick();
+          editor = wrapper.find('[data-qa="dt-rich-text-editor"]').find('div[contenteditable]');
+          editorEl = document.getElementsByClassName('qa-editor')[0];
+
+          const clipboardData = new DataTransfer();
+          clipboardData.setData('text/plain', 'Cell');
+          clipboardData.setData('text/html', '<table><tr><td style="padding: 10px;" valign="top" width="200">Cell</td></tr></table>');
+
+          const pasteEvent = new ClipboardEvent('paste', {
+            clipboardData,
+            bubbles: true,
+            cancelable: true,
+          });
+
+          editorEl.dispatchEvent(pasteEvent);
+          await wrapper.vm.$nextTick();
+          const output = wrapper.vm.getOutput();
+          expect(output).toContain('padding: 10px');
+          expect(output).toContain('valign="top"');
+          expect(output).toContain('width="200"');
+        });
+
+        it('should preserve table header style, valign, and width attributes when pasted', async () => {
+          wrapper.unmount();
+          props['outputFormat'] = 'html';
+          props['modelValue'] = '';
+          props['allowTables'] = true;
+
+          editorEl?.remove();
+          wrapper = mount(DtRichTextEditor, {
+            props,
+            components: { EditorContent },
+            listeners,
+            attrs,
+            slots,
+            attachTo: document.body,
+          });
+          await wrapper.vm.$nextTick();
+          editor = wrapper.find('[data-qa="dt-rich-text-editor"]').find('div[contenteditable]');
+          editorEl = document.getElementsByClassName('qa-editor')[0];
+
+          const clipboardData = new DataTransfer();
+          clipboardData.setData('text/plain', 'Header');
+          clipboardData.setData('text/html', '<table><tr><th style="font-weight: bold;" valign="middle" width="150">Header</th></tr><tr><td>Cell</td></tr></table>');
+
+          const pasteEvent = new ClipboardEvent('paste', {
+            clipboardData,
+            bubbles: true,
+            cancelable: true,
+          });
+
+          editorEl.dispatchEvent(pasteEvent);
+          await wrapper.vm.$nextTick();
+          const output = wrapper.vm.getOutput();
+          expect(output).toContain('valign="middle"');
+          expect(output).toContain('width="150"');
+        });
+
+        it('should preserve styles from anchor tags inside table cells when pasted', async () => {
+          wrapper.unmount();
+          props['outputFormat'] = 'html';
+          props['modelValue'] = '';
+          props['allowTables'] = true;
+
+          props['allowFontSize'] = true;
+          props['allowFontColor'] = true;
+          editorEl?.remove();
+          wrapper = mount(DtRichTextEditor, {
+            props,
+            components: { EditorContent },
+            listeners,
+            attrs,
+            slots,
+            attachTo: document.body,
+          });
+          await wrapper.vm.$nextTick();
+          editor = wrapper.find('[data-qa="dt-rich-text-editor"]').find('div[contenteditable]');
+          editorEl = document.getElementsByClassName('qa-editor')[0];
+
+          const clipboardData = new DataTransfer();
+          clipboardData.setData('text/plain', 'Click here');
+          clipboardData.setData('text/html', '<table><tr><td><a href="https://example.com" style="color:#0066cc; font-size:12pt;">Click here</a></td></tr></table>');
+
+          const pasteEvent = new ClipboardEvent('paste', {
+            clipboardData,
+            bubbles: true,
+            cancelable: true,
+          });
+
+          editorEl.dispatchEvent(pasteEvent);
+          await wrapper.vm.$nextTick();
+          const output = wrapper.vm.getOutput();
+          expect(output).toContain('color: rgb(0, 102, 204)');
+          expect(output).toContain('font-size: 12pt');
+        });
+
+        it('should preserve complex email signature table with mixed attributes when pasted', async () => {
+          wrapper.unmount();
+          props['outputFormat'] = 'html';
+          props['modelValue'] = '';
+          props['allowTables'] = true;
+
+          props['allowFontSize'] = true;
+          props['allowFontColor'] = true;
+          editorEl?.remove();
+          wrapper = mount(DtRichTextEditor, {
+            props,
+            components: { EditorContent },
+            listeners,
+            attrs,
+            slots,
+            attachTo: document.body,
+          });
+          await wrapper.vm.$nextTick();
+          editor = wrapper.find('[data-qa="dt-rich-text-editor"]').find('div[contenteditable]');
+          editorEl = document.getElementsByClassName('qa-editor')[0];
+
+          const clipboardData = new DataTransfer();
+          clipboardData.setData('text/plain', 'John DoeSupport Team');
+          clipboardData.setData('text/html',
+            '<table border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;">' +
+            '<tr style="background-color: #ffffff;">' +
+            '<td style="padding: 5px;" valign="top" width="300">' +
+            '<div style="font-size:14pt; color:#333333; font-weight:bold;">John Doe</div>' +
+            '</td>' +
+            '</tr>' +
+            '<tr>' +
+            '<td style="padding: 5px;" valign="top" width="300">' +
+            '<div style="font-size:10pt; color:#666666;">Support Team</div>' +
+            '</td>' +
+            '</tr>' +
+            '</table>',
+          );
+
+          const pasteEvent = new ClipboardEvent('paste', {
+            clipboardData,
+            bubbles: true,
+            cancelable: true,
+          });
+
+          editorEl.dispatchEvent(pasteEvent);
+          await wrapper.vm.$nextTick();
+          const output = wrapper.vm.getOutput();
+          // Table attributes
+          expect(output).toContain('border="0"');
+          expect(output).toContain('cellpadding="0"');
+          expect(output).toContain('cellspacing="0"');
+          expect(output).toContain('border-collapse: collapse');
+          // Row attributes
+          expect(output).toContain('background-color: rgb(255, 255, 255)');
+          // Cell attributes
+          expect(output).toContain('valign="top"');
+          expect(output).toContain('width="300"');
+          expect(output).toContain('padding: 5px');
+          // Text styles from div tags
+          expect(output).toContain('font-size: 14pt');
+          expect(output).toContain('font-size: 10pt');
+          expect(output).toContain('color: rgb(51, 51, 51)');
+          expect(output).toContain('color: rgb(102, 102, 102)');
+        });
+
+        it('should preserve nested tables when pasted', async () => {
+          wrapper.unmount();
+          props['outputFormat'] = 'html';
+          props['modelValue'] = '';
+          props['allowTables'] = true;
+
+          editorEl?.remove();
+          wrapper = mount(DtRichTextEditor, {
+            props,
+            components: { EditorContent },
+            listeners,
+            attrs,
+            slots,
+            attachTo: document.body,
+          });
+          await wrapper.vm.$nextTick();
+          editor = wrapper.find('[data-qa="dt-rich-text-editor"]').find('div[contenteditable]');
+          editorEl = document.getElementsByClassName('qa-editor')[0];
+
+          const clipboardData = new DataTransfer();
+          clipboardData.setData('text/plain', 'OuterInner');
+          clipboardData.setData('text/html',
+            '<table border="0" style="width: 100%;">' +
+            '<tr><td style="padding: 10px;">' +
+            '<table border="1" style="width: 50%;">' +
+            '<tr><td style="padding: 5px;">Inner</td></tr>' +
+            '</table>' +
+            '</td></tr>' +
+            '</table>',
+          );
+
+          const pasteEvent = new ClipboardEvent('paste', {
+            clipboardData,
+            bubbles: true,
+            cancelable: true,
+          });
+
+          editorEl.dispatchEvent(pasteEvent);
+          await wrapper.vm.$nextTick();
+          const output = wrapper.vm.getOutput();
+          // Outer table attributes
+          expect(output).toContain('border="0"');
+          expect(output).toContain('width: 100%');
+          // Inner table attributes
+          expect(output).toContain('border="1"');
+          expect(output).toContain('width: 50%');
+          // Cell padding
+          expect(output).toContain('padding: 10px');
+          expect(output).toContain('padding: 5px');
+        });
+
+        it('should preserve colspan and rowspan in custom table mode', async () => {
+          wrapper.unmount();
+          props['outputFormat'] = 'html';
+          props['modelValue'] = '';
+          props['allowTables'] = true;
+
+          editorEl?.remove();
+          wrapper = mount(DtRichTextEditor, {
+            props,
+            components: { EditorContent },
+            listeners,
+            attrs,
+            slots,
+            attachTo: document.body,
+          });
+          await wrapper.vm.$nextTick();
+          editor = wrapper.find('[data-qa="dt-rich-text-editor"]').find('div[contenteditable]');
+          editorEl = document.getElementsByClassName('qa-editor')[0];
+
+          const clipboardData = new DataTransfer();
+          clipboardData.setData('text/plain', 'HeaderCell 1Cell 2');
+          clipboardData.setData('text/html',
+            '<table>' +
+            '<tr><td colspan="2">Header</td></tr>' +
+            '<tr><td>Cell 1</td><td>Cell 2</td></tr>' +
+            '</table>',
+          );
+
+          const pasteEvent = new ClipboardEvent('paste', {
+            clipboardData,
+            bubbles: true,
+            cancelable: true,
+          });
+
+          editorEl.dispatchEvent(pasteEvent);
+          await wrapper.vm.$nextTick();
+          const output = wrapper.vm.getOutput();
+          expect(output).toContain('colspan="2"');
+        });
+
+        it('should handle multiple tables in a single paste with custom tables', async () => {
+          wrapper.unmount();
+          props['outputFormat'] = 'html';
+          props['modelValue'] = '';
+          props['allowTables'] = true;
+
+          editorEl?.remove();
+          wrapper = mount(DtRichTextEditor, {
+            props,
+            components: { EditorContent },
+            listeners,
+            attrs,
+            slots,
+            attachTo: document.body,
+          });
+          await wrapper.vm.$nextTick();
+          editor = wrapper.find('[data-qa="dt-rich-text-editor"]').find('div[contenteditable]');
+          editorEl = document.getElementsByClassName('qa-editor')[0];
+
+          const clipboardData = new DataTransfer();
+          clipboardData.setData('text/plain', 'Table1Table2');
+          clipboardData.setData('text/html',
+            '<table border="1"><tr><td>Table1</td></tr></table>' +
+            '<p>Separator</p>' +
+            '<table border="2"><tr><td>Table2</td></tr></table>',
+          );
+
+          const pasteEvent = new ClipboardEvent('paste', {
+            clipboardData,
+            bubbles: true,
+            cancelable: true,
+          });
+
+          editorEl.dispatchEvent(pasteEvent);
+          await wrapper.vm.$nextTick();
+          const output = wrapper.vm.getOutput();
+          expect(output).toContain('border="1"');
+          expect(output).toContain('border="2"');
+          expect(output).toContain('Table1');
+          expect(output).toContain('Table2');
+          expect(output).toContain('Separator');
+        });
+
+        it('should handle table with empty cells in custom table mode', async () => {
+          wrapper.unmount();
+          props['outputFormat'] = 'html';
+          props['modelValue'] = '';
+          props['allowTables'] = true;
+
+          editorEl?.remove();
+          wrapper = mount(DtRichTextEditor, {
+            props,
+            components: { EditorContent },
+            listeners,
+            attrs,
+            slots,
+            attachTo: document.body,
+          });
+          await wrapper.vm.$nextTick();
+          editor = wrapper.find('[data-qa="dt-rich-text-editor"]').find('div[contenteditable]');
+          editorEl = document.getElementsByClassName('qa-editor')[0];
+
+          const clipboardData = new DataTransfer();
+          clipboardData.setData('text/plain', 'Content');
+          clipboardData.setData('text/html',
+            '<table border="0" style="width: 100%;">' +
+            '<tr><td style="padding: 5px;">Content</td><td></td></tr>' +
+            '</table>',
+          );
+
+          const pasteEvent = new ClipboardEvent('paste', {
+            clipboardData,
+            bubbles: true,
+            cancelable: true,
+          });
+
+          editorEl.dispatchEvent(pasteEvent);
+          await wrapper.vm.$nextTick();
+          const output = wrapper.vm.getOutput();
+          expect(output).toContain('<table');
+          expect(output).toContain('border="0"');
+          expect(output).toContain('Content');
+        });
+
+        it('should preserve custom table attributes when setting content programmatically', async () => {
+          wrapper.unmount();
+          props['outputFormat'] = 'html';
+          props['modelValue'] = '';
+          props['allowTables'] = true;
+
+          editorEl?.remove();
+          wrapper = mount(DtRichTextEditor, {
+            props,
+            components: { EditorContent },
+            listeners,
+            attrs,
+            slots,
+            attachTo: document.body,
+          });
+          await wrapper.vm.$nextTick();
+
+          const tableHTML =
+            '<table border="0" cellpadding="5" cellspacing="0" style="border-collapse: collapse;">' +
+            '<tbody>' +
+            '<tr style="background-color: #eee;">' +
+            '<td style="padding: 10px;" valign="top" width="200">Cell content</td>' +
+            '</tr>' +
+            '</tbody>' +
+            '</table>';
+
+          wrapper.vm.editor.commands.setContent(tableHTML);
+          await wrapper.vm.$nextTick();
+
+          const output = wrapper.vm.getOutput();
+          expect(output).toContain('border="0"');
+          expect(output).toContain('cellpadding="5"');
+          expect(output).toContain('cellspacing="0"');
+          expect(output).toContain('border-collapse: collapse');
+          expect(output).toContain('background-color: rgb(238, 238, 238)');
+          expect(output).toContain('valign="top"');
+          expect(output).toContain('width="200"');
+          expect(output).toContain('padding: 10px');
+        });
+
+        it('should handle table with no custom attributes gracefully in custom mode', async () => {
+          wrapper.unmount();
+          props['outputFormat'] = 'html';
+          props['modelValue'] = '';
+          props['allowTables'] = true;
+
+          editorEl?.remove();
+          wrapper = mount(DtRichTextEditor, {
+            props,
+            components: { EditorContent },
+            listeners,
+            attrs,
+            slots,
+            attachTo: document.body,
+          });
+          await wrapper.vm.$nextTick();
+          editor = wrapper.find('[data-qa="dt-rich-text-editor"]').find('div[contenteditable]');
+          editorEl = document.getElementsByClassName('qa-editor')[0];
+
+          const clipboardData = new DataTransfer();
+          clipboardData.setData('text/plain', 'AB');
+          clipboardData.setData('text/html', '<table><tr><td>A</td><td>B</td></tr></table>');
+
+          const pasteEvent = new ClipboardEvent('paste', {
+            clipboardData,
+            bubbles: true,
+            cancelable: true,
+          });
+
+          editorEl.dispatchEvent(pasteEvent);
+          await wrapper.vm.$nextTick();
+          const output = wrapper.vm.getOutput();
+          // Should render a clean table without colgroup/min-width and without extraneous null attributes
+          expect(output).toContain('<table><tbody>');
+          expect(output).not.toContain('colgroup');
+          expect(output).not.toContain('min-width');
+          expect(output).not.toContain('border=');
+          expect(output).not.toContain('cellpadding=');
+          expect(output).not.toContain('cellspacing=');
+          expect(output).toContain('A');
+          expect(output).toContain('B');
+        });
+
+        it('should preserve styles from div tags inside table cells via CustomTextStyle', async () => {
+          wrapper.unmount();
+          props['outputFormat'] = 'html';
+          props['modelValue'] = '';
+          props['allowTables'] = true;
+
+          props['allowFontSize'] = true;
+          props['allowFontColor'] = true;
+          editorEl?.remove();
+          wrapper = mount(DtRichTextEditor, {
+            props,
+            components: { EditorContent },
+            listeners,
+            attrs,
+            slots,
+            attachTo: document.body,
+          });
+          await wrapper.vm.$nextTick();
+          editor = wrapper.find('[data-qa="dt-rich-text-editor"]').find('div[contenteditable]');
+          editorEl = document.getElementsByClassName('qa-editor')[0];
+
+          const clipboardData = new DataTransfer();
+          clipboardData.setData('text/plain', 'NameTitle');
+          clipboardData.setData('text/html',
+            '<table>' +
+            '<tr><td>' +
+            '<div style="font-size: 16pt; color: #111111;">Name</div>' +
+            '<div style="font-size: 10pt; color: #888888;">Title</div>' +
+            '</td></tr>' +
+            '</table>',
+          );
+
+          const pasteEvent = new ClipboardEvent('paste', {
+            clipboardData,
+            bubbles: true,
+            cancelable: true,
+          });
+
+          editorEl.dispatchEvent(pasteEvent);
+          await wrapper.vm.$nextTick();
+          const output = wrapper.vm.getOutput();
+          expect(output).toContain('font-size: 16pt');
+          expect(output).toContain('font-size: 10pt');
+          expect(output).toContain('color: rgb(17, 17, 17)');
+          expect(output).toContain('color: rgb(136, 136, 136)');
         });
 
         it('should not preserve tables when pasted without allow tables', async () => {
@@ -748,7 +1403,7 @@ describe('DtRichTextEditor tests', () => {
     describe('Font styling tests', () => {
       describe('When font size is enabled', () => {
         beforeEach(async () => {
-          await wrapper.setProps({ 
+          await wrapper.setProps({
             allowFontSize: true,
             outputFormat: 'html',
             modelValue: 'Test text',
@@ -768,10 +1423,10 @@ describe('DtRichTextEditor tests', () => {
           _mountWrapper();
           await wrapper.vm.$nextTick();
           _setChildWrappers();
-          
+
           const htmlContent = '<span style="font-size: 24px;">Large text</span>';
           const textContent = 'Large text';
-          
+
           const clipboardData = new DataTransfer();
           clipboardData.setData('text/html', htmlContent);
           clipboardData.setData('text/plain', textContent);
@@ -792,7 +1447,7 @@ describe('DtRichTextEditor tests', () => {
 
       describe('When font color is enabled', () => {
         beforeEach(async () => {
-          await wrapper.setProps({ 
+          await wrapper.setProps({
             allowFontColor: true,
             outputFormat: 'html',
             modelValue: 'Test text',
@@ -812,10 +1467,10 @@ describe('DtRichTextEditor tests', () => {
           _mountWrapper();
           await wrapper.vm.$nextTick();
           _setChildWrappers();
-          
+
           const htmlContent = '<span style="color: rgb(255, 0, 0);">Red text</span>';
           const textContent = 'Red text';
-          
+
           const clipboardData = new DataTransfer();
           clipboardData.setData('text/html', htmlContent);
           clipboardData.setData('text/plain', textContent);
@@ -836,7 +1491,7 @@ describe('DtRichTextEditor tests', () => {
 
       describe('When both font size and color are enabled', () => {
         beforeEach(async () => {
-          await wrapper.setProps({ 
+          await wrapper.setProps({
             allowFontSize: true,
             allowFontColor: true,
             outputFormat: 'json',
@@ -1402,7 +2057,7 @@ describe('DtRichTextEditor tests', () => {
         await wrapper.vm.$nextTick();
 
         const markdownOutput = wrapper.vm.getOutput();
-        expect(markdownOutput).toBe('Hello {{user_name=Bob}} welcome!\n');
+        expect(markdownOutput).toBe('Hello {{user_name=Bob}} welcome!');
       });
 
       it('should insert multiple variables', async function () {
@@ -1504,7 +2159,7 @@ describe('DtRichTextEditor tests', () => {
         await wrapper.vm.$nextTick();
 
         const markdownOutput = wrapper.vm.getOutput();
-        expect(markdownOutput).toBe('Hello {{test_var=Variable}} and **bold text**\n');
+        expect(markdownOutput).toBe('Hello {{test_var=Variable}} and **bold text**');
       });
 
       it('should handle variables in complex document structure', async function () {

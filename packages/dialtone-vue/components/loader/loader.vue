@@ -5,11 +5,31 @@
     data-qa="dt-loader"
   >
     <svg
+      :class="['d-icon', `d-icon--size-${size}`, 'd-loader__icon-track']"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path
+        d="
+          M12 0.0180664C18.6175 0.0180664 23.9819 5.38305 23.9819
+          12.0005C23.9819 18.6177 18.6175 23.9819 12 23.9819C5.38281
+          23.9819 0.0180664 18.6177 0.0180664 12.0005C0.0180664
+          5.38305 5.38281 0.0180664 12 0.0180664ZM12 3.26807C7.17773
+          3.26807 3.26807 7.17797 3.26807 12.0005C3.26807 16.8228
+          7.17773 20.7319 12 20.7319C16.8223 20.7319 20.7319 16.8228
+          20.7319 12.0005C20.7319 7.17797 16.8223 3.26807 12 3.26807Z
+        "
+      />
+    </svg>
+    <svg
       :class="['d-icon', `d-icon--size-${size}`, 'd-loader__icon']"
       data-qa="dt-loader-icon"
       viewBox="0 0 24 24"
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
     >
       <path
         d="

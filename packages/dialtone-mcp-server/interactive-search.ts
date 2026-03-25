@@ -6,11 +6,11 @@
  */
 
 import * as readline from 'readline';
-import { searchUtilityClasses } from './src/tools/utility-classes.js';
-import { searchTokens } from './src/tools/tokens.js';
-import { searchComponents } from './src/tools/components.js';
-import { utilityClasses, tokens, components } from './src/data.js';
-import type { UtilityClassesData, TokensData, Component } from './src/types.js';
+import {
+  searchUtilityClasses, searchTokens, searchComponents,
+  utilityClasses, tokens, components,
+} from '@dialpad/dialtone-query-core';
+import type { UtilityClassesData, TokensData, Component } from '@dialpad/dialtone-query-core';
 
 console.log('='.repeat(80));
 console.log('Dialtone MCP Server - Interactive Search Tool');

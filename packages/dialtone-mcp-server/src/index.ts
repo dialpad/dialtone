@@ -2,28 +2,17 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
 import pkg from '../package.json' with { type: 'json' };
+import clientRules from '../client-rules.json' with { type: 'json' };
 
-import { utilityClasses, tokens, components, icons, clientRules } from './data.js';
-import { searchUtilityClasses, formatResults, buildCompoundPropertiesSet } from './tools/utility-classes.js';
-import { searchTokens, formatTokenResults } from './tools/tokens.js';
-import { searchComponents, formatComponentResults } from './tools/components.js';
-import { searchIcons, formatIconResults } from './tools/icons.js';
+import {
+  utilityClasses, tokens, components, icons,
+  searchUtilityClasses, formatResults, buildCompoundPropertiesSet,
+  searchTokens, formatTokenResults,
+  searchComponents, formatComponentResults,
+  searchIcons, formatIconResults,
+} from '@dialpad/dialtone-query-core';
 
-import type {
-  ValueObject,
-  Metadata,
-  ClassData,
-  UtilityClassesData,
-  ThemeData,
-  TokenData,
-  TokensData,
-  ComponentProp,
-  ComponentEvent,
-  ComponentSlot,
-  Component,
-  IconsData,
-  SearchResult
-} from './types.js';
+import type { TokensData, IconsData } from '@dialpad/dialtone-query-core';
 
 /**
  * Check if a newer version of the package is available on npm

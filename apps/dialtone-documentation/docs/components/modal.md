@@ -377,11 +377,6 @@ At minimum, modals contain a title and one button. They could also contain body 
     if (!value) isOpen.value = false;
   };
 
-  const changeBannerKind = (kind) => {
-    selectedBannerKind.value = kind;
-  };
-
-  const bannerKinds = () => {
-    return Object.keys(window.DIALTONE_CONSTANTS.MODAL_BANNER_KINDS);
-  };
+  const bannerKinds = Object.keys(window.DIALTONE_CONSTANTS.MODAL_BANNER_KINDS)
+    .map(kind => ({ value: kind, label: kind }));
 </script>

@@ -2,6 +2,7 @@ import { action } from 'storybook/actions';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 import DtRecipeMessageInput from './message_input.vue';
 import DtRecipeMessageInputDefaultTemplate from './message_input_default.story.vue';
+import DtRecipeMessageInputMarkdownOutputTemplate from './message_input_markdown_output.story.vue';
 import mentionSuggestion from '@/components/rich_text_editor/mention_suggestion';
 import channelSuggestion from '@/components/rich_text_editor/channel_suggestion';
 import slashCommandSuggestion from '@/components/rich_text_editor/slash_command_suggestion';
@@ -358,5 +359,19 @@ export const WithCustomEmoji = {
       customEmojis: customEmojiJson,
       showAddEmojiButton: true,
     },
+  },
+};
+
+const MarkdownOutputTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+  args,
+  argTypes,
+  DtRecipeMessageInputMarkdownOutputTemplate,
+);
+
+export const MarkdownOutput = {
+  render: MarkdownOutputTemplate,
+  args: {
+    modelValue: '<p>Type here to see live <strong>markdown</strong> <em>output</em>.</p>',
+    outputFormat: 'markdown',
   },
 };

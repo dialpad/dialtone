@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-vue",
-  "version": "3.216.0-next.2",
+  "version": "3.218.2",
   "description": "Vue component library for Dialpad's design system Dialtone",
   "scripts": {
     "lint": "run-s lint:code lint:docs",
@@ -18,6 +18,7 @@
     "@dialpad/dialtone-icons": "workspace:*",
     "@dialpad/i18n": "1.22.3",
     "@tiptap/core": "3.19.0",
+    "@tiptap/static-renderer": "3.19.0",
     "@tiptap/extension-blockquote": "3.19.0",
     "@tiptap/extension-bold": "3.19.0",
     "@tiptap/extension-bubble-menu": "3.19.0",
@@ -54,8 +55,7 @@
     "linkifyjs": "4.3.2",
     "overlayscrollbars": "2.10.0",
     "regex-combined-emojis": "1.6.0",
-    "tippy.js": "6.3.7",
-    "turndown": "7.2.0"
+    "tippy.js": "6.3.7"
   },
   "devDependencies": {
     "@dialpad/dialtone-css": "workspace:*",

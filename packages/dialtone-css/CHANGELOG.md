@@ -1,3 +1,46 @@
+# [8.77.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.76.0...dialtone-css/v8.77.0) (2026-03-19)
+
+
+### Features
+
+* DLT-3144 support truncation within message input bottom btns ([#1134](https://github.com/dialpad/dialtone/issues/1134)) ([22175f5](https://github.com/dialpad/dialtone/commit/22175f59d8b6e270f30992a31cd8604aaeed4984))
+
+# [8.76.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.75.1...dialtone-css/v8.76.0) (2026-03-17)
+
+
+### Features
+
+* **Editor:** DP-175912 extend table extension for table styling ([#1130](https://github.com/dialpad/dialtone/issues/1130)) ([b3793e7](https://github.com/dialpad/dialtone/commit/b3793e7976baba98ca84ada303c87e8e0935c1de))
+* **Loader:** DLT-2963 add track to loader ([#1133](https://github.com/dialpad/dialtone/issues/1133)) ([48a7a52](https://github.com/dialpad/dialtone/commit/48a7a527432f5e450d6dd9b12b4d64f8ef86bd2c))
+
+## [8.75.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.75.0...dialtone-css/v8.75.1) (2026-03-12)
+
+
+### Bug Fixes
+
+* **Popover:** DP-175009 revert visibility CSS that caused tippy-box click stealing ([#1119](https://github.com/dialpad/dialtone/issues/1119)) ([82ffcb6](https://github.com/dialpad/dialtone/commit/82ffcb64c3dbd4d80a170385cdcc4aa4b5218a83))
+
+# [8.75.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.74.0...dialtone-css/v8.75.0) (2026-03-09)
+
+
+### Features
+
+* **Button:** DLT-3086 update loading state to use dt-loader component ([#1111](https://github.com/dialpad/dialtone/issues/1111)) ([621c49a](https://github.com/dialpad/dialtone/commit/621c49a451dd653ad24bb4641f5cff36501670e3))
+
+# [8.74.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.73.0...dialtone-css/v8.74.0) (2026-03-06)
+
+
+### Features
+
+* **Loader,progress Circle:** NO-JIRA polish DtProgressCircle visual and align DtLoader visual with DtProgressCircle ([#1102](https://github.com/dialpad/dialtone/issues/1102)) ([7b9e9b6](https://github.com/dialpad/dialtone/commit/7b9e9b6d699515805bec979c7ffdf5b5f737b316))
+* **Progress Circle:** DLT-2983 add progress-circle component ([#1098](https://github.com/dialpad/dialtone/issues/1098)) ([c0f0e40](https://github.com/dialpad/dialtone/commit/c0f0e403acfd76d8db7dbe002862330d71571d5f))
+
+
+### Reverts
+
+* NO-JIRA revert progress circle polish commits for re-PR ([#1101](https://github.com/dialpad/dialtone/issues/1101)) ([a212c41](https://github.com/dialpad/dialtone/commit/a212c41e5c857ebabfacc9670e7a7054dcd9c6de))
+
+
 # [8.76.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.76.0-next.1...dialtone-css/v8.76.0-next.2) (2026-03-24)
 
 
