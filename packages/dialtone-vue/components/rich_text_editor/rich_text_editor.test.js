@@ -162,7 +162,6 @@ describe('DtRichTextEditor tests', () => {
 
         describe('When using markdown output', () => {
 
-          let jsonToMarkdownConverter;
           const jsonInputBase = (innerContent) => {
             return {
               type: 'doc',
@@ -173,10 +172,14 @@ describe('DtRichTextEditor tests', () => {
             }
           };
 
+          const getMarkdownOutput = async (jsonInput) => {
+            wrapper.vm.editor.commands.setContent(jsonInput);
+            await wrapper.vm.$nextTick();
+            return wrapper.vm.getOutput();
+          };
+
           beforeEach(async () => {
             await wrapper.setProps({ outputFormat: 'markdown' });
-            // Test jsonToMarkdownConverter directly
-            jsonToMarkdownConverter = wrapper.vm.jsonToMarkdownConverter;
           });
 
           it('should convert JSON to markdown correctly', async () => {
@@ -185,34 +188,28 @@ describe('DtRichTextEditor tests', () => {
               text: 'bold text',
               marks: [{ type: 'bold' }],
             }]);
-            const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
-            expect(output).toBe('**bold text**\n');
+            const output = await getMarkdownOutput(jsonInput);
+            expect(output).toBe('**bold text**');
           });
 
           it('should convert italic text to markdown correctly', async () => {
-            await wrapper.setProps({ allowItalic: true });
-
             const jsonInput = jsonInputBase([{
               type: 'text',
               text: 'italic text',
               marks: [{ type: 'italic' }],
             }]);
-            const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
-            expect(output).toBe('*italic text*\n');
+            const output = await getMarkdownOutput(jsonInput);
+            expect(output).toBe('*italic text*');
           });
 
           it('should convert strikethrough text to markdown correctly', async () => {
-            await wrapper.setProps({ allowStrike: true });
-
-            // Test jsonToMarkdownConverter directly
-            const jsonToMarkdownConverter = wrapper.vm.jsonToMarkdownConverter;
             const jsonInput = jsonInputBase([{
               type: 'text',
               text: 'strikethrough text',
               marks: [{ type: 'strike' }],
             }]);
-            const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
-            expect(output).toBe('~~strikethrough text~~\n');
+            const output = await getMarkdownOutput(jsonInput);
+            expect(output).toBe('~~strikethrough text~~');
           });
 
           it('should convert links to markdown correctly', async () => {
@@ -223,8 +220,8 @@ describe('DtRichTextEditor tests', () => {
               text: 'link text',
               marks: [{ type: 'link', attrs: { href: 'https://example.com' } }],
             }]);
-            const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
-            expect(output).toBe('[link text](https://example.com)\n');
+            const output = await getMarkdownOutput(jsonInput);
+            expect(output).toBe('[link text](https://example.com)');
           });
 
           it('should convert bullet lists to markdown without extra newlines', async () => {
@@ -250,12 +247,12 @@ describe('DtRichTextEditor tests', () => {
                 ],
               }],
             };
-            const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
-            expect(output).toBe('- First item\n- Second item\n- Third item\n');
+            const output = await getMarkdownOutput(jsonInput);
+            expect(output).toBe('- First item\n- Second item\n- Third item');
           });
 
           it('should convert bullet lists with formatting to markdown correctly', async () => {
-            await wrapper.setProps({ allowBulletList: true, allowBold: true, allowItalic: true });
+            await wrapper.setProps({ allowBulletList: true });
             const jsonInput = {
               type: 'doc',
               content: [{
@@ -284,17 +281,12 @@ describe('DtRichTextEditor tests', () => {
                 ],
               }],
             };
-            const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
-            expect(output).toBe('- Item with **bold** text\n- Item with *italic* text\n- Regular item\n');
+            const output = await getMarkdownOutput(jsonInput);
+            expect(output).toBe('- Item with **bold** text\n- Item with *italic* text\n- Regular item');
           });
 
           it('should convert mixed formatting to markdown correctly', async () => {
-            await wrapper.setProps({
-                allowBold: true,
-                allowItalic: true,
-                allowStrike: true,
-                link: true,
-            });
+            await wrapper.setProps({ link: true });
             const jsonInput = jsonInputBase([
               { type: 'text', text: 'This has ' },
               { type: 'text', text: 'bold', marks: [{ type: 'bold' }] },
@@ -306,8 +298,8 @@ describe('DtRichTextEditor tests', () => {
               { type: 'text', text: 'link', marks: [{ type: 'link', attrs: { href: 'https://example.com' } }] },
               { type: 'text', text: '.' },
             ]);
-            const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
-            expect(output).toBe('This has **bold**, *italic*, ~~strikethrough~~, and a [link](https://example.com).\n');
+            const output = await getMarkdownOutput(jsonInput);
+            expect(output).toBe('This has **bold**, *italic*, ~~strikethrough~~, and a [link](https://example.com).');
           });
 
           it('should handle text with font size applied', async () => {
@@ -375,21 +367,41 @@ describe('DtRichTextEditor tests', () => {
           });
 
           it('should handle nested formatting correctly', async () => {
-            await wrapper.setProps({
-                allowBold: true,
-                allowItalic: true,
-            });
-
             const jsonInput = jsonInputBase([
               { type: 'text', text: 'Bold and ', marks: [{ type: 'bold' }] },
               { type: 'text', text: 'italic', marks: [{ type: 'bold' }, { type: 'italic' }] },
               { type: 'text', text: ' nested', marks: [{ type: 'bold' }] },
             ]);
-            const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
-            expect(output).toBe('**Bold and *****italic***** nested**\n');
+            const output = await getMarkdownOutput(jsonInput);
+            expect(output).toBe('**Bold and** ***italic*** **nested**');
+          });
+
+          it('should place spaces outside mark delimiters for CommonMark compatibility', async () => {
+            // When switching styles (e.g. bold → italic), TipTap may include the space
+            // inside one of the mark boundaries, producing invalid CommonMark like "**bold **".
+            // The renderer must move boundary spaces outside the delimiters.
+            const jsonInput = jsonInputBase([
+              { type: 'text', text: 'bold ', marks: [{ type: 'bold' }] },
+              { type: 'text', text: 'italic', marks: [{ type: 'italic' }] },
+            ]);
+            const output = await getMarkdownOutput(jsonInput);
+            expect(output).toBe('**bold** *italic*');
+          });
+
+          it('should place leading spaces outside mark delimiters for CommonMark compatibility', async () => {
+            const jsonInput = jsonInputBase([
+              { type: 'text', text: 'bold', marks: [{ type: 'bold' }] },
+              { type: 'text', text: ' italic', marks: [{ type: 'italic' }] },
+            ]);
+            const output = await getMarkdownOutput(jsonInput);
+            expect(output).toBe('**bold** *italic*');
           });
 
           it('should convert mentions to markdown comments correctly', async () => {
+            await wrapper.setProps({
+              mentionSuggestion: { items: vi.fn(() => []) },
+            });
+
             const jsonInput = jsonInputBase([
               { type: 'text', text: 'Hello ' },
               {
@@ -402,11 +414,15 @@ describe('DtRichTextEditor tests', () => {
               },
               { type: 'text', text: ' how are you?' },
             ]);
-            const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
-            expect(output).toBe('Hello <!-- @mention: {"id": "john.doe", "contactKey": "contact-123", "name": "John Doe"} --> how are you?\n');
+            const output = await getMarkdownOutput(jsonInput);
+            expect(output).toBe('Hello <!-- @mention: {"id": "john.doe", "contactKey": "contact-123", "name": "John Doe"} --> how are you?');
           });
 
           it('should convert channels to markdown comments correctly', async () => {
+            await wrapper.setProps({
+              channelSuggestion: { items: vi.fn(() => []) },
+            });
+
             const jsonInput = jsonInputBase([
               { type: 'text', text: 'Check out ' },
               {
@@ -419,11 +435,15 @@ describe('DtRichTextEditor tests', () => {
               },
               { type: 'text', text: ' channel' },
             ]);
-            const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
-            expect(output).toBe('Check out <!-- @channel: {"id": "general", "channelKey": "", "name": "general", "locked": "false"} --> channel\n');
+            const output = await getMarkdownOutput(jsonInput);
+            expect(output).toBe('Check out <!-- @channel: {"id": "general", "channelKey": "", "name": "general", "locked": "false"} --> channel');
           });
 
           it('should convert locked channels to markdown comments correctly', async () => {
+            await wrapper.setProps({
+              channelSuggestion: { items: vi.fn(() => []) },
+            });
+
             const jsonInput = jsonInputBase([
               { type: 'text', text: 'Check out ' },
               {
@@ -436,11 +456,15 @@ describe('DtRichTextEditor tests', () => {
               },
               { type: 'text', text: ' channel' },
             ]);
-            const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
-            expect(output).toBe('Check out <!-- @channel: {"id": "dialtone-internal", "channelKey": "", "name": "dialtone-internal", "locked": "true"} --> channel\n');
+            const output = await getMarkdownOutput(jsonInput);
+            expect(output).toBe('Check out <!-- @channel: {"id": "dialtone-internal", "channelKey": "", "name": "dialtone-internal", "locked": "true"} --> channel');
           });
 
           it('should convert channels with channelKey to markdown comments correctly', async () => {
+            await wrapper.setProps({
+              channelSuggestion: { items: vi.fn(() => []) },
+            });
+
             const jsonInput = jsonInputBase([
               { type: 'text', text: 'Check out ' },
               {
@@ -454,8 +478,8 @@ describe('DtRichTextEditor tests', () => {
               },
               { type: 'text', text: ' channel' },
             ]);
-            const output = jsonToMarkdownConverter.convertToMarkdown(jsonInput);
-            expect(output).toBe('Check out <!-- @channel: {"id": "general", "channelKey": "channel-456", "name": "general", "locked": "false"} --> channel\n');
+            const output = await getMarkdownOutput(jsonInput);
+            expect(output).toBe('Check out <!-- @channel: {"id": "general", "channelKey": "channel-456", "name": "general", "locked": "false"} --> channel');
           });
         });
       });
@@ -2033,7 +2057,7 @@ describe('DtRichTextEditor tests', () => {
         await wrapper.vm.$nextTick();
 
         const markdownOutput = wrapper.vm.getOutput();
-        expect(markdownOutput).toBe('Hello {{user_name=Bob}} welcome!\n');
+        expect(markdownOutput).toBe('Hello {{user_name=Bob}} welcome!');
       });
 
       it('should insert multiple variables', async function () {
@@ -2135,7 +2159,7 @@ describe('DtRichTextEditor tests', () => {
         await wrapper.vm.$nextTick();
 
         const markdownOutput = wrapper.vm.getOutput();
-        expect(markdownOutput).toBe('Hello {{test_var=Variable}} and **bold text**\n');
+        expect(markdownOutput).toBe('Hello {{test_var=Variable}} and **bold text**');
       });
 
       it('should handle variables in complex document structure', async function () {
