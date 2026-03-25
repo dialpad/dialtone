@@ -153,7 +153,7 @@
   line-height: var(--dt-font-line-height-400);
   background-color: var(--modal-dialog-color-background);
   border: var(--dt-size-border-100) solid var(--modal-dialog-color-border);
-  border-radius: var(--dt-layout-25);
+  border-radius: var(--dt-size-radius-500);
   box-shadow: var(--modal-dialog-shadow);
   transform: translate3d(0, 30%, 0) scale3d(0.75, 0.75, 0.75);
   backface-visibility: hidden;
@@ -231,8 +231,8 @@
 //  $   BANNERS
 //  ----------------------------------------------------------------------------
 .d-modal__banner {
-  --modal-banner-padding-y: var(--dt-layout-25);
-  --modal-banner-padding-x: var(--dt-layout-50);
+  --modal-banner-padding-y: var(--dt-spacing-200);
+  --modal-banner-padding-x: var(--dt-spacing-400);
   --modal-banner-color-background: var(--dt-color-surface-warning);
 
   position: relative;
@@ -246,7 +246,7 @@
   background-color: var(--modal-banner-color-background);
   border: var(--dt-size-border-100) solid var(--modal-dialog-color-border);
   border-block-end-width: 0;
-  border-radius: var(--dt-layout-25) var(--dt-layout-25) 0 0;
+  border-radius: var(--dt-size-radius-500) var(--dt-size-radius-500) 0 0;
   box-shadow: var(--modal-dialog-shadow);
 
   &--warning {
@@ -310,7 +310,7 @@
   }
 
   .d-modal__header {
-    padding: var(--dt-spacing-400) var(--dt-layout-50) 0; // 32
+    padding: var(--dt-spacing-400) var(--dt-spacing-400) 0; // 32
   }
 
   .d-modal__content {
@@ -319,12 +319,12 @@
 
   .d-modal__footer {
     margin-block-start: auto !important;
-    padding: 0 var(--dt-spacing-300) var(--dt-layout-50) var(--dt-layout-50); // 0 24 32 32
+    padding: 0 var(--dt-spacing-300) var(--dt-spacing-400) var(--dt-spacing-400); // 0 24 32 32
   }
 
   .d-modal__banner {
     max-inline-size: unset;
-    padding: var(--dt-spacing-150) var(--dt-layout-50); // 12 32
+    padding: var(--dt-spacing-150) var(--dt-spacing-400); // 12 32
     border-radius: 0;
   }
 }

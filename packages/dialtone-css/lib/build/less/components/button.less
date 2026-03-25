@@ -635,9 +635,9 @@
   //  Pseudo-element spinner (fallback for raw HTML consumers)
   &::before {
     position: absolute;
-    inline-size: var(--dt-size-500);
-    block-size: var(--dt-size-500);
-    border: var(--dt-size-200) solid currentColor;
+    inline-size: var(--dt-layout-25);
+    block-size: var(--dt-layout-25);
+    border: var(--dt-size-border-200) solid currentColor;
     border-inline-start-color: transparent !important;
     border-radius: var(--dt-size-radius-circle);
     animation: d-loading-circle 900ms infinite linear;
@@ -813,7 +813,7 @@
     &:not(.d-btn--outlined, .d-btn--primary) > * {
       // yes, I'm pushing a half-pixel over just for this variant
       // to ensure icon is centered
-      transform: translateX(var(--dt-size-50));
+      transform: translateX(var(--dt-spacing-1));
     }
 
     &:disabled:not(.d-btn--outlined),
