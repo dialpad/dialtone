@@ -19,7 +19,7 @@
             text="New"
           />
         </dt-stack>
-        <dt-stack direction="row" gap="200">
+        <dt-stack direction="row" gap="100">
           <dt-button
             v-if="$frontmatter.figma_url"
             :href="$frontmatter.figma_url"
@@ -27,9 +27,10 @@
             rel="noopener noreferrer"
             kind="muted"
             importance="clear"
+            size="sm"
           >
-            <template #icon>
-              <dt-icon-figma size="200" />
+            <template #startIcon="{ iconSize }">
+              <dt-icon-figma :size="iconSize" />
             </template>
             Figma
           </dt-button>
@@ -40,9 +41,10 @@
             rel="noopener noreferrer"
             kind="muted"
             importance="clear"
+            size="sm"
           >
-            <template #icon>
-              <dt-icon-storybook-color size="200" />
+            <template #startIcon="{ iconSize }">
+              <dt-icon-storybook-color :size="iconSize" />
             </template>
             Storybook
           </dt-button>
@@ -53,9 +55,10 @@
             rel="noopener noreferrer"
             kind="muted"
             importance="clear"
+            size="sm"
           >
-            <template #icon>
-              <dt-icon-github size="200" />
+            <template #startIcon="{ iconSize }">
+              <dt-icon-github :size="iconSize" />
             </template>
             GitHub
           </dt-button>
@@ -68,10 +71,10 @@
               start-aria-label="Copy Markdown"
               @start-clicked="onCopyAsMarkdown()"
             >
-              <template #startIcon>
+              <template #startIcon="{ size }">
                 <dt-icon
                   :name="showCopiedIcon ? 'check' : 'copy'"
-                  size="200"
+                  :size="size"
                   :class="{ 'd-fc-success': showCopiedIcon }"
                 />
               </template>
@@ -141,7 +144,7 @@
 </template>
 
 <script setup>
-import { DtIconStorybookColor, DtIconFigma, DtIconGithub } from '@dialpad/dialtone-icons/vue3';
+import { DtIconStorybookColor, DtIconFigma, DtIconGithub } from '@dialpad/dialtone-icons/vue';
 import { computed, ref } from 'vue';
 import { usePageData, withBase } from 'vuepress/client';
 

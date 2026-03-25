@@ -118,7 +118,7 @@ import { computed, ref } from 'vue';
 import { ICON_KINDS } from './constants.js';
 import CopyButton from './CopyButton.vue';
 import SvgLoader from './SvgLoader.vue';
-import { DtIconFigma } from '@dialpad/dialtone-icons/vue3';
+import { DtIconFigma } from '@dialpad/dialtone-icons/vue';
 
 const props = defineProps({
   name: {

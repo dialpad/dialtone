@@ -280,7 +280,7 @@
 
 <script setup>
 import { useRoute } from 'vue-router';
-import { DtIconStorybook, DtIconGithub, DtIconCodepen } from '@dialpad/dialtone-icons/vue3';
+import { DtIconStorybook, DtIconGithub, DtIconCodepen } from '@dialpad/dialtone-icons/vue';
 import { useThemeManager } from '../composables/useThemeManager';
 
 defineEmits(['search']);

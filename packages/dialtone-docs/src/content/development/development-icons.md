@@ -157,17 +157,17 @@ When `aria-label` is provided, `aria-hidden` is set to `false`. When omitted, it
 
 ## Exports and Consumption
 
-Icons are exported from `@dialpad/dialtone-icons` under the `vue3` sub-path:
+Icons are exported from `@dialpad/dialtone-icons` under the `vue` sub-path:
 
 ```javascript
 // Named import (preferred for Vite/ESM)
-import { DtIconAlertCircle } from '@dialpad/dialtone-icons/vue3';
+import { DtIconAlertCircle } from '@dialpad/dialtone-icons/vue';
 
 // Default import (preferred for Webpack)
-import DtIconAlertCircle from '@dialpad/dialtone-icons/vue3/alert-circle';
+import DtIconAlertCircle from '@dialpad/dialtone-icons/vue/alert-circle';
 
 // Import all as glob object (tree-shakeable)
-import { icons } from '@dialpad/dialtone-icons/vue3';
+import { icons } from '@dialpad/dialtone-icons/vue';
 
 // Keyword data for search UIs
 import keywords from '@dialpad/dialtone-icons/keywords-icons.json';
@@ -179,7 +179,7 @@ import iconsList from '@dialpad/dialtone-icons/icons.js';
 import alertSvg from '@dialpad/dialtone-icons/svg/icons/alerts/alert-circle.svg';
 ```
 
-`dialtone-vue` imports icons using the named export pattern. When a Dialtone Vue component renders an icon slot, it accepts any `DtIcon*` component from `@dialpad/dialtone-icons/vue3`.
+`dialtone-vue` imports icons using the named export pattern. When a Dialtone Vue component renders an icon slot, it accepts any `DtIcon*` component from `@dialpad/dialtone-icons/vue`.
 
 ## Illustrations
 
