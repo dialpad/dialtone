@@ -95,12 +95,25 @@ Go to the [Icon Builder page](https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/
 
 ### Exporting
 
+<dt-notice
+  kind="info"
+  class="d-wmx100p d-my24"
+  hide-close
+  title="Claude Code"
+>
+  The <code>/icon</code> skill automates SVG validation, normalization, and build verification. Run <code>/icon add &lt;name&gt;</code> or <code>/icon update &lt;name&gt;</code>.
+</dt-notice>
+
 1. [Create a new branch](https://github.com/dialpad/dialtone/tree/staging/packages/dialtone-css/.github/CONTRIBUTING.md#making-a-pull-request) in [dialtone](https://github.com/dialpad/dialtone/tree/staging) repo starting with "dlt-xxxx-" in the name.
-2. Place the exported SVG file(s) in the appropriate folder category inside `./src/svg/`, files names should be in kebab-case.
-3. Run `nx run dialtone-icons:build`
-4. Add keywords related to the icon(s) in the `packages/dialtone-icons/src/keywords-icons.json` file.
-5. [Commit](https://github.com/dialpad/dialtone/tree/staging/.github/COMMIT_CONVENTION.md) and push your branch to [dialtone](https://github.com/dialpad/dialtone/tree/staging).
-6. Open a pull request, once approved it can be merged into main and will go out in the next [dialtone](https://github.com/dialpad/dialtone/tree/staging) release.
+2. Export the SVG from the **12px (size 100)** Figma component. Prepare the SVG before placing it:
+   - Run **Edit > Outline Stroke** in Figma to ensure the icon is fill-based (no strokes).
+   - Normalize fill colors to `fill="black"`. Figma often exports `fill="#1C1C1C"` or other near-black hex values that the build pipeline won't convert to `currentColor`. Full-color gradient fills (`fill="url(#...)"`) should be left as-is.
+   - Remove no-op `<clipPath>` wrappers — Figma adds these when "Clip content" is enabled, but they are unnecessary when the clip rect matches the viewBox.
+   - Combine multiple `<path>` elements with the same `fill` into a single `<path>` where possible. Exception: paths with different gradient fills must remain separate.
+3. Place the exported SVG file(s) in the appropriate folder category inside `./src/svg/`, file names should be in kebab-case.
+4. Run `nx run dialtone-icons:build`
+5. Add keywords related to the icon(s) in the `packages/dialtone-icons/src/keywords-icons.json` file.
+6. [Commit](https://github.com/dialpad/dialtone/tree/staging/.github/COMMIT_CONVENTION.md) and push your branch to [dialtone](https://github.com/dialpad/dialtone/tree/staging), and open a pull request.
 
 <script setup>
 import { ref } from 'vue';

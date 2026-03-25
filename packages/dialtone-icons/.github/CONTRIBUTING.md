@@ -35,6 +35,36 @@ or standalone as SVG files.
 
 [Learn more on How to craft an icon.](https://dialtone.dialpad.com/design/icons/#crafting-an-icon)
 
+> **Claude Code users:** The `/icon` skill automates SVG validation, normalization, and build verification. Run `/icon add <name>` or `/icon update <name>` to use it.
+
+## SVG Preparation
+
+Figma exports require cleanup before committing. These steps ensure the build pipeline processes icons correctly.
+
+### Source from 12px (size 100)
+
+Always export from the Figma component's **12px size** (size 100). Full-color gradient icons in the `brand-full-color` category may use 24x24.
+
+### Outline strokes
+
+Icons must be fill-based, not stroke-based. In Figma, run **Edit > Outline Stroke** before exporting. Confirm the icon renders correctly after outlining.
+
+### Normalize fill colors
+
+The build pipeline replaces these fill values with `currentColor`: `black`, `#000`, `#000000`, `#0D0C0F`, `#222`, `#222222`.
+
+Figma commonly exports `fill="#1C1C1C"` or other near-black hex values. **These are NOT in the replacement list** and will pass through as hardcoded colors, preventing CSS color inheritance. Change any non-standard dark fill to `fill="black"` before committing.
+
+Full-color icons with gradient fills (`fill="url(#...)"`) should be left as-is.
+
+### Remove no-op clipPath wrappers
+
+Figma adds `<g clip-path="url(#...)">` with a `<clipPath><rect width="12" height="12">` when "Clip content" is enabled on the frame. This clips to the full viewBox — a no-op that adds unnecessary markup. Remove the `<g>` wrapper, the `<defs>`, and the `<clipPath>` block.
+
+### Combine path elements
+
+Multiple `<path>` elements with the same `fill` attribute should be combined into a single `<path>` by concatenating their `d` values (space-separated). **Exception:** paths referencing different gradient fills must remain separate.
+
 ## Icon build process
 
 Because our SVG's come from Figma, it's possible to have duplicated identifiers if we exported the icons as is.
