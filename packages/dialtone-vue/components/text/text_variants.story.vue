@@ -2,7 +2,7 @@
 <template>
   <div>
     <dt-stack
-      gap="800"
+      gap="700"
       class="d-p-400"
     >
       <!-- Kind Examples -->
@@ -14,7 +14,7 @@
         >
           Kind Examples
         </dt-text>
-        <dt-stack gap="200">
+        <dt-stack gap="500">
           <div>
             <dt-text
               as="h3"
@@ -25,7 +25,7 @@
             </dt-text>
             <div class="d-ba d-bc-default d-p-200 d-bar8">
               <dt-stack
-                gap="100"
+                gap="400"
                 direction="row"
                 align="baseline"
               >
@@ -51,7 +51,7 @@
             </dt-text>
             <div class="d-ba d-bc-default d-p-200 d-bar8">
               <dt-stack
-                gap="100"
+                gap="400"
                 direction="row"
                 align="baseline"
               >
@@ -77,7 +77,7 @@
             </dt-text>
             <div class="d-ba d-bc-default d-p-200 d-bar8">
               <dt-stack
-                gap="100"
+                gap="400"
                 direction="row"
                 align="baseline"
               >
@@ -103,7 +103,7 @@
             </dt-text>
             <div class="d-ba d-bc-default d-p-200 d-bar8">
               <dt-stack
-                gap="100"
+                gap="400"
                 direction="row"
                 align="baseline"
               >
@@ -130,7 +130,7 @@
         >
           Strength Examples
         </dt-text>
-        <dt-stack gap="200">
+        <dt-stack gap="500">
           <div>
             <dt-text
               as="h3"
@@ -142,7 +142,7 @@
             <div class="d-ba d-bc-default d-p-200 d-bar8">
               <dt-stack
                 direction="row"
-                gap="200"
+                gap="500"
                 align="baseline"
               >
                 <dt-text
@@ -169,7 +169,7 @@
         >
           Density Examples
         </dt-text>
-        <dt-stack gap="200">
+        <dt-stack gap="500">
           <div>
             <dt-text
               as="h3"
@@ -180,7 +180,7 @@
             </dt-text>
             <div class="d-ba d-bc-default d-p-200 d-bar8">
               <dt-stack
-                gap="100"
+                gap="400"
                 direction="row"
                 align="baseline"
               >
@@ -210,12 +210,12 @@
         >
           Tone Examples
         </dt-text>
-        <dt-stack gap="200">
+        <dt-stack gap="500">
           <div>
             <div class="d-ba d-bc-default d-p-200 d-bar8">
               <dt-stack
                 direction="row"
-                gap="100"
+                gap="400"
                 class="d-fw-wrap"
               >
                 <dt-text
@@ -224,24 +224,6 @@
                   v-bind="item.props"
                 >
                   {{ item.copy }}
-                </dt-text>
-              </dt-stack>
-            </div>
-          </div>
-
-          <div>
-            <div class="d-ba d-bc-default d-p-200 d-bar8 d-bgc-primary-inverted">
-              <dt-stack
-                direction="row"
-                gap="100"
-                class="d-fw-wrap"
-              >
-                <dt-text
-                  v-for="tone in invertedToneExamples"
-                  :key="tone"
-                  :tone="tone"
-                >
-                  {{ tone }}
                 </dt-text>
               </dt-stack>
             </div>
@@ -258,7 +240,7 @@
         >
           Alignment Examples
         </dt-text>
-        <dt-stack gap="200">
+        <dt-stack gap="500">
           <div
             v-for="item in alignExamples"
             :key="item.align"
@@ -291,7 +273,7 @@
         >
           Truncation Examples
         </dt-text>
-        <dt-stack gap="200">
+        <dt-stack gap="500">
           <div>
             <dt-text
               as="h3"
@@ -327,7 +309,7 @@
             </dt-text>
             <dt-stack
               class="d-ba d-bc-default d-p-200 d-bar8"
-              gap="200"
+              gap="500"
             >
               <dt-text
                 as="div"
@@ -388,7 +370,7 @@
         >
           Wrap Examples
         </dt-text>
-        <dt-stack gap="200">
+        <dt-stack gap="500">
           <div
             v-for="item in wrapExamples"
             :key="item.wrap"
@@ -400,7 +382,7 @@
             >
               {{ item.wrap.charAt(0).toUpperCase() + item.wrap.slice(1) }}
             </dt-text>
-            <div class="d-ba d-bc-default d-of-hidden d-p-200 d-bar8 d-w-300">
+            <div class="d-ba d-bc-default d-of-hidden d-p-200 d-bar8">
               <dt-text
                 kind="headline"
                 size="md"
@@ -430,7 +412,7 @@
           Text box trim removes extra space above/below text for tighter layouts
         </dt-text>
         <dt-stack
-          gap="200"
+          gap="500"
           direction="row"
           class="d-ba d-bc-default d-p-200 d-bar8"
         >
@@ -459,7 +441,7 @@
         >
           Numeric Examples
         </dt-text>
-        <dt-stack gap="200">
+        <dt-stack gap="500">
           <div>
             <dt-text
               as="h3"
@@ -469,7 +451,7 @@
               Tabular Figures
             </dt-text>
             <div class="d-ba d-bc-default d-p-200 d-bar8">
-              <dt-stack gap="25">
+              <dt-stack gap="200">
                 <dt-text numeric>
                   00123456789 (numeric)
                 </dt-text>

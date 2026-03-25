@@ -38,7 +38,7 @@
         v-if="selected"
         #selected
       >
-        <dt-icon-check size="400" />
+        <dt-icon-check size="200" />
       </template>
     </dt-item-layout>
     <!-- @slot slot for the main content -->
@@ -52,7 +52,7 @@ import {
   LIST_ITEM_NAVIGATION_TYPES,
 } from './list_item_constants';
 import utils from '@/common/utils';
-import { DtIconCheck } from '@dialpad/dialtone-icons/vue3';
+import { DtIconCheck } from '@dialpad/dialtone-icons/vue';
 import { DtItemLayout } from '@/components/item_layout';
 
 const ROLES = ['listitem', 'menuitem', 'option'];
@@ -88,6 +88,7 @@ export default {
 
     /**
      * String to use for the item's role.
+     * @values listitem, menuitem, option
      */
     role: {
       type: String,

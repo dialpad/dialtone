@@ -2,7 +2,7 @@
   <div>
     <div>
       <h2>Call pill</h2>
-      <h3 class="d-mt-100 d-mb-50">
+      <h3 class="d-mbs-100 d-mbe-50">
         With call recap
       </h3>
       <dt-recipe-feed-item-pill
@@ -47,21 +47,21 @@
               for calling outside of the requested time and expressed that they had
               asked the team to look into the issue and would email them after the call.
             </p>
-            <p class="d-fs-100 d-mt-150">
+            <p class="d-fs-100 d-mbs-150">
               <strong>Actions items</strong>
             </p>
             <dt-stack
               as="p"
               direction="row"
             >
-              <strong class="d-mr-50">1. </strong>
+              <strong class="d-mie-50">1. </strong>
               The agent needs to inform the team to check on Vijay's request or ticket regarding Dialpad CTI.
             </dt-stack>
           </div>
         </template>
       </dt-recipe-feed-item-pill>
 
-      <h3 class="d-mt-200 d-mb-50">
+      <h3 class="d-mbs-200 d-mbe-50">
         Missed
       </h3>
       <dt-recipe-feed-item-pill
@@ -97,7 +97,7 @@
         </template>
       </dt-recipe-feed-item-pill>
 
-      <h3 class="d-mt-200 d-mb-50">
+      <h3 class="d-mbs-200 d-mbe-50">
         Voicemail
       </h3>
       <dt-recipe-feed-item-pill
@@ -135,7 +135,7 @@
         </template>
       </dt-recipe-feed-item-pill>
 
-      <h3 class="d-mt-200 d-mb-50">
+      <h3 class="d-mbs-200 d-mbe-50">
         Generating AI summary
       </h3>
       <dt-recipe-feed-item-pill
@@ -172,11 +172,11 @@
       </dt-recipe-feed-item-pill>
     </div>
     <div>
-      <h2 class="d-mt-200">
+      <h2 class="d-mbs-200">
         Meeting pill
       </h2>
 
-      <h3 class="d-mt-100 d-mb-50">
+      <h3 class="d-mbs-100 d-mbe-50">
         With call recap
       </h3>
       <dt-recipe-feed-item-pill
@@ -225,21 +225,21 @@
               for calling outside of the requested time and expressed that they had
               asked the team to look into the issue and would email them after the call.
             </p>
-            <p class="d-fs-100 d-mt-150">
+            <p class="d-fs-100 d-mbs-150">
               <strong>Actions items</strong>
             </p>
             <dt-stack
               as="p"
               direction="row"
             >
-              <strong class="d-mr-50">1. </strong>
+              <strong class="d-mie-50">1. </strong>
               The agent needs to inform the team to check on Vijay's request or ticket regarding Dialpad CTI.
             </dt-stack>
           </div>
         </template>
       </dt-recipe-feed-item-pill>
 
-      <h3 class="d-mt-200 d-mb-50">
+      <h3 class="d-mbs-200 d-mbe-50">
         Generating AI summary
       </h3>
       <dt-recipe-feed-item-pill
@@ -297,7 +297,7 @@ import {
   DtIconPhoneIncoming,
   DtIconVideo,
   DtIconVoicemail,
-} from '@dialpad/dialtone-icons/vue3';
+} from '@dialpad/dialtone-icons/vue';
 export default {
   name: 'DtRecipeFeedItemPillVariants',
 

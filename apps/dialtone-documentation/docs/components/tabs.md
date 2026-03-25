@@ -8,25 +8,13 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["tab panel", "tab navigation", "d-tabs", "DtTabs", "dt-tabs", "segmented control", "tabbar"]
 ---
 
-<code-well-header>
-  <div class="d-w100p">
-    <example-tabs />
-  </div>
-</code-well-header>
+<component-combinator component-name="DtTabGroup" />
 
 ## Variants
 
 ### Default
 
-<code-well-header>
-  <div class="d-w100p">
-    <example-tabs ref="defaultTabsExample" />
-  </div>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.defaultTabsExample'
-vueCode='
+<code-example vueCode='
 <dt-tab-group>
   <template #tabs>
     <dt-tab id="1" panel-id="2" selected>First</dt-tab>
@@ -34,41 +22,31 @@ vueCode='
     <dt-tab id="5" panel-id="6">Third</dt-tab>
   </template>
 </dt-tab-group>
-'
-showHtmlWarning />
+'>
+  <div class="d-w100p">
+    <example-tabs />
+  </div>
+</code-example>
 
 ### Borderless
 
 Remove the bottom border of any tablist.
 
-<code-well-header>
-  <div class="d-w100p">
-    <example-tabs ref="borderlessTabsExample" borderless />
-  </div>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.borderlessTabsExample'
-vueCode='
+<code-example vueCode='
 <dt-tab-group borderless>
   ...
 </dt-tab-group>
-'
-showHtmlWarning />
+'>
+  <div class="d-w100p">
+    <example-tabs borderless />
+  </div>
+</code-example>
 
 ### Muted
 
 All tabs render as muted buttons. The selected tab is distinguished with active styling.
 
-<code-well-header>
-  <div class="d-w100p">
-    <example-tabs ref="mutedTabsExample" kind="muted" />
-  </div>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.mutedTabsExample'
-vueCode='
+<code-example vueCode='
 <dt-tab-group kind="muted">
   <template #tabs>
     <dt-tab id="1" panel-id="2" selected>First</dt-tab>
@@ -76,22 +54,17 @@ vueCode='
     <dt-tab id="5" panel-id="6">Third</dt-tab>
   </template>
 </dt-tab-group>
-'
-showHtmlWarning />
+'>
+  <div class="d-w100p">
+    <example-tabs kind="muted" />
+  </div>
+</code-example>
 
 ### Outlined
 
 The selected tab renders with an outlined border instead of a filled style.
 
-<code-well-header>
-  <div class="d-w100p">
-    <example-tabs ref="outlinedTabsExample" outlined />
-  </div>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.outlinedTabsExample'
-vueCode='
+<code-example vueCode='
 <dt-tab-group outlined>
   <template #tabs>
     <dt-tab id="1" panel-id="2" selected>First</dt-tab>
@@ -99,22 +72,17 @@ vueCode='
     <dt-tab id="5" panel-id="6">Third</dt-tab>
   </template>
 </dt-tab-group>
-'
-showHtmlWarning />
+'>
+  <div class="d-w100p">
+    <example-tabs outlined />
+  </div>
+</code-example>
 
 ### Muted Outlined
 
 Combines muted kind with outlined selected state.
 
-<code-well-header>
-  <div class="d-w100p">
-    <example-tabs ref="mutedOutlinedTabsExample" kind="muted" outlined />
-  </div>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.mutedOutlinedTabsExample'
-vueCode='
+<code-example vueCode='
 <dt-tab-group kind="muted" outlined>
   <template #tabs>
     <dt-tab id="1" panel-id="2" selected>First</dt-tab>
@@ -122,14 +90,17 @@ vueCode='
     <dt-tab id="5" panel-id="6">Third</dt-tab>
   </template>
 </dt-tab-group>
-'
-showHtmlWarning />
+'>
+  <div class="d-w100p">
+    <example-tabs kind="muted" outlined />
+  </div>
+</code-example>
 
 ### Disabled
 
 Add `disabled` to a specific tab.
 
-<code-well-header>
+<code-example>
   <dt-tab-group>
     <template #tabs>
       <dt-tab id="1" panel-id="2" selected>First</dt-tab>
@@ -138,31 +109,11 @@ Add `disabled` to a specific tab.
       <dt-tab id="7" panel-id="8" disabled>Fourth</dt-tab>
     </template>
   </dt-tab-group>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.disabledTabsExample'
-vueCode='
-<dt-tab-group>
-  <template #tabs>
-    <dt-tab id="1" panel-id="2" selected>First</dt-tab>
-    <dt-tab id="3" panel-id="4">Second</dt-tab>
-    <dt-tab id="5" panel-id="6">Third</dt-tab>
-    <dt-tab id="7" panel-id="8" disabled>Fourth</dt-tab>
-  </template>
-</dt-tab-group>
-'
-showHtmlWarning />
+</code-example>
 
 Add `disabled` to the tab group to disable all.
 
-<code-well-header>
-  <example-tabs ref="disabledTabsExample" disabled />
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.disabledTabsExample'
-vueCode='
+<code-example vueCode='
 <dt-tab-group disabled>
   <template #tabs>
     <dt-tab id="1" panel-id="2" selected>First</dt-tab>
@@ -170,41 +121,77 @@ vueCode='
     <dt-tab id="5" panel-id="6">Third</dt-tab>
   </template>
 </dt-tab-group>
-'
-showHtmlWarning />
+'>
+  <example-tabs disabled />
+</code-example>
 
 ### Inverted
 
-<dt-notice title="Deprecated" kind="error" class="d-wmx100p d-my-200">
-  The <code>inverted</code> prop has been deprecated in favor of using <router-link to="mode-island.html"><DtLink>DtModeIsland</DtLink></router-link> as a wrapper.
+<dt-notice title="Deprecated" kind="info" class="d-wmx100p d-my-200" hide-close>
+  The <code>inverted</code> prop has been deprecated. Use the <dt-link to="mode-island.html#inverting">v-dt-mode directive</dt-link> instead.
 </dt-notice>
 
-In place of the <code>inverted</code> prop, use the <router-link to="mode-island.html"><DtLink>DtModeIsland</DtLink></router-link> component as a wrapper.
+In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#inverting) on the component element.
 
-<code-well-header>
-  <dt-mode-island class="d-p-200 d-bar8">
-    <example-tabs ref="invertedTabsExample" />
-  </dt-mode-island>
-</code-well-header>
+<code-example vueCode='
+<dt-tab-group v-dt-mode:invert>
+  <template #tabs>
+    <dt-tab id="1" panel-id="2" selected>First</dt-tab>
+    <dt-tab id="3" panel-id="4">Second</dt-tab>
+  </template>
+</dt-tab-group>
+'>
+  <div class="d-p-100 d-bgc-contrast d-w100p">
+    <div v-dt-mode:invert class="d-p-200 d-bar8">
+      <example-tabs />
+    </div>
+  </div>
+</code-example>
 
-<code-example-tabs
-:htmlCode='() => $refs.invertedTabsExample'
-vueCode='
-<dt-mode-island>
-  <dt-tab-group>
-    <template #tabs>
-      <dt-tab id="1" panel-id="2" selected>First</dt-tab>
-      <dt-tab id="3" panel-id="4">Second</dt-tab>
-    </template>
-  </dt-tab-group>
-</dt-mode-island>
-'
-showHtmlWarning />
+## Spread
+
+Control how tabs distribute available horizontal space within the tab list. It only applies to horizontal tabs, and has no effect with `orientation="vertical"`.
+
+### Grow
+
+Tabs expand proportionally to fill the container. Longer labels receive more space.
+
+<code-example>
+  <div class="d-w100p" data-demo-wrapper>
+    <dt-tab-group spread="grow">
+      <template #tabs>
+        <dt-tab id="sg1" panel-id="sg2" selected>Tab 1</dt-tab>
+        <dt-tab id="sg3" panel-id="sg4">Tab the second</dt-tab>
+        <dt-tab id="sg5" panel-id="sg6">Tab the third</dt-tab>
+      </template>
+    </dt-tab-group>
+  </div>
+</code-example>
+
+### Equal
+
+All tabs share the same width, regardless of label length.
+
+<code-example>
+  <div class="d-w100p" data-demo-wrapper>
+    <dt-tab-group spread="equal">
+      <template #tabs>
+        <dt-tab id="se1" panel-id="se2" selected>Tab 1</dt-tab>
+        <dt-tab id="se3" panel-id="se4">Tab the second</dt-tab>
+        <dt-tab id="se5" panel-id="se6">Tab the third</dt-tab>
+      </template>
+    </dt-tab-group>
+  </div>
+</code-example>
 
 ## Sizes
 
-<code-well-header>
-  <dt-stack gap="200" class="d-w100p">
+<code-example vueCode='
+<dt-tab-group size="xs|sm|md|lg|xl">
+  ...
+</dt-tab-group>
+'>
+  <dt-stack gap="500" class="d-w100p">
     <dt-tab-group size="xs">
       <template #tabs>
         <dt-tab id="1" panel-id="2" selected>
@@ -271,88 +258,63 @@ showHtmlWarning />
       </template>
     </dt-tab-group>
   </dt-stack>
-</code-well-header>
+</code-example>
 
-<code-example-tabs
-:htmlCode='() => $refs.sizeTabsExample'
-vueCode='
-<dt-tab-group size="xs|sm|md|lg|xl">
-  ...
-</dt-tab-group>
-'
-showHtmlWarning />
+## Slots
 
-## Icon Support
+### Icon
 
 Use the `#startIcon` or `#endIcon` slot on `dt-tab` to add an icon. The slot provides `iconSize` to match the tab's size.
 
-<dt-notice title="Deprecated" kind="warning" class="d-wmx100p d-my-200">
+<dt-notice title="Deprecated" kind="info" class="d-wmx100p d-my-200" hide-close>
   The <code>#icon</code> slot has been deprecated. Use <code>#startIcon</code> or <code>#endIcon</code> instead.
 </dt-notice>
 
-<code-well-header>
-  <div class="d-w100p">
+<code-example>
+  <div class="d-w100p" data-demo-wrapper>
     <dt-tab-group>
       <template #tabs>
         <dt-tab id="1" panel-id="2" selected>
+          First
           <template #startIcon="{ iconSize }">
             <dt-icon name="box-select" :size="iconSize" />
           </template>
-          First
         </dt-tab>
         <dt-tab id="3" panel-id="4">
           Second
-        </dt-tab>
-        <dt-tab id="5" panel-id="6">
+          <template #startIcon="{ iconSize }">
+            <dt-icon name="box-select" :size="iconSize" />
+          </template>
           <template #endIcon="{ iconSize }">
             <dt-icon name="box-select" :size="iconSize" />
           </template>
+        </dt-tab>
+        <dt-tab id="5" panel-id="6">
           Third
+          <template #endIcon="{ iconSize }">
+            <dt-icon name="box-select" :size="iconSize" />
+          </template>
         </dt-tab>
       </template>
     </dt-tab-group>
   </div>
-</code-well-header>
+</code-example>
 
-<code-example-tabs
-vueCode='
-<dt-tab-group>
-  <template #tabs>
-    <dt-tab id="1" panel-id="2" selected>
-      <template #startIcon="{ iconSize }">
-        <dt-icon name="box-select" :size="iconSize" />
-      </template>
-      First
-    </dt-tab>
-    <dt-tab id="3" panel-id="4">
-      Second
-    </dt-tab>
-    <dt-tab id="5" panel-id="6">
-      <template #endIcon="{ iconSize }">
-        <dt-icon name="box-select" :size="iconSize" />
-      </template>
-      Third
-    </dt-tab>
-  </template>
-</dt-tab-group>
-'
-showHtmlWarning />
-
-## Leading & Trailing
+### Leading & Trailing
 
 Use the `#leading` and `#trailing` slots on `dt-tab` to render content like badges or count indicators alongside tab labels. Use `leading-class` and `trailing-class` to adjust padding.
 
-<code-well-header>
-  <div class="d-w100p">
+<code-example>
+  <div class="d-w100p" data-demo-wrapper>
     <dt-tab-group>
       <template #tabs>
-        <dt-tab id="lt1" panel-id="lt2" selected trailing-class="d-pr-100">
+        <dt-tab id="lt1" panel-id="lt2" selected trailing-class="d-pie-100">
           Inbox
           <template #trailing>
             <dt-badge kind="count" type="bulletin" text="9" />
           </template>
         </dt-tab>
-        <dt-tab id="lt3" panel-id="lt4" trailing-class="d-pr-100">
+        <dt-tab id="lt3" panel-id="lt4" trailing-class="d-pie-100">
           Archive
           <template #trailing>
             <dt-badge kind="count" text="99+" />
@@ -364,31 +326,23 @@ Use the `#leading` and `#trailing` slots on `dt-tab` to render content like badg
       </template>
     </dt-tab-group>
   </div>
-</code-well-header>
+</code-example>
 
-<code-example-tabs
-vueCode='
-<dt-tab-group>
+## Orientation
+
+Set `orientation="vertical"` to stack tabs vertically alongside the panel.
+
+<code-example vueCode='
+<dt-tab-group orientation="vertical">
   <template #tabs>
-    <dt-tab id="lt1" panel-id="lt2" selected trailing-class="d-pr-100">
-      Inbox
-      <template #trailing>
-        <dt-badge kind="count" type="bulletin" text="9" />
-      </template>
-    </dt-tab>
-    <dt-tab id="lt3" panel-id="lt4" trailing-class="d-pr-100">
-      Archive
-      <template #trailing>
-        <dt-badge kind="count" text="99+" />
-      </template>
-    </dt-tab>
-    <dt-tab id="lt5" panel-id="lt6">
-      Drafts
-    </dt-tab>
+    <dt-tab id="1" panel-id="2" selected>First</dt-tab>
+    <dt-tab id="3" panel-id="4">Second</dt-tab>
+    <dt-tab id="5" panel-id="6">Third</dt-tab>
   </template>
 </dt-tab-group>
-'
-showHtmlWarning />
+'>
+  <example-tabs orientation="vertical" />
+</code-example>
 
 ## Advanced Usages
 
@@ -396,13 +350,7 @@ showHtmlWarning />
 
 By default, tabs use manual activation — the user must press `Enter` or `Space` after focusing a tab to select it. Set `activation-mode="auto"` to select tabs immediately on focus via arrow keys, following the <a class="d-link" href="https://www.w3.org/WAI/ARIA/apg/patterns/tabs/" target="_blank">WAI-ARIA Tabs pattern</a>.
 
-<code-well-header>
-  <example-tabs ref="autoActivationExample" activation-mode="auto" />
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.autoActivationExample'
-vueCode='
+<code-example vueCode='
 <dt-tab-group activation-mode="auto">
   <template #tabs>
     <dt-tab id="1" panel-id="2" selected>First</dt-tab>
@@ -410,20 +358,15 @@ vueCode='
     <dt-tab id="5" panel-id="6">Third</dt-tab>
   </template>
 </dt-tab-group>
-'
-showHtmlWarning />
+'>
+  <example-tabs activation-mode="auto" />
+</code-example>
 
 ### Validation Before Changing Tabs
 
 If you need to do some validation before changing tabs, you can use the `before-change` event. If the event handler is prevented, the tab change will be cancelled.
 
-<code-well-header>
-  <example-tabs ref="validateTabsExample" validate />
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.validateTabsExample'
-vueCode='
+<code-example vueCode='
 <dt-tab-group @before-change="confirmBeforeLeave">
   <template #tabs>
     <dt-tab id="1" panel-id="2" selected>First</dt-tab>
@@ -439,8 +382,9 @@ vueCode='
     }
   }
 </script>
-'
-showHtmlWarning />
+'>
+  <example-tabs validate />
+</code-example>
 
 ## Vue API
 

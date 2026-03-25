@@ -7,25 +7,21 @@
     ]"
   >
     <template #content>
-      <div class="dtc-theme__canvas">
-        <dtc-tab-panel
-          selected="code"
-          :generate-label="generateLabel"
-        >
-          <template #code>
-            <dtc-code-editor
-              :info="info"
-              :options="options"
-              :theme="settings.root.theme"
-              :verbose="settings.code.verbose"
-              :indent-spaces="settings.code.indent"
-              @update:options="e => emit(OPTIONS_UPDATE_EVENT, e)"
-            />
-          </template>
-          <template #events>
-            <dtc-event-console ref="eventConsole" />
-          </template>
-        </dtc-tab-panel>
+      <div
+        v-dt-scrollbar
+        class="dtc-theme__canvas d-p-200"
+      >
+        <dtc-code-editor
+          :info="info"
+          :options="options"
+          :theme="settings.root.theme"
+          :verbose="settings.code.verbose"
+          :indent-spaces="settings.code.indent"
+          :disabled-members="disabledMembers"
+          :dev-mode="devMode"
+          :has-changes="hasChanges"
+          @update:options="e => emit(OPTIONS_UPDATE_EVENT, e)"
+        />
       </div>
     </template>
     <template #overlay>
@@ -35,7 +31,7 @@
         justify="end"
         class="d-h100p"
       >
-        <div class="d-pr-400 d-pb-200 d-pe-auto">
+        <div class="d-pie-400 d-pbe-200 d-pe-auto">
           <slot name="overlay" />
         </div>
       </dt-stack>
@@ -44,13 +40,10 @@
 </template>
 
 <script setup>
-import DtcTabPanel from '@/src/components/tools/tab_panel.vue';
-import DtcEventConsole from '@/src/components/event_console/event_console.vue';
 import DtcCodeEditor from '@/src/components/code_editor/code_editor.vue';
 import DtcOverlay from '@/src/components/tools/overlay.vue';
 
 import { OPTIONS_UPDATE_EVENT } from '@/src/lib/constants';
-import { ref } from 'vue';
 
 defineProps({
   /**
@@ -74,24 +67,27 @@ defineProps({
     type: Object,
     required: true,
   },
+  /**
+   * Set of member names that are currently disabled.
+   */
+  disabledMembers: {
+    type: Set,
+    default: () => new Set(),
+  },
+  devMode: {
+    type: Boolean,
+    default: false,
+  },
+  hasChanges: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits([
   OPTIONS_UPDATE_EVENT,
 ]);
 
-const eventConsole = ref();
-defineExpose({
-  trigger: (event, value) => eventConsole.value.trigger(event, value),
-});
-
-function generateLabel (slot, capitalCase) {
-  const label = capitalCase(slot);
-  switch (slot) {
-    case 'events': return `${label} (${eventConsole.value?.entryCount})`;
-    default: return label;
-  }
-}
 </script>
 
 <script>
@@ -112,17 +108,19 @@ export default {
 @import "@/src/assets/themes/scheme/mono.less";
 }
 
-.dtc-code-panel-scheme--highlight {
-@import "@/src/assets/themes/scheme/highlight.less";
-}
-
+.dtc-code-panel-scheme--highlight,
 .dtc-code-panel-scheme--highlight--light {
-@import "@/src/assets/themes/scheme/highlight_light.less";
+  --dtc-scheme-color-identifier: var(--dt-color-blue-800);
+  --dtc-scheme-color-class: var(--dt-color-purple-900);
+  --dtc-scheme-color-string: var(--dt-color-green-900);
+  --dtc-scheme-color-value: var(--dt-color-red-900);
+  --dtc-scheme-color-function: var(--dt-color-gold-900);
 }
 
 .dtc-code-panel {
   display: grid;
   grid-template-columns: 1fr;
+  color: var(--dt-color-foreground-secondary);
 }
 
 .dtc-code-panel > * {

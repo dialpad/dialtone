@@ -9,11 +9,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["dropdown", "picker", "d-select-menu", "DtSelectMenu", "dt-select-menu", "native select", "listbox"]
 ---
 
-<code-well-header class="d-d-block">
-  <example-select-menu label="Label" />
-</code-well-header>
-
-<!-- <component-combinator component-name="DtSelectMenu" /> -->
+<component-combinator component-name="DtSelectMenu" />
 
 ## Usage
 
@@ -28,7 +24,7 @@ keywords: ["dropdown", "picker", "d-select-menu", "DtSelectMenu", "dt-select-men
 - For site navigation.
 - If the list of options is very short. Use [Radio](radio.md) instead.
 - If the list of options is very long. Let users type the same information into an [Input](input.md) that suggests possible options instead (aka Combobox).
-- Avoid using the `multiple` attribute. Users often don’t understand how to select multiple items from the select element (e.g. by holding down a modifier key).
+- Avoid using the `multiple` attribute. Users often don't understand how to select multiple items from the select element (e.g. by holding down a modifier key).
 - For selecting an action that takes immediate effect. A `select` is for selecting a choice that is only confirmed by a separate submit action (much like a [Checkbox](checkbox.md)). For immediate actions consider the [Dropdown](dropdown.md) component.
 </template>
 
@@ -36,8 +32,8 @@ keywords: ["dropdown", "picker", "d-select-menu", "DtSelectMenu", "dt-select-men
 
 ### Best Practices
 
-- Selects should be considered the “UI of last resort,” as users often find them confusing and difficult to use. Consider testing thoroughly with members of your target audience.
-- Avoid making options in one dropdown menu change based on the input to another. Users often don’t understand how selecting an item in one impacts another.
+- Selects should be considered the "UI of last resort," as users often find them confusing and difficult to use. Consider testing thoroughly with members of your target audience.
+- Avoid making options in one dropdown menu change based on the input to another. Users often don't understand how selecting an item in one impacts another.
 - When most users will (or should) pick a particular option, make it the default selection.
 - Avoid auto-submission. Be wary of UI implications of automatically submitting upon selection or applying its value. Users may often change their choices multiple times, particularly if interacting with a form solely with keyboard. Auto-submission is also less accessible. For auto-submission consider the [Dropdown](dropdown.md) component.
 
@@ -47,42 +43,7 @@ keywords: ["dropdown", "picker", "d-select-menu", "DtSelectMenu", "dt-select-men
 
 A select is normally paired with a label, but there are times when it can be used without a label. Don't rely on the placeholder text as a label.
 
-<code-well-header bgclass="d-bgc-primary" class="d-d-block">
-  <div class="d-stack16 d-w100p">
-    <example-select-menu label="Default" />
-    <example-select-menu label="Disabled" disabled />
-  </div>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div>
-  <label>
-    <div class="d-select">
-      <select class="d-select__input">
-        <option value=""> Please select one </option>
-        <option value="1"> Option 1 </option>
-        <option value="2"> Option 2 </option>
-        <option value="3"> Option 3 </option>
-      </select>
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-label">Disabled</div>
-    <div class="d-select d-select--disabled">
-      <select disabled="disabled" class="d-select__input">
-        <option class="" value=""> Please select one </option>
-        <option class="" value="1"> Option 1 </option>
-        <option class="" value="2"> Option 2 </option>
-        <option class="" value="3"> Option 3 </option>
-      </select>
-    </div>
-  </label>
-</div>
-'
-vueCode='
+<code-example vueCode='
 <dt-select-menu
   :options="[
         { value: ``, label: `Please select one` },
@@ -108,33 +69,16 @@ vueCode='
   @input="onInput"
   @change="onChange"
 />
-'
-showHtmlWarning />
+'>
+  <div class="d-d-grid d-g-200 d-g-cols2">
+    <example-select-menu label="Default" />
+    <example-select-menu label="Disabled" disabled />
+  </div>
+</code-example>
 
 ### With Description Text
 
-<code-well-header bgclass="d-bgc-primary" class="d-d-block">
-  <example-select-menu label="Label" description="Optional description text" />
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div>
-  <label>
-    <div aria-details="select-dt0-description" class="d-label">Label</div>
-    <div id="select-dt0-description" class="d-description">Optional description text</div>
-    <div class="d-select">
-      <select class="d-select__input">
-        <option class="" value=""> Please select one </option>
-        <option class="" value="1"> Option 1 </option>
-        <option class="" value="2"> Option 2 </option>
-        <option class="" value="3"> Option 3 </option>
-      </select>
-    </div>
-  </label>
-</div>
-'
-vueCode='
+<code-example vueCode='
 <dt-select-menu
   :options="[
         { value: ``, label: `Please select one` },
@@ -148,82 +92,15 @@ vueCode='
   @input="onInput"
   @change="onChange"
 />
-'
-showHtmlWarning />
+'>
+  <example-select-menu label="Label" description="Optional description text" />
+</code-example>
 
 ### With Validation States
 
 Provides feedback to the user based on their interaction, or lack thereof, with a select.
 
-<code-well-header bgclass="d-bgc-primary" class="d-d-block">
-  <div class="d-stack16 d-w100p">
-    <example-select-menu
-      label="Label"
-      :messages='[{"message":"Error validation message","type":"error"}]'
-    />
-    <example-select-menu
-      label="Label"
-      :messages='[{"message":"Success validation message","type":"success"}]'
-    />
-    <example-select-menu
-      label="Label"
-      :messages='[{"message":"Warning validation message","type":"warning"}]'
-    />
-  </div>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div>
-  <label>
-    <div class="d-label">Label</div>
-    <div class="d-select">
-      <select class="d-select__input d-select__input--error">
-        <option class="" value=""> Please select one </option>
-        <option class="" value="1"> Option 1 </option>
-        <option class="" value="2"> Option 2 </option>
-        <option class="" value="3"> Option 3 </option>
-      </select>
-    </div>
-  </label>
-  <div class="base-input__messages d-validation-message__container">
-    <div role="status" aria-live="polite" class="base-input__message d-validation-message base-input__message--error d-validation-message--error"><p>Error validation message</p></div>
-  </div>
-</div>
-<div>
-  <label>
-    <div class="d-label">Label</div>
-    <div class="d-select">
-      <select class="d-select__input d-select__input--success">
-        <option class="" value=""> Please select one </option>
-        <option class="" value="1"> Option 1 </option>
-        <option class="" value="2"> Option 2 </option>
-        <option class="" value="3"> Option 3 </option>
-      </select>
-    </div>
-  </label>
-  <div class="base-input__messages d-validation-message__container">
-    <div role="status" aria-live="polite" class="base-input__message d-validation-message base-input__message--success d-validation-message--success"><p>Success validation message</p></div>
-  </div>
-</div>
-<div>
-  <label>
-    <div class="d-label">Label</div>
-    <div class="d-select">
-      <select class="d-select__input d-select__input--warning">
-        <option class="" value=""> Please select one </option>
-        <option class="" value="1"> Option 1 </option>
-        <option class="" value="2"> Option 2 </option>
-        <option class="" value="3"> Option 3 </option>
-      </select>
-    </div>
-  </label>
-  <div class="base-input__messages d-validation-message__container">
-    <div role="status" aria-live="polite" class="base-input__message d-validation-message base-input__message--warning d-validation-message--warning"><p>Warning validation message</p></div>
-  </div>
-</div>
-'
-vueCode='
+<code-example vueCode='
 <dt-select-menu
   :options="[
     { value: ``, label: `Please select one` },
@@ -263,34 +140,26 @@ vueCode='
   @input="onInput"
   @change="onChange"
 />
-'
-showHtmlWarning />
-
-### With Validation States Hidden
-
-<code-well-header bgclass="d-bgc-primary" class="d-d-block">
-  <div class="d-stack16 d-w100p" ref="messagesHidden">
+'>
+  <div class="d-d-grid d-g-200 d-g-cols3">
     <example-select-menu
       label="Label"
       :messages='[{"message":"Error validation message","type":"error"}]'
-      :show-messages="false"
     />
     <example-select-menu
       label="Label"
       :messages='[{"message":"Success validation message","type":"success"}]'
-      :show-messages="false"
     />
     <example-select-menu
       label="Label"
       :messages='[{"message":"Warning validation message","type":"warning"}]'
-      :show-messages="false"
     />
   </div>
-</code-well-header>
+</code-example>
 
-<code-example-tabs
-:htmlCode="() => $refs.messagesHidden"
-vueCode='
+### With Validation States Hidden
+
+<code-example vueCode='
 <dt-select-menu
   :options="[
     { value: ``, label: `Please select one` },
@@ -333,22 +202,29 @@ vueCode='
   @change="onChange"
   :show-messages="false"
 />
-'
-/>
+'>
+  <div class="d-d-grid d-g-200 d-g-cols3">
+    <example-select-menu
+      label="Label"
+      :messages='[{"message":"Error validation message","type":"error"}]'
+      :show-messages="false"
+    />
+    <example-select-menu
+      label="Label"
+      :messages='[{"message":"Success validation message","type":"success"}]'
+      :show-messages="false"
+    />
+    <example-select-menu
+      label="Label"
+      :messages='[{"message":"Warning validation message","type":"warning"}]'
+      :show-messages="false"
+    />
+  </div>
+</code-example>
 
 ### With Slotted Label
 
-<code-well-header class="d-d-block">
-  <example-select-menu ref="slottedLabel">
-    <template #label>
-      <div>Slotted label</div>
-    </template>
-  </example-select-menu>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs.slottedLabel"
-vueCode='
+<code-example vueCode='
 <dt-select-menu
   :options="[
     { value: ``, label: `Please select one` },
@@ -364,22 +240,17 @@ vueCode='
     <div>Slotted label</div>
   </template>
 </dt-select-menu>
-'
-/>
+'>
+  <example-select-menu>
+    <template #label>
+      <div>Slotted label</div>
+    </template>
+  </example-select-menu>
+</code-example>
 
 ### With Slotted Description
 
-<code-well-header class="d-d-block">
-  <example-select-menu ref="slottedDescription">
-    <template #description>
-      <div>Slotted description</div>
-    </template>
-  </example-select-menu>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs.slottedDescription"
-vueCode='
+<code-example vueCode='
 <dt-select-menu
   :options="[
     { value: ``, label: `Please select one` },
@@ -395,26 +266,17 @@ vueCode='
     <div>Slotted description</div>
   </template>
 </dt-select-menu>
-'
-/>
+'>
+  <example-select-menu>
+    <template #description>
+      <div>Slotted description</div>
+    </template>
+  </example-select-menu>
+</code-example>
 
 ### With Slotted Options
 
-<code-well-header class="d-d-block">
-  <dt-select-menu
-    label="With Slotted Options"
-    ref="slottedOptions"
-  >
-    <option value="">Slotted options</option>
-    <option value="1">Option 1</option>
-    <option value="2">Option 2</option>
-    <option value="3">Option 3</option>
-  </dt-select-menu>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs.slottedOptions"
-vueCode='
+<code-example vueCode='
 <dt-select-menu
   :model-value="modelValue"
   @input="onInput"
@@ -430,91 +292,22 @@ vueCode='
     </option>
   </template>
 </dt-select-menu>
-'
-/>
+'>
+  <dt-select-menu
+    label="With Slotted Options"
+  >
+    <option value="">Slotted options</option>
+    <option value="1">Option 1</option>
+    <option value="2">Option 2</option>
+    <option value="3">Option 3</option>
+  </dt-select-menu>
+</code-example>
 
 ## Sizes
 
 We offer different sizes for instances in which the interface requires a smaller or larger select. In general, though, use the base (medium) size select as much as possible, especially in forms.
 
-<code-well-header bgclass="d-bgc-primary" class="d-d-block">
-  <div class="d-stack16 d-w100p">
-    <example-select-menu label="Label" size="xs" />
-    <example-select-menu label="Label" size="sm" />
-    <example-select-menu label="Label" size="md" />
-    <example-select-menu label="Label" size="lg" />
-    <example-select-menu label="Label" size="xl" />
-  </div>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div>
-  <label>
-    <div class="d-label d-label--xs">Label</div>
-    <div class="d-select d-select--xs">
-      <select class="d-select__input">
-        <option class="" value=""> Please select one </option>
-        <option class="" value="1"> Option 1 </option>
-        <option class="" value="2"> Option 2 </option>
-        <option class="" value="3"> Option 3 </option>
-      </select>
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-label d-label--sm">Label</div>
-    <div class="d-select d-select--sm">
-      <select class="d-select__input">
-        <option class="" value=""> Please select one </option>
-        <option class="" value="1"> Option 1 </option>
-        <option class="" value="2"> Option 2 </option>
-        <option class="" value="3"> Option 3 </option>
-      </select>
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-label d-label--md">Label</div>
-    <div class="d-select d-select--md">
-      <select class="d-select__input">
-        <option class="" value=""> Please select one </option>
-        <option class="" value="1"> Option 1 </option>
-        <option class="" value="2"> Option 2 </option>
-        <option class="" value="3"> Option 3 </option>
-      </select>
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-label d-label--lg">Label</div>
-    <div class="d-select d-select--lg">
-      <select class="d-select__input">
-        <option class="" value=""> Please select one </option>
-        <option class="" value="1"> Option 1 </option>
-        <option class="" value="2"> Option 2 </option>
-        <option class="" value="3"> Option 3 </option>
-      </select>
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-label d-label--xl">Label</div>
-    <div class="d-select d-select--xl">
-      <select class="" value=""> Please select one </option>
-        <option class="" value="1"> Option 1 </option>
-        <option class="" value="2"> Option 2 </option>
-        <option class="" value="3"> Option 3 </option>
-      </select>
-    </div>
-  </label>
-</div>
-'
-vueCode='
+<code-example vueCode='
 <dt-select-menu
   :options="[
     { value: ``, label: `Please select one` },
@@ -528,55 +321,54 @@ vueCode='
   @input="onInput"
   @change="onChange"
 />
-'
-showHtmlWarning />
+'>
+  <dt-stack gap="500">
+    <example-select-menu label="Label" size="xs" />
+    <example-select-menu label="Label" size="sm" />
+    <example-select-menu label="Label" size="md" />
+    <example-select-menu label="Label" size="lg" />
+    <example-select-menu label="Label" size="xl" />
+  </dt-stack>
+</code-example>
 
 ## Label size
 
 The label text size is automatically derived from the component's `size` prop. Use the `label-size` prop to override this when you need a different label size independent of the select size. For example, the default label size for a `size="md"` select menu is `md`, but you can override it from `xs` to `lg`.
 
-<code-well-header bgclass="d-bgc-primary" class="d-d-block">
-  <div class="d-stack16 d-w100p">
-    <example-select-menu label="Extra small label" label-size="xs" />
-    <example-select-menu label="Small label" label-size="sm" />
-    <example-select-menu label="Medium label (default)" label-size="md" />
-    <example-select-menu label="Large label" label-size="lg" />
-  </div>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
+<code-example vueCode='
 <dt-select-menu
   :options="options"
   label="Label"
   size="xs|sm|md|lg|xl"
   label-size="xs|sm|md|lg"
 />
-'
-/>
+'>
+  <dt-stack gap="500">
+    <example-select-menu label="Extra small label" label-size="xs" />
+    <example-select-menu label="Small label" label-size="sm" />
+    <example-select-menu label="Medium label (default)" label-size="md" />
+    <example-select-menu label="Large label" label-size="lg" />
+  </dt-stack>
+</code-example>
 
 ## Label strength
 
 Override the label font weight independently of the label size. Valid values are `bold`, `semibold`, `medium`, and `normal`.
 
-<code-well-header bgclass="d-bgc-primary" class="d-d-block">
-  <div class="d-stack16 d-w100p">
-    <example-select-menu label="Bold label" label-strength="bold" />
-    <example-select-menu label="Semibold label" label-strength="semibold" />
-    <example-select-menu label="Medium label" label-strength="medium" />
-    <example-select-menu label="Normal label" label-strength="normal" />
-  </div>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
+<code-example vueCode='
 <dt-select-menu
   :options="options"
   label="Label"
   label-strength="bold|semibold|medium|normal"
 />
-'
-/>
+'>
+  <dt-stack gap="500">
+    <example-select-menu label="Bold label" label-strength="bold" />
+    <example-select-menu label="Semibold label" label-strength="semibold" />
+    <example-select-menu label="Medium label" label-strength="medium" />
+    <example-select-menu label="Normal label" label-strength="normal" />
+  </dt-stack>
+</code-example>
 
 ## Accessibility
 

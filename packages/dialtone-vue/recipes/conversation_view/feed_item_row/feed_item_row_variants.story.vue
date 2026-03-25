@@ -52,7 +52,7 @@
                   align="center"
                   class="d-fs-100 d-lh200"
                 >
-                  <a class="d-link d-pr-50">3 replies</a>
+                  <a class="d-link d-pie-50">3 replies</a>
                   <span class="feed-item-row__reply">Last reply an hour ago</span>
                 </dt-stack>
               </dt-stack>
@@ -265,14 +265,14 @@
                     for calling outside of the requested time and expressed that they had
                     asked the team to look into the issue and would email them after the call.
                   </p>
-                  <p class="d-fs-100 d-mt-150">
+                  <p class="d-fs-100 d-mbs-150">
                     <strong>Actions items</strong>
                   </p>
                   <dt-stack
                     as="p"
                     direction="row"
                   >
-                    <strong class="d-mr-50">1. </strong>
+                    <strong class="d-mie-50">1. </strong>
                     The agent needs to inform the team to check on Vijay's request or ticket regarding Dialpad CTI.
                   </dt-stack>
                 </div>
@@ -308,7 +308,7 @@ const { mockReactions } = useMockReactions();
 <style lang="less" scoped>
   .feed-item-row {
     &__default-story {
-      p {
+      :where(p) {
         color: var(--dt-color-foreground-primary);
         font-size: 15px;
         font-style: normal;

@@ -1,27 +1,24 @@
 <template>
-  <div>
-    <slot />
-    <div data-qa="dtc-control-dynamic-selection">
-      <dtc-control-selection
-        :value="selectedControl"
-        :valid-values="controlSelections"
-        :disabled="disabled"
-        @update:value="updateControl"
-      />
-    </div>
-    <div
-      class="d-ps-relative d-b-1"
-      :class="inputClass"
-      data-qa="dtc-control-dynamic-value"
-    >
-      <component
-        :is="controlComponent"
-        v-if="controlComponent"
-        v-bind="bindings"
-        :value="value"
-        @update:value="updateValue"
-      />
-    </div>
+  <slot />
+  <div data-qa="dtc-control-dynamic-selection">
+    <dtc-control-selection
+      :value="selectedControl"
+      :valid-values="controlSelections"
+      :disabled="disabled"
+      @update:value="updateControl"
+    />
+  </div>
+  <div
+    :class="inputClass"
+    data-qa="dtc-control-dynamic-value"
+  >
+    <component
+      :is="controlComponent"
+      v-if="controlComponent"
+      v-bind="bindings"
+      :value="value"
+      @update:value="updateValue"
+    />
   </div>
 </template>
 
@@ -30,7 +27,7 @@ import DtcControlSelection from './control_selection.vue';
 
 import { controlMap, getControlByValue, UNSET } from '@/src/lib/control';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 
 const props = defineProps({
   value: {
@@ -93,6 +90,10 @@ const controlSelectionMap = {
 
 const controlSelections = computed(() => Object.keys(controlSelectionMap));
 const selectedControl = ref(getControl());
+
+watch(() => props.value, () => {
+  selectedControl.value = getControl();
+});
 
 const controlComponent = computed(() => {
   return controlSelectionMap[selectedControl.value].component;

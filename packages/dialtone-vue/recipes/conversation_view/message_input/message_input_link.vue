@@ -106,7 +106,7 @@ import { DtPopover } from '@/components/popover';
 import { DtInput } from '@/components/input';
 import { DtButton } from '@/components/button';
 import { DtStack } from '@/components/stack';
-import { DtIconLink2 } from '@dialpad/dialtone-icons/vue3';
+import { DtIconLink2 } from '@dialpad/dialtone-icons/vue';
 import DtRecipeMessageInputButton from './message_input_button.vue';
 import { DialtoneLocalization } from '@/localization';
 

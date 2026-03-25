@@ -1,7 +1,7 @@
 <template>
   <div
     data-qa="dt-tab-group"
-    class="d-tab-neux"
+    :class="['d-tab-neux', { 'd-tab-neux--vertical': orientation === 'vertical' }]"
   >
     <!-- eslint-disable-next-line vuejs-accessibility/interactive-supports-focus -->
     <div
@@ -9,6 +9,8 @@
       :class="[
         'd-tablist',
         TAB_LIST_SIZE_MODIFIERS[size],
+        TAB_ORIENTATION_MODIFIERS[orientation],
+        orientation !== 'vertical' && TAB_SPREAD_MODIFIERS[spread],
         {
           [TAB_LIST_KIND_MODIFIERS.inverted]: inverted,
           [TAB_LIST_IMPORTANCE_MODIFIERS.borderless]: borderless,
@@ -18,9 +20,11 @@
       v-bind="tabListChildProps"
       role="tablist"
       :aria-label="label"
-      aria-orientation="horizontal"
-      @keyup.left="tabLeft"
-      @keyup.right="tabRight"
+      :aria-orientation="orientation"
+      @keydown.left="tabLeft"
+      @keydown.right="tabRight"
+      @keydown.up="tabUp"
+      @keydown.down="tabDown"
       @keyup.enter="selectTab"
       @keyup.space="selectTab"
       @click="selectTab"
@@ -41,8 +45,12 @@ import {
   TAB_LIST_KIND_MODIFIERS,
   TAB_LIST_IMPORTANCE_MODIFIERS,
   TAB_LIST_SIZE_MODIFIERS,
+  TAB_ORIENTATIONS,
+  TAB_ORIENTATION_MODIFIERS,
   TAB_ACTIVATION_MODES,
   TAB_GROUP_KINDS,
+  TAB_SPREADS,
+  TAB_SPREAD_MODIFIERS,
 } from './tabs_constants';
 
 /**
@@ -88,7 +96,7 @@ export default {
 
     /**
      * If true, applies inverted styles to the tab group
-     * @deprecated
+     * @deprecated Use v-dt-mode directive instead.
      * @values true, false
      */
     inverted: {
@@ -106,13 +114,37 @@ export default {
     },
 
     /**
+     * Controls how tabs distribute available space within the tab list.
+     * @values none, grow, equal
+     */
+    spread: {
+      type: String,
+      default: 'none',
+      validator (value) {
+        return TAB_SPREADS.includes(value);
+      },
+    },
+
+    /**
+     * The orientation of the tab list
+     * @values horizontal, vertical
+     */
+    orientation: {
+      type: String,
+      default: 'horizontal',
+      validator (value) {
+        return TAB_ORIENTATIONS.includes(value);
+      },
+    },
+
+    /**
      * If provided, applies size styles to the tab group
      * @values default, xs, sm, lg, xl
      */
     size: {
       type: String,
       default: 'default',
-      validate (size) {
+      validator (size) {
         return TAB_LIST_SIZES.includes(size);
       },
     },
@@ -194,6 +226,8 @@ export default {
         size: 'default',
         kind: 'default',
         outlined: false,
+        orientation: 'horizontal',
+        spread: 'none',
       },
 
       focusId: null,
@@ -201,6 +235,8 @@ export default {
       TAB_LIST_SIZE_MODIFIERS,
       TAB_LIST_KIND_MODIFIERS,
       TAB_LIST_IMPORTANCE_MODIFIERS,
+      TAB_ORIENTATION_MODIFIERS,
+      TAB_SPREAD_MODIFIERS,
     };
   },
 
@@ -237,6 +273,20 @@ export default {
       immediate: true,
       handler () {
         this.provideObj.outlined = this.outlined;
+      },
+    },
+
+    orientation: {
+      immediate: true,
+      handler () {
+        this.provideObj.orientation = this.orientation;
+      },
+    },
+
+    spread: {
+      immediate: true,
+      handler () {
+        this.provideObj.spread = this.spread;
       },
     },
   },
@@ -283,6 +333,28 @@ export default {
     },
 
     tabLeft () {
+      if (this.orientation !== 'horizontal') return;
+      this.navigatePrevious();
+    },
+
+    tabRight () {
+      if (this.orientation !== 'horizontal') return;
+      this.navigateNext();
+    },
+
+    tabUp (event) {
+      if (this.orientation !== 'vertical') return;
+      event.preventDefault();
+      this.navigatePrevious();
+    },
+
+    tabDown (event) {
+      if (this.orientation !== 'vertical') return;
+      event.preventDefault();
+      this.navigateNext();
+    },
+
+    navigatePrevious () {
       const index = this.getFocusedTabIndex();
       if (index === -1) return;
 
@@ -290,7 +362,7 @@ export default {
       this.selectFocusOnTab(nextIndex);
     },
 
-    tabRight () {
+    navigateNext () {
       const index = this.getFocusedTabIndex();
       if (index === -1) return;
 

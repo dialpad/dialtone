@@ -55,6 +55,7 @@ const KNOWN_HTML_TAGS = new Set([
 const HANDLED_COMPONENTS = new Set([
   'code-well-header',
   'code-example-tabs',
+  'code-example',
   'component-vue-api',
   'component-class-table',
   'component-accessible-table',

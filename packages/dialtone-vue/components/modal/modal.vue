@@ -15,6 +15,7 @@
       ]"
       data-qa="dt-modal"
       :aria-hidden="open"
+      v-bind="modeAttrs"
       v-on="modalListeners"
     >
       <div
@@ -129,8 +130,9 @@
 /* eslint-disable max-lines */
 import { DtButton } from '@/components/button';
 import { DtText } from '@/components/text';
-import { DtIconClose } from '@dialpad/dialtone-icons/vue3';
+import { DtIconClose } from '@dialpad/dialtone-icons/vue';
 import Modal from '@/common/mixins/modal';
+import ModeMixin from '@/common/mixins/mode';
 import {
   MODAL_BANNER_KINDS,
   MODAL_KIND_MODIFIERS,
@@ -160,7 +162,7 @@ export default {
     SrOnlyCloseButton,
   },
 
-  mixins: [Modal],
+  mixins: [Modal, ModeMixin],
 
   props: {
     /**
@@ -272,7 +274,7 @@ export default {
     bannerKind: {
       type: String,
       default: 'warning',
-      validate (kind) {
+      validator (kind) {
         return NOTICE_KINDS.includes(kind);
       },
     },

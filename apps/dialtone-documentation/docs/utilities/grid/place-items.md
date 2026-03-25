@@ -101,7 +101,7 @@ Use `d-pli-center{-n}` to align grid items along the center of their block and/o
 <utility-class-table>
   <template #content>
     <tbody>
-      <div v-for="c in alignments" style="display: contents">
+      <template v-for="c in alignments">
         <tr v-for="i in alignments">
           <th scope="row" class="d-code--sm d-docsite-code">
             <span v-if="i !== c">.d-pli-{{ c }}-{{ i }}</span>
@@ -112,7 +112,7 @@ Use `d-pli-center{-n}` to align grid items along the center of their block and/o
             <span v-else>place-items: {{ c }} !important;</span>
           </td>
         </tr>
-      </div>
+      </template>
     </tbody>
   </template>
 </utility-class-table>

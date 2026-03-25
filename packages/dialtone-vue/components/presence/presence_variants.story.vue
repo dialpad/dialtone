@@ -1,65 +1,48 @@
 <template>
   <div>
-    <dt-stack
-      direction="row"
-      align="center"
-      class="d-p-100"
-    >
-      <h1 class="d-fs-200 d-mx-50">
+    <div>
+      <h2>
         Active
-      </h1>
+      </h2>
       <dt-presence
         presence="active"
       />
-    </dt-stack>
+    </div>
 
-    <dt-stack
-      direction="row"
-      align="center"
-      class="d-p-100"
-    >
-      <h1 class="d-fs-200 d-mx-50">
+    <div>
+      <h2>
         Away
-      </h1>
+      </h2>
       <dt-presence
         presence="away"
       />
-    </dt-stack>
+    </div>
 
-    <dt-stack
-      direction="row"
-      align="center"
-      class="d-p-100"
-    >
-      <h1 class="d-fs-200 d-mx-50">
+    <div>
+      <h2>
         Busy
-      </h1>
+      </h2>
       <dt-presence
         presence="busy"
       />
-    </dt-stack>
+    </div>
 
-    <dt-stack
-      direction="row"
-      align="center"
-      class="d-p-100"
-    >
-      <h1 class="d-fs-200 d-mx-50">
+    <div>
+      <h2>
         Offline
-      </h1>
+      </h2>
       <dt-presence
         presence="offline"
       />
-    </dt-stack>
+    </div>
   </div>
 </template>
 
 <script>
 import DtPresence from './presence.vue';
-import { DtStack } from '@/components/stack';
 
 export default {
   name: 'DtPresenceVariantsStory',
-  components: { DtPresence, DtStack },
+  components: { DtPresence },
 };
 </script>

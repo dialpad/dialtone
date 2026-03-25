@@ -9,6 +9,8 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox--de
 keywords: ["autocomplete","typeahead","search select","d-combobox","DtCombobox","dt-combobox"]
 ---
 
+<component-combinator component-name="DtCombobox" />
+
 ## Base Style
 
 A combobox provides accessibility controls and common functionality. It does not render any functioning UI on it's own, but it depends on the elements passed to it via slots.
@@ -19,13 +21,12 @@ It has 2 core required slots:
 2. `list`: the list of items to display responding to `input`'s value. Almost always this will be a list of `dt-list-item`.
 This will usually be the [List Item component](/components/list-item.md).
 
-<code-well-header class="d-d-block">
+<code-example class="d-d-block">
   <dt-combobox
     :show-list="!!value"
     label="Label Text"
     @escape="onComboboxEscape"
     @select="onComboboxSelect"
-    ref="example-combobox"
   >
     <template
       #input="{ inputProps }"
@@ -41,7 +42,7 @@ This will usually be the [List Item component](/components/list-item.md).
     >
       <ol
         v-bind="listProps"
-        class="d-p-0 d-mt-100 d-hmx332 d-of-y-auto"
+        class="d-p-0 d-mbs-100 d-hmx332 d-of-y-auto"
       >
         <dt-list-item
           v-for="(item, i) in items"
@@ -61,115 +62,17 @@ This will usually be the [List Item component](/components/list-item.md).
       </ol>
     </template>
   </dt-combobox>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div>
-  <div class="base-input">
-    <label class="base-input__label">
-      <div class="base-input__label-text d-label">Label Text</div>
-      <div class="d-input__wrapper">
-        <input
-          name=""
-          type="text"
-          autocomplete="off"
-          class="base-input__input d-input"
-          placeholder="Type to show the items"
-          role="combobox"
-          aria-label="Label Text"
-          aria-expanded="true"
-          aria-owns="dt618"
-          aria-haspopup="listbox"
-          aria-controls="dt618"
-        />
-      </div>
-    </label>
-  </div>
-  <div>
-    <ol
-      role="listbox"
-      class="d-ps-relative d-p-0 d-mt-100 d-hmx332 d-of-y-auto"
-      aria-label="Label Text"
-    >
-      <li
-        class="d-list-item"
-        tabindex="-1"
-        role="option"
-        aria-selected="false"
-      >
-        <div class="d-item-layout">
-          <section class="d-item-layout--left">
-            <div class="d-avatar d-avatar--md" data-avatar-family="5" data-avatar-variant="3">
-              <div class="d-avatar__canvas">
-                <span class="d-avatar__initials">1</span>
-              </div>
-            </div>
-          </section>
-          <section class="d-item-layout--content">
-            <div class="d-item-layout--title">combobox item 1</div>
-          </section>
-        </div>
-      </li>
-      ...
-    </ol>
-  </div>
-</div>
-'
-vueCode='
-<dt-combobox
-  :show-list="!!value"
-  label="Label Text"
-  @escape="onComboboxEscape"
-  @select="onComboboxSelect"
->
-  <template
-    #input="{ inputProps }"
-  >
-    <dt-input
-      placeholder="Type to show the items"
-      v-model="value"
-      v-bind="inputProps"
-    />
-  </template>
-  <template
-    #list="{ listProps }"
-  >
-    <ol
-      v-bind="listProps"
-      class="d-p-0 d-mt-100 d-hmx332 d-of-y-auto"
-    >
-      <dt-list-item
-        v-for="(item, i) in items"
-        :key="item.id"
-        role="option"
-        navigation-type="arrow-keys"
-        @click="onListItemSelect(i)"
-      >
-        <template #start>
-          <dt-avatar
-            :full-name="(i + 1).toString()"
-            :seed="i.toString()"
-          />
-        </template>
-        {{ item.name }}
-      </dt-list-item>
-    </ol>
-  </template>
-</dt-combobox>
-'
-/>
+</code-example>
 
 ## With Empty List Item
 
-<code-well-header class="d-d-block">
+<code-example class="d-d-block">
   <dt-combobox
     :show-list="!!value"
     label="Label Text"
     @escape="onComboboxEscape"
     @select="onComboboxSelect"
     :empty-list="true"
-    ref="example-with-empty-list"
   >
     <template
       #input="{ inputProps }"
@@ -184,33 +87,7 @@ vueCode='
       <div class="d-py-100 d-fc-tertiary">No matches found.</div>
     </template>
   </dt-combobox>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs['example-with-empty-list']"
-vueCode='
-<dt-combobox
-  :show-list="!!value"
-  label="Label Text"
-  @escape="onComboboxEscape"
-  @select="onComboboxSelect"
-  :empty-list="true"
->
-  <template
-    #input="{ inputProps }"
-  >
-    <dt-input
-      placeholder="Type to show the items"
-      v-model="value"
-      v-bind="inputProps"
-    />
-  </template>
-  <template #emptyListItem>
-    <div class="d-py-100 d-fc-tertiary">No matches found.</div>
-  </template>
-</dt-combobox>
-'
-/>
+</code-example>
 
 ## Accessibility
 

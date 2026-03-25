@@ -27,13 +27,13 @@
     <template #content>
       <div>
         <dtc-button-bar
-          class="d-mb-50"
+          class="d-mbe-50"
           :value="background"
           @click="e => updateSettings('background', e)"
         >
           <template #theme>
             <div class="d-w-25 d-h-25 d-ba">
-              <span class="d-fs12 d-ps-relative d-t-75">T</span>
+              <span class="d-fs12 d-ps-relative d-ibs-75">T</span>
             </div>
           </template>
           <template #black>
@@ -44,7 +44,7 @@
           </template>
         </dtc-button-bar>
         <dtc-button-bar
-          class="d-mb-50"
+          class="d-mbe-50"
           :value="positioning"
           @click="e => updateSettings('positioning', e)"
         >
@@ -61,7 +61,7 @@
 </template>
 
 <script setup>
-import { DtIconArrowLeft, DtIconAlignCenter, DtIconMenu } from '@dialpad/dialtone-icons/vue3';
+import { DtIconArrowLeft, DtIconAlignCenter, DtIconMenu } from '@dialpad/dialtone-icons/vue';
 import DtcButtonBar from '../tools/button_bar.vue';
 import { DtButton, DtPopover } from '@dialpad/dialtone-vue';
 import { SETTINGS_UPDATE_EVENT } from '@/src/lib/constants';

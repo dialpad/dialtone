@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="editorRoot"
     class="d-recipe-editor"
     v-bind="addClassStyleAttrs($attrs)"
     data-qa="dt-recipe-editor"
@@ -45,13 +46,13 @@
                   <dt-input
                     v-bind="inputProps"
                     v-model="fontStyleSearch"
-                    root-class="d-p-100 d-pb-50 d-w216"
+                    root-class="d-p-100 d-pbe-50 d-w216"
                     type="search"
                     :placeholder="i18n.$t('DIALTONE_EDITOR_FONT_STYLE_SEARCH_PLACEHOLDER')"
                     size="sm"
                     role="menuitem"
                   >
-                    <template #leftIcon="{ iconSize }">
+                    <template #startIcon="{ iconSize }">
                       <dt-icon-search :size="iconSize" />
                     </template>
                   </dt-input>
@@ -68,7 +69,7 @@
                       role="option"
                       navigation-type="arrow-keys"
                       @click="
-                        close();
+                        close(focusEditor);
                         onFontStyleSelect(fontStyle.value)
                       "
                     >
@@ -102,7 +103,7 @@
                 role="menuitem"
                 navigation-type="arrow-keys"
                 @click="
-                  close();
+                  close(focusEditor);
                   onFontSizeSelect(fontSize.value, $event)
                 "
               >
@@ -116,7 +117,11 @@
             v-else-if="button.buttonType === 'custom' && button.selector === 'fontColor'"
             :key="getButtonKey(buttonGroup.key, button.selector)"
             :ref="getButtonRef(buttonGroup.key, button.selector)"
-            v-dt-tooltip="{ message: button.tooltipMessage, placement: 'top' }"
+            v-dt-tooltip="{
+              message: button.tooltipMessage,
+              placement: 'top',
+              externalAnchorElement: $refs[getButtonRef(buttonGroup.key, button.selector)]?.$el, 
+            }"
             kind="muted"
             importance="clear"
             size="xs"
@@ -173,13 +178,13 @@
                   <dt-input
                     v-bind="inputProps"
                     v-model="variableSearchValue"
-                    root-class="d-p-100 d-pb-50 d-w264"
+                    root-class="d-p-100 d-pbe-50 d-w264"
                     type="search"
                     :placeholder="i18n.$t('DIALTONE_EDITOR_VARIABLE_POPOVER_SEARCH_PLACEHOLDER')"
                     size="md"
                     role="menuitem"
                   >
-                    <template #leftIcon="{ iconSize }">
+                    <template #startIcon="{ iconSize }">
                       <dt-icon-search :size="iconSize" />
                     </template>
                   </dt-input>
@@ -199,7 +204,7 @@
                         navigation-type="arrow-keys"
                         @click="
                           insertVariable(category.name, item);
-                          close();
+                          close(focusEditor);
                         "
                       >
                         {{ item.name }}
@@ -350,6 +355,8 @@
         :allow-line-breaks="true"
         :allow-variable="true"
         :allow-font-size="showFontSizeButton"
+        :allow-background-color="allowBackgroundColor"
+        :allow-line-height="allowLineHeight"
         :variable-items="flattenedVariableItems"
         :hide-link-bubble-menu="true"
         :auto-focus="autoFocus"
@@ -359,6 +366,7 @@
         :link="true"
         :output-format="htmlOutputFormat"
         :placeholder="placeholder"
+        :preserve-whitespace="preserveWhitespace"
         :use-div-tags="useDivTags"
         :allow-tables="allowTables"
         :allow-image-resize="allowImageResize"
@@ -421,7 +429,7 @@ import {
   DtIconChevronDown,
   DtIconFontSize,
   DtIconStopFilled,
-} from '@dialpad/dialtone-icons/vue3';
+} from '@dialpad/dialtone-icons/vue';
 import { DialtoneLocalization } from '@/localization';
 
 export default {
@@ -737,6 +745,34 @@ export default {
         { name: 'Large', value: '24px'},
         { name: 'Huge', value: '36px'},
       ],
+    },
+
+    /**
+     * Whether the input allows background color to be introduced in the text.
+     */
+    allowBackgroundColor: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Whether the input allows line height to be introduced in the text.
+     */
+    allowLineHeight: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Controls how whitespace is handled when parsing HTML content.
+     * - 'full': All whitespace is preserved
+     * - true: Whitespace in inline content is preserved, whitespace-only nodes between blocks are removed
+     * - false: Standard HTML whitespace collapsing
+     * @values full, true, false
+     */
+    preserveWhitespace: {
+      type: [Boolean, String],
+      default: 'full',
     },
 
     /**
@@ -1115,7 +1151,7 @@ export default {
     },
 
     colorPickerInput() {
-      return document.querySelector('.colorPickerInput');
+      return this.$refs.editorRoot?.querySelector('.colorPickerInput');
     },
 
     isDefaultFontColor() {
@@ -1139,6 +1175,10 @@ export default {
   methods: {
     removeClassStyleAttrs,
     addClassStyleAttrs,
+
+    focusEditor () {
+      this.$refs.richTextEditor?.editor?.commands.focus();
+    },
 
     onInputFocus (event) {
       event?.stopPropagation();

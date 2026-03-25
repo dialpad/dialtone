@@ -155,9 +155,6 @@ importers:
       '@dialpad/conventional-changelog-angular':
         specifier: ^1.1.1
         version: 1.1.1
-      '@dialpad/i18n-services':
-        specifier: 1.11.0
-        version: 1.11.0(vue@3.5.29(typescript@5.9.3))
       '@dialpad/semantic-release-changelog-json':
         specifier: ^1.0.0
         version: 1.0.0(semantic-release@21.1.2(typescript@5.9.3))
@@ -571,13 +568,7 @@ importers:
         specifier: ^4.17.21
         version: 4.17.23
 
-  packages/dialtone-icons/vue2:
-    devDependencies:
-      vue:
-        specifier: ^2.7.16
-        version: 2.7.16
-
-  packages/dialtone-icons/vue3:
+  packages/dialtone-icons/vue:
     devDependencies:
       '@vue/compiler-sfc':
         specifier: ^3.4.15
@@ -585,6 +576,12 @@ importers:
       vue:
         specifier: ^3.4.15
         version: 3.5.29(typescript@5.9.3)
+
+  packages/dialtone-icons/vue2:
+    devDependencies:
+      vue:
+        specifier: ^2.7.16
+        version: 2.7.16
 
   packages/dialtone-mcp-server:
     dependencies:
@@ -1268,13 +1265,13 @@ packages:
     engines: {node: '>=10'}
 
   '@dialpad/i18n-services@1.11.0':
-    resolution: {integrity: sha512-NzGie5sIbfW/AyJwtIRZOumhAiXP6329VNBOrVerXgGrXqbTacTAuXPPVSgprFol5kWdbV34QtAlKN5OY11WEw==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n-services/1.11.0/20198484967555617ab62da6ad3c276265ee232d}
+    resolution: {tarball: https://npm.pkg.github.com/download/@dialpad/i18n-services/1.11.0/20198484967555617ab62da6ad3c276265ee232d}
     hasBin: true
     peerDependencies:
       vue: ^2.0.0 || >=3.0.0
 
   '@dialpad/i18n@1.22.3':
-    resolution: {integrity: sha512-vIviaCpnXRyd/CegJw4jlcdB9Zbgmml0gmHr9cNXUtJuC+DEOtwadVtq7qpUedggKMltg7VlMkC38U85C6W/yw==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n/1.22.3/fcdcd6ab6ab141035696d71caf35b3554b64c726}
+    resolution: {tarball: https://npm.pkg.github.com/download/@dialpad/i18n/1.22.3/fcdcd6ab6ab141035696d71caf35b3554b64c726}
     peerDependencies:
       vue: ^3.0.0
 
@@ -5756,6 +5753,7 @@ packages:
   basic-ftp@5.2.0:
     resolution: {integrity: sha512-VoMINM2rqJwJgfdHq6RiUudKt2BV+FY5ZFezP/ypmwayk68+NzzAQy4XXLlqsGD4MCzq3DrmNFD/uUmBJuGoXw==}
     engines: {node: '>=10.0.0'}
+    deprecated: Security vulnerability fixed in 5.2.0, please upgrade
 
   batch@0.6.1:
     resolution: {integrity: sha512-x+VAiMRL6UPkx+kudNvxTl6hB2XNNCG2r+7wixVfIYwu/2HKRXimwQyaumLjMveWvT2Hkd/cAJw+QBMfJ/EKVw==}

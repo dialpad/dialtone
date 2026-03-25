@@ -1,50 +1,88 @@
 <template>
   <div>
     <component
-      :is="controlComponent"
-      v-bind="controlBindings"
+      :is="rawMode ? 'dt-text' : controlComponent"
+      v-bind="rawMode ? { as: 'div', kind: 'label', size: 'xs', tone: 'secondary' } : controlBindings"
       @update:value="updateValue"
     >
-      <span v-dt-tooltip="description">
-        <span
-          class="d-tt-capitalize"
-          data-qa="dtc-option-bar-control-label"
+      <dt-stack
+        as="div"
+        direction="row"
+        gap="300"
+        justify="space-between"
+        align="baseline"
+      >
+        <dt-stack
+          direction="row"
+          gap="300"
+          align="baseline"
         >
-          {{ controlLabel }}
-        </span>
-        <dt-icon-lock
-          v-if="locked"
-          class="d-pr-50 d-fs10 d-ps-relative d-t-1"
-        />
-        <span
-          v-if="required"
-          class="d-pl-25 d-ps-relative d-b-25"
-        >
-          <dt-badge
-            text="required"
-            color="black-700"
+          <dt-text
+            v-dt-tooltip="{ message: description, placement: 'left' }"
+            as="span"
+            class="d-tt-capitalize"
+            :tone="disabled ? 'muted' : undefined"
+            data-qa="dtc-option-bar-control-label"
+          >
+            {{ controlLabel }}
+          </dt-text>
+          <dt-icon-lock
+            v-if="locked"
+            size="100"
           />
-        </span>
-        <span
-          v-if="vModel"
-          class="d-pl-25 d-ps-relative d-b-25"
+          <dt-text
+            v-if="required"
+            size="xs"
+            kind="label"
+            strength="normal"
+            tone="critical"
+            class="d-fs-50"
+          >
+            Required
+          </dt-text>
+          <dt-text
+            v-if="vModel"
+            size="xs"
+            kind="label"
+            strength="normal"
+            tone="muted"
+            class="d-fs-50"
+          >
+            v-model
+          </dt-text>
+        </dt-stack>
+        <dt-button
+          v-if="showRawToggle"
+          v-dt-tooltip="'Edit as JSON'"
+          link
+          :link-underline="false"
+          class="d-ml-auto d-fw-normal d-fs-50 d-px-25 d-bar2 h:d-td-none "
+          :class="{ 'd-bgc-bold d-fc-secondary h:d-fc-primary': rawMode }"
+          @click="toggleRawMode"
         >
-          <dt-badge
-            text="v-model"
-            color="black-700"
-          />
-        </span>
-      </span>
+          RAW
+        </dt-button>
+      </dt-stack>
+      <dt-input
+        v-if="rawMode"
+        v-model="rawText"
+        type="textarea"
+        size="xs"
+        spellcheck="false"
+        root-class="d-mbs-75"
+      />
     </component>
   </div>
 </template>
 
 <script setup>
-import DtIconLock from '@dialpad/dialtone-icons/vue3/lock';
-import { DtBadge } from '@dialpad/dialtone-vue';
+import DtIconLock from '@dialpad/dialtone-icons/vue/lock';
+import { DtBadge, DtButton, DtInput, DtText } from '@dialpad/dialtone-vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
-import { computed } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { deserializeControlValue, serializeControlValue } from '@/src/lib/control';
+import { parseDocValue } from '@/src/lib/parse';
+import JSON5 from 'json5-with-undefined';
 
 const props = defineProps({
   /**
@@ -104,6 +142,13 @@ const props = defineProps({
     default: false,
   },
   /**
+   * Disable the control due to exclusion rules.
+   */
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  /**
    * Optional args to bind directly to the control.
    */
   args: {
@@ -133,9 +178,14 @@ const controlComponent = computed(() => {
  * @type {ComputedRef<object>}
  */
 const controlArgs = computed(() => {
+  const isInactive = props.disabled && !props.locked;
+  const displayValue = isInactive
+    ? props.controlData.component.props?.value?.default?.() ?? controlValue.value
+    : controlValue.value;
+
   return {
-    value: controlValue.value,
-    disabled: props.locked,
+    value: displayValue,
+    disabled: props.locked || props.disabled,
     tags: props.tags,
     ...props.args,
   };
@@ -170,6 +220,44 @@ function updateValue (e) {
     : e;
   emit(VALUE_UPDATE_EVENT, value);
 }
+
+const showRawToggle = computed(() => {
+  const name = props.controlData.component?.name;
+  return name === 'DtcControlArray' || name === 'DtcControlObject';
+});
+
+const rawMode = ref(false);
+const rawText = ref('');
+let rawEditInProgress = false;
+
+function formatRawValue (val) {
+  return JSON5.stringify(val, null, 2);
+}
+
+watch(() => props.value, (val) => {
+  if (rawMode.value && !rawEditInProgress) {
+    rawText.value = formatRawValue(val);
+  }
+}, { deep: true });
+
+function toggleRawMode () {
+  rawMode.value = !rawMode.value;
+  if (rawMode.value) {
+    rawText.value = formatRawValue(props.value);
+  }
+}
+
+watch(rawText, (val) => {
+  try {
+    rawEditInProgress = true;
+    const parsed = parseDocValue(val);
+    emit(VALUE_UPDATE_EVENT, parsed);
+  } catch {
+    // Invalid JSON5 — don't emit until syntax is valid
+  } finally {
+    rawEditInProgress = false;
+  }
+});
 </script>
 
 <script>

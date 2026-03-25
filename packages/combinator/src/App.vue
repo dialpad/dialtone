@@ -1,27 +1,25 @@
 <template>
   <dt-stack
-    gap="200"
-    class="d-ai-center"
+    gap="500"
+    class="d-ai-center d-p-800"
   >
     <dtc-suggestion
       :value="component.name"
       :suggestions="options"
       @update:value="updateComponent"
     >
-      <span>Target Component</span>
       <template #item="{ value }">
         <span class="d-d-flex d-jc-space-between">
-          <span>{{ value }}</span>
+          <span :class="isSupportedComponent(value) ? '' : 'd-fc-muted'">{{ value }}</span>
           <dt-badge
             v-if="!isSupportedComponent(value)"
-            class="d-ml-75"
-            color="yellow-300"
+            class="d-mis-75"
+            type="warning"
           >
             Unsupported
           </dt-badge>
           <dt-badge
             v-if="value === DEFAULT_COMPONENT"
-            color="purple-500"
           >
             Default
           </dt-badge>
@@ -30,7 +28,7 @@
     </dtc-suggestion>
     <Combinator
       :key="componentKey"
-      class="d-wmn80p"
+      class="d-w100p"
       :component="component"
       :variants="variants"
       :documentation="componentDocumentation"
@@ -46,6 +44,7 @@ import Combinator from './components/combinator.vue';
 import { computed, markRaw, onMounted, ref } from 'vue';
 import { DIALTONE_PREFIX } from '@/src/lib/constants';
 import { DtBadge, DtStack } from '@dialpad/dialtone-vue';
+import * as dialtoneIcons from '@dialpad/dialtone-icons/vue';
 import DtcSuggestion from '@/src/components/controls/control_suggestion.vue';
 import supportedComponentData from '@/src/supported_components.json';
 import variantBank from '@/src/variants/variants';
@@ -88,12 +87,10 @@ function updateComponent (e) {
   window.location.hash = e;
 }
 
-const icons = ref();
-
 const library = computed(() => {
   return {
     ...components.value,
-    ...icons.value,
+    ...dialtoneIcons,
   };
 });
 
@@ -101,19 +98,11 @@ const componentDocumentation = computed(() => {
   return documentation.find(componentInfo => componentInfo.displayName === component.value.name);
 });
 
-onMounted(async () => {
+onMounted(() => {
   addEventListener('hashchange', () => {
     component.value = getComponentFromHash();
     variants.value = getVariantFromHash();
   });
-
-  // const promises = [];
-  // getIcons().forEach(icon => {
-  //  promises.push(import(`../node_modules/@dialpad/dialtone/lib/dist/vue/icons/${icon}.vue`).then(module => {
-  //    return [icon, module.default];
-  //  }));
-  // });
-  // icons.value = Object.fromEntries(await Promise.all(promises));
 });
 
 </script>

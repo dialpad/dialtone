@@ -1,28 +1,27 @@
 <template>
   <div
-    class="d-filter-pill"
+    :class="[
+      'd-filter-pill',
+      { 'd-filter-pill--read-only': readOnly },
+    ]"
     data-qa="dt-filter-pill"
   >
-    <dt-popover
+    <component
+      :is="overlayComponent"
       v-model:open="isOpen"
-      :append-to="popoverAppendTo"
-      :fallback-placements="popoverFallbackPlacements"
-      :max-height="popoverMaxHeight"
-      :max-width="popoverMaxWidth"
-      :modal="false"
-      :padding="popoverPadding"
-      :placement="popoverPlacement"
+      v-bind="overlayProps"
+      :content-mode="contentMode"
     >
-      <template #anchor="{ attrs }">
+      <template #anchor="slotData">
         <dt-button
           v-dt-tooltip="resolvedStartTooltipText"
-          v-bind="attrs"
+          v-bind="useDropdown ? slotData : slotData.attrs"
           :active="isActive"
+          :aria-disabled="readOnly || undefined"
           :class="[
             'd-filter-pill__primary',
             {
               'd-filter-pill--selected': isActive,
-              'd-filter-pill__primary--has-clear': hasClear,
             },
           ]"
           :disabled="disabled"
@@ -30,23 +29,51 @@
           :size="size"
           data-qa="dt-filter-pill__button"
           importance="outlined"
-          @click="isOpen = true"
+          @click="openPopover"
+          @keydown.up.down.prevent="openPopover"
         >
+          <template
+            v-if="$slots.startIcon"
+            #startIcon="{ iconSize }"
+          >
+            <!-- @slot Icon displayed before the label -->
+            <slot
+              name="startIcon"
+              :icon-size="iconSize"
+            />
+          </template>
           <span class="d-filter-pill__label">
-            <!-- @slot Allows you to override the label behavior -->
-            <slot>
+            <!-- @slot Allows you to customize the label slot -->
+            <slot
+              :label="label"
+              :filters="filters"
+              :active-filters="activeFilters"
+              :active-filter-list="activeFilterList"
+              :active-filter-overflow="activeFilterOverflow"
+            >
               <span
-                class="d-filter-pill__label-alpha"
+                class="d-filter-pill__label-start"
+                :title="label"
                 v-text="label"
               />
               <span
                 v-if="activeFilterList"
-                class="d-filter-pill__label-omega"
+                class="d-filter-pill__label-end"
+                :title="activeFilterList"
                 v-text="activeFilterList"
+              />
+              <span
+                v-if="activeFilterOverflow"
+                class="d-filter-pill__label-end-overflow"
+                :title="`plus ${activeFilters.length - 1} others`"
+                v-text="activeFilterOverflow"
               />
             </slot>
           </span>
-          <template #endIcon="{ iconSize }">
+          <template
+            v-if="!readOnly"
+            #endIcon="{ iconSize }"
+          >
             <dt-icon-chevron-down
               :size="iconSize"
               class="d-filter-pill__icon"
@@ -55,20 +82,26 @@
           </template>
         </dt-button>
       </template>
-      <template #content="{ close }">
+      <template
+        v-if="!useDropdown"
+        #content="{ close }"
+      >
         <!-- @slot Allows you to override the popover content, only use this if you need custom behavior -->
         <slot
           :close="close"
+          :apply="applySelection"
+          :cancel="cancelSelection"
+          :pending-filters="pendingFilters"
           name="content"
         >
           <dt-checkbox-group
             v-if="modelValue?.length"
-            :selected-values="activeFilters"
+            :selected-values="deferSelection ? pendingActiveFilters : activeFilters"
             :aria-label="label"
-            name="contact-centers"
+            :name="label || 'filter-pill'"
           >
             <dt-checkbox
-              v-for="filter in filters"
+              v-for="filter in displayFilters"
               :key="filter.name"
               :label="filter.name"
               :value="filter.name"
@@ -77,10 +110,79 @@
           </dt-checkbox-group>
         </slot>
       </template>
-    </dt-popover>
+      <template
+        v-if="!useDropdown && $slots.headerContent"
+        #headerContent="{ close }"
+      >
+        <!-- @slot Allows you to customize the popover header -->
+        <slot
+          name="headerContent"
+          :close="close"
+        />
+      </template>
+      <template
+        v-if="!useDropdown && (deferSelection || $slots.footerContent)"
+        #footerContent="{ close }"
+      >
+        <!-- @slot Allows you to customize the popover footer. Receives { close, apply, cancel } bindings. -->
+        <slot
+          name="footerContent"
+          :close="close"
+          :apply="applySelection"
+          :cancel="cancelSelection"
+        >
+          <dt-stack
+            v-if="deferSelection"
+            direction="row"
+            gap="400"
+            justify="end"
+            data-qa="dt-filter-pill__deferred-footer"
+          >
+            <dt-button
+              importance="clear"
+              kind="muted"
+              size="sm"
+              data-qa="dt-filter-pill__cancel-button"
+              @click="cancelSelection"
+            >
+              {{ cancelButtonLabel }}
+            </dt-button>
+            <dt-button
+              importance="primary"
+              size="sm"
+              data-qa="dt-filter-pill__apply-button"
+              @click="applySelection"
+            >
+              {{ applyButtonLabel }}
+            </dt-button>
+          </dt-stack>
+        </slot>
+      </template>
+      <template
+        v-if="useDropdown"
+        #list="{ close }"
+      >
+        <!-- @slot Allows you to override the dropdown content -->
+        <slot
+          :close="close"
+          name="content"
+        >
+          <dt-list-item
+            v-for="filter in filters"
+            :key="filter.name"
+            role="menuitem"
+            navigation-type="arrow-keys"
+            :selected="filter.active"
+            @click="selectFilter(filter, close)"
+          >
+            {{ filter.name }}
+          </dt-list-item>
+        </slot>
+      </template>
+    </component>
     <dt-button
       v-if="hasClear"
-      v-dt-tooltip="resolvedEndTooltipText"
+      v-dt-tooltip="endTooltipText"
       :active="isActive"
       :aria-label="clearButtonAriaLabel"
       :class="[
@@ -104,11 +206,15 @@
 
 <script>
 import { DtPopover, POPOVER_APPEND_TO_VALUES, POPOVER_PADDING_CLASSES } from '@/components/popover';
+import { CONTENT_MODE_PROP } from '@/common/mode_constants';
 import { BUTTON_SIZE_MODIFIERS, DtButton } from '@/components/button';
-import { DtIconChevronDown, DtIconClose } from '@dialpad/dialtone-icons/vue3';
+import { DtIconChevronDown, DtIconClose } from '@dialpad/dialtone-icons/vue';
 import { DialtoneLocalization } from '@/localization';
 import { DtCheckbox } from '@/components/checkbox';
 import { DtCheckboxGroup } from '@/components/checkbox_group';
+import { DtDropdown } from '@/components/dropdown';
+import { DtListItem } from '@/components/list_item';
+import { DtStack } from '@/components/stack';
 
 export default {
   name: 'DtFilterPill',
@@ -120,11 +226,35 @@ export default {
     DtButton,
     DtIconClose,
     DtIconChevronDown,
+    DtDropdown,
+    DtListItem,
+    DtStack,
   },
 
   inheritAttrs: false,
 
   props: {
+    /**
+     * When true, uses DtDropdown instead of DtPopover as the overlay.
+     * Provides keyboard navigation (arrow keys) for list items.
+     * Default content renders DtListItem elements (single-select)
+     * instead of checkboxes (multi-select).
+     */
+    useDropdown: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * When true, checkbox changes are held in a pending state until the user
+     * clicks Apply. Cancel or closing the popover discards pending changes.
+     * Only applies to popover mode (not useDropdown).
+     */
+    deferSelection: {
+      type: Boolean,
+      default: false,
+    },
+
     /**
      * Array of filters to display in the popover,
      * should be an array of objects with `name` and `active` properties
@@ -144,17 +274,21 @@ export default {
     },
 
     /**
-     * @deprecated Use startTooltipText
-     */
-    alphaTooltipText: {
-      type: String,
-      default: undefined,
-    },
-
-    /**
      * HTML disabled attribute
      */
     disabled: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * When true, the pill cannot be interacted with but does not
+     * receive disabled visual styling. Adds `d-filter-pill--read-only`
+     * class and hides the chevron icon. The clear button is suppressed
+     * and the tooltip falls back to a read-only message when
+     * startTooltipText is not provided.
+     */
+    readOnly: {
       type: Boolean,
       default: false,
     },
@@ -183,14 +317,6 @@ export default {
     endTooltipText: {
       type: String,
       default: '',
-    },
-
-    /**
-     * @deprecated Use endTooltipText
-     */
-    omegaTooltipText: {
-      type: String,
-      default: undefined,
     },
 
     /**
@@ -266,6 +392,57 @@ export default {
     },
 
     /**
+     * Additional CSS class(es) applied to the popover content area.
+     * Only applies when useDropdown is false.
+     */
+    popoverContentClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional CSS class(es) applied to the outer popover header element (`d-popover__header`).
+     * Only applies when useDropdown is false.
+     */
+    popoverHeaderClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional CSS class(es) applied to the outer popover footer element (`d-popover__footer`).
+     * Only applies when useDropdown is false.
+     */
+    popoverFooterClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional CSS class(es) applied to the popover dialog element.
+     * Only applies when useDropdown is false.
+     */
+    popoverDialogClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional CSS class(es) applied to the dropdown list wrapper.
+     * Only applies when useDropdown is true.
+     */
+    dropdownListClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Applies a color mode to the positioned content element.
+     * @values light, dark, invert
+     */
+    contentMode: CONTENT_MODE_PROP,
+
+    /**
      * The size of the button.
      * @values xs, sm, md, lg, xl
      */
@@ -298,6 +475,13 @@ export default {
      * @type {Array}
      */
     'update:modelValue',
+
+    /**
+     * Emitted when deferred selection is applied
+     *
+     * @event apply
+     */
+    'apply',
   ],
 
   data () {
@@ -305,28 +489,51 @@ export default {
       isOpen: false,
       i18n: new DialtoneLocalization(),
       filters: this.modelValue,
+      pendingFilters: null,
     };
   },
 
   computed: {
+    overlayComponent () {
+      return this.useDropdown ? 'dt-dropdown' : 'dt-popover';
+    },
+
+    overlayProps () {
+      const props = {
+        'append-to': this.popoverAppendTo,
+        'fallback-placements': this.popoverFallbackPlacements,
+        'max-height': this.popoverMaxHeight,
+        'max-width': this.popoverMaxWidth,
+        modal: true,
+        placement: this.popoverPlacement,
+      };
+      if (this.useDropdown) {
+        props['list-class'] = this.dropdownListClass;
+      } else {
+        props.padding = this.popoverPadding;
+        props['content-class'] = this.popoverContentClass;
+        props['header-wrapper-class'] = this.popoverHeaderClass;
+        props['footer-wrapper-class'] = this.popoverFooterClass;
+        props['dialog-class'] = this.popoverDialogClass;
+      }
+      return props;
+    },
+
     buttonKind () {
-      return this.isActive ? 'default': 'muted';
+      return (this.isActive && !this.disabled) ? 'default' : 'muted';
     },
 
     resolvedStartTooltipText () {
-      return this.alphaTooltipText ?? this.startTooltipText;
-    },
-
-    resolvedEndTooltipText () {
-      return this.omegaTooltipText ?? this.endTooltipText;
+      if (this.readOnly) return this.startTooltipText || this.i18n.$t('DIALTONE_FILTER_PILL_READ_ONLY_TOOLTIP');
+      return this.startTooltipText;
     },
 
     clearButtonAriaLabel () {
-      return this.resolvedEndTooltipText || this.i18n.$t('DIALTONE_FILTER_PILL_CLEAR_BUTTON_LABEL');
+      return this.endTooltipText || this.i18n.$t('DIALTONE_FILTER_PILL_CLEAR_BUTTON_LABEL');
     },
 
     clearButtonTitle () {
-      if (this.resolvedEndTooltipText) return;
+      if (this.endTooltipText) return;
 
       return this.clearButtonAriaLabel
     },
@@ -336,11 +543,18 @@ export default {
     },
 
     activeFilterList () {
-      if (this.activeFilters.length <= 2) {
-        return this.activeFilters.join(', ');
+      if (this.activeFilters.length === this.filters.length && this.filters.length > 1) {
+        return 'All';
       }
 
-      return this.activeFilters.slice(0, 2).join(', ') + ', + ' + (this.activeFilters.length - 2);
+      return this.activeFilters[0] ?? '';
+    },
+
+    activeFilterOverflow () {
+      if (this.activeFilters.length <= 1) return '';
+      if (this.activeFilters.length === this.filters.length && this.filters.length > 1) return '';
+
+      return '+' + (this.activeFilters.length - 1);
     },
 
     isActive () {
@@ -348,13 +562,37 @@ export default {
     },
 
     hasClear () {
-      return !this.hideClear && this.activeFilterList.length > 0;
+      return !this.readOnly && !this.hideClear && this.activeFilterList.length > 0;
+    },
+
+    displayFilters () {
+      return (this.deferSelection && this.pendingFilters) ? this.pendingFilters : this.filters;
+    },
+
+    pendingActiveFilters () {
+      if (!this.pendingFilters) return [];
+      return this.pendingFilters.filter(f => f.active).map(f => f.name);
+    },
+
+    cancelButtonLabel () {
+      return this.i18n.$t('DIALTONE_FILTER_PILL_CANCEL_BUTTON_LABEL');
+    },
+
+    applyButtonLabel () {
+      return this.i18n.$t('DIALTONE_FILTER_PILL_APPLY_BUTTON_LABEL');
     },
   },
 
   watch: {
     isOpen (isOpen) {
       this.$emit('open', isOpen);
+      if (this.deferSelection) {
+        if (isOpen) {
+          this.pendingFilters = JSON.parse(JSON.stringify(this.filters));
+        } else {
+          this.pendingFilters = null;
+        }
+      }
     },
 
     filters: {
@@ -367,7 +605,10 @@ export default {
 
   mounted () {
     if (!(this.modelValue?.length || (this.$slots.content && this.$slots.content()))) {
-      console.warn('Please provide content through the v-model or the "content" slot.')
+      console.warn('Please provide content through the v-model or the "content" slot.');
+    }
+    if (this.deferSelection && this.useDropdown) {
+      console.warn('deferSelection has no effect when useDropdown is true.');
     }
   },
 
@@ -375,6 +616,35 @@ export default {
     clearFilter ($event) {
       this.filters.forEach(filter => delete filter.active);
       this.$emit('clear', $event)
+    },
+
+    openPopover () {
+      if (this.readOnly) return;
+      this.isOpen = true;
+    },
+
+    selectFilter (selectedFilter, close) {
+      this.filters.forEach(filter => {
+        filter.active = filter === selectedFilter;
+      });
+      close();
+    },
+
+    applySelection () {
+      if (!this.pendingFilters) return;
+      this.filters.forEach((filter, i) => {
+        if (this.pendingFilters[i]) {
+          filter.active = this.pendingFilters[i].active;
+        } else {
+          delete filter.active;
+        }
+      });
+      this.$emit('apply');
+      this.isOpen = false;
+    },
+
+    cancelSelection () {
+      this.isOpen = false;
     },
   },
 };

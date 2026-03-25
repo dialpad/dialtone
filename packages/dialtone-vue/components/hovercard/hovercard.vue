@@ -6,6 +6,7 @@
     :open="hovercardOpen"
     :placement="placement"
     :content-class="contentClass"
+    :content-mode="contentMode"
     :dialog-class="dialogClass"
     :fallback-placements="fallbackPlacements"
     :padding="padding"
@@ -16,6 +17,7 @@
     :header-class="headerClass"
     :footer-class="footerClass"
     :append-to="appendTo"
+    :external-anchor-element="externalAnchorElement"
     data-qa="dt-hovercard"
     :enter-delay="enterDelay"
     :leave-delay="leaveDelay"
@@ -58,8 +60,19 @@ import { ref, watch, nextTick, onMounted, onBeforeUnmount } from 'vue';
 import { POPOVER_APPEND_TO_VALUES, POPOVER_PADDING_CLASSES, DtPopover } from '@/components/popover/index.js';
 import { TOOLTIP_DIRECTIONS, TOOLTIP_DELAY_MS } from '@/components/tooltip/index.js';
 import { getUniqueString } from '@/common/utils';
+import { CONTENT_MODE_PROP } from '@/common/mode_constants';
+
+defineOptions({
+  name: 'DtHovercard',
+});
 
 const props = defineProps({
+  /**
+     * Applies a color mode to the positioned content element.
+     * @values light, dark, invert
+     */
+  contentMode: CONTENT_MODE_PROP,
+
   /**
      * Fade transition when the content display is toggled.
      * @type boolean
@@ -203,6 +216,15 @@ const props = defineProps({
     type: Number,
     default: TOOLTIP_DELAY_MS,
   },
+
+  /**
+   * External anchor element reference. Use this instead of the anchor slot when
+   * the anchor may be inside a Shadow DOM, as querySelector cannot pierce shadow boundaries.
+   */
+  externalAnchorElement: {
+    type: HTMLElement,
+    default: null,
+  },
 });
 
 defineEmits([
@@ -248,9 +270,12 @@ onBeforeUnmount(() => {
   clearTimeout(inTimer);
   clearTimeout(outTimer);
 });
+
 watch(() => props.open, (open) => {
   hovercardOpen.value = open;
 }, { immediate: true });
+
+defineExpose({ show: onMouseEnter, hide: onMouseLeave });
 
 function setInTimer () {
   if (props.open === null) {

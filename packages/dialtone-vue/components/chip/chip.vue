@@ -58,7 +58,7 @@
 
 <script>
 import { DtButton } from '@/components/button';
-import { DtIconClose } from '@dialpad/dialtone-icons/vue3';
+import { DtIconClose } from '@dialpad/dialtone-icons/vue';
 import {
   CHIP_CLOSE_BUTTON_SIZE_MODIFIERS,
   CHIP_SIZE_MODIFIERS,

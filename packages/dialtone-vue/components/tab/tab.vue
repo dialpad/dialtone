@@ -2,7 +2,9 @@
   <dt-button
     :id="`dt-tab-${id}`"
     :class="[
+      'd-tablist__item',
       tabClass,
+      { 'd-tablist__item--vertical': groupContext.orientation === 'vertical' },
       { 'd-btn--disabled': isDisabled },
       { 'd-tab--is-selected': !groupContext.outlined && groupContext.kind !== 'muted' && isSelected },
     ]"
@@ -66,12 +68,7 @@
       <slot name="trailing" />
     </template>
     <!-- @slot default slot, defaults contains dt-button -->
-    <span
-      ref="tabLabel"
-      class="d-tab__label"
-    >
-      <slot />
-    </span>
+    <slot />
   </dt-button>
 </template>
 
@@ -243,28 +240,12 @@ export default {
   },
 
   mounted () {
-    this.syncDataContent();
     if (this.selected) {
       this.groupContext.selected = this.panelId;
     }
   },
 
-  updated () {
-    this.syncDataContent();
-  },
-
   methods: {
-    // Sets data-content to match the rendered label text so CSS can use
-    // `content: attr(data-content)` on a hidden ::after pseudo-element to
-    // hold the bold-width and prevent layout shift on selection.
-    syncDataContent () {
-      const el = this.$refs.tabLabel;
-      if (!el) return;
-      const text = el.textContent?.trim() || '';
-      if (el.getAttribute('data-content') !== text) {
-        el.setAttribute('data-content', text);
-      }
-    },
   },
 };
 </script>

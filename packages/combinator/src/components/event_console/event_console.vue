@@ -17,7 +17,7 @@
             <span>
               <dt-icon-arrow-right
                 v-if="entry.value !== undefined"
-                class="d-fs10 d-px-75 d-ps-relative d-t-25"
+                class="d-fs10 d-px-75 d-ps-relative d-ibs-25"
               />
             </span>
           </template>
@@ -31,7 +31,7 @@
 import DtcEventConsolePair from '@/src/components/event_console/event_console_pair.vue';
 
 import { computed, ref } from 'vue';
-import { DtIconArrowRight } from '@dialpad/dialtone-icons/vue3';
+import { DtIconArrowRight } from '@dialpad/dialtone-icons/vue';
 
 defineProps({
   /**

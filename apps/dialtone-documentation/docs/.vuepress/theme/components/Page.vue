@@ -5,8 +5,18 @@
   >
     <div class="d-p48">
       <page-header />
-      <!-- eslint-disable-next-line vue/no-undef-components -->
-      <content />
+      <article class="dialtone-content__article">
+        <div
+          v-if="$page.path.startsWith('/components') && !$frontmatter.no_preview"
+          id="preview-header"
+        >
+          <h2 class="d-vi-visible-sr">
+            Preview
+          </h2>
+        </div>
+        <!-- eslint-disable-next-line vue/no-undef-components -->
+        <content />
+      </article>
       <dt-stack
         direction="row"
         :justify="prev ? 'between' : 'end'"
@@ -27,8 +37,10 @@
           <template #startIcon>
             <dt-icon name="arrow-left" />
           </template>
-          <dt-stack as="span" class="d-ta-left d-p8">
-            <span class="d-body--md-compact d-fc-muted">Previous</span>
+          <dt-stack as="span" class="d-p8">
+            <dt-text as="span" kind="body" size="md" tone="muted">
+              Previous
+            </dt-text>
             <span>{{ prev.text }}</span>
           </dt-stack>
         </dt-button>
@@ -37,7 +49,6 @@
           :to="next.link"
           class="d-wmn40p"
           label-class="d-jc-space-between"
-          icon-position="right"
           importance="outlined"
           kind="muted"
           size="lg"
@@ -45,8 +56,10 @@
           <template #endIcon>
             <dt-icon name="arrow-right" />
           </template>
-          <dt-stack as="span" class="d-ta-left d-p8">
-            <span class="d-body--md-compact d-fc-muted">Next</span>
+          <dt-stack as="span" class="d-p8">
+            <dt-text as="span" kind="body" size="md" tone="muted">
+              Next
+            </dt-text>
             <span>{{ next.text }}</span>
           </dt-stack>
         </dt-button>

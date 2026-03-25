@@ -35,19 +35,34 @@
             v-for="({ item, applies, description }) in accessible"
             :key="item"
           >
-            <th
-              scope="row"
-              class="d-code--sm d-docsite-code"
-              v-text="item"
-            />
-            <td
-              class="d-code--sm"
-              v-text="applies"
-            />
-            <td
-              class="d-fs-100"
-              v-html="description"
-            />
+            <th scope="row">
+              <dt-text
+                as="span"
+                kind="code"
+                size="xs"
+                class="d-docsite-code"
+              >
+                {{ item }}
+              </dt-text>
+            </th>
+            <td>
+              <dt-text
+                as="code"
+                kind="code"
+                size="xs"
+                class="code-example--inline"
+              >
+                {{ applies }}
+              </dt-text>
+            </td>
+            <td>
+              <dt-text
+                kind="body"
+                size="xs"
+              >
+                {{ description }}
+              </dt-text>
+            </td>
           </tr>
         </tbody>
       </table>

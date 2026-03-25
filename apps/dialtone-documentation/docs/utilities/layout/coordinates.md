@@ -12,15 +12,15 @@ Use the `top|right|bottom|left|x|y|all` utility classes to absolutely position e
 
 <code-well-header>
   <div class="d-w100p d-hmn216 d-d-grid d-g-cols4 d-g-200 d-pi-center">
-    <div class="d-ps-relative d-h-200 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-x-0 d-t-0 d-bgc-moderate-opaque d-bar4 d-h50p">1</dt-stack></div>
-    <div class="d-ps-relative d-h-200 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-y-0 d-r-0 d-bgc-moderate-opaque d-bar4 d-w50p">2</dt-stack></div>
-    <div class="d-ps-relative d-h-200 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-x-0 d-b-0 d-bgc-moderate-opaque d-bar4 d-h50p">3</dt-stack></div>
-    <div class="d-ps-relative d-h-200 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-y-0 d-l-0 d-bgc-moderate-opaque d-bar4 d-w50p">4</dt-stack></div>
+    <div class="d-ps-relative d-h-200 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-x-0 d-ibs-0 d-bgc-moderate-opaque d-bar4 d-h50p">1</dt-stack></div>
+    <div class="d-ps-relative d-h-200 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-y-0 d-iie-0 d-bgc-moderate-opaque d-bar4 d-w50p">2</dt-stack></div>
+    <div class="d-ps-relative d-h-200 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-x-0 d-ibe-0 d-bgc-moderate-opaque d-bar4 d-h50p">3</dt-stack></div>
+    <div class="d-ps-relative d-h-200 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-y-0 d-iis-0 d-bgc-moderate-opaque d-bar4 d-w50p">4</dt-stack></div>
     <div class="d-ps-relative d-h-200 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-all-0 d-bgc-moderate-opaque d-bar4">5</dt-stack></div>
-    <div class="d-ps-relative d-h-200 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-l-0 d-t-0 d-bgc-moderate-opaque d-bar4 d-size-50p">6</dt-stack></div>
-    <div class="d-ps-relative d-h-200 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-r-0 d-t-0 d-bgc-moderate-opaque d-bar4 d-size-50p">7</dt-stack></div>
-    <div class="d-ps-relative d-h-200 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-r-0 d-b-0 d-bgc-moderate-opaque d-bar4 d-size-50p">8</dt-stack></div>
-    <div class="d-ps-relative d-h-200 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-l-0 d-b-0 d-bgc-moderate-opaque d-bar4 d-size-50p">9</dt-stack></div>
+    <div class="d-ps-relative d-h-200 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-iis-0 d-ibs-0 d-bgc-moderate-opaque d-bar4 d-size-50p">6</dt-stack></div>
+    <div class="d-ps-relative d-h-200 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-iie-0 d-ibs-0 d-bgc-moderate-opaque d-bar4 d-size-50p">7</dt-stack></div>
+    <div class="d-ps-relative d-h-200 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-iie-0 d-ibe-0 d-bgc-moderate-opaque d-bar4 d-size-50p">8</dt-stack></div>
+    <div class="d-ps-relative d-h-200 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-iis-0 d-ibe-0 d-bgc-moderate-opaque d-bar4 d-size-50p">9</dt-stack></div>
     <div class="d-ps-relative d-h-200 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-all-100 d-bgc-moderate-opaque d-bar4">10</dt-stack></div>
   </div>
 </code-well-header>
@@ -91,15 +91,15 @@ Use the `top|right|bottom|left|x|y|all` utility classes to absolutely position e
       <tbody>
         <tr v-for="{coordinate, suffix, combo, value } in coordinates">
           <th scope="row">{{ value }}</th>
-          <div v-for="{direction: dir, prefix: pre, percent} in coordinateDirections" style="display: contents">
-            <td v-if="percent === 'no' && combo === 'no'" class="d-o50 d-bgc-black-200 d-fc-black-400 d-fs-100 d-ta-center">
-              <em>N/A</em>
+          <template v-for="{direction: dir, prefix: pre, percent} in coordinateDirections">
+            <td v-if="percent === 'no' && combo === 'no'" class="d-fc-muted d-fs-100 d-ta-center">
+              N/A
             </td>
             <td v-else class="d-code--sm d-docsite-code">
               <span v-if="/^\d+$/.test(coordinate)">.d-{{ pre }}-{{ coordinate }}</span>
               <span v-else>.d-{{ pre }}{{ coordinate }}</span>
             </td>
-          </div>
+          </template>
         </tr>
       </tbody>
     </table>
@@ -114,15 +114,15 @@ Use the `top|right|bottom|left|x|y|all` utility classes to absolutely position e
 
 <code-well-header>
   <div class="d-w100p d-hmn216 d-d-grid d-g-cols4 d-g-200 d-pi-center">
-    <div class="d-ps-relative d-h-200 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-x-n25 d-t-n25 d-bgc-moderate-opaque d-bar8 d-h50p">1</dt-stack></div>
-    <div class="d-ps-relative d-h-200 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-y-n25 d-r-n25 d-bgc-moderate-opaque d-bar8 d-w50p">2</dt-stack></div>
-    <div class="d-ps-relative d-h-200 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-x-n25 d-b-n25 d-bgc-moderate-opaque d-bar8 d-h50p">3</dt-stack></div>
-    <div class="d-ps-relative d-h-200 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-y-n25 d-l-n25 d-bgc-moderate-opaque d-bar8 d-w50p">4</dt-stack></div>
+    <div class="d-ps-relative d-h-200 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-x-n25 d-ibs-n25 d-bgc-moderate-opaque d-bar8 d-h50p">1</dt-stack></div>
+    <div class="d-ps-relative d-h-200 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-y-n25 d-iie-n25 d-bgc-moderate-opaque d-bar8 d-w50p">2</dt-stack></div>
+    <div class="d-ps-relative d-h-200 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-x-n25 d-ibe-n25 d-bgc-moderate-opaque d-bar8 d-h50p">3</dt-stack></div>
+    <div class="d-ps-relative d-h-200 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-y-n25 d-iis-n25 d-bgc-moderate-opaque d-bar8 d-w50p">4</dt-stack></div>
     <div class="d-ps-relative d-h-200 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-all-n25 d-bgc-moderate-opaque d-bar8">5</dt-stack></div>
-    <div class="d-ps-relative d-h-200 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-l-n50 d-t-n50 d-bgc-moderate-opaque d-bar8 d-size-50p">6</dt-stack></div>
-    <div class="d-ps-relative d-h-200 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-r-n100 d-t-n100 d-bgc-moderate-opaque d-bar8 d-size-50p">7</dt-stack></div>
-    <div class="d-ps-relative d-h-200 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-r-n100 d-b-n100 d-bgc-moderate-opaque d-bar8 d-size-50p">8</dt-stack></div>
-    <div class="d-ps-relative d-h-200 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-l-n50 d-b-n50 d-bgc-moderate-opaque d-bar8 d-size-50p">9</dt-stack></div>
+    <div class="d-ps-relative d-h-200 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-iis-n50 d-ibs-n50 d-bgc-moderate-opaque d-bar8 d-size-50p">6</dt-stack></div>
+    <div class="d-ps-relative d-h-200 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-iie-n100 d-ibs-n100 d-bgc-moderate-opaque d-bar8 d-size-50p">7</dt-stack></div>
+    <div class="d-ps-relative d-h-200 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-iie-n100 d-ibe-n100 d-bgc-moderate-opaque d-bar8 d-size-50p">8</dt-stack></div>
+    <div class="d-ps-relative d-h-200 d-bar8 d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-ps-absolute d-iis-n50 d-ibe-n50 d-bgc-moderate-opaque d-bar8 d-size-50p">9</dt-stack></div>
   </div>
 </code-well-header>
 
@@ -191,15 +191,15 @@ Use the `top|right|bottom|left|x|y|all` utility classes to absolutely position e
       <tbody>
         <tr v-for="{coordinate, suffix, combo, negative, value } in coordinates">
           <th v-if="negative === 'yes'" scope="row">{{ value }}</th>
-          <div v-if="negative === 'yes'" v-for="{direction: dir, prefix: pre, percent} in coordinateDirections" style="display: contents">
-            <td v-if="percent === 'no' && combo === 'no'" class="d-o50 d-bgc-black-200 d-fc-black-400 d-fs-100 d-ta-center">
-              <em>N/A</em>
+          <template v-if="negative === 'yes'" v-for="{direction: dir, prefix: pre, percent} in coordinateDirections">
+            <td v-if="percent === 'no' && combo === 'no'" class="d-fc-muted d-fs-100 d-ta-center">
+              N/A
             </td>
             <td v-else class="d-code--sm d-docsite-code">
               <span v-if="/^\d+$/.test(coordinate)">.d-{{ pre }}-n{{ coordinate }}</span>
               <span v-else>.d-{{ pre }}n{{ coordinate }}</span>
             </td>
-          </div>
+          </template>
         </tr>
       </tbody>
     </table>

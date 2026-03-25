@@ -12,9 +12,14 @@
       {
     </template>
     <template #item="{ item, update }">
-      <div class="d-d-grid d-g-cols2">
-        <div
-          class="d-d-flex"
+      <dt-stack
+        direction="row"
+        gap="200"
+        align="end"
+      >
+        <dt-stack
+          direction="row"
+          gap="200"
           data-qa="dtc-control-object-item-key"
         >
           <dtc-control-string
@@ -22,8 +27,8 @@
             :disabled="disabled"
             @update:value="e => updateKey(e, item[1], update)"
           />
-          <span class="d-px-75 d-ps-relative d-t-75">:</span>
-        </div>
+          <span>:</span>
+        </dt-stack>
         <div
           class="dtc-control-object__contents"
           data-qa="dtc-control-object-item-value"
@@ -36,7 +41,7 @@
             @update:value="e => updateEntry(item[0], deserializeControlValue(e), update)"
           />
         </div>
-      </div>
+      </dt-stack>
     </template>
     <template #suffix>
       }

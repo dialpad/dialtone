@@ -1,4 +1,5 @@
-@layer dialtone.components {
+/* validate-layers: off */
+// intentionally outside @layer to win specificity over imported library overlayscrollbars.css
 .d-scrollbar {
   .os-theme-dark {
     // main color for the scrollbars handle
@@ -22,11 +23,11 @@
       opacity: var(--dt-opacity-700);
 
       &:hover {
-        opacity: var(--dt-opacity-800);
+        opacity: var(--dt-opacity-900);
       }
 
       &:active {
-        opacity: var(--dt-opacity-900);
+        opacity: var(--dt-opacity-1100);
       }
     }
   }
@@ -39,5 +40,4 @@
   & .os-scrollbar {
     display: none;
   }
-}
 }

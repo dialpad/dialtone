@@ -53,7 +53,7 @@ import {
   DtIconCommand,
   DtIconOption,
   DtIconPlus,
-} from '@dialpad/dialtone-icons/vue3';
+} from '@dialpad/dialtone-icons/vue';
 import { DtText } from '@/components/text';
 
 const SHORTCUTS_ICON_ALIASES = {
@@ -113,9 +113,10 @@ export default {
 
   props: {
     /**
-     * @ignore
+     * @deprecated Use v-dt-mode instead.
      * If true, applies inverted styles.
      * @values true, false
+     * @deprecated Use v-dt-mode directive instead.
      */
     inverted: {
       type: Boolean,

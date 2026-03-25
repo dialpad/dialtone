@@ -12,7 +12,6 @@ export const argsData = {
   href: '#',
   to: null,
   replace: false,
-  inverted: false,
   kind: '',
   rel: undefined,
   onClick: action('click'),
@@ -40,7 +39,8 @@ export const argTypesData = {
     },
   },
   inverted: {
-    control: 'boolean',
+    table: { category: 'Deprecated' },
+    description: 'Deprecated.',
   },
   href: {
     description: 'URL for anchor link navigation. Renders as a native <a> element.',

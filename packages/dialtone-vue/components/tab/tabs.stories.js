@@ -4,11 +4,12 @@ import DtTabGroup from './tab_group.vue';
 
 import DtTabsDefaultTemplate from './tabs_default.story.vue';
 import DtTabsVariantsTemplate from './tabs_variants.story.vue';
-import { TAB_LIST_SIZES } from './tabs_constants';
+import { TAB_LIST_SIZES, TAB_SPREADS } from './tabs_constants';
 
 // Default Prop Values
 export const argsData = {
   size: 'default',
+  spread: 'none',
   onChange: action('change'),
 };
 
@@ -38,6 +39,12 @@ export const argTypesData = {
       type: 'select',
     },
   },
+  spread: {
+    options: TAB_SPREADS,
+    control: {
+      type: 'select',
+    },
+  },
 
   // Action Event Handlers
   onChange: {
@@ -54,7 +61,8 @@ export const argTypesData = {
     },
   },
   inverted: {
-    table: { disable: true },
+    table: { category: 'Deprecated' },
+    description: 'Deprecated.',
   },
 };
 

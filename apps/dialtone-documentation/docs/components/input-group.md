@@ -1,14 +1,14 @@
 ---
 title: Input Group
 description: Input Groups are convenience components for a grouping of related inputs. While each input within the group could be independent, the v-model on the group provides a convenient interface for determining the current state of the group.
-status: ready
+status: deprecated
 thumb: true
 image: assets/images/components/input.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-input-group--default
 keywords: ["input addon", "input prefix", "input suffix", "d-input-group", "DtInputGroup", "dt-input-group", "compound input", "prepend append"]
 ---
 
-<code-well-header>
+<code-example only-show="demo">
   <dt-input-group
     name="fruits-input-group"
     legend="Fruits"
@@ -17,35 +17,23 @@ keywords: ["input addon", "input prefix", "input suffix", "d-input-group", "DtIn
     <dt-radio value="banana"><span>Banana</span></dt-radio>
     <dt-radio value="other"><span>Other</span></dt-radio>
   </dt-input-group>
-</code-well-header>
+</code-example>
+
+<component-combinator component-name="DtInputGroup" />
 
 ## Default
 
 Input Groups are typically paired with a legend which identifies the group. If no legend is provided then it is expected that an `aria-label` will be given in order to provide an invisible label to screen readers. Each Input Group should contain one or more inputs which users can interact with.
 
-<code-well-header>
+<code-example>
   <dt-input-group
-    ref="baseExample"
     name="fruits-input-group"
   >
     <dt-radio value="apple"><span>Apple</span></dt-radio>
     <dt-radio value="banana"><span>Banana</span></dt-radio>
     <dt-radio value="other"><span>Other</span></dt-radio>
   </dt-input-group>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.baseExample'
-vueCode='
-<dt-input-group
-  name="fruits-input-group"
->
-  <dt-radio value="apple"><span>Apple</span></dt-radio>
-  <dt-radio value="banana"><span>Banana</span></dt-radio>
-  <dt-radio value="other"><span>Other</span></dt-radio>
-</dt-input-group>
-'
-/>
+</code-example>
 
 ## Model
 
@@ -110,7 +98,14 @@ export default {
 
 ### With Legend
 
-<code-well-header>
+<code-example vueCode='
+<dt-input-group
+  name="input-group-with-legend"
+  legend="With Legend"
+>
+  <!-- Input Elements -->
+</dt-input-group>
+'>
   <dt-input-group
     name="input-group-with-legend"
     legend="With Legend"
@@ -119,34 +114,11 @@ export default {
     <dt-radio value="banana"><span>Banana</span></dt-radio>
     <dt-radio value="other"><span>Other</span></dt-radio>
   </dt-input-group>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-input-group
-  name="input-group-with-legend"
-  legend="With Legend"
->
-  <!-- Input Elements -->
-</dt-input-group>
-'
-/>
+</code-example>
 
 ### With Slotted Legend
 
-<code-well-header>
-  <dt-input-group name="input-group-with-slotted-legend">
-    <dt-radio value="apple"><span>Apple</span></dt-radio>
-    <dt-radio value="banana"><span>Banana</span></dt-radio>
-    <dt-radio value="other"><span>Other</span></dt-radio>
-    <template #legend>
-      With Slotted Legend
-    </template>
-  </dt-input-group>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
+<code-example vueCode='
 <dt-input-group
   name="input-group-with-legend"
 >
@@ -155,12 +127,28 @@ vueCode='
     With Slotted Legend
   </template>
 </dt-input-group>
-'
-/>
+'>
+  <dt-input-group name="input-group-with-slotted-legend">
+    <dt-radio value="apple"><span>Apple</span></dt-radio>
+    <dt-radio value="banana"><span>Banana</span></dt-radio>
+    <dt-radio value="other"><span>Other</span></dt-radio>
+    <template #legend>
+      With Slotted Legend
+    </template>
+  </dt-input-group>
+</code-example>
 
 ### Disabled
 
-<code-well-header>
+<code-example vueCode='
+<dt-input-group
+  name="input-group-disabled"
+  legend="Disabled"
+  disabled
+>
+  <!-- Input Elements -->
+</dt-input-group>
+'>
   <dt-input-group
     name="input-group-disabled"
     legend="Disabled"
@@ -170,24 +158,34 @@ vueCode='
     <dt-radio value="banana"><span>Banana</span></dt-radio>
     <dt-radio value="other"><span>Other</span></dt-radio>
   </dt-input-group>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-input-group
-  name="input-group-disabled"
-  legend="Disabled"
-  disabled
->
-  <!-- Input Elements -->
-</dt-input-group>
-'
-/>
+</code-example>
 
 ### With Validation Messages
 
-<code-well-header>
-  <div class="d-stack16">
+<code-example vueCode='
+<dt-input-group
+  name="input-group-with-success-message"
+  legend="With Success Message"
+  :messages="[{ message: `Success validation message`, type: VALIDATION_MESSAGE_TYPES.SUCCESS }]"
+>
+  <!-- Input Elements -->
+</dt-input-group>
+<dt-input-group
+  name="input-group-with-warning-message"
+  legend="With Warning Message"
+  :messages="[{ message: `Warning`, type: VALIDATION_MESSAGE_TYPES.WARNING }]"
+>
+  <!-- Input Elements -->
+</dt-input-group>
+<dt-input-group
+  name="input-group-with-error-message"
+  legend="With Error Message"
+  :messages="[{ message: `Error`, type: VALIDATION_MESSAGE_TYPES.ERROR }]"
+>
+  <!-- Input Elements -->
+</dt-input-group>
+'>
+  <dt-stack gap="500">
     <dt-input-group
       name="input-group-with-success-message"
       legend="With Success Message"
@@ -215,38 +213,21 @@ vueCode='
       <dt-radio value="banana"><span>Banana</span></dt-radio>
       <dt-radio value="other"><span>Other</span></dt-radio>
     </dt-input-group>
-  </div>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-input-group
-  name="input-group-with-success-message"
-  legend="With Success Message"
-  :messages="[{ message: `Success validation message`, type: VALIDATION_MESSAGE_TYPES.SUCCESS }]"
->
-  <!-- Input Elements -->
-</dt-input-group>
-<dt-input-group
-  name="input-group-with-warning-message"
-  legend="With Warning Message"
-  :messages="[{ message: `Warning`, type: VALIDATION_MESSAGE_TYPES.WARNING }]"
->
-  <!-- Input Elements -->
-</dt-input-group>
-<dt-input-group
-  name="input-group-with-error-message"
-  legend="With Error Message"
-  :messages="[{ message: `Error`, type: VALIDATION_MESSAGE_TYPES.ERROR }]"
->
-  <!-- Input Elements -->
-</dt-input-group>
-'
-/>
+  </dt-stack>
+</code-example>
 
 ### With Validation Messages Hidden
 
-<code-well-header>
+<code-example vueCode='
+<dt-input-group
+  name="input-group-with-error-messages-hidden"
+  legend="With Error Messages Hidden"
+  :messages="[{ message: `Error`, type: VALIDATION_MESSAGE_TYPES.ERROR }]"
+  :show-messages="false"
+>
+  <!-- Input Elements -->
+</dt-input-group>
+'>
   <dt-input-group
     name="input-group-with-error-messages-hidden"
     legend="With Error Messages Hidden"
@@ -257,20 +238,7 @@ vueCode='
     <dt-radio value="banana"><span>Banana</span></dt-radio>
     <dt-radio value="other"><span>Other</span></dt-radio>
   </dt-input-group>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-input-group
-  name="input-group-with-error-messages-hidden"
-  legend="With Error Messages Hidden"
-  :messages="[{ message: `Error`, type: VALIDATION_MESSAGE_TYPES.ERROR }]"
-  :show-messages="false"
->
-  <!-- Input Elements -->
-</dt-input-group>
-'
-/>
+</code-example>
 
 ## Extending
 

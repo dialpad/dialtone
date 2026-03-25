@@ -6,6 +6,7 @@
   >
     <dt-tab-group
       :size="$attrs.size"
+      :spread="$attrs.spread"
       :inverted="$attrs.inverted"
       :borderless="$attrs.borderless"
       :disabled="$attrs.disabled"

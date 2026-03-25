@@ -20,11 +20,11 @@
           <dt-stack
             direction="row"
             align="center"
-            class="d-mb-25"
+            class="d-mbe-25"
           >
             <div
               id="contact-number1"
-              class="d-fs-200 d-fw-bold d-mr-50"
+              class="d-fs-200 d-fw-bold d-mie-50"
             >
               +1 (415) 123-4567
             </div>
@@ -59,11 +59,11 @@
           <dt-stack
             direction="row"
             align="center"
-            class="d-mb-25"
+            class="d-mbe-25"
           >
             <div
               id="contact-number2"
-              class="d-fs-200 d-fw-bold d-mr-50"
+              class="d-fs-200 d-fw-bold d-mie-50"
             >
               +1 (415) 123-4567
             </div>
@@ -106,11 +106,11 @@
             <dt-stack
               direction="row"
               align="center"
-              class="d-mb-25"
+              class="d-mbe-25"
             >
               <div
                 id="contact-name1"
-                class="d-fs-200 d-fw-bold d-mr-50"
+                class="d-fs-200 d-fw-bold d-mie-50"
               >
                 Joseph Lumaban
               </div>
@@ -121,7 +121,7 @@
               direction="row"
               align="center"
             >
-              <div class="d-fs-100 d-mt-25 d-mr-50">
+              <div class="d-fs-100 d-mbs-25 d-mie-50">
                 +1 (415) 123-4567
               </div>
               <dt-icon
@@ -135,12 +135,12 @@
             <dt-stack
               direction="row"
               align="center"
-              class="d-mt-n75"
+              class="d-mbs-n75"
             >
-              <div class="d-w8 d-h8 d-mr-50 d-bgc-magenta-200">
+              <div class="d-w8 d-h8 d-mie-50 d-bgc-magenta-200">
                 &nbsp;
               </div>
-              <div class="d-fs-100 d-mr-50">
+              <div class="d-fs-100 d-mie-50">
                 Aerolabs Support
               </div>
             </dt-stack>
@@ -168,11 +168,11 @@
           <dt-stack
             direction="row"
             align="center"
-            class="d-mb-25"
+            class="d-mbe-25"
           >
             <div
               id="contact-name2"
-              class="d-fs-200 d-fw-bold d-mr-50"
+              class="d-fs-200 d-fw-bold d-mie-50"
             >
               Joseph Lumaban
             </div>
@@ -183,7 +183,7 @@
             direction="row"
             align="center"
           >
-            <div class="d-fs-100 d-mt-25 d-mr-50">
+            <div class="d-fs-100 d-mbs-25 d-mie-50">
               +1 (415) 123-4567
             </div>
             <dt-icon
@@ -197,12 +197,12 @@
           <dt-stack
             direction="row"
             align="center"
-            class="d-mt-n75"
+            class="d-mbs-n75"
           >
-            <div class="d-w8 d-h8 d-mr-50 d-bgc-magenta-200">
+            <div class="d-w8 d-h8 d-mie-50 d-bgc-magenta-200">
               &nbsp;
             </div>
-            <div class="d-fs-100 d-mr-50">
+            <div class="d-fs-100 d-mie-50">
               Aerolabs Support
             </div>
             <div class="d-fw-bold d-fs-100">
@@ -224,7 +224,7 @@
           <dt-stack
             direction="row"
             align="center"
-            class="d-mb-25"
+            class="d-mbe-25"
           >
             <div
               id="contact-names1"
@@ -242,7 +242,7 @@
             direction="row"
             align="center"
           >
-            <div class="d-fs-100 d-mr-50">
+            <div class="d-fs-100 d-mie-50">
               +1 (415) 123-4567
             </div>
             <dt-icon
@@ -256,12 +256,12 @@
           <dt-stack
             direction="row"
             align="center"
-            class="d-mt-n50"
+            class="d-mbs-n50"
           >
-            <div class="d-w8 d-h8 d-mr-50 d-bgc-magenta-200">
+            <div class="d-w8 d-h8 d-mie-50 d-bgc-magenta-200">
               &nbsp;
             </div>
-            <div class="d-fs-100 d-mr-50">
+            <div class="d-fs-100 d-mie-50">
               Aerolabs Support
             </div>
           </dt-stack>
@@ -348,7 +348,7 @@
           <dt-stack
             direction="row"
             align="center"
-            class="d-mb-25"
+            class="d-mbe-25"
           >
             <div
               id="group-name"
@@ -363,7 +363,7 @@
             direction="row"
             align="center"
           >
-            <div class="d-fs-100 d-mr-50">
+            <div class="d-fs-100 d-mie-50">
               Manage participants
             </div>
           </dt-stack>
@@ -382,7 +382,7 @@
           <dt-stack
             direction="row"
             align="center"
-            class="d-mb-25"
+            class="d-mbe-25"
           >
             <div
               id="group-name"
@@ -400,7 +400,7 @@
             direction="row"
             align="center"
           >
-            <div class="d-fs-100 d-mr-50">
+            <div class="d-fs-100 d-mie-50">
               Manage participants
             </div>
           </dt-stack>
@@ -419,7 +419,7 @@ import { DtStack } from '@/components/stack';
 
 import avatar1 from '@/common/assets/avatar1.png?url';
 import avatar2 from '@/common/assets/avatar2.png?url';
-import { DtIconHear, DtIconUser } from '@dialpad/dialtone-icons/vue3';
+import { DtIconHear, DtIconUser } from '@dialpad/dialtone-icons/vue';
 
 export default {
   name: 'DtRecipeContactInfoVariants',

@@ -10,11 +10,11 @@ Use `d-bar{n}` to change the border radius on all corners of your element.
 
 <code-well-header>
   <dt-stack
-    gap="100"
+    gap="400"
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
     <div
-      v-for="r in [0, 1, 2, 4, 8, 12, 16, 24, 32]"
+      v-for="r in [0, 1, 2, 4, 6, 8, 12, 16, 24, 32]"
       class="d-p-200 d-ba d-baw2 d-bgc-primary d-ws-nowrap"
       :class="`d-bar${r}`"
     >
@@ -28,6 +28,7 @@ Use `d-bar{n}` to change the border radius on all corners of your element.
 <div class="d-bar1">...</div>
 <div class="d-bar2">...</div>
 <div class="d-bar4">...</div>
+<div class="d-bar6">...</div>
 <div class="d-bar8">...</div>
 <div class="d-bar12">...</div>
 <div class="d-bar16">...</div>
@@ -41,7 +42,7 @@ Use `d-b{t|r|b|l}r{n}` to change the border radius on a side of your element.
 
 <code-well-header>
   <dt-stack
-    gap="100"
+    gap="400"
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
     <div
@@ -67,7 +68,7 @@ Use `d-b{a|t|r|b|l}r-pill` to change the border radius of your element to a pill
 
 <code-well-header>
   <dt-stack
-    gap="100"
+    gap="400"
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
     <div class="d-p-200 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-pill">
@@ -86,10 +87,10 @@ Use `d-b{a|t|r|b|l}r-circle` to change the border radius of your element to a ci
 
 <code-well-header>
   <dt-stack
-    gap="100"
+    gap="400"
     :direction="{ 'default': 'column', 'md': 'row' }"
    >
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-size-200 d-ba d-baw2 d-bc-default d-bgc-primary d-ws-nowrap d-bar-circle">
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-200 d-w-200 d-ba d-baw2 d-bc-default d-bgc-primary d-ws-nowrap d-bar-circle">
       d-bar-circle
     </dt-stack>
   </dt-stack>
@@ -110,7 +111,7 @@ Use `d-b{a|t|r|b|l}r-circle` to change the border radius of your element to a ci
       </tr>
     </tbody>
     <tbody v-for="i in ['a', 't', 'r', 'b', 'l']">
-      <tr v-for="(val, token) in {'--dt-size-radius-0': '0', '--dt-size-radius-100': '1', '--dt-size-radius-200': '2', '--dt-size-radius-300': '4', '--dt-size-radius-400': '8', '--dt-size-radius-450': '12', '--dt-size-radius-500': '16', '--dt-size-550': '24', '--dt-size-radius-600': '32', '--dt-size-radius-circle': '-circle', '--dt-size-radius-pill': '-pill'}">
+      <tr v-for="(val, token) in {'--dt-size-radius-0': '0', '--dt-size-radius-100': '1', '--dt-size-radius-200': '2', '--dt-size-radius-300': '4', '--dt-size-radius-350': '6', '--dt-size-radius-400': '8', '--dt-size-radius-450': '12', '--dt-size-radius-500': '16', '--dt-size-550': '24', '--dt-size-radius-600': '32', '--dt-size-radius-circle': '-circle', '--dt-size-radius-pill': '-pill'}">
         <th scope="row" class="d-code--sm d-docsite-code">.d-b{{ i }}r{{ val }}</th>
         <td>
           <dt-stack direction="row" justify="between" align="center">
@@ -134,7 +135,7 @@ Use `d-b{a|t|r|b|l}r-circle` to change the border radius of your element to a ci
               </span>
             </div>
             <div
-              class="d-fl-shrink0 d-m-50 d-ml-200 d-h-50 d-bgc-black-300"
+              class="d-fl-shrink0 d-m-50 d-mis-200 d-h-50 d-bgc-black-300"
               :class="[val === '-circle' ? 'd-w-50' : 'd-w-100', `d-b${i}r${val}`]"
             >
             </div>

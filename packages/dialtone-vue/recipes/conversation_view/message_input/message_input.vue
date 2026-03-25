@@ -297,7 +297,7 @@ import { DtTooltip } from '@/components/tooltip';
 import { DtStack } from '@/components/stack';
 import {
   DtIconImage, DtIconVerySatisfied, DtIconSatisfied, DtIconSend,
-} from '@dialpad/dialtone-icons/vue3';
+} from '@dialpad/dialtone-icons/vue';
 import DtRecipeMessageInputTopbar from './message_input_topbar.vue';
 import DtRecipeMessageInputLink from './message_input_link.vue';
 import { DialtoneLocalization } from '@/localization';

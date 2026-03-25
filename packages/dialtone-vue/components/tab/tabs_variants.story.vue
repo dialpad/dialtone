@@ -4,12 +4,12 @@
       v-for="(variant, i) in variantsTabs"
       :key="i"
     >
-      <p class="d-fw-bold d-mb-100">
+      <p class="d-fw-bold d-mbe-100">
         {{ variant.description }}
       </p>
       <dt-tab-group
         v-bind="variant.propsToBind"
-        class="d-mb-100"
+        class="d-mbe-100"
       >
         <template #tabs>
           <dt-tab
@@ -90,6 +90,18 @@ export default {
           description: 'Disabled tabs',
           propsToBind: {
             disabled: true,
+          },
+        },
+        {
+          description: 'Spread grow tabs',
+          propsToBind: {
+            spread: 'grow',
+          },
+        },
+        {
+          description: 'Spread equal tabs',
+          propsToBind: {
+            spread: 'equal',
           },
         },
       ],

@@ -3,6 +3,7 @@
     <dt-tab-group
       :selected="selectedTab"
       size="sm"
+      spread="equal"
       tab-list-class="d-emoji-picker__tabset-list"
     >
       <template #tabs>
@@ -43,7 +44,7 @@ import {
   DtIconHeart,
   DtIconFlag,
   DtIconDialpadStar,
-} from '@dialpad/dialtone-icons/vue3';
+} from '@dialpad/dialtone-icons/vue';
 
 const props = defineProps({
   /**

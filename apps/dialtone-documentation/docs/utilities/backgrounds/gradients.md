@@ -117,7 +117,7 @@ The starting stop (`d-bgg-from-{color}`) should be declared. Optionally an endin
 
 <utility-class-table>
 <template #content>
-       <div v-for="direction in ['from', 'to']" style="display: contents">
+       <template v-for="direction in ['from', 'to']">
          <tbody v-for="{ color, stops } in baseColors">
              <tr v-for="{ stop } in stops">
                  <th scope="row" class="d-code--sm d-docsite-code">.d-bgg-{{ direction }}-{{ color }}-{{ stop }}</th>
@@ -135,7 +135,7 @@ The starting stop (`d-bgg-from-{color}`) should be declared. Optionally an endin
                              </span>
                          </div>
                          <div
-                           class="d-fl-shrink0 d-m-50 d-ml-200 d-h-50 d-w-100 d-bar4 d-bgg-to-r d-bgg-from-black-100"
+                           class="d-fl-shrink0 d-m-50 d-mis-200 d-h-50 d-w-100 d-bar4 d-bgg-to-r d-bgg-from-black-100"
                            :class="[`d-bgg-${direction}-${color}-${stop}`]"
                          >
                          </div>
@@ -143,7 +143,7 @@ The starting stop (`d-bgg-from-{color}`) should be declared. Optionally an endin
                  </td>
              </tr>
          </tbody>
-       </div>
+       </template>
    </template>
  </utility-class-table>
 

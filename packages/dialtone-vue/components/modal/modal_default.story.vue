@@ -17,6 +17,7 @@
       :fixed-header-footer="$attrs.fixedHeaderFooter"
       :close-on-click="$attrs.closeOnClick"
       :append-to="$attrs.appendTo"
+      :content-mode="$attrs.contentMode"
       @update:show="close"
     >
       <template
@@ -55,7 +56,7 @@
           <dt-button
             :kind="$attrs.kind"
             importance="primary"
-            class="d-ml-75"
+            class="d-mis-75"
           >
             Confirm
           </dt-button>

@@ -9,41 +9,28 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["navigation", "path", "d-breadcrumbs", "DtBreadcrumbs", "dt-breadcrumbs", "trail", "path navigation"]
 ---
 
-<code-well-header>
-  <dt-breadcrumbs
-    :breadcrumbs="[
-      { href: '#', label: 'Root' },
-      { href: '#', label: 'Section' },
-      { href: '#', label: 'Section' },
-      { href: '#', label: 'Section' },
-      { href: '#', label: 'Current Page', selected: true },
-    ]"
-  />
-</code-well-header>
-
-<!-- <component-combinator component-name="DtBreadcrumbs" /> -->
+<component-combinator component-name="DtBreadcrumbs" />
 
 ## Usage
 
-Breadcrumbs show users where they are within a site’s hierarchy. Breadcrumbs help orient the user and allow for navigation to previous page levels. It can be appropriate to use a breadcrumb when:
+Breadcrumbs show users where they are within a site's hierarchy. Breadcrumbs help orient the user and allow for navigation to previous page levels. It can be appropriate to use a breadcrumb when:
 
 - The user is many levels of navigation deep
 - The current page does not have its own navigation
 - The user needs to quickly go back to the previous parent page
 
-Breadcrumbs should be the first page element—placed directly above the page’s title. All pages that appear in the breadcrumb should link to their respective page. The page the user is on should always be the last page listed and not linked.
+Breadcrumbs should be the first page element—placed directly above the page's title. All pages that appear in the breadcrumb should link to their respective page. The page the user is on should always be the last page listed and not linked.
 
 ### When Not to Use
 
-Breadcrumbs are always treated as secondary and should not entirely replace the primary navigation. They shouldn’t be used for products that have single level navigation because they create unnecessary clutter.
+Breadcrumbs are always treated as secondary and should not entirely replace the primary navigation. They shouldn't be used for products that have single level navigation because they create unnecessary clutter.
 
 ## Variants and Examples
 
 ### Default
 
-<code-well-header>
+<code-example>
   <dt-breadcrumbs
-    ref="defaultExample"
     :breadcrumbs="[
       { href: '#', label: 'Root' },
       { href: '#', label: 'Section' },
@@ -52,52 +39,31 @@ Breadcrumbs are always treated as secondary and should not entirely replace the 
       { href: '#', label: 'Current Page', selected: true },
     ]"
   />
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.defaultExample'
-vueCode='
-<dt-breadcrumbs
-  :breadcrumbs="[
-    { href: `#`, label: `Root` },
-    { href: `#`, label: `Section` },
-    { href: `#`, label: `Section` },
-    { href: `#`, label: `Section` },
-    { href: `#`, label: `Current Page`, selected: true },
-  ]"
-/>
-'
-showHtmlWarning />
+</code-example>
 
 ### Inverted
 
-<dt-notice title="Deprecated" kind="error" class="d-wmx100p d-my-200">
-  The <code>inverted</code> prop has been deprecated in favor of using <router-link to="mode-island.html"><DtLink>DtModeIsland</DtLink></router-link> as a wrapper.
+<dt-notice title="Deprecated" kind="info" class="d-wmx100p d-my-200" hide-close>
+  The <code>inverted</code> prop has been deprecated. Use the
+  <dt-link to="mode-island.html#inverting">v-dt-mode directive</dt-link>
+  instead.
 </dt-notice>
 
-In place of the <code>inverted</code> prop, use the <router-link to="mode-island.html"><DtLink>DtModeIsland</DtLink></router-link> component as a wrapper.
+In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#inverting) on the component element.
 
-<code-well-header>
-  <dt-mode-island class="d-p-200 d-bar8">
+<code-example>
+  <div class="d-bgc-contrast">
     <dt-breadcrumbs
-      ref="invertedBreadcrumbsExample"
+      v-dt-mode:invert
+      class="d-p-200 d-bar8"
       :breadcrumbs="[
         { href: '#', label: 'Root' },
         { href: '#', label: 'Section' },
         { href: '#', label: 'Current Page', selected: true },
       ]"
     />
-  </dt-mode-island>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.invertedBreadcrumbsExample'
-vueCode='
-<dt-mode-island>
-  <dt-breadcrumbs :breadcrumbs="breadcrumbs" />
-</dt-mode-island>
-'
-showHtmlWarning />
+  </div>
+</code-example>
 
 ## Vue API
 

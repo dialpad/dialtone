@@ -60,17 +60,14 @@
 
   &__tabset-list {
       gap: var(--dt-spacing-0);
-      justify-content: space-between;
 
       &::after {
         background-color: var(--dt-color-surface-moderate) !important;
       }
 
-      .d-tab {
-        --tab-padding-y: var(--dt-spacing-100);
-        --tab-padding-x: var(--dt-spacing-50);
-
-        flex-grow: 1;
+      .d-tablist__item {
+        --button-padding-y: var(--dt-spacing-75);
+        --button-padding-x: var(--dt-spacing-1);
 
         &.d-tab--selected {
           &::after {

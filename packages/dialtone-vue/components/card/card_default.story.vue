@@ -11,10 +11,17 @@
       v-if="showHeader && variants"
       #header
     >
-      <p>Header</p>
+      <dt-text
+        kind="headline"
+        size="md"
+        as="h3"
+      >
+        Header
+      </dt-text>
       <dt-button
         size="xs"
         importance="clear"
+        kind="muted"
         aria-label="Menu button"
       >
         <template #startIcon>
@@ -39,13 +46,8 @@
         v-else
         tabindex="0"
       >
-        <p class="d-fs-200 d-fw-bold">
-          Lorem ipsum
-        </p>
-        <p class="d-fs-100">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
-        </p>
+        Default content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
       </div>
     </template>
     <template
@@ -55,7 +57,7 @@
       <dt-button>
         Button 1
       </dt-button>
-      <dt-button class="d-ml-100">
+      <dt-button>
         Button 2
       </dt-button>
     </template>
@@ -72,6 +74,7 @@
 import DtCard from './card.vue';
 import { DtIcon } from '@/components/icon';
 import { DtButton } from '@/components/button';
+import { DtText } from '@/components/text';
 
 export default {
   name: 'DtCardDefault',
@@ -79,6 +82,7 @@ export default {
     DtCard,
     DtButton,
     DtIcon,
+    DtText,
   },
 
   props: {

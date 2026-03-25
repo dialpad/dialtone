@@ -1,7 +1,7 @@
 <template>
   <dt-stack gap="400">
     <div>
-      <h3 class="d-mb-100">
+      <h3 class="d-mbe-100">
         Ai Contact Centers leftbar
       </h3>
       <dt-recipe-contact-centers-row
@@ -33,7 +33,7 @@
       </dt-recipe-contact-centers-row>
     </div>
     <div>
-      <h3 class="d-mb-100">
+      <h3 class="d-mbe-100">
         Ai Contact Centers selected
       </h3>
       <dt-recipe-contact-centers-row
@@ -66,7 +66,7 @@
       </dt-recipe-contact-centers-row>
     </div>
     <div>
-      <h3 class="d-mb-100">
+      <h3 class="d-mbe-100">
         Ai Contact Centers with unread messages
       </h3>
       <dt-recipe-contact-centers-row
@@ -101,7 +101,7 @@
       </dt-recipe-contact-centers-row>
     </div>
     <div>
-      <h3 class="d-mb-100">
+      <h3 class="d-mbe-100">
         Ai Contact Centers selected with unread messages
       </h3>
       <dt-recipe-contact-centers-row
@@ -136,7 +136,7 @@
       </dt-recipe-contact-centers-row>
     </div>
     <div>
-      <h3 class="d-mb-100">
+      <h3 class="d-mbe-100">
         Ai Contact Centers leftbar with hidden actions
       </h3>
       <dt-recipe-contact-centers-row
@@ -175,7 +175,7 @@
 <script>
 import { DtButton } from '@/components/button';
 import { DtStack } from '@/components/stack';
-import DtIconBellRing from '@dialpad/dialtone-icons/vue3/bell-ring';
+import DtIconBellRing from '@dialpad/dialtone-icons/vue/bell-ring';
 import DtRecipeContactCentersRow from './contact_centers_row.vue';
 
 export default {

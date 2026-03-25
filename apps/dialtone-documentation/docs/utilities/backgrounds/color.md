@@ -4,7 +4,7 @@ description: Utilities for setting the background color.
 keywords: ["bg color","background colour","bgc"]
 ---
 
-<dt-notice kind="warning" class="d-wmx100p d-mt-300" hideClose>
+<dt-notice kind="warning" class="d-wmx100p d-mbs-300" hideClose>
   Before using background color utilities, first consider <dt-link to="/design/colors/palette/#surface" kind="muted">semantic surface colors</dt-link>.
 </dt-notice>
 
@@ -109,6 +109,33 @@ Use `d-bgo{stop}` to change an element's background color opacity. You can also 
 <p class="d-bgc-critical d-bgo25">...</p>
 <p class="d-bgc-critical d-bgo10">...</p>
 <p class="d-bgc-critical d-bgo0">...</p>
+```
+
+## Inverted
+
+<dt-notice title="Tip" kind="info" class="d-wmx100p d-my-200">
+  Avoid <code>-inverted</code> utility variants. Use the <dt-link to="/components/mode-island.html#inverting">v-dt-mode directive</dt-link> with base classes instead — it automatically resolves the correct colors for the current mode.
+</dt-notice>
+
+<code-well-header>
+  <dt-stack
+    gap="500"
+    :direction="{ 'default': 'column', 'md': 'row' }"
+  >
+    <div
+      v-dt-mode:invert
+      v-for="color in ['primary', 'critical']"
+      class="d-p-200 d-bar4"
+      :class="`d-bgc-${color}`"
+    >
+      {{ color.charAt(0).toUpperCase() + color.slice(1) }}
+    </div>
+  </dt-stack>
+</code-well-header>
+
+```html
+<div v-dt-mode:invert class="d-bgc-primary">...</div>
+<div v-dt-mode:invert class="d-bgc-critical">...</div>
 ```
 
 ## Classes

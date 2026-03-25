@@ -3,7 +3,7 @@
     <dt-recipe-editor
       ref="editor"
       v-model="modelValue"
-      class="d-mb-400"
+      class="d-mbe-400"
       :input-aria-label="$attrs.inputAriaLabel"
       :auto-focus="$attrs.autoFocus"
       :editable="$attrs.editable"
@@ -11,6 +11,7 @@
       :placeholder="$attrs.placeholder"
       :max-height="$attrs.maxHeight"
       :show-add-link="$attrs.showAddLink"
+      :preserve-whitespace="$attrs.preserveWhitespace"
       :use-div-tags="$attrs.useDivTags"
       :show-bold-button="$attrs.showBoldButton"
       :show-italics-button="$attrs.showItalicsButton"

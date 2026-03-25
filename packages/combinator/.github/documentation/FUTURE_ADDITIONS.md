@@ -1,83 +1,74 @@
 # Future Additions
 
-## Add Supported Components
+## Completed
 
-A recent feature was added that allows Dialtone Vue components
-to be used in slots.
+### Add Supported Components
 
-[Pull Request](https://github.com/dialpad/dialtone-combinator/pull/14)
+Components can now be used in slots via the library system. `node.vue` recursively
+renders library components, and 28+ components have variant definitions with slot
+examples demonstrating nested Dialtone Vue components.
 
-This should allow some components to work as intended such as 'DtDropdown'.
-Any component that requires nesting of Dialtone Vue components now has the potential to
-be 'supported'.
+[Original Pull Request](https://github.com/dialpad/dialtone-combinator/pull/14)
 
-## Renderer Node Scoped Slots
+### Icon Control
 
-Add communication between the target component and the 'node' components in their slots
-when scoped slot data is present.
+A dedicated icon slot control (`control_icon_slot.vue`) provides a searchable dropdown
+of all Dialtone icons using `dt-recipe-combobox-with-popover`. Icons are detected by
+naming convention (`isIconSlot()` checks for names equal to 'icon' or ending with
+'Icon'/'Icons') rather than the originally proposed `@icon` documentation tag.
 
-There should be some sort of way to modify the renderer_target.vue `renderTarget()` 
-hyper-script function `h(...)` to provide the scoped slot data to slots containing
-dtc-node components.
+The control handles icon-to-template conversion, scoped slot bindings (`iconSize`),
+and clear/reset. Icons are passed through the existing `library` prop rather than a
+separate `iconLibrary` prop as originally proposed.
 
-There is some 
-[existing documentation](https://vuejs.org/guide/extras/render-function.html#rendering-slots)
-about rendering hyper-script with scoped slots.
+### Semantic Versioning (CI)
 
-## Icon Control
+Implemented via `release-ci.config.cjs` with semantic-release-plus. Release branches:
+`staging` (production), `beta`, `alpha`, `next` (prerelease). Tag format:
+`combinator/v${version}`.
 
-A control could be added to allow quick selection of icons for the user.
+---
 
-### Implementation
+## In Progress
 
-Currently, all the library components and icons are passed to a single `library` prop. 
-Another prop `iconLibrary` could be implemented to allow icons to be passed in separately.
+### Renderer Node Scoped Slots
 
-The `library` prop and the `iconLibrary` prop could be merged and passed to the renderer.
-The `iconLibrary` prop could be passed to the icon control to allow.
+Scoped slot data is partially supported. The renderer passes slot bindings through
+`renderer_target.vue`, and specific cases are handled (icon slots extract `iconSize`
+bindings, code generation detects used binding names from slot content).
 
-To know which members to allow the icon control, a custom `@icon` tag could be added
-to the dialtone-vue documentation. If a slot contains this `@icon` tag in its documentation
-it should allow either the default 'slot' control or 'icon' control to be selected, with
-the 'icon' control as the default.
+The general case — full communication of arbitrary scoped slot data between the target
+component and node components — is not yet complete. The existing icon slot pattern
+(`hasIconSizeBinding`) could be generalized so that any slot with scoped data
+automatically makes those bindings available to its content.
 
-This can be implemented using `getSlotControls()` in option_bar.vue.
+[Vue render function slots documentation](https://vuejs.org/guide/extras/render-function.html#rendering-slots)
 
-## Class Control
+### Sidebar Theming
 
-A control that allows quick selection and suggestions of dialtone utility classes.
+The settings system supports a light/dark theme toggle, and the code panel and renderer
+respond to it via `dtc-theme--${theme}` classes. The sidebar (option bar) does not yet
+fully respond to theme changes. Extending theming to the sidebar would be mostly CSS
+work to ensure the option bar respects the existing theme classes.
 
-### Implementation
+---
 
-Currently, the user can usually pass a string, array, or object to a 'class' prop
-(based on the prop type).
+## Future
 
-A 'class' control could be implemented to replace these 3 controls for each class prop.
+### Class Control
 
-A good idea would be to use the 'combobox with multiselect' Dialtone Vue recipe and
-somehow provide a list of all the dialtone utility classes as suggestions.
+A control that allows quick selection and suggestions of Dialtone utility classes.
 
-There should also be functionality to allow the user to type in non dialtone classes
-which I think is already supported by the component.
+Props with a `Class` suffix (e.g., `labelClass`) are currently treated as regular
+string or selection controls. A dedicated class control using 'combobox with multiselect'
+could replace these, providing a list of Dialtone utility classes as suggestions while
+still allowing custom class input.
 
-To know which members to allow the icon control, a custom `@class` tag could be added
-to the dialtone-vue documentation. If a prop contains this `@class` tag in its documentation
-it should disallow selection of the 'string' 'array' and 'object' controls and
-allow the 'class' control to be selected with 'class' being the default.
+#### Implementation
 
-This can be implemented using `getBindingControls()` in option_bar.vue, possibly even
-a new `getPropControls()` could be implemented to abstract the logic since
-this will only be possible for props.
+Detection could use naming convention (props ending in `Class`) similar to how icon
+slots are detected, rather than the originally proposed `@class` documentation tag.
 
-## Semantic Versioning (CI)
-
-Currently, releases have to be manually categorized. A semantic version
-implementation similar to Dialtone or Dialtone Vue would be good.
-
-## Sidebar Theming
-
-Currently, the theming only affects the code panel area and the renderer area.
-This was intended to be extended to the sidebar as well.
-
-This will allow the entire combinator to be dark mode or light mode, fitting into
-the consumer website and being able to match the theme.
+This can be implemented using `getBindingControls()` in option_bar.vue. A dedicated
+`getPropControls()` could be added to abstract the logic since this would only apply
+to props.

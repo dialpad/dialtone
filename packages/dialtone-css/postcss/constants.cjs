@@ -27,6 +27,7 @@ module.exports = {
     1: 'radius-100',
     2: 'radius-200',
     4: 'radius-300',
+    6: 'radius-350',
     8: 'radius-400',
     12: 'radius-450',
     16: 'radius-500',

@@ -1,14 +1,35 @@
+ 
 export default {
   default: {
     slots: {
       default: {
-        initialValue: 'Message body with <a href="#" class="d-link">a link</a>.',
+        initialValue: 'Message body with <dt-link to="/path/to/">a link</dt-link>.',
       },
     },
     props: {
       title: {
-        initialValue: 'Base title (optional)',
+        initialValue: 'Base title',
       },
+    },
+  },
+
+  'info with action and hide close': {
+    props: {
+      title: { initialValue: 'Info title' },
+      kind: { initialValue: 'info' },
+      hideClose: { initialValue: true },
+    },
+    slots: {
+      default: { initialValue: 'Message body with <dt-link to="/path/to/">a link</dt-link>.' },
+      action: { initialValue: '<dt-button size="sm" importance="outlined" kind="muted">Action</dt-button>' },
+    },
+  },
+
+  'important warning with no message': {
+    props: {
+      title: { initialValue: 'Warning title' },
+      kind: { initialValue: 'warning' },
+      important: { initialValue: true },
     },
   },
 };

@@ -67,7 +67,7 @@
           <dt-stack
             direction="row"
             gap="100"
-            class="d-pb-100 d-px-100"
+            class="d-pbe-100 d-px-100"
           >
             <dt-link
               v-for="section in sections"
@@ -144,7 +144,7 @@ import { ref, h, onErrorCaptured, onMounted, defineComponent, markRaw } from 'vu
 import { DtLink } from '@/components/link';
 import { DtStack } from '@/components/stack';
 import { DtText } from '@/components/text';
-import { DtIconExternalLink } from '@dialpad/dialtone-icons/vue3';
+import { DtIconExternalLink } from '@dialpad/dialtone-icons/vue';
 
 const props = defineProps({
   title: {
@@ -255,5 +255,8 @@ onMounted(async () => {
 <style scoped>
 .kitchen-sink__section {
   scroll-margin-block-start: var(--dt-layout-150);
+}
+[outline] {
+  outline: 2px solid orangered;
 }
 </style>

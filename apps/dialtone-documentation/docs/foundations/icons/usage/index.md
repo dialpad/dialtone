@@ -11,7 +11,7 @@ keywords: ["how to use icons","icon guidelines"]
 
 Find a list of available icons in [DT Core: Icons](https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT8-Icon-Library), or search the icons in the search library within your Figma file.
 
-<dt-stack class="d-gc2" direction="column" gap="200">
+<dt-stack class="d-gc2" direction="column" gap="500">
 <img alt="Figma Search Icon" src="/assets/images/figma-search-icon.gif" style="border-radius: var(--dt-size-radius-400)">
 <p class="d-body--md d-fc-tertiary">Swap instances in Figma by holding ⌘ + ⌥ on Mac, or Ctrl + Alt on Windows.</p>
 </dt-stack>
@@ -46,7 +46,7 @@ import { DtIconCreditCard } from '@dialpad/dialtone-icons/vue2';
 ### Vue 3
 
 ```js
-import { DtIconCreditCard } from '@dialpad/dialtone-icons/vue3';
+import { DtIconCreditCard } from '@dialpad/dialtone-icons/vue';
 <dt-icon-credit-card size="500" aria-label="Description" />
 ```
 
@@ -63,32 +63,32 @@ Some icons are linked to specific actions, like the Settings gear <dt-icon name=
 The icon size is defined based on the context and text size next to it. These are the only available size options and no overrides should be needed to properly size the icons.
 </div>
 
-<dt-stack direction="row" gap="200" class="d-gc1 d-bgc-secondary d-p-200 d-px-400 d-bar16 d-ai-flex-start d-jc-space-between">
-  <dt-stack gap="200" class="d-ai-center">
+<dt-stack direction="row" gap="500" class="d-gc1 d-bgc-secondary d-p-200 d-px-400 d-bar16 d-ai-flex-start d-jc-space-between">
+  <dt-stack gap="500" align="center">
     <code>200</code>
     <dt-icon name="food" size="200" />
   </dt-stack>
-  <dt-stack gap="200" class="d-ai-center">
+  <dt-stack gap="500" align="center">
     <code>300</code>
     <dt-icon name="food" size="300" />
   </dt-stack>
-  <dt-stack gap="200" class="d-ai-center">
+  <dt-stack gap="500" align="center">
     <code>400</code>
     <dt-icon name="food" size="400" />
   </dt-stack>
-  <dt-stack gap="200" class="d-ai-center">
+  <dt-stack gap="500" align="center">
     <code>500</code>
     <dt-icon name="food" size="500" />
   </dt-stack>
-  <dt-stack gap="200" class="d-ai-center">
+  <dt-stack gap="500" align="center">
     <code>600</code>
     <dt-icon name="food" size="600" />
   </dt-stack>
-  <dt-stack gap="200" class="d-ai-center">
+  <dt-stack gap="500" align="center">
     <code>700</code>
     <dt-icon name="food" size="700" />
   </dt-stack>
-  <dt-stack gap="200" class="d-ai-center">
+  <dt-stack gap="500" align="center">
     <code>800</code>
     <dt-icon name="food" size="800" />
   </dt-stack>

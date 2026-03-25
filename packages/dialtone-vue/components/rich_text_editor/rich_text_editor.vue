@@ -373,6 +373,14 @@ export default {
     },
 
     /**
+     * Whether the input allows background color to be introduced in the text.
+     */
+    allowBackgroundColor: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
      * Whether the input allows font size to be introduced in the text.
      */
     allowFontSize: {
@@ -384,6 +392,14 @@ export default {
      * Whether the input allows different font-families to be introduced in the text.
      */
     allowFontFamily: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Whether the input allows line height to be introduced in the text.
+     */
+    allowLineHeight: {
       type: Boolean,
       default: false,
     },
@@ -420,6 +436,18 @@ export default {
     hideLinkBubbleMenu: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * Controls how whitespace is handled when parsing HTML content.
+     * - 'full': All whitespace is preserved
+     * - true: Whitespace in inline content is preserved, whitespace-only nodes between blocks are removed
+     * - false: Standard HTML whitespace collapsing
+     * @values full, true, false
+     */
+    preserveWhitespace: {
+      type: [Boolean, String],
+      default: 'full',
     },
 
     /**
@@ -898,13 +926,17 @@ export default {
         }));
       }
 
-      if (this.allowFontFamily || this.allowFontColor || this.allowFontSize) {
+      if (this.allowFontFamily ||
+        this.allowFontColor ||
+        this.allowFontSize ||
+        this.allowBackgroundColor ||
+        this.allowLineHeight) {
         extensions.push(TextStyleKit.configure({
           color: this.allowFontColor,
-          backgroundColor: false,
+          backgroundColor: this.allowBackgroundColor,
           fontFamily: this.allowFontFamily,
           fontSize: this.allowFontSize,
-          lineHeight: false,
+          lineHeight: this.allowLineHeight,
         }));
       }
 
@@ -986,7 +1018,7 @@ export default {
         extensions: this.extensions,
         shouldRerenderOnTransaction: false,
         parseOptions: {
-          preserveWhitespace: 'full',
+          preserveWhitespace: this.preserveWhitespace,
         },
 
         editorProps: {
@@ -1118,7 +1150,10 @@ export default {
       }
 
       // Otherwise replace the content (resets the cursor position).
-      this.editor.commands.setContent(newValue, { emitUpdate: false, parseOptions: { preserveWhitespace: 'full' }});
+      this.editor.commands.setContent(newValue, {
+        emitUpdate: false, 
+        parseOptions: { preserveWhitespace: this.preserveWhitespace },
+      });
     },
 
     destroyEditor () {

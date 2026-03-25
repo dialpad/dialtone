@@ -133,7 +133,7 @@
         type="ai"
       />
     </dt-stack>
-    <h2 class="d-mt-400">
+    <h2 class="d-mbs-400">
       Kind: Count
     </h2>
     <dt-stack
@@ -200,7 +200,7 @@ import {
   DtIconLock,
   DtIconMessage,
   DtIconRecordFilled,
-} from '@dialpad/dialtone-icons/vue3';
+} from '@dialpad/dialtone-icons/vue';
 
 export default {
   name: 'DtBadgeExamples',

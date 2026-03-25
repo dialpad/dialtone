@@ -15,6 +15,19 @@ export const TAB_LIST_IMPORTANCE_MODIFIERS = {
   borderless: 'd-tablist--no-border',
 };
 
+export const TAB_ORIENTATIONS = ['horizontal', 'vertical'];
+
+export const TAB_ORIENTATION_MODIFIERS = {
+  vertical: 'd-tablist--vertical',
+};
+
 export const TAB_ACTIVATION_MODES = ['auto', 'manual'];
 
 export const TAB_GROUP_KINDS = ['default', 'muted'];
+
+export const TAB_SPREADS = ['none', 'grow', 'equal'];
+
+export const TAB_SPREAD_MODIFIERS = {
+  grow: 'd-tablist--spread-grow',
+  equal: 'd-tablist--spread-equal',
+};

@@ -3,7 +3,7 @@
     <dt-recipe-editor
       ref="editor"
       v-model="modelValue"
-      class="d-mb-400"
+      class="d-mbe-400"
       :input-aria-label="$attrs.inputAriaLabel"
       :auto-focus="$attrs.autoFocus"
       :editable="$attrs.editable"
@@ -11,6 +11,7 @@
       :placeholder="$attrs.placeholder"
       :max-height="$attrs.maxHeight"
       :show-add-link="$attrs.showAddLink"
+      :preserve-whitespace="preserveWhitespace"
       :use-div-tags="useDivTags"
       :show-bold-button="$attrs.showBoldButton"
       :show-italics-button="$attrs.showItalicsButton"
@@ -29,9 +30,11 @@
       :show-font-color-button="showFontColorButton"
       :show-font-style-button="showFontStyleButton"
       :show-font-size-button="showFontSizeButton"
+      :allow-background-color="allowBackgroundColor"
+      :allow-line-height="allowLineHeight"
       :show-variable-button="showVariableButton"
       :variable-categories="variableCategories"
-      :allow-tables="$attrs.allowTables"
+      :allow-tables="allowTables"
       :allow-image-resize="allowImageResize"
       @focus="$attrs.onFocus"
       @blur="$attrs.onBlur"
@@ -60,7 +63,11 @@ export default {
       showFontColorButton: this.$attrs.showFontColorButton ?? true,
       showFontStyleButton: this.$attrs.showFontStyleButton ?? true,
       showFontSizeButton: this.$attrs.showFontSizeButton ?? true,
+      allowBackgroundColor: this.$attrs.allowBackgroundColor ?? true,
+      allowLineHeight: this.$attrs.allowLineHeight ?? true,
       useDivTags: this.$attrs.useDivTags ?? true,
+      allowTables: this.$attrs.allowTables ?? true,
+      preserveWhitespace: this.$attrs.preserveWhitespace ?? false,
       variableCategories: this.$attrs.variableCategories ?? [
         {
           name: 'Agent',

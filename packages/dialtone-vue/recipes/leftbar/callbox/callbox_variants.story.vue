@@ -243,7 +243,7 @@
           >
             <dt-icon-users
               size="100"
-              class="d-mr-25"
+              class="d-mie-25"
             />
             <span>3</span>
           </dt-stack>
@@ -337,7 +337,7 @@
             <dt-stack
               direction="row"
               gap="100"
-              class="d-pl-25"
+              class="d-pis-25"
             >
               <dt-stack
                 class="d-ai-center d-w24"
@@ -406,7 +406,7 @@ import {
   DtIconMic,
   DtIconUsers,
   DtIconWaveform,
-} from '@dialpad/dialtone-icons/vue3';
+} from '@dialpad/dialtone-icons/vue';
 import DtItemLayout from '@/components/item_layout/item_layout.vue';
 import DtStack from '@/components/stack/stack.vue';
 import chattingPersonImage from '@/common/assets/chatting-person-example.png';

@@ -129,7 +129,7 @@ import { DtLazyShow } from '@/components/lazy_show';
 import { DtListItem } from '@/components/list_item';
 import { DtBadge } from '@/components/badge';
 import Modal from '@/common/mixins/modal';
-import { DtIconUser } from '@dialpad/dialtone-icons/vue3';
+import { DtIconUser } from '@dialpad/dialtone-icons/vue';
 import { hasSlotContent } from '@/common/utils';
 
 export default {

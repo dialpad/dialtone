@@ -1,10 +1,10 @@
 <template>
   <div
     data-qa="dt-popover-header-footer"
-    :class="{
+    :class="[{
       'd-popover__header': type === 'header',
       'd-popover__footer': type === 'footer',
-    }"
+    }, wrapperClass]"
   >
     <div
       v-if="hasSlotContent($slots.content)"
@@ -43,7 +43,7 @@
 
 <script>
 import { DtButton } from '@/components/button';
-import { DtIconClose } from '@dialpad/dialtone-icons/vue3';
+import { DtIconClose } from '@dialpad/dialtone-icons/vue';
 import { hasSlotContent, returnFirstEl } from '@/common/utils';
 import { DialtoneLocalization } from '@/localization';
 
@@ -62,6 +62,14 @@ export default {
       validator: function (value) {
         return ['header', 'footer'].includes(value);
       },
+    },
+
+    /**
+     * Additional class name for the outer header/footer wrapper element.
+     */
+    wrapperClass: {
+      type: [String, Array, Object],
+      default: '',
     },
 
     /**

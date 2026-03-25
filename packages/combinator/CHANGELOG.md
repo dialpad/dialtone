@@ -1,3 +1,16 @@
+# [1.2.0-next.2](https://github.com/dialpad/dialtone/compare/combinator/v1.2.0-next.1...combinator/v1.2.0-next.2) (2026-03-24)
+
+
+### Documentation
+
+* **Playground:** DLT-3119 refine playground UI and integrate across doc site ([#1127](https://github.com/dialpad/dialtone/issues/1127)) ([ba6b599](https://github.com/dialpad/dialtone/commit/ba6b599ad6b2cb0213491b9b4980d6fc914dc945))
+
+
+### Features
+
+* **Segmented Control:** DLT-413 new component ([#1144](https://github.com/dialpad/dialtone/issues/1144)) ([ad4c6c3](https://github.com/dialpad/dialtone/commit/ad4c6c364c28eef2b433821805b9d33040f10c55))
+* **Tabs:** DLT-3162 add spread prop for horizontal distribution ([#1135](https://github.com/dialpad/dialtone/issues/1135)) ([6e7cd04](https://github.com/dialpad/dialtone/commit/6e7cd041a27aaff16bcfeafadc48b1856f7876dc))
+
 # [1.2.0-next.1](https://github.com/dialpad/dialtone/compare/combinator/v1.1.2-next.1...combinator/v1.2.0-next.1) (2026-03-02)
 
 

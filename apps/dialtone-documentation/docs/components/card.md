@@ -9,26 +9,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-card--defaul
 keywords: ["panel", "container", "box", "d-card", "DtCard", "dt-card", "tile", "surface"]
 ---
 
-<code-well-header>
-  <div class="d-card d-w-400">
-    <div class="d-card__header">
-      <dt-text as="p" kind="headline" size="md">
-        Lorem ipsum
-      </dt-text>
-      <button type="button" class="d-btn d-btn--xs d-btn--circle">
-        <dt-icon name="more-vertical" size="200" />
-      </button>
-    </div>
-    <div class="d-card__content">
-      Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
-    </div>
-    <div class="d-card__footer">
-      <dt-stack direction="row" gap="100">
-        <button type="button" class="d-btn d-btn--sm d-btn--outlined">Button</button>
-      </dt-stack>
-    </div>
-  </div>
-</code-well-header>
+<component-combinator component-name="DtCard" />
 
 ## Usage
 
@@ -53,260 +34,113 @@ They should be easy to scan for relevant and actionable information. Elements, l
 
 - It should only contain a single idea that may feature a call-to-action, or the option to navigate to more detailed content.
 - The content of a card should be concise and offer only a preview of detailed content.
-- The headings should set clear expectations about the card’s purpose.
+- The headings should set clear expectations about the card's purpose.
 
 ## Variants and Examples
 
 ### Base
 
-<code-well-header>
-  <div class="d-card d-w-400">
-    <div class="d-card__header">
-      <div>(header slot)</div>
-    </div>
-    <div class="d-card__content">
-      <div>(content slot)</div>
-    </div>
-    <div class="d-card__footer">
-      <div>(footer slot)</div>
-    </div>
-  </div>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div class="d-card d-w-400">
-  <div class="d-card__header">
-    <div>(header slot)</div>
-  </div>
-  <div class="d-card__content">
-    <div>(content slot)</div>
-  </div>
-  <div class="d-card__footer">
-    <div>(footer slot)</div>
-  </div>
-</div>
-'
-vueCode='
-<dt-card class="d-w-400">
-  <template #header>
-    (header slot)
-  </template>
-  <template #content>
-    (content slot)
-  </template>
-  <template #footer>
-    (footer slot)
-  </template>
-</dt-card>
-'
-showHtmlWarning />
+<code-example>
+  <dt-card class="d-w264" header-class="h:d-bgc-moderate-opaque" content-class="h:d-bgc-moderate-opaque" footer-class="h:d-bgc-moderate-opaque">
+    <template #header>
+      (header slot)
+    </template>
+    <template #content>
+      (content slot)
+    </template>
+    <template #footer>
+      (footer slot)
+    </template>
+  </dt-card>
+</code-example>
 
 ### With Header
 
-<code-well-header>
-  <div class="d-card d-w-400">
-    <div class="d-card__header">
-      <dt-text as="p" kind="headline" size="md">
-        Lorem ipsum
-      </dt-text>
-      <button type="button" class="d-btn d-btn--xs d-btn--circle">
-        <dt-icon name="more-vertical" size="200" />
-      </button>
-    </div>
-    <div class="d-card__content">
+<code-example>
+  <dt-card class="d-w264">
+    <template #header>
+      <dt-text as="p" kind="headline" size="md">Lorem ipsum</dt-text>
+      <dt-button
+        size="xs"
+        importance="clear"
+        kind="muted"
+        aria-label="Menu button"
+      >
+        <template #startIcon>
+          <dt-icon
+            name="more-vertical"
+            size="100"
+          />
+        </template>
+      </dt-button>
+    </template>
+    <template #content>
       Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
-    </div>
-  </div>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div class="d-card d-w-400">
-  <div class="d-card__header">
-    <dt-text as="p" kind="headline" size="md">
-      Lorem ipsum
-    </dt-text>
-    <button type="button" class="d-btn d-btn--xs d-btn--circle">
-      <dt-icon name="more-vertical" size="200" />
-    </button>
-  </div>
-  <div class="d-card__content">
-    Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
-  </div>
-</div>
-'
-vueCode='
-<dt-card class="d-w-400">
-  <template #header>
-    <dt-text as="p" kind="headline" size="md">Lorem ipsum</dt-text>
-    <dt-button
-      size="xs"
-      importance="clear"
-      aria-label="Menu button"
-    >
-      <template #startIcon>
-        <dt-icon
-          name="more-vertical"
-          size="100"
-        />
-      </template>
-    </dt-button>
-  </template>
-  <template #content>
-    Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
-  </template>
-</dt-card>
-'
-showHtmlWarning />
+    </template>
+  </dt-card>
+</code-example>
 
 ### With Footer
 
-<code-well-header>
-  <div class="d-card d-w-400">
-    <div class="d-card__content">
+<code-example>
+  <dt-card class="d-w264">
+    <template #content>
       Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
-    </div>
-    <div class="d-card__footer">
-      <dt-stack direction="row" gap="100">
-        <button type="button" class="d-btn d-btn--sm d-btn--outlined">Button</button>
-      </dt-stack>
-    </div>
-  </div>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div class="d-card d-w-400">
-  <div class="d-card__content">
-    Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
-  </div>
-  <div class="d-card__footer">
-    <dt-stack direction="row" gap="100">
-      <button type="button" class="d-btn d-btn--sm d-btn--outlined">Button</button>
-    </dt-stack>
-  </div>
-</div>
-'
-vueCode='
-<dt-card class="d-w-400">
-  <template #content>
-    Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
-  </template>
-  <template #footer>
-    <dt-button
-      importance="outlined"
-      size="sm"
-    >
-      Button
-    </dt-button>
-  </template>
-</dt-card>
-'
-showHtmlWarning />
+    </template>
+    <template #footer>
+      <dt-button
+        importance="outlined"
+        size="sm"
+      >
+        Button
+      </dt-button>
+    </template>
+  </dt-card>
+</code-example>
 
 ### Content Only
 
-<code-well-header>
-  <div class="d-card d-w-400">
-    <div class="d-card__content">
+<code-example>
+  <dt-card class="d-w264">
+    <template #content>
       Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
-    </div>
-  </div>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div class="d-card d-w-400">
-  <div class="d-card__content">
-    Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
-  </div>
-</div>
-'
-vueCode='
-<dt-card class="d-w-400">
-  <template #content>
-    Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
-  </template>
-</dt-card>
-'
-showHtmlWarning />
+    </template>
+  </dt-card>
+</code-example>
 
 ### With Header, Footer and Scrollable Content
 
-<code-well-header>
-  <div class="d-card d-w-400">
-    <div class="d-card__header">
-      <dt-text as="p" kind="headline" size="md">
-        Lorem ipsum
-      </dt-text>
-      <button type="button" class="d-btn d-btn--xs d-btn--circle">
-        <dt-icon name="more-vertical" size="200" />
-      </button>
-    </div>
-    <div class="d-card__content d-h-100">
-      Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
-    </div>
-    <div class="d-card__footer">
-      <dt-stack direction="row" gap="100">
-        <button type="button" class="d-btn d-btn--sm d-btn--outlined">Button</button>
-      </dt-stack>
-    </div>
-  </div>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div class="d-card d-w-400">
-  <div class="d-card__header">
-    <dt-text as="p" kind="headline" size="md">
-      Lorem ipsum
-    </dt-text>
-    <button type="button" class="d-btn d-btn--xs d-btn--circle">
-      <dt-icon name="more-vertical" size="200" />
-    </button>
-  </div>
-  <div class="d-card__content d-h-125">
-    Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
-  </div>
-  <div class="d-card__footer">
-    <dt-stack direction="row" gap="100">
-      <button type="button" class="d-btn d-btn--sm d-btn--outlined">Button</button>
-    </dt-stack>
-  </div>
-</div>
-'
-vueCode='
-<dt-card max-height="50px" class="d-w-400">
-  <template #header>
-    <dt-text as="p" kind="headline" size="md">Lorem ipsum</dt-text>
-    <dt-button
-      size="xs"
-      importance="clear"
-      aria-label="Menu button"
-    >
-      <template #startIcon>
-        <dt-icon
-          name="more-vertical"
-          size="100"
-        />
-      </template>
-    </dt-button>
-  </template>
-  <template #content>
-    Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
-  </template>
-  <template #footer>
-    <dt-button
-      importance="outlined"
-      size="sm"
-    >
-      Button
-    </dt-button>
-  </template>
-</dt-card>
-'
-showHtmlWarning />
+<code-example>
+  <dt-card class="d-w264" content-class="d-pie-0">
+    <template #header>
+      <dt-text as="p" kind="headline" size="md">Lorem ipsum</dt-text>
+      <dt-button
+        size="xs"
+        importance="clear"
+        kind="muted"
+        aria-label="Menu button"
+      >
+        <template #startIcon>
+          <dt-icon
+            name="more-vertical"
+            size="100"
+          />
+        </template>
+      </dt-button>
+    </template>
+    <template #content>
+      <div class="d-h72 d-pie-200" v-dt-scrollbar:never>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
+    </template>
+    <template #footer>
+      <dt-button
+        importance="outlined"
+        size="sm"
+      >
+        Button
+      </dt-button>
+    </template>
+  </dt-card>
+</code-example>
 
 ## Vue API
 

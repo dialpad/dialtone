@@ -9,9 +9,7 @@ figma_url: https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT-Core%3A-Icons-7?
 keywords: ["svg","glyph","symbol","d-icon","DtIcon","dt-icon"]
 ---
 
-<code-well-header>
-  <dt-icon-user-plus />
-</code-well-header>
+<component-combinator component-name="DtIcon" />
 
 Check out our complete icon collection in the [icon catalog](/foundations/icons/index.md#icon-catalog).
 
@@ -22,9 +20,11 @@ Here is an example that demonstrates how you can use the icon component in your 
 ### With Tree Shaking (Preferred)
 
 ```js
-import { DtIconUserPlus } from '@dialpad/dialtone-icons/vue3';
+import { DtIconUserPlus } from '@dialpad/dialtone-icons/vue';
 
-<dt-icon-user-plus size="500" />
+<template>
+  <dt-icon-user-plus size="500" />
+</template>
 ```
 
 ### Without Tree Shaking (Deprecated)
@@ -32,24 +32,26 @@ import { DtIconUserPlus } from '@dialpad/dialtone-icons/vue3';
 ```js
 import { DtIcon } from '@dialpad/dialtone'
 
-<dt-icon name="user-plus" size="500" />
+<template>
+  <dt-icon name="user-plus" size="500" />
+</template>
 ```
 
 ## Changing Sizes
 
-<div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols3">
+<div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols3 d-ai-center">
 
 Adjust the size using the `size` prop. Note that sizes 600, 700, and 800 are exclusively for devices.
 
 <div class="d-gc2">
-<code-well-header>
+<code-example only-show="demo">
   <div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols2 d-w100p">
     <dt-stack direction="row" align="center" justify="center">
       <dt-icon-settings :size="selectedSize" />
     </dt-stack>
     <dt-select-menu label="Size" :options="sizeValues" v-model="selectedSize" />
   </div>
-</code-well-header>
+</code-example>
 
 ```js
 <dt-icon-settings size="500" />
@@ -60,25 +62,25 @@ Adjust the size using the `size` prop. Note that sizes 600, 700, and 800 are exc
 
 ## Changing Color
 
-<div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols3">
+<div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols3 d-ai-center">
 
 The icon's color inherits from the parent's foreground color.
 
 <div class="d-gc2">
-<code-well-header>
+<code-example only-show="demo">
 <div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols2 d-w100p">
   <dt-stack direction="row" align="center" justify="center">
-    <dt-stack :class="selectedColor" direction="row" as="div" gap="50">
+    <dt-stack :class="selectedColor" direction="row" gap="300">
       <dt-icon-settings size="300" />
       <dt-text>Settings</dt-text>
     </dt-stack>
   </dt-stack>
   <dt-select-menu label="Color" :options="iconColors" v-model="selectedColor" />
 </div>
-</code-well-header>
+</code-example>
 
-```js
-<dt-stack class="d-fc-success">
+```html
+<dt-stack class="d-fc-success" direction="row" gap="300">
   <dt-icon-settings size="300" />
   <dt-text>Settings</dt-text>
 </dt-stack>
@@ -87,23 +89,23 @@ The icon's color inherits from the parent's foreground color.
 </div>
 </div>
 
-<div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols3">
+<div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols3 d-ai-center">
 
 When setting the color of an icon take these into consideration:
 
 <div class="d-gc1">
-<dt-stack direction="row" align="center" class="d-p-200 d-hmn164 d-bar8" style="background: var(--dt-color-purple-100)">
-<dt-stack direction="row" as="section" gap="1" class="d-bgc-primary d-bc-default d-bar32 d-py-100 d-px-200 d-w100p">
-<dt-stack direction="row" as="section" gap="50" class="d-fl1">
-<dt-icon name="headphones" size="300" ariaLabel="Headphones icon" />
-<dt-text kind="body" truncate class="d-w100p d-wmx102">Ai Contact Center</dt-text>
-</dt-stack>
-<dt-stack direction="row" as="section" gap="50">
-<dt-icon class="d-fc-success" name="bell" size="200" ariaLabel="Bell Icon" />
-<dt-text kind="body" size="sm" tone="success">Available</dt-text>
-</dt-stack>
-</dt-stack>
-</dt-stack>
+  <dt-stack direction="row" align="center" class="d-p-200 d-hmn164 d-bar8" style="background: var(--dt-color-purple-100)">
+  <dt-stack direction="row" as="section" gap="100" class="d-bgc-primary d-bc-default d-bar32 d-py-100 d-px-200 d-w100p">
+    <dt-stack direction="row" as="section" gap="300" class="d-fl1">
+      <dt-icon name="headphones" size="300" ariaLabel="Headphones icon" />
+      <dt-text kind="body" truncate class="d-w100p d-wmx102">Ai Contact Center</dt-text>
+    </dt-stack>
+    <dt-stack direction="row" as="section" gap="300">
+      <dt-icon class="d-fc-success" name="bell" size="200" ariaLabel="Bell Icon" />
+      <dt-text kind="body" size="sm" tone="success">Available</dt-text>
+    </dt-stack>
+  </dt-stack>
+  </dt-stack>
 
 - Match the icon color with the text color when pairing them.
 - All icons are monochrome.
@@ -111,46 +113,46 @@ When setting the color of an icon take these into consideration:
 </div>
 
 <div class="d-gc1">
-<dt-stack direction="row" align="center" class="d-bgc-critical-subtle-opaque d-p-200 d-hmn164 d-bar8">
-<dt-stack direction="row" as="section" gap="1" class="d-bgc-primary d-bc-default d-bar32 d-py-100 d-px-200 d-w100p">
-<dt-stack direction="row" as="section" gap="50" class="d-fl1">
-<dt-icon name="headphones" size="300" ariaLabel="Headphones icon" />
-<dt-text kind="body" truncate class="d-w100p d-wmx102">Ai Contact Center</dt-text>
-</dt-stack>
-<dt-stack direction="row" as="section" gap="50">
-<dt-icon class="d-fc-critical" name="bell" size="200" ariaLabel="Bell Icon" />
-<dt-text kind="body" size="sm" tone="success">Available</dt-text>
-</dt-stack>
-</dt-stack>
-</dt-stack>
+  <dt-stack direction="row" align="center" class="d-bgc-critical-subtle-opaque d-p-200 d-hmn164 d-bar8">
+  <dt-stack direction="row" as="section" gap="100" class="d-bgc-primary d-bc-default d-bar32 d-py-100 d-px-200 d-w100p">
+  <dt-stack direction="row" as="section" gap="300" class="d-fl1">
+    <dt-icon name="headphones" size="300" ariaLabel="Headphones icon" />
+    <dt-text kind="body" truncate class="d-w100p d-wmx102">Ai Contact Center</dt-text>
+  </dt-stack>
+  <dt-stack direction="row" as="section" gap="300">
+    <dt-icon class="d-fc-critical" name="bell" size="200" ariaLabel="Bell Icon" />
+    <dt-text kind="body" size="sm" tone="success">Available</dt-text>
+  </dt-stack>
+  </dt-stack>
+  </dt-stack>
 
-- Don’t use different colors for text and icons.
-- Don’t use more than one color within an icon.
+- Don't use different colors for text and icons.
+- Don't use more than one color within an icon.
 
 </div>
 </div>
 
 ## Icon and Text Alignment
 
-<div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols3">
+<div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols3 d-ai-center">
 
 We encourage utilizing the [Stack component](/components/stack.md) for aligning elements both horizontally and vertically.
 
 <div class="d-gc2">
-<code-well-header>
+<code-example only-show="demo">
   <div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols2 d-w100p">
     <dt-stack direction="row" align="center" justify="center">
-      <dt-stack :direction="selectedDirection" class="d-fl-center" gap="50">
+      <dt-stack :direction="selectedDirection" class="d-fl-center" gap="300">
       <dt-icon-settings size="300" />
       <dt-text>Settings</dt-text>
       </dt-stack>
     </dt-stack>
     <dt-select-menu label="Direction" :options="stackDirection" v-model="selectedDirection" />
   </div>
-</code-well-header>
+</code-example>
 
 ```html
-<dt-stack direction="row" class="d-fl-center" gap="50">
+<dt-stack direction="row" class="d-fl-center" gap="300">
   <dt-icon-settings size="300" />
   <dt-text>Settings</dt-text>
 </dt-stack>
@@ -200,7 +202,7 @@ Dialtone provides eight sizes for icons. Each of the sizes represents the width 
 <script setup>
   import { ref } from 'vue';
   import sizes from '@data/icons-sizes.json';
-  import { DtIconUserPlus, DtIconSettings } from '@dialpad/dialtone-icons/vue3';
+  import { DtIconUserPlus, DtIconSettings } from '@dialpad/dialtone-icons/vue';
 
   const sizeValues = sizes.map(item => ({ value: item.size, label: item.size }));
 

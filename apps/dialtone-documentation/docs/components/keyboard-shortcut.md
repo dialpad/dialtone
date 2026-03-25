@@ -9,24 +9,15 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["hotkey", "key binding", "shortcut key", "d-kbd", "DtKeyboardShortcut", "dt-keyboard-shortcut", "kbd", "accelerator"]
 ---
 
-<code-well-header>
-  <dt-keyboard-shortcut shortcut="{cmd}+Ctrl+X"/>
-</code-well-header>
+<component-combinator component-name="DtKeyboardShortcut" />
 
 ## Base
 
 Keyboard shortcut outlines a key combination with a border to represent a keyboard shortcut. `+` will be rendered as an icon rather than text. Supported symbol tags can be used in the shortcut prop, see the [Props, Slots & Events](#vue-api) section.
 
-<code-well-header>
-  <dt-keyboard-shortcut ref="baseExample" shortcut="{cmd}+Ctrl+X"/>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs.baseExample"
-vueCode='
-<dt-keyboard-shortcut shortcut="{cmd}+Ctrl+X"/>
-'
-/>
+<code-example>
+  <dt-keyboard-shortcut shortcut="{cmd}+Ctrl+X"/>
+</code-example>
 
 ## Usage
 
@@ -39,86 +30,49 @@ vueCode='
 
 ### Inverted
 
-<dt-notice title="Deprecated" kind="error" class="d-wmx100p d-my-200">
-  The <code>inverted</code> prop has been deprecated in favor of using <router-link to="mode-island.html"><DtLink>DtModeIsland</DtLink></router-link> as a wrapper.
+<dt-notice title="Deprecated" kind="info" class="d-wmx100p d-my-200" hide-close>
+  The <code>inverted</code> prop has been deprecated. Use the
+  <dt-link to="mode-island.html#inverting">v-dt-mode directive</dt-link>
+  instead.
 </dt-notice>
 
-In place of the <code>inverted</code> prop, use the <router-link to="mode-island.html"><DtLink>DtModeIsland</DtLink></router-link> component as a wrapper.
+In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#inverting) on the component element.
 
-<code-well-header>
-  <dt-mode-island class="d-p-200 d-bar8">
-    <dt-keyboard-shortcut ref="invertedExample" shortcut="{cmd}+Ctrl+X" />
-  </dt-mode-island>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.invertedExample'
-vueCode='
-<dt-mode-island>
-  <dt-keyboard-shortcut shortcut="{cmd}+Ctrl+X" />
-</dt-mode-island>
-'
-showHtmlWarning />
+<code-example>
+  <div class="d-bgc-contrast d-p-200">
+    <dt-keyboard-shortcut v-dt-mode:invert shortcut="{cmd}+Ctrl+X" />
+  </div>
+</code-example>
 
 ### Shortcut Size Variation
 
-<code-well-header>
+<code-example>
   <dt-keyboard-shortcut
     class="d-fs-200"
     shortcut="{cmd}+Y"
-    ref="sizeExample"
   />
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs.sizeExample"
-vueCode='
-<dt-keyboard-shortcut class="d-fs-200" shortcut="{cmd}+Y" />
-'
-/>
+</code-example>
 
 ### All Available Shortcut Aliases
 
-<code-well-header>
+<code-example>
   <dt-keyboard-shortcut
-    ref="allShortcuts"
-    shortcut="{cmd}+{opt}+{win}+{arrow-right}+{arrow-left}+{arrow-up}+{arrow-down}"
+    shortcut="{cmd}+{opt}+{win}+{arrow-right}+{arrow-left}+{arrow-up}+{arrow-down}+A"
   />
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs.allShortcuts"
-vueCode='
-<dt-keyboard-shortcut
-  shortcut="{cmd}+{opt}+{win}+{arrow-right}+{arrow-left}+{arrow-up}+{arrow-down}"
-/>
-'
-/>
+</code-example>
 
 ### Inline with Text and Screen Reader Text
 
-<code-well-header>
-  <div ref="inlineExample">
-  Press
-  <dt-keyboard-shortcut
-    screen-reader-text="Control plus F5"
-    shortcut="Ctrl + F5"
-  />
-  to hard refresh the page.
-  </div>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs.inlineExample"
-vueCode='
-Press
-<dt-keyboard-shortcut
-  screen-reader-text="Control plus F5"
-  shortcut="Ctrl + F5"
-/>
-to hard refresh the page.
-'
-/>
+<code-example>
+  <dt-text kind="body" size="md">
+    Press
+    <dt-keyboard-shortcut
+      screen-reader-text="Control plus F5"
+      shortcut="Ctrl + F5"
+    />
+    to hard refresh the page.
+  </dt-text>
+</code-example>
 
 ## Accessibility
 

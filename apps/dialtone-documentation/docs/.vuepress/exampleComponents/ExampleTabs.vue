@@ -6,6 +6,9 @@
     :inverted="inverted"
     :borderless="borderless"
     :disabled="disabled"
+    :spread="spread"
+    :orientation="orientation"
+    :tab-list-class="orientation === 'vertical' ? 'd-w264' : undefined"
     :activation-mode="activationMode"
     @before-change="confirmBeforeLeave"
   >
@@ -15,30 +18,24 @@
         panel-id="2"
         selected
       >
-        <p>
-          First tab
-        </p>
+        First tab
       </dt-tab>
       <dt-tab
         id="3"
         panel-id="4"
       >
-        <p>
-          Second tab
-        </p>
+        Second tab
       </dt-tab>
       <dt-tab
         id="5"
         panel-id="6"
         label="Third Label"
       >
-        <p>
-          Third tab
-        </p>
+        Third tab
       </dt-tab>
     </template>
     <div
-      class="d-ba d-bas-dashed d-mt16 d-bar4 d-bc-subtle"
+      class="d-ba d-baw2 d-bas-dashed d-bc-subtle d-w100p d-plc-center d-py48"
       :class="{
         'd-fc-primary-inverted': inverted,
       }"
@@ -114,6 +111,16 @@ export default {
     activationMode: {
       type: String,
       default: 'manual',
+    },
+
+    spread: {
+      type: String,
+      default: 'none',
+    },
+
+    orientation: {
+      type: String,
+      default: 'horizontal',
     },
   },
 

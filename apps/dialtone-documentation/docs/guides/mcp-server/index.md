@@ -106,7 +106,7 @@ Find CSS utility classes to style HTML elements. Use when your query mentions CS
 
 **Example queries:**
 
-```
+```text
 "padding 8px"       → d-p8, d-pt8, d-pr8, d-pb8, d-pl8, d-px8, d-py-100
 "display flex"      → d-d-flex, d-d-inline-flex
 "width 100%"        → d-w100p
@@ -127,7 +127,7 @@ Find design tokens (CSS variables) from Dialtone's design system. Use when your 
 
 **Example queries:**
 
-```
+```text
 "color foreground primary" → --dt-color-foreground-primary
 "spacing 100"              → --dt-spacing-100, --dt-spacing-100-negative
 "font family"              → --dt-font-family-body, --dt-font-family-expressive
@@ -147,7 +147,7 @@ Find Vue components from Dialtone's component library with props, events, and sl
 
 **Example queries:**
 
-```
+```text
 "button"   → DtButton, DtButtonGroup, DtBanner (29 results)
 "modal"    → DtModal, DtBanner, DtDropdown (6 results)
 "checkbox" → DtCheckbox, DtCheckboxGroup, DtRadio
@@ -171,11 +171,11 @@ Find Vue components from Dialtone's component library with props, events, and sl
 
 **Tool:** `search_icons`
 
-Find icons from Dialtone's icon library and learn how to use icon components. Icons are imported from `@dialpad/dialtone-icons/vue3`, not `@dialpad/dialtone-vue`.
+Find icons from Dialtone's icon library and learn how to use icon components. Icons are imported from `@dialpad/dialtone-icons/vue`, not `@dialpad/dialtone-vue`.
 
 **Example queries:**
 
-```
+```text
 "notification" → bell, bell-ring, bell-off, bell-plus
 "arrow up"     → arrow-up, arrow-up-down, arrow-up-left
 "profile"      → user
@@ -201,7 +201,7 @@ Find icons from Dialtone's icon library and learn how to use icon components. Ic
 
 When working on a component and need specific styling:
 
-```
+```text
 User: "What class adds padding 8px to all sides?"
 Claude: [Uses search_utility_classes tool]
 Result: d-p-100 (padding: var(--dt-spacing-100) which equals 8px)
@@ -211,7 +211,7 @@ Result: d-p-100 (padding: var(--dt-spacing-100) which equals 8px)
 
 When building UI and unsure what components exist:
 
-```
+```text
 User: "What button components are available in Dialtone?"
 Claude: [Uses search_components tool]
 Result: DtButton, DtButtonGroup, DtIconButton with complete
@@ -222,7 +222,7 @@ Result: DtButton, DtButtonGroup, DtIconButton with complete
 
 When implementing designs and need exact token values:
 
-```
+```text
 User: "What's the primary foreground color token?"
 Claude: [Uses search_tokens tool]
 Result: --dt-color-foreground-primary
@@ -234,11 +234,11 @@ Result: --dt-color-foreground-primary
 
 When adding icons to your interface:
 
-```
+```text
 User: "Show me all notification-related icons"
 Claude: [Uses search_icons tool]
 Result: bell, bell-ring, bell-off, bell-plus, bell-minus
-        Import: import { IconBell } from '@dialpad/dialtone-icons/vue3'
+        Import: import { IconBell } from '@dialpad/dialtone-icons/vue'
 ```
 
 ## Configuration
@@ -247,7 +247,7 @@ Result: bell, bell-ring, bell-off, bell-plus, bell-minus
 
 The server checks for updates automatically on startup. If a new version is available, you'll see:
 
-```
+```text
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⚠️  Dialtone MCP Server Update Available
    Current: v1.2.0

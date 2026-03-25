@@ -87,35 +87,31 @@
                 </dt-badge>
               </dt-stack>
             </div>
-            <a
+            <dt-button
               v-else-if="isExternalLink(subItem.link)"
               :href="subItem.link"
               target="_blank"
               rel="noopener noreferrer"
-              class="d-td-none"
+              importance="clear"
+              kind="muted"
+              label-class="d-jc-flex-start d-ta-left d-fw-normal"
+              :class="[
+                'dialtone-shell-btn d-w100p d-tw-pretty',
+                { 'd-pl48': depth === 0 },
+                { 'd-pl64': depth === 1 },
+              ]"
             >
-              <dt-button
-                importance="clear"
-                kind="muted"
-                label-class="d-jc-flex-start d-ta-left d-fw-normal"
-                :class="[
-                  'dialtone-shell-btn d-w100p',
-                  { 'd-pl48': depth === 0 },
-                  { 'd-pl64': depth === 1 },
-                ]"
-              >
-                <dt-stack as="span" direction="row" justify="space-between" class="d-w100p">
-                  {{ subItem.text }}
-                  <dt-badge
-                    v-if="subItem.status === 'beta'"
-                    class="d-fw-normal d-ml4"
-                    type="info"
-                  >
-                    Beta
-                  </dt-badge>
-                </dt-stack>
-              </dt-button>
-            </a>
+              <dt-stack as="span" direction="row" justify="space-between" class="d-w100p">
+                {{ subItem.text }}
+                <dt-badge
+                  v-if="subItem.status === 'beta'"
+                  class="d-fw-normal d-ml4"
+                  type="info"
+                >
+                  Beta
+                </dt-badge>
+              </dt-stack>
+            </dt-button>
             <dt-button
               v-else
               :to="subItem.link"

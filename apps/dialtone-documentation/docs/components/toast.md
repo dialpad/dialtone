@@ -9,64 +9,11 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["notification", "snackbar", "alert", "message", "d-toast", "DtToast", "dt-toast", "flash message"]
 ---
 
-<code-well-header>
-  <dt-stack direction="row" justify="center">
-    <example-toast show title="Title" class="d-ps-relative d-zi-base d-t-0" :fixed="false" />
-  </dt-stack>
-</code-well-header>
-
-<!-- <component-combinator component-name="DtToast" /> -->
+<component-combinator component-name="DtToast" />
 
 ## Variants and Examples
 
-<code-well-header>
-    <dt-stack direction="row" gap="400" align="end" class="d-w100p">
-        <div class="d-fl-grow1">
-            <dt-select-menu label="Style" :options="toastOptions" v-model="selectedKind" />
-        </div>
-        <dt-checkbox value="important" @input="toggleImportant">Important</dt-checkbox>
-        <dt-button @click="toggleToast">Toggle Example</dt-button>
-    </dt-stack>
-</code-well-header>
-
-<example-toast
-  class="d-zi-notification"
-  :show="showToast"
-  title="Title"
-  :important="important"
-  :kind="selectedKind"
-  @close="toggleToast"
-/>
-
-<code-example-tabs
-htmlCode='
-<aside class="d-toast-wrapper">
-  <div class="d-toast d-toast--base" role="status" aria-hidden="true">
-    <div class="d-toast__dialog">
-      <div class="d-notice__icon">...</div>
-      <div class="d-notice__content">
-        <h2 class="d-notice__title">...</h2>
-        <p class="d-notice__message">...</p>
-      </div>
-      <div class="d-notice__actions">...</div>
-    </div>
-  </div>
-</aside>
-
-<aside class="d-toast-wrapper">
-  <div class="d-toast d-toast--error" role="status" aria-hidden="true">...</div>
-</aside>
-<aside class="d-toast-wrapper">
-  <div class="d-toast d-toast--info" role="status" aria-hidden="true">...</div>
-</aside>
-<aside class="d-toast-wrapper">
-  <div class="d-toast d-toast--success" role="status" aria-hidden="true">...</div>
-</aside>
-<aside class="d-toast-wrapper">
-  <div class="d-toast d-toast--warning" role="status" aria-hidden="true">...</div>
-</aside>
-'
-vueCode='
+<code-example vueCode='
 <dt-toast
   title="Title"
   :show="showToast"
@@ -88,28 +35,31 @@ vueCode='
     </dt-button>
   </template>
 </dt-toast>
-'
-showHtmlWarning />
+'>
+  <dt-stack direction="row" gap="500" class="d-w100p">
+    <div class="d-fl-grow1">
+      <dt-select-menu :label-visible="false" label="Style" :options="toastOptions" v-model="selectedKind" />
+    </div>
+    <dt-checkbox value="important" @input="toggleImportant">Important</dt-checkbox>
+    <dt-button @click="toggleToast">Toggle Example</dt-button>
+  </dt-stack>
+</code-example>
+
+<example-toast
+  class="d-zi-notification"
+  :show="showToast"
+  title="Title"
+  :important="important"
+  :kind="selectedKind"
+  @close="toggleToast"
+/>
 
 ### With Duration
 
 It's recommended to use a time of at least 6000 ms (minimum duration validated in the component) to give users enough time to read the toast. Take into account that the time necessary to read and comprehend the message could vary in users. For instance, users using assistive technology, or users with language barriers could potentially need more time to read and understand the message.
 If the duration is not provided the toast won't disappear automatically.
 
-<code-well-header>
-  <dt-button @click="toggleDurationToast(true)">Show Example</dt-button>
-  <example-toast
-    class="d-zi-notification"
-    :show="showDurationToast"
-    title="Title"
-    @close="toggleDurationToast(false)"
-    @update:show="updateShow"
-    :duration="6000"
-  />
-</code-well-header>
-
-<code-example-tabs
-vueCode='
+<code-example vueCode='
 <dt-toast
   title="Title"
   :show="showDurationToast"
@@ -130,22 +80,31 @@ vueCode='
     </dt-button>
   </template>
 </dt-toast>
-'
-/>
+'>
+  <dt-button @click="toggleDurationToast(true)">Show Example</dt-button>
+  <example-toast
+    class="d-zi-notification"
+    :show="showDurationToast"
+    title="Title"
+    @close="toggleDurationToast(false)"
+    @update:show="updateShow"
+    :duration="6000"
+  />
+</code-example>
 
 ### With Self-Positioning
 
 If you need to self-position the toast at the top center, use the `d-toast-wrapper` Dialtone class:
 
-```html
-<aside class="d-toast-wrapper">
-  <dt-toast
-    :title="title"
-    :message="message"
-    :show="isShown"
-  ></dt-toast>
-</aside>
-```
+<code-example only-show="code">
+  <aside class="d-toast-wrapper">
+    <dt-toast
+      :title="title"
+      :message="message"
+      :show="isShown"
+    ></dt-toast>
+  </aside>
+</code-example>
 
 ## Vue API
 
