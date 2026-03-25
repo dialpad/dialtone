@@ -1,3 +1,16 @@
+# [4.50.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.49.0...dialtone-icons/v4.50.0-next.1) (2026-03-25)
+
+
+### Documentation
+
+* DLT-1510 DLT-1511 DLT-1512 site redesign and ia ([#968](https://github.com/dialpad/dialtone/issues/968)) ([6ea7eb9](https://github.com/dialpad/dialtone/commit/6ea7eb959f01bfb01c91c3b6a92465ed0c2e0f4b))
+* **Icons:** DLT-3220 update contributing and add claude rules and skill ([#1151](https://github.com/dialpad/dialtone/issues/1151)) ([296a83d](https://github.com/dialpad/dialtone/commit/296a83d082ba6d12d69a7592b8d89b988d60804c))
+
+
+### Features
+
+* **Icons:** DLT-3219 align star/sparkle icons with dp brand star ([#1152](https://github.com/dialpad/dialtone/issues/1152)) ([ef39afc](https://github.com/dialpad/dialtone/commit/ef39afc90c1d77330c121b3a010b7b0b959beddb))
+
 # [4.49.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.48.0...dialtone-icons/v4.49.0) (2026-03-17)
 
 
