@@ -1,3 +1,7 @@
+---
+description: "Merge staging into next branch following the Dialtone Next Merge Guide. Use when the user asks to merge staging into next, sync next with staging, or references the merge guide."
+---
+
 # /merge-next - Merge staging into next
 
 Executes the Dialtone Next Merge Guide: pulls both branches, merges staging into next, resolves conflicts, runs the color-stops migration, commits, builds, and tests.
