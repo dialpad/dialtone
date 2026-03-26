@@ -30,9 +30,14 @@ paths:
 
 ## Sizes
 
-- Interactive components: `xs`, `sm`, `md`, `lg`, `xl` (string).
-- Icons: numeric scale `100`–`800`.
-- Export from `*_constants.js`: `COMPONENT_SIZES` object + `COMPONENT_SIZE_DEFAULT`.
+- All component size props use a numeric ordinal scale: `100` (xs), `200` (sm), `300` (md), `400` (lg), `500` (xl).
+- Prop type: `[String, Number]`. Default: numeric (e.g., `default: 300`).
+- T-shirt aliases (`xs`, `sm`, `md`, `lg`, `xl`) remain in constants for backward compat but are deprecated.
+- `@values` JSDoc: list numeric only (e.g., `@values 100, 200, 300, 400, 500`). Do not list t-shirt aliases.
+- Text headline extends the scale: `500` (xl), `600` (2xl), `700` (3xl).
+- Icons: separate numeric scale `100`–`800` (unchanged, do not modify).
+- Shared scale definition: `packages/dialtone-vue/common/constants/sizes.js`.
+- Export from `*_constants.js`: `COMPONENT_SIZE_MODIFIERS` object with both numeric and t-shirt keys.
 
 ## Separation of Concerns
 
