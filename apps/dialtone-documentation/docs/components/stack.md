@@ -229,7 +229,7 @@ vueCode='
       align="start"
     >
       <dt-stack class="d-w100p md:d-w50p" gap="300">
-        <dt-text as="h3" kind="headline" size="md">Column</dt-text>
+        <dt-text as="h3" kind="headline" :size="300">Column</dt-text>
         <dt-stack
           :gap="selectedGap"
           class="d-bgc-moderate-opaque d-t d-td300 d-bar8 d-ttf-quint"
@@ -240,7 +240,7 @@ vueCode='
         </dt-stack>
       </dt-stack>
       <dt-stack class="d-w100p md:d-w50p" gap="300">
-        <dt-text as="h3" kind="headline" size="md">Row</dt-text>
+        <dt-text as="h3" kind="headline" :size="300">Row</dt-text>
         <dt-stack
           direction="row"
           :gap="selectedGap"
@@ -826,9 +826,9 @@ vueCode='
   gap="400"
   align="baseline"
 >
-  <dt-text kind="body" size="xs">Small body</dt-text>
-  <dt-text kind="body" size="md">Medium body</dt-text>
-  <dt-text kind="headline" size="2xl">Large headline</dt-text>
+  <dt-text kind="body" :size="100">Small body</dt-text>
+  <dt-text kind="body" :size="300">Medium body</dt-text>
+  <dt-text kind="headline" :size="600">Large headline</dt-text>
 </dt-stack>
 '>
   <dt-stack
@@ -838,13 +838,13 @@ vueCode='
     class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--baseline"
   >
     <div class="d-bgc-moderate-opaque d-p16 d-bar8">
-      <dt-text kind="body" size="xs">Small body</dt-text>
+      <dt-text kind="body" :size="100">Small body</dt-text>
     </div>
     <div class="d-bgc-moderate-opaque d-p16 d-bar8">
-      <dt-text kind="body" size="md">Medium body</dt-text>
+      <dt-text kind="body" :size="300">Medium body</dt-text>
     </div>
     <div class="d-bgc-moderate-opaque d-p16 d-bar8">
-      <dt-text kind="headline" size="2xl">Large headline</dt-text>
+      <dt-text kind="headline" :size="600">Large headline</dt-text>
     </div>
   </dt-stack>
 </code-example>
@@ -1288,7 +1288,7 @@ vueCode='
 <dt-stack gap="500">
   <dt-stack gap="400" justify="space-between">
     <dt-stack>
-      <dt-text as="h2" kind="headline" size="xl" strength="medium" density="200" class="d-fs-400">
+      <dt-text as="h2" kind="headline" :size="500" strength="medium" density="200" class="d-fs-400">
         Katie Rodriguez
       </dt-text>
       <dt-stack direction="row" gap="350">
@@ -1302,10 +1302,10 @@ vueCode='
       </dt-stack>
     </dt-stack>
     <dt-stack gap="200">
-      <dt-text kind="body" size="md" density="200" strength="semibold" tone="tertiary">
+      <dt-text kind="body" :size="300" density="200" strength="semibold" tone="tertiary">
         Chief Customer Success Officer
       </dt-text>
-      <dt-text kind="body" size="sm" density="200">
+      <dt-text kind="body" :size="200" density="200">
         <dt-text strength="semibold">
           6:19 am
         </dt-text> local time
@@ -1341,21 +1341,21 @@ vueCode='
 
 <code-example>
   <dt-stack gap="400" class="d-w100p">
-    <dt-text as="h2" kind="headline" size="lg">Saturday, May 24, 2025</dt-text>
+    <dt-text as="h2" kind="headline" :size="400">Saturday, May 24, 2025</dt-text>
     <dt-stack direction="row" gap="450" class="d-w100p">
       <dt-avatar full-name="Ashanti Trevor" />
       <dt-stack class="d-fl1">
-        <dt-text kind="body" size="sm" strength="bold">Ashanti Trevor</dt-text>
+        <dt-text kind="body" :size="200" strength="bold">Ashanti Trevor</dt-text>
         <dt-stack direction="row" gap="300">
           <dt-stack direction="row" gap="400">
             <dt-icon name="phone-outgoing" size="200" class="d-fc-tertiary" />
-            <dt-text kind="body" size="xs" tone="tertiary">Outgoing call</dt-text>
+            <dt-text kind="body" :size="100" tone="tertiary">Outgoing call</dt-text>
           </dt-stack>
-          <dt-text kind="body" size="xs" tone="tertiary">&bull;</dt-text>
-          <dt-text kind="body" size="xs" tone="tertiary">2 minutes 10 seconds</dt-text>
+          <dt-text kind="body" :size="100" tone="tertiary">&bull;</dt-text>
+          <dt-text kind="body" :size="100" tone="tertiary">2 minutes 10 seconds</dt-text>
         </dt-stack>
       </dt-stack>
-      <dt-text kind="body" size="sm" tone="tertiary">3:23 pm</dt-text>
+      <dt-text kind="body" :size="200" tone="tertiary">3:23 pm</dt-text>
       <dt-badge kind="count" type="bulletin" text="6" />
     </dt-stack>
   </dt-stack>

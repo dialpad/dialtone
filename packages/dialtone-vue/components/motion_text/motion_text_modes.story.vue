@@ -38,7 +38,7 @@
           :ref="el => { if (el) modeRefs[mode.value] = el }"
           :text="exampleText"
           :animation-mode="mode.value"
-          speed="md"
+          :speed="300"
           :auto-start="false"
           :loop="isStaticMode(mode.value)"
           class="d-headline--lg"

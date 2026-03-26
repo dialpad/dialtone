@@ -18,7 +18,7 @@
         :image-src="avatarSrc"
         :color="avatarColor"
         image-alt=""
-        size="sm"
+        :size="200"
         :seed="avatarSeed"
         :presence="avatarPresence"
       >

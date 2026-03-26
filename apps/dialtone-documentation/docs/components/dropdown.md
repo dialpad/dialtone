@@ -131,7 +131,7 @@ Dropdown content renders outside the DOM tree. Use the `contentMode` prop to app
 '>
   <dt-dropdown content-mode="invert" navigation-type="arrow-keys" placement="bottom-start">
     <template #anchor="{ attrs }">
-      <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined">
+      <dt-button v-bind="attrs" :size="200" kind="muted" importance="outlined">
         Inverted Dropdown
         <template #endIcon="{ iconSize }">
           <dt-icon name="chevron-down" :size="iconSize" />

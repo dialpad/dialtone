@@ -8,10 +8,10 @@
       class="hero__inner-wrapper d-mx-auto d-wmx1340 d-pl24 d-pr32"
     >
       <dt-stack justify="center" class="hero__content">
-        <dt-text as="h1" kind="headline" size="2xl" class="d-mb12 d-ff-marketing">
+        <dt-text as="h1" kind="headline" :size="600" class="d-mb12 d-ff-marketing">
           Improve your UI's reception with Dialtone
         </dt-text>
-        <dt-text as="p" kind="body" size="md" density="400" tone="secondary" class="d-mb16">
+        <dt-text as="p" kind="body" :size="300" density="400" tone="secondary" class="d-mb16">
           Documented styles, components, and utility classes to help you quickly design and build unified experiences
           across Dialpad experiences.
         </dt-text>
@@ -31,14 +31,14 @@
         <dt-stack direction="row" justify="center" gap="500">
           <dt-button
             to="/guides/getting-started/"
-            size="lg"
+            :size="400"
             @click="sendAnalyticsEvent()"
           >
             Get Started
           </dt-button>
           <dt-button
             to="/about/whats-new/"
-            size="lg"
+            :size="400"
             importance="outlined"
           >
             What's New?
@@ -54,12 +54,12 @@
         <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pt4" to="/design/">
           <dt-stack gap="600">
             <svg-loader class="d-h96" name="home-design-language" />
-            <dt-text as="h2" kind="headline" size="xl" class="d-ff-marketing">
+            <dt-text as="h2" kind="headline" :size="500" class="d-ff-marketing">
               Design Language
             </dt-text>
           </dt-stack>
         </router-link>
-        <dt-text as="p" kind="body" size="md" density="200" tone="secondary">
+        <dt-text as="p" kind="body" :size="300" density="200" tone="secondary">
           Foundational color, iconography, and spacing guidelines
         </dt-text>
         <dt-stack gap="300">
@@ -72,12 +72,12 @@
         <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pt4" to="/components/">
           <dt-stack gap="600">
             <svg-loader class="d-h96" name="home-components" />
-            <dt-text as="h2" kind="headline" size="xl" class="d-ff-marketing">
+            <dt-text as="h2" kind="headline" :size="500" class="d-ff-marketing">
               Components
             </dt-text>
           </dt-stack>
         </router-link>
-        <dt-text as="p" kind="body" size="md" density="200" tone="secondary">
+        <dt-text as="p" kind="body" :size="300" density="200" tone="secondary">
           Presentational UI components offered in CSS and Vue
         </dt-text>
         <dt-stack gap="300">
@@ -93,12 +93,12 @@
         <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pt4" to="/utilities/">
           <dt-stack gap="600">
             <svg-loader class="d-h96" name="home-utilities" />
-            <dt-text as="h2" kind="headline" size="xl" class="d-ff-marketing">
+            <dt-text as="h2" kind="headline" :size="500" class="d-ff-marketing">
               Utilities
             </dt-text>
           </dt-stack>
         </router-link>
-        <dt-text as="p" kind="body" size="md" density="200" tone="secondary">
+        <dt-text as="p" kind="body" :size="300" density="200" tone="secondary">
           A utility-first CSS framework for building user interfaces.
         </dt-text>
         <dt-stack gap="300">
@@ -111,12 +111,12 @@
         <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pt4" to="/guides/">
           <dt-stack gap="600">
             <svg-loader class="d-h96" name="home-guides" />
-            <dt-text as="h2" kind="headline" size="xl" class="d-ff-marketing">
+            <dt-text as="h2" kind="headline" :size="500" class="d-ff-marketing">
               Guides
             </dt-text>
           </dt-stack>
         </router-link>
-        <dt-text as="p" kind="body" size="md" density="200" tone="secondary">
+        <dt-text as="p" kind="body" :size="300" density="200" tone="secondary">
           Reference guidelines for Accessibility, Writing, and more
         </dt-text>
         <dt-stack gap="300">
@@ -135,7 +135,7 @@
   </section>
   <section class="d-py64 d-ta-center">
     <dt-stack direction="row" gap="500" align="center" class="d-fc-secondary d-px48 d-mx-auto d-d-inline-flex">
-      <dt-text as="h2" kind="headline" size="lg" strength="semibold">
+      <dt-text as="h2" kind="headline" :size="400" strength="semibold">
         Don't see something? Want to contribute?
       </dt-text>
       <dt-button
@@ -144,7 +144,7 @@
         rel="noopener noreferrer"
         kind="muted"
         importance="outlined"
-        size="lg"
+        :size="400"
       >
         Make a request
       </dt-button>
@@ -154,7 +154,7 @@
         rel="noopener noreferrer"
         kind="muted"
         importance="outlined"
-        size="lg"
+        :size="400"
       >
         Report a bug
       </dt-button>

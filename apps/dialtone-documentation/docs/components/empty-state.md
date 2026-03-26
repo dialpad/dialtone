@@ -290,8 +290,8 @@ A few rules to keep in nothing-to-see-here when choosing a size variant.
   >
     <template #body>
       <dt-stack direction="row" gap="300">
-        <dt-button kind="muted" size="sm" importance="clear">Action</dt-button>
-        <dt-button kind="muted" importance="outlined" size="sm">Action</dt-button>
+        <dt-button kind="muted" :size="200" importance="clear">Action</dt-button>
+        <dt-button kind="muted" importance="outlined" :size="200">Action</dt-button>
       </dt-stack>
     </template>
     <template #icon="{ iconSize }">

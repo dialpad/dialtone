@@ -90,7 +90,7 @@
               :ref="el => { if (el) sizeRefs[size.class] = el }"
               text="Animated text"
               animation-mode="fade-in"
-              speed="md"
+              :speed="300"
               :auto-start="false"
               :class="size.class"
             />
@@ -112,7 +112,7 @@
         <dt-motion-text
           text="This text loops continuously"
           animation-mode="slide-in"
-          speed="sm"
+          :speed="200"
           :auto-start="true"
           :loop="true"
           class="d-headline--md"
@@ -178,7 +178,7 @@
             ref="manualRef"
             text="Control me with the buttons above"
             animation-mode="gradient-in"
-            speed="lg"
+            :speed="400"
             :auto-start="false"
             class="d-headline--md"
           />

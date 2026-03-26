@@ -93,17 +93,17 @@ const colors = processColorsDocs(props.excludedColors, props.classPrefix);
             </th>
             <th class="d-lh-300" scope="row">
               <span class="d-tt-capitalize" v-text="color.name" />
-              <dt-text v-if="color.description" as="span" kind="body" size="xs" strength="normal" class="d-d-block">
+              <dt-text v-if="color.description" as="span" kind="body" :size="100" strength="normal" class="d-d-block">
                 {{ color.description }}
               </dt-text>
             </th>
             <td>
-              <dt-text as="span" kind="code" size="xs" class="d-docsite-code">
+              <dt-text as="span" kind="code" :size="100" class="d-docsite-code">
                 {{ color.tokenName ? `var(${color.tokenName})` : '-' }}
               </dt-text>
             </td>
             <td>
-              <dt-text as="span" kind="code" size="xs" class="d-docsite-code">
+              <dt-text as="span" kind="code" :size="100" class="d-docsite-code">
                 {{ color.utilityClass }}
               </dt-text>
             </td>

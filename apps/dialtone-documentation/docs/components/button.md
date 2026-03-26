@@ -116,7 +116,7 @@ This style's use should be rare. When in doubt, use the [default button style](#
 <dt-button disabled {props}>Place Call</dt-button>
 '>
   <dt-stack gap="400">
-    <dt-toggle v-model="isDisabled" size="sm" wrapperClass="d-g8 d-m-auto d-pb8">Disabled</dt-toggle>
+    <dt-toggle v-model="isDisabled" :size="200" wrapperClass="d-g8 d-m-auto d-pb8">Disabled</dt-toggle>
     <dt-stack gap="400">
       <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
         <dt-button :disabled="isDisabled"> Place Call </dt-button>
@@ -236,7 +236,7 @@ Use the [v-dt-mode directive](mode-island.html#inverting) in place of `kind="inv
 <dt-button v-dt-mode:invert {props}>Place Call</dt-button>
 '>
   <dt-stack gap="400">
-    <dt-toggle v-model="isInverted" size="sm" wrapperClass="d-g8 d-m-auto d-pb8">Inverted</dt-toggle>
+    <dt-toggle v-model="isInverted" :size="200" wrapperClass="d-g8 d-m-auto d-pb8">Inverted</dt-toggle>
     <dt-stack gap="400">
       <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
         <dt-button v-dt-mode:invert="isInverted"> Place Call </dt-button>
@@ -697,7 +697,7 @@ The width of the button remains determined by the length of the label, which is 
 </dt-button>
 '>
   <dt-stack gap="500" align="center">
-    <dt-toggle size="sm" v-model="loading" wrapperClass="d-g8">
+    <dt-toggle :size="200" v-model="loading" wrapperClass="d-g8">
       Loading
     </dt-toggle>
     <dt-stack

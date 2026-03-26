@@ -32,13 +32,13 @@
           label-class="d-jc-space-between"
           importance="outlined"
           kind="muted"
-          size="lg"
+          :size="400"
         >
           <template #startIcon>
             <dt-icon name="arrow-left" />
           </template>
           <dt-stack as="span" class="d-p8">
-            <dt-text as="span" kind="body" size="md" tone="muted">
+            <dt-text as="span" kind="body" :size="300" tone="muted">
               Previous
             </dt-text>
             <span>{{ prev.text }}</span>
@@ -51,13 +51,13 @@
           label-class="d-jc-space-between"
           importance="outlined"
           kind="muted"
-          size="lg"
+          :size="400"
         >
           <template #endIcon>
             <dt-icon name="arrow-right" />
           </template>
           <dt-stack as="span" class="d-p8">
-            <dt-text as="span" kind="body" size="md" tone="muted">
+            <dt-text as="span" kind="body" :size="300" tone="muted">
               Next
             </dt-text>
             <span>{{ next.text }}</span>
@@ -65,7 +65,7 @@
         </dt-button>
       </dt-stack>
       <footer class="d-mt16 d-mb16">
-        <dt-text as="p" kind="body" size="sm" tone="muted">
+        <dt-text as="p" kind="body" :size="200" tone="muted">
           <dt-text v-if="$frontmatter.title">
             {{ $frontmatter.title }}
           </dt-text>

@@ -2,7 +2,7 @@
   <dt-stack gap="500">
     <dt-stack gap="400" justify="between">
       <dt-stack>
-        <dt-text as="h2" kind="headline" size="xl" strength="medium" density="200" class="d-fs-400">
+        <dt-text as="h2" kind="headline" :size="500" strength="medium" density="200" class="d-fs-400">
           Katie Rodriguez
         </dt-text>
         <dt-stack direction="row" gap="350">
@@ -16,10 +16,10 @@
         </dt-stack>
       </dt-stack>
       <dt-stack gap="200">
-        <dt-text kind="body" size="md" density="200" strength="semibold" tone="tertiary">
+        <dt-text kind="body" :size="300" density="200" strength="semibold" tone="tertiary">
           Chief Customer Success Officer
         </dt-text>
-        <dt-text kind="body" size="sm" density="200">
+        <dt-text kind="body" :size="200" density="200">
           <dt-text strength="medium">
             6:19 am
           </dt-text> local time

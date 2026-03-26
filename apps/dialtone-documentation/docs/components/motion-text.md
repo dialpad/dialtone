@@ -7,7 +7,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-motion-text-
 ---
 
 <code-example>
-  <dt-text kind="headline" size="2xl">
+  <dt-text kind="headline" :size="600">
     <dt-motion-text
       text="Welcome to Dialtone Motion Text"
       animation-mode="shimmer"
