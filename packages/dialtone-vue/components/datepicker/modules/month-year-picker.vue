@@ -29,9 +29,9 @@
             @click="changeYear(-1)"
             @keydown="handleKeyDown($event)"
           >
-            <dt-icon-chevrons-left
-              size="200"
-            />
+            <template #icon="{ iconSize }">
+              <dt-icon-chevrons-left :size="iconSize" />
+            </template>
           </dt-button>
         </template>
       </dt-tooltip>
@@ -54,9 +54,9 @@
             @click="changeMonth(-1)"
             @keydown="handleKeyDown($event)"
           >
-            <dt-icon-chevron-left
-              size="200"
-            />
+            <template #icon="{ iconSize }">
+              <dt-icon-chevron-left :size="iconSize" />
+            </template>
           </dt-button>
         </template>
       </dt-tooltip>
@@ -94,9 +94,9 @@
             @click="changeMonth(1)"
             @keydown="handleKeyDown($event)"
           >
-            <dt-icon-chevron-right
-              size="200"
-            />
+            <template #icon="{ iconSize }">
+              <dt-icon-chevron-right :size="iconSize" />
+            </template>
           </dt-button>
         </template>
       </dt-tooltip>
@@ -119,9 +119,9 @@
             @click="changeYear(1)"
             @keydown="handleKeyDown($event)"
           >
-            <dt-icon-chevrons-right
-              size="200"
-            />
+            <template #icon="{ iconSize }">
+              <dt-icon-chevrons-right :size="iconSize" />
+            </template>
           </dt-button>
         </template>
       </dt-tooltip>

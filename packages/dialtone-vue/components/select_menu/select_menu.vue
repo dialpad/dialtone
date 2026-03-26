@@ -309,8 +309,8 @@ export default {
 
   computed: {
     resolvedLabelSize () {
+      if (this.labelSize != null) return this.labelSize;
       const sizeStr = String(this.size);
-      if (this.labelSize) return this.labelSize;
       // xl/500 exceeds label's max size — cap at lg/400
       if (sizeStr === 'xl' || sizeStr === '500') return sizeStr === '500' ? '400' : 'lg';
       return this.size;
