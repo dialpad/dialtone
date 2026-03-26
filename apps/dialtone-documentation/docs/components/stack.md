@@ -206,31 +206,21 @@ vueCode='
 '>
   <dt-stack gap="500" class="d-w100p">
     <dt-stack gap="200">
-      <dt-text as="h3" kind="label" size="md" id="interactive-gap-label">Select a gap option</dt-text>
-      <dt-stack
-        :direction="{ 'default': 'column', 'md': 'row' }"
-        gap="200"
-        class="d-ba d-bc-subtle d-p2 d-bar8"
-        role="group"
-        aria-labelledby="interactive-gap-label"
-        @keydown="handleGapButtonKeydown"
+      <dt-segmented-control
+        :size="100"
+        :model-value="selectedGap"
+        aria-label="Gap size"
+        @update:model-value="setGap"
       >
-        <dt-button
-          v-for="(gap, index) in gaps"
-          :ref="el => gapButtonRefs[index] = el"
-          size="xs"
-          kind="muted"
-          importance="clear"
-          class="d-fl1 d-bar6"
+        <dt-segmented-control-item
+          v-for="gap in gaps"
           :key="gap"
-          :active="gap === selectedGap"
-          @click="setGap(gap)"
-          :tabindex="gap === selectedGap ? 0 : -1"
-          @focus="focusedGapIndex = index"
+          :value="gap"
+          :selected="gap === selectedGap"
         >
           {{ gap }}
-        </dt-button>
-      </dt-stack>
+        </dt-segmented-control-item>
+      </dt-segmented-control>
     </dt-stack>
     <dt-stack
       :direction="{ 'default': 'column', 'md': 'row' }"
@@ -1380,89 +1370,17 @@ vueCode='
 <component-class-table component-name="stack"></component-class-table>
 
 <script setup>
-  import { ref, nextTick } from 'vue';
+  import { ref } from 'vue';
   import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
   import ExampleProfileCard from '@exampleComponents/ExampleProfileCard.vue';
 
   const selectedGap = ref('400');
-  const focusedGapIndex = ref(0);
-  const gapButtonRefs = ref([]);
 
   const setGap = (gap) => {
     selectedGap.value = gap;
   };
 
   const gaps = window.DIALTONE_CONSTANTS.DT_STACK_GAP;
-
-  // Find the index of the currently selected gap
-  const getSelectedGapIndex = () => {
-    return gaps.indexOf(selectedGap.value);
-  };
-
-  // Focus a button by index
-  const focusGapButton = async (index) => {
-    focusedGapIndex.value = index;
-    await nextTick();
-    if (gapButtonRefs.value[index]) {
-      gapButtonRefs.value[index].$el?.focus();
-    }
-  };
-
-  // Handle keyboard navigation for roving tabindex
-  const handleGapButtonKeydown = async (event) => {
-    const currentIndex = focusedGapIndex.value;
-    const totalButtons = gaps.length;
-    let newIndex = currentIndex;
-
-    switch (event.key) {
-      case 'ArrowRight':
-      case 'ArrowDown':
-        event.preventDefault();
-        // Move to next button, wrap to first if at end
-        newIndex = (currentIndex + 1) % totalButtons;
-        break;
-
-      case 'ArrowLeft':
-      case 'ArrowUp':
-        event.preventDefault();
-        // Move to previous button, wrap to last if at beginning
-        newIndex = (currentIndex - 1 + totalButtons) % totalButtons;
-        break;
-
-      case 'Home':
-        event.preventDefault();
-        // Move to first button
-        newIndex = 0;
-        break;
-
-      case 'End':
-        event.preventDefault();
-        // Move to last button
-        newIndex = totalButtons - 1;
-        break;
-
-      case 'Enter':
-      case ' ':
-        // Space or Enter selects the focused button
-        event.preventDefault();
-        setGap(gaps[currentIndex]);
-        break;
-
-      default:
-        // No action for other keys
-        return;
-    }
-
-    // Focus and activate the new button if index changed
-    if (newIndex !== currentIndex) {
-      await focusGapButton(newIndex);
-      // Also activate (select) the newly focused button
-      setGap(gaps[newIndex]);
-    }
-  };
-
-  // Initialize focused index to the selected gap on mount
-  focusedGapIndex.value = getSelectedGapIndex();
 </script>
 
 <style scoped lang="less">

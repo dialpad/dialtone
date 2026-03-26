@@ -196,44 +196,26 @@ Bind a reactive variable as the directive arg to switch modes at runtime.
 <dt-text v-dt-mode:{mode} align="center" tone="success"> ... mode </dt-text>
 '>
   <dt-stack gap="500">
-    <dt-stack gap="400" direction="row">
-      <dt-button
-        kind="muted"
-        size="sm"
-        importance="outlined"
-        :active="dynamicMode === 'invert'"
-        @click="dynamicMode = 'invert'"
-      >
-        Invert
+    <dt-segmented-control :size="100" v-model="dynamicMode" aria-label="Mode">
+      <dt-segmented-control-item value="invert" :selected="dynamicMode === 'invert'">
         <template #startIcon="{ iconSize }">
           <dt-icon name="circle-half-filled" :size="iconSize" />
         </template>
-      </dt-button>
-      <dt-button
-        kind="muted"
-        size="sm"
-        importance="outlined"
-        :active="dynamicMode === 'light'"
-        @click="dynamicMode = 'light'"
-      >
-        Light
+        Invert
+      </dt-segmented-control-item>
+      <dt-segmented-control-item value="light" :selected="dynamicMode === 'light'">
         <template #startIcon="{ iconSize }">
           <dt-icon name="sun" :size="iconSize" />
         </template>
-      </dt-button>
-      <dt-button
-        kind="muted"
-        size="sm"
-        importance="outlined"
-        :active="dynamicMode === 'dark'"
-        @click="dynamicMode = 'dark'"
-      >
-        Dark
+        Light
+      </dt-segmented-control-item>
+      <dt-segmented-control-item value="dark" :selected="dynamicMode === 'dark'">
         <template #startIcon="{ iconSize }">
           <dt-icon name="moon" :size="iconSize" />
         </template>
-      </dt-button>
-    </dt-stack>
+        Dark
+      </dt-segmented-control-item>
+    </dt-segmented-control>
     <dt-text v-dt-mode:[dynamicMode] align="center" tone="success"> {{ dynamicMode }} mode </dt-text>
   </dt-stack>
 </code-example>

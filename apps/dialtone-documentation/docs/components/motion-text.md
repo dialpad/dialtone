@@ -94,34 +94,38 @@ The component supports six different animation modes:
 
 Take full control of the animation lifecycle:
 
-```vue
-<template>
-  <div>
-    <dt-motion-text
-      ref="textRef"
-      text="Click to animate"
-      :auto-start="false"
-      @complete="onComplete"
-    />
-
-    <dt-button @click="$refs.textRef.start()">Start</dt-button>
-    <dt-button @click="$refs.textRef.pause()">Pause</dt-button>
-    <dt-button @click="$refs.textRef.resume()">Resume</dt-button>
-    <dt-button @click="$refs.textRef.reset()">Reset</dt-button>
-    <dt-button @click="$refs.textRef.skipToEnd()">Skip to End</dt-button>
-  </div>
-</template>
-
-<script>
-export default {
-  methods: {
-    onComplete() {
-      console.log('Animation completed!');
-    }
-  }
-}
-</script>
-```
+<code-example vueCode='
+<dt-button @click="$refs.textRef.start()">Start</dt-button>
+<dt-button @click="$refs.textRef.pause()">Pause</dt-button>
+<dt-button @click="$refs.textRef.resume()">Resume</dt-button>
+<dt-button @click="$refs.textRef.reset()">Reset</dt-button>
+<dt-button @click="$refs.textRef.skipToEnd()">Skip to End</dt-button>
+<dt-motion-text
+  ref="textRef"
+  text="Welcome to Dialtone Motion Text"
+  animation-mode="shimmer"
+  :auto-start="false"
+/>
+'>
+  <dt-stack gap="500" align="center">
+    <dt-stack direction="row" gap="300">
+      <dt-button :size="100" kind="muted" importance="outlined" @click="manualDemoRef.start()">Start</dt-button>
+      <dt-button :size="100" kind="muted" importance="outlined" @click="manualDemoRef.pause()">Pause</dt-button>
+      <dt-button :size="100" kind="muted" importance="outlined" @click="manualDemoRef.resume()">Resume</dt-button>
+      <dt-button :size="100" kind="muted" importance="outlined" @click="manualDemoRef.reset()">Reset</dt-button>
+      <dt-button :size="100" kind="muted" importance="outlined" @click="manualDemoRef.skipToEnd()">Skip to End</dt-button>
+    </dt-stack>
+    <dt-text kind="headline" :size="600">
+      <dt-motion-text
+        ref="manualDemoRef"
+        text="Welcome to Dialtone Motion Text"
+        animation-mode="shimmer"
+        :auto-start="true"
+        loop
+      />
+    </dt-text>
+  </dt-stack>
+</code-example>
 
 ### Looping Animation
 
@@ -197,6 +201,7 @@ The component automatically includes proper ARIA attributes:
 import { ref, nextTick } from 'vue';
 
 const animDemoRef = ref(null);
+const manualDemoRef = ref(null);
 const activeMode = ref('none');
 const selected = ref('300');
 
