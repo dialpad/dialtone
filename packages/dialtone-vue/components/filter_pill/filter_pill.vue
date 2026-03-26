@@ -444,12 +444,12 @@ export default {
 
     /**
      * The size of the button.
-     * @values xs, sm, md, lg, xl
+     * @values 100, 200, 300, 400, 500
      */
     size: {
-      type: String,
-      default: 'sm',
-      validator: (s) => Object.keys(BUTTON_SIZE_MODIFIERS).includes(s),
+      type: [String, Number],
+      default: 200,
+      validator: (s) => Object.keys(BUTTON_SIZE_MODIFIERS).includes(String(s)),
     },
   },
 

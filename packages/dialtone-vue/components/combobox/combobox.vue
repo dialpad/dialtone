@@ -100,13 +100,13 @@ export default {
     },
 
     /**
-     * Size of the input, one of `xs`, `sm`, `md`, `lg`, `xl`
-     * @values null, xs, sm, md, lg, xl
+     * Size of the input.
+     * @values 100, 200, 300, 400, 500
      */
     size: {
-      type: String,
+      type: [String, Number],
       default: null,
-      validator: (t) => Object.values(COMBOBOX_LABEL_SIZES).includes(t),
+      validator: (t) => t === null || Object.values(COMBOBOX_LABEL_SIZES).includes(t) || ['100', '200', '300', '400', '500'].includes(String(t)),
     },
 
     /**

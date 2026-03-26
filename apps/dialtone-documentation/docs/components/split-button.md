@@ -144,11 +144,11 @@ Use the `disabled` prop to disable both buttons, or use `start-disabled` and `en
 
 <code-example>
   <dt-stack direction="row" gap="400" data-demo-wrapper>
-    <dt-split-button size="xs" end-tooltip-text="More calling options"> xs </dt-split-button>
-    <dt-split-button size="sm" end-tooltip-text="More calling options"> sm </dt-split-button>
-    <dt-split-button size="md" end-tooltip-text="More calling options"> md </dt-split-button>
-    <dt-split-button size="lg" end-tooltip-text="More calling options"> lg </dt-split-button>
-    <dt-split-button size="xl" end-tooltip-text="More calling options"> xl </dt-split-button>
+    <dt-split-button :size="100" end-tooltip-text="More calling options"> 100 </dt-split-button>
+    <dt-split-button :size="200" end-tooltip-text="More calling options"> 200 </dt-split-button>
+    <dt-split-button :size="300" end-tooltip-text="More calling options"> 300 </dt-split-button>
+    <dt-split-button :size="400" end-tooltip-text="More calling options"> 400 </dt-split-button>
+    <dt-split-button :size="500" end-tooltip-text="More calling options"> 500 </dt-split-button>
   </dt-stack>
 </code-example>
 
