@@ -178,7 +178,7 @@ A few rules to keep in nothing-to-see-here when choosing a size variant.
 
 <code-example>
   <dt-empty-state
-    size="md"
+    :size="300"
     header-text="Nothing to see here"
     body-text="Looks like there is no data to display here."
   >
@@ -198,7 +198,7 @@ A few rules to keep in nothing-to-see-here when choosing a size variant.
 
 <code-example>
   <dt-empty-state
-    size="md"
+    :size="300"
     header-text="Nothing to see here"
     body-text="Looks like there is no data to display here."
   >
@@ -218,7 +218,7 @@ A few rules to keep in nothing-to-see-here when choosing a size variant.
 
 <code-example>
   <dt-empty-state
-    size="sm"
+    :size="200"
     header-text="Nothing to see here"
     body-text="Looks like there is no data to display here."
   >
@@ -284,7 +284,7 @@ A few rules to keep in nothing-to-see-here when choosing a size variant.
 
 <code-example>
   <dt-empty-state
-    size="sm"
+    :size="200"
     header-text="Nothing to see here"
     body-text="Looks like there is no data to display here."
   >

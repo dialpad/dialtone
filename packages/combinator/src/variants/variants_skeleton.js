@@ -9,14 +9,14 @@ export default {
 
   'list item': {
     props: {
-      listItemOption: { initialValue: { shapeSize: 'sm', paragraphs: { rows: 1 } } },
+      listItemOption: { initialValue: { shapeSize: '200', paragraphs: { rows: 1 } } },
       animate: { initialValue: true },
     },
   },
 
   'shape circle': {
     props: {
-      shapeOption: { initialValue: { size: 'md', shape: 'circle' } },
+      shapeOption: { initialValue: { size: '300', shape: 'circle' } },
       animate: { initialValue: true },
     },
   },

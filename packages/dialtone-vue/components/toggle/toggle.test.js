@@ -82,10 +82,21 @@ describe('DtToggle Tests', () => {
           expect(button.classes().includes('d-toggle--disabled')).toBe(true);
         });
 
-        it('should set correct size class', async () => {
+        it('should set correct size class with t-shirt alias', async () => {
           await wrapper.setProps({ size: 'sm' });
 
           expect(button.classes().includes('d-toggle--small')).toBe(true);
+        });
+
+        it('should set correct size class with numeric size', async () => {
+          await wrapper.setProps({ size: 200 });
+
+          expect(button.classes().includes('d-toggle--small')).toBe(true);
+        });
+
+        it('should render default size with numeric 300', () => {
+          expect(button.classes().includes('d-toggle--small')).toBe(false);
+          expect(button.classes().includes('d-toggle')).toBe(true);
         });
       });
     });

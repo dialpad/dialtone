@@ -66,6 +66,9 @@ export const DEFAULT_VALIDATION_MESSAGE_TYPE = VALIDATION_MESSAGE_TYPES.ERROR;
 // Default prefix used for ids
 export const DEFAULT_PREFIX = 'dt';
 
+// Component size scale
+export { COMPONENT_SIZES, TEXT_HEADLINE_SIZES } from './sizes.js';
+
 export default {
   VALIDATION_MESSAGE_TYPES,
   DESCRIPTION_SIZE_TYPES,
