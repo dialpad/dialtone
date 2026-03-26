@@ -10,7 +10,7 @@
       :to="link.link"
       kind="muted"
       importance="clear"
-      size="lg"
+      :size="400"
       class="d-fw-normal"
       :active="isActiveLink(link.link)"
     >

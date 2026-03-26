@@ -97,7 +97,7 @@
       class="d-mt6"
       label-class="d-mr6"
       label="Small size"
-      size="sm"
+      :size="200"
     >
       Small size
     </dt-toggle>

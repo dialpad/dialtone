@@ -41,7 +41,7 @@
           />
           <dt-button
             v-else
-            size="sm"
+            :size="200"
             importance="outlined"
             :kind="buttonKind"
             @click="$attrs.onClick"

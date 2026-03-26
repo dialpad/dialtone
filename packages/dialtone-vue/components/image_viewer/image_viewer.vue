@@ -47,7 +47,7 @@
             data-qa="dt-image-viewer-close-btn"
             class="d-modal__close"
             circle
-            size="lg"
+            :size="400"
             importance="clear"
             kind="inverted"
             :aria-label="closeButtonTitle"

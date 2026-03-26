@@ -29,6 +29,8 @@ const PROP_REGEX = new RegExp(
 
 const DT_TAG_PATTERN = /<(dt-[\w-]+|Dt\w+)\b[^>]*>/g;
 
+const EXCLUDED_PROPS = ['button-width-size', 'buttonWidthSize', 'background-size', 'backgroundSize', 'font-size', 'fontSize'];
+
 function transformContent (content) {
   let transformed = content;
   let count = 0;
@@ -37,6 +39,7 @@ function transformContent (content) {
     PROP_REGEX.lastIndex = 0;
     return tag.replace(PROP_REGEX, (match, propName, tshirt, offset, fullTag) => {
       if (offset > 0 && fullTag[offset - 1] === ':') return match;
+      if (EXCLUDED_PROPS.includes(propName)) return match;
       if (SIZE_MAP[tshirt]) {
         count++;
         return `:${propName}="${SIZE_MAP[tshirt]}"`;
@@ -334,6 +337,22 @@ describe('camelCase prop names', () => {
     const expected = '<dt-input :descriptionSize="300" />';
     const { transformed } = transformContent(input);
     assert.equal(transformed, expected);
+  });
+});
+
+describe('Excluded props (not component scale sizes)', () => {
+  it('ignores button-width-size="md"', () => {
+    const input = '<dt-recipe-callbar-button button-width-size="md" />';
+    const { transformed, count } = transformContent(input);
+    assert.equal(transformed, input);
+    assert.equal(count, 0);
+  });
+
+  it('ignores buttonWidthSize="lg"', () => {
+    const input = '<DtCallbarButton buttonWidthSize="lg" />';
+    const { transformed, count } = transformContent(input);
+    assert.equal(transformed, input);
+    assert.equal(count, 0);
   });
 });
 

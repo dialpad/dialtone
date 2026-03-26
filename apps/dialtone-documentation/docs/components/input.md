@@ -284,7 +284,7 @@ Each Text Input size has a default icon size, keeping it proportional. While rar
         <dt-icon name="box-select" size="200" />
       </template>
     </dt-input>
-    <dt-input label="Medium textarea with large icon" type="textarea" placeholder="Placeholder" icon-size="md" :size="400">
+    <dt-input label="Medium textarea with large icon" type="textarea" placeholder="Placeholder" :icon-size="300" :size="400">
       <template #startIcon>
         <dt-icon name="box-select" size="500" />
       </template>

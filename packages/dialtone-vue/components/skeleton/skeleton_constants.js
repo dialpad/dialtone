@@ -18,9 +18,11 @@ export const SKELETON_TEXT_TYPES = [
 
 export const SKELETON_SHAPE_SIZES = {
   // Numeric (preferred)
+  100: '16px',
   200: '24px',
   300: '32px',
   400: '48px',
+  500: '64px',
   // T-shirt aliases (deprecated)
   sm: '24px',
   md: '32px',

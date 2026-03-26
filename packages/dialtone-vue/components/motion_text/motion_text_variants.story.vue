@@ -25,7 +25,7 @@
               {{ speed.label }} ({{ speed.value }})
             </h3>
             <dt-button
-              size="sm"
+              :size="200"
               importance="outlined"
               kind="muted"
               @click="restartAnimation('speed', speed.value)"
@@ -73,7 +73,7 @@
               {{ size.label }}
             </h3>
             <dt-button
-              size="sm"
+              :size="200"
               importance="outlined"
               kind="muted"
               @click="restartAnimation('size', size.class)"
@@ -134,35 +134,35 @@
           class="d-fw-wrap"
         >
           <dt-button
-            size="sm"
+            :size="200"
             importance="outlined"
             @click="manualRef?.start()"
           >
             Start
           </dt-button>
           <dt-button
-            size="sm"
+            :size="200"
             importance="outlined"
             @click="manualRef?.pause()"
           >
             Pause
           </dt-button>
           <dt-button
-            size="sm"
+            :size="200"
             importance="outlined"
             @click="manualRef?.resume()"
           >
             Resume
           </dt-button>
           <dt-button
-            size="sm"
+            :size="200"
             importance="outlined"
             @click="manualRef?.reset()"
           >
             Reset
           </dt-button>
           <dt-button
-            size="sm"
+            :size="200"
             importance="outlined"
             @click="manualRef?.skipToEnd()"
           >

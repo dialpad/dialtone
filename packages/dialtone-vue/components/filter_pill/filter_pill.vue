@@ -141,7 +141,7 @@
             <dt-button
               importance="clear"
               kind="muted"
-              size="sm"
+              :size="200"
               data-qa="dt-filter-pill__cancel-button"
               @click="cancelSelection"
             >
@@ -149,7 +149,7 @@
             </dt-button>
             <dt-button
               importance="primary"
-              size="sm"
+              :size="200"
               data-qa="dt-filter-pill__apply-button"
               @click="applySelection"
             >

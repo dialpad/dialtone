@@ -2,7 +2,7 @@
   <div class="d-emoji-picker__tabset">
     <dt-tab-group
       :selected="selectedTab"
-      size="sm"
+      :size="200"
       spread="equal"
       tab-list-class="d-emoji-picker__tabset-list"
     >

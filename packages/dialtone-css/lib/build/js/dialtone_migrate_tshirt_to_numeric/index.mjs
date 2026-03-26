@@ -40,16 +40,15 @@ const SIZE_MAP = {
 
 const TSHIRT_VALUES = Object.keys(SIZE_MAP).join('|');
 
-// Single regex that captures the full prop name (including compound like label-size)
-// and the t-shirt value. Matches: size="sm", label-size="xs", speed="md",
-// description-size="lg", or any future *-size compound prop.
 // Match any prop ending in size/Size/speed/Speed with a t-shirt value.
-// The simple approach: match the full prop="value", then in the replacer
-// check that the character before the match is NOT a colon (v-bind).
+// In the replacer, check that the character before the match is NOT a colon (v-bind).
 const PROP_REGEX = new RegExp(
   `([\\w-]*(?:[Ss]ize|[Ss]peed))="(${TSHIRT_VALUES})"`,
   'g',
 );
+
+// Props that end in "size" but are NOT component scale sizes — exclude from migration
+const EXCLUDED_PROPS = ['button-width-size', 'buttonWidthSize', 'background-size', 'backgroundSize', 'font-size', 'fontSize'];
 
 // Only match on Dialtone component tags
 const DT_TAG_PATTERN = /<(dt-[\w-]+|Dt\w+)\b[^>]*>/g;
@@ -98,6 +97,8 @@ function transformContent (content) {
     return tag.replace(PROP_REGEX, (match, propName, tshirt, offset, fullTag) => {
       // Skip if preceded by ':' (already a v-bind expression)
       if (offset > 0 && fullTag[offset - 1] === ':') return match;
+      // Skip excluded prop names (not component scale sizes)
+      if (EXCLUDED_PROPS.includes(propName)) return match;
       if (SIZE_MAP[tshirt]) {
         count++;
         return `:${propName}="${SIZE_MAP[tshirt]}"`;

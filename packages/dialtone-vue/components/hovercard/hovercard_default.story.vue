@@ -42,7 +42,7 @@
             :image-src="defaultImage"
             image-alt="Person avatar"
             seed="JN"
-            size="md"
+            :size="300"
             presence="busy"
           />
           <dt-stack

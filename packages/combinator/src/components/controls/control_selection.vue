@@ -1,7 +1,7 @@
 <template>
   <dt-text
     kind="label"
-    size="xs"
+    :size="100"
     tone="secondary"
     class="d-input__label-text d-c-default"
   >
@@ -17,7 +17,7 @@
         v-bind="attrs"
         importance="outlined"
         kind="muted"
-        size="xs"
+        :size="100"
         :disabled="disabled"
         class="d-w100p"
         label-class="d-jc-space-between d-fw-normal"

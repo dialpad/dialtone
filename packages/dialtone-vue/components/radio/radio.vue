@@ -40,7 +40,7 @@
       <dt-text
         v-if="$slots.description || description"
         kind="body"
-        size="sm"
+        :size="200"
         tone="tertiary"
         as="div"
         :class="['d-description', descriptionClass]"

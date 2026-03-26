@@ -7,7 +7,7 @@ keywords: ["animation","transition","movement","easing"]
 
 <div class="d-ba d-bar16 d-pt32 d-ta-center d-fc-muted d-headline--xxl">
   <dt-empty-state
-    size="md"
+    :size="300"
     header-text="TBD"
     class="d-w100p"
   >

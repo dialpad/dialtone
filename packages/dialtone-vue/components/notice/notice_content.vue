@@ -7,7 +7,7 @@
       v-if="title || hasSlotContent($slots.titleOverride)"
       :id="titleId"
       kind="headline"
-      size="md"
+      :size="300"
       density="200"
       as="p"
       class="d-notice__title"
@@ -21,7 +21,7 @@
     <dt-text
       :id="contentId"
       kind="body"
-      size="sm"
+      :size="200"
       wrap="pretty"
       as="p"
       class="d-notice__message"

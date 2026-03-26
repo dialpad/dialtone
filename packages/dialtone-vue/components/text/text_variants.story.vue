@@ -10,7 +10,7 @@
         <dt-text
           as="h2"
           kind="headline"
-          size="2xl"
+          :size="600"
         >
           Kind Examples
         </dt-text>
@@ -19,7 +19,7 @@
             <dt-text
               as="h3"
               kind="headline"
-              size="xl"
+              :size="500"
             >
               Headline
             </dt-text>
@@ -45,7 +45,7 @@
             <dt-text
               as="h3"
               kind="headline"
-              size="xl"
+              :size="500"
             >
               Body
             </dt-text>
@@ -71,7 +71,7 @@
             <dt-text
               as="h3"
               kind="headline"
-              size="xl"
+              :size="500"
             >
               Label
             </dt-text>
@@ -97,7 +97,7 @@
             <dt-text
               as="h3"
               kind="headline"
-              size="xl"
+              :size="500"
             >
               Code
             </dt-text>
@@ -126,7 +126,7 @@
         <dt-text
           as="h2"
           kind="headline"
-          size="2xl"
+          :size="600"
         >
           Strength Examples
         </dt-text>
@@ -135,7 +135,7 @@
             <dt-text
               as="h3"
               kind="headline"
-              size="xl"
+              :size="500"
             >
               Font Weight Modifiers
             </dt-text>
@@ -149,7 +149,7 @@
                   v-for="item in strengthExamples"
                   :key="item.strength"
                   kind="headline"
-                  size="2xl"
+                  :size="600"
                   :strength="item.strength"
                 >
                   {{ item.copy }}
@@ -165,7 +165,7 @@
         <dt-text
           as="h2"
           kind="headline"
-          size="2xl"
+          :size="600"
         >
           Density Examples
         </dt-text>
@@ -174,7 +174,7 @@
             <dt-text
               as="h3"
               kind="headline"
-              size="xl"
+              :size="500"
             >
               Line Height Modifiers
             </dt-text>
@@ -206,7 +206,7 @@
         <dt-text
           as="h2"
           kind="headline"
-          size="2xl"
+          :size="600"
         >
           Tone Examples
         </dt-text>
@@ -236,7 +236,7 @@
         <dt-text
           as="h2"
           kind="headline"
-          size="2xl"
+          :size="600"
         >
           Alignment Examples
         </dt-text>
@@ -248,7 +248,7 @@
             <dt-text
               as="h4"
               kind="headline"
-              size="lg"
+              :size="400"
             >
               {{ item.align.charAt(0).toUpperCase() + item.align.slice(1) }}
             </dt-text>
@@ -269,7 +269,7 @@
         <dt-text
           as="h2"
           kind="headline"
-          size="2xl"
+          :size="600"
         >
           Truncation Examples
         </dt-text>
@@ -278,7 +278,7 @@
             <dt-text
               as="h3"
               kind="headline"
-              size="xl"
+              :size="500"
             >
               Single Line (truncate)
             </dt-text>
@@ -303,7 +303,7 @@
             <dt-text
               as="h3"
               kind="headline"
-              size="xl"
+              :size="500"
             >
               Multi Line (maxLines)
             </dt-text>
@@ -366,7 +366,7 @@
         <dt-text
           as="h2"
           kind="headline"
-          size="2xl"
+          :size="600"
         >
           Wrap Examples
         </dt-text>
@@ -378,14 +378,14 @@
             <dt-text
               as="h4"
               kind="headline"
-              size="lg"
+              :size="400"
             >
               {{ item.wrap.charAt(0).toUpperCase() + item.wrap.slice(1) }}
             </dt-text>
             <div class="d-ba d-bc-default d-of-hidden d-p16 d-bar8">
               <dt-text
                 kind="headline"
-                size="md"
+                :size="300"
                 :wrap="item.wrap"
               >
                 {{ item.copy }}
@@ -400,7 +400,7 @@
         <dt-text
           as="h2"
           kind="headline"
-          size="2xl"
+          :size="600"
         >
           Trim Examples
         </dt-text>
@@ -422,7 +422,7 @@
           >
             <dt-text
               kind="headline"
-              size="3xl"
+              :size="700"
               :text-box-trim="item.textBoxTrim"
               class="d-bgc-moderate-opaque"
             >
@@ -437,7 +437,7 @@
         <dt-text
           as="h2"
           kind="headline"
-          size="2xl"
+          :size="600"
         >
           Numeric Examples
         </dt-text>
@@ -446,7 +446,7 @@
             <dt-text
               as="h3"
               kind="headline"
-              size="xl"
+              :size="500"
             >
               Tabular Figures
             </dt-text>

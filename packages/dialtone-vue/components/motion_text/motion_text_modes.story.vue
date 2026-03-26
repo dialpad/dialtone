@@ -18,7 +18,7 @@
         </h3>
         <dt-button
           v-if="!isStaticMode(mode.value)"
-          size="sm"
+          :size="200"
           importance="outlined"
           kind="muted"
           @click="restartAnimation(mode.value)"

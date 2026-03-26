@@ -40,7 +40,7 @@ export default {
 
     /**
      * Size of the shape
-     * @values 200, 300, 400
+     * @values 100, 200, 300, 400, 500
      */
     size: {
       type: [String, Number],
