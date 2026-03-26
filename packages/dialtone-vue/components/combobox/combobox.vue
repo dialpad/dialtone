@@ -54,6 +54,7 @@ import ComboboxEmptyList from './combobox_empty-list.vue';
 import { DtKeyboardListNavigationMixin } from '@/common/mixins';
 import { getUniqueString, hasSlotContent } from '@/common/utils';
 import { COMBOBOX_LABEL_SIZES } from '@/components/combobox';
+import { COMPONENT_SIZES } from '@/common/constants';
 
 /**
  * A combobox is a semantic component that displays an input element combined with a listbox,
@@ -106,7 +107,9 @@ export default {
     size: {
       type: [String, Number],
       default: null,
-      validator: (t) => t === null || Object.values(COMBOBOX_LABEL_SIZES).includes(t) || ['100', '200', '300', '400', '500'].includes(String(t)),
+      validator: (t) => t === null
+        || Object.values(COMBOBOX_LABEL_SIZES).includes(t)
+        || Object.keys(COMPONENT_SIZES).includes(String(t)),
     },
 
     /**

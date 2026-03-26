@@ -108,7 +108,6 @@ const hasIcon = computed(() => {
   return hasSlotContent(slots.icon);
 });
 const hasIllustration = computed(() => hasSlotContent(slots.illustration));
-const isSmallSize = computed(() => String(props.size) === 'sm' || String(props.size) === '200');
 
 /**
  * Icon will be shown in lg and md size only if illustration is not provided
@@ -123,6 +122,7 @@ const showIcon = computed(() => hasIcon.value && (!hasIllustration.value || isSm
 const showIllustration = computed(() => hasIllustration.value && !isSmallSize.value);
 
 const sizeKey = computed(() => String(props.size));
+const isSmallSize = computed(() => sizeKey.value === 'sm' || sizeKey.value === '200');
 
 const sizeClass = computed(() => EMPTY_STATE_SIZE_MODIFIERS[sizeKey.value]);
 

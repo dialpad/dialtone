@@ -111,6 +111,8 @@ function transformContent (content) {
   return { transformed, count };
 }
 
+export { transformContent, SIZE_MAP };
+
 // ---------------------------------------------------------------------------
 // CLI
 // ---------------------------------------------------------------------------
@@ -147,6 +149,7 @@ async function prompt (question) {
   });
 }
 
+// eslint-disable-next-line complexity
 async function main () {
   const args = process.argv.slice(2);
 
@@ -210,7 +213,11 @@ async function main () {
   console.log(`\nMigrated ${changes.reduce((sum, c) => sum + c.count, 0)} references across ${changes.length} files.\n`);
 }
 
-main().catch(err => {
-  console.error(err);
-  process.exit(1);
-});
+// Only run CLI when executed directly (not when imported for testing)
+const isDirectRun = process.argv[1] && import.meta.url.endsWith(process.argv[1].replace(/\\/g, '/'));
+if (isDirectRun) {
+  main().catch(err => {
+    console.error(err);
+    process.exit(1);
+  });
+}

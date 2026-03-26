@@ -7,49 +7,7 @@
 
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
-
-// Import the transform function directly — extract it for testing
-// We'll inline the transform logic here since the main script is a CLI
-const SIZE_MAP = {
-  xs: '100',
-  sm: '200',
-  md: '300',
-  lg: '400',
-  xl: '500',
-  '2xl': '600',
-  '3xl': '700',
-};
-
-const TSHIRT_VALUES = Object.keys(SIZE_MAP).join('|');
-
-const PROP_REGEX = new RegExp(
-  `([\\w-]*(?:[Ss]ize|[Ss]peed))="(${TSHIRT_VALUES})"`,
-  'g',
-);
-
-const DT_TAG_PATTERN = /<(dt-[\w-]+|Dt\w+)\b[\s\S]*?>/g;
-
-const EXCLUDED_PROPS = ['button-width-size', 'buttonWidthSize', 'background-size', 'backgroundSize', 'font-size', 'fontSize'];
-
-function transformContent (content) {
-  let transformed = content;
-  let count = 0;
-
-  transformed = transformed.replace(DT_TAG_PATTERN, (tag) => {
-    PROP_REGEX.lastIndex = 0;
-    return tag.replace(PROP_REGEX, (match, propName, tshirt, offset, fullTag) => {
-      if (offset > 0 && fullTag[offset - 1] === ':') return match;
-      if (EXCLUDED_PROPS.includes(propName)) return match;
-      if (SIZE_MAP[tshirt]) {
-        count++;
-        return `:${propName}="${SIZE_MAP[tshirt]}"`;
-      }
-      return match;
-    });
-  });
-
-  return { transformed, count };
-}
+import { transformContent } from './index.mjs';
 
 // ---------------------------------------------------------------------------
 // Tests
