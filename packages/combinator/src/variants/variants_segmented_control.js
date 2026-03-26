@@ -182,7 +182,7 @@ export default {
     props: {
       modelValue: { initialValue: 'all' },
       ariaLabel: { initialValue: 'View filter' },
-      size: { initialValue: 'xs' },
+      size: { initialValue: '100' },
     },
   },
 
@@ -197,7 +197,7 @@ export default {
     props: {
       modelValue: { initialValue: 'all' },
       ariaLabel: { initialValue: 'View filter' },
-      size: { initialValue: 'lg' },
+      size: { initialValue: '400' },
     },
   },
 };

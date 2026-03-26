@@ -280,7 +280,7 @@ Pass `href` to render as an `<a>` element. Use `target="_blank"` and `rel="noope
     rel="noopener noreferrer"
     kind="muted"
     importance="outlined"
-    size="sm"
+    :size="200"
   >
     <template #endIcon="{ iconSize }">
       <dt-icon name="external-link" :size="iconSize" />
@@ -294,7 +294,7 @@ Pass `href` to render as an `<a>` element. Use `target="_blank"` and `rel="noope
 Pass `to` to render as `<router-link>` for internal client-side SPA navigation. Use `replace` to navigate without adding a history entry.
 
 <code-example>
-  <dt-button to="/" kind="default" size="xs">
+  <dt-button to="/" kind="default" :size="100">
     Home
   </dt-button>
 </code-example>
@@ -319,7 +319,7 @@ If you have existing `<a class="d-btn">` or `<router-link class="d-btn">` workar
     target="_blank"
     rel="noopener noreferrer"
     importance="outlined"
-    size="sm"
+    :size="200"
   >
     Link Text
   </dt-button>
@@ -334,14 +334,14 @@ If you have existing `<a class="d-btn">` or `<router-link class="d-btn">` workar
   Join Room
 </router-link>
 <!-- After: DtButton with to prop -->
-<dt-button :to="roomPath" size="sm">
+<dt-button :to="roomPath" :size="200">
   Join Room
 </dt-button>
 </code-example>
 
 ## Sizes
 
-The default button size is `md`, but does not need to be explicitly specified.
+The default button size is `300`, but does not need to be explicitly specified.
 
 <code-example>
   <dt-stack
@@ -349,13 +349,13 @@ The default button size is `md`, but does not need to be explicitly specified.
     :direction="{ 'default': 'column', 'md': 'row' }"
     data-demo-wrapper
   >
-    <dt-button size="xs" kind="muted" importance="outlined">
+    <dt-button :size="100" kind="muted" importance="outlined">
       Call
       <template #startIcon="{ iconSize }">
         <dt-icon name="phone" :size="iconSize" />
       </template>
     </dt-button>
-    <dt-button size="sm" kind="muted" importance="outlined">
+    <dt-button :size="200" kind="muted" importance="outlined">
       Call
       <template #startIcon="{ iconSize }">
         <dt-icon name="phone" :size="iconSize" />
@@ -367,13 +367,13 @@ The default button size is `md`, but does not need to be explicitly specified.
         <dt-icon name="phone" :size="iconSize" />
       </template>
     </dt-button>
-    <dt-button size="lg" kind="muted" importance="outlined">
+    <dt-button :size="400" kind="muted" importance="outlined">
       Call
       <template #startIcon="{ iconSize }">
         <dt-icon name="phone" :size="iconSize" />
       </template>
     </dt-button>
-    <dt-button size="xl" kind="muted" importance="outlined">
+    <dt-button :size="500" kind="muted" importance="outlined">
       Call
       <template #startIcon="{ iconSize }">
         <dt-icon name="phone" :size="iconSize" />
@@ -761,7 +761,7 @@ The width of the button remains determined by the length of the label, which is 
     direction="row"
   >
   <dt-button
-    size="xs"
+    :size="100"
   >
     Validating
     <template #endIcon="{ iconSize }">
@@ -771,7 +771,7 @@ The width of the button remains determined by the length of the label, which is 
     </template>
   </dt-button>
   <dt-button
-    size="sm"
+    :size="200"
   >
     Validating
     <template #endIcon="{ iconSize }">
@@ -781,7 +781,7 @@ The width of the button remains determined by the length of the label, which is 
     </template>
   </dt-button>
   <dt-button
-    size="md"
+    :size="300"
   >
     Validating
     <template #endIcon="{ iconSize }">
@@ -791,7 +791,7 @@ The width of the button remains determined by the length of the label, which is 
     </template>
   </dt-button>
   <dt-button
-    size="lg"
+    :size="400"
   >
     Validating
     <template #endIcon="{ iconSize }">
@@ -828,7 +828,7 @@ Use the `#leading` and `#trailing` slots to render freeform content at the start
 ### Trailing
 
 <code-example>
-  <dt-button size="sm" kind="muted" importance="outlined" trailing-class="d-pr2">
+  <dt-button :size="200" kind="muted" importance="outlined" trailing-class="d-pr2">
     Copy
     <template #startIcon="{ iconSize }">
       <dt-icon name="copy" :size="iconSize" />

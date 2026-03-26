@@ -206,6 +206,18 @@ describe('DtSelectMenu Tests', () => {
       });
     });
 
+    describe('When size is numeric', () => {
+      it('should have size variant class on select menu for numeric size 200', () => {
+        mockProps = { size: 200 };
+
+        updateWrapper();
+
+        selectWrapper = wrapper.find('[data-qa="dt-select-wrapper"]');
+
+        expect(selectWrapper.classes()).toContain('d-select--sm');
+      });
+    });
+
     describe('When labelSize is provided', () => {
       it('should override the default label size', () => {
         mockProps = { labelSize: 'xs' };

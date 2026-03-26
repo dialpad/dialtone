@@ -40,7 +40,7 @@
       <div
         :class="[
           'd-select',
-          SELECT_SIZE_MODIFIERS[size],
+          SELECT_SIZE_MODIFIERS[String(size)],
           selectClass,
           { 'd-select--disabled': disabled },
         ]"
@@ -160,12 +160,12 @@ export default {
 
     /**
      * Controls the size of the select
-     * @values xs, sm, md, lg, xl
+     * @values 100, 200, 300, 400, 500
      */
     size: {
-      type: String,
-      default: 'md',
-      validator: (s) => Object.keys(SELECT_SIZE_MODIFIERS).includes(s),
+      type: [String, Number],
+      default: 300,
+      validator: (s) => Object.keys(SELECT_SIZE_MODIFIERS).includes(String(s)),
     },
 
     /**
@@ -254,12 +254,12 @@ export default {
     /**
      * Overrides the label text size. When not provided, the label size
      * is derived from the component size prop.
-     * @values lg, md, sm, xs
+     * @values 100, 200, 300, 400
      */
     labelSize: {
-      type: String,
+      type: [String, Number],
       default: null,
-      validator: (s) => TEXT_SIZE_MODIFIERS.label.includes(s),
+      validator: (s) => TEXT_SIZE_MODIFIERS.label.includes(String(s)),
     },
 
     /**
@@ -309,16 +309,24 @@ export default {
 
   computed: {
     resolvedLabelSize () {
-      return this.labelSize ?? (this.size === 'xl' ? 'lg' : this.size);
+      const sizeStr = String(this.size);
+      if (this.labelSize) return this.labelSize;
+      // xl/500 exceeds label's max size — cap at lg/400
+      if (sizeStr === 'xl' || sizeStr === '500') return sizeStr === '500' ? '400' : 'lg';
+      return this.size;
     },
 
     resolvedDescriptionSize () {
-      const map = { xs: 'xs', sm: 'xs', md: 'sm', lg: 'sm', xl: 'md' };
-      return map[this.size] || 'sm';
+      const map = {
+        100: 'xs', 200: 'xs', 300: 'sm', 400: 'sm', 500: 'md',
+        xs: 'xs', sm: 'xs', md: 'sm', lg: 'sm', xl: 'md',
+      };
+      return map[String(this.size)] || 'sm';
     },
 
     resolvedDescriptionDensity () {
-      return this.size === 'xl' ? '300' : undefined;
+      const sizeStr = String(this.size);
+      return (sizeStr === 'xl' || sizeStr === '500') ? '300' : undefined;
     },
 
     selectListeners () {
