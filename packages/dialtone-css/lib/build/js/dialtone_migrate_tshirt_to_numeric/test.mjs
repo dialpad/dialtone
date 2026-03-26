@@ -27,7 +27,7 @@ const PROP_REGEX = new RegExp(
   'g',
 );
 
-const DT_TAG_PATTERN = /<(dt-[\w-]+|Dt\w+)\b[^>]*>/g;
+const DT_TAG_PATTERN = /<(dt-[\w-]+|Dt\w+)\b[\s\S]*?>/g;
 
 const EXCLUDED_PROPS = ['button-width-size', 'buttonWidthSize', 'background-size', 'backgroundSize', 'font-size', 'fontSize'];
 

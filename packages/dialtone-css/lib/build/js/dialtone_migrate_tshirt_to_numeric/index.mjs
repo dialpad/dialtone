@@ -51,7 +51,8 @@ const PROP_REGEX = new RegExp(
 const EXCLUDED_PROPS = ['button-width-size', 'buttonWidthSize', 'background-size', 'backgroundSize', 'font-size', 'fontSize'];
 
 // Only match on Dialtone component tags
-const DT_TAG_PATTERN = /<(dt-[\w-]+|Dt\w+)\b[^>]*>/g;
+// Use [\s\S] instead of [^>] to match across newlines in multiline tags
+const DT_TAG_PATTERN = /<(dt-[\w-]+|Dt\w+)\b[\s\S]*?>/g;
 
 // ---------------------------------------------------------------------------
 // File finder
