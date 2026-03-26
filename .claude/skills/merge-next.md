@@ -15,11 +15,17 @@ Executes the Dialtone Next Merge Guide: pulls both branches, merges staging into
 ```bash
 git checkout next
 git pull origin next
-git pull origin staging   # ensure staging is up to date locally
-git merge staging
+git fetch origin staging:staging   # update local staging ref without merging
+git merge --no-commit staging
 ```
 
-If the merge completes with no conflicts, skip to step 4.
+Save the list of conflicted files immediately (needed for the verification step later):
+
+```bash
+git diff --name-only --diff-filter=U > /tmp/merge-conflicted-files.txt
+```
+
+If there are no conflicts, skip to step 4.
 
 ### 2. Resolve CHANGELOG conflicts
 
@@ -76,7 +82,27 @@ Then run for real (pipe `y` to auto-confirm):
 echo "y" | node scripts/merge-migrate-color-stops.mjs --merge-from origin/staging --verbose
 ```
 
-### 5. Commit the merge
+### 5. Verify conflict resolutions
+
+**DO NOT commit yet.** Present a resolution summary to the user for review.
+
+1. Output a structured resolution summary listing every file that had conflicts and what was done:
+
+```
+Conflict resolution summary:
+- path/to/file.json: <what was chosen and why>
+- path/to/other.vue: <what was combined from each side>
+```
+
+2. Show the diff for only the files that had conflicts:
+
+```bash
+cat /tmp/merge-conflicted-files.txt | xargs git diff --cached --
+```
+
+3. **Wait for user confirmation** before proceeding to commit. Do not continue until the user approves.
+
+### 6. Commit the merge
 
 ```bash
 git commit --no-edit
@@ -84,7 +110,9 @@ git commit --no-edit
 
 This uses the default merge commit message and triggers pre-commit hooks (which may rebuild icons, etc.).
 
-### 6. Fix any lint issues introduced by the merge
+After committing, `git show --cc HEAD` can be used to re-inspect only the conflict resolution decisions at any time.
+
+### 7. Fix any lint issues introduced by the merge
 
 Check for new lint issues and fix them. Common ones:
 
@@ -98,7 +126,7 @@ git add <fixed-files>
 git commit -m "fix(<scope>): NO-JIRA fix lint issues from staging merge"
 ```
 
-### 7. Build, test, and lint
+### 8. Build, test, and lint
 
 Run the full production build:
 
@@ -109,7 +137,7 @@ pnpm nx run dialtone:build
 Run the storybook and docsite builds and verify they complete successfully:
 
 ```bash
-pnpm nx run dialtone-vue:storybook:build
+pnpm nx run dialtone-vue:build-storybook
 pnpm nx run dialtone-documentation:build
 ```
 
@@ -127,7 +155,7 @@ pnpm nx run dialtone:lint:all
 
 For any failures, determine if they are **pre-existing** (also fail on staging) or **introduced by the merge**. Only fix merge-introduced issues. Report pre-existing failures to the user.
 
-### 8. Push
+### 9. Push
 
 Do NOT push automatically. Report the results to the user and wait for confirmation before pushing.
 
