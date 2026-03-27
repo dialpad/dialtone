@@ -13,13 +13,13 @@ keywords: ["tick", "select", "form field", "d-checkbox", "DtCheckbox", "dt-check
 
 ## Usage
 
-Checkboxes are an easily understandable way to indicate that users can select one or more answers to a question or items from a list. They visibly show users what's been selected and makes it easy for them to “uncheck” an option, which can be difficult with other selection methods on a form (such as radio buttons or select menus).
+Checkboxes are an easily understandable way to indicate that users can select one or more answers to a question or items from a list. They visibly show users what's been selected and makes it easy for them to "uncheck" an option, which can be difficult with other selection methods on a form (such as radio buttons or select menus).
 
 <dialtone-usage>
 <template #do>
 
 - Selecting any number of choices from a set list.
-- Binary selections that convey opposite states, such as check=“on” and unchecked=“off”, paired with a label that conveys the choice.
+- Binary selections that convey opposite states, such as check="on" and unchecked="off", paired with a label that conveys the choice.
 - When users need to see all the available options at a glance.
 </template>
 

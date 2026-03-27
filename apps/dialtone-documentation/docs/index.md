@@ -20,7 +20,7 @@ pageClass: dialpad-design-home
       <svg-loader name="home--dialtone-badge" />
     </dt-stack>
     <h2 class="d-headline--xxl d-ff-expressive d-wmx764" style="font-size: 48px;font-family:var(--dt-font-family-expressive); text-wrap: balance; max-width: 1400px; font-weight: var(--dt-font-weight-regular);">Setting the tone.</h2>
-    <p class="d-ta-center d-docsite--paragraph d-m0 d-wmx764" style="text-wrap: balance; font-size: 24px; font-weight: 400;">Dialtone is Dialpad’s shared design language—shaping everything from our product interfaces to our marketing. It defines how our brand looks, feels, and behaves across every touchpoint. Built on principles of clarity, consistency, and accessibility, Dialtone keeps our visual identity cohesive and unmistakably Dialpad.</p>
+    <p class="d-ta-center d-docsite--paragraph d-m0 d-wmx764" style="text-wrap: balance; font-size: 24px; font-weight: 400;">Dialtone is Dialpad's shared design language—shaping everything from our product interfaces to our marketing. It defines how our brand looks, feels, and behaves across every touchpoint. Built on principles of clarity, consistency, and accessibility, Dialtone keeps our visual identity cohesive and unmistakably Dialpad.</p>
   </dt-stack>
   <dt-stack gap="700" class="d-py64 d-px64 d-pt96 d-ai-center d-bgc-secondary-opaque">
     <dt-stack style="max-width: 1400px;" direction="row" gap="600" class="d-w100p d-jc-center">

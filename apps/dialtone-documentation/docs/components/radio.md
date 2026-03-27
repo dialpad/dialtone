@@ -27,7 +27,7 @@ Radio buttons are a common way to allow users to make a single selection from a 
 
 - Consider [Checkbox](checkbox.md) if users may have the option to select more than one.
 - Consider a [Select](select-menu.md) if you don't have enough space to list out all available options.
-- If users should be able to select zero of the options; radio elements are not “uncheckable.” A [Checkbox](checkbox.md) may be warranted.
+- If users should be able to select zero of the options; radio elements are not "uncheckable." A [Checkbox](checkbox.md) may be warranted.
 - If there are too many options to display on a single view; consider a [Select](select-menu.md) instead.
 </template>
 

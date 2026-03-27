@@ -35,10 +35,10 @@ keywords: ["btn","click","action","cta","d-button","DtButton","dt-button"]
 
 Button labels should be clear and predictable so users have confidence in their actions.
 
-- Lead with a strong verb and use **verb + noun** structure except for common actions like “Done,” “Close,” “Cancel,” or “OK”
+- Lead with a strong verb and use **verb + noun** structure except for common actions like "Done," "Close," "Cancel," or "OK"
 - Should be sentence case
 - Do not use punctuation
-- Avoid unnecessary articles such as “the,” “an,” and “a.”
+- Avoid unnecessary articles such as "the," "an," and "a."
 
 <dialtone-usage>
 <template #do>

@@ -24,7 +24,7 @@ In addition to the [Button component's](button.md) documentation:
 <dialtone-usage>
 <template #do>
 
-- Use Split Buttons when you need to offer a default action paired with closely related actions, such as "Save" with secondary actions like "Save as Draft" or “Save all.”
+- Use Split Buttons when you need to offer a default action paired with closely related actions, such as "Save" with secondary actions like "Save as Draft" or "Save all."
 - Reserve for scenarios where multiple related actions can reasonably be grouped within the same context via the secondary action.
 
 </template>
