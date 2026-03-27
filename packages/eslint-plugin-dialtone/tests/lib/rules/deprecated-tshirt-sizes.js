@@ -2,14 +2,14 @@
  * @fileoverview Tests for deprecated-tshirt-sizes rule.
  * @author Dialtone Team
  */
-"use strict";
+'use strict';
 
 //------------------------------------------------------------------------------
 // Requirements
 //------------------------------------------------------------------------------
 
-const rule = require("../../../lib/rules/deprecated-tshirt-sizes"),
-  RuleTester = require("eslint").RuleTester;
+const rule = require('../../../lib/rules/deprecated-tshirt-sizes'),
+  RuleTester = require('eslint').RuleTester;
 
 //------------------------------------------------------------------------------
 // Tests
@@ -21,7 +21,7 @@ const ruleTester = new RuleTester({
   parserOptions: { ecmaVersion: 'latest' },
 });
 
-ruleTester.run("deprecated-tshirt-sizes", rule, {
+ruleTester.run('deprecated-tshirt-sizes', rule, {
   valid: [
     // Numeric sizes should be valid
     {
@@ -51,6 +51,10 @@ ruleTester.run("deprecated-tshirt-sizes", rule, {
     // Numeric speed should be valid
     {
       code: '<template><dt-motion-text :speed="300" /></template>',
+    },
+    // Dynamic binding with numeric literal should be valid
+    {
+      code: `<template><dt-button :size="isCompact ? 200 : 300" /></template>`,
     },
   ],
 
@@ -114,6 +118,24 @@ ruleTester.run("deprecated-tshirt-sizes", rule, {
       code: '<template><DtButton size="sm" /></template>',
       output: '<template><DtButton :size="200" /></template>',
       errors: [{ messageId: 'deprecatedSize' }],
+    },
+    // Dynamic binding: :size="'sm'" (string literal in expression)
+    {
+      code: `<template><dt-button :size="'sm'" /></template>`,
+      errors: [{ messageId: 'deprecatedSizeInBinding' }],
+    },
+    // Dynamic binding: ternary with t-shirt literals
+    {
+      code: `<template><dt-button :size="isCompact ? 'sm' : 'md'" /></template>`,
+      errors: [
+        { messageId: 'deprecatedSizeInBinding' },
+        { messageId: 'deprecatedSizeInBinding' },
+      ],
+    },
+    // Dynamic binding: single t-shirt in ternary
+    {
+      code: `<template><dt-text :size="isLarge ? 'xl' : 300" /></template>`,
+      errors: [{ messageId: 'deprecatedSizeInBinding' }],
     },
   ],
 });

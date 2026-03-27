@@ -19,11 +19,16 @@ const SIZE_MAP = {
   '3xl': '700',
 };
 
+const TSHIRT_VALUES = new Set(Object.keys(SIZE_MAP));
+
 // Props that accept the component size scale
 const SIZE_PROPS = ['size', 'label-size', 'labelSize'];
 
 // Speed prop on motion-text also uses the same scale
 const SPEED_PROPS = ['speed'];
+
+// All size-related prop names
+const ALL_SIZE_PROPS = [...SIZE_PROPS, ...SPEED_PROPS];
 
 // Only flag on Dialtone components (dt-* or Dt*)
 function isDialtoneComponent (node) {
@@ -47,6 +52,7 @@ module.exports = {
     schema: [],
     messages: {
       deprecatedSize: 'Size "{{oldSize}}" is deprecated. Use :{{prop}}="{{newSize}}" instead.',
+      deprecatedSizeInBinding: 'T-shirt size "{{oldSize}}" in dynamic binding is deprecated. Use numeric {{newSize}} instead.',
     },
   },
 
@@ -56,15 +62,16 @@ module.exports = {
       VAttribute (node) {
         if (!isDialtoneComponent(node)) return;
 
-        // Get the prop name — handle both `size` and `label-size` forms
-        const propName = node.key.name;
+        // Get the prop name and check if it's a size-related prop
         const isDirective = node.directive;
+        const propName = isDirective
+          ? (node.key.argument && node.key.argument.name)
+          : node.key.name;
 
-        // Skip v-bind expressions like :size="computedSize" — we only flag static values
-        if (isDirective) return;
+        if (!propName || !ALL_SIZE_PROPS.includes(propName)) return;
 
-        // Check size/label-size props
-        if (SIZE_PROPS.includes(propName) && node.value && node.value.value) {
+        // --- Static attributes: size="sm" → auto-fixable ---
+        if (!isDirective && node.value && node.value.value) {
           const sizeValue = node.value.value;
           if (SIZE_MAP[sizeValue]) {
             context.report({
@@ -76,7 +83,6 @@ module.exports = {
                 prop: propName,
               },
               fix (fixer) {
-                // Replace `size="sm"` with `:size="200"`
                 const newAttr = `:${propName}="${SIZE_MAP[sizeValue]}"`;
                 return fixer.replaceTextRange(
                   [node.range[0], node.range[1]],
@@ -85,26 +91,41 @@ module.exports = {
               },
             });
           }
+          return;
         }
 
-        // Check speed prop on motion-text
-        if (SPEED_PROPS.includes(propName) && node.value && node.value.value) {
-          const speedValue = node.value.value;
-          if (SIZE_MAP[speedValue]) {
+        // --- Dynamic bindings: :size="'sm'" or :size="x ? 'sm' : 'md'" ---
+        if (isDirective && node.value && node.value.expression) {
+          // Walk the expression tree for string literals with t-shirt values
+          const expression = node.value.expression;
+          const literals = [];
+
+          (function findLiterals (n) {
+            if (!n) return;
+            if (n.type === 'Literal' && typeof n.value === 'string' && TSHIRT_VALUES.has(n.value)) {
+              literals.push(n);
+            }
+            // Walk child nodes
+            for (const key of Object.keys(n)) {
+              if (key === 'parent') continue;
+              const child = n[key];
+              if (child && typeof child === 'object') {
+                if (Array.isArray(child)) {
+                  child.forEach(c => { if (c && c.type) findLiterals(c); });
+                } else if (child.type) {
+                  findLiterals(child);
+                }
+              }
+            }
+          })(expression);
+
+          for (const literal of literals) {
             context.report({
-              node,
-              messageId: 'deprecatedSize',
+              node: literal,
+              messageId: 'deprecatedSizeInBinding',
               data: {
-                oldSize: speedValue,
-                newSize: SIZE_MAP[speedValue],
-                prop: propName,
-              },
-              fix (fixer) {
-                const newAttr = `:${propName}="${SIZE_MAP[speedValue]}"`;
-                return fixer.replaceTextRange(
-                  [node.range[0], node.range[1]],
-                  newAttr,
-                );
+                oldSize: literal.value,
+                newSize: SIZE_MAP[literal.value],
               },
             });
           }
