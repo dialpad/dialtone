@@ -223,7 +223,7 @@ export default {
       provideObj: {
         selected: '', // the currently displayed tab id
         disabled: false, // disable group
-        size: 'default',
+        size: 300,
         kind: 'default',
         outlined: false,
         orientation: 'horizontal',
