@@ -6,8 +6,8 @@ keywords: ["theme island","mode override","v-dt-mode","directive","light","dark"
 ---
 
 <code-example only-show="demo">
-  <dt-stack gap="500">
-    <dt-stack direction="row" gap="500" justify="space-between" class="d-w100p">
+  <dt-stack gap="200">
+    <dt-stack direction="row" gap="200" justify="space-between" class="d-w100p">
       <dt-text as="h4" kind="headline" size="lg">Demo</dt-text>
       <dt-dropdown
         navigation-type="arrow-keys"
@@ -19,7 +19,7 @@ keywords: ["theme island","mode override","v-dt-mode","directive","light","dark"
             kind="muted"
             size="sm"
           >
-            <dt-stack gap="400" direction="row">
+            <dt-stack gap="100" direction="row">
               <span>
                 <dt-text strength="bold">Mode:</dt-text>
                 <dt-text tone="tertiary">{{ currentMode.charAt(0).toUpperCase() + currentMode.slice(1) }}</dt-text>
@@ -108,50 +108,50 @@ keywords: ["theme island","mode override","v-dt-mode","directive","light","dark"
         </template>
       </dt-dropdown>
     </dt-stack>
-    <dt-stack :direction="{ 'default': 'column', 'lg': 'row' }" gap="500" class="d-w100p">
-      <dt-stack gap="400" class="d-fl1">
+    <dt-stack :direction="{ 'default': 'column', 'lg': 'row' }" gap="200" class="d-w100p">
+      <dt-stack gap="100" class="d-fl1">
         <dt-text as="h3" kind="headline" size="md">Inverted <dt-text strength="normal">(auto)</dt-text></dt-text>
-        <dt-stack v-dt-mode:invert gap="400" class="d-bgc-secondary d-p-200 d-bar8 d-ba d-bc-default">
-          <dt-stack gap="400" direction="row">
+        <dt-stack v-dt-mode:invert gap="100" class="d-bgc-secondary d-p-200 d-bar8 d-ba d-bc-default">
+          <dt-stack gap="100" direction="row">
             <dt-icon name="circle-half-filled" size="300" class="d-fc-success" />
             <dt-text as="p" kind="body" size="sm">Primary</dt-text>
             <dt-text as="p" kind="body" size="sm" tone="muted">Muted</dt-text>
             <dt-text as="p" kind="body" size="sm" tone="critical">Critical</dt-text>
             <dt-link>Link</dt-link>
           </dt-stack>
-          <dt-stack direction="row" gap="400" class="d-100p">
+          <dt-stack direction="row" gap="100" class="d-100p">
             <dt-button size="sm" class="d-fl1">Button</dt-button>
             <dt-button size="sm" class="d-fl1" kind="danger">Button</dt-button>
           </dt-stack>
         </dt-stack>
       </dt-stack>
-      <dt-stack gap="400" class="d-fl1">
+      <dt-stack gap="100" class="d-fl1">
         <dt-text as="h3" kind="headline" size="md">Explicit light</dt-text>
-        <dt-stack v-dt-mode:light gap="400" class="d-bgc-secondary d-p-200 d-bar8 d-ba d-bc-default">
-          <dt-stack gap="400" direction="row">
+        <dt-stack v-dt-mode:light gap="100" class="d-bgc-secondary d-p-200 d-bar8 d-ba d-bc-default">
+          <dt-stack gap="100" direction="row">
             <dt-icon name="sun" size="300" class="d-fc-success" />
             <dt-text as="p" kind="body" size="sm">Primary</dt-text>
             <dt-text as="p" kind="body" size="sm" tone="muted">Muted</dt-text>
             <dt-text as="p" kind="body" size="sm" tone="critical">Critical</dt-text>
             <dt-link>Link</dt-link>
           </dt-stack>
-          <dt-stack direction="row" gap="400" class="d-100p">
+          <dt-stack direction="row" gap="100" class="d-100p">
             <dt-button size="sm" class="d-fl1">Button</dt-button>
             <dt-button size="sm" class="d-fl1" kind="danger">Button</dt-button>
           </dt-stack>
         </dt-stack>
       </dt-stack>
-      <dt-stack gap="400" class="d-fl1">
+      <dt-stack gap="100" class="d-fl1">
         <dt-text as="h3" kind="headline" size="md">Explicit dark</dt-text>
-        <dt-stack v-dt-mode:dark gap="400" class="d-bgc-secondary d-p-200 d-bar8 d-ba d-bc-default">
-          <dt-stack gap="400" direction="row">
+        <dt-stack v-dt-mode:dark gap="100" class="d-bgc-secondary d-p-200 d-bar8 d-ba d-bc-default">
+          <dt-stack gap="100" direction="row">
             <dt-icon name="moon" size="300" class="d-fc-success" />
             <dt-text as="p" kind="body" size="sm">Primary</dt-text>
             <dt-text as="p" kind="body" size="sm" tone="muted">Muted</dt-text>
             <dt-text as="p" kind="body" size="sm" tone="critical">Critical</dt-text>
             <dt-link>Link</dt-link>
           </dt-stack>
-          <dt-stack direction="row" gap="400" class="d-100p">
+          <dt-stack direction="row" gap="100" class="d-100p">
             <dt-button size="sm" class="d-fl1">Button</dt-button>
             <dt-button size="sm" class="d-fl1" kind="danger">Button</dt-button>
           </dt-stack>
@@ -168,7 +168,7 @@ keywords: ["theme island","mode override","v-dt-mode","directive","light","dark"
 Use the `v-dt-mode` directive to control the color mode of a region, component, or element. It creates a scoped region with the specified mode. Descendant elements retain their original styling but are rendered with the specified mode.
 
 <code-example>
-  <dt-stack gap="400" data-demo-wrapper>
+  <dt-stack gap="100" data-demo-wrapper>
     <dt-text v-dt-mode:dark tone="success"> Dark content </dt-text>
     <dt-text v-dt-mode:light tone="success"> Light content </dt-text>
     <dt-text v-dt-mode:invert tone="success"> Inverted — opposite of parent or root </dt-text>
@@ -182,7 +182,7 @@ This effectively removes the need for `inverted` props or variants on elements o
 For example, instead of using `inverted` on a DtButton, use `v-dt-mode:invert`
 
 <code-example>
-  <dt-stack gap="400" direction="row" data-demo-wrapper>
+  <dt-stack gap="200" direction="row" data-demo-wrapper>
     <dt-button>Button</dt-button>
     <dt-button v-dt-mode:invert>Button</dt-button>
   </dt-stack>
@@ -193,8 +193,8 @@ For example, instead of using `inverted` on a DtButton, use `v-dt-mode:invert`
 Bind a reactive variable as the directive arg to switch modes at runtime.
 
 <code-example>
-  <dt-stack gap="500">
-    <dt-stack gap="400" direction="row">
+  <dt-stack gap="200">
+    <dt-stack gap="100" direction="row">
       <dt-button
         kind="muted"
         size="sm"
@@ -311,11 +311,11 @@ Explicitly set to dark mode regardless of parent or root mode.
 Mode boundaries can be nested. Each `v-dt-mode:invert` reads the nearest parent boundary and flips. In this example the first level is explicitly set to light mode, the second level inverts against that, and the third level inverts again.
 
 <code-example>
-  <dt-stack gap="500" v-dt-mode:light class="d-p-200 d-bar8 d-bgc-secondary d-ba">
+  <dt-stack gap="200" v-dt-mode:light class="d-p-200 d-bar8 d-bgc-secondary d-ba">
     <dt-text as="p" tone="success" text-box-trim="both">Explicit Light</dt-text>
-    <dt-stack v-dt-mode gap="500" class="d-p-200 d-bar8 d-bgc-secondary">
+    <dt-stack v-dt-mode gap="200" class="d-p-200 d-bar8 d-bgc-secondary">
       <dt-text as="p" tone="success" text-box-trim="both">Inverted (Dark)</dt-text>
-      <dt-stack v-dt-mode gap="500" class="d-p-200 d-bar4 d-bgc-secondary">
+      <dt-stack v-dt-mode gap="200" class="d-p-200 d-bar4 d-bgc-secondary">
         <dt-text as="p" tone="success" text-box-trim="both">Inverted again (Light)</dt-text>
       </dt-stack>
     </dt-stack>
@@ -327,38 +327,40 @@ Mode boundaries can be nested. Each `v-dt-mode:invert` reads the nearest parent 
 The background surface of a Mode Island defaults to the root surface color. To override, use a CSS Utility class.
 
 <code-example>
-  <dt-mode-island class="d-p-200 d-bar8 d-w100p d-bgc-transparent">
-    <dt-stack gap="400">
-      <dt-text as="p" kind="code" size="xs" tone="tertiary">Transparent background, inverted mode island</dt-text>
-      <div>
-        <dt-button>Button</dt-button>
-      </div>
-    </dt-stack>
-  </dt-mode-island>
-  <dt-mode-island class="d-p-200 d-bar8 d-w100p">
-    <dt-stack gap="400">
-      <dt-text as="p" kind="code" size="xs" tone="tertiary">Default background, inverted mode island</dt-text>
-      <div>
-        <dt-button>Button</dt-button>
-      </div>
-    </dt-stack>
-  </dt-mode-island>
-  <dt-mode-island mode="dark" class="d-p-200 d-bar8 d-w100p d-bgc-critical">
-    <dt-stack gap="400">
-      <dt-text as="p" kind="code" size="xs" tone="tertiary">critical background, dark mode island</dt-text>
-      <div>
-        <dt-button>Button</dt-button>
-      </div>
-    </dt-stack>
-  </dt-mode-island>
-  <dt-mode-island mode="light" class="d-p-200 d-bar8 d-w100p d-bgc-critical">
-    <dt-stack gap="400">
-      <dt-text as="p" kind="code" size="xs" tone="tertiary">critical background, light mode island</dt-text>
-      <div>
-        <dt-button>Button</dt-button>
-      </div>
-    </dt-stack>
-  </dt-mode-island>
+  <dt-stack gap="200">
+    <dt-mode-island class="d-p-200 d-bar8 d-w100p d-bgc-transparent">
+      <dt-stack gap="200">
+        <dt-text as="p" kind="code" size="xs" tone="tertiary">Transparent background, inverted mode island</dt-text>
+        <div>
+          <dt-button>Button</dt-button>
+        </div>
+      </dt-stack>
+    </dt-mode-island>
+    <dt-mode-island class="d-p-200 d-bar8 d-w100p">
+      <dt-stack gap="200">
+        <dt-text as="p" kind="code" size="xs" tone="tertiary">Default background, inverted mode island</dt-text>
+        <div>
+          <dt-button>Button</dt-button>
+        </div>
+      </dt-stack>
+    </dt-mode-island>
+    <dt-mode-island mode="dark" class="d-p-200 d-bar8 d-w100p d-bgc-critical">
+      <dt-stack gap="200">
+        <dt-text as="p" kind="code" size="xs" tone="tertiary">critical background, dark mode island</dt-text>
+        <div>
+          <dt-button>Button</dt-button>
+        </div>
+      </dt-stack>
+    </dt-mode-island>
+    <dt-mode-island mode="light" class="d-p-200 d-bar8 d-w100p d-bgc-critical">
+      <dt-stack gap="200">
+        <dt-text as="p" kind="code" size="xs" tone="tertiary">critical background, light mode island</dt-text>
+        <div>
+          <dt-button>Button</dt-button>
+        </div>
+      </dt-stack>
+    </dt-mode-island>
+  </dt-stack>
 </code-example>
 
 ## Examples
@@ -368,23 +370,23 @@ The background surface of a Mode Island defaults to the root surface color. To o
 A real-world pattern: the callbar container already exists as a semantic element. The directive applies mode theming directly — no wrapper needed.
 
 <code-example>
-  <dt-stack v-dt-mode class="d-ba d-bc-subtle d-bgc-secondary d-p-75 d-py-50 d-bar12 d-bs-md d-w100p" direction="row" gap="600">
-    <dt-stack gap="400" direction="row">
+  <dt-stack v-dt-mode class="d-ba d-bc-subtle d-bgc-secondary d-p-75 d-py-50 d-bar12 d-bs-md d-w100p" direction="row" gap="400">
+    <dt-stack gap="100" direction="row">
       <dt-avatar
         full-name="TA"
         seed="ted-anderson"
         size="lg"
       />
-      <dt-stack gap="200">
+      <dt-stack gap="25">
         <dt-text kind="label" size="md" density="200">Ted Anderson</dt-text>
-        <dt-stack direction="row" gap="300" align="baseline">
+        <dt-stack direction="row" gap="50" align="baseline">
           <dt-text kind="body" size="xs" tone="tertiary" wrap="nowrap" numeric>(913) 555-6745</dt-text>
           <dt-text kind="body" size="xs" tone="muted">&bull;</dt-text>
           <dt-text kind="body" size="xs" tone="tertiary" numeric>21:18</dt-text>
         </dt-stack>
       </dt-stack>
     </dt-stack>
-    <dt-stack class="d-fl1" direction="row" gap="200" justify="center">
+    <dt-stack class="d-fl1" direction="row" gap="25" justify="center">
       <dt-button class="d-px-100 d-w-100 d-w64" size="xs" kind="danger">
         <template #blockStartIcon> <dt-icon name="mic" size="300" /> </template>
         Unmute
@@ -461,10 +463,10 @@ A real-world pattern: the callbar container already exists as a semantic element
   </template>
 </dt-dropdown>
 '>
-  <dt-stack gap="500">
-    <dt-stack gap="200">
+  <dt-stack gap="200">
+    <dt-stack gap="25">
       <dt-text as="p" kind="headline" size="md">Hovercard</dt-text>
-      <dt-stack gap="400" direction="row">
+      <dt-stack gap="100" direction="row">
         <dt-hovercard placement="top-start">
           <template #anchor>
             <dt-button size="sm" kind="muted" importance="outlined">Default </dt-button>
@@ -499,9 +501,9 @@ A real-world pattern: the callbar container already exists as a semantic element
         </dt-hovercard>
       </dt-stack>
     </dt-stack>
-    <dt-stack gap="200">
+    <dt-stack gap="25">
       <dt-text as="p" kind="headline" size="md">Popover</dt-text>
-      <dt-stack gap="400" direction="row">
+      <dt-stack gap="100" direction="row">
         <dt-popover placement="top-start" dialogClass="d-w216">
           <template #anchor>
             <dt-button size="sm" kind="muted" importance="outlined"> Default </dt-button>
@@ -536,9 +538,9 @@ A real-world pattern: the callbar container already exists as a semantic element
         </dt-popover>
       </dt-stack>
     </dt-stack>
-    <dt-stack gap="200">
+    <dt-stack gap="25">
       <dt-text as="p" kind="headline" size="md">Dropdown</dt-text>
-      <dt-stack gap="400" direction="row">
+      <dt-stack gap="100" direction="row">
         <dt-dropdown navigation-type="arrow-keys" placement="bottom-start">
           <template #anchor="{ attrs }">
             <dt-button v-bind="attrs" size="sm" kind="muted" importance="outlined">
