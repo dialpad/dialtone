@@ -228,4 +228,48 @@
   inline-size: var(--dt-size-999);
   padding: var(--dt-size-123);
 }
+
+/* ============================================ */
+/* ADDITIONAL COVERAGE (from review feedback)   */
+/* ============================================ */
+
+/* --dt-size-50 in spacing context → spacing-1 (0.5px → 1px nearest) */
+.test-size-50-spacing {
+  padding: var(--dt-size-50);           /* → spacing-1 */
+  letter-spacing: var(--dt-size-50);    /* → spacing-1 (via default) */
+}
+
+/* Unmapped layout stops that should now have nearest-neighbor entries */
+.test-newly-mapped-stops {
+  inline-size: var(--dt-size-720);      /* 72px → layout-100 (64px) */
+  inline-size: var(--dt-size-730);      /* 84px → layout-125 (80px) */
+  inline-size: var(--dt-size-760);      /* 102px → layout-150 (96px) */
+  inline-size: var(--dt-size-775);      /* 114px → layout-175 (112px) */
+}
+
+/* Negative and percent suffixes */
+.test-suffixes {
+  margin: var(--dt-size-400-negative);  /* → spacing-100-negative */
+  inline-size: var(--dt-size-100-percent); /* → layout-100-percent */
+}
+
+/* calc(var(--dt-spacing-*) * -1) → negative token cleanup */
+.test-calc-negation {
+  inset: calc(var(--dt-spacing-100) * -1);  /* → var(--dt-spacing-100-negative) */
+  margin: calc(var(--dt-spacing-300) * -1); /* → var(--dt-spacing-300-negative) */
+}
+
+/* Border-width context → --dt-size-border-* */
+.test-border-width {
+  border: var(--dt-size-100) solid red;         /* → dt-size-border-100 */
+  border-width: var(--dt-size-200);             /* → dt-size-border-200 */
+  outline: var(--dt-size-100) solid;            /* → dt-size-border-100 */
+}
+
+/* Border-radius context → --dt-size-radius-* */
+.test-border-radius {
+  border-radius: var(--dt-size-300);            /* → dt-size-radius-300 */
+  border-radius: var(--dt-size-400);            /* → dt-size-radius-400 */
+  --badge-radius: var(--dt-size-300);           /* "radius" keyword → dt-size-radius-300 */
+}
 </style>

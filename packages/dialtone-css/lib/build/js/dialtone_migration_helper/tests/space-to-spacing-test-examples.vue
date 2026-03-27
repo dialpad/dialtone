@@ -186,8 +186,8 @@
   gap: var(--dt-spacing-400);
 }
 
-/* Custom property definition (should NOT be replaced) */
+/* Custom property definition — WILL be replaced (regex is context-free) */
 .test-skip-custom-prop {
-  --my-spacing: var(--dt-space-400);
+  --my-spacing: var(--dt-space-400); /* → var(--dt-spacing-100) */
 }
 </style>
