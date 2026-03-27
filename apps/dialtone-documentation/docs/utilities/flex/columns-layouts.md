@@ -76,9 +76,9 @@ By default flexed items align to `flex-start` both horizontally and vertically (
 
 <code-well-header>
   <dt-stack direction="row" align="center" justify="center" class="d-w100p d-hmn216 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-w-75 d-h-75 d-m-100 d-p-200 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-w-100 d-h-100 d-m-100 d-p-200 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-w-75 d-h-75 d-m-100 d-p-200 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-size-75 d-m-100 d-p-200 d-bgc-moderate-opaque d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-size-100 d-m-100 d-p-200 d-bgc-moderate-opaque d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-size-75 d-m-100 d-p-200 d-bgc-moderate-opaque d-bar4">3</dt-stack>
   </dt-stack>
 </code-well-header>
 

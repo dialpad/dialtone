@@ -10,7 +10,7 @@ Use `d-bgr-{n}` to how an element's background image repeats.
 
 <code-well-header class="d-fl-col3 d-fw-wrap d-g-200 d-p-200 d-bgc-secondary" custom>
   <dt-stack align="center" class="d-g-50" v-for="i in repeat">
-      <dt-stack direction="row" align="center" justify="center" class="d-w-200 d-h-200 d-bgc-moderate d-bar8 d-of-hidden d-bgp-tl d-bgs-var" style="--bgg-size: 65% 65%; background-image: url('/assets/images/puffin.jpg');"
+      <dt-stack direction="row" align="center" justify="center" class="d-size-200 d-bgc-moderate d-bar8 d-of-hidden d-bgp-tl d-bgs-var" style="--bgg-size: 65% 65%; background-image: url('/assets/images/puffin.jpg');"
         :class="`d-bgr-${i}`">
       </dt-stack>
       <code class="d-code--sm d-bgc-transparent">.d-bgr-{{ i }}</code>

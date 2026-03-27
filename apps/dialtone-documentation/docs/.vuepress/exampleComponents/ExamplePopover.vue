@@ -30,7 +30,7 @@
     </template>
     <template #content>
       <slot name="content">
-        <div class="d-mb8">
+        <div class="d-mbe-100">
           This is content rendered within the popover.
         </div>
       </slot>

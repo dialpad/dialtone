@@ -3,63 +3,95 @@
   "values": [
     {
       "value": "0",
-      "output": "0px"
+      "output": "0rem"
     },
     {
       "value": "1",
-      "output": "1px"
+      "output": "0.1rem"
     },
     {
       "value": "25",
-      "output": "2px"
+      "output": "0.2rem"
     },
     {
       "value": "50",
-      "output": "4px"
+      "output": "0.4rem"
     },
     {
       "value": "75",
-      "output": "6px"
+      "output": "0.6rem"
     },
     {
       "value": "100",
-      "output": "8px"
+      "output": "0.8rem"
     },
     {
       "value": "125",
-      "output": "10px"
+      "output": "1rem"
     },
     {
       "value": "150",
-      "output": "12px"
+      "output": "1.2rem"
     },
     {
       "value": "175",
-      "output": "14px"
+      "output": "1.4rem"
     },
     {
       "value": "200",
-      "output": "16px"
+      "output": "1.6rem"
     },
     {
       "value": "250",
-      "output": "20px"
+      "output": "2rem"
     },
     {
       "value": "300",
-      "output": "24px"
+      "output": "2.4rem"
+    },
+    {
+      "value": "350",
+      "output": "2.8rem"
     },
     {
       "value": "400",
-      "output": "32px"
+      "output": "3.2rem"
+    },
+    {
+      "value": "450",
+      "output": "3.6rem"
+    },
+    {
+      "value": "500",
+      "output": "4rem"
+    },
+    {
+      "value": "525",
+      "output": "4.2rem"
+    },
+    {
+      "value": "550",
+      "output": "4.4rem"
     },
     {
       "value": "600",
-      "output": "48px"
+      "output": "4.8rem"
+    },
+    {
+      "value": "650",
+      "output": "5.2rem"
+    },
+    {
+      "value": "700",
+      "output": "5.6rem"
+    },
+    {
+      "value": "750",
+      "output": "6rem"
     },
     {
       "value": "800",
-      "output": "64px"
+      "output": "6.4rem"
     }
   ],
   "coordinateDirections": [
@@ -104,91 +136,91 @@
       "coordinate": "0",
       "negative": "no",
       "combo": "yes",
-      "value": "0px"
+      "value": "0"
     },
     {
       "coordinate": "1",
       "negative": "yes",
       "combo": "yes",
-      "value": "1px"
+      "value": "0.1rem"
     },
     {
       "coordinate": "25",
       "negative": "yes",
       "combo": "yes",
-      "value": "2px"
+      "value": "0.2rem"
     },
     {
       "coordinate": "50",
       "negative": "yes",
       "combo": "yes",
-      "value": "4px"
+      "value": "0.4rem"
     },
     {
       "coordinate": "75",
       "negative": "yes",
       "combo": "yes",
-      "value": "6px"
+      "value": "0.6rem"
     },
     {
       "coordinate": "100",
       "negative": "yes",
       "combo": "yes",
-      "value": "8px"
+      "value": "0.8rem"
     },
     {
       "coordinate": "125",
       "negative": "yes",
       "combo": "yes",
-      "value": "10px"
+      "value": "1rem"
     },
     {
       "coordinate": "150",
       "negative": "yes",
       "combo": "yes",
-      "value": "12px"
+      "value": "1.2rem"
     },
     {
       "coordinate": "175",
       "negative": "yes",
       "combo": "yes",
-      "value": "14px"
+      "value": "1.4rem"
     },
     {
       "coordinate": "200",
       "negative": "yes",
       "combo": "yes",
-      "value": "16px"
+      "value": "1.6rem"
     },
     {
       "coordinate": "250",
       "negative": "yes",
       "combo": "yes",
-      "value": "20px"
+      "value": "2rem"
     },
     {
       "coordinate": "300",
       "negative": "yes",
       "combo": "yes",
-      "value": "24px"
+      "value": "2.4rem"
     },
     {
       "coordinate": "400",
       "negative": "yes",
       "combo": "yes",
-      "value": "32px"
+      "value": "3.2rem"
     },
     {
       "coordinate": "600",
       "negative": "yes",
       "combo": "yes",
-      "value": "48px"
+      "value": "4.8rem"
     },
     {
       "coordinate": "800",
       "negative": "yes",
       "combo": "yes",
-      "value": "64px"
+      "value": "6.4rem"
     },
     {
       "coordinate": "50p",

@@ -117,7 +117,7 @@ Since this will be primary content on a dark surface, let's use `d-fc-primary-in
 
 ### 4. Apply Some Padding
 
-Let's use `d-p8` padding for all four sides, from the list of [padding utility classes](/utilities/spacing/padding/index.md).
+Let's use `d-p-100` padding for all four sides, from the list of [padding utility classes](/utilities/spacing/padding/index.md).
 
 <code-well-header>
   <div class="d-bgc-primary-inverted d-fc-primary-inverted d-p-100">

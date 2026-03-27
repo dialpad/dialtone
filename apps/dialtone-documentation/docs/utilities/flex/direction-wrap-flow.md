@@ -12,14 +12,14 @@ The `flex-direction` property declares a flex container’s main axis direction.
 
 <code-well-header>
   <dt-stack class="d-fd-row-reverse d-w100p d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-size-100 d-bgc-moderate-opaque d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-size-100 d-bgc-moderate-opaque d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-size-100 d-bgc-moderate-opaque d-bar4">3</dt-stack>
   </dt-stack>
-  <dt-stack class="d-fd-row d-w100p d-mt-200 d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+  <dt-stack class="d-fd-row d-w100p d-mbs-200 d-bar8 d-bgc-moderate">
+    <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-size-100 d-bgc-moderate-opaque d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-size-100 d-bgc-moderate-opaque d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-size-100 d-bgc-moderate-opaque d-bar4">3</dt-stack>
   </dt-stack>
 </code-well-header>
 
@@ -38,10 +38,10 @@ The `flex-direction` property declares a flex container’s main axis direction.
 
 ### Classes
 
-<clamped-table-wrapper class="d-mb-200">
+<clamped-table-wrapper class="d-mbe-200">
   <div>
     <table class="d-table dialtone-doc-table">
-      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t-0">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-ibs-0">
         <tr>
           <th scope="col" class="d-p-0 d-bbw0 d-w20p"><div class="d-p-200 d-bb d-bbw1">Class</div></th>
           <th scope="col" class="d-p-0 d-bbw0 d-w30p"><div class="d-p-200 d-bb d-bbw1">Output</div></th>
@@ -81,10 +81,10 @@ The `flex-wrap` property declares a flex container’s wrapping status. The defa
 
 ### Classes
 
-<clamped-table-wrapper class="d-mb-200">
+<clamped-table-wrapper class="d-mbe-200">
   <div>
     <table class="d-table dialtone-doc-table">
-      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t-0">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-ibs-0">
         <tr>
           <th scope="col" class="d-p-0 d-bbw0 d-w20p"><div class="d-p-200 d-bb d-bbw1">Class</div></th>
           <th scope="col" class="d-p-0 d-bbw0 d-w30p"><div class="d-p-200 d-bb d-bbw1">Output</div></th>
@@ -124,10 +124,10 @@ The `flex-flow` property is a shorthand property that sets allows you to quickly
 
 ### Classes
 
-<clamped-table-wrapper class="d-mb-200">
+<clamped-table-wrapper class="d-mbe-200">
   <div>
     <table class="d-table dialtone-doc-table">
-      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t-0">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-ibs-0">
         <tr>
           <th scope="col" class="d-p-0 d-bbw0 d-w20p"><div class="d-p-200 d-bb d-bbw1">Class</div></th>
           <th scope="col" class="d-p-0 d-bbw0 d-w30p"><div class="d-p-200 d-bb d-bbw1">Output</div></th>

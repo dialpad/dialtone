@@ -68,7 +68,7 @@ Use keyword utilities to set both width and height using CSS keyword values.
 <clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
-      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t-0">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-ibs-0">
         <tr>
           <th scope="col" class="d-p-0 d-bbw0 d-w30p"><div class="d-p-200 d-bb d-bbw1">Class</div></th>
           <th scope="col" class="d-p-0 d-bbw0"><div class="d-p-200 d-bb d-bbw1">Output</div></th>
@@ -77,7 +77,7 @@ Use keyword utilities to set both width and height using CSS keyword values.
       <tbody>
         <tr v-for="i in layout">
           <th scope="row" class="d-code--sm d-docsite-code">.d-size-{{ i.stop }}</th>
-          <td class="d-code--sm">inline-size: var(--dt-layout-{{ i.stop }}) !important; block-size: var(--dt-layout-{{ i.stop }}) !important; <span class="d-fc-tertiary">/* {{ i.px }}px */</span></td>
+          <td class="d-code--sm">inline-size: var(--dt-layout-{{ i.stop }}) !important; block-size: var(--dt-layout-{{ i.stop }}) !important; <span class="d-fc-tertiary">/* {{ i.px }}px / {{ (i.px / 10).toFixed(1) }}rem */</span></td>
         </tr>
       </tbody>
       <tbody>

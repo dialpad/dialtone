@@ -8,7 +8,7 @@ keywords: ["top","right","bottom","left","inset","position offset"]
 
 ### Examples
 
-Use the `top|right|bottom|left|x|y|all` utility classes to absolutely position elements within the nearest positioned element.
+Use `d-t-{stop}`, `d-r-{stop}`, `d-b-{stop}`, `d-l-{stop}`, `d-x-{stop}`, `d-y-{stop}`, `d-all-{stop}` to absolutely position elements. Logical property aliases are also available: `d-ibs-{stop}` (inset-block-start), `d-iie-{stop}` (inset-inline-end), `d-ibe-{stop}` (inset-block-end), `d-iis-{stop}` (inset-inline-start).
 
 <code-well-header>
   <div class="d-w100p d-hmn216 d-d-grid d-g-cols4 d-g-200 d-pi-center">
@@ -110,7 +110,7 @@ Use the `top|right|bottom|left|x|y|all` utility classes to absolutely position e
 
 ### Examples
 
-Use the `top|right|bottom|left|x|y|all` utility classes to absolutely position elements within the nearest positioned element.
+Use `d-t-{stop}`, `d-r-{stop}`, `d-b-{stop}`, `d-l-{stop}`, `d-x-{stop}`, `d-y-{stop}`, `d-all-{stop}` to absolutely position elements. Logical property aliases are also available: `d-ibs-{stop}` (inset-block-start), `d-iie-{stop}` (inset-inline-end), `d-ibe-{stop}` (inset-block-end), `d-iis-{stop}` (inset-inline-start).
 
 <code-well-header>
   <div class="d-w100p d-hmn216 d-d-grid d-g-cols4 d-g-200 d-pi-center">

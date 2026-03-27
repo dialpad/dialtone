@@ -9,9 +9,9 @@ keywords: ["minimum width", "mnw"]
 Use `d-wmn-{stop}` to set a fixed minimum width for an element using layout token stops. The hyphen before the number indicates a layout token reference, e.g. `d-wmn-100` outputs `min-inline-size: var(--dt-layout-100)` (64px). This can be combined with `d-w{n}p` and `d-wmx-{stop}` to have an element fill a certain width range.
 
 <code-well-header class="d-d-flex d-jc-center d-p-300 d-bgc-secondary d-w100p d-flow16 d-of-x-scroll" custom>
-  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w-100 d-h-100 d-wmn-100 d-bgc-moderate d-bar4">1</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w-100 d-h-100 d-wmn-150 d-bgc-moderate d-bar4">2</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w-100 d-h-100 d-wmn-500 d-bgc-moderate d-bar4">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-size-100 d-wmn-100 d-bgc-moderate d-bar4">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-size-100 d-wmn-150 d-bgc-moderate d-bar4">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-size-100 d-wmn-500 d-bgc-moderate d-bar4">3</dt-stack>
 </code-well-header>
 
 ```html
@@ -64,7 +64,7 @@ Use keyword utilities to set minimum width using CSS keyword values.
 <clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
-      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t-0">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-ibs-0">
         <tr>
           <th scope="col" class="d-p-0 d-bbw0 d-w30p"><div class="d-p-200 d-bb d-bbw1">Class</div></th>
           <th scope="col" class="d-p-0 d-bbw0"><div class="d-p-200 d-bb d-bbw1">Output</div></th>
@@ -73,7 +73,7 @@ Use keyword utilities to set minimum width using CSS keyword values.
       <tbody>
         <tr v-for="i in layout">
           <th scope="row" class="d-code--sm d-docsite-code">.d-wmn-{{ i.stop }}</th>
-          <td class="d-code--sm">min-inline-size: var(--dt-layout-{{ i.stop }}) !important; <span class="d-fc-tertiary">/* {{ i.px }}px */</span></td>
+          <td class="d-code--sm">min-inline-size: var(--dt-layout-{{ i.stop }}) !important; <span class="d-fc-tertiary">/* {{ i.px }}px / {{ (i.px / 10).toFixed(1) }}rem */</span></td>
         </tr>
       </tbody>
       <tbody>

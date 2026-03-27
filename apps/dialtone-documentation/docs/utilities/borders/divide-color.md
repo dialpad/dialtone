@@ -48,7 +48,7 @@ Use `d-divide-x{n}` to create a divider between an element's child items.
 
 <new-utility-class-table :classes="divideColors">
   <template #example="{ className }">
-    <dt-stack direction="row" class="d-fl-shrink0 d-w-75 d-h-75 d-w-50 d-ta-center" :class="[
+    <dt-stack direction="row" class="d-fl-shrink0 d-size-75 d-w-50 d-ta-center" :class="[
         className.startsWith('d-divide-x') ? 'd-divide-x d-fl-col2' : 'd-divide-y d-fd-column',
         className
       ]">

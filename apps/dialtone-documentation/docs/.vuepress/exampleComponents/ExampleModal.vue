@@ -16,7 +16,7 @@
         id="confirm-button"
         importance="primary"
         :kind="kind"
-        class="d-ml6"
+        class="d-mis-75"
         @click="isOpen = false"
       >
         Confirm

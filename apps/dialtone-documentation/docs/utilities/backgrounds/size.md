@@ -10,7 +10,7 @@ Use `d-bgs-{n}` to control the size of element's background image.
 
 <code-well-header class="d-fl-col5 d-fw-wrap d-g-200 d-p-200 d-bgc-secondary" custom>
   <dt-stack align="center" class="d-g-50" v-for="i in sizes">
-      <dt-stack direction="row" align="center" justify="center" class="d-w-200 d-h-200 d-bgc-moderate d-bar8 d-of-hidden d-bgr-none" style="background-image: url('/assets/images/puffin.jpg');"
+      <dt-stack direction="row" align="center" justify="center" class="d-size-200 d-bgc-moderate d-bar8 d-of-hidden d-bgr-none" style="background-image: url('/assets/images/puffin.jpg');"
         :style="i === 'var' ? '--bgg-size: 65% 65%;' : ''"
         :class="[{'d-bgp-center': i === 'auto'}, `d-bgs-${i}`]">
       </dt-stack>

@@ -16,9 +16,9 @@ Use `d-w-{stop}` to set a fixed width for an element using layout token stops. T
 </code-well-header>
 
 ```html
-<div class="d-w-100">...</div>  <!-- inline-size: var(--dt-layout-100) = 64px -->
-<div class="d-w-200">...</div>  <!-- inline-size: var(--dt-layout-200) = 128px -->
-<div class="d-w-400">...</div>  <!-- inline-size: var(--dt-layout-400) = 256px -->
+<div class="d-w-100">...</div>  <!-- inline-size: var(--dt-layout-100) = 64px / 6.4rem -->
+<div class="d-w-200">...</div>  <!-- inline-size: var(--dt-layout-200) = 128px / 12.8rem -->
+<div class="d-w-400">...</div>  <!-- inline-size: var(--dt-layout-400) = 256px / 25.6rem -->
 ```
 
 ## Percentages
@@ -96,7 +96,7 @@ Use keyword utilities to set width using CSS keyword values.
 <clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
-      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t-0">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-ibs-0">
         <tr>
           <th scope="col" class="d-p-0 d-bbw0 d-w30p"><div class="d-p-200 d-bb d-bbw1">Class</div></th>
           <th scope="col" class="d-p-0 d-bbw0"><div class="d-p-200 d-bb d-bbw1">Output</div></th>
@@ -105,7 +105,7 @@ Use keyword utilities to set width using CSS keyword values.
       <tbody>
         <tr v-for="i in layout">
           <th scope="row" class="d-code--sm d-docsite-code">.d-w-{{ i.stop }}</th>
-          <td class="d-code--sm">inline-size: var(--dt-layout-{{ i.stop }}) !important; <span class="d-fc-tertiary">/* {{ i.px }}px */</span></td>
+          <td class="d-code--sm">inline-size: var(--dt-layout-{{ i.stop }}) !important; <span class="d-fc-tertiary">/* {{ i.px }}px / {{ (i.px / 10).toFixed(1) }}rem */</span></td>
         </tr>
       </tbody>
       <tbody>

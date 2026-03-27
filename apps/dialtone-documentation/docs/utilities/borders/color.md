@@ -178,7 +178,7 @@ You can also change the border color opacity value on `:hover`
   <template #example="{ className }">
     <div :class="['d-d-inline-flex', {'d-bgc-contrast': className.endsWith('inverted')}]" >
       <div
-        class="d-fl-shrink0 d-m-50 d-h-75 d-w-75 d-bar4 d-ba d-baw2"
+        class="d-fl-shrink0 d-m-50 d-size-75 d-bar4 d-ba d-baw2"
         :class="className"
       />
     </div>

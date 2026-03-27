@@ -1,6 +1,6 @@
 <template>
   <div
-    class="d-d-grid d-g64 d-g-cols3"
+    class="d-d-grid d-g-800 d-g-cols3"
   >
     <dt-tooltip
       v-for="direction in directions"
@@ -11,7 +11,7 @@
       <template #anchor>
         <dt-button
           importance="outlined"
-          class="d-w128"
+          class="d-w-200"
         >
           {{ direction }}
         </dt-button>

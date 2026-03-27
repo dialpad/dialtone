@@ -32,10 +32,10 @@ Use `d-pli-start{-n}` to align grid items along the start of their block and/or 
 
 <code-well-header>
   <div class="d-d-grid d-g-cols2 d-pli-start d-g-200 d-w100p d-h-350 d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">3</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">4</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-size-100 d-bgc-moderate-opaque d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-size-100 d-bgc-moderate-opaque d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-size-100 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-size-100 d-bgc-moderate-opaque d-bar4">4</dt-stack>
   </div>
 </code-well-header>
 
@@ -54,10 +54,10 @@ Use `d-pli-end{-n}` to align grid items along the end of their block and/or inli
 
 <code-well-header>
   <div class="d-d-grid d-g-cols2 d-pli-end d-g-200 d-w100p d-h-350 d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">3</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">4</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-size-100 d-bgc-moderate-opaque d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-size-100 d-bgc-moderate-opaque d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-size-100 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-size-100 d-bgc-moderate-opaque d-bar4">4</dt-stack>
   </div>
 </code-well-header>
 
@@ -76,10 +76,10 @@ Use `d-pli-center{-n}` to align grid items along the center of their block and/o
 
 <code-well-header>
   <div class="d-d-grid d-g-cols2 d-pli-center d-g-200 d-w100p d-h-350 d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">3</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-w-100 d-h-100 d-bgc-moderate-opaque d-bar4">4</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-size-100 d-bgc-moderate-opaque d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-size-100 d-bgc-moderate-opaque d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-size-100 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-size-100 d-bgc-moderate-opaque d-bar4">4</dt-stack>
   </div>
 </code-well-header>
 
