@@ -28,7 +28,7 @@ import {
   TEXT_DENSITY_MODIFIERS,
 } from './text_constants';
 
-const DEFAULT_SIZE = 'md';
+const DEFAULT_SIZE = '300';
 const SEMANTIC_HEADING_ELEMENTS = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 
 // Module-level flag to emit info only once per session
