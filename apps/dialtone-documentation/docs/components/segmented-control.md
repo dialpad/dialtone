@@ -168,7 +168,7 @@ Add `disabled` to an individual item.
   ...
 </dt-segmented-control>
 '>
-  <dt-stack gap="400" class="d-w100p" data-demo-wrapper>
+  <dt-stack gap="100" class="d-w100p" data-demo-wrapper>
     <dt-segmented-control v-model="selected" size="xs" aria-label="Extra small">
       <dt-segmented-control-item value="all">All</dt-segmented-control-item>
       <dt-segmented-control-item value="favorites">Favorites</dt-segmented-control-item>
@@ -233,7 +233,7 @@ Use the `#startIcon` or `#endIcon` slot on `dt-segmented-control-item` to add an
 Omit the default slot text to create icon-only items. Use the `label` prop for accessibility.
 
 <code-example>
-  <dt-stack gap="400" class="d-w464" data-demo-wrapper>
+  <dt-stack gap="100" class="d-w464" data-demo-wrapper>
     <div>
       <dt-segmented-control v-model="iconOnlySelected" aria-label="Appearance mode">
         <dt-segmented-control-item value="system" label="System">
@@ -311,7 +311,7 @@ Set `orientation="vertical"` to stack items vertically.
   ...
 </dt-segmented-control>
 '>
-  <dt-stack direction="row" gap="500" align="start">
+  <dt-stack direction="row" gap="200" align="start">
     <div class="d-w164">
       <dt-segmented-control v-model="selected" orientation="vertical" aria-label="Vertical example">
         <dt-segmented-control-item value="all">

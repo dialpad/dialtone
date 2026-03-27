@@ -36,7 +36,7 @@ keywords: ["notification", "snackbar", "alert", "message", "d-toast", "DtToast",
   </template>
 </dt-toast>
 '>
-  <dt-stack direction="row" gap="500" class="d-w100p">
+  <dt-stack direction="row" gap="200" class="d-w100p">
     <div class="d-fl-grow1">
       <dt-select-menu :label-visible="false" label="Style" :options="toastOptions" v-model="selectedKind" />
     </div>

@@ -18,14 +18,14 @@ keywords: ["layout", "vertical", "horizontal", "d-stack", "DtStack", "dt-stack",
 
 <code-example
 vueCode='
-<dt-stack gap="500">
+<dt-stack gap="200">
   <div> Stack item 1 </div>
   <div> Stack item 2 </div>
   <div> Stack item 3 </div>
 </dt-stack>
 '>
   <dt-stack
-    gap="500"
+    gap="200"
     class="d-bgc-moderate-opaque d-bar8"
   >
     <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
@@ -47,7 +47,7 @@ vueCode='
 <code-example
 vueCode='
 <dt-stack
-  gap="500"
+  gap="200"
   direction="row"
 >
   <div> Stack item 1 </div>
@@ -56,7 +56,7 @@ vueCode='
 </dt-stack>
 '>
   <dt-stack
-    gap="500"
+    gap="200"
     direction="row"
     class="d-bgc-moderate-opaque d-bar8"
   >
@@ -77,7 +77,7 @@ vueCode='
 <code-example
 vueCode='
 <dt-stack
-  gap="500"
+  gap="200"
   direction="row-reverse"
 >
   <div> Stack item 1 </div>
@@ -86,7 +86,7 @@ vueCode='
 </dt-stack>
 '>
   <dt-stack
-    gap="500"
+    gap="200"
     direction="row-reverse"
     class="d-bgc-moderate-opaque d-bar8"
   >
@@ -107,7 +107,7 @@ vueCode='
 <code-example
 vueCode='
 <dt-stack
-  gap="500"
+  gap="200"
   direction="column-reverse"
 >
   <div> Stack item 1 </div>
@@ -116,7 +116,7 @@ vueCode='
 </dt-stack>
 '>
   <dt-stack
-    gap="500"
+    gap="200"
     direction="column-reverse"
     class="d-bgc-moderate-opaque d-bar8"
   >
@@ -148,7 +148,7 @@ Use `as="section"` to create a thematic grouping of content.
 vueCode='
 <dt-stack
   as="section"
-  gap="400"
+  gap="100"
 >
   <div>Stack item 1</div>
   <div>Stack item 2</div>
@@ -157,7 +157,7 @@ vueCode='
 '>
   <dt-stack
     as="section"
-    gap="400"
+    gap="100"
     class="d-bgc-moderate-opaque d-bar8"
   >
     <div class="d-bgc-moderate-opaque d-bar8 d-p-200">Stack item 1</div>
@@ -175,7 +175,7 @@ vueCode='
 <dt-stack
   as="span"
   direction="row"
-  gap="300"
+  gap="100"
 >
   <span>Inline item 1</span>
   <span>Inline item 2</span>
@@ -185,7 +185,7 @@ vueCode='
   <dt-stack
     as="span"
     direction="row"
-    gap="300"
+    gap="100"
     class="d-bgc-moderate-opaque d-bar8"
   >
     <span class="d-bgc-moderate-opaque d-bar8 d-p-200">Inline item 1</span>
@@ -198,14 +198,14 @@ vueCode='
 
 <code-example
 vueCode='
-<dt-stack gap="400">
+<dt-stack gap="100">
   <div> Stack item 1 </div>
   <div> Stack item 2 </div>
   <div> Stack item 3 </div>
 </dt-stack>
 '>
-  <dt-stack gap="500" class="d-w100p">
-    <dt-stack gap="200">
+  <dt-stack gap="1" class="d-w100p">
+    <dt-stack gap="25">
       <dt-text as="h3" kind="label" size="md" id="interactive-gap-label">Select a gap option</dt-text>
       <dt-stack
         :direction="{ 'default': 'column', 'md': 'row' }"
@@ -233,11 +233,11 @@ vueCode='
     </dt-stack>
     <dt-stack
       :direction="{ 'default': 'column', 'md': 'row' }"
-      gap="500"
+      gap="200"
       class="d-w100p"
       align="start"
     >
-      <dt-stack class="d-w100p md:d-w50p" gap="300">
+      <dt-stack class="d-w100p md:d-w50p" gap="50">
         <dt-text as="h3" kind="headline" size="md">Column</dt-text>
         <dt-stack
           :gap="selectedGap"
@@ -248,7 +248,7 @@ vueCode='
           <div class="d-bgc-moderate-opaque d-bar8 d-p-200">Stack item 3</div>
         </dt-stack>
       </dt-stack>
-      <dt-stack class="d-w100p md:d-w50p" gap="300">
+      <dt-stack class="d-w100p md:d-w50p" gap="50">
         <dt-text as="h3" kind="headline" size="md">Row</dt-text>
         <dt-stack
           direction="row"
@@ -309,7 +309,7 @@ The `align` prop is optional. Unless specified, it will default vertical stacks 
 
 <code-example
 vueCode='
-<dt-stack>
+<dt-stack gap="100">
   <div>Short</div>
   <div>
     Taller item<br>
@@ -331,6 +331,7 @@ vueCode='
     :direction="{ default: `column`, md: `row` }"
   >
     <dt-stack
+      gap="100"
       class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-stretch"
     >
       <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
@@ -345,6 +346,7 @@ vueCode='
       </div>
     </dt-stack>
     <dt-stack
+      gap="100"
       direction="row"
       class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
     >
@@ -369,7 +371,7 @@ Align items to the start of the cross-axis.
 <code-example
 vueCode='
 <dt-stack
-  gap="400"
+  gap="100"
   align="start"
 >
   <div>Short</div>
@@ -381,7 +383,7 @@ vueCode='
 </dt-stack>
 <dt-stack
   direction="row"
-  gap="400"
+  gap="100"
   align="start"
 >
   <div>Short</div>
@@ -393,11 +395,11 @@ vueCode='
 </dt-stack>
 '>
   <dt-stack
-    gap="500"
+    gap="100"
     :direction="{ default: `column`, md: `row` }"
   >
     <dt-stack
-      gap="400"
+      gap="100"
       align="start"
       class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-start"
     >
@@ -414,7 +416,7 @@ vueCode='
     </dt-stack>
     <dt-stack
       direction="row"
-      gap="400"
+      gap="100"
       align="start"
       class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-start"
     >
@@ -440,7 +442,7 @@ Center items along the cross-axis.
 vueCode='
 <dt-stack
   direction="row"
-  gap="400"
+  gap="100"
   align="center"
 >
   <div>Short</div>
@@ -452,11 +454,11 @@ vueCode='
 </dt-stack>
 '>
   <dt-stack
-    gap="500"
+    gap="200"
     :direction="{ default: `column`, md: `row` }"
   >
     <dt-stack
-      gap="400"
+      gap="100"
       align="center"
       class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-center"
     >
@@ -473,7 +475,7 @@ vueCode='
     </dt-stack>
     <dt-stack
       direction="row"
-      gap="400"
+      gap="100"
       align="center"
       class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
     >
@@ -498,7 +500,7 @@ Align items to the end of the cross-axis.
 <code-example
 vueCode='
 <dt-stack
-  gap="400"
+  gap="100"
   align="end"
 >
   <div>Short</div>
@@ -510,7 +512,7 @@ vueCode='
 </dt-stack>
 <dt-stack
   direction="row"
-  gap="400"
+  gap="100"
   align="end"
 >
   <div>Short</div>
@@ -522,11 +524,11 @@ vueCode='
 </dt-stack>
 '>
   <dt-stack
-    gap="500"
+    gap="200"
     :direction="{ default: `column`, md: `row` }"
   >
     <dt-stack
-      gap="400"
+      gap="100"
       align="end"
       class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-end"
     >
@@ -543,7 +545,7 @@ vueCode='
     </dt-stack>
     <dt-stack
       direction="row"
-      gap="400"
+      gap="100"
       align="end"
       class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-end"
     >
@@ -569,7 +571,7 @@ Stretch items to fill the container height.
 vueCode='
 <dt-stack
   direction="row"
-  gap="400"
+  gap="100"
   align="stretch"
 >
   <div>Short</div>
@@ -581,11 +583,11 @@ vueCode='
 </dt-stack>
 '>
   <dt-stack
-    gap="500"
+    gap="200"
     :direction="{ default: `column`, md: `row` }"
   >
     <dt-stack
-      gap="400"
+      gap="100"
       align="stretch"
       class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-stretch"
     >
@@ -602,7 +604,7 @@ vueCode='
     </dt-stack>
     <dt-stack
       direction="row"
-      gap="400"
+      gap="100"
       align="stretch"
       class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-stretch"
     >
@@ -628,7 +630,7 @@ Align items along their text baselines.
 vueCode='
 <dt-stack
   direction="row"
-  gap="400"
+  gap="100"
   align="baseline"
 >
   <dt-text kind="body" size="xs">Small body</dt-text>
@@ -638,7 +640,7 @@ vueCode='
 '>
   <dt-stack
     direction="row"
-    gap="400"
+    gap="100"
     align="baseline"
     class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--baseline"
   >
@@ -674,14 +676,14 @@ vueCode='
 '>
   <dt-stack
     class="d-w100p"
-    gap="500"
+    gap="200"
     align="stretch"
     :direction="{ default: `column`, md: `row` }"
   >
     <dt-stack
-      gap="400"
+      gap="100"
       justify="start"
-      class="d-w100p d-h332 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-start"
+      class="d-w100p d-h-400 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-start"
     >
       <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 1</div>
       <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 2</div>
@@ -689,7 +691,7 @@ vueCode='
     </dt-stack>
     <dt-stack
       direction="row"
-      gap="400"
+      gap="100"
       justify="start"
       class="d-w100p d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-start"
     >
@@ -714,13 +716,13 @@ vueCode='
 '>
   <dt-stack
     class="d-w100p"
-    gap="500"
+    gap="200"
     :direction="{ default: `column`, md: `row` }"
   >
     <dt-stack
-      gap="400"
+      gap="100"
       justify="center"
-      class="d-w100p d-h332 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
+      class="d-w100p d-h-400 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
     >
       <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 1</div>
       <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 2</div>
@@ -728,7 +730,7 @@ vueCode='
     </dt-stack>
     <dt-stack
       direction="row"
-      gap="400"
+      gap="100"
       justify="center"
       class="d-w100p d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-center"
     >
@@ -753,13 +755,13 @@ vueCode='
 '>
   <dt-stack
     class="d-w100p"
-    gap="500"
+    gap="200"
     :direction="{ default: `column`, md: `row` }"
   >
     <dt-stack
-      gap="400"
+      gap="100"
       justify="end"
-      class="d-w100p d-h332 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-end"
+      class="d-w100p d-h-400 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-end"
     >
       <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 1</div>
       <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 2</div>
@@ -767,7 +769,7 @@ vueCode='
     </dt-stack>
     <dt-stack
       direction="row"
-      gap="400"
+      gap="100"
       justify="end"
       class="d-w100p d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-end"
     >
@@ -792,13 +794,13 @@ vueCode='
 '>
   <dt-stack
     class="d-w100p"
-    gap="500"
+    gap="200"
     :direction="{ default: `column`, md: `row` }"
   >
     <dt-stack
-      gap="400"
+      gap="100"
       justify="space-around"
-      class="d-w100p d-h332 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
+      class="d-w100p d-h-400 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
     >
       <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 1</div>
       <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 2</div>
@@ -806,7 +808,7 @@ vueCode='
     </dt-stack>
     <dt-stack
       direction="row"
-      gap="400"
+      gap="100"
       justify="space-around"
       class="d-w100p d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-center"
     >
@@ -825,7 +827,7 @@ Distribute items with space between them, edges flush to container.
 vueCode='
 <dt-stack
   direction="row"
-  gap="400"
+  gap="100"
   justify="space-between"
   class="d-w100p"
 >
@@ -836,13 +838,13 @@ vueCode='
 '>
   <dt-stack
     class="d-w100p"
-    gap="500"
+    gap="200"
     :direction="{ default: `column`, md: `row` }"
   >
     <dt-stack
-      gap="400"
+      gap="100"
       justify="space-between"
-      class="d-w100p d-h332 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
+      class="d-w100p d-h-400 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
     >
       <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 1</div>
       <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 2</div>
@@ -850,7 +852,7 @@ vueCode='
     </dt-stack>
     <dt-stack
       direction="row"
-      gap="400"
+      gap="100"
       justify="space-between"
       class="d-w100p d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-center"
     >
@@ -875,13 +877,13 @@ vueCode='
 '>
   <dt-stack
     class="d-w100p"
-    gap="500"
+    gap="200"
     :direction="{ default: `column`, md: `row` }"
   >
     <dt-stack
-      gap="400"
+      gap="100"
       justify="space-evenly"
-      class="d-w100p d-h332 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
+      class="d-w100p d-h-400 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
     >
       <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 1</div>
       <div class="d-bgc-moderate-opaque d-p-200 d-bar8">Item 2</div>
@@ -889,7 +891,7 @@ vueCode='
     </dt-stack>
     <dt-stack
       direction="row"
-      gap="400"
+      gap="100"
       justify="space-evenly"
       class="d-w100p d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-center"
     >
@@ -910,7 +912,7 @@ Stacks column at small screen size and column reverse at large screen
 vueCode='
 <dt-stack
   :direction="{ `default`: `row`, `sm`: `column`, `lg`: `column-reverse` }"
-  gap="500"
+  gap="200"
 >
   <div>
     Stack item 1
@@ -925,7 +927,7 @@ vueCode='
 '>
   <dt-stack
     :direction="{ default: `row`, sm: `column`, lg: `column-reverse` }"
-    gap="500"
+    gap="100"
     class="d-bgc-moderate-opaque"
   >
     <div class="d-bgc-moderate-opaque d-bar8 d-p-200">
@@ -975,16 +977,16 @@ vueCode='
 <dt-stack
   direction="row"
   as="section"
-  gap="500"
+  gap="200"
 >
   <dt-stack>
     Stack item 1
   </dt-stack>
-  <dt-stack gap="500">
+  <dt-stack gap="200">
     <div>Stack item 2</div>
     <dt-stack
       direction="row-reverse"
-      gap="500"
+      gap="200"
     >
       <div>Stack item 3<br>with multiple lines</div>
       <div>Stack item 4</div>
@@ -995,17 +997,17 @@ vueCode='
   <dt-stack
     direction="row"
     as="section"
-    gap="500"
+    gap="200"
     class="d-bgc-moderate-opaque d-bar8"
   >
     <dt-stack class="d-bgc-moderate-opaque d-bar8 d-p-200">
       Stack item 1
     </dt-stack>
-    <dt-stack gap="500" class="d-bgc-moderate-opaque">
+    <dt-stack gap="200" class="d-bgc-moderate-opaque">
       <div class="d-bgc-moderate-opaque d-bar8 d-p-200">Stack item 2</div>
       <dt-stack
         direction="row-reverse"
-        gap="500"
+        gap="200"
       >
         <div class="d-bgc-moderate-opaque d-bar8 d-p-200">Stack item 3<br>with multiple lines</div>
         <div class="d-bgc-moderate-opaque d-bar8 d-p-200">Stack item 4</div>
@@ -1022,7 +1024,7 @@ Like `direction` and `gap`, the `align` and `justify` props support responsive o
 vueCode='
 <dt-stack
   direction="row"
-  gap="400"
+  gap="100"
   :align="{ default: `start`, md: `center`, lg: `end` }"
 >
   <div>Short</div>
@@ -1035,7 +1037,7 @@ vueCode='
 '>
   <dt-stack
     direction="row"
-    gap="400"
+    gap="100"
     :align="{ default: 'start', md: 'center', lg: 'end' }"
     class="d-bgc-moderate-opaque d-bar8"
   >
@@ -1145,14 +1147,14 @@ vueCode='
 ### Call Log
 
 <code-example>
-  <dt-stack gap="400" class="d-w100p">
-    <dt-text as="h2" kind="headline" size="lg">Saturday, May 24, 2025</dt-text>
-    <dt-stack direction="row" gap="450" class="d-w100p">
+  <dt-stack gap="100" class="d-w-800">
+    <dt-text as="h2" kind="headline" size="md">Saturday, May 24, 2025</dt-text>
+    <dt-stack direction="row" gap="150">
       <dt-avatar full-name="Ashanti Trevor" />
       <dt-stack class="d-fl1">
         <dt-text kind="body" size="sm" strength="bold">Ashanti Trevor</dt-text>
-        <dt-stack direction="row" gap="300">
-          <dt-stack direction="row" gap="400">
+        <dt-stack direction="row" gap="50">
+          <dt-stack direction="row" gap="100">
             <dt-icon name="phone-outgoing" size="200" class="d-fc-tertiary" />
             <dt-text kind="body" size="xs" tone="tertiary">Outgoing call</dt-text>
           </dt-stack>
@@ -1160,7 +1162,7 @@ vueCode='
           <dt-text kind="body" size="xs" tone="tertiary">2 minutes 10 seconds</dt-text>
         </dt-stack>
       </dt-stack>
-      <dt-text kind="body" size="sm" tone="tertiary">3:23 pm</dt-text>
+      <dt-text kind="body" size="xs" tone="tertiary" numeric>3:23 pm</dt-text>
       <dt-badge kind="count" type="bulletin" text="6" />
     </dt-stack>
   </dt-stack>

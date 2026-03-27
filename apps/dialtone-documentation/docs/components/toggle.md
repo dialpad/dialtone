@@ -42,7 +42,7 @@ The Toggle component acts as a way to allow the User to switch between two mutua
 ### Base Styles
 
 <code-example>
-  <dt-stack as="fieldset" gap="400">
+  <dt-stack as="fieldset" gap="100">
     <dt-toggle wrapper-class="d-g-200">Unchecked Toggle</dt-toggle>
     <dt-toggle :model-value="true" wrapper-class="d-g-200">Checked Toggle</dt-toggle>
     <dt-toggle disabled wrapper-class="d-g-200">Unchecked Disabled</dt-toggle>
@@ -56,7 +56,7 @@ The Toggle component acts as a way to allow the User to switch between two mutua
 ### Sizes
 
 <code-example>
-  <dt-stack as="fieldset" gap="400">
+  <dt-stack as="fieldset" gap="100">
     <dt-toggle size="sm" wrapper-class="d-g-200">Small size</dt-toggle>
     <dt-toggle wrapper-class="d-g-200">Default size</dt-toggle>
   </dt-stack>

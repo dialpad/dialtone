@@ -1,6 +1,6 @@
 <template>
   <div
-    class="d-d-grid d-g-800 d-g-cols3"
+    class="d-d-grid d-g-100 d-g-cols3"
   >
     <dt-tooltip
       v-for="direction in directions"

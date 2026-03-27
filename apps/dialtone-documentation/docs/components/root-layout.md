@@ -11,7 +11,7 @@ keywords: ["app layout","page layout","d-root-layout","DtRootLayout","dt-root-la
 <code-example class="d-d-block" only-show="demo">
 <dt-root-layout
   :fixed="false"
-  class="d-w100p d-h332"
+  class="d-w100p d-h-500"
 >
   <template
     #header
@@ -43,7 +43,7 @@ body according to the `responsiveBreakpoint` prop.
 <code-example class="d-d-block">
 <dt-root-layout
   :fixed="false"
-  class="d-w100p d-h332"
+  class="d-w100p d-h-500"
 >
   <template
     #header
@@ -70,11 +70,11 @@ body according to the `responsiveBreakpoint` prop.
 
 <code-example class="d-d-block">
   <div
-    class="d-h332 d-of-scroll"
+    class="d-h-500 d-of-scroll"
   >
     <dt-root-layout
       header-sticky
-      class="d-w100p d-h332"
+      class="d-w100p d-h-500"
     >
       <template
         #header

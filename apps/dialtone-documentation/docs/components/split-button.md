@@ -41,7 +41,7 @@ In addition to the [Button component's](button.md) documentation:
 ### Base
 
 <code-example>
-  <dt-stack direction="row" gap="400" data-demo-wrapper>
+  <dt-stack direction="row" gap="100" data-demo-wrapper>
     <dt-split-button end-tooltip-text="More calling options">
       Place Call
       <template #dropdownList>
@@ -72,7 +72,7 @@ In addition to the [Button component's](button.md) documentation:
 ### Danger
 
 <code-example>
-  <dt-stack direction="row" gap="400" data-demo-wrapper>
+  <dt-stack direction="row" gap="100" data-demo-wrapper>
     <dt-split-button kind="danger" end-tooltip-text="More calling options">
       Place Call
       <template #dropdownList>
@@ -103,7 +103,7 @@ In addition to the [Button component's](button.md) documentation:
 ### Positive
 
 <code-example>
-  <dt-stack direction="row" gap="400" data-demo-wrapper>
+  <dt-stack direction="row" gap="100" data-demo-wrapper>
       <dt-split-button kind="positive" end-tooltip-text="More calling options"> Place Call </dt-split-button>
       <dt-split-button importance="outlined" kind="positive" end-tooltip-text="More calling options"> Place Call </dt-split-button>
       <dt-split-button importance="clear" kind="positive" end-tooltip-text="More calling options"> Place Call </dt-split-button>
@@ -113,7 +113,7 @@ In addition to the [Button component's](button.md) documentation:
 ### Muted
 
 <code-example>
-  <dt-stack direction="row" gap="400" data-demo-wrapper>
+  <dt-stack direction="row" gap="100" data-demo-wrapper>
       <dt-split-button importance="outlined" kind="muted" end-tooltip-text="More calling options"> Place Call </dt-split-button>
       <dt-split-button importance="clear" kind="muted" end-tooltip-text="More calling options"> Place Call </dt-split-button>
   </dt-stack>
@@ -124,7 +124,7 @@ In addition to the [Button component's](button.md) documentation:
 Use the `disabled` prop to disable both buttons, or use `start-disabled` and `end-disabled` to disable each button independently.
 
 <code-example>
-  <dt-stack direction="row" gap="400" data-demo-wrapper>
+  <dt-stack direction="row" gap="100" data-demo-wrapper>
       <dt-split-button disabled end-tooltip-text="More calling options"> Both disabled </dt-split-button>
       <dt-split-button start-disabled end-tooltip-text="More calling options"> Start disabled </dt-split-button>
       <dt-split-button end-disabled end-tooltip-text="More calling options"> End disabled </dt-split-button>
@@ -134,7 +134,7 @@ Use the `disabled` prop to disable both buttons, or use `start-disabled` and `en
 ### Active
 
 <code-example>
-  <dt-stack direction="row" gap="400" data-demo-wrapper>
+  <dt-stack direction="row" gap="100" data-demo-wrapper>
     <dt-split-button start-active end-tooltip-text="More calling options"> Start active </dt-split-button>
     <dt-split-button end-active end-tooltip-text="More calling options"> End active </dt-split-button>
   </dt-stack>
@@ -143,7 +143,7 @@ Use the `disabled` prop to disable both buttons, or use `start-disabled` and `en
 ## Sizes
 
 <code-example>
-  <dt-stack direction="row" gap="400" data-demo-wrapper>
+  <dt-stack direction="row" gap="100" data-demo-wrapper>
     <dt-split-button size="xs" end-tooltip-text="More calling options"> xs </dt-split-button>
     <dt-split-button size="sm" end-tooltip-text="More calling options"> sm </dt-split-button>
     <dt-split-button size="md" end-tooltip-text="More calling options"> md </dt-split-button>
@@ -155,7 +155,7 @@ Use the `disabled` prop to disable both buttons, or use `start-disabled` and `en
 ## Loading
 
 <code-example>
-  <dt-stack direction="row" gap="400" data-demo-wrapper>
+  <dt-stack direction="row" gap="100" data-demo-wrapper>
     <dt-split-button start-loading end-tooltip-text="More calling options"> Place call </dt-split-button>
     <dt-split-button start-loading importance="outlined" end-tooltip-text="More calling options"> Place call </dt-split-button>
     <dt-split-button start-loading importance="clear" end-tooltip-text="More calling options"> Place call </dt-split-button>
@@ -203,7 +203,7 @@ The start button supports navigation via `start-href` (renders as `<a>`) or `sta
 ### Icon and Label
 
 <code-example>
-  <dt-stack direction="row" gap="400" class="d-fw-wrap" data-demo-wrapper>
+  <dt-stack direction="row" gap="100" class="d-fw-wrap" data-demo-wrapper>
     <dt-split-button importance="outlined" end-tooltip-text="More calling options">
       <template #startIcon="{ size }">
         <dt-icon name="phone" :size="size" />

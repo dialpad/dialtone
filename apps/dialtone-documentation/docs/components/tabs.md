@@ -173,7 +173,7 @@ Tabs expand proportionally to fill the container. Longer labels receive more spa
 All tabs share the same width, regardless of label length.
 
 <code-example>
-  <div class="d-w100p" data-demo-wrapper>
+  <div class="d-w-800" data-demo-wrapper>
     <dt-tab-group spread="equal">
       <template #tabs>
         <dt-tab id="se1" panel-id="se2" selected>Tab 1</dt-tab>
@@ -191,7 +191,7 @@ All tabs share the same width, regardless of label length.
   ...
 </dt-tab-group>
 '>
-  <dt-stack gap="500" class="d-w100p">
+  <dt-stack gap="200" class="d-w100p">
     <dt-tab-group size="xs">
       <template #tabs>
         <dt-tab id="1" panel-id="2" selected>
