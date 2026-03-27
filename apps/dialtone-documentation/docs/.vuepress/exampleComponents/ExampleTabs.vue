@@ -44,7 +44,7 @@
         id="2"
         tab-id="1"
       >
-        <dt-text as="p" kind="code" size="xs" tone="muted" align="center" class="d-p16">
+        <dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p16">
           <strong>First</strong> tab content panel
         </dt-text>
       </dt-tab-panel>
@@ -52,7 +52,7 @@
         id="4"
         tab-id="3"
       >
-        <dt-text as="p" kind="code" size="xs" tone="muted" align="center" class="d-p16">
+        <dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p16">
           <strong>Second</strong> tab content panel
         </dt-text>
       </dt-tab-panel>
@@ -60,7 +60,7 @@
         id="6"
         tab-id="5"
       >
-        <dt-text as="p" kind="code" size="xs" tone="muted" align="center" class="d-p16">
+        <dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p16">
           <strong>Third</strong> tab content panel
         </dt-text>
       </dt-tab-panel>

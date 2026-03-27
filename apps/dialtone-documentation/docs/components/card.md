@@ -59,9 +59,9 @@ They should be easy to scan for relevant and actionable information. Elements, l
 <code-example>
   <dt-card class="d-w264">
     <template #header>
-      <dt-text as="p" kind="headline" size="md">Lorem ipsum</dt-text>
+      <dt-text as="p" kind="headline" :size="300">Lorem ipsum</dt-text>
       <dt-button
-        size="xs"
+        :size="100"
         importance="clear"
         kind="muted"
         aria-label="Menu button"
@@ -90,7 +90,7 @@ They should be easy to scan for relevant and actionable information. Elements, l
     <template #footer>
       <dt-button
         importance="outlined"
-        size="sm"
+        :size="200"
       >
         Button
       </dt-button>
@@ -113,9 +113,9 @@ They should be easy to scan for relevant and actionable information. Elements, l
 <code-example>
   <dt-card class="d-w264" content-class="d-pr0">
     <template #header>
-      <dt-text as="p" kind="headline" size="md">Lorem ipsum</dt-text>
+      <dt-text as="p" kind="headline" :size="300">Lorem ipsum</dt-text>
       <dt-button
-        size="xs"
+        :size="100"
         importance="clear"
         kind="muted"
         aria-label="Menu button"
@@ -134,7 +134,7 @@ They should be easy to scan for relevant and actionable information. Elements, l
     <template #footer>
       <dt-button
         importance="outlined"
-        size="sm"
+        :size="200"
       >
         Button
       </dt-button>

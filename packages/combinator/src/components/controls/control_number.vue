@@ -3,13 +3,13 @@
     :model-value="value"
     :disabled="disabled"
     type="number"
-    size="xs"
+    :size="100"
     @input="e => emit(VALUE_UPDATE_EVENT, e === '' ? undefined : parseInt(e))"
   >
     <template #labelSlot>
       <dt-text
         kind="label"
-        size="xs"
+        :size="100"
         tone="secondary"
         class="d-input__label-text"
       >

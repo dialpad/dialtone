@@ -69,7 +69,7 @@
             :aria-label="menuButtonLabel"
             :title="menuButtonLabel"
             importance="clear"
-            size="xs"
+            :size="100"
             circle
             @click.stop="$emit('click-menu', $event)"
           >

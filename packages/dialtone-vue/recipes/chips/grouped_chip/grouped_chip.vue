@@ -6,7 +6,7 @@
     <dt-chip
       :hide-close="true"
       :interactive="false"
-      size="xs"
+      :size="100"
       :grouped-chip="true"
       class="d-recipe-grouped-chip__content d-recipe-grouped-chip__content-left"
     >
@@ -53,7 +53,7 @@
     <dt-chip
       :hide-close="true"
       :interactive="false"
-      size="xs"
+      :size="100"
       :grouped-chip="true"
       class="d-recipe-grouped-chip__content d-recipe-grouped-chip__content-right"
     >

@@ -120,10 +120,10 @@ Use the `label-size` prop to override the default label size.
 
 <code-example>
   <dt-stack gap="400" data-demo-wrapper>
-    <dt-radio name="labelSizeExample1" value="xs" label="Extra small label" label-size="xs" checked />
-    <dt-radio name="labelSizeExample1" value="sm" label="Small label" label-size="sm" />
-    <dt-radio name="labelSizeExample1" value="md" label="Medium label (default)" label-size="md" />
-    <dt-radio name="labelSizeExample1" value="lg" label="Large label" label-size="lg" />
+    <dt-radio name="labelSizeExample1" value="xs" label="Extra small label" :label-size="100" checked />
+    <dt-radio name="labelSizeExample1" value="sm" label="Small label" :label-size="200" />
+    <dt-radio name="labelSizeExample1" value="md" label="Medium label (default)" :label-size="300" />
+    <dt-radio name="labelSizeExample1" value="lg" label="Large label" :label-size="400" />
   </dt-stack>
 </code-example>
 

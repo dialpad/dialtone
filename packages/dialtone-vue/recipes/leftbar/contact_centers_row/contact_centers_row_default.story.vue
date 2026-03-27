@@ -19,7 +19,7 @@
       #end
     >
       <dt-button
-        size="sm"
+        :size="200"
         kind="muted"
         importance="clear"
         class="d-bar-pill d-py4 d-fc-success d-to-ellipsis"

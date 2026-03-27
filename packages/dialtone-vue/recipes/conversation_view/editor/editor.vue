@@ -49,7 +49,7 @@
                     root-class="d-p8 d-pb4 d-w216"
                     type="search"
                     :placeholder="i18n.$t('DIALTONE_EDITOR_FONT_STYLE_SEARCH_PLACEHOLDER')"
-                    size="sm"
+                    :size="200"
                     role="menuitem"
                   >
                     <template #startIcon="{ iconSize }">
@@ -124,7 +124,7 @@
             }"
             kind="muted"
             importance="clear"
-            size="xs"
+            :size="100"
             :active="$refs.richTextEditor?.editor?.isActive(button.selector)"
             :tabindex="canFocus(getButtonRef(buttonGroup.key, button.selector)) ? 0 : -1"
             :aria-label="button.tooltipMessage"
@@ -144,7 +144,7 @@
                 root-class="d-w0 d-h0 d-of-hidden"
                 input-class="colorPickerInput d-w0 d-h0 d-p0 d-bar0"
                 input-wrapper-class="d-w0 d-h0 d-ba-none"
-                size="sm"
+                :size="200"
                 type="color"
                 @input="onColorPickerInput"
                 @click.stop
@@ -181,7 +181,7 @@
                     root-class="d-p8 d-pb4 d-w264"
                     type="search"
                     :placeholder="i18n.$t('DIALTONE_EDITOR_VARIABLE_POPOVER_SEARCH_PLACEHOLDER')"
-                    size="md"
+                    :size="300"
                     role="menuitem"
                   >
                     <template #startIcon="{ iconSize }">
@@ -267,7 +267,7 @@
                   :tabindex="canFocus(getButtonRef('custom', 'link')) ? 0 : -1"
                   importance="clear"
                   kind="muted"
-                  size="xs"
+                  :size="100"
                   @click="linkButton.onClick()"
                   @keydown.right.stop="shiftActionBarFocusRight"
                   @keydown.left.stop="shiftActionBarFocusLeft"
@@ -311,7 +311,7 @@
                 data-qa="dt-recipe-editor-remove-link-btn"
                 importance="clear"
                 kind="muted"
-                size="sm"
+                :size="200"
                 v-bind="removeLinkButtonLabels"
                 @click="removeLink"
               >
@@ -321,7 +321,7 @@
                 data-qa="dt-recipe-editor-set-link-cancel-btn"
                 importance="clear"
                 kind="muted"
-                size="sm"
+                :size="200"
                 v-bind="cancelSetLinkButtonLabels"
                 @click="closeLinkInput"
               >
@@ -329,7 +329,7 @@
               </dt-button>
               <dt-button
                 data-qa="dt-recipe-editor-set-link-confirm-btn"
-                size="sm"
+                :size="200"
                 v-bind="confirmSetLinkButtonLabels"
                 @click="setLink"
               >

@@ -35,7 +35,7 @@
         <dt-input
           v-model="linkText"
           :input-aria-label="textInputLabel"
-          size="xs"
+          :size="100"
           data-qa="dt-message-input-link-text-input"
           :label="textInputLabel"
           input-wrapper-class="d-recipe-message-input__link-input"
@@ -46,7 +46,7 @@
         <dt-input
           v-model="linkInput"
           :input-aria-label="linkInputLabel"
-          size="xs"
+          :size="100"
           data-qa="dt-message-input-link-input"
           :placeholder="linkInputPlaceHolder"
           :label="linkInputLabel"
@@ -64,7 +64,7 @@
             :title="removeButtonLabel"
             importance="clear"
             kind="danger"
-            size="md"
+            :size="300"
             data-qa="dt-message-input-link-remove-btn"
             @click="$emit('remove-link', linkText, linkInput)"
           >
@@ -79,14 +79,14 @@
               :title="cancelButtonLabel"
               importance="clear"
               kind="muted"
-              size="md"
+              :size="300"
               data-qa="dt-message-input-link-cancel-btn"
               @click="isOpen = false"
             >
               {{ cancelButtonLabel }}
             </dt-button>
             <dt-button
-              size="md"
+              :size="300"
               :aria-label="confirmButtonLabel"
               :title="confirmButtonLabel"
               data-qa="dt-message-input-link-confirm-btn"

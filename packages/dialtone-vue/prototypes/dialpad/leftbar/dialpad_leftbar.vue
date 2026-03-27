@@ -50,7 +50,7 @@
             class="d-fc-success d-bar-pill d-h24"
             kind="muted"
             importance="clear"
-            size="xs"
+            :size="100"
           >
             <template #icon="{ iconSize }">
               <dt-icon-bell-ring

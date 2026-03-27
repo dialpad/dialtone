@@ -54,7 +54,7 @@
                    { 'dt-recipe--callbar-button-with-dropdown--arrow--large': !isCompactMode }]"
           :circle="true"
           importance="clear"
-          size="lg"
+          :size="400"
           :aria-label="arrowButtonLabel"
           :title="arrowButtonLabel"
           width="2rem"

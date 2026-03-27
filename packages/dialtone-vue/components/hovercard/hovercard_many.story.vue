@@ -51,7 +51,7 @@
                   :image-src="data.src"
                   image-alt="Person avatar"
                   seed="JN"
-                  size="md"
+                  :size="300"
                   presence="active"
                 />
                 <dt-stack
@@ -117,7 +117,7 @@
         <template #picker>
           <dt-button
             importance="clear"
-            size="sm"
+            :size="200"
             aria-label="Add reaction"
             data-qa="feed-item-reaction-button"
             class="d-recipe-emoji-row__reaction d-recipe-emoji-row__picker"

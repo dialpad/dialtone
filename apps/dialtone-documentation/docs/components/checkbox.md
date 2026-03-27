@@ -185,10 +185,10 @@ Use the `label-size` prop to override the default label size.
 
 <code-example>
   <dt-stack gap="400" data-demo-wrapper>
-    <dt-checkbox name="sizeXs" value="Value" label="Extra small label" label-size="xs" />
-    <dt-checkbox name="sizeSm" value="Value" label="Small label" label-size="sm" />
-    <dt-checkbox name="sizeMd" value="Value" label="Medium label (default)" label-size="md" />
-    <dt-checkbox name="sizeLg" value="Value" label="Large label" label-size="lg" />
+    <dt-checkbox name="sizeXs" value="Value" label="Extra small label" :label-size="100" />
+    <dt-checkbox name="sizeSm" value="Value" label="Small label" :label-size="200" />
+    <dt-checkbox name="sizeMd" value="Value" label="Medium label (default)" :label-size="300" />
+    <dt-checkbox name="sizeLg" value="Value" label="Large label" :label-size="400" />
   </dt-stack>
 </code-example>
 

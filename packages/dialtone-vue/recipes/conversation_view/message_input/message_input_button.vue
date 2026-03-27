@@ -6,7 +6,7 @@
         importance="clear"
         kind="muted"
         :aria-label="ariaLabel"
-        size="xs"
+        :size="100"
         :active="isActive"
         @click="$emit('click', $event)"
       >

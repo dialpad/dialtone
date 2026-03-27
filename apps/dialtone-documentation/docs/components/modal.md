@@ -265,7 +265,7 @@ When there is a need of more context information regarding the content of the Mo
   <dt-stack direction="row" gap="500" align="end">
     <dt-select-menu
       label="Kind of Banner"
-      size="md"
+      :size="300"
       @change="changeBannerKind"
     >
       <option

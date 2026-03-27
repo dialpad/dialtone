@@ -29,7 +29,7 @@
         <template #anchor="{ attrs }">
           <dt-button
             importance="clear"
-            size="sm"
+            :size="200"
             data-qa="feed-item-reaction-button"
             :class="[
               'd-recipe-emoji-row__reaction',

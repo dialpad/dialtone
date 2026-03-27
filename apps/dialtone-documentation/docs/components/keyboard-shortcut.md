@@ -64,7 +64,7 @@ In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#
 ### Inline with Text and Screen Reader Text
 
 <code-example>
-  <dt-text kind="body" size="md">
+  <dt-text kind="body" :size="300">
     Press
     <dt-keyboard-shortcut
       screen-reader-text="Control plus F5"

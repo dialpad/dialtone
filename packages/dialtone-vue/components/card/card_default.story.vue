@@ -13,13 +13,13 @@
     >
       <dt-text
         kind="headline"
-        size="md"
+        :size="300"
         as="h3"
       >
         Header
       </dt-text>
       <dt-button
-        size="xs"
+        :size="100"
         importance="clear"
         kind="muted"
         aria-label="Menu button"

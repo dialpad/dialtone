@@ -233,7 +233,7 @@ vueCode='
 <dt-stack gap="500">
   <dt-stack gap="400" class="d-jc-space-between">
     <dt-stack>
-      <dt-text as="h2" kind="headline" size="xl" strength="medium" density="200" class="d-fs-400">
+      <dt-text as="h2" kind="headline" :size="500" strength="medium" density="200" class="d-fs-400">
         Katie Rodriguez
       </dt-text>
       <dt-stack direction="row" gap="350">
@@ -247,10 +247,10 @@ vueCode='
       </dt-stack>
     </dt-stack>
     <dt-stack gap="200">
-      <dt-text kind="body" size="md" density="200" strength="semibold" tone="tertiary">
+      <dt-text kind="body" :size="300" density="200" strength="semibold" tone="tertiary">
         Chief Customer Success Officer
       </dt-text>
-      <dt-text kind="body" size="sm" density="200">
+      <dt-text kind="body" :size="200" density="200">
         <dt-text strength="semibold">
           6:19 am
         </dt-text> local time
@@ -286,21 +286,21 @@ vueCode='
 <code-well-header class="d-pb32">
   <dt-stack gap="500">
     <dt-stack>
-      <dt-text as="h2" kind="headline" size="2xl">AI that works for you</dt-text>
-      <dt-text kind="body" size="lg">Support customers, drive sales, and collaborate with your team—all in one, beautiful AI-powered app.</dt-text>
+      <dt-text as="h2" kind="headline" :size="600">AI that works for you</dt-text>
+      <dt-text kind="body" :size="400">Support customers, drive sales, and collaborate with your team—all in one, beautiful AI-powered app.</dt-text>
     </dt-stack>
-    <dt-stack :direction="{ 'default': 'column', 'md': 'row' }" gap="500" align="start">
+    <dt-stack :direction="{ ‘default’: ‘column’, ‘md’: ‘row’ }" gap="500" align="start">
       <dt-stack>
-        <dt-text as="h3" kind="headline" size="xl">AI Contact Center</dt-text>
-        <dt-text as="p" kind="body" size="md">The world’s most advanced customer engagement platform</dt-text>
+        <dt-text as="h3" kind="headline" :size="500">AI Contact Center</dt-text>
+        <dt-text as="p" kind="body" :size="300">The world’s most advanced customer engagement platform</dt-text>
       </dt-stack>
       <dt-stack>
-        <dt-text as="h3" kind="headline" size="xl">AI Voice</dt-text>
-        <dt-text as="p" kind="body" size="md">Say hello to the world’s smartest business phone</dt-text>
+        <dt-text as="h3" kind="headline" :size="500">AI Voice</dt-text>
+        <dt-text as="p" kind="body" :size="300">Say hello to the world’s smartest business phone</dt-text>
       </dt-stack>
       <dt-stack>
-        <dt-text as="h3" kind="headline" size="xl">AI Meetings</dt-text>
-        <dt-text as="p" kind="body" size="md">I-powered video meetings with built-in transcriptions</dt-text>
+        <dt-text as="h3" kind="headline" :size="500">AI Meetings</dt-text>
+        <dt-text as="p" kind="body" :size="300">I-powered video meetings with built-in transcriptions</dt-text>
       </dt-stack>
     </dt-stack>
   </dt-stack>
@@ -310,21 +310,21 @@ vueCode='
 vueCode='
 <dt-stack gap="500">
   <dt-stack>
-    <dt-text as="h2" kind="headline" size="2xl">AI that works for you</dt-text>
-    <dt-text kind="body" size="lg">Support customers, drive sales, and collaborate with your team—all in one, beautiful AI-powered app.</dt-text>
+    <dt-text as="h2" kind="headline" :size="600">AI that works for you</dt-text>
+    <dt-text kind="body" :size="400">Support customers, drive sales, and collaborate with your team—all in one, beautiful AI-powered app.</dt-text>
   </dt-stack>
   <dt-stack direction="row" gap="500" align="start">
     <dt-stack>
-      <dt-text as="h3" kind="headline" size="xl">AI Contact Center</dt-text>
-      <dt-text as="p" kind="body" size="md">The world’s most advanced customer engagement platform</dt-text>
+      <dt-text as="h3" kind="headline" :size="500">AI Contact Center</dt-text>
+      <dt-text as="p" kind="body" :size="300">The world’s most advanced customer engagement platform</dt-text>
     </dt-stack>
     <dt-stack>
-      <dt-text as="h3" kind="headline" size="xl">AI Voice</dt-text>
-      <dt-text as="p" kind="body" size="md">Say hello to the world’s smartest business phone</dt-text>
+      <dt-text as="h3" kind="headline" :size="500">AI Voice</dt-text>
+      <dt-text as="p" kind="body" :size="300">Say hello to the world’s smartest business phone</dt-text>
     </dt-stack>
     <dt-stack>
-      <dt-text as="h3" kind="headline" size="xl">AI Meetings</dt-text>
-      <dt-text as="p" kind="body" size="md">AI-powered video meetings with built-in transcriptions</dt-text>
+      <dt-text as="h3" kind="headline" :size="500">AI Meetings</dt-text>
+      <dt-text as="p" kind="body" :size="300">AI-powered video meetings with built-in transcriptions</dt-text>
     </dt-stack>
   </dt-stack>
 </dt-stack>

@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+
 export default {
   default: {
     props: {
@@ -59,7 +60,7 @@ export default {
     },
     slots: {
       default: {
-        initialValue: '<div class="d-bgc-moderate-opaque d-p16 d-bar8"> <dt-text kind="body" size="xs">Small body</dt-text> </div> <div class="d-bgc-moderate-opaque d-p16 d-bar8"> <dt-text kind="headline" size="2xl">Large headline</dt-text> </div>',
+        initialValue: '<div class="d-bgc-moderate-opaque d-p16 d-bar8"> <dt-text kind="body" :size="100">Small body</dt-text> </div> <div class="d-bgc-moderate-opaque d-p16 d-bar8"> <dt-text kind="headline" :size="600">Large headline</dt-text> </div>',
       },
     },
   },

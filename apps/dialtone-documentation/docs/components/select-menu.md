@@ -316,38 +316,38 @@ We offer different sizes for instances in which the interface requires a smaller
     { value: `3`, label: `Option 3` },
   ]"
   label="Label"
-  size="xs|sm|md|lg|xl"
+  :size="100|200|300|400|500"
   :model-value="modelValue"
   @input="onInput"
   @change="onChange"
 />
 '>
   <dt-stack gap="500">
-    <example-select-menu label="Label" size="xs" />
-    <example-select-menu label="Label" size="sm" />
-    <example-select-menu label="Label" size="md" />
-    <example-select-menu label="Label" size="lg" />
-    <example-select-menu label="Label" size="xl" />
+    <example-select-menu label="Label" :size="100" />
+    <example-select-menu label="Label" :size="200" />
+    <example-select-menu label="Label" :size="300" />
+    <example-select-menu label="Label" :size="400" />
+    <example-select-menu label="Label" :size="500" />
   </dt-stack>
 </code-example>
 
 ## Label size
 
-The label text size is automatically derived from the component's `size` prop. Use the `label-size` prop to override this when you need a different label size independent of the select size. For example, the default label size for a `size="md"` select menu is `md`, but you can override it from `xs` to `lg`.
+The label text size is automatically derived from the component's `size` prop. Use the `label-size` prop to override this when you need a different label size independent of the select size. For example, the default label size for a `:size="300"` select menu is `300`, but you can override it from `100` to `400`.
 
 <code-example vueCode='
 <dt-select-menu
   :options="options"
   label="Label"
-  size="xs|sm|md|lg|xl"
-  label-size="xs|sm|md|lg"
+  :size="100"
+  :label-size="100"
 />
 '>
   <dt-stack gap="500">
-    <example-select-menu label="Extra small label" label-size="xs" />
-    <example-select-menu label="Small label" label-size="sm" />
-    <example-select-menu label="Medium label (default)" label-size="md" />
-    <example-select-menu label="Large label" label-size="lg" />
+    <example-select-menu label="Extra small label" :label-size="100" />
+    <example-select-menu label="Small label" :label-size="200" />
+    <example-select-menu label="Medium label (default)" :label-size="300" />
+    <example-select-menu label="Large label" :label-size="400" />
   </dt-stack>
 </code-example>
 

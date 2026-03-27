@@ -22,7 +22,7 @@
             name="select-menu"
             :value="selectedVariant"
             :options="variantOptions"
-            size="xl"
+            :size="500"
             @input="e => emit('update:variant', e)"
           />
         </div>

@@ -78,7 +78,7 @@
                 as="p"
                 :style="{ color: `var(${color.variable})` }"
                 kind="body"
-                size="lg"
+                :size="400"
                 class="d-p6 d-ta-center d-fw-medium"
               >
                 Ag
@@ -94,22 +94,22 @@
               </div>
             </td>
             <th scope="row">
-              <dt-text as="span" kind="body" size="xs" class="d-tt-capitalize">
+              <dt-text as="span" kind="body" :size="100" class="d-tt-capitalize">
                 {{ color.section }}
               </dt-text>
             </th>
             <td>
-              <dt-text as="span" kind="body" size="xs" class="d-tt-capitalize">
+              <dt-text as="span" kind="body" :size="100" class="d-tt-capitalize">
                 {{ color.states }}
               </dt-text>
             </td>
             <td>
-              <dt-text as="span" kind="code" size="xs" class="d-docsite-code">
+              <dt-text as="span" kind="code" :size="100" class="d-docsite-code">
                 {{ color.property }}
               </dt-text>
             </td>
             <td>
-              <dt-text as="span" kind="code" size="xs" class="d-docsite-code">
+              <dt-text as="span" kind="code" :size="100" class="d-docsite-code">
                 {{ color.variable }}
               </dt-text>
             </td>

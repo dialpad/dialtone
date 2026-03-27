@@ -8,7 +8,7 @@
     :tabindex="tabindex"
     importance="clear"
     kind="muted"
-    size="xs"
+    :size="100"
     @click="onClick"
     @keydown.right.stop="$emit('shift-focus-right')"
     @keydown.left.stop="$emit('shift-focus-left')"

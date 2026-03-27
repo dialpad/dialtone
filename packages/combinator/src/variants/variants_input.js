@@ -1,4 +1,4 @@
- 
+
 
 export default {
   exclusions: [
@@ -12,6 +12,22 @@ export default {
     props: {
       label: {
         initialValue: 'Label',
+      },
+    },
+    attributes: {
+      placeholder: {
+        initialValue: 'Placeholder',
+      },
+    },
+  },
+
+  'small input': {
+    props: {
+      label: {
+        initialValue: 'Label',
+      },
+      size: {
+        initialValue: '200',
       },
     },
     attributes: {
@@ -75,7 +91,7 @@ export default {
         initialValue: 'bold',
       },
       labelSize: {
-        initialValue: 'xs',
+        initialValue: '100',
       },
     },
     attributes: {
@@ -141,7 +157,7 @@ export default {
       },
       endIcon: {
         initialValue: `<dt-stack class="d-pr2">
-  <dt-button kind="muted" importance="clear" size="xs" aria-label="Clear search" @click="clear">
+  <dt-button kind="muted" importance="clear" size="100" aria-label="Clear search" @click="clear">
     <template #startIcon="{ iconSize }"><dt-icon name="close" :size="iconSize" /></template>
   </dt-button>
 </dt-stack>`,

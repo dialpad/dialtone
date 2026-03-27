@@ -40,11 +40,11 @@
           <dt-stack gap="500">
             <dt-stack direction="row" gap="300">
               <dt-stack class="d-fl-grow5">
-                <dt-text kind="label" size="sm">
+                <dt-text kind="label" :size="200">
                   Name
                 </dt-text>
                 <dt-stack direction="row" justify="between">
-                  <dt-text kind="body" size="md" density="200">
+                  <dt-text kind="body" :size="300" density="200">
                     {{ name }}
                   </dt-text>
                 </dt-stack>
@@ -64,10 +64,10 @@
             </dt-stack>
             <dt-stack direction="row" align="center">
               <dt-stack class="d-fl-grow5">
-                <dt-text kind="label" size="sm">
+                <dt-text kind="label" :size="200">
                   Description
                 </dt-text>
-                <dt-text kind="body" size="md" density="200">
+                <dt-text kind="body" :size="300" density="200">
                   {{ desc }}
                 </dt-text>
               </dt-stack>
@@ -79,7 +79,7 @@
                   label="SVG"
                   readonly
                   tabindex="-1"
-                  size="sm"
+                  :size="200"
                   :value="rawSvg"
                 />
               </div>
@@ -96,7 +96,7 @@
                   label="Vue"
                   tabindex="-1"
                   readonly
-                  size="sm"
+                  :size="200"
                   :value="`<${vue} />`"
                 />
               </div>

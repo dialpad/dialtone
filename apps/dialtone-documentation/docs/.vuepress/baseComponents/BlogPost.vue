@@ -18,15 +18,15 @@
       </component>
       <dt-stack as="section" direction="row" gap="400">
         <dt-avatar
-          size="md"
+          :size="300"
           :seed="author"
           :full-name="author"
         />
         <dt-stack>
-          <dt-text size="sm" kind="label" tone="secondary" density="200">
+          <dt-text :size="200" kind="label" tone="secondary" density="200">
             {{ author }}
           </dt-text>
-          <dt-text as="time" size="sm" kind="body" tone="tertiary">
+          <dt-text as="time" :size="200" kind="body" tone="tertiary">
             {{ format(posted, 'MMMM do, y') }}
           </dt-text>
         </dt-stack>
@@ -34,7 +34,7 @@
       <dt-text
         v-if="excerpt"
         as="p"
-        :size="isPreview ? 'md' : 'lg'"
+        :size="isPreview ? 300 : 400"
         kind="body"
         tone="tertiary"
         class="d-mt8"
