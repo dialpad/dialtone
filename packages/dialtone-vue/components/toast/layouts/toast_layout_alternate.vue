@@ -35,7 +35,7 @@
         <dt-notice-action
           :hide-action="true"
           :hide-close="hideClose"
-          button-size="xs"
+          :button-size="100"
           v-bind="toastListeners"
           @close="$emit('close')"
         />

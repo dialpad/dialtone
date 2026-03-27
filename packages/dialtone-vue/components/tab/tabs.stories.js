@@ -8,7 +8,7 @@ import { TAB_LIST_SIZES, TAB_SPREADS } from './tabs_constants';
 
 // Default Prop Values
 export const argsData = {
-  size: 'default',
+  size: 300,
   spread: 'none',
   onChange: action('change'),
 };

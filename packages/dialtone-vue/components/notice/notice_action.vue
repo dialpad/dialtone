@@ -11,7 +11,7 @@
       data-qa="dt-notice-action-close-button"
       importance="clear"
       kind="muted"
-      size="sm"
+      :size="200"
       :aria-label="closeButtonTitle"
       :title="closeButtonTitle"
       @click="close"

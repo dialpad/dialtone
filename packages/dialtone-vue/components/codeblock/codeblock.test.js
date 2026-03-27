@@ -63,5 +63,12 @@ describe('DtCodeblock Tests', () => {
         expect(wrapper.find('code').classes()).toContain('d-codeblock__code--lg');
       });
     });
+
+    describe('When size prop is numeric', () => {
+      it('should apply the correct size modifier class', async () => {
+        await wrapper.setProps({ size: 400 });
+        expect(wrapper.find('code').classes()).toContain('d-codeblock__code--lg');
+      });
+    });
   });
 });

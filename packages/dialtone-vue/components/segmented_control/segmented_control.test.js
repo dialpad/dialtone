@@ -68,6 +68,16 @@ describe('DtSegmentedControl Tests', () => {
     });
   });
 
+  describe('When size is numeric', () => {
+    it('should apply the correct size class for numeric size 200', () => {
+      _setWrapper({ size: 200 });
+
+      const container = wrapper.find('[data-qa="dt-segmented-control"]');
+
+      expect(container.classes()).toContain('d-segmented-control--sm');
+    });
+  });
+
   describe('Interactivity Tests', () => {
     it('emits update:modelValue on child click', async () => {
       _setWrapper();

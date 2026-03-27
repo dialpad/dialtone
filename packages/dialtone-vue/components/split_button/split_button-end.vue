@@ -14,9 +14,9 @@
     <template #icon>
       <slot
         name="icon"
-        :size="SPLIT_BUTTON_ICON_SIZES[size]"
+        :size="SPLIT_BUTTON_ICON_SIZES[String(size)]"
       >
-        <dt-icon-chevron-down :size="SPLIT_BUTTON_ICON_SIZES[size]" />
+        <dt-icon-chevron-down :size="SPLIT_BUTTON_ICON_SIZES[String(size)]" />
       </slot>
     </template>
   </dt-button>
@@ -90,8 +90,8 @@ export default {
      * The size of the button.
      */
     size: {
-      type: String,
-      default: 'md',
+      type: [String, Number],
+      default: 300,
     },
 
     /**

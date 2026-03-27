@@ -16,7 +16,7 @@ const SELECT_OPTIONS = [
 // Default Prop Values
 export const argsData = {
   label: 'Label',
-  size: 'md',
+  size: 300,
   name: '',
   disabled: false,
   modelValue: SELECT_OPTIONS[0].value,

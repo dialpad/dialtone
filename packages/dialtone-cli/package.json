@@ -23,7 +23,7 @@
     "@dialpad/dialtone-css": "workspace:*",
     "@dialpad/dialtone-icons": "workspace:*",
     "@dialpad/dialtone-query-core": "workspace:*",
-    "@dialpad/dialtone-vue": "workspace:^3",
+    "@dialpad/dialtone-vue": "workspace:*",
     "@rollup/plugin-commonjs": "^28.0.0",
     "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-node-resolve": "^15.2.0",

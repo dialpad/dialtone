@@ -281,12 +281,12 @@ export default {
 
     /**
      * The size of the button.
-     * @values xs, sm, md, lg, xl
+     * @values 100, 200, 300, 400, 500
      */
     size: {
-      type: String,
-      default: 'md',
-      validator: (s) => Object.keys(BUTTON_SIZE_MODIFIERS).includes(s),
+      type: [String, Number],
+      default: 300,
+      validator: (s) => Object.keys(BUTTON_SIZE_MODIFIERS).includes(String(s)),
     },
 
     /**
@@ -508,11 +508,11 @@ export default {
     },
 
     iconSize () {
-      return BUTTON_ICON_SIZES[this.size];
+      return BUTTON_ICON_SIZES[String(this.size)];
     },
 
     loaderSize () {
-      return BUTTON_ICON_SIZES[this.size];
+      return BUTTON_ICON_SIZES[String(this.size)];
     },
   },
 
@@ -547,7 +547,7 @@ export default {
         return [
           'd-link',
           getLinkKindModifier(this.linkKind, this.linkInverted),
-          BUTTON_SIZE_MODIFIERS[this.size],
+          BUTTON_SIZE_MODIFIERS[String(this.size)],
           { 'd-link--no-underline': !this.resolvedUnderline },
         ];
       }
@@ -558,7 +558,7 @@ export default {
         'd-btn',
         BUTTON_IMPORTANCE_MODIFIERS[this.importance],
         BUTTON_KIND_MODIFIERS[this.kind],
-        BUTTON_SIZE_MODIFIERS[this.size],
+        BUTTON_SIZE_MODIFIERS[String(this.size)],
         {
           'd-btn--circle': this.circle,
           'd-btn--loading': this.loading,

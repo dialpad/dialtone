@@ -41,7 +41,7 @@
       <dt-text
         v-if="$slots.description || description"
         kind="body"
-        size="sm"
+        :size="200"
         tone="tertiary"
         as="div"
         :class="['d-description', descriptionClass]"
@@ -104,12 +104,12 @@ export default {
 
     /**
      * Overrides the label text size.
-     * @values lg, md, sm, xs
+     * @values 100, 200, 300, 400
      */
     labelSize: {
-      type: String,
+      type: [String, Number],
       default: null,
-      validator: (s) => TEXT_SIZE_MODIFIERS.label.includes(s),
+      validator: (s) => TEXT_SIZE_MODIFIERS.label.includes(String(s)),
     },
 
     /**
@@ -158,7 +158,7 @@ export default {
 
   computed: {
     resolvedLabelSize () {
-      return this.labelSize ?? 'md';
+      return this.labelSize ?? 300;
     },
 
     inputValidationClass () {
