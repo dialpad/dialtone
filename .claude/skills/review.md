@@ -23,9 +23,8 @@ Read `.claude/rules/code-review.md` to load the full review checklist.
 Determine what to review:
 
 1. If user specified a file path → review that file
-2. If there are staged changes → `git diff --cached --name-only`
-3. If there are unstaged changes → `git diff --name-only`
-4. If no local changes → diff against the base branch:
+2. Collect **both** staged and unstaged changed files: `git diff --cached --name-only` + `git diff --name-only`, deduplicate the union
+3. If no local changes → diff against the base branch:
    - Detect base: `git rev-parse --abbrev-ref HEAD@{upstream} 2>/dev/null` — extracts the remote tracking branch (e.g., `origin/staging`, `origin/next`)
    - If no upstream is set, fall back to the repo's default branch: `git remote show origin | sed -n 's/.*HEAD branch: //p'`
    - Then: `git diff --name-only <base>...HEAD`
@@ -44,7 +43,7 @@ For each changed file, determine which review categories apply:
 |---|---|
 | `*.vue` | Reuse & Duplication, Code Quality, Vue Correctness, API & Library Design, i18n & Assets, Accessibility |
 | `*.less` | CSS / Styling |
-| `*.test.js` | Testing |
+| `*.test.js`, `*.test.ts` | Testing |
 | `*.stories.js`, `*.mdx` | Storybook |
 | JS helpers (`*_constants.js`, `validators.js`, `utils.js`, `index.js`, and similar) | Reuse & Duplication, Code Quality, API & Library Design |
 | `packages/dialtone-tokens/**/*.json` | CSS / Styling (token usage) |

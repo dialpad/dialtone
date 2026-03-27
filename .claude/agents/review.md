@@ -33,7 +33,7 @@ Read `.claude/skills/review.md` and use the file type → category mapping table
 For each file:
 
 1. Read the full file for context
-2. Read the diff for that file: `git diff -- <filepath>`
+2. Read the diff for that file: `git diff HEAD -- <filepath>`
 3. Check each applicable rule from the checklist
 4. Record findings with file path and line number
 
