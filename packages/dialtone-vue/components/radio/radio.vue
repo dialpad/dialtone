@@ -186,7 +186,7 @@ export default {
     },
 
     resolvedLabelSize () {
-      return this.labelSize ?? 'md';
+      return this.labelSize ?? 300;
     },
 
     inputValidationClass () {

@@ -82,7 +82,7 @@ export default {
 
   computed: {
     resolvedLabelSize () {
-      return this.labelSize ?? 'md';
+      return this.labelSize ?? 300;
     },
 
     inputValidationClass () {
