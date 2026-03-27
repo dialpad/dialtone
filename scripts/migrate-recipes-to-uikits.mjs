@@ -128,10 +128,18 @@ function rewriteDialtoneImport (importedNames, quote) {
 function migrateContent (content) {
   let result = content
 
-  // 1. Rewrite named imports from @dialpad/dialtone/vue3
+  // 1. Rewrite named imports from @dialpad/dialtone/vue3, but only when at least
+  //    one imported name is a recipe component that needs to move to a new package.
   result = result.replace(
     /import\s*\{([^}]+)\}\s*from\s*(['"])@dialpad\/dialtone\/vue3\2/g,
-    (_, importedNames, quote) => rewriteDialtoneImport(importedNames, quote),
+    (match, importedNames, quote) => {
+      const names = importedNames.split(',').map(n => n.trim()).filter(Boolean)
+      const hasRecipe = names.some(specifier => {
+        const importedName = specifier.split(/\s+as\s+/)[0].trim()
+        return MIGRATION_MAP[importedName] !== undefined
+      })
+      return hasRecipe ? rewriteDialtoneImport(importedNames, quote) : match
+    },
   )
 
   // 2. Replace PascalCase component names (whole-word, handles JS/TS/JSX and Vue templates)
