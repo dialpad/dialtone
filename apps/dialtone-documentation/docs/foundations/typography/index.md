@@ -292,11 +292,11 @@ vueCode='
     <dt-stack :direction="{ 'default': 'column', 'md': 'row' }" gap="500" align="start">
       <dt-stack>
         <dt-text as="h3" kind="headline" :size="500">AI Contact Center</dt-text>
-        <dt-text as="p" kind="body" :size="300">The world's most advanced customer engagement platform</dt-text>
+        <dt-text as="p" kind="body" :size="300">The world’s most advanced customer engagement platform</dt-text>
       </dt-stack>
       <dt-stack>
         <dt-text as="h3" kind="headline" :size="500">AI Voice</dt-text>
-        <dt-text as="p" kind="body" :size="300">Say hello to the world's smartest business phone</dt-text>
+        <dt-text as="p" kind="body" :size="300">Say hello to the world’s smartest business phone</dt-text>
       </dt-stack>
       <dt-stack>
         <dt-text as="h3" kind="headline" :size="500">AI Meetings</dt-text>
@@ -316,11 +316,11 @@ vueCode='
   <dt-stack direction="row" gap="500" align="start">
     <dt-stack>
       <dt-text as="h3" kind="headline" :size="500">AI Contact Center</dt-text>
-      <dt-text as="p" kind="body" :size="300">The world's most advanced customer engagement platform</dt-text>
+      <dt-text as="p" kind="body" :size="300">The world’s most advanced customer engagement platform</dt-text>
     </dt-stack>
     <dt-stack>
       <dt-text as="h3" kind="headline" :size="500">AI Voice</dt-text>
-      <dt-text as="p" kind="body" :size="300">Say hello to the world's smartest business phone</dt-text>
+      <dt-text as="p" kind="body" :size="300">Say hello to the world’s smartest business phone</dt-text>
     </dt-stack>
     <dt-stack>
       <dt-text as="h3" kind="headline" :size="500">AI Meetings</dt-text>
