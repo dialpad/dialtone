@@ -1,5 +1,5 @@
 <template>
-  <dt-stack gap="400" class="dialtone-doc-table-clamped d-ps-relative" role="region" aria-label="Searchable table">
+  <dt-stack gap="100" class="dialtone-doc-table-clamped d-ps-relative" role="region" aria-label="Searchable table">
     <div v-if="shouldShowSearch" role="search">
       <dt-input
         v-model="inputSearchValue"

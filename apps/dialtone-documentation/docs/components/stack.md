@@ -209,7 +209,6 @@ vueCode='
       <dt-text as="h3" kind="label" size="md" id="interactive-gap-label">Select a gap option</dt-text>
       <dt-stack
         :direction="{ 'default': 'column', 'md': 'row' }"
-        gap="200"
         class="d-ba d-bc-subtle d-p-25 d-bar8"
         role="group"
         aria-labelledby="interactive-gap-label"
@@ -287,215 +286,11 @@ vueCode='
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row" class="d-code--sm d-docsite-code">
-              0
-          </th>
-          <td>
-            <strong>var(--dt-size-0)</strong>
-          </td>
-          <td class="d-code--sm d-docsite-code d-ta-right">
-            0.0rem
-          </td>
-          <td class="d-code--sm d-docsite-code d-ta-right">
-             0px
-          </td>
-        </tr>
-        <tr>
-          <th scope="row" class="d-code--sm d-docsite-code">
-             50
-          </th>
-          <td>
-            <strong>var(--dt-size-50)</strong>
-          </td>
-          <td class="d-code--sm d-docsite-code d-ta-right">
-            0.05rem
-          </td>
-          <td class="d-code--sm d-docsite-code d-ta-right">
-            .5px
-          </td>
-        </tr>
-        <tr>
-          <th scope="row" class="d-code--sm d-docsite-code">
-            100
-          </th>
-          <td>
-            <strong>var(--dt-size-100)</strong>
-          </td>
-          <td class="d-code--sm d-docsite-code d-ta-right">
-            0.1rem
-          </td>
-          <td class="d-code--sm d-docsite-code d-ta-right">
-             1px
-          </td>
-        </tr>
-        <tr>
-          <th scope="row" class="d-code--sm d-docsite-code">
-            200
-          </th>
-          <td>
-            <strong>var(--dt-size-200)</strong>
-          </td>
-          <td class="d-code--sm d-docsite-code d-ta-right">
-            0.2rem
-          </td>
-          <td class="d-code--sm d-docsite-code d-ta-right">
-             2px
-          </td>
-        </tr>
-        <tr>
-          <th scope="row" class="d-code--sm d-docsite-code">
-            300
-          </th>
-          <td>
-            <strong>var(--dt-size-300)</strong>
-          </td>
-          <td class="d-code--sm d-docsite-code d-ta-right">
-            0.4rem
-          </td>
-          <td class="d-code--sm d-docsite-code d-ta-right">
-             4px
-          </td>
-        </tr>
-        <tr>
-          <th scope="row" class="d-code--sm d-docsite-code">
-            350
-          </th>
-          <td>
-            <strong>var(--dt-size-350)</strong>
-          </td>
-          <td class="d-code--sm d-docsite-code d-ta-right">
-            0.6rem
-          </td>
-          <td class="d-code--sm d-docsite-code d-ta-right">
-             6px
-          </td>
-        </tr>
-        <tr>
-          <th scope="row" class="d-code--sm d-docsite-code">
-            400
-          </th>
-          <td>
-            <strong>var(--dt-size-400)</strong>
-          </td>
-          <td class="d-code--sm d-docsite-code d-ta-right">
-            0.8rem
-          </td>
-          <td class="d-code--sm d-docsite-code d-ta-right">
-             8px
-          </td>
-        </tr>
-        <tr>
-          <th scope="row" class="d-code--sm d-docsite-code">
-            450
-          </th>
-          <td>
-            <strong>var(--dt-size-450)</strong>
-          </td>
-          <td class="d-code--sm d-docsite-code d-ta-right">
-            1.2rem
-          </td>
-          <td class="d-code--sm d-docsite-code d-ta-right">
-            12px
-          </td>
-        </tr>
-        <tr>
-          <th scope="row" class="d-code--sm d-docsite-code">
-            500
-          </th>
-          <td>
-            <strong>var(--dt-size-500)</strong>
-          </td>
-          <td class="d-code--sm d-docsite-code d-ta-right">
-            1.6rem
-          </td>
-          <td class="d-code--sm d-docsite-code d-ta-right">
-            16px
-          </td>
-        </tr>
-        <tr>
-          <th scope="row" class="d-code--sm d-docsite-code">
-            525
-          </th>
-          <td>
-            <strong>var(--dt-size-525)</strong>
-          </td>
-          <td class="d-code--sm d-docsite-code d-ta-right">
-            2.0rem
-          </td>
-          <td class="d-code--sm d-docsite-code d-ta-right">
-            20px
-          </td>
-        </tr>
-        <tr>
-          <th scope="row" class="d-code--sm d-docsite-code">
-            550
-          </th>
-          <td>
-            <strong>var(--dt-size-550)</strong>
-          </td>
-          <td class="d-code--sm d-docsite-code d-ta-right">
-            2.4rem
-          </td>
-          <td class="d-code--sm d-docsite-code d-ta-right">
-            24px
-          </td>
-        </tr>
-        <tr>
-          <th scope="row" class="d-code--sm d-docsite-code">
-            600
-          </th>
-          <td>
-            <strong>var(--dt-size-600)</strong>
-          </td>
-          <td class="d-code--sm d-docsite-code d-ta-right">
-            3.2rem
-          </td>
-          <td class="d-code--sm d-docsite-code d-ta-right">
-            32px
-          </td>
-        </tr>
-        <tr>
-          <th scope="row" class="d-code--sm d-docsite-code">
-            625
-          </th>
-          <td>
-            <strong>var(--dt-size-625)</strong>
-          </td>
-          <td class="d-code--sm d-docsite-code d-ta-right">
-            4.2rem
-          </td>
-          <td class="d-code--sm d-docsite-code d-ta-right">
-            42px
-          </td>
-        </tr>
-        <tr>
-          <th scope="row" class="d-code--sm d-docsite-code">
-            650
-          </th>
-          <td>
-            <strong>var(--dt-size-650)</strong>
-          </td>
-          <td class="d-code--sm d-docsite-code d-ta-right">
-            4.8rem
-          </td>
-          <td class="d-code--sm d-docsite-code d-ta-right">
-            48px
-          </td>
-        </tr>
-        <tr>
-          <th scope="row" class="d-code--sm d-docsite-code">
-            700
-          </th>
-          <td>
-            <strong>var(--dt-size-700)</strong>
-          </td>
-          <td class="d-code--sm d-docsite-code d-ta-right">
-            6.4rem
-          </td>
-          <td class="d-code--sm d-docsite-code d-ta-right">
-            64px
-          </td>
+        <tr v-for="{ value: stop, output } in spacingValues" :key="stop">
+          <th scope="row" class="d-code--sm d-docsite-code">{{ stop }}</th>
+          <td><strong>var(--dt-spacing-{{ stop }})</strong></td>
+          <td class="d-code--sm d-docsite-code d-ta-right">{{ output }}</td>
+          <td class="d-code--sm d-docsite-code d-ta-right">{{ (parseFloat(output) * 10) }}px</td>
         </tr>
       </tbody>
     </table>
@@ -1383,6 +1178,7 @@ vueCode='
   import { ref, nextTick } from 'vue';
   import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
   import ExampleProfileCard from '@exampleComponents/ExampleProfileCard.vue';
+  import { values as spacingValues } from '@data/spacing.json';
 
   const selectedGap = ref('400');
   const focusedGapIndex = ref(0);
@@ -1467,8 +1263,8 @@ vueCode='
 
 <style scoped lang="less">
   .axis-outline {
-    --axis-size: var(--dt-size-200);
-    --axis-offset: var(--dt-size-200-negative);
+    --axis-size: var(--dt-spacing-25);
+    --axis-offset: var(--dt-spacing-25-negative);
     --axis-color: var(--dt-color-border-critical);
     --axis-opacity: var(--dt-opacity-800);
     --axis-pattern-vertical: repeating-linear-gradient(
@@ -1582,7 +1378,7 @@ vueCode='
 
     // Special case for baseline
     &--baseline::before {
-      inset-block-end: calc(var(--dt-size-500) + var(--dt-size-400));
+      inset-block-end: var(--dt-spacing-300);
       block-size: var(--axis-size);
       inline-size: 100%;
       background-image: var(--axis-pattern-horizontal);
