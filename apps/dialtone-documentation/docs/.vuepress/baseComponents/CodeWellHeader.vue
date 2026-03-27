@@ -2,7 +2,7 @@
   <aside>
     <dt-stack
       as="header"
-      gap="400"
+      gap="100"
       align="center"
       justify="center"
       class="d-bar8"

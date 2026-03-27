@@ -11,8 +11,8 @@ keywords: ["text color", "foreground color", "font colour"]
 Use [DtText's](/components/text.html#tone) `tone` prop to declare the text's tone, which will map to a foreground color. By default, the tone is inherited from its parent.
 
 <code-well-header>
-  <dt-stack gap="500" direction="row">
-    <dt-stack gap="300" class="d-py-100 d-px-200 d-bgc-primary d-bar4">
+  <dt-stack gap="200" direction="row">
+    <dt-stack class="d-py-100 d-px-200 d-bgc-primary d-bar4">
       <dt-text tone="primary">primary</dt-text>
       <dt-text tone="secondary">secondary</dt-text>
       <dt-text tone="tertiary">tertiary</dt-text>
@@ -98,8 +98,8 @@ Use `fv:d-fc-{color}` to change an element's text color on `:focus-visible` stat
 </dt-notice>
 
 <code-well-header>
-  <dt-stack direction="row" gap="600">
-    <dt-stack gap="300" class="d-py-100 d-px-200 d-bgc-primary d-bar4">
+  <dt-stack direction="row" gap="400">
+    <dt-stack class="d-py-100 d-px-200 d-bgc-primary d-bar4">
       <dt-text tone="primary">primary</dt-text>
       <dt-text tone="secondary">secondary</dt-text>
       <dt-text tone="tertiary">tertiary</dt-text>
@@ -112,7 +112,7 @@ Use `fv:d-fc-{color}` to change an element's text color on `:focus-visible` stat
       <dt-text tone="critical">critical</dt-text>
       <dt-text tone="critical-strong">critical-strong</dt-text>
     </dt-stack>
-    <dt-stack gap="300" class="d-py-100 d-px-200 d-bgc-contrast d-bar4">
+    <dt-stack class="d-py-100 d-px-200 d-bgc-contrast d-bar4">
       <dt-text v-dt-mode:invert tone="primary">primary</dt-text>
       <dt-text v-dt-mode:invert tone="secondary">secondary</dt-text>
       <dt-text v-dt-mode:invert tone="tertiary">tertiary</dt-text>

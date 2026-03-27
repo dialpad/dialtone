@@ -65,8 +65,8 @@ const resolvedCheckRadioDescriptionClass = computed(() => showCheckRadioDescript
 const checkRadioDisabled = ref(false);
 </script>
 
-<dt-stack class="d-p-400" gap="600">
-  <dt-stack direction="row" gap="400">
+<dt-stack class="d-p-400" gap="400">
+  <dt-stack direction="row" gap="100">
     <dt-text as="h1" kind="headline" size="2xl">
       Scratchpad
     </dt-text>
@@ -150,7 +150,7 @@ const checkRadioDisabled = ref(false);
       </template>
     </dt-dropdown>
   </dt-stack>
-  <dt-stack gap="500">
+  <dt-stack gap="200">
     <dt-text as="h1" kind="headline" size="xl">
       Disabled Button
     </dt-text>
@@ -162,36 +162,36 @@ const checkRadioDisabled = ref(false);
         <dt-checkbox v-model="isDisabled">Disabled</dt-checkbox>
       </span>
     </dt-stack>
-    <dt-stack gap="400" ref="disabledAll">
-      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+    <dt-stack gap="100" ref="disabledAll">
+      <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
         <dt-button :disabled="isDisabled"> Place Call <template #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template></dt-button>
         <dt-button :disabled="isDisabled" importance="outlined"> Place Call <template #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template></dt-button>
         <dt-button :disabled="isDisabled" importance="clear"> Place Call <template #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template></dt-button>
       </dt-stack>
-      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+      <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
         <dt-button :disabled="isDisabled" kind="danger"> Place Call <template #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template></dt-button>
         <dt-button :disabled="isDisabled" kind="danger" importance="outlined"> Place Call <template #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template></dt-button>
         <dt-button :disabled="isDisabled" kind="danger" importance="clear"> Place Call <template #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template></dt-button>
       </dt-stack>
-      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+      <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
         <dt-button :disabled="isDisabled" kind="positive">Place Call<template #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template></dt-button>
         <dt-button :disabled="isDisabled" kind="positive" importance="outlined">Place Call<template #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template></dt-button>
         <dt-button :disabled="isDisabled" kind="positive" importance="clear">Place Call<template #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template></dt-button>
       </dt-stack>
-      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+      <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
         <dt-button :disabled="isDisabled" kind="muted" importance="clear"> Place Call <template #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template></dt-button>
         <dt-button :disabled="isDisabled" kind="muted" importance="outlined"> Place Call <template #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template></dt-button>
       </dt-stack>
     </dt-stack>
   </dt-stack>
-  <dt-stack gap="500">
+  <dt-stack gap="200">
     <dt-text as="h1" kind="headline" size="xl">
       Button: Leading/Trailing
     </dt-text>
     <dt-text as="p" kind="body" size="lg">
       Freeform elements that are rendered before/after the button content.
     </dt-text>
-    <dt-stack gap="500" direction="row" align="baseline" class="d-bgc-moderate-opaque d-p-150 d-bar8">
+    <dt-stack gap="200" direction="row" align="baseline" class="d-bgc-moderate-opaque d-p-150 d-bar8">
       <dt-checkbox v-model="showBtnLeading">
         Leading
       </dt-checkbox>
@@ -214,7 +214,7 @@ const checkRadioDisabled = ref(false);
         Highlight leading/trailing
       </dt-checkbox>
     </dt-stack>
-    <dt-stack gap="400" direction="row">
+    <dt-stack gap="100" direction="row">
       <dt-button kind="muted" importance="outlined" size="xs" :leading-class="[removeBtnSlotClass ? undefined : 'd-pis-25', highlightBtnSlotClass ? 'd-bgc-warning' : undefined]" :trailing-class="[removeBtnSlotClass ? undefined : 'd-pie-1', highlightBtnSlotClass ? 'd-bgc-warning' : undefined]" :label-class="resolvedBtnLabelClass">
         Place Call
         <template v-if="showBtnLeading" #leading>
@@ -272,7 +272,7 @@ const checkRadioDisabled = ref(false);
       </dt-button>
     </dt-stack>
   </dt-stack>
-  <dt-stack gap="500">
+  <dt-stack gap="200">
     <dt-text as="h1" kind="headline" size="xl">
       Sizing update: Button/Input/Select
     </dt-text>
@@ -407,11 +407,11 @@ const checkRadioDisabled = ref(false);
       </dt-button>
     </dt-stack>
   </dt-stack>
-  <dt-stack gap="500">
+  <dt-stack gap="200">
     <dt-text as="h1" kind="headline" size="xl">
       Input / Select
     </dt-text>
-    <dt-stack gap="500" direction="row" class="d-bgc-moderate-opaque d-p-150 d-bar8">
+    <dt-stack gap="200" direction="row" class="d-bgc-moderate-opaque d-p-150 d-bar8">
       <dt-select-menu
         label="Label Size"
         :label-visible="false"
@@ -444,15 +444,15 @@ const checkRadioDisabled = ref(false);
       <dt-checkbox v-model="showInputMessagesClass">`messagesClass`</dt-checkbox>
       <dt-checkbox v-model="showInputDescriptionClass">`descriptionClass`</dt-checkbox>
     </dt-stack>
-    <dt-stack direction="row" gap="600">
-      <dt-stack gap="400" class="d-fl1">
+    <dt-stack direction="row" gap="400">
+      <dt-stack gap="100" class="d-fl1">
         <dt-input label="Extra Small" type="text" placeholder="Placeholder" size="xs" :label-size="resolvedLabelSize" :label-strength="resolvedLabelStrength" :label-class="resolvedLabelClass" :description="showInputDescription ? 'Description text' : undefined" :messages="inputMessages" :messages-class="resolvedInputMessagesClass" :description-class="resolvedInputDescriptionClass" />
         <dt-input label="Small" type="text" placeholder="Placeholder" size="sm" :label-size="resolvedLabelSize" :label-strength="resolvedLabelStrength" :label-class="resolvedLabelClass" :description="showInputDescription ? 'Description text' : undefined" :messages="inputMessages" :messages-class="resolvedInputMessagesClass" :description-class="resolvedInputDescriptionClass" />
         <dt-input label="Medium" type="text" placeholder="Placeholder" size="md" :label-size="resolvedLabelSize" :label-strength="resolvedLabelStrength" :label-class="resolvedLabelClass" :description="showInputDescription ? 'Description text' : undefined" :messages="inputMessages" :messages-class="resolvedInputMessagesClass" :description-class="resolvedInputDescriptionClass" />
         <dt-input label="Large" type="text" placeholder="Placeholder" size="lg" :label-size="resolvedLabelSize" :label-strength="resolvedLabelStrength" :label-class="resolvedLabelClass" :description="showInputDescription ? 'Description text' : undefined" :messages="inputMessages" :messages-class="resolvedInputMessagesClass" :description-class="resolvedInputDescriptionClass" />
         <dt-input label="Extra large" type="text" placeholder="Placeholder" size="xl" :label-size="resolvedLabelSize" :label-strength="resolvedLabelStrength" :label-class="resolvedLabelClass" :description="showInputDescription ? 'Description text' : undefined" :messages="inputMessages" :messages-class="resolvedInputMessagesClass" :description-class="resolvedInputDescriptionClass" />
       </dt-stack>
-      <dt-stack gap="400" class="d-fl1">
+      <dt-stack gap="100" class="d-fl1">
         <!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
         <dt-select-menu
           :options="[
@@ -557,14 +557,14 @@ const checkRadioDisabled = ref(false);
       </dt-stack>
     </dt-stack>
   </dt-stack>
-  <dt-stack gap="500">
+  <dt-stack gap="200">
     <dt-text as="h1" kind="headline" size="xl">
       Tabs
     </dt-text>
     <dt-text as="p" kind="body" size="lg">
       Just straight up refactor to use DtButton instead of custom markup/style. Use mix of DtButton variants depending on `active`. Uses all DtButton sizes (currently at least).
     </dt-text>
-    <dt-stack gap="500" direction="row" align="baseline" class="d-bgc-moderate-opaque d-p-150 d-bar8">
+    <dt-stack gap="200" direction="row" align="baseline" class="d-bgc-moderate-opaque d-p-150 d-bar8">
       <dt-checkbox v-model="borderless">
         Borderless
       </dt-checkbox>
@@ -604,7 +604,7 @@ const checkRadioDisabled = ref(false);
         @change="size = $event"
       />
     </dt-stack>
-    <dt-stack gap="200" hidden>
+    <dt-stack gap="25" hidden>
       <dt-text as="h3" kind="headline" size="md">
         Backwards-compatible old tabs html
       </dt-text>
@@ -693,35 +693,35 @@ const checkRadioDisabled = ref(false);
       </template>
       <div class="d-py-100">
         <dt-tab-panel id="2" tab-id="1">
-          <dt-stack gap="400">
+          <dt-stack gap="100">
             <dt-text as="p" kind="body" size="md">The <dt-link href="https://en.wikipedia.org/wiki/Argentina" target="_blank">Argentina</dt-link> stretches from subtropical forests in the north to glacial landscapes in the south, encompassing the towering Andes mountains and the vast Pampas grasslands in between.</dt-text>
             <dt-text as="p" kind="body" size="md">Its cities blend European architectural influences with a vibrant local character, while rural traditions of horsemanship and cattle ranching continue to shape the national identity.</dt-text>
             <dt-text as="p" kind="body" size="md">The country is celebrated for its contributions to tango, wine production, and a culinary culture built around shared meals and regional flavors.</dt-text>
           </dt-stack>
         </dt-tab-panel>
         <dt-tab-panel id="4" tab-id="3">
-          <dt-stack gap="400">
+          <dt-stack gap="100">
             <dt-text as="p" kind="body" size="md">The <dt-link href="https://en.wikipedia.org/wiki/United_States">United States</dt-link> spans a broad continental range, from Atlantic coastlines and Appalachian ridges to Great Plains, Rocky Mountain summits, and Pacific shores beyond.</dt-text>
             <dt-text as="p" kind="body" size="md">Major metropolitan areas serve as centers for finance, technology, and the arts, while smaller communities maintain distinct regional customs, dialects, and culinary traditions.</dt-text>
             <dt-text as="p" kind="body" size="md">The nation's history of immigration has produced a diverse cultural fabric, with influences from virtually every corner of the globe woven into daily life.</dt-text>
           </dt-stack>
         </dt-tab-panel>
         <dt-tab-panel id="6" tab-id="5">
-          <dt-stack gap="400">
+          <dt-stack gap="100">
             <dt-text as="p" kind="body" size="md">The <dt-link href="https://en.wikipedia.org/wiki/United_Kingdom" target="_blank">United Kingdom</dt-link> comprises England, Scotland, Wales, and Northern Ireland, each with distinct landscapes ranging from chalk cliffs and moors to highland lochs and green valleys.</dt-text>
             <dt-text as="p" kind="body" size="md">Its cities layer centuries of history alongside modern architecture, with institutions in education, finance, and governance that have influenced systems around the world.</dt-text>
             <dt-text as="p" kind="body" size="md">A strong tradition in literature, theater, and music continues to thrive, supported by public institutions and a widespread culture of creative expression.</dt-text>
           </dt-stack>
         </dt-tab-panel>
         <dt-tab-panel id="8" tab-id="7">
-          <dt-stack gap="400">
+          <dt-stack gap="100">
             <dt-text as="p" kind="body" size="md">The <dt-link href="https://en.wikipedia.org/wiki/India" target="_blank">India</dt-link> extends from the Himalayan ranges in the north through fertile river plains to tropical coastlines in the south, supporting an extraordinary range of ecosystems and climates.</dt-text>
             <dt-text as="p" kind="body" size="md">Hundreds of languages and traditions coexist across its states and territories, producing one of the most culturally varied societies on earth with deep historical roots.</dt-text>
             <dt-text as="p" kind="body" size="md">A growing technology sector and expanding urban centers complement longstanding agricultural and artisan economies that continue to sustain millions of people.</dt-text>
           </dt-stack>
         </dt-tab-panel>
         <dt-tab-panel id="10" tab-id="9">
-          <dt-stack gap="400">
+          <dt-stack gap="100">
             <dt-text as="p" kind="body" size="md">The <dt-link href="https://en.wikipedia.org/wiki/Canada" target="_blank">Canada</dt-link> stretches from the Atlantic to the Pacific and northward into the Arctic, encompassing boreal forests, prairies, mountain ranges, and thousands of lakes and waterways.</dt-text>
             <dt-text as="p" kind="body" size="md">Its cities are known for cultural diversity and livability, while vast rural and wilderness areas support forestry, mining, and agriculture across multiple climate zones.</dt-text>
             <dt-text as="p" kind="body" size="md">Official bilingualism in English and French reflects a history shaped by Indigenous peoples, European settlement, and ongoing immigration from around the world.</dt-text>
@@ -791,28 +791,28 @@ const checkRadioDisabled = ref(false);
       </template>
       <div class="d-pis-300 d-w100p d-py-50">
         <dt-tab-panel id="2" tab-id="1">
-          <dt-stack gap="400">
+          <dt-stack gap="100">
             <dt-text as="p" kind="body" size="md">The <dt-link href="https://en.wikipedia.org/wiki/Argentina" target="_blank">Argentina</dt-link> stretches from subtropical forests in the north to glacial landscapes in the south, encompassing the towering Andes mountains and the vast Pampas grasslands in between.</dt-text>
             <dt-text as="p" kind="body" size="md">Its cities blend European architectural influences with a vibrant local character, while rural traditions of horsemanship and cattle ranching continue to shape the national identity.</dt-text>
             <dt-text as="p" kind="body" size="md">The country is celebrated for its contributions to tango, wine production, and a culinary culture built around shared meals and regional flavors.</dt-text>
           </dt-stack>
         </dt-tab-panel>
         <dt-tab-panel id="4" tab-id="3">
-          <dt-stack gap="400">
+          <dt-stack gap="100">
             <dt-text as="p" kind="body" size="md">The <dt-link href="https://en.wikipedia.org/wiki/United_States" target="_blank">United States</dt-link> spans a broad continental range, from Atlantic coastlines and Appalachian ridges to Great Plains, Rocky Mountain summits, and Pacific shores beyond.</dt-text>
             <dt-text as="p" kind="body" size="md">Major metropolitan areas serve as centers for finance, technology, and the arts, while smaller communities maintain distinct regional customs, dialects, and culinary traditions.</dt-text>
             <dt-text as="p" kind="body" size="md">The nation's history of immigration has produced a diverse cultural fabric, with influences from virtually every corner of the globe woven into daily life.</dt-text>
           </dt-stack>
         </dt-tab-panel>
         <dt-tab-panel id="6" tab-id="5">
-          <dt-stack gap="400">
+          <dt-stack gap="100">
             <dt-text as="p" kind="body" size="md">The <dt-link href="https://en.wikipedia.org/wiki/United_Kingdom" target="_blank">United Kingdom</dt-link> comprises England, Scotland, Wales, and Northern Ireland, each with distinct landscapes ranging from chalk cliffs and moors to highland lochs and green valleys.</dt-text>
             <dt-text as="p" kind="body" size="md">Its cities layer centuries of history alongside modern architecture, with institutions in education, finance, and governance that have influenced systems around the world.</dt-text>
             <dt-text as="p" kind="body" size="md">A strong tradition in literature, theater, and music continues to thrive, supported by public institutions and a widespread culture of creative expression.</dt-text>
           </dt-stack>
         </dt-tab-panel>
         <dt-tab-panel id="8" tab-id="7">
-          <dt-stack gap="400">
+          <dt-stack gap="100">
             <dt-text as="p" kind="body" size="md">The <dt-link href="https://en.wikipedia.org/wiki/India" target="_blank">India</dt-link> extends from the Himalayan ranges in the north through fertile river plains to tropical coastlines in the south, supporting an extraordinary range of ecosystems and climates.</dt-text>
             <dt-text as="p" kind="body" size="md">Hundreds of languages and traditions coexist across its states and territories, producing one of the most culturally varied societies on earth with deep historical roots.</dt-text>
             <dt-text as="p" kind="body" size="md">A growing technology sector and expanding urban centers complement longstanding agricultural and artisan economies that continue to sustain millions of people.</dt-text>
@@ -821,7 +821,7 @@ const checkRadioDisabled = ref(false);
           </dt-stack>
         </dt-tab-panel>
         <dt-tab-panel id="10" tab-id="9">
-          <dt-stack gap="400">
+          <dt-stack gap="100">
             <dt-text as="p" kind="body" size="md">Canada stretches from the Atlantic to the Pacific and northward into the Arctic, encompassing boreal forests, prairies, mountain ranges, and thousands of lakes and waterways.</dt-text>
             <dt-text as="p" kind="body" size="md">Its cities are known for cultural diversity and livability, while vast rural and wilderness areas support forestry, mining, and agriculture across multiple climate zones.</dt-text>
             <dt-text as="p" kind="body" size="md">Official bilingualism in English and French reflects a history shaped by Indigenous peoples, European settlement, and ongoing immigration from around the world.</dt-text>
@@ -830,19 +830,19 @@ const checkRadioDisabled = ref(false);
       </div>
     </dt-tab-group>
   </dt-stack>
-  <dt-stack gap="500">
+  <dt-stack gap="200">
     <dt-text as="h1" kind="headline" size="xl">
       Notice / Banner / Toast
     </dt-text>
     <dt-text as="p" kind="body" size="lg">
       Updated typography sizing and intelligent icon alignment. Icon margin adjusts based on content layout: title-only, message-only, or title+message.
     </dt-text>
-    <dt-stack gap="500">
+    <dt-stack gap="200">
       <dt-text as="h2" kind="headline" size="lg">
         Notice
       </dt-text>
       <div class="d-d-grid d-g-400 d-g-cols2">
-        <dt-stack gap="400">
+        <dt-stack gap="100">
           <dt-text as="h3" kind="headline" size="md">Default</dt-text>
           <dt-notice kind="success" title="Success" hide-action>
             Action completed successfully.
@@ -857,7 +857,7 @@ const checkRadioDisabled = ref(false);
             A neutral notice for general information.
           </dt-notice>
         </dt-stack>
-        <dt-stack gap="400">
+        <dt-stack gap="100">
           <dt-text as="h3" kind="headline" size="md">Important</dt-text>
           <dt-notice kind="info" title="Important info" :important="true" hide-action>
             Visually prominent variant with filled background.
@@ -872,7 +872,7 @@ const checkRadioDisabled = ref(false);
             Visually prominent variant with filled background.
           </dt-notice>
         </dt-stack>
-        <dt-stack gap="400">
+        <dt-stack gap="100">
           <dt-text as="h3" kind="headline" size="md">Alignment per internal parts</dt-text>
           <dt-notice kind="info" title="Title only" hide-action />
           <dt-notice kind="info" hide-action>
@@ -884,11 +884,11 @@ const checkRadioDisabled = ref(false);
         </dt-stack>
       </div>
     </dt-stack>
-    <dt-stack gap="500">
+    <dt-stack gap="200">
       <dt-text as="h2" kind="headline" size="lg">
         Banner
       </dt-text>
-      <dt-stack gap="400">
+      <dt-stack gap="100">
         <dt-banner kind="info" title="Info banner" class="d-ps-relative d-zi-base">
           Banners are more prominent than notices.
         </dt-banner>
@@ -902,7 +902,7 @@ const checkRadioDisabled = ref(false);
           Something went wrong.
         </dt-banner>
       </dt-stack>
-      <dt-stack gap="400">
+      <dt-stack gap="100">
         <dt-text as="h3" kind="headline" size="md">Important</dt-text>
         <dt-banner kind="info" title="Info banner" :important="true" class="d-ps-relative d-zi-base">
           Banners are more prominent than notices.
@@ -918,12 +918,12 @@ const checkRadioDisabled = ref(false);
         </dt-banner>
       </dt-stack>
     </dt-stack>
-    <dt-stack gap="500">
+    <dt-stack gap="200">
       <dt-text as="h2" kind="headline" size="lg">
         Toast
       </dt-text>
       <div class="d-d-grid d-g-400 d-g-cols2">
-        <dt-stack gap="400">
+        <dt-stack gap="100">
           <dt-text as="h3" kind="headline" size="md">Default</dt-text>
           <dt-toast :show="true" kind="info" title="Info toast" message="Informational message." :duration="null" />
           <dt-toast :show="true" kind="success" title="Success toast" message="Action completed." :duration="null" />
@@ -931,7 +931,7 @@ const checkRadioDisabled = ref(false);
           <dt-toast :show="true" kind="error" title="Error toast" message="Something went wrong." :duration="null" />
           <dt-toast :show="true" kind="base" title="Base toast" message="Neutral notification." :duration="null" />
         </dt-stack>
-        <dt-stack gap="400">
+        <dt-stack gap="100">
           <dt-text as="h3" kind="headline" size="md">Important</dt-text>
           <dt-toast :show="true" kind="info" title="Info toast" message="Informational message." :important="true" :duration="null" />
           <dt-toast :show="true" kind="success" title="Success toast" message="Action completed." :important="true" :duration="null" />
@@ -939,7 +939,7 @@ const checkRadioDisabled = ref(false);
           <dt-toast :show="true" kind="error" title="Error toast" message="Something went wrong." :important="true" :duration="null" />
           <dt-toast :show="true" kind="base" title="Base toast" message="Neutral notification." :important="true" :duration="null" />
         </dt-stack>
-        <dt-stack gap="400">
+        <dt-stack gap="100">
           <dt-text as="h3" kind="headline" size="md">Alignment per internal parts</dt-text>
           <dt-toast :show="true" kind="info" title="Title only" :duration="null" />
           <dt-toast :show="true" kind="info" message="Action completed." :duration="null" />
@@ -948,11 +948,11 @@ const checkRadioDisabled = ref(false);
       </div>
     </dt-stack>
   </dt-stack>
-  <dt-stack gap="500">
+  <dt-stack gap="200">
     <dt-text as="h1" kind="headline" size="xl">
       Radio / Checkbox
     </dt-text>
-    <dt-stack gap="500" direction="row" class="d-bgc-moderate-opaque d-p-150 d-bar8">
+    <dt-stack gap="200" direction="row" class="d-bgc-moderate-opaque d-p-150 d-bar8">
       <dt-select-menu
         label="Label Size"
         :label-visible="false"
@@ -986,14 +986,14 @@ const checkRadioDisabled = ref(false);
       <dt-checkbox v-model="showCheckRadioMessagesClass">`messagesClass`</dt-checkbox>
       <dt-checkbox v-model="showCheckRadioDescriptionClass">`descriptionClass`</dt-checkbox>
     </dt-stack>
-    <dt-stack gap="500" direction="row">
-      <dt-stack gap="400" class="d-fl1">
+    <dt-stack gap="200" direction="row">
+      <dt-stack gap="100" class="d-fl1">
         <dt-text as="h2" kind="headline" size="lg">Checkbox</dt-text>
         <dt-checkbox label="Checkbox label" :label-size="resolvedCheckRadioLabelSize" :label-strength="resolvedCheckRadioLabelStrength" :label-class="resolvedLabelClass" :disabled="checkRadioDisabled" :description="showDescription ? 'Description text for this checkbox' : undefined" :messages="checkRadioMessages" :messages-class="resolvedCheckRadioMessagesClass" :description-class="resolvedCheckRadioDescriptionClass" />
         <dt-checkbox label="Checkbox label" :label-size="resolvedCheckRadioLabelSize" :label-strength="resolvedCheckRadioLabelStrength" :label-class="resolvedLabelClass" :disabled="checkRadioDisabled" :description="showDescription ? 'Description text for this checkbox' : undefined" :messages="checkRadioMessages" :messages-class="resolvedCheckRadioMessagesClass" :description-class="resolvedCheckRadioDescriptionClass" />
         <dt-checkbox label="Checkbox label" :label-size="resolvedCheckRadioLabelSize" :label-strength="resolvedCheckRadioLabelStrength" :label-class="resolvedLabelClass" :disabled="checkRadioDisabled" :description="showDescription ? 'Description text for this checkbox' : undefined" :messages="checkRadioMessages" :messages-class="resolvedCheckRadioMessagesClass" :description-class="resolvedCheckRadioDescriptionClass" />
       </dt-stack>
-      <dt-stack gap="400" class="d-fl1">
+      <dt-stack gap="100" class="d-fl1">
         <dt-text as="h2" kind="headline" size="lg">Radio</dt-text>
         <dt-radio label="Radio label" value="1" :label-size="resolvedCheckRadioLabelSize" :label-strength="resolvedCheckRadioLabelStrength" :label-class="resolvedLabelClass" :disabled="checkRadioDisabled" :description="showDescription ? 'Description text for this radio' : undefined" :messages="checkRadioMessages" :messages-class="resolvedCheckRadioMessagesClass" :description-class="resolvedCheckRadioDescriptionClass" />
         <dt-radio label="Radio label" value="2" :label-size="resolvedCheckRadioLabelSize" :label-strength="resolvedCheckRadioLabelStrength" :label-class="resolvedLabelClass" :disabled="checkRadioDisabled" :description="showDescription ? 'Description text for this radio' : undefined" :messages="checkRadioMessages" :messages-class="resolvedCheckRadioMessagesClass" :description-class="resolvedCheckRadioDescriptionClass" />

@@ -89,7 +89,7 @@
               v-if="info.props?.length"
               gap="300"
             >
-              <dt-stack gap="450">
+              <dt-stack gap="150">
                 <dtc-option-bar-member-group
                   :component="component"
                   :control-selector="(prop, value) => getBindingControls(prop, value, 'null')"
@@ -112,7 +112,7 @@
               v-if="info.slots?.length"
               gap="300"
             >
-              <dt-stack gap="450">
+              <dt-stack gap="150">
                 <dtc-option-bar-member-group
                   :component="component"
                   :control-selector="getSlotControls"
