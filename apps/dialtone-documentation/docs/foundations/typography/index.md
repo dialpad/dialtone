@@ -289,14 +289,14 @@ vueCode='
       <dt-text as="h2" kind="headline" :size="600">AI that works for you</dt-text>
       <dt-text kind="body" :size="400">Support customers, drive sales, and collaborate with your team—all in one, beautiful AI-powered app.</dt-text>
     </dt-stack>
-    <dt-stack :direction="{ ‘default’: ‘column’, ‘md’: ‘row’ }" gap="500" align="start">
+    <dt-stack :direction="{ 'default': 'column', 'md': 'row' }" gap="500" align="start">
       <dt-stack>
         <dt-text as="h3" kind="headline" :size="500">AI Contact Center</dt-text>
-        <dt-text as="p" kind="body" :size="300">The world’s most advanced customer engagement platform</dt-text>
+        <dt-text as="p" kind="body" :size="300">The world's most advanced customer engagement platform</dt-text>
       </dt-stack>
       <dt-stack>
         <dt-text as="h3" kind="headline" :size="500">AI Voice</dt-text>
-        <dt-text as="p" kind="body" :size="300">Say hello to the world’s smartest business phone</dt-text>
+        <dt-text as="p" kind="body" :size="300">Say hello to the world's smartest business phone</dt-text>
       </dt-stack>
       <dt-stack>
         <dt-text as="h3" kind="headline" :size="500">AI Meetings</dt-text>
@@ -316,11 +316,11 @@ vueCode='
   <dt-stack direction="row" gap="500" align="start">
     <dt-stack>
       <dt-text as="h3" kind="headline" :size="500">AI Contact Center</dt-text>
-      <dt-text as="p" kind="body" :size="300">The world’s most advanced customer engagement platform</dt-text>
+      <dt-text as="p" kind="body" :size="300">The world's most advanced customer engagement platform</dt-text>
     </dt-stack>
     <dt-stack>
       <dt-text as="h3" kind="headline" :size="500">AI Voice</dt-text>
-      <dt-text as="p" kind="body" :size="300">Say hello to the world’s smartest business phone</dt-text>
+      <dt-text as="p" kind="body" :size="300">Say hello to the world's smartest business phone</dt-text>
     </dt-stack>
     <dt-stack>
       <dt-text as="h3" kind="headline" :size="500">AI Meetings</dt-text>
