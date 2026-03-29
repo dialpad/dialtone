@@ -387,23 +387,23 @@ A real-world pattern: the callbar container already exists as a semantic element
       </dt-stack>
     </dt-stack>
     <dt-stack class="d-fl1" direction="row" gap="25" justify="center">
-      <dt-button class="d-px-100 d-w-100 d-w64" size="xs" kind="danger">
+      <dt-button class="d-px-100 d-w-100" size="xs" kind="danger">
         <template #blockStartIcon> <dt-icon name="mic" size="300" /> </template>
         Unmute
       </dt-button>
-      <dt-button class="d-px-100 d-w-100 d-w64" size="xs" kind="muted" importance="clear">
+      <dt-button class="d-px-100 d-w-100" size="xs" kind="muted" importance="clear">
         <template #blockStartIcon> <dt-icon name="record-filled" size="300" /> </template>
         Record
       </dt-button>
-      <dt-button class="d-px-100 d-w-100 d-w64" size="xs" kind="muted" importance="clear">
+      <dt-button class="d-px-100 d-w-100" size="xs" kind="muted" importance="clear">
         <template #blockStartIcon> <dt-icon name="keypad" size="300" /> </template>
         Keypad
       </dt-button>
-      <dt-button class="d-px-100 d-w-100 d-w64" size="xs" kind="muted" importance="clear">
+      <dt-button class="d-px-100 d-w-100" size="xs" kind="muted" importance="clear">
         <template #blockStartIcon> <dt-icon name="user-plus" size="300" /> </template>
         Add
       </dt-button>
-      <dt-button class="d-px-100 d-w-100 d-w64" size="xs" kind="muted" importance="clear">
+      <dt-button class="d-px-100 d-w-100" size="xs" kind="muted" importance="clear">
         <template #blockStartIcon> <dt-icon name="more-horizontal" size="300" /> </template>
         More
       </dt-button>
@@ -432,7 +432,7 @@ A real-world pattern: the callbar container already exists as a semantic element
   </template>
 </dt-hovercard>
 <!-- Popover -->
-<dt-popover content-mode="invert" placement="top-start" dialogClass="d-w216">
+<dt-popover content-mode="invert" placement="top-start" dialogClass="d-w-350">
   <template #anchor>
     <dt-button size="sm" kind="muted" importance="outlined"> Inverted </dt-button>
   </template>
@@ -504,7 +504,7 @@ A real-world pattern: the callbar container already exists as a semantic element
     <dt-stack gap="25">
       <dt-text as="p" kind="headline" size="md">Popover</dt-text>
       <dt-stack gap="100" direction="row">
-        <dt-popover placement="top-start" dialogClass="d-w216">
+        <dt-popover placement="top-start" dialogClass="d-w-350">
           <template #anchor>
             <dt-button size="sm" kind="muted" importance="outlined"> Default </dt-button>
           </template>
@@ -512,7 +512,7 @@ A real-world pattern: the callbar container already exists as a semantic element
             <dt-text as="p">This is just a default Popover, and does not use Mode Island.</dt-text>
           </template>
         </dt-popover>
-        <dt-popover content-mode="invert" placement="top-start" dialogClass="d-w216">
+        <dt-popover content-mode="invert" placement="top-start" dialogClass="d-w-350">
           <template #anchor>
             <dt-button size="sm" kind="muted" importance="outlined"> Inverted </dt-button>
           </template>
@@ -520,7 +520,7 @@ A real-world pattern: the callbar container already exists as a semantic element
             <dt-text as="p">This Popover's content is in the <dt-text strength="strong">inverted</dt-text> mode.</dt-text>
           </template>
         </dt-popover>
-        <dt-popover content-mode="light" placement="top-start" dialogClass="d-w216">
+        <dt-popover content-mode="light" placement="top-start" dialogClass="d-w-350">
           <template #anchor>
             <dt-button size="sm" kind="muted" importance="outlined"> Light </dt-button>
           </template>
@@ -528,7 +528,7 @@ A real-world pattern: the callbar container already exists as a semantic element
             <dt-text as="p">This Popover's content is in explicit <dt-text strength="strong">light</dt-text> mode.</dt-text>
           </template>
         </dt-popover>
-        <dt-popover content-mode="dark" placement="top-start" dialogClass="d-w216">
+        <dt-popover content-mode="dark" placement="top-start" dialogClass="d-w-350">
           <template #anchor>
             <dt-button size="sm" kind="muted" importance="outlined"> Dark </dt-button>
           </template>

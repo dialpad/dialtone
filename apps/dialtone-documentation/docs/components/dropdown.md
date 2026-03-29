@@ -101,7 +101,7 @@ Set `openOnContext=true` to open the menu on right-click (context menu) and disa
     <template #anchor="{ attrs }">
       <div
         v-bind="attrs"
-        class="d-ba d-bas-dashed d-w264 d-py-600 d-ta-center d-bgc-black-300"
+        class="d-ba d-bas-dashed d-w-400 d-py-600 d-ta-center d-bgc-black-300"
       >
         Right click to open
       </div>

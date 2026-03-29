@@ -94,7 +94,7 @@ The icon's color inherits from the parent's foreground color.
 When setting the color of an icon take these into consideration:
 
 <div class="d-gc1">
-  <dt-stack direction="row" align="center" class="d-p-200 d-hmn164 d-bar8" style="background: var(--dt-color-purple-100)">
+  <dt-stack direction="row" align="center" class="d-p-200 d-hmn-250 d-bar8" style="background: var(--dt-color-purple-100)">
   <dt-stack direction="row" as="section" gap="100" class="d-bgc-primary d-bc-default d-bar32 d-py-100 d-px-200 d-w100p">
     <dt-stack direction="row" as="section" gap="300" class="d-fl1">
       <dt-icon name="headphones" size="300" ariaLabel="Headphones icon" />
@@ -113,7 +113,7 @@ When setting the color of an icon take these into consideration:
 </div>
 
 <div class="d-gc1">
-  <dt-stack direction="row" align="center" class="d-bgc-critical-subtle-opaque d-p-200 d-hmn164 d-bar8">
+  <dt-stack direction="row" align="center" class="d-bgc-critical-subtle-opaque d-p-200 d-hmn-250 d-bar8">
   <dt-stack direction="row" as="section" gap="100" class="d-bgc-primary d-bc-default d-bar32 d-py-100 d-px-200 d-w100p">
   <dt-stack direction="row" as="section" gap="300" class="d-fl1">
     <dt-icon name="headphones" size="300" ariaLabel="Headphones icon" />

@@ -70,7 +70,7 @@ The four most likely scenarios for an empty state are **Zero State**, **No Resul
 
 <div class="d-d-grid d-g-cols1 lg:d-g-cols3 d-bar8 d-bgc-secondary d-mbe-400">
 
-  <div class="d-p-200 d-p16 d-plc-center">
+  <div class="d-p-200 d-plc-center">
 
 #### Zero State
 
@@ -84,7 +84,7 @@ The Empty State should guide the user on how to achieve a non-empty state. You m
 
 <div class="d-d-grid d-g-cols1 lg:d-g-cols3 d-bar8 d-bgc-secondary d-mbe-400">
 
-  <div class="d-p-200 d-p16 d-plc-center">
+  <div class="d-p-200 d-plc-center">
 
 #### No Results
 
@@ -98,7 +98,7 @@ When an action results in no data or information to display, recommend alternate
 
 <div class="d-d-grid d-g-cols1 lg:d-g-cols3 d-bar8 d-bgc-secondary d-mbe-400">
 
-  <div class="d-p-200 d-p16 d-plc-center">
+  <div class="d-p-200 d-plc-center">
 
 #### New Feature
 
@@ -112,7 +112,7 @@ An opportunity to introduce something new or not yet take advantage of. If it in
 
 <div class="d-d-grid d-g-cols1 lg:d-g-cols3 d-bar8 d-bgc-secondary d-mbe-400">
 
-  <div class="d-p-200 d-p16 d-plc-center">
+  <div class="d-p-200 d-plc-center">
 
 #### Not Enabled
 

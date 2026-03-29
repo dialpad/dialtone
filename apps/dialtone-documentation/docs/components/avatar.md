@@ -96,7 +96,7 @@ Unless otherwise specified via the `color` prop, a background color will be prov
   seed="user-unique-id"
 />
 '>
-  <dt-stack direction="row" gap="500" class="d-w332 d-fw-wrap">
+  <dt-stack direction="row" gap="500" class="d-w-500 d-fw-wrap">
     <dt-avatar v-for="seed in seeds" :seed="seed" full-name="Daniel Parker" />
   </dt-stack>
 </code-example>

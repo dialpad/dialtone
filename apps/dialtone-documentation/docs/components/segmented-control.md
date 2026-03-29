@@ -120,7 +120,7 @@ Items share space equally. Only applies in horizontal orientation.
   ...
 </dt-segmented-control>
 '>
-  <div class="d-w464" data-demo-wrapper>
+  <div class="d-w-750" data-demo-wrapper>
     <dt-segmented-control v-model="spreadSelected" spread="evenly" aria-label="Spread example">
       <dt-segmented-control-item value="1">1</dt-segmented-control-item>
       <dt-segmented-control-item value="two">Two</dt-segmented-control-item>
@@ -233,7 +233,7 @@ Use the `#startIcon` or `#endIcon` slot on `dt-segmented-control-item` to add an
 Omit the default slot text to create icon-only items. Use the `label` prop for accessibility.
 
 <code-example>
-  <dt-stack gap="100" class="d-w464" data-demo-wrapper>
+  <dt-stack gap="100" class="d-w-750" data-demo-wrapper>
     <div>
       <dt-segmented-control v-model="iconOnlySelected" aria-label="Appearance mode">
         <dt-segmented-control-item value="system" label="System">
@@ -312,7 +312,7 @@ Set `orientation="vertical"` to stack items vertically.
 </dt-segmented-control>
 '>
   <dt-stack direction="row" gap="200" align="start">
-    <div class="d-w164">
+    <div class="d-w-250">
       <dt-segmented-control v-model="selected" orientation="vertical" aria-label="Vertical example">
         <dt-segmented-control-item value="all">
           System

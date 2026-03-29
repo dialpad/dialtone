@@ -290,7 +290,7 @@ Popover content renders outside the DOM tree. Use the `contentMode` prop to appl
 <dt-popover content-mode="dark">...</dt-popover>
 <dt-popover content-mode="light">...</dt-popover>
 '>
-  <dt-popover content-mode="invert" placement="bottom-start" dialogClass="d-w216">
+  <dt-popover content-mode="invert" placement="bottom-start" dialogClass="d-w-350">
     <template #anchor>
       <dt-button size="sm" kind="muted" importance="outlined">Inverted Popover</dt-button>
     </template>

@@ -28,7 +28,7 @@ The rule of thumb: if every item in your list is the same height, use fixed. If 
 Use when all items share a known, uniform height. Set `:item-size` to that height in pixels.
 
 <code-example>
-  <div class="d-w264" data-demo-wrapper>
+  <div class="d-w-400" data-demo-wrapper>
     <dt-scroller
       :items="[
         { id: 1, name: 'James Cooper' }, { id: 2, name: 'Sarah Mitchell' }, { id: 3, name: 'Tyler Brooks' },
@@ -68,7 +68,7 @@ Use when all items share a known, uniform height. Set `:item-size` to that heigh
 Use when item heights depend on their content. Set `dynamic="true"` and `:min-item-size` to the smallest expected item height — the component measures actual sizes after render.
 
 <code-example>
-  <div class="d-w264" data-demo-wrapper>
+  <div class="d-w-400" data-demo-wrapper>
     <dt-scroller
       :items="[
         { id: 'J.C.', message: 'Lorem ipsum dolor sit amet' },
@@ -140,7 +140,7 @@ Use when item heights depend on their content. Set `dynamic="true"` and `:min-it
 Defaults to `vertical`. Set to `horizontal` for a horizontal scroller.
 
 <code-example>
-  <div class="d-w264" data-demo-wrapper>
+  <div class="d-w-400" data-demo-wrapper>
     <dt-scroller
       :items="[
         { id: 1, name: 'JC' }, { id: 2, name: 'SM' }, { id: 3, name: 'TB' },

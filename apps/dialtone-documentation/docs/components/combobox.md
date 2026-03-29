@@ -42,7 +42,7 @@ This will usually be the [List Item component](/components/list-item.md).
     >
       <ol
         v-bind="listProps"
-        class="d-p-0 d-mbs-100 d-hmx332 d-of-y-auto"
+        class="d-p-0 d-mbs-100 d-hmx-500 d-of-y-auto"
       >
         <dt-list-item
           v-for="(item, i) in items"
