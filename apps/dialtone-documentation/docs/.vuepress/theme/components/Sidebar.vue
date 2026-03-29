@@ -6,9 +6,9 @@
     v-if="sidebarItems.length"
     as="ul"
     class="dialtone-sidebar__list"
-    gap="300"
+    gap="50"
   >
-    <div class="d-pb8">
+    <div class="d-pb-100">
       <dt-input
         ref="searchInput"
         v-model="inputValue"

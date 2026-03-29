@@ -3,7 +3,7 @@
     class="d-d-grid d-jc-center"
     :class="gridClass"
   >
-    <div class="d-p48">
+    <div class="d-p-600">
       <page-header />
       <article class="dialtone-content__article">
         <div
@@ -21,9 +21,9 @@
         direction="row"
         :justify="prev ? 'between' : 'end'"
         align="center"
-        class="d-pt32"
+        class="d-pt-400"
         as="nav"
-        gap="600"
+        gap="400"
       >
         <dt-button
           v-if="prev"
@@ -37,7 +37,7 @@
           <template #startIcon>
             <dt-icon name="arrow-left" />
           </template>
-          <dt-stack as="span" class="d-p8">
+          <dt-stack as="span" class="d-p-100">
             <dt-text as="span" kind="body" size="md" tone="muted">
               Previous
             </dt-text>
@@ -56,7 +56,7 @@
           <template #endIcon>
             <dt-icon name="arrow-right" />
           </template>
-          <dt-stack as="span" class="d-p8">
+          <dt-stack as="span" class="d-p-100">
             <dt-text as="span" kind="body" size="md" tone="muted">
               Next
             </dt-text>
@@ -64,7 +64,7 @@
           </dt-stack>
         </dt-button>
       </dt-stack>
-      <footer class="d-mt16 d-mb16">
+      <footer class="d-mt-200 d-mb-200">
         <dt-text as="p" kind="body" size="sm" tone="muted">
           <dt-text v-if="$frontmatter.title">
             {{ $frontmatter.title }}

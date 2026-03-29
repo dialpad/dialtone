@@ -6,14 +6,14 @@
         aria-label="Search table"
         placeholder="Search table"
         type="search"
-        root-class="d-w332"
+        root-class="d-w-500"
         @keydown.escape="handleEscapeKey"
       >
         <template #startIcon="{ iconSize }">
           <dt-icon name="search" :size="iconSize" />
         </template>
         <template v-if="inputSearchValue.length !== 0" #endIcon>
-          <dt-stack class="d-pr1">
+          <dt-stack class="d-pr-1">
             <dt-button
               v-dt-tooltip="`Clear`"
               kind="muted"
@@ -34,7 +34,7 @@
       v-if="showEmptyState"
       size="sm"
       :header-text="`No results found`"
-      class="d-w100p d-ba d-bc-subtle d-bar8 d-pt32"
+      class="d-w100p d-ba d-bc-subtle d-bar8 d-pt-400"
     >
       <template #icon="{ iconSize }">
         <!-- maybe alt icon? -->
@@ -93,7 +93,7 @@ const { buttonLabel, iconName, maxHeightClass } = defineProps({
   },
   maxHeightClass: {
     type: String,
-    default: 'd-hmx464',
+    default: 'd-hmx-700',
   },
 });
 

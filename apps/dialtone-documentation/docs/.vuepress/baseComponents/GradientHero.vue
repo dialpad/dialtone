@@ -6,7 +6,7 @@
       kind="headline"
       size="2xl"
       strength="medium"
-      class="d-h100p d-w100p d-d-grid d-plc-center d-ta-center d-wmx1024 d-m-auto d-p32"
+      class="d-h100p d-w100p d-d-grid d-plc-center d-ta-center d-wmx-1600 d-m-auto d-p-400"
       style="
         font-size: 64px;
         font-family: var(--dt-font-family-expressive);

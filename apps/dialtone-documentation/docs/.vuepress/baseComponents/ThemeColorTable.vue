@@ -4,28 +4,28 @@
       <table class="d-table dialtone-doc-table">
         <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
           <tr>
-            <th class="d-p0 d-bbw0" scope="col">
-              <div class="d-p16 d-bb d-bbw1">
+            <th class="d-p-0 d-bbw0" scope="col">
+              <div class="d-p-200 d-bb d-bbw1">
                 Color
               </div>
             </th>
-            <th class="d-p0 d-bbw0" scope="col">
-              <div class="d-p16 d-bb d-bbw1">
+            <th class="d-p-0 d-bbw0" scope="col">
+              <div class="d-p-200 d-bb d-bbw1">
                 Section
               </div>
             </th>
-            <th class="d-p0 d-bbw0" scope="col">
-              <div class="d-p16 d-bb d-bbw1">
+            <th class="d-p-0 d-bbw0" scope="col">
+              <div class="d-p-200 d-bb d-bbw1">
                 State
               </div>
             </th>
-            <th class="d-p0 d-bbw0" scope="col">
-              <div class="d-p16 d-bb d-bbw1">
+            <th class="d-p-0 d-bbw0" scope="col">
+              <div class="d-p-200 d-bb d-bbw1">
                 Property
               </div>
             </th>
-            <th class="d-p0 d-bbw0" scope="col">
-              <div class="d-p16 d-bb d-bbw1">
+            <th class="d-p-0 d-bbw0" scope="col">
+              <div class="d-p-200 d-bb d-bbw1">
                 Variable
               </div>
             </th>
@@ -79,13 +79,13 @@
                 :style="{ color: `var(${color.variable})` }"
                 kind="body"
                 size="lg"
-                class="d-p6 d-ta-center d-fw-medium"
+                class="d-p-75 d-ta-center d-fw-medium"
               >
                 Ag
               </dt-text>
               <div
                 v-else-if="color.property === 'border-color'"
-                :class="['d-d-inline-flex d-p4 d-bar-pill', { 'd-bgc-contrast': color.variable.includes('inverted') }]"
+                :class="['d-d-inline-flex d-p-50 d-bar-pill', { 'd-bgc-contrast': color.variable.includes('inverted') }]"
               >
                 <div
                   :style="{ borderColor: `var(--${color.variable})` }"

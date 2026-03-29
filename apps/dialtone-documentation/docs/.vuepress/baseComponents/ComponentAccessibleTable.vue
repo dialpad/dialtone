@@ -6,25 +6,25 @@
           <tr>
             <th
               scope="col"
-              class="d-w40p d-p0 d-bbw0"
+              class="d-w40p d-p-0 d-bbw0"
             >
-              <div class="d-p16 d-bb d-bbw1">
+              <div class="d-p-200 d-bb d-bbw1">
                 Item
               </div>
             </th>
             <th
               scope="col"
-              class="d-w30p d-p0 d-bbw0"
+              class="d-w30p d-p-0 d-bbw0"
             >
-              <div class="d-p16 d-bb d-bbw1">
+              <div class="d-p-200 d-bb d-bbw1">
                 Applies to
               </div>
             </th>
             <th
               scope="col"
-              class="d-p0 d-bbw0"
+              class="d-p-0 d-bbw0"
             >
-              <div class="d-p16 d-bb d-bbw1">
+              <div class="d-p-200 d-bb d-bbw1">
                 Description
               </div>
             </th>

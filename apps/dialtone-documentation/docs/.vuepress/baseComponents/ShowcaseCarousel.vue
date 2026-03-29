@@ -1,7 +1,7 @@
 <!-- eslint-disable max-len -->
 <template>
   <div ref="carouselContainerRef" class="showcase-carousel">
-    <dt-stack ref="carouselTrackRef" direction="row" gap="700" class="showcase-carousel__track">
+    <dt-stack ref="carouselTrackRef" direction="row" gap="800" class="showcase-carousel__track">
       <img style="align-self: flex-start; width: 468px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--01.jpg" alt="">
       <img style="align-self: flex-end; width: 546px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--02.jpg" alt="">
       <img style="align-self: flex-start; width: 352px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--03.jpg" alt="">

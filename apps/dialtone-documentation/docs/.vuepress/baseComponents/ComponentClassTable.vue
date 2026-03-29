@@ -5,26 +5,26 @@
         <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
           <tr>
             <th
-              class="d-w40p d-p0 d-bbw0"
+              class="d-w40p d-p-0 d-bbw0"
               scope="col"
             >
-              <div class="d-p16 d-bb d-bbw1">
+              <div class="d-p-200 d-bb d-bbw1">
                 Class
               </div>
             </th>
             <th
-              class="d-w30p d-p0 d-bbw0"
+              class="d-w30p d-p-0 d-bbw0"
               scope="col"
             >
-              <div class="d-p16 d-bb d-bbw1">
+              <div class="d-p-200 d-bb d-bbw1">
                 Applies to
               </div>
             </th>
             <th
-              class="d-p0 d-bbw0"
+              class="d-p-0 d-bbw0"
               scope="col"
             >
-              <div class="d-p16 d-bb d-bbw1">
+              <div class="d-p-200 d-bb d-bbw1">
                 Description
               </div>
             </th>

@@ -20,7 +20,7 @@ const kindDescriptions = {
 </script>
 
 <template>
-  <table class="d-table dialtone-doc-table d-mb16">
+  <table class="d-table dialtone-doc-table d-mb-200">
     <colgroup>
       <col>
       <col class="d-w25p">
@@ -31,7 +31,7 @@ const kindDescriptions = {
       <tr>
         <th class="d-ta-left d-va-top" />
         <th v-for="importance in importanceModifiers" :key="importance" class="d-ta-left d-va-top">
-          <div class="d-mb4">
+          <div class="d-mb-50">
             {{ importance }}
           </div>
           <dt-text kind="body" size="sm" density="200" class="d-tt-none">
@@ -42,8 +42,8 @@ const kindDescriptions = {
     </thead>
     <tbody>
       <tr v-for="kind in kindModifiers" :key="kind">
-        <th class="d-ta-left d-pl0" scope="row">
-          <a class="d-link d-fs-100 d-fw-medium d-d-block d-mb4 d-tt-uppercase" :href="`#${kind}`">
+        <th class="d-ta-left d-pl-0" scope="row">
+          <a class="d-link d-fs-100 d-fw-medium d-d-block d-mb-50 d-tt-uppercase" :href="`#${kind}`">
             <strong>{{ kind }}</strong>
           </a>
           <dt-text kind="body" size="sm" density="200">

@@ -6,13 +6,13 @@ import { computed, onBeforeUnmount, ref } from 'vue';
  * Designed for documentation components that need to clamp content height.
  *
  * @param {Object} options - Configuration options
- * @param {string} options.maxHeightClass - CSS utility class for max-height (e.g., 'd-hmx332')
+ * @param {string} options.maxHeightClass - CSS utility class for max-height (e.g., 'd-hmx-500')
  * @param {number} options.heightFudge - Pixels to subtract from threshold for better UX (default: 8)
  * @param {number} options.debounceMs - Debounce delay for resize events (default: 100)
  * @returns {Object} Expandable state and methods
  */
 export function useDocExpandable({
-  maxHeightClass = 'd-hmx464',
+  maxHeightClass = 'd-hmx-700',
   heightFudge = 8,
   debounceMs = 100,
 } = {}) {

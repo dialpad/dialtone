@@ -1,39 +1,39 @@
 <template>
-  <div v-dt-scrollbar:never class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+  <div v-dt-scrollbar:never class="d-hmx-700 d-bar8 d-ba d-bc-subtle">
     <table v-dt-mode:[mode] class="d-bgc-primary d-table dialtone-doc-table">
       <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
         <tr>
           <th
             scope="col"
-            class="d-p0 d-bbw0 d-tt-none"
+            class="d-p-0 d-bbw0 d-tt-none"
           >
-            <div class="d-p16 d-bb d-bbw1">
+            <div class="d-p-200 d-bb d-bbw1">
               Preview
             </div>
           </th>
           <th
             scope="col"
-            class="d-p0 d-bbw0 d-tt-none"
+            class="d-p-0 d-bbw0 d-tt-none"
           >
-            <div class="d-p16 d-bb d-bbw1">
+            <div class="d-p-200 d-bb d-bbw1">
               Token Name
             </div>
           </th>
           <th
             v-if="showValue"
             scope="col"
-            class="d-p0 d-bbw0 d-tt-none d-ta-right"
+            class="d-p-0 d-bbw0 d-tt-none d-ta-right"
           >
-            <div class="d-p16 d-bb d-bbw1">
+            <div class="d-p-200 d-bb d-bbw1">
               {{ tokenList ? "REM" : "Value" }}
             </div>
           </th>
           <th
             v-show="!!tokenList"
             scope="col"
-            class="d-p0 d-bbw0"
+            class="d-p-0 d-bbw0"
           >
-            <div class="d-p16 d-bb d-bbw1">
+            <div class="d-p-200 d-bb d-bbw1">
               PX
             </div>
           </th>
@@ -49,7 +49,7 @@
           @focusin="onEnterRow(name)"
           @focusout="onLeaveRow()"
         >
-          <td class="d-w72 sm:d-w128 d-box-content">
+          <td class="d-w-100 sm:d-w-200 d-box-content">
             <token-example
               :category="category"
               :name="exampleName || name"
@@ -61,14 +61,14 @@
             <dt-badge v-if="deprecated" type="critical" kind="label" text="Deprecated" />
             <dt-stack
               direction="row"
-              gap="300"
+              gap="50"
               align="center"
               class="token-name"
             >
               <dt-text as="p" kind="label" size="md">
                 {{ name }}
               </dt-text>
-              <div class="d-w32">
+              <div class="d-w-50">
                 <dt-lazy-show :show="showCopyButton(name)">
                   <copy-button
                     v-if="!isSmallDevice"
@@ -87,13 +87,13 @@
               :tokens="tokens"
             />
           </th>
-          <td v-if="!isSmallDevice && showValue" class="d-ta-right d-wmx164">
+          <td v-if="!isSmallDevice && showValue" class="d-ta-right d-wmx-250">
             <dt-text as="span" kind="code" size="md" class="d-fc-blue-800">
               <token-value :token-value="valueToString(tokenValue)" :tokens="tokens" />
             </dt-text>
           </td>
           <td v-if="!!tokenList">
-            <dt-text as="div" kind="code" size="md" class="d-docsite-code d-wmx264">
+            <dt-text as="div" kind="code" size="md" class="d-docsite-code d-wmx-400">
               {{ remToPixels(tokenValue) }}
             </dt-text>
           </td>

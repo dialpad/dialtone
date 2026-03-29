@@ -8,7 +8,7 @@
     :disabled="disabled"
     :spread="spread"
     :orientation="orientation"
-    :tab-list-class="orientation === 'vertical' ? 'd-w264' : undefined"
+    :tab-list-class="orientation === 'vertical' ? 'd-w-400' : undefined"
     :activation-mode="activationMode"
     @before-change="confirmBeforeLeave"
   >

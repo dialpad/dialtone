@@ -5,11 +5,11 @@
       align="center"
       justify="between"
       class="
-        d-px16
+        d-px-200
         d-ps-fixed
         d-w100p
         d-bgc-secondary
-        d-h64
+        d-h-100
         d-x0
         d-bb
         d-bc-default
@@ -39,8 +39,8 @@
         d-w100p
         d-bgc-primary
         d-of-auto
-        d-pt24
-        d-px16
+        d-pt-300
+        d-px-200
       "
       :class="{ 'd-o0 d-d-none': !isSiteNavOpen }"
     >

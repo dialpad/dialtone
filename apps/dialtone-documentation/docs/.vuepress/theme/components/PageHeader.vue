@@ -4,10 +4,10 @@
     <header>
       <dt-stack
         :direction="{ default: 'column', md: 'row' }"
-        :gap="{ default: '200', lg: '500' }"
+        :gap="{ default: '25', lg: '200' }"
         justify="between"
       >
-        <dt-stack direction="row" gap="400">
+        <dt-stack direction="row" gap="100">
           <h1
             v-if="$frontmatter.title"
             class="dialtone-page-title"
@@ -19,7 +19,7 @@
             text="New"
           />
         </dt-stack>
-        <dt-stack direction="row" gap="200">
+        <dt-stack direction="row" gap="25">
           <dt-button
             v-if="$frontmatter.figma_url"
             :href="$frontmatter.figma_url"
@@ -143,7 +143,7 @@
             </template>
             GitHub
           </dt-button>
-          <span class="d-pl8">
+          <span class="d-pl-100">
             <dt-split-button
               size="sm"
               importance="outlined"
@@ -215,7 +215,7 @@
         kind="body"
         tone="tertiary"
         wrap="pretty"
-        class="d-mb16 d-fs-300"
+        class="d-mb-200 d-fs-300"
       >
         {{ $frontmatter.description }}
       </dt-text>

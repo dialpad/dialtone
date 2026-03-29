@@ -9,7 +9,7 @@
         class="dialtone-wall__item"
       >
         <dt-stack direction="column" justify="between" class="dialtone-wall__details d-h100p">
-          <dt-stack direction="column" gap="400">
+          <dt-stack direction="column" gap="100">
             <div class="dialtone-wall__title">
               <span class="dialtone-wall__title-text">{{ kit.text }}</span>
               <span
@@ -24,7 +24,7 @@
               {{ kit.description }}
             </div>
           </dt-stack>
-          <dt-stack direction="row" gap="300" class="d-ai-center">
+          <dt-stack direction="row" gap="50" class="d-ai-center">
             <svg
               class="d-icon d-icon--size-200"
               viewBox="0 0 24 24"
@@ -61,7 +61,7 @@
       </a>
       <div v-else class="dialtone-wall__item">
         <dt-stack direction="column" class="dialtone-wall__details">
-          <dt-stack direction="column" gap="400">
+          <dt-stack direction="column" gap="100">
             <div class="dialtone-wall__title">
               <span class="dialtone-wall__title-text">{{ kit.text }}</span>
               <span class="d-badge d-tt-capitalize">

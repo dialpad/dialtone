@@ -1,11 +1,11 @@
 <template>
   <dt-stack
-    gap="500"
-    class="d-p16 d-bar8"
+    gap="200"
+    class="d-p-200 d-bar8"
   >
     <h3
       :id="kind"
-      class="d-docsite--header-3 d-mt0"
+      class="d-docsite--header-3 d-mt-0"
     >
       <a
         :href="`#${kind}`"

@@ -2,7 +2,7 @@
   <dt-notice
     kind="warning"
     hide-close
-    class="d-wmx100p d-my16"
+    class="d-wmx100p d-my-200"
     title="Use DtText over CSS Utilities"
   >
     <template #default>

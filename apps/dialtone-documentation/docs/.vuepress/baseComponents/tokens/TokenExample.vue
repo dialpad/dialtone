@@ -4,7 +4,7 @@
     direction="row"
     justify="center"
     align="center"
-    class="d-bar4 d-hmn32 colorRectangle"
+    class="d-bar4 d-hmn-50 colorRectangle"
     :style="getColorStyle"
   >
     <dt-text
@@ -22,7 +22,7 @@
     direction="row"
     justify="center"
     align="center"
-    class="d-hmn32"
+    class="d-hmn-50"
   >
     <div :style="getTypographyStyle">
       Ag
@@ -30,7 +30,7 @@
   </dt-stack>
   <div
     v-if="category === 'shadow'"
-    class="d-bar4 d-hmn32"
+    class="d-bar4 d-hmn-50"
     :style="getShadowStyle"
   />
   <div

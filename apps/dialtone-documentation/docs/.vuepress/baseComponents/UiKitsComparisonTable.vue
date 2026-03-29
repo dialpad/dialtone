@@ -1,21 +1,21 @@
 <template>
-  <div v-dt-scrollbar:never class="d-hmx464 d-bar8 d-ba d-bc-subtle d-mt24">
+  <div v-dt-scrollbar:never class="d-hmx-700 d-bar8 d-ba d-bc-subtle d-mt-300">
     <div>
       <table class="d-table dialtone-doc-table">
         <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
           <tr>
-            <th scope="col" class="d-p0 d-bbw0 d-tt-none">
-              <div class="d-p16 d-bb d-bbw1">
+            <th scope="col" class="d-p-0 d-bbw0 d-tt-none">
+              <div class="d-p-200 d-bb d-bbw1">
                 Criteria
               </div>
             </th>
-            <th scope="col" class="d-p0 d-bbw0 d-tt-none">
-              <div class="d-p16 d-bb d-bbw1">
+            <th scope="col" class="d-p-0 d-bbw0 d-tt-none">
+              <div class="d-p-200 d-bb d-bbw1">
                 Design System Component
               </div>
             </th>
-            <th scope="col" class="d-p0 d-bbw0 d-tt-none">
-              <div class="d-p16 d-bb d-bbw1">
+            <th scope="col" class="d-p-0 d-bbw0 d-tt-none">
+              <div class="d-p-200 d-bb d-bbw1">
                 UI Kit Component
               </div>
             </th>

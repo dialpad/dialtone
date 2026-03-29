@@ -38,7 +38,7 @@
       :id="vuePanelId"
       :tab-id="vueTabId"
     >
-      <div ref="vuePanelRef" v-dt-scrollbar class="language-html d-hmx164" data-ext="html">
+      <div ref="vuePanelRef" v-dt-scrollbar class="language-html d-hmx-250" data-ext="html">
         <pre class="language-html" v-html="highlightedVue" />
       </div>
     </dt-tab-panel>
@@ -55,7 +55,7 @@
       >
         Raw HTML renders visuals only. You may need to add JS to replicate its functionality.
       </dt-banner>
-      <div ref="htmlPanelRef" v-dt-scrollbar class="language-html d-hmx164" data-ext="html">
+      <div ref="htmlPanelRef" v-dt-scrollbar class="language-html d-hmx-250" data-ext="html">
         <pre class="language-html" v-html="highlightedHtml" />
       </div>
     </dt-tab-panel>
@@ -148,7 +148,7 @@ const selectedPanelId = ref(vuePanelId);
 const vuePanelRef = ref(null);
 const htmlPanelRef = ref(null);
 const { shouldShowButton, handleExpand, initExpandable } = useDocExpandable({
-  maxHeightClass: 'd-hmx164',
+  maxHeightClass: 'd-hmx-250',
 });
 
 /**

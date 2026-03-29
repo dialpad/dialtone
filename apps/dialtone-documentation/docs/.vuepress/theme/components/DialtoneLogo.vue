@@ -1,6 +1,6 @@
 <template>
   <router-link
-    class="d-pl16 d-w216"
+    class="d-pl-200 d-w-350"
     title="Dialtone homepage"
     to="/"
   >

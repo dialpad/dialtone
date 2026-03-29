@@ -37,8 +37,8 @@
           </dt-text>
         </template>
         <template #content>
-          <dt-stack gap="500">
-            <dt-stack direction="row" gap="300">
+          <dt-stack gap="200">
+            <dt-stack direction="row" gap="50">
               <dt-stack class="d-fl-grow5">
                 <dt-text kind="label" size="sm">
                   Name
@@ -132,7 +132,7 @@
                 />
               </div>
               <copy-button
-                class="d-ml8"
+                class="d-ml-100"
                 :text="rawSvg"
                 aria-label="Copy SVG markup"
               />
@@ -149,7 +149,7 @@
                 />
               </div>
               <copy-button
-                class="d-ml8"
+                class="d-ml-100"
                 :text="`<${vue} />`"
                 aria-label="Copy Vue markup"
               />

@@ -1,7 +1,7 @@
 <template>
   <div class="dialtone-header dialtone-header--home d-bgc-primary d-bgo90 d-m-auto">
     <router-link
-      class="d-pl8"
+      class="d-pl-100"
       title="Dialtone homepage"
       to="/"
     >

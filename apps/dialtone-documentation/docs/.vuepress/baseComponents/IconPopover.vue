@@ -12,7 +12,7 @@
   >
     <template #anchor>
       <dt-button
-        class="dialtone-icon-grid__item d-gg8"
+        class="dialtone-icon-grid__item d-g-100"
         label-class="d-fl-grow-unset"
         importance="clear"
         kind="muted"
@@ -35,7 +35,7 @@
           {{ name }}
         </dt-text>
         <copy-button
-          class="d-ml8"
+          class="d-ml-100"
           :text="shareIcon"
           aria-label="Copy link"
         />
