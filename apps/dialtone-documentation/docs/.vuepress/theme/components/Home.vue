@@ -5,17 +5,17 @@
       direction="row"
       justify="between"
       align="center"
-      class="hero__inner-wrapper d-mx-auto d-wmx1340 d-pl-300 d-pr-400"
+      class="hero__inner-wrapper d-mx-auto d-wmx1340 d-pis-300 d-pie-400"
     >
       <dt-stack justify="center" class="hero__content">
-        <dt-text as="h1" kind="headline" size="2xl" class="d-mb-150 d-ff-marketing">
+        <dt-text as="h1" kind="headline" size="2xl" class="d-mbe-150 d-ff-marketing">
           Improve your UI's reception with Dialtone
         </dt-text>
-        <dt-text as="p" kind="body" size="md" density="400" tone="secondary" class="d-mb-200">
+        <dt-text as="p" kind="body" size="md" density="400" tone="secondary" class="d-mbe-200">
           Documented styles, components, and utility classes to help you quickly design and build unified experiences
           across Dialpad experiences.
         </dt-text>
-        <dt-stack direction="row" justify="start" class="d-mb-400">
+        <dt-stack direction="row" justify="start" class="d-mbe-400">
           <a
             class="d-td-unset d-d-inline-flex"
             href="https://github.com/dialpad/dialtone"
@@ -51,7 +51,7 @@
   <section class="links d-bt d-bb d-bc-subtle d-bgc-secondary">
     <div class="d-d-grid d-g-200 d-g-cols12 d-wmx1340 d-mx-auto">
       <dt-stack gap="100" class="link d-body--md d-gc3 d-px-400 d-ta-center">
-        <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pt-50" to="/design/">
+        <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pbs-50" to="/design/">
           <dt-stack gap="100">
             <svg-loader class="d-h-150" name="home-design-language" />
             <dt-text as="h2" kind="headline" size="xl" class="d-ff-marketing">
@@ -69,7 +69,7 @@
         </dt-stack>
       </dt-stack>
       <dt-stack gap="100" class="link d-body--md d-gc3 d-px-400 d-ta-center">
-        <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pt-50" to="/components/">
+        <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pbs-50" to="/components/">
           <dt-stack gap="100">
             <svg-loader class="d-h-150" name="home-components" />
             <dt-text as="h2" kind="headline" size="xl" class="d-ff-marketing">
@@ -90,7 +90,7 @@
         </dt-stack>
       </dt-stack>
       <dt-stack gap="100" class="link d-body--md d-gc3 d-px-400 d-ta-center">
-        <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pt-50" to="/utilities/">
+        <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pbs-50" to="/utilities/">
           <dt-stack gap="100">
             <svg-loader class="d-h-150" name="home-utilities" />
             <dt-text as="h2" kind="headline" size="xl" class="d-ff-marketing">
@@ -108,7 +108,7 @@
         </dt-stack>
       </dt-stack>
       <dt-stack gap="100" class="link d-body--md d-gc3 d-px-400 d-ta-center">
-        <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pt-50" to="/guides/">
+        <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pbs-50" to="/guides/">
           <dt-stack gap="100">
             <svg-loader class="d-h-150" name="home-guides" />
             <dt-text as="h2" kind="headline" size="xl" class="d-ff-marketing">

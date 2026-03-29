@@ -143,7 +143,7 @@
             </template>
             GitHub
           </dt-button>
-          <span class="d-pl-100">
+          <span class="d-pis-100">
             <dt-split-button
               size="sm"
               importance="outlined"
@@ -215,7 +215,7 @@
         kind="body"
         tone="tertiary"
         wrap="pretty"
-        class="d-mb-200 d-fs-300"
+        class="d-mbe-200 d-fs-300"
       >
         {{ $frontmatter.description }}
       </dt-text>

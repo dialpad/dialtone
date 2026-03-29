@@ -132,7 +132,7 @@
                 />
               </div>
               <copy-button
-                class="d-ml-100"
+                class="d-mis-100"
                 :text="rawSvg"
                 aria-label="Copy SVG markup"
               />
@@ -149,7 +149,7 @@
                 />
               </div>
               <copy-button
-                class="d-ml-100"
+                class="d-mis-100"
                 :text="`<${vue} />`"
                 aria-label="Copy Vue markup"
               />

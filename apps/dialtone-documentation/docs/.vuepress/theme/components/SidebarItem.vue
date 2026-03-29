@@ -25,10 +25,10 @@
             'd-w100p dialtone-shell-btn',
             {
               'd-headline--eyebrow d-fw-semibold d-bgc-transparent d-c-default': !item.link,
-              'd-pr-200': depth === 1,
+              'd-pie-200': depth === 1,
             },
             {
-              'd-pl-600': depth === 1,
+              'd-pis-600': depth === 1,
             },
           ]"
           :data-sidebar-link="item.link"
@@ -38,7 +38,7 @@
             v-if="depth === 0 && item.icon"
             :name="item.icon"
             size="400"
-            class="d-mr-150 d-fc-muted"
+            class="d-mie-150 d-fc-muted"
           />
           {{ item.text }}
           <template #endIcon="{ iconSize }">
@@ -58,7 +58,7 @@
           :aria-labelledby="labelId"
           gap="25"
           :class="{
-            'd-pt-50': depth === 0 || depth === 1,
+            'd-pbs-50': depth === 0 || depth === 1,
           }"
         >
           <li
@@ -76,12 +76,12 @@
             <div
               v-else-if="subItem.status === 'planned'"
               class="d-btn d-w100p d-jc-flex-start d-ta-left d-fw-normal d-fc-muted h:d-bgc-transparent d-c-default"
-              :class="[{ 'd-pl-600': depth === 0 }, { 'd-pl-800': depth === 1 }]"
+              :class="[{ 'd-pis-600': depth === 0 }, { 'd-pis-800': depth === 1 }]"
             >
               <dt-stack as="span" direction="row" justify="space-between" class="d-w100p">
                 {{ subItem.text }}
                 <dt-badge
-                  class="d-fw-normal d-ml-50"
+                  class="d-fw-normal d-mis-50"
                 >
                   Planned
                 </dt-badge>
@@ -97,15 +97,15 @@
               label-class="d-jc-flex-start d-ta-left d-fw-normal"
               :class="[
                 'dialtone-shell-btn d-w100p d-tw-pretty',
-                { 'd-pl-600': depth === 0 },
-                { 'd-pl-800': depth === 1 },
+                { 'd-pis-600': depth === 0 },
+                { 'd-pis-800': depth === 1 },
               ]"
             >
               <dt-stack as="span" direction="row" justify="space-between" class="d-w100p">
                 {{ subItem.text }}
                 <dt-badge
                   v-if="subItem.status === 'beta'"
-                  class="d-fw-normal d-ml-50"
+                  class="d-fw-normal d-mis-50"
                   type="info"
                 >
                   Beta
@@ -122,10 +122,10 @@
               :data-sidebar-link="subItem.link"
               :class="[
                 'd-w100p d-fw-normal',
-                { 'd-pl-600': depth === 0 },
-                { 'd-pl-800': depth === 1 },
+                { 'd-pis-600': depth === 0 },
+                { 'd-pis-800': depth === 1 },
                 {
-                  'd-mt-25': (index === 0 && nested), // add margin top to first nested item
+                  'd-mbs-25': (index === 0 && nested), // add margin top to first nested item
                 },
               ]"
             >
@@ -161,7 +161,7 @@
         v-if="depth === 0 && item.icon"
         :name="item.icon"
         size="400"
-        class="d-mr-150 d-fc-muted"
+        class="d-mie-150 d-fc-muted"
       />
       {{ item.text }}
     </dt-button>

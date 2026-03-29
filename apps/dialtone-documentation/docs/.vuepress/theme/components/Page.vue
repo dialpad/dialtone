@@ -21,7 +21,7 @@
         direction="row"
         :justify="prev ? 'between' : 'end'"
         align="center"
-        class="d-pt-400"
+        class="d-pbs-400"
         as="nav"
         gap="400"
       >
@@ -64,7 +64,7 @@
           </dt-stack>
         </dt-button>
       </dt-stack>
-      <footer class="d-mt-200 d-mb-200">
+      <footer class="d-mbs-200 d-mbe-200">
         <dt-text as="p" kind="body" size="sm" tone="muted">
           <dt-text v-if="$frontmatter.title">
             {{ $frontmatter.title }}

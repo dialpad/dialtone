@@ -1,13 +1,13 @@
 <template>
   <aside class="dialtone-toc d-of-auto d-py-800 d-ps-fixed d-d-none xl:d-d-block">
-    <dt-text as="h2" kind="headline" size="xs" strength="semibold" tone="secondary" class="d-tt-uppercase d-px-100 d-pb-50">
+    <dt-text as="h2" kind="headline" size="xs" strength="semibold" tone="secondary" class="d-tt-uppercase d-px-100 d-pbe-50">
       On this page
     </dt-text>
     <nav>
       <ul
         v-for="header in headers"
         :key="header.slug"
-        class="d-mt-25"
+        class="d-mbs-25"
       >
         <li v-if="!header.children.length">
           <toc-item
@@ -33,11 +33,11 @@
             v-if="header.children.length"
             #content
           >
-            <ul class="d-pl-100 d-mt-25">
+            <ul class="d-pis-100 d-mbs-25">
               <li
                 v-for="child in header.children"
                 :key="child.slug"
-                class="lg:d-d-flex d-fw-wrap d-mt-25"
+                class="lg:d-d-flex d-fw-wrap d-mbs-25"
               >
                 <toc-item
                   :active="isItemActive(child)"

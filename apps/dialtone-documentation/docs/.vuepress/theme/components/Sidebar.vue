@@ -8,7 +8,7 @@
     class="dialtone-sidebar__list"
     gap="50"
   >
-    <div class="d-pb-100">
+    <div class="d-pbe-100">
       <dt-input
         ref="searchInput"
         v-model="inputValue"

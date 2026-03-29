@@ -13,7 +13,7 @@
           <dt-icon name="search" :size="iconSize" />
         </template>
         <template v-if="inputSearchValue.length !== 0" #endIcon>
-          <dt-stack class="d-pr-1">
+          <dt-stack class="d-pie-1">
             <dt-button
               v-dt-tooltip="`Clear`"
               kind="muted"
@@ -34,7 +34,7 @@
       v-if="showEmptyState"
       size="sm"
       :header-text="`No results found`"
-      class="d-w100p d-ba d-bc-subtle d-bar8 d-pt-400"
+      class="d-w100p d-ba d-bc-subtle d-bar8 d-pbs-400"
     >
       <template #icon="{ iconSize }">
         <!-- maybe alt icon? -->

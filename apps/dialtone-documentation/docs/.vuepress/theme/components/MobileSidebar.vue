@@ -39,7 +39,7 @@
         d-w100p
         d-bgc-primary
         d-of-auto
-        d-pt-300
+        d-pbs-300
         d-px-200
       "
       :class="{ 'd-o0 d-d-none': !isSiteNavOpen }"

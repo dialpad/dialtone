@@ -86,7 +86,7 @@ const colors = processColorsDocs(props.excludedColors, props.classPrefix);
         </thead>
         <tbody>
           <tr v-for="(color, index) in colors" :key="`${color.utilityClass}-${index}`">
-            <th class="d-pr-0" colspan="2" scope="row">
+            <th class="d-pie-0" colspan="2" scope="row">
               <dt-stack direction="row" align="center" gap="200">
                 <slot :color="color" name="example" />
               </dt-stack>

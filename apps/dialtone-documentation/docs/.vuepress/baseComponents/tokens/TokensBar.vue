@@ -60,7 +60,7 @@
         v-dt-tooltip:top-end="shareLinkTooltip"
         importance="clear"
         kind="muted"
-        class="d-ml-auto"
+        class="d-mis-auto"
         @click="copyURLToClipboard"
       >
         Share Search Filter

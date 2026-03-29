@@ -5,7 +5,7 @@
   >
     <h3
       :id="kind"
-      class="d-docsite--header-3 d-mt-0"
+      class="d-docsite--header-3 d-mbs-0"
     >
       <a
         :href="`#${kind}`"

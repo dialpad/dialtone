@@ -35,7 +35,7 @@
           {{ name }}
         </dt-text>
         <copy-button
-          class="d-ml-100"
+          class="d-mis-100"
           :text="shareIcon"
           aria-label="Copy link"
         />
