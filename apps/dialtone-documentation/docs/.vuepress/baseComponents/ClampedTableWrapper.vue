@@ -185,7 +185,7 @@ const getDeprecatedRows = () => {
 const toggleDeprecatedRows = () => {
   const rows = getDeprecatedRows();
   rows.forEach(row => {
-    row.classList.toggle('d-d-none', hideDeprecated.value);
+    row.toggleAttribute('hidden', hideDeprecated.value);
   });
   nextTick(() => updateExpandableState());
 };
@@ -270,6 +270,9 @@ const filterTableRows = (rows, searchTerm) => {
   let visibleCount = 0;
 
   rows.forEach(row => {
+    // Skip rows hidden by the deprecated toggle
+    if (row.hasAttribute('hidden')) return;
+
     const rowText = row.textContent?.toLowerCase() || '';
     const isMatch = rowText.includes(searchTerm);
     row.classList.toggle('d-d-none', !isMatch);
