@@ -27,10 +27,10 @@ control the grow and shrink flex values separately with their own utility classe
 </dt-stack>
 ```
 
-<clamped-table-wrapper class="d-mb-200">
+<clamped-table-wrapper class="d-mbe-200">
   <div>
     <table class="d-table dialtone-doc-table">
-      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t-0">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-ibs-0">
         <tr>
           <th scope="col" class="d-p-0 d-bbw0 d-w20p"><div class="d-p-200 d-bb d-bbw1">Class</div></th>
           <th scope="col" class="d-p-0 d-bbw0 d-w30p"><div class="d-p-200 d-bb d-bbw1">Output</div></th>
@@ -73,10 +73,10 @@ The `flex-grow` sets the flex container’s grow factor relative to the parent's
 </dt-stack>
 ```
 
-<clamped-table-wrapper class="d-mb-200">
+<clamped-table-wrapper class="d-mbe-200">
   <div>
     <table class="d-table dialtone-doc-table">
-      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t-0">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-ibs-0">
         <tr>
           <th scope="col" class="d-p-0 d-bbw0 d-w20p"><div class="d-p-200 d-bb d-bbw1">Class</div></th>
           <th scope="col" class="d-p-0 d-bbw0 d-w30p"><div class="d-p-200 d-bb d-bbw1">Output</div></th>
@@ -119,10 +119,10 @@ The `flex-shrink` sets the flex container’s shrink factor relative to the pare
 </dt-stack>
 ```
 
-<clamped-table-wrapper class="d-mb-200">
+<clamped-table-wrapper class="d-mbe-200">
   <div>
     <table class="d-table dialtone-doc-table">
-      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t-0">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-ibs-0">
         <tr>
           <th scope="col" class="d-p-0 d-bbw0 d-w20p"><div class="d-p-200 d-bb d-bbw1">Class</div></th>
           <th scope="col" class="d-p-0 d-bbw0 d-w30p"><div class="d-p-200 d-bb d-bbw1">Output</div></th>

@@ -171,7 +171,7 @@ export const Default = {
 
   decorators: [
     () => ({
-      template: `<ul class="d-ls-none d-pt-400" style="padding-inline-start: 0px; max-width: 960px"><story /></ul>`,
+      template: `<ul class="d-ls-none d-pbs-400" style="padding-inline-start: 0px; max-width: 960px"><story /></ul>`,
     }),
   ],
 

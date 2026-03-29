@@ -100,6 +100,6 @@ export const Default = {
     size: 'lg',
     headerText: 'Nothing to see here',
     bodyText: 'Lorem ipsum dolor sit amet consectetur. Diam in aliquam arcu elit pulvinar morbi lorem ac neque.',
-    body: '<div class="d-mt-100 d-stack d-stack--row d-stack--gap-50"><button class="d-btn">Click me</button><button class="d-btn d-btn--primary">Click me</button></div>',
+    body: '<div class="d-mbs-100 d-stack d-stack--row d-stack--gap-50"><button class="d-btn">Click me</button><button class="d-btn d-btn--primary">Click me</button></div>',
   },
 };

@@ -2,12 +2,12 @@
   <div>
     <dt-stack
       direction="row"
-      class="d-mb-150"
+      class="d-mbe-150"
     >
       <dt-dropdown
         v-for="(variant, i) in variants.placement"
         :key="i"
-        class="d-mr-100"
+        class="d-mie-100"
         :placement="variant"
         :padding="$attrs.padding"
         :navigation-type="$attrs.navigationType"
@@ -35,7 +35,7 @@
 
       <dt-dropdown
         :open="$attrs.open"
-        class="d-mr-100"
+        class="d-mie-100"
         :placement="$attrs.placement"
         :fallback-placements="$attrs.fallbackPlacements"
         :padding="$attrs.padding"
@@ -89,7 +89,7 @@
       </dt-dropdown>
 
       <dt-dropdown
-        class="d-mr-100"
+        class="d-mie-100"
         :open="$attrs.open"
         :placement="$attrs.placement"
         :fallback-placements="$attrs.fallbackPlacements"
@@ -153,7 +153,7 @@
       </dt-dropdown>
 
       <dt-dropdown
-        class="d-mr-100"
+        class="d-mie-100"
         :open="$attrs.open"
       >
         <template #anchor="{ attrs }">
@@ -182,17 +182,17 @@
       </dt-dropdown>
     </dt-stack>
     <dt-stack>
-      <p class="d-fw-bold d-mb-25">
+      <p class="d-fw-bold d-mbe-25">
         Context menu
       </p>
-      <p class="d-mb-100">
+      <p class="d-mbe-100">
         Displays the dropdown menu located at the pointer, triggered by a right-click
       </p>
       <dt-stack
         direction="row"
       >
         <dt-dropdown
-          class="d-mr-100"
+          class="d-mie-100"
           :padding="$attrs.padding"
           :navigation-type="$attrs.navigationType"
           :open="$attrs.open"

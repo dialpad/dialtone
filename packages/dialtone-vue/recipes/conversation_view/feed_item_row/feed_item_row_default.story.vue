@@ -70,7 +70,7 @@
             align="center"
             class="d-fs-100 d-lh200"
           >
-            <a class="d-link d-pr-50">3 replies</a>
+            <a class="d-link d-pie-50">3 replies</a>
             <span class="feed-item-row__reply">Last reply an hour ago</span>
           </dt-stack>
         </dt-stack>

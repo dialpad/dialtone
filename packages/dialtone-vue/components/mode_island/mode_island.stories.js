@@ -79,29 +79,29 @@ export const NestedIslands = {
     components: { DtModeIsland, DtStack },
     template: `
       <div>
-        <h3 class="d-headline--md d-mb-200">Nested Mode Islands</h3>
+        <h3 class="d-headline--md d-mbe-200">Nested Mode Islands</h3>
         <dt-stack gap="200" direction="row">
           <dt-mode-island class="d-fl1 d-p-200 d-ba d-bc-subtle d-bar8">
-            <p class="d-body--lg d-fw-semibold d-mb-200">Inverted Mode Island (Parent)</p>
+            <p class="d-body--lg d-fw-semibold d-mbe-200">Inverted Mode Island (Parent)</p>
             <dt-mode-island class="d-p-200 d-ba d-bc-subtle d-bar8">
-              <p class="d-body--md d-fw-semibold d-mb-100">Inverted Island (Child)</p>
+              <p class="d-body--md d-fw-semibold d-mbe-100">Inverted Island (Child)</p>
               <dt-mode-island class="d-p-200 d-ba d-bc-subtle d-bar8">
                 <p class="d-body--sm">Inverted Island (Grandchild)</p>
               </dt-mode-island>
             </dt-mode-island>
-            <dt-mode-island mode="light" class="d-mt-200 d-p-200 d-ba d-bc-subtle d-bar8">
+            <dt-mode-island mode="light" class="d-mbs-200 d-p-200 d-ba d-bc-subtle d-bar8">
               <p class="d-body--md">Explicit Light Island</p>
             </dt-mode-island>
           </dt-mode-island>
           <dt-mode-island mode="dark" class="d-fl1 d-p-200 d-ba d-bc-subtle d-bar8">
-            <p class="d-body--lg d-fw-semibold d-mb-200">Dark Mode Island (Parent)</p>
+            <p class="d-body--lg d-fw-semibold d-mbe-200">Dark Mode Island (Parent)</p>
             <dt-mode-island class="d-p-200 d-ba d-bc-subtle d-bar8">
-              <p class="d-body--md d-fw-semibold d-mb-100">Inverted Island (Child - Light)</p>
+              <p class="d-body--md d-fw-semibold d-mbe-100">Inverted Island (Child - Light)</p>
               <dt-mode-island class="d-p-200 d-ba d-bc-subtle d-bar8">
                 <p class="d-body--sm">Inverted Island (Grandchild - Dark)</p>
               </dt-mode-island>
             </dt-mode-island>
-            <dt-mode-island mode="light" class="d-mt-200 d-p-200 d-ba d-bc-subtle d-bar8">
+            <dt-mode-island mode="light" class="d-mbs-200 d-p-200 d-ba d-bc-subtle d-bar8">
               <p class="d-body--md">Explicit Light Island (Always Light)</p>
             </dt-mode-island>
           </dt-mode-island>
@@ -116,7 +116,7 @@ export const WithCustomElement = {
     components: { DtModeIsland, DtStack },
     template: `
       <div>
-        <h3 class="d-headline--md d-mb-200">
+        <h3 class="d-headline--md d-mbe-200">
           Custom HTML Elements <span class="d-body--md">via <code class="d-fw-bold">as</code> prop</span>
         </h3>
         <dt-stack gap="100" direction="row">

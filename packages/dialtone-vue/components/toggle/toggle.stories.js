@@ -11,7 +11,7 @@ export const argsData = {
   default: 'Toggle Default',
   modelValue: false,
   onChange: action('change'),
-  labelClass: 'd-mr-75',
+  labelClass: 'd-mie-75',
   wrapperClass: '',
 };
 

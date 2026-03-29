@@ -116,7 +116,7 @@ This style's use should be rare. When in doubt, use the [default button style](#
 <dt-button disabled {props}>Place Call</dt-button>
 '>
   <dt-stack gap="400">
-    <dt-toggle v-model="isDisabled" size="sm" wrapperClass="d-g-100 d-m-auto d-pb-100">Disabled</dt-toggle>
+    <dt-toggle v-model="isDisabled" size="sm" wrapperClass="d-g-100 d-m-auto d-pbe-100">Disabled</dt-toggle>
     <dt-stack gap="400">
       <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
         <dt-button :disabled="isDisabled"> Place Call </dt-button>
@@ -236,7 +236,7 @@ Use the [v-dt-mode directive](mode-island.html#inverting) in place of `kind="inv
 <dt-button v-dt-mode:invert {props}>Place Call</dt-button>
 '>
   <dt-stack gap="400">
-    <dt-toggle v-model="isInverted" size="sm" wrapperClass="d-g-100 d-m-auto d-pb-100">Inverted</dt-toggle>
+    <dt-toggle v-model="isInverted" size="sm" wrapperClass="d-g-100 d-m-auto d-pbe-100">Inverted</dt-toggle>
     <dt-stack gap="400">
       <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
         <dt-button v-dt-mode:invert="isInverted"> Place Call </dt-button>

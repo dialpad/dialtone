@@ -172,12 +172,12 @@ export const Default = {
     avatarColor: '',
     presence: 'active',
     header: `<div class="d-fs-200 d-fw-bold" id="contact-name"> Joseph Lumaban </div>`,
-    subtitle: `<div class="d-fs-100 d-mt-25"> +1 (415) 123-4567 </div>`,
-    blockEnd: `<div data-qa="dt-stack" class="d-mt-n75 d-stack d-stack--row d-stack--gap-0 d-stack--align-center d-stack--justify-start">
-    <div class="d-w8 d-h8 d-mr-50 d-bgc-magenta-200">
+    subtitle: `<div class="d-fs-100 d-mbs-25"> +1 (415) 123-4567 </div>`,
+    blockEnd: `<div data-qa="dt-stack" class="d-mbs-n75 d-stack d-stack--row d-stack--gap-0 d-stack--align-center d-stack--justify-start">
+    <div class="d-w8 d-h8 d-mie-50 d-bgc-magenta-200">
       &nbsp;
     </div>
-    <div class="d-fs-100 d-mr-50">
+    <div class="d-fs-100 d-mie-50">
       Aerolabs Support
     </div>
   </div>`,
@@ -195,15 +195,15 @@ export const Default = {
     :presence="presence"
   >
     <template #header>
-      <div class="d-fs-200 d-fw-bold d-mr-50">Joseph Lumaban</div>
+      <div class="d-fs-200 d-fw-bold d-mie-50">Joseph Lumaban</div>
     </template>
     <template #subtitle>
-      <div class="d-fs-100 d-mt-25">+1 (415) 123-4567</div>
+      <div class="d-fs-100 d-mbs-25">+1 (415) 123-4567</div>
     </template>
     <template #blockEnd>
-      <dt-stack direction="row" align="center" class="d-mt-n75">
-        <div class="d-w8 d-h8 d-mr-50 d-bgc-magenta-200">&nbsp;</div>
-        <div class="d-fs-100 d-mr-50">Aerolabs Support</div>
+      <dt-stack direction="row" align="center" class="d-mbs-n75">
+        <div class="d-w8 d-h8 d-mie-50 d-bgc-magenta-200">&nbsp;</div>
+        <div class="d-fs-100 d-mie-50">Aerolabs Support</div>
       </dt-stack>
     </template>
   </dt-recipe-contact-info>
@@ -247,8 +247,8 @@ export const Variants = {
       <p class="d-my-200 d-fs-200 d-fw-bold">Unknown contact (phone number only) with attestation</p>
       <dt-recipe-contact-info>
         <template #header>
-          <dt-stack direction="row" align="center" class="d-mb-25">
-            <div class="d-fs-200 d-fw-bold d-mr-50">+1 (415) 123-4567</div>
+          <dt-stack direction="row" align="center" class="d-mbe-25">
+            <div class="d-fs-200 d-fw-bold d-mie-50">+1 (415) 123-4567</div>
             <dt-icon name="check-circle" size="200" class="d-fc-tertiary" />
           </dt-stack>
         </template>
@@ -259,8 +259,8 @@ export const Variants = {
       <p class="d-my-200 d-fs-200 d-fw-bold">Unknown contact with "marked as spam" button</p>
       <dt-recipe-contact-info>
         <template #header>
-          <dt-stack direction="row" align="center" class="d-mb-25">
-            <div class="d-fs-200 d-fw-bold d-mr-50">+1 (415) 123-4567</div>
+          <dt-stack direction="row" align="center" class="d-mbe-25">
+            <div class="d-fs-200 d-fw-bold d-mie-50">+1 (415) 123-4567</div>
           </dt-stack>
         </template>
         <template #subtitle>
@@ -277,18 +277,18 @@ export const Variants = {
       >
         <dt-recipe-contact-info>
           <template #header>
-            <div class="d-fs-200 d-fw-bold d-mr-50">Joseph Lumaban</div>
+            <div class="d-fs-200 d-fw-bold d-mie-50">Joseph Lumaban</div>
           </template>
           <template #subtitle>
             <dt-stack direction="row" align="center">
-              <div class="d-fs-100 d-mt-25">+1 (415) 123-4567</div>
+              <div class="d-fs-100 d-mbs-25">+1 (415) 123-4567</div>
               <dt-icon name="check-circle" size="200" class="d-fc-tertiary d-va-text-bottom" />
             </dt-stack>
           </template>
           <template #blockEnd>
-            <dt-stack direction="row" align="center" class="d-mt-n75">
-              <div class="d-w8 d-h8 d-mr-50 d-bgc-magenta-200">&nbsp;</div>
-              <div class="d-fs-100 d-mr-50">Aerolabs Support</div>
+            <dt-stack direction="row" align="center" class="d-mbs-n75">
+              <div class="d-w8 d-h8 d-mie-50 d-bgc-magenta-200">&nbsp;</div>
+              <div class="d-fs-100 d-mie-50">Aerolabs Support</div>
             </dt-stack>
           </template>
         </dt-recipe-contact-info>
@@ -297,17 +297,17 @@ export const Variants = {
     <div class="d-m-400">
       <p class="d-my-200 d-fs-200 d-fw-bold">Group contact with transfer info</p>
       <dt-recipe-contact-info>
-        <template #header><div class="d-fs-200 d-fw-bold d-mr-50">Joseph Lumaban</div></template>
+        <template #header><div class="d-fs-200 d-fw-bold d-mie-50">Joseph Lumaban</div></template>
         <template #subtitle>
           <dt-stack direction="row" align="center">
-            <div class="d-fs-100 d-mt-25">+1 (415) 123-4567</div>
+            <div class="d-fs-100 d-mbs-25">+1 (415) 123-4567</div>
             <dt-icon name="check-circle" size="200" class="d-fc-tertiary d-va-text-bottom" />
           </dt-stack>
         </template>
         <template #blockEnd>
-          <dt-stack direction="row" align="center" class="d-mt-n75">
-            <div class="d-w8 d-h8 d-mr-50 d-bgc-magenta-200">&nbsp;</div>
-            <div class="d-fs-100 d-mr-50">Aerolabs Support</div>
+          <dt-stack direction="row" align="center" class="d-mbs-n75">
+            <div class="d-w8 d-h8 d-mie-50 d-bgc-magenta-200">&nbsp;</div>
+            <div class="d-fs-100 d-mie-50">Aerolabs Support</div>
             <div class="d-fw-bold d-fs-100">• Transfer from Billing Support</div>
           </dt-stack>
         </template>
@@ -317,21 +317,21 @@ export const Variants = {
       <p class="d-my-200 d-fs-200 d-fw-bold">Admin view / listening in</p>
       <dt-recipe-contact-info>
         <template #header>
-          <dt-stack direction="row" align="center" class="d-mb-25">
+          <dt-stack direction="row" align="center" class="d-mbe-25">
             <div class="d-fw-bold d-fs-200">Joseph Lumaban & Justin H.</div>
             <div class="d-fs-200">(Agent)</div>
           </dt-stack>
         </template>
         <template #subtitle>
           <dt-stack direction="row" align="center">
-            <div class="d-fs-100 d-mt-25">+1 (415) 123-4567</div>
+            <div class="d-fs-100 d-mbs-25">+1 (415) 123-4567</div>
             <dt-icon name="check-circle" size="200" class="d-fc-tertiary d-va-text-bottom" />
           </dt-stack>
         </template>
         <template #blockEnd>
-          <dt-stack direction="row" align="center" class="d-mt-n75">
-            <div class="d-w8 d-h8 d-mr-50 d-bgc-magenta-200">&nbsp;</div>
-            <div class="d-fs-100 d-mr-50">Aerolabs Support</div>
+          <dt-stack direction="row" align="center" class="d-mbs-n75">
+            <div class="d-w8 d-h8 d-mie-50 d-bgc-magenta-200">&nbsp;</div>
+            <div class="d-fs-100 d-mie-50">Aerolabs Support</div>
           </dt-stack>
         </template>
       </dt-recipe-contact-info>

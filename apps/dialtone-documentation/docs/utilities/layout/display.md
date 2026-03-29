@@ -51,7 +51,7 @@ keywords: ["block", "inline", "flex", "grid", "none", "hidden"]
 
 ## Flex Display
 
-<FlexStackNotice class="d-mb-200" />
+<FlexStackNotice class="d-mbe-200" />
 
 While `d-d-flex` and `d-d-inline-flex` technically are `display` utilities, use the [DtStack](/components/stack) component instead.
 

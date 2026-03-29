@@ -9,7 +9,7 @@ keywords: ["data visualization","graph colors","chart palette"]
 Data visualization is crucial for clear communication, but inconsistent color usage can hinder comprehension and create visual noise.
 **Chart Color Tokens** provide a unified, robust, and accessible system for coloring data visualizations  across all Dialpad products.
 
-<div class="d-bgc-secondary d-bar8 d-mb-200">
+<div class="d-bgc-secondary d-bar8 d-mbe-200">
  <svg-loader name="chart-header" />
 </div>
 
@@ -28,7 +28,7 @@ Chart Colors are available for one of four types: [Single Color](#single-color),
 
 Use for data visualizations that only require comparing one or two data points, or a single data point against a series of adjacent neutral data. Use `chart.color.accent` as the default. To bring a data point to focus, use `chart.color.accent` for the focused data point and `chart.color.neutral` for the rest.
 
-<div class="d-bgc-secondary d-bar8 d-mb-200">
+<div class="d-bgc-secondary d-bar8 d-mbe-200">
   <svg-loader name="chart-singlecolor" />
 </div>
 
@@ -44,7 +44,7 @@ Use for data visualizations that only require comparing one or two data points, 
 
 Apply colors that associate meaning to the data points, such as status, severity, or sentiment.
 
-<div class="d-bgc-secondary d-bar8 d-mb-200">
+<div class="d-bgc-secondary d-bar8 d-mbe-200">
   <svg-loader name="chart-semantic" />
 </div>
 
@@ -61,7 +61,7 @@ Apply colors that associate meaning to the data points, such as status, severity
 
 Apply unique colors to distinguish two or more unrelated data where color carries no meaning. Use in the predetermined numerical order, e.g. `01`, `02`, etc. This ensures applied data can be visually distinguished from its adjacent data.
 
-<div class="d-bgc-secondary d-bar8 d-mb-200">
+<div class="d-bgc-secondary d-bar8 d-mbe-200">
   <svg-loader name="chart-categorical" />
 </div>
 
@@ -76,7 +76,7 @@ Apply unique colors to distinguish two or more unrelated data where color carrie
 
 To represent data using progressive shades or tints of a single color, emphasizing their relative depth within a single data series.
 
-<div class="d-bgc-secondary d-bar8 d-mb-200">
+<div class="d-bgc-secondary d-bar8 d-mbe-200">
   <svg-loader name="chart-sequential" />
 </div>
 

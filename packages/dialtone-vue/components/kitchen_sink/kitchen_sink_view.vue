@@ -16,13 +16,13 @@
         class="
           d-p-400
           d-py-200
-          d-pb-100
+          d-pbe-100
           d-bgc-secondary
           d-bb
           d-ps-sticky
           d-t-0
           d-zi-base1
-          d-mt-n125
+          d-mbs-n125
           d-mx-n125
           d-bs-card
         "

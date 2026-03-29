@@ -6,9 +6,9 @@ thumb: true
 keywords: ["font", "typography", "typeface", "text", "season"]
 ---
 
-<svg-loader name="type-billboard" class="d-bar16 d-mt-600" />
+<svg-loader name="type-billboard" class="d-bar16 d-mbs-600" />
 
-<dt-stack gap="600" class="d-mt-600">
+<dt-stack gap="600" class="d-mbs-600">
   <div class="d-d-grid d-g-600 d-g-cols1 md:d-g-cols3 d-ai-center">
     <div>
       <p class="d-docsite--paragraph">The Seasons type family is built to have a shared character and proportions between the Sans and Mix versions.</p>

@@ -6,7 +6,7 @@
       justify="between"
       class="
         d-p-100
-        d-pr-200
+        d-pie-200
         d-bb
         d-bc-subtle
       "

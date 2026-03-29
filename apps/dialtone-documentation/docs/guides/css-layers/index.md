@@ -33,7 +33,7 @@ Dialtone defines four cascade layers in priority order:
   title="Note"
   kind="info"
   hide-close
-  class="d-wmx100p d-mt-200"
+  class="d-wmx100p d-mbs-200"
 >
   Since Dialtone utilities use <code>!important</code> and are in the last layer (top-most), they effectively have the highest priority for overriding component styles while staying organized.
 </dt-notice>
@@ -115,7 +115,7 @@ Styles outside any `@layer` have the highest priority:
   title="Warning"
   kind="warning"
   hide-close
-  class="d-wmx100p d-mt-300"
+  class="d-wmx100p d-mbs-300"
 >
   Use unlayered styles sparingly. They defeat the purpose of cascade layers and make styles harder to maintain.
 </dt-notice>
@@ -271,7 +271,7 @@ Wrap utility classes in `@layer dialtone.utilities`:
   title="Warning"
   kind="warning"
   hide-close
-  class="d-mb-200 d-wmx100p"
+  class="d-mbe-200 d-wmx100p"
 >
   LESS mixins should rarely be used. Please consult with the team before using them.
 </dt-notice>

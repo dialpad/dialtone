@@ -4,7 +4,7 @@ description: Utilities for controlling how an element handles content that is to
 keywords: ["scroll", "hidden", "auto", "clip", "scrollbar"]
 ---
 
-<dt-notice kind="info" class="d-wmx100p d-mt-300" hideClose>
+<dt-notice kind="info" class="d-wmx100p d-mbs-300" hideClose>
 Consider using the custom scrollbar first with the <dt-link to="/components/scrollbar" kind="muted">Scrollbar Directive</dt-link>.
 </dt-notice>
 
@@ -49,7 +49,7 @@ The `overflow` CSS shorthand property sets the desired behavior for how content 
 <clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
-        <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t-0">
+        <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-ibs-0">
             <tr>
                 <th scope="col" class="d-p-0 d-bbw0 d-w20p"><div class="d-p-200 d-bb d-bbw1">Class</div></th>
                 <th scope="col" class="d-p-0 d-bbw0 d-w20p"><div class="d-p-200 d-bb d-bbw1">Output</div></th>

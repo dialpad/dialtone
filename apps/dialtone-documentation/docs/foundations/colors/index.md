@@ -5,7 +5,7 @@ thumb: true
 keywords: ["colour", "colors", "palette", "theme", "purple", "red", "blue", "green", "gold", "magenta", "white", "black", "berry", "coral", "indigo", "olive", "tan" ]
 ---
 
-<dt-stack gap="650" class="d-mt-600">
+<dt-stack gap="650" class="d-mbs-600">
   <div class="d-d-grid d-g-600 d-g-cols1 md:d-g-cols3 d-ai-center">
     <div>
       <h2 class="d-docsite--header-3">Expanded</h2>

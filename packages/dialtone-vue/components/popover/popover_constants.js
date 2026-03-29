@@ -8,9 +8,9 @@ export const POPOVER_PADDING_CLASSES = {
 };
 export const POPOVER_HEADER_FOOTER_PADDING_CLASSES = {
   none: undefined,
-  small: 'd-pl-50',
-  medium: 'd-pl-100',
-  large: 'd-pl-200',
+  small: 'd-pis-50',
+  medium: 'd-pis-100',
+  large: 'd-pis-200',
 };
 export const POPOVER_ROLES = ['dialog', 'menu', 'listbox', 'tree', 'grid'];
 export const POPOVER_CONTENT_WIDTHS = ['', 'anchor'];

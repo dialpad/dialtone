@@ -2,7 +2,7 @@
   <dt-stack gap="800">
     <!-- Large -->
     <section>
-      <p class="d-label-sm d-fc-tertiary d-mb-100">
+      <p class="d-label-sm d-fc-tertiary d-mbe-100">
         Large (lg)
       </p>
       <dt-empty-state
@@ -14,7 +14,7 @@
           <dt-illustration name="mind" />
         </template>
         <template #body>
-          <div class="d-mt-100 d-stack d-stack--row d-stack--gap-50">
+          <div class="d-mbs-100 d-stack d-stack--row d-stack--gap-50">
             <button class="d-btn">
               Cancel
             </button>
@@ -28,7 +28,7 @@
 
     <!-- Medium -->
     <section>
-      <p class="d-label-sm d-fc-tertiary d-mb-100">
+      <p class="d-label-sm d-fc-tertiary d-mbe-100">
         Medium (md)
       </p>
       <dt-empty-state
@@ -44,7 +44,7 @@
 
     <!-- Small -->
     <section>
-      <p class="d-label-sm d-fc-tertiary d-mb-100">
+      <p class="d-label-sm d-fc-tertiary d-mbe-100">
         Small (sm)
       </p>
       <dt-empty-state

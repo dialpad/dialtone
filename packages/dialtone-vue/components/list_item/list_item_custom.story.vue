@@ -18,7 +18,7 @@
         class="custom-list-item d-ps-relative d-py-100 d-px-150"
       >
         <time
-          class="custom-list-item--time d-fs-100 d-pr-150"
+          class="custom-list-item--time d-fs-100 d-pie-150"
           datetime="10:00"
         >
           10:00
@@ -44,7 +44,7 @@
             </template>
           </dt-button>
           <dt-button
-            class="d-p-50 d-py-100 d-ml-50"
+            class="d-p-50 d-py-100 d-mis-50"
             importance="clear"
             title="star"
             @click.stop="() => {}"
@@ -57,7 +57,7 @@
             </template>
           </dt-button>
           <dt-button
-            class="d-p-50 d-py-100 d-ml-50"
+            class="d-p-50 d-py-100 d-mis-50"
             importance="clear"
             title="more"
             @click.stop="() => {}"

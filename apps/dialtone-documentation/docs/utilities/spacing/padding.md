@@ -4,7 +4,7 @@ description: Utilities for setting an element's interior spacing between child e
 keywords: ["inner spacing", "inset"]
 ---
 
-<dt-notice kind="info" class="d-wmx100p d-mt-300" hideClose>
+<dt-notice kind="info" class="d-wmx100p d-mbs-300" hideClose>
   Padding CSS Utilities are most appropriate for padding on the <strong>sides</strong> of an element. Avoiding using it to create spacing <strong>between</strong> elements. Instead, favor the <dt-link to="/components/stack/" kind="muted">Stack</dt-link> component and its <code>gap</code> property for spacing between. It can still be combined with flex utilities to create more complex layouts.
 </dt-notice>
 
@@ -24,18 +24,18 @@ Use `d-p-{stop}` to set padding using spacing token stops. The number references
 
 <code-well-header>
   <dt-stack direction="row" justify="center" gap="300" class="d-fw-wrap d-w100p">
-    <div class="d-as-center d-pt-150 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bbr4 d-code--md">d-pt-150</dt-stack></div>
-    <div class="d-as-center d-pr-200 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-brl4 d-code--md">d-pr-200</dt-stack></div>
-    <div class="d-as-center d-pb-300 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-btr4 d-code--md">d-pb-300</dt-stack></div>
-    <div class="d-as-center d-pl-400 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-brr4 d-code--md">d-pl-400</dt-stack></div>
+    <div class="d-as-center d-pbs-150 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bbr4 d-code--md">d-pbs-150</dt-stack></div>
+    <div class="d-as-center d-pie-200 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-brl4 d-code--md">d-pie-200</dt-stack></div>
+    <div class="d-as-center d-pbe-300 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-btr4 d-code--md">d-pbe-300</dt-stack></div>
+    <div class="d-as-center d-pis-400 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-brr4 d-code--md">d-pis-400</dt-stack></div>
   </dt-stack>
 </code-well-header>
 
 ```html
-<div class="d-pt-150 ...">d-pt-150</div>
-<div class="d-pr-200 ...">d-pr-200</div>
-<div class="d-pb-300 ...">d-pb-300</div>
-<div class="d-pl-400 ...">d-pl-400</div>
+<div class="d-pbs-150 ...">d-pbs-150</div>
+<div class="d-pie-200 ...">d-pie-200</div>
+<div class="d-pbe-300 ...">d-pbe-300</div>
+<div class="d-pis-400 ...">d-pis-400</div>
 ```
 
 ## Add Horizontal Padding

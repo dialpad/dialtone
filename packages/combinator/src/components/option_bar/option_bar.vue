@@ -28,7 +28,7 @@
         </dt-tab>
         <dt-button
           v-dt-tooltip="'Search'"
-          class="d-ml-auto"
+          class="d-mis-auto"
           kind="muted"
           importance="clear"
           size="xs"

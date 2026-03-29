@@ -7,7 +7,7 @@ description: Dialtone is Dialpad's Design System that unites product teams aroun
 
 <p>
   <a
-    class="d-d-inline-flex d-pt-150"
+    class="d-d-inline-flex d-pbs-150"
     href="https://github.com/dialpad/dialtone/"
   >
     <img

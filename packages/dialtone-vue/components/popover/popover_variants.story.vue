@@ -9,7 +9,7 @@
       width-content="anchor"
       placement="bottom-start"
       initial-focus-element="first"
-      class="d-mb-200"
+      class="d-mbe-200"
     >
       <template
         #anchor="{ attrs }"
@@ -22,7 +22,7 @@
       </template>
       <template #content="{ close }">
         <div>
-          <p class="d-mb-50">
+          <p class="d-mbe-50">
             I will be displayed in the popover!
           </p>
           <dt-button
@@ -40,7 +40,7 @@
       :transition="$attrs.transition"
       width-content="anchor"
       initial-focus-element="first"
-      class="d-mb-200 d-jc-flex-end"
+      class="d-mbe-200 d-jc-flex-end"
     >
       <template
         #anchor="{ attrs }"
@@ -53,7 +53,7 @@
       </template>
       <template #content="{ close }">
         <div>
-          <p class="d-mb-50">
+          <p class="d-mbe-50">
             I will be displayed in the popover!
           </p>
           <dt-button
@@ -72,7 +72,7 @@
       padding="none"
       width-content="anchor"
       initial-focus-element="first"
-      class="d-mb-200"
+      class="d-mbe-200"
     >
       <template
         #anchor="{ attrs }"
@@ -114,7 +114,7 @@
       </template>
       <template #content="{ close }">
         <div>
-          <p class="d-mb-50">
+          <p class="d-mbe-50">
             I will be displayed in the popover!
           </p>
           <dt-button
@@ -130,7 +130,7 @@
       :modal="$attrs.modal"
       :hide-on-click="$attrs.hideOnClick"
       :transition="$attrs.transition"
-      class="d-mb-200"
+      class="d-mbe-200"
       :show-close-button="true"
       placement="bottom-start"
       header-class="d-d-flex d-ai-center d-jc-space-between"
@@ -202,7 +202,7 @@
       :modal="$attrs.modal"
       :hide-on-click="$attrs.hideOnClick"
       :transition="$attrs.transition"
-      class="d-mb-200 d-jc-flex-end"
+      class="d-mbe-200 d-jc-flex-end"
       :show-close-button="true"
       max-height="20rem"
       max-width="50rem"
@@ -270,7 +270,7 @@
       :modal="$attrs.modal"
       :transition="$attrs.transition"
       :hide-on-click="$attrs.hideOnClick"
-      content-class="d-pl-150 d-pr-200"
+      content-class="d-pis-150 d-pie-200"
       initial-focus-element="first"
       class="d-my-200 d-jc-flex-end"
       max-height="15rem"
@@ -359,7 +359,7 @@
       :modal="$attrs.modal"
       :transition="$attrs.transition"
       :hide-on-click="$attrs.hideOnClick"
-      content-class="d-pl-150 d-pr-200"
+      content-class="d-pis-150 d-pie-200"
       class="d-my-200"
       initial-focus-element="first"
       max-height="20rem"
@@ -393,7 +393,7 @@
       :modal="false"
       :hide-on-click="$attrs.hideOnClick"
       :transition="$attrs.transition"
-      content-class="d-pl-150 d-pr-200"
+      content-class="d-pis-150 d-pie-200"
       class="d-my-200 d-jc-flex-end"
       max-height="20rem"
       max-width="50rem"

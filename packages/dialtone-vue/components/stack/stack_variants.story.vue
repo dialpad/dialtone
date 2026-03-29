@@ -6,14 +6,14 @@
     >
       <!-- Direction Examples -->
       <section>
-        <h3 class="d-headline--xl d-mb-100">
+        <h3 class="d-headline--xl d-mbe-100">
           Direction Examples
         </h3>
         <dt-stack
           gap="200"
         >
           <div>
-            <h4 class="d-headline--lg d-mb-100">
+            <h4 class="d-headline--lg d-mbe-100">
               Column (default)
             </h4>
             <div class="d-ba d-bc-default d-p-200 d-bar8">
@@ -36,7 +36,7 @@
           </div>
 
           <div>
-            <h4 class="d-headline--lg d-mb-100">
+            <h4 class="d-headline--lg d-mbe-100">
               Row
             </h4>
             <div class="d-ba d-bc-default d-p-200 d-bar8">
@@ -59,7 +59,7 @@
           </div>
 
           <div>
-            <h4 class="d-headline--lg d-mb-100">
+            <h4 class="d-headline--lg d-mbe-100">
               Column Reverse
             </h4>
             <div class="d-ba d-bc-default d-p-200 d-bar8">
@@ -82,7 +82,7 @@
           </div>
 
           <div>
-            <h4 class="d-headline--lg d-mb-100">
+            <h4 class="d-headline--lg d-mbe-100">
               Row Reverse
             </h4>
             <div class="d-ba d-bc-default d-p-200 d-bar8">
@@ -108,12 +108,12 @@
 
       <!-- Gap Examples -->
       <section>
-        <h3 class="d-headline--xl d-mb-100">
+        <h3 class="d-headline--xl d-mbe-100">
           Gap Examples
         </h3>
         <dt-stack gap="200">
           <div>
-            <h4 class="d-headline--lg d-mb-100">
+            <h4 class="d-headline--lg d-mbe-100">
               Gap: 0
             </h4>
             <div class="d-ba d-bc-default d-p-200 d-bar8">
@@ -135,7 +135,7 @@
           </div>
 
           <div>
-            <h4 class="d-headline--lg d-mb-100">
+            <h4 class="d-headline--lg d-mbe-100">
               Gap: 200
             </h4>
             <div class="d-ba d-bc-default d-p-200 d-bar8">
@@ -157,7 +157,7 @@
           </div>
 
           <div>
-            <h4 class="d-headline--lg d-mb-100">
+            <h4 class="d-headline--lg d-mbe-100">
               Gap: 400
             </h4>
             <div class="d-ba d-bc-default d-p-200 d-bar8">
@@ -179,7 +179,7 @@
           </div>
 
           <div>
-            <h4 class="d-headline--lg d-mb-100">
+            <h4 class="d-headline--lg d-mbe-100">
               Gap: 600
             </h4>
             <div class="d-ba d-bc-default d-p-200 d-bar8">
@@ -204,12 +204,12 @@
 
       <!-- Align Examples -->
       <section>
-        <h3 class="d-headline--xl d-mb-100">
+        <h3 class="d-headline--xl d-mbe-100">
           Align Examples (Row Direction)
         </h3>
         <dt-stack gap="200">
           <div>
-            <h4 class="d-headline--lg d-mb-100">
+            <h4 class="d-headline--lg d-mbe-100">
               Default (no align specified - uses CSS implicit: center for row)
             </h4>
             <div class="d-ba d-bc-default d-p-200 d-bar8">
@@ -232,7 +232,7 @@
           </div>
 
           <div>
-            <h4 class="d-headline--lg d-mb-100">
+            <h4 class="d-headline--lg d-mbe-100">
               Start
             </h4>
             <div class="d-ba d-bc-default d-p-200 d-bar8">
@@ -256,7 +256,7 @@
           </div>
 
           <div>
-            <h4 class="d-headline--lg d-mb-100">
+            <h4 class="d-headline--lg d-mbe-100">
               Center
             </h4>
             <div class="d-ba d-bc-default d-p-200 d-bar8">
@@ -280,7 +280,7 @@
           </div>
 
           <div>
-            <h4 class="d-headline--lg d-mb-100">
+            <h4 class="d-headline--lg d-mbe-100">
               End
             </h4>
             <div class="d-ba d-bc-default d-p-200 d-bar8">
@@ -304,7 +304,7 @@
           </div>
 
           <div>
-            <h4 class="d-headline--lg d-mb-100">
+            <h4 class="d-headline--lg d-mbe-100">
               Stretch
             </h4>
             <div class="d-ba d-bc-default d-p-200 d-bar8">
@@ -328,7 +328,7 @@
           </div>
 
           <div>
-            <h4 class="d-headline--lg d-mb-100">
+            <h4 class="d-headline--lg d-mbe-100">
               Baseline
             </h4>
             <div class="d-ba d-bc-default d-p-200 d-bar8">
@@ -355,12 +355,12 @@
 
       <!-- Justify Examples -->
       <section>
-        <h3 class="d-headline--xl d-mb-100">
+        <h3 class="d-headline--xl d-mbe-100">
           Justify Examples (Row Direction)
         </h3>
         <dt-stack gap="200">
           <div>
-            <h4 class="d-headline--lg d-mb-100">
+            <h4 class="d-headline--lg d-mbe-100">
               Start (default)
             </h4>
             <div class="d-ba d-bc-default d-p-200 d-bar8">
@@ -384,7 +384,7 @@
           </div>
 
           <div>
-            <h4 class="d-headline--lg d-mb-100">
+            <h4 class="d-headline--lg d-mbe-100">
               Center
             </h4>
             <div class="d-ba d-bc-default d-p-200 d-bar8">
@@ -408,7 +408,7 @@
           </div>
 
           <div>
-            <h4 class="d-headline--lg d-mb-100">
+            <h4 class="d-headline--lg d-mbe-100">
               End
             </h4>
             <div class="d-ba d-bc-default d-p-200 d-bar8">
@@ -432,7 +432,7 @@
           </div>
 
           <div>
-            <h4 class="d-headline--lg d-mb-100">
+            <h4 class="d-headline--lg d-mbe-100">
               space-around
             </h4>
             <div class="d-ba d-bc-default d-p-200 d-bar8">
@@ -456,7 +456,7 @@
           </div>
 
           <div>
-            <h4 class="d-headline--lg d-mb-100">
+            <h4 class="d-headline--lg d-mbe-100">
               space-between
             </h4>
             <div class="d-ba d-bc-default d-p-200 d-bar8">
@@ -480,7 +480,7 @@
           </div>
 
           <div>
-            <h4 class="d-headline--lg d-mb-100">
+            <h4 class="d-headline--lg d-mbe-100">
               space-evenly
             </h4>
             <div class="d-ba d-bc-default d-p-200 d-bar8">
@@ -507,15 +507,15 @@
 
       <!-- Responsive Examples -->
       <section>
-        <h3 class="d-headline--xl d-mb-100">
+        <h3 class="d-headline--xl d-mbe-100">
           Responsive Examples
         </h3>
-        <p class="d-body--md d-fc-secondary d-mb-100">
+        <p class="d-body--md d-fc-secondary d-mbe-100">
           Resize your browser to see these examples change at different breakpoints
         </p>
         <dt-stack gap="200">
           <div>
-            <h4 class="d-headline--lg d-mb-100">
+            <h4 class="d-headline--lg d-mbe-100">
               Responsive Direction (column → row @md)
             </h4>
             <div class="d-ba d-bc-default d-p-200 d-bar8">
@@ -538,7 +538,7 @@
           </div>
 
           <div>
-            <h4 class="d-headline--lg d-mb-100">
+            <h4 class="d-headline--lg d-mbe-100">
               Responsive Gap (200 → 400 @md → 600 @lg)
             </h4>
             <div class="d-ba d-bc-default d-p-200 d-bar8">
@@ -561,7 +561,7 @@
           </div>
 
           <div>
-            <h4 class="d-headline--lg d-mb-100">
+            <h4 class="d-headline--lg d-mbe-100">
               Responsive Align (start → center @md → end @lg)
             </h4>
             <div class="d-ba d-bc-default d-p-200 d-bar8">
@@ -585,7 +585,7 @@
           </div>
 
           <div>
-            <h4 class="d-headline--lg d-mb-100">
+            <h4 class="d-headline--lg d-mbe-100">
               Responsive Justify (start → center @md → space-between @lg)
             </h4>
             <div class="d-ba d-bc-default d-p-200 d-bar8">
@@ -609,7 +609,7 @@
           </div>
 
           <div>
-            <h4 class="d-headline--lg d-mb-100">
+            <h4 class="d-headline--lg d-mbe-100">
               Combined Responsive (direction + gap + align)
             </h4>
             <div class="d-ba d-bc-default d-p-200 d-bar8">

@@ -110,7 +110,7 @@ Find CSS utility classes to style HTML elements. Use when your query mentions CS
 "padding 8px"       → d-p8, d-pt8, d-pr8, d-pb8, d-pl8, d-px8, d-py-100
 "display flex"      → d-d-flex, d-d-inline-flex
 "width 100%"        → d-w100p
-"margin top auto"   → d-mt-auto
+"margin top auto"   → d-mbs-auto
 "text align center" → d-ta-center
 ```
 

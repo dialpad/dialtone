@@ -9,21 +9,21 @@
       :list-class="$attrs.listClass"
     >
       <dt-list-item
-        class="d-pl-100"
+        class="d-pis-100"
         role="option"
         navigation-type="tab"
       >
         item1
       </dt-list-item>
       <dt-list-item
-        class="d-pl-100"
+        class="d-pis-100"
         role="option"
         navigation-type="tab"
       >
         item2
       </dt-list-item>
       <dt-list-item
-        class="d-pl-100"
+        class="d-pis-100"
         role="option"
         navigation-type="tab"
       >

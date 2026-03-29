@@ -28,22 +28,22 @@ Use `d-t-{stop}`, `d-r-{stop}`, `d-b-{stop}`, `d-l-{stop}`, `d-x-{stop}`, `d-y-{
 ```html
 <!-- Example 1 -->
 <div class="d-ps-relative d-size-200">
-  <div class="d-ps-absolute d-x-0 d-t-0 d-h50p">1</div>
+  <div class="d-ps-absolute d-x-0 d-ibs-0 d-h50p">1</div>
 </div>
 
 <!-- Example 2 -->
 <div class="d-ps-relative d-size-200">
-  <div class="d-ps-absolute d-y-0 d-r-0 d-w50p">2</div>
+  <div class="d-ps-absolute d-y-0 d-iie-0 d-w50p">2</div>
 </div>
 
 <!-- Example 3 -->
 <div class="d-ps-relative d-size-200">
-      <div class="d-ps-absolute d-x-0 d-b-0 d-h50p">3</div>
+      <div class="d-ps-absolute d-x-0 d-ibe-0 d-h50p">3</div>
 </div>
 
 <!-- Example 4 -->
 <div class="d-ps-relative d-size-200">
-  <div class="d-ps-absolute d-y-0 d-l-0 d-w50p">4</div>
+  <div class="d-ps-absolute d-y-0 d-iis-0 d-w50p">4</div>
 </div>
 
 <!-- Example 5 -->
@@ -53,22 +53,22 @@ Use `d-t-{stop}`, `d-r-{stop}`, `d-b-{stop}`, `d-l-{stop}`, `d-x-{stop}`, `d-y-{
 
 <!-- Example 6 -->
 <div class="d-ps-relative d-size-200">
-  <div class="d-ps-absolute d-t-0 d-l-0 d-size-50p">6</div>
+  <div class="d-ps-absolute d-ibs-0 d-iis-0 d-size-50p">6</div>
 </div>
 
 <!-- Example 7 -->
 <div class="d-ps-relative d-size-200">
-  <div class="d-ps-absolute d-t-0 d-r-0 d-size-50p">7</div>
+  <div class="d-ps-absolute d-ibs-0 d-iie-0 d-size-50p">7</div>
 </div>
 
 <!-- Example 8 -->
 <div class="d-ps-relative d-size-200">
-  <div class="d-ps-absolute d-b-0 d-r-0 d-size-50p">8</div>
+  <div class="d-ps-absolute d-ibe-0 d-iie-0 d-size-50p">8</div>
 </div>
 
 <!-- Example 9 -->
 <div class="d-ps-relative d-size-200">
-  <div class="d-ps-absolute d-b-0 d-l-0 d-size-50p">9</div>
+  <div class="d-ps-absolute d-ibe-0 d-iis-0 d-size-50p">9</div>
 </div>
 
 <!-- Example 10 -->
@@ -129,22 +129,22 @@ Use `d-t-{stop}`, `d-r-{stop}`, `d-b-{stop}`, `d-l-{stop}`, `d-x-{stop}`, `d-y-{
 ```html
 <!-- Example 1 -->
 <div class="d-ps-relative d-size-200">
-  <div class="d-ps-absolute d-x-n25 d-t-n25 d-h50p">1</div>
+  <div class="d-ps-absolute d-x-n25 d-ibs-n25 d-h50p">1</div>
 </div>
 
 <!-- Example 2 -->
 <div class="d-ps-relative d-size-200">
-  <div class="d-ps-absolute d-y-n25 d-r-n25 d-w50p">2</div>
+  <div class="d-ps-absolute d-y-n25 d-iie-n25 d-w50p">2</div>
 </div>
 
 <!-- Example 3 -->
 <div class="d-ps-relative d-size-200">
-  <div class="d-ps-absolute d-x-n25 d-b-n25 d-h50p">3</div>
+  <div class="d-ps-absolute d-x-n25 d-ibe-n25 d-h50p">3</div>
 </div>
 
 <!-- Example 4 -->
 <div class="d-ps-relative d-size-200">
-  <div class="d-ps-absolute d-y-n25 d-l-n25 d-w50p">4</div>
+  <div class="d-ps-absolute d-y-n25 d-iis-n25 d-w50p">4</div>
 </div>
 
 <!-- Example 5 -->
@@ -154,22 +154,22 @@ Use `d-t-{stop}`, `d-r-{stop}`, `d-b-{stop}`, `d-l-{stop}`, `d-x-{stop}`, `d-y-{
 
 <!-- Example 6 -->
 <div class="d-ps-relative d-size-200">
-  <div class="d-ps-absolute d-t-n50 d-l-n50 d-size-50p">6</div>
+  <div class="d-ps-absolute d-ibs-n50 d-iis-n50 d-size-50p">6</div>
 </div>
 
 <!-- Example 7 -->
 <div class="d-ps-relative d-size-200">
-  <div class="d-ps-absolute d-t-n100 d-r-n100 d-size-50p">7</div>
+  <div class="d-ps-absolute d-ibs-n100 d-iie-n100 d-size-50p">7</div>
 </div>
 
 <!-- Example 8 -->
 <div class="d-ps-relative d-size-200">
-  <div class="d-ps-absolute d-b-n100 d-r-n100 d-size-50p">8</div>
+  <div class="d-ps-absolute d-ibe-n100 d-iie-n100 d-size-50p">8</div>
 </div>
 
 <!-- Example 9 -->
 <div class="d-ps-relative d-size-200">
-  <div class="d-ps-absolute d-b-n50 d-l-n50 d-size-50p">9</div>
+  <div class="d-ps-absolute d-ibe-n50 d-iis-n50 d-size-50p">9</div>
 </div>
 ```
 
