@@ -14,9 +14,14 @@
                 Output
               </div>
             </th>
-            <th v-if="showRendered" class="d-p-0 d-bbw0" scope="col">
+            <th v-if="showRendered" class="d-p-0 d-bbw0 d-ta-right" scope="col">
               <div class="d-p-200 d-bb d-bbw1">
-                Rendered
+                REM
+              </div>
+            </th>
+            <th v-if="showRendered" class="d-p-0 d-bbw0 d-ta-right" scope="col">
+              <div class="d-p-200 d-bb d-bbw1">
+                PX
               </div>
             </th>
           </tr>

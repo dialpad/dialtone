@@ -96,7 +96,8 @@ It is highly recommended to use the [DtStack component](/components/stack.md) pr
                   <span v-else>padding: var(--dt-spacing-{{ val }}) !important</span>
                 </span>
             </td>
-            <td class="d-code--sm d-fc-tertiary">{{ output }} / {{ parseFloat(output) * 10 }}px</td>
+            <td class="d-code--sm d-fc-tertiary d-ta-right">{{ output }}</td>
+            <td class="d-code--sm d-fc-tertiary d-ta-right">{{ parseFloat(output) * 10 }}px</td>
         </tr>
     </tbody>
     <!-- Unset paddings -->
@@ -125,6 +126,7 @@ It is highly recommended to use the [DtStack component](/components/stack.md) pr
             <span v-else>padding: unset !important</span>
           </span>
         </td>
+        <td class="d-fc-muted d-fs-100 d-ta-center">N/A</td>
         <td class="d-fc-muted d-fs-100 d-ta-center">N/A</td>
       </tr>
     </tbody>

@@ -126,7 +126,8 @@ It is highly recommended to use the [DtStack component](/components/stack.md) pr
             <span v-else>margin: var(--dt-spacing-{{ val }}) !important</span>
           </span>
         </td>
-        <td class="d-code--sm d-fc-tertiary">{{ output }} / {{ parseFloat(output) * 10 }}px</td>
+        <td class="d-code--sm d-fc-tertiary d-ta-right">{{ output }}</td>
+        <td class="d-code--sm d-fc-tertiary d-ta-right">{{ parseFloat(output) * 10 }}px</td>
       </tr>
     </tbody>
     <!-- Negative margins -->
@@ -155,7 +156,8 @@ It is highly recommended to use the [DtStack component](/components/stack.md) pr
             <span v-else>margin: var(--dt-spacing-{{ val }}-negative) !important</span>
           </span>
         </td>
-        <td class="d-code--sm d-fc-tertiary">-{{ output }} / -{{ parseFloat(output) * 10 }}px</td>
+        <td class="d-code--sm d-fc-tertiary d-ta-right">-{{ output }}</td>
+        <td class="d-code--sm d-fc-tertiary d-ta-right">-{{ parseFloat(output) * 10 }}px</td>
       </tr>
     </tbody>
     <!-- Auto margins -->
@@ -179,6 +181,7 @@ It is highly recommended to use the [DtStack component](/components/stack.md) pr
           </span>
         </td>
         <td class="d-fc-muted d-fs-100 d-ta-center">N/A</td>
+        <td class="d-fc-muted d-fs-100 d-ta-center">N/A</td>
       </tr>
     </tbody>
     <!-- Unset margins -->
@@ -201,6 +204,7 @@ It is highly recommended to use the [DtStack component](/components/stack.md) pr
             <span v-else>margin: unset !important</span>
           </span>
         </td>
+        <td class="d-fc-muted d-fs-100 d-ta-center">N/A</td>
         <td class="d-fc-muted d-fs-100 d-ta-center">N/A</td>
       </tr>
     </tbody>

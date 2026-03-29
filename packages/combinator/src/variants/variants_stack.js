@@ -3,7 +3,7 @@ export default {
   default: {
     props: {
       gap: {
-        initialValue: '500',
+        initialValue: '200',
       },
     },
     slots: {
@@ -32,7 +32,7 @@ export default {
         initialValue: 'row',
       },
       gap: {
-        initialValue: '500',
+        initialValue: '200',
       },
       align: {
         initialValue: 'start',
@@ -51,7 +51,7 @@ export default {
         initialValue: 'row',
       },
       gap: {
-        initialValue: '500',
+        initialValue: '200',
       },
       align: {
         initialValue: 'baseline',
@@ -59,7 +59,7 @@ export default {
     },
     slots: {
       default: {
-        initialValue: '<div class="d-bgc-moderate-opaque d-p-200 d-bar8"> <dt-text kind="body" size="xs">Small body</dt-text> </div> <div class="d-bgc-moderate-opaque d-p-200 d-bar8"> <dt-text kind="headline" size="2xl">Large headline</dt-text> </div>',
+        initialValue: '<div class="d-bgc-moderate-opaque d-p-200 d-bar8"> <dt-text kind="body" size="xs">Small body</dt-text> </div> <div class="d-bgc-moderate-opaque d-p-200 d-bar8"> <dt-text kind="headline" size="2xl">2xl headline</dt-text> </div> <div class="d-bgc-moderate-opaque d-p-200 d-bar8"> <dt-text kind="headline" size="lg">Large headline</dt-text> </div>',
       },
     },
   },

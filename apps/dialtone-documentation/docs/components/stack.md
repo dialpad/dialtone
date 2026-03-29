@@ -216,6 +216,7 @@ vueCode='
       >
         <dt-button
           v-for="(gap, index) in gaps"
+          v-dt-tooltip="{ message: gapToPx(gap), delay: false }"
           :ref="el => gapButtonRefs[index] = el"
           size="xs"
           kind="muted"
@@ -286,9 +287,9 @@ vueCode='
         </tr>
       </thead>
       <tbody>
-        <tr v-for="{ value: stop, output } in spacingValues" :key="stop">
+        <tr v-for="{ value: stop, output } in spacingValues" :key="stop" valign="baseline">
           <th scope="row" class="d-code--sm d-docsite-code">{{ stop }}</th>
-          <td><strong>var(--dt-spacing-{{ stop }})</strong></td>
+          <td><dt-text kind="code" size="xs">var(--dt-spacing-{{ stop }})</dt-text></td>
           <td class="d-code--sm d-docsite-code d-ta-right">{{ output }}</td>
           <td class="d-code--sm d-docsite-code d-ta-right">{{ (parseFloat(output) * 10) }}px</td>
         </tr>
@@ -1185,6 +1186,11 @@ vueCode='
   const selectedGap = ref('400');
   const focusedGapIndex = ref(0);
   const gapButtonRefs = ref([]);
+
+  const gapToPx = (gap) => {
+    const entry = spacingValues.find(v => v.value === gap);
+    return entry ? `${parseFloat(entry.output) * 10}px` : gap;
+  };
 
   const setGap = (gap) => {
     selectedGap.value = gap;

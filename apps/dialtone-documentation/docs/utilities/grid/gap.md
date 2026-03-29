@@ -79,7 +79,8 @@ Use `d-cg-{stop}` or `d-rg-{stop}` to independently change the row and column ga
           <span v-if="dir !== 'both'">{{ dir }}-gap: var(--dt-spacing-{{ stop }}) !important;</span>
           <span v-else>gap: var(--dt-spacing-{{ stop }}) !important;</span>
         </td>
-        <td class="d-code--sm d-fc-tertiary">{{ parseFloat(px) / 10 }}rem / {{ px }}</td>
+        <td class="d-code--sm d-fc-tertiary d-ta-right">{{ parseFloat(px) / 10 }}rem</td>
+        <td class="d-code--sm d-fc-tertiary d-ta-right">{{ px }}</td>
       </tr>
     </tbody>
     <tbody>
@@ -87,15 +88,18 @@ Use `d-cg-{stop}` or `d-rg-{stop}` to independently change the row and column ga
         <th scope="row" class="d-code--sm d-docsite-code">.d-g-unset</th>
         <td class="d-code--sm">gap: unset !important;</td>
         <td class="d-fc-muted d-fs-100 d-ta-center">N/A</td>
+        <td class="d-fc-muted d-fs-100 d-ta-center">N/A</td>
       </tr>
       <tr>
         <th scope="row" class="d-code--sm d-docsite-code">.d-cg-unset</th>
         <td class="d-code--sm">column-gap: unset !important;</td>
         <td class="d-fc-muted d-fs-100 d-ta-center">N/A</td>
+        <td class="d-fc-muted d-fs-100 d-ta-center">N/A</td>
       </tr>
       <tr>
         <th scope="row" class="d-code--sm d-docsite-code">.d-rg-unset</th>
         <td class="d-code--sm">row-gap: unset !important;</td>
+        <td class="d-fc-muted d-fs-100 d-ta-center">N/A</td>
         <td class="d-fc-muted d-fs-100 d-ta-center">N/A</td>
       </tr>
     </tbody>
