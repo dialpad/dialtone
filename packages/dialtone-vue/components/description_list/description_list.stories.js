@@ -27,7 +27,7 @@ export const argTypesData = {
 
 export const argsData = {
   direction: 'row',
-  gap: '400',
+  gap: '100',
   items: [
     {
       term: 'Customer Intent',

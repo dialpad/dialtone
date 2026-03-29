@@ -2,12 +2,12 @@
 <template>
   <div
     id="forms-radio--variants-container"
-    class="d-pt-200 d-px-800"
+    class="d-pbs-200 d-px-800"
   >
     <dt-stack
       direction="row"
       justify="center"
-      class="d-w100p d-mb-800 d-mt-400"
+      class="d-w100p d-mbe-800 d-my-400"
     >
       <dt-button
         id="external-tooltip-anchor"
@@ -23,11 +23,12 @@
       direction="row"
       justify="center"
       align="center"
-      class="d-mb-200"
+      class="d-my-200"
     >
       <div
         v-for="direction in rowDirection"
         :key="direction"
+        class="d-mx-100"
       >
         <dt-tooltip
           v-if="direction !== null"
@@ -35,7 +36,6 @@
           :placement="direction"
           :message="localMessage"
           :show="$attrs.showTooltip"
-          class="d-mx-800"
         >
           <template #anchor>
             <dt-button
@@ -58,7 +58,7 @@
         Circle button tooltip
       </div>
       <dt-tooltip
-        class="d-ml-50"
+        class="d-mx-100"
         :transition="transition"
         :message="localMessage"
         :show="$attrs.showTooltip"
@@ -86,7 +86,7 @@
     >
       <!-- Text -->
       <dt-tooltip
-        class="d-mb-800 d-mt-800"
+        class="d-my-100"
         :transition="$attrs.transition"
         :message="localMessage"
         :show="$attrs.showTooltip"
@@ -105,7 +105,7 @@
     >
       <!-- Open state -->
       <dt-tooltip
-        class="d-mb-800 d-mt-400"
+        class="d-my-100"
         :transition="$attrs.transition"
         :message="localMessage"
         :show="show1"
@@ -127,7 +127,7 @@
     >
       <!-- Custom Theme -->
       <dt-tooltip
-        class="d-mb-800 d-mt-400"
+        class="d-my-100"
         theme="purple"
         :transition="$attrs.transition"
         :message="localMessage"
@@ -145,7 +145,7 @@
     <dt-stack
       direction="row"
       justify="center"
-      class="d-bgc-contrast d-pt-800"
+      class="d-bgc-contrast d-py-100"
     >
       <div class="d-py-800">
         <!-- Inverted state -->
@@ -157,7 +157,7 @@
         >
           <template #anchor>
             <dt-button
-              kind="inverted"
+              v-dt-mode:invert
               importance="outlined"
             >
               Inverted
