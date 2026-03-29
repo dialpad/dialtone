@@ -5,7 +5,6 @@
   padding: var(--dt-spacing-0);
   color: var(--dt-shell-action-color-foreground-primary-default);
   background-color: var(--dt-shell-action-color-background-primary-default);
-  border-radius: calc(var(--dt-layout-25) * 1.5);
 
   &:hover {
     color: var(--dt-shell-action-color-foreground-primary-hover);
@@ -19,14 +18,15 @@
 
 .d-recipe-settings-menu-button-update {
   block-size: var(--dt-layout-50);
-  color: var(--dt-color-blue-800);
-  background-color: oklch(from var(--dt-color-blue-200) l c h / 0.25);
-  border-color: oklch(from var(--dt-color-blue-200) l c h / 0.25);
+  padding-inline-start: var(--dt-spacing-150);
+  color: var(--dt-color-blue-800); // TODO
+  background-color: var(--dt-color-surface-info);
+  border-color: var(--dt-color-border-default);
   border-radius: var(--dt-size-radius-pill);
 
   &:hover {
-    color: var(--dt-shell-action-color-foreground-primary-hover);
-    background-color: oklch(from var(--dt-color-blue-200) l c h / 0.5);
+    color: var(--dt-shell-action-color-foreground-secondary-hover);
+    background-color: oklch(from var(--dt-color-surface-info) calc(l - 0.01) c h);
   }
 }
 }
