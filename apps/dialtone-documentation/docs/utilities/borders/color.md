@@ -4,7 +4,7 @@ description: Utilities for controlling an element's border color.
 keywords: ["border colour"]
 ---
 
-<dt-notice kind="warning" class="d-wmx100p d-mbs-300" hideClose>
+<dt-notice kind="warning" class="d-wmx100p d-my-200" hideClose>
   Before using border color utilities, first consider <dt-link to="/design/colors/palette/#borders" kind="muted">semantic border colors</dt-link>.
 </dt-notice>
 

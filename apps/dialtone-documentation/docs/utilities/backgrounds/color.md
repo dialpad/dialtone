@@ -4,7 +4,7 @@ description: Utilities for setting the background color.
 keywords: ["bg color","background colour","bgc"]
 ---
 
-<dt-notice kind="warning" class="d-wmx100p d-mbs-300" hideClose>
+<dt-notice kind="warning" class="d-wmx100p d-my-200" hideClose>
   Before using background color utilities, first consider <dt-link to="/design/colors/palette/#surface" kind="muted">semantic surface colors</dt-link>.
 </dt-notice>
 

@@ -4,7 +4,7 @@ description: Utilities for setting an element's interior spacing between child e
 keywords: ["inner spacing", "inset"]
 ---
 
-<dt-notice kind="info" class="d-wmx100p d-mbs-300" hideClose>
+<dt-notice kind="info" class="d-wmx100p d-my-200" hideClose>
   Padding CSS Utilities are most appropriate for padding on the <strong>sides</strong> of an element. Avoiding using it to create spacing <strong>between</strong> elements. Instead, favor the <dt-link to="/components/stack/" kind="muted">Stack</dt-link> component and its <code>gap</code> property for spacing between. It can still be combined with flex utilities to create more complex layouts.
 </dt-notice>
 
@@ -100,12 +100,10 @@ Padding can be added to an element by using `d-p-{stop}` or a directional class 
         </th>
         <td class="d-code--sm">
           <span v-if="i == 'y'">
-            padding-block-start: unset !important;<br/>
-            padding-block-end: unset !important;
+            padding-block: unset !important;
           </span>
           <span v-else-if="i == 'x'">
-            padding-inline-end: unset !important;<br/>
-            padding-inline-start: unset !important;
+            padding-inline: unset !important;
           </span>
           <span v-else>
             <span v-if="i !== 'All'">padding-{{ i === 'top' ? 'block-start' : i === 'bottom' ? 'block-end' : i === 'left' ? 'inline-start' : i === 'right' ? 'inline-end' : i }}: unset !important; </span>

@@ -33,7 +33,7 @@ Use `d-lc-{n}` to truncate text at a specific number of lines with an ellipsis.
 
 ### Avoiding display conflicts
 
-<dt-notice kind="error" class="d-wmx100p d-mbe-200" :hideClose="true">
+<dt-notice kind="error" class="d-wmx100p d-my-200" :hideClose="true">
   <template #default>
     Avoid applying line-clamp to elements with flex or grid <code>display</code> styles. The clamped text should be considered a child element of the flex or grid container.
   </template>

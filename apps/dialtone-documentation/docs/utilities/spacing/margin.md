@@ -4,7 +4,7 @@ description: Utilities to adjust an element's exterior spacing between other obj
 keywords: ["outer spacing", "gap", "offset"]
 ---
 
-<dt-notice kind="warning" class="d-wmx100p d-my-300" hideClose>
+<dt-notice kind="warning" class="d-wmx100p d-my-200" hideClose>
   Avoid applying margins directly. Lean toward using layout components like <dt-link to="/components/stack/" kind="muted">Stack</dt-link> for consistent and maintainable spacing <strong>between</strong> elements.
 </dt-notice>
 
@@ -132,12 +132,10 @@ It is highly recommended to use the [stack component](/components/stack.md) or t
         </th>
         <td class="d-code--sm">
           <span v-if="i == 'y'">
-            margin-block-start: -{{ output }} !important;<br/>
-            margin-block-end: -{{ output }} !important;
+            margin-block: -{{ output }} !important;
           </span>
           <span v-else-if="i == 'x'">
-            margin-inline-end: -{{ output }} !important;<br/>
-            margin-inline-start: -{{ output }} !important;
+            margin-inline: -{{ output }} !important;
           </span>
           <span v-else>
             <span v-if="i !== 'All'">margin-{{ i === 'top' ? 'block-start' : i === 'bottom' ? 'block-end' : i === 'left' ? 'inline-start' : i === 'right' ? 'inline-end' : i }}: -{{ output }} !important; </span>
@@ -155,12 +153,10 @@ It is highly recommended to use the [stack component](/components/stack.md) or t
         </th>
         <td class="d-code--sm">
           <span v-if="i == 'y'">
-            margin-block-start: auto !important;<br/>
-            margin-block-end: auto !important;
+            margin-block: auto !important;
           </span>
           <span v-else-if="i == 'x'">
-            margin-inline-end: auto !important;<br/>
-            margin-inline-start: auto !important;
+            margin-inline: auto !important;
           </span>
           <span v-else>
             <span v-if="i !== 'All'">margin-{{ i === 'top' ? 'block-start' : i === 'bottom' ? 'block-end' : i === 'left' ? 'inline-start' : i === 'right' ? 'inline-end' : i }}: auto !important; </span>
@@ -178,12 +174,10 @@ It is highly recommended to use the [stack component](/components/stack.md) or t
         </th>
         <td class="d-code--sm">
           <span v-if="i == 'y'">
-            margin-block-start: unset !important;<br/>
-            margin-block-end: unset !important;
+            margin-block: unset !important;
           </span>
           <span v-else-if="i == 'x'">
-            margin-inline-end: unset !important;<br/>
-            margin-inline-start: unset !important;
+            margin-inline: unset !important;
           </span>
           <span v-else>
             <span v-if="i !== 'All'">margin-{{ i === 'top' ? 'block-start' : i === 'bottom' ? 'block-end' : i === 'left' ? 'inline-start' : i === 'right' ? 'inline-end' : i }}: unset !important; </span>
