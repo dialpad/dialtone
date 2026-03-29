@@ -66,7 +66,7 @@ Use `d-cg-{stop}` or `d-rg-{stop}` to independently change the row and column ga
 
 ## Classes
 
-<utility-class-table>
+<utility-class-table show-rendered>
   <template #content>
     <tbody v-for="dir in directions">
       <tr v-for="{ stop, px } in values">
@@ -78,22 +78,25 @@ Use `d-cg-{stop}` or `d-rg-{stop}` to independently change the row and column ga
         <td class="d-code--sm">
           <span v-if="dir !== 'both'">{{ dir }}-gap: var(--dt-spacing-{{ stop }}) !important;</span>
           <span v-else>gap: var(--dt-spacing-{{ stop }}) !important;</span>
-          <span class="d-fc-tertiary"> /* {{ px }} */</span>
         </td>
+        <td class="d-code--sm d-fc-tertiary">{{ parseFloat(px) / 10 }}rem / {{ px }}</td>
       </tr>
     </tbody>
     <tbody>
       <tr>
         <th scope="row" class="d-code--sm d-docsite-code">.d-g-unset</th>
         <td class="d-code--sm">gap: unset !important;</td>
+        <td class="d-fc-muted d-fs-100 d-ta-center">N/A</td>
       </tr>
       <tr>
         <th scope="row" class="d-code--sm d-docsite-code">.d-cg-unset</th>
         <td class="d-code--sm">column-gap: unset !important;</td>
+        <td class="d-fc-muted d-fs-100 d-ta-center">N/A</td>
       </tr>
       <tr>
         <th scope="row" class="d-code--sm d-docsite-code">.d-rg-unset</th>
         <td class="d-code--sm">row-gap: unset !important;</td>
+        <td class="d-fc-muted d-fs-100 d-ta-center">N/A</td>
       </tr>
     </tbody>
   </template>

@@ -14,6 +14,11 @@
                 Output
               </div>
             </th>
+            <th v-if="showRendered" class="d-p-0 d-bbw0" scope="col">
+              <div class="d-p-200 d-bb d-bbw1">
+                Rendered
+              </div>
+            </th>
           </tr>
         </thead>
         <slot name="content" />
@@ -27,5 +32,12 @@ import ClampedTableWrapper from './ClampedTableWrapper.vue';
 
 defineOptions({
   name: 'UtilityClassTable',
+});
+
+defineProps({
+  showRendered: {
+    type: Boolean,
+    default: false,
+  },
 });
 </script>

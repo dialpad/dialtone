@@ -98,7 +98,7 @@ Margins can be added using `d-m-{stop}` or directional classes like `d-m{t|r|b|l
 
 It is highly recommended to use the [DtStack component](/components/stack.md) prior to applying margins individually.
 
-<utility-class-table>
+<utility-class-table show-rendered>
   <template #content>
     <!-- Positive margins -->
     <tbody v-for="{ name: dir, deprecated } in directions">
@@ -116,16 +116,17 @@ It is highly recommended to use the [DtStack component](/components/stack.md) pr
         </th>
         <td class="d-code--sm">
           <span v-if="dir == 'y'">
-            margin-block: {{ output }} !important;
+            margin-block: var(--dt-spacing-{{ val }}) !important;
           </span>
           <span v-else-if="dir == 'x'">
-            margin-inline: {{ output }} !important;
+            margin-inline: var(--dt-spacing-{{ val }}) !important;
           </span>
           <span v-else>
-            <span v-if="dir !== 'All'">margin-{{ dir === 'top' ? 'block-start' : dir === 'bottom' ? 'block-end' : dir === 'left' ? 'inline-start' : dir === 'right' ? 'inline-end' : dir }}: {{ output }} !important; </span>
-            <span v-else>margin: {{ output }} !important</span>
+            <span v-if="dir !== 'All'">margin-{{ dir === 'top' ? 'block-start' : dir === 'bottom' ? 'block-end' : dir === 'left' ? 'inline-start' : dir === 'right' ? 'inline-end' : dir }}: var(--dt-spacing-{{ val }}) !important; </span>
+            <span v-else>margin: var(--dt-spacing-{{ val }}) !important</span>
           </span>
         </td>
+        <td class="d-code--sm d-fc-tertiary">{{ output }} / {{ parseFloat(output) * 10 }}px</td>
       </tr>
     </tbody>
     <!-- Negative margins -->
@@ -144,16 +145,17 @@ It is highly recommended to use the [DtStack component](/components/stack.md) pr
         </th>
         <td class="d-code--sm">
           <span v-if="dir == 'y'">
-            margin-block: -{{ output }} !important;
+            margin-block: var(--dt-spacing-{{ val }}-negative) !important;
           </span>
           <span v-else-if="dir == 'x'">
-            margin-inline: -{{ output }} !important;
+            margin-inline: var(--dt-spacing-{{ val }}-negative) !important;
           </span>
           <span v-else>
-            <span v-if="dir !== 'All'">margin-{{ dir === 'top' ? 'block-start' : dir === 'bottom' ? 'block-end' : dir === 'left' ? 'inline-start' : dir === 'right' ? 'inline-end' : dir }}: -{{ output }} !important; </span>
-            <span v-else>margin: -{{ output }} !important</span>
+            <span v-if="dir !== 'All'">margin-{{ dir === 'top' ? 'block-start' : dir === 'bottom' ? 'block-end' : dir === 'left' ? 'inline-start' : dir === 'right' ? 'inline-end' : dir }}: var(--dt-spacing-{{ val }}-negative) !important; </span>
+            <span v-else>margin: var(--dt-spacing-{{ val }}-negative) !important</span>
           </span>
         </td>
+        <td class="d-code--sm d-fc-tertiary">-{{ output }} / -{{ parseFloat(output) * 10 }}px</td>
       </tr>
     </tbody>
     <!-- Auto margins -->
@@ -176,6 +178,7 @@ It is highly recommended to use the [DtStack component](/components/stack.md) pr
             <span v-else>margin: auto !important</span>
           </span>
         </td>
+        <td class="d-fc-muted d-fs-100 d-ta-center">N/A</td>
       </tr>
     </tbody>
     <!-- Unset margins -->
@@ -198,6 +201,7 @@ It is highly recommended to use the [DtStack component](/components/stack.md) pr
             <span v-else>margin: unset !important</span>
           </span>
         </td>
+        <td class="d-fc-muted d-fs-100 d-ta-center">N/A</td>
       </tr>
     </tbody>
   </template>

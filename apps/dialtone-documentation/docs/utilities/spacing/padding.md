@@ -68,7 +68,7 @@ Padding can be added to an element by using `d-p-{stop}` or a directional class 
 
 It is highly recommended to use the [DtStack component](/components/stack.md) prior to applying padding individually.
 
-<utility-class-table>
+<utility-class-table show-rendered>
   <template #content>
     <!-- Positive paddings -->
     <tbody v-for="{ name: dir, deprecated } in directions">
@@ -86,16 +86,17 @@ It is highly recommended to use the [DtStack component](/components/stack.md) pr
             </th>
             <td class="d-code--sm">
                 <span v-if="dir == 'y'">
-                  padding-block: {{ output }} !important;
+                  padding-block: var(--dt-spacing-{{ val }}) !important;
                 </span>
                 <span v-else-if="dir == 'x'">
-                  padding-inline: {{ output }} !important;
+                  padding-inline: var(--dt-spacing-{{ val }}) !important;
                 </span>
                 <span v-else>
-                  <span v-if="dir !== 'All'">padding-{{ dir === 'top' ? 'block-start' : dir === 'bottom' ? 'block-end' : dir === 'left' ? 'inline-start' : dir === 'right' ? 'inline-end' : dir }}: {{ output }} !important; </span>
-                  <span v-else>padding: {{ output }} !important</span>
+                  <span v-if="dir !== 'All'">padding-{{ dir === 'top' ? 'block-start' : dir === 'bottom' ? 'block-end' : dir === 'left' ? 'inline-start' : dir === 'right' ? 'inline-end' : dir }}: var(--dt-spacing-{{ val }}) !important; </span>
+                  <span v-else>padding: var(--dt-spacing-{{ val }}) !important</span>
                 </span>
             </td>
+            <td class="d-code--sm d-fc-tertiary">{{ output }} / {{ parseFloat(output) * 10 }}px</td>
         </tr>
     </tbody>
     <!-- Unset paddings -->
@@ -124,6 +125,7 @@ It is highly recommended to use the [DtStack component](/components/stack.md) pr
             <span v-else>padding: unset !important</span>
           </span>
         </td>
+        <td class="d-fc-muted d-fs-100 d-ta-center">N/A</td>
       </tr>
     </tbody>
   </template>
