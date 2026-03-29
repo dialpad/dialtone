@@ -85,19 +85,21 @@ Use `d-t-{stop}`, `d-r-{stop}`, `d-b-{stop}`, `d-l-{stop}`, `d-x-{stop}`, `d-y-{
       <thead>
         <tr>
           <th scope="col">Value</th>
-          <th v-for="{ direction: dir } in coordinateDirections" scope="col">{{ dir }}</th>
+          <th v-for="{ direction: dir, directionPhysical: dirPhysical } in coordinateDirections" scope="col"  v-dt-tooltip="{ message: dirPhysical, delay: false }" class="d-c-default">
+            {{ dir }}
+          </th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="{coordinate, suffix, combo, value } in coordinates">
-          <th scope="row">{{ value }}</th>
+          <th scope="row"><dt-text kind="code" size="xs" strength="bold">{{ value }}</dt-text></th>
           <template v-for="{direction: dir, prefix: pre, percent} in coordinateDirections">
             <td v-if="percent === 'no' && combo === 'no'" class="d-fc-muted d-fs-100 d-ta-center">
               N/A
             </td>
             <td v-else class="d-code--sm d-docsite-code">
-              <span v-if="/^\d+$/.test(coordinate)">.d-{{ pre }}-{{ coordinate }}</span>
-              <span v-else>.d-{{ pre }}{{ coordinate }}</span>
+              <span v-if="/^\d+$/.test(coordinate)">d-{{ pre }}-{{ coordinate }}</span>
+              <span v-else>d-{{ pre }}{{ coordinate }}</span>
             </td>
           </template>
         </tr>
@@ -185,19 +187,23 @@ Use `d-t-{stop}`, `d-r-{stop}`, `d-b-{stop}`, `d-l-{stop}`, `d-x-{stop}`, `d-y-{
       <thead>
         <tr>
           <th scope="col">Value</th>
-          <th v-for="{ direction: dir } in coordinateDirections" scope="col">{{ dir }}</th>
+          <th v-for="{ direction: dir, directionPhysical: dirPhysical } in coordinateDirections" scope="col"  v-dt-tooltip="{ message: dirPhysical, delay: false }" class="d-c-default">
+            {{ dir }}
+          </th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="{coordinate, suffix, combo, negative, value } in coordinates">
-          <th v-if="negative === 'yes'" scope="row">{{ value }}</th>
+          <th v-if="negative === 'yes'" scope="row">
+            <dt-text kind="code" size="xs" strength="bold">{{ value }}</dt-text>
+          </th>
           <template v-if="negative === 'yes'" v-for="{direction: dir, prefix: pre, percent} in coordinateDirections">
             <td v-if="percent === 'no' && combo === 'no'" class="d-fc-muted d-fs-100 d-ta-center">
               N/A
             </td>
             <td v-else class="d-code--sm d-docsite-code">
-              <span v-if="/^\d+$/.test(coordinate)">.d-{{ pre }}-n{{ coordinate }}</span>
-              <span v-else>.d-{{ pre }}n{{ coordinate }}</span>
+              <span v-if="/^\d+$/.test(coordinate)">d-{{ pre }}-n{{ coordinate }}</span>
+              <span v-else>d-{{ pre }}n{{ coordinate }}</span>
             </td>
           </template>
         </tr>

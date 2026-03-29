@@ -1,6 +1,6 @@
 <template>
   <dt-stack gap="100" class="dialtone-doc-table-clamped d-ps-relative" role="region" aria-label="Searchable table">
-    <div v-if="shouldShowSearch" role="search">
+    <dt-stack v-if="shouldShowSearch" role="search" direction="row" align="center" gap="200">
       <dt-input
         v-model="inputSearchValue"
         aria-label="Search table"
@@ -29,7 +29,12 @@
           </dt-stack>
         </template>
       </dt-input>
-    </div>
+      <dt-toggle v-if="hasDeprecatedRows" v-model="hideDeprecated" wrapper-class="d-g-100" size="sm">
+        <dt-text kind="label" size="xs" strength="normal">
+          Hide deprecated
+        </dt-text>
+      </dt-toggle>
+    </dt-stack>
     <dt-empty-state
       v-if="showEmptyState"
       size="sm"
@@ -105,6 +110,8 @@ const inputSearchValue = ref('');
 const showEmptyState = ref(false);
 const searchResultsAnnouncement = ref('');
 const shouldShowSearch = ref(true);
+const hasDeprecatedRows = ref(false);
+const hideDeprecated = ref(true);
 
 // DOM reference for measuring content height
 const scrollRef = ref(null);
@@ -150,10 +157,37 @@ const updateExpandableState = () => {
 const checkSearchVisibility = () => {
   const table = scrollRef.value?.querySelector('table');
   if (table) {
-    // Gets all data rows from all tbody elements (handles multiple tbody correctly)
     const rows = table.querySelectorAll('tbody tr');
     shouldShowSearch.value = rows.length >= SEARCH_VISIBILITY_THRESHOLD;
   }
+};
+
+// Find all deprecated badge elements in the table
+const findDeprecatedBadges = () => {
+  const table = scrollRef.value?.querySelector('table');
+  if (!table) return [];
+  return [...table.querySelectorAll('[data-qa="dt-badge"]')].filter(
+    badge => badge.textContent.trim() === 'Deprecated',
+  );
+};
+
+// Detect if any rows contain a deprecated badge
+const checkForDeprecatedRows = () => {
+  hasDeprecatedRows.value = findDeprecatedBadges().length > 0;
+};
+
+// Get all rows that contain a deprecated badge
+const getDeprecatedRows = () => {
+  return findDeprecatedBadges().map(badge => badge.closest('tr')).filter(Boolean);
+};
+
+// Toggle visibility of deprecated rows
+const toggleDeprecatedRows = () => {
+  const rows = getDeprecatedRows();
+  rows.forEach(row => {
+    row.classList.toggle('d-d-none', hideDeprecated.value);
+  });
+  nextTick(() => updateExpandableState());
 };
 
 // Highlight matching text in table cells
@@ -371,6 +405,11 @@ watch(inputSearchValue, () => {
   handleSearch();
 });
 
+// Watch for deprecated toggle changes
+watch(hideDeprecated, () => {
+  toggleDeprecatedRows();
+});
+
 // Watch for search state changes and update expandable
 watch(showEmptyState, () => {
   if (!showEmptyState.value) {
@@ -380,7 +419,9 @@ watch(showEmptyState, () => {
 
 onMounted(() => {
   nextTick(() => {
-    checkSearchVisibility(); // Check on initial mount
+    checkSearchVisibility();
+    checkForDeprecatedRows();
+    toggleDeprecatedRows();
 
     // Initialize expandable functionality
     if (scrollRef.value) {

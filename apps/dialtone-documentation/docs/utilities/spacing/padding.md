@@ -66,26 +66,33 @@ Use `d-p-{stop}` to set padding using spacing token stops. The number references
 
 Padding can be added to an element by using `d-p-{stop}` or a directional class like `d-p{t|r|b|l|y|x}-{stop}`. Logical property aliases are also available: `d-pbs-{stop}` (padding-block-start), `d-pbe-{stop}` (padding-block-end), `d-pis-{stop}` (padding-inline-start), `d-pie-{stop}` (padding-inline-end).
 
+It is highly recommended to use the [DtStack component](/components/stack.md) prior to applying padding individually.
+
 <utility-class-table>
   <template #content>
     <!-- Positive paddings -->
-    <tbody v-for="i in directions">
+    <tbody v-for="{ name: dir, deprecated } in directions">
         <tr v-for="{ value: val, output } in values">
-            <th scope="row" class="d-code--sm d-docsite-code">
-              <span v-if="i !== 'All'">.d-p{{ i[0] }}-{{ val }}</span>
-              <span v-else>.d-p-{{ val }}</span>
+            <th scope="row">
+              <dt-stack gap="50">
+                <span class="d-code--sm d-docsite-code">
+                  <span v-if="dir !== 'All'">d-p{{ dir[0] }}-{{ val }}</span>
+                  <span v-else>d-p-{{ val }}</span>
+                </span>
+                <span>
+                  <dt-badge v-if="deprecated" type="critical" kind="label" text="Deprecated" />
+                </span>
+              </dt-stack>
             </th>
             <td class="d-code--sm">
-                <span v-if="i == 'y'">
-                  padding-block-start: {{ output }} !important;<br/>
-                  padding-block-end: {{ output }} !important;
+                <span v-if="dir == 'y'">
+                  padding-block: {{ output }} !important;
                 </span>
-                <span v-else-if="i == 'x'">
-                  padding-inline-end: {{ output }} !important;<br/>
-                  padding-inline-start: {{ output }} !important;
+                <span v-else-if="dir == 'x'">
+                  padding-inline: {{ output }} !important;
                 </span>
                 <span v-else>
-                  <span v-if="i !== 'All'">padding-{{ i === 'top' ? 'block-start' : i === 'bottom' ? 'block-end' : i === 'left' ? 'inline-start' : i === 'right' ? 'inline-end' : i }}: {{ output }} !important; </span>
+                  <span v-if="dir !== 'All'">padding-{{ dir === 'top' ? 'block-start' : dir === 'bottom' ? 'block-end' : dir === 'left' ? 'inline-start' : dir === 'right' ? 'inline-end' : dir }}: {{ output }} !important; </span>
                   <span v-else>padding: {{ output }} !important</span>
                 </span>
             </td>
@@ -93,20 +100,27 @@ Padding can be added to an element by using `d-p-{stop}` or a directional class 
     </tbody>
     <!-- Unset paddings -->
     <tbody>
-      <tr v-for="i in directions">
-        <th scope="row" class="d-code--sm d-docsite-code">
-          <span v-if="i !== 'All'">.d-p{{ i[0] }}-unset</span>
-          <span v-else>.d-p-unset</span>
+      <tr v-for="{ name: dir, deprecated } in directions">
+        <th scope="row">
+          <dt-stack gap="50">
+            <span class="d-code--sm d-docsite-code">
+              <span v-if="dir !== 'All'">d-p{{ dir[0] }}-unset</span>
+              <span v-else>d-p-unset</span>
+            </span>
+            <span>
+              <dt-badge v-if="deprecated" type="critical" kind="label" text="Deprecated" />
+            </span>
+          </dt-stack>
         </th>
         <td class="d-code--sm">
-          <span v-if="i == 'y'">
+          <span v-if="dir == 'y'">
             padding-block: unset !important;
           </span>
-          <span v-else-if="i == 'x'">
+          <span v-else-if="dir == 'x'">
             padding-inline: unset !important;
           </span>
           <span v-else>
-            <span v-if="i !== 'All'">padding-{{ i === 'top' ? 'block-start' : i === 'bottom' ? 'block-end' : i === 'left' ? 'inline-start' : i === 'right' ? 'inline-end' : i }}: unset !important; </span>
+            <span v-if="dir !== 'All'">padding-{{ dir === 'top' ? 'block-start' : dir === 'bottom' ? 'block-end' : dir === 'left' ? 'inline-start' : dir === 'right' ? 'inline-end' : dir }}: unset !important; </span>
             <span v-else>padding: unset !important</span>
           </span>
         </td>

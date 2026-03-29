@@ -96,49 +96,61 @@ Auto margins allow an element to fill a remaining space within an object. This i
 
 Margins can be added using `d-m-{stop}` or directional classes like `d-m{t|r|b|l|y|x}-{stop}`. Logical property aliases are also available: `d-mbs-{stop}` (margin-block-start), `d-mbe-{stop}` (margin-block-end), `d-mis-{stop}` (margin-inline-start), `d-mie-{stop}` (margin-inline-end).
 
-It is highly recommended to use the [stack component](/components/stack.md) or the [auto spacing classes](/utilities/spacing/auto-spacing.md) prior to applying margins individually.
+It is highly recommended to use the [DtStack component](/components/stack.md) prior to applying margins individually.
 
 <utility-class-table>
   <template #content>
     <!-- Positive margins -->
-    <tbody v-for="i in directions">
+    <tbody v-for="{ name: dir, deprecated } in directions">
       <tr v-for="{ value: val, output } in values">
-        <th scope="row" class="d-code--sm d-docsite-code">
-          <span v-if="i !== 'All'">.d-m{{ i[0] }}-{{ val }}</span>
-          <span v-else>.d-m-{{ val }}</span>
+        <th scope="row">
+          <dt-stack gap="50">
+            <span class="d-code--sm d-docsite-code">
+              <span v-if="dir !== 'All'">d-m{{ dir[0] }}-{{ val }}</span>
+              <span v-else>d-m-{{ val }}</span>
+            </span>
+            <span>
+              <dt-badge v-if="deprecated" type="critical" kind="label" text="Deprecated" />
+            </span>
+          </dt-stack>
         </th>
         <td class="d-code--sm">
-          <span v-if="i == 'y'">
-            margin-block-start: {{ output }} !important;<br/>
-            margin-block-end: {{ output }} !important;
+          <span v-if="dir == 'y'">
+            margin-block: {{ output }} !important;
           </span>
-          <span v-else-if="i == 'x'">
-            margin-inline-end: {{ output }} !important;<br/>
-            margin-inline-start: {{ output }} !important;
+          <span v-else-if="dir == 'x'">
+            margin-inline: {{ output }} !important;
           </span>
           <span v-else>
-            <span v-if="i !== 'All'">margin-{{ i === 'top' ? 'block-start' : i === 'bottom' ? 'block-end' : i === 'left' ? 'inline-start' : i === 'right' ? 'inline-end' : i }}: {{ output }} !important; </span>
+            <span v-if="dir !== 'All'">margin-{{ dir === 'top' ? 'block-start' : dir === 'bottom' ? 'block-end' : dir === 'left' ? 'inline-start' : dir === 'right' ? 'inline-end' : dir }}: {{ output }} !important; </span>
             <span v-else>margin: {{ output }} !important</span>
           </span>
         </td>
       </tr>
     </tbody>
     <!-- Negative margins -->
-    <tbody v-for="i in directions">
+    <tbody v-for="{ name: dir, deprecated } in directions">
       <tr v-for="{ value: val, output } in values.slice(1)">
-        <th scope="row" class="d-code--sm d-docsite-code">
-          <span v-if="i !== 'All'">.d-m{{ i[0] }}-n{{ val }}</span>
-          <span v-else>.d-m-n{{ val }}</span>
+        <th scope="row">
+          <dt-stack gap="50">
+            <span class="d-code--sm d-docsite-code">
+              <span v-if="dir !== 'All'">d-m{{ dir[0] }}-n{{ val }}</span>
+              <span v-else>d-m-n{{ val }}</span>
+            </span>
+            <span>
+              <dt-badge v-if="deprecated" type="critical" kind="label" text="Deprecated" />
+            </span>
+          </dt-stack>
         </th>
         <td class="d-code--sm">
-          <span v-if="i == 'y'">
+          <span v-if="dir == 'y'">
             margin-block: -{{ output }} !important;
           </span>
-          <span v-else-if="i == 'x'">
+          <span v-else-if="dir == 'x'">
             margin-inline: -{{ output }} !important;
           </span>
           <span v-else>
-            <span v-if="i !== 'All'">margin-{{ i === 'top' ? 'block-start' : i === 'bottom' ? 'block-end' : i === 'left' ? 'inline-start' : i === 'right' ? 'inline-end' : i }}: -{{ output }} !important; </span>
+            <span v-if="dir !== 'All'">margin-{{ dir === 'top' ? 'block-start' : dir === 'bottom' ? 'block-end' : dir === 'left' ? 'inline-start' : dir === 'right' ? 'inline-end' : dir }}: -{{ output }} !important; </span>
             <span v-else>margin: -{{ output }} !important</span>
           </span>
         </td>
@@ -146,20 +158,21 @@ It is highly recommended to use the [stack component](/components/stack.md) or t
     </tbody>
     <!-- Auto margins -->
     <tbody>
-      <tr v-for="i in directions">
+      <tr v-for="{ name: dir, deprecated } in directions">
         <th scope="row" class="d-code--sm d-docsite-code">
-          <span v-if="i !== 'All'">.d-m{{ i[0] }}-auto</span>
-          <span v-else>.d-m-auto</span>
+          <span v-if="dir !== 'All'">d-m{{ dir[0] }}-auto</span>
+          <span v-else>d-m-auto</span>
+          <dt-badge v-if="deprecated" type="critical" kind="label" text="Deprecated" />
         </th>
         <td class="d-code--sm">
-          <span v-if="i == 'y'">
+          <span v-if="dir == 'y'">
             margin-block: auto !important;
           </span>
-          <span v-else-if="i == 'x'">
+          <span v-else-if="dir == 'x'">
             margin-inline: auto !important;
           </span>
           <span v-else>
-            <span v-if="i !== 'All'">margin-{{ i === 'top' ? 'block-start' : i === 'bottom' ? 'block-end' : i === 'left' ? 'inline-start' : i === 'right' ? 'inline-end' : i }}: auto !important; </span>
+            <span v-if="dir !== 'All'">margin-{{ dir === 'top' ? 'block-start' : dir === 'bottom' ? 'block-end' : dir === 'left' ? 'inline-start' : dir === 'right' ? 'inline-end' : dir }}: auto !important; </span>
             <span v-else>margin: auto !important</span>
           </span>
         </td>
@@ -167,20 +180,21 @@ It is highly recommended to use the [stack component](/components/stack.md) or t
     </tbody>
     <!-- Unset margins -->
     <tbody>
-      <tr v-for="i in directions">
+      <tr v-for="{ name: dir, deprecated } in directions">
         <th scope="row" class="d-code--sm d-docsite-code">
-          <span v-if="i !== 'All'">.d-m{{ i[0] }}-unset</span>
-          <span v-else>.d-m-unset</span>
+          <span v-if="dir !== 'All'">d-m{{ dir[0] }}-unset</span>
+          <span v-else>d-m-unset</span>
+          <dt-badge v-if="deprecated" type="critical" kind="label" text="Deprecated" />
         </th>
         <td class="d-code--sm">
-          <span v-if="i == 'y'">
+          <span v-if="dir == 'y'">
             margin-block: unset !important;
           </span>
-          <span v-else-if="i == 'x'">
+          <span v-else-if="dir == 'x'">
             margin-inline: unset !important;
           </span>
           <span v-else>
-            <span v-if="i !== 'All'">margin-{{ i === 'top' ? 'block-start' : i === 'bottom' ? 'block-end' : i === 'left' ? 'inline-start' : i === 'right' ? 'inline-end' : i }}: unset !important; </span>
+            <span v-if="dir !== 'All'">margin-{{ dir === 'top' ? 'block-start' : dir === 'bottom' ? 'block-end' : dir === 'left' ? 'inline-start' : dir === 'right' ? 'inline-end' : dir }}: unset !important; </span>
             <span v-else>margin: unset !important</span>
           </span>
         </td>

@@ -1,5 +1,13 @@
 {
-  "directions": ["All", "top", "right", "bottom", "left", "x", "y"],
+  "directions": [
+    { "name": "All" },
+    { "name": "top", "deprecated": true },
+    { "name": "right", "deprecated": true },
+    { "name": "bottom", "deprecated": true },
+    { "name": "left", "deprecated": true },
+    { "name": "x" },
+    { "name": "y" }
+  ],
   "values": [
     {
       "value": "0",
@@ -96,37 +104,44 @@
   ],
   "coordinateDirections": [
     {
-      "direction": "Top",
-      "prefix": "t",
+      "direction": "inset-block-start",
+      "directionPhysical": "Top",
+      "prefix": "ibs",
       "percent": "yes"
     },
     {
-      "direction": "Right",
-      "prefix": "r",
+      "direction": "inset-inline-end",
+      "directionPhysical": "Right",
+      "prefix": "iie",
       "percent": "yes"
     },
     {
-      "direction": "Bottom",
-      "prefix": "b",
+      "direction": "inset-block-end",
+      "directionPhysical": "Bottom",
+      "prefix": "ibe",
       "percent": "yes"
     },
     {
-      "direction": "Left",
-      "prefix": "l",
+      "direction": "inset-inline-start",
+      "directionPhysical": "Left",
+      "prefix": "iis",
       "percent": "yes"
     },
     {
-      "direction": "L/R",
+      "direction": "inset-inline",
+      "directionPhysical": "Left/Right",
       "prefix": "x",
       "percent": "no"
     },
     {
-      "direction": "T/B",
+      "direction": "inset-block",
+      "directionPhysical": "Top/Bottom",
       "prefix": "y",
       "percent": "no"
     },
     {
-      "direction": "All",
+      "direction": "inset",
+      "directionPhysical": "All",
       "prefix": "all",
       "percent": "no"
     }
