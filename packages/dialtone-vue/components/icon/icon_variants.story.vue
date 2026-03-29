@@ -11,18 +11,23 @@
       <dt-stack
         direction="row"
         class="d-fw-wrap"
-        gap="500"
       >
-        <dt-stack
+        <dt-button
           v-for="icon in Object.keys(icons).slice(0, $attrs.limit)"
           :key="`${category}-${icon}`"
-          :title="icon"
+          v-dt-tooltip="{ message: copiedIcon === icon ? '✅ Copied!' : icon, delay: false }"
+          importance="clear"
+          kind="muted"
+          size="lg"
+          @click="copyIconName(icon)"
         >
-          <dt-icon
-            :name="icon"
-            size="300"
-          />
-        </dt-stack>
+          <template #startIcon="{ iconSize }">
+            <dt-icon
+              :name="icon"
+              :size="iconSize"
+            />
+          </template>
+        </dt-button>
       </dt-stack>
     </template>
   </div>
@@ -31,15 +36,25 @@
 <script>
 import { DtIcon } from './';
 import { categories } from '@dialpad/dialtone-icons/keywords-icons.json';
+import { DtButton } from '../button';
 import { DtStack } from '../stack';
 
 export default {
   name: 'IconDefault',
-  components: { DtIcon, DtStack },
+  components: { DtButton, DtIcon, DtStack },
   data () {
     return {
       categories,
+      copiedIcon: null,
     };
+  },
+
+  methods: {
+    copyIconName (icon) {
+      navigator.clipboard.writeText(icon);
+      this.copiedIcon = icon;
+      setTimeout(() => { this.copiedIcon = null; }, 1200);
+    },
   },
 };
 </script>

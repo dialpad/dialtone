@@ -15,13 +15,14 @@ export default {
     },
   },
 
-  'with footer': {
+  'with footer, max height scrollable content': {
     props: {
-      maxHeight: { initialValue: '50px' },
+      maxHeight: { initialValue: '104px' },
+      footerClass: { initialValue: 'd-pbs-200' },
     },
     slots: {
       header: { initialValue: '<dt-text as="p" kind="headline" size="md">Lorem ipsum</dt-text>' },
-      content: { initialValue: 'Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.' },
+      content: { initialValue: 'Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.' },
       footer: { initialValue: '<dt-button importance="outlined" size="sm">Button</dt-button>' },
     },
   },
