@@ -16,15 +16,19 @@
       v-else
       #start
     >
-      <span class="d-fw-bold"> Active Call </span>
+      <dt-text strength="bold">
+        Active Call
+      </dt-text>
     </template>
     <template v-if="defaultSlot">
       <span v-html="defaultSlot" />
     </template>
-    <span v-else>
-      <span class="d-fw-medium">Caller ID: </span>
+    <dt-text v-else>
+      <dt-text strength="medium">
+        Caller ID:
+      </dt-text>
       Aerolabs Support (415) 583-3482
-    </span>
+    </dt-text>
     <template
       v-if="$attrs.end"
       #end
@@ -35,16 +39,19 @@
       v-else
       #end
     >
-      <span class="d-fw-bold"> Recording ON </span>
+      <dt-text strength="bold">
+        Recording ON
+      </dt-text>
     </template>
   </dt-recipe-top-banner-info>
 </template>
 
 <script>
 import DtRecipeTopBannerInfo from './top_banner_info.vue';
+import { DtText } from '@/components/text';
 
 export default {
   name: 'DtRecipeTopBannerInfoDefault',
-  components: { DtRecipeTopBannerInfo },
+  components: { DtRecipeTopBannerInfo, DtText },
 };
 </script>
