@@ -5,7 +5,7 @@
   //  ----------------------------------------------------------------------------
   --leftbar-row-color-foreground: var(--dt-shell-color-foreground-primary);
   --leftbar-row-color-background: var(--dt-shell-color-surface-default);
-  --leftbar-row-radius: var(--dt-size-radius-pill);
+  --leftbar-row-radius: var(--dt-size-radius-400); // TODO: not a final solution
   --leftbar-row-opacity: 100%;
   --leftbar-row-alpha-color-foreground: var(--dt-shell-color-foreground-primary);
   --leftbar-row-alpha-width: calc(var(--dt-layout-50) + var(--dt-spacing-100));
@@ -310,7 +310,7 @@
 
   &__active-voice {
     display: inline-flex;
-    color: var(--dt-color-purple-600);
+    color: var(--dt-color-link-primary);
     .d-recipe-leftbar-row-opacity-pulsate();
   }
 
