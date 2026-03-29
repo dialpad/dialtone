@@ -19,7 +19,7 @@ export const argsData = {
   headerClass: 'd-bgc-purple-200',
   footer: '<div class="d-h-100">Footer</div>',
   footerClass: 'd-bgc-gold-200',
-  sidebar: `<div class="d-w264">${sidebarItems}</div>`,
+  sidebar: `<div class="d-w-400">${sidebarItems}</div>`,
   sidebarClass: 'd-bgc-black-200',
   default: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam dignissim eleifend condimentum.
   Vestibulum euismod leo at finibus mattis. Integer ut dui id ligula tincidunt pellentesque. Vestibulum a ullamcorper

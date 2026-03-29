@@ -10,7 +10,7 @@
   <dt-dropdown
     navigation-type="arrow-keys"
     placement="bottom-start"
-    content-class="d-w164 d-hmx216"
+    content-class="d-w-250 d-hmx-350"
   >
     <template #anchor="{ attrs }">
       <dt-button

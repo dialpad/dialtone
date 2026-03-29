@@ -27,7 +27,7 @@
         v-else
         navigation-type="arrow-keys"
         placement="bottom-start"
-        content-class="d-wmn332"
+        content-class="d-wmn-500"
       >
         <template #anchor="{ attrs }">
           <dt-button

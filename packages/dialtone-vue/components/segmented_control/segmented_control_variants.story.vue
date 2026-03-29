@@ -317,7 +317,7 @@
         </dt-segmented-control>
         <dt-segmented-control
           v-model="selectedVertical"
-          class="d-w164"
+          class="d-w-250"
           orientation="vertical"
           aria-label="Vertical example"
           size="xs"

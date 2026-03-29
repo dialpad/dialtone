@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+
 export default {
   default: {
     props: {
@@ -53,7 +54,7 @@ export default {
       dynamic: { initialValue: true },
     },
     slots: {
-      default: { initialValue: '<dt-stack gap="400" direction="row" align="start" class="d-p-50"><dt-avatar size="md" :full-name="item.id" /><dt-stack><dt-text kind="headline" size="sm" tone="secondary">{{ item.id }}</dt-text><dt-text kind="body" size="sm" tone="primary">{{ item.message }}</dt-text></dt-stack></dt-stack>' },
+      default: { initialValue: '<dt-stack gap="100" direction="row" align="start" class="d-p-50"><dt-avatar size="md" :full-name="item.id" /><dt-stack><dt-text kind="headline" size="sm" tone="secondary">{{ item.id }}</dt-text><dt-text kind="body" size="sm" tone="primary">{{ item.message }}</dt-text></dt-stack></dt-stack>' },
     },
   },
 };

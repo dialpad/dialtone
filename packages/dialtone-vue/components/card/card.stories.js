@@ -77,7 +77,7 @@ export const Default = {
     docs: {
       source: {
         code: `
-  <dt-card class="d-w264">
+  <dt-card class="d-w-400">
     <template #content>
       <p class="d-fs-200 d-fw-bold">Lorem ipsum</p>
       <p class="d-fs-100">Lorem ipsum dolor sit amet, consectetur adipiscing elit.

@@ -26,7 +26,7 @@ export default {
       closeAriaLabel: {
         initialValue: 'Close',
       },
-      imageButtonClass: { initialValue: 'd-wmn-100 d-hmn-100 d-wmx332 d-hmx332' },
+      imageButtonClass: { initialValue: 'd-wmn-100 d-hmn-100 d-wmx-500 d-hmx-500' },
       ariaLabel: {
         initialValue: 'Click to open image',
       },

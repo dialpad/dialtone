@@ -115,7 +115,7 @@
               :image-src="fryImage"
               image-alt="Alt Text"
               close-aria-label="Close"
-              image-button-class="d-recipe-feed-item-row__image d-wmn-100 d-hmn-100 w-wmx332 d-hmx332"
+              image-button-class="d-recipe-feed-item-row__image d-wmn-100 d-hmn-100 d-wmx-500 d-hmx-500"
               aria-label="Click to open image"
             />
           </template>
@@ -216,7 +216,7 @@
         </dt-recipe-feed-item-row>
       </ul>
     </div>
-    <div class="d-h332">
+    <div class="d-h-500">
       <h3>Feed item pill within</h3>
       <ul class="d-py-100">
         <dt-recipe-feed-item-row
@@ -233,7 +233,7 @@
               default-toggled
               title="Ben called you"
               icon-name="phone-outgoing"
-              wrapper-class="d-w628"
+              wrapper-class="d-w-950"
               border-color="ai"
             >
               <template #subtitle>

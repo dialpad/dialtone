@@ -55,7 +55,7 @@ export const argTypesData = {
 };
 
 const decorator = () => ({
-  template: `<div style="background-color: var(--dt-theme-sidebar-color-background)" class="d-w264 d-p-100"><story />
+  template: `<div style="background-color: var(--dt-theme-sidebar-color-background)" class="d-w-400 d-p-100"><story />
   </div>`,
 });
 
