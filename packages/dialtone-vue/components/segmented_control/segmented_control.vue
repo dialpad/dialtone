@@ -2,6 +2,7 @@
   <dt-stack
     :id="id"
     ref="container"
+    align="stretch"
     :class="containerClasses"
     :direction="stackDirection"
     role="radiogroup"
