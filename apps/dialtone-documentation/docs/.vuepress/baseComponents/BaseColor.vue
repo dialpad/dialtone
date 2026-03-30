@@ -4,7 +4,7 @@
       <dt-text
         as="h4"
         kind="headline"
-        size="lg"
+        :size="400"
         class="d-tt-capitalize"
         text-box-trim="start"
         tabindex="-1"

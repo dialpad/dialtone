@@ -61,7 +61,7 @@
             v-else
             :id="labelledById"
             kind="headline"
-            size="2xl"
+            :size="600"
             strength="medium"
             density="100"
             text-box-trim="start"
@@ -107,7 +107,7 @@
             v-else
             class="d-modal__close"
             data-qa="dt-modal-close-button"
-            size="md"
+            :size="300"
             kind="muted"
             importance="clear"
             :aria-label="closeButtonTitle"

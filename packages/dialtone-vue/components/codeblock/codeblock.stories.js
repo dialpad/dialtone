@@ -42,7 +42,7 @@ export const Default = {
   args: {
     text: 'function someFunction() {\n  return "some result";\n}',
     bordered: false,
-    size: 'sm',
+    size: 200,
   },
 };
 

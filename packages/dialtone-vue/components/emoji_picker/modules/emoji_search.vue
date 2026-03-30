@@ -21,7 +21,7 @@
       >
         <dt-button
           importance="clear"
-          size="xs"
+          :size="100"
           class="d-emoji-picker__search-x-button"
           circle
           kind="muted"

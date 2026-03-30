@@ -36,7 +36,7 @@
               { 'd-recipe-combobox-multi-select__chip--truncate': !!chipMaxWidth },
             ]"
             :style="{ maxWidth: chipMaxWidth }"
-            :size="CHIP_SIZES[size]"
+            :size="CHIP_SIZES[String(size)]"
             :disabled="disabled"
             v-on="chipListeners"
             @keydown.backspace="onChipRemove(item)"
@@ -128,10 +128,10 @@ import {
   POPOVER_APPEND_TO_VALUES,
 } from '@/components/popover/popover_constants';
 import {
-  MULTI_SELECT_SIZES,
   CHIP_SIZES,
   CHIP_TOP_POSITION,
 } from './combobox_multi_select_constants';
+import { COMPONENT_SIZES } from '@/common/constants';
 
 export default {
   compatConfig: { MODE: 3 },
@@ -278,12 +278,12 @@ export default {
 
     /**
      * Size of the chip.
-     * @values xs, sm, md
+     * @values 100, 200, 300
      */
     size: {
-      type: String,
-      default: 'md',
-      validator: (t) => Object.values(MULTI_SELECT_SIZES).includes(t),
+      type: [String, Number],
+      default: 300,
+      validator: (t) => Object.keys(CHIP_SIZES).includes(String(t)),
     },
 
     /**
@@ -490,7 +490,7 @@ export default {
 
     chipWrapperClass () {
       return {
-        [`d-recipe-combobox-multi-select__chip-wrapper-${this.size}--collapsed`]: !this.inputFocused && this.collapseOnFocusOut,
+        [`d-recipe-combobox-multi-select__chip-wrapper-${COMPONENT_SIZES[String(this.size)] || this.size}--collapsed`]: !this.inputFocused && this.collapseOnFocusOut,
       };
     },
   },
@@ -691,7 +691,7 @@ export default {
       const top = input.getBoundingClientRect().top -
                   inputSlotWrapper.getBoundingClientRect().top;
       const chipsWrapper = this.$refs.chipsWrapper;
-      chipsWrapper.style.top = (top - CHIP_TOP_POSITION[this.size]) + 'px';
+      chipsWrapper.style.top = (top - CHIP_TOP_POSITION[String(this.size)]) + 'px';
     },
 
     setInputPadding () {

@@ -8,21 +8,21 @@
       <h4>xs</h4>
       <dt-codeblock
         :text="text"
-        size="xs"
+        :size="100"
       />
     </div>
     <div>
       <h4>md</h4>
       <dt-codeblock
         :text="text"
-        size="md"
+        :size="300"
       />
     </div>
     <div>
       <h4>lg</h4>
       <dt-codeblock
         :text="text"
-        size="lg"
+        :size="400"
       />
     </div>
     <div>

@@ -100,22 +100,22 @@ describe('DtMotionText Tests', () => {
     });
 
     describe('Speed variants', () => {
-      it('should apply timing for sm speed', async () => {
-        await wrapper.setProps({ speed: 'sm' });
+      it('should apply timing for 200 speed', async () => {
+        await wrapper.setProps({ speed: 200 });
         expect(wrapper.vm.timing.characterDelay).toBe(20);
         expect(wrapper.vm.timing.wordDelay).toBe(30);
         expect(wrapper.vm.timing.duration).toBe(600);
       });
 
-      it('should apply timing for md speed', async () => {
-        await wrapper.setProps({ speed: 'md' });
+      it('should apply timing for 300 speed', async () => {
+        await wrapper.setProps({ speed: 300 });
         expect(wrapper.vm.timing.characterDelay).toBe(30);
         expect(wrapper.vm.timing.wordDelay).toBe(50);
         expect(wrapper.vm.timing.duration).toBe(1000);
       });
 
-      it('should apply timing for lg speed', async () => {
-        await wrapper.setProps({ speed: 'lg' });
+      it('should apply timing for 400 speed', async () => {
+        await wrapper.setProps({ speed: 400 });
         expect(wrapper.vm.timing.characterDelay).toBe(50);
         expect(wrapper.vm.timing.wordDelay).toBe(100);
         expect(wrapper.vm.timing.duration).toBe(1500);

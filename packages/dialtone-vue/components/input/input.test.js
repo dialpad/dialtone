@@ -468,6 +468,18 @@ describe('DtInput tests', () => {
         });
       });
 
+      describe('When size is numeric', () => {
+        it('should add input size class for numeric size 200', () => {
+          mockProps = { size: 200 };
+
+          updateWrapper();
+
+          nativeInput = wrapper.find('input');
+
+          expect(nativeInput.classes().includes('d-input--sm')).toBe(true);
+        });
+      });
+
       describe('When size is EXTRA_LARGE', () => {
         const MOCK_INPUT_SIZE_EXTRA_LARGE = INPUT_SIZES.EXTRA_LARGE;
 

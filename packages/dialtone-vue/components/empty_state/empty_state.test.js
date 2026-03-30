@@ -83,6 +83,16 @@ describe('DtIllustration Tests', () => {
     });
   });
 
+  describe('Numeric size', () => {
+    it('Should render correct size class with numeric value', () => {
+      mockProps = { size: 200 };
+
+      updateWrapper();
+
+      expect(wrapper.classes()).toContain('d-empty-state--size-sm');
+    });
+  });
+
   describe('Interactivity Tests', () => {
     describe('On size change', () => {
       it('Should update size classes in wrapper', () => {

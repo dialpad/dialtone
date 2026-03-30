@@ -26,7 +26,7 @@
         v-else-if="item.trim()"
         :key="`text-${i}-${item}`"
         kind="body"
-        size="sm"
+        :size="200"
         numeric
         :density="400"
         :tone="inverted ? 'secondary-inverted' : 'tertiary'"

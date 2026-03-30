@@ -11,7 +11,7 @@
         class="d-fc-tertiary d-h24 d-w24"
         importance="clear"
         kind="muted"
-        size="sm"
+        :size="200"
         circle
         aria-label="Section Options"
         v-bind="attrs"

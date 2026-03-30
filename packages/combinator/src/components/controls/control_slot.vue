@@ -5,13 +5,13 @@
     type="textarea"
     input-class="d-pr32"
     spellcheck="false"
-    size="xs"
+    :size="100"
     @input="updateValue"
   >
     <template #labelSlot>
       <dt-text
         kind="label"
-        size="xs"
+        :size="100"
         tone="secondary"
         class="d-input__label-text"
       >
@@ -23,7 +23,7 @@
         v-if="isModified"
         kind="muted"
         importance="clear"
-        size="xs"
+        :size="100"
         class="d-p2 d-mrn16"
         @click.stop="onReset"
       >

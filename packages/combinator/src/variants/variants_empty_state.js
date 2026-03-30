@@ -20,7 +20,7 @@ export default {
     props: {
       headerText: { initialValue: 'Nothing to see here' },
       bodyText: { initialValue: 'Looks like there is no data to display here.' },
-      size: { initialValue: 'lg' },
+      size: { initialValue: '400' },
     },
   },
 };

@@ -35,7 +35,7 @@ Used in most scenarios when the message should be noticeable but not dominate.
   </span>
   <template #action>
     <dt-button
-      size="sm"
+      :size="200"
       importance="outlined"
       kind="muted"
       @click="onClick"
@@ -58,7 +58,7 @@ Used in most scenarios when the message should be noticeable but not dominate.
   </span>
   <template #action>
     <dt-button
-      size="sm"
+      :size="200"
       importance="outlined"
       kind="muted"
       @click="onClick"
@@ -81,7 +81,7 @@ Used in most scenarios when the message should be noticeable but not dominate.
   </span>
   <template #action>
     <dt-button
-      size="sm"
+      :size="200"
       importance="outlined"
       kind="muted"
       @click="onClick"
@@ -104,7 +104,7 @@ Used in most scenarios when the message should be noticeable but not dominate.
   </span>
   <template #action>
     <dt-button
-      size="sm"
+      :size="200"
       importance="outlined"
       kind="muted"
       @click="onClick"
@@ -127,7 +127,7 @@ Used in most scenarios when the message should be noticeable but not dominate.
   </span>
   <template #action>
     <dt-button
-      size="sm"
+      :size="200"
       importance="outlined"
       kind="muted"
       @click="onClick"
@@ -165,7 +165,7 @@ Used occasionally in scenarios when the message needs to dominate.
   </span>
   <template #action>
     <dt-button
-      size="sm"
+      :size="200"
       importance="outlined"
       kind="inverted"
       @click="onClick"
@@ -189,7 +189,7 @@ Used occasionally in scenarios when the message needs to dominate.
   </span>
   <template #action>
     <dt-button
-      size="sm"
+      :size="200"
       importance="outlined"
       kind="inverted"
       @click="onClick"
@@ -213,7 +213,7 @@ Used occasionally in scenarios when the message needs to dominate.
   </span>
   <template #action>
     <dt-button
-      size="sm"
+      :size="200"
       importance="outlined"
       kind="inverted"
       @click="onClick"
@@ -237,7 +237,7 @@ Used occasionally in scenarios when the message needs to dominate.
   </span>
   <template #action>
     <dt-button
-      size="sm"
+      :size="200"
       importance="outlined"
       kind="inverted"
       @click="onClick"
@@ -261,7 +261,7 @@ Used occasionally in scenarios when the message needs to dominate.
   </span>
   <template #action>
     <dt-button
-      size="sm"
+      :size="200"
       importance="outlined"
       kind="inverted"
       @click="onClick"

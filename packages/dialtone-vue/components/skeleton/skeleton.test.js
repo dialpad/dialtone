@@ -104,6 +104,18 @@ describe('DtSkeleton Tests', () => {
 
         expect(skeletonShape.exists()).toBe(true);
       });
+
+      it('should render correct dimensions with numeric size', () => {
+        mockProps = {
+          shapeOption: { size: 200, shape: 'circle' },
+        };
+
+        updateWrapper();
+
+        skeletonShape = wrapper.find('[data-qa="skeleton-shape"]');
+
+        expect(skeletonShape.attributes('style')).toContain('min-width: 24px');
+      });
     });
   });
 

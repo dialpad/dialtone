@@ -40,7 +40,7 @@
                   :key="person"
                   :full-name="person"
                   seed="seed"
-                  size="sm"
+                  :size="200"
                 />
               </dt-stack>
               <dt-stack
@@ -79,7 +79,7 @@
                 :key="button"
                 kind="muted"
                 importance="clear"
-                size="xs"
+                :size="100"
                 aria-label="button"
               >
                 <template #icon>

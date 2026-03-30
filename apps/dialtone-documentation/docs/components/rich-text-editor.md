@@ -14,7 +14,7 @@ keywords: ["rte", "wysiwyg", "markdown", "d-rte", "DtRichTextEditor", "dt-rich-t
   <span>Not a standalone component, please use Message Input instead</span>
   <template #action>
     <dt-button
-      size="sm"
+      :size="200"
       importance="outlined"
       kind="muted"
       @click="onClick"

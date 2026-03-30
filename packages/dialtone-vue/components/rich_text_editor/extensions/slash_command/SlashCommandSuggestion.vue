@@ -2,7 +2,7 @@
   <div>
     <dt-text
       kind="body"
-      size="md"
+      :size="300"
       :density="300"
       as="div"
     >
@@ -10,7 +10,7 @@
     </dt-text>
     <dt-text
       kind="body"
-      size="sm"
+      :size="200"
       tone="tertiary"
       as="div"
     >

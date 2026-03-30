@@ -49,7 +49,7 @@
         class="dtc-theme__button"
         kind="muted"
         importance="clear"
-        size="xs"
+        :size="100"
         @click="copyJson"
       >
         <template #default>
@@ -67,7 +67,7 @@
         class="dtc-theme__button"
         kind="muted"
         importance="clear"
-        size="xs"
+        :size="100"
         @click="copy"
       >
         <template #default>

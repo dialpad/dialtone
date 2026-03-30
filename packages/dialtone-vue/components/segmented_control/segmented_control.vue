@@ -77,12 +77,12 @@ const props = defineProps({
 
   /**
    * DtButton size for all items. Inherited by children via provide.
-   * @values xs, sm, md, lg, xl
+   * @values 100, 200, 300, 400, 500
    */
   size: {
-    type: String,
+    type: [String, Number],
     default: SEGMENTED_CONTROL_SIZE_DEFAULT,
-    validator: (v) => SEGMENTED_CONTROL_SIZES.includes(v),
+    validator: (v) => SEGMENTED_CONTROL_SIZES.includes(String(v)),
   },
 
   /**
@@ -172,7 +172,7 @@ const stackDirection = computed(() => props.orientation === 'vertical' ? 'column
 
 const containerClasses = computed(() => [
   'd-segmented-control',
-  SEGMENTED_CONTROL_SIZE_MODIFIERS[props.size],
+  SEGMENTED_CONTROL_SIZE_MODIFIERS[String(props.size)],
   props.hideDivider ? 'd-segmented-control--hide-divider' : null,
   props.borderless ? 'd-segmented-control--borderless' : null,
   props.orientation === 'vertical' ? 'd-segmented-control--vertical' : null,

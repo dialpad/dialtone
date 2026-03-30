@@ -4,7 +4,7 @@
     :active="active"
     importance="clear"
     kind="muted"
-    size="xs"
+    :size="100"
     label-class="d-jc-flex-start d-fw-normal d-tw-pretty"
     class="d-w100p"
   >

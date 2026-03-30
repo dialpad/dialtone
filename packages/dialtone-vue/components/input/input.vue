@@ -247,13 +247,13 @@ export default {
     },
 
     /**
-     * Size of the input, one of `xs`, `sm`, `md`, `lg`, `xl`
-     * @values xs, sm, md, lg, xl
+     * Size of the input.
+     * @values 100, 200, 300, 400, 500
      */
     size: {
-      type: String,
-      default: 'md',
-      validator: (t) => Object.values(INPUT_SIZES).includes(t),
+      type: [String, Number],
+      default: 300,
+      validator: (t) => Object.keys(INPUT_ICON_SIZES).includes(String(t)),
     },
 
     /**
@@ -327,12 +327,12 @@ export default {
     /**
      * Overrides the label text size. When not provided, the label size
      * is derived from the component size prop.
-     * @values lg, md, sm, xs
+     * @values 100, 200, 300, 400
      */
     labelSize: {
-      type: String,
+      type: [String, Number],
       default: null,
-      validator: (s) => TEXT_SIZE_MODIFIERS.label.includes(s),
+      validator: (s) => TEXT_SIZE_MODIFIERS.label.includes(String(s)),
     },
 
     /**
@@ -443,15 +443,15 @@ export default {
     },
 
     isDefaultSize () {
-      return this.size === INPUT_SIZES.DEFAULT;
+      return String(this.size) === INPUT_SIZES.DEFAULT || String(this.size) === '300';
     },
 
     iconSize () {
-      return INPUT_ICON_SIZES[this.size];
+      return INPUT_ICON_SIZES[String(this.size)];
     },
 
     isValidSize () {
-      return Object.values(INPUT_SIZES).includes(this.size);
+      return Object.keys(INPUT_ICON_SIZES).includes(String(this.size));
     },
 
     isValidDescriptionSize () {
@@ -583,16 +583,24 @@ export default {
     },
 
     resolvedLabelSize () {
-      return this.labelSize ?? (this.size === 'xl' ? 'lg' : this.size);
+      if (this.labelSize != null) return this.labelSize;
+      const sizeStr = String(this.size);
+      // xl/500 exceeds label's max size — cap at lg/400
+      if (sizeStr === 'xl' || sizeStr === '500') return sizeStr === '500' ? '400' : 'lg';
+      return this.size;
     },
 
     resolvedDescriptionSize () {
-      const map = { xs: 'xs', sm: 'xs', md: 'sm', lg: 'sm', xl: 'md' };
-      return map[this.size] || 'sm';
+      const map = {
+        100: 'xs', 200: 'xs', 300: 'sm', 400: 'sm', 500: 'md',
+        xs: 'xs', sm: 'xs', md: 'sm', lg: 'sm', xl: 'md',
+      };
+      return map[String(this.size)] || 'sm';
     },
 
     resolvedDescriptionDensity () {
-      return this.size === 'xl' ? '300' : undefined;
+      const sizeStr = String(this.size);
+      return (sizeStr === 'xl' || sizeStr === '500') ? '300' : undefined;
     },
 
     sizeModifierClass () {
@@ -600,7 +608,7 @@ export default {
         return '';
       }
 
-      return INPUT_SIZE_CLASSES[this.inputComponent][this.size];
+      return INPUT_SIZE_CLASSES[this.inputComponent][String(this.size)];
     },
 
     stateClass () {

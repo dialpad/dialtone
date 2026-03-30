@@ -27,7 +27,7 @@
             rel="noopener noreferrer"
             kind="muted"
             importance="clear"
-            size="sm"
+            :size="200"
           >
             <template #startIcon="{ iconSize }">
               <dt-icon-figma :size="iconSize" />
@@ -41,7 +41,7 @@
             rel="noopener noreferrer"
             kind="muted"
             importance="clear"
-            size="sm"
+            :size="200"
           >
             <template #startIcon="{ iconSize }">
               <dt-icon-storybook-color :size="iconSize" />
@@ -55,7 +55,7 @@
             rel="noopener noreferrer"
             kind="muted"
             importance="clear"
-            size="sm"
+            :size="200"
           >
             <template #startIcon="{ iconSize }">
               <dt-icon-github :size="iconSize" />
@@ -64,7 +64,7 @@
           </dt-button>
           <span class="d-pl8">
             <dt-split-button
-              size="sm"
+              :size="200"
               importance="outlined"
               kind="muted"
               end-tooltip-text="More options"

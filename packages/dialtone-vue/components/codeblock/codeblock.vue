@@ -4,12 +4,12 @@
     :class="{ 'd-codeblock--bordered': bordered }"
   ><code
     class="d-codeblock__code"
-    :class="`d-codeblock__code--${size}`"
+    :class="`d-codeblock__code--${sizeClass}`"
   >{{ text }}</code></pre> <!-- this must be a single line -->
 </template>
 
 <script>
-import { CODEBLOCK_SIZES } from './codeblock_constants';
+import { CODEBLOCK_SIZES, CODEBLOCK_SIZE_MAP } from './codeblock_constants';
 
 export default {
   compatConfig: { MODE: 3 },
@@ -34,12 +34,18 @@ export default {
 
     /**
      * Font size of the code block.
-     * @values xs, sm, md, lg
+     * @values 100, 200, 300, 400
      */
     size: {
-      type: String,
-      default: 'sm',
-      validator: (val) => CODEBLOCK_SIZES.includes(val),
+      type: [String, Number],
+      default: 200,
+      validator: (val) => CODEBLOCK_SIZES.includes(String(val)),
+    },
+  },
+
+  computed: {
+    sizeClass () {
+      return CODEBLOCK_SIZE_MAP[String(this.size)] || String(this.size);
     },
   },
 };

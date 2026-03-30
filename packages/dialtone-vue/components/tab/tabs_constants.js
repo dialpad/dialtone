@@ -1,10 +1,20 @@
-export const TAB_LIST_SIZES = ['default', 'xs', 'sm', 'lg', 'xl'];
+export const TAB_LIST_SIZES = ['100', '200', '300', '400', '500', 'default', 'xs', 'sm', 'md', 'lg', 'xl'];
 
 export const TAB_LIST_SIZE_MODIFIERS = {
+  // Numeric (preferred)
+  100: 'd-tablist--xs',
+  200: 'd-tablist--sm',
+  300: '',
+  400: 'd-tablist--lg',
+  500: 'd-tablist--xl',
+  // T-shirt aliases (deprecated)
   xs: 'd-tablist--xs',
   sm: 'd-tablist--sm',
+  md: '',
   lg: 'd-tablist--lg',
   xl: 'd-tablist--xl',
+  // Legacy alias
+  default: '',
 };
 
 export const TAB_LIST_KIND_MODIFIERS = {

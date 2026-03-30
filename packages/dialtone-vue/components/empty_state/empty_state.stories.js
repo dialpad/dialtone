@@ -97,7 +97,7 @@ export const Default = {
 
   args: {
     illustration: 'mind',
-    size: 'lg',
+    size: 400,
     headerText: 'Nothing to see here',
     bodyText: 'Lorem ipsum dolor sit amet consectetur. Diam in aliquam arcu elit pulvinar morbi lorem ac neque.',
     body: '<div class="d-mt8 d-stack d-stack--row d-stack--gap-300"><button class="d-btn">Click me</button><button class="d-btn d-btn--primary">Click me</button></div>',

@@ -17,7 +17,7 @@
           <dt-button
             circle
             importance="clear"
-            size="xs"
+            :size="100"
             :aria-label="closeButtonTitle"
             :title="closeButtonTitle"
             @click="close"

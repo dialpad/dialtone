@@ -10,7 +10,7 @@
       :image-alt="name"
       :show-presence="showDetails"
       :presence="presence"
-      size="sm"
+      :size="200"
     />
     <dt-stack
       class="d-mention-suggestion__details-container"
@@ -28,7 +28,7 @@
         <dt-text
           v-if="presenceText"
           kind="label"
-          size="sm"
+          :size="200"
           strength="normal"
           class="d-mention-suggestion__presence"
           :class="[presenceFontColorClass]"
@@ -38,7 +38,7 @@
         <dt-text
           v-if="status && presenceText"
           kind="label"
-          size="sm"
+          :size="200"
           strength="normal"
           as="div"
           class="d-mention-suggestion__divider"
@@ -48,7 +48,7 @@
         <dt-text
           v-if="status"
           kind="label"
-          size="sm"
+          :size="200"
           strength="normal"
           as="div"
           class="d-mention-suggestion__status"

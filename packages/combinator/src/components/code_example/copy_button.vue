@@ -7,7 +7,7 @@
       <dt-button
         :aria-label="ariaLabel"
         :circle="!$slots.default"
-        size="xs"
+        :size="100"
         importance="clear"
         kind="muted"
         @click="copyToClipboard"

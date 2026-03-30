@@ -34,7 +34,7 @@ const kindDescriptions = {
           <div class="d-mb4">
             {{ importance }}
           </div>
-          <dt-text kind="body" size="sm" density="200" class="d-tt-none">
+          <dt-text kind="body" :size="200" density="200" class="d-tt-none">
             {{ importanceDescriptions[importance] }}
           </dt-text>
         </th>
@@ -46,7 +46,7 @@ const kindDescriptions = {
           <a class="d-link d-fs-100 d-fw-medium d-d-block d-mb4 d-tt-uppercase" :href="`#${kind}`">
             <strong>{{ kind }}</strong>
           </a>
-          <dt-text kind="body" size="sm" density="200">
+          <dt-text kind="body" :size="200" density="200">
             {{ kindDescriptions[kind] }}
           </dt-text>
         </th>

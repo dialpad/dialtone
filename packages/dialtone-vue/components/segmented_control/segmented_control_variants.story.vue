@@ -320,7 +320,7 @@
           class="d-w164"
           orientation="vertical"
           aria-label="Vertical example"
-          size="xs"
+          :size="100"
         >
           <dt-segmented-control-item value="all">
             All
@@ -346,7 +346,7 @@
         <div>
           <dt-segmented-control
             v-model="selectedSize"
-            size="xs"
+            :size="100"
             aria-label="Extra small size"
           >
             <dt-segmented-control-item value="option1">
@@ -381,7 +381,7 @@
         <div>
           <dt-segmented-control
             v-model="selectedSize"
-            size="sm"
+            :size="200"
             aria-label="Small size"
           >
             <dt-segmented-control-item value="option1">
@@ -416,7 +416,7 @@
         <div>
           <dt-segmented-control
             v-model="selectedSize"
-            size="md"
+            :size="300"
             aria-label="Default size"
           >
             <dt-segmented-control-item value="option1">
@@ -451,7 +451,7 @@
         <div>
           <dt-segmented-control
             v-model="selectedSize"
-            size="lg"
+            :size="400"
             aria-label="Large size"
           >
             <dt-segmented-control-item value="option1">
@@ -486,7 +486,7 @@
         <div>
           <dt-segmented-control
             v-model="selectedSize"
-            size="xl"
+            :size="500"
             aria-label="Extra large size"
           >
             <dt-segmented-control-item value="option1">

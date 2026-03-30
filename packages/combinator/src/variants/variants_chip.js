@@ -1,9 +1,10 @@
 /* eslint-disable max-len */
+
 export default {
   default: {
     props: {
       interactive: { initialValue: false },
-      size: { initialValue: 'xs' },
+      size: { initialValue: '100' },
     },
     slots: {
       default: {
@@ -15,7 +16,7 @@ export default {
   'interactive': {
     props: {
       interactive: { initialValue: true },
-      size: { initialValue: 'xs' },
+      size: { initialValue: '100' },
     },
     slots: {
       default: { initialValue: 'I can be clicked' },

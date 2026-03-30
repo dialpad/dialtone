@@ -30,7 +30,7 @@ export default {
       v-for="(key, name) in allowedLocales"
       :key="key"
       :active="key === i18n.currentLocale"
-      size="xs"
+      :size="100"
       importance="outlined"
       @click="i18n.currentLocale = key"
     >
