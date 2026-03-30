@@ -63,7 +63,7 @@ export default {
 
   'with presence': {
     props: {
-      size: { initialValue: 'sm' },
+      size: { initialValue: '200' },
       presence: { initialValue: 'away' },
       imageSrc: { initialValue: '/assets/images/person.png' },
       imageAlt: { initialValue: 'Person Avatar' },
@@ -72,7 +72,7 @@ export default {
 
   'with overlay icon': {
     props: {
-      size: { initialValue: 'lg' },
+      size: { initialValue: '500' },
       imageSrc: { initialValue: '/assets/images/person.png' },
       imageAlt: { initialValue: 'Avatar user' },
     },

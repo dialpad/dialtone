@@ -39,7 +39,7 @@
               <dt-text
                 as="span"
                 kind="code"
-                size="xs"
+                :size="100"
                 class="d-docsite-code"
               >
                 {{ item }}
@@ -49,7 +49,7 @@
               <dt-text
                 as="code"
                 kind="code"
-                size="xs"
+                :size="100"
                 class="code-example--inline"
               >
                 {{ applies }}
@@ -58,7 +58,7 @@
             <td>
               <dt-text
                 kind="body"
-                size="xs"
+                :size="100"
               >
                 {{ description }}
               </dt-text>

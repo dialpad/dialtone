@@ -12,7 +12,7 @@
     </dt-link>
     <template #action>
       <dt-button
-        size="sm"
+        :size="200"
         importance="outlined"
         :kind="important ? 'inverted' : 'muted'"
         :class="{ 'd-bc-neutral-black': important && kind === 'warning' }"

@@ -295,7 +295,7 @@
             class="d-m8"
           >
             <dt-button
-              size="xs"
+              :size="100"
               :circle="true"
               importance="clear"
               aria-label="chat"
@@ -308,7 +308,7 @@
               </template>
             </dt-button>
             <dt-button
-              size="xs"
+              :size="100"
               :circle="true"
               importance="clear"
               aria-label="more"

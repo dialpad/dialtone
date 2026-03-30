@@ -13,13 +13,13 @@ keywords: ["tick", "select", "form field", "d-checkbox", "DtCheckbox", "dt-check
 
 ## Usage
 
-Checkboxes are an easily understandable way to indicate that users can select one or more answers to a question or items from a list. They visibly show users what's been selected and makes it easy for them to “uncheck” an option, which can be difficult with other selection methods on a form (such as radio buttons or select menus).
+Checkboxes are an easily understandable way to indicate that users can select one or more answers to a question or items from a list. They visibly show users what's been selected and makes it easy for them to "uncheck" an option, which can be difficult with other selection methods on a form (such as radio buttons or select menus).
 
 <dialtone-usage>
 <template #do>
 
 - Selecting any number of choices from a set list.
-- Binary selections that convey opposite states, such as check=“on” and unchecked=“off”, paired with a label that conveys the choice.
+- Binary selections that convey opposite states, such as check="on" and unchecked="off", paired with a label that conveys the choice.
 - When users need to see all the available options at a glance.
 </template>
 
@@ -185,10 +185,10 @@ Use the `label-size` prop to override the default label size.
 
 <code-example>
   <dt-stack gap="400" data-demo-wrapper>
-    <dt-checkbox name="sizeXs" value="Value" label="Extra small label" label-size="xs" />
-    <dt-checkbox name="sizeSm" value="Value" label="Small label" label-size="sm" />
-    <dt-checkbox name="sizeMd" value="Value" label="Medium label (default)" label-size="md" />
-    <dt-checkbox name="sizeLg" value="Value" label="Large label" label-size="lg" />
+    <dt-checkbox name="sizeXs" value="Value" label="Extra small label" :label-size="100" />
+    <dt-checkbox name="sizeSm" value="Value" label="Small label" :label-size="200" />
+    <dt-checkbox name="sizeMd" value="Value" label="Medium label (default)" :label-size="300" />
+    <dt-checkbox name="sizeLg" value="Value" label="Large label" :label-size="400" />
   </dt-stack>
 </code-example>
 

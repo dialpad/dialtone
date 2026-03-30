@@ -17,7 +17,7 @@
         kind="code"
         tone="primary"
         strength="semibold"
-        size="md"
+        :size="300"
         as="div"
         class="d-px12 d-py8"
       >
@@ -84,7 +84,7 @@
           v-dt-tooltip="`Reset`"
           kind="muted"
           importance="clear"
-          size="sm"
+          :size="200"
           @click="resetOptions"
         >
           <template #icon="{ iconSize }">
@@ -97,7 +97,7 @@
           v-dt-tooltip="`Fullscreen`"
           kind="muted"
           importance="clear"
-          size="sm"
+          :size="200"
           @click="toggleFullScreen"
         >
           <template #icon="{ iconSize }">

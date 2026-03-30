@@ -6,7 +6,7 @@ thumb: true
 
 <div class="d-ba d-bar16 d-py128 d-mt32 d-ta-center d-fc-muted d-headline--xxl">
   <dt-empty-state
-    size="md"
+    :size="300"
     header-text="TBD"
     class="d-w100p"
   >

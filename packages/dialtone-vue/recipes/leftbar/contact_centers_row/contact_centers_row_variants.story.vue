@@ -18,7 +18,7 @@
               'd-fc-success',
             ]"
             class="d-to-ellipsis"
-            size="sm"
+            :size="200"
             data-qa="leftbar-call-centers-duty-value"
             aria-label="Available"
           >
@@ -51,7 +51,7 @@
               'd-fc-success',
             ]"
             class="d-to-ellipsis"
-            size="sm"
+            :size="200"
             data-qa="leftbar-call-centers-duty-value"
             aria-label="Available"
           >
@@ -86,7 +86,7 @@
               'd-fc-success',
             ]"
             class="d-to-ellipsis"
-            size="sm"
+            :size="200"
             data-qa="leftbar-call-centers-duty-value"
             aria-label="Available"
           >
@@ -121,7 +121,7 @@
               'd-fc-success',
             ]"
             class="d-to-ellipsis"
-            size="sm"
+            :size="200"
             data-qa="leftbar-call-centers-duty-value"
             aria-label="Available"
           >
@@ -155,7 +155,7 @@
               'd-fc-success',
             ]"
             class="d-to-ellipsis"
-            size="sm"
+            :size="200"
             data-qa="leftbar-call-centers-duty-value"
             aria-label="Available"
           >

@@ -39,7 +39,7 @@ export default {
   'with custom label size and strength': {
     props: {
       label: { initialValue: 'Radio label' },
-      labelSize: { initialValue: 'xs' },
+      labelSize: { initialValue: '100' },
       labelStrength: { initialValue: 'bold' },
     },
   },

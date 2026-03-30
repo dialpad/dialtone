@@ -73,7 +73,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-emoji-picker
   >
     <template #anchor>
       <dt-button
-        size="sm"
+        :size="200"
         circle
         importance="clear"
         @click="toggleEmojiPicker"

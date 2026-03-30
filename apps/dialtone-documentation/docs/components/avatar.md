@@ -169,18 +169,18 @@ Provides the user's current [presence](/components/presence.md), positioned in t
 <code-example>
   <dt-stack gap="400" data-demo-wrapper>
     <dt-stack direction="row" align="center" gap="400">
-      <dt-avatar size="xs" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-      <dt-avatar size="sm" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-      <dt-avatar size="md" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-      <dt-avatar size="lg" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-      <dt-avatar size="500" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="100" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="200" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="300" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="400" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="500" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
     </dt-stack>
     <dt-stack direction="row" align="center" gap="400">
-      <dt-avatar size="xs" presence="active" seed="user-1" full-name="Test Name" />
-      <dt-avatar size="sm" presence="away" seed="user-2" full-name="William Steele" />
-      <dt-avatar size="md" presence="busy" seed="user-3" full-name="Frank Richard" />
-      <dt-avatar size="lg" presence="offline" seed="user-4" full-name="John Hawkins" />
-      <dt-avatar size="500" presence="active" seed="user-5" full-name="Alice Edwards" />
+      <dt-avatar :size="100" presence="active" seed="user-1" full-name="Test Name" />
+      <dt-avatar :size="200" presence="away" seed="user-2" full-name="William Steele" />
+      <dt-avatar :size="300" presence="busy" seed="user-3" full-name="Frank Richard" />
+      <dt-avatar :size="400" presence="offline" seed="user-4" full-name="John Hawkins" />
+      <dt-avatar :size="500" presence="active" seed="user-5" full-name="Alice Edwards" />
     </dt-stack>
   </dt-stack>
 </code-example>
@@ -189,12 +189,12 @@ Provides the user's current [presence](/components/presence.md), positioned in t
 
 <code-example>
   <dt-stack direction="row" align="center" gap="500" data-demo-wrapper>
-    <dt-avatar size="lg" image-src="/assets/images/person.png" image-alt="avatar user">
+    <dt-avatar :size="400" image-src="/assets/images/person.png" image-alt="avatar user">
       <template #overlayIcon>
         <dt-icon-hear />
       </template>
     </dt-avatar>
-    <dt-avatar size="lg" image-src="/assets/images/person.png" image-alt="avatar user" overlay-text="+3" />
+    <dt-avatar :size="400" image-src="/assets/images/person.png" image-alt="avatar user" overlay-text="+3" />
   </dt-stack>
 </code-example>
 

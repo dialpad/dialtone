@@ -4,7 +4,7 @@
       <slot name="prefix" />
       <dt-button
         class="dtc-theme__button dtc-theme__interactive d-p4"
-        size="sm"
+        :size="200"
         importance="clear"
         @click="toggle"
       >
@@ -19,7 +19,7 @@
     <span v-else>
       <dt-button
         class="dtc-theme__button dtc-theme__interactive d-p0"
-        size="xl"
+        :size="500"
         importance="clear"
         @click="toggle"
       >

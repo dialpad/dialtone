@@ -2,7 +2,7 @@
   <dt-button
     v-if="updateAvailable"
     importance="outlined"
-    size="xs"
+    :size="100"
     class="d-recipe-settings-menu-button-update"
     :aria-label="ariaLabel"
     v-bind="$attrs"

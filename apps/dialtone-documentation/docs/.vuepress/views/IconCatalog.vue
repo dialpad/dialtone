@@ -24,7 +24,7 @@
             v-dt-tooltip="'Clear search'"
             kind="muted"
             importance="clear"
-            size="xs"
+            :size="100"
             aria-label="Clear filters"
             @click="resetSearch"
           >
@@ -71,7 +71,7 @@
     <dt-text
       as="h2"
       kind="headline"
-      size="xl"
+      :size="500"
       class="d-tt-capitalize d-mb4"
     >
       {{ category }}
@@ -91,7 +91,7 @@
   </div>
   <dt-empty-state
     v-if="!hasSearchResults"
-    size="sm"
+    :size="200"
     :header-text="`No results found for &OpenCurlyDoubleQuote;${search}&CloseCurlyDoubleQuote;`"
     class="d-w100p d-ba d-bc-subtle d-bar8 d-mt16 d-pt32"
   >

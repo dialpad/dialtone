@@ -3,7 +3,7 @@
     class="dialtone-playground__controls d-ps-relative"
   >
     <dt-tab-group
-      size="xs"
+      :size="100"
       borderless
       kind="muted"
       activation-mode="auto"
@@ -31,7 +31,7 @@
           class="d-ml-auto"
           kind="muted"
           importance="clear"
-          size="xs"
+          :size="100"
           :active="showSearch"
           @click="toggleSearch"
         >
@@ -45,7 +45,7 @@
           v-model="searchQuery"
           type="search"
           placeholder="Search"
-          size="xs"
+          :size="100"
           root-class="d-w100p d-mt2"
         >
           <template #startIcon="{ iconSize }">
@@ -58,7 +58,7 @@
             <dt-button
               kind="muted"
               importance="clear"
-              size="xs"
+              :size="100"
               class="d-p2"
               aria-label="Clear search"
               @click="clear"

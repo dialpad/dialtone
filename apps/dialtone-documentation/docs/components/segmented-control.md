@@ -164,12 +164,12 @@ Add `disabled` to an individual item.
 ## Sizes
 
 <code-example vueCode='
-<dt-segmented-control v-model="selected" size="xs|sm|md|lg|xl">
+<dt-segmented-control v-model="selected" :size="100|200|300|400|500">
   ...
 </dt-segmented-control>
 '>
   <dt-stack gap="400" class="d-w100p" data-demo-wrapper>
-    <dt-segmented-control v-model="selected" size="xs" aria-label="Extra small">
+    <dt-segmented-control v-model="selected" :size="100" aria-label="Extra small">
       <dt-segmented-control-item value="all">All</dt-segmented-control-item>
       <dt-segmented-control-item value="favorites">Favorites</dt-segmented-control-item>
       <dt-segmented-control-item value="recent">Recent</dt-segmented-control-item>
@@ -179,17 +179,17 @@ Add `disabled` to an individual item.
       <dt-segmented-control-item value="favorites">Favorites</dt-segmented-control-item>
       <dt-segmented-control-item value="recent">Recent</dt-segmented-control-item>
     </dt-segmented-control>
-    <dt-segmented-control v-model="selected" size="md" aria-label="Medium">
+    <dt-segmented-control v-model="selected" :size="300" aria-label="Medium">
       <dt-segmented-control-item value="all">All</dt-segmented-control-item>
       <dt-segmented-control-item value="favorites">Favorites</dt-segmented-control-item>
       <dt-segmented-control-item value="recent">Recent</dt-segmented-control-item>
     </dt-segmented-control>
-    <dt-segmented-control v-model="selected" size="lg" aria-label="Large">
+    <dt-segmented-control v-model="selected" :size="400" aria-label="Large">
       <dt-segmented-control-item value="all">All</dt-segmented-control-item>
       <dt-segmented-control-item value="favorites">Favorites</dt-segmented-control-item>
       <dt-segmented-control-item value="recent">Recent</dt-segmented-control-item>
     </dt-segmented-control>
-    <dt-segmented-control v-model="selected" size="xl" aria-label="Extra large">
+    <dt-segmented-control v-model="selected" :size="500" aria-label="Extra large">
       <dt-segmented-control-item value="all">All</dt-segmented-control-item>
       <dt-segmented-control-item value="favorites">Favorites</dt-segmented-control-item>
       <dt-segmented-control-item value="recent">Recent</dt-segmented-control-item>

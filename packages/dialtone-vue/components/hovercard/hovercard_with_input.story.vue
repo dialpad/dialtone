@@ -42,7 +42,7 @@
             :image-src="defaultImage"
             image-alt="Person avatar"
             seed="JN"
-            size="md"
+            :size="300"
             presence="busy"
           />
           <dt-stack
@@ -100,7 +100,7 @@
         <dt-input
           v-model="inputValue"
           placeholder="Quick message"
-          size="md"
+          :size="300"
           width="var(--dt-size-100-percent)"
         />
       </dt-stack>

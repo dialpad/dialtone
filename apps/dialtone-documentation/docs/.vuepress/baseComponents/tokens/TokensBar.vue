@@ -21,7 +21,7 @@
           v-dt-tooltip="'Clear search'"
           kind="muted"
           importance="clear"
-          size="xs"
+          :size="100"
           aria-label="Clear search"
           @click="resetSearch"
         >

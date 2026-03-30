@@ -206,31 +206,21 @@ vueCode='
 '>
   <dt-stack gap="500" class="d-w100p">
     <dt-stack gap="200">
-      <dt-text as="h3" kind="label" size="md" id="interactive-gap-label">Select a gap option</dt-text>
-      <dt-stack
-        :direction="{ 'default': 'column', 'md': 'row' }"
-        gap="200"
-        class="d-ba d-bc-subtle d-p2 d-bar8"
-        role="group"
-        aria-labelledby="interactive-gap-label"
-        @keydown="handleGapButtonKeydown"
+      <dt-segmented-control
+        :size="100"
+        :model-value="selectedGap"
+        aria-label="Gap size"
+        @update:model-value="setGap"
       >
-        <dt-button
-          v-for="(gap, index) in gaps"
-          :ref="el => gapButtonRefs[index] = el"
-          size="xs"
-          kind="muted"
-          importance="clear"
-          class="d-fl1 d-bar6"
+        <dt-segmented-control-item
+          v-for="gap in gaps"
           :key="gap"
-          :active="gap === selectedGap"
-          @click="setGap(gap)"
-          :tabindex="gap === selectedGap ? 0 : -1"
-          @focus="focusedGapIndex = index"
+          :value="gap"
+          :selected="gap === selectedGap"
         >
           {{ gap }}
-        </dt-button>
-      </dt-stack>
+        </dt-segmented-control-item>
+      </dt-segmented-control>
     </dt-stack>
     <dt-stack
       :direction="{ 'default': 'column', 'md': 'row' }"
@@ -239,7 +229,7 @@ vueCode='
       align="start"
     >
       <dt-stack class="d-w100p md:d-w50p" gap="300">
-        <dt-text as="h3" kind="headline" size="md">Column</dt-text>
+        <dt-text as="h3" kind="headline" :size="300">Column</dt-text>
         <dt-stack
           :gap="selectedGap"
           class="d-bgc-moderate-opaque d-t d-td300 d-bar8 d-ttf-quint"
@@ -250,7 +240,7 @@ vueCode='
         </dt-stack>
       </dt-stack>
       <dt-stack class="d-w100p md:d-w50p" gap="300">
-        <dt-text as="h3" kind="headline" size="md">Row</dt-text>
+        <dt-text as="h3" kind="headline" :size="300">Row</dt-text>
         <dt-stack
           direction="row"
           :gap="selectedGap"
@@ -836,9 +826,9 @@ vueCode='
   gap="400"
   align="baseline"
 >
-  <dt-text kind="body" size="xs">Small body</dt-text>
-  <dt-text kind="body" size="md">Medium body</dt-text>
-  <dt-text kind="headline" size="2xl">Large headline</dt-text>
+  <dt-text kind="body" :size="100">Small body</dt-text>
+  <dt-text kind="body" :size="300">Medium body</dt-text>
+  <dt-text kind="headline" :size="600">Large headline</dt-text>
 </dt-stack>
 '>
   <dt-stack
@@ -848,13 +838,13 @@ vueCode='
     class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--baseline"
   >
     <div class="d-bgc-moderate-opaque d-p16 d-bar8">
-      <dt-text kind="body" size="xs">Small body</dt-text>
+      <dt-text kind="body" :size="100">Small body</dt-text>
     </div>
     <div class="d-bgc-moderate-opaque d-p16 d-bar8">
-      <dt-text kind="body" size="md">Medium body</dt-text>
+      <dt-text kind="body" :size="300">Medium body</dt-text>
     </div>
     <div class="d-bgc-moderate-opaque d-p16 d-bar8">
-      <dt-text kind="headline" size="2xl">Large headline</dt-text>
+      <dt-text kind="headline" :size="600">Large headline</dt-text>
     </div>
   </dt-stack>
 </code-example>
@@ -1298,7 +1288,7 @@ vueCode='
 <dt-stack gap="500">
   <dt-stack gap="400" justify="space-between">
     <dt-stack>
-      <dt-text as="h2" kind="headline" size="xl" strength="medium" density="200" class="d-fs-400">
+      <dt-text as="h2" kind="headline" :size="500" strength="medium" density="200" class="d-fs-400">
         Katie Rodriguez
       </dt-text>
       <dt-stack direction="row" gap="350">
@@ -1312,10 +1302,10 @@ vueCode='
       </dt-stack>
     </dt-stack>
     <dt-stack gap="200">
-      <dt-text kind="body" size="md" density="200" strength="semibold" tone="tertiary">
+      <dt-text kind="body" :size="300" density="200" strength="semibold" tone="tertiary">
         Chief Customer Success Officer
       </dt-text>
-      <dt-text kind="body" size="sm" density="200">
+      <dt-text kind="body" :size="200" density="200">
         <dt-text strength="semibold">
           6:19 am
         </dt-text> local time
@@ -1351,21 +1341,21 @@ vueCode='
 
 <code-example>
   <dt-stack gap="400" class="d-w100p">
-    <dt-text as="h2" kind="headline" size="lg">Saturday, May 24, 2025</dt-text>
+    <dt-text as="h2" kind="headline" :size="400">Saturday, May 24, 2025</dt-text>
     <dt-stack direction="row" gap="450" class="d-w100p">
       <dt-avatar full-name="Ashanti Trevor" />
       <dt-stack class="d-fl1">
-        <dt-text kind="body" size="sm" strength="bold">Ashanti Trevor</dt-text>
+        <dt-text kind="body" :size="200" strength="bold">Ashanti Trevor</dt-text>
         <dt-stack direction="row" gap="300">
           <dt-stack direction="row" gap="400">
             <dt-icon name="phone-outgoing" size="200" class="d-fc-tertiary" />
-            <dt-text kind="body" size="xs" tone="tertiary">Outgoing call</dt-text>
+            <dt-text kind="body" :size="100" tone="tertiary">Outgoing call</dt-text>
           </dt-stack>
-          <dt-text kind="body" size="xs" tone="tertiary">&bull;</dt-text>
-          <dt-text kind="body" size="xs" tone="tertiary">2 minutes 10 seconds</dt-text>
+          <dt-text kind="body" :size="100" tone="tertiary">&bull;</dt-text>
+          <dt-text kind="body" :size="100" tone="tertiary">2 minutes 10 seconds</dt-text>
         </dt-stack>
       </dt-stack>
-      <dt-text kind="body" size="sm" tone="tertiary">3:23 pm</dt-text>
+      <dt-text kind="body" :size="200" tone="tertiary">3:23 pm</dt-text>
       <dt-badge kind="count" type="bulletin" text="6" />
     </dt-stack>
   </dt-stack>
@@ -1380,89 +1370,17 @@ vueCode='
 <component-class-table component-name="stack"></component-class-table>
 
 <script setup>
-  import { ref, nextTick } from 'vue';
+  import { ref } from 'vue';
   import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
   import ExampleProfileCard from '@exampleComponents/ExampleProfileCard.vue';
 
   const selectedGap = ref('400');
-  const focusedGapIndex = ref(0);
-  const gapButtonRefs = ref([]);
 
   const setGap = (gap) => {
     selectedGap.value = gap;
   };
 
   const gaps = window.DIALTONE_CONSTANTS.DT_STACK_GAP;
-
-  // Find the index of the currently selected gap
-  const getSelectedGapIndex = () => {
-    return gaps.indexOf(selectedGap.value);
-  };
-
-  // Focus a button by index
-  const focusGapButton = async (index) => {
-    focusedGapIndex.value = index;
-    await nextTick();
-    if (gapButtonRefs.value[index]) {
-      gapButtonRefs.value[index].$el?.focus();
-    }
-  };
-
-  // Handle keyboard navigation for roving tabindex
-  const handleGapButtonKeydown = async (event) => {
-    const currentIndex = focusedGapIndex.value;
-    const totalButtons = gaps.length;
-    let newIndex = currentIndex;
-
-    switch (event.key) {
-      case 'ArrowRight':
-      case 'ArrowDown':
-        event.preventDefault();
-        // Move to next button, wrap to first if at end
-        newIndex = (currentIndex + 1) % totalButtons;
-        break;
-
-      case 'ArrowLeft':
-      case 'ArrowUp':
-        event.preventDefault();
-        // Move to previous button, wrap to last if at beginning
-        newIndex = (currentIndex - 1 + totalButtons) % totalButtons;
-        break;
-
-      case 'Home':
-        event.preventDefault();
-        // Move to first button
-        newIndex = 0;
-        break;
-
-      case 'End':
-        event.preventDefault();
-        // Move to last button
-        newIndex = totalButtons - 1;
-        break;
-
-      case 'Enter':
-      case ' ':
-        // Space or Enter selects the focused button
-        event.preventDefault();
-        setGap(gaps[currentIndex]);
-        break;
-
-      default:
-        // No action for other keys
-        return;
-    }
-
-    // Focus and activate the new button if index changed
-    if (newIndex !== currentIndex) {
-      await focusGapButton(newIndex);
-      // Also activate (select) the newly focused button
-      setGap(gaps[newIndex]);
-    }
-  };
-
-  // Initialize focused index to the selected gap on mount
-  focusedGapIndex.value = getSelectedGapIndex();
 </script>
 
 <style scoped lang="less">

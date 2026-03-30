@@ -24,7 +24,7 @@ export default {
         initialValue: 'headline',
       },
       size: {
-        initialValue: 'xl',
+        initialValue: '500',
       },
       as: {
         initialValue: 'h2',
@@ -42,7 +42,7 @@ export default {
         initialValue: 'body',
       },
       size: {
-        initialValue: 'md',
+        initialValue: '300',
       },
       as: {
         initialValue: 'p',
@@ -60,7 +60,7 @@ export default {
         initialValue: 'label',
       },
       size: {
-        initialValue: 'sm',
+        initialValue: '200',
       },
     },
   },
@@ -78,7 +78,7 @@ export default {
         initialValue: 'critical',
       },
       size: {
-        initialValue: 'sm',
+        initialValue: '200',
       },
     },
   },
@@ -93,7 +93,7 @@ export default {
         initialValue: 'code',
       },
       size: {
-        initialValue: 'xs',
+        initialValue: '100',
       },
     },
   },
@@ -111,7 +111,7 @@ export default {
         initialValue: '3',
       },
       size: {
-        initialValue: 'md',
+        initialValue: '300',
       },
     },
   },
@@ -132,7 +132,7 @@ export default {
         initialValue: 'center',
       },
       size: {
-        initialValue: 'md',
+        initialValue: '300',
       },
     },
   },
@@ -153,7 +153,7 @@ export default {
         initialValue: 'tertiary',
       },
       size: {
-        initialValue: 'lg',
+        initialValue: '400',
       },
       align: {
         initialValue: 'center',

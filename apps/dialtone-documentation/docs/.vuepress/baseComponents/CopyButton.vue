@@ -1,7 +1,7 @@
 <template>
   <dt-button
     :aria-label="ariaLabel"
-    size="xs"
+    :size="100"
     importance="clear"
     kind="muted"
     @click="copyToClipboard"

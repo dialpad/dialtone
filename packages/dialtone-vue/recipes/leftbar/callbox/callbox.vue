@@ -27,7 +27,7 @@
           :full-name="avatarFullName"
           :seed="avatarSeed"
           :clickable="clickable"
-          size="sm"
+          :size="200"
           @click="handleClick"
         >
           <template

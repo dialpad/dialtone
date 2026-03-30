@@ -29,7 +29,7 @@
         tabindex="0"
         class="d-recipe-attachment-carousel__image-close-button"
         circle
-        size="xs"
+        :size="100"
         importance="clear"
         :aria-label="closeButtonTitle"
         :title="closeButtonTitle"

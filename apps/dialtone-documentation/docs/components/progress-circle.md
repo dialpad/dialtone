@@ -34,10 +34,10 @@ Use a progress circle to communicate deterministic progress to the user — for 
   <dt-stack gap="500" align="center">
     <dt-progress-circle size="800" :progress="demoProgress" :aria-label="`${demoProgress}% complete`" />
     <dt-stack direction="row" gap="400">
-      <dt-button size="sm" kind="muted" importance="outlined" :disabled="atMin" @click="setProgress(0)">0%</dt-button>
-      <dt-button size="sm" kind="muted" importance="outlined" :disabled="atMin" @click="setProgress(demoProgress - 10)">-10</dt-button>
-      <dt-button size="sm" kind="muted" importance="outlined" :disabled="atMax" @click="setProgress(demoProgress + 10)">+10</dt-button>
-      <dt-button size="sm" kind="muted" importance="outlined" :disabled="atMax" @click="setProgress(100)">100%</dt-button>
+      <dt-button :size="200" kind="muted" importance="outlined" :disabled="atMin" @click="setProgress(0)">0%</dt-button>
+      <dt-button :size="200" kind="muted" importance="outlined" :disabled="atMin" @click="setProgress(demoProgress - 10)">-10</dt-button>
+      <dt-button :size="200" kind="muted" importance="outlined" :disabled="atMax" @click="setProgress(demoProgress + 10)">+10</dt-button>
+      <dt-button :size="200" kind="muted" importance="outlined" :disabled="atMax" @click="setProgress(100)">100%</dt-button>
     </dt-stack>
   </dt-stack>
 </code-example>

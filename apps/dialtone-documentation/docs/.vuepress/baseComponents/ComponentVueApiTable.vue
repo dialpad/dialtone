@@ -46,7 +46,7 @@
           >
             <th scope="row">
               <dt-stack gap="300">
-                <dt-text as="code" kind="code" size="xs" class="d-docsite-code">
+                <dt-text as="code" kind="code" :size="100" class="d-docsite-code">
                   {{ item.name }}
                 </dt-text>
                 <dt-text
@@ -67,7 +67,7 @@
             </th>
 
             <td v-if="withDefault">
-              <dt-text v-if="item.defaultValue" as="code" kind="code" size="xs" class="d-docsite-code">
+              <dt-text v-if="item.defaultValue" as="code" kind="code" :size="100" class="d-docsite-code">
                 {{ item.defaultValue }}
               </dt-text>
             </td>
@@ -85,22 +85,22 @@
                     v-for="(value, index) in item.values"
                     :key="`${item.name} ${value}`"
                   >
-                    <dt-text v-if="index > 0" tone="muted" as="span" kind="body" size="xs">
+                    <dt-text v-if="index > 0" tone="muted" as="span" kind="body" :size="100">
                       |
                     </dt-text>
-                    <dt-text as="code" kind="code" size="xs" class="d-docsite-code">
+                    <dt-text as="code" kind="code" :size="100" class="d-docsite-code">
                       "{{ value }}"
                     </dt-text>
                   </template>
                 </dt-stack>
-                <dt-text v-else-if="item.type" as="code" kind="code" size="xs" class="d-docsite-code">
+                <dt-text v-else-if="item.type" as="code" kind="code" :size="100" class="d-docsite-code">
                   {{ item.type }}
                 </dt-text>
                 <dt-text
                   v-if="item.description"
                   as="p"
                   kind="body"
-                  size="sm"
+                  :size="200"
                   wrap="balance"
                 >
                   <markdown-render
@@ -111,7 +111,7 @@
                   v-if="item.deprecated && item.deprecatedMessage"
                   as="p"
                   kind="body"
-                  size="sm"
+                  :size="200"
                   tone="critical"
                 >
                   {{ item.deprecatedMessage }}

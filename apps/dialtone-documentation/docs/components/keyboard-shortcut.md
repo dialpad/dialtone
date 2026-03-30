@@ -23,7 +23,7 @@ Keyboard shortcut outlines a key combination with a border to represent a keyboa
 
 - Commands shown should always be device specific (different systems may require a different shortcut combination).
 - Commonly used in list item, tooltips.
-- Don't use actual “+” key as a shortcut.
+- Don't use actual "+" key as a shortcut.
 - Avoid using browser or operating system shortcuts. For example, `Control+P` is `print`.
 
 ## Variants
@@ -64,7 +64,7 @@ In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#
 ### Inline with Text and Screen Reader Text
 
 <code-example>
-  <dt-text kind="body" size="md">
+  <dt-text kind="body" :size="300">
     Press
     <dt-keyboard-shortcut
       screen-reader-text="Control plus F5"
