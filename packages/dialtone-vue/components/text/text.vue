@@ -14,6 +14,7 @@
 import {
   TEXT_KIND_MODIFIERS,
   TEXT_SIZE_MODIFIERS,
+  TEXT_SIZE_MAP,
   TEXT_HEADLINE_ONLY_SIZES,
   TEXT_ALIGN_MODIFIERS,
   TEXT_TONE_PREFIX,
@@ -27,7 +28,7 @@ import {
   TEXT_DENSITY_MODIFIERS,
 } from './text_constants';
 
-const DEFAULT_SIZE = 'md';
+const DEFAULT_SIZE = '300';
 const SEMANTIC_HEADING_ELEMENTS = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
 
 // Module-level flag to emit info only once per session
@@ -69,12 +70,12 @@ export default {
     },
 
     /**
-     * Size variant within the selected `kind`. Falls back to `md` if unsupported.
-     * Headline supports all sizes; body/label/code support lg, md, sm, xs.
-     * @values 3xl, 2xl, xl, lg, md, sm, xs
+     * Size variant within the selected `kind`. Falls back to `md`/300 if unsupported.
+     * Headline supports all sizes; body/label/code support 100-400.
+     * @values 100, 200, 300, 400, 500, 600, 700
      */
     size: {
-      type: String,
+      type: [String, Number],
       default: null,
     },
 
@@ -266,11 +267,12 @@ export default {
       }
 
       const allowedSizes = TEXT_SIZE_MODIFIERS[this.kind] || [];
-      const requestedSize = this.size || DEFAULT_SIZE;
+      const rawSize = this.size != null ? String(this.size) : null;
+      const requestedSize = rawSize || DEFAULT_SIZE;
       let resolvedSize = requestedSize;
 
       if (!allowedSizes.includes(requestedSize)) {
-        // Headline-only sizes (3xl, 2xl, xl) throw an error when used with incompatible kinds
+        // Headline-only sizes (3xl, 2xl, xl, 500, 600, 700) throw an error when used with incompatible kinds
         if (TEXT_HEADLINE_ONLY_SIZES.includes(requestedSize)) {
           throw new Error(
             `[DtText] size="${requestedSize}" is only valid for kind="headline". ` +
@@ -278,7 +280,7 @@ export default {
           );
         }
 
-        // Universal sizes (lg, md, sm, xs) fall back gracefully with a warning
+        // Universal sizes fall back gracefully with a warning
         const fallbackSize = allowedSizes.includes(DEFAULT_SIZE) ? DEFAULT_SIZE : allowedSizes[0];
         if (fallbackSize) {
           resolvedSize = fallbackSize;
@@ -290,7 +292,9 @@ export default {
         return null;
       }
 
-      return `${TEXT_KIND_MODIFIERS[this.kind]}--${resolvedSize}`;
+      // Map numeric sizes to t-shirt CSS class suffix
+      const cssSuffix = TEXT_SIZE_MAP[resolvedSize] || resolvedSize;
+      return `${TEXT_KIND_MODIFIERS[this.kind]}--${cssSuffix}`;
     },
 
     getModifierClass (value, modifiers, propName) {

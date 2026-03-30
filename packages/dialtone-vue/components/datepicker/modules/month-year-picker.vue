@@ -24,14 +24,14 @@
             kind="muted"
             class="d-datepicker__nav-btn"
             importance="clear"
-            size="xs"
+            :size="100"
             type="button"
             @click="changeYear(-1)"
             @keydown="handleKeyDown($event)"
           >
-            <dt-icon-chevrons-left
-              size="200"
-            />
+            <template #icon="{ iconSize }">
+              <dt-icon-chevrons-left :size="iconSize" />
+            </template>
           </dt-button>
         </template>
       </dt-tooltip>
@@ -49,14 +49,14 @@
             class="d-datepicker__nav-btn"
             importance="clear"
             kind="muted"
-            size="xs"
+            :size="100"
             type="button"
             @click="changeMonth(-1)"
             @keydown="handleKeyDown($event)"
           >
-            <dt-icon-chevron-left
-              size="200"
-            />
+            <template #icon="{ iconSize }">
+              <dt-icon-chevron-left :size="iconSize" />
+            </template>
           </dt-button>
         </template>
       </dt-tooltip>
@@ -89,14 +89,14 @@
             class="d-datepicker__nav-btn"
             importance="clear"
             kind="muted"
-            size="xs"
+            :size="100"
             type="button"
             @click="changeMonth(1)"
             @keydown="handleKeyDown($event)"
           >
-            <dt-icon-chevron-right
-              size="200"
-            />
+            <template #icon="{ iconSize }">
+              <dt-icon-chevron-right :size="iconSize" />
+            </template>
           </dt-button>
         </template>
       </dt-tooltip>
@@ -114,14 +114,14 @@
             class="d-datepicker__nav-btn"
             importance="clear"
             kind="muted"
-            size="xs"
+            :size="100"
             type="button"
             @click="changeYear(1)"
             @keydown="handleKeyDown($event)"
           >
-            <dt-icon-chevrons-right
-              size="200"
-            />
+            <template #icon="{ iconSize }">
+              <dt-icon-chevrons-right :size="iconSize" />
+            </template>
           </dt-button>
         </template>
       </dt-tooltip>

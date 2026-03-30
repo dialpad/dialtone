@@ -40,11 +40,11 @@ export default {
 
     /**
      * Size of the shape
-     * @values xs, sm, md, lg, xl
+     * @values 100, 200, 300, 400, 500
      */
     size: {
-      type: String,
-      default: 'md',
+      type: [String, Number],
+      default: 300,
     },
 
     /**
@@ -94,7 +94,7 @@ export default {
 
   computed: {
     shapeStyles () {
-      const size = SKELETON_SHAPE_SIZES[this.size] || this.size;
+      const size = SKELETON_SHAPE_SIZES[String(this.size)] || this.size;
       return {
         ...this.skeletonStyle,
         'min-width': size,

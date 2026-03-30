@@ -22,6 +22,13 @@ export const DESCRIPTION_SIZE_TYPES = {
 
 // Description size variants
 export const DESCRIPTION_SIZE_MODIFIERS = {
+  // Numeric (preferred)
+  100: 'd-description--xs',
+  200: 'd-description--sm',
+  300: '',
+  400: 'd-description--lg',
+  500: 'd-description--xl',
+  // T-shirt aliases (deprecated)
   xs: 'd-description--xs',
   sm: 'd-description--sm',
   md: '',
@@ -31,6 +38,13 @@ export const DESCRIPTION_SIZE_MODIFIERS = {
 
 // Label size variants
 export const LABEL_SIZE_MODIFIERS = {
+  // Numeric (preferred)
+  100: 'd-label--xs',
+  200: 'd-label--sm',
+  300: '',
+  400: 'd-label--lg',
+  500: 'd-label--xl',
+  // T-shirt aliases (deprecated)
   xs: 'd-label--xs',
   sm: 'd-label--sm',
   md: '',
@@ -65,6 +79,9 @@ export const DEFAULT_VALIDATION_MESSAGE_TYPE = VALIDATION_MESSAGE_TYPES.ERROR;
 
 // Default prefix used for ids
 export const DEFAULT_PREFIX = 'dt';
+
+// Component size scale
+export { COMPONENT_SIZES, TEXT_HEADLINE_SIZES } from './sizes.js';
 
 export default {
   VALIDATION_MESSAGE_TYPES,

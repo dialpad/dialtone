@@ -1,7 +1,14 @@
-export const SEGMENTED_CONTROL_SIZES = ['xs', 'sm', 'md', 'lg', 'xl'];
-export const SEGMENTED_CONTROL_SIZE_DEFAULT = 'sm';
+export const SEGMENTED_CONTROL_SIZES = ['100', '200', '300', '400', '500', 'xs', 'sm', 'md', 'lg', 'xl'];
+export const SEGMENTED_CONTROL_SIZE_DEFAULT = 200;
 
 export const SEGMENTED_CONTROL_SIZE_MODIFIERS = {
+  // Numeric (preferred)
+  100: 'd-segmented-control--xs',
+  200: 'd-segmented-control--sm',
+  300: 'd-segmented-control--md',
+  400: 'd-segmented-control--lg',
+  500: 'd-segmented-control--xl',
+  // T-shirt aliases (deprecated)
   xs: 'd-segmented-control--xs',
   sm: 'd-segmented-control--sm',
   md: 'd-segmented-control--md',

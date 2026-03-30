@@ -77,12 +77,12 @@ const slots = useSlots();
 const props = defineProps({
   /**
     * The empty state size.
-    * @values 'sm', 'md', 'lg'
+    * @values 200, 300, 400
     */
   size: {
-    type: String,
-    default: 'lg',
-    validator: (s) => Object.keys(EMPTY_STATE_SIZE_MODIFIERS).includes(s),
+    type: [String, Number],
+    default: 400,
+    validator: (s) => Object.keys(EMPTY_STATE_SIZE_MODIFIERS).includes(String(s)),
   },
 
   /**
@@ -108,7 +108,6 @@ const hasIcon = computed(() => {
   return hasSlotContent(slots.icon);
 });
 const hasIllustration = computed(() => hasSlotContent(slots.illustration));
-const isSmallSize = computed(() => props.size === 'sm');
 
 /**
  * Icon will be shown in lg and md size only if illustration is not provided
@@ -122,17 +121,20 @@ const showIcon = computed(() => hasIcon.value && (!hasIllustration.value || isSm
  */
 const showIllustration = computed(() => hasIllustration.value && !isSmallSize.value);
 
-const sizeClass = computed(() => EMPTY_STATE_SIZE_MODIFIERS[props.size]);
+const sizeKey = computed(() => String(props.size));
+const isSmallSize = computed(() => sizeKey.value === 'sm' || sizeKey.value === '200');
+
+const sizeClass = computed(() => EMPTY_STATE_SIZE_MODIFIERS[sizeKey.value]);
 
 const emptyStateClasses = computed(() => ['d-empty-state', sizeClass.value]);
 
-const contentClass = computed(() => EMPTY_STATE_CONTENT_SIZE_MODIFIERS[props.size]);
+const contentClass = computed(() => EMPTY_STATE_CONTENT_SIZE_MODIFIERS[sizeKey.value]);
 
-const headlineSize = computed(() => EMPTY_STATE_HEADLINE_SIZES[props.size]);
-const headlineDensity = computed(() => EMPTY_STATE_HEADLINE_DENSITIES[props.size]);
+const headlineSize = computed(() => EMPTY_STATE_HEADLINE_SIZES[sizeKey.value]);
+const headlineDensity = computed(() => EMPTY_STATE_HEADLINE_DENSITIES[sizeKey.value]);
 
-const bodySize = computed(() => EMPTY_STATE_BODY_SIZES[props.size]);
-const bodyDensity = computed(() => EMPTY_STATE_BODY_DENSITIES[props.size]);
+const bodySize = computed(() => EMPTY_STATE_BODY_SIZES[sizeKey.value]);
+const bodyDensity = computed(() => EMPTY_STATE_BODY_DENSITIES[sizeKey.value]);
 
 onMounted(() => {
   if (!props.bodyText && !hasSlotContent(slots.body)) {

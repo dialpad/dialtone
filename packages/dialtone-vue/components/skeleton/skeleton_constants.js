@@ -17,12 +17,24 @@ export const SKELETON_TEXT_TYPES = [
 ];
 
 export const SKELETON_SHAPE_SIZES = {
+  // Numeric (preferred)
+  100: '16px',
+  200: '24px',
+  300: '32px',
+  400: '48px',
+  500: '64px',
+  // T-shirt aliases (deprecated)
   sm: '24px',
   md: '32px',
   lg: '48px',
 };
 
 export const SKELETON_HEADING_HEIGHTS = {
+  // Numeric (preferred)
+  200: 'd-h-25',
+  300: 'd-h24',
+  400: 'd-h-50',
+  // T-shirt aliases (deprecated)
   sm: 'd-h-25',
   md: 'd-h24',
   lg: 'd-h-50',

@@ -48,7 +48,7 @@ export const argTypesData = {
   },
 
   size: {
-    description: 'Used to set the size of the toggle',
+    description: 'Used to set the size of the toggle.',
     options: Object.keys(TOGGLE_SIZE_MODIFIERS),
     control: {
       type: 'select',

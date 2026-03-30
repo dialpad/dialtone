@@ -8,7 +8,7 @@
       ref="tabs"
       :class="[
         'd-tablist',
-        TAB_LIST_SIZE_MODIFIERS[size],
+        TAB_LIST_SIZE_MODIFIERS[String(size)],
         TAB_ORIENTATION_MODIFIERS[orientation],
         orientation !== 'vertical' && TAB_SPREAD_MODIFIERS[spread],
         {
@@ -139,13 +139,13 @@ export default {
 
     /**
      * If provided, applies size styles to the tab group
-     * @values default, xs, sm, lg, xl
+     * @values 100, 200, 300, 400, 500
      */
     size: {
-      type: String,
-      default: 'default',
+      type: [String, Number],
+      default: 300,
       validator (size) {
-        return TAB_LIST_SIZES.includes(size);
+        return TAB_LIST_SIZES.includes(String(size));
       },
     },
 
@@ -223,7 +223,7 @@ export default {
       provideObj: {
         selected: '', // the currently displayed tab id
         disabled: false, // disable group
-        size: 'default',
+        size: 300,
         kind: 'default',
         outlined: false,
         orientation: 'horizontal',

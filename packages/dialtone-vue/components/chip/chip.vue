@@ -103,12 +103,12 @@ export default {
 
     /**
      * The size of the chip.
-     * @values xs, sm, md
+     * @values 100, 200, 300
      */
     size: {
-      type: String,
-      default: 'md',
-      validator: (s) => Object.keys(CHIP_SIZE_MODIFIERS).includes(s),
+      type: [String, Number],
+      default: 300,
+      validator: (s) => Object.keys(CHIP_SIZE_MODIFIERS).includes(String(s)),
     },
 
     /**
@@ -218,7 +218,7 @@ export default {
     },
 
     closeButtonIconSize () {
-      return CHIP_ICON_SIZES[this.size];
+      return CHIP_ICON_SIZES[String(this.size)];
     },
 
     closeButtonTitle () {
@@ -230,7 +230,7 @@ export default {
     chipClasses () {
       return [
         this.$attrs['grouped-chip'] ? 'd-chip' : 'd-chip__label',
-        CHIP_SIZE_MODIFIERS[this.size],
+        CHIP_SIZE_MODIFIERS[String(this.size)],
         this.labelClass,
         this.disabled && 'd-chip--disabled',
       ];
@@ -239,7 +239,7 @@ export default {
     chipCloseButtonClasses () {
       return [
         'd-chip__close',
-        CHIP_CLOSE_BUTTON_SIZE_MODIFIERS[this.size],
+        CHIP_CLOSE_BUTTON_SIZE_MODIFIERS[String(this.size)],
         this.disabled && 'd-chip__close--disabled',
       ];
     },

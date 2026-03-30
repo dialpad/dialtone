@@ -89,6 +89,16 @@ describe('DtChip Tests', () => {
       });
     });
 
+    describe('When size is numeric', () => {
+      it('should render correct size class', () => {
+        mockProps = { size: 100 };
+
+        updateWrapper();
+
+        expect(chip.classes()).toContain('d-chip__label--xs');
+      });
+    });
+
     describe('When interactive is false', () => {
       it('should not be interactive', () => {
         mockProps = { interactive: false };
