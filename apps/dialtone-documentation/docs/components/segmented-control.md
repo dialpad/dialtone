@@ -233,8 +233,8 @@ Use the `#startIcon` or `#endIcon` slot on `dt-segmented-control-item` to add an
 Omit the default slot text to create icon-only items. Use the `label` prop for accessibility.
 
 <code-example>
-  <dt-stack gap="100" class="d-w-750" data-demo-wrapper>
-    <div>
+  <dt-stack gap="100" align="center" data-demo-wrapper>
+    <div class="d-w-750">
       <dt-segmented-control v-model="iconOnlySelected" aria-label="Appearance mode">
         <dt-segmented-control-item value="system" label="System">
           <template #startIcon="{ iconSize }">

@@ -205,7 +205,7 @@ vueCode='
 </dt-stack>
 '>
   <dt-stack gap="500" class="d-w100p">
-    <dt-stack gap="200">
+    <div class="d-d-none xl:d-d-flex">
       <dt-segmented-control
         :size="100"
         :model-value="selectedGap"
@@ -222,7 +222,7 @@ vueCode='
           {{ gap }}
         </dt-segmented-control-item>
       </dt-segmented-control>
-    </dt-stack>
+    </div>
     <dt-stack
       :direction="{ 'default': 'column', 'md': 'row' }"
       gap="200"
