@@ -105,10 +105,10 @@ describe('DtCheckbox Tests', () => {
         expect(dtText.props('tone')).toBe('primary');
       });
 
-      it('should render label DtText with default size="md"', () => {
+      it('should render label DtText with default size 300', () => {
         const dtText = wrapper.findComponent(DtText);
 
-        expect(dtText.props('size')).toBe('md');
+        expect(dtText.props('size')).toBe(300);
       });
     });
 

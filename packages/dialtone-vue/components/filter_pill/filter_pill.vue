@@ -141,7 +141,7 @@
             <dt-button
               importance="clear"
               kind="muted"
-              size="sm"
+              :size="200"
               data-qa="dt-filter-pill__cancel-button"
               @click="cancelSelection"
             >
@@ -149,7 +149,7 @@
             </dt-button>
             <dt-button
               importance="primary"
-              size="sm"
+              :size="200"
               data-qa="dt-filter-pill__apply-button"
               @click="applySelection"
             >
@@ -444,12 +444,12 @@ export default {
 
     /**
      * The size of the button.
-     * @values xs, sm, md, lg, xl
+     * @values 100, 200, 300, 400, 500
      */
     size: {
-      type: String,
-      default: 'sm',
-      validator: (s) => Object.keys(BUTTON_SIZE_MODIFIERS).includes(s),
+      type: [String, Number],
+      default: 200,
+      validator: (s) => Object.keys(BUTTON_SIZE_MODIFIERS).includes(String(s)),
     },
   },
 

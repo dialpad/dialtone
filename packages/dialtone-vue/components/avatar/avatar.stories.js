@@ -11,7 +11,7 @@ const ICONS_LIST = getIconNames();
 
 export const argsData = {
   onClick: action('click'),
-  size: 'md',
+  size: 300,
   presence: null,
   fullName: 'Jaqueline Nackos',
   imageAlt: 'profile image',

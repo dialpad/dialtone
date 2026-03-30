@@ -103,13 +103,13 @@ export default {
     },
 
     /**
-     * Animation speed using t-shirt sizing.
-     * @values sm, md, lg
+     * Animation speed.
+     * @values 100, 200, 300, 400, 500
      */
     speed: {
-      type: String,
-      default: 'md',
-      validator: (value) => MOTION_TEXT_SPEEDS.includes(value),
+      type: [String, Number],
+      default: 300,
+      validator: (value) => MOTION_TEXT_SPEEDS.includes(String(value)),
     },
 
     /**
@@ -202,7 +202,7 @@ export default {
      * Get timing preset based on speed prop
      */
     timing () {
-      return MOTION_TEXT_TIMING_PRESETS[this.speed];
+      return MOTION_TEXT_TIMING_PRESETS[String(this.speed)];
     },
 
     /**

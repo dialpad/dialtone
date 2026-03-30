@@ -25,7 +25,7 @@ export const argsData = {
   default: 'The quick brown fox jumps over the lazy dog.',
   as: 'span',
   kind: 'body',
-  size: 'md',
+  size: 300,
   strength: undefined,
   density: undefined,
   tone: undefined,

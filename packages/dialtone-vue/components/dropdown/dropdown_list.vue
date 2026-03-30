@@ -9,7 +9,7 @@
     >
       <dt-text
         kind="label"
-        size="xs"
+        :size="100"
         strength="bold"
         tone="muted"
       >

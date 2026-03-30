@@ -17,7 +17,7 @@ export const argsData = {
   onClick: action('click'),
   onFocusIn: action('focusin'),
   onFocusOut: action('focusout'),
-  size: 'md',
+  size: 300,
   link: false,
 };
 

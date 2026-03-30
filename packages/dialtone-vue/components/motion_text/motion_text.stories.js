@@ -14,7 +14,7 @@ import DtMotionTextVariantsTemplate from './motion_text_variants.story.vue';
 export const argsData = {
   text: 'Experience the magic of animated text',
   animationMode: 'gradient-in',
-  speed: 'md',
+  speed: 300,
   autoStart: true,
   loop: false,
   respectsReducedMotion: true,
@@ -57,7 +57,7 @@ export const argTypesData = {
       type: 'select',
     },
     options: MOTION_TEXT_SPEEDS,
-    description: 'Animation speed using t-shirt sizing (sm: fast, md: medium, lg: slow)',
+    description: 'Animation speed (100: near-instant, 200: fast, 300: medium, 400: slow, 500: very slow)',
     table: {
       type: {
         summary: MOTION_TEXT_SPEEDS.join(' | '),

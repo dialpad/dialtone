@@ -227,6 +227,18 @@ describe('DtButton Tests', () => {
         });
       });
 
+      describe('When size is numeric', () => {
+        it('should apply the correct size class for numeric size 200', async () => {
+          await wrapper.setProps({
+            size: 200,
+          });
+
+          button = wrapper.find('.base-button__button');
+
+          expect(button.classes().includes('d-btn--sm')).toBe(true);
+        });
+      });
+
       describe('When button has an invalid size prop', () => {
         it('should not have a size class', async () => {
           await wrapper.setProps({

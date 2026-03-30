@@ -119,6 +119,7 @@ import ComboboxEmptyList from '@/components/combobox/combobox_empty-list.vue';
 import { DtCombobox, COMBOBOX_LABEL_SIZES } from '@/components/combobox';
 import { DtPopover, POPOVER_APPEND_TO_VALUES, POPOVER_CONTENT_WIDTHS } from '@/components/popover';
 import { getUniqueString, hasSlotContent } from '@/common/utils';
+import { COMPONENT_SIZES } from '@/common/constants';
 import { DROPDOWN_PADDING_CLASSES } from '@/components/dropdown';
 import { CONTENT_MODE_PROP } from '@/common/mode_constants';
 
@@ -158,13 +159,15 @@ export default {
     },
 
     /**
-     * Size of the input, one of `xs`, `sm`, `md`, `lg`, `xl`
-     * @values null, xs, sm, md, lg, xl
+     * Size of the input.
+     * @values 100, 200, 300, 400, 500
      */
     size: {
-      type: String,
+      type: [String, Number],
       default: null,
-      validator: (t) => Object.values(COMBOBOX_LABEL_SIZES).includes(t),
+      validator: (t) => t === null
+        || Object.values(COMBOBOX_LABEL_SIZES).includes(t)
+        || Object.keys(COMPONENT_SIZES).includes(String(t)),
     },
 
     /**

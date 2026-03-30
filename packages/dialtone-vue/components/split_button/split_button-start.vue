@@ -177,8 +177,8 @@ export default {
      * The size of the button.
      */
     size: {
-      type: String,
-      default: 'md',
+      type: [String, Number],
+      default: 300,
     },
 
     /**

@@ -6,14 +6,25 @@ export const TEXT_KIND_MODIFIERS = {
 };
 
 export const TEXT_SIZE_MODIFIERS = {
-  headline: ['3xl', '2xl', 'xl', 'lg', 'md', 'sm', 'xs'],
-  body: ['lg', 'md', 'sm', 'xs'],
-  label: ['lg', 'md', 'sm', 'xs'],
-  code: ['lg', 'md', 'sm', 'xs'],
+  headline: ['700', '600', '500', '400', '300', '200', '100', '3xl', '2xl', 'xl', 'lg', 'md', 'sm', 'xs'],
+  body: ['400', '300', '200', '100', 'lg', 'md', 'sm', 'xs'],
+  label: ['400', '300', '200', '100', 'lg', 'md', 'sm', 'xs'],
+  code: ['400', '300', '200', '100', 'lg', 'md', 'sm', 'xs'],
 };
 
 // Sizes that are only valid for headline kind - using these with other kinds throws an error
-export const TEXT_HEADLINE_ONLY_SIZES = ['3xl', '2xl', 'xl'];
+export const TEXT_HEADLINE_ONLY_SIZES = ['700', '600', '500', '3xl', '2xl', 'xl'];
+
+// Numeric → t-shirt CSS class suffix mapping
+export const TEXT_SIZE_MAP = {
+  100: 'xs',
+  200: 'sm',
+  300: 'md',
+  400: 'lg',
+  500: 'xl',
+  600: '2xl',
+  700: '3xl',
+};
 
 import TEXT_TONE_TOKENS from './text_tone_tokens.js';
 export { TEXT_TONE_TOKENS };

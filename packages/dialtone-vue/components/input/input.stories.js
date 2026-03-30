@@ -361,28 +361,28 @@ export const WithMultipleMessages = {
 export const ExtraSmall = {
   ...Default,
   args: {
-    size: 'xs',
+    size: 100,
   },
 };
 
 export const Small = {
   ...Default,
   args: {
-    size: 'sm',
+    size: 200,
   },
 };
 
 export const Large = {
   ...Default,
   args: {
-    size: 'lg',
+    size: 400,
   },
 };
 
 export const ExtraLarge = {
   ...Default,
   args: {
-    size: 'xl',
+    size: 500,
   },
 };
 

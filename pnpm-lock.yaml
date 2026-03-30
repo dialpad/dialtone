@@ -512,7 +512,7 @@ importers:
         specifier: workspace:*
         version: link:../dialtone-query-core
       '@dialpad/dialtone-vue':
-        specifier: workspace:^3
+        specifier: workspace:*
         version: link:../dialtone-vue
       '@rollup/plugin-commonjs':
         specifier: ^28.0.0
@@ -705,7 +705,7 @@ importers:
         specifier: workspace:*
         version: link:../dialtone-icons
       '@dialpad/dialtone-vue':
-        specifier: workspace:^3
+        specifier: workspace:*
         version: link:../dialtone-vue
       '@types/node':
         specifier: 24.3.1

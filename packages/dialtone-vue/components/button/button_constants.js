@@ -1,6 +1,13 @@
 export const BUTTON_UNSTYLED_CLASS = 'd-btn--unstyled';
 
 export const BUTTON_SIZE_MODIFIERS = {
+  // Numeric (preferred)
+  100: 'd-btn--xs',
+  200: 'd-btn--sm',
+  300: '',
+  400: 'd-btn--lg',
+  500: 'd-btn--xl',
+  // T-shirt aliases (deprecated)
   xs: 'd-btn--xs',
   sm: 'd-btn--sm',
   md: '',
@@ -64,6 +71,13 @@ export const INVALID_COMBINATION = [
 ];
 
 export const BUTTON_ICON_SIZES = {
+  // Numeric (preferred)
+  100: '200',
+  200: '200',
+  300: '300',
+  400: '400',
+  500: '500',
+  // T-shirt aliases (deprecated)
   xs: '200',
   sm: '200',
   md: '300',
