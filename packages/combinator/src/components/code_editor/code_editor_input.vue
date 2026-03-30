@@ -58,11 +58,12 @@ export default {
 
 <style lang="less">
 .dtc-code-editor-input {
-  border: solid var(--dt-spacing-1) transparent;
   background-color: transparent;
-  outline: none;
+  border-radius: var(--dt-size-radius-200);
+  padding-inline: var(--dt-spacing-50);
+
   &:hover {
-    border-color: var(--dt-color-border-moderate);
+    outline: var(--dt-size-border-100) solid var(--dt-color-border-default);
   }
 }
 </style>

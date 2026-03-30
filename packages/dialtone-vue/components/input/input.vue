@@ -432,6 +432,7 @@ export default {
       defaultLength: 0,
       hasSlotContent,
       isComposing: false,
+      justEndedComposition: false,
     };
   },
 
@@ -473,10 +474,19 @@ export default {
 
         compositionend: () => {
           this.isComposing = false;
+          this.justEndedComposition = true;
+          const val = this.$refs.input.value;
+          this.$emit('input', val);
+          this.$emit('update:modelValue', val);
+          // Clear the flag after the current synchronous event processing so
+          // Firefox's post-compositionend input event is skipped, but the
+          // next real user input (a separate browser task) is not.
+          Promise.resolve().then(() => { this.justEndedComposition = false; });
         },
 
         input: async event => {
           if (this.isComposing) return;
+          if (this.justEndedComposition) return;
           let val = event.target.value;
           if (this.type === INPUT_TYPES.FILE) {
             const files = Array.from(event.target.files);
@@ -616,7 +626,7 @@ export default {
 
         // Set textarea value programmatically to avoid attribute binding
         // Skip during IME composition to avoid interrupting in-progress input
-        if (this.isTextarea && this.$refs.input && this.$refs.input.value !== newValue && !this.isComposing) {
+        if (this.isTextarea && !this.isComposing && this.$refs.input && this.$refs.input.value !== newValue) {
           this.$refs.input.value = newValue;
         }
       },

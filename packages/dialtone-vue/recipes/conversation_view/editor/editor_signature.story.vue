@@ -52,7 +52,7 @@
 import DtRecipeEditor from './editor.vue';
 
 export default {
-  name: 'DtRecipeEditorWithVariables',
+  name: 'DtRecipeEditorSignature',
   components: { DtRecipeEditor },
 
   data () {

@@ -1,0 +1,170 @@
+---
+description: "Merge staging into next branch following the Dialtone Next Merge Guide. Use when the user asks to merge staging into next, sync next with staging, or references the merge guide."
+---
+
+# /merge-next - Merge staging into next
+
+Executes the Dialtone Next Merge Guide: pulls both branches, merges staging into next, resolves conflicts, runs the color-stops migration, commits, builds, and tests.
+
+**Important:** This must be run via `git merge` on the CLI, NOT via a GitHub PR (which would squash and destroy historical references).
+
+## Workflow
+
+### 1. Pull and merge
+
+```bash
+git checkout next
+git pull origin next
+git fetch origin staging:staging   # update local staging ref without merging
+git merge --no-commit staging
+```
+
+Save the list of conflicted files immediately (needed for the verification step later):
+
+```bash
+git diff --name-only --diff-filter=U > /tmp/merge-conflicted-files.txt
+```
+
+If there are no conflicts, skip to step 4.
+
+### 2. Resolve CHANGELOG conflicts
+
+Run the changelog resolution script first:
+
+```bash
+python3 scripts/resolve-changelog-conflicts.py
+```
+
+This handles CHANGELOG.json and CHANGELOG.md for the main packages. For any remaining CHANGELOG conflicts (e.g. dialtone-icons, eslint-plugin-dialtone) that the script missed, resolve manually:
+
+- **CHANGELOG.md**: Keep both sides' entries, staging releases first (newest date first), then next prerelease entries, then shared history.
+- **CHANGELOG.json**: Merge both version arrays, staging entries first, sorted by date descending. A quick Node script can help:
+
+```js
+// Extract HEAD and staging JSON from conflict markers, merge versions arrays,
+// sort by date descending, write back.
+```
+
+Stage all resolved changelogs.
+
+### 3. Resolve remaining conflicts
+
+Apply these resolution strategies:
+
+| Conflict type | Strategy |
+| --- | --- |
+| **package.json versions** | Take staging's released version (higher semver). Next will get its own prerelease versions on next release. |
+| **pnpm-lock.yaml** | Accept staging's version (`git checkout --theirs pnpm-lock.yaml`), then regenerate with `pnpm install --no-frozen-lockfile`. |
+| **Code conflicts** | Analyze both sides. Keep new features from both branches. Prefer next's naming conventions (e.g. `#startIcon` over `#icon`, logical properties over physical). Combine additive changes. |
+| **Documentation conflicts** | Prefer next's unified `code-example` component over staging's older `code-well-header` + `code-example-tabs` pattern. |
+| **CSS conflicts** | Prefer next's logical properties (`max-inline-size` over `max-width`). Combine additive styles from both sides. |
+
+Stage all resolved files. Verify no conflict markers remain:
+
+```bash
+git diff --name-only --diff-filter=U          # should be empty
+git diff --cached --name-only | xargs grep -l '<<<<<<<'  # should find nothing
+```
+
+### 4. Run the color-stops migration script
+
+**DO NOT commit yet.** The script needs the repo to be in a merge state.
+
+Preview first:
+
+```bash
+node scripts/merge-migrate-color-stops.mjs --merge-from origin/staging --dry-run --verbose
+```
+
+Then run for real (pipe `y` to auto-confirm):
+
+```bash
+echo "y" | node scripts/merge-migrate-color-stops.mjs --merge-from origin/staging --verbose
+```
+
+### 5. Verify conflict resolutions
+
+**DO NOT commit yet.** Present a resolution summary to the user for review.
+
+1. Output a structured resolution summary listing every file that had conflicts and what was done:
+
+```
+Conflict resolution summary:
+- path/to/file.json: <what was chosen and why>
+- path/to/other.vue: <what was combined from each side>
+```
+
+2. Show the diff for only the files that had conflicts:
+
+```bash
+cat /tmp/merge-conflicted-files.txt | xargs git diff --cached --
+```
+
+3. **Wait for user confirmation** before proceeding to commit. Do not continue until the user approves.
+
+### 6. Commit the merge
+
+```bash
+git commit --no-edit
+```
+
+This uses the default merge commit message and triggers pre-commit hooks (which may rebuild icons, etc.).
+
+After committing, `git show --cc HEAD` can be used to re-inspect only the conflict resolution decisions at any time.
+
+### 7. Fix any lint issues introduced by the merge
+
+Check for new lint issues and fix them. Common ones:
+
+- Extra blank lines in `.mdx` files (MD012)
+- Unused imports after conflict resolution
+
+Commit fixes separately:
+
+```bash
+git add <fixed-files>
+git commit -m "fix(<scope>): NO-JIRA fix lint issues from staging merge"
+```
+
+### 8. Build, test, and lint
+
+Run the full production build:
+
+```bash
+pnpm nx run dialtone:build
+```
+
+Run the storybook and docsite builds and verify they complete successfully:
+
+```bash
+pnpm nx run dialtone-vue:build-storybook
+pnpm nx run dialtone-documentation:build
+```
+
+Run all tests:
+
+```bash
+pnpm nx run dialtone:test:all
+```
+
+Run all linters:
+
+```bash
+pnpm nx run dialtone:lint:all
+```
+
+For any failures, determine if they are **pre-existing** (also fail on staging) or **introduced by the merge**. Only fix merge-introduced issues. Report pre-existing failures to the user.
+
+### 9. Push
+
+Do NOT push automatically. Report the results to the user and wait for confirmation before pushing.
+
+```bash
+git push origin next
+```
+
+## Notes
+
+- Never create a PR for this merge. Always push the merge commit directly to `next`.
+- The color-stops migration script is temporary for the staging-to-next migration period.
+- Pre-commit hooks may trigger icon rebuilds or other builds during the commit step. This is expected and may take a few minutes.

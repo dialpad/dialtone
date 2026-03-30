@@ -33,7 +33,7 @@ const deprecatedComponents = {
     docs: 'https://dialtone.dialpad.com/vue/?path=/story/components-checkbox--default',
   },
   'DtIcon': {
-    replacement: 'Individual tree-shakable icon components from @dialpad/dialtone-icons/vue3 (e.g., DtIconBell, DtIconAlertCircle)',
+    replacement: 'Individual tree-shakable icon components from @dialpad/dialtone-icons/vue (e.g., DtIconBell, DtIconAlertCircle)',
     docs: 'https://dialtone.dialpad.com/components/icon.html',
   },
 };

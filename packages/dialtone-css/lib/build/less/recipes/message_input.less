@@ -46,6 +46,7 @@
 }
 
 .d-recipe-message-input__button {
+  flex-shrink: 0;
   max-inline-size: 2.8rem;
   max-block-size: 2.8rem;
   border-radius: var(--dt-size-radius-300);
@@ -65,6 +66,7 @@
 
 .d-recipe-message-input__bottom-section {
   display: flex;
+  flex-wrap: nowrap;
   justify-content: space-between;
   padding: var(--dt-spacing-50) var(--dt-spacing-100) var(--dt-spacing-100);
 }
@@ -72,6 +74,12 @@
 .d-recipe-message-input__bottom-section-left,
 .d-recipe-message-input__bottom-section-right {
   display: flex;
+}
+
+.d-recipe-message-input__bottom-section-left,
+.d-recipe-message-input__bottom-section-left-stack {
+  flex: 1 1 auto;
+  min-inline-size: var(--dt-size-0);
 }
 
 .d-recipe-message-input__image-input {

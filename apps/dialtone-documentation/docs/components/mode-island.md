@@ -192,7 +192,9 @@ For example, instead of using `inverted` on a DtButton, use `v-dt-mode:invert`
 
 Bind a reactive variable as the directive arg to switch modes at runtime.
 
-<code-example>
+<code-example vueCode='
+<dt-text v-dt-mode:{mode} align="center" tone="success"> ... mode </dt-text>
+'>
   <dt-stack gap="200">
     <dt-stack gap="100" direction="row">
       <dt-button
@@ -328,38 +330,40 @@ The background surface of a Mode Island defaults to the root surface color. To o
 
 <code-example>
   <dt-stack gap="200">
+    <dt-stack gap="500" data-demo-wrapper>
     <dt-mode-island class="d-p-200 d-bar8 d-w100p d-bgc-transparent">
-      <dt-stack gap="200">
-        <dt-text as="p" kind="code" size="xs" tone="tertiary">Transparent background, inverted mode island</dt-text>
-        <div>
-          <dt-button>Button</dt-button>
-        </div>
-      </dt-stack>
-    </dt-mode-island>
-    <dt-mode-island class="d-p-200 d-bar8 d-w100p">
-      <dt-stack gap="200">
-        <dt-text as="p" kind="code" size="xs" tone="tertiary">Default background, inverted mode island</dt-text>
-        <div>
-          <dt-button>Button</dt-button>
-        </div>
-      </dt-stack>
-    </dt-mode-island>
-    <dt-mode-island mode="dark" class="d-p-200 d-bar8 d-w100p d-bgc-critical">
-      <dt-stack gap="200">
-        <dt-text as="p" kind="code" size="xs" tone="tertiary">critical background, dark mode island</dt-text>
-        <div>
-          <dt-button>Button</dt-button>
-        </div>
-      </dt-stack>
-    </dt-mode-island>
-    <dt-mode-island mode="light" class="d-p-200 d-bar8 d-w100p d-bgc-critical">
-      <dt-stack gap="200">
-        <dt-text as="p" kind="code" size="xs" tone="tertiary">critical background, light mode island</dt-text>
-        <div>
-          <dt-button>Button</dt-button>
-        </div>
-      </dt-stack>
-    </dt-mode-island>
+        <dt-stack gap="200">
+          <dt-text as="p" kind="code" size="xs" tone="tertiary">Transparent background, inverted mode island</dt-text>
+          <div>
+            <dt-button>Button</dt-button>
+          </div>
+        </dt-stack>
+      </dt-mode-island>
+      <dt-mode-island class="d-p-200 d-bar8 d-w100p">
+        <dt-stack gap="200">
+          <dt-text as="p" kind="code" size="xs" tone="tertiary">Default background, inverted mode island</dt-text>
+          <div>
+            <dt-button>Button</dt-button>
+          </div>
+        </dt-stack>
+      </dt-mode-island>
+      <dt-mode-island mode="dark" class="d-p-200 d-bar8 d-w100p d-bgc-critical">
+        <dt-stack gap="200">
+          <dt-text as="p" kind="code" size="xs" tone="tertiary">critical background, dark mode island</dt-text>
+          <div>
+            <dt-button>Button</dt-button>
+          </div>
+        </dt-stack>
+      </dt-mode-island>
+      <dt-mode-island mode="light" class="d-p-200 d-bar8 d-w100p d-bgc-critical">
+        <dt-stack gap="200">
+          <dt-text as="p" kind="code" size="xs" tone="tertiary">critical background, light mode island</dt-text>
+          <div>
+            <dt-button>Button</dt-button>
+          </div>
+        </dt-stack>
+      </dt-mode-island>
+  </dt-stack>
   </dt-stack>
 </code-example>
 
