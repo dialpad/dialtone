@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 
 
+
 export default {
   default: {
     props: {
@@ -148,13 +149,13 @@ export default {
     slots: {
       tabs: {
         initialValue: `
-<dt-tab id="tab-1" panel-id="panel-1" selected>
+<dt-tab id="tab-1" panel-id="panel-1" label="Inbox" selected>
   <template #startIcon="{ iconSize }"><dt-icon name="inbox" :size="iconSize" /></template>
 </dt-tab>
-<dt-tab id="tab-2" panel-id="panel-2">
+<dt-tab id="tab-2" panel-id="panel-2" label="Send">
   <template #startIcon="{ iconSize }"><dt-icon name="send" :size="iconSize" /></template>
 </dt-tab>
-<dt-tab id="tab-3" panel-id="panel-3">
+<dt-tab id="tab-3" panel-id="panel-3" label="Archive">
   <template #startIcon="{ iconSize }"><dt-icon name="archive" :size="iconSize" /></template>
 </dt-tab>`
 ,
