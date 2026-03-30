@@ -2,7 +2,7 @@
   <dt-text
     as="div"
     kind="label"
-    size="xs"
+    :size="100"
     tone="secondary"
   >
     <slot />
@@ -10,7 +10,7 @@
   <dt-text
     kind="code"
     tone="muted"
-    size="xs"
+    :size="100"
   >
     <slot name="prefix" />
   </dt-text>
@@ -31,7 +31,7 @@
           class="dtc-icon"
           importance="clear"
           kind="muted"
-          size="xs"
+          :size="100"
           :disabled="disabled"
           @click="() => removeItem(index)"
         >
@@ -43,7 +43,7 @@
     </template>
     <dt-button
       class="dtc-icon"
-      size="xs"
+      :size="100"
       importance="clear"
       kind="muted"
       :disabled="disabled"
@@ -57,7 +57,7 @@
   <dt-text
     kind="code"
     tone="muted"
-    size="xs"
+    :size="100"
   >
     <slot name="suffix" />
   </dt-text>

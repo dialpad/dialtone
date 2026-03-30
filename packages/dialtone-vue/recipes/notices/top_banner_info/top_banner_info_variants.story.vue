@@ -17,7 +17,7 @@
       </template>
       <dt-button
         importance="clear"
-        size="xs"
+        :size="100"
         kind="muted"
         class="d-px-50 d-py-0"
       >
@@ -149,7 +149,7 @@
       <template #end>
         <dt-button
           importance="clear"
-          size="xs"
+          :size="100"
           kind="muted"
           class="d-fc-primary d-p-0"
         >

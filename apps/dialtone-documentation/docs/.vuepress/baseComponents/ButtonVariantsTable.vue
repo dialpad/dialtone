@@ -29,12 +29,12 @@ const kindDescriptions = {
     </colgroup>
     <thead>
       <tr>
-        <th class="d-ta-left d-va-top" />
+        <th class="d-ta-left d-va-top" aria-hidden="true" />
         <th v-for="importance in importanceModifiers" :key="importance" class="d-ta-left d-va-top">
           <div class="d-mbe-50">
             {{ importance }}
           </div>
-          <dt-text kind="body" size="sm" density="200" class="d-tt-none">
+          <dt-text kind="body" :size="200" density="200" class="d-tt-none">
             {{ importanceDescriptions[importance] }}
           </dt-text>
         </th>
@@ -46,7 +46,7 @@ const kindDescriptions = {
           <a class="d-link d-fs-100 d-fw-medium d-d-block d-mbe-50 d-tt-uppercase" :href="`#${kind}`">
             <strong>{{ kind }}</strong>
           </a>
-          <dt-text kind="body" size="sm" density="200">
+          <dt-text kind="body" :size="200" density="200">
             {{ kindDescriptions[kind] }}
           </dt-text>
         </th>

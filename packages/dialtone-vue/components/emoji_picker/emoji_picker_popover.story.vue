@@ -7,7 +7,7 @@
   >
     <template #anchor>
       <dt-button
-        size="sm"
+        :size="200"
         circle
         importance="clear"
         @click="toggleEmojiPicker"

@@ -3,13 +3,13 @@
     :model-value="value"
     :disabled="disabled"
     :messages="messages"
-    size="xs"
+    :size="100"
     @input="e => emit(VALUE_UPDATE_EVENT, e)"
   >
     <template #labelSlot>
       <dt-text
         kind="label"
-        size="xs"
+        :size="100"
         tone="secondary"
         class="d-input__label-text"
       >
@@ -21,7 +21,7 @@
         v-if="isModified && !$slots.icon"
         kind="muted"
         importance="clear"
-        size="xs"
+        :size="100"
         class="d-p-25"
         @click.stop="onReset"
       >

@@ -4,14 +4,14 @@
       :model-value="value"
       :disabled="disabled"
       label-class="d-label--sm d-fc-secondary"
-      size="sm"
+      :size="200"
       wrapper-class="d-jc-space-between"
       data-qa="dtc-control-boolean-input"
       @change="e => emit(VALUE_UPDATE_EVENT, e)"
     >
       <dt-text
         kind="label"
-        size="xs"
+        :size="100"
         tone="secondary"
         class="d-input__label-text d-mbe-0"
       >

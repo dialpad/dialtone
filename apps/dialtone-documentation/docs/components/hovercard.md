@@ -57,7 +57,7 @@ Hovercard content renders outside the DOM tree. Use the `contentMode` prop to ap
 '>
   <dt-hovercard content-mode="invert" placement="bottom-start">
     <template #anchor>
-      <dt-button size="sm" kind="muted" importance="outlined">Hover for Inverted Hovercard</dt-button>
+      <dt-button :size="200" kind="muted" importance="outlined">Hover for Inverted Hovercard</dt-button>
     </template>
     <template #content>
       <dt-text as="p">This hovercard content is in the <dt-text strength="strong">inverted</dt-text> mode.</dt-text>

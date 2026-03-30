@@ -7,7 +7,7 @@ keywords: ["css tokens","dev tokens","code tokens"]
 
 <div class="d-ba d-bar16 d-py-200 d-mbs-400 d-ta-center d-fc-muted d-headline--xxl">
   <dt-empty-state
-    size="md"
+    :size="300"
     header-text="TBD"
     class="d-w100p"
   >

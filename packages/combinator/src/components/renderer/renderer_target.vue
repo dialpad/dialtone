@@ -8,7 +8,7 @@
 import { capitalize, computed, h, nextTick, onMounted, onUpdated, ref, render, useSlots } from 'vue';
 import { DtNotice } from '@dialpad/dialtone-vue';
 
-const ERROR_MESSAGE = 'Error rendering component';
+const ERROR_MESSAGE = 'Invalid combination';
 
 const props = defineProps({
   /**

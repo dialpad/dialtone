@@ -62,125 +62,30 @@ Declare the role of the content. Default will inherit styles from the parent.
 
 ### Size
 
-All kinds support `size` prop, but not all sizes are available for each kind. When `kind` is set, size defaults to `md` if not specified.
+All kinds support `size` prop, but not all sizes are available for each kind. When `kind` is set, size defaults to `300` if not specified.
 
-<code-example vueCode='
-<dt-text kind="{{kind}}" size="{{size}}">....</dt-text>
-'>
-  <dt-stack class="d-w100p d-ba d-bar4 d-of-auto">
-    <table class="d-w100p d-table">
-      <tr class="d-va-baseline">
-        <th></th>
-        <th class="d-ta-center">
-          <dt-text as="code" kind="code" class="d-bgc-transparent">xs</dt-text>
-        </th>
-        <th class="d-ta-center">
-          <dt-text as="code" kind="code" class="d-bgc-transparent">sm</dt-text>
-        </th>
-        <th class="d-ta-center">
-          <dt-text as="code" kind="code" class="d-bgc-transparent">md</dt-text>
-        </th>
-        <th class="d-ta-center">
-          <dt-text as="code" kind="code" class="d-bgc-transparent">lg</dt-text>
-        </th>
-        <th class="d-ta-center">
-          <dt-text as="code" kind="code" class="d-bgc-transparent">xl</dt-text>
-        </th>
-        <th class="d-ta-center">
-          <dt-text as="code" kind="code" class="d-bgc-transparent">2xl</dt-text>
-        </th>
-        <th class="d-ta-center">
-          <dt-text as="code" kind="code" class="d-bgc-transparent">3xl</dt-text>
-        </th>
-      </tr>
-      <tr class="d-va-baseline">
-        <th scope="row">
-          <dt-text as="code" align="end" kind="code" class="d-bgc-transparent ">headline</dt-text>
-        </th>
-        <td class="d-ta-center">
-          <dt-text kind="headline" as="h2" size="xs">Text</dt-text>
-        </td>
-        <td class="d-ta-center">
-          <dt-text kind="headline" as="h2" size="sm">Text</dt-text>
-        </td>
-        <td class="d-ta-center">
-          <dt-text kind="headline" as="h2">Text</dt-text>
-        </td>
-        <td class="d-ta-center">
-          <dt-text kind="headline" as="h2" size="lg">Text</dt-text>
-        </td>
-        <td class="d-ta-center">
-          <dt-text kind="headline" as="h2" size="xl">Text</dt-text>
-        </td>
-        <td class="d-ta-center">
-          <dt-text kind="headline" as="h2" size="2xl">Text</dt-text>
-        </td>
-        <td class="d-ta-center">
-          <dt-text kind="headline" as="h2" size="3xl">Text</dt-text>
-        </td>
-      </tr>
-      <tr class="d-va-baseline">
-        <th scope="row">
-          <dt-text as="code" align="end" kind="code" class="d-bgc-transparent">body</dt-text>
-        </th>
-        <td class="d-ta-center">
-          <dt-text kind="body" as="p" size="xs">Text</dt-text>
-        </td>
-        <td class="d-ta-center">
-          <dt-text kind="body" as="p" size="sm">Text</dt-text>
-        </td>
-        <td class="d-ta-center">
-          <dt-text kind="body" as="p">Text</dt-text>
-        </td>
-        <td class="d-ta-center">
-          <dt-text kind="body" as="p" size="lg">Text</dt-text>
-        </td>
-        <td class="d-ta-center"><dt-text tone="muted" kind="body" size="sm" title="not available">-</dt-text></td>
-        <td class="d-ta-center"><dt-text tone="muted" kind="body" size="sm" title="not available">-</dt-text></td>
-        <td class="d-ta-center"><dt-text tone="muted" kind="body" size="sm" title="not available">-</dt-text></td>
-      </tr>
-      <tr class="d-va-baseline">
-        <th scope="row">
-          <dt-text as="code" align="end" kind="code" class="d-bgc-transparent">label</dt-text>
-        </th>
-        <td class="d-ta-center">
-          <dt-text kind="label" as="p" size="xs">Text</dt-text>
-        </td>
-        <td class="d-ta-center">
-          <dt-text kind="label" as="p" size="sm">Text</dt-text>
-        </td>
-        <td class="d-ta-center">
-          <dt-text kind="label" as="p">Text</dt-text>
-        </td>
-        <td class="d-ta-center">
-          <dt-text kind="label" as="p" size="lg">Text</dt-text>
-        </td>
-        <td class="d-ta-center"><dt-text tone="muted" kind="body" size="sm" title="not available">-</dt-text></td>
-        <td class="d-ta-center"><dt-text tone="muted" kind="body" size="sm" title="not available">-</dt-text></td>
-        <td class="d-ta-center"><dt-text tone="muted" kind="body" size="sm" title="not available">-</dt-text></td>
-      </tr>
-      <tr class="d-va-baseline">
-        <th scope="row">
-          <dt-text as="code" align="end" kind="code" class="d-bgc-transparent">code</dt-text>
-        </th>
-        <td class="d-ta-center">
-          <dt-text kind="code" as="code" size="xs" class="d-bgc-transparent" tone="secondary">Text</dt-text>
-        </td>
-        <td class="d-ta-center">
-          <dt-text kind="code" as="code" size="sm" class="d-bgc-transparent" tone="secondary">Text</dt-text>
-        </td>
-        <td class="d-ta-center">
-          <dt-text kind="code" as="code" class="d-bgc-transparent" tone="secondary">Text</dt-text>
-        </td>
-        <td class="d-ta-center">
-          <dt-text kind="code" as="code" size="lg" class="d-bgc-transparent" tone="secondary">Text</dt-text>
-        </td>
-        <td class="d-ta-center"><dt-text tone="muted" kind="body" size="sm" title="not available">-</dt-text></td>
-        <td class="d-ta-center"><dt-text tone="muted" kind="body" size="sm" title="not available">-</dt-text></td>
-        <td class="d-ta-center"><dt-text tone="muted" kind="body" size="sm" title="not available">-</dt-text></td>
-      </tr>
-    </table>
-  </dt-stack>
+<dt-stack class="d-w100p d-ba d-bar4 d-of-auto">
+  <table class="d-w100p d-table">
+    <tr class="d-va-baseline">
+      <th></th>
+      <th v-for="s in textSizeColumns" :key="s" class="d-ta-center">
+        <dt-text as="code" kind="code" size="100" class="d-docsite-code">{{ s }}</dt-text>
+      </th>
+    </tr>
+    <tr v-for="kind in textSizeKinds" :key="kind.name" class="d-va-baseline">
+      <th scope="row">
+        <dt-text as="code" align="end" kind="code" size="100" class="d-docsite-code">{{ kind.name }}</dt-text>
+      </th>
+      <td v-for="s in textSizeColumns" :key="s" class="d-ta-center">
+        <dt-text v-if="kind.sizes.includes(String(s))" :kind="kind.name" :as="kind.as" :size="s" :class="kind.class" :tone="kind.tone">Text</dt-text>
+        <dt-text v-else tone="muted" kind="body" :size="200" title="not available">-</dt-text>
+      </td>
+    </tr>
+  </table>
+</dt-stack>
+
+<code-example only-show="code">
+  <dt-text kind="{kind}" :size="{size}">....</dt-text>
 </code-example>
 
 ### Numeric
@@ -192,7 +97,7 @@ The `numeric` prop applies styles that ensure that each number is set with consi
 '>
   <dt-stack direction="row" gap="200">
     <dt-stack>
-      <dt-text kind="label" size="sm" tone="critical">Without numeric</dt-text>
+      <dt-text kind="label" :size="200" tone="critical">Without numeric</dt-text>
       <dt-text>(913) 555-3170</dt-text>
       <dt-text>(908) 555-1111</dt-text>
       <dt-text>(805) 555-8413</dt-text>
@@ -200,7 +105,7 @@ The `numeric` prop applies styles that ensure that each number is set with consi
       <dt-text>(886) 555-8888</dt-text>
     </dt-stack>
     <dt-stack>
-      <dt-text kind="label" size="sm" tone="success">With numeric</dt-text>
+      <dt-text kind="label" :size="200" tone="success">With numeric</dt-text>
       <dt-text numeric>(913) 555-3170</dt-text>
       <dt-text numeric>(908) 555-1111</dt-text>
       <dt-text numeric>(805) 555-8413</dt-text>
@@ -233,12 +138,12 @@ Override the line-height of the text. Applies to any kind/size combination. If o
 <dt-text density="{{density}}">...</dt-text>
 '>
   <dt-stack gap="100">
-    <dt-text kind="body" as="p" density="100" class="d-bgc-moderate-opaque"><dt-text kind="code" as="code" size="sm" class="d-bgc-transparent">100</dt-text> The quick brown fox jumped over the lazy dog.</dt-text>
-    <dt-text kind="body" as="p" density="200" class="d-bgc-moderate-opaque"><dt-text kind="code" as="code" size="sm" class="d-bgc-transparent">200</dt-text> The quick brown fox jumped over the lazy dog.</dt-text>
-    <dt-text kind="body" as="p" density="300" class="d-bgc-moderate-opaque"><dt-text kind="code" as="code" size="sm" class="d-bgc-transparent">300</dt-text> The quick brown fox jumped over the lazy dog.</dt-text>
-    <dt-text kind="body" as="p" density="400" class="d-bgc-moderate-opaque"><dt-text kind="code" as="code" size="sm" class="d-bgc-transparent">400</dt-text> The quick brown fox jumped over the lazy dog.</dt-text>
-    <dt-text kind="body" as="p" density="500" class="d-bgc-moderate-opaque"><dt-text kind="code" as="code" size="sm" class="d-bgc-transparent">500</dt-text> The quick brown fox jumped over the lazy dog.</dt-text>
-    <dt-text kind="body" as="p" density="600" class="d-bgc-moderate-opaque"><dt-text kind="code" as="code" size="sm" class="d-bgc-transparent">600</dt-text> The quick brown fox jumped over the lazy dog.</dt-text>
+    <dt-text kind="body" as="p" density="100" class="d-bgc-moderate-opaque"><dt-text kind="code" as="code" :size="200" class="d-bgc-transparent">100</dt-text> The quick brown fox jumped over the lazy dog.</dt-text>
+    <dt-text kind="body" as="p" density="200" class="d-bgc-moderate-opaque"><dt-text kind="code" as="code" :size="200" class="d-bgc-transparent">200</dt-text> The quick brown fox jumped over the lazy dog.</dt-text>
+    <dt-text kind="body" as="p" density="300" class="d-bgc-moderate-opaque"><dt-text kind="code" as="code" :size="200" class="d-bgc-transparent">300</dt-text> The quick brown fox jumped over the lazy dog.</dt-text>
+    <dt-text kind="body" as="p" density="400" class="d-bgc-moderate-opaque"><dt-text kind="code" as="code" :size="200" class="d-bgc-transparent">400</dt-text> The quick brown fox jumped over the lazy dog.</dt-text>
+    <dt-text kind="body" as="p" density="500" class="d-bgc-moderate-opaque"><dt-text kind="code" as="code" :size="200" class="d-bgc-transparent">500</dt-text> The quick brown fox jumped over the lazy dog.</dt-text>
+    <dt-text kind="body" as="p" density="600" class="d-bgc-moderate-opaque"><dt-text kind="code" as="code" :size="200" class="d-bgc-transparent">600</dt-text> The quick brown fox jumped over the lazy dog.</dt-text>
   </dt-stack>
 </code-example>
 
@@ -286,20 +191,20 @@ Use `as` to declare the underlying HTML tag that the component should render, in
 <code-example>
   <dt-stack class="d-w100p" gap="200">
     <dt-stack gap="100">
-      <dt-text kind="headline" as="h1" size="2xl">The Complete Agentic AI Platform</dt-text>
-      <dt-text kind="body" as="p" size="lg">Our AI Agents come equipped with the core skills businesses need to deliver seamless customer experiences.</dt-text>
+      <dt-text kind="headline" as="h1" :size="600">The Complete Agentic AI Platform</dt-text>
+      <dt-text kind="body" as="p" :size="400">Our AI Agents come equipped with the core skills businesses need to deliver seamless customer experiences.</dt-text>
     </dt-stack>
     <dt-stack :direction="{ 'default': 'column', 'md': 'row' }" gap="500" align="start">
       <dt-stack>
-        <dt-text kind="headline" as="h2" size="xl">Try before you AI</dt-text>
+        <dt-text kind="headline" as="h2" :size="500">Try before you AI</dt-text>
         <dt-text kind="body" as="p">Build, run and optimize your agents - no code, just your expertise and our built-in intelligence.</dt-text>
       </dt-stack>
       <dt-stack>
-        <dt-text kind="headline" as="h2" size="xl">Great minds sync alike</dt-text>
+        <dt-text kind="headline" as="h2" :size="500">Great minds sync alike</dt-text>
         <dt-text kind="body" as="p">Our AI learns and balances speed with quality using one data plane that keeps customers coming back.</dt-text>
       </dt-stack>
       <dt-stack>
-        <dt-text kind="headline" as="h2" size="xl">History repeats itself. Customers shouldn't.</dt-text>
+        <dt-text kind="headline" as="h2" :size="500">History repeats itself. Customers shouldn't.</dt-text>
         <dt-text kind="body" as="p">Whatever your customer types or says, our AI and your human agents stay in sync.</dt-text>
       </dt-stack>
     </dt-stack>
@@ -347,16 +252,16 @@ Since `DtText`'s default element is a `<span>`, the `truncate` will only work if
 <code-example only-show="demo">
   <dt-stack gap="100">
     <dt-stack direction="row" gap="200" justify="space-between" align="center">
-      <dt-text kind="headline" size="lg" as="h3" tone="secondary">Demo</dt-text>
+      <dt-text kind="headline" :size="400" as="h3" tone="secondary">Demo</dt-text>
       <dt-stack direction="row" gap="200" align="center">
-        <dt-text v-if="state.isApplied" as="code" kind="code" size="xs" tone="tertiary">
+        <dt-text v-if="state.isApplied" as="code" kind="code" :size="100" tone="tertiary">
           max-lines="<strong>{{ state.value }}</strong>"
         </dt-text>
         <dt-stack direction="row" gap="25" align="center">
           <dt-stack direction="row">
             <dt-button
               class="d-as-stretch d-brr0 d-brw0"
-              size="sm"
+              :size="200"
               importance="outlined"
               kind="muted"
               @click="toggleMaxLines"
@@ -366,7 +271,7 @@ Since `DtText`'s default element is a `<span>`, the `truncate` will only work if
             <dt-button
               v-dt-tooltip="`Decrement`"
               class="d-as-stretch d-g-0 d-blr0 d-brr0 d-brw0"
-              size="sm"
+              :size="200"
               importance="outlined"
               kind="muted"
               :disabled="!canDecreaseMaxLines"
@@ -379,7 +284,7 @@ Since `DtText`'s default element is a `<span>`, the `truncate` will only work if
             <dt-button
               v-dt-tooltip="`Increment`"
               class="d-as-stretch d-g-0 d-blr0"
-              size="sm"
+              :size="200"
               importance="outlined"
               kind="muted"
               :disabled="!canIncreaseMaxLines"
@@ -473,7 +378,7 @@ Text box trim will only affect elements with block or inline-block styled contex
 <dt-stack gap="500">
   <dt-stack gap="400" justify="space-between">
     <dt-stack>
-      <dt-text as="h2" kind="headline" size="xl" strength="medium" density="200" class="d-fs-400">
+      <dt-text as="h2" kind="headline" :size="500" strength="medium" density="200" class="d-fs-400">
         Katie Rodriguez
       </dt-text>
       <dt-stack direction="row" gap="350">
@@ -487,10 +392,10 @@ Text box trim will only affect elements with block or inline-block styled contex
       </dt-stack>
     </dt-stack>
     <dt-stack gap="200">
-      <dt-text kind="body" size="md" density="200" strength="semibold" tone="tertiary">
+      <dt-text kind="body" :size="300" density="200" strength="semibold" tone="tertiary">
         Chief Customer Success Officer
       </dt-text>
-      <dt-text kind="body" size="sm" density="200">
+      <dt-text kind="body" :size="200" density="200">
         <dt-text strength="semibold">
           6:19 am
         </dt-text> local time
@@ -526,21 +431,21 @@ Text box trim will only affect elements with block or inline-block styled contex
 
 <code-example>
   <dt-stack gap="100" class="d-w-700">
-    <dt-text as="h2" kind="headline" size="lg">Saturday, May 24, 2025</dt-text>
+    <dt-text as="h2" kind="headline" :size="400">Saturday, May 24, 2025</dt-text>
     <dt-stack direction="row" gap="150">
       <dt-avatar full-name="Ashanti Trevor" />
       <dt-stack class="d-fl1">
-        <dt-text kind="body" size="sm" strength="bold">Ashanti Trevor</dt-text>
+        <dt-text kind="body" :size="200" strength="bold">Ashanti Trevor</dt-text>
         <dt-stack direction="row" gap="50">
           <dt-stack direction="row" gap="100">
             <dt-icon name="phone-outgoing" size="200" class="d-fc-tertiary" />
-            <dt-text kind="body" size="xs" tone="tertiary">Outgoing call</dt-text>
+            <dt-text kind="body" :size="100" tone="tertiary">Outgoing call</dt-text>
           </dt-stack>
-          <dt-text kind="body" size="xs" tone="tertiary">&bull;</dt-text>
-          <dt-text kind="body" size="xs" tone="tertiary">2 minutes 10 seconds</dt-text>
+          <dt-text kind="body" :size="100" tone="tertiary">&bull;</dt-text>
+          <dt-text kind="body" :size="100" tone="tertiary">2 minutes 10 seconds</dt-text>
         </dt-stack>
       </dt-stack>
-      <dt-text kind="body" size="sm" tone="tertiary">3:23 pm</dt-text>
+      <dt-text kind="body" :size="200" tone="tertiary">3:23 pm</dt-text>
       <dt-badge kind="count" type="bulletin" text="6" />
     </dt-stack>
   </dt-stack>
@@ -562,7 +467,16 @@ Text box trim will only affect elements with block or inline-block styled contex
 
 <script setup>
 import { computed, reactive } from 'vue';
+import { TEXT_SIZE_MODIFIERS } from '@dialpad/dialtone-vue';
 import ExampleProfileCard from '@exampleComponents/ExampleProfileCard.vue';
+
+const textSizeColumns = [100, 200, 300, 400, 500, 600, 700];
+const textSizeKinds = [
+  { name: 'headline', as: 'h2', sizes: TEXT_SIZE_MODIFIERS.headline },
+  { name: 'body', as: 'p', sizes: TEXT_SIZE_MODIFIERS.body },
+  { name: 'label', as: 'p', sizes: TEXT_SIZE_MODIFIERS.label },
+  { name: 'code', as: 'code', sizes: TEXT_SIZE_MODIFIERS.code, class: 'd-bgc-transparent', tone: 'secondary' },
+];
 
 const BOUNDS = Object.freeze({ min: 2, max: 10, default: 4 });
 const clampToBounds = (value) => Math.min(Math.max(value ?? BOUNDS.default, BOUNDS.min), BOUNDS.max);

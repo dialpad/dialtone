@@ -187,12 +187,12 @@ All tabs share the same width, regardless of label length.
 ## Sizes
 
 <code-example vueCode='
-<dt-tab-group size="xs|sm|md|lg|xl">
+<dt-tab-group :size="100|200|300|400|500">
   ...
 </dt-tab-group>
 '>
   <dt-stack gap="200" class="d-w100p">
-    <dt-tab-group size="xs">
+    <dt-tab-group :size="100">
       <template #tabs>
         <dt-tab id="1" panel-id="2" selected>
           First
@@ -205,7 +205,7 @@ All tabs share the same width, regardless of label length.
         </dt-tab>
       </template>
     </dt-tab-group>
-    <dt-tab-group size="sm">
+    <dt-tab-group :size="200">
       <template #tabs>
         <dt-tab id="1" panel-id="2" selected>
           First
@@ -231,7 +231,7 @@ All tabs share the same width, regardless of label length.
         </dt-tab>
       </template>
     </dt-tab-group>
-    <dt-tab-group size="lg">
+    <dt-tab-group :size="400">
       <template #tabs>
         <dt-tab id="1" panel-id="2" selected>
           First
@@ -244,7 +244,7 @@ All tabs share the same width, regardless of label length.
         </dt-tab>
       </template>
     </dt-tab-group>
-    <dt-tab-group size="xl">
+    <dt-tab-group :size="500">
       <template #tabs>
         <dt-tab id="1" panel-id="2" selected>
           First

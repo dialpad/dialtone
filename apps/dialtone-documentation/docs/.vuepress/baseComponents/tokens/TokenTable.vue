@@ -65,7 +65,7 @@
               align="center"
               class="token-name"
             >
-              <dt-text as="p" kind="label" size="md">
+              <dt-text as="p" kind="label" :size="300">
                 {{ name }}
               </dt-text>
               <div class="d-w-50">
@@ -78,7 +78,7 @@
                 </dt-lazy-show>
               </div>
             </dt-stack>
-            <dt-text kind="body" size="sm" tone="tertiary">
+            <dt-text kind="body" :size="200" tone="tertiary">
               {{ description }}
             </dt-text>
             <token-value
@@ -88,12 +88,12 @@
             />
           </th>
           <td v-if="!isSmallDevice && showValue" class="d-ta-right d-wmx-250">
-            <dt-text as="span" kind="code" size="md" class="d-fc-blue-800">
+            <dt-text as="span" kind="code" :size="300" class="d-fc-blue-800">
               <token-value :token-value="valueToString(tokenValue)" :tokens="tokens" />
             </dt-text>
           </td>
           <td v-if="!!tokenList">
-            <dt-text as="div" kind="code" size="md" class="d-docsite-code d-wmx-400">
+            <dt-text as="div" kind="code" :size="300" class="d-docsite-code d-wmx-400">
               {{ remToPixels(tokenValue) }}
             </dt-text>
           </td>

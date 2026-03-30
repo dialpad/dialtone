@@ -22,13 +22,13 @@
             :key="className"
           >
             <th scope="row">
-              <dt-text as="span" kind="code" size="xs" class="d-docsite-code">
+              <dt-text as="span" kind="code" :size="100" class="d-docsite-code">
                 {{ className }}
               </dt-text>
             </th>
             <td class="d-ws-break-spaces">
               <dt-stack direction="row" justify="between" align="center" gap="200">
-                <dt-text as="span" kind="code" size="xs" class="d-fl-grow1">
+                <dt-text as="span" kind="code" :size="100" class="d-fl-grow1">
                   {{ value }}
                 </dt-text>
                 <slot name="example" :class-name="className" />

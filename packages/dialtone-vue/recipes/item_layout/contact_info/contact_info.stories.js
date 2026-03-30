@@ -346,12 +346,12 @@ export const Variants = {
         <template #subtitle>+1 (415) 123-4567</template>
         <template #end>
           <dt-stack direction="row" align="center" class="d-m-100">
-            <dt-button size="xs" :circle="true" importance="clear" aria-label="chat">
+            <dt-button :size="100" :circle="true" importance="clear" aria-label="chat">
               <template #icon>
                 <dt-icon size="400" name="webchat" />
               </template>
             </dt-button>
-            <dt-button size="xs" :circle="true" importance="clear" aria-label="more">
+            <dt-button :size="100" :circle="true" importance="clear" aria-label="more">
               <template #icon>
                 <dt-icon size="400" name="more-horizontal" />
               </template>

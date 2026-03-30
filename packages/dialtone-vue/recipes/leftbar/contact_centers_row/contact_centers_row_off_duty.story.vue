@@ -19,7 +19,7 @@
       #end
     >
       <dt-button
-        size="sm"
+        :size="200"
         kind="muted"
         importance="clear"
         class="d-bar-pill d-py-50 d-fc-critical d-to-ellipsis"
@@ -43,7 +43,7 @@
           01:15
         </div>
         <dt-button
-          size="sm"
+          :size="200"
           kind="muted"
           importance="outlined"
         >

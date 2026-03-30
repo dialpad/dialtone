@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 export default {
   exclusions: [
     {
@@ -64,7 +65,7 @@ export default {
         initialValue: 'muted',
       },
       size: {
-        initialValue: 'sm',
+        initialValue: '200',
       },
     },
     slots: {
@@ -132,7 +133,7 @@ export default {
       rel: { initialValue: 'noopener noreferrer' },
       kind: { initialValue: 'muted' },
       importance: { initialValue: 'outlined' },
-      size: { initialValue: 'sm' },
+      size: { initialValue: '200' },
       iconPosition: { initialValue: 'right' },
     },
     slots: {
@@ -145,7 +146,7 @@ export default {
     props: {
       to: { initialValue: '/' },
       kind: { initialValue: 'default' },
-      size: { initialValue: 'xs' },
+      size: { initialValue: '100' },
     },
     slots: {
       default: { initialValue: 'Home' },
@@ -187,7 +188,7 @@ export default {
   'with trailing slot': {
     props: {
       size: {
-        initialValue: 'sm',
+        initialValue: '200',
       },
       kind: {
         initialValue: 'muted',

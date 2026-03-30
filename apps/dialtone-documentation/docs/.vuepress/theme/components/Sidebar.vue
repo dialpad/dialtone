@@ -25,7 +25,7 @@
             v-dt-tooltip="'Clear search'"
             kind="muted"
             importance="clear"
-            size="xs"
+            :size="100"
             aria-label="Clear search"
             @click="clear"
           >
@@ -47,7 +47,7 @@
     />
     <li v-if="filteredItems.length === 0 && inputValue.trim()">
       <dt-empty-state
-        size="sm"
+        :size="200"
         :header-text="`No results found for &quot;${inputValue}&quot;`"
         class="d-w100p"
       >

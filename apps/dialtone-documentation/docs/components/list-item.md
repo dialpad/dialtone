@@ -84,18 +84,18 @@ When `type` is set to "custom" the list item will not render any styles or slots
           <dt-text
             kind="body"
             tone="muted"
-            size="xs"
+            :size="100"
             datetime="10:00"
           >
             10:00
           </dt-text>
-          <dt-text size="md" density="300" kind="body" tone="secondary">
+          <dt-text :size="300" density="300" kind="body" tone="secondary">
             Custom list item example lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
           </dt-text>
         </dt-stack>
         <dt-stack direction="row">
           <dt-button
-            size="xs"
+            :size="100"
             kind="muted"
             importance="clear"
             title="share"
@@ -108,7 +108,7 @@ When `type` is set to "custom" the list item will not render any styles or slots
             </template>
           </dt-button>
           <dt-button
-            size="xs"
+            :size="100"
             kind="muted"
             importance="clear"
             title="star"
@@ -121,7 +121,7 @@ When `type` is set to "custom" the list item will not render any styles or slots
             </template>
           </dt-button>
           <dt-button
-            size="xs"
+            :size="100"
             kind="muted"
             importance="clear"
             title="more"

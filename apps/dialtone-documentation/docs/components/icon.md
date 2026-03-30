@@ -102,7 +102,7 @@ When setting the color of an icon take these into consideration:
     </dt-stack>
     <dt-stack direction="row" as="section" gap="300">
       <dt-icon class="d-fc-success" name="bell" size="200" ariaLabel="Bell Icon" />
-      <dt-text kind="body" size="sm" tone="success">Available</dt-text>
+      <dt-text kind="body" :size="200" tone="success">Available</dt-text>
     </dt-stack>
   </dt-stack>
   </dt-stack>
@@ -121,7 +121,7 @@ When setting the color of an icon take these into consideration:
   </dt-stack>
   <dt-stack direction="row" as="section" gap="300">
     <dt-icon class="d-fc-critical" name="bell" size="200" ariaLabel="Bell Icon" />
-    <dt-text kind="body" size="sm" tone="success">Available</dt-text>
+    <dt-text kind="body" :size="200" tone="success">Available</dt-text>
   </dt-stack>
   </dt-stack>
   </dt-stack>
@@ -188,8 +188,8 @@ Dialtone provides eight sizes for icons. Each of the sizes represents the width 
         <td class="d-ta-center">
           <dt-icon name="inbox" :size="size" />
         </td>
-        <td><dt-text kind="code" size="sm">{{ width_height }}</dt-text></td>
-        <td><dt-text kind="code" size="sm">.{{ className }}</dt-text></td>
+        <td><dt-text kind="code" :size="200">{{ width_height }}</dt-text></td>
+        <td><dt-text kind="code" :size="200">.{{ className }}</dt-text></td>
       </tr>
     </tbody>
   </table>

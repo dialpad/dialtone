@@ -6,7 +6,7 @@
         Large (lg)
       </p>
       <dt-empty-state
-        size="lg"
+        :size="400"
         header-text="Nothing to see here"
         body-text="Lorem ipsum dolor sit amet consectetur. Diam in aliquam arcu elit pulvinar morbi lorem ac neque."
       >
@@ -32,7 +32,7 @@
         Medium (md)
       </p>
       <dt-empty-state
-        size="md"
+        :size="300"
         header-text="Nothing to see here"
         body-text="Lorem ipsum dolor sit amet consectetur. Diam in aliquam arcu elit pulvinar morbi lorem ac neque."
       >
@@ -48,7 +48,7 @@
         Small (sm)
       </p>
       <dt-empty-state
-        size="sm"
+        :size="200"
         header-text="Nothing to see here"
         body-text="Lorem ipsum dolor sit amet consectetur. Diam in aliquam arcu elit pulvinar morbi lorem ac neque."
       >

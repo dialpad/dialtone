@@ -38,13 +38,13 @@
           <dt-text
             as="h1"
             kind="headline"
-            size="3xl"
+            :size="700"
           >
             {{ title }}
           </dt-text>
           <dt-text
             kind="body"
-            size="sm"
+            :size="200"
           >
             <dt-link
               :href="iframeUrl"
@@ -77,7 +77,7 @@
             >
               <dt-text
                 kind="body"
-                size="sm"
+                :size="200"
                 class="d-ws-nowrap"
               >
                 {{ section.name }}
@@ -104,7 +104,7 @@
             <dt-text
               as="h2"
               kind="headline"
-              size="2xl"
+              :size="600"
             >
               {{ section.name }}
             </dt-text>
@@ -121,7 +121,7 @@
             gap="100"
           >
             <dt-text
-              size="xs"
+              :size="100"
               tone="muted"
               kind="code"
             >

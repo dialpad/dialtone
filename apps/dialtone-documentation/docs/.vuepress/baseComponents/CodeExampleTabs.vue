@@ -2,7 +2,7 @@
   <dt-tab-group
     class="code-example-tab-group"
     activation-mode="auto"
-    size="xs"
+    :size="100"
     @change="selectedPanelId = $event.selected"
   >
     <template #tabs>
@@ -68,7 +68,7 @@
         class="code-example-tab-group__more-btn d-bgc-secondary d-bs-sm"
         kind="muted"
         importance="outlined"
-        size="xs"
+        :size="100"
         @click="expandCodeBlocks"
       >
         Show all

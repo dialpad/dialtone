@@ -97,7 +97,7 @@
       class="d-mbs-75"
       label-class="d-mie-75"
       label="Small size"
-      size="sm"
+      :size="200"
     >
       Small size
     </dt-toggle>

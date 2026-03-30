@@ -32,7 +32,7 @@
           />
           <dt-text
             v-if="required"
-            size="xs"
+            :size="100"
             kind="label"
             strength="normal"
             tone="critical"
@@ -42,7 +42,7 @@
           </dt-text>
           <dt-text
             v-if="vModel"
-            size="xs"
+            :size="100"
             kind="label"
             strength="normal"
             tone="muted"
@@ -67,7 +67,7 @@
         v-if="rawMode"
         v-model="rawText"
         type="textarea"
-        size="xs"
+        :size="100"
         spellcheck="false"
         root-class="d-mbs-75"
       />

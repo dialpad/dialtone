@@ -27,7 +27,7 @@ keywords: ["notification", "snackbar", "alert", "message", "d-toast", "DtToast",
   </dt-link>
   <template #action>
     <dt-button
-      size="sm"
+      :size="200"
       importance="outlined"
       kind="muted"
     >
@@ -72,7 +72,7 @@ If the duration is not provided the toast won't disappear automatically.
   </dt-link>
   <template #action>
     <dt-button
-      size="sm"
+      :size="200"
       importance="outlined"
       kind="muted"
     >

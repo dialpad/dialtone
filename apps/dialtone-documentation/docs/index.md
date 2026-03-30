@@ -69,7 +69,7 @@ pageClass: dialpad-design-home
       <h2 class="d-headline--xxl d-ff-expressive" style="font-size: 48px;font-family:var(--dt-font-family-expressive); text-wrap: balance; max-width: 1400px; font-weight: var(--dt-font-weight-regular);">Design System</h2>
       <p class="d-ta-center d-docsite--paragraph d-m-0 d-wmx764" style="text-wrap: balance;  font-size: 24px; font-family:var(--dt-font-family-expressive)">Build with Dialtone Components, Design Tokens, CSS Utilities, and more.</p>
       <p class="d-ta-center d-docsite--paragraph d-m-0 d-wmx764">
-        <dt-button size="lg" to="./dialtone/">
+        <dt-button :size="400" to="./dialtone/">
           View all Documentation
           <template #endIcon>
             <dt-icon name="arrow-right" size="300" />
@@ -83,7 +83,7 @@ pageClass: dialpad-design-home
       <h2 class="d-headline--xxl d-ff-expressive" style="font-size: 48px;font-family:var(--dt-font-family-expressive); text-wrap: balance; max-width: 1400px; font-weight: var(--dt-font-weight-regular);">What's New</h2>
       <p class="d-ta-center d-docsite--paragraph d-m-0 d-wmx764" style="text-wrap: balance; font-size: 24px; font-family:var(--dt-font-family-expressive)">The latest from Dialpad Design.</p>
       <p class="d-ta-center d-docsite--paragraph d-m-0 d-wmx764">
-        <dt-button size="lg" to="./dialtone/whats-new/">
+        <dt-button :size="400" to="./dialtone/whats-new/">
           View all
           <template #endIcon>
             <dt-icon name="arrow-right" size="300" />
@@ -107,10 +107,10 @@ pageClass: dialpad-design-home
         <router-link :to="`/dialtone/whats-new/posts/${post.posted}`" class="d-d-block d-td-none">
           <dt-stack gap="300">
             <dt-link class="d-d-inline">
-              <dt-text as="h3" kind="headline" size="md">{{ post.heading }}</dt-text>
+              <dt-text as="h3" kind="headline" :size="300">{{ post.heading }}</dt-text>
             </dt-link>
-            <dt-text as="time" kind="body" size="xs" tone="tertiary">{{ post.author }} &middot; {{ formatDate(post.posted) }}</dt-text>
-            <dt-text as="p" kind="body" size="md" tone="primary" wrap="pretty">{{ post.excerpt }}</dt-text>
+            <dt-text as="time" kind="body" :size="100" tone="tertiary">{{ post.author }} &middot; {{ formatDate(post.posted) }}</dt-text>
+            <dt-text as="p" kind="body" :size="300" tone="primary" wrap="pretty">{{ post.excerpt }}</dt-text>
           </dt-stack>
         </router-link>
       </dt-stack>

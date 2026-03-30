@@ -26,7 +26,7 @@ keywords: ["btn","click","action","cta","d-button","DtButton","dt-button"]
 </template>
 <template #dont>
 
-- Avoid using to navigate between destinations, deferring to a [Link](link.md) instead. Exception: use DtButton with `href` or `to` when button styling is intentional (e.g. CTAs, toolbar actions).
+- Avoid using to navigate between destinations, deferring to a [DtLink](link.md) instead. Exception: use DtButton with `href` or `to` when button styling is intentional (e.g. CTAs, toolbar actions).
 
 </template>
 </dialtone-usage>
@@ -35,10 +35,10 @@ keywords: ["btn","click","action","cta","d-button","DtButton","dt-button"]
 
 Button labels should be clear and predictable so users have confidence in their actions.
 
-- Lead with a strong verb and use **verb + noun** structure except for common actions like “Done,” “Close,” “Cancel,” or “OK”
+- Lead with a strong verb and use **verb + noun** structure except for common actions like "Done," "Close," "Cancel," or "OK"
 - Should be sentence case
 - Do not use punctuation
-- Avoid unnecessary articles such as “the,” “an,” and “a.”
+- Avoid unnecessary articles such as "the," "an," and "a."
 
 <dialtone-usage>
 <template #do>
@@ -116,7 +116,7 @@ This style's use should be rare. When in doubt, use the [default button style](#
 <dt-button disabled {props}>Place Call</dt-button>
 '>
   <dt-stack gap="400">
-    <dt-toggle v-model="isDisabled" size="sm" wrapperClass="d-g-100 d-m-auto d-pbe-100">Disabled</dt-toggle>
+    <dt-toggle v-model="isDisabled" :size="200" wrapperClass="d-g-100 d-m-auto d-pbe-100">Disabled</dt-toggle>
     <dt-stack gap="400">
       <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
         <dt-button :disabled="isDisabled"> Place Call </dt-button>
@@ -179,7 +179,7 @@ Buttons can be set to active state using the `active` prop or `.d-btn--active` D
 
 ### Link
 
-Buttons can be styled as a [Link](link.md) in situations for which you need the appearance of a link but behavior of a button. Using the `button` element provides a better accessibility experience.
+Buttons can be styled to match the appearance of a [DtLink](link.md) in situations for which you need the appearance of a link but require the behavior of a button. Using the `button` element provides a better accessibility experience.
 
 <code-example>
   <dt-stack
@@ -236,7 +236,7 @@ Use the [v-dt-mode directive](mode-island.html#inverting) in place of `kind="inv
 <dt-button v-dt-mode:invert {props}>Place Call</dt-button>
 '>
   <dt-stack gap="400">
-    <dt-toggle v-model="isInverted" size="sm" wrapperClass="d-g-100 d-m-auto d-pbe-100">Inverted</dt-toggle>
+    <dt-toggle v-model="isInverted" :size="200" wrapperClass="d-g-100 d-m-auto d-pbe-100">Inverted</dt-toggle>
     <dt-stack gap="400">
       <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
         <dt-button v-dt-mode:invert="isInverted"> Place Call </dt-button>
@@ -280,7 +280,7 @@ Pass `href` to render as an `<a>` element. Use `target="_blank"` and `rel="noope
     rel="noopener noreferrer"
     kind="muted"
     importance="outlined"
-    size="sm"
+    :size="200"
   >
     <template #endIcon="{ iconSize }">
       <dt-icon name="external-link" :size="iconSize" />
@@ -294,7 +294,7 @@ Pass `href` to render as an `<a>` element. Use `target="_blank"` and `rel="noope
 Pass `to` to render as `<router-link>` for internal client-side SPA navigation. Use `replace` to navigate without adding a history entry.
 
 <code-example>
-  <dt-button to="/" kind="default" size="xs">
+  <dt-button to="/" kind="default" :size="100">
     Home
   </dt-button>
 </code-example>
@@ -319,7 +319,7 @@ If you have existing `<a class="d-btn">` or `<router-link class="d-btn">` workar
     target="_blank"
     rel="noopener noreferrer"
     importance="outlined"
-    size="sm"
+    :size="200"
   >
     Link Text
   </dt-button>
@@ -334,14 +334,14 @@ If you have existing `<a class="d-btn">` or `<router-link class="d-btn">` workar
   Join Room
 </router-link>
 <!-- After: DtButton with to prop -->
-<dt-button :to="roomPath" size="sm">
+<dt-button :to="roomPath" :size="200">
   Join Room
 </dt-button>
 </code-example>
 
 ## Sizes
 
-The default button size is `md`, but does not need to be explicitly specified.
+The default button size is `300`, but does not need to be explicitly specified.
 
 <code-example>
   <dt-stack
@@ -349,13 +349,13 @@ The default button size is `md`, but does not need to be explicitly specified.
     :direction="{ 'default': 'column', 'md': 'row' }"
     data-demo-wrapper
   >
-    <dt-button size="xs" kind="muted" importance="outlined">
+    <dt-button :size="100" kind="muted" importance="outlined">
       Call
       <template #startIcon="{ iconSize }">
         <dt-icon name="phone" :size="iconSize" />
       </template>
     </dt-button>
-    <dt-button size="sm" kind="muted" importance="outlined">
+    <dt-button :size="200" kind="muted" importance="outlined">
       Call
       <template #startIcon="{ iconSize }">
         <dt-icon name="phone" :size="iconSize" />
@@ -367,13 +367,13 @@ The default button size is `md`, but does not need to be explicitly specified.
         <dt-icon name="phone" :size="iconSize" />
       </template>
     </dt-button>
-    <dt-button size="lg" kind="muted" importance="outlined">
+    <dt-button :size="400" kind="muted" importance="outlined">
       Call
       <template #startIcon="{ iconSize }">
         <dt-icon name="phone" :size="iconSize" />
       </template>
     </dt-button>
-    <dt-button size="xl" kind="muted" importance="outlined">
+    <dt-button :size="500" kind="muted" importance="outlined">
       Call
       <template #startIcon="{ iconSize }">
         <dt-icon name="phone" :size="iconSize" />
@@ -697,7 +697,7 @@ The width of the button remains determined by the length of the label, which is 
 </dt-button>
 '>
   <dt-stack gap="500" align="center">
-    <dt-toggle size="sm" v-model="loading" wrapperClass="d-g-100">
+    <dt-toggle :size="200" v-model="loading" wrapperClass="d-g-100">
       Loading
     </dt-toggle>
     <dt-stack
@@ -761,7 +761,7 @@ The width of the button remains determined by the length of the label, which is 
     direction="row"
   >
   <dt-button
-    size="xs"
+    :size="100"
   >
     Validating
     <template #endIcon="{ iconSize }">
@@ -771,7 +771,7 @@ The width of the button remains determined by the length of the label, which is 
     </template>
   </dt-button>
   <dt-button
-    size="sm"
+    :size="200"
   >
     Validating
     <template #endIcon="{ iconSize }">
@@ -781,7 +781,7 @@ The width of the button remains determined by the length of the label, which is 
     </template>
   </dt-button>
   <dt-button
-    size="md"
+    :size="300"
   >
     Validating
     <template #endIcon="{ iconSize }">
@@ -791,7 +791,7 @@ The width of the button remains determined by the length of the label, which is 
     </template>
   </dt-button>
   <dt-button
-    size="lg"
+    :size="400"
   >
     Validating
     <template #endIcon="{ iconSize }">
@@ -828,7 +828,7 @@ Use the `#leading` and `#trailing` slots to render freeform content at the start
 ### Trailing
 
 <code-example>
-  <dt-button size="sm" kind="muted" importance="outlined" trailing-class="d-pie-25">
+  <dt-button :size="200" kind="muted" importance="outlined" trailing-class="d-pie-25">
     Copy
     <template #startIcon="{ iconSize }">
       <dt-icon name="copy" :size="iconSize" />

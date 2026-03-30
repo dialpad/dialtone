@@ -151,7 +151,7 @@
               class="d-recipe-leftbar-row__action-button"
               data-qa="dt-recipe-leftbar-row-action-call-button"
               circle
-              size="xs"
+              :size="100"
               kind="inverted"
               :aria-label="callButtonTooltip"
               @focus="actionFocused = true"

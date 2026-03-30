@@ -116,7 +116,7 @@
             class="d-ta-center"
           >
             <dt-split-button
-              size="xs"
+              :size="100"
               :start-icon-position="position"
               :end-tooltip-text="endTooltipText"
               :end-aria-label="endAriaLabel"
@@ -171,7 +171,7 @@
         <h2>Status</h2>
         <dt-stack gap="200">
           <dt-split-button
-            size="xs"
+            :size="100"
             :start-active="true"
             :end-tooltip-text="endTooltipText"
             :end-aria-label="endAriaLabel"
@@ -179,7 +179,7 @@
             Start active
           </dt-split-button>
           <dt-split-button
-            size="xs"
+            :size="100"
             :end-active="true"
             :end-tooltip-text="endTooltipText"
             :end-aria-label="endAriaLabel"
@@ -187,7 +187,7 @@
             End active
           </dt-split-button>
           <dt-split-button
-            size="xs"
+            :size="100"
             :start-active="true"
             :end-active="true"
             :end-tooltip-text="endTooltipText"
@@ -196,7 +196,7 @@
             Both active
           </dt-split-button>
           <dt-split-button
-            size="xs"
+            :size="100"
             :start-loading="true"
             start-aria-label="loading"
             :end-tooltip-text="endTooltipText"
@@ -212,7 +212,7 @@
         <h2>Disabled</h2>
         <dt-stack gap="200">
           <dt-split-button
-            size="xs"
+            :size="100"
             :start-disabled="true"
             :end-tooltip-text="endTooltipText"
             :end-aria-label="endAriaLabel"
@@ -220,7 +220,7 @@
             Start disabled
           </dt-split-button>
           <dt-split-button
-            size="xs"
+            :size="100"
             :end-disabled="true"
             :end-tooltip-text="endTooltipText"
             :end-aria-label="endAriaLabel"
@@ -228,7 +228,7 @@
             End disabled
           </dt-split-button>
           <dt-split-button
-            size="xs"
+            :size="100"
             :disabled="true"
             :end-tooltip-text="endTooltipText"
             :end-aria-label="endAriaLabel"
@@ -245,7 +245,7 @@
         <h2>Disabled</h2>
         <dt-stack gap="200">
           <dt-split-button
-            size="xs"
+            :size="100"
             :start-disabled="true"
             :end-tooltip-text="endTooltipText"
             :end-aria-label="endAriaLabel"
@@ -253,7 +253,7 @@
             Start disabled
           </dt-split-button>
           <dt-split-button
-            size="xs"
+            :size="100"
             :end-disabled="true"
             :end-tooltip-text="endTooltipText"
             :end-aria-label="endAriaLabel"
@@ -261,7 +261,7 @@
             End disabled
           </dt-split-button>
           <dt-split-button
-            size="xs"
+            :size="100"
             :disabled="true"
             :end-tooltip-text="endTooltipText"
             :end-aria-label="endAriaLabel"
@@ -278,7 +278,7 @@
         <h2>With tooltip</h2>
         <dt-stack gap="200">
           <dt-split-button
-            size="xs"
+            :size="100"
             start-tooltip-text="Hover text"
             :end-tooltip-text="endTooltipText"
             :end-aria-label="endAriaLabel"
@@ -286,14 +286,14 @@
             Hover me
           </dt-split-button>
           <dt-split-button
-            size="xs"
+            :size="100"
             :end-tooltip-text="endTooltipText"
             :end-aria-label="endAriaLabel"
           >
             Hover end
           </dt-split-button>
           <dt-split-button
-            size="xs"
+            :size="100"
             start-tooltip-text="Start tooltip"
             :end-tooltip-text="endTooltipText"
             :end-aria-label="endAriaLabel"

@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 
 export default {
   default: {
@@ -25,7 +26,7 @@ export default {
     },
     slots: {
       default: { initialValue: 'Message body with <a href="#" class="d-link">a link</a>.' },
-      action: { initialValue: '<dt-button size="sm" importance="outlined" kind="muted">Action</dt-button>' },
+      action: { initialValue: '<dt-button :size="200" importance="outlined" kind="muted">Action</dt-button>' },
     },
   },
 

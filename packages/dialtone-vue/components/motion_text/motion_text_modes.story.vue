@@ -18,7 +18,7 @@
         </h3>
         <dt-button
           v-if="!isStaticMode(mode.value)"
-          size="sm"
+          :size="200"
           importance="outlined"
           kind="muted"
           @click="restartAnimation(mode.value)"
@@ -38,7 +38,7 @@
           :ref="el => { if (el) modeRefs[mode.value] = el }"
           :text="exampleText"
           :animation-mode="mode.value"
-          speed="md"
+          :speed="300"
           :auto-start="false"
           :loop="isStaticMode(mode.value)"
           class="d-headline--lg"

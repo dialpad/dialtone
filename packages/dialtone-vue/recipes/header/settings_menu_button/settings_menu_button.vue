@@ -3,7 +3,7 @@
     v-if="updateAvailable"
     kind="muted"
     importance="outlined"
-    size="xs"
+    :size="100"
     class="d-recipe-settings-menu-button-update"
     :aria-label="ariaLabel"
     v-bind="$attrs"

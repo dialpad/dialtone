@@ -62,35 +62,35 @@ The icon size is defined based on the context and text size next to it. These ar
 <dt-stack direction="row" justify="between" gap="100" class="d-gc2 d-bgc-secondary d-p-300 d-bar16">
   <dt-stack gap="100" align="center">
     <dt-icon name="food" size="100" />
-    <dt-text as="code" kind="code" size="sm">100</dt-text>
+    <dt-text as="code" kind="code" :size="200">100</dt-text>
   </dt-stack>
   <dt-stack gap="100" align="center">
     <dt-icon name="food" size="200" />
-    <dt-text as="code" kind="code" size="sm">200</dt-text>
+    <dt-text as="code" kind="code" :size="200">200</dt-text>
   </dt-stack>
   <dt-stack gap="100" align="center">
     <dt-icon name="food" size="300" />
-    <dt-text as="code" kind="code" size="sm">300</dt-text>
+    <dt-text as="code" kind="code" :size="200">300</dt-text>
   </dt-stack>
   <dt-stack gap="100" align="center">
     <dt-icon name="food" size="400" />
-    <dt-text as="code" kind="code" size="sm">400</dt-text>
+    <dt-text as="code" kind="code" :size="200">400</dt-text>
   </dt-stack>
   <dt-stack gap="100" align="center">
     <dt-icon name="food" size="500" />
-    <dt-text as="code" kind="code" size="sm">500</dt-text>
+    <dt-text as="code" kind="code" :size="200">500</dt-text>
   </dt-stack>
   <dt-stack gap="100" align="center">
     <dt-icon name="food" size="600" />
-    <dt-text as="code" kind="code" size="sm">600</dt-text>
+    <dt-text as="code" kind="code" :size="200">600</dt-text>
   </dt-stack>
   <dt-stack gap="100" align="center">
     <dt-icon name="food" size="700" />
-    <dt-text as="code" kind="code" size="sm">700</dt-text>
+    <dt-text as="code" kind="code" :size="200">700</dt-text>
   </dt-stack>
   <dt-stack gap="100" align="center">
     <dt-icon name="food" size="800" />
-    <dt-text as="code" kind="code" size="sm">800</dt-text>
+    <dt-text as="code" kind="code" :size="200">800</dt-text>
   </dt-stack>
 </dt-stack>
 </div>
@@ -101,31 +101,31 @@ The icon size is defined based on the context and text size next to it. These ar
   <dt-stack gap="100">
     <dt-stack direction="row" gap="50" align="center">
       <dt-icon name="food" size="100" />
-      <dt-text kind="body" size="xs">100 with XS body</dt-text>
+      <dt-text kind="body" :size="100">100 with XS body</dt-text>
     </dt-stack>
     <dt-stack direction="row" gap="50" align="center">
       <dt-icon name="food" size="200" />
-      <dt-text kind="body" size="sm">200 with SM body</dt-text>
+      <dt-text kind="body" :size="200">200 with SM body</dt-text>
     </dt-stack>
     <dt-stack direction="row" gap="50" align="center">
       <dt-icon name="food" size="300" />
-      <dt-text kind="body" size="md">300 with MD body</dt-text>
+      <dt-text kind="body" :size="300">300 with MD body</dt-text>
     </dt-stack>
     <dt-stack direction="row" gap="50" align="center">
       <dt-icon name="food" size="400" />
-      <dt-text kind="headline" size="lg">400 with LG headline</dt-text>
+      <dt-text kind="headline" :size="400">400 with LG headline</dt-text>
     </dt-stack>
     <dt-stack direction="row" gap="50" align="center">
       <dt-icon name="food" size="500" />
-      <dt-text kind="headline" size="xl">500 with XL headline</dt-text>
+      <dt-text kind="headline" :size="500">500 with XL headline</dt-text>
     </dt-stack>
     <dt-stack direction="row" gap="50" align="center">
       <dt-icon name="food" size="600" />
-      <dt-text kind="headline" size="2xl">600 with 2XL headline</dt-text>
+      <dt-text kind="headline" :size="600">600 with 2XL headline</dt-text>
     </dt-stack>
     <dt-stack direction="row" gap="50" align="center">
       <dt-icon name="food" size="700" />
-      <dt-text kind="headline" size="3xl">700 with 3XL headline</dt-text>
+      <dt-text kind="headline" :size="700">700 with 3XL headline</dt-text>
     </dt-stack>
   </dt-stack>
 </dt-stack>

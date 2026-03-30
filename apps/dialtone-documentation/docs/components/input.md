@@ -39,20 +39,20 @@ This component combines both the `input` and `textarea` elements as options with
 
 ## Sizes
 
-We offer different sizes for instances in which the interface requires a smaller or larger input. In general, though, use the base (medium) size input as much as possible, especially in forms.
+We offer different sizes for instances in which the interface requires a smaller or larger input. In general, though, use the base `300` (medium) size input as much as possible, especially in forms.
 
 <code-example>
   <div class="d-d-grid d-g-200 d-g-cols2" data-demo-wrapper>
-    <dt-input label="Extra Small" type="text" placeholder="Placeholder" size="xs" />
-    <dt-input label="Extra Small" type="textarea" placeholder="Placeholder" size="xs" />
-    <dt-input label="Small" type="text" placeholder="Placeholder" size="sm" />
-    <dt-input label="Small" type="textarea" placeholder="Placeholder" size="sm" />
-    <dt-input label="Medium" type="text" placeholder="Placeholder" size="md" />
-    <dt-input label="Medium" type="textarea" placeholder="Placeholder" size="md" />
-    <dt-input label="Large" type="text" placeholder="Placeholder" size="lg" />
-    <dt-input label="Large" type="textarea" placeholder="Placeholder" size="lg" />
-    <dt-input label="Extra large" type="text" placeholder="Placeholder" size="xl" />
-    <dt-input label="Extra large" type="textarea" placeholder="Placeholder" size="xl" />
+    <dt-input :size="100" type="text" label="Extra Small" placeholder="Placeholder" />
+    <dt-input :size="100" type="textarea" label="Extra Small" placeholder="Placeholder" />
+    <dt-input :size="200" type="text" label="Small" placeholder="Placeholder" />
+    <dt-input :size="200" type="textarea" label="Small" placeholder="Placeholder" />
+    <dt-input :size="300" type="text" label="Medium" placeholder="Placeholder" />
+    <dt-input :size="300" type="textarea" label="Medium" placeholder="Placeholder" />
+    <dt-input :size="400" type="text" label="Large" placeholder="Placeholder" />
+    <dt-input :size="400" type="textarea" label="Large" placeholder="Placeholder" />
+    <dt-input :size="500" type="text" label="Extra large" placeholder="Placeholder" />
+    <dt-input :size="500" type="textarea" label="Extra large" placeholder="Placeholder" />
   </div>
 </code-example>
 
@@ -206,7 +206,7 @@ Use `type="search"` with a clear button in the `icon` slot. When the input is no
           v-dt-tooltip="'Clear search'"
           kind="muted"
           importance="clear"
-          size="xs"
+          :size="100"
           aria-label="Clear search"
           @click="clear"
         >
@@ -266,32 +266,27 @@ Use `type="search"` with a clear button in the `icon` slot. When the input is no
 
 Each Text Input size has a default icon size, keeping it proportional. While rare, customizing the icon size is possible.
 
-<code-example vueCode='
-<dt-input label="Small input with large icon" type="text" placeholder="Placeholder" size="{size}">
-  <template #startIcon="{ iconSize }">
-    <dt-icon name="send" :size="iconSize" />
-  </template>
-</dt-input>
-'>
-  <dt-stack gap="500" class="d-w100p">
-    <dt-input label="Small input with large icon" type="text" placeholder="Placeholder" size="sm">
-      <template #startIcon="{ iconSize }">
-        <dt-icon name="send" :size="iconSize" />
-      </template>
-    </dt-input>
-    <dt-input label="Medium input with extra large icon" type="text" placeholder="Placeholder">
-      <template #startIcon="{ iconSize }">
-        <dt-icon name="send" :size="iconSize" />
-      </template>
-    </dt-input>
-    <dt-input label="Extra large input with medium icon" type="text" placeholder="Placeholder" size="xl">
+<code-example>
+  <dt-stack gap="500" class="d-w100p" data-demo-wrapper>
+    <dt-input label="Medium input with smallest icon" type="text" placeholder="Placeholder" :size="300">
       <template #startIcon>
-        <dt-icon name="send" :size="iconSize" />
+        <dt-icon name="box-select" size="100" />
+      </template>
+      <template #endIcon>
+        <dt-icon name="box-select" size="100" />
       </template>
     </dt-input>
-    <dt-input label="Large textarea with medium icon" type="textarea" placeholder="Placeholder" icon-size="md" size="lg">
+    <dt-input label="Extra large input with medium icon" type="text" placeholder="Placeholder" :size="500">
       <template #startIcon>
-        <dt-icon name="send" :size="iconSize" />
+        <dt-icon name="box-select" size="200" />
+      </template>
+      <template #endIcon>
+        <dt-icon name="box-select" size="200" />
+      </template>
+    </dt-input>
+    <dt-input label="Medium textarea with large icon" type="textarea" placeholder="Placeholder" :icon-size="300" :size="400">
+      <template #startIcon>
+        <dt-icon name="box-select" size="500" />
       </template>
     </dt-input>
   </dt-stack>
@@ -299,16 +294,16 @@ Each Text Input size has a default icon size, keeping it proportional. While rar
 
 ## Label size
 
-The label text size is automatically derived from the component's `size` prop. Use the `label-size` prop to override this when you need a different label size independent of the input size. For example, the default label size for a `size="md"` input is `md`, but you can override it from `xs` to `lg`.
+The label text size is automatically derived from the component's `size` prop. Use the `label-size` prop to override this when you need a different label size independent of the input size. For example, the default label size for a `:size="300"` input is `300`, but you can override it from `100` to `400`.
 
 <code-example vueCode='
-<dt-input label="Extra small label" placeholder="Placeholder" label-size="xs|sm|md|lg" />
+<dt-input label="Extra small label" placeholder="Placeholder" :label-size="100" />
 '>
-  <dt-stack gap="500" class="d-w100p">
-    <dt-input label="Extra small label" placeholder="Placeholder" label-size="xs" />
-    <dt-input label="Small label" placeholder="Placeholder" label-size="sm" />
-    <dt-input label="Medium label (default)" placeholder="Placeholder" label-size="md" />
-    <dt-input label="Large label" placeholder="Placeholder" label-size="lg" />
+  <dt-stack gap="500" class="d-w100p" data-demo-wrapper>
+    <dt-input label="Extra small label" placeholder="Placeholder" :label-size="100" />
+    <dt-input label="Small label" placeholder="Placeholder" :label-size="200" />
+    <dt-input label="Medium label (default)" placeholder="Placeholder" :label-size="300" />
+    <dt-input label="Large label" placeholder="Placeholder" :label-size="400" />
   </dt-stack>
 </code-example>
 
@@ -319,7 +314,7 @@ Override the label font weight independently of the label size. Valid values are
 <code-example vueCode='
 <dt-input label="Label" placeholder="Placeholder" label-strength="bold|semibold|medium|normal" />
 '>
-  <dt-stack gap="500" class="d-w100p">
+  <dt-stack gap="500" class="d-w100p" data-demo-wrapper>
     <dt-input label="Bold label" placeholder="Placeholder" label-strength="bold" />
     <dt-input label="Semibold label" placeholder="Placeholder" label-strength="semibold" />
     <dt-input label="Medium label" placeholder="Placeholder" label-strength="medium" />

@@ -14,7 +14,7 @@ keywords: ["alert","notification","message","d-banner","DtBanner","dt-banner"]
     <dt-banner title="Example banner" kind="info" class="d-ps-relative d-zi-base">
       Message body with a <dt-link kind="muted">Link</dt-link>
       <template #action>
-        <dt-button size="sm" kind="muted" importance="outlined">Action</dt-button>
+        <dt-button :size="200" kind="muted" importance="outlined">Action</dt-button>
       </template>
     </dt-banner>
     <dt-stack direction="row">
@@ -86,7 +86,7 @@ Pins the banner to the top of the window.
 >
   Detailed description goes here.
   <template #action>
-    <dt-button size="sm" kind="muted" importance="outlined">Action</dt-button>
+    <dt-button :size="200" kind="muted" importance="outlined">Action</dt-button>
   </template>
 </dt-banner>
 
@@ -97,7 +97,7 @@ Pins the banner to the top of the window.
   >
     Detailed description goes here.
     <template #action>
-      <dt-button size="sm" kind="muted" importance="outlined">Action</dt-button>
+      <dt-button :size="200" kind="muted" importance="outlined">Action</dt-button>
     </template>
   </dt-banner>
 </code-example>

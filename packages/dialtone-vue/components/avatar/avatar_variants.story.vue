@@ -130,7 +130,7 @@
           v-for="state in AVATAR_PRESENCE_STATES"
           :key="`presence-${state}`"
           :seed="$attrs.seed"
-          size="md"
+          :size="300"
           full-name="Person avatar"
           :image-src="$attrs.imageSrc"
           :image-alt="$attrs.imageAlt"
@@ -143,7 +143,7 @@
       <div class="d-flow16 d-d-flex">
         <dt-avatar
           :seed="$attrs.seed"
-          size="xl"
+          :size="500"
           full-name="Person avatar"
           :image-src="$attrs.imageSrc"
           :image-alt="$attrs.imageAlt"
@@ -155,7 +155,7 @@
         </dt-avatar>
         <dt-avatar
           :seed="$attrs.seed"
-          size="xl"
+          :size="500"
           full-name="Person avatar"
           :image-src="$attrs.imageSrc"
           :image-alt="$attrs.imageAlt"

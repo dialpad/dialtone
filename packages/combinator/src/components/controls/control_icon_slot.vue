@@ -4,7 +4,7 @@
     label="Icon"
     max-height="320px"
     list-class="d-w-250 d-hmx-350"
-    size="xs"
+    :size="100"
     append-to="body"
     @select="e => onSelect(filteredIcons[e])"
     @opened="onOpen"
@@ -25,7 +25,7 @@
             v-if="isModified"
             kind="muted"
             importance="clear"
-            size="xs"
+            :size="100"
             class="d-p-25"
             @click.stop="onReset"
           >

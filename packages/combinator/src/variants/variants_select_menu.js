@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
  
 
 export default {
@@ -59,7 +60,7 @@ export default {
   'with custom label size and strength': {
     props: {
       label: { initialValue: 'Label' },
-      labelSize: { initialValue: 'xs' },
+      labelSize: { initialValue: '100' },
       labelStrength: { initialValue: 'normal' },
       options: {
         initialValue: [

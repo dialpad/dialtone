@@ -58,7 +58,7 @@
             :key="person"
             :full-name="person"
             seed="seed"
-            size="sm"
+            :size="200"
           />
         </dt-stack>
         <dt-stack
@@ -86,7 +86,7 @@
           <span>
             <dt-button
               importance="clear"
-              size="sm"
+              :size="200"
               aria-label="Add reaction"
               data-qa="feed-item-reaction-button"
               class="d-recipe-emoji-row__reaction d-recipe-emoji-row__picker"
@@ -114,7 +114,7 @@
           :key="button"
           kind="muted"
           importance="clear"
-          size="xs"
+          :size="100"
           aria-label="button"
         >
           <template #icon>

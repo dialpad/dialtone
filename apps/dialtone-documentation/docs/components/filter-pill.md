@@ -56,7 +56,7 @@ keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFil
       defer-selection
     >
     </dt-filter-pill>
-    <dt-button size="sm" kind="muted" importance="outlined" :disabled="!heroHasActiveFilters" @click="resetHeroFilters">
+    <dt-button :size="200" kind="muted" importance="outlined" :disabled="!heroHasActiveFilters" @click="resetHeroFilters">
       Reset
     </dt-button>
   </dt-stack>
@@ -144,7 +144,7 @@ Its value is reflected in the filter set but cannot be opened, cleared, or modif
 
 ### Size
 
-`sm` is the default.
+`200` (small) is the default.
 
 <code-example vueCode='<dt-filter-pill label="{size}" size="{size}" />'>
   <dt-stack direction="row" gap="400">
@@ -499,5 +499,5 @@ function selectDropdownType (name, close) {
 function resetDropdownType () {
   dropdownTypes.value.forEach(f => { f.active = false; });
 }
-const sizes = Object.keys(window.DIALTONE_CONSTANTS.BUTTON_SIZE_MODIFIERS);
+const sizes = Object.keys(window.DIALTONE_CONSTANTS.BUTTON_SIZE_MODIFIERS).filter(k => /^\d+$/.test(k));
 </script>

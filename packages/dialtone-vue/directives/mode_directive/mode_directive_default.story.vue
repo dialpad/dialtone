@@ -6,7 +6,7 @@
     <dt-text
       as="h3"
       kind="headline"
-      size="lg"
+      :size="400"
     >
       Explicit modes
     </dt-text>
@@ -63,7 +63,7 @@
     <dt-text
       as="h3"
       kind="headline"
-      size="lg"
+      :size="400"
     >
       Invert mode (default)
     </dt-text>
@@ -82,7 +82,7 @@
     <dt-text
       as="h3"
       kind="headline"
-      size="lg"
+      :size="400"
     >
       Nested directives
     </dt-text>
@@ -127,7 +127,7 @@
     <dt-text
       as="h3"
       kind="headline"
-      size="lg"
+      :size="400"
     >
       Disabled (value = false)
     </dt-text>
@@ -169,7 +169,7 @@
     <dt-text
       as="h3"
       kind="headline"
-      size="lg"
+      :size="400"
     >
       Dynamic arg
     </dt-text>

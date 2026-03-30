@@ -11,7 +11,7 @@
       v-if="isForeground || isLink"
       as="p"
       kind="headline"
-      size="xl"
+      :size="500"
       :class="{ 'link-example': isLink }"
     >
       Ag

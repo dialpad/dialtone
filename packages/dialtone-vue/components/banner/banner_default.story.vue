@@ -42,7 +42,7 @@
         #action
       >
         <dt-button
-          size="sm"
+          :size="200"
           :kind="buttonKind"
           importance="outlined"
           @click="$attrs.onClick"

@@ -25,7 +25,7 @@
               {{ speed.label }} ({{ speed.value }})
             </h3>
             <dt-button
-              size="sm"
+              :size="200"
               importance="outlined"
               kind="muted"
               @click="restartAnimation('speed', speed.value)"
@@ -73,7 +73,7 @@
               {{ size.label }}
             </h3>
             <dt-button
-              size="sm"
+              :size="200"
               importance="outlined"
               kind="muted"
               @click="restartAnimation('size', size.class)"
@@ -90,7 +90,7 @@
               :ref="el => { if (el) sizeRefs[size.class] = el }"
               text="Animated text"
               animation-mode="fade-in"
-              speed="md"
+              :speed="300"
               :auto-start="false"
               :class="size.class"
             />
@@ -112,7 +112,7 @@
         <dt-motion-text
           text="This text loops continuously"
           animation-mode="slide-in"
-          speed="sm"
+          :speed="200"
           :auto-start="true"
           :loop="true"
           class="d-headline--md"
@@ -134,35 +134,35 @@
           class="d-fw-wrap"
         >
           <dt-button
-            size="sm"
+            :size="200"
             importance="outlined"
             @click="manualRef?.start()"
           >
             Start
           </dt-button>
           <dt-button
-            size="sm"
+            :size="200"
             importance="outlined"
             @click="manualRef?.pause()"
           >
             Pause
           </dt-button>
           <dt-button
-            size="sm"
+            :size="200"
             importance="outlined"
             @click="manualRef?.resume()"
           >
             Resume
           </dt-button>
           <dt-button
-            size="sm"
+            :size="200"
             importance="outlined"
             @click="manualRef?.reset()"
           >
             Reset
           </dt-button>
           <dt-button
-            size="sm"
+            :size="200"
             importance="outlined"
             @click="manualRef?.skipToEnd()"
           >
@@ -178,7 +178,7 @@
             ref="manualRef"
             text="Control me with the buttons above"
             animation-mode="gradient-in"
-            speed="lg"
+            :speed="400"
             :auto-start="false"
             class="d-headline--md"
           />

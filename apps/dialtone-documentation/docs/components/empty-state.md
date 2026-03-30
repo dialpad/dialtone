@@ -129,10 +129,10 @@ Appropriate for indicating that something is currently unavailable to them. Prov
 A few rules to keep in nothing-to-see-here when choosing a size variant.
 
 - Choosing a size adjusts the relative width, padding, and font size.
-- `lg` and `md` sizes
+- `400` and `300` sizes
   - The visual may be an Illustration or an Icon.
   - If both are chosen, the Illustration takes precedence.
-- `sm` size
+- `200` size
   - Illustrations are not available, an Icon is the only visual available.
   - If both are chosen, the Icon takes precedence.
 
@@ -178,7 +178,7 @@ A few rules to keep in nothing-to-see-here when choosing a size variant.
 
 <code-example>
   <dt-empty-state
-    size="md"
+    :size="300"
     header-text="Nothing to see here"
     body-text="Looks like there is no data to display here."
   >
@@ -198,7 +198,7 @@ A few rules to keep in nothing-to-see-here when choosing a size variant.
 
 <code-example>
   <dt-empty-state
-    size="md"
+    :size="300"
     header-text="Nothing to see here"
     body-text="Looks like there is no data to display here."
   >
@@ -218,7 +218,7 @@ A few rules to keep in nothing-to-see-here when choosing a size variant.
 
 <code-example>
   <dt-empty-state
-    size="sm"
+    :size="200"
     header-text="Nothing to see here"
     body-text="Looks like there is no data to display here."
   >
@@ -284,14 +284,14 @@ A few rules to keep in nothing-to-see-here when choosing a size variant.
 
 <code-example>
   <dt-empty-state
-    size="sm"
+    :size="200"
     header-text="Nothing to see here"
     body-text="Looks like there is no data to display here."
   >
     <template #body>
       <dt-stack direction="row" gap="300">
-        <dt-button kind="muted" size="sm" importance="clear">Action</dt-button>
-        <dt-button kind="muted" importance="outlined" size="sm">Action</dt-button>
+        <dt-button kind="muted" :size="200" importance="clear">Action</dt-button>
+        <dt-button kind="muted" importance="outlined" :size="200">Action</dt-button>
       </dt-stack>
     </template>
     <template #icon="{ iconSize }">

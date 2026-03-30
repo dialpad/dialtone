@@ -18,7 +18,7 @@
               v-dt-tooltip="`Clear`"
               kind="muted"
               importance="clear"
-              size="xs"
+              :size="100"
               aria-label="Clear search"
               @click="clearSearch"
             >
@@ -37,7 +37,7 @@
     </dt-stack>
     <dt-empty-state
       v-if="showEmptyState"
-      size="sm"
+      :size="200"
       :header-text="`No results found`"
       class="d-w100p d-ba d-bc-subtle d-bar8 d-pbs-400"
     >
@@ -63,7 +63,7 @@
         class="dialtone-doc-table-clamped__more-btn d-bgc-secondary d-bs-sm"
         kind="muted"
         importance="outlined"
-        size="xs"
+        :size="100"
         @click="() => handleExpand(scrollRef)"
       >
         {{ buttonLabel }}
