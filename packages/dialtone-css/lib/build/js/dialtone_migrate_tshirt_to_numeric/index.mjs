@@ -21,8 +21,10 @@
  */
 
 import fs from 'fs/promises';
+import { realpathSync } from 'node:fs';
 import path from 'path';
 import readline from 'readline';
+import { fileURLToPath } from 'node:url';
 
 // ---------------------------------------------------------------------------
 // Mapping
@@ -213,8 +215,16 @@ async function main () {
   console.log(`\nMigrated ${changes.reduce((sum, c) => sum + c.count, 0)} references across ${changes.length} files.\n`);
 }
 
-// Only run CLI when executed directly (not when imported for testing)
-const isDirectRun = process.argv[1] && import.meta.url.endsWith(process.argv[1].replace(/\\/g, '/'));
+// Only run CLI when executed directly (not when imported for testing).
+// Uses realpathSync to resolve symlinks from npx/npm bin shims.
+const isDirectRun = (() => {
+  try {
+    return realpathSync(process.argv[1]) === fileURLToPath(import.meta.url);
+  } catch {
+    return false;
+  }
+})();
+
 if (isDirectRun) {
   main().catch(err => {
     console.error(err);
