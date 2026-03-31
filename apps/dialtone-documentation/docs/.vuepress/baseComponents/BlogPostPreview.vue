@@ -4,7 +4,7 @@
     class="d-fc-unset d-d-block d-bar8 d-td-none"
   >
     <dt-card
-      class="d-mbs-200 d-bgc-primary d-bs-none h:d-bs-sm d-bar8 d-bbw1"
+      class="d-mbs-200 d-bgc-primary d-bs-none h:d-bs-sm d-bar8 d-bbw1 h:d-bc-default"
     >
       <template #content>
         <blog-post
