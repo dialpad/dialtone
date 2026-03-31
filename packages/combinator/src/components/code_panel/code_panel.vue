@@ -8,8 +8,8 @@
   >
     <template #content>
       <div
-        v-dt-scrollbar
-        class="dtc-theme__canvas d-p-200"
+        v-dt-scrollbar:never
+        :class="['dtc-theme__canvas d-p-200', { 'd-hmx-250': !fullScreen }]"
       >
         <dtc-code-editor
           :info="info"
@@ -79,6 +79,10 @@ defineProps({
     default: false,
   },
   hasChanges: {
+    type: Boolean,
+    default: false,
+  },
+  fullScreen: {
     type: Boolean,
     default: false,
   },

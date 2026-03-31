@@ -145,6 +145,7 @@
         :disabled-members="disabledMembers"
         :dev-mode="devMode"
         :has-changes="hasChanges"
+        :full-screen="isFullScreen"
         @update:options="e => e(options)"
       />
     </div>

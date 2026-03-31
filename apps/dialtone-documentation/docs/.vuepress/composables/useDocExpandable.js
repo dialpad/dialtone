@@ -31,22 +31,21 @@ export function useDocExpandable({
     resize: null,
   };
 
+  // Resolved max height in pixels, measured from DOM
+  const resolvedMaxHeight = ref(DEFAULT_MAX_HEIGHT);
+
   /**
-   * Parse the numeric value from the provided max-height utility class.
-   * @returns {number} Parsed height in pixels
+   * Measure the actual computed max-height from an element.
+   * @param {HTMLElement} element - The element with the max-height class applied
    */
-  const resolvedMaxHeight = computed(() => {
-    const match = maxHeightClass.match(/d-hmx(\d+)/);
-
-    if (!match) {
-      return DEFAULT_MAX_HEIGHT;
+  const measureMaxHeight = (element) => {
+    if (!element) return;
+    const computed = window.getComputedStyle(element);
+    const maxH = parseFloat(computed.maxBlockSize || computed.maxHeight);
+    if (!Number.isNaN(maxH) && maxH > 0) {
+      resolvedMaxHeight.value = maxH;
     }
-
-    const [, heightString] = match;
-    const parsedHeight = Number.parseInt(heightString, 10);
-
-    return Number.isNaN(parsedHeight) ? DEFAULT_MAX_HEIGHT : parsedHeight;
-  });
+  };
 
   /**
    * Calculate the threshold for determining if content is expandable.
@@ -92,6 +91,9 @@ export function useDocExpandable({
     if (!element) {
       return;
     }
+
+    // Measure actual max-height from DOM
+    measureMaxHeight(element);
 
     // Initial measurement
     updateExpandable(element);
