@@ -131,43 +131,24 @@ export function useResizableKeyboard(options: ResizableKeyboardOptions) {
       .replace('{incrementType}', incrementType);
   }
 
-  // ─── DOM position updates (mirrors mouse drag approach) ─────────────
+  // ─── DOM position updates (logical properties — writing-mode handles direction) ──
 
-  function updateRowLayout(
+  function updateLayout(
     beforeEl: HTMLElement,
     afterEl: HTMLElement,
     handleEl: HTMLElement | null,
     cursorPos: number,
-    beforeRight: number,
+    beforeEnd: number,
   ): void {
-    beforeEl.style.left = beforeEl.style.left || '0px';
-    beforeEl.style.right = `${beforeRight}px`;
-    beforeEl.style.width = '';
+    beforeEl.style.insetInlineStart = beforeEl.style.insetInlineStart || '0px';
+    beforeEl.style.insetInlineEnd = `${beforeEnd}px`;
+    beforeEl.style.inlineSize = '';
 
-    afterEl.style.left = `${cursorPos}px`;
-    afterEl.style.width = '';
+    afterEl.style.insetInlineStart = `${cursorPos}px`;
+    afterEl.style.inlineSize = '';
 
     if (handleEl) {
-      handleEl.style.left = `${Math.max(0, cursorPos - 2)}px`;
-    }
-  }
-
-  function updateColumnLayout(
-    beforeEl: HTMLElement,
-    afterEl: HTMLElement,
-    handleEl: HTMLElement | null,
-    cursorPos: number,
-    beforeBottom: number,
-  ): void {
-    beforeEl.style.top = beforeEl.style.top || '0px';
-    beforeEl.style.bottom = `${beforeBottom}px`;
-    beforeEl.style.height = '';
-
-    afterEl.style.top = `${cursorPos}px`;
-    afterEl.style.height = '';
-
-    if (handleEl) {
-      handleEl.style.top = `${Math.max(0, cursorPos - 2)}px`;
+      handleEl.style.insetInlineStart = `${Math.max(0, cursorPos - 2)}px`;
     }
   }
 
@@ -195,15 +176,8 @@ export function useResizableKeyboard(options: ResizableKeyboardOptions) {
       ) as HTMLElement;
 
       if (beforeEl && afterEl) {
-        const beforeRight = containerSize.value - cursorPos;
-
-        if (direction.value === 'row') {
-          updateRowLayout(beforeEl, afterEl, hEl, cursorPos, beforeRight);
-        } else {
-          updateColumnLayout(
-            beforeEl, afterEl, hEl, cursorPos, beforeRight,
-          );
-        }
+        const beforeEnd = containerSize.value - cursorPos;
+        updateLayout(beforeEl, afterEl, hEl, cursorPos, beforeEnd);
       }
     }
 

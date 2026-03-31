@@ -70,43 +70,32 @@ export function useResizableOffset(
 
   // ── Computed styles for handle positioning ──────────────────────────
 
+  // Logical properties — writing-mode on parent handles direction rotation
   const handleStyles = computed(() => {
     const styles: Record<string, string> = {};
     if (!offsetElement || calculatedOffset.value <= 0) return styles;
-    const offset = calculatedOffset.value;
+    const offset = `${calculatedOffset.value}px`;
 
-    if (direction.value === 'row') {
-      if (offsetDirection === 'start' || offsetDirection === 'both') {
-        styles.top = `${offset}px`;
-      }
-      if (offsetDirection === 'end') styles.bottom = `${offset}px`;
-    } else {
-      if (offsetDirection === 'start' || offsetDirection === 'both') {
-        styles.left = `${offset}px`;
-      }
-      if (offsetDirection === 'end') styles.right = `${offset}px`;
+    if (offsetDirection === 'start' || offsetDirection === 'both') {
+      styles.insetBlockStart = offset;
+    }
+    if (offsetDirection === 'end') {
+      styles.insetBlockEnd = offset;
     }
 
     return styles;
   });
 
-  // ── Computed styles for panel content padding ──────────────────────
-
   const contentStyles = computed(() => {
     const styles: Record<string, string> = {};
     if (!offsetElement || calculatedOffset.value <= 0) return styles;
-    const offset = calculatedOffset.value;
+    const offset = `${calculatedOffset.value}px`;
 
-    if (direction.value === 'row') {
-      if (offsetDirection === 'start' || offsetDirection === 'both') {
-        styles.paddingTop = `${offset}px`;
-      }
-      if (offsetDirection === 'end') styles.paddingBottom = `${offset}px`;
-    } else {
-      if (offsetDirection === 'start' || offsetDirection === 'both') {
-        styles.paddingLeft = `${offset}px`;
-      }
-      if (offsetDirection === 'end') styles.paddingRight = `${offset}px`;
+    if (offsetDirection === 'start' || offsetDirection === 'both') {
+      styles.paddingBlockStart = offset;
+    }
+    if (offsetDirection === 'end') {
+      styles.paddingBlockEnd = offset;
     }
 
     return styles;

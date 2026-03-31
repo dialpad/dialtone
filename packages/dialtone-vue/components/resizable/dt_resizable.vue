@@ -353,5 +353,9 @@ defineExpose({
   overflow: hidden;
   width: 100%;
   height: 100%;
+
+  &--column {
+    writing-mode: vertical-lr;
+  }
 }
 </style>

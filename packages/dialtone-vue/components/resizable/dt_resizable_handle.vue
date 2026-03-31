@@ -163,9 +163,8 @@ const handleStyles = computed(() => {
     return { visibility: 'hidden' };
   }
 
-  const positionProp = direction.value === 'row' ? 'left' : 'top';
   return {
-    [positionProp]: `${Math.max(0, pos.left)}px`,
+    insetInlineStart: `${Math.max(0, pos.left)}px`,
     visibility: '',
     ...offset.handleStyles.value,
   };
@@ -338,30 +337,20 @@ function handleBlurEvent () {
   border-radius: var(--dt-size-radius-pill);
   z-index: calc(var(--zi-navigation-fixed) + var(--zi-base1));
 
+  // Logical properties handle both row/column via parent writing-mode
+  inset-block: var(--dt-size-200);
+  inline-size: var(--dt-size-300);
+
   // Invisible hit area for easier grabbing
   &::before {
     content: '';
     position: absolute;
-    top: var(--dt-size-400-negative);
-    left: var(--dt-size-400-negative);
-    right: var(--dt-size-400-negative);
-    bottom: var(--dt-size-400-negative);
+    inset: var(--dt-size-400-negative);
   }
 
-  // ─── Direction Modifiers ───
-  &--row {
-    top: var(--dt-size-200);
-    bottom: var(--dt-size-200);
-    width: var(--dt-size-300);
-    cursor: ew-resize;
-  }
-
-  &--column {
-    left: var(--dt-size-200);
-    right: var(--dt-size-200);
-    height: var(--dt-size-300);
-    cursor: ns-resize;
-  }
+  // Cursor is the only direction-specific property
+  &--row { cursor: ew-resize; }
+  &--column { cursor: ns-resize; }
 
   // ─── State Modifiers ───
   &--disabled {
@@ -374,23 +363,10 @@ function handleBlurEvent () {
   // ─── Indicator (visible drag line) ───
   &__indicator {
     position: absolute;
+    inset: 0;
     border-radius: var(--dt-size-radius-pill);
     background-color: transparent;
     transition: background-color 150ms ease;
-  }
-
-  &--row &__indicator {
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
-
-  &--column &__indicator {
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
   }
 
   // ─── Hover ───

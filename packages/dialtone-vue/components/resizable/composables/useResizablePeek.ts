@@ -128,22 +128,12 @@ export function useResizablePeek(
   // ─── Computed: peek styles ──────────────────────────────────────────
 
   const peekStyles = computed((): CSSProperties => {
-    const styles: CSSProperties = {};
-    const offset = panelOffset.value;
-
-    if (direction.value === 'row') {
-      styles.width = `${peekWidthPixels.value}px`;
-      styles.top = '0';
-      styles.bottom = '0';
-      styles.left = `${offset}px`;
-    } else {
-      styles.height = `${peekWidthPixels.value}px`;
-      styles.left = '0';
-      styles.right = '0';
-      styles.top = `${offset}px`;
-    }
-
-    return styles;
+    // Logical properties — writing-mode on parent handles direction rotation
+    return {
+      inlineSize: `${peekWidthPixels.value}px`,
+      insetBlock: '0',
+      insetInlineStart: `${panelOffset.value}px`,
+    } as CSSProperties;
   });
 
   // ─── Computed: peek classes ─────────────────────────────────────────

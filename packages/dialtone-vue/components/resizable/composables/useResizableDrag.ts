@@ -80,31 +80,24 @@ function findHandleElement(container: HTMLElement, handleId: string): HTMLElemen
   return container.querySelector<HTMLElement>(`[data-handle-id="${handleId}"]`);
 }
 
-function applyPanelDragStyle(element: HTMLElement, left: number, right: number): void {
-  element.style.left = `${left}px`;
-  element.style.right = `${right}px`;
-  element.style.width = '';
+function applyPanelDragStyle(element: HTMLElement, start: number, end: number): void {
+  element.style.insetInlineStart = `${start}px`;
+  element.style.insetInlineEnd = `${end}px`;
+  element.style.inlineSize = '';
 }
 
 function clearDragStyle(element: HTMLElement): void {
-  element.style.left = '';
-  element.style.right = '';
-  element.style.width = '';
+  element.style.insetInlineStart = '';
+  element.style.insetInlineEnd = '';
+  element.style.inlineSize = '';
 }
 
-function applyHandleDragStyle(element: HTMLElement, position: number, direction: ResizableDirection): void {
-  if (direction === 'row') {
-    element.style.left = `${Math.max(0, position)}px`;
-    element.style.top = '';
-  } else {
-    element.style.top = `${Math.max(0, position)}px`;
-    element.style.left = '';
-  }
+function applyHandleDragStyle(element: HTMLElement, position: number): void {
+  element.style.insetInlineStart = `${Math.max(0, position)}px`;
 }
 
 function clearHandleDragStyle(element: HTMLElement): void {
-  element.style.left = '';
-  element.style.top = '';
+  element.style.insetInlineStart = '';
 }
 
 // ============================================================================
@@ -255,7 +248,7 @@ export function useResizableDrag(options: UseResizableDragOptions) {
     originalBeforeSize = elements.beforePanel.pixelSize;
     originalAfterSize = elements.afterPanel.pixelSize;
 
-    beforePanelLeft = parseFloat(beforePanelEl.style.left || '0');
+    beforePanelLeft = parseFloat(beforePanelEl.style.insetInlineStart || '0');
 
     Object.assign(dragState, {
       isActive: true,
@@ -326,7 +319,7 @@ export function useResizableDrag(options: UseResizableDragOptions) {
     applyPanelDragStyle(afterPanelEl!, constrainedCursor, Math.max(0, afterRight));
 
     if (handleEl) {
-      applyHandleDragStyle(handleEl, handlePos, direction.value);
+      applyHandleDragStyle(handleEl, handlePos);
     }
   }
 

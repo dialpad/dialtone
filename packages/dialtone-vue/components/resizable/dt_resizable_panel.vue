@@ -194,21 +194,21 @@ const panelStyles = computed(() => {
   const position = layoutRef.value.panels.get(props.id);
 
   if (!position) {
-    return { left: '0px', width: '0px', pointerEvents: 'none' };
+    return { insetInlineStart: '0px', inlineSize: '0px', pointerEvents: 'none' };
   }
 
   if (position.collapsed) {
     return {
-      left: `${position.left}px`,
-      width: '0px',
+      insetInlineStart: `${position.left}px`,
+      inlineSize: '0px',
       overflow: 'hidden',
       pointerEvents: 'none',
     };
   }
 
   return {
-    left: `${position.left}px`,
-    right: `${position.right}px`,
+    insetInlineStart: `${position.left}px`,
+    insetInlineEnd: `${position.right}px`,
   };
 });
 
@@ -255,8 +255,7 @@ defineExpose({
 <style lang="less">
 .dt-resizable-panel {
   position: absolute;
-  top: 0;
-  bottom: 0;
+  inset-block: 0;
   overflow: hidden;
 
   &--collapsed {
@@ -275,6 +274,7 @@ defineExpose({
   width: 100%;
   height: 100%;
   pointer-events: auto;
+  writing-mode: horizontal-tb;
 }
 
 .dt-resizable-panel__peek-overlay {
