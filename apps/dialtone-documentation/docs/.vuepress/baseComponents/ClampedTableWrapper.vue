@@ -162,29 +162,28 @@ const checkSearchVisibility = () => {
   }
 };
 
-// Find all deprecated badge elements in the table
-const findDeprecatedBadges = () => {
+// Cached deprecated row references (populated once on mount, static thereafter)
+let cachedDeprecatedRows = null;
+
+// Detect deprecated rows once and cache the references
+const initDeprecatedRows = () => {
   const table = scrollRef.value?.querySelector('table');
-  if (!table) return [];
-  return [...table.querySelectorAll('[data-qa="dt-badge"]')].filter(
+  if (!table) {
+    cachedDeprecatedRows = [];
+    hasDeprecatedRows.value = false;
+    return;
+  }
+  const badges = [...table.querySelectorAll('[data-qa="dt-badge"]')].filter(
     badge => badge.textContent.trim() === 'Deprecated',
   );
+  cachedDeprecatedRows = badges.map(badge => badge.closest('tr')).filter(Boolean);
+  hasDeprecatedRows.value = cachedDeprecatedRows.length > 0;
 };
 
-// Detect if any rows contain a deprecated badge
-const checkForDeprecatedRows = () => {
-  hasDeprecatedRows.value = findDeprecatedBadges().length > 0;
-};
-
-// Get all rows that contain a deprecated badge
-const getDeprecatedRows = () => {
-  return findDeprecatedBadges().map(badge => badge.closest('tr')).filter(Boolean);
-};
-
-// Toggle visibility of deprecated rows
+// Toggle visibility of deprecated rows using cached references
 const toggleDeprecatedRows = () => {
-  const rows = getDeprecatedRows();
-  rows.forEach(row => {
+  if (!cachedDeprecatedRows) return;
+  cachedDeprecatedRows.forEach(row => {
     row.toggleAttribute('hidden', hideDeprecated.value);
   });
   nextTick(() => updateExpandableState());
@@ -423,7 +422,7 @@ watch(showEmptyState, () => {
 onMounted(() => {
   nextTick(() => {
     checkSearchVisibility();
-    checkForDeprecatedRows();
+    initDeprecatedRows();
     toggleDeprecatedRows();
 
     // Initialize expandable functionality

@@ -40,8 +40,8 @@ export function useDocExpandable({
    */
   const measureMaxHeight = (element) => {
     if (!element) return;
-    const computed = window.getComputedStyle(element);
-    const maxH = parseFloat(computed.maxBlockSize || computed.maxHeight);
+    const computedStyle = window.getComputedStyle(element);
+    const maxH = parseFloat(computedStyle.maxBlockSize || computedStyle.maxHeight);
     if (!Number.isNaN(maxH) && maxH > 0) {
       resolvedMaxHeight.value = maxH;
     }
