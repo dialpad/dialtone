@@ -156,8 +156,22 @@ const OffsetTemplate = (args, { argTypes }) =>
 
 export const Default = {
   render: DefaultTemplate,
-  args: {
-    direction: 'row',
+  args: {},
+  parameters: {
+    docs: {
+      source: {
+        code: `
+<dt-resizable>
+  <dt-resizable-panel id="left">
+    Left Panel
+  </dt-resizable-panel>
+  <dt-resizable-handle />
+  <dt-resizable-panel id="right">
+    Right Panel
+  </dt-resizable-panel>
+</dt-resizable>`,
+      },
+    },
   },
 };
 
@@ -165,6 +179,22 @@ export const Vertical = {
   render: DefaultTemplate,
   args: {
     direction: 'column',
+  },
+  parameters: {
+    docs: {
+      source: {
+        code: `
+<dt-resizable direction="column">
+  <dt-resizable-panel id="top">
+    Top Panel
+  </dt-resizable-panel>
+  <dt-resizable-handle />
+  <dt-resizable-panel id="bottom">
+    Bottom Panel
+  </dt-resizable-panel>
+</dt-resizable>`,
+      },
+    },
   },
 };
 
