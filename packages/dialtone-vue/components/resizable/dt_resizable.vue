@@ -205,10 +205,14 @@ const {
   isInitializing,
 });
 
-// Wrapper for resetPanels that clears storage after reset
+// Wrapper for resetPanels that updates storage after reset
 function resetPanels (beforePanelId, afterPanelId, behavior = 'all') {
   originalResetPanels(beforePanelId, afterPanelId, behavior);
-  group.clearSavedState();
+  if (behavior === 'all') {
+    group.clearSavedState();
+  } else {
+    saveToStorage(state.panels);
+  }
 }
 
 // Process auto-collapse/expand based on both container-width and panel-size triggers.
