@@ -38,6 +38,13 @@ jobs:
           ref: ${{ github.event_name == 'workflow_dispatch' && github.ref || github.event.workflow_run.head_sha }}
           fetch-depth: 0
 
+      - name: Get previous release SHA
+        if: ${{ github.event_name == 'workflow_run' }}
+        id: prev-release
+        run: |
+          PREV_TAG=$(git tag --sort=-creatordate | grep '^dialtone/v[0-9]' | grep -v -- '-' | sed -n '2p')
+          echo "sha=$(git rev-parse $PREV_TAG)" >> $GITHUB_OUTPUT
+
       - name: Get changed files (automatic)
         if: ${{ github.event_name == 'workflow_run' }}
         id: changed-files
@@ -47,6 +54,7 @@ jobs:
           json: true
           escape_json: false
           sha: ${{ github.event.workflow_run.head_sha }}
+          base_sha: ${{ steps.prev-release.outputs.sha }}
 
       - name: Set posts output
         id: set-posts
@@ -63,6 +71,7 @@ jobs:
   send-email:
     name: Send email
     runs-on: ubuntu-latest
+    if: ${{ needs.added-posts.outputs.added_posts != '[]' && needs.added-posts.outputs.added_posts != '' }}
     permissions:
       contents: read
       id-token: write
@@ -144,7 +153,7 @@ jobs:
   send-sms:
     name: Send SMS
     runs-on: ubuntu-latest
-    if: ${{ github.event.inputs.test_email == '' || github.event_name != 'workflow_dispatch' }}
+    if: ${{ (needs.added-posts.outputs.added_posts != '[]' && needs.added-posts.outputs.added_posts != '') && (github.event.inputs.test_email == '' || github.event_name != 'workflow_dispatch') }}
     permissions:
       contents: read
       id-token: write
