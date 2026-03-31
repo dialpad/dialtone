@@ -10,6 +10,10 @@ import ResizableCollapsibleStory from './resizable_collapsible.story.vue';
 import ResizableProgrammaticStory from './resizable_programmatic.story.vue';
 import ResizablePersistenceStory from './resizable_persistence.story.vue';
 import ResizableCustomAdapterStory from './resizable_custom_adapter.story.vue';
+import ResizableKeyboardStory from './resizable_keyboard.story.vue';
+import ResizablePeekHoverStory from './resizable_peek_hover.story.vue';
+import ResizablePeekButtonStory from './resizable_peek_button.story.vue';
+import ResizableOffsetStory from './resizable_offset.story.vue';
 
 export const argsData = {
   direction: 'row',
@@ -137,6 +141,18 @@ const PersistenceTemplate = (args, { argTypes }) =>
 
 const CustomAdapterTemplate = (args, { argTypes }) =>
   createTemplateFromVueFile(args, argTypes, ResizableCustomAdapterStory);
+
+const KeyboardTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, ResizableKeyboardStory);
+
+const PeekHoverTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, ResizablePeekHoverStory);
+
+const PeekButtonTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, ResizablePeekButtonStory);
+
+const OffsetTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, ResizableOffsetStory);
 
 export const Default = {
   render: DefaultTemplate,
@@ -312,6 +328,134 @@ const myAdapter = {
 <dt-resizable direction="row" :storage="myAdapter">
   ...
 </dt-resizable>`,
+      },
+    },
+  },
+};
+
+export const Keyboard = {
+  render: KeyboardTemplate,
+  args: {},
+  parameters: {
+    docs: {
+      description: {
+        story: 'Keyboard navigation demo. Use Ctrl/Cmd+E to enter edit mode, arrow keys to resize, and Escape to exit.',
+      },
+      source: {
+        code: `
+<dt-resizable>
+  <dt-resizable-panel id="left" initial-size="50p">
+    Left Panel
+  </dt-resizable-panel>
+  <dt-resizable-handle />
+  <dt-resizable-panel id="right" initial-size="50p">
+    Right Panel
+  </dt-resizable-panel>
+</dt-resizable>
+
+<!-- Keyboard Controls:
+  Ctrl/Cmd + E — Toggle edit mode
+  Arrow keys — Resize (8px)
+  Shift + Arrow — Large resize (24px)
+  Ctrl/Cmd + Arrow — Fine resize (1px)
+  R — Reset current handle
+  Escape — Exit edit mode -->`,
+      },
+    },
+  },
+};
+
+export const PeekHover = {
+  render: PeekHoverTemplate,
+  args: {},
+  parameters: {
+    docs: {
+      description: {
+        story: 'Collapsed panel with hover-triggered peek. Hover over the collapsed sidebar to temporarily reveal it.',
+      },
+      source: {
+        code: `
+<dt-resizable>
+  <dt-resizable-panel
+    id="sidebar"
+    initial-size="925"
+    collapsible
+    :collapsed="true"
+    peek-enabled
+    peek-trigger="hover"
+    peek-when-manual
+  >
+    Sidebar (hover to peek)
+  </dt-resizable-panel>
+  <dt-resizable-handle />
+  <dt-resizable-panel id="main" initial-size="50p">
+    Main Content
+  </dt-resizable-panel>
+</dt-resizable>`,
+      },
+    },
+  },
+};
+
+export const PeekButton = {
+  render: PeekButtonTemplate,
+  args: {},
+  parameters: {
+    docs: {
+      description: {
+        story: 'Collapsed panel with button-triggered peek. Uses the #peek-trigger slot to render a custom toggle button.',
+      },
+      source: {
+        code: `
+<dt-resizable>
+  <dt-resizable-panel
+    id="sidebar"
+    initial-size="925"
+    collapsible
+    :collapsed="true"
+    peek-enabled
+    peek-trigger="button"
+    peek-when-manual
+  >
+    <template #peek-trigger="{ togglePeek, isPeeking }">
+      <button @click="togglePeek">
+        {{ isPeeking ? 'Hide' : 'Peek' }}
+      </button>
+    </template>
+    Sidebar (click button to peek)
+  </dt-resizable-panel>
+  <dt-resizable-handle />
+  <dt-resizable-panel id="main" initial-size="50p">
+    Main Content
+  </dt-resizable-panel>
+</dt-resizable>`,
+      },
+    },
+  },
+};
+
+export const Offset = {
+  render: OffsetTemplate,
+  args: {},
+  parameters: {
+    docs: {
+      description: {
+        story: 'Handle with offset-element prop. The handle shortens to avoid overlapping a fixed toolbar.',
+      },
+      source: {
+        code: `
+<div style="position: relative;">
+  <div id="toolbar" style="height: 48px;">Toolbar</div>
+  <dt-resizable>
+    <dt-resizable-panel id="left" initial-size="50p">
+      Left Panel
+    </dt-resizable-panel>
+    <dt-resizable-handle offset-element="#toolbar" :offset-amount="8" />
+    <dt-resizable-panel id="right" initial-size="50p">
+      Right Panel
+    </dt-resizable-panel>
+  </dt-resizable>
+</div>`,
       },
     },
   },
