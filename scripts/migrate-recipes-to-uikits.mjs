@@ -91,7 +91,7 @@ const SKIP_DIRS = new Set(['node_modules', '.git', 'dist', 'build', '.nuxt', '.o
  * Rewrite a single named-import statement from @dialpad/dialtone/vue3.
  * Splits recipe imports out into their new packages.
  */
-function rewriteDialtoneImport (importedNames, quote) {
+function rewriteDialtoneImport (importedNames, quote, isType = false) {
   const names = importedNames.split(',').map(n => n.trim()).filter(Boolean)
 
   /** @type {Record<string, string[]>} package → list of import specifiers */
@@ -116,8 +116,9 @@ function rewriteDialtoneImport (importedNames, quote) {
     return a.localeCompare(b)
   })
 
+  const importKeyword = isType ? 'import type' : 'import'
   return sorted
-    .map(([pkg, pkgNames]) => `import { ${pkgNames.join(', ')} } from ${quote}${pkg}${quote}`)
+    .map(([pkg, pkgNames]) => `${importKeyword} { ${pkgNames.join(', ')} } from ${quote}${pkg}${quote}`)
     .join('\n')
 }
 
@@ -131,14 +132,15 @@ function migrateContent (content) {
   // 1. Rewrite named imports from @dialpad/dialtone/vue3, but only when at least
   //    one imported name is a recipe component that needs to move to a new package.
   result = result.replace(
-    /import\s*\{([^}]+)\}\s*from\s*(['"])@dialpad\/dialtone\/vue3\2/g,
-    (match, importedNames, quote) => {
+    /import\s+(type\s+)?\{([^}]+)\}\s*from\s*(['"])@dialpad\/dialtone\/vue3\3/g,
+    (match, typeKeyword, importedNames, quote) => {
+      const isType = Boolean(typeKeyword)
       const names = importedNames.split(',').map(n => n.trim()).filter(Boolean)
       const hasRecipe = names.some(specifier => {
         const importedName = specifier.split(/\s+as\s+/)[0].trim()
         return MIGRATION_MAP[importedName] !== undefined
       })
-      return hasRecipe ? rewriteDialtoneImport(importedNames, quote) : match
+      return hasRecipe ? rewriteDialtoneImport(importedNames, quote, isType) : match
     },
   )
 
