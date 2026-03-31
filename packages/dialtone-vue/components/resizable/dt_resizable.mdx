@@ -1,0 +1,123 @@
+import { Canvas, Subtitle, Controls, Meta } from '@storybook/addon-docs/blocks';
+
+import * as ResizableStories from './dt_resizable.stories';
+
+<Meta of={ResizableStories}/>
+
+# Resizable
+
+<Subtitle>
+  A layout component that allows users to resize panels by dragging handles between them.
+</Subtitle>
+
+## Base Style
+
+<Canvas of={ResizableStories.Default} />
+
+## Vertical
+
+Panels can be stacked vertically using `direction="column"`.
+
+<Canvas of={ResizableStories.Vertical} />
+
+## Three Panel Layout
+
+Multiple panels can be combined with handles between each pair.
+
+<Canvas of={ResizableStories.ThreePanel} />
+
+## Custom Initial Sizes
+
+Panels accept `initialSize` as a percentage (`"30p"`) or Dialtone token (`"925"`).
+
+<Canvas of={ResizableStories.CustomSizes} />
+
+## Slots, Props & Events
+
+<Controls />
+
+## Usage
+
+### Import
+
+```jsx
+import {
+  DtResizable,
+  DtResizablePanel,
+  DtResizableHandle,
+} from '@dialpad/dialtone-vue';
+```
+
+### Basic Usage
+
+```html
+<dt-resizable direction="row">
+  <dt-resizable-panel id="left">
+    Left content
+  </dt-resizable-panel>
+  <dt-resizable-handle />
+  <dt-resizable-panel id="right">
+    Right content
+  </dt-resizable-panel>
+</dt-resizable>
+```
+
+### With Initial Sizes
+
+```html
+<dt-resizable direction="row">
+  <dt-resizable-panel id="sidebar" initial-size="30p">
+    Sidebar
+  </dt-resizable-panel>
+  <dt-resizable-handle />
+  <dt-resizable-panel id="content" initial-size="70p">
+    Main content
+  </dt-resizable-panel>
+</dt-resizable>
+```
+
+### With localStorage Persistence
+
+```html
+<dt-resizable direction="row" storage-key="my-layout">
+  <dt-resizable-panel id="left">
+    Left
+  </dt-resizable-panel>
+  <dt-resizable-handle />
+  <dt-resizable-panel id="right">
+    Right
+  </dt-resizable-panel>
+</dt-resizable>
+```
+
+## Accessibility
+
+### Keyboard Support
+
+- Each handle has `role="separator"` with appropriate `aria-orientation`.
+- `aria-valuenow`, `aria-valuemin`, and `aria-valuemax` reflect the before-panel's percentage size.
+- Double-clicking a handle resets adjacent panels to their initial sizes.
+
+## Sub-components
+
+### DtResizablePanel
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `id` | `string` | required | Unique panel identifier |
+| `initialSize` | `string` | — | Initial size (token or percentage, e.g. `"30p"`) |
+| `userMinSize` | `string` | — | Minimum size for user dragging |
+| `userMaxSize` | `string` | — | Maximum size for user dragging |
+| `resizable` | `boolean` | `true` | Whether the panel can be resized |
+| `collapsible` | `boolean` | `false` | Whether the panel can be collapsed |
+| `collapsed` | `boolean` | `false` | Initial collapsed state |
+
+### DtResizableHandle
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `disabled` | `boolean` | `false` | Disables the handle |
+| `beforePanelId` | `string` | — | Explicit panel ID before handle (auto-detected if omitted) |
+| `afterPanelId` | `string` | — | Explicit panel ID after handle (auto-detected if omitted) |
+| `disableResetOnDoubleClick` | `boolean` | `false` | Disable double-click reset |
+| `resetBehavior` | `string` | `"both"` | Reset behavior: `"both"`, `"before"`, `"after"`, `"all"` |
