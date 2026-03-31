@@ -76,17 +76,21 @@ import {
 </dt-resizable>
 ```
 
-### With localStorage Persistence
+### With Persistence
+
+Use `storageKey` for localStorage, or `:storage` for Pinia/Vuex/custom backends.
 
 ```html
+<!-- localStorage shorthand -->
 <dt-resizable storage-key="my-layout">
-  <dt-resizable-panel id="left">
-    Left
-  </dt-resizable-panel>
+  <dt-resizable-panel id="left">Left</dt-resizable-panel>
   <dt-resizable-handle />
-  <dt-resizable-panel id="right">
-    Right
-  </dt-resizable-panel>
+  <dt-resizable-panel id="right">Right</dt-resizable-panel>
+</dt-resizable>
+
+<!-- Custom adapter (Pinia, Vuex, API, etc.) -->
+<dt-resizable :storage="piniaAdapter">
+  ...
 </dt-resizable>
 ```
 

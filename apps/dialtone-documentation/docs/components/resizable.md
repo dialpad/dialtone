@@ -30,7 +30,7 @@ The resizable component system consists of three parts: `DtResizable` (the group
 ### Basic Two-Panel Layout
 
 ```vue
-<dt-resizable direction="row">
+<dt-resizable>
   <dt-resizable-panel id="sidebar" initial-size="25p">
     Sidebar content
   </dt-resizable-panel>
@@ -44,7 +44,7 @@ The resizable component system consists of three parts: `DtResizable` (the group
 ### Three-Panel Layout
 
 ```vue
-<dt-resizable direction="row">
+<dt-resizable>
   <dt-resizable-panel id="sidebar" initial-size="20p">
     Sidebar
   </dt-resizable-panel>
@@ -78,7 +78,7 @@ The resizable component system consists of three parts: `DtResizable` (the group
 Panels support user drag constraints (`userMinSize`/`userMaxSize`) and system viewport constraints (`systemMinSize`/`systemMaxSize`). User constraints define hard limits for drag interactions. System constraints define the range the layout engine uses during viewport resizes.
 
 ```vue
-<dt-resizable direction="row">
+<dt-resizable>
   <dt-resizable-panel
     id="sidebar"
     initial-size="30p"
@@ -96,11 +96,9 @@ Panels support user drag constraints (`userMinSize`/`userMaxSize`) and system vi
 
 ### Constraint Hierarchy
 
-| Constraint | Purpose | Applied during |
-|---|---|---|
-| `userMinSize` / `userMaxSize` | Hard floor/ceiling for user dragging | Drag interactions |
-| `systemMinSize` / `systemMaxSize` | Scaling range for the layout engine | Viewport resizes |
-| `collapseSize` | Container width threshold for auto-collapse | Container resize |
+- **`userMinSize` / `userMaxSize`** — Hard floor/ceiling for user dragging. Applied during drag interactions.
+- **`systemMinSize` / `systemMaxSize`** — Scaling range for the layout engine. Applied during viewport resizes.
+- **`collapseSize`** — Container width threshold for auto-collapse. Applied during container resize.
 
 System constraints fall back to user constraints when not specified. `systemMinSize` must be >= `userMinSize`, and `systemMaxSize` must be <= `userMaxSize`.
 
@@ -109,7 +107,7 @@ System constraints fall back to user constraints when not specified. `systemMinS
 Mark a panel as `collapsible` to allow it to collapse to zero width. Use the `collapsed` prop for initial state, or call `collapsePanel()` programmatically.
 
 ```vue
-<dt-resizable ref="group" direction="row">
+<dt-resizable ref="group">
   <dt-resizable-panel
     id="sidebar"
     initial-size="25p"
@@ -132,7 +130,6 @@ Use the `collapseRules` prop on `DtResizable` to define which panels collapse fi
 
 ```vue
 <dt-resizable
-  direction="row"
   :collapse-rules="[
     { panelId: 'details', priority: 1 },
     { panelId: 'sidebar', priority: 2 },
@@ -144,39 +141,62 @@ Use the `collapseRules` prop on `DtResizable` to define which panels collapse fi
 
 ## Persistence
 
-Panel sizes can be persisted across page loads. Use `storageKey` for localStorage, or provide a custom adapter via the `:storage` prop.
+Panel sizes can be persisted across page loads. Two approaches are available:
 
-### localStorage (Built-in)
+<table class="d-table dialtone-doc-table">
+<thead>
+<tr>
+<th scope="col">Approach</th>
+<th scope="col">Prop</th>
+<th scope="col">Best For</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>storageKey</code></td>
+<td><code>storage-key="my-layout"</code></td>
+<td>Quick localStorage persistence</td>
+</tr>
+<tr>
+<td><code>:storage</code></td>
+<td><code>:storage="adapter"</code></td>
+<td>Pinia, Vuex, IndexedDB, or API backends</td>
+</tr>
+</tbody>
+</table>
+
+### localStorage
+
+The simplest option — pass a `storageKey` string and panel sizes are automatically saved to and restored from localStorage.
 
 ```vue
-<dt-resizable direction="row" storage-key="my-layout">
+<dt-resizable storage-key="my-layout">
   ...
 </dt-resizable>
 ```
 
-### Custom Storage Adapter
+### Pinia / Custom Store
 
-Implement the `ResizableStorageAdapter` interface to persist layouts with Pinia, Vuex, IndexedDB, or any other storage backend.
+For state management integration, implement the `ResizableStorageAdapter` interface (`save`, `load`, `clear`) and pass it via the `:storage` prop.
 
 ```js
-import { localStorageAdapter } from '@dialpad/dialtone-vue';
+// Pinia adapter example
+const layoutStore = useLayoutStore();
 
-// Built-in localStorage factory
-const adapter = localStorageAdapter('my-key');
-
-// Custom adapter
 const piniaAdapter = {
-  save(data) { store.setLayout(data); },
-  load() { return store.layout; },
-  clear() { store.clearLayout(); },
+  save(data) { layoutStore.setLayout(data); },
+  load() { return layoutStore.layout; },
+  clear() { layoutStore.clearLayout(); },
 };
 ```
 
 ```vue
-<dt-resizable direction="row" :storage="piniaAdapter">
+<dt-resizable :storage="piniaAdapter">
   ...
 </dt-resizable>
 ```
+
+The same interface works with Vuex, IndexedDB, or an API backend — any object with `save`, `load`, and `clear` methods.
 
 When both `storageKey` and `:storage` are provided, the custom adapter takes precedence.
 
@@ -219,7 +239,7 @@ Access methods via a template ref on the `DtResizable` component.
 
 ```vue
 <template>
-  <dt-resizable ref="group" direction="row">
+  <dt-resizable ref="group">
     ...
   </dt-resizable>
 </template>
@@ -247,94 +267,384 @@ group.value.resetPanels();
 
 ### Exposed Methods
 
-| Method | Signature | Description |
-|---|---|---|
-| `resizePanel` | `(panelId: string, size: number) => void` | Resize a panel to a specific pixel size |
-| `collapsePanel` | `(panelId: string, collapsed: boolean) => void` | Collapse or expand a panel |
-| `lockPanel` | `(panelId: string) => void` | Lock a panel at its current size |
-| `unlockPanel` | `(panelId: string) => void` | Unlock a previously locked panel |
-| `resetPanels` | `(beforePanelId?, afterPanelId?, behavior?) => void` | Reset panels to initial sizes |
+<table class="d-table dialtone-doc-table">
+<thead>
+<tr>
+<th scope="col">Method</th>
+<th scope="col">Signature</th>
+<th scope="col">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>resizePanel</code></td>
+<td><code>(panelId: string, size: number) =&gt; void</code></td>
+<td>Resize a panel to a specific pixel size</td>
+</tr>
+<tr>
+<td><code>collapsePanel</code></td>
+<td><code>(panelId: string, collapsed: boolean) =&gt; void</code></td>
+<td>Collapse or expand a panel</td>
+</tr>
+<tr>
+<td><code>lockPanel</code></td>
+<td><code>(panelId: string) =&gt; void</code></td>
+<td>Lock a panel at its current size</td>
+</tr>
+<tr>
+<td><code>unlockPanel</code></td>
+<td><code>(panelId: string) =&gt; void</code></td>
+<td>Unlock a previously locked panel</td>
+</tr>
+<tr>
+<td><code>resetPanels</code></td>
+<td><code>(beforePanelId?, afterPanelId?, behavior?) =&gt; void</code></td>
+<td>Reset panels to initial sizes</td>
+</tr>
+</tbody>
+</table>
 
 ### Exposed Readonly State
 
-| Property | Type | Description |
-|---|---|---|
-| `state` | `readonly object` | Current layout state including `panels`, `containerSize`, `isResizing` |
-| `panelConfigs` | `ComputedRef<Array>` | Panel configurations from the `panels` prop |
-| `allocationStrategy` | `ComputedRef<string>` | Current space allocation strategy |
+<table class="d-table dialtone-doc-table">
+<thead>
+<tr>
+<th scope="col">Property</th>
+<th scope="col">Type</th>
+<th scope="col">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>state</code></td>
+<td><code>readonly object</code></td>
+<td>Current layout state including <code>panels</code>, <code>containerSize</code>, <code>isResizing</code></td>
+</tr>
+<tr>
+<td><code>panelConfigs</code></td>
+<td><code>ComputedRef&lt;Array&gt;</code></td>
+<td>Panel configurations from the <code>panels</code> prop</td>
+</tr>
+<tr>
+<td><code>allocationStrategy</code></td>
+<td><code>ComputedRef&lt;string&gt;</code></td>
+<td>Current space allocation strategy</td>
+</tr>
+</tbody>
+</table>
 
 ## Props
 
 ### DtResizable
 
-| Prop | Type | Default | Description |
-|---|---|---|---|
-| `direction` | `'row' \| 'column'` | `'row'` | Layout direction. `'row'` for horizontal, `'column'` for vertical. |
-| `storageKey` | `string` | `null` | localStorage key for persisting panel sizes. |
-| `storage` | `ResizableStorageAdapter` | `null` | Custom storage adapter. Overrides `storageKey` when both provided. |
-| `panels` | `Array` | `[]` | Panel configurations array for programmatic initialization. |
-| `spaceAllocationStrategy` | `'proportional' \| 'preserve-manual'` | `'proportional'` | Strategy for redistributing space when panels open/close. |
-| `collapseRules` | `Array<CollapseRule>` | `[]` | Rules defining which panels collapse first when space is constrained. |
+<table class="d-table dialtone-doc-table">
+<thead>
+<tr>
+<th scope="col">Prop</th>
+<th scope="col">Type</th>
+<th scope="col">Default</th>
+<th scope="col">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>direction</code></td>
+<td><code>'row' | 'column'</code></td>
+<td><code>'row'</code></td>
+<td>Layout direction. <code>'row'</code> for horizontal, <code>'column'</code> for vertical.</td>
+</tr>
+<tr>
+<td><code>storageKey</code></td>
+<td><code>string</code></td>
+<td><code>null</code></td>
+<td>localStorage key for persisting panel sizes.</td>
+</tr>
+<tr>
+<td><code>storage</code></td>
+<td><code>ResizableStorageAdapter</code></td>
+<td><code>null</code></td>
+<td>Custom storage adapter. Overrides <code>storageKey</code> when both provided.</td>
+</tr>
+<tr>
+<td><code>spaceAllocationStrategy</code></td>
+<td><code>'proportional' | 'preserve-manual'</code></td>
+<td><code>'proportional'</code></td>
+<td>Strategy for redistributing space when panels open/close.</td>
+</tr>
+<tr>
+<td><code>collapseRules</code></td>
+<td><code>Array&lt;CollapseRule&gt;</code></td>
+<td><code>[]</code></td>
+<td>Rules defining which panels collapse first when space is constrained.</td>
+</tr>
+<tr>
+<td><code>messages</code></td>
+<td><code>Object</code></td>
+<td><code>{}</code></td>
+<td>i18n overrides for screen reader announcements.</td>
+</tr>
+</tbody>
+</table>
 
 ### DtResizablePanel
 
-| Prop | Type | Default | Description |
-|---|---|---|---|
-| `id` | `string` | **required** | Unique panel identifier. |
-| `initialSize` | `string` | `undefined` | Initial size as percentage token (e.g., `'25p'` for 25%). |
-| `userMinSize` | `string` | `undefined` | Minimum size for user drag interactions. |
-| `userMaxSize` | `string` | `undefined` | Maximum size for user drag interactions. |
-| `systemMinSize` | `string` | `undefined` | Minimum size for system viewport scaling. |
-| `systemMaxSize` | `string` | `undefined` | Maximum size for system viewport scaling. |
-| `collapseSize` | `string` | `undefined` | Container width threshold for auto-collapse. |
-| `resizable` | `boolean` | `true` | Whether this panel can be resized by dragging. |
-| `collapsible` | `boolean` | `false` | Whether this panel can be collapsed. |
-| `collapsed` | `boolean` | `false` | Initial collapsed state. |
-| `peekEnabled` | `boolean` | `false` | Enable peek overlay when panel is collapsed. |
-| `peekTrigger` | `'hover' \| 'button' \| 'both'` | `'hover'` | What triggers the peek overlay. |
-| `peekWhenManual` | `boolean` | `false` | Allow peek even for manually collapsed panels. |
-| `peekWidth` | `string` | `undefined` | Width of the peek overlay. Uses `initialSize` if not set. |
-| `peekGracePeriod` | `number` | `150` | Grace period (ms) before hiding peek on mouse leave. |
+<table class="d-table dialtone-doc-table">
+<thead>
+<tr>
+<th scope="col">Prop</th>
+<th scope="col">Type</th>
+<th scope="col">Default</th>
+<th scope="col">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td><code>string</code></td>
+<td><strong>required</strong></td>
+<td>Unique panel identifier.</td>
+</tr>
+<tr>
+<td><code>initialSize</code></td>
+<td><code>string</code></td>
+<td><code>undefined</code></td>
+<td>Initial size as percentage token (e.g., <code>'25p'</code> for 25%).</td>
+</tr>
+<tr>
+<td><code>userMinSize</code></td>
+<td><code>string</code></td>
+<td><code>undefined</code></td>
+<td>Minimum size for user drag interactions.</td>
+</tr>
+<tr>
+<td><code>userMaxSize</code></td>
+<td><code>string</code></td>
+<td><code>undefined</code></td>
+<td>Maximum size for user drag interactions.</td>
+</tr>
+<tr>
+<td><code>systemMinSize</code></td>
+<td><code>string</code></td>
+<td><code>undefined</code></td>
+<td>Minimum size for system viewport scaling.</td>
+</tr>
+<tr>
+<td><code>systemMaxSize</code></td>
+<td><code>string</code></td>
+<td><code>undefined</code></td>
+<td>Maximum size for system viewport scaling.</td>
+</tr>
+<tr>
+<td><code>collapseSize</code></td>
+<td><code>string</code></td>
+<td><code>undefined</code></td>
+<td>Container width threshold for auto-collapse.</td>
+</tr>
+<tr>
+<td><code>resizable</code></td>
+<td><code>boolean</code></td>
+<td><code>true</code></td>
+<td>Whether this panel can be resized by dragging.</td>
+</tr>
+<tr>
+<td><code>collapsible</code></td>
+<td><code>boolean</code></td>
+<td><code>false</code></td>
+<td>Whether this panel can be collapsed.</td>
+</tr>
+<tr>
+<td><code>collapsed</code></td>
+<td><code>boolean</code></td>
+<td><code>false</code></td>
+<td>Initial collapsed state.</td>
+</tr>
+<tr>
+<td><code>peekEnabled</code></td>
+<td><code>boolean</code></td>
+<td><code>false</code></td>
+<td>Enable peek overlay when panel is collapsed.</td>
+</tr>
+<tr>
+<td><code>peekTrigger</code></td>
+<td><code>'hover' | 'button' | 'both'</code></td>
+<td><code>'hover'</code></td>
+<td>What triggers the peek overlay.</td>
+</tr>
+<tr>
+<td><code>peekWhenManual</code></td>
+<td><code>boolean</code></td>
+<td><code>false</code></td>
+<td>Allow peek even for manually collapsed panels.</td>
+</tr>
+<tr>
+<td><code>peekWidth</code></td>
+<td><code>string</code></td>
+<td><code>undefined</code></td>
+<td>Width of the peek overlay. Uses <code>initialSize</code> if not set.</td>
+</tr>
+<tr>
+<td><code>peekGracePeriod</code></td>
+<td><code>number</code></td>
+<td><code>150</code></td>
+<td>Grace period (ms) before hiding peek on mouse leave.</td>
+</tr>
+</tbody>
+</table>
 
 ### DtResizableHandle
 
-| Prop | Type | Default | Description |
-|---|---|---|---|
-| `beforePanelId` | `string` | `null` | ID of the panel before this handle. Auto-detected if not set. |
-| `afterPanelId` | `string` | `null` | ID of the panel after this handle. Auto-detected if not set. |
-| `disabled` | `boolean` | `false` | Disable resize interaction for this handle. |
-| `disableResetOnDoubleClick` | `boolean` | `false` | Disable the double-click reset behavior. |
-| `resetBehavior` | `'both' \| 'before' \| 'after' \| 'all'` | `'both'` | Which panels to reset on double-click. |
-| `offsetElement` | `string` | `undefined` | CSS selector for an element to offset the handle position. |
-| `offsetAmount` | `number` | `0` | Pixel offset amount for the handle position. |
-| `offsetDirection` | `'start' \| 'end' \| 'both'` | `'both'` | Direction of the offset. |
+<table class="d-table dialtone-doc-table">
+<thead>
+<tr>
+<th scope="col">Prop</th>
+<th scope="col">Type</th>
+<th scope="col">Default</th>
+<th scope="col">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>beforePanelId</code></td>
+<td><code>string</code></td>
+<td><code>null</code></td>
+<td>ID of the panel before this handle. Auto-detected if not set.</td>
+</tr>
+<tr>
+<td><code>afterPanelId</code></td>
+<td><code>string</code></td>
+<td><code>null</code></td>
+<td>ID of the panel after this handle. Auto-detected if not set.</td>
+</tr>
+<tr>
+<td><code>disabled</code></td>
+<td><code>boolean</code></td>
+<td><code>false</code></td>
+<td>Disable resize interaction for this handle.</td>
+</tr>
+<tr>
+<td><code>disableResetOnDoubleClick</code></td>
+<td><code>boolean</code></td>
+<td><code>false</code></td>
+<td>Disable the double-click reset behavior.</td>
+</tr>
+<tr>
+<td><code>resetBehavior</code></td>
+<td><code>'both' | 'before' | 'after' | 'all'</code></td>
+<td><code>'both'</code></td>
+<td>Which panels to reset on double-click.</td>
+</tr>
+<tr>
+<td><code>offsetElement</code></td>
+<td><code>string</code></td>
+<td><code>undefined</code></td>
+<td>CSS selector for an element to offset the handle position.</td>
+</tr>
+<tr>
+<td><code>offsetAmount</code></td>
+<td><code>number</code></td>
+<td><code>0</code></td>
+<td>Pixel offset amount for the handle position.</td>
+</tr>
+<tr>
+<td><code>offsetDirection</code></td>
+<td><code>'start' | 'end' | 'both'</code></td>
+<td><code>'both'</code></td>
+<td>Direction of the offset.</td>
+</tr>
+<tr>
+<td><code>ariaLabel</code></td>
+<td><code>string</code></td>
+<td><code>null</code></td>
+<td>Override the default aria-label for i18n.</td>
+</tr>
+</tbody>
+</table>
 
 ## Events
 
 ### DtResizable
 
-| Event | Payload | Description |
-|---|---|---|
-| `panel-resize` | `(panelId: string, size: number)` | Emitted when a panel is resized. |
-| `panel-collapse` | `(panelId: string, collapsed: boolean)` | Emitted when a panel is collapsed or expanded. |
-| `resize-start` | `(handleId: string)` | Emitted when a resize drag begins. |
-| `resize-end` | `(handleId: string)` | Emitted when a resize drag ends. |
+<table class="d-table dialtone-doc-table">
+<thead>
+<tr>
+<th scope="col">Event</th>
+<th scope="col">Payload</th>
+<th scope="col">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>panel-resize</code></td>
+<td><code>(panelId: string, size: number)</code></td>
+<td>Emitted when a panel is resized.</td>
+</tr>
+<tr>
+<td><code>panel-collapse</code></td>
+<td><code>(panelId: string, collapsed: boolean)</code></td>
+<td>Emitted when a panel is collapsed or expanded.</td>
+</tr>
+<tr>
+<td><code>resize-start</code></td>
+<td><code>(handleId: string)</code></td>
+<td>Emitted when a resize drag begins.</td>
+</tr>
+<tr>
+<td><code>resize-end</code></td>
+<td><code>(handleId: string)</code></td>
+<td>Emitted when a resize drag ends.</td>
+</tr>
+</tbody>
+</table>
 
 ## Slots
 
 ### DtResizable
 
-| Slot | Scoped Props | Description |
-|---|---|---|
-| `default` | `{ panels, direction, isResizing, spaceAllocationStrategy, resizePanel, collapsePanel, startResize, stopResize }` | Container for panels and handles. |
+<table class="d-table dialtone-doc-table">
+<thead>
+<tr>
+<th scope="col">Slot</th>
+<th scope="col">Scoped Props</th>
+<th scope="col">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>default</code></td>
+<td><code>{ panels, direction, isResizing, resizePanel, collapsePanel, startResize, stopResize }</code></td>
+<td>Container for panels and handles.</td>
+</tr>
+</tbody>
+</table>
 
 ### DtResizablePanel
 
-| Slot | Scoped Props | Description |
-|---|---|---|
-| `default` | `{ panel, isCollapsed, isResizing, isPeeking }` | Panel content. |
-| `peek-trigger` | `{ togglePeek, isPeeking }` | Custom trigger element for the peek overlay. |
-| `peek-content` | `{ exitPeek }` | Custom content for the peek overlay. Falls back to default slot. |
+<table class="d-table dialtone-doc-table">
+<thead>
+<tr>
+<th scope="col">Slot</th>
+<th scope="col">Scoped Props</th>
+<th scope="col">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>default</code></td>
+<td><code>{ panel, isCollapsed, isResizing, isPeeking }</code></td>
+<td>Panel content.</td>
+</tr>
+<tr>
+<td><code>peek-trigger</code></td>
+<td><code>{ togglePeek, isPeeking }</code></td>
+<td>Custom trigger element for the peek overlay.</td>
+</tr>
+<tr>
+<td><code>peek-content</code></td>
+<td><code>{ exitPeek }</code></td>
+<td>Custom content for the peek overlay. Falls back to default slot.</td>
+</tr>
+</tbody>
+</table>
 
 ## Accessibility
 
@@ -350,8 +660,25 @@ group.value.resetPanels();
 
 All size props accept percentage tokens with a `p` suffix. The value represents a percentage of the container size.
 
-| Token | Meaning |
-|---|---|
-| `'25p'` | 25% of container |
-| `'50p'` | 50% of container |
-| `'100p'` | 100% of container |
+<table class="d-table dialtone-doc-table">
+<thead>
+<tr>
+<th scope="col">Token</th>
+<th scope="col">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>'25p'</code></td>
+<td>25% of container</td>
+</tr>
+<tr>
+<td><code>'50p'</code></td>
+<td>50% of container</td>
+</tr>
+<tr>
+<td><code>'100p'</code></td>
+<td>100% of container</td>
+</tr>
+</tbody>
+</table>
