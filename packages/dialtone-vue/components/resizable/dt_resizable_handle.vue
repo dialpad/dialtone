@@ -51,36 +51,20 @@ import {
 } from './resizable_constants';
 import { pixelsToPercentage } from './resizable_utils';
 import { useResizableKeyboard } from './composables/useResizableKeyboard';
+import { useResizableOffset } from './composables/useResizableOffset';
 
 const props = defineProps({
-  /** Panel ID before this handle — overrides layout index when provided */
-  beforePanelId: {
-    type: String,
-    default: null,
-  },
-  /** Panel ID after this handle — overrides layout index when provided */
-  afterPanelId: {
-    type: String,
-    default: null,
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  class: {
-    type: String,
-    default: '',
-  },
-  /** Disable the built-in double-click reset behavior for this handle */
-  disableResetOnDoubleClick: {
-    type: Boolean,
-    default: false,
-  },
-  /** Reset behavior passed to resetPanels on double-click @values 'both', 'before', 'after', 'all' */
-  resetBehavior: {
-    type: String,
-    default: 'both',
-  },
+  beforePanelId: { type: String, default: null },
+  afterPanelId: { type: String, default: null },
+  disabled: { type: Boolean, default: false },
+  class: { type: String, default: '' },
+  disableResetOnDoubleClick: { type: Boolean, default: false },
+  /** @values 'both', 'before', 'after', 'all' */
+  resetBehavior: { type: String, default: 'both' },
+  offsetElement: { type: String, default: undefined },
+  offsetAmount: { type: Number, default: 0 },
+  /** @values 'start', 'end', 'both' */
+  offsetDirection: { type: String, default: 'both' },
 });
 
 // ── Injected state from DtResizable ──────────────────────────────────────
@@ -178,6 +162,7 @@ const handleStyles = computed(() => {
   return {
     [positionProp]: `${Math.max(0, pos.left)}px`,
     visibility: '',
+    ...offset.handleStyles.value,
   };
 });
 
@@ -245,6 +230,15 @@ const keyboard = useResizableKeyboard({
     // deferred to blur/exit-edit-mode for now.
     void beforeId; void beforeSize; void afterId; void afterSize;
   },
+});
+
+// ── Offset composable ──────────────────────────────────────────────────────
+
+const offset = useResizableOffset({
+  offsetElement: props.offsetElement,
+  offsetAmount: props.offsetAmount,
+  offsetDirection: props.offsetDirection,
+  direction: directionRef,
 });
 
 // ── Lifecycle ────────────────────────────────────────────────────────────────
