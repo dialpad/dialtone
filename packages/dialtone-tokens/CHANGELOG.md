@@ -1,3 +1,15 @@
+# [1.48.0-next.13](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.12...dialtone-tokens/v1.48.0-next.13) (2026-03-31)
+
+
+### Documentation
+
+* **Playground:** DLT-3119 refine playground UI and integrate across doc site ([#1127](https://github.com/dialpad/dialtone/issues/1127)) ([ba6b599](https://github.com/dialpad/dialtone/commit/ba6b599ad6b2cb0213491b9b4980d6fc914dc945))
+
+
+### Features
+
+* **Dialtone Css, Dialtone Tokens, Dialtone Vue:** DLT-3197 DLT-3198 DLT-3199 DLT-3200 DLT-3201 DLT-3202 DLT-3203 DLT-3204 DLT-3205 DLT-3206 DLT-3207 DLT-3208 DLT-3209 DLT-3210 DLT-3211 token-stop utility classes, migration tooling, and documentation ([#1150](https://github.com/dialpad/dialtone/issues/1150)) ([6237b84](https://github.com/dialpad/dialtone/commit/6237b84b901aed6e3e2bcb7d0216feac218eebad))
+
 # [1.48.0-next.12](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.11...dialtone-tokens/v1.48.0-next.12) (2026-03-10)
 
 
