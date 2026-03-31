@@ -1,9 +1,9 @@
 /**
  * Resizable panel system — types and injection keys.
  *
- * @see dt_resizable.vue — provides all keys
- * @see dt_resizable_panel.vue — consumes panel/layout keys
- * @see dt_resizable_handle.vue — consumes handle/resize keys
+ * @see resizable.vue — provides all keys
+ * @see resizable_panel.vue — consumes panel/layout keys
+ * @see resizable_handle.vue — consumes handle/resize keys
  */
 import type { InjectionKey, ComputedRef, ComponentInternalInstance } from 'vue';
 import type { LayoutResult } from './composables/computeLayout';

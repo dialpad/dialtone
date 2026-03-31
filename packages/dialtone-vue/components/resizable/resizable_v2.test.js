@@ -8,7 +8,7 @@
 import { mount } from '@vue/test-utils';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { h } from 'vue';
-import DtResizable from './dt_resizable.vue';
+import DtResizable from './resizable.vue';
 import {
   applyPanelPixelConstraints,
   createPanelState,

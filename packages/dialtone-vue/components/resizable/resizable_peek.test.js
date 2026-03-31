@@ -8,9 +8,9 @@
 import { mount } from '@vue/test-utils';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { defineComponent } from 'vue';
-import DtResizable from './dt_resizable.vue';
-import DtResizablePanel from './dt_resizable_panel.vue';
-import DtResizableHandle from './dt_resizable_handle.vue';
+import DtResizable from './resizable.vue';
+import DtResizablePanel from './resizable_panel.vue';
+import DtResizableHandle from './resizable_handle.vue';
 
 // Mock ResizeObserver
 global.ResizeObserver = vi.fn().mockImplementation(() => ({

@@ -54,9 +54,9 @@
 </template>
 
 <script>
-import DtResizable from './dt_resizable.vue';
-import DtResizablePanel from './dt_resizable_panel.vue';
-import DtResizableHandle from './dt_resizable_handle.vue';
+import DtResizable from './resizable.vue';
+import DtResizablePanel from './resizable_panel.vue';
+import DtResizableHandle from './resizable_handle.vue';
 
 export default {
   name: 'ResizableCustomAdapterStory',

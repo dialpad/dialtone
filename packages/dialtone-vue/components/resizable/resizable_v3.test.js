@@ -7,7 +7,7 @@
 
 import { mount } from '@vue/test-utils';
 import { describe, it, expect, vi, afterEach } from 'vitest';
-import DtResizable from './dt_resizable.vue';
+import DtResizable from './resizable.vue';
 import {
   useResizableStorage,
   localStorageAdapter,

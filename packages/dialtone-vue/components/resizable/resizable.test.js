@@ -8,7 +8,7 @@
 import { mount } from '@vue/test-utils';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { defineComponent, inject, computed, h } from 'vue';
-import DtResizable from './dt_resizable.vue';
+import DtResizable from './resizable.vue';
 import {
   RESIZABLE_DIRECTION_KEY,
   RESIZABLE_PANELS_KEY,
