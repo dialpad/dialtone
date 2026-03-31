@@ -1801,6 +1801,74 @@
       "value": "{layout.base} * 16",
       "type": "dimension",
       "description": "1024px"
+    },
+    "0-percent": {
+      "value": "{size.0-percent}",
+      "type": "dimension"
+    },
+    "5-percent": {
+      "value": "{size.5-percent}",
+      "type": "dimension"
+    },
+    "10-percent": {
+      "value": "{size.10-percent}",
+      "type": "dimension"
+    },
+    "20-percent": {
+      "value": "{size.20-percent}",
+      "type": "dimension"
+    },
+    "25-percent": {
+      "value": "{size.25-percent}",
+      "type": "dimension"
+    },
+    "30-percent": {
+      "value": "{size.30-percent}",
+      "type": "dimension"
+    },
+    "33-percent": {
+      "value": "{size.33-percent}",
+      "type": "dimension"
+    },
+    "40-percent": {
+      "value": "{size.40-percent}",
+      "type": "dimension"
+    },
+    "50-percent": {
+      "value": "{size.50-percent}",
+      "type": "dimension"
+    },
+    "60-percent": {
+      "value": "{size.60-percent}",
+      "type": "dimension"
+    },
+    "66-percent": {
+      "value": "{size.66-percent}",
+      "type": "dimension"
+    },
+    "70-percent": {
+      "value": "{size.70-percent}",
+      "type": "dimension"
+    },
+    "75-percent": {
+      "value": "{size.75-percent}",
+      "type": "dimension"
+    },
+    "80-percent": {
+      "value": "{size.80-percent}",
+      "type": "dimension"
+    },
+    "90-percent": {
+      "value": "{size.90-percent}",
+      "type": "dimension"
+    },
+    "95-percent": {
+      "value": "{size.95-percent}",
+      "type": "dimension"
+    },
+    "100-percent": {
+      "value": "{size.100-percent}",
+      "type": "dimension"
     }
   },
   "size": {

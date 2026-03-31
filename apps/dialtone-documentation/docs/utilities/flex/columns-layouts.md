@@ -11,11 +11,11 @@ keywords: ["flexbox","flex columns","flex layout","column layout"]
 Use `d-fl-col{n}` to create uniformly sized children within an element.
 
 <code-well-header>
-  <dt-stack gap="500" class="d-w100p">
-    <div v-for="(i, index) in columns" class="d-p8 d-bar8 d-bgc-moderate d-w100p">
+  <dt-stack gap="200" class="d-w100p">
+    <div v-for="(i, index) in columns" class="d-p-100 d-bar8 d-bgc-moderate d-w100p">
       <code class="d-bgc-transparent">.d-fl-col{{i}}</code>
-      <div class="d-cg8 d-of-auto" :class="`d-fl-col${i}`">
-        <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bar4 d-bgc-moderate-opaque" v-for="(col) in columns.slice(0, i)">{{ col }}</dt-stack>
+      <div class="d-cg-100 d-of-auto" :class="`d-fl-col${i}`">
+        <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar4 d-bgc-moderate-opaque" v-for="(col) in columns.slice(0, i)">{{ col }}</dt-stack>
       </div>
     </div>
   </dt-stack>
@@ -23,17 +23,17 @@ Use `d-fl-col{n}` to create uniformly sized children within an element.
 
 ```html
 <div class="d-fl-col1">...</div>
-<div class="d-fl-col2 d-cg8">...</div>
-<div class="d-fl-col3 d-cg8">...</div>
-<div class="d-fl-col4 d-cg8">...</div>
-<div class="d-fl-col5 d-cg8">...</div>
-<div class="d-fl-col6 d-cg8">...</div>
-<div class="d-fl-col7 d-cg8">...</div>
-<div class="d-fl-col8 d-cg8">...</div>
-<div class="d-fl-col9 d-cg8">...</div>
-<div class="d-fl-col10 d-cg8">...</div>
-<div class="d-fl-col11 d-cg8">...</div>
-<div class="d-fl-col12 d-cg8">...</div>
+<div class="d-fl-col2 d-cg-100">...</div>
+<div class="d-fl-col3 d-cg-100">...</div>
+<div class="d-fl-col4 d-cg-100">...</div>
+<div class="d-fl-col5 d-cg-100">...</div>
+<div class="d-fl-col6 d-cg-100">...</div>
+<div class="d-fl-col7 d-cg-100">...</div>
+<div class="d-fl-col8 d-cg-100">...</div>
+<div class="d-fl-col9 d-cg-100">...</div>
+<div class="d-fl-col10 d-cg-100">...</div>
+<div class="d-fl-col11 d-cg-100">...</div>
+<div class="d-fl-col12 d-cg-100">...</div>
 ```
 
 ## Flex Column Gaps
@@ -41,31 +41,31 @@ Use `d-fl-col{n}` to create uniformly sized children within an element.
 Use `d-cg{n}` to create uniform gaps between flex columns within an element.
 
 <code-well-header>
-  <dt-stack gap="500" class="d-w100p">
-    <dt-stack v-for="i in gaps" gap="400" class="d-p8 d-bar8 d-bgc-moderate d-w100p">
+  <dt-stack gap="200" class="d-w100p">
+    <dt-stack v-for="i in gaps" gap="100" class="d-p-100 d-bar8 d-bgc-moderate d-w100p">
       <code class="d-bgc-transparent">.d-cg{{ i }}</code>
       <div class="d-fl-col3 d-of-auto" :class="`d-cg${i}`">
-        <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bar4 d-bgc-moderate-opaque">1</dt-stack>
-        <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bar4 d-bgc-moderate-opaque">2</dt-stack>
-        <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bar4 d-bgc-moderate-opaque">3</dt-stack>
+        <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar4 d-bgc-moderate-opaque">1</dt-stack>
+        <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar4 d-bgc-moderate-opaque">2</dt-stack>
+        <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar4 d-bgc-moderate-opaque">3</dt-stack>
       </div>
     </dt-stack>
   </dt-stack>
 </code-well-header>
 
 ```html
-<div class="d-fl-col3 d-cg0">...</div>
-<div class="d-fl-col3 d-cg1">...</div>
-<div class="d-fl-col3 d-cg2">...</div>
-<div class="d-fl-col3 d-cg4">...</div>
-<div class="d-fl-col3 d-cg6">...</div>
-<div class="d-fl-col3 d-cg8">...</div>
-<div class="d-fl-col3 d-cg12">...</div>
-<div class="d-fl-col3 d-cg16">...</div>
-<div class="d-fl-col3 d-cg24">...</div>
-<div class="d-fl-col3 d-cg32">...</div>
-<div class="d-fl-col3 d-cg48">...</div>
-<div class="d-fl-col3 d-cg64">...</div>
+<div class="d-fl-col3 d-cg-0">...</div>
+<div class="d-fl-col3 d-cg-1">...</div>
+<div class="d-fl-col3 d-cg-25">...</div>
+<div class="d-fl-col3 d-cg-50">...</div>
+<div class="d-fl-col3 d-cg-75">...</div>
+<div class="d-fl-col3 d-cg-100">...</div>
+<div class="d-fl-col3 d-cg-150">...</div>
+<div class="d-fl-col3 d-cg-200">...</div>
+<div class="d-fl-col3 d-cg-300">...</div>
+<div class="d-fl-col3 d-cg-400">...</div>
+<div class="d-fl-col3 d-cg-600">...</div>
+<div class="d-fl-col3 d-cg-800">...</div>
 ```
 
 ## Centering Objects
@@ -76,9 +76,9 @@ By default flexed items align to `flex-start` both horizontally and vertically (
 
 <code-well-header>
   <dt-stack direction="row" align="center" justify="center" class="d-w100p d-hmn216 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-w48 d-h48 d-m8 d-p16 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-w64 d-h64 d-m8 d-p16 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-w48 d-h48 d-m8 d-p16 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-size-75 d-m-100 d-p-200 d-bgc-moderate-opaque d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-size-100 d-m-100 d-p-200 d-bgc-moderate-opaque d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-size-75 d-m-100 d-p-200 d-bgc-moderate-opaque d-bar4">3</dt-stack>
   </dt-stack>
 </code-well-header>
 

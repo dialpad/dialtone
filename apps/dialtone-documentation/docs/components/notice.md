@@ -137,7 +137,7 @@ Used in most scenarios when the message should be noticeable but not dominate.
   </template>
 </dt-notice>
 '>
-  <dt-stack gap="400">
+  <dt-stack gap="100">
     <example-notice kind="base" title="Base title (optional)" />
     <example-notice kind="error" title="Error title (optional)" />
     <example-notice kind="info" title="Info title (optional)" />
@@ -271,7 +271,7 @@ Used occasionally in scenarios when the message needs to dominate.
   </template>
 </dt-notice>
 '>
-  <dt-stack gap="400">
+  <dt-stack gap="100">
     <example-notice important kind="base" title="Base title (optional)" />
     <example-notice important kind="error" title="Error title (optional)" />
     <example-notice important kind="info" title="Info title (optional)" />

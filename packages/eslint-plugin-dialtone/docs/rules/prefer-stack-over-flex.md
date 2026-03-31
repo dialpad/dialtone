@@ -25,7 +25,7 @@ The DtStack component provides a semantic, prop-based API for flex layouts. Usin
 <div class="d-d-flex d-jc-space-between">...</div>
 
 <!-- Flex with direction and gap -->
-<div class="d-d-flex d-fd-column d-g16">...</div>
+<div class="d-d-flex d-fd-column d-g-200">...</div>
 
 <!-- Flex with wrap (keep as class on dt-stack) -->
 <div class="d-d-flex d-fw-wrap">...</div>
@@ -47,7 +47,7 @@ The DtStack component provides a semantic, prop-based API for flex layouts. Usin
 <dt-stack justify="between">...</dt-stack>
 
 <!-- Stack with direction and gap -->
-<dt-stack direction="column" gap="500">...</dt-stack>
+<dt-stack direction="column" gap="200">...</dt-stack>
 
 <!-- Stack with wrap (retain utility class) -->
 <dt-stack class="d-fw-wrap">...</dt-stack>
@@ -56,7 +56,7 @@ The DtStack component provides a semantic, prop-based API for flex layouts. Usin
 <dt-stack class="d-fl-grow1">...</dt-stack>
 
 <!-- Stack with multiple props -->
-<dt-stack align="center" justify="between" direction="row" gap="400">
+<dt-stack align="center" justify="between" direction="row" gap="100">
   ...
 </dt-stack>
 ```
@@ -84,12 +84,12 @@ The DtStack component provides a semantic, prop-based API for flex layouts. Usin
 | `d-fd-row-reverse` | `direction="row-reverse"` |
 | `d-fd-column-reverse` | `direction="column-reverse"` |
 | `d-g0` | `gap="0"` |
-| `d-g8` | `gap="400"` |
-| `d-g16` | `gap="500"` |
-| `d-g24` | `gap="550"` |
-| `d-g32` | `gap="600"` |
-| `d-g48` | `gap="650"` |
-| `d-g64` | `gap="700"` |
+| `d-g8` | `gap="100"` |
+| `d-g16` | `gap="200"` |
+| `d-g24` | `gap="300"` |
+| `d-g32` | `gap="400"` |
+| `d-g48` | `gap="600"` |
+| `d-g64` | `gap="800"` |
 
 ### Utilities That Stay as Classes
 
@@ -111,7 +111,7 @@ Some flex utilities don't have DtStack prop equivalents. Keep these as classes o
 **Before:**
 
 ```vue
-<div class="d-d-flex d-ai-center d-jc-space-between d-g16">
+<div class="d-d-flex d-ai-center d-jc-space-between d-g-200">
   <span>Left</span>
   <span>Right</span>
 </div>
@@ -120,7 +120,7 @@ Some flex utilities don't have DtStack prop equivalents. Keep these as classes o
 **After:**
 
 ```vue
-<dt-stack direction="row" align="center" justify="between" gap="500">
+<dt-stack direction="row" align="center" justify="between" gap="200">
   <span>Left</span>
   <span>Right</span>
 </dt-stack>
@@ -131,7 +131,7 @@ Some flex utilities don't have DtStack prop equivalents. Keep these as classes o
 **Before:**
 
 ```vue
-<div class="d-d-flex d-fw-wrap d-ai-center d-g8">
+<div class="d-d-flex d-fw-wrap d-ai-center d-g-100">
   <badge v-for="item in items" :key="item.id">{{ item.name }}</badge>
 </div>
 ```
@@ -139,7 +139,7 @@ Some flex utilities don't have DtStack prop equivalents. Keep these as classes o
 **After:**
 
 ```vue
-<dt-stack direction="row" align="center" gap="400" class="d-fw-wrap">
+<dt-stack direction="row" align="center" gap="100" class="d-fw-wrap">
   <badge v-for="item in items" :key="item.id">{{ item.name }}</badge>
 </dt-stack>
 ```
@@ -149,7 +149,7 @@ Some flex utilities don't have DtStack prop equivalents. Keep these as classes o
 **Before:**
 
 ```vue
-<div class="d-d-flex d-fd-column d-g32 d-fl-grow1">
+<div class="d-d-flex d-fd-column d-g-400 d-fl-grow1">
   <section>...</section>
   <section>...</section>
 </div>
@@ -158,7 +158,7 @@ Some flex utilities don't have DtStack prop equivalents. Keep these as classes o
 **After:**
 
 ```vue
-<dt-stack direction="column" gap="600" class="d-fl-grow1">
+<dt-stack direction="column" gap="400" class="d-fl-grow1">
   <section>...</section>
   <section>...</section>
 </dt-stack>

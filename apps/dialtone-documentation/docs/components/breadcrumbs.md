@@ -43,7 +43,7 @@ Breadcrumbs are always treated as secondary and should not entirely replace the 
 
 ### Inverted
 
-<dt-notice title="Deprecated" kind="info" class="d-wmx100p d-my16" hide-close>
+<dt-notice title="Deprecated" kind="info" class="d-wmx100p d-my-200" hide-close>
   The <code>inverted</code> prop has been deprecated. Use the
   <dt-link to="mode-island.html#inverting">v-dt-mode directive</dt-link>
   instead.
@@ -55,7 +55,7 @@ In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#
   <div class="d-bgc-contrast">
     <dt-breadcrumbs
       v-dt-mode:invert
-      class="d-p16 d-bar8"
+      class="d-p-200 d-bar8"
       :breadcrumbs="[
         { href: '#', label: 'Root' },
         { href: '#', label: 'Section' },

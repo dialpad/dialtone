@@ -28,7 +28,7 @@ The rule of thumb: if every item in your list is the same height, use fixed. If 
 Use when all items share a known, uniform height. Set `:item-size` to that height in pixels.
 
 <code-example>
-  <div class="d-w264" data-demo-wrapper>
+  <div class="d-w-400" data-demo-wrapper>
     <dt-scroller
       :items="[
         { id: 1, name: 'James Cooper' }, { id: 2, name: 'Sarah Mitchell' }, { id: 3, name: 'Tyler Brooks' },
@@ -54,10 +54,10 @@ Use when all items share a known, uniform height. Set `:item-size` to that heigh
       list-tag="div"
       item-tag="div"
       direction="vertical"
-      class="d-ba d-bar8 d-p4"
+      class="d-ba d-bar8 d-p-50"
       >
       <template #default="{ item }">
-        <dt-text class="d-px4">{{ item.name }}</dt-text>
+        <dt-text class="d-px-50">{{ item.name }}</dt-text>
       </template>
     </dt-scroller>
   </div>
@@ -68,7 +68,7 @@ Use when all items share a known, uniform height. Set `:item-size` to that heigh
 Use when item heights depend on their content. Set `dynamic="true"` and `:min-item-size` to the smallest expected item height — the component measures actual sizes after render.
 
 <code-example>
-  <div class="d-w264" data-demo-wrapper>
+  <div class="d-w-400" data-demo-wrapper>
     <dt-scroller
       :items="[
         { id: 'J.C.', message: 'Lorem ipsum dolor sit amet' },
@@ -120,10 +120,10 @@ Use when item heights depend on their content. Set `dynamic="true"` and `:min-it
       item-tag="div"
       direction="vertical"
       :dynamic="true"
-      class="d-ba d-bar8 d-p4"
+      class="d-ba d-bar8 d-p-50"
     >
       <template #default="{ item }">
-        <dt-stack gap="400" direction="row" align="start" class="d-p4">
+        <dt-stack gap="100" direction="row" align="start" class="d-p-50">
           <dt-avatar :size="300" :full-name="item.id" />
           <dt-stack>
             <dt-text kind="headline" :size="200" tone="secondary">{{ item.id }}</dt-text>
@@ -140,7 +140,7 @@ Use when item heights depend on their content. Set `dynamic="true"` and `:min-it
 Defaults to `vertical`. Set to `horizontal` for a horizontal scroller.
 
 <code-example>
-  <div class="d-w264" data-demo-wrapper>
+  <div class="d-w-400" data-demo-wrapper>
     <dt-scroller
       :items="[
         { id: 1, name: 'JC' }, { id: 2, name: 'SM' }, { id: 3, name: 'TB' },
@@ -166,10 +166,10 @@ Defaults to `vertical`. Set to `horizontal` for a horizontal scroller.
       list-tag="div"
       item-tag="div"
       direction="horizontal"
-      class="d-ba d-bar8 d-p4"
+      class="d-ba d-bar8 d-p-50"
       >
       <template #default="{ item }">
-        <dt-stack class="d-p12 d-ba h:d-bgc-secondary d-bc-subtle d-bar4 d-c-default" align="center" justify="center"><dt-text kind="code">{{ item.name }}</dt-text></dt-stack>
+        <dt-stack class="d-p-150 d-ba h:d-bgc-secondary d-bc-subtle d-bar4 d-c-default" align="center" justify="center"><dt-text kind="code">{{ item.name }}</dt-text></dt-stack>
       </template>
     </dt-scroller>
   </div>

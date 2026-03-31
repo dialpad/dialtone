@@ -33,7 +33,7 @@ keywords: ["emoji support","emoticon wrapper","d-emoji-text-wrapper","DtEmojiTex
 ### Variants
 
 <code-example>
-  <dt-stack gap="500" data-demo-wrapper>
+  <dt-stack gap="200" data-demo-wrapper>
     <dt-button>
       <dt-emoji-text-wrapper>
         Button with shortcode :cry: emoji

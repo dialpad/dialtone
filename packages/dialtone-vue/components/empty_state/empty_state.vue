@@ -22,7 +22,7 @@
     </span>
 
     <dt-stack
-      gap="450"
+      gap="150"
       :class="['d-empty-state__content', contentClass]"
     >
       <dt-text

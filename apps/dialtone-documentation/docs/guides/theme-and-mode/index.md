@@ -343,7 +343,7 @@ Vue 3 app with theme switching:
 
 ```vue
 <template>
-  <dt-stack gap="400">
+  <dt-stack gap="100">
     <dt-button @click="toggleMode">
       Switch to {{ isDark ? 'Light' : 'Dark' }} Mode
     </dt-button>

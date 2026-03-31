@@ -215,8 +215,8 @@ const ExternalAnchorTemplate = (args, { argTypes }) => createTemplateFromVueFile
 export const ExternalAnchor = {
   render: ExternalAnchorTemplate,
   decorators: [() => ({
-    template: `<dt-stack direction="row" justify="center" align="center" class="d-h464">
-      <div class="d-w332">
+    template: `<dt-stack direction="row" justify="center" align="center" class="d-h-700">
+      <div class="d-w-500">
         <story />
       </div>
     </dt-stack>`,

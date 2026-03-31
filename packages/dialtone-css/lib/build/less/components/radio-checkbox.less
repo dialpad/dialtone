@@ -37,8 +37,8 @@
     //  [1] Check to see if we can use custom styles, if so reset the defaults
     //  ------------------------------------------------------------------------
     @supports ((-webkit-appearance: none) or (-moz-appearance: none) or (appearance: none)) {
-        inline-size: var(--dt-size-500); // 16
-        block-size: var(--dt-size-500); // 16
+        inline-size: var(--dt-layout-25); // 16
+        block-size: var(--dt-layout-25); // 16
 
         //  [2]  Now re-style the checkboxes and radios
         //  --------------------------------------------------------------------
@@ -90,7 +90,7 @@
 .d-checkbox-group,
 .d-radio-group {
     display: inline-flex;
-    gap: var(--dt-size-400); // 8
+    gap: var(--dt-spacing-100); // 8
     vertical-align: top;
     cursor: pointer;
 }
@@ -109,6 +109,7 @@
 .d-input-group__fieldset {
     display: flex;
     flex-direction: column;
+    gap: var(--dt-spacing-50);
     align-items: flex-start;
 
     &__label {
@@ -117,13 +118,13 @@
         align-items: baseline;
         justify-content: space-between;
         box-sizing: border-box;
-        margin-block-end: var(--dt-size-300);
         color: var(--dt-color-foreground-secondary);
         font-weight: var(--dt-font-weight-semi-bold);
         font-size: var(--dt-font-size-200);
         font-family: inherit;
         line-height: var(--dt-font-line-height-300);
         overflow-wrap: break-word;
+        margin-block-end: var(--dt-spacing-50);
     }
 }
 
@@ -136,7 +137,7 @@
 .d-radio__input {
     display: flex;
     align-self: flex-start;
-    padding-block-start: calc(var(--dt-size-300) + var(--dt-size-50));
+    padding-block-start: calc(var(--dt-spacing-50) + calc(var(--dt-spacing-1) / 2));
 }
 
 
@@ -163,14 +164,14 @@
     cursor: pointer;
 
     &.d-text-label--sm {
-        margin-block-start: var(--dt-size-100); // sue me
+        margin-block-start: var(--dt-spacing-1); // sue me
     }
 }
 
 .d-checkbox__messages,
 .d-radio__messages {
-    margin-block-start: var(--dt-size-200-negative);
-    margin-inline-start: var(--dt-size-550);
+    margin-block-start: var(--dt-spacing-25-negative);
+    margin-inline-start: var(--dt-spacing-300);
 }
 
 .d-checkbox__description {
@@ -283,7 +284,7 @@
             --check-radio-color-background: var(--check-radio-color-background-checked);
 
             border-color: transparent;
-            box-shadow: inset 0 0 0 var(--dt-size-200) var(--dt-radio-color-foreground-checked);
+            box-shadow: inset 0 0 0 var(--dt-size-border-200) var(--dt-radio-color-foreground-checked);
 
             // Disabled
             &[disabled] {
@@ -294,7 +295,7 @@
         &:focus,
         &:focus-visible,
         &:checked:focus-visible {
-          box-shadow: var(--dt-shadow-focus), inset 0 0 0 var(--dt-size-200) var(--dt-radio-color-foreground-checked);
+          box-shadow: var(--dt-shadow-focus), inset 0 0 0 var(--dt-size-border-200) var(--dt-radio-color-foreground-checked);
         }
 
         &--disabled:checked {

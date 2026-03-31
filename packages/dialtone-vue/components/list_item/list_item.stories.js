@@ -154,7 +154,7 @@ export const argTypesData = {
 };
 
 const decorator = () => ({
-  template: '<div class="d-w628"><story /></div>',
+  template: '<div class="d-w-950"><story /></div>',
 });
 
 // Story Collection

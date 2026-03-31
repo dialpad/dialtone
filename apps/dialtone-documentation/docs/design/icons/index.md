@@ -12,11 +12,11 @@ figma_url: https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT-Core%3A-Icons-7?
 
 ### In Figma
 
-<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
+<div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols3">
 
 Find a list of available icons in [DT Core: Icons](https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT8-Icon-Library), or search the icons in the search library within your Figma file.
 
-<dt-stack class="d-gc2" direction="column" gap="500">
+<dt-stack class="d-gc2" direction="column" gap="200">
 <img alt="Figma Search Icon" src="/assets/images/figma-search-icon.gif" style="border-radius: var(--dt-size-radius-400)">
 
 <dt-text kind="body" tone="tertiary">Swap instances in Figma by holding ⌘ + ⌥ on Mac, or Ctrl + Alt on Windows.</dt-text>
@@ -26,13 +26,13 @@ Find a list of available icons in [DT Core: Icons](https://www.figma.com/file/zz
 
 ### In Vue
 
-<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
+<div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols3">
 
 For detailed instructions on using the icons, check the [Icon component](/components/icon.md).
 
 <div class="d-gc2">
 <code-well-header>
-  <div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3 d-w100p">
+  <div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols3 d-w100p">
     <dt-stack direction="row" align="center" justify="center">
       <dt-icon :name="selectedIcon" :size="selectedSize" />
     </dt-stack>
@@ -55,40 +55,40 @@ Some icons are linked to specific actions, like the Settings gear <dt-icon name=
 
 ### Sizing
 
-<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
+<div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols3">
 
 The icon size is defined based on the context and text size next to it. These are the only available size options and no overrides should be needed to properly size the icons.
 
-<dt-stack direction="row" justify="between" gap="400" class="d-gc2 d-bgc-secondary d-p24 d-bar16">
-  <dt-stack gap="400" align="center">
+<dt-stack direction="row" justify="between" gap="100" class="d-gc2 d-bgc-secondary d-p-300 d-bar16">
+  <dt-stack gap="100" align="center">
     <dt-icon name="food" size="100" />
     <dt-text as="code" kind="code" :size="200">100</dt-text>
   </dt-stack>
-  <dt-stack gap="400" align="center">
+  <dt-stack gap="100" align="center">
     <dt-icon name="food" size="200" />
     <dt-text as="code" kind="code" :size="200">200</dt-text>
   </dt-stack>
-  <dt-stack gap="400" align="center">
+  <dt-stack gap="100" align="center">
     <dt-icon name="food" size="300" />
     <dt-text as="code" kind="code" :size="200">300</dt-text>
   </dt-stack>
-  <dt-stack gap="400" align="center">
+  <dt-stack gap="100" align="center">
     <dt-icon name="food" size="400" />
     <dt-text as="code" kind="code" :size="200">400</dt-text>
   </dt-stack>
-  <dt-stack gap="400" align="center">
+  <dt-stack gap="100" align="center">
     <dt-icon name="food" size="500" />
     <dt-text as="code" kind="code" :size="200">500</dt-text>
   </dt-stack>
-  <dt-stack gap="400" align="center">
+  <dt-stack gap="100" align="center">
     <dt-icon name="food" size="600" />
     <dt-text as="code" kind="code" :size="200">600</dt-text>
   </dt-stack>
-  <dt-stack gap="400" align="center">
+  <dt-stack gap="100" align="center">
     <dt-icon name="food" size="700" />
     <dt-text as="code" kind="code" :size="200">700</dt-text>
   </dt-stack>
-  <dt-stack gap="400" align="center">
+  <dt-stack gap="100" align="center">
     <dt-icon name="food" size="800" />
     <dt-text as="code" kind="code" :size="200">800</dt-text>
   </dt-stack>
@@ -97,33 +97,33 @@ The icon size is defined based on the context and text size next to it. These ar
 
 #### Sample Pairings
 
-<dt-stack align="center" class="d-gc2 d-bgc-secondary d-p24 d-bar16">
-  <dt-stack gap="400">
-    <dt-stack direction="row" gap="300" align="center">
+<dt-stack align="center" class="d-gc2 d-bgc-secondary d-p-300 d-bar16">
+  <dt-stack gap="100">
+    <dt-stack direction="row" gap="50" align="center">
       <dt-icon name="food" size="100" />
       <dt-text kind="body" :size="100">100 with XS body</dt-text>
     </dt-stack>
-    <dt-stack direction="row" gap="300" align="center">
+    <dt-stack direction="row" gap="50" align="center">
       <dt-icon name="food" size="200" />
       <dt-text kind="body" :size="200">200 with SM body</dt-text>
     </dt-stack>
-    <dt-stack direction="row" gap="300" align="center">
+    <dt-stack direction="row" gap="50" align="center">
       <dt-icon name="food" size="300" />
       <dt-text kind="body" :size="300">300 with MD body</dt-text>
     </dt-stack>
-    <dt-stack direction="row" gap="300" align="center">
+    <dt-stack direction="row" gap="50" align="center">
       <dt-icon name="food" size="400" />
       <dt-text kind="headline" :size="400">400 with LG headline</dt-text>
     </dt-stack>
-    <dt-stack direction="row" gap="300" align="center">
+    <dt-stack direction="row" gap="50" align="center">
       <dt-icon name="food" size="500" />
       <dt-text kind="headline" :size="500">500 with XL headline</dt-text>
     </dt-stack>
-    <dt-stack direction="row" gap="300" align="center">
+    <dt-stack direction="row" gap="50" align="center">
       <dt-icon name="food" size="600" />
       <dt-text kind="headline" :size="600">600 with 2XL headline</dt-text>
     </dt-stack>
-    <dt-stack direction="row" gap="300" align="center">
+    <dt-stack direction="row" gap="50" align="center">
       <dt-icon name="food" size="700" />
       <dt-text kind="headline" :size="700">700 with 3XL headline</dt-text>
     </dt-stack>
@@ -138,7 +138,7 @@ Our icons are designed for easy recognition and understanding. They are a visual
 
 Go to the [Icon Builder page](https://www.figma.com/file/zz40wi0uW9MvaJ5RuhcRZR/DT8-Icon-Library?type=design&node-id=12057-3505&mode=design&t=CNADHg9I1bsKDPiB-4) in Figma and follow the instructions. Remember to work on a branch and send a review when the icons are ready.
 
-<div class="d-d-grid d-g24 d-g-cols1 md:d-g-cols3">
+<div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols3">
 
 <div>
 

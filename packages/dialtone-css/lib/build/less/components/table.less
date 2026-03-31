@@ -35,7 +35,7 @@
 
     // Caption styles
     &__caption {
-      margin-block-end: var(--dt-size-400); // 8
+      margin-block-end: var(--dt-spacing-100); // 8
       color: var(--table-th-color-text);
       font-weight: var(--dt-font-weight-bold);
       font-size: var(--table-font-size);
@@ -44,13 +44,12 @@
 
     // Table Head Styles
     :where(thead) {
-        border-block-end: var(--dt-size-200) solid var(--table-color-border);
+        border-block-end: var(--dt-size-border-200) solid var(--table-color-border);
 
         // Column Header Styles
         :where(th) {
             font-size: var(--table-th-font-size);
-            line-height: var(--dt-font-line-height-100);
-            text-transform: uppercase;
+            line-height: var(--dt-font-line-height-100)
         }
     }
 
@@ -67,16 +66,16 @@
 
     // Header & Cell Styles
     :where(th, td) {
-        padding: var(--dt-size-500); // 16
+        padding: var(--dt-spacing-200); // 16
         text-align: start;
-        border-block-end: var(--dt-size-100) solid var(--table-color-border);
+        border-block-end: var(--dt-size-border-100) solid var(--table-color-border);
     }
 
     // Nested Table Body, First Row Styles, used internally on the Dialtone site
     :where(tbody + tbody tr:first-of-type) {
         // Header & Cell Styles
         :where(td, th) {
-            border-block-start: var(--dt-size-200) solid var(--table-color-border);
+            border-block-start: var(--dt-size-border-200) solid var(--table-color-border);
         }
     }
 

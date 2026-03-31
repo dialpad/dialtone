@@ -2,7 +2,7 @@
 .d-recipe-emoji-row {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--dt-size-300);
+  gap: var(--dt-spacing-50);
 }
 
 .d-recipe-emoji-row__tooltip {
@@ -10,15 +10,15 @@
 }
 
 .d-recipe-emoji-row__tooltip-content {
-   max-inline-size: var(--dt-size-875);
+   max-inline-size: var(--dt-layout-350);
 }
 
 .d-recipe-emoji-row__tooltip-emoji {
   display: inline-block;
-  padding: var(--dt-size-300);
+  padding: var(--dt-spacing-50);
   background-color: var(--dt-color-neutral-white);
   border-radius: var(--dt-size-radius-300);
-  margin-block: var(--dt-size-300) var(--dt-size-350);
+  margin-block: var(--dt-spacing-50) var(--dt-spacing-75);
 
   .d-emoji {
     block-size: var(--icon-size);
@@ -40,8 +40,8 @@
   --emoji-item-color-foreground: var(--dt-action-color-foreground-muted-default);
   --emoji-item-color-background: var(--dt-action-color-background-muted-hover);
 
-  block-size: var(--dt-size-550);
-  padding: var(--dt-size-300) var(--dt-size-400);
+  block-size: calc(var(--dt-layout-25) * 1.5);
+  padding: var(--dt-spacing-50) var(--dt-spacing-100);
   color: var(--emoji-item-color-foreground);
   background-color: var(--emoji-item-color-background);
   border: 0;
@@ -49,7 +49,7 @@
   box-shadow: inset 0 0 0 var(--dt-size-border-100) var(--emoji-item-color-inset-shadow);
 
   &.d-recipe-emoji-row__picker {
-    padding: var(--dt-size-200) var(--dt-size-350);
+    padding: var(--dt-spacing-25) var(--dt-spacing-75);
   }
 
   &:hover {
@@ -98,7 +98,7 @@
   --emoji-size: calc(var(--dt-icon-size-200) + .2rem);
 
   display: inline-flex;
-  margin-inline-end: var(--dt-size-300);
+  margin-inline-end: var(--dt-spacing-50);
   inline-size: var(--emoji-size);
   block-size: var(--emoji-size);
 }

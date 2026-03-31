@@ -4,7 +4,7 @@ description: Utilities for controlling an element's border color.
 keywords: ["border colour"]
 ---
 
-<dt-notice kind="warning" class="d-wmx100p d-mt24" hideClose>
+<dt-notice kind="warning" class="d-wmx100p d-my-200" hideClose>
   Before using border color utilities, first consider <dt-link to="/design/colors/palette/#borders" kind="muted">semantic border colors</dt-link>.
 </dt-notice>
 
@@ -14,13 +14,13 @@ Use `d-bc-{color}` to set an element's border color.
 
 <code-well-header>
   <dt-stack
-    gap="500"
+    gap="200"
     :direction="{ 'default': 'column', 'md': 'row' }"
     class="d-fw-wrap"
   >
     <div
       v-for="color in ['subtle', 'default', 'moderate', 'bold', 'critical', 'success', 'warning']"
-      class="d-p16 d-ba d-baw2"
+      class="d-p-200 d-ba d-baw2"
       :class="`d-bc-${color}`"
     >
       {{ color.charAt(0).toUpperCase() + color.slice(1) }}
@@ -37,21 +37,21 @@ Use `d-bc-{color}` to set an element's border color.
 Use `h:d-bc-{color}` to change an element's border color spot on `:hover`.
 
 <code-well-header>
-  <dt-stack direction="row" gap="500">
-    <dt-button kind="unstyled" class="d-p16 d-ba d-baw2 h:d-bc-moderate">
+  <dt-stack direction="row" gap="200">
+    <dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 h:d-bc-moderate">
       Hover over me
     </dt-button>
-    <dt-button kind="unstyled" class="d-p16 d-ba d-baw2 h:d-bc-critical">
+    <dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 h:d-bc-critical">
       Hover over me
     </dt-button>
   </dt-stack>
 </code-well-header>
 
 ```html
-<dt-button kind="unstyled" class="d-p16 d-ba d-baw2 h:d-bc-moderate">
+<dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 h:d-bc-moderate">
   Hover over me
 </dt-button>
-<dt-button kind="unstyled" class="d-p16 d-ba d-baw2 h:d-bc-critical">
+<dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 h:d-bc-critical">
   Hover over me
 </dt-button>
 ```
@@ -61,21 +61,21 @@ Use `h:d-bc-{color}` to change an element's border color spot on `:hover`.
 Use `f:d-bc-{color}` to change an element's border color when in `:focus` or `:focus-within` states.
 
 <code-well-header>
-  <dt-stack direction="row" gap="500">
-    <dt-button kind="unstyled" class="d-p16 d-ba d-baw2 f:d-bc-moderate">
+  <dt-stack direction="row" gap="200">
+    <dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 f:d-bc-moderate">
       Focus me
     </dt-button>
-    <dt-button kind="unstyled" class="d-p16 d-ba d-baw2 f:d-bc-critical">
+    <dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 f:d-bc-critical">
       Focus me
     </dt-button>
   </dt-stack>
 </code-well-header>
 
 ```html
-<dt-button kind="unstyled" class="d-p16 d-ba d-baw2 f:d-bc-moderate">
+<dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 f:d-bc-moderate">
   Focus me
 </dt-button>
-<dt-button kind="unstyled" class="d-p16 d-ba d-baw2 f:d-bc-critical">
+<dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 f:d-bc-critical">
   Focus me
 </dt-button>
 ```
@@ -86,21 +86,21 @@ Use `fv:d-bc-{color}` to change an element's border color when in `:focus-visibl
 .
 
 <code-well-header>
-  <dt-stack direction="row" gap="500">
-    <dt-button kind="unstyled" class="d-p16 d-ba d-baw2 fv:d-bc-moderate">
+  <dt-stack direction="row" gap="200">
+    <dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 fv:d-bc-moderate">
       Keyboard focus me
     </dt-button>
-    <dt-button kind="unstyled" class="d-p16 d-ba d-baw2 fv:d-bc-critical">
+    <dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 fv:d-bc-critical">
       Keyboard focus me
     </dt-button>
   </dt-stack>
 </code-well-header>
 
 ```html
-<dt-button kind="unstyled" class="d-p16 d-ba d-baw2 fv:d-bc-moderate">
+<dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 fv:d-bc-moderate">
   Keyboard focus me
 </dt-button>
-<dt-button kind="unstyled" class="d-p16 d-ba d-baw2 fv:d-bc-critical">
+<dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 fv:d-bc-critical">
   Keyboard focus me
 </dt-button>
 ```
@@ -111,12 +111,12 @@ Use `d-bco{n}` to change the border color opacity value.
 
 <code-well-header>
   <dt-stack
-    gap="500"
+    gap="200"
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
     <div
       v-for="opacity in [100, 99, 95, 90, 75, 50, 25, 10, 0]"
-      class="d-p16 d-ba d-baw2 d-bc-critical"
+      class="d-p-200 d-ba d-baw2 d-bc-critical"
       :class="`d-bco${opacity}`"
     >
       {{ opacity }}%
@@ -141,34 +141,34 @@ You can also change the border color opacity value on `:hover`
 
 <code-well-header>
   <dt-stack
-    gap="500"
+    gap="200"
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
-    <dt-button kind="unstyled" class="d-p16 d-ba d-baw2 d-bc-critical h:d-bco50">
+    <dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 d-bc-critical h:d-bco50">
       Hover me to see 50%
     </dt-button>
-    <dt-button kind="unstyled" class="d-p16 d-ba d-baw2 d-bc-critical f:d-bco50">
+    <dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 d-bc-critical f:d-bco50">
       Focus me with mouse to see 50%
     </dt-button>
-    <dt-button kind="unstyled" class="d-p16 d-ba d-baw2 d-bc-critical fv:d-bco50">
+    <dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 d-bc-critical fv:d-bco50">
       Focus me via keyboard to see 50%
     </dt-button>
   </dt-stack>
 </code-well-header>
 
 ```html
-<dt-button kind="unstyled" class="d-p16 d-ba d-baw2 d-bc-critical h:d-bco50">
+<dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 d-bc-critical h:d-bco50">
   Hover me to see 50%
 </dt-button>
-<dt-button kind="unstyled" class="d-p16 d-ba d-baw2 d-bc-critical f:d-bco50">
+<dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 d-bc-critical f:d-bco50">
   Focus me with mouse to see 50%
 </dt-button>
-<dt-button kind="unstyled" class="d-p16 d-ba d-baw2 d-bc-critical fv:d-bco50">
+<dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 d-bc-critical fv:d-bco50">
   Focus me via keyboard to see 50%
 </dt-button>
 ```
 
-<dt-notice title="Tip" kind="info" class="d-wmx100p d-my16">
+<dt-notice title="Tip" kind="info" class="d-wmx100p d-my-200">
   Prefer using the <dt-link to="/components/mode-island.html#inverting">v-dt-mode directive</dt-link> with base utility classes instead of <code>-inverted</code> variants. For example, use <code>&lt;div v-dt-mode:invert class="d-bc-critical"&gt;</code> instead of <code>&lt;div class="d-bc-critical-inverted"&gt;</code>.
 </dt-notice>
 
@@ -178,7 +178,7 @@ You can also change the border color opacity value on `:hover`
   <template #example="{ className }">
     <div :class="['d-d-inline-flex', {'d-bgc-contrast': className.endsWith('inverted')}]" >
       <div
-        class="d-fl-shrink0 d-m4 d-h42 d-w42 d-bar4 d-ba d-baw2"
+        class="d-fl-shrink0 d-m-50 d-size-75 d-bar4 d-ba d-baw2"
         :class="className"
       />
     </div>

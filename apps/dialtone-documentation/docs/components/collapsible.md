@@ -24,7 +24,7 @@ The collapsible component consists of two parts: the anchor and the content. If 
       initial-focus-element="first"
       >
       <template #content>
-        <div class="d-ta-center d-ba d-bc-warning d-bgc-warning d-bas-dotted d-baw2 d-p8 d-code--sm">(content slot)</div>
+        <div class="d-ta-center d-ba d-bc-warning d-bgc-warning d-bas-dotted d-baw2 d-p-100 d-code--sm">(content slot)</div>
       </template>
     </dt-collapsible>
     <dt-collapsible
@@ -33,7 +33,7 @@ The collapsible component consists of two parts: the anchor and the content. If 
       initial-focus-element="first"
     >
       <template #content>
-        <div class="d-ta-center d-ba d-bc-warning d-bgc-warning d-bas-dotted d-baw2 d-p8 d-code--sm">(content slot)</div>
+        <div class="d-ta-center d-ba d-bc-warning d-bgc-warning d-bas-dotted d-baw2 d-p-100 d-code--sm">(content slot)</div>
       </template>
     </dt-collapsible>
   </div>

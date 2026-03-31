@@ -1,13 +1,13 @@
 <template>
-  <aside class="dialtone-toc d-of-auto d-py64 d-ps-fixed d-d-none xl:d-d-block">
-    <dt-text as="h2" kind="headline" :size="100" strength="semibold" tone="secondary" class="d-tt-uppercase d-px8 d-pb4">
+  <aside class="dialtone-toc d-of-auto d-py-800 d-ps-fixed d-d-none xl:d-d-block">
+    <dt-text as="h2" kind="headline" :size="100" strength="semibold" tone="secondary" class="d-tt-uppercase d-px-100 d-pbe-50">
       On this page
     </dt-text>
     <nav>
       <ul
         v-for="header in headers"
         :key="header.slug"
-        class="d-mt2"
+        class="d-mbs-25"
       >
         <li v-if="!header.children.length">
           <toc-item
@@ -33,11 +33,11 @@
             v-if="header.children.length"
             #content
           >
-            <ul class="d-pl8 d-mt2">
+            <ul class="d-pis-100 d-mbs-25">
               <li
                 v-for="child in header.children"
                 :key="child.slug"
-                class="lg:d-d-flex d-fw-wrap d-mt2"
+                class="lg:d-d-flex d-fw-wrap d-mbs-25"
               >
                 <toc-item
                   :active="isItemActive(child)"
@@ -78,8 +78,8 @@ function isItemActive (item) {
 
 <style lang="less" scoped>
 .dialtone-toc {
-  inline-size: var(--dt-size-850);
-  block-size: calc(100vh - var(--dt-size-700));
-  inset-block-start: var(--dt-size-700);
+  inline-size: var(--dt-layout-300);
+  block-size: calc(100vh - var(--dt-layout-100));
+  inset-block-start: var(--dt-layout-100);
 }
 </style>

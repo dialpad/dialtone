@@ -218,7 +218,7 @@ const defaultArgs = {
   tooltip: 'Tooltip Text',
   ariaLabel: 'Button',
   content: 'Popover body content',
-  contentClass: ['d-h464', 'd-w512'],
+  contentClass: ['d-h464', 'd-w-800'],
   headerContent: 'Header content',
   showCloseButton: true,
   forceShowArrow: false,

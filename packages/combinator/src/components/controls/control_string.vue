@@ -22,7 +22,7 @@
         kind="muted"
         importance="clear"
         :size="100"
-        class="d-p2"
+        class="d-p-25"
         @click.stop="onReset"
       >
         <template #icon>

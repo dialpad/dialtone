@@ -1,12 +1,12 @@
 <template>
   <dt-stack
-    gap="550"
-    class="d-p24"
+    gap="300"
+    class="d-p-300"
   >
     <dt-stack
       v-for="mode in animationModes"
       :key="mode.value"
-      gap="400"
+      gap="100"
     >
       <dt-stack
         direction="row"
@@ -32,7 +32,7 @@
       <dt-stack
         direction="row"
         align="center"
-        class="d-p24 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn128"
+        class="d-p-300 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn-200"
       >
         <dt-motion-text
           :ref="el => { if (el) modeRefs[mode.value] = el }"

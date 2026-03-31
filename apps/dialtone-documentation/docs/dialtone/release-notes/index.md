@@ -3,7 +3,7 @@ title: Release Notes
 description: Dialtone release history and version information.
 ---
 
-<p class="d-mt32">
+<p class="d-mbs-400">
   <a
     href="https://github.com/dialpad/dialtone/"
   >
@@ -13,7 +13,7 @@ description: Dialtone release history and version information.
     />
   </a>
 </p>
-<div class="d-mb16">
+<div class="d-mbe-200">
   <dialtone-changelog />
 </div>
 

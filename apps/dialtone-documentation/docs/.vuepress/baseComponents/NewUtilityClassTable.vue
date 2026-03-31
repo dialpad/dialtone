@@ -4,13 +4,13 @@
       <table class="d-table dialtone-doc-table d-fc-primary">
         <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
           <tr>
-            <th class="d-w25p d-p0 d-bbw0" scope="col">
-              <div class="d-p16 d-bb d-bbw1">
+            <th class="d-w25p d-p-0 d-bbw0" scope="col">
+              <div class="d-p-200 d-bb d-bbw1">
                 Class
               </div>
             </th>
-            <th class="d-p0 d-bbw0" scope="col">
-              <div class="d-p16 d-bb d-bbw1">
+            <th class="d-p-0 d-bbw0" scope="col">
+              <div class="d-p-200 d-bb d-bbw1">
                 Output
               </div>
             </th>
@@ -27,7 +27,7 @@
               </dt-text>
             </th>
             <td class="d-ws-break-spaces">
-              <dt-stack direction="row" justify="between" align="center" gap="500">
+              <dt-stack direction="row" justify="between" align="center" gap="200">
                 <dt-text as="span" kind="code" :size="100" class="d-fl-grow1">
                   {{ value }}
                 </dt-text>

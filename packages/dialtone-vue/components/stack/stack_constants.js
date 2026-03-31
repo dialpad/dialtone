@@ -23,7 +23,7 @@ export const DT_STACK_RESPONSIVE_BREAKPOINTS = ['sm', 'md', 'lg', 'xl'];
  * Uses array format.
  * @type {string[]}
  */
-export const DT_STACK_GAP = ['0', '50', '100', '200', '300', '350', '400', '450', '500', '525', '550', '600', '625', '650', '700'];
+export const DT_STACK_GAP = ['0', '1', '25', '50', '75', '100', '125', '150', '175', '200', '250', '300', '350', '400', '450', '500', '525', '550', '600', '650', '700', '750', '800'];
 
 /**
  * Align values for the stack component (cross-axis alignment).

@@ -95,8 +95,8 @@ The `numeric` prop applies styles that ensure that each number is set with consi
 <code-example vueCode='
 <dt-text numeric>(913) 555-3170</dt-text>
 '>
-  <dt-stack direction="row" gap="500">
-    <dt-stack gap="500" justify="space-between" align="baseline">
+  <dt-stack direction="row" gap="200">
+    <dt-stack>
       <dt-text kind="label" :size="200" tone="critical">Without numeric</dt-text>
       <dt-text>(913) 555-3170</dt-text>
       <dt-text>(908) 555-1111</dt-text>
@@ -104,7 +104,7 @@ The `numeric` prop applies styles that ensure that each number is set with consi
       <dt-text>(816) 555-1203</dt-text>
       <dt-text>(886) 555-8888</dt-text>
     </dt-stack>
-    <dt-stack gap="500" justify="space-between" align="baseline">
+    <dt-stack>
       <dt-text kind="label" :size="200" tone="success">With numeric</dt-text>
       <dt-text numeric>(913) 555-3170</dt-text>
       <dt-text numeric>(908) 555-1111</dt-text>
@@ -122,7 +122,7 @@ Override the font-weight of the text. Applies to any kind/size combination. If o
 <code-example vueCode='
 <dt-text strength="{{strength}}">...</dt-text>
 '>
-  <dt-stack :direction="{ 'default': 'column', 'md': 'row' }" gap="500" class="d-fw-wrap">
+  <dt-stack :direction="{ 'default': 'column', 'md': 'row' }" gap="200" class="d-fw-wrap">
     <dt-text strength="bold">Bold</dt-text>
     <dt-text strength="semibold">Semibold</dt-text>
     <dt-text strength="medium">Medium</dt-text>
@@ -137,7 +137,7 @@ Override the line-height of the text. Applies to any kind/size combination. If o
 <code-example vueCode='
 <dt-text density="{{density}}">...</dt-text>
 '>
-  <dt-stack gap="400">
+  <dt-stack gap="100">
     <dt-text kind="body" as="p" density="100" class="d-bgc-moderate-opaque"><dt-text kind="code" as="code" :size="200" class="d-bgc-transparent">100</dt-text> The quick brown fox jumped over the lazy dog.</dt-text>
     <dt-text kind="body" as="p" density="200" class="d-bgc-moderate-opaque"><dt-text kind="code" as="code" :size="200" class="d-bgc-transparent">200</dt-text> The quick brown fox jumped over the lazy dog.</dt-text>
     <dt-text kind="body" as="p" density="300" class="d-bgc-moderate-opaque"><dt-text kind="code" as="code" :size="200" class="d-bgc-transparent">300</dt-text> The quick brown fox jumped over the lazy dog.</dt-text>
@@ -152,7 +152,7 @@ Override the line-height of the text. Applies to any kind/size combination. If o
 Use `tone` to declare the text's tone, which will map to a foreground color. By default, the tone is inherited from its parent.
 
 <code-example>
-  <dt-stack gap="300" class="d-py8 d-px16 d-bar4">
+  <dt-stack class="d-py-100 d-px-200 d-bar4" data-demo-wrapper>
     <dt-text>primary</dt-text>
     <dt-text tone="secondary">secondary</dt-text>
     <dt-text tone="tertiary">tertiary</dt-text>
@@ -174,12 +174,12 @@ Rather than use the `-inverted` tone variants, use the [v-dt-mode](/components/m
 <code-example vueCode='
 <dt-text v-dt-mode:invert tone="critical">critical tone on contrasting surface</dt-text>
 '>
-  <dt-stack gap="300" class="d-py8 d-px16 d-bar4">
-    <div class="d-p8 d-bgc-transparent">
-      <dt-text tone="critical">critical tone on default surface</dt-text>
+  <dt-stack gap="100" class="d-py-100 d-px-200 d-bar4">
+    <div class="d-p-100 d-px-150 d-bgc-transparent d-baw2 d-bas-dashed d-bc-subtle">
+      <dt-text as="p" align="center" tone="critical">critical tone on default surface</dt-text>
     </div>
-    <div class="d-p8 d-bgc-contrast">
-      <dt-text v-dt-mode:invert tone="critical">critical tone on contrasting surface</dt-text>
+    <div class="d-p-100 d-px-150 d-bgc-contrast">
+      <dt-text as="p" align="center" v-dt-mode:invert tone="critical">critical tone on contrasting surface</dt-text>
     </div>
   </dt-stack>
 </code-example>
@@ -189,22 +189,22 @@ Rather than use the `-inverted` tone variants, use the [v-dt-mode](/components/m
 Use `as` to declare the underlying HTML tag that the component should render, independent of the visual styling. Defaults to `span`.
 
 <code-example>
-  <dt-stack class="d-w100p" gap="500">
-    <dt-stack gap="400">
+  <dt-stack class="d-w100p" gap="200">
+    <dt-stack gap="100">
       <dt-text kind="headline" as="h1" :size="600">The Complete Agentic AI Platform</dt-text>
       <dt-text kind="body" as="p" :size="400">Our AI Agents come equipped with the core skills businesses need to deliver seamless customer experiences.</dt-text>
     </dt-stack>
-    <dt-stack :direction="{ 'default': 'column', 'md': 'row' }" gap="500" align="start">
-      <dt-stack gap="400">
-        <dt-text kind="headline" as="h2" :size="500">Try before you AI</dt-text>
+    <dt-stack direction="row" gap="500" align="start">
+      <dt-stack gap="100">
+        <dt-text kind="headline" as="h2" :size="500" density="200">Try before you AI</dt-text>
         <dt-text kind="body" as="p">Build, run and optimize your agents - no code, just your expertise and our built-in intelligence.</dt-text>
       </dt-stack>
-      <dt-stack gap="400">
-        <dt-text kind="headline" as="h2" :size="500">Great minds sync alike</dt-text>
+      <dt-stack gap="100">
+        <dt-text kind="headline" as="h2" :size="500" density="200">Great minds sync alike</dt-text>
         <dt-text kind="body" as="p">Our AI learns and balances speed with quality using one data plane that keeps customers coming back.</dt-text>
       </dt-stack>
-      <dt-stack gap="400">
-        <dt-text kind="headline" as="h2" :size="500">History repeats itself. Customers shouldn't.</dt-text>
+      <dt-stack gap="100">
+        <dt-text kind="headline" as="h2" :size="500" density="200">History repeats itself. Customers shouldn't.</dt-text>
         <dt-text kind="body" as="p">Whatever your customer types or says, our AI and your human agents stay in sync.</dt-text>
       </dt-stack>
     </dt-stack>
@@ -221,7 +221,7 @@ Since `DtText`'s default element is a `<span>`, which is inline by default, the 
 <dt-text align="end">....</dt-text>
 <dt-text align="justify">....</dt-text>
 '>
-  <dt-stack class="d-w100p" gap="600">
+  <dt-stack class="d-w100p" gap="300">
     <div class="d-bgc-moderate-opaque">
       <dt-text as="p" align="start">Welcome to Dialpad, the most modern, AI-powered business communications platform. We've taken every form of communication that you rely on and unified it into one app. </dt-text>
     </div>
@@ -242,7 +242,7 @@ Since `DtText`'s default element is a `<span>`, which is inline by default, the 
 Since `DtText`'s default element is a `<span>`, the `truncate` will only work if its element is in block or inline-block context, e.g. `<div>...</div>`.
 
 <code-example>
-  <div class="d-w332">
+  <div class="d-w-700">
     <dt-text as="p" truncate>Welcome to Dialpad, the most modern, AI-powered business communications platform. We've taken every form of communication that you rely on and unified it into one app.</dt-text>
   </div>
 </code-example>
@@ -250,14 +250,14 @@ Since `DtText`'s default element is a `<span>`, the `truncate` will only work if
 ## Max Lines
 
 <code-example only-show="demo">
-  <dt-stack gap="400">
-    <dt-stack direction="row" gap="500" justify="space-between" align="center">
+  <dt-stack gap="100">
+    <dt-stack direction="row" gap="200" justify="space-between" align="center">
       <dt-text kind="headline" :size="400" as="h3" tone="secondary">Demo</dt-text>
-      <dt-stack direction="row" gap="500" align="center">
+      <dt-stack direction="row" gap="200" align="center">
         <dt-text v-if="state.isApplied" as="code" kind="code" :size="100" tone="tertiary">
           max-lines="<strong>{{ state.value }}</strong>"
         </dt-text>
-        <dt-stack direction="row" gap="200" align="center">
+        <dt-stack direction="row" gap="25" align="center">
           <dt-stack direction="row">
             <dt-button
               class="d-as-stretch d-brr0 d-brw0"
@@ -270,7 +270,7 @@ Since `DtText`'s default element is a `<span>`, the `truncate` will only work if
             </dt-button>
             <dt-button
               v-dt-tooltip="`Decrement`"
-              class="d-as-stretch d-g0 d-blr0 d-brr0 d-brw0"
+              class="d-as-stretch d-g-0 d-blr0 d-brr0 d-brw0"
               :size="200"
               importance="outlined"
               kind="muted"
@@ -283,7 +283,7 @@ Since `DtText`'s default element is a `<span>`, the `truncate` will only work if
             </dt-button>
             <dt-button
               v-dt-tooltip="`Increment`"
-              class="d-as-stretch d-g0 d-blr0"
+              class="d-as-stretch d-g-0 d-blr0"
               :size="200"
               importance="outlined"
               kind="muted"
@@ -320,7 +320,7 @@ Since `DtText`'s default element is a `<span>`, which is inline by default, the 
 <dt-text wrap="pretty">....</dt-text>
 <dt-text wrap="nowrap">....</dt-text>
 '>
-  <dt-stack gap="600" align="start" class="d-w332">
+  <dt-stack gap="400" align="start" class="d-w-700">
     <dt-text as="p"><strong>Default</strong>. Lorem ipsum dolor sit amet consectetur adipisicing consequatur deleniti non doloremque autem adipisci in omnis voluptatibus </dt-text>
     <dt-text as="p" wrap="balance"><strong>Balance</strong>. Lorem ipsum dolor sit amet consectetur adipisicing consequatur deleniti non doloremque autem adipisci in omnis voluptatibus </dt-text>
     <dt-text as="p" wrap="pretty"><strong>Pretty</strong>. Lorem ipsum dolor sit amet consectetur adipisicing consequatur deleniti non doloremque autem adipisci in omnis voluptatibus </dt-text>
@@ -339,7 +339,7 @@ Text box trim will only affect elements with block or inline-block styled contex
 <dt-text as="p" text-box-trim="end">....</dt-text>
 <dt-text as="p" text-box-trim="both">....</dt-text>
 '>
-  <dt-stack gap="500" :direction="{ 'default': 'column', 'md': 'row' }">
+  <dt-stack gap="200" :direction="{ 'default': 'column', 'md': 'row' }">
     <dt-text as="p" class="d-bgc-moderate-opaque"><strong>No trim:</strong> lorem ipsum dolor sit amet</dt-text>
     <dt-text as="p" text-box-trim="start" class="d-bgc-moderate-opaque"><strong>Trim start:</strong> lorem ipsum dolor sit amet</dt-text>
     <dt-text as="p" text-box-trim="end" class="d-bgc-moderate-opaque"><strong>Trim end:</strong> lorem ipsum dolor sit amet</dt-text>
@@ -363,7 +363,7 @@ Text box trim will only affect elements with block or inline-block styled contex
 
 <dt-notice
   kind="info"
-  class="d-wmx100p d-my24"
+  class="d-wmx100p d-my-300"
   hide-close
   title="Browser Support"
 >
@@ -430,14 +430,14 @@ Text box trim will only affect elements with block or inline-block styled contex
 ### Call Log
 
 <code-example>
-  <dt-stack gap="400" class="d-w100p">
+  <dt-stack gap="100" class="d-w-700">
     <dt-text as="h2" kind="headline" :size="400">Saturday, May 24, 2025</dt-text>
-    <dt-stack direction="row" gap="450" class="d-w100p">
+    <dt-stack direction="row" gap="150">
       <dt-avatar full-name="Ashanti Trevor" />
       <dt-stack class="d-fl1">
         <dt-text kind="body" :size="200" strength="bold">Ashanti Trevor</dt-text>
-        <dt-stack direction="row" gap="300">
-          <dt-stack direction="row" gap="400">
+        <dt-stack direction="row" gap="50">
+          <dt-stack direction="row" gap="100">
             <dt-icon name="phone-outgoing" size="200" class="d-fc-tertiary" />
             <dt-text kind="body" :size="100" tone="tertiary">Outgoing call</dt-text>
           </dt-stack>

@@ -3,7 +3,7 @@
     ref="combobox"
     label="Icon"
     max-height="320px"
-    list-class="d-w164 d-hmx216"
+    list-class="d-w-250 d-hmx-350"
     :size="100"
     append-to="body"
     @select="e => onSelect(filteredIcons[e])"
@@ -26,7 +26,7 @@
             kind="muted"
             importance="clear"
             :size="100"
-            class="d-p2"
+            class="d-p-25"
             @click.stop="onReset"
           >
             <template #icon>
@@ -44,7 +44,7 @@
     </template>
     <template #list="{ listProps }">
       <ul
-        class="d-p4"
+        class="d-p-50"
         v-bind="listProps"
       >
         <dt-list-item

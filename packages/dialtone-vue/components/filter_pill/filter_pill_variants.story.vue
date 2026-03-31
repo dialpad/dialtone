@@ -1,7 +1,7 @@
 <template>
-  <dt-stack gap="500">
+  <dt-stack gap="200">
     <!-- No selection -->
-    <dt-stack gap="300">
+    <dt-stack gap="50">
       <span class="d-label--sm">No selection</span>
       <dt-filter-pill
         v-model="channels"
@@ -13,7 +13,7 @@
       </dt-filter-pill>
     </dt-stack>
     <!-- With start icon -->
-    <dt-stack gap="300">
+    <dt-stack gap="50">
       <span class="d-label--sm">With start icon</span>
       <dt-filter-pill
         v-model="contactCenters"
@@ -26,7 +26,7 @@
       </dt-filter-pill>
     </dt-stack>
     <!-- Selected, show label/count, has clear -->
-    <dt-stack gap="300">
+    <dt-stack gap="50">
       <span class="d-label--sm">Selected, show label/count, has clear</span>
       <dt-filter-pill
         v-model="contactCenters2"
@@ -35,7 +35,7 @@
       />
     </dt-stack>
     <!-- Selected, overflow, label tooltip, has clear -->
-    <dt-stack gap="300">
+    <dt-stack gap="50">
       <span class="d-label--sm">Selected, overflow, label tooltip, has clear</span>
       <dt-filter-pill
         v-model="merchandise"
@@ -45,7 +45,7 @@
       />
     </dt-stack>
     <!-- Custom label slot: conversation type -->
-    <dt-stack gap="300">
+    <dt-stack gap="50">
       <span class="d-label--sm">Custom label slot: conversation type</span>
       <dt-filter-pill
         v-model="conversationTypes"
@@ -77,7 +77,7 @@
       </dt-filter-pill>
     </dt-stack>
     <!-- Custom label -->
-    <dt-stack gap="300">
+    <dt-stack gap="50">
       <span class="d-label--sm">Custom label slot</span>
       <dt-filter-pill
         v-model="contactCentersBadge"
@@ -97,7 +97,7 @@
       </dt-filter-pill>
     </dt-stack>
     <!-- Radio selection: always active -->
-    <dt-stack gap="300">
+    <dt-stack gap="50">
       <span class="d-label--sm">Radio selection (always active)</span>
       <dt-filter-pill
         v-model="internalExternal"
@@ -123,7 +123,7 @@
       </dt-filter-pill>
     </dt-stack>
     <!-- All/selected list -->
-    <dt-stack gap="300">
+    <dt-stack gap="50">
       <span class="d-label--sm">All/selected list</span>
       <dt-filter-pill
         v-model="channelsCustom"
@@ -143,7 +143,7 @@
       </dt-filter-pill>
     </dt-stack>
     <!-- Dropdown: single-select with list items -->
-    <dt-stack gap="300">
+    <dt-stack gap="50">
       <span class="d-label--sm">Dropdown: conversation type</span>
       <dt-filter-pill
         v-model="dropdownConversationTypes"
@@ -174,7 +174,7 @@
       </dt-filter-pill>
     </dt-stack>
     <!-- Deferred selection -->
-    <dt-stack gap="300">
+    <dt-stack gap="50">
       <span class="d-label--sm">Deferred selection (Apply/Cancel)</span>
       <dt-filter-pill
         v-model="deferredFilters"
@@ -184,14 +184,14 @@
       />
     </dt-stack>
     <!-- Read only -->
-    <dt-stack gap="300">
+    <dt-stack gap="50">
       <span class="d-label--sm">Read only</span>
       <dt-filter-pill
         read-only
         label="Conversation type"
       />
     </dt-stack>
-    <dt-stack gap="300">
+    <dt-stack gap="50">
       <span class="d-label--sm">Read only with selections</span>
       <dt-filter-pill
         v-model="readOnlySelections"
@@ -200,14 +200,14 @@
       />
     </dt-stack>
     <!-- Disabled -->
-    <dt-stack gap="300">
+    <dt-stack gap="50">
       <span class="d-label--sm">Disabled</span>
       <dt-filter-pill
         disabled
         label="Conversation type"
       />
     </dt-stack>
-    <dt-stack gap="300">
+    <dt-stack gap="50">
       <span class="d-label--sm">Disabled with selections</span>
       <dt-filter-pill
         v-model="contactCenters"
@@ -217,7 +217,7 @@
       />
     </dt-stack>
     <!-- Sizes -->
-    <dt-stack gap="500">
+    <dt-stack gap="200">
       <h3>Sizes</h3>
       <dt-filter-pill
         v-for="size in sizes"

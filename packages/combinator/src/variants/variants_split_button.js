@@ -1,6 +1,5 @@
 /* eslint-disable max-len */
 
-
 export default {
   default: {
     props: {
@@ -99,7 +98,7 @@ export default {
     props: {
       importance: { initialValue: 'outlined' },
       endTooltipText: { initialValue: 'More options' },
-      alphaLeadingClass: { initialValue: 'd-pl8' },
+      alphaLeadingClass: { initialValue: 'd-pis-100' },
     },
     slots: {
       default: { initialValue: 'Place Call' },

@@ -12,12 +12,12 @@
 @layer dialtone.components {
 .d-toast-wrapper {
   position: absolute;
-  inset-block-start: var(--dt-size-600); // 32
+  inset-block-start: var(--dt-spacing-400); // 32
   inset-inline-start: 50%;
   z-index: var(--zi-notification);
   display: flex;
   flex-direction: column;
-  gap: var(--dt-size-500);
+  gap: var(--dt-spacing-200);
   transform: translateX(-50%);
 }
 
@@ -28,11 +28,11 @@
     //  Component CSS Vars
     //  ------------------------------------------------------------------------
     --toast-color-shadow: var(--dt-color-border-subtle);
-    --toast-box-shadow: 0 0 0 var(--dt-size-100) var(--toast-color-shadow) inset, var(--dt-shadow-medium);
+    --toast-box-shadow: 0 0 0 var(--dt-size-border-100) var(--toast-color-shadow) inset, var(--dt-shadow-medium);
 
     z-index: var(--zi-notification);
     display: block;
-    max-inline-size: var(--dt-size-975);
+    max-inline-size: var(--dt-layout-700);
     word-break: normal;
     box-shadow: var(--toast-box-shadow);
     pointer-events: all;
@@ -63,7 +63,7 @@
     align-items: start;
 
     .d-notice__actions :where(button:first-child) {
-        margin-inline-start: var(--dt-size-600); // 32
+        margin-inline-start: var(--dt-spacing-400); // 32
     }
 }
 
@@ -107,7 +107,7 @@
 .d-toast--viewing {
   --toast-border-radius: var(--dt-size-radius-200);
 
-  border-block-start: var(--dt-size-300) solid var(--dt-color-magenta-400);
+  border-block-start: var(--dt-size-border-300) solid var(--dt-color-magenta-400);
 
   .d-notice__icon {
     color: var(--dt-color-magenta-400);
@@ -127,17 +127,17 @@
   //  Component CSS Vars
   //  ------------------------------------------------------------------------
   --toast-alternate-color-shadow: oklch(from var(--dt-color-black-900) l c h / 0.15);
-  --toast-alternate-box-shadow: 0 0 0 var(--dt-size-0) var(--toast-alternate-color-shadow) inset, var(--dt-shadow-medium);
+  --toast-alternate-box-shadow: 0 0 0 var(--dt-spacing-0) var(--toast-alternate-color-shadow) inset, var(--dt-shadow-medium);
   --toast-alternate-color-background: var(--dt-color-surface-primary);
   --toast-alternate-color-text: var(--dt-color-foreground-primary);
   --toast-alternate-color-icon: var(--dt-color-foreground-muted);
   --toast-alternate-font-color: var(--dt-color-foreground-tertiary);
   --toast-alternate-font-size: var(--dt-font-size-200);
   --toast-alternate-line-height: var(--dt-font-line-height-300);
-  --toast-alternate-border-radius: var(--dt-size-500);
+  --toast-alternate-border-radius: var(--dt-size-radius-500);
   --toast-alternate-border-color: var(--dt-color-border-subtle);
   --toast-alternate-border-style: solid;
-  --toast-alternate-border-width: var(--dt-size-100);
+  --toast-alternate-border-width: var(--dt-size-border-100);
 
   z-index: var(--zi-notification);
 
@@ -146,8 +146,8 @@
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  inline-size: var(--dt-size-925);
-  padding: var(--dt-size-350) var(--dt-size-350) var(--dt-size-450) var(--dt-size-450);
+  inline-size: var(--dt-layout-500);
+  padding: var(--dt-spacing-75) var(--dt-spacing-75) var(--dt-spacing-150) var(--dt-spacing-150);
   color: var(--toast-alternate-color-text);
   font-size: var(--toast-alternate-font-size);
   line-height: var(--toast-alternate-line-height);
@@ -177,7 +177,7 @@
   .d-toast-layout-alternate__icon {
     display: flex;
     flex: 0 auto;
-    margin-inline-end: var(--dt-size-300);
+    margin-inline-end: var(--dt-spacing-50);
     color: var(--toast-alternate-color-icon);
   }
 
@@ -199,7 +199,7 @@
   display: flex;
   flex: 1 auto;
   flex-direction: column;
-  margin-inline-end: var(--dt-size-500);
+  margin-inline-end: var(--dt-spacing-200);
   color: var(--dt-color-foreground-primary);
   font-weight: var(--dt-font-weight-normal);
   font-size: var(--dt-font-size-200);
@@ -208,17 +208,17 @@
 .d-toast-alternate__dialog {
   position: relative;
   align-items: center;
-  inline-size: var(--dt-size-100-percent);
+  inline-size: var(--dt-layout-100-percent);
 
 
   .d-notice__actions :where(button:first-child) {
-    margin-inline-start: var(--dt-size-600); // 32
+    margin-inline-start: var(--dt-spacing-400); // 32
   }
 }
 
 .d-toast-alternate__header {
   display: flex;
-  gap: var(--dt-size-200);
+  gap: var(--dt-spacing-25);
   align-items: center;
   color: var(--toast-alternate-font-color);
 }

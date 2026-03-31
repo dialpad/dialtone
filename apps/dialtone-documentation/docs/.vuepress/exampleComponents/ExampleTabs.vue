@@ -8,7 +8,7 @@
     :disabled="disabled"
     :spread="spread"
     :orientation="orientation"
-    :tab-list-class="orientation === 'vertical' ? 'd-w264' : undefined"
+    :tab-list-class="orientation === 'vertical' ? 'd-w-400' : undefined"
     :activation-mode="activationMode"
     @before-change="confirmBeforeLeave"
   >
@@ -35,7 +35,7 @@
       </dt-tab>
     </template>
     <div
-      class="d-ba d-baw2 d-bas-dashed d-bc-subtle d-w100p d-plc-center d-py48"
+      class="d-ba d-baw2 d-bas-dashed d-bc-subtle d-w100p d-plc-center d-py-600"
       :class="{
         'd-fc-primary-inverted': inverted,
       }"
@@ -44,7 +44,7 @@
         id="2"
         tab-id="1"
       >
-        <dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p16">
+        <dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p-200">
           <strong>First</strong> tab content panel
         </dt-text>
       </dt-tab-panel>
@@ -52,7 +52,7 @@
         id="4"
         tab-id="3"
       >
-        <dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p16">
+        <dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p-200">
           <strong>Second</strong> tab content panel
         </dt-text>
       </dt-tab-panel>
@@ -60,7 +60,7 @@
         id="6"
         tab-id="5"
       >
-        <dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p16">
+        <dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p-200">
           <strong>Third</strong> tab content panel
         </dt-text>
       </dt-tab-panel>

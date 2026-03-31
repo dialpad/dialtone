@@ -10,7 +10,7 @@
     v-if="noSearchResults"
     :size="200"
     :header-text="`No results found for &OpenCurlyDoubleQuote;${searchCriteria}&CloseCurlyDoubleQuote;`"
-    class="d-w100p d-ba d-bc-subtle d-bar8 d-mt16 d-pt32"
+    class="d-w100p d-ba d-bc-subtle d-bar8 d-mbs-200 d-pbs-400"
   >
     <template #icon="{ iconSize }">
       <dt-icon name="box" :size="iconSize" />

@@ -2,7 +2,7 @@
 <template>
   <dt-stack
     class="d-datepicker"
-    gap="400"
+    gap="100"
   >
     <div class="d-datepicker__hd">
       <month-year-picker

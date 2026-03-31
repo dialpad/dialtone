@@ -7,33 +7,33 @@ keywords: ["block", "inline", "flex", "grid", "none", "hidden"]
 ## Examples
 
 <code-well-header>
-  <dt-stack gap="500" class="d-w100p">
-    <div class="d-p8 d-ba d-baw4 d-bar4 d-bc-default d-bgc-moderate d-d-block">
-      <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p8 d-bgc-moderate-opaque d-bar2 d-code--sm">d-d-block</dt-stack>
+  <dt-stack gap="200" class="d-w100p">
+    <div class="d-p-100 d-ba d-baw4 d-bar4 d-bc-default d-bgc-moderate d-d-block">
+      <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p-100 d-bgc-moderate-opaque d-bar2 d-code--sm">d-d-block</dt-stack>
     </div>
     <div class="d-d-contents">
-      <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p8 d-bgc-moderate-opaque d-bar2 d-code--sm">d-d-contents</dt-stack>
+      <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p-100 d-bgc-moderate-opaque d-bar2 d-code--sm">d-d-contents</dt-stack>
     </div>
-    <dt-stack direction="row" gap="400" class="d-p8 d-ba d-baw4 d-bar4 d-bgc-moderate">
+    <dt-stack direction="row" gap="100" class="d-p-100 d-ba d-baw4 d-bar4 d-bgc-moderate">
       <div>
-        <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p8 d-bgc-moderate-opaque d-bar2 d-code--sm d-d-inline-block">d-d-inline-block</dt-stack>
+        <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p-100 d-bgc-moderate-opaque d-bar2 d-code--sm d-d-inline-block">d-d-inline-block</dt-stack>
       </div>
       <div>
-        <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p8 d-bgc-moderate-opaque d-bar2 d-code--sm d-d-inline-block">d-d-inline-block</dt-stack>
+        <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p-100 d-bgc-moderate-opaque d-bar2 d-code--sm d-d-inline-block">d-d-inline-block</dt-stack>
       </div>
       <div>
-        <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p8 d-bgc-moderate-opaque d-bar2 d-code--sm d-d-inline-block">d-d-inline-block</dt-stack>
+        <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p-100 d-bgc-moderate-opaque d-bar2 d-code--sm d-d-inline-block">d-d-inline-block</dt-stack>
       </div>
     </dt-stack>
-    <dt-stack direction="row" gap="400" class="d-p8 d-ba d-baw4 d-bar4 d-bgc-moderate">
+    <dt-stack direction="row" gap="100" class="d-p-100 d-ba d-baw4 d-bar4 d-bgc-moderate">
       <div>
-        <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p4 d-bgc-moderate-opaque d-bar2 d-code--sm d-d-inline">d-d-inline</dt-stack>
+        <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p-50 d-bgc-moderate-opaque d-bar2 d-code--sm d-d-inline">d-d-inline</dt-stack>
       </div>
       <div>
-        <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p4 d-bgc-moderate-opaque d-bar2 d-code--sm d-d-inline">d-d-inline</dt-stack>
+        <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p-50 d-bgc-moderate-opaque d-bar2 d-code--sm d-d-inline">d-d-inline</dt-stack>
       </div>
       <div>
-        <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p4 d-bgc-moderate-opaque d-bar2 d-code--sm d-d-inline">d-d-inline</dt-stack>
+        <dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p-50 d-bgc-moderate-opaque d-bar2 d-code--sm d-d-inline">d-d-inline</dt-stack>
       </div>
     </dt-stack>
   </dt-stack>
@@ -51,23 +51,23 @@ keywords: ["block", "inline", "flex", "grid", "none", "hidden"]
 
 ## Flex Display
 
-<FlexStackNotice class="d-mb16" />
+<FlexStackNotice class="d-mbe-200" />
 
 While `d-d-flex` and `d-d-inline-flex` technically are `display` utilities, use the [DtStack](/components/stack) component instead.
 
 <code-well-header>
   <dt-stack
-    gap="500"
+    gap="200"
     direction="row"
     class="d-bgc-moderate-opaque d-bar8"
   >
-    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+    <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
       Stack item 1
     </div>
-    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+    <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
       Stack item 2
     </div>
-    <div class="d-bgc-moderate-opaque d-p16 d-bar8">
+    <div class="d-bgc-moderate-opaque d-p-200 d-bar8">
       Stack item 3
     </div>
   </dt-stack>
@@ -75,7 +75,7 @@ While `d-d-flex` and `d-d-inline-flex` technically are `display` utilities, use 
 
 ```html
 <dt-stack
-  gap="500"
+  gap="200"
   direction="row"
 >
   <div>

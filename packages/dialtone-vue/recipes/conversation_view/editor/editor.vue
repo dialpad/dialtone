@@ -11,13 +11,13 @@
     <dt-stack
       class="d-recipe-editor__top-bar"
       direction="row"
-      gap="450"
+      gap="150"
     >
       <dt-stack
         v-for="buttonGroup in buttonGroups"
         :key="buttonGroup.key"
         direction="row"
-        gap="300"
+        gap="50"
       >
         <template v-for="button in buttonGroup.buttonGroup">
           <!-- Font Style Popover -->
@@ -46,7 +46,7 @@
                   <dt-input
                     v-bind="inputProps"
                     v-model="fontStyleSearch"
-                    root-class="d-p8 d-pb4 d-w216"
+                    root-class="d-p-100 d-pbe-50 d-w216"
                     type="search"
                     :placeholder="i18n.$t('DIALTONE_EDITOR_FONT_STYLE_SEARCH_PLACEHOLDER')"
                     :size="200"
@@ -142,7 +142,7 @@
               <dt-input
                 :value="currentFontColor"
                 root-class="d-w0 d-h0 d-of-hidden"
-                input-class="colorPickerInput d-w0 d-h0 d-p0 d-bar0"
+                input-class="colorPickerInput d-w0 d-h0 d-p-0 d-bar0"
                 input-wrapper-class="d-w0 d-h0 d-ba-none"
                 :size="200"
                 type="color"
@@ -178,7 +178,7 @@
                   <dt-input
                     v-bind="inputProps"
                     v-model="variableSearchValue"
-                    root-class="d-p8 d-pb4 d-w264"
+                    root-class="d-p-100 d-pbe-50 d-w264"
                     type="search"
                     :placeholder="i18n.$t('DIALTONE_EDITOR_VARIABLE_POPOVER_SEARCH_PLACEHOLDER')"
                     :size="300"
@@ -195,7 +195,7 @@
                       v-for="(category, index) in filteredCategories"
                       :key="category.name"
                       :heading="category.name"
-                      heading-class="d-headline--sm-compact d-p8"
+                      heading-class="d-headline--sm-compact d-p-100"
                     >
                       <dt-list-item
                         v-for="item in getFilteredItemsForCategory(category)"
@@ -240,7 +240,7 @@
       <dt-stack
         v-if="linkButton.showBtn"
         direction="row"
-        gap="300"
+        gap="50"
       >
         <dt-popover
           :open="showLinkInput"
@@ -304,7 +304,7 @@
           <template #footerContent>
             <dt-stack
               direction="row"
-              gap="300"
+              gap="50"
               class="d-recipe-editor__popover-footer"
             >
               <dt-button
@@ -507,7 +507,7 @@ export default {
     /**
      * Additional class name for the input element. Only accepts a String value
      * because this is passed to the editor via options. For multiple classes,
-     * join them into one string, e.g. "d-p8 d-hmx96"
+     * join them into one string, e.g. "d-p-100 d-hmx-150"
      */
     inputClass: {
       type: String,

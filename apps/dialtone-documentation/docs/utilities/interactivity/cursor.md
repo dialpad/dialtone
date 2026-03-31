@@ -6,8 +6,8 @@ keywords: ["pointer", "hover", "focus"]
 ## Usage
 
 <code-well-header>
-  <dt-stack direction="row" gap="400" class="d-fw-wrap d-w100p d-bar8 d-plc-center">
-    <div v-for="{ class: className, output } in cursor" class="d-p16 d-bgc-moderate d-code--sm d-bar4" :class="className">{{ className }}</div>
+  <dt-stack direction="row" gap="100" class="d-fw-wrap d-w100p d-bar8 d-plc-center">
+    <div v-for="{ class: className, output } in cursor" class="d-p-200 d-bgc-moderate d-code--sm d-bar4" :class="className">{{ className }}</div>
   </dt-stack>
 </code-well-header>
 

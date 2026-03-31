@@ -31,11 +31,11 @@
     <template #content>
       <dt-stack
         direction="column"
-        gap="400"
+        gap="100"
       >
         <dt-stack
           direction="row"
-          gap="300"
+          gap="50"
         >
           <dt-avatar
             full-name="Jaqueline Nackos"
@@ -59,7 +59,7 @@
         </dt-stack>
         <dt-stack
           direction="column"
-          gap="300"
+          gap="50"
           class="d-fc-secondary"
         >
           <p>
@@ -67,7 +67,7 @@
           </p>
           <dt-stack
             direction="row"
-            gap="300"
+            gap="50"
           >
             <dt-icon
               name="clock-4"
@@ -80,17 +80,17 @@
         </dt-stack>
         <dt-stack
           direction="row"
-          gap="400"
+          gap="100"
         >
           <dt-button
-            width="var(--dt-size-100-percent)"
+            width="var(--dt-layout-100-percent)"
             importance="outlined"
             kind="muted"
           >
             Call
           </dt-button>
           <dt-button
-            width="var(--dt-size-100-percent)"
+            width="var(--dt-layout-100-percent)"
             importance="outlined"
             kind="muted"
           >
@@ -101,7 +101,7 @@
           v-model="inputValue"
           placeholder="Quick message"
           :size="300"
-          width="var(--dt-size-100-percent)"
+          width="var(--dt-layout-100-percent)"
         />
       </dt-stack>
     </template>

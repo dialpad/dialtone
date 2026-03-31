@@ -1,5 +1,5 @@
 <template>
-  <dt-stack gap="500">
+  <dt-stack gap="200">
     <div>
       <dt-button
         kind="danger"

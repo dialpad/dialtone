@@ -96,7 +96,7 @@
       <!-- Left content -->
       <div class="d-recipe-message-input__bottom-section-left">
         <dt-stack
-          gap="200"
+          gap="25"
           direction="row"
           class="d-recipe-message-input__bottom-section-left-stack"
         >
@@ -186,7 +186,7 @@
       <div class="d-recipe-message-input__bottom-section-right">
         <dt-stack
           direction="row"
-          gap="300"
+          gap="50"
         >
           <!-- @slot Slot for schedule message -->
           <div class="d-recipe-message-input__schedule-message">
@@ -379,7 +379,7 @@ export default {
     /**
      * Additional class name for the input element. Only accepts a String value
      * because this is passed to the editor via options. For multiple classes,
-     * join them into one string, e.g. "d-p8 d-hmx96"
+     * join them into one string, e.g. "d-p-100 d-hmx-150"
      */
     inputClass: {
       type: String,

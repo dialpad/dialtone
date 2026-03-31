@@ -2,7 +2,7 @@
 <template>
   <dt-stack gap="600">
     <dt-stack>
-      <p class="d-fw-bold d-mb8">
+      <p class="d-fw-bold d-mbe-100">
         Horizontal (default)
       </p>
       <div>
@@ -24,7 +24,7 @@
           </dt-segmented-control-item>
         </dt-segmented-control>
       </div>
-      <p class="d-mb8">
+      <p class="d-mbe-100">
         Horizontal: inline-flex (aka "hug")
       </p>
       <div>
@@ -50,7 +50,7 @@
     </dt-stack>
 
     <dt-stack>
-      <p class="d-fw-bold d-mb8">
+      <p class="d-fw-bold d-mbe-100">
         No divider
       </p>
       <div>
@@ -76,7 +76,7 @@
     </dt-stack>
 
     <dt-stack>
-      <p class="d-fw-bold d-mb8">
+      <p class="d-fw-bold d-mbe-100">
         Borderless
       </p>
       <div>
@@ -102,7 +102,7 @@
     </dt-stack>
 
     <dt-stack>
-      <p class="d-fw-bold d-mb8">
+      <p class="d-fw-bold d-mbe-100">
         Spread: evenly
       </p>
       <div>
@@ -128,7 +128,7 @@
     </dt-stack>
 
     <dt-stack>
-      <p class="d-fw-bold d-mb8">
+      <p class="d-fw-bold d-mbe-100">
         With icons
       </p>
       <div>
@@ -159,7 +159,7 @@
     </dt-stack>
 
     <dt-stack>
-      <p class="d-fw-bold d-mb8">
+      <p class="d-fw-bold d-mbe-100">
         Icon only
       </p>
       <div>
@@ -193,7 +193,7 @@
           </dt-segmented-control-item>
         </dt-segmented-control>
       </div>
-      <p class="d-fw-bold d-mb8">
+      <p class="d-fw-bold d-mbe-100">
         Icon only (inline-flex)
       </p>
       <div>
@@ -231,7 +231,7 @@
     </dt-stack>
 
     <dt-stack>
-      <p class="d-fw-bold d-mb8">
+      <p class="d-fw-bold d-mbe-100">
         With trailing slot
       </p>
       <div>
@@ -241,7 +241,7 @@
         >
           <dt-segmented-control-item
             value="apples"
-            trailing-class="d-pr8"
+            trailing-class="d-pie-100"
           >
             Apples
             <template #trailing>
@@ -252,7 +252,7 @@
           </dt-segmented-control-item>
           <dt-segmented-control-item
             value="oranges"
-            trailing-class="d-pr8"
+            trailing-class="d-pie-100"
           >
             Oranges
             <template #trailing>
@@ -263,7 +263,7 @@
           </dt-segmented-control-item>
           <dt-segmented-control-item
             value="bananas"
-            trailing-class="d-pr8"
+            trailing-class="d-pie-100"
           >
             Bananas
             <template #trailing>
@@ -277,7 +277,7 @@
     </dt-stack>
 
     <dt-stack>
-      <p class="d-fw-bold d-mb8">
+      <p class="d-fw-bold d-mbe-100">
         Vertical
       </p>
       <dt-stack
@@ -317,7 +317,7 @@
         </dt-segmented-control>
         <dt-segmented-control
           v-model="selectedVertical"
-          class="d-w164"
+          class="d-w-250"
           orientation="vertical"
           aria-label="Vertical example"
           :size="100"
@@ -339,7 +339,7 @@
     </dt-stack>
 
     <dt-stack>
-      <p class="d-fw-bold d-mb8">
+      <p class="d-fw-bold d-mbe-100">
         Sizes
       </p>
       <dt-stack gap="400">
@@ -522,7 +522,7 @@
     </dt-stack>
 
     <dt-stack>
-      <p class="d-fw-bold d-mb8">
+      <p class="d-fw-bold d-mbe-100">
         Disabled (entire group)
       </p>
       <div>
@@ -548,7 +548,7 @@
     </dt-stack>
 
     <dt-stack>
-      <p class="d-fw-bold d-mb8">
+      <p class="d-fw-bold d-mbe-100">
         Individual disabled option
       </p>
       <div>
@@ -576,7 +576,7 @@
     </dt-stack>
 
     <dt-stack>
-      <p class="d-fw-bold d-mb8">
+      <p class="d-fw-bold d-mbe-100">
         Activation mode: auto (selects on focus)
       </p>
       <div>
@@ -602,7 +602,7 @@
     </dt-stack>
 
     <dt-stack>
-      <p class="d-fw-bold d-mb8">
+      <p class="d-fw-bold d-mbe-100">
         Activation mode: manual (Space/Enter to select)
       </p>
       <div>

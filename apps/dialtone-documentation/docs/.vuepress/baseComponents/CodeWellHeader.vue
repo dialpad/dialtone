@@ -2,7 +2,7 @@
   <aside>
     <dt-stack
       as="header"
-      gap="400"
+      gap="100"
       align="center"
       justify="center"
       class="d-bar8"
@@ -39,7 +39,7 @@ export default {
     classes () {
       if (this.custom) return this.$attrs.class;
       return [
-        'd-p32 d-w100p d-of-auto',
+        'd-p-400 d-w100p d-of-auto',
         this.bgclass,
         { 'd-ba d-bc-subtle d-btr8 d-baw1': this.isSurfacePrimary },
         this.$attrs.class,

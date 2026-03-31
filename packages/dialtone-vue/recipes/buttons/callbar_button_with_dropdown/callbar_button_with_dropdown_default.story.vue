@@ -37,7 +37,7 @@
     </template>
     <template #list="{ close }">
       <dt-list-item-group
-        heading-class="d-py4 d-px8 d-fw-semibold d-c-default"
+        heading-class="d-py-50 d-px-100 d-fw-semibold d-c-default"
         heading="Menu Heading A"
       >
         <dt-list-item
@@ -58,7 +58,7 @@
       </dt-list-item-group>
       <dt-dropdown-separator />
       <dt-list-item-group
-        heading-class="d-py4 d-px8 d-fw-semibold d-c-default"
+        heading-class="d-py-50 d-px-100 d-fw-semibold d-c-default"
         heading="Menu Heading B"
       >
         <dt-list-item

@@ -72,6 +72,27 @@ const VALUE_MAP = {
   },
 };
 
+// Physical → logical utility class prefix mappings
+// These map directional class names to their logical equivalents in templates.
+// Sorted by longest prefix first to avoid partial matches (d-ml- before d-l-).
+const CLASS_PREFIX_MAP = [
+  // Margin
+  ['d-mt-', 'd-mbs-'],
+  ['d-mr-', 'd-mie-'],
+  ['d-mb-', 'd-mbe-'],
+  ['d-ml-', 'd-mis-'],
+  // Padding
+  ['d-pt-', 'd-pbs-'],
+  ['d-pr-', 'd-pie-'],
+  ['d-pb-', 'd-pbe-'],
+  ['d-pl-', 'd-pis-'],
+  // Position (inset)
+  ['d-t-', 'd-ibs-'],
+  ['d-r-', 'd-iie-'],
+  ['d-b-', 'd-ibe-'],
+  ['d-l-', 'd-iis-'],
+];
+
 function escapeRegex(string) {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
@@ -117,6 +138,47 @@ function fixLogicalProperties(content) {
   return fixedLines.join('\n');
 }
 
+/**
+ * Replace physical utility class prefixes with logical equivalents in a string.
+ * e.g. "d-pt-100 d-ml-200" → "d-pbs-100 d-mis-200"
+ */
+function fixLogicalClassNames(content) {
+  let fixed = content;
+  for (const [physical, logical] of CLASS_PREFIX_MAP) {
+    // Match the physical prefix followed by a token stop number or 'n' + number (negative)
+    // Word boundary ensures we don't match partial class names
+    const regex = new RegExp(escapeRegex(physical) + '(n?[0-9]+)', 'g');
+    fixed = fixed.replace(regex, `${logical}$1`);
+  }
+  return fixed;
+}
+
+/**
+ * Process class="..." and :class="..." attributes in template content,
+ * replacing physical class prefixes with logical equivalents.
+ */
+function processTemplateClassNames(content) {
+  let hasChanges = false;
+
+  // Match class="..." attributes (static)
+  const staticClassRegex = /(class=")(.*?)(")/g;
+  let fixed = content.replace(staticClassRegex, (_match, open, classes, close) => {
+    const fixedClasses = fixLogicalClassNames(classes);
+    if (fixedClasses !== classes) hasChanges = true;
+    return open + fixedClasses + close;
+  });
+
+  // Match :class="'...'" attributes (dynamic with string literal)
+  const dynamicClassRegex = /(:class="')(.*?)(')/g;
+  fixed = fixed.replace(dynamicClassRegex, (_match, open, classes, close) => {
+    const fixedClasses = fixLogicalClassNames(classes);
+    if (fixedClasses !== classes) hasChanges = true;
+    return open + fixedClasses + close;
+  });
+
+  return { fixed, hasChanges };
+}
+
 function processStyleBlocks(content) {
   // Match all <style> blocks (with any attributes like lang, scoped, etc.)
   const styleRegex = /(<style[^>]*>)([\s\S]*?)(<\/style>)/gi;
@@ -150,11 +212,12 @@ function processMarkdownFile(filePath) {
         return part; // Keep code blocks unchanged
       }
       // Process style blocks in non-code parts
-      const result = processStyleBlocks(part);
-      if (result.hasChanges) {
-        hasChanges = true;
-      }
-      return result.fixed;
+      const styleResult = processStyleBlocks(part);
+      if (styleResult.hasChanges) hasChanges = true;
+      // Process class names in non-code parts
+      const classResult = processTemplateClassNames(styleResult.fixed);
+      if (classResult.hasChanges) hasChanges = true;
+      return classResult.fixed;
     });
 
     if (hasChanges) {
@@ -171,11 +234,21 @@ function processMarkdownFile(filePath) {
 
 function processFileWithStyleBlocks(filePath) {
   try {
-    const content = fs.readFileSync(filePath, 'utf8');
-    const result = processStyleBlocks(content);
+    let content = fs.readFileSync(filePath, 'utf8');
+    let hasChanges = false;
 
-    if (result.hasChanges) {
-      fs.writeFileSync(filePath, result.fixed, 'utf8');
+    // Fix CSS properties in <style> blocks
+    const styleResult = processStyleBlocks(content);
+    if (styleResult.hasChanges) hasChanges = true;
+    content = styleResult.fixed;
+
+    // Fix class names in templates (outside <style> blocks)
+    const classResult = processTemplateClassNames(content);
+    if (classResult.hasChanges) hasChanges = true;
+    content = classResult.fixed;
+
+    if (hasChanges) {
+      fs.writeFileSync(filePath, content, 'utf8');
       console.log(`Fixed: ${filePath}`);
       return true;
     }

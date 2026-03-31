@@ -42,7 +42,7 @@
     <dt-stack
       direction="row"
       gap="200"
-      class="d-ps-sticky d-t0 d-r0"
+      class="d-ps-sticky d-ibs-0 d-iie-0"
     >
       <dt-button
         v-if="devMode && hasChanges"

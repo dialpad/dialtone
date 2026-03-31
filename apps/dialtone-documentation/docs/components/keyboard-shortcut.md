@@ -30,7 +30,7 @@ Keyboard shortcut outlines a key combination with a border to represent a keyboa
 
 ### Inverted
 
-<dt-notice title="Deprecated" kind="info" class="d-wmx100p d-my16" hide-close>
+<dt-notice title="Deprecated" kind="info" class="d-wmx100p d-my-200" hide-close>
   The <code>inverted</code> prop has been deprecated. Use the
   <dt-link to="mode-island.html#inverting">v-dt-mode directive</dt-link>
   instead.
@@ -39,7 +39,7 @@ Keyboard shortcut outlines a key combination with a border to represent a keyboa
 In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#inverting) on the component element.
 
 <code-example>
-  <div class="d-bgc-contrast d-p16">
+  <div class="d-bgc-contrast d-p-200">
     <dt-keyboard-shortcut v-dt-mode:invert shortcut="{cmd}+Ctrl+X" />
   </div>
 </code-example>

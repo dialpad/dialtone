@@ -1,6 +1,6 @@
 <!-- eslint-disable max-lines -->
 <template>
-  <div class="d-ml128">
+  <div class="d-mis-200">
     <dt-popover
       :open="$attrs.open"
       :modal="true"
@@ -18,7 +18,7 @@
       </template>
       <template #content="{ close }">
         <div>
-          <p class="d-mb4">
+          <p class="d-mbe-50">
             I will be displayed in the popover!
           </p>
           <dt-button

@@ -1,5 +1,5 @@
 <template>
-  <dt-hovercard placement="bottom-start" content-class="d-wmn332 ">
+  <dt-hovercard placement="bottom-start" content-class="d-wmn-500 ">
     <template #anchor>
       <dt-button>
         {{ label }}

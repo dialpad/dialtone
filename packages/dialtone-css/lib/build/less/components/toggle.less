@@ -26,9 +26,9 @@
   --toggle-transition-timing-function: var(--ttf-out-quint);
   --toggle-transition-speed: var(--td300);
   --toggle-color-background: oklch(from var(--dt-color-surface-bold) 0.738 c h);
-  --toggle-size-height: var(--dt-size-550); // 24
-  --toggle-size-width: var(--dt-size-650); // 48
-  --toggle-size-icon: var(--dt-size-500); // 16
+  --toggle-size-height: calc(var(--dt-layout-25) * 1.5); // 24
+  --toggle-size-width: var(--dt-layout-75); // 48
+  --toggle-size-icon: var(--dt-layout-25); // 16
 
   //  $$  BASE STYLE
   //  ----------------------------------------------------------------------------
@@ -42,7 +42,7 @@
   line-height: var(--lh4);
   vertical-align: middle;
   background-color: var(--toggle-color-background);
-  border: var(--dt-size-100) solid var(--toggle-color-background);
+  border: var(--dt-size-border-100) solid var(--toggle-color-background);
   border-radius: var(--toggle-size-width);
   cursor: pointer;
   transition-timing-function: var(--ttf-out-quint);
@@ -51,14 +51,14 @@
 
   &__inner {
     position: absolute;
-    inset-block-start: calc(var(--dt-size-300) - var(--dt-size-100)); // 3
-    inset-inline-start: var(--dt-size-550); // 24
+    inset-block-start: calc(var(--dt-spacing-50) - var(--dt-spacing-1)); // 3
+    inset-inline-start: var(--dt-spacing-300); // 24
     inline-size: var(--toggle-size-icon);
     block-size: var(--toggle-size-icon);
 
     .d-toggle--small & {
-      inset-block-start: var(--dt-size-100); // 1
-      inset-inline-start: calc(var(--dt-size-500) + var(--dt-size-100)); // 17
+      inset-block-start: var(--dt-spacing-1); // 1
+      inset-inline-start: calc(var(--dt-spacing-200) + var(--dt-spacing-1)); // 17
     }
 
     .d-toggle--indeterminate & {
@@ -77,10 +77,10 @@
 
   &::after {
     position: absolute;
-    inset-block-start: var(--dt-size-100); // 1
-    inset-inline-start: var(--dt-size-100); // 1
-    inline-size: calc(var(--toggle-size-icon) + var(--dt-size-300));
-    block-size: calc(var(--toggle-size-icon) + var(--dt-size-300));
+    inset-block-start: var(--dt-spacing-1); // 1
+    inset-inline-start: var(--dt-spacing-1); // 1
+    inline-size: var(--dt-icon-size-400);
+    block-size: var(--dt-icon-size-400);
     background-color: var(--dt-color-surface-primary);
     border-radius: var(--dt-size-radius-circle);
     cursor: pointer;
@@ -91,20 +91,20 @@
   //  $$  TOGGLE VARIANTS
   //  ----------------------------------------------------------------------------
   &--small {
-    --toggle-size-height: calc(var(--dt-size-500) + var(--dt-size-200)); // 18
-    --toggle-size-width: calc(var(--dt-size-600) + var(--dt-size-300)); // 36
-    --toggle-size-icon: calc(var(--dt-size-500) - var(--dt-size-200)); // 14
+    --toggle-size-height: calc(var(--dt-layout-25) + var(--dt-spacing-25)); // 18
+    --toggle-size-width: calc(var(--dt-layout-50) + var(--dt-spacing-50)); // 36
+    --toggle-size-icon: var(--dt-icon-size-200); // 14
 
     &::before {
       position: absolute;
-      inset: var(--dt-size-300-negative) 0 var(--dt-size-300-negative) 0; // -4 // -4
+      inset: var(--dt-spacing-50-negative) 0 var(--dt-spacing-50-negative) 0; // -4 // -4
       content: '';
     }
   }
 
   &--small::after {
-    inline-size: var(--toggle-size-icon);
-    block-size: var(--toggle-size-icon);
+    inline-size: var(--dt-icon-size-200);
+    block-size: var(--dt-icon-size-200);
   }
 
   //  $$  CHECKED TOGGLE
@@ -113,7 +113,7 @@
     --toggle-color-background: var(--dt-checkbox-color-background-checked);
 
     .d-toggle__inner {
-      inset-inline-start: var(--dt-size-350); // 6
+      inset-inline-start: var(--dt-spacing-75); // 6
       background-image: url("data:image/svg+xml,<svg width='14' height='14' viewBox='0 0 14 14' fill='none' xmlns='http://www.w3.org/2000/svg'> <path fill-rule='evenodd' clip-rule='evenodd' d='M12.1083 3.05806C12.3524 3.30214 12.3524 3.69786 12.1083 3.94194L5.69162 10.3586C5.44754 10.6027 5.05181 10.6027 4.80773 10.3586L1.89107 7.44194C1.64699 7.19786 1.64699 6.80214 1.89107 6.55806C2.13514 6.31398 2.53087 6.31398 2.77495 6.55806L5.24967 9.03278L11.2244 3.05806C11.4685 2.81398 11.8642 2.81398 12.1083 3.05806Z' fill='white'/> </svg>");
 
       [data-dt-mode="dark"] &,
@@ -123,15 +123,15 @@
     }
 
     &.d-toggle--small .d-toggle__inner {
-      inset-inline-start: calc(var(--dt-size-100) + var(--dt-size-200)); // 3
+      inset-inline-start: calc(var(--dt-spacing-1) + var(--dt-spacing-25)); // 3
     }
 
     &::after {
-      inset-inline-start: calc(var(--dt-size-550) + var(--dt-size-100)); // 25
+      inset-inline-start: calc(var(--dt-spacing-300) + var(--dt-spacing-1)); // 25
     }
 
     &.d-toggle--small::after {
-      inset-inline: calc(calc(var(--dt-size-300) * 5) - var(--dt-size-100)) var(--dt-size-100); // 1 // 19
+      inset-inline: calc(calc(var(--dt-spacing-50) * 5) - var(--dt-spacing-1)) var(--dt-spacing-1); // 1 // 19
     }
   }
 
@@ -170,7 +170,7 @@
 }
 
 .d-toggle-group {
-  gap: var(--dt-size-400); // 8
+  gap: var(--dt-spacing-100); // 8
 }
 
 //  ============================================================================

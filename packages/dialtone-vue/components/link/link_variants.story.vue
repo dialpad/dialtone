@@ -1,12 +1,12 @@
 <template>
   <div>
     <dt-stack
-      gap="400"
+      gap="100"
     >
       <dt-stack
         class="d-fw-wrap"
         direction="row"
-        gap="400"
+        gap="100"
         align="baseline"
       >
         <dt-link

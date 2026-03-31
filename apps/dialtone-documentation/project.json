@@ -19,7 +19,7 @@
       "outputs": ["{projectRoot}/docs/.vuepress/dist"],
       "options": {
         "cwd": "{projectRoot}",
-        "command": "node scripts/generate-raw-markdown.mjs && NODE_OPTIONS='--max-old-space-size=6144' vuepress build docs"
+        "command": "node scripts/generate-raw-markdown.mjs && NODE_OPTIONS='--max-old-space-size=8192' vuepress build docs"
       }
     },
     "start": {

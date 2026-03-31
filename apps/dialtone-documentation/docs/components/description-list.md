@@ -15,9 +15,9 @@ keywords: ["definition list", "key value", "dl", "d-description-list", "DtDescri
 ### Default
 
 <code-example>
-  <div class="d-w332" data-demo-wrapper>
+  <div class="d-w-500" data-demo-wrapper>
     <dt-description-list
-      gap="400"
+      gap="100"
       :items="items"
       direction="row"
     />
@@ -27,9 +27,9 @@ keywords: ["definition list", "key value", "dl", "d-description-list", "DtDescri
 ### Column Direction
 
 <code-example>
-  <div class="d-w332" data-demo-wrapper>
+  <div class="d-w-500" data-demo-wrapper>
     <dt-description-list
-      gap="400"
+      gap="100"
       :items="items"
       direction="column"
     />
@@ -39,9 +39,9 @@ keywords: ["definition list", "key value", "dl", "d-description-list", "DtDescri
 ### Long Text
 
 <code-example>
-  <div class="d-w332" data-demo-wrapper>
+  <div class="d-w-500" data-demo-wrapper>
     <dt-description-list
-      gap="400"
+      gap="100"
       :items="longTextItems"
       direction="row"
     />
@@ -51,9 +51,9 @@ keywords: ["definition list", "key value", "dl", "d-description-list", "DtDescri
 ### With Term and Description Styles
 
 <code-example>
-  <div class="d-w332" data-demo-wrapper>
+  <div class="d-w-500" data-demo-wrapper>
     <dt-description-list
-      gap="400"
+      gap="100"
       :items="items"
       direction="row"
       :termClass="[`d-fc-critical`, `d-fw-bold`]"

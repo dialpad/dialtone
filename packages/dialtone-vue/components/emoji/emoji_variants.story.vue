@@ -1,9 +1,9 @@
 <template>
-  <dt-stack gap="300">
+  <dt-stack gap="50">
     <dt-stack
       v-for="size in sizes"
       :key="`emoji-size${size}`"
-      gap="200"
+      gap="25"
       direction="row"
     >
       <dt-emoji

@@ -127,7 +127,7 @@ Add `disabled` to the tab group to disable all.
 
 ### Inverted
 
-<dt-notice title="Deprecated" kind="info" class="d-wmx100p d-my16" hide-close>
+<dt-notice title="Deprecated" kind="info" class="d-wmx100p d-my-200" hide-close>
   The <code>inverted</code> prop has been deprecated. Use the <dt-link to="mode-island.html#inverting">v-dt-mode directive</dt-link> instead.
 </dt-notice>
 
@@ -141,8 +141,8 @@ In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#
   </template>
 </dt-tab-group>
 '>
-  <div class="d-p8 d-bgc-contrast d-w100p">
-    <div v-dt-mode:invert class="d-p16 d-bar8">
+  <div class="d-p-100 d-bgc-contrast d-w100p">
+    <div v-dt-mode:invert class="d-p-200 d-bar8">
       <example-tabs />
     </div>
   </div>
@@ -173,7 +173,7 @@ Tabs expand proportionally to fill the container. Longer labels receive more spa
 All tabs share the same width, regardless of label length.
 
 <code-example>
-  <div class="d-w100p" data-demo-wrapper>
+  <div class="d-w-800" data-demo-wrapper>
     <dt-tab-group spread="equal">
       <template #tabs>
         <dt-tab id="se1" panel-id="se2" selected>Tab 1</dt-tab>
@@ -191,7 +191,7 @@ All tabs share the same width, regardless of label length.
   ...
 </dt-tab-group>
 '>
-  <dt-stack gap="500" class="d-w100p">
+  <dt-stack gap="200" class="d-w100p">
     <dt-tab-group :size="100">
       <template #tabs>
         <dt-tab id="1" panel-id="2" selected>
@@ -266,7 +266,7 @@ All tabs share the same width, regardless of label length.
 
 Use the `#startIcon` or `#endIcon` slot on `dt-tab` to add an icon. The slot provides `iconSize` to match the tab's size.
 
-<dt-notice title="Deprecated" kind="info" class="d-wmx100p d-my16" hide-close>
+<dt-notice title="Deprecated" kind="info" class="d-wmx100p d-my-200" hide-close>
   The <code>#icon</code> slot has been deprecated. Use <code>#startIcon</code> or <code>#endIcon</code> instead.
 </dt-notice>
 
@@ -308,13 +308,13 @@ Use the `#leading` and `#trailing` slots on `dt-tab` to render content like badg
   <div class="d-w100p" data-demo-wrapper>
     <dt-tab-group>
       <template #tabs>
-        <dt-tab id="lt1" panel-id="lt2" selected trailing-class="d-pr8">
+        <dt-tab id="lt1" panel-id="lt2" selected trailing-class="d-pie-100">
           Inbox
           <template #trailing>
             <dt-badge kind="count" type="bulletin" text="9" />
           </template>
         </dt-tab>
-        <dt-tab id="lt3" panel-id="lt4" trailing-class="d-pr8">
+        <dt-tab id="lt3" panel-id="lt4" trailing-class="d-pie-100">
           Archive
           <template #trailing>
             <dt-badge kind="count" text="99+" />

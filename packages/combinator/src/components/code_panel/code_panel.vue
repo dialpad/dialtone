@@ -8,8 +8,8 @@
   >
     <template #content>
       <div
-        v-dt-scrollbar
-        class="dtc-theme__canvas d-p16"
+        v-dt-scrollbar:never
+        :class="['dtc-theme__canvas d-p-200', { 'd-hmx-250': !fullScreen }]"
       >
         <dtc-code-editor
           :info="info"
@@ -31,7 +31,7 @@
         justify="end"
         class="d-h100p"
       >
-        <div class="d-pr32 d-pb16 d-pe-auto">
+        <div class="d-pie-400 d-pbe-200 d-pe-auto">
           <slot name="overlay" />
         </div>
       </dt-stack>
@@ -79,6 +79,10 @@ defineProps({
     default: false,
   },
   hasChanges: {
+    type: Boolean,
+    default: false,
+  },
+  fullScreen: {
     type: Boolean,
     default: false,
   },

@@ -40,7 +40,7 @@
     </template>
     <template #list>
       <ul
-        class="d-ps-relative d-stack2 d-m4 d-px0"
+        class="d-ps-relative d-stack2 d-m-50 d-px-0"
       >
         <dt-list-item
           v-for="(item, i) in items"

@@ -49,13 +49,13 @@ Dialtone's CSS library offers a framework of [CSS Utilities](/utilities/) classe
 <code-well-header>
   <dt-stack
     direction="row"
-    gap="400"
+    gap="100"
     justify="between"
     class="
       d-w100p
       d-bar8
       d-fc-tertiary
-      d-p16
+      d-p-200
       d-bgc-moderate
       d-ba
       d-bc-subtle
@@ -76,13 +76,13 @@ Dialtone's CSS library offers a framework of [CSS Utilities](/utilities/) classe
 ```html
 <dt-stack
   direction="row"
-  gap="400"
+  gap="100"
   justify="between"
   class="
     d-w100p
     d-bar8
     d-fc-tertiary
-    d-p16
+    d-p-200
     d-bgc-moderate
     d-ba
     d-bc-subtle
@@ -173,16 +173,16 @@ In the event you need to write CSS, use [BEM (Block Element Modifier)](http://ge
 
   // Elements within block
   &__header {
-    padding: var(--dt-size-500);
+    padding: var(--dt-spacing-200);
   }
 
   &__body {
     flex-grow: 1;
-    padding: var(--dt-size-500);
+    padding: var(--dt-spacing-200);
   }
 
   &__footer {
-    padding: var(--dt-size-500);
+    padding: var(--dt-spacing-200);
   }
 }
 ```

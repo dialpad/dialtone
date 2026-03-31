@@ -5,7 +5,7 @@ import { CALLBOX_BADGE_COLORS, CALLBOX_BORDER_COLORS } from '@/recipes/leftbar/c
 const MOCK_CALLBOX_STUB = vi.fn();
 const MOCK_AVATAR_IMAGE_SOURCE = 'image.png';
 const MOCK_AVATAR_FULL_NAME = 'Jaqueline Nackos';
-const MOCK_AVATAR_INITIALS = 'J';
+const MOCK_AVATAR_INITIALS = 'JN';
 const MOCK_TITLE = '1 Participant';
 const MOCK_BADGE_TEXT = 'Some_call_center';
 const MOCK_BADGE_COLOR = 'warning';

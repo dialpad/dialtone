@@ -8,7 +8,7 @@
       kind="muted"
       activation-mode="auto"
       class="d-d-flex d-fd-column d-h100p"
-      tab-list-class="d-ps-sticky d-t0 d-zi-base1 d-pr16 d-pt16 d-pb4"
+      tab-list-class="d-ps-sticky d-ibs-0 d-zi-base1 d-pie-200 d-pbs-200 d-pbe-50"
     >
       <template #tabs>
         <dt-tab
@@ -28,7 +28,7 @@
         </dt-tab>
         <dt-button
           v-dt-tooltip="'Search'"
-          class="d-ml-auto"
+          class="d-mis-auto"
           kind="muted"
           importance="clear"
           :size="100"
@@ -46,7 +46,7 @@
           type="search"
           placeholder="Search"
           :size="100"
-          root-class="d-w100p d-mt2"
+          root-class="d-w100p d-mbs-25"
         >
           <template #startIcon="{ iconSize }">
             <dt-icon
@@ -59,7 +59,7 @@
               kind="muted"
               importance="clear"
               :size="100"
-              class="d-p2"
+              class="d-p-25"
               aria-label="Clear search"
               @click="clear"
             >
@@ -75,10 +75,10 @@
       </template>
       <div
         v-dt-scrollbar
-        class="d-fl1 d-pt8"
+        class="d-fl1 d-pbs-100"
       >
         <dt-stack
-          class="d-fl1 d-pr16 d-pb16"
+          class="d-fl1 d-pie-200 d-pbe-200"
         >
           <dt-tab-panel
             v-if="info.props?.length"
@@ -89,7 +89,7 @@
               v-if="info.props?.length"
               gap="300"
             >
-              <dt-stack gap="450">
+              <dt-stack gap="150">
                 <dtc-option-bar-member-group
                   :component="component"
                   :control-selector="(prop, value) => getBindingControls(prop, value, 'null')"
@@ -112,7 +112,7 @@
               v-if="info.slots?.length"
               gap="300"
             >
-              <dt-stack gap="450">
+              <dt-stack gap="150">
                 <dtc-option-bar-member-group
                   :component="component"
                   :control-selector="getSlotControls"

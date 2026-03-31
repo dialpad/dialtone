@@ -33,8 +33,8 @@ The component supports six different animation modes:
   />
 </dt-text>
 '>
-  <dt-stack gap="500" align="center" class="d-hmn84">
-    <dt-stack direction="row" gap="400">
+  <dt-stack gap="200" align="center" class="d-hmn84">
+    <dt-stack direction="row" gap="100">
       <dt-button
         v-for="mode in animationModes"
         :key="mode"
@@ -70,7 +70,7 @@ The component supports six different animation modes:
   />
 </dt-text>
 '>
-  <dt-stack gap="500">
+  <dt-stack gap="200">
     <dt-segmented-control :size="100" v-model="selected" aria-label="Speed Control">
       <dt-segmented-control-item  v-dt-tooltip="'Near-instant'" value="100" :selected="selected === '100'">100</dt-segmented-control-item>
       <dt-segmented-control-item  v-dt-tooltip="'Fast'" value="200" :selected="selected === '200'">200</dt-segmented-control-item>
@@ -107,8 +107,8 @@ Take full control of the animation lifecycle:
   :auto-start="false"
 />
 '>
-  <dt-stack gap="500" align="center">
-    <dt-stack direction="row" gap="300">
+  <dt-stack gap="200" align="center">
+    <dt-stack direction="row" gap="100">
       <dt-button :size="100" kind="muted" importance="outlined" @click="manualDemoRef.start()">Start</dt-button>
       <dt-button :size="100" kind="muted" importance="outlined" @click="manualDemoRef.pause()">Pause</dt-button>
       <dt-button :size="100" kind="muted" importance="outlined" @click="manualDemoRef.resume()">Resume</dt-button>

@@ -95,7 +95,7 @@ Use the `disabled` prop to disable both the Chip and its close button. This sets
 To truncate text, add `.d-truncate` to the content element, and set the width of the `.d-chip` element.
 
 <code-example>
-  <dt-chip content-class="d-w102">
+  <dt-chip content-class="d-w-150">
     <span class="d-chip__text d-truncate">Chip loooooong name</span>
   </dt-chip>
 </code-example>
@@ -103,7 +103,7 @@ To truncate text, add `.d-truncate` to the content element, and set the width of
 ### Sizes
 
 <code-example>
-  <dt-stack direction="row" gap="400" data-demo-wrapper>
+  <dt-stack direction="row" gap="100" data-demo-wrapper>
     <dt-chip :interactive="false" :size="100">Chip</dt-chip>
     <dt-chip :interactive="false" :size="200">Chip</dt-chip>
     <dt-chip :interactive="false">Chip</dt-chip>

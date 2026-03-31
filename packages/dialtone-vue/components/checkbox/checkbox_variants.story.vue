@@ -1,7 +1,7 @@
 <template>
   <dt-stack
     id="components-checkbox--variants-container"
-    gap="400"
+    gap="100"
   >
     <!-- Default -->
     <dt-checkbox

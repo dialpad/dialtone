@@ -11,7 +11,7 @@
       <div class="dialtone-header">
         <!-- <dialtone-logo /> -->
         <router-link
-          class="d-pl8"
+          class="d-pis-100"
           title="Dialtone homepage"
           to="/"
         >

@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+ 
 export default {
   default: {
     props: {
@@ -11,7 +12,7 @@ export default {
     },
     slots: {
       footer: {
-        initialValue: '<dt-button importance="clear">Cancel</dt-button><dt-button importance="primary" class="d-ml6">Confirm</dt-button>',
+        initialValue: '<dt-button importance="clear">Cancel</dt-button><dt-button importance="primary" class="d-mis-75">Confirm</dt-button>',
       },
     },
   },
@@ -29,7 +30,7 @@ export default {
     },
     slots: {
       footer: {
-        initialValue: '<dt-button importance="clear">Cancel</dt-button><dt-button kind="danger" importance="primary" class="d-ml6">Confirm</dt-button>',
+        initialValue: '<dt-button importance="clear">Cancel</dt-button><dt-button kind="danger" importance="primary" class="d-mis-75">Confirm</dt-button>',
       },
     },
   },
