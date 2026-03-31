@@ -364,10 +364,6 @@ function handleBlurEvent () {
   }
 
   // ─── State Modifiers ───
-  &--active {
-    // Active state handled via &__indicator selector above
-  }
-
   &--disabled {
     cursor: default;
     opacity: 0.3;
