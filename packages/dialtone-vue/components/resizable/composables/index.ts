@@ -49,5 +49,9 @@ export type { ResizableKeyboardOptions } from './useResizableKeyboard';
 // Edit mode + announcements
 export { useResizableEditMode } from './useResizableEditMode';
 
+// Peek overlay
+export { useResizablePeek } from './useResizablePeek';
+export type { UseResizablePeekOptions, UseResizablePeekReturn } from './useResizablePeek';
+
 // Re-export types for convenience
 export type * from '../resizable_constants';
