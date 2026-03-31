@@ -120,6 +120,8 @@ const containerRef = ref(null);
 // ── Reactive layout controller ──────────────────────────────────────────────
 const currentDirection = computed(() => props.direction);
 
+// Note: storageKey and storage are captured at mount time. If they need to
+// change dynamically in the future, useResizableGroup should accept refs.
 const group = useResizableGroup({
   storageKey: props.storageKey ?? null,
   direction: currentDirection,
@@ -141,6 +143,9 @@ const state = reactive({
 const resizeHandler = useResizeHandling(props.direction, () => state.containerSize);
 
 // Sync state.panels / containerSize with useResizableGroup's computed values.
+// Custom comparator avoids deep: true watch — panel objects change identity on
+// every computeLayout recompute, but we only propagate when layout-affecting
+// fields actually change. This prevents unnecessary downstream re-renders.
 function panelsChanged (a, b) {
   if (a.length !== b.length) return true;
   for (let i = 0; i < a.length; i++) {

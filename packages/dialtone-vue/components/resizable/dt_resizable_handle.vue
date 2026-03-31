@@ -57,7 +57,7 @@ const props = defineProps({
   beforePanelId: { type: String, default: null },
   afterPanelId: { type: String, default: null },
   disabled: { type: Boolean, default: false },
-  class: { type: String, default: '' },
+  class: { type: [String, Object, Array], default: '' },
   disableResetOnDoubleClick: { type: Boolean, default: false },
   /** @values 'both', 'before', 'after', 'all' */
   resetBehavior: { type: String, default: 'both' },
@@ -362,12 +362,12 @@ function handleBlurEvent () {
   }
 
   &:focus-visible {
-    outline: 2px solid var(--dt-color-focus-ring);
-    outline-offset: 2px;
+    outline: var(--dt-size-200) solid var(--dt-color-focus-ring);
+    outline-offset: var(--dt-size-200);
     background-color: var(--dt-color-focus-ring);
     box-shadow:
-      0 0 0 2px var(--dt-color-surface-primary),
-      0 0 0 4px var(--dt-color-focus-ring);
+      0 0 0 var(--dt-size-200) var(--dt-color-surface-primary),
+      0 0 0 var(--dt-size-300) var(--dt-color-focus-ring);
   }
 }
 </style>
