@@ -305,6 +305,38 @@ describe('DtComboboxMultiSelect Tests', () => {
     });
   });
 
+  describe('Duplicate Items Tests', () => {
+    beforeEach(async () => {
+      await wrapper.setProps({ selectedItems: ['item1', 'item1', 'item1'] });
+      await flushPromises();
+      _setChildWrappers();
+    });
+
+    it('should render a chip for each duplicate item', () => {
+      expect(chips.length).toBe(3);
+    });
+
+    it('should return distinct elements from getChips for duplicates', () => {
+      const chipElements = wrapper.vm.getChips();
+      const unique = new Set(chipElements);
+      expect(unique.size).toBe(3);
+    });
+  });
+
+  describe('Bulk Update Tests', () => {
+    it('should return chips in selectedItems order after bulk update', async () => {
+      await wrapper.setProps({ selectedItems: ['alpha', 'beta', 'gamma'] });
+      await flushPromises();
+      _setChildWrappers();
+
+      const chipElements = wrapper.vm.getChips();
+      const labels = chipElements.map(
+        el => el.querySelector('.d-chip__label')?.textContent?.trim(),
+      );
+      expect(labels).toEqual(['alpha', 'beta', 'gamma']);
+    });
+  });
+
   describe('Validation Tests', () => {
     beforeEach(async () => {
       await wrapper.setProps({

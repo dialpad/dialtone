@@ -1,3 +1,67 @@
+# [9.176.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.175.2...dialtone/v9.176.0) (2026-03-31)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DLT-3190 replace custom JSON-to-markdown converter with @tiptap/static-renderer ([#1148](https://github.com/dialpad/dialtone/issues/1148)) ([9629c70](https://github.com/dialpad/dialtone/commit/9629c70e8898cac5d79df0229f83f3671d739b83))
+
+
+### Documentation
+
+* DLT-3151 blog post for ui-kits migration and script ([#1156](https://github.com/dialpad/dialtone/issues/1156)) ([069ad3c](https://github.com/dialpad/dialtone/commit/069ad3cbf2c9fd2e9b56f8db8b05be41121323ce))
+* **Editor:** DLT-3050 updated editor docs with recent changes ([#1139](https://github.com/dialpad/dialtone/issues/1139)) ([04bfabb](https://github.com/dialpad/dialtone/commit/04bfabbd9e01ca47ba0fe236d8e3af74e6747cdd))
+* **Icons:** DLT-3220 update contributing and add claude rules and skill ([#1151](https://github.com/dialpad/dialtone/issues/1151)) ([296a83d](https://github.com/dialpad/dialtone/commit/296a83d082ba6d12d69a7592b8d89b988d60804c))
+
+
+### Features
+
+* **Dialtone Cli,dialtone Query Core:** DLT-3163 extract query core and add CLI ([#1142](https://github.com/dialpad/dialtone/issues/1142)) ([65090e6](https://github.com/dialpad/dialtone/commit/65090e6dc215084677e05fa50eb1ba0de72c61d8))
+* DLT-3049 add code review rules, skill, agent, and command ([#1154](https://github.com/dialpad/dialtone/issues/1154)) ([6bdef46](https://github.com/dialpad/dialtone/commit/6bdef465e50017369a5d94bbcde8b3c077eb5777))
+* **Icons:** DLT-3219 align star/sparkle icons with dp brand star ([#1152](https://github.com/dialpad/dialtone/issues/1152)) ([ef39afc](https://github.com/dialpad/dialtone/commit/ef39afc90c1d77330c121b3a010b7b0b959beddb))
+
+## [9.175.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.175.1...dialtone/v9.175.2) (2026-03-24)
+
+
+### Bug Fixes
+
+* **Input:** DP-180970 ime composition bug ([#1146](https://github.com/dialpad/dialtone/issues/1146)) ([af6afdd](https://github.com/dialpad/dialtone/commit/af6afddfa04a13bf63885972797bece8815e2a5d))
+
+## [9.175.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.175.0...dialtone/v9.175.1) (2026-03-20)
+
+
+### Bug Fixes
+
+* **Input:** revert DP-173960 handle composition events ([#1082](https://github.com/dialpad/dialtone/issues/1082)) ([ba81d87](https://github.com/dialpad/dialtone/commit/ba81d87b1a2e64672aab5d22d2b8f4e3774994b2))
+
+# [9.175.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.174.1...dialtone/v9.175.0) (2026-03-20)
+
+
+### Features
+
+* **Editor:** DP-181154 replacing 0 width tables with full width ([#1145](https://github.com/dialpad/dialtone/issues/1145)) ([6aa8a1d](https://github.com/dialpad/dialtone/commit/6aa8a1d0a06531a5abf2691138b331c2d241702e))
+
+## [9.174.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.174.0...dialtone/v9.174.1) (2026-03-19)
+
+
+### Bug Fixes
+
+* **Combobox Multi Select:** DP-180791 cursor position ([#1141](https://github.com/dialpad/dialtone/issues/1141)) ([bbf4cd1](https://github.com/dialpad/dialtone/commit/bbf4cd11c91a7e06f40f3bb9fea23171f52e4945))
+
+# [9.174.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.173.0...dialtone/v9.174.0) (2026-03-19)
+
+
+### Bug Fixes
+
+* **Deprecated Component:** NO-JIRA fix deprecated component regex ([#1140](https://github.com/dialpad/dialtone/issues/1140)) ([6d1a76f](https://github.com/dialpad/dialtone/commit/6d1a76fc672335eac2172e9a1323f9752c22db07))
+* **Editor:** NO-JIRA empty div issue with nested block elements ([#1121](https://github.com/dialpad/dialtone/issues/1121)) ([a9bb763](https://github.com/dialpad/dialtone/commit/a9bb763285440a7c8352767eee6980c1b44b0942))
+* **Workflow:** SEC-2156 claude-review ([#1138](https://github.com/dialpad/dialtone/issues/1138)) ([d8483ba](https://github.com/dialpad/dialtone/commit/d8483bad8d99dc962558be00aa3b15e82bfd0b3e))
+
+
+### Features
+
+* **Dialtone Docs:** DDT-1622 add AI documentation package — content, validation, and templates ([#1051](https://github.com/dialpad/dialtone/issues/1051)) ([633c331](https://github.com/dialpad/dialtone/commit/633c331cb2d2e45a7010721b9d2834ea8bd19654))
+* DLT-3144 support truncation within message input bottom btns ([#1134](https://github.com/dialpad/dialtone/issues/1134)) ([22175f5](https://github.com/dialpad/dialtone/commit/22175f59d8b6e270f30992a31cd8604aaeed4984))
+
 # [9.173.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.172.0...dialtone/v9.173.0) (2026-03-17)
 
 
