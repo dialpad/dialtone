@@ -734,6 +734,10 @@
           "link": "/components/radio-group.html"
         },
         {
+          "text": "Resizable",
+          "link": "/components/resizable.html"
+        },
+        {
           "text": "Rich Text Editor",
           "link": "/components/rich-text-editor.html"
         },

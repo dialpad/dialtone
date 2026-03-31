@@ -3,6 +3,7 @@ export * from './common/mixins';
 export * from './common/constants';
 export { validationMessageValidator } from './common/validators';
 export * from './common/utils';
+export * from './common/composables';
 export * from './common/dates';
 export * from './common/emoji';
 
@@ -48,6 +49,7 @@ export * from './components/progress_circle';
 export * from './components/presence';
 export * from './components/radio';
 export * from './components/radio_group';
+export * from './components/resizable';
 export * from './components/rich_text_editor';
 export * from './components/root_layout';
 export * from './components/scroller';
