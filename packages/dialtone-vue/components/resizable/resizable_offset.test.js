@@ -108,18 +108,12 @@ describe('V6: Offset Positioning', () => {
   });
 
   describe('Offset direction prop', () => {
-    it('should accept start direction', () => {
-      _setWrapper({ offsetElement: '#toolbar', offsetDirection: 'start' });
-      expect(wrapper.find('.dt-resizable-handle').exists()).toBe(true);
-    });
-
-    it('should accept end direction', () => {
-      _setWrapper({ offsetElement: '#toolbar', offsetDirection: 'end' });
-      expect(wrapper.find('.dt-resizable-handle').exists()).toBe(true);
-    });
-
-    it('should accept both direction', () => {
-      _setWrapper({ offsetElement: '#toolbar', offsetDirection: 'both' });
+    it.each([
+      ['start'],
+      ['end'],
+      ['both'],
+    ])('should accept %s direction', (direction) => {
+      _setWrapper({ offsetElement: '#toolbar', offsetDirection: direction });
       expect(wrapper.find('.dt-resizable-handle').exists()).toBe(true);
     });
   });

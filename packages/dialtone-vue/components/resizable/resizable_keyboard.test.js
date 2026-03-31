@@ -150,19 +150,13 @@ describe('V4: Keyboard Accessibility', () => {
   });
 
   describe('Keyboard increment constants', () => {
-    it('should define fine increment as 1px', async () => {
+    it.each([
+      ['fine', 1],
+      ['normal', 8],
+      ['large', 24],
+    ])('KEYBOARD_INCREMENTS.%s equals %d', async (key, expected) => {
       const { KEYBOARD_INCREMENTS } = await import('./composables/useResizableKeyboard');
-      expect(KEYBOARD_INCREMENTS.fine).toBe(1);
-    });
-
-    it('should define normal increment as 8px', async () => {
-      const { KEYBOARD_INCREMENTS } = await import('./composables/useResizableKeyboard');
-      expect(KEYBOARD_INCREMENTS.normal).toBe(8);
-    });
-
-    it('should define large increment as 24px', async () => {
-      const { KEYBOARD_INCREMENTS } = await import('./composables/useResizableKeyboard');
-      expect(KEYBOARD_INCREMENTS.large).toBe(24);
+      expect(KEYBOARD_INCREMENTS[key]).toBe(expected);
     });
   });
 });
