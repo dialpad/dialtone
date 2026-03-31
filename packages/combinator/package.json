@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-combinator",
-  "version": "1.2.0-next.2",
+  "version": "1.2.0-next.3",
   "description": "Dialtone vue component combinator",
   "scripts": {
     "lint": "eslint --fix src",

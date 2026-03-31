@@ -1,3 +1,16 @@
+# [1.2.0-next.3](https://github.com/dialpad/dialtone/compare/combinator/v1.2.0-next.2...combinator/v1.2.0-next.3) (2026-03-31)
+
+
+### Documentation
+
+* **Components:** DLT-3178 DLT-3182 unify code examples into single code-example component ([#1147](https://github.com/dialpad/dialtone/issues/1147)) ([d0b6e14](https://github.com/dialpad/dialtone/commit/d0b6e14df5f306fe7caa7eb4b56ecc02a9cd1a9c))
+* **Dialtone Vue:** DLT-3226 update documentation and consuming code to numeric size scale ([#1158](https://github.com/dialpad/dialtone/issues/1158)) ([149c763](https://github.com/dialpad/dialtone/commit/149c7636987aef44ff33ae19b63c0efd334dc187))
+
+
+### Features
+
+* **Dialtone Css, Dialtone Tokens, Dialtone Vue:** DLT-3197 DLT-3198 DLT-3199 DLT-3200 DLT-3201 DLT-3202 DLT-3203 DLT-3204 DLT-3205 DLT-3206 DLT-3207 DLT-3208 DLT-3209 DLT-3210 DLT-3211 token-stop utility classes, migration tooling, and documentation ([#1150](https://github.com/dialpad/dialtone/issues/1150)) ([6237b84](https://github.com/dialpad/dialtone/commit/6237b84b901aed6e3e2bcb7d0216feac218eebad))
+
 # [1.2.0-next.2](https://github.com/dialpad/dialtone/compare/combinator/v1.2.0-next.1...combinator/v1.2.0-next.2) (2026-03-24)
 
 
