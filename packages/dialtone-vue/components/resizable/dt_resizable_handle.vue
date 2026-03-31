@@ -9,20 +9,25 @@
       {
         'dt-resizable-handle--active': isActive,
         'dt-resizable-handle--disabled': isDisabled,
+        'dt-resizable-handle--edit-mode': isEditMode,
       },
     ]"
     :style="handleStyles"
     :data-handle-id="handleId"
-    tabindex="-1"
+    :tabindex="isEditMode ? '0' : '-1'"
     role="separator"
     :aria-orientation="direction === 'row' ? 'vertical' : 'horizontal'"
     :aria-label="ariaLabel"
     :aria-valuenow="ariaValueNow"
     :aria-valuemin="ariaValueMin"
     :aria-valuemax="ariaValueMax"
+    :aria-describedby="isEditMode ? 'dt-resize-instructions' : undefined"
     @mousedown="handleMouseDown"
     @touchstart="handleTouchStart"
     @dblclick="handleDoubleClick"
+    @keydown="handleKeyDown"
+    @focus="handleFocusEvent"
+    @blur="handleBlurEvent"
   >
     <div class="dt-resizable-handle__indicator" />
   </div>
@@ -36,12 +41,16 @@ import {
   RESIZABLE_DIRECTION_KEY,
   RESIZABLE_CONTAINER_SIZE_KEY,
   RESIZABLE_ACTIVE_HANDLE_KEY,
+  RESIZABLE_IS_EDIT_MODE_KEY,
   RESIZABLE_START_RESIZE_KEY,
   RESIZABLE_RESET_PANELS_KEY,
   RESIZABLE_REGISTER_HANDLE_KEY,
   RESIZABLE_UNREGISTER_HANDLE_KEY,
+  RESIZABLE_REGISTER_EDIT_HANDLE_KEY,
+  RESIZABLE_UNREGISTER_EDIT_HANDLE_KEY,
 } from './resizable_constants';
 import { pixelsToPercentage } from './resizable_utils';
+import { useResizableKeyboard } from './composables/useResizableKeyboard';
 
 const props = defineProps({
   /** Panel ID before this handle — overrides layout index when provided */
@@ -96,10 +105,16 @@ const activeHandleId = inject(
   RESIZABLE_ACTIVE_HANDLE_KEY,
   computed(() => undefined),
 );
+const isEditMode = inject(
+  RESIZABLE_IS_EDIT_MODE_KEY,
+  computed(() => false),
+);
 const startResize = inject(RESIZABLE_START_RESIZE_KEY, () => {});
 const resetPanels = inject(RESIZABLE_RESET_PANELS_KEY, () => {});
 const registerHandle = inject(RESIZABLE_REGISTER_HANDLE_KEY, () => 0);
 const unregisterHandle = inject(RESIZABLE_UNREGISTER_HANDLE_KEY, () => {});
+const registerEditHandle = inject(RESIZABLE_REGISTER_EDIT_HANDLE_KEY, () => {});
+const unregisterEditHandle = inject(RESIZABLE_UNREGISTER_EDIT_HANDLE_KEY, () => {});
 
 // ── Handle registration ──────────────────────────────────────────────────────
 
@@ -216,15 +231,40 @@ watch(
 
 const handleElement = ref(null);
 
+// ── Keyboard resize composable ─────────────────────────────────────────────
+
+const keyboard = useResizableKeyboard({
+  panels,
+  direction: directionRef,
+  containerSize: containerSizeRef,
+  beforePanelId: resolvedBeforePanelId,
+  afterPanelId: resolvedAfterPanelId,
+  handleElement,
+  onResize (beforeId, beforeSize, afterId, afterSize) {
+    // Keyboard resize updates panel state in-place; storage save can be
+    // deferred to blur/exit-edit-mode for now.
+    void beforeId; void beforeSize; void afterId; void afterSize;
+  },
+});
+
 // ── Lifecycle ────────────────────────────────────────────────────────────────
 
 onMounted(() => {
   autoIndex.value = registerHandle(currentInstance);
   updateAriaValues();
+
+  // Register this handle's DOM element for edit mode focus management
+  if (handleElement.value) {
+    registerEditHandle(handleElement.value);
+  }
 });
 
 onUnmounted(() => {
   unregisterHandle(currentInstance);
+
+  if (handleElement.value) {
+    unregisterEditHandle(handleElement.value);
+  }
 
   if (ariaUpdateTimeout) {
     clearTimeout(ariaUpdateTimeout);
@@ -255,6 +295,18 @@ function handleDoubleClick () {
   if (!beforeId || !afterId) return;
 
   resetPanels(beforeId, afterId, props.resetBehavior);
+}
+
+function handleKeyDown (event) {
+  keyboard.handleKeyDown(event);
+}
+
+function handleFocusEvent () {
+  keyboard.handleFocus();
+}
+
+function handleBlurEvent () {
+  keyboard.handleBlur();
 }
 </script>
 

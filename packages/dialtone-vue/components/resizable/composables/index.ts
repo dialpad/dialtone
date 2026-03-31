@@ -42,5 +42,12 @@ export { useResizableDrag, type DragState, type UseResizableDragOptions } from '
 export { computeLayout } from './computeLayout';
 export { calculateConstraintHierarchy } from './constraintResolver';
 
+// Keyboard accessibility
+export { useResizableKeyboard, KEYBOARD_INCREMENTS } from './useResizableKeyboard';
+export type { ResizableKeyboardOptions } from './useResizableKeyboard';
+
+// Edit mode + announcements
+export { useResizableEditMode } from './useResizableEditMode';
+
 // Re-export types for convenience
 export type * from '../resizable_constants';

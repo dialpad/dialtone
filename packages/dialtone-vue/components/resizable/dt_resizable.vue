@@ -13,6 +13,7 @@
       :panels="state.panels"
       :direction="currentDirection"
       :is-resizing="state.isResizing"
+      :space-allocation-strategy="props.spaceAllocationStrategy"
       :resize-panel="resizePanel"
       :collapse-panel="collapsePanel"
       :start-resize="startResize"
@@ -60,6 +61,7 @@ import {
   useResizableGroup,
   useResizeHandling,
   checkAutoCollapseRules,
+  useResizableEditMode,
 } from './composables';
 import { useResizableDrag, findPanelsForHandle } from './composables/useResizableDrag';
 
@@ -76,6 +78,23 @@ const props = defineProps({
   class: {
     type: [String, Object, Array],
     default: '',
+  },
+  /**
+   * Panel configurations array. When provided, panels are initialized
+   * from this array instead of registering via child DtResizablePanel components.
+   */
+  panels: {
+    type: Array,
+    default: () => [],
+  },
+  /**
+   * Strategy for redistributing space when panels open/close.
+   * @values 'proportional', 'preserve-manual'
+   */
+  spaceAllocationStrategy: {
+    type: String,
+    default: 'proportional',
+    validator: (val) => ['proportional', 'preserve-manual'].includes(val),
   },
   /** Rules defining which panels collapse first when space is constrained */
   collapseRules: {
@@ -115,67 +134,34 @@ const state = reactive({
 // Single resizeHandler instance for drag operations (shared with panel controls)
 const resizeHandler = useResizeHandling(props.direction, () => state.containerSize);
 
-// Keep state.panels and state.containerSize in sync with the computed values
-// produced by useResizableGroup. Any layout recompute propagates here.
+// Sync state.panels / containerSize with useResizableGroup's computed values.
 function panelsChanged (a, b) {
   if (a.length !== b.length) return true;
   for (let i = 0; i < a.length; i++) {
-    if (
-      a[i].id !== b[i].id ||
-      a[i].pixelSize !== b[i].pixelSize ||
-      a[i].collapsed !== b[i].collapsed ||
-      a[i].locked !== b[i].locked
-    )
+    const ai = a[i]; const bi = b[i];
+    if (ai.id !== bi.id || ai.pixelSize !== bi.pixelSize || ai.collapsed !== bi.collapsed || ai.locked !== bi.locked) {
       return true;
+    }
   }
   return false;
 }
 
 let lastPanels = [];
-watch(
-  group.syncedPanels,
-  panels => {
-    if (panelsChanged(panels, lastPanels)) {
-      lastPanels = panels;
-      state.panels = panels;
-    }
-  },
-  { immediate: true, deep: false, flush: 'post' },
-);
-watch(
-  group.containerSize,
-  size => {
-    state.containerSize = size;
-  },
-  { immediate: true },
-);
+watch(group.syncedPanels, panels => {
+  if (panelsChanged(panels, lastPanels)) { lastPanels = panels; state.panels = panels; }
+}, { immediate: true, deep: false, flush: 'post' });
+watch(group.containerSize, size => { state.containerSize = size; }, { immediate: true });
 
 const isInitializing = group.isInitializing;
+const registerPanel = (config) => group.registerPanel(config);
+const unregisterPanel = (id) => group.unregisterPanel(id);
+const saveToStorage = (panels) => group.saveCurrentLayout(panels);
 
-// Delegates to the composable's panel registry
-function registerPanel (config) {
-  group.registerPanel(config);
-}
-function unregisterPanel (id) {
-  group.unregisterPanel(id);
-}
-
-/**
- * Force-read the container element's current size.
- *
- * Kept for useResizablePanelControls, which calls this after imperative panel
- * mutations (resizePanel, collapsePanel). The ResizeObserver in useResizableGroup
- * also writes to the same ref, but it fires asynchronously after layout. This
- * synchronous write ensures the layout computed re-runs immediately.
- */
+// Force-read container size synchronously (for imperative mutations)
 function updateContainerSize () {
   if (!containerRef.value) return;
-  const size = props.direction === 'row' ? containerRef.value.clientWidth : containerRef.value.clientHeight;
-  group.containerSize.value = size;
-}
-
-function saveToStorage (panels) {
-  group.saveCurrentLayout(panels);
+  group.containerSize.value = props.direction === 'row'
+    ? containerRef.value.clientWidth : containerRef.value.clientHeight;
 }
 
 // Panel control operations - uses shared resizeHandler from Integration layer
@@ -193,9 +179,7 @@ const {
   containerRef,
   resizeHandler,
   onPanelResize: (panelId, size) => emit('panel-resize', panelId, size),
-  onPanelCollapse: (panelId, collapsed) => {
-    emit('panel-collapse', panelId, collapsed);
-  },
+  onPanelCollapse: (panelId, collapsed) => emit('panel-collapse', panelId, collapsed),
   updateContainerSize,
   saveToStorage,
   isInitializing,
@@ -207,47 +191,29 @@ function resetPanels (beforePanelId, afterPanelId, behavior = 'all') {
   group.clearSavedState();
 }
 
-/**
- * Process auto-collapse/expand based on both container-width and panel-size triggers.
- */
+// Process auto-collapse/expand based on both container-width and panel-size triggers.
 function processAutoCollapse () {
   processAutoCollapseExpand();
-
-  if (props.collapseRules && props.collapseRules.length > 0) {
-    const panelsToCollapse = checkAutoCollapseRules(state.panels, props.collapseRules, state.containerSize);
-
-    if (panelsToCollapse.length > 0) {
-      const panelId = panelsToCollapse[0];
-      const panel = state.panels.find(p => p.id === panelId);
-      if (panel && !panel.collapsed) {
-        collapsePanel(panelId, true);
-      }
-    }
-  }
+  if (!props.collapseRules?.length) return;
+  const panelsToCollapse = checkAutoCollapseRules(state.panels, props.collapseRules, state.containerSize);
+  if (panelsToCollapse.length === 0) return;
+  const panel = state.panels.find(p => p.id === panelsToCollapse[0]);
+  if (panel && !panel.collapsed) collapsePanel(panelsToCollapse[0], true);
 }
 
-// ── Edit mode stub (V4 — keyboard accessibility) ────────────────────────────
-// Provide a static false for isEditMode so child handles can inject it.
-// V4 will replace this with useResizableEditMode().
-const isEditMode = computed(() => false);
-const editModeRegisterHandle = () => {};
-const editModeUnregisterHandle = () => {};
+// ── Edit mode (V4 — keyboard accessibility) ──────────────────────────────
+const {
+  isEditMode,
+  registerHandle: editModeRegisterHandle,
+  unregisterHandle: editModeUnregisterHandle,
+} = useResizableEditMode();
 
-/**
- * Handle registry — ordered list of handle instance references.
- */
+// Handle registry
 const handleRegistryList = [];
-
-function registerHandle (handleInstance) {
-  handleRegistryList.push(handleInstance);
-  return handleRegistryList.length - 1;
-}
-
-function unregisterHandle (handleInstance) {
-  const index = handleRegistryList.indexOf(handleInstance);
-  if (index !== -1) {
-    handleRegistryList.splice(index, 1);
-  }
+function registerHandle (inst) { handleRegistryList.push(inst); return handleRegistryList.length - 1; }
+function unregisterHandle (inst) {
+  const idx = handleRegistryList.indexOf(inst);
+  if (idx !== -1) handleRegistryList.splice(idx, 1);
 }
 
 // ── Per-group drag composable ─────────────────────────────────────────────────
@@ -263,59 +229,30 @@ const drag = useResizableDrag({
     emit('resize-start', handleId);
   },
   onDragEnd (beforePanelId, afterPanelId, beforeSize, afterSize, sizesChanged) {
-    const beforePanel = state.panels.find(p => p.id === beforePanelId);
-    const afterPanel = state.panels.find(p => p.id === afterPanelId);
-
-    if (sizesChanged && beforePanel && afterPanel) {
-      beforePanel.pixelSize = Math.round(beforeSize);
-      afterPanel.pixelSize = Math.round(afterSize);
-
+    const bp = state.panels.find(p => p.id === beforePanelId);
+    const ap = state.panels.find(p => p.id === afterPanelId);
+    if (sizesChanged && bp && ap) {
+      bp.pixelSize = Math.round(beforeSize);
+      ap.pixelSize = Math.round(afterSize);
       if (state.containerSize > 0) {
-        beforePanel.manualTargetRatio = beforePanel.pixelSize / state.containerSize;
-        afterPanel.manualTargetRatio = afterPanel.pixelSize / state.containerSize;
-        group.setManualTargetRatio(beforePanelId, beforePanel.manualTargetRatio);
-        group.setManualTargetRatio(afterPanelId, afterPanel.manualTargetRatio);
+        bp.manualTargetRatio = bp.pixelSize / state.containerSize;
+        ap.manualTargetRatio = ap.pixelSize / state.containerSize;
+        group.setManualTargetRatio(beforePanelId, bp.manualTargetRatio);
+        group.setManualTargetRatio(afterPanelId, ap.manualTargetRatio);
       }
-
-      beforePanel.manualTargetSize = beforePanel.pixelSize;
-      afterPanel.manualTargetSize = afterPanel.pixelSize;
+      bp.manualTargetSize = bp.pixelSize;
+      ap.manualTargetSize = ap.pixelSize;
     }
-
     const handleId = drag.dragState.handleId ?? `${beforePanelId}:${afterPanelId}`;
-
-    state.isResizing = false;
-    state.activeHandleId = undefined;
-    state.activeCursorPosition = 0;
-
-    if (sizesChanged) {
-      emit('resize-end', handleId);
-      saveToStorage(state.panels);
-      processAutoCollapse();
-    }
+    state.isResizing = false; state.activeHandleId = undefined; state.activeCursorPosition = 0;
+    if (sizesChanged) { emit('resize-end', handleId); saveToStorage(state.panels); processAutoCollapse(); }
   },
 });
 
-/**
- * Start a resize drag for the given handle.
- */
-function startResize (handleId) {
-  drag.startDrag(handleId);
-}
-
-/**
- * Cancel any active resize drag. Exposed via scoped slot for consumers.
- */
-function stopResize () {
-  drag.cancelDrag();
-}
-
-function savePanelsToStorage () {
-  saveToStorage(state.panels);
-}
-
-function emitPanelResize (panelId, size) {
-  emit('panel-resize', panelId, size);
-}
+function startResize (handleId) { drag.startDrag(handleId); }
+function stopResize () { drag.cancelDrag(); }
+function savePanelsToStorage () { saveToStorage(state.panels); }
+function emitPanelResize (panelId, size) { emit('panel-resize', panelId, size); }
 
 // Viewport resize handling
 watch(group.containerSize, () => {
@@ -325,65 +262,56 @@ watch(group.containerSize, () => {
   }
 });
 
-// ── Reset request listener (used by edit mode and programmatic control) ─────
+// Reset request listener (edit mode + programmatic control)
 let resetRequestHandler = null;
-
 onMounted(() => {
-  if (containerRef.value) {
-    resetRequestHandler = (event) => {
-      const customEvent = event;
-
-      if (customEvent.detail.resetType === 'all') {
-        resetPanels('', '', 'all');
-      } else if (customEvent.detail.resetType === 'current' && customEvent.detail.handleElement) {
-        const handleElement = customEvent.detail.handleElement;
-        const handleId = handleElement.getAttribute('data-handle-id');
-
-        if (handleId) {
-          const { beforePanel, afterPanel } = findPanelsForHandle(handleId, state.panels);
-          if (beforePanel && afterPanel) {
-            resetPanels(beforePanel.id, afterPanel.id, 'both');
-          }
-        }
-      }
-    };
-
-    containerRef.value.addEventListener('resizable-reset-request', resetRequestHandler);
-  }
+  if (!containerRef.value) return;
+  resetRequestHandler = (event) => {
+    const { resetType, handleElement } = event.detail;
+    if (resetType === 'all') { resetPanels('', '', 'all'); return; }
+    if (resetType !== 'current' || !handleElement) return;
+    const handleId = handleElement.getAttribute('data-handle-id');
+    if (!handleId) return;
+    const { beforePanel, afterPanel } = findPanelsForHandle(handleId, state.panels);
+    if (beforePanel && afterPanel) resetPanels(beforePanel.id, afterPanel.id, 'both');
+  };
+  containerRef.value.addEventListener('resizable-reset-request', resetRequestHandler);
 });
 
 onUnmounted(() => {
   group.disconnectObserver();
   drag.cancelDrag();
-
   if (resetRequestHandler && containerRef.value) {
     containerRef.value.removeEventListener('resizable-reset-request', resetRequestHandler);
     resetRequestHandler = null;
   }
 });
 
-// Provide values for child components using typed InjectionKeys
-provide(RESIZABLE_LAYOUT_KEY, group.layout);
-provide(RESIZABLE_PANELS_KEY, computed(() => state.panels));
-provide(RESIZABLE_DIRECTION_KEY, currentDirection);
-provide(RESIZABLE_CONTAINER_SIZE_KEY, computed(() => state.containerSize));
-provide(RESIZABLE_CONTAINER_ELEMENT_KEY, computed(() => containerRef.value));
-provide(RESIZABLE_IS_RESIZING_KEY, computed(() => state.isResizing));
-provide(RESIZABLE_ACTIVE_HANDLE_KEY, computed(() => state.activeHandleId));
-provide(RESIZABLE_ACTIVE_CURSOR_POSITION_KEY, computed(() => state.activeCursorPosition ?? 0));
-provide(RESIZABLE_IS_EDIT_MODE_KEY, isEditMode);
-provide(RESIZABLE_IS_INITIALIZING_KEY, computed(() => isInitializing.value));
-provide(RESIZABLE_START_RESIZE_KEY, (handleId) => startResize(handleId));
-provide(RESIZABLE_RESET_PANELS_KEY, resetPanels);
-provide(RESIZABLE_REGISTER_HANDLE_KEY, registerHandle);
-provide(RESIZABLE_UNREGISTER_HANDLE_KEY, unregisterHandle);
-provide(RESIZABLE_REGISTER_PANEL_KEY, registerPanel);
-provide(RESIZABLE_UNREGISTER_PANEL_KEY, unregisterPanel);
-provide(RESIZABLE_REGISTER_EDIT_HANDLE_KEY, editModeRegisterHandle);
-provide(RESIZABLE_UNREGISTER_EDIT_HANDLE_KEY, editModeUnregisterHandle);
-provide(RESIZABLE_SAVE_TO_STORAGE_KEY, savePanelsToStorage);
-provide(RESIZABLE_COLLAPSE_PANEL_KEY, collapsePanel);
-provide(RESIZABLE_EMIT_PANEL_RESIZE_KEY, emitPanelResize);
+// Provide/inject wiring for child components
+const provideMap = [
+  [RESIZABLE_LAYOUT_KEY, group.layout],
+  [RESIZABLE_PANELS_KEY, computed(() => state.panels)],
+  [RESIZABLE_DIRECTION_KEY, currentDirection],
+  [RESIZABLE_CONTAINER_SIZE_KEY, computed(() => state.containerSize)],
+  [RESIZABLE_CONTAINER_ELEMENT_KEY, computed(() => containerRef.value)],
+  [RESIZABLE_IS_RESIZING_KEY, computed(() => state.isResizing)],
+  [RESIZABLE_ACTIVE_HANDLE_KEY, computed(() => state.activeHandleId)],
+  [RESIZABLE_ACTIVE_CURSOR_POSITION_KEY, computed(() => state.activeCursorPosition ?? 0)],
+  [RESIZABLE_IS_EDIT_MODE_KEY, isEditMode],
+  [RESIZABLE_IS_INITIALIZING_KEY, computed(() => isInitializing.value)],
+  [RESIZABLE_START_RESIZE_KEY, (handleId) => startResize(handleId)],
+  [RESIZABLE_RESET_PANELS_KEY, resetPanels],
+  [RESIZABLE_REGISTER_HANDLE_KEY, registerHandle],
+  [RESIZABLE_UNREGISTER_HANDLE_KEY, unregisterHandle],
+  [RESIZABLE_REGISTER_PANEL_KEY, registerPanel],
+  [RESIZABLE_UNREGISTER_PANEL_KEY, unregisterPanel],
+  [RESIZABLE_REGISTER_EDIT_HANDLE_KEY, editModeRegisterHandle],
+  [RESIZABLE_UNREGISTER_EDIT_HANDLE_KEY, editModeUnregisterHandle],
+  [RESIZABLE_SAVE_TO_STORAGE_KEY, savePanelsToStorage],
+  [RESIZABLE_COLLAPSE_PANEL_KEY, collapsePanel],
+  [RESIZABLE_EMIT_PANEL_RESIZE_KEY, emitPanelResize],
+];
+provideMap.forEach(([key, val]) => provide(key, val));
 
 // Expose methods for programmatic control
 defineExpose({
@@ -393,6 +321,8 @@ defineExpose({
   lockPanel,
   unlockPanel,
   state: readonly(state),
+  panelConfigs: computed(() => props.panels),
+  allocationStrategy: computed(() => props.spaceAllocationStrategy),
 });
 </script>
 
@@ -402,18 +332,5 @@ defineExpose({
   overflow: hidden;
   width: 100%;
   height: 100%;
-
-  &--row {
-    // Row direction is the default — panels positioned with left/right.
-  }
-
-  &--column {
-    // Column direction — panels positioned with top/bottom instead.
-  }
-
-  &--resizing {
-    // Applied during active drag — consumers can use this to disable
-    // pointer events on iframes or text selection on children.
-  }
 }
 </style>
