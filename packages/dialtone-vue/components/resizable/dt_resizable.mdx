@@ -51,7 +51,7 @@ import {
 ### Basic Usage
 
 ```html
-<dt-resizable direction="row">
+<dt-resizable>
   <dt-resizable-panel id="left">
     Left content
   </dt-resizable-panel>
@@ -79,7 +79,7 @@ import {
 ### With localStorage Persistence
 
 ```html
-<dt-resizable direction="row" storage-key="my-layout">
+<dt-resizable storage-key="my-layout">
   <dt-resizable-panel id="left">
     Left
   </dt-resizable-panel>
@@ -102,22 +102,42 @@ import {
 
 ### DtResizablePanel
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `id` | `string` | required | Unique panel identifier |
-| `initialSize` | `string` | — | Initial size (token or percentage, e.g. `"30p"`) |
-| `userMinSize` | `string` | — | Minimum size for user dragging |
-| `userMaxSize` | `string` | — | Maximum size for user dragging |
-| `resizable` | `boolean` | `true` | Whether the panel can be resized |
-| `collapsible` | `boolean` | `false` | Whether the panel can be collapsed |
-| `collapsed` | `boolean` | `false` | Initial collapsed state |
+<table>
+  <thead>
+    <tr>
+      <th>Prop</th>
+      <th>Type</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><code>id</code></td><td><code>string</code></td><td>required</td><td>Unique panel identifier</td></tr>
+    <tr><td><code>initialSize</code></td><td><code>string</code></td><td>—</td><td>Initial size (token or percentage, e.g. <code>"30p"</code>)</td></tr>
+    <tr><td><code>userMinSize</code></td><td><code>string</code></td><td>—</td><td>Minimum size for user dragging</td></tr>
+    <tr><td><code>userMaxSize</code></td><td><code>string</code></td><td>—</td><td>Maximum size for user dragging</td></tr>
+    <tr><td><code>resizable</code></td><td><code>boolean</code></td><td><code>true</code></td><td>Whether the panel can be resized</td></tr>
+    <tr><td><code>collapsible</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Whether the panel can be collapsed</td></tr>
+    <tr><td><code>collapsed</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Initial collapsed state</td></tr>
+  </tbody>
+</table>
 
 ### DtResizableHandle
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `disabled` | `boolean` | `false` | Disables the handle |
-| `beforePanelId` | `string` | — | Explicit panel ID before handle (auto-detected if omitted) |
-| `afterPanelId` | `string` | — | Explicit panel ID after handle (auto-detected if omitted) |
-| `disableResetOnDoubleClick` | `boolean` | `false` | Disable double-click reset |
-| `resetBehavior` | `string` | `"both"` | Reset behavior: `"both"`, `"before"`, `"after"`, `"all"` |
+<table>
+  <thead>
+    <tr>
+      <th>Prop</th>
+      <th>Type</th>
+      <th>Default</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td><code>disabled</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Disables the handle</td></tr>
+    <tr><td><code>beforePanelId</code></td><td><code>string</code></td><td>—</td><td>Explicit panel ID before handle (auto-detected if omitted)</td></tr>
+    <tr><td><code>afterPanelId</code></td><td><code>string</code></td><td>—</td><td>Explicit panel ID after handle (auto-detected if omitted)</td></tr>
+    <tr><td><code>disableResetOnDoubleClick</code></td><td><code>boolean</code></td><td><code>false</code></td><td>Disable double-click reset</td></tr>
+    <tr><td><code>resetBehavior</code></td><td><code>string</code></td><td><code>"both"</code></td><td>Reset behavior: <code>"both"</code>, <code>"before"</code>, <code>"after"</code>, <code>"all"</code></td></tr>
+  </tbody>
+</table>
