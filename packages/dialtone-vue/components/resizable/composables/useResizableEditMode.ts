@@ -4,6 +4,7 @@ import { ref, onMounted, onUnmounted } from 'vue';
 
 let announcementElement: HTMLElement | null = null;
 let announcementTimeout: ReturnType<typeof setTimeout> | undefined;
+let announcementRefCount = 0;
 
 function getAnnouncementElement(): HTMLElement {
   if (!announcementElement) {
@@ -399,6 +400,7 @@ export function useResizableEditMode() {
   // ─── Lifecycle ────────────────────────────────────────────────────────
 
   onMounted(() => {
+    announcementRefCount++;
     createInstructions();
 
     if (!globalEditMode.keydownListener) {
@@ -417,6 +419,13 @@ export function useResizableEditMode() {
       document.removeEventListener('keydown', globalEditMode.keydownListener);
       document.removeEventListener('click', handleDocumentClick, true);
       globalEditMode.keydownListener = null;
+    }
+
+    announcementRefCount--;
+    if (announcementRefCount <= 0 && announcementElement) {
+      announcementElement.remove();
+      announcementElement = null;
+      announcementRefCount = 0;
     }
   });
 

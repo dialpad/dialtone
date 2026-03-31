@@ -1,7 +1,6 @@
 // Resizable Composables - Three-Layer Architecture
 // Integration Layer (orchestration, storage, initialization)
 export {
-  useResizableGroupSetup,
   useResizablePanelControls,
   sortCollapseRules,
   allocateSpaceOnPanelOpen,

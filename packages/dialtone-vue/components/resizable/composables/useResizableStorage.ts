@@ -1,3 +1,4 @@
+import { DEFAULT_PANEL_SIZE } from '../resizable_constants';
 import type { ResizablePanelConfig, ResizablePanelState } from '../resizable_constants';
 import type { ResizableStorageAdapter, ResizableStoragePanelData } from '../resizable_constants';
 import { parseSizeToPixels } from '../resizable_utils';
@@ -42,14 +43,14 @@ export function validateStoredPanelSize(
   panelConfig: ResizablePanelConfig
 ): number {
   if (!isFinite(storedSize) || storedSize < 0) {
-    return parseSizeToPixels(panelConfig.initialSize || '50p', containerSize);
+    return parseSizeToPixels(panelConfig.initialSize || DEFAULT_PANEL_SIZE, containerSize);
   }
 
   if (containerSize > 0 && storedSize > containerSize * 2) {
     console.warn(
       `[resizable] Stored size ${storedSize}px for panel '${panelConfig.id}' exceeds 2x container (${containerSize}px). Resetting.`
     );
-    return parseSizeToPixels(panelConfig.initialSize || '50p', containerSize);
+    return parseSizeToPixels(panelConfig.initialSize || DEFAULT_PANEL_SIZE, containerSize);
   }
 
   return storedSize;

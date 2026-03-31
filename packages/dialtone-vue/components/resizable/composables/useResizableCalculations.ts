@@ -1,4 +1,5 @@
 import { computed, type ComputedRef } from 'vue';
+import { MIN_PANEL_SIZE_PX } from '../resizable_constants';
 import type { ResizablePanelState, ResizableDirection, ResizableSizeValue } from '../resizable_constants';
 import { parseSizeToPixels } from '../resizable_utils';
 import { ensureAtLeastOneUnlocked as ensureAtLeastOneUnlockedModel } from './useResizablePanelState';
@@ -412,7 +413,7 @@ export function useResizeHandling(direction: ResizableDirection, containerSize?:
       constrainedCursorPosition,
       beforePanelSize: constrainedBeforeSize,
       afterPanelSize: constrainedAfterSize,
-      isValidResize: constrainedBeforeSize >= 10 && constrainedAfterSize >= 10,
+      isValidResize: constrainedBeforeSize >= MIN_PANEL_SIZE_PX && constrainedAfterSize >= MIN_PANEL_SIZE_PX,
     };
   }
 
@@ -443,7 +444,7 @@ export function useResizeHandling(direction: ResizableDirection, containerSize?:
     newBeforePixels: number,
     newAfterPixels: number
   ): boolean {
-    if (newBeforePixels >= 10 && newAfterPixels >= 10) {
+    if (newBeforePixels >= MIN_PANEL_SIZE_PX && newAfterPixels >= MIN_PANEL_SIZE_PX) {
       beforePanel.pixelSize = Math.round(newBeforePixels);
       afterPanel.pixelSize = Math.round(newAfterPixels);
       beforePanel.locked = true;

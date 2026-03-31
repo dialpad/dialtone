@@ -7,6 +7,9 @@
  */
 
 import { ref, reactive, nextTick, watch, type Ref } from 'vue';
+import {
+  DEFAULT_PANEL_SIZE,
+} from '../resizable_constants';
 import type {
   ResizablePanelConfig,
   ResizablePanelState,
@@ -313,7 +316,7 @@ export function useResizableGroupSetup(
 
       if (shouldSkipPanelPair(beforePanel, afterPanel)) continue;
 
-      const beforeInitialPixelSize = parseSizeToPixels(beforePanel.initialSize || '50p', containerSize);
+      const beforeInitialPixelSize = parseSizeToPixels(beforePanel.initialSize || DEFAULT_PANEL_SIZE, containerSize);
       const beforePanelLeft = 0;
       const targetCursorPosition = beforePanelLeft + beforeInitialPixelSize;
 
@@ -473,7 +476,7 @@ export function useResizableGroupSetup(
       state.panels.forEach(panel => {
         if (panel.collapsed && panel.collapsible && panel.collapseSizePixels) {
           if (panel.autoCollapsed === true && state.containerSize >= panel.collapseSizePixels) {
-            const initialSize = parseSizeToPixels(panel.initialSize ?? '50p', state.containerSize);
+            const initialSize = parseSizeToPixels(panel.initialSize ?? DEFAULT_PANEL_SIZE, state.containerSize);
             const constrainedSize = applyPanelPixelConstraints(panel, initialSize, state.containerSize, 'system');
             panel.pixelSize = constrainedSize;
 

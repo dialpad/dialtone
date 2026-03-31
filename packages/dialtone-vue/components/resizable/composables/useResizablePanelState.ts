@@ -7,6 +7,7 @@
  * Constraint math has been extracted to constraintResolver.ts.
  */
 
+import { DEFAULT_PANEL_SIZE } from '../resizable_constants';
 import type { ResizablePanelConfig, ResizablePanelState } from '../resizable_constants';
 import { parseSizeToPixels } from '../resizable_utils';
 
@@ -97,7 +98,7 @@ export function createPanelState(
 ): ResizablePanelState {
   const constraints = calculateConstraintHierarchy(panelConfig, containerSize);
 
-  const rawPixelSize = parseSizeToPixels(panelConfig.initialSize ?? '50p', containerSize);
+  const rawPixelSize = parseSizeToPixels(panelConfig.initialSize ?? DEFAULT_PANEL_SIZE, containerSize);
   const pixelSize = applyConstraintsToSize(rawPixelSize, constraints.userMinSizePixels, constraints.userMaxSizePixels);
 
   const behavioralState = derivePanelBehavioralState(panelConfig, existingPanel);

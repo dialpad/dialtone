@@ -16,6 +16,7 @@
  * @see constraintResolver.ts
  */
 
+import { DEFAULT_PANEL_SIZE } from '../resizable_constants';
 import type { ResizablePanelConfig } from '../resizable_constants';
 import { parseSizeToPixels } from '../resizable_utils';
 import { calculateConstraintHierarchy, type ConstraintHierarchy } from './constraintResolver';
@@ -147,12 +148,12 @@ function resolveRawSize(
     const saved = savedPanel.pixelSize;
     // Reject corrupted saved values
     if (!isFinite(saved) || saved < 0 || (containerSize > 0 && saved > containerSize * 2)) {
-      return parseSizeToPixels(config.initialSize ?? '50p', containerSize);
+      return parseSizeToPixels(config.initialSize ?? DEFAULT_PANEL_SIZE, containerSize);
     }
     return saved;
   }
 
-  return parseSizeToPixels(config.initialSize ?? '50p', containerSize);
+  return parseSizeToPixels(config.initialSize ?? DEFAULT_PANEL_SIZE, containerSize);
 }
 
 /**

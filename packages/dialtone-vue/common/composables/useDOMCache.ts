@@ -35,6 +35,8 @@ export interface DOMCacheOptions {
   maxAge?: number;
   /** Invalidate cache on DOM mutations (default: true) */
   autoInvalidate?: boolean;
+  /** Scope MutationObserver to this element instead of document.body */
+  observeRoot?: HTMLElement | (() => HTMLElement | null);
 }
 
 export interface DOMCacheMetrics {
@@ -93,6 +95,7 @@ export function useDOMCache(options: DOMCacheOptions = {}) {
     maxElements = 50,
     maxAge = 5000,
     autoInvalidate = true,
+    observeRoot,
   } = options;
 
   const elementCache = ref(new Map<string, CachedElement>());
@@ -256,10 +259,12 @@ export function useDOMCache(options: DOMCacheOptions = {}) {
 
   nextTick(() => {
     if (!autoInvalidate) return;
+    const root = typeof observeRoot === 'function' ? observeRoot() : observeRoot;
+    const target = root ?? document.body;
     observer = new MutationObserver((mutations) => {
       if (shouldInvalidate(mutations)) invalidate();
     });
-    observer.observe(document.body, {
+    observer.observe(target, {
       childList: true,
       subtree: true,
       attributes: true,

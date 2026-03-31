@@ -225,10 +225,9 @@ const keyboard = useResizableKeyboard({
   beforePanelId: resolvedBeforePanelId,
   afterPanelId: resolvedAfterPanelId,
   handleElement,
-  onResize (beforeId, beforeSize, afterId, afterSize) {
-    // Keyboard resize updates panel state in-place; storage save can be
-    // deferred to blur/exit-edit-mode for now.
-    void beforeId; void beforeSize; void afterId; void afterSize;
+  onResize () {
+    // Keyboard resize updates panel state in-place; storage save
+    // deferred to exit-edit-mode.
   },
 });
 

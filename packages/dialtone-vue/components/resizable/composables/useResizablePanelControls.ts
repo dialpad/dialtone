@@ -6,6 +6,7 @@
  */
 
 import type { Ref } from 'vue';
+import { DEFAULT_PANEL_SIZE } from '../resizable_constants';
 import type { ResizablePanelState, ResizableSizeValue } from '../resizable_constants';
 import { parseSizeToPixels, hasPercentageMinSize } from '../resizable_utils';
 import { applyPanelPixelConstraints, ensureAtLeastOneUnlocked, canResetPanelPair } from './useResizablePanelState';
@@ -193,7 +194,7 @@ export function useResizablePanelControls(options: ResizablePanelControlsOptions
 
       preCollapseStates.delete(panel.id);
     } else {
-      const initialSize = parseSizeToPixels(panel.initialSize ?? '50p', containerSize.value);
+      const initialSize = parseSizeToPixels(panel.initialSize ?? DEFAULT_PANEL_SIZE, containerSize.value);
       const constrainedSize = applyPanelPixelConstraints(panel, initialSize, containerSize.value, 'system');
       panel.pixelSize = constrainedSize;
     }
@@ -247,7 +248,7 @@ export function useResizablePanelControls(options: ResizablePanelControlsOptions
   // ---- Panel Reset Operations ----
 
   function resetAdjacentPanels(beforePanel: ResizablePanelState, afterPanel: ResizablePanelState) {
-    const beforeInitialPixelSize = convertToPixelSize(beforePanel.initialSize || '50p');
+    const beforeInitialPixelSize = convertToPixelSize(beforePanel.initialSize || DEFAULT_PANEL_SIZE);
     const beforePanelLeft = 0;
     const targetCursorPosition = beforePanelLeft + beforeInitialPixelSize;
 
