@@ -80,3 +80,4 @@ SKILLS_TODO*.md
 *.bak
 *.old
 *.deprecated
+.claude/scheduled_tasks.lock
