@@ -1,30 +1,18 @@
 import type { ResizablePanelConfig, ResizablePanelState } from '../resizable_constants';
+import type { ResizableStorageAdapter, ResizableStoragePanelData } from '../resizable_constants';
 import { parseSizeToPixels } from '../resizable_utils';
 
-/**
- * Interface for the saved panel data structure in localStorage
- */
-export interface SavedPanelData {
-  id: string;
-  pixelSize: number;
-  locked?: boolean;
-  collapsed?: boolean;
-  /** Whether this panel was auto-collapsed by the system (vs manually by user) */
-  autoCollapsed?: boolean;
-  /** Proportion of container this panel should occupy (set by drag, used for viewport scaling) */
-  manualTargetRatio?: number;
-}
+// Re-export for backward compatibility
+export type SavedPanelData = ResizableStoragePanelData;
 
-/**
- * Validate required properties of SavedPanelData
- */
+// ============================================================================
+// VALIDATION
+// ============================================================================
+
 function validateRequiredProperties(data: Record<string, unknown>): boolean {
   return typeof data.id === 'string' && typeof data.pixelSize === 'number' && data.pixelSize >= 0;
 }
 
-/**
- * Validate optional properties of SavedPanelData
- */
 function validateOptionalProperties(data: Record<string, unknown>): boolean {
   return (
     (data.locked === undefined || typeof data.locked === 'boolean') &&
@@ -33,54 +21,33 @@ function validateOptionalProperties(data: Record<string, unknown>): boolean {
   );
 }
 
-/**
- * Type guard to check if an object is a valid SavedPanelData
- */
-function isSavedPanelData(obj: unknown): obj is SavedPanelData {
-  if (typeof obj !== 'object' || obj === null) {
-    return false;
-  }
-
+function isSavedPanelData(obj: unknown): obj is ResizableStoragePanelData {
+  if (typeof obj !== 'object' || obj === null) return false;
   const data = obj as Record<string, unknown>;
   return validateRequiredProperties(data) && validateOptionalProperties(data);
 }
 
-/**
- * Type guard to check if an array contains valid SavedPanelData objects
- */
-function isSavedPanelDataArray(obj: unknown): obj is SavedPanelData[] {
+function isSavedPanelDataArray(obj: unknown): obj is ResizableStoragePanelData[] {
   return Array.isArray(obj) && obj.every(item => isSavedPanelData(item));
 }
 
 /**
  * Validates a stored panel size against container bounds and returns a safe value.
  *
- * Checks for:
- * - Non-finite values (NaN, Infinity)
- * - Negative values
- * - Oversized values (> 2x container size, likely corrupted)
- *
- * @param storedSize - The pixel size loaded from storage
- * @param containerSize - Current container size in pixels
- * @param panelConfig - Panel configuration with initialSize fallback
- * @returns Validated size or initialSize fallback if invalid
+ * Checks for non-finite values, negative values, and oversized values (> 2x container).
  */
 export function validateStoredPanelSize(
   storedSize: number,
   containerSize: number,
   panelConfig: ResizablePanelConfig
 ): number {
-  if (!isFinite(storedSize)) {
-    return parseSizeToPixels(panelConfig.initialSize || '50p', containerSize);
-  }
-
-  if (storedSize < 0) {
+  if (!isFinite(storedSize) || storedSize < 0) {
     return parseSizeToPixels(panelConfig.initialSize || '50p', containerSize);
   }
 
   if (containerSize > 0 && storedSize > containerSize * 2) {
     console.warn(
-      `[resizable] Stored size ${storedSize}px for panel '${panelConfig.id}' exceeds 2x container (${containerSize}px). Resetting to initial size.`
+      `[resizable] Stored size ${storedSize}px for panel '${panelConfig.id}' exceeds 2x container (${containerSize}px). Resetting.`
     );
     return parseSizeToPixels(panelConfig.initialSize || '50p', containerSize);
   }
@@ -88,91 +55,127 @@ export function validateStoredPanelSize(
   return storedSize;
 }
 
+// ============================================================================
+// LOCALSTORAGE ADAPTER
+// ============================================================================
+
 /**
- * Composable for managing localStorage operations for resizable panels.
- * Provides simple save/load functionality with validation for pixel-based panel states.
+ * Create a localStorage-backed storage adapter.
+ *
+ * @param key - The localStorage key to use
+ * @returns A ResizableStorageAdapter backed by localStorage
+ *
+ * @example
+ * ```vue
+ * <dt-resizable :storage="localStorageAdapter('my-layout')">
+ * ```
  */
-export function useResizableStorage(storageKey: string | null) {
-  function saveToStorage(panels: ResizablePanelState[]) {
-    if (!storageKey) return;
-
-    try {
-      const stateToSave = panels.map(panel => ({
-        id: panel.id,
-        pixelSize: panel.pixelSize,
-        locked: panel.locked,
-        collapsed: panel.collapsed,
-        autoCollapsed: panel.autoCollapsed,
-      }));
-
-      localStorage.setItem(storageKey, JSON.stringify(stateToSave));
-    } catch (error) {
-      console.error('[resizable] Failed to save to storage:', error);
-    }
-  }
-
-  /**
-   * Load panel state from localStorage with runtime type validation.
-   * Returns null if no valid data is found.
-   */
-  function loadFromStorage(): SavedPanelData[] | null {
-    if (!storageKey) {
-      return null;
-    }
-
-    try {
-      const saved = localStorage.getItem(storageKey);
-      if (!saved) {
-        return null;
-      }
-
-      let parsed: unknown;
+export function localStorageAdapter(key: string): ResizableStorageAdapter {
+  return {
+    save(data: ResizableStoragePanelData[]): void {
       try {
-        parsed = JSON.parse(saved);
-      } catch {
-        localStorage.removeItem(storageKey);
-        return null;
+        localStorage.setItem(key, JSON.stringify(data));
+      } catch (error) {
+        console.error('[resizable] Failed to save to localStorage:', error);
       }
+    },
 
-      if (!isSavedPanelDataArray(parsed)) {
-        localStorage.removeItem(storageKey);
-        return null;
-      }
-
-      return parsed;
-    } catch (error) {
-      console.warn('[resizable] Failed to load saved panel data:', error);
+    load(): ResizableStoragePanelData[] | null {
       try {
-        if (storageKey) {
-          localStorage.removeItem(storageKey);
+        const saved = localStorage.getItem(key);
+        if (!saved) return null;
+
+        let parsed: unknown;
+        try {
+          parsed = JSON.parse(saved);
+        } catch {
+          localStorage.removeItem(key);
+          return null;
         }
-      } catch (clearError) {
-        console.warn('[resizable] Failed to clear corrupted panel data:', clearError);
+
+        if (!isSavedPanelDataArray(parsed)) {
+          localStorage.removeItem(key);
+          return null;
+        }
+
+        return parsed;
+      } catch (error) {
+        console.warn('[resizable] Failed to load from localStorage:', error);
+        try { localStorage.removeItem(key); } catch { /* ignore */ }
+        return null;
       }
-      return null;
-    }
+    },
+
+    clear(): void {
+      try {
+        localStorage.removeItem(key);
+      } catch { /* ignore */ }
+    },
+  };
+}
+
+// ============================================================================
+// COMPOSABLE
+// ============================================================================
+
+/**
+ * Composable for managing panel persistence.
+ *
+ * Accepts either a storageKey (string → auto-creates localStorage adapter)
+ * or a custom ResizableStorageAdapter. The adapter takes precedence.
+ *
+ * @param storageKeyOrAdapter - localStorage key string, or null
+ * @param customAdapter - Optional custom adapter (overrides storageKey)
+ */
+export function useResizableStorage(
+  storageKeyOrAdapter: string | null,
+  customAdapter?: ResizableStorageAdapter
+) {
+  // Resolve the adapter: custom > storageKey > null
+  const adapter: ResizableStorageAdapter | null = customAdapter
+    ?? (storageKeyOrAdapter ? localStorageAdapter(storageKeyOrAdapter) : null);
+
+  function saveToStorage(panels: ResizablePanelState[]): void {
+    if (!adapter) return;
+
+    const data: ResizableStoragePanelData[] = panels.map(panel => ({
+      id: panel.id,
+      pixelSize: panel.pixelSize,
+      locked: panel.locked,
+      collapsed: panel.collapsed,
+      autoCollapsed: panel.autoCollapsed,
+    }));
+
+    adapter.save(data);
   }
 
-  /**
-   * Restore panel from saved data with type safety
-   */
-  function restorePanelFromStorage(panel: ResizablePanelState, savedPanel: SavedPanelData): void {
-    if (panel.restoredFromStorage) {
-      return;
+  function loadFromStorage(): ResizableStoragePanelData[] | null {
+    if (!adapter) return null;
+
+    const data = adapter.load();
+    if (!data) return null;
+
+    // Re-validate even if adapter returned data (defense in depth)
+    if (!isSavedPanelDataArray(data)) {
+      adapter.clear();
+      return null;
     }
+
+    return data;
+  }
+
+  function restorePanelFromStorage(panel: ResizablePanelState, savedPanel: ResizableStoragePanelData): void {
+    if (panel.restoredFromStorage) return;
 
     if (savedPanel.pixelSize !== undefined) {
       panel.pixelSize = savedPanel.pixelSize;
     }
-
     if (savedPanel.locked !== undefined && panel.resizable !== false) {
       panel.locked = savedPanel.locked;
     }
-
     if (savedPanel.collapsed !== undefined) {
       panel.collapsed = savedPanel.collapsed;
     }
-
     if (savedPanel.autoCollapsed !== undefined) {
       panel.autoCollapsed = savedPanel.autoCollapsed;
     }
@@ -180,44 +183,30 @@ export function useResizableStorage(storageKey: string | null) {
     panel.restoredFromStorage = true;
   }
 
-  /**
-   * Simple load from storage with basic validation
-   */
   function loadFromStorageWithValidation(panels: ResizablePanelState[]): boolean {
     const savedState = loadFromStorage();
-    if (!savedState) {
-      return false;
-    }
+    if (!savedState) return false;
 
     const currentPanelIds = new Set(panels.map(p => p.id));
     const savedPanelIds = new Set(savedState.map(p => p.id));
 
+    // Clear if current panels don't all exist in saved (panel config changed)
     const hasIncompatiblePanels = Array.from(currentPanelIds).some(id => !savedPanelIds.has(id));
-
     if (hasIncompatiblePanels) {
-      if (storageKey) {
-        localStorage.removeItem(storageKey);
-      }
+      if (adapter) adapter.clear();
       return false;
     }
 
     savedState.forEach(savedPanel => {
       const panel = panels.find(p => p.id === savedPanel.id);
-      if (panel) {
-        restorePanelFromStorage(panel, savedPanel);
-      }
+      if (panel) restorePanelFromStorage(panel, savedPanel);
     });
 
     return true;
   }
 
-  /**
-   * Clear saved storage data
-   */
   function clearStorage(): void {
-    if (storageKey) {
-      localStorage.removeItem(storageKey);
-    }
+    if (adapter) adapter.clear();
   }
 
   return {

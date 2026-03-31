@@ -8,6 +8,8 @@ import ResizableCustomSizesStory from './resizable_custom_sizes.story.vue';
 import ResizableConstraintsStory from './resizable_constraints.story.vue';
 import ResizableCollapsibleStory from './resizable_collapsible.story.vue';
 import ResizableProgrammaticStory from './resizable_programmatic.story.vue';
+import ResizablePersistenceStory from './resizable_persistence.story.vue';
+import ResizableCustomAdapterStory from './resizable_custom_adapter.story.vue';
 
 export const argsData = {
   direction: 'row',
@@ -129,6 +131,12 @@ const CollapsibleTemplate = (args, { argTypes }) =>
 
 const ProgrammaticTemplate = (args, { argTypes }) =>
   createTemplateFromVueFile(args, argTypes, ResizableProgrammaticStory);
+
+const PersistenceTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, ResizablePersistenceStory);
+
+const CustomAdapterTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, ResizableCustomAdapterStory);
 
 export const Default = {
   render: DefaultTemplate,
@@ -258,6 +266,52 @@ export const Programmatic = {
 this.$refs.group.collapsePanel('sidebar', true);
 this.$refs.group.lockPanel('content');
 this.$refs.group.resetPanels();`,
+      },
+    },
+  },
+};
+
+export const Persistence = {
+  render: PersistenceTemplate,
+  args: {},
+  parameters: {
+    docs: {
+      description: {
+        story: 'Panel sizes persist to localStorage via the storageKey prop. Resize panels, then refresh the page to see sizes restored.',
+      },
+      source: {
+        code: `
+<dt-resizable direction="row" storage-key="my-layout">
+  <dt-resizable-panel id="sidebar" initial-size="25p" user-min-size="15p" user-max-size="40p">
+    Sidebar
+  </dt-resizable-panel>
+  <dt-resizable-handle />
+  <dt-resizable-panel id="content">Content</dt-resizable-panel>
+</dt-resizable>`,
+      },
+    },
+  },
+};
+
+export const CustomAdapter = {
+  render: CustomAdapterTemplate,
+  args: {},
+  parameters: {
+    docs: {
+      description: {
+        story: 'Custom storage adapter via the :storage prop. The adapter logs save/load operations to the console. Overrides storageKey when both are provided.',
+      },
+      source: {
+        code: `
+const myAdapter = {
+  save(data) { store.commit('setLayout', data); },
+  load() { return store.state.layout; },
+  clear() { store.commit('clearLayout'); },
+};
+
+<dt-resizable direction="row" :storage="myAdapter">
+  ...
+</dt-resizable>`,
       },
     },
   },

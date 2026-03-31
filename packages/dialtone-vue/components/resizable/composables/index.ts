@@ -35,7 +35,7 @@ export type {
 export { useResizeHandling, useResizablePanelSizing, type ResizeHandler } from './useResizableCalculations';
 
 // Supporting composables
-export { useResizableStorage } from './useResizableStorage';
+export { useResizableStorage, localStorageAdapter, validateStoredPanelSize } from './useResizableStorage';
 export { useResizableDrag, type DragState, type UseResizableDragOptions } from './useResizableDrag';
 
 // Pure engine
@@ -52,6 +52,10 @@ export { useResizableEditMode } from './useResizableEditMode';
 // Peek overlay
 export { useResizablePeek } from './useResizablePeek';
 export type { UseResizablePeekOptions, UseResizablePeekReturn } from './useResizablePeek';
+
+// Offset positioning
+export { useResizableOffset } from './useResizableOffset';
+export type { ResizableOffsetOptions, ResizableOffsetResult } from './useResizableOffset';
 
 // Re-export types for convenience
 export type * from '../resizable_constants';

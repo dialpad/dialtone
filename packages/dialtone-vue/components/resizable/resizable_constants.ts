@@ -212,6 +212,35 @@ export interface CollapseRule {
  */
 export type SpaceAllocationStrategy = 'proportional' | 'preserve-manual';
 
+// ─── Storage Adapter ───────────────────────────────────────────────────────
+
+/**
+ * Interface for pluggable storage backends.
+ * Implement this to persist panel layouts to Pinia, Vuex, IndexedDB, etc.
+ * The built-in `localStorageAdapter(key)` factory creates a localStorage-backed adapter.
+ */
+export interface ResizableStorageAdapter {
+  /** Persist the current panel layout. */
+  save(data: ResizableStoragePanelData[]): void;
+  /** Load a previously saved layout. Returns null if nothing is stored. */
+  load(): ResizableStoragePanelData[] | null;
+  /** Remove all persisted data for this layout. */
+  clear(): void;
+}
+
+/**
+ * Shape of a single panel's persisted data.
+ * Intentionally minimal — only what's needed to restore a layout.
+ */
+export interface ResizableStoragePanelData {
+  id: string;
+  pixelSize: number;
+  locked?: boolean;
+  collapsed?: boolean;
+  autoCollapsed?: boolean;
+  manualTargetRatio?: number;
+}
+
 // ─── Injection Keys ─────────────────────────────────────────────────────────
 // Typed InjectionKey constants for the resizable panel system.
 // All provide/inject between ResizableGroup, ResizablePanel, and ResizableHandle

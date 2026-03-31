@@ -31,6 +31,8 @@ export interface UseResizableGroupOptions {
   storageKey: string | null;
   direction: ComputedRef<ResizableDirection>;
   containerRef: Ref<HTMLElement | null>;
+  /** Custom storage adapter. Overrides storageKey when provided. */
+  storageAdapter?: import('../resizable_constants').ResizableStorageAdapter;
 }
 
 // ============================================================================
@@ -109,7 +111,7 @@ export function useResizableGroup(options: UseResizableGroupOptions) {
   const containerSize = ref(0);
 
   // ── Storage ─────────────────────────────────────────────────────────────────
-  const storage = useResizableStorage(storageKey);
+  const storage = useResizableStorage(storageKey, options.storageAdapter);
   const savedState = ref<SavedPanelData[] | null>(storage.loadFromStorage());
 
   // ── isInitializing ─────────────────────────────────────────────────────────

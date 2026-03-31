@@ -101,6 +101,11 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+  /** Custom storage adapter. Overrides storageKey when both are provided. */
+  storage: {
+    type: Object,
+    default: null,
+  },
 });
 
 const emit = defineEmits([
@@ -119,6 +124,7 @@ const group = useResizableGroup({
   storageKey: props.storageKey ?? null,
   direction: currentDirection,
   containerRef,
+  storageAdapter: props.storage ?? undefined,
 });
 
 // ── Mutable group state (shared with drag/collapse/controls) ────────────────
