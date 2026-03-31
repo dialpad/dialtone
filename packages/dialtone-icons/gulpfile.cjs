@@ -14,6 +14,7 @@ const settings = {
 //  ================================================================================
 //  @@ GENERAL
 const { src, dest, series } = require('gulp');
+const merge = require('merge-stream');
 const del = require('del');
 const rename = require('gulp-rename');
 const fs = require('fs');
@@ -177,7 +178,7 @@ const transformSVGtoVue = function (done) {
 //  Reads previous keywords-icons.json file to extract keywords and add any new icon
 //  into the respective category.
 //  ================================================================================
-const updateIconsJSON = function (done) {
+const updateIconsJSON = function () {
   const rawData = fs.readFileSync(paths.exports.keywordsIcons);
   const keywordsJSON = JSON.parse(rawData).categories;
   const iconsList = [];
@@ -199,18 +200,18 @@ const updateIconsJSON = function (done) {
   fs.writeFileSync(paths.exports.iconsList, `export default ${JSON.stringify(iconsList)}`);
 
   // Copies the icons.js and keywords-icons.json to dist/
-  src([paths.exports.keywordsIcons, paths.exports.iconsList])
+  const copyStream = src([paths.exports.keywordsIcons, paths.exports.iconsList])
     .pipe(dest('./dist/'));
 
   // Prettifies the JSON to improve readability and easier keyword adding.
-  src(paths.exports.keywordsIcons)
+  const prettifyStream = src(paths.exports.keywordsIcons)
     .pipe(jsonFormat(2))
     .pipe(dest('./src/'));
 
-  return done();
+  return merge(copyStream, prettifyStream);
 };
 
-const updateIllustrationsJSON = function (done) {
+const updateIllustrationsJSON = function () {
   const rawData = fs.readFileSync(paths.exports.keywordsIllustrations);
   const keywordsJSON = JSON.parse(rawData).categories;
   const illustrationsList = [];
@@ -232,15 +233,15 @@ const updateIllustrationsJSON = function (done) {
   fs.writeFileSync(paths.exports.illustrationsList, `export default ${JSON.stringify(illustrationsList)}`);
 
   // Copies the illustrations.js and keywords-illustrations.json to dist/
-  src([paths.exports.keywordsIllustrations, paths.exports.illustrationsList])
+  const copyStream = src([paths.exports.keywordsIllustrations, paths.exports.illustrationsList])
     .pipe(dest('./dist/'));
 
   // Prettifies the JSON to improve readability and easier keyword adding.
-  src(paths.exports.keywordsIllustrations)
+  const prettifyStream = src(paths.exports.keywordsIllustrations)
     .pipe(jsonFormat(2))
     .pipe(dest('./src/'));
 
-  return done();
+  return merge(copyStream, prettifyStream);
 };
 
 const updateExports = function (done) {

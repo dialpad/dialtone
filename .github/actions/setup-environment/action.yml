@@ -19,4 +19,6 @@ runs:
 
     - name: Install dependencies
       shell: bash
-      run: pnpm install --frozen-lockfile
+      run: |
+        pnpm install --frozen-lockfile || \
+        (npm config delete @dialpad:registry && pnpm install --frozen-lockfile)

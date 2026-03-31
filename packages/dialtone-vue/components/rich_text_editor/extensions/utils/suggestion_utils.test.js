@@ -23,12 +23,14 @@ vi.mock('@floating-ui/dom', () => ({
 }));
 
 vi.mock('@tiptap/vue-3', () => ({
-  VueRenderer: vi.fn().mockImplementation(() => ({
-    element: document.createElement('div'),
-    destroy: vi.fn(),
-    updateProps: vi.fn(),
-    ref: { onKeyDown: vi.fn() },
-  })),
+  VueRenderer: vi.fn().mockImplementation(function () {
+    return {
+      element: document.createElement('div'),
+      destroy: vi.fn(),
+      updateProps: vi.fn(),
+      ref: { onKeyDown: vi.fn() },
+    };
+  }),
 }));
 
 vi.mock('vue', () => ({

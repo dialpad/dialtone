@@ -4,9 +4,10 @@ import { fileURLToPath } from 'url';
 
 export default defineConfig({
   build: {
+    target: 'es2020',
     sourcemap: true,
     minify: false,
-    rollupOptions: {
+    rolldownOptions: {
       external: [
         /^@dialpad/,
         'change-case',
@@ -18,9 +19,6 @@ export default defineConfig({
       output: {
         preserveModules: true,
         minifyInternalExports: false,
-        globals: {
-          vue: 'Vue',
-        },
       },
     },
     lib: {
