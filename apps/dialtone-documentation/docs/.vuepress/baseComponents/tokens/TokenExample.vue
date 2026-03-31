@@ -34,11 +34,11 @@
     :style="getShadowStyle"
   />
   <div
-    v-if="category === 'size'"
+    v-if="category === 'size' || category === 'layout'"
     class="sizeRectangle"
     :style="getSizeStyle"
   />
-  <div v-if="category === 'space'" class="space">
+  <div v-if="category === 'space' || category === 'spacing'" class="space">
     <div v-if="displaySpaceReference" :class="[{ percentage: isPercentage }, 'spaceReference', 'spaceBefore']">
       A
     </div>
@@ -75,6 +75,11 @@ const isText = (name, key) => name.includes('--dt-text') && name.includes(key);
 const isFont = (name, key) => name.includes(`--dt-font-${key}`);
 const getRectSizeStyle = (value) => {
   if (value.endsWith('%')) return { 'inline-size': value };
+  if (value.endsWith('px')) {
+    const px = Math.abs(parseFloat(value));
+    if (px <= 128) return { 'inline-size': `${px}px` };
+    return null;
+  }
   const size = parseFloat(value.replace('rem', ''));
   if (size < 12.8 && size > -12.8) return { 'inline-size': `${Math.abs(size)}rem` };
   return null;

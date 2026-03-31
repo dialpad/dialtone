@@ -66,7 +66,7 @@
                 align="center"
                 class="token-name"
               >
-                <dt-text as="p" kind="label" :size="300">
+                <dt-text as="p" kind="label" :size="200">
                   {{ name }}
                 </dt-text>
                 <div class="d-w-50">
