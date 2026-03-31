@@ -16,7 +16,7 @@
   "dependencies": {
     "@dialpad/dialtone-emojis": "workspace:*",
     "@dialpad/dialtone-icons": "workspace:*",
-    "@dialpad/i18n": "1.22.3",
+    "@dialpad/i18n": "1.25.0",
     "@tiptap/core": "3.19.0",
     "@tiptap/static-renderer": "3.19.0",
     "@tiptap/extension-blockquote": "3.19.0",

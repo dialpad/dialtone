@@ -43,8 +43,8 @@ importers:
         specifier: workspace:*
         version: link:packages/dialtone-tokens
       '@dialpad/i18n':
-        specifier: 1.22.3
-        version: 1.22.3(vue@3.5.27(typescript@5.9.3))
+        specifier: 1.25.0
+        version: 1.25.0(vue@3.5.27(typescript@5.9.3))
       '@floating-ui/dom':
         specifier: ^1.6.0
         version: 1.7.5
@@ -759,8 +759,8 @@ importers:
         specifier: workspace:*
         version: link:../dialtone-icons
       '@dialpad/i18n':
-        specifier: 1.22.3
-        version: 1.22.3(vue@3.5.27(typescript@5.9.3))
+        specifier: 1.25.0
+        version: 1.25.0(vue@3.5.27(typescript@5.9.3))
       '@tiptap/core':
         specifier: 3.19.0
         version: 3.19.0(@tiptap/pm@3.19.0)
@@ -1336,18 +1336,22 @@ packages:
     resolution: {integrity: sha512-qUT8qgaypYlGPXDO5HqYdq0Q670fqAxr5AaJUo3AOzBJ6IRTcG48kXo6Z9GRVgqrL21jd6MS+fx5nu1wKM0W0w==}
     engines: {node: '>=10'}
 
-  '@dialpad/i18n-services@1.11.0':
-    resolution: {integrity: sha512-vXXU2I7oJ+06yoMYBpBVYEZo+hubHgUsK+8yydFzOxNbIs7KOuH8s0gT36hdWdkM0kPWKUn3X/TaMcTu+At9Ww==}
-    hasBin: true
+  '@dialpad/i18n-goblin-core@1.1.0':
+    resolution: {integrity: sha512-RmDOjfB17zDHAEP4J3D464kSseCcCkO1mTVBuTwZAFx8jvrjquVzvI58mXZkU5dPaMnkeOlGdCiwQSAsFSWcag==}
     peerDependencies:
       '@vue/composition-api': '*'
-      vue: ^2.0.0 || >=3.0.0
+      vue: ^3.0.0
     peerDependenciesMeta:
       '@vue/composition-api':
         optional: true
 
-  '@dialpad/i18n@1.22.3':
-    resolution: {integrity: sha512-vIviaCpnXRyd/CegJw4jlcdB9Zbgmml0gmHr9cNXUtJuC+DEOtwadVtq7qpUedggKMltg7VlMkC38U85C6W/yw==}
+  '@dialpad/i18n-goblin-services@1.2.0':
+    resolution: {integrity: sha512-8kmjfmi+bXCX6zQvgnTgdDNDIHB9U/imsraiEu6h+Vf+cJmcDYVm2SniSBr5C+/U/rtzgHmucKlPEue30Of15w==}
+    hasBin: true
+
+  '@dialpad/i18n@1.25.0':
+    resolution: {integrity: sha512-oQScYUlt9c3GUUQF84Q8Zdcq/3l20Y/7xF0t3O6zmu5GN6PP9CF2hBA4MVMD0VDx1266io91ze9StJwPYbDFNA==}
+    hasBin: true
     peerDependencies:
       vue: ^3.0.0
 
@@ -16414,18 +16418,21 @@ snapshots:
       compare-func: 2.0.0
       q: 1.5.1
 
-  '@dialpad/i18n-services@1.11.0(vue@3.5.27(typescript@5.9.3))':
+  '@dialpad/i18n-goblin-core@1.1.0(vue@3.5.27(typescript@5.9.3))':
     dependencies:
       '@fluent/bundle': 0.17.1
-      '@fluent/syntax': 0.19.0
-      csv-parse: 5.5.6
       fluent-vue: 3.7.2(@fluent/bundle@0.17.1)(vue@3.5.27(typescript@5.9.3))
       vue: 3.5.27(typescript@5.9.3)
-      vue-demi: 0.14.10(vue@3.5.27(typescript@5.9.3))
 
-  '@dialpad/i18n@1.22.3(vue@3.5.27(typescript@5.9.3))':
+  '@dialpad/i18n-goblin-services@1.2.0':
     dependencies:
-      '@dialpad/i18n-services': 1.11.0(vue@3.5.27(typescript@5.9.3))
+      '@fluent/syntax': 0.19.0
+      csv-parse: 5.5.6
+
+  '@dialpad/i18n@1.25.0(vue@3.5.27(typescript@5.9.3))':
+    dependencies:
+      '@dialpad/i18n-goblin-core': 1.1.0(vue@3.5.27(typescript@5.9.3))
+      '@dialpad/i18n-goblin-services': 1.2.0
       vue: 3.5.27(typescript@5.9.3)
     transitivePeerDependencies:
       - '@vue/composition-api'
