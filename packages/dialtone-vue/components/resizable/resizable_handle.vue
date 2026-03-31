@@ -345,7 +345,7 @@ function handleBlurEvent () {
 // Positioned absolutely between panels. The layout engine sets inline `left`
 // (or `top` for column). The hit area extends beyond the visible bar via ::before.
 .d-resizable-handle {
-  --d-resizable-handle-color-surface: var(--dt-color-surface-info-strong);
+  --d-resizable-handle-color-surface: var(--dt-color-border-focus);
 
   position: absolute;
   background-color: transparent;
@@ -370,7 +370,7 @@ function handleBlurEvent () {
   // ─── State Modifiers ───
   &--disabled {
     cursor: default;
-    opacity: 0.3;
+    opacity: var(--dt-opacity-500);
     pointer-events: none;
     background-color: transparent !important;
   }
@@ -381,7 +381,7 @@ function handleBlurEvent () {
     inset: 0;
     border-radius: var(--dt-size-radius-pill);
     background-color: transparent;
-    transition: background-color 150ms ease;
+    transition: background-color var(--td150) ease;
   }
 
   // ─── Hover ───
@@ -396,12 +396,8 @@ function handleBlurEvent () {
   }
 
   &:focus-visible {
-    outline: var(--dt-size-200) solid var(--d-resizable-handle-color-surface);
-    outline-offset: var(--dt-size-200);
     background-color: var(--d-resizable-handle-color-surface);
-    box-shadow:
-      0 0 0 var(--dt-size-200) var(--dt-color-surface-primary),
-      0 0 0 var(--dt-size-300) var(--d-resizable-handle-color-surface);
+    box-shadow: none;
   }
 }
 </style>
