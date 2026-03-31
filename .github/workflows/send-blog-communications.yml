@@ -42,8 +42,8 @@ jobs:
         if: ${{ github.event_name == 'workflow_run' }}
         id: prev-release
         run: |
-          PREV_TAG=$(git tag --sort=-creatordate | grep '^dialtone/v[0-9]' | grep -v -- '-' | sed -n '2p')
-          echo "sha=$(git rev-parse $PREV_TAG)" >> $GITHUB_OUTPUT
+          PREV_TAG=$(git tag --sort=-creatordate | grep -E "^dialtone/v[0-9]+\.[0-9]+\.[0-9]+$" | sed -n "2p")
+          echo "sha=$(git rev-parse ${PREV_TAG})" >> "${GITHUB_OUTPUT}"
 
       - name: Get changed files (automatic)
         if: ${{ github.event_name == 'workflow_run' }}
