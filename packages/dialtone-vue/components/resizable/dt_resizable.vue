@@ -205,12 +205,18 @@ const {
   isInitializing,
 });
 
-// Wrapper for resetPanels that updates storage after reset
+// Wrapper for resetPanels that clears runtime ratios and updates storage
 function resetPanels (beforePanelId, afterPanelId, behavior = 'all') {
   originalResetPanels(beforePanelId, afterPanelId, behavior);
+
   if (behavior === 'all') {
+    // Clear all runtime ratios and saved state
+    state.panels.forEach(p => group.setManualTargetRatio(p.id, undefined));
     group.clearSavedState();
   } else {
+    // Clear runtime ratios for the affected panels only
+    if (beforePanelId) group.setManualTargetRatio(beforePanelId, undefined);
+    if (afterPanelId) group.setManualTargetRatio(afterPanelId, undefined);
     saveToStorage(state.panels);
   }
 }

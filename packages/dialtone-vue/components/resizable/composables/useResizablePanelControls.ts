@@ -249,26 +249,25 @@ export function useResizablePanelControls(options: ResizablePanelControlsOptions
   // ---- Panel Reset Operations ----
 
   function resetAdjacentPanels(beforePanel: ResizablePanelState, afterPanel: ResizablePanelState) {
-    const beforeInitialPixelSize = convertToPixelSize(beforePanel.initialSize || DEFAULT_PANEL_SIZE);
-    const beforePanelLeft = 0;
-    const targetCursorPosition = beforePanelLeft + beforeInitialPixelSize;
+    // Redistribute the combined space of both panels by their initial size ratio
+    const combinedSpace = beforePanel.pixelSize + afterPanel.pixelSize;
+    const beforeInitial = convertToPixelSize(beforePanel.initialSize || DEFAULT_PANEL_SIZE);
+    const afterInitial = convertToPixelSize(afterPanel.initialSize || DEFAULT_PANEL_SIZE);
+    const totalInitial = beforeInitial + afterInitial;
 
-    const resizeResult = resizeHandler.processResizeMove(
-      targetCursorPosition,
-      beforePanel,
-      afterPanel,
-      containerSize.value,
-      undefined,
-      panels.value,
-      beforePanelLeft
-    );
+    const beforeSize = totalInitial > 0
+      ? Math.round(combinedSpace * (beforeInitial / totalInitial))
+      : Math.round(combinedSpace / 2);
+    const afterSize = combinedSpace - beforeSize;
 
-    beforePanel.pixelSize = resizeResult.beforePanelSize;
-    afterPanel.pixelSize = resizeResult.afterPanelSize;
+    beforePanel.pixelSize = beforeSize;
+    afterPanel.pixelSize = afterSize;
     beforePanel.locked = false;
     afterPanel.locked = false;
     beforePanel.manualTargetSize = undefined;
     afterPanel.manualTargetSize = undefined;
+    beforePanel.manualTargetRatio = undefined;
+    afterPanel.manualTargetRatio = undefined;
 
     onPanelResize(beforePanel.id, beforePanel.pixelSize);
     onPanelResize(afterPanel.id, afterPanel.pixelSize);
