@@ -18,6 +18,7 @@
     @keydown="peek.handlers.onKeyDown"
   >
     <div class="dt-resizable-panel__content">
+      <!-- @slot Panel content. Provides panel state, collapsed/resizing/peeking flags. -->
       <slot
         :panel="panel"
         :is-collapsed="panel?.collapsed"
@@ -25,6 +26,7 @@
         :is-peeking="peek.isPeeking.value"
       />
     </div>
+    <!-- @slot Custom trigger element for the peek overlay (e.g., a toggle button). -->
     <slot
       v-if="peek.canPeek.value && peek.showPeekButton.value"
       name="peek-trigger"
@@ -40,6 +42,7 @@
       @mouseenter="peek.handlers.onMouseEnter"
       @mouseleave="peek.handlers.onMouseLeave"
     >
+      <!-- @slot Custom content for the peek overlay. Falls back to the default slot content. -->
       <slot
         name="peek-content"
         :exit-peek="peek.exitPeek"
@@ -73,25 +76,43 @@ import { isValidSizing } from './resizable_utils';
 import { useResizablePeek } from './composables/useResizablePeek';
 
 const props = defineProps({
+  /** Unique panel identifier. Must be unique within its DtResizable parent. */
   id: { type: String, required: true },
+  /** Initial size as a percentage token (e.g., '25p' for 25%) or Dialtone size token. */
   initialSize: { type: String, default: undefined },
+  /** Minimum size for user drag interactions (hard floor). */
   userMinSize: { type: String, default: undefined },
+  /** Maximum size for user drag interactions (hard ceiling). */
   userMaxSize: { type: String, default: undefined },
+  /** Minimum size for system viewport scaling. Falls back to userMinSize. */
   systemMinSize: { type: String, default: undefined },
+  /** Maximum size for system viewport scaling. Falls back to userMaxSize. */
   systemMaxSize: { type: String, default: undefined },
+  /** Container width threshold that triggers auto-collapse. */
   collapseSize: { type: String, default: undefined },
+  /** Whether this panel can be resized by dragging. */
   resizable: { type: Boolean, default: true },
+  /** Whether this panel can be collapsed to zero width. */
   collapsible: { type: Boolean, default: false },
+  /** Initial collapsed state. */
   collapsed: { type: Boolean, default: false },
+  /** Enable peek overlay when panel is collapsed. */
   peekEnabled: { type: Boolean, default: false },
-  /** @values 'hover', 'button', 'both' */
+  /**
+   * What triggers the peek overlay to appear.
+   * @values 'hover', 'button', 'both'
+   */
   peekTrigger: {
     type: String, default: 'hover',
     validator: (val) => ['hover', 'button', 'both'].includes(val),
   },
+  /** Allow peek even when the panel was manually collapsed (not auto-collapsed). */
   peekWhenManual: { type: Boolean, default: false },
+  /** Width of the peek overlay. Uses initialSize if not set. */
   peekWidth: { type: String, default: undefined },
+  /** Grace period in milliseconds before hiding peek on mouse leave. */
   peekGracePeriod: { type: Number, default: 150 },
+  /** Additional CSS classes applied to the panel element. */
   class: { type: [String, Object, Array], default: '' },
 });
 

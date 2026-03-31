@@ -1,38 +1,31 @@
 ---
 title: Resizable
-description: A resizable layout component that allows users to resize adjacent panels by dragging a handle between them.
+description: A layout component that lets users resize adjacent panels by dragging a handle between them.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-resizable--default
 ---
 
+<code-well-header custom class="d-p24 d-bgc-secondary d-bar8">
+  <example-resizable />
+</code-well-header>
+
 ## Usage
 
-The resizable component system consists of three parts: `DtResizable` (the group container), `DtResizablePanel` (the resizable content areas), and `DtResizableHandle` (the draggable dividers between panels). Panels are sized using percentage tokens (e.g., `"25p"` for 25% of the container).
+The resizable component splits a container into adjustable panels separated by draggable handles. It works well for sidebar layouts, split-view editors, and any interface where users should control how space is distributed.
 
-<dialtone-usage>
-<template #do>
+### Examples
 
-- Adjustable sidebar layouts (e.g., navigation + content).
-- Split-view editors or file browsers.
-- Any layout where the user should control how space is distributed.
-</template>
+#### Two panels
 
-<template #dont>
-
-- Fixed layouts that should not be user-adjustable.
-- Single-panel layouts with no adjacent content.
-- Layouts with more than 4 panels (consider tabs or navigation instead).
-</template>
-
-</dialtone-usage>
-
-### Basic Two-Panel Layout
+<code-well-header custom class="d-p24 d-bgc-secondary d-bar8">
+  <example-resizable />
+</code-well-header>
 
 ```vue
 <dt-resizable>
   <dt-resizable-panel id="sidebar" initial-size="25p">
-    Sidebar content
+    Sidebar
   </dt-resizable-panel>
   <dt-resizable-handle />
   <dt-resizable-panel id="content">
@@ -41,7 +34,11 @@ The resizable component system consists of three parts: `DtResizable` (the group
 </dt-resizable>
 ```
 
-### Three-Panel Layout
+#### Three panels
+
+<code-well-header custom class="d-p24 d-bgc-secondary d-bar8">
+  <example-resizable-three-panel />
+</code-well-header>
 
 ```vue
 <dt-resizable>
@@ -59,74 +56,178 @@ The resizable component system consists of three parts: `DtResizable` (the group
 </dt-resizable>
 ```
 
-### Vertical (Column) Direction
+#### Vertical
+
+<code-well-header custom class="d-p24 d-bgc-secondary d-bar8">
+  <example-resizable-vertical />
+</code-well-header>
 
 ```vue
 <dt-resizable direction="column">
   <dt-resizable-panel id="top" initial-size="40p">
-    Top panel
+    Top
   </dt-resizable-panel>
   <dt-resizable-handle />
   <dt-resizable-panel id="bottom">
-    Bottom panel
+    Bottom
   </dt-resizable-panel>
 </dt-resizable>
 ```
 
-## Constraints
+#### Nested layouts
 
-Panels support user drag constraints (`userMinSize`/`userMaxSize`) and system viewport constraints (`systemMinSize`/`systemMaxSize`). User constraints define hard limits for drag interactions. System constraints define the range the layout engine uses during viewport resizes.
+Resizable groups can be nested. For example, a horizontal sidebar + content layout where the content area is itself a vertical split:
 
 ```vue
 <dt-resizable>
-  <dt-resizable-panel
-    id="sidebar"
-    initial-size="30p"
-    user-min-size="20p"
-    user-max-size="50p"
-  >
-    Sidebar (min 20%, max 50%)
-  </dt-resizable-panel>
-  <dt-resizable-handle />
-  <dt-resizable-panel id="content" user-min-size="30p">
-    Content (min 30%)
-  </dt-resizable-panel>
-</dt-resizable>
-```
-
-### Constraint Hierarchy
-
-- **`userMinSize` / `userMaxSize`** — Hard floor/ceiling for user dragging. Applied during drag interactions.
-- **`systemMinSize` / `systemMaxSize`** — Scaling range for the layout engine. Applied during viewport resizes.
-- **`collapseSize`** — Container width threshold for auto-collapse. Applied during container resize.
-
-System constraints fall back to user constraints when not specified. `systemMinSize` must be >= `userMinSize`, and `systemMaxSize` must be <= `userMaxSize`.
-
-## Collapsible Panels
-
-Mark a panel as `collapsible` to allow it to collapse to zero width. Use the `collapsed` prop for initial state, or call `collapsePanel()` programmatically.
-
-```vue
-<dt-resizable ref="group">
-  <dt-resizable-panel
-    id="sidebar"
-    initial-size="25p"
-    user-min-size="20p"
-    collapsible
-    :collapsed="isSidebarCollapsed"
-  >
-    Collapsible sidebar
+  <dt-resizable-panel id="sidebar" initial-size="25p">
+    Sidebar
   </dt-resizable-panel>
   <dt-resizable-handle />
   <dt-resizable-panel id="content">
-    Content
+    <dt-resizable direction="column">
+      <dt-resizable-panel id="editor" initial-size="60p">
+        Editor
+      </dt-resizable-panel>
+      <dt-resizable-handle />
+      <dt-resizable-panel id="terminal">
+        Terminal
+      </dt-resizable-panel>
+    </dt-resizable>
   </dt-resizable-panel>
 </dt-resizable>
 ```
 
-### Auto-Collapse Rules
+### Best practices
 
-Use the `collapseRules` prop on `DtResizable` to define which panels collapse first when space is constrained. Lower priority numbers collapse first.
+<dialtone-usage>
+<template #do>
+
+- Set `initial-size` on panels with a known width (sidebars, detail panes). Omit it on the main content panel so it fills the remaining space.
+- Set `user-min-size` on every panel. Without it, panels can shrink to nearly zero. A minimum of `"825"` (164px) keeps most content usable.
+- Use `storage-key` to persist layouts. Users expect their panel arrangement to survive a page refresh.
+- Always provide a way to restore collapsed panels — for example, a menu icon button in a sibling panel's header.
+</template>
+
+<template #dont>
+
+- Don't pass raw pixel values for sizes. Only percentage tokens (`"25p"`) and Dialtone size tokens (`"925"`) are accepted.
+- Don't set `initial-size` on every panel. Leave one panel without it so it absorbs remaining space and the layout always fills the container.
+- Don't hide a panel without giving the user a way to bring it back. Collapsed panels should either use peek or provide an expand control in a visible sibling.
+</template>
+
+</dialtone-usage>
+
+### Constraints
+
+All size props accept two formats: percentage tokens (e.g., `"25p"` for 25% of the container) and Dialtone size tokens (e.g., `"925"` which resolves to 332px). Raw pixel values are not accepted — the component resolves token values from Dialtone's CSS custom properties at runtime.
+
+`initial-size` defines where a panel starts. For panels whose size should flex with the available space (like a main content area), omit `initial-size` and the panel will fill whatever space remains.
+
+#### User constraints
+
+`user-min-size` and `user-max-size` set hard limits on how small or large a user can drag a panel. These are enforced during drag interactions.
+
+```vue
+<dt-resizable-panel
+  id="sidebar"
+  initial-size="30p"
+  user-min-size="20p"
+  user-max-size="50p"
+>
+  Sidebar (min 20%, max 50%)
+</dt-resizable-panel>
+```
+
+#### System constraints
+
+`system-min-size` and `system-max-size` define the range the layout engine uses when redistributing space during viewport resizes. These default to the user constraints when not specified. System min must be >= user min, and system max must be <= user max.
+
+#### Fixed panels
+
+Set `:resizable="false"` to lock a panel at its `initial-size`. Fixed panels cannot be dragged, and no handle is rendered between a fixed panel and its neighbor. The layout engine subtracts fixed panel widths first, then distributes the remaining space among resizable panels.
+
+```vue
+<dt-resizable>
+  <dt-resizable-panel id="nav" initial-size="700" :resizable="false">
+    Navigation (64px, fixed)
+  </dt-resizable-panel>
+  <dt-resizable-panel id="content">
+    Content (fills remaining space)
+  </dt-resizable-panel>
+</dt-resizable>
+```
+
+### Collapsing panels
+
+<code-well-header custom class="d-p24 d-bgc-secondary d-bar8">
+  <example-resizable-collapsible />
+</code-well-header>
+
+Mark a panel as `collapsible` to let it collapse to zero width. Use the `collapsed` prop for the initial state, or call `collapsePanel()` from a template ref.
+
+```vue
+<dt-resizable @panel-collapse="onPanelCollapse">
+  <dt-resizable-panel
+    id="sidebar"
+    initial-size="25p"
+    user-min-size="825"
+    collapsible
+    :collapsed="isSidebarCollapsed"
+  >
+    Sidebar
+  </dt-resizable-panel>
+  <dt-resizable-handle />
+  <dt-resizable-panel id="content">
+    <header>
+      <button @click="isSidebarCollapsed = !isSidebarCollapsed">
+        Toggle sidebar
+      </button>
+    </header>
+    Content
+  </dt-resizable-panel>
+</dt-resizable>
+
+<script setup>
+import { ref } from 'vue';
+
+const isSidebarCollapsed = ref(false);
+
+function onPanelCollapse (panelId, collapsed) {
+  if (panelId === 'sidebar') {
+    isSidebarCollapsed.value = collapsed;
+  }
+}
+</script>
+```
+
+Listen to `@panel-collapse` to keep your local state in sync — the panel can also be collapsed by the system (auto-collapse rules, viewport resize). Always provide a visible control in a sibling panel to restore a collapsed panel.
+
+#### Dynamic constraints on collapse
+
+For layouts where a panel starts hidden (e.g., a detail pane that opens when an item is selected), bind `initial-size` to a computed value that changes based on collapsed state:
+
+```vue
+<dt-resizable-panel
+  id="list"
+  :initial-size="isDetailOpen ? '30p' : '100p'"
+>
+  List
+</dt-resizable-panel>
+<dt-resizable-handle />
+<dt-resizable-panel
+  id="detail"
+  :initial-size="isDetailOpen ? '70p' : '0p'"
+  collapsible
+  :collapsed="!isDetailOpen"
+>
+  Detail
+</dt-resizable-panel>
+```
+
+#### Auto-collapse rules
+
+Use `collapse-rules` to define which panels collapse first when space gets tight. Lower priority numbers collapse first.
 
 ```vue
 <dt-resizable
@@ -139,35 +240,9 @@ Use the `collapseRules` prop on `DtResizable` to define which panels collapse fi
 </dt-resizable>
 ```
 
-## Persistence
+### Persisting panel sizes
 
-Panel sizes can be persisted across page loads. Two approaches are available:
-
-<table class="d-table dialtone-doc-table">
-<thead>
-<tr>
-<th scope="col">Approach</th>
-<th scope="col">Prop</th>
-<th scope="col">Best For</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>storageKey</code></td>
-<td><code>storage-key="my-layout"</code></td>
-<td>Quick localStorage persistence</td>
-</tr>
-<tr>
-<td><code>:storage</code></td>
-<td><code>:storage="adapter"</code></td>
-<td>Pinia, Vuex, IndexedDB, or API backends</td>
-</tr>
-</tbody>
-</table>
-
-### localStorage
-
-The simplest option — pass a `storageKey` string and panel sizes are automatically saved to and restored from localStorage.
+Add a `storage-key` to save panel sizes to localStorage automatically. Users resize once, and the layout restores on their next visit.
 
 ```vue
 <dt-resizable storage-key="my-layout">
@@ -175,14 +250,9 @@ The simplest option — pass a `storageKey` string and panel sizes are automatic
 </dt-resizable>
 ```
 
-### Pinia / Custom Store
-
-For state management integration, implement the `ResizableStorageAdapter` interface (`save`, `load`, `clear`) and pass it via the `:storage` prop.
+For state management integration (Pinia, Vuex, or an API), implement the `ResizableStorageAdapter` interface and pass it via `:storage`:
 
 ```js
-// Pinia adapter example
-const layoutStore = useLayoutStore();
-
 const piniaAdapter = {
   save(data) { layoutStore.setLayout(data); },
   load() { return layoutStore.layout; },
@@ -196,46 +266,46 @@ const piniaAdapter = {
 </dt-resizable>
 ```
 
-The same interface works with Vuex, IndexedDB, or an API backend — any object with `save`, `load`, and `clear` methods.
+When both `storage-key` and `:storage` are provided, the custom adapter takes precedence.
 
-When both `storageKey` and `:storage` are provided, the custom adapter takes precedence.
+### Peek panel overlay
 
-## Peek Overlay
-
-Collapsed panels can show a temporary overlay on hover or button trigger. Enable with `peekEnabled` on `DtResizablePanel`.
+Collapsed panels can show a temporary overlay on hover or button click, letting users preview content without permanently expanding the panel.
 
 ```vue
 <dt-resizable-panel
   id="sidebar"
-  initial-size="25p"
   collapsible
   peek-enabled
   peek-trigger="hover"
   peek-width="25p"
-  :peek-grace-period="150"
 >
-  <template #default="{ isCollapsed, isPeeking }">
-    Panel content
-  </template>
-  <template #peek-trigger="{ togglePeek, isPeeking }">
-    <button @click="togglePeek">Toggle peek</button>
-  </template>
+  Sidebar content (peek on hover when collapsed)
 </dt-resizable-panel>
 ```
 
-## Keyboard Accessibility
+Set `peek-trigger` to `"button"` to show a toggle button instead of hovering, or `"both"` for either. Use the `peek-trigger` slot to customize the button:
 
-The resize handle supports keyboard navigation. Press `Tab` to reach the handle, then use arrow keys to resize. The handle announces size changes to screen readers via `aria-valuenow`.
+```vue
+<template #peek-trigger="{ togglePeek, isPeeking }">
+  <button @click="togglePeek">
+    {{ isPeeking ? 'Hide' : 'Preview' }}
+  </button>
+</template>
+```
 
-Double-click a handle to reset the adjacent panels to their initial sizes.
+### Space allocation strategies
 
-### Edit Mode
+When a panel opens or closes, the remaining panels need to redistribute space. The `space-allocation-strategy` prop controls how:
 
-Handles are focusable when edit mode is active (`tabindex="0"`). In normal mode, handles have `tabindex="-1"` to keep the tab order clean. Edit mode is managed internally by the `DtResizable` component.
+- **`proportional`** (default) — All unlocked panels give or take space proportionally based on their current size.
+- **`preserve-manual`** — Panels that the user has manually resized keep their exact size. Only panels the user hasn't touched give up space.
 
-## Programmatic Control
+### Programmatic control
 
-Access methods via a template ref on the `DtResizable` component.
+Sometimes the layout needs to respond to application state — collapsing a sidebar when a user clicks a menu item, locking a panel during a loading state, or resetting the layout from a settings page.
+
+Access these methods via a template ref on `DtResizable`:
 
 ```vue
 <template>
@@ -248,90 +318,91 @@ Access methods via a template ref on the `DtResizable` component.
 import { ref } from 'vue';
 const group = ref(null);
 
-// Collapse a panel
 group.value.collapsePanel('sidebar', true);
-
-// Lock a panel at its current size
 group.value.lockPanel('sidebar');
-
-// Unlock a panel
 group.value.unlockPanel('sidebar');
-
-// Resize a panel to a specific pixel size
 group.value.resizePanel('sidebar', 300);
-
-// Reset all panels to initial sizes
 group.value.resetPanels();
 </script>
 ```
-
-### Exposed Methods
 
 <table class="d-table dialtone-doc-table">
 <thead>
 <tr>
 <th scope="col">Method</th>
-<th scope="col">Signature</th>
 <th scope="col">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>resizePanel</code></td>
-<td><code>(panelId: string, size: number) =&gt; void</code></td>
-<td>Resize a panel to a specific pixel size</td>
+<td><code>collapsePanel(id, collapsed)</code></td>
+<td>Collapse or expand a panel.</td>
 </tr>
 <tr>
-<td><code>collapsePanel</code></td>
-<td><code>(panelId: string, collapsed: boolean) =&gt; void</code></td>
-<td>Collapse or expand a panel</td>
+<td><code>lockPanel(id)</code></td>
+<td>Lock a panel at its current size. Drag and viewport resize won't affect it.</td>
 </tr>
 <tr>
-<td><code>lockPanel</code></td>
-<td><code>(panelId: string) =&gt; void</code></td>
-<td>Lock a panel at its current size</td>
+<td><code>unlockPanel(id)</code></td>
+<td>Unlock a previously locked panel.</td>
 </tr>
 <tr>
-<td><code>unlockPanel</code></td>
-<td><code>(panelId: string) =&gt; void</code></td>
-<td>Unlock a previously locked panel</td>
+<td><code>resizePanel(id, pixels)</code></td>
+<td>Set a panel to an exact pixel size.</td>
 </tr>
 <tr>
-<td><code>resetPanels</code></td>
-<td><code>(beforePanelId?, afterPanelId?, behavior?) =&gt; void</code></td>
-<td>Reset panels to initial sizes</td>
+<td><code>resetPanels()</code></td>
+<td>Reset all panels to their initial sizes. Pass panel IDs to reset a specific pair.</td>
 </tr>
 </tbody>
 </table>
 
-### Exposed Readonly State
+## Accessibility
+
+### Keyboard navigation
+
+Each resize handle has `role="separator"` with `aria-orientation`, `aria-valuenow`, `aria-valuemin`, and `aria-valuemax` reflecting the current layout.
+
+Press **Ctrl/Cmd + E** to enter edit mode. In edit mode, handles become focusable via Tab and support these keys:
 
 <table class="d-table dialtone-doc-table">
 <thead>
 <tr>
-<th scope="col">Property</th>
-<th scope="col">Type</th>
-<th scope="col">Description</th>
+<th scope="col">Key</th>
+<th scope="col">Action</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>state</code></td>
-<td><code>readonly object</code></td>
-<td>Current layout state including <code>panels</code>, <code>containerSize</code>, <code>isResizing</code></td>
+<td>Arrow keys</td>
+<td>Resize by 8px</td>
 </tr>
 <tr>
-<td><code>panelConfigs</code></td>
-<td><code>ComputedRef&lt;Array&gt;</code></td>
-<td>Panel configurations from the <code>panels</code> prop</td>
+<td>Shift + Arrow</td>
+<td>Resize by 24px</td>
 </tr>
 <tr>
-<td><code>allocationStrategy</code></td>
-<td><code>ComputedRef&lt;string&gt;</code></td>
-<td>Current space allocation strategy</td>
+<td>Ctrl/Cmd + Arrow</td>
+<td>Resize by 1px</td>
+</tr>
+<tr>
+<td>R</td>
+<td>Reset the current handle's panels</td>
+</tr>
+<tr>
+<td>Ctrl/Cmd + R</td>
+<td>Reset all panels</td>
+</tr>
+<tr>
+<td>Escape</td>
+<td>Exit edit mode</td>
 </tr>
 </tbody>
 </table>
+
+Size changes are announced to screen readers via an `aria-live` region. All announcement strings are configurable via the `messages` prop on `DtResizable` for i18n.
+
+Double-clicking a handle resets the two adjacent panels to their initial size proportions.
 
 ## Vue API
 
@@ -347,39 +418,9 @@ group.value.resetPanels();
 
 <component-vue-api component-name="resizable_handle" />
 
-## Accessibility
-
-- The `DtResizableHandle` renders as a `role="separator"` with `aria-orientation` matching the layout direction.
-- Handles expose `aria-valuenow`, `aria-valuemin`, and `aria-valuemax` indicating the size of the panel before the handle as a percentage.
-- Arrow keys resize panels in increments. Larger increments are used with `Shift` held.
-- `Enter` or `Space` on a handle toggles edit mode, which makes handles focusable via `Tab`.
-- `Escape` exits edit mode.
-- Screen reader announcements describe size changes during keyboard resize.
-- Double-click on a handle resets adjacent panels to their initial sizes.
-
-## Size Tokens
-
-All size props accept percentage tokens with a `p` suffix. The value represents a percentage of the container size.
-
-<table class="d-table dialtone-doc-table">
-<thead>
-<tr>
-<th scope="col">Token</th>
-<th scope="col">Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>'25p'</code></td>
-<td>25% of container</td>
-</tr>
-<tr>
-<td><code>'50p'</code></td>
-<td>50% of container</td>
-</tr>
-<tr>
-<td><code>'100p'</code></td>
-<td>100% of container</td>
-</tr>
-</tbody>
-</table>
+<script setup>
+import ExampleResizable from '@exampleComponents/ExampleResizable.vue';
+import ExampleResizableThreePanel from '@exampleComponents/ExampleResizableThreePanel.vue';
+import ExampleResizableVertical from '@exampleComponents/ExampleResizableVertical.vue';
+import ExampleResizableCollapsible from '@exampleComponents/ExampleResizableCollapsible.vue';
+</script>

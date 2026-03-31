@@ -56,18 +56,31 @@ import { useResizableKeyboard } from './composables/useResizableKeyboard';
 import { useResizableOffset } from './composables/useResizableOffset';
 
 const props = defineProps({
+  /** ID of the panel before this handle. Auto-detected from layout order if not set. */
   beforePanelId: { type: String, default: null },
+  /** ID of the panel after this handle. Auto-detected from layout order if not set. */
   afterPanelId: { type: String, default: null },
+  /** Disable resize interaction for this handle. */
   disabled: { type: Boolean, default: false },
+  /** Additional CSS classes applied to the handle element. */
   class: { type: [String, Object, Array], default: '' },
+  /** Disable the double-click reset behavior. */
   disableResetOnDoubleClick: { type: Boolean, default: false },
-  /** @values 'both', 'before', 'after', 'all' */
+  /**
+   * Which panels to reset on double-click.
+   * @values 'both', 'before', 'after', 'all'
+   */
   resetBehavior: { type: String, default: 'both' },
+  /** CSS selector for an element to offset the handle position from. */
   offsetElement: { type: String, default: undefined },
+  /** Additional pixel offset added to the measured element offset. */
   offsetAmount: { type: Number, default: 0 },
-  /** @values 'start', 'end', 'both' */
+  /**
+   * Which edge(s) the offset applies to.
+   * @values 'start', 'end', 'both'
+   */
   offsetDirection: { type: String, default: 'both' },
-  /** Override the default aria-label for i18n */
+  /** Override the default aria-label for i18n. */
   ariaLabel: { type: String, default: null },
 });
 

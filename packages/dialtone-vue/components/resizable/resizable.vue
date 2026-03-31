@@ -9,6 +9,7 @@
     ]"
     :data-storage-key="props.storageKey || undefined"
   >
+    <!-- @slot Container for panels and handles. -->
     <slot
       :panels="state.panels"
       :direction="currentDirection"
@@ -67,15 +68,20 @@ import {
 import { useResizableDrag, findPanelsForHandle } from './composables/useResizableDrag';
 
 const props = defineProps({
-  /** @values 'row', 'column' */
+  /**
+   * Layout direction. 'row' for horizontal, 'column' for vertical.
+   * @values 'row', 'column'
+   */
   direction: {
     type: String,
     default: 'row',
   },
+  /** localStorage key for persisting panel sizes across page loads. */
   storageKey: {
     type: String,
     default: null,
   },
+  /** Additional CSS classes applied to the container element. */
   class: {
     type: [String, Object, Array],
     default: '',
@@ -117,12 +123,15 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits([
-  'panel-resize',
-  'panel-collapse',
-  'resize-start',
-  'resize-end',
-]);
+const emit = defineEmits(
+  /**
+   * @event panel-resize - Emitted when a panel is resized. Payload: (panelId, size).
+   * @event panel-collapse - Emitted when a panel collapses or expands. Payload: (panelId, collapsed).
+   * @event resize-start - Emitted when a resize drag begins. Payload: (handleId).
+   * @event resize-end - Emitted when a resize drag ends. Payload: (handleId).
+   */
+  ['panel-resize', 'panel-collapse', 'resize-start', 'resize-end'],
+);
 
 const containerRef = ref(null);
 
