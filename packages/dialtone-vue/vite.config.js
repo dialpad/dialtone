@@ -60,7 +60,7 @@ export default defineConfig({
         minifyInternalExports: true,
         exports: 'named',
       },
-      treeshake: 'smallest',
+      treeshake: true,
     },
     lib: {
       entry: {
@@ -93,7 +93,7 @@ export default defineConfig({
       formats: ['es', 'cjs'],
     },
   },
-  plugins: [vue(), dts({ outDir: 'dist/types' })],
+  plugins: [vue(), dts({ vue: true, parallel: true, compilerOptions: { skipLibCheck: true } })],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('.', import.meta.url)),

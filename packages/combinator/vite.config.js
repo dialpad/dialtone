@@ -19,9 +19,6 @@ export default defineConfig({
       output: {
         preserveModules: true,
         minifyInternalExports: false,
-        globals: {
-          vue: 'Vue',
-        },
       },
     },
     lib: {

@@ -38,7 +38,7 @@ export default defineConfig({
   },
   plugins: [
     vue(),
-    dts({ outDir: 'dist/types' }),
+    dts({ outDir: 'dist/types', vue: true, parallel: true }),
   ],
   resolve: {
     alias: {

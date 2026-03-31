@@ -35,6 +35,9 @@
       "test-exclude": "^7.0.1",
       "trim": ">=0.0.3",
       "trim-newlines": ">=3.0.1"
+    },
+    "patchedDependencies": {
+      "@tiptap/vue-3@3.19.0": "patches/@tiptap__vue-3@3.19.0.patch"
     }
   },
   "files": [
@@ -120,7 +123,8 @@
     "linkifyjs": "4.3.2",
     "overlayscrollbars": "2.10.0",
     "regex-combined-emojis": "1.6.0",
-    "tippy.js": "6.3.7"
+    "tippy.js": "6.3.7",
+    "vue-tsc": "3.2.6"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.4.3",
