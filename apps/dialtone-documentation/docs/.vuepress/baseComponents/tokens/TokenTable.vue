@@ -78,9 +78,8 @@
                 </dt-lazy-show>
               </div>
             </dt-stack>
-            <dt-text kind="body" :size="200" tone="tertiary">
-              {{ description }}
-            </dt-text>
+            <!-- eslint-disable-next-line vue/no-v-text-v-html-on-component -->
+            <dt-text kind="body" :size="200" tone="tertiary" v-html="description" />
             <token-value
               v-if="isSmallDevice && showValue"
               :token-value="valueToString(tokenValue)"

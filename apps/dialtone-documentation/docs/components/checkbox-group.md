@@ -100,7 +100,7 @@ Checkbox Groups are typically paired with a legend which identifies the group. I
   <dt-checkbox value="other"><span>Other</span></dt-checkbox>
 </dt-checkbox-group>
 '>
-  <dt-stack gap="500">
+  <dt-stack gap="200">
     <div>
       <dt-checkbox-group
         name="checkbox-group-with-success-message"

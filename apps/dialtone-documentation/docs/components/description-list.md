@@ -17,7 +17,7 @@ keywords: ["definition list", "key value", "dl", "d-description-list", "DtDescri
 <code-example>
   <div class="d-w-500" data-demo-wrapper>
     <dt-description-list
-      gap="400"
+      gap="100"
       :items="items"
       direction="row"
     />
@@ -29,7 +29,7 @@ keywords: ["definition list", "key value", "dl", "d-description-list", "DtDescri
 <code-example>
   <div class="d-w-500" data-demo-wrapper>
     <dt-description-list
-      gap="400"
+      gap="100"
       :items="items"
       direction="column"
     />
@@ -41,7 +41,7 @@ keywords: ["definition list", "key value", "dl", "d-description-list", "DtDescri
 <code-example>
   <div class="d-w-500" data-demo-wrapper>
     <dt-description-list
-      gap="400"
+      gap="100"
       :items="longTextItems"
       direction="row"
     />
@@ -53,7 +53,7 @@ keywords: ["definition list", "key value", "dl", "d-description-list", "DtDescri
 <code-example>
   <div class="d-w-500" data-demo-wrapper>
     <dt-description-list
-      gap="400"
+      gap="100"
       :items="items"
       direction="row"
       :termClass="[`d-fc-critical`, `d-fw-bold`]"

@@ -43,7 +43,7 @@ The base loader size is 24px and should be used in most cases.
 <dt-loader size="100|200|300|400|500|600|700|800"></dt-loader>
 '>
   <dt-stack
-    gap="500"
+    gap="200"
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
     <dt-loader size="100"></dt-loader>

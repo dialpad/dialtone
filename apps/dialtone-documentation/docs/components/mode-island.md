@@ -195,7 +195,7 @@ Bind a reactive variable as the directive arg to switch modes at runtime.
 <code-example vueCode='
 <dt-text v-dt-mode:{mode} align="center" tone="success"> ... mode </dt-text>
 '>
-  <dt-stack gap="500">
+  <dt-stack gap="200">
     <dt-segmented-control :size="100" v-model="dynamicMode" aria-label="Mode">
       <dt-segmented-control-item value="invert" :selected="dynamicMode === 'invert'">
         <template #startIcon="{ iconSize }">
@@ -311,8 +311,7 @@ Mode boundaries can be nested. Each `v-dt-mode:invert` reads the nearest parent 
 The background surface of a Mode Island defaults to the root surface color. To override, use a CSS Utility class.
 
 <code-example>
-  <dt-stack gap="200">
-    <dt-stack gap="500" data-demo-wrapper>
+  <dt-stack gap="200" data-demo-wrapper>
     <dt-mode-island class="d-p-200 d-bar8 d-w100p d-bgc-transparent">
         <dt-stack gap="200">
           <dt-text as="p" kind="code" :size="100" tone="tertiary">Transparent background, inverted mode island</dt-text>
@@ -345,7 +344,6 @@ The background surface of a Mode Island defaults to the root surface color. To o
           </div>
         </dt-stack>
       </dt-mode-island>
-  </dt-stack>
   </dt-stack>
 </code-example>
 

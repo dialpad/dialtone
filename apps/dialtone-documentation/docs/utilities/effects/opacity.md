@@ -9,7 +9,7 @@ keywords: ["transparent", "alpha", "fade"]
 Use `d-o{n}` to change the opacity of your element.
 
 <code-well-header>
-  <dt-stack direction="row" gap="500">
+  <dt-stack direction="row" gap="200">
     <div class="d-p-200 d-bar8 d-bgc-moderate d-o100">.d-o100</div>
     <div class="d-p-200 d-bar8 d-bgc-moderate d-o75">.d-o75</div>
     <div class="d-p-200 d-bar8 d-bgc-moderate d-o50">.d-o50</div>

@@ -36,7 +36,7 @@ keywords: ["emoticon","smiley","d-emoji","DtEmoji","dt-emoji"]
 <code-example vueCode='
 <dt-emoji size="100|200|300|400|500|600|700|800" code=":smile:" />
 '>
-  <dt-stack direction="row" gap="400" align="center">
+  <dt-stack direction="row" gap="100" align="center">
     <dt-emoji v-for="size in sizes" :size="size" code=":smile:" />
   </dt-stack>
 </code-example>

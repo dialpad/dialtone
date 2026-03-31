@@ -267,7 +267,7 @@ Use `type="search"` with a clear button in the `icon` slot. When the input is no
 Each Text Input size has a default icon size, keeping it proportional. While rare, customizing the icon size is possible.
 
 <code-example>
-  <dt-stack gap="500" class="d-w100p" data-demo-wrapper>
+  <dt-stack gap="200" class="d-w100p" data-demo-wrapper>
     <dt-input label="Medium input with smallest icon" type="text" placeholder="Placeholder" :size="300">
       <template #startIcon>
         <dt-icon name="box-select" size="100" />
@@ -299,7 +299,7 @@ The label text size is automatically derived from the component's `size` prop. U
 <code-example vueCode='
 <dt-input label="Extra small label" placeholder="Placeholder" :label-size="100" />
 '>
-  <dt-stack gap="500" class="d-w100p" data-demo-wrapper>
+  <dt-stack gap="200" class="d-w100p" data-demo-wrapper>
     <dt-input label="Extra small label" placeholder="Placeholder" :label-size="100" />
     <dt-input label="Small label" placeholder="Placeholder" :label-size="200" />
     <dt-input label="Medium label (default)" placeholder="Placeholder" :label-size="300" />
@@ -314,7 +314,7 @@ Override the label font weight independently of the label size. Valid values are
 <code-example vueCode='
 <dt-input label="Label" placeholder="Placeholder" label-strength="bold|semibold|medium|normal" />
 '>
-  <dt-stack gap="500" class="d-w100p" data-demo-wrapper>
+  <dt-stack gap="200" class="d-w100p" data-demo-wrapper>
     <dt-input label="Bold label" placeholder="Placeholder" label-strength="bold" />
     <dt-input label="Semibold label" placeholder="Placeholder" label-strength="semibold" />
     <dt-input label="Medium label" placeholder="Placeholder" label-strength="medium" />

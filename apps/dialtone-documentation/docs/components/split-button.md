@@ -267,7 +267,7 @@ Use `#endIcon` to replace the default chevron icon on the end (omega) button.
 ### Icon Only
 
 <code-example>
-  <dt-stack direction="row" gap="400" data-demo-wrapper>
+  <dt-stack direction="row" gap="100" data-demo-wrapper>
     <dt-split-button end-tooltip-text="More calling options" start-tooltip-text="Place call">
       <template #startIcon="{ size }">
         <dt-icon name="phone" :size="size" />
@@ -286,32 +286,12 @@ Use `#endIcon` to replace the default chevron icon on the end (omega) button.
   </dt-stack>
 </code-example>
 
-<code-example bgclass="d-bgc-contrast">
-  <dt-stack direction="row" gap="400" data-demo-wrapper>
-    <dt-split-button kind="inverted" end-tooltip-text="More calling options" start-tooltip-text="Place call">
-      <template #startIcon="{ size }">
-        <dt-icon name="phone" :size="size" />
-      </template>
-    </dt-split-button>
-    <dt-split-button importance="outlined" kind="inverted" end-tooltip-text="More calling options" start-tooltip-text="Place call">
-      <template #startIcon="{ size }">
-        <dt-icon name="phone" :size="size" />
-      </template>
-    </dt-split-button>
-    <dt-split-button importance="clear" kind="inverted" end-tooltip-text="More calling options" start-tooltip-text="Place call">
-      <template #startIcon="{ size }">
-        <dt-icon name="phone" :size="size" />
-      </template>
-    </dt-split-button>
-  </dt-stack>
-</code-example>
-
 ## Leading & Trailing
 
 The `#leading` and `#trailing` slots are forwarded to the alpha button. Use `alpha-leading-class` and `alpha-trailing-class` to style the containers.
 
 <code-example>
-  <dt-stack direction="row" gap="400" data-demo-wrapper>
+  <dt-stack direction="row" gap="100" data-demo-wrapper>
     <dt-split-button
       importance="outlined"
       omega-tooltip-text="More calling options"

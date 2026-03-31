@@ -123,7 +123,7 @@ Use when item heights depend on their content. Set `dynamic="true"` and `:min-it
       class="d-ba d-bar8 d-p-50"
     >
       <template #default="{ item }">
-        <dt-stack gap="400" direction="row" align="start" class="d-p-50">
+        <dt-stack gap="100" direction="row" align="start" class="d-p-50">
           <dt-avatar :size="300" :full-name="item.id" />
           <dt-stack>
             <dt-text kind="headline" :size="200" tone="secondary">{{ item.id }}</dt-text>

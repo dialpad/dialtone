@@ -305,7 +305,7 @@ Provides feedback to the user based on their interaction, or lack thereof, with 
 
 ## Sizes
 
-We offer different sizes for instances in which the interface requires a smaller or larger select. In general, though, use the base (medium) size select as much as possible, especially in forms.
+We offer different sizes for instances in which the interface requires a smaller or larger select. In general, though, use the base `300` (medium) size select as much as possible, especially in forms.
 
 <code-example vueCode='
 <dt-select-menu
@@ -322,7 +322,7 @@ We offer different sizes for instances in which the interface requires a smaller
   @change="onChange"
 />
 '>
-  <dt-stack gap="500">
+  <dt-stack gap="200">
     <example-select-menu label="Label" :size="100" />
     <example-select-menu label="Label" :size="200" />
     <example-select-menu label="Label" :size="300" />
@@ -343,7 +343,7 @@ The label text size is automatically derived from the component's `size` prop. U
   :label-size="100"
 />
 '>
-  <dt-stack gap="500">
+  <dt-stack gap="200">
     <example-select-menu label="Extra small label" :label-size="100" />
     <example-select-menu label="Small label" :label-size="200" />
     <example-select-menu label="Medium label (default)" :label-size="300" />
@@ -362,7 +362,7 @@ Override the label font weight independently of the label size. Valid values are
   label-strength="bold|semibold|medium|normal"
 />
 '>
-  <dt-stack gap="500">
+  <dt-stack gap="200">
     <example-select-menu label="Bold label" label-strength="bold" />
     <example-select-menu label="Semibold label" label-strength="semibold" />
     <example-select-menu label="Medium label" label-strength="medium" />

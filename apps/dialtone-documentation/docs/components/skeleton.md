@@ -111,7 +111,7 @@ Customize an animating Skeleton by modifying the `--placeholder-from-color` and 
 Default sizes match the avatar size. Size is customizable when needed.
 
 <code-example>
-  <dt-stack gap="400" data-demo-wrapper>
+  <dt-stack gap="100" data-demo-wrapper>
     <p>S (24x24px)</p>
     <dt-skeleton :shape-option="{ shape: 'circle', size: 'sm' }" :animate="false" />
     <p>M (32x32px)</p>
@@ -124,7 +124,7 @@ Default sizes match the avatar size. Size is customizable when needed.
 ### Image / Icon
 
 <code-example>
-  <dt-stack data-demo-wrapper>
+  <dt-stack gap="100" data-demo-wrapper>
     <p>S (24x24px)</p>
     <dt-skeleton :shape-option="{ shape: 'square', size: 'sm' }" :animate="false" />
     <p>M (32x32px)</p>
@@ -137,7 +137,7 @@ Default sizes match the avatar size. Size is customizable when needed.
 ### Headings
 
 <code-example>
-  <dt-stack data-demo-wrapper>
+  <dt-stack gap="100" data-demo-wrapper>
     <p>Small</p>
     <dt-skeleton :text-option="{ type: 'heading', headingHeight: 'sm', width: '160px' }" :animate="false" />
     <p>Medium</p>

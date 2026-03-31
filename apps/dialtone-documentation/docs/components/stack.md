@@ -204,8 +204,8 @@ vueCode='
   <div> Stack item 3 </div>
 </dt-stack>
 '>
-  <dt-stack gap="500" class="d-w100p">
-    <div class="d-d-none xl:d-d-flex">
+  <dt-stack gap="200" class="d-w100p">
+    <div class="d-d-none xl:d-d-flex d-jc-center">
       <dt-segmented-control
         :size="100"
         :model-value="selectedGap"
@@ -319,7 +319,7 @@ vueCode='
 </dt-stack>
 '>
   <dt-stack
-    gap="500"
+    gap="200"
     :direction="{ default: `column`, md: `row` }"
   >
     <dt-stack
@@ -1084,8 +1084,8 @@ View the [Migrating from Flex CSS Utilities to DtStack](/about/whats-new/posts/2
 
 <code-example
 vueCode='
-<dt-stack gap="500">
-  <dt-stack gap="400" justify="space-between">
+<dt-stack gap="200">
+  <dt-stack gap="100" justify="space-between">
     <dt-stack>
       <dt-text as="h2" kind="headline" :size="500" strength="medium" density="200" class="d-fs-400">
         Katie Rodriguez
@@ -1111,7 +1111,7 @@ vueCode='
       </dt-text>
     </dt-stack>
   </dt-stack>
-  <dt-stack gap="400" direction="row" justify="space-between">
+  <dt-stack gap="100" direction="row" justify="space-between">
     <dt-button class="d-fl1" kind="muted" importance="outlined">
       <template #startIcon="{ iconSize }">
         <dt-icon-phone :size="iconSize" />
@@ -1141,7 +1141,7 @@ vueCode='
 <code-example>
   <dt-stack gap="100" class="d-w-800">
     <dt-text as="h2" kind="headline" :size="400">Saturday, May 24, 2025</dt-text>
-    <dt-stack direction="row" gap="450" class="d-w100p">
+    <dt-stack direction="row" gap="100" class="d-w100p">
       <dt-avatar full-name="Ashanti Trevor" />
       <dt-stack class="d-fl1">
         <dt-text kind="body" :size="200" strength="bold">Ashanti Trevor</dt-text>
@@ -1174,7 +1174,7 @@ vueCode='
   import ExampleProfileCard from '@exampleComponents/ExampleProfileCard.vue';
   import { values as spacingValues } from '@data/spacing.json';
 
-  const selectedGap = ref('400');
+  const selectedGap = ref('100');
 
   const gapToPx = (gap) => {
     const entry = spacingValues.find(v => v.value === gap);
@@ -1185,7 +1185,8 @@ vueCode='
     selectedGap.value = gap;
   };
 
-  const gaps = window.DIALTONE_CONSTANTS.DT_STACK_GAP;
+  const allGaps = window.DIALTONE_CONSTANTS.DT_STACK_GAP;
+  const gaps = allGaps.slice(0, allGaps.indexOf('400') + 1);
 </script>
 
 <style scoped lang="less">

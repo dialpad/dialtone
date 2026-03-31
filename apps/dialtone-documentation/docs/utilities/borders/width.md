@@ -10,7 +10,7 @@ Use `d-baw{n}` to change the border width on your element.
 
 <code-well-header>
   <dt-stack
-    gap="500"
+    gap="200"
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
     <div
@@ -36,7 +36,7 @@ Use `d-b{a|t|r|b|l}w{n}` to change the border width of your direction on your el
 
 <code-well-header>
   <dt-stack
-    gap="500"
+    gap="200"
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
     <div
@@ -50,7 +50,6 @@ Use `d-b{a|t|r|b|l}w{n}` to change the border width of your direction on your el
 </code-well-header>
 
 ```html
-
 <div class="d-bt d-btw1">...</div>
 <div class="d-br d-btw2">...</div>
 <div class="d-bb d-btw4">...</div>

@@ -49,7 +49,7 @@ Checkboxes are an easily understandable way to indicate that users can select on
 ### Base Styles
 
 <code-example>
-  <dt-stack gap="400" data-demo-wrapper>
+  <dt-stack gap="100" data-demo-wrapper>
     <!-- Default -->
     <dt-checkbox
       name="default"
@@ -84,7 +84,7 @@ Checkboxes are an easily understandable way to indicate that users can select on
 ### Indeterminate
 
 <code-example>
-  <dt-stack gap="400" data-demo-wrapper>
+  <dt-stack gap="100" data-demo-wrapper>
     <!-- Indeterminate -->
     <dt-checkbox
       name="indeterminate"
@@ -184,7 +184,7 @@ Checkboxes are an easily understandable way to indicate that users can select on
 Use the `label-size` prop to override the default label size.
 
 <code-example>
-  <dt-stack gap="400" data-demo-wrapper>
+  <dt-stack gap="100" data-demo-wrapper>
     <dt-checkbox name="sizeXs" value="Value" label="Extra small label" :label-size="100" />
     <dt-checkbox name="sizeSm" value="Value" label="Small label" :label-size="200" />
     <dt-checkbox name="sizeMd" value="Value" label="Medium label (default)" :label-size="300" />

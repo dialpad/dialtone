@@ -87,7 +87,6 @@ Although highly versatile, this doesn't mean modal dialogs are fit for all purpo
     <dt-button
       id="confirm-button"
       importance="primary"
-      class="d-mis-75"
     >
       Confirm
     </dt-button>
@@ -128,7 +127,6 @@ This is the default behavior that adds the scroll automatically in the modal con
     <dt-button
       id="confirm-button"
       importance="primary"
-      class="d-mis-75"
     >
       Confirm
     </dt-button>
@@ -169,7 +167,6 @@ A modal style for destructive or irreversible actions.
       id="confirm-button"
       kind="danger"
       importance="primary"
-      class="d-mis-75"
     >
       Confirm
     </dt-button>
@@ -209,7 +206,6 @@ To make this modal take up as much of the screen as possible.
     <dt-button
       id="confirm-button"
       importance="primary"
-      class="d-mis-75"
     >
       Confirm
     </dt-button>
@@ -250,7 +246,6 @@ When there is a need of more context information regarding the content of the Mo
     <dt-button
       id="confirm-button"
       importance="primary"
-      class="d-mis-75"
     >
       Confirm
     </dt-button>
@@ -262,20 +257,13 @@ When there is a need of more context information regarding the content of the Mo
   Click to open
 </dt-button>
 '>
-  <dt-stack direction="row" gap="500" align="end">
+  <dt-stack direction="row" gap="200" align="end">
     <dt-select-menu
+      v-model="selectedBannerKind"
       label="Kind of Banner"
       :size="300"
-      @change="changeBannerKind"
-    >
-      <option
-        v-for="option in bannerKinds()"
-        :key="option"
-        :selected="option === selectedBannerKind"
-        :value="option"
-        v-text="option"
-      />
-    </dt-select-menu>
+      :options="bannerKinds"
+    />
     <example-modal kind="default" :banner-kind="selectedBannerKind" banner-title="This banner can have different kinds." />
   </dt-stack>
 </code-example>

@@ -17,7 +17,6 @@ Use `d-bgc-{name}` to control which box an element's background is clipped by.
 </code-well-header>
 
 ```html
-
 <div class="d-bgc-border-box">...</div>
 <div class="d-bgc-padding-box">...</div>
 <div class="d-bgc-content-box">...</div>

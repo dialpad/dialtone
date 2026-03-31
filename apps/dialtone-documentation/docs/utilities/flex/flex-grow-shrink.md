@@ -84,15 +84,15 @@ The `flex-grow` sets the flex container’s grow factor relative to the parent's
         </tr>
       </thead>
       <tbody>
-        <tr v-for="v in properties[1].values">
+        <tr v-for="v in properties[1].values" valign="baseline">
           <th scope="row" class="d-code--sm d-docsite-code">.d-{{ properties[1].class }}{{ v }}</th>
-          <td class="d-code--sm">flex-grow: {{ v }} !important;</td>
-          <td>{{ properties[1].description }} {{ v }}.</td>
+          <td><dt-text as="code" kind="code" size="100">flex-grow: {{ v }} !important;</dt-text></td>
+          <td><dt-text as="p" kind="body" size="200">{{ properties[1].description }} {{ v }}.</dt-text></td>
         </tr>
-        <tr>
+        <tr valign="baseline">
           <th scope="row" class="d-code--sm d-docsite-code">.d-fl-grow-unset</th>
-          <td class="d-code--sm">flex-grow: unset !important;</td>
-          <td>Resets the flex-grow value to the initial value (0).</td>
+          <td><dt-text as="code" kind="code" size="100">flex-grow: unset !important;</dt-text></td>
+          <td><dt-text as="p" kind="body" size="200">Resets the flex-grow value to the initial value (0).</dt-text></td>
         </tr>
       </tbody>
     </table>
@@ -104,10 +104,10 @@ The `flex-grow` sets the flex container’s grow factor relative to the parent's
 The `flex-shrink` sets the flex container’s shrink factor relative to the parent's main size. The default value is 1.
 
 <code-well-header>
-  <dt-stack direction="row" class="d-w-25 d-bar8 d-bgc-moderate">
-    <div class="d-fl-none d-p-200">Longer text that cannot flex</div>
-    <div class="d-fl-shrink1 d-p-200 d-bgc-moderate-opaque">Text that will shrink even if it causes text to wrap</div>
-    <div class="d-fl-none d-p-200">Longer text that cannot flex</div>
+  <dt-stack direction="row" class="d-bar8 d-bgc-moderate">
+    <div class="d-bar8 d-fl-none d-p-200 d-bgc-moderate-opaque">Longer text that cannot flex</div>
+    <div class="d-bar8 d-fl-shrink1 d-p-200 d-bgc-moderate-opaque">Text that will shrink even if it causes text to wrap</div>
+    <div class="d-bar8 d-fl-none d-p-200 d-bgc-moderate-opaque">Longer text that cannot flex</div>
   </dt-stack>
 </code-well-header>
 
@@ -130,15 +130,15 @@ The `flex-shrink` sets the flex container’s shrink factor relative to the pare
         </tr>
       </thead>
       <tbody>
-        <tr v-for="v in properties[2].values">
+        <tr v-for="v in properties[2].values" valign="baseline">
           <th scope="row" class="d-code--sm d-docsite-code">.d-{{ properties[2].class }}{{ v }}</th>
-          <td class="d-code--sm">flex-shrink: {{ v }} !important;</td>
-          <td>{{ properties[2].description }} {{ v }}.</td>
+          <td><dt-text as="code" kind="code" size="100">flex-shrink: {{ v }} !important;</dt-text></td>
+          <td><dt-text as="p" kind="body" size="200">{{ properties[2].description }} {{ v }}.</dt-text></td>
         </tr>
-        <tr>
+        <tr valign="baseline">
           <th scope="row" class="d-code--sm d-docsite-code">.d-fl-shrink-unset</th>
-          <td class="d-code--sm">flex-shrink: unset !important;</td>
-          <td>Resets the flex-shrink value to the initial value (1).</td>
+          <td><dt-text as="code" kind="code" size="100">flex-shrink: unset !important;</dt-text></td>
+          <td><dt-text as="p" kind="body" size="200">Resets the flex-shrink value to the initial value (1).</dt-text></td>
         </tr>
       </tbody>
     </table>

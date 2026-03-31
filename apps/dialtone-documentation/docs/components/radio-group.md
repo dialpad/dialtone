@@ -95,7 +95,7 @@ The event handler is only needed if you need to do additional processing. The v-
 ### With Validation States
 
 <code-example>
-  <dt-stack gap="500" data-demo-wrapper>
+  <dt-stack gap="200" data-demo-wrapper>
     <div>
       <dt-radio-group
         name="radio-group-with-success-message"

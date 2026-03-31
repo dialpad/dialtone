@@ -34,6 +34,7 @@
           <tr
             v-for="({ class: className, applies, description }) in classes"
             :key="className"
+            valign="baseline"
           >
             <th
               scope="row"
@@ -58,12 +59,8 @@
               </dt-text>
             </td>
             <td>
-              <dt-text
-                kind="body"
-                :size="100"
-              >
-                {{ description }}
-              </dt-text>
+              <!-- eslint-disable-next-line vue/no-v-text-v-html-on-component -->
+              <dt-text kind="body" :size="200" v-html="description" />
             </td>
           </tr>
         </tbody>

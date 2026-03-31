@@ -144,7 +144,7 @@ A few rules to keep in nothing-to-see-here when choosing a size variant.
     body-text="Looks like there is no data to display here."
   >
     <template #body>
-      <dt-stack direction="row" gap="300">
+      <dt-stack direction="row" gap="50">
         <dt-button importance="clear">Action</dt-button>
         <dt-button>Action</dt-button>
       </dt-stack>
@@ -163,7 +163,7 @@ A few rules to keep in nothing-to-see-here when choosing a size variant.
     body-text="Looks like there is no data to display here."
   >
     <template #body>
-      <dt-stack direction="row" gap="300">
+      <dt-stack direction="row" gap="50">
         <dt-button importance="clear">Action</dt-button>
         <dt-button>Action</dt-button>
       </dt-stack>
@@ -183,7 +183,7 @@ A few rules to keep in nothing-to-see-here when choosing a size variant.
     body-text="Looks like there is no data to display here."
   >
     <template #body>
-      <dt-stack direction="row" gap="300">
+      <dt-stack direction="row" gap="50">
         <dt-button importance="clear">Action</dt-button>
         <dt-button>Action</dt-button>
       </dt-stack>
@@ -203,7 +203,7 @@ A few rules to keep in nothing-to-see-here when choosing a size variant.
     body-text="Looks like there is no data to display here."
   >
     <template #body>
-      <dt-stack direction="row" gap="300">
+      <dt-stack direction="row" gap="50">
         <dt-button importance="clear">Action</dt-button>
         <dt-button>Action</dt-button>
       </dt-stack>
@@ -223,7 +223,7 @@ A few rules to keep in nothing-to-see-here when choosing a size variant.
     body-text="Looks like there is no data to display here."
   >
     <template #body>
-      <dt-stack direction="row" gap="300">
+      <dt-stack direction="row" gap="50">
         <dt-button importance="clear">Action</dt-button>
         <dt-button>Action</dt-button>
       </dt-stack>
@@ -269,7 +269,7 @@ A few rules to keep in nothing-to-see-here when choosing a size variant.
     body-text="Looks like there is no data to display here."
   >
     <template #body>
-      <dt-stack direction="row" gap="300">
+      <dt-stack direction="row" gap="50">
         <dt-button importance="clear">Action</dt-button>
         <dt-button>Action</dt-button>
       </dt-stack>
@@ -289,7 +289,7 @@ A few rules to keep in nothing-to-see-here when choosing a size variant.
     body-text="Looks like there is no data to display here."
   >
     <template #body>
-      <dt-stack direction="row" gap="300">
+      <dt-stack direction="row" gap="50">
         <dt-button kind="muted" :size="200" importance="clear">Action</dt-button>
         <dt-button kind="muted" importance="outlined" :size="200">Action</dt-button>
       </dt-stack>

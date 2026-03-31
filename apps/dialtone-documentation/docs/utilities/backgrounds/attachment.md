@@ -23,7 +23,6 @@ This is the default behavior. Use `d-bga-scroll` to fix the <dt-link href="/asse
 </code-well-header>
 
 ```html
-
 <div class="... d-bga-scroll">...</div>
 ```
 
@@ -46,7 +45,6 @@ Use `d-bga-fixed` to fix the <dt-link href="/assets/images/dp-sample-gradient.pn
 </code-well-header>
 
 ```html
-
 <div class="... d-bga-fixed">...</div>
 ```
 
@@ -71,7 +69,6 @@ of the element rather than the viewable box.
 </code-well-header>
 
 ```html
-
 <div class="... d-bga-local">...</div>
 ```
 

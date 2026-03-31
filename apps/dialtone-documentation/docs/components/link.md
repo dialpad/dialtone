@@ -45,7 +45,7 @@ keywords: ["anchor", "hyperlink", "url", "d-link", "DtLink", "dt-link", "text li
 ### Default
 
 <code-example>
-  <DtStack gap="400" data-demo-wrapper>
+  <DtStack gap="100" data-demo-wrapper>
     <dt-link href="#link">Base link</dt-link>
     <dt-link href="#link" kind="danger">Danger link</dt-link>
     <dt-link href="#link" kind="muted">Muted link</dt-link>
@@ -80,7 +80,7 @@ In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#
 <code-example vueCode='
 <dt-link v-dt-mode:invert {props}>Link</dt-link>
 '>
-  <DtStack gap="400" class="d-bgc-contrast d-p-100">
+  <DtStack gap="100" class="d-bgc-contrast d-p-100">
     <dt-link v-dt-mode:invert href="#link">Base link</dt-link>
     <dt-link v-dt-mode:invert href="#link" kind="danger">Danger link</dt-link>
     <dt-link v-dt-mode:invert href="#link" kind="success">Success link</dt-link>

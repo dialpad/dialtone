@@ -96,7 +96,7 @@ Unless otherwise specified via the `color` prop, a background color will be prov
   seed="user-unique-id"
 />
 '>
-  <dt-stack direction="row" gap="500" class="d-w-500 d-fw-wrap">
+  <dt-stack direction="row" gap="200" class="d-w-500 d-fw-wrap">
     <dt-avatar v-for="seed in seeds" :seed="seed" full-name="Daniel Parker" />
   </dt-stack>
 </code-example>
@@ -106,7 +106,7 @@ Unless otherwise specified via the `color` prop, a background color will be prov
 If `image-src` is not provided, or if image fails to load, the avatar will fall back to the initials extracted from the `full-name`.
 
 <code-example>
-  <dt-stack direction="row" gap="400" data-demo-wrapper>
+  <dt-stack direction="row" gap="100" data-demo-wrapper>
     <dt-avatar image-src="/assets/images/person.png" full-name="Daniel Parker" image-alt="avatar user" />
     <dt-avatar image-src="/assets/images/broken-image.png" full-name="Daniel Parker" image-alt="avatar user" />
   </dt-stack>
@@ -137,7 +137,7 @@ Avatar supports a 100-based sizing scale. T-shirt sizes (`xs`, `sm`, `md`, `lg`,
   </template>
 </dt-avatar>
 '>
-  <dt-stack direction="row" align="center" justify="center" gap="500" class="d-fw-wrap">
+  <dt-stack direction="row" align="center" justify="center" gap="200" class="d-fw-wrap">
     <dt-avatar v-for="size in sizes" :size="size">
       <template #icon>
         <dt-icon-user />
@@ -151,7 +151,7 @@ Avatar supports a 100-based sizing scale. T-shirt sizes (`xs`, `sm`, `md`, `lg`,
 The group avatar is used to represent group discussions in a compact form. A count badge is added on top of the avatar. The avatar shown is the last person to send a message in the group. The group avatar is available only from sizes 100-500. At size 100, only the count badge is shown.
 
 <code-example>
-  <dt-stack direction="row" align="center" gap="500" data-demo-wrapper>
+  <dt-stack direction="row" align="center" gap="200" data-demo-wrapper>
     <dt-avatar size="100" :group="3" image-src="/assets/images/person.png" image-alt="Person Avatar" />
     <dt-avatar size="150" :group="5" image-src="/assets/images/person.png" image-alt="Person Avatar" />
     <dt-avatar size="200" :group="12" image-src="/assets/images/person.png" image-alt="Person Avatar" />
@@ -167,15 +167,15 @@ The group avatar is used to represent group discussions in a compact form. A cou
 Provides the user's current [presence](/components/presence.md), positioned in the bottom right corner.
 
 <code-example>
-  <dt-stack gap="400" data-demo-wrapper>
-    <dt-stack direction="row" align="center" gap="400">
+  <dt-stack gap="100" data-demo-wrapper>
+    <dt-stack direction="row" align="center" gap="100">
       <dt-avatar :size="100" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
       <dt-avatar :size="200" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
       <dt-avatar :size="300" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
       <dt-avatar :size="400" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
       <dt-avatar :size="500" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
     </dt-stack>
-    <dt-stack direction="row" align="center" gap="400">
+    <dt-stack direction="row" align="center" gap="100">
       <dt-avatar :size="100" presence="active" seed="user-1" full-name="Test Name" />
       <dt-avatar :size="200" presence="away" seed="user-2" full-name="William Steele" />
       <dt-avatar :size="300" presence="busy" seed="user-3" full-name="Frank Richard" />
@@ -188,7 +188,7 @@ Provides the user's current [presence](/components/presence.md), positioned in t
 ### Overlay
 
 <code-example>
-  <dt-stack direction="row" align="center" gap="500" data-demo-wrapper>
+  <dt-stack direction="row" align="center" gap="200" data-demo-wrapper>
     <dt-avatar :size="400" image-src="/assets/images/person.png" image-alt="avatar user">
       <template #overlayIcon>
         <dt-icon-hear />
@@ -217,7 +217,7 @@ Avatars that convey meaning on their own — such as navigation or actions — s
 Use the `deactivated` prop to render the avatar in a desaturated/washed-out state. This is useful to indicate that a user is deactivated or inactive.
 
 <code-example>
-  <dt-stack direction="row" align="center" gap="500" data-demo-wrapper>
+  <dt-stack direction="row" align="center" gap="200" data-demo-wrapper>
     <dt-avatar deactivated image-src="/assets/images/person.png" image-alt="Deactivated user" />
     <dt-avatar deactivated full-name="Deactivated User" seed="user-deactivated" />
     <dt-avatar deactivated>

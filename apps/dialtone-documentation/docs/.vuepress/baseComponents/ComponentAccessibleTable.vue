@@ -34,6 +34,7 @@
           <tr
             v-for="({ item, applies, description }) in accessible"
             :key="item"
+            valign="baseline"
           >
             <th scope="row">
               <dt-text
@@ -56,12 +57,8 @@
               </dt-text>
             </td>
             <td>
-              <dt-text
-                kind="body"
-                :size="100"
-              >
-                {{ description }}
-              </dt-text>
+              <!-- eslint-disable-next-line vue/no-v-text-v-html-on-component -->
+              <dt-text kind="body" :size="200" v-html="description" />
             </td>
           </tr>
         </tbody>

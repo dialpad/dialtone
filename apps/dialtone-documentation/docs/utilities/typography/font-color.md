@@ -54,7 +54,6 @@ Use `h:d-fc-{color}` to change an element's text color `:hover` state.
 </code-well-header>
 
 ```html
-
 <dt-button kind="unstyled" class="d-fc-critical h:d-fc-success">Hover over me</dt-button>
 ```
 
@@ -67,7 +66,6 @@ Use `f:d-fc-{color}` to change an element's text color `:focus` and `:focus-with
 </code-well-header>
 
 ```html
-
 <dt-button kind="unstyled" class="d-fc-critical f:d-fc-success">Focus me</dt-button>
 ```
 
@@ -80,7 +78,6 @@ Use `fv:d-fc-{color}` to change an element's text color on `:focus-visible` stat
 </code-well-header>
 
 ```html
-
 <dt-button kind="unstyled" class="d-fc-critical fv:d-fc-success">Keyboard focus me</dt-button>
 ```
 

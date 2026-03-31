@@ -174,12 +174,12 @@ Rather than use the `-inverted` tone variants, use the [v-dt-mode](/components/m
 <code-example vueCode='
 <dt-text v-dt-mode:invert tone="critical">critical tone on contrasting surface</dt-text>
 '>
-  <dt-stack gap="300" class="d-py-100 d-px-200 d-bar4">
-    <div class="d-p-100 d-bgc-transparent">
-      <dt-text tone="critical">critical tone on default surface</dt-text>
+  <dt-stack gap="100" class="d-py-100 d-px-200 d-bar4">
+    <div class="d-p-100 d-px-150 d-bgc-transparent d-baw2 d-bas-dashed d-bc-subtle">
+      <dt-text as="p" align="center" tone="critical">critical tone on default surface</dt-text>
     </div>
-    <div class="d-p-100 d-bgc-contrast">
-      <dt-text v-dt-mode:invert tone="critical">critical tone on contrasting surface</dt-text>
+    <div class="d-p-100 d-px-150 d-bgc-contrast">
+      <dt-text as="p" align="center" v-dt-mode:invert tone="critical">critical tone on contrasting surface</dt-text>
     </div>
   </dt-stack>
 </code-example>
@@ -194,17 +194,17 @@ Use `as` to declare the underlying HTML tag that the component should render, in
       <dt-text kind="headline" as="h1" :size="600">The Complete Agentic AI Platform</dt-text>
       <dt-text kind="body" as="p" :size="400">Our AI Agents come equipped with the core skills businesses need to deliver seamless customer experiences.</dt-text>
     </dt-stack>
-    <dt-stack :direction="{ 'default': 'column', 'md': 'row' }" gap="500" align="start">
-      <dt-stack>
-        <dt-text kind="headline" as="h2" :size="500">Try before you AI</dt-text>
+    <dt-stack direction="row" gap="500" align="start">
+      <dt-stack gap="100">
+        <dt-text kind="headline" as="h2" :size="500" density="200">Try before you AI</dt-text>
         <dt-text kind="body" as="p">Build, run and optimize your agents - no code, just your expertise and our built-in intelligence.</dt-text>
       </dt-stack>
-      <dt-stack>
-        <dt-text kind="headline" as="h2" :size="500">Great minds sync alike</dt-text>
+      <dt-stack gap="100">
+        <dt-text kind="headline" as="h2" :size="500" density="200">Great minds sync alike</dt-text>
         <dt-text kind="body" as="p">Our AI learns and balances speed with quality using one data plane that keeps customers coming back.</dt-text>
       </dt-stack>
-      <dt-stack>
-        <dt-text kind="headline" as="h2" :size="500">History repeats itself. Customers shouldn't.</dt-text>
+      <dt-stack gap="100">
+        <dt-text kind="headline" as="h2" :size="500" density="200">History repeats itself. Customers shouldn't.</dt-text>
         <dt-text kind="body" as="p">Whatever your customer types or says, our AI and your human agents stay in sync.</dt-text>
       </dt-stack>
     </dt-stack>

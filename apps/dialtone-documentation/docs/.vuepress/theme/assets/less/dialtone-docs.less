@@ -366,7 +366,7 @@ html body {
   // border-inline-end: var(--dt-size-100) solid var(--dt-shell-color-border-subtle);
 
   &__list {
-    padding: var(--dt-spacing-300) 0 calc(var(--dt-spacing-100) * 12) var(--dt-spacing-100);
+    padding: var(--dt-spacing-300) 0 calc(var(--dt-spacing-100) * 12) var(--dt-spacing-200);
     padding-block-start: var(--dt-spacing-700);
     inset-block: var(--dt-layout-100) 0;
     inline-size: var(--dt-layout-400);
@@ -381,7 +381,7 @@ html body {
     margin-block-end: var(--dt-spacing-100);
     border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
     border-radius: var(--dt-size-radius-500);
-    margin-inline: var(--dt-spacing-100);
+    margin-inline: var(--dt-spacing-200);
   }
 }
 
@@ -948,7 +948,7 @@ a.header-anchor {
 
   display: flex;
   flex-direction: column;
-  gap: var(--dt-spacing-400);
+  gap: var(--dt-spacing-200);
   margin-block: var(--dt-spacing-300);
 
   @media screen and (min-width: 640px) {
@@ -962,7 +962,7 @@ a.header-anchor {
     align-self: baseline;
     padding: var(--dt-spacing-1) var(--dt-spacing-75);
     color: var(--dt-color-foreground-primary-inverted);
-    font: var(--dt-text-label-sm);
+    font: var(--dt-text-label-xs);
     background-color: var(--usage-item-background-hd);
     border-radius: var(--dt-size-radius-pill);
 
@@ -984,10 +984,10 @@ a.header-anchor {
     flex: 1;
     flex-direction: column;
     gap: var(--dt-spacing-200);
-    padding: var(--dt-spacing-300);
+    padding: var(--dt-spacing-200);
     color: var(--dt-color-foreground-secondary);
     border: var(--dt-size-border-100) solid var(--usage-item-color-border);
-    border-radius: var(--dt-spacing-200);
+    border-radius: var(--dt-size-radius-400);
 
     &--do {
       --usage-item-color-border: var(--dt-color-border-success);

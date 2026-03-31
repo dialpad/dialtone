@@ -14,7 +14,6 @@ Use `d-bgg-pattern-{pattern}-{dark|light}` to apply a pattern.
 </code-well-header>
 
 ```html
-
 <div class="... d-bgg-pattern d-bgg-pattern-slanted-stripes-dark">...</div>
 <div class="... d-bgg-pattern d-bgg-pattern-dots-circles-light">...</div>
 ```
