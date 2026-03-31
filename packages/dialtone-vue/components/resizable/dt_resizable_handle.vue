@@ -332,6 +332,8 @@ function handleBlurEvent () {
 // Positioned absolutely between panels. The layout engine sets inline `left`
 // (or `top` for column). The hit area extends beyond the visible bar via ::before.
 .dt-resizable-handle {
+  --dt-resizable-handle-color-surface: var(--dt-color-surface-info-strong);
+
   position: absolute;
   background-color: transparent;
   border-radius: var(--dt-size-radius-pill);
@@ -372,7 +374,7 @@ function handleBlurEvent () {
   // ─── Hover ───
   &:hover:not(&--disabled) &__indicator,
   &--active &__indicator {
-    background-color: var(--dt-color-focus-ring);
+    background-color: var(--dt-resizable-handle-color-surface);
   }
 
   // Remove browser default focus outline — custom indicators handle it
@@ -381,12 +383,12 @@ function handleBlurEvent () {
   }
 
   &:focus-visible {
-    outline: var(--dt-size-200) solid var(--dt-color-focus-ring);
+    outline: var(--dt-size-200) solid var(--dt-resizable-handle-color-surface);
     outline-offset: var(--dt-size-200);
-    background-color: var(--dt-color-focus-ring);
+    background-color: var(--dt-resizable-handle-color-surface);
     box-shadow:
       0 0 0 var(--dt-size-200) var(--dt-color-surface-primary),
-      0 0 0 var(--dt-size-300) var(--dt-color-focus-ring);
+      0 0 0 var(--dt-size-300) var(--dt-resizable-handle-color-surface);
   }
 }
 </style>
