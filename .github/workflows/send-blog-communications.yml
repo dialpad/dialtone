@@ -10,6 +10,15 @@ on:
         description: 'Optional: Send to this email address instead of the production list (for testing)'
         required: false
         type: string
+      channels:
+        description: 'Which channels to send to'
+        required: false
+        type: choice
+        default: 'all'
+        options:
+          - all
+          - email
+          - sms
   workflow_run:
     workflows: ["Deploy"]
     types:
@@ -71,7 +80,7 @@ jobs:
   send-email:
     name: Send email
     runs-on: ubuntu-latest
-    if: ${{ needs.added-posts.outputs.added_posts != '[]' && needs.added-posts.outputs.added_posts != '' }}
+    if: ${{ needs.added-posts.outputs.added_posts != '[]' && needs.added-posts.outputs.added_posts != '' && (github.event_name != 'workflow_dispatch' || github.event.inputs.channels != 'sms') }}
     permissions:
       contents: read
       id-token: write
@@ -143,7 +152,7 @@ jobs:
           jq -n \
             --arg to "${{ env.TO_MAIL }}" \
             --arg subject "[dialtone] New blog post: ${{ env.BLOG_POST_HEADING }}" \
-            --arg message "${{ env.MESSAGE_BODY }}" \
+            --rawfile message "$FILE_PATH" \
             '{to: $to, subject: $subject, message: $message}' | \
           curl -m 70 -X POST ${{ env.API_URL }} \
             -H "Authorization: bearer ${{ steps.auth.outputs.id_token }}" \
@@ -153,7 +162,7 @@ jobs:
   send-sms:
     name: Send SMS
     runs-on: ubuntu-latest
-    if: ${{ (needs.added-posts.outputs.added_posts != '[]' && needs.added-posts.outputs.added_posts != '') && (github.event.inputs.test_email == '' || github.event_name != 'workflow_dispatch') }}
+    if: ${{ (needs.added-posts.outputs.added_posts != '[]' && needs.added-posts.outputs.added_posts != '') && (github.event.inputs.test_email == '' || github.event_name != 'workflow_dispatch') && (github.event_name != 'workflow_dispatch' || github.event.inputs.channels != 'email') }}
     permissions:
       contents: read
       id-token: write
