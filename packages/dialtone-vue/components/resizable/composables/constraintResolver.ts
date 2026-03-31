@@ -31,6 +31,40 @@ export interface ConstraintHierarchy {
 }
 
 // ============================================================================
+// CLAMPING PRIMITIVE
+// ============================================================================
+
+/**
+ * Clamp a value to optional min/max bounds.
+ * Single source of truth for all constraint clamping in the resizable system.
+ */
+export function clampSize(value: number, min?: number, max?: number): number {
+  let result = value;
+  if (min !== undefined) result = Math.max(result, min);
+  if (max !== undefined) result = Math.min(result, max);
+  return result;
+}
+
+/**
+ * Resolve effective min/max for a given constraint tier, then clamp.
+ * - 'user' tier: uses userMin/userMax only
+ * - 'system' tier: uses systemMin/systemMax, falling back to userMin/userMax
+ */
+export function clampToTier(
+  value: number,
+  constraints: ConstraintHierarchy,
+  tier: 'user' | 'system' = 'system'
+): number {
+  const min = tier === 'user'
+    ? constraints.userMinSizePixels
+    : (constraints.systemMinSizePixels ?? constraints.userMinSizePixels);
+  const max = tier === 'user'
+    ? constraints.userMaxSizePixels
+    : (constraints.systemMaxSizePixels ?? constraints.userMaxSizePixels);
+  return clampSize(value, min, max);
+}
+
+// ============================================================================
 // INTERNAL HELPERS
 // ============================================================================
 

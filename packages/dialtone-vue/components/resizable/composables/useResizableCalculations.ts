@@ -3,6 +3,7 @@ import { MIN_PANEL_SIZE_PX } from '../resizable_constants';
 import type { ResizablePanelState, ResizableDirection, ResizableSizeValue } from '../resizable_constants';
 import { parseSizeToPixels } from '../resizable_utils';
 import { ensureAtLeastOneUnlocked as ensureAtLeastOneUnlockedModel } from './useResizablePanelState';
+import { clampSize } from './constraintResolver';
 
 // ============================================================================
 // PANEL SIZING (formerly useResizablePanelSizing.ts)
@@ -318,16 +319,7 @@ export function useResizeHandling(direction: ResizableDirection, containerSize?:
   }
 
   function applyPanelConstraints(proposedSize: number, panel: ResizablePanelState): number {
-    let constrainedSize = proposedSize;
-
-    if (panel.userMinSizePixels !== undefined) {
-      constrainedSize = Math.max(constrainedSize, panel.userMinSizePixels);
-    }
-    if (panel.userMaxSizePixels !== undefined) {
-      constrainedSize = Math.min(constrainedSize, panel.userMaxSizePixels);
-    }
-
-    return constrainedSize;
+    return clampSize(proposedSize, panel.userMinSizePixels, panel.userMaxSizePixels);
   }
 
   function calculateMaxCursorForAfterPanel(

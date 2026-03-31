@@ -11,6 +11,7 @@ import type { ResizablePanelState, ResizableSizeValue } from '../resizable_const
 import { parseSizeToPixels, hasPercentageMinSize } from '../resizable_utils';
 import { applyPanelPixelConstraints, ensureAtLeastOneUnlocked, canResetPanelPair } from './useResizablePanelState';
 import type { ResizeHandler } from './useResizableCalculations';
+import { clampSize } from './constraintResolver';
 
 // ============================================================================
 // TYPES
@@ -392,12 +393,11 @@ export function useResizablePanelControls(options: ResizablePanelControlsOptions
   }
 
   function applySystemConstraints(panel: ResizablePanelState, size: number): number {
-    let targetSize = size;
-    const minSize = panel.systemMinSizePixels ?? panel.userMinSizePixels;
-    const maxSize = panel.systemMaxSizePixels ?? panel.userMaxSizePixels;
-    if (minSize !== undefined) targetSize = Math.max(targetSize, minSize);
-    if (maxSize !== undefined) targetSize = Math.min(targetSize, maxSize);
-    return targetSize;
+    return clampSize(
+      size,
+      panel.systemMinSizePixels ?? panel.userMinSizePixels,
+      panel.systemMaxSizePixels ?? panel.userMaxSizePixels,
+    );
   }
 
   function compressPanelsToFit(

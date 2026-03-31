@@ -10,6 +10,7 @@
 import { DEFAULT_PANEL_SIZE } from '../resizable_constants';
 import type { ResizablePanelConfig, ResizablePanelState } from '../resizable_constants';
 import { parseSizeToPixels } from '../resizable_utils';
+import { clampToTier } from './constraintResolver';
 
 import { calculateConstraintHierarchy } from './constraintResolver';
 
@@ -42,24 +43,7 @@ export function applyPanelPixelConstraints(
   panel.systemMaxSizePixels = constraints.systemMaxSizePixels;
   panel.collapseSizePixels = constraints.collapseSizePixels;
 
-  const minPixels =
-    constraintType === 'system'
-      ? (constraints.systemMinSizePixels ?? constraints.userMinSizePixels)
-      : constraints.userMinSizePixels;
-  const maxPixels =
-    constraintType === 'system'
-      ? (constraints.systemMaxSizePixels ?? constraints.userMaxSizePixels)
-      : constraints.userMaxSizePixels;
-
-  let constrainedSize = pixelSize;
-  if (minPixels !== undefined) {
-    constrainedSize = Math.max(constrainedSize, minPixels);
-  }
-  if (maxPixels !== undefined) {
-    constrainedSize = Math.min(constrainedSize, maxPixels);
-  }
-
-  return constrainedSize;
+  return clampToTier(pixelSize, constraints, constraintType);
 }
 
 // ============================================================================

@@ -19,7 +19,7 @@
 import { DEFAULT_PANEL_SIZE } from '../resizable_constants';
 import type { ResizablePanelConfig } from '../resizable_constants';
 import { parseSizeToPixels } from '../resizable_utils';
-import { calculateConstraintHierarchy, type ConstraintHierarchy } from './constraintResolver';
+import { calculateConstraintHierarchy, clampToTier, type ConstraintHierarchy } from './constraintResolver';
 
 // ============================================================================
 // SAVED STATE TYPE (inlined from useResizableStorage — ported in Task #2)
@@ -181,16 +181,7 @@ function clampToConstraints(
   constraints: ConstraintHierarchy,
   tier: 'user' | 'system' = 'system'
 ): { clamped: number; delta: number } {
-  const min =
-    tier === 'user'
-      ? (constraints.userMinSizePixels ?? 0)
-      : (constraints.systemMinSizePixels ?? constraints.userMinSizePixels ?? 0);
-  const max =
-    tier === 'user'
-      ? (constraints.userMaxSizePixels ?? Infinity)
-      : (constraints.systemMaxSizePixels ?? constraints.userMaxSizePixels ?? Infinity);
-
-  const clamped = Math.max(min, Math.min(max, width));
+  const clamped = clampToTier(width, constraints, tier);
   return { clamped, delta: clamped - width };
 }
 

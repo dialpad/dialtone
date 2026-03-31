@@ -1,7 +1,18 @@
 // Resizable Composables - Three-Layer Architecture
-// Integration Layer (orchestration, storage, initialization)
+
+// Controller Layer (panel operations)
+export { useResizablePanelControls } from './useResizablePanelControls';
+export type {
+  ResizablePanelControlsOptions,
+  CollapseOptions,
+  PreCollapseState,
+  CollapseRequestSource,
+  CollapseRequest,
+  CollapseRequestResult,
+} from './useResizablePanelControls';
+
+// Core utilities (collapse rules, space allocation)
 export {
-  useResizablePanelControls,
   sortCollapseRules,
   allocateSpaceOnPanelOpen,
   checkAutoCollapseRules,
@@ -20,16 +31,6 @@ export {
   canResetPanelPair,
 } from './useResizablePanelState';
 
-// Controller Layer (panel operations) - also re-exported from useResizableCore
-export type {
-  ResizablePanelControlsOptions,
-  CollapseOptions,
-  PreCollapseState,
-  CollapseRequestSource,
-  CollapseRequest,
-  CollapseRequestResult,
-} from './useResizablePanelControls';
-
 // Calculations (resize handling, panel sizing)
 export { useResizeHandling, useResizablePanelSizing, type ResizeHandler } from './useResizableCalculations';
 
@@ -39,7 +40,7 @@ export { useResizableDrag, type DragState, type UseResizableDragOptions } from '
 
 // Pure engine
 export { computeLayout } from './computeLayout';
-export { calculateConstraintHierarchy } from './constraintResolver';
+export { calculateConstraintHierarchy, clampSize, clampToTier } from './constraintResolver';
 
 // Keyboard accessibility
 export { useResizableKeyboard, KEYBOARD_INCREMENTS } from './useResizableKeyboard';
