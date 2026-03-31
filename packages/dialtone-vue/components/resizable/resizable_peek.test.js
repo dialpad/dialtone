@@ -75,7 +75,7 @@ const _setWrapper = (props = {}) => {
 describe('V5: Peek Overlay', () => {
   afterEach(() => {
     wrapper?.unmount();
-    const announcements = document.getElementById('dt-resizable-announcements');
+    const announcements = document.getElementById('d-resizable-announcements');
     if (announcements) announcements.remove();
   });
 
@@ -85,16 +85,16 @@ describe('V5: Peek Overlay', () => {
     });
 
     it('should render the panel component', () => {
-      expect(wrapper.find('[data-qa="dt-resizable-panel"]').exists()).toBe(true);
+      expect(wrapper.find('[data-qa="d-resizable-panel"]').exists()).toBe(true);
     });
 
     it('should not show peeking class when not collapsed', () => {
       const panel = wrapper.find('[data-panel-id="sidebar"]');
-      expect(panel.classes()).not.toContain('dt-resizable-panel--peeking');
+      expect(panel.classes()).not.toContain('d-resizable-panel--peeking');
     });
 
     it('should not render peek overlay when not collapsed', () => {
-      expect(wrapper.find('[data-qa="dt-resizable-panel-peek"]').exists()).toBe(false);
+      expect(wrapper.find('[data-qa="d-resizable-panel-peek"]').exists()).toBe(false);
     });
   });
 
@@ -105,7 +105,7 @@ describe('V5: Peek Overlay', () => {
 
     it('should apply collapsed class', () => {
       const panel = wrapper.find('[data-panel-id="sidebar"]');
-      expect(panel.classes()).toContain('dt-resizable-panel--collapsed');
+      expect(panel.classes()).toContain('d-resizable-panel--collapsed');
     });
   });
 

@@ -1,23 +1,23 @@
 <template>
   <div
-    class="dt-resizable-panel"
+    class="d-resizable-panel"
     :class="[
       props.class,
       {
-        'dt-resizable-panel--collapsed': panel && panel.collapsed === true,
-        'dt-resizable-panel--fixed': panel && panel.resizable === false,
-        'dt-resizable-panel--peeking': peek.isPeeking.value,
+        'd-resizable-panel--collapsed': panel && panel.collapsed === true,
+        'd-resizable-panel--fixed': panel && panel.resizable === false,
+        'd-resizable-panel--peeking': peek.isPeeking.value,
       },
     ]"
     :style="panelStyles"
     :data-panel-id="props.id"
     :data-locked="panel ? (panel.locked || panel.resizable === false).toString() : 'false'"
-    data-qa="dt-resizable-panel"
+    data-qa="d-resizable-panel"
     @mouseenter="peek.handlers.onMouseEnter"
     @mouseleave="peek.handlers.onMouseLeave"
     @keydown="peek.handlers.onKeyDown"
   >
-    <div class="dt-resizable-panel__content">
+    <div class="d-resizable-panel__content">
       <!-- @slot Panel content. Provides panel state, collapsed/resizing/peeking flags. -->
       <slot
         :panel="panel"
@@ -38,7 +38,7 @@
       ref="peekOverlayRef"
       :class="peek.peekClasses.value"
       :style="peek.peekStyles.value"
-      data-qa="dt-resizable-panel-peek"
+      data-qa="d-resizable-panel-peek"
       @mouseenter="peek.handlers.onMouseEnter"
       @mouseleave="peek.handlers.onMouseLeave"
     >
@@ -274,7 +274,7 @@ defineExpose({
 </script>
 
 <style lang="less">
-.dt-resizable-panel {
+.d-resizable-panel {
   position: absolute;
   inset-block: 0;
   overflow: hidden;
@@ -288,7 +288,7 @@ defineExpose({
   }
 }
 
-.dt-resizable-panel__content {
+.d-resizable-panel__content {
   display: flex;
   align-items: start;
   flex: 1;
@@ -298,7 +298,7 @@ defineExpose({
   writing-mode: horizontal-tb;
 }
 
-.dt-resizable-panel__peek-overlay {
+.d-resizable-panel__peek-overlay {
   position: absolute;
   z-index: calc(var(--zi-navigation-fixed) + var(--zi-base2));
   background-color: var(--dt-color-surface-primary);

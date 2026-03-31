@@ -50,7 +50,7 @@ export function useResizableOffset(
   const calculatedOffset = ref(0);
   const { querySelector } = useDOMCache({
     maxAge: 2000,
-    observeRoot: () => document.querySelector('.dt-resizable') as HTMLElement | null,
+    observeRoot: () => document.querySelector('.d-resizable') as HTMLElement | null,
   });
 
   function updateOffset(): void {

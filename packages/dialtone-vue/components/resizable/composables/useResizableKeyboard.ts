@@ -162,7 +162,7 @@ export function useResizableKeyboard(options: ResizableKeyboardOptions) {
     afterPanel.pixelSize = Math.round(newAfterPixels);
 
     const cursorPos = newBeforePixels;
-    const container = handleElement.value?.closest('.dt-resizable');
+    const container = handleElement.value?.closest('.d-resizable');
 
     if (container) {
       const beforeEl = container.querySelector(

@@ -225,7 +225,7 @@ export function useResizableGroup(options: UseResizableGroupOptions) {
     const container = containerRef.value;
     if (!container) return panels;
 
-    const panelElements = Array.from(container.querySelectorAll<HTMLElement>('.dt-resizable-panel[data-panel-id]'));
+    const panelElements = Array.from(container.querySelectorAll<HTMLElement>('.d-resizable-panel[data-panel-id]'));
     if (panelElements.length === 0) return panels;
 
     const domOrder = new Map<string, number>();

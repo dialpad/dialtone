@@ -69,7 +69,7 @@ const _setWrapper = (props = {}) => {
 describe('V6: Offset Positioning', () => {
   afterEach(() => {
     wrapper?.unmount();
-    const announcements = document.getElementById('dt-resizable-announcements');
+    const announcements = document.getElementById('d-resizable-announcements');
     if (announcements) announcements.remove();
   });
 
@@ -79,11 +79,11 @@ describe('V6: Offset Positioning', () => {
     });
 
     it('should render handle', () => {
-      expect(wrapper.find('.dt-resizable-handle').exists()).toBe(true);
+      expect(wrapper.find('.d-resizable-handle').exists()).toBe(true);
     });
 
     it('should not add offset styles when no offsetElement', () => {
-      const handle = wrapper.find('.dt-resizable-handle');
+      const handle = wrapper.find('.d-resizable-handle');
       expect(handle.attributes('style')).not.toContain('padding');
     });
   });
@@ -94,7 +94,7 @@ describe('V6: Offset Positioning', () => {
     });
 
     it('should render handle with offset element configured', () => {
-      expect(wrapper.find('.dt-resizable-handle').exists()).toBe(true);
+      expect(wrapper.find('.d-resizable-handle').exists()).toBe(true);
     });
   });
 
@@ -112,7 +112,7 @@ describe('V6: Offset Positioning', () => {
       ['both'],
     ])('should accept %s direction', (direction) => {
       _setWrapper({ offsetElement: '#toolbar', offsetDirection: direction });
-      expect(wrapper.find('.dt-resizable-handle').exists()).toBe(true);
+      expect(wrapper.find('.d-resizable-handle').exists()).toBe(true);
     });
   });
 });

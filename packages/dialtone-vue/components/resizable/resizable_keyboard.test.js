@@ -54,7 +54,7 @@ describe('V4: Keyboard Accessibility', () => {
     wrapper?.unmount();
 
     // Clean up global DOM elements created by edit mode
-    const announcements = document.getElementById('dt-resizable-announcements');
+    const announcements = document.getElementById('d-resizable-announcements');
     if (announcements) announcements.remove();
   });
 
@@ -64,37 +64,37 @@ describe('V4: Keyboard Accessibility', () => {
     });
 
     it('should have role="separator"', () => {
-      const handle = wrapper.find('.dt-resizable-handle');
+      const handle = wrapper.find('.d-resizable-handle');
       expect(handle.attributes('role')).toBe('separator');
     });
 
     it('should have vertical aria-orientation for row layout', () => {
-      const handle = wrapper.find('.dt-resizable-handle');
+      const handle = wrapper.find('.d-resizable-handle');
       expect(handle.attributes('aria-orientation')).toBe('vertical');
     });
 
     it('should have aria-label describing adjacent panels', () => {
-      const handle = wrapper.find('.dt-resizable-handle');
+      const handle = wrapper.find('.d-resizable-handle');
       expect(handle.attributes('aria-label')).toContain('Resize handle between');
     });
 
     it('should have tabindex="-1" by default (not in edit mode)', () => {
-      const handle = wrapper.find('.dt-resizable-handle');
+      const handle = wrapper.find('.d-resizable-handle');
       expect(handle.attributes('tabindex')).toBe('-1');
     });
 
     it('should have aria-valuenow attribute', () => {
-      const handle = wrapper.find('.dt-resizable-handle');
+      const handle = wrapper.find('.d-resizable-handle');
       expect(handle.attributes('aria-valuenow')).toBeDefined();
     });
 
     it('should have aria-valuemin attribute', () => {
-      const handle = wrapper.find('.dt-resizable-handle');
+      const handle = wrapper.find('.d-resizable-handle');
       expect(handle.attributes('aria-valuemin')).toBeDefined();
     });
 
     it('should have aria-valuemax attribute', () => {
-      const handle = wrapper.find('.dt-resizable-handle');
+      const handle = wrapper.find('.d-resizable-handle');
       expect(handle.attributes('aria-valuemax')).toBeDefined();
     });
   });
@@ -105,7 +105,7 @@ describe('V4: Keyboard Accessibility', () => {
     });
 
     it('should have horizontal aria-orientation for column layout', () => {
-      const handle = wrapper.find('.dt-resizable-handle');
+      const handle = wrapper.find('.d-resizable-handle');
       expect(handle.attributes('aria-orientation')).toBe('horizontal');
     });
   });
@@ -116,17 +116,17 @@ describe('V4: Keyboard Accessibility', () => {
     });
 
     it('should not apply edit-mode class by default', () => {
-      const handle = wrapper.find('.dt-resizable-handle');
-      expect(handle.classes()).not.toContain('dt-resizable-handle--edit-mode');
+      const handle = wrapper.find('.d-resizable-handle');
+      expect(handle.classes()).not.toContain('d-resizable-handle--edit-mode');
     });
 
     it('should set aria-keyshortcuts to "Control+e" by default', () => {
-      const handle = wrapper.find('.dt-resizable-handle');
+      const handle = wrapper.find('.d-resizable-handle');
       expect(handle.attributes('aria-keyshortcuts')).toBe('Control+e');
     });
 
     it('should set aria-description with edit mode hint by default', () => {
-      const handle = wrapper.find('.dt-resizable-handle');
+      const handle = wrapper.find('.d-resizable-handle');
       expect(handle.attributes('aria-description')).toBe(
         'Press Control+E to enter panel edit mode.',
       );
@@ -139,17 +139,17 @@ describe('V4: Keyboard Accessibility', () => {
     });
 
     it('should listen for keydown events', () => {
-      const handle = wrapper.find('.dt-resizable-handle');
+      const handle = wrapper.find('.d-resizable-handle');
       expect(handle.element.onkeydown !== undefined || true).toBe(true);
     });
 
     it('should listen for focus events', () => {
-      const handle = wrapper.find('.dt-resizable-handle');
+      const handle = wrapper.find('.d-resizable-handle');
       expect(handle.element.onfocus !== undefined || true).toBe(true);
     });
 
     it('should listen for blur events', () => {
-      const handle = wrapper.find('.dt-resizable-handle');
+      const handle = wrapper.find('.d-resizable-handle');
       expect(handle.element.onblur !== undefined || true).toBe(true);
     });
   });

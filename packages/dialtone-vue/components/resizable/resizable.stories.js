@@ -161,15 +161,15 @@ export const Default = {
     docs: {
       source: {
         code: `
-<dt-resizable>
-  <dt-resizable-panel id="left">
+<d-resizable>
+  <d-resizable-panel id="left">
     Left Panel
-  </dt-resizable-panel>
-  <dt-resizable-handle />
-  <dt-resizable-panel id="right">
+  </d-resizable-panel>
+  <d-resizable-handle />
+  <d-resizable-panel id="right">
     Right Panel
-  </dt-resizable-panel>
-</dt-resizable>`,
+  </d-resizable-panel>
+</d-resizable>`,
       },
     },
   },
@@ -184,15 +184,15 @@ export const Vertical = {
     docs: {
       source: {
         code: `
-<dt-resizable direction="column">
-  <dt-resizable-panel id="top">
+<d-resizable direction="column">
+  <d-resizable-panel id="top">
     Top Panel
-  </dt-resizable-panel>
-  <dt-resizable-handle />
-  <dt-resizable-panel id="bottom">
+  </d-resizable-panel>
+  <d-resizable-handle />
+  <d-resizable-panel id="bottom">
     Bottom Panel
-  </dt-resizable-panel>
-</dt-resizable>`,
+  </d-resizable-panel>
+</d-resizable>`,
       },
     },
   },
@@ -205,19 +205,19 @@ export const ThreePanel = {
     docs: {
       source: {
         code: `
-<dt-resizable direction="row">
-  <dt-resizable-panel id="sidebar" initial-size="20p">
+<d-resizable direction="row">
+  <d-resizable-panel id="sidebar" initial-size="20p">
     Sidebar
-  </dt-resizable-panel>
-  <dt-resizable-handle />
-  <dt-resizable-panel id="content">
+  </d-resizable-panel>
+  <d-resizable-handle />
+  <d-resizable-panel id="content">
     Content
-  </dt-resizable-panel>
-  <dt-resizable-handle />
-  <dt-resizable-panel id="details" initial-size="25p">
+  </d-resizable-panel>
+  <d-resizable-handle />
+  <d-resizable-panel id="details" initial-size="25p">
     Details
-  </dt-resizable-panel>
-</dt-resizable>`,
+  </d-resizable-panel>
+</d-resizable>`,
       },
     },
   },
@@ -230,15 +230,15 @@ export const CustomSizes = {
     docs: {
       source: {
         code: `
-<dt-resizable direction="row">
-  <dt-resizable-panel id="narrow" initial-size="30p">
+<d-resizable direction="row">
+  <d-resizable-panel id="narrow" initial-size="30p">
     30% Panel
-  </dt-resizable-panel>
-  <dt-resizable-handle />
-  <dt-resizable-panel id="wide" initial-size="70p">
+  </d-resizable-panel>
+  <d-resizable-handle />
+  <d-resizable-panel id="wide" initial-size="70p">
     70% Panel
-  </dt-resizable-panel>
-</dt-resizable>`,
+  </d-resizable-panel>
+</d-resizable>`,
       },
     },
   },
@@ -254,15 +254,15 @@ export const Constraints = {
       },
       source: {
         code: `
-<dt-resizable direction="row">
-  <dt-resizable-panel id="sidebar" initial-size="30p" user-min-size="20p" user-max-size="50p">
+<d-resizable direction="row">
+  <d-resizable-panel id="sidebar" initial-size="30p" user-min-size="20p" user-max-size="50p">
     Sidebar (min 20%, max 50%)
-  </dt-resizable-panel>
-  <dt-resizable-handle />
-  <dt-resizable-panel id="content" user-min-size="30p">
+  </d-resizable-panel>
+  <d-resizable-handle />
+  <d-resizable-panel id="content" user-min-size="30p">
     Content (min 30%)
-  </dt-resizable-panel>
-</dt-resizable>`,
+  </d-resizable-panel>
+</d-resizable>`,
       },
     },
   },
@@ -278,13 +278,13 @@ export const Collapsible = {
       },
       source: {
         code: `
-<dt-resizable ref="group" direction="row">
-  <dt-resizable-panel id="sidebar" initial-size="25p" user-min-size="20p" collapsible :collapsed="isCollapsed">
+<d-resizable ref="group" direction="row">
+  <d-resizable-panel id="sidebar" initial-size="25p" user-min-size="20p" collapsible :collapsed="isCollapsed">
     Collapsible Sidebar
-  </dt-resizable-panel>
-  <dt-resizable-handle />
-  <dt-resizable-panel id="content">Content</dt-resizable-panel>
-</dt-resizable>`,
+  </d-resizable-panel>
+  <d-resizable-handle />
+  <d-resizable-panel id="content">Content</d-resizable-panel>
+</d-resizable>`,
       },
     },
   },
@@ -300,13 +300,13 @@ export const Programmatic = {
       },
       source: {
         code: `
-<dt-resizable ref="group" direction="row">
-  <dt-resizable-panel id="sidebar" initial-size="25p" user-min-size="10p" collapsible>
+<d-resizable ref="group" direction="row">
+  <d-resizable-panel id="sidebar" initial-size="25p" user-min-size="10p" collapsible>
     Sidebar
-  </dt-resizable-panel>
-  <dt-resizable-handle />
-  <dt-resizable-panel id="content">Content</dt-resizable-panel>
-</dt-resizable>
+  </d-resizable-panel>
+  <d-resizable-handle />
+  <d-resizable-panel id="content">Content</d-resizable-panel>
+</d-resizable>
 
 // Programmatic control via ref:
 this.$refs.group.collapsePanel('sidebar', true);
@@ -327,13 +327,13 @@ export const Persistence = {
       },
       source: {
         code: `
-<dt-resizable direction="row" storage-key="my-layout">
-  <dt-resizable-panel id="sidebar" initial-size="25p" user-min-size="15p" user-max-size="40p">
+<d-resizable direction="row" storage-key="my-layout">
+  <d-resizable-panel id="sidebar" initial-size="25p" user-min-size="15p" user-max-size="40p">
     Sidebar
-  </dt-resizable-panel>
-  <dt-resizable-handle />
-  <dt-resizable-panel id="content">Content</dt-resizable-panel>
-</dt-resizable>`,
+  </d-resizable-panel>
+  <d-resizable-handle />
+  <d-resizable-panel id="content">Content</d-resizable-panel>
+</d-resizable>`,
       },
     },
   },
@@ -355,9 +355,9 @@ const myAdapter = {
   clear() { store.commit('clearLayout'); },
 };
 
-<dt-resizable direction="row" :storage="myAdapter">
+<d-resizable direction="row" :storage="myAdapter">
   ...
-</dt-resizable>`,
+</d-resizable>`,
       },
     },
   },
@@ -373,15 +373,15 @@ export const Keyboard = {
       },
       source: {
         code: `
-<dt-resizable>
-  <dt-resizable-panel id="left" initial-size="50p">
+<d-resizable>
+  <d-resizable-panel id="left" initial-size="50p">
     Left Panel
-  </dt-resizable-panel>
-  <dt-resizable-handle />
-  <dt-resizable-panel id="right" initial-size="50p">
+  </d-resizable-panel>
+  <d-resizable-handle />
+  <d-resizable-panel id="right" initial-size="50p">
     Right Panel
-  </dt-resizable-panel>
-</dt-resizable>
+  </d-resizable-panel>
+</d-resizable>
 
 <!-- Keyboard Controls:
   Ctrl/Cmd + E — Toggle edit mode
@@ -405,8 +405,8 @@ export const PeekHover = {
       },
       source: {
         code: `
-<dt-resizable>
-  <dt-resizable-panel
+<d-resizable>
+  <d-resizable-panel
     id="sidebar"
     initial-size="925"
     collapsible
@@ -416,12 +416,12 @@ export const PeekHover = {
     peek-when-manual
   >
     Sidebar (hover to peek)
-  </dt-resizable-panel>
-  <dt-resizable-handle />
-  <dt-resizable-panel id="main" initial-size="50p">
+  </d-resizable-panel>
+  <d-resizable-handle />
+  <d-resizable-panel id="main" initial-size="50p">
     Main Content
-  </dt-resizable-panel>
-</dt-resizable>`,
+  </d-resizable-panel>
+</d-resizable>`,
       },
     },
   },
@@ -437,8 +437,8 @@ export const PeekButton = {
       },
       source: {
         code: `
-<dt-resizable>
-  <dt-resizable-panel
+<d-resizable>
+  <d-resizable-panel
     id="sidebar"
     initial-size="925"
     collapsible
@@ -453,12 +453,12 @@ export const PeekButton = {
       </button>
     </template>
     Sidebar (click button to peek)
-  </dt-resizable-panel>
-  <dt-resizable-handle />
-  <dt-resizable-panel id="main" initial-size="50p">
+  </d-resizable-panel>
+  <d-resizable-handle />
+  <d-resizable-panel id="main" initial-size="50p">
     Main Content
-  </dt-resizable-panel>
-</dt-resizable>`,
+  </d-resizable-panel>
+</d-resizable>`,
       },
     },
   },
@@ -476,15 +476,15 @@ export const Offset = {
         code: `
 <div style="position: relative;">
   <div id="toolbar" style="height: 48px;">Toolbar</div>
-  <dt-resizable>
-    <dt-resizable-panel id="left" initial-size="50p">
+  <d-resizable>
+    <d-resizable-panel id="left" initial-size="50p">
       Left Panel
-    </dt-resizable-panel>
-    <dt-resizable-handle offset-element="#toolbar" :offset-amount="8" />
-    <dt-resizable-panel id="right" initial-size="50p">
+    </d-resizable-panel>
+    <d-resizable-handle offset-element="#toolbar" :offset-amount="8" />
+    <d-resizable-panel id="right" initial-size="50p">
       Right Panel
-    </dt-resizable-panel>
-  </dt-resizable>
+    </d-resizable-panel>
+  </d-resizable>
 </div>`,
       },
     },

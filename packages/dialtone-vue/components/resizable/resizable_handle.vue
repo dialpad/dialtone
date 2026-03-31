@@ -3,13 +3,13 @@
   <div
     ref="handleElement"
     :class="[
-      'dt-resizable-handle',
-      `dt-resizable-handle--${direction}`,
+      'd-resizable-handle',
+      `d-resizable-handle--${direction}`,
       props.class,
       {
-        'dt-resizable-handle--active': isActive,
-        'dt-resizable-handle--disabled': isDisabled,
-        'dt-resizable-handle--edit-mode': isEditMode,
+        'd-resizable-handle--active': isActive,
+        'd-resizable-handle--disabled': isDisabled,
+        'd-resizable-handle--edit-mode': isEditMode,
       },
     ]"
     :style="handleStyles"
@@ -30,7 +30,7 @@
     @focus="handleFocusEvent"
     @blur="handleBlurEvent"
   >
-    <div class="dt-resizable-handle__indicator" />
+    <div class="d-resizable-handle__indicator" />
   </div>
 </template>
 
@@ -344,8 +344,8 @@ function handleBlurEvent () {
 // ─── Resize Handle ───
 // Positioned absolutely between panels. The layout engine sets inline `left`
 // (or `top` for column). The hit area extends beyond the visible bar via ::before.
-.dt-resizable-handle {
-  --dt-resizable-handle-color-surface: var(--dt-color-surface-info-strong);
+.d-resizable-handle {
+  --d-resizable-handle-color-surface: var(--dt-color-surface-info-strong);
 
   position: absolute;
   background-color: transparent;
@@ -387,7 +387,7 @@ function handleBlurEvent () {
   // ─── Hover ───
   &:hover:not(&--disabled) &__indicator,
   &--active &__indicator {
-    background-color: var(--dt-resizable-handle-color-surface);
+    background-color: var(--d-resizable-handle-color-surface);
   }
 
   // Remove browser default focus outline — custom indicators handle it
@@ -396,12 +396,12 @@ function handleBlurEvent () {
   }
 
   &:focus-visible {
-    outline: var(--dt-size-200) solid var(--dt-resizable-handle-color-surface);
+    outline: var(--dt-size-200) solid var(--d-resizable-handle-color-surface);
     outline-offset: var(--dt-size-200);
-    background-color: var(--dt-resizable-handle-color-surface);
+    background-color: var(--d-resizable-handle-color-surface);
     box-shadow:
       0 0 0 var(--dt-size-200) var(--dt-color-surface-primary),
-      0 0 0 var(--dt-size-300) var(--dt-resizable-handle-color-surface);
+      0 0 0 var(--dt-size-300) var(--d-resizable-handle-color-surface);
   }
 }
 </style>

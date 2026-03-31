@@ -2,9 +2,9 @@
   <div
     ref="containerRef"
     :class="[
-      'dt-resizable',
-      `dt-resizable--${currentDirection}`,
-      { 'dt-resizable--resizing': state.isResizing },
+      'd-resizable',
+      `d-resizable--${currentDirection}`,
+      { 'd-resizable--resizing': state.isResizing },
       props.class,
     ]"
     :data-storage-key="props.storageKey || undefined"
@@ -367,7 +367,7 @@ defineExpose({
 </script>
 
 <style lang="less">
-.dt-resizable {
+.d-resizable {
   position: relative;
   overflow: hidden;
   width: 100%;

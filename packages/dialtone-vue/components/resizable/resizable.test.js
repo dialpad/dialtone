@@ -71,12 +71,12 @@ describe('DtResizable Tests', () => {
       expect(wrapper.exists()).toBe(true);
     });
 
-    it('should render with dt-resizable class', () => {
-      expect(wrapper.find('.dt-resizable').exists()).toBe(true);
+    it('should render with d-resizable class', () => {
+      expect(wrapper.find('.d-resizable').exists()).toBe(true);
     });
 
     it('should apply row direction class by default', () => {
-      expect(wrapper.find('.dt-resizable--row').exists()).toBe(true);
+      expect(wrapper.find('.d-resizable--row').exists()).toBe(true);
     });
   });
 
@@ -86,11 +86,11 @@ describe('DtResizable Tests', () => {
     });
 
     it('should apply column direction class', () => {
-      expect(wrapper.find('.dt-resizable--column').exists()).toBe(true);
+      expect(wrapper.find('.d-resizable--column').exists()).toBe(true);
     });
 
     it('should not apply row direction class', () => {
-      expect(wrapper.find('.dt-resizable--row').exists()).toBe(false);
+      expect(wrapper.find('.d-resizable--row').exists()).toBe(false);
     });
   });
 
@@ -100,7 +100,7 @@ describe('DtResizable Tests', () => {
     });
 
     it('should set data-storage-key attribute', () => {
-      expect(wrapper.find('.dt-resizable').attributes('data-storage-key')).toBe('test-layout');
+      expect(wrapper.find('.d-resizable').attributes('data-storage-key')).toBe('test-layout');
     });
   });
 
@@ -110,9 +110,9 @@ describe('DtResizable Tests', () => {
     });
 
     it('should apply custom class alongside component classes', () => {
-      const el = wrapper.find('.dt-resizable');
+      const el = wrapper.find('.d-resizable');
       expect(el.classes()).toContain('custom-layout');
-      expect(el.classes()).toContain('dt-resizable--row');
+      expect(el.classes()).toContain('d-resizable--row');
     });
   });
 

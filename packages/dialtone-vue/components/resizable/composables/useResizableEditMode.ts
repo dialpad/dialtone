@@ -45,11 +45,11 @@ let announcementRefCount = 0;
 
 function getAnnouncementElement(): HTMLElement {
   if (!announcementElement) {
-    announcementElement = document.getElementById('dt-resizable-announcements');
+    announcementElement = document.getElementById('d-resizable-announcements');
 
     if (!announcementElement) {
       announcementElement = document.createElement('div');
-      announcementElement.id = 'dt-resizable-announcements';
+      announcementElement.id = 'd-resizable-announcements';
       announcementElement.setAttribute('aria-live', 'polite');
       announcementElement.setAttribute('aria-atomic', 'true');
       announcementElement.style.position = 'absolute';
@@ -163,7 +163,7 @@ export function useResizableEditMode(messages?: ResizableEditModeMessages) {
       const handleId = handle.getAttribute('data-handle-id');
       if (!handleId || handleId === 'temp-handle') return false;
 
-      const container = handle.closest('.dt-resizable');
+      const container = handle.closest('.d-resizable');
       if (!container) return false;
 
       const allPanelElements = container.querySelectorAll('[data-panel-id]');
@@ -306,7 +306,7 @@ export function useResizableEditMode(messages?: ResizableEditModeMessages) {
     const currentHandle = validHandles[currentIndex];
     if (!currentHandle) return;
 
-    const container = currentHandle.closest('.dt-resizable');
+    const container = currentHandle.closest('.d-resizable');
     if (!container) return;
 
     dispatchResetEvent(container, currentHandle);
@@ -318,7 +318,7 @@ export function useResizableEditMode(messages?: ResizableEditModeMessages) {
   function resetAllVisiblePanels(): void {
     if (!globalEditMode.isActive.value) return;
 
-    const containers = document.querySelectorAll('.dt-resizable');
+    const containers = document.querySelectorAll('.d-resizable');
     containers.forEach((container) => {
       container.dispatchEvent(
         new CustomEvent('resizable-reset-request', {
@@ -394,7 +394,7 @@ export function useResizableEditMode(messages?: ResizableEditModeMessages) {
     const target = event.target as HTMLElement | null;
     if (!target) return;
 
-    if (!target.closest('.dt-resizable-handle')) {
+    if (!target.closest('.d-resizable-handle')) {
       exitEditMode();
     }
   }

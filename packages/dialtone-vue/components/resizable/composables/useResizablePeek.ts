@@ -139,20 +139,20 @@ export function useResizablePeek(
   // ─── Computed: peek classes ─────────────────────────────────────────
 
   const peekClasses = computed((): string[] => {
-    const classes: string[] = ['dt-resizable-panel__peek-overlay'];
+    const classes: string[] = ['d-resizable-panel__peek-overlay'];
 
     if (isPeeking.value) {
-      classes.push('dt-resizable-panel__peek-overlay--visible');
+      classes.push('d-resizable-panel__peek-overlay--visible');
     }
 
     const dir = direction.value === 'row' ? 'row' : 'column';
-    classes.push(`dt-resizable-panel__peek-trigger--${dir}`);
+    classes.push(`d-resizable-panel__peek-trigger--${dir}`);
 
     if (isFirstPanel.value) {
-      classes.push('dt-resizable-panel__peek-trigger--first');
+      classes.push('d-resizable-panel__peek-trigger--first');
     }
     if (isLastPanel.value) {
-      classes.push('dt-resizable-panel__peek-trigger--last');
+      classes.push('d-resizable-panel__peek-trigger--last');
     }
 
     return classes;
