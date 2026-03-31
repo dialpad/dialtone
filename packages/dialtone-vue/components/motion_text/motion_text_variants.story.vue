@@ -1,20 +1,20 @@
 <template>
   <dt-stack
-    gap="600"
-    class="d-p24"
+    gap="400"
+    class="d-p-300"
   >
     <!-- Speed Variants -->
     <section>
-      <h2 class="d-headline--lg d-mb16">
+      <h2 class="d-headline--lg d-mbe-200">
         Speed Variants
       </h2>
       <dt-stack
-        gap="500"
+        gap="200"
       >
         <dt-stack
           v-for="speed in speeds"
           :key="speed.value"
-          gap="400"
+          gap="100"
         >
           <dt-stack
             direction="row"
@@ -36,7 +36,7 @@
           <dt-stack
             direction="row"
             align="center"
-            class="d-p16 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn96"
+            class="d-p-200 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn-150"
           >
             <dt-motion-text
               :ref="el => { if (el) speedRefs[speed.value] = el }"
@@ -53,16 +53,16 @@
 
     <!-- Text Size Variants -->
     <section>
-      <h2 class="d-headline--lg d-mb16">
+      <h2 class="d-headline--lg d-mbe-200">
         Text Size Variants
       </h2>
       <dt-stack
-        gap="500"
+        gap="200"
       >
         <dt-stack
           v-for="size in textSizes"
           :key="size.class"
-          gap="400"
+          gap="100"
         >
           <dt-stack
             direction="row"
@@ -84,7 +84,7 @@
           <dt-stack
             direction="row"
             align="center"
-            class="d-p16 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn96"
+            class="d-p-200 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn-150"
           >
             <dt-motion-text
               :ref="el => { if (el) sizeRefs[size.class] = el }"
@@ -101,13 +101,13 @@
 
     <!-- Looping Animation -->
     <section>
-      <h2 class="d-headline--lg d-mb16">
+      <h2 class="d-headline--lg d-mbe-200">
         Looping Animation
       </h2>
       <dt-stack
         direction="row"
         align="center"
-        class="d-p24 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn128"
+        class="d-p-300 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn-200"
       >
         <dt-motion-text
           text="This text loops continuously"
@@ -122,15 +122,15 @@
 
     <!-- Manual Controls -->
     <section>
-      <h2 class="d-headline--lg d-mb16">
+      <h2 class="d-headline--lg d-mbe-200">
         Manual Controls
       </h2>
       <dt-stack
-        gap="500"
+        gap="200"
       >
         <dt-stack
           direction="row"
-          gap="400"
+          gap="100"
           class="d-fw-wrap"
         >
           <dt-button
@@ -172,7 +172,7 @@
         <dt-stack
           direction="row"
           align="center"
-          class="d-p24 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn128"
+          class="d-p-300 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn-200"
         >
           <dt-motion-text
             ref="manualRef"

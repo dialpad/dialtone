@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+ 
 export default {
   default: {
     props: {
@@ -73,7 +74,7 @@ export default {
       },
       label: { initialValue: 'Channel' },
       endTooltipText: { initialValue: 'Remove' },
-      popoverFooterClass: { initialValue: 'd-pr16 d-py12' },
+      popoverFooterClass: { initialValue: 'd-pie-200 d-py-150' },
       deferSelection: { initialValue: true },
     },
   },

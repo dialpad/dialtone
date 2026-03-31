@@ -12,15 +12,15 @@
 //  ----------------------------------------------------------------------------
 @layer dialtone.components {
 .d-datepicker {
-  --datepicker-width: calc(var(--dt-size-300) * 75); // A bit of a magic number as default fixed size, may use CSS utilities to override
-  --datepicker-button-size: calc(var(--dt-size-600) - var(--dt-size-200)); // Emulates SM button since Vue component in lieu of Vue component using DT button
+  --datepicker-width: var(--dt-layout-450);
+  --datepicker-button-size: calc(var(--dt-layout-50) - var(--dt-spacing-25)); // Emulates SM button since Vue component in lieu of Vue component using DT button
 
   box-sizing: border-box;
   inline-size: var(--datepicker-width);
-  padding: var(--dt-size-500);
+  padding: var(--dt-spacing-200);
 
   &__hd {
-    padding: 0 var(--dt-size-300);
+    padding: 0 var(--dt-spacing-50);
   }
 
   &__month-year {
@@ -56,11 +56,11 @@
 
   &__cell {
     padding: 0;
-    padding-block-start: var(--dt-size-200);
+    padding-block-start: var(--dt-spacing-25);
     text-align: center;
 
     &--header {
-      padding-block: 0 var(--dt-size-400);
+      padding-block: 0 var(--dt-spacing-100);
     }
   }
 

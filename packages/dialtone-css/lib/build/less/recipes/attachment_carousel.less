@@ -1,7 +1,7 @@
 @layer dialtone.components {
 .d-recipe-attachment-carousel {
   position: relative;
-  inline-size: var(--dt-size-1000);
+  inline-size: var(--dt-layout-800);
   max-block-size: 100px; /* stylelint-disable-line meowtec/no-px */
 }
 
@@ -18,12 +18,12 @@
 
 .d-recipe-attachment-carousel__arrow {
   position: absolute;
-  inset-block-start: var(--dt-size-30-percent);
+  inset-block-start: var(--dt-layout-30-percent);
   color: var(--dt-color-foreground-tertiary-inverted);
   background-color: var(--dt-color-surface-strong);
-  border: var(--dt-size-100) solid;
+  border: var(--dt-size-border-100) solid;
   border-color: var(--dt-color-border-moderate-inverted);
-  border-width: var(--dt-size-100);
+  border-width: var(--dt-size-border-100);
   opacity: 0;
 
   &:hover {
@@ -36,11 +36,11 @@
 }
 
 .d-recipe-attachment-carousel__arrow--left {
-  inset-inline-start: var(--dt-size-300);
+  inset-inline-start: var(--dt-spacing-50);
 }
 
 .d-recipe-attachment-carousel__arrow--right {
-  inset-inline-end: var(--dt-size-300);
+  inset-inline-end: var(--dt-spacing-50);
 }
 
 .d-recipe-attachment-carousel__image {
@@ -65,19 +65,19 @@
 }
 
 .d-recipe-attachment-carousel__image-viewer {
-  inline-size: var(--dt-size-700);
-  block-size: var(--dt-size-700);
+  inline-size: var(--dt-layout-100);
+  block-size: var(--dt-layout-100);
   object-fit: cover;
-  border: var(--dt-size-100) solid;
+  border: var(--dt-size-border-100) solid;
   border-color: var(--dt-color-border-subtle);
-  border-width: var(--dt-size-350);
+  border-width: var(--dt-spacing-75);
   border-radius: var(--br4);
 }
 
 .d-recipe-attachment-carousel__image-top-right {
   position: absolute;
-  inset-block-start: var(--dt-size-100);
-  inset-inline-end: var(--dt-size-100);
+  inset-block-start: var(--dt-spacing-1);
+  inset-inline-end: var(--dt-spacing-1);
 }
 
 .d-recipe-attachment-carousel__image-progress-bar {
@@ -85,7 +85,7 @@
   inset-block-start: inherit;
   inset-inline-end: inherit;
   display: flex;
-  padding: var(--dt-size-300);
+  padding: var(--dt-spacing-50);
   background-color: var(--dt-color-surface-moderate);
   border-radius: var(--dt-size-radius-circle);
 }

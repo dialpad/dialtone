@@ -1,7 +1,7 @@
 <template>
   <dt-stack
     id="components-radio--variants-container"
-    gap="400"
+    gap="100"
   >
     <!-- Default -->
     <dt-radio

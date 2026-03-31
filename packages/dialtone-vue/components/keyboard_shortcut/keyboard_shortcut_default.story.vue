@@ -1,5 +1,5 @@
 <template>
-  <div :class="['d-p8', { 'd-bgc-black-900': $attrs.inverted }]">
+  <div :class="['d-p-100', { 'd-bgc-black-900': $attrs.inverted }]">
     <dt-keyboard-shortcut
       :inverted="$attrs.inverted"
       :shortcut="$attrs.shortcut"

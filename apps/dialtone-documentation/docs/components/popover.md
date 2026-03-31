@@ -79,7 +79,7 @@ The content slot will be rendered lazily when the popover is open. By default, t
     #content="{ close }"
   >
     <div>
-      <p class="d-mb4">
+      <p class="d-mbe-50">
         This is content rendered within the popover.
       </p>
       <dt-button
@@ -110,7 +110,7 @@ The content slot will be rendered lazily when the popover is open. By default, t
     #content="{ close }"
   >
     <div>
-      <p class="d-mb4">
+      <p class="d-mbe-50">
         This is content rendered within the popover.
       </p>
       <dt-button
@@ -145,7 +145,7 @@ The content slot will be rendered lazily when the popover is open. By default, t
     #content="{ close }"
   >
     <div>
-      <div class="d-mb8">
+      <div class="d-mbe-100">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae.<br>
       </div>
       <dt-button
@@ -159,7 +159,7 @@ The content slot will be rendered lazily when the popover is open. By default, t
 '>
   <example-popover modal header>
     <template #content>
-      <div class="d-mb8">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae.<br></div>
+      <div class="d-mbe-100">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae.<br></div>
     </template>
   </example-popover>
 </code-example>
@@ -179,7 +179,7 @@ The content slot will be rendered lazily when the popover is open. By default, t
     #content="{ close }"
   >
     <div>
-      <div class="d-mb8">
+      <div class="d-mbe-100">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae.<br>
       </div>
       <dt-button
@@ -198,7 +198,7 @@ The content slot will be rendered lazily when the popover is open. By default, t
 '>
   <example-popover modal footer>
     <template #content>
-      <div class="d-mb8">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae.<br></div>
+      <div class="d-mbe-100">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae.<br></div>
     </template>
   </example-popover>
 </code-example>
@@ -224,7 +224,7 @@ manually specify which position it will move to in what order you can do so via 
     #content="{ close }"
   >
     <div>
-      <p class="d-mb4">
+      <p class="d-mbe-50">
         This is content rendered within the popover.
       </p>
       <dt-button
@@ -257,7 +257,7 @@ Padding options for the popover content are provided via size classes "small", "
     #content="{ close }"
   >
     <div>
-      <p class="d-mb4">
+      <p class="d-mbe-50">
         This is content rendered within the popover.
       </p>
       <dt-button
@@ -290,7 +290,7 @@ Popover content renders outside the DOM tree. Use the `contentMode` prop to appl
 <dt-popover content-mode="dark">...</dt-popover>
 <dt-popover content-mode="light">...</dt-popover>
 '>
-  <dt-popover content-mode="invert" placement="bottom-start" dialogClass="d-w216">
+  <dt-popover content-mode="invert" placement="bottom-start" dialogClass="d-w-350">
     <template #anchor>
       <dt-button :size="200" kind="muted" importance="outlined">Inverted Popover</dt-button>
     </template>

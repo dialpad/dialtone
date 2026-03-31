@@ -12,7 +12,7 @@ keywords: ["font family", "font weight", "font size", "line height", "system fon
 
 Dialtone's product UI font stack defers to the user's default system font, ensuring a seamless native experience.
 
-<dt-stack direction="row" gap="500" class="d-wmx764">
+<dt-stack direction="row" gap="200" class="d-wmx764">
   <svg-loader class="d-fl1" name="ff-appleSF" />
   <svg-loader class="d-fl1" name="ff-windows" />
   <svg-loader class="d-fl1" name="ff-roboto" />
@@ -23,7 +23,7 @@ Dialtone's product UI font stack defers to the user's default system font, ensur
 
 Four weights for clear hierarchy and visual contrast among different elements.
 
-<dt-stack direction="row" gap="500" class="d-wmx764">
+<dt-stack direction="row" gap="200" class="d-wmx764">
   <svg-loader name="fw-regular" />
   <svg-loader name="fw-medium" />
   <svg-loader name="fw-semibold" />
@@ -34,15 +34,15 @@ Four weights for clear hierarchy and visual contrast among different elements.
 
 Dictates the scale of text, enhancing readability and defining information hierarchy across content.
 
-<dt-stack gap="500">
-  <dt-stack direction="row" gap="500">
+<dt-stack gap="200">
+  <dt-stack direction="row" gap="200">
     <svg-loader name="fs12" style="max-width: 140px" /> <!--lazy inline style until we redesign this whole page -->
     <svg-loader name="fs14" style="max-width: 140px" />
     <svg-loader name="fs16" style="max-width: 140px" />
     <svg-loader name="fs18" style="max-width: 140px" />
     <svg-loader name="fs20" style="max-width: 140px" />
   </dt-stack>
-  <dt-stack direction="row" gap="500">
+  <dt-stack direction="row" gap="200">
     <svg-loader name="fs28" style="max-width: 140px" />
     <svg-loader name="fs32" style="max-width: 140px" />
   </dt-stack>
@@ -52,13 +52,13 @@ Dictates the scale of text, enhancing readability and defining information hiera
 
 Adjusts vertical spacing between lines of text, optimizing legibility and text flow.
 
-<dt-stack direction="column" gap="500">
-  <dt-stack direction="row" gap="500" class="d-wmx764">
+<dt-stack direction="column" gap="200">
+  <dt-stack direction="row" gap="200" class="d-wmx764">
     <svg-loader name="lh-100" />
     <svg-loader name="lh-200" />
     <svg-loader name="lh-300" />
   </dt-stack>
-  <dt-stack direction="row" gap="500" class="d-wmx764">
+  <dt-stack direction="row" gap="200" class="d-wmx764">
     <svg-loader name="lh-400" />
     <svg-loader name="lh-500" />
     <svg-loader name="lh-600" />
@@ -89,16 +89,16 @@ Text Style CSS utilities should be considered a last resort or as a fallback for
 
 Titles and headings to establish hierarchy and set the tone of contextual groupings.
 
-<code-well-header class="d-p16 d-bgc-secondary" custom>
+<code-well-header class="d-p-200 d-bgc-secondary" custom>
   <table class="d-w100p">
     <tbody>
       <template v-for="({ var: varName }, index) in typographyStylesHeadlines" :key="varName">
         <tr>
-          <td class="d-p4 d-lc-1">
+          <td class="d-p-50 d-lc-1">
             <div :class="[varName]">{{ example }}</div>
           </td>
-          <td class="d-p4 d-ws-nowrap">
-            <dt-stack direction="row" as="code" gap="300" class="d-text-code--sm d-bgc-transparent d-ta-center d-c-default">
+          <td class="d-p-50 d-ws-nowrap">
+            <dt-stack direction="row" as="code" gap="50" class="d-text-code--sm d-bgc-transparent d-ta-center d-c-default">
               <span v-dt-tooltip="`Font Size`">{{ getStyles('headlines', index).fontSize }}</span>
               /
               <span v-dt-tooltip="`Line Height`">{{ getStyles('headlines', index).lineHeight }}</span>
@@ -106,7 +106,7 @@ Titles and headings to establish hierarchy and set the tone of contextual groupi
               <span v-dt-tooltip="`Font Weight`">{{ getStyles('headlines', index).fontWeightName }}</span>
             </dt-stack>
           </td>
-          <td class="d-p4 d-ws-nowrap">
+          <td class="d-p-50 d-ws-nowrap">
             <dt-stack direction="row" justify="between" class="dialtone-copy-utility">
               <code class="dialtone-copy-utility__utility d-bgc-transparent d-text-code--sm">{{ varName }}</code>
               <div class="dialtone-copy-utility__btn">
@@ -124,15 +124,15 @@ Titles and headings to establish hierarchy and set the tone of contextual groupi
 
 Default text style for longer-form prose content, designed for comfort and clarity in reading varying lengths.
 
-<code-well-header class="d-p16 d-bgc-secondary" custom>
+<code-well-header class="d-p-200 d-bgc-secondary" custom>
   <table class="d-w100p">
     <tbody>
       <tr v-for="({ var: varName }, index) in typographyStylesBody" :key="varName">
-        <td class="d-p4 d-lc-1">
+        <td class="d-p-50 d-lc-1">
           <div :class="[varName]">{{ example }}</div>
         </td>
-        <td class="d-p4 d-ws-nowrap">
-          <dt-stack direction="row" as="code" gap="300" class="d-text-code--sm d-bgc-transparent d-ta-center d-c-default">
+        <td class="d-p-50 d-ws-nowrap">
+          <dt-stack direction="row" as="code" gap="50" class="d-text-code--sm d-bgc-transparent d-ta-center d-c-default">
             <span v-dt-tooltip="`Font Size`">{{ getStyles('body', index).fontSize }}</span>
             /
             <span v-dt-tooltip="`Line Height`">{{ getStyles('body', index).lineHeight }}</span>
@@ -140,7 +140,7 @@ Default text style for longer-form prose content, designed for comfort and clari
             <span v-dt-tooltip="`Font Weight`">{{ getStyles('body', index).fontWeightName }}</span>
           </dt-stack>
         </td>
-        <td class="d-p4 d-ws-nowrap">
+        <td class="d-p-50 d-ws-nowrap">
           <dt-stack direction="row" justify="between" class="dialtone-copy-utility">
             <code class="dialtone-copy-utility__utility d-bgc-transparent d-text-code--sm">{{ varName }}</code>
             <div class="dialtone-copy-utility__btn">
@@ -158,15 +158,15 @@ Default text style for longer-form prose content, designed for comfort and clari
 Shorter-length copy like form fields, buttons, and other UI-labeling elements, ensuring clear navigation and
 interaction.
 
-<code-well-header class="d-p16 d-bgc-secondary" custom>
+<code-well-header class="d-p-200 d-bgc-secondary" custom>
   <table class="d-w100p">
     <tbody>
       <tr v-for="({ var: varName }, index) in typographyStylesLabel" :key="varName">
-        <td class="d-p4 d-lc-1">
+        <td class="d-p-50 d-lc-1">
           <div :class="[varName]">{{ example }}</div>
         </td>
-        <td class="d-p4 d-ws-nowrap">
-          <dt-stack direction="row" as="code" gap="300" class="d-text-code--sm d-bgc-transparent d-ta-center d-c-default">
+        <td class="d-p-50 d-ws-nowrap">
+          <dt-stack direction="row" as="code" gap="50" class="d-text-code--sm d-bgc-transparent d-ta-center d-c-default">
             <span v-dt-tooltip="`Font Size`">{{ getStyles('label', index).fontSize }}</span>
             /
             <span v-dt-tooltip="`Line Height`">{{ getStyles('label', index).lineHeight }}</span>
@@ -174,7 +174,7 @@ interaction.
             <span v-dt-tooltip="`Font Weight`">{{ getStyles('label', index).fontWeightName }}</span>
           </dt-stack>
         </td>
-        <td class="d-p4 d-ws-nowrap">
+        <td class="d-p-50 d-ws-nowrap">
           <dt-stack direction="row" justify="between" class="dialtone-copy-utility">
             <code class="dialtone-copy-utility__utility d-bgc-transparent d-text-code--sm">{{ varName }}</code>
             <div class="dialtone-copy-utility__btn">
@@ -191,15 +191,15 @@ interaction.
 
 Code snippets, technical commands, or data values rendered as a monospaced font.
 
-<code-well-header class="d-p16 d-bgc-secondary" custom>
+<code-well-header class="d-p-200 d-bgc-secondary" custom>
   <table class=d-w100p>
     <tbody>
       <tr v-for="({ var: varName }, index) in typographyStylesCode" :key="varName">
-        <td class="d-p4 d-lc-1">
+        <td class="d-p-50 d-lc-1">
           <div :class="[varName]">{{ example }}</div>
         </td>
-        <td class="d-p4 d-ws-nowrap">
-          <dt-stack direction="row" as="code" gap="300" class="d-text-code--sm d-bgc-transparent d-ta-center d-c-default">
+        <td class="d-p-50 d-ws-nowrap">
+          <dt-stack direction="row" as="code" gap="50" class="d-text-code--sm d-bgc-transparent d-ta-center d-c-default">
             <span v-dt-tooltip="`Font Size`">{{ getStyles('code', index).fontSize }}</span>
             /
             <span v-dt-tooltip="`Line Height`">{{ getStyles('code', index).lineHeight }}</span>
@@ -207,7 +207,7 @@ Code snippets, technical commands, or data values rendered as a monospaced font.
             <span v-dt-tooltip="`Font Weight`">{{ getStyles('code', index).fontWeightName }}</span>
           </dt-stack>
         </td>
-        <td class="d-p4 d-ws-nowrap">
+        <td class="d-p-50 d-ws-nowrap">
           <dt-stack direction="row" justify="between" class="dialtone-copy-utility">
             <code class="dialtone-copy-utility__utility d-bgc-transparent d-text-code--sm">{{ varName }}</code>
             <div class="dialtone-copy-utility__btn">
@@ -230,13 +230,13 @@ Code snippets, technical commands, or data values rendered as a monospaced font.
 
 <code-example-tabs
 vueCode='
-<dt-stack gap="500">
-  <dt-stack gap="400" class="d-jc-space-between">
+<dt-stack gap="200">
+  <dt-stack gap="100" class="d-jc-space-between">
     <dt-stack>
       <dt-text as="h2" kind="headline" :size="500" strength="medium" density="200" class="d-fs-400">
         Katie Rodriguez
       </dt-text>
-      <dt-stack direction="row" gap="350">
+      <dt-stack direction="row" gap="75">
         <dt-text tone="success">
           Available
         </dt-text>
@@ -246,7 +246,7 @@ vueCode='
         </dt-text>
       </dt-stack>
     </dt-stack>
-    <dt-stack gap="200">
+    <dt-stack gap="25">
       <dt-text kind="body" :size="300" density="200" strength="semibold" tone="tertiary">
         Chief Customer Success Officer
       </dt-text>
@@ -257,7 +257,7 @@ vueCode='
       </dt-text>
     </dt-stack>
   </dt-stack>
-  <dt-stack gap="400" direction="row" class="d-jc-space-between">
+  <dt-stack gap="100" direction="row" class="d-jc-space-between">
     <dt-button class="d-fl1" kind="muted" importance="outlined">
       <template #startIcon="{ iconSize }">
         <dt-icon-phone :size="iconSize" />
@@ -283,13 +283,13 @@ vueCode='
 
 ### Hero
 
-<code-well-header class="d-pb32">
-  <dt-stack gap="500">
+<code-well-header class="d-pbe-400">
+  <dt-stack gap="200">
     <dt-stack>
       <dt-text as="h2" kind="headline" :size="600">AI that works for you</dt-text>
       <dt-text kind="body" :size="400">Support customers, drive sales, and collaborate with your team—all in one, beautiful AI-powered app.</dt-text>
     </dt-stack>
-    <dt-stack :direction="{ 'default': 'column', 'md': 'row' }" gap="500" align="start">
+    <dt-stack :direction="{ 'default': 'column', 'md': 'row' }" gap="200" align="start">
       <dt-stack>
         <dt-text as="h3" kind="headline" :size="500">AI Contact Center</dt-text>
         <dt-text as="p" kind="body" :size="300">The world’s most advanced customer engagement platform</dt-text>
@@ -308,12 +308,12 @@ vueCode='
 
 <code-example-tabs
 vueCode='
-<dt-stack gap="500">
+<dt-stack gap="200">
   <dt-stack>
     <dt-text as="h2" kind="headline" :size="600">AI that works for you</dt-text>
     <dt-text kind="body" :size="400">Support customers, drive sales, and collaborate with your team—all in one, beautiful AI-powered app.</dt-text>
   </dt-stack>
-  <dt-stack direction="row" gap="500" align="start">
+  <dt-stack direction="row" gap="200" align="start">
     <dt-stack>
       <dt-text as="h3" kind="headline" :size="500">AI Contact Center</dt-text>
       <dt-text as="p" kind="body" :size="300">The world’s most advanced customer engagement platform</dt-text>
@@ -338,10 +338,10 @@ Each typography style is expressed through a shorthand `font` property, and its 
 <clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
-      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-ibs-0">
         <tr>
-          <th scope="col" class="d-w40p  d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Class</div></th>
-          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Output</div></th>
+          <th scope="col" class="d-w40p  d-p-0 d-bbw0"><div class="d-p-200 d-bb d-bc-default d-bbw1">Class</div></th>
+          <th scope="col" class="d-p-0 d-bbw0"><div class="d-p-200 d-bb d-bc-default d-bbw1">Output</div></th>
         </tr>
       </thead>
       <tbody>
@@ -417,7 +417,7 @@ Each typography style is expressed through a shorthand `font` property, and its 
       position: absolute;
       inset-inline-end: 0;
       background-color: var(--dt-color-surface-secondary);
-      padding-inline-start: var(--dt-size-300);
+      padding-inline-start: var(--dt-spacing-50);
 
       .dialtone-copy-utility:hover & {
         display: block;

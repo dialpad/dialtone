@@ -27,7 +27,7 @@ export const argTypesData = {
 
 export const argsData = {
   direction: 'row',
-  gap: '400',
+  gap: '100',
   items: [
     {
       term: 'Customer Intent',
@@ -75,7 +75,7 @@ const argsDataLongText = {
 
 const decorator = () => ({
   template: `<div
-      style="width: var(--dt-size-925);
+      style="width: var(--dt-layout-500);
       overflow: hidden;
       resize: horizontal;
       height: auto;

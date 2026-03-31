@@ -17,7 +17,7 @@
             <span>
               <dt-icon-arrow-right
                 v-if="entry.value !== undefined"
-                class="d-fs10 d-px6 d-ps-relative d-t2"
+                class="d-fs10 d-px-75 d-ps-relative d-ibs-25"
               />
             </span>
           </template>

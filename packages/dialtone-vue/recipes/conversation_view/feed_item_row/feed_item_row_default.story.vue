@@ -47,11 +47,11 @@
     >
       <dt-stack
         direction="row"
-        gap="400"
+        gap="100"
       >
         <dt-stack
           direction="row"
-          gap="300"
+          gap="50"
         >
           <dt-avatar
             v-for="person of persons"
@@ -63,14 +63,14 @@
         </dt-stack>
         <dt-stack
           direction="row"
-          gap="400"
+          gap="100"
         >
           <dt-stack
             direction="row"
             align="center"
             class="d-fs-100 d-lh200"
           >
-            <a class="d-link d-pr4">3 replies</a>
+            <a class="d-link d-pie-50">3 replies</a>
             <span class="feed-item-row__reply">Last reply an hour ago</span>
           </dt-stack>
         </dt-stack>

@@ -15,7 +15,7 @@
 
 //  WRAPPER
 .d-tab-neux {
-    --tablist-padding-bottom: var(--dt-size-400);
+    --tablist-padding-bottom: var(--dt-spacing-100);
 
     inline-size: 100%;
 
@@ -27,10 +27,10 @@
         padding-block-end: var(--tablist-padding-bottom);
     }
 
-    > :where(.d-tablist--xs) { --tablist-padding-bottom: var(--dt-size-350); }
-    > :where(.d-tablist--sm) { --tablist-padding-bottom: var(--dt-size-400); }
-    > :where(.d-tablist--lg) { --tablist-padding-bottom: var(--dt-size-400); }
-    > :where(.d-tablist--xl) { --tablist-padding-bottom: var(--dt-size-450); }
+    > :where(.d-tablist--xs) { --tablist-padding-bottom: var(--dt-spacing-75); }
+    > :where(.d-tablist--sm) { --tablist-padding-bottom: var(--dt-spacing-100); }
+    > :where(.d-tablist--lg) { --tablist-padding-bottom: var(--dt-spacing-100); }
+    > :where(.d-tablist--xl) { --tablist-padding-bottom: var(--dt-spacing-100); }
 
     .d-tablist--no-border {
         border-block-end: 0;
@@ -45,7 +45,7 @@
             --tablist-padding-bottom: 0;
 
             padding-block-end: 0;
-            padding-inline-end: var(--dt-size-400);
+            padding-inline-end: var(--dt-spacing-100);
         }
     }
 }
@@ -58,8 +58,8 @@
     --tab-color-text: var(--dt-action-color-foreground-muted-default);
     --tab-font-style: var(--dt-typography-button-md);
     --tab-border-radius: var(--dt-button-size-radius-md);
-    --tab-padding-x: calc(var(--dt-size-450) - var(--dt-size-border-100));
-    --tab-padding-y: calc(var(--dt-size-400) - var(--dt-size-border-100));
+    --tab-padding-x: calc(var(--dt-spacing-150) - var(--dt-size-border-100));
+    --tab-padding-y: calc(var(--dt-spacing-100) - var(--dt-size-border-100));
 
     //  --  CSS VARS: border opacity (toggled by --no-border)
     --tablist-border-opacity: 1;
@@ -82,7 +82,7 @@
     position: relative;
     display: flex;
     flex-wrap: wrap;
-    gap: var(--dt-size-300);
+    gap: var(--dt-spacing-50);
     align-items: center;
     padding-block-end: var(--tablist-padding-bottom);
 
@@ -115,21 +115,21 @@
 
     //  Sizes
     &--sm {
-        --tab-padding-x: calc(var(--dt-size-400) - var(--dt-size-border-100));
+        --tab-padding-x: calc(var(--dt-spacing-100) - var(--dt-size-border-100));
         --tab-border-radius: var(--dt-button-size-radius-xs);
         --tab-font-style: var(--dt-typography-button-xs);
     }
 
     &--lg {
-        --tab-padding-x: calc(var(--dt-size-500) - var(--dt-size-border-100));
-        --tab-padding-y: calc((var(--dt-size-400) + var(--dt-size-200)) - var(--dt-size-border-100));
+        --tab-padding-x: calc(var(--dt-spacing-200) - var(--dt-size-border-100));
+        --tab-padding-y: calc((var(--dt-spacing-100) + var(--dt-spacing-25)) - var(--dt-size-border-100));
         --tab-border-radius: var(--dt-button-size-radius-lg);
         --tab-font-style: var(--dt-typography-button-lg);
     }
 
     &--xl {
-        --tab-padding-x: calc(var(--dt-size-500) - var(--dt-size-border-100));
-        --tab-padding-y: calc(var(--dt-size-450) - var(--dt-size-border-100));
+        --tab-padding-x: calc(var(--dt-spacing-200) - var(--dt-size-border-100));
+        --tab-padding-y: calc(var(--dt-spacing-150) - var(--dt-size-border-100));
         --tab-border-radius: var(--dt-button-size-radius-xl);
         --tab-font-style: var(--dt-typography-button-xl);
     }
@@ -148,7 +148,7 @@
 
         &::after {
             block-size: auto;
-            inset-inline-start: calc(100% - var(--dt-size-200));
+            inset-inline-start: calc(100% - var(--dt-spacing-25));
             inline-size: var(--dt-size-border-100);
             inset-block: 1px;
         }
@@ -195,7 +195,7 @@
 .d-tab {
     position: relative;
     display: inline-flex;
-    gap: var(--dt-size-400);
+    gap: var(--dt-spacing-100);
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
@@ -225,8 +225,8 @@
         block-size: var(--dt-size-border-200);
         background-color: var(--tab-after-bg);
         content: '';
-        inset-inline: var(--dt-size-100-negative) var(--dt-size-100-negative);
-        inset-block-end: var(--dt-size-100-negative);
+        inset-inline: var(--dt-spacing-1-negative) var(--dt-spacing-1-negative);
+        inset-block-end: var(--dt-spacing-1-negative);
     }
 
     &:focus-visible {
@@ -284,18 +284,18 @@
             background-color: var(--tab-selected-indicator);
             border-radius: var(--dt-size-radius-pill);
             content: '';
-            block-size: var(--dt-size-200);
-            inset-block-start: calc(calc(100% + var(--tablist-padding-bottom)) - var(--dt-size-100));
-            inset-inline: var(--dt-size-100-negative);
+            block-size: var(--dt-spacing-25);
+            inset-block-start: calc(calc(100% + var(--tablist-padding-bottom)) - var(--dt-spacing-1));
+            inset-inline: var(--dt-spacing-1-negative);
         }
 
         // Vertical context override
         :where(.d-tablist--vertical) &::after {
-            inset-block: var(--dt-size-100-negative);
+            inset-block: var(--dt-spacing-1-negative);
             inset-inline: auto 0;
-            inset-inline-start: calc(100% + var(--dt-size-350));
+            inset-inline-start: calc(100% + var(--dt-spacing-75));
             block-size: auto;
-            inline-size: var(--dt-size-200);
+            inline-size: var(--dt-spacing-25);
         }
     }
 }

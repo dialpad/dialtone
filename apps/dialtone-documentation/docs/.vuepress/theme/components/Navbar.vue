@@ -2,7 +2,7 @@
   <dt-stack
     as="nav"
     direction="row"
-    gap="300"
+    gap="50"
   >
     <dt-button
       v-for="link in navItems"
@@ -17,7 +17,7 @@
       {{ link.text }}
     </dt-button>
   </dt-stack>
-  <dt-stack direction="row" gap="300">
+  <dt-stack direction="row" gap="50">
     <dt-button
       v-dt-tooltip="'Storybook'"
       hidden
@@ -88,7 +88,7 @@
       </template>
       <template #list>
         <dt-list-item-group
-          heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+          heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
           heading="Base Theme"
         >
           <dt-list-item
@@ -104,7 +104,7 @@
         </dt-list-item-group>
         <dt-dropdown-separator />
         <dt-list-item-group
-          heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+          heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
           heading="Partner Themes"
         >
           <dt-list-item
@@ -120,7 +120,7 @@
         </dt-list-item-group>
         <dt-dropdown-separator />
         <dt-list-item-group
-          heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+          heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
           heading="Accessibility"
         >
           <dt-list-item
@@ -146,7 +146,7 @@
         </dt-list-item-group>
         <dt-dropdown-separator />
         <dt-list-item-group
-          heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+          heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
           heading="Named Themes"
         >
           <dt-list-item
@@ -164,7 +164,7 @@
         </dt-list-item-group>
         <dt-dropdown-separator />
         <dt-list-item-group
-          heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+          heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
           heading="Experimental (37 themes)"
         >
           <dt-list-item
@@ -200,7 +200,7 @@
       </template>
       <template #list>
         <dt-list-item-group
-          heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+          heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
           heading="Mode"
         >
           <dt-list-item
@@ -236,7 +236,7 @@
         </dt-list-item-group>
         <dt-dropdown-separator />
         <dt-list-item-group
-          heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+          heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
           heading="Contrast"
         >
           <dt-list-item

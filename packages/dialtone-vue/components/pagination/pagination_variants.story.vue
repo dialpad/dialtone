@@ -1,7 +1,7 @@
 <template>
   <div class="d-divide-y">
-    <div class="d-m32">
-      <p class="d-my16 d-fs-200 d-fw-bold">
+    <div class="d-m-400">
+      <p class="d-my-200 d-fs-200 d-fw-bold">
         Separator in the end
       </p>
       <dt-pagination
@@ -9,8 +9,8 @@
         aria-label="pagination with separator in the end"
       />
     </div>
-    <div class="d-m32">
-      <p class="d-my16 d-fs-200 d-fw-bold">
+    <div class="d-m-400">
+      <p class="d-my-200 d-fs-200 d-fw-bold">
         Separator in the beginning
       </p>
       <dt-pagination
@@ -19,8 +19,8 @@
         aria-label="pagination with separator in the beginning"
       />
     </div>
-    <div class="d-m32">
-      <p class="d-my16 d-fs-200 d-fw-bold">
+    <div class="d-m-400">
+      <p class="d-my-200 d-fs-200 d-fw-bold">
         Separator on both sides
       </p>
       <dt-pagination
@@ -29,8 +29,8 @@
         aria-label="pagination with separator on both sides"
       />
     </div>
-    <div class="d-m32">
-      <p class="d-my16 d-fs-200 d-fw-bold">
+    <div class="d-m-400">
+      <p class="d-my-200 d-fs-200 d-fw-bold">
         Hide edges
       </p>
       <dt-pagination

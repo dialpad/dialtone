@@ -79,7 +79,7 @@ When `type` is set to "custom" the list item will not render any styles or slots
       navigation-type="tab"
       type="custom"
     >
-      <dt-stack direction="row" align="start" justify="between" gap="500" class="d-py8 d-px12 d-pr8">
+      <dt-stack direction="row" align="start" justify="between" gap="500" class="d-py-100 d-px-150 d-pie-100">
         <dt-stack align="baseline" direction="row" gap="400">
           <dt-text
             kind="body"

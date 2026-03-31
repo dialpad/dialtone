@@ -26,7 +26,7 @@ keywords: ["btn","click","action","cta","d-button","DtButton","dt-button"]
 </template>
 <template #dont>
 
-- Avoid using to navigate between destinations, deferring to a [Link](link.md) instead. Exception: use DtButton with `href` or `to` when button styling is intentional (e.g. CTAs, toolbar actions).
+- Avoid using to navigate between destinations, deferring to a [DtLink](link.md) instead. Exception: use DtButton with `href` or `to` when button styling is intentional (e.g. CTAs, toolbar actions).
 
 </template>
 </dialtone-usage>
@@ -66,7 +66,7 @@ Dialtone provides five options for `kind`, with three levels of `importance`.
 The base button should be the go-to button for most of your needs. When in doubt, use this style. To help provide clarity to users, it is generally recommended to use only one primary button style within a section or page.
 
 <code-example>
-  <dt-stack direction="row" gap="400" data-demo-wrapper>
+  <dt-stack direction="row" gap="100" data-demo-wrapper>
     <dt-button> Place Call </dt-button>
     <dt-button importance="outlined"> Place Call </dt-button>
     <dt-button importance="clear"> Place Call </dt-button>
@@ -78,7 +78,7 @@ The base button should be the go-to button for most of your needs. When in doubt
 The danger button style is used to communicate critical or destructive actions such as deleting content, accounts, or canceling services.
 
 <code-example>
-  <dt-stack direction="row" gap="400" data-demo-wrapper>
+  <dt-stack direction="row" gap="100" data-demo-wrapper>
     <dt-button kind="danger"> Place Call </dt-button>
     <dt-button kind="danger" importance="outlined"> Place Call </dt-button>
     <dt-button kind="danger" importance="clear"> Place Call </dt-button>
@@ -90,7 +90,7 @@ The danger button style is used to communicate critical or destructive actions s
 The positive button style is used to communicate positive actions.
 
 <code-example>
-  <dt-stack direction="row" gap="400" data-demo-wrapper>
+  <dt-stack direction="row" gap="100" data-demo-wrapper>
     <dt-button kind="positive">Place Call</dt-button>
     <dt-button kind="positive" importance="outlined">Place Call</dt-button>
     <dt-button kind="positive" importance="clear">Place Call</dt-button>
@@ -104,7 +104,7 @@ The muted button style is used to communicate non-primary actions for contexts i
 This style's use should be rare. When in doubt, use the [default button style](#default).
 
 <code-example>
-  <dt-stack direction="row" gap="400" data-demo-wrapper>
+  <dt-stack direction="row" gap="100" data-demo-wrapper>
     <dt-button kind="muted" importance="clear"> Place Call </dt-button>
     <dt-button kind="muted" importance="outlined"> Place Call </dt-button>
   </dt-stack>
@@ -115,25 +115,25 @@ This style's use should be rare. When in doubt, use the [default button style](#
 <code-example vueCode='
 <dt-button disabled {props}>Place Call</dt-button>
 '>
-  <dt-stack gap="400">
-    <dt-toggle v-model="isDisabled" :size="200" wrapperClass="d-g8 d-m-auto d-pb8">Disabled</dt-toggle>
-    <dt-stack gap="400">
-      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+  <dt-stack gap="100">
+    <dt-toggle v-model="isDisabled" :size="200" wrapperClass="d-g-100 d-m-auto d-pbe-100">Disabled</dt-toggle>
+    <dt-stack gap="100">
+      <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
         <dt-button :disabled="isDisabled"> Place Call </dt-button>
         <dt-button :disabled="isDisabled" importance="outlined"> Place Call </dt-button>
         <dt-button :disabled="isDisabled" importance="clear"> Place Call </dt-button>
       </dt-stack>
-      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+      <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
         <dt-button :disabled="isDisabled" kind="danger"> Place Call </dt-button>
         <dt-button :disabled="isDisabled" kind="danger" importance="outlined"> Place Call </dt-button>
         <dt-button :disabled="isDisabled" kind="danger" importance="clear"> Place Call </dt-button>
       </dt-stack>
-      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+      <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
         <dt-button :disabled="isDisabled" kind="positive">Place Call</dt-button>
         <dt-button :disabled="isDisabled" kind="positive" importance="outlined">Place Call</dt-button>
         <dt-button :disabled="isDisabled" kind="positive" importance="clear">Place Call</dt-button>
       </dt-stack>
-      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+      <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
         <dt-button :disabled="isDisabled" kind="muted" importance="clear"> Place Call </dt-button>
         <dt-button :disabled="isDisabled" kind="muted" importance="outlined"> Place Call </dt-button>
       </dt-stack>
@@ -147,7 +147,7 @@ Using the class also requires `aria-disabled`, and additional javascript impleme
 
 <code-example>
   <dt-stack
-    gap="400"
+    gap="100"
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
     <!-- disabled attribute -->
@@ -165,7 +165,7 @@ Buttons can be set to active state using the `active` prop or `.d-btn--active` D
 
 <code-example>
   <dt-stack
-    gap="400"
+    gap="100"
     :direction="{ 'default': 'column', 'md': 'row' }"
     data-demo-wrapper
   >
@@ -179,11 +179,11 @@ Buttons can be set to active state using the `active` prop or `.d-btn--active` D
 
 ### Link
 
-Buttons can be styled as a [Link](link.md) in situations for which you need the appearance of a link but behavior of a button. Using the `button` element provides a better accessibility experience.
+Buttons can be styled to match the appearance of a [DtLink](link.md) in situations for which you need the appearance of a link but require the behavior of a button. Using the `button` element provides a better accessibility experience.
 
 <code-example>
   <dt-stack
-    gap="400"
+    gap="100"
     :direction="{ 'default': 'column', 'md': 'row' }"
     data-demo-wrapper
   >
@@ -202,7 +202,7 @@ This inverts the underline behavior. With `underline="false"`, the link will not
 
 <code-example>
   <dt-stack
-    gap="400"
+    gap="100"
     :direction="{ 'default': 'column', 'md': 'row' }"
     data-demo-wrapper
   >
@@ -224,7 +224,7 @@ The unstyled button removes all default Dialtone styling while preserving the se
 <dt-notice
   title="Deprecated"
   kind="info"
-  class="d-wmx100p d-my16"
+  class="d-wmx100p d-my-200"
   hide-close
 >
   <code>kind="inverted"</code> has been deprecated. Use the <dt-link to="mode-island.html#inverting">v-dt-mode directive</dt-link> instead, or <dt-link to="mode-island.html#dtmodeisland-component">DtModeIsland</dt-link>.
@@ -235,25 +235,25 @@ Use the [v-dt-mode directive](mode-island.html#inverting) in place of `kind="inv
 <code-example vueCode='
 <dt-button v-dt-mode:invert {props}>Place Call</dt-button>
 '>
-  <dt-stack gap="400">
-    <dt-toggle v-model="isInverted" :size="200" wrapperClass="d-g8 d-m-auto d-pb8">Inverted</dt-toggle>
-    <dt-stack gap="400">
-      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+  <dt-stack gap="100">
+    <dt-toggle v-model="isInverted" :size="200" wrapperClass="d-g-100 d-m-auto d-pbe-100">Inverted</dt-toggle>
+    <dt-stack gap="100">
+      <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
         <dt-button v-dt-mode:invert="isInverted"> Place Call </dt-button>
         <dt-button v-dt-mode:invert="isInverted" importance="outlined"> Place Call </dt-button>
         <dt-button v-dt-mode:invert="isInverted" importance="clear"> Place Call </dt-button>
       </dt-stack>
-      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+      <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
         <dt-button v-dt-mode:invert="isInverted" kind="danger"> Place Call </dt-button>
         <dt-button v-dt-mode:invert="isInverted" kind="danger" importance="outlined"> Place Call </dt-button>
         <dt-button v-dt-mode:invert="isInverted" kind="danger" importance="clear"> Place Call </dt-button>
       </dt-stack>
-      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+      <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
         <dt-button v-dt-mode:invert="isInverted" kind="positive">Place Call</dt-button>
         <dt-button v-dt-mode:invert="isInverted" kind="positive" importance="outlined">Place Call</dt-button>
         <dt-button v-dt-mode:invert="isInverted" kind="positive" importance="clear">Place Call</dt-button>
       </dt-stack>
-      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+      <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
         <dt-button v-dt-mode:invert="isInverted" kind="muted" importance="clear"> Place Call </dt-button>
         <dt-button v-dt-mode:invert="isInverted" kind="muted" importance="outlined"> Place Call </dt-button>
       </dt-stack>
@@ -345,7 +345,7 @@ The default button size is `300`, but does not need to be explicitly specified.
 
 <code-example>
   <dt-stack
-    gap="400"
+    gap="100"
     :direction="{ 'default': 'column', 'md': 'row' }"
     data-demo-wrapper
   >
@@ -386,7 +386,7 @@ The default button size is `300`, but does not need to be explicitly specified.
 
 <dt-notice
   kind="info"
-  class="d-wmx100p d-my24"
+  class="d-wmx100p d-my-300"
   hide-close
   title="Note"
 >
@@ -398,7 +398,7 @@ The default button size is `300`, but does not need to be explicitly specified.
 Place icons before and/or after inline of the label with `startIcon` and `endIcon` slots.
 
 <code-example>
-  <dt-stack direction="row" gap="400" data-demo-wrapper>
+  <dt-stack direction="row" gap="100" data-demo-wrapper>
     <span>
       <dt-button importance="outlined">
         <template #startIcon="{ iconSize }">
@@ -435,7 +435,7 @@ Place icons above or below the label with `blockStartIcon` and `blockEndIcon` sl
 
 <code-example>
   <dt-stack
-    gap="400"
+    gap="100"
     :direction="{ 'default': 'column', 'md': 'row' }"
     data-demo-wrapper
   >
@@ -466,11 +466,11 @@ Icon-only buttons are commonly used for toggling actions, navigation, or closing
 
 <code-example>
   <dt-stack
-    gap="600"
+    gap="300"
     :direction="{ 'default': 'column', 'md': 'row' }"
     data-demo-wrapper
   >
-    <dt-stack direction="row" gap="400">
+    <dt-stack direction="row" gap="100">
       <dt-button v-dt-tooltip="`Tooltip`" kind="muted" importance="clear">
         <template #startIcon="{ iconSize }">
           <dt-icon
@@ -488,7 +488,7 @@ Icon-only buttons are commonly used for toggling actions, navigation, or closing
         </template>
       </dt-button>
     </dt-stack>
-    <dt-stack direction="row" gap="400">
+    <dt-stack direction="row" gap="100">
       <dt-button v-dt-tooltip="`Tooltip`" importance="clear">
         <template #startIcon="{ iconSize }">
           <dt-icon
@@ -514,7 +514,7 @@ Icon-only buttons are commonly used for toggling actions, navigation, or closing
         </template>
       </dt-button>
     </dt-stack>
-    <dt-stack direction="row" gap="400">
+    <dt-stack direction="row" gap="100">
       <dt-button v-dt-tooltip="`Tooltip`" kind="danger" importance="clear">
         <template #startIcon="{ iconSize }">
           <dt-icon
@@ -540,7 +540,7 @@ Icon-only buttons are commonly used for toggling actions, navigation, or closing
         </template>
       </dt-button>
     </dt-stack>
-    <dt-stack direction="row" gap="400">
+    <dt-stack direction="row" gap="100">
       <dt-button v-dt-tooltip="`Tooltip`" importance="clear" kind="positive">
         <template #startIcon="{ iconSize }">
           <dt-icon
@@ -575,11 +575,11 @@ The following styles are available as a circle shape.
 
 <code-example>
   <dt-stack
-    gap="600"
+    gap="300"
     :direction="{ 'default': 'column', 'md': 'row' }"
     data-demo-wrapper
   >
-    <dt-stack direction="row" gap="400">
+    <dt-stack direction="row" gap="100">
       <dt-button v-dt-tooltip="`Tooltip`" circle kind="muted" importance="clear">
         <template #startIcon="{ iconSize }">
           <dt-icon
@@ -597,7 +597,7 @@ The following styles are available as a circle shape.
         </template>
       </dt-button>
     </dt-stack>
-    <dt-stack direction="row" gap="400">
+    <dt-stack direction="row" gap="100">
       <dt-button v-dt-tooltip="`Tooltip`" circle kind="danger" importance="clear">
         <template #startIcon="{ iconSize }">
           <dt-icon
@@ -623,7 +623,7 @@ The following styles are available as a circle shape.
         </template>
       </dt-button>
     </dt-stack>
-    <dt-stack direction="row" gap="400">
+    <dt-stack direction="row" gap="100">
       <dt-button v-dt-tooltip="`Tooltip`" circle importance="clear" kind="positive">
         <template #startIcon="{ iconSize }">
           <dt-icon
@@ -696,15 +696,15 @@ The width of the button remains determined by the length of the label, which is 
   </template>
 </dt-button>
 '>
-  <dt-stack gap="500" align="center">
-    <dt-toggle :size="200" v-model="loading" wrapperClass="d-g8">
+  <dt-stack gap="200" align="center">
+    <dt-toggle :size="200" v-model="loading" wrapperClass="d-g-100">
       Loading
     </dt-toggle>
     <dt-stack
-      gap="600"
+      gap="300"
       :direction="{ 'default': 'column', 'md': 'row' }"
     >
-      <dt-stack direction="row" gap="400">
+      <dt-stack direction="row" gap="100">
         <dt-button :loading="loading"> Place Call </dt-button>
         <dt-button v-dt-tooltip="`Tooltip`" :loading="loading">
           <template #icon>
@@ -723,7 +723,7 @@ The width of the button remains determined by the length of the label, which is 
           </template>
         </dt-button>
       </dt-stack>
-      <dt-stack direction="row" gap="400">
+      <dt-stack direction="row" gap="100">
         <dt-button kind="muted" importance="outlined" :loading="loading"> Place Call </dt-button>
         <dt-button kind="muted" importance="outlined" v-dt-tooltip="`Tooltip`" :loading="loading">
           <template #icon>
@@ -757,7 +757,7 @@ The width of the button remains determined by the length of the label, which is 
 </dt-button>
 '>
   <dt-stack
-    gap="400"
+    gap="100"
     direction="row"
   >
   <dt-button
@@ -817,7 +817,7 @@ Use the `#leading` and `#trailing` slots to render freeform content at the start
 ### Leading
 
 <code-example>
-  <dt-button kind="muted" importance="outlined" leading-class="d-pl12">
+  <dt-button kind="muted" importance="outlined" leading-class="d-pis-150">
     Caution
     <template #leading>
       <span class="d-bgc-critical-strong d-bar4 d-w12 d-h12"></span>
@@ -828,7 +828,7 @@ Use the `#leading` and `#trailing` slots to render freeform content at the start
 ### Trailing
 
 <code-example>
-  <dt-button :size="200" kind="muted" importance="outlined" trailing-class="d-pr2">
+  <dt-button :size="200" kind="muted" importance="outlined" trailing-class="d-pie-25">
     Copy
     <template #startIcon="{ iconSize }">
       <dt-icon name="copy" :size="iconSize" />
@@ -843,7 +843,7 @@ Use the `#leading` and `#trailing` slots to render freeform content at the start
 
 <dt-notice
   kind="info"
-  class="d-wmx100p d-my16"
+  class="d-wmx100p d-my-200"
 >
   <dt-link to="split-button.html">DtSplitButton</dt-link> is its own component containing multiple DtButtons.
 </dt-notice>
@@ -867,7 +867,7 @@ We provide the following branded buttons for log-in and sign-up workflows.
 
 <code-example>
   <dt-stack
-    gap="400"
+    gap="100"
     :direction="{ 'default': 'column', 'md': 'row' }"
     data-demo-wrapper
   >

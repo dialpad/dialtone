@@ -1,100 +1,147 @@
 {
-  "directions": ["All", "top", "right", "bottom", "left", "x", "y"],
+  "directions": [
+    { "name": "All" },
+    { "name": "top", "deprecated": true },
+    { "name": "right", "deprecated": true },
+    { "name": "bottom", "deprecated": true },
+    { "name": "left", "deprecated": true },
+    { "name": "x" },
+    { "name": "y" }
+  ],
   "values": [
     {
       "value": "0",
-      "output": "0"
+      "output": "0rem"
     },
     {
       "value": "1",
-      "output": ".1rem"
+      "output": "0.1rem"
     },
     {
-      "value": "2",
-      "output": ".2rem"
+      "value": "25",
+      "output": "0.2rem"
     },
     {
-      "value": "4",
-      "output": ".4rem"
+      "value": "50",
+      "output": "0.4rem"
     },
     {
-      "value": "6",
-      "output": ".6rem"
+      "value": "75",
+      "output": "0.6rem"
     },
     {
-      "value": "8",
-      "output": ".8rem"
+      "value": "100",
+      "output": "0.8rem"
     },
     {
-      "value": "12",
+      "value": "125",
+      "output": "1rem"
+    },
+    {
+      "value": "150",
       "output": "1.2rem"
     },
     {
-      "value": "16",
+      "value": "175",
+      "output": "1.4rem"
+    },
+    {
+      "value": "200",
       "output": "1.6rem"
     },
     {
-      "value": "20",
-      "output": "2.0rem"
+      "value": "250",
+      "output": "2rem"
     },
     {
-      "value": "24",
+      "value": "300",
       "output": "2.4rem"
     },
     {
-      "value": "32",
+      "value": "350",
+      "output": "2.8rem"
+    },
+    {
+      "value": "400",
       "output": "3.2rem"
     },
     {
-      "value": "48",
+      "value": "450",
+      "output": "3.6rem"
+    },
+    {
+      "value": "500",
+      "output": "4rem"
+    },
+    {
+      "value": "525",
+      "output": "4.2rem"
+    },
+    {
+      "value": "550",
+      "output": "4.4rem"
+    },
+    {
+      "value": "600",
       "output": "4.8rem"
     },
     {
-      "value": "64",
+      "value": "650",
+      "output": "5.2rem"
+    },
+    {
+      "value": "700",
+      "output": "5.6rem"
+    },
+    {
+      "value": "750",
+      "output": "6rem"
+    },
+    {
+      "value": "800",
       "output": "6.4rem"
-    },
-    {
-      "value": "96",
-      "output": "9.6rem"
-    },
-    {
-      "value": "128",
-      "output": "12.8rem"
     }
   ],
   "coordinateDirections": [
     {
-      "direction": "Top",
-      "prefix": "t",
+      "direction": "inset-block-start",
+      "directionPhysical": "Top",
+      "prefix": "ibs",
       "percent": "yes"
     },
     {
-      "direction": "Right",
-      "prefix": "r",
+      "direction": "inset-inline-end",
+      "directionPhysical": "Right",
+      "prefix": "iie",
       "percent": "yes"
     },
     {
-      "direction": "Bottom",
-      "prefix": "b",
+      "direction": "inset-block-end",
+      "directionPhysical": "Bottom",
+      "prefix": "ibe",
       "percent": "yes"
     },
     {
-      "direction": "Left",
-      "prefix": "l",
+      "direction": "inset-inline-start",
+      "directionPhysical": "Left",
+      "prefix": "iis",
       "percent": "yes"
     },
     {
-      "direction": "L/R",
+      "direction": "inset-inline",
+      "directionPhysical": "Left/Right",
       "prefix": "x",
       "percent": "no"
     },
     {
-      "direction": "T/B",
+      "direction": "inset-block",
+      "directionPhysical": "Top/Bottom",
       "prefix": "y",
       "percent": "no"
     },
     {
-      "direction": "All",
+      "direction": "inset",
+      "directionPhysical": "All",
       "prefix": "all",
       "percent": "no"
     }
@@ -102,115 +149,111 @@
   "coordinates": [
     {
       "coordinate": "0",
-      "suffix": "px",
       "negative": "no",
       "combo": "yes",
-      "value": "0px"
+      "value": "0"
     },
     {
       "coordinate": "1",
-      "suffix": "px",
       "negative": "yes",
       "combo": "yes",
-      "value": "1px"
+      "value": "0.1rem"
     },
     {
-      "coordinate": "2",
-      "suffix": "px",
+      "coordinate": "25",
       "negative": "yes",
       "combo": "yes",
-      "value": "2px"
+      "value": "0.2rem"
     },
     {
-      "coordinate": "4",
-      "suffix": "px",
+      "coordinate": "50",
       "negative": "yes",
       "combo": "yes",
-      "value": "4px"
+      "value": "0.4rem"
     },
     {
-      "coordinate": "6",
-      "suffix": "px",
+      "coordinate": "75",
       "negative": "yes",
       "combo": "yes",
-      "value": "6px"
+      "value": "0.6rem"
     },
     {
-      "coordinate": "8",
-      "suffix": "px",
+      "coordinate": "100",
       "negative": "yes",
       "combo": "yes",
-      "value": "8px"
+      "value": "0.8rem"
     },
     {
-      "coordinate": "12",
-      "suffix": "px",
+      "coordinate": "125",
       "negative": "yes",
       "combo": "yes",
-      "value": "12px"
+      "value": "1rem"
     },
     {
-      "coordinate": "16",
-      "suffix": "px",
+      "coordinate": "150",
       "negative": "yes",
       "combo": "yes",
-      "value": "16px"
+      "value": "1.2rem"
     },
     {
-      "coordinate": "20",
-      "suffix": "px",
+      "coordinate": "175",
       "negative": "yes",
       "combo": "yes",
-      "value": "20px"
+      "value": "1.4rem"
     },
     {
-      "coordinate": "24",
-      "suffix": "px",
+      "coordinate": "200",
       "negative": "yes",
       "combo": "yes",
-      "value": "24px"
+      "value": "1.6rem"
     },
     {
-      "coordinate": "32",
-      "suffix": "px",
+      "coordinate": "250",
       "negative": "yes",
       "combo": "yes",
-      "value": "32px"
+      "value": "2rem"
     },
     {
-      "coordinate": "48",
-      "suffix": "px",
+      "coordinate": "300",
       "negative": "yes",
       "combo": "yes",
-      "value": "48px"
+      "value": "2.4rem"
     },
     {
-      "coordinate": "64",
-      "suffix": "px",
+      "coordinate": "400",
       "negative": "yes",
       "combo": "yes",
-      "value": "64px"
+      "value": "3.2rem"
+    },
+    {
+      "coordinate": "600",
+      "negative": "yes",
+      "combo": "yes",
+      "value": "4.8rem"
+    },
+    {
+      "coordinate": "800",
+      "negative": "yes",
+      "combo": "yes",
+      "value": "6.4rem"
     },
     {
       "coordinate": "50p",
-      "suffix": "%",
       "negative": "yes",
       "combo": "no",
       "value": "50%"
     },
     {
       "coordinate": "100p",
-      "suffix": "%",
       "negative": "yes",
       "combo": "no",
       "value": "100%"
     },
     {
-      "coordinate": "100p",
-      "suffix": "-calc",
+      "coordinate": "100p-calc",
       "negative": "yes",
       "combo": "no",
-      "value": "100-calc"
+      "value": "calc(100% + 8px)"
     }
   ]
 }

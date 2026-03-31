@@ -252,6 +252,23 @@ module.exports = {
     96: '150',
     128: '200',
   },
+  // Token-stop-based utility class constants
+  // These drive the new d-h-{stop}, d-w-{stop}, d-size-{stop}, d-m-{stop}, d-p-{stop} classes
+  // where the class name = the token stop number
+
+  // All layout token stops (25–1600, base-64 scale)
+  LAYOUT_STOPS: [
+    25, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500,
+    550, 600, 650, 700, 750, 800, 850, 900, 950, 1000, 1050, 1100, 1150,
+    1200, 1250, 1300, 1350, 1400, 1450, 1500, 1550, 1600,
+  ],
+
+  // All spacing token stops (0–800, base-8 scale)
+  SPACING_STOPS: [
+    0, 1, 25, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400,
+    450, 500, 525, 550, 600, 650, 700, 750, 800,
+  ],
+
   REGEX_OPTIONS: {
     COLORS: [
       'White',

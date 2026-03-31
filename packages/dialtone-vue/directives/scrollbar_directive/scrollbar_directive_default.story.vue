@@ -1,17 +1,17 @@
 <template>
   <dt-stack
     gap="600"
-    class="d-m64"
+    class="d-m-800"
   >
     <div>
-      <p class="d-label--md-compact d-mb8">
+      <p class="d-label--md-compact d-mbe-100">
         Default (auto-hide on leave)
       </p>
       <div
         v-dt-scrollbar
-        class="d-h164 d-w264 d-bar8 d-bc-default d-ba"
+        class="d-h-250 d-w-400 d-bar8 d-bc-default d-ba"
       >
-        <div class="d-p16">
+        <div class="d-p-200">
           <p
             v-for="i in 20"
             :key="i"
@@ -23,14 +23,14 @@
       </div>
     </div>
     <div>
-      <p class="d-label--md-compact d-mb8">
+      <p class="d-label--md-compact d-mbe-100">
         Never auto-hide
       </p>
       <div
         v-dt-scrollbar:never
-        class="d-h164 d-w264 d-bar8 d-bc-default d-ba"
+        class="d-h-250 d-w-400 d-bar8 d-bc-default d-ba"
       >
-        <div class="d-p16">
+        <div class="d-p-200">
           <p
             v-for="i in 20"
             :key="i"
@@ -42,14 +42,14 @@
       </div>
     </div>
     <div>
-      <p class="d-label--md-compact d-mb8">
+      <p class="d-label--md-compact d-mbe-100">
         Auto-hide on scroll
       </p>
       <div
         v-dt-scrollbar:scroll
-        class="d-h164 d-w264 d-bar8 d-bc-default d-ba"
+        class="d-h-250 d-w-400 d-bar8 d-bc-default d-ba"
       >
-        <div class="d-p16">
+        <div class="d-p-200">
           <p
             v-for="i in 20"
             :key="i"

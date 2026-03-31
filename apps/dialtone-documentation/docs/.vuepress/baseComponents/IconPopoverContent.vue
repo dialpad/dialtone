@@ -1,12 +1,12 @@
 <template>
-  <dt-stack direction="row" align="center" justify="center" class="d-h64 d-mb16 d-fc-primary">
+  <dt-stack direction="row" align="center" justify="center" class="d-h-100 d-mbe-200 d-fc-primary">
     <dt-icon
       ref="iconPreview"
       :name="iconName"
       :size="selectedSize"
     />
   </dt-stack>
-  <dt-stack gap="500" class="d-fc-primary">
+  <dt-stack gap="200" class="d-fc-primary">
     <div class="d-wmx50p">
       <dt-select-menu
         v-model="selectedSize"
@@ -32,7 +32,7 @@
         </dt-text>
       </dt-stack>
       <copy-button
-        class="d-ml8"
+        class="d-mis-100"
         :text="iconName"
         aria-label="Copy icon name"
       />
@@ -65,12 +65,12 @@
         />
       </div>
       <copy-button
-        class="d-ml8"
+        class="d-mis-100"
         :text="svgExample"
         aria-label="Copy SVG markup"
       />
     </dt-stack>
-    <dt-stack direction="row" align="end" class="d-bb d-bc-default d-pb16">
+    <dt-stack direction="row" align="end" class="d-bb d-bc-default d-pbe-200">
       <div class="d-fl-grow1">
         <dt-input
           class="d-ff-mono"
@@ -82,7 +82,7 @@
         />
       </div>
       <copy-button
-        class="d-ml8"
+        class="d-mis-100"
         :text="vueExample"
         aria-label="Copy Vue markup"
       />
@@ -107,7 +107,7 @@
         </dt-input>
       </div>
       <copy-button
-        class="d-ml8"
+        class="d-mis-100"
         :text="vueExampleDeprecated"
         aria-label="Copy Vue Deprecated markup"
       />

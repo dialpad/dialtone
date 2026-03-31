@@ -24,7 +24,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox-wit
       />
     </template>
     <template #list="{ listProps }">
-      <ul v-bind="listProps" class="d-p4">
+      <ul v-bind="listProps" class="d-p-50">
         <dt-list-item
           v-for="(item, i) in items"
           :key="item.id"
@@ -78,7 +78,7 @@ You can add header and footer content to the popover using the `header` and `foo
     @opened="onOpenedHeaderFooter"
   >
     <template #header>
-      <div class="d-px12 d-py8 d-fw-semibold">Select an option</div>
+      <div class="d-px-150 d-py-100 d-fw-semibold">Select an option</div>
     </template>
     <template #input="{ inputProps, onInput }">
       <dt-input
@@ -89,7 +89,7 @@ You can add header and footer content to the popover using the `header` and `foo
       />
     </template>
     <template #list="{ listProps }">
-      <ul v-bind="listProps" class="d-p4">
+      <ul v-bind="listProps" class="d-p-50">
         <dt-list-item
           v-for="(item, i) in items"
           :key="item.id"
@@ -105,7 +105,7 @@ You can add header and footer content to the popover using the `header` and `foo
       </ul>
     </template>
     <template #footer>
-      <div class="d-px12 d-py8 d-fc-tertiary">Footer content</div>
+      <div class="d-px-150 d-py-100 d-fc-tertiary">Footer content</div>
     </template>
   </dt-combobox-with-popover>
 </code-example>

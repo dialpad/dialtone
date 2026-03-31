@@ -1,6 +1,6 @@
 <template>
   <dt-card
-    class="d-w264"
+    class="d-w-400"
     :container-class="$attrs.containerClass"
     :header-class="$attrs.headerClass"
     :content-class="$attrs.contentClass"

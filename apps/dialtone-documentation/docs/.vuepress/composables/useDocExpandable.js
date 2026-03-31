@@ -6,13 +6,13 @@ import { computed, onBeforeUnmount, ref } from 'vue';
  * Designed for documentation components that need to clamp content height.
  *
  * @param {Object} options - Configuration options
- * @param {string} options.maxHeightClass - CSS utility class for max-height (e.g., 'd-hmx332')
+ * @param {string} options.maxHeightClass - CSS utility class for max-height (e.g., 'd-hmx-500')
  * @param {number} options.heightFudge - Pixels to subtract from threshold for better UX (default: 8)
  * @param {number} options.debounceMs - Debounce delay for resize events (default: 100)
  * @returns {Object} Expandable state and methods
  */
 export function useDocExpandable({
-  maxHeightClass = 'd-hmx464',
+  maxHeightClass = 'd-hmx-700',
   heightFudge = 8,
   debounceMs = 100,
 } = {}) {
@@ -31,22 +31,21 @@ export function useDocExpandable({
     resize: null,
   };
 
+  // Resolved max height in pixels, measured from DOM
+  const resolvedMaxHeight = ref(DEFAULT_MAX_HEIGHT);
+
   /**
-   * Parse the numeric value from the provided max-height utility class.
-   * @returns {number} Parsed height in pixels
+   * Measure the actual computed max-height from an element.
+   * @param {HTMLElement} element - The element with the max-height class applied
    */
-  const resolvedMaxHeight = computed(() => {
-    const match = maxHeightClass.match(/d-hmx(\d+)/);
-
-    if (!match) {
-      return DEFAULT_MAX_HEIGHT;
+  const measureMaxHeight = (element) => {
+    if (!element) return;
+    const computedStyle = window.getComputedStyle(element);
+    const maxH = parseFloat(computedStyle.maxBlockSize || computedStyle.maxHeight);
+    if (!Number.isNaN(maxH) && maxH > 0) {
+      resolvedMaxHeight.value = maxH;
     }
-
-    const [, heightString] = match;
-    const parsedHeight = Number.parseInt(heightString, 10);
-
-    return Number.isNaN(parsedHeight) ? DEFAULT_MAX_HEIGHT : parsedHeight;
-  });
+  };
 
   /**
    * Calculate the threshold for determining if content is expandable.
@@ -92,6 +91,9 @@ export function useDocExpandable({
     if (!element) {
       return;
     }
+
+    // Measure actual max-height from DOM
+    measureMaxHeight(element);
 
     // Initial measurement
     updateExpandable(element);

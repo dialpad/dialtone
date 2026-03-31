@@ -5,7 +5,7 @@ no_preview: true
 keywords: ["dark mode","light mode","color scheme"]
 ---
 
-<div class="d-m32"></div>
+<div class="d-m-400"></div>
 
 ## Overview
 
@@ -40,7 +40,7 @@ A theme represents the core color scheme. It applies a unique set of colors to t
           <code class="d-code--sm">Dialpad</code>
         </td>
         <td>
-          <dt-stack direction="row" gap="200">
+          <dt-stack direction="row" gap="25">
             <div class="color-swatch" style="background-color: #1C1C1C;" title="Background"></div>
             <div class="color-swatch" style="background-color: #252525;" title="Sidebar"></div>
             <div class="color-swatch" style="background-color: #F9F9F9;" title="Border"></div>
@@ -49,7 +49,7 @@ A theme represents the core color scheme. It applies a unique set of colors to t
           </dt-stack>
         </td>
         <td>
-          <dt-stack direction="row" gap="200">
+          <dt-stack direction="row" gap="25">
             <div class="color-swatch" style="background-color: #E6E6E6;" title="Background"></div>
             <div class="color-swatch" style="background-color: #1F1F1F;" title="Sidebar"></div>
             <div class="color-swatch" style="background-color: #D4D4D4;" title="Border"></div>
@@ -63,7 +63,7 @@ A theme represents the core color scheme. It applies a unique set of colors to t
           <code class="d-code--sm">T-Mobile</code>
         </td>
         <td>
-          <dt-stack direction="row" gap="200">
+          <dt-stack direction="row" gap="25">
             <div class="color-swatch" style="background-color: #1C1C1C;" title="Background"></div>
             <div class="color-swatch" style="background-color: #252525;" title="Sidebar"></div>
             <div class="color-swatch" style="background-color: #F9F9F9;" title="Border"></div>
@@ -72,7 +72,7 @@ A theme represents the core color scheme. It applies a unique set of colors to t
           </dt-stack>
         </td>
         <td>
-          <dt-stack direction="row" gap="200">
+          <dt-stack direction="row" gap="25">
             <div class="color-swatch" style="background-color: #E6E6E6;" title="Background"></div>
             <div class="color-swatch" style="background-color: #1F1F1F;" title="Sidebar"></div>
             <div class="color-swatch" style="background-color: #D4D4D4;" title="Border"></div>
@@ -86,7 +86,7 @@ A theme represents the core color scheme. It applies a unique set of colors to t
           <code class="d-code--sm">Sunflower</code>
         </td>
         <td>
-          <dt-stack direction="row" gap="200">
+          <dt-stack direction="row" gap="25">
             <div class="color-swatch" style="background-color: #380010;" title="Background"></div>
             <div class="color-swatch" style="background-color: #6A652A;" title="Sidebar"></div>
             <div class="color-swatch" style="background-color: #FFF9E5;" title="Border"></div>
@@ -95,7 +95,7 @@ A theme represents the core color scheme. It applies a unique set of colors to t
           </dt-stack>
         </td>
         <td>
-          <dt-stack direction="row" gap="200">
+          <dt-stack direction="row" gap="25">
             <div class="color-swatch" style="background-color: #1F1C00;" title="Background"></div>
             <div class="color-swatch" style="background-color: #FE1F76;" title="Sidebar"></div>
             <div class="color-swatch" style="background-color: #FFF2F3;" title="Border"></div>
@@ -109,7 +109,7 @@ A theme represents the core color scheme. It applies a unique set of colors to t
           <code class="d-code--sm">Ceruleo</code>
         </td>
         <td>
-          <dt-stack direction="row" gap="200">
+          <dt-stack direction="row" gap="25">
             <div class="color-swatch" style="background-color: #003165;" title="Background"></div>
             <div class="color-swatch" style="background-color: #98DCFF;" title="Sidebar"></div>
             <div class="color-swatch" style="background-color: #E8E9E9;" title="Border"></div>
@@ -118,7 +118,7 @@ A theme represents the core color scheme. It applies a unique set of colors to t
           </dt-stack>
         </td>
         <td>
-          <dt-stack direction="row" gap="200">
+          <dt-stack direction="row" gap="25">
             <div class="color-swatch" style="background-color: #052133;" title="Background"></div>
             <div class="color-swatch" style="background-color: #5FC4F9;" title="Sidebar"></div>
             <div class="color-swatch" style="background-color: #F5F9FD;" title="Border"></div>
@@ -132,7 +132,7 @@ A theme represents the core color scheme. It applies a unique set of colors to t
           <code class="d-code--sm">Melon</code>
         </td>
         <td>
-          <dt-stack direction="row" gap="200">
+          <dt-stack direction="row" gap="25">
             <div class="color-swatch" style="background-color: #FFE6FD;" title="Background"></div>
             <div class="color-swatch" style="background-color: #190826;" title="Sidebar"></div>
             <div class="color-swatch" style="background-color: #511E76;" title="Border"></div>
@@ -141,7 +141,7 @@ A theme represents the core color scheme. It applies a unique set of colors to t
           </dt-stack>
         </td>
         <td>
-          <dt-stack direction="row" gap="200">
+          <dt-stack direction="row" gap="25">
             <div class="color-swatch" style="background-color: #190826;" title="Background"></div>
             <div class="color-swatch" style="background-color: #FFE6FD;" title="Sidebar"></div>
             <div class="color-swatch" style="background-color: #FFF0FE;" title="Border"></div>
@@ -155,7 +155,7 @@ A theme represents the core color scheme. It applies a unique set of colors to t
           <code class="d-code--sm">Aegean</code>
         </td>
         <td>
-          <dt-stack direction="row" gap="200">
+          <dt-stack direction="row" gap="25">
             <div class="color-swatch" style="background-color: #D3E0F4;" title="Background"></div>
             <div class="color-swatch" style="background-color: #10022C;" title="Sidebar"></div>
             <div class="color-swatch" style="background-color: #228782;" title="Border"></div>
@@ -164,7 +164,7 @@ A theme represents the core color scheme. It applies a unique set of colors to t
           </dt-stack>
         </td>
         <td>
-          <dt-stack direction="row" gap="200">
+          <dt-stack direction="row" gap="25">
             <div class="color-swatch" style="background-color: #072C2A;" title="Background"></div>
             <div class="color-swatch" style="background-color: #8CBAEB;" title="Sidebar"></div>
             <div class="color-swatch" style="background-color: #8CBAEB;" title="Border"></div>
@@ -178,7 +178,7 @@ A theme represents the core color scheme. It applies a unique set of colors to t
           <code class="d-code--sm">Verdant Haze</code>
         </td>
         <td>
-          <dt-stack direction="row" gap="200">
+          <dt-stack direction="row" gap="25">
             <div class="color-swatch" style="background-color: #EDF0EB;" title="Background"></div>
             <div class="color-swatch" style="background-color: #1A2214;" title="Sidebar"></div>
             <div class="color-swatch" style="background-color: #344626;" title="Border"></div>
@@ -187,7 +187,7 @@ A theme represents the core color scheme. It applies a unique set of colors to t
           </dt-stack>
         </td>
         <td>
-          <dt-stack direction="row" gap="200">
+          <dt-stack direction="row" gap="25">
             <div class="color-swatch" style="background-color: #C0CAAE;" title="Background"></div>
             <div class="color-swatch" style="background-color: #1A2214;" title="Sidebar"></div>
             <div class="color-swatch" style="background-color: #3F5F01;" title="Border"></div>
@@ -201,7 +201,7 @@ A theme represents the core color scheme. It applies a unique set of colors to t
           <code class="d-code--sm">Plum</code>
         </td>
         <td>
-          <dt-stack direction="row" gap="200">
+          <dt-stack direction="row" gap="25">
             <div class="color-swatch" style="background-color: #E4E0E8;" title="Background"></div>
             <div class="color-swatch" style="background-color: #0A0029;" title="Sidebar"></div>
             <div class="color-swatch" style="background-color: #1C1C1C;" title="Border"></div>
@@ -210,7 +210,7 @@ A theme represents the core color scheme. It applies a unique set of colors to t
           </dt-stack>
         </td>
         <td>
-          <dt-stack direction="row" gap="200">
+          <dt-stack direction="row" gap="25">
             <div class="color-swatch" style="background-color: #0A0029;" title="Background"></div>
             <div class="color-swatch" style="background-color: #10022C;" title="Sidebar"></div>
             <div class="color-swatch" style="background-color: #65318E;" title="Border"></div>
@@ -224,7 +224,7 @@ A theme represents the core color scheme. It applies a unique set of colors to t
           <code class="d-code--sm">Buttercream</code>
         </td>
         <td>
-          <dt-stack direction="row" gap="200">
+          <dt-stack direction="row" gap="25">
             <div class="color-swatch" style="background-color: #F0E4CB;" title="Background"></div>
             <div class="color-swatch" style="background-color: #15242E;" title="Sidebar"></div>
             <div class="color-swatch" style="background-color: #1B2F3B;" title="Border"></div>
@@ -233,7 +233,7 @@ A theme represents the core color scheme. It applies a unique set of colors to t
           </dt-stack>
         </td>
         <td>
-          <dt-stack direction="row" gap="200">
+          <dt-stack direction="row" gap="25">
             <div class="color-swatch" style="background-color: #282317;" title="Background"></div>
             <div class="color-swatch" style="background-color: #D2E0FF;" title="Sidebar"></div>
             <div class="color-swatch" style="background-color: #ECF9F8;" title="Border"></div>
@@ -247,7 +247,7 @@ A theme represents the core color scheme. It applies a unique set of colors to t
           <code class="d-code--sm">Botany</code>
         </td>
         <td>
-          <dt-stack direction="row" gap="200">
+          <dt-stack direction="row" gap="25">
             <div class="color-swatch" style="background-color: #E6EBD8;" title="Background"></div>
             <div class="color-swatch" style="background-color: #022443;" title="Sidebar"></div>
             <div class="color-swatch" style="background-color: #0D6D4C;" title="Border"></div>
@@ -256,7 +256,7 @@ A theme represents the core color scheme. It applies a unique set of colors to t
           </dt-stack>
         </td>
         <td>
-          <dt-stack direction="row" gap="200">
+          <dt-stack direction="row" gap="25">
             <div class="color-swatch" style="background-color: #072C2A;" title="Background"></div>
             <div class="color-swatch" style="background-color: #C6E4FF;" title="Sidebar"></div>
             <div class="color-swatch" style="background-color: #D3BCFF;" title="Border"></div>
@@ -270,7 +270,7 @@ A theme represents the core color scheme. It applies a unique set of colors to t
           <code class="d-code--sm">High Desert</code>
         </td>
         <td>
-          <dt-stack direction="row" gap="200">
+          <dt-stack direction="row" gap="25">
             <div class="color-swatch" style="background-color: #ECE2CE;" title="Background"></div>
             <div class="color-swatch" style="background-color: #141F00;" title="Sidebar"></div>
             <div class="color-swatch" style="background-color: #223300;" title="Border"></div>
@@ -279,7 +279,7 @@ A theme represents the core color scheme. It applies a unique set of colors to t
           </dt-stack>
         </td>
         <td>
-          <dt-stack direction="row" gap="200">
+          <dt-stack direction="row" gap="25">
             <div class="color-swatch" style="background-color: #3F3D3C;" title="Background"></div>
             <div class="color-swatch" style="background-color: #DCD138;" title="Sidebar"></div>
             <div class="color-swatch" style="background-color: #F48662;" title="Border"></div>
@@ -302,7 +302,7 @@ These are the core reference colors for the shell. They are directly linked to t
 
 <div class="d-bgc-secondary d-bar8"><svg-loader class="d-fl1" name="base-tokens" /></div>
 
-<div class="d-m32"></div>
+<div class="d-m-400"></div>
 
 ### Shell Modifier Tokens
 
@@ -310,18 +310,18 @@ These tokens, such as `shell-action...`, `shell-status...` `shell-mention...`, i
 
 <div class="d-bgc-secondary d-bar8"><svg-loader class="d-fl1" name="base-shell-token" /></div>
 
-<div class="d-m32"></div>
+<div class="d-m-400"></div>
 
 This structure allows for a cascading effect: changing a shell base token automatically updates all related shell modifier tokens, making it simple to create and manage custom themes for the application's shell.
 <div class="d-bgc-secondary d-bar8"><svg-loader class="d-fl1" name="token-structure" /></div>
 
-<div class="d-m32"></div>
+<div class="d-m-400"></div>
 
 ## Accessibility
 
 When creating a custom theme, it is important to ensure that the colors used are accessible. This means that the colors should be easy to read and contrast well with the background.
 
-<dialtone-usage class="d-d-grid d-g24 d-g-cols2">
+<dialtone-usage class="d-d-grid d-g-300 d-g-cols2">
   <template #do>
     <div class="d-bgc-secondary d-bar8">
       <svg-loader class="d-fl1" name="theme-contrast-do" />
@@ -341,8 +341,10 @@ When creating a custom theme, it is important to ensure that the colors used are
 
 <style scoped>
 .color-swatch {
-  inline-size: var(--dt-size-550);
-  block-size: var(--dt-size-550);
+  --color-swatch-size: calc(var(--dt-layout-25) * 1.5);
+
+  inline-size: var(--color-swatch-size);
+  block-size: var(--color-swatch-size);
   border-radius: var(--dt-size-radius-300);
   border: var(--dt-size-border-100) solid var(--dt-color-border-default);
   flex-shrink: 0;

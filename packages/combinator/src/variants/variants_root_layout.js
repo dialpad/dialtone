@@ -8,16 +8,16 @@ export default {
     },
     slots: {
       header: {
-        initialValue: '<div class="d-h64 d-bgc-purple-100">Header</div>',
+        initialValue: '<div class="d-h-100 d-bgc-purple-100">Header</div>',
       },
       sidebar: {
-        initialValue: '<div class="d-w128 d-h100p d-bgc-black-100"><div>Sidebar item 1</div><div>Sidebar item 2</div></div>',
+        initialValue: '<div class="d-w-200 d-h100p d-bgc-black-100"><div>Sidebar item 1</div><div>Sidebar item 2</div></div>',
       },
       default: {
         initialValue: '<div class="d-bgc-green-100 d-w100p d-h100p">Content</div>',
       },
       footer: {
-        initialValue: '<div class="d-h64 d-bgc-gold-100">Footer</div>',
+        initialValue: '<div class="d-h-100 d-bgc-gold-100">Footer</div>',
       },
     },
   },

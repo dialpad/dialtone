@@ -1,5 +1,5 @@
 <template>
-  <dt-stack direction="row" align="center" class="d-ml-auto lg:d-d-none">
+  <dt-stack direction="row" align="center" class="d-mis-auto lg:d-d-none">
     <dt-button
       v-show="!isMenuOpen"
       importance="clear"
@@ -47,8 +47,8 @@
         d-bgc-secondary
         d-of-auto
         d-fs-300
-        d-py24
-        d-px16
+        d-py-300
+        d-px-200
         d-h100p
         d-t64
         d-zi-navigation-fixed
@@ -59,7 +59,7 @@
         v-for="link in items"
         :key="link"
         :to="link.link"
-        class="d-mb12"
+        class="d-mbe-150"
         :class="{ 'router-link-active': isActiveLink(link.text) }"
         @click="toggleNavbar"
       >

@@ -1,10 +1,10 @@
 <template>
   <div
     v-dt-mode:[mode]
-    class="d-p16 d-bgc-secondary"
+    class="d-p-200 d-bgc-secondary"
   >
-    <dt-stack as="section" gap="500">
-      <div class="d-d-grid d-g16 d-rg32 d-g-cols1 md:d-g-cols2">
+    <dt-stack as="section" gap="200">
+      <div class="d-d-grid d-g-200 d-rg-400 d-g-cols1 md:d-g-cols2">
         <base-color
           v-for="({ stops }, colorName) in colors"
           :key="colorName"

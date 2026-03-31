@@ -5,11 +5,11 @@
   //  ----------------------------------------------------------------------------
   --leftbar-row-color-foreground: var(--dt-shell-color-foreground-primary);
   --leftbar-row-color-background: var(--dt-shell-color-surface-default);
-  --leftbar-row-radius: var(--dt-size-radius-pill);
+  --leftbar-row-radius: var(--dt-size-radius-400); // TODO: not a final solution
   --leftbar-row-opacity: 100%;
   --leftbar-row-alpha-color-foreground: var(--dt-shell-color-foreground-primary);
-  --leftbar-row-alpha-width: calc(var(--dt-size-300) * 10);
-  --leftbar-row-alpha-height: calc(var(--dt-size-300) * 9);
+  --leftbar-row-alpha-width: calc(var(--dt-layout-50) + var(--dt-spacing-50));
+  --leftbar-row-alpha-height: calc(var(--dt-layout-50) + var(--dt-spacing-50));
   --leftbar-row-omega-height: var(--leftbar-row-alpha-height);
   --leftbar-row-unread-badge-display: inline-flex;
   --leftbar-row-description-color-foreground: var(--dt-shell-color-foreground-primary);
@@ -19,9 +19,9 @@
   --leftbar-row-status-color-foreground: var(--dt-shell-color-foreground-muted);
   --leftbar-row-status-font-size: var(--dt-font-size-100);
   --leftbar-row-status-line-height: var(--dt-font-line-height-100);
-  --leftbar-row-action-position-right: var(--dt-size-400);
+  --leftbar-row-action-position-right: var(--dt-spacing-100);
   --leftbar-row-action-position-bottom: 50%;
-  --leftbar-row-action-width: var(--dt-size-550);
+  --leftbar-row-action-width: calc(var(--dt-layout-25) * 1.5);
   --leftbar-row-action-height: var(--leftbar-row-action-width);
 
   .d-presence {
@@ -104,7 +104,7 @@
   }
 
   &__status {
-    padding-block-end: var(--dt-size-100);
+    padding-block-end: var(--dt-spacing-1);
     overflow: hidden;
     color: var(--leftbar-row-status-color-foreground);
     font-size: var(--leftbar-row-status-font-size);
@@ -142,11 +142,11 @@
   }
 
   &__is-typing {
-    --is-typing-size-shape: var(--dt-size-550);
+    --is-typing-size-shape: calc(var(--dt-layout-25) * 1.5);
 
     position: absolute;
     display: flex;
-    gap: var(--dt-size-200);
+    gap: var(--dt-spacing-25);
     align-items: center;
     justify-content: center;
     inline-size: var(--is-typing-size-shape);
@@ -156,8 +156,8 @@
 
     & span {
       display: inline-block;
-      inline-size: var(--dt-size-300);
-      block-size: var(--dt-size-300);
+      inline-size: var(--dt-spacing-25);
+      block-size: var(--dt-spacing-25);
       padding: 0;
       background: var(--dt-color-surface-strong);
       border-radius: var(--dt-size-radius-pill);
@@ -256,7 +256,7 @@
     box-sizing: border-box;
     inline-size: var(--leftbar-row-alpha-width);
     block-size: var(--leftbar-row-alpha-height);
-    padding-inline: var(--dt-size-400) var(--dt-size-400);
+    padding-inline: var(--dt-spacing-50);
     color: var(--leftbar-row-alpha-color-foreground);
     border-radius: var(--leftbar-row-radius) 0 0 var(--leftbar-row-radius);
   }
@@ -271,7 +271,7 @@
     inset-block-start: var(--leftbar-row-action-position-bottom);
     inset-inline-end: var(--leftbar-row-action-position-right);
     display: flex;
-    gap: var(--dt-size-300);
+    gap: var(--dt-spacing-50);
     align-items: center;
     justify-content: flex-end;
     box-sizing: border-box;
@@ -310,13 +310,13 @@
 
   &__active-voice {
     display: inline-flex;
-    color: var(--dt-color-purple-600);
+    color: var(--dt-color-link-primary);
     .d-recipe-leftbar-row-opacity-pulsate();
   }
 
   &__dnd {
-    padding-block-start: var(--dt-size-200);
-    padding-inline-end: var(--dt-size-300);
+    padding-block-start: var(--dt-spacing-25);
+    padding-inline-end: var(--dt-spacing-50);
     color: var(--dt-color-foreground-tertiary);
     font-weight: var(--dt-font-weight-medium);
     font-size: var(--dt-font-size-100);
@@ -325,32 +325,32 @@
 
   &__container--off-duty {
     background-color: var(--dt-color-surface-critical);
-    border: var(--dt-size-100) solid var(--dt-color-border-subtle);
+    border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
     border-radius: var(--dt-size-radius-500);
 
     .d-recipe-leftbar-row__primary {
-      margin: calc(var(--dt-size-100) * -1);
+      margin: var(--dt-spacing-1-negative);
     }
   }
 
   &--contact-centers {
     .d-recipe-leftbar-row__alpha {
-      padding-inline: var(--dt-size-450) var(--dt-size-450);
+      padding-inline: var(--dt-spacing-150) var(--dt-spacing-150);
     }
 
     .d-recipe-leftbar-row__action-container {
       display: inline-flex;
       align-items: center;
       justify-content: flex-end;
-      min-inline-size: var(--dt-size-600);
-      block-size: var(--dt-size-500);
+      min-inline-size: var(--dt-layout-50);
+      block-size: var(--dt-layout-25);
     }
   }
 
   &__icon-cc {
-    inline-size: calc(var(--dt-size-300) * 3.5);
-    block-size: calc(var(--dt-size-300) * 3.5);
-    border-radius: var(--dt-size-200);
+    inline-size: calc(var(--dt-layout-25) - var(--dt-spacing-25));
+    block-size: calc(var(--dt-layout-25) - var(--dt-spacing-25));
+    border-radius: var(--dt-size-radius-200);
   }
 }
 

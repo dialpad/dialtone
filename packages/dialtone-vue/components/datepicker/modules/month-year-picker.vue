@@ -2,13 +2,13 @@
   <dt-stack
     class="d-datepicker__month-year"
     direction="row"
-    gap="300"
+    gap="50"
   >
     <dt-stack
       as="nav"
       class="d-datepicker__nav"
       direction="row"
-      gap="200"
+      gap="25"
     >
       <dt-tooltip
         :fallback-placements="['top-start', 'auto']"
@@ -73,7 +73,7 @@
       as="nav"
       class="d-datepicker__nav"
       direction="row"
-      gap="200"
+      gap="25"
     >
       <dt-tooltip
         :fallback-placements="['top-end', 'auto']"

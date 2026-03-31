@@ -1,13 +1,13 @@
 @layer dialtone.components {
 .d-rich-text-editor {
   &__code-block {
-    padding: var(--dt-size-400);
+    padding: var(--dt-spacing-100);
     font: var(--dt-typography-code-md);
     background: var(--dt-color-surface-secondary);
   }
 
   code:not(.d-rich-text-editor__code-block > code) {
-    padding: var(--dt-size-200);
+    padding: var(--dt-spacing-25);
     color: var(--dt-color-foreground-warning);
     font: var(--dt-typography-code-md);
     background-color: var(--dt-color-surface-secondary-opaque);
@@ -27,7 +27,7 @@
     }
 
     ul, ol {
-      padding-inline-start: var(--dt-size-525);
+      padding-inline-start: var(--dt-spacing-250);
     }
 
     ul > li {
@@ -40,7 +40,7 @@
 
     blockquote {
       margin-inline-start: 0;
-      padding-inline-start: var(--dt-size-400);
+      padding-inline-start: var(--dt-spacing-100);
       border-inline-start: var(--dt-size-border-300) solid var(--dt-color-border-subtle);
     }
 
@@ -49,29 +49,29 @@
     }
 
     td {
-      padding-inline-start: var(--dt-size-200);
+      padding-inline-start: var(--dt-spacing-25);
       border: var(--dt-size-border-100) solid var(--dt-color-foreground-primary);
     }
   }
 }
 
 .d-rich-text-editor-bubble-menu__button-stack {
-  padding: var(--dt-size-300);
+  padding: var(--dt-spacing-50);
 }
 
 .d-suggestion-list__container {
-  max-block-size: var(--dt-size-875);
+  max-block-size: var(--dt-layout-350);
 }
 
 .d-suggestion-list {
   position: relative;
-  min-inline-size: var(--dt-size-925);
-  max-inline-size: var(--dt-size-975);
-  padding: var(--dt-size-300);
+  min-inline-size: var(--dt-layout-500);
+  max-inline-size: var(--dt-layout-700);
+  padding: var(--dt-spacing-50);
 }
 
 .d-suggestion-list__item {
-  border: var(--dt-size-100) solid transparent;
+  border: var(--dt-size-border-100) solid transparent;
 }
 
 .d-mention-suggestion__name {
@@ -90,7 +90,7 @@
 
 .d-mention-suggestion__presence {
   min-inline-size: fit-content;
-  margin-inline-start: var(--dt-size-200);
+  margin-inline-start: var(--dt-spacing-25);
 }
 
 .d-mention-suggestion__status {
@@ -98,7 +98,7 @@
   color: var(--dt-color-foreground-tertiary);
   white-space: nowrap;
   text-overflow: ellipsis;
-  margin-inline-start: var(--dt-size-100);
+  margin-inline-start: var(--dt-spacing-1);
 }
 
 .d-mention-suggestion__divider {

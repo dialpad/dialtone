@@ -1,6 +1,7 @@
 <template>
   <dt-button
     v-if="updateAvailable"
+    kind="muted"
     importance="outlined"
     :size="100"
     class="d-recipe-settings-menu-button-update"
@@ -17,7 +18,7 @@
   <dt-button
     v-else
     importance="clear"
-    kind="inverted"
+    kind="muted"
     class="d-recipe-settings-menu-button"
     :aria-label="ariaLabel"
     v-bind="$attrs"

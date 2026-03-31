@@ -10,13 +10,13 @@ Examples of **incorrect** code for this rule:
 
 ```css
 .card {
-  padding: var(--dt-space-400);
-  margin-bottom: var(--dt-space-300);
-  gap: var(--dt-space-200);
+  padding: var(--dt-spacing-100);
+  margin-bottom: var(--dt-spacing-50);
+  gap: var(--dt-spacing-25);
 }
 
 .overlap {
-  margin-top: var(--dt-space-400-negative);
+  margin-top: var(--dt-spacing-100-negative);
 }
 ```
 
@@ -24,13 +24,13 @@ Examples of **correct** code for this rule:
 
 ```css
 .card {
-  padding: var(--dt-size-400);
-  margin-bottom: var(--dt-size-300);
-  gap: var(--dt-size-200);
+  padding: var(--dt-spacing-100);
+  margin-bottom: var(--dt-spacing-50);
+  gap: var(--dt-spacing-25);
 }
 
 .overlap {
-  margin-top: var(--dt-size-400-negative);
+  margin-top: var(--dt-spacing-100-negative);
 }
 ```
 

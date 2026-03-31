@@ -12,22 +12,23 @@
       </template>
       <template #end>
         <dt-button
-          aria-label="toggle dialpad ai"
-          circle
+          v-dt-tooltip="`Dialpad AI`"
+          aria-label="toggle dialpad AI"
           importance="clear"
+          kind="muted"
         >
-          <template #icon>
-            <dt-icon-dialpad-sparkle size="400" />
+          <template #icon="{ iconSize }">
+            <dt-icon-dialpad-sparkle :size="iconSize" />
           </template>
         </dt-button>
         <dt-button
+          v-dt-tooltip="`Hang up`"
           aria-label="hang call"
-          circle
           importance="clear"
           kind="danger"
         >
-          <template #icon>
-            <dt-icon-phone-hang-up size="400" />
+          <template #icon="{ iconSize }">
+            <dt-icon-phone-hang-up :size="iconSize" />
           </template>
         </dt-button>
       </template>
@@ -41,31 +42,33 @@
       </template>
       <template #end>
         <dt-button
+          v-dt-tooltip="`Mute`"
           aria-label="toggle mic"
-          circle
           importance="clear"
+          kind="muted"
         >
-          <template #icon>
-            <dt-icon-mic size="400" />
+          <template #icon="{ iconSize }">
+            <dt-icon-mic :size="iconSize" />
           </template>
         </dt-button>
         <dt-button
+          v-dt-tooltip="`Video`"
           aria-label="toggle video"
-          circle
           importance="clear"
+          kind="muted"
         >
-          <template #icon>
-            <dt-icon-video size="400" />
+          <template #icon="{ iconSize }">
+            <dt-icon-video :size="iconSize" />
           </template>
         </dt-button>
         <dt-button
+          v-dt-tooltip="`Hang up`"
           aria-label="hang call"
-          circle
           importance="clear"
           kind="danger"
         >
-          <template #icon>
-            <dt-icon-phone-hang-up size="400" />
+          <template #icon="{ iconSize }">
+            <dt-icon-phone-hang-up :size="iconSize" />
           </template>
         </dt-button>
       </template>
@@ -86,31 +89,33 @@
       </template>
       <template #end>
         <dt-button
+          v-dt-tooltip="`Mute`"
           aria-label="toggle mic"
-          circle
           importance="clear"
+          kind="muted"
         >
-          <template #icon>
-            <dt-icon-mic size="400" />
+          <template #icon="{ iconSize }">
+            <dt-icon-mic :size="iconSize" />
           </template>
         </dt-button>
         <dt-button
+          v-dt-tooltip="`Video`"
           aria-label="toggle video"
-          circle
           importance="clear"
+          kind="muted"
         >
-          <template #icon>
-            <dt-icon-video size="400" />
+          <template #icon="{ iconSize }">
+            <dt-icon-video :size="iconSize" />
           </template>
         </dt-button>
         <dt-button
+          v-dt-tooltip="`Hang up`"
           aria-label="hang call"
-          circle
           importance="clear"
           kind="danger"
         >
-          <template #icon>
-            <dt-icon-phone-hang-up size="400" />
+          <template #icon="{ iconSize }">
+            <dt-icon-phone-hang-up :size="iconSize" />
           </template>
         </dt-button>
       </template>
@@ -128,22 +133,23 @@
       </template>
       <template #end>
         <dt-button
-          aria-label="toggle dialpad ai"
-          circle
+          v-dt-tooltip="`Dialpad AI`"
+          aria-label="toggle dialpad AI"
           importance="clear"
+          kind="muted"
         >
-          <template #icon>
-            <dt-icon-dialpad-sparkle size="400" />
+          <template #icon="{ iconSize }">
+            <dt-icon-dialpad-sparkle :size="iconSize" />
           </template>
         </dt-button>
         <dt-button
+          v-dt-tooltip="`Hang up`"
           aria-label="hang call"
-          circle
           importance="clear"
           kind="danger"
         >
-          <template #icon>
-            <dt-icon-phone-hang-up size="400" />
+          <template #icon="{ iconSize }">
+            <dt-icon-phone-hang-up :size="iconSize" />
           </template>
         </dt-button>
       </template>
@@ -157,7 +163,7 @@
       <template #subtitle>
         <dt-stack
           direction="row"
-          gap="300"
+          gap="50"
           class="d-ai-center"
         >
           <dt-icon-share-screen size="100" />
@@ -166,32 +172,33 @@
       </template>
       <template #end>
         <dt-button
+          v-dt-tooltip="`Share screen`"
           aria-label="share screen"
-          circle
           importance="clear"
           kind="muted"
         >
-          <template #icon>
-            <dt-icon-share-screen size="400" />
+          <template #icon="{ iconSize }">
+            <dt-icon-share-screen :size="iconSize" />
           </template>
         </dt-button>
         <dt-button
-          aria-label="toggle dialpad ai"
-          circle
+          v-dt-tooltip="`Dialpad AI`"
+          aria-label="toggle dialpad AI"
           importance="clear"
+          kind="muted"
         >
-          <template #icon>
-            <dt-icon-dialpad-sparkle size="400" />
+          <template #icon="{ iconSize }">
+            <dt-icon-dialpad-sparkle :size="iconSize" />
           </template>
         </dt-button>
         <dt-button
+          v-dt-tooltip="`Hang up`"
           aria-label="hang call"
-          circle
           importance="clear"
           kind="danger"
         >
-          <template #icon>
-            <dt-icon-phone-hang-up size="400" />
+          <template #icon="{ iconSize }">
+            <dt-icon-phone-hang-up :size="iconSize" />
           </template>
         </dt-button>
       </template>
@@ -205,7 +212,7 @@
       <template #subtitle>
         <dt-stack
           direction="row"
-          gap="300"
+          gap="50"
           class="d-ai-center"
         >
           <dt-icon-share-screen size="100" />
@@ -214,12 +221,13 @@
       </template>
       <template #end>
         <dt-button
+          v-dt-tooltip="`Stop`"
           aria-label="stop call"
           importance="clear"
           kind="danger"
         >
-          <template #icon>
-            <dt-icon-stop-filled size="300" />
+          <template #icon="{ iconSize }">
+            <dt-icon-stop-filled :size="iconSize" />
           </template>
           Stop
         </dt-button>
@@ -235,7 +243,7 @@
       <template #subtitle>
         <dt-stack
           direction="row"
-          gap="300"
+          gap="50"
         >
           <dt-stack
             direction="row"
@@ -243,7 +251,7 @@
           >
             <dt-icon-users
               size="100"
-              class="d-mr2"
+              class="d-mie-25"
             />
             <span>3</span>
           </dt-stack>
@@ -269,23 +277,23 @@
       </template>
       <template #end>
         <dt-button
+          v-dt-tooltip="`Mute`"
           aria-label="toggle mic"
           importance="clear"
           kind="muted"
-          circle
         >
-          <template #icon>
-            <dt-icon-mic size="300" />
+          <template #icon="{ iconSize }">
+            <dt-icon-mic :size="iconSize" />
           </template>
         </dt-button>
         <dt-button
+          v-dt-tooltip="`Hang up`"
           aria-label="hang call"
-          circle
           importance="clear"
           kind="danger"
         >
-          <template #icon>
-            <dt-icon-phone-hang-up size="400" />
+          <template #icon="{ iconSize }">
+            <dt-icon-phone-hang-up :size="iconSize" />
           </template>
         </dt-button>
       </template>
@@ -299,7 +307,7 @@
       <template #subtitle>
         <dt-stack
           direction="row"
-          gap="300"
+          gap="50"
           class="d-ai-center"
         >
           <dt-icon-share-screen size="100" />
@@ -308,47 +316,49 @@
       </template>
       <template #end>
         <dt-button
-          aria-label="toggle dialpad ai"
-          circle
+          v-dt-tooltip="`Dialpad AI`"
+          aria-label="toggle dialpad AI"
           importance="clear"
+          kind="muted"
         >
-          <template #icon>
-            <dt-icon-dialpad-sparkle size="400" />
+          <template #icon="{ iconSize }">
+            <dt-icon-dialpad-sparkle :size="iconSize" />
           </template>
         </dt-button>
         <dt-button
+          v-dt-tooltip="`Hang up`"
           aria-label="hang call"
-          circle
           importance="clear"
           kind="danger"
         >
-          <template #icon>
-            <dt-icon-phone-hang-up size="400" />
+          <template #icon="{ iconSize }">
+            <dt-icon-phone-hang-up :size="iconSize" />
           </template>
         </dt-button>
       </template>
       <template #blockEnd>
         <dt-item-layout
-          class="d-py4 d-px8"
+          class="d-py-50 d-px-100"
           content-class="d-ac-center"
           unstyled
         >
           <template #default>
             <dt-stack
               direction="row"
-              gap="400"
-              class="d-pl2"
+              gap="100"
+              class="d-pis-25"
             >
               <dt-stack
                 class="d-ai-center d-w24"
               >
-                <dt-icon-share-screen size="400" />
+                <dt-icon-share-screen size="300" />
               </dt-stack>
               <span class="d-body--sm-compact">Sharing screen</span>
             </dt-stack>
           </template>
           <template #end>
             <dt-button
+              v-dt-tooltip="`Stop`"
               aria-label="stop call"
               importance="clear"
               kind="danger"
@@ -371,7 +381,7 @@
       <template #subtitle>
         <dt-stack
           direction="row"
-          gap="300"
+          gap="50"
           class="d-ai-center"
         >
           <dt-icon-share-screen size="100" />
@@ -380,13 +390,13 @@
       </template>
       <template #end>
         <dt-button
+          v-dt-tooltip="`Hang up`"
           aria-label="hang call"
-          circle
           importance="clear"
           kind="danger"
         >
-          <template #icon>
-            <dt-icon-phone-hang-up size="400" />
+          <template #icon="{ iconSize }">
+            <dt-icon-phone-hang-up :size="iconSize" />
           </template>
         </dt-button>
       </template>

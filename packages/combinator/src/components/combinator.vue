@@ -5,8 +5,8 @@
       gap="500"
       justify="between"
       class="
-        d-p8
-        d-pr16
+        d-p-100
+        d-pie-200
         d-bb
         d-bc-subtle
       "
@@ -19,7 +19,7 @@
         strength="semibold"
         :size="300"
         as="div"
-        class="d-px12 d-py8"
+        class="d-px-150 d-py-100"
       >
         {{ component.name }}
       </dt-text>
@@ -27,7 +27,7 @@
         v-else
         navigation-type="arrow-keys"
         placement="bottom-start"
-        content-class="d-wmn332"
+        content-class="d-wmn-500"
       >
         <template #anchor="{ attrs }">
           <dt-button
@@ -36,7 +36,7 @@
             importance="clear"
             kind="muted"
             :size="isFullScreen ? 'lg' : 'md'"
-            leading-class="d-pt1 d-pl12 d-mrn2"
+            leading-class="d-pbs-1 d-pis-150 d-mie-n25"
           >
             <template #leading>
               <dt-text
@@ -145,6 +145,7 @@
         :disabled-members="disabledMembers"
         :dev-mode="devMode"
         :has-changes="hasChanges"
+        :full-screen="isFullScreen"
         @update:options="e => e(options)"
       />
     </div>

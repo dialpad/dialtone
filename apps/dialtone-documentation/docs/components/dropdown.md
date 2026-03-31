@@ -56,7 +56,7 @@ Use the Dropdown component when you have a list of links or actions that can be 
     </template>
     <template #list="{ close }">
       <dt-list-item-group
-        heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+        heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
         heading="Menu Heading A"
       >
         <dt-list-item
@@ -77,7 +77,7 @@ Use the Dropdown component when you have a list of links or actions that can be 
       </dt-list-item-group>
       <dt-dropdown-separator />
       <dt-list-item-group
-        heading-class="d-py4 d-px8 d-c-default d-fc-tertiary d-label--sm"
+        heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
         heading="Menu Heading B"
       >
         <dt-list-item
@@ -101,7 +101,7 @@ Set `openOnContext=true` to open the menu on right-click (context menu) and disa
     <template #anchor="{ attrs }">
       <div
         v-bind="attrs"
-        class="d-ba d-bas-dashed d-w264 d-py48 d-ta-center d-bgc-black-300"
+        class="d-ba d-bas-dashed d-w-400 d-py-600 d-ta-center d-bgc-black-300"
       >
         Right click to open
       </div>

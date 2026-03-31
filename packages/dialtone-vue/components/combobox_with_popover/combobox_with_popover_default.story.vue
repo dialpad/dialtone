@@ -42,7 +42,7 @@
     <template #list="{ listProps }">
       <ul
         v-bind="listProps"
-        class="d-p4"
+        class="d-p-50"
       >
         <dt-list-item
           v-for="(item, i) in $attrs.items"
@@ -71,7 +71,7 @@
       <dt-stack
         direction="row"
         align="center"
-        class="d-px12"
+        class="d-px-150"
       >
         <dt-checkbox label="Apply primary number to assigned Contact Centers" />
       </dt-stack>

@@ -19,7 +19,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox-mul
   @remove="onRemove"
 >
   <template #list>
-    <dt-stack as="ul" class="d-ps-relative d-m4 d-px0">
+    <dt-stack as="ul" class="d-ps-relative d-m-50 d-px-0">
       <dt-list-item
         v-for="(item, i) in items"
         :key="item.id"
@@ -44,7 +44,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox-mul
     @remove="onComboboxRemove"
   >
     <template #list>
-      <dt-stack as="ul" class="d-ps-relative d-m4 d-px0">
+      <dt-stack as="ul" class="d-ps-relative d-m-50 d-px-0">
         <dt-list-item
           v-for="(item, i) in items"
           :key="item.id"
@@ -99,7 +99,7 @@ Adds validation for max selection. Make sure to provide the following props:
   @max-selected="onMaxSelected"
 >
   <template #list>
-    <dt-stack as="ul" class="d-ps-relative d-m4 d-px0">
+    <dt-stack as="ul" class="d-ps-relative d-m-50 d-px-0">
       <dt-list-item
         v-for="(item, i) in items"
         :key="item.id"
@@ -128,7 +128,7 @@ Adds validation for max selection. Make sure to provide the following props:
     @max-selected="onMaxSelected"
   >
     <template #list>
-      <dt-stack as="ul" class="d-ps-relative d-m4 d-px0">
+      <dt-stack as="ul" class="d-ps-relative d-m-50 d-px-0">
         <dt-list-item
           v-for="(item, i) in maxSelectItems"
           :key="item.id"

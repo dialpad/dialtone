@@ -23,8 +23,8 @@
   --avatar-color-background: var(--dt-avatar-color-background-000);
   --avatar-color-text: var(--dt-color-neutral-black);
   --avatar-size-shape: var(--dt-spacing-400);
-  --avatar-size-image: var(--dt-size-100-percent);
-  --avatar-canvas-size: var(--dt-size-100-percent);
+  --avatar-size-image: var(--dt-layout-100-percent);
+  --avatar-canvas-size: var(--dt-layout-100-percent);
   --avatar-size-text: var(--dt-font-size-200);
   --avatar-border-radius: calc(var(--avatar-size-shape) * 0.125);
   --avatar-presence-shape: calc(var(--avatar-size-shape) * 0.375);
@@ -322,19 +322,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    inline-size: var(--dt-size-100-percent);
-    block-size: var(--dt-size-100-percent);
+    inline-size: var(--dt-layout-100-percent);
+    block-size: var(--dt-layout-100-percent);
     background-color: var(--dt-color-surface-contrast-opaque);
     border-radius: var(--avatar-border-radius);
     opacity: var(--dt-opacity-900);
 
     &-icon {
-      inline-size: var(--dt-size-100-percent);
+      inline-size: var(--dt-layout-100-percent);
       color: var(--dt-color-foreground-primary-inverted);
     }
 
     &-text {
-      inline-size: var(--dt-size-100-percent);
+      inline-size: var(--dt-layout-100-percent);
       color: var(--dt-color-foreground-primary-inverted);
       font-weight: var(--dt-font-weight-bold);
       font-size: var(--dt-font-size-200);
@@ -430,20 +430,9 @@
         position: absolute;
         background-color: var(--dt-color-neutral-transparent);
         border: var(--dt-size-border-100) solid var(--avatar-color-border);
-        border-radius: var(--dt-size-radius-circle);
+        border-radius: var(--avatar-border-radius);
         content: "";
-        inset: calc(var(--dt-size-100) * -1);
-        mask: radial-gradient(
-          circle calc(var(--avatar-presence-mask-size) / 2) at
-            calc(
-              var(--dt-size-100-percent) - var(--avatar-presence-mask-offset-x) - var(--dt-size-100)
-            )
-            calc(
-              var(--dt-size-100-percent) - var(--avatar-presence-mask-offset-y) - var(--dt-size-100)
-            ),
-          var(--dt-color-neutral-transparent) 92%, // less than 99% to smooth the edges
-          var(--dt-color-neutral-white) var(--dt-size-100-percent)
-        );
+        inset: var(--dt-spacing-1-negative);
       }
     }
 

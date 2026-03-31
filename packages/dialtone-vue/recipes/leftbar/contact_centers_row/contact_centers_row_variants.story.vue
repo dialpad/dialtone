@@ -1,7 +1,7 @@
 <template>
-  <dt-stack gap="600">
+  <dt-stack gap="400">
     <div>
-      <h3 class="d-mb8">
+      <h3 class="d-mbe-100">
         Ai Contact Centers leftbar
       </h3>
       <dt-recipe-contact-centers-row
@@ -14,7 +14,7 @@
             :class="[
               'leftbar-call-centers-duty-status__button',
               'd-bar-pill',
-              'd-py4',
+              'd-py-50',
               'd-fc-success',
             ]"
             class="d-to-ellipsis"
@@ -25,7 +25,7 @@
             <template #icon>
               <dt-icon-bell-ring size="100" />
             </template>
-            <span class="d-truncate d-wmx128">
+            <span class="d-truncate d-wmx-200">
               Available
             </span>
           </dt-button>
@@ -33,7 +33,7 @@
       </dt-recipe-contact-centers-row>
     </div>
     <div>
-      <h3 class="d-mb8">
+      <h3 class="d-mbe-100">
         Ai Contact Centers selected
       </h3>
       <dt-recipe-contact-centers-row
@@ -47,7 +47,7 @@
             :class="[
               'leftbar-call-centers-duty-status__button',
               'd-bar-pill',
-              'd-py4',
+              'd-py-50',
               'd-fc-success',
             ]"
             class="d-to-ellipsis"
@@ -58,7 +58,7 @@
             <template #icon>
               <dt-icon-bell-ring size="100" />
             </template>
-            <span class="d-truncate d-wmx128">
+            <span class="d-truncate d-wmx-200">
               Available
             </span>
           </dt-button>
@@ -66,7 +66,7 @@
       </dt-recipe-contact-centers-row>
     </div>
     <div>
-      <h3 class="d-mb8">
+      <h3 class="d-mbe-100">
         Ai Contact Centers with unread messages
       </h3>
       <dt-recipe-contact-centers-row
@@ -82,7 +82,7 @@
             :class="[
               'leftbar-call-centers-duty-status__button',
               'd-bar-pill',
-              'd-py4',
+              'd-py-50',
               'd-fc-success',
             ]"
             class="d-to-ellipsis"
@@ -93,7 +93,7 @@
             <template #icon>
               <dt-icon-bell-ring size="100" />
             </template>
-            <span class="d-truncate d-wmx128">
+            <span class="d-truncate d-wmx-200">
               Available
             </span>
           </dt-button>
@@ -101,7 +101,7 @@
       </dt-recipe-contact-centers-row>
     </div>
     <div>
-      <h3 class="d-mb8">
+      <h3 class="d-mbe-100">
         Ai Contact Centers selected with unread messages
       </h3>
       <dt-recipe-contact-centers-row
@@ -117,7 +117,7 @@
             :class="[
               'leftbar-call-centers-duty-status__button',
               'd-bar-pill',
-              'd-py4',
+              'd-py-50',
               'd-fc-success',
             ]"
             class="d-to-ellipsis"
@@ -128,7 +128,7 @@
             <template #icon>
               <dt-icon-bell-ring size="100" />
             </template>
-            <span class="d-truncate d-wmx128">
+            <span class="d-truncate d-wmx-200">
               Available
             </span>
           </dt-button>
@@ -136,7 +136,7 @@
       </dt-recipe-contact-centers-row>
     </div>
     <div>
-      <h3 class="d-mb8">
+      <h3 class="d-mbe-100">
         Ai Contact Centers leftbar with hidden actions
       </h3>
       <dt-recipe-contact-centers-row
@@ -151,7 +151,7 @@
             :class="[
               'leftbar-call-centers-duty-status__button',
               'd-bar-pill',
-              'd-py4',
+              'd-py-50',
               'd-fc-success',
             ]"
             class="d-to-ellipsis"
@@ -162,7 +162,7 @@
             <template #icon>
               <dt-icon-bell-ring size="100" />
             </template>
-            <span class="d-truncate d-wmx128">
+            <span class="d-truncate d-wmx-200">
               Available
             </span>
           </dt-button>

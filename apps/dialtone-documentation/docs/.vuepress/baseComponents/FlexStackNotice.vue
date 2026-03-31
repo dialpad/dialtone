@@ -1,7 +1,7 @@
 <template>
   <dt-notice
     kind="warning"
-    class="d-wmx100p d-mt24"
+    class="d-wmx100p d-my-200"
     hide-close
     title="Use DtStack in favor of Flex CSS Utilities"
   >

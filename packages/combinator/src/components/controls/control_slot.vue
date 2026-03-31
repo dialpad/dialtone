@@ -3,7 +3,7 @@
     :model-value="value"
     :disabled="disabled"
     type="textarea"
-    input-class="d-pr32"
+    input-class="d-pie-400"
     spellcheck="false"
     :size="100"
     @input="updateValue"
@@ -24,7 +24,7 @@
         kind="muted"
         importance="clear"
         :size="100"
-        class="d-p2 d-mrn16"
+        class="d-p-25 d-mie-n200"
         @click.stop="onReset"
       >
         <template #icon>

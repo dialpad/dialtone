@@ -9,8 +9,8 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["alert","notification","message","d-banner","DtBanner","dt-banner"]
 ---
 
-<code-example only-show="demo" class="d-p0">
-  <dt-stack gap="500" class="d-w100p" align="center">
+<code-example only-show="demo" class="d-p-0">
+  <dt-stack gap="200" class="d-w100p" align="center">
     <dt-banner title="Example banner" kind="info" class="d-ps-relative d-zi-base">
       Message body with a <dt-link kind="muted">Link</dt-link>
       <template #action>
@@ -39,7 +39,7 @@ Banners are a type of notice and so you can use the following [Notice](notice.md
 ### Kind
 
 <code-example only-show="demo">
-  <dt-stack direction="row" gap="500">
+  <dt-stack direction="row" gap="200">
     <dt-select-menu :label-visible="false" label="Style" :options="bannerOptions" v-model="selectedKind" />
     <dt-checkbox value="important" @input="toggleImportant">Important</dt-checkbox>
     <dt-button @click="toggleBanner('example-kind')">Toggle Example</dt-button>

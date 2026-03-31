@@ -8,7 +8,7 @@ keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFil
 ---
 
 <code-example only-show="demo">
-  <dt-stack direction="row" gap="400">
+  <dt-stack direction="row" gap="100">
     <dt-filter-pill
       :model-value="[{name: 'Address', active: true}, {name: 'Call Purpose', active: true}, {name: 'Action Item'}, {name: 'Negative Sentiment'}, {name: 'Warranty Inquiry', active: true}]"
       label="Moment"
@@ -52,7 +52,7 @@ keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFil
       :model-value="[{name: 'Email'}, {name: 'Phone', active: true}, {name: 'Chat'}, {name: 'Social'}, {name: 'SMS'}]"
       label="Channel"
       end-tooltip-text="Remove"
-      popover-footer-class="d-pr16 d-py12"
+      popover-footer-class="d-pie-200 d-py-150"
       defer-selection
     >
     </dt-filter-pill>
@@ -97,7 +97,7 @@ keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFil
 ### Base
 
 <code-example>
-  <dt-stack direction="row" gap="400" data-demo-wrapper>
+  <dt-stack direction="row" gap="100" data-demo-wrapper>
     <dt-filter-pill
       :model-value="[{name: 'Email'}, {name: 'Phone'}, {name: 'Chat'}, {name: 'Social'}, {name: 'SMS'}]"
       label="Channel"
@@ -111,7 +111,7 @@ keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFil
 The pill becomes active when any filter item has `active: true`.
 
 <code-example>
-  <dt-stack direction="row" gap="400" data-demo-wrapper>
+  <dt-stack direction="row" gap="100" data-demo-wrapper>
     <dt-filter-pill
       :model-value="[{name: 'Headquarters', active: true}, {name: 'Westside'}, {name: 'Downtown'}]"
       label="Contact centers"
@@ -123,7 +123,7 @@ The pill becomes active when any filter item has `active: true`.
 ### Disabled
 
 <code-example>
-  <dt-stack direction="row" gap="400" data-demo-wrapper>
+  <dt-stack direction="row" gap="100" data-demo-wrapper>
     <dt-filter-pill label="Conversation type" disabled></dt-filter-pill>
   </dt-stack>
 </code-example>
@@ -133,7 +133,7 @@ The pill becomes active when any filter item has `active: true`.
 Its value is reflected in the filter set but cannot be opened, cleared, or modified. Functionally and visually distinct from disabled.
 
 <code-example>
-  <dt-stack direction="row" gap="400" data-demo-wrapper>
+  <dt-stack direction="row" gap="100" data-demo-wrapper>
     <dt-filter-pill
       :model-value="[{name: 'Headquarters', active: true}, {name: 'Westside', active: true}, {name: 'Downtown'}]"
       label="Contact centers"
@@ -147,7 +147,7 @@ Its value is reflected in the filter set but cannot be opened, cleared, or modif
 `200` (small) is the default.
 
 <code-example vueCode='<dt-filter-pill label="{size}" size="{size}" />'>
-  <dt-stack direction="row" gap="400">
+  <dt-stack direction="row" gap="100">
     <dt-filter-pill
       v-for="size in sizes"
       :key="size"
@@ -164,7 +164,7 @@ Its value is reflected in the filter set but cannot be opened, cleared, or modif
 A clear button appears when any filter is active. It emits the `reset` event when clicked.
 
 <code-example>
-  <dt-stack direction="row" gap="400" data-demo-wrapper>
+  <dt-stack direction="row" gap="100" data-demo-wrapper>
     <dt-filter-pill
       label="Channel"
       :model-value="[{ name: 'Option 1' }, { name: 'Option 2', active: true }, { name: 'Option 3' }]"
@@ -179,7 +179,7 @@ A clear button appears when any filter is active. It emits the `reset` event whe
 Setting the `hide-clear` prop hides the reset/clear button.
 
 <code-example>
-  <dt-stack direction="row" gap="400" data-demo-wrapper>
+  <dt-stack direction="row" gap="100" data-demo-wrapper>
     <dt-filter-pill
       :model-value="[{name: '0–5 min', active: true}, {name: '5–15 min'}, {name: '15–30 min'}, {name: '30+ min'}]"
       label="Duration"
@@ -195,13 +195,13 @@ Setting `defer-selection` holds checkbox changes in a pending state until Apply 
 Cancel, Escape, or clicking outside discards pending changes.
 
 <code-example>
-  <dt-stack direction="row" gap="400" data-demo-wrapper>
+  <dt-stack direction="row" gap="100" data-demo-wrapper>
     <dt-filter-pill
       :model-value="[{name: 'Email'}, {name: 'Phone', active: true}, {name: 'Chat'}, {name: 'Social'}, {name: 'SMS'}]"
       label="Channel"
       end-tooltip-text="Remove"
       defer-selection
-      popover-footer-class="d-pr16 d-py12"
+      popover-footer-class="d-pie-200 d-py-150"
     >
     </dt-filter-pill>
   </dt-stack>
@@ -240,7 +240,7 @@ out of the box — ideal for single-select filter patterns.
     </dt-list-item>
   </template>
 </dt-filter-pill>'>
-  <dt-stack direction="row" gap="400">
+  <dt-stack direction="row" gap="100">
     <dt-filter-pill
       v-model="dropdownTypes"
       :start-tooltip-text="selectedDropdownType !== 'All Conversations'
@@ -282,7 +282,7 @@ Using the `default` slot, you can override the `label` prop.
 Using the `default` scoped slot, you can display a count of active filters alongside the label.
 
 <code-example>
-  <dt-stack direction="row" gap="400" data-demo-wrapper>
+  <dt-stack direction="row" gap="100" data-demo-wrapper>
     <dt-filter-pill
       :model-value="[{name: 'Address', active: true}, {name: 'Call Purpose', active: true}, {name: 'Action Item'}, {name: 'Negative Sentiment'}, {name: 'Warranty Inquiry', active: true}]"
       label="Contact centers"
@@ -303,7 +303,7 @@ Using the `default` scoped slot, you can display a count of active filters along
 Shows the first active filter name using `activeFilterList`, with overflow count for remaining selections (e.g., "Email +2").
 
 <code-example>
-  <dt-stack direction="row" gap="400" data-demo-wrapper>
+  <dt-stack direction="row" gap="100" data-demo-wrapper>
     <dt-filter-pill
       :model-value="[{name: 'Email', active: true}, {name: 'Phone', active: true}, {name: 'Chat', active: true}, {name: 'Social'}, {name: 'SMS'}]"
       label="Channel"
@@ -326,7 +326,7 @@ Combining the `default` and `content` slots with a radio group creates a single-
 The label updates to show the selected option, and a clear button resets to the default.
 
 <code-example>
-  <dt-stack direction="row" gap="400" data-demo-wrapper>
+  <dt-stack direction="row" gap="100" data-demo-wrapper>
     <dt-filter-pill
       :model-value="[{name: 'All Conversations'}, {name: 'Only Calls'}, {name: 'Only Meetings'}, {name: 'Only Digital'}]"
       :start-tooltip-text="selectedConversationType !== 'All Conversations'
@@ -363,7 +363,7 @@ The label updates to show the selected option, and a clear button resets to the 
 Using the `content` slot, you can override the popover content with custom markup.
 
 <code-example>
-  <dt-stack direction="row" gap="400" data-demo-wrapper>
+  <dt-stack direction="row" gap="100" data-demo-wrapper>
     <dt-filter-pill
       :model-value="[{name: 'Contains'}, {name: 'Starts with'}]"
       label="Keyword"

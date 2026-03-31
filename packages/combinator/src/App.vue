@@ -1,7 +1,7 @@
 <template>
   <dt-stack
-    gap="500"
-    class="d-ai-center d-p64"
+    gap="200"
+    class="d-ai-center d-p-800"
   >
     <dtc-suggestion
       :value="component.name"
@@ -13,7 +13,7 @@
           <span :class="isSupportedComponent(value) ? '' : 'd-fc-muted'">{{ value }}</span>
           <dt-badge
             v-if="!isSupportedComponent(value)"
-            class="d-ml6"
+            class="d-mis-75"
             type="warning"
           >
             Unsupported

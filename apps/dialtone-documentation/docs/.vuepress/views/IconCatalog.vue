@@ -1,6 +1,6 @@
 <!-- eslint-disable vuejs-accessibility/no-autofocus -->
 <template>
-  <div class="d-d-grid d-gg16 d-g-cols6 d-mt32 d-mb16 d-p16 d-bgc-secondary d-bar8">
+  <div class="d-d-grid d-g-200 d-g-cols6 d-mbs-400 d-mbe-200 d-p-200 d-bgc-secondary d-bar8">
     <div class="d-gc4">
       <dt-input
         id="search-input"
@@ -66,13 +66,13 @@
   <div
     v-for="(icons, category) in filteredIconsList"
     :key="category"
-    class="d-mb16 d-px16"
+    class="d-mbe-200 d-px-200"
   >
     <dt-text
       as="h2"
       kind="headline"
       :size="500"
-      class="d-tt-capitalize d-mb4"
+      class="d-tt-capitalize d-mbe-50"
     >
       {{ category }}
     </dt-text>
@@ -93,7 +93,7 @@
     v-if="!hasSearchResults"
     :size="200"
     :header-text="`No results found for &OpenCurlyDoubleQuote;${search}&CloseCurlyDoubleQuote;`"
-    class="d-w100p d-ba d-bc-subtle d-bar8 d-mt16 d-pt32"
+    class="d-w100p d-ba d-bc-subtle d-bar8 d-mbs-200 d-pbs-400"
   >
     <template #icon="{ iconSize }">
       <dt-icon name="box" :size="iconSize" />
@@ -103,7 +103,7 @@
     v-if="selectedIcon"
     :show="isModalOpen"
     size="full"
-    content-class="d-wmx100p d-pr32"
+    content-class="d-wmx100p d-pie-400"
     @update:show="isModalOpen = false"
   >
     <template #header>
@@ -277,6 +277,6 @@ onMounted(() => {
 <style scoped>
   /* more or less a hack, 🤷‍♂️ */
   #search-input-button-close {
-    margin-inline-end: var(--dt-size-350-negative);
+    margin-inline-end: var(--dt-spacing-75-negative);
   }
 </style>

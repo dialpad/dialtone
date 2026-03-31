@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 export default {
   exclusions: [
     {
@@ -176,7 +177,7 @@ export default {
     props: {
       kind: { initialValue: 'muted' },
       importance: { initialValue: 'outlined' },
-      leadingClass: { initialValue: 'd-pl12' },
+      leadingClass: { initialValue: 'd-pis-150' },
     },
     slots: {
       default: { initialValue: 'Caution' },
@@ -196,7 +197,7 @@ export default {
         initialValue: 'outlined',
       },
       trailingClass: {
-        initialValue: 'd-pr2',
+        initialValue: 'd-pie-25',
       },
     },
     slots: {

@@ -9,12 +9,11 @@ keywords: ["bg pattern", "department", "call center"]
 Use `d-bgg-pattern-{pattern}-{dark|light}` to apply a pattern.
 
 <code-well-header>
-  <dt-stack direction="row" align="center" class="d-w100p d-h32 d-bar4 d-bgg-to-br d-ba d-bc-default d-bgc-moderate d-bgg-pattern d-bgg-pattern-slanted-stripes-dark d-fc-primary">Ted's Call Center</dt-stack>
-  <dt-stack direction="row" align="center" class="d-w100p d-h32 d-bar4 d-bgg-to-br d-ba d-bc-default d-bgc-moderate d-bgg-pattern d-bgg-pattern-chevrons-dark">Vicky's Department</dt-stack>
+  <dt-stack direction="row" align="center" class="d-w100p d-h-50 d-bar4 d-bgg-to-br d-ba d-bc-default d-bgc-moderate d-bgg-pattern d-bgg-pattern-slanted-stripes-dark d-fc-primary">Ted's Call Center</dt-stack>
+  <dt-stack direction="row" align="center" class="d-w100p d-h-50 d-bar4 d-bgg-to-br d-ba d-bc-default d-bgc-moderate d-bgg-pattern d-bgg-pattern-chevrons-dark">Vicky's Department</dt-stack>
 </code-well-header>
 
 ```html
-
 <div class="... d-bgg-pattern d-bgg-pattern-slanted-stripes-dark">...</div>
 <div class="... d-bgg-pattern d-bgg-pattern-dots-circles-light">...</div>
 ```
@@ -32,7 +31,7 @@ Use `d-bgg-pattern-{pattern}-{dark|light}` to apply a pattern.
               --bgg-pattern: --bgg-pattern-{{ i }}-{{ c }};
             </div>
             <div
-              class="d-w24 d-h24 d-bgg-pattern d-ba d-bc-black-900 d-bar4"
+              class="d-size-50 d-bgg-pattern d-ba d-bc-black-900 d-bar4"
               :class="[
                   {'d-bgc-neutral-white': c === 'dark'},
                   {'d-bgc-neutral-black': c === 'light'},

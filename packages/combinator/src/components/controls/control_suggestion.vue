@@ -4,7 +4,7 @@
       ref="combobox"
       label="Valid values"
       max-height="512px"
-      list-class="d-hmx216"
+      list-class="d-hmx-350"
       append-to="body"
       @select="e => onUpdate(suggestions[e])"
       @opened="onOpen"
@@ -30,7 +30,7 @@
       </template>
       <template #list="{ listProps }">
         <ul
-          class="d-p0"
+          class="d-p-0"
           v-bind="listProps"
         >
           <dt-list-item

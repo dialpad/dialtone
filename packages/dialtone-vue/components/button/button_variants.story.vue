@@ -1,7 +1,7 @@
 <template>
   <dt-stack
-    gap="500"
-    class="d-px8"
+    gap="200"
+    class="d-px-100"
   >
     <h2>Variants</h2>
     <table class="d-table d-bt d-bb d-bbw2">
@@ -67,7 +67,7 @@
     <h2>Sizes</h2>
     <dt-stack
       direction="row"
-      gap="400"
+      gap="100"
     >
       <dt-button
         v-for="size in sizes"
@@ -82,7 +82,7 @@
     <h2>Icon positions</h2>
     <dt-stack
       direction="row"
-      gap="400"
+      gap="100"
     >
       <dt-button
         v-for="position in iconPositions"
@@ -183,7 +183,7 @@
     <h2>Active</h2>
     <dt-stack
       direction="row"
-      gap="400"
+      gap="100"
     >
       <dt-button active>
         Active button

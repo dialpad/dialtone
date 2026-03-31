@@ -1,9 +1,9 @@
 <template>
-  <div class="d-fd-column d-p24 d-w100p d-of-auto d-stack8">
+  <div class="d-fd-column d-p-300 d-w100p d-of-auto d-stack8">
     <h2>Kind: Label</h2>
     <dt-stack
       direction="row"
-      gap="400"
+      gap="100"
       align="center"
     >
       <dt-badge
@@ -29,7 +29,7 @@
     </dt-stack>
     <dt-stack
       direction="row"
-      gap="400"
+      gap="100"
       align="center"
     >
       <dt-badge
@@ -47,7 +47,7 @@
     </dt-stack>
     <dt-stack
       direction="row"
-      gap="400"
+      gap="100"
       align="center"
     >
       <dt-badge
@@ -65,7 +65,7 @@
     </dt-stack>
     <dt-stack
       direction="row"
-      gap="400"
+      gap="100"
       align="center"
     >
       <dt-badge
@@ -75,7 +75,7 @@
     </dt-stack>
     <dt-stack
       direction="row"
-      gap="400"
+      gap="100"
       align="center"
     >
       <dt-badge
@@ -85,7 +85,7 @@
     </dt-stack>
     <dt-stack
       direction="row"
-      gap="400"
+      gap="100"
       align="center"
     >
       <dt-badge
@@ -99,7 +99,7 @@
     </dt-stack>
     <dt-stack
       direction="row"
-      gap="400"
+      gap="100"
       align="center"
     >
       <dt-badge
@@ -113,7 +113,7 @@
     </dt-stack>
     <dt-stack
       direction="row"
-      gap="400"
+      gap="100"
       align="center"
     >
       <dt-badge
@@ -133,12 +133,12 @@
         type="ai"
       />
     </dt-stack>
-    <h2 class="d-mt32">
+    <h2 class="d-mbs-400">
       Kind: Count
     </h2>
     <dt-stack
       direction="row"
-      gap="400"
+      gap="100"
       align="center"
     >
       <dt-badge
@@ -153,7 +153,7 @@
     </dt-stack>
     <dt-stack
       direction="row"
-      gap="400"
+      gap="100"
       align="center"
     >
       <dt-badge
@@ -168,7 +168,7 @@
     </dt-stack>
     <dt-stack
       direction="row"
-      gap="400"
+      gap="100"
       align="center"
     >
       <dt-badge

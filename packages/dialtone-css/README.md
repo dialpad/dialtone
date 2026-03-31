@@ -30,14 +30,12 @@ import '@dialpad/dialtone-css';
 - Light mode
 
 ```html
-
 <body class="dialtone-theme-light">...</body>
 ```
 
 - Dark mode
 
 ```html
-
 <body class="dialtone-theme-dark">...</body>
 ```
 

@@ -16,22 +16,23 @@ export default {
     },
   },
 
-  'with footer': {
+  'with footer, max height scrollable content': {
     props: {
-      maxHeight: { initialValue: '50px' },
+      maxHeight: { initialValue: '104px' },
+      footerClass: { initialValue: 'd-pbs-200' },
     },
     slots: {
       header: { initialValue: '<dt-text as="p" kind="headline" :size="300">Lorem ipsum</dt-text>' },
-      content: { initialValue: 'Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.' },
+      content: { initialValue: 'Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.' },
       footer: { initialValue: '<dt-button importance="outlined" :size="200">Button</dt-button>' },
     },
   },
   'Targeted styling': {
     props: {
       containerClass: { initialValue: 'd-bar0 d-baw0' },
-      contentClass: { initialValue: 'd-p8 d-by d-bgc-critical' },
-      headerClass: { initialValue: 'd-p8 d-bgc-info' },
-      footerClass: { initialValue: 'd-p8 d-bgc-warning' },
+      contentClass: { initialValue: 'd-p-100 d-by d-bgc-critical' },
+      headerClass: { initialValue: 'd-p-100 d-bgc-info' },
+      footerClass: { initialValue: 'd-p-100 d-bgc-warning' },
     },
     slots: {
       header: { initialValue: '<dt-text as="p" kind="headline" :size="300">Lorem ipsum</dt-text>' },

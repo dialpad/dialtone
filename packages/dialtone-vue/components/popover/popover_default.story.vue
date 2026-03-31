@@ -42,7 +42,7 @@
           v-html="$attrs.content"
         />
         <template v-else>
-          <p class="d-mb4">
+          <p class="d-mbe-50">
             I will be displayed in the popover!
           </p>
           <dt-button

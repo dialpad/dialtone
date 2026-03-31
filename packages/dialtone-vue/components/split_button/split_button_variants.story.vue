@@ -1,7 +1,7 @@
 <template>
   <dt-stack
-    gap="500"
-    class="d-px8"
+    gap="200"
+    class="d-px-100"
   >
     <h2>Variants</h2>
     <table class="d-table d-bt d-bb d-bbw2">
@@ -45,7 +45,7 @@
             >N/A</abbr>
             <dt-stack
               v-else
-              gap="500"
+              gap="200"
               class="d-jc-center"
             >
               <div>
@@ -75,16 +75,16 @@
     </table>
     <dt-stack
       direction="row"
-      gap="500"
+      gap="200"
       class="d-ai-stretch d-jc-flex-start d-fw-wrap"
     >
       <!-- Sizes  -->
       <dt-stack
-        gap="500"
-        class="d-br d-pr16"
+        gap="200"
+        class="d-br d-pie-200"
       >
         <h2>Sizes</h2>
-        <dt-stack gap="500">
+        <dt-stack gap="200">
           <div
             v-for="size in sizes"
             :key="size"
@@ -105,11 +105,11 @@
       </dt-stack>
       <!-- With start icon  -->
       <dt-stack
-        gap="500"
-        class="d-br d-pr16"
+        gap="200"
+        class="d-br d-pie-200"
       >
         <h2>With start icon</h2>
-        <dt-stack gap="500">
+        <dt-stack gap="200">
           <div
             v-for="position in iconPositions"
             :key="position"
@@ -137,11 +137,11 @@
       </dt-stack>
       <!-- With custom end icon  -->
       <dt-stack
-        gap="500"
-        class="d-br d-pr16"
+        gap="200"
+        class="d-br d-pie-200"
       >
         <h2>With custom end icon</h2>
-        <dt-stack gap="500">
+        <dt-stack gap="200">
           <div
             v-for="size in sizes"
             :key="size"
@@ -165,11 +165,11 @@
       </dt-stack>
       <!-- Status  -->
       <dt-stack
-        gap="500"
-        class="d-br d-pr16"
+        gap="200"
+        class="d-br d-pie-200"
       >
         <h2>Status</h2>
-        <dt-stack gap="500">
+        <dt-stack gap="200">
           <dt-split-button
             :size="100"
             :start-active="true"
@@ -206,11 +206,11 @@
       </dt-stack>
       <!-- Disabled  -->
       <dt-stack
-        gap="500"
-        class="d-br d-bc-default d-pr16"
+        gap="200"
+        class="d-br d-bc-default d-pie-200"
       >
         <h2>Disabled</h2>
-        <dt-stack gap="500">
+        <dt-stack gap="200">
           <dt-split-button
             :size="100"
             :start-disabled="true"
@@ -239,11 +239,11 @@
       </dt-stack>
       <!-- With tooltip -->
       <dt-stack
-        gap="500"
-        class="d-br d-bc-default d-pr16"
+        gap="200"
+        class="d-br d-bc-default d-pie-200"
       >
         <h2>Disabled</h2>
-        <dt-stack gap="500">
+        <dt-stack gap="200">
           <dt-split-button
             :size="100"
             :start-disabled="true"
@@ -272,11 +272,11 @@
       </dt-stack>
       <!-- With tooltip -->
       <dt-stack
-        gap="500"
-        class="d-br d-pr16"
+        gap="200"
+        class="d-br d-pie-200"
       >
         <h2>With tooltip</h2>
-        <dt-stack gap="500">
+        <dt-stack gap="200">
           <dt-split-button
             :size="100"
             start-tooltip-text="Hover text"
@@ -304,11 +304,11 @@
       </dt-stack>
       <!-- Icon-only  -->
       <dt-stack
-        gap="500"
-        class="d-br d-pr16"
+        gap="200"
+        class="d-br d-pie-200"
       >
         <h2>Icon only</h2>
-        <dt-stack gap="500">
+        <dt-stack gap="200">
           <div
             v-for="size in sizes"
             :key="`icon-only-${size}`"

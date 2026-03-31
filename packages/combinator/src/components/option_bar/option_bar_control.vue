@@ -56,7 +56,7 @@
           v-dt-tooltip="'Edit as JSON'"
           link
           :link-underline="false"
-          class="d-ml-auto d-fw-normal d-fs-50 d-px2 d-bar2 h:d-td-none "
+          class="d-mis-auto d-fw-normal d-fs-50 d-px-25 d-bar2 h:d-td-none "
           :class="{ 'd-bgc-bold d-fc-secondary h:d-fc-primary': rawMode }"
           @click="toggleRawMode"
         >
@@ -69,7 +69,7 @@
         type="textarea"
         :size="100"
         spellcheck="false"
-        root-class="d-mt6"
+        root-class="d-mbs-75"
       />
     </component>
   </div>

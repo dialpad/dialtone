@@ -27,7 +27,7 @@ Each `dt-segmented-control-item` wraps a `DtButton` internally and inherits its 
 ### Segmented Control vs. Tabs
 
 | | Segmented Control | Tabs |
-|---|---|---|
+| --- | --- | --- |
 | **Purpose** | Switch between **views or formats** of the same content | Navigate between **distinct content sections** |
 | **Content relationship** | Same data, different presentation (e.g., grid vs. list) | Different data in each section (the filing cabinet metaphor — each tab holds different papers) |
 | **Hierarchy** | Lower-level, often **within** a tabbed section | Top-level content organization |
@@ -120,7 +120,7 @@ Items share space equally. Only applies in horizontal orientation.
   ...
 </dt-segmented-control>
 '>
-  <div class="d-w464" data-demo-wrapper>
+  <div class="d-w-750" data-demo-wrapper>
     <dt-segmented-control v-model="spreadSelected" spread="evenly" aria-label="Spread example">
       <dt-segmented-control-item value="1">1</dt-segmented-control-item>
       <dt-segmented-control-item value="two">Two</dt-segmented-control-item>
@@ -168,7 +168,7 @@ Add `disabled` to an individual item.
   ...
 </dt-segmented-control>
 '>
-  <dt-stack gap="400" class="d-w100p" data-demo-wrapper>
+  <dt-stack gap="100" class="d-w100p" data-demo-wrapper>
     <dt-segmented-control v-model="selected" :size="100" aria-label="Extra small">
       <dt-segmented-control-item value="all">All</dt-segmented-control-item>
       <dt-segmented-control-item value="favorites">Favorites</dt-segmented-control-item>
@@ -233,8 +233,8 @@ Use the `#startIcon` or `#endIcon` slot on `dt-segmented-control-item` to add an
 Omit the default slot text to create icon-only items. Use the `label` prop for accessibility.
 
 <code-example>
-  <dt-stack gap="400" class="d-w464" data-demo-wrapper>
-    <div>
+  <dt-stack gap="100" align="center" data-demo-wrapper>
+    <div class="d-w-750">
       <dt-segmented-control v-model="iconOnlySelected" aria-label="Appearance mode">
         <dt-segmented-control-item value="system" label="System">
           <template #startIcon="{ iconSize }">
@@ -281,19 +281,19 @@ Use the `#leading` and `#trailing` slots on `dt-segmented-control-item` to rende
 
 <code-example>
   <dt-segmented-control v-model="trailingSelected" aria-label="Fruit counts">
-    <dt-segmented-control-item value="apples" trailingClass="d-pr8">
+    <dt-segmented-control-item value="apples" trailingClass="d-pie-100">
       Apples
       <template #trailing>
         <dt-badge kind="count">24</dt-badge>
       </template>
     </dt-segmented-control-item>
-    <dt-segmented-control-item value="oranges" trailingClass="d-pr8">
+    <dt-segmented-control-item value="oranges" trailingClass="d-pie-100">
       Oranges
       <template #trailing>
         <dt-badge kind="count">8</dt-badge>
       </template>
     </dt-segmented-control-item>
-    <dt-segmented-control-item value="bananas" trailingClass="d-pr8">
+    <dt-segmented-control-item value="bananas" trailingClass="d-pie-100">
       Bananas
       <template #trailing>
         <dt-badge kind="count">15</dt-badge>
@@ -311,8 +311,8 @@ Set `orientation="vertical"` to stack items vertically.
   ...
 </dt-segmented-control>
 '>
-  <dt-stack direction="row" gap="500" align="start">
-    <div class="d-w164">
+  <dt-stack direction="row" gap="200" align="start">
+    <div class="d-w-250">
       <dt-segmented-control v-model="selected" orientation="vertical" aria-label="Vertical example">
         <dt-segmented-control-item value="all">
           System

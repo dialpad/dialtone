@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 
 
 export default {
@@ -156,7 +157,7 @@ export default {
         initialValue: '<dt-icon name="search" :size="iconSize" />',
       },
       endIcon: {
-        initialValue: `<dt-stack class="d-pr2">
+        initialValue: `<dt-stack class="d-pie-25">
   <dt-button kind="muted" importance="clear" size="100" aria-label="Clear search" @click="clear">
     <template #startIcon="{ iconSize }"><dt-icon name="close" :size="iconSize" /></template>
   </dt-button>

@@ -43,7 +43,7 @@
     >
       <div
         v-dt-scrollbar
-        class="language-html d-hmx332"
+        class="language-html d-hmx-500"
         data-ext="html"
       >
         <pre
@@ -67,7 +67,7 @@
       </dt-banner>
       <div
         v-dt-scrollbar
-        class="language-html d-hmx332"
+        class="language-html d-hmx-500"
         data-ext="html"
       >
         <pre

@@ -1,7 +1,7 @@
 <template>
   <dt-stack
     direction="row"
-    gap="200"
+    gap="25"
     class="d-recipe-message-input__button-stack"
   >
     <dt-recipe-message-input-button

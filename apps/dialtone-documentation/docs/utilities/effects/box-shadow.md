@@ -10,10 +10,10 @@ Use `d-bs-{n}` to add an outer box shadow to an element.
 
 <code-well-header>
   <dt-stack
-    gap="600"
+    gap="400"
     :direction="{ 'default': 'column', 'lg': 'row' }"
   >
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bar8 d-bgc-primary" v-for="className in boxShadowSizes" :class="`d-bs-${className}`">d-bs-{{ className }}</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar8 d-bgc-primary" v-for="className in boxShadowSizes" :class="`d-bs-${className}`">d-bs-{{ className }}</dt-stack>
   </dt-stack>
 </code-well-header>
 
@@ -30,7 +30,7 @@ Use `d-bs-{n}` to add an outer box shadow to an element.
 Use `d-bs-none` to remove a box shadow to an element.
 
 <code-well-header>
-  <div class="d-p16 d-bar8 d-bgc-primary d-bs-none">.d-bs-none</div>
+  <div class="d-p-200 d-bar8 d-bgc-primary d-bs-none">.d-bs-none</div>
 </code-well-header>
 
 ```html
@@ -41,8 +41,8 @@ Use `d-bs-none` to remove a box shadow to an element.
 
 Use `h:d-bs-{n}` to change an element's `:hover` state box shadow.
 
-<code-well-header class="d-fl-center d-p24 d-bgc-secondary d-w100p" custom>
-  <dt-button kind="unstyled" class="d-p16 d-bar8 d-bgc-primary h:d-bs-md">Hover over me</dt-button>
+<code-well-header class="d-fl-center d-p-300 d-bgc-secondary d-w100p" custom>
+  <dt-button kind="unstyled" class="d-p-200 d-bar8 d-bgc-primary h:d-bs-md">Hover over me</dt-button>
 </code-well-header>
 
 ```html
@@ -53,8 +53,8 @@ Use `h:d-bs-{n}` to change an element's `:hover` state box shadow.
 
 Use `f:d-bs-{n}` to change an element's `:focus` and `:focus-within` state box shadow.
 
-<code-well-header class="d-fl-center d-p24 d-bgc-secondary d-w100p" custom>
-  <dt-button kind="unstyled" class="d-p16 d-bar8 d-bgc-primary f:d-bs-md">Focus me</dt-button>
+<code-well-header class="d-fl-center d-p-300 d-bgc-secondary d-w100p" custom>
+  <dt-button kind="unstyled" class="d-p-200 d-bar8 d-bgc-primary f:d-bs-md">Focus me</dt-button>
 </code-well-header>
 
 ```html
@@ -65,8 +65,8 @@ Use `f:d-bs-{n}` to change an element's `:focus` and `:focus-within` state box s
 
 Use `fv:d-bs-{n}` to change an element's `:focus-visible` state box shadow [only when focused by keyboard].
 
-<code-well-header class="d-fl-center d-p24 d-bgc-secondary d-w100p" custom>
-  <dt-button kind="unstyled" class="d-p16 d-bar8 d-bgc-primary fv:d-bs-md">Keyboard focus me</dt-button>
+<code-well-header class="d-fl-center d-p-300 d-bgc-secondary d-w100p" custom>
+  <dt-button kind="unstyled" class="d-p-200 d-bar8 d-bgc-primary fv:d-bs-md">Keyboard focus me</dt-button>
 </code-well-header>
 
 ```html

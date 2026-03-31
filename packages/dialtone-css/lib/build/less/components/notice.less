@@ -20,10 +20,10 @@
     --notice-color-text: var(--dt-color-foreground-primary);
     --notice-color-icon: var(--notice-color-text);
     --notice-color-shadow: var(--dt-color-border-subtle);
-    --notice-padding: var(--dt-size-500);
+    --notice-padding: var(--dt-spacing-200);
     --notice-line-height: var(--dt-font-line-height-300);
-    --notice-border-radius: var(--dt-size-400);
-    --notice-box-shadow: 0 0 0 var(--dt-size-100) var(--notice-color-shadow) inset;
+    --notice-border-radius: var(--dt-size-radius-400);
+    --notice-box-shadow: 0 0 0 var(--dt-size-border-100) var(--notice-color-shadow) inset;
 
     //  Base Styles
     //  ------------------------------------------------------------------------
@@ -31,7 +31,7 @@
     align-items: start;
     box-sizing: border-box;
     inline-size: 100%;
-    max-inline-size: var(--dt-size-1020);
+    max-inline-size: var(--dt-layout-1000);
     padding: var(--notice-padding);
     color: var(--notice-color-text);
     font: var(--dt-text-body-md);
@@ -50,8 +50,8 @@
     display: flex;
     flex: 1 auto;
     flex-direction: column;
-    margin-inline-end: var(--dt-size-500);
-    gap: var(--dt-size-400);
+    margin-inline-end: var(--dt-spacing-200);
+    gap: var(--dt-spacing-100);
     align-self: center;
 }
 
@@ -60,7 +60,7 @@
 .d-notice__actions {
     display: flex;
     flex: 0 auto;
-    gap: var(--dt-size-400);
+    gap: var(--dt-spacing-100);
     align-items: center;
     align-self: start;
 
@@ -79,15 +79,15 @@
     display: flex;
     flex: 0 auto;
     color: var(--notice-color-icon);
-    margin-inline-end: var(--dt-size-450);
-    margin-block-start: var(--dt-size-200);
+    margin-inline-end: var(--dt-spacing-150);
+    margin-block-start: var(--dt-spacing-25);
 
     &--has-title {
-        margin-block-start: var(--dt-size-0);
+        margin-block-start: var(--dt-spacing-0);
     }
 
     .d-banner & {
-        margin-inline-end: var(--dt-size-400);
+        margin-inline-end: var(--dt-spacing-100);
     }
 }
 

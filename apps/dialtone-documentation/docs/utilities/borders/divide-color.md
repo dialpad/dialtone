@@ -10,17 +10,17 @@ Use `d-divide-y{n}` to create a divider between an element's child items.
 
 <code-well-header>
   <dt-stack class="d-divide-y d-divide-default d-w100p">
-    <dt-stack direction="row" align="center" justify="center" class="d-p16">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200">3</dt-stack>
   </dt-stack>
 </code-well-header>
 
 ```html
 <dt-stack class="d-divide-y d-divide-default d-w100p">
-  <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p16">1</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p16">2</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p16">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">3</dt-stack>
 </dt-stack>
 ```
 
@@ -30,17 +30,17 @@ Use `d-divide-x{n}` to create a divider between an element's child items.
 
 <code-well-header>
   <dt-stack direction="row" class="d-divide-x d-divide-default d-w100p">
-    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p16">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p16">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p16">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">3</dt-stack>
   </dt-stack>
 </code-well-header>
 
 ```html
 <dt-stack direction="row" class="d-divide-x d-divide-default d-w100p">
-  <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p16">1</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p16">2</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p16">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">3</dt-stack>
 </dt-stack>
 ```
 
@@ -48,7 +48,7 @@ Use `d-divide-x{n}` to create a divider between an element's child items.
 
 <new-utility-class-table :classes="divideColors">
   <template #example="{ className }">
-    <dt-stack direction="row" class="d-fl-shrink0 d-w42 d-h42 d-w24 d-ta-center" :class="[
+    <dt-stack direction="row" class="d-fl-shrink0 d-size-75 d-w-50 d-ta-center" :class="[
         className.startsWith('d-divide-x') ? 'd-divide-x d-fl-col2' : 'd-divide-y d-fd-column',
         className
       ]">

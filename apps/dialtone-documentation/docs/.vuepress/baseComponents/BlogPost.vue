@@ -1,11 +1,11 @@
 <!-- eslint-disable max-len -->
 <template>
   <article class="blog-post">
-    <dt-stack as="section" gap="400">
+    <dt-stack as="section" gap="100">
       <component
         :is="isPreview ? 'h2' : 'h1'"
-        class="d-d-flex d-g8"
-        :class="isPreview ? 'd-docsite--header-3 d-mt0' : 'dialtone-page-title'"
+        class="d-d-flex d-g-100"
+        :class="isPreview ? 'd-docsite--header-3 d-mbs-0' : 'dialtone-page-title'"
       >
         <div>
           {{ heading }}
@@ -16,7 +16,7 @@
           aria-label="Copy post link"
         />
       </component>
-      <dt-stack as="section" direction="row" gap="400">
+      <dt-stack as="section" direction="row" gap="100">
         <dt-avatar
           :size="300"
           :seed="author"
@@ -37,8 +37,8 @@
         :size="isPreview ? 300 : 400"
         kind="body"
         tone="tertiary"
-        class="d-mt8"
-        :class="isPreview ? '' : 'd-bb d-bc-subtle d-pb24'"
+        class="d-mbs-100"
+        :class="isPreview ? '' : 'd-bb d-bc-subtle d-pbe-300'"
         wrap="pretty"
       >
         {{ excerpt }}

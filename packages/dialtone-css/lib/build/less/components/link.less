@@ -23,7 +23,7 @@
 
     position: relative;
     display: inline-flex;
-    gap: var(--dt-size-300);
+    gap: var(--dt-spacing-50);
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
@@ -32,7 +32,7 @@
     color: var(--link-color-default);
     font: inherit;
     text-decoration: var(--link-text-decoration);
-    text-underline-offset: var(--dt-size-200);
+    text-underline-offset: var(--dt-spacing-25);
     text-decoration-thickness: var(--dt-size-border-100);
     background-color: var(--link-background-color);
     border: 0;
@@ -174,7 +174,7 @@
         --link-color-default: var(--dt-color-link-primary-inverted);
         --link-color-default-hover: var(--dt-color-link-primary-inverted-hover);
         --link-text-decoration: none;
-        --link-padding: 0 var(--dt-size-200);
+        --link-padding: 0 var(--dt-spacing-25);
         --link-background-color: oklch(from var(--dt-color-surface-brand-strong) l c h /0.3);
 
         line-height: var(--dt-font-line-height-200);
@@ -187,7 +187,7 @@
     // is reversed compared to a regular link, and it has a light background.
     &--mention {
         --link-text-decoration: none;
-        --link-padding: 0 var(--dt-size-200);
+        --link-padding: 0 var(--dt-spacing-25);
         --link-background-color: oklch(from var(--dt-color-surface-brand-strong) l c h /0.1);
 
         line-height: var(--dt-font-line-height-200);
@@ -197,7 +197,7 @@
             --link-text-decoration: underline;
             --link-background-color: oklch(from var(--dt-color-surface-brand-strong) l c h /0.25);
 
-            text-underline-offset: var(--dt-size-200);
+            text-underline-offset: var(--dt-spacing-25);
             text-decoration-thickness: var(--dt-size-border-100);
         }
 

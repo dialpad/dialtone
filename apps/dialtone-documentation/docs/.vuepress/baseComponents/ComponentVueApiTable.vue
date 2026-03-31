@@ -7,32 +7,32 @@
   <clamped-table-wrapper>
     <div>
       <table
-        class="d-table dialtone-doc-table d-wmn512"
+        class="d-table dialtone-doc-table d-wmn-800"
       >
         <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
           <tr>
             <th
               scope="col"
-              class="d-p0 d-bbw0"
+              class="d-p-0 d-bbw0"
             >
-              <div class="d-p16 d-bb d-bbw1">
+              <div class="d-p-200 d-bb d-bbw1">
                 Name
               </div>
             </th>
             <th
               v-if="withDefault"
               scope="col"
-              class="d-p0 d-bbw0"
+              class="d-p-0 d-bbw0"
             >
-              <div class="d-p16 d-bb d-bbw1">
+              <div class="d-p-200 d-bb d-bbw1">
                 Default
               </div>
             </th>
             <th
               scope="col"
-              class="vue-api-table d-p0 d-bbw0"
+              class="vue-api-table d-p-0 d-bbw0"
             >
-              <div class="d-p16 d-bb d-bbw1">
+              <div class="d-p-200 d-bb d-bbw1">
                 Type
               </div>
             </th>
@@ -45,7 +45,7 @@
             class="d-va-baseline"
           >
             <th scope="row">
-              <dt-stack gap="300">
+              <dt-stack gap="50">
                 <dt-text as="code" kind="code" :size="100" class="d-docsite-code">
                   {{ item.name }}
                 </dt-text>
@@ -73,13 +73,13 @@
             </td>
 
             <td class="vue-api-table">
-              <dt-stack gap="350">
+              <dt-stack gap="75">
                 <dt-stack
                   v-if="item.values"
                   direction="row"
                   align="baseline"
                   class="d-fw-wrap"
-                  gap="350"
+                  gap="75"
                 >
                   <template
                     v-for="(value, index) in item.values"

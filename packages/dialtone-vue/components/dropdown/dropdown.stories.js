@@ -177,7 +177,7 @@ export const Default = {
 
   decorators: [
     () => ({
-      template: `<dt-stack direction="row" justify="center" align="center" class="d-h164"><story /></dt-stack>`,
+      template: `<dt-stack direction="row" justify="center" align="center" class="d-h-250"><story /></dt-stack>`,
     }),
   ],
 };

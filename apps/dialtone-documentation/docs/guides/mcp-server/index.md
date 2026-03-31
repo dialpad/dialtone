@@ -107,10 +107,10 @@ Find CSS utility classes to style HTML elements. Use when your query mentions CS
 **Example queries:**
 
 ```text
-"padding 8px"       → d-p8, d-pt8, d-pr8, d-pb8, d-pl8, d-px8, d-py8
+"padding 8px"       → d-p8, d-pt8, d-pr8, d-pb8, d-pl8, d-px8, d-py-100
 "display flex"      → d-d-flex, d-d-inline-flex
 "width 100%"        → d-w100p
-"margin top auto"   → d-mt-auto
+"margin top auto"   → d-mbs-auto
 "text align center" → d-ta-center
 ```
 
@@ -204,7 +204,7 @@ When working on a component and need specific styling:
 ```text
 User: "What class adds padding 8px to all sides?"
 Claude: [Uses search_utility_classes tool]
-Result: d-p8 (padding: var(--dt-spacing-100) which equals 8px)
+Result: d-p-100 (padding: var(--dt-spacing-100) which equals 8px)
 ```
 
 ### Discovering Components

@@ -1,7 +1,7 @@
 <template>
   <div class="d-divide-y">
-    <div class="d-m32">
-      <p class="d-my16 d-fs-200 d-fw-bold">
+    <div class="d-m-400">
+      <p class="d-my-200 d-fs-200 d-fw-bold">
         Unknown contact (phone number only) with attestation
       </p>
       <dt-recipe-contact-info
@@ -20,11 +20,11 @@
           <dt-stack
             direction="row"
             align="center"
-            class="d-mb2"
+            class="d-mbe-25"
           >
             <div
               id="contact-number1"
-              class="d-fs-200 d-fw-bold d-mr4"
+              class="d-fs-200 d-fw-bold d-mie-50"
             >
               +1 (415) 123-4567
             </div>
@@ -39,8 +39,8 @@
         </template>
       </dt-recipe-contact-info>
     </div>
-    <div class="d-m32">
-      <p class="d-my16 d-fs-200 d-fw-bold">
+    <div class="d-m-400">
+      <p class="d-my-200 d-fs-200 d-fw-bold">
         Unknown contact with "marked as spam" button
       </p>
       <dt-recipe-contact-info
@@ -59,11 +59,11 @@
           <dt-stack
             direction="row"
             align="center"
-            class="d-mb2"
+            class="d-mbe-25"
           >
             <div
               id="contact-number2"
-              class="d-fs-200 d-fw-bold d-mr4"
+              class="d-fs-200 d-fw-bold d-mie-50"
             >
               +1 (415) 123-4567
             </div>
@@ -80,8 +80,8 @@
         </template>
       </dt-recipe-contact-info>
     </div>
-    <div class="d-m32">
-      <p class="d-my16 d-fs-200 d-fw-bold">
+    <div class="d-m-400">
+      <p class="d-my-200 d-fs-200 d-fw-bold">
         Clickable Group contact
       </p>
       <dt-button
@@ -106,11 +106,11 @@
             <dt-stack
               direction="row"
               align="center"
-              class="d-mb2"
+              class="d-mbe-25"
             >
               <div
                 id="contact-name1"
-                class="d-fs-200 d-fw-bold d-mr4"
+                class="d-fs-200 d-fw-bold d-mie-50"
               >
                 Joseph Lumaban
               </div>
@@ -121,7 +121,7 @@
               direction="row"
               align="center"
             >
-              <div class="d-fs-100 d-mt2 d-mr4">
+              <div class="d-fs-100 d-mbs-25 d-mie-50">
                 +1 (415) 123-4567
               </div>
               <dt-icon
@@ -135,12 +135,12 @@
             <dt-stack
               direction="row"
               align="center"
-              class="d-mtn6"
+              class="d-mbs-n75"
             >
-              <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">
+              <div class="d-w8 d-h8 d-mie-50 d-bgc-magenta-200">
                 &nbsp;
               </div>
-              <div class="d-fs-100 d-mr4">
+              <div class="d-fs-100 d-mie-50">
                 Aerolabs Support
               </div>
             </dt-stack>
@@ -148,8 +148,8 @@
         </dt-recipe-contact-info>
       </dt-button>
     </div>
-    <div class="d-m32">
-      <p class="d-my16 d-fs-200 d-fw-bold">
+    <div class="d-m-400">
+      <p class="d-my-200 d-fs-200 d-fw-bold">
         Group contact with transfer info
       </p>
       <dt-recipe-contact-info
@@ -168,11 +168,11 @@
           <dt-stack
             direction="row"
             align="center"
-            class="d-mb2"
+            class="d-mbe-25"
           >
             <div
               id="contact-name2"
-              class="d-fs-200 d-fw-bold d-mr4"
+              class="d-fs-200 d-fw-bold d-mie-50"
             >
               Joseph Lumaban
             </div>
@@ -183,7 +183,7 @@
             direction="row"
             align="center"
           >
-            <div class="d-fs-100 d-mt2 d-mr4">
+            <div class="d-fs-100 d-mbs-25 d-mie-50">
               +1 (415) 123-4567
             </div>
             <dt-icon
@@ -197,12 +197,12 @@
           <dt-stack
             direction="row"
             align="center"
-            class="d-mtn6"
+            class="d-mbs-n75"
           >
-            <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">
+            <div class="d-w8 d-h8 d-mie-50 d-bgc-magenta-200">
               &nbsp;
             </div>
-            <div class="d-fs-100 d-mr4">
+            <div class="d-fs-100 d-mie-50">
               Aerolabs Support
             </div>
             <div class="d-fw-bold d-fs-100">
@@ -212,8 +212,8 @@
         </template>
       </dt-recipe-contact-info>
     </div>
-    <div class="d-m32">
-      <p class="d-my16 d-fs-200 d-fw-bold">
+    <div class="d-m-400">
+      <p class="d-my-200 d-fs-200 d-fw-bold">
         Admin view / listening in
       </p>
       <dt-recipe-contact-info
@@ -224,7 +224,7 @@
           <dt-stack
             direction="row"
             align="center"
-            class="d-mb2"
+            class="d-mbe-25"
           >
             <div
               id="contact-names1"
@@ -242,7 +242,7 @@
             direction="row"
             align="center"
           >
-            <div class="d-fs-100 d-mr4">
+            <div class="d-fs-100 d-mie-50">
               +1 (415) 123-4567
             </div>
             <dt-icon
@@ -256,20 +256,20 @@
           <dt-stack
             direction="row"
             align="center"
-            class="d-mtn4"
+            class="d-mbs-n50"
           >
-            <div class="d-w8 d-h8 d-mr4 d-bgc-magenta-200">
+            <div class="d-w8 d-h8 d-mie-50 d-bgc-magenta-200">
               &nbsp;
             </div>
-            <div class="d-fs-100 d-mr4">
+            <div class="d-fs-100 d-mie-50">
               Aerolabs Support
             </div>
           </dt-stack>
         </template>
       </dt-recipe-contact-info>
     </div>
-    <div class="d-m32">
-      <p class="d-my16 d-fs-200 d-fw-bold">
+    <div class="d-m-400">
+      <p class="d-my-200 d-fs-200 d-fw-bold">
         Contact with items in right slot
       </p>
       <dt-recipe-contact-info
@@ -292,7 +292,7 @@
           <dt-stack
             direction="row"
             align="center"
-            class="d-m8"
+            class="d-m-100"
           >
             <dt-button
               :size="100"
@@ -320,7 +320,7 @@
                 />
               </template>
             </dt-button>
-            <div class="d-m4">
+            <div class="d-m-50">
               0:32
             </div>
           </dt-stack>
@@ -336,8 +336,8 @@
         </template>
       </dt-recipe-contact-info>
     </div>
-    <div class="d-m32">
-      <p class="d-my16 d-fs-200 d-fw-bold">
+    <div class="d-m-400">
+      <p class="d-my-200 d-fs-200 d-fw-bold">
         Group call
       </p>
       <dt-recipe-contact-info
@@ -348,7 +348,7 @@
           <dt-stack
             direction="row"
             align="center"
-            class="d-mb2"
+            class="d-mbe-25"
           >
             <div
               id="group-name"
@@ -363,15 +363,15 @@
             direction="row"
             align="center"
           >
-            <div class="d-fs-100 d-mr4">
+            <div class="d-fs-100 d-mie-50">
               Manage participants
             </div>
           </dt-stack>
         </template>
       </dt-recipe-contact-info>
     </div>
-    <div class="d-m32">
-      <p class="d-my16 d-fs-200 d-fw-bold">
+    <div class="d-m-400">
+      <p class="d-my-200 d-fs-200 d-fw-bold">
         Group call with icon
       </p>
       <dt-recipe-contact-info
@@ -382,7 +382,7 @@
           <dt-stack
             direction="row"
             align="center"
-            class="d-mb2"
+            class="d-mbe-25"
           >
             <div
               id="group-name"
@@ -400,7 +400,7 @@
             direction="row"
             align="center"
           >
-            <div class="d-fs-100 d-mr4">
+            <div class="d-fs-100 d-mie-50">
               Manage participants
             </div>
           </dt-stack>

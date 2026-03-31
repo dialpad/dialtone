@@ -8,7 +8,7 @@ export default {
     },
     slots: {
       default: {
-        initialValue: '<div class="d-py8 d-px12">item1</div><div class="d-py8 d-px12">item2</div><div class="d-py8 d-px12">item3</div>',
+        initialValue: '<div class="d-py-100 d-px-150">item1</div><div class="d-py-100 d-px-150">item2</div><div class="d-py-100 d-px-150">item3</div>',
       },
     },
   },

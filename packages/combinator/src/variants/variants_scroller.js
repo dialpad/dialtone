@@ -29,7 +29,7 @@ export default {
       direction: { initialValue: 'vertical' },
     },
     slots: {
-      default: { initialValue: '<dt-text class="d-px4">{{ item.name }}</dt-text>' },
+      default: { initialValue: '<dt-text class="d-px-50">{{ item.name }}</dt-text>' },
     },
   },
 
@@ -54,7 +54,7 @@ export default {
       dynamic: { initialValue: true },
     },
     slots: {
-      default: { initialValue: '<dt-stack gap="400" direction="row" align="start" class="d-p4"><dt-avatar :size="300" :full-name="item.id" /><dt-stack><dt-text kind="headline" :size="200" tone="secondary">{{ item.id }}</dt-text><dt-text kind="body" :size="200" tone="primary">{{ item.message }}</dt-text></dt-stack></dt-stack>' },
+      default: { initialValue: '<dt-stack gap="100" direction="row" align="start" class="d-p-50"><dt-avatar :size="300" :full-name="item.id" /><dt-stack><dt-text kind="headline" :size="200" tone="secondary">{{ item.id }}</dt-text><dt-text kind="body" :size="200" tone="primary">{{ item.message }}</dt-text></dt-stack></dt-stack>' },
     },
   },
 };

@@ -31,13 +31,13 @@ export const SKELETON_SHAPE_SIZES = {
 
 export const SKELETON_HEADING_HEIGHTS = {
   // Numeric (preferred)
-  200: 'd-h16',
+  200: 'd-h-25',
   300: 'd-h24',
-  400: 'd-h32',
+  400: 'd-h-50',
   // T-shirt aliases (deprecated)
-  sm: 'd-h16',
+  sm: 'd-h-25',
   md: 'd-h24',
-  lg: 'd-h32',
+  lg: 'd-h-50',
 };
 
 export default {

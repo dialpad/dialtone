@@ -11,7 +11,8 @@
       #connector
     >
       <div
-        class="d-recipe-ivr-node__connector d-w-auto d-px8 d-h24 d-bar-pill d-mbn12 d-fc-primary-inverted d-fs-100"
+        class="d-recipe-ivr-node__connector d-w-auto d-px-100 d-h-25
+          d-bar-pill d-mbe-n150 d-fc-primary-inverted d-fs-100"
       >
         Add branch
       </div>
@@ -47,7 +48,7 @@
         <dt-stack
           direction="row"
           align="center"
-          gap="400"
+          gap="100"
         >
           <dt-avatar
             full-name="Person Avatar"

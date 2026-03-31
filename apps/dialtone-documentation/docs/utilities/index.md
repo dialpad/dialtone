@@ -117,16 +117,16 @@ Since this will be primary content on a dark surface, let's use `d-fc-primary-in
 
 ### 4. Apply Some Padding
 
-Let's use `d-p8` padding for all four sides, from the list of [padding utility classes](/utilities/spacing/padding/index.md).
+Let's use `d-p-100` padding for all four sides, from the list of [padding utility classes](/utilities/spacing/padding/index.md).
 
 <code-well-header>
-  <div class="d-bgc-primary-inverted d-fc-primary-inverted d-p8">
+  <div class="d-bgc-primary-inverted d-fc-primary-inverted d-p-100">
     <dt-text>Box</dt-text>
   </div>
 </code-well-header>
 
 ```html
-<div class="d-bgc-primary-inverted d-fc-primary-inverted d-p8">
+<div class="d-bgc-primary-inverted d-fc-primary-inverted d-p-100">
   <dt-text>Box</dt-text>
 </div>
 ```
@@ -137,16 +137,16 @@ Let's repeat them in a [Stack](/components/stack.md) component. Note that I've m
 
 <code-well-header>
   <dt-stack class="d-bgc-primary-inverted d-fc-primary-inverted">
-    <div class="d-p8">
+    <div class="d-p-100">
       <dt-text>Box 1</dt-text>
     </div>
-    <div class="d-p8">
+    <div class="d-p-100">
       <dt-text>Box the 2nd</dt-text>
     </div>
-    <div class="d-p8">
+    <div class="d-p-100">
       <dt-text>Box third</dt-text>
     </div>
-    <div class="d-p8">
+    <div class="d-p-100">
       <dt-text>Box IV</dt-text>
     </div>
   </dt-stack>
@@ -154,16 +154,16 @@ Let's repeat them in a [Stack](/components/stack.md) component. Note that I've m
 
 ```html
 <dt-stack class="d-bgc-primary-inverted d-fc-primary-inverted">
-  <div class="d-p8">
+  <div class="d-p-100">
     <dt-text>Box 1</dt-text>
   </div>
-  <div class="d-p8">
+  <div class="d-p-100">
     <dt-text>Box the 2nd</dt-text>
   </div>
-  <div class="d-p8">
+  <div class="d-p-100">
     <dt-text>Box third</dt-text>
   </div>
-  <div class="d-p8">
+  <div class="d-p-100">
     <dt-text>Box IV</dt-text>
   </div>
 </dt-stack>
@@ -175,16 +175,16 @@ Let's add the `direction` prop to make them flow horizontally.
 
 <code-well-header>
   <dt-stack direction="row" class="d-bgc-primary-inverted d-fc-primary-inverted">
-    <div class="d-p8">
+    <div class="d-p-100">
       <dt-text>Box 1</dt-text>
     </div>
-    <div class="d-p8">
+    <div class="d-p-100">
       <dt-text>Box the 2nd</dt-text>
     </div>
-    <div class="d-p8">
+    <div class="d-p-100">
       <dt-text>Box third</dt-text>
     </div>
-    <div class="d-p8">
+    <div class="d-p-100">
       <dt-text>Box IV</dt-text>
     </div>
   </dt-stack>
@@ -192,16 +192,16 @@ Let's add the `direction` prop to make them flow horizontally.
 
 ```html
 <dt-stack direction="row" class="d-bgc-primary-inverted d-fc-primary-inverted">
-  <div class="d-p8">
+  <div class="d-p-100">
     <dt-text>Box 1</dt-text>
   </div>
-  <div class="d-p8">
+  <div class="d-p-100">
     <dt-text>Box the 2nd</dt-text>
   </div>
-  <div class="d-p8">
+  <div class="d-p-100">
     <dt-text>Box third</dt-text>
   </div>
-  <div class="d-p8">
+  <div class="d-p-100">
     <dt-text>Box IV</dt-text>
   </div>
 </dt-stack>
@@ -213,16 +213,16 @@ Add a border between each item with `d-divide-x`. Its default color is `currentC
 
 <code-well-header>
   <dt-stack direction="row" class="d-bgc-primary-inverted d-fc-primary-inverted d-divide-x">
-    <div class="d-p8">
+    <div class="d-p-100">
       <dt-text>Box 1</dt-text>
     </div>
-    <div class="d-p8">
+    <div class="d-p-100">
       <dt-text>Box the 2nd</dt-text>
     </div>
-    <div class="d-p8">
+    <div class="d-p-100">
       <dt-text>Box third</dt-text>
     </div>
-    <div class="d-p8">
+    <div class="d-p-100">
       <dt-text>Box IV</dt-text>
     </div>
   </dt-stack>
@@ -230,16 +230,16 @@ Add a border between each item with `d-divide-x`. Its default color is `currentC
 
 ```html
 <dt-stack direction="row" class="d-bgc-primary-inverted d-fc-primary-inverted d-divide-x">
-  <div class="d-p8">
+  <div class="d-p-100">
     <dt-text>Box 1</dt-text>
   </div>
-  <div class="d-p8">
+  <div class="d-p-100">
     <dt-text>Box the 2nd</dt-text>
   </div>
-  <div class="d-p8">
+  <div class="d-p-100">
     <dt-text>Box third</dt-text>
   </div>
-  <div class="d-p8">
+  <div class="d-p-100">
     <dt-text>Box IV</dt-text>
   </div>
 </dt-stack>
@@ -251,16 +251,16 @@ Since the border color inherits the color of the parent's foreground (implicitly
 
 <code-well-header>
   <dt-stack direction="row" class="d-bgc-primary-inverted d-fc-primary-inverted d-divide-x d-divide-moderate-inverted">
-    <div class="d-p8">
+    <div class="d-p-100">
       <dt-text>Box 1</dt-text>
     </div>
-    <div class="d-p8">
+    <div class="d-p-100">
       <dt-text>Box the 2nd</dt-text>
     </div>
-    <div class="d-p8">
+    <div class="d-p-100">
       <dt-text>Box third</dt-text>
     </div>
-    <div class="d-p8">
+    <div class="d-p-100">
       <dt-text>Box IV</dt-text>
     </div>
   </dt-stack>
@@ -268,16 +268,16 @@ Since the border color inherits the color of the parent's foreground (implicitly
 
 ```html
 <dt-stack direction="row" class="d-bgc-primary-inverted d-fc-primary-inverted d-divide-x d-divide-moderate-inverted">
-  <div class="d-p8">
+  <div class="d-p-100">
     <dt-text>Box 1</dt-text>
   </div>
-  <div class="d-p8">
+  <div class="d-p-100">
     <dt-text>Box the 2nd</dt-text>
   </div>
-  <div class="d-p8">
+  <div class="d-p-100">
     <dt-text>Box third</dt-text>
   </div>
-  <div class="d-p8">
+  <div class="d-p-100">
     <dt-text>Box IV</dt-text>
   </div>
 </dt-stack>
@@ -289,19 +289,19 @@ Add some [icons](/design/icons/index.md).
 
 <code-well-header>
   <dt-stack direction="row" class="d-bgc-primary-inverted d-fc-primary-inverted d-divide-x d-divide-moderate-inverted">
-    <dt-stack direction="row" gap="400" class="d-p8">
+    <dt-stack direction="row" gap="100" class="d-p-100">
       <dt-icon name="alert-triangle" size="200" />
       <dt-text>Box 1</dt-text>
     </dt-stack>
-    <dt-stack direction="row" gap="400" class="d-p8">
+    <dt-stack direction="row" gap="100" class="d-p-100">
       <dt-icon name="info" size="200" />
       <dt-text>Box the 2nd</dt-text>
     </dt-stack>
-    <dt-stack direction="row" gap="400" class="d-p8">
+    <dt-stack direction="row" gap="100" class="d-p-100">
       <dt-icon name="alert-circle" size="200" />
       <dt-text>Box third</dt-text>
     </dt-stack>
-    <dt-stack direction="row" gap="400" class="d-p8">
+    <dt-stack direction="row" gap="100" class="d-p-100">
       <dt-icon name="check-circle" size="200" />
       <dt-text>Box IV</dt-text>
     </dt-stack>
@@ -310,19 +310,19 @@ Add some [icons](/design/icons/index.md).
 
 ```html
 <dt-stack direction="row" class="d-bgc-primary-inverted d-fc-primary-inverted d-divide-x d-divide-moderate-inverted">
-  <dt-stack direction="row" gap="400" class="d-p8">
+  <dt-stack direction="row" gap="100" class="d-p-100">
     <dt-icon name="alert-triangle" size="200" />
     <dt-text>Box 1</dt-text>
   </dt-stack>
-  <dt-stack direction="row" gap="400" class="d-p8">
+  <dt-stack direction="row" gap="100" class="d-p-100">
     <dt-icon name="info" size="200" />
     <dt-text>Box the 2nd</dt-text>
   </dt-stack>
-  <dt-stack direction="row" gap="400" class="d-p8">
+  <dt-stack direction="row" gap="100" class="d-p-100">
     <dt-icon name="alert-circle" size="200" />
     <dt-text>Box third</dt-text>
   </dt-stack>
-  <dt-stack direction="row" gap="400" class="d-p8">
+  <dt-stack direction="row" gap="100" class="d-p-100">
     <dt-icon name="check-circle" size="200" />
     <dt-text>Box IV</dt-text>
   </dt-stack>
@@ -334,16 +334,16 @@ Add some [icons](/design/icons/index.md).
 Apply a [semantic surface color](/utilities/backgrounds/color.md) to convey some meaning to them, e.g. `d-bgc-critical-strong`.
 
 <code-well-header>
-  <dt-stack direction="row" gap="400" class="d-fc-primary-inverted">
-    <dt-stack direction="row" gap="400" class="d-bgc-critical-strong d-p8">
+  <dt-stack direction="row" gap="100" class="d-fc-primary-inverted">
+    <dt-stack direction="row" gap="100" class="d-bgc-critical-strong d-p-100">
       <dt-icon name="alert-triangle" size="200" />
       <dt-text>Critical</dt-text>
     </dt-stack>
-    <dt-stack direction="row" gap="400" class="d-bgc-info-strong d-p8">
+    <dt-stack direction="row" gap="100" class="d-bgc-info-strong d-p-100">
       <dt-icon name="alert-circle" size="200" />
       <dt-text>Info</dt-text>
     </dt-stack>
-    <dt-stack direction="row" gap="400" class="d-bgc-success-strong d-p8">
+    <dt-stack direction="row" gap="100" class="d-bgc-success-strong d-p-100">
       <dt-icon name="check-circle" size="200" />
       <dt-text>Success</dt-text>
     </dt-stack>
@@ -351,16 +351,16 @@ Apply a [semantic surface color](/utilities/backgrounds/color.md) to convey some
 </code-well-header>
 
 ```html
-<dt-stack direction="row" gap="400" class="d-fc-primary-inverted">
-  <dt-stack direction="row" gap="400" class="d-bgc-critical-strong d-p8">
+<dt-stack direction="row" gap="100" class="d-fc-primary-inverted">
+  <dt-stack direction="row" gap="100" class="d-bgc-critical-strong d-p-100">
     <dt-icon name="alert-triangle" size="200" />
     <dt-text>Critical</dt-text>
   </dt-stack>
-  <dt-stack direction="row" gap="400" class="d-bgc-info-strong d-p8">
+  <dt-stack direction="row" gap="100" class="d-bgc-info-strong d-p-100">
     <dt-icon name="alert-circle" size="200" />
     <dt-text>Info</dt-text>
   </dt-stack>
-  <dt-stack direction="row" gap="400" class="d-bgc-success-strong d-p8">
+  <dt-stack direction="row" gap="100" class="d-bgc-success-strong d-p-100">
     <dt-icon name="check-circle" size="200" />
     <dt-text>Success</dt-text>
   </dt-stack>
@@ -372,16 +372,16 @@ Apply a [semantic surface color](/utilities/backgrounds/color.md) to convey some
 Use the [DtText](/components/text.html) component for text styling. It provides a semantic, prop-driven API for typography.
 
 <code-well-header>
-  <dt-stack direction="row" gap="400" class="d-fc-primary-inverted">
-    <dt-stack direction="row" gap="400" class="d-bgc-critical-strong d-p8">
+  <dt-stack direction="row" gap="100" class="d-fc-primary-inverted">
+    <dt-stack direction="row" gap="100" class="d-bgc-critical-strong d-p-100">
       <dt-icon name="alert-triangle" size="200" />
       <dt-text kind="label" :size="200">Critical</dt-text>
     </dt-stack>
-    <dt-stack direction="row" gap="400" class="d-bgc-info-strong d-p8">
+    <dt-stack direction="row" gap="100" class="d-bgc-info-strong d-p-100">
       <dt-icon name="alert-circle" size="200" />
       <dt-text kind="label" :size="200">Info</dt-text>
     </dt-stack>
-    <dt-stack direction="row" gap="400" class="d-bgc-success-strong d-p8">
+    <dt-stack direction="row" gap="100" class="d-bgc-success-strong d-p-100">
       <dt-icon name="check-circle" size="200" />
       <dt-text kind="label" :size="200">Success</dt-text>
     </dt-stack>
@@ -389,16 +389,16 @@ Use the [DtText](/components/text.html) component for text styling. It provides 
 </code-well-header>
 
 ```html
-<dt-stack direction="row" gap="400" class="d-fc-primary-inverted">
-  <dt-stack direction="row" gap="400" class="d-bgc-critical-strong d-p8">
+<dt-stack direction="row" gap="100" class="d-fc-primary-inverted">
+  <dt-stack direction="row" gap="100" class="d-bgc-critical-strong d-p-100">
     <dt-icon name="alert-triangle" size="200" />
     <dt-text kind="label" :size="200">Critical</dt-text>
   </dt-stack>
-  <dt-stack direction="row" gap="400" class="d-bgc-info-strong d-p8">
+  <dt-stack direction="row" gap="100" class="d-bgc-info-strong d-p-100">
     <dt-icon name="alert-circle" size="200" />
     <dt-text kind="label" :size="200">Info</dt-text>
   </dt-stack>
-  <dt-stack direction="row" gap="400" class="d-bgc-success-strong d-p8">
+  <dt-stack direction="row" gap="100" class="d-bgc-success-strong d-p-100">
     <dt-icon name="check-circle" size="200" />
     <dt-text kind="label" :size="200">Success</dt-text>
   </dt-stack>
@@ -410,16 +410,16 @@ Use the [DtText](/components/text.html) component for text styling. It provides 
 Refine the spacing by adjusting the [Stack](/components/stack.md) `gap` prop and padding utilities for horizontal and vertical padding.
 
 <code-well-header>
-  <dt-stack direction="row" gap="400" class="d-fc-primary-inverted">
-    <dt-stack direction="row" gap="300" class="d-bgc-critical-strong d-py4 d-px8">
+  <dt-stack direction="row" gap="100" class="d-fc-primary-inverted">
+    <dt-stack direction="row" gap="50" class="d-bgc-critical-strong d-py-50 d-px-100">
       <dt-icon name="alert-triangle" size="200" />
       <dt-text kind="label" :size="200">Critical</dt-text>
     </dt-stack>
-    <dt-stack direction="row" gap="300" class="d-bgc-info-strong d-py4 d-px8">
+    <dt-stack direction="row" gap="50" class="d-bgc-info-strong d-py-50 d-px-100">
       <dt-icon name="alert-circle" size="200" />
       <dt-text kind="label" :size="200">Info</dt-text>
     </dt-stack>
-    <dt-stack direction="row" gap="300" class="d-bgc-success-strong d-py4 d-px8">
+    <dt-stack direction="row" gap="50" class="d-bgc-success-strong d-py-50 d-px-100">
       <dt-icon name="check-circle" size="200" />
       <dt-text kind="label" :size="200">Success</dt-text>
     </dt-stack>
@@ -427,16 +427,16 @@ Refine the spacing by adjusting the [Stack](/components/stack.md) `gap` prop and
 </code-well-header>
 
 ```html
-<dt-stack direction="row" gap="400" class="d-fc-primary-inverted">
-  <dt-stack direction="row" gap="300" class="d-bgc-critical-strong d-py4 d-px8">
+<dt-stack direction="row" gap="100" class="d-fc-primary-inverted">
+  <dt-stack direction="row" gap="50" class="d-bgc-critical-strong d-py-50 d-px-100">
     <dt-icon name="alert-triangle" size="200" />
     <dt-text kind="label" :size="200">Critical</dt-text>
   </dt-stack>
-  <dt-stack direction="row" gap="300" class="d-bgc-info-strong d-py4 d-px8">
+  <dt-stack direction="row" gap="50" class="d-bgc-info-strong d-py-50 d-px-100">
     <dt-icon name="alert-circle" size="200" />
     <dt-text kind="label" :size="200">Info</dt-text>
   </dt-stack>
-  <dt-stack direction="row" gap="300" class="d-bgc-success-strong d-py4 d-px8">
+  <dt-stack direction="row" gap="50" class="d-bgc-success-strong d-py-50 d-px-100">
     <dt-icon name="check-circle" size="200" />
     <dt-text kind="label" :size="200">Success</dt-text>
   </dt-stack>
@@ -448,16 +448,16 @@ Refine the spacing by adjusting the [Stack](/components/stack.md) `gap` prop and
 Add `d-bar4` to each item for subtle rounded corners.
 
 <code-well-header>
-  <dt-stack direction="row" gap="400" class="d-fc-primary-inverted">
-    <dt-stack direction="row" gap="300" class="d-bar4 d-bgc-critical-strong d-py4 d-px8">
+  <dt-stack direction="row" gap="100" class="d-fc-primary-inverted">
+    <dt-stack direction="row" gap="50" class="d-bar4 d-bgc-critical-strong d-py-50 d-px-100">
       <dt-icon name="alert-triangle" size="200" />
       <dt-text kind="label" :size="200">Critical</dt-text>
     </dt-stack>
-    <dt-stack direction="row" gap="300" class="d-bar4 d-bgc-info-strong d-py4 d-px8">
+    <dt-stack direction="row" gap="50" class="d-bar4 d-bgc-info-strong d-py-50 d-px-100">
       <dt-icon name="alert-circle" size="200" />
       <dt-text kind="label" :size="200">Info</dt-text>
     </dt-stack>
-    <dt-stack direction="row" gap="300" class="d-bar4 d-bgc-success-strong d-py4 d-px8">
+    <dt-stack direction="row" gap="50" class="d-bar4 d-bgc-success-strong d-py-50 d-px-100">
       <dt-icon name="check-circle" size="200" />
       <dt-text kind="label" :size="200">Success</dt-text>
     </dt-stack>
@@ -465,16 +465,16 @@ Add `d-bar4` to each item for subtle rounded corners.
 </code-well-header>
 
 ```html
-<dt-stack direction="row" gap="400" class="d-fc-primary-inverted">
-  <dt-stack direction="row" gap="300" class="d-bar4 d-bgc-critical-strong d-py4 d-px8">
+<dt-stack direction="row" gap="100" class="d-fc-primary-inverted">
+  <dt-stack direction="row" gap="50" class="d-bar4 d-bgc-critical-strong d-py-50 d-px-100">
     <dt-icon name="alert-triangle" size="200" />
     <dt-text kind="label" :size="200">Critical</dt-text>
   </dt-stack>
-  <dt-stack direction="row" gap="300" class="d-bar4 d-bgc-info-strong d-py4 d-px8">
+  <dt-stack direction="row" gap="50" class="d-bar4 d-bgc-info-strong d-py-50 d-px-100">
     <dt-icon name="alert-circle" size="200" />
     <dt-text kind="label" :size="200">Info</dt-text>
   </dt-stack>
-  <dt-stack direction="row" gap="300" class="d-bar4 d-bgc-success-strong d-py4 d-px8">
+  <dt-stack direction="row" gap="50" class="d-bar4 d-bgc-success-strong d-py-50 d-px-100">
     <dt-icon name="check-circle" size="200" />
     <dt-text kind="label" :size="200">Success</dt-text>
   </dt-stack>
