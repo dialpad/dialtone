@@ -77,8 +77,6 @@ describe('V5: Peek Overlay', () => {
     wrapper?.unmount();
     const announcements = document.getElementById('dt-resizable-announcements');
     if (announcements) announcements.remove();
-    const instructions = document.getElementById('dt-resize-instructions');
-    if (instructions) instructions.remove();
   });
 
   describe('Panel peek props', () => {

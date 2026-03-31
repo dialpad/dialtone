@@ -71,8 +71,6 @@ describe('V6: Offset Positioning', () => {
     wrapper?.unmount();
     const announcements = document.getElementById('dt-resizable-announcements');
     if (announcements) announcements.remove();
-    const instructions = document.getElementById('dt-resize-instructions');
-    if (instructions) instructions.remove();
   });
 
   describe('Handle without offset', () => {

@@ -56,8 +56,6 @@ describe('V4: Keyboard Accessibility', () => {
     // Clean up global DOM elements created by edit mode
     const announcements = document.getElementById('dt-resizable-announcements');
     if (announcements) announcements.remove();
-    const instructions = document.getElementById('dt-resize-instructions');
-    if (instructions) instructions.remove();
   });
 
   describe('Handle ARIA attributes', () => {
@@ -122,9 +120,16 @@ describe('V4: Keyboard Accessibility', () => {
       expect(handle.classes()).not.toContain('dt-resizable-handle--edit-mode');
     });
 
-    it('should create instructions element on mount', () => {
-      const el = document.getElementById('dt-resize-instructions');
-      expect(el).not.toBeNull();
+    it('should set aria-keyshortcuts to "Control+e" by default', () => {
+      const handle = wrapper.find('.dt-resizable-handle');
+      expect(handle.attributes('aria-keyshortcuts')).toBe('Control+e');
+    });
+
+    it('should set aria-description with edit mode hint by default', () => {
+      const handle = wrapper.find('.dt-resizable-handle');
+      expect(handle.attributes('aria-description')).toBe(
+        'Press Control+E to enter panel edit mode.',
+      );
     });
   });
 

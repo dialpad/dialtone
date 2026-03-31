@@ -19,6 +19,10 @@ export interface ResizableEditModeMessages {
   panelsReset?: string;
   /** Announced when all visible panels are reset */
   allPanelsReset?: string;
+  /** aria-description for the handle when not in edit mode */
+  editModeDescription?: string;
+  /** aria-description for the handle when in edit mode */
+  editModeActiveDescription?: string;
 }
 
 const DEFAULT_EDIT_MODE_MESSAGES: Required<ResizableEditModeMessages> = {
@@ -28,6 +32,9 @@ const DEFAULT_EDIT_MODE_MESSAGES: Required<ResizableEditModeMessages> = {
   editModeDeactivated: 'Panel edit mode deactivated.',
   panelsReset: 'Reset panels: {before} and {after} to initial sizes.',
   allPanelsReset: 'Reset all visible panels to their initial sizes.',
+  editModeDescription: 'Press Control+E to enter panel edit mode.',
+  editModeActiveDescription:
+    'Edit mode active. Arrow keys resize, Shift for large, Control for fine. R to reset. Escape to exit.',
 };
 
 // ─── Announcements (merged from useResizableAnnouncements) ────────────────
@@ -70,40 +77,6 @@ function announce(message: string): void {
     element.textContent = message;
     setTimeout(() => { element.textContent = ''; }, 1000);
   }, 100);
-}
-
-function createInstructions(): void {
-  if (document.getElementById('dt-resize-instructions')) return;
-
-  const instructions = document.createElement('div');
-  instructions.id = 'dt-resize-instructions';
-  instructions.style.position = 'absolute';
-  instructions.style.left = '-10000px';
-  instructions.style.width = '1px';
-  instructions.style.height = '1px';
-  instructions.style.overflow = 'hidden';
-  instructions.innerHTML = `
-    <div>
-      <p><strong>Panel Edit Mode:</strong></p>
-      <ul>
-        <li>Press Ctrl+E (or Cmd+E on Mac) to enter/exit panel edit mode</li>
-        <li>In edit mode, use Tab to navigate between resize handles</li>
-        <li>Press Escape to exit edit mode</li>
-      </ul>
-      <p><strong>Resize Controls:</strong></p>
-      <ul>
-        <li>Arrow keys: Normal resize (8px increments)</li>
-        <li>Shift + Arrow keys: Large resize (24px increments)</li>
-        <li>Ctrl/Cmd + Arrow keys: Fine resize (1px increments)</li>
-      </ul>
-      <p><strong>Reset Controls:</strong></p>
-      <ul>
-        <li>R: Reset current handle's panels to initial sizes</li>
-        <li>Ctrl/Cmd + R: Reset all visible panels to initial sizes</li>
-      </ul>
-    </div>
-  `;
-  document.body.appendChild(instructions);
 }
 
 // ─── Global edit mode state (shared across all ResizableGroups) ───────────
@@ -430,7 +403,6 @@ export function useResizableEditMode(messages?: ResizableEditModeMessages) {
 
   onMounted(() => {
     announcementRefCount++;
-    createInstructions();
 
     if (!globalEditMode.keydownListener) {
       globalEditMode.keydownListener = handleGlobalKeydown;

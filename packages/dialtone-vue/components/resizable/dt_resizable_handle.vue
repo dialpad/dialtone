@@ -21,7 +21,8 @@
     :aria-valuenow="ariaValueNow"
     :aria-valuemin="ariaValueMin"
     :aria-valuemax="ariaValueMax"
-    :aria-describedby="isEditMode ? 'dt-resize-instructions' : undefined"
+    :aria-keyshortcuts="ariaKeyShortcuts"
+    :aria-description="ariaDescription"
     @mousedown="handleMouseDown"
     @touchstart="handleTouchStart"
     @dblclick="handleDoubleClick"
@@ -177,6 +178,24 @@ const computedAriaLabel = computed(() => {
   const before = resolvedBeforePanelId.value || 'first';
   const after = resolvedAfterPanelId.value || 'second';
   return `Resize handle between ${before} and ${after} panels`;
+});
+
+const ariaKeyShortcuts = computed(() => {
+  if (isEditMode.value) {
+    return 'Control+e Escape ArrowUp ArrowDown ArrowLeft ArrowRight';
+  }
+  return 'Control+e';
+});
+
+const DEFAULT_DESCRIPTION = 'Press Control+E to enter panel edit mode.';
+const DEFAULT_ACTIVE_DESCRIPTION =
+  'Edit mode active. Arrow keys resize, Shift for large, Control for fine. R to reset. Escape to exit.';
+
+const ariaDescription = computed(() => {
+  if (isEditMode.value) {
+    return injectedMessages.editModeActiveDescription ?? DEFAULT_ACTIVE_DESCRIPTION;
+  }
+  return injectedMessages.editModeDescription ?? DEFAULT_DESCRIPTION;
 });
 
 const ariaValueNow = ref(50);
