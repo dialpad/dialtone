@@ -25,7 +25,7 @@
             {{ isPeeking ? 'Hide' : 'Peek' }}
           </button>
         </template>
-        <div class="d-d-flex d-ai-center d-jc-center d-h100p d-bgc-purple-100">
+        <div class="d-d-flex d-ai-center d-jc-center d-w100p d-h100p d-bgc-purple-100">
           <span class="d-fs-200 d-fw-bold d-fc-purple-400">
             Sidebar (click button to peek)
           </span>
@@ -36,7 +36,7 @@
         id="main"
         initial-size="50p"
       >
-        <div class="d-d-flex d-ai-center d-jc-center d-h100p d-bgc-gold-100">
+        <div class="d-d-flex d-ai-center d-jc-center d-w100p d-h100p d-bgc-gold-100">
           <span class="d-fs-200 d-fw-bold d-fc-gold-400">Main Content</span>
         </div>
       </dt-resizable-panel>

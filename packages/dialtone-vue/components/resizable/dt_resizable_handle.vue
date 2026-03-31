@@ -365,7 +365,7 @@ function handleBlurEvent () {
 
   // ─── State Modifiers ───
   &--active {
-    background-color: var(--dt-color-focus-ring);
+    // Active state handled via &__indicator selector above
   }
 
   &--disabled {
@@ -375,9 +375,31 @@ function handleBlurEvent () {
     background-color: transparent !important;
   }
 
+  // ─── Indicator (visible drag line) ───
+  &__indicator {
+    position: absolute;
+    border-radius: var(--dt-size-radius-pill);
+    background-color: transparent;
+    transition: background-color 150ms ease;
+  }
+
+  &--row &__indicator {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  &--column &__indicator {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
   // ─── Hover ───
-  &:hover:not(&--disabled),
-  .dt-resizable--resizing > & {
+  &:hover:not(&--disabled) &__indicator,
+  &--active &__indicator {
     background-color: var(--dt-color-focus-ring);
   }
 

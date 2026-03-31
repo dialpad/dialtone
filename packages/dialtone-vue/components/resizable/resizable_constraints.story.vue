@@ -8,7 +8,7 @@
         user-min-size="20p"
         user-max-size="50p"
       >
-        <div class="d-d-flex d-ai-center d-jc-center d-h100p d-bgc-purple-100">
+        <div class="d-d-flex d-ai-center d-jc-center d-w100p d-h100p d-bgc-purple-100">
           <span class="d-fs-200 d-fw-bold d-fc-purple-400">
             Sidebar (min 20%, max 50%)
           </span>
@@ -19,7 +19,7 @@
         id="content"
         user-min-size="30p"
       >
-        <div class="d-d-flex d-ai-center d-jc-center d-h100p d-bgc-gold-100">
+        <div class="d-d-flex d-ai-center d-jc-center d-w100p d-h100p d-bgc-gold-100">
           <span class="d-fs-200 d-fw-bold d-fc-gold-400">
             Content (min 30%)
           </span>

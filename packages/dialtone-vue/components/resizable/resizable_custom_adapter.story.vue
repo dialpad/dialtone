@@ -28,13 +28,13 @@
           initial-size="33p"
           user-min-size="20p"
         >
-          <div class="d-d-flex d-ai-center d-jc-center d-h100p d-bgc-green-100">
+          <div class="d-d-flex d-ai-center d-jc-center d-w100p d-h100p d-bgc-green-100">
             <span class="d-fs-200 d-fw-bold d-fc-green-400">Left Panel</span>
           </div>
         </dt-resizable-panel>
         <dt-resizable-handle />
         <dt-resizable-panel id="center">
-          <div class="d-d-flex d-ai-center d-jc-center d-h100p d-bgc-gold-100">
+          <div class="d-d-flex d-ai-center d-jc-center d-w100p d-h100p d-bgc-gold-100">
             <span class="d-fs-200 d-fw-bold d-fc-gold-400">Center Panel</span>
           </div>
         </dt-resizable-panel>
@@ -44,7 +44,7 @@
           initial-size="25p"
           user-min-size="15p"
         >
-          <div class="d-d-flex d-ai-center d-jc-center d-h100p d-bgc-purple-100">
+          <div class="d-d-flex d-ai-center d-jc-center d-w100p d-h100p d-bgc-purple-100">
             <span class="d-fs-200 d-fw-bold d-fc-purple-400">Right Panel</span>
           </div>
         </dt-resizable-panel>
