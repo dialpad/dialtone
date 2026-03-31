@@ -5,6 +5,19 @@ import type {
 } from '../resizable_constants';
 import { useResizeHandling } from './useResizableCalculations';
 
+export interface ResizableKeyboardMessages {
+  /**
+   * Announcement template for resize actions.
+   * Placeholders: {beforeId}, {afterId}, {beforePx}, {afterPx}, {action}, {incrementType}
+   */
+  resizeAnnouncement?: string;
+}
+
+const DEFAULT_KEYBOARD_MESSAGES: Required<ResizableKeyboardMessages> = {
+  resizeAnnouncement:
+    'Panel {beforeId} {action} to {beforePx}px, Panel {afterId} adjusted to {afterPx}px. {incrementType} adjustment applied.',
+};
+
 export interface ResizableKeyboardOptions {
   panels: ComputedRef<ResizablePanelState[]>;
   direction: ComputedRef<ResizableDirection>;
@@ -19,6 +32,7 @@ export interface ResizableKeyboardOptions {
     afterSize: number,
   ) => void;
   onSizeAnnouncement?: (message: string) => void;
+  messages?: ResizableKeyboardMessages;
 }
 
 /**
@@ -46,7 +60,10 @@ export function useResizableKeyboard(options: ResizableKeyboardOptions) {
     handleElement,
     onResize,
     onSizeAnnouncement,
+    messages: userMessages,
   } = options;
+
+  const msg = { ...DEFAULT_KEYBOARD_MESSAGES, ...userMessages };
 
   const isFocused = ref(false);
 
@@ -105,11 +122,13 @@ export function useResizableKeyboard(options: ResizableKeyboardOptions) {
           ? 'large'
           : 'normal';
 
-    return (
-      `Panel ${beforePanel.id} ${action} to ${beforePx}px, ` +
-      `Panel ${afterPanel.id} adjusted to ${afterPx}px. ` +
-      `${incrementType} adjustment applied.`
-    );
+    return msg.resizeAnnouncement
+      .replace('{beforeId}', beforePanel.id)
+      .replace('{afterId}', afterPanel.id)
+      .replace('{beforePx}', String(beforePx))
+      .replace('{afterPx}', String(afterPx))
+      .replace('{action}', action)
+      .replace('{incrementType}', incrementType);
   }
 
   // ─── DOM position updates (mirrors mouse drag approach) ─────────────

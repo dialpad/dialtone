@@ -44,10 +44,11 @@ export { calculateConstraintHierarchy, clampSize, clampToTier } from './constrai
 
 // Keyboard accessibility
 export { useResizableKeyboard, KEYBOARD_INCREMENTS } from './useResizableKeyboard';
-export type { ResizableKeyboardOptions } from './useResizableKeyboard';
+export type { ResizableKeyboardOptions, ResizableKeyboardMessages } from './useResizableKeyboard';
 
 // Edit mode + announcements
 export { useResizableEditMode } from './useResizableEditMode';
+export type { ResizableEditModeMessages } from './useResizableEditMode';
 
 // Peek overlay
 export { useResizablePeek } from './useResizablePeek';

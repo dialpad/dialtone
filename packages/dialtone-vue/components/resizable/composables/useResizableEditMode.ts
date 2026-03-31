@@ -1,5 +1,35 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 
+// ─── i18n message interface ─────────────────────────────────────────────────
+
+export interface ResizableEditModeMessages {
+  /** Announced when edit mode is activated but no handles exist */
+  editModeNoHandles?: string;
+  /**
+   * Announced when edit mode is activated with available handles.
+   * Use {count} as a placeholder for the number of handles.
+   */
+  editModeActivated?: string;
+  /** Announced when edit mode is deactivated */
+  editModeDeactivated?: string;
+  /**
+   * Announced when panels are reset to initial sizes.
+   * Use {before} and {after} as placeholders for panel IDs.
+   */
+  panelsReset?: string;
+  /** Announced when all visible panels are reset */
+  allPanelsReset?: string;
+}
+
+const DEFAULT_EDIT_MODE_MESSAGES: Required<ResizableEditModeMessages> = {
+  editModeNoHandles: 'Panel edit mode activated, but no resize handles are available.',
+  editModeActivated:
+    'Panel edit mode activated. Use Tab/Shift+Tab to navigate between {count} resize handles. Press Escape to exit.',
+  editModeDeactivated: 'Panel edit mode deactivated.',
+  panelsReset: 'Reset panels: {before} and {after} to initial sizes.',
+  allPanelsReset: 'Reset all visible panels to their initial sizes.',
+};
+
 // ─── Announcements (merged from useResizableAnnouncements) ────────────────
 
 let announcementElement: HTMLElement | null = null;
@@ -128,7 +158,8 @@ function arePanelsVisible(
 
 // ─── Composable ───────────────────────────────────────────────────────────
 
-export function useResizableEditMode() {
+export function useResizableEditMode(messages?: ResizableEditModeMessages) {
+  const msg = { ...DEFAULT_EDIT_MODE_MESSAGES, ...messages };
   function registerHandle(handleElement: HTMLElement): void {
     if (!globalEditMode.availableHandles.value.includes(handleElement)) {
       globalEditMode.availableHandles.value.push(handleElement);
@@ -206,9 +237,7 @@ export function useResizableEditMode() {
     const validHandles = getValidHandles();
 
     if (validHandles.length === 0) {
-      announce(
-        'Panel edit mode activated, but no resize handles are available.',
-      );
+      announce(msg.editModeNoHandles);
       return;
     }
 
@@ -216,9 +245,7 @@ export function useResizableEditMode() {
     globalEditMode.currentHandleIndex.value = 0;
 
     focusHandleAtIndex(0, validHandles);
-    announce(
-      `Panel edit mode activated. Use Tab/Shift+Tab to navigate between ${validHandles.length} resize handles. Press Escape to exit.`,
-    );
+    announce(msg.editModeActivated.replace('{count}', String(validHandles.length)));
   }
 
   function exitEditMode(): void {
@@ -240,7 +267,7 @@ export function useResizableEditMode() {
       (document.activeElement as HTMLElement).blur();
     }
 
-    announce('Panel edit mode deactivated.');
+    announce(msg.editModeDeactivated);
   }
 
   function focusNextHandle(): void {
@@ -291,7 +318,9 @@ export function useResizableEditMode() {
     );
     if (beforePanelId && afterPanelId) {
       announce(
-        `Reset panels: ${beforePanelId} and ${afterPanelId} to initial sizes.`,
+        msg.panelsReset
+          .replace('{before}', beforePanelId)
+          .replace('{after}', afterPanelId),
       );
     }
   }
@@ -325,7 +354,7 @@ export function useResizableEditMode() {
       );
     });
 
-    announce('Reset all visible panels to their initial sizes.');
+    announce(msg.allPanelsReset);
   }
 
   // ─── Global keyboard handler ──────────────────────────────────────────

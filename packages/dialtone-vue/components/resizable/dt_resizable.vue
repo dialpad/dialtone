@@ -55,6 +55,7 @@ import {
   RESIZABLE_SAVE_TO_STORAGE_KEY,
   RESIZABLE_COLLAPSE_PANEL_KEY,
   RESIZABLE_EMIT_PANEL_RESIZE_KEY,
+  RESIZABLE_MESSAGES_KEY,
 } from './resizable_constants';
 import {
   useResizablePanelControls,
@@ -105,6 +106,14 @@ const props = defineProps({
   storage: {
     type: Object,
     default: null,
+  },
+  /**
+   * i18n message overrides for screen reader announcements.
+   * Accepts keys from ResizableEditModeMessages and ResizableKeyboardMessages.
+   */
+  messages: {
+    type: Object,
+    default: () => ({}),
   },
 });
 
@@ -217,7 +226,7 @@ const {
   isEditMode,
   registerHandle: editModeRegisterHandle,
   unregisterHandle: editModeUnregisterHandle,
-} = useResizableEditMode();
+} = useResizableEditMode(props.messages);
 
 // Handle registry
 const handleRegistryList = [];
@@ -321,6 +330,7 @@ const provideMap = [
   [RESIZABLE_SAVE_TO_STORAGE_KEY, savePanelsToStorage],
   [RESIZABLE_COLLAPSE_PANEL_KEY, collapsePanel],
   [RESIZABLE_EMIT_PANEL_RESIZE_KEY, emitPanelResize],
+  [RESIZABLE_MESSAGES_KEY, props.messages],
 ];
 provideMap.forEach(([key, val]) => provide(key, val));
 

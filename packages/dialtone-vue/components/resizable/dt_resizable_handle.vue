@@ -17,7 +17,7 @@
     :tabindex="isEditMode ? '0' : '-1'"
     role="separator"
     :aria-orientation="direction === 'row' ? 'vertical' : 'horizontal'"
-    :aria-label="ariaLabel"
+    :aria-label="computedAriaLabel"
     :aria-valuenow="ariaValueNow"
     :aria-valuemin="ariaValueMin"
     :aria-valuemax="ariaValueMax"
@@ -48,6 +48,7 @@ import {
   RESIZABLE_UNREGISTER_HANDLE_KEY,
   RESIZABLE_REGISTER_EDIT_HANDLE_KEY,
   RESIZABLE_UNREGISTER_EDIT_HANDLE_KEY,
+  RESIZABLE_MESSAGES_KEY,
 } from './resizable_constants';
 import { pixelsToPercentage } from './resizable_utils';
 import { useResizableKeyboard } from './composables/useResizableKeyboard';
@@ -65,6 +66,8 @@ const props = defineProps({
   offsetAmount: { type: Number, default: 0 },
   /** @values 'start', 'end', 'both' */
   offsetDirection: { type: String, default: 'both' },
+  /** Override the default aria-label for i18n */
+  ariaLabel: { type: String, default: null },
 });
 
 // ── Injected state from DtResizable ──────────────────────────────────────
@@ -99,6 +102,7 @@ const registerHandle = inject(RESIZABLE_REGISTER_HANDLE_KEY, () => 0);
 const unregisterHandle = inject(RESIZABLE_UNREGISTER_HANDLE_KEY, () => {});
 const registerEditHandle = inject(RESIZABLE_REGISTER_EDIT_HANDLE_KEY, () => {});
 const unregisterEditHandle = inject(RESIZABLE_UNREGISTER_EDIT_HANDLE_KEY, () => {});
+const injectedMessages = inject(RESIZABLE_MESSAGES_KEY, {});
 
 // ── Handle registration ──────────────────────────────────────────────────────
 
@@ -168,7 +172,8 @@ const handleStyles = computed(() => {
 
 // ── ARIA values ──────────────────────────────────────────────────────────────
 
-const ariaLabel = computed(() => {
+const computedAriaLabel = computed(() => {
+  if (props.ariaLabel) return props.ariaLabel;
   const before = resolvedBeforePanelId.value || 'first';
   const after = resolvedAfterPanelId.value || 'second';
   return `Resize handle between ${before} and ${after} panels`;
@@ -229,6 +234,7 @@ const keyboard = useResizableKeyboard({
     // Keyboard resize updates panel state in-place; storage save
     // deferred to exit-edit-mode.
   },
+  messages: injectedMessages,
 });
 
 // ── Offset composable ──────────────────────────────────────────────────────
