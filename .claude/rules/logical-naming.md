@@ -1,5 +1,17 @@
 # Logical Naming Convention
 
+## Enforcement
+
+**Never introduce physical direction names** (`left`, `right`, `top`, `bottom`, `alpha`, `omega`) in new component slots, props, events, or prop values. Always use logical equivalents (`start`, `end`, `blockStart`, `blockEnd`).
+
+When reviewing code or creating new components:
+
+- New slots must use logical names: e.g. `startIcon`, `endIcon`, `start`, `end`, `blockStart`, `blockEnd`
+- New props must use logical names: e.g. `startClass`, `endClass`, `startDisabled`, etc.
+- New prop values for positioning must be logical: e.g. `start`, `end`, `blockStart`, `blockEnd`
+- New events must use logical names: e.g. `start-clicked`, `end-clicked`
+- If touching a component that still has physical-only names, add logical alternatives with deprecated fallbacks.
+
 ## Direction Names
 
 Use logical names in all new component code, e.g.:
