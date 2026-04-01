@@ -1,0 +1,26 @@
+diff --git a/dist/menus/index.d.cts b/dist/menus/index.d.cts
+index 25d74222ae587d4611bdcfd6f047330114dab7b8..a2c5e802f60966b55583fcc27b3e6e19be1a6fd4 100644
+--- a/dist/menus/index.d.cts
++++ b/dist/menus/index.d.cts
+@@ -9,7 +9,7 @@ import { PropType } from 'vue';
+ import { PluginKey, EditorState } from '@tiptap/pm/state';
+ import { EditorView } from '@tiptap/pm/view';
+ 
+-interface BubbleMenuPluginProps {
++export interface BubbleMenuPluginProps {
+     /**
+      * The plugin key.
+      * @type {PluginKey | string}
+diff --git a/dist/menus/index.d.ts b/dist/menus/index.d.ts
+index 25d74222ae587d4611bdcfd6f047330114dab7b8..a2c5e802f60966b55583fcc27b3e6e19be1a6fd4 100644
+--- a/dist/menus/index.d.ts
++++ b/dist/menus/index.d.ts
+@@ -9,7 +9,7 @@ import { PropType } from 'vue';
+ import { PluginKey, EditorState } from '@tiptap/pm/state';
+ import { EditorView } from '@tiptap/pm/view';
+ 
+-interface BubbleMenuPluginProps {
++export interface BubbleMenuPluginProps {
+     /**
+      * The plugin key.
+      * @type {PluginKey | string}

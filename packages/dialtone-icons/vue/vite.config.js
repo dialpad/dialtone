@@ -18,6 +18,7 @@ const illustrationEntries = glob.sync('../src/illustrations/*.vue').reduce((entr
 }, {});
 export default defineConfig({
   build: {
+    target: 'es2020',
     sourcemap: true,
     lib: {
       entry: {
@@ -27,7 +28,7 @@ export default defineConfig({
       },
       formats: ['es', 'cjs'],
     },
-    rollupOptions: {
+    rolldownOptions: {
       external: ['vue'],
       output: {
         minifyInternalExports: true,
@@ -37,7 +38,7 @@ export default defineConfig({
   },
   plugins: [
     vue(),
-    dts({ outDir: 'dist/types' }),
+    dts({ outDir: 'dist/types', vue: true, parallel: true }),
   ],
   resolve: {
     alias: {

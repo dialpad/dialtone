@@ -8,7 +8,9 @@
         "command": "pnpm exec gulp"
       },
       "inputs": [
-        "{projectRoot}/src/**/*",
+        "{projectRoot}/src/svg/**/*",
+        "{projectRoot}/src/keywords-icons.json",
+        "{projectRoot}/src/keywords-illustrations.json",
         "{projectRoot}/transformSVGtoVue.cjs",
         "{projectRoot}/gulpfile.cjs"
       ],

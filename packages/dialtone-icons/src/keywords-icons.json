@@ -625,6 +625,13 @@
       "fast-forward": [
         "music"
       ],
+      "filter-filled": [
+        "funnel",
+        "hopper",
+        "filled",
+        "sort",
+        "active"
+      ],
       "filter": [
         "funnel",
         "hopper"
