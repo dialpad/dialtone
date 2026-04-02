@@ -281,8 +281,6 @@ export const RESIZABLE_ACTIVE_CURSOR_POSITION_KEY: InjectionKey<ComputedRef<numb
   'resizable-active-cursor-position'
 );
 
-export const RESIZABLE_IS_EDIT_MODE_KEY: InjectionKey<ComputedRef<boolean>> = Symbol('resizable-is-edit-mode');
-
 export const RESIZABLE_IS_INITIALIZING_KEY: InjectionKey<ComputedRef<boolean>> = Symbol('resizable-is-initializing');
 
 // ─── Operations ─────────────────────────────────────────────────────────────
@@ -304,15 +302,9 @@ export const RESIZABLE_REGISTER_PANEL_KEY: InjectionKey<(config: ResizablePanelC
 
 export const RESIZABLE_UNREGISTER_PANEL_KEY: InjectionKey<(id: string) => void> = Symbol('resizable-unregister-panel');
 
-export const RESIZABLE_REGISTER_EDIT_HANDLE_KEY: InjectionKey<(element: HTMLElement) => void> = Symbol(
-  'resizable-register-edit-handle'
-);
-
-export const RESIZABLE_UNREGISTER_EDIT_HANDLE_KEY: InjectionKey<(element: HTMLElement) => void> = Symbol(
-  'resizable-unregister-edit-handle'
-);
-
 export const RESIZABLE_SAVE_TO_STORAGE_KEY: InjectionKey<() => void> = Symbol('resizable-save-to-storage');
+
+export const RESIZABLE_ANNOUNCE_KEY: InjectionKey<(message: string) => void> = Symbol('resizable-announce');
 
 export const RESIZABLE_COLLAPSE_PANEL_KEY: InjectionKey<(panelId: string, collapsed: boolean) => void> =
   Symbol('resizable-collapse-panel');

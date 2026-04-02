@@ -29,7 +29,6 @@ import {
   computed,
   reactive,
   watch,
-  onMounted,
   onUnmounted,
   provide,
   readonly,
@@ -43,7 +42,6 @@ import {
   RESIZABLE_IS_RESIZING_KEY,
   RESIZABLE_ACTIVE_HANDLE_KEY,
   RESIZABLE_ACTIVE_CURSOR_POSITION_KEY,
-  RESIZABLE_IS_EDIT_MODE_KEY,
   RESIZABLE_IS_INITIALIZING_KEY,
   RESIZABLE_START_RESIZE_KEY,
   RESIZABLE_RESET_PANELS_KEY,
@@ -51,21 +49,20 @@ import {
   RESIZABLE_UNREGISTER_HANDLE_KEY,
   RESIZABLE_REGISTER_PANEL_KEY,
   RESIZABLE_UNREGISTER_PANEL_KEY,
-  RESIZABLE_REGISTER_EDIT_HANDLE_KEY,
-  RESIZABLE_UNREGISTER_EDIT_HANDLE_KEY,
   RESIZABLE_SAVE_TO_STORAGE_KEY,
   RESIZABLE_COLLAPSE_PANEL_KEY,
   RESIZABLE_EMIT_PANEL_RESIZE_KEY,
   RESIZABLE_MESSAGES_KEY,
+  RESIZABLE_ANNOUNCE_KEY,
 } from './resizable_constants';
 import {
   useResizablePanelControls,
   useResizableGroup,
   useResizeHandling,
   checkAutoCollapseRules,
-  useResizableEditMode,
+  useResizableAnnouncements,
 } from './composables';
-import { useResizableDrag, findPanelsForHandle } from './composables/useResizableDrag';
+import { useResizableDrag } from './composables/useResizableDrag';
 
 const props = defineProps({
   /**
@@ -115,7 +112,7 @@ const props = defineProps({
   },
   /**
    * i18n message overrides for screen reader announcements.
-   * Accepts keys from ResizableEditModeMessages and ResizableKeyboardMessages.
+   * Accepts keys from ResizableKeyboardMessages.
    */
   messages: {
     type: Object,
@@ -240,12 +237,8 @@ function processAutoCollapse () {
   if (panel && !panel.collapsed) collapsePanel(panelsToCollapse[0], true);
 }
 
-// ── Edit mode (V4 — keyboard accessibility) ──────────────────────────────
-const {
-  isEditMode,
-  registerHandle: editModeRegisterHandle,
-  unregisterHandle: editModeUnregisterHandle,
-} = useResizableEditMode(props.messages);
+// ── Announcements (aria-live region for screen readers) ─────────────────
+const { announce } = useResizableAnnouncements();
 
 // Handle registry
 const handleRegistryList = [];
@@ -301,29 +294,9 @@ watch(group.containerSize, () => {
   }
 });
 
-// Reset request listener (edit mode + programmatic control)
-let resetRequestHandler = null;
-onMounted(() => {
-  if (!containerRef.value) return;
-  resetRequestHandler = (event) => {
-    const { resetType, handleElement } = event.detail;
-    if (resetType === 'all') { resetPanels('', '', 'all'); return; }
-    if (resetType !== 'current' || !handleElement) return;
-    const handleId = handleElement.getAttribute('data-handle-id');
-    if (!handleId) return;
-    const { beforePanel, afterPanel } = findPanelsForHandle(handleId, state.panels);
-    if (beforePanel && afterPanel) resetPanels(beforePanel.id, afterPanel.id, 'both');
-  };
-  containerRef.value.addEventListener('resizable-reset-request', resetRequestHandler);
-});
-
 onUnmounted(() => {
   group.disconnectObserver();
   drag.cancelDrag();
-  if (resetRequestHandler && containerRef.value) {
-    containerRef.value.removeEventListener('resizable-reset-request', resetRequestHandler);
-    resetRequestHandler = null;
-  }
 });
 
 // Provide/inject wiring for child components
@@ -336,7 +309,6 @@ const provideMap = [
   [RESIZABLE_IS_RESIZING_KEY, computed(() => state.isResizing)],
   [RESIZABLE_ACTIVE_HANDLE_KEY, computed(() => state.activeHandleId)],
   [RESIZABLE_ACTIVE_CURSOR_POSITION_KEY, computed(() => state.activeCursorPosition ?? 0)],
-  [RESIZABLE_IS_EDIT_MODE_KEY, isEditMode],
   [RESIZABLE_IS_INITIALIZING_KEY, computed(() => isInitializing.value)],
   [RESIZABLE_START_RESIZE_KEY, (handleId) => startResize(handleId)],
   [RESIZABLE_RESET_PANELS_KEY, resetPanels],
@@ -344,9 +316,8 @@ const provideMap = [
   [RESIZABLE_UNREGISTER_HANDLE_KEY, unregisterHandle],
   [RESIZABLE_REGISTER_PANEL_KEY, registerPanel],
   [RESIZABLE_UNREGISTER_PANEL_KEY, unregisterPanel],
-  [RESIZABLE_REGISTER_EDIT_HANDLE_KEY, editModeRegisterHandle],
-  [RESIZABLE_UNREGISTER_EDIT_HANDLE_KEY, editModeUnregisterHandle],
   [RESIZABLE_SAVE_TO_STORAGE_KEY, savePanelsToStorage],
+  [RESIZABLE_ANNOUNCE_KEY, announce],
   [RESIZABLE_COLLAPSE_PANEL_KEY, collapsePanel],
   [RESIZABLE_EMIT_PANEL_RESIZE_KEY, emitPanelResize],
   [RESIZABLE_MESSAGES_KEY, props.messages],

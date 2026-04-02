@@ -1,5 +1,6 @@
 <template>
   <div
+    :id="`dt-resizable-panel-${props.id}`"
     class="d-resizable-panel"
     :class="[
       props.class,

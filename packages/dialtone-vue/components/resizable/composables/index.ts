@@ -46,9 +46,8 @@ export { calculateConstraintHierarchy, clampSize, clampToTier } from './constrai
 export { useResizableKeyboard, KEYBOARD_INCREMENTS } from './useResizableKeyboard';
 export type { ResizableKeyboardOptions, ResizableKeyboardMessages } from './useResizableKeyboard';
 
-// Edit mode + announcements
-export { useResizableEditMode } from './useResizableEditMode';
-export type { ResizableEditModeMessages } from './useResizableEditMode';
+// Announcements (aria-live region)
+export { useResizableAnnouncements } from './useResizableAnnouncements';
 
 // Peek overlay
 export { useResizablePeek } from './useResizablePeek';

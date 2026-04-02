@@ -3,19 +3,35 @@ import type {
   ResizablePanelState,
   ResizableDirection,
 } from '../resizable_constants';
+import { MIN_PANEL_SIZE_PX } from '../resizable_constants';
 import { useResizeHandling } from './useResizableCalculations';
 
 export interface ResizableKeyboardMessages {
   /**
    * Announcement template for resize actions.
-   * Placeholders: {beforeId}, {afterId}, {beforePx}, {afterPx}, {action}, {incrementType}
+   * Placeholders: {beforeId}, {afterId}, {beforePx}, {afterPx}
    */
   resizeAnnouncement?: string;
+  /** Announced when a panel is collapsed. Placeholder: {panelId} */
+  collapseAnnouncement?: string;
+  /** Announced when a panel is expanded. Placeholder: {panelId} */
+  expandAnnouncement?: string;
+  /** Announced when panels are reset. Placeholders: {beforeId}, {afterId} */
+  resetAnnouncement?: string;
+  /** aria-valuetext template. Placeholders: {panelId}, {pixels} */
+  ariaValueText?: string;
+  /** aria-label template. Placeholders: {before}, {after} */
+  handleAriaLabel?: string;
 }
 
 const DEFAULT_KEYBOARD_MESSAGES: Required<ResizableKeyboardMessages> = {
   resizeAnnouncement:
-    'Panel {beforeId} {action} to {beforePx}px, Panel {afterId} adjusted to {afterPx}px. {incrementType} adjustment applied.',
+    '{beforeId}: {beforePx}px, {afterId}: {afterPx}px',
+  collapseAnnouncement: '{panelId} collapsed',
+  expandAnnouncement: '{panelId} expanded',
+  resetAnnouncement: '{beforeId} and {afterId} reset',
+  ariaValueText: '{panelId}: {pixels}px',
+  handleAriaLabel: 'Resize handle between {before} and {after} panels',
 };
 
 export interface ResizableKeyboardOptions {
@@ -31,6 +47,8 @@ export interface ResizableKeyboardOptions {
     afterPanelId: string,
     afterSize: number,
   ) => void;
+  onCollapse?: (panelId: string, collapsed: boolean) => void;
+  onReset?: (beforePanelId: string, afterPanelId: string) => void;
   onSizeAnnouncement?: (message: string) => void;
   messages?: ResizableKeyboardMessages;
 }
@@ -49,6 +67,13 @@ export const KEYBOARD_INCREMENTS = {
 
 /**
  * Composable for keyboard-driven resize on a single handle.
+ * Implements the W3C ARIA separator keyboard pattern:
+ * - Arrow keys: resize
+ * - Enter: toggle collapse on before panel
+ * - Home: resize to min
+ * - End: resize to max
+ * - R: reset adjacent panels
+ * - Escape: blur handle
  */
 export function useResizableKeyboard(options: ResizableKeyboardOptions) {
   const {
@@ -59,6 +84,8 @@ export function useResizableKeyboard(options: ResizableKeyboardOptions) {
     afterPanelId,
     handleElement,
     onResize,
+    onCollapse,
+    onReset,
     onSizeAnnouncement,
     messages: userMessages,
   } = options;
@@ -108,30 +135,18 @@ export function useResizableKeyboard(options: ResizableKeyboardOptions) {
   function generateSizeAnnouncement(
     beforePanel: ResizablePanelState,
     afterPanel: ResizablePanelState,
-    resizeDirection: 'increase' | 'decrease',
-    increment: number,
   ): string {
     const beforePx = Math.round(beforePanel.pixelSize);
     const afterPx = Math.round(afterPanel.pixelSize);
-    const action =
-      resizeDirection === 'increase' ? 'increased' : 'decreased';
-    const incrementType =
-      increment === KEYBOARD_INCREMENTS.fine
-        ? 'fine'
-        : increment === KEYBOARD_INCREMENTS.large
-          ? 'large'
-          : 'normal';
 
     return msg.resizeAnnouncement
       .replace('{beforeId}', beforePanel.id)
       .replace('{afterId}', afterPanel.id)
       .replace('{beforePx}', String(beforePx))
-      .replace('{afterPx}', String(afterPx))
-      .replace('{action}', action)
-      .replace('{incrementType}', incrementType);
+      .replace('{afterPx}', String(afterPx));
   }
 
-  // ─── DOM position updates (logical properties — writing-mode handles direction) ──
+  // ─── DOM position updates (logical properties) ──────────────────────
 
   function updateLayout(
     beforeEl: HTMLElement,
@@ -220,20 +235,16 @@ export function useResizableKeyboard(options: ResizableKeyboardOptions) {
 
     if (onSizeAnnouncement) {
       onSizeAnnouncement(
-        generateSizeAnnouncement(
-          beforePanel, afterPanel, resizeDirection, incrementPixels,
-        ),
+        generateSizeAnnouncement(beforePanel, afterPanel),
       );
     }
 
     return true;
   }
 
-  // ─── Event handlers ─────────────────────────────────────────────────
+  // ─── Key handlers ─────────────────────────────────────────────────
 
-  function handleKeyDown(event: KeyboardEvent): void {
-    if (!isFocused.value) return;
-
+  function handleArrowKey(event: KeyboardEvent): void {
     const resizeDirection = getResizeDirection(event.key, direction.value);
     if (!resizeDirection) return;
 
@@ -247,6 +258,105 @@ export function useResizableKeyboard(options: ResizableKeyboardOptions) {
     processKeyboardResize(
       beforePanel, afterPanel, resizeDirection, incrementPixels,
     );
+  }
+
+  function handleEnterKey(event: KeyboardEvent): void {
+    const { beforePanel } = getCurrentPanels();
+    if (!beforePanel?.collapsible || !onCollapse) return;
+
+    event.preventDefault();
+    const newCollapsed = !beforePanel.collapsed;
+    onCollapse(beforePanel.id, newCollapsed);
+
+    if (onSizeAnnouncement) {
+      const template = newCollapsed
+        ? msg.collapseAnnouncement
+        : msg.expandAnnouncement;
+      onSizeAnnouncement(template.replace('{panelId}', beforePanel.id));
+    }
+  }
+
+  function handleHomeKey(event: KeyboardEvent): void {
+    event.preventDefault();
+
+    const { beforePanel, afterPanel } = getCurrentPanels();
+    if (!beforePanel || !afterPanel) return;
+
+    const targetSize = beforePanel.userMinSizePixels ?? MIN_PANEL_SIZE_PX;
+    const delta = targetSize - beforePanel.pixelSize;
+    if (delta === 0) return;
+
+    const dir = delta > 0 ? 'increase' : 'decrease';
+    processKeyboardResize(beforePanel, afterPanel, dir, Math.abs(delta));
+  }
+
+  function handleEndKey(event: KeyboardEvent): void {
+    event.preventDefault();
+
+    const { beforePanel, afterPanel } = getCurrentPanels();
+    if (!beforePanel || !afterPanel) return;
+
+    const afterMin = afterPanel.userMinSizePixels ?? MIN_PANEL_SIZE_PX;
+    const maxSize = beforePanel.userMaxSizePixels
+      ?? (containerSize.value - afterMin);
+    const targetSize = Math.min(maxSize, containerSize.value - afterMin);
+    const delta = targetSize - beforePanel.pixelSize;
+    if (delta === 0) return;
+
+    const dir = delta > 0 ? 'increase' : 'decrease';
+    processKeyboardResize(beforePanel, afterPanel, dir, Math.abs(delta));
+  }
+
+  function handleResetKey(event: KeyboardEvent): void {
+    if (event.ctrlKey || event.metaKey || event.altKey || event.shiftKey) return;
+
+    event.preventDefault();
+
+    const { beforePanel, afterPanel } = getCurrentPanels();
+    if (!beforePanel || !afterPanel || !onReset) return;
+
+    onReset(beforePanel.id, afterPanel.id);
+
+    if (onSizeAnnouncement) {
+      onSizeAnnouncement(
+        msg.resetAnnouncement
+          .replace('{beforeId}', beforePanel.id)
+          .replace('{afterId}', afterPanel.id),
+      );
+    }
+  }
+
+  function handleEscapeKey(event: KeyboardEvent): void {
+    event.preventDefault();
+    handleElement.value?.blur();
+  }
+
+  // ─── Event handlers ─────────────────────────────────────────────────
+
+  function handleKeyDown(event: KeyboardEvent): void {
+    if (!isFocused.value) return;
+
+    switch (event.key) {
+      case 'Enter':
+        handleEnterKey(event);
+        return;
+      case 'Home':
+        handleHomeKey(event);
+        return;
+      case 'End':
+        handleEndKey(event);
+        return;
+      case 'r':
+      case 'R':
+        handleResetKey(event);
+        return;
+      case 'Escape':
+        handleEscapeKey(event);
+        return;
+    }
+
+    // Arrow keys — resize
+    handleArrowKey(event);
   }
 
   function handleFocus(): void {

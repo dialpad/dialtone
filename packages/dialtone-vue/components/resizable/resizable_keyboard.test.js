@@ -78,9 +78,9 @@ describe('V4: Keyboard Accessibility', () => {
       expect(handle.attributes('aria-label')).toContain('Resize handle between');
     });
 
-    it('should have tabindex="-1" by default (not in edit mode)', () => {
+    it('should have tabindex="0" by default (always focusable)', () => {
       const handle = wrapper.find('.d-resizable-handle');
-      expect(handle.attributes('tabindex')).toBe('-1');
+      expect(handle.attributes('tabindex')).toBe('0');
     });
 
     it('should have aria-valuenow attribute', () => {
@@ -110,26 +110,19 @@ describe('V4: Keyboard Accessibility', () => {
     });
   });
 
-  describe('Edit mode toggle', () => {
+  describe('W3C separator ARIA attributes', () => {
     beforeEach(() => {
       _setWrapper();
     });
 
-    it('should not apply edit-mode class by default', () => {
+    it('should have aria-controls pointing to the before panel', () => {
       const handle = wrapper.find('.d-resizable-handle');
-      expect(handle.classes()).not.toContain('d-resizable-handle--edit-mode');
+      expect(handle.attributes('aria-controls')).toContain('dt-resizable-panel-');
     });
 
-    it('should set aria-keyshortcuts to "Control+e" by default', () => {
+    it('should have aria-valuetext with panel size', () => {
       const handle = wrapper.find('.d-resizable-handle');
-      expect(handle.attributes('aria-keyshortcuts')).toBe('Control+e');
-    });
-
-    it('should set aria-description with edit mode hint by default', () => {
-      const handle = wrapper.find('.d-resizable-handle');
-      expect(handle.attributes('aria-description')).toBe(
-        'Press Control+E to enter panel edit mode.',
-      );
+      expect(handle.attributes('aria-valuetext')).toBeDefined();
     });
   });
 

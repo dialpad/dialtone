@@ -9,20 +9,20 @@
       {
         'd-resizable-handle--active': isActive,
         'd-resizable-handle--disabled': isDisabled,
-        'd-resizable-handle--edit-mode': isEditMode,
       },
     ]"
     :style="handleStyles"
     :data-handle-id="handleId"
-    :tabindex="isEditMode ? '0' : '-1'"
+    :tabindex="isDisabled ? '-1' : '0'"
     role="separator"
     :aria-orientation="direction === 'row' ? 'vertical' : 'horizontal'"
     :aria-label="computedAriaLabel"
     :aria-valuenow="ariaValueNow"
     :aria-valuemin="ariaValueMin"
     :aria-valuemax="ariaValueMax"
-    :aria-keyshortcuts="ariaKeyShortcuts"
-    :aria-description="ariaDescription"
+    :aria-controls="`dt-resizable-panel-${resolvedBeforePanelId}`"
+    :aria-valuetext="ariaValueText"
+    :aria-disabled="isDisabled || undefined"
     @mousedown="handleMouseDown"
     @touchstart="handleTouchStart"
     @dblclick="handleDoubleClick"
@@ -42,13 +42,13 @@ import {
   RESIZABLE_DIRECTION_KEY,
   RESIZABLE_CONTAINER_SIZE_KEY,
   RESIZABLE_ACTIVE_HANDLE_KEY,
-  RESIZABLE_IS_EDIT_MODE_KEY,
   RESIZABLE_START_RESIZE_KEY,
   RESIZABLE_RESET_PANELS_KEY,
   RESIZABLE_REGISTER_HANDLE_KEY,
   RESIZABLE_UNREGISTER_HANDLE_KEY,
-  RESIZABLE_REGISTER_EDIT_HANDLE_KEY,
-  RESIZABLE_UNREGISTER_EDIT_HANDLE_KEY,
+  RESIZABLE_SAVE_TO_STORAGE_KEY,
+  RESIZABLE_COLLAPSE_PANEL_KEY,
+  RESIZABLE_ANNOUNCE_KEY,
   RESIZABLE_MESSAGES_KEY,
 } from './resizable_constants';
 import { pixelsToPercentage } from './resizable_utils';
@@ -106,16 +106,13 @@ const activeHandleId = inject(
   RESIZABLE_ACTIVE_HANDLE_KEY,
   computed(() => undefined),
 );
-const isEditMode = inject(
-  RESIZABLE_IS_EDIT_MODE_KEY,
-  computed(() => false),
-);
 const startResize = inject(RESIZABLE_START_RESIZE_KEY, () => {});
 const resetPanels = inject(RESIZABLE_RESET_PANELS_KEY, () => {});
 const registerHandle = inject(RESIZABLE_REGISTER_HANDLE_KEY, () => 0);
 const unregisterHandle = inject(RESIZABLE_UNREGISTER_HANDLE_KEY, () => {});
-const registerEditHandle = inject(RESIZABLE_REGISTER_EDIT_HANDLE_KEY, () => {});
-const unregisterEditHandle = inject(RESIZABLE_UNREGISTER_EDIT_HANDLE_KEY, () => {});
+const saveToStorage = inject(RESIZABLE_SAVE_TO_STORAGE_KEY, null);
+const collapsePanel = inject(RESIZABLE_COLLAPSE_PANEL_KEY, null);
+const announce = inject(RESIZABLE_ANNOUNCE_KEY, null);
 const injectedMessages = inject(RESIZABLE_MESSAGES_KEY, {});
 
 // ── Handle registration ──────────────────────────────────────────────────────
@@ -189,25 +186,18 @@ const computedAriaLabel = computed(() => {
   if (props.ariaLabel) return props.ariaLabel;
   const before = resolvedBeforePanelId.value || 'first';
   const after = resolvedAfterPanelId.value || 'second';
-  return `Resize handle between ${before} and ${after} panels`;
+  const template = injectedMessages.handleAriaLabel
+    ?? 'Resize handle between {before} and {after} panels';
+  return template.replace('{before}', before).replace('{after}', after);
 });
 
-const ariaKeyShortcuts = computed(() => {
-  if (isEditMode.value) {
-    return 'Control+e Escape ArrowUp ArrowDown ArrowLeft ArrowRight';
-  }
-  return 'Control+e';
-});
-
-const DEFAULT_DESCRIPTION = 'Press Control+E to enter panel edit mode.';
-const DEFAULT_ACTIVE_DESCRIPTION =
-  'Edit mode active. Arrow keys resize, Shift for large, Control for fine. R to reset. Escape to exit.';
-
-const ariaDescription = computed(() => {
-  if (isEditMode.value) {
-    return injectedMessages.editModeActiveDescription ?? DEFAULT_ACTIVE_DESCRIPTION;
-  }
-  return injectedMessages.editModeDescription ?? DEFAULT_DESCRIPTION;
+const ariaValueText = computed(() => {
+  const panel = panels.value.find(p => p.id === resolvedBeforePanelId.value);
+  if (!panel) return '';
+  const template = injectedMessages.ariaValueText ?? '{panelId}: {pixels}px';
+  return template
+    .replace('{panelId}', resolvedBeforePanelId.value)
+    .replace('{pixels}', String(Math.round(panel.pixelSize)));
 });
 
 const ariaValueNow = ref(50);
@@ -261,10 +251,10 @@ const keyboard = useResizableKeyboard({
   beforePanelId: resolvedBeforePanelId,
   afterPanelId: resolvedAfterPanelId,
   handleElement,
-  onResize () {
-    // Keyboard resize updates panel state in-place; storage save
-    // deferred to exit-edit-mode.
-  },
+  onResize () { saveToStorage?.(); },
+  onCollapse (panelId, collapsed) { collapsePanel?.(panelId, collapsed); },
+  onReset (beforeId, afterId) { resetPanels?.(beforeId, afterId, 'both'); },
+  onSizeAnnouncement (msg) { announce?.(msg); },
   messages: injectedMessages,
 });
 
@@ -282,19 +272,10 @@ const offset = useResizableOffset({
 onMounted(() => {
   autoIndex.value = registerHandle(currentInstance);
   updateAriaValues();
-
-  // Register this handle's DOM element for edit mode focus management
-  if (handleElement.value) {
-    registerEditHandle(handleElement.value);
-  }
 });
 
 onUnmounted(() => {
   unregisterHandle(currentInstance);
-
-  if (handleElement.value) {
-    unregisterEditHandle(handleElement.value);
-  }
 
   if (ariaUpdateTimeout) {
     clearTimeout(ariaUpdateTimeout);
