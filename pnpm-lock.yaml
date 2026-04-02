@@ -27,9 +27,6 @@ importers:
 
   .:
     dependencies:
-      '@dialpad/dialtone-cli':
-        specifier: workspace:*
-        version: link:packages/dialtone-cli
       '@dialpad/dialtone-emojis':
         specifier: workspace:*
         version: link:packages/dialtone-emojis
@@ -169,6 +166,9 @@ importers:
       '@dialpad/conventional-changelog-angular':
         specifier: ^1.1.1
         version: 1.1.1
+      '@dialpad/dialtone-cli':
+        specifier: workspace:*
+        version: link:packages/dialtone-cli
       '@dialpad/semantic-release-changelog-json':
         specifier: ^1.0.0
         version: 1.0.0(semantic-release@21.1.2(typescript@5.9.3))

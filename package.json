@@ -86,7 +86,6 @@
   "dependencies": {
     "@dialpad/dialtone-emojis": "workspace:*",
     "@dialpad/dialtone-icons": "workspace:*",
-    "@dialpad/dialtone-cli": "workspace:*",
     "@dialpad/dialtone-mcp-server": "workspace:*",
     "@dialpad/dialtone-tokens": "workspace:*",
     "@dialpad/i18n": "1.25.0",
@@ -129,6 +128,7 @@
     "vue-tsc": "3.2.6"
   },
   "devDependencies": {
+    "@dialpad/dialtone-cli": "workspace:*",
     "@commitlint/cli": "^18.4.3",
     "@commitlint/config-conventional": "^17.6.6",
     "@dialpad/conventional-changelog-angular": "^1.1.1",
