@@ -55,6 +55,7 @@ Directives configure the `<code-example>` output. Place them at the top of the b
 | Directive | Purpose | Equivalent `<code-example>` prop |
 | --- | --- | --- |
 | `<!-- @wrapper -->` | Marks first element as demo-only layout wrapper | `data-demo-wrapper` on element |
+| `<!-- @custom -->` | Bypasses default demo wrapper styles (padding, width, bg) | `custom` prop |
 | `<!-- @code -->` | Separator: above = live demo, below = code tab | `vueCode='...'` |
 | `<!-- @bg classname -->` | Custom background class | `bgclass="classname"` |
 | `<!-- @class name -->` | Custom CSS class on code-example | `class="name"` |

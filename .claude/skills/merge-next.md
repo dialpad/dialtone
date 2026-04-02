@@ -56,7 +56,7 @@ Apply these resolution strategies:
 | **package.json versions** | Take staging's released version (higher semver). Next will get its own prerelease versions on next release. |
 | **pnpm-lock.yaml** | Accept staging's version (`git checkout --theirs pnpm-lock.yaml`), then regenerate with `pnpm install --no-frozen-lockfile`. |
 | **Code conflicts** | Analyze both sides. Keep new features from both branches. Prefer next's naming conventions (e.g. `#startIcon` over `#icon`, logical properties over physical). Combine additive changes. |
-| **Documentation conflicts** | Prefer next's unified `code-example` component over staging's older `code-well-header` + `code-example-tabs` pattern. |
+| **Documentation conflicts** | Prefer next's fenced ` ```vue demo ` blocks over staging's `<code-example>` tags or `<code-well-header>` + `<code-example-tabs>` patterns. |
 | **CSS conflicts** | Prefer next's logical properties (`max-inline-size` over `max-width`). Combine additive styles from both sides. |
 
 Stage all resolved files. Verify no conflict markers remain:

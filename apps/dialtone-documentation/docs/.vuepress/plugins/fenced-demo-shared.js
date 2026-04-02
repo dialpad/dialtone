@@ -31,13 +31,14 @@ export function trimBlankLines (str) {
  *   <!-- @code-only -->     → onlyShow = 'code'
  *   <!-- @code -->          → codeSeparatorIndex
  *   <!-- @wrapper -->       → hasWrapper = true
+ *   <!-- @custom -->        → hasCustom = true
  *   <!-- @bg classname -->  → bgclass = 'classname'
  *   <!-- @class name -->    → cssClass = 'name'
  *
  * @param {string[]} lines - Content lines (without fences)
  * @param {string} [infoMode='demo'] - 'demo', 'demo-only', or 'code-only' from the info string
  * @returns {{ onlyShow: string|null, bgclass: string|null, cssClass: string|null,
- *             codeSeparatorIndex: number, hasWrapper: boolean, directiveLines: Set<number> }}
+ *             codeSeparatorIndex: number, hasWrapper: boolean, hasCustom: boolean, directiveLines: Set<number> }}
  */
 export function parseDirectives (lines, infoMode = 'demo') {
   let onlyShow = infoMode === 'demo-only' ? 'demo'
@@ -47,6 +48,7 @@ export function parseDirectives (lines, infoMode = 'demo') {
   let cssClass = null;
   let codeSeparatorIndex = -1;
   let hasWrapper = false;
+  let hasCustom = false;
   const directiveLines = new Set();
 
   for (let i = 0; i < lines.length; i++) {
@@ -64,6 +66,9 @@ export function parseDirectives (lines, infoMode = 'demo') {
     } else if (trimmed === '<!-- @wrapper -->') {
       hasWrapper = true;
       directiveLines.add(i);
+    } else if (trimmed === '<!-- @custom -->') {
+      hasCustom = true;
+      directiveLines.add(i);
     } else {
       const bgMatch = trimmed.match(/^<!-- @bg (.+) -->$/);
       if (bgMatch) {
@@ -79,5 +84,5 @@ export function parseDirectives (lines, infoMode = 'demo') {
     }
   }
 
-  return { onlyShow, bgclass, cssClass, codeSeparatorIndex, hasWrapper, directiveLines };
+  return { onlyShow, bgclass, cssClass, codeSeparatorIndex, hasWrapper, hasCustom, directiveLines };
 }

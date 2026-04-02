@@ -218,4 +218,33 @@ describe('transformFencedDemo', () => {
     assert.ok(result.includes('source-code=\''));
     assert.ok(result.includes('&lt;dt-button&gt;Code only&lt;/dt-button&gt;'));
   });
+
+  it('handles @custom directive', () => {
+    const input = [
+      '<!-- @custom -->',
+      '<!-- @class d-fl-center d-p-300 d-bgc-secondary d-w100p -->',
+      '<dt-button kind="unstyled" class="d-p-200 d-bar8 h:d-bs-md">Hover</dt-button>',
+      '',
+    ].join('\n');
+    const result = transformFencedDemo(input);
+    assert.ok(result.includes(' custom '));
+    assert.ok(result.includes('class="'));
+    assert.ok(!result.includes('<!-- @custom -->'));
+  });
+
+  it('handles @custom combined with @bg and @code', () => {
+    const input = [
+      '<!-- @custom -->',
+      '<!-- @class d-fl-center d-p-300 -->',
+      '<div v-for="c in colors" :class="`d-bgc-${c}`">{{ c }}</div>',
+      '<!-- @code -->',
+      '<div class="d-bgc-primary">...</div>',
+      '',
+    ].join('\n');
+    const result = transformFencedDemo(input);
+    assert.ok(result.includes(' custom '));
+    assert.ok(result.includes('class="'));
+    assert.ok(result.includes('source-code=\''));
+    assert.ok(result.includes('v-for'));
+  });
 });
