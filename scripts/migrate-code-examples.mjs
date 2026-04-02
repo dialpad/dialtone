@@ -159,7 +159,7 @@ function handleDemoWrapper (slotContent) {
  * Component-level classes on slot content should NOT be converted.
  */
 function isUtilityClass (classValue) {
-  // Check if all classes start with d-
+  // Check if any class starts with d-
   const classes = classValue.trim().split(/\s+/);
   return classes.some(c => c.startsWith('d-'));
 }
@@ -186,11 +186,14 @@ function convertBlock (attrs, slotContent) {
   const wrapper = handleDemoWrapper(content);
   content = wrapper.content;
 
+  // Determine info string variant based on onlyShow
+  let infoString = '```vue demo';
+  if (attrs.onlyShow === 'demo') infoString = '```vue demo-only';
+  if (attrs.onlyShow === 'code') infoString = '```vue code-only';
+
   // Build directives
   const directives = [];
 
-  if (attrs.onlyShow === 'demo') directives.push('<!-- @demo-only -->');
-  if (attrs.onlyShow === 'code') directives.push('<!-- @code-only -->');
   if (wrapper.hasWrapper) directives.push('<!-- @wrapper -->');
   if (attrs.bgclass) directives.push(`<!-- @bg ${attrs.bgclass} -->`);
   if (attrs.class && isUtilityClass(attrs.class)) {
@@ -199,7 +202,7 @@ function convertBlock (attrs, slotContent) {
 
   // Build the fenced block
   const lines = [];
-  lines.push('```vue demo');
+  lines.push(infoString);
 
   for (const d of directives) {
     lines.push(d);

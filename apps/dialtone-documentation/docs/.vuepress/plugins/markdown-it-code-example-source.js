@@ -1,3 +1,5 @@
+import { encodeForAttr, trimBlankLines } from './fenced-demo-shared.js';
+
 /**
  * markdown-it plugin that processes <code-example> blocks in two steps:
  *
@@ -65,7 +67,7 @@ function encodeVueCodeAttr (content) {
     if (end === -1) break;
 
     const value = result.slice(valueStart, end);
-    const trimmed = value.replace(/^\n+|\n+$/g, '');
+    const trimmed = trimBlankLines(value);
     if (!trimmed) { searchFrom = end + 1; continue; }
 
     const encoded = encodeForAttr(trimmed);
@@ -98,7 +100,7 @@ function processCodeExample (block) {
   if (closeTagStart === -1) return block;
 
   const innerContent = block.slice(openTagEnd, closeTagStart);
-  let extracted = dedent(innerContent.replace(/^\n+|\n+$/g, ''));
+  let extracted = dedent(trimBlankLines(innerContent));
   if (!extracted) return block;
 
   // Strip wrapper element marked with data-demo-wrapper
@@ -129,7 +131,7 @@ export function stripMarkedWrapper (content) {
 
   // Extract children between the opening and closing tags
   const children = trimmed.slice(openEnd + 1, lastCloseStart);
-  return dedent(children.replace(/^\n+|\n+$/g, ''));
+  return dedent(trimBlankLines(children));
 }
 
 /**
@@ -144,19 +146,6 @@ function findFirstUnquotedClose (str) {
     else if (str[i] === '>' && !inSingleQuote && !inDoubleQuote) return i;
   }
   return -1;
-}
-
-/**
- * Encode a string for safe inclusion in a single-quoted HTML attribute.
- * Vue auto-decodes these entities when passing to component props.
- */
-function encodeForAttr (str) {
-  return str
-    .replace(/&/g, '&amp;')
-    .replace(/'/g, '&#39;')
-    .replace(/"/g, '&quot;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
 }
 
 /**

@@ -25,6 +25,7 @@ import { transformHtmlTable } from './transform-html-table.mjs';
 import { transformNewUtilityClassTable, transformOldUtilityClassTable } from './transform-utility-class-table.mjs';
 import { isStandaloneVueComponentLine, cleanupOutput, PASSTHROUGH_COMPONENTS } from './utils.mjs';
 import { INLINE_HANDLERS, consumeUntilClose, parseFrontmatterField } from './component-handlers.mjs';
+import { parseDirectives, trimBlankLines } from '../../docs/.vuepress/plugins/fenced-demo-shared.js';
 
 const S = {
   NORMAL: 'NORMAL',
@@ -172,33 +173,11 @@ function handleFencedDemoState (ctx) {
  * @returns {string[]|null} - Cleaned lines, or null to skip the block
  */
 export function transformFencedDemoBlock (lines, infoMode = 'demo') {
-  let hasDemoOnly = infoMode === 'demo-only';
-  let hasWrapper = false;
-  let codeSeparatorIndex = -1;
-  const directiveIndices = new Set();
-
-  for (let i = 0; i < lines.length; i++) {
-    const trimmed = lines[i].trim();
-    if (trimmed === '<!-- @demo-only -->') {
-      hasDemoOnly = true;
-      directiveIndices.add(i);
-    } else if (trimmed === '<!-- @code-only -->') {
-      directiveIndices.add(i);
-    } else if (trimmed === '<!-- @code -->') {
-      codeSeparatorIndex = i;
-      directiveIndices.add(i);
-    } else if (trimmed === '<!-- @wrapper -->') {
-      hasWrapper = true;
-      directiveIndices.add(i);
-    } else if (/^<!-- @bg .+ -->$/.test(trimmed)) {
-      directiveIndices.add(i);
-    } else if (/^<!-- @class .+ -->$/.test(trimmed)) {
-      directiveIndices.add(i);
-    }
-  }
+  const { onlyShow, hasWrapper, codeSeparatorIndex, directiveLines: directiveIndices } =
+    parseDirectives(lines, infoMode);
 
   // @demo-only: skip the entire block
-  if (hasDemoOnly) return null;
+  if (onlyShow === 'demo') return null;
 
   let contentLines;
 
@@ -267,7 +246,7 @@ function stripWrapperElement (lines) {
 
   // Extract children between the opening and closing tags
   const children = trimmed.slice(openEnd + 1, lastCloseStart);
-  const childLines = children.replace(/^\n+|\n+$/g, '').split('\n');
+  const childLines = trimBlankLines(children).split('\n');
 
   // Trim leading/trailing blank lines
   while (childLines.length > 0 && childLines[0].trim() === '') childLines.shift();
@@ -340,7 +319,7 @@ function transformCodeExample (lines) {
   const closeTagStart = joined.lastIndexOf('</code-example>');
   if (closeTagStart === -1) return [];
 
-  const slotContent = joined.slice(openTagEnd, closeTagStart).replace(/^\n+|\n+$/g, '');
+  const slotContent = trimBlankLines(joined.slice(openTagEnd, closeTagStart));
   if (!slotContent.trim()) return [];
 
   // Dedent

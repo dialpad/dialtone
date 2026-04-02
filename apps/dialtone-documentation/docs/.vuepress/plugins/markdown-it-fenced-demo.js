@@ -20,6 +20,8 @@
  *   <!-- @class name -->    → class="name"
  */
 
+import { encodeForAttr, trimBlankLines, parseDirectives } from './fenced-demo-shared.js';
+
 const INFO_RE = /^vue\s+(demo-only|code-only|demo)$/;
 
 export default function fencedDemoPlugin (md) {
@@ -53,38 +55,8 @@ export function transformFencedDemo (raw, infoMode = 'demo') {
   const lines = raw.split('\n');
 
   // --- Parse directives (info string takes precedence, directives can override) ---
-  let onlyShow = infoMode === 'demo-only' ? 'demo'
-    : infoMode === 'code-only' ? 'code'
-      : null;
-  let bgclass = null;
-  let cssClass = null;
-  let codeSeparatorIndex = -1;
-  let hasWrapper = false;
-  const directiveLines = new Set();
-
-  for (let i = 0; i < lines.length; i++) {
-    const trimmed = lines[i].trim();
-
-    if (trimmed === '<!-- @demo-only -->') {
-      onlyShow = 'demo';
-      directiveLines.add(i);
-    } else if (trimmed === '<!-- @code-only -->') {
-      onlyShow = 'code';
-      directiveLines.add(i);
-    } else if (trimmed === '<!-- @code -->') {
-      codeSeparatorIndex = i;
-      directiveLines.add(i);
-    } else if (trimmed === '<!-- @wrapper -->') {
-      hasWrapper = true;
-      directiveLines.add(i);
-    } else if (/^<!-- @bg .+ -->$/.test(trimmed)) {
-      bgclass = trimmed.slice('<!-- @bg '.length, -' -->'.length);
-      directiveLines.add(i);
-    } else if (/^<!-- @class .+ -->$/.test(trimmed)) {
-      cssClass = trimmed.slice('<!-- @class '.length, -' -->'.length);
-      directiveLines.add(i);
-    }
-  }
+  const { onlyShow, bgclass, cssClass, codeSeparatorIndex, hasWrapper, directiveLines } =
+    parseDirectives(lines, infoMode);
 
   // --- Build slot content and optional source-code ---
   let slotContent;
@@ -135,21 +107,3 @@ function addDataDemoWrapper (content) {
   );
 }
 
-/**
- * Remove leading and trailing blank lines.
- */
-function trimBlankLines (str) {
-  return str.replace(/^\n+|\n+$/g, '');
-}
-
-/**
- * Encode a string for safe inclusion in a single-quoted HTML attribute.
- */
-function encodeForAttr (str) {
-  return str
-    .replace(/&/g, '&amp;')
-    .replace(/'/g, '&#39;')
-    .replace(/"/g, '&quot;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
-}
