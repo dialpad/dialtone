@@ -25,69 +25,91 @@ paths:
 - Never write TODO, TBD, "Coming soon", or empty sections
 - If content isn't ready, omit the section entirely
 
-## Code Examples: Use `<code-example>`
+## Code Examples: Fenced Demo Blocks
 
-Prefer the unified `<code-example>` component. The slot content is the single source of truth — a build-time plugin auto-extracts it as the Vue code tab.
+Use fenced ` ```vue demo ` blocks for all new doc examples. A markdown-it plugin (`markdown-it-fenced-demo.js`) transforms them into `<code-example>` tags at build time, so the rendered output is identical — but the authoring experience is cleaner (no entity-encoding, no quote tracking).
 
-```html
-<!-- Default: demo + code tabs, auto-extracted -->
-<code-example>
-  <dt-notice kind="base" title="Base title" />
-</code-example>
+### Info string variants
 
-<!-- Demo only -->
-<code-example only-show="demo">
-  <dt-notice kind="base" title="Base title" />
-</code-example>
-
-<!-- Code only -->
-<code-example only-show="code">
-  <dt-notice kind="base" title="Base title" />
-</code-example>
-
-<!-- Override vueCode ONLY when the code tab genuinely differs -->
-<code-example vueCode='<dt-button disabled>Click</dt-button>'>
-  <dt-toggle v-model="isDisabled" />
-  <dt-button :disabled="isDisabled">Click</dt-button>
-</code-example>
-
-<!-- Strip a demo-only layout wrapper from the code tab -->
-<code-example>
-  <dt-stack direction="row" gap="400" data-demo-wrapper>
-    <dt-button> Place Call </dt-button>
-    <dt-button importance="outlined"> Place Call </dt-button>
-  </dt-stack>
-</code-example>
+````md
+<!-- Default: demo + code tabs -->
+```vue demo
+<dt-notice kind="base" title="Base title" />
 ```
 
-### When to use `vueCode` override
+<!-- Demo only (no code tab) -->
+```vue demo-only
+<dt-notice kind="base" title="Base title" />
+```
 
-Only add `vueCode` when the code tab must show something **genuinely different** from the slot:
+<!-- Code only (no live preview) -->
+```vue code-only
+<dt-notice kind="base" title="Base title" />
+```
+````
 
-**Valid reasons for override:**
+### Directives (HTML comments inside the fenced block)
 
-- Slot uses a **custom example wrapper** (`<example-modal>`, `<example-popover>`, `<ExampleProfileCard>`) — code expands to real component markup
-- Slot has **interactive page state** (v-model, toggles, event handlers) — code shows simplified static version
-- Slot uses **v-for with page data** — code shows single static example
-- Code uses **placeholder syntax** (`{{props}}`, `....`) for API reference
-- Slot has **demo-only styling on child elements** (e.g., `d-bgc-moderate-opaque d-p16 d-bar8` on each child to make items visible) — code shows clean API
+Directives configure the `<code-example>` output. Place them at the top of the block, before content.
 
-**NOT valid reasons (remove the vueCode):**
+| Directive | Purpose | Equivalent `<code-example>` prop |
+| --- | --- | --- |
+| `<!-- @wrapper -->` | Marks first element as demo-only layout wrapper | `data-demo-wrapper` on element |
+| `<!-- @code -->` | Separator: above = live demo, below = code tab | `vueCode='...'` |
+| `<!-- @bg classname -->` | Custom background class | `bgclass="classname"` |
+| `<!-- @class name -->` | Custom CSS class on code-example | `class="name"` |
+| `<!-- @demo-only -->` | Alias for `demo-only` info string | `only-show="demo"` |
+| `<!-- @code-only -->` | Alias for `code-only` info string | `only-show="code"` |
 
-- Slot is wrapped in a layout wrapper — use `data-demo-wrapper` to strip it from the code tab instead
-- Only difference is `class="d-w100p"` or similar layout constraint on the wrapper
+Prefer the info string for `demo-only`/`code-only`. Use the directive form when combining with other directives.
+
+### Common patterns
+
+````md
+<!-- Strip a layout wrapper from the code tab -->
+```vue demo
+<!-- @wrapper -->
+<dt-stack direction="row" gap="400">
+  <dt-button> Place Call </dt-button>
+  <dt-button importance="outlined"> Place Call </dt-button>
+</dt-stack>
+```
+
+<!-- Show different code than what renders (interactive demo vs static code) -->
+```vue demo
+<dt-toggle v-model="isDisabled" />
+<dt-button :disabled="isDisabled">Click</dt-button>
+<!-- @code -->
+<dt-button disabled>Click</dt-button>
+```
+
+<!-- Custom background -->
+```vue demo
+<!-- @bg d-bgc-primary -->
+<dt-button>Click me</dt-button>
+```
+````
+
+### When to use `<!-- @code -->` separator
+
+Only use `<!-- @code -->` when the code tab must show something **genuinely different** from the demo:
+
+**Valid reasons:**
+
+- Demo uses a **custom example wrapper** (`<example-tabs>`, `<example-modal>`) — code shows real component markup
+- Demo has **interactive page state** (v-model, toggles, event handlers) — code shows simplified static version
+- Demo uses **v-for with page data** — code shows single static example
+- Code uses **placeholder syntax** (`{props}`, `....`) for API reference
+- Demo has **demo-only styling on child elements** — code shows clean API
+
+**NOT valid reasons (drop the `<!-- @code -->`):**
+
+- Demo is wrapped in a layout wrapper — use `<!-- @wrapper -->` instead
 - Only difference is formatting, whitespace, or self-closing style
-- vueCode strips the wrapper but the inner components are identical
 
-**Never:**
+### Demo-only wrappers (`<!-- @wrapper -->`)
 
-- Use `vueCode` with an empty slot — slot must always have content
-- Self-close `<code-example />` — always use `</code-example>`
-- Put empty lines inside `<code-example>` — markdown-it splits the block at blank lines, breaking source extraction
-
-### Demo-only wrappers (`data-demo-wrapper`)
-
-When a `<code-example>` slot needs a layout wrapper (e.g., `<dt-stack direction="row">`) purely for the demo but users shouldn't copy it, add `data-demo-wrapper` to that element. The build plugin strips the wrapper from the code tab, showing only its children.
+When a demo needs a layout wrapper (e.g., `<dt-stack direction="row">`) purely for visual arrangement but users shouldn't copy it, add `<!-- @wrapper -->`. The build plugin adds `data-demo-wrapper` to the first element, stripping it from the code tab.
 
 - Use when the wrapper is purely for demo layout (direction, gap, alignment)
 - Do NOT use when the wrapper is meaningful structure users should copy (e.g., stack.md's own examples, nested layout patterns)
@@ -97,11 +119,14 @@ When a `<code-example>` slot needs a layout wrapper (e.g., `<dt-stack direction=
 - Never use raw HTML with component CSS classes (e.g., `<div class="d-card">`) — always use the Vue component (`<dt-card>`)
 - Use `<dt-stack>` for spacing wrappers — never `<div class="d-stack*">` or `<div class="d-flow*">` (deprecated)
 - Layout utility classes like `d-w100p` and `d-d-grid` on wrapper `<div>` elements are fine
-- Use `bgclass` prop for custom background: `<code-example bgclass="d-bgc-primary">`
+- Do NOT put empty lines inside fenced demo blocks — markdown-it splits the block at blank lines
+- Use `<!-- @bg classname -->` for custom background
 
-### Legacy pattern (still supported)
+### Legacy patterns (still supported)
 
-The old `<code-well-header>` + `<code-example-tabs>` pattern still works. When using it:
+**`<code-example>` tag syntax** — the underlying component that fenced blocks compile to. Both syntaxes work and can coexist. Fenced blocks are preferred for new content. Run `node scripts/migrate-code-examples.mjs --dry-run` to preview migrating existing pages.
+
+**`<code-well-header>` + `<code-example-tabs>`** — the oldest pattern. When using it:
 
 - Add `ref="descriptiveName"` to the outermost element in `<code-well-header>`
 - Bind `:htmlCode='() => $refs.refName'` — never static inline HTML strings
@@ -111,7 +136,7 @@ The old `<code-well-header>` + `<code-example-tabs>` pattern still works. When u
 
 1. No static inline HTML strings (`htmlCode='<...`)
 2. No raw HTML component classes in demo areas
-3. `vueCode` override only used when genuinely needed
+3. `<!-- @code -->` separator only used when genuinely needed
 4. Run: `node scripts/lint-doc-examples.mjs` — should pass with 0 violations
 
 ## Component Doc Pages (VuePress)

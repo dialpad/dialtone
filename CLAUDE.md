@@ -101,7 +101,7 @@ When creating or updating a component, ALL must stay in sync:
 2. **Tests** — `.test.js` using Vitest + @vue/test-utils
 3. **Storybook stories** — `.stories.js` + `.mdx`
 4. **Component docs JSON** — via `scripts/build-dialtone-vue-docs.mjs`
-5. **VuePress documentation** — `apps/dialtone-documentation/docs/`, sidebar in `_data/site-nav.json`
+5. **VuePress documentation** — `apps/dialtone-documentation/docs/`, sidebar in `_data/site-nav.json`. Use fenced ` ```vue demo ` blocks for code examples (see `.claude/rules/documentation-writing.md`)
 6. **MCP server data** — `packages/dialtone-mcp-server/src/data.ts`
 
 ## Release Process
@@ -154,3 +154,5 @@ All tracking data lives in `.claude/tsc-cache/<session>/` (gitignored):
 | `packages/dialtone-css/gulpfile.cjs` | CSS build pipeline |
 | `packages/dialtone-tokens/tokens/$metadata.json` | Token sets build order |
 | `apps/dialtone-documentation/docs/_data/site-nav.json` | Sidebar navigation |
+| `apps/dialtone-documentation/docs/.vuepress/plugins/markdown-it-fenced-demo.js` | Fenced ` ```vue demo ` → `<code-example>` transform |
+| `scripts/migrate-code-examples.mjs` | Migration script: `<code-example>` → fenced demo syntax |
