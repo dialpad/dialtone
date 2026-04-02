@@ -151,4 +151,71 @@ describe('transformFencedDemo', () => {
     assert.ok(result.includes('only-show="demo"'));
     assert.ok(result.includes('data-demo-wrapper'));
   });
+
+  it('handles @wrapper combined with @code separator', () => {
+    const input = [
+      '<!-- @wrapper -->',
+      '<dt-stack direction="row">',
+      '  <dt-button :loading="loading">Call</dt-button>',
+      '</dt-stack>',
+      '<!-- @code -->',
+      '<dt-button loading>Call</dt-button>',
+      '',
+    ].join('\n');
+    const result = transformFencedDemo(input);
+    // Wrapper applied to slot content
+    assert.ok(result.includes('<dt-stack data-demo-wrapper direction="row">'));
+    // Source-code has the clean code (below @code), no wrapper
+    assert.ok(result.includes('source-code=\''));
+    assert.ok(result.includes('&lt;dt-button loading&gt;'));
+    assert.ok(!result.includes('<!-- @wrapper -->'));
+    assert.ok(!result.includes('<!-- @code -->'));
+  });
+
+  it('handles empty fenced block', () => {
+    const result = transformFencedDemo('\n');
+    assert.equal(result, '<code-example>\n\n</code-example>');
+  });
+
+  it('handles @demo-only combined with @code (demo-only wins, code ignored)', () => {
+    const input = [
+      '<!-- @demo-only -->',
+      '<dt-button>Live demo</dt-button>',
+      '<!-- @code -->',
+      '<dt-button>Code tab</dt-button>',
+      '',
+    ].join('\n');
+    const result = transformFencedDemo(input);
+    // Both only-show and source-code are emitted; component handles precedence
+    assert.ok(result.includes('only-show="demo"'));
+    assert.ok(result.includes('<dt-button>Live demo</dt-button>'));
+  });
+
+  it('only uses the first @code separator', () => {
+    const input = [
+      '<dt-button>Demo</dt-button>',
+      '<!-- @code -->',
+      '<dt-button>First code</dt-button>',
+      '<!-- @code -->',
+      '<dt-button>Second code</dt-button>',
+      '',
+    ].join('\n');
+    const result = transformFencedDemo(input);
+    // Second <!-- @code --> is NOT a directive — it's regular content in the code tab
+    assert.ok(result.includes('<dt-button>Demo</dt-button>'));
+    assert.ok(result.includes('&lt;dt-button&gt;First code&lt;/dt-button&gt;'));
+    assert.ok(result.includes('&lt;!-- @code --&gt;'));
+    assert.ok(result.includes('&lt;dt-button&gt;Second code&lt;/dt-button&gt;'));
+  });
+
+  it('handles @code with empty content above', () => {
+    const input = [
+      '<!-- @code -->',
+      '<dt-button>Code only</dt-button>',
+      '',
+    ].join('\n');
+    const result = transformFencedDemo(input);
+    assert.ok(result.includes('source-code=\''));
+    assert.ok(result.includes('&lt;dt-button&gt;Code only&lt;/dt-button&gt;'));
+  });
 });
