@@ -58,7 +58,7 @@ export function parseDirectives (lines, infoMode = 'demo') {
     } else if (trimmed === '<!-- @code-only -->') {
       onlyShow = 'code';
       directiveLines.add(i);
-    } else if (trimmed === '<!-- @code -->') {
+    } else if (trimmed === '<!-- @code -->' && codeSeparatorIndex === -1) {
       codeSeparatorIndex = i;
       directiveLines.add(i);
     } else if (trimmed === '<!-- @wrapper -->') {

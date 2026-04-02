@@ -53,15 +53,22 @@ export default function fencedDemoPlugin (md) {
  */
 export function transformFencedDemo (raw, infoMode = 'demo') {
   const lines = raw.split('\n');
+  const directives = parseDirectives(lines, infoMode);
 
-  // --- Parse directives (info string takes precedence, directives can override) ---
-  const { onlyShow, bgclass, cssClass, codeSeparatorIndex, hasWrapper, directiveLines } =
-    parseDirectives(lines, infoMode);
+  let { slotContent, sourceCode } = splitContent(lines, directives);
 
-  // --- Build slot content and optional source-code ---
-  let slotContent;
-  let sourceCode = null;
+  if (directives.hasWrapper) {
+    slotContent = addDataDemoWrapper(slotContent);
+  }
 
+  return buildCodeExampleTag(directives, slotContent, sourceCode);
+}
+
+/**
+ * Split lines into slot content (demo) and optional source code (code tab)
+ * based on the @code separator position.
+ */
+function splitContent (lines, { codeSeparatorIndex, directiveLines }) {
   if (codeSeparatorIndex !== -1) {
     const above = [];
     const below = [];
@@ -72,19 +79,20 @@ export function transformFencedDemo (raw, infoMode = 'demo') {
       if (pastSeparator) below.push(lines[i]);
       else above.push(lines[i]);
     }
-    slotContent = trimBlankLines(above.join('\n'));
-    sourceCode = trimBlankLines(below.join('\n'));
-  } else {
-    const content = lines.filter((_, i) => !directiveLines.has(i));
-    slotContent = trimBlankLines(content.join('\n'));
+    return {
+      slotContent: trimBlankLines(above.join('\n')),
+      sourceCode: trimBlankLines(below.join('\n')),
+    };
   }
 
-  // --- Apply @wrapper ---
-  if (hasWrapper) {
-    slotContent = addDataDemoWrapper(slotContent);
-  }
+  const content = lines.filter((_, i) => !directiveLines.has(i));
+  return { slotContent: trimBlankLines(content.join('\n')), sourceCode: null };
+}
 
-  // --- Build <code-example> tag ---
+/**
+ * Build the <code-example> HTML tag string from parsed directives and content.
+ */
+function buildCodeExampleTag ({ onlyShow, bgclass, cssClass }, slotContent, sourceCode) {
   const attrs = [];
   if (onlyShow) attrs.push(`only-show="${onlyShow}"`);
   if (bgclass) attrs.push(`bgclass="${encodeForAttr(bgclass)}"`);
