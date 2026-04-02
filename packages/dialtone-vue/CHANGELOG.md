@@ -1,3 +1,10 @@
+## [3.218.4](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.218.3...dialtone-vue/v3.218.4) (2026-04-02)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DP-179946 fix suggestion list positioning ([#1155](https://github.com/dialpad/dialtone/issues/1155)) ([fdbe45b](https://github.com/dialpad/dialtone/commit/fdbe45bb61ef2264f7535e6e1d2325ba641d445d))
+
 ## [3.218.3](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.218.2...dialtone-vue/v3.218.3) (2026-03-31)
 
 
