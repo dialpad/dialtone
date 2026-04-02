@@ -87,9 +87,13 @@ function parseOpeningTag (content, startIndex) {
   const vueCodeStart = tagText.indexOf('vueCode=\'');
   if (vueCodeStart !== -1) {
     const valueStart = vueCodeStart + 'vueCode=\''.length;
-    // Find matching closing single quote
+    // Find matching closing single quote (track double-quote state because
+    // vueCode content can contain ' inside "..." Vue bindings)
     let j = valueStart;
-    while (j < tagText.length && tagText[j] !== '\'') {
+    let inDQ = false;
+    while (j < tagText.length) {
+      if (tagText[j] === '"') inDQ = !inDQ;
+      else if (tagText[j] === '\'' && !inDQ) break;
       j++;
     }
     attrs.vueCode = tagText.slice(valueStart, j);

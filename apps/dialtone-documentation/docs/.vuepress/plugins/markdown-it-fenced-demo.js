@@ -87,9 +87,10 @@ export function transformFencedDemo (raw, infoMode = 'demo') {
   // --- Build <code-example> tag ---
   const attrs = [];
   if (onlyShow) attrs.push(`only-show="${onlyShow}"`);
-  if (bgclass) attrs.push(`bgclass="${bgclass}"`);
-  if (cssClass) attrs.push(`class="${cssClass}"`);
+  if (bgclass) attrs.push(`bgclass="${encodeForAttr(bgclass)}"`);
+  if (cssClass) attrs.push(`class="${encodeForAttr(cssClass)}"`);
   if (sourceCode) {
+    // Single-quoted because source-code contains HTML with double quotes
     attrs.push(`source-code='${encodeForAttr(sourceCode)}'`);
   }
 
