@@ -8,9 +8,9 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-modal--defau
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=4454-10944
 keywords: ["dialog", "popup", "overlay", "lightbox", "d-modal", "DtModal", "dt-modal", "alert dialog", "sheet"]
 ---
-<code-example only-show="demo">
-  <example-modal />
-</code-example>
+```vue demo-only
+<example-modal />
+```
 
 <!-- <component-combinator component-name="DtModal" /> -->
 
@@ -67,7 +67,9 @@ Although highly versatile, this doesn't mean modal dialogs are fit for all purpo
 
 ### Base Style
 
-<code-example vueCode='
+```vue demo
+<example-modal />
+<!-- @code -->
 <dt-modal
   title="Example title"
   :show="isOpen"
@@ -97,15 +99,15 @@ Although highly versatile, this doesn't mean modal dialogs are fit for all purpo
 >
   Click to open
 </dt-button>
-'>
-  <example-modal />
-</code-example>
+```
 
 ### Fixed Header and Footer
 
 This is the default behavior that adds the scroll automatically in the modal content and leaves the header and footer fixed.
 
-<code-example vueCode='
+```vue demo
+<example-modal fixed-header-footer :copy="fixedHeaderFooterCopy" />
+<!-- @code -->
 <dt-modal
   title="Example title"
   :show="isOpen"
@@ -137,15 +139,15 @@ This is the default behavior that adds the scroll automatically in the modal con
 >
   Click to open
 </dt-button>
-'>
-  <example-modal fixed-header-footer :copy="fixedHeaderFooterCopy" />
-</code-example>
+```
 
 ### Danger
 
 A modal style for destructive or irreversible actions.
 
-<code-example vueCode='
+```vue demo
+<example-modal kind="danger" />
+<!-- @code -->
 <dt-modal
   title="Example title"
   :show="isOpen"
@@ -177,15 +179,15 @@ A modal style for destructive or irreversible actions.
 >
   Click to open
 </dt-button>
-'>
-  <example-modal kind="danger" />
-</code-example>
+```
 
 ### Full Screen
 
 To make this modal take up as much of the screen as possible.
 
-<code-example vueCode='
+```vue demo
+<example-modal size="full" />
+<!-- @code -->
 <dt-modal
   title="Example title"
   :show="isOpen"
@@ -216,15 +218,23 @@ To make this modal take up as much of the screen as possible.
 >
   Click to open
 </dt-button>
-'>
-  <example-modal size="full" />
-</code-example>
+```
 
 ### Has Banner
 
 When there is a need of more context information regarding the content of the Modal
 
-<code-example vueCode='
+```vue demo
+<dt-stack direction="row" gap="200" align="end">
+  <dt-select-menu
+    v-model="selectedBannerKind"
+    label="Kind of Banner"
+    :size="300"
+    :options="bannerKinds"
+  />
+  <example-modal kind="default" :banner-kind="selectedBannerKind" banner-title="This banner can have different kinds." />
+</dt-stack>
+<!-- @code -->
 <dt-modal
   title="Example title"
   :show="isOpen"
@@ -256,17 +266,7 @@ When there is a need of more context information regarding the content of the Mo
 >
   Click to open
 </dt-button>
-'>
-  <dt-stack direction="row" gap="200" align="end">
-    <dt-select-menu
-      v-model="selectedBannerKind"
-      label="Kind of Banner"
-      :size="300"
-      :options="bannerKinds"
-    />
-    <example-modal kind="default" :banner-kind="selectedBannerKind" banner-title="This banner can have different kinds." />
-  </dt-stack>
-</code-example>
+```
 
 ### Custom Header and Content
 
@@ -276,7 +276,28 @@ In addition to the footer, custom elements can be inserted into the header and b
 
 **Please note:** supplied header or body slots will take the place of any provided "title" or "copy" text, respectively.
 
-<code-example vueCode='
+```vue demo
+<div>
+  <dt-modal
+    :show="isOpen"
+    @update:show="updateShow"
+  >
+    <template #header>
+      <dt-stack direction="row" align="center" justify="center" class="d-p-150 d-bgc-purple-100">
+        <div>Custom header</div>
+      </dt-stack>
+    </template>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-400 d-bgc-gold-200">
+      <h2>Custom content</h2>
+    </dt-stack>
+  </dt-modal>
+  <dt-button
+    @click="openModal"
+  >
+    Click to open
+  </dt-button>
+</div>
+<!-- @code -->
 <dt-modal
   :show="isOpen"
   @update:show="updateShow"
@@ -290,49 +311,28 @@ In addition to the footer, custom elements can be inserted into the header and b
     <h2>Custom content</h2>
   </dt-stack>
 </dt-modal>
-'>
-  <div>
-    <dt-modal
-      :show="isOpen"
-      @update:show="updateShow"
-    >
-      <template #header>
-        <dt-stack direction="row" align="center" justify="center" class="d-p-150 d-bgc-purple-100">
-          <div>Custom header</div>
-        </dt-stack>
-      </template>
-      <dt-stack direction="row" align="center" justify="center" class="d-p-400 d-bgc-gold-200">
-        <h2>Custom content</h2>
-      </dt-stack>
-    </dt-modal>
-    <dt-button
-      @click="openModal"
-    >
-      Click to open
-    </dt-button>
-  </div>
-</code-example>
+```
 
 ## Content Mode
 
 Modal content renders outside the DOM tree. Use the `contentMode` prop to apply color mode (invert, light, dark) to the positioned content. See [Positioned Components](/components/mode-island.html#positioned-components) for details.
 
-<code-example vueCode='
+```vue demo
+<div>
+  <dt-button @click="invertedModalOpen = true">Open Inverted Modal</dt-button>
+  <dt-modal
+    content-mode="invert"
+    title="Inverted Modal"
+    copy="This modal's content is in the inverted mode."
+    :show="invertedModalOpen"
+    @update:show="invertedModalOpen = $event"
+  />
+</div>
+<!-- @code -->
 <dt-modal content-mode="invert">...</dt-modal>
 <dt-modal content-mode="dark">...</dt-modal>
 <dt-modal content-mode="light">...</dt-modal>
-'>
-  <div>
-    <dt-button @click="invertedModalOpen = true">Open Inverted Modal</dt-button>
-    <dt-modal
-      content-mode="invert"
-      title="Inverted Modal"
-      copy="This modal's content is in the inverted mode."
-      :show="invertedModalOpen"
-      @update:show="invertedModalOpen = $event"
-    />
-  </div>
-</code-example>
+```
 
 ## Vue API
 

@@ -363,7 +363,6 @@ html body {
   inset-block-start: var(--dt-layout-100);
   // TODO: redo 😜
   block-size: calc(100vh - var(--dt-layout-100));
-  // border-inline-end: var(--dt-size-100) solid var(--dt-shell-color-border-subtle);
 
   &__list {
     padding: var(--dt-spacing-300) 0 calc(var(--dt-spacing-100) * 12) var(--dt-spacing-200);
@@ -389,9 +388,8 @@ html body {
   // the div is hard coded into vuepress
   > table:not([class]) {
     color: var(--dt-color-foreground-tertiary);
-    border: 1px solid var(--dt-color-border-default);
     border-collapse: collapse;
-    margin: var(--dt-size-500) 0;
+    margin: var(--dt-spacing-200) 0;
     inline-size: 100%;
     font: var(--dt-text-body-sm);
 
@@ -405,14 +403,18 @@ html body {
 
     :where(th, td) {
       text-align: start;
-      border: 1px solid var(--dt-color-border-default);
+      border-block-end: var(--dt-size-border-100) solid var(--dt-color-border-default);
       border-inline: 0;
-      padding: var(--dt-size-500);
+      padding: var(--dt-spacing-200);
       vertical-align: baseline;
     }
 
     :where(thead th) {
-      border-block-end-width: 3px;
+      border-block-end-width: var(--dt-size-border-200);
+    }
+
+    :where(tbody tr:last-of-type) :where(td, th) {
+      border-block-end: none;
     }
 
     :where(code, kbd) {
@@ -422,6 +424,7 @@ html body {
     }
   }
 }
+
 
 a.header-anchor {
   float: inline-start;
@@ -519,9 +522,9 @@ a.header-anchor {
 
 :where(:is(.d-docsite--paragraph, .d-docsite--unordered-list, .d-docsite--ordered-list, .d-docsite--list-element, .d-docsite--preview-header) > code) {
   font: var(--dt-text-code-sm);
-  padding: var(--dt-size-200) var(--dt-size-300);
+  padding: var(--dt-spacing-25) var(--dt-spacing-50);
   color: var(--dt-color-blue-800);
-  border-radius: var(--dt-size-200);
+  border-radius: var(--dt-size-radius-200);
   border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
   user-select: all;
 }
@@ -886,7 +889,7 @@ a.header-anchor {
   // UI Kits variant: keeps description visible and stays 2-column longer
   &--ui-kits {
     .dialtone-wall__details {
-      gap: var(--dt-size-500);
+      gap: var(--dt-spacing-200);
     }
 
     .dialtone-wall__description {

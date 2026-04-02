@@ -15,31 +15,31 @@ keywords: ["emoticon","smiley","d-emoji","DtEmoji","dt-emoji"]
 
 ### With Shortcode
 
-<code-example>
-  <dt-emoji code=":smile:" size="500" />
-</code-example>
+```vue demo
+<dt-emoji code=":smile:" size="500" />
+```
 
 ### With Unicode
 
-<code-example>
-  <dt-emoji code="😉" />
-</code-example>
+```vue demo
+<dt-emoji code="😉" />
+```
 
 ### With Skin Tone
 
-<code-example>
-  <dt-emoji code=":raised_hand_tone4:" />
-</code-example>
+```vue demo
+<dt-emoji code=":raised_hand_tone4:" />
+```
 
 ### Sizes
 
-<code-example vueCode='
+```vue demo
+<dt-stack direction="row" gap="100" align="center">
+  <dt-emoji v-for="size in sizes" :size="size" code=":smile:" />
+</dt-stack>
+<!-- @code -->
 <dt-emoji size="100|200|300|400|500|600|700|800" code=":smile:" />
-'>
-  <dt-stack direction="row" gap="100" align="center">
-    <dt-emoji v-for="size in sizes" :size="size" code=":smile:" />
-  </dt-stack>
-</code-example>
+```
 
 ## Vue API
 
@@ -74,9 +74,9 @@ setCustomEmojiUrl('https://my.example.website.com/images/icons/emoji/');
 setCustomEmojiJson(customEmojiJson);
 ```
 
-<code-example>
-  <dt-emoji code=":shipit:" />
-</code-example>
+```vue demo
+<dt-emoji code=":shipit:" />
+```
 
 In this example, the emoji with the :shipit: shortcode from the custom emoji provided will be rendered. Take into account that a custom emoji can only be referenced by the shortcode as no Unicode character is associated with it.
 

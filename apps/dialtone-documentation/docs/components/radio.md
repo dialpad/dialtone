@@ -44,88 +44,90 @@ Radio buttons are a common way to allow users to make a single selection from a 
 
 ### Base Styles
 
-<code-example>
-  <dt-stack gap="100" data-demo-wrapper>
-    <dt-radio name="Value" value="Value" label="Radio label"/>
-    <dt-radio name="Disabled" value="Disabled" label="Radio label thats been disabled" disabled/>
-    <dt-radio name="CheckedDisabled" value="Checked" label="Radio label thats been disabled & checked" :model-value="true" disabled />
-  </dt-stack>
-</code-example>
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="100">
+  <dt-radio name="Value" value="Value" label="Radio label"/>
+  <dt-radio name="Disabled" value="Disabled" label="Radio label thats been disabled" disabled/>
+  <dt-radio name="CheckedDisabled" value="Checked" label="Radio label thats been disabled & checked" :model-value="true" disabled />
+</dt-stack>
+```
 
 ### With Description Text
 
-<code-example>
-  <dt-radio-group legend="Advanced missed call routing" model-value="">
-    <dt-radio name="ValueWDesc" value="Value" label="To voicemail" description="So they can hear your voice"/>
-    <dt-radio name="DisabledWDesc" value="Disabled" label="Disabled" description="With Description" disabled />
-  </dt-radio-group>
-</code-example>
+```vue demo
+<dt-radio-group legend="Advanced missed call routing" model-value="">
+  <dt-radio name="ValueWDesc" value="Value" label="To voicemail" description="So they can hear your voice"/>
+  <dt-radio name="DisabledWDesc" value="Disabled" label="Disabled" description="With Description" disabled />
+</dt-radio-group>
+```
 
 ### With Validation States
 
-<code-example>
-  <dt-radio-group legend="Advanced missed call routing" model-value="">
-    <dt-radio
-      name="ValidationMessages"
-      value="Validation Message Warning"
-      label="To voicemail"
-      validation-state="warning"
-      :messages="[{ message: `So they can hear your voice`, type: `warning` }]"
-    />
-    <dt-radio
-      name="ValidationMessages"
-      value="Validation Message Error"
-      label="To a message (no voicemail)"
-      validation-state="error"
-      :messages="[{ message: `Because they probably don't need to leave a message anyway.`, type: `error` }]"
-    />
-    <dt-radio
-      name="ValidationMessages"
-      value="Validation Message Success"
-      label="To a team member or room phone"
-      validation-state="success"
-      :messages="[{ message: `Because someone else might be able to talk to them.`, type: `success` }]"
-    />
-  </dt-radio-group>
-</code-example>
+```vue demo
+<dt-radio-group legend="Advanced missed call routing" model-value="">
+  <dt-radio
+    name="ValidationMessages"
+    value="Validation Message Warning"
+    label="To voicemail"
+    validation-state="warning"
+    :messages="[{ message: `So they can hear your voice`, type: `warning` }]"
+  />
+  <dt-radio
+    name="ValidationMessages"
+    value="Validation Message Error"
+    label="To a message (no voicemail)"
+    validation-state="error"
+    :messages="[{ message: `Because they probably don't need to leave a message anyway.`, type: `error` }]"
+  />
+  <dt-radio
+    name="ValidationMessages"
+    value="Validation Message Success"
+    label="To a team member or room phone"
+    validation-state="success"
+    :messages="[{ message: `Because someone else might be able to talk to them.`, type: `success` }]"
+  />
+</dt-radio-group>
+```
 
 ### With Slotted Label
 
-<code-example>
-  <dt-radio
-    name="ValueWSlot"
-    value="Value"
-  >
-    With Slotted Label
-  </dt-radio>
-</code-example>
+```vue demo
+<dt-radio
+  name="ValueWSlot"
+  value="Value"
+>
+  With Slotted Label
+</dt-radio>
+```
 
 ### With Slotted Description
 
-<code-example>
-  <dt-radio
-    name="ValueWSlottedDescription"
-    value="Value"
-    label="With"
-  >
-    <template #description>
-      Slotted Description
-    </template>
-  </dt-radio>
-</code-example>
+```vue demo
+<dt-radio
+  name="ValueWSlottedDescription"
+  value="Value"
+  label="With"
+>
+  <template #description>
+    Slotted Description
+  </template>
+</dt-radio>
+```
 
 ## Label size
 
 Use the `label-size` prop to override the default label size.
 
-<code-example>
-  <dt-stack gap="100" data-demo-wrapper>
-    <dt-radio name="labelSizeExample1" value="xs" label="Extra small label" :label-size="100" checked />
-    <dt-radio name="labelSizeExample1" value="sm" label="Small label" :label-size="200" />
-    <dt-radio name="labelSizeExample1" value="md" label="Medium label (default)" :label-size="300" />
-    <dt-radio name="labelSizeExample1" value="lg" label="Large label" :label-size="400" />
-  </dt-stack>
-</code-example>
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="100">
+  <dt-radio name="labelSizeExample1" value="xs" label="Extra small label" :label-size="100" checked />
+  <dt-radio name="labelSizeExample1" value="sm" label="Small label" :label-size="200" />
+  <dt-radio name="labelSizeExample1" value="md" label="Medium label (default)" :label-size="300" />
+  <dt-radio name="labelSizeExample1" value="lg" label="Large label" :label-size="400" />
+</dt-stack>
+```
 
 ## Classes
 

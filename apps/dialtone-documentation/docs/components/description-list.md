@@ -14,53 +14,57 @@ keywords: ["definition list", "key value", "dl", "d-description-list", "DtDescri
 
 ### Default
 
-<code-example>
-  <div class="d-w-500" data-demo-wrapper>
-    <dt-description-list
-      gap="100"
-      :items="items"
-      direction="row"
-    />
-  </div>
-</code-example>
+```vue demo
+<!-- @wrapper -->
+<div class="d-w-500">
+  <dt-description-list
+    gap="100"
+    :items="items"
+    direction="row"
+  />
+</div>
+```
 
 ### Column Direction
 
-<code-example>
-  <div class="d-w-500" data-demo-wrapper>
-    <dt-description-list
-      gap="100"
-      :items="items"
-      direction="column"
-    />
-  </div>
-</code-example>
+```vue demo
+<!-- @wrapper -->
+<div class="d-w-500">
+  <dt-description-list
+    gap="100"
+    :items="items"
+    direction="column"
+  />
+</div>
+```
 
 ### Long Text
 
-<code-example>
-  <div class="d-w-500" data-demo-wrapper>
-    <dt-description-list
-      gap="100"
-      :items="longTextItems"
-      direction="row"
-    />
-  </div>
-</code-example>
+```vue demo
+<!-- @wrapper -->
+<div class="d-w-500">
+  <dt-description-list
+    gap="100"
+    :items="longTextItems"
+    direction="row"
+  />
+</div>
+```
 
 ### With Term and Description Styles
 
-<code-example>
-  <div class="d-w-500" data-demo-wrapper>
-    <dt-description-list
-      gap="100"
-      :items="items"
-      direction="row"
-      :termClass="[`d-fc-critical`, `d-fw-bold`]"
-      :descriptionClass="[`d-fc-success`]"
-    />
-  </div>
-</code-example>
+```vue demo
+<!-- @wrapper -->
+<div class="d-w-500">
+  <dt-description-list
+    gap="100"
+    :items="items"
+    direction="row"
+    :termClass="[`d-fc-critical`, `d-fw-bold`]"
+    :descriptionClass="[`d-fc-success`]"
+  />
+</div>
+```
 
 ## Vue API
 

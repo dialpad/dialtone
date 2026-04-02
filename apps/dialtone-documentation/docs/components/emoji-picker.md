@@ -13,7 +13,27 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-emoji-picker
 
 ### Default
 
-<code-example vueCode='
+```vue demo
+<dt-emoji-picker
+  skin-tone="Default"
+  skin-selector-button-tooltip-label="Change default skin tone"
+  :tab-set-labels="[
+    'Most recently used',
+    'Smileys and people',
+    'Nature',
+    'Food',
+    'Activity',
+    'Travel',
+    'Objects',
+    'Symbols',
+    'Flags',
+  ]"
+  :recently-used-emojis="recentlyUsedEmojis"
+  search-results-label="Search results"
+  search-no-results-label="No results"
+  search-placeholder-label="Search..."
+/>
+<!-- @code -->
 <dt-emoji-picker
   :skin-tone="Default"
   skin-selector-button-tooltip-label="Change default skin tone"
@@ -40,75 +60,55 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-emoji-picker
   @skin-tone="skinTone = $event"
   @selected-emoji="selectedEmoji"
 />
-'>
-  <dt-emoji-picker
-    skin-tone="Default"
-    skin-selector-button-tooltip-label="Change default skin tone"
-    :tab-set-labels="[
-      'Most recently used',
-      'Smileys and people',
-      'Nature',
-      'Food',
-      'Activity',
-      'Travel',
-      'Objects',
-      'Symbols',
-      'Flags',
-    ]"
-    :recently-used-emojis="recentlyUsedEmojis"
-    search-results-label="Search results"
-    search-no-results-label="No results"
-    search-placeholder-label="Search..."
-  />
-</code-example>
+```
 
 ### With Popover
 
-<code-example>
-  <dt-popover
-    :open="emojiPickerOpened"
-    initial-focus-element="#searchInput"
-    padding="none"
-    @opened="(open) => { emojiPickerOpened = open }"
-  >
-    <template #anchor>
-      <dt-button
-        :size="200"
-        circle
-        importance="clear"
-        @click="toggleEmojiPicker"
-      >
-        <template #startIcon>
-          <dt-icon
-            name="satisfied"
-            size="300"
-          />
-        </template>
-      </dt-button>
-    </template>
-    <template #content>
-      <dt-emoji-picker
-        skin-tone="Default"
-        skin-selector-button-tooltip-label="Change default skin tone"
-        :tab-set-labels="[
-          'Most recently used',
-          'Smileys and people',
-          'Nature',
-          'Food',
-          'Activity',
-          'Travel',
-          'Objects',
-          'Symbols',
-          'Flags',
-        ]"
-        :recently-used-emojis="recentlyUsedEmojis"
-        search-results-label="Search results"
-        search-no-results-label="No results"
-        search-placeholder-label="Search..."
-      />
-    </template>
-  </dt-popover>
-</code-example>
+```vue demo
+<dt-popover
+  :open="emojiPickerOpened"
+  initial-focus-element="#searchInput"
+  padding="none"
+  @opened="(open) => { emojiPickerOpened = open }"
+>
+  <template #anchor>
+    <dt-button
+      :size="200"
+      circle
+      importance="clear"
+      @click="toggleEmojiPicker"
+    >
+      <template #startIcon>
+        <dt-icon
+          name="satisfied"
+          size="300"
+        />
+      </template>
+    </dt-button>
+  </template>
+  <template #content>
+    <dt-emoji-picker
+      skin-tone="Default"
+      skin-selector-button-tooltip-label="Change default skin tone"
+      :tab-set-labels="[
+        'Most recently used',
+        'Smileys and people',
+        'Nature',
+        'Food',
+        'Activity',
+        'Travel',
+        'Objects',
+        'Symbols',
+        'Flags',
+      ]"
+      :recently-used-emojis="recentlyUsedEmojis"
+      search-results-label="Search results"
+      search-no-results-label="No results"
+      search-placeholder-label="Search..."
+    />
+  </template>
+</dt-popover>
+```
 
 ## Vue API
 

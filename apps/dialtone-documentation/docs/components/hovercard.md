@@ -11,7 +11,9 @@ keywords: ["hover tooltip", "popover", "card overlay", "d-hovercard", "DtHoverca
 
 The hovercard will appear upon the mouse entering the anchor, with a delay of 300 milliseconds. It will remain open as long as the mouse cursor is over either the open card or the anchor.
 
-<code-example vueCode='
+```vue demo
+<example-hovercard />
+<!-- @code -->
 <dt-hovercard placement="bottom-start">
   <template #anchor>
     <dt-button kind="muted" importance="outlined">
@@ -28,9 +30,7 @@ The hovercard will appear upon the mouse entering the anchor, with a delay of 30
     <div>Footer</div>
   </template>
 </dt-hovercard>
-'>
-  <example-hovercard />
-</code-example>
+```
 
 <!-- <component-combinator component-name="DtHovercard" /> -->
 
@@ -40,30 +40,30 @@ The hovercard will appear upon the mouse entering the anchor, with a delay of 30
 
 After opening one hovercard, moving to another skips the entrance delay — a "warm-up" pattern for faster navigation between targets.
 
-<code-example only-show="demo">
-  <dt-stack direction="row" gap="200">
-    <example-hovercard v-for="data in exampleData" :label="data.label" :content="data.content" />
-  </dt-stack>
-</code-example>
+```vue demo-only
+<dt-stack direction="row" gap="200">
+  <example-hovercard v-for="data in exampleData" :label="data.label" :content="data.content" />
+</dt-stack>
+```
 
 ## Content Mode
 
 Hovercard content renders outside the DOM tree. Use the `contentMode` prop to apply color mode (invert, light, dark) to the positioned content. See [Positioned Components](/components/mode-island.html#positioned-components) for details.
 
-<code-example vueCode='
+```vue demo
+<dt-hovercard content-mode="invert" placement="bottom-start">
+  <template #anchor>
+    <dt-button :size="200" kind="muted" importance="outlined">Hover for Inverted Hovercard</dt-button>
+  </template>
+  <template #content>
+    <dt-text as="p">This hovercard content is in the <dt-text strength="strong">inverted</dt-text> mode.</dt-text>
+  </template>
+</dt-hovercard>
+<!-- @code -->
 <dt-hovercard content-mode="invert">...</dt-hovercard>
 <dt-hovercard content-mode="dark">...</dt-hovercard>
 <dt-hovercard content-mode="light">...</dt-hovercard>
-'>
-  <dt-hovercard content-mode="invert" placement="bottom-start">
-    <template #anchor>
-      <dt-button :size="200" kind="muted" importance="outlined">Hover for Inverted Hovercard</dt-button>
-    </template>
-    <template #content>
-      <dt-text as="p">This hovercard content is in the <dt-text strength="strong">inverted</dt-text> mode.</dt-text>
-    </template>
-  </dt-hovercard>
-</code-example>
+```
 
 ## Vue API
 

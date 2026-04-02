@@ -19,30 +19,30 @@ Validation messages are typically paired with an input element. They are current
 
 ### Success / Positive
 
-<code-example>
-  <dt-validation-messages
-    id="sample--02"
-    :validationMessages='[{"message":"Positive validation message","type":"success"}]'
-  />
-</code-example>
+```vue demo
+<dt-validation-messages
+  id="sample--02"
+  :validationMessages='[{"message":"Positive validation message","type":"success"}]'
+/>
+```
 
 ### Critical / Error
 
-<code-example>
-  <dt-validation-messages
-    id="sample--03"
-    :validationMessages='[{"message":"Critical validation message","type":"error"}]'
-  />
-</code-example>
+```vue demo
+<dt-validation-messages
+  id="sample--03"
+  :validationMessages='[{"message":"Critical validation message","type":"error"}]'
+/>
+```
 
 ### Warning
 
-<code-example>
-  <dt-validation-messages
-    id="sample--04"
-    :validationMessages='[{"message":"Warning validation message","type":"warning"}]'
-  />
-</code-example>
+```vue demo
+<dt-validation-messages
+  id="sample--04"
+  :validationMessages='[{"message":"Warning validation message","type":"warning"}]'
+/>
+```
 
 ## Vue API
 

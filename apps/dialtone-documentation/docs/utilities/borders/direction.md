@@ -83,7 +83,7 @@ Use `d-b{t|r|b|l|x|y}` to add a border to only specific sides of your element.
             border: var(--dt-size-border-100) solid !important;
           </span>
           <span v-else>
-            border-{{ i === 'top' ? 'block-start' : i === 'bottom' ? 'block-end' : i === 'left' ? 'inline-start' : i === 'right' ? 'inline-end' : i }}: var(--dt-size-100) solid !important;
+            border-{{ i === 'top' ? 'block-start' : i === 'bottom' ? 'block-end' : i === 'left' ? 'inline-start' : i === 'right' ? 'inline-end' : i }}: var(--dt-size-border-100) solid !important;
           </span>
         </td>
       </tr>

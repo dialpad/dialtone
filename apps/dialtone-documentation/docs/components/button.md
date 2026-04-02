@@ -317,6 +317,7 @@ If you have existing `<a class="d-btn">` or `<router-link class="d-btn">` workar
 >
   Link Text
 </a>
+
 <!-- After: DtButton with href prop -->
 <dt-button
   href="<https://example.com>"
@@ -337,6 +338,7 @@ If you have existing `<a class="d-btn">` or `<router-link class="d-btn">` workar
 >
   Join Room
 </router-link>
+
 <!-- After: DtButton with to prop -->
 <dt-button :to="roomPath" :size="200">
   Join Room
@@ -716,39 +718,6 @@ The width of the button remains determined by the length of the label, which is 
 </dt-stack>
 <!-- @code -->
 <dt-button loading> Place Call </dt-button>
-<dt-button v-dt-tooltip="`Tooltip`" loading>
-  <template #startIcon="{ iconSize }">
-    <dt-icon
-      name="phone"
-      :size="iconSize"
-    />
-  </template>
-</dt-button>
-<dt-button v-dt-tooltip="`Tooltip`" circle loading>
-  <template #startIcon="{ iconSize }">
-    <dt-icon
-      name="phone"
-      :size="iconSize"
-    />
-  </template>
-</dt-button>
-<dt-button kind="muted" importance="outlined" loading> Place Call </dt-button>
-<dt-button kind="muted" importance="outlined" v-dt-tooltip="`Tooltip`" loading>
-  <template #startIcon="{ iconSize }">
-    <dt-icon
-      name="phone"
-      :size="iconSize"
-    />
-  </template>
-</dt-button>
-<dt-button kind="muted" importance="outlined" v-dt-tooltip="`Tooltip`" circle loading>
-  <template #startIcon="{ iconSize }">
-    <dt-icon
-      name="phone"
-      :size="iconSize"
-    />
-  </template>
-</dt-button>
 ```
 
 ### With label

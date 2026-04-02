@@ -14,27 +14,29 @@ keywords: ["data table", "grid", "rows", "d-table", "DtTable", "dt-table", "data
 
 ### Base Style
 
-<code-example bgclass="d-bgc-primary" class="d-d-block">
-  <table class="d-table dialtone-doc-table">
-    <caption class="d-table__caption">Office List</caption>
-    <thead>
-      <tr>
-        <th scope="col">Office</th>
-        <th scope="col">Country</th>
-        <th scope="col" width="10%">Employees</th>
-        <th scope="col">Contact</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="i in examples">
-        <th scope="row">{{ i.office }}</th>
-        <td>{{ i.country }}</td>
-        <td>{{ i.size }}</td>
-        <td>{{ i.contact }}</td>
-      </tr>
-    </tbody>
-  </table>
-</code-example>
+```vue demo
+<!-- @bg d-bgc-primary -->
+<!-- @class d-d-block -->
+<table class="d-table dialtone-doc-table">
+  <caption class="d-table__caption">Office List</caption>
+  <thead>
+    <tr>
+      <th scope="col">Office</th>
+      <th scope="col">Country</th>
+      <th scope="col" width="10%">Employees</th>
+      <th scope="col">Contact</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="i in examples">
+      <th scope="row">{{ i.office }}</th>
+      <td>{{ i.country }}</td>
+      <td>{{ i.size }}</td>
+      <td>{{ i.contact }}</td>
+    </tr>
+  </tbody>
+</table>
+```
 
 ### Inverted Style
 
@@ -44,27 +46,29 @@ keywords: ["data table", "grid", "rows", "d-table", "DtTable", "dt-table", "data
 
 ### Striped
 
-<code-example bgclass="d-bgc-primary" class="d-d-block">
-  <table class="d-table dialtone-doc-table d-table--striped">
-    <caption class="d-table__caption">Office List</caption>
-    <thead>
-      <tr>
-        <th scope="col">Office</th>
-        <th scope="col">Country</th>
-        <th scope="col" width="10%">Employees</th>
-        <th scope="col">Contact</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="i in examples">
-        <th scope="row">{{ i.office }}</th>
-        <td>{{ i.country }}</td>
-        <td>{{ i.size }}</td>
-        <td>{{ i.contact }}</td>
-      </tr>
-    </tbody>
-  </table>
-</code-example>
+```vue demo
+<!-- @bg d-bgc-primary -->
+<!-- @class d-d-block -->
+<table class="d-table dialtone-doc-table d-table--striped">
+  <caption class="d-table__caption">Office List</caption>
+  <thead>
+    <tr>
+      <th scope="col">Office</th>
+      <th scope="col">Country</th>
+      <th scope="col" width="10%">Employees</th>
+      <th scope="col">Contact</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="i in examples">
+      <th scope="row">{{ i.office }}</th>
+      <td>{{ i.country }}</td>
+      <td>{{ i.size }}</td>
+      <td>{{ i.contact }}</td>
+    </tr>
+  </tbody>
+</table>
+```
 
 ## Classes
 

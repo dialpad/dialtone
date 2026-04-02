@@ -15,9 +15,9 @@ keywords: ["hotkey", "key binding", "shortcut key", "d-kbd", "DtKeyboardShortcut
 
 Keyboard shortcut outlines a key combination with a border to represent a keyboard shortcut. `+` will be rendered as an icon rather than text. Supported symbol tags can be used in the shortcut prop, see the [Props, Slots & Events](#vue-api) section.
 
-<code-example>
-  <dt-keyboard-shortcut shortcut="{cmd}+Ctrl+X"/>
-</code-example>
+```vue demo
+<dt-keyboard-shortcut shortcut="{cmd}+Ctrl+X"/>
+```
 
 ## Usage
 
@@ -38,41 +38,41 @@ Keyboard shortcut outlines a key combination with a border to represent a keyboa
 
 In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#inverting) on the component element.
 
-<code-example>
-  <div class="d-bgc-contrast d-p-200">
-    <dt-keyboard-shortcut v-dt-mode:invert shortcut="{cmd}+Ctrl+X" />
-  </div>
-</code-example>
+```vue demo
+<div class="d-bgc-contrast d-p-200">
+  <dt-keyboard-shortcut v-dt-mode:invert shortcut="{cmd}+Ctrl+X" />
+</div>
+```
 
 ### Shortcut Size Variation
 
-<code-example>
-  <dt-keyboard-shortcut
-    class="d-fs-200"
-    shortcut="{cmd}+Y"
-  />
-</code-example>
+```vue demo
+<dt-keyboard-shortcut
+  class="d-fs-200"
+  shortcut="{cmd}+Y"
+/>
+```
 
 ### All Available Shortcut Aliases
 
-<code-example>
-  <dt-keyboard-shortcut
-    shortcut="{cmd}+{opt}+{win}+{arrow-right}+{arrow-left}+{arrow-up}+{arrow-down}+A"
-  />
-</code-example>
+```vue demo
+<dt-keyboard-shortcut
+  shortcut="{cmd}+{opt}+{win}+{arrow-right}+{arrow-left}+{arrow-up}+{arrow-down}+A"
+/>
+```
 
 ### Inline with Text and Screen Reader Text
 
-<code-example>
-  <dt-text kind="body" :size="300">
-    Press
-    <dt-keyboard-shortcut
-      screen-reader-text="Control plus F5"
-      shortcut="Ctrl + F5"
-    />
-    to hard refresh the page.
-  </dt-text>
-</code-example>
+```vue demo
+<dt-text kind="body" :size="300">
+  Press
+  <dt-keyboard-shortcut
+    screen-reader-text="Control plus F5"
+    shortcut="Ctrl + F5"
+  />
+  to hard refresh the page.
+</dt-text>
+```
 
 ## Accessibility
 

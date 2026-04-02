@@ -24,127 +24,127 @@ Use the Dropdown component when you have a list of links or actions that can be 
 
 ### Default
 
-<code-example>
-  <dt-dropdown navigation-type="arrow-keys">
-    <template #anchor="{ attrs }">
-      <dt-button v-bind="attrs">
-        Click to open
-      </dt-button>
-    </template>
-    <template #list="{ close }">
-      <dt-list-item
-        v-for="(item) in items"
-        :key="item.id"
-        role="menuitem"
-        :navigation-type="arrow-keys"
-        @click="close"
-      >
-        {{ item.name }}
-      </dt-list-item>
-    </template>
-  </dt-dropdown>
-</code-example>
+```vue demo
+<dt-dropdown navigation-type="arrow-keys">
+  <template #anchor="{ attrs }">
+    <dt-button v-bind="attrs">
+      Click to open
+    </dt-button>
+  </template>
+  <template #list="{ close }">
+    <dt-list-item
+      v-for="(item) in items"
+      :key="item.id"
+      role="menuitem"
+      :navigation-type="arrow-keys"
+      @click="close"
+    >
+      {{ item.name }}
+    </dt-list-item>
+  </template>
+</dt-dropdown>
+```
 
 ### With Sections and Headings
 
-<code-example>
-  <dt-dropdown navigation-type="arrow-keys">
-    <template #anchor="{ attrs }">
-      <dt-button v-bind="attrs">
-        Click to open
-      </dt-button>
-    </template>
-    <template #list="{ close }">
-      <dt-list-item-group
-        heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
-        heading="Menu Heading A"
+```vue demo
+<dt-dropdown navigation-type="arrow-keys">
+  <template #anchor="{ attrs }">
+    <dt-button v-bind="attrs">
+      Click to open
+    </dt-button>
+  </template>
+  <template #list="{ close }">
+    <dt-list-item-group
+      heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
+      heading="Menu Heading A"
+    >
+      <dt-list-item
+        role="menuitem"
+        navigation-type="arrow-keys"
+        @click="close"
       >
-        <dt-list-item
-          role="menuitem"
-          navigation-type="arrow-keys"
-          @click="close"
-        >
-          Menu Item 1
-        </dt-list-item>
-        <dt-dropdown-separator />
-        <dt-list-item
-          role="menuitem"
-          navigation-type="arrow-keys"
-          @click="close"
-        >
-          Menu Item 2
-        </dt-list-item>
-      </dt-list-item-group>
+        Menu Item 1
+      </dt-list-item>
       <dt-dropdown-separator />
-      <dt-list-item-group
-        heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
-        heading="Menu Heading B"
+      <dt-list-item
+        role="menuitem"
+        navigation-type="arrow-keys"
+        @click="close"
       >
-        <dt-list-item
-          role="menuitem"
-          navigation-type="arrow-keys"
-          @click="close"
-        >
-          Menu Item 3
-        </dt-list-item>
-      </dt-list-item-group>
-    </template>
-  </dt-dropdown>
-</code-example>
+        Menu Item 2
+      </dt-list-item>
+    </dt-list-item-group>
+    <dt-dropdown-separator />
+    <dt-list-item-group
+      heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
+      heading="Menu Heading B"
+    >
+      <dt-list-item
+        role="menuitem"
+        navigation-type="arrow-keys"
+        @click="close"
+      >
+        Menu Item 3
+      </dt-list-item>
+    </dt-list-item-group>
+  </template>
+</dt-dropdown>
+```
 
 ### Context Menu
 
 Set `openOnContext=true` to open the menu on right-click (context menu) and disable the default trigger behavior.
 
-<code-example>
-  <dt-dropdown navigation-type="arrow-keys" :open-on-context="true">
-    <template #anchor="{ attrs }">
-      <div
-        v-bind="attrs"
-        class="d-ba d-bas-dashed d-w-400 d-py-600 d-ta-center d-bgc-black-300"
-      >
-        Right click to open
-      </div>
-    </template>
-    <template #list="{ close }">
-      <dt-list-item
-        v-for="(item) in items"
-        :key="item.id"
-        role="menuitem"
-        :navigation-type="arrow-keys"
-        @click="close"
-      >
-        {{ item.name }}
-      </dt-list-item>
-    </template>
-  </dt-dropdown>
-</code-example>
+```vue demo
+<dt-dropdown navigation-type="arrow-keys" :open-on-context="true">
+  <template #anchor="{ attrs }">
+    <div
+      v-bind="attrs"
+      class="d-ba d-bas-dashed d-w-400 d-py-600 d-ta-center d-bgc-black-300"
+    >
+      Right click to open
+    </div>
+  </template>
+  <template #list="{ close }">
+    <dt-list-item
+      v-for="(item) in items"
+      :key="item.id"
+      role="menuitem"
+      :navigation-type="arrow-keys"
+      @click="close"
+    >
+      {{ item.name }}
+    </dt-list-item>
+  </template>
+</dt-dropdown>
+```
 
 ## Content Mode
 
 Dropdown content renders outside the DOM tree. Use the `contentMode` prop to apply color mode (invert, light, dark) to the positioned content. See [Positioned Components](/components/mode-island.html#positioned-components) for details.
 
-<code-example vueCode='
+```vue demo
+<dt-dropdown content-mode="invert" navigation-type="arrow-keys" placement="bottom-start">
+  <template #anchor="{ attrs }">
+    <dt-button v-bind="attrs" :size="200" kind="muted" importance="outlined">
+      Inverted Dropdown
+      <template #endIcon="{ iconSize }">
+        <dt-icon name="chevron-down" :size="iconSize" />
+      </template>
+    </dt-button>
+  </template>
+  <template #list="{ close }">
+    <dt-list-item role="menuitem" @click="close">Option 1</dt-list-item>
+    <dt-list-item role="menuitem" @click="close">Option 2</dt-list-item>
+    <dt-list-item role="menuitem" @click="close">Option 3</dt-list-item>
+  </template>
+</dt-dropdown>
+<!-- @code -->
 <dt-dropdown content-mode="invert">...</dt-dropdown>
 <dt-dropdown content-mode="dark">...</dt-dropdown>
 <dt-dropdown content-mode="light">...</dt-dropdown>
-'>
-  <dt-dropdown content-mode="invert" navigation-type="arrow-keys" placement="bottom-start">
-    <template #anchor="{ attrs }">
-      <dt-button v-bind="attrs" :size="200" kind="muted" importance="outlined">
-        Inverted Dropdown
-        <template #endIcon="{ iconSize }">
-          <dt-icon name="chevron-down" :size="iconSize" />
-        </template>
-      </dt-button>
-    </template>
-    <template #list="{ close }">
-      <dt-list-item role="menuitem" @click="close">Option 1</dt-list-item>
-      <dt-list-item role="menuitem" @click="close">Option 2</dt-list-item>
-      <dt-list-item role="menuitem" @click="close">Option 3</dt-list-item>
-    </template>
-  </dt-dropdown>
-</code-example>
+```
 
 ## Vue API
 

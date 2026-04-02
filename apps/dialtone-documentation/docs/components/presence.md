@@ -20,38 +20,38 @@ Located at the bottom right of an avatar, the `presence` indicator displays a us
 ### Active
 
 When a user is available.
-<code-example vueCode='
+```vue demo
+<example-presence presence="active" />
+<!-- @code -->
 <dt-presence presence="active" />
-'>
-  <example-presence presence="active" />
-</code-example>
+```
 
 ### Busy
 
 When a user is unavailable, either due to being **'On a call'**, **'In a meeting'**, or set to **'DND (Do Not Disturb)'**. Additionally, a text label indicating their specific status will appear under the user's name.
-<code-example vueCode='
+```vue demo
+<example-presence presence="busy" />
+<!-- @code -->
 <dt-presence presence="busy" />
-'>
-  <example-presence presence="busy" />
-</code-example>
+```
 
 ### Away
 
 When a user has a scheduled meeting on their synced calendar (Google G Suite or Microsoft Office 365) and is not actively participating in it through the app. Additionally, **'In a meeting'** will appear under the user's name.
-<code-example vueCode='
+```vue demo
+<example-presence presence="away" />
+<!-- @code -->
 <dt-presence presence="away" />
-'>
-  <example-presence presence="away" />
-</code-example>
+```
 
 ### Offline
 
 When a user has not logged in for their first time.
-<code-example vueCode='
+```vue demo
+<example-presence presence="offline" />
+<!-- @code -->
 <dt-presence presence="offline" />
-'>
-  <example-presence presence="offline" />
-</code-example>
+```
 
 ## Vue API
 
