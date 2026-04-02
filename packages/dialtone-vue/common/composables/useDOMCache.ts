@@ -259,17 +259,22 @@ export function useDOMCache(options: DOMCacheOptions = {}) {
 
   nextTick(() => {
     if (!autoInvalidate) return;
-    const root = typeof observeRoot === 'function' ? observeRoot() : observeRoot;
-    const target = root ?? document.body;
-    observer = new MutationObserver((mutations) => {
-      if (shouldInvalidate(mutations)) invalidate();
-    });
-    observer.observe(target, {
-      childList: true,
-      subtree: true,
-      attributes: true,
-      attributeFilter: ['class', 'id', 'style'],
-    });
+    if (typeof MutationObserver === 'undefined' || typeof MutationObserver.prototype === 'undefined') return;
+    try {
+      const root = typeof observeRoot === 'function' ? observeRoot() : observeRoot;
+      const target = root ?? document.body;
+      observer = new MutationObserver((mutations) => {
+        if (shouldInvalidate(mutations)) invalidate();
+      });
+      observer.observe(target, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['class', 'id', 'style'],
+      });
+    } catch {
+      // MutationObserver unavailable or mocked improperly (test environments)
+    }
   });
 
   onUnmounted(() => { cleanup(); });
