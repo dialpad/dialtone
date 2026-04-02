@@ -138,167 +138,167 @@ A few rules to keep in nothing-to-see-here when choosing a size variant.
 
 ### Large with Illustration
 
-<code-example>
-  <dt-empty-state
-    header-text="Nothing to see here"
-    body-text="Looks like there is no data to display here."
-  >
-    <template #body>
-      <dt-stack direction="row" gap="50">
-        <dt-button importance="clear">Action</dt-button>
-        <dt-button>Action</dt-button>
-      </dt-stack>
-    </template>
-    <template #illustration>
-      <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
-    </template>
-  </dt-empty-state>
-</code-example>
+```vue demo
+<dt-empty-state
+  header-text="Nothing to see here"
+  body-text="Looks like there is no data to display here."
+>
+  <template #body>
+    <dt-stack direction="row" gap="50">
+      <dt-button importance="clear">Action</dt-button>
+      <dt-button>Action</dt-button>
+    </dt-stack>
+  </template>
+  <template #illustration>
+    <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
+  </template>
+</dt-empty-state>
+```
 
 ### Large with Icon
 
-<code-example>
-  <dt-empty-state
-    header-text="Nothing to see here"
-    body-text="Looks like there is no data to display here."
-  >
-    <template #body>
-      <dt-stack direction="row" gap="50">
-        <dt-button importance="clear">Action</dt-button>
-        <dt-button>Action</dt-button>
-      </dt-stack>
-    </template>
-    <template #icon="{ iconSize }">
-      <dt-icon-box :size="iconSize"></dt-icon-box>
-    </template>
-  </dt-empty-state>
-</code-example>
+```vue demo
+<dt-empty-state
+  header-text="Nothing to see here"
+  body-text="Looks like there is no data to display here."
+>
+  <template #body>
+    <dt-stack direction="row" gap="50">
+      <dt-button importance="clear">Action</dt-button>
+      <dt-button>Action</dt-button>
+    </dt-stack>
+  </template>
+  <template #icon="{ iconSize }">
+    <dt-icon-box :size="iconSize"></dt-icon-box>
+  </template>
+</dt-empty-state>
+```
 
 ### Medium with Illustration
 
-<code-example>
-  <dt-empty-state
-    :size="300"
-    header-text="Nothing to see here"
-    body-text="Looks like there is no data to display here."
-  >
-    <template #body>
-      <dt-stack direction="row" gap="50">
-        <dt-button importance="clear">Action</dt-button>
-        <dt-button>Action</dt-button>
-      </dt-stack>
-    </template>
-    <template #illustration>
-      <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
-    </template>
-  </dt-empty-state>
-</code-example>
+```vue demo
+<dt-empty-state
+  :size="300"
+  header-text="Nothing to see here"
+  body-text="Looks like there is no data to display here."
+>
+  <template #body>
+    <dt-stack direction="row" gap="50">
+      <dt-button importance="clear">Action</dt-button>
+      <dt-button>Action</dt-button>
+    </dt-stack>
+  </template>
+  <template #illustration>
+    <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
+  </template>
+</dt-empty-state>
+```
 
 ### Medium with Icon
 
-<code-example>
-  <dt-empty-state
-    :size="300"
-    header-text="Nothing to see here"
-    body-text="Looks like there is no data to display here."
-  >
-    <template #body>
-      <dt-stack direction="row" gap="50">
-        <dt-button importance="clear">Action</dt-button>
-        <dt-button>Action</dt-button>
-      </dt-stack>
-    </template>
-    <template #icon="{ iconSize }">
-      <dt-icon-box :size="iconSize"></dt-icon-box>
-    </template>
-  </dt-empty-state>
-</code-example>
+```vue demo
+<dt-empty-state
+  :size="300"
+  header-text="Nothing to see here"
+  body-text="Looks like there is no data to display here."
+>
+  <template #body>
+    <dt-stack direction="row" gap="50">
+      <dt-button importance="clear">Action</dt-button>
+      <dt-button>Action</dt-button>
+    </dt-stack>
+  </template>
+  <template #icon="{ iconSize }">
+    <dt-icon-box :size="iconSize"></dt-icon-box>
+  </template>
+</dt-empty-state>
+```
 
 ### Small
 
-<code-example>
-  <dt-empty-state
-    :size="200"
-    header-text="Nothing to see here"
-    body-text="Looks like there is no data to display here."
-  >
-    <template #body>
-      <dt-stack direction="row" gap="50">
-        <dt-button importance="clear">Action</dt-button>
-        <dt-button>Action</dt-button>
-      </dt-stack>
-    </template>
-    <template #icon="{ iconSize }">
-      <dt-icon-box :size="iconSize"></dt-icon-box>
-    </template>
-  </dt-empty-state>
-</code-example>
+```vue demo
+<dt-empty-state
+  :size="200"
+  header-text="Nothing to see here"
+  body-text="Looks like there is no data to display here."
+>
+  <template #body>
+    <dt-stack direction="row" gap="50">
+      <dt-button importance="clear">Action</dt-button>
+      <dt-button>Action</dt-button>
+    </dt-stack>
+  </template>
+  <template #icon="{ iconSize }">
+    <dt-icon-box :size="iconSize"></dt-icon-box>
+  </template>
+</dt-empty-state>
+```
 
 ## Examples
 
 ### No Actions
 
-<code-example>
-  <dt-empty-state
-    header-text="Nothing to see here"
-    body-text="Looks like there is no data to display here."
-  >
-    <template #illustration>
-      <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
-    </template>
-  </dt-empty-state>
-</code-example>
+```vue demo
+<dt-empty-state
+  header-text="Nothing to see here"
+  body-text="Looks like there is no data to display here."
+>
+  <template #illustration>
+    <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
+  </template>
+</dt-empty-state>
+```
 
 ### No Description
 
-<code-example>
-  <dt-empty-state
-    header-text="Nothing to see here"
-  >
-    <template #illustration>
-      <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
-    </template>
-  </dt-empty-state>
-</code-example>
+```vue demo
+<dt-empty-state
+  header-text="Nothing to see here"
+>
+  <template #illustration>
+    <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
+  </template>
+</dt-empty-state>
+```
 
 ### Everything
 
-<code-example>
-  <dt-empty-state
-    header-text="Nothing to see here"
-    body-text="Looks like there is no data to display here."
-  >
-    <template #body>
-      <dt-stack direction="row" gap="50">
-        <dt-button importance="clear">Action</dt-button>
-        <dt-button>Action</dt-button>
-      </dt-stack>
-    </template>
-    <template #illustration>
-      <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
-    </template>
-  </dt-empty-state>
-</code-example>
+```vue demo
+<dt-empty-state
+  header-text="Nothing to see here"
+  body-text="Looks like there is no data to display here."
+>
+  <template #body>
+    <dt-stack direction="row" gap="50">
+      <dt-button importance="clear">Action</dt-button>
+      <dt-button>Action</dt-button>
+    </dt-stack>
+  </template>
+  <template #illustration>
+    <dt-illustration-nothing-to-see-here></dt-illustration-nothing-to-see-here>
+  </template>
+</dt-empty-state>
+```
 
 ### Small, with Muted Actions
 
-<code-example>
-  <dt-empty-state
-    :size="200"
-    header-text="Nothing to see here"
-    body-text="Looks like there is no data to display here."
-  >
-    <template #body>
-      <dt-stack direction="row" gap="50">
-        <dt-button kind="muted" :size="200" importance="clear">Action</dt-button>
-        <dt-button kind="muted" importance="outlined" :size="200">Action</dt-button>
-      </dt-stack>
-    </template>
-    <template #icon="{ iconSize }">
-      <dt-icon-box :size="iconSize"></dt-icon-box>
-    </template>
-  </dt-empty-state>
-</code-example>
+```vue demo
+<dt-empty-state
+  :size="200"
+  header-text="Nothing to see here"
+  body-text="Looks like there is no data to display here."
+>
+  <template #body>
+    <dt-stack direction="row" gap="50">
+      <dt-button kind="muted" :size="200" importance="clear">Action</dt-button>
+      <dt-button kind="muted" importance="outlined" :size="200">Action</dt-button>
+    </dt-stack>
+  </template>
+  <template #icon="{ iconSize }">
+    <dt-icon-box :size="iconSize"></dt-icon-box>
+  </template>
+</dt-empty-state>
+```
 
 ## Writing Guidelines
 

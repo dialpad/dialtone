@@ -21,7 +21,16 @@ A notice delivers informational and assistive messages that inform the user abou
 
 Used in most scenarios when the message should be noticeable but not dominate.
 
-<code-example bgclass="d-bgc-primary" vueCode='
+```vue demo
+<!-- @bg d-bgc-primary -->
+<dt-stack gap="100">
+  <example-notice kind="base" title="Base title (optional)" />
+  <example-notice kind="error" title="Error title (optional)" />
+  <example-notice kind="info" title="Info title (optional)" />
+  <example-notice kind="success" title="Success title (optional)" />
+  <example-notice kind="warning" title="Warning title (optional)" />
+</dt-stack>
+<!-- @code -->
 <dt-notice
   title="Base title (optional)"
 >
@@ -136,21 +145,21 @@ Used in most scenarios when the message should be noticeable but not dominate.
     </dt-button>
   </template>
 </dt-notice>
-'>
-  <dt-stack gap="100">
-    <example-notice kind="base" title="Base title (optional)" />
-    <example-notice kind="error" title="Error title (optional)" />
-    <example-notice kind="info" title="Info title (optional)" />
-    <example-notice kind="success" title="Success title (optional)" />
-    <example-notice kind="warning" title="Warning title (optional)" />
-  </dt-stack>
-</code-example>
+```
 
 ### Important
 
 Used occasionally in scenarios when the message needs to dominate.
 
-<code-example vueCode='
+```vue demo
+<dt-stack gap="100">
+  <example-notice important kind="base" title="Base title (optional)" />
+  <example-notice important kind="error" title="Error title (optional)" />
+  <example-notice important kind="info" title="Info title (optional)" />
+  <example-notice important kind="success" title="Success title (optional)" />
+  <example-notice important kind="warning" title="Warning title (optional)" />
+</dt-stack>
+<!-- @code -->
 <dt-notice
   title="Base title (optional)"
   important
@@ -270,32 +279,25 @@ Used occasionally in scenarios when the message needs to dominate.
     </dt-button>
   </template>
 </dt-notice>
-'>
-  <dt-stack gap="100">
-    <example-notice important kind="base" title="Base title (optional)" />
-    <example-notice important kind="error" title="Error title (optional)" />
-    <example-notice important kind="info" title="Info title (optional)" />
-    <example-notice important kind="success" title="Success title (optional)" />
-    <example-notice important kind="warning" title="Warning title (optional)" />
-  </dt-stack>
-</code-example>
+```
 
 ### Truncate Text
 
 Truncates the text instead of wrapping it. Useful when the Notice needs to have a fixed height.
 
-<code-example bgclass="d-bgc-primary">
-  <dt-notice
-    :truncate-text="true"
-    title="Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-  >
-    <span>
-      Duis aute irure dolor in reprehenderit in voluptate velit
-      esse cillum dolore eu fugiat nulla pariatur.
-    </span>
-  </dt-notice>
-</code-example>
+```vue demo
+<!-- @bg d-bgc-primary -->
+<dt-notice
+  :truncate-text="true"
+  title="Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+>
+  <span>
+    Duis aute irure dolor in reprehenderit in voluptate velit
+    esse cillum dolore eu fugiat nulla pariatur.
+  </span>
+</dt-notice>
+```
 
 ## Vue API
 

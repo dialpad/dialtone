@@ -15,21 +15,21 @@ keywords: ["pager", "page navigation", "page numbers", "d-pagination", "DtPagina
 
 ### With Active Page
 
-<code-example>
-  <dt-pagination
-    :total-pages="25"
-    :active-page="5"
-  />
-</code-example>
+```vue demo
+<dt-pagination
+  :total-pages="25"
+  :active-page="5"
+/>
+```
 
 ### With Max-Visible
 
-<code-example>
-  <dt-pagination
-    :total-pages="25"
-    :max-visible="7"
-  />
-</code-example>
+```vue demo
+<dt-pagination
+  :total-pages="25"
+  :max-visible="7"
+/>
+```
 
 ## Vue API
 

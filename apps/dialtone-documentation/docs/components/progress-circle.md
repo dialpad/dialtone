@@ -30,59 +30,59 @@ Use a progress circle to communicate deterministic progress to the user — for 
 
 ## Demo
 
-<code-example only-show="demo">
-  <dt-stack gap="200" align="center">
-    <dt-progress-circle size="800" :progress="demoProgress" :aria-label="`${demoProgress}% complete`" />
-    <dt-stack direction="row" gap="100">
-      <dt-button :size="200" kind="muted" importance="outlined" :disabled="atMin" @click="setProgress(0)">0%</dt-button>
-      <dt-button :size="200" kind="muted" importance="outlined" :disabled="atMin" @click="setProgress(demoProgress - 10)">-10</dt-button>
-      <dt-button :size="200" kind="muted" importance="outlined" :disabled="atMax" @click="setProgress(demoProgress + 10)">+10</dt-button>
-      <dt-button :size="200" kind="muted" importance="outlined" :disabled="atMax" @click="setProgress(100)">100%</dt-button>
-    </dt-stack>
+```vue demo-only
+<dt-stack gap="200" align="center">
+  <dt-progress-circle size="800" :progress="demoProgress" :aria-label="`${demoProgress}% complete`" />
+  <dt-stack direction="row" gap="100">
+    <dt-button :size="200" kind="muted" importance="outlined" :disabled="atMin" @click="setProgress(0)">0%</dt-button>
+    <dt-button :size="200" kind="muted" importance="outlined" :disabled="atMin" @click="setProgress(demoProgress - 10)">-10</dt-button>
+    <dt-button :size="200" kind="muted" importance="outlined" :disabled="atMax" @click="setProgress(demoProgress + 10)">+10</dt-button>
+    <dt-button :size="200" kind="muted" importance="outlined" :disabled="atMax" @click="setProgress(100)">100%</dt-button>
   </dt-stack>
-</code-example>
+</dt-stack>
+```
 
 ## Variants
 
 ### Progress
 
-<code-example vueCode='
-<dt-progress-circle :progress="{value}" aria-label="{value} complete" />
-'>
-  <dt-stack direction="row" gap="200">
-    <dt-stack v-for="v in [0, 25, 50, 75, 100]" :key="v" gap="200">
-      <dt-progress-circle :progress="v" :aria-label="`${v}% complete`" />
-    </dt-stack>
+```vue demo
+<dt-stack direction="row" gap="200">
+  <dt-stack v-for="v in [0, 25, 50, 75, 100]" :key="v" gap="200">
+    <dt-progress-circle :progress="v" :aria-label="`${v}% complete`" />
   </dt-stack>
-</code-example>
+</dt-stack>
+<!-- @code -->
+<dt-progress-circle :progress="{value}" aria-label="{value} complete" />
+```
 
 ### Sizes
 
 The `size` prop controls the diameter of the progress circle, aligning to Dialtone icon sizes.
 
-<code-example vueCode='
-<dt-progress-circle size="{size}" :progress="66" aria-label="value" />
-'>
-  <dt-stack direction="row" gap="200">
-    <dt-stack v-for="s in ['100', '200', '300', '400', '500', '600', '700', '800']" :key="s" gap="100">
-      <dt-progress-circle :size="s" :progress="66" :aria-label="`size ${s}`" />
-    </dt-stack>
+```vue demo
+<dt-stack direction="row" gap="200">
+  <dt-stack v-for="s in ['100', '200', '300', '400', '500', '600', '700', '800']" :key="s" gap="100">
+    <dt-progress-circle :size="s" :progress="66" :aria-label="`size ${s}`" />
   </dt-stack>
-</code-example>
+</dt-stack>
+<!-- @code -->
+<dt-progress-circle size="{size}" :progress="66" aria-label="value" />
+```
 
 ### Kinds
 
 The `kind` prop sets the color variant of the progress circle.
 
-<code-example vueCode='
-<dt-progress-circle kind="{kind}" :progress="66" aria-label="value" />
-'>
-  <dt-stack direction="row" gap="200">
-    <dt-stack v-for="k in ['default', 'brand', 'critical', 'positive', 'warning', 'info', 'ai']" :key="k" gap="100">
-      <dt-progress-circle :kind="k" :progress="66" :aria-label="`kind ${k}`" />
-    </dt-stack>
+```vue demo
+<dt-stack direction="row" gap="200">
+  <dt-stack v-for="k in ['default', 'brand', 'critical', 'positive', 'warning', 'info', 'ai']" :key="k" gap="100">
+    <dt-progress-circle :kind="k" :progress="66" :aria-label="`kind ${k}`" />
   </dt-stack>
-</code-example>
+</dt-stack>
+<!-- @code -->
+<dt-progress-circle kind="{kind}" :progress="66" aria-label="value" />
+```
 
 ## Vue API
 

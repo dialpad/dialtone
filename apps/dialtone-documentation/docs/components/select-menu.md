@@ -43,7 +43,12 @@ keywords: ["dropdown", "picker", "d-select-menu", "DtSelectMenu", "dt-select-men
 
 A select is normally paired with a label, but there are times when it can be used without a label. Don't rely on the placeholder text as a label.
 
-<code-example vueCode='
+```vue demo
+<div class="d-d-grid d-g-200 d-g-cols2">
+  <example-select-menu label="Default" />
+  <example-select-menu label="Disabled" disabled />
+</div>
+<!-- @code -->
 <dt-select-menu
   :options="[
         { value: ``, label: `Please select one` },
@@ -69,16 +74,13 @@ A select is normally paired with a label, but there are times when it can be use
   @input="onInput"
   @change="onChange"
 />
-'>
-  <div class="d-d-grid d-g-200 d-g-cols2">
-    <example-select-menu label="Default" />
-    <example-select-menu label="Disabled" disabled />
-  </div>
-</code-example>
+```
 
 ### With Description Text
 
-<code-example vueCode='
+```vue demo
+<example-select-menu label="Label" description="Optional description text" />
+<!-- @code -->
 <dt-select-menu
   :options="[
         { value: ``, label: `Please select one` },
@@ -92,15 +94,28 @@ A select is normally paired with a label, but there are times when it can be use
   @input="onInput"
   @change="onChange"
 />
-'>
-  <example-select-menu label="Label" description="Optional description text" />
-</code-example>
+```
 
 ### With Validation States
 
 Provides feedback to the user based on their interaction, or lack thereof, with a select.
 
-<code-example vueCode='
+```vue demo
+<div class="d-d-grid d-g-200 d-g-cols3">
+  <example-select-menu
+    label="Label"
+    :messages='[{"message":"Error validation message","type":"error"}]'
+  />
+  <example-select-menu
+    label="Label"
+    :messages='[{"message":"Success validation message","type":"success"}]'
+  />
+  <example-select-menu
+    label="Label"
+    :messages='[{"message":"Warning validation message","type":"warning"}]'
+  />
+</div>
+<!-- @code -->
 <dt-select-menu
   :options="[
     { value: ``, label: `Please select one` },
@@ -140,26 +155,29 @@ Provides feedback to the user based on their interaction, or lack thereof, with 
   @input="onInput"
   @change="onChange"
 />
-'>
-  <div class="d-d-grid d-g-200 d-g-cols3">
-    <example-select-menu
-      label="Label"
-      :messages='[{"message":"Error validation message","type":"error"}]'
-    />
-    <example-select-menu
-      label="Label"
-      :messages='[{"message":"Success validation message","type":"success"}]'
-    />
-    <example-select-menu
-      label="Label"
-      :messages='[{"message":"Warning validation message","type":"warning"}]'
-    />
-  </div>
-</code-example>
+```
 
 ### With Validation States Hidden
 
-<code-example vueCode='
+```vue demo
+<div class="d-d-grid d-g-200 d-g-cols3">
+  <example-select-menu
+    label="Label"
+    :messages='[{"message":"Error validation message","type":"error"}]'
+    :show-messages="false"
+  />
+  <example-select-menu
+    label="Label"
+    :messages='[{"message":"Success validation message","type":"success"}]'
+    :show-messages="false"
+  />
+  <example-select-menu
+    label="Label"
+    :messages='[{"message":"Warning validation message","type":"warning"}]'
+    :show-messages="false"
+  />
+</div>
+<!-- @code -->
 <dt-select-menu
   :options="[
     { value: ``, label: `Please select one` },
@@ -202,29 +220,17 @@ Provides feedback to the user based on their interaction, or lack thereof, with 
   @change="onChange"
   :show-messages="false"
 />
-'>
-  <div class="d-d-grid d-g-200 d-g-cols3">
-    <example-select-menu
-      label="Label"
-      :messages='[{"message":"Error validation message","type":"error"}]'
-      :show-messages="false"
-    />
-    <example-select-menu
-      label="Label"
-      :messages='[{"message":"Success validation message","type":"success"}]'
-      :show-messages="false"
-    />
-    <example-select-menu
-      label="Label"
-      :messages='[{"message":"Warning validation message","type":"warning"}]'
-      :show-messages="false"
-    />
-  </div>
-</code-example>
+```
 
 ### With Slotted Label
 
-<code-example vueCode='
+```vue demo
+<example-select-menu>
+  <template #label>
+    <div>Slotted label</div>
+  </template>
+</example-select-menu>
+<!-- @code -->
 <dt-select-menu
   :options="[
     { value: ``, label: `Please select one` },
@@ -240,17 +246,17 @@ Provides feedback to the user based on their interaction, or lack thereof, with 
     <div>Slotted label</div>
   </template>
 </dt-select-menu>
-'>
-  <example-select-menu>
-    <template #label>
-      <div>Slotted label</div>
-    </template>
-  </example-select-menu>
-</code-example>
+```
 
 ### With Slotted Description
 
-<code-example vueCode='
+```vue demo
+<example-select-menu>
+  <template #description>
+    <div>Slotted description</div>
+  </template>
+</example-select-menu>
+<!-- @code -->
 <dt-select-menu
   :options="[
     { value: ``, label: `Please select one` },
@@ -266,17 +272,20 @@ Provides feedback to the user based on their interaction, or lack thereof, with 
     <div>Slotted description</div>
   </template>
 </dt-select-menu>
-'>
-  <example-select-menu>
-    <template #description>
-      <div>Slotted description</div>
-    </template>
-  </example-select-menu>
-</code-example>
+```
 
 ### With Slotted Options
 
-<code-example vueCode='
+```vue demo
+<dt-select-menu
+  label="With Slotted Options"
+>
+  <option value="">Slotted options</option>
+  <option value="1">Option 1</option>
+  <option value="2">Option 2</option>
+  <option value="3">Option 3</option>
+</dt-select-menu>
+<!-- @code -->
 <dt-select-menu
   :model-value="modelValue"
   @input="onInput"
@@ -292,22 +301,21 @@ Provides feedback to the user based on their interaction, or lack thereof, with 
     </option>
   </template>
 </dt-select-menu>
-'>
-  <dt-select-menu
-    label="With Slotted Options"
-  >
-    <option value="">Slotted options</option>
-    <option value="1">Option 1</option>
-    <option value="2">Option 2</option>
-    <option value="3">Option 3</option>
-  </dt-select-menu>
-</code-example>
+```
 
 ## Sizes
 
 We offer different sizes for instances in which the interface requires a smaller or larger select. In general, though, use the base `300` (medium) size select as much as possible, especially in forms.
 
-<code-example vueCode='
+```vue demo
+<dt-stack gap="200">
+  <example-select-menu label="Label" :size="100" />
+  <example-select-menu label="Label" :size="200" />
+  <example-select-menu label="Label" :size="300" />
+  <example-select-menu label="Label" :size="400" />
+  <example-select-menu label="Label" :size="500" />
+</dt-stack>
+<!-- @code -->
 <dt-select-menu
   :options="[
     { value: ``, label: `Please select one` },
@@ -321,54 +329,46 @@ We offer different sizes for instances in which the interface requires a smaller
   @input="onInput"
   @change="onChange"
 />
-'>
-  <dt-stack gap="200">
-    <example-select-menu label="Label" :size="100" />
-    <example-select-menu label="Label" :size="200" />
-    <example-select-menu label="Label" :size="300" />
-    <example-select-menu label="Label" :size="400" />
-    <example-select-menu label="Label" :size="500" />
-  </dt-stack>
-</code-example>
+```
 
 ## Label size
 
 The label text size is automatically derived from the component's `size` prop. Use the `label-size` prop to override this when you need a different label size independent of the select size. For example, the default label size for a `:size="300"` select menu is `300`, but you can override it from `100` to `400`.
 
-<code-example vueCode='
+```vue demo
+<dt-stack gap="200">
+  <example-select-menu label="Extra small label" :label-size="100" />
+  <example-select-menu label="Small label" :label-size="200" />
+  <example-select-menu label="Medium label (default)" :label-size="300" />
+  <example-select-menu label="Large label" :label-size="400" />
+</dt-stack>
+<!-- @code -->
 <dt-select-menu
   :options="options"
   label="Label"
   :size="100"
   :label-size="100"
 />
-'>
-  <dt-stack gap="200">
-    <example-select-menu label="Extra small label" :label-size="100" />
-    <example-select-menu label="Small label" :label-size="200" />
-    <example-select-menu label="Medium label (default)" :label-size="300" />
-    <example-select-menu label="Large label" :label-size="400" />
-  </dt-stack>
-</code-example>
+```
 
 ## Label strength
 
 Override the label font weight independently of the label size. Valid values are `bold`, `semibold`, `medium`, and `normal`.
 
-<code-example vueCode='
+```vue demo
+<dt-stack gap="200">
+  <example-select-menu label="Bold label" label-strength="bold" />
+  <example-select-menu label="Semibold label" label-strength="semibold" />
+  <example-select-menu label="Medium label" label-strength="medium" />
+  <example-select-menu label="Normal label" label-strength="normal" />
+</dt-stack>
+<!-- @code -->
 <dt-select-menu
   :options="options"
   label="Label"
   label-strength="bold|semibold|medium|normal"
 />
-'>
-  <dt-stack gap="200">
-    <example-select-menu label="Bold label" label-strength="bold" />
-    <example-select-menu label="Semibold label" label-strength="semibold" />
-    <example-select-menu label="Medium label" label-strength="medium" />
-    <example-select-menu label="Normal label" label-strength="normal" />
-  </dt-stack>
-</code-example>
+```
 
 ## Accessibility
 

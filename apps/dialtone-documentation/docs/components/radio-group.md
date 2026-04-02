@@ -14,123 +14,124 @@ keywords: ["radio buttons","radio options","form fields","d-radio-group","DtRadi
 
 ### Default
 
-<code-example>
-  <dt-radio-group
-    model-value=""
-    name="fruits-radio-group-01"
-    legend="Fruits"
-  >
-    <dt-radio value="apple"><span >Apple</span></dt-radio>
-    <dt-radio value="banana"><span >Banana</span></dt-radio>
-    <dt-radio value="other"><span >Other</span></dt-radio>
-  </dt-radio-group>
-</code-example>
+```vue demo
+<dt-radio-group
+  model-value=""
+  name="fruits-radio-group-01"
+  legend="Fruits"
+>
+  <dt-radio value="apple"><span >Apple</span></dt-radio>
+  <dt-radio value="banana"><span >Banana</span></dt-radio>
+  <dt-radio value="other"><span >Other</span></dt-radio>
+</dt-radio-group>
+```
 
 ### With Options
 
 Passing in Radio components programmatically using an options object.
 
-<code-example>
-  <dt-radio-group
-    v-model="selectedFruits"
-    name="fruits-radio-group"
-    legend="Fruits"
+```vue demo
+<dt-radio-group
+  v-model="selectedFruits"
+  name="fruits-radio-group"
+  legend="Fruits"
+>
+  <dt-radio
+    v-for="option in options"
+    :key="option.value"
+    :value="option.value"
   >
-    <dt-radio
-      v-for="option in options"
-      :key="option.value"
-      :value="option.value"
-    >
-      <span>{{ option.label }}</span>
-    </dt-radio>
-  </dt-radio-group>
-</code-example>
+    <span>{{ option.label }}</span>
+  </dt-radio>
+</dt-radio-group>
+```
 
 ### Without Legend
 
 When no legend is provided it is expected that an `aria-label` is passed into the component.
 
-<code-example>
-  <dt-radio-group
-    name="fruits-radio-group"
-    aria-label="Fruits"
-  >
-    <dt-radio value="pear">Pear</dt-radio>
-    <dt-radio value="kiwi">Kiwi</dt-radio>
-  </dt-radio-group>
-</code-example>
+```vue demo
+<dt-radio-group
+  name="fruits-radio-group"
+  aria-label="Fruits"
+>
+  <dt-radio value="pear">Pear</dt-radio>
+  <dt-radio value="kiwi">Kiwi</dt-radio>
+</dt-radio-group>
+```
 
 ### With Slotted Legend
 
 The legend can also be passed by slot.
 
-<code-example>
-  <dt-radio-group
-    name="fruits-radio-group"
-  >
-    <dt-radio value="pear">Pear</dt-radio>
-    <dt-radio value="kiwi">Kiwi</dt-radio>
-    <template #legend>
-      Fruits
-    </template>
-  </dt-radio-group>
-</code-example>
+```vue demo
+<dt-radio-group
+  name="fruits-radio-group"
+>
+  <dt-radio value="pear">Pear</dt-radio>
+  <dt-radio value="kiwi">Kiwi</dt-radio>
+  <template #legend>
+    Fruits
+  </template>
+</dt-radio-group>
+```
 
 ### With Event Hander
 
 The event handler is only needed if you need to do additional processing. The v-model is automatically updated.
 
-<code-example>
-  <dt-radio-group
-    v-model="selectedFruits"
-    name="fruits-radio-group"
-    legend="Fruits"
-    @input="onInput"
-  >
-    <dt-radio value="pear">Pear</dt-radio>
-    <dt-radio value="kiwi">Kiwi</dt-radio>
-  </dt-radio-group>
-</code-example>
+```vue demo
+<dt-radio-group
+  v-model="selectedFruits"
+  name="fruits-radio-group"
+  legend="Fruits"
+  @input="onInput"
+>
+  <dt-radio value="pear">Pear</dt-radio>
+  <dt-radio value="kiwi">Kiwi</dt-radio>
+</dt-radio-group>
+```
 
 ### With Validation States
 
-<code-example>
-  <dt-stack gap="200" data-demo-wrapper>
-    <div>
-      <dt-radio-group
-        name="radio-group-with-success-message"
-        legend="With Success Message"
-        :messages='[{"message":"Success validation message","type":"success"}]'
-      >
-        <dt-radio value="apple"><span >Apple</span></dt-radio>
-        <dt-radio value="banana"><span >Banana</span></dt-radio>
-        <dt-radio value="other"><span >Other</span></dt-radio>
-      </dt-radio-group>
-    </div>
-    <div>
-      <dt-radio-group
-        name="radio-group-with-warning-message"
-        legend="With Warning Message"
-        :messages='[{"message":"Warning validation message","type":"warning"}]'
-      >
-        <dt-radio value="apple"><span >Apple</span></dt-radio>
-        <dt-radio value="banana"><span >Banana</span></dt-radio>
-        <dt-radio value="other"><span >Other</span></dt-radio>
-      </dt-radio-group>
-    </div>
-    <div>
-      <dt-radio-group
-        name="radio-group-with-error-message"
-        legend="With Error Message"
-        :messages='[{"message":"Error validation message","type":"error"}]'
-      >
-        <dt-radio value="apple"><span >Apple</span></dt-radio>
-        <dt-radio value="banana"><span >Banana</span></dt-radio>
-        <dt-radio value="other"><span >Other</span></dt-radio>
-      </dt-radio-group>
-    </div>
-  </dt-stack>
-</code-example>
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="200">
+  <div>
+    <dt-radio-group
+      name="radio-group-with-success-message"
+      legend="With Success Message"
+      :messages='[{"message":"Success validation message","type":"success"}]'
+    >
+      <dt-radio value="apple"><span >Apple</span></dt-radio>
+      <dt-radio value="banana"><span >Banana</span></dt-radio>
+      <dt-radio value="other"><span >Other</span></dt-radio>
+    </dt-radio-group>
+  </div>
+  <div>
+    <dt-radio-group
+      name="radio-group-with-warning-message"
+      legend="With Warning Message"
+      :messages='[{"message":"Warning validation message","type":"warning"}]'
+    >
+      <dt-radio value="apple"><span >Apple</span></dt-radio>
+      <dt-radio value="banana"><span >Banana</span></dt-radio>
+      <dt-radio value="other"><span >Other</span></dt-radio>
+    </dt-radio-group>
+  </div>
+  <div>
+    <dt-radio-group
+      name="radio-group-with-error-message"
+      legend="With Error Message"
+      :messages='[{"message":"Error validation message","type":"error"}]'
+    >
+      <dt-radio value="apple"><span >Apple</span></dt-radio>
+      <dt-radio value="banana"><span >Banana</span></dt-radio>
+      <dt-radio value="other"><span >Other</span></dt-radio>
+    </dt-radio-group>
+  </div>
+</dt-stack>
+```
 
 ## Vue API
 

@@ -6,6 +6,7 @@
  *   NORMAL          — default, pass-through for standard markdown
  *   FRONTMATTER     — inside YAML --- block
  *   FENCED_CODE     — inside ``` fenced code block (highest priority)
+ *   FENCED_DEMO     — inside ```vue demo block (transforms directives to clean code)
  *   CODE_WELL_HEADER — inside <code-well-header>...</code-well-header> (remove)
  *   CODE_EXAMPLE    — inside <code-example>...</code-example> (extract slot as code)
  *   CODE_EXAMPLE_TABS — accumulating <code-example-tabs ... /> lines
@@ -24,11 +25,13 @@ import { transformHtmlTable } from './transform-html-table.mjs';
 import { transformNewUtilityClassTable, transformOldUtilityClassTable } from './transform-utility-class-table.mjs';
 import { isStandaloneVueComponentLine, cleanupOutput, PASSTHROUGH_COMPONENTS } from './utils.mjs';
 import { INLINE_HANDLERS, consumeUntilClose, parseFrontmatterField } from './component-handlers.mjs';
+import { parseDirectives, trimBlankLines } from '../../docs/.vuepress/plugins/fenced-demo-shared.js';
 
 const S = {
   NORMAL: 'NORMAL',
   FRONTMATTER: 'FRONTMATTER',
   FENCED_CODE: 'FENCED_CODE',
+  FENCED_DEMO: 'FENCED_DEMO',
   CODE_WELL_HEADER: 'CODE_WELL_HEADER',
   CODE_EXAMPLE_TABS: 'CODE_EXAMPLE_TABS',
   DIALTONE_USAGE: 'DIALTONE_USAGE',
@@ -134,6 +137,124 @@ function handleFencedCode (ctx) {
   }
 }
 
+// ── State handler: FENCED_DEMO ──────────────────────────────────
+function handleFencedDemoState (ctx) {
+  // Detect the closing fence
+  if (ctx.trimmed.startsWith(ctx.fencedCodeMarker) && ctx.trimmed.slice(ctx.fencedCodeMarker.length).trim() === '') {
+    const result = transformFencedDemoBlock(ctx.accumulator, ctx.fencedDemoInfoMode);
+    if (result !== null) {
+      ctx.output.push('');
+      ctx.output.push('```vue');
+      ctx.output.push(...result);
+      ctx.output.push('```');
+      ctx.output.push('');
+    }
+    ctx.accumulator = [];
+    ctx.fencedCodeMarker = '';
+    ctx.state = S.NORMAL;
+    return;
+  }
+  ctx.accumulator.push(ctx.line);
+}
+
+/**
+ * Transform accumulated lines from a ```vue demo block into clean code lines.
+ *
+ * Handles directives:
+ *   <!-- @demo-only -->  → return null (skip entire block)
+ *   <!-- @code-only -->  → stripped (content emitted normally)
+ *   <!-- @code -->       → emit only content below the separator
+ *   <!-- @wrapper -->    → strip the wrapper element, keep children
+ *   <!-- @bg ... -->     → stripped
+ *   <!-- @class ... -->  → stripped
+ *
+ * @param {string[]} lines - Accumulated content lines (without fences)
+ * @param {string} [infoMode='demo'] - 'demo', 'demo-only', or 'code-only' from the info string
+ * @returns {string[]|null} - Cleaned lines, or null to skip the block
+ */
+export function transformFencedDemoBlock (lines, infoMode = 'demo') {
+  const { onlyShow, hasWrapper, codeSeparatorIndex, directiveLines: directiveIndices } =
+    parseDirectives(lines, infoMode);
+
+  // @demo-only: skip the entire block
+  if (onlyShow === 'demo') return null;
+
+  let contentLines;
+
+  if (codeSeparatorIndex !== -1) {
+    // @code separator: emit only lines below the separator (excluding directives)
+    contentLines = [];
+    for (let i = codeSeparatorIndex + 1; i < lines.length; i++) {
+      if (!directiveIndices.has(i)) contentLines.push(lines[i]);
+    }
+  } else {
+    // No separator: emit all non-directive lines
+    contentLines = lines.filter((_, i) => !directiveIndices.has(i));
+  }
+
+  // Trim leading/trailing blank lines
+  while (contentLines.length > 0 && contentLines[0].trim() === '') contentLines.shift();
+  while (contentLines.length > 0 && contentLines[contentLines.length - 1].trim() === '') contentLines.pop();
+
+  if (contentLines.length === 0) return null;
+
+  // @wrapper: strip the wrapper element, keeping only its children.
+  // Only applies when there's no @code separator (with @code, the code content
+  // is already explicitly specified below the separator).
+  if (hasWrapper && codeSeparatorIndex === -1) {
+    contentLines = stripWrapperElement(contentLines);
+  }
+
+  // Dedent
+  const nonEmpty = contentLines.filter(l => l.trim().length > 0);
+  if (nonEmpty.length > 0) {
+    const minIndent = Math.min(...nonEmpty.map(l => l.match(/^(\s*)/)[1].length));
+    if (minIndent > 0) {
+      contentLines = contentLines.map(l => l.slice(minIndent));
+    }
+  }
+
+  return contentLines;
+}
+
+/**
+ * Strip the outermost wrapper element from content lines, keeping only
+ * its children. Used when @wrapper directive is present.
+ *
+ * @param {string[]} lines - Content lines (wrapper element is the outer element)
+ * @returns {string[]} - Children lines with wrapper removed
+ */
+function stripWrapperElement (lines) {
+  const joined = lines.join('\n');
+  const trimmed = joined.trim();
+
+  // Find the end of the opening tag (first > not inside quotes)
+  let inSQ = false;
+  let inDQ = false;
+  let openEnd = -1;
+  for (let i = 0; i < trimmed.length; i++) {
+    const ch = trimmed[i];
+    if (ch === '\'' && !inDQ) inSQ = !inSQ;
+    else if (ch === '"' && !inSQ) inDQ = !inDQ;
+    else if (ch === '>' && !inSQ && !inDQ) { openEnd = i; break; }
+  }
+  if (openEnd === -1) return lines;
+
+  // Find the last closing tag
+  const lastCloseStart = trimmed.lastIndexOf('</');
+  if (lastCloseStart === -1 || lastCloseStart <= openEnd) return lines;
+
+  // Extract children between the opening and closing tags
+  const children = trimmed.slice(openEnd + 1, lastCloseStart);
+  const childLines = trimBlankLines(children).split('\n');
+
+  // Trim leading/trailing blank lines
+  while (childLines.length > 0 && childLines[0].trim() === '') childLines.shift();
+  while (childLines.length > 0 && childLines[childLines.length - 1].trim() === '') childLines.pop();
+
+  return childLines;
+}
+
 // ── State handler: FRONTMATTER ───────────────────────────────────
 function handleFrontmatter (ctx) {
   if (ctx.trimmed === '---') {
@@ -198,7 +319,7 @@ function transformCodeExample (lines) {
   const closeTagStart = joined.lastIndexOf('</code-example>');
   if (closeTagStart === -1) return [];
 
-  const slotContent = joined.slice(openTagEnd, closeTagStart).replace(/^\n+|\n+$/g, '');
+  const slotContent = trimBlankLines(joined.slice(openTagEnd, closeTagStart));
   if (!slotContent.trim()) return [];
 
   // Dedent
@@ -254,6 +375,16 @@ function tryDetectFencedCode (ctx) {
   const fenceMatch = ctx.trimmed.match(/^(`{3,}|~{3,})/);
   if (!fenceMatch) return false;
   ctx.fencedCodeMarker = fenceMatch[1];
+
+  // Check if the info string is "vue demo", "vue demo-only", or "vue code-only"
+  const infoString = ctx.trimmed.slice(fenceMatch[1].length).trim();
+  if (/^vue\s+(demo-only|code-only|demo)$/.test(infoString)) {
+    ctx.state = S.FENCED_DEMO;
+    ctx.accumulator = [];
+    ctx.fencedDemoInfoMode = infoString.split(/\s+/)[1]; // 'demo', 'demo-only', or 'code-only'
+    return true;
+  }
+
   ctx.state = S.FENCED_CODE;
   ctx.output.push(ctx.line);
   return true;
@@ -570,6 +701,7 @@ function processNormalLine (ctx) {
  */
 const STATE_HANDLERS = {
   [S.FENCED_CODE]: handleFencedCode,
+  [S.FENCED_DEMO]: handleFencedDemoState,
   [S.FRONTMATTER]: handleFrontmatter,
   [S.HTML_COMMENT]: (ctx) => handleSkipUntilClose(ctx, '-->', S.NORMAL),
   [S.SCRIPT_SETUP]: (ctx) => handleSkipUntilClose(ctx, '</script>', S.NORMAL),

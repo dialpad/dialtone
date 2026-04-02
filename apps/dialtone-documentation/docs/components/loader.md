@@ -31,31 +31,31 @@ keywords: ["spinner", "loading", "progress", "d-loader", "DtLoader", "dt-loader"
 
 The base loader should be the go-to loader for most of your needs. When in doubt, use this style.
 
-<code-example>
-  <dt-loader></dt-loader>
-</code-example>
+```vue demo
+<dt-loader></dt-loader>
+```
 
 ## Sizes
 
 The base loader size is 24px and should be used in most cases.
 
-<code-example vueCode='
+```vue demo
+<dt-stack
+  gap="200"
+  :direction="{ 'default': 'column', 'md': 'row' }"
+>
+  <dt-loader size="100"></dt-loader>
+  <dt-loader size="200"></dt-loader>
+  <dt-loader size="300"></dt-loader>
+  <dt-loader size="400"></dt-loader>
+  <dt-loader size="500"></dt-loader>
+  <dt-loader size="600"></dt-loader>
+  <dt-loader size="700"></dt-loader>
+  <dt-loader size="800"></dt-loader>
+</dt-stack>
+<!-- @code -->
 <dt-loader size="100|200|300|400|500|600|700|800"></dt-loader>
-'>
-  <dt-stack
-    gap="200"
-    :direction="{ 'default': 'column', 'md': 'row' }"
-  >
-    <dt-loader size="100"></dt-loader>
-    <dt-loader size="200"></dt-loader>
-    <dt-loader size="300"></dt-loader>
-    <dt-loader size="400"></dt-loader>
-    <dt-loader size="500"></dt-loader>
-    <dt-loader size="600"></dt-loader>
-    <dt-loader size="700"></dt-loader>
-    <dt-loader size="800"></dt-loader>
-  </dt-stack>
-</code-example>
+```
 
 ## Vue API
 

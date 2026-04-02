@@ -5,6 +5,7 @@ import { backToTopPlugin } from '@vuepress/plugin-back-to-top';
 import { gitPlugin } from '@vuepress/plugin-git';
 import { sitemapPlugin } from 'vuepress-plugin-sitemap2';
 import markdownItClass from '@toycode/markdown-it-class';
+import fencedDemoPlugin from '../plugins/markdown-it-fenced-demo.js';
 import codeExampleSourcePlugin from '../plugins/markdown-it-code-example-source.js';
 import { getDirname, path } from 'vuepress/utils'
 
@@ -272,6 +273,9 @@ export const dialtoneVuepressTheme = (options) => ({
     ],
 
   extendsMarkdown: (md) => {
+      // Transform ```vue demo fenced blocks into <code-example> HTML
+      md.use(fencedDemoPlugin);
+
       md.use(markdownItClass, mapping);
 
       // Auto-extract slot source from <code-example> blocks for the Vue code tab

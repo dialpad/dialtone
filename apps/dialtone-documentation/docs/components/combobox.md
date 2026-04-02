@@ -21,73 +21,75 @@ It has 2 core required slots:
 2. `list`: the list of items to display responding to `input`'s value. Almost always this will be a list of `dt-list-item`.
 This will usually be the [List Item component](/components/list-item.md).
 
-<code-example class="d-d-block">
-  <dt-combobox
-    :show-list="!!value"
-    label="Label Text"
-    @escape="onComboboxEscape"
-    @select="onComboboxSelect"
+```vue demo
+<!-- @class d-d-block -->
+<dt-combobox
+  :show-list="!!value"
+  label="Label Text"
+  @escape="onComboboxEscape"
+  @select="onComboboxSelect"
+>
+  <template
+    #input="{ inputProps }"
   >
-    <template
-      #input="{ inputProps }"
+    <dt-input
+      placeholder="Type to show the items"
+      v-model="value"
+      v-bind="inputProps"
+    />
+  </template>
+  <template
+    #list="{ listProps }"
+  >
+    <ol
+      v-bind="listProps"
+      class="d-p-0 d-mbs-100 d-hmx-500 d-of-y-auto"
     >
-      <dt-input
-        placeholder="Type to show the items"
-        v-model="value"
-        v-bind="inputProps"
-      />
-    </template>
-    <template
-      #list="{ listProps }"
-    >
-      <ol
-        v-bind="listProps"
-        class="d-p-0 d-mbs-100 d-hmx-500 d-of-y-auto"
+      <dt-list-item
+        v-for="(item, i) in items"
+        :key="item.id"
+        role="option"
+        navigation-type="arrow-keys"
+        @click="onListItemSelect(i)"
       >
-        <dt-list-item
-          v-for="(item, i) in items"
-          :key="item.id"
-          role="option"
-          navigation-type="arrow-keys"
-          @click="onListItemSelect(i)"
-        >
-          <template #start>
-            <dt-avatar
-              :full-name="(i + 1).toString()"
-              :seed="i.toString()"
-            />
-          </template>
-          {{ item.name }}
-        </dt-list-item>
-      </ol>
-    </template>
-  </dt-combobox>
-</code-example>
+        <template #start>
+          <dt-avatar
+            :full-name="(i + 1).toString()"
+            :seed="i.toString()"
+          />
+        </template>
+        {{ item.name }}
+      </dt-list-item>
+    </ol>
+  </template>
+</dt-combobox>
+```
 
 ## With Empty List Item
 
-<code-example class="d-d-block">
-  <dt-combobox
-    :show-list="!!value"
-    label="Label Text"
-    @escape="onComboboxEscape"
-    @select="onComboboxSelect"
-    :empty-list="true"
+```vue demo
+<!-- @class d-d-block -->
+<dt-combobox
+  :show-list="!!value"
+  label="Label Text"
+  @escape="onComboboxEscape"
+  @select="onComboboxSelect"
+  :empty-list="true"
+>
+  <template
+    #input="{ inputProps }"
   >
-    <template
-      #input="{ inputProps }"
-    >
-      <dt-input
-        placeholder="Type to show the items"
-        v-model="value"
-        v-bind="inputProps"
-      />
-    </template>
-    <template #emptyListItem>
-      <div class="d-py-100 d-fc-tertiary">No matches found.</div>
-    </template>
-  </dt-combobox>
-</code-example>
+    <dt-input
+      placeholder="Type to show the items"
+      v-model="value"
+      v-bind="inputProps"
+    />
+  </template>
+  <template #emptyListItem>
+    <div class="d-py-100 d-fc-tertiary">No matches found.</div>
+  </template>
+</dt-combobox>
+```
 
 ## Accessibility
 

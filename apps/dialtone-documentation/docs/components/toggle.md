@@ -41,32 +41,32 @@ The Toggle component acts as a way to allow the User to switch between two mutua
 
 ### Base Styles
 
-<code-example>
-  <dt-stack as="fieldset" gap="100">
-    <dt-toggle wrapper-class="d-g-200">Unchecked Toggle</dt-toggle>
-    <dt-toggle :model-value="true" wrapper-class="d-g-200">Checked Toggle</dt-toggle>
-    <dt-toggle disabled wrapper-class="d-g-200">Unchecked Disabled</dt-toggle>
-    <dt-toggle :model-value="true" disabled wrapper-class="d-g-200">Checked Disabled</dt-toggle>
-    <dt-toggle :model-value="mixed" wrapper-class="d-g-200">Indeterminate Toggle</dt-toggle>
-    <dt-toggle :model-value="mixed" wrapper-class="d-g-200" disabled>Indeterminate Disabled</dt-toggle>
-    <dt-toggle wrapper-class="d-g-200" :show-icon="false">Without icon</dt-toggle>
-  </dt-stack>
-</code-example>
+```vue demo
+<dt-stack as="fieldset" gap="100">
+  <dt-toggle wrapper-class="d-g-200">Unchecked Toggle</dt-toggle>
+  <dt-toggle :model-value="true" wrapper-class="d-g-200">Checked Toggle</dt-toggle>
+  <dt-toggle disabled wrapper-class="d-g-200">Unchecked Disabled</dt-toggle>
+  <dt-toggle :model-value="true" disabled wrapper-class="d-g-200">Checked Disabled</dt-toggle>
+  <dt-toggle :model-value="mixed" wrapper-class="d-g-200">Indeterminate Toggle</dt-toggle>
+  <dt-toggle :model-value="mixed" wrapper-class="d-g-200" disabled>Indeterminate Disabled</dt-toggle>
+  <dt-toggle wrapper-class="d-g-200" :show-icon="false">Without icon</dt-toggle>
+</dt-stack>
+```
 
 ### Sizes
 
-<code-example>
-  <dt-stack as="fieldset" gap="100">
-    <dt-toggle :size="200" wrapper-class="d-g-200">Small size</dt-toggle>
-    <dt-toggle wrapper-class="d-g-200">Default size</dt-toggle>
-  </dt-stack>
-</code-example>
+```vue demo
+<dt-stack as="fieldset" gap="100">
+  <dt-toggle :size="200" wrapper-class="d-g-200">Small size</dt-toggle>
+  <dt-toggle wrapper-class="d-g-200">Default size</dt-toggle>
+</dt-stack>
+```
 
 ### With v-model
 
-<code-example>
-  <dt-toggle v-model="checked" wrapper-class="d-g-200">Toggle</dt-toggle>
-</code-example>
+```vue demo
+<dt-toggle v-model="checked" wrapper-class="d-g-200">Toggle</dt-toggle>
+```
 
 ## Vue API
 

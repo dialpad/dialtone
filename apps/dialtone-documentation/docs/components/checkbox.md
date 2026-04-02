@@ -48,149 +48,152 @@ Checkboxes are an easily understandable way to indicate that users can select on
 
 ### Base Styles
 
-<code-example>
-  <dt-stack gap="100" data-demo-wrapper>
-    <!-- Default -->
-    <dt-checkbox
-      name="default"
-      value="Value"
-      label="Checkbox label"
-    />
-    <!-- Checked -->
-    <dt-checkbox
-      name="checked"
-      value="Value"
-      label="Checkbox label"
-      checked
-    />
-    <!-- Disabled -->
-    <dt-checkbox
-      name="disabled"
-      value="Value"
-      label="Disabled Checkbox label"
-      disabled
-    />
-    <!-- Disabled Checked -->
-    <dt-checkbox
-      name="disabled-checked"
-      value="Value"
-      label="Disabled Checkbox label"
-      checked
-      disabled
-    />
-  </dt-stack>
-</code-example>
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="100">
+  <!-- Default -->
+  <dt-checkbox
+    name="default"
+    value="Value"
+    label="Checkbox label"
+  />
+  <!-- Checked -->
+  <dt-checkbox
+    name="checked"
+    value="Value"
+    label="Checkbox label"
+    checked
+  />
+  <!-- Disabled -->
+  <dt-checkbox
+    name="disabled"
+    value="Value"
+    label="Disabled Checkbox label"
+    disabled
+  />
+  <!-- Disabled Checked -->
+  <dt-checkbox
+    name="disabled-checked"
+    value="Value"
+    label="Disabled Checkbox label"
+    checked
+    disabled
+  />
+</dt-stack>
+```
 
 ### Indeterminate
 
-<code-example>
-  <dt-stack gap="100" data-demo-wrapper>
-    <!-- Indeterminate -->
-    <dt-checkbox
-      name="indeterminate"
-      value="Value"
-      label="Indeterminate checkbox"
-      indeterminate
-    />
-    <!-- Indeterminate disabled -->
-    <dt-checkbox
-      name="indeterminate-disabled"
-      value="Value"
-      label="Indeterminate checkbox disabled"
-      checked
-      disabled
-      indeterminate
-    />
-  </dt-stack>
-</code-example>
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="100">
+  <!-- Indeterminate -->
+  <dt-checkbox
+    name="indeterminate"
+    value="Value"
+    label="Indeterminate checkbox"
+    indeterminate
+  />
+  <!-- Indeterminate disabled -->
+  <dt-checkbox
+    name="indeterminate-disabled"
+    value="Value"
+    label="Indeterminate checkbox disabled"
+    checked
+    disabled
+    indeterminate
+  />
+</dt-stack>
+```
 
 ### Stacked Group
 
-<code-example>
-  <dt-checkbox-group legend="Call Blocking & Spam Protection" :selectedValues="[]">
-    <dt-checkbox
-      name="option1"
-      value="Value"
-      label="Anonymous callers"
-    />
-    <dt-checkbox
-      name="option2"
-      value="Value"
-      label="Block callers not already in contacts list"
-    />
-    <dt-checkbox
-      name="option3"
-      value="Value"
-      label="Block callers with a high spam score"
-    />
-  </dt-checkbox-group>
-</code-example>
+```vue demo
+<dt-checkbox-group legend="Call Blocking & Spam Protection" :selectedValues="[]">
+  <dt-checkbox
+    name="option1"
+    value="Value"
+    label="Anonymous callers"
+  />
+  <dt-checkbox
+    name="option2"
+    value="Value"
+    label="Block callers not already in contacts list"
+  />
+  <dt-checkbox
+    name="option3"
+    value="Value"
+    label="Block callers with a high spam score"
+  />
+</dt-checkbox-group>
+```
 
 ### With Description Text
 
-<code-example>
-  <dt-checkbox-group legend="Call Blocking & Spam Protection" :selectedValues="[]">
-    <dt-checkbox
-      name="option1"
-      value="Value"
-      label="Anonymous callers"
-      description="Select how phone numbers you dont know should be handled."
-    />
-    <dt-checkbox
-      name="option2"
-      value="Value"
-      label="Block callers not already in contacts list"
-      description="You get enough calls. Free up some of your time."
-    />
-    <dt-checkbox
-      name="option3"
-      value="Value"
-      label="Block callers with a high spam score"
-      description="We will only let the legitimate callers through to bother you."
-    />
-  </dt-checkbox-group>
-</code-example>
+```vue demo
+<dt-checkbox-group legend="Call Blocking & Spam Protection" :selectedValues="[]">
+  <dt-checkbox
+    name="option1"
+    value="Value"
+    label="Anonymous callers"
+    description="Select how phone numbers you dont know should be handled."
+  />
+  <dt-checkbox
+    name="option2"
+    value="Value"
+    label="Block callers not already in contacts list"
+    description="You get enough calls. Free up some of your time."
+  />
+  <dt-checkbox
+    name="option3"
+    value="Value"
+    label="Block callers with a high spam score"
+    description="We will only let the legitimate callers through to bother you."
+  />
+</dt-checkbox-group>
+```
 
 ### With Validation States
 
-<code-example>
-  <dt-checkbox-group legend="Call Blocking & Spam Protection" :selectedValues="[]">
-    <dt-checkbox
-      name="option1"
-      value="Value"
-      label="Anonymous callers"
-      validation-state="warning"
-      :messages="[{ message: `Select how phone numbers you dont know should be handled.`, type: `warning` }]"
-    />
-    <dt-checkbox
-      name="option2"
-      value="Value"
-      label="Block callers not already in contacts list"
-      validation-state="error"
-      :messages="[{ message: `You get enough calls. Free up some of your time.`, type: `error` }]"
-    />
-    <dt-checkbox
-      name="option3"
-      value="Value"
-      label="Block callers with a high spam score"
-      validation-state="success"
-      :messages="[{ message: `We will only let the legitimate callers through to bother you.`, type: `success` }]"
-    />
-  </dt-checkbox-group>
-</code-example>
+```vue demo
+<dt-checkbox-group legend="Call Blocking & Spam Protection" :selectedValues="[]">
+  <dt-checkbox
+    name="option1"
+    value="Value"
+    label="Anonymous callers"
+    validation-state="warning"
+    :messages="[{ message: `Select how phone numbers you dont know should be handled.`, type: `warning` }]"
+  />
+  <dt-checkbox
+    name="option2"
+    value="Value"
+    label="Block callers not already in contacts list"
+    validation-state="error"
+    :messages="[{ message: `You get enough calls. Free up some of your time.`, type: `error` }]"
+  />
+  <dt-checkbox
+    name="option3"
+    value="Value"
+    label="Block callers with a high spam score"
+    validation-state="success"
+    :messages="[{ message: `We will only let the legitimate callers through to bother you.`, type: `success` }]"
+  />
+</dt-checkbox-group>
+```
 
 ## Label size
 
 Use the `label-size` prop to override the default label size.
 
-<code-example>
-  <dt-stack gap="100" data-demo-wrapper>
-    <dt-checkbox name="sizeXs" value="Value" label="Extra small label" :label-size="100" />
-    <dt-checkbox name="sizeSm" value="Value" label="Small label" :label-size="200" />
-    <dt-checkbox name="sizeMd" value="Value" label="Medium label (default)" :label-size="300" />
-    <dt-checkbox name="sizeLg" value="Value" label="Large label" :label-size="400" />
-  </dt-stack>
-</code-example>
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="100">
+  <dt-checkbox name="sizeXs" value="Value" label="Extra small label" :label-size="100" />
+  <dt-checkbox name="sizeSm" value="Value" label="Small label" :label-size="200" />
+  <dt-checkbox name="sizeMd" value="Value" label="Medium label (default)" :label-size="300" />
+  <dt-checkbox name="sizeLg" value="Value" label="Large label" :label-size="400" />
+</dt-stack>
+```
 
 ## Vue API
 

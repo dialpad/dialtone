@@ -9,11 +9,11 @@ figma: planned
 keywords: ["loading placeholder", "shimmer", "ghost", "d-skeleton", "DtSkeleton", "dt-skeleton", "content loader", "placeholder ui"]
 ---
 
-<code-example only-show="demo">
-  <div class="d-w-400">
-    <dt-skeleton :animate="false" />
-  </div>
-</code-example>
+```vue demo-only
+<div class="d-w-400">
+  <dt-skeleton :animate="false" />
+</div>
+```
 
 <!-- <component-combinator component-name="DtSkeleton" /> -->
 
@@ -61,48 +61,52 @@ keywords: ["loading placeholder", "shimmer", "ghost", "d-skeleton", "DtSkeleton"
 
 ### Default
 
-<code-example>
-  <div class="d-w-400" data-demo-wrapper>
-    <dt-skeleton :animate="false" arial-label="Loading" />
-  </div>
-</code-example>
+```vue demo
+<!-- @wrapper -->
+<div class="d-w-400">
+  <dt-skeleton :animate="false" arial-label="Loading" />
+</div>
+```
 
 ### Animation
 
-<code-example>
-  <div class="d-w-400" data-demo-wrapper>
-    <dt-skeleton arial-label="Loading" />
-  </div>
-</code-example>
+```vue demo
+<!-- @wrapper -->
+<div class="d-w-400">
+  <dt-skeleton arial-label="Loading" />
+</div>
+```
 
 ## Custom
 
 To customize a non-animating Skeleton background color modify the `--placeholder-from-color` variable with an inline `style`.
 
-<code-example>
-  <div class="d-w-400" data-demo-wrapper>
-    <dt-skeleton
-      :animate="false"
-      :text-option="{
-        style: '--placeholder-from-color: var(--dt-color-blue-400)',
-      }"
-      arial-label="Loading"
-    />
-  </div>
-</code-example>
+```vue demo
+<!-- @wrapper -->
+<div class="d-w-400">
+  <dt-skeleton
+    :animate="false"
+    :text-option="{
+      style: '--placeholder-from-color: var(--dt-color-blue-400)',
+    }"
+    arial-label="Loading"
+  />
+</div>
+```
 
 Customize an animating Skeleton by modifying the `--placeholder-from-color` and `--placeholder-to-color` variables with an inline `style`.
 
-<code-example>
-  <div class="d-w-400" data-demo-wrapper>
-    <dt-skeleton
-      :text-option="{
-        style: '--placeholder-from-color: var(--dt-color-blue-400); --placeholder-to-color: var(--dt-color-blue-200);',
-      }"
-      arial-label="Loading"
-    />
-  </div>
-</code-example>
+```vue demo
+<!-- @wrapper -->
+<div class="d-w-400">
+  <dt-skeleton
+    :text-option="{
+      style: '--placeholder-from-color: var(--dt-color-blue-400); --placeholder-to-color: var(--dt-color-blue-200);',
+    }"
+    arial-label="Loading"
+  />
+</div>
+```
 
 ## Shapes
 
@@ -110,96 +114,103 @@ Customize an animating Skeleton by modifying the `--placeholder-from-color` and 
 
 Default sizes match the avatar size. Size is customizable when needed.
 
-<code-example>
-  <dt-stack gap="100" data-demo-wrapper>
-    <p>S (24x24px)</p>
-    <dt-skeleton :shape-option="{ shape: 'circle', size: 'sm' }" :animate="false" />
-    <p>M (32x32px)</p>
-    <dt-skeleton :shape-option="{ shape: 'circle' }" :animate="false" />
-    <p>L (48x48px)</p>
-    <dt-skeleton :shape-option="{ shape: 'circle', size: 'lg' }" :animate="false" />
-  </dt-stack>
-</code-example>
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="100">
+  <p>S (24x24px)</p>
+  <dt-skeleton :shape-option="{ shape: 'circle', size: 'sm' }" :animate="false" />
+  <p>M (32x32px)</p>
+  <dt-skeleton :shape-option="{ shape: 'circle' }" :animate="false" />
+  <p>L (48x48px)</p>
+  <dt-skeleton :shape-option="{ shape: 'circle', size: 'lg' }" :animate="false" />
+</dt-stack>
+```
 
 ### Image / Icon
 
-<code-example>
-  <dt-stack gap="100" data-demo-wrapper>
-    <p>S (24x24px)</p>
-    <dt-skeleton :shape-option="{ shape: 'square', size: 'sm' }" :animate="false" />
-    <p>M (32x32px)</p>
-    <dt-skeleton :shape-option="{ shape: 'square' }" :animate="false" />
-    <p>L (48x48px)</p>
-    <dt-skeleton :shape-option="{ shape: 'square', size: 'lg' }" :animate="false" />
-  </dt-stack>
-</code-example>
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="100">
+  <p>S (24x24px)</p>
+  <dt-skeleton :shape-option="{ shape: 'square', size: 'sm' }" :animate="false" />
+  <p>M (32x32px)</p>
+  <dt-skeleton :shape-option="{ shape: 'square' }" :animate="false" />
+  <p>L (48x48px)</p>
+  <dt-skeleton :shape-option="{ shape: 'square', size: 'lg' }" :animate="false" />
+</dt-stack>
+```
 
 ### Headings
 
-<code-example>
-  <dt-stack gap="100" data-demo-wrapper>
-    <p>Small</p>
-    <dt-skeleton :text-option="{ type: 'heading', headingHeight: 'sm', width: '160px' }" :animate="false" />
-    <p>Medium</p>
-    <dt-skeleton :text-option="{ type: 'heading', width: '240px' }" :animate="false" />
-    <p>Large</p>
-    <dt-skeleton :text-option="{ type: 'heading', headingHeight: 'lg', width: '320px' }" :animate="false" />
-  </dt-stack>
-</code-example>
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="100">
+  <p>Small</p>
+  <dt-skeleton :text-option="{ type: 'heading', headingHeight: 'sm', width: '160px' }" :animate="false" />
+  <p>Medium</p>
+  <dt-skeleton :text-option="{ type: 'heading', width: '240px' }" :animate="false" />
+  <p>Large</p>
+  <dt-skeleton :text-option="{ type: 'heading', headingHeight: 'lg', width: '320px' }" :animate="false" />
+</dt-stack>
+```
 
 ## Prefabricated Combinations
 
 ### Paragraphs
 
-<code-example>
-  <div class="d-w-400" data-demo-wrapper>
-    <dt-skeleton :paragraph-option="{ rows: 5, randomWidth: true }" :animate="false" />
-  </div>
-</code-example>
+```vue demo
+<!-- @wrapper -->
+<div class="d-w-400">
+  <dt-skeleton :paragraph-option="{ rows: 5, randomWidth: true }" :animate="false" />
+</div>
+```
 
 ### Avatar + Name
 
-<code-example>
-  <div class="d-w-400" data-demo-wrapper>
-    <dt-skeleton
-      :list-item-option="{ shapeSize: 'sm', paragraphs: { rows: 1 } }"
-    />
-  </div>
-</code-example>
+```vue demo
+<!-- @wrapper -->
+<div class="d-w-400">
+  <dt-skeleton
+    :list-item-option="{ shapeSize: 'sm', paragraphs: { rows: 1 } }"
+  />
+</div>
+```
 
 ### Icon + Text
 
-<code-example>
-  <div class="d-w-400" data-demo-wrapper>
-    <dt-skeleton
-      :list-item-option="{
-        shapeSize: '2rem',
-        shape: 'square',
-        paragraphs: {
-          rows: 1,
-        },
-      }"
-    />
-  </div>
-</code-example>
+```vue demo
+<!-- @wrapper -->
+<div class="d-w-400">
+  <dt-skeleton
+    :list-item-option="{
+      shapeSize: '2rem',
+      shape: 'square',
+      paragraphs: {
+        rows: 1,
+      },
+    }"
+  />
+</div>
+```
 
 ### Messages / Transcript / Comment
 
-<code-example>
-  <div class="d-w-400" data-demo-wrapper>
-    <dt-skeleton
-      :list-item-option="{
-        shapeSize: '3.6rem',
-        paragraphs: {
-          rows: 4,
-          width: [
-            '120px', '311px', '371px', '279px',
-          ],
-        },
-      }"
-    />
-  </div>
-</code-example>
+```vue demo
+<!-- @wrapper -->
+<div class="d-w-400">
+  <dt-skeleton
+    :list-item-option="{
+      shapeSize: '3.6rem',
+      paragraphs: {
+        rows: 4,
+        width: [
+          '120px', '311px', '371px', '279px',
+        ],
+      },
+    }"
+  />
+</div>
+```
 
 ## Accessibility
 

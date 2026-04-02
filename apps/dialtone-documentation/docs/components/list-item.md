@@ -9,25 +9,26 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["list element", "d-list-item", "DtListItem", "dt-list-item"]
 ---
 
-<code-example only-show="demo" class="d-d-block">
-  <ul>
-    <dt-list-item navigation-type="tab">
-      <template #start>
-        <dt-icon size="300" name="check" />
-      </template>
-      <span>Default List Item</span>
-      <template #subtitle>
-        Description
-      </template>
-      <template #bottom>
-        <dt-badge text="Label" />
-      </template>
-      <template #end>
-        <dt-icon size="300" name="external-link" />
-      </template>
-    </dt-list-item>
-  </ul>
-</code-example>
+```vue demo-only
+<!-- @class d-d-block -->
+<ul>
+  <dt-list-item navigation-type="tab">
+    <template #start>
+      <dt-icon size="300" name="check" />
+    </template>
+    <span>Default List Item</span>
+    <template #subtitle>
+      Description
+    </template>
+    <template #bottom>
+      <dt-badge text="Label" />
+    </template>
+    <template #end>
+      <dt-icon size="300" name="external-link" />
+    </template>
+  </dt-list-item>
+</ul>
+```
 
 <!-- <component-combinator component-name="DtListItem" /> -->
 
@@ -47,25 +48,26 @@ The **subtitle** slot can be used to display content below the default slot. The
 
 The **bottom** slot can be used to display content below the subtitle slot.
 
-<code-example class="d-d-block">
-  <ul>
-    <dt-list-item navigation-type="tab">
-      <template #start>
-        <dt-icon size="300" name="check" />
-      </template>
-      <span>Default List Item</span>
-      <template #subtitle>
-        Description
-      </template>
-      <template #bottom>
-        <dt-badge text="Label" />
-      </template>
-      <template #end>
-        <dt-icon size="300" name="external-link" />
-      </template>
-    </dt-list-item>
-  </ul>
-</code-example>
+```vue demo
+<!-- @class d-d-block -->
+<ul>
+  <dt-list-item navigation-type="tab">
+    <template #start>
+      <dt-icon size="300" name="check" />
+    </template>
+    <span>Default List Item</span>
+    <template #subtitle>
+      Description
+    </template>
+    <template #bottom>
+      <dt-badge text="Label" />
+    </template>
+    <template #end>
+      <dt-icon size="300" name="external-link" />
+    </template>
+  </dt-list-item>
+</ul>
+```
 
 ## Variants
 
@@ -73,71 +75,72 @@ The **bottom** slot can be used to display content below the subtitle slot.
 
 When `type` is set to "custom" the list item will not render any styles or slots. This type can be used when the list item has to support content that does not work with the default structure.
 
-<code-example class="d-d-block">
-  <ul>
-    <dt-list-item
-      navigation-type="tab"
-      type="custom"
-    >
-      <dt-stack direction="row" align="start" justify="between" gap="500" class="d-py-100 d-px-150 d-pie-100">
-        <dt-stack align="baseline" direction="row" gap="400">
-          <dt-text
-            kind="body"
-            tone="muted"
-            :size="100"
-            datetime="10:00"
-          >
-            10:00
-          </dt-text>
-          <dt-text :size="300" density="300" kind="body" tone="secondary">
-            Custom list item example lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-          </dt-text>
-        </dt-stack>
-        <dt-stack direction="row">
-          <dt-button
-            :size="100"
-            kind="muted"
-            importance="clear"
-            title="share"
-          >
-            <template #startIcon="{ iconSize }">
-              <dt-icon
-                name="share"
-                :size="iconSize"
-              />
-            </template>
-          </dt-button>
-          <dt-button
-            :size="100"
-            kind="muted"
-            importance="clear"
-            title="star"
-          >
-            <template #startIcon="{ iconSize }">
-              <dt-icon
-                name="star"
-                :size="iconSize"
-              />
-            </template>
-          </dt-button>
-          <dt-button
-            :size="100"
-            kind="muted"
-            importance="clear"
-            title="more"
-          >
-            <template #startIcon="{ iconSize }">
-              <dt-icon
-                name="more-vertical"
-                :size="iconSize"
-              />
-            </template>
-          </dt-button>
-        </dt-stack>
+```vue demo
+<!-- @class d-d-block -->
+<ul>
+  <dt-list-item
+    navigation-type="tab"
+    type="custom"
+  >
+    <dt-stack direction="row" align="start" justify="between" gap="500" class="d-py-100 d-px-150 d-pie-100">
+      <dt-stack align="baseline" direction="row" gap="400">
+        <dt-text
+          kind="body"
+          tone="muted"
+          :size="100"
+          datetime="10:00"
+        >
+          10:00
+        </dt-text>
+        <dt-text :size="300" density="300" kind="body" tone="secondary">
+          Custom list item example lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+        </dt-text>
       </dt-stack>
-    </dt-list-item>
-  </ul>
-</code-example>
+      <dt-stack direction="row">
+        <dt-button
+          :size="100"
+          kind="muted"
+          importance="clear"
+          title="share"
+        >
+          <template #startIcon="{ iconSize }">
+            <dt-icon
+              name="share"
+              :size="iconSize"
+            />
+          </template>
+        </dt-button>
+        <dt-button
+          :size="100"
+          kind="muted"
+          importance="clear"
+          title="star"
+        >
+          <template #startIcon="{ iconSize }">
+            <dt-icon
+              name="star"
+              :size="iconSize"
+            />
+          </template>
+        </dt-button>
+        <dt-button
+          :size="100"
+          kind="muted"
+          importance="clear"
+          title="more"
+        >
+          <template #startIcon="{ iconSize }">
+            <dt-icon
+              name="more-vertical"
+              :size="iconSize"
+            />
+          </template>
+        </dt-button>
+      </dt-stack>
+    </dt-stack>
+  </dt-list-item>
+</ul>
+```
 
 ## Vue API
 

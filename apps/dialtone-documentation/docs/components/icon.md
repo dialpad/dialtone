@@ -44,14 +44,14 @@ import { DtIcon } from '@dialpad/dialtone'
 Adjust the size using the `size` prop. Note that sizes 600, 700, and 800 are exclusively for devices.
 
 <div class="d-gc2">
-<code-example only-show="demo">
-  <div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols2 d-w100p">
-    <dt-stack direction="row" align="center" justify="center">
-      <dt-icon-settings :size="selectedSize" />
-    </dt-stack>
-    <dt-select-menu label="Size" :options="sizeValues" v-model="selectedSize" />
-  </div>
-</code-example>
+```vue demo-only
+<div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols2 d-w100p">
+  <dt-stack direction="row" align="center" justify="center">
+    <dt-icon-settings :size="selectedSize" />
+  </dt-stack>
+  <dt-select-menu label="Size" :options="sizeValues" v-model="selectedSize" />
+</div>
+```
 
 ```js
 <dt-icon-settings size="500" />
@@ -67,17 +67,17 @@ Adjust the size using the `size` prop. Note that sizes 600, 700, and 800 are exc
 The icon's color inherits from the parent's foreground color.
 
 <div class="d-gc2">
-<code-example only-show="demo">
+```vue demo-only
 <div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols2 d-w100p">
-  <dt-stack direction="row" align="center" justify="center">
-    <dt-stack :class="selectedColor" direction="row" gap="300">
-      <dt-icon-settings size="300" />
-      <dt-text>Settings</dt-text>
-    </dt-stack>
+<dt-stack direction="row" align="center" justify="center">
+  <dt-stack :class="selectedColor" direction="row" gap="300">
+    <dt-icon-settings size="300" />
+    <dt-text>Settings</dt-text>
   </dt-stack>
-  <dt-select-menu label="Color" :options="iconColors" v-model="selectedColor" />
+</dt-stack>
+<dt-select-menu label="Color" :options="iconColors" v-model="selectedColor" />
 </div>
-</code-example>
+```
 
 ```html
 <dt-stack class="d-fc-success" direction="row" gap="300">
@@ -139,17 +139,17 @@ When setting the color of an icon take these into consideration:
 We encourage utilizing the [Stack component](/components/stack.md) for aligning elements both horizontally and vertically.
 
 <div class="d-gc2">
-<code-example only-show="demo">
-  <div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols2 d-w100p">
-    <dt-stack direction="row" align="center" justify="center">
-      <dt-stack :direction="selectedDirection" class="d-fl-center" gap="300">
-      <dt-icon-settings size="300" />
-      <dt-text>Settings</dt-text>
-      </dt-stack>
+```vue demo-only
+<div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols2 d-w100p">
+  <dt-stack direction="row" align="center" justify="center">
+    <dt-stack :direction="selectedDirection" class="d-fl-center" gap="300">
+    <dt-icon-settings size="300" />
+    <dt-text>Settings</dt-text>
     </dt-stack>
-    <dt-select-menu label="Direction" :options="stackDirection" v-model="selectedDirection" />
-  </div>
-</code-example>
+  </dt-stack>
+  <dt-select-menu label="Direction" :options="stackDirection" v-model="selectedDirection" />
+</div>
+```
 
 ```html
 <dt-stack direction="row" class="d-fl-center" gap="300">

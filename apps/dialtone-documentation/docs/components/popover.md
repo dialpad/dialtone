@@ -9,9 +9,9 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["popup", "overlay", "floating", "d-popover", "DtPopover", "dt-popover", "flyout", "tooltip panel"]
 ---
 
-<code-example only-show="demo">
-  <example-popover modal />
-</code-example>
+```vue demo-only
+<example-popover modal />
+```
 
 <component-combinator component-name="DtPopover" />
 
@@ -66,7 +66,9 @@ The content slot will be rendered lazily when the popover is open. By default, t
 
 ### Popover - Modal
 
-<code-example vueCode='
+```vue demo
+<example-popover modal />
+<!-- @code -->
 <dt-popover
   :open="onOpen"
 >
@@ -90,13 +92,13 @@ The content slot will be rendered lazily when the popover is open. By default, t
     </div>
   </template>
 </dt-popover>
-'>
-  <example-popover modal />
-</code-example>
+```
 
 ### Popover - Non Modal
 
-<code-example vueCode='
+```vue demo
+<example-popover />
+<!-- @code -->
 <dt-popover
   :open="onOpen"
   :modal="false"
@@ -121,13 +123,17 @@ The content slot will be rendered lazily when the popover is open. By default, t
     </div>
   </template>
 </dt-popover>
-'>
-  <example-popover />
-</code-example>
+```
 
 ### With Header - Modal
 
-<code-example vueCode='
+```vue demo
+<example-popover modal header>
+  <template #content>
+    <div class="d-mbe-100">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae.<br></div>
+  </template>
+</example-popover>
+<!-- @code -->
 <dt-popover
   :open="onOpen"
 >
@@ -156,17 +162,17 @@ The content slot will be rendered lazily when the popover is open. By default, t
     </div>
   </template>
 </dt-popover>
-'>
-  <example-popover modal header>
-    <template #content>
-      <div class="d-mbe-100">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae.<br></div>
-    </template>
-  </example-popover>
-</code-example>
+```
 
 ### With Footer - Modal
 
-<code-example vueCode='
+```vue demo
+<example-popover modal footer>
+  <template #content>
+    <div class="d-mbe-100">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae.<br></div>
+  </template>
+</example-popover>
+<!-- @code -->
 <dt-popover
   :open="onOpen"
 >
@@ -195,13 +201,7 @@ The content slot will be rendered lazily when the popover is open. By default, t
     </div>
   </template>
 </dt-popover>
-'>
-  <example-popover modal footer>
-    <template #content>
-      <div class="d-mbe-100">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae.<br></div>
-    </template>
-  </example-popover>
-</code-example>
+```
 
 ### Fallback Placements
 
@@ -210,7 +210,9 @@ The popover uses [headless-tippy](https://atomiks.github.io/tippyjs/v6/headless-
 be clipped, it will move to a new position. It will do this automatically by default, but if you want to
 manually specify which position it will move to in what order you can do so via the `fallbackPlacements` prop.
 
-<code-example vueCode='
+```vue demo
+<example-popover :fallback-placements="['top']" button-text="Fallback placement: top" />
+<!-- @code -->
 <dt-popover
   :open="onOpen"
   :fallback-placements="[`top`]"
@@ -235,15 +237,15 @@ manually specify which position it will move to in what order you can do so via 
     </div>
   </template>
 </dt-popover>
-'>
-  <example-popover :fallback-placements="['top']" button-text="Fallback placement: top" />
-</code-example>
+```
 
 ### Padding
 
 Padding options for the popover content are provided via size classes "small", "medium" or "large" in order to standardize the look of the popover content between usages. To remove the padding from the content, you can pass "none". Setting none will also allow you to set custom padding via utility classes (Ex: you only want padding on the left.).
 
-<code-example vueCode='
+```vue demo
+<example-popover padding="small" />
+<!-- @code -->
 <dt-popover
   :open="onOpen"
   padding="small"
@@ -268,9 +270,7 @@ Padding options for the popover content are provided via size classes "small", "
     </div>
   </template>
 </dt-popover>
-'>
-  <example-popover padding="small" />
-</code-example>
+```
 
 ### Force Close All Opened Instances
 
@@ -285,20 +285,20 @@ window.dispatchEvent(e);
 
 Popover content renders outside the DOM tree. Use the `contentMode` prop to apply color mode (invert, light, dark) to the positioned content. See [Positioned Components](/components/mode-island.html#positioned-components) for details.
 
-<code-example vueCode='
+```vue demo
+<dt-popover content-mode="invert" placement="bottom-start" dialogClass="d-w-350">
+  <template #anchor>
+    <dt-button :size="200" kind="muted" importance="outlined">Inverted Popover</dt-button>
+  </template>
+  <template #content="{ close }">
+    <dt-text as="p">This Popover's content is in the <dt-text strength="strong">inverted</dt-text> mode.</dt-text>
+  </template>
+</dt-popover>
+<!-- @code -->
 <dt-popover content-mode="invert">...</dt-popover>
 <dt-popover content-mode="dark">...</dt-popover>
 <dt-popover content-mode="light">...</dt-popover>
-'>
-  <dt-popover content-mode="invert" placement="bottom-start" dialogClass="d-w-350">
-    <template #anchor>
-      <dt-button :size="200" kind="muted" importance="outlined">Inverted Popover</dt-button>
-    </template>
-    <template #content="{ close }">
-      <dt-text as="p">This Popover's content is in the <dt-text strength="strong">inverted</dt-text> mode.</dt-text>
-    </template>
-  </dt-popover>
-</code-example>
+```
 
 ## Vue API
 

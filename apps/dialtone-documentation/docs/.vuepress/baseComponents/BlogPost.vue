@@ -86,13 +86,12 @@ const blogLink = computed(() => {
 <style lang="less">
 .blog-post-content {
   .d-docsite--header-2:first-of-type {
-    margin-block-start: var(--dt-size-500);
+    margin-block-start: var(--dt-spacing-200);
   }
   > table:not([class]) {
     color: var(--dt-color-foreground-tertiary);
-    border: 1px solid var(--dt-color-border-default);
     border-collapse: collapse;
-    margin: var(--dt-size-500) 0;
+    margin: var(--dt-spacing-200) 0;
     inline-size: 100%;
     font: var(--dt-text-body-sm);
 
@@ -106,14 +105,17 @@ const blogLink = computed(() => {
 
     :where(th, td) {
       text-align: start;
-      border: 1px solid var(--dt-color-border-default);
-      border-inline: 0;
-      padding: var(--dt-size-500);
+      border-block-end: var(--dt-size-border-100) solid var(--dt-color-border-default);
+      padding: var(--dt-spacing-200);
       vertical-align: baseline;
     }
 
     :where(thead th) {
-      border-block-end-width: 3px;
+      border-block-end-width: var(--dt-size-border-200);
+    }
+
+    :where(tbody tr:last-of-type) :where(td, th) {
+      border-block-end: none;
     }
 
     :where(code, kbd) {

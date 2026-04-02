@@ -28,47 +28,54 @@ With this we accomplish the requirement to have the previous year button focused
 
 ### Default
 
-<code-example>
-  <dt-datepicker></dt-datepicker>
-</code-example>
+```vue demo
+<dt-datepicker></dt-datepicker>
+```
 
 ### With Popover
 
-<code-example>
-  <dt-popover
-    :open="datepickerOpened"
-    initial-focus-element="#prevYearButton"
-    padding="none"
-    @opened="(open) => { datepickerOpened = open }"
-    placement="bottom-start"
-  >
-    <template #anchor>
-      <dt-button
-        :size="200"
-        circle
-        importance="clear"
-        aria-label="Open datepicker"
-        @click="toggleDatepicker"
-      >
-        <template #startIcon>
-          <dt-icon
-            name="calendar"
-            size="300"
-          />
-        </template>
-      </dt-button>
-    </template>
-    <template #content>
-      <dt-datepicker></dt-datepicker>
-    </template>
-  </dt-popover>
-</code-example>
+```vue demo
+<dt-popover
+  :open="datepickerOpened"
+  initial-focus-element="#prevYearButton"
+  padding="none"
+  @opened="(open) => { datepickerOpened = open }"
+  placement="bottom-start"
+>
+  <template #anchor>
+    <dt-button
+      :size="200"
+      circle
+      importance="clear"
+      aria-label="Open datepicker"
+      @click="toggleDatepicker"
+    >
+      <template #startIcon>
+        <dt-icon
+          name="calendar"
+          size="300"
+        />
+      </template>
+    </dt-button>
+  </template>
+  <template #content>
+    <dt-datepicker></dt-datepicker>
+  </template>
+</dt-popover>
+```
 
 ### With min/max date
 
 Constrain the selectable date range by providing `min-date` and/or `max-date` props. Days outside the range are disabled and navigation buttons are disabled when the target month is fully out of range.
 
-<code-example vueCode='
+```vue demo
+<dt-datepicker
+  :selected-date="currentSelectedDate"
+  :min-date="minDate"
+  :max-date="maxDate"
+  @selected-date="currentSelectedDate = $event;"
+/>
+<!-- @code -->
 <script>
 const today = new Date();
 const minDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 5);
@@ -79,14 +86,7 @@ const maxDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() 
   :min-date="minDate"
   :max-date="maxDate"
 />
-'>
-  <dt-datepicker
-    :selected-date="currentSelectedDate"
-    :min-date="minDate"
-    :max-date="maxDate"
-    @selected-date="currentSelectedDate = $event;"
-  />
-</code-example>
+```
 
 ## Vue API
 

@@ -29,17 +29,17 @@ Breadcrumbs are always treated as secondary and should not entirely replace the 
 
 ### Default
 
-<code-example>
-  <dt-breadcrumbs
-    :breadcrumbs="[
-      { href: '#', label: 'Root' },
-      { href: '#', label: 'Section' },
-      { href: '#', label: 'Section' },
-      { href: '#', label: 'Section' },
-      { href: '#', label: 'Current Page', selected: true },
-    ]"
-  />
-</code-example>
+```vue demo
+<dt-breadcrumbs
+  :breadcrumbs="[
+    { href: '#', label: 'Root' },
+    { href: '#', label: 'Section' },
+    { href: '#', label: 'Section' },
+    { href: '#', label: 'Section' },
+    { href: '#', label: 'Current Page', selected: true },
+  ]"
+/>
+```
 
 ### Inverted
 
@@ -51,19 +51,19 @@ Breadcrumbs are always treated as secondary and should not entirely replace the 
 
 In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#inverting) on the component element.
 
-<code-example>
-  <div class="d-bgc-contrast">
-    <dt-breadcrumbs
-      v-dt-mode:invert
-      class="d-p-200 d-bar8"
-      :breadcrumbs="[
-        { href: '#', label: 'Root' },
-        { href: '#', label: 'Section' },
-        { href: '#', label: 'Current Page', selected: true },
-      ]"
-    />
-  </div>
-</code-example>
+```vue demo
+<div class="d-bgc-contrast">
+  <dt-breadcrumbs
+    v-dt-mode:invert
+    class="d-p-200 d-bar8"
+    :breadcrumbs="[
+      { href: '#', label: 'Root' },
+      { href: '#', label: 'Section' },
+      { href: '#', label: 'Current Page', selected: true },
+    ]"
+  />
+</div>
+```
 
 ## Vue API
 

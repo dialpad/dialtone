@@ -30,7 +30,9 @@ keywords: ["rte", "wysiwyg", "markdown", "d-rte", "DtRichTextEditor", "dt-rich-t
 
 The editor itself is without any styling and the intention is to wrap it with another component, such as Message Input, that provides the UI.
 
-<code-example vueCode='
+```vue demo
+<example-rich-text-editor :modelValue="defaultValue" />
+<!-- @code -->
 <dt-rich-text-editor
   v-model="value"
   :editable="true"
@@ -41,17 +43,15 @@ The editor itself is without any styling and the intention is to wrap it with an
   placeholder="Type here..."
   :link="true"
 />
-'>
-  <example-rich-text-editor :modelValue="defaultValue" />
-</code-example>
+```
 
 ## With Links
 
-<code-example only-show="demo">
-  <example-rich-text-editor
-    modelValue="<p>The editor can autolink URLs: <a target='_blank' rel='noopener noreferrer nofollow' class='d-link d-wb-break-all' href='http://dialpad.com'>dialpad.com</a>, <a target='_blank' rel='noopener noreferrer nofollow' class='d-link d-wb-break-all' href='https://www.dialpad.com/about-us/'>https://www.dialpad.com/about-us/</a>, email addresses: <a target='_blank' rel='noopener noreferrer nofollow' class='d-link d-wb-break-all' href='mailto:noreply@dialpad.com'>noreply@dialpad.com</a></p>"
-  />
-</code-example>
+```vue demo-only
+<example-rich-text-editor
+  modelValue="<p>The editor can autolink URLs: <a target='_blank' rel='noopener noreferrer nofollow' class='d-link d-wb-break-all' href='http://dialpad.com'>dialpad.com</a>, <a target='_blank' rel='noopener noreferrer nofollow' class='d-link d-wb-break-all' href='https://www.dialpad.com/about-us/'>https://www.dialpad.com/about-us/</a>, email addresses: <a target='_blank' rel='noopener noreferrer nofollow' class='d-link d-wb-break-all' href='mailto:noreply@dialpad.com'>noreply@dialpad.com</a></p>"
+/>
+```
 
 ## Output Format
 
@@ -117,7 +117,12 @@ If this mentionSuggestion Object prop is not supplied, the mention plugin is dis
 
 To see it in action type char '@' into rich editor With channel mentions.
 
-<code-example vueCode='
+```vue demo
+<example-rich-text-editor
+  modelValue="<p>The editor can also suggest mentions: <mention-component name='Test Person' avatarsrc='' id='test.person'></mention-component>, <mention-component name='Test Person 2' avatarsrc='' id='test.person2'></mention-component>! The suggestions dropdown will wait 1000ms to simulate an API call.</p>"
+  :mentionSuggestion="{ items }"
+/>
+<!-- @code -->
 <dt-rich-text-editor
   v-model="value"
   :editable="true"
@@ -129,12 +134,7 @@ To see it in action type char '@' into rich editor With channel mentions.
   :link="true"
   :mentionSuggestion="{ items }"
 />
-'>
-  <example-rich-text-editor
-    modelValue="<p>The editor can also suggest mentions: <mention-component name='Test Person' avatarsrc='' id='test.person'></mention-component>, <mention-component name='Test Person 2' avatarsrc='' id='test.person2'></mention-component>! The suggestions dropdown will wait 1000ms to simulate an API call.</p>"
-    :mentionSuggestion="{ items }"
-  />
-</code-example>
+```
 
 ## Vue API
 

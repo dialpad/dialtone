@@ -40,107 +40,107 @@ They should be easy to scan for relevant and actionable information. Elements, l
 
 ### Base
 
-<code-example>
-  <dt-card class="d-w-400" header-class="h:d-bgc-moderate-opaque" content-class="h:d-bgc-moderate-opaque" footer-class="h:d-bgc-moderate-opaque">
-    <template #header>
-      (header slot)
-    </template>
-    <template #content>
-      (content slot)
-    </template>
-    <template #footer>
-      (footer slot)
-    </template>
-  </dt-card>
-</code-example>
+```vue demo
+<dt-card class="d-w-400" header-class="h:d-bgc-moderate-opaque" content-class="h:d-bgc-moderate-opaque" footer-class="h:d-bgc-moderate-opaque">
+  <template #header>
+    (header slot)
+  </template>
+  <template #content>
+    (content slot)
+  </template>
+  <template #footer>
+    (footer slot)
+  </template>
+</dt-card>
+```
 
 ### With Header
 
-<code-example>
-  <dt-card class="d-w-400">
-    <template #header>
-      <dt-text as="p" kind="headline" :size="300">Lorem ipsum</dt-text>
-      <dt-button
-        :size="100"
-        importance="clear"
-        kind="muted"
-        aria-label="Menu button"
-      >
-        <template #startIcon>
-          <dt-icon
-            name="more-vertical"
-            size="100"
-          />
-        </template>
-      </dt-button>
-    </template>
-    <template #content>
-      Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
-    </template>
-  </dt-card>
-</code-example>
+```vue demo
+<dt-card class="d-w-400">
+  <template #header>
+    <dt-text as="p" kind="headline" :size="300">Lorem ipsum</dt-text>
+    <dt-button
+      :size="100"
+      importance="clear"
+      kind="muted"
+      aria-label="Menu button"
+    >
+      <template #startIcon>
+        <dt-icon
+          name="more-vertical"
+          size="100"
+        />
+      </template>
+    </dt-button>
+  </template>
+  <template #content>
+    Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
+  </template>
+</dt-card>
+```
 
 ### With Footer
 
-<code-example>
-  <dt-card class="d-w-400">
-    <template #content>
-      Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
-    </template>
-    <template #footer>
-      <dt-button
-        importance="outlined"
-        :size="200"
-      >
-        Button
-      </dt-button>
-    </template>
-  </dt-card>
-</code-example>
+```vue demo
+<dt-card class="d-w-400">
+  <template #content>
+    Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
+  </template>
+  <template #footer>
+    <dt-button
+      importance="outlined"
+      :size="200"
+    >
+      Button
+    </dt-button>
+  </template>
+</dt-card>
+```
 
 ### Content Only
 
-<code-example>
-  <dt-card class="d-w-400">
-    <template #content>
-      Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
-    </template>
-  </dt-card>
-</code-example>
+```vue demo
+<dt-card class="d-w-400">
+  <template #content>
+    Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
+  </template>
+</dt-card>
+```
 
 ### With Header, Footer and Scrollable Content
 
-<code-example>
-  <dt-card class="d-w-400" content-class="d-pie-0">
-    <template #header>
-      <dt-text as="p" kind="headline" :size="300">Lorem ipsum</dt-text>
-      <dt-button
-        :size="100"
-        importance="clear"
-        kind="muted"
-        aria-label="Menu button"
-      >
-        <template #startIcon>
-          <dt-icon
-            name="more-vertical"
-            size="100"
-          />
-        </template>
-      </dt-button>
-    </template>
-    <template #content>
-      <div class="d-h-125 d-pie-200" v-dt-scrollbar:never>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
-    </template>
-    <template #footer>
-      <dt-button
-        importance="outlined"
-        :size="200"
-      >
-        Button
-      </dt-button>
-    </template>
-  </dt-card>
-</code-example>
+```vue demo
+<dt-card class="d-w-400" content-class="d-pie-0">
+  <template #header>
+    <dt-text as="p" kind="headline" :size="300">Lorem ipsum</dt-text>
+    <dt-button
+      :size="100"
+      importance="clear"
+      kind="muted"
+      aria-label="Menu button"
+    >
+      <template #startIcon>
+        <dt-icon
+          name="more-vertical"
+          size="100"
+        />
+      </template>
+    </dt-button>
+  </template>
+  <template #content>
+    <div class="d-h-125 d-pie-200" v-dt-scrollbar:never>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
+  </template>
+  <template #footer>
+    <dt-button
+      importance="outlined"
+      :size="200"
+    >
+      Button
+    </dt-button>
+  </template>
+</dt-card>
+```
 
 ## Vue API
 

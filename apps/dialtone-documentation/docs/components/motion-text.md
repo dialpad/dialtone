@@ -6,16 +6,16 @@ thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-motion-text--default
 ---
 
-<code-example>
-  <dt-text kind="headline" :size="600">
-    <dt-motion-text
-      text="Welcome to Dialtone Motion Text"
-      animation-mode="shimmer"
-      :auto-start="true"
-      loop
-    />
-  </dt-text>
-</code-example>
+```vue demo
+<dt-text kind="headline" :size="600">
+  <dt-motion-text
+    text="Welcome to Dialtone Motion Text"
+    animation-mode="shimmer"
+    :auto-start="true"
+    loop
+  />
+</dt-text>
+```
 
 ## Usage
 
@@ -25,41 +25,60 @@ The Motion Text component provides beautiful text animations with zero configura
 
 The component supports six different animation modes:
 
-<code-example  vueCode='
+```vue demo
+<dt-stack gap="200" align="center" class="d-hmn84">
+  <dt-stack direction="row" gap="100">
+    <dt-button
+      v-for="mode in animationModes"
+      :key="mode"
+      :size="100"
+      kind="muted"
+      importance="outlined"
+      @click="playMode(mode)"
+    >
+      {{ mode }}
+    </dt-button>
+  </dt-stack>
+  <dt-text kind="headline" :size="600">
+    <dt-motion-text
+      ref="animDemoRef"
+      text="Welcome to Dialtone Motion Text"
+      :animation-mode="activeMode"
+      :speed="300"
+    />
+  </dt-text>
+</dt-stack>
+<!-- @code -->
 <dt-text kind="headline" :size="600">
   <dt-motion-text
     text="Welcome to Dialtone Motion Text"
     :animation-mode="{mode}"
   />
 </dt-text>
-'>
-  <dt-stack gap="200" align="center" class="d-hmn84">
-    <dt-stack direction="row" gap="100">
-      <dt-button
-        v-for="mode in animationModes"
-        :key="mode"
-        :size="100"
-        kind="muted"
-        importance="outlined"
-        @click="playMode(mode)"
-      >
-        {{ mode }}
-      </dt-button>
-    </dt-stack>
-    <dt-text kind="headline" :size="600">
-      <dt-motion-text
-        ref="animDemoRef"
-        text="Welcome to Dialtone Motion Text"
-        :animation-mode="activeMode"
-        :speed="300"
-      />
-    </dt-text>
-  </dt-stack>
-</code-example>
+```
 
 ### Speed Control
 
-<code-example vueCode='
+```vue demo
+<dt-stack gap="200">
+  <dt-segmented-control :size="100" v-model="selected" aria-label="Speed Control">
+    <dt-segmented-control-item  v-dt-tooltip="'Near-instant'" value="100" :selected="selected === '100'">100</dt-segmented-control-item>
+    <dt-segmented-control-item  v-dt-tooltip="'Fast'" value="200" :selected="selected === '200'">200</dt-segmented-control-item>
+    <dt-segmented-control-item  v-dt-tooltip="'Medium (default)'" value="300" :selected="selected === '300'">300</dt-segmented-control-item>
+    <dt-segmented-control-item  v-dt-tooltip="'Slow'" value="400" :selected="selected === '400'">400</dt-segmented-control-item>
+    <dt-segmented-control-item  v-dt-tooltip="'Very slow'" value="500" :selected="selected === '500'">500</dt-segmented-control-item>
+  </dt-segmented-control>
+  <dt-text kind="headline" :size="600">
+    <dt-motion-text
+      text="Welcome to Dialtone Motion Text"
+      animation-mode="shimmer"
+      :speed="Number(selected)"
+      :auto-start="true"
+      loop
+    />
+  </dt-text>
+</dt-stack>
+<!-- @code -->
 <dt-text kind="headline" :size="600">
   <dt-motion-text
     text="Welcome to Dialtone Motion Text"
@@ -69,32 +88,32 @@ The component supports six different animation modes:
     loop
   />
 </dt-text>
-'>
-  <dt-stack gap="200">
-    <dt-segmented-control :size="100" v-model="selected" aria-label="Speed Control">
-      <dt-segmented-control-item  v-dt-tooltip="'Near-instant'" value="100" :selected="selected === '100'">100</dt-segmented-control-item>
-      <dt-segmented-control-item  v-dt-tooltip="'Fast'" value="200" :selected="selected === '200'">200</dt-segmented-control-item>
-      <dt-segmented-control-item  v-dt-tooltip="'Medium (default)'" value="300" :selected="selected === '300'">300</dt-segmented-control-item>
-      <dt-segmented-control-item  v-dt-tooltip="'Slow'" value="400" :selected="selected === '400'">400</dt-segmented-control-item>
-      <dt-segmented-control-item  v-dt-tooltip="'Very slow'" value="500" :selected="selected === '500'">500</dt-segmented-control-item>
-    </dt-segmented-control>
-    <dt-text kind="headline" :size="600">
-      <dt-motion-text
-        text="Welcome to Dialtone Motion Text"
-        animation-mode="shimmer"
-        :speed="Number(selected)"
-        :auto-start="true"
-        loop
-      />
-    </dt-text>
-  </dt-stack>
-</code-example>
+```
 
 ### Manual Control
 
 Take full control of the animation lifecycle:
 
-<code-example vueCode='
+```vue demo
+<dt-stack gap="200" align="center">
+  <dt-stack direction="row" gap="100">
+    <dt-button :size="100" kind="muted" importance="outlined" @click="manualDemoRef.start()">Start</dt-button>
+    <dt-button :size="100" kind="muted" importance="outlined" @click="manualDemoRef.pause()">Pause</dt-button>
+    <dt-button :size="100" kind="muted" importance="outlined" @click="manualDemoRef.resume()">Resume</dt-button>
+    <dt-button :size="100" kind="muted" importance="outlined" @click="manualDemoRef.reset()">Reset</dt-button>
+    <dt-button :size="100" kind="muted" importance="outlined" @click="manualDemoRef.skipToEnd()">Skip to End</dt-button>
+  </dt-stack>
+  <dt-text kind="headline" :size="600">
+    <dt-motion-text
+      ref="manualDemoRef"
+      text="Welcome to Dialtone Motion Text"
+      animation-mode="shimmer"
+      :auto-start="true"
+      loop
+    />
+  </dt-text>
+</dt-stack>
+<!-- @code -->
 <dt-button @click="$refs.textRef.start()">Start</dt-button>
 <dt-button @click="$refs.textRef.pause()">Pause</dt-button>
 <dt-button @click="$refs.textRef.resume()">Resume</dt-button>
@@ -106,50 +125,31 @@ Take full control of the animation lifecycle:
   animation-mode="shimmer"
   :auto-start="false"
 />
-'>
-  <dt-stack gap="200" align="center">
-    <dt-stack direction="row" gap="100">
-      <dt-button :size="100" kind="muted" importance="outlined" @click="manualDemoRef.start()">Start</dt-button>
-      <dt-button :size="100" kind="muted" importance="outlined" @click="manualDemoRef.pause()">Pause</dt-button>
-      <dt-button :size="100" kind="muted" importance="outlined" @click="manualDemoRef.resume()">Resume</dt-button>
-      <dt-button :size="100" kind="muted" importance="outlined" @click="manualDemoRef.reset()">Reset</dt-button>
-      <dt-button :size="100" kind="muted" importance="outlined" @click="manualDemoRef.skipToEnd()">Skip to End</dt-button>
-    </dt-stack>
-    <dt-text kind="headline" :size="600">
-      <dt-motion-text
-        ref="manualDemoRef"
-        text="Welcome to Dialtone Motion Text"
-        animation-mode="shimmer"
-        :auto-start="true"
-        loop
-      />
-    </dt-text>
-  </dt-stack>
-</code-example>
+```
 
 ### Looping Animation
 
 Perfect for attention-grabbing headers or hero sections:
 
-<code-example only-show="code">
-  <dt-motion-text
-    text="Continuous animation"
-    animation-mode="slide-in"
-    :loop="true"
-    :speed="200"
-  />
-</code-example>
+```vue code-only
+<dt-motion-text
+  text="Continuous animation"
+  animation-mode="slide-in"
+  :loop="true"
+  :speed="200"
+/>
+```
 
 ### Using Slots
 
 You can also use the default slot instead of the text prop:
 
-<code-example only-show="code">
-  <dt-motion-text animation-mode="fade-in">
-    <span>Animated </span>
-    <strong>text</strong>
-  </dt-motion-text>
-</code-example>
+```vue code-only
+<dt-motion-text animation-mode="fade-in">
+  <span>Animated </span>
+  <strong>text</strong>
+</dt-motion-text>
+```
 
 ## Vue API
 
