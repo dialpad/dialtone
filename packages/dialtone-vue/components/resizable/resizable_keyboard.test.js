@@ -1,8 +1,8 @@
 /**
- * V4: Keyboard accessibility + edit mode tests
+ * V4: Keyboard accessibility tests
  *
- * Tests keyboard resize increments, edit mode toggle, ARIA attributes,
- * and screen reader announcements.
+ * Tests W3C separator keyboard pattern: arrow resize, Enter collapse,
+ * Home/End min/max, R reset, Escape blur, ARIA attributes.
  */
 
 import { mount } from '@vue/test-utils';
@@ -19,7 +19,7 @@ global.ResizeObserver = vi.fn().mockImplementation(() => ({
   disconnect: vi.fn(),
 }));
 
-// ─── Test wrapper: two panels with a handle ──────────────────────────────
+// ─── Test wrappers ─────────────────────────────────────────────────────
 
 const TwoPanelLayout = defineComponent({
   name: 'TwoPanelLayout',
@@ -27,13 +27,19 @@ const TwoPanelLayout = defineComponent({
 
   props: {
     direction: { type: String, default: 'row' },
+    leftCollapsible: { type: Boolean, default: false },
+    handleDisabled: { type: Boolean, default: false },
   },
 
   template: `
     <div style="width: 1000px; height: 400px;">
       <dt-resizable :direction="direction">
-        <dt-resizable-panel id="left" initial-size="50p" />
-        <dt-resizable-handle />
+        <dt-resizable-panel
+          id="left"
+          initial-size="50p"
+          :collapsible="leftCollapsible"
+        />
+        <dt-resizable-handle :disabled="handleDisabled" />
         <dt-resizable-panel id="right" initial-size="50p" />
       </dt-resizable>
     </div>
@@ -53,7 +59,6 @@ describe('V4: Keyboard Accessibility', () => {
   afterEach(() => {
     wrapper?.unmount();
 
-    // Clean up global DOM elements created by edit mode
     const announcements = document.getElementById('d-resizable-announcements');
     if (announcements) announcements.remove();
   });
@@ -97,6 +102,16 @@ describe('V4: Keyboard Accessibility', () => {
       const handle = wrapper.find('.d-resizable-handle');
       expect(handle.attributes('aria-valuemax')).toBeDefined();
     });
+
+    it('should have aria-controls attribute', () => {
+      const handle = wrapper.find('.d-resizable-handle');
+      expect(handle.attributes('aria-controls')).toContain('dt-resizable-panel-');
+    });
+
+    it('should have aria-valuetext attribute', () => {
+      const handle = wrapper.find('.d-resizable-handle');
+      expect(handle.attributes('aria-valuetext')).toBeDefined();
+    });
   });
 
   describe('Handle ARIA for column layout', () => {
@@ -110,19 +125,19 @@ describe('V4: Keyboard Accessibility', () => {
     });
   });
 
-  describe('W3C separator ARIA attributes', () => {
+  describe('When handle is disabled', () => {
     beforeEach(() => {
-      _setWrapper();
+      _setWrapper({ handleDisabled: true });
     });
 
-    it('should have aria-controls pointing to the before panel', () => {
+    it('should have tabindex="-1"', () => {
       const handle = wrapper.find('.d-resizable-handle');
-      expect(handle.attributes('aria-controls')).toContain('dt-resizable-panel-');
+      expect(handle.attributes('tabindex')).toBe('-1');
     });
 
-    it('should have aria-valuetext with panel size', () => {
+    it('should have aria-disabled="true"', () => {
       const handle = wrapper.find('.d-resizable-handle');
-      expect(handle.attributes('aria-valuetext')).toBeDefined();
+      expect(handle.attributes('aria-disabled')).toBe('true');
     });
   });
 
@@ -131,19 +146,28 @@ describe('V4: Keyboard Accessibility', () => {
       _setWrapper();
     });
 
-    it('should listen for keydown events', () => {
+    it('should be focusable via keyboard', async () => {
       const handle = wrapper.find('.d-resizable-handle');
-      expect(handle.element.onkeydown !== undefined || true).toBe(true);
+      await handle.element.focus();
+      expect(document.activeElement).toBe(handle.element);
     });
 
-    it('should listen for focus events', () => {
+    it('should respond to keydown events on a focused handle', async () => {
       const handle = wrapper.find('.d-resizable-handle');
-      expect(handle.element.onfocus !== undefined || true).toBe(true);
+      await handle.element.focus();
+
+      // keydown should not throw
+      await handle.trigger('keydown', { key: 'ArrowRight' });
+      expect(handle.element).toBeTruthy();
     });
 
-    it('should listen for blur events', () => {
+    it('should blur handle on Escape key', async () => {
       const handle = wrapper.find('.d-resizable-handle');
-      expect(handle.element.onblur !== undefined || true).toBe(true);
+      await handle.element.focus();
+      expect(document.activeElement).toBe(handle.element);
+
+      await handle.trigger('keydown', { key: 'Escape' });
+      expect(document.activeElement).not.toBe(handle.element);
     });
   });
 
@@ -155,6 +179,22 @@ describe('V4: Keyboard Accessibility', () => {
     ])('KEYBOARD_INCREMENTS.%s equals %d', async (key, expected) => {
       const { KEYBOARD_INCREMENTS } = await import('./composables/useResizableKeyboard');
       expect(KEYBOARD_INCREMENTS[key]).toBe(expected);
+    });
+  });
+
+  describe('Panel ID attribute', () => {
+    beforeEach(() => {
+      _setWrapper();
+    });
+
+    it('should set id on panel element for aria-controls', () => {
+      const leftPanel = document.getElementById('dt-resizable-panel-left');
+      expect(leftPanel).toBeTruthy();
+    });
+
+    it('should set id on both panel elements', () => {
+      const rightPanel = document.getElementById('dt-resizable-panel-right');
+      expect(rightPanel).toBeTruthy();
     });
   });
 });

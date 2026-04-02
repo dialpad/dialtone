@@ -9,6 +9,8 @@ import { mount } from '@vue/test-utils';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { defineComponent, inject, computed, h } from 'vue';
 import DtResizable from './resizable.vue';
+import DtResizablePanel from './resizable_panel.vue';
+import DtResizableHandle from './resizable_handle.vue';
 import {
   RESIZABLE_DIRECTION_KEY,
   RESIZABLE_PANELS_KEY,
@@ -176,6 +178,71 @@ describe('DtResizable Tests', () => {
     it('should expose readonly state', () => {
       expect(wrapper.vm.state).toBeDefined();
       expect(wrapper.vm.state.direction).toBe('row');
+    });
+  });
+
+  describe('Event emissions', () => {
+    const FullLayout = defineComponent({
+      name: 'FullLayout',
+      components: { DtResizable, DtResizablePanel, DtResizableHandle },
+      template: `
+        <div style="width: 1000px; height: 400px;">
+          <dt-resizable ref="resizable">
+            <dt-resizable-panel id="left" initial-size="50p" collapsible />
+            <dt-resizable-handle />
+            <dt-resizable-panel id="right" initial-size="50p" />
+          </dt-resizable>
+        </div>
+      `,
+    });
+
+    let fullWrapper;
+
+    beforeEach(() => {
+      fullWrapper = mount(FullLayout, { attachTo: document.body });
+    });
+
+    afterEach(() => {
+      fullWrapper?.unmount();
+      const announcements = document.getElementById('d-resizable-announcements');
+      if (announcements) announcements.remove();
+    });
+
+    it('should emit panel-collapse when collapsePanel is called', async () => {
+      const resizable = fullWrapper.findComponent(DtResizable);
+      resizable.vm.collapsePanel('left', true);
+      await fullWrapper.vm.$nextTick();
+
+      const events = resizable.emitted('panel-collapse');
+      expect(events).toBeDefined();
+      expect(events.length).toBeGreaterThanOrEqual(1);
+      expect(events[events.length - 1]).toEqual(['left', true]);
+    });
+
+    it('should emit panel-resize when resizePanel is called', async () => {
+      const resizable = fullWrapper.findComponent(DtResizable);
+      resizable.vm.resizePanel('left', 300);
+      await fullWrapper.vm.$nextTick();
+
+      const events = resizable.emitted('panel-resize');
+      expect(events).toBeDefined();
+      expect(events.length).toBeGreaterThanOrEqual(1);
+    });
+
+    it('should define resize-start and resize-end events', () => {
+      const resizable = fullWrapper.findComponent(DtResizable);
+      // These events exist in the emits definition
+      expect(resizable.vm.$options.emits || resizable.vm.$.type.emits).toContain('resize-start');
+      expect(resizable.vm.$options.emits || resizable.vm.$.type.emits).toContain('resize-end');
+    });
+
+    it('should define all four event types', () => {
+      const resizable = fullWrapper.findComponent(DtResizable);
+      const emits = resizable.vm.$options.emits || resizable.vm.$.type.emits;
+      expect(emits).toContain('panel-resize');
+      expect(emits).toContain('panel-collapse');
+      expect(emits).toContain('resize-start');
+      expect(emits).toContain('resize-end');
     });
   });
 });
