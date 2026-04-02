@@ -293,6 +293,32 @@ export function useResizablePanelControls(options: ResizablePanelControlsOptions
     }
   }
 
+  function resetSinglePanel(panelId?: string) {
+    if (!panelId) return;
+    const panel = panels.value.find(p => p.id === panelId);
+    if (!panel || panel.collapsed || panel.resizable === false) return;
+
+    const initialSize = convertToPixelSize(panel.initialSize || DEFAULT_PANEL_SIZE);
+    const delta = initialSize - panel.pixelSize;
+
+    // Find adjacent unlocked panel to absorb the delta
+    const panelIndex = panels.value.indexOf(panel);
+    const adjacentPanel = panels.value.find((p, i) =>
+      i !== panelIndex && !p.collapsed && p.resizable !== false && !p.locked
+    );
+
+    if (!adjacentPanel) return;
+
+    panel.pixelSize = initialSize;
+    adjacentPanel.pixelSize = adjacentPanel.pixelSize - delta;
+    panel.locked = false;
+    panel.manualTargetSize = undefined;
+    panel.manualTargetRatio = undefined;
+
+    onPanelResize(panel.id, panel.pixelSize);
+    onPanelResize(adjacentPanel.id, adjacentPanel.pixelSize);
+  }
+
   function resetPanels(
     beforePanelId?: string,
     afterPanelId?: string,
@@ -301,6 +327,10 @@ export function useResizablePanelControls(options: ResizablePanelControlsOptions
     try {
       if (behavior === 'all') {
         resetAllPanelPairs();
+      } else if (behavior === 'before') {
+        resetSinglePanel(beforePanelId);
+      } else if (behavior === 'after') {
+        resetSinglePanel(afterPanelId);
       } else {
         resetSpecificPanelPair(beforePanelId, afterPanelId);
       }
