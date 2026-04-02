@@ -369,7 +369,7 @@ export const Keyboard = {
   parameters: {
     docs: {
       description: {
-        story: 'Keyboard navigation demo. Use Ctrl/Cmd+E to enter edit mode, arrow keys to resize, and Escape to exit.',
+        story: 'Keyboard navigation demo. Tab to a handle, then use arrow keys to resize, Enter to collapse, R to reset, and Escape to blur.',
       },
       source: {
         code: `
@@ -383,13 +383,15 @@ export const Keyboard = {
   </d-resizable-panel>
 </d-resizable>
 
-<!-- Keyboard Controls:
-  Ctrl/Cmd + E — Toggle edit mode
+<!-- Keyboard Controls (Tab to handle first):
   Arrow keys — Resize (8px)
   Shift + Arrow — Large resize (24px)
   Ctrl/Cmd + Arrow — Fine resize (1px)
-  R — Reset current handle
-  Escape — Exit edit mode -->`,
+  Enter — Collapse/expand adjacent panel
+  Home — Set to minimum size
+  End — Set to maximum size
+  R — Reset adjacent panels
+  Escape — Remove focus from handle -->`,
       },
     },
   },

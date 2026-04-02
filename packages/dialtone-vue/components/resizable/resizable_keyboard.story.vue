@@ -30,16 +30,16 @@
         line-height: 1.5;
       "
     >
-      <strong>Keyboard Controls</strong>
+      <strong>Keyboard Controls</strong> (Tab to a handle, then use these keys)
       <ul style="margin: var(--dt-size-300) 0 0; padding-left: var(--dt-size-550);">
-        <li><kbd>Ctrl/Cmd + E</kbd> — Toggle edit mode</li>
-        <li><kbd>Tab</kbd> / <kbd>Shift+Tab</kbd> — Navigate handles</li>
         <li><kbd>Arrow keys</kbd> — Resize (8px)</li>
         <li><kbd>Shift + Arrow</kbd> — Large resize (24px)</li>
         <li><kbd>Ctrl/Cmd + Arrow</kbd> — Fine resize (1px)</li>
-        <li><kbd>R</kbd> — Reset current handle</li>
-        <li><kbd>Ctrl/Cmd + R</kbd> — Reset all panels</li>
-        <li><kbd>Escape</kbd> — Exit edit mode</li>
+        <li><kbd>Enter</kbd> — Collapse/expand adjacent panel</li>
+        <li><kbd>Home</kbd> — Set to minimum size</li>
+        <li><kbd>End</kbd> — Set to maximum size</li>
+        <li><kbd>R</kbd> — Reset adjacent panels</li>
+        <li><kbd>Escape</kbd> — Remove focus from handle</li>
       </ul>
     </div>
   </div>

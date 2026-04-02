@@ -98,9 +98,20 @@ Use `storageKey` for localStorage, or `:storage` for Pinia/Vuex/custom backends.
 
 ### Keyboard Support
 
-- Each handle has `role="separator"` with appropriate `aria-orientation`.
-- `aria-valuenow`, `aria-valuemin`, and `aria-valuemax` reflect the before-panel's percentage size.
-- Double-clicking a handle resets adjacent panels to their initial sizes.
+Each handle has `role="separator"` with `aria-orientation`, `aria-controls`, `aria-valuetext`, and value attributes. Handles are always focusable and follow the [W3C ARIA separator pattern](https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/).
+
+| Key | Action |
+| --- | --- |
+| Arrow keys | Resize by 8px |
+| Shift + Arrow | Resize by 24px |
+| Ctrl/Cmd + Arrow | Resize by 1px |
+| Enter | Collapse/expand adjacent panel |
+| Home | Set panel to minimum size |
+| End | Set panel to maximum size |
+| R | Reset adjacent panels |
+| Escape | Remove focus from handle |
+
+Double-clicking a handle resets adjacent panels to their initial sizes.
 
 ## Sub-components
 

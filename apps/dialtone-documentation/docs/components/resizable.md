@@ -361,9 +361,7 @@ group.value.resetPanels();
 
 ### Keyboard navigation
 
-Each resize handle has `role="separator"` with `aria-orientation`, `aria-valuenow`, `aria-valuemin`, and `aria-valuemax` reflecting the current layout.
-
-Press **Ctrl/Cmd + E** to enter edit mode. In edit mode, handles become focusable via Tab and support these keys:
+Each resize handle has `role="separator"` with `aria-orientation`, `aria-valuenow`, `aria-valuemin`, `aria-valuemax`, `aria-controls`, and `aria-valuetext` reflecting the current layout. Handles are always focusable (`tabindex="0"`) and follow the [W3C ARIA separator pattern](https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/).
 
 <table class="d-table dialtone-doc-table">
 <thead>
@@ -386,16 +384,24 @@ Press **Ctrl/Cmd + E** to enter edit mode. In edit mode, handles become focusabl
 <td>Resize by 1px</td>
 </tr>
 <tr>
-<td>R</td>
-<td>Reset the current handle's panels</td>
+<td>Enter</td>
+<td>Collapse or expand the adjacent panel (if collapsible)</td>
 </tr>
 <tr>
-<td>Ctrl/Cmd + R</td>
-<td>Reset all panels</td>
+<td>Home</td>
+<td>Set panel to minimum size</td>
+</tr>
+<tr>
+<td>End</td>
+<td>Set panel to maximum size</td>
+</tr>
+<tr>
+<td>R</td>
+<td>Reset adjacent panels to initial sizes</td>
 </tr>
 <tr>
 <td>Escape</td>
-<td>Exit edit mode</td>
+<td>Remove focus from the handle</td>
 </tr>
 </tbody>
 </table>
