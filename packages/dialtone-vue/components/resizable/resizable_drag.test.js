@@ -19,6 +19,23 @@ global.ResizeObserver = vi.fn().mockImplementation(() => ({
   disconnect: vi.fn(),
 }));
 
+// JSDOM doesn't compute layout — mock clientWidth so the container gets a
+// non-zero size and computeLayout can produce valid panel positions.
+const originalClientWidth = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'clientWidth');
+
+function mockClientWidth () {
+  Object.defineProperty(HTMLElement.prototype, 'clientWidth', {
+    configurable: true,
+    get () { return 1000; },
+  });
+}
+
+function restoreClientWidth () {
+  if (originalClientWidth) {
+    Object.defineProperty(HTMLElement.prototype, 'clientWidth', originalClientWidth);
+  }
+}
+
 const TwoPanelDrag = defineComponent({
   name: 'TwoPanelDrag',
   components: { DtResizable, DtResizablePanel, DtResizableHandle },
@@ -36,6 +53,7 @@ const TwoPanelDrag = defineComponent({
 let wrapper;
 
 const _setWrapper = () => {
+  mockClientWidth();
   wrapper = mount(TwoPanelDrag, {
     attachTo: document.body,
   });
@@ -44,6 +62,7 @@ const _setWrapper = () => {
 describe('DtResizable Drag Interaction', () => {
   afterEach(() => {
     wrapper?.unmount();
+    restoreClientWidth();
     const announcements = document.getElementById('d-resizable-announcements');
     if (announcements) announcements.remove();
   });
@@ -59,13 +78,13 @@ describe('DtResizable Drag Interaction', () => {
       expect(handle.attributes('role')).toBe('separator');
     });
 
-    it('should apply active class on mousedown', async () => {
+    it('should apply resizing class on pointerdown', async () => {
       const handle = wrapper.find('.d-resizable-handle');
-      await handle.trigger('mousedown', { clientX: 500, clientY: 200 });
+      await handle.trigger('pointerdown', { clientX: 500, clientY: 200 });
+      await wrapper.vm.$nextTick();
 
-      // The handle starts a drag, which sets state.isResizing
       const resizable = wrapper.findComponent(DtResizable);
-      expect(resizable.find('.d-resizable--resizing').exists() || true).toBe(true);
+      expect(resizable.find('.d-resizable--resizing').exists()).toBe(true);
     });
 
     it('should not start drag when handle is disabled', async () => {
@@ -85,7 +104,8 @@ describe('DtResizable Drag Interaction', () => {
 
       const disabledWrapper = mount(DisabledHandle, { attachTo: document.body });
       const handle = disabledWrapper.find('.d-resizable-handle');
-      await handle.trigger('mousedown', { clientX: 500, clientY: 200 });
+      await handle.trigger('pointerdown', { clientX: 500, clientY: 200 });
+      await disabledWrapper.vm.$nextTick();
 
       const resizable = disabledWrapper.findComponent(DtResizable);
       expect(resizable.find('.d-resizable--resizing').exists()).toBe(false);
