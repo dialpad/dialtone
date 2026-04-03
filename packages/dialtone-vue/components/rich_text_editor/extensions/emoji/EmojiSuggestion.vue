@@ -1,7 +1,7 @@
 <template>
   <dt-stack
     direction="row"
-    gap="400"
+    gap="100"
   >
     <dt-emoji
       size="200"

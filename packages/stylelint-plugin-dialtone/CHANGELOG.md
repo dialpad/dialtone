@@ -1,3 +1,10 @@
+# [1.4.0-next.2](https://github.com/dialpad/dialtone/compare/stylelint-plugin-dialtone/v1.4.0-next.1...stylelint-plugin-dialtone/v1.4.0-next.2) (2026-03-31)
+
+
+### Features
+
+* **Dialtone Css, Dialtone Tokens, Dialtone Vue:** DLT-3197 DLT-3198 DLT-3199 DLT-3200 DLT-3201 DLT-3202 DLT-3203 DLT-3204 DLT-3205 DLT-3206 DLT-3207 DLT-3208 DLT-3209 DLT-3210 DLT-3211 token-stop utility classes, migration tooling, and documentation ([#1150](https://github.com/dialpad/dialtone/issues/1150)) ([6237b84](https://github.com/dialpad/dialtone/commit/6237b84b901aed6e3e2bcb7d0216feac218eebad))
+
 # [1.4.0-next.1](https://github.com/dialpad/dialtone/compare/stylelint-plugin-dialtone/v1.3.1-next.1...stylelint-plugin-dialtone/v1.4.0-next.1) (2026-03-02)
 
 

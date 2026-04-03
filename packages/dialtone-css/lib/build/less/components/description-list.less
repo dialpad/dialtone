@@ -6,10 +6,21 @@
   align-items: flex-start;
   font: var(--dt-typography-body-sm);
 
-  --description-list-gap: var(--dt-size-400);
-  each(range(0, 600, 100), {
+  --description-list-gap: var(--dt-spacing-100);
+
+  // Stops outside both range() sequences: 1 (not a multiple of 25), 525 (not a multiple of 50)
+  &--gap-1 { --description-list-gap: var(--dt-spacing-1); }
+  &--gap-525 { --description-list-gap: var(--dt-spacing-525); }
+
+  each(range(0, 200, 25), {
     &--gap-@{value} {
-     --description-list-gap: ~"var(--dt-size-@{value})";
+     --description-list-gap: ~"var(--dt-spacing-@{value})";
+    }
+  });
+
+  each(range(250, 800, 50), {
+    &--gap-@{value} {
+     --description-list-gap: ~"var(--dt-spacing-@{value})";
     }
   });
 

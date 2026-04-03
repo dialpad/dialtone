@@ -292,6 +292,32 @@
 
   <!-- TEST 47: Empty element with flex - Should convert -->
   <div class="d-d-flex d-fd-column"></div>
+
+  <!-- ============================================ -->
+  <!-- NEW TESTS: NEW-FORMAT GAP UTILITIES (d-g-*) -->
+  <!-- ============================================ -->
+
+  <!-- TEST 48: New-format gap d-g-100 (8px) - Should convert to gap="100" -->
+  <div class="d-d-flex d-ai-center d-g-100">
+    <span>New gap format 8px</span>
+  </div>
+
+  <!-- TEST 49: New-format gap d-g-200 (16px) - Should convert to gap="200" -->
+  <div class="d-d-flex d-fd-row d-g-200">
+    <span>Item 1</span>
+    <span>Item 2</span>
+  </div>
+
+  <!-- TEST 50: New-format gap d-g-400 (32px) with other props - Should convert -->
+  <div class="d-d-flex d-fd-column d-ai-center d-jc-between d-g-400">
+    <span>Full props with new gap</span>
+    <span>Example</span>
+  </div>
+
+  <!-- TEST 51: New-format gap d-g-50 (4px) - Should convert to gap="50" -->
+  <div class="d-d-flex d-ai-center d-g-50">
+    <span>Small gap 4px</span>
+  </div>
 </template>
 
 <script setup>

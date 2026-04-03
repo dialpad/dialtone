@@ -22,19 +22,32 @@
     </span>
 
     <dt-stack
-      gap="450"
+      gap="150"
       :class="['d-empty-state__content', contentClass]"
     >
-      <div :class="['d-empty-state__header-text', headlineClass]">
+      <dt-text
+        kind="headline"
+        :size="headlineSize"
+        :density="headlineDensity"
+        wrap="balance"
+        as="div"
+        class="d-empty-state__header-text"
+      >
         {{ headerText }}
-      </div>
+      </dt-text>
 
-      <p
+      <dt-text
         v-if="bodyText"
-        :class="['d-empty-state__body-text', bodyClass]"
+        kind="body"
+        :size="bodySize"
+        :density="bodyDensity"
+        tone="secondary"
+        wrap="balance"
+        as="p"
+        class="d-empty-state__body-text"
       >
         {{ bodyText }}
-      </p>
+      </dt-text>
     </dt-stack>
 
     <slot name="body" />
@@ -44,25 +57,32 @@
 <script setup>
 import { useSlots, computed, onMounted } from 'vue';
 import { DtStack } from '@/components/stack';
+import { DtText } from '@/components/text';
 import { hasSlotContent } from '@/common/utils';
 import {
-  EMPTY_STATE_BODY_SIZE_MODIFIERS,
+  EMPTY_STATE_BODY_DENSITIES,
+  EMPTY_STATE_BODY_SIZES,
   EMPTY_STATE_CONTENT_SIZE_MODIFIERS,
-  EMPTY_STATE_HEADLINE_SIZE_MODIFIERS,
+  EMPTY_STATE_HEADLINE_DENSITIES,
+  EMPTY_STATE_HEADLINE_SIZES,
   EMPTY_STATE_SIZE_MODIFIERS,
 } from './empty_state_constants.js';
+
+defineOptions({
+  name: 'DtEmptyState',
+});
 
 const slots = useSlots();
 
 const props = defineProps({
   /**
     * The empty state size.
-    * @values 'sm', 'md', 'lg'
+    * @values 200, 300, 400
     */
   size: {
-    type: String,
-    default: 'lg',
-    validator: (s) => Object.keys(EMPTY_STATE_SIZE_MODIFIERS).includes(s),
+    type: [String, Number],
+    default: 400,
+    validator: (s) => Object.keys(EMPTY_STATE_SIZE_MODIFIERS).includes(String(s)),
   },
 
   /**
@@ -88,7 +108,6 @@ const hasIcon = computed(() => {
   return hasSlotContent(slots.icon);
 });
 const hasIllustration = computed(() => hasSlotContent(slots.illustration));
-const isSmallSize = computed(() => props.size === 'sm');
 
 /**
  * Icon will be shown in lg and md size only if illustration is not provided
@@ -102,15 +121,20 @@ const showIcon = computed(() => hasIcon.value && (!hasIllustration.value || isSm
  */
 const showIllustration = computed(() => hasIllustration.value && !isSmallSize.value);
 
-const sizeClass = computed(() => EMPTY_STATE_SIZE_MODIFIERS[props.size]);
+const sizeKey = computed(() => String(props.size));
+const isSmallSize = computed(() => sizeKey.value === 'sm' || sizeKey.value === '200');
+
+const sizeClass = computed(() => EMPTY_STATE_SIZE_MODIFIERS[sizeKey.value]);
 
 const emptyStateClasses = computed(() => ['d-empty-state', sizeClass.value]);
 
-const contentClass = computed(() => EMPTY_STATE_CONTENT_SIZE_MODIFIERS[props.size]);
+const contentClass = computed(() => EMPTY_STATE_CONTENT_SIZE_MODIFIERS[sizeKey.value]);
 
-const headlineClass = computed(() => EMPTY_STATE_HEADLINE_SIZE_MODIFIERS[props.size]);
+const headlineSize = computed(() => EMPTY_STATE_HEADLINE_SIZES[sizeKey.value]);
+const headlineDensity = computed(() => EMPTY_STATE_HEADLINE_DENSITIES[sizeKey.value]);
 
-const bodyClass = computed(() => EMPTY_STATE_BODY_SIZE_MODIFIERS[props.size]);
+const bodySize = computed(() => EMPTY_STATE_BODY_SIZES[sizeKey.value]);
+const bodyDensity = computed(() => EMPTY_STATE_BODY_DENSITIES[sizeKey.value]);
 
 onMounted(() => {
   if (!props.bodyText && !hasSlotContent(slots.body)) {

@@ -4,7 +4,7 @@
          elements within the span rather than on the span itself -->
     <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -->
     <span
-      v-if="!externalAnchor"
+      v-if="!externalAnchor && !externalAnchorElement"
       ref="anchor"
       data-qa="dt-tooltip-anchor"
       @focusin="onEnterAnchor"
@@ -29,6 +29,7 @@
         },
         contentClass,
       ]"
+      v-bind="modeAttrs"
     >
       <!-- In case when transitionend event doesn't work correct (for ex. tooltip component with custom trigger) -->
       <!-- after-leave event can be used instead of transitionend -->
@@ -56,6 +57,7 @@ import {
   getAnchor,
   getPopperOptions,
 } from '@/components/popover/tippy_utils';
+import ModeMixin from '@/common/mixins/mode';
 
 /**
  * A tooltip is a floating label that briefly explains an action, function, or an element.
@@ -66,6 +68,8 @@ import {
 export default {
   compatConfig: { MODE: 3 },
   name: 'DtTooltip',
+
+  mixins: [ModeMixin],
 
   props: {
     /**
@@ -95,7 +99,7 @@ export default {
     },
 
     /**
-     * If true, applies inverted styles to the tooltip
+     * @deprecated Use contentMode="invert"
      * @values true, false
      */
     inverted: {
@@ -247,9 +251,19 @@ export default {
     /**
      * External anchor id to use in those cases the anchor can't be provided via the slot.
      * For instance, using the combobox's input as the anchor for the popover.
+     * @deprecated Use externalAnchorElement instead for Shadow DOM compatibility.
      */
     externalAnchor: {
       type: String,
+      default: null,
+    },
+
+    /**
+     * External anchor element reference. Use this instead of externalAnchor when
+     * the anchor may be inside a Shadow DOM, as querySelector cannot pierce shadow boundaries.
+     */
+    externalAnchorElement: {
+      type: HTMLElement,
       default: null,
     },
   },
@@ -315,6 +329,7 @@ export default {
     },
 
     anchor () {
+      if (this.externalAnchorElement) return this.externalAnchorElement;
       return this.externalAnchor ? document.body.querySelector(this.externalAnchor) : getAnchor(this.$refs.anchor);
     },
   },
@@ -361,7 +376,7 @@ export default {
     }
 
     this.tip = createTippy(this.anchor, this.initOptions());
-    if (this.externalAnchor) {
+    if (this.externalAnchor || this.externalAnchorElement) {
       await flushPromises();
       this.addExternalAnchorEventListeners();
     }
@@ -369,7 +384,7 @@ export default {
   },
 
   beforeUnmount () {
-    this.externalAnchor && this.removeExternalAnchorEventListeners();
+    (this.externalAnchor || this.externalAnchorElement) && this.removeExternalAnchorEventListeners();
 
     if (this.anchor?._tippy) {
       this.tip?.destroy();
@@ -377,6 +392,10 @@ export default {
   },
 
   methods: {
+    getModeReferenceEl () {
+      return this.anchor;
+    },
+
     calculateAnchorZindex () {
       // if a modal is currently active render at modal-element z-index, otherwise at tooltip z-index
       if (returnFirstEl(this.$el).getRootNode()

@@ -3,16 +3,18 @@
     :component="component"
     :bindings="options.bindings.get()"
     :events="info.events"
+    :disabled-members="disabledMembers"
     @event="(event, value) => emit('event', event, value)"
   >
     <template
       v-for="(slot, name) in renderedSlots"
       :key="name"
-      #[name]
+      #[name]="slotBindings"
     >
       <dtc-node
         :template="slot"
         :library="library"
+        :scope="slotBindings"
       />
     </template>
   </dtc-renderer-target>
@@ -59,6 +61,13 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  /**
+   * Set of member names that are currently disabled.
+   */
+  disabledMembers: {
+    type: Set,
+    default: () => new Set(),
+  },
 });
 
 const emit = defineEmits([
@@ -85,18 +94,7 @@ const renderedSlots = computed(() => {
 //     default: return props.settings.root.theme;
 //   }
 // });
-const background = computed(() => getSetting('background'));
-const positioning = computed(() => getSetting('positioning'));
 
-const backgroundColorMap = {
-  black: 'd-bgc-black-900',
-  white: 'd-bgc-white',
-  theme: `dtc-theme__canvas`,
-};
-
-function getSetting (setting) {
-  return props.settings.renderer[setting];
-}
 
 // function updateSettings (setting, e) {
 //   emit(SETTINGS_UPDATE_EVENT, (model) => {

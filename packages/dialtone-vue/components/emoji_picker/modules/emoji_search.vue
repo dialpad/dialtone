@@ -21,7 +21,7 @@
       >
         <dt-button
           importance="clear"
-          size="xs"
+          :size="100"
           class="d-emoji-picker__search-x-button"
           circle
           kind="muted"
@@ -39,7 +39,7 @@
 </template>
 
 <script setup>
-import { DtIconSearch, DtIconClose } from '@dialpad/dialtone-icons/vue3';
+import { DtIconSearch, DtIconClose } from '@dialpad/dialtone-icons/vue';
 import { DtInput } from '@/components/input';
 import { DtButton } from '@/components/button';
 import { onMounted, ref } from 'vue';

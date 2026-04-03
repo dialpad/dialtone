@@ -11,7 +11,7 @@
         class="d-fc-tertiary d-h24 d-w24"
         importance="clear"
         kind="muted"
-        size="sm"
+        :size="200"
         circle
         aria-label="Section Options"
         v-bind="attrs"
@@ -49,7 +49,7 @@
 import { DtDropdown, DtDropdownSeparator } from '@/components/dropdown';
 import { DtListItem } from '@/components/list_item';
 import { DtButton } from '@/components/button';
-import { DtIconMoreVertical } from '@dialpad/dialtone-icons/vue3';
+import { DtIconMoreVertical } from '@dialpad/dialtone-icons/vue';
 
 const emits = defineEmits(['select-menu-option', 'open-dropdown']);
 

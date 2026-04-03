@@ -33,8 +33,8 @@
           <dt-button
             :ref="el => { if (el) setDayRef(el, day) }"
             class="d-datepicker__day"
-            :circle="true"
-            size="sm"
+            :size="200"
+            kind="muted"
             importance="clear"
             :disabled="day.disabled"
             :class="{

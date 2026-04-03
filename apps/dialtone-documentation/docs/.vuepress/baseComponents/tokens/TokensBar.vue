@@ -1,6 +1,6 @@
 <!-- eslint-disable vuejs-accessibility/no-autofocus -->
 <template>
-  <dt-stack gap="500" class="d-p16 d-bgc-secondary d-bar8">
+  <dt-stack gap="200" class="d-p-200 d-bgc-secondary d-bar8">
     <dt-input
       id="search-input"
       v-model="searchCriteria"
@@ -21,7 +21,7 @@
           v-dt-tooltip="'Clear search'"
           kind="muted"
           importance="clear"
-          size="xs"
+          :size="100"
           aria-label="Clear search"
           @click="resetSearch"
         >
@@ -31,11 +31,11 @@
         </dt-button>
       </template>
     </dt-input>
-    <dt-stack direction="row" gap="500" class="d-ai-flex-end">
+    <dt-stack direction="row" gap="200" class="d-ai-flex-end">
       <dt-select-menu
         name="format-select"
         label="Format"
-        select-class="d-w128"
+        select-class="d-w-200"
         :model-value="format"
         :options="formatSelectMenuOptions"
         @change="updateFormat"
@@ -43,7 +43,7 @@
       <dt-select-menu
         name="mode-select"
         label="Mode"
-        select-class="d-w128"
+        select-class="d-w-200"
         :model-value="mode"
         :options="MODES"
         @change="updateMode"
@@ -51,7 +51,7 @@
       <dt-select-menu
         name="theme-select"
         label="Theme"
-        select-class="d-w128"
+        select-class="d-w-200"
         :model-value="theme"
         :options="THEMES"
         @change="updateTheme"
@@ -60,7 +60,7 @@
         v-dt-tooltip:top-end="shareLinkTooltip"
         importance="clear"
         kind="muted"
-        class="d-ml-auto"
+        class="d-mis-auto"
         @click="copyURLToClipboard"
       >
         Share Search Filter

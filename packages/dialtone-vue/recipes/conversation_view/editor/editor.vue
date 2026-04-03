@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="editorRoot"
     class="d-recipe-editor"
     v-bind="addClassStyleAttrs($attrs)"
     data-qa="dt-recipe-editor"
@@ -10,125 +11,236 @@
     <dt-stack
       class="d-recipe-editor__top-bar"
       direction="row"
-      gap="450"
+      gap="150"
     >
       <dt-stack
         v-for="buttonGroup in buttonGroups"
         :key="buttonGroup.key"
         direction="row"
-        gap="300"
+        gap="50"
       >
-        <dt-tooltip
-          v-for="button in buttonGroup.buttonGroup"
-          :key="getButtonKey(buttonGroup.key, button.selector)"
-          :message="button.tooltipMessage"
-          placement="top"
-        >
-          <template #anchor>
-            <dt-button
-              :ref="getButtonRef(buttonGroup.key, button.selector)"
-              :active="$refs.richTextEditor?.editor?.isActive(button.selector)"
-              :aria-label="button.tooltipMessage"
-              :data-qa="button.dataQA"
-              :tabindex="canFocus(getButtonRef(buttonGroup.key, button.selector)) ? 0 : -1"
-              importance="clear"
-              kind="muted"
-              size="xs"
-              @click="button.onClick()"
-              @keydown.right.stop="shiftActionBarFocusRight"
-              @keydown.left.stop="shiftActionBarFocusLeft"
-            >
-              <template #icon>
-                <component
-                  :is="button.icon"
-                  size="200"
-                />
-              </template>
-              {{ button?.label }}
-            </dt-button>
-          </template>
-        </dt-tooltip>
-        <div class="d-recipe-editor__button-group-divider" />
-      </dt-stack>
-      <dt-stack
-        v-if="variableButton.showBtn"
-        direction="row"
-        gap="300"
-      >
-        <dt-popover
-          padding="small"
-          navigation-type="arrow-keys"
-          :modal="false"
-          placement="bottom-start"
-        >
-          <template #anchor="{ attrs }">
-            <dt-tooltip
-              :message="variableButton.tooltipMessage"
-              placement="top"
-            >
-              <template #anchor>
-                <dt-button
-                  v-bind="attrs"
-                  kind="muted"
-                  size="xs"
-                  importance="clear"
-                  :aria-label="variableButton.tooltipMessage"
-                  :data-qa="variableButton.dataQA"
-                  label-class="d-jc-flex-start"
-                >
-                  <template #icon>
-                    <component
-                      :is="variableButton.icon"
-                      size="200"
-                    />
-                  </template>
-                </dt-button>
-              </template>
-            </dt-tooltip>
-          </template>
-          <template #content="{ close }">
-            <dt-input
-              v-model="variableSearchValue"
-              root-class="d-p8 d-pb4 d-w264"
-              type="search"
-              :placeholder="i18n.$t('DIALTONE_EDITOR_VARIABLE_POPOVER_SEARCH_PLACEHOLDER')"
-              size="md"
-              role="menuitem"
-            >
-              <template #leftIcon="{ iconSize }">
-                <dt-icon-search :size="iconSize" />
-              </template>
-            </dt-input>
-            <dt-list-item-group
-              v-for="(category, index) in filteredCategories"
-              :key="category.name"
-              :heading="category.name"
-              heading-class="d-headline--sm-compact d-p8"
-            >
+        <template v-for="button in buttonGroup.buttonGroup">
+          <!-- Font Style Popover -->
+          <editor-toolbar-popover-button
+            v-if="button.buttonType === 'popover' && button.selector === 'fontStyle'"
+            :key="getButtonKey(buttonGroup.key, button.selector)"
+            :ref="getButtonRef(buttonGroup.key, button.selector)"
+            :is-active="$refs.richTextEditor?.editor?.isActive(button.selector)"
+            :tooltip-message="button.tooltipMessage"
+            :data-qa="button.dataQA"
+            :popover-data-qa="'dt-recipe-editor-font-style-input-popover'"
+            :tabindex="canFocus(getButtonRef(buttonGroup.key, button.selector)) ? 0 : -1"
+            :icon="button.icon"
+            @shift-focus-right="shiftActionBarFocusRight"
+            @shift-focus-left="shiftActionBarFocusLeft"
+          >
+            <template #content="{ close }">
+              <dt-combobox
+                label=""
+                :label-visible="false"
+                :show-list="true"
+                :click-on-select="true"
+                @escape="close()"
+              >
+                <template #input="{ inputProps }">
+                  <dt-input
+                    v-bind="inputProps"
+                    v-model="fontStyleSearch"
+                    root-class="d-p-100 d-pbe-50 d-w216"
+                    type="search"
+                    :placeholder="i18n.$t('DIALTONE_EDITOR_FONT_STYLE_SEARCH_PLACEHOLDER')"
+                    :size="200"
+                    role="menuitem"
+                  >
+                    <template #startIcon="{ iconSize }">
+                      <dt-icon-search :size="iconSize" />
+                    </template>
+                  </dt-input>
+                </template>
+                <template #list="{ listProps }">
+                  <ul
+                    v-bind="listProps"
+                  >
+                    <dt-list-item
+                      v-for="fontStyle in filteredFontStyles"
+                      :key="fontStyle.name"
+                      :selected="isCurrentFontFamily(fontStyle.value)"
+                      :style="{ fontFamily: fontStyle.value || 'inherit' }"
+                      role="option"
+                      navigation-type="arrow-keys"
+                      @click="
+                        close(focusEditor);
+                        onFontStyleSelect(fontStyle.value)
+                      "
+                    >
+                      {{ fontStyle.name }}
+                    </dt-list-item>
+                  </ul>
+                </template>
+              </dt-combobox>
+            </template>
+          </editor-toolbar-popover-button>
+
+          <!-- Font Size Dropdown -->
+          <editor-toolbar-dropdown-button
+            v-else-if="button.buttonType === 'popover' && button.selector === 'fontSize'"
+            :key="getButtonKey(buttonGroup.key, button.selector)"
+            :ref="getButtonRef(buttonGroup.key, button.selector)"
+            :is-active="$refs.richTextEditor?.editor?.isActive(button.selector)"
+            :tooltip-message="button.tooltipMessage"
+            :data-qa="button.dataQA"
+            :dropdown-data-qa="'dt-recipe-editor-font-size-input-popover'"
+            :tabindex="canFocus(getButtonRef(buttonGroup.key, button.selector)) ? 0 : -1"
+            :icon="button.icon"
+            @shift-focus-right="shiftActionBarFocusRight"
+            @shift-focus-left="shiftActionBarFocusLeft"
+          >
+            <template #list="{ close }">
               <dt-list-item
-                v-for="item in getFilteredItemsForCategory(category)"
-                :key="category.name + item.name"
+                v-for="fontSize in fontSizes"
+                :key="fontSize.name"
+                :selected="isCurrentFontSize(fontSize.value)"
                 role="menuitem"
                 navigation-type="arrow-keys"
                 @click="
-                  insertVariable(category.name, item);
-                  close();
+                  close(focusEditor);
+                  onFontSizeSelect(fontSize.value, $event)
                 "
               >
-                {{ item.name }}
+                <span :style="{ fontSize: fontSize.value }">{{ fontSize.name }}</span>
               </dt-list-item>
-              <dt-dropdown-separator
-                v-if="index < filteredCategories.length - 1"
+            </template>
+          </editor-toolbar-dropdown-button>
+
+          <!-- Font Color Button -->
+          <dt-button
+            v-else-if="button.buttonType === 'custom' && button.selector === 'fontColor'"
+            :key="getButtonKey(buttonGroup.key, button.selector)"
+            :ref="getButtonRef(buttonGroup.key, button.selector)"
+            v-dt-tooltip="{
+              message: button.tooltipMessage,
+              placement: 'top',
+              externalAnchorElement: $refs[getButtonRef(buttonGroup.key, button.selector)]?.$el, 
+            }"
+            kind="muted"
+            importance="clear"
+            :size="100"
+            :active="$refs.richTextEditor?.editor?.isActive(button.selector)"
+            :tabindex="canFocus(getButtonRef(buttonGroup.key, button.selector)) ? 0 : -1"
+            :aria-label="button.tooltipMessage"
+            :data-qa="button.dataQA"
+            @keydown.right.stop="shiftActionBarFocusRight"
+            @keydown.left.stop="shiftActionBarFocusLeft"
+            @click="button.onClick()"
+          >
+            <template #icon>
+              <component
+                :is="button.icon"
+                size="200"
+                :style="!isDefaultFontColor ? { color: currentFontColor } : {}"
               />
-            </dt-list-item-group>
-          </template>
-        </dt-popover>
+              <dt-input
+                :value="currentFontColor"
+                root-class="d-w0 d-h0 d-of-hidden"
+                input-class="colorPickerInput d-w0 d-h0 d-p-0 d-bar0"
+                input-wrapper-class="d-w0 d-h0 d-ba-none"
+                :size="200"
+                type="color"
+                @input="onColorPickerInput"
+                @click.stop
+              />
+            </template>
+          </dt-button>
+
+          <!-- Variable Popover -->
+          <editor-toolbar-popover-button
+            v-else-if="button.buttonType === 'popover' && button.selector === 'variable'"
+            :key="getButtonKey(buttonGroup.key, button.selector)"
+            :ref="getButtonRef(buttonGroup.key, button.selector)"
+            :is-active="false"
+            :tooltip-message="button.tooltipMessage"
+            :data-qa="button.dataQA"
+            :popover-data-qa="'dt-recipe-editor-variable-popover'"
+            :tabindex="canFocus(getButtonRef(buttonGroup.key, button.selector)) ? 0 : -1"
+            :icon="button.icon"
+            @shift-focus-right="shiftActionBarFocusRight"
+            @shift-focus-left="shiftActionBarFocusLeft"
+          >
+            <template #content="{ close }">
+              <dt-combobox
+                label=""
+                :label-visible="false"
+                :show-list="true"
+                :click-on-select="true"
+                @escape="close()"
+              >
+                <template #input="{ inputProps }">
+                  <dt-input
+                    v-bind="inputProps"
+                    v-model="variableSearchValue"
+                    root-class="d-p-100 d-pbe-50 d-w264"
+                    type="search"
+                    :placeholder="i18n.$t('DIALTONE_EDITOR_VARIABLE_POPOVER_SEARCH_PLACEHOLDER')"
+                    :size="300"
+                    role="menuitem"
+                  >
+                    <template #startIcon="{ iconSize }">
+                      <dt-icon-search :size="iconSize" />
+                    </template>
+                  </dt-input>
+                </template>
+                <template #list="{ listProps }">
+                  <div v-bind="listProps">
+                    <dt-list-item-group
+                      v-for="(category, index) in filteredCategories"
+                      :key="category.name"
+                      :heading="category.name"
+                      heading-class="d-headline--sm-compact d-p-100"
+                    >
+                      <dt-list-item
+                        v-for="item in getFilteredItemsForCategory(category)"
+                        :key="category.name + item.name"
+                        role="option"
+                        navigation-type="arrow-keys"
+                        @click="
+                          insertVariable(category.name, item);
+                          close(focusEditor);
+                        "
+                      >
+                        {{ item.name }}
+                      </dt-list-item>
+                      <dt-dropdown-separator
+                        v-if="index < filteredCategories.length - 1"
+                      />
+                    </dt-list-item-group>
+                  </div>
+                </template>
+              </dt-combobox>
+            </template>
+          </editor-toolbar-popover-button>
+
+          <!-- Regular Toolbar Button -->
+          <editor-toolbar-button
+            v-else-if="button.buttonType === 'button'"
+            :key="getButtonKey(buttonGroup.key, button.selector)"
+            :ref="getButtonRef(buttonGroup.key, button.selector)"
+            :is-active="$refs.richTextEditor?.editor?.isActive(button.selector)"
+            :tooltip-message="button.tooltipMessage"
+            :data-qa="button.dataQA"
+            :tabindex="canFocus(getButtonRef(buttonGroup.key, button.selector)) ? 0 : -1"
+            :icon="button.icon"
+            :label="button.label"
+            :on-click="button.onClick"
+            @shift-focus-right="shiftActionBarFocusRight"
+            @shift-focus-left="shiftActionBarFocusLeft"
+          />
+        </template>
         <div class="d-recipe-editor__button-group-divider" />
       </dt-stack>
       <dt-stack
         v-if="linkButton.showBtn"
         direction="row"
-        gap="300"
+        gap="50"
       >
         <dt-popover
           :open="showLinkInput"
@@ -155,7 +267,7 @@
                   :tabindex="canFocus(getButtonRef('custom', 'link')) ? 0 : -1"
                   importance="clear"
                   kind="muted"
-                  size="xs"
+                  :size="100"
                   @click="linkButton.onClick()"
                   @keydown.right.stop="shiftActionBarFocusRight"
                   @keydown.left.stop="shiftActionBarFocusLeft"
@@ -192,14 +304,14 @@
           <template #footerContent>
             <dt-stack
               direction="row"
-              gap="300"
+              gap="50"
               class="d-recipe-editor__popover-footer"
             >
               <dt-button
                 data-qa="dt-recipe-editor-remove-link-btn"
                 importance="clear"
                 kind="muted"
-                size="sm"
+                :size="200"
                 v-bind="removeLinkButtonLabels"
                 @click="removeLink"
               >
@@ -209,7 +321,7 @@
                 data-qa="dt-recipe-editor-set-link-cancel-btn"
                 importance="clear"
                 kind="muted"
-                size="sm"
+                :size="200"
                 v-bind="cancelSetLinkButtonLabels"
                 @click="closeLinkInput"
               >
@@ -217,7 +329,7 @@
               </dt-button>
               <dt-button
                 data-qa="dt-recipe-editor-set-link-confirm-btn"
-                size="sm"
+                :size="200"
                 v-bind="confirmSetLinkButtonLabels"
                 @click="setLink"
               >
@@ -232,7 +344,7 @@
     <!-- Some wrapper to restrict the height and show the scrollbar -->
     <div
       :style="{ 'max-height': maxHeight }"
-      class="d-recipe-editor__content"
+      :class="['d-recipe-editor__content', { 'd-recipe-editor__content-image-resize': allowImageResize }]"
     >
       <dt-rich-text-editor
         ref="richTextEditor"
@@ -242,6 +354,9 @@
         :allow-inline-images="true"
         :allow-line-breaks="true"
         :allow-variable="true"
+        :allow-font-size="showFontSizeButton"
+        :allow-background-color="allowBackgroundColor"
+        :allow-line-height="allowLineHeight"
         :variable-items="flattenedVariableItems"
         :hide-link-bubble-menu="true"
         :auto-focus="autoFocus"
@@ -251,21 +366,23 @@
         :link="true"
         :output-format="htmlOutputFormat"
         :placeholder="placeholder"
+        :preserve-whitespace="preserveWhitespace"
         :use-div-tags="useDivTags"
         :allow-tables="allowTables"
+        :allow-image-resize="allowImageResize"
         data-qa="dt-rich-text-editor"
         v-bind="removeClassStyleAttrs($attrs)"
         @text-input="onTextInput"
         @blur="onBlur"
         @focus="onFocus"
         @input="onInput($event)"
+        @selected="onSelected"
       />
     </div>
   </div>
 </template>
 
 <script>
-/* eslint-disable max-lines */
 import {
   DtRichTextEditor,
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
@@ -274,6 +391,7 @@ import {
 import {
   EDITOR_SUPPORTED_LINK_PROTOCOLS,
   EDITOR_DEFAULT_LINK_PREFIX,
+  EDITOR_DEFAULT_FONT_COLOR,
 } from './editor_constants.js';
 import { removeClassStyleAttrs, addClassStyleAttrs } from '@/common/utils';
 import { DtButton } from '@/components/button';
@@ -281,9 +399,14 @@ import { DtPopover } from '@/components/popover';
 import { DtStack } from '@/components/stack';
 import { DtInput } from '@/components/input';
 import { DtTooltip } from '@/components/tooltip';
-import {DtListItem} from '@/components/list_item/index.js';
-import {DtDropdownSeparator} from '@/components/dropdown/index.js';
-import {DtListItemGroup} from '@/components/list_item_group/index.js';
+import { DtListItem } from '@/components/list_item';
+import { DtCombobox } from '@/components/combobox';
+
+import { DtDropdownSeparator } from '@/components/dropdown/index.js';
+import { DtListItemGroup } from '@/components/list_item_group/index.js';
+import EditorToolbarButton from './EditorToolbarButton.vue';
+import EditorToolbarDropdownButton from './EditorToolbarDropdownButton.vue';
+import EditorToolbarPopoverButton from './EditorToolbarPopoverButton.vue';
 import {
   DtIconAlignCenter,
   DtIconAlignJustify,
@@ -300,9 +423,13 @@ import {
   DtIconQuote,
   DtIconStrikethrough,
   DtIconUnderline,
+  DtIconType,
   DtIconBraces,
   DtIconSearch,
-} from '@dialpad/dialtone-icons/vue3';
+  DtIconChevronDown,
+  DtIconFontSize,
+  DtIconStopFilled,
+} from '@dialpad/dialtone-icons/vue';
 import { DialtoneLocalization } from '@/localization';
 
 export default {
@@ -319,6 +446,10 @@ export default {
     DtStack,
     DtInput,
     DtTooltip,
+    DtCombobox,
+    EditorToolbarButton,
+    EditorToolbarDropdownButton,
+    EditorToolbarPopoverButton,
     DtIconQuickReply,
     DtIconBold,
     DtIconItalic,
@@ -334,8 +465,12 @@ export default {
     DtIconCodeBlock,
     DtIconLink2,
     DtIconImage,
-    DtIconBraces,
     DtIconSearch,
+    DtIconType,
+    DtIconBraces,
+    DtIconChevronDown,
+    DtIconFontSize,
+    DtIconStopFilled,
   },
 
   mixins: [],
@@ -372,7 +507,7 @@ export default {
     /**
      * Additional class name for the input element. Only accepts a String value
      * because this is passed to the editor via options. For multiple classes,
-     * join them into one string, e.g. "d-p8 d-hmx96"
+     * join them into one string, e.g. "d-p-100 d-hmx-150"
      */
     inputClass: {
       type: String,
@@ -565,6 +700,82 @@ export default {
     },
 
     /**
+     * Show font style button.
+     */
+    showFontStyleButton: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Show font size button.
+     */
+    showFontSizeButton: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Show font color button.
+     */
+    showFontColorButton: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Available font styles for the font style dropdown.
+     */
+    fontStyles: {
+      type: Array,
+      default: () => [
+        { name: 'Arial', value: null }, // arial is the default font
+        { name: 'Georgia', value: 'Georgia' },
+        { name: 'Helvetica', value: 'Helvetica' },
+        { name: 'Verdana', value: 'Verdana'},
+        { name: 'Times New Roman', value: 'Times New Roman' },
+      ],
+    },
+
+    fontSizes : {
+      type: Array,
+      default: () => [
+        { name: 'Small', value: '12px'},
+        { name: 'Normal', value: '15px'},
+        { name: 'Large', value: '24px'},
+        { name: 'Huge', value: '36px'},
+      ],
+    },
+
+    /**
+     * Whether the input allows background color to be introduced in the text.
+     */
+    allowBackgroundColor: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Whether the input allows line height to be introduced in the text.
+     */
+    allowLineHeight: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Controls how whitespace is handled when parsing HTML content.
+     * - 'full': All whitespace is preserved
+     * - true: Whitespace in inline content is preserved, whitespace-only nodes between blocks are removed
+     * - false: Standard HTML whitespace collapsing
+     * @values full, true, false
+     */
+    preserveWhitespace: {
+      type: [Boolean, String],
+      default: 'full',
+    },
+
+    /**
      * Use div tags instead of paragraph tags to show text
      */
     useDivTags: {
@@ -576,6 +787,14 @@ export default {
      * Allow Tables to be used in to the editor
      */
     allowTables: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Allow image resizing
+     */
+    allowImageResize: {
       type: Boolean,
       default: false,
     },
@@ -640,7 +859,9 @@ export default {
         class: 'd-recipe-editor__link',
       },
 
+      currentFontColor: undefined,
       showLinkInput: false,
+      fontStyleSearch: '',
       linkInput: '',
       currentButtonRefIndex: 0,
       variableSearchValue: '',
@@ -706,6 +927,7 @@ export default {
       return [
         {
           showBtn: this.showQuickRepliesButton,
+          buttonType: 'button',
           label: this.i18n.$t('DIALTONE_EDITOR_QUICK_REPLY_BUTTON_LABEL'),
           selector: 'quickReplies',
           icon: DtIconQuickReply,
@@ -719,7 +941,33 @@ export default {
     textFormatButtons () {
       return [
         {
+          showBtn: this.showFontStyleButton,
+          buttonType: 'popover',
+          selector: 'fontStyle',
+          icon: DtIconType,
+          dataQA: 'dt-recipe-editor-font-style-btn',
+          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_FONT_STYLE_BUTTON_LABEL'),
+        },
+        {
+          showBtn: this.showFontSizeButton,
+          buttonType: 'popover',
+          selector: 'fontSize',
+          icon: DtIconFontSize,
+          dataQA: 'dt-recipe-editor-font-size-btn',
+          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_FONT_SIZE_BUTTON_LABEL'),
+        },
+        {
+          showBtn: this.showFontColorButton,
+          buttonType: 'custom',
+          selector: 'fontColor',
+          icon: DtIconStopFilled,
+          dataQA: 'dt-recipe-editor-font-color-btn',
+          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_FONT_COLOR_BUTTON_LABEL'),
+          onClick: this.onColorPickerButtonClick,
+        },
+        {
           showBtn: this.showBoldButton,
+          buttonType: 'button',
           selector: 'bold',
           icon: DtIconBold,
           dataQA: 'dt-recipe-editor-bold-btn',
@@ -728,6 +976,7 @@ export default {
         },
         {
           showBtn: this.showItalicsButton,
+          buttonType: 'button',
           selector: 'italic',
           icon: DtIconItalic,
           dataQA: 'dt-recipe-editor-italics-btn',
@@ -736,6 +985,7 @@ export default {
         },
         {
           showBtn: this.showUnderlineButton,
+          buttonType: 'button',
           selector: 'underline',
           icon: DtIconUnderline,
           dataQA: 'dt-recipe-editor-underline-btn',
@@ -744,6 +994,7 @@ export default {
         },
         {
           showBtn: this.showStrikeButton,
+          buttonType: 'button',
           selector: 'strike',
           icon: DtIconStrikethrough,
           dataQA: 'dt-recipe-editor-strike-btn',
@@ -757,6 +1008,7 @@ export default {
       return [
         {
           showBtn: this.showAlignLeftButton,
+          buttonType: 'button',
           selector: { textAlign: 'left' },
           icon: DtIconAlignLeft,
           dataQA: 'dt-recipe-editor-align-left-btn',
@@ -765,6 +1017,7 @@ export default {
         },
         {
           showBtn: this.showAlignCenterButton,
+          buttonType: 'button',
           selector: { textAlign: 'center' },
           icon: DtIconAlignCenter,
           dataQA: 'dt-recipe-editor-align-center-btn',
@@ -773,6 +1026,7 @@ export default {
         },
         {
           showBtn: this.showAlignRightButton,
+          buttonType: 'button',
           selector: { textAlign: 'right' },
           icon: DtIconAlignRight,
           dataQA: 'dt-recipe-editor-align-right-btn',
@@ -781,6 +1035,7 @@ export default {
         },
         {
           showBtn: this.showAlignJustifyButton,
+          buttonType: 'button',
           selector: { textAlign: 'justify' },
           icon: DtIconAlignJustify,
           dataQA: 'dt-recipe-editor-align-justify-btn',
@@ -794,6 +1049,7 @@ export default {
       return [
         {
           showBtn: this.showListItemsButton,
+          buttonType: 'button',
           selector: 'bulletList',
           icon: DtIconListBullet,
           dataQA: 'dt-recipe-editor-list-items-btn',
@@ -802,6 +1058,7 @@ export default {
         },
         {
           showBtn: this.showOrderedListButton,
+          buttonType: 'button',
           selector: 'orderedList',
           icon: DtIconListOrdered,
           dataQA: 'dt-recipe-editor-ordered-list-items-btn',
@@ -815,6 +1072,7 @@ export default {
       return [
         {
           showBtn: this.showQuoteButton,
+          buttonType: 'button',
           selector: 'blockquote',
           icon: DtIconQuote,
           dataQA: 'dt-recipe-editor-blockquote-btn',
@@ -823,6 +1081,7 @@ export default {
         },
         {
           showBtn: this.showCodeBlockButton,
+          buttonType: 'button',
           selector: 'codeBlock',
           icon: DtIconCodeBlock,
           dataQA: 'dt-recipe-editor-code-block-btn',
@@ -831,6 +1090,7 @@ export default {
         },
         {
           showBtn: this.showInlineImageButton,
+          buttonType: 'button',
           selector: 'image',
           icon: DtIconImage,
           dataQA: 'dt-recipe-editor-inline-image-btn',
@@ -838,12 +1098,21 @@ export default {
           // Handle getting image
           onClick: this.onInsertInlineImageClick,
         },
+        {
+          showBtn: this.showVariableButton,
+          buttonType: 'popover',
+          selector: 'variable',
+          icon: DtIconBraces,
+          dataQA: 'dt-recipe-editor-variable-btn',
+          tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_VARIABLE_BUTTON_LABEL'),
+        },
       ].filter(button => button.showBtn);
     },
 
     linkButton () {
       return {
         showBtn: this.showAddLink.showAddLinkButton,
+        buttonType: 'custom',
         selector: 'link',
         icon: DtIconLink2,
         dataQA: 'dt-recipe-editor-add-link-btn',
@@ -851,17 +1120,6 @@ export default {
         onClick: this.openLinkInput,
       };
     },
-
-    variableButton() {
-      return {
-        showBtn: this.showVariableButton,
-        selector: 'variable',
-        icon: DtIconBraces,
-        dataQA: 'dt-recipe-editor-variable-btn',
-        tooltipMessage: this.i18n.$t('DIALTONE_EDITOR_VARIABLE_BUTTON_LABEL'),
-      }
-    },
-
 
     confirmSetLinkButtonLabels () {
       return this.i18n.$ta('DIALTONE_EDITOR_CONFIRM_SET_LINK_BUTTON');
@@ -879,11 +1137,33 @@ export default {
       return this.i18n.$ta('DIALTONE_EDITOR_ADD_LINK_BUTTON');
     },
 
+    filteredFontStyles () {
+      const searchValue = this.fontStyleSearch.toLowerCase();
+      return this.fontStyles.filter((item) =>
+        item.name.toLowerCase().includes(searchValue),
+      );
+    },
+
     filteredCategories() {
       return this.variableCategories.filter(
         (category) => this.getFilteredItemsForCategory(category).length,
       );
     },
+
+    colorPickerInput() {
+      return this.$refs.editorRoot?.querySelector('.colorPickerInput');
+    },
+
+    isDefaultFontColor() {
+      return this.currentFontColor === EDITOR_DEFAULT_FONT_COLOR;
+    },
+
+    actionBarBtn () {
+      const ref = this.$refs[this.orderedRefs[this.currentButtonRefIndex]][0]?.$refs?.buttonRef // get nested ref
+        || this.$refs[this.orderedRefs[this.currentButtonRefIndex]];
+      return Array.isArray(ref) ? ref[0] : ref;
+    },
+
   },
 
   watch: {
@@ -895,6 +1175,10 @@ export default {
   methods: {
     removeClassStyleAttrs,
     addClassStyleAttrs,
+
+    focusEditor () {
+      this.$refs.richTextEditor?.editor?.commands.focus();
+    },
 
     onInputFocus (event) {
       event?.stopPropagation();
@@ -1019,6 +1303,7 @@ export default {
         id: variableData.id,
         placeholder: variableData.placeholder || '',
         altText: '',
+        enableAltText: variableData.enableAltText,
       }).run();
     },
 
@@ -1057,6 +1342,10 @@ export default {
       this.$emit('update:modelValue', event);
     },
 
+    onSelected() {
+      this.updateFontColorInput();
+    },
+
     getButtonKey (key, selector) {
       return `${key}-${JSON.stringify(selector)}`;
     },
@@ -1083,14 +1372,41 @@ export default {
     },
 
     shiftButtonRefIndex (shiftAmount) {
-      const previousRef = this.$refs[this.orderedRefs[this.currentButtonRefIndex]];
-      const previousActionBarBtn = Array.isArray(previousRef) ? previousRef[0] : previousRef;
+      const previousActionBarBtn = this.actionBarBtn;
       const index = (this.currentButtonRefIndex + shiftAmount) % this.orderedRefs.length;
       this.currentButtonRefIndex = index >= 0 ? index : this.orderedRefs.length + index;
-      const currentRef = this.$refs[this.orderedRefs[this.currentButtonRefIndex]];
-      const currentActionBarBtn = Array.isArray(currentRef) ? currentRef[0] : currentRef;
+      const currentActionBarBtn = this.actionBarBtn;
+
       previousActionBarBtn.$el.blur();
       currentActionBarBtn.$el.focus();
+    },
+
+    onFontStyleSelect (fontFamily) {
+      if (fontFamily) {
+        this.$refs.richTextEditor?.editor?.chain().focus().setFontFamily(fontFamily).run();
+      } else {
+        this.$refs.richTextEditor?.editor?.chain().focus().unsetFontFamily().run();
+      }
+      this.$refs.richTextEditor?.editor?.commands.focus();
+    },
+
+    isCurrentFontFamily (fontFamily) {
+      if (!fontFamily) {
+        return !this.$refs.richTextEditor?.editor?.getAttributes('textStyle')?.fontFamily;
+      }
+      return this.$refs.richTextEditor?.editor?.isActive('textStyle', { fontFamily });
+    },
+
+    onFontSizeSelect (fontSize) {
+      this.$refs.richTextEditor?.editor?.chain().focus().setFontSize(fontSize).run();
+      this.$refs.richTextEditor?.editor?.commands.focus();
+    },
+
+    isCurrentFontSize (fontSize) {
+      if (!fontSize) {
+        return !this.$refs.richTextEditor?.editor?.getAttributes('textStyle')?.fontSize;
+      }
+      return this.$refs.richTextEditor?.editor?.isActive('textStyle', { fontSize });
     },
 
     getFilteredItemsForCategory(category) {
@@ -1102,6 +1418,61 @@ export default {
         item.name.toLowerCase().includes(searchValue),
       );
     },
+
+    updateFontColorInput() {
+      this.currentFontColor = this.$refs.richTextEditor?.editor?.getAttributes('textStyle')?.color || EDITOR_DEFAULT_FONT_COLOR;
+    },
+
+    onColorPickerButtonClick () {
+      this.colorPickerInput?.click();
+    },
+
+    onColorPickerInput (fontColor) {
+      this.$refs.richTextEditor?.editor?.chain().focus().setColor(fontColor).run();
+      this.$refs.richTextEditor?.editor?.commands.focus();
+      this.updateFontColorInput();
+    },
   },
 };
 </script>
+
+<style>
+/* Image resizing classes - only active when allowImageResize is true */
+
+/* Image border */
+.d-recipe-editor__content-image-resize .tiptap .ProseMirror-selectednode [data-resize-wrapper] {
+  outline: 1px solid var(--dt-color-chart-info-selected);
+  line-height: 0 !important;
+}
+
+/* Corner handles */
+.d-recipe-editor__content-image-resize .tiptap .ProseMirror-selectednode [data-resize-handle] {
+  position: absolute;
+  background: var(--dt-color-chart-info-selected);
+  z-index: 10;
+}
+
+.d-recipe-editor__content-image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='top-left'],
+.d-recipe-editor__content-image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='top-right'],
+.d-recipe-editor__content-image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='bottom-left'],
+.d-recipe-editor__content-image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='bottom-right'] {
+  inline-size: 8px;
+  block-size: 8px;
+}
+.d-recipe-editor__content-image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='top-left'] {
+  cursor: nwse-resize;
+  transform: translate(-50%, -50%);
+}
+.d-recipe-editor__content-image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='top-right'] {
+  cursor: nesw-resize;
+  transform: translate(50%, -50%);
+}
+.d-recipe-editor__content-image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='bottom-left'] {
+  cursor: nesw-resize;
+  transform: translate(-50%, 50%);
+}
+.d-recipe-editor__content-image-resize .tiptap .ProseMirror-selectednode [data-resize-handle='bottom-right'] {
+  cursor: nwse-resize;
+  transform: translate(50%, 50%);
+}
+</style>

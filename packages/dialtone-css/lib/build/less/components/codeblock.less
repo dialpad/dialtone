@@ -13,16 +13,40 @@
 
 @layer dialtone.components {
 .d-codeblock {
-    display: block;
-    padding: var(--dt-size-400);
-    color: var(--dt-color-foreground-secondary);
-    font-size: var(--dt-font-size-200);
-    font-family: var(--dt-font-family-mono);
-    line-height: var(--dt-font-line-height-400);
-    white-space: pre-wrap;
-    background-color: var(--dt-color-surface-secondary);
-    border: var(--dt-size-100) solid;
-    border-color: var(--dt-color-border-subtle);
-    border-radius: var(--dt-size-radius-400);
+    margin: 0;
+    color: var(--dt-color-foreground-tertiary);
+    font: inherit;
+
+    &--bordered {
+        padding: var(--dt-spacing-150);
+        background-color: var(--dt-color-surface-secondary);
+        border: var(--dt-size-border-100) solid;
+        border-color: var(--dt-color-border-subtle);
+        border-radius: var(--dt-size-radius-400);
+    }
+
+    &__code {
+        display: block;
+        font: var(--dt-text-code-sm);
+        line-height: var(--dt-text-line-height-300);
+        white-space: pre-wrap;
+        text-box-trim: trim-both;
+
+        &--xs {
+            font: var(--dt-text-code-xs);
+        }
+
+        &--sm {
+            font: var(--dt-text-code-sm);
+        }
+
+        &--md {
+            font: var(--dt-text-code-md);
+        }
+
+        &--lg {
+            font: var(--dt-text-code-lg);
+        }
+    }
 }
 }

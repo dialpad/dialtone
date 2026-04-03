@@ -62,6 +62,13 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  /**
+   * Set of member names that are currently disabled.
+   */
+  disabledMembers: {
+    type: Set,
+    default: () => new Set(),
+  },
 });
 
 /**
@@ -90,6 +97,8 @@ const bindingMap = computed(() => {
  * @returns {boolean} If the member is visible.
  */
 function isMemberVisible (name, member) {
+  if (props.disabledMembers.has(name)) { return false; }
+  if (member.value === null || (typeof member.value === 'number' && isNaN(member.value))) { return false; }
   if (props.verbose) { return true; }
 
   const defaultString = JSON.stringify(member.defaultValue);

@@ -9,14 +9,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["text field", "form field", "textbox", "d-input", "DtInput", "dt-input", "text input", "form input"]
 ---
 
-<code-well-header>
-  <div class="d-d-grid d-g16 d-g-cols2 d-w100p">
-    <dt-input label="Label" placeholder="Placeholder" />
-    <dt-input label="Label" type="textarea" placeholder="Placeholder" />
-  </div>
-</code-well-header>
-
-<!-- <component-combinator component-name="DtInput" /> -->
+<component-combinator component-name="DtInput" />
 
 ## Usage
 
@@ -25,7 +18,7 @@ This component combines both the `input` and `textarea` elements as options with
 <dialtone-usage>
 <template #do>
 
-- If you can’t reasonably predict a user’s answer to a prompt and there might be wide variability in users’ answers.
+- If you can't reasonably predict a user's answer to a prompt and there might be wide variability in users' answers.
 - When using another type of input will make answering more difficult. For example, birthdays and other known dates are easier to type in than they are to select from a calendar picker.
 - When users want to be able to paste in a response.
 </template>
@@ -46,119 +39,23 @@ This component combines both the `input` and `textarea` elements as options with
 
 ## Sizes
 
-We offer different sizes for instances in which the interface requires a smaller or larger input. In general, though, use the base (medium) size input as much as possible, especially in forms.
+We offer different sizes for instances in which the interface requires a smaller or larger input. In general, though, use the base `300` (medium) size input as much as possible, especially in forms.
 
-<code-well-header>
-  <div class="d-d-grid d-g16 d-g-cols2 d-w100p">
-    <dt-input label="Extra Small" type="text" placeholder="Placeholder" size="xs" />
-    <dt-input label="Extra Small" type="textarea" placeholder="Placeholder" size="xs" />
-    <dt-input label="Small" type="text" placeholder="Placeholder" size="sm" />
-    <dt-input label="Small" type="textarea" placeholder="Placeholder" size="sm" />
-    <dt-input label="Medium" type="text" placeholder="Placeholder" size="md" />
-    <dt-input label="Medium" type="textarea" placeholder="Placeholder" size="md" />
-    <dt-input label="Large" type="text" placeholder="Placeholder" size="lg" />
-    <dt-input label="Large" type="textarea" placeholder="Placeholder" size="lg" />
-    <dt-input label="Extra large" type="text" placeholder="Placeholder" size="xl" />
-    <dt-input label="Extra large" type="textarea" placeholder="Placeholder" size="xl" />
-  </div>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div>
-  <label>
-    <div class="d-label d-label--xs">Extra small</div>
-    <div class="d-input__wrapper">
-      <input type="text" class="d-input d-input--xs" placeholder="Placeholder">
-    </div>
-  </label>
+```vue demo
+<!-- @wrapper -->
+<div class="d-d-grid d-g-200 d-g-cols2">
+  <dt-input :size="100" type="text" label="Extra Small" placeholder="Placeholder" />
+  <dt-input :size="100" type="textarea" label="Extra Small" placeholder="Placeholder" />
+  <dt-input :size="200" type="text" label="Small" placeholder="Placeholder" />
+  <dt-input :size="200" type="textarea" label="Small" placeholder="Placeholder" />
+  <dt-input :size="300" type="text" label="Medium" placeholder="Placeholder" />
+  <dt-input :size="300" type="textarea" label="Medium" placeholder="Placeholder" />
+  <dt-input :size="400" type="text" label="Large" placeholder="Placeholder" />
+  <dt-input :size="400" type="textarea" label="Large" placeholder="Placeholder" />
+  <dt-input :size="500" type="text" label="Extra large" placeholder="Placeholder" />
+  <dt-input :size="500" type="textarea" label="Extra large" placeholder="Placeholder" />
 </div>
-<div>
-  <label>
-    <div class="d-label d-label--sm">Small</div>
-    <div class="d-input__wrapper">
-      <input type="text" class="d-input d-input--sm" placeholder="Placeholder">
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-label d-label--md">Medium</div>
-    <div class="d-input__wrapper">
-      <input type="text" class="d-input" placeholder="Placeholder">
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-label d-label--lg">Large</div>
-    <div class="d-input__wrapper">
-      <input type="text" class="d-input d-input--lg" placeholder="Placeholder">
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-label d-label--xl">Extra large</div>
-    <div class="d-input__wrapper">
-      <input type="text" class="d-input d-input--xl" placeholder="Placeholder">
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-label d-label--xs">Extra small</div>
-    <div class="d-input__wrapper">
-      <textarea class="d-textarea d-textarea--xs" placeholder="Placeholder" />
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-label d-label--sm">Small</div>
-    <div class="d-input__wrapper">
-      <textarea class="d-textarea d-textarea--sm" placeholder="Placeholder" />
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-label d-label--md">Medium</div>
-    <div class="d-input__wrapper">
-      <textarea class="d-textarea" placeholder="Placeholder" />
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-label d-label--lg">Large</div>
-    <div class="d-input__wrapper">
-      <textarea class="d-textarea d-textarea--lg" placeholder="Placeholder" />
-    </div>
-  </label>
-</div>
-<div>
-  <label>
-    <div class="d-label d-label--xl">Extra large</div>
-    <div class="d-input__wrapper">
-      <textarea class="d-textarea d-textarea--xl" placeholder="Placeholder" />
-    </div>
-  </label>
-</div>
-'
-vueCode='
-<dt-input label="Extra Small" type="text" placeholder="Placeholder" size="xs" />
-<dt-input label="Extra Small" type="textarea" placeholder="Placeholder" size="xs" />
-<dt-input label="Small" type="text" placeholder="Placeholder" size="sm" />
-<dt-input label="Small" type="textarea" placeholder="Placeholder" size="sm" />
-<dt-input label="Medium" type="text" placeholder="Placeholder" size="md" />
-<dt-input label="Medium" type="textarea" placeholder="Placeholder" size="md" />
-<dt-input label="Large" type="text" placeholder="Placeholder" size="lg" />
-<dt-input label="Large" type="textarea" placeholder="Placeholder" size="lg" />
-<dt-input label="Extra large" type="text" placeholder="Placeholder" size="xl" />
-<dt-input label="Extra large" type="textarea" placeholder="Placeholder" size="xl" />
-'
-showHtmlWarning />
+```
 
 ## Examples
 
@@ -166,191 +63,49 @@ showHtmlWarning />
 
 An input is normally paired with a label, but there are times when it can be used without a label.  Placeholder text should primarily be used as a content prompt and only provided when needed.
 
-<code-well-header>
-  <div class="d-stack16 d-w100p">
-    <dt-input label="Label" placeholder="Placeholder" />
-    <dt-input label="Label" value="Value" />
-    <dt-input label="Label" placeholder="Placeholder" disabled />
-  </div>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div>
-  <label class="d-label" for="Dialtone--InputExample1a">...</label>
-  <input class="d-input" id="Dialtone--InputExample1a" type="text" placeholder="..." />
+```vue demo
+<!-- @wrapper -->
+<div class="d-d-grid d-g-200 d-g-cols3">
+  <dt-input label="Label" placeholder="Placeholder" />
+  <dt-input label="Label" model-value="Value" />
+  <dt-input label="Label" placeholder="Placeholder" disabled />
+  <dt-input label="Label" placeholder="Placeholder" type="textarea" />
+  <dt-input label="Label" type="textarea" model-value="Value" />
+  <dt-input label="Label" placeholder="Placeholder" type="textarea" disabled />
 </div>
-<div>
-  <label class="d-label" for="Dialtone--InputExample1c">Label</label>
-  <input class="d-input" id="Dialtone--InputExample1c" type="text" value="Value" />
-</div>
-<div>
-  <label class="d-label" for="Dialtone--InputExample1b">...</label>
-  <input class="d-input" id="Dialtone--InputExample1b" type="text" placeholder="..." disabled />
-</div>
-'
-vueCode='
-<dt-input label="Label" placeholder="Placeholder" />
-<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
-<dt-input label="Label" model-value="Value" />
-<dt-input label="Label" placeholder="Placeholder" disabled />
-'
-showHtmlWarning />
-
-<code-well-header>
-  <div class="d-stack16 d-w100p">
-    <dt-input label="Label" placeholder="Placeholder" type="textarea" />
-    <dt-input label="Label" type="textarea" value="Value" />
-    <dt-input label="Label" placeholder="Placeholder" type="textarea" disabled />
-  </div>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div>
-  <label class="d-label" for="Dialtone--TextareaExample1a">...</label>
-  <textarea class="d-textarea" id="Dialtone--TextareaExample1a" type="text" placeholder="..."></textarea>
-</div>
-<div>
-  <label class="d-label" for="Dialtone--TextareaExample1c">Label</label>
-  <textarea class="d-textarea" id="Dialtone--TextareaExample1c" type="text">Value</textarea>
-</div>
-<div>
-  <label class="d-label" for="Dialtone--TextareaExample1b">...</label>
-  <textarea class="d-textarea" id="Dialtone--TextareaExample1b" type="text" placeholder="..." disabled></textarea>
-</div>
-'
-vueCode='
-<dt-input label="Label" placeholder="Placeholder" type="textarea" />
-<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
-<dt-input label="Label" type="textarea" model-value="Value" />
-<dt-input label="Label" placeholder="Placeholder" type="textarea" disabled />
-'
-showHtmlWarning />
+```
 
 ### With Description Text
 
-<code-well-header>
-  <div class="d-w100p">
-    <dt-input label="Label" description="Helpful description text" placeholder="Placeholder"/>
-  </div>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<label class="d-label" for="Dialtone--InputExample2">...</label>
-<span class="d-description">...</span>
-<input class="d-input" id="Dialtone--InputExample2" type="text" placeholder="..." />
-'
-vueCode='
-<dt-input label="Label" description="Helpful description text" placeholder="Placeholder"/>
-'
-showHtmlWarning />
-
-<code-well-header>
-  <div class="d-w100p">
-    <dt-input label="Label" description="Helpful description text" type="textarea" placeholder="Placeholder"/>
-  </div>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<label class="d-label" for="Dialtone--TextareaExample">...</label>
-<span class="d-description">...</span>
-<textarea class="d-textarea" id="Dialtone--TextareaExample" type="text" placeholder="..."></textarea>
-'
-vueCode='
-<dt-input label="Label" description="Helpful description text" type="textarea" placeholder="Placeholder"/>
-'
-showHtmlWarning />
+```vue demo
+<!-- @wrapper -->
+<div class="d-d-grid d-g-200 d-g-cols2">
+  <dt-input label="Label" description="Helpful description text" placeholder="Placeholder"/>
+  <dt-input label="Label" description="Helpful description text" type="textarea" placeholder="Placeholder"/>
+</div>
+```
 
 ### With Validation States
 
 Provides feedback to the user based on their interaction, or lack thereof, with an input.
 
-<code-well-header>
-  <div class="d-stack16 d-w100p">
-    <dt-input label="Label" type="email" value="Value" :messages="[messages.error]"/>
-    <dt-input label="Label" type="email" value="Value" :messages="[messages.success]"/>
-    <dt-input label="Label" type="email" value="Value" :messages="[messages.warning]"/>
-  </div>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div>
-  <label class="d-label" for="Dialtone--InputExample3">...</label>
-  <input class="d-input d-input--error" id="Dialtone--InputExample3" type="email" placeholder="..." value="..." />
-  <span class="d-validation-message d-validation-message--error">...</span>
+```vue demo
+<!-- @wrapper -->
+<div class="d-d-grid d-g-200 d-g-cols3">
+  <dt-input label="Label" type="email" model-value="Value" :messages="[messages.error]"/>
+  <dt-input label="Label" type="email" model-value="Value" :messages="[messages.success]"/>
+  <dt-input label="Label" type="email" model-value="Value" :messages="[messages.warning]"/>
+  <dt-input label="Label" type="textarea" model-value="Value" :messages="[messages.error]"/>
+  <dt-input label="Label" type="textarea" model-value="Value" :messages="[messages.success]"/>
+  <dt-input label="Label" type="textarea" model-value="Value" :messages="[messages.warning]"/>
 </div>
-<div>
-  <label class="d-label" for="Dialtone--InputExample4">...</label>
-  <input class="d-input d-input--success" id="Dialtone--InputExample4" type="email" placeholder="..." value="..." />
-  <span class="d-validation-message d-validation-message--success">...</span>
-</div>
-<div>
-  <label class="d-label" for="Dialtone--InputExample5">...</label>
-  <input class="d-input d-input--warning" id="Dialtone--InputExample5" type="email" placeholder="..." value="..." />
-  <span class="d-validation-message d-validation-message--warning">...</span>
-</div>
-'
-vueCode='
-<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
-<dt-input label="Label" type="email" model-value="Value" :messages="[messages.error]"/>
-<dt-input label="Label" type="email" model-value="Value" :messages="[messages.success]"/>
-<dt-input label="Label" type="email" model-value="Value" :messages="[messages.warning]"/>
-'
-showHtmlWarning />
-
-<code-well-header>
-  <div class="d-stack16 d-w100p">
-    <dt-input label="Label" type="textarea" value="Value" :messages="[messages.error]"/>
-    <dt-input label="Label" type="textarea" value="Value" :messages="[messages.success]"/>
-    <dt-input label="Label" type="textarea" value="Value" :messages="[messages.warning]"/>
-  </div>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div>
-  <label class="d-label" for="Dialtone--TextareaExample3">...</label>
-  <textarea class="d-textarea d-textarea--error" id="Dialtone--TextareaExample3" type="email" placeholder="..." value="..."></textarea>
-  <span class="d-validation-message d-validation-message--error">...</span>
-</div>
-<div>
-  <label class="d-label" for="Dialtone--TextareaExample4">...</label>
-  <textarea class="d-textarea d-textarea--success" id="Dialtone--TextareaExample4" type="email" placeholder="..." value="..."></textarea>
-  <span class="d-validation-message d-validation-message--success">...</span>
-</div>
-<div>
-  <label class="d-label" for="Dialtone--TextareaExample5">...</label>
-  <textarea class="d-textarea d-textarea--warning" id="Dialtone--TextareaExample5" type="email" placeholder="..." value="..."></textarea>
-  <span class="d-validation-message d-validation-message--warning">...</span>
-</div>
-'
-vueCode='
-<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
-<dt-input label="Label" type="textarea" model-value="Value" :messages="[messages.error]"/>
-<dt-input label="Label" type="textarea" model-value="Value" :messages="[messages.success]"/>
-<dt-input label="Label" type="textarea" model-value="Value" :messages="[messages.warning]"/>
-'
-showHtmlWarning />
+```
 
 ### With Multiple Validation Messages
 
-<code-well-header>
-  <div class="d-w100p">
-    <dt-input ref="multipleMessages" label="Label" type="email" value="Value" :messages="multipleMessages" />
-  </div>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.multipleMessages'
-vueCode='
-<!-- IMPORTANT NOTE: Change model-value to just value in Vue 2 -->
+```vue demo
 <dt-input label="Label" type="email" model-value="Value" :messages="multipleMessages" />
-'
-/>
+```
 
 ### With Maximum Length Validation
 
@@ -377,68 +132,33 @@ length: {
 
 If the input is invalid due to the validation, the validation message will be shown even when the input lost focus, otherwise the validation message will be hidden when the user unfocuses the input.
 
-<code-well-header>
-  <div class="d-w100p">
-    <dt-input
-      v-model="inputValue"
-      ref="maxLength"
-      label="Label"
-      placeholder="placeholder"
-      :validate="{
-        length: {
-          description: 'Max 25 characters.',
-          message: 'Max 25 characters allowed.',
-          max: 25,
-          warn: 15,
-          limitMaxLength: false,
-        }
-      }"
-    />
-  </div>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.maxLength'
-vueCode='
+```vue demo
 <dt-input
+  model-value="Value"
   label="Label"
   placeholder="placeholder"
   :validate="{
     length: {
-      description: `Max 25 characters.`,
-      message: `Max 25 characters allowed.`,
+      description: 'Max 25 characters.',
+      message: 'Max 25 characters allowed.',
       max: 25,
       warn: 15,
       limitMaxLength: false,
     }
   }"
 />
-'
-/>
+```
 
 ### With Custom Maximum Length Validation Message
 
-<code-well-header>
-  <div class="d-w100p">
-    <dt-input
-      v-model="inputValue"
-      label="Label"
-      placeholder="placeholder"
-      :validate="validate()"
-    />
-  </div>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
+```vue demo
 <dt-input
+  model-value="Value"
   label="Label"
   placeholder="placeholder"
   :validate="validate()"
-  v-model="inputValue"
 />
-'
-/>
+```
 
 ```js
 const validateData = {
@@ -474,299 +194,141 @@ const validate = () => {
 
 Use `type="search"` with a clear button in the `icon` slot. When the input is not empty, the clear button will render and will clear the input field when triggered.
 
-<code-well-header>
-  <div class="d-w100p">
-    <dt-input
-      aria-label="Search items"
-      placeholder="Search Items"
-      type="search"
-      v-model="inputSearchValue"
-    >
-      <template #startIcon="{ iconSize }">
-        <dt-icon name="search" :size="iconSize" />
-      </template>
-      <template v-if="inputSearchValue.length !== 0" #endIcon="{ clear }">
-        <dt-button
-          v-dt-tooltip="'Clear search'"
-          kind="muted"
-          importance="clear"
-          size="xs"
-          aria-label="Clear search"
-          @click="clear"
-        >
-          <template #startIcon="{ iconSize }">
-            <dt-icon name="close" :size="iconSize" />
-          </template>
-        </dt-button>
-      </template>
-    </dt-input>
-  </div>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div class="d-input__wrapper">
-  <span class="base-input__icon--left d-input-icon--left d-input-icon">...</span>
-  <input type="search" autocomplete="off" class="base-input__input d-input d-input-icon--left d-input-icon--right" placeholder="Search Items">
-  <span class="base-input__icon--right d-input-icon--right d-input-icon undefined" data-qa="dt-input-right-icon-wrapper">
-    <button class="base-button__button d-btn d-btn--muted d-btn--xs d-btn--circle d-btn--icon-only" data-qa="dt-button" type="button" aria-label="Clear search">
-      <span class="base-button__icon d-btn__icon d-btn__icon--left">...</span>
-    </button>
-  </span>
-</div>
-'
-vueCode='
+```vue demo
 <dt-input
   aria-label="Search items"
   placeholder="Search Items"
   type="search"
-  v-model="inputValue"
+  model-value="Search Value"
 >
   <template #startIcon="{ iconSize }">
     <dt-icon name="search" :size="iconSize" />
   </template>
-  <template v-if="inputValue.length !== 0" #endIcon="{ clear }">
-    <dt-button
-      kind="muted"
-      importance="clear"
-      size="xs"
-      circle
-      aria-label="Clear search"
-      @click="clear"
-    >
-      <template #startIcon="{ iconSize }">
-        <dt-icon name="close" :size="iconSize" />
-      </template>
-    </dt-button>
+  <template v-if="inputSearchValue.length !== 0" #endIcon="{ clear }">
+    <dt-stack class="d-pie-25">
+      <dt-button
+        v-dt-tooltip="'Clear search'"
+        kind="muted"
+        importance="clear"
+        :size="100"
+        aria-label="Clear search"
+        @click="clear"
+      >
+        <template #startIcon="{ iconSize }">
+          <dt-icon name="close" :size="iconSize" />
+        </template>
+      </dt-button>
+    </dt-stack>
   </template>
 </dt-input>
-'
-showHtmlWarning />
+```
 
 ## Icon Support
 
-<code-well-header>
-  <div class="d-stack16 d-w100p">
-    <dt-input label="Start icon" type="text" placeholder="Placeholder">
-      <template #startIcon="{ iconSize }">
-        <dt-icon name="send" :size="iconSize" />
-      </template>
-    </dt-input>
-    <dt-input label="End icon" type="text" placeholder="Placeholder">
-      <template #endIcon="{ iconSize }">
-        <dt-icon name="lock" :size="iconSize" />
-      </template>
-    </dt-input>
-    <dt-input label="Start and End icon" type="text" placeholder="Placeholder">
-      <template #startIcon="{ iconSize }">
-        <dt-icon name="send" :size="iconSize" />
-      </template>
-      <template #endIcon="{ iconSize }">
-        <dt-icon name="lock" :size="iconSize" />
-      </template>
-    </dt-input>
-  </div>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div>
-  <label class="d-label" for="Dialtone--InputExample--IconLeft">Label</label>
-  <div class="d-input__wrapper">
-    <span class="d-input-icon d-input-icon--left">
-      <svg class="d-icon d-icon--size-200">...</svg>
-    </span>
-    <input class="d-input" id="Dialtone--InputExample--IconLeft" type="text" placeholder="Placeholder" />
-  </div>
+```vue demo
+<!-- @wrapper -->
+<div class="d-d-grid d-g-200 d-g-cols3">
+  <dt-input label="Start icon" type="text" placeholder="Placeholder">
+    <template #startIcon="{ iconSize }">
+      <dt-icon name="send" :size="iconSize" />
+    </template>
+  </dt-input>
+  <dt-input label="End icon" type="text" placeholder="Placeholder">
+    <template #endIcon="{ iconSize }">
+      <dt-icon name="lock" :size="iconSize" />
+    </template>
+  </dt-input>
+  <dt-input label="Start and End icon" type="text" placeholder="Placeholder">
+    <template #startIcon="{ iconSize }">
+      <dt-icon name="send" :size="iconSize" />
+    </template>
+    <template #endIcon="{ iconSize }">
+      <dt-icon name="lock" :size="iconSize" />
+    </template>
+  </dt-input>
+  <dt-input label="Start icon" type="textarea" placeholder="Placeholder">
+    <template #startIcon="{ iconSize }">
+      <dt-icon name="send" :size="iconSize" />
+    </template>
+  </dt-input>
+  <dt-input label="End icon" type="textarea" placeholder="Placeholder">
+    <template #endIcon="{ iconSize }">
+      <dt-icon name="lock" :size="iconSize" />
+    </template>
+  </dt-input>
+  <dt-input label="Start and End icon" type="textarea" placeholder="Placeholder">
+    <template #startIcon="{ iconSize }">
+      <dt-icon name="send" :size="iconSize" />
+    </template>
+    <template #endIcon="{ iconSize }">
+      <dt-icon name="lock" :size="iconSize" />
+    </template>
+  </dt-input>
 </div>
-<div>
-  <label class="d-label" for="Dialtone--InputExample--IconRight">Label</label>
-  <div class="d-input__wrapper">
-    <input class="d-input" id="Dialtone--InputExample--IconRight" type="text" placeholder="Placeholder" />
-    <span class="d-input-icon d-input-icon--right">
-      <svg class="d-icon d-icon--size-200">...</svg>
-    </span>
-  </div>
-</div>
-'
-vueCode='
-<dt-input label="Start icon" type="text" placeholder="Placeholder">
-  <template #startIcon="{ iconSize }">
-    <dt-icon name="send" :size="iconSize" />
-  </template>
-</dt-input>
-<dt-input label="End icon" type="text" placeholder="Placeholder">
-  <template #endIcon="{ iconSize }">
-    <dt-icon name="lock" :size="iconSize" />
-  </template>
-</dt-input>
-<dt-input label="Start and End icon" type="text" placeholder="Placeholder">
-  <template #startIcon="{ iconSize }">
-    <dt-icon name="send" :size="iconSize" />
-  </template>
-  <template #endIcon="{ iconSize }">
-    <dt-icon name="lock" :size="iconSize" />
-  </template>
-</dt-input>
-'
-showHtmlWarning />
-
-<code-well-header>
-  <div class="d-stack16 d-w100p">
-    <dt-input label="Start icon" type="textarea" placeholder="Placeholder">
-      <template #startIcon="{ iconSize }">
-        <dt-icon name="send" :size="iconSize" />
-      </template>
-    </dt-input>
-    <dt-input label="End icon" type="textarea" placeholder="Placeholder">
-      <template #endIcon="{ iconSize }">
-        <dt-icon name="lock" :size="iconSize" />
-      </template>
-    </dt-input>
-    <dt-input label="Start and End icon" type="textarea" placeholder="Placeholder">
-      <template #startIcon="{ iconSize }">
-        <dt-icon name="send" :size="iconSize" />
-      </template>
-      <template #endIcon="{ iconSize }">
-        <dt-icon name="lock" :size="iconSize" />
-      </template>
-    </dt-input>
-  </div>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div>
-  <label class="d-label" for="Dialtone--InputExample--IconLeft">...</label>
-  <div class="d-input__wrapper">
-    <span class="d-input-icon d-input-icon--left">
-      <svg class="d-icon d-icon--size-200">...</svg>
-    </span>
-    <textarea class="d-textarea" id="Dialtone--InputExample--IconLeft" type="text" placeholder="..."></textarea>
-  </div>
-</div>
-'
-vueCode='
-<dt-input label="Start icon" type="textarea" placeholder="Placeholder">
-  <template #startIcon="{ iconSize }">
-    <dt-icon name="send" :size="iconSize" />
-  </template>
-</dt-input>
-<dt-input label="End icon" type="textarea" placeholder="Placeholder">
-  <template #endIcon="{ iconSize }">
-    <dt-icon name="lock" :size="iconSize" />
-  </template>
-</dt-input>
-<dt-input label="Start and End icon" type="textarea" placeholder="Placeholder">
-  <template #startIcon="{ iconSize }">
-    <dt-icon name="send" :size="iconSize" />
-  </template>
-  <template #endIcon="{ iconSize }">
-    <dt-icon name="lock" :size="iconSize" />
-  </template>
-</dt-input>
-'
-showHtmlWarning />
+```
 
 ### Icon Sizes
 
 Each Text Input size has a default icon size, keeping it proportional. While rare, customizing the icon size is possible.
 
-<code-well-header>
-  <div class="d-stack16 d-w100p">
-    <dt-input label="Small input with large icon" type="text" placeholder="Placeholder" size="sm">
-      <template #startIcon="{ iconSize }">
-        <dt-icon name="send" :size="iconSize" />
-      </template>
-    </dt-input>
-    <dt-input label="Medium input with extra large icon" type="text" placeholder="Placeholder">
-      <template #startIcon="{ iconSize }">
-        <dt-icon name="send" :size="iconSize" />
-      </template>
-    </dt-input>
-    <dt-input label="Extra large input with medium icon" type="text" placeholder="Placeholder" size="xl">
-      <template #startIcon>
-        <dt-icon name="send" :size="iconSize" />
-      </template>
-    </dt-input>
-    <dt-input label="Large textarea with medium icon" type="textarea" placeholder="Placeholder" icon-size="md" size="lg">
-      <template #startIcon>
-        <dt-icon name="send" :size="iconSize" />
-      </template>
-    </dt-input>
-  </div>
-</code-well-header>
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="200" class="d-w100p">
+  <dt-input label="Medium input with smallest icon" type="text" placeholder="Placeholder" :size="300">
+    <template #startIcon>
+      <dt-icon name="box-select" size="100" />
+    </template>
+    <template #endIcon>
+      <dt-icon name="box-select" size="100" />
+    </template>
+  </dt-input>
+  <dt-input label="Extra large input with medium icon" type="text" placeholder="Placeholder" :size="500">
+    <template #startIcon>
+      <dt-icon name="box-select" size="200" />
+    </template>
+    <template #endIcon>
+      <dt-icon name="box-select" size="200" />
+    </template>
+  </dt-input>
+  <dt-input label="Medium textarea with large icon" type="textarea" placeholder="Placeholder" :icon-size="300" :size="400">
+    <template #startIcon>
+      <dt-icon name="box-select" size="500" />
+    </template>
+  </dt-input>
+</dt-stack>
+```
 
-<code-example-tabs
-htmlCode='
-<div>
-  <div>
-    <label class="d-label" for="Dialtone--InputExample--IconLeft">Input:sm Icon:lg</label>
-  </div>
-  <div class="d-input__wrapper">
-    <span class="d-input-icon d-input-icon--left">
-      <svg class="d-icon d-icon--size-400">...</svg>
-    </span>
-    <input class="d-input d-input--sm" id="Dialtone--InputExample--IconLeft-sm-lg" type="text" placeholder="Placeholder" />
-  </div>
-</div>
-<div>
-  <div>
-    <label class="d-label" for="Dialtone--InputExample--IconLeft">Input:md(default), Icon:xl</label>
-  </div>
-  <div class="d-input__wrapper">
-    <span class="d-input-icon d-input-icon--left">
-      <svg class="d-icon d-icon--size-500">...</svg>
-    </span>
-    <input class="d-input" id="Dialtone--InputExample--IconLeft-md-xl" type="text" placeholder="Placeholder" />
-  </div>
-</div>
-<div>
-  <div>
-    <label class="d-label" for="Dialtone--InputExample--IconLeft">Input:xl Icon:md(default)</label>
-  </div>
-  <div class="d-input__wrapper">
-    <span class="d-input-icon d-input-icon--left">
-      <svg class="d-icon d-icon--size-200">...</svg>
-    </span>
-    <input class="d-input d-input--xl" id="Dialtone--InputExample--IconLeft-xl-md" type="text" placeholder="Placeholder" />
-  </div>
-</div>
-<div>
-  <div>
-    <label class="d-label" for="Dialtone--InputExample--IconLeft">Textarea:lg Icon:md(default)</label>
-  </div>
-  <div class="d-input__wrapper">
-    <span class="d-input-icon d-input-icon--left">
-      <svg class="d-icon d-icon--size-200">...</svg>
-    </span>
-    <textarea class="d-textarea d-textarea--lg" id="Dialtone--TextareaExample--IconLeft-lg-md" type="text" placeholder="Placeholder"></textarea>
-  </div>
-</div>
-'
-vueCode='
-<dt-input label="Small input with large icon" type="text" placeholder="Placeholder" size="sm">
-  <template #startIcon>
-    <dt-icon name="send" size="400" />
-  </template>
-</dt-input>
-<dt-input label="Medium input with extra large icon" type="text" placeholder="Placeholder">
-  <template #startIcon>
-    <dt-icon name="send" size="500" />
-  </template>
-</dt-input>
-<dt-input label="Extra large input with medium icon" type="text" placeholder="Placeholder" size="xl">
-  <template #startIcon>
-    <dt-icon name="send" size="200" />
-  </template>
-</dt-input>
-<dt-input label="Large textarea with medium icon" type="textarea" placeholder="Placeholder" size="lg">
-  <template #startIcon>
-    <dt-icon name="send" size="200" />
-  </template>
-</dt-input>
-'
-showHtmlWarning />
+## Label size
+
+The label text size is automatically derived from the component's `size` prop. Use the `label-size` prop to override this when you need a different label size independent of the input size. For example, the default label size for a `:size="300"` input is `300`, but you can override it from `100` to `400`.
+
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="200" class="d-w100p">
+  <dt-input label="Extra small label" placeholder="Placeholder" :label-size="100" />
+  <dt-input label="Small label" placeholder="Placeholder" :label-size="200" />
+  <dt-input label="Medium label (default)" placeholder="Placeholder" :label-size="300" />
+  <dt-input label="Large label" placeholder="Placeholder" :label-size="400" />
+</dt-stack>
+<!-- @code -->
+<dt-input label="Extra small label" placeholder="Placeholder" :label-size="100" />
+```
+
+## Label strength
+
+Override the label font weight independently of the label size. Valid values are `bold`, `semibold`, `medium`, and `normal`.
+
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="200" class="d-w100p">
+  <dt-input label="Bold label" placeholder="Placeholder" label-strength="bold" />
+  <dt-input label="Semibold label" placeholder="Placeholder" label-strength="semibold" />
+  <dt-input label="Medium label" placeholder="Placeholder" label-strength="medium" />
+  <dt-input label="Normal label" placeholder="Placeholder" label-strength="normal" />
+</dt-stack>
+<!-- @code -->
+<dt-input label="Label" placeholder="Placeholder" label-strength="bold|semibold|medium|normal" />
+```
 
 ## Vue API
 

@@ -9,11 +9,13 @@ figma: planned
 keywords: ["loading placeholder", "shimmer", "ghost", "d-skeleton", "DtSkeleton", "dt-skeleton", "content loader", "placeholder ui"]
 ---
 
-<code-well-header>
-  <div class="d-w50p">
-    <dt-skeleton :animate="false" />
-  </div>
-</code-well-header>
+```vue demo-only
+<div class="d-w-400">
+  <dt-skeleton :animate="false" />
+</div>
+```
+
+<!-- <component-combinator component-name="DtSkeleton" /> -->
 
 ## Skeleton vs Loader
 
@@ -38,10 +40,10 @@ keywords: ["loading placeholder", "shimmer", "ghost", "d-skeleton", "DtSkeleton"
 
 - Use when data takes more than 300ms to load on an average connection for our user base.
 - Use to represent a general layout of what is being loaded.
-- For a repeating list, show 6 items maximum, since it’s enough to give an idea of a layout. For conversations, limit to 3.
-- Use skeleton loading for dynamic content, and use actual content for static content that doesn’t change e.g. page title, headings, action components (button, toggles, checkboxes etc.).
+- For a repeating list, show 6 items maximum, since it's enough to give an idea of a layout. For conversations, limit to 3.
+- Use skeleton loading for dynamic content, and use actual content for static content that doesn't change e.g. page title, headings, action components (button, toggles, checkboxes etc.).
 - Dynamic content: Content that would change after loading, usually data-based text.
-- Static content: Content that can be loaded quickly and wouldn’t change, usually non-data-based text.
+- Static content: Content that can be loaded quickly and wouldn't change, usually non-data-based text.
 - Always match the size of content that will load.
 - Always allow content to load gradually. Real content should replace skeleton objects immediately when the data is available.
 
@@ -59,89 +61,52 @@ keywords: ["loading placeholder", "shimmer", "ghost", "d-skeleton", "DtSkeleton"
 
 ### Default
 
-<code-well-header>
-  <div class="d-w50p">
-    <dt-skeleton :animate="false" arial-label="Loading" ref="defaultExample" />
-  </div>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs.defaultExample"
-vueCode='
-<dt-skeleton :animate="false" arial-label="Loading" />
-'
-showHtmlWarning />
+```vue demo
+<!-- @wrapper -->
+<div class="d-w-400">
+  <dt-skeleton :animate="false" arial-label="Loading" />
+</div>
+```
 
 ### Animation
 
-<code-well-header>
-  <div class="d-w50p">
-    <dt-skeleton arial-label="Loading" ref="animationExample" />
-  </div>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs.animationExample"
-vueCode='
-<dt-skeleton arial-label="Loading" />
-'
-/>
+```vue demo
+<!-- @wrapper -->
+<div class="d-w-400">
+  <dt-skeleton arial-label="Loading" />
+</div>
+```
 
 ## Custom
 
 To customize a non-animating Skeleton background color modify the `--placeholder-from-color` variable with an inline `style`.
 
-<code-well-header>
-  <div class="d-w50p">
-    <dt-skeleton
-      :animate="false"
-      :text-option="{
-        style: '--placeholder-from-color: var(--dt-color-blue-400)',
-      }"
-      ref="customExample"
-      arial-label="Loading"
-    />
-  </div>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs.customExample"
-vueCode='
-<dt-skeleton
-  :animate="false"
-  :text-option="{
-    style: `--placeholder-from-color: var(--dt-color-blue-400)`,
-  }"
-  arial-label="Loading"
-/>
-'
-showHtmlWarning />
+```vue demo
+<!-- @wrapper -->
+<div class="d-w-400">
+  <dt-skeleton
+    :animate="false"
+    :text-option="{
+      style: '--placeholder-from-color: var(--dt-color-blue-400)',
+    }"
+    arial-label="Loading"
+  />
+</div>
+```
 
 Customize an animating Skeleton by modifying the `--placeholder-from-color` and `--placeholder-to-color` variables with an inline `style`.
 
-<code-well-header>
-  <div class="d-w50p">
-    <dt-skeleton
-      :text-option="{
-        style: '--placeholder-from-color: var(--dt-color-blue-400); --placeholder-to-color: var(--dt-color-blue-200);',
-      }"
-      ref="customAnimateExample"
-      arial-label="Loading"
-    />
-  </div>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs.customAnimateExample"
-vueCode='
-<dt-skeleton
-  :text-option="{
-    style: `--placeholder-from-color: var(--dt-color-blue-400); --placeholder-to-color: var(--dt-color-blue-200);`,
-  }"
-  arial-label="Loading"
-/>
-'
-showHtmlWarning />
+```vue demo
+<!-- @wrapper -->
+<div class="d-w-400">
+  <dt-skeleton
+    :text-option="{
+      style: '--placeholder-from-color: var(--dt-color-blue-400); --placeholder-to-color: var(--dt-color-blue-200);',
+    }"
+    arial-label="Loading"
+  />
+</div>
+```
 
 ## Shapes
 
@@ -149,184 +114,109 @@ showHtmlWarning />
 
 Default sizes match the avatar size. Size is customizable when needed.
 
-<code-well-header class="d-ai-flex-start">
-  <div ref="avatarExample">
-    <p>S (24x24px)</p>
-    <dt-skeleton :shape-option="{ shape: 'circle', size: 'sm' }" :animate="false" />
-    <p>M (32x32px)</p>
-    <dt-skeleton :shape-option="{ shape: 'circle' }" :animate="false" />
-    <p>L (48x48px)</p>
-    <dt-skeleton :shape-option="{ shape: 'circle', size: 'lg' }" :animate="false" />
-  </div>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs.avatarExample"
-vueCode='
-<dt-skeleton :shape-option="{ shape: `circle`, size: `sm` }" :animate="false" />
-<dt-skeleton :shape-option="{ shape: `circle` }" :animate="false" />
-<dt-skeleton :shape-option="{ shape: `circle`, size: `lg` }" :animate="false" />
-'
-/>
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="100">
+  <p>S (24x24px)</p>
+  <dt-skeleton :shape-option="{ shape: 'circle', size: 'sm' }" :animate="false" />
+  <p>M (32x32px)</p>
+  <dt-skeleton :shape-option="{ shape: 'circle' }" :animate="false" />
+  <p>L (48x48px)</p>
+  <dt-skeleton :shape-option="{ shape: 'circle', size: 'lg' }" :animate="false" />
+</dt-stack>
+```
 
 ### Image / Icon
 
-<code-well-header class="d-ai-flex-start">
-  <div ref="squareExample">
-    <p>S (24x24px)</p>
-    <dt-skeleton :shape-option="{ shape: 'square', size: 'sm' }" :animate="false" />
-    <p>M (32x32px)</p>
-    <dt-skeleton :shape-option="{ shape: 'square' }" :animate="false" />
-    <p>L (48x48px)</p>
-    <dt-skeleton :shape-option="{ shape: 'square', size: 'lg' }" :animate="false" />
-  </div>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs.squareExample"
-vueCode='
-<dt-skeleton :shape-option="{ shape: `square`, size: `sm` }" :animate="false" />
-<dt-skeleton :shape-option="{ shape: `square` }" :animate="false" />
-<dt-skeleton :shape-option="{ shape: `square`, size: `lg` }" :animate="false" />
-'
-/>
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="100">
+  <p>S (24x24px)</p>
+  <dt-skeleton :shape-option="{ shape: 'square', size: 'sm' }" :animate="false" />
+  <p>M (32x32px)</p>
+  <dt-skeleton :shape-option="{ shape: 'square' }" :animate="false" />
+  <p>L (48x48px)</p>
+  <dt-skeleton :shape-option="{ shape: 'square', size: 'lg' }" :animate="false" />
+</dt-stack>
+```
 
 ### Headings
 
-<code-well-header class="d-ai-flex-start">
-  <div ref="headingsExample">
-    <p>Small</p>
-    <dt-skeleton :text-option="{ type: 'heading', headingHeight: 'sm', width: '160px' }" :animate="false" />
-    <p>Medium</p>
-    <dt-skeleton :text-option="{ type: 'heading', width: '240px' }" :animate="false" />
-    <p>Large</p>
-    <dt-skeleton :text-option="{ type: 'heading', headingHeight: 'lg', width: '320px' }" :animate="false" />
-  </div>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs.headingsExample"
-vueCode='
-<dt-skeleton :text-option="{ type: `heading`, headingHeight: `sm`, width: `160px` }" :animate="false" />
-<dt-skeleton :text-option="{ type: `heading`, width: `240px` }" :animate="false" />
-<dt-skeleton :text-option="{ type: `heading`, headingHeight: `lg`, width: `320px` }" :animate="false" />
-'
-/>
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="100">
+  <p>Small</p>
+  <dt-skeleton :text-option="{ type: 'heading', headingHeight: 'sm', width: '160px' }" :animate="false" />
+  <p>Medium</p>
+  <dt-skeleton :text-option="{ type: 'heading', width: '240px' }" :animate="false" />
+  <p>Large</p>
+  <dt-skeleton :text-option="{ type: 'heading', headingHeight: 'lg', width: '320px' }" :animate="false" />
+</dt-stack>
+```
 
 ## Prefabricated Combinations
 
 ### Paragraphs
 
-<code-well-header>
-  <div class="d-w50p">
-    <dt-skeleton :paragraph-option="{ rows: 5, randomWidth: true }" :animate="false" />
-  </div>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-skeleton
-  :paragraph-option="{
-    rows: 5,
-    randomWidth: true,
-  }"
-  :animate="false"
-/>
-'
-/>
+```vue demo
+<!-- @wrapper -->
+<div class="d-w-400">
+  <dt-skeleton :paragraph-option="{ rows: 5, randomWidth: true }" :animate="false" />
+</div>
+```
 
 ### Avatar + Name
 
-<code-well-header>
-  <div class="d-w50p">
-    <dt-skeleton
-      :list-item-option="{ shapeSize: 'sm', paragraphs: { rows: 1 } }"
-    />
-  </div>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-skeleton
-  :list-item-option="{
-    shapeSize: `sm`,
-    paragraphs: {
-      rows: 1,
-    },
-  }"
-/>
-'
-/>
+```vue demo
+<!-- @wrapper -->
+<div class="d-w-400">
+  <dt-skeleton
+    :list-item-option="{ shapeSize: 'sm', paragraphs: { rows: 1 } }"
+  />
+</div>
+```
 
 ### Icon + Text
 
-<code-well-header>
-  <div class="d-w50p">
-    <dt-skeleton
-      :list-item-option="{
-        shapeSize: '2rem',
-        shape: 'square',
-        paragraphs: {
-          rows: 1,
-        },
-      }"
-    />
-  </div>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-skeleton
-  :list-item-option="{
-    shapeSize: `2rem`,
-    shape: `square`,
-    paragraphs: {
-      rows: 1,
-    },
-  }"
-/>
-'
-/>
+```vue demo
+<!-- @wrapper -->
+<div class="d-w-400">
+  <dt-skeleton
+    :list-item-option="{
+      shapeSize: '2rem',
+      shape: 'square',
+      paragraphs: {
+        rows: 1,
+      },
+    }"
+  />
+</div>
+```
 
 ### Messages / Transcript / Comment
 
-<code-well-header>
-  <div class="d-w50p">
-    <dt-skeleton
-      :list-item-option="{
-        shapeSize: '3.6rem',
-        paragraphs: {
-          rows: 4,
-          width: [
-            '120px', '311px', '371px', '279px',
-          ],
-        },
-      }"
-    />
-  </div>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-skeleton
-  :list-item-option="{
-    shapeSize: `3.6rem`,
-    paragraphs: {
-      rows: 4,
-      width: [
-        `120px`, `311px`, `371px`, `279px`,
-      ],
-    },
-  }"
-/>
-'
-/>
+```vue demo
+<!-- @wrapper -->
+<div class="d-w-400">
+  <dt-skeleton
+    :list-item-option="{
+      shapeSize: '3.6rem',
+      paragraphs: {
+        rows: 4,
+        width: [
+          '120px', '311px', '371px', '279px',
+        ],
+      },
+    }"
+  />
+</div>
+```
 
 ## Accessibility
 
 For sighted users, they are able to see that there is loading content and no other action is needed until loading completes.
 Likewise, there is nothing that needs to be added for keyboard users.
-For users who rely on assistive technology, skeleton’s visual representation of a loading state won’t be accessible
+For users who rely on assistive technology, skeleton's visual representation of a loading state won't be accessible
 without additional labeling.
 
 It's `role="status"` on the skeleton component, keep in mind, that:

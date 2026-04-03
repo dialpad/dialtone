@@ -23,8 +23,17 @@
           v-on="callbarButtonListeners"
         >
           <slot />
+          <!-- @slot Icon displayed above the button label (block-start) -->
           <template #blockStartIcon>
-            <slot name="icon" />
+            <slot
+              v-if="$slots.blockStartIcon"
+              name="blockStartIcon"
+            />
+            <!-- @slot @deprecated Use blockStartIcon -->
+            <slot
+              v-else
+              name="icon"
+            />
           </template>
         </dt-button>
       </span>
@@ -93,7 +102,7 @@ export default {
     },
 
     /**
-     * Whether the button is a circle or not.
+     * Whether the button is a circle or not. Use only with icon-only buttons.
      * @values true, false
      * @see https://dialtone.dialpad.com/components/button/
      */

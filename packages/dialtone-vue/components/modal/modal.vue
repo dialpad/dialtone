@@ -15,6 +15,7 @@
       ]"
       data-qa="dt-modal"
       :aria-hidden="open"
+      v-bind="modeAttrs"
       v-on="modalListeners"
     >
       <div
@@ -56,14 +57,20 @@
             <!-- @slot Slot for dialog header section, taking the place of any "title" text prop -->
             <slot name="header" />
           </div>
-          <h2
+          <dt-text
             v-else
             :id="labelledById"
+            kind="headline"
+            :size="600"
+            strength="medium"
+            density="100"
+            text-box-trim="start"
+            as="h2"
             class="d-modal__header"
             data-qa="dt-modal-title"
           >
             {{ title }}
-          </h2>
+          </dt-text>
           <div
             v-if="hasSlotContent($slots.default)"
             :class="[
@@ -100,7 +107,7 @@
             v-else
             class="d-modal__close"
             data-qa="dt-modal-close-button"
-            size="md"
+            :size="300"
             kind="muted"
             importance="clear"
             :aria-label="closeButtonTitle"
@@ -122,8 +129,10 @@
 <script>
 /* eslint-disable max-lines */
 import { DtButton } from '@/components/button';
-import { DtIconClose } from '@dialpad/dialtone-icons/vue3';
+import { DtText } from '@/components/text';
+import { DtIconClose } from '@dialpad/dialtone-icons/vue';
 import Modal from '@/common/mixins/modal';
+import ModeMixin from '@/common/mixins/mode';
 import {
   MODAL_BANNER_KINDS,
   MODAL_KIND_MODIFIERS,
@@ -148,11 +157,12 @@ export default {
   components: {
     DtLazyShow,
     DtButton,
+    DtText,
     DtIconClose,
     SrOnlyCloseButton,
   },
 
-  mixins: [Modal],
+  mixins: [Modal, ModeMixin],
 
   props: {
     /**
@@ -264,7 +274,7 @@ export default {
     bannerKind: {
       type: String,
       default: 'warning',
-      validate (kind) {
+      validator (kind) {
         return NOTICE_KINDS.includes(kind);
       },
     },

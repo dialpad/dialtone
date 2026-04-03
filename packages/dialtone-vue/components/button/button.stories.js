@@ -17,9 +17,8 @@ export const argsData = {
   onClick: action('click'),
   onFocusIn: action('focusin'),
   onFocusOut: action('focusout'),
-  size: 'md',
+  size: 300,
   link: false,
-  linkInverted: false,
 };
 
 const iconsList = getIconNames();
@@ -115,7 +114,7 @@ export const argTypesData = {
   },
   kind: {
     control: 'select',
-    options: Object.keys(BUTTON_KIND_MODIFIERS),
+    options: Object.keys(BUTTON_KIND_MODIFIERS).filter(k => k !== 'inverted'),
   },
   link: {
     type: {
@@ -133,7 +132,8 @@ export const argTypesData = {
     options: Object.keys(LINK_KIND_MODIFIERS),
   },
   linkInverted: {
-    control: 'boolean',
+    table: { category: 'Deprecated' },
+    description: 'Deprecated.',
   },
   loading: {
     control: 'boolean',
@@ -141,7 +141,8 @@ export const argTypesData = {
   iconPosition: {
     control: 'select',
     options: Object.keys(ICON_POSITION_MODIFIERS),
-    table: { disable: true },
+    table: { category: 'Deprecated' },
+    description: 'Use `startIcon`/`endIcon`/`blockStartIcon`/`blockEndIcon` slots instead.',
   },
   labelClass: {
     description: 'Pass through classes. Used to customize the label container',

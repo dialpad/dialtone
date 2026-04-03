@@ -12,27 +12,32 @@
     >
       <!-- @slot Slot for label, defaults to label prop -->
       <slot name="labelSlot">
-        <div
+        <dt-text
           v-if="labelVisible && label"
           ref="label"
           data-qa="dt-input-label"
-          :class="[
-            'd-input__label-text',
-            'd-label',
-            labelSizeClasses[size],
-          ]"
+          kind="label"
+          :size="resolvedLabelSize"
+          :strength="labelStrength"
+          tone="secondary"
+          :class="['d-input__label-text', labelClass]"
         >
           {{ label }}
-        </div>
+        </dt-text>
       </slot>
-      <div
+      <dt-text
         v-if="hasSlotContent($slots.description) || description || shouldValidateLength"
         :id="descriptionKey"
         ref="description"
+        kind="body"
+        :size="resolvedDescriptionSize"
+        tone="tertiary"
+        :density="resolvedDescriptionDensity"
+        as="div"
         :class="[
           'd-input__description',
           'd-description',
-          descriptionSizeClasses[size],
+          descriptionClass,
         ]"
         data-qa="dt-input-description"
       >
@@ -49,7 +54,7 @@
         >
           {{ validationProps.length.description }}
         </div>
-      </div>
+      </dt-text>
       <div
         :class="inputWrapperClasses()"
         :read-only="disabled === true ? true : undefined"
@@ -80,6 +85,7 @@
           :autocomplete="$attrs.autocomplete ?? 'off'"
           :class="inputClasses()"
           :maxlength="shouldLimitMaxLength ? validationProps.length.max : null"
+          :aria-label="!labelVisible && label ? label : undefined"
           data-qa="dt-input-input"
           v-bind="removeClassStyleAttrs($attrs)"
           v-on="inputListeners"
@@ -94,6 +100,7 @@
           :autocomplete="$attrs.autocomplete ?? 'off'"
           :class="inputClasses()"
           :maxlength="shouldLimitMaxLength ? validationProps.length.max : null"
+          :aria-label="!labelVisible && label ? label : undefined"
           data-qa="dt-input-input"
           v-bind="removeClassStyleAttrs($attrs)"
           v-on="inputListeners"
@@ -139,8 +146,6 @@ import {
   INPUT_SIZE_CLASSES,
   INPUT_ICON_SIZES,
   INPUT_STATE_CLASSES,
-  DESCRIPTION_SIZE_CLASSES,
-  LABEL_SIZE_CLASSES,
 } from './input_constants';
 import {
   getUniqueString,
@@ -150,6 +155,7 @@ import {
   addClassStyleAttrs,
 } from '@/common/utils';
 import { DtValidationMessages } from '@/components/validation_messages';
+import { DtText, TEXT_SIZE_MODIFIERS, TEXT_STRENGTH_MODIFIERS } from '@/components/text';
 import { MessagesMixin } from '@/common/mixins/input';
 
 /**
@@ -163,7 +169,7 @@ export default {
   compatConfig: { MODE: 3 },
   name: 'DtInput',
 
-  components: { DtValidationMessages },
+  components: { DtValidationMessages, DtText },
 
   mixins: [MessagesMixin],
 
@@ -181,7 +187,7 @@ export default {
     /**
      * Type of the input.
      * When `textarea` a `<textarea>` element will be rendered instead of an `<input>` element.
-     * @values text, password, email, number, textarea, date, time, file, tel, search
+     * @values text, password, email, number, textarea, date, time, file, tel, search, color
      * @default 'text'
      */
     type: {
@@ -233,13 +239,21 @@ export default {
     },
 
     /**
-     * Size of the input, one of `xs`, `sm`, `md`, `lg`, `xl`
-     * @values xs, sm, md, lg, xl
+     * Used to customize the description container
+     */
+    descriptionClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Size of the input.
+     * @values 100, 200, 300, 400, 500
      */
     size: {
-      type: String,
-      default: 'md',
-      validator: (t) => Object.values(INPUT_SIZES).includes(t),
+      type: [String, Number],
+      default: 300,
+      validator: (t) => Object.keys(INPUT_ICON_SIZES).includes(String(t)),
     },
 
     /**
@@ -308,6 +322,35 @@ export default {
     hidden: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * Overrides the label text size. When not provided, the label size
+     * is derived from the component size prop.
+     * @values 100, 200, 300, 400
+     */
+    labelSize: {
+      type: [String, Number],
+      default: null,
+      validator: (s) => TEXT_SIZE_MODIFIERS.label.includes(String(s)),
+    },
+
+    /**
+     * Overrides the label font weight.
+     * @values bold, semibold, medium, normal
+     */
+    labelStrength: {
+      type: String,
+      default: null,
+      validator: (s) => Object.keys(TEXT_STRENGTH_MODIFIERS).includes(s),
+    },
+
+    /**
+     * Used to customize the label container
+     */
+    labelClass: {
+      type: [String, Array, Object],
+      default: '',
     },
   },
 
@@ -389,6 +432,7 @@ export default {
       defaultLength: 0,
       hasSlotContent,
       isComposing: false,
+      justEndedComposition: false,
     };
   },
 
@@ -399,15 +443,15 @@ export default {
     },
 
     isDefaultSize () {
-      return this.size === INPUT_SIZES.DEFAULT;
+      return String(this.size) === INPUT_SIZES.DEFAULT || String(this.size) === '300';
     },
 
     iconSize () {
-      return INPUT_ICON_SIZES[this.size];
+      return INPUT_ICON_SIZES[String(this.size)];
     },
 
     isValidSize () {
-      return Object.values(INPUT_SIZES).includes(this.size);
+      return Object.keys(INPUT_ICON_SIZES).includes(String(this.size));
     },
 
     isValidDescriptionSize () {
@@ -430,10 +474,19 @@ export default {
 
         compositionend: () => {
           this.isComposing = false;
+          this.justEndedComposition = true;
+          const val = this.$refs.input.value;
+          this.$emit('input', val);
+          this.$emit('update:modelValue', val);
+          // Clear the flag after the current synchronous event processing so
+          // Firefox's post-compositionend input event is skipped, but the
+          // next real user input (a separate browser task) is not.
+          Promise.resolve().then(() => { this.justEndedComposition = false; });
         },
 
         input: async event => {
           if (this.isComposing) return;
+          if (this.justEndedComposition) return;
           let val = event.target.value;
           if (this.type === INPUT_TYPES.FILE) {
             const files = Array.from(event.target.files);
@@ -529,12 +582,33 @@ export default {
       );
     },
 
+    resolvedLabelSize () {
+      if (this.labelSize != null) return this.labelSize;
+      const sizeStr = String(this.size);
+      // xl/500 exceeds label's max size — cap at lg/400
+      if (sizeStr === 'xl' || sizeStr === '500') return sizeStr === '500' ? '400' : 'lg';
+      return this.size;
+    },
+
+    resolvedDescriptionSize () {
+      const map = {
+        100: 'xs', 200: 'xs', 300: 'sm', 400: 'sm', 500: 'md',
+        xs: 'xs', sm: 'xs', md: 'sm', lg: 'sm', xl: 'md',
+      };
+      return map[String(this.size)] || 'sm';
+    },
+
+    resolvedDescriptionDensity () {
+      const sizeStr = String(this.size);
+      return (sizeStr === 'xl' || sizeStr === '500') ? '300' : undefined;
+    },
+
     sizeModifierClass () {
       if (this.isDefaultSize || !this.isValidSize) {
         return '';
       }
 
-      return INPUT_SIZE_CLASSES[this.inputComponent][this.size];
+      return INPUT_SIZE_CLASSES[this.inputComponent][String(this.size)];
     },
 
     stateClass () {
@@ -560,16 +634,11 @@ export default {
 
         // Set textarea value programmatically to avoid attribute binding
         // Skip during IME composition to avoid interrupting in-progress input
-        if (this.isTextarea && this.$refs.input && this.$refs.input.value !== newValue && !this.isComposing) {
+        if (this.isTextarea && !this.isComposing && this.$refs.input && this.$refs.input.value !== newValue) {
           this.$refs.input.value = newValue;
         }
       },
     },
-  },
-
-  beforeMount () {
-    this.descriptionSizeClasses = DESCRIPTION_SIZE_CLASSES;
-    this.labelSizeClasses = LABEL_SIZE_CLASSES;
   },
 
   mounted () {
@@ -577,6 +646,7 @@ export default {
     if (this.isTextarea && this.$refs.input) {
       this.$refs.input.value = this.modelValue;
     }
+    this.runValidations();
   },
 
   methods: {
@@ -659,6 +729,14 @@ export default {
       this.$refs.input.value = '';
       this.$refs.input.focus();
       this.emitClearEvents();
+    },
+
+    runValidations () {
+      if (!this.label && !this.$attrs['aria-label']) {
+        console.info(
+          '[Dialtone] A label is required for accessibility. Provide a label prop and use label-visible="false" to hide it visually.',
+        );
+      }
     },
   },
 };

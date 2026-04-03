@@ -26,7 +26,7 @@ export const argTypesData = {
 };
 
 const decorator = () => ({
-  template: `<div style="background-color: var(--dt-shell-color-surface-default)" class="d-wmx332 d-p16"><story />
+  template: `<div style="background-color: var(--dt-shell-color-surface-default)" class="d-wmx-500 d-p-200"><story />
   </div>`,
 });
 

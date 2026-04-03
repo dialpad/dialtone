@@ -1,5 +1,8 @@
 <template>
-  <div id="components-radio--variants-container">
+  <dt-stack
+    id="components-radio--variants-container"
+    gap="100"
+  >
     <!-- Default -->
     <dt-radio
       name="Value"
@@ -76,6 +79,7 @@
       label="Success"
       description="With Description"
       validation-state="success"
+      :messages="[{ message: 'Success message', type: VALIDATION_MESSAGE_TYPES.SUCCESS }]"
     />
     <!-- Success With Description -->
 
@@ -86,6 +90,7 @@
       label="Warning"
       description="With Description"
       validation-state="warning"
+      :messages="[{ message: 'Warning message', type: VALIDATION_MESSAGE_TYPES.WARNING }]"
     />
     <!-- Warning With Description -->
 
@@ -96,6 +101,7 @@
       label="Error"
       description="With Description"
       validation-state="error"
+      :messages="[{ message: 'Critical message', type: VALIDATION_MESSAGE_TYPES.ERROR }]"
     />
     <!-- Error With Description -->
 
@@ -106,6 +112,7 @@
       label="Warning"
       description="With Description"
       validation-state="warning"
+      :messages="[{ message: 'Warning message', type: VALIDATION_MESSAGE_TYPES.WARNING }]"
       checked
     />
     <!-- Checked Warning With Description -->
@@ -117,6 +124,7 @@
       label="Error"
       description="With Description"
       validation-state="error"
+      :messages="[{ message: 'Critical message', type: VALIDATION_MESSAGE_TYPES.ERROR }]"
       checked
     />
     <!-- Checked Error With Description -->
@@ -128,6 +136,7 @@
       label="Success"
       description="With Description"
       validation-state="success"
+      :messages="[{ message: 'Success message', type: VALIDATION_MESSAGE_TYPES.SUCCESS }]"
       checked
     />
     <!-- Checked Success With Description -->
@@ -182,16 +191,17 @@
       checked
     />
     <!-- Checked With Messages -->
-  </div>
+  </dt-stack>
 </template>
 
 <script>
 import DtRadio from './radio.vue';
+import DtStack from '../stack/stack.vue';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 
 export default {
   name: 'RadioVariants',
-  components: { DtRadio },
+  components: { DtRadio, DtStack },
   setup () {
     return {
       VALIDATION_MESSAGE_TYPES,

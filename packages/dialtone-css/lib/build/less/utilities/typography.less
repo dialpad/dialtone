@@ -52,7 +52,7 @@ ul {
 }
 }
 
-@layer dialtone.components {
+@layer dialtone.base {
 //  ============================================================================
 //  $   HEADLINE STYLES
 //  ----------------------------------------------------------------------------
@@ -256,6 +256,7 @@ ul {
 .d-fs-350 { font-size: var(--dt-font-size-350) !important; }
 .d-fs-400 { font-size: var(--dt-font-size-400) !important; }
 .d-fs-500 { font-size: var(--dt-font-size-500) !important; }
+.d-fs-inherit { font-size: inherit !important; }
 
 .d-fs-100-mobile { font-size: var(--dt-font-size-100-mobile) !important; }
 .d-fs-200-mobile { font-size: var(--dt-font-size-200-mobile) !important; }
@@ -367,13 +368,13 @@ ul {
 
 .d-td-underline {
     text-decoration: underline !important;
-    text-underline-offset: var(--dt-size-200) !important;
+    text-underline-offset: var(--dt-spacing-25) !important;
     text-decoration-thickness: var(--dt-size-border-100) !important;
 }
 
 .d-td-dotted {
     text-decoration: underline dotted !important;
-    text-underline-offset: var(--dt-size-200) !important;
+    text-underline-offset: var(--dt-spacing-25) !important;
     text-decoration-thickness: var(--dt-size-border-100) !important;
 }
 

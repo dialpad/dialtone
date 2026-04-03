@@ -1,4 +1,35 @@
+# [1.12.0-next.2](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.12.0-next.1...eslint-plugin-dialtone/v1.12.0-next.2) (2026-04-03)
+
+
+### Features
+
+* **Eslint Plugin Dialtone:** DLT-3047 physical-to-logical naming migration tooling ([#1163](https://github.com/dialpad/dialtone/issues/1163)) ([d94dc4b](https://github.com/dialpad/dialtone/commit/d94dc4b74575dbb6e78f53ff3977ef348e33440a))
+* **Eslint Plugin Dialtone:** DLT-3227 DLT-3228 add deprecated-tshirt-sizes ESLint rule and migration codemod ([#1159](https://github.com/dialpad/dialtone/issues/1159)) ([21a011f](https://github.com/dialpad/dialtone/commit/21a011f77b177c34fe3d6aefe9307cd4edb0744c))
+
+# [1.12.0-next.1](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.11.3-next.1...eslint-plugin-dialtone/v1.12.0-next.1) (2026-03-31)
+
+
+### Features
+
+* **Dialtone Css, Dialtone Tokens, Dialtone Vue:** DLT-3197 DLT-3198 DLT-3199 DLT-3200 DLT-3201 DLT-3202 DLT-3203 DLT-3204 DLT-3205 DLT-3206 DLT-3207 DLT-3208 DLT-3209 DLT-3210 DLT-3211 token-stop utility classes, migration tooling, and documentation ([#1150](https://github.com/dialpad/dialtone/issues/1150)) ([6237b84](https://github.com/dialpad/dialtone/commit/6237b84b901aed6e3e2bcb7d0216feac218eebad))
+
+## [1.11.3-next.1](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.11.2...eslint-plugin-dialtone/v1.11.3-next.1) (2026-03-25)
+
+
+### Code Refactoring
+
+* **Text:** DLT-2883 rename headline sizes from xxl => 2xl, etc ([#1029](https://github.com/dialpad/dialtone/issues/1029)) ([0ac86f3](https://github.com/dialpad/dialtone/commit/0ac86f30fb59298942a633d0fc42e68ee3ff348f))
+
+## [1.11.2](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.11.1...eslint-plugin-dialtone/v1.11.2) (2026-03-19)
+
+
+### Bug Fixes
+
+* **Deprecated Component:** NO-JIRA fix deprecated component regex ([#1140](https://github.com/dialpad/dialtone/issues/1140)) ([6d1a76f](https://github.com/dialpad/dialtone/commit/6d1a76fc672335eac2172e9a1323f9752c22db07))
+
 ## [1.11.2-next.1](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.11.1...eslint-plugin-dialtone/v1.11.2-next.1) (2026-03-02)
+
+## [1.11.1](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.11.0...eslint-plugin-dialtone/v1.11.1) (2026-02-24)
 
 
 ### Code Refactoring

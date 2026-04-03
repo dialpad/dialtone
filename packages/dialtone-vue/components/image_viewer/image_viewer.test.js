@@ -4,7 +4,7 @@ import DtImageViewer from './image_viewer.vue';
 const baseProps = {
   imageSrc: 'test.png',
   imageAlt: 'imageAltText',
-  imageButtonClass: 'd-wmn64 d-hmn64 w-wmx332 d-hmx332',
+  imageButtonClass: 'd-wmn-100 d-hmn-100 w-wmx332 d-hmx332',
   ariaLabel: 'Click to open image',
 };
 

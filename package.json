@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "9.164.0-next.2",
+  "version": "9.177.0-next.1",
   "packageManager": "pnpm@9.9.0",
   "description": "Dialpad's Dialtone design system monorepo",
   "scripts": {
@@ -17,7 +17,7 @@
         "postcss": "^7.0.39 || ^8.3.3",
         "react": "^18.3.1",
         "typescript": "^5.2",
-        "vite": "^5.0.0 || ^7.0.7",
+        "vite": "^8.0.0",
         "vue": "^3.2",
         "vuepress": "^2.0.0-rc.24"
       }
@@ -35,6 +35,9 @@
       "test-exclude": "^7.0.1",
       "trim": ">=0.0.3",
       "trim-newlines": ">=3.0.1"
+    },
+    "patchedDependencies": {
+      "@tiptap/vue-3@3.19.0": "patches/@tiptap__vue-3@3.19.0.patch"
     }
   },
   "files": [
@@ -52,6 +55,16 @@
       "types": "./dist/tokens/types/postcss/*.d.ts",
       "import": "./dist/tokens/postcss/*.js",
       "require": "./dist/tokens/postcss/*.cjs"
+    },
+    "./vue": {
+      "types": "./dist/vue3/types/index.d.ts",
+      "import": "./dist/vue3/dialtone-vue.js",
+      "require": "./dist/vue3/dialtone-vue.cjs"
+    },
+    "./vue/lib/*": {
+      "types": "./dist/vue3/types/index.d.ts",
+      "import": "./dist/vue3/lib/*/index.js",
+      "require": "./dist/vue3/lib/*/index.cjs"
     },
     "./vue3": {
       "types": "./dist/vue3/types/index.d.ts",
@@ -73,8 +86,10 @@
   "dependencies": {
     "@dialpad/dialtone-emojis": "workspace:*",
     "@dialpad/dialtone-icons": "workspace:*",
+    "@dialpad/dialtone-cli": "workspace:*",
     "@dialpad/dialtone-mcp-server": "workspace:*",
     "@dialpad/dialtone-tokens": "workspace:*",
+    "@dialpad/i18n": "1.25.0",
     "@floating-ui/dom": "^1.6.0",
     "@tiptap/core": "3.19.0",
     "@tiptap/extension-blockquote": "3.19.0",
@@ -110,14 +125,15 @@
     "linkifyjs": "4.3.2",
     "overlayscrollbars": "2.10.0",
     "regex-combined-emojis": "1.6.0",
-    "tippy.js": "6.3.7"
+    "tippy.js": "6.3.7",
+    "vue-tsc": "3.2.6"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.4.3",
     "@commitlint/config-conventional": "^17.6.6",
     "@dialpad/conventional-changelog-angular": "^1.1.1",
-    "@dialpad/i18n-services": "1.11.0",
     "@dialpad/semantic-release-changelog-json": "^1.0.0",
+    "@dialpad/stylelint-plugin-dialtone": "workspace:*",
     "@faker-js/faker": "8.4.1",
     "@percy/cli": "1.30.9",
     "@percy/storybook": "6.0.3",
@@ -125,8 +141,8 @@
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@types/node": "^20.4.5",
-    "@vitejs/plugin-vue": "^5.2.3",
-    "@vitest/coverage-v8": "^1.0.0",
+    "@vitejs/plugin-vue": "^6.0.5",
+    "@vitest/coverage-v8": "^4.1.0",
     "@vue/tsconfig": "^0.4.0",
     "axe-core": "^4.7.2",
     "axe-playwright": "^2.0.3",
@@ -138,7 +154,7 @@
     "eslint-plugin-eslint-plugin": "6.3.1",
     "eslint-plugin-jest": "^29.0.1",
     "eslint-plugin-json": "4.0.1",
-    "eslint-plugin-storybook": "10.2.6",
+    "eslint-plugin-storybook": "10.3.0",
     "eslint-plugin-vitest": "^0.5.4",
     "eslint-plugin-vue": "^10.4.0",
     "eslint-plugin-vuejs-accessibility": "^2.4.1",
@@ -156,6 +172,7 @@
     "markdownlint-cli": "^0.45.0",
     "npm-run-all": "^4.1.5",
     "nx": "19.8.0",
+    "ora": "9.3.0",
     "playwright": "^1.49.0",
     "semantic-release": "^21.0.6",
     "semantic-release-plus": "^20.0.0",
@@ -165,15 +182,14 @@
     "stylelint-config-standard": "^39.0.1",
     "stylelint-less": "^3.0.1",
     "stylelint-no-px": "^1.0.1",
-    "@dialpad/stylelint-plugin-dialtone": "workspace:*",
     "tinycolor2": "^1.6.0",
     "typedoc": "^0.28.2",
     "typedoc-plugin-markdown": "^4.6.1",
     "typescript": "^5.2",
-    "vite": "^5.4.2",
+    "vite": "^8.0.0",
     "vite-bundle-visualizer": "^1.2.1",
-    "vite-plugin-dts": "^4.0.3",
-    "vitest": "^1.6.1",
+    "vite-plugin-dts": "^4.5.4",
+    "vitest": "^4.1.0",
     "vue-docgen-api": "^4.75.0",
     "vue-template-compiler": "^2.7.16",
     "wait-on": "^7.2.0",

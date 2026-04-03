@@ -5,7 +5,7 @@
     class="d-fc-tertiary d-h24 d-w24"
     importance="clear"
     kind="muted"
-    size="sm"
+    :size="200"
     circle
   >
     <template #icon="{ iconSize }">
@@ -18,5 +18,5 @@
 
 <script setup>
 import { DtButton } from '@/components/button';
-import { DtIconDoubleCheck } from '@dialpad/dialtone-icons/vue3';
+import { DtIconDoubleCheck } from '@dialpad/dialtone-icons/vue';
 </script>

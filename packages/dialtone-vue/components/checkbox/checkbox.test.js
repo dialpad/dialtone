@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils';
 import DtCheckbox from './checkbox.vue';
+import { DtText } from '@/components/text';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import { CHECKBOX_INPUT_VALIDATION_CLASSES } from '@/components/checkbox/checkbox_constants.js';
 
@@ -95,6 +96,75 @@ describe('DtCheckbox Tests', () => {
 
       it('should match provided label prop', () => {
         expect(label.text()).toBe(baseProps.label);
+      });
+
+      it('should render label as DtText with tone="primary"', () => {
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.exists()).toBe(true);
+        expect(dtText.props('tone')).toBe('primary');
+      });
+
+      it('should render label DtText with default size 300', () => {
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.props('size')).toBe(300);
+      });
+    });
+
+    describe('When labelStrength is provided', () => {
+      it('should override the default label strength', () => {
+        mockProps = { labelStrength: 'bold' };
+
+        updateWrapper();
+
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.props('strength')).toBe('bold');
+      });
+
+      it('should default to normal strength when not provided', () => {
+        updateWrapper();
+
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.props('strength')).toBe('normal');
+      });
+    });
+
+    describe('When labelSize is provided', () => {
+      it('should override the default label size', () => {
+        mockProps = { labelSize: 'lg' };
+
+        updateWrapper();
+
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.props('size')).toBe('lg');
+      });
+    });
+
+    describe('When labelVisible is false', () => {
+      beforeEach(() => {
+        mockProps = { labelVisible: false };
+
+        updateWrapper();
+      });
+
+      it('should not render a label', () => {
+        label = wrapper.find('[data-qa="checkbox-label"]');
+
+        expect(label.exists()).toBe(false);
+      });
+
+      it('should set aria-label on the input', () => {
+        expect(input.attributes('aria-label')).toBe(baseProps.label);
+      });
+    });
+
+    describe('When labelVisible is true', () => {
+      it('should not set aria-label on the input', () => {
+        expect(input.attributes('aria-label')).toBeUndefined();
       });
     });
 
@@ -194,6 +264,13 @@ describe('DtCheckbox Tests', () => {
 
       it('should have disabled class', () => {
         expect(wrapper.find('.d-checkbox-group--disabled').exists()).toBe(true);
+      });
+
+      it('should render label DtText with tone="disabled"', () => {
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.exists()).toBe(true);
+        expect(dtText.props('tone')).toBe('disabled');
       });
     });
 

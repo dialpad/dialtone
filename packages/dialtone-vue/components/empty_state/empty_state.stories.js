@@ -1,6 +1,7 @@
 import { createTemplateFromVueFile, getIconNames, getIllustrationNames } from '@/common/storybook_utils';
 import DtEmptyState from './empty_state.vue';
 import DtEmptyStateDefaultTemplate from './empty_state_default.story.vue';
+import DtEmptyStateVariantsTemplate from './empty_state_variants.story.vue';
 import { EMPTY_STATE_SIZE_MODIFIERS } from './empty_state_constants.js';
 
 const illustrationsList = getIllustrationNames();
@@ -79,14 +80,26 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   DtEmptyStateDefaultTemplate,
 );
 
+const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+  args,
+  argTypes,
+  DtEmptyStateVariantsTemplate,
+);
+
+export const Variants = {
+  render: VariantsTemplate,
+  parameters: { options: { showPanel: false }, controls: { disable: true } },
+  args: {},
+};
+
 export const Default = {
   render: DefaultTemplate,
 
   args: {
     illustration: 'mind',
-    size: 'lg',
+    size: 400,
     headerText: 'Nothing to see here',
     bodyText: 'Lorem ipsum dolor sit amet consectetur. Diam in aliquam arcu elit pulvinar morbi lorem ac neque.',
-    body: '<div class="d-mt8 d-stack d-stack--row d-stack--gap-300"><button class="d-btn">Click me</button><button class="d-btn d-btn--primary">Click me</button></div>',
+    body: '<div class="d-mbs-100 d-stack d-stack--row d-stack--gap-50"><button class="d-btn">Click me</button><button class="d-btn d-btn--primary">Click me</button></div>',
   },
 };

@@ -79,29 +79,29 @@ export const NestedIslands = {
     components: { DtModeIsland, DtStack },
     template: `
       <div>
-        <h3 class="d-headline--md d-mb16">Nested Mode Islands</h3>
-        <dt-stack gap="500" direction="row">
-          <dt-mode-island class="d-fl1 d-p16 d-ba d-bc-subtle d-bar8">
-            <p class="d-body--lg d-fw-semibold d-mb16">Inverted Mode Island (Parent)</p>
-            <dt-mode-island class="d-p16 d-ba d-bc-subtle d-bar8">
-              <p class="d-body--md d-fw-semibold d-mb8">Inverted Island (Child)</p>
-              <dt-mode-island class="d-p16 d-ba d-bc-subtle d-bar8">
+        <h3 class="d-headline--md d-mbe-200">Nested Mode Islands</h3>
+        <dt-stack gap="200" direction="row">
+          <dt-mode-island class="d-fl1 d-p-200 d-ba d-bc-subtle d-bar8">
+            <p class="d-body--lg d-fw-semibold d-mbe-200">Inverted Mode Island (Parent)</p>
+            <dt-mode-island class="d-p-200 d-ba d-bc-subtle d-bar8">
+              <p class="d-body--md d-fw-semibold d-mbe-100">Inverted Island (Child)</p>
+              <dt-mode-island class="d-p-200 d-ba d-bc-subtle d-bar8">
                 <p class="d-body--sm">Inverted Island (Grandchild)</p>
               </dt-mode-island>
             </dt-mode-island>
-            <dt-mode-island mode="light" class="d-mt16 d-p16 d-ba d-bc-subtle d-bar8">
+            <dt-mode-island mode="light" class="d-mbs-200 d-p-200 d-ba d-bc-subtle d-bar8">
               <p class="d-body--md">Explicit Light Island</p>
             </dt-mode-island>
           </dt-mode-island>
-          <dt-mode-island mode="dark" class="d-fl1 d-p16 d-ba d-bc-subtle d-bar8">
-            <p class="d-body--lg d-fw-semibold d-mb16">Dark Mode Island (Parent)</p>
-            <dt-mode-island class="d-p16 d-ba d-bc-subtle d-bar8">
-              <p class="d-body--md d-fw-semibold d-mb8">Inverted Island (Child - Light)</p>
-              <dt-mode-island class="d-p16 d-ba d-bc-subtle d-bar8">
+          <dt-mode-island mode="dark" class="d-fl1 d-p-200 d-ba d-bc-subtle d-bar8">
+            <p class="d-body--lg d-fw-semibold d-mbe-200">Dark Mode Island (Parent)</p>
+            <dt-mode-island class="d-p-200 d-ba d-bc-subtle d-bar8">
+              <p class="d-body--md d-fw-semibold d-mbe-100">Inverted Island (Child - Light)</p>
+              <dt-mode-island class="d-p-200 d-ba d-bc-subtle d-bar8">
                 <p class="d-body--sm">Inverted Island (Grandchild - Dark)</p>
               </dt-mode-island>
             </dt-mode-island>
-            <dt-mode-island mode="light" class="d-mt16 d-p16 d-ba d-bc-subtle d-bar8">
+            <dt-mode-island mode="light" class="d-mbs-200 d-p-200 d-ba d-bc-subtle d-bar8">
               <p class="d-body--md">Explicit Light Island (Always Light)</p>
             </dt-mode-island>
           </dt-mode-island>
@@ -116,17 +116,17 @@ export const WithCustomElement = {
     components: { DtModeIsland, DtStack },
     template: `
       <div>
-        <h3 class="d-headline--md d-mb16">
+        <h3 class="d-headline--md d-mbe-200">
           Custom HTML Elements <span class="d-body--md">via <code class="d-fw-bold">as</code> prop</span>
         </h3>
-        <dt-stack gap="400" direction="row">
-          <dt-mode-island as="section" class="d-p16 d-ba d-bc-subtle d-bar8">
+        <dt-stack gap="100" direction="row">
+          <dt-mode-island as="section" class="d-p-200 d-ba d-bc-subtle d-bar8">
             <p class="d-body--md">This is a <code>&lt;section&gt;</code> element</p>
           </dt-mode-island>
-          <dt-mode-island as="article" class="d-p16 d-ba d-bc-subtle d-bar8">
+          <dt-mode-island as="article" class="d-p-200 d-ba d-bc-subtle d-bar8">
             <p class="d-body--md">This is an <code>&lt;article&gt;</code> element</p>
           </dt-mode-island>
-          <dt-mode-island as="nav" class="d-p16 d-ba d-bc-subtle d-bar8">
+          <dt-mode-island as="nav" class="d-p-200 d-ba d-bc-subtle d-bar8">
             <p class="d-body--md">This is a <code>&lt;nav&gt;</code> element</p>
           </dt-mode-island>
         </dt-stack>

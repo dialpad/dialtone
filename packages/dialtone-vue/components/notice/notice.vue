@@ -6,6 +6,7 @@
     <dt-notice-icon
       v-if="!hideIcon"
       :kind="kind"
+      :class="{ 'd-notice__icon--has-title': title || $slots.titleOverride }"
     >
       <!-- @slot Slot for custom icon -->
       <slot name="icon" />

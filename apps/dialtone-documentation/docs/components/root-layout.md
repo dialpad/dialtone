@@ -8,29 +8,32 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-root-layout-
 keywords: ["app layout","page layout","d-root-layout","DtRootLayout","dt-root-layout"]
 ---
 
-<code-well-header>
+```vue demo-only
+<!-- @class d-d-block -->
 <dt-root-layout
-  :fixed="false"
-  class="d-w100p d-h332"
+:fixed="false"
+class="d-w100p d-h-500"
 >
-  <template
-    #header
-  >
-    <div class="d-h64 d-bgc-purple-100">Header</div>
-  </template>
-  <template
-    #sidebar
-  >
-    <div class="d-w128 d-h100p d-bgc-black-100"><div>Sidebar item 1</div><div>Sidebar item 2</div><div>Sidebar item 3</div></div>
-  </template>
-  <div class="d-bgc-green-100 d-w100p d-h100p">Content</div>
-  <template
-    #footer
-  >
-    <div class="d-h64 d-bgc-gold-100">Footer</div>
-  </template>
+<template
+  #header
+>
+  <div class="d-h-100 d-bgc-purple-100">Header</div>
+</template>
+<template
+  #sidebar
+>
+  <div class="d-w-200 d-h100p d-bgc-black-100"><div>Sidebar item 1</div><div>Sidebar item 2</div><div>Sidebar item 3</div></div>
+</template>
+<div class="d-bgc-green-100 d-w100p d-h100p">Content</div>
+<template
+  #footer
+>
+  <div class="d-h-100 d-bgc-gold-100">Footer</div>
+</template>
 </dt-root-layout>
-</code-well-header>
+```
+
+<!-- <component-combinator component-name="DtRootLayout" /> -->
 
 ## Base Style
 
@@ -38,145 +41,63 @@ A root layout consists of a header, body, sidebar and footer. Content can option
 will be displayed in the respective area. The sidebar is designed to be responsive and will reposition above the
 body according to the `responsiveBreakpoint` prop.
 
-<code-well-header>
+```vue demo
+<!-- @class d-d-block -->
 <dt-root-layout
-  :fixed="false"
-  class="d-w100p d-h332"
+:fixed="false"
+class="d-w100p d-h-500"
 >
-  <template
-    #header
-  >
-    <div class="d-h64 d-bgc-purple-100">Header</div>
-  </template>
-  <template
-    #sidebar
-  >
-    <div class="d-w128 d-h100p d-bgc-black-100"><div>Sidebar item 1</div><div>Sidebar item 2</div><div>Sidebar item 3</div></div>
-  </template>
-  <div class="d-bgc-green-100 d-w100p d-h100p">Content</div>
-  <template
-    #footer
-  >
-    <div class="d-h64 d-bgc-gold-100">Footer</div>
-  </template>
-</dt-root-layout>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div class="root-layout d-root-layout d-w100p d-h332">
-  <header class="d-root-layout__header"><div class="d-h64 d-bgc-purple-100">Header</div></header>
-  <aside tabindex="0" class="d-root-layout__sidebar">
-    <div class="d-w128 d-h100p d-bgc-black-100">
-      <div>Sidebar item 1</div>
-      <div>Sidebar item 2</div>
-      <div>Sidebar item 3</div>
-    </div>
-  </aside>
-  <main class="d-root-layout__content" tabindex="0"><div class="d-bgc-green-100 d-w100p d-h100p">Content</div></main>
-  <footer class="d-root-layout__footer"><div class="d-h64 d-bgc-gold-100">Footer</div></footer>
-</div>
-'
-vueCode='
-<dt-root-layout
-  :fixed="false"
-  class="d-w100p d-h332"
+<template
+  #header
 >
-  <template
-    #header
-  >
-    <div class="d-h64 d-bgc-purple-100">Header</div>
-  </template>
-  <template
-    #sidebar
-  >
-    <div class="d-w128 d-h100p d-bgc-black-100"><div>Sidebar item 1</div><div>Sidebar item 2</div><div>Sidebar item 3</div></div>
-  </template>
-  <div class="d-bgc-green-100 d-w100p d-h100p">Content</div>
-  <template
-    #footer
-  >
-    <div class="d-h64 d-bgc-gold-100">Footer</div>
-  </template>
+  <div class="d-h-100 d-bgc-purple-100">Header</div>
+</template>
+<template
+  #sidebar
+>
+  <div class="d-w-200 d-h100p d-bgc-black-100"><div>Sidebar item 1</div><div>Sidebar item 2</div><div>Sidebar item 3</div></div>
+</template>
+<div class="d-bgc-green-100 d-w100p d-h100p">Content</div>
+<template
+  #footer
+>
+  <div class="d-h-100 d-bgc-gold-100">Footer</div>
+</template>
 </dt-root-layout>
-'
-showHtmlWarning />
+```
 
 ## Variants and Examples
 
 ### Header Sticky
 
+```vue demo
+<!-- @class d-d-block -->
 <div
-  class="d-h332 d-of-scroll"
+  class="d-h-500 d-of-scroll"
 >
   <dt-root-layout
     header-sticky
-    class="d-w100p d-h332"
+    class="d-w100p d-h-500"
   >
     <template
       #header
     >
-      <div class="d-h64 d-bgc-purple-100">Header</div>
+      <div class="d-h-100 d-bgc-purple-100">Header</div>
     </template>
     <template
       #sidebar
     >
-      <div class="d-w128 d-h100p d-bgc-black-100"><div>Sidebar item 1</div><div>Sidebar item 2</div><div>Sidebar item 3</div></div>
+      <div class="d-w-200 d-h100p d-bgc-black-100"><div>Sidebar item 1</div><div>Sidebar item 2</div><div>Sidebar item 3</div></div>
     </template>
       <div class="d-bgc-green-100 d-w100p d-h100p">Content</div>
     <template
       #footer
     >
-      <div class="d-h64 d-bgc-gold-100">Footer</div>
+      <div class="d-h-100 d-bgc-gold-100">Footer</div>
     </template>
   </dt-root-layout>
 </div>
-
-<code-example-tabs
-htmlCode='
-<div class="d-h332 d-of-scroll">
-  <div class="root-layout d-root-layout d-root-layout--fixed d-w100p d-h332">
-    <header class="d-root-layout__header d-root-layout__header--sticky"><div class="d-h64 d-bgc-purple-100">Header</div></header>
-    <aside tabindex="0" class="d-root-layout__sidebar">
-      <div class="d-w128 d-h100p d-bgc-black-100">
-        <div>Sidebar item 1</div>
-        <div>Sidebar item 2</div>
-        <div>Sidebar item 3</div>
-      </div>
-    </aside>
-    <main class="d-root-layout__content" tabindex="0"><div class="d-bgc-green-100 d-w100p d-h100p">Content</div></main>
-    <footer class="d-root-layout__footer"><div class="d-h64 d-bgc-gold-100">Footer</div></footer>
-  </div>
-</div>
-'
-vueCode='
-<div
-  class="d-h332 d-of-scroll"
->
-  <dt-root-layout
-    header-sticky
-    class="d-w100p d-h332"
-  >
-    <template
-      #header
-    >
-      <div class="d-h64 d-bgc-purple-100">Header</div>
-    </template>
-    <template
-      #sidebar
-    >
-      <div class="d-w128 d-h100p d-bgc-black-100"><div>Sidebar item 1</div><div>Sidebar item 2</div><div>Sidebar item 3</div></div>
-    </template>
-      <div class="d-bgc-green-100 d-w100p d-h100p">Content</div>
-    <template
-      #footer
-    >
-      <div class="d-h64 d-bgc-gold-100">Footer</div>
-    </template>
-  </dt-root-layout>
-</div>
-'
-showHtmlWarning />
+```
 
 ## Usage
 

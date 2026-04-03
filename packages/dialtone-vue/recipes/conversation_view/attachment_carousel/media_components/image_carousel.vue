@@ -13,18 +13,23 @@
     <div
       class="d-recipe-attachment-carousel__image-top-right"
     >
-      <dt-progress-bar
-        v-if="mediaItem.isUploading"
+      <span
         class="d-recipe-attachment-carousel__image-progress-bar"
-        :progress="mediaItem.progress"
-        :aria-label="i18n.$t('DIALTONE_IMAGE_CAROUSEL_PROGRESS_BAR_ARIA_LABEL')"
-      />
+      >
+        <dt-progress-circle
+          v-if="mediaItem.isUploading"
+          kind="brand"
+          size="400"
+          :progress="mediaItem.progress"
+          :aria-label="i18n.$t('DIALTONE_IMAGE_CAROUSEL_PROGRESS_BAR_ARIA_LABEL')"
+        />
+      </span>
       <dt-button
         :id="`closeButton-${index}`"
         tabindex="0"
         class="d-recipe-attachment-carousel__image-close-button"
         circle
-        size="xs"
+        :size="100"
         importance="clear"
         :aria-label="closeButtonTitle"
         :title="closeButtonTitle"
@@ -43,10 +48,10 @@
 <script>
 import { DtImageViewer } from '@/components/image_viewer';
 import { DtButton } from '@/components/button';
-import { DtIconClose } from '@dialpad/dialtone-icons/vue3';
+import { DtIconClose } from '@dialpad/dialtone-icons/vue';
 import { DialtoneLocalization } from '@/localization';
 
-import DtProgressBar from './progress_bar.vue';
+import { DtProgressCircle } from '@/components/progress_circle';
 
 export default {
   compatConfig: { MODE: 3 },
@@ -56,7 +61,7 @@ export default {
     DtImageViewer,
     DtButton,
     DtIconClose,
-    DtProgressBar,
+    DtProgressCircle,
   },
 
   props: {

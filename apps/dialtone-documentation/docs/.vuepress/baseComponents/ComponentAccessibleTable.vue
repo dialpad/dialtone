@@ -6,25 +6,25 @@
           <tr>
             <th
               scope="col"
-              class="d-w40p d-p0 d-bbw0"
+              class="d-w40p d-p-0 d-bbw0"
             >
-              <div class="d-p16 d-bb d-bbw1">
+              <div class="d-p-200 d-bb d-bbw1">
                 Item
               </div>
             </th>
             <th
               scope="col"
-              class="d-w30p d-p0 d-bbw0"
+              class="d-w30p d-p-0 d-bbw0"
             >
-              <div class="d-p16 d-bb d-bbw1">
+              <div class="d-p-200 d-bb d-bbw1">
                 Applies to
               </div>
             </th>
             <th
               scope="col"
-              class="d-p0 d-bbw0"
+              class="d-p-0 d-bbw0"
             >
-              <div class="d-p16 d-bb d-bbw1">
+              <div class="d-p-200 d-bb d-bbw1">
                 Description
               </div>
             </th>
@@ -34,20 +34,32 @@
           <tr
             v-for="({ item, applies, description }) in accessible"
             :key="item"
+            valign="baseline"
           >
-            <th
-              scope="row"
-              class="d-code--sm d-docsite-code"
-              v-text="item"
-            />
-            <td
-              class="d-code--sm"
-              v-text="applies"
-            />
-            <td
-              class="d-fs-100"
-              v-html="description"
-            />
+            <th scope="row">
+              <dt-text
+                as="span"
+                kind="code"
+                :size="100"
+                class="d-docsite-code"
+              >
+                {{ item }}
+              </dt-text>
+            </th>
+            <td>
+              <dt-text
+                as="code"
+                kind="code"
+                :size="100"
+                class="code-example--inline"
+              >
+                {{ applies }}
+              </dt-text>
+            </td>
+            <td>
+              <!-- eslint-disable-next-line vue/no-v-text-v-html-on-component -->
+              <dt-text kind="body" :size="200" v-html="description" />
+            </td>
           </tr>
         </tbody>
       </table>

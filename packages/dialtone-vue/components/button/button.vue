@@ -12,9 +12,22 @@
     v-bind="computedAttrs"
     v-on="computedListeners"
   >
+    <dt-loader
+      v-if="loading && kind !== 'unstyled'"
+      class="d-btn__loader"
+      :size="loaderSize"
+      aria-hidden="true"
+    />
+    <span
+      v-if="hasSlotContent($slots.leading)"
+      :class="['d-btn__leading', leadingClass]"
+    >
+      <!-- @slot Optional leading content at the start of the button, such as badges or indicators -->
+      <slot name="leading" />
+    </span>
     <!-- NEW: Block-start icon slot (above label) -->
     <span
-      v-if="hasBlockStartIcon"
+      v-if="hasSlotContent($slots.blockStartIcon)"
       data-qa="dt-button-block-start-icon"
       :class="[
         'base-button__icon',
@@ -32,7 +45,7 @@
     </span>
     <!-- NEW: Start icon slot -->
     <span
-      v-if="hasStartIcon"
+      v-if="hasSlotContent($slots.startIcon)"
       data-qa="dt-button-start-icon"
       :class="[
         'base-button__icon',
@@ -80,7 +93,7 @@
     </span>
     <!-- NEW: End icon slot -->
     <span
-      v-if="hasEndIcon"
+      v-if="hasSlotContent($slots.endIcon)"
       data-qa="dt-button-end-icon"
       :class="[
         'base-button__icon',
@@ -98,7 +111,7 @@
     </span>
     <!-- NEW: Block-end icon slot (below label) -->
     <span
-      v-if="hasBlockEndIcon"
+      v-if="hasSlotContent($slots.blockEndIcon)"
       data-qa="dt-button-block-end-icon"
       :class="[
         'base-button__icon',
@@ -114,12 +127,20 @@
         :icon-size="iconSize"
       />
     </span>
+    <span
+      v-if="hasSlotContent($slots.trailing)"
+      :class="['d-btn__trailing', trailingClass]"
+    >
+      <!-- @slot Optional trailing content at the end of the button, such as badges or indicators -->
+      <slot name="trailing" />
+    </span>
   </component>
 </template>
 
 <script>
 import { warn, resolveComponent } from 'vue';
 import { hasSlotContent } from '@/common/utils';
+import DtLoader from '@/components/loader/loader.vue';
 
 import {
   BUTTON_SIZE_MODIFIERS,
@@ -144,9 +165,11 @@ export default {
   compatConfig: { MODE: 3 },
   name: 'DtButton',
 
+  components: { DtLoader },
+
   props: {
     /**
-     * Whether the button is a circle or not.
+     * Whether the button is a circle or not. Use only with icon-only buttons.
      * @values true, false
      */
     circle: {
@@ -200,6 +223,7 @@ export default {
      * Determines whether the link should have inverted styling if the button is styled as a link.
      * @values true, false
      * @see DtLink
+     * @deprecated Use v-dt-mode instead.
      */
     linkInverted: {
       type: Boolean,
@@ -211,9 +235,18 @@ export default {
      * Only applies when the link prop is true.
      * @values true, false
      */
-    underline: {
+    linkUnderline: {
       type: Boolean,
       default: true,
+    },
+
+    /**
+     * @deprecated Use linkUnderline instead.
+     * @values true, false
+     */
+    underline: {
+      type: Boolean,
+      default: null,
     },
 
     /**
@@ -248,18 +281,34 @@ export default {
 
     /**
      * The size of the button.
-     * @values xs, sm, md, lg, xl
+     * @values 100, 200, 300, 400, 500
      */
     size: {
-      type: String,
-      default: 'md',
-      validator: (s) => Object.keys(BUTTON_SIZE_MODIFIERS).includes(s),
+      type: [String, Number],
+      default: 300,
+      validator: (s) => Object.keys(BUTTON_SIZE_MODIFIERS).includes(String(s)),
     },
 
     /**
      * Used to customize the label container
      */
     labelClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Used to customize the leading container
+     */
+    leadingClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Used to customize the trailing container
+     */
+    trailingClass: {
       type: [String, Array, Object],
       default: '',
     },
@@ -275,7 +324,8 @@ export default {
 
     /**
      * The color of the button.
-     * @values default, unstyled, muted, danger, positive, inverted
+     * The inverted value is deprecated — use v-dt-mode directive instead.
+     * @values default, unstyled, muted, danger, positive
      */
     kind: {
       type: String,
@@ -379,6 +429,10 @@ export default {
   },
 
   computed: {
+    resolvedUnderline () {
+      return this.underline ?? this.linkUnderline;
+    },
+
     computedTag () {
       if (this.to) return this.resolveRouterLink();
       if (this.href) return 'a';
@@ -454,27 +508,11 @@ export default {
     },
 
     iconSize () {
-      return BUTTON_ICON_SIZES[this.size];
+      return BUTTON_ICON_SIZES[String(this.size)];
     },
 
-    hasStartIcon () {
-      return hasSlotContent(this.$slots.startIcon);
-    },
-
-    hasEndIcon () {
-      return hasSlotContent(this.$slots.endIcon);
-    },
-
-    hasBlockStartIcon () {
-      return hasSlotContent(this.$slots.blockStartIcon);
-    },
-
-    hasBlockEndIcon () {
-      return hasSlotContent(this.$slots.blockEndIcon);
-    },
-
-    hasNewIconSlots () {
-      return this.hasStartIcon || this.hasEndIcon || this.hasBlockStartIcon || this.hasBlockEndIcon;
+    loaderSize () {
+      return BUTTON_ICON_SIZES[String(this.size)];
     },
   },
 
@@ -509,8 +547,8 @@ export default {
         return [
           'd-link',
           getLinkKindModifier(this.linkKind, this.linkInverted),
-          BUTTON_SIZE_MODIFIERS[this.size],
-          { 'd-link--no-underline': !this.underline },
+          BUTTON_SIZE_MODIFIERS[String(this.size)],
+          { 'd-link--no-underline': !this.resolvedUnderline },
         ];
       }
       if (this.kind === 'unstyled') {
@@ -520,7 +558,7 @@ export default {
         'd-btn',
         BUTTON_IMPORTANCE_MODIFIERS[this.importance],
         BUTTON_KIND_MODIFIERS[this.kind],
-        BUTTON_SIZE_MODIFIERS[this.size],
+        BUTTON_SIZE_MODIFIERS[String(this.size)],
         {
           'd-btn--circle': this.circle,
           'd-btn--loading': this.loading,
@@ -546,18 +584,38 @@ export default {
       return true;
     },
 
+    hasStartIcon () {
+      return hasSlotContent(this.$slots.startIcon);
+    },
+
+    hasEndIcon () {
+      return hasSlotContent(this.$slots.endIcon);
+    },
+
+    hasBlockStartIcon () {
+      return hasSlotContent(this.$slots.blockStartIcon);
+    },
+
+    hasBlockEndIcon () {
+      return hasSlotContent(this.$slots.blockEndIcon);
+    },
+
+    hasNewIconSlots () {
+      return this.hasStartIcon() || this.hasEndIcon() || this.hasBlockStartIcon() || this.hasBlockEndIcon();
+    },
+
     shouldRenderLegacyIcon () {
-      return hasSlotContent(this.$slots.icon) && !this.hasNewIconSlots && !this.link;
+      return hasSlotContent(this.$slots.icon) && !this.hasNewIconSlots() && !this.link;
     },
 
     isIconOnly () {
-      return (this.hasNewIconSlots || this.shouldRenderLegacyIcon()) && !hasSlotContent(this.$slots.default);
+      return (this.hasNewIconSlots() || this.shouldRenderLegacyIcon()) && !hasSlotContent(this.$slots.default);
     },
 
     isVerticalIconLayout () {
       if (this.isIconOnly()) return false;
-      if (this.hasBlockStartIcon || this.hasBlockEndIcon) return true;
-      return !this.hasNewIconSlots && ['top', 'bottom'].includes(this.iconPosition);
+      if (this.hasBlockStartIcon() || this.hasBlockEndIcon()) return true;
+      return !this.hasNewIconSlots() && ['top', 'bottom'].includes(this.iconPosition);
     },
   },
 };

@@ -179,11 +179,18 @@ Switch themes by changing the brand CSS import and updating the `data-dt-brand` 
 
 ### Mode Sections
 
-You can create sections with different modes using the [Mode Island component](/components/mode-island.html). This is useful for:
+Use the `v-dt-mode` directive to create sections with different modes within a page.
+Apply it to any existing element — no wrapper needed:
 
-- Dark mode previews within light mode pages
-- Code examples showing both modes
-- Mixed-mode UI sections
+```html
+<section v-dt-mode:dark>
+  Dark mode content
+</section>
+```
+
+When no container element exists, the [Mode Island component](/components/mode-island.html)
+creates one for you. See the [Mode Island page](/components/mode-island.html) for full
+documentation on both approaches.
 
 ### Micro-frontends (Separate Bundles)
 
@@ -336,7 +343,7 @@ Vue 3 app with theme switching:
 
 ```vue
 <template>
-  <dt-stack gap="400">
+  <dt-stack gap="100">
     <dt-button @click="toggleMode">
       Switch to {{ isDark ? 'Light' : 'Dark' }} Mode
     </dt-button>

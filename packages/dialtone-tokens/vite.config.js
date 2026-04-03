@@ -16,6 +16,7 @@ const postcssEntries = glob.sync('./postcss/*.js').reduce((entries, path) => {
 // https://vitejs.dev/config/
 export default defineConfig({
   build: {
+    target: 'es2020',
     emptyOutDir: false,
     lib: {
       entry: {
@@ -24,7 +25,7 @@ export default defineConfig({
       },
       formats: ['es', 'cjs'],
     },
-    rollupOptions: {
+    rolldownOptions: {
       external: (id) => {
         // Externalize all CSS imports (they're inlined as strings via ?inline, not bundled)
         return id.includes('.css');

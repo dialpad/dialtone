@@ -9,14 +9,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["status", "online", "availability", "d-presence", "DtPresence", "dt-presence", "status indicator", "status dot"]
 ---
 
-<code-well-header>
-  <dt-stack direction="row" gap="500">
-    <example-presence presence="active"/>
-    <example-presence presence="away"/>
-    <example-presence presence="busy"/>
-    <example-presence presence="offline"/>
-  </dt-stack>
-</code-well-header>
+<component-combinator component-name="DtPresence" />
 
 ## Usage
 
@@ -27,58 +20,38 @@ Located at the bottom right of an avatar, the `presence` indicator displays a us
 ### Active
 
 When a user is available.
-<code-well-header>
-  <example-presence presence="active" ref="activeExample"/>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.activeExample'
-vueCode='
-<dt-presence presence="active"  />
-'
-showHtmlWarning />
+```vue demo
+<example-presence presence="active" />
+<!-- @code -->
+<dt-presence presence="active" />
+```
 
 ### Busy
 
 When a user is unavailable, either due to being **'On a call'**, **'In a meeting'**, or set to **'DND (Do Not Disturb)'**. Additionally, a text label indicating their specific status will appear under the user's name.
-<code-well-header>
-  <example-presence presence="busy" ref="busyExample"/>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.busyExample'
-vueCode='
+```vue demo
+<example-presence presence="busy" />
+<!-- @code -->
 <dt-presence presence="busy" />
-'
-showHtmlWarning />
+```
 
 ### Away
 
 When a user has a scheduled meeting on their synced calendar (Google G Suite or Microsoft Office 365) and is not actively participating in it through the app. Additionally, **'In a meeting'** will appear under the user's name.
-<code-well-header>
-  <example-presence presence="away" ref="awayExample"/>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.awayExample'
-vueCode='
+```vue demo
+<example-presence presence="away" />
+<!-- @code -->
 <dt-presence presence="away" />
-'
-showHtmlWarning />
+```
 
 ### Offline
 
 When a user has not logged in for their first time.
-<code-well-header>
-  <example-presence presence="offline" ref="offlineExample"/>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.offlineExample'
-vueCode='
+```vue demo
+<example-presence presence="offline" />
+<!-- @code -->
 <dt-presence presence="offline" />
-'
-showHtmlWarning />
+```
 
 ## Vue API
 

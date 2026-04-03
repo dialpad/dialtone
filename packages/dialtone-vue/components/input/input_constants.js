@@ -11,6 +11,7 @@ export const INPUT_TYPES = {
   FILE: 'file',
   TEL: 'tel',
   SEARCH: 'search',
+  COLOR: 'color',
 };
 
 export const INPUT_SIZES = {
@@ -22,6 +23,13 @@ export const INPUT_SIZES = {
 };
 
 export const INPUT_ICON_SIZES = {
+  // Numeric (preferred)
+  100: '100',
+  200: '200',
+  300: '200',
+  400: '400',
+  500: '500',
+  // T-shirt aliases (deprecated)
   xs: '100',
   sm: '200',
   md: '200',
@@ -31,6 +39,12 @@ export const INPUT_ICON_SIZES = {
 
 export const INPUT_SIZE_CLASSES = {
   input: {
+    // Numeric (preferred)
+    100: 'd-input--xs',
+    200: 'd-input--sm',
+    400: 'd-input--lg',
+    500: 'd-input--xl',
+    // T-shirt aliases (deprecated)
     xs: 'd-input--xs',
     sm: 'd-input--sm',
     lg: 'd-input--lg',
@@ -38,6 +52,12 @@ export const INPUT_SIZE_CLASSES = {
   },
 
   textarea: {
+    // Numeric (preferred)
+    100: 'd-textarea--xs',
+    200: 'd-textarea--sm',
+    400: 'd-textarea--lg',
+    500: 'd-textarea--xl',
+    // T-shirt aliases (deprecated)
     xs: 'd-textarea--xs',
     sm: 'd-textarea--sm',
     lg: 'd-textarea--lg',
@@ -52,16 +72,18 @@ export const INPUT_STATE_CLASSES = {
 };
 
 export const DESCRIPTION_SIZE_CLASSES = {
+  // Numeric (preferred)
+  100: 'd-description--xs',
+  200: 'd-description--sm',
+  300: '',
+  400: 'd-description--lg',
+  500: 'd-description--xl',
+  // T-shirt aliases (deprecated)
+  xs: 'd-description--xs',
+  sm: 'd-description--sm',
+  md: '',
   lg: 'd-description--lg',
   xl: 'd-description--xl',
-};
-
-export const LABEL_SIZE_CLASSES = {
-  xs: 'd-label--xs',
-  sm: 'd-label--sm',
-  md: 'd-label--md',
-  lg: 'd-label--lg',
-  xl: 'd-label--xl',
 };
 
 export default {
@@ -71,5 +93,4 @@ export default {
   INPUT_SIZE_CLASSES,
   INPUT_STATE_CLASSES,
   DESCRIPTION_SIZE_CLASSES,
-  LABEL_SIZE_CLASSES,
 };

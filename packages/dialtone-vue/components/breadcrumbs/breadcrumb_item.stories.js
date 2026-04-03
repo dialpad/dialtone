@@ -22,6 +22,10 @@ export const argTypesData = {
     },
     control: 'text',
   },
+  inverted: {
+    table: { category: 'Deprecated' },
+    description: 'Deprecated.',
+  },
 };
 
 // Story Collection

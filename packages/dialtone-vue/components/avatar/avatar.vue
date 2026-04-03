@@ -157,9 +157,10 @@ export default {
     },
 
     /**
-     * **Legacy.** Avatar color code for backward compatibility. Converted internally
+     * Avatar color code for backward compatibility. Converted internally
      * to family/variant. For new code, use `seed` (recommended) or `family`/`variant`.
      * Format: family (1-12) * 100 + variant (0-9) * 10, e.g., '540' = family 5, variant 4.
+     * @deprecated Use seed or family/variant instead.
      */
     color: {
       type: String,
@@ -170,7 +171,7 @@ export default {
      * The size of the avatar.
      * T-shirt sizes (xs, sm, md, lg, xl) are deprecated and will be removed in the next major version.
      * Please use the numeric scale instead.
-     * @values 100, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, xs, sm, md, lg, xl
+     * @values 100, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900
      */
     size: {
       type: [String, Number],

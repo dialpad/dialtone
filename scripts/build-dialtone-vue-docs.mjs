@@ -33,7 +33,7 @@ const deprecatedComponents = {
     docs: 'https://dialtone.dialpad.com/vue/?path=/story/components-checkbox--default',
   },
   'DtIcon': {
-    replacement: 'Individual tree-shakable icon components from @dialpad/dialtone-icons/vue3 (e.g., DtIconBell, DtIconAlertCircle)',
+    replacement: 'Individual tree-shakable icon components from @dialpad/dialtone-icons/vue (e.g., DtIconBell, DtIconAlertCircle)',
     docs: 'https://dialtone.dialpad.com/components/icon.html',
   },
 };
@@ -59,6 +59,17 @@ function writeDocumentationFile (data) {
   });
 }
 
+/**
+ * vue-docgen-api does not support defineOptions(), so <script setup> components
+ * get the filename as their displayName. This reads the source file and extracts
+ * the name from defineOptions({ name: '...' }) when present.
+ */
+function extractDefineOptionsName (filePath) {
+  const source = fs.readFileSync(filePath, 'utf8');
+  const match = source.match(/defineOptions\(\s*\{[^}]*name:\s*['"]([^'"]+)['"]/);
+  return match?.[1] ?? null;
+}
+
 async function parseDocumentation (fileList) {
   const config = {
     alias: { '@': join(__dirname, `../packages/dialtone-vue/`) },
@@ -66,14 +77,22 @@ async function parseDocumentation (fileList) {
   const parsedDocumentationPromises = [];
 
   fileList.forEach(filePath => {
-    parsedDocumentationPromises.push(parse(filePath, config));
+    parsedDocumentationPromises.push(
+      parse(filePath, config).then(doc => ({ doc, filePath })),
+    );
   });
 
   try {
-    const docs = await Promise.all(parsedDocumentationPromises);
+    const results = await Promise.all(parsedDocumentationPromises);
 
-    // Add metadata to deprecated components
-    return docs.map(doc => {
+    return results.map(({ doc, filePath }) => {
+      // Fix displayName for <script setup> components using defineOptions
+      const defineOptionsName = extractDefineOptionsName(filePath);
+      if (defineOptionsName) {
+        doc.displayName = defineOptionsName;
+      }
+
+      // Add metadata to deprecated components
       const componentName = doc.displayName;
       if (deprecatedComponents[componentName]) {
         return {

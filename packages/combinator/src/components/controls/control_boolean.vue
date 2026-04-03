@@ -1,15 +1,22 @@
 <template>
   <div class="dtc-control-boolean">
     <dt-toggle
-      :value="value"
+      :model-value="value"
       :disabled="disabled"
       label-class="d-label--sm d-fc-secondary"
-      size="sm"
+      :size="200"
       wrapper-class="d-jc-space-between"
       data-qa="dtc-control-boolean-input"
       @change="e => emit(VALUE_UPDATE_EVENT, e)"
     >
-      <slot />
+      <dt-text
+        kind="label"
+        :size="100"
+        tone="secondary"
+        class="d-input__label-text d-mbe-0"
+      >
+        <slot />
+      </dt-text>
     </dt-toggle>
   </div>
 </template>

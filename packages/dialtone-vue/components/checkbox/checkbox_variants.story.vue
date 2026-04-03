@@ -1,5 +1,8 @@
 <template>
-  <div id="components-checkbox--variants-container">
+  <dt-stack
+    id="components-checkbox--variants-container"
+    gap="100"
+  >
     <!-- Default -->
     <dt-checkbox
       name="default"
@@ -105,6 +108,7 @@
       label="Success"
       description="With Description"
       validation-state="success"
+      :messages="[{ message: 'Success message', type: VALIDATION_MESSAGE_TYPES.SUCCESS }]"
     />
     <!-- Success With Description -->
 
@@ -115,6 +119,7 @@
       label="Warning"
       description="With Description"
       validation-state="warning"
+      :messages="[{ message: 'Warning message', type: VALIDATION_MESSAGE_TYPES.WARNING }]"
     />
     <!-- Warning With Description -->
 
@@ -125,6 +130,7 @@
       label="Error"
       description="With Description"
       validation-state="error"
+      :messages="[{ message: 'Critical message', type: VALIDATION_MESSAGE_TYPES.ERROR }]"
     />
     <!-- Error With Description -->
 
@@ -135,6 +141,7 @@
       label="Checked Success"
       description="With Description"
       validation-state="success"
+      :messages="[{ message: 'Success message', type: VALIDATION_MESSAGE_TYPES.SUCCESS }]"
       checked
     />
     <!-- Checked Success With Description -->
@@ -157,6 +164,7 @@
       label="Checked Error"
       description="With Description"
       validation-state="error"
+      :messages="[{ message: 'Critical message', type: VALIDATION_MESSAGE_TYPES.ERROR }]"
       checked
     />
     <!-- Checked Error With Description -->
@@ -212,16 +220,17 @@
       checked
     />
     <!-- Checked and With Description and Success validation message -->
-  </div>
+  </dt-stack>
 </template>
 
 <script>
 import DtCheckbox from './checkbox.vue';
+import DtStack from '../stack/stack.vue';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 
 export default {
   name: 'CheckboxVariants',
-  components: { DtCheckbox },
+  components: { DtCheckbox, DtStack },
   created () {
     this.VALIDATION_MESSAGE_TYPES = VALIDATION_MESSAGE_TYPES;
   },

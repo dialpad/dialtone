@@ -113,6 +113,7 @@ export const argTypesData = {
     },
   },
   currentLength: {
+    control: 'number',
     table: {
       defaultValue: {
         summary: 'null',
@@ -120,11 +121,33 @@ export const argTypesData = {
     },
   },
   validate: {
+    control: 'object',
     table: {
       defaultValue: {
         summary: 'null',
       },
     },
+  },
+  disabled: {
+    control: { type: 'boolean' },
+  },
+  hidden: {
+    control: { type: 'boolean' },
+  },
+  labelVisible: {
+    control: { type: 'boolean' },
+  },
+  retainWarning: {
+    control: { type: 'boolean' },
+  },
+  name: {
+    control: { type: 'text' },
+  },
+  inputWrapperClass: {
+    control: 'text',
+  },
+  rootClass: {
+    control: 'text',
   },
 
   // HTML attributes
@@ -338,28 +361,28 @@ export const WithMultipleMessages = {
 export const ExtraSmall = {
   ...Default,
   args: {
-    size: 'xs',
+    size: 100,
   },
 };
 
 export const Small = {
   ...Default,
   args: {
-    size: 'sm',
+    size: 200,
   },
 };
 
 export const Large = {
   ...Default,
   args: {
-    size: 'lg',
+    size: 400,
   },
 };
 
 export const ExtraLarge = {
   ...Default,
   args: {
-    size: 'xl',
+    size: 500,
   },
 };
 

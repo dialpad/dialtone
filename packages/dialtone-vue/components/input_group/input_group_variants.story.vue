@@ -1,5 +1,8 @@
 <template>
-  <div id="components-input-group--variants-container">
+  <dt-stack
+    id="components-input-group--variants-container"
+    gap="400"
+  >
     <!-- Default -->
     <dt-input-group
       name="input-group-default"
@@ -87,18 +90,19 @@
       <inputs-decorator />
     </dt-input-group>
     <!-- With Error Messages Hidden -->
-  </div>
+  </dt-stack>
 </template>
 
 <script>
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import InputsDecorator from './decorators/inputs.vue';
 import DtInputGroup from './input_group.vue';
+import DtStack from '../stack/stack.vue';
 
 export default {
   name: 'InputGroupVariants',
 
-  components: { InputsDecorator, DtInputGroup },
+  components: { InputsDecorator, DtInputGroup, DtStack },
 
   created () {
     this.VALIDATION_MESSAGE_TYPES = VALIDATION_MESSAGE_TYPES;

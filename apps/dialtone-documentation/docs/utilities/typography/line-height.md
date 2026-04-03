@@ -58,10 +58,10 @@ Use `d-lh{n}` to fix an element's line-height. This allows you to target a speci
 <clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
-      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-ibs-0">
         <tr>
-          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bbw1">Variable</div></th>
-          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bbw1">Output</div></th>
+          <th scope="col" class="d-p-0 d-bbw0"><div class="d-p-200 d-bb d-bbw1">Variable</div></th>
+          <th scope="col" class="d-p-0 d-bbw0"><div class="d-p-200 d-bb d-bbw1">Output</div></th>
         </tr>
       </thead>
       <tbody>

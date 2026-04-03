@@ -62,6 +62,7 @@
         }"
         :css="$attrs.css"
         :tabindex="contentTabindex"
+        v-bind="modeAttrs"
         v-on="popoverListeners"
         @mouseenter="onMouseEnterAnchor"
         @mouseleave="onMouseLeaveAnchor"
@@ -69,7 +70,7 @@
         <popover-header-footer
           v-if="hasSlotContent($slots.headerContent) || showCloseButton"
           ref="popover__header"
-          :class="POPOVER_HEADER_FOOTER_PADDING_CLASSES[padding]"
+          :class="[POPOVER_HEADER_FOOTER_PADDING_CLASSES[padding], headerWrapperClass]"
           :content-class="headerClass"
           type="header"
           :show-close-button="showCloseButton"
@@ -102,7 +103,7 @@
           v-if="hasSlotContent($slots.footerContent)"
           ref="popover__footer"
           type="footer"
-          :class="POPOVER_HEADER_FOOTER_PADDING_CLASSES[padding]"
+          :class="[POPOVER_HEADER_FOOTER_PADDING_CLASSES[padding], footerWrapperClass]"
           :content-class="footerClass"
         >
           <template #content>
@@ -136,6 +137,7 @@ import {
 import { getUniqueString, hasSlotContent, isOutOfViewPort, warnIfUnmounted, disableRootScrolling, enableRootScrolling, returnFirstEl } from '@/common/utils';
 import { DtLazyShow } from '@/components/lazy_show';
 import ModalMixin from '@/common/mixins/modal';
+import ModeMixin from '@/common/mixins/mode';
 import { createTippyPopover, getPopperOptions } from './tippy_utils';
 import PopoverHeaderFooter from './popover_header_footer.vue';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
@@ -157,7 +159,7 @@ export default {
     PopoverHeaderFooter,
   },
 
-  mixins: [ModalMixin],
+  mixins: [ModalMixin, ModeMixin],
 
   props: {
     /**
@@ -281,10 +283,20 @@ export default {
     /**
      * External anchor id to use in those cases the anchor can't be provided via the slot.
      * For instance, using the combobox's input as the anchor for the popover.
+     * @deprecated Use externalAnchorElement instead for Shadow DOM compatibility.
      */
     externalAnchor: {
       type: String,
       default: '',
+    },
+
+    /**
+     * External anchor element reference. Use this instead of externalAnchor when
+     * the anchor may be inside a Shadow DOM, as querySelector cannot pierce shadow boundaries.
+     */
+    externalAnchorElement: {
+      type: HTMLElement,
+      default: null,
     },
 
     /**
@@ -437,9 +449,25 @@ export default {
     },
 
     /**
+     * Additional class name for the header element (d-popover__header).
+     */
+    headerWrapperClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
      * Additional class name for the header content wrapper element.
      */
     headerClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the footer element (d-popover__footer).
+     */
+    footerWrapperClass: {
       type: [String, Array, Object],
       default: '',
     },
@@ -642,6 +670,10 @@ export default {
       });
     },
 
+    externalAnchorElement () {
+      this.updateAnchorEl();
+    },
+
     placement (placement) {
       this.tip?.setProps({
         placement,
@@ -710,6 +742,10 @@ export default {
    ******************/
   methods: {
 
+    getModeReferenceEl () {
+      return this.$refs.anchor;
+    },
+
     hasIntersectedViewport (entries) {
       const dialog = entries?.[0]?.target;
       if (!dialog) return;
@@ -718,9 +754,10 @@ export default {
     },
 
     updateAnchorEl () {
-      const externalAnchorEl = this.externalAnchor
-        ? this.$refs.anchor.getRootNode().querySelector(`#${this.externalAnchor}`)
-        : null;
+      const externalAnchorEl = this.externalAnchorElement ||
+        (this.externalAnchor
+          ? this.$refs.anchor.getRootNode().querySelector(`#${this.externalAnchor}`)
+          : null);
       const anchorEl = externalAnchorEl ?? this.$refs.anchor.children[0];
       if (anchorEl === this.anchorEl) {
         return;

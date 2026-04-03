@@ -3,7 +3,7 @@
     <dt-stack
       id="components-badge--variants-container"
       direction="row"
-      gap="400"
+      gap="100"
       align="center"
       class="d-ff-row-wrap"
     >

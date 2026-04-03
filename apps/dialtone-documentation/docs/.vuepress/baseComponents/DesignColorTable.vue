@@ -62,23 +62,23 @@ const colors = processColorsDocs(props.excludedColors, props.classPrefix);
 </script>
 
 <template>
-  <div v-if="colors.length" v-dt-scrollbar class="d-hmx464 d-bar8 d-ba d-bc-subtle">
+  <div v-if="colors.length" v-dt-scrollbar class="d-hmx-700 d-bar8 d-ba d-bc-subtle">
     <div>
       <table class="d-table dialtone-doc-table">
         <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
           <tr>
-            <th class="d-p0 d-bbw0" colspan="3" scope="col">
-              <div class="d-p16 d-bb d-bbw1">
+            <th class="d-p-0 d-bbw0" colspan="3" scope="col">
+              <div class="d-p-200 d-bb d-bbw1">
                 Color
               </div>
             </th>
-            <th class="d-p0 d-bbw0" scope="col">
-              <div class="d-p16 d-bb d-bbw1">
+            <th class="d-p-0 d-bbw0" scope="col">
+              <div class="d-p-200 d-bb d-bbw1">
                 CSS variable
               </div>
             </th>
-            <th class="d-p0 d-bbw0" scope="col">
-              <div class="d-p16 d-bb d-bbw1">
+            <th class="d-p-0 d-bbw0" scope="col">
+              <div class="d-p-200 d-bb d-bbw1">
                 CSS utility
               </div>
             </th>
@@ -86,17 +86,27 @@ const colors = processColorsDocs(props.excludedColors, props.classPrefix);
         </thead>
         <tbody>
           <tr v-for="(color, index) in colors" :key="`${color.utilityClass}-${index}`">
-            <th class="d-pr0" colspan="2" scope="row">
-              <dt-stack direction="row" align="center" gap="500">
+            <th class="d-pie-0" colspan="2" scope="row">
+              <dt-stack direction="row" align="center" gap="200">
                 <slot :color="color" name="example" />
               </dt-stack>
             </th>
             <th class="d-lh-300" scope="row">
               <span class="d-tt-capitalize" v-text="color.name" />
-              <span v-if="color.description" class="d-d-block d-fw-normal d-fs-100" v-text="color.description" />
+              <dt-text v-if="color.description" as="span" kind="body" :size="100" strength="normal" class="d-d-block">
+                {{ color.description }}
+              </dt-text>
             </th>
-            <td class="d-code--sm d-docsite-code" v-text="color.tokenName ? `var(${color.tokenName})` : '-'" />
-            <td class="d-code--sm d-docsite-code" v-text="color.utilityClass" />
+            <td>
+              <dt-text as="span" kind="code" :size="100" class="d-docsite-code">
+                {{ color.tokenName ? `var(${color.tokenName})` : '-' }}
+              </dt-text>
+            </td>
+            <td>
+              <dt-text as="span" kind="code" :size="100" class="d-docsite-code">
+                {{ color.utilityClass }}
+              </dt-text>
+            </td>
           </tr>
         </tbody>
       </table>

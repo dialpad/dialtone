@@ -18,7 +18,7 @@
         :image-src="avatarSrc"
         :color="avatarColor"
         image-alt=""
-        size="sm"
+        :size="200"
         :seed="avatarSeed"
         :presence="avatarPresence"
       >
@@ -67,7 +67,7 @@ import { DtRecipeGeneralRow } from '@/recipes/leftbar/general_row';
 import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
 import { DtAvatar } from '@/components/avatar';
 import { extractVueListeners, safeConcatStrings } from '@/common/utils';
-import { DtIconUser } from '@dialpad/dialtone-icons/vue3';
+import { DtIconUser } from '@dialpad/dialtone-icons/vue';
 
 export default {
   compatConfig: { MODE: 3 },

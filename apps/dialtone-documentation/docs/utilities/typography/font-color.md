@@ -11,9 +11,9 @@ keywords: ["text color", "foreground color", "font colour"]
 Use [DtText's](/components/text.html#tone) `tone` prop to declare the text's tone, which will map to a foreground color. By default, the tone is inherited from its parent.
 
 <code-well-header>
-  <dt-stack gap="500" direction="row">
-    <dt-stack gap="300" class="d-py8 d-px16 d-bgc-primary d-bar4">
-      <dt-text>primary</dt-text>
+  <dt-stack gap="200" direction="row">
+    <dt-stack class="d-py-100 d-px-200 d-bgc-primary d-bar4">
+      <dt-text tone="primary">primary</dt-text>
       <dt-text tone="secondary">secondary</dt-text>
       <dt-text tone="tertiary">tertiary</dt-text>
       <dt-text tone="muted">muted</dt-text>
@@ -24,19 +24,6 @@ Use [DtText's](/components/text.html#tone) `tone` prop to declare the text's ton
       <dt-text tone="warning">warning</dt-text>
       <dt-text tone="critical">critical</dt-text>
       <dt-text tone="critical-strong">critical-strong</dt-text>
-    </dt-stack>
-    <dt-stack gap="300" class="d-py8 d-px16 d-bgc-primary-inverted d-bar4">
-      <dt-text tone="primary-inverted">primary-inverted</dt-text>
-      <dt-text tone="secondary-inverted">secondary-inverted</dt-text>
-      <dt-text tone="tertiary-inverted">tertiary-inverted</dt-text>
-      <dt-text tone="muted-inverted">muted-inverted</dt-text>
-      <dt-text tone="disabled-inverted">disabled-inverted</dt-text>
-      <dt-text tone="placeholder-inverted">placeholder-inverted</dt-text>
-      <dt-text tone="success-inverted">success-inverted</dt-text>
-      <dt-text tone="success-strong-inverted">success-strong-inverted</dt-text>
-      <dt-text tone="warning-inverted">warning-inverted</dt-text>
-      <dt-text tone="critical-inverted">critical-inverted</dt-text>
-      <dt-text tone="critical-strong-inverted">critical-strong-inverted</dt-text>
     </dt-stack>
   </dt-stack>
 </code-well-header>
@@ -67,7 +54,6 @@ Use `h:d-fc-{color}` to change an element's text color `:hover` state.
 </code-well-header>
 
 ```html
-
 <dt-button kind="unstyled" class="d-fc-critical h:d-fc-success">Hover over me</dt-button>
 ```
 
@@ -80,7 +66,6 @@ Use `f:d-fc-{color}` to change an element's text color `:focus` and `:focus-with
 </code-well-header>
 
 ```html
-
 <dt-button kind="unstyled" class="d-fc-critical f:d-fc-success">Focus me</dt-button>
 ```
 
@@ -93,9 +78,69 @@ Use `fv:d-fc-{color}` to change an element's text color on `:focus-visible` stat
 </code-well-header>
 
 ```html
-
 <dt-button kind="unstyled" class="d-fc-critical fv:d-fc-success">Keyboard focus me</dt-button>
 ```
+
+## Inverted
+
+<dt-notice
+  title="Tip"
+  kind="info"
+  class="d-wmx100p d-my-200"
+>
+  Avoid <code>-inverted</code> utility variants, which will be sunset. Use the
+  <dt-link to="/components/mode-island.html#inverting">v-dt-mode directive</dt-link>
+  with base classes instead — it automatically resolves the correct colors for
+  the current mode.
+</dt-notice>
+
+<code-well-header>
+  <dt-stack direction="row" gap="400">
+    <dt-stack class="d-py-100 d-px-200 d-bgc-primary d-bar4">
+      <dt-text tone="primary">primary</dt-text>
+      <dt-text tone="secondary">secondary</dt-text>
+      <dt-text tone="tertiary">tertiary</dt-text>
+      <dt-text tone="muted">muted</dt-text>
+      <dt-text tone="disabled">disabled</dt-text>
+      <dt-text tone="placeholder">placeholder</dt-text>
+      <dt-text tone="success">success</dt-text>
+      <dt-text tone="success-strong">success-strong</dt-text>
+      <dt-text tone="warning">warning</dt-text>
+      <dt-text tone="critical">critical</dt-text>
+      <dt-text tone="critical-strong">critical-strong</dt-text>
+    </dt-stack>
+    <dt-stack class="d-py-100 d-px-200 d-bgc-contrast d-bar4">
+      <dt-text v-dt-mode:invert tone="primary">primary</dt-text>
+      <dt-text v-dt-mode:invert tone="secondary">secondary</dt-text>
+      <dt-text v-dt-mode:invert tone="tertiary">tertiary</dt-text>
+      <dt-text v-dt-mode:invert tone="muted">muted</dt-text>
+      <dt-text v-dt-mode:invert tone="disabled">disabled</dt-text>
+      <dt-text v-dt-mode:invert tone="placeholder">placeholder</dt-text>
+      <dt-text v-dt-mode:invert tone="success">success</dt-text>
+      <dt-text v-dt-mode:invert tone="success-strong">success-strong</dt-text>
+      <dt-text v-dt-mode:invert tone="warning">warning</dt-text>
+      <dt-text v-dt-mode:invert tone="critical">critical</dt-text>
+      <dt-text v-dt-mode:invert tone="critical-strong">critical-strong</dt-text>
+    </dt-stack>
+  </dt-stack>
+</code-well-header>
+
+<code-example-tabs
+vueCode='
+<dt-stack gap="300" class="d-py-100 d-px-200 d-bgc-contrast d-bar4">
+  <dt-text v-dt-mode:invert tone="primary">primary</dt-text>
+  <dt-text v-dt-mode:invert tone="secondary">secondary</dt-text>
+  <dt-text v-dt-mode:invert tone="tertiary">tertiary</dt-text>
+  <dt-text v-dt-mode:invert tone="muted">muted</dt-text>
+  <dt-text v-dt-mode:invert tone="disabled">disabled</dt-text>
+  <dt-text v-dt-mode:invert tone="placeholder">placeholder</dt-text>
+  <dt-text v-dt-mode:invert tone="success">success</dt-text>
+  <dt-text v-dt-mode:invert tone="success-strong">success-strong</dt-text>
+  <dt-text v-dt-mode:invert tone="warning">warning</dt-text>
+  <dt-text v-dt-mode:invert tone="critical">critical</dt-text>
+  <dt-text v-dt-mode:invert tone="critical-strong">critical-strong</dt-text>
+</dt-stack>
+'/>
 
 ## Changing Opacity
 

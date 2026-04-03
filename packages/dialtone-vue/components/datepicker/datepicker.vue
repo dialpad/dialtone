@@ -2,7 +2,7 @@
 <template>
   <dt-stack
     class="d-datepicker"
-    gap="400"
+    gap="100"
   >
     <div class="d-datepicker__hd">
       <month-year-picker
@@ -38,6 +38,10 @@ import Calendar from './modules/calendar.vue';
 import { DtStack } from '@/components/stack';
 import { returnFirstEl, warnIfUnmounted } from '@/common/utils';
 import { onMounted, ref, getCurrentInstance } from 'vue';
+
+defineOptions({
+  name: 'DtDatepicker',
+});
 
 defineProps({
   /**

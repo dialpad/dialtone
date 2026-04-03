@@ -1,5 +1,8 @@
 <template>
-  <div id="components-checkbox-group--variants-container">
+  <dt-stack
+    id="components-checkbox-group--variants-container"
+    gap="100"
+  >
     <!-- Default -->
     <dt-checkbox-group
       name="checkbox-group-default"
@@ -87,17 +90,18 @@
       <dt-checkboxes-decorator />
     </dt-checkbox-group>
     <!-- With Error Messages Hidden -->
-  </div>
+  </dt-stack>
 </template>
 
 <script>
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import DtCheckboxesDecorator from './checkboxes_decorator.vue';
 import DtCheckboxGroup from './checkbox_group.vue';
+import DtStack from '../stack/stack.vue';
 
 export default {
   name: 'CheckboxGroupVariants',
-  components: { DtCheckboxesDecorator, DtCheckboxGroup },
+  components: { DtCheckboxesDecorator, DtCheckboxGroup, DtStack },
   created () {
     this.VALIDATION_MESSAGE_TYPES = VALIDATION_MESSAGE_TYPES;
   },

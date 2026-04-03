@@ -13,8 +13,13 @@ import DtcControlSelection from '@/src/components/controls/control_selection.vue
 import DtcControlString from '@/src/components/controls/control_string.vue';
 import DtcControlNullish from '@/src/components/controls/control_nullish.vue';
 import DtcControlBase from '@/src/components/controls/control_base.vue';
+import DtcControlIconSlot from '@/src/components/controls/control_icon_slot.vue';
+import DtcControlSegmented from '@/src/components/controls/control_segmented.vue';
 
 import { typeOfMemberValue } from '@/src/lib/utils';
+
+const MAX_SEGMENTED_COUNT = 6;
+const MAX_SEGMENTED_LABEL_LENGTH = 4;
 
 /**
  * Symbol representing a value that is "not set".
@@ -57,6 +62,10 @@ export const controlMap = Object.freeze({
     component: DtcControlSelection,
     default ({ values } = {}) { return values?.[0]; },
   },
+  segmented: {
+    component: DtcControlSegmented,
+    default ({ values } = {}) { return values?.[0]; },
+  },
   string: {
     component: DtcControlString,
     default () { return getControlDataDefault(this); },
@@ -78,6 +87,10 @@ export const controlMap = Object.freeze({
     component: DtcControlBase,
     default () { return getControlDataDefault(this); },
   },
+  'icon-slot': {
+    component: DtcControlIconSlot,
+    default () { return null; },
+  },
 });
 
 function getControlDataDefault (controlData) {
@@ -95,14 +108,20 @@ export function getControlByValue (value) {
 }
 
 export function getControlByMemberType (type, args) {
+  if (type === 'boolean') return 'boolean';
+  if (args?.values?.length > 0) {
+    if (shouldUseSegmented(args.values)) return 'segmented';
+    return 'selection';
+  }
   switch (type) {
-    case 'string': {
-      return args?.values && args.values.length > 0
-        ? 'selection'
-        : 'string';
-    }
+    case 'string': return 'string';
     default: return type;
   }
+}
+
+function shouldUseSegmented (values) {
+  return values.length <= MAX_SEGMENTED_COUNT &&
+    values.every(v => String(v).length <= MAX_SEGMENTED_LABEL_LENGTH);
 }
 
 /**

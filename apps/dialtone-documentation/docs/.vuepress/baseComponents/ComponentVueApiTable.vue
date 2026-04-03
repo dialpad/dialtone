@@ -7,32 +7,32 @@
   <clamped-table-wrapper>
     <div>
       <table
-        class="d-table dialtone-doc-table d-wmn512"
+        class="d-table dialtone-doc-table d-wmn-800"
       >
         <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
           <tr>
             <th
               scope="col"
-              class="d-p0 d-bbw0"
+              class="d-p-0 d-bbw0"
             >
-              <div class="d-p16 d-bb d-bbw1">
+              <div class="d-p-200 d-bb d-bbw1">
                 Name
               </div>
             </th>
             <th
               v-if="withDefault"
               scope="col"
-              class="d-p0 d-bbw0"
+              class="d-p-0 d-bbw0"
             >
-              <div class="d-p16 d-bb d-bbw1">
+              <div class="d-p-200 d-bb d-bbw1">
                 Default
               </div>
             </th>
             <th
               scope="col"
-              class="vue-api-table d-p0 d-bbw0"
+              class="vue-api-table d-p-0 d-bbw0"
             >
-              <div class="d-p16 d-bb d-bbw1">
+              <div class="d-p-200 d-bb d-bbw1">
                 Type
               </div>
             </th>
@@ -45,18 +45,17 @@
             class="d-va-baseline"
           >
             <th scope="row">
-              <dt-stack gap="300">
-                <span>
-                  <code class="d-code--sm d-docsite-code">
-                    {{ item.name }}
-                  </code>
-                </span>
-                <div
+              <dt-stack gap="50">
+                <dt-text as="code" kind="code" :size="100" class="d-docsite-code">
+                  {{ item.name }}
+                </dt-text>
+                <dt-text
                   v-if="item.required"
-                  class="d-fc-critical d-fw-normal"
+                  tone="critical"
+                  strength="normal"
                 >
                   required
-                </div>
+                </dt-text>
                 <span v-if="item.deprecated">
                   <dt-badge
                     type="critical"
@@ -68,40 +67,40 @@
             </th>
 
             <td v-if="withDefault">
-              <code v-if="item.defaultValue" class="d-code--sm d-docsite-code">
+              <dt-text v-if="item.defaultValue" as="code" kind="code" :size="100" class="d-docsite-code">
                 {{ item.defaultValue }}
-              </code>
+              </dt-text>
             </td>
 
             <td class="vue-api-table">
-              <dt-stack gap="350">
+              <dt-stack gap="75">
                 <dt-stack
                   v-if="item.values"
                   direction="row"
                   align="baseline"
                   class="d-fw-wrap"
-                  gap="350"
+                  gap="75"
                 >
                   <template
                     v-for="(value, index) in item.values"
                     :key="`${item.name} ${value}`"
                   >
-                    <dt-text v-if="index > 0" tone="muted" as="span" kind="body" size="xs">
+                    <dt-text v-if="index > 0" tone="muted" as="span" kind="body" :size="100">
                       |
                     </dt-text>
-                    <code class="d-code--sm d-docsite-code">"{{ value }}"</code>
+                    <dt-text as="code" kind="code" :size="100" class="d-docsite-code">
+                      "{{ value }}"
+                    </dt-text>
                   </template>
                 </dt-stack>
-                <span v-else-if="item.type">
-                  <code class="d-code--sm d-docsite-code">
-                    {{ item.type }}
-                  </code>
-                </span>
+                <dt-text v-else-if="item.type" as="code" kind="code" :size="100" class="d-docsite-code">
+                  {{ item.type }}
+                </dt-text>
                 <dt-text
                   v-if="item.description"
                   as="p"
                   kind="body"
-                  size="sm"
+                  :size="200"
                   wrap="balance"
                 >
                   <markdown-render
@@ -112,8 +111,8 @@
                   v-if="item.deprecated && item.deprecatedMessage"
                   as="p"
                   kind="body"
-                  size="sm"
-                  class="d-fc-critical"
+                  :size="200"
+                  tone="critical"
                 >
                   {{ item.deprecatedMessage }}
                 </dt-text>

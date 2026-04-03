@@ -10,12 +10,12 @@ Use `d-baw{n}` to change the border width on your element.
 
 <code-well-header>
   <dt-stack
-    gap="500"
+    gap="200"
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
     <div
       v-for="r in [0, 1, 2, 4]"
-      class="d-p16 d-ba"
+      class="d-p-200 d-ba"
       :class="`d-baw${r}`"
     >
       d-baw{{r}}
@@ -36,12 +36,12 @@ Use `d-b{a|t|r|b|l}w{n}` to change the border width of your direction on your el
 
 <code-well-header>
   <dt-stack
-    gap="500"
+    gap="200"
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
     <div
       v-for="r in [0, 1, 2, 4]"
-      class="d-p16 d-ba d-baw0 d-bgc-primary"
+      class="d-p-200 d-ba d-baw0 d-bgc-primary"
       :class="`d-btw${r}`"
     >
       d-btw{{r}}
@@ -50,7 +50,6 @@ Use `d-b{a|t|r|b|l}w{n}` to change the border width of your direction on your el
 </code-well-header>
 
 ```html
-
 <div class="d-bt d-btw1">...</div>
 <div class="d-br d-btw2">...</div>
 <div class="d-bb d-btw4">...</div>

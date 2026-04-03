@@ -52,7 +52,7 @@
       <dt-button
         kind="muted"
         importance="clear"
-        size="xs"
+        :size="100"
         circle
         aria-label="Clear search"
         @click="clear"

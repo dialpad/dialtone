@@ -28,12 +28,12 @@
             HTML
           </dt-tab>
         </div>
-        <!-- aria label blank so no tooltip displays since it would be redundant to the "Copy code" text -->
+        <!-- aria label blank so no tooltip displays since it would be redundant to the "Copy" text -->
         <copy-button
           :text="selectedPanelId === htmlPanelId ? trimmedHtmlCode : trimmedVueCode"
           aria-label=""
         >
-          Copy Code
+          Copy
         </copy-button>
       </dt-stack>
     </template>
@@ -43,7 +43,7 @@
     >
       <div
         v-dt-scrollbar
-        class="language-html d-hmx332"
+        class="language-html d-hmx-500"
         data-ext="html"
       >
         <pre
@@ -67,7 +67,7 @@
       </dt-banner>
       <div
         v-dt-scrollbar
-        class="language-html d-hmx332"
+        class="language-html d-hmx-500"
         data-ext="html"
       >
         <pre

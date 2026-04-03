@@ -12,26 +12,37 @@
           :disabled="internalDisabled"
           type="radio"
           :class="['d-radio', inputValidationClass, inputClass]"
+          :aria-label="!labelVisible && label ? label : undefined"
           v-bind="removeClassStyleAttrs($attrs)"
           v-on="inputListeners"
         >
       </div>
-      <div
+      <dt-text
+        v-if="hasLabel"
+        as="div"
+        kind="label"
+        :size="resolvedLabelSize"
+        :strength="labelStrength ?? 'normal'"
+        :tone="internalDisabled ? 'disabled' : 'primary'"
         :class="[labelClass, 'd-radio__copy d-radio__label']"
         v-bind="labelChildProps"
         data-qa="radio-label"
       >
         <!-- @slot slot for Radio Label -->
         <slot>{{ label }}</slot>
-      </div>
+      </dt-text>
     </label>
     <div
       v-if="$slots.description || description || hasMessages"
       class="d-radio__messages"
       data-qa="radio-description-messages"
     >
-      <div
+      <dt-text
         v-if="$slots.description || description"
+        kind="body"
+        :size="200"
+        tone="tertiary"
+        as="div"
         :class="['d-description', descriptionClass]"
         v-bind="descriptionChildProps"
         data-qa="radio-description"
@@ -40,7 +51,7 @@
         <slot name="description">
           {{ description }}
         </slot>
-      </div>
+      </dt-text>
       <dt-validation-messages
         :validation-messages="formattedMessages"
         :show-messages="showMessages"
@@ -61,6 +72,7 @@ import {
 } from '@/common/mixins/input';
 import { RADIO_INPUT_VALIDATION_CLASSES } from './radio_constants';
 import { DtValidationMessages } from '../validation_messages';
+import { DtText, TEXT_SIZE_MODIFIERS, TEXT_STRENGTH_MODIFIERS } from '@/components/text';
 import { hasSlotContent, removeClassStyleAttrs, addClassStyleAttrs } from '@/common/utils';
 
 /**
@@ -72,7 +84,7 @@ export default {
   compatConfig: { MODE: 3 },
   name: 'DtRadio',
 
-  components: { DtValidationMessages },
+  components: { DtValidationMessages, DtText },
 
   mixins: [InputMixin, CheckableMixin, GroupableMixin, MessagesMixin],
 
@@ -85,6 +97,35 @@ export default {
     value: {
       type: [String, Number],
       default: '',
+    },
+
+    /**
+     * Determines visibility of radio label.
+     * @values true, false
+     */
+    labelVisible: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Overrides the label text size.
+     * @values 100, 200, 300, 400
+     */
+    labelSize: {
+      type: [String, Number],
+      default: null,
+      validator: (s) => TEXT_SIZE_MODIFIERS.label.includes(String(s)),
+    },
+
+    /**
+     * Overrides the label font weight.
+     * @values bold, semibold, medium, normal
+     */
+    labelStrength: {
+      type: String,
+      default: null,
+      validator: (s) => Object.keys(TEXT_STRENGTH_MODIFIERS).includes(s),
     },
   },
 
@@ -136,6 +177,18 @@ export default {
   },
 
   computed: {
+    hasLabelContent () {
+      return !!(this.$slots.default || this.label);
+    },
+
+    hasLabel () {
+      return this.labelVisible && this.hasLabelContent;
+    },
+
+    resolvedLabelSize () {
+      return this.labelSize ?? 300;
+    },
+
     inputValidationClass () {
       return RADIO_INPUT_VALIDATION_CLASSES[this.internalValidationState];
     },
@@ -175,9 +228,22 @@ export default {
     },
   },
 
+  mounted () {
+    this.runValidations();
+  },
+
   methods: {
     removeClassStyleAttrs,
     addClassStyleAttrs,
+
+    runValidations () {
+      if (!this.hasLabelContent && !this.$attrs['aria-label']) {
+        console.info(
+          '[Dialtone] A label is required for accessibility. Provide a label prop and use label-visible="false" to hide it visually.',
+        );
+      }
+    },
+
     emitValue (value) {
       if (value !== this.radioGroupValue) {
         // update provided value if injected

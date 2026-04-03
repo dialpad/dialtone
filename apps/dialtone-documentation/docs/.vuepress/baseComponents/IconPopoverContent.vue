@@ -1,17 +1,17 @@
 <template>
-  <dt-stack direction="row" align="center" justify="center" class="d-h64 d-mb16 d-fc-primary">
+  <dt-stack direction="row" align="center" justify="center" class="d-h-100 d-mbe-200 d-fc-primary">
     <dt-icon
       ref="iconPreview"
       :name="iconName"
       :size="selectedSize"
     />
   </dt-stack>
-  <dt-stack gap="500" class="d-fc-primary">
+  <dt-stack gap="200" class="d-fc-primary">
     <div class="d-wmx50p">
       <dt-select-menu
         v-model="selectedSize"
         label="Size"
-        size="sm"
+        :size="200"
       >
         <option
           v-for="option in sizeOptions"
@@ -24,32 +24,32 @@
     </div>
     <dt-stack direction="row" align="center">
       <dt-stack class="d-fl-grow5">
-        <dt-text kind="label" size="sm">
+        <dt-text kind="label" :size="200">
           Name
         </dt-text>
-        <dt-text kind="body" size="md" density="200">
+        <dt-text kind="body" :size="300" density="200">
           {{ iconName }}
         </dt-text>
       </dt-stack>
       <copy-button
-        class="d-ml8"
+        class="d-mis-100"
         :text="iconName"
         aria-label="Copy icon name"
       />
     </dt-stack>
     <dt-stack>
-      <dt-text kind="label" size="sm">
+      <dt-text kind="label" :size="200">
         Category
       </dt-text>
-      <dt-text kind="body" size="md" density="200" class="d-tt-capitalize">
+      <dt-text kind="body" :size="300" density="200" class="d-tt-capitalize">
         {{ category }}
       </dt-text>
     </dt-stack>
     <dt-stack>
-      <dt-text kind="label" size="sm">
+      <dt-text kind="label" :size="200">
         Keywords
       </dt-text>
-      <dt-text kind="body" size="md" density="200">
+      <dt-text kind="body" :size="300" density="200">
         {{ keywords.join(', ') || '-' }}
       </dt-text>
     </dt-stack>
@@ -60,29 +60,29 @@
           label="SVG"
           readonly
           tabindex="-1"
-          size="sm"
+          :size="200"
           :value="svgExample"
         />
       </div>
       <copy-button
-        class="d-ml8"
+        class="d-mis-100"
         :text="svgExample"
         aria-label="Copy SVG markup"
       />
     </dt-stack>
-    <dt-stack direction="row" align="end" class="d-bb d-bc-default d-pb16">
+    <dt-stack direction="row" align="end" class="d-bb d-bc-default d-pbe-200">
       <div class="d-fl-grow1">
         <dt-input
           class="d-ff-mono"
           label="Vue"
           tabindex="-1"
           readonly
-          size="sm"
+          :size="200"
           :value="vueExample"
         />
       </div>
       <copy-button
-        class="d-ml8"
+        class="d-mis-100"
         :text="vueExample"
         aria-label="Copy Vue markup"
       />
@@ -94,7 +94,7 @@
           label="Deprecated"
           tabindex="-1"
           readonly
-          size="sm"
+          :size="200"
           :value="vueExampleDeprecated"
         >
           <template #description>
@@ -107,7 +107,7 @@
         </dt-input>
       </div>
       <copy-button
-        class="d-ml8"
+        class="d-mis-100"
         :text="vueExampleDeprecated"
         aria-label="Copy Vue Deprecated markup"
       />

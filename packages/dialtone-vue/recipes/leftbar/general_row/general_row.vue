@@ -151,7 +151,7 @@
               class="d-recipe-leftbar-row__action-button"
               data-qa="dt-recipe-leftbar-row-action-call-button"
               circle
-              size="xs"
+              :size="100"
               kind="inverted"
               :aria-label="callButtonTooltip"
               @focus="actionFocused = true"
@@ -198,7 +198,7 @@ import {
   DtIconAtSign,
   DtIconLaptop2,
   DtIconCalendarClock,
-} from '@dialpad/dialtone-icons/vue3';
+} from '@dialpad/dialtone-icons/vue';
 import { DtButton } from '@/components/button';
 import { DtTooltip } from '@/components/tooltip';
 import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';

@@ -130,7 +130,7 @@
           v-for="state in AVATAR_PRESENCE_STATES"
           :key="`presence-${state}`"
           :seed="$attrs.seed"
-          size="md"
+          :size="300"
           full-name="Person avatar"
           :image-src="$attrs.imageSrc"
           :image-alt="$attrs.imageAlt"
@@ -143,7 +143,7 @@
       <div class="d-flow16 d-d-flex">
         <dt-avatar
           :seed="$attrs.seed"
-          size="xl"
+          :size="500"
           full-name="Person avatar"
           :image-src="$attrs.imageSrc"
           :image-alt="$attrs.imageAlt"
@@ -155,7 +155,7 @@
         </dt-avatar>
         <dt-avatar
           :seed="$attrs.seed"
-          size="xl"
+          :size="500"
           full-name="Person avatar"
           :image-src="$attrs.imageSrc"
           :image-alt="$attrs.imageAlt"
@@ -203,7 +203,7 @@
           :group="3"
         />
       </div>
-      <div class="d-flow16 d-d-flex d-ai-center d-mt8">
+      <div class="d-flow16 d-d-flex d-ai-center d-mbs-100">
         <dt-avatar
           v-for="size in groupSizes"
           :key="`group-initials-${size}`"
@@ -228,7 +228,7 @@
           :group="12"
         />
       </div>
-      <div class="d-flow16 d-d-flex d-ai-center d-mt8">
+      <div class="d-flow16 d-d-flex d-ai-center d-mbs-100">
         <dt-avatar
           v-for="size in groupSizes"
           :key="`group-double-initials-${size}`"
@@ -253,7 +253,7 @@
           :group="120"
         />
       </div>
-      <div class="d-flow16 d-d-flex d-ai-center d-mt8">
+      <div class="d-flow16 d-d-flex d-ai-center d-mbs-100">
         <dt-avatar
           v-for="size in groupSizes"
           :key="`group-triple-initials-${size}`"
@@ -277,7 +277,7 @@ import {
   DtIconLockFilled,
   DtIconInbox,
   DtIconContacts,
-} from '@dialpad/dialtone-icons/vue3';
+} from '@dialpad/dialtone-icons/vue';
 import DtAvatar from './avatar.vue';
 import { AVATAR_PRESENCE_STATES, AVATAR_SIZE_MODIFIERS } from './avatar_constants.js';
 

@@ -11,7 +11,7 @@
         :key="label"
       >
         <dt-button
-          class="dtc-control-selector__button d-px4 d-py1"
+          class="dtc-control-selector__button d-px-50 d-py-1"
           importance="outlined"
           v-bind="getStyling(control)"
           @click="() => updateControl(control)"

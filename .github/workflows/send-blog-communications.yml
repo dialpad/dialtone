@@ -10,6 +10,15 @@ on:
         description: 'Optional: Send to this email address instead of the production list (for testing)'
         required: false
         type: string
+      channels:
+        description: 'Which channels to send to'
+        required: false
+        type: choice
+        default: 'all'
+        options:
+          - all
+          - email
+          - sms
   workflow_run:
     workflows: ["Deploy"]
     types:
@@ -38,6 +47,13 @@ jobs:
           ref: ${{ github.event_name == 'workflow_dispatch' && github.ref || github.event.workflow_run.head_sha }}
           fetch-depth: 0
 
+      - name: Get previous release SHA
+        if: ${{ github.event_name == 'workflow_run' }}
+        id: prev-release
+        run: |
+          PREV_TAG=$(git tag --sort=-creatordate | grep -E "^dialtone/v[0-9]+\.[0-9]+\.[0-9]+$" | sed -n "2p")
+          echo "sha=$(git rev-parse ${PREV_TAG})" >> "${GITHUB_OUTPUT}"
+
       - name: Get changed files (automatic)
         if: ${{ github.event_name == 'workflow_run' }}
         id: changed-files
@@ -47,6 +63,7 @@ jobs:
           json: true
           escape_json: false
           sha: ${{ github.event.workflow_run.head_sha }}
+          base_sha: ${{ steps.prev-release.outputs.sha }}
 
       - name: Set posts output
         id: set-posts
@@ -63,6 +80,7 @@ jobs:
   send-email:
     name: Send email
     runs-on: ubuntu-latest
+    if: ${{ needs.added-posts.outputs.added_posts != '[]' && needs.added-posts.outputs.added_posts != '' && (github.event_name != 'workflow_dispatch' || github.event.inputs.channels != 'sms') }}
     permissions:
       contents: read
       id-token: write
@@ -134,7 +152,7 @@ jobs:
           jq -n \
             --arg to "${{ env.TO_MAIL }}" \
             --arg subject "[dialtone] New blog post: ${{ env.BLOG_POST_HEADING }}" \
-            --arg message "${{ env.MESSAGE_BODY }}" \
+            --rawfile message "$FILE_PATH" \
             '{to: $to, subject: $subject, message: $message}' | \
           curl -m 70 -X POST ${{ env.API_URL }} \
             -H "Authorization: bearer ${{ steps.auth.outputs.id_token }}" \
@@ -144,7 +162,7 @@ jobs:
   send-sms:
     name: Send SMS
     runs-on: ubuntu-latest
-    if: ${{ github.event.inputs.test_email == '' || github.event_name != 'workflow_dispatch' }}
+    if: ${{ (needs.added-posts.outputs.added_posts != '[]' && needs.added-posts.outputs.added_posts != '') && (github.event.inputs.test_email == '' || github.event_name != 'workflow_dispatch') && (github.event_name != 'workflow_dispatch' || github.event.inputs.channels != 'email') }}
     permissions:
       contents: read
       id-token: write

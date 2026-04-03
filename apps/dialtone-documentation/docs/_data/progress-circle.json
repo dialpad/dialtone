@@ -1,0 +1,59 @@
+{
+  "classes": [
+    {
+      "class": "d-progress-circle",
+      "applies": "N/A",
+      "description": "Base circular progress indicator style."
+    },
+    {
+      "class": "d-progress-circle--size-{100-800}",
+      "applies": ".d-progress-circle",
+      "description": "Sets the diameter to the corresponding icon size."
+    },
+    {
+      "class": "d-progress-circle--brand",
+      "applies": ".d-progress-circle",
+      "description": "Applies brand color."
+    },
+    {
+      "class": "d-progress-circle--critical",
+      "applies": ".d-progress-circle",
+      "description": "Applies critical color."
+    },
+    {
+      "class": "d-progress-circle--positive",
+      "applies": ".d-progress-circle",
+      "description": "Applies success color."
+    },
+    {
+      "class": "d-progress-circle--warning",
+      "applies": ".d-progress-circle",
+      "description": "Applies warning color."
+    },
+    {
+      "class": "d-progress-circle--info",
+      "applies": ".d-progress-circle",
+      "description": "Applies info color."
+    },
+    {
+      "class": "d-progress-circle--ai",
+      "applies": ".d-progress-circle",
+      "description": "Applies AI gradient fill via inline SVG gradient."
+    },
+    {
+      "class": "d-progress-circle__bar",
+      "applies": "<svg>",
+      "description": "SVG container for the progress shapes."
+    },
+    {
+      "class": "d-progress-circle__shape--track",
+      "applies": "<path>",
+      "description": "Background track circle."
+    },
+    {
+      "class": "d-progress-circle__shape--fill",
+      "applies": "<path>",
+      "description": "Foreground fill showing current progress."
+    }
+  ]
+}

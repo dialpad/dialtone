@@ -1,4 +1,10 @@
 {
+  "permissions": {
+    "allow": [
+      "Skill(doc-sync-enforcer)",
+      "Agent(doc-janitor)"
+    ]
+  },
   "hooks": {
     "PreToolUse": [
       {
@@ -7,6 +13,10 @@
           {
             "type": "command",
             "command": ".claude/hooks/commit-format.sh"
+          },
+          {
+            "type": "command",
+            "command": ".claude/hooks/pre-push-pr-guard.sh"
           }
         ]
       },
@@ -28,6 +38,10 @@
             "type": "command",
             "command": ".claude/hooks/shaping-ripple.sh",
             "timeout": 1000
+          },
+          {
+            "type": "command",
+            "command": ".claude/hooks/post-tool-use-tracker.sh"
           }
         ]
       }

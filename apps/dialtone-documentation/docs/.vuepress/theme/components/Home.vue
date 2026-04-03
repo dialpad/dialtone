@@ -5,17 +5,17 @@
       direction="row"
       justify="between"
       align="center"
-      class="hero__inner-wrapper d-mx-auto d-wmx1340 d-pl24 d-pr32"
+      class="hero__inner-wrapper d-mx-auto d-wmx1340 d-pis-300 d-pie-400"
     >
       <dt-stack justify="center" class="hero__content">
-        <h1 class="d-headline--xxl d-mb12 d-ff-marketing">
+        <dt-text as="h1" kind="headline" :size="600" class="d-mbe-150 d-ff-marketing">
           Improve your UI's reception with Dialtone
-        </h1>
-        <p class="d-fs-300 d-lh-400 d-mb16 d-fc-secondary">
+        </dt-text>
+        <dt-text as="p" kind="body" :size="300" density="400" tone="secondary" class="d-mbe-200">
           Documented styles, components, and utility classes to help you quickly design and build unified experiences
           across Dialpad experiences.
-        </p>
-        <dt-stack direction="row" justify="start" class="d-mb32">
+        </dt-text>
+        <dt-stack direction="row" justify="start" class="d-mbe-400">
           <a
             class="d-td-unset d-d-inline-flex"
             href="https://github.com/dialpad/dialtone"
@@ -28,17 +28,17 @@
             >
           </a>
         </dt-stack>
-        <dt-stack direction="row" justify="center" gap="500">
+        <dt-stack direction="row" justify="center" gap="200">
           <dt-button
             to="/guides/getting-started/"
-            size="lg"
+            :size="400"
             @click="sendAnalyticsEvent()"
           >
             Get Started
           </dt-button>
           <dt-button
             to="/about/whats-new/"
-            size="lg"
+            :size="400"
             importance="outlined"
           >
             What's New?
@@ -49,38 +49,38 @@
     </dt-stack>
   </section>
   <section class="links d-bt d-bb d-bc-subtle d-bgc-secondary">
-    <div class="d-d-grid d-gg16 d-g-cols12 d-wmx1340 d-mx-auto">
-      <dt-stack gap="400" class="link d-body--md d-gc3 d-px32 d-ta-center">
-        <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pt4" to="/design/">
-          <dt-stack gap="600">
-            <svg-loader class="d-h96" name="home-design-language" />
-            <h2 class="d-headline--xl d-ff-marketing">
+    <div class="d-d-grid d-g-200 d-g-cols12 d-wmx1340 d-mx-auto">
+      <dt-stack gap="100" class="link d-body--md d-gc3 d-px-400 d-ta-center">
+        <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pbs-50" to="/design/">
+          <dt-stack gap="100">
+            <svg-loader class="d-h-150" name="home-design-language" />
+            <dt-text as="h2" kind="headline" :size="500" class="d-ff-marketing">
               Design Language
-            </h2>
+            </dt-text>
           </dt-stack>
         </router-link>
-        <p class="d-body--md-compact d-fc-secondary">
+        <dt-text as="p" kind="body" :size="300" density="200" tone="secondary">
           Foundational color, iconography, and spacing guidelines
-        </p>
-        <dt-stack gap="300">
+        </dt-text>
+        <dt-stack gap="50">
           <dt-link to="/design/">
             Browse Design Guidelines
           </dt-link>
         </dt-stack>
       </dt-stack>
-      <dt-stack gap="400" class="link d-body--md d-gc3 d-px32 d-ta-center">
-        <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pt4" to="/components/">
-          <dt-stack gap="600">
-            <svg-loader class="d-h96" name="home-components" />
-            <h2 class="d-headline--xl d-ff-marketing">
+      <dt-stack gap="100" class="link d-body--md d-gc3 d-px-400 d-ta-center">
+        <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pbs-50" to="/components/">
+          <dt-stack gap="100">
+            <svg-loader class="d-h-150" name="home-components" />
+            <dt-text as="h2" kind="headline" :size="500" class="d-ff-marketing">
               Components
-            </h2>
+            </dt-text>
           </dt-stack>
         </router-link>
-        <p class="d-body--md-compact d-fc-secondary">
+        <dt-text as="p" kind="body" :size="300" density="200" tone="secondary">
           Presentational UI components offered in CSS and Vue
-        </p>
-        <dt-stack gap="300">
+        </dt-text>
+        <dt-stack gap="50">
           <dt-link to="/components/">
             Browse CSS Components
           </dt-link>
@@ -89,37 +89,37 @@
           </dt-link>
         </dt-stack>
       </dt-stack>
-      <dt-stack gap="400" class="link d-body--md d-gc3 d-px32 d-ta-center">
-        <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pt4" to="/utilities/">
-          <dt-stack gap="600">
-            <svg-loader class="d-h96" name="home-utilities" />
-            <h2 class="d-headline--xl d-ff-marketing">
+      <dt-stack gap="100" class="link d-body--md d-gc3 d-px-400 d-ta-center">
+        <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pbs-50" to="/utilities/">
+          <dt-stack gap="100">
+            <svg-loader class="d-h-150" name="home-utilities" />
+            <dt-text as="h2" kind="headline" :size="500" class="d-ff-marketing">
               Utilities
-            </h2>
+            </dt-text>
           </dt-stack>
         </router-link>
-        <p class="d-body--md-compact d-fc-secondary">
+        <dt-text as="p" kind="body" :size="300" density="200" tone="secondary">
           A utility-first CSS framework for building user interfaces.
-        </p>
-        <dt-stack gap="300">
+        </dt-text>
+        <dt-stack gap="50">
           <dt-link to="/utilities/">
             Browse Utility Classes
           </dt-link>
         </dt-stack>
       </dt-stack>
-      <dt-stack gap="400" class="link d-body--md d-gc3 d-px32 d-ta-center">
-        <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pt4" to="/guides/">
-          <dt-stack gap="600">
-            <svg-loader class="d-h96" name="home-guides" />
-            <h2 class="d-headline--xl d-ff-marketing">
+      <dt-stack gap="100" class="link d-body--md d-gc3 d-px-400 d-ta-center">
+        <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pbs-50" to="/guides/">
+          <dt-stack gap="100">
+            <svg-loader class="d-h-150" name="home-guides" />
+            <dt-text as="h2" kind="headline" :size="500" class="d-ff-marketing">
               Guides
-            </h2>
+            </dt-text>
           </dt-stack>
         </router-link>
-        <p class="d-body--md-compact d-fc-secondary">
+        <dt-text as="p" kind="body" :size="300" density="200" tone="secondary">
           Reference guidelines for Accessibility, Writing, and more
-        </p>
-        <dt-stack gap="300">
+        </dt-text>
+        <dt-stack gap="50">
           <dt-link to="/guides/getting-started/">
             Getting Started
           </dt-link>
@@ -133,18 +133,18 @@
       </dt-stack>
     </div>
   </section>
-  <section class="d-py64 d-ta-center">
-    <dt-stack direction="row" gap="500" align="center" class="d-fc-secondary d-px48 d-mx-auto d-d-inline-flex">
-      <h2 class="d-headline--lg d-fw-semibold">
+  <section class="d-py-800 d-ta-center">
+    <dt-stack direction="row" gap="200" align="center" class="d-fc-secondary d-px-600 d-mx-auto d-d-inline-flex">
+      <dt-text as="h2" kind="headline" :size="400" strength="semibold">
         Don't see something? Want to contribute?
-      </h2>
+      </dt-text>
       <dt-button
         href="https://dialpad.atlassian.net/servicedesk/customer/portal/123/create/465"
         target="_blank"
         rel="noopener noreferrer"
         kind="muted"
         importance="outlined"
-        size="lg"
+        :size="400"
       >
         Make a request
       </dt-button>
@@ -154,7 +154,7 @@
         rel="noopener noreferrer"
         kind="muted"
         importance="outlined"
-        size="lg"
+        :size="400"
       >
         Report a bug
       </dt-button>

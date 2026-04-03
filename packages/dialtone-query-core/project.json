@@ -1,0 +1,19 @@
+{
+  "name": "dialtone-query-core",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["dialtone-css:build", "dialtone-vue:build"],
+      "inputs": [
+        "{projectRoot}/src/**/*",
+        "{projectRoot}/package.json",
+        "{projectRoot}/tsconfig.json"
+      ],
+      "outputs": ["{projectRoot}/build"],
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "pnpm exec tsc"
+      }
+    }
+  }
+}

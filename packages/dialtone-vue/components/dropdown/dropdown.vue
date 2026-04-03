@@ -3,6 +3,7 @@
   <dt-popover
     ref="popover"
     :content-width="contentWidth"
+    :content-mode="contentMode"
     :open="open"
     :placement="placement"
     :initial-focus-element="openedWithKeyboard ? 'first' : 'dialog'"
@@ -63,6 +64,7 @@ import { LIST_ITEM_NAVIGATION_TYPES } from '@/components/list_item';
 import { DROPDOWN_PADDING_CLASSES } from './dropdown_constants';
 import { getUniqueString } from '@/common/utils';
 import { EVENT_KEYNAMES } from '@/common/constants';
+import { CONTENT_MODE_PROP } from '@/common/mode_constants';
 
 export default {
   compatConfig: { MODE: 3 },
@@ -89,6 +91,12 @@ export default {
   inheritAttrs: false,
 
   props: {
+    /**
+     * Applies a color mode to the positioned content element.
+     * @values light, dark, invert
+     */
+    contentMode: CONTENT_MODE_PROP,
+
     /**
      * Controls whether the dropdown is shown. Leaving this null will have the dropdown trigger on click by default.
      * If you set this value, the default trigger behavior will be disabled and you can control it as you need.
@@ -198,6 +206,7 @@ export default {
 
     /**
      * The direction the dropdown displays relative to the anchor.
+     * @values top, top-start, top-end, right, right-start, right-end, left, left-start, left-end, bottom, bottom-start, bottom-end, auto, auto-start, auto-end
      */
     placement: {
       type: String,

@@ -70,21 +70,25 @@ export const argTypesData = {
     },
   },
 
-  // Deprecated slots (hidden)
+  // Deprecated slots
   leftContent: {
-    table: { disable: true },
+    table: { category: 'Deprecated' },
+    description: 'Use `startContent` instead.',
   },
 
   leftIcon: {
-    table: { disable: true },
+    table: { category: 'Deprecated' },
+    description: 'Use `startIcon` instead.',
   },
 
   rightContent: {
-    table: { disable: true },
+    table: { category: 'Deprecated' },
+    description: 'Use `endContent` instead.',
   },
 
   rightIcon: {
-    table: { disable: true },
+    table: { category: 'Deprecated' },
+    description: 'Use `endIcon` instead.',
   },
 };
 

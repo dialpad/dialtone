@@ -28,7 +28,7 @@
       :aria-label="i18n.$t('DIALTONE_ATTACHMENT_CAROUSEL_LEFT_ARROW_ARIA_LABEL')"
       class="d-recipe-attachment-carousel__arrow d-recipe-attachment-carousel__arrow--left"
       circle
-      size="xs"
+      :size="100"
       importance="clear"
       @click="leftScroll"
     >
@@ -44,7 +44,7 @@
       :aria-label="i18n.$t('DIALTONE_ATTACHMENT_CAROUSEL_RIGHT_ARROW_ARIA_LABEL')"
       class="d-recipe-attachment-carousel__arrow d-recipe-attachment-carousel__arrow--right"
       circle
-      size="xs"
+      :size="100"
       importance="clear"
       @click="rightScroll"
     >
@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import { DtIconArrowRight, DtIconArrowLeft } from '@dialpad/dialtone-icons/vue3';
+import { DtIconArrowRight, DtIconArrowLeft } from '@dialpad/dialtone-icons/vue';
 import { DtButton } from '@/components/button';
 import { DialtoneLocalization } from '@/localization';
 

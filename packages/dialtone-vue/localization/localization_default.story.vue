@@ -23,14 +23,14 @@ export default {
 <template>
   <dt-stack
     direction="row"
-    gap="300"
+    gap="50"
   >
     <span>{{ i18n.$t('STORYBOOK_SET_LANGUAGE') }}: </span>
     <dt-button
       v-for="(key, name) in allowedLocales"
       :key="key"
       :active="key === i18n.currentLocale"
-      size="xs"
+      :size="100"
       importance="outlined"
       @click="i18n.currentLocale = key"
     >

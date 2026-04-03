@@ -1,19 +1,31 @@
-<!-- eslint-disable vue/no-restricted-class -->
 <template>
   <div>
-    <div class="d-body--md-compact">
+    <dt-text
+      kind="body"
+      :size="300"
+      :density="300"
+      as="div"
+    >
       <span>/{{ command }}</span><span v-if="parametersExample"> {{ parametersExample }}</span>
-    </div>
-    <div class="d-body--sm d-fc-tertiary">
+    </dt-text>
+    <dt-text
+      kind="body"
+      :size="200"
+      tone="tertiary"
+      as="div"
+    >
       {{ description }}
-    </div>
+    </dt-text>
   </div>
 </template>
 
 <script>
+import { DtText } from '@/components/text';
+
 export default {
   compatConfig: { MODE: 3 },
   name: 'SlashCommandSuggestion',
+  components: { DtText },
 
   props: {
     item: {

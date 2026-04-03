@@ -18,7 +18,16 @@
       class="dt-recipe--callbar-button-with-dropdown--main-button"
       @click="buttonClick"
     >
-      <template #icon>
+      <template
+        v-if="$slots.blockStartIcon"
+        #blockStartIcon
+      >
+        <slot name="blockStartIcon" />
+      </template>
+      <template
+        v-if="$slots.icon"
+        #icon
+      >
         <slot name="icon" />
       </template>
       <template #tooltip>
@@ -45,13 +54,13 @@
                    { 'dt-recipe--callbar-button-with-dropdown--arrow--large': !isCompactMode }]"
           :circle="true"
           importance="clear"
-          size="lg"
+          :size="400"
           :aria-label="arrowButtonLabel"
           :title="arrowButtonLabel"
           width="2rem"
           @click="arrowClick"
         >
-          <template #icon>
+          <template #startIcon>
             <dt-icon-chevron-up
               class="dt-recipe--callbar-button-with-dropdown--arrow__icon"
               size="200"
@@ -72,7 +81,7 @@
 <script>
 import { DtButton } from '@/components/button';
 import { DtDropdown } from '@/components/dropdown';
-import { DtIconChevronUp } from '@dialpad/dialtone-icons/vue3';
+import { DtIconChevronUp } from '@dialpad/dialtone-icons/vue';
 import { DtRecipeCallbarButton, CALLBAR_BUTTON_VALID_WIDTH_SIZE } from '../callbar_button';
 import utils, { warnIfUnmounted, removeClassStyleAttrs, addClassStyleAttrs, returnFirstEl } from '@/common/utils';
 import { DialtoneLocalization } from '@/localization';

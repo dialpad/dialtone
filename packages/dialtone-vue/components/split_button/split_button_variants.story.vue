@@ -1,7 +1,7 @@
 <template>
   <dt-stack
-    gap="500"
-    class="d-px8"
+    gap="200"
+    class="d-px-100"
   >
     <h2>Variants</h2>
     <table class="d-table d-bt d-bb d-bbw2">
@@ -23,12 +23,10 @@
         <tr
           v-for="kind in kinds"
           :key="kind"
-          :class="{ 'd-bgc-contrast': kind === 'inverted' }"
         >
           <th
             class="d-ta-right d-ba d-brw2"
             scope="row"
-            :class="{ 'd-bc-default-inverted d-fc-primary-inverted': kind === 'inverted' }"
           >
             <span
               class="d-headline--eyebrow"
@@ -38,8 +36,7 @@
           <td
             v-for="importance in importanceList"
             :key="`${kind}-${importance}`"
-            class="d-ta-center d-br"
-            :class="[kind === 'inverted' ? 'd-bc-default-inverted' : 'd-bc-default']"
+            class="d-ta-center d-br d-bc-default"
           >
             <abbr
               v-if="isInvalidCombination({ kind, importance })"
@@ -48,12 +45,11 @@
             >N/A</abbr>
             <dt-stack
               v-else
-              gap="500"
+              gap="200"
               class="d-jc-center"
             >
               <div>
                 <dt-split-button
-                  size="xs"
                   :kind="kind"
                   :importance="importance"
                   :end-tooltip-text="endTooltipText"
@@ -79,16 +75,16 @@
     </table>
     <dt-stack
       direction="row"
-      gap="500"
+      gap="200"
       class="d-ai-stretch d-jc-flex-start d-fw-wrap"
     >
       <!-- Sizes  -->
       <dt-stack
-        gap="500"
-        class="d-br d-pr16"
+        gap="200"
+        class="d-br d-pie-200"
       >
         <h2>Sizes</h2>
-        <dt-stack gap="500">
+        <dt-stack gap="200">
           <div
             v-for="size in sizes"
             :key="size"
@@ -109,18 +105,18 @@
       </dt-stack>
       <!-- With start icon  -->
       <dt-stack
-        gap="500"
-        class="d-br d-pr16"
+        gap="200"
+        class="d-br d-pie-200"
       >
         <h2>With start icon</h2>
-        <dt-stack gap="500">
+        <dt-stack gap="200">
           <div
             v-for="position in iconPositions"
             :key="position"
             class="d-ta-center"
           >
             <dt-split-button
-              size="xs"
+              :size="100"
               :start-icon-position="position"
               :end-tooltip-text="endTooltipText"
               :end-aria-label="endAriaLabel"
@@ -141,11 +137,11 @@
       </dt-stack>
       <!-- With custom end icon  -->
       <dt-stack
-        gap="500"
-        class="d-br d-pr16"
+        gap="200"
+        class="d-br d-pie-200"
       >
         <h2>With custom end icon</h2>
-        <dt-stack gap="500">
+        <dt-stack gap="200">
           <div
             v-for="size in sizes"
             :key="size"
@@ -169,13 +165,13 @@
       </dt-stack>
       <!-- Status  -->
       <dt-stack
-        gap="500"
-        class="d-br d-pr16"
+        gap="200"
+        class="d-br d-pie-200"
       >
         <h2>Status</h2>
-        <dt-stack gap="500">
+        <dt-stack gap="200">
           <dt-split-button
-            size="xs"
+            :size="100"
             :start-active="true"
             :end-tooltip-text="endTooltipText"
             :end-aria-label="endAriaLabel"
@@ -183,7 +179,7 @@
             Start active
           </dt-split-button>
           <dt-split-button
-            size="xs"
+            :size="100"
             :end-active="true"
             :end-tooltip-text="endTooltipText"
             :end-aria-label="endAriaLabel"
@@ -191,7 +187,7 @@
             End active
           </dt-split-button>
           <dt-split-button
-            size="xs"
+            :size="100"
             :start-active="true"
             :end-active="true"
             :end-tooltip-text="endTooltipText"
@@ -200,7 +196,7 @@
             Both active
           </dt-split-button>
           <dt-split-button
-            size="xs"
+            :size="100"
             :start-loading="true"
             start-aria-label="loading"
             :end-tooltip-text="endTooltipText"
@@ -210,13 +206,13 @@
       </dt-stack>
       <!-- Disabled  -->
       <dt-stack
-        gap="500"
-        class="d-br d-bc-default d-pr16"
+        gap="200"
+        class="d-br d-bc-default d-pie-200"
       >
         <h2>Disabled</h2>
-        <dt-stack gap="500">
+        <dt-stack gap="200">
           <dt-split-button
-            size="xs"
+            :size="100"
             :start-disabled="true"
             :end-tooltip-text="endTooltipText"
             :end-aria-label="endAriaLabel"
@@ -224,7 +220,7 @@
             Start disabled
           </dt-split-button>
           <dt-split-button
-            size="xs"
+            :size="100"
             :end-disabled="true"
             :end-tooltip-text="endTooltipText"
             :end-aria-label="endAriaLabel"
@@ -232,7 +228,7 @@
             End disabled
           </dt-split-button>
           <dt-split-button
-            size="xs"
+            :size="100"
             :disabled="true"
             :end-tooltip-text="endTooltipText"
             :end-aria-label="endAriaLabel"
@@ -243,13 +239,13 @@
       </dt-stack>
       <!-- With tooltip -->
       <dt-stack
-        gap="500"
-        class="d-br d-bc-default d-pr16"
+        gap="200"
+        class="d-br d-bc-default d-pie-200"
       >
         <h2>Disabled</h2>
-        <dt-stack gap="500">
+        <dt-stack gap="200">
           <dt-split-button
-            size="xs"
+            :size="100"
             :start-disabled="true"
             :end-tooltip-text="endTooltipText"
             :end-aria-label="endAriaLabel"
@@ -257,7 +253,7 @@
             Start disabled
           </dt-split-button>
           <dt-split-button
-            size="xs"
+            :size="100"
             :end-disabled="true"
             :end-tooltip-text="endTooltipText"
             :end-aria-label="endAriaLabel"
@@ -265,7 +261,7 @@
             End disabled
           </dt-split-button>
           <dt-split-button
-            size="xs"
+            :size="100"
             :disabled="true"
             :end-tooltip-text="endTooltipText"
             :end-aria-label="endAriaLabel"
@@ -276,13 +272,13 @@
       </dt-stack>
       <!-- With tooltip -->
       <dt-stack
-        gap="500"
-        class="d-br d-pr16"
+        gap="200"
+        class="d-br d-pie-200"
       >
         <h2>With tooltip</h2>
-        <dt-stack gap="500">
+        <dt-stack gap="200">
           <dt-split-button
-            size="xs"
+            :size="100"
             start-tooltip-text="Hover text"
             :end-tooltip-text="endTooltipText"
             :end-aria-label="endAriaLabel"
@@ -290,14 +286,14 @@
             Hover me
           </dt-split-button>
           <dt-split-button
-            size="xs"
+            :size="100"
             :end-tooltip-text="endTooltipText"
             :end-aria-label="endAriaLabel"
           >
             Hover end
           </dt-split-button>
           <dt-split-button
-            size="xs"
+            :size="100"
             start-tooltip-text="Start tooltip"
             :end-tooltip-text="endTooltipText"
             :end-aria-label="endAriaLabel"
@@ -308,11 +304,11 @@
       </dt-stack>
       <!-- Icon-only  -->
       <dt-stack
-        gap="500"
-        class="d-br d-pr16"
+        gap="200"
+        class="d-br d-pie-200"
       >
         <h2>Icon only</h2>
-        <dt-stack gap="500">
+        <dt-stack gap="200">
           <div
             v-for="size in sizes"
             :key="`icon-only-${size}`"
@@ -397,7 +393,7 @@ export default {
       },
 
       sizes: Object.keys(BUTTON_SIZE_MODIFIERS),
-      kinds: Object.keys(BUTTON_KIND_MODIFIERS),
+      kinds: Object.keys(BUTTON_KIND_MODIFIERS).filter(k => k !== 'inverted'),
       importanceList: Object.keys(BUTTON_IMPORTANCE_MODIFIERS),
       iconPositions: Object.keys(ICON_POSITION_MODIFIERS),
       listItems: [

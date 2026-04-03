@@ -2,30 +2,30 @@
 <template>
   <div>
     <dt-stack
-      gap="700"
-      class="d-p32"
+      gap="500"
+      class="d-p-400"
     >
       <!-- Kind Examples -->
       <section>
         <dt-text
           as="h2"
           kind="headline"
-          size="2xl"
+          :size="600"
         >
           Kind Examples
         </dt-text>
-        <dt-stack gap="500">
+        <dt-stack gap="200">
           <div>
             <dt-text
               as="h3"
               kind="headline"
-              size="xl"
+              :size="500"
             >
               Headline
             </dt-text>
-            <div class="d-ba d-bc-default d-p16 d-bar8">
+            <div class="d-ba d-bc-default d-p-200 d-bar8">
               <dt-stack
-                gap="400"
+                gap="100"
                 direction="row"
                 align="baseline"
               >
@@ -45,13 +45,13 @@
             <dt-text
               as="h3"
               kind="headline"
-              size="xl"
+              :size="500"
             >
               Body
             </dt-text>
-            <div class="d-ba d-bc-default d-p16 d-bar8">
+            <div class="d-ba d-bc-default d-p-200 d-bar8">
               <dt-stack
-                gap="400"
+                gap="100"
                 direction="row"
                 align="baseline"
               >
@@ -71,13 +71,13 @@
             <dt-text
               as="h3"
               kind="headline"
-              size="xl"
+              :size="500"
             >
               Label
             </dt-text>
-            <div class="d-ba d-bc-default d-p16 d-bar8">
+            <div class="d-ba d-bc-default d-p-200 d-bar8">
               <dt-stack
-                gap="400"
+                gap="100"
                 direction="row"
                 align="baseline"
               >
@@ -97,13 +97,13 @@
             <dt-text
               as="h3"
               kind="headline"
-              size="xl"
+              :size="500"
             >
               Code
             </dt-text>
-            <div class="d-ba d-bc-default d-p16 d-bar8">
+            <div class="d-ba d-bc-default d-p-200 d-bar8">
               <dt-stack
-                gap="400"
+                gap="100"
                 direction="row"
                 align="baseline"
               >
@@ -126,30 +126,30 @@
         <dt-text
           as="h2"
           kind="headline"
-          size="2xl"
+          :size="600"
         >
           Strength Examples
         </dt-text>
-        <dt-stack gap="500">
+        <dt-stack gap="200">
           <div>
             <dt-text
               as="h3"
               kind="headline"
-              size="xl"
+              :size="500"
             >
               Font Weight Modifiers
             </dt-text>
-            <div class="d-ba d-bc-default d-p16 d-bar8">
+            <div class="d-ba d-bc-default d-p-200 d-bar8">
               <dt-stack
                 direction="row"
-                gap="500"
+                gap="200"
                 align="baseline"
               >
                 <dt-text
                   v-for="item in strengthExamples"
                   :key="item.strength"
                   kind="headline"
-                  size="2xl"
+                  :size="600"
                   :strength="item.strength"
                 >
                   {{ item.copy }}
@@ -165,22 +165,22 @@
         <dt-text
           as="h2"
           kind="headline"
-          size="2xl"
+          :size="600"
         >
           Density Examples
         </dt-text>
-        <dt-stack gap="500">
+        <dt-stack gap="200">
           <div>
             <dt-text
               as="h3"
               kind="headline"
-              size="xl"
+              :size="500"
             >
               Line Height Modifiers
             </dt-text>
-            <div class="d-ba d-bc-default d-p16 d-bar8">
+            <div class="d-ba d-bc-default d-p-200 d-bar8">
               <dt-stack
-                gap="400"
+                gap="100"
                 direction="row"
                 align="baseline"
               >
@@ -206,16 +206,16 @@
         <dt-text
           as="h2"
           kind="headline"
-          size="2xl"
+          :size="600"
         >
           Tone Examples
         </dt-text>
-        <dt-stack gap="500">
+        <dt-stack gap="200">
           <div>
-            <div class="d-ba d-bc-default d-p16 d-bar8">
+            <div class="d-ba d-bc-default d-p-200 d-bar8">
               <dt-stack
                 direction="row"
-                gap="400"
+                gap="100"
                 class="d-fw-wrap"
               >
                 <dt-text
@@ -228,24 +228,6 @@
               </dt-stack>
             </div>
           </div>
-
-          <div>
-            <div class="d-ba d-bc-default d-p16 d-bar8 d-bgc-primary-inverted">
-              <dt-stack
-                direction="row"
-                gap="400"
-                class="d-fw-wrap"
-              >
-                <dt-text
-                  v-for="tone in invertedToneExamples"
-                  :key="tone"
-                  :tone="tone"
-                >
-                  {{ tone }}
-                </dt-text>
-              </dt-stack>
-            </div>
-          </div>
         </dt-stack>
       </section>
 
@@ -254,11 +236,11 @@
         <dt-text
           as="h2"
           kind="headline"
-          size="2xl"
+          :size="600"
         >
           Alignment Examples
         </dt-text>
-        <dt-stack gap="500">
+        <dt-stack gap="200">
           <div
             v-for="item in alignExamples"
             :key="item.align"
@@ -266,11 +248,11 @@
             <dt-text
               as="h4"
               kind="headline"
-              size="lg"
+              :size="400"
             >
               {{ item.align.charAt(0).toUpperCase() + item.align.slice(1) }}
             </dt-text>
-            <div class="d-ba d-bc-default d-p16 d-bar8">
+            <div class="d-ba d-bc-default d-p-200 d-bar8">
               <dt-text
                 as="div"
                 :align="item.align"
@@ -287,20 +269,20 @@
         <dt-text
           as="h2"
           kind="headline"
-          size="2xl"
+          :size="600"
         >
           Truncation Examples
         </dt-text>
-        <dt-stack gap="500">
+        <dt-stack gap="200">
           <div>
             <dt-text
               as="h3"
               kind="headline"
-              size="xl"
+              :size="500"
             >
               Single Line (truncate)
             </dt-text>
-            <div class="d-ba d-bc-default d-p16 d-bar8">
+            <div class="d-ba d-bc-default d-p-200 d-bar8">
               <dt-text
                 as="p"
                 truncate
@@ -321,18 +303,18 @@
             <dt-text
               as="h3"
               kind="headline"
-              size="xl"
+              :size="500"
             >
               Multi Line (maxLines)
             </dt-text>
             <dt-stack
-              class="d-ba d-bc-default d-p16 d-bar8"
-              gap="500"
+              class="d-ba d-bc-default d-p-200 d-bar8"
+              gap="200"
             >
               <dt-text
                 as="div"
                 :max-lines="4"
-                class="d-w256"
+                class="d-w-400"
               >
                 <strong>4 lines:</strong> Clamp multi-line content to three lines for summary views.
                 This text will be truncated after three lines with an ellipsis
@@ -347,7 +329,7 @@
               <dt-text
                 as="div"
                 :max-lines="3"
-                class="d-w256"
+                class="d-w-400"
               >
                 <strong>3 lines:</strong> Clamp multi-line content to three lines for summary views.
                 This text will be truncated after three lines with an ellipsis
@@ -362,7 +344,7 @@
               <dt-text
                 as="div"
                 :max-lines="2"
-                class="d-w256"
+                class="d-w-400"
               >
                 <strong>2 lines:</strong> Clamp multi-line content to three lines for summary views.
                 This text will be truncated after three lines with an ellipsis
@@ -384,11 +366,11 @@
         <dt-text
           as="h2"
           kind="headline"
-          size="2xl"
+          :size="600"
         >
           Wrap Examples
         </dt-text>
-        <dt-stack gap="500">
+        <dt-stack gap="200">
           <div
             v-for="item in wrapExamples"
             :key="item.wrap"
@@ -396,14 +378,14 @@
             <dt-text
               as="h4"
               kind="headline"
-              size="lg"
+              :size="400"
             >
               {{ item.wrap.charAt(0).toUpperCase() + item.wrap.slice(1) }}
             </dt-text>
-            <div class="d-ba d-bc-default d-of-hidden d-p16 d-bar8 d-w192">
+            <div class="d-ba d-bc-default d-of-hidden d-p-200 d-bar8">
               <dt-text
                 kind="headline"
-                size="md"
+                :size="300"
                 :wrap="item.wrap"
               >
                 {{ item.copy }}
@@ -418,7 +400,7 @@
         <dt-text
           as="h2"
           kind="headline"
-          size="2xl"
+          :size="600"
         >
           Trim Examples
         </dt-text>
@@ -430,9 +412,9 @@
           Text box trim removes extra space above/below text for tighter layouts
         </dt-text>
         <dt-stack
-          gap="500"
+          gap="200"
           direction="row"
-          class="d-ba d-bc-default d-p16 d-bar8"
+          class="d-ba d-bc-default d-p-200 d-bar8"
         >
           <template
             v-for="item in textBoxTrimExamples"
@@ -440,7 +422,7 @@
           >
             <dt-text
               kind="headline"
-              size="3xl"
+              :size="700"
               :text-box-trim="item.textBoxTrim"
               class="d-bgc-moderate-opaque"
             >
@@ -455,21 +437,21 @@
         <dt-text
           as="h2"
           kind="headline"
-          size="2xl"
+          :size="600"
         >
           Numeric Examples
         </dt-text>
-        <dt-stack gap="500">
+        <dt-stack gap="200">
           <div>
             <dt-text
               as="h3"
               kind="headline"
-              size="xl"
+              :size="500"
             >
               Tabular Figures
             </dt-text>
-            <div class="d-ba d-bc-default d-p16 d-bar8">
-              <dt-stack gap="200">
+            <div class="d-ba d-bc-default d-p-200 d-bar8">
+              <dt-stack gap="50">
                 <dt-text numeric>
                   00123456789 (numeric)
                 </dt-text>

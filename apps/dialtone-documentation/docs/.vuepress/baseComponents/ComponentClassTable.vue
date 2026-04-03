@@ -5,26 +5,26 @@
         <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
           <tr>
             <th
-              class="d-w40p d-p0 d-bbw0"
+              class="d-w40p d-p-0 d-bbw0"
               scope="col"
             >
-              <div class="d-p16 d-bb d-bbw1">
+              <div class="d-p-200 d-bb d-bbw1">
                 Class
               </div>
             </th>
             <th
-              class="d-w30p d-p0 d-bbw0"
+              class="d-w30p d-p-0 d-bbw0"
               scope="col"
             >
-              <div class="d-p16 d-bb d-bbw1">
+              <div class="d-p-200 d-bb d-bbw1">
                 Applies to
               </div>
             </th>
             <th
-              class="d-p0 d-bbw0"
+              class="d-p-0 d-bbw0"
               scope="col"
             >
-              <div class="d-p16 d-bb d-bbw1">
+              <div class="d-p-200 d-bb d-bbw1">
                 Description
               </div>
             </th>
@@ -34,22 +34,34 @@
           <tr
             v-for="({ class: className, applies, description }) in classes"
             :key="className"
+            valign="baseline"
           >
             <th
               scope="row"
-              class="d-code--sm d-docsite-code"
-              v-text="className.startsWith('data-') ? className : `.${className}`"
-            />
-            <td class="d-code--sm">
-              <span
+            >
+              <dt-text
+                as="span"
+                kind="code"
+                :size="100"
+                class="d-docsite-code"
+              >
+                {{ className.startsWith('data-') ? className : `.${className}` }}
+              </dt-text>
+            </th>
+            <td>
+              <dt-text
+                as="code"
+                kind="code"
+                :size="100"
                 class="code-example--inline"
-                v-text="applies"
-              />
+              >
+                {{ applies }}
+              </dt-text>
             </td>
-            <td
-              class="d-fs-100 d-lh-300"
-              v-text="description"
-            />
+            <td>
+              <!-- eslint-disable-next-line vue/no-v-text-v-html-on-component -->
+              <dt-text kind="body" :size="200" v-html="description" />
+            </td>
           </tr>
         </tbody>
       </table>

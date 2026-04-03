@@ -51,6 +51,10 @@ export const argTypesData = {
       },
     },
   },
+  inverted: {
+    table: { category: 'Deprecated' },
+    description: 'Deprecated.',
+  },
 };
 
 // Story Collection

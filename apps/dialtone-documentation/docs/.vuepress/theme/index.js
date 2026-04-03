@@ -5,6 +5,8 @@ import { backToTopPlugin } from '@vuepress/plugin-back-to-top';
 import { gitPlugin } from '@vuepress/plugin-git';
 import { sitemapPlugin } from 'vuepress-plugin-sitemap2';
 import markdownItClass from '@toycode/markdown-it-class';
+import fencedDemoPlugin from '../plugins/markdown-it-fenced-demo.js';
+import codeExampleSourcePlugin from '../plugins/markdown-it-code-example-source.js';
 import { getDirname, path } from 'vuepress/utils'
 
 const __dirname = getDirname(import.meta.url);
@@ -261,11 +263,23 @@ export const dialtoneVuepressTheme = (options) => ({
       }),
       sitemapPlugin({
         hostname: 'https://dialtone.dialpad.com',
+        changefreq: 'weekly',
+        modifyTimeGetter: (page) =>
+          page.git?.updatedTime
+            ? new Date(page.git.updatedTime).toISOString()
+            : new Date().toISOString(),
+        excludePaths: ['/404.html'],
       }),
     ],
 
   extendsMarkdown: (md) => {
+      // Transform ```vue demo fenced blocks into <code-example> HTML
+      md.use(fencedDemoPlugin);
+
       md.use(markdownItClass, mapping);
+
+      // Auto-extract slot source from <code-example> blocks for the Vue code tab
+      md.use(codeExampleSourcePlugin);
     },
 
     onInitialized (app) {

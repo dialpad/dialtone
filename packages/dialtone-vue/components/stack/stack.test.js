@@ -115,9 +115,9 @@ describe('DtStack Tests', () => {
   describe('When `gap` prop is provided with', () => {
     describe('valid string value', () => {
       it('should set proper gap class', async () => {
-        await wrapper.setProps({ gap: '300' });
+        await wrapper.setProps({ gap: '50' });
 
-        expect(wrapper.classes().includes('d-stack--gap-300')).toBe(true);
+        expect(wrapper.classes().includes('d-stack--gap-50')).toBe(true);
       });
     });
 
@@ -152,7 +152,7 @@ describe('DtStack Tests', () => {
         it('should override the default value', async () => {
           await wrapper.setProps({ gap: { default: '500' } });
 
-          expect(wrapper.classes('d-stack', 'd-stack--gap-500')).toBe(true);
+          expect(wrapper.classes('d-stack', 'd-stack--gap-200')).toBe(true);
         });
       });
     });

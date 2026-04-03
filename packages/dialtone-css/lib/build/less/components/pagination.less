@@ -17,7 +17,7 @@
 .d-pagination {
   display: flex;
   flex-direction: row;
-  gap: var(--dt-size-200);
+  gap: var(--dt-spacing-25);
   align-items: center;
 }
 
@@ -25,12 +25,7 @@
 //  $   PREV & NEXT BUTTONS
 //  ----------------------------------------------------------------------------
 .d-pagination__button {
-  padding-inline: var(--dt-size-400);
-
-  &:disabled {
-    color: var(--dt-color-foreground-secondary-inverted);
-    background-color: var(--dt-color-neutral-transparent);
-  }
+  padding-inline: var(--dt-spacing-100);
 }
 
 //  ============================================================================
@@ -41,8 +36,8 @@
 }
 
 .d-pagination__item-label {
-  letter-spacing: var(--dt-size-100-negative);
-  padding-inline-end: var(--dt-size-100);
+  letter-spacing: var(--dt-spacing-1-negative);
+  padding-inline-end: var(--dt-spacing-1);
 }
 
 //  ============================================================================
@@ -53,7 +48,7 @@
 }
 
 .d-pagination__separator-icon {
-  inline-size: var(--dt-size-550);
+  inline-size: calc(var(--dt-layout-25) * 1.5);
   color: var(--dt-color-foreground-tertiary);
   text-align: center;
 }

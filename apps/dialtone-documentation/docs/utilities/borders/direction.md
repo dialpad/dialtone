@@ -10,12 +10,12 @@ Use `d-ba` to add a border to all sides of your element.
 
 <code-well-header>
   <dt-stack
-    gap="500"
+    gap="200"
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
     <div
       v-for="width in [0, 1, 2, 4]"
-      class="d-p16 d-ba d-bgc-primary"
+      class="d-p-200 d-ba d-bgc-primary"
       :class="`d-baw${width}`"
     >
       d-baw{{ width }}
@@ -24,10 +24,10 @@ Use `d-ba` to add a border to all sides of your element.
 </code-well-header>
 
 ```html
-<div class="d-p16 d-ba d-baw0 d-bgc-primary">d-baw0</div>
-<div class="d-p16 d-ba d-baw1 d-bgc-primary">d-baw1</div>
-<div class="d-p16 d-ba d-baw2 d-bgc-primary">d-baw2</div>
-<div class="d-p16 d-ba d-baw4 d-bgc-primary">d-baw4</div>
+<div class="d-p-200 d-ba d-baw0 d-bgc-primary">d-baw0</div>
+<div class="d-p-200 d-ba d-baw1 d-bgc-primary">d-baw1</div>
+<div class="d-p-200 d-ba d-baw2 d-bgc-primary">d-baw2</div>
+<div class="d-p-200 d-ba d-baw4 d-bgc-primary">d-baw4</div>
 ```
 
 ## Individual Sides
@@ -36,12 +36,12 @@ Use `d-b{t|r|b|l|x|y}` to add a border to only specific sides of your element.
 
 <code-well-header>
   <dt-stack
-    gap="500"
+    gap="200"
     :direction="{ 'default': 'column', 'md': 'row' }"
   >
     <div
       v-for="side in ['t', 'r', 'b', 'l', 'x', 'y', 'a']"
-      class="d-p16 d-baw4 d-bgc-primary"
+      class="d-p-200 d-baw4 d-bgc-primary"
       :class="`d-b${side}`"
     >
       d-b{{ side }}
@@ -50,13 +50,13 @@ Use `d-b{t|r|b|l|x|y}` to add a border to only specific sides of your element.
 </code-well-header>
 
 ```html
-<div class="d-p16 d-bt d-baw4 d-bgc-primary">d-bt</div>
-<div class="d-p16 d-br d-baw4 d-bgc-primary">d-br</div>
-<div class="d-p16 d-bb d-baw4 d-bgc-primary">d-bb</div>
-<div class="d-p16 d-bl d-baw4 d-bgc-primary">d-bl</div>
-<div class="d-p16 d-bx d-baw4 d-bgc-primary">d-bx</div>
-<div class="d-p16 d-by d-baw4 d-bgc-primary">d-by</div>
-<div class="d-p16 d-ba d-baw4 d-bgc-primary">d-ba</div>
+<div class="d-p-200 d-bt d-baw4 d-bgc-primary">d-bt</div>
+<div class="d-p-200 d-br d-baw4 d-bgc-primary">d-br</div>
+<div class="d-p-200 d-bb d-baw4 d-bgc-primary">d-bb</div>
+<div class="d-p-200 d-bl d-baw4 d-bgc-primary">d-bl</div>
+<div class="d-p-200 d-bx d-baw4 d-bgc-primary">d-bx</div>
+<div class="d-p-200 d-by d-baw4 d-bgc-primary">d-by</div>
+<div class="d-p-200 d-ba d-baw4 d-bgc-primary">d-ba</div>
 ```
 
 <script setup>
@@ -72,18 +72,18 @@ Use `d-b{t|r|b|l|x|y}` to add a border to only specific sides of your element.
         <th scope="row" class="d-code--sm d-docsite-code">.d-b{{ i[0] }}</th>
         <td class="d-code--sm">
           <span v-if="i === 'y'">
-            border-block-start: var(--dt-size-100) solid !important;<br/>
-            border-block-end: var(--dt-size-100) solid !important;
+            border-block-start: var(--dt-size-border-100) solid !important;<br/>
+            border-block-end: var(--dt-size-border-100) solid !important;
           </span>
           <span v-else-if="i === 'x'">
-            border-inline-end: var(--dt-size-100) solid !important;<br/>
-            border-inline-start: var(--dt-size-100) solid !important;
+            border-inline-end: var(--dt-size-border-100) solid !important;<br/>
+            border-inline-start: var(--dt-size-border-100) solid !important;
           </span>
           <span v-else-if="i === 'all'">
-            border: var(--dt-size-100) solid !important;
+            border: var(--dt-size-border-100) solid !important;
           </span>
           <span v-else>
-            border-{{ i === 'top' ? 'block-start' : i === 'bottom' ? 'block-end' : i === 'left' ? 'inline-start' : i === 'right' ? 'inline-end' : i }}: var(--dt-size-100) solid !important;
+            border-{{ i === 'top' ? 'block-start' : i === 'bottom' ? 'block-end' : i === 'left' ? 'inline-start' : i === 'right' ? 'inline-end' : i }}: var(--dt-size-border-100) solid !important;
           </span>
         </td>
       </tr>

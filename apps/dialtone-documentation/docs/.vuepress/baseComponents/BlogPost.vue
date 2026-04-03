@@ -1,11 +1,11 @@
 <!-- eslint-disable max-len -->
 <template>
   <article class="blog-post">
-    <dt-stack as="section" gap="400">
+    <dt-stack as="section" gap="100">
       <component
         :is="isPreview ? 'h2' : 'h1'"
-        class="d-d-flex d-g8"
-        :class="isPreview ? 'd-docsite--header-3 d-mt0' : 'dialtone-page-title'"
+        class="d-d-flex d-g-100"
+        :class="isPreview ? 'd-docsite--header-3 d-mbs-0' : 'dialtone-page-title'"
       >
         <div>
           {{ heading }}
@@ -16,17 +16,17 @@
           aria-label="Copy post link"
         />
       </component>
-      <dt-stack as="section" direction="row" gap="400">
+      <dt-stack as="section" direction="row" gap="100">
         <dt-avatar
-          size="md"
+          :size="300"
           :seed="author"
           :full-name="author"
         />
         <dt-stack>
-          <dt-text size="sm" kind="label" tone="secondary" density="200">
+          <dt-text :size="200" kind="label" tone="secondary" density="200">
             {{ author }}
           </dt-text>
-          <dt-text as="time" size="sm" kind="body" tone="tertiary">
+          <dt-text as="time" :size="200" kind="body" tone="tertiary">
             {{ format(posted, 'MMMM do, y') }}
           </dt-text>
         </dt-stack>
@@ -34,11 +34,11 @@
       <dt-text
         v-if="excerpt"
         as="p"
-        :size="isPreview ? 'md' : 'lg'"
+        :size="isPreview ? 300 : 400"
         kind="body"
         tone="tertiary"
-        class="d-mt8"
-        :class="isPreview ? '' : 'd-bb d-bc-subtle d-pb24'"
+        class="d-mbs-100"
+        :class="isPreview ? '' : 'd-bb d-bc-subtle d-pbe-300'"
         wrap="pretty"
       >
         {{ excerpt }}
@@ -86,29 +86,41 @@ const blogLink = computed(() => {
 <style lang="less">
 .blog-post-content {
   .d-docsite--header-2:first-of-type {
-    margin-block-start: var(--dt-size-500);
+    margin-block-start: var(--dt-spacing-200);
   }
   > table:not([class]) {
-    border: 1px solid var(--dt-color-border-subtle);
+    color: var(--dt-color-foreground-tertiary);
     border-collapse: collapse;
-    margin: var(--dt-size-200) 0;
+    margin: var(--dt-spacing-200) 0;
     inline-size: 100%;
+    font: var(--dt-text-body-sm);
 
-    th {
-      font: var(--dt-text-label-sm);
+    :where(th) {
+      font: var(--dt-text-label-xs);
       color: var(--dt-color-foreground-secondary);
+      text-transform: uppercase;
+      line-height: var(--dt-font-line-height-100);
     }
 
-    th, td {
+
+    :where(th, td) {
       text-align: start;
-      border: 1px solid var(--dt-color-border-subtle);
-      border-inline: 0;
-      padding: var(--dt-size-400);
+      border-block-end: var(--dt-size-border-100) solid var(--dt-color-border-default);
+      padding: var(--dt-spacing-200);
+      vertical-align: baseline;
     }
 
-    code {
+    :where(thead th) {
+      border-block-end-width: var(--dt-size-border-200);
+    }
+
+    :where(tbody tr:last-of-type) :where(td, th) {
+      border-block-end: none;
+    }
+
+    :where(code, kbd) {
       background-color: var(--dt-color-background-default);
-      padding: var(--dt-size-200);
+      color: var(--dt-color-blue-800);
       font: var(--dt-text-code-xs);
     }
   }

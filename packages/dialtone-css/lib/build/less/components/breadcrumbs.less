@@ -13,7 +13,7 @@
 
 @layer dialtone.components {
 .d-breadcrumbs {
-    --breadcrumbs-font-size: var(--dt-font-size-200);
+    --breadcrumbs-font-size: var(--dt-font-size-150);
     --breadcrumbs-line-height: var(--dt-font-line-height-300);
     --breadcrumbs-color-separator: var(--dt-color-foreground-muted);
     --breadcrumbs-color-text: var(--dt-color-link-muted);
@@ -30,15 +30,13 @@
     //  $  WRAPPER
     //  ----------------------------------------------------------------------------
 
-    > ol {
+    &__list {
         display: flex;
         flex-wrap: wrap;
         align-items: flex-start;
         box-sizing: border-box;
         margin: 0;
         padding: 0;
-        font-size: var(--breadcrumbs-font-size);
-        line-height: var(--breadcrumbs-line-height);
         list-style: none;
     }
 
@@ -47,32 +45,26 @@
     //  ----------------------------------------------------------------------------
     &__item {
         position: relative;
-        margin-inline: var(--dt-size-400) 0;
-        margin-block: 0;
         padding: 0;
+        font-size: var(--breadcrumbs-font-size);
+        line-height: var(--breadcrumbs-line-height);
         list-style: none;
+        margin-inline: var(--dt-spacing-100) 0;
+        margin-block: 0;
 
         //  Provide a forward slash with each element except when it's the last one.
         &:not(:last-of-type) {
-            margin-inline-end: var(--dt-size-450);
+            margin-inline-end: var(--dt-spacing-150);
 
             &::before {
                 position: absolute;
-                inset-inline-end: var(--dt-size-450-negative);
-                margin-block-start: var(--dt-size-100-negative);
                 color: var(--breadcrumbs-color-separator);
                 content: '/';
+                inset-inline-end: var(--dt-spacing-150-negative);
+                margin-block-start: var(--dt-spacing-1-negative);
             }
         }
 
-        .d-link {
-            color: var(--breadcrumbs-color-text);
-            text-decoration: none;
-
-            &:hover {
-                text-decoration: underline;
-            }
-        }
 
         //  --  SELECTED STATE (CURRENT PAGE)
         &--selected {
@@ -84,6 +76,15 @@
             .d-breadcrumbs--inverted & {
                 --breadcrumbs-color-text: var(--dt-color-foreground-primary-inverted);
             }
+        }
+    }
+
+    &__link {
+        color: var(--breadcrumbs-color-text);
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
         }
     }
 }

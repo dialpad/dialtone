@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils';
 import { DtKeyboardShortcut } from '@/components/keyboard_shortcut';
+import { DtText } from '@/components/text';
 import { SHORTCUTS_ALIASES_LIST } from './keyboard_shortcut_constants';
 
 const baseProps = {
@@ -35,6 +36,30 @@ describe('DtKeyboardShortcut Tests', () => {
 
     it('should render 13 icons', () => {
       expect(iconComponents.length === 13).toBe(true);
+    });
+  });
+
+  describe('DtText Rendering', () => {
+    it('should render text items as DtText with tone="tertiary"', () => {
+      mockProps = { shortcut: 'X' };
+
+      updateWrapper();
+
+      const dtText = wrapper.findComponent(DtText);
+
+      expect(dtText.exists()).toBe(true);
+      expect(dtText.props('tone')).toBe('tertiary');
+    });
+
+    it('should render inverted text items as DtText with tone="secondary-inverted"', () => {
+      mockProps = { shortcut: 'X', inverted: true };
+
+      updateWrapper();
+
+      const dtText = wrapper.findComponent(DtText);
+
+      expect(dtText.exists()).toBe(true);
+      expect(dtText.props('tone')).toBe('secondary-inverted');
     });
   });
 

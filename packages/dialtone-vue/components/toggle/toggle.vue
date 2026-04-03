@@ -4,7 +4,7 @@
     v-bind="addClassStyleAttrs($attrs)"
   >
     <label
-      v-if="hasSlotContent($slots.default)"
+      v-if="labelVisible && hasSlotContent($slots.default)"
       :class="labelClass"
       :for="id"
       v-bind="labelChildProps"
@@ -32,7 +32,6 @@
 </template>
 
 <script>
-import { warn } from 'vue';
 import { getUniqueString, hasSlotContent, removeClassStyleAttrs, addClassStyleAttrs } from '@/common/utils';
 import { TOGGLE_CHECKED_VALUES, TOGGLE_SIZE_MODIFIERS } from '@/components/toggle/toggle_constants';
 
@@ -89,12 +88,21 @@ export default {
 
     /**
      * The size of the toggle.
-     * @values sm, md
+     * @values 200, 300
      */
     size: {
-      type: String,
-      default: 'md',
-      validator: (s) => Object.keys(TOGGLE_SIZE_MODIFIERS).includes(s),
+      type: [String, Number],
+      default: 300,
+      validator: (s) => Object.keys(TOGGLE_SIZE_MODIFIERS).includes(String(s)),
+    },
+
+    /**
+     * Determines visibility of toggle label.
+     * @values true, false
+     */
+    labelVisible: {
+      type: Boolean,
+      default: true,
     },
 
     /**
@@ -177,7 +185,7 @@ export default {
     toggleClasses () {
       return [
         'd-toggle',
-        TOGGLE_SIZE_MODIFIERS[this.size],
+        TOGGLE_SIZE_MODIFIERS[String(this.size)],
         {
           'd-toggle--checked': this.internalChecked === true,
           'd-toggle--disabled': this.disabled,
@@ -213,14 +221,10 @@ export default {
     },
 
     runValidations () {
-      this.validateInputLabels(this.hasSlotLabel(), this.$attrs['aria-label']);
-    },
-
-    validateInputLabels (hasLabel, ariaLabel) {
-      if (!hasLabel && !ariaLabel) {
-        warn(
-          'You must provide an aria-label when there is no label passed',
-          this,
+      const hasVisibleLabel = this.labelVisible && this.hasSlotLabel();
+      if (!hasVisibleLabel && !this.$attrs['aria-label']) {
+        console.info(
+          '[Dialtone] A label is required for accessibility. Provide a label and use label-visible="false" to hide it visually.',
         );
       }
     },

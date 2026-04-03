@@ -51,5 +51,9 @@ describe('DtBreadcrumbItem Tests', () => {
         expect(wrapper.text()).toBe('Section');
       });
     });
+
+    it('should apply d-breadcrumbs__link class to the link element', () => {
+      expect(wrapper.find('[data-qa="breadcrumb-item"]').classes()).toContain('d-breadcrumbs__link');
+    });
   });
 });

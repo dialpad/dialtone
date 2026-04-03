@@ -4,13 +4,13 @@
       <table class="d-table dialtone-doc-table d-fc-primary">
         <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
           <tr>
-            <th class="d-w25p d-p0 d-bbw0" scope="col">
-              <div class="d-p16 d-bb d-bbw1">
+            <th class="d-w25p d-p-0 d-bbw0" scope="col">
+              <div class="d-p-200 d-bb d-bbw1">
                 Class
               </div>
             </th>
-            <th class="d-p0 d-bbw0" scope="col">
-              <div class="d-p16 d-bb d-bbw1">
+            <th class="d-p-0 d-bbw0" scope="col">
+              <div class="d-p-200 d-bb d-bbw1">
                 Output
               </div>
             </th>
@@ -21,16 +21,16 @@
             v-for="(value, className) in classes"
             :key="className"
           >
-            <th
-              scope="row"
-              class="d-code--sm d-docsite-code"
-              v-text="className"
-            />
-            <td
-              class="d-code--sm d-ws-break-spaces"
-            >
-              <dt-stack direction="row" justify="between" align="center" gap="500">
-                <span class="d-fl-grow1 d-code--sm" v-text="value" />
+            <th scope="row">
+              <dt-text as="span" kind="code" :size="100" class="d-docsite-code">
+                {{ className }}
+              </dt-text>
+            </th>
+            <td class="d-ws-break-spaces">
+              <dt-stack direction="row" justify="between" align="center" gap="200">
+                <dt-text as="span" kind="code" :size="100" class="d-fl-grow1">
+                  {{ value }}
+                </dt-text>
                 <slot name="example" :class-name="className" />
               </dt-stack>
             </td>

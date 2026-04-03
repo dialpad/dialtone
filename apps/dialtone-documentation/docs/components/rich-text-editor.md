@@ -6,20 +6,33 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-rich-text-ed
 keywords: ["rte", "wysiwyg", "markdown", "d-rte", "DtRichTextEditor", "dt-rich-text-editor", "content editor", "rich editor"]
 ---
 
-<code-well-header>
-  <example-rich-text-editor :modelValue="defaultValue" />
-</code-well-header>
+<dt-notice
+  title="Note"
+  kind="info"
+  class="d-wmx100p d-mbs-300"
+>
+  <span>Not a standalone component, please use Message Input instead</span>
+  <template #action>
+    <dt-button
+      :size="200"
+      importance="outlined"
+      kind="muted"
+      @click="onClick"
+    >
+      Action
+    </dt-button>
+  </template>
+</dt-notice>
+
+<component-combinator component-name="DtRichTextEditor" />
 
 ## Base Style
 
 The editor itself is without any styling and the intention is to wrap it with another component, such as Message Input, that provides the UI.
 
-<code-well-header>
-  <example-rich-text-editor :modelValue="defaultValue" />
-</code-well-header>
-
-<code-example-tabs
-vueCode='
+```vue demo
+<example-rich-text-editor :modelValue="defaultValue" />
+<!-- @code -->
 <dt-rich-text-editor
   v-model="value"
   :editable="true"
@@ -30,16 +43,15 @@ vueCode='
   placeholder="Type here..."
   :link="true"
 />
-'
-/>
+```
 
 ## With Links
 
-<code-well-header>
-  <example-rich-text-editor
-    modelValue="<p>The editor can autolink URLs: <a target='_blank' rel='noopener noreferrer nofollow' class='d-link d-wb-break-all' href='http://dialpad.com'>dialpad.com</a>, <a target='_blank' rel='noopener noreferrer nofollow' class='d-link d-wb-break-all' href='https://www.dialpad.com/about-us/'>https://www.dialpad.com/about-us/</a>, email addresses: <a target='_blank' rel='noopener noreferrer nofollow' class='d-link d-wb-break-all' href='mailto:noreply@dialpad.com'>noreply@dialpad.com</a></p>"
-  />
-</code-well-header>
+```vue demo-only
+<example-rich-text-editor
+  modelValue="<p>The editor can autolink URLs: <a target='_blank' rel='noopener noreferrer nofollow' class='d-link d-wb-break-all' href='http://dialpad.com'>dialpad.com</a>, <a target='_blank' rel='noopener noreferrer nofollow' class='d-link d-wb-break-all' href='https://www.dialpad.com/about-us/'>https://www.dialpad.com/about-us/</a>, email addresses: <a target='_blank' rel='noopener noreferrer nofollow' class='d-link d-wb-break-all' href='mailto:noreply@dialpad.com'>noreply@dialpad.com</a></p>"
+/>
+```
 
 ## Output Format
 
@@ -105,15 +117,12 @@ If this mentionSuggestion Object prop is not supplied, the mention plugin is dis
 
 To see it in action type char '@' into rich editor With channel mentions.
 
-<code-well-header>
-  <example-rich-text-editor
-    modelValue="<p>The editor can also suggest mentions: <mention-component name='Test Person' avatarsrc='' id='test.person'></mention-component>, <mention-component name='Test Person 2' avatarsrc='' id='test.person2'></mention-component>! The suggestions dropdown will wait 1000ms to simulate an API call.</p>"
-    :mentionSuggestion="{ items }"
-  />
-</code-well-header>
-
-<code-example-tabs
-vueCode='
+```vue demo
+<example-rich-text-editor
+  modelValue="<p>The editor can also suggest mentions: <mention-component name='Test Person' avatarsrc='' id='test.person'></mention-component>, <mention-component name='Test Person 2' avatarsrc='' id='test.person2'></mention-component>! The suggestions dropdown will wait 1000ms to simulate an API call.</p>"
+  :mentionSuggestion="{ items }"
+/>
+<!-- @code -->
 <dt-rich-text-editor
   v-model="value"
   :editable="true"
@@ -125,8 +134,7 @@ vueCode='
   :link="true"
   :mentionSuggestion="{ items }"
 />
-'
-/>
+```
 
 ## Vue API
 

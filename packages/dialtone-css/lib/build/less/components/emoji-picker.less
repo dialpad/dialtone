@@ -15,14 +15,14 @@
   flex-direction: column;
   // fixed width to achieve accessibility in keyboard (372px)
   // with this width we have 9 emoji per row
-  inline-size: calc(var(--dt-size-925) + var(--dt-size-600) + var(--dt-size-400));
+  inline-size: var(--dt-layout-550);
   block-size: 100%;
   background-color: var(--dt-color-surface-primary);
   border-radius: var(--dt-size-radius-300);
 
   &--header {
     position: relative;
-    padding: var(--dt-size-300) var(--dt-size-300) 0;
+    padding: var(--dt-spacing-50) var(--dt-spacing-50) 0;
 
     &::after {
       position: absolute;
@@ -38,8 +38,8 @@
     // !important to default value to override popover dialog box-sizing: border-box style
     box-sizing: content-box !important;
     inline-size: auto;
-    max-inline-size: calc(var(--dt-size-925) + var(--dt-size-400));
-    margin: 0 var(--dt-size-500);
+    max-inline-size: calc(var(--dt-layout-500) + var(--dt-spacing-100));
+    margin: 0 var(--dt-spacing-200);
   }
 
   &--footer {
@@ -47,8 +47,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    block-size: calc(var(--dt-size-650) + var(--dt-size-400) + var(--dt-size-200));
-    padding: 0 var(--dt-size-500);
+    block-size: calc(var(--dt-layout-100) - var(--dt-spacing-75));
+    padding: 0 var(--dt-spacing-200);
     background: var(--dt-color-surface-secondary);
     border-block-start: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
   }
@@ -59,18 +59,15 @@
   }
 
   &__tabset-list {
-      gap: var(--dt-size-0);
-      justify-content: space-between;
+      gap: var(--dt-spacing-0);
 
       &::after {
         background-color: var(--dt-color-surface-moderate) !important;
       }
 
-      .d-tab {
-        --tab-padding-y: var(--dt-size-400);
-        --tab-padding-x: var(--dt-size-300);
-
-        flex-grow: 1;
+      .d-tablist__item {
+        --button-padding-y: var(--dt-spacing-75);
+        --button-padding-x: var(--dt-spacing-1);
 
         &.d-tab--selected {
           &::after {
@@ -83,20 +80,20 @@
   &__skin-list {
     display: inline-flex;
     flex-direction: row;
-    gap: var(--dt-size-300);
+    gap: var(--dt-spacing-50);
     align-items: flex-start;
-    padding: var(--dt-size-300);
+    padding: var(--dt-spacing-50);
     background: var(--dt-color-surface-moderate-opaque);
     border-radius: var(--dt-size-radius-pill);
 
     button {
-      inline-size: var(--dt-size-600);
-      block-size: var(--dt-size-600);
+      inline-size: var(--dt-layout-50);
+      block-size: var(--dt-layout-50);
       margin: 0;
       padding: 0;
       background: none;
       border: var(--dt-size-border-100) solid transparent;
-      border-radius: calc(var(--dt-size-550) + var(--dt-size-300));
+      border-radius: var(--dt-size-radius-350);
       outline: none;
       cursor: pointer;
 
@@ -114,10 +111,10 @@
   &__skin-selected {
     button {
       display: inline-block;
-      inline-size: var(--dt-size-625);
-      block-size: var(--dt-size-625);
+      inline-size: calc(var(--dt-layout-75) - var(--dt-spacing-25));
+      block-size: calc(var(--dt-layout-75) - var(--dt-spacing-25));
       margin: 0;
-      padding: calc(var(--dt-size-350) + var(--dt-size-100));
+      padding: calc(var(--dt-spacing-75) + var(--dt-spacing-1));
       background: var(--dt-color-surface-moderate-opaque);
       border: none;
       border-radius: var(--dt-size-radius-circle);
@@ -131,10 +128,10 @@
   }
 
   &__selector {
-    min-block-size: calc(var(--dt-size-905) + var(--dt-size-600) + var(--dt-size-100));
+    min-block-size: calc(var(--dt-layout-450) + var(--dt-spacing-1));
 
     p {
-      padding-block-end: var(--dt-size-300);
+      padding-block-end: var(--dt-spacing-50);
       color: var(--dt-color-foreground-secondary);
       font: var(--dt-typography-headline-eyebrow);
       text-transform: var(--dt-typography-headline-eyebrow-text-case);
@@ -146,48 +143,48 @@
     inset-block-start: 0;
     inline-size: 100%;
     margin: 0;
-    padding: var(--dt-size-500) var(--dt-size-500) 0 var(--dt-size-500);
+    padding: var(--dt-spacing-200) var(--dt-spacing-200) 0 var(--dt-spacing-200);
     background: var(--dt-color-surface-primary);
   }
 
   &__list {
     position: relative;
     block-size: 100%;
-    max-block-size: calc(var(--dt-size-905) + var(--dt-size-600) + var(--dt-size-100));
-    padding-block-end: calc(var(--dt-size-300) + var(--dt-size-100));
+    max-block-size: calc(var(--dt-layout-450) + var(--dt-spacing-1));
+    padding-block-end: calc(var(--dt-spacing-50) + var(--dt-spacing-1));
     overflow: hidden auto;
 
     div:not(:first-child) {
       p {
-        margin-block-start: var(--dt-size-500);
+        margin-block-start: var(--dt-spacing-200);
       }
     }
   }
 
   &__search-label {
-    padding-block-start: var(--dt-size-500);
+    padding-block-start: var(--dt-spacing-200);
   }
 
   &__search-x-button {
-    margin-inline-end: var(--dt-size-300-negative);
+    margin-inline-end: var(--dt-spacing-50-negative);
   }
 
   &__tab {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--dt-size-200);
-    inline-size: calc(100% + calc(var(--dt-size-500) - var(--dt-size-100)));
-    max-inline-size: calc(var(--dt-size-925) + var(--dt-size-400));
+    gap: var(--dt-spacing-25);
+    inline-size: calc(100% + calc(var(--dt-layout-25) - var(--dt-spacing-1)));
+    max-inline-size: calc(var(--dt-layout-500) + var(--dt-spacing-100));
     // We use this margin left to align the emoji list with the tabset label
-    margin-inline-start: var(--dt-size-350-negative);
-    padding-block-start: var(--dt-size-300);
+    margin-inline-start: var(--dt-spacing-75-negative);
+    padding-block-start: var(--dt-spacing-50);
 
     button {
       display: flex;
       align-items: center;
       justify-content: center;
-      inline-size: calc(var(--dt-size-600) + var(--dt-size-300));
-      block-size: calc(var(--dt-size-600) + var(--dt-size-300));
+      inline-size: calc(var(--dt-layout-50) + var(--dt-spacing-50));
+      block-size: calc(var(--dt-layout-50) + var(--dt-spacing-50));
       margin: 0;
       padding: 0;
       background: none;
@@ -214,7 +211,7 @@
   &__search {
     position: relative;
     z-index: 1;
-    padding: var(--dt-size-500) 0 0 0;
+    padding: var(--dt-spacing-200) 0 0 0;
   }
 
   &__search-button {
@@ -229,10 +226,10 @@
 
   &__data {
     display: flex;
-    gap: var(--dt-size-400);
+    gap: var(--dt-spacing-100);
     align-items: center;
     inline-size: 100%;
-    max-inline-size: calc(var(--dt-size-905) + var(--dt-size-550) + var(--dt-size-200));
+    max-inline-size: calc(var(--dt-layout-450) - var(--dt-spacing-75));
     color: var(--dt-color-foreground-tertiary);
     font: var(--dt-typography-body-md);
   }

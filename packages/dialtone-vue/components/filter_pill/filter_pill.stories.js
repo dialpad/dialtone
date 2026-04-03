@@ -6,12 +6,17 @@ import DtFilterPillVariantsTemplate from './filter_pill_variants.story.vue';
 import { action } from 'storybook/actions';
 import { BUTTON_SIZE_MODIFIERS } from '@/components/button';
 import { POPOVER_DIRECTIONS, POPOVER_PADDING_CLASSES } from '@/components/popover/index.js';
+import { CONTENT_MODE_ARG_TYPE } from '@/common/mode_constants';
 
 // Set default values at the story level here.
 export const argsData = {
   label: 'Fruit',
+  useDropdown: false,
+  deferSelection: false,
+  readOnly: false,
   onOpen: action('open'),
   onClear: action('clear'),
+  onApply: action('apply'),
   onUpdateModelValue: action('update:modelValue'),
   modelValue: [
     { name: 'Orange', active: true },
@@ -34,6 +39,7 @@ export const argTypesData = {
   },
 
   // Props
+  contentMode: CONTENT_MODE_ARG_TYPE,
   size: {
     control: 'select',
     options: Object.keys(BUTTON_SIZE_MODIFIERS),
@@ -54,16 +60,28 @@ export const argTypesData = {
     },
   },
 
+  popoverContentClass: {
+    control: 'text',
+  },
+  popoverHeaderClass: {
+    control: 'text',
+  },
+  popoverFooterClass: {
+    control: 'text',
+  },
+  popoverDialogClass: {
+    control: 'text',
+  },
+  dropdownListClass: {
+    control: 'text',
+  },
+
   startTooltipText: {
     control: 'text',
   },
   endTooltipText: {
     control: 'text',
   },
-
-  // Deprecated props (hidden)
-  alphaTooltipText: { table: { disable: true } },
-  omegaTooltipText: { table: { disable: true } },
 
   // Events: Exclude this from the table as event names will automatically be added from the component itself.
   onClear: {
@@ -75,6 +93,13 @@ export const argTypesData = {
 
   onOpen: {
     action: 'open',
+    table: {
+      disable: true,
+    },
+  },
+
+  onApply: {
+    action: 'apply',
     table: {
       disable: true,
     },
@@ -113,7 +138,7 @@ export const Default = {
   render: DefaultTemplate,
   decorators: [
     () => ({
-      template: `<div class="d-p64"><story /></div>`,
+      template: `<div><story /></div>`,
     }),
   ],
 };

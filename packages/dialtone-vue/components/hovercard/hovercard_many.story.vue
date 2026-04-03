@@ -1,5 +1,5 @@
 <template>
-  <ul class="d-mb4">
+  <ul class="d-mbe-50">
     <dt-recipe-feed-item-row
       v-for="data in cardData"
       :key="data.name"
@@ -40,18 +40,18 @@
           <template #content>
             <dt-stack
               direction="column"
-              gap="400"
+              gap="100"
             >
               <dt-stack
                 direction="row"
-                gap="300"
+                gap="50"
               >
                 <dt-avatar
                   :full-name="data.name"
                   :image-src="data.src"
                   image-alt="Person avatar"
                   seed="JN"
-                  size="md"
+                  :size="300"
                   presence="active"
                 />
                 <dt-stack
@@ -68,7 +68,7 @@
               </dt-stack>
               <dt-stack
                 direction="column"
-                gap="300"
+                gap="50"
                 class="d-fc-secondary"
               >
                 <p>
@@ -76,7 +76,7 @@
                 </p>
                 <dt-stack
                   direction="row"
-                  gap="300"
+                  gap="50"
                 >
                   <dt-icon
                     name="clock-4"
@@ -89,17 +89,17 @@
               </dt-stack>
               <dt-stack
                 direction="row"
-                gap="400"
+                gap="100"
               >
                 <dt-button
-                  width="var(--dt-size-100-percent)"
+                  width="var(--dt-layout-100-percent)"
                   importance="outlined"
                   kind="muted"
                 >
                   Call
                 </dt-button>
                 <dt-button
-                  width="var(--dt-size-100-percent)"
+                  width="var(--dt-layout-100-percent)"
                   importance="outlined"
                   kind="muted"
                 >
@@ -117,7 +117,7 @@
         <template #picker>
           <dt-button
             importance="clear"
-            size="sm"
+            :size="200"
             aria-label="Add reaction"
             data-qa="feed-item-reaction-button"
             class="d-recipe-emoji-row__reaction d-recipe-emoji-row__picker"

@@ -1,6 +1,6 @@
 <template>
-  <dt-stack gap="400">
-    <dt-stack gap="200">
+  <dt-stack gap="100">
+    <dt-stack gap="25">
       <dt-recipe-general-row
         v-for="item in mainOptions"
         :key="item.description"
@@ -8,11 +8,11 @@
       />
     </dt-stack>
     <dt-stack
-      gap="200"
+      gap="25"
     >
       <leftbar-section title="Favorites">
         <template #items>
-          <dt-stack gap="200">
+          <dt-stack gap="25">
             <dt-recipe-general-row
               v-for="channel in favoriteChannels"
               :key="channel.description"
@@ -37,7 +37,7 @@
 
       <leftbar-section title="Contact centers Contact centers">
         <template #items>
-          <dt-stack gap="200">
+          <dt-stack gap="25">
             <dt-recipe-general-row
               v-for="contactCenter in contactCenters"
               :key="contactCenter.description"
@@ -50,7 +50,7 @@
             class="d-fc-success d-bar-pill d-h24"
             kind="muted"
             importance="clear"
-            size="xs"
+            :size="100"
           >
             <template #icon="{ iconSize }">
               <dt-icon-bell-ring
@@ -64,7 +64,7 @@
 
       <leftbar-section title="Channels">
         <template #items>
-          <dt-stack gap="200">
+          <dt-stack gap="25">
             <dt-recipe-general-row
               v-for="channel in channels"
               :key="channel.description"
@@ -79,7 +79,7 @@
 
       <leftbar-section title="Recents">
         <template #items>
-          <dt-stack gap="200">
+          <dt-stack gap="25">
             <dt-recipe-general-row
               v-for="group in groups"
               :key="group.description"
@@ -105,7 +105,7 @@ import LeftbarSection from './components/leftbar_section.vue';
 import MarkAllAsReadButton from './components/mark_all_as_read_button.vue';
 import OptionsDropdown from './components/options_dropdown.vue';
 import { DtButton } from '@/components/button';
-import { DtIconBellRing } from '@dialpad/dialtone-icons/vue3';
+import { DtIconBellRing } from '@dialpad/dialtone-icons/vue';
 import { DtStack } from '@/components/stack';
 import { DtRecipeGeneralRow } from '@/recipes/leftbar/general_row';
 import { DtRecipeContactRow } from '@/recipes/leftbar/contact_row';

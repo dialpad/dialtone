@@ -1,5 +1,5 @@
 <template>
-  <div class="d-m64">
+  <div class="d-m-800">
     <div
       ref="container"
       class="container"

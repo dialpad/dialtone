@@ -1,3 +1,34 @@
+# [1.48.0-next.13](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.12...dialtone-tokens/v1.48.0-next.13) (2026-03-31)
+
+
+### Documentation
+
+* **Playground:** DLT-3119 refine playground UI and integrate across doc site ([#1127](https://github.com/dialpad/dialtone/issues/1127)) ([ba6b599](https://github.com/dialpad/dialtone/commit/ba6b599ad6b2cb0213491b9b4980d6fc914dc945))
+
+
+### Features
+
+* **Dialtone Css, Dialtone Tokens, Dialtone Vue:** DLT-3197 DLT-3198 DLT-3199 DLT-3200 DLT-3201 DLT-3202 DLT-3203 DLT-3204 DLT-3205 DLT-3206 DLT-3207 DLT-3208 DLT-3209 DLT-3210 DLT-3211 token-stop utility classes, migration tooling, and documentation ([#1150](https://github.com/dialpad/dialtone/issues/1150)) ([6237b84](https://github.com/dialpad/dialtone/commit/6237b84b901aed6e3e2bcb7d0216feac218eebad))
+
+# [1.48.0-next.12](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.11...dialtone-tokens/v1.48.0-next.12) (2026-03-10)
+
+
+### Code Refactoring
+
+* **Tokens,css,link,text,breadcrumbs,input Group,split Button:** tokens, CSS foundation, deprecations, tooling DLT-3011 DLT-2961 DLT-3068 DLT-3069 DLT-3070 DLT-3071 DLT-3072 ([#1092](https://github.com/dialpad/dialtone/issues/1092)) ([7783090](https://github.com/dialpad/dialtone/commit/7783090542b0f9c9564d9cc9f61a3abfe19edab8))
+
+# [1.48.0-next.11](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.10...dialtone-tokens/v1.48.0-next.11) (2026-03-05)
+
+
+### Bug Fixes
+
+* **Tokens:** DLT-3053 preserve root font size variable as reference ([#1093](https://github.com/dialpad/dialtone/issues/1093)) ([112ab4b](https://github.com/dialpad/dialtone/commit/112ab4bed25cbb4317d600908ad5fbb92533bb06))
+
+
+### Features
+
+* **Button,tabs,split Button:** visual refresh and slot updates DLT-2946 DLT-2947 DLT-2965 ([#1090](https://github.com/dialpad/dialtone/issues/1090)) ([ffdd56f](https://github.com/dialpad/dialtone/commit/ffdd56f534c0e3baab8badfe632df58ca9ea6160))
+
 # [1.48.0-next.10](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.9...dialtone-tokens/v1.48.0-next.10) (2026-03-02)
 
 

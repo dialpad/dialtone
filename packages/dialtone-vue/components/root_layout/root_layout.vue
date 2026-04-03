@@ -78,7 +78,8 @@ export default {
     },
 
     /**
-     * DEPRECATED: set the height of the inner element instead.
+     * Set the height of the inner element instead.
+     * @deprecated
      */
     headerHeight: {
       type: String,
@@ -119,7 +120,8 @@ export default {
     },
 
     /**
-     * DEPRECATED: set the width of the inner element instead.
+     * Set the width of the inner element instead.
+     * @deprecated
      */
     sidebarWidth: {
       type: String,
@@ -145,7 +147,8 @@ export default {
     },
 
     /**
-     * DEPRECATED: set the height of the inner element instead.
+     * Set the height of the inner element instead.
+     * @deprecated
      */
     footerHeight: {
       type: String,

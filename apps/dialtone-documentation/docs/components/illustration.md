@@ -10,6 +10,8 @@ keywords: ["image", "graphic", "artwork", "d-illustration", "DtIllustration", "d
 
 Check out our [illustration catalog](/foundations/illustrations/index.md), and our [brand section](/foundations/brand/index.md) for information on how to use this component.
 
+<component-combinator component-name="DtIllustration" />
+
 ## Vue API
 
 <component-vue-api component-name="icon" />

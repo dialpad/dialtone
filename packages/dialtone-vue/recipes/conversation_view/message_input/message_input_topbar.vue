@@ -1,7 +1,7 @@
 <template>
   <dt-stack
     direction="row"
-    gap="200"
+    gap="25"
     class="d-recipe-message-input__button-stack"
   >
     <dt-recipe-message-input-button
@@ -150,7 +150,7 @@ import {
   DtIconQuote,
   DtIconCode,
   DtIconCodeBlock,
-} from '@dialpad/dialtone-icons/vue3';
+} from '@dialpad/dialtone-icons/vue';
 import DtRecipeMessageInputButton from './message_input_button.vue';
 import { DialtoneLocalization } from '@/localization';
 

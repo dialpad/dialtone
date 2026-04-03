@@ -3,9 +3,13 @@
     class="d-notice__content"
     data-qa="notice-content"
   >
-    <p
+    <dt-text
       v-if="title || hasSlotContent($slots.titleOverride)"
       :id="titleId"
+      kind="headline"
+      :size="300"
+      density="200"
+      as="p"
       class="d-notice__title"
       data-qa="notice-content-title"
     >
@@ -13,24 +17,31 @@
       <slot name="titleOverride">
         {{ title }}
       </slot>
-    </p>
-    <p
+    </dt-text>
+    <dt-text
       :id="contentId"
+      kind="body"
+      :size="200"
+      wrap="pretty"
+      as="p"
       class="d-notice__message"
       data-qa="notice-content-message"
     >
       <!-- @slot Slot for main content -->
       <slot />
-    </p>
+    </dt-text>
   </div>
 </template>
 
 <script>
 import { hasSlotContent } from '@/common/utils';
+import { DtText } from '@/components/text';
 
 export default {
   compatConfig: { MODE: 3 },
   name: 'DtNoticeContent',
+
+  components: { DtText },
 
   props: {
     /**

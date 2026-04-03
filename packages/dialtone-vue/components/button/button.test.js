@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils';
 import DtButton from './button.vue';
 import EmptyComponentFixture from '@/tests/fixtures/component.vue';
+import { BUTTON_ICON_SIZES } from './button_constants';
 
 const MOCK_BUTTON_STUB = vi.fn();
 
@@ -124,29 +125,36 @@ describe('DtButton Tests', () => {
       });
 
       describe('When button has loading set to true', () => {
-        it('Should have loading class', async () => {
-          await wrapper.setProps({
-            loading: true,
-          });
-
+        beforeEach(async () => {
+          await wrapper.setProps({ loading: true });
           button = wrapper.find('.base-button__button');
+        });
+
+        it('Should have loading class and render a correctly sized loader', () => {
+          const loader = wrapper.find('[data-qa="dt-loader"]');
 
           expect(button.classes().includes('d-btn--loading')).toBe(true);
+          expect(loader.exists()).toBe(true);
+          expect(loader.attributes('aria-hidden')).toBe('true');
+          expect(loader.find('[data-qa="dt-loader-icon"]').classes())
+            .toContain(`d-icon--size-${BUTTON_ICON_SIZES.md}`);
         });
       });
 
       describe('When button has loading set to false', () => {
-        it('should not have loading class', async () => {
-          await wrapper.setProps({
-            loading: false,
-          });
+        it('should not have loading class or loader', async () => {
+          await wrapper.setProps({ loading: false });
 
-          const expected = ['base-button__button', 'd-btn', 'd-btn--primary'];
+          expect(button.classes().includes('d-btn--loading')).toBe(false);
+          expect(wrapper.find('[data-qa="dt-loader"]').exists()).toBe(false);
+        });
+      });
 
-          expect(button
-            .classes()
-            .every(function (value, index) { return value === expected[index]; }))
-            .toBe(true);
+      describe('When button is unstyled and loading', () => {
+        it('Should not render a loader', async () => {
+          await wrapper.setProps({ kind: 'unstyled', loading: true });
+
+          expect(wrapper.find('[data-qa="dt-loader"]').exists()).toBe(false);
         });
       });
 
@@ -219,6 +227,18 @@ describe('DtButton Tests', () => {
         });
       });
 
+      describe('When size is numeric', () => {
+        it('should apply the correct size class for numeric size 200', async () => {
+          await wrapper.setProps({
+            size: 200,
+          });
+
+          button = wrapper.find('.base-button__button');
+
+          expect(button.classes().includes('d-btn--sm')).toBe(true);
+        });
+      });
+
       describe('When button has an invalid size prop', () => {
         it('should not have a size class', async () => {
           await wrapper.setProps({
@@ -272,24 +292,24 @@ describe('DtButton Tests', () => {
           });
         });
 
-        describe('When underline is false', () => {
+        describe('When linkUnderline is false', () => {
           it('should have no-underline class', async () => {
-            await wrapper.setProps({ underline: false });
+            await wrapper.setProps({ linkUnderline: false });
 
             expect(button.classes().includes('d-link--no-underline')).toBe(true);
           });
         });
 
-        describe('When underline is true (default)', () => {
+        describe('When linkUnderline is true (default)', () => {
           it('should not have no-underline class', () => {
             expect(button.classes().includes('d-link--no-underline')).toBe(false);
           });
         });
       });
 
-      describe('When underline is false and link is not set', () => {
+      describe('When linkUnderline is false and link is not set', () => {
         it('should not have no-underline class', async () => {
-          await wrapper.setProps({ underline: false });
+          await wrapper.setProps({ linkUnderline: false });
 
           expect(button.classes().includes('d-link--no-underline')).toBe(false);
         });
@@ -810,6 +830,49 @@ describe('DtButton Tests', () => {
 
         expect(wrapper.find('.my-custom-class').html()).toBe(label.html());
       });
+    });
+  });
+
+  describe('Leading and trailing slots', () => {
+    it('should render leading when provided', () => {
+      mockSlots = { leading: '<span data-qa="test-leading">L</span>' };
+
+      updateWrapper();
+
+      expect(wrapper.find('[data-qa="test-leading"]').exists()).toBe(true);
+    });
+
+    it('should render trailing when provided', () => {
+      mockSlots = { trailing: '<span data-qa="test-trailing">T</span>' };
+
+      updateWrapper();
+
+      expect(wrapper.find('[data-qa="test-trailing"]').exists()).toBe(true);
+    });
+
+    it('should apply leadingClass to the leading wrapper', () => {
+      mockProps = { leadingClass: 'my-leading' };
+      mockSlots = { leading: '<span>L</span>' };
+
+      updateWrapper();
+
+      expect(wrapper.find('.d-btn__leading').classes()).toContain('my-leading');
+    });
+
+    it('should apply trailingClass to the trailing wrapper', () => {
+      mockProps = { trailingClass: 'my-trailing' };
+      mockSlots = { trailing: '<span>T</span>' };
+
+      updateWrapper();
+
+      expect(wrapper.find('.d-btn__trailing').classes()).toContain('my-trailing');
+    });
+
+    it('should not render leading or trailing by default', () => {
+      updateWrapper();
+
+      expect(wrapper.find('[data-qa="test-leading"]').exists()).toBe(false);
+      expect(wrapper.find('[data-qa="test-trailing"]').exists()).toBe(false);
     });
   });
 

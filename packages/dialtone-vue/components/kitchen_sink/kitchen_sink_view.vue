@@ -14,23 +14,23 @@
     <template v-else>
       <dt-stack
         class="
-          d-p32
-          d-py16
-          d-pb8
+          d-p-400
+          d-py-200
+          d-pbe-100
           d-bgc-secondary
           d-bb
           d-ps-sticky
-          d-t0
+          d-t-0
           d-zi-base1
-          d-mtn10
-          d-mxn10
+          d-mbs-n125
+          d-mx-n125
           d-bs-card
         "
-        gap="400"
+        gap="100"
       >
         <dt-stack
-          class="d-px8"
-          gap="400"
+          class="d-px-100"
+          gap="100"
           direction="row"
           justify="between"
           align="baseline"
@@ -38,13 +38,13 @@
           <dt-text
             as="h1"
             kind="headline"
-            size="3xl"
+            :size="700"
           >
             {{ title }}
           </dt-text>
           <dt-text
             kind="body"
-            size="sm"
+            :size="200"
           >
             <dt-link
               :href="iframeUrl"
@@ -52,7 +52,7 @@
               rel="noopener noreferrer"
             >
               <dt-stack
-                gap="300"
+                gap="50"
                 direction="row"
               >
                 Open in new window
@@ -66,8 +66,8 @@
         >
           <dt-stack
             direction="row"
-            gap="400"
-            class="d-pb8 d-px8"
+            gap="100"
+            class="d-pbe-100 d-px-100"
           >
             <dt-link
               v-for="section in sections"
@@ -77,7 +77,7 @@
             >
               <dt-text
                 kind="body"
-                size="sm"
+                :size="200"
                 class="d-ws-nowrap"
               >
                 {{ section.name }}
@@ -86,17 +86,17 @@
           </dt-stack>
         </div>
       </dt-stack>
-      <dt-stack class="d-px32">
+      <dt-stack class="d-px-400">
         <dt-stack
           v-for="section in sections"
           :id="`ks-${section.id}`"
           :key="section.id"
           as="section"
-          gap="500"
-          class="d-py32 kitchen-sink__section"
+          gap="200"
+          class="d-py-400 kitchen-sink__section"
         >
           <dt-stack
-            gap="400"
+            gap="100"
             direction="row"
             justify="between"
             align="baseline"
@@ -104,7 +104,7 @@
             <dt-text
               as="h2"
               kind="headline"
-              size="2xl"
+              :size="600"
             >
               {{ section.name }}
             </dt-text>
@@ -117,11 +117,11 @@
           <dt-stack
             v-for="variant in section.variants"
             :key="variant.name"
-            class="d-ba d-bc-subtle d-p16"
-            gap="400"
+            class="d-ba d-bc-subtle d-p-200"
+            gap="100"
           >
             <dt-text
-              size="xs"
+              :size="100"
               tone="muted"
               kind="code"
             >
@@ -144,7 +144,7 @@ import { ref, h, onErrorCaptured, onMounted, defineComponent, markRaw } from 'vu
 import { DtLink } from '@/components/link';
 import { DtStack } from '@/components/stack';
 import { DtText } from '@/components/text';
-import { DtIconExternalLink } from '@dialpad/dialtone-icons/vue3';
+import { DtIconExternalLink } from '@dialpad/dialtone-icons/vue';
 
 const props = defineProps({
   title: {
@@ -188,7 +188,7 @@ function createErrorBoundary (name) {
       return () => {
         if (error.value) {
           return h('div', {
-            class: 'd-fc-critical d-fs-200 d-p8 d-px12 d-bgc-critical d-bar4',
+            class: 'd-fc-critical d-fs-200 d-p-100 d-px-150 d-bgc-critical d-bar4',
           }, `Failed to render ${name}: ${error.value}`);
         }
         return slots.default?.();
@@ -254,6 +254,9 @@ onMounted(async () => {
 
 <style scoped>
 .kitchen-sink__section {
-  scroll-margin-block-start: var(--dt-size-750);
+  scroll-margin-block-start: var(--dt-layout-150);
+}
+[outline] {
+  outline: 2px solid orangered;
 }
 </style>

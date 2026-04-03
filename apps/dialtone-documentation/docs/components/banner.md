@@ -9,19 +9,21 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["alert","notification","message","d-banner","DtBanner","dt-banner"]
 ---
 
-<code-well-header class="d-p0">
-    <dt-stack gap="500" class="d-w100p" align="center">
-      <dt-banner title="Example banner" kind="info" class="d-ps-relative d-zi-base">
-          Message body with a <dt-link kind="muted">Link</dt-link>
-          <template #action>
-            <dt-button size="sm" kind="muted" importance="outlined">Action</dt-button>
-          </template>
-      </dt-banner>
-      <dt-stack direction="row">
-          <dt-button @click="toggleBanner('example-pinned')">Pin to top</dt-button>
-      </dt-stack>
-    </dt-stack>
-</code-well-header>
+```vue demo-only
+<dt-stack gap="200" class="d-w100p" align="center">
+  <dt-banner title="Example banner" kind="info" class="d-ps-relative d-zi-base">
+    Message body with a <dt-link kind="muted">Link</dt-link>
+    <template #action>
+      <dt-button :size="200" kind="muted" importance="outlined">Action</dt-button>
+    </template>
+  </dt-banner>
+  <dt-stack direction="row">
+    <dt-button @click="toggleBanner('example-pinned')">Pin to top</dt-button>
+  </dt-stack>
+</dt-stack>
+```
+
+<!-- <component-combinator component-name="DtBanner" /> -->
 
 ## Usage
 
@@ -36,15 +38,13 @@ Banners are a type of notice and so you can use the following [Notice](notice.md
 
 ### Kind
 
-<code-well-header>
-    <dt-stack direction="row" gap="400" align="end" class="d-w100p">
-        <div class="d-fl-grow1">
-            <dt-select-menu label="Style" :options="bannerOptions" v-model="selectedKind" />
-        </div>
-        <dt-checkbox value="important" @input="toggleImportant">Important</dt-checkbox>
-        <dt-button @click="toggleBanner('example-kind')">Toggle Example</dt-button>
-    </dt-stack>
-</code-well-header>
+```vue demo-only
+<dt-stack direction="row" gap="200">
+  <dt-select-menu :label-visible="false" label="Style" :options="bannerOptions" v-model="selectedKind" />
+  <dt-checkbox value="important" @input="toggleImportant">Important</dt-checkbox>
+  <dt-button @click="toggleBanner('example-kind')">Toggle Example</dt-button>
+</dt-stack>
+```
 
 <dt-banner
   :pinned="pinned"
@@ -57,24 +57,7 @@ Banners are a type of notice and so you can use the following [Notice](notice.md
   Message body
 </dt-banner>
 
-<code-example-tabs
-htmlCode='
-<aside class="d-banner d-banner--base" role="alert" aria-hidden="false">
-  <div class="d-banner__dialog" role="alertdialog" aria-labelledy="info-alert-title" aria-describedby="info-alert-desc">
-    <div class="d-notice__icon">...</div>
-    <div class="d-notice__content">
-      <h2 class="d-notice__title" id="info-alert-title">...</h2>
-      <p class="d-notice__message" id="info-alert-desc">...</p>
-    </div>
-  <div class="d-notice__actions">...</div>
-</aside>
-
-<aside class="d-banner d-banner--error" role="alert" aria-hidden="false">...</aside>
-<aside class="d-banner d-banner--info" role="alert" aria-hidden="false">...</aside>
-<aside class="d-banner d-banner--success" role="alert" aria-hidden="false">...</aside>
-<aside class="d-banner d-banner--warning" role="alert" aria-hidden="false">...</aside>
-'
-vueCode='
+```vue code-only
 <dt-banner kind="base" title="Optional banner title"> Message body </dt-banner>
 <dt-banner kind="error" title="Optional banner title"> Message body </dt-banner>
 <dt-banner kind="info" title="Optional banner title"> Message body </dt-banner>
@@ -83,18 +66,17 @@ vueCode='
 <dt-banner background-image="{$background-image}" background-size="contain"> Message body </dt-banner>
 <dt-banner pinned="true" kind="warning" title="Optional banner title"> Message body </dt-banner>
 <dt-banner important="true" kind="warning" title="Optional banner title"> Message body </dt-banner>
-'
-/>
+```
 
 ### Pinned
 
 Pins the banner to the top of the window.
 
-<code-well-header>
-    <dt-stack direction="row">
-        <dt-button @click="toggleBanner('example-pinned')">Toggle Example</dt-button>
-    </dt-stack>
-</code-well-header>
+```vue demo-only
+<dt-stack direction="row">
+  <dt-button @click="toggleBanner('example-pinned')">Toggle Example</dt-button>
+</dt-stack>
+```
 
 <dt-banner
   :pinned="true"
@@ -104,26 +86,21 @@ Pins the banner to the top of the window.
 >
   Detailed description goes here.
   <template #action>
-    <dt-button size="sm" kind="muted" importance="outlined">Action</dt-button>
+    <dt-button :size="200" kind="muted" importance="outlined">Action</dt-button>
   </template>
 </dt-banner>
 
-<code-example-tabs
-htmlCode='
-<aside class="d-banner d-banner--base d-banner--pinned" role="alert" aria-hidden="false">...</aside>
-'
-vueCode='
+```vue code-only
 <dt-banner
   :pinned="true"
   title="Optional banner title"
 >
   Detailed description goes here.
   <template #action>
-    <dt-button size="sm" kind="muted" importance="outlined">Action</dt-button>
+    <dt-button :size="200" kind="muted" importance="outlined">Action</dt-button>
   </template>
 </dt-banner>
-'
-/>
+```
 
 ## Vue API
 

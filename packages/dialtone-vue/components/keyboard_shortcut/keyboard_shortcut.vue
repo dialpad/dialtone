@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/no-v-html -->
 <template>
   <kbd
     :class="[
@@ -23,16 +22,23 @@
           { 'd-keyboard-shortcut__icon--inverted': inverted },
         ]"
       />
-      <span
+      <dt-text
         v-else-if="item.trim()"
         :key="`text-${i}-${item}`"
+        kind="body"
+        :size="200"
+        numeric
+        :density="400"
+        :tone="inverted ? 'secondary-inverted' : 'tertiary'"
         aria-hidden="true"
         :class="[
           'd-keyboard-shortcut__item',
           { 'd-keyboard-shortcut__item--inverted': inverted },
         ]"
-        v-html="item"
-      />
+      >
+        <!-- eslint-disable-next-line vue/no-v-html -->
+        <span v-html="item" />
+      </dt-text>
     </template>
   </kbd>
 </template>
@@ -47,7 +53,8 @@ import {
   DtIconCommand,
   DtIconOption,
   DtIconPlus,
-} from '@dialpad/dialtone-icons/vue3';
+} from '@dialpad/dialtone-icons/vue';
+import { DtText } from '@/components/text';
 
 const SHORTCUTS_ICON_ALIASES = {
   '{win}': DtIconLayoutGrid,
@@ -101,12 +108,15 @@ export default {
     DtIconCommand,
     DtIconOption,
     DtIconPlus,
+    DtText,
   },
 
   props: {
     /**
+     * @deprecated Use v-dt-mode instead.
      * If true, applies inverted styles.
      * @values true, false
+     * @deprecated Use v-dt-mode directive instead.
      */
     inverted: {
       type: Boolean,

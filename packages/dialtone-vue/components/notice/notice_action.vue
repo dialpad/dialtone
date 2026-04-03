@@ -8,15 +8,15 @@
     <dt-button
       v-if="!hideClose"
       ref="closeButton"
-      :circle="true"
       data-qa="dt-notice-action-close-button"
       importance="clear"
-      size="sm"
+      kind="muted"
+      :size="200"
       :aria-label="closeButtonTitle"
       :title="closeButtonTitle"
       @click="close"
     >
-      <template #icon>
+      <template #startIcon>
         <dt-icon-close
           size="200"
         />
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { DtIconClose } from '@dialpad/dialtone-icons/vue3';
+import { DtIconClose } from '@dialpad/dialtone-icons/vue';
 import { DtButton } from '@/components/button';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
 import { DialtoneLocalization } from '@/localization';

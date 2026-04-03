@@ -101,7 +101,7 @@ When creating or updating a component, ALL must stay in sync:
 2. **Tests** — `.test.js` using Vitest + @vue/test-utils
 3. **Storybook stories** — `.stories.js` + `.mdx`
 4. **Component docs JSON** — via `scripts/build-dialtone-vue-docs.mjs`
-5. **VuePress documentation** — `apps/dialtone-documentation/docs/`, sidebar in `_data/site-nav.json`
+5. **VuePress documentation** — `apps/dialtone-documentation/docs/`, sidebar in `_data/site-nav.json`. Use fenced ` ```vue demo ` blocks for code examples (see `.claude/rules/documentation-writing.md`)
 6. **MCP server data** — `packages/dialtone-mcp-server/src/data.ts`
 
 ## Release Process
@@ -110,6 +110,36 @@ When creating or updating a component, ALL must stay in sync:
 - Release branches: `staging` (production), `beta`, `alpha`, `next` (prerelease)
 - Workflow: feature branch → PR to `staging` → semantic-release → `production` fast-forward
 - Config: `release-ci.config.cjs` per package
+
+## Doc Sync Tooling
+
+Hooks and tools that keep `packages/dialtone-docs/src/content/` in sync with source code changes. Requires the `dialtone-docs` package (PR #1051) to be merged.
+
+### How it works
+
+1. **Edit tracker** (`.claude/hooks/post-tool-use-tracker.sh`) — PostToolUse hook that silently logs every file edit to `.claude/tsc-cache/<session>/edited-files.log` with affected packages and NX commands.
+2. **Pre-push guard** (`.claude/hooks/pre-push-pr-guard.sh`) — PreToolUse hook on Bash that fires on `git push` / `gh pr create`. Maps source packages to doc content files. Denies push if docs are missing and triggers the enforcer.
+3. **Doc sync enforcer** — Skill (`/doc-sync-enforcer`) that reads the edit log, maps changes to `dialtone-docs` content files, and updates them.
+4. **Doc janitor** — Agent (`/doc-janitor`) that sweeps stale artifacts (plan files, session files, backups) before merging.
+
+### Package → doc mapping
+
+| Source package | Doc content file |
+| --- | --- |
+| `packages/dialtone-tokens/` | `development-design-tokens.md`, `architecture-design-token-pipeline.md` |
+| `packages/dialtone-css/` | `development-css-utilities.md` |
+| `packages/dialtone-vue/` | `development-component-workflow.md`, `reference-component-api-patterns.md` |
+| `packages/dialtone-icons/` | `development-icons.md` |
+| `.github/workflows/` | `workflow-ci-pipeline.md` |
+
+### Session cache
+
+All tracking data lives in `.claude/tsc-cache/<session>/` (gitignored):
+- `edited-files.log` — tab-separated: `timestamp\tfilepath\trepo`
+- `affected-repos.txt` — one package per line
+- `commands.txt` — NX build/test commands for affected packages
+- `missing-docs.txt` — written by the guard when docs are missing
+- `push-done` / `pr-create-done` — marker files to avoid re-checking
 
 ## Key Files Reference
 
@@ -124,3 +154,5 @@ When creating or updating a component, ALL must stay in sync:
 | `packages/dialtone-css/gulpfile.cjs` | CSS build pipeline |
 | `packages/dialtone-tokens/tokens/$metadata.json` | Token sets build order |
 | `apps/dialtone-documentation/docs/_data/site-nav.json` | Sidebar navigation |
+| `apps/dialtone-documentation/docs/.vuepress/plugins/markdown-it-fenced-demo.js` | Fenced ` ```vue demo ` → `<code-example>` transform |
+| `scripts/migrate-code-examples.mjs` | Migration script: `<code-example>` → fenced demo syntax |

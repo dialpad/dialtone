@@ -53,13 +53,13 @@ body {
 html body {
   --docsearch-primary-color: var(--dt-color-brand-purple);
   --docsearch-text-color: var(--dt-color-foreground-primary);
-  --docsearch-spacing: var(--dt-size-550);
+  --docsearch-spacing: var(--dt-spacing-300);
   // --docsearch-icon-stroke-width
   --docsearch-highlight-color: var(--docsearch-primary-color);
   --docsearch-muted-color: var(--dt-color-foreground-tertiary);
   --docsearch-container-background: var(--dt-color-surface-backdrop);
   // --docsearch-logo-color
-  --docsearch-modal-width: var(--dt-size-1000);
+  --docsearch-modal-width: var(--dt-layout-800);
   --docsearch-modal-height: auto;
   --docsearch-modal-background: var(--dt-color-surface-secondary);
   --docsearch-modal-shadow: var(--dt-shadow-large);
@@ -73,7 +73,7 @@ html body {
   );
   --docsearch-searchbox-shadow: inset 0 0 0 var(--dt-size-border-100)
     var(--dt-inputs-color-border-default);
-  --docsearch-hit-height: var(--dt-size-650);
+  --docsearch-hit-height: var(--dt-layout-75);
   --docsearch-hit-color: var(--dt-color-foreground-tertiary);
   --docsearch-hit-active-color: var(--dt-color-neutral-white);
   --docsearch-hit-background: var(--dt-color-surface-primary);
@@ -86,17 +86,17 @@ html body {
   );
   --docsearch-key-shadow: inset 0 0 0 var(--dt-size-border-100)
     var(--dt-color-border-default);
-  --docsearch-footer-height: var(--dt-size-650);
+  --docsearch-footer-height: var(--dt-layout-75);
   --docsearch-footer-background: var(--dt-color-surface-primary);
   /* stylelint-disable-next-line meowtec/no-px */
-  --docsearch-footer-shadow: 0 var(--dt-size-100-negative) 0 0
+  --docsearch-footer-shadow: 0 var(--dt-spacing-100-negative) 0 0
       var(--dt-color-border-subtle),
-    0 var(--dt-size-100-negative) 3px 0 rgb(0, 0, 0, 0.2);
+    0 var(--dt-spacing-100-negative) 3px 0 rgb(0, 0, 0, 0.2);
 
   .DocSearch-Modal {
     margin-block-start: 15vh;
     background-clip: padding-box;
-    border: var(--dt-size-100) solid var(--dt-color-border-subtle);
+    border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
     border-radius: var(--dt-size-radius-500);
     box-shadow: var(--dt-shadow-large);
   }
@@ -117,7 +117,7 @@ html body {
     border: none;
     border-radius: var(--dt-size-radius-400);
     box-shadow: var(--docsearch-searchbox-shadow);
-    padding-inline: var(--dt-size-450) var(--dt-size-450);
+    padding-inline: var(--dt-spacing-150);
   }
 
   .DocSearch-MagnifierLabel svg,
@@ -127,7 +127,7 @@ html body {
 
   .DocSearch-Input {
     font-size: var(--dt-font-size-300);
-    padding-inline-start: var(--dt-size-400);
+    padding-inline-start: var(--dt-spacing-100);
 
     &:focus-visible {
       box-shadow: none;
@@ -154,7 +154,7 @@ html body {
   }
 
   .DocSearch-Dropdown {
-    max-block-size: var(--dt-size-1000);
+    max-block-size: var(--dt-layout-800);
   }
 
   .DocSearch-Dropdown-Container {
@@ -166,7 +166,7 @@ html body {
   }
 
   .DocSearch-Hit-source {
-    padding: var(--dt-size-400) var(--dt-size-300) 0;
+    padding: var(--dt-spacing-100) var(--dt-spacing-50) 0;
     color: var(--dt-color-foreground-primary);
     font-weight: var(--dt-font-weight-bold);
     font-size: var(--dt-font-size-200);
@@ -176,7 +176,7 @@ html body {
     color: var(--dt-color-foreground-secondary);
     font-size: var(--dt-font-size-300);
 
-    strong {
+    :where(strong) {
       color: var(--dt-color-foreground-primary);
     }
   }
@@ -186,28 +186,28 @@ html body {
   }
 
   .DocSearch-Hit {
-    padding-block-end: var(--dt-size-400);
+    padding-block-end: var(--dt-spacing-100);
   }
 
-  .DocSearch-Hits mark {
-    padding: var(--dt-size-200);
+  .DocSearch-Hits :where(mark) {
+    padding: var(--dt-spacing-25);
     color: var(--dt-color-foreground-primary);
     background: var(--dt-color-surface-warning);
   }
 
-  .DocSearch-Hit a {
-    padding-inline: var(--dt-size-450) var(--dt-size-450);
+  .DocSearch-Hit :where(a) {
+    padding-inline: var(--dt-spacing-150) var(--dt-spacing-150);
     border-radius: var(--dt-size-radius-300);
   }
 
-  .DocSearch-Hit-action svg,
-  .DocSearch-Hit-icon svg {
+  .DocSearch-Hit-action :where(svg),
+  .DocSearch-Hit-icon :where(svg) {
     inline-size: var(--dt-icon-size-200);
     block-size: var(--dt-icon-size-200);
   }
 
   .DocSearch-Hit-content-wrapper {
-    margin: 0 var(--dt-size-200);
+    margin: 0 var(--dt-spacing-25);
     font-weight: var(--dt-font-weight-normal);
     line-height: var(--dt-font-line-height-200);
   }
@@ -216,7 +216,7 @@ html body {
     // no overrides
   }
 
-  .DocSearch-Hit[aria-selected="true"] mark {
+  .DocSearch-Hit[aria-selected="true"] :where(mark) {
     color: var(--dt-color-foreground-primary) !important;
     text-decoration: none;
   }
@@ -242,8 +242,8 @@ html body {
     // no overrides
   }
 
-  .DocSearch-Logo svg {
-    filter: saturate(0) contrast(0.25);
+  .DocSearch-Logo :where(svg) {
+    filter: saturate(0) contrast(.25);
   }
 
   .DocSearch-Commands {
@@ -259,13 +259,13 @@ html body {
   }
 
   .DocSearch-Help {
-    margin-block-start: var(--dt-size-400);
+    margin-block-start: var(--dt-spacing-100);
     color: var(--dt-color-foreground-secondary);
     font-size: var(--dt-font-size-100);
   }
 
   .DocSearch-NoResults {
-    padding: var(--dt-size-600) 0;
+    padding: var(--dt-spacing-300) 0;
     font-size: var(--dt-font-size-200);
   }
 
@@ -273,7 +273,7 @@ html body {
     color: var(--dt-color-link-primary);
   }
 
-  .DocSearch-NoResults-Prefill-List li {
+  .DocSearch-NoResults-Prefill-List :where(li) {
     list-style-type: none;
   }
 }
@@ -287,30 +287,29 @@ html body {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  padding: var(--dt-size-500) var(--dt-size-550) var(--dt-size-500)
-    var(--dt-size-500);
+  padding: var(--dt-spacing-200) var(--dt-spacing-300) var(--dt-spacing-200) var(--dt-spacing-200);
   color: var(--dt-shell-color-foreground-primary);
   background-color: var(--dt-shell-color-surface-default);
   view-transition-name: dialtone-header;
 
-  > :first-child {
+  > :where(:first-child) {
     justify-self: start;
   }
 
-  > :nth-child(2) {
+  > :where(:nth-child(2)) {
     justify-self: center;
   }
 
-  > :last-child {
+  > :where(:last-child) {
     justify-self: end;
   }
 
   &--home {
-    --position-top: var(--dt-size-500);
+    --position-top: var(--dt-spacing-200);
 
     position: fixed;
     z-index: 1;
-    max-inline-size: calc(var(--dt-size-300) * 350);
+    max-inline-size: calc(var(--dt-layout-1100) * 2);
     border-radius: var(--dt-size-radius-450);
     /* stylelint-disable-next-line meowtec/no-px */
     box-shadow:
@@ -319,11 +318,11 @@ html body {
       0 91.912px 55.094px 0 rgba(0, 0, 0, 0.03),
       0 40.85px 40.85px 0 rgba(0, 0, 0, 0.05),
       0 10.212px 22.306px 0 rgba(0, 0, 0, 0.05);
-    -webkit-backdrop-filter: blur(var(--dt-size-400));
-    backdrop-filter: blur(var(--dt-size-400));
+    -webkit-backdrop-filter: blur(var(--dt-spacing-100));
+    backdrop-filter: blur(var(--dt-spacing-100));
     transition: inset cubic-bezier(0.4, 0, 0.2, 1) 0.66s;
     will-change: inset;
-    inset: var(--position-top) var(--dt-size-500);
+    inset: var(--position-top) var(--dt-spacing-200);
     inset-block-end: auto;
   }
 
@@ -361,16 +360,15 @@ html body {
   position: sticky;
   overflow-y: auto;
   color: var(--dt-shell-color-foreground-primary);
-  inset-block-start: var(--dt-size-700);
+  inset-block-start: var(--dt-layout-100);
   // TODO: redo 😜
-  block-size: calc(100vh - var(--dt-size-700));
-  // border-inline-end: var(--dt-size-100) solid var(--dt-shell-color-border-subtle);
+  block-size: calc(100vh - var(--dt-layout-100));
 
   &__list {
-    padding: var(--dt-size-550) 0 var(--dt-size-750) var(--dt-size-500);
-    padding-block-start: calc(var(--dt-size-600) + var(--dt-size-550));
-    inset-block: var(--dt-size-700) 0;
-    inline-size: calc(var(--dt-size-300) * 64);
+    padding: var(--dt-spacing-300) 0 calc(var(--dt-spacing-100) * 12) var(--dt-spacing-200);
+    padding-block-start: var(--dt-spacing-700);
+    inset-block: var(--dt-layout-100) 0;
+    inline-size: var(--dt-layout-400);
   }
 }
 
@@ -379,12 +377,54 @@ html body {
   border-block: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
 
   @media (min-width: 980px) {
-    margin-block-end: var(--dt-size-500);
+    margin-block-end: var(--dt-spacing-100);
     border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
     border-radius: var(--dt-size-radius-500);
-    margin-inline: var(--dt-size-500);
+    margin-inline: var(--dt-spacing-200);
   }
 }
+
+.dialtone-content__article > div {
+  // the div is hard coded into vuepress
+  > table:not([class]) {
+    color: var(--dt-color-foreground-tertiary);
+    border-collapse: collapse;
+    margin: var(--dt-spacing-200) 0;
+    inline-size: 100%;
+    font: var(--dt-text-body-sm);
+
+    :where(th) {
+      font: var(--dt-text-label-xs);
+      color: var(--dt-color-foreground-secondary);
+      text-transform: uppercase;
+      line-height: var(--dt-font-line-height-100);
+    }
+
+
+    :where(th, td) {
+      text-align: start;
+      border-block-end: var(--dt-size-border-100) solid var(--dt-color-border-default);
+      border-inline: 0;
+      padding: var(--dt-spacing-200);
+      vertical-align: baseline;
+    }
+
+    :where(thead th) {
+      border-block-end-width: var(--dt-size-border-200);
+    }
+
+    :where(tbody tr:last-of-type) :where(td, th) {
+      border-block-end: none;
+    }
+
+    :where(code, kbd) {
+      background-color: var(--dt-color-background-default);
+      color: var(--dt-color-blue-800);
+      font: var(--dt-text-code-xs);
+    }
+  }
+}
+
 
 a.header-anchor {
   float: inline-start;
@@ -402,22 +442,22 @@ a.header-anchor {
 .d-docsite--header-2 {
   font: var(--dt-text-headline-2xl);
   font-weight: var(--dt-font-weight-medium);
-  margin-block: var(--dt-size-600) var(--dt-size-400);
+  margin-block: var(--dt-spacing-400) var(--dt-spacing-100);
 }
 
 .d-docsite--header-3 {
   font: var(--dt-text-headline-xl);
-  margin-block: var(--dt-size-500) var(--dt-size-300);
+  margin-block: var(--dt-spacing-200) var(--dt-spacing-50);
 }
 
 .d-docsite--header-4 {
   font: var(--dt-text-headline-lg);
-  margin-block: var(--dt-size-500) var(--dt-size-300);
+  margin-block: var(--dt-spacing-200) var(--dt-spacing-50);
 }
 
 .d-docsite--header-2,
 .d-docsite--header-3 {
-  &:hover a.header-anchor {
+  &:hover :where(a).header-anchor {
     opacity: 1;
   }
 }
@@ -504,13 +544,13 @@ code {
 
 .d-docsite--unordered-list,
 .d-docsite--ordered-list {
-  margin: var(--dt-size-400) 0;
-  padding-inline-start: var(--dt-size-500);
+  margin: var(--dt-spacing-100) 0;
+  padding-inline-start: var(--dt-spacing-200);
 }
 
 .d-docsite--list-element {
   max-inline-size: 75ch;
-  margin-block-end: var(--dt-size-300);
+  margin-block-end: var(--dt-spacing-50);
   font: var(--dt-text-body-md);
 
   &:last-child {
@@ -518,8 +558,17 @@ code {
   }
 }
 
+:where(:is(.d-docsite--paragraph, .d-docsite--unordered-list, .d-docsite--ordered-list, .d-docsite--list-element, .d-docsite--preview-header) > code) {
+  font: var(--dt-text-code-sm);
+  padding: var(--dt-spacing-25) var(--dt-spacing-50);
+  color: var(--dt-color-blue-800);
+  border-radius: var(--dt-size-radius-200);
+  border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
+  user-select: all;
+}
+
 .d-docsite--preview-header {
-  margin-block: var(--dt-size-600) var(--dt-size-300);
+  margin-block: var(--dt-spacing-400) var(--dt-spacing-50);
 }
 
 .d-docsite-code {
@@ -533,7 +582,7 @@ code {
 //      Styles our icon pages
 //  ----------------------------------------------------------------------------
 .d-gl-docsite-icons {
-  --icon-card-width: minmax(var(--dt-size-775), 1fr);
+  --icon-card-width: minmax(var(--dt-layout-175), 1fr);
   --icon-grid-columns: 2;
 
   display: grid;
@@ -541,7 +590,7 @@ code {
     var(--icon-grid-columns),
     [col] var(--icon-card-width)
   );
-  gap: var(--dt-size-400);
+  gap: var(--dt-spacing-100);
 
   @media screen and (min-width: 375px) {
     --icon-grid-columns: 3;
@@ -579,7 +628,7 @@ code {
 .dialtone-icon-grid__item {
   position: relative;
   inline-size: var(--dt-size-100-percent);
-  block-size: var(--dt-size-750);
+  block-size: var(--dt-layout-150);
 }
 
 .dialtone-icon-card {
@@ -591,7 +640,7 @@ code {
   .d-popover {
     block-size: 100%;
 
-    > div {
+    > :where(div) {
       block-size: 100%;
     }
   }
@@ -657,20 +706,20 @@ code {
 }
 
 .dialtone-icon-card__icon {
-  inline-size: var(--dt-size-650);
-  block-size: var(--dt-size-650);
-  margin-block-end: var(--dt-size-300);
+  inline-size: var(--dt-layout-75);
+  block-size: var(--dt-layout-75);
+  margin-block-end: var(--dt-spacing-50);
 
-  svg {
+  :where(svg) {
     inline-size: 100%;
     block-size: auto;
   }
 }
 
 .dialtone-icon-card__icon--autosize {
-  margin-block-end: var(--dt-size-300);
+  margin-block-end: var(--dt-spacing-50);
 
-  svg {
+  :where(svg) {
     inline-size: 100%;
     block-size: auto;
   }
@@ -680,7 +729,7 @@ code {
   font-weight: var(--dt-font-weight-bold);
   font-size: var(--dt-font-size-200);
   line-height: var(--dt-font-line-height-200);
-  margin-block: 0 var(--dt-size-300);
+  margin-block: 0 var(--dt-spacing-50);
 }
 
 .dialtone-icon-card__subtitle {
@@ -694,13 +743,13 @@ code {
 
 .dialtone-icon-card__name {
   position: absolute;
-  inset-block-end: var(--dt-size-400);
+  inset-block-end: var(--dt-spacing-100);
   color: var(--dt-color-foreground-primary);
   font: var(--dt-typography-code-sm);
 }
 
 .dialtone-icon-popover {
-  max-inline-size: var(--dt-size-950);
+  max-inline-size: var(--dt-layout-600);
 }
 
 //  ============================================================================
@@ -713,7 +762,7 @@ code {
   background-color: var(--dt-color-surface-primary);
 
   &__inner-wrapper {
-    padding-block: calc(var(--dt-size-300) * 32);
+    padding-block: calc(var(--dt-spacing-100) * 16);
     text-wrap: balance;
 
     @media (max-width: 640px) {
@@ -739,12 +788,12 @@ code {
   }
 
   @media (max-width: 640px) {
-    padding-inline: var(--dt-size-400) var(--dt-size-500);
+    padding-inline: var(--dt-spacing-100) var(--dt-spacing-200);
   }
 }
 
 .links {
-  padding-block: var(--dt-size-650) var(--dt-size-650);
+  padding-block: var(--dt-spacing-600);
   text-wrap: balance;
 
   @media (max-width: 640px) {
@@ -756,7 +805,7 @@ code {
   @media (max-width: 640px) {
     display: block;
     grid-column: 1 / -1 !important;
-    margin-block-end: calc(var(--dt-size-300) * 18);
+    margin-block-end: calc(var(--dt-spacing-100) * 9);
   }
 }
 
@@ -767,7 +816,7 @@ code {
 
 .dialtone-page-title {
   font: var(--dt-text-headline-3xl);
-  margin-block-end: var(--dt-size-400);
+  margin-block-end: var(--dt-spacing-100);
   text-wrap: pretty;
 }
 
@@ -778,15 +827,15 @@ code {
 
 .dialtone-wall {
   display: grid;
-  gap: var(--dt-size-500);
-  margin-block-start: var(--dt-size-500);
+  gap: var(--dt-spacing-200);
+  margin-block-start: var(--dt-spacing-200);
 
   @media screen and (min-width: 640px) {
     grid-template-columns: [full-start] repeat(
         2,
         [col-start] var(--col-width, minmax(0, 1fr)) [col-end]
       ) [full-end] !important;
-    gap: var(--dt-size-600);
+    gap: var(--dt-spacing-400);
   }
 
   @media screen and (min-width: 768px) {
@@ -797,7 +846,7 @@ code {
   }
 
   @media screen and (min-width: 1354px) {
-    gap: var(--dt-size-600);
+    gap: var(--dt-spacing-400);
   }
 
   &__item {
@@ -836,7 +885,7 @@ code {
 
   &__thumb {
     inline-size: auto;
-    block-size: var(--dt-size-750);
+    block-size: var(--dt-layout-150);
 
     @media screen and (min-width: 640px) {
       display: block;
@@ -848,13 +897,13 @@ code {
   &__details {
     display: flex;
     flex-direction: column;
-    gap: var(--dt-size-400);
-    padding: var(--dt-size-550);
+    gap: var(--dt-spacing-100);
+    padding: var(--dt-spacing-300);
   }
 
   &__title {
     display: flex;
-    gap: var(--dt-size-400);
+    gap: var(--dt-spacing-100);
     align-items: center;
     color: var(--dt-color-foreground-secondary);
     font: var(--dt-text-headline-xl);
@@ -877,6 +926,10 @@ code {
 
   // UI Kits variant: keeps description visible and stays 2-column longer
   &--ui-kits {
+    .dialtone-wall__details {
+      gap: var(--dt-spacing-200);
+    }
+
     .dialtone-wall__description {
       display: block;
       color: var(--dt-color-foreground-tertiary);
@@ -910,17 +963,17 @@ code {
 //  ----------------------------------------------------------------------------
 
 .dialtone-definition {
-  > dt {
-    margin-block-start: var(--dt-size-500);
+  > :where(dt) {
+    margin-block-start: var(--dt-spacing-200);
     font-weight: var(--dt-font-weight-bold);
   }
 
-  > dd {
+  > :where(dd) {
     max-inline-size: 72ch;
     margin: 0;
   }
 
-  code {
+  :where(code) {
     font-weight: var(--dt-font-weight-normal);
   }
 }
@@ -936,8 +989,8 @@ code {
 
   display: flex;
   flex-direction: column;
-  gap: var(--dt-size-600);
-  margin-block: var(--dt-size-550);
+  gap: var(--dt-spacing-200);
+  margin-block: var(--dt-spacing-300);
 
   @media screen and (min-width: 640px) {
     flex-direction: row;
@@ -945,12 +998,12 @@ code {
 
   &__hd {
     display: flex;
-    gap: var(--dt-size-100);
+    gap: var(--dt-spacing-1);
     align-items: center;
     align-self: baseline;
-    padding: var(--dt-size-100) var(--dt-size-350);
+    padding: var(--dt-spacing-1) var(--dt-spacing-75);
     color: var(--dt-color-foreground-primary-inverted);
-    font: var(--dt-text-label-sm);
+    font: var(--dt-text-label-xs);
     background-color: var(--usage-item-background-hd);
     border-radius: var(--dt-size-radius-pill);
 
@@ -964,18 +1017,18 @@ code {
   }
 
   &__label {
-    padding-inline: var(--dt-size-200);
+    padding-inline: var(--dt-spacing-25);
   }
 
   &__item {
     display: flex;
     flex: 1;
     flex-direction: column;
-    gap: var(--dt-size-500);
-    padding: var(--dt-size-550);
+    gap: var(--dt-spacing-200);
+    padding: var(--dt-spacing-200);
     color: var(--dt-color-foreground-secondary);
     border: var(--dt-size-border-100) solid var(--usage-item-color-border);
-    border-radius: var(--dt-size-500);
+    border-radius: var(--dt-size-radius-400);
 
     &--do {
       --usage-item-color-border: var(--dt-color-border-success);
@@ -1006,7 +1059,7 @@ code {
 //  ----------------------------------------------------------------------------
 
 [outline] {
-  outline: var(--dt-size-200) solid orangered;
+  outline: var(--dt-spacing-25) solid orangered;
 }
 
 // ============================================================================

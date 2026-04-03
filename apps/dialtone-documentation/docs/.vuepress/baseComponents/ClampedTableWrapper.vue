@@ -1,24 +1,24 @@
 <template>
-  <dt-stack gap="400" class="dialtone-doc-table-clamped d-ps-relative" role="region" aria-label="Searchable table">
-    <div v-if="shouldShowSearch" role="search">
+  <dt-stack gap="100" class="dialtone-doc-table-clamped d-ps-relative" role="region" aria-label="Searchable table">
+    <dt-stack v-if="shouldShowSearch" role="search" direction="row" align="center" gap="200">
       <dt-input
         v-model="inputSearchValue"
         aria-label="Search table"
         placeholder="Search table"
         type="search"
-        root-class="d-w332"
+        root-class="d-w-500"
         @keydown.escape="handleEscapeKey"
       >
         <template #startIcon="{ iconSize }">
           <dt-icon name="search" :size="iconSize" />
         </template>
         <template v-if="inputSearchValue.length !== 0" #endIcon>
-          <dt-stack class="d-pr1">
+          <dt-stack class="d-pie-1">
             <dt-button
               v-dt-tooltip="`Clear`"
               kind="muted"
               importance="clear"
-              size="xs"
+              :size="100"
               aria-label="Clear search"
               @click="clearSearch"
             >
@@ -29,12 +29,17 @@
           </dt-stack>
         </template>
       </dt-input>
-    </div>
+      <dt-toggle v-if="hasDeprecatedRows" v-model="hideDeprecated" wrapper-class="d-g-100" size="sm">
+        <dt-text kind="label" size="xs" strength="normal">
+          Hide deprecated
+        </dt-text>
+      </dt-toggle>
+    </dt-stack>
     <dt-empty-state
       v-if="showEmptyState"
-      size="sm"
+      :size="200"
       :header-text="`No results found`"
-      class="d-w100p d-ba d-bc-subtle d-bar8 d-pt32"
+      class="d-w100p d-ba d-bc-subtle d-bar8 d-pbs-400"
     >
       <template #icon="{ iconSize }">
         <!-- maybe alt icon? -->
@@ -51,14 +56,14 @@
     </div>
     <div
       v-if="shouldShowButton"
-      class="dialtone-doc-table-clamped__more d-ps-absolute d-bn16 d-l50p"
+      class="dialtone-doc-table-clamped__more d-ps-absolute d-bn8 d-l50p"
       aria-hidden="true"
     >
       <dt-button
         class="dialtone-doc-table-clamped__more-btn d-bgc-secondary d-bs-sm"
         kind="muted"
         importance="outlined"
-        size="sm"
+        :size="100"
         @click="() => handleExpand(scrollRef)"
       >
         {{ buttonLabel }}
@@ -93,7 +98,7 @@ const { buttonLabel, iconName, maxHeightClass } = defineProps({
   },
   maxHeightClass: {
     type: String,
-    default: 'd-hmx464',
+    default: 'd-hmx-700',
   },
 });
 
@@ -105,6 +110,8 @@ const inputSearchValue = ref('');
 const showEmptyState = ref(false);
 const searchResultsAnnouncement = ref('');
 const shouldShowSearch = ref(true);
+const hasDeprecatedRows = ref(false);
+const hideDeprecated = ref(true);
 
 // DOM reference for measuring content height
 const scrollRef = ref(null);
@@ -150,10 +157,36 @@ const updateExpandableState = () => {
 const checkSearchVisibility = () => {
   const table = scrollRef.value?.querySelector('table');
   if (table) {
-    // Gets all data rows from all tbody elements (handles multiple tbody correctly)
     const rows = table.querySelectorAll('tbody tr');
     shouldShowSearch.value = rows.length >= SEARCH_VISIBILITY_THRESHOLD;
   }
+};
+
+// Cached deprecated row references (populated once on mount, static thereafter)
+let cachedDeprecatedRows = null;
+
+// Detect deprecated rows once and cache the references
+const initDeprecatedRows = () => {
+  const table = scrollRef.value?.querySelector('table');
+  if (!table) {
+    cachedDeprecatedRows = [];
+    hasDeprecatedRows.value = false;
+    return;
+  }
+  const badges = [...table.querySelectorAll('[data-qa="dt-badge"]')].filter(
+    badge => badge.textContent.trim() === 'Deprecated',
+  );
+  cachedDeprecatedRows = badges.map(badge => badge.closest('tr')).filter(Boolean);
+  hasDeprecatedRows.value = cachedDeprecatedRows.length > 0;
+};
+
+// Toggle visibility of deprecated rows using cached references
+const toggleDeprecatedRows = () => {
+  if (!cachedDeprecatedRows) return;
+  cachedDeprecatedRows.forEach(row => {
+    row.toggleAttribute('hidden', hideDeprecated.value);
+  });
+  nextTick(() => updateExpandableState());
 };
 
 // Highlight matching text in table cells
@@ -236,6 +269,9 @@ const filterTableRows = (rows, searchTerm) => {
   let visibleCount = 0;
 
   rows.forEach(row => {
+    // Skip rows hidden by the deprecated toggle
+    if (row.hasAttribute('hidden')) return;
+
     const rowText = row.textContent?.toLowerCase() || '';
     const isMatch = rowText.includes(searchTerm);
     row.classList.toggle('d-d-none', !isMatch);
@@ -371,6 +407,11 @@ watch(inputSearchValue, () => {
   handleSearch();
 });
 
+// Watch for deprecated toggle changes
+watch(hideDeprecated, () => {
+  toggleDeprecatedRows();
+});
+
 // Watch for search state changes and update expandable
 watch(showEmptyState, () => {
   if (!showEmptyState.value) {
@@ -380,7 +421,9 @@ watch(showEmptyState, () => {
 
 onMounted(() => {
   nextTick(() => {
-    checkSearchVisibility(); // Check on initial mount
+    checkSearchVisibility();
+    initDeprecatedRows();
+    toggleDeprecatedRows();
 
     // Initialize expandable functionality
     if (scrollRef.value) {
@@ -421,7 +464,7 @@ onBeforeUnmount(() => {
   }
 
   &__more {
-    transform: translateX(calc(var(--dt-size-50-percent) * -1)); // Transform kept as custom
+    transform: translateX(calc(var(--dt-layout-50-percent) * -1)); // Transform kept as custom
   }
 
 }

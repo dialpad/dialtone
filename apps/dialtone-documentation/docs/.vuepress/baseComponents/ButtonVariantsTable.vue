@@ -1,7 +1,7 @@
 <script setup>
 console.log(window.DIALTONE_CONSTANTS);
 
-const kindModifiers = Object.keys(window.DIALTONE_CONSTANTS.BUTTON_KIND_MODIFIERS);
+const kindModifiers = Object.keys(window.DIALTONE_CONSTANTS.BUTTON_KIND_MODIFIERS).filter(k => k !== 'inverted');
 const importanceModifiers = Object.keys(window.DIALTONE_CONSTANTS.BUTTON_IMPORTANCE_MODIFIERS);
 
 const importanceDescriptions = {
@@ -20,7 +20,7 @@ const kindDescriptions = {
 </script>
 
 <template>
-  <table class="d-table dialtone-doc-table d-mb16">
+  <table class="d-table dialtone-doc-table d-mbe-200">
     <colgroup>
       <col>
       <col class="d-w25p">
@@ -29,12 +29,12 @@ const kindDescriptions = {
     </colgroup>
     <thead>
       <tr>
-        <th class="d-ta-left d-va-top" />
+        <th class="d-ta-left d-va-top" aria-hidden="true" />
         <th v-for="importance in importanceModifiers" :key="importance" class="d-ta-left d-va-top">
-          <div class="d-mb4">
+          <div class="d-mbe-50">
             {{ importance }}
           </div>
-          <dt-text kind="body" size="sm" density="200" class="d-tt-none">
+          <dt-text kind="body" :size="200" density="200" class="d-tt-none">
             {{ importanceDescriptions[importance] }}
           </dt-text>
         </th>
@@ -42,11 +42,11 @@ const kindDescriptions = {
     </thead>
     <tbody>
       <tr v-for="kind in kindModifiers" :key="kind">
-        <th class="d-ta-left d-pl0" scope="row">
-          <a class="d-link d-fs-100 d-fw-medium d-d-block d-mb4 d-tt-uppercase" :href="`#${kind}`">
+        <th class="d-ta-left d-pis-0" scope="row">
+          <a class="d-link d-fs-100 d-fw-medium d-d-block d-mbe-50 d-tt-uppercase" :href="`#${kind}`">
             <strong>{{ kind }}</strong>
           </a>
-          <dt-text kind="body" size="sm" density="200">
+          <dt-text kind="body" :size="200" density="200">
             {{ kindDescriptions[kind] }}
           </dt-text>
         </th>

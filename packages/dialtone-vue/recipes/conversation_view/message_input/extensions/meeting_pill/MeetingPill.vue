@@ -17,7 +17,7 @@
           <dt-button
             circle
             importance="clear"
-            size="xs"
+            :size="100"
             :aria-label="closeButtonTitle"
             :title="closeButtonTitle"
             @click="close"
@@ -37,7 +37,7 @@
 <script>
 import { NodeViewWrapper, nodeViewProps } from '@tiptap/vue-3';
 import { DtItemLayout } from '@/components/item_layout';
-import { DtIconClose, DtIconVideo } from '@dialpad/dialtone-icons/vue3';
+import { DtIconClose, DtIconVideo } from '@dialpad/dialtone-icons/vue';
 import { DtButton } from '@/components/button';
 import { DialtoneLocalization } from '@/localization';
 

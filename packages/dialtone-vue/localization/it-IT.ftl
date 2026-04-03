@@ -55,6 +55,10 @@ DIALTONE_EDITOR_LINK_BUTTON_LABEL = Link
 DIALTONE_EDITOR_ADD_LINK_BUTTON =
     .title = Aggiungi link
     .aria-label = Campo di input per aggiungere il link
+DIALTONE_EDITOR_FONT_STYLE_BUTTON_LABEL = Font
+DIALTONE_EDITOR_FONT_STYLE_SEARCH_PLACEHOLDER = Cerca font
+DIALTONE_EDITOR_FONT_SIZE_BUTTON_LABEL = Dimensione carattere
+DIALTONE_EDITOR_FONT_COLOR_BUTTON_LABEL = Colore del testo
 DIALTONE_EMOJI_ROW_REACTION_LABEL =
     { $personCount ->
         [one] ha reagito con { $reaction }

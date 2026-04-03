@@ -50,11 +50,11 @@ describe('DtDescriptionList Tests', () => {
 
     describe('When gap prop is set', () => {
       it('Should have correct class', () => {
-        mockProps = { gap: '300' };
+        mockProps = { gap: '50' };
 
         updateWrapper();
 
-        expect(wrapper.classes().includes('d-description-list--gap-300')).toBe(true);
+        expect(wrapper.classes().includes('d-description-list--gap-50')).toBe(true);
       });
     });
   });

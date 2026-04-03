@@ -26,7 +26,7 @@
     </template>
 
     <template #content>
-      <dt-stack gap="500">
+      <dt-stack gap="200">
         <div
           class="d-recipe-message-input__link-dialog-title"
         >
@@ -35,7 +35,7 @@
         <dt-input
           v-model="linkText"
           :input-aria-label="textInputLabel"
-          size="xs"
+          :size="100"
           data-qa="dt-message-input-link-text-input"
           :label="textInputLabel"
           input-wrapper-class="d-recipe-message-input__link-input"
@@ -46,7 +46,7 @@
         <dt-input
           v-model="linkInput"
           :input-aria-label="linkInputLabel"
-          size="xs"
+          :size="100"
           data-qa="dt-message-input-link-input"
           :placeholder="linkInputPlaceHolder"
           :label="linkInputLabel"
@@ -64,7 +64,7 @@
             :title="removeButtonLabel"
             importance="clear"
             kind="danger"
-            size="md"
+            :size="300"
             data-qa="dt-message-input-link-remove-btn"
             @click="$emit('remove-link', linkText, linkInput)"
           >
@@ -72,21 +72,21 @@
           </dt-button>
           <dt-stack
             direction="row"
-            gap="400"
+            gap="100"
           >
             <dt-button
               :aria-label="cancelButtonLabel"
               :title="cancelButtonLabel"
               importance="clear"
               kind="muted"
-              size="md"
+              :size="300"
               data-qa="dt-message-input-link-cancel-btn"
               @click="isOpen = false"
             >
               {{ cancelButtonLabel }}
             </dt-button>
             <dt-button
-              size="md"
+              :size="300"
               :aria-label="confirmButtonLabel"
               :title="confirmButtonLabel"
               data-qa="dt-message-input-link-confirm-btn"
@@ -106,7 +106,7 @@ import { DtPopover } from '@/components/popover';
 import { DtInput } from '@/components/input';
 import { DtButton } from '@/components/button';
 import { DtStack } from '@/components/stack';
-import { DtIconLink2 } from '@dialpad/dialtone-icons/vue3';
+import { DtIconLink2 } from '@dialpad/dialtone-icons/vue';
 import DtRecipeMessageInputButton from './message_input_button.vue';
 import { DialtoneLocalization } from '@/localization';
 

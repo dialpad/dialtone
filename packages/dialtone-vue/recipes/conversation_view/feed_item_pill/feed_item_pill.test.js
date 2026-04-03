@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import DtRecipeFeedItemPill from './feed_item_pill.vue';
-import { DtIconVideo } from '@dialpad/dialtone-icons/vue3';
+import { DtIconVideo } from '@dialpad/dialtone-icons/vue';
 
 describe('DtRecipeFeedItemPill Tests', function () {
   let wrapper, feedItemPill, icon;

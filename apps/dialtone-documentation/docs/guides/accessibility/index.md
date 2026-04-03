@@ -13,7 +13,7 @@ Dialpad strives to maintain  **WCAG 2.1 AA** compliance in our digital products.
 
 Everyone benefits when things are designed accessibly. Simply put: building products for accessibility is simply building products for better usability. Considering  **1 in 4** US adults -- that’s 61 million people! -- live with a permanent disability and many more will have temporary or situational throughout their lifetime, accessibility isn’t for just some people. It benefits everyone.
 
-<figure class="d-ml0 d-p16 d-mr0 d-p0 d-bar4 d-ta-center d-ba d-baw2 d-bc-black-200">
+<figure class="d-mis-0 d-p-200 d-mie-0 d-p-0 d-bar4 d-ta-center d-ba d-baw2 d-bc-black-200">
   <img class="d-wmx40p" src="/assets/images/accessibility-graphic.png" alt="Accessibility illustration: permanent, temporary and situational disabilities. For touch, a person could have one arm, an arm injury, or be a new parent holding an infant. For sight, a person could be blind, have cataracts, or be a distracted driver. For hearing, the person might be deaf, have an ear infection, or be a bartender in a loud bar. When speaking, a person might be non-verbal, have laryngitis, or speak with a heavy accent">
   <figcaption class="d-ta-left"><a href="https://www.microsoft.com/design/inclusive/" target="_blank" rel="noopener noreferrer" class="d-link">Microsoft Inclusive Design</a></figcaption>
 </figure>

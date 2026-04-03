@@ -1,5 +1,5 @@
 <template>
-  <div class="d-h264">
+  <div class="d-h-400">
     <dt-recipe-message-input
       ref="input"
       v-model="value"
@@ -102,6 +102,12 @@
         #scheduleMessage
       >
         <span v-html="$attrs.scheduleMessage" />
+      </template>
+      <template
+        v-if="$attrs.messagePolish"
+        #messagePolish
+      >
+        <span v-html="$attrs.messagePolish" />
       </template>
       <template
         v-if="$attrs.smsCount"

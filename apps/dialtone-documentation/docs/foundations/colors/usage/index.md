@@ -4,7 +4,7 @@ description: A systematic and accessible color palette that supports both functi
 keywords: ["ui colors","semantic colors","text color","background color"]
 ---
 
-<div class="d-m32"></div>
+<div class="d-m-400"></div>
 
 ## Overview
 
@@ -12,7 +12,7 @@ Dialtone's color system offers a consistent visual foundation with a brand purpl
 
 What we prioritize is semantic clarity, ensuring each color serves a distinct purpose within the UI for clear communication and consistency...
 
-<div class="d-m32"></div>
+<div class="d-m-400"></div>
 
 <div class="d-bgc-secondary d-bar8">
  <svg-loader name="color-table" />
@@ -24,7 +24,7 @@ Dialtone uses **semantic tokens** for color, representing a color's *purpose* in
 
 <div class="d-bgc-secondary d-bar8"><svg-loader class="d-fl1" name="color-tokens" /></div>
 
-<div class="d-m32"></div>
+<div class="d-m-400"></div>
 
 It's crucial to understand that while these semantic tokens are built upon our underlying **base color palette**, the work of selecting the appropriate base color for each specific UI context has already been meticulously done for you.
 
@@ -42,7 +42,7 @@ We categorize color application by semantic roles such as: **text, surfaces, bor
 
 Foreground colors are the visual language of our content, applied across all content considered to be "in the foreground", i.e. text and icons. You can utilize foreground tokens which can be found within the [tokens documentation here](https://dialtone.dialpad.com/tokens/).
 
-<div class="d-d-grid d-g24 d-g-cols2">
+<div class="d-d-grid d-g-300 d-g-cols2">
   <div>
     <div class="d-bgc-secondary d-bar8"><svg-loader class="d-fl1" name="color-text-f" /></div>
     <h4>Foreground Text</h4>
@@ -69,7 +69,7 @@ Foreground colors are the visual language of our content, applied across all con
 
 Surface colors define the background of UI elements, from pages and modals to tables and cards. Neutrals provide the primary backdrop, while status colors add emphasis and context.
 
-<div class="d-d-grid d-g24 d-g-cols2">
+<div class="d-d-grid d-g-300 d-g-cols2">
   <div>
     <div class="d-bgc-secondary d-bar8"><svg-loader class="d-fl1" name="color-surface-neutral" /></div>
   </div>
@@ -82,7 +82,7 @@ Surface colors define the background of UI elements, from pages and modals to ta
 
 Borders delineate content areas and components, using neutrals for subtle definition and status colors for heightened emphasis. Inverted colors ensure clarity on darker surfaces.
 
-<div class="d-d-grid d-g24 d-g-cols2">
+<div class="d-d-grid d-g-300 d-g-cols2">
   <div>
     <div class="d-bgc-secondary d-bar8"><svg-loader class="d-fl1" name="color-border-ai" /></div>
   </div>
@@ -95,7 +95,7 @@ Borders delineate content areas and components, using neutrals for subtle defini
 
 View our [Chart Colors](../chart-colors/index.md) documentation for more information.
 
-<div class="d-d-grid d-g24 d-g-cols2">
+<div class="d-d-grid d-g-300 d-g-cols2">
   <div class="d-bgc-secondary d-bar8">
    <svg-loader name="chart-singlecolor" />
   </div>
@@ -116,7 +116,7 @@ View our [Chart Colors](../chart-colors/index.md) documentation for more informa
 
 Use feedback colors consistently to maintain clear communication and avoid confusion.
 
-<dialtone-usage class="d-d-grid d-g24 d-g-cols2">
+<dialtone-usage class="d-d-grid d-g-300 d-g-cols2">
   <template #do>
     <div class="d-bgc-secondary d-bar8">
       <svg-loader class="d-fl1" name="color-semantics-do" />
@@ -133,7 +133,7 @@ Use feedback colors consistently to maintain clear communication and avoid confu
 
 Embrace semantic tokens to separate color values from their contextual meaning, enhancing maintainability and clarity.
 
-<dialtone-usage class="d-d-grid d-g24 d-g-cols2">
+<dialtone-usage class="d-d-grid d-g-300 d-g-cols2">
   <template #do>
     <div class="d-bgc-secondary d-bar8">
       <svg-loader class="d-fl1" name="color-token-do" />
@@ -152,7 +152,7 @@ We primarily employ the APCA for precise contrast evaluation, ensuring readabili
 
 **Refer to Accessibility Guidelines for detailed information.**
 
-<dialtone-usage class="d-d-grid d-g24 d-g-cols2">
+<dialtone-usage class="d-d-grid d-g-300 d-g-cols2">
   <template #do>
     <div class="d-bgc-secondary d-bar8">
       <svg-loader class="d-fl1" name="color-contrast-do" />
@@ -169,7 +169,7 @@ We primarily employ the APCA for precise contrast evaluation, ensuring readabili
 
 Maintain color consistency across similar components to build intuitive user patterns.
 
-<dialtone-usage class="d-d-grid d-g24 d-g-cols2">
+<dialtone-usage class="d-d-grid d-g-300 d-g-cols2">
   <template #do>
     <div class="d-bgc-secondary d-bar8">
       <svg-loader class="d-fl1" name="color-uniform-do" />

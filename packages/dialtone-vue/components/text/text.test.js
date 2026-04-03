@@ -80,6 +80,14 @@ describe('DtText', () => {
     expect(wrapper.classes()).toContain('d-text-headline--3xl');
   });
 
+  describe('When size is numeric', () => {
+    it('should apply the correct typography class for numeric size 200 with body kind', () => {
+      const wrapper = mountComponent({ kind: 'body', size: 200 });
+
+      expect(wrapper.classes()).toContain('d-text-body--sm');
+    });
+  });
+
   it('applies truncate class when truncate prop is true', () => {
     const wrapper = mountComponent({ truncate: true });
 

@@ -4,17 +4,12 @@
       v-for="(variant, i) in variantsTabs"
       :key="i"
     >
-      <p class="d-fw-bold d-mb8">
+      <p class="d-fw-bold d-mbe-100">
         {{ variant.description }}
       </p>
       <dt-tab-group
         v-bind="variant.propsToBind"
-        :class="[
-          'd-mb8',
-          {
-            'd-bgc-contrast d-p2': variant.propsToBind.inverted,
-          },
-        ]"
+        class="d-mbe-100"
       >
         <template #tabs>
           <dt-tab
@@ -39,11 +34,7 @@
           </dt-tab>
         </template>
 
-        <div
-          :class="{
-            'd-fc-primary-inverted': variant.propsToBind.inverted,
-          }"
-        >
+        <div>
           <dt-tab-panel
             :id="`${i}2`"
             :tab-id="`${i}1`"
@@ -84,12 +75,6 @@ export default {
           propsToBind: {},
         },
         {
-          description: 'Inverted tabs',
-          propsToBind: {
-            inverted: true,
-          },
-        },
-        {
           description: 'Small size tabs',
           propsToBind: {
             size: 'sm',
@@ -105,6 +90,18 @@ export default {
           description: 'Disabled tabs',
           propsToBind: {
             disabled: true,
+          },
+        },
+        {
+          description: 'Spread grow tabs',
+          propsToBind: {
+            spread: 'grow',
+          },
+        },
+        {
+          description: 'Spread equal tabs',
+          propsToBind: {
+            spread: 'equal',
           },
         },
       ],

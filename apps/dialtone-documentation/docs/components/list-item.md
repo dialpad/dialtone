@@ -9,102 +9,8 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["list element", "d-list-item", "DtListItem", "dt-list-item"]
 ---
 
-<code-well-header class="d-d-block">
-  <ul>
-    <dt-list-item navigation-type="tab">
-      <template #start>
-        <dt-icon size="300" name="check" />
-      </template>
-      <span>Default List Item</span>
-      <template #subtitle>
-        Description
-      </template>
-      <template #bottom>
-        <dt-badge text="Label" />
-      </template>
-      <template #end>
-        <dt-icon size="300" name="external-link" />
-      </template>
-    </dt-list-item>
-  </ul>
-</code-well-header>
-
-## Base Style
-
-A list item provides accessibility controls and common functionality. The component uses child components that provide styling and slots for different types of list items. If you want to create a custom list item you can pass a type "custom", which will let you define the structure of the content.
-
-The default list item has 5 slots that can be used for the most common use cases, **start**, **end**, **default**, **subtitle** and **bottom** slot. All of the slots are optional.
-
-The **start** slot can contain content, such as an avatar, that will be positioned at the start (left in LTR) of the main content.
-
-The **end** slot works the same way, but its contents are placed at the end (right in LTR) of the main slot.
-
-The **default** slot contains the main content of the list item.
-
-The **subtitle** slot can be used to display content below the default slot. The slot has smaller text size and lighter color than default slot.
-
-The **bottom** slot can be used to display content below the subtitle slot.
-
-<code-well-header class="d-d-block">
-  <ul>
-    <dt-list-item navigation-type="tab">
-      <template #start>
-        <dt-icon size="300" name="check" />
-      </template>
-      <span>Default List Item</span>
-      <template #subtitle>
-        Description
-      </template>
-      <template #bottom>
-        <dt-badge text="Label" />
-      </template>
-      <template #end>
-        <dt-icon size="300" name="external-link" />
-      </template>
-    </dt-list-item>
-  </ul>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<ul>
-  <li id="dt4" class="d-list-item d-list-item--focusable" tabindex="0" role="listitem">
-    <div class="d-item-layout">
-      <section class="d-item-layout--left">
-        <span class="d-icon__wrapper">
-          <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-500" style="display: none;">
-            <div
-              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
-              style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-            ></div>
-          </div>
-          <svg>...</svg>
-        </span>
-      </section>
-      <section class="d-item-layout--content">
-        <div class="d-item-layout--subtitle">
-          {subtitle}
-        </div>
-        <div class="d-item-layout--bottom">
-          {bottom}
-        </div>
-      </section>
-      <section class="d-item-layout--right">
-        <span class="d-icon__wrapper">
-          <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-500" style="display: none;">
-            <div
-              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
-              style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-            ></div>
-          </div>
-          <svg>...</svg>
-        </span>
-      </section>
-    </div>
-  </li>
-</ul>
-'
-vueCode='
+```vue demo-only
+<!-- @class d-d-block -->
 <ul>
   <dt-list-item navigation-type="tab">
     <template #start>
@@ -122,8 +28,46 @@ vueCode='
     </template>
   </dt-list-item>
 </ul>
-'
-/>
+```
+
+<!-- <component-combinator component-name="DtListItem" /> -->
+
+## Base Style
+
+A list item provides accessibility controls and common functionality. The component uses child components that provide styling and slots for different types of list items. If you want to create a custom list item you can pass a type "custom", which will let you define the structure of the content.
+
+The default list item has 5 slots that can be used for the most common use cases, **start**, **end**, **default**, **subtitle** and **bottom** slot. All of the slots are optional.
+
+The **start** slot can contain content, such as an avatar, that will be positioned at the start (left in LTR) of the main content.
+
+The **end** slot works the same way, but its contents are placed at the end (right in LTR) of the main slot.
+
+The **default** slot contains the main content of the list item.
+
+The **subtitle** slot can be used to display content below the default slot. The slot has smaller text size and lighter color than default slot.
+
+The **bottom** slot can be used to display content below the subtitle slot.
+
+```vue demo
+<!-- @class d-d-block -->
+<ul>
+  <dt-list-item navigation-type="tab">
+    <template #start>
+      <dt-icon size="300" name="check" />
+    </template>
+    <span>Default List Item</span>
+    <template #subtitle>
+      Description
+    </template>
+    <template #bottom>
+      <dt-badge text="Label" />
+    </template>
+    <template #end>
+      <dt-icon size="300" name="external-link" />
+    </template>
+  </dt-list-item>
+</ul>
+```
 
 ## Variants
 
@@ -131,130 +75,72 @@ vueCode='
 
 When `type` is set to "custom" the list item will not render any styles or slots. This type can be used when the list item has to support content that does not work with the default structure.
 
-<code-well-header class="d-d-block">
-  <ul ref="customListItem">
-    <dt-list-item
-      navigation-type="tab"
-      type="custom"
-    >
-      <dt-stack direction="row" align="center" justify="between" class="d-py8 d-px12">
-        <div>
-          <time
-            class="d-fs-100 d-pr12"
-            datetime="10:00"
-          >
-            10:00
-          </time>
-          <span class="d-fs-200">
-            Custom List Item Example
-          </span>
-        </div>
-        <dt-stack direction="row" class="d-p6 d-tn8 d-r12 d-bgc-white d-bar4 d-bs-md">
-          <dt-button
-            class="d-p4 d-py8"
-            importance="clear"
-            title="share"
-          >
-            <template #startIcon>
-              <dt-icon
-                name="share-2"
-                size="200"
-              />
-            </template>
-          </dt-button>
-          <dt-button
-            class="d-p4 d-py8 d-ml4"
-            importance="clear"
-            title="star"
-          >
-            <template #startIcon>
-              <dt-icon
-                name="star"
-                size="200"
-              />
-            </template>
-          </dt-button>
-          <dt-button
-            class="d-p4 d-py8 d-ml4"
-            importance="clear"
-            title="more"
-          >
-            <template #startIcon>
-              <dt-icon
-                name="more-vertical"
-                size="200"
-              />
-            </template>
-          </dt-button>
-        </dt-stack>
-      </dt-stack>
-    </dt-list-item>
-  </ul>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.customListItem'
-vueCode='
+```vue demo
+<!-- @class d-d-block -->
 <ul>
   <dt-list-item
     navigation-type="tab"
     type="custom"
   >
-    <dt-stack direction="row" align="center" justify="between" class="d-py8 d-px12">
-      <div>
-        <time
-          class="d-fs-100 d-pr12"
+    <dt-stack direction="row" align="start" justify="between" gap="500" class="d-py-100 d-px-150 d-pie-100">
+      <dt-stack align="baseline" direction="row" gap="400">
+        <dt-text
+          kind="body"
+          tone="muted"
+          :size="100"
           datetime="10:00"
         >
           10:00
-        </time>
-        <span class="d-fs-200">
-          Custom List Item Example
-        </span>
-      </div>
-      <dt-stack direction="row" class="d-p6 d-tn8 d-r12 d-bgc-white d-bar4 d-bs-md">
+        </dt-text>
+        <dt-text :size="300" density="300" kind="body" tone="secondary">
+          Custom list item example lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+        </dt-text>
+      </dt-stack>
+      <dt-stack direction="row">
         <dt-button
-          class="d-p4 d-py8"
+          :size="100"
+          kind="muted"
           importance="clear"
           title="share"
         >
-          <template #startIcon>
+          <template #startIcon="{ iconSize }">
             <dt-icon
-              name="share-2"
-              size="200"
+              name="share"
+              :size="iconSize"
             />
           </template>
         </dt-button>
         <dt-button
-          class="d-p4 d-py8 d-ml4"
+          :size="100"
+          kind="muted"
           importance="clear"
           title="star"
         >
-          <template #startIcon>
+          <template #startIcon="{ iconSize }">
             <dt-icon
               name="star"
-              size="200"
+              :size="iconSize"
             />
           </template>
         </dt-button>
         <dt-button
-          class="d-p4 d-py8 d-ml4"
+          :size="100"
+          kind="muted"
           importance="clear"
           title="more"
         >
-          <template #startIcon>
+          <template #startIcon="{ iconSize }">
             <dt-icon
               name="more-vertical"
-              size="200"
+              :size="iconSize"
             />
           </template>
         </dt-button>
       </dt-stack>
-      </dt-stack>
+    </dt-stack>
   </dt-list-item>
 </ul>
-'
-/>
+```
 
 ## Vue API
 

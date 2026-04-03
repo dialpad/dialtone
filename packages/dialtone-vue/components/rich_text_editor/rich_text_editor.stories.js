@@ -192,3 +192,20 @@ export const WithCustomExtensions = {
     useDivTags: false,
   },
 };
+
+export const WithSignatureFeatures = {
+  ...Default,
+  args: {
+    modelValue: '<p>This editor has signature features enabled: font controls, tables, inline images with resizing, and variables.</p>',
+    allowFontColor: true,
+    allowBackgroundColor: true,
+    allowFontSize: true,
+    allowFontFamily: true,
+    allowLineHeight: true,
+    allowTables: true,
+    allowInlineImages: true,
+    allowImageResize: true,
+    allowVariable: true,
+    useDivTags: true,
+  },
+};

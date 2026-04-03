@@ -2,13 +2,13 @@
   <dt-stack
     class="d-datepicker__month-year"
     direction="row"
-    gap="300"
+    gap="50"
   >
     <dt-stack
       as="nav"
       class="d-datepicker__nav"
       direction="row"
-      gap="200"
+      gap="25"
     >
       <dt-tooltip
         :fallback-placements="['top-start', 'auto']"
@@ -20,19 +20,18 @@
             id="prevYearButton"
             :ref="el => { if (el) setDayRef(el) }"
             :aria-label="previousYearAriaLabel()"
-            :circle="true"
             :disabled="isPrevYearDisabled"
+            kind="muted"
             class="d-datepicker__nav-btn"
             importance="clear"
-            kind="muted"
-            size="xs"
+            :size="100"
             type="button"
             @click="changeYear(-1)"
             @keydown="handleKeyDown($event)"
           >
-            <dt-icon-chevrons-left
-              size="200"
-            />
+            <template #icon="{ iconSize }">
+              <dt-icon-chevrons-left :size="iconSize" />
+            </template>
           </dt-button>
         </template>
       </dt-tooltip>
@@ -46,19 +45,18 @@
             id="prevMonthButton"
             :ref="el => { if (el) setDayRef(el) }"
             :aria-label="previousMonthAriaLabel()"
-            :circle="true"
             :disabled="isPrevMonthDisabled"
             class="d-datepicker__nav-btn"
             importance="clear"
             kind="muted"
-            size="xs"
+            :size="100"
             type="button"
             @click="changeMonth(-1)"
             @keydown="handleKeyDown($event)"
           >
-            <dt-icon-chevron-left
-              size="200"
-            />
+            <template #icon="{ iconSize }">
+              <dt-icon-chevron-left :size="iconSize" />
+            </template>
           </dt-button>
         </template>
       </dt-tooltip>
@@ -75,7 +73,7 @@
       as="nav"
       class="d-datepicker__nav"
       direction="row"
-      gap="200"
+      gap="25"
     >
       <dt-tooltip
         :fallback-placements="['top-end', 'auto']"
@@ -87,19 +85,18 @@
             id="nextMonthButton"
             :ref="el => { if (el) setDayRef(el) }"
             :aria-label="nextMonthAriaLabel()"
-            :circle="true"
             :disabled="isNextMonthDisabled"
             class="d-datepicker__nav-btn"
             importance="clear"
             kind="muted"
-            size="xs"
+            :size="100"
             type="button"
             @click="changeMonth(1)"
             @keydown="handleKeyDown($event)"
           >
-            <dt-icon-chevron-right
-              size="200"
-            />
+            <template #icon="{ iconSize }">
+              <dt-icon-chevron-right :size="iconSize" />
+            </template>
           </dt-button>
         </template>
       </dt-tooltip>
@@ -113,19 +110,18 @@
             id="nextYearButton"
             :ref="el => { if (el) setDayRef(el) }"
             :aria-label="nextYearAriaLabel()"
-            :circle="true"
             :disabled="isNextYearDisabled"
             class="d-datepicker__nav-btn"
             importance="clear"
             kind="muted"
-            size="xs"
+            :size="100"
             type="button"
             @click="changeYear(1)"
             @keydown="handleKeyDown($event)"
           >
-            <dt-icon-chevrons-right
-              size="200"
-            />
+            <template #icon="{ iconSize }">
+              <dt-icon-chevrons-right :size="iconSize" />
+            </template>
           </dt-button>
         </template>
       </dt-tooltip>
@@ -139,7 +135,7 @@ import {
   DtIconChevronsLeft,
   DtIconChevronRight,
   DtIconChevronsRight,
-} from '@dialpad/dialtone-icons/vue3';
+} from '@dialpad/dialtone-icons/vue';
 import { DtStack } from '@/components/stack';
 import { DtButton } from '@/components/button';
 import { DtTooltip } from '@/components/tooltip';

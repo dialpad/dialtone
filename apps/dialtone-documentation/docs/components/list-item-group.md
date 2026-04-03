@@ -6,84 +6,13 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-list-item-gr
 keywords: ["list group", "list items", "d-list-item-group", "DtListItemGroup", "dt-list-item-group", "menu list", "option list"]
 ---
 
-<code-well-header>
-  <dt-list-item-group
-    heading="Example Heading"
-    heading-class="d-fw-bold"
-  >
-    <dt-list-item
-      navigation-type="tab"
-    >
-      item1
-    </dt-list-item>
-    <dt-list-item
-      navigation-type="tab"
-    >
-      item2
-    </dt-list-item>
-    <dt-list-item
-      navigation-type="tab"
-    >
-      item3
-    </dt-list-item>
-  </dt-list-item-group>
-</code-well-header>
+<component-combinator component-name="DtListItemGroup" />
 
-## Base Style
+## Usage
 
-You should use this component when you have multiple list items you would like to group into different categories.
+Use this component when you have multiple list items you would like to group into different categories.
 
 The heading is unstyled by default. You will likely have to pass utility classes to the heading-class prop to make the heading look how you wish.
-
-<code-well-header>
-  <dt-list-item-group
-    heading="Example Heading"
-    heading-class="d-fw-bold"
-    ref="listItemGroup"
-  >
-    <dt-list-item
-      navigation-type="tab"
-    >
-      item1
-    </dt-list-item>
-    <dt-list-item
-      navigation-type="tab"
-    >
-      item2
-    </dt-list-item>
-    <dt-list-item
-      navigation-type="tab"
-    >
-      item3
-    </dt-list-item>
-  </dt-list-item-group>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.listItemGroup'
-vueCode='
-<dt-list-item-group
-  heading="Example Heading"
-  heading-class="d-fw-bold"
->
-  <dt-list-item
-    navigation-type="tab"
-  >
-    item1
-  </dt-list-item>
-  <dt-list-item
-    navigation-type="tab"
-  >
-    item2
-  </dt-list-item>
-  <dt-list-item
-    navigation-type="tab"
-  >
-    item3
-  </dt-list-item>
-</dt-list-item-group>
-'
-/>
 
 ## Accessibility
 

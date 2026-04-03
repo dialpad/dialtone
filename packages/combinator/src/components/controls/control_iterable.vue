@@ -1,66 +1,71 @@
 <template>
+  <dt-text
+    as="div"
+    kind="label"
+    :size="100"
+    tone="secondary"
+  >
+    <slot />
+  </dt-text>
+  <dt-text
+    kind="code"
+    tone="muted"
+    :size="100"
+  >
+    <slot name="prefix" />
+  </dt-text>
   <div>
-    <div>
-      <slot />
-    </div>
-    <div class="d-fs18">
-      <slot name="prefix" />
-    </div>
-    <div>
-      <template
-        v-for="(item, index) in value"
-        :key="getId(index)"
-      >
-        <dt-stack
-          direction="row"
-          class="d-my1"
-        >
-          <div class="d-fl-grow1">
-            <dt-list-item
-              class="d-p6 d-pl0"
-              navigation-type="tab"
-              type="custom"
-            >
-              <slot
-                name="item"
-                :item="item"
-                :update="(e) => updateItem(index, e)"
-              />
-            </dt-list-item>
-          </div>
-          <div>
-            <dt-button
-              class="dtc-icon d-px0 d-py6 d-ps-relative d-t6"
-              importance="clear"
-              size="xs"
-              :disabled="disabled"
-              @click="() => removeItem(index)"
-            >
-              <dt-icon-close />
-            </dt-button>
-          </div>
-        </dt-stack>
-      </template>
-      <div>
+    <template
+      v-for="(item, index) in value"
+      :key="getId(index)"
+    >
+      <dt-stack direction="row">
+        <div class="d-fl-grow1">
+          <slot
+            name="item"
+            :item="item"
+            :update="(e) => updateItem(index, e)"
+          />
+        </div>
         <dt-button
-          class="dtc-icon d-p0 d-mt8"
+          class="dtc-icon"
           importance="clear"
+          kind="muted"
+          :size="100"
           :disabled="disabled"
-          @click="addItem"
+          @click="() => removeItem(index)"
         >
-          <dt-icon-plus />
+          <template #icon="{ iconSize }">
+            <dt-icon-close :size="iconSize" />
+          </template>
         </dt-button>
-      </div>
-    </div>
-    <div class="d-fs18">
-      <slot name="suffix" />
-    </div>
+      </dt-stack>
+    </template>
+    <dt-button
+      class="dtc-icon"
+      :size="100"
+      importance="clear"
+      kind="muted"
+      :disabled="disabled"
+      @click="addItem"
+    >
+      <template #icon="{ iconSize }">
+        <dt-icon-plus :size="iconSize" />
+      </template>
+    </dt-button>
   </div>
+  <dt-text
+    kind="code"
+    tone="muted"
+    :size="100"
+  >
+    <slot name="suffix" />
+  </dt-text>
 </template>
 
 <script setup>
-import { DtIconPlus, DtIconClose } from '@dialpad/dialtone-icons/vue3';
-import { DtButton, DtListItem } from '@dialpad/dialtone-vue';
+import { DtIconPlus, DtIconClose } from '@dialpad/dialtone-icons/vue';
+import { DtButton } from '@dialpad/dialtone-vue';
 import { DEFAULT_PREFIX, VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { idMap } from '@/src/lib/utils_vue';
 import { getUniqueString } from '@/src/lib/utils';

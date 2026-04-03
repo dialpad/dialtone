@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils';
 import { INPUT_SIZES } from './input_constants';
 import { DtIcon } from '@/components/icon';
+import { DtText } from '@/components/text';
 import DtInput from './input.vue';
 
 const MOCK_INPUT_STUB = vi.fn();
@@ -127,6 +128,30 @@ describe('DtInput tests', () => {
         updateWrapper();
 
         expect(label.exists()).toBe(false);
+      });
+
+      it('should set aria-label on the input', () => {
+        mockProps = { labelVisible: false };
+
+        updateWrapper();
+
+        expect(nativeInput.attributes('aria-label')).toBe(baseProps.label);
+      });
+
+      it('should set aria-label on the textarea', () => {
+        mockProps = { labelVisible: false, type: 'textarea' };
+
+        updateWrapper();
+
+        nativeTextarea = wrapper.find('textarea');
+
+        expect(nativeTextarea.attributes('aria-label')).toBe(baseProps.label);
+      });
+    });
+
+    describe('When labelVisible is true', () => {
+      it('should not set aria-label on the input', () => {
+        expect(nativeInput.attributes('aria-label')).toBeUndefined();
       });
     });
 
@@ -434,11 +459,24 @@ describe('DtInput tests', () => {
         });
 
         it('should add label size class', () => {
-          expect(label.classes().includes(`d-label--${MOCK_INPUT_SIZE_EXTRA_SMALL}`)).toBe(true);
+          expect(label.classes().includes(`d-text-label--${MOCK_INPUT_SIZE_EXTRA_SMALL}`)).toBe(true);
         });
 
-        it('should not add description size class', () => {
-          expect(description.classes().includes(`d-description--${MOCK_INPUT_SIZE_EXTRA_SMALL}`)).toBe(false);
+        it('should have DtText description size for xs', () => {
+          const descriptionText = description.findComponent(DtText);
+          expect(descriptionText.props('size')).toBe('xs');
+        });
+      });
+
+      describe('When size is numeric', () => {
+        it('should add input size class for numeric size 200', () => {
+          mockProps = { size: 200 };
+
+          updateWrapper();
+
+          nativeInput = wrapper.find('input');
+
+          expect(nativeInput.classes().includes('d-input--sm')).toBe(true);
         });
       });
 
@@ -455,13 +493,82 @@ describe('DtInput tests', () => {
           expect(nativeInput.classes().includes(`d-input--${MOCK_INPUT_SIZE_EXTRA_LARGE}`)).toBe(true);
         });
 
-        it('should add label size class', () => {
-          expect(label.classes().includes(`d-label--${MOCK_INPUT_SIZE_EXTRA_LARGE}`)).toBe(true);
+        it('should add label size class (xl maps to lg)', () => {
+          expect(label.classes().includes('d-text-label--lg')).toBe(true);
         });
 
-        it('should add description size class', () => {
-          expect(description.classes().includes(`d-description--${MOCK_INPUT_SIZE_EXTRA_LARGE}`)).toBe(true);
+        it('should have DtText description size for xl', () => {
+          const descriptionText = description.findComponent(DtText);
+          expect(descriptionText.props('size')).toBe('md');
         });
+      });
+    });
+
+    describe('When labelSize is provided', () => {
+      it('should override the default label size', () => {
+        mockProps = { label: 'Label', labelSize: 'xs' };
+
+        updateWrapper();
+
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.props('size')).toBe('xs');
+      });
+
+      it('should override the size-derived label size', () => {
+        mockProps = { label: 'Label', size: 'xl', labelSize: 'sm' };
+
+        updateWrapper();
+
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.props('size')).toBe('sm');
+      });
+    });
+
+    describe('When labelStrength is provided', () => {
+      it('should override the default label strength', () => {
+        mockProps = { label: 'Label', labelStrength: 'bold' };
+
+        updateWrapper();
+
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.props('strength')).toBe('bold');
+      });
+
+      it('should not set strength when not provided', () => {
+        mockProps = { label: 'Label' };
+
+        updateWrapper();
+
+        const dtText = wrapper.findComponent(DtText);
+
+        expect(dtText.props('strength')).toBeNull();
+      });
+    });
+
+    describe('When labelClass is provided', () => {
+      it('should apply custom class to the label', () => {
+        mockProps = { label: 'Label', labelClass: 'd-fc-success' };
+
+        updateWrapper();
+
+        const labelEl = wrapper.find('[data-qa="dt-input-label"]');
+
+        expect(labelEl.classes('d-fc-success')).toBe(true);
+      });
+    });
+
+    describe('When descriptionClass is provided', () => {
+      it('should apply custom class to the description', () => {
+        mockProps = { description: 'Description', descriptionClass: 'd-bgc-success' };
+
+        updateWrapper();
+
+        const descriptionEl = wrapper.find('[data-qa="dt-input-description"]');
+
+        expect(descriptionEl.classes('d-bgc-success')).toBe(true);
       });
     });
 
@@ -646,25 +753,37 @@ describe('DtInput tests', () => {
 
       it('should emit input and update:modelValue after composition ends', async () => {
         await nativeInput.trigger('compositionstart');
-        await nativeInput.trigger('input');
-
         nativeInput.element.value = 'か';
-        await nativeInput.trigger('compositionend');
-        await nativeInput.trigger('input');
+        await nativeInput.trigger('input'); // Chrome: input fires before compositionend (blocked)
+        await nativeInput.trigger('compositionend'); // compositionend emits the committed value
 
         expect(wrapper.emitted().input[0][0]).toBe('か');
         expect(wrapper.emitted()['update:modelValue'][0][0]).toBe('か');
       });
 
+      it('should not double-emit when input fires after compositionend (Firefox order)', async () => {
+        await nativeInput.trigger('compositionstart');
+        nativeInput.element.value = 'か';
+        // Firefox fires compositionend then input — dispatch both synchronously
+        // before the microtask that clears justEndedComposition can run
+        nativeInput.element.dispatchEvent(new Event('compositionend', { bubbles: true }));
+        nativeInput.element.dispatchEvent(new Event('input', { bubbles: true }));
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.emitted().input).toHaveLength(1);
+        expect(wrapper.emitted()['update:modelValue']).toHaveLength(1);
+        expect(wrapper.emitted().input[0][0]).toBe('か');
+      });
+
       it('should resume normal emission after composition ends', async () => {
         await nativeInput.trigger('compositionstart');
-        await nativeInput.trigger('input');
         await nativeInput.trigger('compositionend');
 
         nativeInput.element.value = 'hello';
         await nativeInput.trigger('input');
 
-        expect(wrapper.emitted().input[0][0]).toBe('hello');
+        const inputEmissions = wrapper.emitted().input;
+        expect(inputEmissions[inputEmissions.length - 1][0]).toBe('hello');
       });
     });
 
@@ -684,14 +803,24 @@ describe('DtInput tests', () => {
 
       it('should emit input and update:modelValue after composition ends', async () => {
         await nativeTextarea.trigger('compositionstart');
-        await nativeTextarea.trigger('input');
-
         nativeTextarea.element.value = 'か';
-        await nativeTextarea.trigger('compositionend');
-        await nativeTextarea.trigger('input');
+        await nativeTextarea.trigger('input'); // Chrome: input fires before compositionend (blocked)
+        await nativeTextarea.trigger('compositionend'); // compositionend emits the committed value
 
         expect(wrapper.emitted().input[0][0]).toBe('か');
         expect(wrapper.emitted()['update:modelValue'][0][0]).toBe('か');
+      });
+
+      it('should not double-emit when input fires after compositionend (Firefox order)', async () => {
+        await nativeTextarea.trigger('compositionstart');
+        nativeTextarea.element.value = 'か';
+        nativeTextarea.element.dispatchEvent(new Event('compositionend', { bubbles: true }));
+        nativeTextarea.element.dispatchEvent(new Event('input', { bubbles: true }));
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.emitted().input).toHaveLength(1);
+        expect(wrapper.emitted()['update:modelValue']).toHaveLength(1);
+        expect(wrapper.emitted().input[0][0]).toBe('か');
       });
 
       it('should not override textarea value via modelValue watcher while composing', async () => {

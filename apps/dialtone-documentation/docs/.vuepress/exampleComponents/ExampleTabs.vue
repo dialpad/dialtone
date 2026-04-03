@@ -1,9 +1,15 @@
 <template>
   <dt-tab-group
     :size="size"
+    :kind="kind"
+    :outlined="outlined"
     :inverted="inverted"
     :borderless="borderless"
     :disabled="disabled"
+    :spread="spread"
+    :orientation="orientation"
+    :tab-list-class="orientation === 'vertical' ? 'd-w-400' : undefined"
+    :activation-mode="activationMode"
     @before-change="confirmBeforeLeave"
   >
     <template #tabs>
@@ -12,29 +18,24 @@
         panel-id="2"
         selected
       >
-        <p>
-          First tab
-        </p>
+        First tab
       </dt-tab>
       <dt-tab
         id="3"
         panel-id="4"
       >
-        <p>
-          Second tab
-        </p>
+        Second tab
       </dt-tab>
       <dt-tab
         id="5"
         panel-id="6"
         label="Third Label"
       >
-        <p>
-          Third tab
-        </p>
+        Third tab
       </dt-tab>
     </template>
     <div
+      class="d-ba d-baw2 d-bas-dashed d-bc-subtle d-w100p d-plc-center d-py-600"
       :class="{
         'd-fc-primary-inverted': inverted,
       }"
@@ -43,25 +44,25 @@
         id="2"
         tab-id="1"
       >
-        <p>
-          First tab content panel
-        </p>
+        <dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p-200">
+          <strong>First</strong> tab content panel
+        </dt-text>
       </dt-tab-panel>
       <dt-tab-panel
         id="4"
         tab-id="3"
       >
-        <p>
-          Second tab content panel
-        </p>
+        <dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p-200">
+          <strong>Second</strong> tab content panel
+        </dt-text>
       </dt-tab-panel>
       <dt-tab-panel
         id="6"
         tab-id="5"
       >
-        <p>
-          Third tab content panel
-        </p>
+        <dt-text as="p" kind="code" :size="100" tone="muted" align="center" class="d-p-200">
+          <strong>Third</strong> tab content panel
+        </dt-text>
       </dt-tab-panel>
     </div>
   </dt-tab-group>
@@ -75,6 +76,16 @@ export default {
     size: {
       type: String,
       default: '',
+    },
+
+    kind: {
+      type: String,
+      default: '',
+    },
+
+    outlined: {
+      type: Boolean,
+      default: false,
     },
 
     borderless: {
@@ -95,6 +106,21 @@ export default {
     validate: {
       type: Boolean,
       default: false,
+    },
+
+    activationMode: {
+      type: String,
+      default: 'manual',
+    },
+
+    spread: {
+      type: String,
+      default: 'none',
+    },
+
+    orientation: {
+      type: String,
+      default: 'horizontal',
     },
   },
 

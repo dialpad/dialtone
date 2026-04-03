@@ -18,6 +18,8 @@
     :input-wrapper-class="$attrs.inputWrapperClass"
     :root-class="$attrs.rootClass"
     :current-length="$attrs.currentLength"
+    :label-visible="$attrs.labelVisible"
+    :hidden="$attrs.hidden"
     :validate="validationConfig"
     @blur="$attrs.onBlur"
     @input="$attrs.onInput"

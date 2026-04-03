@@ -24,15 +24,15 @@
   --badge-color-text: var(--dt-badge-color-foreground-default);
   --badge-color-background: var(--dt-badge-color-background-default);
   --badge-color-outline: var(--dt-badge-color-border-default);
-  --badge-radius: var(--dt-size-300);
-  --badge-line-height: calc(var(--dt-size-500) + var(--dt-size-200));
+  --badge-radius: var(--dt-size-radius-300);
+  --badge-line-height: calc(var(--dt-spacing-200) + var(--dt-spacing-25));
   --badge-font-size: var(--dt-font-size-100);
   --badge-font-weight: var(--dt-font-weight-semi-bold);
-  --badge-gap: var(--dt-size-200);
-  --badge-letter-spacing: var(--dt-size-50);
-  --badge-padding-y: var(--dt-size-100);
-  --badge-padding-x: var(--dt-size-300);
-  --badge-label-padding-x: var(--dt-size-200);
+  --badge-gap: var(--dt-spacing-25);
+  --badge-letter-spacing: calc(var(--dt-spacing-1) / 2);
+  --badge-padding-y: var(--dt-spacing-1);
+  --badge-padding-x: var(--dt-spacing-50);
+  --badge-label-padding-x: var(--dt-spacing-25);
   --badge-text-case: none;
   --badge-decorative-color: var(--dt-color-black-900);
 
@@ -43,7 +43,7 @@
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  min-inline-size: var(--dt-size-550);
+  min-inline-size: calc(var(--dt-layout-25) * 1.5);
   padding: var(--badge-padding-y) var(--badge-padding-x);
   color: var(--badge-color-text);
   font-weight: var(--badge-font-weight);
@@ -59,11 +59,11 @@
   //  --------------------------------------------------------------------------
   &--count {
     --badge-radius: var(--dt-size-radius-pill);
-    --badge-padding-x: calc(var(--dt-size-400) - var(--dt-size-100));
-    --badge-padding-y: var(--dt-size-300);
-    --badge-line-height: var(--dt-size-500);
-    --badge-label-padding-x: var(--dt-size-0);
-    --badge-gap: var(--dt-size-300);
+    --badge-padding-x: calc(var(--dt-spacing-100) - var(--dt-spacing-1));
+    --badge-padding-y: var(--dt-spacing-50);
+    --badge-line-height: var(--dt-layout-25);
+    --badge-label-padding-x: var(--dt-spacing-0);
+    --badge-gap: var(--dt-spacing-50);
   }
 
   //  TYPE
@@ -99,7 +99,7 @@
     --badge-color-text: var(--dt-badge-color-foreground-ai);
     --badge-color-background: var(--dt-color-brand-magenta); // fallback to gradient
 
-    text-shadow: var(--dt-size-50) var(--dt-size-50) 0 oklch(from var(--dt-color-neutral-black) l c h / 0.6);
+    text-shadow: calc(var(--dt-spacing-1) / 2) calc(var(--dt-spacing-1) / 2) 0 oklch(from var(--dt-color-neutral-black) l c h / 0.6);
     background-image: var(--dt-badge-color-background-ai);
   }
 
@@ -135,12 +135,14 @@
   //  SLOTS
   //  --------------------------------------------------------------------------
   &__decorative {
+    --badge-size: calc(var(--dt-layout-25) / 2);
+
     display: inline-flex;
-    inline-size: var(--dt-size-400);
-    block-size: var(--dt-size-400);
+    inline-size: var(--badge-size);
+    block-size: var(--badge-size);
     background-color: var(--badge-decorative-color);
-    border-radius: var(--dt-size-200);
-    margin-inline-start: var(--dt-size-200);
+    border-radius: var(--dt-size-radius-200);
+    margin-inline-start: var(--dt-spacing-25);
   }
 
   &__label {
@@ -155,11 +157,11 @@
   }
 
   &__icon-left {
-    padding-inline-start: var(--dt-size-100);
+    padding-inline-start: var(--dt-spacing-1);
   }
 
   &__icon-right {
-    padding-inline-end: var(--dt-size-100);
+    padding-inline-end: var(--dt-spacing-1);
   }
 }
 }

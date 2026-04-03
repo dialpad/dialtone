@@ -1,0 +1,116 @@
+//
+//  DIALTONE
+//  COMPONENTS: SEGMENTED CONTROL
+//
+//  These are the styles for segmented-control component.
+//
+//
+//  TABLE OF CONTENTS
+//  • BASE STYLE
+
+//  @@  BASE STYLE
+//  ----------------------------------------------------------------------------
+@layer dialtone.components {
+.d-segmented-control {
+  --padding-segmented-control: var(--dt-spacing-25);
+  --radius-segmented-control-item: var(--dt-button-size-radius-md);
+  --radius-segmented-control: calc(var(--radius-segmented-control-item) + var(--padding-segmented-control));
+
+  gap: var(--padding-segmented-control);
+  padding: var(--padding-segmented-control);
+  border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
+  border-radius: var(--radius-segmented-control);
+
+  &--vertical {
+    // hold
+  }
+
+  &--borderless {
+    padding: 0;
+    border: 0;
+  }
+
+  &--spread-evenly {
+    > .d-segmented-control__item {
+      flex: 1;
+    }
+  }
+
+  &--xs {
+    --padding-segmented-control: var(--dt-spacing-1);
+    --radius-segmented-control-item: var(--dt-button-size-radius-xs);
+  }
+
+  &--sm {
+    --padding-segmented-control: var(--dt-spacing-25);
+    --radius-segmented-control-item: var(--dt-button-size-radius-sm);
+  }
+
+  &--md {
+    --padding-segmented-control: var(--dt-spacing-25);
+    --radius-segmented-control-item: var(--dt-button-size-radius-md);
+  }
+
+  &--lg {
+    --padding-segmented-control: var(--dt-spacing-50);
+    --radius-segmented-control-item: var(--dt-button-size-radius-lg);
+  }
+
+  &--xl {
+    --padding-segmented-control: var(--dt-spacing-50);
+    --radius-segmented-control-item: var(--dt-button-size-radius-xl);
+  }
+
+  &__item {
+    flex: 1 1 auto;
+    border-radius: var(--radius-segmented-control-item);
+  }
+
+  //  --  DIVIDERS
+  //  Base styles shared by both orientations
+  &:where(:not(&--hide-divider)) > :where(&__item:not(:first-child))::before {
+    position: absolute;
+    background-color: var(--dt-color-border-subtle);
+    border-radius: var(--radius-segmented-control-item);
+    opacity: var(--dt-opacity-1100);
+    content: '';
+  }
+
+  //  Horizontal divider positioning
+  &:where(:not(&--vertical)) > :where(&__item:not(:first-child))::before {
+    inline-size: var(--dt-size-border-100);
+    // top/bottom: inset by half the item's border-radius
+    // left: positioned in the gap between items — half the padding (gap) negated, minus half the divider's own width
+    /* stylelint-disable-next-line meowtec/no-px */
+    inset:
+      calc(var(--radius-segmented-control-item) / 2)
+      auto
+      calc(var(--radius-segmented-control-item) / 2)
+      calc(calc(calc(var(--padding-segmented-control) * .5) * -1) - 1.5px)
+    ;
+  }
+
+  //  Vertical divider positioning
+  &:where(&--vertical) > :where(&__item:not(:first-child))::before {
+    block-size: var(--dt-size-border-100);
+    inline-size: auto;
+    // top: positioned in the gap between items — half the padding (gap) negated, minus half the divider's own height
+    // right/left: inset by half the item's border-radius so the divider doesn't extend into rounded corners
+    /* stylelint-disable-next-line meowtec/no-px */
+    inset:
+      calc(calc(calc(var(--padding-segmented-control) * .5) * -1) - 1.5px) calc(var(--radius-segmented-control-item) / 2) auto;
+  }
+
+  //  Hide divider on/after active, hovered, or focused items (both orientations)
+  & > :where(
+    .d-segmented-control__item:is(.d-btn--active, :hover, :focus-visible),
+    :is(.d-btn--active, :hover, :focus-visible) + .d-segmented-control__item
+  )::before {
+    opacity: 0;
+  }
+
+  &__item-label {
+    flex: 0 0 auto;
+  }
+}
+}

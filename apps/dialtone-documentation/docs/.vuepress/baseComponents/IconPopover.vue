@@ -12,7 +12,7 @@
   >
     <template #anchor>
       <dt-button
-        class="dialtone-icon-grid__item d-gg8"
+        class="dialtone-icon-grid__item d-g-100"
         label-class="d-fl-grow-unset"
         importance="clear"
         kind="muted"
@@ -24,20 +24,18 @@
             size="600"
           />
         </template>
-        <span
-          class="dialtone-icon-card__subtitle d-tt-capitalize d-fc-tertiary"
-          v-text="name"
-        />
+        <dt-text as="span" tone="tertiary" class="dialtone-icon-card__subtitle d-tt-capitalize">
+          {{ name }}
+        </dt-text>
       </dt-button>
     </template>
     <template #headerContent>
       <dt-stack direction="row" align="center" class="d-plc-space-between">
-        <span
-          class="d-tt-capitalize d-fc-primary"
-          v-text="name"
-        />
+        <dt-text as="span" tone="primary" class="d-tt-capitalize">
+          {{ name }}
+        </dt-text>
         <copy-button
-          class="d-ml8"
+          class="d-mis-100"
           :text="shareIcon"
           aria-label="Copy link"
         />

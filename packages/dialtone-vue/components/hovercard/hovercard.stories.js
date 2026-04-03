@@ -3,12 +3,14 @@ import DtHovercard from './hovercard.vue';
 import DtHovercardDefaultTemplate from './hovercard_default.story.vue';
 import DtHovercardManyTemplate from './hovercard_many.story.vue';
 import DtHovercardWithInputTemplate from './hovercard_with_input.story.vue';
+import DtHovercardExternalAnchorTemplate from './hovercard_external_anchor.story.vue';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { action } from 'storybook/actions';
 import {
   POPOVER_DIRECTIONS,
   POPOVER_PADDING_CLASSES,
 } from '@/components/popover/index.js';
+import { CONTENT_MODE_ARG_TYPE } from '@/common/mode_constants';
 
 export const argTypesData = {
   // Slots
@@ -51,6 +53,7 @@ export const argTypesData = {
   },
 
   // Props
+  contentMode: CONTENT_MODE_ARG_TYPE,
   open: {
     control: {
       type: 'boolean',
@@ -172,11 +175,7 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 export const Default = {
   render: DefaultTemplate,
   decorators: [() => ({
-    template: `<dt-stack direction="row" justify="center" align="center" class="d-h464">
-      <div class="d-w164">
-        <story />
-      </div>
-    </dt-stack>`,
+    template: `<div> <story /> </div>`,
   })],
 
   args: {},
@@ -190,8 +189,7 @@ const ManyTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 export const Many = {
   render: ManyTemplate,
   decorators: [() => ({
-    template: `<div class="d-wmx464"><story />
-    </div>`,
+    template: `<div><story /></div>`,
   })],
   args: { ...Default.args, offset: [0, 5] },
 };
@@ -204,11 +202,34 @@ const InputTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 export const WithInput = {
   render: InputTemplate,
   decorators: [() => ({
-    template: `<dt-stack direction="row" justify="center" align="center" class="d-h464">
-      <div class="d-w164">
+    template: `<div><story /></div>`,
+  })],
+  args: { ...Default.args, offset: [0, 5] },
+};
+
+const ExternalAnchorTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+  args,
+  argTypes,
+  DtHovercardExternalAnchorTemplate,
+);
+export const ExternalAnchor = {
+  render: ExternalAnchorTemplate,
+  decorators: [() => ({
+    template: `<dt-stack direction="row" justify="center" align="center" class="d-h-700">
+      <div class="d-w-500">
         <story />
       </div>
     </dt-stack>`,
   })],
-  args: { ...Default.args, offset: [0, 5] },
+  args: { ...Default.args },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Demonstrates using <code>externalAnchorElement</code> with the exposed <code>show()</code>/<code>hide()</code> API. ' +
+          'This pattern is used when the anchor lives outside the hovercard\'s DOM scope (e.g. inside a Shadow DOM), ' +
+          'so the hovercard cannot detect hover events automatically. ' +
+          'The parent listens for hover events and calls <code>show()</code>/<code>hide()</code> directly on the hovercard ref.',
+      },
+    },
+  },
 };

@@ -2,8 +2,8 @@
   <div id="components-toggle--variants-container">
     <!-- Unchecked Initially -->
     <dt-toggle
-      class="d-mt6"
-      label-class="d-mr6"
+      class="d-mbs-75"
+      label-class="d-mie-75"
       label="Unchecked Initial"
     >
       Unchecked Initial
@@ -11,8 +11,8 @@
 
     <!-- Checked Initially -->
     <dt-toggle
-      class="d-mt6"
-      label-class="d-mr6"
+      class="d-mbs-75"
+      label-class="d-mie-75"
       label="Checked Initial"
       :model-value="true"
     >
@@ -21,8 +21,8 @@
 
     <!-- Indeterminate -->
     <dt-toggle
-      class="d-mt6"
-      label-class="d-mr6"
+      class="d-mbs-75"
+      label-class="d-mie-75"
       model-value="mixed"
     >
       Indeterminate
@@ -30,8 +30,8 @@
 
     <!-- Checked Disabled -->
     <dt-toggle
-      class="d-mt6"
-      label-class="d-mr6"
+      class="d-mbs-75"
+      label-class="d-mie-75"
       :model-value="true"
       :disabled="true"
     >
@@ -40,8 +40,8 @@
 
     <!-- Unchecked Disabled -->
     <dt-toggle
-      class="d-mt6"
-      label-class="d-mr6"
+      class="d-mbs-75"
+      label-class="d-mie-75"
       :disabled="true"
     >
       Disabled Unchecked
@@ -49,8 +49,8 @@
 
     <!-- Indeterminate Disabled -->
     <dt-toggle
-      class="d-mt6"
-      label-class="d-mr6"
+      class="d-mbs-75"
+      label-class="d-mie-75"
       model-value="mixed"
       :disabled="true"
     >
@@ -59,7 +59,7 @@
 
     <!-- With Flex grow -->
     <dt-toggle
-      class="d-mt6"
+      class="d-mbs-75"
       label-class="d-d-flex d-fl-grow1"
     >
       With Flex Grow
@@ -67,9 +67,9 @@
 
     <!-- With Slots -->
     <dt-toggle
-      class="d-mt6"
+      class="d-mbs-75"
     >
-      <div class="d-mr6">
+      <div class="d-mie-75">
         With Slot Label
       </div>
     </dt-toggle>
@@ -77,27 +77,27 @@
     <!-- With v-model -->
     <dt-toggle
       v-model="vModelValue"
-      class="d-mt6"
+      class="d-mbs-75"
     >
-      <div class="d-mr6">
+      <div class="d-mie-75">
         With V-Model
       </div>
     </dt-toggle>
 
     <!-- Without icon -->
     <dt-toggle
-      class="d-mt6"
-      label-class="d-mr6"
+      class="d-mbs-75"
+      label-class="d-mie-75"
       :show-icon="false"
     >
       Without icon
     </dt-toggle>
 
     <dt-toggle
-      class="d-mt6"
-      label-class="d-mr6"
+      class="d-mbs-75"
+      label-class="d-mie-75"
       label="Small size"
-      size="sm"
+      :size="200"
     >
       Small size
     </dt-toggle>

@@ -2,13 +2,13 @@
   <div>
     <div>
       <h2>Call pill</h2>
-      <h3 class="d-mt8 d-mb4">
+      <h3 class="d-mbs-100 d-mbe-50">
         With call recap
       </h3>
       <dt-recipe-feed-item-pill
         default-toggled
         title="Ben called you"
-        wrapper-class="d-w628"
+        wrapper-class="d-w-950"
         border-color="ai"
       >
         <template
@@ -40,34 +40,34 @@
           </div>
         </template>
         <template #content>
-          <div class="d-p16">
+          <div class="d-p-200">
             <p>
               The agent from Dialpad called to follow up on a support ticket
               that Jeff was handling for them regarding Dialpad CTI. They apologized
               for calling outside of the requested time and expressed that they had
               asked the team to look into the issue and would email them after the call.
             </p>
-            <p class="d-fs-100 d-mt12">
+            <p class="d-fs-100 d-mbs-150">
               <strong>Actions items</strong>
             </p>
             <dt-stack
               as="p"
               direction="row"
             >
-              <strong class="d-mr4">1. </strong>
+              <strong class="d-mie-50">1. </strong>
               The agent needs to inform the team to check on Vijay's request or ticket regarding Dialpad CTI.
             </dt-stack>
           </div>
         </template>
       </dt-recipe-feed-item-pill>
 
-      <h3 class="d-mt16 d-mb4">
+      <h3 class="d-mbs-200 d-mbe-50">
         Missed
       </h3>
       <dt-recipe-feed-item-pill
         title="Missed call from Ben"
         border-color="critical"
-        wrapper-class="d-w628"
+        wrapper-class="d-w-950"
         :toggleable="false"
       >
         <template
@@ -97,12 +97,12 @@
         </template>
       </dt-recipe-feed-item-pill>
 
-      <h3 class="d-mt16 d-mb4">
+      <h3 class="d-mbs-200 d-mbe-50">
         Voicemail
       </h3>
       <dt-recipe-feed-item-pill
         title="Voicemail"
-        wrapper-class="d-w628"
+        wrapper-class="d-w-950"
         :toggleable="false"
       >
         <template
@@ -135,13 +135,13 @@
         </template>
       </dt-recipe-feed-item-pill>
 
-      <h3 class="d-mt16 d-mb4">
+      <h3 class="d-mbs-200 d-mbe-50">
         Generating AI summary
       </h3>
       <dt-recipe-feed-item-pill
         border-color="ai"
         title="Ben called you"
-        wrapper-class="d-w628"
+        wrapper-class="d-w-950"
         :toggleable="false"
       >
         <template
@@ -172,17 +172,17 @@
       </dt-recipe-feed-item-pill>
     </div>
     <div>
-      <h2 class="d-mt16">
+      <h2 class="d-mbs-200">
         Meeting pill
       </h2>
 
-      <h3 class="d-mt8 d-mb4">
+      <h3 class="d-mbs-100 d-mbe-50">
         With call recap
       </h3>
       <dt-recipe-feed-item-pill
         title="Ben started a meeting"
         button-class="d-bar24"
-        wrapper-class="d-w628"
+        wrapper-class="d-w-950"
         border-color="ai"
         :default-toggled="true"
       >
@@ -218,35 +218,35 @@
           </div>
         </template>
         <template #content>
-          <div class="d-p16">
+          <div class="d-p-200">
             <p>
               The agent from Dialpad called to follow up on a support ticket
               that Jeff was handling for them regarding Dialpad CTI. They apologized
               for calling outside of the requested time and expressed that they had
               asked the team to look into the issue and would email them after the call.
             </p>
-            <p class="d-fs-100 d-mt12">
+            <p class="d-fs-100 d-mbs-150">
               <strong>Actions items</strong>
             </p>
             <dt-stack
               as="p"
               direction="row"
             >
-              <strong class="d-mr4">1. </strong>
+              <strong class="d-mie-50">1. </strong>
               The agent needs to inform the team to check on Vijay's request or ticket regarding Dialpad CTI.
             </dt-stack>
           </div>
         </template>
       </dt-recipe-feed-item-pill>
 
-      <h3 class="d-mt16 d-mb4">
+      <h3 class="d-mbs-200 d-mbe-50">
         Generating AI summary
       </h3>
       <dt-recipe-feed-item-pill
         title="Ben started a meeting"
         border-color="ai"
         button-class="d-bar24"
-        wrapper-class="d-w628"
+        wrapper-class="d-w-950"
         :toggleable="false"
       >
         <template
@@ -297,7 +297,7 @@ import {
   DtIconPhoneIncoming,
   DtIconVideo,
   DtIconVoicemail,
-} from '@dialpad/dialtone-icons/vue3';
+} from '@dialpad/dialtone-icons/vue';
 export default {
   name: 'DtRecipeFeedItemPillVariants',
 

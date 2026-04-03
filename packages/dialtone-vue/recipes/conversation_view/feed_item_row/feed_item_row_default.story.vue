@@ -47,30 +47,30 @@
     >
       <dt-stack
         direction="row"
-        gap="400"
+        gap="100"
       >
         <dt-stack
           direction="row"
-          gap="300"
+          gap="50"
         >
           <dt-avatar
             v-for="person of persons"
             :key="person"
             :full-name="person"
             seed="seed"
-            size="sm"
+            :size="200"
           />
         </dt-stack>
         <dt-stack
           direction="row"
-          gap="400"
+          gap="100"
         >
           <dt-stack
             direction="row"
             align="center"
             class="d-fs-100 d-lh200"
           >
-            <a class="d-link d-pr4">3 replies</a>
+            <a class="d-link d-pie-50">3 replies</a>
             <span class="feed-item-row__reply">Last reply an hour ago</span>
           </dt-stack>
         </dt-stack>
@@ -86,7 +86,7 @@
           <span>
             <dt-button
               importance="clear"
-              size="sm"
+              :size="200"
               aria-label="Add reaction"
               data-qa="feed-item-reaction-button"
               class="d-recipe-emoji-row__reaction d-recipe-emoji-row__picker"
@@ -114,7 +114,7 @@
           :key="button"
           kind="muted"
           importance="clear"
-          size="xs"
+          :size="100"
           aria-label="button"
         >
           <template #icon>

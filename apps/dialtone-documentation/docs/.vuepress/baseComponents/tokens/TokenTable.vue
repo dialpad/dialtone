@@ -1,40 +1,40 @@
 <template>
-  <div v-dt-scrollbar:never class="d-hmx464 d-bar8 d-ba d-bc-subtle">
-    <dt-mode-island :mode="mode">
-      <table class="d-table dialtone-doc-table">
+  <div v-dt-scrollbar:never>
+    <div class="d-hmx-800 d-bar8 d-ba d-bc-subtle">
+      <table v-dt-mode:[mode] class="d-bgc-primary d-table dialtone-doc-table">
         <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
           <tr>
             <th
               scope="col"
-              class="d-p0 d-bbw0 d-tt-none"
+              class="d-p-0 d-bbw0 d-tt-none"
             >
-              <div class="d-p16 d-bb d-bbw1">
+              <div class="d-p-200 d-bb d-bbw1">
                 Preview
               </div>
             </th>
             <th
               scope="col"
-              class="d-p0 d-bbw0 d-tt-none"
+              class="d-p-0 d-bbw0 d-tt-none"
             >
-              <div class="d-p16 d-bb d-bbw1">
+              <div class="d-p-200 d-bb d-bbw1">
                 Token Name
               </div>
             </th>
             <th
               v-if="showValue"
               scope="col"
-              class="d-p0 d-bbw0 d-tt-none d-ta-right"
+              class="d-p-0 d-bbw0 d-tt-none d-ta-right"
             >
-              <div class="d-p16 d-bb d-bbw1">
+              <div class="d-p-200 d-bb d-bbw1">
                 {{ tokenList ? "REM" : "Value" }}
               </div>
             </th>
             <th
               v-show="!!tokenList"
               scope="col"
-              class="d-p0 d-bbw0"
+              class="d-p-0 d-bbw0"
             >
-              <div class="d-p16 d-bb d-bbw1">
+              <div class="d-p-200 d-bb d-bbw1">
                 PX
               </div>
             </th>
@@ -50,7 +50,7 @@
             @focusin="onEnterRow(name)"
             @focusout="onLeaveRow()"
           >
-            <td class="d-w72 sm:d-w128 d-box-content">
+            <td class="d-w-100 sm:d-w-200 d-box-content">
               <token-example
                 :category="category"
                 :name="exampleName || name"
@@ -62,14 +62,14 @@
               <dt-badge v-if="deprecated" type="critical" kind="label" text="Deprecated" />
               <dt-stack
                 direction="row"
-                gap="300"
+                gap="50"
                 align="center"
                 class="token-name"
               >
-                <dt-text as="p" kind="label" size="md">
+                <dt-text as="p" kind="label" :size="200">
                   {{ name }}
                 </dt-text>
-                <div class="d-w32">
+                <div class="d-w-50">
                   <dt-lazy-show :show="showCopyButton(name)">
                     <copy-button
                       v-if="!isSmallDevice"
@@ -79,30 +79,28 @@
                   </dt-lazy-show>
                 </div>
               </dt-stack>
-              <dt-text kind="body" size="sm" tone="tertiary">
-                {{ description }}
-              </dt-text>
+              <!-- eslint-disable-next-line vue/no-v-text-v-html-on-component -->
+              <dt-text kind="body" :size="200" tone="tertiary" v-html="description" />
               <token-value
                 v-if="isSmallDevice && showValue"
                 :token-value="valueToString(tokenValue)"
                 :tokens="tokens"
               />
             </th>
-            <td v-if="!isSmallDevice && showValue" class="d-text-code--md d-fc-blue-800 d-ta-right d-wmx164">
-              <token-value :token-value="valueToString(tokenValue)" :tokens="tokens" />
+            <td v-if="!isSmallDevice && showValue" class="d-ta-right d-wmx-250">
+              <dt-text as="span" kind="code" :size="300" class="d-fc-blue-800">
+                <token-value :token-value="valueToString(tokenValue)" :tokens="tokens" />
+              </dt-text>
             </td>
-            <td
-              v-if="!!tokenList"
-              class="d-text-code--md d-docsite-code"
-            >
-              <div class="d-wmx264">
+            <td v-if="!!tokenList">
+              <dt-text as="div" kind="code" :size="300" class="d-docsite-code d-wmx-400">
                 {{ remToPixels(tokenValue) }}
-              </div>
+              </dt-text>
             </td>
           </tr>
         </tbody>
       </table>
-    </dt-mode-island>
+    </div>
   </div>
 </template>
 

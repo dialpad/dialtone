@@ -8,119 +8,63 @@ figma: planned
 keywords: ["definition list", "key value", "dl", "d-description-list", "DtDescriptionList", "dt-description-list", "metadata list", "property list"]
 ---
 
-<code-well-header>
-  <div class="d-w332">
-    <dt-description-list
-      gap="400"
-      :items="items"
-      direction="row"
-    />
-  </div>
-</code-well-header>
+<component-combinator component-name="DtDescriptionList" />
 
 ## Variants and Examples
 
 ### Default
 
-<code-well-header>
-  <div class="d-w332">
-    <dt-description-list
-      ref="exampleDefault"
-      gap="400"
-      :items="items"
-      direction="row"
-    />
-  </div>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs.exampleDefault"
-vueCode='
-<dt-description-list
-  ref="descriptionList"
-  gap="400"
-  :items="items"
-  direction="row"
-/>
-'
-/>
+```vue demo
+<!-- @wrapper -->
+<div class="d-w-500">
+  <dt-description-list
+    gap="100"
+    :items="items"
+    direction="row"
+  />
+</div>
+```
 
 ### Column Direction
 
-<code-well-header>
-  <div class="d-w332">
-    <dt-description-list
-      ref="exampleColumn"
-      gap="400"
-      :items="items"
-      direction="column"
-    />
-  </div>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs.exampleColumn"
-vueCode='
-<dt-description-list
-  gap="400"
-  :items="items"
-  direction="column"
-/>
-'
-/>
+```vue demo
+<!-- @wrapper -->
+<div class="d-w-500">
+  <dt-description-list
+    gap="100"
+    :items="items"
+    direction="column"
+  />
+</div>
+```
 
 ### Long Text
 
-<code-well-header>
-  <div class="d-w332">
-    <dt-description-list
-      ref="exampleLongText"
-      gap="400"
-      :items="longTextItems"
-      direction="row"
-    />
-  </div>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs.exampleLongText"
-vueCode='
-<dt-description-list
-  gap="400"
-  :items="longTextItems"
-  direction="row"
-/>
-'
-/>
+```vue demo
+<!-- @wrapper -->
+<div class="d-w-500">
+  <dt-description-list
+    gap="100"
+    :items="longTextItems"
+    direction="row"
+  />
+</div>
+```
 
 ### With Term and Description Styles
 
-<code-well-header>
-  <div class="d-w332">
-    <dt-description-list
-      ref="exampleWithStyles"
-      gap="400"
-      :items="items"
-      direction="row"
-      :termClass="[`d-fc-critical`, `d-fw-bold`]"
-      :descriptionClass="[`d-fc-success`]"
-    />
-  </div>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs.exampleWithStyles"
-vueCode='
-<dt-description-list
-  ref="exampleWithStyles"
-  gap="400"
-  :items="items"
-  direction="row"
-  :termClass="[`d-fc-critical`, `d-fw-bold`]"
-  :descriptionClass="[`d-fc-success`]"
-/>
-'
-/>
+```vue demo
+<!-- @wrapper -->
+<div class="d-w-500">
+  <dt-description-list
+    gap="100"
+    :items="items"
+    direction="row"
+    :termClass="[`d-fc-critical`, `d-fw-bold`]"
+    :descriptionClass="[`d-fc-success`]"
+  />
+</div>
+```
 
 ## Vue API
 

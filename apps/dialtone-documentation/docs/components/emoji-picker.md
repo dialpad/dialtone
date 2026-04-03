@@ -7,150 +7,33 @@ status: beta
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-emoji-picker--default
 ---
 
-<code-well-header>
-  <dt-emoji-picker
-      skin-tone="Default"
-      skin-selector-button-tooltip-label="Change default skin tone"
-      :tab-set-labels="[
-        'Most recently used',
-        'Smileys and people',
-        'Nature',
-        'Food',
-        'Activity',
-        'Travel',
-        'Objects',
-        'Symbols',
-        'Flags',
-      ]"
-      :recently-used-emojis="recentlyUsedEmojis"
-      search-results-label="Search results"
-      search-no-results-label="No results"
-      search-placeholder-label="Search..."
-    />
-</code-well-header>
+<component-combinator component-name="DtEmojiPicker" />
 
 ## Variants and Examples
 
 ### Default
 
-<code-well-header>
-  <dt-emoji-picker
-      skin-tone="Default"
-      skin-selector-button-tooltip-label="Change default skin tone"
-      :tab-set-labels="[
-        'Most recently used',
-        'Smileys and people',
-        'Nature',
-        'Food',
-        'Activity',
-        'Travel',
-        'Objects',
-        'Symbols',
-        'Flags',
-      ]"
-      :recently-used-emojis="recentlyUsedEmojis"
-      search-results-label="Search results"
-      search-no-results-label="No results"
-      search-placeholder-label="Search..."
-    />
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div class="d-emoji-picker">
-  <div class="d-emoji-picker--header">
-    <div class="d-emoji-picker__tabset">
-      <div data-qa="dt-tab-group">
-        <div class="d-tablist d-emoji-picker__tabset-list" role="tablist" aria-label="">
-          <button
-            class="base-button__button d-btn d-btn--primary d-tab d-tab--selected"
-            data-qa="dt-tab"
-            type="button"
-            aria-label="Most recently used"
-            id="dt-tab-1"
-            role="tab"
-            aria-selected="true"
-            aria-controls="d-emoji-picker-list"
-            tabindex="1"
-          >
-            <span data-qa="dt-button-label" class="d-btn__label base-button__label">
-              <svg>...</svg>
-            </span>
-          </button>
-          <button class="base-button__button d-btn d-btn--primary d-tab" data-qa="dt-tab" type="button" aria-label="Smileys and people" id="dt-tab-2" role="tab" aria-selected="false" aria-controls="d-emoji-picker-list" tabindex="2">
-            ...
-          </button>
-          ...
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="d-emoji-picker--body">
-    <div class="d-emoji-picker__search d-emoji-picker__alignment">
-      <div class="base-input" data-qa="dt-input">
-        <label class="base-input__label" data-qa="dt-input-label-wrapper">
-          <div class="d-input__wrapper">
-            <span class="base-input__icon--left d-input-icon--left d-input-icon undefined" data-qa="dt-input-left-icon-wrapper">
-              <svg>...</svg>
-            </span>
-            <input name="" type="text" class="base-input__input d-input d-input-icon--left" data-qa="dt-input-input" id="searchInput" placeholder="Search..." />
-          </div>
-        </label>
-      </div>
-    </div>
-    <div class="d-emoji-picker__selector">
-      <div id="d-emoji-picker-list" class="d-emoji-picker__list">
-        <div class="d-emoji-picker__category d-emoji-picker__alignment" data-index="0"><p>Most recently used</p></div>
-        <div class="d-emoji-picker__alignment" data-index="1">
-          <div class="d-emoji-picker__tab">
-            <button type="button" aria-label="thumbs up"><img class="d-icon d-icon--size-500" alt="thumbs up" aria-label="thumbs up" title="thumbs up" src="https://static.dialpadcdn.com/joypixels/png/unicode/32/1f44d.png" /></button>
-            <button type="button" aria-label="thumbs up: medium-light skin tone">
-              <img
-                class="d-icon d-icon--size-500"
-                alt="thumbs up: medium-light skin tone"
-                aria-label="thumbs up: medium-light skin tone"
-                title="thumbs up: medium-light skin tone"
-                src="https://static.dialpadcdn.com/joypixels/png/unicode/32/1f44d-1f3fc.png"
-              />
-            </button>
-            ...
-          </div>
-        </div>
-        <div class="d-emoji-picker__alignment" data-index="2">
-          <p>Smileys and people</p>
-          ...
-        </div>
-        <div class="d-emoji-picker__alignment" data-index="3">
-          <p>Nature</p>
-          ...
-        </div>
-        ...
-      </div>
-    </div>
-  </div>
-  <div class="d-emoji-picker--footer">
-    <div class="d-emoji-picker__data"></div>
-    <div data-qa="skin-selector">
-      <div class="d-emoji-picker__skin-list" style="display: none;">
-        <button class="">
-          <img class="d-icon d-icon--size-500" alt=":wave_tone1:" aria-label=":wave_tone1:" title=":wave_tone1:" src="https://static.dialpadcdn.com/joypixels/png/unicode/32/1f44b-1f3fb.png" />
-        </button>
-        ...
-      </div>
-      <div class="d-emoji-picker__skin-selected">
-        <div data-qa="dt-tooltip-container">
-          <span data-qa="dt-tooltip-anchor">
-            <button aria-label="Change default skin tone" tabindex="-1">
-              <img class="d-icon d-icon--size-500" alt=":wave:" aria-label=":wave:" title=":wave:" src="https://static.dialpadcdn.com/joypixels/png/unicode/32/1f44b.png" />
-            </button>
-          </span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-'
-vueCode='
+```vue demo
+<dt-emoji-picker
+  skin-tone="Default"
+  skin-selector-button-tooltip-label="Change default skin tone"
+  :tab-set-labels="[
+    'Most recently used',
+    'Smileys and people',
+    'Nature',
+    'Food',
+    'Activity',
+    'Travel',
+    'Objects',
+    'Symbols',
+    'Flags',
+  ]"
+  :recently-used-emojis="recentlyUsedEmojis"
+  search-results-label="Search results"
+  search-no-results-label="No results"
+  search-placeholder-label="Search..."
+/>
+<!-- @code -->
 <dt-emoji-picker
   :skin-tone="Default"
   skin-selector-button-tooltip-label="Change default skin tone"
@@ -177,59 +60,11 @@ vueCode='
   @skin-tone="skinTone = $event"
   @selected-emoji="selectedEmoji"
 />
-'
-showHtmlWarning />
+```
 
 ### With Popover
 
-<code-well-header>
-  <dt-popover
-    :open="emojiPickerOpened"
-    initial-focus-element="#searchInput"
-    padding="none"
-    @opened="(open) => { emojiPickerOpened = open }"
-  >
-    <template #anchor>
-      <dt-button
-        size="sm"
-        circle
-        importance="clear"
-        @click="toggleEmojiPicker"
-      >
-        <template #startIcon>
-          <dt-icon
-            name="satisfied"
-            size="300"
-          />
-        </template>
-      </dt-button>
-    </template>
-    <template #content>
-      <dt-emoji-picker
-        skin-tone="Default"
-        skin-selector-button-tooltip-label="Change default skin tone"
-        :tab-set-labels="[
-          'Most recently used',
-          'Smileys and people',
-          'Nature',
-          'Food',
-          'Activity',
-          'Travel',
-          'Objects',
-          'Symbols',
-          'Flags',
-        ]"
-        :recently-used-emojis="recentlyUsedEmojis"
-        search-results-label="Search results"
-        search-no-results-label="No results"
-        search-placeholder-label="Search..."
-      />
-    </template>
-  </dt-popover>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
+```vue demo
 <dt-popover
   :open="emojiPickerOpened"
   initial-focus-element="#searchInput"
@@ -238,7 +73,7 @@ vueCode='
 >
   <template #anchor>
     <dt-button
-      size="sm"
+      :size="200"
       circle
       importance="clear"
       @click="toggleEmojiPicker"
@@ -256,15 +91,15 @@ vueCode='
       skin-tone="Default"
       skin-selector-button-tooltip-label="Change default skin tone"
       :tab-set-labels="[
-        `Most recently used`,
-        `Smileys and people`,
-        `Nature`,
-        `Food`,
-        `Activity`,
-        `Travel`,
-        `Objects`,
-        `Symbols`,
-        `Flags`,
+        'Most recently used',
+        'Smileys and people',
+        'Nature',
+        'Food',
+        'Activity',
+        'Travel',
+        'Objects',
+        'Symbols',
+        'Flags',
       ]"
       :recently-used-emojis="recentlyUsedEmojis"
       search-results-label="Search results"
@@ -273,8 +108,7 @@ vueCode='
     />
   </template>
 </dt-popover>
-'
-/>
+```
 
 ## Vue API
 

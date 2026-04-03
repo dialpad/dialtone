@@ -1,8 +1,9 @@
 <template>
   <dt-button
     v-if="updateAvailable"
+    kind="muted"
     importance="outlined"
-    size="xs"
+    :size="100"
     class="d-recipe-settings-menu-button-update"
     :aria-label="ariaLabel"
     v-bind="$attrs"
@@ -17,7 +18,7 @@
   <dt-button
     v-else
     importance="clear"
-    kind="inverted"
+    kind="muted"
     class="d-recipe-settings-menu-button"
     :aria-label="ariaLabel"
     v-bind="$attrs"
@@ -35,7 +36,7 @@
  * TODO (Dialtone 10): Localize this component as it'd be a breaking change localizing right now.
  */
 import DtButton from '@/components/button/button.vue';
-import { DtIconMoreVertical } from '@dialpad/dialtone-icons/vue3';
+import { DtIconMoreVertical } from '@dialpad/dialtone-icons/vue';
 
 export default {
   compatConfig: { MODE: 3 },

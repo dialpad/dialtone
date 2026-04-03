@@ -9,21 +9,21 @@ keywords: ["css grid","layout","columns","rows"]
 Use `d-gc{#}` to span an element across multiple columns. This can be combined with `d-gc{#}` classes to span a set of columns. Use `d-gce{#}` to set an element's ending point. A reminder that CSS grid columns start at 1 and end at the number of columns + 1. For example in a 3-column grid, the starting line would be 1 and the ending line would be 4.
 
 <code-well-header>
-  <div class="d-d-grid d-g16 d-g-cols4 d-w100p d-hmn216 d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-gc2 d-p16 d-bgc-bold-opaque d-bar4">3</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-gc2 d-p16 d-bgc-bold-opaque d-bar4">4</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4">5</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4">6</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4">7</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-gc3 d-p16 d-bgc-bold-opaque d-bar4">8</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-gc-full d-p16 d-bgc-bold-opaque d-bar4">9</dt-stack>
+  <div class="d-d-grid d-g-200 d-g-cols4 d-w100p d-hmn216 d-bar8 d-bgc-moderate">
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-gc2 d-p-200 d-bgc-bold-opaque d-bar4">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-gc2 d-p-200 d-bgc-bold-opaque d-bar4">4</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar4">5</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar4">6</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar4">7</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-gc3 d-p-200 d-bgc-bold-opaque d-bar4">8</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-gc-full d-p-200 d-bgc-bold-opaque d-bar4">9</dt-stack>
   </div>
 </code-well-header>
 
 ```html
-<div class="d-d-grid d-g16 d-g-cols4">
+<div class="d-d-grid d-g-200 d-g-cols4">
   <div>1</div>
   <div>2</div>
   <div class="d-gc2">3</div>
@@ -41,19 +41,19 @@ Use `d-gc{#}` to span an element across multiple columns. This can be combined w
 Use `d-gcs{#}` to set the starting point for an element. This can be combined with `d-gc{#}` classes to span a set of columns.
 
 <code-well-header>
-  <div class="d-d-grid d-g16 d-g-cols6 d-w100p d-hmn216 d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4"></dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-gcs2 d-gce6 d-p16 d-bgc-bold-opaque d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4"></dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-gcs1 d-gce5 d-p16 d-bgc-bold-opaque d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4"></dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate-opaque d-bar4"></dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-gcs1 d-gce7 d-p16 d-bgc-bold-opaque d-bar4">3</dt-stack>
+  <div class="d-d-grid d-g-200 d-g-cols6 d-w100p d-hmn216 d-bar8 d-bgc-moderate">
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar4"></dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-gcs2 d-gce6 d-p-200 d-bgc-bold-opaque d-bar4">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar4"></dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-gcs1 d-gce5 d-p-200 d-bgc-bold-opaque d-bar4">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar4"></dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar4"></dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-gcs1 d-gce7 d-p-200 d-bgc-bold-opaque d-bar4">3</dt-stack>
   </div>
 </code-well-header>
 
 ```html
-<div class="d-d-grid d-g16 d-g-cols6">
+<div class="d-d-grid d-g-200 d-g-cols6">
   <div class="d-gcs2 d-gce6">1</div>
   <div class="d-gcs1 d-gce5">2</div>
   <div class="d-gcs1 d-gce7">3</div>

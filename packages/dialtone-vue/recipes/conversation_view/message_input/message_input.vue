@@ -21,10 +21,8 @@
       name="top"
     />
 
-    <!-- set key to selectedText to force update. otherwise this component may not reflect the active selection -->
     <dt-recipe-message-input-topbar
       v-if="richText"
-      :key="selectedText"
       :bold-button-options="boldButtonOptions"
       :italic-button-options="italicButtonOptions"
       :strike-button-options="strikeButtonOptions"
@@ -98,14 +96,15 @@
       <!-- Left content -->
       <div class="d-recipe-message-input__bottom-section-left">
         <dt-stack
-          gap="200"
+          gap="25"
           direction="row"
+          class="d-recipe-message-input__bottom-section-left-stack"
         >
           <dt-button
             v-if="showImagePicker"
             v-dt-tooltip:top-start="imagePickerButtonLabel"
             data-qa="dt-recipe-message-input-image-btn"
-            size="sm"
+            :size="200"
             class="d-recipe-message-input__button"
             kind="muted"
             importance="clear"
@@ -142,7 +141,7 @@
                 v-dt-tooltip="emojiPickerButtonLabel"
                 v-bind="attrs"
                 data-qa="dt-recipe-message-input-emoji-picker-btn"
-                size="sm"
+                :size="200"
                 class="d-recipe-message-input__button"
                 kind="muted"
                 importance="clear"
@@ -179,13 +178,15 @@
           <slot name="emojiGiphyPicker" />
           <!-- @slot Slot to add extra action icons next to default ones -->
           <slot name="customActionIcons" />
+          <!-- @slot Slot for message polish -->
+          <slot name="messagePolish" />
         </dt-stack>
       </div>
       <!-- Right content -->
       <div class="d-recipe-message-input__bottom-section-right">
         <dt-stack
           direction="row"
-          gap="300"
+          gap="50"
         >
           <!-- @slot Slot for schedule message -->
           <div class="d-recipe-message-input__schedule-message">
@@ -223,7 +224,7 @@
             v-dt-tooltip="cancelButtonLabel"
             data-qa="dt-recipe-message-input-cancel-button"
             class="d-recipe-message-input__button d-recipe-message-input__cancel-button"
-            size="sm"
+            :size="200"
             kind="muted"
             importance="clear"
             :aria-label="cancelButtonLabel"
@@ -240,7 +241,7 @@
               v-if="showSend"
               v-dt-tooltip:top-end="sendButtonLabel"
               data-qa="dt-recipe-message-input-send-btn"
-              size="sm"
+              :size="200"
               kind="default"
               importance="primary"
               :class="[
@@ -295,7 +296,7 @@ import { DtTooltip } from '@/components/tooltip';
 import { DtStack } from '@/components/stack';
 import {
   DtIconImage, DtIconVerySatisfied, DtIconSatisfied, DtIconSend,
-} from '@dialpad/dialtone-icons/vue3';
+} from '@dialpad/dialtone-icons/vue';
 import DtRecipeMessageInputTopbar from './message_input_topbar.vue';
 import DtRecipeMessageInputLink from './message_input_link.vue';
 import { DialtoneLocalization } from '@/localization';
@@ -378,7 +379,7 @@ export default {
     /**
      * Additional class name for the input element. Only accepts a String value
      * because this is passed to the editor via options. For multiple classes,
-     * join them into one string, e.g. "d-p8 d-hmx96"
+     * join them into one string, e.g. "d-p-100 d-hmx-150"
      */
     inputClass: {
       type: String,
@@ -829,6 +830,20 @@ export default {
       );
     },
 
+    // Returns a new function reference when selectedText changes, which causes the topbar
+    // to re-render (prop update) without destroying/recreating it (no key change).
+    isSelectionActive () {
+      // eslint-disable-next-line no-unused-vars
+      const _dep = this.selectedText;
+      return (type) => {
+        if (['bulletList', 'orderedList'].includes(type)) {
+          if (!this.richText) return false;
+          return this.lastActiveNodes(this.$refs.richTextEditor?.editor?.state, [{ type: 'bulletList' }, { type: 'orderedList' }]).includes(type) && this.isFocused;
+        }
+        return this.$refs.richTextEditor?.editor?.isActive(type) && this.isFocused;
+      };
+    },
+
     isSendDisabled () {
       return (
         this.disableSend ||
@@ -913,18 +928,6 @@ export default {
       if (editor && typeToCommandMap[type]) {
         typeToCommandMap[type]();
       }
-    },
-
-    // Checks if the node currently selected is active ex/ the bold button is active if the selected text is bold
-
-    // eslint-disable-next-line complexity
-    isSelectionActive (type) {
-      if (['bulletList', 'orderedList'].includes(type)) {
-        // List extensions are only loaded when richText is true
-        if (!this.richText) return false;
-        return this.lastActiveNodes(this.$refs.richTextEditor?.editor?.state, [{ type: 'bulletList' }, { type: 'orderedList' }]).includes(type) && this.isFocused;
-      }
-      return this.$refs.richTextEditor?.editor?.isActive(type) && this.isFocused;
     },
 
     initLinkDialog () {

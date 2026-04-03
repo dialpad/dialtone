@@ -56,11 +56,11 @@ export default {
 
     /**
      * Size of the shape
-     * @values xs, sm, md, lg, xl
+     * @values 100, 200, 300, 400, 500
      */
     shapeSize: {
-      type: String,
-      default: 'md',
+      type: [String, Number],
+      default: 300,
     },
 
     /**

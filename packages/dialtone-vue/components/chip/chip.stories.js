@@ -11,7 +11,7 @@ const iconsList = getIconNames();
 export const argsData = {
   onClose: action('close'),
   onClick: action('click'),
-  size: 'md',
+  size: 300,
   avatarSeed: '',
 };
 

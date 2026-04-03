@@ -27,7 +27,7 @@
           :full-name="avatarFullName"
           :seed="avatarSeed"
           :clickable="clickable"
-          size="sm"
+          size="300"
           @click="handleClick"
         >
           <template
@@ -111,7 +111,7 @@
 import { CALLBOX_BADGE_COLORS, CALLBOX_BORDER_COLORS } from './callbox_constants';
 import DtAvatar from '@/components/avatar/avatar.vue';
 import DtBadge from '@/components/badge/badge.vue';
-import { DtIconPause } from '@dialpad/dialtone-icons/vue3';
+import { DtIconPause } from '@dialpad/dialtone-icons/vue';
 
 export default {
   compatConfig: { MODE: 3 },

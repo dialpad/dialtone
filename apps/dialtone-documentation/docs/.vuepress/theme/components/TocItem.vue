@@ -1,13 +1,15 @@
 <template>
-  <RouterLink
-    :class="[
-      'd-btn d-btn--sm d-btn--muted d-w100p d-jc-flex-start d-fw-normal',
-      { 'd-btn--active': active },
-    ]"
+  <dt-button
     :to="to"
+    :active="active"
+    importance="clear"
+    kind="muted"
+    :size="100"
+    label-class="d-jc-flex-start d-fw-normal d-tw-pretty"
+    class="d-w100p"
   >
     {{ text }}
-  </RouterLink>
+  </dt-button>
 </template>
 
 <script setup>

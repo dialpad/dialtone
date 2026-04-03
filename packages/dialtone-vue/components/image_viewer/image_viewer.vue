@@ -21,6 +21,7 @@
         :aria-hidden="!isOpen ? 'true' : 'false'"
         class="d-modal"
         data-qa="dt-modal"
+        v-bind="modeAttrs"
         v-on="modalListeners"
         @mouseover="showCloseButton = true"
         @mouseleave="showCloseButton = false"
@@ -46,7 +47,7 @@
             data-qa="dt-image-viewer-close-btn"
             class="d-modal__close"
             circle
-            size="lg"
+            :size="400"
             importance="clear"
             kind="inverted"
             :aria-label="closeButtonTitle"
@@ -72,9 +73,10 @@
 
 <script>
 import Modal from '@/common/mixins/modal';
+import ModeMixin from '@/common/mixins/mode';
 import { returnFirstEl } from '@/common/utils';
 import { EVENT_KEYNAMES } from '@/common/constants';
-import { DtIconClose } from '@dialpad/dialtone-icons/vue3';
+import { DtIconClose } from '@dialpad/dialtone-icons/vue';
 import { DtButton } from '@/components/button';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
 import { DialtoneLocalization } from '@/localization';
@@ -89,7 +91,7 @@ export default {
     DtIconClose,
   },
 
-  mixins: [Modal],
+  mixins: [Modal, ModeMixin],
 
   props: {
     /**

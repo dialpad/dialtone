@@ -5,6 +5,7 @@ import { MODAL_KIND_MODIFIERS, MODAL_SIZE_MODIFIERS } from './modal_constants';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { action } from 'storybook/actions';
 import { NOTICE_KINDS } from '@/components/notice';
+import { CONTENT_MODE_ARG_TYPE } from '@/common/mode_constants';
 
 // Default Props for all variations
 export const argsData = {
@@ -56,6 +57,7 @@ export const argTypesData = {
   },
 
   // Props
+  contentMode: CONTENT_MODE_ARG_TYPE,
   size: {
     options: Object.keys(MODAL_SIZE_MODIFIERS),
     control: {
@@ -214,11 +216,11 @@ export const WithCustomHeaderAndContent = {
 
   args: {
     header: `
-      <dt-stack direction="row" align="center" justify="center" class="d-p12 d-bgc-purple-100">
+      <dt-stack direction="row" align="center" justify="center" class="d-p-150 d-bgc-purple-100">
         <div>[custom header]</div>
       </dt-stack>`,
     default: `
-      <dt-stack direction="row" align="center" justify="center" class="d-p32 d-bgc-gold-200">
+      <dt-stack direction="row" align="center" justify="center" class="d-p-400 d-bgc-gold-200">
         <h2>[custom body]</h2>
       </dt-stack>`,
   },

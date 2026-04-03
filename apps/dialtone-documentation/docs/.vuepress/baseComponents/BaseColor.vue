@@ -1,10 +1,10 @@
 <template>
-  <dt-stack as="aside" gap="300">
+  <dt-stack as="aside" gap="50">
     <dt-stack v-if="stops.length" as="header" direction="row" justify="between" align="baseline">
       <dt-text
         as="h4"
         kind="headline"
-        size="lg"
+        :size="400"
         class="d-tt-capitalize"
         text-box-trim="start"
         tabindex="-1"
@@ -16,7 +16,7 @@
         as="abbr"
         tabindex="0"
         text-box-trim="start"
-        class="d-px12 d-td-dotted d-c-help"
+        class="d-px-150 d-td-dotted d-c-help"
       >
         LC
       </dt-text>
@@ -29,7 +29,7 @@
         align="center"
         justify="space-between"
         :class="[
-          'd-px12 d-py8 d-text-code--xs',
+          'd-px-150 d-py-100 d-text-code--xs',
           {
             'd-btr4': index === 0,
             'd-bbr4': index === (stops.length - 1),
@@ -37,7 +37,7 @@
         ]"
         :style="`background-color: ${stop.value}`"
       >
-        <dt-stack gap="300" :class="fontColorClass(stop.lightness)">
+        <dt-stack gap="50" :class="fontColorClass(stop.lightness)">
           <dt-text as="strong" class="d-us-all">
             {{ `var(--dt-color-${colorName}-${stop.stop})` }}
           </dt-text>

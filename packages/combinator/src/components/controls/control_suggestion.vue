@@ -4,6 +4,8 @@
       ref="combobox"
       label="Valid values"
       max-height="512px"
+      list-class="d-hmx-350"
+      append-to="body"
       @select="e => onUpdate(suggestions[e])"
       @opened="onOpen"
     >
@@ -18,17 +20,17 @@
           <template #default>
             <slot />
           </template>
-          <template #icon="{ iconSize }">
+          <template #icon>
             <component
-              :is="open ? DtIconChevronDown : DtIconChevronRight"
-              :size="iconSize"
+              :is="DtIconChevronDown"
+              size="200"
             />
           </template>
         </dtc-control-string>
       </template>
       <template #list="{ listProps }">
         <ul
-          class="d-p0"
+          class="d-p-0"
           v-bind="listProps"
         >
           <dt-list-item
@@ -57,7 +59,7 @@ import { DtRecipeComboboxWithPopover, DtListItem } from '@dialpad/dialtone-vue';
 
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { computed, ref } from 'vue';
-import { DtIconChevronDown, DtIconChevronRight } from '@dialpad/dialtone-icons/vue3';
+import { DtIconChevronDown, DtIconChevronRight } from '@dialpad/dialtone-icons/vue';
 
 const WARNING_MESSAGE = 'Unexpected value';
 

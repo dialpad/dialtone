@@ -3,8 +3,8 @@
     <span v-if="!show">
       <slot name="prefix" />
       <dt-button
-        class="dtc-theme__button dtc-theme__interactive d-p4"
-        size="sm"
+        class="dtc-theme__button dtc-theme__interactive d-p-50"
+        :size="200"
         importance="clear"
         @click="toggle"
       >
@@ -18,8 +18,8 @@
     </span>
     <span v-else>
       <dt-button
-        class="dtc-theme__button dtc-theme__interactive d-p0"
-        size="xl"
+        class="dtc-theme__button dtc-theme__interactive d-p-0"
+        :size="500"
         importance="clear"
         @click="toggle"
       >
@@ -38,7 +38,7 @@
 
 <script setup>
 import { DtButton, DtLazyShow } from '@dialpad/dialtone-vue';
-import { DtIconChevronDown, DtIconChevronRight } from '@dialpad/dialtone-icons/vue3';
+import { DtIconChevronDown, DtIconChevronRight } from '@dialpad/dialtone-icons/vue';
 
 import { ref } from 'vue';
 
