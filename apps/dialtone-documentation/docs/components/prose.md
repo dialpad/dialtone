@@ -74,169 +74,99 @@ Prose styles the full set of content HTML elements:
 
 The most common use case: wrapping HTML that was rendered from markdown by a library like `markdown-it`, `marked`, or a server-side renderer.
 
-<code-well-header>
-  <div class="d-w100p">
-    <dt-prose ref="proseExample1">
-      <h1>Getting started</h1>
-      <p>Install the package:</p>
-      <pre><code>npm install @dialpad/dialtone</code></pre>
-      <p>Then import the styles:</p>
-      <pre><code>import '@dialpad/dialtone/css';</code></pre>
-      <p>You can now use any of the available <a href="#">utility classes</a>. For example:</p>
-      <ul>
-        <li><code>d-p16</code> — applies 16px padding</li>
-        <li><code>d-fc-primary</code> — sets the primary font color</li>
-      </ul>
-      <blockquote>
-        <p><strong>Note:</strong> Make sure your build pipeline processes CSS imports before deploying.</p>
-      </blockquote>
-    </dt-prose>
-  </div>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs.proseExample1"
-vueCode='
-<dt-prose>
-  <h1>Getting started</h1>
-  <p>Install the package:</p>
-  <pre><code>npm install @dialpad/dialtone</code></pre>
-  <p>Then import the styles:</p>
-  <pre><code>import &apos;@dialpad/dialtone/css&apos;;</code></pre>
-  <p>You can now use any of the available
-    <a href="#">utility classes</a>. For example:</p>
-  <ul>
-    <li><code>d-p16</code> — applies 16px padding</li>
-    <li><code>d-fc-primary</code> — sets the primary font color</li>
-  </ul>
-  <blockquote>
-    <p><strong>Note:</strong> Make sure your build pipeline
-      processes CSS imports before deploying.</p>
-  </blockquote>
-</dt-prose>
-'
-/>
+```vue demo
+<!-- @wrapper -->
+<div class="d-w100p">
+  <dt-prose>
+    <h1>Getting started</h1>
+    <p>Install the package:</p>
+    <pre><code>npm install @dialpad/dialtone</code></pre>
+    <p>Then import the styles:</p>
+    <pre><code>import '@dialpad/dialtone/css';</code></pre>
+    <p>You can now use any of the available <a href="#">utility classes</a>. For example:</p>
+    <ul>
+      <li><code>d-p16</code> — applies 16px padding</li>
+      <li><code>d-fc-primary</code> — sets the primary font color</li>
+    </ul>
+    <blockquote>
+      <p><strong>Note:</strong> Make sure your build pipeline processes CSS imports before deploying.</p>
+    </blockquote>
+  </dt-prose>
+</div>
+```
 
 ### Tables
 
 Prose tables are fully styled with borders, header separation, and row-scoped headers.
 
-<code-well-header>
-  <div class="d-w100p">
-    <dt-prose ref="proseExample2">
-      <table>
-        <caption>Token spacing scale</caption>
-        <thead>
-          <tr>
-            <th>Token</th>
-            <th>Value</th>
-            <th>Pixels</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row"><code>--dt-size-300</code></th>
-            <td>0.4rem</td>
-            <td>4px</td>
-          </tr>
-          <tr>
-            <th scope="row"><code>--dt-size-400</code></th>
-            <td>0.8rem</td>
-            <td>8px</td>
-          </tr>
-          <tr>
-            <th scope="row"><code>--dt-size-500</code></th>
-            <td>1.6rem</td>
-            <td>16px</td>
-          </tr>
-        </tbody>
-      </table>
-    </dt-prose>
-  </div>
-</code-well-header>
+```vue demo
+<!-- @wrapper -->
+<div class="d-w100p">
+  <dt-prose>
+    <table>
+      <caption>Token spacing scale</caption>
+      <thead>
+        <tr>
+          <th>Token</th>
+          <th>Value</th>
+          <th>Pixels</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row"><code>--dt-size-300</code></th>
+          <td>0.4rem</td>
+          <td>4px</td>
+        </tr>
+        <tr>
+          <th scope="row"><code>--dt-size-400</code></th>
+          <td>0.8rem</td>
+          <td>8px</td>
+        </tr>
+        <tr>
+          <th scope="row"><code>--dt-size-500</code></th>
+          <td>1.6rem</td>
+          <td>16px</td>
+        </tr>
+      </tbody>
+    </table>
+  </dt-prose>
+</div>
+```
 
-<code-example-tabs
-:htmlCode="() => $refs.proseExample2"
-vueCode='
-<dt-prose>
-  <table>
-    <caption>Token spacing scale</caption>
-    <thead>
-      <tr>
-        <th>Token</th>
-        <th>Value</th>
-        <th>Pixels</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row"><code>--dt-size-300</code></th>
-        <td>0.4rem</td>
-        <td>4px</td>
-      </tr>
-    </tbody>
-  </table>
-</dt-prose>
-'
-/>
 
 ### Task list
 
 Checkboxes inside list items are the one exception to the "no form elements" rule, supporting the common markdown task-list pattern.
 
-<code-well-header>
-  <div class="d-w100p">
-    <dt-prose ref="proseExample3">
-      <ul>
-        <li><input type="checkbox" checked disabled> Design review complete</li>
-        <li><input type="checkbox" checked disabled> Implementation merged</li>
-        <li><input type="checkbox" disabled> Documentation published</li>
-      </ul>
+```vue demo
+<!-- @wrapper -->
+<div class="d-w100p">
+  <dt-prose>
+    <ul>
+      <li><input type="checkbox" checked disabled> Design review complete</li>
+      <li><input type="checkbox" checked disabled> Implementation merged</li>
+      <li><input type="checkbox" disabled> Documentation published</li>
+    </ul>
     </dt-prose>
   </div>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs.proseExample3"
-vueCode='
-<dt-prose>
-  <ul>
-    <li><input type="checkbox" checked disabled> Design review complete</li>
-    <li><input type="checkbox" checked disabled> Implementation merged</li>
-    <li><input type="checkbox" disabled> Documentation published</li>
-  </ul>
-</dt-prose>
-'
-/>
+```
 
 ### Details and summary
 
 Collapsible sections useful for FAQs, supplementary information, or long reference content.
 
-<code-well-header>
-  <div class="d-w100p">
-    <dt-prose ref="proseExample4">
-      <details>
-        <summary>What elements are supported?</summary>
-        <p>Prose styles headings, paragraphs, lists, tables, blockquotes, code blocks, definition lists, figures, and details/summary. See the <strong>Supported elements</strong> table above for the full list.</p>
-      </details>
-    </dt-prose>
-  </div>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs.proseExample4"
-vueCode='
-<dt-prose>
-  <details>
-    <summary>What elements are supported?</summary>
-    <p>Prose styles headings, paragraphs, lists, tables,
-      blockquotes, code blocks, definition lists, figures,
-      and details/summary.</p>
-  </details>
-</dt-prose>
-'
-/>
+```vue demo
+<!-- @wrapper -->
+<div class="d-w100p">
+  <dt-prose ref="proseExample4">
+    <details>
+      <summary>What elements are supported?</summary>
+      <p>Prose styles headings, paragraphs, lists, tables, blockquotes, code blocks, definition lists, figures, and details/summary. See the <strong>Supported elements</strong> table above for the full list.</p>
+    </details>
+  </dt-prose>
+</div>
+```
 
 ## Vue API
 

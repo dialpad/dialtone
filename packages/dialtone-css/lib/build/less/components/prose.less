@@ -72,7 +72,7 @@
     // ---------------------------------------------------------------------------
 
     p {
-      margin-block-start: var(--dt-size-400);
+      margin-block: var(--dt-size-400);
       text-wrap: pretty;
     }
 
@@ -138,7 +138,7 @@
 
     mark {
       color: inherit;
-      background-color: var(--dt-color-surface-warning-subtle);
+      background-color: var(--dt-color-surface-warning-opaque);
       border-radius: var(--dt-size-radius-200);
       padding-block: var(--dt-size-100);
       padding-inline: var(--dt-size-200);
@@ -231,11 +231,11 @@
 
     li {
       list-style: inherit;
-      margin-block-start: var(--dt-size-300);
+      margin-block: var(--dt-size-400);
     }
 
     ul ul, ul ol, ol ul, ol ol {
-      margin-block-start: var(--dt-size-300);
+      margin-block: var(--dt-size-400);
     }
 
     ul ul {
@@ -279,9 +279,9 @@
 
     blockquote {
       border-inline-start: var(--dt-size-border-300) solid var(--dt-color-border-default);
-      padding-inline-start: var(--dt-size-400);
+      padding-inline-start: var(--dt-size-450);
       margin-inline: 0;
-      margin-block-start: var(--dt-size-500);
+      margin-block: var(--dt-size-500);
       color: var(--dt-color-foreground-tertiary);
     }
 
@@ -303,9 +303,10 @@
       overflow-x: auto;
       color: var(--dt-color-foreground-tertiary);
       font: var(--dt-text-code-sm);
+      line-height: var(--dt-font-line-height-300);
       background-color: var(--dt-color-surface-secondary-opaque);
       border-radius: var(--dt-size-radius-300);
-      margin-block-start: var(--dt-size-400);
+      margin-block: var(--dt-size-450);
     }
 
     pre code {
@@ -323,7 +324,6 @@
 
     table {
       font: var(--dt-text-body-sm);
-      border: var(--dt-size-border-100) solid var(--dt-color-border-default);
       border-collapse: collapse;
       border-spacing: 0;
       inline-size: 100%;

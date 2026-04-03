@@ -1368,7 +1368,11 @@ packages:
   '@dialpad/i18n-goblin-core@1.1.0':
     resolution: {integrity: sha512-1hc4vItUk6via1ek/qDZPNyS6K8vjIJi6c3Adzf5etZVtzBR2q51oTORNhyUpt+Kdrnf/86VFY2o9DJ5p6rgZA==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n-goblin-core/1.1.0/dcdb873663c071b4c9507d49eb3298a2e270513c}
     peerDependencies:
+      '@vue/composition-api': '*'
       vue: ^3.0.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
 
   '@dialpad/i18n-goblin-services@1.2.0':
     resolution: {integrity: sha512-fWfp/HIaf3FOcNtxcw1TRzcbWOXOVqnd0W1hJ5REH9l8EW6ywvPjkIRgAUvKR6wmqQychPd7JbjD0Yv5NZ/dWg==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n-goblin-services/1.2.0/01f4f4d88518e29cd7f34509dd464c58327048f1}
@@ -16485,8 +16489,6 @@ snapshots:
       '@fluent/bundle': 0.17.1
       fluent-vue: 3.7.2(@fluent/bundle@0.17.1)(vue@3.5.31(typescript@5.9.3))
       vue: 3.5.31(typescript@5.9.3)
-    transitivePeerDependencies:
-      - '@vue/composition-api'
 
   '@dialpad/i18n-goblin-services@1.2.0':
     dependencies:
