@@ -31,12 +31,13 @@ Text opacity CSS Utilities won't be inherited by its children. A font-color util
       <dt-icon name="alert-triangle" size="400" />
       <strong>Text opacity utility classes don't inherit colors.</strong>
     </dt-stack>
-    ```vue demo
-    <div class="d-fc-critical">
-      <p>The quick brown fox jumps over the lazy dog.</p>
-      <p class="d-fco50">The quick brown fox jumps over the lazy dog.</p>
-    </div>
-  
+
+```vue demo
+<!-- This won't work -->
+<div class="d-fc-critical">
+  <p>The quick brown fox jumps over the lazy dog.</p>
+  <p class="d-fco50">The quick brown fox jumps over the lazy dog.</p>
+</div>
 ```
 
   </div>
@@ -46,15 +47,8 @@ Text opacity CSS Utilities won't be inherited by its children. A font-color util
   <strong>Apply each utility class to the same element</strong>
 </dt-stack>
 
-<code-well-header>
-  <div class="d-fc-critical">
-    <p>The quick brown fox jumps over the lazy dog.</p>
-    <p class="d-fc-critical d-fco50">The quick brown fox jumps over the lazy dog.</p>
-  </div>
-</code-well-header>
-
-```html
-// This will
+```vue demo
+<!-- This will -->
 <div class="d-fc-critical">
   <p>The quick brown fox jumps over the lazy dog.</p>
   <p class="d-fc-critical d-fco50">The quick brown fox jumps over the lazy dog.</p>

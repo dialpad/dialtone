@@ -11,7 +11,6 @@ keywords: ["bold", "semibold", "light", "thin"]
 Use `d-fw-{n}` to change an element's font-weight.
 
 ```vue demo
-<!-- @wrapper -->
 <div class="d-d-grid d-g-200 d-ai-center" style="grid-template-columns: 11rem 1fr">
   <div class="d-code--sm d-docsite-code d-ws-nowrap">.d-fw-normal</div>
   <div><p class="d-fw-normal">The quick brown fox jumps over the lazy dog.</p></div>
@@ -22,6 +21,8 @@ Use `d-fw-{n}` to change an element's font-weight.
   <div class="d-code--sm d-docsite-code d-ws-nowrap">.d-fw-bold</div>
   <div><p class="d-fw-bold">The quick brown fox jumps over the lazy dog.</p></div>
 </div>
+<!-- @code -->
+<p class="d-fw-{className}">...</p>
 ```
 
 ## Variables

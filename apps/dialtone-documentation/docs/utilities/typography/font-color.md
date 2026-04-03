@@ -11,20 +11,19 @@ keywords: ["text color", "foreground color", "font colour"]
 Use [DtText's](/components/text.html#tone) `tone` prop to declare the text's tone, which will map to a foreground color. By default, the tone is inherited from its parent.
 
 ```vue demo
-<dt-stack gap="200" direction="row">
-  <dt-stack class="d-py-100 d-px-200 d-bgc-primary d-bar4">
-    <dt-text tone="primary">primary</dt-text>
-    <dt-text tone="secondary">secondary</dt-text>
-    <dt-text tone="tertiary">tertiary</dt-text>
-    <dt-text tone="muted">muted</dt-text>
-    <dt-text tone="disabled">disabled</dt-text>
-    <dt-text tone="placeholder">placeholder</dt-text>
-    <dt-text tone="success">success</dt-text>
-    <dt-text tone="success-strong">success-strong</dt-text>
-    <dt-text tone="warning">warning</dt-text>
-    <dt-text tone="critical">critical</dt-text>
-    <dt-text tone="critical-strong">critical-strong</dt-text>
-  </dt-stack>
+<!-- @wrapper -->
+<dt-stack class="d-py-100 d-px-200 d-bgc-primary d-bar4">
+  <dt-text tone="primary">primary</dt-text>
+  <dt-text tone="secondary">secondary</dt-text>
+  <dt-text tone="tertiary">tertiary</dt-text>
+  <dt-text tone="muted">muted</dt-text>
+  <dt-text tone="disabled">disabled</dt-text>
+  <dt-text tone="placeholder">placeholder</dt-text>
+  <dt-text tone="success">success</dt-text>
+  <dt-text tone="success-strong">success-strong</dt-text>
+  <dt-text tone="warning">warning</dt-text>
+  <dt-text tone="critical">critical</dt-text>
+  <dt-text tone="critical-strong">critical-strong</dt-text>
 </dt-stack>
 ```
 

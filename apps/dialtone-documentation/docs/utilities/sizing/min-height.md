@@ -41,7 +41,7 @@ Use `d-hmn{n}p` to set a minimum height percentage for an element. No hyphen bef
 
 Use keyword utilities to set minimum height using CSS keyword values.
 
-```html
+```vue code-only
 <div class="d-hmn-auto">...</div>
 <div class="d-hmn-unset">...</div>
 <div class="d-hmn-fit-content">...</div>

@@ -26,6 +26,8 @@ Use `d-lc-{n}` to truncate text at a specific number of lines with an ellipsis.
     <p class="d-lc-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
   </div>
 </dt-stack>
+<!-- @code -->
+<p class="d-lc-{n}">...</p>
 ```
 
 ### Avoiding display conflicts
@@ -38,7 +40,7 @@ Use `d-lc-{n}` to truncate text at a specific number of lines with an ellipsis.
 
 #### Flex example
 
-```html
+```vue code-only
 <!-- This won't work because DtStack is flex-based -->
 <dt-stack class="d-lc-3"> ... </dt-stack>
 
@@ -50,7 +52,7 @@ Use `d-lc-{n}` to truncate text at a specific number of lines with an ellipsis.
 
 #### Grid example
 
-```html
+```vue code-only
 <!-- This won't work -->
 <div class="d-lc-3 d-d-grid"> ... </div>
 
@@ -63,12 +65,6 @@ Use `d-lc-{n}` to truncate text at a specific number of lines with an ellipsis.
 ## Custom
 
 The `d-lc-{n}` utility currently goes up to `9`. Should you need to go beyond, use the `d-lc-custom` class and locally adjust the CSS custom property `--lc-lines`.
-
-```html
-<div class="d-lc-custom" style="--lc-lines: 11">
-  ...
-</div>
-```
 
 ```vue demo
 <div class="d-lc-custom" style="--lc-lines: 11">

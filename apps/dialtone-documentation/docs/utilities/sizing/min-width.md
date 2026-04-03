@@ -34,7 +34,7 @@ Use `d-wmn{n}p` to set a minimum width percentage for an element. No hyphen befo
 
 Use `d-wmn{n}ch` to set a minimum width based on character count. Useful for ensuring text containers maintain a minimum readable width.
 
-```html
+```vue code-only
 <div class="d-wmn60ch">...</div>   <!-- min-inline-size: 60ch -->
 <div class="d-wmn75ch">...</div>   <!-- min-inline-size: 75ch -->
 <div class="d-wmn90ch">...</div>   <!-- min-inline-size: 90ch -->
@@ -44,7 +44,7 @@ Use `d-wmn{n}ch` to set a minimum width based on character count. Useful for ens
 
 Use keyword utilities to set minimum width using CSS keyword values.
 
-```html
+```vue code-only
 <div class="d-wmn-auto">...</div>
 <div class="d-wmn-unset">...</div>
 <div class="d-wmn-fit-content">...</div>

@@ -73,7 +73,7 @@ Product UI text can be characterized as one of **Headline**, **Body**, **Label**
 
 Use the [DtText](/components/text.html) component as the primary way to apply typography styles. The component provides a semantic, prop-driven API that's easier to maintain and ensures consistent usage across your application.
 
-```html
+```vue code-only
 <dt-text kind="headline|body|label|code" size="{size}" {{props}}>...</dt-text>
 ```
 
@@ -81,7 +81,7 @@ Use the [DtText](/components/text.html) component as the primary way to apply ty
 
 Text Style CSS utilities should be considered a last resort or as a fallback for non-Vue contexts.
 
-```html
+```vue code-only
 <el class="d-text-{category}--{size}">...</el>
 ```
 

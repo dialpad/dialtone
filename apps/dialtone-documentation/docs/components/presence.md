@@ -20,6 +20,7 @@ Located at the bottom right of an avatar, the `presence` indicator displays a us
 ### Active
 
 When a user is available.
+
 ```vue demo
 <example-presence presence="active" />
 <!-- @code -->
@@ -29,6 +30,7 @@ When a user is available.
 ### Busy
 
 When a user is unavailable, either due to being **'On a call'**, **'In a meeting'**, or set to **'DND (Do Not Disturb)'**. Additionally, a text label indicating their specific status will appear under the user's name.
+
 ```vue demo
 <example-presence presence="busy" />
 <!-- @code -->
@@ -38,6 +40,7 @@ When a user is unavailable, either due to being **'On a call'**, **'In a meeting
 ### Away
 
 When a user has a scheduled meeting on their synced calendar (Google G Suite or Microsoft Office 365) and is not actively participating in it through the app. Additionally, **'In a meeting'** will appear under the user's name.
+
 ```vue demo
 <example-presence presence="away" />
 <!-- @code -->
@@ -47,6 +50,7 @@ When a user has a scheduled meeting on their synced calendar (Google G Suite or 
 ### Offline
 
 When a user has not logged in for their first time.
+
 ```vue demo
 <example-presence presence="offline" />
 <!-- @code -->
@@ -74,7 +78,7 @@ Even though the component has a role of "status" to assist SR apps in reading ou
 
 Example:
 
-```html
+```vue code-only
 <dt-presence
   presence="active"
   sr-text="User {{ user }} is active"

@@ -9,8 +9,7 @@ keywords: ["text size", "type size", "type scale"]
 ## Usage
 
 ```vue demo
-<!-- @wrapper -->
-<div class="d-d-grid d-g-200 d-ai-center" style="grid-template-columns: 10rem 1fr">
+<div class="d-d-grid d-g-200 d-ai-baseline" style="grid-template-columns: 10rem 1fr">
   <div class="d-code--sm d-docsite-code">d-fs-50</div><div><p class="d-lc-1 d-fs-50">The quick brown fox jumps over the lazy dog.</p></div>
   <div class="d-code--sm d-docsite-code">d-fs-75</div><div><p class="d-lc-1 d-fs-75">The quick brown fox jumps over the lazy dog.</p></div>
   <div class="d-code--sm d-docsite-code">d-fs-100</div><div><p class="d-lc-1 d-fs-100">The quick brown fox jumps over the lazy dog.</p></div>
@@ -23,6 +22,8 @@ keywords: ["text size", "type size", "type scale"]
   <div class="d-code--sm d-docsite-code">d-fs-400</div><div><p class="d-lc-1 d-fs-400">The quick brown fox jumps over the lazy dog.</p></div>
   <div class="d-code--sm d-docsite-code">d-fs-500</div><div><p class="d-lc-1 d-fs-500">The quick brown fox jumps over the lazy dog.</p></div>
 </div>
+<!-- @code -->
+<p class="d-fs-{stop}">...</p>
 ```
 
 <script setup>

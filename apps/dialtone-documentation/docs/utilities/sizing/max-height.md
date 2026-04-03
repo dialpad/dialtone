@@ -24,7 +24,7 @@ Use `d-hmx-{stop}` to set a fixed maximum height for an element using layout tok
 
 Use `d-hmx{n}p` to set a maximum height percentage for an element. No hyphen before the number, `p` suffix indicates a literal percentage value. Note: `d-hmx33p` = 33.333% and `d-hmx66p` = 66.667%.
 
-```html
+```vue code-only
 <div class="d-h-350">
   <div class="d-h-100 d-hmx50p">1</div>
 </div>
@@ -34,7 +34,7 @@ Use `d-hmx{n}p` to set a maximum height percentage for an element. No hyphen bef
 
 Use keyword utilities to set maximum height using CSS keyword values.
 
-```html
+```vue code-only
 <div class="d-hmx-auto">...</div>
 <div class="d-hmx-unset">...</div>
 <div class="d-hmx-fit-content">...</div>

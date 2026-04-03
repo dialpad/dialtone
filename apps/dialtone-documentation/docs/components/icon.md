@@ -44,6 +44,7 @@ import { DtIcon } from '@dialpad/dialtone'
 Adjust the size using the `size` prop. Note that sizes 600, 700, and 800 are exclusively for devices.
 
 <div class="d-gc2">
+
 ```vue demo-only
 <div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols2 d-w100p">
   <dt-stack direction="row" align="center" justify="center">
@@ -67,6 +68,7 @@ Adjust the size using the `size` prop. Note that sizes 600, 700, and 800 are exc
 The icon's color inherits from the parent's foreground color.
 
 <div class="d-gc2">
+
 ```vue demo-only
 <div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols2 d-w100p">
 <dt-stack direction="row" align="center" justify="center">
@@ -139,6 +141,7 @@ When setting the color of an icon take these into consideration:
 We encourage utilizing the [Stack component](/components/stack.md) for aligning elements both horizontally and vertically.
 
 <div class="d-gc2">
+
 ```vue demo-only
 <div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols2 d-w100p">
   <dt-stack direction="row" align="center" justify="center">

@@ -11,7 +11,6 @@ keywords: ["leading", "line spacing"]
 Use `d-lh-{n}` to change an element's line-height relatively. This means no unit is set with the line-height. Instead the line-height value is a multiple of the font-size.
 
 ```vue demo
-<!-- @wrapper -->
 <div class="d-d-grid d-ai-center" style="grid-template-columns: 10rem 1fr">
   <div class="d-code--sm d-docsite-code">.d-lh-unset</div>
   <p class="d-lh-unset d-bgc-moderate">The quick brown fox jumps over the lazy dog.</p>
@@ -40,6 +39,8 @@ Use `d-lh-{n}` to change an element's line-height relatively. This means no unit
   <div class="d-code--sm d-docsite-code">.d-lh-600</div>
   <p class="d-lh-600 d-bgc-moderate">The quick brown fox jumps over the lazy dog.</p>
 </div>
+<!-- @code -->
+<p class="d-lh-{stop}">...</p>
 ```
 
 ## Fixed Line-Heights
@@ -47,7 +48,6 @@ Use `d-lh-{n}` to change an element's line-height relatively. This means no unit
 Use `d-lh{n}` to fix an element's line-height. This allows you to target a specific line-height based on the font-size. For example if a target 20px line-height is desired and the current font-size is 14px, apply `.d-lh6` to achieve this target (14px font-size + 6px = 20px target line-height).
 
 ```vue demo
-<!-- @wrapper -->
 <div class="d-d-grid d-ai-center" style="grid-template-columns: 10rem 1fr">
   <div class="d-code--sm d-docsite-code">.d-lh0</div>
   <div>
@@ -108,6 +108,8 @@ Use `d-lh{n}` to fix an element's line-height. This allows you to target a speci
       <p class="d-lh24 d-fs-300 d-bgc-moderate">The quick brown fox jumps over the lazy dog.</p>
   </div>
 </div>
+<!-- @code -->
+<p class="d-lh{stop}">...</p>
 ```
 
 ## CSS Variables

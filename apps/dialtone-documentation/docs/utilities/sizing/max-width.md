@@ -38,7 +38,7 @@ Use `d-wmx{n}p` to set a maximum width percentage for an element. No hyphen befo
 
 Use `d-wmx{n}ch` to set a maximum width based on character count. Useful for limiting text line lengths for optimal readability.
 
-```html
+```vue code-only
 <div class="d-wmx60ch">...</div>   <!-- max-inline-size: 60ch -->
 <div class="d-wmx75ch">...</div>   <!-- max-inline-size: 75ch -->
 <div class="d-wmx90ch">...</div>   <!-- max-inline-size: 90ch -->
@@ -48,7 +48,7 @@ Use `d-wmx{n}ch` to set a maximum width based on character count. Useful for lim
 
 Use keyword utilities to set maximum width using CSS keyword values.
 
-```html
+```vue code-only
 <div class="d-wmx-auto">...</div>
 <div class="d-wmx-unset">...</div>
 <div class="d-wmx-fit-content">...</div>
