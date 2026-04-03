@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/dialpad/dialtone/compare/dialtone-mcp-server/v1.2.1...dialtone-mcp-server/v1.3.0) (2026-03-31)
+
+
+### Features
+
+* **Dialtone Cli,dialtone Query Core:** DLT-3163 extract query core and add CLI ([#1142](https://github.com/dialpad/dialtone/issues/1142)) ([65090e6](https://github.com/dialpad/dialtone/commit/65090e6dc215084677e05fa50eb1ba0de72c61d8))
+
 ## [1.2.1](https://github.com/dialpad/dialtone/compare/dialtone-mcp-server/v1.2.0...dialtone-mcp-server/v1.2.1) (2026-01-08)
 
 

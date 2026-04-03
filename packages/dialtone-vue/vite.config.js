@@ -40,9 +40,10 @@ const recipeEntries = _getEntries('lib', 'recipes/**/*.{js,vue}');
 export default defineConfig({
   assetsInclude: ['**/*.ftl'],
   build: {
+    target: 'es2020',
     sourcemap: true,
     minify: true,
-    rollupOptions: {
+    rolldownOptions: {
       external: [
         /^@dialpad/,
         /^@tiptap\/(?!vue-3)/,
@@ -59,7 +60,7 @@ export default defineConfig({
         minifyInternalExports: true,
         exports: 'named',
       },
-      treeshake: 'smallest',
+      treeshake: true,
     },
     lib: {
       entry: {
@@ -92,7 +93,7 @@ export default defineConfig({
       formats: ['es', 'cjs'],
     },
   },
-  plugins: [vue(), dts({ outDir: 'dist/types' })],
+  plugins: [vue(), dts({ vue: true, parallel: true, compilerOptions: { skipLibCheck: true } })],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('.', import.meta.url)),
@@ -132,7 +133,6 @@ export default defineConfig({
         '.storybook/**',
         'storybook-static/**',
       ],
-      all: true, // include all files in coverage report
       clean: true, // clean coverage directory before running tests
       skipFull: true, // skip full coverage report
       thresholds: { // will fail the build if coverage is below these thresholds

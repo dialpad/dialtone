@@ -63,6 +63,7 @@ describe('DtCombobox Tests', () => {
     mockAttrs = {};
     mockProps = {};
     mockSlots = {};
+    vi.clearAllMocks();
     vi.restoreAllMocks();
   });
 
