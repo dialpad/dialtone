@@ -122,14 +122,18 @@ export function createBasicPanelStates(
 /**
  * Ensure at least one resizable panel remains unlocked.
  */
-export function ensureAtLeastOneUnlocked(panels: ResizablePanelState[]): void {
+/**
+ * Returns the ID of a panel that should be force-unlocked if all resizable panels are locked.
+ * Returns undefined if at least one panel is already unlocked.
+ */
+export function findPanelToForceUnlock(panels: ResizablePanelState[]): string | undefined {
   const resizablePanels = panels.filter(p => !p.collapsed && p.resizable !== false);
   const unlockedCount = resizablePanels.filter(p => !p.locked).length;
 
   if (unlockedCount === 0 && resizablePanels.length > 0) {
-    const lastResizable = resizablePanels[resizablePanels.length - 1];
-    lastResizable.locked = false;
+    return resizablePanels[resizablePanels.length - 1].id;
   }
+  return undefined;
 }
 
 /**

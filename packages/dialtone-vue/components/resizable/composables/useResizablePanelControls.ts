@@ -14,7 +14,7 @@ import type {
   SpaceAllocationStrategy,
 } from '../resizable_constants';
 import { parseSizeToPixels } from '../resizable_utils';
-import { applyPanelPixelConstraints, ensureAtLeastOneUnlocked, canResetPanelPair } from './useResizablePanelState';
+import { applyPanelPixelConstraints, findPanelToForceUnlock, canResetPanelPair } from './useResizablePanelState';
 
 // ============================================================================
 // TYPES
@@ -148,9 +148,10 @@ export function useResizablePanelControls(options: ResizablePanelControlsOptions
 
     updateSavedPanel(panel.id, { collapsed: true, autoCollapsed: source === 'system' });
 
+    // Clear locks and manual ratios so remaining panels fill the freed space
     panels.value.forEach(p => {
       if (p.id !== panel.id && !p.collapsed) {
-        updateSavedPanel(p.id, { locked: false });
+        updateSavedPanel(p.id, { locked: false, manualTargetRatio: undefined });
       }
     });
   }
@@ -227,7 +228,8 @@ export function useResizablePanelControls(options: ResizablePanelControlsOptions
     if (!panel || panel.collapsed || panel.resizable === false) return;
 
     updateSavedPanel(panelId, { locked: true });
-    ensureAtLeastOneUnlocked(panels.value);
+    const forceUnlock = findPanelToForceUnlock(panels.value);
+    if (forceUnlock) updateSavedPanel(forceUnlock, { locked: false });
   }
 
   function unlockPanel(panelId: string) {
@@ -323,7 +325,8 @@ export function useResizablePanelControls(options: ResizablePanelControlsOptions
         resetSpecificPanelPair(beforePanelId, afterPanelId);
       }
 
-      ensureAtLeastOneUnlocked(panels.value);
+      const forceUnlock = findPanelToForceUnlock(panels.value);
+      if (forceUnlock) updateSavedPanel(forceUnlock, { locked: false });
     } catch (error) {
       console.error('[resizable] Error in resetPanels:', error);
     }

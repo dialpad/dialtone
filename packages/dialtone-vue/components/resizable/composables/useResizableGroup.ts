@@ -212,7 +212,10 @@ export function useResizableGroup(options: UseResizableGroupOptions) {
     if (idx >= 0) {
       savedState.value[idx] = { ...savedState.value[idx], ...updates };
     } else {
-      savedState.value.push({ id: panelId, pixelSize: 0, ...updates });
+      // Use current computed size as default, not 0
+      const currentPanel = syncedPanels.value.find(p => p.id === panelId);
+      const currentSize = currentPanel?.pixelSize ?? 0;
+      savedState.value.push({ id: panelId, pixelSize: currentSize, ...updates });
     }
     savedState.value = [...savedState.value]; // trigger reactivity
 

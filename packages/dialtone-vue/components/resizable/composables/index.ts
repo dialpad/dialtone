@@ -24,7 +24,7 @@ export {
   applyPanelPixelConstraints,
   createPanelState,
   createBasicPanelStates,
-  ensureAtLeastOneUnlocked,
+  findPanelToForceUnlock,
   shouldSkipPanelPair,
   canResetPanelPair,
 } from './useResizablePanelState';

@@ -121,8 +121,10 @@ interface WorkingPanel {
   constraints: ConstraintHierarchy;
   width: number;
   collapsed: boolean;
-  /** True when resizable: false — panel keeps its exact initial pixel size */
+  /** True when resizable: false — panel keeps its exact pixel size, no handle rendered */
   isFixed: boolean;
+  /** True when locked — panel keeps its current size during redistribution but handle stays */
+  isLocked: boolean;
   /**
    * The manual ratio stored from a previous drag (0–1, fraction of container).
    * When present, this panel's target width = manualTargetRatio * containerSize,
@@ -193,18 +195,10 @@ function clampToConstraints(
  * (Panel IDs that exist in saved state but not current panels are simply ignored.)
  */
 function buildSavedIndex(
-  panels: ResizablePanelConfig[],
   savedState: SavedPanelData[] | undefined
 ): Map<string, SavedPanelData> | undefined {
   if (!savedState) return undefined;
-
-  const savedMap = new Map<string, SavedPanelData>(savedState.map(s => [s.id, s]));
-
-  // If any current panel is missing from saved state, saved state is incompatible
-  const hasNewPanel = panels.some(p => !savedMap.has(p.id));
-  if (hasNewPanel) return undefined;
-
-  return savedMap;
+  return new Map<string, SavedPanelData>(savedState.map(s => [s.id, s]));
 }
 
 // ============================================================================
@@ -224,6 +218,7 @@ function buildWorkingPanels(
     const savedPanel = savedIndex?.get(config.id);
     const collapsed = resolveCollapsed(config, savedPanel);
     const isFixed = config.resizable === false;
+    const isLocked = savedPanel?.locked ?? false;
 
     const savedRatio = savedPanel?.manualTargetRatio;
 
@@ -243,6 +238,7 @@ function buildWorkingPanels(
       width: rawWidth,
       collapsed,
       isFixed,
+      isLocked,
       manualTargetRatio: savedRatio,
     };
   });
@@ -263,10 +259,17 @@ function allocateReservedPanels(visiblePanels: WorkingPanel[], containerSize: nu
     }
   }
 
+  // Tier 1b: Locked panels — keep their current size, but handle still rendered
+  for (const p of visiblePanels) {
+    if (!p.isFixed && p.isLocked) {
+      const { clamped } = clampToConstraints(p.width, p.constraints);
+      p.width = clamped;
+      reservedTotal += clamped;
+    }
+  }
+
   // Tier 2: Ratio panels (manualTargetRatio) — user constraints only.
-  // These panels were explicitly sized by the user via drag, so system
-  // constraints (meant for viewport-driven redistribution) don't apply.
-  const ratioPanels = visiblePanels.filter(p => !p.isFixed && p.manualTargetRatio !== undefined);
+  const ratioPanels = visiblePanels.filter(p => !p.isFixed && !p.isLocked && p.manualTargetRatio !== undefined);
   for (const p of ratioPanels) {
     const targetWidth = (p.manualTargetRatio ?? 0) * containerSize;
     const { clamped } = clampToConstraints(targetWidth, p.constraints, 'user');
@@ -324,7 +327,7 @@ function applyFillGuarantee(visiblePanels: WorkingPanel[], propPanels: WorkingPa
   const allocatedTotal = visiblePanels.reduce((sum, p) => sum + p.width, 0);
   const gap = containerSize - allocatedTotal;
   if (gap > 1) {
-    const lastFlexible = [...propPanels].reverse().find(p => !p.isFixed);
+    const lastFlexible = [...propPanels].reverse().find(p => !p.isFixed && !p.isLocked);
     if (lastFlexible) {
       lastFlexible.width += gap;
     }
@@ -362,7 +365,7 @@ function distributeSpace(working: WorkingPanel[], containerSize: number): void {
   const reservedTotal = allocateReservedPanels(visiblePanels, containerSize);
 
   // ── Tier 3: Proportional panels ───────────────────────────────────────────
-  const propPanels = visiblePanels.filter(p => !p.isFixed && p.manualTargetRatio === undefined);
+  const propPanels = visiblePanels.filter(p => !p.isFixed && !p.isLocked && p.manualTargetRatio === undefined);
   const remainingSpace = Math.max(0, containerSize - reservedTotal);
 
   if (propPanels.length === 0) return;
@@ -397,7 +400,7 @@ function distributeShortfall(remainders: { panel: WorkingPanel; remainder: numbe
   for (const { panel } of remainders) {
     if (remaining <= 0) break;
     const max = panel.constraints.systemMaxSizePixels ?? panel.constraints.userMaxSizePixels ?? Infinity;
-    if (panel.width < max && !panel.isFixed) {
+    if (panel.width < max && !panel.isFixed && !panel.isLocked) {
       panel.width += 1;
       remaining -= 1;
     }
@@ -471,7 +474,11 @@ function computePositions(working: WorkingPanel[], containerSize: number): Map<s
  * Its left position equals the right edge of the before-panel.
  * It is disabled when either adjacent panel is collapsed.
  */
-function computeHandles(panels: ResizablePanelConfig[], positions: Map<string, PanelPosition>): HandlePosition[] {
+function computeHandles(
+  panels: ResizablePanelConfig[],
+  positions: Map<string, PanelPosition>,
+  savedIndex?: Map<string, SavedPanelData>,
+): HandlePosition[] {
   const handles: HandlePosition[] = [];
 
   for (let i = 0; i < panels.length - 1; i++) {
@@ -488,7 +495,9 @@ function computeHandles(panels: ResizablePanelConfig[], positions: Map<string, P
 
     if (!beforePos || !afterPos) continue;
 
-    const disabled = beforePos.collapsed || afterPos.collapsed;
+    const beforeLocked = savedIndex?.get(before.id)?.locked ?? false;
+    const afterLocked = savedIndex?.get(after.id)?.locked ?? false;
+    const disabled = beforePos.collapsed || afterPos.collapsed || beforeLocked || afterLocked;
 
     handles.push({
       id: `${before.id}:${after.id}`,
@@ -533,13 +542,13 @@ export function computeLayout(input: LayoutInput): LayoutResult {
   }
 
   // Build saved-state lookup (returns undefined if incompatible with current panels)
-  const savedIndex = buildSavedIndex(panels, savedState);
+  const savedIndex = buildSavedIndex(savedState);
 
   const working = buildWorkingPanels(panels, containerSize, savedIndex);
   distributeSpace(working, containerSize);
   roundWidths(working, containerSize);
   const positions = computePositions(working, containerSize);
-  const handles = computeHandles(panels, positions);
+  const handles = computeHandles(panels, positions, savedIndex);
 
   return { panels: positions, handles };
 }
