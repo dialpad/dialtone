@@ -9,9 +9,15 @@ keywords: ["maximum height", "mxh"]
 Use `d-hmx-{stop}` to set a fixed maximum height for an element using layout token stops. The hyphen before the number indicates a layout token reference, e.g. `d-hmx-100` outputs `max-block-size: var(--dt-layout-100)` (64px). This can be combined with `d-h{n}p` and `d-hmn-{stop}` to have an element fill a certain height range.
 
 ```vue demo
-<!-- @custom -->
-<!-- @class d-d-flex d-jc-center d-p-300 d-bgc-secondary d-w100p d-hmx-350 -->
-<dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100p d-h-100 d-hmx100p d-bgc-moderate d-bar4 d-ta-center">1</dt-stack>
+<dt-stack direction="row" gap="200" align="start" justify="center" class="d-w100p">
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100p d-h-100 d-hmx100p d-bgc-moderate d-bar4 d-ta-center">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100p d-h-200 d-hmx200p d-bgc-moderate d-bar4 d-ta-center">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100p d-h-400 d-hmx400p d-bgc-moderate d-bar4 d-ta-center">3</dt-stack>
+</dt-stack>
+<!-- @code -->
+<div class="d-hmx-100">...</div>  <!-- max-block-size: var(--dt-layout-100) = 64px / 6.4rem -->
+<div class="d-hmx-200">...</div>  <!-- max-block-size: var(--dt-layout-200) = 128px / 12.8rem -->
+<div class="d-hmx-400">...</div>  <!-- max-block-size: var(--dt-layout-400) = 256px / 25.6rem -->
 ```
 
 ## Percentages
