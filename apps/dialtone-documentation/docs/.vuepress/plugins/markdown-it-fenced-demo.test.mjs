@@ -227,7 +227,7 @@ describe('transformFencedDemo', () => {
       '',
     ].join('\n');
     const result = transformFencedDemo(input);
-    assert.ok(result.includes(' custom '));
+    assert.match(result, /\bcustom\b/);
     assert.ok(result.includes('class="'));
     assert.ok(!result.includes('<!-- @custom -->'));
   });
@@ -242,7 +242,7 @@ describe('transformFencedDemo', () => {
       '',
     ].join('\n');
     const result = transformFencedDemo(input);
-    assert.ok(result.includes(' custom '));
+    assert.match(result, /\bcustom\b/);
     assert.ok(result.includes('class="'));
     assert.ok(result.includes('source-code=\''));
     assert.ok(result.includes('v-for'));

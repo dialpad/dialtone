@@ -246,9 +246,9 @@ function stripWrapperElement (lines) {
 
   // Extract children between the opening and closing tags
   const children = trimmed.slice(openEnd + 1, lastCloseStart);
-  const childLines = trimBlankLines(children).split('\n');
+  const childLines = children.split('\n');
 
-  // Trim leading/trailing blank lines
+  // Trim leading/trailing blank or whitespace-only lines
   while (childLines.length > 0 && childLines[0].trim() === '') childLines.shift();
   while (childLines.length > 0 && childLines[childLines.length - 1].trim() === '') childLines.pop();
 

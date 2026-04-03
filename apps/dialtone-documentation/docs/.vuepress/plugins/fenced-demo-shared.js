@@ -74,12 +74,12 @@ export function parseDirectives (lines, infoMode = 'demo') {
       if (bgMatch) {
         bgclass = bgMatch[1];
         directiveLines.add(i);
-        continue;
-      }
-      const classMatch = trimmed.match(/^<!-- @class (.+) -->$/);
-      if (classMatch) {
-        cssClass = classMatch[1];
-        directiveLines.add(i);
+      } else {
+        const classMatch = trimmed.match(/^<!-- @class (.+) -->$/);
+        if (classMatch) {
+          cssClass = classMatch[1];
+          directiveLines.add(i);
+        }
       }
     }
   }
