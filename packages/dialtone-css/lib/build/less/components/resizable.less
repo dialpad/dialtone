@@ -20,10 +20,6 @@
   height: 100%;
   overflow: clip;
 
-  &--peeking {
-    overflow: visible;
-  }
-
   &--column {
     writing-mode: vertical-lr;
   }
@@ -41,10 +37,6 @@
     pointer-events: none;
   }
 
-  &--peeking {
-    z-index: calc(var(--zi-navigation-fixed) + var(--zi-base2));
-    pointer-events: auto;
-  }
 }
 
 .d-resizable-panel__content {
@@ -55,21 +47,6 @@
   height: 100%;
   pointer-events: auto;
   writing-mode: horizontal-tb;
-}
-
-.d-resizable-panel__peek-overlay {
-  position: absolute;
-  z-index: calc(var(--zi-navigation-fixed) + var(--zi-base2));
-  overflow: auto;
-  background-color: var(--dt-color-surface-primary);
-  box-shadow: var(--dt-shadow-large);
-  opacity: 0;
-  transition: opacity var(--td150) ease;
-  pointer-events: auto;
-
-  &--visible {
-    opacity: 1;
-  }
 }
 
 //  ============================================================================

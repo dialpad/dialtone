@@ -124,7 +124,7 @@ vueCode='
 
 - Don't pass raw pixel values for sizes. Only percentage tokens (`"25p"`) and Dialtone size tokens (`"925"`) are accepted.
 - Don't set `initial-size` on every panel. Leave one panel without it so it absorbs remaining space and the layout always fills the container.
-- Don't hide a panel without giving the user a way to bring it back. Collapsed panels should either use peek or provide an expand control in a visible sibling.
+- Don't hide a panel without giving the user a way to bring it back. Provide an expand control in a visible sibling panel (e.g., a menu button in the content header).
 </template>
 
 </dialtone-usage>
@@ -293,36 +293,6 @@ vueCode='
 />
 
 When both `storage-key` and `:storage` are provided, the custom adapter takes precedence.
-
-### Peek panel overlay
-
-Collapsed panels can show a temporary overlay on hover or button click, letting users preview content without permanently expanding the panel.
-
-<code-example-tabs
-vueCode='
-<dt-resizable-panel
-  id="sidebar"
-  collapsible
-  peek-enabled
-  peek-trigger="hover"
-  peek-width="25p"
->
-  Sidebar content (peek on hover when collapsed)
-</dt-resizable-panel>
-'
-/>
-
-Set `peek-trigger` to `"button"` to show a toggle button instead of hovering, or `"both"` for either. Use the `peek-trigger` slot to customize the button:
-
-<code-example-tabs
-vueCode='
-<template #peek-trigger="{ togglePeek, isPeeking }">
-  <button @click="togglePeek">
-    {{ isPeeking ? "Hide" : "Preview" }}
-  </button>
-</template>
-'
-/>
 
 ### Space allocation strategies
 

@@ -14,7 +14,7 @@
  * @see computeLayout.ts — the pure layout engine
  */
 
-import { ref, reactive, computed, watch, nextTick, type ComputedRef, type Ref } from 'vue';
+import { ref, computed, watch, nextTick, type ComputedRef, type Ref } from 'vue';
 import type { ResizablePanelConfig, ResizablePanelState, ResizableDirection } from '../resizable_constants';
 import type { LayoutResult } from './computeLayout';
 import type { SavedPanelData } from './useResizableStorage';
@@ -114,8 +114,6 @@ export function useResizableGroup(options: UseResizableGroupOptions) {
     string,
     { locked: boolean; manualTargetRatio?: number }
   >();
-  // Peeking is ephemeral UI state — reactive Set so syncedPanels recomputes on change
-  const peekingPanels = reactive(new Set<string>());
 
   // ── Layout computed ─────────────────────────────────────────────────────────
   const layout = computed((): LayoutResult => {
@@ -161,7 +159,6 @@ export function useResizableGroup(options: UseResizableGroupOptions) {
         : undefined;
 
       const state = buildPanelState(config, size, result, existingState);
-      state.isPeeking = peekingPanels.has(config.id);
       return state;
     });
   });
@@ -233,7 +230,6 @@ export function useResizableGroup(options: UseResizableGroupOptions) {
   function unregisterPanel(id: string): void {
     registeredPanels.value = registeredPanels.value.filter(p => p.id !== id);
     panelRuntimeState.delete(id);
-    peekingPanels.delete(id);
   }
 
   // ── Runtime state mutations ──────────────────────────────────────────────────
@@ -252,10 +248,6 @@ export function useResizableGroup(options: UseResizableGroupOptions) {
     }
   }
 
-  function setPanelPeeking(id: string, peeking: boolean): void {
-    if (peeking) peekingPanels.add(id);
-    else peekingPanels.delete(id);
-  }
 
   // ── Storage operations ──────────────────────────────────────────────────────
 
@@ -342,7 +334,6 @@ export function useResizableGroup(options: UseResizableGroupOptions) {
 
     setManualTargetRatio,
     setPanelLocked,
-    setPanelPeeking,
 
     saveCurrentLayout,
     updateSavedPanel,

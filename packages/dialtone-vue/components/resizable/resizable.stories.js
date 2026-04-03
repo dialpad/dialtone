@@ -11,8 +11,6 @@ import ResizableProgrammaticStory from './resizable_programmatic.story.vue';
 import ResizablePersistenceStory from './resizable_persistence.story.vue';
 import ResizableCustomAdapterStory from './resizable_custom_adapter.story.vue';
 import ResizableKeyboardStory from './resizable_keyboard.story.vue';
-import ResizablePeekHoverStory from './resizable_peek_hover.story.vue';
-import ResizablePeekButtonStory from './resizable_peek_button.story.vue';
 import ResizableOffsetStory from './resizable_offset.story.vue';
 
 export const argsData = {
@@ -145,12 +143,6 @@ const CustomAdapterTemplate = (args, { argTypes }) =>
 
 const KeyboardTemplate = (args, { argTypes }) =>
   createTemplateFromVueFile(args, argTypes, ResizableKeyboardStory);
-
-const PeekHoverTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, ResizablePeekHoverStory);
-
-const PeekButtonTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, ResizablePeekButtonStory);
 
 const OffsetTemplate = (args, { argTypes }) =>
   createTemplateFromVueFile(args, argTypes, ResizableOffsetStory);
@@ -393,75 +385,6 @@ export const Keyboard = {
   End — Set to maximum size
   R — Reset adjacent panels
   Escape — Remove focus from handle -->`,
-      },
-    },
-  },
-};
-
-export const PeekHover = {
-  render: PeekHoverTemplate,
-  args: {},
-  parameters: {
-    docs: {
-      description: {
-        story: 'Collapsed panel with hover-triggered peek. Hover over the collapsed sidebar to temporarily reveal it.',
-      },
-      source: {
-        code: `
-<d-resizable>
-  <d-resizable-panel
-    id="sidebar"
-    initial-size="925"
-    collapsible
-    :collapsed="true"
-    peek-enabled
-    peek-trigger="hover"
-    peek-when-manual
-  >
-    Sidebar (hover to peek)
-  </d-resizable-panel>
-  <d-resizable-handle />
-  <d-resizable-panel id="main" initial-size="50p">
-    Main Content
-  </d-resizable-panel>
-</d-resizable>`,
-      },
-    },
-  },
-};
-
-export const PeekButton = {
-  render: PeekButtonTemplate,
-  args: {},
-  parameters: {
-    docs: {
-      description: {
-        story: 'Collapsed panel with button-triggered peek. Uses the #peek-trigger slot to render a custom toggle button.',
-      },
-      source: {
-        code: `
-<d-resizable>
-  <d-resizable-panel
-    id="sidebar"
-    initial-size="925"
-    collapsible
-    :collapsed="true"
-    peek-enabled
-    peek-trigger="button"
-    peek-when-manual
-  >
-    <template #peek-trigger="{ togglePeek, isPeeking }">
-      <button @click="togglePeek">
-        {{ isPeeking ? 'Hide' : 'Peek' }}
-      </button>
-    </template>
-    Sidebar (click button to peek)
-  </d-resizable-panel>
-  <d-resizable-handle />
-  <d-resizable-panel id="main" initial-size="50p">
-    Main Content
-  </d-resizable-panel>
-</d-resizable>`,
       },
     },
   },

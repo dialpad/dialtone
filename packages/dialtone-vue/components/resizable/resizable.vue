@@ -4,10 +4,7 @@
     :class="[
       'd-resizable',
       `d-resizable--${currentDirection}`,
-      {
-        'd-resizable--resizing': isResizing,
-        'd-resizable--peeking': isPeeking,
-      },
+      { 'd-resizable--resizing': isResizing },
       props.class,
     ]"
     :data-storage-key="props.storageKey || undefined"
@@ -55,7 +52,6 @@ import {
   RESIZABLE_EMIT_PANEL_RESIZE_KEY,
   RESIZABLE_MESSAGES_KEY,
   RESIZABLE_ANNOUNCE_KEY,
-  RESIZABLE_SET_PANEL_PEEKING_KEY,
   RESIZABLE_UPDATE_SAVED_PANEL_KEY,
 } from './resizable_constants';
 import {
@@ -201,11 +197,6 @@ function processAutoCollapse () {
   if (panel && !panel.collapsed) collapsePanel(panelsToCollapse[0], true);
 }
 
-// ── Peek state (any panel currently showing peek overlay?) ──────────────
-const isPeeking = computed(() =>
-  group.syncedPanels.value.some(p => p.isPeeking),
-);
-
 // ── Announcements (aria-live region for screen readers) ─────────────────
 const { announce } = useResizableAnnouncements();
 
@@ -287,7 +278,6 @@ const provideMap = [
   [RESIZABLE_UNREGISTER_PANEL_KEY, unregisterPanel],
   [RESIZABLE_SAVE_TO_STORAGE_KEY, savePanelsToStorage],
   [RESIZABLE_ANNOUNCE_KEY, announce],
-  [RESIZABLE_SET_PANEL_PEEKING_KEY, (panelId, peeking) => group.setPanelPeeking(panelId, peeking)],
   [RESIZABLE_COLLAPSE_PANEL_KEY, collapsePanel],
   [RESIZABLE_EMIT_PANEL_RESIZE_KEY, emitPanelResize],
   [RESIZABLE_UPDATE_SAVED_PANEL_KEY, (panelId, updates) => group.updateSavedPanel(panelId, updates)],

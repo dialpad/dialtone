@@ -49,10 +49,6 @@ export type { ResizableKeyboardOptions, ResizableKeyboardMessages } from './useR
 // Announcements (aria-live region)
 export { useResizableAnnouncements } from './useResizableAnnouncements';
 
-// Peek overlay
-export { useResizablePeek } from './useResizablePeek';
-export type { UseResizablePeekOptions, UseResizablePeekReturn } from './useResizablePeek';
-
 // Offset positioning
 export { useResizableOffset } from './useResizableOffset';
 export type { ResizableOffsetOptions, ResizableOffsetResult } from './useResizableOffset';

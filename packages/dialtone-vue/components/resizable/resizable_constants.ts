@@ -61,37 +61,6 @@ export interface ResizablePanelConfig {
   /** Initial collapsed state */
   collapsed?: boolean;
 
-  // ─── Peek Overlay Configuration ───
-  /**
-   * Enable peek overlay when panel is collapsed.
-   * Shows panel content as a temporary overlay on hover/trigger.
-   * Default: false
-   */
-  peekEnabled?: boolean;
-  /**
-   * What triggers the peek overlay to appear.
-   * - 'hover': Mouse hover over collapsed panel area
-   * - 'button': Dedicated button/icon click
-   * - 'both': Either hover or button
-   * Default: 'hover'
-   */
-  peekTrigger?: PeekTriggerMode;
-  /**
-   * Allow peek even when panel was manually collapsed (not auto-collapsed).
-   * Default: false (peek only for auto-collapsed panels)
-   */
-  peekWhenManual?: boolean;
-  /**
-   * Width of the peek overlay.
-   * Uses initialSize if not specified.
-   */
-  peekWidth?: ResizableSizeValue;
-  /**
-   * Grace period in milliseconds before hiding peek on mouse leave.
-   * Prevents flicker when mouse briefly leaves the peek area.
-   * Default: 150
-   */
-  peekGracePeriod?: number;
 }
 
 export interface ResizablePanelState extends ResizablePanelConfig {
@@ -145,11 +114,6 @@ export interface ResizablePanelState extends ResizablePanelConfig {
    */
   restoredFromStorage?: boolean;
 
-  // ─── Peek State ───
-  /** Whether the peek overlay is currently visible */
-  isPeeking?: boolean;
-  /** Computed peek width in pixels (derived from peekWidth or initialSize) */
-  peekWidthPixels?: number;
 }
 
 export interface ResizableHandleConfig {
@@ -161,8 +125,6 @@ export interface ResizableHandleConfig {
 
 export type ResizableSizeMode = 'percentage' | 'pixels';
 
-/** Trigger modes for peek overlay */
-export type PeekTriggerMode = 'hover' | 'button' | 'both';
 
 export interface ResizableGroupConfig {
   direction: ResizableDirection;
@@ -186,10 +148,6 @@ export interface ResizableEvents {
   'panel-collapse': (panelId: string, collapsed: boolean) => void;
   'resize-start': (handleId: string) => void;
   'resize-end': (handleId: string) => void;
-  /** Emitted when peek overlay starts showing */
-  'panel-peek-start'?: (panelId: string) => void;
-  /** Emitted when peek overlay finishes hiding */
-  'panel-peek-end'?: (panelId: string) => void;
 }
 
 /**
@@ -305,9 +263,6 @@ export const RESIZABLE_UNREGISTER_PANEL_KEY: InjectionKey<(id: string) => void> 
 export const RESIZABLE_SAVE_TO_STORAGE_KEY: InjectionKey<() => void> = Symbol('resizable-save-to-storage');
 
 export const RESIZABLE_ANNOUNCE_KEY: InjectionKey<(message: string) => void> = Symbol('resizable-announce');
-
-export const RESIZABLE_SET_PANEL_PEEKING_KEY: InjectionKey<(panelId: string, peeking: boolean) => void> =
-  Symbol('resizable-set-panel-peeking');
 
 export const RESIZABLE_COLLAPSE_PANEL_KEY: InjectionKey<(panelId: string, collapsed: boolean) => void> =
   Symbol('resizable-collapse-panel');
