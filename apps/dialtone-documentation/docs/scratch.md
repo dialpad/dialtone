@@ -4,17 +4,17 @@ layout: Blank
 
 <dt-stack gap="200" class="d-p-300">
   <dt-stack direction="row" gap="200">
-    <dt-stack>
-      <dt-text kind="label" size="100">Size</dt-text>
-      <dt-segmented-control v-model="proseSize" aria-label="Size" size="200">
+    <dt-stack gap="50">
+      <dt-text kind="label" size="100" id="size-label">Size</dt-text>
+      <dt-segmented-control v-model="proseSize" aria-label="Size" size="200" aria-labelledby="size-label">
         <dt-segmented-control-item value="100">100</dt-segmented-control-item>
         <dt-segmented-control-item value="200">200</dt-segmented-control-item>
         <dt-segmented-control-item value="300">300</dt-segmented-control-item>
       </dt-segmented-control>
     </dt-stack>
-    <dt-stack>
-      <dt-text kind="label" size="100">Density</dt-text>
-      <dt-segmented-control v-model="proseDensity" aria-label="Density" size="200">
+    <dt-stack gap="50">
+      <dt-text kind="label" size="100" id="density-label">Density</dt-text>
+      <dt-segmented-control v-model="proseDensity" aria-label="Density" size="200" aria-labelledby="density-label">
         <dt-segmented-control-item value="100">100</dt-segmented-control-item>
         <dt-segmented-control-item value="200">200</dt-segmented-control-item>
         <dt-segmented-control-item value="300">300</dt-segmented-control-item>
