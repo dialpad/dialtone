@@ -4,7 +4,10 @@
     :class="[
       'd-resizable',
       `d-resizable--${currentDirection}`,
-      { 'd-resizable--resizing': isResizing },
+      {
+        'd-resizable--resizing': isResizing,
+        'd-resizable--peeking': isPeeking,
+      },
       props.class,
     ]"
     :data-storage-key="props.storageKey || undefined"
@@ -196,6 +199,11 @@ function processAutoCollapse () {
   const panel = panels.find(p => p.id === panelsToCollapse[0]);
   if (panel && !panel.collapsed) collapsePanel(panelsToCollapse[0], true);
 }
+
+// ── Peek state (any panel currently showing peek overlay?) ──────────────
+const isPeeking = computed(() =>
+  group.syncedPanels.value.some(p => p.isPeeking),
+);
 
 // ── Announcements (aria-live region for screen readers) ─────────────────
 const { announce } = useResizableAnnouncements();

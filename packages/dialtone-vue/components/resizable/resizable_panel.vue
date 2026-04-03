@@ -220,11 +220,12 @@ const panelStyles = computed(() => {
   }
 
   if (position.collapsed) {
+    const hasPeek = props.peekEnabled && (props.peekWhenManual || panel.value?.autoCollapsed);
     return {
       insetInlineStart: `${position.left}px`,
-      inlineSize: '0px',
-      overflow: 'hidden',
-      pointerEvents: 'none',
+      inlineSize: hasPeek ? '8px' : '0px',
+      overflow: hasPeek ? 'visible' : 'hidden',
+      pointerEvents: hasPeek ? 'auto' : 'none',
     };
   }
 
