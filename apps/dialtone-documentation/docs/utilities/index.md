@@ -21,13 +21,7 @@ While an atomic CSS approach comes with many advantages, we recognize it also of
 
 `d-bt` applies a border (`b`) to the top (`t`) side. 1px is the default width, and the color is inherited from the foreground color (`currentColor`).
 
-<code-well-header>
-  <div class="d-bt">
-    <dt-text>Box</dt-text>
-  </div>
-</code-well-header>
-
-```html
+```vue demo
 <div class="d-bt">
   <dt-text>Box</dt-text>
 </div>
@@ -37,13 +31,7 @@ While an atomic CSS approach comes with many advantages, we recognize it also of
 
 `d-btw4` applies a 4px (`4`) width (`w`) to the top (`t`).
 
-<code-well-header>
-  <div class="d-bt d-btw4">
-    <dt-text>Box</dt-text>
-  </div>
-</code-well-header>
-
-```html
+```vue demo
 <div class="d-bt d-btw4">
   <dt-text>Box</dt-text>
 </div>
@@ -53,13 +41,7 @@ While an atomic CSS approach comes with many advantages, we recognize it also of
 
 `d-bc-critical` applies a [critical](/design/colors/index.md#borders) border (`b`) color (`c`).
 
-<code-well-header>
-  <div class="d-bt d-btw4 d-bc-critical">
-    <dt-text>Box</dt-text>
-  </div>
-</code-well-header>
-
-```html
+```vue demo
 <div class="d-bt d-btw4 d-bc-critical">
   <dt-text>Box</dt-text>
 </div>
@@ -71,13 +53,7 @@ A basic example styling a container by combining Dialtone's CSS utilities. Follo
 
 ### 1. Begin with an Unstyled Container
 
-<code-well-header>
-  <div>
-    <dt-text>Box</dt-text>
-  </div>
-</code-well-header>
-
-```html
+```vue demo
 <div>
   <dt-text>Box</dt-text>
 </div>
@@ -87,13 +63,7 @@ A basic example styling a container by combining Dialtone's CSS utilities. Follo
 
 Apply a [**Primary Inverted** Surface Color](/utilities/backgrounds/color/index.md#classes).
 
-<code-well-header>
-  <div class="d-bgc-primary-inverted">
-    <dt-text>Box</dt-text>
-  </div>
-</code-well-header>
-
-```html
+```vue demo
 <div class="d-bgc-primary-inverted">
   <dt-text>Box</dt-text>
 </div>
@@ -103,13 +73,7 @@ Apply a [**Primary Inverted** Surface Color](/utilities/backgrounds/color/index.
 
 Since this will be primary content on a dark surface, let's use `d-fc-primary-inverted` from the [font color utilities](/utilities/typography/color/index.md).
 
-<code-well-header>
-  <div class="d-bgc-primary-inverted d-fc-primary-inverted">
-    <dt-text>Box</dt-text>
-  </div>
-</code-well-header>
-
-```html
+```vue demo
 <div class="d-bgc-primary-inverted d-fc-primary-inverted">
   <dt-text>Box</dt-text>
 </div>
@@ -119,13 +83,7 @@ Since this will be primary content on a dark surface, let's use `d-fc-primary-in
 
 Let's use `d-p-100` padding for all four sides, from the list of [padding utility classes](/utilities/spacing/padding/index.md).
 
-<code-well-header>
-  <div class="d-bgc-primary-inverted d-fc-primary-inverted d-p-100">
-    <dt-text>Box</dt-text>
-  </div>
-</code-well-header>
-
-```html
+```vue demo
 <div class="d-bgc-primary-inverted d-fc-primary-inverted d-p-100">
   <dt-text>Box</dt-text>
 </div>
@@ -135,24 +93,8 @@ Let's use `d-p-100` padding for all four sides, from the list of [padding utilit
 
 Let's repeat them in a [Stack](/components/stack.md) component. Note that I've moved the surface and foreground colors to the parent container so they may inherit.
 
-<code-well-header>
-  <dt-stack class="d-bgc-primary-inverted d-fc-primary-inverted">
-    <div class="d-p-100">
-      <dt-text>Box 1</dt-text>
-    </div>
-    <div class="d-p-100">
-      <dt-text>Box the 2nd</dt-text>
-    </div>
-    <div class="d-p-100">
-      <dt-text>Box third</dt-text>
-    </div>
-    <div class="d-p-100">
-      <dt-text>Box IV</dt-text>
-    </div>
-  </dt-stack>
-</code-well-header>
-
-```html
+```vue demo
+<!-- @wrapper -->
 <dt-stack class="d-bgc-primary-inverted d-fc-primary-inverted">
   <div class="d-p-100">
     <dt-text>Box 1</dt-text>
@@ -173,24 +115,8 @@ Let's repeat them in a [Stack](/components/stack.md) component. Note that I've m
 
 Let's add the `direction` prop to make them flow horizontally.
 
-<code-well-header>
-  <dt-stack direction="row" class="d-bgc-primary-inverted d-fc-primary-inverted">
-    <div class="d-p-100">
-      <dt-text>Box 1</dt-text>
-    </div>
-    <div class="d-p-100">
-      <dt-text>Box the 2nd</dt-text>
-    </div>
-    <div class="d-p-100">
-      <dt-text>Box third</dt-text>
-    </div>
-    <div class="d-p-100">
-      <dt-text>Box IV</dt-text>
-    </div>
-  </dt-stack>
-</code-well-header>
-
-```html
+```vue demo
+<!-- @wrapper -->
 <dt-stack direction="row" class="d-bgc-primary-inverted d-fc-primary-inverted">
   <div class="d-p-100">
     <dt-text>Box 1</dt-text>
@@ -211,24 +137,8 @@ Let's add the `direction` prop to make them flow horizontally.
 
 Add a border between each item with `d-divide-x`. Its default color is `currentColor`.
 
-<code-well-header>
-  <dt-stack direction="row" class="d-bgc-primary-inverted d-fc-primary-inverted d-divide-x">
-    <div class="d-p-100">
-      <dt-text>Box 1</dt-text>
-    </div>
-    <div class="d-p-100">
-      <dt-text>Box the 2nd</dt-text>
-    </div>
-    <div class="d-p-100">
-      <dt-text>Box third</dt-text>
-    </div>
-    <div class="d-p-100">
-      <dt-text>Box IV</dt-text>
-    </div>
-  </dt-stack>
-</code-well-header>
-
-```html
+```vue demo
+<!-- @wrapper -->
 <dt-stack direction="row" class="d-bgc-primary-inverted d-fc-primary-inverted d-divide-x">
   <div class="d-p-100">
     <dt-text>Box 1</dt-text>
@@ -249,24 +159,8 @@ Add a border between each item with `d-divide-x`. Its default color is `currentC
 
 Since the border color inherits the color of the parent's foreground (implicitly `currentColor`), let's soften it with a bold inverted border color `d-divide-moderate-inverted`.
 
-<code-well-header>
-  <dt-stack direction="row" class="d-bgc-primary-inverted d-fc-primary-inverted d-divide-x d-divide-moderate-inverted">
-    <div class="d-p-100">
-      <dt-text>Box 1</dt-text>
-    </div>
-    <div class="d-p-100">
-      <dt-text>Box the 2nd</dt-text>
-    </div>
-    <div class="d-p-100">
-      <dt-text>Box third</dt-text>
-    </div>
-    <div class="d-p-100">
-      <dt-text>Box IV</dt-text>
-    </div>
-  </dt-stack>
-</code-well-header>
-
-```html
+```vue demo
+<!-- @wrapper -->
 <dt-stack direction="row" class="d-bgc-primary-inverted d-fc-primary-inverted d-divide-x d-divide-moderate-inverted">
   <div class="d-p-100">
     <dt-text>Box 1</dt-text>
@@ -287,28 +181,8 @@ Since the border color inherits the color of the parent's foreground (implicitly
 
 Add some [icons](/design/icons/index.md).
 
-<code-well-header>
-  <dt-stack direction="row" class="d-bgc-primary-inverted d-fc-primary-inverted d-divide-x d-divide-moderate-inverted">
-    <dt-stack direction="row" gap="100" class="d-p-100">
-      <dt-icon name="alert-triangle" size="200" />
-      <dt-text>Box 1</dt-text>
-    </dt-stack>
-    <dt-stack direction="row" gap="100" class="d-p-100">
-      <dt-icon name="info" size="200" />
-      <dt-text>Box the 2nd</dt-text>
-    </dt-stack>
-    <dt-stack direction="row" gap="100" class="d-p-100">
-      <dt-icon name="alert-circle" size="200" />
-      <dt-text>Box third</dt-text>
-    </dt-stack>
-    <dt-stack direction="row" gap="100" class="d-p-100">
-      <dt-icon name="check-circle" size="200" />
-      <dt-text>Box IV</dt-text>
-    </dt-stack>
-  </dt-stack>
-</code-well-header>
-
-```html
+```vue demo
+<!-- @wrapper -->
 <dt-stack direction="row" class="d-bgc-primary-inverted d-fc-primary-inverted d-divide-x d-divide-moderate-inverted">
   <dt-stack direction="row" gap="100" class="d-p-100">
     <dt-icon name="alert-triangle" size="200" />
@@ -333,24 +207,8 @@ Add some [icons](/design/icons/index.md).
 
 Apply a [semantic surface color](/utilities/backgrounds/color.md) to convey some meaning to them, e.g. `d-bgc-critical-strong`.
 
-<code-well-header>
-  <dt-stack direction="row" gap="100" class="d-fc-primary-inverted">
-    <dt-stack direction="row" gap="100" class="d-bgc-critical-strong d-p-100">
-      <dt-icon name="alert-triangle" size="200" />
-      <dt-text>Critical</dt-text>
-    </dt-stack>
-    <dt-stack direction="row" gap="100" class="d-bgc-info-strong d-p-100">
-      <dt-icon name="alert-circle" size="200" />
-      <dt-text>Info</dt-text>
-    </dt-stack>
-    <dt-stack direction="row" gap="100" class="d-bgc-success-strong d-p-100">
-      <dt-icon name="check-circle" size="200" />
-      <dt-text>Success</dt-text>
-    </dt-stack>
-  </dt-stack>
-</code-well-header>
-
-```html
+```vue demo
+<!-- @wrapper -->
 <dt-stack direction="row" gap="100" class="d-fc-primary-inverted">
   <dt-stack direction="row" gap="100" class="d-bgc-critical-strong d-p-100">
     <dt-icon name="alert-triangle" size="200" />
@@ -371,24 +229,8 @@ Apply a [semantic surface color](/utilities/backgrounds/color.md) to convey some
 
 Use the [DtText](/components/text.html) component for text styling. It provides a semantic, prop-driven API for typography.
 
-<code-well-header>
-  <dt-stack direction="row" gap="100" class="d-fc-primary-inverted">
-    <dt-stack direction="row" gap="100" class="d-bgc-critical-strong d-p-100">
-      <dt-icon name="alert-triangle" size="200" />
-      <dt-text kind="label" :size="200">Critical</dt-text>
-    </dt-stack>
-    <dt-stack direction="row" gap="100" class="d-bgc-info-strong d-p-100">
-      <dt-icon name="alert-circle" size="200" />
-      <dt-text kind="label" :size="200">Info</dt-text>
-    </dt-stack>
-    <dt-stack direction="row" gap="100" class="d-bgc-success-strong d-p-100">
-      <dt-icon name="check-circle" size="200" />
-      <dt-text kind="label" :size="200">Success</dt-text>
-    </dt-stack>
-  </dt-stack>
-</code-well-header>
-
-```html
+```vue demo
+<!-- @wrapper -->
 <dt-stack direction="row" gap="100" class="d-fc-primary-inverted">
   <dt-stack direction="row" gap="100" class="d-bgc-critical-strong d-p-100">
     <dt-icon name="alert-triangle" size="200" />
@@ -409,24 +251,8 @@ Use the [DtText](/components/text.html) component for text styling. It provides 
 
 Refine the spacing by adjusting the [Stack](/components/stack.md) `gap` prop and padding utilities for horizontal and vertical padding.
 
-<code-well-header>
-  <dt-stack direction="row" gap="100" class="d-fc-primary-inverted">
-    <dt-stack direction="row" gap="50" class="d-bgc-critical-strong d-py-50 d-px-100">
-      <dt-icon name="alert-triangle" size="200" />
-      <dt-text kind="label" :size="200">Critical</dt-text>
-    </dt-stack>
-    <dt-stack direction="row" gap="50" class="d-bgc-info-strong d-py-50 d-px-100">
-      <dt-icon name="alert-circle" size="200" />
-      <dt-text kind="label" :size="200">Info</dt-text>
-    </dt-stack>
-    <dt-stack direction="row" gap="50" class="d-bgc-success-strong d-py-50 d-px-100">
-      <dt-icon name="check-circle" size="200" />
-      <dt-text kind="label" :size="200">Success</dt-text>
-    </dt-stack>
-  </dt-stack>
-</code-well-header>
-
-```html
+```vue demo
+<!-- @wrapper -->
 <dt-stack direction="row" gap="100" class="d-fc-primary-inverted">
   <dt-stack direction="row" gap="50" class="d-bgc-critical-strong d-py-50 d-px-100">
     <dt-icon name="alert-triangle" size="200" />
@@ -447,24 +273,8 @@ Refine the spacing by adjusting the [Stack](/components/stack.md) `gap` prop and
 
 Add `d-bar4` to each item for subtle rounded corners.
 
-<code-well-header>
-  <dt-stack direction="row" gap="100" class="d-fc-primary-inverted">
-    <dt-stack direction="row" gap="50" class="d-bar4 d-bgc-critical-strong d-py-50 d-px-100">
-      <dt-icon name="alert-triangle" size="200" />
-      <dt-text kind="label" :size="200">Critical</dt-text>
-    </dt-stack>
-    <dt-stack direction="row" gap="50" class="d-bar4 d-bgc-info-strong d-py-50 d-px-100">
-      <dt-icon name="alert-circle" size="200" />
-      <dt-text kind="label" :size="200">Info</dt-text>
-    </dt-stack>
-    <dt-stack direction="row" gap="50" class="d-bar4 d-bgc-success-strong d-py-50 d-px-100">
-      <dt-icon name="check-circle" size="200" />
-      <dt-text kind="label" :size="200">Success</dt-text>
-    </dt-stack>
-  </dt-stack>
-</code-well-header>
-
-```html
+```vue demo
+<!-- @wrapper -->
 <dt-stack direction="row" gap="100" class="d-fc-primary-inverted">
   <dt-stack direction="row" gap="50" class="d-bar4 d-bgc-critical-strong d-py-50 d-px-100">
     <dt-icon name="alert-triangle" size="200" />

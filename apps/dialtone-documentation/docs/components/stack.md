@@ -899,8 +899,8 @@ Stacks column at small screen size and column reverse at large screen
 </dt-stack>
 <!-- @code -->
 <dt-stack
-  :direction="{ `default`: `row`, `sm`: `column`, `lg`: `column-reverse` }"
-  gap="200"
+  :direction="{ default: `row`, sm: `column`, lg: `column-reverse` }"
+  gap="100"
 >
   <div>
     Stack item 1

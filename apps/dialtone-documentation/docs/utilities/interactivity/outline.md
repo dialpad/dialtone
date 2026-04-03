@@ -8,24 +8,19 @@ keywords: ["focus ring", "focus outline", "focus style"]
 
 Use `d-ol-{focusring|focusring-inset|none}` to change an elements' outline.
 
-<code-well-header>
-  <dt-stack direction="row" gap="200">
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-code--sm d-ol-focusring">
-      .d-ol-focusring
-    </dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-code--sm d-ol-focusring-inset">
-      .d-ol-focusring-inset
-    </dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-code--sm d-ol-none">
-      .d-ol-none
-    </dt-stack>
+```vue demo
+<!-- @wrapper -->
+<dt-stack direction="row" gap="200">
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-code--sm d-ol-focusring">
+    .d-ol-focusring
   </dt-stack>
-</code-well-header>
-
-```html
-<div class="d-ol-focusring">...</div>
-<div class="d-ol-focusring-inset">...</div>
-<div class="d-ol-none">...</div>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-code--sm d-ol-focusring-inset">
+    .d-ol-focusring-inset
+  </dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-code--sm d-ol-none">
+    .d-ol-none
+  </dt-stack>
+</dt-stack>
 ```
 
 * Use `d-ol-focusring` to add a focus ring that will render **outside** of the element.

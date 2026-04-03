@@ -8,36 +8,24 @@ keywords: ["uppercase", "lowercase", "capitalize"]
 
 Use `d-tt-uppercase` to uppercase an element's text.
 
-<code-well-header>
-  <p class="d-tt-uppercase">The quick brown fox jumps over the lazy dog.</p>
-</code-well-header>
-
-```html
-<p class="d-tt-uppercase">...</p>
+```vue demo
+<p class="d-tt-uppercase">The quick brown fox jumps over the lazy dog.</p>
 ```
 
 ## Lowercase
 
 Use `d-tt-lowercase` to lowercase an element's text.
 
-<code-well-header>
-  <p class="d-tt-lowercase">The quick brown fox jumps over the lazy dog.</p>
-</code-well-header>
-
-```html
-<p class="d-tt-lowercase">...</p>
+```vue demo
+<p class="d-tt-lowercase">The quick brown fox jumps over the lazy dog.</p>
 ```
 
 ## Capitalize
 
 Use `d-tt-capitalize` to capitalize an element's text.
 
-<code-well-header>
-  <p class="d-tt-capitalize">The quick brown fox jumps over the lazy dog.</p>
-</code-well-header>
-
-```html
-<p class="d-tt-capitalize">...</p>
+```vue demo
+<p class="d-tt-capitalize">The quick brown fox jumps over the lazy dog.</p>
 ```
 
 <script setup>

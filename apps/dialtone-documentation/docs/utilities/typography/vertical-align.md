@@ -8,108 +8,84 @@ keywords: ["baseline", "middle", "top", "bottom"]
 
 Use `d-va-baseline` to vertically align an element to the baseline.
 
-<code-well-header>
-  <div class="d-w100p d-ps-relative d-lh0 d-bgc-moderate">
-    <div class="d-w-0 d-h-25 d-d-inline-block d-va-baseline">
-      <span class="d-ps-absolute d-ibs-0 d-h-25 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
-      <span class="d-ps-absolute d-ibs-0 d-h-25 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
-    </div>
-    <p class="d-fs-200 d-d-inline-block d-ps-relative d-zi-base1">The quick brown fox.</p>
+```vue demo
+<div class="d-w100p d-ps-relative d-lh0 d-bgc-moderate">
+  <div class="d-w-0 d-h-25 d-d-inline-block d-va-baseline">
+    <span class="d-ps-absolute d-ibs-0 d-h-25 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
+    <span class="d-ps-absolute d-ibs-0 d-h-25 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
   </div>
-</code-well-header>
-
-```html
-<div class="d-d-inline-block d-va-baseline">...</div>
+  <p class="d-fs-200 d-d-inline-block d-ps-relative d-zi-base1">The quick brown fox.</p>
+</div>
 ```
 
 ## Top
 
 Use `d-va-top` to vertically align an element to the top.
 
-<code-well-header>
-  <div class="d-w100p d-ps-relative d-lh0 d-bgc-moderate">
-    <div class="d-w-0 d-h-25 d-d-inline-block d-va-top">
-      <span class="d-ps-absolute d-ibs-0 d-h-25 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
-      <span class="d-ps-absolute d-ibs-0 d-h-25 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
-    </div>
-    <p class="d-fs-200 d-d-inline-block d-ps-relative d-zi-base1">The quick brown fox.</p>
+```vue demo
+<div class="d-w100p d-ps-relative d-lh0 d-bgc-moderate">
+  <div class="d-w-0 d-h-25 d-d-inline-block d-va-top">
+    <span class="d-ps-absolute d-ibs-0 d-h-25 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
+    <span class="d-ps-absolute d-ibs-0 d-h-25 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
   </div>
-</code-well-header>
-
-```html
-<div class="d-d-inline-block d-va-top">...</div>
+  <p class="d-fs-200 d-d-inline-block d-ps-relative d-zi-base1">The quick brown fox.</p>
+</div>
 ```
 
 ## Middle
 
 Use `d-va-middle` to vertically align an element to middle.
 
-<code-well-header>
-  <div class="d-w100p d-ps-relative d-lh0 d-bgc-moderate">
-    <div class="d-w-0 d-h-25 d-d-inline-block d-va-middle">
-      <span class="d-ps-absolute d-ibs-0 d-h-25 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
-      <span class="d-ps-absolute d-ibs-0 d-h-25 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
-    </div>
-    <p class="d-fs-200 d-d-inline-block d-ps-relative d-zi-base1">The quick brown fox.</p>
+```vue demo
+<div class="d-w100p d-ps-relative d-lh0 d-bgc-moderate">
+  <div class="d-w-0 d-h-25 d-d-inline-block d-va-middle">
+    <span class="d-ps-absolute d-ibs-0 d-h-25 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
+    <span class="d-ps-absolute d-ibs-0 d-h-25 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
   </div>
-</code-well-header>
-
-```html
-<div class="d-d-inline-block d-va-middle">...</div>
+  <p class="d-fs-200 d-d-inline-block d-ps-relative d-zi-base1">The quick brown fox.</p>
+</div>
 ```
 
 ## Bottom
 
 Use `d-va-bottom` to vertically align an element to the bottom.
 
-<code-well-header>
-  <div class="d-w100p d-ps-relative d-lh0 d-bgc-moderate">
-    <div class="d-w-0 d-h-25 d-d-inline-block d-va-bottom">
-      <span class="d-ps-absolute d-ibs-0 d-h-25 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
-      <span class="d-ps-absolute d-ibs-0 d-h-25 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
-    </div>
-    <p class="d-fs-200 d-d-inline-block d-ps-relative d-zi-base1">The quick brown fox.</p>
+```vue demo
+<div class="d-w100p d-ps-relative d-lh0 d-bgc-moderate">
+  <div class="d-w-0 d-h-25 d-d-inline-block d-va-bottom">
+    <span class="d-ps-absolute d-ibs-0 d-h-25 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
+    <span class="d-ps-absolute d-ibs-0 d-h-25 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
   </div>
-</code-well-header>
-
-```html
-<div class="d-d-inline-block d-va-bottom">...</div>
+  <p class="d-fs-200 d-d-inline-block d-ps-relative d-zi-base1">The quick brown fox.</p>
+</div>
 ```
 
 ## Text Top
 
 Use `d-va-text-top` to vertically align an element to text top.
 
-<code-well-header>
-  <div class="d-w100p d-ps-relative d-lh0 d-bgc-moderate">
-    <div class="d-w-0 d-h-25 d-d-inline-block d-va-text-top">
-      <span class="d-ps-absolute d-ibs-0 d-h-25 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
-      <span class="d-ps-absolute d-ibs-0 d-h-25 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
-    </div>
-    <p class="d-fs-200 d-d-inline-block d-ps-relative d-zi-base1">The quick brown fox.</p>
+```vue demo
+<div class="d-w100p d-ps-relative d-lh0 d-bgc-moderate">
+  <div class="d-w-0 d-h-25 d-d-inline-block d-va-text-top">
+    <span class="d-ps-absolute d-ibs-0 d-h-25 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
+    <span class="d-ps-absolute d-ibs-0 d-h-25 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
   </div>
-</code-well-header>
-
-```html
-<div class="d-d-inline-block d-va-text-top">...</div>
+  <p class="d-fs-200 d-d-inline-block d-ps-relative d-zi-base1">The quick brown fox.</p>
+</div>
 ```
 
 ## Text Bottom
 
 Use `d-va-text-bottom` to vertically align an element to text bottom.
 
-<code-well-header>
-  <div class="d-w100p d-ps-relative d-lh0 d-bgc-moderate">
-    <div class="d-w-0 d-h-25 d-d-inline-block d-va-text-bottom">
-      <span class="d-ps-absolute d-ibs-0 d-h-25 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
-      <span class="d-ps-absolute d-ibs-0 d-h-25 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
-    </div>
-    <p class="d-fs-200 d-d-inline-block d-ps-relative d-zi-base1">The quick brown fox.</p>
+```vue demo
+<div class="d-w100p d-ps-relative d-lh0 d-bgc-moderate">
+  <div class="d-w-0 d-h-25 d-d-inline-block d-va-text-bottom">
+    <span class="d-ps-absolute d-ibs-0 d-h-25 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
+    <span class="d-ps-absolute d-ibs-0 d-h-25 d-w100p d-by d-bts-dashed d-bbs-dashed d-bc-focus"></span>
   </div>
-</code-well-header>
-
-```html
-<div class="d-d-inline-block d-va-text-bottom">...</div>
+  <p class="d-fs-200 d-d-inline-block d-ps-relative d-zi-base1">The quick brown fox.</p>
+</div>
 ```
 
 ## Classes

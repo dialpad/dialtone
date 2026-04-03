@@ -6,19 +6,13 @@ keywords: ["resizable", "drag to resize"]
 
 ## Usage
 
-<code-well-header>
-  <dt-stack gap="400" class="d-w50p">
-    <div v-for="{ class: className } in resize.slice(0, 4)" :class="className" class="d-of-auto d-p-200 d-ba">
-      .{{ className }}
-    </div>
-  </dt-stack>
-</code-well-header>
-
-```html
-<div class="d-r-both">...</div>
-<div class="d-r-horizontal">...</div>
-<div class="d-r-vertical">...</div>
-<div class="d-r-none">...</div>
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="400" class="d-w50p">
+  <div v-for="{ class: className } in resize.slice(0, 4)" :class="className" class="d-of-auto d-p-200 d-ba">
+    .{{ className }}
+  </div>
+</dt-stack>
 ```
 
 <script setup>

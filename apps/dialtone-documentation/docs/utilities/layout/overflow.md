@@ -10,31 +10,16 @@ keywords: ["scroll", "hidden", "auto", "clip", "scrollbar"]
 
 ## Examples
 
-<code-well-header>
-    <div class="d-d-grid d-g-cols4 d-g-200">
-        <div v-for="{ class: className } in overflow" class="d-h-350 d-p-150 d-bar4 d-bgc-moderate" :class="`d-of-${className}`">
-            <code>.d-of-{{ className }}</code>
-            <p class="d-w-350">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend rutrum auctor. Phasellus convallis sagittis augue ut ornare. Vestibulum et gravida lectus, sed ultrices sapien. Nullam aliquet elit dui, vitae hendrerit lectus volutpat eget.
-            </p>
-        </div>
-    </div>
-</code-well-header>
-
-```html
-<p class="d-of-auto">…</p>
-<p class="d-of-x-auto">…</p>
-<p class="d-of-y-auto">…</p>
-<p class="d-of-hidden">…</p>
-<p class="d-of-x-hidden">…</p>
-<p class="d-of-y-hidden">…</p>
-<p class="d-of-scroll">…</p>
-<p class="d-of-x-scroll">…</p>
-<p class="d-of-y-scroll">…</p>
-<p class="d-of-visible">…</p>
-<p class="d-of-x-visible">…</p>
-<p class="d-of-y-visible">…</p>
-<p class="d-of-unset">…</p>
+```vue demo
+<!-- @wrapper -->
+  <div class="d-d-grid d-g-cols4 d-g-200">
+      <div v-for="{ class: className } in overflow" class="d-h-350 d-p-150 d-bar4 d-bgc-moderate" :class="`d-of-${className}`">
+          <code>.d-of-{{ className }}</code>
+          <p class="d-w-350">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend rutrum auctor. Phasellus convallis sagittis augue ut ornare. Vestibulum et gravida lectus, sed ultrices sapien. Nullam aliquet elit dui, vitae hendrerit lectus volutpat eget.
+          </p>
+      </div>
+  </div>
 ```
 
 <script setup>

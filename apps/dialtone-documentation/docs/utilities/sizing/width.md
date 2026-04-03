@@ -8,37 +8,32 @@ keywords: ["size", "wide", "vw", "viewport width"]
 
 Use `d-w-{stop}` to set a fixed width for an element using layout token stops. The hyphen before the number indicates a layout token reference, e.g. `d-w-100` outputs `inline-size: var(--dt-layout-100)` (64px).
 
-<code-well-header class="d-d-flex d-fd-column d-p-300 d-bgc-secondary d-w100p d-hmx-500 d-stack16 d-ta-center d-of-scroll" v-dt-scrollbar:never custom>
+```vue demo
+<!-- @custom -->
+<!-- @class d-d-flex d-fd-column d-p-300 d-bgc-secondary d-w100p d-hmx-500 d-stack16 d-ta-center d-of-scroll -->
+<div v-dt-scrollbar:never>
   <dt-stack direction="row" align="center" class="d-pls-start" v-for="(i, index) in layout">
     <span class="d-w-100">d-w-{{i.stop}}</span>
     <div class="d-h-100 d-bgc-moderate d-bar4" :class="`d-w-${i.stop}`"></div>
   </dt-stack>
-</code-well-header>
-
-```html
-<div class="d-w-100">...</div>  <!-- inline-size: var(--dt-layout-100) = 64px / 6.4rem -->
-<div class="d-w-200">...</div>  <!-- inline-size: var(--dt-layout-200) = 128px / 12.8rem -->
-<div class="d-w-400">...</div>  <!-- inline-size: var(--dt-layout-400) = 256px / 25.6rem -->
+</div>
 ```
 
 ## Percentages
 
 Use `d-w{n}p` to set a percentage width for an element. No hyphen before the number, `p` suffix indicates a literal percentage value. Note: `d-w33p` = 33.333% and `d-w66p` = 66.667%.
 
-<code-well-header class="d-d-flex d-fd-column d-p-300 d-bgc-secondary d-w100p d-hmx-500 d-stack16 d-code--md d-ta-center d-of-y-scroll" v-dt-scrollbar:never custom>
+```vue demo
+<!-- @custom -->
+<!-- @class d-d-flex d-fd-column d-p-300 d-bgc-secondary d-w100p d-hmx-500 d-stack16 d-code--md d-ta-center d-of-y-scroll -->
+<div v-dt-scrollbar:never>
   <dt-stack direction="row" align="center" justify="center" class="d-ps-relative" v-for="i in percentage">
     <dt-stack as="span" direction="row" align="center" class="d-zi-active d-h-100">d-w{{i}}p</dt-stack>
     <div class="d-w100p d-h-100 d-ps-absolute d-bgc-moderate">
       <div class="d-h-100 d-bgc-moderate-opaque d-bar4" :class="`d-w${i}p`"></div>
     </div>
   </dt-stack>
-</code-well-header>
-
-```html
-<div class="d-w25p">25%</div>
-<div class="d-w50p">50%</div>
-<div class="d-w75p">75%</div>
-<div class="d-w100p">100%</div>
+</div>
 ```
 
 ## Viewport
@@ -49,15 +44,10 @@ Use viewport width utilities to size an element relative to the viewport. `d-w10
 - **svw** (small) -- minimum viewport size, when mobile browser chrome is visible.
 - **lvw** (large) -- maximum viewport size, when mobile browser chrome is hidden.
 
-<code-well-header class="d-ps-relative d-d-flex d-jc-center d-p-300 d-bgc-secondary d-w100p d-h-25 d-stack16 d-of-y-scroll" custom>
-  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100vw d-h100vh d-bgc-moderate d-bar4 d-ta-center">Viewport</dt-stack>
-</code-well-header>
-
-```html
-<div class="d-w100vw">...</div>   <!-- inline-size: 100vw -->
-<div class="d-w-dvw">...</div>    <!-- inline-size: 100dvw -->
-<div class="d-w-svw">...</div>    <!-- inline-size: 100svw -->
-<div class="d-w-lvw">...</div>    <!-- inline-size: 100lvw -->
+```vue demo
+<!-- @custom -->
+<!-- @class d-ps-relative d-d-flex d-jc-center d-p-300 d-bgc-secondary d-w100p d-h-25 d-stack16 d-of-y-scroll -->
+<dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100vw d-h100vh d-bgc-moderate d-bar4 d-ta-center">Viewport</dt-stack>
 ```
 
 ## Character width
@@ -74,16 +64,10 @@ Use `d-w{n}ch` to constrain width based on character count. Useful for limiting 
 
 Use keyword utilities to set width using CSS keyword values.
 
-<code-well-header class="d-ps-relative d-d-flex d-jc-center d-p-300 d-bgc-secondary d-w100p d-hmn-150 d-stack16" custom>
-  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-h-100 d-w-auto d-bgc-moderate d-bar4 d-ta-center">auto</dt-stack>
-</code-well-header>
-
-```html
-<div class="d-w-auto">...</div>
-<div class="d-w-unset">...</div>
-<div class="d-w-fit-content">...</div>
-<div class="d-w-max-content">...</div>
-<div class="d-w-min-content">...</div>
+```vue demo
+<!-- @custom -->
+<!-- @class d-ps-relative d-d-flex d-jc-center d-p-300 d-bgc-secondary d-w100p d-hmn-150 d-stack16 -->
+<dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-h-100 d-w-auto d-bgc-moderate d-bar4 d-ta-center">auto</dt-stack>
 ```
 
 <script setup>

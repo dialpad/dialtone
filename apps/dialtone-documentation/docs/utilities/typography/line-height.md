@@ -10,47 +10,26 @@ keywords: ["leading", "line spacing"]
 
 Use `d-lh-{n}` to change an element's line-height relatively. This means no unit is set with the line-height. Instead the line-height value is a multiple of the font-size.
 
-<code-well-header>
-  <div v-for="{ class: stop } in relative" class="d-d-grid d-ai-center" style="grid-template-columns: 10rem 1fr">
-    <div class="d-code--sm d-docsite-code">.d-lh-{{stop}}</div>
-    <p :class="`d-lh-${stop} d-bgc-moderate`">The quick brown fox jumps over the lazy dog.</p>
-  </div>
-</code-well-header>
-
-```html
-<p class="d-lh-unset">...</p>
-<p class="d-lh-100">...</p>
-<p class="d-lh-200">...</p>
-<p class="d-lh-300">...</p>
-<p class="d-lh-400">...</p>
-<p class="d-lh-500">...</p>
-<p class="d-lh-600">...</p>
+```vue demo
+<!-- @wrapper -->
+<div v-for="{ class: stop } in relative" class="d-d-grid d-ai-center" style="grid-template-columns: 10rem 1fr">
+  <div class="d-code--sm d-docsite-code">.d-lh-{{stop}}</div>
+  <p :class="`d-lh-${stop} d-bgc-moderate`">The quick brown fox jumps over the lazy dog.</p>
+</div>
 ```
 
 ## Fixed Line-Heights
 
 Use `d-lh{n}` to fix an element's line-height. This allows you to target a specific line-height based on the font-size. For example if a target 20px line-height is desired and the current font-size is 14px, apply `.d-lh6` to achieve this target (14px font-size + 6px = 20px target line-height).
 
-<code-well-header>
-  <div v-for="{ class: stop } in fixed" class="d-d-grid d-ai-center" style="grid-template-columns: 10rem 1fr">
-    <div class="d-code--sm d-docsite-code">.d-lh{{stop}}</div>
-    <div>
-        <p :class="`d-lh${stop} d-fs-300 d-bgc-moderate`">The quick brown fox jumps over the lazy dog.</p>
-    </div>
+```vue demo
+<!-- @wrapper -->
+<div v-for="{ class: stop } in fixed" class="d-d-grid d-ai-center" style="grid-template-columns: 10rem 1fr">
+  <div class="d-code--sm d-docsite-code">.d-lh{{stop}}</div>
+  <div>
+      <p :class="`d-lh${stop} d-fs-300 d-bgc-moderate`">The quick brown fox jumps over the lazy dog.</p>
   </div>
-</code-well-header>
-
-```html
-<p class="d-lh0">...</p>
-<p class="d-lh1">...</p>
-<p class="d-lh2">...</p>
-<p class="d-lh4">...</p>
-<p class="d-lh6">...</p>
-<p class="d-lh8">...</p>
-<p class="d-lh12">...</p>
-<p class="d-lh16">...</p>
-<p class="d-lh20">...</p>
-<p class="d-lh24">...</p>
+</div>
 ```
 
 ## CSS Variables

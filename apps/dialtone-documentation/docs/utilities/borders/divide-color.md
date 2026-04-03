@@ -8,19 +8,11 @@ keywords: ["divider color","separator color","divide colour"]
 
 Use `d-divide-y{n}` to create a divider between an element's child items.
 
-<code-well-header>
-  <dt-stack class="d-divide-y d-divide-default d-w100p">
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200">3</dt-stack>
-  </dt-stack>
-</code-well-header>
-
-```html
+```vue demo
 <dt-stack class="d-divide-y d-divide-default d-w100p">
-  <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">1</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">2</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200">3</dt-stack>
 </dt-stack>
 ```
 
@@ -28,15 +20,7 @@ Use `d-divide-y{n}` to create a divider between an element's child items.
 
 Use `d-divide-x{n}` to create a divider between an element's child items.
 
-<code-well-header>
-  <dt-stack direction="row" class="d-divide-x d-divide-default d-w100p">
-    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">3</dt-stack>
-  </dt-stack>
-</code-well-header>
-
-```html
+```vue demo
 <dt-stack direction="row" class="d-divide-x d-divide-default d-w100p">
   <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">1</dt-stack>
   <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">2</dt-stack>

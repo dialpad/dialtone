@@ -149,22 +149,12 @@ Use `.d-g-cols{n}` to create a multi-column layout.
 
 Unlike some CSS, CSS grid does not cascade beyond the parent and its direct children (`parent-element > *`). We can use this to our advantage by being able to nest grids within each other without cascade errors.
 
-<code-well-header>
-  <div class="d-d-grid d-g-cols2 d-g-200 d-w100p d-hmn216 d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-    <div class="d-d-grid d-g-cols2 d-g-200 d-p-200 d-bgc-moderate-opaque d-bar4">
-      <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar4">3</dt-stack>
-      <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar4">4</dt-stack>
-    </div>
-  </div>
-</code-well-header>
-
-```html
-<div class="d-d-grid d-g-200 d-g-cols2">
-  <div>1</div>
-  <div class="d-d-grid d-g-200 d-g-cols2">
-    <div>3</div>
-    <div>4</div>
+```vue demo
+<div class="d-d-grid d-g-cols2 d-g-200 d-w100p d-hmn216 d-bar8 d-bgc-moderate">
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar4">1</dt-stack>
+  <div class="d-d-grid d-g-cols2 d-g-200 d-p-200 d-bgc-moderate-opaque d-bar4">
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar4">4</dt-stack>
   </div>
 </div>
 ```

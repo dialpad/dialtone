@@ -10,17 +10,15 @@ Size utilities set both `inline-size` (width) and `block-size` (height) at once.
 
 Use `d-size-{stop}` to set both width and height using layout token stops. The hyphen before the number indicates a layout token reference, e.g. `d-size-100` outputs both `inline-size: var(--dt-layout-100)` and `block-size: var(--dt-layout-100)` (64px).
 
-<code-well-header class="d-d-flex d-p-300 d-bgc-secondary d-w100p d-hmx-800 d-flow16 d-of-scroll d-ta-center" v-dt-scrollbar:never custom>
+```vue demo
+<!-- @custom -->
+<!-- @class d-d-flex d-p-300 d-bgc-secondary d-w100p d-hmx-800 d-flow16 d-of-scroll d-ta-center -->
+<div v-dt-scrollbar:never>
   <dt-stack gap="100" class="d-pls-start" v-for="(i, index) in layout" :key="index">
     <span class="d-code--md">d-size-{{i.stop}}</span>
     <dt-stack direction="row" align="center" justify="center" class="d-bgc-bold d-bar4" :class="`d-size-${i.stop}`"></dt-stack>
   </dt-stack>
-</code-well-header>
-
-```html
-<div class="d-size-100">...</div>  <!-- 64px square -->
-<div class="d-size-200">...</div>  <!-- 128px square -->
-<div class="d-size-400">...</div>  <!-- 256px square -->
+</div>
 ```
 
 ## Percentages

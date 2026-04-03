@@ -6,36 +6,27 @@ keywords: ["click through", "mouse events", "touch events"]
 
 ## Pointer Event Classes
 
-<code-well-header>
-  <dt-stack direction="row" gap="100">
-    <div class="d-p-200 d-bgc-moderate d-code--sm" v-for="{ class: className } in pointerEvents.slice(0, 3)" :class="className">.{{ className }}</div>
-  </dt-stack>
-</code-well-header>
-
-```html
-<el class="d-pe-auto">...</el>
-<el class="d-pe-inherit">...</el>
-<el class="d-pe-none">...</el>
+```vue demo
+<!-- @wrapper -->
+<dt-stack direction="row" gap="100">
+  <div class="d-p-200 d-bgc-moderate d-code--sm" v-for="{ class: className } in pointerEvents.slice(0, 3)" :class="className">.{{ className }}</div>
+</dt-stack>
 ```
 
 ## User Select Classes
 
 Use the `user-select` property to control whether the user can select text.
 
-<code-well-header>
-  <dt-stack direction="row" gap="100">
-    <div v-for="{ class: className } in pointerEvents.slice(3)" class="d-p-200 d-bgc-moderate d-code--sm" :class="className">
-      <dt-stack gap="100" class="d-ta-center">
-        <div>.{{ className }}</div>
-        <div>Try to select my text.</div>
-      </dt-stack>
-    </div>
-  </dt-stack>
-</code-well-header>
-
-```html
-<div class="d-us-auto">...</div>
-<div class="d-us-none">...</div>
+```vue demo
+<!-- @wrapper -->
+<dt-stack direction="row" gap="100">
+  <div v-for="{ class: className } in pointerEvents.slice(3)" class="d-p-200 d-bgc-moderate d-code--sm" :class="className">
+    <dt-stack gap="100" class="d-ta-center">
+      <div>.{{ className }}</div>
+      <div>Try to select my text.</div>
+    </dt-stack>
+  </div>
+</dt-stack>
 ```
 
 <script setup>

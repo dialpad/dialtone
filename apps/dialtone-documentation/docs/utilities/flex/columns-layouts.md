@@ -10,62 +10,32 @@ keywords: ["flexbox","flex columns","flex layout","column layout"]
 
 Use `d-fl-col{n}` to create uniformly sized children within an element.
 
-<code-well-header>
-  <dt-stack gap="200" class="d-w100p">
-    <div v-for="(i, index) in columns" class="d-p-100 d-bar8 d-bgc-moderate d-w100p">
-      <code class="d-bgc-transparent">.d-fl-col{{i}}</code>
-      <div class="d-cg-100 d-of-auto" :class="`d-fl-col${i}`">
-        <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar4 d-bgc-moderate-opaque" v-for="(col) in columns.slice(0, i)">{{ col }}</dt-stack>
-      </div>
+```vue demo
+<dt-stack gap="200" class="d-w100p">
+  <div v-for="(i, index) in columns" class="d-p-100 d-bar8 d-bgc-moderate d-w100p">
+    <dt-text as="p" kind="code" size="100">.d-fl-col{{i}}</dt-text>
+    <div class="d-cg-100 d-of-auto" :class="`d-fl-col${i}`">
+      <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar4 d-bgc-moderate-opaque" v-for="(col) in columns.slice(0, i)">{{ col }}</dt-stack>
     </div>
-  </dt-stack>
-</code-well-header>
-
-```html
-<div class="d-fl-col1">...</div>
-<div class="d-fl-col2 d-cg-100">...</div>
-<div class="d-fl-col3 d-cg-100">...</div>
-<div class="d-fl-col4 d-cg-100">...</div>
-<div class="d-fl-col5 d-cg-100">...</div>
-<div class="d-fl-col6 d-cg-100">...</div>
-<div class="d-fl-col7 d-cg-100">...</div>
-<div class="d-fl-col8 d-cg-100">...</div>
-<div class="d-fl-col9 d-cg-100">...</div>
-<div class="d-fl-col10 d-cg-100">...</div>
-<div class="d-fl-col11 d-cg-100">...</div>
-<div class="d-fl-col12 d-cg-100">...</div>
+  </div>
+</dt-stack>
 ```
 
 ## Flex Column Gaps
 
 Use `d-cg{n}` to create uniform gaps between flex columns within an element.
 
-<code-well-header>
-  <dt-stack gap="200" class="d-w100p">
-    <dt-stack v-for="i in gaps" gap="100" class="d-p-100 d-bar8 d-bgc-moderate d-w100p">
-      <code class="d-bgc-transparent">.d-cg{{ i }}</code>
-      <div class="d-fl-col3 d-of-auto" :class="`d-cg${i}`">
-        <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar4 d-bgc-moderate-opaque">1</dt-stack>
-        <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar4 d-bgc-moderate-opaque">2</dt-stack>
-        <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar4 d-bgc-moderate-opaque">3</dt-stack>
-      </div>
-    </dt-stack>
+```vue demo
+<dt-stack gap="200" class="d-w100p">
+  <dt-stack v-for="i in gaps" gap="100" class="d-p-100 d-bar8 d-bgc-moderate d-w100p">
+    <dt-text as="p" kind="code" size="100">.d-cg{{ i }}</dt-text>
+    <div class="d-fl-col3 d-of-auto" :class="`d-cg${i}`">
+      <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar4 d-bgc-moderate-opaque">1</dt-stack>
+      <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar4 d-bgc-moderate-opaque">2</dt-stack>
+      <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar4 d-bgc-moderate-opaque">3</dt-stack>
+    </div>
   </dt-stack>
-</code-well-header>
-
-```html
-<div class="d-fl-col3 d-cg-0">...</div>
-<div class="d-fl-col3 d-cg-1">...</div>
-<div class="d-fl-col3 d-cg-25">...</div>
-<div class="d-fl-col3 d-cg-50">...</div>
-<div class="d-fl-col3 d-cg-75">...</div>
-<div class="d-fl-col3 d-cg-100">...</div>
-<div class="d-fl-col3 d-cg-150">...</div>
-<div class="d-fl-col3 d-cg-200">...</div>
-<div class="d-fl-col3 d-cg-300">...</div>
-<div class="d-fl-col3 d-cg-400">...</div>
-<div class="d-fl-col3 d-cg-600">...</div>
-<div class="d-fl-col3 d-cg-800">...</div>
+</dt-stack>
 ```
 
 ## Centering Objects
@@ -74,19 +44,11 @@ This used to be accomplished with `d-fl-center`, which is deprecated in favor of
 
 By default flexed items align to `flex-start` both horizontally and vertically (effectively top, left). Combine Stack's `align` and `justify` utilities to center-center child items within an element.
 
-<code-well-header>
-  <dt-stack direction="row" align="center" justify="center" class="d-w100p d-hmn216 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-size-75 d-m-100 d-p-200 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-size-100 d-m-100 d-p-200 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-size-75 d-m-100 d-p-200 d-bgc-moderate-opaque d-bar4">3</dt-stack>
-  </dt-stack>
-</code-well-header>
-
-```html
-<dt-stack direction="row" align="center" justify="center">
-  <div>1</div>
-  <div>2</div>
-  <div>3</div>
+```vue demo
+<dt-stack direction="row" align="center" justify="center" class="d-w100p d-hmn216 d-bgc-moderate">
+  <dt-stack direction="row" align="center" justify="center" class="d-size-75 d-m-100 d-p-200 d-bgc-moderate-opaque d-bar4">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-size-100 d-m-100 d-p-200 d-bgc-moderate-opaque d-bar4">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-size-75 d-m-100 d-p-200 d-bgc-moderate-opaque d-bar4">3</dt-stack>
 </dt-stack>
 ```
 

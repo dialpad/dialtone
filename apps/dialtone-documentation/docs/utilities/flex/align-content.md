@@ -10,142 +10,85 @@ keywords: ["flexbox", "cross axis", "flex wrap"]
 
 Use `d-ac-flex-start` to pack multiple rows against the start of the element's cross axis. This is the default value.
 
-<code-well-header>
-  <div class="d-fl-col3 d-g-200 d-fw-wrap d-ac-flex-start d-p-100 d-w100p d-bar8 d-bgc-moderate d-hmn332">
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">3</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">4</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">5</dt-stack>
-  </div>
-</code-well-header>
-
-```html
-<dt-stack class="d-ac-flex-start">
-  <div>1</div>
-  <div>2</div>
-  <div>3</div>
-</dt-stack>
+```vue demo
+<div class="d-fl-col3 d-g-200 d-fw-wrap d-ac-flex-start d-p-100 d-w100p d-bar8 d-bgc-moderate d-hmn332">
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">4</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">5</dt-stack>
+</div>
 ```
 
 ## Center
 
 Use `d-ac-center` to pack rows along the center of the element's cross axis.
 
-<code-well-header>
-  <div class="d-fl-col3 d-g-200 d-fw-wrap d-ac-center d-p-100 d-w100p d-bar8 d-bgc-moderate d-hmn332">
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">3</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">4</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">5</dt-stack>
-  </div>
-</code-well-header>
-
-```html
-<dt-stack class="d-ac-center">
-  <div>1</div>
-  <div>2</div>
-  <div>3</div>
-</dt-stack>
+```vue demo
+<div class="d-fl-col3 d-g-200 d-fw-wrap d-ac-center d-p-100 d-w100p d-bar8 d-bgc-moderate d-hmn332">
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">4</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">5</dt-stack>
+</div>
 ```
 
 ## Flex End
 
 Use `d-ac-flex-end` to rack rows against the end of the element's main axis.
 
-<code-well-header >
-  <div class="d-fl-col3 d-fw-wrap d-g-200 d-ac-flex-end d-p-100 d-w100p d-bar8 d-bgc-moderate d-hmn332">
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">3</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">4</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">5</dt-stack>
-  </div>
-</code-well-header>
-
-```html
-<dt-stack class="d-ac-flex-end">
-  <div>1</div>
-  <div>2</div>
-  <div>3</div>
-</dt-stack>
+```vue demo
+<div class="d-fl-col3 d-fw-wrap d-g-200 d-ac-flex-end d-p-100 d-w100p d-bar8 d-bgc-moderate d-hmn332">
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">4</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">5</dt-stack>
+</div>
 ```
 
 ## Space Around
 
 Use `d-ac-space-around` to pack rows along the element's cross axis so that there is an equal amount of space on each side of the item. This effectively takes all available space, divides it for each row, placing half of alotted space on either side of the row. This is why the space appears doubled for interior rows versus end rows.
 
-<code-well-header>
-  <div class="d-fl-col3 d-fw-wrap d-g-200 d-ac-space-around d-bgc-red-100 d-p-100 d-w100p d-bar8 d-bgc-moderate d-hmn332">
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">3</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">4</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">5</dt-stack>
-  </div>
-</code-well-header>
-
-```html
-<dt-stack class="d-ac-space-around">
-  <div>1</div>
-  <div>2</div>
-  <div>3</div>
-  <div>4</div>
-  <div>5</div>
-</dt-stack>
+```vue demo
+<div class="d-fl-col3 d-fw-wrap d-g-200 d-ac-space-around d-bgc-red-100 d-p-100 d-w100p d-bar8 d-bgc-moderate d-hmn332">
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">4</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">5</dt-stack>
+</div>
 ```
 
 ## Space Between
 
 Use `d-ac-space-between` to distribute rows along the element's cross axis so that there is an equal amount of space between each row without inserting any space between the first or last object.
 
-<code-well-header>
-  <div class="d-fl-col3 d-fw-wrap d-g-200 d-ac-space-between d-p-100 d-w100p d-bar8 d-bgc-moderate d-hmn332">
-    <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">3</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">4</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">5</dt-stack>
-  </div>
-</code-well-header>
-
-```html
-<dt-stack class="d-ac-space-between">
-  <div>1</div>
-  <div>2</div>
-  <div>3</div>
-  <div>4</div>
-  <div>5</div>
-</dt-stack>
+```vue demo
+<div class="d-fl-col3 d-fw-wrap d-g-200 d-ac-space-between d-p-100 d-w100p d-bar8 d-bgc-moderate d-hmn332">
+  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">4</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">5</dt-stack>
+</div>
 ```
 
 ## Space Evenly
 
 Use `d-ac-space-evenly` to distribute rows along the element's cross axis so that there is an equal amount of space on each side of the rows, but unlike `d-ac-space-around` the space visually looks evenly distributed between objects.
 
-<code-well-header>
-  <div class="d-fl-col3 d-fw-wrap d-g-200 d-ac-space-evenly d-p-100 d-w100p d-bar8 d-bgc-moderate d-hmn332">
-    <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">3</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">4</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">5</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">6</dt-stack>
-  </div>
-</code-well-header>
-
-```html
-<dt-stack class="d-ac-space-evenly">
-  <div>1</div>
-  <div>2</div>
-  <div>3</div>
-  <div>4</div>
-  <div>5</div>
-  <div>6</div>
-  <div>7</div>
-  <div>8</div>
-</dt-stack>
+```vue demo
+<div class="d-fl-col3 d-fw-wrap d-g-200 d-ac-space-evenly d-p-100 d-w100p d-bar8 d-bgc-moderate d-hmn332">
+  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">4</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">5</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-h-100 d-bgc-moderate-opaque d-bar4">6</dt-stack>
+</div>
 ```
 
 <script setup>
