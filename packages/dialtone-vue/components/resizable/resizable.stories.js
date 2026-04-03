@@ -17,6 +17,7 @@ import ResizableOffsetStory from './resizable_offset.story.vue';
 
 export const argsData = {
   direction: 'row',
+  storageKey: null,
   onPanelResize: action('panel-resize'),
   onPanelCollapse: action('panel-collapse'),
   onResizeStart: action('resize-start'),
@@ -319,7 +320,7 @@ this.$refs.group.resetPanels();`,
 
 export const Persistence = {
   render: PersistenceTemplate,
-  args: {},
+  args: { storageKey: 'storybook-persistence-demo' },
   parameters: {
     docs: {
       description: {
