@@ -146,40 +146,28 @@ export function useResizableDrag(options: UseResizableDragOptions) {
   let originalAfterSize = 0;
   let beforePanelLeft = 0;
 
-  let boundMouseMove: ((e: MouseEvent) => void) | null = null;
-  let boundMouseUp: ((e: MouseEvent) => void) | null = null;
-  let boundTouchMove: ((e: TouchEvent) => void) | null = null;
-  let boundTouchEnd: ((e: TouchEvent) => void) | null = null;
+  let boundPointerMove: ((e: PointerEvent) => void) | null = null;
+  let boundPointerUp: ((e: PointerEvent) => void) | null = null;
 
   function attachDocumentListeners(): void {
-    boundMouseMove = (e: MouseEvent) => onDragMove(e);
-    boundMouseUp = () => commitDrag();
-    boundTouchMove = (e: TouchEvent) => onDragMove(e);
-    boundTouchEnd = () => commitDrag();
+    boundPointerMove = (e: PointerEvent) => onDragMove(e);
+    boundPointerUp = () => commitDrag();
 
-    document.addEventListener('mousemove', boundMouseMove);
-    document.addEventListener('mouseup', boundMouseUp);
-    document.addEventListener('touchmove', boundTouchMove, { passive: false });
-    document.addEventListener('touchend', boundTouchEnd);
+    document.addEventListener('pointermove', boundPointerMove);
+    document.addEventListener('pointerup', boundPointerUp);
+    document.addEventListener('pointercancel', boundPointerUp);
     document.addEventListener('keydown', handleKeydown);
   }
 
   function removeDocumentListeners(): void {
-    if (boundMouseMove) {
-      document.removeEventListener('mousemove', boundMouseMove);
-      boundMouseMove = null;
+    if (boundPointerMove) {
+      document.removeEventListener('pointermove', boundPointerMove);
+      boundPointerMove = null;
     }
-    if (boundMouseUp) {
-      document.removeEventListener('mouseup', boundMouseUp);
-      boundMouseUp = null;
-    }
-    if (boundTouchMove) {
-      document.removeEventListener('touchmove', boundTouchMove);
-      boundTouchMove = null;
-    }
-    if (boundTouchEnd) {
-      document.removeEventListener('touchend', boundTouchEnd);
-      boundTouchEnd = null;
+    if (boundPointerUp) {
+      document.removeEventListener('pointerup', boundPointerUp);
+      document.removeEventListener('pointercancel', boundPointerUp);
+      boundPointerUp = null;
     }
     document.removeEventListener('keydown', handleKeydown);
   }
@@ -267,13 +255,12 @@ export function useResizableDrag(options: UseResizableDragOptions) {
   }
 
   function computeDragPosition(
-    event: MouseEvent | TouchEvent,
+    event: PointerEvent,
     container: HTMLElement,
     dir: ResizableDirection
   ): number {
     const containerRect = container.getBoundingClientRect();
-    const eventPos = resizeHandler.getEventPosition(event);
-    return dir === 'row' ? eventPos.clientX - containerRect.left : eventPos.clientY - containerRect.top;
+    return dir === 'row' ? event.clientX - containerRect.left : event.clientY - containerRect.top;
   }
 
   function isDragMoveReady(): boolean {
@@ -288,7 +275,7 @@ export function useResizableDrag(options: UseResizableDragOptions) {
     );
   }
 
-  function onDragMove(event: MouseEvent | TouchEvent): void {
+  function onDragMove(event: PointerEvent): void {
     if (!isDragMoveReady()) return;
 
     const rawCursorPosition = computeDragPosition(event, containerRef.value!, direction.value);

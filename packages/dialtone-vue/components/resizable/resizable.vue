@@ -178,13 +178,10 @@ function processAutoCollapse () {
 // ── Announcements (aria-live region for screen readers) ─────────────────
 const { announce } = useResizableAnnouncements();
 
-// Handle registry
-const handleRegistryList = [];
-function registerHandle (inst) { handleRegistryList.push(inst); return handleRegistryList.length - 1; }
-function unregisterHandle (inst) {
-  const idx = handleRegistryList.indexOf(inst);
-  if (idx !== -1) handleRegistryList.splice(idx, 1);
-}
+// Handle registry — tracks mounted handle instances for DOM-order resolution
+const handleInstances = new Set();
+function registerHandle (inst) { handleInstances.add(inst); }
+function unregisterHandle (inst) { handleInstances.delete(inst); }
 
 // ── Per-group drag composable ─────────────────────────────────────────────────
 const drag = useResizableDrag({

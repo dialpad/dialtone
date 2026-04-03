@@ -23,8 +23,7 @@
     :aria-controls="`dt-resizable-panel-${resolvedBeforePanelId}`"
     :aria-valuetext="ariaValueText"
     :aria-disabled="isDisabled || undefined"
-    @mousedown="handleMouseDown"
-    @touchstart="handleTouchStart"
+    @pointerdown="handlePointerDown"
     @dblclick="handleDoubleClick"
     @keydown="handleKeyDown"
     @focus="handleFocusEvent"
@@ -92,7 +91,6 @@ const injectedMessages = ctx?.messages ?? {};
 // ── Handle registration ──────────────────────────────────────────────────────
 
 const currentInstance = getCurrentInstance();
-const autoIndex = ref(0);
 
 // ── Layout-driven position ───────────────────────────────────────────────────
 
@@ -102,7 +100,7 @@ const autoIndex = ref(0);
  * Priority:
  * 1. If explicit beforePanelId + afterPanelId props are provided, look up by
  *    the composite key "{beforePanelId}:{afterPanelId}".
- * 2. Otherwise use autoIndex to pick handles[autoIndex] from the layout.
+ * 2. Otherwise resolve by DOM order — count preceding handle siblings.
  */
 const handlePosition = computed(() => {
   const layout = layoutRef.value;
@@ -113,7 +111,12 @@ const handlePosition = computed(() => {
     return layout.handles.find(h => h.id === id) ?? null;
   }
 
-  return layout.handles[autoIndex.value] ?? null;
+  // Resolve by DOM order: count how many handle siblings precede this one
+  const el = handleElement.value;
+  if (!el?.parentElement) return layout.handles[0] ?? null;
+  const allHandles = Array.from(el.parentElement.querySelectorAll('.d-resizable-handle'));
+  const domIndex = allHandles.indexOf(el);
+  return layout.handles[domIndex >= 0 ? domIndex : 0] ?? null;
 });
 
 /** The composite handle identifier used by the drag system */
@@ -237,7 +240,7 @@ const offset = useResizableOffset({
 // ── Lifecycle ────────────────────────────────────────────────────────────────
 
 onMounted(() => {
-  autoIndex.value = registerHandle(currentInstance);
+  registerHandle(currentInstance);
 });
 
 onUnmounted(() => {
@@ -246,13 +249,7 @@ onUnmounted(() => {
 
 // ── Event handlers ───────────────────────────────────────────────────────────
 
-function handleMouseDown (event) {
-  if (isDisabled.value) return;
-  event.preventDefault();
-  startResize(handleId.value);
-}
-
-function handleTouchStart (event) {
+function handlePointerDown (event) {
   if (isDisabled.value) return;
   event.preventDefault();
   startResize(handleId.value);

@@ -231,7 +231,7 @@ export interface ResizableContext {
     afterPanelId?: string,
     behavior?: 'both' | 'before' | 'after' | 'all',
   ) => void;
-  registerHandle: (instance: ComponentInternalInstance | null) => number;
+  registerHandle: (instance: ComponentInternalInstance | null) => void;
   unregisterHandle: (instance: ComponentInternalInstance | null) => void;
   registerPanel: (config: ResizablePanelConfig) => void;
   unregisterPanel: (id: string) => void;

@@ -7,7 +7,6 @@ import { clampSize } from './constraintResolver';
 // ============================================================================
 
 export interface ResizeHandler {
-  getEventPosition: (event: MouseEvent | TouchEvent) => { clientX: number; clientY: number };
   processResizeMove: (
     rawCursorPosition: number,
     beforePanel: ResizablePanelState,
@@ -27,13 +26,6 @@ export interface ResizeMoveResult {
 }
 
 export function useResizeHandling(containerSize?: () => number) {
-  function getEventPosition(event: MouseEvent | TouchEvent) {
-    if ('touches' in event) {
-      return { clientX: event.touches[0].clientX, clientY: event.touches[0].clientY };
-    }
-    return { clientX: event.clientX, clientY: event.clientY };
-  }
-
   function checkPanelsResizable(
     rawCursorPosition: number,
     beforePanel: ResizablePanelState,
@@ -142,7 +134,6 @@ export function useResizeHandling(containerSize?: () => number) {
   }
 
   return {
-    getEventPosition,
     processResizeMove,
   };
 }
