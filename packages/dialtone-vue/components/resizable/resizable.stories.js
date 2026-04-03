@@ -8,7 +8,6 @@ import ResizableCustomSizesStory from './resizable_custom_sizes.story.vue';
 import ResizableConstraintsStory from './resizable_constraints.story.vue';
 import ResizableCollapsibleStory from './resizable_collapsible.story.vue';
 import ResizablePersistenceStory from './resizable_persistence.story.vue';
-import ResizableCustomAdapterStory from './resizable_custom_adapter.story.vue';
 import ResizableKeyboardStory from './resizable_keyboard.story.vue';
 import ResizableOffsetStory from './resizable_offset.story.vue';
 
@@ -133,9 +132,6 @@ const CollapsibleTemplate = (args, { argTypes }) =>
 
 const PersistenceTemplate = (args, { argTypes }) =>
   createTemplateFromVueFile(args, argTypes, ResizablePersistenceStory);
-
-const CustomAdapterTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, ResizableCustomAdapterStory);
 
 const KeyboardTemplate = (args, { argTypes }) =>
   createTemplateFromVueFile(args, argTypes, ResizableKeyboardStory);
@@ -295,30 +291,6 @@ export const Persistence = {
   </d-resizable-panel>
   <d-resizable-handle />
   <d-resizable-panel id="content">Content</d-resizable-panel>
-</d-resizable>`,
-      },
-    },
-  },
-};
-
-export const CustomAdapter = {
-  render: CustomAdapterTemplate,
-  args: {},
-  parameters: {
-    docs: {
-      description: {
-        story: 'Custom storage adapter via the :storage prop. The adapter logs save/load operations to the console. Overrides storageKey when both are provided.',
-      },
-      source: {
-        code: `
-const myAdapter = {
-  save(data) { store.commit('setLayout', data); },
-  load() { return store.state.layout; },
-  clear() { store.commit('clearLayout'); },
-};
-
-<d-resizable direction="row" :storage="myAdapter">
-  ...
 </d-resizable>`,
       },
     },
