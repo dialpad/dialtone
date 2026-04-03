@@ -4,7 +4,6 @@ import { DtResizable } from './';
 
 import ResizableDefaultStory from './resizable_default.story.vue';
 import ResizableThreePanelStory from './resizable_three_panel.story.vue';
-import ResizableCustomSizesStory from './resizable_custom_sizes.story.vue';
 import ResizableConstraintsStory from './resizable_constraints.story.vue';
 import ResizableCollapsibleStory from './resizable_collapsible.story.vue';
 import ResizablePersistenceStory from './resizable_persistence.story.vue';
@@ -121,9 +120,6 @@ const DefaultTemplate = (args, { argTypes }) =>
 const ThreePanelTemplate = (args, { argTypes }) =>
   createTemplateFromVueFile(args, argTypes, ResizableThreePanelStory);
 
-const CustomSizesTemplate = (args, { argTypes }) =>
-  createTemplateFromVueFile(args, argTypes, ResizableCustomSizesStory);
-
 const ConstraintsTemplate = (args, { argTypes }) =>
   createTemplateFromVueFile(args, argTypes, ResizableConstraintsStory);
 
@@ -208,46 +204,25 @@ export const ThreePanel = {
   },
 };
 
-export const CustomSizes = {
-  render: CustomSizesTemplate,
-  args: {},
-  parameters: {
-    docs: {
-      source: {
-        code: `
-<d-resizable direction="row">
-  <d-resizable-panel id="narrow" initial-size="30p">
-    30% Panel
-  </d-resizable-panel>
-  <d-resizable-handle />
-  <d-resizable-panel id="wide" initial-size="70p">
-    70% Panel
-  </d-resizable-panel>
-</d-resizable>`,
-      },
-    },
-  },
-};
-
 export const Constraints = {
   render: ConstraintsTemplate,
   args: {},
   parameters: {
     docs: {
       description: {
-        story: 'Panels with userMinSize/userMaxSize constraints. The sidebar cannot be dragged below 20% or above 50%.',
+        story: 'Initial sizes with min/max constraints. Sidebar uses a Dialtone size token (825 = 164px) for minimum and a percentage for maximum.',
       },
       source: {
         code: `
-<d-resizable direction="row">
-  <d-resizable-panel id="sidebar" initial-size="30p" user-min-size="20p" user-max-size="50p">
-    Sidebar (min 20%, max 50%)
-  </d-resizable-panel>
-  <d-resizable-handle />
-  <d-resizable-panel id="content" user-min-size="30p">
+<dt-resizable>
+  <dt-resizable-panel id="sidebar" initial-size="25p" user-min-size="825" user-max-size="50p">
+    Sidebar (min 164px, max 50%)
+  </dt-resizable-panel>
+  <dt-resizable-handle />
+  <dt-resizable-panel id="content" user-min-size="30p">
     Content (min 30%)
-  </d-resizable-panel>
-</d-resizable>`,
+  </dt-resizable-panel>
+</dt-resizable>`,
       },
     },
   },

@@ -26,11 +26,17 @@ Multiple panels can be combined with handles between each pair.
 
 <Canvas of={ResizableStories.ThreePanel} />
 
-## Custom Initial Sizes
+## Constraints
 
-Panels accept `initialSize` as a percentage (`"30p"`) or Dialtone token (`"925"`).
+Set initial sizes with percentage tokens or Dialtone size tokens, plus min/max constraints.
 
-<Canvas of={ResizableStories.CustomSizes} />
+<Canvas of={ResizableStories.Constraints} />
+
+## Collapsible
+
+Panels can collapse to zero width and be restored via button or programmatic control.
+
+<Canvas of={ResizableStories.Collapsible} />
 
 ## Slots, Props & Events
 
@@ -58,20 +64,6 @@ import {
   <dt-resizable-handle />
   <dt-resizable-panel id="right">
     Right content
-  </dt-resizable-panel>
-</dt-resizable>
-```
-
-### With Initial Sizes
-
-```html
-<dt-resizable direction="row">
-  <dt-resizable-panel id="sidebar" initial-size="30p">
-    Sidebar
-  </dt-resizable-panel>
-  <dt-resizable-handle />
-  <dt-resizable-panel id="content" initial-size="70p">
-    Main content
   </dt-resizable-panel>
 </dt-resizable>
 ```

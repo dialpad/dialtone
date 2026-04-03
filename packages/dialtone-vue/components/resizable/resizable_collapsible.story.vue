@@ -93,6 +93,7 @@ export default {
     },
 
     resetAll () {
+      this.sidebarCollapsed = false;
       this.$refs.group?.resetPanels();
     },
   },
