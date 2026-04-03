@@ -152,7 +152,7 @@ describe('V2 — Constraint enforcement', () => {
 
   describe('useResizeHandling processResizeMove', () => {
     it('should enforce userMinSize during drag', () => {
-      const handler = useResizeHandling('row', () => 1000);
+      const handler = useResizeHandling(() => 1000);
       const before = makePanelState({ id: 'a', pixelSize: 500, userMinSizePixels: 200 });
       const after = makePanelState({ id: 'b', pixelSize: 500, userMinSizePixels: 200 });
 
@@ -162,7 +162,7 @@ describe('V2 — Constraint enforcement', () => {
     });
 
     it('should enforce userMaxSize during drag', () => {
-      const handler = useResizeHandling('row', () => 1000);
+      const handler = useResizeHandling(() => 1000);
       const before = makePanelState({ id: 'a', pixelSize: 500, userMaxSizePixels: 600 });
       const after = makePanelState({ id: 'b', pixelSize: 500, userMinSizePixels: 200 });
 
@@ -172,7 +172,7 @@ describe('V2 — Constraint enforcement', () => {
     });
 
     it('should prevent drag when panel is not resizable', () => {
-      const handler = useResizeHandling('row', () => 1000);
+      const handler = useResizeHandling(() => 1000);
       const before = makePanelState({ id: 'a', pixelSize: 300, resizable: false });
       const after = makePanelState({ id: 'b', pixelSize: 700 });
 

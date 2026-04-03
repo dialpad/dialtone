@@ -127,7 +127,7 @@ const activeHandleId = ref(undefined);
 const activeCursorPosition = ref(0);
 
 // Single resizeHandler instance for drag operations
-const resizeHandler = useResizeHandling(props.direction, () => group.containerSize.value);
+const resizeHandler = useResizeHandling(() => group.containerSize.value);
 
 const isInitializing = group.isInitializing;
 const registerPanel = (config) => group.registerPanel(config);
@@ -239,6 +239,7 @@ onUnmounted(() => {
 provide(RESIZABLE_CONTEXT_KEY, {
   layout: group.layout,
   panels: group.syncedPanels,
+  panelMap: group.panelMap,
   direction: currentDirection,
   containerSize: group.containerSize,
   containerElement: computed(() => containerRef.value),

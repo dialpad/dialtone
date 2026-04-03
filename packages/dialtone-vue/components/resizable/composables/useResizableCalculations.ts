@@ -1,5 +1,5 @@
 import { MIN_PANEL_SIZE_PX } from '../resizable_constants';
-import type { ResizablePanelState, ResizableDirection } from '../resizable_constants';
+import type { ResizablePanelState } from '../resizable_constants';
 import { clampSize } from './constraintResolver';
 
 // ============================================================================
@@ -26,7 +26,7 @@ export interface ResizeMoveResult {
   isValidResize: boolean;
 }
 
-export function useResizeHandling(direction: ResizableDirection, containerSize?: () => number) {
+export function useResizeHandling(containerSize?: () => number) {
   function getEventPosition(event: MouseEvent | TouchEvent) {
     if ('touches' in event) {
       return { clientX: event.touches[0].clientX, clientY: event.touches[0].clientY };

@@ -35,7 +35,7 @@
 </template>
 
 <script setup>
-import { computed, inject, onMounted, onUnmounted, ref, getCurrentInstance, watch } from 'vue';
+import { computed, inject, onMounted, onUnmounted, ref, getCurrentInstance } from 'vue';
 import { RESIZABLE_CONTEXT_KEY } from './resizable_constants';
 import { pixelsToPercentage } from './resizable_utils';
 import { useResizableKeyboard } from './composables/useResizableKeyboard';
@@ -86,6 +86,7 @@ const saveToStorage = ctx?.saveToStorage ?? null;
 const collapsePanel = ctx?.collapsePanel ?? null;
 const updateSavedPanel = ctx?.updateSavedPanel ?? null;
 const announce = ctx?.announce ?? null;
+const panelMap = ctx?.panelMap ?? computed(() => new Map());
 const injectedMessages = ctx?.messages ?? {};
 
 // ── Handle registration ──────────────────────────────────────────────────────
@@ -165,51 +166,34 @@ const computedAriaLabel = computed(() => {
 });
 
 const ariaValueText = computed(() => {
-  const panel = panels.value.find(p => p.id === resolvedBeforePanelId.value);
-  if (!panel) return '';
+  const p = panelMap.value.get(resolvedBeforePanelId.value);
+  if (!p) return '';
   const template = injectedMessages.ariaValueText ?? '{panelId}: {pixels}px';
   return template
     .replace('{panelId}', resolvedBeforePanelId.value)
-    .replace('{pixels}', String(Math.round(panel.pixelSize)));
+    .replace('{pixels}', String(Math.round(p.pixelSize)));
 });
 
-const ariaValueNow = ref(50);
-const ariaValueMin = ref(0);
-const ariaValueMax = ref(100);
+const ariaValueNow = computed(() => {
+  const p = panelMap.value.get(resolvedBeforePanelId.value);
+  const cs = containerSizeRef.value;
+  if (!p || !cs) return 0;
+  return Math.floor(pixelsToPercentage(p.collapsed ? 0 : p.pixelSize || 0, cs));
+});
 
-let ariaUpdateTimeout = null;
+const ariaValueMin = computed(() => {
+  const p = panelMap.value.get(resolvedBeforePanelId.value);
+  const cs = containerSizeRef.value;
+  if (!p || !cs) return 0;
+  return Math.floor(pixelsToPercentage(p.userMinSizePixels || 0, cs));
+});
 
-function calculateAriaValues () {
-  const containerSize = containerSizeRef.value;
-  if (!containerSize || containerSize <= 0) return;
-
-  const beforeId = resolvedBeforePanelId.value;
-  const panelState = panels.value.find(p => p.id === beforeId);
-  if (!panelState) return;
-
-  const position = panelState.collapsed ? 0 : panelState.pixelSize || 0;
-  const min = panelState.userMinSizePixels || 0;
-  const max = panelState.userMaxSizePixels || containerSize;
-
-  ariaValueNow.value = Math.floor(pixelsToPercentage(position, containerSize));
-  ariaValueMin.value = Math.floor(pixelsToPercentage(min, containerSize));
-  ariaValueMax.value = Math.floor(pixelsToPercentage(max, containerSize));
-}
-
-const updateAriaValues = () => {
-  if (ariaUpdateTimeout) {
-    clearTimeout(ariaUpdateTimeout);
-  }
-  ariaUpdateTimeout = setTimeout(calculateAriaValues, 100);
-};
-
-watch(
-  [resolvedBeforePanelId, () => containerSizeRef.value],
-  () => {
-    updateAriaValues();
-  },
-  { flush: 'post' },
-);
+const ariaValueMax = computed(() => {
+  const p = panelMap.value.get(resolvedBeforePanelId.value);
+  const cs = containerSizeRef.value;
+  if (!p || !cs) return 100;
+  return Math.floor(pixelsToPercentage(p.userMaxSizePixels || cs, cs));
+});
 
 // ── Handle DOM element ───────────────────────────────────────────────────────
 
@@ -254,15 +238,10 @@ const offset = useResizableOffset({
 
 onMounted(() => {
   autoIndex.value = registerHandle(currentInstance);
-  updateAriaValues();
 });
 
 onUnmounted(() => {
   unregisterHandle(currentInstance);
-
-  if (ariaUpdateTimeout) {
-    clearTimeout(ariaUpdateTimeout);
-  }
 });
 
 // ── Event handlers ───────────────────────────────────────────────────────────

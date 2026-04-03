@@ -131,6 +131,13 @@ export function useResizableGroup(options: UseResizableGroupOptions) {
     { immediate: true }
   );
 
+  // ── Panel index (O(1) lookup by id) ────────────────────────────────────────
+  const panelMap = computed((): Map<string, ResizablePanelState> => {
+    const map = new Map<string, ResizablePanelState>();
+    for (const p of syncedPanels.value) map.set(p.id, p);
+    return map;
+  });
+
   // ── Panel registration ──────────────────────────────────────────────────────
 
   let sortScheduled = false;
@@ -253,6 +260,7 @@ export function useResizableGroup(options: UseResizableGroupOptions) {
   return {
     layout,
     syncedPanels,
+    panelMap,
     containerSize,
     isInitializing,
 

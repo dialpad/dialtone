@@ -68,7 +68,6 @@ watch(
 
 const ctx = inject(RESIZABLE_CONTEXT_KEY, null);
 const layoutRef = ctx?.layout ?? computed(() => ({ panels: new Map(), handles: [] }));
-const panels = ctx?.panels ?? computed(() => []);
 const isResizing = ctx?.isResizing ?? computed(() => false);
 
 const registerPanel = ctx?.registerPanel ?? null;
@@ -99,15 +98,10 @@ onUnmounted(() => {
   }
 });
 
-// Re-register on config change
-watch(
-  () => JSON.stringify(panelConfig.value),
-  () => {
-    if (registerPanel) {
-      registerPanel(panelConfig.value);
-    }
-  },
-);
+// Re-register on config change (watch each config field explicitly)
+watch(panelConfig, () => {
+  if (registerPanel) registerPanel(panelConfig.value);
+}, { deep: true });
 
 const collapsePanel = ctx?.collapsePanel ?? null;
 const isInitializing = ctx?.isInitializing ?? computed(() => false);
@@ -123,9 +117,8 @@ watch(
   { immediate: true },
 );
 
-const panel = computed(() => {
-  return panels.value.find(p => p.id === props.id);
-});
+const panelMap = ctx?.panelMap ?? computed(() => new Map());
+const panel = computed(() => panelMap.value.get(props.id));
 
 const panelStyles = computed(() => {
   const position = layoutRef.value.panels.get(props.id);

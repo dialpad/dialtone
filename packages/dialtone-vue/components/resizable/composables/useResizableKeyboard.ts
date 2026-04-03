@@ -94,10 +94,7 @@ export function useResizableKeyboard(options: ResizableKeyboardOptions) {
 
   const isFocused = ref(false);
 
-  const resizeHandler = useResizeHandling(
-    direction.value,
-    () => containerSize.value,
-  );
+  const resizeHandler = useResizeHandling(() => containerSize.value);
 
   function getCurrentPanels() {
     const beforePanel = panels.value.find(

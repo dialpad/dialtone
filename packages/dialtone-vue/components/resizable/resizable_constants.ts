@@ -214,6 +214,7 @@ export interface ResizableContext {
   // Reactive state
   layout: ComputedRef<LayoutResult>;
   panels: ComputedRef<ResizablePanelState[]>;
+  panelMap: ComputedRef<Map<string, ResizablePanelState>>;
   direction: ComputedRef<ResizableDirection>;
   containerSize: ComputedRef<number>;
   containerElement: ComputedRef<HTMLElement | null>;
