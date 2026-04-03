@@ -31,8 +31,8 @@ export {
   canResetPanelPair,
 } from './useResizablePanelState';
 
-// Calculations (resize handling, panel sizing)
-export { useResizeHandling, useResizablePanelSizing, type ResizeHandler } from './useResizableCalculations';
+// Calculations (resize handling)
+export { useResizeHandling, type ResizeHandler } from './useResizableCalculations';
 
 // Supporting composables
 export { useResizableStorage, localStorageAdapter, validateStoredPanelSize } from './useResizableStorage';

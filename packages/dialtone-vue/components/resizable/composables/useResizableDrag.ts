@@ -55,8 +55,8 @@ const IDLE_STATE: DragStateIdle = {
 export interface UseResizableDragOptions {
   direction: ComputedRef<ResizableDirection>;
   containerRef: Ref<HTMLElement | null>;
-  panels: ComputedRef<ResizablePanelState[]>;
-  containerSize: ComputedRef<number>;
+  panels: ComputedRef<ResizablePanelState[]> | Ref<ResizablePanelState[]>;
+  containerSize: ComputedRef<number> | Ref<number>;
   resizeHandler: ResizeHandler;
   onDragEnd: (
     beforePanelId: string,

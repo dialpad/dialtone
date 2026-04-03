@@ -50,6 +50,7 @@ import {
   RESIZABLE_COLLAPSE_PANEL_KEY,
   RESIZABLE_ANNOUNCE_KEY,
   RESIZABLE_MESSAGES_KEY,
+  RESIZABLE_UPDATE_SAVED_PANEL_KEY,
 } from './resizable_constants';
 import { pixelsToPercentage } from './resizable_utils';
 import { useResizableKeyboard } from './composables/useResizableKeyboard';
@@ -112,6 +113,7 @@ const registerHandle = inject(RESIZABLE_REGISTER_HANDLE_KEY, () => 0);
 const unregisterHandle = inject(RESIZABLE_UNREGISTER_HANDLE_KEY, () => {});
 const saveToStorage = inject(RESIZABLE_SAVE_TO_STORAGE_KEY, null);
 const collapsePanel = inject(RESIZABLE_COLLAPSE_PANEL_KEY, null);
+const updateSavedPanel = inject(RESIZABLE_UPDATE_SAVED_PANEL_KEY, null);
 const announce = inject(RESIZABLE_ANNOUNCE_KEY, null);
 const injectedMessages = inject(RESIZABLE_MESSAGES_KEY, {});
 
@@ -251,7 +253,17 @@ const keyboard = useResizableKeyboard({
   beforePanelId: resolvedBeforePanelId,
   afterPanelId: resolvedAfterPanelId,
   handleElement,
-  onResize () { saveToStorage?.(); },
+  onResize (beforeId, beforeSize, afterId, afterSize) {
+    if (updateSavedPanel) {
+      const cSize = containerSizeRef.value;
+      const beforeRatio = cSize > 0 ? beforeSize / cSize : undefined;
+      const afterRatio = cSize > 0 ? afterSize / cSize : undefined;
+      updateSavedPanel(beforeId, { pixelSize: beforeSize, manualTargetRatio: beforeRatio });
+      updateSavedPanel(afterId, { pixelSize: afterSize, manualTargetRatio: afterRatio });
+    } else {
+      saveToStorage?.();
+    }
+  },
   onCollapse (panelId, collapsed) { collapsePanel?.(panelId, collapsed); },
   onReset (beforeId, afterId) { resetPanels?.(beforeId, afterId, 'both'); },
   onSizeAnnouncement (msg) { announce?.(msg); },

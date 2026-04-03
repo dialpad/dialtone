@@ -173,9 +173,10 @@ export function useResizableKeyboard(options: ResizableKeyboardOptions) {
     newBeforePixels: number,
     newAfterPixels: number,
   ): void {
-    beforePanel.pixelSize = Math.round(newBeforePixels);
-    afterPanel.pixelSize = Math.round(newAfterPixels);
+    const roundedBefore = Math.round(newBeforePixels);
+    const roundedAfter = Math.round(newAfterPixels);
 
+    // DOM updates for immediate visual feedback
     const cursorPos = newBeforePixels;
     const container = handleElement.value?.closest('.d-resizable');
 
@@ -198,9 +199,9 @@ export function useResizableKeyboard(options: ResizableKeyboardOptions) {
 
     onResize(
       beforePanelId.value,
-      beforePanel.pixelSize,
+      roundedBefore,
       afterPanelId.value,
-      afterPanel.pixelSize,
+      roundedAfter,
     );
   }
 

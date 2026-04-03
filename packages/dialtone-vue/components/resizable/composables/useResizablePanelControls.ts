@@ -8,10 +8,8 @@
 import type { Ref } from 'vue';
 import { DEFAULT_PANEL_SIZE } from '../resizable_constants';
 import type { ResizablePanelState, ResizableSizeValue } from '../resizable_constants';
-import { parseSizeToPixels, hasPercentageMinSize } from '../resizable_utils';
+import { parseSizeToPixels } from '../resizable_utils';
 import { applyPanelPixelConstraints, ensureAtLeastOneUnlocked, canResetPanelPair } from './useResizablePanelState';
-import type { ResizeHandler } from './useResizableCalculations';
-import { clampSize } from './constraintResolver';
 
 // ============================================================================
 // TYPES
@@ -53,12 +51,9 @@ export interface ResizablePanelControlsOptions {
   panels: Ref<ResizablePanelState[]>;
   containerSize: Ref<number>;
   containerRef: Ref<HTMLElement | null>;
-  resizeHandler: ResizeHandler;
   onPanelResize: (panelId: string, pixelSize: number) => void;
   onPanelCollapse: (panelId: string, collapsed: boolean) => void;
-  updateContainerSize: () => void;
-  saveToStorage: (panels: ResizablePanelState[]) => void;
-  isInitializing: Ref<boolean>;
+  updateSavedPanel: (panelId: string, updates: Partial<import('./useResizableStorage').SavedPanelData>) => void;
 }
 
 // ============================================================================
@@ -70,12 +65,9 @@ export function useResizablePanelControls(options: ResizablePanelControlsOptions
     panels,
     containerSize,
     containerRef,
-    resizeHandler,
     onPanelResize,
     onPanelCollapse,
-    updateContainerSize,
-    saveToStorage,
-    isInitializing,
+    updateSavedPanel,
   } = options;
 
   const preCollapseStates = new Map<string, PreCollapseState>();
@@ -104,9 +96,7 @@ export function useResizablePanelControls(options: ResizablePanelControlsOptions
       executeExpand(panel!);
     }
 
-    updateContainerSize();
     onPanelCollapse(panelId, isCollapse);
-    saveToStorage(panels.value);
     if (containerRef.value) {
       containerRef.value.dispatchEvent(new CustomEvent('panels-updated'));
     }
@@ -151,53 +141,53 @@ export function useResizablePanelControls(options: ResizablePanelControlsOptions
     });
     preCollapseStates.set(panel.id, state);
 
-    panel.collapsed = true;
-    panel.autoCollapsed = source === 'system';
+    updateSavedPanel(panel.id, { collapsed: true, autoCollapsed: source === 'system' });
 
     panels.value.forEach(p => {
       if (p.id !== panel.id && !p.collapsed) {
-        p.locked = false;
+        updateSavedPanel(p.id, { locked: false });
       }
     });
   }
 
   function executeExpand(panel: ResizablePanelState): void {
     const wasAutoCollapsed = panel.autoCollapsed ?? false;
-    panel.collapsed = false;
-    panel.autoCollapsed = undefined;
 
-    const savedState = preCollapseStates.get(panel.id);
+    const preCollapse = preCollapseStates.get(panel.id);
 
-    if (savedState) {
-      const viewportChangeRatio = Math.abs(containerSize.value - savedState.containerSize) / savedState.containerSize;
+    if (preCollapse) {
+      const viewportChangeRatio = Math.abs(containerSize.value - preCollapse.containerSize)
+        / preCollapse.containerSize;
       const viewportChanged = viewportChangeRatio > 0.1;
-
       const shouldRestoreSizes = !viewportChanged || !wasAutoCollapsed;
 
       if (shouldRestoreSizes) {
-        const savedPanelSize = savedState.sizes.get(panel.id);
+        const savedPanelSize = preCollapse.sizes.get(panel.id);
         if (savedPanelSize !== undefined) {
-          panel.pixelSize = savedPanelSize;
+          updateSavedPanel(panel.id, { pixelSize: savedPanelSize, collapsed: false, autoCollapsed: undefined });
+        } else {
+          updateSavedPanel(panel.id, { collapsed: false, autoCollapsed: undefined });
         }
 
         panels.value.forEach(p => {
           if (p.id === panel.id) return;
-
-          const savedSize = savedState.sizes.get(p.id);
-          const hadManualTargetBefore = savedState.manualTargets.get(p.id) !== undefined;
+          const savedSize = preCollapse.sizes.get(p.id);
+          const hadManualTargetBefore = preCollapse.manualTargets.get(p.id) !== undefined;
           const hasManualTargetNow = p.manualTargetSize !== undefined;
 
           if (!hadManualTargetBefore && !hasManualTargetNow && savedSize !== undefined) {
-            p.pixelSize = savedSize;
+            updateSavedPanel(p.id, { pixelSize: savedSize });
           }
         });
+      } else {
+        updateSavedPanel(panel.id, { collapsed: false, autoCollapsed: undefined });
       }
 
       preCollapseStates.delete(panel.id);
     } else {
       const initialSize = parseSizeToPixels(panel.initialSize ?? DEFAULT_PANEL_SIZE, containerSize.value);
       const constrainedSize = applyPanelPixelConstraints(panel, initialSize, containerSize.value, 'system');
-      panel.pixelSize = constrainedSize;
+      updateSavedPanel(panel.id, { pixelSize: constrainedSize, collapsed: false, autoCollapsed: undefined });
     }
   }
 
@@ -208,12 +198,11 @@ export function useResizablePanelControls(options: ResizablePanelControlsOptions
     if (!panel || panel.collapsed) return;
 
     const constrainedSize = applyPanelPixelConstraints(panel, newPixelSize, containerSize.value);
+    const ratio = containerSize.value > 0 ? constrainedSize / containerSize.value : undefined;
 
-    panel.pixelSize = constrainedSize;
+    updateSavedPanel(panelId, { pixelSize: constrainedSize, manualTargetRatio: ratio });
 
-    updateContainerSize();
     onPanelResize(panelId, constrainedSize);
-    saveToStorage(panels.value);
   }
 
   /**
@@ -232,24 +221,20 @@ export function useResizablePanelControls(options: ResizablePanelControlsOptions
     const panel = panels.value.find(p => p.id === panelId);
     if (!panel || panel.collapsed || panel.resizable === false) return;
 
-    panel.locked = true;
-
+    updateSavedPanel(panelId, { locked: true });
     ensureAtLeastOneUnlocked(panels.value);
-    saveToStorage(panels.value);
   }
 
   function unlockPanel(panelId: string) {
     const panel = panels.value.find(p => p.id === panelId);
     if (!panel || panel.collapsed || panel.resizable === false) return;
 
-    panel.locked = false;
-    saveToStorage(panels.value);
+    updateSavedPanel(panelId, { locked: false });
   }
 
   // ---- Panel Reset Operations ----
 
   function resetAdjacentPanels(beforePanel: ResizablePanelState, afterPanel: ResizablePanelState) {
-    // Redistribute the combined space of both panels by their initial size ratio
     const combinedSpace = beforePanel.pixelSize + afterPanel.pixelSize;
     const beforeInitial = convertToPixelSize(beforePanel.initialSize || DEFAULT_PANEL_SIZE);
     const afterInitial = convertToPixelSize(afterPanel.initialSize || DEFAULT_PANEL_SIZE);
@@ -260,17 +245,15 @@ export function useResizablePanelControls(options: ResizablePanelControlsOptions
       : Math.round(combinedSpace / 2);
     const afterSize = combinedSpace - beforeSize;
 
-    beforePanel.pixelSize = beforeSize;
-    afterPanel.pixelSize = afterSize;
-    beforePanel.locked = false;
-    afterPanel.locked = false;
-    beforePanel.manualTargetSize = undefined;
-    afterPanel.manualTargetSize = undefined;
-    beforePanel.manualTargetRatio = undefined;
-    afterPanel.manualTargetRatio = undefined;
+    updateSavedPanel(beforePanel.id, {
+      pixelSize: beforeSize, locked: false, manualTargetRatio: undefined,
+    });
+    updateSavedPanel(afterPanel.id, {
+      pixelSize: afterSize, locked: false, manualTargetRatio: undefined,
+    });
 
-    onPanelResize(beforePanel.id, beforePanel.pixelSize);
-    onPanelResize(afterPanel.id, afterPanel.pixelSize);
+    onPanelResize(beforePanel.id, beforeSize);
+    onPanelResize(afterPanel.id, afterSize);
   }
 
   function resetAllPanelPairs() {
@@ -301,7 +284,6 @@ export function useResizablePanelControls(options: ResizablePanelControlsOptions
     const initialSize = convertToPixelSize(panel.initialSize || DEFAULT_PANEL_SIZE);
     const delta = initialSize - panel.pixelSize;
 
-    // Find adjacent unlocked panel to absorb the delta
     const panelIndex = panels.value.indexOf(panel);
     const adjacentPanel = panels.value.find((p, i) =>
       i !== panelIndex && !p.collapsed && p.resizable !== false && !p.locked
@@ -309,14 +291,15 @@ export function useResizablePanelControls(options: ResizablePanelControlsOptions
 
     if (!adjacentPanel) return;
 
-    panel.pixelSize = initialSize;
-    adjacentPanel.pixelSize = adjacentPanel.pixelSize - delta;
-    panel.locked = false;
-    panel.manualTargetSize = undefined;
-    panel.manualTargetRatio = undefined;
+    const newAdjacentSize = adjacentPanel.pixelSize - delta;
 
-    onPanelResize(panel.id, panel.pixelSize);
-    onPanelResize(adjacentPanel.id, adjacentPanel.pixelSize);
+    updateSavedPanel(panel.id, {
+      pixelSize: initialSize, locked: false, manualTargetRatio: undefined,
+    });
+    updateSavedPanel(adjacentPanel.id, { pixelSize: newAdjacentSize });
+
+    onPanelResize(panel.id, initialSize);
+    onPanelResize(adjacentPanel.id, newAdjacentSize);
   }
 
   function resetPanels(
@@ -400,244 +383,12 @@ export function useResizablePanelControls(options: ResizablePanelControlsOptions
     return { collapsed, expanded };
   }
 
-  // ---- Viewport Handling Helpers ----
-
-  function calculateFlexiblePanelTarget(
-    panel: ResizablePanelState,
-    flexibleScaleFactor: number,
-    newAvailableSpace: number,
-    totalCurrentFlexible: number
-  ): number {
-    let targetSize: number;
-
-    if (panel.manualTargetSize !== undefined) {
-      const scaledSize = panel.pixelSize * flexibleScaleFactor;
-      targetSize = Math.min(scaledSize, panel.manualTargetSize);
-    } else {
-      const proportion = totalCurrentFlexible > 0 ? panel.pixelSize / totalCurrentFlexible : 0;
-      targetSize = newAvailableSpace * proportion;
-    }
-
-    return applySystemConstraints(panel, targetSize);
-  }
-
-  function applySystemConstraints(panel: ResizablePanelState, size: number): number {
-    return clampSize(
-      size,
-      panel.systemMinSizePixels ?? panel.userMinSizePixels,
-      panel.systemMaxSizePixels ?? panel.userMaxSizePixels,
-    );
-  }
-
-  function compressPanelsToFit(
-    activePanels: ResizablePanelState[],
-    targetSizes: Map<string, number>,
-    overflow: number
-  ): void {
-    const sorted = [...activePanels].sort(comparePanelsByMinSizePriority);
-
-    let remaining = overflow;
-    for (const panel of sorted) {
-      if (remaining <= 0) break;
-      if (!canPanelCompress(panel)) continue;
-
-      remaining = applyPanelCompression(panel, targetSizes, remaining);
-    }
-  }
-
-  function canPanelCompress(panel: ResizablePanelState): boolean {
-    return !(panel.locked || panel.resizable === false);
-  }
-
-  function applyPanelCompression(
-    panel: ResizablePanelState,
-    targetSizes: Map<string, number>,
-    remaining: number
-  ): number {
-    const currentTarget = targetSizes.get(panel.id) ?? 0;
-    const minSize = panel.systemMinSizePixels ?? panel.userMinSizePixels ?? 0;
-    const availableToCompress = currentTarget - minSize;
-
-    if (availableToCompress <= 0) return remaining;
-
-    const compression = Math.min(availableToCompress, remaining);
-    targetSizes.set(panel.id, currentTarget - compression);
-    return remaining - compression;
-  }
-
-  function comparePanelsByMinSizePriority(a: ResizablePanelState, b: ResizablePanelState): number {
-    const aHasPercentageMin = hasPercentageMinSize(a);
-    const bHasPercentageMin = hasPercentageMinSize(b);
-    if (aHasPercentageMin && !bHasPercentageMin) return 1;
-    if (!aHasPercentageMin && bHasPercentageMin) return -1;
-    return 0;
-  }
-
-  function expandPanelsToFill(
-    activePanels: ResizablePanelState[],
-    targetSizes: Map<string, number>,
-    extraSpace: number
-  ): void {
-    let remaining = extraSpace;
-    const reversed = [...activePanels].reverse();
-
-    for (const panel of reversed) {
-      remaining = distributeExtraSpaceToPanel(panel, targetSizes, remaining);
-      if (remaining <= 0) break;
-    }
-  }
-
-  function getPanelGrowthCeiling(panel: ResizablePanelState): number {
-    const maxSize = panel.systemMaxSizePixels ?? panel.userMaxSizePixels ?? Infinity;
-    if (panel.manualTargetSize !== undefined) {
-      return Math.min(maxSize, panel.manualTargetSize);
-    }
-    return maxSize;
-  }
-
-  function distributeExtraSpaceToPanel(
-    panel: ResizablePanelState,
-    targetSizes: Map<string, number>,
-    remaining: number
-  ): number {
-    if (remaining <= 0) return remaining;
-    if (panel.locked || panel.resizable === false) return remaining;
-
-    const currentTarget = targetSizes.get(panel.id) ?? 0;
-    const ceiling = getPanelGrowthCeiling(panel);
-    const canGrow = ceiling - currentTarget;
-    if (canGrow <= 0) return remaining;
-
-    const growth = Math.min(canGrow, remaining);
-    targetSizes.set(panel.id, currentTarget + growth);
-    return remaining - growth;
-  }
-
-  // ---- Viewport Handling ----
-
-  function handleViewportResize() {
-    if (!panels.value || panels.value.length === 0) return;
-
-    const previousContainerSize = containerSize.value;
-    updateContainerSize();
-    const newContainerSize = containerSize.value;
-
-    if (Math.abs(newContainerSize - previousContainerSize) < 1) return;
-
-    const activePanels = panels.value.filter(p => !p.collapsed);
-    updateActivePanelConstraints(activePanels, newContainerSize);
-
-    const { fixedPanels, flexiblePanels, newAvailableSpace, flexibleScaleFactor, totalCurrentFlexible } =
-      calculateViewportMetrics(activePanels, previousContainerSize, newContainerSize);
-
-    const targetSizes = calculateTargetSizes(
-      fixedPanels,
-      flexiblePanels,
-      flexibleScaleFactor,
-      newAvailableSpace,
-      totalCurrentFlexible
-    );
-
-    const overflow = calculateOverflow(targetSizes, newContainerSize);
-    redistributeIfNeeded(activePanels, targetSizes, overflow);
-
-    applyFinalSizes(activePanels, targetSizes);
-    updateCollapsedPanelConstraints(newContainerSize);
-
-    processAutoCollapseExpand();
-
-    if (!isInitializing.value) saveToStorage(panels.value);
-  }
-
-  function updateActivePanelConstraints(activePanels: ResizablePanelState[], newContainerSize: number): void {
-    activePanels.forEach(panel => {
-      applyPanelPixelConstraints(panel, panel.pixelSize, newContainerSize, 'system');
-    });
-  }
-
-  function calculateViewportMetrics(
-    activePanels: ResizablePanelState[],
-    previousContainerSize: number,
-    newContainerSize: number
-  ): {
-    fixedPanels: ResizablePanelState[];
-    flexiblePanels: ResizablePanelState[];
-    newAvailableSpace: number;
-    flexibleScaleFactor: number;
-    totalCurrentFlexible: number;
-  } {
-    const fixedPanels = activePanels.filter(p => p.locked || p.resizable === false);
-    const flexiblePanels = activePanels.filter(p => !p.locked && p.resizable !== false);
-    const totalFixedSpace = fixedPanels.reduce((sum, p) => sum + p.pixelSize, 0);
-    const previousAvailableSpace = previousContainerSize - totalFixedSpace;
-    const newAvailableSpace = newContainerSize - totalFixedSpace;
-    const flexibleScaleFactor = previousAvailableSpace > 0 ? newAvailableSpace / previousAvailableSpace : 1;
-    const totalCurrentFlexible = flexiblePanels.reduce((sum, p) => sum + p.pixelSize, 0);
-
-    return {
-      fixedPanels,
-      flexiblePanels,
-      newAvailableSpace,
-      flexibleScaleFactor,
-      totalCurrentFlexible,
-    };
-  }
-
-  function calculateTargetSizes(
-    fixedPanels: ResizablePanelState[],
-    flexiblePanels: ResizablePanelState[],
-    flexibleScaleFactor: number,
-    newAvailableSpace: number,
-    totalCurrentFlexible: number
-  ): Map<string, number> {
-    const targetSizes: Map<string, number> = new Map();
-    fixedPanels.forEach(panel => targetSizes.set(panel.id, panel.pixelSize));
-    flexiblePanels.forEach(panel => {
-      const target = calculateFlexiblePanelTarget(panel, flexibleScaleFactor, newAvailableSpace, totalCurrentFlexible);
-      targetSizes.set(panel.id, target);
-    });
-    return targetSizes;
-  }
-
-  function calculateOverflow(targetSizes: Map<string, number>, newContainerSize: number): number {
-    const totalSize = Array.from(targetSizes.values()).reduce((sum, size) => sum + size, 0);
-    return totalSize - newContainerSize;
-  }
-
-  function redistributeIfNeeded(
-    activePanels: ResizablePanelState[],
-    targetSizes: Map<string, number>,
-    overflow: number
-  ): void {
-    if (overflow > 1) {
-      compressPanelsToFit(activePanels, targetSizes, overflow);
-    } else if (overflow < -1) {
-      expandPanelsToFill(activePanels, targetSizes, Math.abs(overflow));
-    }
-  }
-
-  function applyFinalSizes(activePanels: ResizablePanelState[], targetSizes: Map<string, number>): void {
-    activePanels.forEach(panel => {
-      const finalSize = targetSizes.get(panel.id);
-      if (finalSize !== undefined) panel.pixelSize = finalSize;
-    });
-  }
-
-  function updateCollapsedPanelConstraints(newContainerSize: number): void {
-    panels.value
-      .filter(p => p.collapsed)
-      .forEach(panel => {
-        applyPanelPixelConstraints(panel, panel.pixelSize, newContainerSize, 'system');
-      });
-  }
-
   return {
     resizePanel,
     collapsePanel,
     lockPanel,
     unlockPanel,
     resetPanels,
-    handleViewportResize,
     processCollapseRequest,
     checkAutoCollapse,
     checkAutoExpand,

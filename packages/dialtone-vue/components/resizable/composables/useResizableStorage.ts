@@ -136,7 +136,7 @@ export function useResizableStorage(
   const adapter: ResizableStorageAdapter | null = customAdapter
     ?? (storageKeyOrAdapter ? localStorageAdapter(storageKeyOrAdapter) : null);
 
-  function saveToStorage(panels: ResizablePanelState[]): void {
+  function saveToStorage(panels: ResizableStoragePanelData[] | ResizablePanelState[]): void {
     if (!adapter) return;
 
     const data: ResizableStoragePanelData[] = panels.map(panel => ({

@@ -9,11 +9,9 @@ import {
   ref,
   computed,
   onMounted,
-  onUnmounted,
   type Ref,
   type ComputedRef,
 } from 'vue';
-import { useDOMCache } from '../../../common/composables/useDOMCache';
 
 // ─── Types ────────────────────────────────────────────────────────────────
 
@@ -48,16 +46,12 @@ export function useResizableOffset(
   } = options;
 
   const calculatedOffset = ref(0);
-  const { querySelector } = useDOMCache({
-    maxAge: 2000,
-    observeRoot: () => document.querySelector('.d-resizable') as HTMLElement | null,
-  });
 
   function updateOffset(): void {
     if (!offsetElement) { calculatedOffset.value = 0; return; }
 
     try {
-      const element = querySelector(offsetElement);
+      const element = document.querySelector(offsetElement);
       if (!element) { calculatedOffset.value = 0; return; }
 
       const rect = element.getBoundingClientRect();
@@ -102,7 +96,6 @@ export function useResizableOffset(
   });
 
   onMounted(() => { updateOffset(); });
-  onUnmounted(() => { /* cleanup handled by useDOMCache */ });
 
   return { calculatedOffset, updateOffset, handleStyles, contentStyles };
 }

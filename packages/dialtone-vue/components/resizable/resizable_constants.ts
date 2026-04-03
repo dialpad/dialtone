@@ -312,5 +312,9 @@ export const RESIZABLE_COLLAPSE_PANEL_KEY: InjectionKey<(panelId: string, collap
 export const RESIZABLE_EMIT_PANEL_RESIZE_KEY: InjectionKey<(panelId: string, size: number) => void> =
   Symbol('resizable-emit-panel-resize');
 
+export const RESIZABLE_UPDATE_SAVED_PANEL_KEY: InjectionKey<
+  (panelId: string, updates: Partial<ResizableStoragePanelData>) => void
+> = Symbol('resizable-update-saved-panel');
+
 /** i18n message overrides for keyboard announcements, provided by DtResizable */
 export const RESIZABLE_MESSAGES_KEY: InjectionKey<Record<string, string>> = Symbol('resizable-messages');
