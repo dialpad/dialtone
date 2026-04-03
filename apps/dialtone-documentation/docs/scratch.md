@@ -2,9 +2,26 @@
 layout: Blank
 ---
 
-<!-- Prose component scratch page — all base HTML elements typical in a prose block -->
-<div class="d-p16">
-  <dt-prose>
+<dt-stack gap="200" class="d-p-300">
+  <dt-stack direction="row" gap="200">
+    <dt-stack>
+      <dt-text kind="label" size="100">Size</dt-text>
+      <dt-segmented-control v-model="proseSize" aria-label="Size" size="200">
+        <dt-segmented-control-item value="100">100</dt-segmented-control-item>
+        <dt-segmented-control-item value="200">200</dt-segmented-control-item>
+        <dt-segmented-control-item value="300">300</dt-segmented-control-item>
+      </dt-segmented-control>
+    </dt-stack>
+    <dt-stack>
+      <dt-text kind="label" size="100">Density</dt-text>
+      <dt-segmented-control v-model="proseDensity" aria-label="Density" size="200">
+        <dt-segmented-control-item value="100">100</dt-segmented-control-item>
+        <dt-segmented-control-item value="200">200</dt-segmented-control-item>
+        <dt-segmented-control-item value="300">300</dt-segmented-control-item>
+      </dt-segmented-control>
+    </dt-stack>
+  </dt-stack>
+  <dt-prose :class="proseClasses">
     <!-- Headings -->
     <h1>Heading Level 1 <small>small text</small></h1>
     <p>This is a standard paragraph of body text. It contains enough words to wrap across multiple lines so you can evaluate line height, measure, and paragraph spacing. Good typography makes content easier to read and understand.</p>
@@ -92,18 +109,16 @@ layout: Blank
     <!-- Code blocks -->
     <h2>Code Blocks</h2>
     <pre><code>// A plain code block
-name) {
   return `Hello, ${name}!`;
-}
-const message = greet('world');
-console.log(message);</code></pre>
+  const message = greet('world');
+  console.log(message);</code></pre>
     <p>And here is a paragraph between two code blocks to test spacing.</p>
     <pre><code>&lt;template&gt;
   &lt;div class="container"&gt;
     &lt;h1&gt;{{ title }}&lt;/h1&gt;
     &lt;p&gt;{{ description }}&lt;/p&gt;
   &lt;/div&gt;
-&lt;/template&gt;</code></pre>
+  t;/template&gt;</code></pre>
     <!-- Table with thead -->
     <h2>Tables</h2>
     <table>
@@ -218,7 +233,7 @@ console.log(message);</code></pre>
     </blockquote>
     <p>For more details, see the <a href="#">installation guide</a> or reach out to the team on <a href="#">Slack</a>.</p>
   </dt-prose>
-</div>
+</dt-stack>
 
 <script setup>
 import { ref, computed } from 'vue';
@@ -233,6 +248,15 @@ const {
 } = useThemeManager();
 
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
+const proseSize = ref('300');
+const proseDensity = ref('200');
+const proseClasses = computed(() => {
+  const classes = [];
+  if (proseSize.value !== '300') classes.push(`d-prose--size-${proseSize.value}`);
+  if (proseDensity.value !== '200') classes.push(`d-prose--density-${proseDensity.value}`);
+  return classes;
+});
 
 const borderless = ref(false);
 const outlined = ref(false);
