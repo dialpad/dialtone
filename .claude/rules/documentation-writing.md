@@ -91,29 +91,52 @@ Prefer the info string for `demo-only`/`code-only`. Use the directive form when 
 ```
 ````
 
+### Default: let auto-extraction handle the code tab
+
+The build plugin automatically extracts the demo content as the code snippet. **Most blocks should not need `<!-- @code -->`** — if the demo IS what users should copy, just write the demo and the code tab takes care of itself.
+
+Prefer static, copyable markup over dynamic Vue features (`v-for`, `:class` interpolation) in demos. Users see the code tab and expect to copy it. A `v-for` loop is not useful to copy. Expand loops into static elements instead.
+
 ### When to use `<!-- @code -->` separator
 
-Only use `<!-- @code -->` when the code tab must show something **genuinely different** from the demo:
+Only use `<!-- @code -->` when the code tab must show something **genuinely different** from the demo. Minimize its use — every `@code` block is a second source of truth that can drift.
 
 **Valid reasons:**
 
 - Demo uses a **custom example wrapper** (`<example-tabs>`, `<example-modal>`) — code shows real component markup
 - Demo has **interactive page state** (v-model, toggles, event handlers) — code shows simplified static version
-- Demo uses **v-for with page data** — code shows single static example
+- Demo has `v-for` that **cannot be expanded** (data-driven visualizations with many entries, e.g., sizing stops) — code shows representative static examples
 - Code uses **placeholder syntax** (`{props}`, `....`) for API reference
-- Demo has **demo-only styling on child elements** — code shows clean API
+- Demo has **demo-only styling on child elements** (scaffolding colors, padding) — code shows clean API
 
 **NOT valid reasons (drop the `<!-- @code -->`):**
 
+- Demo content and code content are identical or nearly identical — let auto-extraction handle it
 - Demo is wrapped in a layout wrapper — use `<!-- @wrapper -->` instead
 - Only difference is formatting, whitespace, or self-closing style
+- Demo has a `v-for` that could be expanded to static elements — expand it instead
 
-### Demo-only wrappers (`<!-- @wrapper -->`)
+### `<!-- @wrapper -->` — stripping layout scaffolding
 
-When a demo needs a layout wrapper (e.g., `<dt-stack direction="row">`) purely for visual arrangement but users shouldn't copy it, add `<!-- @wrapper -->`. The build plugin adds `data-demo-wrapper` to the first element, stripping it from the code tab.
+When a demo needs a layout wrapper (e.g., `<dt-stack direction="row">`) purely for visual arrangement but users shouldn't copy it, add `<!-- @wrapper -->`. The build plugin strips the wrapper from the code tab, showing only its children.
 
 - Use when the wrapper is purely for demo layout (direction, gap, alignment)
-- Do NOT use when the wrapper is meaningful structure users should copy (e.g., stack.md's own examples, nested layout patterns)
+- Do NOT use when the wrapper carries the utility class being demonstrated (e.g., `<dt-stack class="d-ai-stretch">` in an align-items demo — the wrapper IS the demo)
+- Do NOT use when the wrapper is meaningful structure users should copy (e.g., stack.md's own examples)
+
+### `<!-- @custom -->` — bypassing default demo styles
+
+Use `<!-- @custom -->` when the default demo wrapper styles (padding, width, background) interfere with the demo. Common in utility pages where the demo needs precise control over its container. Pair with `<!-- @class -->` to set explicit styles.
+
+````md
+```vue demo
+<!-- @custom -->
+<!-- @class d-d-block -->
+<div v-dt-scrollbar:never class="d-bar8 d-bgc-secondary d-hmx-500">
+  ...
+</div>
+```
+````
 
 ### Rules
 
