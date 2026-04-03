@@ -72,6 +72,7 @@ import {
   RESIZABLE_UNREGISTER_PANEL_KEY,
   RESIZABLE_COLLAPSE_PANEL_KEY,
   RESIZABLE_IS_INITIALIZING_KEY,
+  RESIZABLE_SET_PANEL_PEEKING_KEY,
 } from './resizable_constants';
 import { isValidSizing } from './resizable_utils';
 import { useResizablePeek } from './composables/useResizablePeek';
@@ -188,6 +189,7 @@ watch(
 );
 
 const collapsePanel = inject(RESIZABLE_COLLAPSE_PANEL_KEY);
+const setPanelPeeking = inject(RESIZABLE_SET_PANEL_PEEKING_KEY, undefined);
 const isInitializing = inject(
   RESIZABLE_IS_INITIALIZING_KEY,
   computed(() => false),
@@ -261,8 +263,9 @@ const peek = useResizablePeek({
   containerSize: containerSizeRef,
   panelPosition,
   panelOffset,
-  onPeekChange (isPeeking) {
-    if (isPeeking) emit('panel-peek-start', props.id);
+  onPeekChange (peeking) {
+    if (setPanelPeeking) setPanelPeeking(props.id, peeking);
+    if (peeking) emit('panel-peek-start', props.id);
     else emit('panel-peek-end', props.id);
   },
 });

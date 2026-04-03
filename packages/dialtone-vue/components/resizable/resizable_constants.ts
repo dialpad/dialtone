@@ -306,6 +306,9 @@ export const RESIZABLE_SAVE_TO_STORAGE_KEY: InjectionKey<() => void> = Symbol('r
 
 export const RESIZABLE_ANNOUNCE_KEY: InjectionKey<(message: string) => void> = Symbol('resizable-announce');
 
+export const RESIZABLE_SET_PANEL_PEEKING_KEY: InjectionKey<(panelId: string, peeking: boolean) => void> =
+  Symbol('resizable-set-panel-peeking');
+
 export const RESIZABLE_COLLAPSE_PANEL_KEY: InjectionKey<(panelId: string, collapsed: boolean) => void> =
   Symbol('resizable-collapse-panel');
 

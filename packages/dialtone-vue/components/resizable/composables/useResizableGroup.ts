@@ -14,7 +14,7 @@
  * @see computeLayout.ts — the pure layout engine
  */
 
-import { ref, computed, watch, nextTick, type ComputedRef, type Ref } from 'vue';
+import { ref, reactive, computed, watch, nextTick, type ComputedRef, type Ref } from 'vue';
 import type { ResizablePanelConfig, ResizablePanelState, ResizableDirection } from '../resizable_constants';
 import type { LayoutResult } from './computeLayout';
 import type { SavedPanelData } from './useResizableStorage';
@@ -50,12 +50,10 @@ const clampContainerSize = validateContainerSize;
 function extractRuntimeFields(existingState: ResizablePanelState | undefined): {
   locked: boolean;
   manualTargetRatio: number | undefined;
-  isPeeking: boolean | undefined;
 } {
   return {
     locked: existingState?.locked ?? false,
     manualTargetRatio: existingState?.manualTargetRatio,
-    isPeeking: existingState?.isPeeking,
   };
 }
 
@@ -88,7 +86,6 @@ function buildPanelState(
     collapseSizePixels: constraints.collapseSizePixels,
     manualTargetRatio: runtime.manualTargetRatio,
     autoCollapsed: existingState?.autoCollapsed,
-    isPeeking: runtime.isPeeking,
   };
 }
 
@@ -115,12 +112,10 @@ export function useResizableGroup(options: UseResizableGroupOptions) {
   // ── Per-panel mutable state (not owned by computeLayout) ──────────────────
   const panelRuntimeState = new Map<
     string,
-    {
-      locked: boolean;
-      manualTargetRatio?: number;
-      isPeeking?: boolean;
-    }
+    { locked: boolean; manualTargetRatio?: number }
   >();
+  // Peeking is ephemeral UI state — reactive Set so syncedPanels recomputes on change
+  const peekingPanels = reactive(new Set<string>());
 
   // ── Layout computed ─────────────────────────────────────────────────────────
   const layout = computed((): LayoutResult => {
@@ -162,11 +157,12 @@ export function useResizableGroup(options: UseResizableGroupOptions) {
             locked: runtime.locked,
             manualTargetRatio: runtime.manualTargetRatio,
             autoCollapsed: saved?.autoCollapsed,
-            isPeeking: runtime.isPeeking,
           }
         : undefined;
 
-      return buildPanelState(config, size, result, existingState);
+      const state = buildPanelState(config, size, result, existingState);
+      state.isPeeking = peekingPanels.has(config.id);
+      return state;
     });
   });
 
@@ -237,6 +233,7 @@ export function useResizableGroup(options: UseResizableGroupOptions) {
   function unregisterPanel(id: string): void {
     registeredPanels.value = registeredPanels.value.filter(p => p.id !== id);
     panelRuntimeState.delete(id);
+    peekingPanels.delete(id);
   }
 
   // ── Runtime state mutations ──────────────────────────────────────────────────
@@ -253,6 +250,11 @@ export function useResizableGroup(options: UseResizableGroupOptions) {
     if (runtime) {
       runtime.locked = locked;
     }
+  }
+
+  function setPanelPeeking(id: string, peeking: boolean): void {
+    if (peeking) peekingPanels.add(id);
+    else peekingPanels.delete(id);
   }
 
   // ── Storage operations ──────────────────────────────────────────────────────
@@ -340,6 +342,7 @@ export function useResizableGroup(options: UseResizableGroupOptions) {
 
     setManualTargetRatio,
     setPanelLocked,
+    setPanelPeeking,
 
     saveCurrentLayout,
     updateSavedPanel,

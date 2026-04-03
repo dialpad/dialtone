@@ -217,7 +217,6 @@ export function useResizablePeek(
 
   watch(isPeeking, (newValue) => {
     if (onPeekChange) onPeekChange(newValue);
-    if (panel.value) panel.value.isPeeking = newValue;
   });
 
   watch(
