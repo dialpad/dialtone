@@ -17,7 +17,7 @@ import {
   checkAutoCollapseRules,
   sortCollapseRules,
   allocateSpaceOnPanelOpen,
-} from './composables/useResizableCore';
+} from './composables/useResizablePanelControls';
 import { useResizeHandling } from './composables/useResizableCalculations';
 
 // Mock ResizeObserver for test environment

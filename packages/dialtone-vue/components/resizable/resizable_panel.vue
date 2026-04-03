@@ -27,15 +27,7 @@
 
 <script setup>
 import { computed, inject, onMounted, onUnmounted, watch } from 'vue';
-import {
-  RESIZABLE_LAYOUT_KEY,
-  RESIZABLE_PANELS_KEY,
-  RESIZABLE_IS_RESIZING_KEY,
-  RESIZABLE_REGISTER_PANEL_KEY,
-  RESIZABLE_UNREGISTER_PANEL_KEY,
-  RESIZABLE_COLLAPSE_PANEL_KEY,
-  RESIZABLE_IS_INITIALIZING_KEY,
-} from './resizable_constants';
+import { RESIZABLE_CONTEXT_KEY } from './resizable_constants';
 import { isValidSizing } from './resizable_utils';
 
 const props = defineProps({
@@ -74,21 +66,13 @@ watch(
   { immediate: true },
 );
 
-const layoutRef = inject(
-  RESIZABLE_LAYOUT_KEY,
-  computed(() => ({ panels: new Map(), handles: [] })),
-);
-const panels = inject(
-  RESIZABLE_PANELS_KEY,
-  computed(() => []),
-);
-const isResizing = inject(
-  RESIZABLE_IS_RESIZING_KEY,
-  computed(() => false),
-);
+const ctx = inject(RESIZABLE_CONTEXT_KEY, null);
+const layoutRef = ctx?.layout ?? computed(() => ({ panels: new Map(), handles: [] }));
+const panels = ctx?.panels ?? computed(() => []);
+const isResizing = ctx?.isResizing ?? computed(() => false);
 
-const registerPanel = inject(RESIZABLE_REGISTER_PANEL_KEY);
-const unregisterPanel = inject(RESIZABLE_UNREGISTER_PANEL_KEY);
+const registerPanel = ctx?.registerPanel ?? null;
+const unregisterPanel = ctx?.unregisterPanel ?? null;
 
 const panelConfig = computed(() => ({
   id: props.id,
@@ -125,11 +109,8 @@ watch(
   },
 );
 
-const collapsePanel = inject(RESIZABLE_COLLAPSE_PANEL_KEY);
-const isInitializing = inject(
-  RESIZABLE_IS_INITIALIZING_KEY,
-  computed(() => false),
-);
+const collapsePanel = ctx?.collapsePanel ?? null;
+const isInitializing = ctx?.isInitializing ?? computed(() => false);
 
 watch(
   () => props.collapsed,

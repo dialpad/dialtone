@@ -57,7 +57,8 @@ export function useResizableOffset(
       const rect = element.getBoundingClientRect();
       const dim = direction.value === 'row' ? rect.height : rect.width;
       calculatedOffset.value = dim + offsetAmount;
-    } catch {
+    } catch (error) {
+      console.warn('[resizable] Failed to measure offset element:', error);
       calculatedOffset.value = 0;
     }
   }

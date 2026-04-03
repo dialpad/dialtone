@@ -31,29 +31,7 @@ import {
   onUnmounted,
   provide,
 } from 'vue';
-import {
-  RESIZABLE_LAYOUT_KEY,
-  RESIZABLE_PANELS_KEY,
-  RESIZABLE_DIRECTION_KEY,
-  RESIZABLE_CONTAINER_SIZE_KEY,
-  RESIZABLE_CONTAINER_ELEMENT_KEY,
-  RESIZABLE_IS_RESIZING_KEY,
-  RESIZABLE_ACTIVE_HANDLE_KEY,
-  RESIZABLE_ACTIVE_CURSOR_POSITION_KEY,
-  RESIZABLE_IS_INITIALIZING_KEY,
-  RESIZABLE_START_RESIZE_KEY,
-  RESIZABLE_RESET_PANELS_KEY,
-  RESIZABLE_REGISTER_HANDLE_KEY,
-  RESIZABLE_UNREGISTER_HANDLE_KEY,
-  RESIZABLE_REGISTER_PANEL_KEY,
-  RESIZABLE_UNREGISTER_PANEL_KEY,
-  RESIZABLE_SAVE_TO_STORAGE_KEY,
-  RESIZABLE_COLLAPSE_PANEL_KEY,
-  RESIZABLE_EMIT_PANEL_RESIZE_KEY,
-  RESIZABLE_MESSAGES_KEY,
-  RESIZABLE_ANNOUNCE_KEY,
-  RESIZABLE_UPDATE_SAVED_PANEL_KEY,
-} from './resizable_constants';
+import { RESIZABLE_CONTEXT_KEY } from './resizable_constants';
 import {
   useResizablePanelControls,
   useResizableGroup,
@@ -178,11 +156,11 @@ function resetPanels (beforePanelId, afterPanelId, behavior = 'all') {
   originalResetPanels(beforePanelId, afterPanelId, behavior);
 
   if (behavior === 'all') {
-    group.syncedPanels.value.forEach(p => group.setManualTargetRatio(p.id, undefined));
+    group.syncedPanels.value.forEach(p => group.updateSavedPanel(p.id, { manualTargetRatio: undefined }));
     group.clearSavedState();
   } else {
-    if (beforePanelId) group.setManualTargetRatio(beforePanelId, undefined);
-    if (afterPanelId) group.setManualTargetRatio(afterPanelId, undefined);
+    if (beforePanelId) group.updateSavedPanel(beforePanelId, { manualTargetRatio: undefined });
+    if (afterPanelId) group.updateSavedPanel(afterPanelId, { manualTargetRatio: undefined });
   }
 }
 
@@ -231,8 +209,6 @@ const drag = useResizableDrag({
       const beforeRatio = cSize > 0 ? roundedBefore / cSize : undefined;
       const afterRatio = cSize > 0 ? roundedAfter / cSize : undefined;
 
-      group.setManualTargetRatio(beforePanelId, beforeRatio);
-      group.setManualTargetRatio(afterPanelId, afterRatio);
       group.updateSavedPanel(beforePanelId, { pixelSize: roundedBefore, manualTargetRatio: beforeRatio });
       group.updateSavedPanel(afterPanelId, { pixelSize: roundedAfter, manualTargetRatio: afterRatio });
 
@@ -259,31 +235,30 @@ onUnmounted(() => {
   drag.cancelDrag();
 });
 
-// Provide/inject wiring for child components
-const provideMap = [
-  [RESIZABLE_LAYOUT_KEY, group.layout],
-  [RESIZABLE_PANELS_KEY, group.syncedPanels],
-  [RESIZABLE_DIRECTION_KEY, currentDirection],
-  [RESIZABLE_CONTAINER_SIZE_KEY, group.containerSize],
-  [RESIZABLE_CONTAINER_ELEMENT_KEY, computed(() => containerRef.value)],
-  [RESIZABLE_IS_RESIZING_KEY, computed(() => isResizing.value)],
-  [RESIZABLE_ACTIVE_HANDLE_KEY, computed(() => activeHandleId.value)],
-  [RESIZABLE_ACTIVE_CURSOR_POSITION_KEY, computed(() => activeCursorPosition.value ?? 0)],
-  [RESIZABLE_IS_INITIALIZING_KEY, computed(() => isInitializing.value)],
-  [RESIZABLE_START_RESIZE_KEY, (handleId) => startResize(handleId)],
-  [RESIZABLE_RESET_PANELS_KEY, resetPanels],
-  [RESIZABLE_REGISTER_HANDLE_KEY, registerHandle],
-  [RESIZABLE_UNREGISTER_HANDLE_KEY, unregisterHandle],
-  [RESIZABLE_REGISTER_PANEL_KEY, registerPanel],
-  [RESIZABLE_UNREGISTER_PANEL_KEY, unregisterPanel],
-  [RESIZABLE_SAVE_TO_STORAGE_KEY, savePanelsToStorage],
-  [RESIZABLE_ANNOUNCE_KEY, announce],
-  [RESIZABLE_COLLAPSE_PANEL_KEY, collapsePanel],
-  [RESIZABLE_EMIT_PANEL_RESIZE_KEY, emitPanelResize],
-  [RESIZABLE_UPDATE_SAVED_PANEL_KEY, (panelId, updates) => group.updateSavedPanel(panelId, updates)],
-  [RESIZABLE_MESSAGES_KEY, props.messages],
-];
-provideMap.forEach(([key, val]) => provide(key, val));
+// Provide single context object for child components
+provide(RESIZABLE_CONTEXT_KEY, {
+  layout: group.layout,
+  panels: group.syncedPanels,
+  direction: currentDirection,
+  containerSize: group.containerSize,
+  containerElement: computed(() => containerRef.value),
+  isResizing: computed(() => isResizing.value),
+  activeHandleId: computed(() => activeHandleId.value),
+  activeCursorPosition: computed(() => activeCursorPosition.value ?? 0),
+  isInitializing: computed(() => isInitializing.value),
+  messages: props.messages,
+  startResize: (handleId) => startResize(handleId),
+  resetPanels,
+  registerHandle,
+  unregisterHandle,
+  registerPanel,
+  unregisterPanel,
+  saveToStorage: savePanelsToStorage,
+  announce,
+  collapsePanel,
+  emitPanelResize,
+  updateSavedPanel: (panelId, updates) => group.updateSavedPanel(panelId, updates),
+});
 
 // Expose methods for programmatic control
 defineExpose({

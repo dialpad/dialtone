@@ -207,72 +207,38 @@ export interface ResizableStoragePanelData {
   manualTargetRatio?: number;
 }
 
-// ─── Injection Keys ─────────────────────────────────────────────────────────
-// Typed InjectionKey constants for the resizable panel system.
-// All provide/inject between ResizableGroup, ResizablePanel, and ResizableHandle
-// must use these keys instead of string literals.
+// ─── Injection Context ──────────────────────────────────────────────────────
+// Single context object for provide/inject between ResizableGroup, Panel, Handle.
 
-// ─── Reactive State ─────────────────────────────────────────────────────────
+export interface ResizableContext {
+  // Reactive state
+  layout: ComputedRef<LayoutResult>;
+  panels: ComputedRef<ResizablePanelState[]>;
+  direction: ComputedRef<ResizableDirection>;
+  containerSize: ComputedRef<number>;
+  containerElement: ComputedRef<HTMLElement | null>;
+  isResizing: ComputedRef<boolean>;
+  activeHandleId: ComputedRef<string | undefined>;
+  activeCursorPosition: ComputedRef<number>;
+  isInitializing: ComputedRef<boolean>;
+  messages: Record<string, string>;
 
-/**
- * The full computed layout result from computeLayout().
- * Provided by ResizableGroup, consumed by ResizablePanel (Phase 2+) and
- * ResizableHandle (Phase 3+) to read their positions directly.
- */
-export const RESIZABLE_LAYOUT_KEY: InjectionKey<ComputedRef<LayoutResult>> = Symbol('resizable-layout');
+  // Operations
+  startResize: (handleId: string) => void;
+  resetPanels: (
+    beforePanelId?: string,
+    afterPanelId?: string,
+    behavior?: 'both' | 'before' | 'after' | 'all',
+  ) => void;
+  registerHandle: (instance: ComponentInternalInstance | null) => number;
+  unregisterHandle: (instance: ComponentInternalInstance | null) => void;
+  registerPanel: (config: ResizablePanelConfig) => void;
+  unregisterPanel: (id: string) => void;
+  saveToStorage: () => void;
+  announce: (message: string) => void;
+  collapsePanel: (panelId: string, collapsed: boolean) => void;
+  emitPanelResize: (panelId: string, size: number) => void;
+  updateSavedPanel: (panelId: string, updates: Partial<ResizableStoragePanelData>) => void;
+}
 
-export const RESIZABLE_PANELS_KEY: InjectionKey<ComputedRef<ResizablePanelState[]>> = Symbol('resizable-panels');
-
-export const RESIZABLE_DIRECTION_KEY: InjectionKey<ComputedRef<ResizableDirection>> = Symbol('resizable-direction');
-
-export const RESIZABLE_CONTAINER_SIZE_KEY: InjectionKey<ComputedRef<number>> = Symbol('resizable-container-size');
-
-export const RESIZABLE_CONTAINER_ELEMENT_KEY: InjectionKey<ComputedRef<HTMLElement | null>> =
-  Symbol('resizable-container-element');
-
-export const RESIZABLE_IS_RESIZING_KEY: InjectionKey<ComputedRef<boolean>> = Symbol('resizable-is-resizing');
-
-export const RESIZABLE_ACTIVE_HANDLE_KEY: InjectionKey<ComputedRef<string | undefined>> =
-  Symbol('resizable-active-handle');
-
-export const RESIZABLE_ACTIVE_CURSOR_POSITION_KEY: InjectionKey<ComputedRef<number>> = Symbol(
-  'resizable-active-cursor-position'
-);
-
-export const RESIZABLE_IS_INITIALIZING_KEY: InjectionKey<ComputedRef<boolean>> = Symbol('resizable-is-initializing');
-
-// ─── Operations ─────────────────────────────────────────────────────────────
-
-export const RESIZABLE_START_RESIZE_KEY: InjectionKey<(handleId: string) => void> = Symbol('resizable-start-resize');
-
-export const RESIZABLE_RESET_PANELS_KEY: InjectionKey<
-  (beforePanelId?: string, afterPanelId?: string, behavior?: 'both' | 'before' | 'after' | 'all') => void
-> = Symbol('resizable-reset-panels');
-
-export const RESIZABLE_REGISTER_HANDLE_KEY: InjectionKey<(instance: ComponentInternalInstance | null) => number> =
-  Symbol('resizable-register-handle');
-
-export const RESIZABLE_UNREGISTER_HANDLE_KEY: InjectionKey<(instance: ComponentInternalInstance | null) => void> =
-  Symbol('resizable-unregister-handle');
-
-export const RESIZABLE_REGISTER_PANEL_KEY: InjectionKey<(config: ResizablePanelConfig) => void> =
-  Symbol('resizable-register-panel');
-
-export const RESIZABLE_UNREGISTER_PANEL_KEY: InjectionKey<(id: string) => void> = Symbol('resizable-unregister-panel');
-
-export const RESIZABLE_SAVE_TO_STORAGE_KEY: InjectionKey<() => void> = Symbol('resizable-save-to-storage');
-
-export const RESIZABLE_ANNOUNCE_KEY: InjectionKey<(message: string) => void> = Symbol('resizable-announce');
-
-export const RESIZABLE_COLLAPSE_PANEL_KEY: InjectionKey<(panelId: string, collapsed: boolean) => void> =
-  Symbol('resizable-collapse-panel');
-
-export const RESIZABLE_EMIT_PANEL_RESIZE_KEY: InjectionKey<(panelId: string, size: number) => void> =
-  Symbol('resizable-emit-panel-resize');
-
-export const RESIZABLE_UPDATE_SAVED_PANEL_KEY: InjectionKey<
-  (panelId: string, updates: Partial<ResizableStoragePanelData>) => void
-> = Symbol('resizable-update-saved-panel');
-
-/** i18n message overrides for keyboard announcements, provided by DtResizable */
-export const RESIZABLE_MESSAGES_KEY: InjectionKey<Record<string, string>> = Symbol('resizable-messages');
+export const RESIZABLE_CONTEXT_KEY: InjectionKey<ResizableContext> = Symbol('resizable-context');

@@ -1,7 +1,12 @@
 // Resizable Composables - Three-Layer Architecture
 
-// Controller Layer (panel operations)
-export { useResizablePanelControls } from './useResizablePanelControls';
+// Controller Layer (panel operations + collapse rule utilities)
+export {
+  useResizablePanelControls,
+  sortCollapseRules,
+  allocateSpaceOnPanelOpen,
+  checkAutoCollapseRules,
+} from './useResizablePanelControls';
 export type {
   ResizablePanelControlsOptions,
   CollapseOptions,
@@ -10,13 +15,6 @@ export type {
   CollapseRequest,
   CollapseRequestResult,
 } from './useResizablePanelControls';
-
-// Core utilities (collapse rules, space allocation)
-export {
-  sortCollapseRules,
-  allocateSpaceOnPanelOpen,
-  checkAutoCollapseRules,
-} from './useResizableCore';
 
 // Reactive layout controller
 export { useResizableGroup, type UseResizableGroupOptions } from './useResizableGroup';

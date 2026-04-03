@@ -36,22 +36,7 @@
 
 <script setup>
 import { computed, inject, onMounted, onUnmounted, ref, getCurrentInstance, watch } from 'vue';
-import {
-  RESIZABLE_LAYOUT_KEY,
-  RESIZABLE_PANELS_KEY,
-  RESIZABLE_DIRECTION_KEY,
-  RESIZABLE_CONTAINER_SIZE_KEY,
-  RESIZABLE_ACTIVE_HANDLE_KEY,
-  RESIZABLE_START_RESIZE_KEY,
-  RESIZABLE_RESET_PANELS_KEY,
-  RESIZABLE_REGISTER_HANDLE_KEY,
-  RESIZABLE_UNREGISTER_HANDLE_KEY,
-  RESIZABLE_SAVE_TO_STORAGE_KEY,
-  RESIZABLE_COLLAPSE_PANEL_KEY,
-  RESIZABLE_ANNOUNCE_KEY,
-  RESIZABLE_MESSAGES_KEY,
-  RESIZABLE_UPDATE_SAVED_PANEL_KEY,
-} from './resizable_constants';
+import { RESIZABLE_CONTEXT_KEY } from './resizable_constants';
 import { pixelsToPercentage } from './resizable_utils';
 import { useResizableKeyboard } from './composables/useResizableKeyboard';
 import { useResizableOffset } from './composables/useResizableOffset';
@@ -85,37 +70,23 @@ const props = defineProps({
   ariaLabel: { type: String, default: null },
 });
 
-// ── Injected state from DtResizable ──────────────────────────────────────
+// ── Injected context from DtResizable ────────────────────────────────────
 
-const layoutRef = inject(
-  RESIZABLE_LAYOUT_KEY,
-  computed(() => ({ panels: new Map(), handles: [] })),
-);
-const panels = inject(
-  RESIZABLE_PANELS_KEY,
-  computed(() => []),
-);
-const directionRef = inject(
-  RESIZABLE_DIRECTION_KEY,
-  computed(() => 'row'),
-);
-const containerSizeRef = inject(
-  RESIZABLE_CONTAINER_SIZE_KEY,
-  computed(() => 1000),
-);
-const activeHandleId = inject(
-  RESIZABLE_ACTIVE_HANDLE_KEY,
-  computed(() => undefined),
-);
-const startResize = inject(RESIZABLE_START_RESIZE_KEY, () => {});
-const resetPanels = inject(RESIZABLE_RESET_PANELS_KEY, () => {});
-const registerHandle = inject(RESIZABLE_REGISTER_HANDLE_KEY, () => 0);
-const unregisterHandle = inject(RESIZABLE_UNREGISTER_HANDLE_KEY, () => {});
-const saveToStorage = inject(RESIZABLE_SAVE_TO_STORAGE_KEY, null);
-const collapsePanel = inject(RESIZABLE_COLLAPSE_PANEL_KEY, null);
-const updateSavedPanel = inject(RESIZABLE_UPDATE_SAVED_PANEL_KEY, null);
-const announce = inject(RESIZABLE_ANNOUNCE_KEY, null);
-const injectedMessages = inject(RESIZABLE_MESSAGES_KEY, {});
+const ctx = inject(RESIZABLE_CONTEXT_KEY, null);
+const layoutRef = ctx?.layout ?? computed(() => ({ panels: new Map(), handles: [] }));
+const panels = ctx?.panels ?? computed(() => []);
+const directionRef = ctx?.direction ?? computed(() => 'row');
+const containerSizeRef = ctx?.containerSize ?? computed(() => 1000);
+const activeHandleId = ctx?.activeHandleId ?? computed(() => undefined);
+const startResize = ctx?.startResize ?? (() => {});
+const resetPanels = ctx?.resetPanels ?? (() => {});
+const registerHandle = ctx?.registerHandle ?? (() => 0);
+const unregisterHandle = ctx?.unregisterHandle ?? (() => {});
+const saveToStorage = ctx?.saveToStorage ?? null;
+const collapsePanel = ctx?.collapsePanel ?? null;
+const updateSavedPanel = ctx?.updateSavedPanel ?? null;
+const announce = ctx?.announce ?? null;
+const injectedMessages = ctx?.messages ?? {};
 
 // ── Handle registration ──────────────────────────────────────────────────────
 

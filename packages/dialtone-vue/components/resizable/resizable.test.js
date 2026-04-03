@@ -11,13 +11,7 @@ import { defineComponent, inject, computed, h } from 'vue';
 import DtResizable from './resizable.vue';
 import DtResizablePanel from './resizable_panel.vue';
 import DtResizableHandle from './resizable_handle.vue';
-import {
-  RESIZABLE_DIRECTION_KEY,
-  RESIZABLE_PANELS_KEY,
-  RESIZABLE_IS_RESIZING_KEY,
-  RESIZABLE_START_RESIZE_KEY,
-  RESIZABLE_LAYOUT_KEY,
-} from './resizable_constants';
+import { RESIZABLE_CONTEXT_KEY } from './resizable_constants';
 
 // Mock ResizeObserver for test environment
 global.ResizeObserver = vi.fn().mockImplementation(() => ({
@@ -30,11 +24,12 @@ global.ResizeObserver = vi.fn().mockImplementation(() => ({
 const InjectionReader = defineComponent({
   name: 'InjectionReader',
   setup () {
-    const direction = inject(RESIZABLE_DIRECTION_KEY, computed(() => 'none'));
-    const panels = inject(RESIZABLE_PANELS_KEY, computed(() => []));
-    const isResizing = inject(RESIZABLE_IS_RESIZING_KEY, computed(() => false));
-    const startResize = inject(RESIZABLE_START_RESIZE_KEY, () => {});
-    const layout = inject(RESIZABLE_LAYOUT_KEY, computed(() => ({ panels: new Map(), handles: [] })));
+    const ctx = inject(RESIZABLE_CONTEXT_KEY, null);
+    const direction = ctx?.direction ?? computed(() => 'none');
+    const panels = ctx?.panels ?? computed(() => []);
+    const isResizing = ctx?.isResizing ?? computed(() => false);
+    const startResize = ctx?.startResize ?? (() => {});
+    const layout = ctx?.layout ?? computed(() => ({ panels: new Map(), handles: [] }));
 
     return { direction, panels, isResizing, startResize, layout };
   },

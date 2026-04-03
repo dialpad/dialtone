@@ -43,28 +43,14 @@ export interface UseResizableGroupOptions {
 const clampContainerSize = validateContainerSize;
 
 /**
- * Extract mutable runtime fields from existing panel state.
- * These are preserved across layout recomputes so drag/collapse don't lose
- * in-flight values.
- */
-function extractRuntimeFields(existingState: ResizablePanelState | undefined): {
-  locked: boolean;
-  manualTargetRatio: number | undefined;
-} {
-  return {
-    locked: existingState?.locked ?? false,
-    manualTargetRatio: existingState?.manualTargetRatio,
-  };
-}
-
-/**
  * Build a `ResizablePanelState` from a panel config + the layout result.
+ * Reads `locked`, `manualTargetRatio`, and `autoCollapsed` from savedState.
  */
 function buildPanelState(
   config: ResizablePanelConfig,
   containerSize: number,
   layoutResult: LayoutResult,
-  existingState: ResizablePanelState | undefined
+  saved: SavedPanelData | undefined
 ): ResizablePanelState {
   const position = layoutResult.panels.get(config.id);
   const constraints = position?.constraints ?? calculateConstraintHierarchy(config, containerSize);
@@ -72,20 +58,18 @@ function buildPanelState(
   const pixelSize = position?.width ?? 0;
   const collapsed = position?.collapsed ?? Boolean(config.collapsed);
 
-  const runtime = extractRuntimeFields(existingState);
-
   return {
     ...config,
     pixelSize,
     collapsed,
-    locked: runtime.locked,
+    locked: saved?.locked ?? false,
     userMinSizePixels: constraints.userMinSizePixels,
     userMaxSizePixels: constraints.userMaxSizePixels,
     systemMinSizePixels: constraints.systemMinSizePixels,
     systemMaxSizePixels: constraints.systemMaxSizePixels,
     collapseSizePixels: constraints.collapseSizePixels,
-    manualTargetRatio: runtime.manualTargetRatio,
-    autoCollapsed: existingState?.autoCollapsed,
+    manualTargetRatio: saved?.manualTargetRatio,
+    autoCollapsed: saved?.autoCollapsed,
   };
 }
 
@@ -109,12 +93,6 @@ export function useResizableGroup(options: UseResizableGroupOptions) {
   // ── isInitializing ─────────────────────────────────────────────────────────
   const isInitializing = ref(true);
 
-  // ── Per-panel mutable state (not owned by computeLayout) ──────────────────
-  const panelRuntimeState = new Map<
-    string,
-    { locked: boolean; manualTargetRatio?: number }
-  >();
-
   // ── Layout computed ─────────────────────────────────────────────────────────
   const layout = computed((): LayoutResult => {
     const panels = registeredPanels.value;
@@ -124,17 +102,10 @@ export function useResizableGroup(options: UseResizableGroupOptions) {
       return { panels: new Map(), handles: [] };
     }
 
-    const augmentedSavedState: SavedPanelData[] | undefined = savedState.value
-      ? savedState.value.map(s => ({
-          ...s,
-          manualTargetRatio: panelRuntimeState.get(s.id)?.manualTargetRatio,
-        }))
-      : undefined;
-
     return computeLayout({
       panels,
       containerSize: size,
-      savedState: augmentedSavedState,
+      savedState: savedState.value ?? undefined,
     });
   });
 
@@ -144,22 +115,8 @@ export function useResizableGroup(options: UseResizableGroupOptions) {
     const size = containerSize.value;
 
     return registeredPanels.value.map(config => {
-      const position = result.panels.get(config.id);
-      const runtime = panelRuntimeState.get(config.id);
       const saved = savedState.value?.find(s => s.id === config.id);
-      const existingState: ResizablePanelState | undefined = runtime
-        ? {
-            ...config,
-            pixelSize: position?.width ?? 0,
-            collapsed: position?.collapsed ?? false,
-            locked: runtime.locked,
-            manualTargetRatio: runtime.manualTargetRatio,
-            autoCollapsed: saved?.autoCollapsed,
-          }
-        : undefined;
-
-      const state = buildPanelState(config, size, result, existingState);
-      return state;
+      return buildPanelState(config, size, result, saved);
     });
   });
 
@@ -190,9 +147,6 @@ export function useResizableGroup(options: UseResizableGroupOptions) {
       registeredPanels.value = registeredPanels.value.map((p, i) => (i === index ? config : p));
     } else {
       registeredPanels.value = [...registeredPanels.value, config];
-      if (!panelRuntimeState.has(config.id)) {
-        panelRuntimeState.set(config.id, { locked: false });
-      }
 
       if (!sortScheduled) {
         sortScheduled = true;
@@ -229,41 +183,20 @@ export function useResizableGroup(options: UseResizableGroupOptions) {
 
   function unregisterPanel(id: string): void {
     registeredPanels.value = registeredPanels.value.filter(p => p.id !== id);
-    panelRuntimeState.delete(id);
   }
-
-  // ── Runtime state mutations ──────────────────────────────────────────────────
-
-  function setManualTargetRatio(id: string, ratio: number | undefined): void {
-    const runtime = panelRuntimeState.get(id);
-    if (runtime) {
-      runtime.manualTargetRatio = ratio;
-    }
-  }
-
-  function setPanelLocked(id: string, locked: boolean): void {
-    const runtime = panelRuntimeState.get(id);
-    if (runtime) {
-      runtime.locked = locked;
-    }
-  }
-
 
   // ── Storage operations ──────────────────────────────────────────────────────
 
   function saveCurrentLayout(panels: ResizablePanelState[]): void {
     storage.saveToStorage(panels);
-    savedState.value = panels.map(p => {
-      const runtime = panelRuntimeState.get(p.id);
-      return {
-        id: p.id,
-        pixelSize: p.pixelSize,
-        locked: p.locked,
-        collapsed: p.collapsed,
-        autoCollapsed: p.autoCollapsed,
-        manualTargetRatio: runtime?.manualTargetRatio,
-      };
-    });
+    savedState.value = panels.map(p => ({
+      id: p.id,
+      pixelSize: p.pixelSize,
+      locked: p.locked,
+      collapsed: p.collapsed,
+      autoCollapsed: p.autoCollapsed,
+      manualTargetRatio: p.manualTargetRatio,
+    }));
   }
 
   function updateSavedPanel(panelId: string, updates: Partial<SavedPanelData>): void {
@@ -275,12 +208,6 @@ export function useResizableGroup(options: UseResizableGroupOptions) {
       savedState.value.push({ id: panelId, pixelSize: 0, ...updates });
     }
     savedState.value = [...savedState.value]; // trigger reactivity
-
-    // Sync manualTargetRatio to runtime state when explicitly included in updates
-    if ('manualTargetRatio' in updates) {
-      const runtime = panelRuntimeState.get(panelId);
-      if (runtime) runtime.manualTargetRatio = updates.manualTargetRatio;
-    }
 
     // Persist to external storage
     storage.saveToStorage(savedState.value);
@@ -331,9 +258,6 @@ export function useResizableGroup(options: UseResizableGroupOptions) {
 
     registerPanel,
     unregisterPanel,
-
-    setManualTargetRatio,
-    setPanelLocked,
 
     saveCurrentLayout,
     updateSavedPanel,
