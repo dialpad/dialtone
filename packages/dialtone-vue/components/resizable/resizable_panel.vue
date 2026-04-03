@@ -11,7 +11,6 @@
     ]"
     :style="panelStyles"
     :data-panel-id="props.id"
-    :data-locked="panel ? (panel.locked || panel.resizable === false).toString() : 'false'"
     data-qa="d-resizable-panel"
   >
     <div class="d-resizable-panel__content">

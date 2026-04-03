@@ -109,8 +109,8 @@ describe('V3 — localStorageAdapter', () => {
     it('should preserve all optional fields', () => {
       const adapter = localStorageAdapter('test-key');
       const data = [
-        { id: 'sidebar', pixelSize: 250, locked: true, collapsed: false, autoCollapsed: false },
-        { id: 'content', pixelSize: 750, locked: false, collapsed: false, autoCollapsed: false },
+        { id: 'sidebar', pixelSize: 250, collapsed: false, autoCollapsed: false },
+        { id: 'content', pixelSize: 750, collapsed: false, autoCollapsed: false },
       ];
       adapter.save(data);
       expect(adapter.load()).toEqual(data);
@@ -131,7 +131,7 @@ describe('V3 — useResizableStorage composable', () => {
 
     it('should not throw on save', () => {
       const storage = useResizableStorage(null);
-      expect(() => storage.saveToStorage([{ id: 'a', pixelSize: 300, locked: false, collapsed: false }])).not.toThrow();
+      expect(() => storage.saveToStorage([{ id: 'a', pixelSize: 300, collapsed: false }])).not.toThrow();
     });
   });
 
@@ -139,8 +139,8 @@ describe('V3 — useResizableStorage composable', () => {
     it('should save and load via localStorage', () => {
       const storage = useResizableStorage('my-layout');
       const panels = [
-        { id: 'sidebar', pixelSize: 250, locked: false, collapsed: false },
-        { id: 'content', pixelSize: 750, locked: false, collapsed: false },
+        { id: 'sidebar', pixelSize: 250, collapsed: false },
+        { id: 'content', pixelSize: 750, collapsed: false },
       ];
       storage.saveToStorage(panels);
       const loaded = storage.loadFromStorage();
@@ -154,7 +154,7 @@ describe('V3 — useResizableStorage composable', () => {
     it('should use the custom adapter for save', () => {
       const mockAdapter = { save: vi.fn(), load: vi.fn().mockReturnValue(null), clear: vi.fn() };
       const storage = useResizableStorage(null, mockAdapter);
-      storage.saveToStorage([{ id: 'a', pixelSize: 300, locked: false, collapsed: false }]);
+      storage.saveToStorage([{ id: 'a', pixelSize: 300, collapsed: false }]);
       expect(mockAdapter.save).toHaveBeenCalledOnce();
     });
 

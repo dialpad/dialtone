@@ -140,8 +140,6 @@ const {
   collapsePanel,
   resetPanels: originalResetPanels,
   processAutoCollapseExpand,
-  lockPanel,
-  unlockPanel,
 } = useResizablePanelControls({
   panels: group.syncedPanels,
   containerSize: group.containerSize,
@@ -263,8 +261,6 @@ defineExpose({
   resizePanel,
   collapsePanel,
   resetPanels,
-  lockPanel,
-  unlockPanel,
   state: computed(() => ({
     direction: currentDirection.value,
     panels: group.syncedPanels.value,

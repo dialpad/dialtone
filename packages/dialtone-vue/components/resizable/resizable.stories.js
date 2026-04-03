@@ -289,7 +289,7 @@ export const Programmatic = {
   parameters: {
     docs: {
       description: {
-        story: 'Programmatic control via component ref. Demonstrates resizePanel, collapsePanel, lockPanel, unlockPanel, and resetPanels.',
+        story: 'Programmatic control via component ref. Demonstrates resizePanel, collapsePanel, and resetPanels.',
       },
       source: {
         code: `
@@ -303,7 +303,6 @@ export const Programmatic = {
 
 // Programmatic control via ref:
 this.$refs.group.collapsePanel('sidebar', true);
-this.$refs.group.lockPanel('content');
 this.$refs.group.resetPanels();`,
       },
     },

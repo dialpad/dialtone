@@ -44,7 +44,7 @@ const clampContainerSize = validateContainerSize;
 
 /**
  * Build a `ResizablePanelState` from a panel config + the layout result.
- * Reads `locked`, `manualTargetRatio`, and `autoCollapsed` from savedState.
+ * Reads `manualTargetRatio` and `autoCollapsed` from savedState.
  */
 function buildPanelState(
   config: ResizablePanelConfig,
@@ -62,7 +62,6 @@ function buildPanelState(
     ...config,
     pixelSize,
     collapsed,
-    locked: saved?.locked ?? false,
     userMinSizePixels: constraints.userMinSizePixels,
     userMaxSizePixels: constraints.userMaxSizePixels,
     systemMinSizePixels: constraints.systemMinSizePixels,
@@ -199,7 +198,6 @@ export function useResizableGroup(options: UseResizableGroupOptions) {
     savedState.value = panels.map(p => ({
       id: p.id,
       pixelSize: p.pixelSize,
-      locked: p.locked,
       collapsed: p.collapsed,
       autoCollapsed: p.autoCollapsed,
       manualTargetRatio: p.manualTargetRatio,

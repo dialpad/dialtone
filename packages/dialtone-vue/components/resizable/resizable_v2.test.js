@@ -32,7 +32,6 @@ function makePanelState (overrides = {}) {
   return {
     id: 'test',
     pixelSize: 500,
-    locked: false,
     collapsed: false,
     resizable: true,
     collapsible: false,
@@ -218,15 +217,6 @@ describe('V2 — Auto-collapse', () => {
       expect(result).toHaveLength(0);
     });
 
-    it('should skip locked panels', () => {
-      const panels = [
-        makePanelState({ id: 'sidebar', pixelSize: 100, locked: true, userMinSizePixels: 200 }),
-      ];
-      const rules = [{ panelId: 'sidebar', priority: 1 }];
-      const result = checkAutoCollapseRules(panels, rules, 1000);
-      expect(result).toHaveLength(0);
-    });
-
     it('should use custom minSizeBeforeCollapse from rule', () => {
       // Panel at 250px, rule threshold is 30p=300px on 1000px container -> should collapse
       const panels = [
@@ -336,14 +326,6 @@ describe('V2 — Programmatic control via exposed methods', () => {
 
     it('should expose resetPanels method', () => {
       expect(typeof wrapper.vm.resetPanels).toBe('function');
-    });
-
-    it('should expose lockPanel method', () => {
-      expect(typeof wrapper.vm.lockPanel).toBe('function');
-    });
-
-    it('should expose unlockPanel method', () => {
-      expect(typeof wrapper.vm.unlockPanel).toBe('function');
     });
 
     it('should expose readonly state', () => {

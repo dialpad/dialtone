@@ -1,7 +1,7 @@
 /**
  * Panel Controls Controller
  *
- * Operations for manipulating panel state: resize, collapse, lock, reset.
+ * Operations for manipulating panel state: resize, collapse, reset.
  * Receives resizeHandler from Integration layer (single instance pattern).
  */
 
@@ -14,7 +14,7 @@ import type {
   SpaceAllocationStrategy,
 } from '../resizable_constants';
 import { parseSizeToPixels } from '../resizable_utils';
-import { applyPanelPixelConstraints, findPanelToForceUnlock, canResetPanelPair } from './useResizablePanelState';
+import { applyPanelPixelConstraints, canResetPanelPair } from './useResizablePanelState';
 
 // ============================================================================
 // TYPES
@@ -148,10 +148,10 @@ export function useResizablePanelControls(options: ResizablePanelControlsOptions
 
     updateSavedPanel(panel.id, { collapsed: true, autoCollapsed: source === 'system' });
 
-    // Clear locks and manual ratios so remaining panels fill the freed space
+    // Clear manual ratios so remaining panels fill the freed space
     panels.value.forEach(p => {
       if (p.id !== panel.id && !p.collapsed) {
-        updateSavedPanel(p.id, { locked: false, manualTargetRatio: undefined });
+        updateSavedPanel(p.id, { manualTargetRatio: undefined });
       }
     });
   }
@@ -223,22 +223,6 @@ export function useResizablePanelControls(options: ResizablePanelControlsOptions
     });
   }
 
-  function lockPanel(panelId: string) {
-    const panel = panels.value.find(p => p.id === panelId);
-    if (!panel || panel.collapsed || panel.resizable === false) return;
-
-    updateSavedPanel(panelId, { locked: true });
-    const forceUnlock = findPanelToForceUnlock(panels.value);
-    if (forceUnlock) updateSavedPanel(forceUnlock, { locked: false });
-  }
-
-  function unlockPanel(panelId: string) {
-    const panel = panels.value.find(p => p.id === panelId);
-    if (!panel || panel.collapsed || panel.resizable === false) return;
-
-    updateSavedPanel(panelId, { locked: false });
-  }
-
   // ---- Panel Reset Operations ----
 
   function resetAdjacentPanels(beforePanel: ResizablePanelState, afterPanel: ResizablePanelState) {
@@ -253,10 +237,10 @@ export function useResizablePanelControls(options: ResizablePanelControlsOptions
     const afterSize = combinedSpace - beforeSize;
 
     updateSavedPanel(beforePanel.id, {
-      pixelSize: beforeSize, locked: false, manualTargetRatio: undefined,
+      pixelSize: beforeSize, manualTargetRatio: undefined,
     });
     updateSavedPanel(afterPanel.id, {
-      pixelSize: afterSize, locked: false, manualTargetRatio: undefined,
+      pixelSize: afterSize, manualTargetRatio: undefined,
     });
 
     onPanelResize(beforePanel.id, beforeSize);
@@ -293,7 +277,7 @@ export function useResizablePanelControls(options: ResizablePanelControlsOptions
 
     const panelIndex = panels.value.indexOf(panel);
     const adjacentPanel = panels.value.find((p, i) =>
-      i !== panelIndex && !p.collapsed && p.resizable !== false && !p.locked
+      i !== panelIndex && !p.collapsed && p.resizable !== false
     );
 
     if (!adjacentPanel) return;
@@ -301,7 +285,7 @@ export function useResizablePanelControls(options: ResizablePanelControlsOptions
     const newAdjacentSize = adjacentPanel.pixelSize - delta;
 
     updateSavedPanel(panel.id, {
-      pixelSize: initialSize, locked: false, manualTargetRatio: undefined,
+      pixelSize: initialSize, manualTargetRatio: undefined,
     });
     updateSavedPanel(adjacentPanel.id, { pixelSize: newAdjacentSize });
 
@@ -324,9 +308,6 @@ export function useResizablePanelControls(options: ResizablePanelControlsOptions
       } else {
         resetSpecificPanelPair(beforePanelId, afterPanelId);
       }
-
-      const forceUnlock = findPanelToForceUnlock(panels.value);
-      if (forceUnlock) updateSavedPanel(forceUnlock, { locked: false });
     } catch (error) {
       console.error('[resizable] Error in resetPanels:', error);
     }
@@ -394,8 +375,6 @@ export function useResizablePanelControls(options: ResizablePanelControlsOptions
   return {
     resizePanel,
     collapsePanel,
-    lockPanel,
-    unlockPanel,
     resetPanels,
     processCollapseRequest,
     checkAutoCollapse,
@@ -460,7 +439,7 @@ function applyProportionalAllocation(
 
 function includeUnchangedPanels(allPanels: ResizablePanelState[], newSizes: Map<string, number>): void {
   allPanels
-    .filter(p => p.collapsed || p.locked)
+    .filter(p => p.collapsed)
     .forEach(p => {
       newSizes.set(p.id, p.pixelSize);
     });
@@ -471,7 +450,7 @@ function includeUnchangedPanels(allPanels: ResizablePanelState[], newSizes: Map<
  * Returns a Map of panelId -> new pixel size for each panel.
  *
  * Strategies:
- * - 'proportional': Takes space proportionally from all unlocked, non-collapsed panels
+ * - 'proportional': Takes space proportionally from all non-collapsed panels
  * - 'preserve-manual': Only takes from non-manually-resized panels; manual panels keep exact size
  */
 export function allocateSpaceOnPanelOpen(
@@ -480,7 +459,7 @@ export function allocateSpaceOnPanelOpen(
   strategy: SpaceAllocationStrategy = 'proportional'
 ): Map<string, number> {
   const newSizes = new Map<string, number>();
-  const availablePanels = allPanels.filter(p => !p.collapsed && !p.locked);
+  const availablePanels = allPanels.filter(p => !p.collapsed);
 
   if (availablePanels.length === 0 || newPanelSize <= 0) {
     allPanels.forEach(p => newSizes.set(p.id, p.pixelSize));
@@ -538,7 +517,7 @@ function shouldPanelCollapse(
 ): string | undefined {
   const panel = panels.find(p => p.id === rule.panelId);
 
-  if (!panel || panel.collapsed || panel.locked) {
+  if (!panel || panel.collapsed) {
     return undefined;
   }
 

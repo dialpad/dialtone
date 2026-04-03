@@ -67,8 +67,6 @@ export interface ResizablePanelState extends ResizablePanelConfig {
   // ─── Core State ───
   /** Current size in pixels (primary storage) */
   pixelSize: number;
-  /** Whether this panel is locked at a fixed pixel size */
-  locked: boolean;
 
   // ─── User Drag Constraints (Computed Pixels) ───
   /** Computed pixel value for userMinSize (absolute floor for user dragging) */
@@ -165,7 +163,7 @@ export interface CollapseRule {
 
 /**
  * Strategy for redistributing space when panels open/close.
- * - 'proportional': Take/give space proportionally from all unlocked panels
+ * - 'proportional': Take/give space proportionally from all non-collapsed panels
  * - 'preserve-manual': Only take from non-manually-resized panels
  */
 export type SpaceAllocationStrategy = 'proportional' | 'preserve-manual';
@@ -201,7 +199,6 @@ export interface ResizableStorageAdapter {
 export interface ResizableStoragePanelData {
   id: string;
   pixelSize: number;
-  locked?: boolean;
   collapsed?: boolean;
   autoCollapsed?: boolean;
   manualTargetRatio?: number;

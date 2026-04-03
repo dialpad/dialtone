@@ -158,7 +158,7 @@ vueCode='
 
 #### Fixed panels
 
-Set `:resizable="false"` to lock a panel at its `initial-size`. Fixed panels cannot be dragged, and no handle is rendered between a fixed panel and its neighbor. The layout engine subtracts fixed panel widths first, then distributes the remaining space among resizable panels.
+Set `:resizable="false"` to fix a panel at its `initial-size`. Fixed panels cannot be dragged, and no handle is rendered between a fixed panel and its neighbor. The layout engine subtracts fixed panel widths first, then distributes the remaining space among resizable panels.
 
 <code-example-tabs
 vueCode='
@@ -298,12 +298,12 @@ When both `storage-key` and `:storage` are provided, the custom adapter takes pr
 
 When a panel opens or closes, the remaining panels need to redistribute space. The `space-allocation-strategy` prop controls how:
 
-- **`proportional`** (default) — All unlocked panels give or take space proportionally based on their current size.
+- **`proportional`** (default) — All non-collapsed panels give or take space proportionally based on their current size.
 - **`preserve-manual`** — Panels that the user has manually resized keep their exact size. Only panels the user hasn't touched give up space.
 
 ### Programmatic control
 
-Sometimes the layout needs to respond to application state — collapsing a sidebar when a user clicks a menu item, locking a panel during a loading state, or resetting the layout from a settings page.
+Sometimes the layout needs to respond to application state — collapsing a sidebar when a user clicks a menu item, resizing a panel to a specific size, or resetting the layout from a settings page.
 
 Access these methods via a template ref on `DtResizable`:
 
@@ -320,8 +320,6 @@ import { ref } from "vue";
 const group = ref(null);
 
 group.value.collapsePanel("sidebar", true);
-group.value.lockPanel("sidebar");
-group.value.unlockPanel("sidebar");
 group.value.resizePanel("sidebar", 300);
 group.value.resetPanels();
 </script>
@@ -339,14 +337,6 @@ group.value.resetPanels();
 <tr>
 <td><code>collapsePanel(id, collapsed)</code></td>
 <td>Collapse or expand a panel.</td>
-</tr>
-<tr>
-<td><code>lockPanel(id)</code></td>
-<td>Lock a panel at its current size. Drag and viewport resize won't affect it.</td>
-</tr>
-<tr>
-<td><code>unlockPanel(id)</code></td>
-<td>Unlock a previously locked panel.</td>
 </tr>
 <tr>
 <td><code>resizePanel(id, pixels)</code></td>

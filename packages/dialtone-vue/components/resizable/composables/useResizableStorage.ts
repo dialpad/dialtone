@@ -16,7 +16,6 @@ function validateRequiredProperties(data: Record<string, unknown>): boolean {
 
 function validateOptionalProperties(data: Record<string, unknown>): boolean {
   return (
-    (data.locked === undefined || typeof data.locked === 'boolean') &&
     (data.collapsed === undefined || typeof data.collapsed === 'boolean') &&
     (data.autoCollapsed === undefined || typeof data.autoCollapsed === 'boolean')
   );
@@ -142,7 +141,6 @@ export function useResizableStorage(
     const data: ResizableStoragePanelData[] = panels.map(panel => ({
       id: panel.id,
       pixelSize: panel.pixelSize,
-      locked: panel.locked,
       collapsed: panel.collapsed,
       autoCollapsed: panel.autoCollapsed,
     }));
@@ -170,9 +168,6 @@ export function useResizableStorage(
 
     if (savedPanel.pixelSize !== undefined) {
       panel.pixelSize = savedPanel.pixelSize;
-    }
-    if (savedPanel.locked !== undefined && panel.resizable !== false) {
-      panel.locked = savedPanel.locked;
     }
     if (savedPanel.collapsed !== undefined) {
       panel.collapsed = savedPanel.collapsed;

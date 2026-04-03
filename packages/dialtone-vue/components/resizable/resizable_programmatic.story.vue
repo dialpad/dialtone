@@ -17,18 +17,6 @@
         Expand Sidebar
       </button>
       <button
-        class="d-btn d-btn--outlined d-btn--sm"
-        @click="lockContent"
-      >
-        Lock Content
-      </button>
-      <button
-        class="d-btn d-btn--outlined d-btn--sm"
-        @click="unlockContent"
-      >
-        Unlock Content
-      </button>
-      <button
         class="d-btn d-btn--danger d-btn--sm"
         @click="resetAll"
       >
@@ -88,7 +76,6 @@ export default {
         id: p.id,
         pixelSize: Math.round(p.pixelSize),
         collapsed: p.collapsed,
-        locked: p.locked,
       }));
     },
   },
@@ -100,14 +87,6 @@ export default {
 
     expandSidebar () {
       this.$refs.group?.collapsePanel('sidebar', false);
-    },
-
-    lockContent () {
-      this.$refs.group?.lockPanel('content');
-    },
-
-    unlockContent () {
-      this.$refs.group?.unlockPanel('content');
     },
 
     resetAll () {

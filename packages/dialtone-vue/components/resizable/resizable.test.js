@@ -162,14 +162,6 @@ describe('DtResizable Tests', () => {
       expect(typeof wrapper.vm.resetPanels).toBe('function');
     });
 
-    it('should expose lockPanel method', () => {
-      expect(typeof wrapper.vm.lockPanel).toBe('function');
-    });
-
-    it('should expose unlockPanel method', () => {
-      expect(typeof wrapper.vm.unlockPanel).toBe('function');
-    });
-
     it('should expose readonly state', () => {
       expect(wrapper.vm.state).toBeDefined();
       expect(wrapper.vm.state.direction).toBe('row');
