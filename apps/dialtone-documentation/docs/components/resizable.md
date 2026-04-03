@@ -275,51 +275,22 @@ When a panel opens or closes, the remaining panels need to redistribute space. T
 - **`proportional`** (default) — All non-collapsed panels give or take space proportionally based on their current size.
 - **`preserve-manual`** — Panels that the user has manually resized keep their exact size. Only panels the user hasn't touched give up space.
 
-### Programmatic control
+### Handle offset
 
-Sometimes the layout needs to respond to application state — collapsing a sidebar when a user clicks a menu item, resizing a panel to a specific size, or resetting the layout from a settings page.
-
-Access these methods via a template ref on `DtResizable`:
+When a fixed element (like a toolbar or header) sits above the resizable layout, handles can offset from that element so they don't overlap it.
 
 ```vue
-<template>
-  <dt-resizable ref="group">
-    ...
-  </dt-resizable>
-</template>
-
-<script setup>
-import { ref } from 'vue';
-const group = ref(null);
-
-group.value.collapsePanel('sidebar', true);
-group.value.resizePanel('sidebar', 300);
-group.value.resetPanels();
-</script>
+<div id="toolbar" style="height: 48px;">Toolbar</div>
+<dt-resizable>
+  <dt-resizable-panel id="left" initial-size="50p">
+    Left
+  </dt-resizable-panel>
+  <dt-resizable-handle offset-element="#toolbar" :offset-amount="8" />
+  <dt-resizable-panel id="right" initial-size="50p">
+    Right
+  </dt-resizable-panel>
+</dt-resizable>
 ```
-
-<table class="d-table dialtone-doc-table">
-<thead>
-<tr>
-<th scope="col">Method</th>
-<th scope="col">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>collapsePanel(id, collapsed)</code></td>
-<td>Collapse or expand a panel.</td>
-</tr>
-<tr>
-<td><code>resizePanel(id, pixels)</code></td>
-<td>Set a panel to an exact pixel size.</td>
-</tr>
-<tr>
-<td><code>resetPanels()</code></td>
-<td>Reset all panels to their initial sizes. Pass panel IDs to reset a specific pair.</td>
-</tr>
-</tbody>
-</table>
 
 ## Accessibility
 
