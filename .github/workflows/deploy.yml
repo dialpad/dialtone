@@ -25,6 +25,7 @@ on:
       - 'packages/dialtone-vue/**/*.vue'
       - 'packages/dialtone-vue/**/*.*js'
       - 'packages/dialtone-vue/**/*.stories.js'
+      - 'packages/combinator/src/**'
       - '!**/*.test.*js'
   pull_request:
     paths:
@@ -43,6 +44,7 @@ on:
       - 'packages/dialtone-vue/**/*.vue'
       - 'packages/dialtone-vue/**/*.*js'
       - 'packages/dialtone-vue/**/*.stories.js'
+      - 'packages/combinator/src/**'
       - '!**/*.test.*js'
 
 env:
@@ -85,6 +87,7 @@ jobs:
               - 'packages/dialtone-tokens/tokens/**'
               - 'packages/dialtone-tokens/gulpfile.cjs'
               - 'packages/dialtone-vue/{common,components,directives,localization,recipes}/**/!(*.story.vue|*.test.js|*.stories.js)'
+              - 'packages/combinator/src/**'
             dialtone-vue:
               - 'packages/dialtone-css/**/*.less'
               - 'packages/dialtone-css/postcss/*.cjs'
