@@ -1,12 +1,35 @@
 @layer dialtone.components {
 .d-prose {
+    // ── Typography (size-driven) ──────────────────────────────────────────────
+    --prose-font-body:      var(--dt-text-body-md);
+    --prose-font-h1:        var(--dt-text-headline-3xl);
+    --prose-font-h2:        var(--dt-text-headline-2xl);
+    --prose-font-h3:        var(--dt-text-headline-xl);
+    --prose-font-h4:        var(--dt-text-headline-lg);
+    --prose-font-h5:        var(--dt-text-headline-md);
+    --prose-font-h6:        var(--dt-text-headline-sm);
+    --prose-font-code:      var(--dt-text-code-sm);
+    --prose-font-table:     var(--dt-text-body-sm);
+    --prose-lh-body:        var(--dt-font-line-height-300);
+    --prose-lh-h1:          var(--dt-font-line-height-100);
+    --prose-lh-heading:     var(--dt-font-line-height-200);
+    --prose-lh-code:        var(--dt-font-line-height-300);
+
+    // ── Spacing (density-driven) ──────────────────────────────────────────────
+    --prose-gap-tight:      var(--dt-spacing-50);
+    --prose-gap-block:      var(--dt-spacing-100);
+    --prose-gap-cell:       var(--dt-spacing-150);
+    --prose-gap-section:    var(--dt-spacing-200);
+    --prose-gap-region:     var(--dt-spacing-300);
+    --prose-indent:         var(--dt-spacing-250);
+
     color: var(--dt-color-foreground-primary);
 
     &,
     :where(*) {
       all: revert;
-      font: var(--dt-text-body-md);
-      line-height: var(--dt-font-line-height-300);
+      font: var(--prose-font-body);
+      line-height: var(--prose-lh-body);
     }
 
     > :first-child {
@@ -18,7 +41,7 @@
     }
 
     :is(h1, h2, h3, h4, h5, h6) + *:not(hr) {
-      margin-block-start: var(--dt-spacing-50) !important;
+      margin-block-start: var(--prose-gap-tight) !important;
     }
 
     // ---------------------------------------------------------------------------
@@ -26,44 +49,44 @@
     // ---------------------------------------------------------------------------
 
     h1 {
-      font: var(--dt-text-headline-3xl);
-      line-height: var(--dt-font-line-height-100);
-      margin-block: var(--dt-spacing-300) var(--dt-spacing-100);
+      font: var(--prose-font-h1);
+      line-height: var(--prose-lh-h1);
+      margin-block: var(--prose-gap-region) var(--prose-gap-block);
       text-wrap: balance;
     }
 
     h2 {
-      font: var(--dt-text-headline-2xl);
-      line-height: var(--dt-font-line-height-200);
-      margin-block: var(--dt-spacing-300) var(--dt-spacing-100);
+      font: var(--prose-font-h2);
+      line-height: var(--prose-lh-heading);
+      margin-block: var(--prose-gap-region) var(--prose-gap-block);
       text-wrap: balance;
     }
 
     h3 {
-      font: var(--dt-text-headline-xl);
-      line-height: var(--dt-font-line-height-200);
-      margin-block: var(--dt-spacing-300) var(--dt-spacing-100);
+      font: var(--prose-font-h3);
+      line-height: var(--prose-lh-heading);
+      margin-block: var(--prose-gap-region) var(--prose-gap-block);
       text-wrap: balance;
     }
 
     h4 {
-      font: var(--dt-text-headline-lg);
-      line-height: var(--dt-font-line-height-200);
-      margin-block: var(--dt-spacing-300) var(--dt-spacing-100);
+      font: var(--prose-font-h4);
+      line-height: var(--prose-lh-heading);
+      margin-block: var(--prose-gap-region) var(--prose-gap-block);
       text-wrap: balance;
     }
 
     h5 {
-      font: var(--dt-text-headline-md);
-      line-height: var(--dt-font-line-height-200);
-      margin-block: var(--dt-spacing-300) var(--dt-spacing-100);
+      font: var(--prose-font-h5);
+      line-height: var(--prose-lh-heading);
+      margin-block: var(--prose-gap-region) var(--prose-gap-block);
       text-wrap: balance;
     }
 
     h6 {
-      font: var(--dt-text-headline-sm);
-      line-height: var(--dt-font-line-height-200);
-      margin-block: var(--dt-spacing-300) var(--dt-spacing-100);
+      font: var(--prose-font-h6);
+      line-height: var(--prose-lh-heading);
+      margin-block: var(--prose-gap-region) var(--prose-gap-block);
       text-wrap: balance;
     }
 
@@ -72,7 +95,7 @@
     // ---------------------------------------------------------------------------
 
     p {
-      margin-block: var(--dt-spacing-100);
+      margin-block: var(--prose-gap-block);
       text-wrap: pretty;
     }
 
@@ -118,7 +141,7 @@
 
     code {
       color: var(--dt-color-foreground-tertiary);
-      font: var(--dt-text-code-sm);
+      font: var(--prose-font-code);
       background-color: var(--dt-color-surface-secondary-opaque);
       border: var(--dt-size-border-50) solid var(--dt-color-border-subtle);
       border-radius: var(--dt-size-radius-200);
@@ -128,7 +151,7 @@
 
     kbd {
       color: var(--dt-color-foreground-tertiary);
-      font: var(--dt-text-code-sm);
+      font: var(--prose-font-code);
       border: var(--dt-size-border-100) solid var(--dt-color-border-default);
       border-radius: var(--dt-size-radius-300);
       padding-block: var(--dt-spacing-1);
@@ -167,12 +190,12 @@
     }
 
     var {
-      font: var(--dt-text-code-sm);
+      font: var(--prose-font-code);
       font-style: italic;
     }
 
     samp {
-      font: var(--dt-text-code-sm);
+      font: var(--prose-font-code);
     }
 
     dfn {
@@ -210,7 +233,7 @@
     hr {
       border: none;
       border-block-start: var(--dt-size-border-100) solid var(--dt-color-border-default);
-      margin-block: var(--dt-spacing-300);
+      margin-block: var(--prose-gap-region);
     }
 
     // ---------------------------------------------------------------------------
@@ -219,23 +242,23 @@
 
     ul {
       list-style: disc;
-      padding-inline-start: var(--dt-spacing-250);
-      margin-block-start: var(--dt-spacing-100);
+      padding-inline-start: var(--prose-indent);
+      margin-block-start: var(--prose-gap-block);
     }
 
     ol {
       list-style: decimal;
-      padding-inline-start: var(--dt-spacing-250);
-      margin-block-start: var(--dt-spacing-100);
+      padding-inline-start: var(--prose-indent);
+      margin-block-start: var(--prose-gap-block);
     }
 
     li {
       list-style: inherit;
-      margin-block: var(--dt-spacing-100);
+      margin-block: var(--prose-gap-block);
     }
 
     ul ul, ul ol, ol ul, ol ol {
-      margin-block: var(--dt-spacing-100);
+      margin-block: var(--prose-gap-block);
     }
 
     ul ul {
@@ -265,11 +288,11 @@
     // Task lists (checkbox items)
     li:has(> input[type="checkbox"]) {
       list-style-type: none;
-      margin-inline-start: calc(-1 * var(--dt-spacing-250));
+      margin-inline-start: calc(-1 * var(--prose-indent));
     }
 
     li > input[type="checkbox"] {
-      margin-inline-end: var(--dt-spacing-50);
+      margin-inline-end: var(--prose-gap-tight);
       vertical-align: text-bottom;
     }
 
@@ -279,15 +302,15 @@
 
     blockquote {
       border-inline-start: var(--dt-size-border-300) solid var(--dt-color-border-default);
-      padding-inline-start: var(--dt-spacing-150);
+      padding-inline-start: var(--prose-gap-cell);
       margin-inline: 0;
-      margin-block: var(--dt-spacing-200);
+      margin-block: var(--prose-gap-section);
       color: var(--dt-color-foreground-tertiary);
     }
 
     blockquote footer {
       color: var(--dt-color-foreground-muted);
-      margin-block-start: var(--dt-spacing-25);
+      margin-block-start: var(--prose-gap-tight);
     }
 
     cite {
@@ -299,14 +322,14 @@
     // ---------------------------------------------------------------------------
 
     pre {
-      padding: var(--dt-spacing-200);
+      padding: var(--prose-gap-section);
       overflow-x: auto;
       color: var(--dt-color-foreground-tertiary);
-      font: var(--dt-text-code-sm);
-      line-height: var(--dt-font-line-height-300);
+      font: var(--prose-font-code);
+      line-height: var(--prose-lh-code);
       background-color: var(--dt-color-surface-secondary-opaque);
       border-radius: var(--dt-size-radius-300);
-      margin-block: var(--dt-spacing-150);
+      margin-block: var(--prose-gap-cell);
     }
 
     pre code {
@@ -324,11 +347,11 @@
     // ---------------------------------------------------------------------------
 
     table {
-      font: var(--dt-text-body-sm);
+      font: var(--prose-font-table);
       border-collapse: collapse;
       border-spacing: 0;
       inline-size: 100%;
-      margin-block: var(--dt-spacing-200);
+      margin-block: var(--prose-gap-section);
     }
 
     caption {
@@ -336,7 +359,7 @@
       font-weight: var(--dt-font-weight-medium);
       text-align: start;
       caption-side: bottom;
-      padding-block-start: var(--dt-spacing-75);
+      padding-block-start: var(--prose-gap-cell);
     }
 
     thead {
@@ -344,7 +367,7 @@
     }
 
     th {
-      padding: var(--dt-spacing-150) var(--dt-spacing-200);
+      padding: var(--prose-gap-cell) var(--prose-gap-section);
       color: var(--dt-color-foreground-secondary);
       font-weight: var(--dt-font-weight-semi-bold);
       text-align: start;
@@ -355,7 +378,7 @@
     }
 
     tbody td {
-      padding: var(--dt-spacing-150) var(--dt-spacing-200);
+      padding: var(--prose-gap-cell) var(--prose-gap-section);
       border-block-end: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
     }
 
@@ -374,12 +397,12 @@
     // ---------------------------------------------------------------------------
 
     dl {
-      margin-block-start: var(--dt-spacing-200);
+      margin-block-start: var(--prose-gap-section);
     }
 
     dt {
       font-weight: var(--dt-font-weight-bold);
-      margin-block-start: var(--dt-spacing-200);
+      margin-block-start: var(--prose-gap-section);
     }
 
     dt:first-child {
@@ -396,7 +419,7 @@
 
     figure {
       margin-inline: 0;
-      margin-block-start: var(--dt-spacing-200);
+      margin-block-start: var(--prose-gap-section);
     }
 
     figure img {
@@ -409,7 +432,7 @@
       color: var(--dt-color-foreground-muted);
       font-weight: var(--dt-font-weight-medium);
       text-align: start;
-      padding-block-start: var(--dt-spacing-50);
+      padding-block-start: var(--prose-gap-tight);
     }
 
     // ---------------------------------------------------------------------------
@@ -417,10 +440,10 @@
     // ---------------------------------------------------------------------------
 
     details {
-      padding: var(--dt-spacing-200);
+      padding: var(--prose-gap-section);
       border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
       border-radius: var(--dt-size-radius-400);
-      margin-block-start: var(--dt-spacing-200);
+      margin-block-start: var(--prose-gap-section);
     }
 
     details:has(summary:hover) {
@@ -429,21 +452,30 @@
 
     summary {
       font-weight: var(--dt-font-weight-semi-bold);
+      list-style: none;
       cursor: pointer;
 
-      &::marker {
+      &::marker,
+      &::-webkit-details-marker {
+        display: none;
+      }
+
+      &::before {
+        display: inline-block;
         color: var(--dt-color-foreground-muted);
         font-size: var(--dt-font-size-200);
-        content: '▶\00a0\00a0';
+        transition: transform var(--dt-duration-moderate1) var(--dt-ease-in-out);
+        content: '›';
+        margin-inline-end: var(--prose-gap-tight);
       }
     }
 
-    details[open] > summary::marker {
-      content: '▼\00a0\00a0';
+    details[open] > summary::before {
+      transform: rotate(90deg);
     }
 
     details[open] > summary {
-      margin-block-end: var(--dt-spacing-200);
+      margin-block-end: var(--prose-gap-section);
     }
 
     details[open] {
@@ -461,5 +493,45 @@
       block-size: auto;
       border-radius: var(--dt-size-radius-200);
     }
-}
+
+    // =========================================================================
+    //  SIZE MODIFIERS
+    // =========================================================================
+
+    &--size-100 {
+      --prose-font-body:    var(--dt-text-body-xs);
+      --prose-font-h1:      var(--dt-text-headline-xl);
+      --prose-font-h2:      var(--dt-text-headline-lg);
+      --prose-font-h3:      var(--dt-text-headline-md);
+      --prose-font-h4:      var(--dt-text-headline-sm);
+      --prose-font-h5:      var(--dt-text-headline-xs);
+      --prose-font-h6:      var(--dt-text-headline-xs);
+      --prose-font-code:    var(--dt-text-code-xs);
+      --prose-font-table:   var(--dt-text-body-xs);
+      --prose-gap-tight:      var(--dt-spacing-50);
+      --prose-gap-block:      var(--dt-spacing-75);
+      --prose-gap-cell:       var(--dt-spacing-75);
+      --prose-gap-section:    var(--dt-spacing-150);
+      --prose-gap-region:     var(--dt-spacing-150);
+      --prose-indent:         var(--dt-spacing-175);
+    }
+
+    &--size-200 {
+      --prose-font-body:    var(--dt-text-body-sm);
+      --prose-font-h1:      var(--dt-text-headline-2xl);
+      --prose-font-h2:      var(--dt-text-headline-xl);
+      --prose-font-h3:      var(--dt-text-headline-lg);
+      --prose-font-h4:      var(--dt-text-headline-md);
+      --prose-font-h5:      var(--dt-text-headline-sm);
+      --prose-font-h6:      var(--dt-text-headline-xs);
+      --prose-font-code:    var(--dt-text-code-xs);
+      --prose-font-table:   var(--dt-text-body-xs);
+      --prose-gap-tight:      var(--dt-spacing-50);
+      --prose-gap-block:      var(--dt-spacing-100);
+      --prose-gap-cell:       var(--dt-spacing-100);
+      --prose-gap-section:    var(--dt-spacing-150);
+      --prose-gap-region:     var(--dt-spacing-200);
+      --prose-indent:         var(--dt-spacing-200);
+    }
+  }
 }
