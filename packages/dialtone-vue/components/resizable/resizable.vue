@@ -31,7 +31,7 @@ import {
   onUnmounted,
   provide,
 } from 'vue';
-import { RESIZABLE_CONTEXT_KEY } from './resizable_constants';
+import { RESIZABLE_CONTEXT_KEY, buildHandleId } from './resizable_constants';
 import {
   useResizablePanelControls,
   useResizableGroup,
@@ -119,7 +119,6 @@ const emit = defineEmits(
 
 const containerRef = ref(null);
 
-// ── Reactive layout controller ──────────────────────────────────────────────
 const currentDirection = computed(() => props.direction);
 
 // Note: storageKey and storage are captured at mount time. If they need to
@@ -131,12 +130,9 @@ const group = useResizableGroup({
   storageAdapter: props.storage ?? undefined,
 });
 
-// ── Transient drag state ──────────────────────────────────────────────────────
 const isResizing = ref(false);
 const activeHandleId = ref(undefined);
-const activeCursorPosition = ref(0);
 
-// Single resizeHandler instance for drag operations
 const resizeHandler = useResizeHandling(() => group.containerSize.value);
 
 const isInitializing = group.isInitializing;
@@ -144,7 +140,13 @@ const registerPanel = (config) => group.registerPanel(config);
 const unregisterPanel = (id) => group.unregisterPanel(id);
 const saveToStorage = (panels) => group.saveCurrentLayout(panels);
 
-// Panel control operations
+function commitPanelSize (panelId, pixels) {
+  const rounded = Math.round(pixels);
+  const cSize = group.containerSize.value;
+  const ratio = cSize > 0 ? rounded / cSize : undefined;
+  group.updateSavedPanel(panelId, { pixelSize: rounded, manualTargetRatio: ratio });
+}
+
 const {
   resizePanel,
   collapsePanel,
@@ -159,7 +161,6 @@ const {
   updateSavedPanel: (panelId, updates) => group.updateSavedPanel(panelId, updates),
 });
 
-// Wrapper for resetPanels that clears runtime ratios and updates storage
 function resetPanels (beforePanelId, afterPanelId, behavior = 'all') {
   originalResetPanels(beforePanelId, afterPanelId, behavior);
 
@@ -172,7 +173,6 @@ function resetPanels (beforePanelId, afterPanelId, behavior = 'all') {
   }
 }
 
-// Process auto-collapse/expand based on both container-width and panel-size triggers.
 function processAutoCollapse () {
   processAutoCollapseExpand();
   if (!props.collapseRules?.length) return;
@@ -183,10 +183,8 @@ function processAutoCollapse () {
   if (panel && !panel.collapsed) collapsePanel(panelsToCollapse[0], true);
 }
 
-// ── Announcements (aria-live region for screen readers) ─────────────────
 const { announce } = useResizableAnnouncements();
 
-// ── Offset (fixed header/toolbar avoidance) ─────────────────────────────
 const offset = useResizableOffset({
   offsetElement: props.offsetElement,
   offsetAmount: props.offsetAmount,
@@ -194,12 +192,10 @@ const offset = useResizableOffset({
   direction: currentDirection,
 });
 
-// Handle registry — tracks mounted handle instances for DOM-order resolution
 const handleInstances = new Set();
 function registerHandle (inst) { handleInstances.add(inst); }
 function unregisterHandle (inst) { handleInstances.delete(inst); }
 
-// ── Per-group drag composable ─────────────────────────────────────────────────
 const drag = useResizableDrag({
   direction: currentDirection,
   containerRef,
@@ -212,18 +208,13 @@ const drag = useResizableDrag({
     emit('resize-start', handleId);
   },
   onDragEnd (beforePanelId, afterPanelId, beforeSize, afterSize, sizesChanged) {
-    const handleId = drag.dragState.handleId ?? `${beforePanelId}:${afterPanelId}`;
-    isResizing.value = false; activeHandleId.value = undefined; activeCursorPosition.value = 0;
+    const handleId = drag.dragState.handleId ?? buildHandleId(beforePanelId, afterPanelId);
+    isResizing.value = false;
+    activeHandleId.value = undefined;
 
     if (sizesChanged) {
-      const roundedBefore = Math.round(beforeSize);
-      const roundedAfter = Math.round(afterSize);
-      const cSize = group.containerSize.value;
-      const beforeRatio = cSize > 0 ? roundedBefore / cSize : undefined;
-      const afterRatio = cSize > 0 ? roundedAfter / cSize : undefined;
-
-      group.updateSavedPanel(beforePanelId, { pixelSize: roundedBefore, manualTargetRatio: beforeRatio });
-      group.updateSavedPanel(afterPanelId, { pixelSize: roundedAfter, manualTargetRatio: afterRatio });
+      commitPanelSize(beforePanelId, beforeSize);
+      commitPanelSize(afterPanelId, afterSize);
 
       emit('resize-end', handleId);
       processAutoCollapse();
@@ -236,7 +227,6 @@ function stopResize () { drag.cancelDrag(); }
 function savePanelsToStorage () { saveToStorage(group.syncedPanels.value); }
 function emitPanelResize (panelId, size) { emit('panel-resize', panelId, size); }
 
-// Auto-collapse triggered by layout changes (replaces viewport resize handler)
 watch(group.syncedPanels, (panels) => {
   if (panels.length > 0 && !isInitializing.value) {
     processAutoCollapse();
@@ -258,7 +248,6 @@ provide(RESIZABLE_CONTEXT_KEY, {
   containerElement: computed(() => containerRef.value),
   isResizing: computed(() => isResizing.value),
   activeHandleId: computed(() => activeHandleId.value),
-  activeCursorPosition: computed(() => activeCursorPosition.value ?? 0),
   isInitializing: computed(() => isInitializing.value),
   messages: props.messages,
   startResize: (handleId) => startResize(handleId),
@@ -273,6 +262,7 @@ provide(RESIZABLE_CONTEXT_KEY, {
   offsetContentStyles: offset.contentStyles,
   collapsePanel,
   emitPanelResize,
+  commitPanelSize,
   updateSavedPanel: (panelId, updates) => group.updateSavedPanel(panelId, updates),
 });
 
@@ -287,7 +277,6 @@ defineExpose({
     containerSize: group.containerSize.value,
     isResizing: isResizing.value,
     activeHandleId: activeHandleId.value,
-    activeCursorPosition: activeCursorPosition.value,
   })),
   panelConfigs: computed(() => props.panels),
   allocationStrategy: computed(() => props.spaceAllocationStrategy),

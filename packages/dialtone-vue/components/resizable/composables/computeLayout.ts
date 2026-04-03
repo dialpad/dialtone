@@ -16,7 +16,7 @@
  * @see constraintResolver.ts
  */
 
-import { DEFAULT_PANEL_SIZE } from '../resizable_constants';
+import { DEFAULT_PANEL_SIZE, buildHandleId } from '../resizable_constants';
 import type { ResizablePanelConfig } from '../resizable_constants';
 import { parseSizeToPixels } from '../resizable_utils';
 import { calculateConstraintHierarchy, clampToTier, type ConstraintHierarchy } from './constraintResolver';
@@ -483,7 +483,7 @@ function computeHandles(
     const disabled = beforePos.collapsed || afterPos.collapsed;
 
     handles.push({
-      id: `${before.id}:${after.id}`,
+      id: buildHandleId(before.id, after.id),
       beforePanelId: before.id,
       afterPanelId: after.id,
       left: beforePos.left + beforePos.width,

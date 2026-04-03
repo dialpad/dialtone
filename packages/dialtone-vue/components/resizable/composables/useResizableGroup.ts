@@ -112,9 +112,10 @@ export function useResizableGroup(options: UseResizableGroupOptions) {
   const syncedPanels = computed((): ResizablePanelState[] => {
     const result = layout.value;
     const size = containerSize.value;
+    const savedMap = new Map(savedState.value?.map(s => [s.id, s]) ?? []);
 
     return registeredPanels.value.map(config => {
-      const saved = savedState.value?.find(s => s.id === config.id);
+      const saved = savedMap.get(config.id);
       return buildPanelState(config, size, result, saved);
     });
   });

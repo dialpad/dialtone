@@ -35,7 +35,7 @@
 
 <script setup>
 import { computed, inject, onMounted, onUnmounted, ref, getCurrentInstance } from 'vue';
-import { RESIZABLE_CONTEXT_KEY } from './resizable_constants';
+import { RESIZABLE_CONTEXT_KEY, buildHandleId } from './resizable_constants';
 import { pixelsToPercentage } from './resizable_utils';
 import { useResizableKeyboard } from './composables/useResizableKeyboard';
 
@@ -73,7 +73,7 @@ const registerHandle = ctx?.registerHandle ?? (() => 0);
 const unregisterHandle = ctx?.unregisterHandle ?? (() => {});
 const saveToStorage = ctx?.saveToStorage ?? null;
 const collapsePanel = ctx?.collapsePanel ?? null;
-const updateSavedPanel = ctx?.updateSavedPanel ?? null;
+const commitPanelSize = ctx?.commitPanelSize ?? null;
 const announce = ctx?.announce ?? null;
 const panelMap = ctx?.panelMap ?? computed(() => new Map());
 const injectedMessages = ctx?.messages ?? {};
@@ -84,29 +84,19 @@ const currentInstance = getCurrentInstance();
 
 // ── Layout-driven position ───────────────────────────────────────────────────
 
-/**
- * Find this handle's position in the layout result.
- *
- * Priority:
- * 1. If explicit beforePanelId + afterPanelId props are provided, look up by
- *    the composite key "{beforePanelId}:{afterPanelId}".
- * 2. Otherwise resolve by DOM order — count preceding handle siblings.
- */
+// DOM index resolved once at mount time to avoid repeated querySelectorAll calls
+const resolvedDomIndex = ref(0);
+
 const handlePosition = computed(() => {
   const layout = layoutRef.value;
   if (layout.handles.length === 0) return null;
 
   if (props.beforePanelId && props.afterPanelId) {
-    const id = `${props.beforePanelId}:${props.afterPanelId}`;
+    const id = buildHandleId(props.beforePanelId, props.afterPanelId);
     return layout.handles.find(h => h.id === id) ?? null;
   }
 
-  // Resolve by DOM order: count how many handle siblings precede this one
-  const el = handleElement.value;
-  if (!el?.parentElement) return layout.handles[0] ?? null;
-  const allHandles = Array.from(el.parentElement.querySelectorAll('.d-resizable-handle'));
-  const domIndex = allHandles.indexOf(el);
-  return layout.handles[domIndex >= 0 ? domIndex : 0] ?? null;
+  return layout.handles[resolvedDomIndex.value] ?? null;
 });
 
 /** The composite handle identifier used by the drag system */
@@ -202,12 +192,9 @@ const keyboard = useResizableKeyboard({
   afterPanelId: resolvedAfterPanelId,
   handleElement,
   onResize (beforeId, beforeSize, afterId, afterSize) {
-    if (updateSavedPanel) {
-      const cSize = containerSizeRef.value;
-      const beforeRatio = cSize > 0 ? beforeSize / cSize : undefined;
-      const afterRatio = cSize > 0 ? afterSize / cSize : undefined;
-      updateSavedPanel(beforeId, { pixelSize: beforeSize, manualTargetRatio: beforeRatio });
-      updateSavedPanel(afterId, { pixelSize: afterSize, manualTargetRatio: afterRatio });
+    if (commitPanelSize) {
+      commitPanelSize(beforeId, beforeSize);
+      commitPanelSize(afterId, afterSize);
     } else {
       saveToStorage?.();
     }
@@ -225,6 +212,13 @@ const offsetHandleStyles = ctx?.offsetHandleStyles ?? computed(() => ({}));
 
 onMounted(() => {
   registerHandle(currentInstance);
+
+  const el = handleElement.value;
+  if (el?.parentElement) {
+    const allHandles = Array.from(el.parentElement.querySelectorAll('.d-resizable-handle'));
+    const idx = allHandles.indexOf(el);
+    if (idx >= 0) resolvedDomIndex.value = idx;
+  }
 });
 
 onUnmounted(() => {

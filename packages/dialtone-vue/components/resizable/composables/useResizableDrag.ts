@@ -145,6 +145,7 @@ export function useResizableDrag(options: UseResizableDragOptions) {
   let originalBeforeSize = 0;
   let originalAfterSize = 0;
   let beforePanelLeft = 0;
+  let cachedContainerRect: DOMRect | null = null;
 
   let boundPointerMove: ((e: PointerEvent) => void) | null = null;
   let boundPointerUp: ((e: PointerEvent) => void) | null = null;
@@ -188,6 +189,7 @@ export function useResizableDrag(options: UseResizableDragOptions) {
     originalBeforeSize = 0;
     originalAfterSize = 0;
     beforePanelLeft = 0;
+    cachedContainerRect = null;
   }
 
   function locateDragElements(
@@ -237,6 +239,7 @@ export function useResizableDrag(options: UseResizableDragOptions) {
     originalAfterSize = elements.afterPanel.pixelSize;
 
     beforePanelLeft = parseFloat(beforePanelEl.style.insetInlineStart || '0');
+    cachedContainerRect = container.getBoundingClientRect();
 
     Object.assign(dragState, {
       isActive: true,
@@ -256,11 +259,10 @@ export function useResizableDrag(options: UseResizableDragOptions) {
 
   function computeDragPosition(
     event: PointerEvent,
-    container: HTMLElement,
     dir: ResizableDirection
   ): number {
-    const containerRect = container.getBoundingClientRect();
-    return dir === 'row' ? event.clientX - containerRect.left : event.clientY - containerRect.top;
+    const rect = cachedContainerRect!;
+    return dir === 'row' ? event.clientX - rect.left : event.clientY - rect.top;
   }
 
   function isDragMoveReady(): boolean {
@@ -278,7 +280,7 @@ export function useResizableDrag(options: UseResizableDragOptions) {
   function onDragMove(event: PointerEvent): void {
     if (!isDragMoveReady()) return;
 
-    const rawCursorPosition = computeDragPosition(event, containerRef.value!, direction.value);
+    const rawCursorPosition = computeDragPosition(event, direction.value);
 
     const result = resizeHandler.processResizeMove(
       rawCursorPosition,
@@ -292,8 +294,12 @@ export function useResizableDrag(options: UseResizableDragOptions) {
 
     if (!result.isValidResize) return;
 
-    dragState.proposedBeforeSize = result.beforePanelSize;
-    dragState.proposedAfterSize = result.afterPanelSize;
+    if (dragState.proposedBeforeSize !== result.beforePanelSize) {
+      dragState.proposedBeforeSize = result.beforePanelSize;
+    }
+    if (dragState.proposedAfterSize !== result.afterPanelSize) {
+      dragState.proposedAfterSize = result.afterPanelSize;
+    }
 
     const containerSizeValue = containerSize.value;
     const constrainedCursor = result.constrainedCursorPosition;
@@ -357,7 +363,6 @@ export function useResizableDrag(options: UseResizableDragOptions) {
 
   onUnmounted(() => {
     cancelDrag();
-    document.removeEventListener('keydown', handleKeydown);
   });
 
   return {

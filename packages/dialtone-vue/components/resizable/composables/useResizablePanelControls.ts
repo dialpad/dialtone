@@ -199,14 +199,19 @@ export function useResizablePanelControls(options: ResizablePanelControlsOptions
 
   // ---- Panel Operations ----
 
+  function commitPanelSize(panelId: string, pixels: number): void {
+    const rounded = Math.round(pixels);
+    const cSize = containerSize.value;
+    const ratio = cSize > 0 ? rounded / cSize : undefined;
+    updateSavedPanel(panelId, { pixelSize: rounded, manualTargetRatio: ratio });
+  }
+
   function resizePanel(panelId: string, newPixelSize: number) {
     const panel = panels.value.find(p => p.id === panelId);
     if (!panel || panel.collapsed) return;
 
     const constrainedSize = applyPanelPixelConstraints(panel, newPixelSize, containerSize.value);
-    const ratio = containerSize.value > 0 ? constrainedSize / containerSize.value : undefined;
-
-    updateSavedPanel(panelId, { pixelSize: constrainedSize, manualTargetRatio: ratio });
+    commitPanelSize(panelId, constrainedSize);
 
     onPanelResize(panelId, constrainedSize);
   }

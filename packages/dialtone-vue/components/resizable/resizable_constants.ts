@@ -138,7 +138,6 @@ export interface ResizableGroupState {
   containerSize: number; // Total container size in pixels
   isResizing: boolean;
   activeHandleId?: string;
-  activeCursorPosition?: number;
 }
 
 export interface ResizableEvents {
@@ -217,7 +216,6 @@ export interface ResizableContext {
   containerElement: ComputedRef<HTMLElement | null>;
   isResizing: ComputedRef<boolean>;
   activeHandleId: ComputedRef<string | undefined>;
-  activeCursorPosition: ComputedRef<number>;
   isInitializing: ComputedRef<boolean>;
   messages: Record<string, string>;
 
@@ -240,7 +238,16 @@ export interface ResizableContext {
   announce: (message: string) => void;
   collapsePanel: (panelId: string, collapsed: boolean) => void;
   emitPanelResize: (panelId: string, size: number) => void;
+  commitPanelSize: (panelId: string, pixels: number) => void;
   updateSavedPanel: (panelId: string, updates: Partial<ResizableStoragePanelData>) => void;
 }
 
 export const RESIZABLE_CONTEXT_KEY: InjectionKey<ResizableContext> = Symbol('resizable-context');
+
+/**
+ * Build a composite handle ID from the before and after panel IDs.
+ * Handles use the format "{beforePanelId}:{afterPanelId}" throughout the system.
+ */
+export function buildHandleId(beforeId: string, afterId: string): string {
+  return `${beforeId}:${afterId}`;
+}

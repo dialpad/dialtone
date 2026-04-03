@@ -3,7 +3,7 @@ import type {
   ResizablePanelState,
   ResizableDirection,
 } from '../resizable_constants';
-import { MIN_PANEL_SIZE_PX } from '../resizable_constants';
+import { MIN_PANEL_SIZE_PX, buildHandleId } from '../resizable_constants';
 import { useResizeHandling } from './useResizableCalculations';
 
 export interface ResizableKeyboardMessages {
@@ -185,7 +185,7 @@ export function useResizableKeyboard(options: ResizableKeyboardOptions) {
         `[data-panel-id="${afterPanelId.value}"]`,
       ) as HTMLElement;
       const hEl = container.querySelector(
-        `[data-handle-id="${beforePanelId.value}:${afterPanelId.value}"]`,
+        `[data-handle-id="${buildHandleId(beforePanelId.value, afterPanelId.value)}"]`,
       ) as HTMLElement;
 
       if (beforeEl && afterEl) {
@@ -217,7 +217,7 @@ export function useResizableKeyboard(options: ResizableKeyboardOptions) {
       beforePanel,
       afterPanel,
       containerSize.value,
-      `${beforePanelId.value}:${afterPanelId.value}`,
+      buildHandleId(beforePanelId.value, afterPanelId.value),
       panels.value,
       0,
     );
