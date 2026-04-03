@@ -282,8 +282,8 @@ export function useResizableGroup(options: UseResizableGroupOptions) {
     }
     savedState.value = [...savedState.value]; // trigger reactivity
 
-    // Also update runtime state for manualTargetRatio if provided
-    if (updates.manualTargetRatio !== undefined) {
+    // Sync manualTargetRatio to runtime state when explicitly included in updates
+    if ('manualTargetRatio' in updates) {
       const runtime = panelRuntimeState.get(panelId);
       if (runtime) runtime.manualTargetRatio = updates.manualTargetRatio;
     }
