@@ -38,6 +38,7 @@ import {
   useResizeHandling,
   checkAutoCollapseRules,
   useResizableAnnouncements,
+  useResizableOffset,
 } from './composables';
 import { useResizableDrag } from './composables/useResizableDrag';
 
@@ -87,6 +88,15 @@ const props = defineProps({
     type: Object,
     default: null,
   },
+  /** CSS selector for a fixed element to offset handles and panel content from. */
+  offsetElement: { type: String, default: null },
+  /** Explicit pixel offset. Overrides offsetElement measurement when both provided. */
+  offsetAmount: { type: Number, default: null },
+  /**
+   * Which edge(s) the offset applies to.
+   * @values 'start', 'end', 'both'
+   */
+  offsetDirection: { type: String, default: 'start' },
   /**
    * i18n message overrides for screen reader announcements.
    * Accepts keys from ResizableKeyboardMessages.
@@ -176,6 +186,14 @@ function processAutoCollapse () {
 // ── Announcements (aria-live region for screen readers) ─────────────────
 const { announce } = useResizableAnnouncements();
 
+// ── Offset (fixed header/toolbar avoidance) ─────────────────────────────
+const offset = useResizableOffset({
+  offsetElement: props.offsetElement,
+  offsetAmount: props.offsetAmount,
+  offsetDirection: props.offsetDirection,
+  direction: currentDirection,
+});
+
 // Handle registry — tracks mounted handle instances for DOM-order resolution
 const handleInstances = new Set();
 function registerHandle (inst) { handleInstances.add(inst); }
@@ -251,6 +269,8 @@ provide(RESIZABLE_CONTEXT_KEY, {
   unregisterPanel,
   saveToStorage: savePanelsToStorage,
   announce,
+  offsetHandleStyles: offset.handleStyles,
+  offsetContentStyles: offset.contentStyles,
   collapsePanel,
   emitPanelResize,
   updateSavedPanel: (panelId, updates) => group.updateSavedPanel(panelId, updates),

@@ -13,7 +13,10 @@
     :data-panel-id="props.id"
     data-qa="d-resizable-panel"
   >
-    <div class="d-resizable-panel__content">
+    <div
+      class="d-resizable-panel__content"
+      :style="offsetContentStyles"
+    >
       <!-- @slot Panel content. Provides panel state and collapsed/resizing flags. -->
       <slot
         :panel="panel"
@@ -68,6 +71,7 @@ watch(
 const ctx = inject(RESIZABLE_CONTEXT_KEY, null);
 const layoutRef = ctx?.layout ?? computed(() => ({ panels: new Map(), handles: [] }));
 const isResizing = ctx?.isResizing ?? computed(() => false);
+const offsetContentStyles = ctx?.offsetContentStyles ?? computed(() => ({}));
 
 const registerPanel = ctx?.registerPanel ?? null;
 const unregisterPanel = ctx?.unregisterPanel ?? null;

@@ -38,7 +38,6 @@ import { computed, inject, onMounted, onUnmounted, ref, getCurrentInstance } fro
 import { RESIZABLE_CONTEXT_KEY } from './resizable_constants';
 import { pixelsToPercentage } from './resizable_utils';
 import { useResizableKeyboard } from './composables/useResizableKeyboard';
-import { useResizableOffset } from './composables/useResizableOffset';
 
 const props = defineProps({
   /** ID of the panel before this handle. Auto-detected from layout order if not set. */
@@ -56,15 +55,6 @@ const props = defineProps({
    * @values 'both', 'before', 'after', 'all'
    */
   resetBehavior: { type: String, default: 'both' },
-  /** CSS selector for an element to offset the handle position from. */
-  offsetElement: { type: String, default: undefined },
-  /** Additional pixel offset added to the measured element offset. */
-  offsetAmount: { type: Number, default: 0 },
-  /**
-   * Which edge(s) the offset applies to.
-   * @values 'start', 'end', 'both'
-   */
-  offsetDirection: { type: String, default: 'both' },
   /** Override the default aria-label for i18n. */
   ariaLabel: { type: String, default: null },
 });
@@ -153,7 +143,7 @@ const handleStyles = computed(() => {
   return {
     insetInlineStart: `${Math.max(0, pos.left)}px`,
     visibility: '',
-    ...offset.handleStyles.value,
+    ...offsetHandleStyles.value,
   };
 });
 
@@ -228,14 +218,8 @@ const keyboard = useResizableKeyboard({
   messages: injectedMessages,
 });
 
-// ── Offset composable ──────────────────────────────────────────────────────
-
-const offset = useResizableOffset({
-  offsetElement: props.offsetElement,
-  offsetAmount: props.offsetAmount,
-  offsetDirection: props.offsetDirection,
-  direction: directionRef,
-});
+// ── Offset (from parent context) ──────────────────────────────────────────
+const offsetHandleStyles = ctx?.offsetHandleStyles ?? computed(() => ({}));
 
 // ── Lifecycle ────────────────────────────────────────────────────────────────
 

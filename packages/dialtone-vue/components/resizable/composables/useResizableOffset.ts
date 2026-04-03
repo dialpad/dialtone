@@ -16,11 +16,11 @@ import {
 // ─── Types ────────────────────────────────────────────────────────────────
 
 export interface ResizableOffsetOptions {
-  /** CSS selector for the element to measure offset from */
-  offsetElement?: string;
-  /** Additional pixels added to the measured offset (default: 0) */
-  offsetAmount?: number;
-  /** Which edge(s) the offset applies to (default: 'both') */
+  /** CSS selector for the element to measure offset from (auto-measures block-size) */
+  offsetElement?: string | null;
+  /** Explicit pixel offset. Overrides offsetElement measurement when both provided. */
+  offsetAmount?: number | null;
+  /** Which edge(s) the offset applies to (default: 'start') */
   offsetDirection?: 'start' | 'end' | 'both';
   /** Layout direction — affects which dimension is measured */
   direction?: ComputedRef<'row' | 'column'> | Ref<'row' | 'column'>;
@@ -39,15 +39,21 @@ export function useResizableOffset(
   options: ResizableOffsetOptions = {},
 ): ResizableOffsetResult {
   const {
-    offsetElement,
-    offsetAmount = 0,
-    offsetDirection = 'both',
+    offsetElement = null,
+    offsetAmount = null,
+    offsetDirection = 'start',
     direction = ref('row'),
   } = options;
 
   const calculatedOffset = ref(0);
 
   function updateOffset(): void {
+    // Explicit amount wins over element measurement
+    if (offsetAmount != null && offsetAmount > 0) {
+      calculatedOffset.value = offsetAmount;
+      return;
+    }
+
     if (!offsetElement) { calculatedOffset.value = 0; return; }
 
     try {
@@ -56,43 +62,30 @@ export function useResizableOffset(
 
       const rect = element.getBoundingClientRect();
       const dim = direction.value === 'row' ? rect.height : rect.width;
-      calculatedOffset.value = dim + offsetAmount;
+      calculatedOffset.value = dim;
     } catch (error) {
       console.warn('[resizable] Failed to measure offset element:', error);
       calculatedOffset.value = 0;
     }
   }
 
-  // ── Computed styles for handle positioning ──────────────────────────
+  // ── Computed styles — logical properties rotate with writing-mode ──
 
-  // Logical properties — writing-mode on parent handles direction rotation
   const handleStyles = computed(() => {
     const styles: Record<string, string> = {};
-    if (!offsetElement || calculatedOffset.value <= 0) return styles;
-    const offset = `${calculatedOffset.value}px`;
-
-    if (offsetDirection === 'start' || offsetDirection === 'both') {
-      styles.insetBlockStart = offset;
-    }
-    if (offsetDirection === 'end') {
-      styles.insetBlockEnd = offset;
-    }
-
+    if (calculatedOffset.value <= 0) return styles;
+    const px = `${calculatedOffset.value}px`;
+    if (offsetDirection === 'start' || offsetDirection === 'both') styles.insetBlockStart = px;
+    if (offsetDirection === 'end' || offsetDirection === 'both') styles.insetBlockEnd = px;
     return styles;
   });
 
   const contentStyles = computed(() => {
     const styles: Record<string, string> = {};
-    if (!offsetElement || calculatedOffset.value <= 0) return styles;
-    const offset = `${calculatedOffset.value}px`;
-
-    if (offsetDirection === 'start' || offsetDirection === 'both') {
-      styles.paddingBlockStart = offset;
-    }
-    if (offsetDirection === 'end') {
-      styles.paddingBlockEnd = offset;
-    }
-
+    if (calculatedOffset.value <= 0) return styles;
+    const px = `${calculatedOffset.value}px`;
+    if (offsetDirection === 'start' || offsetDirection === 'both') styles.paddingBlockStart = px;
+    if (offsetDirection === 'end' || offsetDirection === 'both') styles.paddingBlockEnd = px;
     return styles;
   });
 

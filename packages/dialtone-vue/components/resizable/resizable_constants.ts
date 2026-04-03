@@ -221,6 +221,10 @@ export interface ResizableContext {
   isInitializing: ComputedRef<boolean>;
   messages: Record<string, string>;
 
+  // Offset (from fixed header/toolbar)
+  offsetHandleStyles: ComputedRef<Record<string, string>>;
+  offsetContentStyles: ComputedRef<Record<string, string>>;
+
   // Operations
   startResize: (handleId: string) => void;
   resetPanels: (

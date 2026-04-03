@@ -275,22 +275,30 @@ When a panel opens or closes, the remaining panels need to redistribute space. T
 - **`proportional`** (default) — All non-collapsed panels give or take space proportionally based on their current size.
 - **`preserve-manual`** — Panels that the user has manually resized keep their exact size. Only panels the user hasn't touched give up space.
 
-### Handle offset
+### Offset from fixed elements
 
-When a fixed element (like a toolbar or header) sits above the resizable layout, handles can offset from that element so they don't overlap it.
+<code-well-header custom class="d-p24 d-bgc-secondary d-bar8">
+  <example-resizable-offset />
+</code-well-header>
+
+When a fixed or absolutely positioned element (like a toolbar or header) overlaps the resizable area, set `offset-element` on `DtResizable` to automatically offset all handles and panel content below it.
 
 ```vue
-<div id="toolbar" style="height: 48px;">Toolbar</div>
-<dt-resizable>
+<dt-resizable offset-element="#toolbar">
+  <div id="toolbar" style="position: absolute; top: 0; left: 0; right: 0; height: 48px; z-index: 10;">
+    Toolbar
+  </div>
   <dt-resizable-panel id="left" initial-size="50p">
     Left
   </dt-resizable-panel>
-  <dt-resizable-handle offset-element="#toolbar" :offset-amount="8" />
+  <dt-resizable-handle />
   <dt-resizable-panel id="right" initial-size="50p">
     Right
   </dt-resizable-panel>
 </dt-resizable>
 ```
+
+Alternatively, use `offset-amount` for an explicit pixel value without measuring an element. If both are provided, `offset-amount` takes precedence.
 
 ## Accessibility
 
@@ -364,4 +372,5 @@ import ExampleResizable from '@exampleComponents/ExampleResizable.vue';
 import ExampleResizableThreePanel from '@exampleComponents/ExampleResizableThreePanel.vue';
 import ExampleResizableVertical from '@exampleComponents/ExampleResizableVertical.vue';
 import ExampleResizableCollapsible from '@exampleComponents/ExampleResizableCollapsible.vue';
+import ExampleResizableOffset from '@exampleComponents/ExampleResizableOffset.vue';
 </script>
