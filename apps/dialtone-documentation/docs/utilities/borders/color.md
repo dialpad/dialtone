@@ -14,18 +14,14 @@ Use `d-bc-{color}` to set an element's border color.
 
 ```vue demo
 <!-- @wrapper -->
-<dt-stack
-  gap="200"
-  :direction="{ 'default': 'column', 'md': 'row' }"
-  class="d-fw-wrap"
->
-  <div
-    v-for="color in ['subtle', 'default', 'moderate', 'bold', 'critical', 'success', 'warning']"
-    class="d-p-200 d-ba d-baw2"
-    :class="`d-bc-${color}`"
-  >
-    {{ color.charAt(0).toUpperCase() + color.slice(1) }}
-  </div>
+<dt-stack gap="200" :direction="{ 'default': 'column', 'md': 'row' }" class="d-fw-wrap">
+  <div class="d-p-200 d-ba d-baw2 d-bc-subtle">Subtle</div>
+  <div class="d-p-200 d-ba d-baw2 d-bc-default">Default</div>
+  <div class="d-p-200 d-ba d-baw2 d-bc-moderate">Moderate</div>
+  <div class="d-p-200 d-ba d-baw2 d-bc-bold">Bold</div>
+  <div class="d-p-200 d-ba d-baw2 d-bc-critical">Critical</div>
+  <div class="d-p-200 d-ba d-baw2 d-bc-success">Success</div>
+  <div class="d-p-200 d-ba d-baw2 d-bc-warning">Warning</div>
 </dt-stack>
 ```
 
@@ -84,17 +80,16 @@ Use `d-bco{n}` to change the border color opacity value.
 
 ```vue demo
 <!-- @wrapper -->
-<dt-stack
-  gap="200"
-  :direction="{ 'default': 'column', 'md': 'row' }"
->
-  <div
-    v-for="opacity in [100, 99, 95, 90, 75, 50, 25, 10, 0]"
-    class="d-p-200 d-ba d-baw2 d-bc-critical"
-    :class="`d-bco${opacity}`"
-  >
-    {{ opacity }}%
-  </div>
+<dt-stack gap="200" :direction="{ 'default': 'column', 'md': 'row' }">
+  <div class="d-p-200 d-ba d-baw2 d-bc-critical d-bco100">100%</div>
+  <div class="d-p-200 d-ba d-baw2 d-bc-critical d-bco99">99%</div>
+  <div class="d-p-200 d-ba d-baw2 d-bc-critical d-bco95">95%</div>
+  <div class="d-p-200 d-ba d-baw2 d-bc-critical d-bco90">90%</div>
+  <div class="d-p-200 d-ba d-baw2 d-bc-critical d-bco75">75%</div>
+  <div class="d-p-200 d-ba d-baw2 d-bc-critical d-bco50">50%</div>
+  <div class="d-p-200 d-ba d-baw2 d-bc-critical d-bco25">25%</div>
+  <div class="d-p-200 d-ba d-baw2 d-bc-critical d-bco10">10%</div>
+  <div class="d-p-200 d-ba d-baw2 d-bc-critical d-bco0">0%</div>
 </dt-stack>
 ```
 

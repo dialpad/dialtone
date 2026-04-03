@@ -10,17 +10,11 @@ Use `d-baw{n}` to change the border width on your element.
 
 ```vue demo
 <!-- @wrapper -->
-<dt-stack
-  gap="200"
-  :direction="{ 'default': 'column', 'md': 'row' }"
->
-  <div
-    v-for="r in [0, 1, 2, 4]"
-    class="d-p-200 d-ba"
-    :class="`d-baw${r}`"
-  >
-    d-baw{{r}}
-  </div>
+<dt-stack gap="200" :direction="{ 'default': 'column', 'md': 'row' }">
+  <div class="d-p-200 d-ba d-baw0">d-baw0</div>
+  <div class="d-p-200 d-ba d-baw1">d-baw1</div>
+  <div class="d-p-200 d-ba d-baw2">d-baw2</div>
+  <div class="d-p-200 d-ba d-baw4">d-baw4</div>
 </dt-stack>
 ```
 
@@ -30,17 +24,11 @@ Use `d-b{a|t|r|b|l}w{n}` to change the border width of your direction on your el
 
 ```vue demo
 <!-- @wrapper -->
-<dt-stack
-  gap="200"
-  :direction="{ 'default': 'column', 'md': 'row' }"
->
-  <div
-    v-for="r in [0, 1, 2, 4]"
-    class="d-p-200 d-ba d-baw0 d-bgc-primary"
-    :class="`d-btw${r}`"
-  >
-    d-btw{{r}}
-  </div>
+<dt-stack gap="200" :direction="{ 'default': 'column', 'md': 'row' }">
+  <div class="d-p-200 d-ba d-baw0 d-bgc-primary d-btw0">d-btw0</div>
+  <div class="d-p-200 d-ba d-baw0 d-bgc-primary d-btw1">d-btw1</div>
+  <div class="d-p-200 d-ba d-baw0 d-bgc-primary d-btw2">d-btw2</div>
+  <div class="d-p-200 d-ba d-baw0 d-bgc-primary d-btw4">d-btw4</div>
 </dt-stack>
 ```
 

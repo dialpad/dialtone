@@ -9,9 +9,10 @@ keywords: ["resizable", "drag to resize"]
 ```vue demo
 <!-- @wrapper -->
 <dt-stack gap="400" class="d-w50p">
-  <div v-for="{ class: className } in resize.slice(0, 4)" :class="className" class="d-of-auto d-p-200 d-ba">
-    .{{ className }}
-  </div>
+  <div class="d-of-auto d-p-200 d-ba d-r-both">.d-r-both</div>
+  <div class="d-of-auto d-p-200 d-ba d-r-horizontal">.d-r-horizontal</div>
+  <div class="d-of-auto d-p-200 d-ba d-r-vertical">.d-r-vertical</div>
+  <div class="d-of-auto d-p-200 d-ba d-r-none">.d-r-none</div>
 </dt-stack>
 ```
 

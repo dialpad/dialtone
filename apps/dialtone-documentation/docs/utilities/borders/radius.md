@@ -10,17 +10,17 @@ Use `d-bar{n}` to change the border radius on all corners of your element.
 
 ```vue demo
 <!-- @wrapper -->
-<dt-stack
-  gap="100"
-  :direction="{ 'default': 'column', 'md': 'row' }"
->
-  <div
-    v-for="r in [0, 1, 2, 4, 6, 8, 12, 16, 24, 32]"
-    class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap"
-    :class="`d-bar${r}`"
-  >
-    <dt-text kind="code" size="xs">d-bar{{ r }}</dt-text>
-  </div>
+<dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar0"><dt-text kind="code" size="xs">d-bar0</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar1"><dt-text kind="code" size="xs">d-bar1</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar2"><dt-text kind="code" size="xs">d-bar2</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar4"><dt-text kind="code" size="xs">d-bar4</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar6"><dt-text kind="code" size="xs">d-bar6</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar8"><dt-text kind="code" size="xs">d-bar8</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar12"><dt-text kind="code" size="xs">d-bar12</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar16"><dt-text kind="code" size="xs">d-bar16</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar24"><dt-text kind="code" size="xs">d-bar24</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar32"><dt-text kind="code" size="xs">d-bar32</dt-text></div>
 </dt-stack>
 ```
 
@@ -30,17 +30,11 @@ Use `d-b{t|r|b|l}r{n}` to change the border radius on a side of your element.
 
 ```vue demo
 <!-- @wrapper -->
-<dt-stack
-  gap="400"
-  :direction="{ 'default': 'column', 'md': 'row' }"
->
-  <div
-    v-for="r in [4, 8, 12, 16]"
-    class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap"
-    :class="`d-btr${r}`"
-  >
-    <dt-text kind="code" size="xs">d-btr{{ r }}</dt-text>
-  </div>
+<dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-btr4"><dt-text kind="code" size="xs">d-btr4</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-btr8"><dt-text kind="code" size="xs">d-btr8</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-btr12"><dt-text kind="code" size="xs">d-btr12</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-btr16"><dt-text kind="code" size="xs">d-btr16</dt-text></div>
 </dt-stack>
 ```
 

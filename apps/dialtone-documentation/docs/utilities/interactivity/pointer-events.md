@@ -9,7 +9,9 @@ keywords: ["click through", "mouse events", "touch events"]
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="100">
-  <div class="d-p-200 d-bgc-moderate d-code--sm" v-for="{ class: className } in pointerEvents.slice(0, 3)" :class="className">.{{ className }}</div>
+  <div class="d-p-200 d-bgc-moderate d-code--sm d-pe-auto">.d-pe-auto</div>
+  <div class="d-p-200 d-bgc-moderate d-code--sm d-pe-inherit">.d-pe-inherit</div>
+  <div class="d-p-200 d-bgc-moderate d-code--sm d-pe-none">.d-pe-none</div>
 </dt-stack>
 ```
 
@@ -20,9 +22,21 @@ Use the `user-select` property to control whether the user can select text.
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="100">
-  <div v-for="{ class: className } in pointerEvents.slice(3)" class="d-p-200 d-bgc-moderate d-code--sm" :class="className">
+  <div class="d-p-200 d-bgc-moderate d-code--sm d-us-all">
     <dt-stack gap="100" class="d-ta-center">
-      <div>.{{ className }}</div>
+      <div>.d-us-all</div>
+      <div>Try to select my text.</div>
+    </dt-stack>
+  </div>
+  <div class="d-p-200 d-bgc-moderate d-code--sm d-us-auto">
+    <dt-stack gap="100" class="d-ta-center">
+      <div>.d-us-auto</div>
+      <div>Try to select my text.</div>
+    </dt-stack>
+  </div>
+  <div class="d-p-200 d-bgc-moderate d-code--sm d-us-none">
+    <dt-stack gap="100" class="d-ta-center">
+      <div>.d-us-none</div>
       <div>Try to select my text.</div>
     </dt-stack>
   </div>
