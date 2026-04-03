@@ -1,3 +1,11 @@
+# [1.12.0-next.2](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.12.0-next.1...eslint-plugin-dialtone/v1.12.0-next.2) (2026-04-03)
+
+
+### Features
+
+* **Eslint Plugin Dialtone:** DLT-3047 physical-to-logical naming migration tooling ([#1163](https://github.com/dialpad/dialtone/issues/1163)) ([d94dc4b](https://github.com/dialpad/dialtone/commit/d94dc4b74575dbb6e78f53ff3977ef348e33440a))
+* **Eslint Plugin Dialtone:** DLT-3227 DLT-3228 add deprecated-tshirt-sizes ESLint rule and migration codemod ([#1159](https://github.com/dialpad/dialtone/issues/1159)) ([21a011f](https://github.com/dialpad/dialtone/commit/21a011f77b177c34fe3d6aefe9307cd4edb0744c))
+
 # [1.12.0-next.1](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.11.3-next.1...eslint-plugin-dialtone/v1.12.0-next.1) (2026-03-31)
 
 
