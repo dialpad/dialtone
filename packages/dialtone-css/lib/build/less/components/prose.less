@@ -1,27 +1,28 @@
 @layer dialtone.components {
 .d-prose {
     // ── Typography (size-driven) ──────────────────────────────────────────────
-    --prose-font-body:      var(--dt-text-body-md);
-    --prose-font-h1:        var(--dt-text-headline-3xl);
-    --prose-font-h2:        var(--dt-text-headline-2xl);
-    --prose-font-h3:        var(--dt-text-headline-xl);
-    --prose-font-h4:        var(--dt-text-headline-lg);
-    --prose-font-h5:        var(--dt-text-headline-md);
-    --prose-font-h6:        var(--dt-text-headline-sm);
-    --prose-font-code:      var(--dt-text-code-sm);
-    --prose-font-table:     var(--dt-text-body-sm);
-    --prose-lh-body:        var(--dt-font-line-height-300);
-    --prose-lh-h1:          var(--dt-font-line-height-100);
-    --prose-lh-heading:     var(--dt-font-line-height-200);
-    --prose-lh-code:        var(--dt-font-line-height-300);
+    --prose-font-body:       var(--dt-text-body-md);
+    --prose-font-h1:         var(--dt-text-headline-3xl);
+    --prose-font-h2:         var(--dt-text-headline-2xl);
+    --prose-font-h3:         var(--dt-text-headline-xl);
+    --prose-font-h4:         var(--dt-text-headline-lg);
+    --prose-font-h5:         var(--dt-text-headline-md);
+    --prose-font-h6:         var(--dt-text-headline-sm);
+    --prose-font-code:       var(--dt-text-code-sm);
+    --prose-font-code-scale: 87.5%;
+    --prose-font-table:      var(--dt-text-body-sm);
+    --prose-lh-body:         var(--dt-font-line-height-300);
+    --prose-lh-h1:           var(--dt-font-line-height-100);
+    --prose-lh-heading:      var(--dt-font-line-height-200);
+    --prose-lh-code:         var(--dt-font-line-height-300);
 
     // ── Spacing (density-driven) ──────────────────────────────────────────────
-    --prose-gap-tight:      var(--dt-spacing-50);
-    --prose-gap-block:      var(--dt-spacing-100);
-    --prose-gap-cell:       var(--dt-spacing-150);
-    --prose-gap-section:    var(--dt-spacing-200);
-    --prose-gap-region:     var(--dt-spacing-300);
-    --prose-indent:         var(--dt-spacing-250);
+    --prose-gap-tight:       var(--dt-spacing-50);
+    --prose-gap-block:       var(--dt-spacing-100);
+    --prose-gap-cell:        var(--dt-spacing-150);
+    --prose-gap-section:     var(--dt-spacing-200);
+    --prose-gap-region:      var(--dt-spacing-300);
+    --prose-indent:          var(--dt-spacing-250);
 
     color: var(--dt-color-foreground-primary);
 
@@ -142,6 +143,7 @@
     code {
       color: var(--dt-color-foreground-tertiary);
       font: var(--prose-font-code);
+      font-size: var(--prose-font-code-scale);
       background-color: var(--dt-color-surface-secondary-opaque);
       border: var(--dt-size-border-50) solid var(--dt-color-border-subtle);
       border-radius: var(--dt-size-radius-200);
@@ -152,10 +154,12 @@
     kbd {
       color: var(--dt-color-foreground-tertiary);
       font: var(--prose-font-code);
-      border: var(--dt-size-border-100) solid var(--dt-color-border-default);
-      border-radius: var(--dt-size-radius-300);
+      font-size: var(--prose-font-code-scale);
+      background-color: var(--dt-color-surface-secondary-opaque);
+      border: var(--dt-size-border-50) solid var(--dt-color-border-subtle);
+      border-radius: var(--dt-size-radius-200);
       padding-block: var(--dt-spacing-1);
-      padding-inline: var(--dt-spacing-75);
+      padding-inline: var(--dt-spacing-50);
       border-block-end-width: var(--dt-size-border-200);
     }
 
@@ -191,11 +195,13 @@
 
     var {
       font: var(--prose-font-code);
+      font-size: var(--prose-font-code-scale);
       font-style: italic;
     }
 
     samp {
       font: var(--prose-font-code);
+      font-size: var(--prose-font-code-scale);
     }
 
     dfn {
@@ -286,14 +292,13 @@
     }
 
     // Task lists (checkbox items)
-    li:has(> input[type="checkbox"]) {
+    li:has(> input[type="checkbox"]:not([class])) {
       list-style-type: none;
       margin-inline-start: calc(-1 * var(--prose-indent));
     }
 
     li > input[type="checkbox"] {
       margin-inline-end: var(--prose-gap-tight);
-      vertical-align: text-bottom;
     }
 
     // ---------------------------------------------------------------------------
@@ -326,6 +331,7 @@
       overflow-x: auto;
       color: var(--dt-color-foreground-tertiary);
       font: var(--prose-font-code);
+      font-size: var(--prose-font-code-scale);
       line-height: var(--prose-lh-code);
       background-color: var(--dt-color-surface-secondary-opaque);
       border-radius: var(--dt-size-radius-300);
@@ -440,7 +446,7 @@
     // ---------------------------------------------------------------------------
 
     details {
-      padding: var(--prose-gap-section);
+      padding: var(--prose-gap-cell);
       border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
       border-radius: var(--dt-size-radius-400);
       margin-block-start: var(--prose-gap-section);
@@ -451,9 +457,11 @@
     }
 
     summary {
+      display: block;
       font-weight: var(--dt-font-weight-semi-bold);
       list-style: none;
       cursor: pointer;
+      text-box-trim: trim-both;
 
       &::marker,
       &::-webkit-details-marker {

@@ -38,6 +38,7 @@ import DtNotice from './variants_notice.js';
 import DtPagination from './variants_pagination.js';
 import DtPopover from './variants_popover.js';
 import DtPresence from './variants_presence.js';
+import DtProse from './variants_prose.js';
 import DtProgressCircle from './variants_progress_circle.js';
 import DtRadio from './variants_radio.js';
 import DtRadioGroup from './variants_radio_group.js';
@@ -98,6 +99,7 @@ export default function variants () {
     DtPagination,
     DtPopover,
     DtPresence,
+    DtProse,
     DtProgressCircle,
     DtRadio,
     DtRadioGroup,

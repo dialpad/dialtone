@@ -109,16 +109,15 @@ layout: Blank
     <!-- Code blocks -->
     <h2>Code Blocks</h2>
     <pre><code>// A plain code block
-  return `Hello, ${name}!`;
-  const message = greet('world');
-  console.log(message);</code></pre>
-    <p>And here is a paragraph between two code blocks to test spacing.</p>
+return `Hello, ${name}!`;
+const message = greet('world');
+console.log(message);</code></pre>
     <pre><code>&lt;template&gt;
   &lt;div class="container"&gt;
     &lt;h1&gt;{{ title }}&lt;/h1&gt;
     &lt;p&gt;{{ description }}&lt;/p&gt;
   &lt;/div&gt;
-  t;/template&gt;</code></pre>
+&lt;/template&gt;</code></pre>
     <!-- Table with thead -->
     <h2>Tables</h2>
     <table>
