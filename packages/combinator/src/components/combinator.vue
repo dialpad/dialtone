@@ -76,7 +76,7 @@
         </template>
       </dt-dropdown>
       <dt-stack
-        gap="400"
+        gap="100"
         direction="row"
       >
         <dt-button

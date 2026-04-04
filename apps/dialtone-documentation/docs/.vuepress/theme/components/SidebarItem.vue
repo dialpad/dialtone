@@ -129,7 +129,24 @@
                 },
               ]"
             >
-              {{ subItem.text }}
+              <dt-stack
+                v-if="subItem.status === 'beta'"
+                as="span"
+                direction="row"
+                justify="space-between"
+                class="d-w100p"
+              >
+                {{ subItem.text }}
+                <dt-badge
+                  class="d-fw-normal d-mis-50"
+                  type="info"
+                >
+                  Beta
+                </dt-badge>
+              </dt-stack>
+              <template v-else>
+                {{ subItem.text }}
+              </template>
             </dt-button>
           </li>
         </dt-stack>

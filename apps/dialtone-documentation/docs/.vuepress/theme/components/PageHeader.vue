@@ -14,9 +14,9 @@
             v-text="$frontmatter.title"
           />
           <dt-badge
-            v-if="$frontmatter.new"
-            type="bulletin"
-            text="New"
+            v-if="$frontmatter.status === 'beta'"
+            type="info"
+            text="Beta"
           />
         </dt-stack>
         <dt-stack direction="row" gap="25">
