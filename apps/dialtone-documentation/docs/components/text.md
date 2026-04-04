@@ -1,7 +1,7 @@
 ---
 title: Text
 description: Consistent typography styling through semantic text kinds and sizes.
-status: beta
+status: ready
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-text--default
 image: assets/images/components/text.png
 ---

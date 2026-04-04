@@ -1,7 +1,7 @@
 ---
 title: Scrollbar
 description: A directive that adds a custom overlay scrollbar to any scrollable region.
-status: beta
+status: ready
 thumb: true
 image: assets/images/components/scrollbar.png
 keywords: ["scrollable", "d-scrollbar", "DtScrollbar", "dt-scrollbar", "custom scrollbar", "scroll container", "v-dt", "directive"]

@@ -1,7 +1,7 @@
 ---
 title: Scroller
 description: A virtualized list that renders only what's visible, so large datasets scroll without slowing down the page.
-status: beta
+status: ready
 thumb: true
 image: assets/images/components/scroller.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-scroller--default
