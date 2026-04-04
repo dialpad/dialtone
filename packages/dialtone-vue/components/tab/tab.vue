@@ -21,7 +21,7 @@
     :leading-class="leadingClass"
     :trailing-class="trailingClass"
     data-qa="dt-tab"
-    :tabindex="isSelected ? '0' : '-1'"
+    :tabindex="isFocusTarget ? '0' : '-1'"
     v-bind="$attrs"
     v-on="tabListeners"
   >
@@ -209,6 +209,11 @@ export default {
 
     isSelected () {
       return this.groupContext.selected === this.panelId;
+    },
+
+    isFocusTarget () {
+      const focusedId = this.groupContext.focusedTabId;
+      return focusedId ? focusedId === this.id : this.isSelected;
     },
 
     buttonKind () {

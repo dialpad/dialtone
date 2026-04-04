@@ -25,8 +25,8 @@
       @keydown.right="tabRight"
       @keydown.up="tabUp"
       @keydown.down="tabDown"
-      @keyup.enter="selectTab"
-      @keyup.space="selectTab"
+      @keydown.enter="selectTab"
+      @keydown.space="selectTab"
       @click="selectTab"
       @keydown.home.prevent="onHomeButton"
       @keydown.end.prevent="onEndButton"
@@ -228,9 +228,9 @@ export default {
         outlined: false,
         orientation: 'horizontal',
         spread: 'none',
+        focusedTabId: null, // tracks last-focused tab for roving tabindex
       },
 
-      focusId: null,
       tabs: [],
       TAB_LIST_SIZE_MODIFIERS,
       TAB_LIST_KIND_MODIFIERS,
@@ -252,6 +252,7 @@ export default {
       immediate: true,
       handler () {
         this.provideObj.selected = this.selected;
+        this.provideObj.focusedTabId = null;
       },
     },
 
@@ -311,7 +312,7 @@ export default {
     },
 
     setFocus (focusId) {
-      this.focusId = focusId;
+      this.provideObj.focusedTabId = focusId;
     },
 
     getTabChildren () {
@@ -385,13 +386,21 @@ export default {
     },
 
     selectTab (event) {
-      if (this.isSameTabClicked()) return;
+      const tabEl = event.target.closest('[role="tab"]');
+      const index = tabEl
+        ? this.tabs.findIndex(t => t.context === tabEl)
+        : this.getFocusedTabIndex();
 
-      const index = this.getFocusedTabIndex();
+      if (index === -1) return;
       if (this.tabs[index]?.isDisabled) return;
+      if (this.provideObj.selected === this.tabs[index]?.panelId) return;
 
       this.$emit('before-change', event);
       if (event.defaultPrevented) return;
+
+      // Prevent keyboard defaults (Space scroll, Enter form submit)
+      // after confirming the tab change will proceed
+      event.preventDefault();
 
       this.selectTabByIndex(index);
       this.onChange();
@@ -404,11 +413,9 @@ export default {
     },
 
     getFocusedTabIndex () {
-      // Hot fix https://github.com/dialpad/dialtone/pull/849
-      // The main issue is that this.tabs is not being updated at the time this is being triggered.
-
+      const focusedId = this.provideObj.focusedTabId;
       const index = this.tabs.findIndex((context) =>
-        this.focusId ? context.tabId === `${this.focusId}` : context.isSelected,
+        focusedId ? context.tabId === focusedId : context.isSelected,
       );
 
       return index === -1 ? 0 : index;
@@ -422,10 +429,6 @@ export default {
       if (this.tabs.length) this.selectFocusOnTab(this.tabs.length - 1);
     },
 
-    isSameTabClicked () {
-      const tab = this.tabs[this.getFocusedTabIndex()];
-      return this.provideObj.selected === tab.panelId;
-    },
   },
 };
 </script>
