@@ -25,8 +25,11 @@
     --prose-indent:          var(--dt-spacing-250);
 
     color: var(--dt-color-foreground-primary);
+    font: var(--prose-font-body);
+    font-weight: inherit;
+    font-style: inherit;
+    line-height: var(--prose-lh-body);
 
-    &,
     :where(*) {
       all: revert;
       font: var(--prose-font-body);
@@ -58,36 +61,13 @@
       text-wrap: balance;
     }
 
-    h2 {
-      font: var(--prose-font-h2);
-      line-height: var(--prose-lh-heading);
-      margin-block: var(--prose-gap-region) var(--prose-gap-block);
-      text-wrap: balance;
-    }
+    h2 { font: var(--prose-font-h2); }
+    h3 { font: var(--prose-font-h3); }
+    h4 { font: var(--prose-font-h4); }
+    h5 { font: var(--prose-font-h5); }
+    h6 { font: var(--prose-font-h6); }
 
-    h3 {
-      font: var(--prose-font-h3);
-      line-height: var(--prose-lh-heading);
-      margin-block: var(--prose-gap-region) var(--prose-gap-block);
-      text-wrap: balance;
-    }
-
-    h4 {
-      font: var(--prose-font-h4);
-      line-height: var(--prose-lh-heading);
-      margin-block: var(--prose-gap-region) var(--prose-gap-block);
-      text-wrap: balance;
-    }
-
-    h5 {
-      font: var(--prose-font-h5);
-      line-height: var(--prose-lh-heading);
-      margin-block: var(--prose-gap-region) var(--prose-gap-block);
-      text-wrap: balance;
-    }
-
-    h6 {
-      font: var(--prose-font-h6);
+    h2, h3, h4, h5, h6 {
       line-height: var(--prose-lh-heading);
       margin-block: var(--prose-gap-region) var(--prose-gap-block);
       text-wrap: balance;
@@ -142,7 +122,7 @@
       font-style: italic;
     }
 
-    code {
+    code, kbd {
       color: var(--dt-color-foreground-tertiary);
       font: var(--prose-font-code);
       font-size: var(--prose-font-code-scale);
@@ -154,14 +134,6 @@
     }
 
     kbd {
-      color: var(--dt-color-foreground-tertiary);
-      font: var(--prose-font-code);
-      font-size: var(--prose-font-code-scale);
-      background-color: var(--dt-color-surface-secondary-opaque);
-      border: var(--dt-size-border-50) solid var(--dt-color-border-subtle);
-      border-radius: var(--dt-size-radius-200);
-      padding-block: var(--dt-spacing-1);
-      padding-inline: var(--dt-spacing-50);
       border-block-end-width: var(--dt-size-border-200);
     }
 
@@ -178,15 +150,12 @@
       font-size: smaller;
     }
 
-    sub {
+    sub, sup {
       font-size: smaller;
-      vertical-align: sub;
     }
 
-    sup {
-      font-size: smaller;
-      vertical-align: super;
-    }
+    sub { vertical-align: sub; }
+    sup { vertical-align: super; }
 
     abbr[title] {
       text-decoration: underline dotted;
@@ -195,15 +164,13 @@
       cursor: help;
     }
 
-    var {
+    var, samp {
       font: var(--prose-font-code);
       font-size: var(--prose-font-code-scale);
-      font-style: italic;
     }
 
-    samp {
-      font: var(--prose-font-code);
-      font-size: var(--prose-font-code-scale);
+    var {
+      font-style: italic;
     }
 
     dfn {
@@ -211,27 +178,23 @@
       font-style: italic;
     }
 
-    del {
-      color: var(--dt-color-foreground-secondary);
-      text-decoration: line-through;
+    del, ins, u {
       text-decoration-thickness: var(--dt-size-border-100);
     }
 
-    ins {
+    del {
+      color: var(--dt-color-foreground-secondary);
+      text-decoration: line-through;
+    }
+
+    ins, u {
       text-decoration: underline;
-      text-decoration-thickness: var(--dt-size-border-100);
       text-underline-offset: var(--dt-spacing-25);
     }
 
     s {
       color: var(--dt-color-foreground-tertiary);
       text-decoration-color: var(--dt-color-foreground-tertiary);
-    }
-
-    u {
-      text-decoration: underline;
-      text-underline-offset: var(--dt-spacing-25);
-      text-decoration-thickness: var(--dt-size-border-100);
     }
 
     // ---------------------------------------------------------------------------
@@ -248,17 +211,13 @@
     //  LISTS
     // ---------------------------------------------------------------------------
 
-    ul {
-      list-style: disc;
+    ul, ol {
       padding-inline-start: var(--prose-indent);
       margin-block-start: var(--prose-gap-block);
     }
 
-    ol {
-      list-style: decimal;
-      padding-inline-start: var(--prose-indent);
-      margin-block-start: var(--prose-gap-block);
-    }
+    ul { list-style: disc; }
+    ol { list-style: decimal; }
 
     li {
       list-style: inherit;
@@ -269,21 +228,10 @@
       margin-block: var(--prose-gap-block);
     }
 
-    ul ul {
-      list-style-type: circle;
-    }
-
-    ul ul ul {
-      list-style-type: square;
-    }
-
-    ol ol {
-      list-style-type: lower-alpha;
-    }
-
-    ol ol ol {
-      list-style-type: lower-roman;
-    }
+    ul ul { list-style-type: circle; }
+    ul ul ul { list-style-type: square; }
+    ol ol { list-style-type: lower-alpha; }
+    ol ol ol { list-style-type: lower-roman; }
 
     li:first-child {
       margin-block-start: 0;
@@ -374,19 +322,18 @@
       border-block-end: var(--dt-size-border-200) solid var(--dt-color-border-default);
     }
 
-    th {
+    th, tbody td {
       padding: var(--prose-gap-cell) var(--prose-gap-section);
+    }
+
+    th {
       color: var(--dt-color-foreground-secondary);
       font-weight: var(--dt-font-weight-semi-bold);
       text-align: start;
     }
 
-    tbody th {
-      border-block-end: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
-    }
-
+    tbody th,
     tbody td {
-      padding: var(--prose-gap-cell) var(--prose-gap-section);
       border-block-end: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
     }
 
@@ -430,17 +377,21 @@
       margin-block-start: var(--prose-gap-section);
     }
 
-    figure img {
-      max-inline-size: 100%;
-      block-size: auto;
-      border-radius: var(--dt-size-radius-200);
-    }
-
     figcaption {
       color: var(--dt-color-foreground-muted);
       font-weight: var(--dt-font-weight-medium);
       text-align: start;
       padding-block-start: var(--prose-gap-tight);
+    }
+
+    // ---------------------------------------------------------------------------
+    //  IMAGES
+    // ---------------------------------------------------------------------------
+
+    img {
+      max-inline-size: 100%;
+      block-size: auto;
+      border-radius: var(--dt-size-radius-200);
     }
 
     // ---------------------------------------------------------------------------
@@ -488,20 +439,8 @@
       margin-block-end: var(--prose-gap-section);
     }
 
-    details[open] {
-      & > :last-child {
-        margin-block-end: 0;
-      }
-    }
-
-    // ---------------------------------------------------------------------------
-    //  IMAGES (standalone, outside figure)
-    // ---------------------------------------------------------------------------
-
-    img {
-      max-inline-size: 100%;
-      block-size: auto;
-      border-radius: var(--dt-size-radius-200);
+    details[open] > :last-child {
+      margin-block-end: 0;
     }
 
     // =========================================================================
