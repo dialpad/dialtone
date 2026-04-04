@@ -4,7 +4,7 @@ import DtTabPanel from './tab_panel.vue';
 import DtTab from './tab.vue';
 import { returnFirstEl } from '@/common/utils';
 import { TAB_LIST_KIND_MODIFIERS, TAB_LIST_SIZE_MODIFIERS, TAB_LIST_IMPORTANCE_MODIFIERS, TAB_ORIENTATION_MODIFIERS, TAB_SPREAD_MODIFIERS } from './tabs_constants';
-import { h } from 'vue';
+import { h, ref } from 'vue';
 
 const optionTabPanel = [
   {
@@ -581,6 +581,56 @@ describe('DtTabGroup Tests', () => {
         await wrapper.setProps(props);
 
         expect(tabs.at(2).attributes('tabindex')).toBe('0');
+        expect(tabs.at(1).attributes('tabindex')).toBe('-1');
+      });
+    });
+
+    describe('When focused tab is removed', () => {
+      const tabOptions = ref([]);
+
+      const dynamicTabs = {
+        setup () {
+          return () => h('div', {}, tabOptions.value.map(opt =>
+            h(DtTab, { id: opt.id, panelId: opt.panelId, selected: opt.selected }, () => opt.slot),
+          ));
+        },
+      };
+
+      beforeEach(async () => {
+        tabOptions.value = [
+          { id: '1', panelId: '2', selected: true, slot: 'First' },
+          { id: '3', panelId: '4', slot: 'Second' },
+          { id: '5', panelId: '6', slot: 'Third' },
+        ];
+
+        wrapper.unmount();
+        wrapper = mount(DtTabGroup, {
+          attachTo: document.body,
+          props: { label: 'area-label' },
+          attrs,
+          slots: {
+            default: tabPanelComponents,
+            tabs: dynamicTabs,
+          },
+        });
+        _setWrappers();
+
+        // Focus third tab via arrow keys
+        returnFirstEl(tabs.at(0).vm.$el).focus();
+        await tabList.trigger('keydown.right');
+        await tabList.trigger('keydown.right');
+
+        // Remove the focused tab
+        tabOptions.value = [tabOptions.value[0], tabOptions.value[1]];
+        await wrapper.vm.$nextTick();
+        _setWrappers();
+      });
+
+      it('should give tabindex 0 to the selected tab', () => {
+        expect(tabs.at(0).attributes('tabindex')).toBe('0');
+      });
+
+      it('should give tabindex -1 to other tabs', () => {
         expect(tabs.at(1).attributes('tabindex')).toBe('-1');
       });
     });

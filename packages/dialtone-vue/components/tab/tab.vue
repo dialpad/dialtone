@@ -250,6 +250,12 @@ export default {
     }
   },
 
+  beforeUnmount () {
+    if (this.groupContext.focusedTabId === this.id) {
+      this.setFocus(null);
+    }
+  },
+
   methods: {
   },
 };

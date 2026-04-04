@@ -250,9 +250,11 @@ export default {
 
     selected: {
       immediate: true,
-      handler () {
+      handler (newVal, oldVal) {
         this.provideObj.selected = this.selected;
-        this.provideObj.focusedTabId = null;
+        if (newVal !== oldVal) {
+          this.provideObj.focusedTabId = null;
+        }
       },
     },
 
@@ -309,10 +311,17 @@ export default {
         this.provideObj.selected = this.selected;
       }
       this.tabs = this.getTabChildren();
+
+      // Clear stale focusedTabId if the focused tab was removed
+      if (this.provideObj.focusedTabId && !this.tabs.some(t => t.tabId === this.provideObj.focusedTabId)) {
+        this.provideObj.focusedTabId = null;
+      }
     },
 
     setFocus (focusId) {
-      this.provideObj.focusedTabId = focusId;
+      if (this.provideObj.focusedTabId !== focusId) {
+        this.provideObj.focusedTabId = focusId;
+      }
     },
 
     getTabChildren () {
