@@ -2,7 +2,7 @@
 <template>
   <div
     ref="proseRef"
-    class="d-prose"
+    :class="proseClasses"
     data-qa="dt-prose"
   >
     <!-- @slot Default slot for raw HTML content -->
@@ -11,11 +11,43 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUpdated } from 'vue';
+defineOptions({ name: 'DtProse' });
+
+import { computed, ref, onMounted, onUpdated } from 'vue';
 import {
   PROSE_DISALLOWED_ELEMENTS,
   PROSE_ALLOWED_ATTRIBUTES,
+  PROSE_SIZE_MODIFIERS,
+  PROSE_DENSITY_MODIFIERS,
 } from './prose_constants.js';
+
+const props = defineProps({
+  /**
+   * The size of the prose typography scale.
+   * @values 100, 200, 300
+   */
+  size: {
+    type: [String, Number],
+    default: 300,
+    validator: (s) => Object.keys(PROSE_SIZE_MODIFIERS).includes(String(s)),
+  },
+
+  /**
+   * The density (line-height) of prose content.
+   * @values 100, 200, 300
+   */
+  density: {
+    type: [String, Number],
+    default: 200,
+    validator: (s) => Object.keys(PROSE_DENSITY_MODIFIERS).includes(String(s)),
+  },
+});
+
+const proseClasses = computed(() => [
+  'd-prose',
+  PROSE_SIZE_MODIFIERS[String(props.size)],
+  PROSE_DENSITY_MODIFIERS[String(props.density)],
+].filter(Boolean));
 
 const proseRef = ref(null);
 

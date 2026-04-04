@@ -1,10 +1,30 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtProse from './prose.vue';
 import DtProseDefaultTemplate from './prose_default.story.vue';
+import {
+  PROSE_SIZE_MODIFIERS,
+  PROSE_DENSITY_MODIFIERS,
+} from './prose_constants';
 
-export const argTypesData = {};
+export const argTypesData = {
+  size: {
+    control: 'select',
+    options: Object.keys(PROSE_SIZE_MODIFIERS),
+  },
+  density: {
+    control: 'select',
+    options: Object.keys(PROSE_DENSITY_MODIFIERS),
+  },
+  default: {
+    table: { type: { summary: 'VNode' } },
+    control: { type: 'text' },
+  },
+};
 
-export const argsData = {};
+export const argsData = {
+  size: 300,
+  density: 200,
+};
 
 export default {
   title: 'Components/Prose',

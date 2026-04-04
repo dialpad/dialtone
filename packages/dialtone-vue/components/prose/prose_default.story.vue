@@ -1,7 +1,10 @@
 <!-- eslint-disable vuejs-accessibility/form-control-has-label -->
 <!-- eslint-disable max-len -->
 <template>
-  <dt-prose>
+  <dt-prose
+    :size="$attrs.size"
+    :density="$attrs.density"
+  >
     <!-- Headings -->
     <h1>Heading Level 1 <small>small text</small></h1>
     <p>This is a standard paragraph of body text. It contains enough words to wrap across multiple lines so you can evaluate line height, measure, and paragraph spacing. Good typography makes content easier to read and understand.</p>

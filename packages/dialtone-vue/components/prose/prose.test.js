@@ -1,5 +1,6 @@
 import DtProse from './prose.vue';
 import { mount } from '@vue/test-utils';
+import { PROSE_SIZE_MODIFIERS, PROSE_DENSITY_MODIFIERS } from './prose_constants.js';
 
 const PROSE_SELECTOR = '[data-qa="dt-prose"]';
 
@@ -210,6 +211,63 @@ describe('DtProse Tests', () => {
 
       expect(prose.element.tagName).toBe('DIV');
       expect(prose.element.hasAttribute('role')).toBe(false);
+    });
+  });
+
+  describe('Size Prop', () => {
+    it.each([
+      [100, PROSE_SIZE_MODIFIERS[100]],
+      ['100', PROSE_SIZE_MODIFIERS[100]],
+      [200, PROSE_SIZE_MODIFIERS[200]],
+    ])('Should apply correct class when size is %s', (size, expectedClass) => {
+      _setWrapper({ size });
+
+      const prose = wrapper.find(PROSE_SELECTOR);
+
+      expect(prose.classes()).toContain(expectedClass);
+    });
+
+    it('Should not render a size modifier class when size is not set', () => {
+      _setWrapper();
+
+      const prose = wrapper.find(PROSE_SELECTOR);
+
+      expect(prose.classes()).toContain('d-prose');
+      expect(prose.classes().some(c => c.includes('--size-'))).toBe(false);
+    });
+  });
+
+  describe('Density Prop', () => {
+    it.each([
+      [100, PROSE_DENSITY_MODIFIERS[100]],
+      [300, PROSE_DENSITY_MODIFIERS[300]],
+    ])('Should apply correct class when density is %s', (density, expectedClass) => {
+      _setWrapper({ density });
+
+      const prose = wrapper.find(PROSE_SELECTOR);
+
+      expect(prose.classes()).toContain(expectedClass);
+    });
+
+    it('Should not render a density modifier class when density is not set', () => {
+      _setWrapper();
+
+      const prose = wrapper.find(PROSE_SELECTOR);
+
+      expect(prose.classes()).toContain('d-prose');
+      expect(prose.classes().some(c => c.includes('--density-'))).toBe(false);
+    });
+  });
+
+  describe('Combined Size and Density Props', () => {
+    it('Should apply both size and density modifier classes', () => {
+      _setWrapper({ size: 100, density: 300 });
+
+      const prose = wrapper.find(PROSE_SELECTOR);
+
+      expect(prose.classes()).toContain('d-prose');
+      expect(prose.classes()).toContain(PROSE_SIZE_MODIFIERS[100]);
+      expect(prose.classes()).toContain(PROSE_DENSITY_MODIFIERS[300]);
     });
   });
 });

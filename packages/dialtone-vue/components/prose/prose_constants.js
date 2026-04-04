@@ -1,3 +1,15 @@
+export const PROSE_SIZE_MODIFIERS = {
+  100: 'd-prose--size-100',
+  200: 'd-prose--size-200',
+  300: '',
+};
+
+export const PROSE_DENSITY_MODIFIERS = {
+  100: 'd-prose--density-100',
+  200: '',
+  300: 'd-prose--density-300',
+};
+
 export const PROSE_DISALLOWED_ELEMENTS = [
   'form', 'input', 'select', 'textarea', 'button',
   'fieldset', 'output', 'datalist', 'progress', 'meter',
