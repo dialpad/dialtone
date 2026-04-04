@@ -8,6 +8,9 @@ keywords: ["border colour"]
   Before using border color utilities, first consider <dt-link to="/design/colors/palette/#borders" kind="muted">semantic border colors</dt-link>.
 </dt-notice>
 
+> [!warning] Test notice block
+> Before using border color utilities, first consider [semantic border colors](/design/colors/palette/#borders).
+
 ## Usage
 
 Use `d-bc-{color}` to set an element's border color.

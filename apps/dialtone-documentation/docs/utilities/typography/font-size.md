@@ -6,6 +6,9 @@ keywords: ["text size", "type size", "type scale"]
 
 <FontUtilitiesNotice />
 
+> [!warning] Use DtText over CSS Utilities
+> Reach for the [DtText](/components/text) component before considering any typography utility.
+
 ## Usage
 
 <code-well-header>

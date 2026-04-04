@@ -139,6 +139,45 @@ When a demo needs a layout wrapper (e.g., `<dt-stack direction="row">`) purely f
 3. `<!-- @code -->` separator only used when genuinely needed
 4. Run: `node scripts/lint-doc-examples.mjs` — should pass with 0 violations
 
+## Notice Blocks
+
+Use GFM-style blockquote alerts to render `<dt-notice>` components. A markdown-it plugin (`markdown-it-notice.js`) transforms them at build time.
+
+### Syntax
+
+```md
+> [!KIND] Optional title text
+> Body text with **markdown** and [links](/path).
+```
+
+**KIND** must be one of: `base`, `info`, `success`, `warning`, `error` (case-insensitive, maps to DtNotice's `kind` prop).
+
+Links in the body automatically get `d-link` styling.
+
+### Examples
+
+```md
+> [!warning] Use DtText over CSS Utilities
+> Reach for the [DtText](/components/text) component before considering any typography utility.
+
+> [!info] Accessibility
+> Always provide an `aria-label` when using icon-only buttons.
+
+> [!error] Breaking change
+> The `leftIcon` prop is removed in v10. Use `startIcon` instead.
+> See [migration guide](/guides/migration) for details.
+
+> [!success]
+> A notice with no custom title — DtNotice uses its default for the kind.
+```
+
+### When to use
+
+- **Prefer notice blocks** for all new callouts, warnings, tips, and deprecation notices in doc pages
+- **Use inline `<dt-notice>`** only when you need props not supported by the syntax (e.g., `important`, custom `role`, `action` slot), but this should be rare
+- **Do not create shared notice wrapper components** (e.g., `<SomeFeatureNotice />`) — use the markdown syntax directly so the content is visible and editable in the markdown file
+- Normal blockquotes (without `[!KIND]`) are unaffected and render as regular blockquotes
+
 ## Component Doc Pages (VuePress)
 
 Required sections in order: overview, usage example, variants, props table, events table, slots table, accessibility notes. See `rules/documentation-site.md` for frontmatter and sidebar conventions.
