@@ -8,12 +8,6 @@ figma_url: planned
 keywords: ["typography", "markdown", "content", "article", "html", "rich content", "d-prose", "DtProse", "dt-prose"]
 ---
 
-```vue demo
-<dt-prose>
-  <p class="asdfasdf">This is some prose content.</p>
-</dt-prose>
-```
-
 <component-combinator component-name="DtProse" />
 
 ## Usage
@@ -52,6 +46,22 @@ DtProse enforces that slot content stays "pure" HTML:
 - **Attribute stripping** — On elements inside the slot, non-essential attributes (`class`, `style`, `data-*`, event handlers) are silently removed. Structural and accessibility attributes (`id`, `href`, `src`, `alt`, `scope`, `lang`, `dir`, etc.) are preserved. Attributes on `<dt-prose>` itself are unaffected.
 
 This is a development-time guardrail, not a security boundary. XSS protection is the responsibility of whoever produces the HTML.
+
+### Supported elements
+
+Prose styles the full set of content HTML elements:
+
+| Category | Elements |
+| --- | --- |
+| Headings | `h1` – `h6`, with `<small>` subtext |
+| Text blocks | `p`, `blockquote`, `pre`, `hr` |
+| Inline formatting | `strong`, `em`, `code`, `kbd`, `mark`, `small`, `sub`, `sup`, `abbr`, `var`, `samp`, `dfn`, `del`, `ins`, `s`, `u`, `q` |
+| Links | `a` with hover, active, and focus-visible states |
+| Lists | `ul`, `ol`, `dl`/`dt`/`dd`, task lists |
+| Tables | `table`, `thead`, `tbody`, `th`, `td`, `caption` |
+| Media | `img`, `figure`/`figcaption` |
+| Interactive | `details`/`summary` |
+| Code | `pre > code` blocks, inline `code` |
 
 ## Variants
 
@@ -338,22 +348,6 @@ Checkboxes inside list items are the one exception to the "no form elements" rul
 - Tables use semantic `<thead>`, `<th scope>`, and visible borders for screen-reader navigability.
 
 ## Vue API
-
-### Supported elements
-
-Prose styles the full set of content HTML elements:
-
-| Category | Elements |
-| --- | --- |
-| Headings | `h1` – `h6`, with `<small>` subtext |
-| Text blocks | `p`, `blockquote`, `pre`, `hr` |
-| Inline formatting | `strong`, `em`, `code`, `kbd`, `mark`, `small`, `sub`, `sup`, `abbr`, `var`, `samp`, `dfn`, `del`, `ins`, `s`, `u`, `q` |
-| Links | `a` with hover, active, and focus-visible states |
-| Lists | `ul`, `ol`, `dl`/`dt`/`dd`, task lists |
-| Tables | `table`, `thead`, `tbody`, `th`, `td`, `caption` |
-| Media | `img`, `figure`/`figcaption` |
-| Interactive | `details`/`summary` |
-| Code | `pre > code` blocks, inline `code` |
 
 <component-vue-api component-name="prose" />
 
