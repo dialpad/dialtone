@@ -1,7 +1,7 @@
 ---
 title: Border Directions
 description: Utilities for controlling an element's border.
-keywords: ["border top", "border bottom", "border left", "border right"]
+keywords: ["border top", "border bottom", "border left", "border right", "border inline start", "border inline end", "border block start", "border block end"]
 ---
 
 ## All Sides

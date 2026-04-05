@@ -1,7 +1,7 @@
 ---
 title: Max-width
 description: Utilities to control an element's maximum width.
-keywords: ["maximum width", "mxw"]
+keywords: ["maximum width", "mxw", "max inline size", "max inline-size"]
 ---
 
 ## Layout stops

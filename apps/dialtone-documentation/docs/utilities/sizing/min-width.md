@@ -1,7 +1,7 @@
 ---
 title: Min-width
 description: Utilities to control an element's minimum width.
-keywords: ["minimum width", "mnw"]
+keywords: ["minimum width", "mnw", "min inline size", "min inline-size"]
 ---
 
 ## Layout stops

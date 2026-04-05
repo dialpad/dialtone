@@ -1,7 +1,7 @@
 ---
 title: Border Radius
 description: Utilities for controlling an element's border radius.
-keywords: ["rounded", "corner", "pill", "circle"]
+keywords: ["rounded", "corner", "pill", "circle", "radius start", "radius end"]
 ---
 
 ## All Corners
