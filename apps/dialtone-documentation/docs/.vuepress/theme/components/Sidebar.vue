@@ -83,16 +83,14 @@ const focusedIndex = ref(-1);
 // Ref to the search input element
 const searchInput = ref(null);
 
-// Normalize a string for separator-insensitive matching.
-// Strips non-alphanumeric characters so "border-color", "border color",
-// and "bordercolor" all normalize to "bordercolor".
+// Strip separators and case for fuzzy matching.
 const normalize = (str) => str.toLowerCase().replace(/[^a-z0-9]/g, '');
 
 // Recursive filter function for sidebar items
 const filterItems = (items, searchTerm) => {
   if (!searchTerm) return items;
 
-  const term = searchTerm.toLowerCase().trim();
+  const term = searchTerm.trim();
   if (!term) return items;
 
   const normalizedTerm = normalize(term);
