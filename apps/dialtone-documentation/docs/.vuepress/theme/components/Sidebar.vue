@@ -83,6 +83,11 @@ const focusedIndex = ref(-1);
 // Ref to the search input element
 const searchInput = ref(null);
 
+// Normalize a string for separator-insensitive matching.
+// Strips non-alphanumeric characters so "border-color", "border color",
+// and "bordercolor" all normalize to "bordercolor".
+const normalize = (str) => str.toLowerCase().replace(/[^a-z0-9]/g, '');
+
 // Recursive filter function for sidebar items
 const filterItems = (items, searchTerm) => {
   if (!searchTerm) return items;
@@ -90,13 +95,14 @@ const filterItems = (items, searchTerm) => {
   const term = searchTerm.toLowerCase().trim();
   if (!term) return items;
 
+  const normalizedTerm = normalize(term);
   const filtered = [];
 
   items.forEach(item => {
     // Check if current item matches (text or keywords)
-    const itemMatches = item.text.toLowerCase().includes(term) ||
+    const itemMatches = normalize(item.text).includes(normalizedTerm) ||
       (item.keywords?.some(keyword =>
-        keyword.toLowerCase().includes(term),
+        normalize(keyword).includes(normalizedTerm),
       ) ?? false);
 
     // Recursively filter children if they exist
