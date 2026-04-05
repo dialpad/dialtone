@@ -1,7 +1,7 @@
 <template>
   <span
     data-qa="dt-split-button"
-    :class="[rootClass, 'd-split-btn', { 'd-split-btn--no-divider': !showDivider }]"
+    :class="[rootClass, 'd-split-btn', { 'd-split-btn--no-divider': !showDivider && importance === 'clear' }]"
     :style="{ width }"
   >
     <split-button-start
