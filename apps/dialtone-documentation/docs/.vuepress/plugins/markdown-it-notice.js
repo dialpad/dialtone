@@ -97,7 +97,7 @@ export default function noticePlugin (md) {
       // Adjacent paragraphs get <br> separators; remaining <p> tags are
       // removed so block elements like <ul> don't cause orphaned </p>.
       bodyHtml = bodyHtml
-        .replace(/<\/p>\n<p[^>]*>/g, '<br>')
+        .replace(/<\/p>\s*<p[^>]*>/g, '<br>')
         .replace(/<p[^>]*>/g, '')
         .replace(/<\/p>/g, '');
 
