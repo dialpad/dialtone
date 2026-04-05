@@ -139,7 +139,7 @@ When a demo needs a layout wrapper (e.g., `<dt-stack direction="row">`) purely f
 3. `<!-- @code -->` separator only used when genuinely needed
 4. Run: `node scripts/lint-doc-examples.mjs` — should pass with 0 violations
 
-## Notice Blocks
+## Notice Blocks (GFM Alerts → DtNotice)
 
 Use GFM-style blockquote alerts to render `<dt-notice>` components. A markdown-it plugin (`markdown-it-notice.js`) transforms them at build time.
 
@@ -152,7 +152,17 @@ Use GFM-style blockquote alerts to render `<dt-notice>` components. A markdown-i
 
 **KIND** must be one of: `BASE`, `INFO`, `SUCCESS`, `WARNING`, `ERROR` (case-insensitive, but uppercase is the convention — maps to DtNotice's `kind` prop).
 
-Links in the body automatically get `d-link` styling.
+The plugin always adds `hide-close` and `class="d-wmx100p d-my-200 dialtone-doc-notice"`. Links in the body automatically get `d-link` styling.
+
+### Choosing a kind
+
+| Kind | Use for | Example |
+| --- | --- | --- |
+| `INFO` | Supplementary context, tips, notes, browser support | "DtStack also accepts responsive props" |
+| `WARNING` | Deprecations, migration nudges, "prefer X over Y" | "Use DtText over CSS utilities" |
+| `ERROR` | Breaking changes, removed APIs, things that will fail | "The `leftIcon` prop is removed in v10" |
+| `SUCCESS` | Confirmation of completion, positive outcomes | Rare in docs — use sparingly |
+| `BASE` | Neutral notices that don't fit other kinds | Rare — prefer `INFO` in most cases |
 
 ### Examples
 
@@ -173,10 +183,17 @@ Links in the body automatically get `d-link` styling.
 
 ### When to use
 
-- **Prefer notice blocks** for all new callouts, warnings, tips, and deprecation notices in doc pages
-- **Use inline `<dt-notice>`** only when you need props not supported by the syntax (e.g., `important`, custom `role`, `action` slot), but this should be rare
+- **Prefer notice blocks** for deprecation warnings, breaking changes, migration guidance, prerequisites, and browser support notes
+- **Use inline `<dt-notice>`** only when you need props not supported by the syntax (e.g., `important`, custom `role`, `action` slot), though this should be extremely rare if ever
 - **Do not create shared notice wrapper components** (e.g., `<SomeFeatureNotice />`) — use the markdown syntax directly so the content is visible and editable in the markdown file
 - Normal blockquotes (without `[!KIND]`) are unaffected and render as regular blockquotes
+
+### When NOT to use
+
+- **Don't use notices for ordinary prose.** If the information flows naturally in the surrounding text, it doesn't need a callout. Notices are for content that interrupts the flow — warnings, deprecations, prerequisites, breaking changes.
+- **Don't stack multiple notices.** Two or more consecutive notices create visual clutter. Combine related information into a single notice, or restructure so only the most critical point gets a callout.
+- **Don't use notices inside code example sections.** Place them before or after the example block, not between related examples.
+- **Don't use `[!INFO]` as a default.** Choose the kind that matches the intent — most doc callouts are `WARNING` (deprecations, migration) or `ERROR` (breaking changes), not `INFO`.
 
 ## Component Doc Pages (VuePress)
 

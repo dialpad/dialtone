@@ -155,4 +155,5 @@ All tracking data lives in `.claude/tsc-cache/<session>/` (gitignored):
 | `packages/dialtone-tokens/tokens/$metadata.json` | Token sets build order |
 | `apps/dialtone-documentation/docs/_data/site-nav.json` | Sidebar navigation |
 | `apps/dialtone-documentation/docs/.vuepress/plugins/markdown-it-fenced-demo.js` | Fenced ` ```vue demo ` → `<code-example>` transform |
+| `apps/dialtone-documentation/docs/.vuepress/plugins/markdown-it-notice.js` | GFM `> [!KIND]` alerts → `<dt-notice>` transform |
 | `scripts/migrate-code-examples.mjs` | Migration script: `<code-example>` → fenced demo syntax |
