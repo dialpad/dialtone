@@ -94,6 +94,8 @@ const filterItems = (items, searchTerm) => {
   if (!term) return items;
 
   const normalizedTerm = normalize(term);
+  if (!normalizedTerm) return [];
+
   const filtered = [];
 
   items.forEach(item => {
