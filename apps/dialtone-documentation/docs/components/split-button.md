@@ -123,6 +123,32 @@ In addition to the [Button component's](button.md) documentation:
 </dt-stack>
 ```
 
+### No Divider
+
+Use `:show-divider="false"` to hide the vertical divider between the start and end buttons. This is only available for the `clear` importance variant.
+
+```vue demo
+<!-- @wrapper -->
+<dt-stack direction="row" gap="100">
+  <dt-split-button importance="clear" kind="muted" :show-divider="false" end-tooltip-text="More calling options">
+    Place Call
+    <template #dropdownList>
+      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>
+      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item>
+      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>
+    </template>
+  </dt-split-button>
+  <dt-split-button importance="clear" :show-divider="false" end-tooltip-text="More calling options">
+    Place Call
+    <template #dropdownList>
+      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>
+      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item>
+      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>
+    </template>
+  </dt-split-button>
+</dt-stack>
+```
+
 ### Disabled
 
 Use the `disabled` prop to disable both buttons, or use `start-disabled` and `end-disabled` to disable each button independently.

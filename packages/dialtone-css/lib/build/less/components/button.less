@@ -826,6 +826,11 @@
     }
   }
 
+  &--no-divider &__omega::before,
+  &--no-divider &__end::before {
+    content: none;
+  }
+
   // adjust x-padding for icon-only button at each size
   &__omega--xs,
   &__end--xs {

@@ -1,6 +1,14 @@
 /* eslint-disable max-len */
 
+
 export default {
+  exclusions: [
+    {
+      when: { importance: v => v !== 'clear' },
+      hide: { props: ['showDivider'] },
+    },
+  ],
+
   default: {
     props: {
       endTooltipText: {
@@ -103,6 +111,21 @@ export default {
     slots: {
       default: { initialValue: 'Place Call' },
       leading: { initialValue: '<dt-badge kind="count" text="3" />' },
+      dropdownList: {
+        initialValue: '<dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>\n<dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item>\n<dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>',
+      },
+    },
+  },
+
+  'clear muted no divider': {
+    props: {
+      importance: { initialValue: 'clear' },
+      kind: { initialValue: 'muted' },
+      showDivider: { initialValue: false },
+      endTooltipText: { initialValue: 'More calling options' },
+    },
+    slots: {
+      default: { initialValue: 'Place Call' },
       dropdownList: {
         initialValue: '<dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>\n<dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item>\n<dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>',
       },

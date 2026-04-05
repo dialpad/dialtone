@@ -1,7 +1,7 @@
 <template>
   <span
     data-qa="dt-split-button"
-    :class="[rootClass, 'd-split-btn']"
+    :class="[rootClass, 'd-split-btn', { 'd-split-btn--no-divider': !showDivider }]"
     :style="{ width }"
   >
     <split-button-start
@@ -490,6 +490,16 @@ export default {
     },
 
     /**
+     * Whether to show the vertical divider between the start and end buttons.
+     * Only applies when importance is "clear".
+     * @values true, false
+     */
+    showDivider: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
      * Additional class name for the root element.
      * Can accept all of: String, Object, and Array, i.e. has the
      * same api as Vue's built-in handling of the class attribute.
@@ -648,6 +658,7 @@ export default {
     validateProps () {
       this.validateStartButtonProps();
       this.validateEndButtonProps();
+      this.validateShowDivider();
     },
 
     validateStartButtonProps () {
@@ -664,6 +675,15 @@ export default {
 
       if (!(this.omegaTooltipText ?? this.endTooltipText)) {
         console.warn('end-tooltip-text prop is required as it is an icon-only button');
+      }
+    },
+
+    validateShowDivider () {
+      if (!this.showDivider && this.importance !== 'clear') {
+        console.warn(
+          'show-divider prop set to false has no effect when importance is not "clear". ' +
+          'The divider is always shown for "outlined" and "primary" importances.',
+        );
       }
     },
   },
