@@ -7,8 +7,6 @@
  * Also provides shared helpers: consumeUntilClose and parseFrontmatterField.
  */
 
-import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
 import { transformVueApi } from './transform-vue-api.mjs';
 import { transformClassTable, transformAccessibleTable } from './transform-class-table.mjs';
 import {
@@ -19,7 +17,6 @@ import {
 } from './transform-color-tables.mjs';
 import { transformAllTokens } from './transform-tokens.mjs';
 import { transformIconCatalog, transformIllustrationCatalog } from './transform-icon-catalog.mjs';
-import { transformDtNotice } from './parse-source-markdown.mjs';
 
 /**
  * Advance past lines until a closing tag is found.
@@ -59,44 +56,6 @@ export function parseFrontmatterField (trimmed, field) {
   const match = trimmed.match(new RegExp(`^${field}:\\s*(.+)`));
   if (!match) return null;
   return match[1].replace(/^['"]|['"]$/g, '').trim();
-}
-
-const BASE_COMPONENTS = resolve(import.meta.dirname, '../../docs/.vuepress/baseComponents');
-
-/**
- * Read a Vue SFC from baseComponents, extract its <dt-notice> content,
- * and convert it to GFM alert lines via transformDtNotice.
- */
-function readNoticeComponent (filename) {
-  const content = readFileSync(resolve(BASE_COMPONENTS, filename), 'utf-8');
-  const templateMatch = content.match(/<template>\s*([\s\S]*?)\s*<\/template>/);
-  if (!templateMatch) return ['<!-- could not extract template from ' + filename + ' -->'];
-
-  const templateContent = templateMatch[1];
-  const lines = templateContent.split('\n');
-
-  const openingTagParts = [];
-  const bodyLines = [];
-  let phase = 'before'; // before | opening | body
-  for (const line of lines) {
-    const trimmed = line.trim();
-    if (phase === 'before' && trimmed.startsWith('<dt-notice')) {
-      openingTagParts.push(trimmed);
-      phase = trimmed.includes('>') ? 'body' : 'opening';
-      continue;
-    }
-    if (phase === 'opening') {
-      openingTagParts.push(trimmed);
-      if (trimmed.includes('>')) phase = 'body';
-      continue;
-    }
-    if (phase === 'body') {
-      if (trimmed === '</dt-notice>' || trimmed.startsWith('</dt-notice>')) break;
-      bodyLines.push(line);
-    }
-  }
-
-  return transformDtNotice(openingTagParts.join(' '), bodyLines);
 }
 
 /**
@@ -166,24 +125,6 @@ export const INLINE_HANDLERS = [
       return transformColorsCatalog(mode);
     },
     closingTags: ['</ColorsCatalog>'],
-  },
-
-  // <FlexStackNotice /> or <flex-stack-notice>
-  {
-    match: (trimmed) =>
-      (trimmed.startsWith('<FlexStackNotice') || trimmed.startsWith('<flex-stack-notice'))
-        ? trimmed : null,
-    handle: () => readNoticeComponent('FlexStackNotice.vue'),
-    closingTags: ['</FlexStackNotice>', '</flex-stack-notice>'],
-  },
-
-  // <FontUtilitiesNotice /> or <font-utilities-notice>
-  {
-    match: (trimmed) =>
-      (trimmed.startsWith('<FontUtilitiesNotice') || trimmed.startsWith('<font-utilities-notice'))
-        ? trimmed : null,
-    handle: () => readNoticeComponent('FontUtilitiesNotice.vue'),
-    closingTags: ['</FontUtilitiesNotice>', '</font-utilities-notice>'],
   },
 
   // <all-tokens />

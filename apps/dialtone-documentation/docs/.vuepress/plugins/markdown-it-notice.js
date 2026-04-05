@@ -3,11 +3,11 @@
  * <dt-notice> Vue components.
  *
  * Syntax:
- *   > [!warning] Optional title
+ *   > [!WARNING] Optional title
  *   > Body text with **markdown** and [links](/path).
  *
- * Supported kinds: base, info, success, warning, error
- * (matching DtNotice's `kind` prop, case-insensitive)
+ * Supported kinds: BASE, INFO, SUCCESS, WARNING, ERROR
+ * (uppercase by convention, case-insensitive — maps to DtNotice's `kind` prop)
  *
  * Always outputs: hide-close, class="d-wmx100p d-my-200"
  *
@@ -94,18 +94,19 @@ export default function noticePlugin (md) {
 
       // Strip <p> wrappers — DtNotice wraps slot content in its own <p>.
       // Keeping them creates invalid nested <p><p>...</p></p>.
-      // Multi-paragraph bodies get <br> separators instead.
+      // Adjacent paragraphs get <br> separators; remaining <p> tags are
+      // removed so block elements like <ul> don't cause orphaned </p>.
       bodyHtml = bodyHtml
         .replace(/<\/p>\n<p[^>]*>/g, '<br>')
-        .replace(/^<p[^>]*>/, '')
-        .replace(/<\/p>\n?$/, '');
+        .replace(/<p[^>]*>/g, '')
+        .replace(/<\/p>/g, '');
 
       // Build <dt-notice> tag
       const attrs = [`kind="${kind}"`];
       if (title) {
         attrs.push(`title="${encodeForAttr(title)}"`);
       }
-      attrs.push('hide-close', 'class="d-wmx100p d-my-200"');
+      attrs.push('hide-close', 'class="d-wmx100p d-my-200 dialtone-doc-notice"');
 
       const html = `<dt-notice ${attrs.join(' ')}>\n${bodyHtml}</dt-notice>\n`;
 
