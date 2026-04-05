@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+/* eslint-disable complexity */
 /**
  * State-machine parser that transforms a component .md source file
  * into clean GFM markdown.
@@ -482,13 +484,15 @@ function tryDetectFrontmatterStart (ctx) {
   return true;
 }
 
-// ── Kind → GitHub alert mapping for dt-notice ────────────────────
+// ── Kind → GFM alert mapping for dt-notice ───────────────────────
+// Uses DtNotice kind values directly (uppercase) to match the
+// > [!KIND] convention used in the VuePress source files.
 const NOTICE_KIND_MAP = {
   warning: 'WARNING',
-  info: 'NOTE',
-  error: 'CAUTION',
-  success: 'TIP',
-  base: 'NOTE',
+  info: 'INFO',
+  error: 'ERROR',
+  success: 'SUCCESS',
+  base: 'BASE',
 };
 
 /**
@@ -543,14 +547,10 @@ function tryDetectDtNotice (ctx) {
  */
 export function transformDtNotice (openingTag, bodyLines) {
   const kind = extractTagAttribute(openingTag, 'kind') || 'base';
-  const alertType = NOTICE_KIND_MAP[kind] || 'NOTE';
+  const alertType = NOTICE_KIND_MAP[kind] || 'INFO';
+  const title = extractTagAttribute(openingTag, 'title');
 
-  const filtered = bodyLines.filter(l => {
-    const t = l.trim();
-    if (t.match(/^<template\b/)) return false;
-    if (t === '</template>') return false;
-    return true;
-  });
+  const filtered = bodyLines.filter(l => !/^\s*<\/?template[\s>]/.test(l));
 
   const joined = filtered.join('\n');
   const withLinks = convertRouterLinks(joined);
@@ -560,14 +560,12 @@ export function transformDtNotice (openingTag, bodyLines) {
     .filter(Boolean);
   let content = paragraphs.join('\n\n');
 
-  // Use title attribute as fallback when body is empty
-  if (!content) {
-    const title = extractTagAttribute(openingTag, 'title');
-    if (title) content = title;
-  }
+  // Use title as body fallback when body is empty
+  if (!content && title) content = title;
 
   if (!content) return [];
-  const lines = [`> [!${alertType}]`];
+  const header = title ? `> [!${alertType}] ${title}` : `> [!${alertType}]`;
+  const lines = [header];
   for (const line of content.split('\n')) {
     const trimmedLine = line.trim();
     lines.push(trimmedLine ? `> ${trimmedLine}` : '>');
