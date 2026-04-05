@@ -43,11 +43,8 @@ Breadcrumbs are always treated as secondary and should not entirely replace the 
 
 ### Inverted
 
-<dt-notice title="Deprecated" kind="info" class="d-wmx100p d-my-200" hide-close>
-  The <code>inverted</code> prop has been deprecated. Use the
-  <dt-link to="mode-island.html#inverting">v-dt-mode directive</dt-link>
-  instead.
-</dt-notice>
+> [!INFO] Deprecated
+> The `inverted` prop has been deprecated. Use the [v-dt-mode directive](mode-island.html#inverting) instead.
 
 In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#inverting) on the component element.
 

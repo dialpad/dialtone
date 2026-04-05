@@ -363,16 +363,7 @@ Text box trim will only affect elements with block or inline-block styled contex
 </template>
 </dialtone-usage>
 
-<dt-notice
-  kind="info"
-  class="d-wmx100p d-my-300"
-  hide-close
-  title="Browser Support"
->
-  Text box trim requires modern browser support for <code class="d-bgc-transparent">text-box-trim</code>. Chrome 133+, Edge 132+, Safari 18.2+ as of November 2025. Otherwise, it will gracefully fallback to default rendering with half-leading above and below.
-</dt-notice>
-
-> [!info] Browser Support
+> [!INFO] Browser Support
 > Text box trim requires modern browser support for `text-box-trim`. Chrome 133+, Edge 132+, Safari 18.2+ as of November 2025. Otherwise, it will gracefully fallback to default rendering with half-leading above and below.
 
 ## Examples

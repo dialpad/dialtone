@@ -29,14 +29,8 @@ Dialtone defines four cascade layers in priority order:
 3. `dialtone.components !important`
 4. `dialtone.utilities !important` - Lowest priority
 
-<dt-notice
-  title="Note"
-  kind="info"
-  hide-close
-  class="d-wmx100p d-mbs-200"
->
-  Since Dialtone utilities use <code>!important</code> and are in the last layer (top-most), they effectively have the highest priority for overriding component styles while staying organized.
-</dt-notice>
+> [!INFO] Note
+> Since Dialtone utilities use `!important` and are in the last layer (top-most), they effectively have the highest priority for overriding component styles while staying organized.
 
 ### What's in Each Layer
 
@@ -111,14 +105,8 @@ Styles outside any `@layer` have the highest priority:
 }
 ```
 
-<dt-notice
-  title="Warning"
-  kind="warning"
-  hide-close
-  class="d-wmx100p d-mbs-300"
->
-  Use unlayered styles sparingly. They defeat the purpose of cascade layers and make styles harder to maintain.
-</dt-notice>
+> [!WARNING] Warning
+> Use unlayered styles sparingly. They defeat the purpose of cascade layers and make styles harder to maintain.
 
 ### Common Patterns
 
@@ -267,14 +255,8 @@ Wrap utility classes in `@layer dialtone.utilities`:
 
 ### Parametric Mixins for Cross-Layer Access
 
-<dt-notice
-  title="Warning"
-  kind="warning"
-  hide-close
-  class="d-mbe-200 d-wmx100p"
->
-  LESS mixins should rarely be used. Please consult with the team before using them.
-</dt-notice>
+> [!WARNING] Warning
+> LESS mixins should rarely be used. Please consult with the team before using them.
 
 If you need to share styles between files or layers, extract parametric mixins **outside** `@layer` blocks:
 

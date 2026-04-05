@@ -150,24 +150,24 @@ Use GFM-style blockquote alerts to render `<dt-notice>` components. A markdown-i
 > Body text with **markdown** and [links](/path).
 ```
 
-**KIND** must be one of: `base`, `info`, `success`, `warning`, `error` (case-insensitive, maps to DtNotice's `kind` prop).
+**KIND** must be one of: `BASE`, `INFO`, `SUCCESS`, `WARNING`, `ERROR` (case-insensitive, but uppercase is the convention — maps to DtNotice's `kind` prop).
 
 Links in the body automatically get `d-link` styling.
 
 ### Examples
 
 ```md
-> [!warning] Use DtText over CSS Utilities
+> [!WARNING] Use DtText over CSS Utilities
 > Reach for the [DtText](/components/text) component before considering any typography utility.
 
-> [!info] Accessibility
+> [!INFO] Accessibility
 > Always provide an `aria-label` when using icon-only buttons.
 
-> [!error] Breaking change
+> [!ERROR] Breaking change
 > The `leftIcon` prop is removed in v10. Use `startIcon` instead.
 > See [migration guide](/guides/migration) for details.
 
-> [!success]
+> [!SUCCESS]
 > A notice with no custom title — DtNotice uses its default for the kind.
 ```
 

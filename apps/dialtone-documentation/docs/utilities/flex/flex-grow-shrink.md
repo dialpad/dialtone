@@ -4,7 +4,8 @@ description: Utilities for setting an object's flex, grow, and shrink flex prope
 keywords: ["flexbox", "flex shrink", "flex basis"]
 ---
 
-<FlexStackNotice />
+> [!WARNING] Use DtStack in favor of Flex CSS Utilities
+> Use the [DtStack](/components/stack) component for most Flex-based layout implementations. View [Migrating from Flex CSS Utilities to DtStack](/about/whats-new/posts/2025-12-2) for more details.
 
 ## Flex
 

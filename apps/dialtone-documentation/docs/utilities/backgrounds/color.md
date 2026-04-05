@@ -4,9 +4,8 @@ description: Utilities for setting the background color.
 keywords: ["bg color","background colour","bgc"]
 ---
 
-<dt-notice kind="warning" class="d-wmx100p d-my-200" hideClose>
-  Before using background color utilities, first consider <dt-link to="/design/colors/palette/#surface" kind="muted">semantic surface colors</dt-link>.
-</dt-notice>
+> [!WARNING]
+> Before using background color utilities, first consider [semantic surface colors](/design/colors/palette/#surface).
 
 ## Usage
 
@@ -113,9 +112,8 @@ Use `d-bgo{stop}` to change an element's background color opacity. You can also 
 
 ## Inverted
 
-<dt-notice title="Tip" kind="info" class="d-wmx100p d-my-200">
-  Avoid <code>-inverted</code> utility variants. Use the <dt-link to="/components/mode-island.html#inverting">v-dt-mode directive</dt-link> with base classes instead — it automatically resolves the correct colors for the current mode.
-</dt-notice>
+> [!INFO] Tip
+> Avoid `-inverted` utility variants. Use the [v-dt-mode directive](/components/mode-island.html#inverting) with base classes instead -- it automatically resolves the correct colors for the current mode.
 
 <code-well-header>
   <dt-stack

@@ -4,9 +4,8 @@ description: Utilities for setting an element's interior spacing between child e
 keywords: ["inner spacing", "inset"]
 ---
 
-<dt-notice kind="info" class="d-wmx100p d-my-200" hideClose>
-  Padding CSS Utilities are most appropriate for padding on the <strong>sides</strong> of an element. Avoiding using it to create spacing <strong>between</strong> elements. Instead, favor the <dt-link to="/components/stack/" kind="muted">Stack</dt-link> component and its <code>gap</code> property for spacing between. It can still be combined with flex utilities to create more complex layouts.
-</dt-notice>
+> [!INFO]
+> Padding CSS Utilities are most appropriate for padding on the **sides** of an element. Avoiding using it to create spacing **between** elements. Instead, favor the [Stack](/components/stack/) component and its `gap` property for spacing between. It can still be combined with flex utilities to create more complex layouts.
 
 Use `d-p-{stop}` to set padding using spacing token stops. The number references the spacing token (`d-p-100` = `--dt-spacing-100` = 8px).
 

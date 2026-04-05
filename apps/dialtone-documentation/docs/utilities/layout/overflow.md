@@ -4,9 +4,8 @@ description: Utilities for controlling how an element handles content that is to
 keywords: ["scroll", "hidden", "auto", "clip", "scrollbar"]
 ---
 
-<dt-notice kind="info" class="d-wmx100p d-my-200" hideClose>
-  Consider using the custom scrollbar first with the <dt-link to="/components/scrollbar" kind="muted">Scrollbar Directive</dt-link>.
-</dt-notice>
+> [!INFO]
+> Consider using the custom scrollbar first with the [Scrollbar Directive](/components/scrollbar).
 
 ## Examples
 

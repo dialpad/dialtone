@@ -4,7 +4,8 @@ description: Utilities to change an element's font styles.
 keywords: ["italic", "oblique", "normal"]
 ---
 
-<FontUtilitiesNotice />
+> [!WARNING] Use DtText over CSS Utilities
+> Reach for the [DtText](/components/text) component before considering any typography utility.
 
 ## Normal
 
@@ -44,7 +45,6 @@ Use `d-fs-none` to remove an element's font-style.
 
 <script setup>
   import { style } from '@data/type.json';
-  import FontUtilitiesNotice from '@baseComponents/FontUtilitiesNotice.vue';
 </script>
 
 ## Classes

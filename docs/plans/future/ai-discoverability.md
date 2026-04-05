@@ -185,7 +185,7 @@ The `llms.txt` file already serves as the index. Each raw markdown file is a sel
 #### 3b — Inline Component Handlers (Priority: Medium)
 
 4. **Unit tests for component handlers** (`component-handlers.mjs`)
-    - What: Test the 14 inline handlers (`<component-vue-api>`, `<component-class-table>`, `<component-accessible-table>`, `<DesignColorTable>`, `<ThemeColorTable>`, `<ColorsCatalog>`, `<FlexStackNotice>`, `<FontUtilitiesNotice>`, `<ButtonVariantsTable>`, `<all-tokens>`, `<icon-catalog>`, etc.) with mock JSON data
+    - What: Test the inline handlers (`<component-vue-api>`, `<component-class-table>`, `<component-accessible-table>`, `<DesignColorTable>`, `<ThemeColorTable>`, `<ColorsCatalog>`, `<ButtonVariantsTable>`, `<all-tokens>`, `<icon-catalog>`, etc.) with mock JSON data
     - Why: Each handler has complex attribute parsing and data lookups; currently untested
     - Include: Missing component graceful handling, malformed attributes
 

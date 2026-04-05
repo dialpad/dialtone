@@ -4,11 +4,8 @@ description: Utilities for controlling the space between child elements.
 keywords: ["margin","padding","gap","whitespace"]
 ---
 
-<dt-notice kind="error" class="d-wmx100p d-my-200" hideClose>
-
-`d-stack` and `d-flow` utilities are deprecated. Please use the <dt-link to="/components/stack" kind="muted">Stack</dt-link> component instead.
-
-</dt-notice>
+> [!ERROR]
+> `d-stack` and `d-flow` utilities are deprecated. Please use the [Stack](/components/stack) component instead.
 
 ## Adding Space Vertically
 

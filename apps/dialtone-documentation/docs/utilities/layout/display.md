@@ -51,7 +51,8 @@ keywords: ["block", "inline", "flex", "grid", "none", "hidden"]
 
 ## Flex Display
 
-<FlexStackNotice class="d-mbe-200" />
+> [!WARNING] Use DtStack in favor of Flex CSS Utilities
+> Use the [DtStack](/components/stack) component for most Flex-based layout implementations. View [Migrating from Flex CSS Utilities to DtStack](/about/whats-new/posts/2025-12-2) for more details.
 
 While `d-d-flex` and `d-d-inline-flex` technically are `display` utilities, use the [DtStack](/components/stack) component instead.
 

@@ -4,7 +4,8 @@ description: Utilities to change an element's font-color.
 keywords: ["text color", "foreground color", "font colour"]
 ---
 
-<FontUtilitiesNotice />
+> [!WARNING] Use DtText over CSS Utilities
+> Reach for the [DtText](/components/text) component before considering any typography utility.
 
 ## Use DtText's `tone` prop
 
@@ -83,16 +84,8 @@ Use `fv:d-fc-{color}` to change an element's text color on `:focus-visible` stat
 
 ## Inverted
 
-<dt-notice
-  title="Tip"
-  kind="info"
-  class="d-wmx100p d-my-200"
->
-  Avoid <code>-inverted</code> utility variants, which will be sunset. Use the
-  <dt-link to="/components/mode-island.html#inverting">v-dt-mode directive</dt-link>
-  with base classes instead — it automatically resolves the correct colors for
-  the current mode.
-</dt-notice>
+> [!INFO] Tip
+> Avoid `-inverted` utility variants, which will be sunset. Use the [v-dt-mode directive](/components/mode-island.html#inverting) with base classes instead -- it automatically resolves the correct colors for the current mode.
 
 <code-well-header>
   <dt-stack direction="row" gap="400">
@@ -188,7 +181,6 @@ Use `d-fco{n}` to change an element's text color opacity. You can also change fo
 <script setup>
   import { inject } from 'vue';
   import { extractUtilityClasses } from '@utilities';
-  import FontUtilitiesNotice from '@baseComponents/FontUtilitiesNotice.vue';
 
   const utilityClassDocs = inject('utilityClassDocs');
   const fontColors = extractUtilityClasses(utilityClassDocs, 'd-fc-');

@@ -4,11 +4,7 @@ description: Utilities for controlling an element's border color.
 keywords: ["border colour"]
 ---
 
-<dt-notice kind="warning" class="d-wmx100p d-my-200" hideClose>
-  Before using border color utilities, first consider <dt-link to="/design/colors/palette/#borders" kind="muted">semantic border colors</dt-link>.
-</dt-notice>
-
-> [!warning] Test notice block
+> [!WARNING]
 > Before using border color utilities, first consider [semantic border colors](/design/colors/palette/#borders).
 
 ## Usage
@@ -171,9 +167,8 @@ You can also change the border color opacity value on `:hover`
 </dt-button>
 ```
 
-<dt-notice title="Tip" kind="info" class="d-wmx100p d-my-200">
-  Prefer using the <dt-link to="/components/mode-island.html#inverting">v-dt-mode directive</dt-link> with base utility classes instead of <code>-inverted</code> variants. For example, use <code>&lt;div v-dt-mode:invert class="d-bc-critical"&gt;</code> instead of <code>&lt;div class="d-bc-critical-inverted"&gt;</code>.
-</dt-notice>
+> [!INFO] Tip
+> Prefer using the [v-dt-mode directive](/components/mode-island.html#inverting) with base utility classes instead of `-inverted` variants. For example, use `<div v-dt-mode:invert class="d-bc-critical">` instead of `<div class="d-bc-critical-inverted">`.
 
 ## Classes
 
