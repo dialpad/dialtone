@@ -1,7 +1,7 @@
 ---
 title: Size
 description: Utilities to set both width and height simultaneously.
-keywords: ["size", "square", "aspect", "both dimensions"]
+keywords: ["size", "square", "aspect", "both dimensions", "inline size", "block size"]
 ---
 
 Size utilities set both `inline-size` (width) and `block-size` (height) at once. Useful for icons, avatars, thumbnails, and any element that needs to be square or have matching dimensions.

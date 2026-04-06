@@ -1,7 +1,7 @@
 ---
 title: Min-height
 description: Utilities to control an element's minimum height.
-keywords: ["minimum height", "mnh"]
+keywords: ["minimum height", "mnh", "min block size", "min block-size"]
 ---
 
 ## Layout stops

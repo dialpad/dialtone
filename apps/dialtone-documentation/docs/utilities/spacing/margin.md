@@ -1,7 +1,7 @@
 ---
 title: Margins
 description: Utilities to adjust an element's exterior spacing between other objects.
-keywords: ["outer spacing", "gap", "offset"]
+keywords: ["outer spacing", "gap", "offset", "margin inline start", "margin inline end", "margin block start", "margin block end"]
 ---
 
 <dt-notice kind="warning" class="d-wmx100p d-my-200" hideClose>

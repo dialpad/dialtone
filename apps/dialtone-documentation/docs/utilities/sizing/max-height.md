@@ -1,7 +1,7 @@
 ---
 title: Max-height
 description: Utilities to control an element's maximum height.
-keywords: ["maximum height", "mxh"]
+keywords: ["maximum height", "mxh", "max block size", "max block-size"]
 ---
 
 ## Layout stops
