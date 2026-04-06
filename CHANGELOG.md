@@ -1,3 +1,10 @@
+## [9.177.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.177.1...dialtone/v9.177.2) (2026-04-06)
+
+
+### Bug Fixes
+
+* NO-JIRA include static-renderer ([e698bf4](https://github.com/dialpad/dialtone/commit/e698bf44619e20a5b14c4dc9ceacc7a8352332db))
+
 ## [9.177.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.177.0...dialtone/v9.177.1) (2026-04-06)
 
 
