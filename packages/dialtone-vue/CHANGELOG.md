@@ -1,3 +1,10 @@
+## [3.218.5](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.218.4...dialtone-vue/v3.218.5) (2026-04-06)
+
+
+### Bug Fixes
+
+* NO-JIRA include static-renderer ([e698bf4](https://github.com/dialpad/dialtone/commit/e698bf44619e20a5b14c4dc9ceacc7a8352332db))
+
 ## [3.218.4](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.218.3...dialtone-vue/v3.218.4) (2026-04-02)
 
 
