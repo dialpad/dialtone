@@ -4,7 +4,8 @@ description: Utilities to change an element's font variant numeric.
 keywords: ["tabular", "lining", "oldstyle"]
 ---
 
-<FontUtilitiesNotice />
+> [!WARNING] Use DtText over CSS Utilities
+> Reach for the [DtText](/components/text) component before considering any typography utility.
 
 The `font-variant-numeric` CSS property controls the usage of alternate glyphs for numbers, fractions, and ordinal markers.
 
@@ -108,7 +109,6 @@ Use `d-fvn-unset` to deactivate other value previously set to `font-variant-nume
 
 <script setup>
   import { fontVariantNumeric } from '@data/type.json';
-  import FontUtilitiesNotice from '@baseComponents/FontUtilitiesNotice.vue';
 </script>
 
 ## Classes

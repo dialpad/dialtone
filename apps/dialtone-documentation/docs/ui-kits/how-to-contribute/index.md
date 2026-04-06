@@ -3,9 +3,8 @@ title: How to Contribute
 description: Thanks for your interest in contributing to Dialpad UI Kits!
 ---
 
-<dt-notice kind="info" hide-close>
-  This is an abbreviated version of the <a href="https://docs.google.com/document/d/1w4gXpZLkJ5tlT3Y_dCCU5laObliMUgucTVuH4auWtSA" class="d-link d-link--muted">full contributing guide</a>. We encourage all potential contributors to read the full guide for more information.
-</dt-notice>
+> [!INFO]
+> This is an abbreviated version of the [full contributing guide](https://docs.google.com/document/d/1w4gXpZLkJ5tlT3Y_dCCU5laObliMUgucTVuH4auWtSA). We encourage all potential contributors to read the full guide for more information.
 
 ## Proposing a new component or kit
 

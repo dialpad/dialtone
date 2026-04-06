@@ -4,7 +4,8 @@ description: Utilities to change an element's font-weight.
 keywords: ["bold", "semibold", "light", "thin"]
 ---
 
-<FontUtilitiesNotice />
+> [!WARNING] Use DtText over CSS Utilities
+> Reach for the [DtText](/components/text) component before considering any typography utility.
 
 ## Usage
 
@@ -66,5 +67,4 @@ Use `d-fw-{n}` to change an element's font-weight.
 <script setup>
   import { weight } from '@data/type.json';
   import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
-  import FontUtilitiesNotice from '@baseComponents/FontUtilitiesNotice.vue';
 </script>

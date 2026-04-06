@@ -4,7 +4,8 @@ description: Limiting the number of lines displayed for text content.
 keywords: ["truncate", "ellipsis", "max lines"]
 ---
 
-<FontUtilitiesNotice />
+> [!WARNING] Use DtText over CSS Utilities
+> Reach for the [DtText](/components/text) component before considering any typography utility.
 
 ## Usage
 
@@ -32,11 +33,8 @@ Use `d-lc-{n}` to truncate text at a specific number of lines with an ellipsis.
 
 ### Avoiding display conflicts
 
-<dt-notice kind="error" class="d-wmx100p d-my-200" :hideClose="true">
-  <template #default>
-    Avoid applying line-clamp to elements with flex or grid <code>display</code> styles. The clamped text should be considered a child element of the flex or grid container.
-  </template>
-</dt-notice>
+> [!ERROR]
+> Avoid applying line-clamp to elements with flex or grid `display` styles. The clamped text should be considered a child element of the flex or grid container.
 
 #### Flex example
 
@@ -89,5 +87,4 @@ The `d-lc-{n}` utility currently goes up to `9`. Should you need to go beyond, u
 
 <script setup>
   import { lineClamp } from '@data/type.json';
-  import FontUtilitiesNotice from '@baseComponents/FontUtilitiesNotice.vue';
 </script>

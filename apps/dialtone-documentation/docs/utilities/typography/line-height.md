@@ -4,7 +4,8 @@ description: Utilities to change an element's line-height.
 keywords: ["leading", "line spacing"]
 ---
 
-<FontUtilitiesNotice />
+> [!WARNING] Use DtText over CSS Utilities
+> Reach for the [DtText](/components/text) component before considering any typography utility.
 
 ## Relative Line-Heights
 
@@ -174,6 +175,5 @@ Use `d-lh{n}` to fix an element's line-height. This allows you to target a speci
 <script setup>
   import { lineHeight } from '@data/type.json';
   import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
-  import FontUtilitiesNotice from '@baseComponents/FontUtilitiesNotice.vue';
   const { relative, fixed } = lineHeight;
 </script>

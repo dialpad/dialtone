@@ -19,7 +19,6 @@ import CodeExampleTabs from './baseComponents/CodeExampleTabs.vue';
 import CodeExample from './baseComponents/CodeExample.vue';
 import SvgLoader from './baseComponents/SvgLoader.vue';
 import DialtoneUsage from './baseComponents/DialtoneUsage.vue';
-import FlexStackNotice from './baseComponents/FlexStackNotice.vue';
 import UiKitsComparisonTable from './baseComponents/UiKitsComparisonTable.vue';
 
 export default defineClientConfig({
@@ -42,7 +41,6 @@ export default defineClientConfig({
     app.component('CodeExample', CodeExample);
     app.component('SvgLoader', SvgLoader);
     app.component('DialtoneUsage', DialtoneUsage);
-    app.component('FlexStackNotice', FlexStackNotice);
     app.component('UiKitsComparisonTable', UiKitsComparisonTable);
   },
   setup () {

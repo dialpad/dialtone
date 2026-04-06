@@ -4,7 +4,8 @@ description: Utilities to change an element's font-family.
 keywords: ["typeface", "sans serif", "monospace"]
 ---
 
-<FontUtilitiesNotice />
+> [!WARNING] Use DtText over CSS Utilities
+> Reach for the [DtText](/components/text) component before considering any typography utility.
 
 ## Sans-Serif
 
@@ -33,7 +34,6 @@ Dialtone supports select marketing fonts and weights. Use the following combinat
 <script setup>
   import { fontFamily } from '@data/type.json';
   import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
-  import FontUtilitiesNotice from '@baseComponents/FontUtilitiesNotice.vue';
 </script>
 
 ## CSS Variables

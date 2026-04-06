@@ -225,14 +225,8 @@ The unstyled button removes all default Dialtone styling while preserving the se
 
 ### Inverted
 
-<dt-notice
-  title="Deprecated"
-  kind="info"
-  class="d-wmx100p d-my-200"
-  hide-close
->
-  <code>kind="inverted"</code> has been deprecated. Use the <dt-link to="mode-island.html#inverting">v-dt-mode directive</dt-link> instead, or <dt-link to="mode-island.html#dtmodeisland-component">DtModeIsland</dt-link>.
-</dt-notice>
+> [!WARNING] Deprecated
+> `kind="inverted"` has been deprecated. Use the [v-dt-mode directive](mode-island.html#inverting) instead, or [DtModeIsland](mode-island.html#dtmodeisland-component).
 
 Use the [v-dt-mode directive](mode-island.html#inverting) in place of `kind="inverted"` on the component element. The previous `inverted` variant of DtButton was limited to a single presentation style. The directive now makes every combination available as an inverted style.
 
@@ -390,14 +384,8 @@ The default button size is `300`, but does not need to be explicitly specified.
 
 ## Icon Support
 
-<dt-notice
-  kind="info"
-  class="d-wmx100p d-my-300"
-  hide-close
-  title="Note"
->
-  <code class="d-bgc-transparent">startIcon</code> and <code class="d-bgc-transparent">endIcon</code> slots replace the previous <code class="d-bgc-transparent">icon</code> slot and <code class="d-bgc-transparent">icon-position</code> prop, which are deprecated and will be sunset.
-</dt-notice>
+> [!INFO] Note
+> `startIcon` and `endIcon` slots replace the previous `icon` slot and `icon-position` prop, which are deprecated and will be sunset.
 
 ### Start and End
 
@@ -781,12 +769,8 @@ The width of the button remains determined by the length of the label, which is 
 
 Use the `#leading` and `#trailing` slots to render freeform content at the start or end of a button — outside the label area but inside the button's border. Common use cases include badges, count indicators, or keyboard shortcut hints. Use `leading-class` and `trailing-class` to add padding or styling to the slot containers.
 
-<dt-notice
-  kind="info"
-  title="Info"
->
-  This is not to be confused with `#icon` slots, which are specifically for icons. `leading` and `trailing` are essentially freeform.
-</dt-notice>
+> [!INFO] Info
+> This is not to be confused with `#icon` slots, which are specifically for icons. `leading` and `trailing` are essentially freeform.
 
 ### Leading
 
@@ -815,12 +799,8 @@ Use the `#leading` and `#trailing` slots to render freeform content at the start
 
 ## Split Button
 
-<dt-notice
-  kind="info"
-  class="d-wmx100p d-my-200"
->
-  <dt-link to="split-button.html">DtSplitButton</dt-link> is its own component containing multiple DtButtons.
-</dt-notice>
+> [!INFO]
+> [DtSplitButton](split-button.html) is its own component containing multiple DtButtons.
 
 ```vue demo-only
 <dt-split-button

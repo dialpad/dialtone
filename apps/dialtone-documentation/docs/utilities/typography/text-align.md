@@ -4,7 +4,8 @@ description: Utilities for controlling an element's text alignment.
 keywords: ["left", "center", "right", "justify"]
 ---
 
-<FontUtilitiesNotice />
+> [!WARNING] Use DtText over CSS Utilities
+> Reach for the [DtText](/components/text) component before considering any typography utility.
 
 ## Usage
 
@@ -28,7 +29,6 @@ Use `d-ta-{n}` to change an element's text alignment.
 
 <script setup>
   import { align } from '@data/type.json';
-  import FontUtilitiesNotice from '@baseComponents/FontUtilitiesNotice.vue';
 </script>
 
 ## Classes

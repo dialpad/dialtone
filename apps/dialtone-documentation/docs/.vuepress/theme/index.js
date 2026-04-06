@@ -7,6 +7,7 @@ import { sitemapPlugin } from 'vuepress-plugin-sitemap2';
 import markdownItClass from '@toycode/markdown-it-class';
 import fencedDemoPlugin from '../plugins/markdown-it-fenced-demo.js';
 import codeExampleSourcePlugin from '../plugins/markdown-it-code-example-source.js';
+import noticePlugin from '../plugins/markdown-it-notice.js';
 import { getDirname, path } from 'vuepress/utils'
 
 const __dirname = getDirname(import.meta.url);
@@ -289,6 +290,9 @@ export const dialtoneVuepressTheme = (options) => ({
       md.use(fencedDemoPlugin);
 
       md.use(markdownItClass, mapping);
+
+      // Transform > [!kind] blockquote alerts into <dt-notice> components
+      md.use(noticePlugin);
 
       // Auto-extract slot source from <code-example> blocks for the Vue code tab
       md.use(codeExampleSourcePlugin);

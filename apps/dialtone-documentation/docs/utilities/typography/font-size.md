@@ -4,7 +4,8 @@ description: Utilities to change an element's font-size.
 keywords: ["text size", "type size", "type scale"]
 ---
 
-<FontUtilitiesNotice />
+> [!WARNING] Use DtText over CSS Utilities
+> Reach for the [DtText](/components/text) component before considering any typography utility.
 
 ## Usage
 
@@ -29,7 +30,6 @@ keywords: ["text size", "type size", "type scale"]
 <script setup>
   import { fontSize } from '@data/type.json';
   import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
-  import FontUtilitiesNotice from '@baseComponents/FontUtilitiesNotice.vue';
 </script>
 
 ## Classes by Platform
