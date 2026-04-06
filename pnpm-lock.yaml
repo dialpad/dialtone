@@ -1333,11 +1333,11 @@ packages:
       postcss-selector-parser: ^7.0.0
 
   '@dialpad/conventional-changelog-angular@1.1.1':
-    resolution: {integrity: sha512-qUT8qgaypYlGPXDO5HqYdq0Q670fqAxr5AaJUo3AOzBJ6IRTcG48kXo6Z9GRVgqrL21jd6MS+fx5nu1wKM0W0w==}
+    resolution: {integrity: sha512-TLsyNwTUmGK6TtvdoC4SE/13Ae501pdzhSIyOV9V3HOVf8YrVTOgLUJ/l97kZSxcTOeRbFeRjbWfH7W3ixn36g==, tarball: https://npm.pkg.github.com/download/@dialpad/conventional-changelog-angular/1.1.1/1c54240f941b2d02d73e4ca2d4e53420d128bbf6}
     engines: {node: '>=10'}
 
   '@dialpad/i18n-goblin-core@1.1.0':
-    resolution: {integrity: sha512-RmDOjfB17zDHAEP4J3D464kSseCcCkO1mTVBuTwZAFx8jvrjquVzvI58mXZkU5dPaMnkeOlGdCiwQSAsFSWcag==}
+    resolution: {integrity: sha512-1hc4vItUk6via1ek/qDZPNyS6K8vjIJi6c3Adzf5etZVtzBR2q51oTORNhyUpt+Kdrnf/86VFY2o9DJ5p6rgZA==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n-goblin-core/1.1.0/dcdb873663c071b4c9507d49eb3298a2e270513c}
     peerDependencies:
       '@vue/composition-api': '*'
       vue: ^3.0.0
@@ -1346,17 +1346,17 @@ packages:
         optional: true
 
   '@dialpad/i18n-goblin-services@1.2.0':
-    resolution: {integrity: sha512-8kmjfmi+bXCX6zQvgnTgdDNDIHB9U/imsraiEu6h+Vf+cJmcDYVm2SniSBr5C+/U/rtzgHmucKlPEue30Of15w==}
+    resolution: {integrity: sha512-fWfp/HIaf3FOcNtxcw1TRzcbWOXOVqnd0W1hJ5REH9l8EW6ywvPjkIRgAUvKR6wmqQychPd7JbjD0Yv5NZ/dWg==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n-goblin-services/1.2.0/01f4f4d88518e29cd7f34509dd464c58327048f1}
     hasBin: true
 
   '@dialpad/i18n@1.25.0':
-    resolution: {integrity: sha512-oQScYUlt9c3GUUQF84Q8Zdcq/3l20Y/7xF0t3O6zmu5GN6PP9CF2hBA4MVMD0VDx1266io91ze9StJwPYbDFNA==}
+    resolution: {integrity: sha512-mt7oLj7Ujv5OJJKyWw54pC+t9ZDV0VTnf14iVT3ooGWBj9/Wv/DFOOQ6qHRd7gL+B4fLx4w4qaPXDh2Dy/5J0g==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n/1.25.0/b8f12af6615cb9e856c7dfc7b010c66f522bd64d}
     hasBin: true
     peerDependencies:
       vue: ^3.0.0
 
   '@dialpad/semantic-release-changelog-json@1.0.0':
-    resolution: {integrity: sha512-9bbDAiJR2MHI6M5KNsLQGebmg1d1exXP9O8lET6SIVWeaq6bIJrWM7WRqyohkBpq3Ad2ZPc0Rq6zCY0UC/wiVQ==}
+    resolution: {integrity: sha512-RIk5Wkco9pTucCO5Pi+4kx2CtmaDzY94V77bK/gluhb3IEDVktnzpS5SIWV+dTKtXUrHweoSXjCH+1cSifgefw==, tarball: https://npm.pkg.github.com/download/@dialpad/semantic-release-changelog-json/1.0.0/40fb236ee722da99879010c02f12b95cb2635ddc}
     engines: {node: '>=14.17'}
     peerDependencies:
       semantic-release: '>=18.0.0'
