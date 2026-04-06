@@ -150,15 +150,6 @@ Use the `disabled` prop to disable both buttons, or use `start-disabled` and `en
 
 Use `:show-divider="false"` to hide the vertical divider between the start and end buttons. This is only available for the `clear` importance variant.
 
-<dt-split-button :show-divider="false" end-tooltip-text="More calling options">
-  Place Call
-  <template #dropdownList>
-    <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>
-    <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item>
-    <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>
-  </template>
-</dt-split-button>
-
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="100">
