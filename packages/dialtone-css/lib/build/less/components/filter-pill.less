@@ -16,6 +16,16 @@
 
   display: inline-flex;
   gap: 0;
+  align-items: stretch;
+
+  // Nested popover wrappers shouldn't affect layout
+  > div:not([class]) {
+    display: contents;
+  }
+
+  :where(.d-popover, .d-popover > div) {
+    display: contents;
+  }
 
   &--read-only {
     --filter-pill-color-background-selected-hover: transparent;

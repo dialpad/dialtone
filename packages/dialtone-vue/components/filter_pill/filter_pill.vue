@@ -197,8 +197,8 @@
       importance="outlined"
       @click="clearFilter"
     >
-      <template #icon="{ iconSize }">
-        <dt-icon-close :size="iconSize" />
+      <template #icon>
+        <dt-icon-close :size="clearIconSize" />
       </template>
     </dt-button>
   </div>
@@ -207,7 +207,7 @@
 <script>
 import { DtPopover, POPOVER_APPEND_TO_VALUES, POPOVER_PADDING_CLASSES } from '@/components/popover';
 import { CONTENT_MODE_PROP } from '@/common/mode_constants';
-import { BUTTON_SIZE_MODIFIERS, DtButton } from '@/components/button';
+import { BUTTON_SIZE_MODIFIERS, BUTTON_ICON_SIZES, DtButton } from '@/components/button';
 import { DtIconChevronDown, DtIconClose } from '@dialpad/dialtone-icons/vue';
 import { DialtoneLocalization } from '@/localization';
 import { DtCheckbox } from '@/components/checkbox';
@@ -580,6 +580,11 @@ export default {
 
     applyButtonLabel () {
       return this.i18n.$t('DIALTONE_FILTER_PILL_APPLY_BUTTON_LABEL');
+    },
+
+    clearIconSize () {
+      if (String(this.size) === '100') return '100';
+      return BUTTON_ICON_SIZES[String(this.size)];
     },
   },
 
