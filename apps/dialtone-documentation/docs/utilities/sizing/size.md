@@ -10,14 +10,16 @@ Size utilities set both `inline-size` (width) and `block-size` (height) at once.
 
 Use `d-size-{stop}` to set both width and height using layout token stops. The hyphen before the number indicates a layout token reference, e.g. `d-size-100` outputs both `inline-size: var(--dt-layout-100)` and `block-size: var(--dt-layout-100)` (64px).
 
-<code-well-header class="d-d-flex d-p-300 d-bgc-secondary d-w100p d-hmx-800 d-flow16 d-of-scroll d-ta-center" v-dt-scrollbar:never custom>
-  <dt-stack gap="100" class="d-pls-start" v-for="(i, index) in layout" :key="index">
-    <span class="d-code--md">d-size-{{i.stop}}</span>
-    <dt-stack direction="row" align="center" justify="center" class="d-bgc-bold d-bar4" :class="`d-size-${i.stop}`"></dt-stack>
+```vue demo
+<div v-dt-scrollbar:never class="d-bar8 d-d-flex d-bgc-secondary d-w100p d-hmx-500 d-ta-center">
+  <dt-stack gap="100" align="start">
+    <div v-for="(i, index) in layout" v-dt-tooltip="{ message: `${i.px}px`, delay: false }">
+      <dt-text kind="code" size="100" class="d-w-100 d-us-all">d-size-{{i.stop}}</dt-text>
+      <div class="d-h-100 d-bgc-moderate d-bar4" :class="`d-size-${i.stop}`"></div>
+    </div>
   </dt-stack>
-</code-well-header>
-
-```html
+</div>
+<!-- @code -->
 <div class="d-size-100">...</div>  <!-- 64px square -->
 <div class="d-size-200">...</div>  <!-- 128px square -->
 <div class="d-size-400">...</div>  <!-- 256px square -->
@@ -27,7 +29,7 @@ Use `d-size-{stop}` to set both width and height using layout token stops. The h
 
 Use `d-size{n}p` to set both width and height to the same percentage. No hyphen before the number, `p` suffix indicates a literal percentage value. Note: `d-size33p` = 33.333% and `d-size66p` = 66.667%.
 
-```html
+```vue code-only
 <div class="d-size50p">...</div>   <!-- 50% width and height -->
 <div class="d-size100p">...</div>  <!-- 100% width and height -->
 ```
@@ -40,7 +42,7 @@ Use viewport utilities to size an element relative to the viewport in both dimen
 - **svh/svw** (small) -- minimum viewport size, when mobile browser chrome is visible.
 - **lvh/lvw** (large) -- maximum viewport size, when mobile browser chrome is hidden.
 
-```html
+```vue code-only
 <div class="d-size-dvh">...</div>   <!-- inline-size: 100dvw; block-size: 100dvh -->
 <div class="d-size-svh">...</div>   <!-- inline-size: 100svw; block-size: 100svh -->
 <div class="d-size-lvh">...</div>   <!-- inline-size: 100lvw; block-size: 100lvh -->
@@ -50,7 +52,7 @@ Use viewport utilities to size an element relative to the viewport in both dimen
 
 Use keyword utilities to set both width and height using CSS keyword values.
 
-```html
+```vue code-only
 <div class="d-size-auto">...</div>
 <div class="d-size-unset">...</div>
 <div class="d-size-fit-content">...</div>

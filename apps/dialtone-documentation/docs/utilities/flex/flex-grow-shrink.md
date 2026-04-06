@@ -11,19 +11,11 @@ keywords: ["flexbox", "flex shrink", "flex basis"]
 The `flex` property is a shorthand property for `flex-grow`, `flex-shrink`, and `flex-basis` properties. You can also
 control the grow and shrink flex values separately with their own utility classes.
 
-<code-well-header>
-  <dt-stack direction="row" class="d-w100p d-bar8 d-bgc-moderate">
-    <div class="d-fl-none d-p-200 d-ps-relative">Content cannot flex</div>
-    <div class="d-fl1 d-p-200 d-bgc-moderate-opaque d-ps-relative">Text that will flex</div>
-    <div class="d-fl-none d-p-200 d-ps-relative">Content cannot flex</div>
-  </dt-stack>
-</code-well-header>
-
-```html
-<dt-stack direction="row">
-  <div>...</div>
-  <div class="d-fl1">...</div>
-  <div>...</div>
+```vue demo
+<dt-stack direction="row" class="d-w-1000 d-bar8 d-bgc-moderate">
+  <div class="d-fl-none d-p-200 d-ps-relative">Content cannot flex</div>
+  <div class="d-fl1 d-p-200 d-bgc-moderate-opaque d-ps-relative">Text that will flex</div>
+  <div class="d-fl-none d-p-200 d-ps-relative">Content cannot flex</div>
 </dt-stack>
 ```
 
@@ -57,19 +49,11 @@ control the grow and shrink flex values separately with their own utility classe
 
 The `flex-grow` sets the flex container’s grow factor relative to the parent's main size. The default value is 0.
 
-<code-well-header>
-  <dt-stack direction="row" class="d-w100p d-bar8 d-bgc-moderate">
-    <div class="d-fl-none d-p-200">Content cannot flex</div>
-    <div class="d-fl-grow1 d-p-200 d-bgc-moderate-opaque">Text that will grow</div>
-    <div class="d-fl-none d-p-200">Content cannot flex</div>
-  </dt-stack>
-</code-well-header>
-
-```html
-<dt-stack direction="row">
-  <div>...</div>
-  <div class="d-fl-grow1">...</div>
-  <div>...</div>
+```vue demo
+<dt-stack direction="row" class="d-w-1000 d-bar8 d-bgc-moderate">
+  <div class="d-fl-none d-p-200">Content cannot flex</div>
+  <div class="d-fl-grow1 d-p-200 d-bgc-moderate-opaque">Text that will grow</div>
+  <div class="d-fl-none d-p-200">Content cannot flex</div>
 </dt-stack>
 ```
 
@@ -103,19 +87,11 @@ The `flex-grow` sets the flex container’s grow factor relative to the parent's
 
 The `flex-shrink` sets the flex container’s shrink factor relative to the parent's main size. The default value is 1.
 
-<code-well-header>
-  <dt-stack direction="row" class="d-bar8 d-bgc-moderate">
-    <div class="d-bar8 d-fl-none d-p-200 d-bgc-moderate-opaque">Longer text that cannot flex</div>
-    <div class="d-bar8 d-fl-shrink1 d-p-200 d-bgc-moderate-opaque">Text that will shrink even if it causes text to wrap</div>
-    <div class="d-bar8 d-fl-none d-p-200 d-bgc-moderate-opaque">Longer text that cannot flex</div>
-  </dt-stack>
-</code-well-header>
-
-```html
-<dt-stack direction="row">
-  <div>...</div>
-  <div class="d-fl-shrink1">...</div>
-  <div>...</div>
+```vue demo
+<dt-stack direction="row" class="d-bar8 d-bgc-moderate">
+  <div class="d-bar8 d-fl-none d-p-200 d-bgc-moderate-opaque">Longer text that cannot flex</div>
+  <div class="d-bar8 d-fl-shrink1 d-p-200 d-bgc-moderate-opaque">Text that will shrink even if it causes text to wrap</div>
+  <div class="d-bar8 d-fl-none d-p-200 d-bgc-moderate-opaque">Longer text that cannot flex</div>
 </dt-stack>
 ```
 

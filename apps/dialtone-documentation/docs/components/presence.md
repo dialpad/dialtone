@@ -74,7 +74,7 @@ Even though the component has a role of "status" to assist SR apps in reading ou
 
 Example:
 
-```html
+```vue code-only
 <dt-presence
   presence="active"
   sr-text="User {{ user }} is active"

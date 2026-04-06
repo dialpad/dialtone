@@ -16,6 +16,7 @@
  *   <!-- @code-only -->     → only-show="code" (alias for info string)
  *   <!-- @code -->          → separator: above = live demo, below = code tab
  *   <!-- @wrapper -->       → adds data-demo-wrapper to the first element
+ *   <!-- @custom -->        → bypasses default demo wrapper styles (custom prop)
  *   <!-- @bg classname -->  → bgclass="classname"
  *   <!-- @class name -->    → class="name"
  */
@@ -92,9 +93,10 @@ function splitContent (lines, { codeSeparatorIndex, directiveLines }) {
 /**
  * Build the <code-example> HTML tag string from parsed directives and content.
  */
-function buildCodeExampleTag ({ onlyShow, bgclass, cssClass }, slotContent, sourceCode) {
+function buildCodeExampleTag ({ onlyShow, bgclass, cssClass, hasCustom }, slotContent, sourceCode) {
   const attrs = [];
   if (onlyShow) attrs.push(`only-show="${onlyShow}"`);
+  if (hasCustom) attrs.push('custom');
   if (bgclass) attrs.push(`bgclass="${encodeForAttr(bgclass)}"`);
   if (cssClass) attrs.push(`class="${encodeForAttr(cssClass)}"`);
   if (sourceCode) {

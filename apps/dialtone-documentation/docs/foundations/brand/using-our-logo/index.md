@@ -80,7 +80,7 @@ keywords: ["logo usage","logo guidelines","brand guidelines"]
 
 Choose the proper logo variant based on its context and theme.
 
-```html
+```vue code-only
 <dt-illustration name='{variant}' />
 ```
 

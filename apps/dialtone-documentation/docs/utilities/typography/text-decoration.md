@@ -8,48 +8,32 @@ keywords: ["underline", "strikethrough", "line through"]
 
 Use `d-td-underline` to underline text.
 
-<code-well-header>
-  <p class="d-td-underline">The quick brown fox jumps over the lazy dog.</p>
-</code-well-header>
-
-```html
-<p class="d-td-underline">...</p>
+```vue demo
+<p class="d-td-underline">The quick brown fox jumps over the lazy dog.</p>
 ```
 
 ## Dotted
 
 Use `d-td-dotted` to apply a dotted underline style to the text.
 
-<code-well-header>
-  <p class="d-td-dotted">The quick brown fox jumps over the lazy dog.</p>
-</code-well-header>
-
-```html
-<p class="d-td-dotted">...</p>
+```vue demo
+<p class="d-td-dotted">The quick brown fox jumps over the lazy dog.</p>
 ```
 
 ## Line Through
 
 Use `d-td-line-through` to apply a line through the text.
 
-<code-well-header>
-  <p class="d-td-line-through">The quick brown fox jumps over the lazy dog.</p>
-</code-well-header>
-
-```html
-<p class="d-td-line-through">...</p>
+```vue demo
+<p class="d-td-line-through">The quick brown fox jumps over the lazy dog.</p>
 ```
 
 ## No Decorations
 
 Use `d-td-none` to remove text decorations.
 
-<code-well-header>
-  <p class="d-td-none">The quick brown fox jumps over the lazy dog.</p>
-</code-well-header>
-
-```html
-<p class="d-td-none">...</p>
+```vue demo
+<p class="d-td-none">The quick brown fox jumps over the lazy dog.</p>
 ```
 
 <script setup>
@@ -60,13 +44,7 @@ Use `d-td-none` to remove text decorations.
 
 Use `h:d-td-{n}` to change an element's :hover state text decoration.
 
-<code-well-header>
-  <dt-button kind="unstyled" class="h:d-td-underline">
-    The quick brown fox jumps over the lazy dog.
-  </dt-button>
-</code-well-header>
-
-```html
+```vue demo
 <dt-button kind="unstyled" class="h:d-td-underline">
   The quick brown fox jumps over the lazy dog.
 </dt-button>
@@ -76,13 +54,7 @@ Use `h:d-td-{n}` to change an element's :hover state text decoration.
 
 Use `f:d-td-{n}` to change an element's :focus and :focus-within state text decoration.
 
-<code-well-header>
-  <dt-button kind="unstyled" class="f:d-td-underline">
-    The quick brown fox jumps over the lazy dog.
-  </dt-button>
-</code-well-header>
-
-```html
+```vue demo
 <dt-button kind="unstyled" class="f:d-td-underline">
   The quick brown fox jumps over the lazy dog.
 </dt-button>
@@ -92,13 +64,7 @@ Use `f:d-td-{n}` to change an element's :focus and :focus-within state text deco
 
 Use `fv:d-td-{n}` to change an element's :focus-visible state text decoration [only when focused by keyboard].
 
-<code-well-header>
-  <dt-button kind="unstyled" class="fv:d-td-underline">
-    The quick brown fox jumps over the lazy dog.
-  </dt-button>
-</code-well-header>
-
-```html
+```vue demo
 <dt-button kind="unstyled" class="fv:d-td-underline">
   The quick brown fox jumps over the lazy dog.
 </dt-button>

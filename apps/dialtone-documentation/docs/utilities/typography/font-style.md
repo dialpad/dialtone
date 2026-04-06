@@ -10,36 +10,24 @@ keywords: ["italic", "oblique", "normal"]
 
 Use `d-fs-normal` to change an element's font-style.
 
-<code-well-header>
-  <p class="d-fs-normal">The quick brown fox jumps over the lazy dog.</p>
-</code-well-header>
-
-```html
-<p class="d-fs-normal">...</p>
+```vue demo
+<p class="d-fs-normal">The quick brown fox jumps over the lazy dog.</p>
 ```
 
 ## Italics
 
 Use `d-fs-italic` to change an element's font-style.
 
-<code-well-header>
-  <p class="d-fs-italic">The quick brown fox jumps over the lazy dog.</p>
-</code-well-header>
-
-```html
-<p class="d-fs-italic">...</p>
+```vue demo
+<p class="d-fs-italic">The quick brown fox jumps over the lazy dog.</p>
 ```
 
 ## No Italics
 
 Use `d-fs-none` to remove an element's font-style.
 
-<code-well-header>
-  <p class="d-fs-none">The quick brown fox jumps over the lazy dog.</p>
-</code-well-header>
-
-```html
-<p class="d-fs-none">...</p>
+```vue demo
+<p class="d-fs-none">The quick brown fox jumps over the lazy dog.</p>
 ```
 
 <script setup>

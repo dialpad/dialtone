@@ -12,72 +12,49 @@ keywords: ["border colour"]
 
 Use `d-bc-{color}` to set an element's border color.
 
-<code-well-header>
-  <dt-stack
-    gap="200"
-    :direction="{ 'default': 'column', 'md': 'row' }"
-    class="d-fw-wrap"
-  >
-    <div
-      v-for="color in ['subtle', 'default', 'moderate', 'bold', 'critical', 'success', 'warning']"
-      class="d-p-200 d-ba d-baw2"
-      :class="`d-bc-${color}`"
-    >
-      {{ color.charAt(0).toUpperCase() + color.slice(1) }}
-    </div>
-  </dt-stack>
-</code-well-header>
-
-```html
-<div class="d-ba d-bc-{color}">...</div>
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="200" :direction="{ 'default': 'column', 'md': 'row' }" class="d-fw-wrap">
+  <div class="d-p-200 d-ba d-baw2 d-bc-subtle">Subtle</div>
+  <div class="d-p-200 d-ba d-baw2 d-bc-default">Default</div>
+  <div class="d-p-200 d-ba d-baw2 d-bc-moderate">Moderate</div>
+  <div class="d-p-200 d-ba d-baw2 d-bc-bold">Bold</div>
+  <div class="d-p-200 d-ba d-baw2 d-bc-critical">Critical</div>
+  <div class="d-p-200 d-ba d-baw2 d-bc-success">Success</div>
+  <div class="d-p-200 d-ba d-baw2 d-bc-warning">Warning</div>
+</dt-stack>
 ```
 
 ## Hover
 
 Use `h:d-bc-{color}` to change an element's border color spot on `:hover`.
 
-<code-well-header>
-  <dt-stack direction="row" gap="200">
-    <dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 h:d-bc-moderate">
-      Hover over me
-    </dt-button>
-    <dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 h:d-bc-critical">
-      Hover over me
-    </dt-button>
-  </dt-stack>
-</code-well-header>
-
-```html
-<dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 h:d-bc-moderate">
-  Hover over me
-</dt-button>
-<dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 h:d-bc-critical">
-  Hover over me
-</dt-button>
+```vue demo
+<!-- @wrapper -->
+<dt-stack direction="row" gap="200">
+  <dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 h:d-bc-moderate">
+    Hover over me
+  </dt-button>
+  <dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 h:d-bc-critical">
+    Hover over me
+  </dt-button>
+</dt-stack>
 ```
 
 ## Focus
 
 Use `f:d-bc-{color}` to change an element's border color when in `:focus` or `:focus-within` states.
 
-<code-well-header>
-  <dt-stack direction="row" gap="200">
-    <dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 f:d-bc-moderate">
-      Focus me
-    </dt-button>
-    <dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 f:d-bc-critical">
-      Focus me
-    </dt-button>
-  </dt-stack>
-</code-well-header>
-
-```html
-<dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 f:d-bc-moderate">
-  Focus me
-</dt-button>
-<dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 f:d-bc-critical">
-  Focus me
-</dt-button>
+```vue demo
+<!-- @wrapper -->
+<dt-stack direction="row" gap="200">
+  <dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 f:d-bc-moderate">
+    Focus me
+  </dt-button>
+  <dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 f:d-bc-critical">
+    Focus me
+  </dt-button>
+</dt-stack>
 ```
 
 ## Focus Visible
@@ -85,87 +62,56 @@ Use `f:d-bc-{color}` to change an element's border color when in `:focus` or `:f
 Use `fv:d-bc-{color}` to change an element's border color when in `:focus-visible` state [only when focused by keyboard]
 .
 
-<code-well-header>
-  <dt-stack direction="row" gap="200">
-    <dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 fv:d-bc-moderate">
-      Keyboard focus me
-    </dt-button>
-    <dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 fv:d-bc-critical">
-      Keyboard focus me
-    </dt-button>
-  </dt-stack>
-</code-well-header>
-
-```html
-<dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 fv:d-bc-moderate">
-  Keyboard focus me
-</dt-button>
-<dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 fv:d-bc-critical">
-  Keyboard focus me
-</dt-button>
+```vue demo
+<!-- @wrapper -->
+<dt-stack direction="row" gap="200">
+  <dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 fv:d-bc-moderate">
+    Keyboard focus me
+  </dt-button>
+  <dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 fv:d-bc-critical">
+    Keyboard focus me
+  </dt-button>
+</dt-stack>
 ```
 
 ## Changing Opacities
 
 Use `d-bco{n}` to change the border color opacity value.
 
-<code-well-header>
-  <dt-stack
-    gap="200"
-    :direction="{ 'default': 'column', 'md': 'row' }"
-  >
-    <div
-      v-for="opacity in [100, 99, 95, 90, 75, 50, 25, 10, 0]"
-      class="d-p-200 d-ba d-baw2 d-bc-critical"
-      :class="`d-bco${opacity}`"
-    >
-      {{ opacity }}%
-    </div>
-  </dt-stack>
-</code-well-header>
-
-```html
-<div class="d-ba d-bc-critical d-bco100">100%</div>
-<div class="d-ba d-bc-critical d-bco99">99%</div>
-<div class="d-ba d-bc-critical d-bco95">95%</div>
-<div class="d-ba d-bc-critical d-bco90">90%</div>
-<div class="d-ba d-bc-critical d-bco75">75%</div>
-<div class="d-ba d-bc-critical d-bco50">50%</div>
-<div class="d-ba d-bc-critical d-bco25">25%</div>
-<div class="d-ba d-bc-critical d-bco10">10%</div>
-<div class="d-ba d-bc-critical d-bco0">0%</div>
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="200" :direction="{ 'default': 'column', 'md': 'row' }">
+  <div class="d-p-200 d-ba d-baw2 d-bc-critical d-bco100">100%</div>
+  <div class="d-p-200 d-ba d-baw2 d-bc-critical d-bco99">99%</div>
+  <div class="d-p-200 d-ba d-baw2 d-bc-critical d-bco95">95%</div>
+  <div class="d-p-200 d-ba d-baw2 d-bc-critical d-bco90">90%</div>
+  <div class="d-p-200 d-ba d-baw2 d-bc-critical d-bco75">75%</div>
+  <div class="d-p-200 d-ba d-baw2 d-bc-critical d-bco50">50%</div>
+  <div class="d-p-200 d-ba d-baw2 d-bc-critical d-bco25">25%</div>
+  <div class="d-p-200 d-ba d-baw2 d-bc-critical d-bco10">10%</div>
+  <div class="d-p-200 d-ba d-baw2 d-bc-critical d-bco0">0%</div>
+</dt-stack>
 ```
 
 You can also change the border color opacity value on `:hover`
 , `:focus`, `:focus-visible` by using the respective `h:d-bco{n}`, `f:d-bco{n}`, `fv:d-bco{n}` prefixes.
 
-<code-well-header>
-  <dt-stack
-    gap="200"
-    :direction="{ 'default': 'column', 'md': 'row' }"
-  >
-    <dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 d-bc-critical h:d-bco50">
-      Hover me to see 50%
-    </dt-button>
-    <dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 d-bc-critical f:d-bco50">
-      Focus me with mouse to see 50%
-    </dt-button>
-    <dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 d-bc-critical fv:d-bco50">
-      Focus me via keyboard to see 50%
-    </dt-button>
-  </dt-stack>
-</code-well-header>
-
-```html
-<dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 d-bc-critical h:d-bco50">
-  Hover me to see 50%
-</dt-button>
-<dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 d-bc-critical f:d-bco50">
-  Focus me with mouse to see 50%
-</dt-button>
-<dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 d-bc-critical fv:d-bco50">
-  Focus me via keyboard to see 50%
-</dt-button>
+```vue demo
+<!-- @wrapper -->
+<dt-stack
+  gap="200"
+  :direction="{ 'default': 'column', 'md': 'row' }"
+>
+  <dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 d-bc-critical h:d-bco50">
+    Hover me to see 50%
+  </dt-button>
+  <dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 d-bc-critical f:d-bco50">
+    Focus me with mouse to see 50%
+  </dt-button>
+  <dt-button kind="unstyled" class="d-p-200 d-ba d-baw2 d-bc-critical fv:d-bco50">
+    Focus me via keyboard to see 50%
+  </dt-button>
+</dt-stack>
 ```
 
 <dt-notice title="Tip" kind="info" class="d-wmx100p d-my-200">

@@ -8,55 +8,31 @@ keywords: ["border top", "border bottom", "border left", "border right"]
 
 Use `d-ba` to add a border to all sides of your element.
 
-<code-well-header>
-  <dt-stack
-    gap="200"
-    :direction="{ 'default': 'column', 'md': 'row' }"
-  >
-    <div
-      v-for="width in [0, 1, 2, 4]"
-      class="d-p-200 d-ba d-bgc-primary"
-      :class="`d-baw${width}`"
-    >
-      d-baw{{ width }}
-    </div>
-  </dt-stack>
-</code-well-header>
-
-```html
-<div class="d-p-200 d-ba d-baw0 d-bgc-primary">d-baw0</div>
-<div class="d-p-200 d-ba d-baw1 d-bgc-primary">d-baw1</div>
-<div class="d-p-200 d-ba d-baw2 d-bgc-primary">d-baw2</div>
-<div class="d-p-200 d-ba d-baw4 d-bgc-primary">d-baw4</div>
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="200" :direction="{ 'default': 'column', 'md': 'row' }">
+  <div class="d-p-200 d-ba d-bgc-primary d-baw0">d-baw0</div>
+  <div class="d-p-200 d-ba d-bgc-primary d-baw1">d-baw1</div>
+  <div class="d-p-200 d-ba d-bgc-primary d-baw2">d-baw2</div>
+  <div class="d-p-200 d-ba d-bgc-primary d-baw4">d-baw4</div>
+</dt-stack>
 ```
 
 ## Individual Sides
 
 Use `d-b{t|r|b|l|x|y}` to add a border to only specific sides of your element.
 
-<code-well-header>
-  <dt-stack
-    gap="200"
-    :direction="{ 'default': 'column', 'md': 'row' }"
-  >
-    <div
-      v-for="side in ['t', 'r', 'b', 'l', 'x', 'y', 'a']"
-      class="d-p-200 d-baw4 d-bgc-primary"
-      :class="`d-b${side}`"
-    >
-      d-b{{ side }}
-    </div>
-  </dt-stack>
-</code-well-header>
-
-```html
-<div class="d-p-200 d-bt d-baw4 d-bgc-primary">d-bt</div>
-<div class="d-p-200 d-br d-baw4 d-bgc-primary">d-br</div>
-<div class="d-p-200 d-bb d-baw4 d-bgc-primary">d-bb</div>
-<div class="d-p-200 d-bl d-baw4 d-bgc-primary">d-bl</div>
-<div class="d-p-200 d-bx d-baw4 d-bgc-primary">d-bx</div>
-<div class="d-p-200 d-by d-baw4 d-bgc-primary">d-by</div>
-<div class="d-p-200 d-ba d-baw4 d-bgc-primary">d-ba</div>
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="200" :direction="{ 'default': 'column', 'md': 'row' }">
+  <div class="d-p-200 d-baw4 d-bgc-primary d-bt">d-bt</div>
+  <div class="d-p-200 d-baw4 d-bgc-primary d-br">d-br</div>
+  <div class="d-p-200 d-baw4 d-bgc-primary d-bb">d-bb</div>
+  <div class="d-p-200 d-baw4 d-bgc-primary d-bl">d-bl</div>
+  <div class="d-p-200 d-baw4 d-bgc-primary d-bx">d-bx</div>
+  <div class="d-p-200 d-baw4 d-bgc-primary d-by">d-by</div>
+  <div class="d-p-200 d-baw4 d-bgc-primary d-ba">d-ba</div>
+</dt-stack>
 ```
 
 <script setup>

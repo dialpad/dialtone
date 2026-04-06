@@ -8,96 +8,66 @@ keywords: ["rounded", "corner", "pill", "circle"]
 
 Use `d-bar{n}` to change the border radius on all corners of your element.
 
-<code-well-header>
-  <dt-stack
-    gap="100"
-    :direction="{ 'default': 'column', 'md': 'row' }"
-  >
-    <div
-      v-for="r in [0, 1, 2, 4, 6, 8, 12, 16, 24, 32]"
-      class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap"
-      :class="`d-bar${r}`"
-    >
-      <dt-text kind="code" size="xs">d-bar{{ r }}</dt-text>
-    </div>
-  </dt-stack>
-</code-well-header>
-
-```html
-<div class="d-bar0">...</div>
-<div class="d-bar1">...</div>
-<div class="d-bar2">...</div>
-<div class="d-bar4">...</div>
-<div class="d-bar6">...</div>
-<div class="d-bar8">...</div>
-<div class="d-bar12">...</div>
-<div class="d-bar16">...</div>
-<div class="d-bar24">...</div>
-<div class="d-bar32">...</div>
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar0"><dt-text kind="code" size="xs">d-bar0</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar1"><dt-text kind="code" size="xs">d-bar1</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar2"><dt-text kind="code" size="xs">d-bar2</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar4"><dt-text kind="code" size="xs">d-bar4</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar6"><dt-text kind="code" size="xs">d-bar6</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar8"><dt-text kind="code" size="xs">d-bar8</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar12"><dt-text kind="code" size="xs">d-bar12</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar16"><dt-text kind="code" size="xs">d-bar16</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar24"><dt-text kind="code" size="xs">d-bar24</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar32"><dt-text kind="code" size="xs">d-bar32</dt-text></div>
+</dt-stack>
 ```
 
 ## Rounded Sides
 
 Use `d-b{t|r|b|l}r{n}` to change the border radius on a side of your element.
 
-<code-well-header>
-  <dt-stack
-    gap="400"
-    :direction="{ 'default': 'column', 'md': 'row' }"
-  >
-    <div
-      v-for="r in [4, 8, 12, 16]"
-      class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap"
-      :class="`d-btr${r}`"
-    >
-      <dt-text kind="code" size="xs">d-btr{{ r }}</dt-text>
-    </div>
-  </dt-stack>
-</code-well-header>
-
-```html
-<div class="d-btr4">...</div>
-<div class="d-brr8">...</div>
-<div class="d-bbr12">...</div>
-<div class="d-blr16">...</div>
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-btr4"><dt-text kind="code" size="xs">d-btr4</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-btr8"><dt-text kind="code" size="xs">d-btr8</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-btr12"><dt-text kind="code" size="xs">d-btr12</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-btr16"><dt-text kind="code" size="xs">d-btr16</dt-text></div>
+</dt-stack>
 ```
 
 ## Pills
 
 Use `d-b{a|t|r|b|l}r-pill` to change the border radius of your element to a pill shape.
 
-<code-well-header>
-  <dt-stack
-    gap="400"
-    :direction="{ 'default': 'column', 'md': 'row' }"
-  >
-    <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-pill">
-      <dt-text kind="code" size="xs">d-bar-pill</dt-text>
-    </div>
-  </dt-stack>
-</code-well-header>
-
-```html
-<div class="d-bar-pill">...</div>
+```vue demo
+<!-- @wrapper -->
+<dt-stack
+  gap="400"
+  :direction="{ 'default': 'column', 'md': 'row' }"
+>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-pill">
+    <dt-text kind="code" size="xs">d-bar-pill</dt-text>
+  </div>
+</dt-stack>
 ```
 
 ## Circles
 
 Use `d-b{a|t|r|b|l}r-circle` to change the border radius of your element to a circle shape.
 
-<code-well-header>
-  <dt-stack
-    gap="400"
-    :direction="{ 'default': 'column', 'md': 'row' }"
-   >
-    <dt-stack direction="row" align="center" justify="center" class="d-p-100 d-size-200 d-ba d-baw2 d-bc-default d-bgc-primary d-ws-nowrap d-bar-circle">
-      <dt-text kind="code" size="xs">d-bar-circle</dt-text>
-    </dt-stack>
+```vue demo
+<!-- @wrapper -->
+<dt-stack
+  gap="400"
+  :direction="{ 'default': 'column', 'md': 'row' }"
+ >
+  <dt-stack direction="row" align="center" justify="center" class="d-p-100 d-size-200 d-ba d-baw2 d-bc-default d-bgc-primary d-ws-nowrap d-bar-circle">
+    <dt-text kind="code" size="xs">d-bar-circle</dt-text>
   </dt-stack>
-</code-well-header>
-
-```html
-<div class="d-bar-circle">...</div>
+</dt-stack>
 ```
 
 ## Classes
