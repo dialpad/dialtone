@@ -44,6 +44,7 @@ jobs:
       - name: Checkout base branch (never PR code — prevents prompt injection via attacker files)
         uses: actions/checkout@v4
         with:
+          persist-credentials: false
           fetch-depth: 1
           ref: ${{ github.event.pull_request.base.sha || github.sha }}
 
@@ -58,7 +59,7 @@ jobs:
         uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          claude_args: '--max-turns 20 --allowed-tools "Bash(gh pr diff:*),Bash(gh pr view:*),Bash(safe-read:*),Bash(safe-grep:*),Bash(safe-glob:*)"'
+          claude_args: '--max-turns 20 --tools "Bash" --allowed-tools "Bash(gh pr diff:*),Bash(gh pr view:*),Bash(safe-read:*),Bash(safe-grep:*),Bash(safe-glob:*)"'
           prompt: |
             You are reviewing a pull request for Dialtone, Dialpad's public design system monorepo.
             Breaking changes here have blast radius across all Dialpad products and external consumers.
