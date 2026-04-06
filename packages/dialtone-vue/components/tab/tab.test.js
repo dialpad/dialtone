@@ -8,6 +8,7 @@ const MOCK_DEFAULT_SLOT = 'Message Slot';
 const MOCK_GROUP_CONTEXT = {
   disabled: false,
   selected: '',
+  focusedTabId: null,
 };
 
 const baseProps = {
@@ -386,6 +387,52 @@ describe('DtTab Tests', () => {
 
       it('tabindex should be -1', () => {
         expect(tab.attributes('tabindex')).toBe('-1');
+      });
+    });
+
+    describe('Roving tabindex', () => {
+      describe('When focusedTabId matches this tab', () => {
+        beforeEach(() => {
+          mockProvide = { groupContext: { ...MOCK_GROUP_CONTEXT, selected: '', focusedTabId: MOCK_ID } };
+
+          updateWrapper();
+        });
+
+        it('tabindex should be 0', () => {
+          expect(tab.attributes('tabindex')).toBe('0');
+        });
+
+        it('aria-selected should still be "false"', () => {
+          expect(tab.attributes('aria-selected')).toBe('false');
+        });
+      });
+
+      describe('When focusedTabId is a different tab', () => {
+        beforeEach(() => {
+          mockProvide = { groupContext: { ...MOCK_GROUP_CONTEXT, selected: MOCK_PANEL_ID, focusedTabId: 'other-tab' } };
+
+          updateWrapper();
+        });
+
+        it('tabindex should be -1 even when selected', () => {
+          expect(tab.attributes('tabindex')).toBe('-1');
+        });
+
+        it('aria-selected should still be "true"', () => {
+          expect(tab.attributes('aria-selected')).toBe('true');
+        });
+      });
+
+      describe('When focusedTabId is null', () => {
+        beforeEach(() => {
+          mockProvide = { groupContext: { ...MOCK_GROUP_CONTEXT, selected: MOCK_PANEL_ID, focusedTabId: null } };
+
+          updateWrapper();
+        });
+
+        it('tabindex should fall back to selected tab', () => {
+          expect(tab.attributes('tabindex')).toBe('0');
+        });
       });
     });
   });
