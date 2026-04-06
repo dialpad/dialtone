@@ -145,37 +145,49 @@ function _extractComponentStatus (app) {
     .sort((a, b) => _sortAlphabetically(a.name, b.name));
 }
 
-function _injectKeywordsFromFrontmatter (app, options) {
-  // Create a map of page paths to keywords for faster lookup
+function _injectFrontmatterIntoSidebar (app, options) {
+  // Create maps of page paths to frontmatter data for faster lookup
   const pageKeywords = new Map();
+  const pageStatus = new Map();
   app.pages.forEach(page => {
+    const normalizedPath = page.path.replace(/\/$/, '').replace(/\.html$/, '');
+
     if (page.frontmatter?.keywords && Array.isArray(page.frontmatter.keywords)) {
-      // Normalize path by removing trailing slash and .html
-      const normalizedPath = page.path.replace(/\/$/, '').replace(/\.html$/, '');
       pageKeywords.set(normalizedPath, page.frontmatter.keywords);
-      // Also store with original path for exact matches
       pageKeywords.set(page.path, page.frontmatter.keywords);
+    }
+
+    if (page.frontmatter?.status) {
+      pageStatus.set(normalizedPath, page.frontmatter.status);
+      pageStatus.set(page.path, page.frontmatter.status);
     }
   });
 
-  // Recursive function to inject keywords into sidebar items
-  const injectKeywords = (items) => {
+  // Recursive function to inject frontmatter data into sidebar items
+  const injectData = (items) => {
     if (!items || !Array.isArray(items)) return;
 
     items.forEach(item => {
       if (item.link) {
-        // Try to find keywords for this link (normalize for matching)
         const normalizedLink = item.link.replace(/\/$/, '').replace(/\.html$/, '');
-        const keywords = pageKeywords.get(normalizedLink) || pageKeywords.get(item.link);
 
+        const keywords = pageKeywords.get(normalizedLink) || pageKeywords.get(item.link);
         if (keywords) {
           item.keywords = keywords;
+        }
+
+        // Only inject status from frontmatter if not already set in site-nav.json
+        if (!item.status) {
+          const status = pageStatus.get(normalizedLink) || pageStatus.get(item.link);
+          if (status) {
+            item.status = status;
+          }
         }
       }
 
       // Recursively process children
       if (item.children && Array.isArray(item.children)) {
-        injectKeywords(item.children);
+        injectData(item.children);
       }
     });
   };
@@ -185,7 +197,7 @@ function _injectKeywordsFromFrontmatter (app, options) {
     Object.values(options.sidebar.topLevelGroups).forEach(group => {
       if (group.sections) {
         Object.values(group.sections).forEach(section => {
-          injectKeywords(section);
+          injectData(section);
         });
       }
     });
@@ -302,7 +314,7 @@ export const dialtoneVuepressTheme = (options) => ({
       _extractFrontmatter(app, '/foundations/', options, ['/foundations/typography/', '/foundations/typography.html', '/foundations/colors/usage/', '/foundations/colors/palette/', '/foundations/colors/themes/', '/foundations/colors/chart-colors/', '/foundations/icons/usage/', '/foundations/icons/crafting-an-icon/', '/foundations/brand/using-our-logo/', '/foundations/brand/our-icon/', '/foundations/brand/sub-brands-and-co-branding/', '/foundations/brand/samples/', '/foundations/size/', '/foundations/space/']);
       _extractFrontmatter(app, '/foundations/colors/', options);
       _extractComponentStatus(app);
-      _injectKeywordsFromFrontmatter(app, options);
+      _injectFrontmatterIntoSidebar(app, options);
     },
 
     extendsPage: (page) => {
