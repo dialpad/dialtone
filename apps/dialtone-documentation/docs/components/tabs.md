@@ -127,7 +127,7 @@ Add `disabled` to the tab group to disable all.
 
 ### Inverted
 
-> [!INFO] Deprecated
+> [!WARNING] Deprecated
 > The `inverted` prop has been deprecated. Use the [v-dt-mode directive](mode-island.html#inverting) instead.
 
 In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#inverting) on the component element.
@@ -267,7 +267,7 @@ All tabs share the same width, regardless of label length.
 
 Use the `#startIcon` or `#endIcon` slot on `dt-tab` to add an icon. The slot provides `iconSize` to match the tab's size.
 
-> [!INFO] Deprecated
+> [!WARNING] Deprecated
 > The `#icon` slot has been deprecated. Use `#startIcon` or `#endIcon` instead.
 
 ```vue demo

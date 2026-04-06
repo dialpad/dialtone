@@ -40,7 +40,7 @@ keywords: ["data table", "grid", "rows", "d-table", "DtTable", "dt-table", "data
 
 ### Inverted Style
 
-> [!INFO] Deprecated
+> [!WARNING] Deprecated
 > The `d-table--inverted` modifier has been deprecated. Use the [v-dt-mode directive](mode-island.html#inverting) instead.
 
 ### Striped

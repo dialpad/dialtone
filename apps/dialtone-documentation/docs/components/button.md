@@ -225,7 +225,7 @@ The unstyled button removes all default Dialtone styling while preserving the se
 
 ### Inverted
 
-> [!INFO] Deprecated
+> [!WARNING] Deprecated
 > `kind="inverted"` has been deprecated. Use the [v-dt-mode directive](mode-island.html#inverting) instead, or [DtModeIsland](mode-island.html#dtmodeisland-component).
 
 Use the [v-dt-mode directive](mode-island.html#inverting) in place of `kind="inverted"` on the component element. The previous `inverted` variant of DtButton was limited to a single presentation style. The directive now makes every combination available as an inverted style.

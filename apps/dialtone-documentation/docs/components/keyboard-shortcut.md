@@ -30,7 +30,7 @@ Keyboard shortcut outlines a key combination with a border to represent a keyboa
 
 ### Inverted
 
-> [!INFO] Deprecated
+> [!WARNING] Deprecated
 > The `inverted` prop has been deprecated. Use the [v-dt-mode directive](mode-island.html#inverting) instead.
 
 In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#inverting) on the component element.

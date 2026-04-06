@@ -43,7 +43,7 @@ Breadcrumbs are always treated as secondary and should not entirely replace the 
 
 ### Inverted
 
-> [!INFO] Deprecated
+> [!WARNING] Deprecated
 > The `inverted` prop has been deprecated. Use the [v-dt-mode directive](mode-island.html#inverting) instead.
 
 In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#inverting) on the component element.
