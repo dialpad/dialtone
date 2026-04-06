@@ -8,6 +8,8 @@ on:
 jobs:
   pull-translations:
     runs-on: ubuntu-latest
+    permissions:
+      packages: read
 
     defaults:
       run:
