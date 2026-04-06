@@ -4,7 +4,8 @@ description: Utilities to change an element's font variant numeric.
 keywords: ["tabular", "lining", "oldstyle"]
 ---
 
-<FontUtilitiesNotice />
+> [!WARNING] Use DtText over CSS Utilities
+> Reach for the [DtText](/components/text) component before considering any typography utility.
 
 The `font-variant-numeric` CSS property controls the usage of alternate glyphs for numbers, fractions, and ordinal markers.
 
@@ -12,23 +13,15 @@ The `font-variant-numeric` CSS property controls the usage of alternate glyphs f
 
 Use `d-fvn-normal` to deactivate any alternate glyphs.
 
-<code-well-header>
-  <p class="d-fvn-normal">1234567890</p>
-</code-well-header>
-
-```html
-<p class="d-fvn-normal">...</p>
+```vue demo
+<p class="d-fvn-normal">1234567890</p>
 ```
 
 ## Ordinal
 
 The class `d-fvn-ordinal` forces the use of special glyphs for ordinal markers, like 1st, 2nd, 3rd.
 
-<code-well-header>
-  <p class="d-fvn-ordinal">1st, 2nd, 3rd, 4th</p>
-</code-well-header>
-
-```html
+```vue demo
 <p class="d-fvn-ordinal">1st, 2nd, 3rd, 4th</p>
 ```
 
@@ -36,85 +29,73 @@ The class `d-fvn-ordinal` forces the use of special glyphs for ordinal markers, 
 
 Use `d-fvn-proportional` to set different sizes for each number.
 
-<code-well-header>
-  <div class="d-fvn-proportional">
-    <table class="numbers-table">
-      <tbody>
-      <tr>
-        <td><span>21.0</span></td>
-        <td><span>160</span></td>
-        <td><span>3.90</span></td>
-        <td><span>2.875</span></td>
-        <td><span>17.02</span></td>
-      </tr>
-      <tr>
-        <td><span>22.8</span></td>
-        <td><span>108</span></td>
-        <td><span>3.85</span></td>
-        <td><span>2.320</span></td>
-        <td><span>18.61</span></td>
-      </tr>
-      <tr>
-        <td><span>21.4</span></td>
-        <td><span>258</span></td>
-        <td><span>3.08</span></td>
-        <td><span>3.215</span></td>
-        <td><span>19.44</span></td>
-      </tr>
-    </tbody></table>
-  </div>
-</code-well-header>
-
-```html
-<div class="d-fvn-proportional">...</div>
+```vue demo
+<div class="d-fvn-proportional">
+  <table class="numbers-table">
+    <tbody>
+    <tr>
+      <td><span>21.0</span></td>
+      <td><span>160</span></td>
+      <td><span>3.90</span></td>
+      <td><span>2.875</span></td>
+      <td><span>17.02</span></td>
+    </tr>
+    <tr>
+      <td><span>22.8</span></td>
+      <td><span>108</span></td>
+      <td><span>3.85</span></td>
+      <td><span>2.320</span></td>
+      <td><span>18.61</span></td>
+    </tr>
+    <tr>
+      <td><span>21.4</span></td>
+      <td><span>258</span></td>
+      <td><span>3.08</span></td>
+      <td><span>3.215</span></td>
+      <td><span>19.44</span></td>
+    </tr>
+  </tbody></table>
+</div>
 ```
 
 ## Tabular-Nums
 
 Use `d-fvn-tabular` for aligning tabular data and preventing layout shifts of dynamically-changing content. For example, a timer counting down.
 
-<code-well-header>
-  <div class="d-fvn-tabular">
-    <table class="numbers-table">
-      <tbody>
-      <tr>
-        <td><span>21.0</span></td>
-        <td><span>160</span></td>
-        <td><span>3.90</span></td>
-        <td><span>2.875</span></td>
-        <td><span>17.02</span></td>
-      </tr>
-      <tr>
-        <td><span>22.8</span></td>
-        <td><span>108</span></td>
-        <td><span>3.85</span></td>
-        <td><span>2.320</span></td>
-        <td><span>18.61</span></td>
-      </tr>
-      <tr>
-        <td><span>21.4</span></td>
-        <td><span>258</span></td>
-        <td><span>3.08</span></td>
-        <td><span>3.215</span></td>
-        <td><span>19.44</span></td>
-      </tr>
-    </tbody></table>
-  </div>
-</code-well-header>
-
-```html
-<div class="d-fvn-tabular"><table>...</table></div>
+```vue demo
+<div class="d-fvn-tabular">
+  <table class="numbers-table">
+    <tbody>
+    <tr>
+      <td><span>21.0</span></td>
+      <td><span>160</span></td>
+      <td><span>3.90</span></td>
+      <td><span>2.875</span></td>
+      <td><span>17.02</span></td>
+    </tr>
+    <tr>
+      <td><span>22.8</span></td>
+      <td><span>108</span></td>
+      <td><span>3.85</span></td>
+      <td><span>2.320</span></td>
+      <td><span>18.61</span></td>
+    </tr>
+    <tr>
+      <td><span>21.4</span></td>
+      <td><span>258</span></td>
+      <td><span>3.08</span></td>
+      <td><span>3.215</span></td>
+      <td><span>19.44</span></td>
+    </tr>
+  </tbody></table>
+</div>
 ```
 
 ## Diagonal-Fractions
 
 Use `d-fvn-diagonal` to display numerator and denominator smaller and separated by a slash.
 
-<code-well-header>
-  <p class="d-fvn-diagonal">1/2 3/4 5/6</p>
-</code-well-header>
-
-```html
+```vue demo
 <p class="d-fvn-diagonal">1/2 3/4 5/6</p>
 ```
 
@@ -122,17 +103,12 @@ Use `d-fvn-diagonal` to display numerator and denominator smaller and separated 
 
 Use `d-fvn-unset` to deactivate other value previously set to `font-variant-numeric`.
 
-<code-well-header>
-  <p class="d-fvn-unset">1234567890</p>
-</code-well-header>
-
-```html
-<p class="d-fvn-unset">...</p>
+```vue demo
+<p class="d-fvn-unset">1234567890</p>
 ```
 
 <script setup>
   import { fontVariantNumeric } from '@data/type.json';
-  import FontUtilitiesNotice from '@baseComponents/FontUtilitiesNotice.vue';
 </script>
 
 ## Classes

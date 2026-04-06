@@ -4,37 +4,67 @@ description: Utilities for controlling how an element handles content that is to
 keywords: ["scroll", "hidden", "auto", "clip", "scrollbar"]
 ---
 
-<dt-notice kind="info" class="d-wmx100p d-my-200" hideClose>
-  Consider using the custom scrollbar first with the <dt-link to="/components/scrollbar" kind="muted">Scrollbar Directive</dt-link>.
-</dt-notice>
+> [!INFO]
+> Consider using the custom scrollbar first with the [Scrollbar Directive](/components/scrollbar).
 
 ## Examples
 
-<code-well-header>
-    <div class="d-d-grid d-g-cols4 d-g-200">
-        <div v-for="{ class: className } in overflow" class="d-h-350 d-p-150 d-bar4 d-bgc-moderate" :class="`d-of-${className}`">
-            <code>.d-of-{{ className }}</code>
-            <p class="d-w-350">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend rutrum auctor. Phasellus convallis sagittis augue ut ornare. Vestibulum et gravida lectus, sed ultrices sapien. Nullam aliquet elit dui, vitae hendrerit lectus volutpat eget.
-            </p>
-        </div>
-    </div>
-</code-well-header>
-
-```html
-<p class="d-of-auto">…</p>
-<p class="d-of-x-auto">…</p>
-<p class="d-of-y-auto">…</p>
-<p class="d-of-hidden">…</p>
-<p class="d-of-x-hidden">…</p>
-<p class="d-of-y-hidden">…</p>
-<p class="d-of-scroll">…</p>
-<p class="d-of-x-scroll">…</p>
-<p class="d-of-y-scroll">…</p>
-<p class="d-of-visible">…</p>
-<p class="d-of-x-visible">…</p>
-<p class="d-of-y-visible">…</p>
-<p class="d-of-unset">…</p>
+```vue demo
+<!-- @wrapper -->
+  <div class="d-d-grid d-g-cols4 d-g-200">
+      <div class="d-h-350 d-p-150 d-bar4 d-bgc-moderate d-of-auto">
+          <code>.d-of-auto</code>
+          <p class="d-w-350">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend rutrum auctor. Phasellus convallis sagittis augue ut ornare. Vestibulum et gravida lectus, sed ultrices sapien. Nullam aliquet elit dui, vitae hendrerit lectus volutpat eget.</p>
+      </div>
+      <div class="d-h-350 d-p-150 d-bar4 d-bgc-moderate d-of-x-auto">
+          <code>.d-of-x-auto</code>
+          <p class="d-w-350">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend rutrum auctor. Phasellus convallis sagittis augue ut ornare. Vestibulum et gravida lectus, sed ultrices sapien. Nullam aliquet elit dui, vitae hendrerit lectus volutpat eget.</p>
+      </div>
+      <div class="d-h-350 d-p-150 d-bar4 d-bgc-moderate d-of-y-auto">
+          <code>.d-of-y-auto</code>
+          <p class="d-w-350">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend rutrum auctor. Phasellus convallis sagittis augue ut ornare. Vestibulum et gravida lectus, sed ultrices sapien. Nullam aliquet elit dui, vitae hendrerit lectus volutpat eget.</p>
+      </div>
+      <div class="d-h-350 d-p-150 d-bar4 d-bgc-moderate d-of-hidden">
+          <code>.d-of-hidden</code>
+          <p class="d-w-350">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend rutrum auctor. Phasellus convallis sagittis augue ut ornare. Vestibulum et gravida lectus, sed ultrices sapien. Nullam aliquet elit dui, vitae hendrerit lectus volutpat eget.</p>
+      </div>
+      <div class="d-h-350 d-p-150 d-bar4 d-bgc-moderate d-of-x-hidden">
+          <code>.d-of-x-hidden</code>
+          <p class="d-w-350">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend rutrum auctor. Phasellus convallis sagittis augue ut ornare. Vestibulum et gravida lectus, sed ultrices sapien. Nullam aliquet elit dui, vitae hendrerit lectus volutpat eget.</p>
+      </div>
+      <div class="d-h-350 d-p-150 d-bar4 d-bgc-moderate d-of-y-hidden">
+          <code>.d-of-y-hidden</code>
+          <p class="d-w-350">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend rutrum auctor. Phasellus convallis sagittis augue ut ornare. Vestibulum et gravida lectus, sed ultrices sapien. Nullam aliquet elit dui, vitae hendrerit lectus volutpat eget.</p>
+      </div>
+      <div class="d-h-350 d-p-150 d-bar4 d-bgc-moderate d-of-scroll">
+          <code>.d-of-scroll</code>
+          <p class="d-w-350">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend rutrum auctor. Phasellus convallis sagittis augue ut ornare. Vestibulum et gravida lectus, sed ultrices sapien. Nullam aliquet elit dui, vitae hendrerit lectus volutpat eget.</p>
+      </div>
+      <div class="d-h-350 d-p-150 d-bar4 d-bgc-moderate d-of-x-scroll">
+          <code>.d-of-x-scroll</code>
+          <p class="d-w-350">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend rutrum auctor. Phasellus convallis sagittis augue ut ornare. Vestibulum et gravida lectus, sed ultrices sapien. Nullam aliquet elit dui, vitae hendrerit lectus volutpat eget.</p>
+      </div>
+      <div class="d-h-350 d-p-150 d-bar4 d-bgc-moderate d-of-y-scroll">
+          <code>.d-of-y-scroll</code>
+          <p class="d-w-350">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend rutrum auctor. Phasellus convallis sagittis augue ut ornare. Vestibulum et gravida lectus, sed ultrices sapien. Nullam aliquet elit dui, vitae hendrerit lectus volutpat eget.</p>
+      </div>
+      <div class="d-h-350 d-p-150 d-bar4 d-bgc-moderate d-of-visible">
+          <code>.d-of-visible</code>
+          <p class="d-w-350">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend rutrum auctor. Phasellus convallis sagittis augue ut ornare. Vestibulum et gravida lectus, sed ultrices sapien. Nullam aliquet elit dui, vitae hendrerit lectus volutpat eget.</p>
+      </div>
+      <div class="d-h-350 d-p-150 d-bar4 d-bgc-moderate d-of-x-visible">
+          <code>.d-of-x-visible</code>
+          <p class="d-w-350">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend rutrum auctor. Phasellus convallis sagittis augue ut ornare. Vestibulum et gravida lectus, sed ultrices sapien. Nullam aliquet elit dui, vitae hendrerit lectus volutpat eget.</p>
+      </div>
+      <div class="d-h-350 d-p-150 d-bar4 d-bgc-moderate d-of-y-visible">
+          <code>.d-of-y-visible</code>
+          <p class="d-w-350">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend rutrum auctor. Phasellus convallis sagittis augue ut ornare. Vestibulum et gravida lectus, sed ultrices sapien. Nullam aliquet elit dui, vitae hendrerit lectus volutpat eget.</p>
+      </div>
+      <div class="d-h-350 d-p-150 d-bar4 d-bgc-moderate d-of-unset">
+          <code>.d-of-unset</code>
+          <p class="d-w-350">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eleifend rutrum auctor. Phasellus convallis sagittis augue ut ornare. Vestibulum et gravida lectus, sed ultrices sapien. Nullam aliquet elit dui, vitae hendrerit lectus volutpat eget.</p>
+      </div>
+  </div>
 ```
 
 <script setup>

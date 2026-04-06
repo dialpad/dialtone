@@ -4,30 +4,26 @@ description: Utilities to change an element's font-weight.
 keywords: ["bold", "semibold", "light", "thin"]
 ---
 
-<FontUtilitiesNotice />
+> [!WARNING] Use DtText over CSS Utilities
+> Reach for the [DtText](/components/text) component before considering any typography utility.
 
 ## Usage
 
 Use `d-fw-{n}` to change an element's font-weight.
 
-<code-well-header>
-  <div class="d-d-grid d-g-200 d-ai-center" style="grid-template-columns: 11rem 1fr">
-    <div class="d-code--sm d-docsite-code d-ws-nowrap">.d-fw-normal</div>
-    <div><p class="d-fw-normal">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code--sm d-docsite-code d-ws-nowrap">.d-fw-medium</div>
-    <div><p class="d-fw-medium">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code--sm d-docsite-code d-ws-nowrap">.d-fw-semibold</div>
-    <div><p class="d-fw-semibold">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code--sm d-docsite-code d-ws-nowrap">.d-fw-bold</div>
-    <div><p class="d-fw-bold">The quick brown fox jumps over the lazy dog.</p></div>
-  </div>
-</code-well-header>
-
-```html
-<p class="d-fw-normal">...</p>
-<p class="d-fw-medium">...</p>
-<p class="d-fw-semibold">...</p>
-<p class="d-fw-bold">...</p>
+```vue demo
+<div class="d-d-grid d-g-200 d-ai-center" style="grid-template-columns: 11rem 1fr">
+  <div class="d-code--sm d-docsite-code d-ws-nowrap">.d-fw-normal</div>
+  <div><p class="d-fw-normal">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code d-ws-nowrap">.d-fw-medium</div>
+  <div><p class="d-fw-medium">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code d-ws-nowrap">.d-fw-semibold</div>
+  <div><p class="d-fw-semibold">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code d-ws-nowrap">.d-fw-bold</div>
+  <div><p class="d-fw-bold">The quick brown fox jumps over the lazy dog.</p></div>
+</div>
+<!-- @code -->
+<p class="d-fw-{className}">...</p>
 ```
 
 ## Variables
@@ -71,5 +67,4 @@ Use `d-fw-{n}` to change an element's font-weight.
 <script setup>
   import { weight } from '@data/type.json';
   import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
-  import FontUtilitiesNotice from '@baseComponents/FontUtilitiesNotice.vue';
 </script>

@@ -4,45 +4,26 @@ description: Utilities for controlling the space between child elements.
 keywords: ["margin","padding","gap","whitespace"]
 ---
 
-<dt-notice kind="error" class="d-wmx100p d-my-200" hideClose>
-
-`d-stack` and `d-flow` utilities are deprecated. Please use the <dt-link to="/components/stack" kind="muted">Stack</dt-link> component instead.
-
-</dt-notice>
+> [!ERROR]
+> `d-stack` and `d-flow` utilities are deprecated. Please use the [Stack](/components/stack) component instead.
 
 ## Adding Space Vertically
 
-<code-well-header>
-  <div class="d-bgc-bold d-stack16 d-bar8 lg:d-w-150 d-w-200">
-    <div class="d-p-200 d-bar8 d-bgc-moderate d-ta-center">1</div>
-    <div class="d-p-200 d-bar8 d-bgc-moderate d-ta-center">2</div>
-    <div class="d-p-200 d-bar8 d-bgc-moderate d-ta-center">3</div>
-  </div>
-</code-well-header>
-
-```html
-<div class="d-stack16">
-  <div>1</div>
-  <div>2</div>
-  <div>3</div>
+```vue demo
+<div class="d-bgc-bold d-stack16 d-bar8 lg:d-w-150 d-w-200">
+  <div class="d-p-200 d-bar8 d-bgc-moderate d-ta-center">1</div>
+  <div class="d-p-200 d-bar8 d-bgc-moderate d-ta-center">2</div>
+  <div class="d-p-200 d-bar8 d-bgc-moderate d-ta-center">3</div>
 </div>
 ```
 
 ## Adding Space Horizontally
 
-<code-well-header>
-  <div class="d-fl-center d-bgc-bold d-flow24 d-bar8 d-ta-center">
-    <div class="lg:d-w-150 d-w-200 d-p-200 d-bar8 d-bgc-moderate">1</div>
-    <div class="lg:d-w-150 d-w-200 d-p-200 d-bar8 d-bgc-moderate">2</div>
-    <div class="lg:d-w-150 d-w-200 d-p-200 d-bar8 d-bgc-moderate">3</div>
-  </div>
-</code-well-header>
-
-```html
-<div class="d-flow24">
-  <div>1</div>
-  <div>2</div>
-  <div>3</div>
+```vue demo
+<div class="d-fl-center d-bgc-bold d-flow24 d-bar8 d-ta-center">
+  <div class="lg:d-w-150 d-w-200 d-p-200 d-bar8 d-bgc-moderate">1</div>
+  <div class="lg:d-w-150 d-w-200 d-p-200 d-bar8 d-bgc-moderate">2</div>
+  <div class="lg:d-w-150 d-w-200 d-p-200 d-bar8 d-bgc-moderate">3</div>
 </div>
 ```
 

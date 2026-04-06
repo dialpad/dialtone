@@ -1,7 +1,7 @@
 ---
 title: Split Button
 description: A Split Button offers a default action paired with a secondary action to reveal alternate or related actions.
-status: beta
+status: ready
 thumb: true
 image: assets/images/components/split-button.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-split-button--default
@@ -143,6 +143,32 @@ Use the `disabled` prop to disable both buttons, or use `start-disabled` and `en
 <dt-stack direction="row" gap="100">
   <dt-split-button start-active end-tooltip-text="More calling options"> Start active </dt-split-button>
   <dt-split-button end-active end-tooltip-text="More calling options"> End active </dt-split-button>
+</dt-stack>
+```
+
+### No Divider
+
+Use `:show-divider="false"` to hide the vertical divider between the start and end buttons. This is only available for the `clear` importance variant.
+
+```vue demo
+<!-- @wrapper -->
+<dt-stack direction="row" gap="100">
+  <dt-split-button importance="clear" kind="muted" :show-divider="false" end-tooltip-text="More calling options">
+    Place Call
+    <template #dropdownList>
+      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>
+      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item>
+      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>
+    </template>
+  </dt-split-button>
+  <dt-split-button importance="clear" :show-divider="false" end-tooltip-text="More calling options">
+    Place Call
+    <template #dropdownList>
+      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>
+      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item>
+      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>
+    </template>
+  </dt-split-button>
 </dt-stack>
 ```
 

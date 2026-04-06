@@ -621,14 +621,8 @@ A real-world pattern: the callbar container already exists as a semantic element
 
 The `<dt-mode-island>` component is the underlying abstraction that the directive builds on. The key rendered difference is that it creates a wrapper element, while the directive attaches to mode to the existing element.
 
-<dt-notice
-  kind="info"
-  class="d-wmx100p d-mbs-300 d-mbe-300"
-  hide-close
-  title="Note"
->
-  The only real case where you might want to use the component is when you need to create a container element that doesn't already exist, but even then, you can create any kind of containing element with the directive e.g. <code>&lt;span v-dt-mode:invert"&gt;...&lt;/span&gt;</code>.
-</dt-notice>
+> [!INFO] Note
+> The only real case where you might want to use the component is when you need to create a container element that doesn't already exist, but even then, you can create any kind of containing element with the directive e.g. `<span v-dt-mode:invert">...</span>`.
 
 ```vue code-only
 <dt-mode-island as="section">

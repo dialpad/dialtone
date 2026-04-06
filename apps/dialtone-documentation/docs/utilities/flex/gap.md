@@ -4,7 +4,8 @@ description: Utilities to control the spacing between columns, rows, or both.
 keywords: ["flexbox","flex gap","spacing","gutter"]
 ---
 
-<FlexStackNotice />
+> [!WARNING] Use DtStack in favor of Flex CSS Utilities
+> Use the [DtStack](/components/stack) component for most Flex-based layout implementations. View [Migrating from Flex CSS Utilities to DtStack](/about/whats-new/posts/2025-12-2) for more details.
 
 Use `d-g-{stop}` to set gap using spacing token stops. The number references the spacing token (`d-g-100` = `--dt-spacing-100` = 8px). These classes work with both flex and grid layouts.
 
@@ -12,21 +13,12 @@ Use `d-g-{stop}` to set gap using spacing token stops. The number references the
 
 Use `d-g-{stop}` to universally change the row and column gap space.
 
-<code-well-header>
-  <dt-stack direction="row" class="d-fl-col2 d-fw-wrap d-g-200 d-bar8 d-w100p d-bgc-bold">
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">3</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">4</dt-stack>
-  </dt-stack>
-</code-well-header>
-
-```html
-<dt-stack direction="row" class="d-fl-col2 d-fw-wrap d-g-200">
-  <div>1</div>
-  <div>2</div>
-  <div>3</div>
-  <div>4</div>
+```vue demo
+<dt-stack direction="row" class="d-fl-col2 d-fw-wrap d-g-200 d-bar8 d-w100p d-bgc-bold">
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">4</dt-stack>
 </dt-stack>
 ```
 
@@ -34,21 +26,12 @@ Use `d-g-{stop}` to universally change the row and column gap space.
 
 Use `d-rg-{stop}` to change the row gap space.
 
-<code-well-header>
-  <dt-stack class="d-rg-200 d-bar8 d-w100p d-bgc-bold">
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">3</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">4</dt-stack>
-  </dt-stack>
-</code-well-header>
-
-```html
-<dt-stack class="d-rg-200">
-  <div>1</div>
-  <div>2</div>
-  <div>3</div>
-  <div>4</div>
+```vue demo
+<dt-stack class="d-rg-200 d-bar8 d-w100p d-bgc-bold">
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">4</dt-stack>
 </dt-stack>
 ```
 
@@ -56,41 +39,23 @@ Use `d-rg-{stop}` to change the row gap space.
 
 Use `d-cg-{stop}` to change the column gap space.
 
-<code-well-header>
-  <dt-stack direction="row" class="d-fl-col4 d-cg-200 d-bar8 d-w100p d-bgc-bold">
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">3</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">4</dt-stack>
-  </dt-stack>
-</code-well-header>
-
-```html
-<dt-stack direction="row" class="d-fl-col4 d-cg-200">
-  <div>1</div>
-  <div>2</div>
-  <div>3</div>
-  <div>4</div>
+```vue demo
+<dt-stack direction="row" class="d-fl-col4 d-cg-200 d-bar8 d-w100p d-bgc-bold">
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">4</dt-stack>
 </dt-stack>
 ```
 
 ## Independently Changing Row and Column Gaps
 
-<code-well-header>
-  <dt-stack direction="row" class="d-fl-col2 d-fw-wrap d-rg-400 d-cg-100 d-bar8 d-w100p d-bgc-bold">
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">3</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">4</dt-stack>
-  </dt-stack>
-</code-well-header>
-
-```html
-<dt-stack direction="row" class="d-rg-400 d-cg-100">
-  <div>1</div>
-  <div>2</div>
-  <div>3</div>
-  <div>4</div>
+```vue demo
+<dt-stack direction="row" class="d-fl-col2 d-fw-wrap d-rg-400 d-cg-100 d-bar8 d-w100p d-bgc-bold">
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">4</dt-stack>
 </dt-stack>
 ```
 

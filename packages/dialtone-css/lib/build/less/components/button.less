@@ -718,11 +718,13 @@
   align-items: stretch;
   justify-content: center;
 
-  .d-popover,
-  .d-popover div,
-  .d-popover &__omega,
-  .d-popover &__end {
-    block-size: 100%;
+  // Nested popover wrappers shouldn't affect layout
+  > :where(div:not([class])) {
+    display: contents;
+  }
+
+  :where(.d-popover, .d-popover > div) {
+    display: contents;
   }
 
   &__alpha,
@@ -824,6 +826,11 @@
       border-start-start-radius: 0;
       border-end-start-radius: 0;
     }
+  }
+
+  &--no-divider &__omega::before,
+  &--no-divider &__end::before {
+    content: none;
   }
 
   // adjust x-padding for icon-only button at each size

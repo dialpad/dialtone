@@ -21,7 +21,7 @@
     :leading-class="leadingClass"
     :trailing-class="trailingClass"
     data-qa="dt-tab"
-    :tabindex="isSelected ? '0' : '-1'"
+    :tabindex="isFocusTarget ? '0' : '-1'"
     v-bind="$attrs"
     v-on="tabListeners"
   >
@@ -211,6 +211,11 @@ export default {
       return this.groupContext.selected === this.panelId;
     },
 
+    isFocusTarget () {
+      const focusedId = this.groupContext.focusedTabId;
+      return focusedId ? focusedId === this.id : this.isSelected;
+    },
+
     buttonKind () {
       if (this.groupContext.outlined) {
         return this.groupContext.kind === 'muted' ? 'muted' : 'default';
@@ -242,6 +247,12 @@ export default {
   mounted () {
     if (this.selected) {
       this.groupContext.selected = this.panelId;
+    }
+  },
+
+  beforeUnmount () {
+    if (this.groupContext.focusedTabId === this.id) {
+      this.setFocus(null);
     }
   },
 

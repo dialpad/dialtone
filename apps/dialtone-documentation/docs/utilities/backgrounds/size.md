@@ -8,22 +8,29 @@ keywords: ["bg size", "cover", "contain"]
 
 Use `d-bgs-{n}` to control the size of element's background image.
 
-<code-well-header class="d-d-grid d-g-200 d-g-cols4 d-g-200 d-p-200 d-bgc-secondary" custom>
-  <dt-stack align="center" class="d-g-50" v-for="i in sizes">
-      <dt-stack direction="row" align="center" justify="center" class="d-size-200 d-bgc-moderate d-bar8 d-of-hidden d-bgr-none" style="background-image: url('/assets/images/puffin.jpg');"
-        :style="i === 'var' ? '--bgg-size: 65% 65%;' : ''"
-        :class="[{'d-bgp-center': i === 'auto'}, `d-bgs-${i}`]">
-      </dt-stack>
-      <dt-text as="code" kind="code" size="100">d-bgs-{{ i }}</dt-text>
-  </dt-stack>
-</code-well-header>
-
-```html
-<div class="d-bgr-none d-bgs-contain" style="background-image: url(...);">...</div>
-<div class="d-bgr-none d-bgs-cover" style="background-image: url(...);">...</div>
-<div class="d-bgr-none d-bgs-var" style="--bgg-size: 65% 65%; background-image: url(...);">...</div>
-<div class="d-bgr-none d-bgs-auto d-bgp-center" style="background-image: url(...);">...</div>
-<div class="d-bgr-none d-bgs-unset" style="background-image: url(...);">...</div>
+```vue demo
+<!-- @custom -->
+<!-- @class d-d-grid d-g-200 d-g-cols4 d-p-200 d-bgc-secondary -->
+<dt-stack align="center" class="d-g-50">
+  <div class="d-size-200 d-bgc-moderate d-bar8 d-of-hidden d-bgr-none d-bgs-contain" style="background-image: url('/assets/images/puffin.jpg');"></div>
+  <dt-text as="code" kind="code" size="100">d-bgs-contain</dt-text>
+</dt-stack>
+<dt-stack align="center" class="d-g-50">
+  <div class="d-size-200 d-bgc-moderate d-bar8 d-of-hidden d-bgr-none d-bgs-cover" style="background-image: url('/assets/images/puffin.jpg');"></div>
+  <dt-text as="code" kind="code" size="100">d-bgs-cover</dt-text>
+</dt-stack>
+<dt-stack align="center" class="d-g-50">
+  <div class="d-size-200 d-bgc-moderate d-bar8 d-of-hidden d-bgr-none d-bgs-var" style="background-image: url('/assets/images/puffin.jpg'); --bgg-size: 65% 65%;"></div>
+  <dt-text as="code" kind="code" size="100">d-bgs-var</dt-text>
+</dt-stack>
+<dt-stack align="center" class="d-g-50">
+  <div class="d-size-200 d-bgc-moderate d-bar8 d-of-hidden d-bgr-none d-bgs-auto d-bgp-center" style="background-image: url('/assets/images/puffin.jpg');"></div>
+  <dt-text as="code" kind="code" size="100">d-bgs-auto</dt-text>
+</dt-stack>
+<dt-stack align="center" class="d-g-50">
+  <div class="d-size-200 d-bgc-moderate d-bar8 d-of-hidden d-bgr-none d-bgs-unset" style="background-image: url('/assets/images/puffin.jpg');"></div>
+  <dt-text as="code" kind="code" size="100">d-bgs-unset</dt-text>
+</dt-stack>
 ```
 
 <script setup>

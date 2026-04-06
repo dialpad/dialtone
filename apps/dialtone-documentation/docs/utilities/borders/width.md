@@ -1,58 +1,35 @@
 ---
 title: Border Widths
 description: Utilities for controlling an element's border width.
-keywords: ["border size", "border thickness"]
+keywords: ["border size", "border thickness", "border inline size", "border block size"]
 ---
 
 ## All Sides
 
 Use `d-baw{n}` to change the border width on your element.
 
-<code-well-header>
-  <dt-stack
-    gap="200"
-    :direction="{ 'default': 'column', 'md': 'row' }"
-  >
-    <div
-      v-for="r in [0, 1, 2, 4]"
-      class="d-p-200 d-ba"
-      :class="`d-baw${r}`"
-    >
-      d-baw{{r}}
-    </div>
-  </dt-stack>
-</code-well-header>
-
-```html
-<div class="d-ba d-baw0">...</div>
-<div class="d-ba d-baw1">...</div>
-<div class="d-ba d-baw2">...</div>
-<div class="d-ba d-baw4">...</div>
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="200" :direction="{ 'default': 'column', 'md': 'row' }">
+  <div class="d-p-200 d-ba d-baw0">d-baw0</div>
+  <div class="d-p-200 d-ba d-baw1">d-baw1</div>
+  <div class="d-p-200 d-ba d-baw2">d-baw2</div>
+  <div class="d-p-200 d-ba d-baw4">d-baw4</div>
+</dt-stack>
 ```
 
 ## Individual Sides
 
 Use `d-b{a|t|r|b|l}w{n}` to change the border width of your direction on your element.
 
-<code-well-header>
-  <dt-stack
-    gap="200"
-    :direction="{ 'default': 'column', 'md': 'row' }"
-  >
-    <div
-      v-for="r in [0, 1, 2, 4]"
-      class="d-p-200 d-ba d-baw0 d-bgc-primary"
-      :class="`d-btw${r}`"
-    >
-      d-btw{{r}}
-    </div>
-  </dt-stack>
-</code-well-header>
-
-```html
-<div class="d-bt d-btw1">...</div>
-<div class="d-br d-btw2">...</div>
-<div class="d-bb d-btw4">...</div>
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="200" :direction="{ 'default': 'column', 'md': 'row' }">
+  <div class="d-p-200 d-ba d-baw0 d-bgc-primary d-btw0">d-btw0</div>
+  <div class="d-p-200 d-ba d-baw0 d-bgc-primary d-btw1">d-btw1</div>
+  <div class="d-p-200 d-ba d-baw0 d-bgc-primary d-btw2">d-btw2</div>
+  <div class="d-p-200 d-ba d-baw0 d-bgc-primary d-btw4">d-btw4</div>
+</dt-stack>
 ```
 
 ## Classes

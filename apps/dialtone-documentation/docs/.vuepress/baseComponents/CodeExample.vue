@@ -1,18 +1,17 @@
 <template>
   <code-well-header
     v-if="showDemo"
+    ref="demoContent"
     :bgclass="bgclass"
     :custom="custom"
     :class="$attrs.class"
   >
-    <div ref="demoContent">
-      <slot />
-    </div>
+    <slot />
   </code-well-header>
 
   <code-example-tabs
     v-if="showCode && resolvedVueCode"
-    :html-code="showDemo ? () => $refs.demoContent : null"
+    :html-code="showDemo ? () => $refs.demoContent?.$el : null"
     :vue-code="resolvedVueCode"
     show-html-warning
   />

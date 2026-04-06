@@ -4,47 +4,35 @@ description: Utilities to change an element's font styles.
 keywords: ["italic", "oblique", "normal"]
 ---
 
-<FontUtilitiesNotice />
+> [!WARNING] Use DtText over CSS Utilities
+> Reach for the [DtText](/components/text) component before considering any typography utility.
 
 ## Normal
 
 Use `d-fs-normal` to change an element's font-style.
 
-<code-well-header>
-  <p class="d-fs-normal">The quick brown fox jumps over the lazy dog.</p>
-</code-well-header>
-
-```html
-<p class="d-fs-normal">...</p>
+```vue demo
+<p class="d-fs-normal">The quick brown fox jumps over the lazy dog.</p>
 ```
 
 ## Italics
 
 Use `d-fs-italic` to change an element's font-style.
 
-<code-well-header>
-  <p class="d-fs-italic">The quick brown fox jumps over the lazy dog.</p>
-</code-well-header>
-
-```html
-<p class="d-fs-italic">...</p>
+```vue demo
+<p class="d-fs-italic">The quick brown fox jumps over the lazy dog.</p>
 ```
 
 ## No Italics
 
 Use `d-fs-none` to remove an element's font-style.
 
-<code-well-header>
-  <p class="d-fs-none">The quick brown fox jumps over the lazy dog.</p>
-</code-well-header>
-
-```html
-<p class="d-fs-none">...</p>
+```vue demo
+<p class="d-fs-none">The quick brown fox jumps over the lazy dog.</p>
 ```
 
 <script setup>
   import { style } from '@data/type.json';
-  import FontUtilitiesNotice from '@baseComponents/FontUtilitiesNotice.vue';
 </script>
 
 ## Classes

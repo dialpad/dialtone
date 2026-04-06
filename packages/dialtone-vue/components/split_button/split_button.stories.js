@@ -122,6 +122,10 @@ export const argTypesData = {
     options: Object.keys(ICON_POSITION_MODIFIERS),
   },
 
+  showDivider: {
+    control: 'boolean',
+  },
+
   startLoading: {
     control: 'boolean',
   },

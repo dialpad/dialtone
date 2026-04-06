@@ -70,8 +70,6 @@ const HANDLED_COMPONENTS = new Set([
   'designcolortable',
   'themecolortable',
   'colorscatalog',
-  'flexstacknotice',
-  'fontutilitiesnotice',
   'buttonvariantstable',
   'dt-notice',
   'blogpost',

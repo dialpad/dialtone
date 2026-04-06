@@ -8,84 +8,60 @@ keywords: ["nowrap", "pre", "pre wrap", "word spacing"]
 
 Use `d-ws-normal` to collapse an element's text whitespaces sequences and newline characters are treated like whitespace. Lines are broken as needed to fill boxes.
 
-<code-well-header>
-  <div class="d-bgc-moderate d-py-100 d-px-200 d-bar8 d-w-350">
-    <p class="d-ws-normal">Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br/>Blanditiisitaquequodpraesentium Dolores beatae nam at sed dolorum ratione dolorem nisi velit dolor.</p>
-  </div>
-</code-well-header>
-
-```html
-<p class="d-ws-normal">...</p>
+```vue demo
+<div class="d-bgc-moderate d-py-100 d-px-200 d-bar8 d-w-350">
+  <p class="d-ws-normal">Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br/>Blanditiisitaquequodpraesentium Dolores beatae nam at sed dolorum ratione dolorem nisi velit dolor.</p>
+</div>
 ```
 
 ## No Wrap
 
 Use `d-ws-nowrap` to collapse an element's text whitespaces sequences, but line breaks are not honored. This keeps text from wrapping.
 
-<code-well-header>
-  <div class="d-bgc-moderate d-py-100 d-px-200 d-bar8 d-w-350">
-    <p class="d-ws-nowrap d-of-hidden">Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br/>Blanditiisitaquequodpraesentiumexplicaboincidunt? Dolores beatae nam at sed dolorum ratione dolorem nisi velit dolor.</p>
-  </div>
-</code-well-header>
-
-```html
-<p class="d-ws-nowrap">...</p>
+```vue demo
+<div class="d-bgc-moderate d-py-100 d-px-200 d-bar8 d-w-350">
+  <p class="d-ws-nowrap d-of-hidden">Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br/>Blanditiisitaquequodpraesentiumexplicaboincidunt? Dolores beatae nam at sed dolorum ratione dolorem nisi velit dolor.</p>
+</div>
 ```
 
 ## Pre
 
 Use `d-ws-pre` to preserve an element's whitespaces sequences. Lines are only broken at new line characters and `<br/>` elements.
 
-<code-well-header>
-  <div class="d-bgc-moderate d-py-100 d-px-200 d-bar8 d-w-350">
-    <p class="d-ws-pre d-of-hidden">Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br/>       Blanditiisitaquequodpraesentiumexplicaboincidunt?       Dolores beatae nam at sed dolorum ratione dolorem nisi velit dolor.</p>
-  </div>
-</code-well-header>
-
-```html
-<p class="d-ws-pre">...</p>
+```vue demo
+<div class="d-bgc-moderate d-py-100 d-px-200 d-bar8 d-w-350">
+  <p class="d-ws-pre d-of-hidden">Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br/>       Blanditiisitaquequodpraesentiumexplicaboincidunt?       Dolores beatae nam at sed dolorum ratione dolorem nisi velit dolor.</p>
+</div>
 ```
 
 ## Pre Line
 
 Use `d-ws-pre-line` to collapse an element's whitespaces sequences. Lines are broken at new line characters, `<br/>` elements, or as needed to fill boxes.
 
-<code-well-header>
-  <div class="d-bgc-moderate d-py-100 d-px-200 d-bar8 d-w-350">
-    <p class="d-ws-pre-line d-of-hidden">Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br/>Blanditiisitaquequodpraesentiumexplicaboincidunt? Dolores beatae nam at sed dolorum ratione dolorem nisi velit dolor.</p>
-  </div>
-</code-well-header>
-
-```html
-<p class="d-ws-pre-line">...</p>
+```vue demo
+<div class="d-bgc-moderate d-py-100 d-px-200 d-bar8 d-w-350">
+  <p class="d-ws-pre-line d-of-hidden">Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br/>Blanditiisitaquequodpraesentiumexplicaboincidunt? Dolores beatae nam at sed dolorum ratione dolorem nisi velit dolor.</p>
+</div>
 ```
 
 ## Pre Wrap
 
 Use `d-ws-pre-wrap` to preserve an element's whitespaces sequences. Lines are broken at new line characters, `<br/>` elements, or as needed to fill boxes.
 
-<code-well-header>
-  <div class="d-bgc-moderate d-py-100 d-px-200 d-bar8 d-w-350">
-    <p class="d-ws-pre-wrap d-of-hidden">Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br/>      Blanditiisitaquequodpraesentiumexplicaboincidunt? Dolores beatae nam at sed dolorum ratione dolorem nisi velit dolor.</p>
-  </div>
-</code-well-header>
-
-```html
-<p class="d-ws-pre-wrap">...</p>
+```vue demo
+<div class="d-bgc-moderate d-py-100 d-px-200 d-bar8 d-w-350">
+  <p class="d-ws-pre-wrap d-of-hidden">Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br/>      Blanditiisitaquequodpraesentiumexplicaboincidunt? Dolores beatae nam at sed dolorum ratione dolorem nisi velit dolor.</p>
+</div>
 ```
 
 ## Break Spaces
 
 Use `d-ws-break-spaces` to have an element act like `pre-wrap` except that any sequence of preserved whitespace always takes up space, a line breaking opportunity exists after every preserved whitespace character, and preserved spaces take up space and do not hang which affects the element's intrinisic size (`min-content` and `max-content` sizes).
 
-<code-well-header>
-  <div class="d-bgc-moderate d-py-100 d-px-200 d-bar8 d-w-350">
-    <p class="d-ws-break-spaces d-of-hidden">Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br/>Blanditiisitaquequodpraesentiumexplicaboincidunt? Dolores beatae nam at sed dolorum ratione dolorem nisi velit dolor.</p>
-  </div>
-</code-well-header>
-
-```html
-<p class="d-ws-break-spaces">...</p>
+```vue demo
+<div class="d-bgc-moderate d-py-100 d-px-200 d-bar8 d-w-350">
+  <p class="d-ws-break-spaces d-of-hidden">Lorem ipsum dolor sit amet, consectetur adipisicing elit.<br/>Blanditiisitaquequodpraesentiumexplicaboincidunt? Dolores beatae nam at sed dolorum ratione dolorem nisi velit dolor.</p>
+</div>
 ```
 
 ## Classes

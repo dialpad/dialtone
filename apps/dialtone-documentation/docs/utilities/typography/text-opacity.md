@@ -9,24 +9,11 @@ The ability to control an element's color is <em>only</em> provided as a class. 
 
 Use `d-fco{n}` to change a font-color's opacity. You can also change font-color's opacity on `:hover`, `:focus`, `:focus-visible` by using the respective `h:d-fco{n}`, `f:d-fco{n}`, `fv:d-fco{n}` prefixes.
 
-<code-well-header>
-  <p class="d-fc-critical">The quick brown fox jumps over the lazy dog.</p>
-  <p class="d-fc-critical d-fco99">The quick brown fox jumps over the lazy dog.</p>
-  <p class="d-fc-critical d-fco95">The quick brown fox jumps over the lazy dog.</p>
-  <p class="d-fc-critical d-fco90">The quick brown fox jumps over the lazy dog.</p>
-  <p class="d-fc-critical d-fco75">The quick brown fox jumps over the lazy dog.</p>
-  <p class="d-fc-critical d-fco50">The quick brown fox jumps over the lazy dog.</p>
-  <p class="d-fc-critical d-fco25">The quick brown fox jumps over the lazy dog.</p>
-  <p class="d-fc-critical d-fco10">The quick brown fox jumps over the lazy dog.</p>
-  <p class="d-fc-critical d-fco0">The quick brown fox jumps over the lazy dog.</p>
-</code-well-header>
-
-```html
+```vue demo
 <p class="d-fc-critical">The quick brown fox jumps over the lazy dog.</p>
 <p class="d-fc-critical d-fco99">The quick brown fox jumps over the lazy dog.</p>
 <p class="d-fc-critical d-fco95">The quick brown fox jumps over the lazy dog.</p>
 <p class="d-fc-critical d-fco90">The quick brown fox jumps over the lazy dog.</p>
-<p class="d-fc-critical d-fco85">The quick brown fox jumps over the lazy dog.</p>
 <p class="d-fc-critical d-fco75">The quick brown fox jumps over the lazy dog.</p>
 <p class="d-fc-critical d-fco50">The quick brown fox jumps over the lazy dog.</p>
 <p class="d-fc-critical d-fco25">The quick brown fox jumps over the lazy dog.</p>
@@ -44,15 +31,9 @@ Text opacity CSS Utilities won't be inherited by its children. A font-color util
       <dt-icon name="alert-triangle" size="400" />
       <strong>Text opacity utility classes don't inherit colors.</strong>
     </dt-stack>
-    <code-well-header>
-      <div class="d-fc-critical">
-        <p>The quick brown fox jumps over the lazy dog.</p>
-        <p class="d-fco50">The quick brown fox jumps over the lazy dog.</p>
-      </div>
-    </code-well-header>
 
-```html
-// This will not work
+```vue demo
+<!-- This won't work -->
 <div class="d-fc-critical">
   <p>The quick brown fox jumps over the lazy dog.</p>
   <p class="d-fco50">The quick brown fox jumps over the lazy dog.</p>
@@ -66,15 +47,8 @@ Text opacity CSS Utilities won't be inherited by its children. A font-color util
   <strong>Apply each utility class to the same element</strong>
 </dt-stack>
 
-<code-well-header>
-  <div class="d-fc-critical">
-    <p>The quick brown fox jumps over the lazy dog.</p>
-    <p class="d-fc-critical d-fco50">The quick brown fox jumps over the lazy dog.</p>
-  </div>
-</code-well-header>
-
-```html
-// This will
+```vue demo
+<!-- This will -->
 <div class="d-fc-critical">
   <p>The quick brown fox jumps over the lazy dog.</p>
   <p class="d-fc-critical d-fco50">The quick brown fox jumps over the lazy dog.</p>

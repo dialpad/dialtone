@@ -278,6 +278,38 @@ describe('DtSplitButton Tests', function () {
     });
   });
 
+  describe('showDivider Tests', () => {
+    describe('When showDivider is true (default)', () => {
+      it('Should not have no-divider class', () => {
+        expect(wrapper.classes()).not.toContain('d-split-btn--no-divider');
+      });
+    });
+
+    describe('When showDivider is false', () => {
+      it('Should have no-divider class', () => {
+        mockProps = { showDivider: false, importance: 'clear' };
+
+        updateWrapper();
+
+        expect(wrapper.classes()).toContain('d-split-btn--no-divider');
+      });
+    });
+
+    describe('When showDivider is false and importance is not clear', () => {
+      it('Should warn about invalid combination', () => {
+        const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+        mockProps = { showDivider: false, importance: 'outlined' };
+
+        updateWrapper();
+
+        expect(warnSpy).toHaveBeenCalledWith(
+          expect.stringContaining('show-divider prop set to false has no effect'),
+        );
+        warnSpy.mockRestore();
+      });
+    });
+  });
+
   describe('Interactivity Tests', () => {
     describe('When start button is clicked', () => {
       beforeEach(async () => {

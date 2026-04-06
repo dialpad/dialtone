@@ -4,48 +4,36 @@ description: Utilities to change an element's font-family.
 keywords: ["typeface", "sans serif", "monospace"]
 ---
 
-<FontUtilitiesNotice />
+> [!WARNING] Use DtText over CSS Utilities
+> Reach for the [DtText](/components/text) component before considering any typography utility.
 
 ## Sans-Serif
 
 Use `d-ff-sans` to apply a Sans-Serif font stack.
 
-<code-well-header>
-  <p class="d-ff-sans">The quick brown fox jumps over the lazy dog.</p>
-</code-well-header>
-
-```html
-<p class="d-ff-sans">...</p>
+```vue demo
+<p class="d-ff-sans">The quick brown fox jumps over the lazy dog.</p>
 ```
 
 ## Mono
 
 Use `d-ff-mono` to apply a Monospace font stack.
 
-<code-well-header>
-  <p class="d-ff-mono">The quick brown fox jumps over the lazy dog.</p>
-</code-well-header>
-
-```html
-<p class="d-ff-mono">...</p>
+```vue demo
+<p class="d-ff-mono">The quick brown fox jumps over the lazy dog.</p>
 ```
 
 ## Marketing
 
 Dialtone supports select marketing fonts and weights. Use the following combinations to apply the marketing font stack.
 
-<code-well-header>
-  <p class="d-ff-marketing">The quick brown fox jumps over the lazy dog.</p>
-</code-well-header>
-
-```html
-<p class="d-ff-marketing">...</p>
+```vue demo
+<p class="d-ff-marketing">The quick brown fox jumps over the lazy dog.</p>
 ```
 
 <script setup>
   import { fontFamily } from '@data/type.json';
   import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
-  import FontUtilitiesNotice from '@baseComponents/FontUtilitiesNotice.vue';
 </script>
 
 ## CSS Variables

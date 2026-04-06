@@ -66,15 +66,8 @@ This inverts the underline behavior. With `underline="false"`, the link will not
 
 ### Inverted
 
-<dt-notice
-  title="Deprecated"
-  kind="error"
-  class="d-wmx100p d-my-200"
->
-  The <code>inverted</code> prop has been deprecated. Use the
-  <dt-link to="mode-island.html#inverting">v-dt-mode directive</dt-link>
-  instead.
-</dt-notice>
+> [!ERROR] Deprecated
+> The `inverted` prop has been deprecated. Use the [v-dt-mode directive](mode-island.html#inverting) instead.
 
 In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#inverting) on the component element.
 

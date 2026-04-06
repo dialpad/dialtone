@@ -1,33 +1,19 @@
 ---
 title: Divide Width
 description: Utilities for controlling the divider width between an element's child items.
-keywords: ["divider width","separator width","divider size"]
+keywords: ["divider width","separator width","divider size","divide inline size","divide block size"]
 ---
 
 ## Default Width
 
 Use `d-divide-{y|x}` to create a 1px divider between an element's child items.
 
-<code-well-header>
-  <dt-stack class="d-divide-y d-divide-default d-w100p">
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200">3</dt-stack>
-  </dt-stack>
-  <dt-stack direction="row" class="d-divide-x d-divide-default d-w100p">
-    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">3</dt-stack>
-  </dt-stack>
-</code-well-header>
-
-```html
+```vue demo
 <dt-stack class="d-divide-y d-divide-default d-w100p">
   <dt-stack direction="row" align="center" justify="center" class="d-p-200">1</dt-stack>
   <dt-stack direction="row" align="center" justify="center" class="d-p-200">2</dt-stack>
   <dt-stack direction="row" align="center" justify="center" class="d-p-200">3</dt-stack>
 </dt-stack>
-
 <dt-stack direction="row" class="d-divide-x d-divide-default d-w100p">
   <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">1</dt-stack>
   <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">2</dt-stack>
@@ -39,36 +25,24 @@ Use `d-divide-{y|x}` to create a 1px divider between an element's child items.
 
 Use `d-divide-{y|x}{n}` to change the divider width between an element's child items.
 
-<code-well-header>
-  <code>d-divide-x0</code>
-  <dt-stack direction="row" class="d-divide-x d-divide-x0 d-divide-default d-w100p d-ba d-bc-default">
-    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">3</dt-stack>
-  </dt-stack>
-  <code>d-divide-x2</code>
-  <dt-stack direction="row" class="d-divide-x d-divide-x2 d-divide-default d-w100p d-ba d-bc-default d-baw2">
-    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">3</dt-stack>
-  </dt-stack>
-  <code>d-divide-x4</code>
-  <dt-stack direction="row" class="d-divide-x d-divide-x4 d-divide-default d-w100p d-ba d-bc-default d-baw4">
-    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">3</dt-stack>
-  </dt-stack>
-</code-well-header>
-
-```html
-<dt-stack direction="row" class="d-divide-x d-divide-x0 d-divide-default d-w100p d-ba">
-  ...
+```vue demo
+<code>d-divide-x0</code>
+<dt-stack direction="row" class="d-divide-x d-divide-x0 d-divide-default d-w100p d-ba d-bc-default">
+  <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">3</dt-stack>
 </dt-stack>
-<dt-stack direction="row" class="d-divide-x d-divide-x2 d-divide-default d-w100p d-ba d-baw2">
-  ...
+<code>d-divide-x2</code>
+<dt-stack direction="row" class="d-divide-x d-divide-x2 d-divide-default d-w100p d-ba d-bc-default d-baw2">
+  <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">3</dt-stack>
 </dt-stack>
-<dt-stack direction="row" class="d-divide-x d-divide-x4 d-divide-default d-w100p d-ba d-baw4">
-  ...
+<code>d-divide-x4</code>
+<dt-stack direction="row" class="d-divide-x d-divide-x4 d-divide-default d-w100p d-ba d-bc-default d-baw4">
+  <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">3</dt-stack>
 </dt-stack>
 ```
 
@@ -76,16 +50,8 @@ Use `d-divide-{y|x}{n}` to change the divider width between an element's child i
 
 If an element's `flex-direction` is reversed, apply `d-divide-{y|x}-reverse` to reverse the divider placement between an element's child items.
 
-<code-well-header>
-  <dt-stack direction="row-reverse" class="d-divide-x d-divide-default d-divide-x-reverse d-w100p">
-    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">3</dt-stack>
-  </dt-stack>
-</code-well-header>
-
-```html
-<dt-stack direction="row-reverse" class="d-divide-x d-divide-default d-divide-x-reverse d-w100p d-ba d-bc-default">
+```vue demo
+<dt-stack direction="row-reverse" class="d-divide-x d-divide-default d-divide-x-reverse d-w100p">
   <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">1</dt-stack>
   <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">2</dt-stack>
   <dt-stack direction="row" align="center" justify="center" class="d-w100p d-p-200">3</dt-stack>

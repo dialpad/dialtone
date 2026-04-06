@@ -4,34 +4,32 @@ description: Utilities to change an element's font-size.
 keywords: ["text size", "type size", "type scale"]
 ---
 
-<FontUtilitiesNotice />
+> [!WARNING] Use DtText over CSS Utilities
+> Reach for the [DtText](/components/text) component before considering any typography utility.
 
 ## Usage
 
-<code-well-header>
-  <div class="d-d-grid d-g-200 d-ai-center" style="grid-template-columns: 10rem 1fr">
-    <div class="d-code--sm d-docsite-code">d-fs-50</div><div><p class="d-lc-1 d-fs-50">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code--sm d-docsite-code">d-fs-75</div><div><p class="d-lc-1 d-fs-75">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code--sm d-docsite-code">d-fs-100</div><div><p class="d-lc-1 d-fs-100">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code--sm d-docsite-code">d-fs-125</div><div><p class="d-lc-1 d-fs-125">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code--sm d-docsite-code">d-fs-150</div><div><p class="d-lc-1 d-fs-150">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code--sm d-docsite-code">d-fs-200</div><div><p class="d-lc-1 d-fs-200">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code--sm d-docsite-code">d-fs-250</div><div><p class="d-lc-1 d-fs-250">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code--sm d-docsite-code">d-fs-300</div><div><p class="d-lc-1 d-fs-300">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code--sm d-docsite-code">d-fs-350</div><div><p class="d-lc-1 d-fs-350">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code--sm d-docsite-code">d-fs-400</div><div><p class="d-lc-1 d-fs-400">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code--sm d-docsite-code">d-fs-500</div><div><p class="d-lc-1 d-fs-500">The quick brown fox jumps over the lazy dog.</p></div>
-  </div>
-</code-well-header>
-
-```html
-<p class="d-fs-*">...</p>
+```vue demo
+<div class="d-d-grid d-g-200 d-ai-baseline" style="grid-template-columns: 10rem 1fr">
+  <div class="d-code--sm d-docsite-code">d-fs-50</div><div><p class="d-lc-1 d-fs-50">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code">d-fs-75</div><div><p class="d-lc-1 d-fs-75">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code">d-fs-100</div><div><p class="d-lc-1 d-fs-100">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code">d-fs-125</div><div><p class="d-lc-1 d-fs-125">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code">d-fs-150</div><div><p class="d-lc-1 d-fs-150">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code">d-fs-200</div><div><p class="d-lc-1 d-fs-200">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code">d-fs-250</div><div><p class="d-lc-1 d-fs-250">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code">d-fs-300</div><div><p class="d-lc-1 d-fs-300">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code">d-fs-350</div><div><p class="d-lc-1 d-fs-350">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code">d-fs-400</div><div><p class="d-lc-1 d-fs-400">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code">d-fs-500</div><div><p class="d-lc-1 d-fs-500">The quick brown fox jumps over the lazy dog.</p></div>
+</div>
+<!-- @code -->
+<p class="d-fs-{stop}">...</p>
 ```
 
 <script setup>
   import { fontSize } from '@data/type.json';
   import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
-  import FontUtilitiesNotice from '@baseComponents/FontUtilitiesNotice.vue';
 </script>
 
 ## Classes by Platform

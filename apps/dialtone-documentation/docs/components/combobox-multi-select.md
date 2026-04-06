@@ -123,7 +123,7 @@ Adds validation for max selection. Make sure to provide the following props:
   description="Select up to 2 options."
   :selected-items="selectedItems"
   :max-selected="2"
-  :max-selected-message="[{ message: `More than 2 selected`, type: `error` }]"
+  :max-selected-message="[{ message: 'More than 2 selected', type: 'error' }]"
   @input="onInput"
   @select="onSelect"
   @remove="onRemove"

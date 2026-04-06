@@ -4,29 +4,29 @@ description: Utilities to change an element's font-color.
 keywords: ["text color", "foreground color", "font colour"]
 ---
 
-<FontUtilitiesNotice />
+> [!WARNING] Use DtText over CSS Utilities
+> Reach for the [DtText](/components/text) component before considering any typography utility.
 
 ## Use DtText's `tone` prop
 
 Use [DtText's](/components/text.html#tone) `tone` prop to declare the text's tone, which will map to a foreground color. By default, the tone is inherited from its parent.
 
-<code-well-header>
-  <dt-stack gap="200" direction="row">
-    <dt-stack class="d-py-100 d-px-200 d-bgc-primary d-bar4">
-      <dt-text tone="primary">primary</dt-text>
-      <dt-text tone="secondary">secondary</dt-text>
-      <dt-text tone="tertiary">tertiary</dt-text>
-      <dt-text tone="muted">muted</dt-text>
-      <dt-text tone="disabled">disabled</dt-text>
-      <dt-text tone="placeholder">placeholder</dt-text>
-      <dt-text tone="success">success</dt-text>
-      <dt-text tone="success-strong">success-strong</dt-text>
-      <dt-text tone="warning">warning</dt-text>
-      <dt-text tone="critical">critical</dt-text>
-      <dt-text tone="critical-strong">critical-strong</dt-text>
-    </dt-stack>
-  </dt-stack>
-</code-well-header>
+```vue demo
+<!-- @wrapper -->
+<dt-stack class="d-py-100 d-px-200 d-bgc-primary d-bar4">
+  <dt-text tone="primary">primary</dt-text>
+  <dt-text tone="secondary">secondary</dt-text>
+  <dt-text tone="tertiary">tertiary</dt-text>
+  <dt-text tone="muted">muted</dt-text>
+  <dt-text tone="disabled">disabled</dt-text>
+  <dt-text tone="placeholder">placeholder</dt-text>
+  <dt-text tone="success">success</dt-text>
+  <dt-text tone="success-strong">success-strong</dt-text>
+  <dt-text tone="warning">warning</dt-text>
+  <dt-text tone="critical">critical</dt-text>
+  <dt-text tone="critical-strong">critical-strong</dt-text>
+</dt-stack>
+```
 
 <code-example-tabs
 vueCode='
@@ -37,23 +37,15 @@ vueCode='
 
 Use `d-fc-{color}` to change an element's text color.
 
-<code-well-header >
-  <p class="d-fc-critical">The quick brown fox jumps over the lazy dog.</p>
-</code-well-header>
-
-```html
-<p class="d-fc-critical">...</p>
+```vue demo
+<p class="d-fc-critical">The quick brown fox jumps over the lazy dog.</p>
 ```
 
 ## Hover
 
 Use `h:d-fc-{color}` to change an element's text color `:hover` state.
 
-<code-well-header>
-  <dt-button kind="unstyled" class="d-fc-critical h:d-fc-success">Hover over me</dt-button>
-</code-well-header>
-
-```html
+```vue demo
 <dt-button kind="unstyled" class="d-fc-critical h:d-fc-success">Hover over me</dt-button>
 ```
 
@@ -61,11 +53,7 @@ Use `h:d-fc-{color}` to change an element's text color `:hover` state.
 
 Use `f:d-fc-{color}` to change an element's text color `:focus` and `:focus-within` state.
 
-<code-well-header>
-  <dt-button kind="unstyled" class="d-fc-critical f:d-fc-success">Focus me</dt-button>
-</code-well-header>
-
-```html
+```vue demo
 <dt-button kind="unstyled" class="d-fc-critical f:d-fc-success">Focus me</dt-button>
 ```
 
@@ -73,57 +61,45 @@ Use `f:d-fc-{color}` to change an element's text color `:focus` and `:focus-with
 
 Use `fv:d-fc-{color}` to change an element's text color on `:focus-visible` state [only when focused by keyboard].
 
-<code-well-header>
-  <dt-button kind="unstyled" class="d-fc-critical fv:d-fc-success">Keyboard focus me</dt-button>
-</code-well-header>
-
-```html
+```vue demo
 <dt-button kind="unstyled" class="d-fc-critical fv:d-fc-success">Keyboard focus me</dt-button>
 ```
 
 ## Inverted
 
-<dt-notice
-  title="Tip"
-  kind="info"
-  class="d-wmx100p d-my-200"
->
-  Avoid <code>-inverted</code> utility variants, which will be sunset. Use the
-  <dt-link to="/components/mode-island.html#inverting">v-dt-mode directive</dt-link>
-  with base classes instead — it automatically resolves the correct colors for
-  the current mode.
-</dt-notice>
+> [!INFO] Tip
+> Avoid `-inverted` utility variants, which will be sunset. Use the [v-dt-mode directive](/components/mode-island.html#inverting) with base classes instead -- it automatically resolves the correct colors for the current mode.
 
-<code-well-header>
-  <dt-stack direction="row" gap="400">
-    <dt-stack class="d-py-100 d-px-200 d-bgc-primary d-bar4">
-      <dt-text tone="primary">primary</dt-text>
-      <dt-text tone="secondary">secondary</dt-text>
-      <dt-text tone="tertiary">tertiary</dt-text>
-      <dt-text tone="muted">muted</dt-text>
-      <dt-text tone="disabled">disabled</dt-text>
-      <dt-text tone="placeholder">placeholder</dt-text>
-      <dt-text tone="success">success</dt-text>
-      <dt-text tone="success-strong">success-strong</dt-text>
-      <dt-text tone="warning">warning</dt-text>
-      <dt-text tone="critical">critical</dt-text>
-      <dt-text tone="critical-strong">critical-strong</dt-text>
-    </dt-stack>
-    <dt-stack class="d-py-100 d-px-200 d-bgc-contrast d-bar4">
-      <dt-text v-dt-mode:invert tone="primary">primary</dt-text>
-      <dt-text v-dt-mode:invert tone="secondary">secondary</dt-text>
-      <dt-text v-dt-mode:invert tone="tertiary">tertiary</dt-text>
-      <dt-text v-dt-mode:invert tone="muted">muted</dt-text>
-      <dt-text v-dt-mode:invert tone="disabled">disabled</dt-text>
-      <dt-text v-dt-mode:invert tone="placeholder">placeholder</dt-text>
-      <dt-text v-dt-mode:invert tone="success">success</dt-text>
-      <dt-text v-dt-mode:invert tone="success-strong">success-strong</dt-text>
-      <dt-text v-dt-mode:invert tone="warning">warning</dt-text>
-      <dt-text v-dt-mode:invert tone="critical">critical</dt-text>
-      <dt-text v-dt-mode:invert tone="critical-strong">critical-strong</dt-text>
-    </dt-stack>
+```vue demo
+<dt-stack direction="row" gap="400">
+  <dt-stack class="d-py-100 d-px-200 d-bgc-primary d-bar4">
+    <dt-text tone="primary">primary</dt-text>
+    <dt-text tone="secondary">secondary</dt-text>
+    <dt-text tone="tertiary">tertiary</dt-text>
+    <dt-text tone="muted">muted</dt-text>
+    <dt-text tone="disabled">disabled</dt-text>
+    <dt-text tone="placeholder">placeholder</dt-text>
+    <dt-text tone="success">success</dt-text>
+    <dt-text tone="success-strong">success-strong</dt-text>
+    <dt-text tone="warning">warning</dt-text>
+    <dt-text tone="critical">critical</dt-text>
+    <dt-text tone="critical-strong">critical-strong</dt-text>
   </dt-stack>
-</code-well-header>
+  <dt-stack class="d-py-100 d-px-200 d-bgc-contrast d-bar4">
+    <dt-text v-dt-mode:invert tone="primary">primary</dt-text>
+    <dt-text v-dt-mode:invert tone="secondary">secondary</dt-text>
+    <dt-text v-dt-mode:invert tone="tertiary">tertiary</dt-text>
+    <dt-text v-dt-mode:invert tone="muted">muted</dt-text>
+    <dt-text v-dt-mode:invert tone="disabled">disabled</dt-text>
+    <dt-text v-dt-mode:invert tone="placeholder">placeholder</dt-text>
+    <dt-text v-dt-mode:invert tone="success">success</dt-text>
+    <dt-text v-dt-mode:invert tone="success-strong">success-strong</dt-text>
+    <dt-text v-dt-mode:invert tone="warning">warning</dt-text>
+    <dt-text v-dt-mode:invert tone="critical">critical</dt-text>
+    <dt-text v-dt-mode:invert tone="critical-strong">critical-strong</dt-text>
+  </dt-stack>
+</dt-stack>
+```
 
 <code-example-tabs
 vueCode='
@@ -147,28 +123,16 @@ vueCode='
 Use `d-fco{n}` to change an element's text color opacity. You can also change font color opacity on `:hover`, `:focus`,
 `:focus-visible` by using the respective `h:d-fco{n}`, `f:d-fco{n}`, `fv:d-fco{n}` prefixes.
 
-<code-well-header>
-  <p class="d-fc-critical">The quick brown fox jumps over the lazy dog.</p>
-  <p class="d-fc-critical d-fco99">The quick brown fox jumps over the lazy dog.</p>
-  <p class="d-fc-critical d-fco95">The quick brown fox jumps over the lazy dog.</p>
-  <p class="d-fc-critical d-fco90">The quick brown fox jumps over the lazy dog.</p>
-  <p class="d-fc-critical d-fco75">The quick brown fox jumps over the lazy dog.</p>
-  <p class="d-fc-critical d-fco50">The quick brown fox jumps over the lazy dog.</p>
-  <p class="d-fc-critical d-fco25">The quick brown fox jumps over the lazy dog.</p>
-  <p class="d-fc-critical d-fco10">The quick brown fox jumps over the lazy dog.</p>
-  <p class="d-fc-critical d-fco0">The quick brown fox jumps over the lazy dog.</p>
-</code-well-header>
-
-```html
-<p class="d-fc-critical">...</p>
-<p class="d-fc-critical d-fco99">...</p>
-<p class="d-fc-critical d-fco95">...</p>
-<p class="d-fc-critical d-fco90">...</p>
-<p class="d-fc-critical d-fco75">...</p>
-<p class="d-fc-critical d-fco50">...</p>
-<p class="d-fc-critical d-fco25">...</p>
-<p class="d-fc-critical d-fco10">...</p>
-<p class="d-fc-critical d-fco0">...</p>
+```vue demo
+<p class="d-fc-critical">The quick brown fox jumps over the lazy dog.</p>
+<p class="d-fc-critical d-fco99">The quick brown fox jumps over the lazy dog.</p>
+<p class="d-fc-critical d-fco95">The quick brown fox jumps over the lazy dog.</p>
+<p class="d-fc-critical d-fco90">The quick brown fox jumps over the lazy dog.</p>
+<p class="d-fc-critical d-fco75">The quick brown fox jumps over the lazy dog.</p>
+<p class="d-fc-critical d-fco50">The quick brown fox jumps over the lazy dog.</p>
+<p class="d-fc-critical d-fco25">The quick brown fox jumps over the lazy dog.</p>
+<p class="d-fc-critical d-fco10">The quick brown fox jumps over the lazy dog.</p>
+<p class="d-fc-critical d-fco0">The quick brown fox jumps over the lazy dog.</p>
 ```
 
 ## Classes
@@ -188,7 +152,6 @@ Use `d-fco{n}` to change an element's text color opacity. You can also change fo
 <script setup>
   import { inject } from 'vue';
   import { extractUtilityClasses } from '@utilities';
-  import FontUtilitiesNotice from '@baseComponents/FontUtilitiesNotice.vue';
 
   const utilityClassDocs = inject('utilityClassDocs');
   const fontColors = extractUtilityClasses(utilityClassDocs, 'd-fc-');
