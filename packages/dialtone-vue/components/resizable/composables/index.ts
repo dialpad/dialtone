@@ -4,7 +4,6 @@
 export {
   useResizablePanelControls,
   sortCollapseRules,
-  allocateSpaceOnPanelOpen,
   checkAutoCollapseRules,
 } from './useResizablePanelControls';
 export type {

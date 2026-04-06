@@ -11,7 +11,6 @@ import type {
   ResizablePanelState,
   ResizableSizeValue,
   CollapseRule,
-  SpaceAllocationStrategy,
 } from '../resizable_constants';
 import { parseSizeToPixels } from '../resizable_utils';
 import { applyPanelPixelConstraints, canResetPanelPair } from './useResizablePanelState';
@@ -378,6 +377,7 @@ export function useResizablePanelControls(options: ResizablePanelControlsOptions
   }
 
   return {
+    commitPanelSize,
     resizePanel,
     collapsePanel,
     resetPanels,
@@ -413,91 +413,6 @@ export function sortCollapseRules(rules: CollapseRule[]): CollapseRule[] {
   });
 
   return indexed.map(item => item.rule);
-}
-
-// ============================================================================
-// SPACE ALLOCATION UTILITIES
-// ============================================================================
-
-function applyProportionalAllocation(
-  donors: ResizablePanelState[],
-  newPanelSize: number,
-  newSizes: Map<string, number>
-): void {
-  const totalSpace = donors.reduce((sum, p) => sum + p.pixelSize, 0);
-
-  if (totalSpace < newPanelSize) {
-    console.warn(
-      `[resizable] proportional: Available panels only have ${totalSpace}px, need ${newPanelSize}px. Taking all available.`
-    );
-  }
-
-  const actualContribution = Math.min(newPanelSize, totalSpace);
-
-  donors.forEach(p => {
-    const proportion = p.pixelSize / totalSpace;
-    const contribution = actualContribution * proportion;
-    const newSize = Math.max(0, p.pixelSize - contribution);
-    newSizes.set(p.id, Math.round(newSize));
-  });
-}
-
-function includeUnchangedPanels(allPanels: ResizablePanelState[], newSizes: Map<string, number>): void {
-  allPanels
-    .filter(p => p.collapsed)
-    .forEach(p => {
-      newSizes.set(p.id, p.pixelSize);
-    });
-}
-
-/**
- * Allocates space from existing panels when a new panel opens.
- * Returns a Map of panelId -> new pixel size for each panel.
- *
- * Strategies:
- * - 'proportional': Takes space proportionally from all non-collapsed panels
- * - 'preserve-manual': Only takes from non-manually-resized panels; manual panels keep exact size
- */
-export function allocateSpaceOnPanelOpen(
-  newPanelSize: number,
-  allPanels: ResizablePanelState[],
-  strategy: SpaceAllocationStrategy = 'proportional'
-): Map<string, number> {
-  const newSizes = new Map<string, number>();
-  const availablePanels = allPanels.filter(p => !p.collapsed);
-
-  if (availablePanels.length === 0 || newPanelSize <= 0) {
-    allPanels.forEach(p => newSizes.set(p.id, p.pixelSize));
-    return newSizes;
-  }
-
-  if (strategy === 'preserve-manual') {
-    const donors = availablePanels.filter(p => p.manualTargetSize === undefined);
-    const manualPanels = availablePanels.filter(p => p.manualTargetSize !== undefined);
-
-    if (donors.length === 0) {
-      return allocateSpaceOnPanelOpen(newPanelSize, allPanels, 'proportional');
-    }
-
-    const totalDonorSpace = donors.reduce((sum, p) => sum + p.pixelSize, 0);
-    if (totalDonorSpace < newPanelSize) {
-      console.warn(
-        `[resizable] preserve-manual: Donor panels only have ${totalDonorSpace}px, ` +
-        `need ${newPanelSize}px. Falling back to proportional.`
-      );
-      return allocateSpaceOnPanelOpen(newPanelSize, allPanels, 'proportional');
-    }
-
-    applyProportionalAllocation(donors, newPanelSize, newSizes);
-    manualPanels.forEach(p => newSizes.set(p.id, p.pixelSize));
-    includeUnchangedPanels(allPanels, newSizes);
-  } else {
-    // Default: proportional
-    applyProportionalAllocation(availablePanels, newPanelSize, newSizes);
-    includeUnchangedPanels(allPanels, newSizes);
-  }
-
-  return newSizes;
 }
 
 // ============================================================================

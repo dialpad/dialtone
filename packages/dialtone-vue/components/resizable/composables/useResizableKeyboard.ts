@@ -164,6 +164,19 @@ export function useResizableKeyboard(options: ResizableKeyboardOptions) {
     }
   }
 
+  function clearInlineStyles(
+    beforeEl: HTMLElement,
+    afterEl: HTMLElement,
+    handleEl: HTMLElement | null,
+  ): void {
+    beforeEl.style.insetInlineStart = '';
+    beforeEl.style.insetInlineEnd = '';
+    beforeEl.style.inlineSize = '';
+    afterEl.style.insetInlineStart = '';
+    afterEl.style.inlineSize = '';
+    if (handleEl) handleEl.style.insetInlineStart = '';
+  }
+
   function applyResize(
     beforePanel: ResizablePanelState,
     afterPanel: ResizablePanelState,
@@ -177,16 +190,20 @@ export function useResizableKeyboard(options: ResizableKeyboardOptions) {
     const cursorPos = newBeforePixels;
     const container = handleElement.value?.closest('.d-resizable');
 
+    let beforeEl: HTMLElement | null = null;
+    let afterEl: HTMLElement | null = null;
+    let hEl: HTMLElement | null = null;
+
     if (container) {
-      const beforeEl = container.querySelector(
+      beforeEl = container.querySelector(
         `[data-panel-id="${beforePanelId.value}"]`,
-      ) as HTMLElement;
-      const afterEl = container.querySelector(
+      );
+      afterEl = container.querySelector(
         `[data-panel-id="${afterPanelId.value}"]`,
-      ) as HTMLElement;
-      const hEl = container.querySelector(
+      );
+      hEl = container.querySelector(
         `[data-handle-id="${buildHandleId(beforePanelId.value, afterPanelId.value)}"]`,
-      ) as HTMLElement;
+      );
 
       if (beforeEl && afterEl) {
         const beforeEnd = containerSize.value - cursorPos;
@@ -194,12 +211,21 @@ export function useResizableKeyboard(options: ResizableKeyboardOptions) {
       }
     }
 
+    // Commit to reactive state — mirrors drag's commitDrag discipline
     onResize(
       beforePanelId.value,
       roundedBefore,
       afterPanelId.value,
       roundedAfter,
     );
+
+    // Clear inline styles so Vue exclusively owns the DOM from this point.
+    // Without this, there's a frame where both inline styles and Vue's
+    // computed layout coexist — a latent bug surface if anything reads
+    // DOM positions between onResize and Vue's next render.
+    if (beforeEl && afterEl) {
+      clearInlineStyles(beforeEl, afterEl, hEl);
+    }
   }
 
   function processKeyboardResize(

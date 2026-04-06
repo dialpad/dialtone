@@ -16,7 +16,6 @@ import {
 import {
   checkAutoCollapseRules,
   sortCollapseRules,
-  allocateSpaceOnPanelOpen,
 } from './composables/useResizablePanelControls';
 import { useResizeHandling } from './composables/useResizableCalculations';
 
@@ -251,57 +250,6 @@ describe('V2 — Auto-collapse', () => {
 
     it('should return empty array for empty input', () => {
       expect(sortCollapseRules([])).toEqual([]);
-    });
-  });
-});
-
-// =============================================================================
-// SPACE ALLOCATION — Unit Tests
-// =============================================================================
-
-describe('V2 — Space allocation strategies', () => {
-  describe('allocateSpaceOnPanelOpen proportional', () => {
-    it('should take space proportionally from all unlocked panels', () => {
-      const panels = [
-        makePanelState({ id: 'a', pixelSize: 300 }),
-        makePanelState({ id: 'b', pixelSize: 700 }),
-      ];
-      const result = allocateSpaceOnPanelOpen(200, panels, 'proportional');
-      const aSize = result.get('a');
-      const bSize = result.get('b');
-      expect(aSize).toBeLessThan(300);
-      expect(bSize).toBeLessThan(700);
-      expect(aSize + bSize).toBeCloseTo(800, 0);
-    });
-
-    it('should not change collapsed panels', () => {
-      const panels = [
-        makePanelState({ id: 'a', pixelSize: 0, collapsed: true }),
-        makePanelState({ id: 'b', pixelSize: 1000 }),
-      ];
-      const result = allocateSpaceOnPanelOpen(200, panels, 'proportional');
-      expect(result.get('a')).toBe(0);
-    });
-  });
-
-  describe('allocateSpaceOnPanelOpen preserve-manual', () => {
-    it('should preserve manually-resized panel sizes', () => {
-      const panels = [
-        makePanelState({ id: 'a', pixelSize: 300, manualTargetSize: 300 }),
-        makePanelState({ id: 'b', pixelSize: 700 }),
-      ];
-      const result = allocateSpaceOnPanelOpen(200, panels, 'preserve-manual');
-      expect(result.get('a')).toBe(300);
-      expect(result.get('b')).toBeLessThan(700);
-    });
-
-    it('should fall back to proportional when all panels are manual', () => {
-      const panels = [
-        makePanelState({ id: 'a', pixelSize: 500, manualTargetSize: 500 }),
-        makePanelState({ id: 'b', pixelSize: 500, manualTargetSize: 500 }),
-      ];
-      const result = allocateSpaceOnPanelOpen(200, panels, 'proportional');
-      expect(result.get('a') + result.get('b')).toBeCloseTo(800, 0);
     });
   });
 });

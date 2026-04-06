@@ -161,12 +161,6 @@ export interface CollapseRule {
 }
 
 /**
- * Strategy for redistributing space when panels open/close.
- * - 'proportional': Take/give space proportionally from all non-collapsed panels
- * - 'preserve-manual': Only take from non-manually-resized panels
- */
-export type SpaceAllocationStrategy = 'proportional' | 'preserve-manual';
-
 // ─── Defaults ─────────────────────────────────────────────────────────────
 
 /** Default panel size when no initialSize is specified (50% of container). */

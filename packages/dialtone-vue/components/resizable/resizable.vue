@@ -140,14 +140,8 @@ const registerPanel = (config) => group.registerPanel(config);
 const unregisterPanel = (id) => group.unregisterPanel(id);
 const saveToStorage = (panels) => group.saveCurrentLayout(panels);
 
-function commitPanelSize (panelId, pixels) {
-  const rounded = Math.round(pixels);
-  const cSize = group.containerSize.value;
-  const ratio = cSize > 0 ? rounded / cSize : undefined;
-  group.updateSavedPanel(panelId, { pixelSize: rounded, manualTargetRatio: ratio });
-}
-
 const {
+  commitPanelSize,
   resizePanel,
   collapsePanel,
   resetPanels: originalResetPanels,
