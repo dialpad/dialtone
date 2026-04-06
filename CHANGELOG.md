@@ -1,3 +1,11 @@
+## [9.177.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.177.0...dialtone/v9.177.1) (2026-04-06)
+
+
+### Bug Fixes
+
+* NO-JIRA fix pnpm lock and add missing permissions ([#1175](https://github.com/dialpad/dialtone/issues/1175)) ([b355291](https://github.com/dialpad/dialtone/commit/b3552919edc6f48580421154453353ceaaeac88f))
+* NO-JIRA make dialtone-cli private ([cf555f2](https://github.com/dialpad/dialtone/commit/cf555f2a0c8562a949ec3c5b28e10185612b441a))
+
 # [9.177.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.176.0...dialtone/v9.177.0) (2026-04-02)
 
 
