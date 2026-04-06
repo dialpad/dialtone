@@ -103,7 +103,8 @@ export default {
 
     /**
      * Severity level of the toast, could be different depending on which toast layout is used.
-     * @values base, error, info, success, warning, gradient
+     * @values base, critical, info, positive, warning, gradient
+     * @deprecated-values error (use critical), success (use positive)
      */
     kind: {
       type: String,

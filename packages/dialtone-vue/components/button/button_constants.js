@@ -18,6 +18,7 @@ export const BUTTON_SIZE_MODIFIERS = {
 export const BUTTON_KIND_MODIFIERS = {
   default: '',
   muted: 'd-btn--muted',
+  critical: 'd-btn--critical',
   danger: 'd-btn--danger',
   positive: 'd-btn--positive',
   inverted: 'd-btn--inverted',

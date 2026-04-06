@@ -2,6 +2,8 @@ import { mount } from '@vue/test-utils';
 import DtLink from './link.vue';
 import {
   LINK_KIND_MODIFIERS,
+  CRITICAL,
+  POSITIVE,
   DANGER,
   SUCCESS,
   WARNING,
@@ -62,8 +64,28 @@ describe('DtLink tests', () => {
       });
     });
 
-    describe('When kind is danger', () => {
-      it('should have correct class', async () => {
+    describe('When tone is critical', () => {
+      it('should have correct class', () => {
+        mockProps = { tone: CRITICAL };
+
+        updateWrapper();
+
+        expect(nativeLink.classes('d-link--critical')).toBe(true);
+      });
+    });
+
+    describe('When tone is positive', () => {
+      it('should have correct class', () => {
+        mockProps = { tone: POSITIVE };
+
+        updateWrapper();
+
+        expect(nativeLink.classes('d-link--positive')).toBe(true);
+      });
+    });
+
+    describe('When kind is danger (deprecated)', () => {
+      it('should have correct class', () => {
         mockProps = { kind: DANGER };
 
         updateWrapper();
@@ -72,8 +94,8 @@ describe('DtLink tests', () => {
       });
     });
 
-    describe('When kind is success', () => {
-      it('should have correct class', async () => {
+    describe('When kind is success (deprecated)', () => {
+      it('should have correct class', () => {
         mockProps = { kind: SUCCESS };
 
         updateWrapper();
@@ -112,7 +134,7 @@ describe('DtLink tests', () => {
       });
     });
 
-    describe('When kind is danger and inverted is true', () => {
+    describe('When kind is danger and inverted is true (deprecated)', () => {
       it('should have correct class', async () => {
         mockProps = { kind: DANGER, inverted: true };
 
@@ -122,7 +144,7 @@ describe('DtLink tests', () => {
       });
     });
 
-    describe('When kind is success and inverted is true', () => {
+    describe('When kind is success and inverted is true (deprecated)', () => {
       it('should have correct class', async () => {
         mockProps = { kind: SUCCESS, inverted: true };
 

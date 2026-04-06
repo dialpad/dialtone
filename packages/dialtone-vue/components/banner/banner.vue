@@ -116,12 +116,13 @@ export default {
 
     /**
      * Severity level of the notice, sets the icon and background
-     * @values base, error, info, success, warning
+     * @values base, critical, info, positive, warning
+     * @deprecated-values error (use critical), success (use positive)
      */
     kind: {
       type: String,
       default: 'base',
-      validate (kind) {
+      validator (kind) {
         return NOTICE_KINDS.includes(kind);
       },
     },

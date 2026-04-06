@@ -220,6 +220,18 @@ describe('DtModal Tests', () => {
       expect(banner.classes(MODAL_BANNER_KINDS.info)).toBe(true);
     });
 
+    it('Should apply critical banner kind', async () => {
+      await wrapper.setProps({
+        show: true,
+        bannerKind: 'critical',
+        bannerTitle: 'title',
+      });
+
+      banner = wrapper.find('[data-qa="dt-modal-banner"]');
+
+      expect(banner.classes(MODAL_BANNER_KINDS.critical)).toBe(true);
+    });
+
     it('should set data-dt-mode on dialog when contentMode is set', () => {
       document.documentElement.setAttribute('data-dt-mode', 'light');
       mockProps = { contentMode: 'dark' };

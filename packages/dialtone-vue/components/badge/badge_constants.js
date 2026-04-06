@@ -1,6 +1,7 @@
 export const BADGE_TYPE_MODIFIERS = {
   default: '',
   info: 'd-badge--info',
+  positive: 'd-badge--positive',
   success: 'd-badge--success',
   warning: 'd-badge--warning',
   critical: 'd-badge--critical',

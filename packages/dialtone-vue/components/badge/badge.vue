@@ -102,7 +102,8 @@ export default {
 
     /**
      * Color for the badge background
-     * @values default, info, success, warning, critical, bulletin, ai
+     * @values default, info, positive, warning, critical, bulletin, ai
+     * @deprecated-values success (use positive)
      */
     type: {
       type: String,
