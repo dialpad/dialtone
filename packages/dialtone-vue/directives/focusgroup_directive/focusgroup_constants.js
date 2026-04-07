@@ -12,11 +12,11 @@ const MENU_DEFAULTS = Object.freeze({
 
 /**
  * Default configuration for v-dt-focusgroup.
- * Matches Open UI spec defaults: both axes, wrap on, memory on, skip disabled on.
+ * Matches Open UI spec defaults: both axes, loop on, memory on, skip disabled on.
  */
 export const FOCUSGROUP_DEFAULTS = Object.freeze({
   axis: 'both',
-  wrap: true,
+  loop: true,
   memory: true,
   selector: null,
   skipDisabled: null, // null = use role-aware default
@@ -53,26 +53,26 @@ export const ROLE_DEFAULTS_MAP = Object.freeze({
  *
  * Accepts:
  *   - undefined / null / true  → defaults
- *   - String of space-separated tokens: 'inline wrap nomemory skipdisabled'
- *   - Object: { axis: 'inline', wrap: true, memory: false, selector: '[role="tab"]' }
+ *   - String of space-separated tokens: 'horizontal nomemory skipdisabled'
+ *   - Object: { axis: 'horizontal', loop: true, memory: false, selector: '[role="tab"]' }
  *
  * @param {*} value - The directive binding value
- * @returns {{ axis: string, wrap: boolean, memory: boolean, selector: string|null, skipDisabled: boolean|null }}
+ * @returns {{ axis: string, loop: boolean, memory: boolean, selector: string|null, skipDisabled: boolean|null }}
  */
 // Maps string tokens to config key + value
 const TOKEN_MAP = Object.freeze({
-  inline: { key: 'axis', value: 'inline' },
-  block: { key: 'axis', value: 'block' },
+  horizontal: { key: 'axis', value: 'horizontal' },
+  vertical: { key: 'axis', value: 'vertical' },
   both: { key: 'axis', value: 'both' },
-  wrap: { key: 'wrap', value: true },
-  nowrap: { key: 'wrap', value: false },
+  loop: { key: 'loop', value: true },
+  noloop: { key: 'loop', value: false },
   memory: { key: 'memory', value: true },
   nomemory: { key: 'memory', value: false },
   skipdisabled: { key: 'skipDisabled', value: true },
   noskipdisabled: { key: 'skipDisabled', value: false },
 });
 
-const CONFIG_KEYS = ['axis', 'wrap', 'memory', 'selector', 'skipDisabled'];
+const CONFIG_KEYS = ['axis', 'loop', 'memory', 'selector', 'skipDisabled'];
 
 function parseObjectConfig (config, value) {
   for (const key of CONFIG_KEYS) {
@@ -108,7 +108,7 @@ export function parseConfig (value) {
  */
 export function configsEqual (a, b) {
   return a.axis === b.axis &&
-    a.wrap === b.wrap &&
+    a.loop === b.loop &&
     a.memory === b.memory &&
     a.selector === b.selector &&
     a.skipDisabled === b.skipDisabled;

@@ -3,23 +3,23 @@
     gap="500"
     class="d-p-100"
   >
-    <!-- ── Toolbar (inline wrap) ─────────────────────────── -->
+    <!-- ── Toolbar (inline loop) ─────────────────────────── -->
     <dt-text
       as="h3"
       kind="headline"
       :size="400"
     >
-      Toolbar — inline wrap
+      Toolbar — inline loop
     </dt-text>
     <dt-text
       kind="body"
       class="d-fc-tertiary"
     >
       Left/Right cycles buttons. Home/End jump to first/last.
-      <code>v-dt-focusgroup="'inline wrap'"</code>
+      <code>v-dt-focusgroup="'horizontal'"</code>
     </dt-text>
     <div
-      v-dt-focusgroup="'inline wrap'"
+      v-dt-focusgroup="'horizontal'"
       role="toolbar"
       aria-label="Text formatting"
       class="d-d-flex d-gg-300"
@@ -57,23 +57,23 @@
       </dt-button>
     </div>
 
-    <!-- ── Tab list (inline wrap nomemory) ────────────────── -->
+    <!-- ── Tab list (inline loop nomemory) ────────────────── -->
     <dt-text
       as="h3"
       kind="headline"
       :size="400"
     >
-      Tab list — inline wrap nomemory
+      Tab list — inline loop nomemory
     </dt-text>
     <dt-text
       kind="body"
       class="d-fc-tertiary"
     >
       Left/Right cycles tabs. <code>@dt-focusgroup-move</code> for selection-follows-focus.
-      <code>v-dt-focusgroup="'inline wrap nomemory'"</code>
+      <code>v-dt-focusgroup="'horizontal nomemory'"</code>
     </dt-text>
     <div
-      v-dt-focusgroup="'inline wrap nomemory'"
+      v-dt-focusgroup="'horizontal nomemory'"
       role="tablist"
       aria-label="Operating system"
       class="d-d-flex d-gg-300"
@@ -100,23 +100,23 @@
       </dt-text>
     </div>
 
-    <!-- ── Listbox (block, nowrap, disabled items) ────────── -->
+    <!-- ── Listbox (block, noloop, disabled items) ────────── -->
     <dt-text
       as="h3"
       kind="headline"
       :size="400"
     >
-      Listbox — block, nowrap
+      Listbox — block, noloop
     </dt-text>
     <dt-text
       kind="body"
       class="d-fc-tertiary"
     >
-      Up/Down navigates. No wrap. Disabled item skipped.
-      <code>v-dt-focusgroup="'block nowrap'"</code>
+      Up/Down navigates. No loop. Disabled item skipped.
+      <code>v-dt-focusgroup="'block noloop'"</code>
     </dt-text>
     <div
-      v-dt-focusgroup="'block nowrap'"
+      v-dt-focusgroup="'block noloop'"
       role="listbox"
       aria-label="Fruits"
       class="d-ba d-bc-subtle d-bar8 d-of-hidden"
@@ -147,10 +147,10 @@
       class="d-fc-tertiary"
     >
       Up/Down cycles visible items. Right expands, Left collapses/goes to parent.
-      <code>v-dt-focusgroup="'block'"</code>
+      <code>v-dt-focusgroup="'vertical'"</code>
     </dt-text>
     <div
-      v-dt-focusgroup="'block'"
+      v-dt-focusgroup="'vertical'"
       role="tree"
       tabindex="0"
       aria-label="Sidebar navigation"

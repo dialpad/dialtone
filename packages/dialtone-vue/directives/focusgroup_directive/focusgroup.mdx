@@ -6,7 +6,7 @@ import * as FocusgroupDirectiveStories from './focusgroup.stories.js';
 # Focusgroup directive
 
 Declarative roving tabindex for composite widgets. Manages arrow-key navigation,
-`tabindex` management, wrapping, focus memory, and disabled-item skipping — following
+`tabindex` management, looping, focus memory, and disabled-item skipping — following
 the [Open UI focusgroup proposal](https://open-ui.org/components/scoped-focusgroup.explainer/).
 
 The directive handles **focus movement only**. Activation and selection (toggling
@@ -24,7 +24,7 @@ app.use(DtFocusgroupDirective);
 ### Token syntax (Open UI style)
 
 ```html
-<div role="toolbar" v-dt-focusgroup="'inline wrap'" aria-label="Formatting">
+<div role="toolbar" v-dt-focusgroup="'horizontal'" aria-label="Formatting">
   <button>Bold</button>
   <button>Italic</button>
   <button>Underline</button>
@@ -35,7 +35,7 @@ app.use(DtFocusgroupDirective);
 
 ```html
 <div role="toolbar" aria-orientation="vertical"
-  v-dt-focusgroup="'block wrap'" aria-label="Formatting">
+  v-dt-focusgroup="'vertical'" aria-label="Formatting">
   <button>Bold</button>
   <button>Italic</button>
   <button>Underline</button>
@@ -45,7 +45,7 @@ app.use(DtFocusgroupDirective);
 ### Object syntax
 
 ```html
-<div role="listbox" v-dt-focusgroup="{ axis: 'block', wrap: false }" aria-label="Fruits">
+<div role="listbox" v-dt-focusgroup="{ axis: 'vertical', loop: false }" aria-label="Fruits">
   <div role="option">Apple</div>
   <div role="option">Banana</div>
 </div>
@@ -57,6 +57,19 @@ app.use(DtFocusgroupDirective);
 <div role="radiogroup" v-dt-focusgroup aria-label="Options">
   <button role="radio">A</button>
   <button role="radio">B</button>
+</div>
+```
+
+### Disable looping
+
+Use `noloop` so focus stops at the first and last items instead of cycling:
+
+```html
+<div role="toolbar" v-dt-focusgroup="'horizontal noloop'" aria-label="Pagination">
+  <button>First</button>
+  <button>Previous</button>
+  <button>Next</button>
+  <button>Last</button>
 </div>
 ```
 
@@ -74,12 +87,12 @@ Space-separated string tokens configure the directive behavior:
   </thead>
   <tbody>
     <tr>
-      <td><code>inline</code></td>
+      <td><code>horizontal</code></td>
       <td>Left/Right arrow keys only</td>
       <td rowSpan="3"><code>both</code></td>
     </tr>
     <tr>
-      <td><code>block</code></td>
+      <td><code>vertical</code></td>
       <td>Up/Down arrow keys only</td>
     </tr>
     <tr>
@@ -87,12 +100,12 @@ Space-separated string tokens configure the directive behavior:
       <td>All four arrow keys (Left/Up = prev, Right/Down = next)</td>
     </tr>
     <tr>
-      <td><code>wrap</code></td>
-      <td>Focus wraps from last to first and vice versa</td>
-      <td rowSpan="2"><code>wrap</code></td>
+      <td><code>loop</code></td>
+      <td>Focus loops from last to first and vice versa</td>
+      <td rowSpan="2"><code>loop</code></td>
     </tr>
     <tr>
-      <td><code>nowrap</code></td>
+      <td><code>noloop</code></td>
       <td>Focus stops at boundaries</td>
     </tr>
     <tr>
@@ -132,12 +145,12 @@ The object syntax accepts the same options as named properties:
   <tbody>
     <tr>
       <td><code>axis</code></td>
-      <td><code>'inline' | 'block' | 'both'</code></td>
+      <td><code>'horizontal' | 'vertical' | 'both'</code></td>
       <td><code>'both'</code></td>
       <td>Which arrow keys respond</td>
     </tr>
     <tr>
-      <td><code>wrap</code></td>
+      <td><code>loop</code></td>
       <td><code>boolean</code></td>
       <td><code>true</code></td>
       <td>Wrap at boundaries</td>
@@ -220,7 +233,7 @@ focus via arrow key, Home, or End. **Not** dispatched on click or Tab re-entry.
 ```html
 <div
   role="tablist"
-  v-dt-focusgroup="'inline wrap nomemory'"
+  v-dt-focusgroup="'horizontal nomemory'"
   @dt-focusgroup-move="selectTab($event.detail.item)"
 >
 ```
@@ -265,7 +278,7 @@ Add `data-dt-focusgroup-skip` to exclude an element from arrow-key navigation
 (e.g., text inputs that need their own arrow keys):
 
 ```html
-<div role="toolbar" v-dt-focusgroup="'inline wrap'">
+<div role="toolbar" v-dt-focusgroup="'horizontal'">
   <button>Bold</button>
   <input type="number" data-dt-focusgroup-skip />
   <button>Code</button>
@@ -302,7 +315,7 @@ Add `data-dt-focusgroup-skip` to exclude an element from arrow-key navigation
 </table>
 
 Arrow direction is RTL-aware: in right-to-left contexts, Left arrow moves
-forward and Right arrow moves backward on the inline axis.
+forward and Right arrow moves backward on the horizontal axis.
 
 ## Nesting depth
 
@@ -310,7 +323,7 @@ Items do not need to be direct children. The directive uses `querySelectorAll`
 on the container, finding items at any nesting depth in DOM order:
 
 ```html
-<div role="toolbar" v-dt-focusgroup="'inline wrap'">
+<div role="toolbar" v-dt-focusgroup="'horizontal'">
   <div class="d-d-flex">
     <button>Bold</button>
     <button>Italic</button>
@@ -343,22 +356,22 @@ navigation cues (e.g., "use Left/Right" when Up/Down is what works).
     <tr>
       <td><code>toolbar</code></td>
       <td>horizontal</td>
-      <td>Add <code>aria-orientation="vertical"</code> when using <code>axis: 'block'</code></td>
+      <td>Add <code>aria-orientation="vertical"</code> when using <code>axis: 'vertical'</code></td>
     </tr>
     <tr>
       <td><code>tablist</code></td>
       <td>horizontal</td>
-      <td>Add <code>aria-orientation="vertical"</code> when using <code>axis: 'block'</code></td>
+      <td>Add <code>aria-orientation="vertical"</code> when using <code>axis: 'vertical'</code></td>
     </tr>
     <tr>
       <td><code>listbox</code></td>
       <td>vertical</td>
-      <td>Add <code>aria-orientation="horizontal"</code> when using <code>axis: 'inline'</code></td>
+      <td>Add <code>aria-orientation="horizontal"</code> when using <code>axis: 'horizontal'</code></td>
     </tr>
     <tr>
       <td><code>menu</code></td>
       <td>vertical</td>
-      <td>Add <code>aria-orientation="horizontal"</code> when using <code>axis: 'inline'</code></td>
+      <td>Add <code>aria-orientation="horizontal"</code> when using <code>axis: 'horizontal'</code></td>
     </tr>
     <tr>
       <td><code>radiogroup</code></td>

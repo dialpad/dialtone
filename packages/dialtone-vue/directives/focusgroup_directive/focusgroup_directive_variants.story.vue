@@ -41,23 +41,23 @@
       </dt-button>
     </div>
 
-    <!-- ── Vertical menu (block wrap) ────────────────────── -->
+    <!-- ── Vertical menu (vertical) ────────────────────── -->
     <dt-text
       as="h3"
       kind="headline"
       :size="400"
     >
-      Vertical menu — block wrap
+      Vertical menu — vertical
     </dt-text>
     <dt-text
       kind="body"
       class="d-fc-tertiary"
     >
       Up/Down cycles menu items. Wraps around.
-      <code>v-dt-focusgroup="'block wrap'"</code>
+      <code>v-dt-focusgroup="'vertical'"</code>
     </dt-text>
     <div
-      v-dt-focusgroup="'block wrap'"
+      v-dt-focusgroup="'vertical'"
       role="menu"
       aria-label="File actions"
       class="d-ba d-bc-subtle d-bar8 d-w264 d-of-hidden"

@@ -10,19 +10,19 @@ import {
  * v-dt-focusgroup directive — declarative roving tabindex for composite widgets.
  *
  * Implements the Open UI focusgroup pattern as a Vue custom directive.
- * Manages arrow-key navigation, tabindex, wrapping, memory, and disabled-item
+ * Manages arrow-key navigation, tabindex, looping, memory, and disabled-item
  * handling. Focus only — activation/selection is the consumer's responsibility.
  *
  * @example
  * // Token syntax (Open UI style)
- * <div role="toolbar" v-dt-focusgroup="'inline wrap'" aria-label="Formatting">
+ * <div role="toolbar" v-dt-focusgroup="'horizontal'" aria-label="Formatting">
  *
  * // Object syntax
- * <div role="listbox" v-dt-focusgroup="{ axis: 'block', wrap: false }">
+ * <div role="listbox" v-dt-focusgroup="{ axis: 'vertical', loop: false }">
  *
  * // Selection follows focus via dt-focusgroup-move event
  * <div role="tablist"
- *   v-dt-focusgroup="'inline wrap nomemory'"
+ *   v-dt-focusgroup="'horizontal nomemory'"
  *   @dt-focusgroup-move="selectTab($event.detail.item)">
  *
  * @see https://open-ui.org/components/scoped-focusgroup.explainer/
@@ -72,12 +72,12 @@ export const DtFocusgroupDirective = {
 
     // ── Navigation ──────────────────────────────────────────
 
-    function findNext (items, fromIndex, direction, wrap, skipDisabled) {
+    function findNext (items, fromIndex, direction, loop, skipDisabled) {
       const len = items.length;
       // Clamp fallback to valid range (fromIndex can be -1 or len for Home/End)
       const fallback = Math.max(0, Math.min(fromIndex, len - 1));
       for (let i = 1; i <= len; i++) {
-        const index = wrap
+        const index = loop
           ? (fromIndex + i * direction + len) % len
           : fromIndex + i * direction;
 
@@ -88,12 +88,12 @@ export const DtFocusgroupDirective = {
       return fallback;
     }
 
-    // Maps arrow keys to [axis, ltr-direction]. RTL reverses inline direction.
+    // Maps arrow keys to [axis, ltr-direction]. RTL reverses horizontal direction.
     const ARROW_KEY_MAP = {
-      [EVENT_KEYNAMES.arrowright]: ['inline', 1],
-      [EVENT_KEYNAMES.arrowleft]: ['inline', -1],
-      [EVENT_KEYNAMES.arrowdown]: ['block', 1],
-      [EVENT_KEYNAMES.arrowup]: ['block', -1],
+      [EVENT_KEYNAMES.arrowright]: ['horizontal', 1],
+      [EVENT_KEYNAMES.arrowleft]: ['horizontal', -1],
+      [EVENT_KEYNAMES.arrowdown]: ['vertical', 1],
+      [EVENT_KEYNAMES.arrowup]: ['vertical', -1],
     };
 
     function resolveDirection (key, axis, isRTL) {
@@ -104,7 +104,7 @@ export const DtFocusgroupDirective = {
       const axisAllowed = axis === 'both' || axis === keyAxis;
       if (!axisAllowed) return null;
 
-      return (keyAxis === 'inline' && isRTL) ? -ltrDir : ltrDir;
+      return (keyAxis === 'horizontal' && isRTL) ? -ltrDir : ltrDir;
     }
 
     // ── Tabindex management ─────────────────────────────────
@@ -162,7 +162,7 @@ export const DtFocusgroupDirective = {
       const direction = resolveDirection(event.key, state.config.axis, state.isRTL);
       if (direction === null) return;
 
-      const nextIndex = findNext(items, currentIndex, direction, state.config.wrap, state.skipDisabled);
+      const nextIndex = findNext(items, currentIndex, direction, state.config.loop, state.skipDisabled);
       if (nextIndex !== currentIndex) moveTo(event, el, state, items, currentIndex, nextIndex);
     }
 
