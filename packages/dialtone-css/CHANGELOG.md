@@ -1,3 +1,10 @@
+# [8.78.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.77.0...dialtone-css/v8.78.0) (2026-04-07)
+
+
+### Features
+
+* **Resizable:** DLT-2097 add DtResizable panel layout component ([#1162](https://github.com/dialpad/dialtone/issues/1162)) ([c6bd3bc](https://github.com/dialpad/dialtone/commit/c6bd3bcbae65634015f3fa29bbe9043ae40baa90))
+
 # [8.77.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.76.0...dialtone-css/v8.77.0) (2026-03-19)
 
 
