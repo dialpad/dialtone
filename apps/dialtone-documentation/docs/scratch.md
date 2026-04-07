@@ -65,7 +65,7 @@ const resolvedCheckRadioDescriptionClass = computed(() => showCheckRadioDescript
 const checkRadioDisabled = ref(false);
 </script>
 
-<dt-stack class="d-p-400" gap="400">
+<dt-stack class="d-p-400 d-bgc-primary" gap="400">
   <dt-stack direction="row" gap="100">
     <dt-text as="h1" kind="headline" :size="600">
       Scratchpad
@@ -150,6 +150,179 @@ const checkRadioDisabled = ref(false);
       </template>
     </dt-dropdown>
   </dt-stack>
+  <article>
+
+# Focusgroup directive
+
+Declarative roving tabindex for composite widgets. Manages arrow-key navigation,
+`tabindex` management, wrapping, focus memory, and disabled-item skipping — following
+the [Open UI focusgroup proposal](https://open-ui.org/components/scoped-focusgroup.explainer/).
+
+The directive handles **focus movement only**. Activation and selection (toggling
+`aria-selected`, `aria-checked`, etc.) remain the consumer's responsibility.
+
+## Usage
+
+Import and install the directive:
+
+```js
+import { DtFocusgroupDirective } from "@dialpad/dialtone-vue";
+app.use(DtFocusgroupDirective);
+```
+
+### Token syntax
+
+```vue demo
+<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'inline wrap'" aria-label="Formatting">
+  <dt-button kind="muted" importance="outlined">Bold</dt-button>
+  <dt-button kind="muted" importance="outlined">Italic</dt-button>
+  <dt-button kind="muted" importance="outlined">Underline</dt-button>
+</dt-stack>
+```
+
+```vue demo
+<table class="d-table dialtone-doc-table" v-dt-focusgroup="{ axis: 'block', selector: 'tbody tr' }" aria-label="Office List">
+  <caption class="d-table__caption">Office List</caption>
+  <thead>
+    <tr>
+      <th scope="col">Office</th>
+      <th scope="col">Country</th>
+      <th scope="col" width="10%">Employees</th>
+      <th scope="col" colspan="2">Contact</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="h:d-bgc-secondary-opaque :d-bgc-secondary-opaque fv:d-bgc-secondary-opaque d-c-pointer" tabindex="0">
+      <th scope="row">Austin, TX</th>
+      <td>United States</td>
+      <td>48</td>
+      <td>Henna Ferry</td>
+      <td class="d-ta-right"><dt-button kind="muted" importance="outlined" size="200">Button 1</dt-button></td>
+      <td class="d-ta-right"><dt-button kind="muted" importance="outlined" size="200">Button 2</dt-button></td>
+    </tr>
+    <tr class="h:d-bgc-secondary-opaque :d-bgc-secondary-opaque fv:d-bgc-secondary-opaque d-c-pointer" tabindex="0">
+      <th scope="row">Bangalore</th>
+      <td>India</td>
+      <td>13</td>
+      <td>Arun Chadda</td>
+      <td class="d-ta-right"><dt-button kind="muted" importance="outlined" size="200">Button 1</dt-button></td>
+      <td class="d-ta-right"><dt-button kind="muted" importance="outlined" size="200">Button 2</dt-button></td>
+    </tr>
+    <tr class="h:d-bgc-secondary-opaque :d-bgc-secondary-opaque fv:d-bgc-secondary-opaque d-c-pointer" tabindex="0">
+      <th scope="row">San Francisco, CA</th>
+      <td>United States</td>
+      <td>108</td>
+      <td>Shane Holmes</td>
+      <td class="d-ta-right"><dt-button kind="muted" importance="outlined" size="200">Button 1</dt-button></td>
+      <td class="d-ta-right"><dt-button kind="muted" importance="outlined" size="200">Button 2</dt-button></td>
+    </tr>
+    <tr class="h:d-bgc-secondary-opaque :d-bgc-secondary-opaque fv:d-bgc-secondary-opaque d-c-pointer" tabindex="0">
+      <th scope="row">Vancouver, BC</th>
+      <td>Canada</td>
+      <td>76</td>
+      <td>Kendal Lewis</td>
+      <td class="d-ta-right"><dt-button kind="muted" importance="outlined" size="200">Button 1</dt-button></td>
+      <td class="d-ta-right"><dt-button kind="muted" importance="outlined" size="200">Button 2</dt-button></td>
+    </tr>
+  </tbody>
+</table>
+```
+
+```vue demo
+<dt-stack gap="100" role="toolbar" aria-orientation="vertical" v-dt-focusgroup="'block wrap'" aria-label="Formatting">
+  <dt-button kind="muted" importance="outlined">Bold</dt-button>
+  <dt-button kind="muted" importance="outlined">Italic</dt-button>
+  <dt-button kind="muted" importance="outlined">Underline</dt-button>
+</dt-stack>
+```
+
+### Object syntax
+
+```vue demo
+<dt-stack gap="100" role="listbox" v-dt-focusgroup="{ axis: 'block', wrap: false }" aria-label="Fruits">
+  <dt-button role="option" kind="muted" importance="outlined">Apple</dt-button>
+  <dt-button role="option" kind="muted" importance="outlined">Banana</dt-button>
+</dt-stack>
+```
+```vue demo
+<dt-stack direction="row" gap="100" role="listbox" aria-orientation="horizontal" v-dt-focusgroup="{ axis: 'inline', wrap: false }" aria-label="Fruits">
+  <dt-button role="option" kind="muted" importance="outlined">Apple</dt-button>
+  <dt-button role="option" kind="muted" importance="outlined">Banana</dt-button>
+</dt-stack>
+```
+
+### No value (defaults)
+
+```vue demo
+<dt-stack direction="row" gap="100" role="radiogroup" v-dt-focusgroup aria-label="Options">
+  <dt-button role="radio" kind="muted" importance="outlined">A</dt-button>
+  <dt-button role="radio" kind="muted" importance="outlined">B</dt-button>
+</dt-stack>
+```
+
+## Item opt-out
+
+Add `data-dt-focusgroup-skip` to exclude an element from arrow-key navigation
+(e.g., text inputs that need their own arrow keys):
+
+```vue demo
+<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'inline wrap'">
+  <dt-button kind="muted" importance="outlined">Bold</dt-button>
+  <dt-input data-dt-focusgroup-skip placeholder="This will be skipped" />
+  <dt-button kind="muted" importance="outlined">Code</dt-button>
+  <dt-link data-dt-focusgroup-skip>Skipped Text link</dt-link>
+  <dt-button kind="muted" importance="outlined">Code</dt-button>
+</dt-stack>
+```
+
+## Mixed focusable elements
+
+
+
+```vue demo
+<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'inline wrap'">
+  <dt-button kind="muted" importance="outlined">Button</dt-button>
+  <dt-link>Link</dt-link>
+  <dt-select-menu
+    :options="[
+          { value: ``, label: `Please select one` },
+          { value: `1`, label: `Option 1` },
+          { value: `2`, label: `Option 2` },
+          { value: `3`, label: `Option 3` },
+        ]"
+    label="Default"
+    :model-value="modelValue"
+    :label-visible="false"
+    @input="onInput"
+    @change="onChange"
+  />
+</dt-stack>
+```
+
+## Nesting depth
+
+Items do not need to be direct children. The directive uses `querySelectorAll`
+on the container, finding items at any nesting depth in DOM order:
+
+```vue demo
+<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'inline wrap'">
+  <dt-stack direction="row" gap="100" class="d-bgc-moderate-opaque d-p-100">
+    <dt-button kind="muted" importance="outlined">btn</dt-button>
+    <dt-button kind="muted" importance="outlined">btn</dt-button>
+    <dt-button kind="muted" importance="outlined">btn</dt-button>
+  </dt-stack>
+  <dt-stack direction="row" gap="100" class="d-bgc-moderate-opaque d-p-100">
+    <dt-button kind="muted" importance="outlined">btn</dt-button>
+    <dt-button kind="muted" importance="outlined">btn</dt-button>
+  </dt-stack>
+  <dt-stack direction="row" gap="100" class="d-bgc-moderate-opaque d-p-100">
+    <dt-link>text link a</dt-link>
+    <dt-link>text link b</dt-link>
+  </dt-stack>
+</dt-stack>
+```
+
+  </article>
   <dt-stack gap="200">
     <dt-text as="h1" kind="headline" :size="500">
       Disabled Button

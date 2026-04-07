@@ -150,9 +150,10 @@ export const DtFocusgroupDirective = {
       const currentIndex = items.indexOf(document.activeElement);
       if (currentIndex === -1) return;
 
-      // Home / End
+      // Home / End — always preventDefault to avoid page scroll
       const homeEndIndex = resolveHomeEnd(event.key, items, state.skipDisabled);
       if (homeEndIndex !== null) {
+        event.preventDefault();
         if (homeEndIndex !== currentIndex) moveTo(event, el, state, items, currentIndex, homeEndIndex);
         return;
       }
@@ -197,6 +198,16 @@ export const DtFocusgroupDirective = {
 
       // Set initial tabindex
       const items = getItems(el, selector);
+      if (!items.length && process.env.NODE_ENV !== 'production') {
+        const role = el.getAttribute('role');
+         
+        console.warn(
+          `[DtFocusgroupDirective] No items found for selector "${selector}"` +
+          (role ? ` (inferred from role="${role}")` : '') +
+          '. Check that items match the selector, or provide an explicit selector via ' +
+          'v-dt-focusgroup="{ selector: \'...\' }".',
+        );
+      }
       if (items.length) {
         let initialIndex = 0;
         if (skipDisabled) {
