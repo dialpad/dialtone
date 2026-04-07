@@ -609,6 +609,7 @@ describe('DtFocusgroupDirective', () => {
 
       expect(spy).toHaveBeenCalledWith('keydown', expect.any(Function));
       expect(spy).toHaveBeenCalledWith('focusin', expect.any(Function));
+      expect(spy).toHaveBeenCalledWith('focusout', expect.any(Function));
 
       // Prevent double-unmount in afterEach
       loopper = null;
