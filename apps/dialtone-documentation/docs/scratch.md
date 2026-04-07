@@ -192,7 +192,7 @@ app.use(DtFocusgroupDirective);
     </tr>
   </thead>
   <tbody>
-    <tr class="h:d-bgc-secondary-opaque :d-bgc-secondary-opaque fv:d-bgc-secondary-opaque d-c-pointer" tabindex="0">
+    <tr class="h:d-bgc-moderate-opaque fv:d-bgc-moderate-opaque d-c-pointer" tabindex="0">
       <th scope="row">Austin, TX</th>
       <td>United States</td>
       <td>48</td>
@@ -200,7 +200,7 @@ app.use(DtFocusgroupDirective);
       <td class="d-ta-right"><dt-button kind="muted" importance="outlined" size="200">Button 1</dt-button></td>
       <td class="d-ta-right"><dt-button kind="muted" importance="outlined" size="200">Button 2</dt-button></td>
     </tr>
-    <tr class="h:d-bgc-secondary-opaque :d-bgc-secondary-opaque fv:d-bgc-secondary-opaque d-c-pointer" tabindex="0">
+    <tr class="h:d-bgc-moderate-opaque fv:d-bgc-moderate-opaque d-c-pointer" tabindex="0">
       <th scope="row">Bangalore</th>
       <td>India</td>
       <td>13</td>
@@ -208,7 +208,7 @@ app.use(DtFocusgroupDirective);
       <td class="d-ta-right"><dt-button kind="muted" importance="outlined" size="200">Button 1</dt-button></td>
       <td class="d-ta-right"><dt-button kind="muted" importance="outlined" size="200">Button 2</dt-button></td>
     </tr>
-    <tr class="h:d-bgc-secondary-opaque :d-bgc-secondary-opaque fv:d-bgc-secondary-opaque d-c-pointer" tabindex="0">
+    <tr class="h:d-bgc-moderate-opaque fv:d-bgc-moderate-opaque d-c-pointer" tabindex="0">
       <th scope="row">San Francisco, CA</th>
       <td>United States</td>
       <td>108</td>
@@ -216,7 +216,7 @@ app.use(DtFocusgroupDirective);
       <td class="d-ta-right"><dt-button kind="muted" importance="outlined" size="200">Button 1</dt-button></td>
       <td class="d-ta-right"><dt-button kind="muted" importance="outlined" size="200">Button 2</dt-button></td>
     </tr>
-    <tr class="h:d-bgc-secondary-opaque :d-bgc-secondary-opaque fv:d-bgc-secondary-opaque d-c-pointer" tabindex="0">
+    <tr class="h:d-bgc-moderate-opaque fv:d-bgc-moderate-opaque d-c-pointer" tabindex="0">
       <th scope="row">Vancouver, BC</th>
       <td>Canada</td>
       <td>76</td>
@@ -233,6 +233,64 @@ app.use(DtFocusgroupDirective);
   <dt-button kind="muted" importance="outlined">Bold</dt-button>
   <dt-button kind="muted" importance="outlined">Italic</dt-button>
   <dt-button kind="muted" importance="outlined">Underline</dt-button>
+</dt-stack>
+```
+
+```vue demo
+<dt-stack role="list" v-dt-focusgroup="'block wrap'" aria-label="Contacts">
+  <dt-stack role="listitem" tabindex="0" gap="100" class="d-p-100 d-w-800 h:d-bgc-moderate-opaque fv:d-bgc-moderate-opaque d-bar8">
+    <dt-stack direction="row" gap="100" class="d-w100p">
+      <dt-avatar full-name="Ashanti Trevor" />
+      <dt-stack class="d-fl1">
+        <dt-text kind="body" :size="200" strength="bold">Ashanti Trevor</dt-text>
+        <dt-stack direction="row" gap="50">
+          <dt-stack direction="row" gap="100">
+            <dt-icon name="phone-outgoing" size="200" class="d-fc-tertiary" />
+            <dt-text kind="body" :size="100" tone="tertiary">Outgoing call</dt-text>
+          </dt-stack>
+          <dt-text kind="body" :size="100" tone="tertiary">&bull;</dt-text>
+          <dt-text kind="body" :size="100" tone="tertiary">2 minutes 10 seconds</dt-text>
+        </dt-stack>
+      </dt-stack>
+      <dt-text kind="body" :size="200" tone="tertiary" numeric>3:23 pm</dt-text>
+      <dt-badge kind="count" type="bulletin" text="6" />
+    </dt-stack>
+  </dt-stack>
+  <dt-stack role="listitem" tabindex="0" gap="100" class="d-p-100 d-w-800 h:d-bgc-moderate-opaque fv:d-bgc-moderate-opaque d-bar8">
+    <dt-stack direction="row" gap="100" class="d-w100p">
+      <dt-avatar full-name="Marcus Chen" />
+      <dt-stack class="d-fl1">
+        <dt-text kind="body" :size="200" strength="bold">Marcus Chen</dt-text>
+        <dt-stack direction="row" gap="50">
+          <dt-stack direction="row" gap="100">
+            <dt-icon name="phone-incoming" size="200" class="d-fc-tertiary" />
+            <dt-text kind="body" :size="100" tone="tertiary">Incoming call</dt-text>
+          </dt-stack>
+          <dt-text kind="body" :size="100" tone="tertiary">&bull;</dt-text>
+          <dt-text kind="body" :size="100" tone="tertiary">14 minutes 32 seconds</dt-text>
+        </dt-stack>
+      </dt-stack>
+      <dt-text kind="body" :size="200" tone="tertiary" numeric>1:47 pm</dt-text>
+    </dt-stack>
+  </dt-stack>
+  <dt-stack role="listitem" tabindex="0" gap="100" class="d-p-100 d-w-800 h:d-bgc-moderate-opaque fv:d-bgc-moderate-opaque d-bar8">
+    <dt-stack direction="row" gap="100" class="d-w100p">
+      <dt-avatar full-name="Priya Sharma" />
+      <dt-stack class="d-fl1">
+        <dt-text kind="body" :size="200" strength="bold">Priya Sharma</dt-text>
+        <dt-stack direction="row" gap="50">
+          <dt-stack direction="row" gap="100">
+            <dt-icon name="phone-missed" size="200" class="d-fc-critical" />
+            <dt-text kind="body" :size="100" tone="tertiary">Missed call</dt-text>
+          </dt-stack>
+          <dt-text kind="body" :size="100" tone="tertiary">&bull;</dt-text>
+          <dt-text kind="body" :size="100" tone="tertiary">0 seconds</dt-text>
+        </dt-stack>
+      </dt-stack>
+      <dt-text kind="body" :size="200" tone="tertiary" numeric>11:05 am</dt-text>
+      <dt-badge kind="count" type="bulletin" text="3" />
+    </dt-stack>
+  </dt-stack>
 </dt-stack>
 ```
 
