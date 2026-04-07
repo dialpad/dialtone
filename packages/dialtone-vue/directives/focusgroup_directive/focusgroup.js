@@ -178,6 +178,18 @@ export const DtFocusgroupDirective = {
       }
     }
 
+    function handleFocusout (event, el, state) {
+      if (state.config.memory) return;
+      // relatedTarget is where focus is going — if still inside, ignore
+      if (event.relatedTarget && el.contains(event.relatedTarget)) return;
+      // Focus left the container — reset tabindex to first item
+      const items = getItems(el, state.selector);
+      if (items.length) {
+        setRovingTabindex(items, 0);
+        state.lastFocusedIndex = 0;
+      }
+    }
+
     // ── Lifecycle ───────────────────────────────────────────
 
     function attach (el, config) {
@@ -194,6 +206,7 @@ export const DtFocusgroupDirective = {
         _internalMove: false,
         onKeydown: null,
         onFocusin: null,
+        onFocusout: null,
       };
 
       // Set initial tabindex
@@ -224,9 +237,11 @@ export const DtFocusgroupDirective = {
       // Bind handlers
       state.onKeydown = (event) => handleKeydown(event, el, state);
       state.onFocusin = (event) => handleFocusin(event, el, state);
+      state.onFocusout = (event) => handleFocusout(event, el, state);
 
       el.addEventListener('keydown', state.onKeydown);
       el.addEventListener('focusin', state.onFocusin);
+      el.addEventListener('focusout', state.onFocusout);
 
       return state;
     }
@@ -235,8 +250,10 @@ export const DtFocusgroupDirective = {
       if (!state) return;
       if (state.onKeydown) el.removeEventListener('keydown', state.onKeydown);
       if (state.onFocusin) el.removeEventListener('focusin', state.onFocusin);
+      if (state.onFocusout) el.removeEventListener('focusout', state.onFocusout);
       state.onKeydown = null;
       state.onFocusin = null;
+      state.onFocusout = null;
     }
   },
 };
