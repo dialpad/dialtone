@@ -73,6 +73,77 @@ Use `noloop` so focus stops at the first and last items instead of cycling:
 </div>
 ```
 
+### Disable memory
+
+Use `nomemory` so re-entry via Tab always starts at the first item instead of
+restoring the last focused item:
+
+```html
+<div role="toolbar" v-dt-focusgroup="'horizontal nomemory'" aria-label="Actions">
+  <button>Cut</button>
+  <button>Copy</button>
+  <button>Paste</button>
+</div>
+```
+
+### Disabled items
+
+By default, disabled items (`aria-disabled="true"` or native `disabled`) are
+skipped during arrow-key navigation:
+
+```html
+<div role="toolbar" v-dt-focusgroup="'horizontal'" aria-label="Tools">
+  <button>Pen</button>
+  <button aria-disabled="true">Eraser (disabled)</button>
+  <button>Highlighter</button>
+</div>
+```
+
+For `role="tablist"`, disabled items remain focusable so screen reader users can
+discover them. This is the WAI-ARIA Tabs convention and the directive applies it
+automatically. Override with explicit `skipdisabled` if needed.
+
+```html
+<div role="tablist" v-dt-focusgroup="'horizontal nomemory'" aria-label="Platforms">
+  <button role="tab">Mac</button>
+  <button role="tab" aria-disabled="true">Windows (disabled)</button>
+  <button role="tab">Linux</button>
+</div>
+```
+
+### Selection follows focus
+
+The directive dispatches a `dt-focusgroup-move` event when focus moves via arrow
+keys. Use it to implement selection-follows-focus without any script:
+
+```html
+<div
+  role="tablist"
+  v-dt-focusgroup="'horizontal nomemory'"
+  aria-label="Tabs"
+  @dt-focusgroup-move="
+    $event.detail.item.setAttribute('aria-selected', 'true');
+    $event.detail.previousItem.setAttribute('aria-selected', 'false');
+  "
+>
+  <button role="tab" aria-selected="true">One</button>
+  <button role="tab" aria-selected="false">Two</button>
+  <button role="tab" aria-selected="false">Three</button>
+</div>
+```
+
+### Important: always pair with ARIA
+
+The directive manages keyboard focus but does not set any ARIA attributes. For
+screen readers to announce the widget correctly, you must provide:
+
+- A `role` (`toolbar`, `tablist`, `listbox`, `radiogroup`, `menu`)
+- An accessible name (`aria-label` or `aria-labelledby`)
+- `aria-orientation` when the axis differs from the role's default
+
+Without a role, the container is opaque to assistive technology — arrow-key
+cycling works, but the user has no context for what they're navigating.
+
 ## Tokens
 
 Space-separated string tokens configure the directive behavior:

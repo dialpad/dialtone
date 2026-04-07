@@ -177,7 +177,6 @@ Just add `v-dt-focusgroup` and any focusable child will be managed by the focusg
 > [!WARNING] Always pair with an ARIA role
 > The directive manages keyboard focus but does not set any ARIA attributes. For screen readers to announce the widget correctly, you must provide a `role` (`toolbar`, `tablist`, `listbox`, `radiogroup`, `menu`), an accessible name (`aria-label`), and `aria-orientation` when the axis differs from the role's default. Without a role, the container is opaque to assistive technology — arrow-key cycling works, but the user has no context for what they're navigating.
 
-
 ```vue demo
 <dt-stack v-dt-focusgroup direction="row" gap="100">
   <dt-button kind="muted" importance="outlined">Button</dt-button>
@@ -242,14 +241,6 @@ Just add `v-dt-focusgroup` and any focusable child will be managed by the focusg
     </tr>
   </tbody>
 </table>
-```
-
-```vue demo
-<dt-stack gap="100" role="toolbar" aria-orientation="vertical" v-dt-focusgroup="'vertical'" aria-label="Formatting">
-  <dt-button kind="muted" importance="outlined">Bold</dt-button>
-  <dt-button kind="muted" importance="outlined">Italic</dt-button>
-  <dt-button kind="muted" importance="outlined">Underline</dt-button>
-</dt-stack>
 ```
 
 ### noloop — focus stops at boundaries
@@ -369,6 +360,7 @@ Just add `v-dt-focusgroup` and any focusable child will be managed by the focusg
   <dt-button role="option" kind="muted" importance="outlined">Banana</dt-button>
 </dt-stack>
 ```
+
 ```vue demo
 <dt-stack direction="row" gap="100" role="listbox" aria-orientation="horizontal" v-dt-focusgroup="{ axis: 'horizontal', loop: false }" aria-label="Fruits">
   <dt-button role="option" kind="muted" importance="outlined">Apple</dt-button>
@@ -392,8 +384,6 @@ Add `data-dt-focusgroup-skip` to exclude an element from arrow-key navigation
 ```
 
 ## Mixed focusable elements
-
-
 
 ```vue demo
 <dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal'">
