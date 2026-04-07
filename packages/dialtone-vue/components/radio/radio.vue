@@ -1,7 +1,7 @@
 <template>
   <div
-    :class="rootClass"
-    v-bind="addClassStyleAttrs($attrs)"
+    :class="$attrs.class"
+    :style="$attrs.style"
   >
     <label :class="['d-radio-group', { 'd-radio-group--disabled': internalDisabled }]">
       <div class="d-radio__input">
@@ -73,7 +73,7 @@ import {
 import { RADIO_INPUT_VALIDATION_CLASSES } from './radio_constants';
 import { DtValidationMessages } from '../validation_messages';
 import { DtText, TEXT_SIZE_MODIFIERS, TEXT_STRENGTH_MODIFIERS } from '@/components/text';
-import { hasSlotContent, removeClassStyleAttrs, addClassStyleAttrs } from '@/common/utils';
+import { hasSlotContent, removeClassStyleAttrs } from '@/common/utils';
 
 /**
  * Radios are control elements that allow the user to make a single selection.
@@ -234,7 +234,6 @@ export default {
 
   methods: {
     removeClassStyleAttrs,
-    addClassStyleAttrs,
 
     runValidations () {
       if (!this.hasLabelContent && !this.$attrs['aria-label']) {
