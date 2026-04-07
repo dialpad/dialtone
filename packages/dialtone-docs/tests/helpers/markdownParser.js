@@ -1,4 +1,5 @@
-import matter from 'gray-matter';
+import { stripMarkdown, stripFrontmatter } from '@src/utils/strip-markdown.mjs';
+export { stripMarkdown, stripFrontmatter };
 
 // Regex patterns kept as named constants so callers can understand intent
 // and future maintainers can update them in one place.
@@ -15,20 +16,6 @@ const PATTERNS = {
   emphasis: /[*_]{1,2}([^*_]+)[*_]{1,2}/g,
 };
 
-/**
- * Strip YAML frontmatter from raw markdown, returning only the body.
- * If no frontmatter is present, the original string is returned unchanged.
- *
- * @param {string} markdown - Raw markdown string (may or may not have frontmatter)
- * @returns {string} Markdown body without frontmatter
- */
-export function stripFrontmatter(markdown) {
-  try {
-    return matter(markdown).content;
-  } catch {
-    return markdown;
-  }
-}
 
 /**
  * Extract all headings from markdown content.
@@ -229,41 +216,6 @@ export function auditCodeBlocks(markdown, options = {}) {
   };
 }
 
-/**
- * Strip markdown syntax, returning searchable plain text.
- * Removes frontmatter, fenced code blocks, HTML, link syntax, heading markers,
- * emphasis markers, and excess whitespace.
- *
- * This produces the same searchable text that the Milestone 3 generator
- * (src/generators/lib/markdown-reader.mjs) will write into ai-docs.json —
- * keeping test assertions and build output in sync by design.
- *
- * @param {string} markdown - Markdown string
- * @param {Object} [options]
- * @param {boolean} [options.stripFrontmatter=true] - Strip YAML frontmatter before parsing
- * @returns {string}
- */
-export function stripMarkdown(markdown, options = {}) {
-  const { stripFrontmatter: strip = true } = options;
-  let text = strip ? stripFrontmatter(markdown) : markdown;
-
-  text = text
-    .replace(PATTERNS.htmlComment, '')
-    .replace(PATTERNS.codeBlockFenced, ' ')
-    .replace(PATTERNS.image, '$1')           // images → alt text
-    .replace(PATTERNS.link, '$1')            // links → link text
-    .replace(PATTERNS.htmlTag, '')
-    .replace(PATTERNS.headingGlobal, '$2')   // `## Foo` → `Foo`
-    .replace(PATTERNS.blockquote, m => m.replace(/^>\s?/, ''))
-    .replace(PATTERNS.horizontalRule, '')
-    .replace(PATTERNS.codeInline, '$1')      // `code` → code
-    .replace(PATTERNS.emphasis, '$1')        // **bold** / _italic_ → plain
-    .replace(/\[([^\]]+)\]/g, '$1')          // leftover bracket groups
-    .replace(/\n{3,}/g, '\n\n')
-    .trim();
-
-  return text;
-}
 
 /**
  * Count words in markdown content.
