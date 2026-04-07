@@ -21,43 +21,42 @@ import { DtFocusgroupDirective } from "@dialpad/dialtone-vue";
 app.use(DtFocusgroupDirective);
 ```
 
-### Token syntax (Open UI style)
+### Token syntax
 
 ```html
-<div role="toolbar" v-dt-focusgroup="'horizontal'" aria-label="Formatting">
-  <button>Bold</button>
-  <button>Italic</button>
-  <button>Underline</button>
-</div>
-```
-
-### Vertical toolbar
-
-```html
-<div role="toolbar" aria-orientation="vertical"
-  v-dt-focusgroup="'vertical'" aria-label="Formatting">
-  <button>Bold</button>
-  <button>Italic</button>
-  <button>Underline</button>
-</div>
+<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal'" aria-label="Formatting">
+  <dt-button kind="muted" importance="outlined">Bold</dt-button>
+  <dt-button kind="muted" importance="outlined">Italic</dt-button>
+  <dt-button kind="muted" importance="outlined">Underline</dt-button>
+</dt-stack>
 ```
 
 ### Object syntax
 
 ```html
-<div role="listbox" v-dt-focusgroup="{ axis: 'vertical', loop: false }" aria-label="Fruits">
-  <div role="option">Apple</div>
-  <div role="option">Banana</div>
-</div>
+<dt-stack gap="100" role="listbox" v-dt-focusgroup="{ axis: 'vertical', loop: false }" aria-label="Fruits">
+  <dt-button role="option" kind="muted" importance="outlined">Apple</dt-button>
+  <dt-button role="option" kind="muted" importance="outlined">Banana</dt-button>
+</dt-stack>
+```
+
+### Vertical toolbar
+
+```html
+<dt-stack gap="100" role="toolbar" aria-orientation="vertical" v-dt-focusgroup="'vertical'" aria-label="Formatting">
+  <dt-button kind="muted" importance="outlined">Bold</dt-button>
+  <dt-button kind="muted" importance="outlined">Italic</dt-button>
+  <dt-button kind="muted" importance="outlined">Underline</dt-button>
+</dt-stack>
 ```
 
 ### No value (defaults)
 
 ```html
-<div role="radiogroup" v-dt-focusgroup aria-label="Options">
-  <button role="radio">A</button>
-  <button role="radio">B</button>
-</div>
+<dt-stack direction="row" gap="100" role="radiogroup" v-dt-focusgroup aria-label="Options">
+  <dt-button role="radio" kind="muted" importance="outlined">A</dt-button>
+  <dt-button role="radio" kind="muted" importance="outlined">B</dt-button>
+</dt-stack>
 ```
 
 ### Disable looping
@@ -65,12 +64,12 @@ app.use(DtFocusgroupDirective);
 Use `noloop` so focus stops at the first and last items instead of cycling:
 
 ```html
-<div role="toolbar" v-dt-focusgroup="'horizontal noloop'" aria-label="Pagination">
-  <button>First</button>
-  <button>Previous</button>
-  <button>Next</button>
-  <button>Last</button>
-</div>
+<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal noloop'" aria-label="Pagination">
+  <dt-button kind="muted" importance="outlined">First</dt-button>
+  <dt-button kind="muted" importance="outlined">Previous</dt-button>
+  <dt-button kind="muted" importance="outlined">Next</dt-button>
+  <dt-button kind="muted" importance="outlined">Last</dt-button>
+</dt-stack>
 ```
 
 ### Disable memory
@@ -79,11 +78,11 @@ Use `nomemory` so re-entry via Tab always starts at the first item instead of
 restoring the last focused item:
 
 ```html
-<div role="toolbar" v-dt-focusgroup="'horizontal nomemory'" aria-label="Actions">
-  <button>Cut</button>
-  <button>Copy</button>
-  <button>Paste</button>
-</div>
+<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal nomemory'" aria-label="Actions">
+  <dt-button kind="muted" importance="outlined">Cut</dt-button>
+  <dt-button kind="muted" importance="outlined">Copy</dt-button>
+  <dt-button kind="muted" importance="outlined">Paste</dt-button>
+</dt-stack>
 ```
 
 ### Disabled items
@@ -92,11 +91,11 @@ By default, disabled items (`aria-disabled="true"` or native `disabled`) are
 skipped during arrow-key navigation:
 
 ```html
-<div role="toolbar" v-dt-focusgroup="'horizontal'" aria-label="Tools">
-  <button>Pen</button>
-  <button aria-disabled="true">Eraser (disabled)</button>
-  <button>Highlighter</button>
-</div>
+<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal'" aria-label="Tools">
+  <dt-button kind="muted" importance="outlined">Pen</dt-button>
+  <dt-button kind="muted" importance="outlined" aria-disabled="true">Eraser (disabled)</dt-button>
+  <dt-button kind="muted" importance="outlined">Highlighter</dt-button>
+</dt-stack>
 ```
 
 For `role="tablist"`, disabled items remain focusable so screen reader users can
@@ -104,32 +103,38 @@ discover them. This is the WAI-ARIA Tabs convention and the directive applies it
 automatically. Override with explicit `skipdisabled` if needed.
 
 ```html
-<div role="tablist" v-dt-focusgroup="'horizontal nomemory'" aria-label="Platforms">
-  <button role="tab">Mac</button>
-  <button role="tab" aria-disabled="true">Windows (disabled)</button>
-  <button role="tab">Linux</button>
-</div>
+<dt-stack direction="row" gap="100" role="tablist" v-dt-focusgroup="'horizontal nomemory'" aria-label="Platforms">
+  <dt-button role="tab" kind="muted" importance="outlined">Mac</dt-button>
+  <dt-button role="tab" kind="muted" importance="outlined" aria-disabled="true">Windows (disabled)</dt-button>
+  <dt-button role="tab" kind="muted" importance="outlined">Linux</dt-button>
+</dt-stack>
 ```
 
 ### Selection follows focus
 
 The directive dispatches a `dt-focusgroup-move` event when focus moves via arrow
-keys. Use it to implement selection-follows-focus without any script:
+keys. Use it to implement selection-follows-focus:
 
 ```html
-<div
+<dt-stack
+  direction="row"
+  gap="100"
   role="tablist"
   v-dt-focusgroup="'horizontal nomemory'"
   aria-label="Tabs"
-  @dt-focusgroup-move="
-    $event.detail.item.setAttribute('aria-selected', 'true');
-    $event.detail.previousItem.setAttribute('aria-selected', 'false');
-  "
+  @dt-focusgroup-move="selectedTab = $event.detail.index"
 >
-  <button role="tab" aria-selected="true">One</button>
-  <button role="tab" aria-selected="false">Two</button>
-  <button role="tab" aria-selected="false">Three</button>
-</div>
+  <dt-button
+    v-for="(tab, index) in tabs"
+    :key="tab.label"
+    role="tab"
+    :active="selectedTab === index"
+    :importance="selectedTab === index ? 'outlined' : 'clear'"
+    :aria-selected="selectedTab === index ? 'true' : 'false'"
+  >
+    {{ tab.label }}
+  </dt-button>
+</dt-stack>
 ```
 
 ### Important: always pair with ARIA
@@ -143,6 +148,63 @@ screen readers to announce the widget correctly, you must provide:
 
 Without a role, the container is opaque to assistive technology — arrow-key
 cycling works, but the user has no context for what they're navigating.
+
+### Item opt-out
+
+Add `data-dt-focusgroup-skip` to exclude an element from arrow-key navigation
+(e.g., text inputs that need their own arrow keys):
+
+```html
+<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal'">
+  <dt-button kind="muted" importance="outlined">Bold</dt-button>
+  <dt-input data-dt-focusgroup-skip placeholder="Skipped" />
+  <dt-button kind="muted" importance="outlined">Code</dt-button>
+</dt-stack>
+```
+
+### Mixed focusable elements
+
+The directive cycles through any focusable element matched by the selector,
+regardless of element type:
+
+```html
+<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal'">
+  <dt-button kind="muted" importance="outlined">Button</dt-button>
+  <dt-link>Link</dt-link>
+  <dt-select-menu
+    :options="[
+      { value: '1', label: 'Option 1' },
+      { value: '2', label: 'Option 2' },
+      { value: '3', label: 'Option 3' },
+    ]"
+    label="Select"
+    :label-visible="false"
+  />
+</dt-stack>
+```
+
+### Nesting depth
+
+Items do not need to be direct children. The directive uses `querySelectorAll`
+on the container, finding items at any nesting depth in DOM order:
+
+```html
+<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal'">
+  <dt-stack direction="row" gap="100" class="d-bgc-moderate-opaque d-p-100">
+    <dt-button kind="muted" importance="outlined">btn</dt-button>
+    <dt-button kind="muted" importance="outlined">btn</dt-button>
+    <dt-button kind="muted" importance="outlined">btn</dt-button>
+  </dt-stack>
+  <dt-stack direction="row" gap="100" class="d-bgc-moderate-opaque d-p-100">
+    <dt-button kind="muted" importance="outlined">btn</dt-button>
+    <dt-button kind="muted" importance="outlined">btn</dt-button>
+  </dt-stack>
+  <dt-stack direction="row" gap="100" class="d-bgc-moderate-opaque d-p-100">
+    <dt-link>text link a</dt-link>
+    <dt-link>text link b</dt-link>
+  </dt-stack>
+</dt-stack>
+```
 
 ## Tokens
 
@@ -343,19 +405,6 @@ The `event.detail` payload:
   </tbody>
 </table>
 
-## Item opt-out
-
-Add `data-dt-focusgroup-skip` to exclude an element from arrow-key navigation
-(e.g., text inputs that need their own arrow keys):
-
-```html
-<div role="toolbar" v-dt-focusgroup="'horizontal'">
-  <button>Bold</button>
-  <input type="number" data-dt-focusgroup-skip />
-  <button>Code</button>
-</div>
-```
-
 ## Keyboard support
 
 <table>
@@ -387,23 +436,6 @@ Add `data-dt-focusgroup-skip` to exclude an element from arrow-key navigation
 
 Arrow direction is RTL-aware: in right-to-left contexts, Left arrow moves
 forward and Right arrow moves backward on the horizontal axis.
-
-## Nesting depth
-
-Items do not need to be direct children. The directive uses `querySelectorAll`
-on the container, finding items at any nesting depth in DOM order:
-
-```html
-<div role="toolbar" v-dt-focusgroup="'horizontal'">
-  <div class="d-d-flex">
-    <button>Bold</button>
-    <button>Italic</button>
-  </div>
-  <div class="d-d-flex">
-    <button>Underline</button>
-  </div>
-</div>
-```
 
 ## Accessibility: `aria-orientation`
 
@@ -454,3 +486,129 @@ navigation cues (e.g., "use Left/Right" when Up/Down is what works).
 
 **Rule of thumb:** if you specify `axis`, check whether it matches the role's
 default. If it doesn't, add `aria-orientation`.
+
+## Recipes
+
+Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone components.
+
+### Table with row navigation
+
+Use `selector` to target `tbody tr` elements. Up/Down cycles rows; Tab reaches
+interactive content within a row.
+
+```html
+<table v-dt-focusgroup="{ axis: 'vertical', selector: 'tbody tr' }" aria-label="Office List">
+  <thead>
+    <tr>
+      <th scope="col">Office</th>
+      <th scope="col">Country</th>
+      <th scope="col">Contact</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr tabindex="0">
+      <th scope="row">Austin, TX</th>
+      <td>United States</td>
+      <td>Henna Ferry</td>
+    </tr>
+    <tr tabindex="-1">
+      <th scope="row">Bangalore</th>
+      <td>India</td>
+      <td>Arun Chadda</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+### Inbox
+
+A vertical list using `DtRecipeContactRow`. Up/Down cycles contacts.
+
+```html
+<dt-stack role="list" v-dt-focusgroup="'vertical'" aria-label="Contacts" gap="0">
+  <dt-recipe-contact-row role="listitem" tabindex="0" name="Ashanti Trevor" avatar-presence="active" user-status="Good morning!" has-call-button />
+  <dt-recipe-contact-row role="listitem" tabindex="-1" name="Marcus Chen" avatar-presence="away" presence-text="Away" user-status="Out for a bit" has-call-button />
+  <dt-recipe-contact-row role="listitem" tabindex="-1" name="Priya Sharma" avatar-presence="busy" presence-text="In a meeting" user-status="Meetings all day" has-call-button />
+  <dt-recipe-contact-row role="listitem" tabindex="-1" name="Jordan Kim" unread-count="3" :has-unreads="true" has-call-button />
+</dt-stack>
+```
+
+### Contact list
+
+A vertical list of rich content items built with Dialtone primitives. Up/Down cycles contacts.
+
+```html
+<dt-stack role="list" v-dt-focusgroup="'vertical'" aria-label="Contacts">
+  <dt-stack role="listitem" tabindex="0" gap="100" class="d-p-100 d-w-800 h:d-bgc-moderate-opaque fv:d-bgc-moderate-opaque d-bar8">
+    <dt-stack direction="row" gap="100" class="d-w100p">
+      <dt-avatar full-name="Ashanti Trevor" />
+      <dt-stack class="d-fl1">
+        <dt-text kind="body" :size="200" strength="bold">Ashanti Trevor</dt-text>
+        <dt-stack direction="row" gap="50">
+          <dt-icon name="phone-outgoing" size="200" class="d-fc-tertiary" />
+          <dt-text kind="body" :size="100" tone="tertiary">Outgoing call</dt-text>
+          <dt-text kind="body" :size="100" tone="tertiary">&bull; 2m 10s</dt-text>
+        </dt-stack>
+      </dt-stack>
+      <dt-text kind="body" :size="200" tone="tertiary" numeric>3:23 pm</dt-text>
+      <dt-badge kind="count" type="bulletin" text="6" />
+    </dt-stack>
+  </dt-stack>
+  <dt-stack role="listitem" tabindex="-1" gap="100" class="d-p-100 d-w-800 h:d-bgc-moderate-opaque fv:d-bgc-moderate-opaque d-bar8">
+    <dt-stack direction="row" gap="100" class="d-w100p">
+      <dt-avatar full-name="Marcus Chen" />
+      <dt-stack class="d-fl1">
+        <dt-text kind="body" :size="200" strength="bold">Marcus Chen</dt-text>
+        <dt-stack direction="row" gap="50">
+          <dt-icon name="phone-incoming" size="200" class="d-fc-tertiary" />
+          <dt-text kind="body" :size="100" tone="tertiary">Incoming call</dt-text>
+          <dt-text kind="body" :size="100" tone="tertiary">&bull; 14m 32s</dt-text>
+        </dt-stack>
+      </dt-stack>
+      <dt-text kind="body" :size="200" tone="tertiary" numeric>1:47 pm</dt-text>
+    </dt-stack>
+  </dt-stack>
+</dt-stack>
+```
+
+### Contact list with hovercards (custom selector)
+
+When items are wrapped in complex components like `DtHovercard`, use a custom
+`selector` with a data attribute to target only the intended focusable items.
+
+```html
+<dt-stack
+  role="list"
+  v-dt-focusgroup="{ axis: 'vertical', loop: false, selector: '[data-custom-attribute-name]' }"
+  aria-label="Contacts"
+>
+  <dt-hovercard placement="right">
+    <template #anchor>
+      <dt-recipe-contact-row
+        data-custom-attribute-name
+        role="listitem"
+        name="Ashanti Trevor"
+        avatar-presence="active"
+        user-status="Good morning!"
+      />
+    </template>
+    <template #content>
+      <ExampleProfileCard />
+    </template>
+  </dt-hovercard>
+  <dt-hovercard placement="right">
+    <template #anchor>
+      <dt-recipe-contact-row
+        data-custom-attribute-name
+        role="listitem"
+        name="Marcus Chen"
+        avatar-presence="away"
+        presence-text="Away"
+      />
+    </template>
+    <template #content>
+      <ExampleProfileCard />
+    </template>
+  </dt-hovercard>
+</dt-stack>
+```

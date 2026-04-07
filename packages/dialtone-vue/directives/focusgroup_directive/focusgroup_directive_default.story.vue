@@ -72,17 +72,22 @@
       Left/Right cycles tabs. <code>@dt-focusgroup-move</code> for selection-follows-focus.
       <code>v-dt-focusgroup="'horizontal nomemory'"</code>
     </dt-text>
+    <!-- v-dt-focusgroup manages focus on child tabs, not the container -->
+    <!-- eslint-disable-next-line vuejs-accessibility/interactive-supports-focus -->
     <div
       v-dt-focusgroup="'horizontal nomemory'"
       role="tablist"
       aria-label="Operating system"
       class="d-d-flex d-gg-300"
       @dt-focusgroup-move="selectedTab = $event.detail.index"
+      @click="selectTabByClick"
+      @keydown.enter="selectTabByClick"
     >
       <dt-button
         v-for="(tab, index) in tabs"
         :key="tab.label"
         role="tab"
+        :active="selectedTab === index"
         :importance="selectedTab === index ? 'outlined' : 'clear'"
         :size="200"
         :aria-selected="selectedTab === index ? 'true' : 'false'"
@@ -237,6 +242,17 @@ export default {
   },
 
   methods: {
+    selectTabByClick (event) {
+      const tab = event.target.closest('[role="tab"]');
+      if (!tab) return;
+      const tablist = tab.closest('[role="tablist"]');
+      const tabs = Array.from(tablist.querySelectorAll('[role="tab"]'));
+      const index = tabs.indexOf(tab);
+      if (index !== -1 && !this.tabs[index].disabled) {
+        this.selectedTab = index;
+      }
+    },
+
     expandOrEnter () {
       const el = document.activeElement;
       if (!el) return;
