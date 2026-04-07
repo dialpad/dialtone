@@ -13,7 +13,7 @@
         modalClass,
       ]"
       data-qa="dt-modal"
-      :aria-describedby="describedById"
+      :aria-describedby="describedById || undefined"
       :aria-labelledby="labelledById"
       v-bind="modeAttrs"
       @cancel.prevent="close"
