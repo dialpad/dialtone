@@ -15,7 +15,7 @@
     :omega-aria-label="$attrs.omegaAriaLabel"
     :omega-id="$attrs.omegaId"
     :omega-tooltip-text="$attrs.omegaTooltipText"
-    :root-class="$attrs.rootClass"
+    :class="$attrs.class"
     :size="$attrs.size"
     :width="$attrs.width"
     @alpha-clicked="$attrs.onAlphaClicked"

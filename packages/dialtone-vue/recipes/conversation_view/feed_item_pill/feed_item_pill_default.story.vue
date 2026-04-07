@@ -1,7 +1,7 @@
 <template>
   <dt-recipe-feed-item-pill
     :title="$attrs.title"
-    :wrapper-class="$attrs.wrapperClass"
+    :class="$attrs.class"
     :button-class="$attrs.buttonClass"
     :border-color="$attrs.borderColor"
     :toggleable="$attrs.toggleable"

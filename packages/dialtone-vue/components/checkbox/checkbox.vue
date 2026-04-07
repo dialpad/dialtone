@@ -1,7 +1,7 @@
 <template>
   <div
-    :class="rootClass"
-    v-bind="addClassStyleAttrs($attrs)"
+    :class="$attrs.class"
+    :style="$attrs.style"
   >
     <label :class="['d-checkbox-group', { 'd-checkbox-group--disabled': internalDisabled }]">
       <div class="d-checkbox__input">

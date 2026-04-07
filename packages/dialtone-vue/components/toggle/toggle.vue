@@ -1,7 +1,7 @@
 <template>
   <div
-    :class="['d-toggle-wrapper', wrapperClass]"
-    v-bind="addClassStyleAttrs($attrs)"
+    :class="['d-toggle-wrapper', $attrs.class]"
+    :style="$attrs.style"
   >
     <label
       v-if="hasSlotContent($slots.default)"
@@ -112,14 +112,6 @@ export default {
     labelClass: {
       type: [String, Array, Object],
       default: '',
-    },
-
-    /**
-     * Additional styling for the wrapper element
-     */
-    wrapperClass: {
-      type: [String, Array, Object],
-      default: undefined,
     },
 
     /**

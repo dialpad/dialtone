@@ -1,7 +1,7 @@
 <template>
   <div
-    :class="rootClass"
-    v-bind="addClassStyleAttrs($attrs)"
+    :class="$attrs.class"
+    :style="$attrs.style"
   >
     <label :class="['d-radio-group', { 'd-radio-group--disabled': internalDisabled }]">
       <div class="d-radio__input">

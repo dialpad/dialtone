@@ -89,14 +89,6 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  rootClass: {
-    type: String,
-    default: '',
-  },
-  headerClass: {
-    type: String,
-    default: '',
-  },
 });
 
 const selectedVariant = ref('default');

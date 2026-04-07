@@ -295,9 +295,9 @@ describe('DtSplitButton Tests', function () {
   });
 
   describe('Extendability Tests', () => {
-    describe('When a rootClass is provided', () => {
+    describe('When a class is provided', () => {
       it('should include the root class', () => {
-        mockProps = { rootClass: MOCK_ROOT_CLASS }
+        mockAttrs = { class: MOCK_ROOT_CLASS };
 
         updateWrapper();
 

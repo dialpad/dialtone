@@ -1,8 +1,8 @@
 <template>
   <div
     ref="container"
-    :class="[rootClass, 'd-input__root', { 'd-input--hidden': hidden }]"
-    v-bind="addClassStyleAttrs($attrs)"
+    :class="['d-input__root', { 'd-input--hidden': hidden }, $attrs.class]"
+    :style="$attrs.style"
     data-qa="dt-input"
   >
     <label
@@ -243,16 +243,6 @@ export default {
      * same api as Vue's built-in handling of the class attribute.
      */
     inputWrapperClass: {
-      type: [String, Object, Array],
-      default: '',
-    },
-
-    /**
-     * Additional class name for the root element.
-     * Can accept all of: String, Object, and Array, i.e. has the
-     * same api as Vue's built-in handling of the class attribute.
-     */
-    rootClass: {
       type: [String, Object, Array],
       default: '',
     },

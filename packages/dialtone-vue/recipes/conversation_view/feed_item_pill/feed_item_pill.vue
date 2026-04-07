@@ -1,5 +1,8 @@
 <template>
-  <div :class="['d-recipe-feed-item-pill__border', borderClass, wrapperClass]">
+  <div
+    :class="['d-recipe-feed-item-pill__border', borderClass, $attrs.class]"
+    :style="$attrs.style"
+  >
     <div class="d-recipe-feed-item-pill__wrapper">
       <dt-collapsible :open="expanded">
         <template #anchor>
@@ -92,6 +95,8 @@ export default {
 
   components: { DtItemLayout, DtCollapsible },
 
+  inheritAttrs: false,
+
   props: {
     /**
      * Bolded primary text
@@ -99,14 +104,6 @@ export default {
     title: {
       type: String,
       default: () => '',
-    },
-
-    /**
-     * Additional styling around the pill
-     */
-    wrapperClass: {
-      type: [String, Array, Object],
-      default: '',
     },
 
     /**

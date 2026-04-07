@@ -1,7 +1,7 @@
 <template>
   <div
-    :class="rootClass"
-    v-bind="addClassStyleAttrs($attrs)"
+    :class="$attrs.class"
+    :style="$attrs.style"
   >
     <label>
       <div
@@ -46,6 +46,7 @@
           :class="[
             'd-select__input',
             SELECT_STATE_MODIFIERS[state],
+            inputClass,
           ]"
           v-bind="removeClassStyleAttrs($attrs)"
           data-qa="dt-select"
@@ -222,11 +223,11 @@ export default {
     },
 
     /**
-     * Additional class name for the root element.
+     * Additional class name for the select input element.
      * Can accept all of: String, Object, and Array, i.e. has the
      * same api as Vue's built-in handling of the class attribute.
      */
-    rootClass: {
+    inputClass: {
       type: [String, Object, Array],
       default: '',
     },

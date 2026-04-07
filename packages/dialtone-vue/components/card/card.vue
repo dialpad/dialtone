@@ -1,9 +1,7 @@
 <template>
   <div
-    :class="[
-      'd-card',
-      containerClass,
-    ]"
+    :class="['d-card', $attrs.class]"
+    :style="$attrs.style"
     data-qa="dt-card"
   >
     <div
@@ -52,6 +50,9 @@ import { hasSlotContent } from '@/common/utils';
 export default {
   compatConfig: { MODE: 3 },
   name: 'DtCard',
+
+  inheritAttrs: false,
+
   props: {
     /**
      * The maximum height of the card content.
@@ -60,14 +61,6 @@ export default {
     maxHeight: {
       type: String,
       default: null,
-    },
-
-    /**
-     * class for card container.
-     */
-    containerClass: {
-      type: [String, Array, Object],
-      default: '',
     },
 
     /**
