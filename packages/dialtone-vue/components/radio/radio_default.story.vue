@@ -13,7 +13,7 @@
     :label-child-props="$attrs.labelChildProps"
     :description-child-props="$attrs.descriptionChildProps"
     :messages="$attrs.messages"
-    :root-class="$attrs.rootClass"
+    :class="$attrs.class"
     @input="$attrs.onInput"
     @focusin="$attrs.onFocusIn"
     @focusout="$attrs.onFocusOut"
