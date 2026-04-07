@@ -22,6 +22,21 @@ const baseSlots = {};
 let mockProps = {};
 let mockSlots = {};
 
+// Mock native <dialog> methods not supported in JSDOM
+beforeAll(() => {
+  HTMLDialogElement.prototype.showModal = vi.fn(function () {
+    this.setAttribute('open', '');
+  });
+  HTMLDialogElement.prototype.close = vi.fn(function () {
+    this.removeAttribute('open');
+  });
+});
+
+afterAll(() => {
+  delete HTMLDialogElement.prototype.showModal;
+  delete HTMLDialogElement.prototype.close;
+});
+
 describe('DtModal Tests', () => {
   let wrapper;
   let closeBtn;
@@ -47,6 +62,7 @@ describe('DtModal Tests', () => {
   };
 
   beforeEach(() => {
+    vi.clearAllMocks();
     updateWrapper();
   });
 
@@ -56,15 +72,13 @@ describe('DtModal Tests', () => {
     wrapper.unmount();
   });
 
-  afterAll(() => {
-    // Restore RequestAnimationFrame and cancelAnimationFrame
-    global.requestAnimationFrame = undefined;
-    global.cancelAnimationFrame = undefined;
-  });
-
   describe('Presentation Tests', () => {
     it('should render the component', () => {
       expect(wrapper.exists()).toBe(true);
+    });
+
+    it('should render using a native dialog element', () => {
+      expect(overlay.element.tagName).toBe('DIALOG');
     });
 
     it('should render the title content', () => {
@@ -92,6 +106,10 @@ describe('DtModal Tests', () => {
 
     it('Should set default banner kind when no kind is set', async () => {
       expect(banner.classes(MODAL_BANNER_KINDS[DtModal.props.bannerKind.default])).toBe(true);
+    });
+
+    it('Should call showModal when show is true', () => {
+      expect(overlay.element.showModal).toHaveBeenCalled();
     });
 
     describe('When hideClose prop is true', () => {
@@ -162,13 +180,19 @@ describe('DtModal Tests', () => {
       expect(wrapper.emitted()[SYNC_EVENT_NAME][0][0]).toBe(false);
     });
 
-    it('Should emit a sync-able update event when escape key is pressed', async () => {
+    it('Should emit a sync-able update event when cancel event fires (escape key)', async () => {
       expect(wrapper.emitted(SYNC_EVENT_NAME)).toBeFalsy();
 
-      await overlay.trigger('keydown', { code: 'Escape' });
+      await overlay.trigger('cancel');
 
       expect(wrapper.emitted()[SYNC_EVENT_NAME].length).toBe(1);
       expect(wrapper.emitted()[SYNC_EVENT_NAME][0][0]).toBe(false);
+    });
+
+    it('Should emit keydown event to parent', async () => {
+      await overlay.trigger('keydown', { code: 'Escape' });
+
+      expect(wrapper.emitted().keydown).toBeTruthy();
     });
   });
 

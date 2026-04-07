@@ -796,7 +796,7 @@ export default {
     calculateAnchorZindex () {
       // if a modal is currently active render at modal-element z-index, otherwise at popover z-index
       if (returnFirstEl(this.$el).getRootNode()
-        .querySelector('.d-modal[aria-hidden="false"], .d-modal--transparent[aria-hidden="false"]') ||
+        .querySelector('.d-modal[aria-hidden="false"], .d-modal--transparent[aria-hidden="false"], .d-modal[open], .d-modal--transparent[open]') ||
         // Special case because we don't have any dialtone drawer component yet. Render at 650 when
         // anchor of popover is within a drawer.
         this.anchorEl?.closest('.d-zi-drawer')) {
