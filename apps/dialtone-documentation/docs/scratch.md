@@ -155,7 +155,7 @@ const checkRadioDisabled = ref(false);
 # Focusgroup directive
 
 Declarative roving tabindex for composite widgets. Manages arrow-key navigation,
-`tabindex` management, wrapping, focus memory, and disabled-item skipping — following
+`tabindex` management, looping, focus memory, and disabled-item skipping — following
 the [Open UI focusgroup proposal](https://open-ui.org/components/scoped-focusgroup.explainer/).
 
 The directive handles **focus movement only**. Activation and selection (toggling
@@ -170,10 +170,26 @@ import { DtFocusgroupDirective } from "@dialpad/dialtone-vue";
 app.use(DtFocusgroupDirective);
 ```
 
+### Basic usage
+
+Just add `v-dt-focusgroup` and any focusable child will be managed by the focusgroup.
+
+> [!WARNING] Always pair with an ARIA role
+> The directive manages keyboard focus but does not set any ARIA attributes. For screen readers to announce the widget correctly, you must provide a `role` (`toolbar`, `tablist`, `listbox`, `radiogroup`, `menu`), an accessible name (`aria-label`), and `aria-orientation` when the axis differs from the role's default. Without a role, the container is opaque to assistive technology — arrow-key cycling works, but the user has no context for what they're navigating.
+
+
+```vue demo
+<dt-stack v-dt-focusgroup direction="row" gap="100">
+  <dt-button kind="muted" importance="outlined">Button</dt-button>
+  <dt-button kind="muted" importance="outlined">Button</dt-button>
+  <dt-button kind="muted" importance="outlined">Button</dt-button>
+</dt-stack>
+```
+
 ### Token syntax
 
 ```vue demo
-<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'inline wrap'" aria-label="Formatting">
+<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal'" aria-label="Formatting">
   <dt-button kind="muted" importance="outlined">Bold</dt-button>
   <dt-button kind="muted" importance="outlined">Italic</dt-button>
   <dt-button kind="muted" importance="outlined">Underline</dt-button>
@@ -181,7 +197,7 @@ app.use(DtFocusgroupDirective);
 ```
 
 ```vue demo
-<table class="d-table dialtone-doc-table" v-dt-focusgroup="{ axis: 'block', selector: 'tbody tr' }" aria-label="Office List">
+<table class="d-table dialtone-doc-table" v-dt-focusgroup="{ axis: 'vertical', selector: 'tbody tr' }" aria-label="Office List">
   <caption class="d-table__caption">Office List</caption>
   <thead>
     <tr>
@@ -229,15 +245,66 @@ app.use(DtFocusgroupDirective);
 ```
 
 ```vue demo
-<dt-stack gap="100" role="toolbar" aria-orientation="vertical" v-dt-focusgroup="'block wrap'" aria-label="Formatting">
+<dt-stack gap="100" role="toolbar" aria-orientation="vertical" v-dt-focusgroup="'vertical'" aria-label="Formatting">
   <dt-button kind="muted" importance="outlined">Bold</dt-button>
   <dt-button kind="muted" importance="outlined">Italic</dt-button>
   <dt-button kind="muted" importance="outlined">Underline</dt-button>
 </dt-stack>
 ```
 
+### noloop — focus stops at boundaries
+
 ```vue demo
-<dt-stack role="list" v-dt-focusgroup="'block wrap'" aria-label="Contacts">
+<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal noloop'" aria-label="Pagination">
+  <dt-button kind="muted" importance="outlined">First</dt-button>
+  <dt-button kind="muted" importance="outlined">Previous</dt-button>
+  <dt-button kind="muted" importance="outlined">Next</dt-button>
+  <dt-button kind="muted" importance="outlined">Last</dt-button>
+</dt-stack>
+```
+
+### nomemory — re-entry always starts at first item
+
+```vue demo
+<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal nomemory'" aria-label="Actions">
+  <dt-button kind="muted" importance="outlined">Cut</dt-button>
+  <dt-button kind="muted" importance="outlined">Copy</dt-button>
+  <dt-button kind="muted" importance="outlined">Paste</dt-button>
+</dt-stack>
+```
+
+### Disabled items — skipped by default
+
+```vue demo
+<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal'" aria-label="Tools">
+  <dt-button kind="muted" importance="outlined">Pen</dt-button>
+  <dt-button kind="muted" importance="outlined" aria-disabled="true">Eraser (disabled)</dt-button>
+  <dt-button kind="muted" importance="outlined">Highlighter</dt-button>
+</dt-stack>
+```
+
+### noskipdisabled — disabled items remain focusable
+
+```vue demo
+<dt-stack direction="row" gap="100" role="tablist" v-dt-focusgroup="'horizontal nomemory'" aria-label="Platforms">
+  <dt-button role="tab" kind="muted" importance="outlined">Mac</dt-button>
+  <dt-button role="tab" kind="muted" importance="outlined" aria-disabled="true">Windows (disabled)</dt-button>
+  <dt-button role="tab" kind="muted" importance="outlined">Linux</dt-button>
+</dt-stack>
+```
+
+### dt-focusgroup-move event — selection follows focus
+
+```vue demo
+<dt-stack direction="row" gap="100" role="tablist" v-dt-focusgroup="'horizontal nomemory'" aria-label="Tabs" @dt-focusgroup-move="$event.detail.item.setAttribute('aria-selected', 'true'); $event.detail.previousItem.setAttribute('aria-selected', 'false')">
+  <dt-button role="tab" kind="muted" importance="outlined" aria-selected="true">One</dt-button>
+  <dt-button role="tab" kind="muted" importance="clear" aria-selected="false">Two</dt-button>
+  <dt-button role="tab" kind="muted" importance="clear" aria-selected="false">Three</dt-button>
+</dt-stack>
+```
+
+```vue demo
+<dt-stack role="list" v-dt-focusgroup="'vertical'" aria-label="Contacts">
   <dt-stack role="listitem" tabindex="0" gap="100" class="d-p-100 d-w-800 h:d-bgc-moderate-opaque fv:d-bgc-moderate-opaque d-bar8">
     <dt-stack direction="row" gap="100" class="d-w100p">
       <dt-avatar full-name="Ashanti Trevor" />
@@ -297,24 +364,15 @@ app.use(DtFocusgroupDirective);
 ### Object syntax
 
 ```vue demo
-<dt-stack gap="100" role="listbox" v-dt-focusgroup="{ axis: 'block', wrap: false }" aria-label="Fruits">
+<dt-stack gap="100" role="listbox" v-dt-focusgroup="{ axis: 'vertical', loop: false }" aria-label="Fruits">
   <dt-button role="option" kind="muted" importance="outlined">Apple</dt-button>
   <dt-button role="option" kind="muted" importance="outlined">Banana</dt-button>
 </dt-stack>
 ```
 ```vue demo
-<dt-stack direction="row" gap="100" role="listbox" aria-orientation="horizontal" v-dt-focusgroup="{ axis: 'inline', wrap: false }" aria-label="Fruits">
+<dt-stack direction="row" gap="100" role="listbox" aria-orientation="horizontal" v-dt-focusgroup="{ axis: 'horizontal', loop: false }" aria-label="Fruits">
   <dt-button role="option" kind="muted" importance="outlined">Apple</dt-button>
   <dt-button role="option" kind="muted" importance="outlined">Banana</dt-button>
-</dt-stack>
-```
-
-### No value (defaults)
-
-```vue demo
-<dt-stack direction="row" gap="100" role="radiogroup" v-dt-focusgroup aria-label="Options">
-  <dt-button role="radio" kind="muted" importance="outlined">A</dt-button>
-  <dt-button role="radio" kind="muted" importance="outlined">B</dt-button>
 </dt-stack>
 ```
 
@@ -324,7 +382,7 @@ Add `data-dt-focusgroup-skip` to exclude an element from arrow-key navigation
 (e.g., text inputs that need their own arrow keys):
 
 ```vue demo
-<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'inline wrap'">
+<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal'">
   <dt-button kind="muted" importance="outlined">Bold</dt-button>
   <dt-input data-dt-focusgroup-skip placeholder="This will be skipped" />
   <dt-button kind="muted" importance="outlined">Code</dt-button>
@@ -338,7 +396,7 @@ Add `data-dt-focusgroup-skip` to exclude an element from arrow-key navigation
 
 
 ```vue demo
-<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'inline wrap'">
+<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal'">
   <dt-button kind="muted" importance="outlined">Button</dt-button>
   <dt-link>Link</dt-link>
   <dt-select-menu
@@ -363,7 +421,7 @@ Items do not need to be direct children. The directive uses `querySelectorAll`
 on the container, finding items at any nesting depth in DOM order:
 
 ```vue demo
-<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'inline wrap'">
+<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal'">
   <dt-stack direction="row" gap="100" class="d-bgc-moderate-opaque d-p-100">
     <dt-button kind="muted" importance="outlined">btn</dt-button>
     <dt-button kind="muted" importance="outlined">btn</dt-button>
