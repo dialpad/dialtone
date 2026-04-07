@@ -9,7 +9,7 @@ const iconsList = getIconNames();
 const args = {
   leftIcon: 'video',
   title: 'This meeting has ended',
-  wrapperClass: 'd-w628',
+  class: 'd-w628',
   buttonClass: 'd-bar24',
 };
 

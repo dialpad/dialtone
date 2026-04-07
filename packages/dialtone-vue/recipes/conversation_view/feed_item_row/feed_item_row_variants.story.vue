@@ -233,7 +233,7 @@
               default-toggled
               title="Ben called you"
               icon-name="phone-outgoing"
-              wrapper-class="d-w628"
+              class="d-w628"
               border-color="ai"
             >
               <template #subtitle>

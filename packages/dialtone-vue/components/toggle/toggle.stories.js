@@ -12,7 +12,7 @@ export const argsData = {
   modelValue: false,
   onChange: action('change'),
   labelClass: 'd-mr6',
-  wrapperClass: '',
+  class: '',
 };
 
 // Prop Controls

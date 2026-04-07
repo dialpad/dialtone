@@ -8,7 +8,7 @@
       <dt-recipe-feed-item-pill
         default-toggled
         title="Ben called you"
-        wrapper-class="d-w628"
+        class="d-w628"
         border-color="ai"
       >
         <template
@@ -67,7 +67,7 @@
       <dt-recipe-feed-item-pill
         title="Missed call from Ben"
         border-color="critical"
-        wrapper-class="d-w628"
+        class="d-w628"
         :toggleable="false"
       >
         <template
@@ -102,7 +102,7 @@
       </h3>
       <dt-recipe-feed-item-pill
         title="Voicemail"
-        wrapper-class="d-w628"
+        class="d-w628"
         :toggleable="false"
       >
         <template
@@ -141,7 +141,7 @@
       <dt-recipe-feed-item-pill
         border-color="ai"
         title="Ben called you"
-        wrapper-class="d-w628"
+        class="d-w628"
         :toggleable="false"
       >
         <template
@@ -182,7 +182,7 @@
       <dt-recipe-feed-item-pill
         title="Ben started a meeting"
         button-class="d-bar24"
-        wrapper-class="d-w628"
+        class="d-w628"
         border-color="ai"
         :default-toggled="true"
       >
@@ -246,7 +246,7 @@
         title="Ben started a meeting"
         border-color="ai"
         button-class="d-bar24"
-        wrapper-class="d-w628"
+        class="d-w628"
         :toggleable="false"
       >
         <template
