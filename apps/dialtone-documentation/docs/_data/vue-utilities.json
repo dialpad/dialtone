@@ -1,0 +1,43 @@
+{
+  "directives": [
+    {
+      "name": "v-dt-focusgroup",
+      "description": "Roving tabindex for composite widgets — arrow-key cycling, looping, memory, and disabled-item handling",
+      "storybook": "https://dialtone.dialpad.com/vue/next/?path=/docs/directives-focusgroup--docs"
+    },
+    {
+      "name": "v-dt-mode",
+      "description": "Scope descendant design tokens to a light, dark, or inverted color palette",
+      "storybook": "https://dialtone.dialpad.com/vue/next/?path=/docs/directives-mode--docs"
+    },
+    {
+      "name": "v-dt-tooltip",
+      "description": "Attach a tooltip to any element without a wrapper component",
+      "storybook": "https://dialtone.dialpad.com/vue/next/?path=/docs/directives-tooltip--docs"
+    },
+    {
+      "name": "v-dt-scrollbar",
+      "description": "Replace native scrollbars with a styled overlay that auto-hides",
+      "storybook": "https://dialtone.dialpad.com/vue/next/?path=/docs/directives-scrollbar--docs"
+    }
+  ],
+  "functions": [
+    {
+      "name": "Date and Time",
+      "description": "Format dates, relative timestamps, and durations with i18n locale support",
+      "storybook": "https://dialtone.dialpad.com/vue/next/?path=/docs/functions-date-and-time--docs"
+    }
+  ],
+  "utilities": [
+    {
+      "name": "DtLazyShow",
+      "description": "Defer child rendering until first shown — reduces initial mount cost for popovers and modals",
+      "storybook": "https://dialtone.dialpad.com/vue/next/?path=/docs/utilities-lazy-show--docs"
+    },
+    {
+      "name": "Localization",
+      "description": "Singleton i18n manager that localizes strings across all Dialtone components",
+      "storybook": "https://dialtone.dialpad.com/vue/next/?path=/docs/utilities-localization--docs"
+    }
+  ]
+}
