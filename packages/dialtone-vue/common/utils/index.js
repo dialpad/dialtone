@@ -239,20 +239,12 @@ export const returnFirstEl = (el) => {
 };
 
 /**
-  Only will apply changes if the config option configVue2StyleClassAttrs is set to true. It is false by default.
-
-  Removes the class and style attributes from the $attrs. This is useful for vue 2 to vue 3 migration
-  purposes so we don't cause breaking changes due to INSTANCE_ATTRS_CLASS_STYLE
-  https://v3-migration.vuejs.org/breaking-changes/attrs-includes-class-style
-
-  Remove the class and style attributes from the v-bind like so so v-bind="removeClassStyleAttrs($attrs)",
-  and then apply them to the root element manually via:
-
-  :class="$attrs.class"
-  :style="$attrs.style"
+  In Vue 3, $attrs includes class and style attributes, but when using inheritAttrs: false
+  and manually binding :class="$attrs.class" and :style="$attrs.style" to the root element,
+  we need to prevent class/style from being passed to inner elements via v-bind="removeClassStyleAttrs($attrs)".
+  This function removes class and style attributes from the attrs object.
 */
 export function removeClassStyleAttrs (attrs) {
-  if (!configVue2StyleClassAttrs) return attrs;
   const listeners = Object.entries(attrs)
     .filter(([key]) => !['class', 'style'].includes(key));
   return Object.fromEntries(listeners);
