@@ -43,21 +43,18 @@ jobs:
         run: |
           TABLE="| Plan | Status |\n|------|--------|\n"
 
-          while IFS= read -r -d '' FILE; do
-            TITLE=$(grep -m1 "^# " "$FILE" | sed 's/^# //')
-            STATUS=$(grep -m1 "^Status:" "$FILE" | sed 's/^Status: *//' | tr -d '[:space:]')
-            [ -z "$TITLE" ] && TITLE="$(basename "$FILE" .md)"
-            [ -z "$STATUS" ] && STATUS="—"
-            TABLE="${TABLE}| \`$(basename "$FILE")\` — ${TITLE} | ${STATUS} |\n"
-          done < <(find . -maxdepth 1 -name "PLAN-*.md" -print0 2>/dev/null)
+          scan_plans() {
+            while IFS= read -r -d '' FILE; do
+              TITLE=$(grep -m1 "^# " "$FILE" | sed 's/^# //')
+              STATUS=$(grep -m1 "^Status:" "$FILE" | sed 's/^Status: *//' | tr -d '[:space:]')
+              [ -z "$TITLE" ] && TITLE="$(basename "$FILE" .md)"
+              [ -z "$STATUS" ] && STATUS="—"
+              TABLE="${TABLE}| \`$(basename "$FILE")\` — ${TITLE} | ${STATUS} |\n"
+            done
+          }
 
-          while IFS= read -r -d '' FILE; do
-            TITLE=$(grep -m1 "^# " "$FILE" | sed 's/^# //')
-            STATUS=$(grep -m1 "^Status:" "$FILE" | sed 's/^Status: *//' | tr -d '[:space:]')
-            [ -z "$TITLE" ] && TITLE="$(basename "$FILE" .md)"
-            [ -z "$STATUS" ] && STATUS="—"
-            TABLE="${TABLE}| \`$(basename "$FILE")\` — ${TITLE} | ${STATUS} |\n"
-          done < <(find ./docs/plans -maxdepth 1 -name "*.md" -print0 2>/dev/null)
+          scan_plans < <(find . -maxdepth 1 -name "PLAN-*.md" -print0 2>/dev/null)
+          scan_plans < <(find ./docs/plans -maxdepth 1 -name "*.md" -print0 2>/dev/null)
 
           BODY="## Automated Plan Cleanup\n\nThis PR removes planning docs that were merged into \`staging\` during development.\n\n### Plans removed\n\n${TABLE}\n---\n\n> **Add highlights here** — anything worth preserving from these plans (key decisions, trade-offs, context for future contributors):\n\n"
 
@@ -68,13 +65,12 @@ jobs:
           } >> "$GITHUB_OUTPUT"
 
           git rm -f PLAN-*.md --ignore-unmatch
-          git rm -rf docs/plans/ --ignore-unmatch
+          find ./docs/plans -maxdepth 1 -name "*.md" -exec git rm -f {} + 2>/dev/null || true
 
       - name: Create cleanup PR
         if: steps.check.outputs.found == 'true'
         uses: peter-evans/create-pull-request@v5
         with:
-          token: ${{ github.token }}
           branch: chore/cleanup-plan-docs
           base: staging
           commit-message: 'chore: NO-JIRA remove planning docs from staging'
