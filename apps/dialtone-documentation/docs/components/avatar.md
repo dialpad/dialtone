@@ -202,14 +202,14 @@ Provides the user's current [presence](/components/presence.md), positioned in t
 </dt-stack>
 ```
 
-### Clickable
+### Interactive
 
 Avatars that appear alongside a visible label (e.g., a user's name) are decorative and should not be focusable or announced by screen readers. This is the default behavior.
 
-Avatars that convey meaning on their own — such as navigation or actions — should be made interactive using the `clickable` prop. This renders the avatar as a `<button>` with visible focus ring and keyboard activation via Enter and Space. Provide an accessible name via `icon-aria-label` (for icon avatars), `full-name` (for initials avatars), or `image-alt` (for image avatars).
+Avatars that convey meaning on their own — such as navigation or actions — should be made interactive using the `interactive` prop. This renders the avatar as a `<button>` with visible focus ring and keyboard activation via Enter and Space. Provide an accessible name via `icon-aria-label` (for icon avatars), `full-name` (for initials avatars), or `image-alt` (for image avatars).
 
 ```vue demo
-<dt-avatar clickable icon-aria-label="user">
+<dt-avatar interactive icon-aria-label="user">
   <template #icon>
     <dt-icon-user />
   </template>
