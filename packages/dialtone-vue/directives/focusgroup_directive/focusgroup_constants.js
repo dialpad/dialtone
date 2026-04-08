@@ -107,11 +107,7 @@ export function parseConfig (value) {
  * Used by the updated hook to avoid teardown/reattach when config is semantically identical.
  */
 export function configsEqual (a, b) {
-  return a.axis === b.axis &&
-    a.loop === b.loop &&
-    a.memory === b.memory &&
-    a.selector === b.selector &&
-    a.skipDisabled === b.skipDisabled;
+  return CONFIG_KEYS.every(key => a[key] === b[key]);
 }
 
 /**

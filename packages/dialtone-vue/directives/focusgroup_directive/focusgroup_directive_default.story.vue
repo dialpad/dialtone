@@ -118,10 +118,10 @@
       class="d-fc-tertiary"
     >
       Up/Down navigates. No loop. Disabled item skipped.
-      <code>v-dt-focusgroup="'block noloop'"</code>
+      <code>v-dt-focusgroup="'vertical noloop'"</code>
     </dt-text>
     <div
-      v-dt-focusgroup="'block noloop'"
+      v-dt-focusgroup="'vertical noloop'"
       role="listbox"
       aria-label="Fruits"
       class="d-ba d-bc-subtle d-bar8 d-of-hidden"

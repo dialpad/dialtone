@@ -448,7 +448,7 @@ describe('DtFocusgroupDirective', () => {
     });
 
     it('should respect explicit skipdisabled override on tablist', async () => {
-      loopper = mountWithConfig('inline loop skipdisabled', `
+      loopper = mountWithConfig('horizontal skipdisabled', `
         <div role="tablist" v-dt-focusgroup="config" data-qa="container">
           <button role="tab" data-qa="item-0">Tab 1</button>
           <button role="tab" data-qa="item-1" aria-disabled="true">Tab 2</button>

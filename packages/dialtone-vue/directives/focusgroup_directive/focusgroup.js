@@ -227,10 +227,6 @@ export const DtFocusgroupDirective = {
           const enabledIndex = items.findIndex(item => !isDisabled(item));
           if (enabledIndex !== -1) initialIndex = enabledIndex;
         }
-        // When memory is off, always start at first item (no restore)
-        if (!config.memory) {
-          state.lastFocusedIndex = 0;
-        }
         setRovingTabindex(items, initialIndex);
       }
 
