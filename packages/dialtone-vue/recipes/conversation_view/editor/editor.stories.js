@@ -2,7 +2,7 @@ import { action } from 'storybook/actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeEditor from './editor.vue';
 import DtRecipeEditorDefault from './editor_default.story.vue';
-import DtRecipeEditorWithVariables from './editor_with_variables.story.vue';
+import DtRecipeEditorSignature from './editor_signature.story.vue';
 
 /*
   Controls
@@ -89,10 +89,10 @@ const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   DtRecipeEditorDefault,
 );
 
-const WithVariablesTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+const SignatureTemplate = (args, { argTypes }) => createTemplateFromVueFile(
   args,
   argTypes,
-  DtRecipeEditorWithVariables,
+  DtRecipeEditorSignature,
 );
 
 // Stories
@@ -101,7 +101,7 @@ export const Default = {
   args: {},
 };
 
-export const WithVariables = {
-  render: WithVariablesTemplate,
+export const Signature = {
+  render: SignatureTemplate,
   args: {},
 };

@@ -1,3 +1,50 @@
+## [3.218.4](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.218.3...dialtone-vue/v3.218.4) (2026-04-02)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DP-179946 fix suggestion list positioning ([#1155](https://github.com/dialpad/dialtone/issues/1155)) ([fdbe45b](https://github.com/dialpad/dialtone/commit/fdbe45bb61ef2264f7535e6e1d2325ba641d445d))
+
+## [3.218.3](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.218.2...dialtone-vue/v3.218.3) (2026-03-31)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DLT-3190 replace custom JSON-to-markdown converter with @tiptap/static-renderer ([#1148](https://github.com/dialpad/dialtone/issues/1148)) ([9629c70](https://github.com/dialpad/dialtone/commit/9629c70e8898cac5d79df0229f83f3671d739b83))
+
+
+### Documentation
+
+* **Editor:** DLT-3050 updated editor docs with recent changes ([#1139](https://github.com/dialpad/dialtone/issues/1139)) ([04bfabb](https://github.com/dialpad/dialtone/commit/04bfabbd9e01ca47ba0fe236d8e3af74e6747cdd))
+
+## [3.218.2](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.218.1...dialtone-vue/v3.218.2) (2026-03-24)
+
+
+### Bug Fixes
+
+* **Input:** DP-180970 ime composition bug ([#1146](https://github.com/dialpad/dialtone/issues/1146)) ([af6afdd](https://github.com/dialpad/dialtone/commit/af6afddfa04a13bf63885972797bece8815e2a5d))
+
+## [3.218.1](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.218.0...dialtone-vue/v3.218.1) (2026-03-20)
+
+
+### Bug Fixes
+
+* **Input:** revert DP-173960 handle composition events ([#1082](https://github.com/dialpad/dialtone/issues/1082)) ([ba81d87](https://github.com/dialpad/dialtone/commit/ba81d87b1a2e64672aab5d22d2b8f4e3774994b2))
+
+# [3.218.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.217.1...dialtone-vue/v3.218.0) (2026-03-20)
+
+
+### Features
+
+* **Editor:** DP-181154 replacing 0 width tables with full width ([#1145](https://github.com/dialpad/dialtone/issues/1145)) ([6aa8a1d](https://github.com/dialpad/dialtone/commit/6aa8a1d0a06531a5abf2691138b331c2d241702e))
+
+## [3.217.1](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.217.0...dialtone-vue/v3.217.1) (2026-03-19)
+
+
+### Bug Fixes
+
+* **Combobox Multi Select:** DP-180791 cursor position ([#1141](https://github.com/dialpad/dialtone/issues/1141)) ([bbf4cd1](https://github.com/dialpad/dialtone/commit/bbf4cd11c91a7e06f40f3bb9fea23171f52e4945))
+
 # [3.217.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.216.0...dialtone-vue/v3.217.0) (2026-03-19)
 
 

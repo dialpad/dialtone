@@ -286,6 +286,7 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import DtRecipeFeedItemRow from './feed_item_row.vue';
 
 import { DtRecipeEmojiRow } from '../emoji_row';
@@ -299,7 +300,7 @@ import { DtButton } from '@/components/button';
 import { useMockReactions } from '@/recipes/conversation_view/emoji_row/composables/useMockReactions.js';
 import fryImage from '@/common/assets/fry.gif';
 
-const fadeState = 'SEARCHED';
+const fadeState = ref('SEARCHED');
 const hoverButtons = ['bell', 'living-thing', 'map-pin'];
 const persons = ['Jim Halpert', 'Michael Scott', 'Pam'];
 const { mockReactions } = useMockReactions();

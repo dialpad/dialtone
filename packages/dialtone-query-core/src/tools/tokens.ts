@@ -14,7 +14,7 @@ import type {
 /**
  * Search design tokens using simple AND-logic (like Dialtone docs site)
  */
-export function searchTokens(query: string, data: TokensData): { results: SearchResult[]; notes: string[] } {
+export function searchTokens(query: string, data: TokensData, options?: { includeHsl?: boolean }): { results: SearchResult[]; notes: string[] } {
   console.error(`\n[TOKEN SEARCH DEBUG] Query: "${query}"`);
 
   // Normalize query: lowercase, replace hyphens/slashes with spaces
@@ -55,6 +55,14 @@ export function searchTokens(query: string, data: TokensData): { results: Search
     // Skip component-specific tokens (not general design tokens)
     // Only include tokens that start with --dt- or --base-- (like the docs site does)
     if (!tokenName.startsWith('--dt-') && !tokenName.startsWith('--base--')) {
+      continue;
+    }
+
+    // Skip HSL decomposition tokens. These are machine-generated for
+    // programmatic color manipulation and will be removed in a future release.
+    // Pattern: base token + one of (-h, -s, -l, -a, -hsl, -hsla)
+    // Only filter color tokens to avoid false positives on non-color tokens.
+    if (!options?.includeHsl && /^--dt-.*color.*-(h|s|l|a|hsl|hsla)$/.test(tokenName)) {
       continue;
     }
 

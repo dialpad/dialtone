@@ -15,6 +15,7 @@ const postcssEntries = glob.sync('./postcss/*.js').reduce((entries, path) => {
 // https://vitejs.dev/config/
 export default defineConfig({
   build: {
+    target: 'es2020',
     emptyOutDir: false,
     lib: {
       entry: {
@@ -23,7 +24,7 @@ export default defineConfig({
       },
       formats: ['es', 'cjs'],
     },
-    rollupOptions: {
+    rolldownOptions: {
       output: {
         minifyInternalExports: true,
         chunkFileNames: () => 'themes/chunks/[name]-[hash].js',
