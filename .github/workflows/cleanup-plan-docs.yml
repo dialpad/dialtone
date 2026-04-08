@@ -64,9 +64,9 @@ jobs:
           BODY="## Automated Plan Cleanup\n\nThis PR removes planning docs that were merged into \`staging\` during development.\n\n### Plans removed\n\n${TABLE}\n---\n\n> **Add highlights here** — anything worth preserving from these plans (key decisions, trade-offs, context for future contributors):\n\n"
 
           {
-            echo 'pr_body<<EOF'
+            echo 'pr_body<<CLEANUP_PR_BODY'
             printf '%b' "$BODY"
-            echo 'EOF'
+            echo 'CLEANUP_PR_BODY'
           } >> "$GITHUB_OUTPUT"
 
           git rm -f PLAN-*.md --ignore-unmatch
