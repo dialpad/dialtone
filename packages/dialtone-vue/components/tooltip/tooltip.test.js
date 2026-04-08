@@ -270,10 +270,11 @@ describe('DtTooltip tests', () => {
         expect(tooltipZIndex).toBeGreaterThan(650); // Greater than modal-element z-index
       });
 
-      it('should have higher z-index when modal without aria-hidden is present', async () => {
-        // Create a mock modal element without aria-hidden attribute
-        const modalElement = document.createElement('div');
+      it('should have higher z-index when native dialog modal is open', async () => {
+        // Create a mock native dialog modal with [open] attribute
+        const modalElement = document.createElement('dialog');
         modalElement.className = 'd-modal';
+        modalElement.setAttribute('open', '');
         document.body.appendChild(modalElement);
 
         mockProps = { show: true };
