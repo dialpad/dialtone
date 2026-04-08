@@ -279,7 +279,7 @@ Add `data-dt-focusgroup-skip` to exclude an element from arrow-key navigation
 (e.g., text inputs that need their own arrow keys):
 
 ```vue demo
-<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal'">
+<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal'" aria-label="Formatting with opt-out">
   <dt-button kind="muted" importance="outlined">Bold</dt-button>
   <dt-input data-dt-focusgroup-skip placeholder="This will be skipped" />
   <dt-button kind="muted" importance="outlined">Code</dt-button>
@@ -291,7 +291,7 @@ Add `data-dt-focusgroup-skip` to exclude an element from arrow-key navigation
 ### Mixed focusable elements
 
 ```vue demo
-<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal'">
+<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal'" aria-label="Mixed elements">
   <dt-button kind="muted" importance="outlined">Button</dt-button>
   <dt-link>Link</dt-link>
   <dt-select-menu
@@ -316,7 +316,7 @@ Items do not need to be direct children. The directive uses `querySelectorAll`
 on the container, finding items at any nesting depth in DOM order:
 
 ```vue demo
-<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal'">
+<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal'" aria-label="Nested groups">
   <dt-stack direction="row" gap="100" class="d-bgc-moderate-opaque d-p-100">
     <dt-button kind="muted" importance="outlined">btn</dt-button>
     <dt-button kind="muted" importance="outlined">btn</dt-button>

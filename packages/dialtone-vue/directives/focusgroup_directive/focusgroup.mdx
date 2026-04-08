@@ -21,6 +21,32 @@ import { DtFocusgroupDirective } from "@dialpad/dialtone-vue";
 app.use(DtFocusgroupDirective);
 ```
 
+### Important: always pair with ARIA
+
+The directive manages keyboard focus but does not set any ARIA attributes. For
+screen readers to announce the widget correctly, you must provide:
+
+- A `role` (`toolbar`, `tablist`, `listbox`, `radiogroup`, `menu`, `menubar` — or any other role; these have smart defaults)
+- An accessible name (`aria-label` or `aria-labelledby`)
+- `aria-orientation` when the axis differs from the role's default
+
+Without a role, the container is opaque to assistive technology — arrow-key
+cycling works, but the user has no context for what they're navigating.
+
+Two ESLint rules in `eslint-plugin-dialtone` catch these omissions:
+
+- `dialtone/focusgroup-requires-role` — warns when `v-dt-focusgroup` is used without a `role`
+- `dialtone/focusgroup-requires-label` — warns when `v-dt-focusgroup` is used without `aria-label` or `aria-labelledby`
+
+Enable them in your ESLint config:
+
+```js
+rules: {
+  'dialtone/focusgroup-requires-role': 'warn',
+  'dialtone/focusgroup-requires-label': 'warn',
+}
+```
+
 ### Token syntax
 
 ```html
@@ -137,39 +163,13 @@ keys. Use it to implement selection-follows-focus:
 </dt-stack>
 ```
 
-### Important: always pair with ARIA
-
-The directive manages keyboard focus but does not set any ARIA attributes. For
-screen readers to announce the widget correctly, you must provide:
-
-- A `role` (`toolbar`, `tablist`, `listbox`, `radiogroup`, `menu`)
-- An accessible name (`aria-label` or `aria-labelledby`)
-- `aria-orientation` when the axis differs from the role's default
-
-Without a role, the container is opaque to assistive technology — arrow-key
-cycling works, but the user has no context for what they're navigating.
-
-Two ESLint rules in `eslint-plugin-dialtone` catch these omissions:
-
-- `dialtone/focusgroup-requires-role` — warns when `v-dt-focusgroup` is used without a `role`
-- `dialtone/focusgroup-requires-label` — warns when `v-dt-focusgroup` is used without `aria-label` or `aria-labelledby`
-
-Enable them in your ESLint config:
-
-```js
-rules: {
-  'dialtone/focusgroup-requires-role': 'warn',
-  'dialtone/focusgroup-requires-label': 'warn',
-}
-```
-
 ### Item opt-out
 
 Add `data-dt-focusgroup-skip` to exclude an element from arrow-key navigation
 (e.g., text inputs that need their own arrow keys):
 
 ```html
-<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal'">
+<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal'" aria-label="Formatting with opt-out">
   <dt-button kind="muted" importance="outlined">Bold</dt-button>
   <dt-input data-dt-focusgroup-skip placeholder="Skipped" />
   <dt-button kind="muted" importance="outlined">Code</dt-button>
@@ -182,7 +182,7 @@ The directive cycles through any focusable element matched by the selector,
 regardless of element type:
 
 ```html
-<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal'">
+<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal'" aria-label="Mixed elements">
   <dt-button kind="muted" importance="outlined">Button</dt-button>
   <dt-link>Link</dt-link>
   <dt-select-menu
@@ -203,7 +203,7 @@ Items do not need to be direct children. The directive uses `querySelectorAll`
 on the container, finding items at any nesting depth in DOM order:
 
 ```html
-<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal'">
+<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal'" aria-label="Nested groups">
   <dt-stack direction="row" gap="100" class="d-bgc-moderate-opaque d-p-100">
     <dt-button kind="muted" importance="outlined">btn</dt-button>
     <dt-button kind="muted" importance="outlined">btn</dt-button>
@@ -226,53 +226,18 @@ Space-separated string tokens configure the directive behavior:
 
 <table>
   <thead>
-    <tr>
-      <th>Token</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
+    <tr><th>Token</th><th>Description</th><th>Default</th></tr>
   </thead>
   <tbody>
-    <tr>
-      <td><code>horizontal</code></td>
-      <td>Left/Right arrow keys only</td>
-      <td rowSpan="3"><code>both</code></td>
-    </tr>
-    <tr>
-      <td><code>vertical</code></td>
-      <td>Up/Down arrow keys only</td>
-    </tr>
-    <tr>
-      <td><code>both</code></td>
-      <td>All four arrow keys (Left/Up = prev, Right/Down = next)</td>
-    </tr>
-    <tr>
-      <td><code>loop</code></td>
-      <td>Focus loops from last to first and vice versa</td>
-      <td rowSpan="2"><code>loop</code></td>
-    </tr>
-    <tr>
-      <td><code>noloop</code></td>
-      <td>Focus stops at boundaries</td>
-    </tr>
-    <tr>
-      <td><code>memory</code></td>
-      <td>Re-entry restores last focused item</td>
-      <td rowSpan="2"><code>memory</code></td>
-    </tr>
-    <tr>
-      <td><code>nomemory</code></td>
-      <td>Re-entry always starts at first item</td>
-    </tr>
-    <tr>
-      <td><code>skipdisabled</code></td>
-      <td>Arrow keys skip disabled items</td>
-      <td rowSpan="2">Role-aware</td>
-    </tr>
-    <tr>
-      <td><code>noskipdisabled</code></td>
-      <td>Disabled items remain focusable (e.g., tabs)</td>
-    </tr>
+    <tr><td><code>horizontal</code></td><td>Left/Right arrow keys only</td><td><code>both</code></td></tr>
+    <tr><td><code>vertical</code></td><td>Up/Down arrow keys only</td><td><code>both</code></td></tr>
+    <tr><td><code>both</code></td><td>All four arrow keys (Left/Up = prev, Right/Down = next)</td><td><code>both</code></td></tr>
+    <tr><td><code>loop</code></td><td>Focus loops from last to first and vice versa</td><td><code>loop</code></td></tr>
+    <tr><td><code>noloop</code></td><td>Focus stops at boundaries</td><td><code>loop</code></td></tr>
+    <tr><td><code>memory</code></td><td>Re-entry restores last focused item</td><td><code>memory</code></td></tr>
+    <tr><td><code>nomemory</code></td><td>Re-entry always starts at first item</td><td><code>memory</code></td></tr>
+    <tr><td><code>skipdisabled</code></td><td>Arrow keys skip disabled items</td><td>Role-aware</td></tr>
+    <tr><td><code>noskipdisabled</code></td><td>Disabled items remain focusable (e.g., tabs)</td><td>Role-aware</td></tr>
   </tbody>
 </table>
 
@@ -282,44 +247,14 @@ The object syntax accepts the same options as named properties:
 
 <table>
   <thead>
-    <tr>
-      <th>Property</th>
-      <th>Type</th>
-      <th>Default</th>
-      <th>Description</th>
-    </tr>
+    <tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr>
   </thead>
   <tbody>
-    <tr>
-      <td><code>axis</code></td>
-      <td><code>'horizontal' | 'vertical' | 'both'</code></td>
-      <td><code>'both'</code></td>
-      <td>Which arrow keys respond</td>
-    </tr>
-    <tr>
-      <td><code>loop</code></td>
-      <td><code>boolean</code></td>
-      <td><code>true</code></td>
-      <td>Wrap at boundaries</td>
-    </tr>
-    <tr>
-      <td><code>memory</code></td>
-      <td><code>boolean</code></td>
-      <td><code>true</code></td>
-      <td>Remember last focused item</td>
-    </tr>
-    <tr>
-      <td><code>selector</code></td>
-      <td><code>string | null</code></td>
-      <td>Role-aware</td>
-      <td>CSS selector for focusable items</td>
-    </tr>
-    <tr>
-      <td><code>skipDisabled</code></td>
-      <td><code>boolean | null</code></td>
-      <td>Role-aware</td>
-      <td>Whether to skip disabled items</td>
-    </tr>
+    <tr><td><code>axis</code></td><td><code>'horizontal' | 'vertical' | 'both'</code></td><td><code>'both'</code></td><td>Which arrow keys respond</td></tr>
+    <tr><td><code>loop</code></td><td><code>boolean</code></td><td><code>true</code></td><td>Loop at boundaries</td></tr>
+    <tr><td><code>memory</code></td><td><code>boolean</code></td><td><code>true</code></td><td>Remember last focused item</td></tr>
+    <tr><td><code>selector</code></td><td><code>string | null</code></td><td>Role-aware</td><td>CSS selector for focusable items</td></tr>
+    <tr><td><code>skipDisabled</code></td><td><code>boolean | null</code></td><td>Role-aware</td><td>Whether to skip disabled items</td></tr>
   </tbody>
 </table>
 
@@ -330,43 +265,15 @@ defaults from the container's `role` attribute:
 
 <table>
   <thead>
-    <tr>
-      <th>Container role</th>
-      <th>Default selector</th>
-      <th>Skip disabled?</th>
-    </tr>
+    <tr><th>Container role</th><th>Default selector</th><th>Skip disabled?</th></tr>
   </thead>
   <tbody>
-    <tr>
-      <td><code>tablist</code></td>
-      <td><code>[role="tab"]</code></td>
-      <td>No (disabled tabs remain focusable)</td>
-    </tr>
-    <tr>
-      <td><code>radiogroup</code></td>
-      <td><code>[role="radio"]</code></td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td><code>listbox</code></td>
-      <td><code>[role="option"]</code></td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td><code>menu</code> / <code>menubar</code></td>
-      <td><code>[role="menuitem"], ...</code></td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td><code>toolbar</code></td>
-      <td>All focusable elements</td>
-      <td>Yes</td>
-    </tr>
-    <tr>
-      <td><em>(other)</em></td>
-      <td>All focusable elements</td>
-      <td>Yes</td>
-    </tr>
+    <tr><td><code>tablist</code></td><td><code>[role="tab"]</code></td><td>No (disabled tabs remain focusable)</td></tr>
+    <tr><td><code>radiogroup</code></td><td><code>[role="radio"]</code></td><td>Yes</td></tr>
+    <tr><td><code>listbox</code></td><td><code>[role="option"]</code></td><td>Yes</td></tr>
+    <tr><td><code>menu</code> / <code>menubar</code></td><td><code>[role="menuitem"], ...</code></td><td>Yes</td></tr>
+    <tr><td><code>toolbar</code></td><td>All focusable elements</td><td>Yes</td></tr>
+    <tr><td><em>(other)</em></td><td>All focusable elements</td><td>Yes</td></tr>
   </tbody>
 </table>
 
@@ -389,33 +296,13 @@ The `event.detail` payload:
 
 <table>
   <thead>
-    <tr>
-      <th>Property</th>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
+    <tr><th>Property</th><th>Type</th><th>Description</th></tr>
   </thead>
   <tbody>
-    <tr>
-      <td><code>item</code></td>
-      <td><code>HTMLElement</code></td>
-      <td>The newly focused element</td>
-    </tr>
-    <tr>
-      <td><code>index</code></td>
-      <td><code>number</code></td>
-      <td>Index of the newly focused item</td>
-    </tr>
-    <tr>
-      <td><code>previousItem</code></td>
-      <td><code>HTMLElement</code></td>
-      <td>The previously focused element</td>
-    </tr>
-    <tr>
-      <td><code>previousIndex</code></td>
-      <td><code>number</code></td>
-      <td>Index of the previously focused item</td>
-    </tr>
+    <tr><td><code>item</code></td><td><code>HTMLElement</code></td><td>The newly focused element</td></tr>
+    <tr><td><code>index</code></td><td><code>number</code></td><td>Index of the newly focused item</td></tr>
+    <tr><td><code>previousItem</code></td><td><code>HTMLElement</code></td><td>The previously focused element</td></tr>
+    <tr><td><code>previousIndex</code></td><td><code>number</code></td><td>Index of the previously focused item</td></tr>
   </tbody>
 </table>
 
@@ -423,33 +310,25 @@ The `event.detail` payload:
 
 <table>
   <thead>
-    <tr>
-      <th>Key</th>
-      <th>Behavior</th>
-    </tr>
+    <tr><th>Key</th><th>Behavior</th></tr>
   </thead>
   <tbody>
-    <tr>
-      <td>Arrow Right / Arrow Down</td>
-      <td>Move to next item (when axis allows)</td>
-    </tr>
-    <tr>
-      <td>Arrow Left / Arrow Up</td>
-      <td>Move to previous item (when axis allows)</td>
-    </tr>
-    <tr>
-      <td>Home</td>
-      <td>Move to first enabled item</td>
-    </tr>
-    <tr>
-      <td>End</td>
-      <td>Move to last enabled item</td>
-    </tr>
+    <tr><td>Arrow Right / Arrow Down</td><td>Move to next item (when axis allows)</td></tr>
+    <tr><td>Arrow Left / Arrow Up</td><td>Move to previous item (when axis allows)</td></tr>
+    <tr><td>Home</td><td>Move to first enabled item</td></tr>
+    <tr><td>End</td><td>Move to last enabled item</td></tr>
   </tbody>
 </table>
 
 Arrow direction is RTL-aware: in right-to-left contexts, Left arrow moves
 forward and Right arrow moves backward on the horizontal axis.
+
+## Limitations
+
+- **Nesting**: Multiple `v-dt-focusgroup` directives can be nested (e.g., a toolbar inside a treeview), but each instance is independent. The outer focusgroup does not automatically skip over a nested focusgroup's subtree during item discovery. This mostly works when the two use different axes (e.g., outer `vertical`, inner `horizontal`), but may behave unexpectedly if both respond to the same arrow keys. Use distinct axis values to avoid conflicts.
+- **2D grid navigation**: Not supported. All navigation is 1D (linear DOM order). A future `grid` token or separate directive may address this.
+- **`aria-activedescendant`**: The directive uses roving tabindex (actual DOM focus moves between items). It does not support the `aria-activedescendant` pattern where the container retains focus and items are "virtually" focused. Use the `keyboard_list_navigation` mixin for that model.
+- **RTL**: Direction is resolved at mount time. If `dir` changes dynamically without remounting, the directive won't pick it up.
 
 ## Accessibility: `aria-orientation`
 
@@ -463,38 +342,14 @@ navigation cues (e.g., "use Left/Right" when Up/Down is what works).
 
 <table>
   <thead>
-    <tr>
-      <th>Role</th>
-      <th>Implicit default</th>
-      <th>When to add <code>aria-orientation</code></th>
-    </tr>
+    <tr><th>Role</th><th>Implicit default</th><th>When to add <code>aria-orientation</code></th></tr>
   </thead>
   <tbody>
-    <tr>
-      <td><code>toolbar</code></td>
-      <td>horizontal</td>
-      <td>Add <code>aria-orientation="vertical"</code> when using <code>axis: 'vertical'</code></td>
-    </tr>
-    <tr>
-      <td><code>tablist</code></td>
-      <td>horizontal</td>
-      <td>Add <code>aria-orientation="vertical"</code> when using <code>axis: 'vertical'</code></td>
-    </tr>
-    <tr>
-      <td><code>listbox</code></td>
-      <td>vertical</td>
-      <td>Add <code>aria-orientation="horizontal"</code> when using <code>axis: 'horizontal'</code></td>
-    </tr>
-    <tr>
-      <td><code>menu</code></td>
-      <td>vertical</td>
-      <td>Add <code>aria-orientation="horizontal"</code> when using <code>axis: 'horizontal'</code></td>
-    </tr>
-    <tr>
-      <td><code>radiogroup</code></td>
-      <td>undefined</td>
-      <td>Always set it explicitly</td>
-    </tr>
+    <tr><td><code>toolbar</code></td><td>horizontal</td><td>Add <code>aria-orientation="vertical"</code> when using <code>axis: 'vertical'</code></td></tr>
+    <tr><td><code>tablist</code></td><td>horizontal</td><td>Add <code>aria-orientation="vertical"</code> when using <code>axis: 'vertical'</code></td></tr>
+    <tr><td><code>listbox</code></td><td>vertical</td><td>Add <code>aria-orientation="horizontal"</code> when using <code>axis: 'horizontal'</code></td></tr>
+    <tr><td><code>menu</code></td><td>vertical</td><td>Add <code>aria-orientation="horizontal"</code> when using <code>axis: 'horizontal'</code></td></tr>
+    <tr><td><code>radiogroup</code></td><td>undefined</td><td>Always set it explicitly</td></tr>
   </tbody>
 </table>
 
@@ -536,7 +391,7 @@ interactive content within a row.
 
 ### Inbox
 
-A vertical list using `DtRecipeContactRow`. Up/Down cycles contacts.
+A vertical list using `DtRecipeContactRow`. Up/Down cycles all focusable elements.
 
 ```html
 <dt-stack role="list" v-dt-focusgroup="'vertical'" aria-label="Contacts" gap="0">
@@ -549,7 +404,7 @@ A vertical list using `DtRecipeContactRow`. Up/Down cycles contacts.
 
 ### Contact list
 
-A vertical list of rich content items built with Dialtone primitives. Up/Down cycles contacts.
+A vertical list of rich content items built with Dialtone primitives. Up/Down cycles all focusable elements.
 
 ```html
 <dt-stack role="list" v-dt-focusgroup="'vertical'" aria-label="Contacts">
