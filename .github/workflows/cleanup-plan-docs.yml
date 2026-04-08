@@ -30,10 +30,7 @@ jobs:
         id: check
         run: |
           PLAN_FILES=$(find . -maxdepth 1 -name "PLAN-*.md" 2>/dev/null || true)
-          DOCS_FILES=""
-          if [ -d "./docs/plans" ]; then
-            DOCS_FILES=$(find ./docs/plans -maxdepth 1 -name "*.md" 2>/dev/null || true)
-          fi
+          DOCS_FILES=$(find ./docs/plans -maxdepth 1 -name "*.md" 2>/dev/null || true)
           if [ -z "$PLAN_FILES" ] && [ -z "$DOCS_FILES" ]; then
             echo "found=false" >> "$GITHUB_OUTPUT"
           else
@@ -57,9 +54,7 @@ jobs:
           }
 
           scan_plans < <(find . -maxdepth 1 -name "PLAN-*.md" -print0 2>/dev/null || true)
-          if [ -d "./docs/plans" ]; then
-            scan_plans < <(find ./docs/plans -maxdepth 1 -name "*.md" -print0 2>/dev/null || true)
-          fi
+          scan_plans < <(find ./docs/plans -maxdepth 1 -name "*.md" -print0 2>/dev/null || true)
 
           BODY="## Automated Plan Cleanup\n\nThis PR removes planning docs that were merged into \`staging\` during development.\n\n### Plans removed\n\n${TABLE}\n---\n\n> **Add highlights here** — anything worth preserving from these plans (key decisions, trade-offs, context for future contributors):\n\n"
 
@@ -70,9 +65,7 @@ jobs:
           } >> "$GITHUB_OUTPUT"
 
           git rm -f PLAN-*.md --ignore-unmatch
-          if [ -d "./docs/plans" ]; then
-            find ./docs/plans -maxdepth 1 -name "*.md" -exec git rm -f {} + 2>/dev/null || true
-          fi
+          find ./docs/plans -maxdepth 1 -name "*.md" -exec git rm -f {} + 2>/dev/null || true
 
       - name: Create cleanup PR
         if: steps.check.outputs.found == 'true'
