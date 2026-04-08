@@ -22,10 +22,14 @@ jobs:
     permissions:
       contents: read
       pull-requests: write
+      id-token: write
 
     concurrency:
-      group: claude-review-${{ github.event.pull_request.number || inputs.pr_number }}
+      group: claude-review-${{ github.event.pull_request.number || inputs.pr_number }}-${{ github.event.label.name || 'manual' }}
       cancel-in-progress: true
+
+    env:
+      REPO_DIR: ${{ github.workspace }}
 
     steps:
       - name: Resolve PR number
@@ -40,14 +44,22 @@ jobs:
       - name: Checkout base branch (never PR code — prevents prompt injection via attacker files)
         uses: actions/checkout@v4
         with:
+          persist-credentials: false
           fetch-depth: 1
           ref: ${{ github.event.pull_request.base.sha || github.sha }}
+
+      - name: Set up sandboxed tools
+        run: |
+          chmod +x .github/scripts/safe-read.sh .github/scripts/safe-grep.sh .github/scripts/safe-glob.sh
+          ln -s "$GITHUB_WORKSPACE/.github/scripts/safe-read.sh" /usr/local/bin/safe-read
+          ln -s "$GITHUB_WORKSPACE/.github/scripts/safe-grep.sh" /usr/local/bin/safe-grep
+          ln -s "$GITHUB_WORKSPACE/.github/scripts/safe-glob.sh" /usr/local/bin/safe-glob
 
       - name: Run Claude Code Review
         uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          claude_args: '--max-turns 20 --allowed-tools "Bash(gh pr diff:*),Bash(gh pr view:*),Read, Glob, Grep"'
+          claude_args: '--max-turns 20 --tools "Bash" --allowed-tools "Bash(gh pr diff:*),Bash(gh pr view:*),Bash(safe-read:*),Bash(safe-grep:*),Bash(safe-glob:*)"'
           prompt: |
             You are reviewing a pull request for Dialtone, Dialpad's public design system monorepo.
             Breaking changes here have blast radius across all Dialpad products and external consumers.
@@ -55,10 +67,19 @@ jobs:
             PR NUMBER: ${{ steps.pr.outputs.number }}
             REPO: ${{ github.repository }}
 
+            ## Tools
+
+            You have sandboxed file-access tools that only work within the repository:
+            - `safe-read <file>` — read a file (like cat -n)
+            - `safe-grep <pattern> [path]` — search file contents (like grep -rn)
+            - `safe-glob <pattern> [path]` — find files by name pattern (like find -name)
+
+            Do NOT attempt to use Read, Glob, or Grep directly. Use the safe-* commands above.
+
             ## Steps
 
             1. Get the diff: `gh pr diff ${{ steps.pr.outputs.number }}`
-            2. Read relevant source files from the base branch for full context on changed code
+            2. Read relevant source files using `safe-read <file>` for full context on changed code
             3. Post inline review comments using the PR Review API (see format below)
             4. If the PR has NO issues, post nothing. Do not comment just to say "looks good".
 
