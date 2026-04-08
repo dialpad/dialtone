@@ -597,6 +597,122 @@ describe('DtFocusgroupDirective', () => {
     });
   });
 
+  // ── nomemory / focusout ──────────────────────────────────
+
+  describe('nomemory focusout reset', () => {
+    it('should reset tabindex to first item when focus leaves container with nomemory', async () => {
+      loopper = mountWithConfig('horizontal nomemory', `
+        <div role="toolbar" v-dt-focusgroup="config" data-qa="container">
+          <button data-qa="item-0">A</button>
+          <button data-qa="item-1">B</button>
+          <button data-qa="item-2">C</button>
+        </div>
+      `);
+
+      const container = loopper.find('[data-qa="container"]');
+      const item2 = loopper.find('[data-qa="item-2"]');
+
+      // Focus third item via arrow keys
+      loopper.find('[data-qa="item-0"]').element.focus();
+      await container.trigger('keydown', { key: 'ArrowRight' });
+      await container.trigger('keydown', { key: 'ArrowRight' });
+
+      expect(document.activeElement).toBe(item2.element);
+
+      // Simulate focus leaving the container
+      container.element.dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: document.body }));
+      await loopper.vm.$nextTick();
+
+      // tabindex should reset to first item
+      expect(loopper.find('[data-qa="item-0"]').attributes('tabindex')).toBe('0');
+      expect(item2.attributes('tabindex')).toBe('-1');
+    });
+
+    it('should NOT reset tabindex when focus leaves container with memory (default)', async () => {
+      loopper = mountToolbar();
+      const container = loopper.find('[data-qa="container"]');
+      const item2 = loopper.find('[data-qa="item-2"]');
+
+      // Focus third item
+      loopper.find('[data-qa="item-0"]').element.focus();
+      await container.trigger('keydown', { key: 'ArrowRight' });
+      await container.trigger('keydown', { key: 'ArrowRight' });
+
+      // Simulate focus leaving
+      container.element.dispatchEvent(new FocusEvent('focusout', { bubbles: true, relatedTarget: document.body }));
+      await loopper.vm.$nextTick();
+
+      // tabindex should stay on last focused item
+      expect(item2.attributes('tabindex')).toBe('0');
+    });
+  });
+
+  // ── RTL ─────────────────────────────────────────────────
+
+  describe('RTL support', () => {
+    it('should reverse ArrowRight/ArrowLeft in RTL context', async () => {
+      loopper = mount({
+        template: `
+          <div
+            role="toolbar"
+            dir="rtl"
+            v-dt-focusgroup="'horizontal'"
+            data-qa="container"
+          >
+            <button data-qa="item-0">A</button>
+            <button data-qa="item-1">B</button>
+            <button data-qa="item-2">C</button>
+          </div>
+        `,
+      }, {
+        global: { plugins: PLUGINS },
+        attachTo: document.body,
+      });
+
+      const item0 = loopper.find('[data-qa="item-0"]');
+      item0.element.focus();
+
+      // In RTL, ArrowLeft should go forward (next), not backward
+      await loopper.find('[data-qa="container"]').trigger('keydown', { key: 'ArrowLeft' });
+
+      expect(document.activeElement).toBe(loopper.find('[data-qa="item-1"]').element);
+    });
+  });
+
+  // ── Dynamic config update ───────────────────────────────
+
+  describe('Dynamic config update', () => {
+    it('should apply new axis when config changes', async () => {
+      loopper = mount({
+        data () { return { config: 'horizontal' }; },
+        template: `
+          <div role="toolbar" v-dt-focusgroup="config" data-qa="container">
+            <button data-qa="item-0">A</button>
+            <button data-qa="item-1">B</button>
+          </div>
+        `,
+      }, {
+        global: { plugins: PLUGINS },
+        attachTo: document.body,
+      });
+
+      const container = loopper.find('[data-qa="container"]');
+      loopper.find('[data-qa="item-0"]').element.focus();
+
+      // ArrowDown should be ignored with horizontal axis
+      await container.trigger('keydown', { key: 'ArrowDown' });
+      expect(document.activeElement).toBe(loopper.find('[data-qa="item-0"]').element);
+
+      // Change to vertical
+      await loopper.setData({ config: 'vertical' });
+
+      // ArrowDown should now work
+      loopper.find('[data-qa="item-0"]').element.focus();
+      await container.trigger('keydown', { key: 'ArrowDown' });
+      expect(document.activeElement).toBe(loopper.find('[data-qa="item-1"]').element);
+    });
+  });
+
   // ── Lifecycle ───────────────────────────────────────────
 
   describe('Lifecycle', () => {

@@ -117,8 +117,7 @@ export const DtFocusgroupDirective = {
 
     // ── Focus movement ──────────────────────────────────────
 
-    function moveTo (event, el, state, items, currentIndex, targetIndex) {
-      event.preventDefault();
+    function moveTo (el, state, items, currentIndex, targetIndex) {
       setRovingTabindex(items, targetIndex);
       state._internalMove = true;
       items[targetIndex].focus();
@@ -154,7 +153,7 @@ export const DtFocusgroupDirective = {
       const homeEndIndex = resolveHomeEnd(event.key, items, state.skipDisabled);
       if (homeEndIndex !== null) {
         event.preventDefault();
-        if (homeEndIndex !== currentIndex) moveTo(event, el, state, items, currentIndex, homeEndIndex);
+        if (homeEndIndex !== currentIndex) moveTo(el, state, items, currentIndex, homeEndIndex);
         return;
       }
 
@@ -163,7 +162,10 @@ export const DtFocusgroupDirective = {
       if (direction === null) return;
 
       const nextIndex = findNext(items, currentIndex, direction, state.config.loop, state.skipDisabled);
-      if (nextIndex !== currentIndex) moveTo(event, el, state, items, currentIndex, nextIndex);
+      if (nextIndex !== currentIndex) {
+        event.preventDefault();
+        moveTo(el, state, items, currentIndex, nextIndex);
+      }
     }
 
     function handleFocusin (event, el, state) {
@@ -195,7 +197,7 @@ export const DtFocusgroupDirective = {
     function attach (el, config) {
       const selector = resolveSelector(el, config);
       const skipDisabled = resolveSkipDisabled(el, config);
-      const isRTL = getComputedStyle(el).direction === 'rtl';
+      const isRTL = getComputedStyle(el).direction === 'rtl' || el.closest('[dir="rtl"]') !== null;
 
       const state = {
         config,

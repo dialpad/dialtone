@@ -149,6 +149,20 @@ screen readers to announce the widget correctly, you must provide:
 Without a role, the container is opaque to assistive technology — arrow-key
 cycling works, but the user has no context for what they're navigating.
 
+Two ESLint rules in `eslint-plugin-dialtone` catch these omissions:
+
+- `dialtone/focusgroup-requires-role` — warns when `v-dt-focusgroup` is used without a `role`
+- `dialtone/focusgroup-requires-label` — warns when `v-dt-focusgroup` is used without `aria-label` or `aria-labelledby`
+
+Enable them in your ESLint config:
+
+```js
+rules: {
+  'dialtone/focusgroup-requires-role': 'warn',
+  'dialtone/focusgroup-requires-label': 'warn',
+}
+```
+
 ### Item opt-out
 
 Add `data-dt-focusgroup-skip` to exclude an element from arrow-key navigation
