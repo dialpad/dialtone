@@ -1,16 +1,16 @@
 name: Cleanup Plan Docs
 
 on:
-  pull_request:
-    types: [closed]
-    branches: [staging]
+  schedule:
+    - cron: '0 23 * * *'
+  workflow_dispatch:
 
 jobs:
   cleanup:
-    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pull-requests: write
     concurrency:
       group: ${{ github.workflow }}
       cancel-in-progress: false
@@ -26,14 +26,58 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Remove planning docs
+      - name: Check for plan files
+        id: check
         run: |
+          PLAN_FILES=$(find . -maxdepth 1 -name "PLAN-*.md" 2>/dev/null)
+          DOCS_FILES=$(find ./docs/plans -maxdepth 1 -name "*.md" 2>/dev/null)
+          if [ -z "$PLAN_FILES" ] && [ -z "$DOCS_FILES" ]; then
+            echo "found=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "found=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build PR body and remove plan files
+        id: build_body
+        if: steps.check.outputs.found == 'true'
+        run: |
+          TABLE="| Plan | Status |\n|------|--------|\n"
+
+          while IFS= read -r -d '' FILE; do
+            TITLE=$(grep -m1 "^# " "$FILE" | sed 's/^# //')
+            STATUS=$(grep -m1 "^Status:" "$FILE" | sed 's/^Status: *//' | tr -d '[:space:]')
+            [ -z "$TITLE" ] && TITLE="$(basename "$FILE" .md)"
+            [ -z "$STATUS" ] && STATUS="—"
+            TABLE="${TABLE}| \`$(basename "$FILE")\` — ${TITLE} | ${STATUS} |\n"
+          done < <(find . -maxdepth 1 -name "PLAN-*.md" -print0 2>/dev/null)
+
+          while IFS= read -r -d '' FILE; do
+            TITLE=$(grep -m1 "^# " "$FILE" | sed 's/^# //')
+            STATUS=$(grep -m1 "^Status:" "$FILE" | sed 's/^Status: *//' | tr -d '[:space:]')
+            [ -z "$TITLE" ] && TITLE="$(basename "$FILE" .md)"
+            [ -z "$STATUS" ] && STATUS="—"
+            TABLE="${TABLE}| \`$(basename "$FILE")\` — ${TITLE} | ${STATUS} |\n"
+          done < <(find ./docs/plans -maxdepth 1 -name "*.md" -print0 2>/dev/null)
+
+          BODY="## Automated Plan Cleanup\n\nThis PR removes planning docs that were merged into \`staging\` during development.\n\n### Plans removed\n\n${TABLE}\n---\n\n> **Add highlights here** — anything worth preserving from these plans (key decisions, trade-offs, context for future contributors):\n\n"
+
+          {
+            echo 'pr_body<<EOF'
+            printf '%b' "$BODY"
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT"
+
           git rm -f PLAN-*.md --ignore-unmatch
           git rm -rf docs/plans/ --ignore-unmatch
 
-      - name: Commit and push if changed
-        run: |
-          if ! git diff --cached --quiet --exit-code; then
-            git commit -m "chore: remove planning docs post-merge [skip ci]"
-            git push origin staging
-          fi
+      - name: Create cleanup PR
+        if: steps.check.outputs.found == 'true'
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ github.token }}
+          branch: chore/cleanup-plan-docs
+          base: staging
+          commit-message: 'chore: NO-JIRA remove planning docs from staging'
+          title: 'chore: NO-JIRA remove planning docs from staging'
+          body: ${{ steps.build_body.outputs.pr_body }}
+          delete-branch: true
