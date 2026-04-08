@@ -61,6 +61,8 @@ export const DtFocusgroupDirective = {
         .filter(item => {
           if (item.hasAttribute('data-dt-focusgroup-skip')) return false;
           if (item.closest('[hidden]')) return false;
+          // Exclude items inside collapsed containers (e.g., DtCollapsible)
+          if (item.closest('[aria-hidden="true"]')) return false;
           return true;
         });
     }
