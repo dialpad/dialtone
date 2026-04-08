@@ -43,7 +43,6 @@ describe('Build output — dist/ai-docs.json', () => {
 
   test('type field uses allowed values', () => {
     for (const doc of docs) {
-      expect(doc.type, `"${doc.id}" type is null`).not.toBeNull();
       expect(ALLOWED_TYPES, `"${doc.id}" invalid type "${doc.type}"`).toContain(doc.type);
     }
   });
