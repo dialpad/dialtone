@@ -29,7 +29,7 @@ export default {
   },
   'Targeted styling': {
     props: {
-      containerClass: { initialValue: 'd-bar0 d-baw0' },
+      class: { initialValue: 'd-bar0 d-baw0' },
       contentClass: { initialValue: 'd-p-100 d-by d-bgc-critical' },
       headerClass: { initialValue: 'd-p-100 d-bgc-info' },
       footerClass: { initialValue: 'd-p-100 d-bgc-warning' },

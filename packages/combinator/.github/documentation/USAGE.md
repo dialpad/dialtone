@@ -216,6 +216,6 @@ of the combinator.
 <dtc-combinator
   ...
   header-class="d-py32"
-  root-class="d-px32"
+  class="d-px32"
 />
 ```
