@@ -26,7 +26,7 @@
           </dt-stack>
           <dt-stack direction="row" gap="50" class="d-ai-center">
             <dt-icon name="storybook-color" size="200" />
-            <span class="d-fs-125 d-fw-semibold d-fc-secondary">View in Storybook</span>
+            <dt-text kind="label" size="200" strength="medium" tone="secondary">Storybook</dt-text>
           </dt-stack>
         </dt-stack>
       </a>
