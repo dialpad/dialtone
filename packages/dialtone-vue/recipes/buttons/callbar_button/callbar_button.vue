@@ -4,7 +4,7 @@
     :inverted="invertedTooltip"
     v-bind="addClassStyleAttrs($attrs)"
     :delay="tooltipDelay"
-    :show="showTooltip"
+    :open="showTooltip"
     :offset="[0, 24]"
   >
     <template #anchor>

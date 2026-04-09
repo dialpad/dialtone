@@ -20,8 +20,7 @@ paths:
 ## Events
 
 - `update:modelValue` for v-model.
-- `update:open` for Popover, Collapsible, ImageViewer, FilterPill.
-- `update:show` for Modal, Tooltip, Toast (legacy — don't change existing, use `update:open` for new).
+- `update:open` for Modal, Tooltip, Toast, Popover, Collapsible, ImageViewer, FilterPill.
 
 ## Slots
 

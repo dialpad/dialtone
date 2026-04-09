@@ -925,25 +925,25 @@ const checkRadioDisabled = ref(false);
       <div class="d-d-grid d-g-400 d-g-cols2">
         <dt-stack gap="100">
           <dt-text as="h3" kind="headline" :size="300">Default</dt-text>
-          <dt-toast :show="true" kind="info" title="Info toast" message="Informational message." :duration="null" />
-          <dt-toast :show="true" kind="success" title="Success toast" message="Action completed." :duration="null" />
-          <dt-toast :show="true" kind="warning" title="Warning toast" message="Review before proceeding." :duration="null" />
-          <dt-toast :show="true" kind="error" title="Error toast" message="Something went wrong." :duration="null" />
-          <dt-toast :show="true" kind="base" title="Base toast" message="Neutral notification." :duration="null" />
+          <dt-toast :open="true" kind="info" title="Info toast" message="Informational message." :duration="null" />
+          <dt-toast :open="true" kind="success" title="Success toast" message="Action completed." :duration="null" />
+          <dt-toast :open="true" kind="warning" title="Warning toast" message="Review before proceeding." :duration="null" />
+          <dt-toast :open="true" kind="error" title="Error toast" message="Something went wrong." :duration="null" />
+          <dt-toast :open="true" kind="base" title="Base toast" message="Neutral notification." :duration="null" />
         </dt-stack>
         <dt-stack gap="100">
           <dt-text as="h3" kind="headline" :size="300">Important</dt-text>
-          <dt-toast :show="true" kind="info" title="Info toast" message="Informational message." :important="true" :duration="null" />
-          <dt-toast :show="true" kind="success" title="Success toast" message="Action completed." :important="true" :duration="null" />
-          <dt-toast :show="true" kind="warning" title="Warning toast" message="Review before proceeding." :important="true" :duration="null" />
-          <dt-toast :show="true" kind="error" title="Error toast" message="Something went wrong." :important="true" :duration="null" />
-          <dt-toast :show="true" kind="base" title="Base toast" message="Neutral notification." :important="true" :duration="null" />
+          <dt-toast :open="true" kind="info" title="Info toast" message="Informational message." :important="true" :duration="null" />
+          <dt-toast :open="true" kind="success" title="Success toast" message="Action completed." :important="true" :duration="null" />
+          <dt-toast :open="true" kind="warning" title="Warning toast" message="Review before proceeding." :important="true" :duration="null" />
+          <dt-toast :open="true" kind="error" title="Error toast" message="Something went wrong." :important="true" :duration="null" />
+          <dt-toast :open="true" kind="base" title="Base toast" message="Neutral notification." :important="true" :duration="null" />
         </dt-stack>
         <dt-stack gap="100">
           <dt-text as="h3" kind="headline" :size="300">Alignment per internal parts</dt-text>
-          <dt-toast :show="true" kind="info" title="Title only" :duration="null" />
-          <dt-toast :show="true" kind="info" message="Action completed." :duration="null" />
-          <dt-toast :show="true" kind="info" title="Title and message" message="Review before proceeding." :duration="null" />
+          <dt-toast :open="true" kind="info" title="Title only" :duration="null" />
+          <dt-toast :open="true" kind="info" message="Action completed." :duration="null" />
+          <dt-toast :open="true" kind="info" title="Title and message" message="Review before proceeding." :duration="null" />
         </dt-stack>
       </div>
     </dt-stack>

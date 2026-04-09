@@ -75,12 +75,15 @@ All form components implement Vue 3 v-model via `modelValue` prop + `update:mode
 | DtSelectMenu | `String \| Number` | |
 | DtToggle | `Boolean \| String` | Supports `'mixed'` for indeterminate state |
 
-Visibility-toggle components use `update:show` instead:
+Visibility-toggle components use `update:open`:
 
 | Component | Emit |
 |-----------|------|
-| DtModal | `update:show` |
-| DtTooltip | `update:show` |
+| DtModal | `update:open` |
+| DtTooltip | `update:open` |
+| DtToast | `update:open` |
+| DtPopover | `update:open` |
+| DtDropdown | `update:open` |
 
 ## Event Naming
 
@@ -90,7 +93,7 @@ Custom events use the `update:{prop}` convention to stay compatible with `v-mode
 
 ```
 update:modelValue   — value changed
-update:show         — visibility changed
+update:open         — visibility changed
 update:length       — input length changed (DtInput)
 update:invalid      — validation state changed (DtInput)
 ```
