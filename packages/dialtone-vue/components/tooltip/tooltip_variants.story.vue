@@ -35,7 +35,7 @@
           :transition="$attrs.transition"
           :placement="direction"
           :message="localMessage"
-          :show="$attrs.showTooltip"
+          :open="$attrs.showTooltip"
         >
           <template #anchor>
             <dt-button
@@ -61,7 +61,7 @@
         class="d-mx-100"
         :transition="transition"
         :message="localMessage"
-        :show="$attrs.showTooltip"
+        :open="$attrs.showTooltip"
       >
         <template #anchor>
           <dt-button
@@ -89,7 +89,7 @@
         class="d-my-100"
         :transition="$attrs.transition"
         :message="localMessage"
-        :show="$attrs.showTooltip"
+        :open="$attrs.showTooltip"
       >
         <template #anchor>
           <dt-button link>
@@ -108,7 +108,7 @@
         class="d-my-100"
         :transition="$attrs.transition"
         :message="localMessage"
-        :show="show1"
+        :open="show1"
       >
         <template #anchor>
           <dt-button
@@ -131,7 +131,7 @@
         theme="purple"
         :transition="$attrs.transition"
         :message="localMessage"
-        :show="$attrs.showTooltip"
+        :open="$attrs.showTooltip"
       >
         <template #anchor>
           <dt-button
@@ -153,7 +153,7 @@
           :inverted="true"
           :transition="$attrs.transition"
           :message="localMessage"
-          :show="$attrs.showTooltip"
+          :open="$attrs.showTooltip"
         >
           <template #anchor>
             <dt-button
@@ -169,7 +169,7 @@
     <dt-tooltip
       :transition="transition"
       external-anchor="#external-tooltip-anchor"
-      :show="$attrs.showTooltip"
+      :open="$attrs.showTooltip"
     >
       This is a tooltip with external anchor, the actual dt-tooltip component
       is at the end of this page

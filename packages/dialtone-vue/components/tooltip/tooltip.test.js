@@ -73,7 +73,7 @@ describe('DtTooltip tests', () => {
   describe('Presentation Tests', () => {
     describe('when tooltip is open', () => {
       beforeEach(() => {
-        mockProps = { show: true };
+        mockProps = { open: true };
 
         updateWrapper();
       });
@@ -101,7 +101,7 @@ describe('DtTooltip tests', () => {
       describe('When tooltip content is a space character', () => {
         it('should not render the content', async () => {
           wrapper.unmount();
-          mockProps = { show: true, message: ' ' };
+          mockProps = { open: true, message: ' ' };
           updateWrapper();
           expect(tippyContent.getAttribute('data-state')).not.toBe('visible');
         });
@@ -109,21 +109,21 @@ describe('DtTooltip tests', () => {
 
       describe('When inverted is true', () => {
         it('should have the inverted class set', async () => {
-          await wrapper.setProps({ show: true, inverted: true });
+          await wrapper.setProps({ open: true, inverted: true });
           expect([...tooltip.classList].includes(TOOLTIP_KIND_MODIFIERS.inverted)).not.toBeNull();
         });
       });
 
       describe('When contentMode is set', () => {
         it('should set data-dt-mode on tooltip content', async () => {
-          await wrapper.setProps({ show: true, contentMode: 'dark' });
+          await wrapper.setProps({ open: true, contentMode: 'dark' });
 
           expect(tooltip.getAttribute('data-dt-mode')).toBe('dark');
         });
 
         it('should invert root mode when contentMode is invert', async () => {
           document.documentElement.setAttribute('data-dt-mode', 'light');
-          await wrapper.setProps({ show: true, contentMode: 'invert' });
+          await wrapper.setProps({ open: true, contentMode: 'invert' });
           await wrapper.vm.$nextTick();
 
           expect(tooltip.getAttribute('data-dt-mode')).toBe('dark');
@@ -134,7 +134,7 @@ describe('DtTooltip tests', () => {
 
       it.each(TOOLTIP_DIRECTIONS)('when placement is %s should have correct data-placement attribute', async (placement) => {
         wrapper.unmount();
-        mockProps = { show: true, placement, fallbackPlacements: [] };
+        mockProps = { open: true, placement, fallbackPlacements: [] };
         updateWrapper();
 
         await flushPromises();
@@ -146,9 +146,9 @@ describe('DtTooltip tests', () => {
   });
 
   describe('Interactivity Tests', () => {
-    describe('When show prop is true', () => {
+    describe('When open prop is true', () => {
       it('should display tooltip', async () => {
-        mockProps = { show: true };
+        mockProps = { open: true };
         updateWrapper();
         await flushPromises();
 
@@ -156,19 +156,19 @@ describe('DtTooltip tests', () => {
       });
     });
 
-    describe('When show prop is false', () => {
+    describe('When open prop is false', () => {
       it('should not display tooltip', async () => {
-        mockProps = { show: true };
+        mockProps = { open: true };
         updateWrapper();
-        await wrapper.setProps({ show: false });
+        await wrapper.setProps({ open: false });
 
         expect(tippyContent.getAttribute('data-state')).not.toBe('visible');
       });
     });
 
-    describe('When show prop is unset (default behaviour)', () => {
+    describe('When open prop is unset (default behaviour)', () => {
       beforeEach(() => {
-        mockProps = { show: null };
+        mockProps = { open: null };
         updateWrapper();
       });
 
@@ -234,7 +234,7 @@ describe('DtTooltip tests', () => {
         modalElement.setAttribute('aria-hidden', 'false');
         document.body.appendChild(modalElement);
 
-        mockProps = { show: true };
+        mockProps = { open: true };
         updateWrapper();
         await flushPromises();
 
@@ -256,7 +256,7 @@ describe('DtTooltip tests', () => {
         modalElement.setAttribute('aria-hidden', 'false');
         document.body.appendChild(modalElement);
 
-        mockProps = { show: true };
+        mockProps = { open: true };
         updateWrapper();
         await flushPromises();
 
@@ -277,7 +277,7 @@ describe('DtTooltip tests', () => {
         modalElement.setAttribute('open', '');
         document.body.appendChild(modalElement);
 
-        mockProps = { show: true };
+        mockProps = { open: true };
         updateWrapper();
         await flushPromises();
 
@@ -292,7 +292,7 @@ describe('DtTooltip tests', () => {
       });
 
       it('should have default z-index when no modal is present', async () => {
-        mockProps = { show: true };
+        mockProps = { open: true };
         updateWrapper();
         await flushPromises();
 

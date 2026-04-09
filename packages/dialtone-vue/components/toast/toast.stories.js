@@ -79,7 +79,7 @@ export const argTypesData = {
       type: 'select',
     },
   },
-  show: {
+  open: {
     table: {
       defaultValue: {
         summary: 'false',
@@ -156,7 +156,7 @@ export const Default = {
   parameters: {
     percy: {
       args: {
-        show: true,
+        open: true,
       },
     },
   },

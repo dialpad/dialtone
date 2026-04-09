@@ -3,7 +3,7 @@
     <dt-modal
       :title="$attrs.title"
       :banner-title="$attrs.bannerTitle"
-      :show="isOpen"
+      :open="isOpen"
       :kind="$attrs.kind"
       :size="$attrs.size"
       :copy="$attrs.copy"
@@ -18,7 +18,7 @@
       :close-on-click="$attrs.closeOnClick"
       :append-to="$attrs.appendTo"
       :content-mode="$attrs.contentMode"
-      @update:show="close"
+      @update:open="close"
     >
       <template
         v-if="$attrs.banner"
@@ -92,7 +92,7 @@ export default {
 
   data () {
     return {
-      isOpen: this.$attrs.show,
+      isOpen: this.$attrs.open,
     };
   },
 
@@ -103,9 +103,9 @@ export default {
   },
 
   watch: {
-    show: {
+    open: {
       handler () {
-        this.isOpen = this.$attrs.show;
+        this.isOpen = this.$attrs.open;
       },
     },
   },

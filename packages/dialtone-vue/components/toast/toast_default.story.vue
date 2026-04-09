@@ -7,7 +7,7 @@
     <aside class="d-toast-wrapper">
       <dt-toast
         ref="toast"
-        v-model:show="isShown"
+        v-model:open="isShown"
         :kind="$attrs.kind"
         :title="$attrs.title"
         :message="$attrs.message"
@@ -78,7 +78,7 @@ export default {
 
   data () {
     return {
-      isShown: this.$attrs.show,
+      isShown: this.$attrs.open,
     };
   },
 
@@ -101,8 +101,8 @@ export default {
   },
 
   watch: {
-    show: function (show) {
-      this.isShown = show;
+    open: function (open) {
+      this.isShown = open;
     },
   },
 

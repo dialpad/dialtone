@@ -18,7 +18,7 @@ maximus ipsum ex. Curabitur elementum luctus augue, quis eleifend tortor feugiat
 Maecenas maximus, ipsum et laoreet congue, diam massa aliquam libero, at pellentesque \
 orci ipsum et velit.`,
   title: 'Example Title',
-  onClose: action('update:show'),
+  onClose: action('update:open'),
 };
 
 export const argTypesData = {
@@ -103,7 +103,7 @@ export const argTypesData = {
       type: 'boolean',
     },
   },
-  show: {
+  open: {
     control: {
       type: 'boolean',
     },
@@ -116,7 +116,7 @@ export const argTypesData = {
   },
 
   // Events
-  'update:show': {
+  'update:open': {
     description: `The modal will emit a "false" boolean value for this event when the \
 user performs a modal-closing action.  Parent components can sync on this value to create \
 a 2-way binding to control modal visibility.`,
@@ -151,7 +151,7 @@ export const Default = {
   parameters: {
     percy: {
       args: {
-        show: true,
+        open: true,
       },
     },
   },
