@@ -206,7 +206,8 @@ export const DtFocusgroupDirective = {
     function attach (el, config) {
       const selector = resolveSelector(el, config);
       const skipDisabled = resolveSkipDisabled(el, config);
-      const isRTL = getComputedStyle(el).direction === 'rtl' || el.closest('[dir="rtl"]') !== null;
+      // getComputedStyle is the source of truth; closest('[dir]') fallback for jsdom (which doesn't compute direction)
+      const isRTL = getComputedStyle(el).direction === 'rtl' || el.closest('[dir]')?.getAttribute('dir') === 'rtl';
 
       const state = {
         config,
