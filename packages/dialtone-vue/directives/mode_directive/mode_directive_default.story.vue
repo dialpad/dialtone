@@ -1,6 +1,6 @@
 <template>
   <dt-stack
-    gap="500"
+    gap="200"
     class="d-p-100"
   >
     <dt-text
@@ -134,6 +134,7 @@
     <dt-stack
       gap="400"
       direction="row"
+      align="start"
     >
       <section
         v-dt-mode:invert="false"
