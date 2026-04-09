@@ -3,6 +3,15 @@
     gap="200"
     class="d-p-100"
   >
+    <dt-stack>
+      <dt-text
+        as="h2"
+        kind="headline"
+        :size="600"
+      >
+        Default Example
+      </dt-text>
+    </dt-stack>
     <!-- ── vertical ──────────────────────────────────────── -->
     <dt-text
       as="h3"

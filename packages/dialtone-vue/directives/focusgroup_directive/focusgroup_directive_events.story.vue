@@ -3,6 +3,25 @@
     gap="200"
     class="d-p-100"
   >
+    <dt-stack>
+      <dt-text
+        as="h2"
+        kind="headline"
+        :size="600"
+      >
+        Event Examples
+      </dt-text>
+      <p>
+        <dt-link
+          href="https://github.com/dialpad/dialtone/blob/next/packages/dialtone-vue/directives/focusgroup_directive/focusgroup_directive_events.story.vue"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          View source on GitHub
+        </dt-link> for code examples.
+      </p>
+    </dt-stack>
+
     <!-- ── Tab list with selection follows focus ──────────── -->
     <dt-text
       as="h3"
@@ -104,10 +123,11 @@
 import DtStack from '@/components/stack/stack.vue';
 import DtText from '@/components/text/text.vue';
 import DtButton from '@/components/button/button.vue';
+import DtLink from '@/components/link/link.vue';
 import DtIcon from '@/components/icon/icon.vue';
 export default {
   name: 'DtFocusgroupDirectiveEvents',
-  components: { DtStack, DtText, DtButton, DtIcon },
+  components: { DtStack, DtText, DtButton, DtLink, DtIcon },
 
   data () {
     return {

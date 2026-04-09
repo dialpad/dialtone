@@ -1,8 +1,29 @@
+<!-- eslint-disable max-lines -->
 <template>
   <dt-stack
     gap="200"
     class="d-p-100"
   >
+    <dt-stack>
+      <dt-text
+        as="h2"
+        kind="headline"
+        :size="600"
+      >
+        Recipe Examples
+      </dt-text>
+      <p>
+        <!-- eslint-disable-next-line max-len -->
+        <dt-link
+          href="https://github.com/dialpad/dialtone/blob/next/packages/dialtone-vue/directives/focusgroup_directive/focusgroup_directive_recipes.story.vue"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          View source on GitHub
+        </dt-link> for code examples.
+      </p>
+    </dt-stack>
+
     <!-- ── Treeview sidebar with DtCollapsible ────────────── -->
     <dt-text
       as="h3"
@@ -217,7 +238,7 @@
       Uses <code>selector: 'tbody tr'</code> so the header row is excluded.
     </dt-text>
     <table
-      v-dt-focusgroup="{ axis: 'vertical', selector: 'tbody tr' }"
+      v-dt-focusgroup="{ axis: 'vertical', selector: 'tbody tr', memory: false }"
       class="d-table dialtone-doc-table"
       aria-label="Office List"
     >
@@ -660,6 +681,7 @@
 import DtStack from '@/components/stack/stack.vue';
 import DtText from '@/components/text/text.vue';
 import DtButton from '@/components/button/button.vue';
+import DtLink from '@/components/link/link.vue';
 import DtCollapsible from '@/components/collapsible/collapsible.vue';
 import DtAvatar from '@/components/avatar/avatar.vue';
 import DtIcon from '@/components/icon/icon.vue';
@@ -672,6 +694,7 @@ export default {
     DtStack,
     DtText,
     DtButton,
+    DtLink,
     DtCollapsible,
     DtAvatar,
     DtIcon,

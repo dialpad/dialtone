@@ -3,6 +3,15 @@
     gap="200"
     class="d-p-100"
   >
+    <dt-stack>
+      <dt-text
+        as="h2"
+        kind="headline"
+        :size="600"
+      >
+        Advanced Examples
+      </dt-text>
+    </dt-stack>
     <!-- ── Item opt-out ──────────────────────────────────── -->
     <dt-text
       as="h3"
