@@ -2,6 +2,7 @@
 title: Vue Utilities
 description: Consumer-facing directives and utilities exported by Dialtone Vue.
 thumb: true
+keywords: ["directive", "function", "utility", "utilities", "plugin", "v-dt-focusgroup", "v-dt-mode", "v-dt-tooltip", "v-dt-scrollbar", "keyboard navigation", "roving tabindex", "dark mode", "date", "time", "localization", "i18n", "lazy show", "DtLazyShow", "accessibility", "a11y", "internationalization", "theme"]
 ---
 
 ## Directives
