@@ -161,13 +161,13 @@ export const DtFocusgroupDirective = {
         return;
       }
 
-      // Arrow keys
+      // Arrow keys — always preventDefault when axis matches to prevent page scroll
       const direction = resolveDirection(event.key, state.config.axis, state.isRTL);
       if (direction === null) return;
+      event.preventDefault();
 
       const nextIndex = findNext(items, currentIndex, direction, state.config.loop, state.skipDisabled);
       if (nextIndex !== currentIndex) {
-        event.preventDefault();
         moveTo(el, state, items, currentIndex, nextIndex);
       }
     }
@@ -188,11 +188,16 @@ export const DtFocusgroupDirective = {
       if (state.config.memory) return;
       // relatedTarget is where focus is going — if still inside, ignore
       if (event.relatedTarget && el.contains(event.relatedTarget)) return;
-      // Focus left the container — reset tabindex to first item
+      // Focus left the container — reset tabindex to first enabled item
       const items = getItems(el, state.selector);
       if (items.length) {
-        setRovingTabindex(items, 0);
-        state.lastFocusedIndex = 0;
+        let resetIndex = 0;
+        if (state.skipDisabled) {
+          const enabledIndex = items.findIndex(item => !isDisabled(item));
+          if (enabledIndex !== -1) resetIndex = enabledIndex;
+        }
+        setRovingTabindex(items, resetIndex);
+        state.lastFocusedIndex = resetIndex;
       }
     }
 
@@ -219,7 +224,7 @@ export const DtFocusgroupDirective = {
       const items = getItems(el, selector);
       if (!items.length && process.env.NODE_ENV !== 'production') {
         const role = el.getAttribute('role');
-         
+        // eslint-disable-next-line no-console
         console.warn(
           `[DtFocusgroupDirective] No items found for selector "${selector}"` +
           (role ? ` (inferred from role="${role}")` : '') +

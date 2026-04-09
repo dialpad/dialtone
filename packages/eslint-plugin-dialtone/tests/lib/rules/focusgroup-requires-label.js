@@ -30,6 +30,14 @@ ruleTester.run('focusgroup-requires-label', rule, {
       name: 'Element without v-dt-focusgroup (no rule needed)',
       code: '<template><div role="toolbar" /></template>',
     },
+    {
+      name: 'Dynamic :aria-label binding',
+      code: '<template><div role="toolbar" v-dt-focusgroup :aria-label="computedLabel" /></template>',
+    },
+    {
+      name: 'Dynamic :aria-labelledby binding',
+      code: '<template><div role="toolbar" v-dt-focusgroup :aria-labelledby="headingId" /></template>',
+    },
   ],
 
   invalid: [

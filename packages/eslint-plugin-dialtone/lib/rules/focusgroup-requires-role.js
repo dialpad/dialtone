@@ -32,7 +32,9 @@ module.exports = {
 
         const element = node.parent;
         const hasRole = element.attributes.some(
-          attr => !attr.directive && attr.key.name === 'role',
+          attr =>
+            (!attr.directive && attr.key.name === 'role') ||
+            (attr.directive && attr.key.name.name === 'bind' && attr.key.argument?.name === 'role'),
         );
 
         if (!hasRole) {

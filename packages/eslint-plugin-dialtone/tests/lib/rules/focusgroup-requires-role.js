@@ -34,6 +34,10 @@ ruleTester.run('focusgroup-requires-role', rule, {
       name: 'Bare v-dt-focusgroup with role',
       code: '<template><div role="radiogroup" v-dt-focusgroup /></template>',
     },
+    {
+      name: 'Dynamic :role binding',
+      code: '<template><div :role="dynamicRole" v-dt-focusgroup /></template>',
+    },
   ],
 
   invalid: [

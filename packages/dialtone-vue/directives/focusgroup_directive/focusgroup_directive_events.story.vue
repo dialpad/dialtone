@@ -5,6 +5,7 @@
   >
     <dt-stack>
       <p>
+        <!-- eslint-disable-next-line max-len -->
         <dt-link
           href="https://github.com/dialpad/dialtone/blob/next/packages/dialtone-vue/directives/focusgroup_directive/focusgroup_directive_events.story.vue"
           target="_blank"
@@ -39,7 +40,7 @@
       gap="100"
       role="tablist"
       aria-label="Operating system"
-      @dt-focusgroup-move="selectedTab = $event.detail.index"
+      @dt-focusgroup-move="!tabs[$event.detail.index].disabled && (selectedTab = $event.detail.index)"
       @click="selectTabByClick"
       @keydown.enter="selectTabByClick"
     >

@@ -32,10 +32,15 @@ module.exports = {
 
         const element = node.parent;
         const hasLabel = element.attributes.some(
-          attr => !attr.directive && (
-            attr.key.name === 'aria-label' ||
-            attr.key.name === 'aria-labelledby'
-          ),
+          attr =>
+            (!attr.directive && (
+              attr.key.name === 'aria-label' ||
+              attr.key.name === 'aria-labelledby'
+            )) ||
+            (attr.directive && attr.key.name.name === 'bind' && (
+              attr.key.argument?.name === 'aria-label' ||
+              attr.key.argument?.name === 'aria-labelledby'
+            )),
         );
 
         if (!hasLabel) {

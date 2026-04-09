@@ -154,7 +154,7 @@ describe('DtFocusgroupDirective', () => {
     it.each([
       ['tablist', false],
       ['radiogroup', true],
-    ])('should default to %s for role="%s"', (role, expected) => {
+    ])('for role="%s", should default skipDisabled to %s', (role, expected) => {
       const el = document.createElement('div');
       el.setAttribute('role', role);
       expect(resolveSkipDisabled(el, { skipDisabled: null })).toBe(expected);
