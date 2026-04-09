@@ -4,13 +4,6 @@
     class="d-p-100"
   >
     <dt-stack>
-      <dt-text
-        as="h2"
-        kind="headline"
-        :size="600"
-      >
-        Event Examples
-      </dt-text>
       <p>
         <dt-link
           href="https://github.com/dialpad/dialtone/blob/next/packages/dialtone-vue/directives/focusgroup_directive/focusgroup_directive_events.story.vue"
@@ -26,13 +19,13 @@
     <dt-text
       as="h3"
       kind="headline"
-      :size="400"
+      :size="300"
     >
       Tab list — selection follows focus
     </dt-text>
     <dt-text
       kind="body"
-      class="d-fc-tertiary"
+      tone="tertiary"
     >
       Left/Right cycles tabs. <code>@dt-focusgroup-move</code> drives selection.
       Click also selects. Disabled tab remains focusable (tablist default).
@@ -77,13 +70,13 @@
     <dt-text
       as="h3"
       kind="headline"
-      :size="400"
+      :size="300"
     >
       Listbox — vertical, noloop
     </dt-text>
     <dt-text
       kind="body"
-      class="d-fc-tertiary"
+      tone="tertiary"
     >
       Up/Down navigates. Does not loop. Disabled item skipped. Click to select.
       <code>v-dt-focusgroup="'vertical noloop'"</code>
@@ -93,21 +86,30 @@
       role="listbox"
       aria-label="Fruits"
       class="d-w-400"
+      gap="100"
     >
       <dt-button
         v-for="fruit in fruits"
         :key="fruit.label"
         role="option"
         kind="muted"
-        importance="clear"
+        importance="outlined"
         :active="selectedFruit === fruit.label"
         :aria-selected="selectedFruit === fruit.label ? 'true' : 'false'"
         :aria-disabled="fruit.disabled ? 'true' : undefined"
         :disabled="fruit.disabled"
         @click="!fruit.disabled && (selectedFruit = fruit.label)"
       >
-        {{ fruit.label }}{{ fruit.disabled ? ' (sold out)' : '' }}
+        {{ fruit.label }}
+        {{ fruit.disabled ? ' (sold out)' : '' }}
         <template #startIcon>
+          <dt-icon
+            name="check"
+            :size="200"
+            class="d-o0"
+          />
+        </template>
+        <template #endIcon>
           <dt-icon
             name="check"
             :size="200"
@@ -143,8 +145,9 @@ export default {
         { label: 'Apple' },
         { label: 'Banana' },
         { label: 'Cherry', disabled: true },
-        { label: 'Date' },
+        { label: 'Orange' },
         { label: 'Elderberry' },
+        { label: 'Avocado', disabled: true },
       ],
     };
   },

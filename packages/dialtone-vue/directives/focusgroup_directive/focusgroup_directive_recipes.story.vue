@@ -5,13 +5,6 @@
     class="d-p-100"
   >
     <dt-stack>
-      <dt-text
-        as="h2"
-        kind="headline"
-        :size="600"
-      >
-        Recipe Examples
-      </dt-text>
       <p>
         <!-- eslint-disable-next-line max-len -->
         <dt-link

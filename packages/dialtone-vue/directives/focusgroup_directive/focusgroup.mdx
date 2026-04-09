@@ -53,166 +53,70 @@ rules: {
 
 ### Object syntax
 
-```html
-<dt-stack gap="100" role="listbox" v-dt-focusgroup="{ axis: 'vertical', loop: false }" aria-label="Fruits">
-  <dt-button role="option" kind="muted" importance="outlined">Apple</dt-button>
-  <dt-button role="option" kind="muted" importance="outlined">Banana</dt-button>
-</dt-stack>
-```
+<Canvas of={FocusgroupDirectiveStories.ObjectSyntax} />
 
 ### Vertical toolbar
 
-```html
-<dt-stack gap="100" role="toolbar" aria-orientation="vertical" v-dt-focusgroup="'vertical'" aria-label="Formatting">
-  <dt-button kind="muted" importance="outlined">Bold</dt-button>
-  <dt-button kind="muted" importance="outlined">Italic</dt-button>
-  <dt-button kind="muted" importance="outlined">Underline</dt-button>
-</dt-stack>
-```
+<Canvas of={FocusgroupDirectiveStories.Vertical} />
 
 ### No value (defaults)
 
-```html
-<dt-stack direction="row" gap="100" role="radiogroup" v-dt-focusgroup aria-label="Options">
-  <dt-button role="radio" kind="muted" importance="outlined">A</dt-button>
-  <dt-button role="radio" kind="muted" importance="outlined">B</dt-button>
-</dt-stack>
-```
+<Canvas of={FocusgroupDirectiveStories.Defaults} />
 
 ### Disable looping
 
 Use `noloop` so focus stops at the first and last items instead of cycling:
 
-```html
-<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal noloop'" aria-label="Pagination">
-  <dt-button kind="muted" importance="outlined">First</dt-button>
-  <dt-button kind="muted" importance="outlined">Previous</dt-button>
-  <dt-button kind="muted" importance="outlined">Next</dt-button>
-  <dt-button kind="muted" importance="outlined">Last</dt-button>
-</dt-stack>
-```
+<Canvas of={FocusgroupDirectiveStories.Noloop} />
 
 ### Disable memory
 
 Use `nomemory` so re-entry via Tab always starts at the first item instead of
 restoring the last focused item:
 
-```html
-<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal nomemory'" aria-label="Actions">
-  <dt-button kind="muted" importance="outlined">Cut</dt-button>
-  <dt-button kind="muted" importance="outlined">Copy</dt-button>
-  <dt-button kind="muted" importance="outlined">Paste</dt-button>
-</dt-stack>
-```
+<Canvas of={FocusgroupDirectiveStories.Nomemory} />
 
 ### Disabled items
 
 By default, disabled items (`aria-disabled="true"` or native `disabled`) are
 skipped during arrow-key navigation:
 
-```html
-<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal'" aria-label="Tools">
-  <dt-button kind="muted" importance="outlined">Pen</dt-button>
-  <dt-button kind="muted" importance="outlined" aria-disabled="true">Eraser (disabled)</dt-button>
-  <dt-button kind="muted" importance="outlined">Highlighter</dt-button>
-</dt-stack>
-```
+<Canvas of={FocusgroupDirectiveStories.DisabledSkipped} />
 
 For `role="tablist"`, disabled items remain focusable so screen reader users can
 discover them. This is the WAI-ARIA Tabs convention and the directive applies it
 automatically. Override with explicit `skipdisabled` if needed.
 
-```html
-<dt-stack direction="row" gap="100" role="tablist" v-dt-focusgroup="'horizontal nomemory'" aria-label="Platforms">
-  <dt-button role="tab" kind="muted" importance="outlined">Mac</dt-button>
-  <dt-button role="tab" kind="muted" importance="outlined" aria-disabled="true">Windows (disabled)</dt-button>
-  <dt-button role="tab" kind="muted" importance="outlined">Linux</dt-button>
-</dt-stack>
-```
+<Canvas of={FocusgroupDirectiveStories.DisabledFocusable} />
 
 ### Selection follows focus
 
 The directive dispatches a `dt-focusgroup-move` event when focus moves via arrow
-keys. Use it to implement selection-follows-focus:
+keys. Use it to implement selection-follows-focus. See the
+[Events story](?path=/story/directives-focusgroup--events) for the full interactive example.
 
-```html
-<dt-stack
-  direction="row"
-  gap="100"
-  role="tablist"
-  v-dt-focusgroup="'horizontal nomemory'"
-  aria-label="Tabs"
-  @dt-focusgroup-move="selectedTab = $event.detail.index"
->
-  <dt-button
-    v-for="(tab, index) in tabs"
-    :key="tab.label"
-    role="tab"
-    :active="selectedTab === index"
-    :importance="selectedTab === index ? 'outlined' : 'clear'"
-    :aria-selected="selectedTab === index ? 'true' : 'false'"
-  >
-    {{ tab.label }}
-  </dt-button>
-</dt-stack>
-```
+<Canvas of={FocusgroupDirectiveStories.Events} sourceState="none" />
 
 ### Item opt-out
 
 Add `data-dt-focusgroup-skip` to exclude an element from arrow-key navigation
 (e.g., text inputs that need their own arrow keys):
 
-```html
-<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal'" aria-label="Formatting with opt-out">
-  <dt-button kind="muted" importance="outlined">Bold</dt-button>
-  <dt-input data-dt-focusgroup-skip placeholder="Skipped" />
-  <dt-button kind="muted" importance="outlined">Code</dt-button>
-</dt-stack>
-```
+<Canvas of={FocusgroupDirectiveStories.OptOut} />
 
 ### Mixed focusable elements
 
 The directive cycles through any focusable element matched by the selector,
 regardless of element type:
 
-```html
-<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal'" aria-label="Mixed elements">
-  <dt-button kind="muted" importance="outlined">Button</dt-button>
-  <dt-link>Link</dt-link>
-  <dt-select-menu
-    :options="[
-      { value: '1', label: 'Option 1' },
-      { value: '2', label: 'Option 2' },
-      { value: '3', label: 'Option 3' },
-    ]"
-    label="Select"
-    :label-visible="false"
-  />
-</dt-stack>
-```
+<Canvas of={FocusgroupDirectiveStories.Mixed} />
 
 ### Nesting depth
 
 Items do not need to be direct children. The directive uses `querySelectorAll`
 on the container, finding items at any nesting depth in DOM order:
 
-```html
-<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal'" aria-label="Nested groups">
-  <dt-stack direction="row" gap="100" class="d-bgc-moderate-opaque d-p-100">
-    <dt-button kind="muted" importance="outlined">btn</dt-button>
-    <dt-button kind="muted" importance="outlined">btn</dt-button>
-    <dt-button kind="muted" importance="outlined">btn</dt-button>
-  </dt-stack>
-  <dt-stack direction="row" gap="100" class="d-bgc-moderate-opaque d-p-100">
-    <dt-button kind="muted" importance="outlined">btn</dt-button>
-    <dt-button kind="muted" importance="outlined">btn</dt-button>
-  </dt-stack>
-  <dt-stack direction="row" gap="100" class="d-bgc-moderate-opaque d-p-100">
-    <dt-link>text link a</dt-link>
-    <dt-link>text link b</dt-link>
-  </dt-stack>
-</dt-stack>
-```
+<Canvas of={FocusgroupDirectiveStories.Nesting} />
 
 ## Tokens
 
