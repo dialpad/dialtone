@@ -4,8 +4,6 @@ import {
   LINK_KIND_MODIFIERS,
   CRITICAL,
   POSITIVE,
-  DANGER,
-  SUCCESS,
   WARNING,
   MUTED,
   getLinkKindModifier,
@@ -84,29 +82,9 @@ describe('DtLink tests', () => {
       });
     });
 
-    describe('When kind is danger (deprecated)', () => {
-      it('should have correct class', () => {
-        mockProps = { kind: DANGER };
-
-        updateWrapper();
-
-        expect(nativeLink.classes(LINK_KIND_MODIFIERS[DANGER])).toBe(true);
-      });
-    });
-
-    describe('When kind is success (deprecated)', () => {
-      it('should have correct class', () => {
-        mockProps = { kind: SUCCESS };
-
-        updateWrapper();
-
-        expect(nativeLink.classes(LINK_KIND_MODIFIERS[SUCCESS])).toBe(true);
-      });
-    });
-
-    describe('When kind is warning', () => {
+    describe('When tone is warning', () => {
       it('should have correct class', async () => {
-        mockProps = { kind: WARNING };
+        mockProps = { tone: WARNING };
 
         updateWrapper();
 
@@ -114,9 +92,9 @@ describe('DtLink tests', () => {
       });
     });
 
-    describe('When kind is muted', () => {
+    describe('When tone is muted', () => {
       it('should have correct class', async () => {
-        mockProps = { kind: MUTED };
+        mockProps = { tone: MUTED };
 
         updateWrapper();
 
@@ -134,29 +112,29 @@ describe('DtLink tests', () => {
       });
     });
 
-    describe('When kind is danger and inverted is true (deprecated)', () => {
+    describe('When tone is critical and inverted is true', () => {
       it('should have correct class', async () => {
-        mockProps = { kind: DANGER, inverted: true };
+        mockProps = { tone: CRITICAL, inverted: true };
 
         updateWrapper();
 
-        expect(nativeLink.classes(getLinkKindModifier(DANGER, true))).toBe(true);
+        expect(nativeLink.classes(getLinkKindModifier(CRITICAL, true))).toBe(true);
       });
     });
 
-    describe('When kind is success and inverted is true (deprecated)', () => {
+    describe('When tone is positive and inverted is true', () => {
       it('should have correct class', async () => {
-        mockProps = { kind: SUCCESS, inverted: true };
+        mockProps = { tone: POSITIVE, inverted: true };
 
         updateWrapper();
 
-        expect(nativeLink.classes(getLinkKindModifier(SUCCESS, true))).toBe(true);
+        expect(nativeLink.classes(getLinkKindModifier(POSITIVE, true))).toBe(true);
       });
     });
 
-    describe('When kind is warning and inverted is true', () => {
+    describe('When tone is warning and inverted is true', () => {
       it('should have correct class', async () => {
-        mockProps = { kind: WARNING, inverted: true };
+        mockProps = { tone: WARNING, inverted: true };
 
         updateWrapper();
 
@@ -164,9 +142,9 @@ describe('DtLink tests', () => {
       });
     });
 
-    describe('When kind is muted and inverted is true', () => {
+    describe('When tone is muted and inverted is true', () => {
       it('should have correct class', async () => {
-        mockProps = { kind: MUTED, inverted: true };
+        mockProps = { tone: MUTED, inverted: true };
 
         updateWrapper();
 
@@ -293,7 +271,7 @@ describe('DtLink tests', () => {
       });
     });
 
-    describe('When to is provided with kind', () => {
+    describe('When to is provided with tone', () => {
       const RouterLinkStub = {
         name: 'RouterLink',
         template: '<a data-qa="dt-link" :class="$attrs.class"><slot /></a>',
@@ -301,7 +279,7 @@ describe('DtLink tests', () => {
       };
 
       it('should apply link classes to the router-link', () => {
-        mockProps = { to: '/components/', kind: MUTED };
+        mockProps = { to: '/components/', tone: MUTED };
         mockGlobal = {
           stubs: { RouterLink: RouterLinkStub },
         };

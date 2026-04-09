@@ -80,7 +80,7 @@
     >
       <dt-badge
         text="Resolved"
-        type="success"
+        type="positive"
       />
     </dt-stack>
     <dt-stack
@@ -144,7 +144,7 @@
       <dt-badge
         text="5%"
         kind="count"
-        type="success"
+        type="positive"
       >
         <template #startIcon="{ iconSize }">
           <dt-icon-arrow-up :size="iconSize" />

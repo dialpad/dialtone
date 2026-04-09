@@ -110,7 +110,6 @@ export default {
     /**
      * Severity level of the notice, sets the icon and background
      * @values base, critical, info, positive, warning
-     * @deprecated-values error (use critical), success (use positive)
      */
     kind: {
       type: String,
@@ -179,10 +178,8 @@ export default {
     noticeClass () {
       const noticeKinds = {
         critical: 'd-notice--critical',
-        error: 'd-notice--error',
         info: 'd-notice--info',
         positive: 'd-notice--positive',
-        success: 'd-notice--success',
         warning: 'd-notice--warning',
         base: 'd-notice--base',
       };

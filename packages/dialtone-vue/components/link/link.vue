@@ -27,7 +27,6 @@ export default {
     /**
      * Applies the link variant styles
      * @values null, critical, warning, positive, muted, mention
-     * @deprecated-values danger (use critical), success (use positive)
      */
     tone: {
       type: String,

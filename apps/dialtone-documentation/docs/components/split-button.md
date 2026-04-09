@@ -70,12 +70,12 @@ In addition to the [Button component's](button.md) documentation:
 </dt-stack>
 ```
 
-### Danger
+### Critical
 
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="100">
-  <dt-split-button kind="danger" end-tooltip-text="More calling options">
+  <dt-split-button kind="critical" end-tooltip-text="More calling options">
     Place Call
     <template #dropdownList>
       <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>
@@ -83,7 +83,7 @@ In addition to the [Button component's](button.md) documentation:
       <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>
     </template>
   </dt-split-button>
-  <dt-split-button importance="outlined" kind="danger" end-tooltip-text="More calling options">
+  <dt-split-button importance="outlined" kind="critical" end-tooltip-text="More calling options">
     Place Call
     <template #dropdownList>
       <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>
@@ -91,7 +91,7 @@ In addition to the [Button component's](button.md) documentation:
       <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>
     </template>
   </dt-split-button>
-  <dt-split-button importance="clear" kind="danger" end-tooltip-text="More calling options">
+  <dt-split-button importance="clear" kind="critical" end-tooltip-text="More calling options">
     Place Call
     <template #dropdownList>
       <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>
@@ -314,7 +314,7 @@ Use `#endIcon` to replace the default chevron icon on the end (omega) button.
       <dt-icon name="phone" :size="size" />
     </template>
   </dt-split-button>
-  <dt-split-button importance="clear" kind="danger" end-tooltip-text="More calling options" start-tooltip-text="Place call">
+  <dt-split-button importance="clear" kind="critical" end-tooltip-text="More calling options" start-tooltip-text="Place call">
     <template #startIcon="{ size }">
       <dt-icon name="phone" :size="size" />
     </template>

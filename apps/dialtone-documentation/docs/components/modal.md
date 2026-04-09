@@ -32,7 +32,7 @@ Although highly versatile, this doesn't mean modal dialogs are fit for all purpo
 
 - When its content or features can be part of the page without complicating the page's intent.
 - When the content or message requires interaction with other parts of the application or screen.
-- Form-related error, success, or warning messages. Keep feedback in context to forms.
+- Form-related critical, positive, or warning messages. Keep feedback in context to forms.
 - Confirming an action took place (instead: use a [Toast](toast.md)).
 - Revealing more information (instead: place content inline)
 - Displaying complex forms or large amounts of information (instead: place content inline)
@@ -141,17 +141,17 @@ This is the default behavior that adds the scroll automatically in the modal con
 </dt-button>
 ```
 
-### Danger
+### Critical
 
 A modal style for destructive or irreversible actions.
 
 ```vue demo
-<example-modal kind="danger" />
+<example-modal kind="critical" />
 <!-- @code -->
 <dt-modal
   title="Example title"
   :show="isOpen"
-  kind="danger"
+  kind="critical"
   copy="Sed at orci quis nunc finibus gravida eget vitae est..."
   @update:show="updateShow"
 >
@@ -167,7 +167,7 @@ A modal style for destructive or irreversible actions.
     </dt-button>
     <dt-button
       id="confirm-button"
-      kind="danger"
+      kind="critical"
       importance="primary"
     >
       Confirm
@@ -350,7 +350,7 @@ At minimum, modals contain a title and one button. They could also contain body 
 
   const isOpen = ref(false);
   const invertedModalOpen = ref(false);
-  const selectedBannerKind = ref('success');
+  const selectedBannerKind = ref('positive');
   const fixedHeaderFooterCopy = ref(`Sed at orci quis nunc finibus gravida eget vitae est. Praesent
           ac laoreet mi. Cras porttitor mauris ex. Integer convallis tellus a ex egestas, id laoreet elit mollis. Mauris
           ut elementum velit. Nam vel consectetur turpis. Aenean consequat purus non nunc tincidunt rutrum. In semper

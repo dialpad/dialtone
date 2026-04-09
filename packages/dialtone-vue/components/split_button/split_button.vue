@@ -370,7 +370,7 @@ export default {
 
     /**
      * The color of the button.
-     * @values default, muted, danger
+     * @values default, muted, critical
      */
     kind: {
       type: String,

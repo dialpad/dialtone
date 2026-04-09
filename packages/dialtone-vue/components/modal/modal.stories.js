@@ -193,7 +193,7 @@ export const WithDangerStyle = {
   render: DefaultTemplate,
 
   args: {
-    kind: 'danger',
+    kind: 'critical',
     showFooter: true,
   },
 

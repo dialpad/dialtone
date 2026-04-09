@@ -82,20 +82,20 @@ describe('DtButton Tests', () => {
         });
       });
 
-      describe('When button has kind set to danger (deprecated)', () => {
-        it('Should have danger class', async () => {
+      describe('When button has kind set to critical', () => {
+        it('Should have critical class', async () => {
           await wrapper.setProps({
-            kind: 'danger',
+            kind: 'critical',
           });
 
           button = wrapper.find('.base-button__button');
 
-          expect(button.classes().includes('d-btn--danger')).toBe(true);
+          expect(button.classes().includes('d-btn--critical')).toBe(true);
         });
       });
 
       describe('When button has an invalid kind prop', () => {
-        it('should not have danger class', async () => {
+        it('should not have critical class', async () => {
           await wrapper.setProps({
             kind: 'bad',
           });
@@ -294,13 +294,13 @@ describe('DtButton Tests', () => {
           });
         });
 
-        describe('When link kind is danger', () => {
+        describe('When link kind is critical', () => {
           it('sets the correct class', async () => {
             await wrapper.setProps({
-              linkKind: 'danger',
+              linkKind: 'critical',
             });
 
-            expect(button.classes().includes('d-link--danger')).toBe(true);
+            expect(button.classes().includes('d-link--critical')).toBe(true);
           });
         });
 

@@ -2,7 +2,7 @@
   <dt-stack gap="200">
     <div>
       <dt-button
-        kind="danger"
+        kind="critical"
         importance="primary"
       >
         <dt-emoji-text-wrapper>Button with shortcode :cry: emoji</dt-emoji-text-wrapper>

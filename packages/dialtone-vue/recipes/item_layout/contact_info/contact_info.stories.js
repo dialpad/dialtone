@@ -264,7 +264,7 @@ export const Variants = {
           </dt-stack>
         </template>
         <template #subtitle>
-          <dt-link kind="danger" @click.stop="onMarkAsSpam">Mark as spam</dt-link>
+          <dt-link tone="critical" @click.stop="onMarkAsSpam">Mark as spam</dt-link>
         </template>
       </dt-recipe-contact-info>
     </div>

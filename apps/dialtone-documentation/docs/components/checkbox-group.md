@@ -72,9 +72,9 @@ Checkbox Groups are typically paired with a legend which identifies the group. I
 <dt-stack gap="200">
   <div>
     <dt-checkbox-group
-      name="checkbox-group-with-success-message"
+      name="checkbox-group-with-positive-message"
       legend="Fruits"
-      :messages='[{"message":"Success validation message","type":"success"}]'
+      :messages='[{"message":"Positive validation message","type":"positive"}]'
     >
       <dt-checkbox value="apple"><span>Apple</span></dt-checkbox>
       <dt-checkbox value="banana"><span>Banana</span></dt-checkbox>
@@ -96,7 +96,7 @@ Checkbox Groups are typically paired with a legend which identifies the group. I
     <dt-checkbox-group
       name="checkbox-group-with-error-message"
       legend="Fruits"
-      :messages='[{"message":"Error validation message","type":"error"}]'
+      :messages='[{"message":"Critical validation message","type":"critical"}]'
     >
       <dt-checkbox value="apple"><span>Apple</span></dt-checkbox>
       <dt-checkbox value="banana"><span>Banana</span></dt-checkbox>
@@ -108,8 +108,8 @@ Checkbox Groups are typically paired with a legend which identifies the group. I
 <dt-checkbox-group
   name="fruits-checkbox-group"
   legend="Fruits"
-  validation-state="success"
-  :messages="[{ message: `Success validation message.`, type: `success` }]"
+  validation-state="positive"
+  :messages="[{ message: `Positive validation message.`, type: `positive` }]"
 >
   <dt-checkbox value="apple"><span>Apple</span></dt-checkbox>
   <dt-checkbox value="banana"><span>Banana</span></dt-checkbox>
@@ -128,8 +128,8 @@ Checkbox Groups are typically paired with a legend which identifies the group. I
 <dt-checkbox-group
   name="fruits-checkbox-group"
   legend="Fruits"
-  validation-state="error"
-  :messages="[{ message: `Error validation message.`, type: `error` }]"
+  validation-state="critical"
+  :messages="[{ message: `Critical validation message.`, type: `critical` }]"
 >
   <dt-checkbox value="apple"><span>Apple</span></dt-checkbox>
   <dt-checkbox value="banana"><span>Banana</span></dt-checkbox>
@@ -143,7 +143,7 @@ Checkbox Groups are typically paired with a legend which identifies the group. I
 <dt-checkbox-group
   name="my-group-name"
   legend="My Legend"
-  :messages="[{ message: 'My Success Message', type: `success` }]"
+  :messages="[{ message: 'My Positive Message', type: `positive` }]"
   :show-messages="false"
 >
   <dt-checkbox

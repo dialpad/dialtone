@@ -63,36 +63,36 @@
     </dt-select-menu>
     <!-- With Slotted Options -->
 
-    <!-- With Error Message -->
+    <!-- With Critical Message -->
     <dt-select-menu
-      id="with-error-message"
-      name="with-error-message"
-      label="With Error Message"
+      id="with-critical-message"
+      name="with-critical-message"
+      label="With Critical Message"
       :options="$attrs.options"
-      :messages="[{ message: 'Error', type: VALIDATION_MESSAGE_TYPES.ERROR }]"
+      :messages="[{ message: 'Critical', type: VALIDATION_MESSAGE_TYPES.CRITICAL }]"
     />
-    <!-- With Error Message -->
+    <!-- With Critical Message -->
 
-    <!-- With Error Messages Hidden -->
+    <!-- With Critical Messages Hidden -->
     <dt-select-menu
-      id="with-error-messages-hidden"
-      name="with-error-messages-hidden"
-      label="With Error Messages Hidden"
+      id="with-critical-messages-hidden"
+      name="with-critical-messages-hidden"
+      label="With Critical Messages Hidden"
       :options="$attrs.options"
-      :messages="[{ message: 'Error', type: VALIDATION_MESSAGE_TYPES.ERROR }]"
+      :messages="[{ message: 'Critical', type: VALIDATION_MESSAGE_TYPES.CRITICAL }]"
       :show-messages="false"
     />
-    <!-- With Error Messages Hidden -->
+    <!-- With Critical Messages Hidden -->
 
-    <!-- With Success Message -->
+    <!-- With Positive Message -->
     <dt-select-menu
-      id="with-success-message"
-      name="with-success-message"
-      label="With Success Message"
+      id="with-positive-message"
+      name="with-positive-message"
+      label="With Positive Message"
       :options="$attrs.options"
-      :messages="[{ message: 'Success', type: VALIDATION_MESSAGE_TYPES.SUCCESS }]"
+      :messages="[{ message: 'Positive', type: VALIDATION_MESSAGE_TYPES.POSITIVE }]"
     />
-    <!-- With Success Message -->
+    <!-- With Positive Message -->
 
     <!-- With Warning Message -->
     <dt-select-menu

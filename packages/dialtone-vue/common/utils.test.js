@@ -119,7 +119,7 @@ describe('Util Tests', () => {
           },
           {
             message: 'message 2',
-            type: VALIDATION_MESSAGE_TYPES.SUCCESS,
+            type: VALIDATION_MESSAGE_TYPES.POSITIVE,
           },
         ];
         expectedFormattedMessages = messageList;
@@ -135,7 +135,7 @@ describe('Util Tests', () => {
           'message 1',
           {
             message: 'message 2',
-            type: VALIDATION_MESSAGE_TYPES.SUCCESS,
+            type: VALIDATION_MESSAGE_TYPES.POSITIVE,
           },
         ];
         expectedFormattedMessages = [
@@ -145,7 +145,7 @@ describe('Util Tests', () => {
           },
           {
             message: 'message 2',
-            type: VALIDATION_MESSAGE_TYPES.SUCCESS,
+            type: VALIDATION_MESSAGE_TYPES.POSITIVE,
           },
         ];
       });
@@ -181,10 +181,10 @@ describe('Util Tests', () => {
       itBehavesLikeReturnsEmptyMessageList(filterFormattedMessages([]));
     });
 
-    describe('when there is only SUCCESS messages', () => {
+    describe('when there is only POSITIVE messages', () => {
       // Test Setup
       beforeEach(() => {
-        _setFormattedMessages(VALIDATION_MESSAGE_TYPES.SUCCESS);
+        _setFormattedMessages(VALIDATION_MESSAGE_TYPES.POSITIVE);
         expectedFilteredFormattedMessages = formattedMessages;
       });
 
@@ -200,29 +200,29 @@ describe('Util Tests', () => {
 
       itBehavesLikeReturnsFilteredFormattedMessageList();
 
-      describe('when there is also a SUCCESS message', () => {
+      describe('when there is also a POSITIVE message', () => {
         // Test Setup
         beforeEach(() => {
-          _addFormattedMessage(VALIDATION_MESSAGE_TYPES.SUCCESS);
+          _addFormattedMessage(VALIDATION_MESSAGE_TYPES.POSITIVE);
         });
 
         itBehavesLikeReturnsFilteredFormattedMessageList();
       });
     });
 
-    describe('when there is an ERROR message', () => {
+    describe('when there is an CRITICAL message', () => {
       // Test Setup
       beforeEach(() => {
-        _setFormattedMessages(VALIDATION_MESSAGE_TYPES.ERROR);
+        _setFormattedMessages(VALIDATION_MESSAGE_TYPES.CRITICAL);
         expectedFilteredFormattedMessages = formattedMessages;
       });
 
       itBehavesLikeReturnsFilteredFormattedMessageList();
 
-      describe('when there is also a SUCCESS message', () => {
+      describe('when there is also a POSITIVE message', () => {
         // Test Setup
         beforeEach(() => {
-          _addFormattedMessage(VALIDATION_MESSAGE_TYPES.SUCCESS);
+          _addFormattedMessage(VALIDATION_MESSAGE_TYPES.POSITIVE);
         });
 
         itBehavesLikeReturnsFilteredFormattedMessageList();
@@ -249,26 +249,26 @@ describe('Util Tests', () => {
 
     describe('when formatted message list is undefined', () => {
       it('should return false', () => {
-        expect(hasFormattedMessageOfType(undefined, VALIDATION_MESSAGE_TYPES.ERROR)).toBe(false);
+        expect(hasFormattedMessageOfType(undefined, VALIDATION_MESSAGE_TYPES.CRITICAL)).toBe(false);
       });
     });
 
     describe('when formatted message list is null', () => {
       it('should return false', () => {
-        expect(hasFormattedMessageOfType(null, VALIDATION_MESSAGE_TYPES.ERROR)).toBe(false);
+        expect(hasFormattedMessageOfType(null, VALIDATION_MESSAGE_TYPES.CRITICAL)).toBe(false);
       });
     });
 
     describe('when the formatted message list is empty', () => {
       it('should return false', () => {
-        expect(hasFormattedMessageOfType([], VALIDATION_MESSAGE_TYPES.ERROR)).toBe(false);
+        expect(hasFormattedMessageOfType([], VALIDATION_MESSAGE_TYPES.CRITICAL)).toBe(false);
       });
     });
 
     describe('when there is a formatted message list', () => {
       // Test Setup
       beforeEach(() => {
-        _setFormattedMessages(VALIDATION_MESSAGE_TYPES.SUCCESS);
+        _setFormattedMessages(VALIDATION_MESSAGE_TYPES.POSITIVE);
       });
 
       describe('when there is no given type', () => {
@@ -298,7 +298,7 @@ describe('Util Tests', () => {
       describe('when there is no formatted message of the given type', () => {
         it('should return false', () => {
           expect(
-            hasFormattedMessageOfType(formattedMessages, VALIDATION_MESSAGE_TYPES.ERROR),
+            hasFormattedMessageOfType(formattedMessages, VALIDATION_MESSAGE_TYPES.CRITICAL),
           ).toBe(false);
         });
       });
@@ -306,7 +306,7 @@ describe('Util Tests', () => {
       describe('when there is a formatted message of the given type', () => {
         it('should return true', () => {
           expect(
-            hasFormattedMessageOfType(formattedMessages, VALIDATION_MESSAGE_TYPES.SUCCESS),
+            hasFormattedMessageOfType(formattedMessages, VALIDATION_MESSAGE_TYPES.POSITIVE),
           ).toBe(true);
         });
       });
@@ -316,12 +316,12 @@ describe('Util Tests', () => {
   describe('getValidationState', () => {
     // Test Setup
     beforeEach(() => {
-      _setFormattedMessages(VALIDATION_MESSAGE_TYPES.SUCCESS);
+      _setFormattedMessages(VALIDATION_MESSAGE_TYPES.POSITIVE);
     });
 
-    describe('when all message types are SUCCESS', () => {
-      it('should return SUCCESS', () => {
-        expect(getValidationState(formattedMessages)).toBe(VALIDATION_MESSAGE_TYPES.SUCCESS);
+    describe('when all message types are POSITIVE', () => {
+      it('should return POSITIVE', () => {
+        expect(getValidationState(formattedMessages)).toBe(VALIDATION_MESSAGE_TYPES.POSITIVE);
       });
     });
 
@@ -336,15 +336,15 @@ describe('Util Tests', () => {
       });
     });
 
-    describe('when there is an ERROR message type', () => {
+    describe('when there is an CRITICAL message type', () => {
       // Test Setup
       beforeEach(() => {
         _addFormattedMessage(VALIDATION_MESSAGE_TYPES.WARNING);
-        _addFormattedMessage(VALIDATION_MESSAGE_TYPES.ERROR);
+        _addFormattedMessage(VALIDATION_MESSAGE_TYPES.CRITICAL);
       });
 
-      it('should return ERROR', () => {
-        expect(getValidationState(formattedMessages)).toBe(VALIDATION_MESSAGE_TYPES.ERROR);
+      it('should return CRITICAL', () => {
+        expect(getValidationState(formattedMessages)).toBe(VALIDATION_MESSAGE_TYPES.CRITICAL);
       });
     });
   });

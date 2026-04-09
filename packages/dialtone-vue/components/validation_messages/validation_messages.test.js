@@ -7,8 +7,8 @@ import {
 } from '../../tests/helpers/validation_messages';
 
 const MOCK_BASE_VALIDATION_MESSAGES = [{
-  message: 'Error',
-  type: VALIDATION_MESSAGE_TYPES.ERROR,
+  message: 'Critical',
+  type: VALIDATION_MESSAGE_TYPES.CRITICAL,
 }];
 
 let MOCK_VALIDATION_MESSAGES;
@@ -38,13 +38,13 @@ describe('Validation Messages Tests', () => {
   });
 
   describe('Presentation Tests', () => {
-    describe('When there is a success validation message', () => {
-      const MOCK_SUCCESS_VALIDATION_MESSAGE = 'Success';
+    describe('When there is a positive validation message', () => {
+      const MOCK_POSITIVE_VALIDATION_MESSAGE = 'Positive';
 
       beforeEach(() => {
         MOCK_VALIDATION_MESSAGES = setFormattedValidationMessages(
-          VALIDATION_MESSAGE_TYPES.SUCCESS,
-          MOCK_SUCCESS_VALIDATION_MESSAGE);
+          VALIDATION_MESSAGE_TYPES.POSITIVE,
+          MOCK_POSITIVE_VALIDATION_MESSAGE);
       });
 
       describe('When the radio group renders', () => {
@@ -59,7 +59,7 @@ describe('Validation Messages Tests', () => {
         });
 
         it('should have matching first validation message', () => {
-          expect(messages.at(0).text()).toBe(MOCK_SUCCESS_VALIDATION_MESSAGE);
+          expect(messages.at(0).text()).toBe(MOCK_POSITIVE_VALIDATION_MESSAGE);
         });
       });
 
@@ -102,14 +102,14 @@ describe('Validation Messages Tests', () => {
           });
         });
 
-        describe('When there is also an error validation message', () => {
-          const MOCK_ERROR_VALIDATION_MESSAGE = 'Error';
+        describe('When there is also a critical validation message', () => {
+          const MOCK_CRITICAL_VALIDATION_MESSAGE = 'Critical';
 
           beforeEach(() => {
             MOCK_VALIDATION_MESSAGES = addFormattedValidationMessage(
               MOCK_VALIDATION_MESSAGES,
-              VALIDATION_MESSAGE_TYPES.ERROR,
-              MOCK_ERROR_VALIDATION_MESSAGE,
+              VALIDATION_MESSAGE_TYPES.CRITICAL,
+              MOCK_CRITICAL_VALIDATION_MESSAGE,
             );
           });
 
@@ -125,7 +125,7 @@ describe('Validation Messages Tests', () => {
             });
 
             it('should have matching first validation message', () => {
-              expect(messages.at(0).text()).toBe(MOCK_ERROR_VALIDATION_MESSAGE);
+              expect(messages.at(0).text()).toBe(MOCK_CRITICAL_VALIDATION_MESSAGE);
             });
           });
         });
@@ -151,15 +151,15 @@ describe('Validation Messages Tests', () => {
         });
       });
 
-      describe('When there is also a correct success validation message', () => {
+      describe('When there is also a correct positive validation message', () => {
         describe('When the validation message renders', () => {
           it('should not have any visible validation messages', () => {
-            const MOCK_SUCCESS_VALIDATION_MESSAGE = 'Success';
+            const MOCK_POSITIVE_VALIDATION_MESSAGE = 'Positive';
 
             MOCK_VALIDATION_MESSAGES = addFormattedValidationMessage(
               MOCK_VALIDATION_MESSAGES,
-              VALIDATION_MESSAGE_TYPES.SUCCESS,
-              MOCK_SUCCESS_VALIDATION_MESSAGE,
+              VALIDATION_MESSAGE_TYPES.POSITIVE,
+              MOCK_POSITIVE_VALIDATION_MESSAGE,
             );
 
             mockProps = { validationMessages: MOCK_VALIDATION_MESSAGES };
@@ -224,7 +224,7 @@ describe('Validation Messages Tests', () => {
       const MOCK_PROP = DtValidationMessages.props.validationMessages;
 
       it('passes custom prop validation', () => {
-        expect(MOCK_PROP.validator(['Error'])).toBe(true);
+        expect(MOCK_PROP.validator(['Critical'])).toBe(true);
       });
 
       describe('When the provided messages are numeric', () => {

@@ -66,9 +66,9 @@ export const INPUT_SIZE_CLASSES = {
 };
 
 export const INPUT_STATE_CLASSES = {
-  error: 'd-input--error',
+  critical: 'd-input--critical',
   warning: 'd-input--warning',
-  success: 'd-input--success',
+  positive: 'd-input--positive',
 };
 
 export const DESCRIPTION_SIZE_CLASSES = {

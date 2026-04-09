@@ -74,16 +74,16 @@ The base button should be the go-to button for most of your needs. When in doubt
 </dt-stack>
 ```
 
-### Danger
+### Critical
 
-The danger button style is used to communicate critical or destructive actions such as deleting content, accounts, or canceling services.
+The critical button style is used to communicate critical or destructive actions such as deleting content, accounts, or canceling services.
 
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="100">
-  <dt-button kind="danger"> Place Call </dt-button>
-  <dt-button kind="danger" importance="outlined"> Place Call </dt-button>
-  <dt-button kind="danger" importance="clear"> Place Call </dt-button>
+  <dt-button kind="critical"> Place Call </dt-button>
+  <dt-button kind="critical" importance="outlined"> Place Call </dt-button>
+  <dt-button kind="critical" importance="clear"> Place Call </dt-button>
 </dt-stack>
 ```
 
@@ -126,9 +126,9 @@ This style's use should be rare. When in doubt, use the [default button style](#
       <dt-button :disabled="isDisabled" importance="clear"> Place Call </dt-button>
     </dt-stack>
     <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
-      <dt-button :disabled="isDisabled" kind="danger"> Place Call </dt-button>
-      <dt-button :disabled="isDisabled" kind="danger" importance="outlined"> Place Call </dt-button>
-      <dt-button :disabled="isDisabled" kind="danger" importance="clear"> Place Call </dt-button>
+      <dt-button :disabled="isDisabled" kind="critical"> Place Call </dt-button>
+      <dt-button :disabled="isDisabled" kind="critical" importance="outlined"> Place Call </dt-button>
+      <dt-button :disabled="isDisabled" kind="critical" importance="clear"> Place Call </dt-button>
     </dt-stack>
     <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
       <dt-button :disabled="isDisabled" kind="positive">Place Call</dt-button>
@@ -175,7 +175,7 @@ Buttons can be set to active state using the `active` prop or `.d-btn--active` D
 >
   <dt-button importance="clear" active>Place Call</dt-button>
   <dt-button active>Place Call</dt-button>
-  <dt-button kind="danger" importance="clear" active>Place Call</dt-button>
+  <dt-button kind="critical" importance="clear" active>Place Call</dt-button>
   <dt-button kind="positive" importance="clear" active>Place Call</dt-button>
   <dt-button kind="muted" active>Place Call</dt-button>
 </dt-stack>
@@ -193,8 +193,8 @@ Buttons can be styled to match the appearance of a [DtLink](link.md) in situatio
 >
   <dt-button link>Place Call</dt-button>
   <dt-button link linkKind="warning">Place Call</dt-button>
-  <dt-button link linkKind="danger">Place Call</dt-button>
-  <dt-button link linkKind="success">Place Call</dt-button>
+  <dt-button link linkKind="critical">Place Call</dt-button>
+  <dt-button link linkKind="positive">Place Call</dt-button>
   <dt-button link linkKind="muted">Place Call</dt-button>
   <dt-button link disabled>Place Call</dt-button>
 </dt-stack>
@@ -211,7 +211,7 @@ This inverts the underline behavior. With `underline="false"`, the link will not
   :direction="{ 'default': 'column', 'md': 'row' }"
 >
   <dt-button link :underline="false">Place Call</dt-button>
-  <dt-button link linkKind="danger" :underline="false">Place Call</dt-button>
+  <dt-button link linkKind="critical" :underline="false">Place Call</dt-button>
 </dt-stack>
 ```
 
@@ -240,9 +240,9 @@ Use the [v-dt-mode directive](mode-island.html#inverting) in place of `kind="inv
       <dt-button v-dt-mode:invert="isInverted" importance="clear"> Place Call </dt-button>
     </dt-stack>
     <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
-      <dt-button v-dt-mode:invert="isInverted" kind="danger"> Place Call </dt-button>
-      <dt-button v-dt-mode:invert="isInverted" kind="danger" importance="outlined"> Place Call </dt-button>
-      <dt-button v-dt-mode:invert="isInverted" kind="danger" importance="clear"> Place Call </dt-button>
+      <dt-button v-dt-mode:invert="isInverted" kind="critical"> Place Call </dt-button>
+      <dt-button v-dt-mode:invert="isInverted" kind="critical" importance="outlined"> Place Call </dt-button>
+      <dt-button v-dt-mode:invert="isInverted" kind="critical" importance="clear"> Place Call </dt-button>
     </dt-stack>
     <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
       <dt-button v-dt-mode:invert="isInverted" kind="positive">Place Call</dt-button>
@@ -510,7 +510,7 @@ Icon-only buttons are commonly used for toggling actions, navigation, or closing
     </dt-button>
   </dt-stack>
   <dt-stack direction="row" gap="100">
-    <dt-button v-dt-tooltip="`Tooltip`" kind="danger" importance="clear">
+    <dt-button v-dt-tooltip="`Tooltip`" kind="critical" importance="clear">
       <template #startIcon="{ iconSize }">
         <dt-icon
           name="phone"
@@ -518,7 +518,7 @@ Icon-only buttons are commonly used for toggling actions, navigation, or closing
         />
       </template>
     </dt-button>
-    <dt-button v-dt-tooltip="`Tooltip`" kind="danger" importance="outlined">
+    <dt-button v-dt-tooltip="`Tooltip`" kind="critical" importance="outlined">
       <template #startIcon="{ iconSize }">
         <dt-icon
           name="phone"
@@ -526,7 +526,7 @@ Icon-only buttons are commonly used for toggling actions, navigation, or closing
         />
       </template>
     </dt-button>
-    <dt-button v-dt-tooltip="`Tooltip`" kind="danger">
+    <dt-button v-dt-tooltip="`Tooltip`" kind="critical">
       <template #startIcon="{ iconSize }">
         <dt-icon
           name="phone"
@@ -593,7 +593,7 @@ The following styles are available as a circle shape.
     </dt-button>
   </dt-stack>
   <dt-stack direction="row" gap="100">
-    <dt-button v-dt-tooltip="`Tooltip`" circle kind="danger" importance="clear">
+    <dt-button v-dt-tooltip="`Tooltip`" circle kind="critical" importance="clear">
       <template #startIcon="{ iconSize }">
         <dt-icon
           name="phone"
@@ -601,7 +601,7 @@ The following styles are available as a circle shape.
         />
       </template>
     </dt-button>
-    <dt-button v-dt-tooltip="`Tooltip`" circle kind="danger" importance="outlined">
+    <dt-button v-dt-tooltip="`Tooltip`" circle kind="critical" importance="outlined">
       <template #startIcon="{ iconSize }">
         <dt-icon
           name="phone"
@@ -609,7 +609,7 @@ The following styles are available as a circle shape.
         />
       </template>
     </dt-button>
-    <dt-button v-dt-tooltip="`Tooltip`" circle kind="danger">
+    <dt-button v-dt-tooltip="`Tooltip`" circle kind="critical">
       <template #startIcon="{ iconSize }">
         <dt-icon
           name="phone"

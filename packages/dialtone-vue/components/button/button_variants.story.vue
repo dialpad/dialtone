@@ -190,7 +190,7 @@
       </dt-button>
       <dt-button
         active
-        kind="danger"
+        kind="critical"
       >
         Active Danger button
       </dt-button>

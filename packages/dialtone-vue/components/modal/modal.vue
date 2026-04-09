@@ -220,7 +220,6 @@ export default {
     /**
      * The theme of the modal.
      * @values default, critical
-     * @deprecated-values danger (use critical)
      */
     kind: {
       type: String,
@@ -271,7 +270,6 @@ export default {
     /**
      * Sets the color of the banner.
      * @values base, critical, info, positive, warning
-     * @deprecated-values error (use critical), success (use positive)
      */
     bannerKind: {
       type: String,

@@ -89,11 +89,11 @@ describe('DtBadge Tests', () => {
         });
       });
 
-      describe('When type is success (deprecated)', () => {
+      describe('When type is positive', () => {
         it('should have correct type', async () => {
-          await wrapper.setProps({ type: 'success' });
+          await wrapper.setProps({ type: 'positive' });
 
-          expect(badge.classes(BADGE_TYPE_MODIFIERS.success)).toBe(true);
+          expect(badge.classes(BADGE_TYPE_MODIFIERS.positive)).toBe(true);
         });
       });
 

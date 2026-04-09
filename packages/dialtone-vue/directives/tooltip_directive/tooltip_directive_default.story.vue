@@ -8,7 +8,7 @@
     <dt-button
       v-dt-tooltip:bottom="'Tooltip on bottom'"
       importance="clear"
-      kind="danger"
+      kind="critical"
       circle
       aria-label="example button"
     >

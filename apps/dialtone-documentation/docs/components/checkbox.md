@@ -168,15 +168,15 @@ Checkboxes are an easily understandable way to indicate that users can select on
     name="option2"
     value="Value"
     label="Block callers not already in contacts list"
-    validation-state="error"
-    :messages="[{ message: `You get enough calls. Free up some of your time.`, type: `error` }]"
+    validation-state="critical"
+    :messages="[{ message: `You get enough calls. Free up some of your time.`, type: `critical` }]"
   />
   <dt-checkbox
     name="option3"
     value="Value"
     label="Block callers with a high spam score"
-    validation-state="success"
-    :messages="[{ message: `We will only let the legitimate callers through to bother you.`, type: `success` }]"
+    validation-state="positive"
+    :messages="[{ message: `We will only let the legitimate callers through to bother you.`, type: `positive` }]"
   />
 </dt-checkbox-group>
 ```
