@@ -189,7 +189,7 @@ export const WithBanner = {
   parameters: { ...Default.parameters },
 };
 
-export const WithDangerStyle = {
+export const WithCriticalStyle = {
   render: DefaultTemplate,
 
   args: {

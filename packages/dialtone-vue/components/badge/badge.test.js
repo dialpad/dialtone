@@ -85,14 +85,6 @@ describe('DtBadge Tests', () => {
         it('should have correct type', async () => {
           await wrapper.setProps({ type: 'positive' });
 
-          expect(badge.classes('d-badge--positive')).toBe(true);
-        });
-      });
-
-      describe('When type is positive', () => {
-        it('should have correct type', async () => {
-          await wrapper.setProps({ type: 'positive' });
-
           expect(badge.classes(BADGE_TYPE_MODIFIERS.positive)).toBe(true);
         });
       });

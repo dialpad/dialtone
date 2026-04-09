@@ -119,7 +119,7 @@
 
     <!-- Checked Critical With Description -->
     <dt-radio
-      name="CritcalChecked"
+      name="CriticalChecked"
       value="Validation"
       label="Critical"
       description="With Description"

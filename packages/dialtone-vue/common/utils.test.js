@@ -210,7 +210,7 @@ describe('Util Tests', () => {
       });
     });
 
-    describe('when there is an CRITICAL message', () => {
+    describe('when there is a CRITICAL message', () => {
       // Test Setup
       beforeEach(() => {
         _setFormattedMessages(VALIDATION_MESSAGE_TYPES.CRITICAL);
@@ -336,7 +336,7 @@ describe('Util Tests', () => {
       });
     });
 
-    describe('when there is an CRITICAL message type', () => {
+    describe('when there is a CRITICAL message type', () => {
       // Test Setup
       beforeEach(() => {
         _addFormattedMessage(VALIDATION_MESSAGE_TYPES.WARNING);

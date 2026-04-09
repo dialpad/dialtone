@@ -70,17 +70,7 @@ describe('DtButton Tests', () => {
         });
       });
 
-      describe('When button has kind set to critical', () => {
-        it('Should have critical class', async () => {
-          await wrapper.setProps({
-            kind: 'critical',
-          });
 
-          button = wrapper.find('.base-button__button');
-
-          expect(button.classes().includes('d-btn--critical')).toBe(true);
-        });
-      });
 
       describe('When button has kind set to critical', () => {
         it('Should have critical class', async () => {

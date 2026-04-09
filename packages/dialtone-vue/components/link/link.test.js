@@ -68,7 +68,7 @@ describe('DtLink tests', () => {
 
         updateWrapper();
 
-        expect(nativeLink.classes('d-link--critical')).toBe(true);
+        expect(nativeLink.classes(LINK_KIND_MODIFIERS[CRITICAL])).toBe(true);
       });
     });
 
@@ -78,7 +78,7 @@ describe('DtLink tests', () => {
 
         updateWrapper();
 
-        expect(nativeLink.classes('d-link--positive')).toBe(true);
+        expect(nativeLink.classes(LINK_KIND_MODIFIERS[POSITIVE])).toBe(true);
       });
     });
 

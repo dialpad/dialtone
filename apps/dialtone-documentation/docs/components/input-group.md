@@ -208,9 +208,9 @@ export default {
   <!-- Input Elements -->
 </dt-input-group>
 <dt-input-group
-  name="input-group-with-error-message"
+  name="input-group-with-critical-message"
   legend="With Critical Message"
-  :messages="[{ message: `Error`, type: VALIDATION_MESSAGE_TYPES.CRITICAL }]"
+  :messages="[{ message: `Critical`, type: VALIDATION_MESSAGE_TYPES.CRITICAL }]"
 >
   <!-- Input Elements -->
 </dt-input-group>
@@ -220,7 +220,7 @@ export default {
 
 ```vue demo
 <dt-input-group
-  name="input-group-with-error-messages-hidden"
+  name="input-group-with-critical-messages-hidden"
   legend="With Critical Messages Hidden"
   :messages="[{ message: 'Critical', type: 'critical' }]"
   :show-messages="false"
@@ -231,7 +231,7 @@ export default {
 </dt-input-group>
 <!-- @code -->
 <dt-input-group
-  name="input-group-with-error-messages-hidden"
+  name="input-group-with-critical-messages-hidden"
   legend="With Critical Messages Hidden"
   :messages="[{ message: `Critical`, type: VALIDATION_MESSAGE_TYPES.CRITICAL }]"
   :show-messages="false"

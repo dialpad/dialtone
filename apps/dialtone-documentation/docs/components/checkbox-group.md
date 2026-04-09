@@ -94,7 +94,7 @@ Checkbox Groups are typically paired with a legend which identifies the group. I
   </div>
   <div>
     <dt-checkbox-group
-      name="checkbox-group-with-error-message"
+      name="checkbox-group-with-critical-message"
       legend="Fruits"
       :messages='[{"message":"Critical validation message","type":"critical"}]'
     >

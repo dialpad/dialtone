@@ -192,7 +192,7 @@
         active
         kind="critical"
       >
-        Active Danger button
+        Active Critical button
       </dt-button>
       <dt-button
         active

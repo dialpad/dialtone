@@ -121,7 +121,7 @@ The event handler is only needed if you need to do additional processing. The v-
   </div>
   <div>
     <dt-radio-group
-      name="radio-group-with-error-message"
+      name="radio-group-with-critical-message"
       legend="With Critical Message"
       :messages='[{"message":"Critical validation message","type":"critical"}]'
     >
