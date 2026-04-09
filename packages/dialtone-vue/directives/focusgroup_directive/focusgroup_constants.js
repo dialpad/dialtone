@@ -84,7 +84,15 @@ function parseStringConfig (config, value) {
   const tokens = value.split(/\s+/);
   for (const token of tokens) {
     const mapping = TOKEN_MAP[token];
-    if (mapping) config[mapping.key] = mapping.value;
+    if (mapping) {
+      config[mapping.key] = mapping.value;
+    } else if (token && process.env.NODE_ENV !== 'production') {
+      // eslint-disable-next-line no-console
+      console.warn(
+        `[DtFocusgroupDirective] Unknown token "${token}". ` +
+        `Valid tokens: ${Object.keys(TOKEN_MAP).join(', ')}.`,
+      );
+    }
   }
 }
 
