@@ -82,7 +82,7 @@ export const Nomemory = inline({ DtButton }, `\
 export const DisabledSkipped = inline({ DtButton }, `\
 <dt-stack v-dt-focusgroup="'horizontal'" direction="row" gap="100" role="toolbar" aria-label="Tools">
   <dt-button kind="muted" importance="outlined">Pen</dt-button>
-  <dt-button kind="muted" importance="outlined" aria-disabled="true" class="d-btn--disabled">Eraser (disabled)</dt-button>
+  <dt-button kind="muted" importance="outlined" aria-disabled="true" disabled>Eraser (disabled)</dt-button>
   <dt-button kind="muted" importance="outlined">Highlighter</dt-button>
 </dt-stack>`);
 
