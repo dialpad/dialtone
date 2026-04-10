@@ -392,13 +392,20 @@ export default {
       }
       const style = getComputedStyle(this.$refs.tabs);
       this._indicatorDuration = parseInt(style.getPropertyValue('--tab-indicator-duration'), 10) || 200;
-      this._indicatorEasing = style.getPropertyValue('--tab-indicator-easing').trim() || 'cubic-bezier(0.22, 1, 0.36, 1)';
+      this._indicatorEasing = style.getPropertyValue('--tab-indicator-easing').trim() || 'ease';
     },
 
     transitionIndicator (panelId, newContext) {
       const tabsEl = this.$refs.tabs;
-      const oldTab = tabsEl.querySelector('.d-tab--is-selected');
+      const oldTab = tabsEl.querySelector('[aria-selected="true"]');
       const oldRect = oldTab?.getBoundingClientRect();
+
+      // Capture old indicator style before state change (for outlined/muted modes)
+      let oldStyle = null;
+      if (oldTab && (this.outlined || this.kind === 'muted')) {
+        const cs = getComputedStyle(oldTab);
+        oldStyle = { borderColor: cs.borderColor, borderWidth: cs.borderWidth, backgroundColor: cs.backgroundColor };
+      }
 
       this.provideObj.selected = panelId;
 
@@ -414,12 +421,43 @@ export default {
         if (delta === 0) return;
 
         if (this._indicatorAnimation) this._indicatorAnimation.cancel();
+        if (this._hideNativeAnimation) this._hideNativeAnimation.cancel();
 
         const from = isVertical ? `0 ${delta}px` : `${delta}px 0`;
-        this._indicatorAnimation = newContext.animate(
-          [{ translate: from }, { translate: '0 0' }],
-          { duration: this._indicatorDuration, easing: this._indicatorEasing, pseudoElement: '::after' },
-        );
+        const scale = isVertical
+          ? `1 ${oldRect.height / newRect.height}`
+          : `${oldRect.width / newRect.width} 1`;
+        const opts = { duration: this._indicatorDuration, easing: this._indicatorEasing };
+
+        if (this.outlined && oldStyle) {
+          const shadow = `inset 0 0 0 ${oldStyle.borderWidth} ${oldStyle.borderColor}`;
+          this._hideNativeAnimation = newContext.animate(
+            [{ borderColor: 'transparent' }, { borderColor: 'transparent' }],
+            { ...opts, fill: 'forwards' },
+          );
+          this._indicatorAnimation = newContext.animate(
+            [{ translate: from, scale, boxShadow: shadow },
+              { translate: '0 0', scale: '1 1', boxShadow: shadow }],
+            { ...opts, pseudoElement: '::before' },
+          );
+          this._indicatorAnimation.onfinish = () => { this._hideNativeAnimation?.cancel(); };
+        } else if (this.kind === 'muted' && oldStyle) {
+          this._hideNativeAnimation = newContext.animate(
+            [{ backgroundColor: 'transparent' }, { backgroundColor: 'transparent' }],
+            { ...opts, fill: 'forwards' },
+          );
+          this._indicatorAnimation = newContext.animate(
+            [{ translate: from, scale, backgroundColor: oldStyle.backgroundColor },
+              { translate: '0 0', scale: '1 1', backgroundColor: oldStyle.backgroundColor }],
+            { ...opts, pseudoElement: '::before' },
+          );
+          this._indicatorAnimation.onfinish = () => { this._hideNativeAnimation?.cancel(); };
+        } else {
+          this._indicatorAnimation = newContext.animate(
+            [{ translate: from, scale }, { translate: '0 0', scale: '1 1' }],
+            { ...opts, pseudoElement: '::after' },
+          );
+        }
       });
     },
 
