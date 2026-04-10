@@ -17,14 +17,10 @@
 </template>
 
 <script setup>
-import { ref, computed, reactive, watchEffect, watch, provide, onMounted, onBeforeUnmount, nextTick } from 'vue';
+import { ref, computed, reactive, watchEffect, watch, provide, onMounted, nextTick } from 'vue';
 import { getUniqueString } from '@/common/utils';
 import { DtStack } from '@/components/stack';
-import {
-  cacheIndicatorConfig,
-  cancelIndicatorAnimations,
-  animateIndicator,
-} from '@/common/utils/indicatorAnimation';
+import { useIndicatorAnimation } from '@/common/composables/useIndicatorAnimation';
 import {
   SEGMENTED_CONTROL_SIZES,
   SEGMENTED_CONTROL_SIZE_DEFAULT,
@@ -228,22 +224,11 @@ function ensureTabbable () {
   if (firstEnabled) firstEnabled.setAttribute('tabindex', '0');
 }
 
-let _animConfig = null;
-let _animState = { indicator: null, hideNative: null };
+const indicator = useIndicatorAnimation(
+  container, '--segmented-indicator-duration', '--segmented-indicator-easing',
+);
 
-onMounted(() => {
-  ensureTabbable();
-  const el = container.value?.$el || container.value;
-  if (el) {
-    _animConfig = cacheIndicatorConfig(
-      el, '--segmented-indicator-duration', '--segmented-indicator-easing',
-    );
-  }
-});
-
-onBeforeUnmount(() => {
-  cancelIndicatorAnimations(_animState);
-});
+onMounted(ensureTabbable);
 
 watch(() => [props.modelValue, props.disabled], ensureTabbable, { flush: 'post' });
 
@@ -264,8 +249,9 @@ function selectValue (value, { animate: shouldAnimate = true } = {}) {
   if (beforeChangeEvent.defaultPrevented) return;
 
   const containerEl = container.value?.$el || container.value;
+  indicator.cancel();
   const canAnimate = shouldAnimate && props.showIndicatorTransition &&
-    _animConfig && !_animConfig.prefersReducedMotion;
+    indicator.canAnimate();
 
   let oldRect = null;
   let oldBg = null;
@@ -286,12 +272,10 @@ function selectValue (value, { animate: shouldAnimate = true } = {}) {
     const newEl = containerEl.querySelector(`[${SEGMENTED_CONTROL_DATA_VALUE_ATTR}="${value}"]`);
     if (!newEl || typeof newEl.animate !== 'function') return;
 
-    animateIndicator(_animState, {
+    indicator.animate({
       oldRect,
       newEl,
       orientation: props.orientation,
-      duration: _animConfig.duration,
-      easing: _animConfig.easing,
       hideProps: { backgroundColor: 'transparent' },
       indicatorExtra: { backgroundColor: oldBg },
       pseudoElement: '::after',
@@ -369,7 +353,7 @@ function handleKeyDown (event) {
   items[newIndex].focus();
 
   if (props.activationMode === 'auto') {
-    cancelIndicatorAnimations(_animState);
+    indicator.cancel();
     const value = items[newIndex].getAttribute(SEGMENTED_CONTROL_DATA_VALUE_ATTR);
     if (!isItemDisabled(items[newIndex])) {
       selectValue(value, { animate: false });

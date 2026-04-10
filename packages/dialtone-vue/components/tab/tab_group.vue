@@ -52,11 +52,8 @@ import {
   TAB_SPREADS,
   TAB_SPREAD_MODIFIERS,
 } from './tabs_constants';
-import {
-  cacheIndicatorConfig,
-  cancelIndicatorAnimations,
-  animateIndicator,
-} from '@/common/utils/indicatorAnimation';
+import { ref } from 'vue';
+import { useIndicatorAnimation } from '@/common/composables/useIndicatorAnimation';
 
 /**
  * Tabs allow users to navigation between grouped content in different views while within the same page context.
@@ -232,6 +229,14 @@ export default {
     'before-change',
   ],
 
+  setup () {
+    const tabs = ref(null);
+    const indicator = useIndicatorAnimation(
+      tabs, '--tab-indicator-duration', '--tab-indicator-easing',
+    );
+    return { tabs, indicator };
+  },
+
   data () {
     return {
       provideObj: {
@@ -245,7 +250,7 @@ export default {
         focusedTabId: null, // tracks last-focused tab for roving tabindex
       },
 
-      tabs: [],
+      tabItems: [],
       TAB_LIST_SIZE_MODIFIERS,
       TAB_LIST_KIND_MODIFIERS,
       TAB_LIST_IMPORTANCE_MODIFIERS,
@@ -310,15 +315,10 @@ export default {
 
   mounted () {
     this.updateSelected();
-    this._initIndicatorAnimation();
   },
 
   updated () {
     this.updateSelected();
-  },
-
-  beforeUnmount () {
-    cancelIndicatorAnimations(this._animState);
   },
 
   methods: {
@@ -329,10 +329,10 @@ export default {
       if (!this.provideObj.selected) {
         this.provideObj.selected = this.selected;
       }
-      this.tabs = this.getTabChildren();
+      this.tabItems = this.getTabChildren();
 
       // Clear stale focusedTabId if the focused tab was removed
-      if (this.provideObj.focusedTabId && !this.tabs.some(t => t.tabId === this.provideObj.focusedTabId)) {
+      if (this.provideObj.focusedTabId && !this.tabItems.some(t => t.tabId === this.provideObj.focusedTabId)) {
         this.provideObj.focusedTabId = null;
       }
     },
@@ -344,7 +344,7 @@ export default {
     },
 
     getTabChildren () {
-      const tabs = Array.from(this.$refs.tabs.querySelectorAll('[role="tab"]'));
+      const tabs = Array.from(this.tabs.querySelectorAll('[role="tab"]'));
       return tabs
         .map(el => {
           return ({
@@ -400,26 +400,18 @@ export default {
     },
 
     findNextTab (fromIndex, direction) {
-      const len = this.tabs.length;
+      const len = this.tabItems.length;
       return (fromIndex + direction + len) % len;
     },
 
-    _initIndicatorAnimation () {
-      const config = cacheIndicatorConfig(
-        this.$refs.tabs, '--tab-indicator-duration', '--tab-indicator-easing',
-      );
-      this._animConfig = config;
-      this._animState = { indicator: null, hideNative: null };
-    },
-
     transitionIndicator (panelId, newContext) {
-      if (!newContext || !this.showIndicatorTransition || this._animConfig?.prefersReducedMotion ||
+      if (!newContext || !this.showIndicatorTransition || !this.indicator.canAnimate() ||
         typeof newContext?.animate !== 'function') {
         this.provideObj.selected = panelId;
         return;
       }
 
-      const tabsEl = this.$refs.tabs;
+      const tabsEl = this.tabs;
       const oldTab = tabsEl.querySelector('[aria-selected="true"]');
       const oldRect = oldTab?.getBoundingClientRect();
 
@@ -446,12 +438,10 @@ export default {
           pseudoElement = '::before';
         }
 
-        animateIndicator(this._animState, {
+        this.indicator.animate({
           oldRect,
           newEl: newContext,
           orientation: this.orientation,
-          duration: this._animConfig.duration,
-          easing: this._animConfig.easing,
           hideProps,
           indicatorExtra,
           pseudoElement,
@@ -460,10 +450,10 @@ export default {
     },
 
     selectFocusOnTab (index) {
-      const { context, panelId, isDisabled } = this.tabs[index];
+      const { context, panelId, isDisabled } = this.tabItems[index];
       context.focus();
       if (this.activationMode === 'auto' && !isDisabled) {
-        cancelIndicatorAnimations(this._animState);
+        this.indicator.cancel();
         this.provideObj.selected = panelId;
         this.onChange();
       }
@@ -472,12 +462,12 @@ export default {
     selectTab (event) {
       const tabEl = event.target.closest('[role="tab"]');
       const index = tabEl
-        ? this.tabs.findIndex(t => t.context === tabEl)
+        ? this.tabItems.findIndex(t => t.context === tabEl)
         : this.getFocusedTabIndex();
 
       if (index === -1) return;
-      if (this.tabs[index]?.isDisabled) return;
-      if (this.provideObj.selected === this.tabs[index]?.panelId) return;
+      if (this.tabItems[index]?.isDisabled) return;
+      if (this.provideObj.selected === this.tabItems[index]?.panelId) return;
 
       this.$emit('before-change', event);
       if (event.defaultPrevented) return;
@@ -491,14 +481,14 @@ export default {
     },
 
     selectTabByIndex (index) {
-      const { context, panelId } = this.tabs[index];
+      const { context, panelId } = this.tabItems[index];
       this.transitionIndicator(panelId, context);
       context.focus();
     },
 
     getFocusedTabIndex () {
       const focusedId = this.provideObj.focusedTabId;
-      const index = this.tabs.findIndex((context) =>
+      const index = this.tabItems.findIndex((context) =>
         focusedId ? context.tabId === focusedId : context.isSelected,
       );
 
@@ -506,11 +496,11 @@ export default {
     },
 
     onHomeButton () {
-      if (this.tabs.length) this.selectFocusOnTab(0);
+      if (this.tabItems.length) this.selectFocusOnTab(0);
     },
 
     onEndButton () {
-      if (this.tabs.length) this.selectFocusOnTab(this.tabs.length - 1);
+      if (this.tabItems.length) this.selectFocusOnTab(this.tabItems.length - 1);
     },
 
   },
