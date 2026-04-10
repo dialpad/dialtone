@@ -43,10 +43,11 @@
                 @escape="close()"
               >
                 <template #input="{ inputProps }">
+                  <!-- eslint-disable vue/no-restricted-class -->
                   <dt-input
                     v-bind="inputProps"
                     v-model="fontStyleSearch"
-                    root-class="d-p-100 d-pbe-50 d-w216"
+                    class="d-p-100 d-pbe-50 d-w216"
                     type="search"
                     :placeholder="i18n.$t('DIALTONE_EDITOR_FONT_STYLE_SEARCH_PLACEHOLDER')"
                     :size="200"
@@ -56,6 +57,7 @@
                       <dt-icon-search :size="iconSize" />
                     </template>
                   </dt-input>
+                  <!-- eslint-enable vue/no-restricted-class -->
                 </template>
                 <template #list="{ listProps }">
                   <ul
@@ -139,9 +141,10 @@
                 size="200"
                 :style="!isDefaultFontColor ? { color: currentFontColor } : {}"
               />
+              <!-- eslint-disable vue/no-restricted-class -->
               <dt-input
                 :value="currentFontColor"
-                root-class="d-w0 d-h0 d-of-hidden"
+                class="d-w0 d-h0 d-of-hidden"
                 input-class="colorPickerInput d-w0 d-h0 d-p-0 d-bar0"
                 input-wrapper-class="d-w0 d-h0 d-ba-none"
                 :size="200"
@@ -149,6 +152,7 @@
                 @input="onColorPickerInput"
                 @click.stop
               />
+              <!-- eslint-enable vue/no-restricted-class -->
             </template>
           </dt-button>
 
@@ -175,10 +179,11 @@
                 @escape="close()"
               >
                 <template #input="{ inputProps }">
+                  <!-- eslint-disable vue/no-restricted-class -->
                   <dt-input
                     v-bind="inputProps"
                     v-model="variableSearchValue"
-                    root-class="d-p-100 d-pbe-50 d-w264"
+                    class="d-p-100 d-pbe-50 d-w264"
                     type="search"
                     :placeholder="i18n.$t('DIALTONE_EDITOR_VARIABLE_POPOVER_SEARCH_PLACEHOLDER')"
                     :size="300"
@@ -188,6 +193,7 @@
                       <dt-icon-search :size="iconSize" />
                     </template>
                   </dt-input>
+                  <!-- eslint-enable vue/no-restricted-class -->
                 </template>
                 <template #list="{ listProps }">
                   <div v-bind="listProps">
