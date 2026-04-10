@@ -192,7 +192,7 @@ showHtmlWarning />
 
 Buttons can be disabled using the `disabled` attribute or the Dialtone class, `d-btn--disabled`. Use the attribute when a button should appear disabled and not receive focus; use the class when a button should appear disabled but still receive focus (i.e. a disabled button with a tooltip).
 
-When using the raw HTML intead of the Vue component , it requires `aria-disabled`, and additional javascript implementation is required to prevent events.
+When using the raw HTML instead of the Vue component , it requires `aria-disabled`, and additional javascript implementation is required to prevent events.
 
 <code-well-header>
   <dt-stack gap="500">
@@ -1304,8 +1304,8 @@ We provide the following branded buttons for log-in and sign-up workflows.
 
 <script setup>
 import { ref } from 'vue';
-const isDisabled = ref(true);
 import ButtonVariantsTable from '@baseComponents/ButtonVariantsTable.vue';
 
+const isDisabled = ref(true);
 const loading = ref(true);
 </script>
