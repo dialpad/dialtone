@@ -35,6 +35,7 @@ Use `d-ttf-{n}` change an element's `transition-timing-function` (aka easing) fr
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="200">
+  <dt-button kind="unstyled" class="d-p-200 d-bar8 d-bgc-moderate h:d-bgc-critical h:d-bs-md h:d-fc-critical d-t d-td300 d-ttf          ">Ease</dt-button>
   <dt-button kind="unstyled" class="d-p-200 d-bar8 d-bgc-moderate h:d-bgc-critical h:d-bs-md h:d-fc-critical d-t d-td300                ">Ease In, Ease Out</dt-button>
   <dt-button kind="unstyled" class="d-p-200 d-bar8 d-bgc-moderate h:d-bgc-critical h:d-bs-md h:d-fc-critical d-t d-td300 d-ttf-out      ">Ease Out</dt-button>
   <dt-button kind="unstyled" class="d-p-200 d-bar8 d-bgc-moderate h:d-bgc-critical h:d-bs-md h:d-fc-critical d-t d-td300 d-ttf-out-quint">Ease Out Quint</dt-button>
@@ -76,9 +77,9 @@ Use `d-tp-{n}` change an what items within an element are transitioned.
         <th scope="row" class="d-code--sm d-docsite-code">.d-{{ i }}{{ d }}</th>
         <td class="d-code--sm">transition-duration: var(--td{{ d }}) !important;</td>
       </tr>
-      <tr v-else-if="i === 'ttf'" v-for="t in ['in-out', 'out', 'quint']">
-        <th scope="row" class="d-code--sm d-docsite-code">.d-{{ i }}-{{ t }}</th>
-        <td class="d-code--sm">transition-timing-function: var(--ttf-{{ t }}) !important;</td>
+      <tr v-else-if="i === 'ttf'" v-for="t in ['', 'in-out', 'out', 'quint']">
+        <th scope="row" class="d-code--sm d-docsite-code">.d-{{ i }}{{ t ? `-${t}` : '' }}</th>
+        <td class="d-code--sm">transition-timing-function: var(--ttf-{{ t || 'ease' }}) !important;</td>
       </tr>
       <tr v-else-if="i === 'tp'" v-for="p in ['all', 'o', 'bs', 'bgc', 'transform', 'colors']">
         <th scope="row" class="d-code--sm d-docsite-code">.d-{{ i }}-{{ p }}</th>
