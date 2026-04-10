@@ -296,6 +296,7 @@ export default {
 
   mounted () {
     this.updateSelected();
+    this._cacheIndicatorConfig();
   },
 
   updated () {
@@ -385,11 +386,48 @@ export default {
       return (fromIndex + direction + len) % len;
     },
 
+    _cacheIndicatorConfig () {
+      if (typeof window.matchMedia === 'function') {
+        this._prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      }
+      const style = getComputedStyle(this.$refs.tabs);
+      this._indicatorDuration = parseInt(style.getPropertyValue('--tab-indicator-duration'), 10) || 200;
+      this._indicatorEasing = style.getPropertyValue('--tab-indicator-easing').trim() || 'cubic-bezier(0.22, 1, 0.36, 1)';
+    },
+
+    transitionIndicator (panelId, newContext) {
+      const tabsEl = this.$refs.tabs;
+      const oldTab = tabsEl.querySelector('.d-tab--is-selected');
+      const oldRect = oldTab?.getBoundingClientRect();
+
+      this.provideObj.selected = panelId;
+
+      if (!oldRect || !newContext || this._prefersReducedMotion) return;
+      if (typeof newContext.animate !== 'function') return;
+
+      this.$nextTick(() => {
+        const newRect = newContext.getBoundingClientRect();
+        const isVertical = this.orientation === 'vertical';
+        const delta = isVertical
+          ? oldRect.top - newRect.top
+          : oldRect.left - newRect.left;
+        if (delta === 0) return;
+
+        if (this._indicatorAnimation) this._indicatorAnimation.cancel();
+
+        const from = isVertical ? `0 ${delta}px` : `${delta}px 0`;
+        this._indicatorAnimation = newContext.animate(
+          [{ translate: from }, { translate: '0 0' }],
+          { duration: this._indicatorDuration, easing: this._indicatorEasing, pseudoElement: '::after' },
+        );
+      });
+    },
+
     selectFocusOnTab (index) {
       const { context, panelId, isDisabled } = this.tabs[index];
       context.focus();
       if (this.activationMode === 'auto' && !isDisabled) {
-        this.provideObj.selected = panelId;
+        this.transitionIndicator(panelId, context);
         this.onChange();
       }
     },
@@ -417,7 +455,7 @@ export default {
 
     selectTabByIndex (index) {
       const { context, panelId } = this.tabs[index];
-      this.provideObj.selected = panelId;
+      this.transitionIndicator(panelId, context);
       context.focus();
     },
 
