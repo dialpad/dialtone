@@ -56,6 +56,7 @@ jobs:
           ln -s "$GITHUB_WORKSPACE/.github/scripts/safe-glob.sh" /usr/local/bin/safe-glob
 
       - name: Run Claude Code Review
+        id: claude
         uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -159,3 +160,17 @@ jobs:
             - Only comment on lines that appear in the diff.
             - Be specific and constructive. Only flag real issues visible in the diff.
             - If there are no issues, do nothing — no "looks good" comments.
+
+      - name: Debug — show permission denials
+        if: always() && steps.claude.outputs.execution_file
+        run: |
+          EXEC_FILE="${{ steps.claude.outputs.execution_file }}"
+          if [ -f "$EXEC_FILE" ]; then
+            echo "=== Permission Denials ==="
+            jq '[.[] | select(.type == "result") | .permission_denials // empty] | flatten | .[] | {tool: .tool_name, command: (.tool_input.command // "N/A")[:80]}' "$EXEC_FILE" 2>/dev/null || echo "No denials or could not parse"
+            echo ""
+            echo "=== Turn Summary ==="
+            jq '{total_turns: ([.[] | select(.type == "assistant")] | length), denied: ([.[] | select(.type == "result") | .permission_denials // []] | flatten | length)}' "$EXEC_FILE" 2>/dev/null || echo "Could not parse summary"
+          else
+            echo "Execution file not found"
+          fi
