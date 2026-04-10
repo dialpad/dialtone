@@ -52,6 +52,11 @@ import {
   TAB_SPREADS,
   TAB_SPREAD_MODIFIERS,
 } from './tabs_constants';
+import {
+  cacheIndicatorConfig,
+  cancelIndicatorAnimations,
+  animateIndicator,
+} from '@/common/utils/indicatorAnimation';
 
 /**
  * Tabs allow users to navigation between grouped content in different views while within the same page context.
@@ -305,7 +310,7 @@ export default {
 
   mounted () {
     this.updateSelected();
-    this._cacheIndicatorConfig();
+    this._initIndicatorAnimation();
   },
 
   updated () {
@@ -313,7 +318,7 @@ export default {
   },
 
   beforeUnmount () {
-    this._cancelIndicatorAnimations();
+    cancelIndicatorAnimations(this._animState);
   },
 
   methods: {
@@ -399,28 +404,16 @@ export default {
       return (fromIndex + direction + len) % len;
     },
 
-    _cacheIndicatorConfig () {
-      if (typeof window.matchMedia === 'function') {
-        this._prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      }
-      const style = getComputedStyle(this.$refs.tabs);
-      this._indicatorDuration = parseInt(style.getPropertyValue('--tab-indicator-duration'), 10) || 200;
-      this._indicatorEasing = style.getPropertyValue('--tab-indicator-easing').trim() || 'ease';
-    },
-
-    _cancelIndicatorAnimations () {
-      if (this._indicatorAnimation) {
-        this._indicatorAnimation.onfinish = null;
-        this._indicatorAnimation.cancel();
-      }
-      if (this._hideNativeAnimation) {
-        this._hideNativeAnimation.onfinish = null;
-        this._hideNativeAnimation.cancel();
-      }
+    _initIndicatorAnimation () {
+      const config = cacheIndicatorConfig(
+        this.$refs.tabs, '--tab-indicator-duration', '--tab-indicator-easing',
+      );
+      this._animConfig = config;
+      this._animState = { indicator: null, hideNative: null };
     },
 
     transitionIndicator (panelId, newContext) {
-      if (!newContext || !this.showIndicatorTransition || this._prefersReducedMotion ||
+      if (!newContext || !this.showIndicatorTransition || this._animConfig?.prefersReducedMotion ||
         typeof newContext?.animate !== 'function') {
         this.provideObj.selected = panelId;
         return;
@@ -440,20 +433,6 @@ export default {
       if (!oldRect) return;
 
       this.$nextTick(() => {
-        const newRect = newContext.getBoundingClientRect();
-        const isVertical = this.orientation === 'vertical';
-        const delta = isVertical
-          ? oldRect.top - newRect.top
-          : oldRect.left - newRect.left;
-        if (delta === 0) return;
-
-        this._cancelIndicatorAnimations();
-
-        const from = isVertical ? `0 ${delta}px` : `${delta}px 0`;
-        const scale = isVertical
-          ? `1 ${oldRect.height / newRect.height}`
-          : `${oldRect.width / newRect.width} 1`;
-
         let hideProps = { backgroundColor: 'transparent' };
         let indicatorExtra = {};
         let pseudoElement = '::after';
@@ -467,16 +446,16 @@ export default {
           pseudoElement = '::before';
         }
 
-        const opts = { duration: this._indicatorDuration, easing: this._indicatorEasing };
-        this._hideNativeAnimation = newContext.animate(
-          [hideProps, hideProps], { ...opts, fill: 'forwards' },
-        );
-        this._indicatorAnimation = newContext.animate(
-          [{ translate: from, scale, ...indicatorExtra },
-            { translate: '0 0', scale: '1 1', ...indicatorExtra }],
-          { ...opts, pseudoElement },
-        );
-        this._indicatorAnimation.onfinish = () => { this._hideNativeAnimation?.cancel(); };
+        animateIndicator(this._animState, {
+          oldRect,
+          newEl: newContext,
+          orientation: this.orientation,
+          duration: this._animConfig.duration,
+          easing: this._animConfig.easing,
+          hideProps,
+          indicatorExtra,
+          pseudoElement,
+        });
       });
     },
 
@@ -484,7 +463,7 @@ export default {
       const { context, panelId, isDisabled } = this.tabs[index];
       context.focus();
       if (this.activationMode === 'auto' && !isDisabled) {
-        this._cancelIndicatorAnimations();
+        cancelIndicatorAnimations(this._animState);
         this.provideObj.selected = panelId;
         this.onChange();
       }
