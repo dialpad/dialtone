@@ -23,7 +23,8 @@ reviews:
         - Flag raw hex/rgb values, hardcoded px, or inline z-index that should use
           --dt-color-*, --dt-space-*, --dt-size-*, --dt-z-index-*, --dt-radius-* tokens.
 
-        - New boolean props should use negative polarity (hideX pattern).
+        - Boolean props: general booleans use is/has/show prefixes.
+          Visibility toggles use hideX negative polarity (hideClose, hideHeader).
 
         - Component styles must live in packages/dialtone-css, not inline.
           Templates should use Dialtone utility classes (d-*).
