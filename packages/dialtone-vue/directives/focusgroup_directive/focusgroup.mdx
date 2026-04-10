@@ -223,8 +223,8 @@ forward and Right arrow moves backward on the horizontal axis.
 
 ## Limitations
 
-- **Nesting**: Multiple `v-dt-focusgroup` directives can be nested (e.g., a toolbar inside a treeview), but each instance is independent. The outer focusgroup does not automatically skip over a nested focusgroup's subtree during item discovery. This mostly works when the two use different axes (e.g., outer `vertical`, inner `horizontal`), but may behave unexpectedly if both respond to the same arrow keys. Use distinct axis values to avoid conflicts.
-- **2D grid navigation**: Not supported. All navigation is 1D (linear DOM order). A future `grid` token or separate directive may address this.
+- **Nesting**: Nesting multiple `v-dt-focusgroup` directives is **not recommended**. Each instance is independent — keydown events bubble, so both handlers fire. This can cause unpredictable double-moves if both respond to the same arrow keys. If you must nest, use distinct axes (e.g., outer `vertical`, inner `horizontal`). Most cases where nesting seems necessary are better served by 2D grid navigation (see below).
+- **2D grid navigation**: Not supported. All navigation is 1D (linear DOM order). A future `grid` token on this directive will address cases where Up/Down and Left/Right need to mean different things (rows vs columns).
 - **`aria-activedescendant`**: The directive uses roving tabindex (actual DOM focus moves between items). It does not support the `aria-activedescendant` pattern where the container retains focus and items are "virtually" focused. Use the `keyboard_list_navigation` mixin for that model.
 - **RTL**: Direction is resolved at mount time. If `dir` changes dynamically without remounting, the directive won't pick it up.
 - **Dynamic items**: The directive re-queries items on every keystroke, so dynamically added/removed items are handled correctly during navigation. However, the initial `tabindex` setup only runs on mount — items added after mount (e.g., async data) won't have `tabindex="-1"` until the first keyboard interaction.
