@@ -4,7 +4,7 @@ import {
   configsEqual,
   resolveSelector,
   resolveSkipDisabled,
-} from './focusgroup_constants.js';
+} from './focusgroup_utils.js';
 
 /**
  * v-dt-focusgroup directive — declarative roving tabindex for composite widgets.

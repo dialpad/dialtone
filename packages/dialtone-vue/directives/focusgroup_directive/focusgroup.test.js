@@ -1,12 +1,12 @@
 import { mount } from '@vue/test-utils';
 import { DtFocusgroupDirective } from './focusgroup.js';
+import { FOCUSGROUP_DEFAULTS } from './focusgroup_constants.js';
 import {
   parseConfig,
   configsEqual,
   resolveSelector,
   resolveSkipDisabled,
-  FOCUSGROUP_DEFAULTS,
-} from './focusgroup_constants.js';
+} from './focusgroup_utils.js';
 
 // ── Helpers ─────────────────────────────────────────────────
 
