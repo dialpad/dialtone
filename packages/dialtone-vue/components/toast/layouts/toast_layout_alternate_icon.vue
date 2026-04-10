@@ -51,7 +51,7 @@ export default {
     kind: {
       type: String,
       default: 'base',
-      validate (kind) {
+      validator (kind) {
         return TOAST_ALTERNATE_KINDS.includes(kind);
       },
     },

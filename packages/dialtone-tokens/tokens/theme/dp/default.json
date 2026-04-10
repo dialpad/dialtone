@@ -49,14 +49,26 @@
         "type": "color",
         "description": "Expresses an error, danger, or otherwise critical state on surfaces that require a stronger contrast."
       },
+      "positive": {
+        "value": "{color.green.800}",
+        "type": "color",
+        "description": "Indicates a positive state."
+      },
+      "positive-strong": {
+        "value": "{color.green.900}",
+        "type": "color",
+        "description": "Indicates a strong positive state on surfaces that require a stronger contrast."
+      },
       "success": {
         "value": "{color.green.800}",
         "type": "color",
+        "$deprecated": "Use positive instead.",
         "description": "Indicates a positive state."
       },
       "success-strong": {
         "value": "{color.green.900}",
         "type": "color",
+        "$deprecated": "Use positive-strong instead.",
         "description": "Indicates a strong positive state on surfaces that require a stronger contrast."
       },
       "warning": {
@@ -113,15 +125,27 @@
         "type": "color",
         "description": "Critical strong text that sits on high-contrast surfaces or backgrounds"
       },
+      "positive-inverted": {
+        "value": "{color.green.300}",
+        "type": "color",
+        "description": "Positive text that sits on high-contrast surfaces or backgrounds."
+      },
+      "positive-strong-inverted": {
+        "value": "{color.green.200}",
+        "type": "color",
+        "description": "Positive strong text that sits on high-contrast surfaces or backgrounds."
+      },
       "success-inverted": {
         "value": "{color.green.300}",
         "type": "color",
-        "description": "Success text that sits on high-contrast surfaces or backgrounds"
+        "$deprecated": "Use positive-inverted instead.",
+        "description": "Success text that sits on high-contrast surfaces or backgrounds."
       },
       "success-strong-inverted": {
         "value": "{color.green.200}",
         "type": "color",
-        "description": "Success strong text that sits on high-contrast surfaces or backgrounds"
+        "$deprecated": "Use positive-strong-inverted instead.",
+        "description": "Success strong text that sits on high-contrast surfaces or backgrounds."
       },
       "warning-inverted": {
         "value": "{color.gold.500}",
@@ -147,12 +171,12 @@
         "type": "color"
       },
       "success": {
-        "value": "{color.foreground.success}",
+        "value": "{color.foreground.positive}",
         "type": "color",
         "description": "positive"
       },
       "success-hover": {
-        "value": "{color.foreground.success-strong}",
+        "value": "{color.foreground.positive-strong}",
         "type": "color"
       },
       "warning": {
@@ -196,11 +220,11 @@
         "type": "color"
       },
       "success-inverted": {
-        "value": "{color.foreground.success-inverted}",
+        "value": "{color.foreground.positive-inverted}",
         "type": "color"
       },
       "success-inverted-hover": {
-        "value": "{color.foreground.success-strong-inverted}",
+        "value": "{color.foreground.positive-strong-inverted}",
         "type": "color"
       },
       "warning-inverted": {
@@ -4244,7 +4268,7 @@
           "type": "color"
         },
         "status-positive": {
-          "value": "{color.foreground.success}",
+          "value": "{color.foreground.positive}",
           "type": "color"
         },
         "status-critical": {

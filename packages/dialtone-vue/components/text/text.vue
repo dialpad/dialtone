@@ -80,7 +80,7 @@ export default {
     },
 
     /**
-     * Aligns to available foreground color tokens, e.g. `tertiary`, `critical`, etc.
+     * Aligns to available foreground color tokens, e.g. `tertiary`, `critical`, `positive`, etc.
      */
     tone: {
       type: String,
