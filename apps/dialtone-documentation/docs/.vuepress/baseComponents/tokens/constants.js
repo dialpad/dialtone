@@ -40,14 +40,6 @@ export const SUBCATEGORY_MAP = {
   size: ['radius', 'border'],
 };
 
-export const DEPRECATED_PATTERNS = [
-  'typography-headline-',
-  'typography-body-',
-  'typography-label-',
-  'typography-helper-',
-  'typography-code-',
-];
-
 export const getTokensStructure = () => ({
   color: {
     foreground: {

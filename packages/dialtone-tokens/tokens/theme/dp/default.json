@@ -74,7 +74,7 @@
       "warning": {
         "value": "{color.gold.800}",
         "type": "color",
-        "description": "Indicates information that requires user’s attention and further action may be necessary."
+        "description": "Indicates information that requires user\u2019s attention and further action may be necessary."
       },
       "primary-inverted": {
         "value": "{color.black.100}",
@@ -2704,7 +2704,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) Base default medium text style for main content."
+        "description": "Base default medium text style for main content.",
+        "$deprecated": "Use text tokens instead."
       },
       "md-compact": {
         "value": {
@@ -2715,7 +2716,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) A tighter-spaced version of medium body style."
+        "description": "A tighter-spaced version of medium body style.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm": {
         "value": {
@@ -2726,7 +2728,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) Reduced small text style for less prominent or adjacent content."
+        "description": "Reduced small text style for less prominent or adjacent content.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm-compact": {
         "value": {
@@ -2737,7 +2740,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) A tighter-spaced version of small body style."
+        "description": "A tighter-spaced version of small body style.",
+        "$deprecated": "Use text tokens instead."
       }
     },
     "headline": {
@@ -2750,7 +2754,8 @@
           "textCase": "{font.text-case.uppercase}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) Visually concise and uppercase title text used above a paired headline. Also known as a kicker or overline."
+        "description": "Visually concise and uppercase title text used above a paired headline. Also known as a kicker or overline.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm": {
         "value": {
@@ -2761,7 +2766,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) Smaller text size for secondary information or subheadings."
+        "description": "Smaller text size for secondary information or subheadings.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm-compact": {
         "value": {
@@ -2772,7 +2778,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) A tighter-spaced version of small headline style."
+        "description": "A tighter-spaced version of small headline style.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm-soft": {
         "value": {
@@ -2783,7 +2790,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) A softer font weight version of small headline style."
+        "description": "A softer font weight version of small headline style.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm-soft-compact": {
         "value": {
@@ -2794,7 +2802,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) A softer font weight, tighter-spaced version of small headline style."
+        "description": "A softer font weight, tighter-spaced version of small headline style.",
+        "$deprecated": "Use text tokens instead."
       },
       "md": {
         "value": {
@@ -2805,7 +2814,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) Medium-sized base text style for headlines."
+        "description": "Medium-sized base text style for headlines.",
+        "$deprecated": "Use text tokens instead."
       },
       "md-compact": {
         "value": {
@@ -2816,7 +2826,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) A tighter-spaced version of medium headline style."
+        "description": "A tighter-spaced version of medium headline style.",
+        "$deprecated": "Use text tokens instead."
       },
       "lg": {
         "value": {
@@ -2827,7 +2838,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) Large text style for headlines to attract attention."
+        "description": "Large text style for headlines to attract attention.",
+        "$deprecated": "Use text tokens instead."
       },
       "lg-soft": {
         "value": {
@@ -2838,7 +2850,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) A softer font weight version of large headline style."
+        "description": "A softer font weight version of large headline style.",
+        "$deprecated": "Use text tokens instead."
       },
       "lg-compact": {
         "value": {
@@ -2849,7 +2862,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) A tighter-spaced version of large body style."
+        "description": "A tighter-spaced version of large body style.",
+        "$deprecated": "Use text tokens instead."
       },
       "lg-soft-compact": {
         "value": {
@@ -2860,7 +2874,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) A softer font weight, tighter spaced version of large headline style."
+        "description": "A softer font weight, tighter spaced version of large headline style.",
+        "$deprecated": "Use text tokens instead."
       },
       "xl": {
         "value": {
@@ -2871,7 +2886,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) Extra large text style for high importance headlines."
+        "description": "Extra large text style for high importance headlines.",
+        "$deprecated": "Use text tokens instead."
       },
       "xl-compact": {
         "value": {
@@ -2882,7 +2898,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) A tighter-spaced version of extra large headline style."
+        "description": "A tighter-spaced version of extra large headline style.",
+        "$deprecated": "Use text tokens instead."
       },
       "xxl": {
         "value": {
@@ -2893,7 +2910,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) Largest text style for extra extra large content."
+        "description": "Largest text style for extra extra large content.",
+        "$deprecated": "Use text tokens instead."
       },
       "xxl-compact": {
         "value": {
@@ -2904,7 +2922,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) A tighter-spaced version of extra extra large headline style."
+        "description": "A tighter-spaced version of extra extra large headline style.",
+        "$deprecated": "Use text tokens instead."
       }
     },
     "label": {
@@ -2917,7 +2936,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Base default medium-sized text style for labels, providing clear identification and categorization."
+        "description": "Base default medium-sized text style for labels, providing clear identification and categorization.",
+        "$deprecated": "Use text tokens instead."
       },
       "md-compact": {
         "value": {
@@ -2928,7 +2948,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A tighter-spaced version of medium label style."
+        "description": "A tighter-spaced version of medium label style.",
+        "$deprecated": "Use text tokens instead."
       },
       "md-plain": {
         "value": {
@@ -2939,7 +2960,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A non-bold version of medium label style."
+        "description": "A non-bold version of medium label style.",
+        "$deprecated": "Use text tokens instead."
       },
       "md-plain-compact": {
         "value": {
@@ -2950,7 +2972,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A non-bolded, tighter-spaced version of medium label style."
+        "description": "A non-bolded, tighter-spaced version of medium label style.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm": {
         "value": {
@@ -2961,7 +2984,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Smaller text style for labels when space is limited or for secondary information or to convey a slightly lower hierachy."
+        "description": "Smaller text style for labels when space is limited or for secondary information or to convey a slightly lower hierachy.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm-compact": {
         "value": {
@@ -2972,7 +2996,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A tighter-spaced version of small label style."
+        "description": "A tighter-spaced version of small label style.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm-plain": {
         "value": {
@@ -2983,7 +3008,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A non-bold version of small label style."
+        "description": "A non-bold version of small label style.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm-plain-compact": {
         "value": {
@@ -2994,7 +3020,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A non-bolded, tighter-spaced version of small label style."
+        "description": "A non-bolded, tighter-spaced version of small label style.",
+        "$deprecated": "Use text tokens instead."
       }
     },
     "helper": {
@@ -3007,7 +3034,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Base default medium-sized text style for supplementary contextual information."
+        "description": "Base default medium-sized text style for supplementary contextual information.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm": {
         "value": {
@@ -3018,7 +3046,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Smaller text size for subtle guidance or additional context, minimizing visual disruption."
+        "description": "Smaller text size for subtle guidance or additional context, minimizing visual disruption.",
+        "$deprecated": "Use text tokens instead."
       }
     },
     "code": {
@@ -3031,7 +3060,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Base default medium-sized text style for monospace code snippets of technical content."
+        "description": "Base default medium-sized text style for monospace code snippets of technical content.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm": {
         "value": {
@@ -3042,7 +3072,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Smaller text size for monospace code, suitable for inline references or less prominent code examples."
+        "description": "Smaller text size for monospace code, suitable for inline references or less prominent code examples.",
+        "$deprecated": "Use text tokens instead."
       }
     },
     "inputs": {
