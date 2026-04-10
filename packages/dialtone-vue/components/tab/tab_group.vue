@@ -198,6 +198,15 @@ export default {
         return TAB_ACTIVATION_MODES.includes(value);
       },
     },
+
+    /**
+     * If true, the selection indicator animates between tabs on click.
+     * @values true, false
+     */
+    showIndicatorTransition: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   emits: [
@@ -411,7 +420,8 @@ export default {
     },
 
     transitionIndicator (panelId, newContext) {
-      if (!newContext || this._prefersReducedMotion || typeof newContext?.animate !== 'function') {
+      if (!newContext || !this.showIndicatorTransition || this._prefersReducedMotion ||
+        typeof newContext?.animate !== 'function') {
         this.provideObj.selected = panelId;
         return;
       }
