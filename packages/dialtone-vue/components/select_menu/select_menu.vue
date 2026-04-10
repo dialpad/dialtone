@@ -96,7 +96,6 @@ import {
   getValidationState,
   hasSlotContent,
   removeClassStyleAttrs,
-  addClassStyleAttrs,
 } from '@/common/utils';
 import { MessagesMixin } from '@/common/mixins/input';
 import { optionsValidator } from './select_menu_validators.js';
@@ -363,7 +362,6 @@ export default {
 
   methods: {
     removeClassStyleAttrs,
-    addClassStyleAttrs,
     emitValue (value, event) {
       this.$emit('update:modelValue', value, event);
       this.$emit('input', value, event);

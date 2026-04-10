@@ -1,8 +1,8 @@
 <template>
   <div
     ref="editorRoot"
-    class="d-recipe-editor"
-    v-bind="addClassStyleAttrs($attrs)"
+    :class="['d-recipe-editor', $attrs.class]"
+    :style="$attrs.style"
     data-qa="dt-recipe-editor"
     role="presentation"
     @click="$refs.richTextEditor.focusEditor()"
@@ -120,7 +120,7 @@
             v-dt-tooltip="{
               message: button.tooltipMessage,
               placement: 'top',
-              externalAnchorElement: $refs[getButtonRef(buttonGroup.key, button.selector)]?.$el, 
+              externalAnchorElement: $refs[getButtonRef(buttonGroup.key, button.selector)]?.$el,
             }"
             kind="muted"
             importance="clear"
@@ -393,7 +393,7 @@ import {
   EDITOR_DEFAULT_LINK_PREFIX,
   EDITOR_DEFAULT_FONT_COLOR,
 } from './editor_constants.js';
-import { removeClassStyleAttrs, addClassStyleAttrs } from '@/common/utils';
+import { removeClassStyleAttrs } from '@/common/utils';
 import { DtButton } from '@/components/button';
 import { DtPopover } from '@/components/popover';
 import { DtStack } from '@/components/stack';
@@ -1174,7 +1174,6 @@ export default {
 
   methods: {
     removeClassStyleAttrs,
-    addClassStyleAttrs,
 
     focusEditor () {
       this.$refs.richTextEditor?.editor?.commands.focus();

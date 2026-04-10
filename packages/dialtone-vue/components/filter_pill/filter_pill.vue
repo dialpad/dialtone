@@ -231,8 +231,6 @@ export default {
     DtStack,
   },
 
-  inheritAttrs: false,
-
   props: {
     /**
      * When true, uses DtDropdown instead of DtPopover as the overlay.

@@ -1,7 +1,7 @@
 <template>
   <div
-    :class="leftbarGeneralRowClasses"
-    v-bind="addClassStyleAttrs($attrs)"
+    :class="[leftbarGeneralRowClasses, $attrs.class]"
+    :style="$attrs.style"
     data-qa="dt-recipe-leftbar-row"
   >
     <a
@@ -204,7 +204,7 @@ import { DtTooltip } from '@/components/tooltip';
 import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
 import { DtAvatar } from '@/components/avatar';
 import DtRecipeLeftbarGeneralRowIcon from './leftbar_general_row_icon.vue';
-import { extractVueListeners, safeConcatStrings, removeClassStyleAttrs, returnFirstEl, addClassStyleAttrs } from '@/common/utils';
+import { extractVueListeners, safeConcatStrings, removeClassStyleAttrs, returnFirstEl } from '@/common/utils';
 import { DialtoneLocalization } from '@/localization';
 
 const TYPE_TO_ICON = new Map([
@@ -559,7 +559,6 @@ export default {
 
   methods: {
     removeClassStyleAttrs,
-    addClassStyleAttrs,
 
     validateProps () {
       if (this.type === LEFTBAR_GENERAL_ROW_TYPES.CONTACT_CENTER &&

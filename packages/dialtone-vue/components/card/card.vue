@@ -1,7 +1,6 @@
 <template>
   <div
-    :class="['d-card', $attrs.class]"
-    :style="$attrs.style"
+    class="d-card"
     data-qa="dt-card"
   >
     <div
@@ -51,7 +50,6 @@ export default {
   compatConfig: { MODE: 3 },
   name: 'DtCard',
 
-  inheritAttrs: false,
 
   props: {
     /**

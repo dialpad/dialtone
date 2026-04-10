@@ -4,9 +4,6 @@ import {
   VALIDATION_MESSAGE_TYPES,
 } from '../constants/index.js';
 import {
-  configVue2StyleClassAttrs,
-} from '../config';
-import {
   h,
   Comment,
   Text,
@@ -250,18 +247,6 @@ export function removeClassStyleAttrs (attrs) {
   return Object.fromEntries(listeners);
 }
 
-/**
-  This should be applied to the root element on components using inheritAttrs: false.
-  This will add the class and style attributes back to the root element if configVue2StyleClassAttrs
-  is enabled.
-*/
-export function addClassStyleAttrs (attrs) {
-  if (!configVue2StyleClassAttrs) return {};
-  return {
-    class: attrs.class,
-    style: attrs.style,
-  };
-}
 
 /*
 * Set's a global timer to debounce the execution of a function.
@@ -532,7 +517,6 @@ export default {
   extractVueListeners,
   extractNonListeners,
   removeClassStyleAttrs,
-  addClassStyleAttrs,
   returnFirstEl,
   debounce,
   isOutOfViewPort,
