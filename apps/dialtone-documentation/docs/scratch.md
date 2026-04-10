@@ -6,6 +6,8 @@ layout: Blank
 
 <script setup>
 import { ref, computed } from 'vue';
+import ExampleTabs from '@exampleComponents/ExampleTabs.vue';
+import { DtTabGroup, DtTab, DtTabPanel } from '@dialpad/dialtone-vue';
 import { useThemeManager } from '@composables/useThemeManager';
 
 const {
@@ -1001,5 +1003,229 @@ const checkRadioDisabled = ref(false);
       </dt-stack>
     </dt-stack>
   </dt-stack>
+  <dt-stack gap="200">
+    <dt-text as="h1" kind="headline" :size="600">Traveling Indicator Stress Test</dt-text>
+    <!-- 1. ALL FOUR VARIANTS SIDE BY SIDE -->
+    <dt-text as="h2" kind="headline" :size="400">1. All four variants</dt-text>
+    <dt-stack gap="400">
+      <dt-stack gap="100">
+        <dt-text as="p" kind="label" :size="200">Default (::after underline)</dt-text>
+        <example-tabs />
+      </dt-stack>
+      <dt-stack gap="100">
+        <dt-text as="p" kind="label" :size="200">Outlined</dt-text>
+        <example-tabs outlined />
+      </dt-stack>
+      <dt-stack gap="100">
+        <dt-text as="p" kind="label" :size="200">Muted + Outlined</dt-text>
+        <example-tabs kind="muted" outlined />
+      </dt-stack>
+      <dt-stack gap="100">
+        <dt-text as="p" kind="label" :size="200">Muted Active (background)</dt-text>
+        <example-tabs kind="muted" />
+      </dt-stack>
+    </dt-stack>
+    <!-- 2. ALL SIZES -->
+    <dt-text as="h2" kind="headline" :size="400">2. All sizes (width variance stress)</dt-text>
+    <dt-stack gap="400">
+      <dt-stack gap="100">
+        <dt-text as="p" kind="label" :size="200">Size 100 (xs)</dt-text>
+        <example-tabs size="100" />
+      </dt-stack>
+      <dt-stack gap="100">
+        <dt-text as="p" kind="label" :size="200">Size 200 (sm)</dt-text>
+        <example-tabs size="200" />
+      </dt-stack>
+      <dt-stack gap="100">
+        <dt-text as="p" kind="label" :size="200">Size 300 (md) — default</dt-text>
+        <example-tabs size="300" />
+      </dt-stack>
+      <dt-stack gap="100">
+        <dt-text as="p" kind="label" :size="200">Size 400 (lg)</dt-text>
+        <example-tabs size="400" />
+      </dt-stack>
+      <dt-stack gap="100">
+        <dt-text as="p" kind="label" :size="200">Size 500 (xl)</dt-text>
+        <example-tabs size="500" />
+      </dt-stack>
+    </dt-stack>
+    <!-- 3. SPREAD MODES -->
+    <dt-text as="h2" kind="headline" :size="400">3. Spread modes (indicator width morphing)</dt-text>
+    <dt-stack gap="400">
+      <dt-stack gap="100">
+        <dt-text as="p" kind="label" :size="200">spread="none" (default)</dt-text>
+        <example-tabs />
+      </dt-stack>
+      <dt-stack gap="100">
+        <dt-text as="p" kind="label" :size="200">spread="grow"</dt-text>
+        <example-tabs spread="grow" />
+      </dt-stack>
+      <dt-stack gap="100">
+        <dt-text as="p" kind="label" :size="200">spread="equal"</dt-text>
+        <example-tabs spread="equal" />
+      </dt-stack>
+    </dt-stack>
+    <!-- 4. VERTICAL ORIENTATION -->
+    <dt-text as="h2" kind="headline" :size="400">4. Vertical orientation</dt-text>
+    <dt-stack gap="400" direction="row">
+      <dt-stack gap="100" class="d-fl1">
+        <dt-text as="p" kind="label" :size="200">Default vertical</dt-text>
+        <example-tabs orientation="vertical" />
+      </dt-stack>
+      <dt-stack gap="100" class="d-fl1">
+        <dt-text as="p" kind="label" :size="200">Outlined vertical</dt-text>
+        <example-tabs orientation="vertical" outlined />
+      </dt-stack>
+      <dt-stack gap="100" class="d-fl1">
+        <dt-text as="p" kind="label" :size="200">Muted vertical</dt-text>
+        <example-tabs orientation="vertical" kind="muted" />
+      </dt-stack>
+    </dt-stack>
+    <!-- 5. BORDERLESS -->
+    <dt-text as="h2" kind="headline" :size="400">5. Borderless</dt-text>
+    <dt-stack gap="400">
+      <dt-stack gap="100">
+        <dt-text as="p" kind="label" :size="200">Borderless default</dt-text>
+        <example-tabs borderless />
+      </dt-stack>
+      <dt-stack gap="100">
+        <dt-text as="p" kind="label" :size="200">Borderless outlined</dt-text>
+        <example-tabs borderless outlined />
+      </dt-stack>
+    </dt-stack>
+    <!-- 6. AUTO ACTIVATION (keyboard rapid-fire) -->
+    <dt-text as="h2" kind="headline" :size="400">6. Auto activation mode (arrow keys should NOT animate)</dt-text>
+    <dt-stack gap="400">
+      <dt-stack gap="100">
+        <dt-text as="p" kind="label" :size="200">Auto mode — click should animate, arrows should snap</dt-text>
+        <example-tabs activation-mode="auto" />
+      </dt-stack>
+      <dt-stack gap="100">
+        <dt-text as="p" kind="label" :size="200">Auto mode + outlined</dt-text>
+        <example-tabs activation-mode="auto" outlined />
+      </dt-stack>
+    </dt-stack>
+    <!-- 7. DISABLED -->
+    <dt-text as="h2" kind="headline" :size="400">7. Disabled (should do nothing)</dt-text>
+    <dt-stack gap="100">
+      <dt-text as="p" kind="label" :size="200">Whole group disabled</dt-text>
+      <example-tabs disabled />
+    </dt-stack>
+    <!-- 8. showIndicatorTransition=false -->
+    <dt-text as="h2" kind="headline" :size="400">8. showIndicatorTransition=false (animation suppressed)</dt-text>
+    <dt-stack gap="100">
+      <dt-text as="p" kind="label" :size="200">Should switch instantly, no slide</dt-text>
+      <dt-tab-group :show-indicator-transition="false">
+        <template #tabs>
+          <dt-tab id="s1" panel-id="s2" selected>First</dt-tab>
+          <dt-tab id="s3" panel-id="s4">Second</dt-tab>
+          <dt-tab id="s5" panel-id="s6">Third</dt-tab>
+        </template>
+        <dt-tab-panel id="s2" tab-id="s1"><dt-text>Panel 1</dt-text></dt-tab-panel>
+        <dt-tab-panel id="s4" tab-id="s3"><dt-text>Panel 2</dt-text></dt-tab-panel>
+        <dt-tab-panel id="s6" tab-id="s5"><dt-text>Panel 3</dt-text></dt-tab-panel>
+      </dt-tab-group>
+    </dt-stack>
+    <!-- 9. MULTIPLE INSTANCES (conflict test) -->
+    <dt-text as="h2" kind="headline" :size="400">9. Multiple instances on same page (no conflicts)</dt-text>
+    <dt-text as="p" kind="body" :size="200" tone="muted">Click tabs in one group while another is mid-animation. They should not interfere.</dt-text>
+    <dt-stack gap="400" direction="row">
+      <dt-stack gap="100" class="d-fl1">
+        <dt-text as="p" kind="label" :size="200">Group A</dt-text>
+        <example-tabs />
+      </dt-stack>
+      <dt-stack gap="100" class="d-fl1">
+        <dt-text as="p" kind="label" :size="200">Group B</dt-text>
+        <example-tabs outlined />
+      </dt-stack>
+      <dt-stack gap="100" class="d-fl1">
+        <dt-text as="p" kind="label" :size="200">Group C</dt-text>
+        <example-tabs kind="muted" />
+      </dt-stack>
+    </dt-stack>
+    <!-- 10. EXTREME WIDTH VARIANCE -->
+    <dt-text as="h2" kind="headline" :size="400">10. Extreme tab width differences (scale morphing stress)</dt-text>
+    <dt-stack gap="100">
+      <dt-text as="p" kind="label" :size="200">Short vs very long labels — watch the scale animation</dt-text>
+      <dt-tab-group>
+        <template #tabs>
+          <dt-tab id="w1" panel-id="w2" selected>A</dt-tab>
+          <dt-tab id="w3" panel-id="w4">This is an extremely long tab label for stress testing</dt-tab>
+          <dt-tab id="w5" panel-id="w6">B</dt-tab>
+        </template>
+        <dt-tab-panel id="w2" tab-id="w1"><dt-text>Panel A</dt-text></dt-tab-panel>
+        <dt-tab-panel id="w4" tab-id="w3"><dt-text>Panel Long</dt-text></dt-tab-panel>
+        <dt-tab-panel id="w6" tab-id="w5"><dt-text>Panel B</dt-text></dt-tab-panel>
+      </dt-tab-group>
+    </dt-stack>
+    <!-- 11. MANY TABS (overflow / wrapping) -->
+    <dt-text as="h2" kind="headline" :size="400">11. Many tabs (potential wrapping)</dt-text>
+    <dt-stack gap="100">
+      <dt-text as="p" kind="label" :size="200">Does the animation break when tabs wrap to a second row?</dt-text>
+      <dt-tab-group>
+        <template #tabs>
+          <dt-tab id="m1" panel-id="m2" selected>Alpha</dt-tab>
+          <dt-tab id="m3" panel-id="m4">Bravo</dt-tab>
+          <dt-tab id="m5" panel-id="m6">Charlie</dt-tab>
+          <dt-tab id="m7" panel-id="m8">Delta</dt-tab>
+          <dt-tab id="m9" panel-id="m10">Echo</dt-tab>
+          <dt-tab id="m11" panel-id="m12">Foxtrot</dt-tab>
+          <dt-tab id="m13" panel-id="m14">Golf</dt-tab>
+          <dt-tab id="m15" panel-id="m16">Hotel</dt-tab>
+          <dt-tab id="m17" panel-id="m18">India</dt-tab>
+          <dt-tab id="m19" panel-id="m20">Juliet</dt-tab>
+        </template>
+        <dt-tab-panel id="m2" tab-id="m1"><dt-text>Panel Alpha</dt-text></dt-tab-panel>
+        <dt-tab-panel id="m4" tab-id="m3"><dt-text>Panel Bravo</dt-text></dt-tab-panel>
+        <dt-tab-panel id="m6" tab-id="m5"><dt-text>Panel Charlie</dt-text></dt-tab-panel>
+        <dt-tab-panel id="m8" tab-id="m7"><dt-text>Panel Delta</dt-text></dt-tab-panel>
+        <dt-tab-panel id="m10" tab-id="m9"><dt-text>Panel Echo</dt-text></dt-tab-panel>
+        <dt-tab-panel id="m12" tab-id="m11"><dt-text>Panel Foxtrot</dt-text></dt-tab-panel>
+        <dt-tab-panel id="m14" tab-id="m13"><dt-text>Panel Golf</dt-text></dt-tab-panel>
+        <dt-tab-panel id="m16" tab-id="m15"><dt-text>Panel Hotel</dt-text></dt-tab-panel>
+        <dt-tab-panel id="m18" tab-id="m17"><dt-text>Panel India</dt-text></dt-tab-panel>
+        <dt-tab-panel id="m20" tab-id="m19"><dt-text>Panel Juliet</dt-text></dt-tab-panel>
+      </dt-tab-group>
+    </dt-stack>
+    <!-- 12. RTL (logical direction) -->
+    <dt-text as="h2" kind="headline" :size="400">12. RTL direction</dt-text>
+    <dt-stack gap="100">
+      <dt-text as="p" kind="label" :size="200">Does the indicator slide the correct direction in RTL?</dt-text>
+      <div dir="rtl">
+        <example-tabs />
+      </div>
+    </dt-stack>
+    <!-- 13. INVERTED (dark on light) -->
+    <dt-text as="h2" kind="headline" :size="400">13. Inverted</dt-text>
+    <dt-stack gap="100">
+      <div class="d-bgc-contrast d-p16 d-bar8">
+        <example-tabs inverted />
+      </div>
+    </dt-stack>
+    <!-- 14. RAPID CLICK STRESS -->
+    <dt-text as="h2" kind="headline" :size="400">14. Rapid click test</dt-text>
+    <dt-stack gap="100">
+      <dt-text as="p" kind="label" :size="200">Click tabs as fast as possible — animation should cancel cleanly, no stuck states</dt-text>
+      <example-tabs />
+    </dt-stack>
+    <!-- 15. COMBINED EXTREMES -->
+    <dt-text as="h2" kind="headline" :size="400">15. Combined extremes</dt-text>
+    <dt-stack gap="400">
+      <dt-stack gap="100">
+        <dt-text as="p" kind="label" :size="200">Outlined + spread=equal + size 500</dt-text>
+        <example-tabs outlined spread="equal" size="500" />
+      </dt-stack>
+      <dt-stack gap="100">
+        <dt-text as="p" kind="label" :size="200">Muted + vertical + borderless</dt-text>
+        <example-tabs kind="muted" orientation="vertical" borderless />
+      </dt-stack>
+      <dt-stack gap="100">
+        <dt-text as="p" kind="label" :size="200">Muted + outlined + spread=grow + size 100</dt-text>
+        <example-tabs kind="muted" outlined spread="grow" size="100" />
+      </dt-stack>
+    </dt-stack>
+  </dt-stack>
 </dt-stack>
-<div class="d-h-1200"></div>
+<!-- ================================================================== -->
+<!-- TRAVELING INDICATOR STRESS TEST — remove before merging            -->
+<!-- ================================================================== -->
