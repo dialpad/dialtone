@@ -386,7 +386,7 @@ export function getPhoneNumberRegex (minLength = 7, maxLength = 15) {
       ')(?=\\b)(?=\\W(?=\\W|$)|\\s|$)',
     );
   } catch {
-     
+    // eslint-disable-next-line no-console
     console.warn('This browser doesn\'t support regex lookahead/lookbehind');
   }
 
