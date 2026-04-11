@@ -21,7 +21,7 @@ export default {
     props: {
       name: { initialValue: 'validated-checkbox-group' },
       legend: { initialValue: 'Fruits' },
-      messages: { initialValue: [{ message: 'Please select at least one option.', type: 'error' }] },
+      messages: { initialValue: [{ message: 'Please select at least one option.', type: 'critical' }] },
     },
     slots: {
       default: {

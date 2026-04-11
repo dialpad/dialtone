@@ -20,7 +20,7 @@ export default {
     props: {
       name: { initialValue: 'validated-radio-group' },
       legend: { initialValue: 'Fruits' },
-      messages: { initialValue: [{ message: 'Please select an option.', type: 'error' }] },
+      messages: { initialValue: [{ message: 'Please select an option.', type: 'critical' }] },
     },
     slots: {
       default: {

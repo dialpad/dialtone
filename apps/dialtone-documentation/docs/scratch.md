@@ -50,14 +50,14 @@ const showTabLabelClass = ref(false);
 const resolvedTabLabelClass = computed(() => showTabLabelClass.value ? 'd-bgc-warning' : undefined);
 const showInputDescription = ref(false);
 const showInputMessages = ref(false);
-const inputMessages = computed(() => showInputMessages.value ? [{ message: 'Error validation message', type: 'error' }] : []);
+const inputMessages = computed(() => showInputMessages.value ? [{ message: 'Critical validation message', type: 'critical' }] : []);
 const showInputMessagesClass = ref(false);
 const resolvedInputMessagesClass = computed(() => showInputMessagesClass.value ? 'd-bgc-critical' : undefined);
 const showInputDescriptionClass = ref(false);
 const resolvedInputDescriptionClass = computed(() => showInputDescriptionClass.value ? 'd-bgc-success' : undefined);
 const showDescription = ref(false);
 const showCheckRadioMessages = ref(false);
-const checkRadioMessages = computed(() => showCheckRadioMessages.value ? [{ message: 'Error validation message', type: 'error' }] : []);
+const checkRadioMessages = computed(() => showCheckRadioMessages.value ? [{ message: 'Critical validation message', type: 'critical' }] : []);
 const showCheckRadioMessagesClass = ref(false);
 const resolvedCheckRadioMessagesClass = computed(() => showCheckRadioMessagesClass.value ? 'd-bgc-critical' : undefined);
 const showCheckRadioDescriptionClass = ref(false);
@@ -169,9 +169,9 @@ const checkRadioDisabled = ref(false);
         <dt-button :disabled="isDisabled" importance="clear"> Place Call <template #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template></dt-button>
       </dt-stack>
       <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
-        <dt-button :disabled="isDisabled" kind="danger"> Place Call <template #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template></dt-button>
-        <dt-button :disabled="isDisabled" kind="danger" importance="outlined"> Place Call <template #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template></dt-button>
-        <dt-button :disabled="isDisabled" kind="danger" importance="clear"> Place Call <template #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template></dt-button>
+        <dt-button :disabled="isDisabled" kind="critical"> Place Call <template #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template></dt-button>
+        <dt-button :disabled="isDisabled" kind="critical" importance="outlined"> Place Call <template #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template></dt-button>
+        <dt-button :disabled="isDisabled" kind="critical" importance="clear"> Place Call <template #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template></dt-button>
       </dt-stack>
       <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
         <dt-button :disabled="isDisabled" kind="positive">Place Call<template #startIcon="{ iconSize }"> <dt-icon name="box-select" :size="iconSize" /> </template></dt-button>
@@ -850,7 +850,7 @@ const checkRadioDisabled = ref(false);
           <dt-notice kind="warning" title="Warning" hide-action>
             Please review before proceeding.
           </dt-notice>
-          <dt-notice kind="error" title="Error" hide-action>
+          <dt-notice kind="critical" title="Critical" hide-action>
             Something went wrong. Please try again.
           </dt-notice>
           <dt-notice kind="base" title="Base" hide-action>
@@ -868,7 +868,7 @@ const checkRadioDisabled = ref(false);
           <dt-notice kind="warning" title="Important warning" :important="true" hide-action>
             Visually prominent variant with filled background.
           </dt-notice>
-          <dt-notice kind="error" title="Important error" :important="true" hide-action>
+          <dt-notice kind="critical" title="Important critical" :important="true" hide-action>
             Visually prominent variant with filled background.
           </dt-notice>
         </dt-stack>
@@ -898,7 +898,7 @@ const checkRadioDisabled = ref(false);
         <dt-banner kind="warning" title="Warning banner" class="d-ps-relative d-zi-base">
           Please review before proceeding.
         </dt-banner>
-        <dt-banner kind="error" title="Error banner" class="d-ps-relative d-zi-base">
+        <dt-banner kind="critical" title="Critical banner" class="d-ps-relative d-zi-base">
           Something went wrong.
         </dt-banner>
       </dt-stack>
@@ -913,7 +913,7 @@ const checkRadioDisabled = ref(false);
         <dt-banner kind="warning" title="Warning banner" :important="true" class="d-ps-relative d-zi-base">
           Please review before proceeding.
         </dt-banner>
-        <dt-banner kind="error" title="Error banner" :important="true" class="d-ps-relative d-zi-base">
+        <dt-banner kind="critical" title="Critical banner" :important="true" class="d-ps-relative d-zi-base">
           Something went wrong.
         </dt-banner>
       </dt-stack>
@@ -928,7 +928,7 @@ const checkRadioDisabled = ref(false);
           <dt-toast :show="true" kind="info" title="Info toast" message="Informational message." :duration="null" />
           <dt-toast :show="true" kind="success" title="Success toast" message="Action completed." :duration="null" />
           <dt-toast :show="true" kind="warning" title="Warning toast" message="Review before proceeding." :duration="null" />
-          <dt-toast :show="true" kind="error" title="Error toast" message="Something went wrong." :duration="null" />
+          <dt-toast :show="true" kind="critical" title="Critical toast" message="Something went wrong." :duration="null" />
           <dt-toast :show="true" kind="base" title="Base toast" message="Neutral notification." :duration="null" />
         </dt-stack>
         <dt-stack gap="100">
@@ -936,7 +936,7 @@ const checkRadioDisabled = ref(false);
           <dt-toast :show="true" kind="info" title="Info toast" message="Informational message." :important="true" :duration="null" />
           <dt-toast :show="true" kind="success" title="Success toast" message="Action completed." :important="true" :duration="null" />
           <dt-toast :show="true" kind="warning" title="Warning toast" message="Review before proceeding." :important="true" :duration="null" />
-          <dt-toast :show="true" kind="error" title="Error toast" message="Something went wrong." :important="true" :duration="null" />
+          <dt-toast :show="true" kind="critical" title="Critical toast" message="Something went wrong." :important="true" :duration="null" />
           <dt-toast :show="true" kind="base" title="Base toast" message="Neutral notification." :important="true" :duration="null" />
         </dt-stack>
         <dt-stack gap="100">

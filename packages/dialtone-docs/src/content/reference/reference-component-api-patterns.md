@@ -42,10 +42,10 @@ Exceptions exist — DtModal uses `default` and `full` instead.
 
 Color or semantic variant. Values vary per component:
 
-- DtButton: `default`, `muted`, `danger`, `positive`, `inverted`, `unstyled`
-- DtModal: `default`, `danger`
-- DtNotice: `base`, `error`, `info`, `success`, `warning`
-- DtBadge: uses `type` instead (`default`, `info`, `success`, `warning`, `critical`, `bulletin`, `ai`)
+- DtButton: `default`, `muted`, `critical`, `positive`, `inverted`, `unstyled`
+- DtModal: `default`, `critical`
+- DtNotice: `base`, `critical`, `info`, `positive`, `warning`
+- DtBadge: uses `type` instead (`default`, `info`, `positive`, `warning`, `critical`, `bulletin`, `ai`)
 
 ### Importance
 
@@ -143,11 +143,13 @@ Icon scale values correspond to pixel sizes defined in `packages/dialtone-icons/
 Group-child relationships use Vue's provide/inject. The parent provides a reactive context object plus action methods:
 
 **Tab group** (`tab_group.vue`):
+
 ```
 provides: { groupContext: { selected, disabled }, setFocus }
 ```
 
 **Input groups** (CheckboxGroup, RadioGroup via `input_group.js` mixin):
+
 ```
 provides: { groupContext: { name, disabled, validationState, value, selectedValues }, setGroupValue }
 ```

@@ -121,7 +121,7 @@ keywords: ["theme island","mode override","v-dt-mode","directive","light","dark"
         </dt-stack>
         <dt-stack direction="row" gap="100" class="d-100p">
           <dt-button :size="200" class="d-fl1">Button</dt-button>
-          <dt-button :size="200" class="d-fl1" kind="danger">Button</dt-button>
+          <dt-button :size="200" class="d-fl1" kind="critical">Button</dt-button>
         </dt-stack>
       </dt-stack>
     </dt-stack>
@@ -137,7 +137,7 @@ keywords: ["theme island","mode override","v-dt-mode","directive","light","dark"
         </dt-stack>
         <dt-stack direction="row" gap="100" class="d-100p">
           <dt-button :size="200" class="d-fl1">Button</dt-button>
-          <dt-button :size="200" class="d-fl1" kind="danger">Button</dt-button>
+          <dt-button :size="200" class="d-fl1" kind="critical">Button</dt-button>
         </dt-stack>
       </dt-stack>
     </dt-stack>
@@ -153,7 +153,7 @@ keywords: ["theme island","mode override","v-dt-mode","directive","light","dark"
         </dt-stack>
         <dt-stack direction="row" gap="100" class="d-100p">
           <dt-button :size="200" class="d-fl1">Button</dt-button>
-          <dt-button :size="200" class="d-fl1" kind="danger">Button</dt-button>
+          <dt-button :size="200" class="d-fl1" kind="critical">Button</dt-button>
         </dt-stack>
       </dt-stack>
     </dt-stack>
@@ -374,7 +374,7 @@ A real-world pattern: the callbar container already exists as a semantic element
     </dt-stack>
   </dt-stack>
   <dt-stack class="d-fl1" direction="row" gap="25" justify="center">
-    <dt-button class="d-px-100 d-w-100" :size="100" kind="danger">
+    <dt-button class="d-px-100 d-w-100" :size="100" kind="critical">
       <template #blockStartIcon> <dt-icon name="mic" size="300" /> </template>
       Unmute
     </dt-button>
@@ -396,7 +396,7 @@ A real-world pattern: the callbar container already exists as a semantic element
     </dt-button>
   </dt-stack>
   <dt-stack>
-    <dt-button class="d-p-150" circle :size="400" kind="danger">
+    <dt-button class="d-p-150" circle :size="400" kind="critical">
       <template #startIcon> <dt-icon name="phone-hang-up" size="500" /> </template>
     </dt-button>
   </dt-stack>
