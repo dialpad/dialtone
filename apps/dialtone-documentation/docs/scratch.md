@@ -770,7 +770,10 @@ const checkRadioDisabled = ref(false);
           <template v-if="showTabEndIcon" #endIcon="{ iconSize }">
             <dt-icon name="box-select" :size="iconSize" />
           </template>
-          United Kingdom
+          <dt-stack>
+            United Kingdom
+            <dt-text as="p" kind="body" :size="200" tone="muted">England, Scotland, Wales, Northern Ireland</dt-text>
+          </dt-stack>
         </dt-tab>
         <dt-tab id="7" panel-id="8" :label-class="resolvedTabLabelClass">
           <template v-if="showIcon" #startIcon="{ iconSize }">
@@ -1151,11 +1154,13 @@ const checkRadioDisabled = ref(false);
         <template #tabs>
           <dt-tab id="w1" panel-id="w2" selected>A</dt-tab>
           <dt-tab id="w3" panel-id="w4">This is an extremely long tab label for stress testing</dt-tab>
-          <dt-tab id="w5" panel-id="w6">B</dt-tab>
+          <dt-tab id="w5" panel-id="w6">This tab spans<br>two lines</dt-tab>
+          <dt-tab id="w7" panel-id="w8">B</dt-tab>
         </template>
         <dt-tab-panel id="w2" tab-id="w1"><dt-text>Panel A</dt-text></dt-tab-panel>
         <dt-tab-panel id="w4" tab-id="w3"><dt-text>Panel Long</dt-text></dt-tab-panel>
-        <dt-tab-panel id="w6" tab-id="w5"><dt-text>Panel B</dt-text></dt-tab-panel>
+        <dt-tab-panel id="w6" tab-id="w5"><dt-text>Panel Two Lines</dt-text></dt-tab-panel>
+        <dt-tab-panel id="w8" tab-id="w7"><dt-text>Panel B</dt-text></dt-tab-panel>
       </dt-tab-group>
     </dt-stack>
     <!-- 11. MANY TABS (overflow / wrapping) -->
@@ -1198,9 +1203,7 @@ const checkRadioDisabled = ref(false);
     <!-- 13. INVERTED (dark on light) -->
     <dt-text as="h2" kind="headline" :size="400">13. Inverted</dt-text>
     <dt-stack gap="100">
-      <div class="d-bgc-contrast d-p16 d-bar8">
-        <example-tabs inverted />
-      </div>
+      <example-tabs v-dt-mode:invert class="d-p16 d-bar8 d-bgc-primary" />
     </dt-stack>
     <!-- 14. RAPID CLICK STRESS -->
     <dt-text as="h2" kind="headline" :size="400">14. Rapid click test</dt-text>
