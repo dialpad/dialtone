@@ -344,7 +344,7 @@ export default {
     },
 
     getTabChildren () {
-      const tabs = Array.from(this.tabs.querySelectorAll('[role="tab"]'));
+      const tabs = Array.from(this.$refs.tabs.querySelectorAll('[role="tab"]'));
       return tabs
         .map(el => {
           return ({
@@ -411,7 +411,7 @@ export default {
         return;
       }
 
-      const tabsEl = this.tabs;
+      const tabsEl = this.$refs.tabs;
       const oldTab = tabsEl.querySelector('[aria-selected="true"]');
       const oldRect = oldTab?.getBoundingClientRect();
 
