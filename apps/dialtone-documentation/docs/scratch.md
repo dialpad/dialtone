@@ -7,6 +7,7 @@ layout: Blank
 <script setup>
 import { ref, computed } from 'vue';
 import { useThemeManager } from '@composables/useThemeManager';
+import ExampleProfileCard from '@exampleComponents/ExampleProfileCard.vue';
 
 const {
   currentMode,
@@ -65,7 +66,7 @@ const resolvedCheckRadioDescriptionClass = computed(() => showCheckRadioDescript
 const checkRadioDisabled = ref(false);
 </script>
 
-<dt-stack class="d-p-400" gap="400">
+<dt-stack class="d-p-400 d-bgc-primary" gap="400">
   <dt-stack direction="row" gap="100">
     <dt-text as="h1" kind="headline" :size="600">
       Scratchpad
@@ -150,6 +151,343 @@ const checkRadioDisabled = ref(false);
       </template>
     </dt-dropdown>
   </dt-stack>
+  <article>
+
+# Focusgroup directive
+
+Declarative roving tabindex for composite widgets. Manages arrow-key navigation,
+`tabindex` management, looping, focus memory, and disabled-item skipping — following
+the [Open UI focusgroup proposal](https://open-ui.org/components/scoped-focusgroup.explainer/).
+
+The directive handles **focus movement only**. Activation and selection (toggling
+`aria-selected`, `aria-checked`, etc.) remain the consumer's responsibility.
+
+## Usage
+
+Import and install the directive:
+
+```js
+import { DtFocusgroupDirective } from "@dialpad/dialtone-vue";
+app.use(DtFocusgroupDirective);
+```
+
+### Basic usage
+
+Just add `v-dt-focusgroup` and any focusable child will be managed by the focusgroup.
+
+> [!WARNING] Always pair with an ARIA role
+> The directive manages keyboard focus but does not set any ARIA attributes. For screen readers to announce the widget correctly, you must provide a `role` (`toolbar`, `tablist`, `listbox`, `radiogroup`, `menu`), an accessible name (`aria-label`), and `aria-orientation` when the axis differs from the role's default. Without a role, the container is opaque to assistive technology — arrow-key cycling works, but the user has no context for what they're navigating.
+
+```vue demo
+<dt-stack v-dt-focusgroup direction="row" gap="100">
+  <dt-button kind="muted" importance="outlined">Button</dt-button>
+  <dt-button kind="muted" importance="outlined">Button</dt-button>
+  <dt-button kind="muted" importance="outlined">Button</dt-button>
+</dt-stack>
+```
+
+### Token syntax
+
+```vue demo
+<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal'" aria-label="Formatting">
+  <dt-button kind="muted" importance="outlined">Bold</dt-button>
+  <dt-button kind="muted" importance="outlined">Italic</dt-button>
+  <dt-button kind="muted" importance="outlined">Underline</dt-button>
+</dt-stack>
+```
+
+### Object syntax
+
+```vue demo
+<dt-stack gap="100" role="listbox" v-dt-focusgroup="{ axis: 'vertical', loop: false }" aria-label="Fruits">
+  <dt-button role="option" kind="muted" importance="outlined">Apple</dt-button>
+  <dt-button role="option" kind="muted" importance="outlined">Banana</dt-button>
+</dt-stack>
+```
+
+```vue demo
+<dt-stack direction="row" gap="100" role="listbox" aria-orientation="horizontal" v-dt-focusgroup="{ axis: 'horizontal', loop: false }" aria-label="Fruits">
+  <dt-button role="option" kind="muted" importance="outlined">Apple</dt-button>
+  <dt-button role="option" kind="muted" importance="outlined">Banana</dt-button>
+</dt-stack>
+```
+
+### Vertical toolbar
+
+```vue demo
+<dt-stack gap="100" role="toolbar" aria-orientation="vertical" v-dt-focusgroup="'vertical'" aria-label="Formatting">
+  <dt-button kind="muted" importance="outlined">Bold</dt-button>
+  <dt-button kind="muted" importance="outlined">Italic</dt-button>
+  <dt-button kind="muted" importance="outlined">Underline</dt-button>
+</dt-stack>
+```
+
+### noloop — focus stops at boundaries
+
+```vue demo
+<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal noloop'" aria-label="Pagination">
+  <dt-button kind="muted" importance="outlined">First</dt-button>
+  <dt-button kind="muted" importance="outlined">Previous</dt-button>
+  <dt-button kind="muted" importance="outlined">Next</dt-button>
+  <dt-button kind="muted" importance="outlined">Last</dt-button>
+</dt-stack>
+```
+
+### nomemory — re-entry always starts at first item
+
+```vue demo
+<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal nomemory'" aria-label="Actions">
+  <dt-button kind="muted" importance="outlined">Cut</dt-button>
+  <dt-button kind="muted" importance="outlined">Copy</dt-button>
+  <dt-button kind="muted" importance="outlined">Paste</dt-button>
+</dt-stack>
+```
+
+### Disabled items — skipped by default
+
+```vue demo
+<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal'" aria-label="Tools">
+  <dt-button kind="muted" importance="outlined">Pen</dt-button>
+  <dt-button kind="muted" importance="outlined" disabled>Eraser (disabled)</dt-button>
+  <dt-button kind="muted" importance="outlined">Highlighter</dt-button>
+</dt-stack>
+```
+
+### noskipdisabled — disabled items remain focusable
+
+```vue demo
+<dt-stack direction="row" gap="100" role="tablist" v-dt-focusgroup="'horizontal nomemory'" aria-label="Platforms">
+  <dt-button role="tab" kind="muted" importance="outlined">Mac</dt-button>
+  <dt-button role="tab" kind="muted" importance="outlined" class="d-btn--disabled" aria-disabled="true">Windows (disabled)</dt-button>
+  <dt-button role="tab" kind="muted" importance="outlined">Linux</dt-button>
+</dt-stack>
+```
+
+### dt-focusgroup-move event — selection follows focus
+
+```vue demo
+<dt-stack direction="row" gap="100" role="tablist" v-dt-focusgroup="'horizontal nomemory'" aria-label="Tabs" @dt-focusgroup-move="$event.detail.item.setAttribute('aria-selected', 'true'); $event.detail.previousItem.setAttribute('aria-selected', 'false')">
+  <dt-button role="tab" kind="muted" importance="clear" aria-selected="true">One</dt-button>
+  <dt-button role="tab" kind="muted" importance="clear" aria-selected="false">Two</dt-button>
+  <dt-button role="tab" kind="muted" importance="clear" aria-selected="false">Three</dt-button>
+</dt-stack>
+```
+
+### Item opt-out
+
+Add `data-dt-focusgroup-skip` to exclude an element from arrow-key navigation
+(e.g., text inputs that need their own arrow keys):
+
+```vue demo
+<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal'" aria-label="Formatting with opt-out">
+  <dt-button kind="muted" importance="outlined">Bold</dt-button>
+  <dt-input data-dt-focusgroup-skip placeholder="This will be skipped" />
+  <dt-button kind="muted" importance="outlined">Code</dt-button>
+  <dt-link data-dt-focusgroup-skip>Skipped Text link</dt-link>
+  <dt-button kind="muted" importance="outlined">Code</dt-button>
+</dt-stack>
+```
+
+### Mixed focusable elements
+
+```vue demo
+<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal'" aria-label="Mixed elements">
+  <dt-button kind="muted" importance="outlined">Button</dt-button>
+  <dt-link>Link</dt-link>
+  <dt-select-menu
+    :options="[
+          { value: ``, label: `Please select one` },
+          { value: `1`, label: `Option 1` },
+          { value: `2`, label: `Option 2` },
+          { value: `3`, label: `Option 3` },
+        ]"
+    label="Default"
+    :model-value="modelValue"
+    :label-visible="false"
+    @input="onInput"
+    @change="onChange"
+  />
+</dt-stack>
+```
+
+### Nesting depth
+
+Items do not need to be direct children. The directive uses `querySelectorAll`
+on the container, finding items at any nesting depth in DOM order:
+
+```vue demo
+<dt-stack direction="row" gap="100" role="toolbar" v-dt-focusgroup="'horizontal'" aria-label="Nested groups">
+  <dt-stack direction="row" gap="100" class="d-bgc-moderate-opaque d-p-100">
+    <dt-button kind="muted" importance="outlined">btn</dt-button>
+    <dt-button kind="muted" importance="outlined">btn</dt-button>
+    <dt-button kind="muted" importance="outlined">btn</dt-button>
+  </dt-stack>
+  <dt-stack direction="row" gap="100" class="d-bgc-moderate-opaque d-p-100">
+    <dt-button kind="muted" importance="outlined">btn</dt-button>
+    <dt-button kind="muted" importance="outlined">btn</dt-button>
+  </dt-stack>
+  <dt-stack direction="row" gap="100" class="d-bgc-moderate-opaque d-p-100">
+    <dt-link>text link a</dt-link>
+    <dt-link>text link b</dt-link>
+  </dt-stack>
+</dt-stack>
+```
+
+## Recipes
+
+Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone components.
+
+### Table with row navigation
+
+```vue demo
+<table class="d-table dialtone-doc-table" v-dt-focusgroup="{ axis: 'vertical', selector: 'tbody tr' }" aria-label="Office List">
+  <caption class="d-table__caption">Office List</caption>
+  <thead>
+    <tr>
+      <th scope="col">Office</th>
+      <th scope="col">Country</th>
+      <th scope="col" width="10%">Employees</th>
+      <th scope="col" colspan="2">Contact</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="h:d-bgc-moderate-opaque fv:d-bgc-moderate-opaque d-c-pointer" tabindex="0">
+      <th scope="row">Austin, TX</th>
+      <td>United States</td>
+      <td>48</td>
+      <td>Henna Ferry</td>
+      <td class="d-ta-right"><dt-button kind="muted" importance="outlined" size="200">Button 1</dt-button></td>
+      <td class="d-ta-right"><dt-button kind="muted" importance="outlined" size="200">Button 2</dt-button></td>
+    </tr>
+    <tr class="h:d-bgc-moderate-opaque fv:d-bgc-moderate-opaque d-c-pointer" tabindex="-1">
+      <th scope="row">Bangalore</th>
+      <td>India</td>
+      <td>13</td>
+      <td>Arun Chadda</td>
+      <td class="d-ta-right"><dt-button kind="muted" importance="outlined" size="200">Button 1</dt-button></td>
+      <td class="d-ta-right"><dt-button kind="muted" importance="outlined" size="200">Button 2</dt-button></td>
+    </tr>
+    <tr class="h:d-bgc-moderate-opaque fv:d-bgc-moderate-opaque d-c-pointer" tabindex="-1">
+      <th scope="row">San Francisco, CA</th>
+      <td>United States</td>
+      <td>108</td>
+      <td>Shane Holmes</td>
+      <td class="d-ta-right"><dt-button kind="muted" importance="outlined" size="200">Button 1</dt-button></td>
+      <td class="d-ta-right"><dt-button kind="muted" importance="outlined" size="200">Button 2</dt-button></td>
+    </tr>
+    <tr class="h:d-bgc-moderate-opaque fv:d-bgc-moderate-opaque d-c-pointer" tabindex="-1">
+      <th scope="row">Vancouver, BC</th>
+      <td>Canada</td>
+      <td>76</td>
+      <td>Kendal Lewis</td>
+      <td class="d-ta-right"><dt-button kind="muted" importance="outlined" size="200">Button 1</dt-button></td>
+      <td class="d-ta-right"><dt-button kind="muted" importance="outlined" size="200">Button 2</dt-button></td>
+    </tr>
+  </tbody>
+</table>
+```
+
+### Inbox
+
+```vue demo
+<dt-stack role="list" v-dt-focusgroup="'vertical'" aria-label="Contacts">
+  <dt-stack role="listitem" tabindex="0" gap="100" class="d-p-100 d-w-800 h:d-bgc-moderate-opaque fv:d-bgc-moderate-opaque d-bar8">
+    <dt-stack direction="row" gap="100" class="d-w100p">
+      <dt-avatar full-name="Ashanti Trevor" />
+      <dt-stack class="d-fl1">
+        <dt-text kind="body" :size="200" strength="bold">Ashanti Trevor</dt-text>
+        <dt-stack direction="row" gap="50">
+          <dt-stack direction="row" gap="100">
+            <dt-icon name="phone-outgoing" size="200" class="d-fc-tertiary" />
+            <dt-text kind="body" :size="100" tone="tertiary">Outgoing call</dt-text>
+          </dt-stack>
+          <dt-text kind="body" :size="100" tone="tertiary">&bull;</dt-text>
+          <dt-text kind="body" :size="100" tone="tertiary">2 minutes 10 seconds</dt-text>
+        </dt-stack>
+      </dt-stack>
+      <dt-text kind="body" :size="200" tone="tertiary" numeric>3:23 pm</dt-text>
+      <dt-badge kind="count" type="bulletin" text="6" />
+    </dt-stack>
+  </dt-stack>
+  <dt-stack role="listitem" tabindex="0" gap="100" class="d-p-100 d-w-800 h:d-bgc-moderate-opaque fv:d-bgc-moderate-opaque d-bar8">
+    <dt-stack direction="row" gap="100" class="d-w100p">
+      <dt-avatar full-name="Marcus Chen" />
+      <dt-stack class="d-fl1">
+        <dt-text kind="body" :size="200" strength="bold">Marcus Chen</dt-text>
+        <dt-stack direction="row" gap="50">
+          <dt-stack direction="row" gap="100">
+            <dt-icon name="phone-incoming" size="200" class="d-fc-tertiary" />
+            <dt-text kind="body" :size="100" tone="tertiary">Incoming call</dt-text>
+          </dt-stack>
+          <dt-text kind="body" :size="100" tone="tertiary">&bull;</dt-text>
+          <dt-text kind="body" :size="100" tone="tertiary">14 minutes 32 seconds</dt-text>
+        </dt-stack>
+      </dt-stack>
+      <dt-text kind="body" :size="200" tone="tertiary" numeric>1:47 pm</dt-text>
+    </dt-stack>
+  </dt-stack>
+  <dt-stack role="listitem" tabindex="0" gap="100" class="d-p-100 d-w-800 h:d-bgc-moderate-opaque fv:d-bgc-moderate-opaque d-bar8">
+    <dt-stack direction="row" gap="100" class="d-w100p">
+      <dt-avatar full-name="Priya Sharma" />
+      <dt-stack class="d-fl1">
+        <dt-text kind="body" :size="200" strength="bold">Priya Sharma</dt-text>
+        <dt-stack direction="row" gap="50">
+          <dt-stack direction="row" gap="100">
+            <dt-icon name="phone-missed" size="200" class="d-fc-critical" />
+            <dt-text kind="body" :size="100" tone="tertiary">Missed call</dt-text>
+          </dt-stack>
+          <dt-text kind="body" :size="100" tone="tertiary">&bull;</dt-text>
+          <dt-text kind="body" :size="100" tone="tertiary">0 seconds</dt-text>
+        </dt-stack>
+      </dt-stack>
+      <dt-text kind="body" :size="200" tone="tertiary" numeric>11:05 am</dt-text>
+      <dt-badge kind="count" type="bulletin" text="3" />
+    </dt-stack>
+  </dt-stack>
+</dt-stack>
+```
+
+### Contact List, with custom selector
+
+
+```vue demo
+<dt-stack role="list" v-dt-focusgroup="{ axis: 'vertical', loop: false, selector: '[data-custom-attribute-name]' }" aria-label="Contacts" class="d-w-400">
+  <dt-hovercard placement="right">
+    <template #anchor>
+      <dt-recipe-contact-row data-custom-attribute-name role="listitem" name="Ashanti Trevor" avatar-presence="active" user-status="Good morning!" has-call-button />
+    </template>
+    <template #content>
+      <ExampleProfileCard />
+    </template>
+  </dt-hovercard>
+  <dt-hovercard placement="right">
+    <template #anchor>
+      <dt-recipe-contact-row data-custom-attribute-name role="listitem" name="Marcus Chen" avatar-presence="away" presence-text="Away" user-status="Out for a bit" has-call-button />
+    </template>
+    <template #content>
+      <ExampleProfileCard />
+    </template>
+  </dt-hovercard>
+  <dt-hovercard placement="right">
+    <template #anchor>
+      <dt-recipe-contact-row data-custom-attribute-name role="listitem" name="Priya Sharma" avatar-presence="busy" presence-text="In a meeting" user-status="Meetings all day" has-call-button />
+    </template>
+    <template #content>
+      <ExampleProfileCard />
+    </template>
+  </dt-hovercard>
+  <dt-hovercard placement="right">
+    <template #anchor>
+      <dt-recipe-contact-row data-custom-attribute-name role="listitem" name="Jordan Kim" unread-count="3" :has-unreads="true" has-call-button />
+    </template>
+    <template #content>
+      <ExampleProfileCard />
+    </template>
+  </dt-hovercard>
+</dt-stack>
+```
+
+  </article>
   <dt-stack gap="200">
     <dt-text as="h1" kind="headline" :size="500">
       Disabled Button

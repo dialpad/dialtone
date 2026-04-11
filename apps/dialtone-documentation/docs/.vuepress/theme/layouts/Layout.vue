@@ -83,7 +83,7 @@ const isMobile = ref(false);
  */
 function detectTopLevelGroup(path) {
   // Map routes to top-level groups
-  const designSystemPaths = ['/components/', '/utilities/', '/tokens/', '/guides/', '/about/'];
+  const designSystemPaths = ['/components/', '/utilities/', '/tokens/', '/guides/', '/about/', '/functions-and-utilities/'];
 
   if (designSystemPaths.some(p => path.includes(p))) {
     return 'dialtone';
