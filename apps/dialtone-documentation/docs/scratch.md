@@ -1152,14 +1152,22 @@ const checkRadioDisabled = ref(false);
       <dt-text as="p" kind="label" :size="200">Short vs very long labels — watch the scale animation</dt-text>
       <dt-tab-group>
         <template #tabs>
-          <dt-tab id="w1" panel-id="w2" selected>A</dt-tab>
-          <dt-tab id="w3" panel-id="w4">This is an extremely long tab label for stress testing</dt-tab>
-          <dt-tab id="w5" panel-id="w6">This tab spans<br>two lines</dt-tab>
-          <dt-tab id="w7" panel-id="w8">B</dt-tab>
+          <dt-tab id="w1" panel-id="w2" selected>Medium label</dt-tab>
+          <dt-tab id="w3" panel-id="w4">Extremely long tab label for stressy stressful testing</dt-tab>
+          <dt-tab id="w7" panel-id="w8">Shrt</dt-tab>
         </template>
         <dt-tab-panel id="w2" tab-id="w1"><dt-text>Panel A</dt-text></dt-tab-panel>
         <dt-tab-panel id="w4" tab-id="w3"><dt-text>Panel Long</dt-text></dt-tab-panel>
-        <dt-tab-panel id="w6" tab-id="w5"><dt-text>Panel Two Lines</dt-text></dt-tab-panel>
+        <dt-tab-panel id="w8" tab-id="w7"><dt-text>Panel B</dt-text></dt-tab-panel>
+      </dt-tab-group>
+      <dt-tab-group kind="muted">
+        <template #tabs>
+          <dt-tab id="w1" panel-id="w2" selected>Medium label</dt-tab>
+          <dt-tab id="w3" panel-id="w4">Extremely long tab label for stressy stressful testing</dt-tab>
+          <dt-tab id="w7" panel-id="w8">Shrt</dt-tab>
+        </template>
+        <dt-tab-panel id="w2" tab-id="w1"><dt-text>Panel A</dt-text></dt-tab-panel>
+        <dt-tab-panel id="w4" tab-id="w3"><dt-text>Panel Long</dt-text></dt-tab-panel>
         <dt-tab-panel id="w8" tab-id="w7"><dt-text>Panel B</dt-text></dt-tab-panel>
       </dt-tab-group>
     </dt-stack>

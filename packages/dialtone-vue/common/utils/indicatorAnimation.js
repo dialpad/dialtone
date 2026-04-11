@@ -55,9 +55,10 @@ export function animateIndicator (state, {
 }) {
   const newRect = newEl.getBoundingClientRect();
   const isVertical = orientation === 'vertical';
+  // Use center-to-center delta so scale from center aligns both edges correctly
   const delta = isVertical
-    ? oldRect.top - newRect.top
-    : oldRect.left - newRect.left;
+    ? (oldRect.top + oldRect.height / 2) - (newRect.top + newRect.height / 2)
+    : (oldRect.left + oldRect.width / 2) - (newRect.left + newRect.width / 2);
   if (delta === 0) return;
 
   cancelIndicatorAnimations(state);
