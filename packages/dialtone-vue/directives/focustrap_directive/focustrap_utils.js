@@ -44,7 +44,7 @@ export function getTabbableElements (container, { includeNegativeTabIndex = fals
 export function getFirstFocusCandidate (elements) {
   if (!elements.length) return undefined;
   const first = elements[0];
-  if (first.matches('[type="radio"]:not(:checked)')) {
+  if (first.matches('[type="radio"]:not(:checked)') && first.name) {
     return elements.find(el => el.checked && el.name === first.name) || first;
   }
   return first;
