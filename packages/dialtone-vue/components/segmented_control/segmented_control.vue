@@ -269,7 +269,8 @@ function selectValue (value, { animate: shouldAnimate = true } = {}) {
   if (!oldRect || !canAnimate) return;
 
   nextTick(() => {
-    const newEl = containerEl.querySelector(`[${SEGMENTED_CONTROL_DATA_VALUE_ATTR}="${value}"]`);
+    const escapedValue = typeof CSS !== 'undefined' && CSS.escape ? CSS.escape(value) : value;
+    const newEl = containerEl.querySelector(`[${SEGMENTED_CONTROL_DATA_VALUE_ATTR}="${escapedValue}"]`);
     if (!newEl || typeof newEl.animate !== 'function') return;
 
     indicator.animate({
