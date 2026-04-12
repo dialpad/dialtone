@@ -61,9 +61,25 @@ Use `d-ji-center` to justify items to the center of their inline axis.
 <utility-class-table>
   <template #content>
     <tbody>
-      <tr v-for="i in ['center', 'end', 'start', 'left', 'right', 'baseline', 'first-baseline', 'last-baseline', 'stretch', 'safe', 'unsafe', 'normal', 'legacy', 'auto', 'unset']">
-        <th scope="row" class="d-code--sm d-docsite-code">.d-ji-{{ i }}</th>
-        <td class="d-code--sm">justify-items: {{ i }} !important;</td>
+      <tr v-for="{ class: cls, deprecated } in [
+        { class: 'center' },
+        { class: 'end' },
+        { class: 'start' },
+        { class: 'left', deprecated: true },
+        { class: 'right', deprecated: true },
+        { class: 'baseline' },
+        { class: 'first-baseline' },
+        { class: 'last-baseline' },
+        { class: 'stretch' },
+        { class: 'safe' },
+        { class: 'unsafe' },
+        { class: 'normal' },
+        { class: 'legacy' },
+        { class: 'auto' },
+        { class: 'unset' },
+      ]">
+        <th scope="row" class="d-code--sm d-docsite-code">.d-ji-{{ cls }} <dt-badge v-if="deprecated" type="critical" class="d-ff-sans">Deprecated</dt-badge></th>
+        <td class="d-code--sm">justify-items: {{ cls }} !important;</td>
       </tr>
     </tbody>
   </template>
