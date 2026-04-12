@@ -51,7 +51,7 @@ describe('Validator Tests', () => {
       beforeEach(() => {
         rawMessages = [{
           message: 'message',
-          type: VALIDATION_MESSAGE_TYPES.SUCCESS,
+          type: VALIDATION_MESSAGE_TYPES.POSITIVE,
         }];
       });
 
@@ -68,7 +68,7 @@ describe('Validator Tests', () => {
           'message 1',
           {
             message: 'message 2',
-            type: VALIDATION_MESSAGE_TYPES.SUCCESS,
+            type: VALIDATION_MESSAGE_TYPES.POSITIVE,
           },
         ];
       });

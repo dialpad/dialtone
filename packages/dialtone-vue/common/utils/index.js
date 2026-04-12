@@ -107,23 +107,23 @@ export function filterFormattedMessages (formattedMessages) {
 }
 
 /*
- * The priority order of message types is as flows: 'error' > 'warning' > 'success'.
- * If any message of type 'error' is present in messages, the input state is considered
- * to be 'error', then 'warning' and lastly 'success'.
+ * The priority order of message types is as flows: 'critical' > 'warning' > 'positive'.
+ * If any message of type 'critical' is present in messages, the input state is considered
+ * to be 'critical', then 'warning' and lastly 'positive'.
  */
 export function getValidationState (formattedMessages) {
   if (!formattedMessages) {
     return null;
   }
 
-  if (hasFormattedMessageOfType(formattedMessages, VALIDATION_MESSAGE_TYPES.ERROR)) {
-    return VALIDATION_MESSAGE_TYPES.ERROR;
+  if (hasFormattedMessageOfType(formattedMessages, VALIDATION_MESSAGE_TYPES.CRITICAL)) {
+    return VALIDATION_MESSAGE_TYPES.CRITICAL;
   }
   if (hasFormattedMessageOfType(formattedMessages, VALIDATION_MESSAGE_TYPES.WARNING)) {
     return VALIDATION_MESSAGE_TYPES.WARNING;
   }
-  if (hasFormattedMessageOfType(formattedMessages, VALIDATION_MESSAGE_TYPES.SUCCESS)) {
-    return VALIDATION_MESSAGE_TYPES.SUCCESS;
+  if (hasFormattedMessageOfType(formattedMessages, VALIDATION_MESSAGE_TYPES.POSITIVE)) {
+    return VALIDATION_MESSAGE_TYPES.POSITIVE;
   }
 
   return null;

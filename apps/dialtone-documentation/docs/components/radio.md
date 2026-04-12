@@ -75,17 +75,17 @@ Radio buttons are a common way to allow users to make a single selection from a 
   />
   <dt-radio
     name="ValidationMessages"
-    value="Validation Message Error"
+    value="Validation Message Critical"
     label="To a message (no voicemail)"
-    validation-state="error"
-    :messages="[{ message: `Because they probably don't need to leave a message anyway.`, type: `error` }]"
+    validation-state="critical"
+    :messages="[{ message: `Because they probably don't need to leave a message anyway.`, type: `critical` }]"
   />
   <dt-radio
     name="ValidationMessages"
-    value="Validation Message Success"
+    value="Validation Message Positive"
     label="To a team member or room phone"
-    validation-state="success"
-    :messages="[{ message: `Because someone else might be able to talk to them.`, type: `success` }]"
+    validation-state="positive"
+    :messages="[{ message: `Because someone else might be able to talk to them.`, type: `positive` }]"
   />
 </dt-radio-group>
 ```

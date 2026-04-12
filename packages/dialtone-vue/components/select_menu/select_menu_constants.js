@@ -14,9 +14,9 @@ export const SELECT_SIZE_MODIFIERS = {
 };
 
 export const SELECT_STATE_MODIFIERS = {
-  error: 'd-select__input--error',
+  critical: 'd-select__input--critical',
   warning: 'd-select__input--warning',
-  success: 'd-select__input--success',
+  positive: 'd-select__input--positive',
 };
 
 export default {

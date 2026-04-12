@@ -33,7 +33,7 @@
             {{ i18n.$t('DIALTONE_RICH_TEXT_EDITOR_OPEN_LINK_BUTTON_LABEL') }}
           </dt-button>
           <dt-button
-            kind="danger"
+            kind="critical"
             importance="clear"
             @click="removeLink"
           >

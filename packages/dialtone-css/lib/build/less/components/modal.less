@@ -285,6 +285,7 @@
     --modal-banner-color-background: var(--dt-color-surface-critical);
   }
 
+  &--positive,
   &--success {
     --modal-banner-color-background: var(--dt-color-surface-success);
   }
@@ -365,8 +366,9 @@
   }
 }
 
-//  $$  DANGER
+//  $$  CRITICAL / DANGER
 //  ----------------------------------------------------------------------------
+.d-modal--critical,
 .d-modal--danger {
   --modal-header-color-text: var(--dt-color-foreground-primary);
 }

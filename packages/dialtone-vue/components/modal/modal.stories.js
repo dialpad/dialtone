@@ -189,11 +189,11 @@ export const WithBanner = {
   parameters: { ...Default.parameters },
 };
 
-export const WithDangerStyle = {
+export const WithCriticalStyle = {
   render: DefaultTemplate,
 
   args: {
-    kind: 'danger',
+    kind: 'critical',
     showFooter: true,
   },
 

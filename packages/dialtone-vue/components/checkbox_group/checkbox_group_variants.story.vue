@@ -50,15 +50,15 @@
     </dt-checkbox-group>
     <!-- Disabled -->
 
-    <!-- With Success Message -->
+    <!-- With Positive Message -->
     <dt-checkbox-group
-      name="checkbox-group-with-success-message"
-      legend="With Success Message"
-      :messages="[{ message: 'Success', type: VALIDATION_MESSAGE_TYPES.SUCCESS }]"
+      name="checkbox-group-with-positive-message"
+      legend="With Positive Message"
+      :messages="[{ message: 'Positive', type: VALIDATION_MESSAGE_TYPES.POSITIVE }]"
     >
       <dt-checkboxes-decorator />
     </dt-checkbox-group>
-    <!-- With Success Message -->
+    <!-- With Positive Message -->
 
     <!-- With Warning Message -->
     <dt-checkbox-group
@@ -70,26 +70,26 @@
     </dt-checkbox-group>
     <!-- With Warning Message -->
 
-    <!-- With Error Message -->
+    <!-- With Critical Message -->
     <dt-checkbox-group
-      name="checkbox-group-with-error-message"
-      legend="With Error Message"
-      :messages="[{ message: 'Error', type: VALIDATION_MESSAGE_TYPES.ERROR }]"
+      name="checkbox-group-with-critical-message"
+      legend="With Critical Message"
+      :messages="[{ message: 'Critical', type: VALIDATION_MESSAGE_TYPES.CRITICAL }]"
     >
       <dt-checkboxes-decorator />
     </dt-checkbox-group>
-    <!-- With Error Message -->
+    <!-- With Critical Message -->
 
-    <!-- With Error Messages Hidden -->
+    <!-- With Critical Messages Hidden -->
     <dt-checkbox-group
-      name="checkbox-group-with-error-messages-hidden"
-      legend="With Error Messages Hidden"
-      :messages="[{ message: 'Error', type: VALIDATION_MESSAGE_TYPES.ERROR }]"
+      name="checkbox-group-with-critical-messages-hidden"
+      legend="With Critical Messages Hidden"
+      :messages="[{ message: 'Critical', type: VALIDATION_MESSAGE_TYPES.CRITICAL }]"
       :show-messages="false"
     >
       <dt-checkboxes-decorator />
     </dt-checkbox-group>
-    <!-- With Error Messages Hidden -->
+    <!-- With Critical Messages Hidden -->
   </dt-stack>
 </template>
 

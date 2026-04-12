@@ -141,9 +141,9 @@ import { ref } from 'vue';
 
 const toastOptions = [
   { value: 'base', label: 'Base' },
-  { value: 'error', label: 'Error' },
+  { value: 'critical', label: 'Critical' },
   { value: 'info', label: 'Info' },
-  { value: 'success', label: 'Success' },
+  { value: 'positive', label: 'Positive' },
   { value: 'warning', label: 'Warning' },
 ];
 const showToast = ref(false);

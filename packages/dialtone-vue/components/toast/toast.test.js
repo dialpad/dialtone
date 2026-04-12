@@ -114,13 +114,13 @@ describe('DtToast Tests', () => {
       });
     });
 
-    describe('When kind is set to error', () => {
+    describe('When kind is set to critical', () => {
       it('has correct class', () => {
-        mockProps = { kind: 'error' };
+        mockProps = { kind: 'critical' };
 
         updateWrapper();
 
-        expect(toast.classes('d-toast--error')).toBe(true);
+        expect(toast.classes('d-toast--critical')).toBe(true);
       });
     });
 

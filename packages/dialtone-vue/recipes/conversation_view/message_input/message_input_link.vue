@@ -63,7 +63,7 @@
             :aria-label="removeButtonLabel"
             :title="removeButtonLabel"
             importance="clear"
-            kind="danger"
+            kind="critical"
             :size="300"
             data-qa="dt-message-input-link-remove-btn"
             @click="$emit('remove-link', linkText, linkInput)"

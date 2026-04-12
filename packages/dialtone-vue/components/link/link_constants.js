@@ -1,24 +1,24 @@
-export const DANGER = 'danger';
+export const CRITICAL = 'critical';
+export const POSITIVE = 'positive';
 export const WARNING = 'warning';
-export const SUCCESS = 'success';
 export const MUTED = 'muted';
 export const MENTION = 'mention';
-export const LINK_VARIANTS = ['', DANGER, WARNING, SUCCESS, MUTED, MENTION];
+export const LINK_VARIANTS = ['', CRITICAL, WARNING, POSITIVE, MUTED, MENTION];
 
 export const LINK_KIND_MODIFIERS = {
   default: '',
+  critical: 'd-link--critical',
   warning: 'd-link--warning',
-  danger: 'd-link--danger',
-  success: 'd-link--success',
+  positive: 'd-link--positive',
   muted: 'd-link--muted',
   mention: 'd-link--mention',
 };
 
 const LINK_KIND_MODIFIERS_INVERTED = {
   default: 'd-link--inverted',
+  critical: 'd-link--inverted-critical',
   warning: 'd-link--inverted-warning',
-  danger: 'd-link--inverted-danger',
-  success: 'd-link--inverted-success',
+  positive: 'd-link--inverted-positive',
   muted: 'd-link--inverted-muted',
   mention: 'd-link--inverted-mention',
 };

@@ -268,8 +268,8 @@ describe('DtSelectMenu Tests', () => {
       });
 
       describe('When validation messages are shown', () => {
-        it('should have error state class on select menu', () => {
-          expect(select.classes(SELECT_STATE_MODIFIERS.error)).toBe(true);
+        it('should have critical state class on select menu', () => {
+          expect(select.classes(SELECT_STATE_MODIFIERS.critical)).toBe(true);
         });
 
         it('should render validation message', () => {
@@ -284,8 +284,8 @@ describe('DtSelectMenu Tests', () => {
           updateWrapper();
         });
 
-        it('should have error state class on select menu', () => {
-          expect(select.classes(SELECT_STATE_MODIFIERS.error)).toBe(true);
+        it('should have critical state class on select menu', () => {
+          expect(select.classes(SELECT_STATE_MODIFIERS.critical)).toBe(true);
         });
 
         it('should not render any validation messages', () => {

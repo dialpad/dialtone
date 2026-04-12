@@ -65,7 +65,7 @@ export default {
 
   computed: {
     shouldInvertButton () {
-      return this.$attrs.kind === 'base' || this.$attrs.kind === 'error' || this.$attrs.kind === 'info';
+      return this.$attrs.kind === 'base' || this.$attrs.kind === 'critical' || this.$attrs.kind === 'info';
     },
 
     isInverted () {

@@ -101,16 +101,16 @@
     />
     <!-- Indeterminate Disabled -->
 
-    <!-- Success With Description -->
+    <!-- Positive With Description -->
     <dt-checkbox
-      name="success-with-description"
+      name="positive-with-description"
       value="Value"
-      label="Success"
+      label="Positive"
       description="With Description"
-      validation-state="success"
-      :messages="[{ message: 'Success message', type: VALIDATION_MESSAGE_TYPES.SUCCESS }]"
+      validation-state="positive"
+      :messages="[{ message: 'Positive message', type: VALIDATION_MESSAGE_TYPES.POSITIVE }]"
     />
-    <!-- Success With Description -->
+    <!-- Positive With Description -->
 
     <!-- Warning With Description -->
     <dt-checkbox
@@ -123,28 +123,28 @@
     />
     <!-- Warning With Description -->
 
-    <!-- Error With Description -->
+    <!-- Critical With Description -->
     <dt-checkbox
-      name="error-with-description"
+      name="critical-with-description"
       value="Value"
-      label="Error"
+      label="Critical"
       description="With Description"
-      validation-state="error"
-      :messages="[{ message: 'Critical message', type: VALIDATION_MESSAGE_TYPES.ERROR }]"
+      validation-state="critical"
+      :messages="[{ message: 'Critical message', type: VALIDATION_MESSAGE_TYPES.CRITICAL }]"
     />
-    <!-- Error With Description -->
+    <!-- Critical With Description -->
 
-    <!-- Checked Success With Description -->
+    <!-- Checked Positive With Description -->
     <dt-checkbox
-      name="checked-success-with-description"
+      name="checked-positive-with-description"
       value="Value"
-      label="Checked Success"
+      label="Checked Positive"
       description="With Description"
-      validation-state="success"
-      :messages="[{ message: 'Success message', type: VALIDATION_MESSAGE_TYPES.SUCCESS }]"
+      validation-state="positive"
+      :messages="[{ message: 'Positive message', type: VALIDATION_MESSAGE_TYPES.POSITIVE }]"
       checked
     />
-    <!-- Checked Success With Description -->
+    <!-- Checked Positive With Description -->
 
     <!-- Checked Warning With Description -->
     <dt-checkbox
@@ -157,17 +157,17 @@
     />
     <!-- Checked Warning With Description -->
 
-    <!-- Checked Error With Description -->
+    <!-- Checked Critical With Description -->
     <dt-checkbox
-      name="checked-error-with-description"
+      name="checked-critical-with-description"
       value="Value"
-      label="Checked Error"
+      label="Checked Critical"
       description="With Description"
-      validation-state="error"
-      :messages="[{ message: 'Critical message', type: VALIDATION_MESSAGE_TYPES.ERROR }]"
+      validation-state="critical"
+      :messages="[{ message: 'Critical message', type: VALIDATION_MESSAGE_TYPES.CRITICAL }]"
       checked
     />
-    <!-- Checked Error With Description -->
+    <!-- Checked Critical With Description -->
 
     <!-- Disabled -->
     <dt-checkbox
@@ -209,17 +209,17 @@
     />
     <!-- Checked and Disabled With Description -->
 
-    <!-- Checked and With Description and Success validation message -->
+    <!-- Checked and With Description and Positive validation message -->
     <dt-checkbox
       name="checked-with-description-and-validation-message"
       value="Value"
       label="Checked"
       description="With Description"
-      validation-state="success"
-      :messages="[{ message: 'Success', type: VALIDATION_MESSAGE_TYPES.SUCCESS }]"
+      validation-state="positive"
+      :messages="[{ message: 'Positive', type: VALIDATION_MESSAGE_TYPES.POSITIVE }]"
       checked
     />
-    <!-- Checked and With Description and Success validation message -->
+    <!-- Checked and With Description and Positive validation message -->
   </dt-stack>
 </template>
 

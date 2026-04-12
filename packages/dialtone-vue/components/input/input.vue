@@ -558,7 +558,7 @@ export default {
       } else if (this.inputLength <= this.validationProps.length.max) {
         return this.validationProps.length.warn ? VALIDATION_MESSAGE_TYPES.WARNING : null;
       } else {
-        return VALIDATION_MESSAGE_TYPES.ERROR;
+        return VALIDATION_MESSAGE_TYPES.CRITICAL;
       }
     },
 

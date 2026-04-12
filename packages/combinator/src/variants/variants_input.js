@@ -1,4 +1,4 @@
-/* eslint-disable max-len */
+ 
 
 
 export default {
@@ -170,7 +170,7 @@ export default {
     props: {
       label: { initialValue: 'Label' },
       type: { initialValue: 'email' },
-      messages: { initialValue: [{ message: 'Please enter a valid email address.', type: 'error' }] },
+      messages: { initialValue: [{ message: 'Please enter a valid email address.', type: 'critical' }] },
     },
   },
 };
