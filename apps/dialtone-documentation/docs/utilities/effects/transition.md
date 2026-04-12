@@ -77,7 +77,7 @@ Use `d-tp-{n}` change an what items within an element are transitioned.
         <th scope="row" class="d-code--sm d-docsite-code">.d-{{ i }}{{ d }}</th>
         <td class="d-code--sm">transition-duration: var(--td{{ d }}) !important;</td>
       </tr>
-      <tr v-else-if="i === 'ttf'" v-for="t in ['', 'in-out', 'out', 'quint']">
+      <tr v-else-if="i === 'ttf'" v-for="t in ['', 'in-out', 'out', 'out-quint']">
         <th scope="row" class="d-code--sm d-docsite-code">.d-{{ i }}{{ t ? `-${t}` : '' }}</th>
         <td class="d-code--sm">transition-timing-function: var(--ttf-{{ t || 'ease' }}) !important;</td>
       </tr>
