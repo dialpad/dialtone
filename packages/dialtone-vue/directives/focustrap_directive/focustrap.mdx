@@ -1,0 +1,258 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as FocustrapDirectiveStories from './focustrap.stories.js';
+
+<Meta of={FocustrapDirectiveStories}/>
+
+# Focustrap directive
+
+Traps Tab and Shift+Tab focus within a container element. Manages initial focus
+placement, Tab boundary wrapping, and focus restoration on deactivation.
+
+Use this directive for dialogs, popovers, drawers, and any overlay where focus
+must not escape the container while it is open.
+
+The directive handles **Tab trapping only**. Escape-to-close, click-outside
+dismissal, and `aria-modal` management remain the consumer's responsibility.
+
+## Usage
+
+Import and install the directive:
+
+```js
+import { DtFocustrapDirective } from "@dialpad/dialtone-vue";
+app.use(DtFocustrapDirective);
+```
+
+### Boolean binding -- activate when truthy
+
+```html
+<div v-dt-focustrap="isOpen" role="dialog" aria-label="Settings">
+  ...
+</div>
+```
+
+### Object binding -- full configuration
+
+```html
+<div
+  v-dt-focustrap="{ active: isOpen, initialFocus: '#name-input', restoreFocus: true }"
+  role="dialog"
+  aria-label="Settings"
+>
+  <input id="name-input" />
+  ...
+</div>
+```
+
+### No binding -- always active
+
+```html
+<div v-dt-focustrap role="alertdialog" aria-label="Confirm">
+  ...
+</div>
+```
+
+## Examples
+
+### Default (always active)
+
+A dialog container with buttons, inputs, and a link. Tab and Shift+Tab cycle
+within the container and never escape.
+
+<Canvas of={FocustrapDirectiveStories.Default} />
+
+### Initial focus via CSS selector
+
+Use `initialFocus` with a CSS selector string to direct focus to a specific
+element when the trap activates.
+
+<Canvas of={FocustrapDirectiveStories.InitialFocusSelector} />
+
+### Toggle activation
+
+Bind `active` to a reactive boolean. When the trap deactivates with
+`restoreFocus: true`, focus returns to the element that was focused before
+activation.
+
+<Canvas of={FocustrapDirectiveStories.ToggleActivation} sourceState="none" />
+
+### No initial focus
+
+Set `initialFocus: false` to prevent the directive from moving focus on
+activation. Focus stays where it was, but Tab still cycles within the container.
+
+<Canvas of={FocustrapDirectiveStories.NoInitialFocus} />
+
+## Options
+
+<table>
+  <thead>
+    <tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>active</code></td>
+      <td><code>boolean</code></td>
+      <td><code>true</code></td>
+      <td>Whether the trap is currently active. Reactive -- changing this activates or deactivates the trap.</td>
+    </tr>
+    <tr>
+      <td><code>initialFocus</code></td>
+      <td><code>'auto' | string | HTMLElement | false</code></td>
+      <td><code>'auto'</code></td>
+      <td>
+        Where to place focus when the trap activates.<br/>
+        <code>'auto'</code> -- first tabbable element (including <code>tabindex="-1"</code>).<br/>
+        <strong>CSS selector</strong> -- e.g. <code>'#my-input'</code>, resolved via <code>el.querySelector()</code>.<br/>
+        <strong>HTMLElement</strong> -- a direct DOM reference.<br/>
+        <code>false</code> -- do not move focus.
+      </td>
+    </tr>
+    <tr>
+      <td><code>restoreFocus</code></td>
+      <td><code>boolean</code></td>
+      <td><code>true</code></td>
+      <td>Restore focus to the previously focused element when the trap deactivates.</td>
+    </tr>
+  </tbody>
+</table>
+
+## How it works
+
+### Keydown interception
+
+The directive listens for `keydown` events on the container element and
+intercepts the `Tab` key. All other keys pass through unmodified.
+
+### Tab wrapping
+
+When Tab is pressed on the **last** tabbable element, focus wraps to the
+**first** tabbable element. When Shift+Tab is pressed on the **first** tabbable
+element, focus wraps to the **last**. The tabbable element list is re-queried on
+every Tab press, so dynamically added or removed elements are handled correctly.
+
+### Initial focus resolution
+
+When the trap activates, focus is placed according to the `initialFocus` option:
+
+1. **`'auto'`** (default) -- focuses the first tabbable element inside the
+   container, including elements with `tabindex="-1"`. For radio buttons, prefers
+   the checked radio over the first in the group.
+2. **CSS selector string** -- runs `el.querySelector()` against the container.
+3. **HTMLElement reference** -- focuses the element directly.
+4. **`false`** -- no initial focus movement.
+5. **Fallback** -- if no tabbable element is found, the container itself is made
+   focusable (`tabindex="-1"`) and focused.
+
+Initial focus is set asynchronously (microtask) to avoid breaking CSS transitions
+and unwanted scrolling.
+
+### Focus restoration
+
+When the trap deactivates with `restoreFocus: true`, the element that held focus
+before activation is refocused. If that element has been removed from the DOM,
+the restore is silently skipped.
+
+## Focustrap vs. Focusgroup
+
+These directives solve different problems. Use both when a widget needs both behaviors.
+
+<table>
+  <thead>
+    <tr><th></th><th><code>v-dt-focustrap</code></th><th><code>v-dt-focusgroup</code></th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Purpose</strong></td>
+      <td>Prevent focus from <em>leaving</em> a container</td>
+      <td>Move focus <em>within</em> a container via arrow keys</td>
+    </tr>
+    <tr>
+      <td><strong>Key handled</strong></td>
+      <td><code>Tab</code> / <code>Shift+Tab</code></td>
+      <td>Arrow keys, <code>Home</code>, <code>End</code></td>
+    </tr>
+    <tr>
+      <td><strong>Typical use</strong></td>
+      <td>Dialogs, modals, popovers, hovercards, drawers</td>
+      <td>Toolbars, tab lists, menus, listboxes, radio groups</td>
+    </tr>
+    <tr>
+      <td><strong>Tab behavior</strong></td>
+      <td>Cycles Tab at container boundaries</td>
+      <td>Single Tab stop — Tab exits the group</td>
+    </tr>
+    <tr>
+      <td><strong>Focus management</strong></td>
+      <td>Initial focus + focus restoration</td>
+      <td>Roving tabindex + memory</td>
+    </tr>
+    <tr>
+      <td><strong>Composable?</strong></td>
+      <td colspan="2">Yes — a dialog can use <code>v-dt-focustrap</code> on the dialog element and <code>v-dt-focusgroup</code> on a toolbar inside it.</td>
+    </tr>
+  </tbody>
+</table>
+
+## Why use this instead of a custom implementation?
+
+**Consistent behavior.** Every focus trap in the product works the same way — same
+focusable-element detection, same Tab wrapping, same initial focus logic, same
+focus restoration. No per-team divergence.
+
+**Battle-tested discovery logic.** The focusable-element selectors and filters are
+extracted from the Modal mixin that has been stable in production across DtModal,
+DtBanner, DtPopover, and DtImageViewer for years. Radio button handling, visibility
+filtering, disabled-state filtering — all handled.
+
+**Zero boilerplate.** One attribute replaces: a mixin import, a keydown handler, a
+`focusFirstElement()` call, a `previousActiveElement` ref, and a manual
+`focus()` restore in your close handler.
+
+**Reactive.** Bind to your open/close state and the directive handles the full
+lifecycle. No manual activate/deactivate calls.
+
+## Migrating a custom focus trap in product code
+
+If your product feature has its own focus trap logic (manual Tab keydown listeners,
+`querySelectorAll('button, [href], input...')`, etc.), you can replace it with one line:
+
+```html
+<!-- Before: manual focus trap -->
+<div ref="dialog" @keydown.tab="trapFocus" role="dialog">
+
+<!-- After: directive handles everything -->
+<div v-dt-focustrap="isOpen" role="dialog">
+```
+
+**Steps:**
+
+1. Remove any `@keydown.tab` handler that implements Tab wrapping
+2. Remove any `focusableElements` / `querySelectorAll` calls for Tab trapping
+3. Remove any `previousActiveElement` save/restore logic
+4. Add `v-dt-focustrap="yourOpenState"` to the container
+5. If you need focus on a specific element, add `initialFocus: '#your-element'`
+6. Keep your existing Escape and click-outside handlers — those are yours to own
+
+## What it does NOT do
+
+- **Escape key** -- not handled. Add your own `@keydown.escape` handler.
+- **Click outside** -- not handled. Use a click-outside directive or manual listener.
+- **`aria-modal`** -- not set. Add `aria-modal="true"` to your dialog element yourself.
+- **`role="dialog"`** -- not set. You must provide the appropriate ARIA role and label.
+- **Scroll lock** -- not managed. Use CSS `overflow: hidden` on `<body>` if needed.
+- **Portal / teleport** -- the directive works on the element it is bound to,
+  regardless of where it sits in the DOM. Works fine with Vue `<Teleport>`.
+
+## Migration from Modal mixin
+
+Components that currently use `modal.js` mixin for focus trapping can adopt
+`v-dt-focustrap` incrementally:
+
+1. Add `v-dt-focustrap="isOpen"` to the container element.
+2. Remove the mixin's `focusTrap()` / `releaseFocusTrap()` calls.
+3. The directive handles tabbable element discovery, Tab wrapping, initial focus,
+   and focus restoration automatically.
+
+The directive uses the same focusable-element selectors as the mixin, so behavior
+is consistent.

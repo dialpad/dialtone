@@ -6,6 +6,11 @@
       "storybook": "https://dialtone.dialpad.com/vue/next/?path=/docs/directives-focusgroup--docs"
     },
     {
+      "name": "v-dt-focustrap",
+      "description": "Trap Tab/Shift+Tab within a container — initial focus, boundary wrapping, and focus restoration for dialogs and overlays",
+      "storybook": "https://dialtone.dialpad.com/vue/next/?path=/docs/directives-focustrap--docs"
+    },
+    {
       "name": "v-dt-mode",
       "description": "Scope descendant design tokens to a light, dark, or inverted color palette",
       "storybook": "https://dialtone.dialpad.com/vue/next/?path=/docs/directives-mode--docs"

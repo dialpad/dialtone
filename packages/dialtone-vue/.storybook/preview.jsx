@@ -50,6 +50,7 @@ import { DtTooltipDirective } from '@/directives/tooltip_directive';
 import { DtScrollbarDirective } from '@/directives/scrollbar_directive';
 import { DtModeDirective } from '@/directives/mode_directive';
 import { DtFocusgroupDirective } from '@/directives/focusgroup_directive';
+import { DtFocustrapDirective } from '@/directives/focustrap_directive';
 import { DtStack } from '@/components/stack';
 import { faker } from '@faker-js/faker';
 
@@ -137,6 +138,7 @@ setup((app) => {
   app.use(DtScrollbarDirective);
   app.use(DtModeDirective);
   app.use(DtFocusgroupDirective);
+  app.use(DtFocustrapDirective);
   app.component('DtStack', DtStack);
   // global seed, to make sure results are reproducible on percy and don't change on every reload too.
   faker.seed(6687422389464139);
