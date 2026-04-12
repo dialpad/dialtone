@@ -55,6 +55,13 @@ export function animateIndicator (state, {
 }) {
   const newRect = newEl.getBoundingClientRect();
   const isVertical = orientation === 'vertical';
+
+  // Skip animation if elements are on different rows/columns (e.g. wrapped tabs)
+  const crossAxisDelta = isVertical
+    ? Math.abs(oldRect.left - newRect.left)
+    : Math.abs(oldRect.top - newRect.top);
+  if (crossAxisDelta > 1) return;
+
   // Use center-to-center delta so scale from center aligns both edges correctly
   const delta = isVertical
     ? (oldRect.top + oldRect.height / 2) - (newRect.top + newRect.height / 2)
