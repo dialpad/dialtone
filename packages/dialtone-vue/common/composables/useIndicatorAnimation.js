@@ -44,7 +44,12 @@ export function useIndicatorAnimation (containerRef, durationVar, easingVar) {
     const containerEl = container?.$el || container;
     const el = containerEl?.querySelector(selector);
     if (!el) return null;
-    return { rect: el.getBoundingClientRect(), style: getComputedStyle(el), el };
+    const cs = getComputedStyle(el);
+    return {
+      rect: el.getBoundingClientRect(),
+      style: { borderColor: cs.borderColor, borderWidth: cs.borderWidth, backgroundColor: cs.backgroundColor },
+      el,
+    };
   }
 
   /**
@@ -64,11 +69,14 @@ export function useIndicatorAnimation (containerRef, durationVar, easingVar) {
     const newRect = newEl.getBoundingClientRect();
     const isVertical = orientation === 'vertical';
 
-    // Skip if elements are on different rows/columns (e.g. wrapped tabs)
+    // Skip if elements are on different rows/columns (e.g. wrapped tabs).
+    // Use half the element's cross-axis size as threshold — items on the same
+    // row/column may differ slightly due to sub-pixel rounding or varying widths.
+    const crossAxisSize = isVertical ? newRect.width : newRect.height;
     const crossAxisDelta = isVertical
       ? Math.abs(oldRect.left - newRect.left)
       : Math.abs(oldRect.top - newRect.top);
-    if (crossAxisDelta > 1) return;
+    if (crossAxisDelta > crossAxisSize / 2) return;
 
     // Center-to-center delta so scale from center aligns both edges
     const delta = isVertical
