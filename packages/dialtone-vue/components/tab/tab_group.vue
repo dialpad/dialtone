@@ -405,41 +405,32 @@ export default {
     },
 
     transitionIndicator (panelId, newContext) {
-      if (!newContext || !this.showIndicatorTransition || !this.indicator.canAnimate() ||
-        typeof newContext?.animate !== 'function') {
+      if (!newContext || !this.showIndicatorTransition) {
         this.provideObj.selected = panelId;
         return;
       }
 
-      const tabsEl = this.$refs.tabs;
-      const oldTab = tabsEl.querySelector('[aria-selected="true"]');
-      const oldRect = oldTab?.getBoundingClientRect();
-
-      let oldStyle = null;
-      if (oldTab && (this.outlined || this.kind === 'muted')) {
-        const cs = getComputedStyle(oldTab);
-        oldStyle = { borderColor: cs.borderColor, borderWidth: cs.borderWidth, backgroundColor: cs.backgroundColor };
-      }
+      const old = this.indicator.snapshot('[aria-selected="true"]');
 
       this.provideObj.selected = panelId;
-      if (!oldRect) return;
+      if (!old) return;
 
       this.$nextTick(() => {
         let hideProps = { backgroundColor: 'transparent' };
         let indicatorExtra = {};
         let pseudoElement = '::after';
 
-        if (this.outlined && oldStyle) {
+        if (this.outlined) {
           hideProps = { borderColor: 'transparent', backgroundColor: 'transparent' };
-          indicatorExtra = { boxShadow: `inset 0 0 0 ${oldStyle.borderWidth} ${oldStyle.borderColor}` };
+          indicatorExtra = { boxShadow: `inset 0 0 0 ${old.style.borderWidth} ${old.style.borderColor}` };
           pseudoElement = '::before';
-        } else if (this.kind === 'muted' && oldStyle) {
-          indicatorExtra = { backgroundColor: oldStyle.backgroundColor };
+        } else if (this.kind === 'muted') {
+          indicatorExtra = { backgroundColor: old.style.backgroundColor };
           pseudoElement = '::before';
         }
 
         this.indicator.animate({
-          oldRect,
+          oldRect: old.rect,
           newEl: newContext,
           orientation: this.orientation,
           hideProps,

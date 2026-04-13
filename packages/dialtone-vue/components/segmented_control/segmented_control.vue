@@ -241,46 +241,34 @@ function setFocus (value) {
   focusedValue.value = value;
 }
 
-function selectValue (value, { animate: shouldAnimate = true } = {}) {
+async function selectValue (value, { animate: shouldAnimate = true } = {}) {
   if (props.disabled) return;
   if (value === props.modelValue) return;
   const beforeChangeEvent = new Event('before-change', { cancelable: true });
   emit('before-change', beforeChangeEvent);
   if (beforeChangeEvent.defaultPrevented) return;
 
-  const containerEl = container.value?.$el || container.value;
   indicator.cancel();
-  const canAnimate = shouldAnimate && props.showIndicatorTransition &&
-    indicator.canAnimate();
-
-  let oldRect = null;
-  let oldBg = null;
-  if (canAnimate && containerEl) {
-    const oldEl = containerEl.querySelector('[aria-checked="true"]');
-    oldRect = oldEl?.getBoundingClientRect();
-    if (oldEl) {
-      oldBg = getComputedStyle(oldEl).backgroundColor;
-    }
-  }
+  const shouldTransition = shouldAnimate && props.showIndicatorTransition;
+  const old = shouldTransition ? indicator.snapshot('[aria-checked="true"]') : null;
 
   emit('update:modelValue', value);
   emit('change', value);
 
-  if (!oldRect || !canAnimate) return;
+  if (!old) return;
 
-  nextTick(() => {
-    const escapedValue = typeof CSS !== 'undefined' && CSS.escape ? CSS.escape(value) : value;
-    const newEl = containerEl.querySelector(`[${SEGMENTED_CONTROL_DATA_VALUE_ATTR}="${escapedValue}"]`);
-    if (!newEl || typeof newEl.animate !== 'function') return;
+  await nextTick();
+  const newEl = (container.value?.$el || container.value)
+    ?.querySelector(`[${SEGMENTED_CONTROL_DATA_VALUE_ATTR}="${CSS.escape(value)}"]`);
+  if (!newEl) return;
 
-    indicator.animate({
-      oldRect,
-      newEl,
-      orientation: props.orientation,
-      hideProps: { backgroundColor: 'transparent' },
-      indicatorExtra: { backgroundColor: oldBg },
-      pseudoElement: '::after',
-    });
+  indicator.animate({
+    oldRect: old.rect,
+    newEl,
+    orientation: props.orientation,
+    hideProps: { backgroundColor: 'transparent' },
+    indicatorExtra: { backgroundColor: old.style.backgroundColor },
+    pseudoElement: '::after',
   });
 }
 
