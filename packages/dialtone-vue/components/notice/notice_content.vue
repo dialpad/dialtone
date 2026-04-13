@@ -4,7 +4,7 @@
     data-qa="notice-content"
   >
     <dt-text
-      v-if="title || hasSlotContent($slots.titleOverride)"
+      v-if="title || hasSlotContent($slots.title)"
       :id="titleId"
       kind="headline"
       :size="300"
@@ -13,8 +13,8 @@
       class="d-notice__title"
       data-qa="notice-content-title"
     >
-      <!-- @slot Slot for the title  -->
-      <slot name="titleOverride">
+      <!-- @slot Slot for the title. Can also be used as a slot. -->
+      <slot name="title">
         {{ title }}
       </slot>
     </dt-text>

@@ -10,8 +10,8 @@
       :aria-details="$slots.description || description ? descriptionKey : undefined"
       data-qa="dt-input-label-wrapper"
     >
-      <!-- @slot Slot for label, defaults to label prop -->
-      <slot name="labelSlot">
+      <!-- @slot Slot for label, defaults to label prop. Can also be used as a slot. -->
+      <slot name="label">
         <dt-text
           v-if="labelVisible && label"
           ref="label"

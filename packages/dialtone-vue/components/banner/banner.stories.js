@@ -16,7 +16,7 @@ export const argsData = {
 
 export const argTypesData = {
   // Slots
-  titleOverride: {
+  titleSlot: {
     table: {
       type: { summary: 'VNode' },
     },

@@ -24,7 +24,7 @@ const argsDataLongText = {
 
 export const argTypesData = {
   // Slots
-  titleOverride: {
+  titleSlot: {
     table: {
       type: { summary: 'VNode' },
     },

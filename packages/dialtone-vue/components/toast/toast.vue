@@ -19,10 +19,9 @@
     <template #icon>
       <slot name="icon" />
     </template>
-    <template #titleOverride>
-      <!-- @slot Allows you to override the title, only use this if you need to override
-          with something other than text. Otherwise use the "title" prop. -->
-      <slot name="titleOverride" />
+    <template #title>
+      <!-- @slot Slot for the title. Can also be used as a slot. -->
+      <slot name="title" />
     </template>
     <!-- @slot the main textual content of the toast -->
     <slot>

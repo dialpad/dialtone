@@ -57,10 +57,10 @@
         <dt-icon :name="$attrs.icon" />
       </template>
       <template
-        v-if="$attrs.titleOverride"
-        #titleOverride
+        v-if="$attrs.titleSlot"
+        #title
       >
-        <span v-html="$attrs.titleOverride" />
+        <span v-html="$attrs.titleSlot" />
       </template>
     </dt-banner>
   </div>

@@ -29,7 +29,7 @@
   >
     <template
       v-if="$attrs.labelSlot"
-      #labelSlot
+      #label
     >
       <span v-html="$attrs.labelSlot" />
     </template>

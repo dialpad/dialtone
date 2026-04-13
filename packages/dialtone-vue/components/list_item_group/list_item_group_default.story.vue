@@ -31,7 +31,7 @@
       </dt-list-item>
       <template
         v-if="$attrs.headingSlot"
-        #headingSlot
+        #heading
       >
         <span v-html="$attrs.headingSlot" />
       </template>
