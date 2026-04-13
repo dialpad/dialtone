@@ -16,7 +16,7 @@
     :input-class="$attrs.inputClass"
     :retain-warning="$attrs.retainWarning"
     :input-wrapper-class="$attrs.inputWrapperClass"
-    :root-class="$attrs.rootClass"
+    :class="$attrs.class"
     :current-length="$attrs.currentLength"
     :label-visible="$attrs.labelVisible"
     :hidden="$attrs.hidden"

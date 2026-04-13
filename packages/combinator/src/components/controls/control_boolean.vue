@@ -5,7 +5,7 @@
       :disabled="disabled"
       label-class="d-label--sm d-fc-secondary"
       :size="200"
-      wrapper-class="d-jc-space-between"
+      class="d-jc-space-between"
       data-qa="dtc-control-boolean-input"
       @change="e => emit(VALUE_UPDATE_EVENT, e)"
     >

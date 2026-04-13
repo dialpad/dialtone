@@ -146,9 +146,6 @@ export const argTypesData = {
   inputWrapperClass: {
     control: 'text',
   },
-  rootClass: {
-    control: 'text',
-  },
 
   // HTML attributes
   placeholder: {

@@ -1,5 +1,3 @@
-/* eslint-disable max-len */
-
 export default {
   default: {
     slots: {
@@ -8,7 +6,7 @@ export default {
       },
     },
     props: {
-      wrapperClass: { initialValue: 'd-g-200' },
+      class: { initialValue: 'd-g-200' },
     },
   },
 
@@ -23,7 +21,7 @@ export default {
 
   'with space between': {
     props: {
-      wrapperClass: { initialValue: 'd-g-200 d-w-200 d-jc-space-between' },
+      class: { initialValue: 'd-g-200 d-w-200 d-jc-space-between' },
     },
     slots: {
       default: { initialValue: 'Label' },

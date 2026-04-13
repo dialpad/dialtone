@@ -18,7 +18,7 @@
     :description-child-props="$attrs.descriptionChildProps"
     :option-child-props="$attrs.optionChildProps"
     :messages-child-props="$attrs.messagesChildProps"
-    :root-class="$attrs.rootClass"
+    :class="$attrs.class"
     @input="$attrs.onInput"
     @change="$attrs.onChange"
   >

@@ -94,7 +94,7 @@ export default {
       <template #content="{ close }">
         <dt-input
           v-model="altText"
-          root-class="d-p-100 d-w332"
+          class="d-p-100 d-w332"
           :label="i18n.$t('DIALTONE_EDITOR_VARIABLE_LABEL')"
           :placeholder="placeholderText"
           :validate="{

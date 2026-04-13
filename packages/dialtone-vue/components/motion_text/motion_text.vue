@@ -80,8 +80,6 @@ export default {
   compatConfig: { MODE: 3 },
   name: 'DtMotionText',
 
-  inheritAttrs: false,
-
   props: {
     /**
      * The text content to animate.
@@ -235,7 +233,6 @@ export default {
           'd-motion-text--paused': this.isPaused,
           'd-motion-text--looped': this.isLooped,
         },
-        this.$attrs.class,
       ];
     },
   },

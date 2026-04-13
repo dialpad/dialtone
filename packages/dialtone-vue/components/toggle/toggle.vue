@@ -1,7 +1,7 @@
 <template>
   <div
-    :class="['d-toggle-wrapper', wrapperClass]"
-    v-bind="addClassStyleAttrs($attrs)"
+    :class="['d-toggle-wrapper', $attrs.class]"
+    :style="$attrs.style"
   >
     <label
       v-if="labelVisible && hasSlotContent($slots.default)"
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { getUniqueString, hasSlotContent, removeClassStyleAttrs, addClassStyleAttrs } from '@/common/utils';
+import { getUniqueString, hasSlotContent, removeClassStyleAttrs } from '@/common/utils';
 import { TOGGLE_CHECKED_VALUES, TOGGLE_SIZE_MODIFIERS } from '@/components/toggle/toggle_constants';
 
 /**
@@ -123,14 +123,6 @@ export default {
     },
 
     /**
-     * Additional styling for the wrapper element
-     */
-    wrapperClass: {
-      type: [String, Array, Object],
-      default: undefined,
-    },
-
-    /**
      * A set of props that are passed into the label container
      */
     labelChildProps: {
@@ -206,7 +198,6 @@ export default {
   },
 
   methods: {
-    addClassStyleAttrs,
     toggleCheckedValue () {
       this.$emit('update:modelValue', !this.internalChecked);
       this.$emit('change', !this.internalChecked);

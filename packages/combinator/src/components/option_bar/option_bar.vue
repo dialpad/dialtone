@@ -46,7 +46,7 @@
           type="search"
           placeholder="Search"
           :size="100"
-          root-class="d-w100p d-mbs-25"
+          class="d-w100p d-mbs-25"
         >
           <template #startIcon="{ iconSize }">
             <dt-icon

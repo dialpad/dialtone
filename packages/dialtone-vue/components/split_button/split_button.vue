@@ -1,8 +1,8 @@
 <template>
   <span
     data-qa="dt-split-button"
-    :class="[rootClass, 'd-split-btn', { 'd-split-btn--no-divider': !showDivider && importance === 'clear' }]"
-    :style="{ width }"
+    :class="['d-split-btn', { 'd-split-btn--no-divider': !showDivider && importance === 'clear' }, $attrs.class]"
+    :style="[$attrs.style, { width }]"
   >
     <split-button-start
       v-bind="startButtonProps"
@@ -497,16 +497,6 @@ export default {
     showDivider: {
       type: Boolean,
       default: true,
-    },
-
-    /**
-     * Additional class name for the root element.
-     * Can accept all of: String, Object, and Array, i.e. has the
-     * same api as Vue's built-in handling of the class attribute.
-     */
-    rootClass: {
-      type: [String, Object, Array],
-      default: '',
     },
 
     /**

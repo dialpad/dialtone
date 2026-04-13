@@ -2,11 +2,11 @@
   <li
     data-qa="dt-breadcrumb-item"
     :class="[
-      rootClass,
       'd-breadcrumbs__item',
       { [BREADCRUMB_ITEM_SELECTED_MODIFIER]: selected },
+      $attrs.class,
     ]"
-    v-bind="addClassStyleAttrs($attrs)"
+    :style="$attrs.style"
   >
     <dt-link
       :kind="linkKind"
@@ -27,7 +27,7 @@
 
 <script>
 import { BREADCRUMB_ITEM_SELECTED_MODIFIER } from './breadcrumbs_constants';
-import { removeClassStyleAttrs, addClassStyleAttrs } from '@/common/utils';
+import { removeClassStyleAttrs } from '@/common/utils';
 import { DtLink, MUTED } from '@/components/link';
 
 export default {
@@ -65,16 +65,6 @@ export default {
       type: String,
       default: '',
     },
-
-    /**
-     * Additional class name for the root element.
-     * Can accept all of: String, Object, and Array, i.e. has the
-     * same api as Vue's built-in handling of the class attribute.
-     */
-    rootClass: {
-      type: [String, Object, Array],
-      default: '',
-    },
   },
 
   data () {
@@ -100,7 +90,6 @@ export default {
 
   methods: {
     removeClassStyleAttrs,
-    addClassStyleAttrs,
   },
 };
 </script>
