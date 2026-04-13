@@ -17,8 +17,7 @@ import {
   TEXT_SIZE_MAP,
   TEXT_HEADLINE_ONLY_SIZES,
   TEXT_ALIGN_MODIFIERS,
-  TEXT_TONE_PREFIX,
-  TEXT_TONE_TOKENS,
+  TEXT_TONE_MODIFIERS,
   TEXT_NUMERIC_CLASS,
   TEXT_TRUNCATE_CLASS,
   TEXT_LINE_CLAMP_CLASS,
@@ -80,11 +79,15 @@ export default {
     },
 
     /**
-     * Aligns to available foreground color tokens, e.g. `tertiary`, `critical`, `positive`, etc.
+     * Semantic foreground color.
+     * @values primary, secondary, tertiary, muted, disabled, placeholder, critical, critical-strong, positive, positive-strong, success, success-strong, warning, neutral-black, neutral-white
      */
     tone: {
       type: String,
       default: null,
+      validator: (value) => {
+        return value === null || Object.prototype.hasOwnProperty.call(TEXT_TONE_MODIFIERS, value);
+      },
     },
 
     /**
@@ -94,6 +97,9 @@ export default {
     align: {
       type: String,
       default: null,
+      validator: (value) => {
+        return value === null || Object.prototype.hasOwnProperty.call(TEXT_ALIGN_MODIFIERS, value);
+      },
     },
 
     /**
@@ -316,16 +322,7 @@ export default {
     },
 
     getToneClass () {
-      if (!this.tone) {
-        return null;
-      }
-
-      if (!TEXT_TONE_TOKENS.includes(this.tone)) {
-        console.warn(`[DtText] Unsupported tone "${this.tone}".`);
-        return null;
-      }
-
-      return `${TEXT_TONE_PREFIX}${this.tone}`;
+      return this.getModifierClass(this.tone, TEXT_TONE_MODIFIERS, 'tone');
     },
 
     getWrapClass () {
