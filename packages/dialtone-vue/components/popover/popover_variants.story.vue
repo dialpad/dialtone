@@ -377,7 +377,7 @@
           <p>
             {{ sampleText }}
           </p>
-          <dt-tooltip :show="$attrs.open">
+          <dt-tooltip :open="$attrs.open">
             <template #anchor>
               <dt-button>
                 Hover me

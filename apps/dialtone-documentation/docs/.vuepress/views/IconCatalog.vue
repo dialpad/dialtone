@@ -101,10 +101,10 @@
   </dt-empty-state>
   <dt-modal
     v-if="selectedIcon"
-    :show="isModalOpen"
+    :open="isModalOpen"
     size="full"
     content-class="d-wmx100p d-pie-400"
-    @update:show="isModalOpen = false"
+    @update:open="isModalOpen = false"
   >
     <template #header>
       <span

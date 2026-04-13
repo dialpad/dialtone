@@ -70,7 +70,7 @@ export const argTypesData = {
   enabled: {
     type: 'boolean',
   },
-  show: {
+  open: {
     options: [null, true, false],
     type: 'select',
   },
@@ -100,7 +100,7 @@ export const argTypesData = {
       disable: true,
     },
   },
-  'update:show': {
+  'update:open': {
     table: {
       disable: true,
     },

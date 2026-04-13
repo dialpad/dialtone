@@ -15,8 +15,7 @@ Detailed rules are applied automatically via path-scoped rules when editing comp
 | Prop validation | `validator` (NEVER `validate` — Vue silently ignores it) |
 | Constants | Export from `*_constants.js`, import in component + tests |
 | v-model event | `update:modelValue` |
-| Open/close (new) | `update:open` (Popover, Collapsible, ImageViewer, FilterPill) |
-| Open/close (legacy) | `update:show` (Modal, Tooltip, Toast — don't change) |
+| Open/close | `update:open` (Modal, Tooltip, Toast, Popover, Collapsible, ImageViewer, FilterPill) |
 | Overlay slots | `headerContent` / `footerContent` |
 | Structural slots | `header` / `footer` |
 | Sizes (interactive) | `xs`, `sm`, `md`, `lg`, `xl` |

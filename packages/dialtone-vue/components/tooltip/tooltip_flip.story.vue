@@ -12,7 +12,7 @@
           class="tooltip"
           :fallback-placements="['right', 'bottom']"
           :offset="$attrs.offset"
-          :show="true"
+          :open="true"
         >
           <template #anchor="{ attrs }">
             <dt-button

@@ -1,7 +1,7 @@
 import { DtModal, MODAL_BANNER_KINDS } from '@/components/modal';
 import { mount } from '@vue/test-utils';
 
-const SYNC_EVENT_NAME = 'update:show';
+const SYNC_EVENT_NAME = 'update:open';
 
 const MOCK_MODAL_COPY = 'test modal copy';
 const MOCK_MODAL_TITLE = 'test modal title';
@@ -14,7 +14,7 @@ const baseProps = {
   title: MOCK_MODAL_TITLE,
   copy: MOCK_MODAL_COPY,
   bannerTitle: MOCK_MODAL_BANNER,
-  show: true,
+  open: true,
 };
 
 const baseSlots = {};
@@ -222,7 +222,7 @@ describe('DtModal Tests', () => {
       const bannerTitle = 'title';
 
       await wrapper.setProps({
-        show: true,
+        open: true,
         bannerTitle,
         bannerClass,
       });
@@ -234,7 +234,7 @@ describe('DtModal Tests', () => {
 
     it('Should apply banner kind', async () => {
       await wrapper.setProps({
-        show: true,
+        open: true,
         bannerKind: 'info',
         bannerTitle: 'title',
       });

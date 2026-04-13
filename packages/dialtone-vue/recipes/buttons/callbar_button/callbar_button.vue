@@ -5,7 +5,7 @@
     :class="$attrs.class"
     :style="$attrs.style"
     :delay="tooltipDelay"
-    :show="showTooltip"
+    :open="showTooltip"
     :offset="[0, 24]"
   >
     <template #anchor>

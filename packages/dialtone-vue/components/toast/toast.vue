@@ -126,7 +126,7 @@ export default {
      * Supports v-model
      * @values true, false
      */
-    show: {
+    open: {
       type: Boolean,
       default: false,
     },
@@ -193,11 +193,11 @@ export default {
     'close',
 
     /**
-     * Sync show value
+     * Sync open value
      *
-     * @event update:show
+     * @event update:open
      */
-    'update:show',
+    'update:open',
   ],
 
   data () {
@@ -218,10 +218,10 @@ export default {
   },
 
   watch: {
-    show: {
-      handler: function (show) {
-        this.isShown = show;
-        if (show) {
+    open: {
+      handler: function (open) {
+        this.isShown = open;
+        if (open) {
           this.setTimeout();
         } else {
           clearTimeout(this.displayTimer);
@@ -241,7 +241,7 @@ export default {
       if (this.shouldSetTimeout) {
         this.displayTimer = setTimeout(() => {
           this.isShown = false;
-          this.$emit('update:show', false);
+          this.$emit('update:open', false);
         }, this.duration);
       }
     },
@@ -249,7 +249,7 @@ export default {
     handleClose () {
       this.isShown = false;
       this.$emit('close');
-      this.$emit('update:show', false);
+      this.$emit('update:open', false);
     },
   },
 };

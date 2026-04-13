@@ -72,8 +72,8 @@ Although highly versatile, this doesn't mean modal dialogs are fit for all purpo
 <!-- @code -->
 <dt-modal
   title="Example title"
-  :show="isOpen"
-  @update:show="updateShow"
+  :open="isOpen"
+  @update:open="updateOpen"
   copy="Lorem ipsum ..."
 >
   <template
@@ -110,8 +110,8 @@ This is the default behavior that adds the scroll automatically in the modal con
 <!-- @code -->
 <dt-modal
   title="Example title"
-  :show="isOpen"
-  @update:show="updateShow"
+  :open="isOpen"
+  @update:open="updateOpen"
   :showFooter="true"
   :fixed-header-footer="true"
   copy="Sed at orci quis nunc finibus gravida eget vitae est..."
@@ -150,10 +150,10 @@ A modal style for destructive or irreversible actions.
 <!-- @code -->
 <dt-modal
   title="Example title"
-  :show="isOpen"
+  :open="isOpen"
   kind="critical"
   copy="Sed at orci quis nunc finibus gravida eget vitae est..."
-  @update:show="updateShow"
+  @update:open="updateOpen"
 >
   <template
     #footer
@@ -190,10 +190,10 @@ To make this modal take up as much of the screen as possible.
 <!-- @code -->
 <dt-modal
   title="Example title"
-  :show="isOpen"
+  :open="isOpen"
   size="full"
   copy="Sed at orci quis nunc finibus gravida eget vitae est..."
-  @update:show="updateShow"
+  @update:open="updateOpen"
 >
   <template
     #footer
@@ -237,11 +237,11 @@ When there is a need of more context information regarding the content of the Mo
 <!-- @code -->
 <dt-modal
   title="Example title"
-  :show="isOpen"
+  :open="isOpen"
   banner-title="This banner can have different kinds."
   :bannerKind="selectedBannerKind"
   copy="Sed at orci quis nunc finibus gravida eget vitae est..."
-  @update:show="updateShow"
+  @update:open="updateOpen"
 >
   <template
     #footer
@@ -279,8 +279,8 @@ In addition to the footer, custom elements can be inserted into the header and b
 ```vue demo
 <div>
   <dt-modal
-    :show="isOpen"
-    @update:show="updateShow"
+    :open="isOpen"
+    @update:open="updateOpen"
   >
     <template #header>
       <dt-stack direction="row" align="center" justify="center" class="d-p-150 d-bgc-purple-100">
@@ -299,8 +299,8 @@ In addition to the footer, custom elements can be inserted into the header and b
 </div>
 <!-- @code -->
 <dt-modal
-  :show="isOpen"
-  @update:show="updateShow"
+  :open="isOpen"
+  @update:open="updateOpen"
 >
   <template #header>
     <dt-stack direction="row" align="center" justify="center" class="d-p-150 d-bgc-purple-100">
@@ -324,8 +324,8 @@ Modal content renders outside the DOM tree. Use the `contentMode` prop to apply 
     content-mode="invert"
     title="Inverted Modal"
     copy="This modal's content is in the inverted mode."
-    :show="invertedModalOpen"
-    @update:show="invertedModalOpen = $event"
+    :open="invertedModalOpen"
+    @update:open="invertedModalOpen = $event"
   />
 </div>
 <!-- @code -->
@@ -361,7 +361,7 @@ At minimum, modals contain a title and one button. They could also contain body 
     isOpen.value = true;
   };
 
-  const updateShow = (value) => {
+  const updateOpen = (value) => {
     if (!value) isOpen.value = false;
   };
 

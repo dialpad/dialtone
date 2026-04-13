@@ -5,7 +5,7 @@ import DtNoticeAction from '../notice/notice_action.vue';
 import DtNoticeContent from '../notice/notice_content.vue';
 import DtNoticeIcon from '../notice/notice_icon.vue';
 
-const baseProps = { title: '', show: true };
+const baseProps = { title: '', open: true };
 const baseSlots = {};
 
 let mockProps = {};
@@ -152,7 +152,7 @@ describe('DtToast Tests', () => {
 
         expect(toast.exists()).toBe(true);
 
-        mockProps = { show: true, duration: 6500 };
+        mockProps = { open: true, duration: 6500 };
 
         updateWrapper();
 
@@ -170,7 +170,7 @@ describe('DtToast Tests', () => {
       it('should close the toast with close method', async () => {
         expect(toast.exists()).toBe(true);
 
-        await wrapper.setProps({ show: false });
+        await wrapper.setProps({ open: false });
 
         toast = wrapper.find('[data-qa="dt-toast"]');
 

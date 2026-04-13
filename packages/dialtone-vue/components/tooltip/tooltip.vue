@@ -204,7 +204,7 @@ export default {
 
     /**
      * Controls whether hover/focus causes the tooltip to appear.
-     * Cannot be combined with the show prop. show value will be ignored.
+     * Cannot be combined with the open prop. open value will be ignored.
      * by default this is true, if you override with false, the tooltip will never show up.
      */
     enabled: {
@@ -218,7 +218,7 @@ export default {
      * Supports .sync modifier
      * @values null, true, false
      */
-    show: {
+    open: {
       type: Boolean,
       default: null,
     },
@@ -278,11 +278,11 @@ export default {
     'shown',
 
     /**
-     * Sync show value
+     * Sync open value
      *
-     * @event update:show
+     * @event update:open
      */
-    'update:show',
+    'update:open',
   ],
 
   data () {
@@ -341,10 +341,10 @@ export default {
       deep: true,
     },
 
-    show: {
-      handler: function (show) {
-        if (show !== null && this.enabled) {
-          this.internalShow = show;
+    open: {
+      handler: function (open) {
+        if (open !== null && this.enabled) {
+          this.internalShow = open;
         }
       },
 
@@ -370,9 +370,9 @@ export default {
   },
 
   async mounted () {
-    if (!this.enabled && this.show != null) {
-      console.warn('Tooltip: You cannot use both the enabled and show props at the same time.');
-      console.warn('The show prop will be ignored.');
+    if (!this.enabled && this.open != null) {
+      console.warn('Tooltip: You cannot use both the enabled and open props at the same time.');
+      console.warn('The open prop will be ignored.');
     }
 
     this.tip = createTippy(this.anchor, this.initOptions());
@@ -433,11 +433,11 @@ export default {
         // Example: anchor of a popover is a button with tooltip.
         // closing it with the mouse would trigger the tooltip to display as
         // the anchor is focused on close. Not what we want.
-        if (this.show === null && this.hasVisibleFocus()) {
+        if (this.open === null && this.hasVisibleFocus()) {
           this.internalShow = true;
         }
       } else {
-        if (this.show === null) this.internalShow = true;
+        if (this.open === null) this.internalShow = true;
       }
     },
 
@@ -450,7 +450,7 @@ export default {
     },
 
     triggerHide () {
-      if (this.show === null) this.internalShow = false;
+      if (this.open === null) this.internalShow = false;
     },
 
     onChangePlacement (placement) {
@@ -460,8 +460,8 @@ export default {
     onHide () {
       this.tip?.unmount();
       this.$emit('shown', false);
-      if (this.show !== null) {
-        this.$emit('update:show', false);
+      if (this.open !== null) {
+        this.$emit('update:open', false);
       }
     },
 
@@ -473,8 +473,8 @@ export default {
         return;
       }
       this.$emit('shown', true);
-      if (this.show !== null) {
-        this.$emit('update:show', true);
+      if (this.open !== null) {
+        this.$emit('update:open', true);
       }
     },
 

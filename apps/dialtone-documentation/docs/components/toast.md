@@ -24,7 +24,7 @@ keywords: ["notification", "snackbar", "alert", "message", "d-toast", "DtToast",
 <!-- @code -->
 <dt-toast
   title="Title"
-  :show="showToast"
+  :open="showToast"
   :important="important"
   :kind="selectedKind"
   @close="closeEvent"
@@ -47,7 +47,7 @@ keywords: ["notification", "snackbar", "alert", "message", "d-toast", "DtToast",
 
 <example-toast
   class="d-zi-notification"
-  :show="showToast"
+  :open="showToast"
   title="Title"
   :important="important"
   :kind="selectedKind"
@@ -63,16 +63,16 @@ If the duration is not provided the toast won't disappear automatically.
 <dt-button @click="toggleDurationToast(true)">Show Example</dt-button>
 <example-toast
   class="d-zi-notification"
-  :show="showDurationToast"
+  :open="showDurationToast"
   title="Title"
   @close="toggleDurationToast(false)"
-  @update:show="updateShow"
+  @update:open="updateOpen"
   :duration="6000"
 />
 <!-- @code -->
 <dt-toast
   title="Title"
-  :show="showDurationToast"
+  :open="showDurationToast"
   @close="closeEvent"
   :duration="7500"
 >
@@ -101,7 +101,7 @@ If you need to self-position the toast at the top center, use the `d-toast-wrapp
   <dt-toast
     :title="title"
     :message="message"
-    :show="isShown"
+    :open="isShown"
   ></dt-toast>
 </aside>
 ```
@@ -158,7 +158,7 @@ function toggleToast () {
 function toggleDurationToast (value) {
   showDurationToast.value = value;
 }
-const updateShow = (value) => {
+const updateOpen = (value) => {
   if (!value) showDurationToast.value = false;
 };
 

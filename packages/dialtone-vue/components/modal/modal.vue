@@ -21,7 +21,7 @@
       @keydown="onKeydown"
     >
       <div
-        v-if="show && (hasSlotContent($slots.banner) || bannerTitle)"
+        v-if="open && (hasSlotContent($slots.banner) || bannerTitle)"
         data-qa="dt-modal-banner"
         :class="[
           'd-modal__banner',
@@ -35,13 +35,13 @@
         </slot>
       </div>
       <transition
-        :appear="show"
+        :appear="open"
         name="d-modal__dialog"
         @after-enter="onAfterEnter"
         @after-leave="onAfterLeave"
       >
         <div
-          v-show="show"
+          v-show="open"
           :class="[
             'd-modal__dialog',
             { 'd-modal__dialog--scrollable': fixedHeaderFooter },
@@ -195,7 +195,7 @@ export default {
      * Parent component can sync on this value to control the modal's visibility.
      * @values true, false
      */
-    show: {
+    open: {
       type: Boolean,
       default: false,
     },
@@ -362,10 +362,10 @@ export default {
      * The modal will emit a "false" boolean value for this event when the user performs a modal-closing action.
      * Parent components can sync on this value to create a 2-way binding to control modal visibility.
      *
-     * @event update:show
+     * @event update:open
      * @type {Boolean}
      */
-    'update:show',
+    'update:open',
   ],
 
   data () {
@@ -393,13 +393,13 @@ export default {
   },
 
   watch: {
-    show (isShowing) {
+    open (isShowing) {
       this.syncDialogState(isShowing);
     },
   },
 
   mounted () {
-    if (this.show) {
+    if (this.open) {
       this.syncDialogState(true);
     }
   },
@@ -436,7 +436,7 @@ export default {
     },
 
     close () {
-      this.$emit('update:show', false);
+      this.$emit('update:open', false);
     },
 
     onBackdropClick (event) {
@@ -451,7 +451,7 @@ export default {
     },
 
     async onAfterEnter () {
-      this.$emit('update:show', true);
+      this.$emit('update:open', true);
       await this.setFocusAfterTransition();
     },
 

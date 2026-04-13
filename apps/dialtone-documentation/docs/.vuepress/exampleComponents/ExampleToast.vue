@@ -2,12 +2,12 @@
   <aside :class="['d-toast-wrapper', { 'd-ps-fixed': fixed }]">
     <dt-toast
       :title="title"
-      :show="show"
+      :open="open"
       :important="important"
       :duration="duration"
       :kind="kind"
       @close="$emit('close')"
-      @update:show="$emit('update:show', $event)"
+      @update:open="$emit('update:open', $event)"
     >
       Message body with
       <dt-link
@@ -38,7 +38,7 @@ export default {
       default: '',
     },
 
-    show: {
+    open: {
       type: Boolean,
       default: false,
     },
@@ -64,7 +64,7 @@ export default {
     },
   },
 
-  emits: ['close', 'update:show'],
+  emits: ['close', 'update:open'],
   computed: {
     linkClass () {
       if (this.kind === 'warning' && this.important) return 'd-fc-neutral-black';

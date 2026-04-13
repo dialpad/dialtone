@@ -1,13 +1,13 @@
 <template>
   <dt-modal
     title="Example title"
-    :show="isOpen"
+    :open="isOpen"
     :banner-title="bannerTitle"
     :banner-kind="bannerKind"
     :fixed-header-footer="fixedHeaderFooter"
     :size="size"
     :copy="copy"
-    @update:show="isOpen = $event"
+    @update:open="isOpen = $event"
   >
     <template
       #footer
