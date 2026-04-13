@@ -19,6 +19,7 @@ export function buildDocs (platformName, theme, currentObj) {
   const tokenDescription = currentObj?.description;
   const tokenPath = currentObj?.path;
   const isCompositionToken = currentObj?.isCompositionToken ?? undefined;
+  const tokenDeprecated = currentObj?.$deprecated ?? currentObj?.deprecated ?? undefined;
 
   if (tokenValue && tokenPath) {
     const tokenKey = tokenPath.join('/');
@@ -31,6 +32,7 @@ export function buildDocs (platformName, theme, currentObj) {
         description: tokenDescription,
         keywords: getTokenKeywords(keywordsJson, tokenPath),
         isCompositionToken,
+        deprecated: tokenDeprecated,
       },
     };
     return null;
@@ -50,7 +52,6 @@ export function buildDocs (platformName, theme, currentObj) {
  * @param {Array} keywords Array with the keywords. Is completed by recursively looping through obj
  * @returns {Array|undefined} Array with the keywords, or undefined if there are none
  */
-// eslint-disable-next-line complexity
 function getTokenKeywords (obj, tokenPath, keywords = []) {
   if (tokenPath.legth === 0 || !obj) return;
   const currentCategory = tokenPath[0];

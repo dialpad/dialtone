@@ -923,7 +923,7 @@
         ],
         "/functions-and-utilities/": [
           {
-            "text": "Functions",
+            "text": "Vue Utilities",
             "link": "/functions-and-utilities/",
             "icon": "code"
           }

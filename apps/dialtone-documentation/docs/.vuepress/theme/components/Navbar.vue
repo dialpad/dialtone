@@ -314,7 +314,7 @@ const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 const isActiveLink = (link) => {
   // For Design System, check all related paths (same as useSidebarItems.js)
   if (link === '/dialtone/') {
-    const designSystemPaths = ['/components/', '/utilities/', '/tokens/', '/guides/', '/about/', '/dialtone/'];
+    const designSystemPaths = ['/components/', '/utilities/', '/tokens/', '/guides/', '/about/', '/dialtone/', '/functions-and-utilities/'];
     return designSystemPaths.some(p => route.path.includes(p));
   }
   // For other links, use simple path matching

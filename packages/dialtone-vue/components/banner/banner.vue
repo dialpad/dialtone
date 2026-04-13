@@ -116,12 +116,12 @@ export default {
 
     /**
      * Severity level of the notice, sets the icon and background
-     * @values base, error, info, success, warning
+     * @values base, critical, info, positive, warning
      */
     kind: {
       type: String,
       default: 'base',
-      validate (kind) {
+      validator (kind) {
         return NOTICE_KINDS.includes(kind);
       },
     },
@@ -197,9 +197,9 @@ export default {
 
     bannerClass () {
       const kindClasses = {
-        error: 'd-banner--error',
+        critical: 'd-banner--critical',
         info: 'd-banner--info',
-        success: 'd-banner--success',
+        positive: 'd-banner--positive',
         warning: 'd-banner--warning',
         base: 'd-banner--base',
       };

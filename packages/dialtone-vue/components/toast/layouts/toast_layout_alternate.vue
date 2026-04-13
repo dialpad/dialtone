@@ -123,7 +123,7 @@ export default {
 
     /**
      * Severity level of the toast, sets the icon and background
-     * @values base, error, info, success, warning, gradient
+     * @values base, critical, info, positive, warning, gradient
      */
     kind: {
       type: String,
@@ -155,9 +155,9 @@ export default {
   computed: {
     kindClass () {
       const kindClasses = {
-        error: 'd-toast-alternate--error',
+        critical: 'd-toast-alternate--critical',
         info: 'd-toast-alternate--info',
-        success: 'd-toast-alternate--success',
+        positive: 'd-toast-alternate--positive',
         warning: 'd-toast-alternate--warning',
         gradient: 'd-toast-alternate--gradient',
       };

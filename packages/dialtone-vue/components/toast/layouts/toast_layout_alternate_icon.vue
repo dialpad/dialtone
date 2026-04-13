@@ -25,9 +25,9 @@ import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants.js';
 
 const kindToIcon = new Map([
   ['info', DtIconInfo],
-  ['success', DtIconInfo],
+  ['positive', DtIconInfo],
   ['warning', DtIconAlertTriangle],
-  ['error', DtIconInfo],
+  ['critical', DtIconInfo],
   ['base', DtIconBell],
   ['gradient', DtIconSparkle],
 ]);
@@ -46,12 +46,12 @@ export default {
   props: {
     /**
      * Kind of icon
-     * @values base, error, info, success, warning
+     * @values base, critical, info, positive, warning
      */
     kind: {
       type: String,
       default: 'base',
-      validate (kind) {
+      validator (kind) {
         return TOAST_ALTERNATE_KINDS.includes(kind);
       },
     },

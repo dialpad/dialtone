@@ -217,8 +217,8 @@ export default {
     },
 
     /**
-     * The theme of the modal. kind - default or danger,
-     * @values default, danger
+     * The theme of the modal.
+     * @values default, critical
      */
     kind: {
       type: String,
@@ -268,7 +268,7 @@ export default {
 
     /**
      * Sets the color of the banner.
-     * @values base, error, info, success, warning
+     * @values base, critical, info, positive, warning
      */
     bannerKind: {
       type: String,

@@ -213,12 +213,12 @@ describe('DtCheckbox Tests', () => {
     });
 
     describe('When a validation state is provided', () => {
-      it('applies validation classes for success state', () => {
-        mockProps = { description: 'Description', validationState: VALIDATION_MESSAGE_TYPES.SUCCESS };
+      it('applies validation classes for positive state', () => {
+        mockProps = { description: 'Description', validationState: VALIDATION_MESSAGE_TYPES.POSITIVE };
 
         updateWrapper();
 
-        expect(wrapper.find(`.${CHECKBOX_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.SUCCESS]}`).exists())
+        expect(wrapper.find(`.${CHECKBOX_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.POSITIVE]}`).exists())
           .toBe(true);
       });
 
@@ -231,12 +231,12 @@ describe('DtCheckbox Tests', () => {
           .toBe(true);
       });
 
-      it('applies validation classes for error state', () => {
-        mockProps = { description: 'Description', validationState: VALIDATION_MESSAGE_TYPES.ERROR };
+      it('applies validation classes for critical state', () => {
+        mockProps = { description: 'Description', validationState: VALIDATION_MESSAGE_TYPES.CRITICAL };
 
         updateWrapper();
 
-        expect(wrapper.find(`.${CHECKBOX_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.ERROR]}`).exists())
+        expect(wrapper.find(`.${CHECKBOX_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.CRITICAL]}`).exists())
           .toBe(true);
       });
     });
@@ -479,11 +479,11 @@ describe('DtCheckbox Tests', () => {
 
       describe('When the checkbox group has a validation state', () => {
         beforeEach(() => {
-          _setGroupContext([], false, VALIDATION_MESSAGE_TYPES.SUCCESS);
+          _setGroupContext([], false, VALIDATION_MESSAGE_TYPES.POSITIVE);
         });
 
         it('has validation classes', () => {
-          expect(wrapper.find(`.${CHECKBOX_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.SUCCESS]}`).exists())
+          expect(wrapper.find(`.${CHECKBOX_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.POSITIVE]}`).exists())
             .toBe(true);
         });
 
@@ -493,7 +493,7 @@ describe('DtCheckbox Tests', () => {
 
             updateWrapper();
 
-            expect(wrapper.find(`.${CHECKBOX_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.SUCCESS]}`).exists())
+            expect(wrapper.find(`.${CHECKBOX_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.POSITIVE]}`).exists())
               .toBe(true);
           });
         });
@@ -580,9 +580,9 @@ describe('DtCheckbox Tests', () => {
       });
     });
 
-    describe('When a rootClass is provided', () => {
-      it('should include the root class', () => {
-        mockProps = { rootClass: MOCK_ROOT_CLASS }
+    describe('When a class is provided', () => {
+      it('should include the class', () => {
+        mockAttrs = { class: MOCK_ROOT_CLASS }
 
         updateWrapper();
 

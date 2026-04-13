@@ -72,7 +72,7 @@
         <template #subtitle>
           <!-- eslint-disable-next-line vuejs-accessibility/click-events-have-key-events -->
           <dt-link
-            kind="danger"
+            kind="critical"
             @click.stop="$attrs.onMarkAsSpam"
           >
             Mark as spam

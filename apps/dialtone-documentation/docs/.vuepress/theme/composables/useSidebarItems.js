@@ -9,7 +9,7 @@ import { usePageData } from 'vuepress/client';
  */
 function detectTopLevelGroup(path) {
   // Map routes to top-level groups
-  const designSystemPaths = ['/design/', '/components/', '/utilities/', '/tokens/', '/guides/', '/about/'];
+  const designSystemPaths = ['/design/', '/components/', '/utilities/', '/tokens/', '/guides/', '/about/', '/functions-and-utilities/'];
 
   if (designSystemPaths.some(p => path.includes(p))) {
     return 'dialtone';

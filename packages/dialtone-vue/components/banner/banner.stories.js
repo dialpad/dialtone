@@ -152,9 +152,9 @@ export const Default = {
   },
 };
 
-export const Error = {
+export const Critical = {
   render: Template,
-  args: { ...Default.args, kind: 'error' },
+  args: { ...Default.args, kind: 'critical' },
   parameters: Default.parameters,
 };
 
@@ -164,9 +164,9 @@ export const Info = {
   parameters: Default.parameters,
 };
 
-export const Success = {
+export const Positive = {
   render: Template,
-  args: { ...Default.args, kind: 'success' },
+  args: { ...Default.args, kind: 'positive' },
   parameters: Default.parameters,
 };
 

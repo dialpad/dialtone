@@ -120,8 +120,11 @@
     --notice-color-shadow: transparent;
 }
 
-//  $$  ERROR
+//  $$  CRITICAL / ERROR
 //  ----------------------------------------------------------------------------
+.d-notice--critical,
+.d-banner--critical,
+.d-toast--critical,
 .d-notice--error,
 .d-banner--error,
 .d-toast--error {
@@ -151,13 +154,16 @@
     }
 }
 
-//  $$  SUCCESS
+//  $$  POSITIVE / SUCCESS
 //  ----------------------------------------------------------------------------
+.d-notice--positive,
+.d-banner--positive,
+.d-toast--positive,
 .d-notice--success,
 .d-banner--success,
 .d-toast--success {
     --notice-color-background: var(--dt-color-surface-success);
-    --notice-color-icon: var(--dt-color-foreground-success);
+    --notice-color-icon: var(--dt-color-foreground-positive);
 
     &.d-notice--important,
     &.d-banner--important,

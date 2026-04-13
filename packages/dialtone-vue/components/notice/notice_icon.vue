@@ -27,9 +27,9 @@ import { hasSlotContent } from '@/common/utils';
 
 const kindToIcon = new Map([
   ['info', DtIconInfo],
-  ['success', DtIconCheckCircle],
+  ['positive', DtIconCheckCircle],
   ['warning', DtIconAlertTriangle],
-  ['error', DtIconAlertCircle],
+  ['critical', DtIconAlertCircle],
   ['base', DtIconBell],
 ]);
 
@@ -48,12 +48,12 @@ export default {
   props: {
     /**
      * Kind of icon
-     * @values base, error, info, success, warning
+     * @values base, critical, info, positive, warning
      */
     kind: {
       type: String,
       default: 'base',
-      validate (kind) {
+      validator (kind) {
         return NOTICE_KINDS.includes(kind);
       },
     },

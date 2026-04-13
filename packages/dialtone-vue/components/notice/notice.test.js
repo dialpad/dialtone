@@ -85,11 +85,19 @@ describe('DtNotice tests', () => {
       });
     });
 
-    describe('When kind is set to error', () => {
+    describe('When kind is set to critical', () => {
       it('Has correct class', async () => {
-        await wrapper.setProps({ kind: 'error' });
+        await wrapper.setProps({ kind: 'critical' });
 
-        expect(rootElement.classes('d-notice--error')).toBe(true);
+        expect(rootElement.classes('d-notice--critical')).toBe(true);
+      });
+    });
+
+    describe('When kind is set to positive', () => {
+      it('Has correct class', async () => {
+        await wrapper.setProps({ kind: 'positive' });
+
+        expect(rootElement.classes('d-notice--positive')).toBe(true);
       });
     });
   });

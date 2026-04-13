@@ -109,12 +109,12 @@ export default {
 
     /**
      * Severity level of the notice, sets the icon and background
-     * @values base, error, info, success, warning
+     * @values base, critical, info, positive, warning
      */
     kind: {
       type: String,
       default: 'base',
-      validate (kind) {
+      validator (kind) {
         return NOTICE_KINDS.includes(kind);
       },
     },
@@ -177,9 +177,9 @@ export default {
   computed: {
     noticeClass () {
       const noticeKinds = {
-        error: 'd-notice--error',
+        critical: 'd-notice--critical',
         info: 'd-notice--info',
-        success: 'd-notice--success',
+        positive: 'd-notice--positive',
         warning: 'd-notice--warning',
         base: 'd-notice--base',
       };

@@ -210,7 +210,7 @@ export default {
 
     /**
      * The color of the link and button if the button is styled as a link.
-     * @values default, warning, danger, success, muted
+     * @values default, critical, warning, positive, muted
      * @see DtLink
      */
     linkKind: {
@@ -325,7 +325,7 @@ export default {
     /**
      * The color of the button.
      * The inverted value is deprecated — use v-dt-mode directive instead.
-     * @values default, unstyled, muted, danger, positive
+     * @values default, unstyled, muted, critical, positive
      */
     kind: {
       type: String,

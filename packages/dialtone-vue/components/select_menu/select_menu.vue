@@ -1,7 +1,7 @@
 <template>
   <div
-    :class="rootClass"
-    v-bind="addClassStyleAttrs($attrs)"
+    :class="$attrs.class"
+    :style="$attrs.style"
   >
     <label>
       <dt-text
@@ -96,7 +96,6 @@ import {
   getValidationState,
   hasSlotContent,
   removeClassStyleAttrs,
-  addClassStyleAttrs,
 } from '@/common/utils';
 import { MessagesMixin } from '@/common/mixins/input';
 import { optionsValidator } from './select_menu_validators.js';
@@ -234,16 +233,6 @@ export default {
     },
 
     /**
-     * Additional class name for the root element.
-     * Can accept all of: String, Object, and Array, i.e. has the
-     * same api as Vue's built-in handling of the class attribute.
-     */
-    rootClass: {
-      type: [String, Object, Array],
-      default: '',
-    },
-
-    /**
      * The value of the select menu
      */
     modelValue: {
@@ -373,7 +362,6 @@ export default {
 
   methods: {
     removeClassStyleAttrs,
-    addClassStyleAttrs,
     emitValue (value, event) {
       this.$emit('update:modelValue', value, event);
       this.$emit('input', value, event);

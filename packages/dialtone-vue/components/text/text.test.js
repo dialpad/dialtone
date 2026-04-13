@@ -113,6 +113,14 @@ describe('DtText', () => {
     expect(wrapper.classes()).toContain('d-fc-primary');
   });
 
+  it('applies positive tone modifier class', () => {
+    const wrapper = mountComponent({ tone: 'positive' });
+
+    expect(wrapper.classes()).toContain('d-fc-positive');
+  });
+
+
+
   it('warns and does not apply class for unrecognized tone', () => {
     const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 

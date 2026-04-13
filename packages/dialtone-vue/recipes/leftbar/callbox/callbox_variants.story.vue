@@ -25,7 +25,7 @@
           v-dt-tooltip="`Hang up`"
           aria-label="hang call"
           importance="clear"
-          kind="danger"
+          kind="critical"
         >
           <template #icon="{ iconSize }">
             <dt-icon-phone-hang-up :size="iconSize" />
@@ -65,7 +65,7 @@
           v-dt-tooltip="`Hang up`"
           aria-label="hang call"
           importance="clear"
-          kind="danger"
+          kind="critical"
         >
           <template #icon="{ iconSize }">
             <dt-icon-phone-hang-up :size="iconSize" />
@@ -112,7 +112,7 @@
           v-dt-tooltip="`Hang up`"
           aria-label="hang call"
           importance="clear"
-          kind="danger"
+          kind="critical"
         >
           <template #icon="{ iconSize }">
             <dt-icon-phone-hang-up :size="iconSize" />
@@ -146,7 +146,7 @@
           v-dt-tooltip="`Hang up`"
           aria-label="hang call"
           importance="clear"
-          kind="danger"
+          kind="critical"
         >
           <template #icon="{ iconSize }">
             <dt-icon-phone-hang-up :size="iconSize" />
@@ -195,7 +195,7 @@
           v-dt-tooltip="`Hang up`"
           aria-label="hang call"
           importance="clear"
-          kind="danger"
+          kind="critical"
         >
           <template #icon="{ iconSize }">
             <dt-icon-phone-hang-up :size="iconSize" />
@@ -224,7 +224,7 @@
           v-dt-tooltip="`Stop`"
           aria-label="stop call"
           importance="clear"
-          kind="danger"
+          kind="critical"
         >
           <template #icon="{ iconSize }">
             <dt-icon-stop-filled :size="iconSize" />
@@ -290,7 +290,7 @@
           v-dt-tooltip="`Hang up`"
           aria-label="hang call"
           importance="clear"
-          kind="danger"
+          kind="critical"
         >
           <template #icon="{ iconSize }">
             <dt-icon-phone-hang-up :size="iconSize" />
@@ -329,7 +329,7 @@
           v-dt-tooltip="`Hang up`"
           aria-label="hang call"
           importance="clear"
-          kind="danger"
+          kind="critical"
         >
           <template #icon="{ iconSize }">
             <dt-icon-phone-hang-up :size="iconSize" />
@@ -361,7 +361,7 @@
               v-dt-tooltip="`Stop`"
               aria-label="stop call"
               importance="clear"
-              kind="danger"
+              kind="critical"
             >
               <template #icon>
                 <dt-icon-stop-filled size="300" />
@@ -393,7 +393,7 @@
           v-dt-tooltip="`Hang up`"
           aria-label="hang call"
           importance="clear"
-          kind="danger"
+          kind="critical"
         >
           <template #icon="{ iconSize }">
             <dt-icon-phone-hang-up :size="iconSize" />

@@ -25,9 +25,9 @@ Used in most scenarios when the message should be noticeable but not dominate.
 <!-- @bg d-bgc-primary -->
 <dt-stack gap="100">
   <example-notice kind="base" title="Base title (optional)" />
-  <example-notice kind="error" title="Error title (optional)" />
+  <example-notice kind="critical" title="Critical title (optional)" />
   <example-notice kind="info" title="Info title (optional)" />
-  <example-notice kind="success" title="Success title (optional)" />
+  <example-notice kind="positive" title="Positive title (optional)" />
   <example-notice kind="warning" title="Warning title (optional)" />
 </dt-stack>
 <!-- @code -->
@@ -77,8 +77,8 @@ Used in most scenarios when the message should be noticeable but not dominate.
   </template>
 </dt-notice>
 <dt-notice
-  title="Error title (optional)"
-  kind="error"
+  title="Critical title (optional)"
+  kind="critical"
 >
   <span>
     Message body with
@@ -100,8 +100,8 @@ Used in most scenarios when the message should be noticeable but not dominate.
   </template>
 </dt-notice>
 <dt-notice
-  title="Success title (optional)"
-  kind="success"
+  title="Positive title (optional)"
+  kind="positive"
 >
   <span>
     Message body with
@@ -154,9 +154,9 @@ Used occasionally in scenarios when the message needs to dominate.
 ```vue demo
 <dt-stack gap="100">
   <example-notice important kind="base" title="Base title (optional)" />
-  <example-notice important kind="error" title="Error title (optional)" />
+  <example-notice important kind="critical" title="Critical title (optional)" />
   <example-notice important kind="info" title="Info title (optional)" />
-  <example-notice important kind="success" title="Success title (optional)" />
+  <example-notice important kind="positive" title="Positive title (optional)" />
   <example-notice important kind="warning" title="Warning title (optional)" />
 </dt-stack>
 <!-- @code -->
@@ -208,8 +208,8 @@ Used occasionally in scenarios when the message needs to dominate.
   </template>
 </dt-notice>
 <dt-notice
-  title="Error title (optional)"
-  kind="error"
+  title="Critical title (optional)"
+  kind="critical"
   important
 >
   <span>
@@ -232,8 +232,8 @@ Used occasionally in scenarios when the message needs to dominate.
   </template>
 </dt-notice>
 <dt-notice
-  title="Success title (optional)"
-  kind="success"
+  title="Positive title (optional)"
+  kind="positive"
   important
 >
   <span>

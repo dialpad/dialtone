@@ -356,58 +356,58 @@ describe('DtInput tests', () => {
     });
 
     describe('When validation message(s) are provided', () => {
-      it('should display error messages', async () => {
-        const errorMessage1 = 'error message 1';
-        const errorMessage2 = 'error message 2';
+      it('should display critical messages', async () => {
+        const criticalMessage1 = 'critical message 1';
+        const criticalMessage2 = 'critical message 2';
 
         await wrapper.setProps({
           showMessages: false,
           messages: [
-            errorMessage1,
-            { message: errorMessage2, type: 'error' },
+            criticalMessage1,
+            { message: criticalMessage2, type: 'critical' },
           ],
         });
 
         expect(wrapper.findAll('.d-validation-message').length).toBe(0);
-        expect(wrapper.vm.inputState).toBe('error');
+        expect(wrapper.vm.inputState).toBe('critical');
 
         await wrapper.setProps({ showMessages: true });
 
-        const inputErrorMessages = wrapper.findAll('.d-validation-message--error');
+        const inputCriticalMessages = wrapper.findAll('.d-validation-message--critical');
 
-        expect(inputErrorMessages.length).toBe(2);
-        expect(inputErrorMessages.at(0).text()).toEqual(errorMessage1);
-        expect(inputErrorMessages.at(1).text()).toEqual(errorMessage2);
+        expect(inputCriticalMessages.length).toBe(2);
+        expect(inputCriticalMessages.at(0).text()).toEqual(criticalMessage1);
+        expect(inputCriticalMessages.at(1).text()).toEqual(criticalMessage2);
       });
 
-      it('should ignore all other message types if at least 1 error message is present', async () => {
-        const strErrorMessage = 'string error message';
+      it('should ignore all other message types if at least 1 critical message is present', async () => {
+        const strCriticalMessage = 'string critical message';
 
         await wrapper.setProps({
           messages: [
-            strErrorMessage,
+            strCriticalMessage,
             { message: 'formatted warning message', type: 'warning' },
-            { message: 'formatted success message', type: 'success' },
+            { message: 'formatted positive message', type: 'positive' },
           ],
         });
 
-        expect(wrapper.vm.inputState).toBe('error');
+        expect(wrapper.vm.inputState).toBe('critical');
 
         const inputMessages = wrapper.findAll('.d-validation-message');
-        const inputErrorMessages = wrapper.findAll('.d-validation-message--error');
+        const inputCriticalMessages = wrapper.findAll('.d-validation-message--critical');
 
         expect(inputMessages.length).toBe(1);
-        expect(inputErrorMessages.length).toBe(1);
-        expect(inputErrorMessages.at(0).text()).toEqual(strErrorMessage);
+        expect(inputCriticalMessages.length).toBe(1);
+        expect(inputCriticalMessages.at(0).text()).toEqual(strCriticalMessage);
       });
 
-      it('should display warning messages only if no error messages are present', async () => {
+      it('should display warning messages only if no critical messages are present', async () => {
         const warningMessage = 'formatted warning message';
 
         await wrapper.setProps({
           messages: [
             { message: warningMessage, type: 'warning' },
-            { message: 'formatted success message', type: 'success' },
+            { message: 'formatted positive message', type: 'positive' },
           ],
         });
 
@@ -421,26 +421,26 @@ describe('DtInput tests', () => {
         expect(inputWarningMessages.at(0).text()).toEqual(warningMessage);
       });
 
-      it('should display success messages only if no other types are present', async () => {
-        const successMessage1 = 'formatted success message 1';
-        const successMessage2 = 'formatted success message 2';
+      it('should display positive messages only if no other types are present', async () => {
+        const positiveMessage1 = 'formatted positive message 1';
+        const positiveMessage2 = 'formatted positive message 2';
 
         await wrapper.setProps({
           messages: [
-            { message: successMessage1, type: 'success' },
-            { message: successMessage2, type: 'success' },
+            { message: positiveMessage1, type: 'positive' },
+            { message: positiveMessage2, type: 'positive' },
           ],
         });
 
-        expect(wrapper.vm.inputState).toBe('success');
+        expect(wrapper.vm.inputState).toBe('positive');
 
         const inputMessages = wrapper.findAll('.d-validation-message');
-        const inputSuccessMessages = wrapper.findAll('.d-validation-message--success');
+        const inputPositiveMessages = wrapper.findAll('.d-validation-message--positive');
 
         expect(inputMessages.length).toBe(2);
-        expect(inputSuccessMessages.length).toBe(2);
-        expect(inputSuccessMessages.at(0).text()).toEqual(successMessage1);
-        expect(inputSuccessMessages.at(1).text()).toEqual(successMessage2);
+        expect(inputPositiveMessages.length).toBe(2);
+        expect(inputPositiveMessages.at(0).text()).toEqual(positiveMessage1);
+        expect(inputPositiveMessages.at(1).text()).toEqual(positiveMessage2);
       });
     });
 
@@ -613,12 +613,12 @@ describe('DtInput tests', () => {
           updateWrapper();
         });
 
-        it('should not show an error validation message', () => {
+        it('should not show a critical validation message', () => {
           expect(wrapper.find('[data-qa="dt-input-length-validation-message"]').exists()).toBe(false);
 
-          const inputWarningMessages = wrapper.findAll('.d-validation-message--error');
+          const inputCriticalMessages = wrapper.findAll('.d-validation-message--critical');
 
-          expect(inputWarningMessages.length).toBe(0);
+          expect(inputCriticalMessages.length).toBe(0);
         });
       });
 
@@ -632,14 +632,14 @@ describe('DtInput tests', () => {
           updateWrapper();
         });
 
-        it('should show an error validation message', async () => {
+        it('should show a critical validation message', async () => {
           await wrapper.setProps({ modelValue: 'new value with 28 characters' });
 
           const inputMessages = wrapper.findAll('.d-validation-message');
-          const inputErrorMessages = wrapper.findAll('.d-validation-message--error');
+          const inputCriticalMessages = wrapper.findAll('.d-validation-message--critical');
 
           expect(inputMessages.length).toBe(1);
-          expect(inputErrorMessages.length).toBe(1);
+          expect(inputCriticalMessages.length).toBe(1);
         });
       });
     });
@@ -844,9 +844,9 @@ describe('DtInput tests', () => {
       expect(nativeInput.element.disabled).toBe(true);
     });
 
-    describe('When a rootClass is provided', () => {
-      it('should include the root class', () => {
-        mockProps = { rootClass: MOCK_ROOT_CLASS }
+    describe('When a class is provided', () => {
+      it('should include the class', () => {
+        mockAttrs = { class: MOCK_ROOT_CLASS }
 
         updateWrapper();
 

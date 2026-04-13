@@ -1,8 +1,8 @@
 export { default as DtLink } from './link.vue';
 export {
-  DANGER,
+  CRITICAL,
+  POSITIVE,
   WARNING,
-  SUCCESS,
   MUTED,
   MENTION,
   LINK_VARIANTS,

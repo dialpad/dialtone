@@ -1,7 +1,7 @@
 <template>
   <div
-    :class="rootClass"
-    v-bind="addClassStyleAttrs($attrs)"
+    :class="$attrs.class"
+    :style="$attrs.style"
   >
     <label :class="['d-checkbox-group', { 'd-checkbox-group--disabled': internalDisabled }]">
       <div class="d-checkbox__input">
@@ -72,7 +72,7 @@ import {
   GroupableMixin,
   MessagesMixin,
 } from '@/common/mixins/input';
-import { removeClassStyleAttrs, addClassStyleAttrs } from '@/common/utils';
+import { removeClassStyleAttrs } from '@/common/utils';
 import { CHECKBOX_INPUT_VALIDATION_CLASSES } from './checkbox_constants';
 import { DtValidationMessages } from '../validation_messages';
 import { DtText, TEXT_SIZE_MODIFIERS, TEXT_STRENGTH_MODIFIERS } from '@/components/text';
@@ -214,7 +214,6 @@ export default {
 
   methods: {
     removeClassStyleAttrs,
-    addClassStyleAttrs,
 
     emitValue (target) {
       let { value, checked } = target;

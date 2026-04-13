@@ -1,7 +1,7 @@
 <template>
   <div
-    class="dt-recipe--callbar-button-with-dropdown"
-    v-bind="addClassStyleAttrs($attrs)"
+    :class="['dt-recipe--callbar-button-with-dropdown', $attrs.class]"
+    :style="$attrs.style"
   >
     <dt-recipe-callbar-button
       :active="active"
@@ -83,7 +83,7 @@ import { DtButton } from '@/components/button';
 import { DtDropdown } from '@/components/dropdown';
 import { DtIconChevronUp } from '@dialpad/dialtone-icons/vue';
 import { DtRecipeCallbarButton, CALLBAR_BUTTON_VALID_WIDTH_SIZE } from '../callbar_button';
-import utils, { warnIfUnmounted, removeClassStyleAttrs, addClassStyleAttrs, returnFirstEl } from '@/common/utils';
+import utils, { warnIfUnmounted, removeClassStyleAttrs, returnFirstEl } from '@/common/utils';
 import { DialtoneLocalization } from '@/localization';
 
 export default {
@@ -199,7 +199,7 @@ export default {
      * we actually have a click handler or not.
      * We're hacking it by adding an onClick prop: https://github.com/vuejs/core/issues/5220
      */
-     
+
     onClick: {
       type: Function,
       default: null,
@@ -314,7 +314,6 @@ export default {
 
   methods: {
     removeClassStyleAttrs,
-    addClassStyleAttrs,
     arrowClick (ev) {
       this.$emit('arrow-click', ev);
       return this.toggleOpen();

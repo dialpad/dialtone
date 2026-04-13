@@ -183,24 +183,24 @@ describe('DtRadio Tests', () => {
         });
       });
 
-      describe('When error', () => {
+      describe('When Critical', () => {
         it('has validation classes', () => {
-          mockProps = { description: 'Description', validationState: VALIDATION_MESSAGE_TYPES.ERROR };
+          mockProps = { description: 'Description', validationState: VALIDATION_MESSAGE_TYPES.CRITICAL };
 
           updateWrapper();
 
-          expect(wrapper.find(`.${RADIO_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.ERROR]}`).exists())
+          expect(wrapper.find(`.${RADIO_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.CRITICAL]}`).exists())
             .toBe(true);
         });
       });
 
-      describe('When success', () => {
+      describe('When Positive', () => {
         it('has validation classes', () => {
-          mockProps = { description: 'Description', validationState: VALIDATION_MESSAGE_TYPES.SUCCESS };
+          mockProps = { description: 'Description', validationState: VALIDATION_MESSAGE_TYPES.POSITIVE };
 
           updateWrapper();
 
-          expect(wrapper.find(`.${RADIO_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.SUCCESS]}`).exists())
+          expect(wrapper.find(`.${RADIO_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.POSITIVE]}`).exists())
             .toBe(true);
         });
       });
@@ -490,7 +490,7 @@ describe('DtRadio Tests', () => {
               name: MOCK_GROUP_NAME,
               selectedValue: MOCK_VALUE,
               disabled: false,
-              validationState: VALIDATION_MESSAGE_TYPES.SUCCESS,
+              validationState: VALIDATION_MESSAGE_TYPES.POSITIVE,
             },
           };
 
@@ -500,7 +500,7 @@ describe('DtRadio Tests', () => {
 
           updateWrapper();
 
-          expect(wrapper.find(`.${RADIO_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.SUCCESS]}`).exists())
+          expect(wrapper.find(`.${RADIO_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.POSITIVE]}`).exists())
             .toBe(true);
         });
 
@@ -557,9 +557,9 @@ describe('DtRadio Tests', () => {
   });
 
   describe('Extendability Tests', () => {
-    describe('When a rootClass is provided', () => {
-      it('should include the root class', () => {
-        mockProps = { rootClass: MOCK_ROOT_CLASS }
+    describe('When a class is provided', () => {
+      it('should include the class', () => {
+        mockAttrs = { class: MOCK_ROOT_CLASS }
 
         updateWrapper();
 

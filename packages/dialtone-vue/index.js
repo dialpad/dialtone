@@ -71,6 +71,7 @@ export * from './components/combobox_with_popover';
 export * from './directives/tooltip_directive';
 export * from './directives/scrollbar_directive';
 export * from './directives/mode_directive';
+export * from './directives/focusgroup_directive';
 
 /// Recipes
 export * from './recipes/buttons/callbar_button';

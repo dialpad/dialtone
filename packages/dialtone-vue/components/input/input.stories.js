@@ -146,9 +146,6 @@ export const argTypesData = {
   inputWrapperClass: {
     control: 'text',
   },
-  rootClass: {
-    control: 'text',
-  },
 
   // HTML attributes
   placeholder: {
@@ -333,17 +330,17 @@ export const WithWarning = {
   },
 };
 
-export const WithError = {
+export const WithCritical = {
   ...Default,
   args: {
-    messages: [{ message: 'This is an error message', type: 'error' }],
+    messages: [{ message: 'This is a critical message', type: 'critical' }],
   },
 };
 
-export const WithSuccess = {
+export const WithPositive = {
   ...Default,
   args: {
-    messages: [{ message: 'This is a success message', type: 'success' }],
+    messages: [{ message: 'This is a positive message', type: 'positive' }],
   },
 };
 
@@ -351,9 +348,9 @@ export const WithMultipleMessages = {
   ...Default,
   args: {
     messages: [
-      { message: 'This is the first message', type: 'error' },
-      { message: 'This is the second message', type: 'error' },
-      { message: 'This is the third message', type: 'error' },
+      { message: 'This is the first message', type: 'critical' },
+      { message: 'This is the second message', type: 'critical' },
+      { message: 'This is the third message', type: 'critical' },
     ],
   },
 };

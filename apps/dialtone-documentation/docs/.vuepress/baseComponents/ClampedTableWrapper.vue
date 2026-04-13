@@ -6,7 +6,7 @@
         aria-label="Search table"
         placeholder="Search table"
         type="search"
-        root-class="d-w-500"
+        class="d-w-500"
         @keydown.escape="handleEscapeKey"
       >
         <template #startIcon="{ iconSize }">
@@ -29,7 +29,7 @@
           </dt-stack>
         </template>
       </dt-input>
-      <dt-toggle v-if="hasDeprecatedRows" v-model="hideDeprecated" wrapper-class="d-g-100" size="sm">
+      <dt-toggle v-if="hasDeprecatedRows" v-model="hideDeprecated" class="d-g-100" size="sm">
         <dt-text kind="label" size="xs" strength="normal">
           Hide deprecated
         </dt-text>

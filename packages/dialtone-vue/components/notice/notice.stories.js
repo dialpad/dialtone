@@ -145,13 +145,13 @@ export const Default = {
   },
 };
 
-export const Error = {
+export const Critical = {
   render: Template,
 
   args: {
     ...Default.args,
-    title: 'Error title (optional)',
-    kind: 'error',
+    title: 'Critical title (optional)',
+    kind: 'critical',
   },
 };
 
@@ -165,13 +165,13 @@ export const Info = {
   },
 };
 
-export const Success = {
+export const Positive = {
   render: Template,
 
   args: {
     ...Default.args,
-    title: 'Success title (optional)',
-    kind: 'success',
+    title: 'Positive title (optional)',
+    kind: 'positive',
   },
 };
 

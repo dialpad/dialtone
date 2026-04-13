@@ -109,8 +109,6 @@ export default {
   name: 'DtAvatar',
   components: { DtPresence },
 
-  inheritAttrs: false,
-
   props: {
     /**
      * Id of the avatar content wrapper element
@@ -409,7 +407,6 @@ export default {
     avatarClasses () {
       return [
         'd-avatar',
-        this.$attrs.class,
         AVATAR_SIZE_MODIFIERS[this.validatedSize],
         this.avatarClass,
         {
@@ -428,9 +425,7 @@ export default {
      * Compute inline styles for fallback color in browsers that don't support oklch()
      */
     avatarStyles () {
-      // $attrs.style can be object, string, or array — normalize to an array for merging
-      const attrStyle = this.$attrs.style;
-      const baseStyles = attrStyle != null ? [].concat(attrStyle) : [];
+      const baseStyles = [];
 
       // Only compute hex fallback for browsers that don't support oklch()
       if (!supportsOklch && !this.isIconType && this.computedFamily && this.computedVariant !== undefined) {

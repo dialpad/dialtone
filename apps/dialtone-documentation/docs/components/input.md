@@ -92,11 +92,11 @@ Provides feedback to the user based on their interaction, or lack thereof, with 
 ```vue demo
 <!-- @wrapper -->
 <div class="d-d-grid d-g-200 d-g-cols3">
-  <dt-input label="Label" type="email" model-value="Value" :messages="[messages.error]"/>
-  <dt-input label="Label" type="email" model-value="Value" :messages="[messages.success]"/>
+  <dt-input label="Label" type="email" model-value="Value" :messages="[messages.critical]"/>
+  <dt-input label="Label" type="email" model-value="Value" :messages="[messages.positive]"/>
   <dt-input label="Label" type="email" model-value="Value" :messages="[messages.warning]"/>
-  <dt-input label="Label" type="textarea" model-value="Value" :messages="[messages.error]"/>
-  <dt-input label="Label" type="textarea" model-value="Value" :messages="[messages.success]"/>
+  <dt-input label="Label" type="textarea" model-value="Value" :messages="[messages.critical]"/>
+  <dt-input label="Label" type="textarea" model-value="Value" :messages="[messages.positive]"/>
   <dt-input label="Label" type="textarea" model-value="Value" :messages="[messages.warning]"/>
 </div>
 ```
@@ -355,14 +355,14 @@ const inputSearchValue = ref('Some text');
 
 const messages = {
   warning: { "message": "Warning validation message", "type": "warning" },
-  error: { "message": "Error validation message", "type": "error" },
-  success: { "message": "Success validation message", "type": "success" },
+  critical: { "message": "Critical validation message", "type": "critical" },
+  positive: { "message": "Positive validation message", "type": "positive" },
 };
 
 const multipleMessages = [
-  { message: 'This is the first message', type: 'error' },
-  { message: 'This is the second message', type: 'error' },
-  { message: 'This is the third message', type: 'error' },
+  { message: 'This is the first message', type: 'critical' },
+  { message: 'This is the second message', type: 'critical' },
+  { message: 'This is the third message', type: 'critical' },
 ];
 
 const validateData = {

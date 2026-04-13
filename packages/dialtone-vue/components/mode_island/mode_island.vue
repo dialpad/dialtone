@@ -2,7 +2,6 @@
   <component
     :is="as"
     class="d-mode-island"
-    v-bind="$attrs"
     :data-dt-mode="computedMode"
     :data-mode-island-inverted="invertedAttribute"
     :data-dt-contrast="currentContrast"
@@ -38,8 +37,6 @@ export default {
       default: null,
     },
   },
-
-  inheritAttrs: false,
 
   props: {
     /**
