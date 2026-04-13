@@ -59,6 +59,7 @@ export function useIndicatorAnimation (containerRef, durationVar, easingVar) {
    */
   function animate ({ oldRect, newEl, orientation, hideProps, indicatorExtra = {}, pseudoElement }) {
     if (!supported) return;
+    cancel();
 
     const newRect = newEl.getBoundingClientRect();
     const isVertical = orientation === 'vertical';
@@ -74,8 +75,6 @@ export function useIndicatorAnimation (containerRef, durationVar, easingVar) {
       ? (oldRect.top + oldRect.height / 2) - (newRect.top + newRect.height / 2)
       : (oldRect.left + oldRect.width / 2) - (newRect.left + newRect.width / 2);
     if (delta === 0) return;
-
-    cancel();
 
     const from = isVertical ? `0 ${delta}px` : `${delta}px 0`;
     const scale = isVertical
