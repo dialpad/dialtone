@@ -127,16 +127,26 @@
       "output": "resize: both !important;"
     },
     {
-      "class": "d-r-horizontal",
-      "output": "resize: horizontal !important;"
+      "class": "d-r-inline",
+      "output": "resize: inline !important;"
     },
     {
-      "class": "d-r-vertical",
-      "output": "resize: vertical !important;"
+      "class": "d-r-block",
+      "output": "resize: block !important;"
     },
     {
       "class": "d-r-none",
       "output": "resize: none !important;"
+    },
+    {
+      "class": "d-r-horizontal",
+      "output": "resize: horizontal !important;",
+      "deprecated": true
+    },
+    {
+      "class": "d-r-vertical",
+      "output": "resize: vertical !important;",
+      "deprecated": true
     }
   ]
 }
