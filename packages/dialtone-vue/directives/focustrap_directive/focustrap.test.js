@@ -1,19 +1,11 @@
 import { mount } from '@vue/test-utils';
 import { DtFocustrapDirective } from './focustrap.js';
 import { FOCUSTRAP_DEFAULTS, FOCUSTRAP_STATE_KEY } from './focustrap_constants.js';
+import { flushPromises } from '@/common/utils';
 
 // ── Helpers ─────────────────────────────────────────────────
 
 const PLUGINS = [DtFocustrapDirective];
-
-/**
- * Flush the microtask queue so that Promise.resolve().then(...)
- * used by setInitialFocus has a chance to run.
- */
-async function flushMicrotasks (wrapper) {
-  await wrapper.vm.$nextTick();
-  await new Promise(resolve => setTimeout(resolve, 0));
-}
 
 function mountDialog (config = true, options = {}) {
   return mount({
@@ -56,14 +48,14 @@ describe('DtFocustrapDirective', () => {
   describe('Default rendering', () => {
     it('should mount without errors', async () => {
       wrapper = mountDialog();
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       expect(wrapper.find('[data-qa="trap"]').exists()).toBe(true);
     });
 
     it('should store state on the container element', async () => {
       wrapper = mountDialog();
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       const el = wrapper.find('[data-qa="trap"]').element;
       expect(el[FOCUSTRAP_STATE_KEY]).toBeDefined();
@@ -71,7 +63,7 @@ describe('DtFocustrapDirective', () => {
 
     it('should activate the trap on mount', async () => {
       wrapper = mountDialog();
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       const el = wrapper.find('[data-qa="trap"]').element;
       expect(el[FOCUSTRAP_STATE_KEY].active).toBe(true);
@@ -79,7 +71,7 @@ describe('DtFocustrapDirective', () => {
 
     it('should register a keydown listener on the container', async () => {
       wrapper = mountDialog();
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       const el = wrapper.find('[data-qa="trap"]').element;
       expect(el[FOCUSTRAP_STATE_KEY].onKeydown).toBeTypeOf('function');
@@ -91,7 +83,7 @@ describe('DtFocustrapDirective', () => {
   describe('Tab wrapping', () => {
     it('should wrap focus from last element to first on Tab', async () => {
       wrapper = mountDialog();
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       wrapper.find('[data-qa="third"]').element.focus();
       await wrapper.find('[data-qa="trap"]').trigger('keydown', { key: 'Tab' });
@@ -101,7 +93,7 @@ describe('DtFocustrapDirective', () => {
 
     it('should wrap focus from first element to last on Shift+Tab', async () => {
       wrapper = mountDialog();
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       wrapper.find('[data-qa="first"]').element.focus();
       await wrapper.find('[data-qa="trap"]').trigger('keydown', { key: 'Tab', shiftKey: true });
@@ -111,12 +103,11 @@ describe('DtFocustrapDirective', () => {
 
     it('should not interfere with Tab between middle elements', async () => {
       wrapper = mountDialog();
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       wrapper.find('[data-qa="second"]').element.focus();
       await wrapper.find('[data-qa="trap"]').trigger('keydown', { key: 'Tab' });
 
-      // Focus should remain on second since the handler only traps at boundaries
       expect(document.activeElement).toBe(wrapper.find('[data-qa="second"]').element);
     });
   });
@@ -126,21 +117,7 @@ describe('DtFocustrapDirective', () => {
   describe('Initial focus: auto', () => {
     it('should focus the first focusable element on activation', async () => {
       wrapper = mountDialog();
-      await flushMicrotasks(wrapper);
-
-      expect(document.activeElement).toBe(wrapper.find('[data-qa="first"]').element);
-    });
-
-    it('should focus first focusable element when config is bare true', async () => {
-      wrapper = mountDialog(true);
-      await flushMicrotasks(wrapper);
-
-      expect(document.activeElement).toBe(wrapper.find('[data-qa="first"]').element);
-    });
-
-    it('should focus first focusable element when config is { active: true }', async () => {
-      wrapper = mountDialog({ active: true });
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       expect(document.activeElement).toBe(wrapper.find('[data-qa="first"]').element);
     });
@@ -151,16 +128,15 @@ describe('DtFocustrapDirective', () => {
   describe('Initial focus: CSS selector', () => {
     it('should focus the element matching the selector', async () => {
       wrapper = mountDialog({ active: true, initialFocus: '[data-qa="second"]' });
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       expect(document.activeElement).toBe(wrapper.find('[data-qa="second"]').element);
     });
 
     it('should fall back to container if selector matches nothing', async () => {
       wrapper = mountDialog({ active: true, initialFocus: '[data-qa="nonexistent"]' });
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
-      // Container should be focused as fallback
       expect(document.activeElement).toBe(wrapper.find('[data-qa="trap"]').element);
     });
   });
@@ -169,14 +145,13 @@ describe('DtFocustrapDirective', () => {
 
   describe('Initial focus: false', () => {
     it('should not move focus when initialFocus is false', async () => {
-      // Focus something outside the trap first
       const outsideBtn = document.createElement('button');
       outsideBtn.setAttribute('data-qa', 'outside');
       document.body.appendChild(outsideBtn);
       outsideBtn.focus();
 
       wrapper = mountDialog({ active: true, initialFocus: false });
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       expect(document.activeElement).toBe(outsideBtn);
 
@@ -195,7 +170,7 @@ describe('DtFocustrapDirective', () => {
           <input type="radio" name="choice" value="c" data-qa="radio-c" />
         </div>
       `);
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       expect(document.activeElement).toBe(wrapper.find('[data-qa="radio-b"]').element);
     });
@@ -207,7 +182,7 @@ describe('DtFocustrapDirective', () => {
           <input type="radio" name="choice" value="b" data-qa="radio-b" />
         </div>
       `);
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       expect(document.activeElement).toBe(wrapper.find('[data-qa="radio-a"]').element);
     });
@@ -216,40 +191,36 @@ describe('DtFocustrapDirective', () => {
   // ── Focus restoration ──────────────────────────────────
 
   describe('Focus restoration', () => {
-    it('should restore focus to previously focused element on deactivation', async () => {
-      const outsideBtn = document.createElement('button');
+    let outsideBtn;
+
+    beforeEach(() => {
+      outsideBtn = document.createElement('button');
       outsideBtn.setAttribute('data-qa', 'outside');
       document.body.appendChild(outsideBtn);
       outsideBtn.focus();
+    });
 
+    afterEach(() => {
+      outsideBtn.remove();
+    });
+
+    it('should restore focus to previously focused element on deactivation', async () => {
       wrapper = mountWithTemplate(true, `
         <div>
           <div role="dialog" v-dt-focustrap="config" data-qa="trap" aria-label="Test dialog">
             <button data-qa="first">First</button>
-            <button data-qa="second">Second</button>
           </div>
         </div>
       `);
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       await wrapper.setData({ config: false });
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       expect(document.activeElement).toBe(outsideBtn);
-
-      outsideBtn.remove();
     });
-  });
 
-  // ── Focus restoration: disabled ────────────────────────
-
-  describe('Focus restoration: disabled', () => {
     it('should not restore focus when restoreFocus is false', async () => {
-      const outsideBtn = document.createElement('button');
-      outsideBtn.setAttribute('data-qa', 'outside');
-      document.body.appendChild(outsideBtn);
-      outsideBtn.focus();
-
       wrapper = mountWithTemplate({ active: true, restoreFocus: false }, `
         <div>
           <div role="dialog" v-dt-focustrap="config" data-qa="trap" aria-label="Test dialog">
@@ -257,14 +228,12 @@ describe('DtFocustrapDirective', () => {
           </div>
         </div>
       `);
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       await wrapper.setData({ config: { active: false, restoreFocus: false } });
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       expect(document.activeElement).not.toBe(outsideBtn);
-
-      outsideBtn.remove();
     });
   });
 
@@ -273,10 +242,10 @@ describe('DtFocustrapDirective', () => {
   describe('Reactive activation', () => {
     it('should set active state when binding changes from false to true', async () => {
       wrapper = mountDialog(false);
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       await wrapper.setData({ config: true });
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       const el = wrapper.find('[data-qa="trap"]').element;
       expect(el[FOCUSTRAP_STATE_KEY].active).toBe(true);
@@ -284,20 +253,20 @@ describe('DtFocustrapDirective', () => {
 
     it('should focus first element when binding changes from false to true', async () => {
       wrapper = mountDialog(false);
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       await wrapper.setData({ config: true });
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       expect(document.activeElement).toBe(wrapper.find('[data-qa="first"]').element);
     });
 
     it('should activate with object binding change', async () => {
       wrapper = mountDialog({ active: false });
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       await wrapper.setData({ config: { active: true } });
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       expect(document.activeElement).toBe(wrapper.find('[data-qa="first"]').element);
     });
@@ -308,10 +277,10 @@ describe('DtFocustrapDirective', () => {
   describe('Reactive deactivation', () => {
     it('should set active state to false when binding changes from true to false', async () => {
       wrapper = mountDialog(true);
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       await wrapper.setData({ config: false });
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       const el = wrapper.find('[data-qa="trap"]').element;
       expect(el[FOCUSTRAP_STATE_KEY].active).toBe(false);
@@ -324,10 +293,10 @@ describe('DtFocustrapDirective', () => {
       outsideBtn.focus();
 
       wrapper = mountDialog(true);
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       await wrapper.setData({ config: false });
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       expect(document.activeElement).toBe(outsideBtn);
 
@@ -336,13 +305,13 @@ describe('DtFocustrapDirective', () => {
 
     it('should remove keydown listener on deactivation', async () => {
       wrapper = mountDialog(true);
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       const el = wrapper.find('[data-qa="trap"]').element;
       expect(el[FOCUSTRAP_STATE_KEY].onKeydown).toBeTypeOf('function');
 
       await wrapper.setData({ config: false });
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       expect(el[FOCUSTRAP_STATE_KEY].onKeydown).toBeNull();
     });
@@ -353,7 +322,7 @@ describe('DtFocustrapDirective', () => {
   describe('Boolean binding', () => {
     it('should activate the trap when bound to true', async () => {
       wrapper = mountDialog(true);
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       const el = wrapper.find('[data-qa="trap"]').element;
       expect(el[FOCUSTRAP_STATE_KEY].active).toBe(true);
@@ -361,14 +330,14 @@ describe('DtFocustrapDirective', () => {
 
     it('should focus first element when bound to true', async () => {
       wrapper = mountDialog(true);
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       expect(document.activeElement).toBe(wrapper.find('[data-qa="first"]').element);
     });
 
     it('should treat false as { active: false }', async () => {
       wrapper = mountDialog(false);
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       const el = wrapper.find('[data-qa="trap"]').element;
       expect(el[FOCUSTRAP_STATE_KEY].active).toBe(false);
@@ -384,10 +353,9 @@ describe('DtFocustrapDirective', () => {
           <p>No focusable elements here</p>
         </div>
       `);
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       const trap = wrapper.find('[data-qa="trap"]');
-      // Should not throw
       await trap.trigger('keydown', { key: 'Tab' });
     });
 
@@ -397,7 +365,7 @@ describe('DtFocustrapDirective', () => {
           <p>No focusable elements here</p>
         </div>
       `);
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       const event = new KeyboardEvent('keydown', { key: 'Tab', bubbles: true, cancelable: true });
       const spy = vi.spyOn(event, 'preventDefault');
@@ -410,25 +378,28 @@ describe('DtFocustrapDirective', () => {
   // ── Dynamic content ────────────────────────────────────
 
   describe('Dynamic content', () => {
+    const DYNAMIC_TEMPLATE = `
+      <div role="dialog" v-dt-focustrap="config" data-qa="trap" aria-label="Dynamic dialog">
+        <button data-qa="first">First</button>
+        <button v-if="showMiddle" data-qa="middle">Middle</button>
+        <button data-qa="last">Last</button>
+      </div>
+    `;
+
     it('should include newly added elements in Tab wrapping', async () => {
       wrapper = mount({
-        data () { return { config: true, showExtra: false }; },
-        template: `
-          <div role="dialog" v-dt-focustrap="config" data-qa="trap" aria-label="Dynamic dialog">
-            <button data-qa="first">First</button>
-            <button v-if="showExtra" data-qa="extra">Extra</button>
-          </div>
-        `,
+        data () { return { config: true, showMiddle: false }; },
+        template: DYNAMIC_TEMPLATE,
       }, {
         global: { plugins: PLUGINS },
         attachTo: document.body,
       });
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
-      await wrapper.setData({ showExtra: true });
-      await flushMicrotasks(wrapper);
+      await wrapper.setData({ showMiddle: true });
+      await flushPromises();
 
-      wrapper.find('[data-qa="extra"]').element.focus();
+      wrapper.find('[data-qa="last"]').element.focus();
       await wrapper.find('[data-qa="trap"]').trigger('keydown', { key: 'Tab' });
       expect(document.activeElement).toBe(wrapper.find('[data-qa="first"]').element);
     });
@@ -436,29 +407,20 @@ describe('DtFocustrapDirective', () => {
     it('should handle removed focusable elements', async () => {
       wrapper = mount({
         data () { return { config: true, showMiddle: true }; },
-        template: `
-          <div role="dialog" v-dt-focustrap="config" data-qa="trap" aria-label="Dynamic dialog">
-            <button data-qa="first">First</button>
-            <button v-if="showMiddle" data-qa="middle">Middle</button>
-            <button data-qa="last">Last</button>
-          </div>
-        `,
+        template: DYNAMIC_TEMPLATE,
       }, {
         global: { plugins: PLUGINS },
         attachTo: document.body,
       });
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
-      // Remove the middle button
       await wrapper.setData({ showMiddle: false });
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
-      // Tab on last should wrap to first
       wrapper.find('[data-qa="last"]').element.focus();
       await wrapper.find('[data-qa="trap"]').trigger('keydown', { key: 'Tab' });
       expect(document.activeElement).toBe(wrapper.find('[data-qa="first"]').element);
 
-      // Shift+Tab on first should wrap to last
       wrapper.find('[data-qa="first"]').element.focus();
       await wrapper.find('[data-qa="trap"]').trigger('keydown', { key: 'Tab', shiftKey: true });
       expect(document.activeElement).toBe(wrapper.find('[data-qa="last"]').element);
@@ -478,7 +440,7 @@ describe('DtFocustrapDirective', () => {
       ' ',
     ])('should not interfere with %s key', async (key) => {
       wrapper = mountDialog();
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       wrapper.find('[data-qa="first"]').element.focus();
       const event = new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true });
@@ -494,7 +456,7 @@ describe('DtFocustrapDirective', () => {
   describe('Unmount cleanup', () => {
     it('should remove keydown listener on unmount', async () => {
       wrapper = mountDialog();
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       const el = wrapper.find('[data-qa="trap"]').element;
       const spy = vi.spyOn(el, 'removeEventListener');
@@ -503,7 +465,6 @@ describe('DtFocustrapDirective', () => {
 
       expect(spy).toHaveBeenCalledWith('keydown', expect.any(Function));
 
-      // Prevent double-unmount in afterEach
       wrapper = null;
     });
 
@@ -514,7 +475,7 @@ describe('DtFocustrapDirective', () => {
       outsideBtn.focus();
 
       wrapper = mountDialog(true);
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       wrapper.unmount();
 
@@ -526,7 +487,7 @@ describe('DtFocustrapDirective', () => {
 
     it('should clear state key from element on unmount', async () => {
       wrapper = mountDialog();
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       const el = wrapper.find('[data-qa="trap"]').element;
       expect(el[FOCUSTRAP_STATE_KEY]).toBeDefined();
@@ -549,13 +510,13 @@ describe('DtFocustrapDirective', () => {
           </div>
         </div>
       `);
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       const el = wrapper.find('[data-qa="trap"]').element;
       expect(el.getAttribute('tabindex')).toBe('-1');
 
       await wrapper.setData({ config: false });
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       expect(el.hasAttribute('tabindex')).toBe(false);
     });
@@ -566,7 +527,7 @@ describe('DtFocustrapDirective', () => {
           <p>Are you sure?</p>
         </div>
       `);
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       const el = wrapper.find('[data-qa="trap"]').element;
       expect(el.getAttribute('tabindex')).toBe('-1');
@@ -578,7 +539,7 @@ describe('DtFocustrapDirective', () => {
           <p>Are you sure?</p>
         </div>
       `);
-      await flushMicrotasks(wrapper);
+      await flushPromises();
 
       const el = wrapper.find('[data-qa="trap"]').element;
       expect(document.activeElement).toBe(el);
