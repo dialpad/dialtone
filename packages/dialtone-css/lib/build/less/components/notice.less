@@ -25,10 +25,8 @@
     --notice-border-radius: var(--dt-size-radius-400);
     --notice-box-shadow: 0 0 0 var(--dt-size-border-100) var(--notice-color-shadow) inset;
 
-    //  Base Styles
+    //  Shared Styles
     //  ------------------------------------------------------------------------
-    display: flex;
-    align-items: start;
     box-sizing: border-box;
     inline-size: 100%;
     max-inline-size: var(--dt-layout-1000);
@@ -41,6 +39,11 @@
     box-shadow: var(--notice-box-shadow);
 }
 
+.d-notice {
+    display: flex;
+    align-items: start;
+}
+
 //  ============================================================================
 //  $   NOTICE AREAS
 //  ============================================================================
@@ -49,9 +52,10 @@
 .d-notice__content {
     display: flex;
     flex: 1 auto;
-    flex-direction: column;
+    flex-direction: var(--notice-content-direction, column);
     margin-inline-end: var(--dt-spacing-200);
-    gap: var(--dt-spacing-100);
+    gap: var(--notice-content-gap, var(--dt-spacing-100));
+    align-items: var(--notice-content-align, normal);
     align-self: center;
 }
 
@@ -62,10 +66,10 @@
     flex: 0 auto;
     gap: var(--dt-spacing-100);
     align-items: center;
-    align-self: start;
+    align-self: var(--notice-actions-align, start);
 
-    .d-banner & {
-        align-self: inherit;
+    :where(button:first-child) {
+        margin-inline-start: var(--notice-actions-button-offset, 0);
     }
 
     .d-btn {
@@ -79,15 +83,11 @@
     display: flex;
     flex: 0 auto;
     color: var(--notice-color-icon);
-    margin-inline-end: var(--dt-spacing-150);
-    margin-block-start: var(--dt-spacing-25);
+    margin-inline-end: var(--notice-icon-gap, var(--dt-spacing-150));
+    margin-block-start: var(--notice-icon-block-offset, var(--dt-spacing-25));
 
     &--has-title {
         margin-block-start: var(--dt-spacing-0);
-    }
-
-    .d-banner & {
-        margin-inline-end: var(--dt-spacing-100);
     }
 }
 
@@ -191,16 +191,14 @@
 
 //  $$  TRUNCATE TEXT
 //  ----------------------------------------------------------------------------
-.d-notice.d-notice--truncate {
-    .d-notice__content {
-        overflow: hidden;
+.d-notice--truncate :where(.d-notice__content) {
+    overflow: hidden;
+}
 
-        .d-notice__title,
-        .d-notice__message {
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-        }
-    }
+.d-notice--truncate :where(.d-notice__title),
+.d-notice--truncate :where(.d-notice__message) {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 }
