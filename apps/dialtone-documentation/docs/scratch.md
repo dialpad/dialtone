@@ -6,6 +6,8 @@ layout: Blank
 
 <script setup>
 import { ref, computed } from 'vue';
+import ExampleTabs from '@exampleComponents/ExampleTabs.vue';
+import { DtTabGroup, DtTab, DtTabPanel } from '@dialpad/dialtone-vue';
 import { useThemeManager } from '@composables/useThemeManager';
 import ExampleProfileCard from '@exampleComponents/ExampleProfileCard.vue';
 
@@ -1105,7 +1107,10 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
           <template v-if="showTabEndIcon" #endIcon="{ iconSize }">
             <dt-icon name="box-select" :size="iconSize" />
           </template>
-          United Kingdom
+          <dt-stack>
+            United Kingdom
+            <dt-text as="p" kind="body" :size="200" tone="muted">England, Scotland, Wales, Northern Ireland</dt-text>
+          </dt-stack>
         </dt-tab>
         <dt-tab id="7" panel-id="8" :label-class="resolvedTabLabelClass">
           <template v-if="showIcon" #startIcon="{ iconSize }">
