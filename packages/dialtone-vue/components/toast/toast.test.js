@@ -81,7 +81,7 @@ describe('DtToast Tests', () => {
           contentId: 'contentId prop content',
           title: '',
           message: 'message prop content',
-          hideClose: true,
+          showClose: false,
         };
 
         updateWrapper();
@@ -103,8 +103,8 @@ describe('DtToast Tests', () => {
         expect(contentChild.find('[data-qa="notice-content-message"]').text()).toBe(mockProps.message);
       });
 
-      it('hideClose prop is passed down correctly', () => {
-        expect(actionChild.props('hideClose')).toBe(mockProps.hideClose);
+      it('showClose prop is passed down correctly', () => {
+        expect(actionChild.props('showClose')).toBe(mockProps.showClose);
       });
     });
 

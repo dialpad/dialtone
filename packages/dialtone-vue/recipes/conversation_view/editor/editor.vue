@@ -37,7 +37,7 @@
             <template #content="{ close }">
               <dt-combobox
                 label=""
-                :label-visible="false"
+                :show-label="false"
                 :show-list="true"
                 :click-on-select="true"
                 @escape="close()"
@@ -173,7 +173,7 @@
             <template #content="{ close }">
               <dt-combobox
                 label=""
-                :label-visible="false"
+                :show-label="false"
                 :show-list="true"
                 :click-on-select="true"
                 @escape="close()"
@@ -364,7 +364,7 @@
         :allow-background-color="allowBackgroundColor"
         :allow-line-height="allowLineHeight"
         :variable-items="flattenedVariableItems"
-        :hide-link-bubble-menu="true"
+        :show-link-bubble-menu="false"
         :auto-focus="autoFocus"
         :editable="editable"
         :input-aria-label="inputAriaLabel"

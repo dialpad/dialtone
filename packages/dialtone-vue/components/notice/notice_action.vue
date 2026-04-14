@@ -4,9 +4,9 @@
     data-qa="notice-content-actions"
   >
     <!-- @slot Slot for main content -->
-    <slot v-if="!hideAction" />
+    <slot v-if="showAction" />
     <dt-button
-      v-if="!hideClose"
+      v-if="showClose"
       ref="closeButton"
       data-qa="dt-notice-action-close-button"
       importance="clear"
@@ -47,21 +47,21 @@ export default {
 
   props: {
     /**
-     * Hides the close button from the notice
+     * Shows the close button in the notice
      * @values true, false
      */
-    hideClose: {
+    showClose: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     /**
-     * Hides the action from the notice
+     * Shows the action in the notice
      * @values true, false
      */
-    hideAction: {
+    showAction: {
       type: Boolean,
-      default: false,
+      default: true,
     },
   },
 
@@ -87,7 +87,7 @@ export default {
   },
 
   mounted () {
-    if (!this.hideClose) {
+    if (this.showClose) {
       this.lastFocusedElement = document.activeElement;
     }
   },

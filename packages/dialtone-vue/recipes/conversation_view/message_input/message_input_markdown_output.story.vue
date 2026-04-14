@@ -16,7 +16,7 @@
         :code-button-options="$attrs.codeButtonOptions"
         :code-block-button-options="$attrs.codeBlockButtonOptions"
         :editable="$attrs.editable"
-        :prevent-typing="$attrs.preventTyping"
+        :allow-typing="$attrs.allowTyping"
         :input-class="$attrs.inputClass"
         :output-format="$attrs.outputFormat"
         :placeholder="$attrs.placeholder"

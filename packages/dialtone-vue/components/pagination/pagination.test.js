@@ -121,13 +121,13 @@ describe('DtPagination Tests', () => {
       });
     });
 
-    describe('When hideEdges is true', () => {
+    describe('When showEdges is false', () => {
       it('shouldn\'t render hidden pages which are the first and last when in middle', () => {
         mockProps = {
           totalPages: 15,
           activePage: 7,
           maxVisible: 5,
-          hideEdges: true,
+          showEdges: false,
         };
 
         updateWrapper();
@@ -142,7 +142,7 @@ describe('DtPagination Tests', () => {
           totalPages: 15,
           activePage: 1,
           maxVisible: 5,
-          hideEdges: true,
+          showEdges: false,
         };
 
         updateWrapper();
@@ -156,7 +156,7 @@ describe('DtPagination Tests', () => {
           totalPages: 15,
           activePage: 14,
           maxVisible: 5,
-          hideEdges: true,
+          showEdges: false,
         };
 
         updateWrapper();

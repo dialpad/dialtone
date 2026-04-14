@@ -71,12 +71,12 @@
         :auto-focus="autoFocus"
         :link="richText"
         :placeholder="placeholder"
-        :prevent-typing="preventTyping"
+        :allow-typing="allowTyping"
         :mention-suggestion="mentionSuggestion"
         :channel-suggestion="channelSuggestion"
         :slash-command-suggestion="slashCommandSuggestion"
         :additional-extensions="additionalExtensions"
-        :hide-link-bubble-menu="hideLinkBubbleMenu"
+        :show-link-bubble-menu="showLinkBubbleMenu"
         v-bind="removeClassStyleAttrs($attrs)"
         @input="onInput"
         @text-input="onTextInput"
@@ -369,11 +369,11 @@ export default {
     },
 
     /**
-     * Prevents the user from typing any further. Deleting text will still work.
+     * Allows the user to type. Set to false to prevent typing (deleting text will still work).
      */
-    preventTyping: {
+    allowTyping: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     /**
@@ -801,7 +801,7 @@ export default {
       linkDialogOpen: false,
       selectedText: '',
       text: '',
-      hideLinkBubbleMenu: false,
+      showLinkBubbleMenu: true,
       i18n: new DialtoneLocalization(),
     };
   },
@@ -905,7 +905,7 @@ export default {
       if (value === true) {
         this.initLinkDialog();
       } else {
-        this.hideLinkBubbleMenu = false;
+        this.showLinkBubbleMenu = true;
         this.$refs.richTextEditor?.focusEditor();
       }
     },
@@ -931,7 +931,7 @@ export default {
 
     initLinkDialog () {
       this.$refs.link.setInitialValues(this.selectedText, this.$refs.richTextEditor?.editor?.getAttributes('link')?.href);
-      this.hideLinkBubbleMenu = true;
+      this.showLinkBubbleMenu = false;
       this.linkDialogOpen = true;
     },
 

@@ -20,6 +20,6 @@ Detailed rules are applied automatically via path-scoped rules when editing comp
 | Structural slots | `header` / `footer` |
 | Sizes (interactive) | `xs`, `sm`, `md`, `lg`, `xl` |
 | Sizes (icons) | `100`–`800` numeric |
-| Visibility toggles | `hideX` negative polarity |
+| Visibility toggles | `showX` positive polarity |
 | Styles | `<style scoped>` or `d-*` utility classes, `var(--dt-*)` tokens only |
 | Shared behavior | Composables for new, mixins for legacy in `packages/dialtone-vue/common/mixins/` (`InputMixin`, `CheckableMixin`, `GroupableMixin`, `MessagesMixin`) |

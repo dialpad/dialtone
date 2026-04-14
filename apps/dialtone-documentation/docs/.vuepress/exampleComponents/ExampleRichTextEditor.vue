@@ -7,7 +7,7 @@
     :output-format="$attrs.outputFormat"
     :auto-focus="false"
     placeholder="Type here..."
-    :prevent-typing="$attrs.preventTyping"
+    :allow-typing="$attrs.allowTyping"
     :link="true"
     :mention-suggestion="$attrs.mentionSuggestion"
     :channel-suggestion="$attrs.channelSuggestion"

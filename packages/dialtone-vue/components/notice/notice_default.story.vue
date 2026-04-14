@@ -5,10 +5,10 @@
     :title-id="$attrs.titleId"
     :content-id="$attrs.contentId"
     :important="$attrs.important"
-    :hide-close="$attrs.hideClose"
-    :hide-action="$attrs.hideAction"
+    :show-close="$attrs.showClose"
+    :show-action="$attrs.showAction"
     :truncate-text="$attrs.truncateText"
-    :hide-icon="$attrs.hideIcon"
+    :show-icon="$attrs.showIcon"
     @close="$attrs.onClose($event);"
   >
     <span

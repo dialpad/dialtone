@@ -112,9 +112,9 @@ describe('DtModal Tests', () => {
       expect(overlay.element.showModal).toHaveBeenCalled();
     });
 
-    describe('When hideClose prop is true', () => {
+    describe('When showClose prop is false', () => {
       beforeEach(async () => {
-        mockProps = { ...mockProps, hideClose: true };
+        mockProps = { ...mockProps, showClose: false };
 
         updateWrapper();
       });

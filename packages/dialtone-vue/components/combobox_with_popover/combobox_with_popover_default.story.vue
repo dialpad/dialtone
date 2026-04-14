@@ -2,7 +2,7 @@
   <dt-combobox-with-popover
     ref="comboboxWithPopover"
     :label="$attrs.label"
-    :label-visible="$attrs.labelVisible"
+    :show-label="$attrs.showLabel"
     :description="$attrs.description"
     :size="$attrs.size"
     :loading="$attrs.loading"

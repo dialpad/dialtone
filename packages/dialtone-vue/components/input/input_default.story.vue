@@ -18,7 +18,7 @@
     :input-wrapper-class="$attrs.inputWrapperClass"
     :class="$attrs.class"
     :current-length="$attrs.currentLength"
-    :label-visible="$attrs.labelVisible"
+    :show-label="$attrs.showLabel"
     :hidden="$attrs.hidden"
     :validate="validationConfig"
     @blur="$attrs.onBlur"

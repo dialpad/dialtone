@@ -37,7 +37,7 @@
         :total-pages="10"
         :active-page="5"
         aria-label="pagination with separator on both sides"
-        :hide-edges="true"
+        :show-edges="false"
       />
     </div>
   </div>

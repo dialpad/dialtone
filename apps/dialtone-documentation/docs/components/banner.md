@@ -40,7 +40,7 @@ Banners are a type of notice and so you can use the following [Notice](notice.md
 
 ```vue demo-only
 <dt-stack direction="row" gap="200">
-  <dt-select-menu :label-visible="false" label="Style" :options="bannerOptions" v-model="selectedKind" />
+  <dt-select-menu :show-label="false" label="Style" :options="bannerOptions" v-model="selectedKind" />
   <dt-checkbox value="important" @input="toggleImportant">Important</dt-checkbox>
   <dt-button @click="toggleBanner('example-kind')">Toggle Example</dt-button>
 </dt-stack>

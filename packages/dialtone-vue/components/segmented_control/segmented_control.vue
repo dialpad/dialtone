@@ -106,11 +106,11 @@ const props = defineProps({
   },
 
   /**
-   * Hides the dividers between items.
+   * Shows the dividers between items.
    */
-  hideDivider: {
+  showDivider: {
     type: Boolean,
-    default: false,
+    default: true,
   },
 
   /**
@@ -174,7 +174,7 @@ const stackDirection = computed(() => props.orientation === 'vertical' ? 'column
 const containerClasses = computed(() => [
   'd-segmented-control',
   SEGMENTED_CONTROL_SIZE_MODIFIERS[String(props.size)],
-  props.hideDivider ? 'd-segmented-control--hide-divider' : null,
+  !props.showDivider ? 'd-segmented-control--hide-divider' : null,
   props.borderless ? 'd-segmented-control--borderless' : null,
   props.orientation === 'vertical' ? 'd-segmented-control--vertical' : null,
   props.spread === 'evenly' && props.orientation === 'horizontal'

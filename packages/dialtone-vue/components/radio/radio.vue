@@ -12,7 +12,7 @@
           :disabled="internalDisabled"
           type="radio"
           :class="['d-radio', inputValidationClass, inputClass]"
-          :aria-label="!labelVisible && label ? label : undefined"
+          :aria-label="!showLabel && label ? label : undefined"
           v-bind="removeClassStyleAttrs($attrs)"
           v-on="inputListeners"
         >
@@ -103,7 +103,7 @@ export default {
      * Determines visibility of radio label.
      * @values true, false
      */
-    labelVisible: {
+    showLabel: {
       type: Boolean,
       default: true,
     },
@@ -182,7 +182,7 @@ export default {
     },
 
     hasLabel () {
-      return this.labelVisible && this.hasLabelContent;
+      return this.showLabel && this.hasLabelContent;
     },
 
     resolvedLabelSize () {
@@ -238,7 +238,7 @@ export default {
     runValidations () {
       if (!this.hasLabelContent && !this.$attrs['aria-label']) {
         console.info(
-          '[Dialtone] A label is required for accessibility. Provide a label prop and use label-visible="false" to hide it visually.',
+          '[Dialtone] A label is required for accessibility. Provide a label prop and use show-label="false" to hide it visually.',
         );
       }
     },

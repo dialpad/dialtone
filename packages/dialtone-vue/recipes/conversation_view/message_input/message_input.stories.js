@@ -346,7 +346,7 @@ export const WithMeetingPill = {
       },
     },
     modelValue: '<meeting-pill text="Start a meeting"/>',
-    preventTyping: true,
+    allowTyping: false,
   },
 };
 

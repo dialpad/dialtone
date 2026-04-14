@@ -178,9 +178,9 @@ describe('DtToggle Tests', () => {
       });
     });
 
-    describe('When labelVisible is false', () => {
+    describe('When showLabel is false', () => {
       it('should not render a label', () => {
-        mockProps = { labelVisible: false };
+        mockProps = { showLabel: false };
 
         updateWrapper();
 

@@ -134,7 +134,7 @@ export const argTypesData = {
   hidden: {
     control: { type: 'boolean' },
   },
-  labelVisible: {
+  showLabel: {
     control: { type: 'boolean' },
   },
   retainWarning: {

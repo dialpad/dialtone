@@ -116,11 +116,11 @@ describe('DtFilterPill Tests', function () {
       });
     });
 
-    describe('When hide-clear is set', () => {
+    describe('When showClear is false', () => {
       it('Should not render clear button', () => {
         mockProps = {
           modelValue: [{ name: 'Test item 1', active: true }],
-          hideClear: true,
+          showClear: false,
         };
 
         updateWrapper();

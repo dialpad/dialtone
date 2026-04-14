@@ -9,7 +9,7 @@
  * Supported kinds: BASE, INFO, SUCCESS, WARNING, ERROR
  * (uppercase by convention, case-insensitive — maps to DtNotice's `kind` prop)
  *
- * Always outputs: hide-close, class="d-wmx100p d-my-200"
+ * Always outputs: :show-close="false", class="d-wmx100p d-my-200"
  *
  * Two-pass design:
  *   1. `notice_detect` runs BEFORE inline parsing — matches [!KIND] in raw
@@ -106,7 +106,7 @@ export default function noticePlugin (md) {
       if (title) {
         attrs.push(`title="${encodeForAttr(title)}"`);
       }
-      attrs.push('hide-close', 'class="d-wmx100p d-my-200 dialtone-doc-notice"');
+      attrs.push(':show-close="false"', 'class="d-wmx100p d-my-200 dialtone-doc-notice"');
 
       const html = `<dt-notice ${attrs.join(' ')}>\n${bodyHtml}</dt-notice>\n`;
 

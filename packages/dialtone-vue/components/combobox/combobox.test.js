@@ -9,7 +9,7 @@ const MOCK_OPENED_STUB = vi.fn();
 
 const baseProps = {
   label: 'Label Text',
-  labelVisible: true,
+  showLabel: true,
   size: 'md',
   description: '',
   listId: 'list',
@@ -109,7 +109,7 @@ describe('DtCombobox Tests', () => {
 
       describe('If label visible prop is false', () => {
         it('should still set aria-label even if label visible is false', async () => {
-          await wrapper.setProps({ labelVisible: false });
+          await wrapper.setProps({ showLabel: false });
 
           expect(input.find('input').attributes('aria-label')).toEqual(baseProps.label);
         });
