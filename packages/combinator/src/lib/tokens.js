@@ -15,7 +15,7 @@ let measureEl = null;
 function getMeasureElement () {
   if (!measureEl) {
     measureEl = document.createElement('div');
-    measureEl.style.cssText = 'position:absolute;visibility:hidden;pointer-events:none;';
+    measureEl.style.cssText = 'position:fixed;top:-9999px;left:-9999px;visibility:hidden;pointer-events:none;';
     document.body.appendChild(measureEl);
   }
   return measureEl;
