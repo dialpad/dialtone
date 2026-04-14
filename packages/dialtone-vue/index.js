@@ -10,6 +10,7 @@ export * from './common/emoji';
 export * from './components/avatar';
 export * from './components/badge';
 export * from './components/banner';
+export * from './components/box';
 export * from './components/breadcrumbs';
 export * from './components/button';
 export * from './components/button_group';

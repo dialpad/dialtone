@@ -1340,4 +1340,287 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
     </dt-stack>
   </dt-stack>
 </dt-stack>
+
+<!-- ============================================================ -->
+<!-- DtBox V1 Demos                                                -->
+<!-- ============================================================ -->
+
+<dt-stack class="d-p-400 d-bgc-primary" gap="400">
+  <dt-text as="h1" kind="headline" :size="600">
+    DtBox V1
+  </dt-text>
+
+  <!-- Basic padding + surface combos -->
+  <dt-stack gap="200">
+    <dt-text as="h2" kind="headline" :size="500">
+      Padding + Surface Combos
+    </dt-text>
+
+```vue demo
+<dt-stack gap="200">
+  <dt-box padding="200" surface="secondary">
+    <dt-text kind="body" :size="200">padding="200" surface="secondary"</dt-text>
+  </dt-box>
+  <dt-box padding="400" surface="moderate">
+    <dt-text kind="body" :size="200">padding="400" surface="moderate"</dt-text>
+  </dt-box>
+  <dt-box padding="100" surface="success-subtle">
+    <dt-text kind="body" :size="200">padding="100" surface="success-subtle"</dt-text>
+  </dt-box>
+  <dt-box padding="100" surface="critical-subtle">
+    <dt-text kind="body" :size="200">padding="100" surface="critical-subtle"</dt-text>
+  </dt-box>
+  <dt-box padding="200" surface="brand">
+    <dt-text kind="body" :size="200">padding="200" surface="brand"</dt-text>
+  </dt-box>
+</dt-stack>
+```
+
+  </dt-stack>
+
+  <!-- as prop variants -->
+  <dt-stack gap="200">
+    <dt-text as="h2" kind="headline" :size="500">
+      <code>as</code> Prop Variants
+    </dt-text>
+    <dt-text as="p" kind="body" :size="200" tone="secondary">
+      DtBox renders as different HTML elements via the <code>as</code> prop.
+      Inspect elements to verify the rendered tag.
+    </dt-text>
+
+```vue demo
+<dt-stack gap="200">
+  <dt-box as="div" padding="100" surface="secondary">
+    <dt-text kind="body" :size="200">as="div" (default)</dt-text>
+  </dt-box>
+  <dt-box as="section" padding="100" surface="secondary">
+    <dt-text kind="body" :size="200">as="section"</dt-text>
+  </dt-box>
+  <dt-box as="header" padding="100" surface="secondary">
+    <dt-text kind="body" :size="200">as="header"</dt-text>
+  </dt-box>
+  <dt-box as="nav" padding="100" surface="secondary">
+    <dt-text kind="body" :size="200">as="nav"</dt-text>
+  </dt-box>
+  <dt-box as="article" padding="100" surface="secondary">
+    <dt-text kind="body" :size="200">as="article"</dt-text>
+  </dt-box>
+</dt-stack>
+```
+
+  </dt-stack>
+
+  <!-- Padding cascade demo -->
+  <dt-stack gap="200">
+    <dt-text as="h2" kind="headline" :size="500">
+      Padding Cascade
+    </dt-text>
+    <dt-text as="p" kind="body" :size="200" tone="secondary">
+      Specific axes override shorthand: <code>paddingInline</code> overrides <code>padding</code> for left/right,
+      <code>paddingBlockStart</code> overrides <code>paddingBlock</code> for top.
+    </dt-text>
+
+```vue demo
+<dt-stack gap="200">
+  <dt-box padding="100" surface="moderate">
+    <dt-text kind="body" :size="200">padding="100" (uniform)</dt-text>
+  </dt-box>
+  <dt-box padding="100" padding-inline="400" surface="moderate">
+    <dt-text kind="body" :size="200">padding="100" paddingInline="400" (wider sides)</dt-text>
+  </dt-box>
+  <dt-box padding="100" padding-block="400" surface="moderate">
+    <dt-text kind="body" :size="200">padding="100" paddingBlock="400" (taller top/bottom)</dt-text>
+  </dt-box>
+  <dt-box
+    padding="100"
+    padding-inline="200"
+    padding-inline-start="500"
+    surface="moderate"
+  >
+    <dt-text kind="body" :size="200">padding="100" paddingInline="200" paddingInlineStart="500"</dt-text>
+  </dt-box>
+  <dt-box
+    padding="100"
+    padding-block="200"
+    padding-block-start="500"
+    surface="moderate"
+  >
+    <dt-text kind="body" :size="200">padding="100" paddingBlock="200" paddingBlockStart="500"</dt-text>
+  </dt-box>
+</dt-stack>
+```
+
+  </dt-stack>
+
+  <!-- Nested DtBox inheritance isolation -->
+  <dt-stack gap="200">
+    <dt-text as="h2" kind="headline" :size="500">
+      Nested Inheritance Isolation
+    </dt-text>
+    <dt-text as="p" kind="body" :size="200" tone="secondary">
+      <code>@property</code> registrations prevent custom property inheritance.
+      Inner boxes should NOT inherit outer padding or surface.
+    </dt-text>
+
+```vue demo
+<dt-box padding="400" surface="brand">
+  <dt-text kind="body" :size="200">Outer: padding="400" surface="brand"</dt-text>
+  <dt-box padding="100" surface="secondary" class="d-mt-100">
+    <dt-text kind="body" :size="200">Inner: padding="100" surface="secondary" (should not inherit outer)</dt-text>
+  </dt-box>
+  <dt-box class="d-mt-100">
+    <dt-text kind="body" :size="200">Inner: no props (should have 0 padding, transparent surface)</dt-text>
+  </dt-box>
+</dt-box>
+```
+
+  </dt-stack>
+
+  <!-- Surface opaque variants -->
+  <dt-stack gap="200">
+    <dt-text as="h2" kind="headline" :size="500">
+      Surface Opaque Variants
+    </dt-text>
+    <dt-text as="p" kind="body" :size="200" tone="secondary">
+      Opaque surfaces use solid colors instead of alpha transparency,
+      preventing bleed-through on layered backgrounds.
+    </dt-text>
+
+```vue demo
+<dt-box padding="200" surface="brand">
+  <dt-text kind="body" :size="200" class="d-mb-100">Parent: surface="brand"</dt-text>
+  <dt-stack direction="row" gap="100">
+    <dt-box padding="100" surface="primary">
+      <dt-text kind="body" :size="100">primary (alpha)</dt-text>
+    </dt-box>
+    <dt-box padding="100" surface="primary-opaque">
+      <dt-text kind="body" :size="100">primary-opaque (solid)</dt-text>
+    </dt-box>
+    <dt-box padding="100" surface="secondary">
+      <dt-text kind="body" :size="100">secondary (alpha)</dt-text>
+    </dt-box>
+    <dt-box padding="100" surface="secondary-opaque">
+      <dt-text kind="body" :size="100">secondary-opaque (solid)</dt-text>
+    </dt-box>
+  </dt-stack>
+</dt-box>
+```
+
+  </dt-stack>
+
+  <!-- Utility class escape hatch -->
+  <dt-stack gap="200">
+    <dt-text as="h2" kind="headline" :size="500">
+      Utility Class Escape Hatch
+    </dt-text>
+    <dt-text as="p" kind="body" :size="200" tone="secondary">
+      DtBox accepts standard class attributes for one-off styling that falls
+      outside its prop API. Utility classes compose naturally with the component.
+    </dt-text>
+
+```vue demo
+<dt-box
+  padding="200"
+  surface="moderate"
+  class="d-bar8 d-bs-sm"
+>
+  <dt-text kind="body" :size="200">class="d-bar8 d-bs-sm" (border-radius + box-shadow via utilities)</dt-text>
+</dt-box>
+```
+
+```vue demo
+<div style="position: relative; height: 120px; overflow: auto; border: 1px solid var(--dt-color-border-default);">
+  <dt-box
+    padding="100"
+    surface="secondary"
+    class="d-ps-sticky d-t0"
+  >
+    <dt-text kind="body" :size="200">class="d-ps-sticky d-t0" (sticky header via utilities)</dt-text>
+  </dt-box>
+  <dt-box padding="200">
+    <dt-text kind="body" :size="200">Scroll content below the sticky box...</dt-text>
+    <div class="d-h-400"></div>
+    <dt-text kind="body" :size="200">...end of scroll content.</dt-text>
+  </dt-box>
+</div>
+```
+
+  </dt-stack>
+</dt-stack>
+<!-- ============================================================ -->
+<!-- DtBox V1 demos                                               -->
+<!-- ============================================================ -->
+
+<dt-stack class="d-p-400" gap="400">
+  <dt-text as="h2" kind="headline" size="lg">DtBox V1</dt-text>
+
+  <dt-text kind="headline" size="md">Basic padding + surface</dt-text>
+  <dt-stack direction="row" gap="200">
+    <dt-box padding="200" surface="primary" class="d-ba d-bc-subtle">
+      <dt-text kind="body" size="md">padding="200" surface="primary"</dt-text>
+    </dt-box>
+    <dt-box padding="300" surface="moderate" class="d-ba d-bc-subtle">
+      <dt-text kind="body" size="md">padding="300" surface="moderate"</dt-text>
+    </dt-box>
+    <dt-box padding="400" surface="brand-subtle" class="d-ba d-bc-subtle">
+      <dt-text kind="body" size="md">padding="400" surface="brand-subtle"</dt-text>
+    </dt-box>
+  </dt-stack>
+
+  <dt-text kind="headline" size="md">Padding cascade</dt-text>
+  <dt-stack direction="row" gap="200">
+    <dt-box padding="400" surface="secondary" class="d-ba d-bc-subtle">
+      <dt-text kind="body" size="sm">padding="400" (all sides)</dt-text>
+    </dt-box>
+    <dt-box padding="400" padding-inline="100" surface="secondary" class="d-ba d-bc-subtle">
+      <dt-text kind="body" size="sm">+ paddingInline="100"</dt-text>
+    </dt-box>
+    <dt-box padding="400" padding-inline="100" padding-inline-start="0" surface="secondary" class="d-ba d-bc-subtle">
+      <dt-text kind="body" size="sm">+ paddingInlineStart="0"</dt-text>
+    </dt-box>
+  </dt-stack>
+
+  <dt-text kind="headline" size="md">Polymorphic as</dt-text>
+  <dt-stack gap="100">
+    <dt-box as="section" padding="200" surface="info-subtle" class="d-ba d-bc-subtle">
+      <dt-text kind="body" size="sm">as="section"</dt-text>
+    </dt-box>
+    <dt-box as="nav" padding="200" surface="warning-subtle" class="d-ba d-bc-subtle">
+      <dt-text kind="body" size="sm">as="nav"</dt-text>
+    </dt-box>
+    <dt-box as="header" padding="200" surface="success-subtle" class="d-ba d-bc-subtle">
+      <dt-text kind="body" size="sm">as="header"</dt-text>
+    </dt-box>
+  </dt-stack>
+
+  <dt-text kind="headline" size="md">Nested inheritance isolation</dt-text>
+  <dt-box padding="500" surface="brand-subtle" class="d-ba d-bc-subtle">
+    <dt-text kind="body" size="md">Outer: padding="500" surface="brand-subtle"</dt-text>
+    <dt-box padding="200" surface="primary" class="d-mt-200 d-ba d-bc-subtle">
+      <dt-text kind="body" size="md">Inner: padding="200" surface="primary" (independent)</dt-text>
+    </dt-box>
+    <dt-box surface="critical-subtle" class="d-mt-200 d-ba d-bc-subtle">
+      <dt-text kind="body" size="md">Inner: no padding prop (should be 0, not 500)</dt-text>
+    </dt-box>
+  </dt-box>
+
+  <dt-text kind="headline" size="md">Utility class escape hatch</dt-text>
+  <dt-box padding="200" surface="primary" class="d-ba d-bc-default d-bar-200">
+    <dt-text kind="body" size="md">DtBox props + utility class="d-ba d-bc-default d-bar-200"</dt-text>
+  </dt-box>
+
+  <dt-text kind="headline" size="md">Surface opaque variants</dt-text>
+  <dt-stack direction="row" gap="200">
+    <dt-box padding="200" surface="brand-subtle-opaque" class="d-ba d-bc-subtle">
+      <dt-text kind="body" size="sm">brand-subtle-opaque</dt-text>
+    </dt-box>
+    <dt-box padding="200" surface="success-opaque" class="d-ba d-bc-subtle">
+      <dt-text kind="body" size="sm">success-opaque</dt-text>
+    </dt-box>
+    <dt-box padding="200" surface="critical-opaque" class="d-ba d-bc-subtle">
+      <dt-text kind="body" size="sm">critical-opaque</dt-text>
+    </dt-box>
+  </dt-stack>
+</dt-stack>
+
 <div class="d-h-1200"></div>

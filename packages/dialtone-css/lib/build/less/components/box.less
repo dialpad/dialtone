@@ -1,0 +1,89 @@
+//
+//  DIALTONE
+//  COMPONENTS: BOX
+//
+//  These are the styles for box component.
+//
+//
+//  TABLE OF CONTENTS
+//  • @PROPERTY REGISTRATIONS
+//  • PARAMETRIC MIXINS
+//  • VALUE LISTS
+//  • BASE STYLE
+//  • MODIFIERS
+
+//  @@  @PROPERTY REGISTRATIONS
+//  ----------------------------------------------------------------------------
+@property --box-p { syntax: "*"; inherits: false; }
+@property --box-pi { syntax: "*"; inherits: false; }
+@property --box-pis { syntax: "*"; inherits: false; }
+@property --box-pie { syntax: "*"; inherits: false; }
+@property --box-pbl { syntax: "*"; inherits: false; }
+@property --box-pbs { syntax: "*"; inherits: false; }
+@property --box-pbe { syntax: "*"; inherits: false; }
+@property --box-surface { syntax: "<color>"; inherits: false; initial-value: transparent; }
+
+//  ============================================================================
+//  $   PARAMETRIC MIXINS
+//  ----------------------------------------------------------------------------
+._box-token(@prefix; @prop; @token; @names) {
+  each(@names, {
+    .d-box--@{prefix}-@{value} { @{prop}: ~"var(--@{token}-@{value})"; }
+  });
+}
+
+._box-spacing(@prop) {
+  // Stops outside both range() sequences: 1 (not a multiple of 25), 525 (not a multiple of 50)
+  &-1 { @{prop}: var(--dt-spacing-1); }
+  &-525 { @{prop}: var(--dt-spacing-525); }
+
+  each(range(0, 200, 25), {
+    &-@{value} { @{prop}: ~"var(--dt-spacing-@{value})"; }
+  });
+
+  each(range(250, 800, 50), {
+    &-@{value} { @{prop}: ~"var(--dt-spacing-@{value})"; }
+  });
+}
+
+//  ============================================================================
+//  $   VALUE LISTS
+//  ----------------------------------------------------------------------------
+@box-surface-values: primary, secondary, moderate, bold, strong, contrast, backdrop, brand, info, success, warning, critical, brand-subtle, brand-strong, info-subtle, info-strong, success-subtle, success-strong, warning-subtle, warning-strong, critical-subtle, critical-strong, primary-opaque, secondary-opaque, moderate-opaque, bold-opaque, strong-opaque, contrast-opaque, brand-opaque, brand-subtle-opaque, info-opaque, info-subtle-opaque, success-opaque, success-subtle-opaque, warning-opaque, warning-subtle-opaque, critical-opaque, critical-subtle-opaque;
+
+@layer dialtone.components {
+
+//  @@  BASE STYLE
+//  ----------------------------------------------------------------------------
+.d-box {
+  box-sizing: border-box;
+
+  // Padding cascade: specific → axis → shorthand → 0
+  padding-block-start:  var(--box-pbs, var(--box-pbl, var(--box-p, 0)));
+  padding-block-end:    var(--box-pbe, var(--box-pbl, var(--box-p, 0)));
+  padding-inline-start: var(--box-pis, var(--box-pi,  var(--box-p, 0)));
+  padding-inline-end:   var(--box-pie, var(--box-pi,  var(--box-p, 0)));
+
+  // Surface — @property provides transparent default
+  background-color: var(--box-surface);
+}
+
+//  ============================================================================
+//  $   MODIFIERS
+//  ----------------------------------------------------------------------------
+//  $$  PADDING
+//  ----------------------------------------------------------------------------
+.d-box--p   { ._box-spacing(--box-p); }
+.d-box--pi  { ._box-spacing(--box-pi); }
+.d-box--pis { ._box-spacing(--box-pis); }
+.d-box--pie { ._box-spacing(--box-pie); }
+.d-box--pbl { ._box-spacing(--box-pbl); }
+.d-box--pbs { ._box-spacing(--box-pbs); }
+.d-box--pbe { ._box-spacing(--box-pbe); }
+
+//  ----------------------------------------------------------------------------
+//  $$  SURFACE
+//  ----------------------------------------------------------------------------
+._box-token(surface; --box-surface; dt-color-surface; @box-surface-values);
+
+}

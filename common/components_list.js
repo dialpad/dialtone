@@ -3,6 +3,7 @@ module.exports = [
   'avatar.vue',
   'badge.vue',
   'banner.vue',
+  'box.vue',
   'breadcrumbs.vue',
   'button.vue',
   'button_group.vue',
