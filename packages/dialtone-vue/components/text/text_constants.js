@@ -37,8 +37,6 @@ export const TEXT_TONE_MODIFIERS = {
   'critical-strong': 'd-text--tone-critical-strong',
   'positive': 'd-text--tone-positive',
   'positive-strong': 'd-text--tone-positive-strong',
-  'success': 'd-text--tone-success',
-  'success-strong': 'd-text--tone-success-strong',
   'warning': 'd-text--tone-warning',
   'neutral-black': 'd-text--tone-neutral-black',
   'neutral-white': 'd-text--tone-neutral-white',
