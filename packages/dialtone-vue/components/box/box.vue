@@ -1,25 +1,29 @@
 <template>
   <component
     :is="as"
-    ref="boxRef"
+    v-if="scrollbar"
+    v-dt-scrollbar:[scrollbarMode]
     data-qa="dt-box"
     :class="boxClasses"
-    :style="boxStyle"
   >
-    <div
-      v-if="scrollbar"
-      class="d-box__scrollbar-content"
-    >
+    <div class="d-box__scrollbar-content">
       <!-- @slot Slot for main content -->
       <slot />
     </div>
+  </component>
+  <component
+    :is="as"
+    v-else
+    data-qa="dt-box"
+    :class="boxClasses"
+  >
     <!-- @slot Slot for main content -->
-    <slot v-else />
+    <slot />
   </component>
 </template>
 
 <script setup>
-import { computed, ref, onMounted, onUnmounted, watch } from 'vue';
+import { computed } from 'vue';
 import {
   asValidator,
   spacingValidator,
@@ -28,10 +32,10 @@ import {
   borderWidthValidator,
   borderRadiusValidator,
   shadowValidator,
+  layoutValidator,
   overflowValidator,
   scrollbarValidator,
 } from './validators.js';
-import { DT_BOX_LAYOUT_VALUES } from './box_constants.js';
 
 defineOptions({
   name: 'DtBox',
@@ -170,53 +174,59 @@ const props = defineProps({
   },
 
   /**
-   * Inline size. Accepts layout token scale values or raw CSS.
+   * Inline size. Maps to --dt-layout-* tokens.
    * @values 0, 25, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600
    */
   inlineSize: {
     type: String,
     default: undefined,
+    validator: layoutValidator,
   },
 
   /**
-   * Block size. Accepts layout token scale values or raw CSS.
+   * Block size. Maps to --dt-layout-* tokens.
    * @values 0, 25, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600
    */
   blockSize: {
     type: String,
     default: undefined,
+    validator: layoutValidator,
   },
 
   /**
-   * Minimum inline size. Accepts layout token scale values or raw CSS.
+   * Minimum inline size. Maps to --dt-layout-* tokens.
    */
   minInlineSize: {
     type: String,
     default: undefined,
+    validator: layoutValidator,
   },
 
   /**
-   * Maximum inline size. Accepts layout token scale values or raw CSS.
+   * Maximum inline size. Maps to --dt-layout-* tokens.
    */
   maxInlineSize: {
     type: String,
     default: undefined,
+    validator: layoutValidator,
   },
 
   /**
-   * Minimum block size. Accepts layout token scale values or raw CSS.
+   * Minimum block size. Maps to --dt-layout-* tokens.
    */
   minBlockSize: {
     type: String,
     default: undefined,
+    validator: layoutValidator,
   },
 
   /**
-   * Maximum block size. Accepts layout token scale values or raw CSS.
+   * Maximum block size. Maps to --dt-layout-* tokens.
    */
   maxBlockSize: {
     type: String,
     default: undefined,
+    validator: layoutValidator,
   },
 
   /**
@@ -241,69 +251,13 @@ const props = defineProps({
   },
 });
 
-const boxRef = ref(null);
-let scrollbarInstance = null;
-
-function resolveAutoHide (value) {
-  if (value === true) return 'leave';
-  return String(value);
-}
-
-async function initScrollbar () {
-  if (!props.scrollbar || !boxRef.value?.$el) return;
-  const el = boxRef.value.$el || boxRef.value;
-  const { OverlayScrollbars, ClickScrollPlugin } = await import('overlayscrollbars');
-  OverlayScrollbars.plugin(ClickScrollPlugin);
-  scrollbarInstance = OverlayScrollbars({
-    target: el,
-    elements: {
-      viewport: el.querySelector('.d-box__scrollbar-content'),
-    },
-  }, {
-    scrollbars: {
-      autoHide: resolveAutoHide(props.scrollbar),
-      clickScroll: true,
-      autoHideDelay: resolveAutoHide(props.scrollbar) === 'leave' ? 0 : 1300,
-    },
-  });
-  el.setAttribute('data-overlayscrollbars-initialize', true);
-  el.classList.add('d-scrollbar');
-}
-
-function destroyScrollbar () {
-  if (scrollbarInstance) {
-    scrollbarInstance.destroy();
-    scrollbarInstance = null;
-  }
-}
-
-onMounted(() => {
-  if (props.scrollbar) initScrollbar();
+const scrollbarMode = computed(() => {
+  if (props.scrollbar === true) return 'leave';
+  return props.scrollbar || undefined;
 });
-
-onUnmounted(() => {
-  destroyScrollbar();
-});
-
-watch(() => props.scrollbar, (newVal, oldVal) => {
-  if (oldVal && !newVal) destroyScrollbar();
-  if (newVal && !oldVal) initScrollbar();
-});
-
-function isLayoutToken (value) {
-  return DT_BOX_LAYOUT_VALUES.includes(String(value));
-}
 
 function modifierClass (prefix, value) {
   return value ? `${prefix}-${value}` : false;
-}
-
-function sizingClass (prefix, value) {
-  return value && isLayoutToken(value) ? `${prefix}-${value}` : false;
-}
-
-function sizingStyle (prop, value) {
-  return value && !isLayoutToken(value) ? [prop, value] : null;
 }
 
 function paddingClasses (p) {
@@ -331,12 +285,12 @@ function visualClasses (p) {
 
 function sizingClasses (p) {
   return [
-    sizingClass('d-box--is', p.inlineSize),
-    sizingClass('d-box--bls', p.blockSize),
-    sizingClass('d-box--min-is', p.minInlineSize),
-    sizingClass('d-box--max-is', p.maxInlineSize),
-    sizingClass('d-box--min-bls', p.minBlockSize),
-    sizingClass('d-box--max-bls', p.maxBlockSize),
+    modifierClass('d-box--is', p.inlineSize),
+    modifierClass('d-box--bls', p.blockSize),
+    modifierClass('d-box--min-is', p.minInlineSize),
+    modifierClass('d-box--max-is', p.maxInlineSize),
+    modifierClass('d-box--min-bls', p.minBlockSize),
+    modifierClass('d-box--max-bls', p.maxBlockSize),
   ];
 }
 
@@ -346,21 +300,4 @@ const boxClasses = computed(() => [
   ...visualClasses(props),
   ...sizingClasses(props),
 ]);
-
-// Inline style — ONLY for sizing raw CSS fallback
-const boxStyle = computed(() => {
-  const s = {};
-  const pairs = [
-    sizingStyle('inline-size', props.inlineSize),
-    sizingStyle('block-size', props.blockSize),
-    sizingStyle('min-inline-size', props.minInlineSize),
-    sizingStyle('max-inline-size', props.maxInlineSize),
-    sizingStyle('min-block-size', props.minBlockSize),
-    sizingStyle('max-block-size', props.maxBlockSize),
-  ];
-  for (const pair of pairs) {
-    if (pair) s[pair[0]] = pair[1];
-  }
-  return Object.keys(s).length ? s : undefined;
-});
 </script>

@@ -449,7 +449,6 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
 
 ### Contact List, with custom selector
 
-
 ```vue demo
 <dt-stack role="list" v-dt-focusgroup="{ axis: 'vertical', loop: false, selector: '[data-custom-attribute-name]' }" aria-label="Contacts" class="d-w-400">
   <dt-hovercard placement="right">
@@ -1358,21 +1357,11 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
 
 ```vue demo
 <dt-stack gap="200">
-  <dt-box padding="200" surface="secondary">
-    <dt-text kind="body" :size="200">padding="200" surface="secondary"</dt-text>
-  </dt-box>
-  <dt-box padding="400" surface="moderate">
-    <dt-text kind="body" :size="200">padding="400" surface="moderate"</dt-text>
-  </dt-box>
-  <dt-box padding="100" surface="success-subtle">
-    <dt-text kind="body" :size="200">padding="100" surface="success-subtle"</dt-text>
-  </dt-box>
-  <dt-box padding="100" surface="critical-subtle">
-    <dt-text kind="body" :size="200">padding="100" surface="critical-subtle"</dt-text>
-  </dt-box>
-  <dt-box padding="200" surface="brand">
-    <dt-text kind="body" :size="200">padding="200" surface="brand"</dt-text>
-  </dt-box>
+  <dt-box padding="200" surface="secondary">Box demo</dt-box>
+  <dt-box padding="400" surface="moderate">Box demo</dt-box>
+  <dt-box padding="100" surface="success-subtle">Box demo</dt-box>
+  <dt-box padding="100" surface="critical-subtle">Box demo</dt-box>
+  <dt-box padding="200" surface="brand">Box demo</dt-box>
 </dt-stack>
 ```
 
@@ -1390,21 +1379,11 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
 
 ```vue demo
 <dt-stack gap="200">
-  <dt-box as="div" padding="100" surface="secondary">
-    <dt-text kind="body" :size="200">as="div" (default)</dt-text>
-  </dt-box>
-  <dt-box as="section" padding="100" surface="secondary">
-    <dt-text kind="body" :size="200">as="section"</dt-text>
-  </dt-box>
-  <dt-box as="header" padding="100" surface="secondary">
-    <dt-text kind="body" :size="200">as="header"</dt-text>
-  </dt-box>
-  <dt-box as="nav" padding="100" surface="secondary">
-    <dt-text kind="body" :size="200">as="nav"</dt-text>
-  </dt-box>
-  <dt-box as="article" padding="100" surface="secondary">
-    <dt-text kind="body" :size="200">as="article"</dt-text>
-  </dt-box>
+  <dt-box as="div" padding="100" surface="secondary">Box demo</dt-box>
+  <dt-box as="section" padding="100" surface="secondary">Box demo</dt-box>
+  <dt-box as="header" padding="100" surface="secondary">Box demo</dt-box>
+  <dt-box as="nav" padding="100" surface="secondary">Box demo</dt-box>
+  <dt-box as="article" padding="100" surface="secondary">Box demo</dt-box>
 </dt-stack>
 ```
 
@@ -1422,31 +1401,11 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
 
 ```vue demo
 <dt-stack gap="200">
-  <dt-box padding="100" surface="moderate">
-    <dt-text kind="body" :size="200">padding="100" (uniform)</dt-text>
-  </dt-box>
-  <dt-box padding="100" padding-inline="400" surface="moderate">
-    <dt-text kind="body" :size="200">padding="100" paddingInline="400" (wider sides)</dt-text>
-  </dt-box>
-  <dt-box padding="100" padding-block="400" surface="moderate">
-    <dt-text kind="body" :size="200">padding="100" paddingBlock="400" (taller top/bottom)</dt-text>
-  </dt-box>
-  <dt-box
-    padding="100"
-    padding-inline="200"
-    padding-inline-start="500"
-    surface="moderate"
-  >
-    <dt-text kind="body" :size="200">padding="100" paddingInline="200" paddingInlineStart="500"</dt-text>
-  </dt-box>
-  <dt-box
-    padding="100"
-    padding-block="200"
-    padding-block-start="500"
-    surface="moderate"
-  >
-    <dt-text kind="body" :size="200">padding="100" paddingBlock="200" paddingBlockStart="500"</dt-text>
-  </dt-box>
+  <dt-box padding="100" surface="moderate">Box demo</dt-box>
+  <dt-box padding="100" padding-inline="400" surface="moderate">Box demo</dt-box>
+  <dt-box padding="100" padding-block="400" surface="moderate">Box demo</dt-box>
+  <dt-box padding="100" padding-inline="200" padding-inline-start="500" surface="moderate">Box demo</dt-box>
+  <dt-box padding="100" padding-block="200" padding-block-start="500" surface="moderate">Box demo</dt-box>
 </dt-stack>
 ```
 
@@ -1464,13 +1423,11 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
 
 ```vue demo
 <dt-box padding="400" surface="brand">
-  <dt-text kind="body" :size="200">Outer: padding="400" surface="brand"</dt-text>
-  <dt-box padding="100" surface="secondary" class="d-mt-100">
-    <dt-text kind="body" :size="200">Inner: padding="100" surface="secondary" (should not inherit outer)</dt-text>
-  </dt-box>
-  <dt-box class="d-mt-100">
-    <dt-text kind="body" :size="200">Inner: no props (should have 0 padding, transparent surface)</dt-text>
-  </dt-box>
+  <dt-stack gap="100">
+    <div>Outer box</div>
+    <dt-box padding="100" surface="secondary">Inner box (should not inherit outer)</dt-box>
+    <dt-box>Inner box, no props (should have 0 padding, transparent surface)</dt-box>
+  </dt-stack>
 </dt-box>
 ```
 
@@ -1488,20 +1445,14 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
 
 ```vue demo
 <dt-box padding="200" surface="brand">
-  <dt-text kind="body" :size="200" class="d-mb-100">Parent: surface="brand"</dt-text>
-  <dt-stack direction="row" gap="100">
-    <dt-box padding="100" surface="primary">
-      <dt-text kind="body" :size="100">primary (alpha)</dt-text>
-    </dt-box>
-    <dt-box padding="100" surface="primary-opaque">
-      <dt-text kind="body" :size="100">primary-opaque (solid)</dt-text>
-    </dt-box>
-    <dt-box padding="100" surface="secondary">
-      <dt-text kind="body" :size="100">secondary (alpha)</dt-text>
-    </dt-box>
-    <dt-box padding="100" surface="secondary-opaque">
-      <dt-text kind="body" :size="100">secondary-opaque (solid)</dt-text>
-    </dt-box>
+  <dt-stack gap="100">
+    <div>Parent surface="brand"</div>
+    <dt-stack direction="row" gap="100">
+      <dt-box padding="100" surface="primary">Box demo</dt-box>
+      <dt-box padding="100" surface="primary-opaque">Box demo</dt-box>
+      <dt-box padding="100" surface="secondary">Box demo</dt-box>
+      <dt-box padding="100" surface="secondary-opaque">Box demo</dt-box>
+    </dt-stack>
   </dt-stack>
 </dt-box>
 ```
@@ -1519,12 +1470,8 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
     </dt-text>
 
 ```vue demo
-<dt-box
-  padding="200"
-  surface="moderate"
-  class="d-bar8 d-bs-sm"
->
-  <dt-text kind="body" :size="200">class="d-bar8 d-bs-sm" (border-radius + box-shadow via utilities)</dt-text>
+<dt-box padding="200" surface="moderate" class="d-bar8 d-bs-sm">
+  Box demo
 </dt-box>
 ```
 
@@ -1535,7 +1482,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
     surface="secondary"
     class="d-ps-sticky d-t0"
   >
-    <dt-text kind="body" :size="200">class="d-ps-sticky d-t0" (sticky header via utilities)</dt-text>
+    <dt-text kind="body" :size="200">Box demo</dt-text>
   </dt-box>
   <dt-box padding="200">
     <dt-text kind="body" :size="200">Scroll content below the sticky box...</dt-text>
@@ -1548,169 +1495,160 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
   </dt-stack>
 </dt-stack>
 <!-- ============================================================ -->
-<!-- DtBox V1 demos                                               -->
+<!-- DtBox demos (V1–V4)                                          -->
 <!-- ============================================================ -->
 
 <dt-stack class="d-p-400" gap="400">
-  <dt-text as="h2" kind="headline" size="lg">DtBox V1</dt-text>
+  <dt-text as="h2" kind="headline" size="lg">DtBox</dt-text>
 
   <dt-text kind="headline" size="md">Basic padding + surface</dt-text>
-  <dt-stack direction="row" gap="200">
-    <dt-box padding="200" surface="primary" border-color="subtle" border-width="100">
-      <dt-text kind="body" size="md">padding="200" surface="primary"</dt-text>
-    </dt-box>
-    <dt-box padding="300" surface="moderate" border-color="subtle" border-width="100">
-      <dt-text kind="body" size="md">padding="300" surface="moderate"</dt-text>
-    </dt-box>
-    <dt-box padding="400" surface="brand-subtle" border-color="subtle" border-width="100">
-      <dt-text kind="body" size="md">padding="400" surface="brand-subtle"</dt-text>
-    </dt-box>
-  </dt-stack>
+
+```vue demo
+<dt-stack direction="row" gap="200">
+  <dt-box padding="200" surface="primary" border-color="subtle" border-width="100">Box demo</dt-box>
+  <dt-box padding="300" surface="moderate" border-color="subtle" border-width="100">Box demo</dt-box>
+  <dt-box padding="400" surface="brand-subtle" border-color="subtle" border-width="100">Box demo</dt-box>
+</dt-stack>
+```
 
   <dt-text kind="headline" size="md">Padding cascade</dt-text>
-  <dt-stack direction="row" gap="200">
-    <dt-box padding="400" surface="secondary" border-color="subtle" border-width="100">
-      <dt-text kind="body" size="sm">padding="400" (all sides)</dt-text>
-    </dt-box>
-    <dt-box padding="400" padding-inline="100" surface="secondary" border-color="subtle" border-width="100">
-      <dt-text kind="body" size="sm">+ paddingInline="100"</dt-text>
-    </dt-box>
-    <dt-box padding="400" padding-inline="100" padding-inline-start="0" surface="secondary" border-color="subtle" border-width="100">
-      <dt-text kind="body" size="sm">+ paddingInlineStart="0"</dt-text>
-    </dt-box>
-  </dt-stack>
+
+```vue demo
+<dt-stack direction="row" gap="200">
+  <dt-box padding="400" surface="secondary" border-color="subtle" border-width="100">Box demo</dt-box>
+  <dt-box padding="400" padding-inline="100" surface="secondary" border-color="subtle" border-width="100">Box demo</dt-box>
+  <dt-box padding="400" padding-inline="100" padding-inline-start="0" surface="secondary" border-color="subtle" border-width="100">Box demo</dt-box>
+</dt-stack>
+```
 
   <dt-text kind="headline" size="md">Polymorphic as</dt-text>
-  <dt-stack gap="100">
-    <dt-box as="section" padding="200" surface="info-subtle" border-color="subtle" border-width="100">
-      <dt-text kind="body" size="sm">as="section"</dt-text>
-    </dt-box>
-    <dt-box as="nav" padding="200" surface="warning-subtle" border-color="subtle" border-width="100">
-      <dt-text kind="body" size="sm">as="nav"</dt-text>
-    </dt-box>
-    <dt-box as="header" padding="200" surface="success-subtle" border-color="subtle" border-width="100">
-      <dt-text kind="body" size="sm">as="header"</dt-text>
-    </dt-box>
-  </dt-stack>
+
+```vue demo
+<dt-stack gap="100">
+  <dt-box as="section" padding="200" surface="info-subtle" border-color="subtle" border-width="100">Box demo</dt-box>
+  <dt-box as="nav" padding="200" surface="warning-subtle" border-color="subtle" border-width="100">Box demo</dt-box>
+  <dt-box as="header" padding="200" surface="success-subtle" border-color="subtle" border-width="100">Box demo</dt-box>
+</dt-stack>
+```
 
   <dt-text kind="headline" size="md">Nested inheritance isolation</dt-text>
-  <dt-box padding="500" surface="brand-subtle" border-color="subtle" border-width="100">
-    <dt-stack gap="200">
-      <dt-text kind="body" size="md">Outer: padding="500" surface="brand-subtle"</dt-text>
-      <dt-box padding="200" surface="primary" border-color="subtle" border-width="100">
-        <dt-text kind="body" size="md">Inner: padding="200" surface="primary" (independent)</dt-text>
-      </dt-box>
-      <dt-box surface="critical-subtle" border-color="subtle" border-width="100">
-        <dt-text kind="body" size="md">Inner: no padding prop (should be 0, not 500)</dt-text>
-      </dt-box>
-    </dt-stack>
-  </dt-box>
+
+```vue demo
+<dt-box padding="500" surface="brand-subtle" border-color="subtle" border-width="100">
+  <dt-stack gap="200">
+    <div>Outer box</div>
+    <dt-box padding="200" surface="primary" border-color="subtle" border-width="100">Inner box (independent)</dt-box>
+    <dt-box surface="critical-subtle" border-color="subtle" border-width="100">Inner box, no padding (should be 0)</dt-box>
+  </dt-stack>
+</dt-box>
+```
 
   <dt-text kind="headline" size="md">Utility class escape hatch</dt-text>
-  <dt-box padding="200" surface="primary" border-color="default" border-width="100" border-radius="200" class="d-ps-sticky d-t0">
-    <dt-text kind="body" size="md">DtBox border props + utility class="d-ps-sticky d-t0"</dt-text>
-  </dt-box>
 
-  <dt-text kind="headline" size="md">V2: Card compositions</dt-text>
-  <dt-stack direction="row" gap="200">
-    <dt-box padding="300" surface="primary" border-color="subtle" border-width="100" border-radius="300" shadow="card">
-      <dt-text kind="body" size="sm">Card: subtle border + radius + card shadow</dt-text>
-    </dt-box>
-    <dt-box padding="300" surface="primary" border-color="default" border-width="100" border-radius="400" shadow="medium">
-      <dt-text kind="body" size="sm">Elevated: default border + more radius + medium shadow</dt-text>
-    </dt-box>
-    <dt-box padding="300" surface="brand-subtle" border-color="brand" border-width="100" border-radius="200">
-      <dt-text kind="body" size="sm">Brand card: no shadow</dt-text>
-    </dt-box>
+```vue demo
+<dt-box padding="200" surface="primary" border-color="default" border-width="100" border-radius="200" class="d-ps-sticky d-t0">
+  Box demo
+</dt-box>
+```
+
+  <dt-text kind="headline" size="md">Card compositions</dt-text>
+
+```vue demo
+<dt-stack direction="row" gap="200">
+  <dt-box padding="300" surface="primary" border-color="subtle" border-width="100" border-radius="300" shadow="card">Box demo</dt-box>
+  <dt-box padding="300" surface="primary" border-color="default" border-width="100" border-radius="400" shadow="medium">Box demo</dt-box>
+  <dt-box padding="300" surface="brand-subtle" border-color="brand" border-width="100" border-radius="200">Box demo</dt-box>
+</dt-stack>
+```
+
+  <dt-text kind="headline" size="md">Shadow scale</dt-text>
+
+```vue demo
+<dt-stack direction="row" gap="300">
+  <dt-box padding="200" surface="primary" border-radius="200" shadow="small">Box demo</dt-box>
+  <dt-box padding="200" surface="primary" border-radius="200" shadow="medium">Box demo</dt-box>
+  <dt-box padding="200" surface="primary" border-radius="200" shadow="large">Box demo</dt-box>
+  <dt-box padding="200" surface="primary" border-radius="200" shadow="extra-large">Box demo</dt-box>
+  <dt-box padding="200" surface="primary" border-radius="200" shadow="card">Box demo</dt-box>
+</dt-stack>
+```
+
+  <dt-text kind="headline" size="md">Border radius variants</dt-text>
+
+```vue demo
+<dt-stack direction="row" gap="200" align="center">
+  <dt-box padding="100" surface="moderate" border-color="subtle" border-width="100" border-radius="0">0 long label lorem <br> second line</dt-box>
+  <dt-box padding="100" surface="moderate" border-color="subtle" border-width="100" border-radius="200">200 long label lorem <br> second line</dt-box>
+  <dt-box padding="100" surface="moderate" border-color="subtle" border-width="100" border-radius="400">400 long label lorem <br> second line</dt-box>
+  <dt-box padding="100" surface="moderate" border-color="subtle" border-width="100" border-radius="600">600 long label lorem <br> second line</dt-box>
+  <dt-box padding="100" surface="moderate" border-color="subtle" border-width="100" border-radius="pill">pill long label lorem</dt-box>
+  <dt-box padding="100" surface="moderate" border-color="subtle" border-width="100" border-radius="circle">circle</dt-box>
+</dt-stack>
+```
+
+  <dt-text kind="headline" size="md">No border props = invisible border</dt-text>
+
+```vue demo
+<dt-stack direction="row" gap="200">
+  <dt-box padding="200" surface="secondary">Box demo (no border props)</dt-box>
+  <dt-box padding="200" surface="secondary" border-color="default" border-width="100">Box demo (with border props)</dt-box>
+</dt-stack>
+```
+
+  <dt-text kind="headline" size="md">Layout token sizing</dt-text>
+
+```vue demo
+<dt-stack direction="row" gap="200">
+  <dt-box padding="200" surface="secondary" border-color="subtle" border-width="100" inline-size="300">Box demo</dt-box>
+  <dt-box padding="200" surface="secondary" border-color="subtle" border-width="100" inline-size="500">Box demo</dt-box>
+</dt-stack>
+```
+
+  <dt-text kind="headline" size="md">Class escape hatch for arbitrary sizing</dt-text>
+
+```vue demo
+<dt-stack gap="200">
+  <dt-box padding="200" surface="secondary" border-color="subtle" border-width="100" class="d-wmx-464">Box demo</dt-box>
+  <dt-box padding="200" surface="secondary" border-color="subtle" border-width="100" class="d-hmn-164">Box demo</dt-box>
+</dt-stack>
+```
+
+  <dt-text kind="headline" size="md">Overflow + borderRadius clipping</dt-text>
+
+```vue demo
+<dt-box surface="secondary" border-color="subtle" border-width="100" border-radius="400" overflow="hidden" inline-size="500" max-block-size="200">
+  <div class="d-p-200 d-bgc-brand-subtle d-h-400">
+    Tall content clipped by overflow="hidden" and borderRadius="400"
+  </div>
+</dt-box>
+```
+
+  <dt-text kind="headline" size="md">Scrollbar integration</dt-text>
+
+```vue demo
+<dt-box padding="200" surface="secondary" border-color="subtle" border-width="100" border-radius="200" scrollbar="never" max-block-size="300">
+  <dt-stack gap="100">
+    <div v-for="i in 20" :key="i">Scrollable item {{ i }}</div>
   </dt-stack>
+</dt-box>
+```
 
-  <dt-text kind="headline" size="md">V2: Shadow scale</dt-text>
-  <dt-stack direction="row" gap="300">
-    <dt-box v-for="s in ['small', 'medium', 'large', 'extra-large', 'card']" :key="s" padding="200" surface="primary" border-radius="200" :shadow="s">
-      <dt-text kind="label" size="sm">{{ s }}</dt-text>
-    </dt-box>
+```vue demo
+<dt-box padding="200" surface="secondary" border-color="subtle" border-width="100" border-radius="200" scrollbar="leave" max-block-size="300">
+  <dt-stack gap="100">
+    <div v-for="i in 20" :key="i">Scrollable item {{ i }}</div>
   </dt-stack>
+</dt-box>
+```
 
-  <dt-text kind="headline" size="md">V2: Border radius variants</dt-text>
-  <dt-stack direction="row" gap="200" align="center">
-    <dt-box v-for="r in ['0', '200', '300', '400', '500', '600', 'pill', 'circle']" :key="r" padding="200" surface="moderate" border-color="subtle" border-width="100" :border-radius="r" class="d-d-flex d-ai-center d-jc-center" style="min-width: 64px; min-height: 64px;">
-      <dt-text kind="label" size="sm">{{ r }}</dt-text>
-    </dt-box>
+```vue demo
+<dt-box padding="200" surface="secondary" border-color="subtle" border-width="100" border-radius="200" overflow="auto" max-block-size="300">
+  <dt-stack gap="100">
+    <div v-for="i in 20" :key="i">Scrollable item {{ i }} (native scrollbar)</div>
   </dt-stack>
+</dt-box>
+```
 
-  <dt-text kind="headline" size="md">V2: No border props = invisible border</dt-text>
-  <dt-stack direction="row" gap="200">
-    <dt-box padding="200" surface="secondary">
-      <dt-text kind="body" size="sm">No border props (@property defaults = invisible)</dt-text>
-    </dt-box>
-    <dt-box padding="200" surface="secondary" border-color="default" border-width="100">
-      <dt-text kind="body" size="sm">With border props = visible</dt-text>
-    </dt-box>
-  </dt-stack>
-
-  <dt-text kind="headline" size="md">Surface opaque variants</dt-text>
-  <dt-stack direction="row" gap="200">
-    <dt-box padding="200" surface="brand-subtle-opaque" border-color="subtle" border-width="100">
-      <dt-text kind="body" size="sm">brand-subtle-opaque</dt-text>
-    </dt-box>
-    <dt-box padding="200" surface="success-opaque" border-color="subtle" border-width="100">
-      <dt-text kind="body" size="sm">success-opaque</dt-text>
-    </dt-box>
-    <dt-box padding="200" surface="critical-opaque" border-color="subtle" border-width="100">
-      <dt-text kind="body" size="sm">critical-opaque</dt-text>
-    </dt-box>
-  </dt-stack>
-
-  <dt-text kind="headline" size="md">V3: Layout token sizing</dt-text>
-  <dt-stack direction="row" gap="200">
-    <dt-box padding="200" surface="secondary" border-color="subtle" border-width="100" inline-size="300">
-      <dt-text kind="body" size="sm">inlineSize="300" (192px via layout token)</dt-text>
-    </dt-box>
-    <dt-box padding="200" surface="secondary" border-color="subtle" border-width="100" inline-size="500">
-      <dt-text kind="body" size="sm">inlineSize="500" (320px)</dt-text>
-    </dt-box>
-  </dt-stack>
-
-  <dt-text kind="headline" size="md">V3: Raw CSS sizing fallback</dt-text>
-  <dt-stack gap="200">
-    <dt-box padding="200" surface="secondary" border-color="subtle" border-width="100" max-inline-size="480px">
-      <dt-text kind="body" size="sm">maxInlineSize="480px" (raw CSS — not a layout token)</dt-text>
-    </dt-box>
-    <dt-box padding="200" surface="secondary" border-color="subtle" border-width="100" min-block-size="calc(100px + 2rem)">
-      <dt-text kind="body" size="sm">minBlockSize="calc(100px + 2rem)" (raw CSS expression)</dt-text>
-    </dt-box>
-  </dt-stack>
-
-  <dt-text kind="headline" size="md">V3: Overflow + borderRadius clipping</dt-text>
-  <dt-box padding="0" surface="secondary" border-color="subtle" border-width="100" border-radius="400" overflow="hidden" max-block-size="100" inline-size="500">
-    <div class="d-p-200 d-bgc-brand-subtle" style="height: 200px;">
-      <dt-text kind="body" size="sm">This content is taller than the box — overflow="hidden" clips it. borderRadius="400" rounds the clip.</dt-text>
-    </div>
-  </dt-box>
-
-  <dt-text kind="headline" size="md">V4: Scrollbar integration</dt-text>
-  <dt-stack gap="200">
-    <dt-text kind="body" size="sm">scrollbar="never" — always visible overlay scrollbar</dt-text>
-    <dt-box padding="200" surface="secondary" border-color="subtle" border-width="100" border-radius="200" scrollbar="never" max-block-size="200px">
-      <dt-stack gap="100">
-        <dt-text v-for="i in 20" :key="i" kind="body" size="sm">Scrollable item {{ i }}</dt-text>
-      </dt-stack>
-    </dt-box>
-
-    <dt-text kind="body" size="sm">scrollbar="leave" — scrollbar hides when mouse leaves</dt-text>
-    <dt-box padding="200" surface="secondary" border-color="subtle" border-width="100" border-radius="200" scrollbar="leave" max-block-size="200px">
-      <dt-stack gap="100">
-        <dt-text v-for="i in 20" :key="i" kind="body" size="sm">Scrollable item {{ i }}</dt-text>
-      </dt-stack>
-    </dt-box>
-
-    <dt-text kind="body" size="sm">No scrollbar prop — no wrapper, no overlay scrollbar</dt-text>
-    <dt-box padding="200" surface="secondary" border-color="subtle" border-width="100" border-radius="200" overflow="auto" max-block-size="200px">
-      <dt-stack gap="100">
-        <dt-text v-for="i in 20" :key="i" kind="body" size="sm">Scrollable item {{ i }} (native scrollbar)</dt-text>
-      </dt-stack>
-    </dt-box>
-  </dt-stack>
 </dt-stack>
 
 <div class="d-h-1200"></div>

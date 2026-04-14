@@ -289,27 +289,6 @@ describe('DtBox', () => {
     expect(wrapper.classes()).toContain('d-box--min-bls-100');
   });
 
-  // ── Sizing (raw CSS fallback) ─────────────────────────────
-
-  it('applies raw CSS inline-size via inline style', () => {
-    const wrapper = mountComponent({ inlineSize: '480px' });
-
-    expect(wrapper.attributes('style')).toContain('inline-size: 480px');
-    expect(wrapper.classes()).not.toContain('d-box--is-480px');
-  });
-
-  it('applies raw CSS max-inline-size via inline style', () => {
-    const wrapper = mountComponent({ maxInlineSize: 'calc(100% - 2rem)' });
-
-    expect(wrapper.attributes('style')).toContain('max-inline-size: calc(100% - 2rem)');
-  });
-
-  it('does not add inline style when sizing uses layout token', () => {
-    const wrapper = mountComponent({ inlineSize: '300' });
-
-    expect(wrapper.attributes('style')).toBeUndefined();
-  });
-
   // ── Overflow ──────────────────────────────────────────────
 
   it('applies overflow modifier class', () => {
