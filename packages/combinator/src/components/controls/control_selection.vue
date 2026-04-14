@@ -46,7 +46,8 @@
         :key="option.value"
         role="menuitem"
         navigation-type="arrow-keys"
-        @click="onInput(option.value); close()"
+        :class="{ 'd-o50 d-pe-none': option.disabled }"
+        @click="!option.disabled && (onInput(option.value), close())"
       >
         <dt-stack
           direction="row"
@@ -113,6 +114,10 @@ const props = defineProps({
     type: Object,
     default: undefined,
   },
+  disabledValues: {
+    type: Set,
+    default: undefined,
+  },
 });
 
 const emit = defineEmits([VALUE_UPDATE_EVENT]);
@@ -123,10 +128,11 @@ function onInput (e) {
 
 const options = computed(() => {
   const valueOptions = props.validValues?.map(selection => {
-    const resolved = props.tokenCategory
+    const optionDisabled = props.disabledValues?.has(String(selection)) ?? false;
+    const resolved = !optionDisabled && props.tokenCategory
       ? resolveTokenValue(props.tokenCategory, selection, props.propValues)
       : null;
-    return { value: selection, label: props.generateLabel(selection), resolved };
+    return { value: selection, label: props.generateLabel(selection), resolved, disabled: optionDisabled };
   }) ?? [];
 
   if (props.defaultValue === null || props.defaultValue === undefined) {

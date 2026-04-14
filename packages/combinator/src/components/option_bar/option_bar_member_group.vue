@@ -25,6 +25,7 @@
           bindings: member.bindings,
           tokenCategory: member.tokenCategory,
           propValues,
+          disabledValues: getDisabledValues(key, props.exclusionRules, props.propValues),
         }"
         @update:value="e => updateMember(e, key)"
         @update:control="e => updateControl(e, key)"
@@ -40,7 +41,7 @@ import { computed, reactive } from 'vue';
 import { convert } from '@/src/lib/convert';
 import { controlMap } from '@/src/lib/control';
 import { buildDependencyMap, shouldHideProp } from '@/src/lib/prop_dependencies';
-import { shouldExclude } from '@/src/lib/exclusion_rules';
+import { shouldExclude, getDisabledValues } from '@/src/lib/exclusion_rules';
 import { isIconSlot } from '@/src/lib/icons';
 import { DtStack } from '@dialpad/dialtone-vue';
 

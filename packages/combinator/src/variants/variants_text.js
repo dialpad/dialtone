@@ -8,6 +8,17 @@ export default {
     },
   },
 
+  exclusions: [
+    {
+      when: { kind: v => v !== 'headline' },
+      disableValues: { props: { size: ['500', '600', '700'] } },
+    },
+    {
+      when: { size: v => ['500', '600', '700'].includes(String(v)) },
+      disableValues: { props: { kind: ['body', 'label', 'code'] } },
+    },
+  ],
+
   default: {
     slots: {
       default: {
