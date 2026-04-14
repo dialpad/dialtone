@@ -48,6 +48,7 @@
         role="menuitem"
         navigation-type="arrow-keys"
         :class="{ 'd-o50 d-pe-none': option.disabled }"
+        :aria-disabled="option.disabled || undefined"
         @click="!option.disabled && (onInput(option.value), close())"
       >
         <dt-stack

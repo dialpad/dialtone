@@ -82,7 +82,7 @@ export function resolveTokenValue (category, value, propValues) {
       result = resolveLineHeight(value);
       break;
     case 'component-size':
-      result = resolveComponentSize(kindOverride, value);
+      if (kindOverride) result = resolveComponentSize(kindOverride, value);
       break;
   }
 
