@@ -7,6 +7,7 @@ import {
   TEXT_KIND_MODIFIERS,
   TEXT_SIZE_MODIFIERS,
   TEXT_ALIGN_MODIFIERS,
+  TEXT_TONE_MODIFIERS,
   TEXT_STRENGTH_MODIFIERS,
   TEXT_DENSITY_MODIFIERS,
   TEXT_WRAP_MODIFIERS,
@@ -19,6 +20,7 @@ const alignOptions = [undefined, ...Object.keys(TEXT_ALIGN_MODIFIERS)];
 const strengthOptions = [undefined, ...Object.keys(TEXT_STRENGTH_MODIFIERS)];
 const densityOptions = [undefined, ...Object.keys(TEXT_DENSITY_MODIFIERS)];
 const wrapOptions = [undefined, ...Object.keys(TEXT_WRAP_MODIFIERS)];
+const toneOptions = [undefined, ...Object.keys(TEXT_TONE_MODIFIERS)];
 const textBoxTrimOptions = [undefined, ...Object.keys(TEXT_BOX_TRIM_MODIFIERS)];
 
 export const argsData = {
@@ -63,7 +65,8 @@ export const argTypesData = {
     control: { type: 'select' },
   },
   tone: {
-    control: 'text',
+    options: toneOptions,
+    control: { type: 'select' },
   },
   align: {
     options: alignOptions,

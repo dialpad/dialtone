@@ -13,10 +13,12 @@
 //
 @layer dialtone.components {
 .d-text {
+  --text-tone: currentColor;
+
   //  ============================================================================
   //  $   BASE STYLE
   //  ----------------------------------------------------------------------------
-  color: inherit;
+  color: oklch(from var(--text-tone) l c h / var(--fco, alpha));
 
   //  ============================================================================
   //  $   TEXT STYLES
@@ -214,5 +216,25 @@
 
   &--lh-600,
   &--lh-600.d-text { line-height: var(--dt-font-line-height-600); }
+
+  //  ============================================================================
+  //  $   TONE MODIFIERS
+  //  ----------------------------------------------------------------------------
+
+  &--tone-primary         { --text-tone: var(--dt-color-foreground-primary); }
+  &--tone-secondary       { --text-tone: var(--dt-color-foreground-secondary); }
+  &--tone-tertiary        { --text-tone: var(--dt-color-foreground-tertiary); }
+  &--tone-muted           { --text-tone: var(--dt-color-foreground-muted); }
+  &--tone-disabled        { --text-tone: var(--dt-color-foreground-disabled); }
+  &--tone-placeholder     { --text-tone: var(--dt-color-foreground-placeholder); }
+  &--tone-critical        { --text-tone: var(--dt-color-foreground-critical); }
+  &--tone-critical-strong { --text-tone: var(--dt-color-foreground-critical-strong); }
+  &--tone-positive        { --text-tone: var(--dt-color-foreground-positive); }
+  &--tone-positive-strong { --text-tone: var(--dt-color-foreground-positive-strong); }
+  &--tone-success         { --text-tone: var(--dt-color-foreground-success); }
+  &--tone-success-strong  { --text-tone: var(--dt-color-foreground-success-strong); }
+  &--tone-warning         { --text-tone: var(--dt-color-foreground-warning); }
+  &--tone-neutral-black   { --text-tone: var(--dt-color-neutral-black); }
+  &--tone-neutral-white   { --text-tone: var(--dt-color-neutral-white); }
 }
 }
