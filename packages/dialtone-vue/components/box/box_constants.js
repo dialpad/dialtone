@@ -67,3 +67,9 @@ export const DT_BOX_LAYOUT_VALUES = ['0', '25', '50', '75', '100', '200', '300',
  * @type {string[]}
  */
 export const DT_BOX_OVERFLOW_VALUES = ['hidden', 'scroll', 'auto', 'clip', 'visible'];
+
+/**
+ * Scrollbar autoHide mode values (maps to OverlayScrollbars autoHide option).
+ * @type {string[]}
+ */
+export const DT_BOX_SCROLLBAR_VALUES = ['leave', 'scroll', 'move', 'never'];

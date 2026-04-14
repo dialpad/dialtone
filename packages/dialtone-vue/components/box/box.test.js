@@ -331,6 +331,32 @@ describe('DtBox', () => {
     expect(ofClasses).toHaveLength(0);
   });
 
+  // ── Scrollbar ──────────────────────────────────────────────
+
+  it('renders scrollbar viewport wrapper when scrollbar prop is set', () => {
+    const wrapper = mountComponent({ scrollbar: 'never' });
+
+    expect(wrapper.find('.d-box__scrollbar-content').exists()).toBe(true);
+  });
+
+  it('does not render scrollbar wrapper when scrollbar prop is undefined', () => {
+    const wrapper = mountComponent();
+
+    expect(wrapper.find('.d-box__scrollbar-content').exists()).toBe(false);
+  });
+
+  it('renders scrollbar wrapper when scrollbar is true', () => {
+    const wrapper = mountComponent({ scrollbar: true });
+
+    expect(wrapper.find('.d-box__scrollbar-content').exists()).toBe(true);
+  });
+
+  it('renders slot content inside scrollbar wrapper', () => {
+    const wrapper = mountComponent({ scrollbar: 'leave' });
+
+    expect(wrapper.find('.d-box__scrollbar-content').text()).toBe(slotContent);
+  });
+
   // ── Attrs passthrough ─────────────────────────────────────
 
   it('passes class attr through to root element', () => {

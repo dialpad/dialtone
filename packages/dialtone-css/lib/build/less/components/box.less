@@ -15,17 +15,29 @@
 //  @@  @PROPERTY REGISTRATIONS
 //  ----------------------------------------------------------------------------
 @property --box-p { syntax: "*"; inherits: false; }
+
 @property --box-pi { syntax: "*"; inherits: false; }
+
 @property --box-pis { syntax: "*"; inherits: false; }
+
 @property --box-pie { syntax: "*"; inherits: false; }
+
 @property --box-pbl { syntax: "*"; inherits: false; }
+
 @property --box-pbs { syntax: "*"; inherits: false; }
+
 @property --box-pbe { syntax: "*"; inherits: false; }
+
 @property --box-surface { syntax: "<color>"; inherits: false; initial-value: transparent; }
+
 @property --box-bc { syntax: "<color>"; inherits: false; initial-value: transparent; }
-@property --box-bw { syntax: "<length>"; inherits: false; initial-value: 0px; }
-@property --box-br { syntax: "<length-percentage>"; inherits: false; initial-value: 0px; }
+
+@property --box-bw { syntax: "<length>"; inherits: false; initial-value: 0; }
+
+@property --box-br { syntax: "<length-percentage>"; inherits: false; initial-value: 0; }
+
 @property --box-shadow { syntax: "*"; inherits: false; }
+
 @property --box-of { syntax: "*"; inherits: false; }
 
 //  ============================================================================
@@ -77,27 +89,25 @@
 .d-box {
   box-sizing: border-box;
 
-  // Padding cascade: specific → axis → shorthand → 0
-  padding-block-start:  var(--box-pbs, var(--box-pbl, var(--box-p, 0)));
-  padding-block-end:    var(--box-pbe, var(--box-pbl, var(--box-p, 0)));
-  padding-inline-start: var(--box-pis, var(--box-pi,  var(--box-p, 0)));
-  padding-inline-end:   var(--box-pie, var(--box-pi,  var(--box-p, 0)));
+  // Overflow
+  overflow: var(--box-of, visible);
 
   // Surface — @property provides transparent default
   background-color: var(--box-surface);
+  border-color: var(--box-bc);
 
   // Border — always solid, safe because @property defaults --box-bw to 0px
   // and --box-bc to transparent. No visible border until modifier class is added.
   border-style: solid;
-  border-color: var(--box-bc);
   border-width: var(--box-bw);
   border-radius: var(--box-br);
 
   // Shadow
   box-shadow: var(--box-shadow, none);
 
-  // Overflow
-  overflow: var(--box-of, visible);
+  // Padding cascade: specific → axis → shorthand → 0
+  padding-block:  var(--box-pbs, var(--box-pbl, var(--box-p, 0))) var(--box-pbe, var(--box-pbl, var(--box-p, 0)));
+  padding-inline: var(--box-pis, var(--box-pi,  var(--box-p, 0))) var(--box-pie, var(--box-pi,  var(--box-p, 0)));
 }
 
 //  ============================================================================
@@ -162,5 +172,22 @@ each(@box-border-radius-values, {
 each(@box-overflow-values, {
   .d-box--of-@{value} { --box-of: @value; }
 });
+
+//  ----------------------------------------------------------------------------
+//  $$  SCROLLBAR
+//  ----------------------------------------------------------------------------
+//  Inner viewport wrapper — only rendered when scrollbar prop is active.
+//  OverlayScrollbars uses this as the viewport element (el.children[0]).
+//  :has() detects the wrapper — CSS reacts to its presence without JS class toggling.
+.d-box__scrollbar-content {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.d-box:has(> .d-box__scrollbar-content) {
+  // Scrollbar-aware overrides — OverlayScrollbars manages overflow internally.
+  // Reserve this selector for future scrollbar-specific styling needs
+  // (e.g., shifting padding to the inner wrapper).
+}
 
 }

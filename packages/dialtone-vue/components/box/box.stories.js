@@ -157,16 +157,20 @@ export const NestedInheritanceIsolation = {
     template: `
       <dt-stack gap="200">
         <dt-box padding="500" surface="moderate" border-color="subtle" border-width="100">
-          <dt-text kind="body" :size="200">Outer: padding 500</dt-text>
-          <dt-box padding="100" surface="success-subtle" border-color="subtle" border-width="100" class="d-mt8">
-            <dt-text kind="body" :size="200">Inner: padding 100 (no inheritance leak)</dt-text>
-          </dt-box>
+          <dt-stack gap="200">
+            <dt-text kind="body" :size="200">Outer: padding 500</dt-text>
+            <dt-box padding="100" surface="success-subtle" border-color="subtle" border-width="100">
+              <dt-text kind="body" :size="200">Inner: padding 100 (no inheritance leak)</dt-text>
+            </dt-box>
+          </dt-stack>
         </dt-box>
         <dt-box padding="500" surface="moderate" border-color="subtle" border-width="100">
-          <dt-text kind="body" :size="200">Outer: padding 500</dt-text>
-          <dt-box surface="critical-subtle" border-color="subtle" border-width="100" class="d-mt8">
-            <dt-text kind="body" :size="200">Inner: no padding (should be 0, not 500)</dt-text>
-          </dt-box>
+          <dt-stack gap="200">
+            <dt-text kind="body" :size="200">Outer: padding 500</dt-text>
+            <dt-box surface="critical-subtle" border-color="subtle" border-width="100">
+              <dt-text kind="body" :size="200">Inner: no padding (should be 0, not 500)</dt-text>
+            </dt-box>
+          </dt-stack>
         </dt-box>
       </dt-stack>
     `,

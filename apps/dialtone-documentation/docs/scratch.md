@@ -1595,13 +1595,15 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
 
   <dt-text kind="headline" size="md">Nested inheritance isolation</dt-text>
   <dt-box padding="500" surface="brand-subtle" border-color="subtle" border-width="100">
-    <dt-text kind="body" size="md">Outer: padding="500" surface="brand-subtle"</dt-text>
-    <dt-box padding="200" surface="primary" border-color="subtle" border-width="100" class="d-mt-200">
-      <dt-text kind="body" size="md">Inner: padding="200" surface="primary" (independent)</dt-text>
-    </dt-box>
-    <dt-box surface="critical-subtle" border-color="subtle" border-width="100" class="d-mt-200">
-      <dt-text kind="body" size="md">Inner: no padding prop (should be 0, not 500)</dt-text>
-    </dt-box>
+    <dt-stack gap="200">
+      <dt-text kind="body" size="md">Outer: padding="500" surface="brand-subtle"</dt-text>
+      <dt-box padding="200" surface="primary" border-color="subtle" border-width="100">
+        <dt-text kind="body" size="md">Inner: padding="200" surface="primary" (independent)</dt-text>
+      </dt-box>
+      <dt-box surface="critical-subtle" border-color="subtle" border-width="100">
+        <dt-text kind="body" size="md">Inner: no padding prop (should be 0, not 500)</dt-text>
+      </dt-box>
+    </dt-stack>
   </dt-box>
 
   <dt-text kind="headline" size="md">Utility class escape hatch</dt-text>
@@ -1685,6 +1687,30 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
       <dt-text kind="body" size="sm">This content is taller than the box — overflow="hidden" clips it. borderRadius="400" rounds the clip.</dt-text>
     </div>
   </dt-box>
+
+  <dt-text kind="headline" size="md">V4: Scrollbar integration</dt-text>
+  <dt-stack gap="200">
+    <dt-text kind="body" size="sm">scrollbar="never" — always visible overlay scrollbar</dt-text>
+    <dt-box padding="200" surface="secondary" border-color="subtle" border-width="100" border-radius="200" scrollbar="never" max-block-size="200px">
+      <dt-stack gap="100">
+        <dt-text v-for="i in 20" :key="i" kind="body" size="sm">Scrollable item {{ i }}</dt-text>
+      </dt-stack>
+    </dt-box>
+
+    <dt-text kind="body" size="sm">scrollbar="leave" — scrollbar hides when mouse leaves</dt-text>
+    <dt-box padding="200" surface="secondary" border-color="subtle" border-width="100" border-radius="200" scrollbar="leave" max-block-size="200px">
+      <dt-stack gap="100">
+        <dt-text v-for="i in 20" :key="i" kind="body" size="sm">Scrollable item {{ i }}</dt-text>
+      </dt-stack>
+    </dt-box>
+
+    <dt-text kind="body" size="sm">No scrollbar prop — no wrapper, no overlay scrollbar</dt-text>
+    <dt-box padding="200" surface="secondary" border-color="subtle" border-width="100" border-radius="200" overflow="auto" max-block-size="200px">
+      <dt-stack gap="100">
+        <dt-text v-for="i in 20" :key="i" kind="body" size="sm">Scrollable item {{ i }} (native scrollbar)</dt-text>
+      </dt-stack>
+    </dt-box>
+  </dt-stack>
 </dt-stack>
 
 <div class="d-h-1200"></div>

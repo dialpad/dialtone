@@ -1,17 +1,25 @@
 <template>
   <component
     :is="as"
+    ref="boxRef"
     data-qa="dt-box"
     :class="boxClasses"
     :style="boxStyle"
   >
+    <div
+      v-if="scrollbar"
+      class="d-box__scrollbar-content"
+    >
+      <!-- @slot Slot for main content -->
+      <slot />
+    </div>
     <!-- @slot Slot for main content -->
-    <slot />
+    <slot v-else />
   </component>
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, ref, onMounted, onUnmounted, watch } from 'vue';
 import {
   asValidator,
   spacingValidator,
@@ -21,6 +29,7 @@ import {
   borderRadiusValidator,
   shadowValidator,
   overflowValidator,
+  scrollbarValidator,
 } from './validators.js';
 import { DT_BOX_LAYOUT_VALUES } from './box_constants.js';
 
@@ -219,6 +228,66 @@ const props = defineProps({
     default: undefined,
     validator: overflowValidator,
   },
+
+  /**
+   * Custom scrollbar via OverlayScrollbars. When set, an inner viewport
+   * wrapper (.d-box__scrollbar-content) is inserted automatically.
+   * @values leave, scroll, move, never
+   */
+  scrollbar: {
+    type: [String, Boolean],
+    default: undefined,
+    validator: scrollbarValidator,
+  },
+});
+
+const boxRef = ref(null);
+let scrollbarInstance = null;
+
+function resolveAutoHide (value) {
+  if (value === true) return 'leave';
+  return String(value);
+}
+
+async function initScrollbar () {
+  if (!props.scrollbar || !boxRef.value?.$el) return;
+  const el = boxRef.value.$el || boxRef.value;
+  const { OverlayScrollbars, ClickScrollPlugin } = await import('overlayscrollbars');
+  OverlayScrollbars.plugin(ClickScrollPlugin);
+  scrollbarInstance = OverlayScrollbars({
+    target: el,
+    elements: {
+      viewport: el.querySelector('.d-box__scrollbar-content'),
+    },
+  }, {
+    scrollbars: {
+      autoHide: resolveAutoHide(props.scrollbar),
+      clickScroll: true,
+      autoHideDelay: resolveAutoHide(props.scrollbar) === 'leave' ? 0 : 1300,
+    },
+  });
+  el.setAttribute('data-overlayscrollbars-initialize', true);
+  el.classList.add('d-scrollbar');
+}
+
+function destroyScrollbar () {
+  if (scrollbarInstance) {
+    scrollbarInstance.destroy();
+    scrollbarInstance = null;
+  }
+}
+
+onMounted(() => {
+  if (props.scrollbar) initScrollbar();
+});
+
+onUnmounted(() => {
+  destroyScrollbar();
+});
+
+watch(() => props.scrollbar, (newVal, oldVal) => {
+  if (oldVal && !newVal) destroyScrollbar();
+  if (newVal && !oldVal) initScrollbar();
 });
 
 function isLayoutToken (value) {

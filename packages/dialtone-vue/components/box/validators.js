@@ -8,6 +8,7 @@ import {
   DT_BOX_SHADOW_VALUES,
   DT_BOX_LAYOUT_VALUES,
   DT_BOX_OVERFLOW_VALUES,
+  DT_BOX_SCROLLBAR_VALUES,
 } from './box_constants.js';
 
 export const asValidator = (value) => DT_BOX_AS_VALUES.includes(value);
@@ -19,3 +20,4 @@ export const borderRadiusValidator = (value) => DT_BOX_BORDER_RADIUS_VALUES.incl
 export const shadowValidator = (value) => DT_BOX_SHADOW_VALUES.includes(value);
 export const layoutValidator = (value) => DT_BOX_LAYOUT_VALUES.includes(String(value));
 export const overflowValidator = (value) => DT_BOX_OVERFLOW_VALUES.includes(value);
+export const scrollbarValidator = (value) => value === true || DT_BOX_SCROLLBAR_VALUES.includes(value);
