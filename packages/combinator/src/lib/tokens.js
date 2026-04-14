@@ -82,7 +82,7 @@ export function resolveTokenValue (category, value, propValues) {
       result = resolveLineHeight(value);
       break;
     case 'component-size':
-      result = resolveComponentSize(baseCategory, kindOverride, value);
+      result = resolveComponentSize(kindOverride, value);
       break;
   }
 
@@ -100,7 +100,7 @@ function resolveIconSize (value) {
   return px ? formatPx(px) : null;
 }
 
-function resolveComponentSize (category, componentClass, value) {
+function resolveComponentSize (componentClass, value) {
   const el = getMeasureElement();
   try {
     // Apply the size modifier class to set the CSS custom property,
