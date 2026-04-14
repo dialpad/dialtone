@@ -78,6 +78,9 @@ export function resolveTokenValue (category, value, propValues) {
     case 'typography-size':
       result = resolveTypographySize(value, propValues, kindOverride);
       break;
+    case 'line-height':
+      result = resolveLineHeight(value);
+      break;
   }
 
   cache.set(cacheKey, result);
@@ -92,6 +95,14 @@ function resolveSpacing (value) {
 function resolveIconSize (value) {
   const px = resolveCssVar(`--dt-icon-size-${value}`);
   return px ? formatPx(px) : null;
+}
+
+function resolveLineHeight (value) {
+  const raw = getComputedStyle(document.documentElement)
+    .getPropertyValue(`--dt-font-line-height-${value}`)
+    .trim();
+  if (!raw) return null;
+  return raw;
 }
 
 function resolveTypographySize (value, propValues, kindOverride) {

@@ -1,6 +1,13 @@
 /* eslint-disable max-len */
 
 export default {
+  defaults: {
+    props: {
+      size: { tokenCategory: 'typography-size' },
+      density: { tokenCategory: 'line-height' },
+    },
+  },
+
   default: {
     slots: {
       default: {
