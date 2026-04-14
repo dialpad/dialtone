@@ -113,16 +113,16 @@ export const PaddingCascade = {
     components: { DtBox, DtStack, DtText },
     template: `
       <dt-stack gap="200">
-        <dt-box padding="300" surface="secondary" border-color="subtle" border-width="100">
+        <dt-box padding="300" surface="secondary" border-width="100">
           <dt-text kind="body" :size="200">padding="300" (all sides)</dt-text>
         </dt-box>
-        <dt-box padding="300" padding-inline="100" surface="secondary" border-color="subtle" border-width="100">
+        <dt-box padding="300" padding-inline="100" surface="secondary" border-width="100">
           <dt-text kind="body" :size="200">+ paddingInline="100"</dt-text>
         </dt-box>
-        <dt-box padding="300" padding-inline-start="0" surface="secondary" border-color="subtle" border-width="100">
+        <dt-box padding="300" padding-inline-start="0" surface="secondary" border-width="100">
           <dt-text kind="body" :size="200">+ paddingInlineStart="0"</dt-text>
         </dt-box>
-        <dt-box padding="300" padding-block="200" padding-block-end="500" surface="secondary" border-color="subtle" border-width="100">
+        <dt-box padding="300" padding-block="200" padding-block-end="500" surface="secondary" border-width="100">
           <dt-text kind="body" :size="200">+ paddingBlock="200" + paddingBlockEnd="500"</dt-text>
         </dt-box>
       </dt-stack>
@@ -136,10 +136,10 @@ export const CardComposition = {
     components: { DtBox, DtStack, DtText },
     template: `
       <dt-stack direction="row" gap="200">
-        <dt-box padding="300" surface="primary" border-color="subtle" border-width="100" border-radius="300" shadow="card">
+        <dt-box padding="300" surface="primary" border-width="100" border-radius="300" shadow="card">
           <dt-text kind="body" :size="200">Card: subtle border + radius + card shadow</dt-text>
         </dt-box>
-        <dt-box padding="300" surface="primary" border-color="default" border-width="100" border-radius="400" shadow="medium">
+        <dt-box padding="300" surface="primary" border-width="100" border-radius="400" shadow="medium">
           <dt-text kind="body" :size="200">Elevated card</dt-text>
         </dt-box>
         <dt-box padding="300" surface="brand-subtle" border-color="brand" border-width="100" border-radius="200">
@@ -156,18 +156,18 @@ export const NestedInheritanceIsolation = {
     components: { DtBox, DtStack, DtText },
     template: `
       <dt-stack gap="200">
-        <dt-box padding="500" surface="moderate" border-color="subtle" border-width="100">
+        <dt-box padding="500" surface="moderate" border-width="100">
           <dt-stack gap="200">
             <dt-text kind="body" :size="200">Outer: padding 500</dt-text>
-            <dt-box padding="100" surface="success-subtle" border-color="subtle" border-width="100">
+            <dt-box padding="100" surface="success-subtle" border-width="100">
               <dt-text kind="body" :size="200">Inner: padding 100 (no inheritance leak)</dt-text>
             </dt-box>
           </dt-stack>
         </dt-box>
-        <dt-box padding="500" surface="moderate" border-color="subtle" border-width="100">
+        <dt-box padding="500" surface="moderate" border-width="100">
           <dt-stack gap="200">
             <dt-text kind="body" :size="200">Outer: padding 500</dt-text>
-            <dt-box surface="critical-subtle" border-color="subtle" border-width="100">
+            <dt-box surface="critical-subtle" border-width="100">
               <dt-text kind="body" :size="200">Inner: no padding (should be 0, not 500)</dt-text>
             </dt-box>
           </dt-stack>

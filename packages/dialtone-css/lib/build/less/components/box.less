@@ -77,7 +77,7 @@
 //  ----------------------------------------------------------------------------
 @box-surface-values: primary, secondary, moderate, bold, strong, contrast, backdrop, brand, info, success, warning, critical, brand-subtle, brand-strong, info-subtle, info-strong, success-subtle, success-strong, warning-subtle, warning-strong, critical-subtle, critical-strong, primary-opaque, secondary-opaque, moderate-opaque, bold-opaque, strong-opaque, contrast-opaque, brand-opaque, brand-subtle-opaque, info-opaque, info-subtle-opaque, success-opaque, success-subtle-opaque, warning-opaque, warning-subtle-opaque, critical-opaque, critical-subtle-opaque;
 
-@box-border-color-values: subtle, default, moderate, bold, accent, focus, brand, info, success, warning, critical, brand-subtle, brand-strong, success-subtle, success-strong, warning-subtle, warning-strong, critical-subtle, critical-strong;
+@box-border-color-values: subtle, default, moderate, bold, accent, focus, brand, success, warning, critical, brand-subtle, brand-strong, success-subtle, success-strong, warning-subtle, warning-strong, critical-subtle, critical-strong;
 
 @box-shadow-values: small, medium, large, extra-large, card;
 @box-overflow-values: hidden, scroll, auto, clip, visible;
@@ -96,10 +96,9 @@
   background-color: var(--box-surface);
   border-color: var(--box-bc);
 
-  // Border — always solid, safe because @property defaults --box-bw to 0px
-  // and --box-bc to transparent. No visible border until modifier class is added.
+  // Border — always solid, no visible border until borderWidth prop is set.
   border-style: solid;
-  border-width: var(--box-bw);
+  border-width: var(--box-bw, 0);
   border-radius: var(--box-br);
 
   // Shadow
@@ -132,6 +131,7 @@
 //  $$  BORDER
 //  ----------------------------------------------------------------------------
 //  ── Border ──────────────────────────────────────────────────────────────────
+.d-box--bc-transparent { --box-bc: transparent; }
 ._box-token(bc; --box-bc; dt-color-border; @box-border-color-values);
 
 @box-border-width-values: 0, 50, 100, 150, 200, 300, 400;

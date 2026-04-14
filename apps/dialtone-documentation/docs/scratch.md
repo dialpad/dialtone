@@ -1504,9 +1504,9 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
 
 ```vue demo
 <dt-stack direction="row" gap="200">
-  <dt-box padding="200" surface="primary" border-color="subtle" border-width="100">Box demo</dt-box>
-  <dt-box padding="300" surface="moderate" border-color="subtle" border-width="100">Box demo</dt-box>
-  <dt-box padding="400" surface="brand-subtle" border-color="subtle" border-width="100">Box demo</dt-box>
+  <dt-box padding="200" surface="primary" border-width="100">Box demo</dt-box>
+  <dt-box padding="300" surface="moderate" border-width="100">Box demo</dt-box>
+  <dt-box padding="400" surface="brand-subtle" border-width="100">Box demo</dt-box>
 </dt-stack>
 ```
 
@@ -1514,9 +1514,9 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
 
 ```vue demo
 <dt-stack direction="row" gap="200">
-  <dt-box padding="400" surface="secondary" border-color="subtle" border-width="100">Box demo</dt-box>
-  <dt-box padding="400" padding-inline="100" surface="secondary" border-color="subtle" border-width="100">Box demo</dt-box>
-  <dt-box padding="400" padding-inline="100" padding-inline-start="0" surface="secondary" border-color="subtle" border-width="100">Box demo</dt-box>
+  <dt-box padding="400" surface="secondary" border-width="100">Box demo</dt-box>
+  <dt-box padding="400" padding-inline="100" surface="secondary" border-width="100">Box demo</dt-box>
+  <dt-box padding="400" padding-inline="100" padding-inline-start="0" surface="secondary" border-width="100">Box demo</dt-box>
 </dt-stack>
 ```
 
@@ -1524,20 +1524,20 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
 
 ```vue demo
 <dt-stack gap="100">
-  <dt-box as="section" padding="200" surface="info-subtle" border-color="subtle" border-width="100">Box demo</dt-box>
-  <dt-box as="nav" padding="200" surface="warning-subtle" border-color="subtle" border-width="100">Box demo</dt-box>
-  <dt-box as="header" padding="200" surface="success-subtle" border-color="subtle" border-width="100">Box demo</dt-box>
+  <dt-box as="section" padding="200" surface="info-subtle" border-width="100">Box demo</dt-box>
+  <dt-box as="nav" padding="200" surface="warning-subtle" border-width="100">Box demo</dt-box>
+  <dt-box as="header" padding="200" surface="success-subtle" border-width="100">Box demo</dt-box>
 </dt-stack>
 ```
 
   <dt-text kind="headline" size="md">Nested inheritance isolation</dt-text>
 
 ```vue demo
-<dt-box padding="500" surface="brand-subtle" border-color="subtle" border-width="100">
+<dt-box padding="500" surface="brand-subtle" border-width="100">
   <dt-stack gap="200">
     <div>Outer box</div>
-    <dt-box padding="200" surface="primary" border-color="subtle" border-width="100">Inner box (independent)</dt-box>
-    <dt-box surface="critical-subtle" border-color="subtle" border-width="100">Inner box, no padding (should be 0)</dt-box>
+    <dt-box padding="200" surface="primary" border-width="100">Inner box (independent)</dt-box>
+    <dt-box surface="critical-subtle" border-width="100">Inner box, no padding (should be 0)</dt-box>
   </dt-stack>
 </dt-box>
 ```
@@ -1545,7 +1545,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
   <dt-text kind="headline" size="md">Utility class escape hatch</dt-text>
 
 ```vue demo
-<dt-box padding="200" surface="primary" border-color="default" border-width="100" border-radius="200" class="d-ps-sticky d-t0">
+<dt-box padding="200" surface="primary" border-width="100" border-radius="200" class="d-ps-sticky d-t0">
   Box demo
 </dt-box>
 ```
@@ -1554,8 +1554,8 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
 
 ```vue demo
 <dt-stack direction="row" gap="200">
-  <dt-box padding="300" surface="primary" border-color="subtle" border-width="100" border-radius="300" shadow="card">Box demo</dt-box>
-  <dt-box padding="300" surface="primary" border-color="default" border-width="100" border-radius="400" shadow="medium">Box demo</dt-box>
+  <dt-box padding="300" surface="primary" border-width="100" border-radius="300" shadow="card">Box demo</dt-box>
+  <dt-box padding="300" surface="primary" border-width="100" border-radius="400" shadow="medium">Box demo</dt-box>
   <dt-box padding="300" surface="brand-subtle" border-color="brand" border-width="100" border-radius="200">Box demo</dt-box>
 </dt-stack>
 ```
@@ -1576,12 +1576,12 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
 
 ```vue demo
 <dt-stack direction="row" gap="200" align="center">
-  <dt-box padding="100" surface="moderate" border-color="subtle" border-width="100" border-radius="0">0 long label lorem <br> second line</dt-box>
-  <dt-box padding="100" surface="moderate" border-color="subtle" border-width="100" border-radius="200">200 long label lorem <br> second line</dt-box>
-  <dt-box padding="100" surface="moderate" border-color="subtle" border-width="100" border-radius="400">400 long label lorem <br> second line</dt-box>
-  <dt-box padding="100" surface="moderate" border-color="subtle" border-width="100" border-radius="600">600 long label lorem <br> second line</dt-box>
-  <dt-box padding="100" surface="moderate" border-color="subtle" border-width="100" border-radius="pill">pill long label lorem</dt-box>
-  <dt-box padding="100" surface="moderate" border-color="subtle" border-width="100" border-radius="circle">circle</dt-box>
+  <dt-box padding="100" surface="moderate" border-width="100" border-radius="0">0 long label lorem <br> second line</dt-box>
+  <dt-box padding="100" surface="moderate" border-width="100" border-radius="200">200 long label lorem <br> second line</dt-box>
+  <dt-box padding="100" surface="moderate" border-width="100" border-radius="400">400 long label lorem <br> second line</dt-box>
+  <dt-box padding="100" surface="moderate" border-width="100" border-radius="600">600 long label lorem <br> second line</dt-box>
+  <dt-box padding="100" surface="moderate" border-width="100" border-radius="pill">pill long label lorem</dt-box>
+  <dt-box padding="100" surface="moderate" border-width="100" border-radius="circle">circle</dt-box>
 </dt-stack>
 ```
 
@@ -1590,7 +1590,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
 ```vue demo
 <dt-stack direction="row" gap="200">
   <dt-box padding="200" surface="secondary">Box demo (no border props)</dt-box>
-  <dt-box padding="200" surface="secondary" border-color="default" border-width="100">Box demo (with border props)</dt-box>
+  <dt-box padding="200" surface="secondary" border-width="100">Box demo (with border props)</dt-box>
 </dt-stack>
 ```
 
@@ -1598,8 +1598,8 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
 
 ```vue demo
 <dt-stack direction="row" gap="200">
-  <dt-box padding="200" surface="secondary" border-color="subtle" border-width="100" inline-size="300">Box demo</dt-box>
-  <dt-box padding="200" surface="secondary" border-color="subtle" border-width="100" inline-size="500">Box demo</dt-box>
+  <dt-box padding="200" surface="secondary" border-width="100" inline-size="300">Box demo</dt-box>
+  <dt-box padding="200" surface="secondary" border-width="100" inline-size="500">Box demo</dt-box>
 </dt-stack>
 ```
 
@@ -1607,15 +1607,15 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
 
 ```vue demo
 <dt-stack gap="200">
-  <dt-box padding="200" surface="secondary" border-color="subtle" border-width="100" class="d-wmx-464">Box demo</dt-box>
-  <dt-box padding="200" surface="secondary" border-color="subtle" border-width="100" class="d-hmn-164">Box demo</dt-box>
+  <dt-box padding="200" surface="secondary" border-width="100" class="d-wmx-464">Box demo</dt-box>
+  <dt-box padding="200" surface="secondary" border-width="100" class="d-hmn-164">Box demo</dt-box>
 </dt-stack>
 ```
 
   <dt-text kind="headline" size="md">Overflow + borderRadius clipping</dt-text>
 
 ```vue demo
-<dt-box surface="secondary" border-color="subtle" border-width="100" border-radius="400" overflow="hidden" inline-size="500" max-block-size="200">
+<dt-box surface="secondary" border-width="100" border-radius="400" overflow="hidden" inline-size="500" max-block-size="200">
   <div class="d-p-200 d-bgc-brand-subtle d-h-400">
     Tall content clipped by overflow="hidden" and borderRadius="400"
   </div>
@@ -1625,7 +1625,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
   <dt-text kind="headline" size="md">Scrollbar integration</dt-text>
 
 ```vue demo
-<dt-box padding="200" surface="secondary" border-color="subtle" border-width="100" border-radius="200" scrollbar="never" max-block-size="300">
+<dt-box padding="200" surface="secondary" border-width="100" border-radius="200" scrollbar="never" max-block-size="300">
   <dt-stack gap="100">
     <div v-for="i in 20" :key="i">Scrollable item {{ i }}</div>
   </dt-stack>
@@ -1633,7 +1633,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
 ```
 
 ```vue demo
-<dt-box padding="200" surface="secondary" border-color="subtle" border-width="100" border-radius="200" scrollbar="leave" max-block-size="300">
+<dt-box padding="200" surface="secondary" border-width="100" border-radius="200" scrollbar="leave" max-block-size="300">
   <dt-stack gap="100">
     <div v-for="i in 20" :key="i">Scrollable item {{ i }}</div>
   </dt-stack>
@@ -1641,7 +1641,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
 ```
 
 ```vue demo
-<dt-box padding="200" surface="secondary" border-color="subtle" border-width="100" border-radius="200" overflow="auto" max-block-size="300">
+<dt-box padding="200" surface="secondary" border-width="100" border-radius="200" overflow="auto" max-block-size="300">
   <dt-stack gap="100">
     <div v-for="i in 20" :key="i">Scrollable item {{ i }} (native scrollbar)</div>
   </dt-stack>

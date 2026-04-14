@@ -68,6 +68,7 @@ const props = defineProps({
   /**
    * Padding on the inline axis (left/right in LTR).
    * Overrides `padding` for the inline axis.
+   * @values 0, 1, 25, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 525, 550, 600, 650, 700, 750, 800
    */
   paddingInline: {
     type: String,
@@ -78,6 +79,7 @@ const props = defineProps({
   /**
    * Padding on the inline-start side.
    * Overrides `paddingInline` and `padding` for inline-start.
+   * @values 0, 1, 25, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 525, 550, 600, 650, 700, 750, 800
    */
   paddingInlineStart: {
     type: String,
@@ -88,6 +90,7 @@ const props = defineProps({
   /**
    * Padding on the inline-end side.
    * Overrides `paddingInline` and `padding` for inline-end.
+   * @values 0, 1, 25, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 525, 550, 600, 650, 700, 750, 800
    */
   paddingInlineEnd: {
     type: String,
@@ -98,6 +101,7 @@ const props = defineProps({
   /**
    * Padding on the block axis (top/bottom in horizontal writing mode).
    * Overrides `padding` for the block axis.
+   * @values 0, 1, 25, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 525, 550, 600, 650, 700, 750, 800
    */
   paddingBlock: {
     type: String,
@@ -108,6 +112,7 @@ const props = defineProps({
   /**
    * Padding on the block-start side.
    * Overrides `paddingBlock` and `padding` for block-start.
+   * @values 0, 1, 25, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 525, 550, 600, 650, 700, 750, 800
    */
   paddingBlockStart: {
     type: String,
@@ -118,6 +123,7 @@ const props = defineProps({
   /**
    * Padding on the block-end side.
    * Overrides `paddingBlock` and `padding` for block-end.
+   * @values 0, 1, 25, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 525, 550, 600, 650, 700, 750, 800
    */
   paddingBlockEnd: {
     type: String,
@@ -136,17 +142,6 @@ const props = defineProps({
   },
 
   /**
-   * Border color. Maps to --dt-color-border-* tokens.
-   * When set, border-style: solid is applied automatically via @property defaults.
-   * @values subtle, default, moderate, bold, accent, focus, brand, info, success, warning, critical, brand-subtle, brand-strong, ...
-   */
-  borderColor: {
-    type: String,
-    default: undefined,
-    validator: borderColorValidator,
-  },
-
-  /**
    * Border width. Maps to --dt-size-border-* tokens.
    * @values 0, 50, 100, 150, 200, 300, 400
    */
@@ -154,6 +149,17 @@ const props = defineProps({
     type: String,
     default: undefined,
     validator: borderWidthValidator,
+  },
+
+  /**
+   * Border color. Maps to --dt-color-border-* tokens.
+   * Defaults to 'default'. Only applies when the `borderWidth` prop is set.
+   * @values transparent, subtle, default, moderate, bold, accent, focus, brand, success, warning, critical, brand-subtle, brand-strong, ...
+   */
+  borderColor: {
+    type: String,
+    default: 'default',
+    validator: borderColorValidator,
   },
 
   /**
@@ -198,6 +204,7 @@ const props = defineProps({
 
   /**
    * Minimum inline size. Maps to --dt-layout-* tokens.
+   * @values 0, 25, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600
    */
   minInlineSize: {
     type: String,
@@ -207,6 +214,7 @@ const props = defineProps({
 
   /**
    * Maximum inline size. Maps to --dt-layout-* tokens.
+   * @values 0, 25, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600
    */
   maxInlineSize: {
     type: String,
@@ -216,6 +224,7 @@ const props = defineProps({
 
   /**
    * Minimum block size. Maps to --dt-layout-* tokens.
+   * @values 0, 25, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600
    */
   minBlockSize: {
     type: String,
@@ -225,6 +234,7 @@ const props = defineProps({
 
   /**
    * Maximum block size. Maps to --dt-layout-* tokens.
+   * @values 0, 25, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600
    */
   maxBlockSize: {
     type: String,

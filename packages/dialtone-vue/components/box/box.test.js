@@ -166,11 +166,10 @@ describe('DtBox', () => {
     expect(wrapper.classes()).toContain(`d-box--bc-${borderColor}`);
   });
 
-  it('does not add borderColor class when prop is undefined', () => {
+  it('applies default borderColor class when prop is not specified', () => {
     const wrapper = mountComponent();
 
-    const bcClasses = wrapper.classes().filter(c => c.startsWith('d-box--bc'));
-    expect(bcClasses).toHaveLength(0);
+    expect(wrapper.classes()).toContain('d-box--bc-default');
   });
 
   // ── Border width ──────────────────────────────────────────

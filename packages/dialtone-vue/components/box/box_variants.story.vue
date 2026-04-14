@@ -24,7 +24,6 @@
           :key="s"
           padding="100"
           :surface="s"
-          border-color="subtle"
           border-width="100"
         >
           <dt-text
@@ -51,7 +50,6 @@
           :key="s"
           padding="100"
           :surface="s"
-          border-color="subtle"
           border-width="100"
         >
           <dt-text
@@ -78,7 +76,6 @@
           :key="s"
           padding="100"
           :surface="s"
-          border-color="subtle"
           border-width="100"
         >
           <dt-text
@@ -105,7 +102,6 @@
           :key="s"
           padding="100"
           :surface="s"
-          border-color="subtle"
           border-width="100"
         >
           <dt-text
@@ -162,7 +158,6 @@
         v-for="bw in borderWidths"
         :key="bw"
         padding="200"
-        border-color="default"
         :border-width="bw"
       >
         <dt-text

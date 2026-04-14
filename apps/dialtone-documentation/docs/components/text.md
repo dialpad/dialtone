@@ -4,6 +4,7 @@ description: Consistent typography styling through semantic text kinds and sizes
 status: ready
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-text--default
 image: assets/images/components/text.png
+keywords: ["dt-box", "DtBox", "typography", "size", "tone", "font", "font size", "font weight", "line height", "density", "strength", "primitive"]
 ---
 
 <component-combinator component-name="DtText" />
