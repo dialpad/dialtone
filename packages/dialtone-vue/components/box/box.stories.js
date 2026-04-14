@@ -1,26 +1,33 @@
 import DtBox from './box.vue';
 import DtStack from '@/components/stack/stack.vue';
 import DtText from '@/components/text/text.vue';
+import BoxVariants from './box_variants.story.vue';
+import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import {
   DT_BOX_AS_VALUES,
   DT_BOX_SPACING_VALUES,
   DT_BOX_SURFACE_VALUES,
+  DT_BOX_BORDER_COLOR_VALUES,
+  DT_BOX_BORDER_WIDTH_VALUES,
+  DT_BOX_BORDER_RADIUS_VALUES,
+  DT_BOX_SHADOW_VALUES,
 } from './box_constants.js';
 
 export const argsData = {
   as: 'div',
   padding: '200',
   surface: 'secondary',
+  borderColor: undefined,
+  borderWidth: undefined,
+  borderRadius: undefined,
+  shadow: undefined,
 };
 
 export const argTypesData = {
-  // Slots
   default: {
     control: { type: null },
     description: 'Slot for main content',
   },
-
-  // Props
   as: {
     control: 'select',
     options: DT_BOX_AS_VALUES,
@@ -57,6 +64,22 @@ export const argTypesData = {
     control: 'select',
     options: [undefined, ...DT_BOX_SURFACE_VALUES],
   },
+  borderColor: {
+    control: 'select',
+    options: [undefined, ...DT_BOX_BORDER_COLOR_VALUES],
+  },
+  borderWidth: {
+    control: 'select',
+    options: [undefined, ...DT_BOX_BORDER_WIDTH_VALUES],
+  },
+  borderRadius: {
+    control: 'select',
+    options: [undefined, ...DT_BOX_BORDER_RADIUS_VALUES],
+  },
+  shadow: {
+    control: 'select',
+    options: [undefined, ...DT_BOX_SHADOW_VALUES],
+  },
 };
 
 export default {
@@ -71,13 +94,18 @@ export const Default = {
   render: (args) => ({
     components: { DtBox },
     setup () { return { args }; },
-    template: `
-      <dt-box v-bind="args">
-        Box content
-      </dt-box>
-    `,
+    template: '<dt-box v-bind="args">Box content</dt-box>',
   }),
   args: {},
+};
+
+const VariantsTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, BoxVariants);
+
+export const Variants = {
+  render: VariantsTemplate,
+  args: {},
+  parameters: { controls: { disable: true } },
 };
 
 export const PaddingCascade = {
@@ -85,71 +113,42 @@ export const PaddingCascade = {
     components: { DtBox, DtStack, DtText },
     template: `
       <dt-stack gap="200">
-        <dt-text kind="body" :size="200"><strong>Shorthand only</strong> — padding="300"</dt-text>
-        <dt-box padding="300" surface="secondary">
-          <dt-text kind="body" :size="200">All sides: 300</dt-text>
+        <dt-box padding="300" surface="secondary" border-color="subtle" border-width="100">
+          <dt-text kind="body" :size="200">padding="300" (all sides)</dt-text>
         </dt-box>
-
-        <dt-text kind="body" :size="200"><strong>Axis override</strong> — padding="300" + paddingInline="100"</dt-text>
-        <dt-box padding="300" padding-inline="100" surface="secondary">
-          <dt-text kind="body" :size="200">Block: 300, Inline: 100</dt-text>
+        <dt-box padding="300" padding-inline="100" surface="secondary" border-color="subtle" border-width="100">
+          <dt-text kind="body" :size="200">+ paddingInline="100"</dt-text>
         </dt-box>
-
-        <dt-text kind="body" :size="200"><strong>Side override</strong> — padding="300" + paddingInlineStart="0"</dt-text>
-        <dt-box padding="300" padding-inline-start="0" surface="secondary">
-          <dt-text kind="body" :size="200">All sides 300 except inline-start: 0</dt-text>
+        <dt-box padding="300" padding-inline-start="0" surface="secondary" border-color="subtle" border-width="100">
+          <dt-text kind="body" :size="200">+ paddingInlineStart="0"</dt-text>
         </dt-box>
-
-        <dt-text kind="body" :size="200"><strong>Full cascade</strong> — padding="300" + paddingBlock="200" + paddingBlockEnd="500"</dt-text>
-        <dt-box padding="300" padding-block="200" padding-block-end="500" surface="secondary">
-          <dt-text kind="body" :size="200">Inline: 300, Block-start: 200, Block-end: 500</dt-text>
+        <dt-box padding="300" padding-block="200" padding-block-end="500" surface="secondary" border-color="subtle" border-width="100">
+          <dt-text kind="body" :size="200">+ paddingBlock="200" + paddingBlockEnd="500"</dt-text>
         </dt-box>
       </dt-stack>
     `,
   }),
-  parameters: {
-    controls: { disable: true },
-  },
+  parameters: { controls: { disable: true } },
 };
 
-export const SurfaceVariants = {
+export const CardComposition = {
   render: () => ({
     components: { DtBox, DtStack, DtText },
     template: `
-      <dt-stack gap="200">
-        <dt-text as="h3" kind="headline" :size="300">Neutral</dt-text>
-        <dt-stack direction="row" gap="100">
-          <dt-box v-for="s in ['primary', 'secondary', 'moderate', 'bold', 'strong', 'contrast']" :key="s" padding="100" :surface="s">
-            <dt-text kind="body" :size="100">{{ s }}</dt-text>
-          </dt-box>
-        </dt-stack>
-
-        <dt-text as="h3" kind="headline" :size="300">Semantic</dt-text>
-        <dt-stack direction="row" gap="100">
-          <dt-box v-for="s in ['brand', 'info', 'success', 'warning', 'critical']" :key="s" padding="100" :surface="s">
-            <dt-text kind="body" :size="100">{{ s }}</dt-text>
-          </dt-box>
-        </dt-stack>
-
-        <dt-text as="h3" kind="headline" :size="300">Subtle / Strong</dt-text>
-        <dt-stack direction="row" gap="100">
-          <dt-box v-for="s in ['brand-subtle', 'brand-strong', 'info-subtle', 'info-strong', 'success-subtle', 'success-strong', 'warning-subtle', 'warning-strong', 'critical-subtle', 'critical-strong']" :key="s" padding="100" :surface="s">
-            <dt-text kind="body" :size="100">{{ s }}</dt-text>
-          </dt-box>
-        </dt-stack>
-
-        <dt-text as="h3" kind="headline" :size="300">Opaque</dt-text>
-        <dt-stack direction="row" gap="100">
-          <dt-box v-for="s in ['primary-opaque', 'secondary-opaque', 'moderate-opaque', 'bold-opaque', 'strong-opaque', 'contrast-opaque']" :key="s" padding="100" :surface="s">
-            <dt-text kind="body" :size="100">{{ s }}</dt-text>
-          </dt-box>
-        </dt-stack>
+      <dt-stack direction="row" gap="200">
+        <dt-box padding="300" surface="primary" border-color="subtle" border-width="100" border-radius="300" shadow="card">
+          <dt-text kind="body" :size="200">Card: subtle border + radius + card shadow</dt-text>
+        </dt-box>
+        <dt-box padding="300" surface="primary" border-color="default" border-width="100" border-radius="400" shadow="medium">
+          <dt-text kind="body" :size="200">Elevated card</dt-text>
+        </dt-box>
+        <dt-box padding="300" surface="brand-subtle" border-color="brand" border-width="100" border-radius="200">
+          <dt-text kind="body" :size="200">Brand card: no shadow</dt-text>
+        </dt-box>
       </dt-stack>
     `,
   }),
-  parameters: {
-    controls: { disable: true },
-  },
+  parameters: { controls: { disable: true } },
 };
 
 export const NestedInheritanceIsolation = {
@@ -157,29 +156,20 @@ export const NestedInheritanceIsolation = {
     components: { DtBox, DtStack, DtText },
     template: `
       <dt-stack gap="200">
-        <dt-text kind="body" :size="200">
-          Nested DtBox should NOT inherit padding from parent — each box controls its own spacing via @property initial values.
-        </dt-text>
-        <dt-box padding="500" surface="moderate">
-          <dt-text kind="body" :size="200">Outer: padding 500, surface moderate</dt-text>
-          <dt-box padding="100" surface="success-subtle" class="d-mt8">
-            <dt-text kind="body" :size="200">Inner: padding 100, surface success-subtle (no inheritance leak)</dt-text>
+        <dt-box padding="500" surface="moderate" border-color="subtle" border-width="100">
+          <dt-text kind="body" :size="200">Outer: padding 500</dt-text>
+          <dt-box padding="100" surface="success-subtle" border-color="subtle" border-width="100" class="d-mt8">
+            <dt-text kind="body" :size="200">Inner: padding 100 (no inheritance leak)</dt-text>
           </dt-box>
         </dt-box>
-
-        <dt-text kind="body" :size="200">
-          Inner box with NO padding prop — should reset to 0, not inherit parent's 500.
-        </dt-text>
-        <dt-box padding="500" surface="moderate">
+        <dt-box padding="500" surface="moderate" border-color="subtle" border-width="100">
           <dt-text kind="body" :size="200">Outer: padding 500</dt-text>
-          <dt-box surface="critical-subtle" class="d-mt8">
-            <dt-text kind="body" :size="200">Inner: no padding prop (should be 0, not 500)</dt-text>
+          <dt-box surface="critical-subtle" border-color="subtle" border-width="100" class="d-mt8">
+            <dt-text kind="body" :size="200">Inner: no padding (should be 0, not 500)</dt-text>
           </dt-box>
         </dt-box>
       </dt-stack>
     `,
   }),
-  parameters: {
-    controls: { disable: true },
-  },
+  parameters: { controls: { disable: true } },
 };

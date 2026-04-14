@@ -1556,71 +1556,135 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
 
   <dt-text kind="headline" size="md">Basic padding + surface</dt-text>
   <dt-stack direction="row" gap="200">
-    <dt-box padding="200" surface="primary" class="d-ba d-bc-subtle">
+    <dt-box padding="200" surface="primary" border-color="subtle" border-width="100">
       <dt-text kind="body" size="md">padding="200" surface="primary"</dt-text>
     </dt-box>
-    <dt-box padding="300" surface="moderate" class="d-ba d-bc-subtle">
+    <dt-box padding="300" surface="moderate" border-color="subtle" border-width="100">
       <dt-text kind="body" size="md">padding="300" surface="moderate"</dt-text>
     </dt-box>
-    <dt-box padding="400" surface="brand-subtle" class="d-ba d-bc-subtle">
+    <dt-box padding="400" surface="brand-subtle" border-color="subtle" border-width="100">
       <dt-text kind="body" size="md">padding="400" surface="brand-subtle"</dt-text>
     </dt-box>
   </dt-stack>
 
   <dt-text kind="headline" size="md">Padding cascade</dt-text>
   <dt-stack direction="row" gap="200">
-    <dt-box padding="400" surface="secondary" class="d-ba d-bc-subtle">
+    <dt-box padding="400" surface="secondary" border-color="subtle" border-width="100">
       <dt-text kind="body" size="sm">padding="400" (all sides)</dt-text>
     </dt-box>
-    <dt-box padding="400" padding-inline="100" surface="secondary" class="d-ba d-bc-subtle">
+    <dt-box padding="400" padding-inline="100" surface="secondary" border-color="subtle" border-width="100">
       <dt-text kind="body" size="sm">+ paddingInline="100"</dt-text>
     </dt-box>
-    <dt-box padding="400" padding-inline="100" padding-inline-start="0" surface="secondary" class="d-ba d-bc-subtle">
+    <dt-box padding="400" padding-inline="100" padding-inline-start="0" surface="secondary" border-color="subtle" border-width="100">
       <dt-text kind="body" size="sm">+ paddingInlineStart="0"</dt-text>
     </dt-box>
   </dt-stack>
 
   <dt-text kind="headline" size="md">Polymorphic as</dt-text>
   <dt-stack gap="100">
-    <dt-box as="section" padding="200" surface="info-subtle" class="d-ba d-bc-subtle">
+    <dt-box as="section" padding="200" surface="info-subtle" border-color="subtle" border-width="100">
       <dt-text kind="body" size="sm">as="section"</dt-text>
     </dt-box>
-    <dt-box as="nav" padding="200" surface="warning-subtle" class="d-ba d-bc-subtle">
+    <dt-box as="nav" padding="200" surface="warning-subtle" border-color="subtle" border-width="100">
       <dt-text kind="body" size="sm">as="nav"</dt-text>
     </dt-box>
-    <dt-box as="header" padding="200" surface="success-subtle" class="d-ba d-bc-subtle">
+    <dt-box as="header" padding="200" surface="success-subtle" border-color="subtle" border-width="100">
       <dt-text kind="body" size="sm">as="header"</dt-text>
     </dt-box>
   </dt-stack>
 
   <dt-text kind="headline" size="md">Nested inheritance isolation</dt-text>
-  <dt-box padding="500" surface="brand-subtle" class="d-ba d-bc-subtle">
+  <dt-box padding="500" surface="brand-subtle" border-color="subtle" border-width="100">
     <dt-text kind="body" size="md">Outer: padding="500" surface="brand-subtle"</dt-text>
-    <dt-box padding="200" surface="primary" class="d-mt-200 d-ba d-bc-subtle">
+    <dt-box padding="200" surface="primary" border-color="subtle" border-width="100" class="d-mt-200">
       <dt-text kind="body" size="md">Inner: padding="200" surface="primary" (independent)</dt-text>
     </dt-box>
-    <dt-box surface="critical-subtle" class="d-mt-200 d-ba d-bc-subtle">
+    <dt-box surface="critical-subtle" border-color="subtle" border-width="100" class="d-mt-200">
       <dt-text kind="body" size="md">Inner: no padding prop (should be 0, not 500)</dt-text>
     </dt-box>
   </dt-box>
 
   <dt-text kind="headline" size="md">Utility class escape hatch</dt-text>
-  <dt-box padding="200" surface="primary" class="d-ba d-bc-default d-bar-200">
-    <dt-text kind="body" size="md">DtBox props + utility class="d-ba d-bc-default d-bar-200"</dt-text>
+  <dt-box padding="200" surface="primary" border-color="default" border-width="100" border-radius="200" class="d-ps-sticky d-t0">
+    <dt-text kind="body" size="md">DtBox border props + utility class="d-ps-sticky d-t0"</dt-text>
   </dt-box>
+
+  <dt-text kind="headline" size="md">V2: Card compositions</dt-text>
+  <dt-stack direction="row" gap="200">
+    <dt-box padding="300" surface="primary" border-color="subtle" border-width="100" border-radius="300" shadow="card">
+      <dt-text kind="body" size="sm">Card: subtle border + radius + card shadow</dt-text>
+    </dt-box>
+    <dt-box padding="300" surface="primary" border-color="default" border-width="100" border-radius="400" shadow="medium">
+      <dt-text kind="body" size="sm">Elevated: default border + more radius + medium shadow</dt-text>
+    </dt-box>
+    <dt-box padding="300" surface="brand-subtle" border-color="brand" border-width="100" border-radius="200">
+      <dt-text kind="body" size="sm">Brand card: no shadow</dt-text>
+    </dt-box>
+  </dt-stack>
+
+  <dt-text kind="headline" size="md">V2: Shadow scale</dt-text>
+  <dt-stack direction="row" gap="300">
+    <dt-box v-for="s in ['small', 'medium', 'large', 'extra-large', 'card']" :key="s" padding="200" surface="primary" border-radius="200" :shadow="s">
+      <dt-text kind="label" size="sm">{{ s }}</dt-text>
+    </dt-box>
+  </dt-stack>
+
+  <dt-text kind="headline" size="md">V2: Border radius variants</dt-text>
+  <dt-stack direction="row" gap="200" align="center">
+    <dt-box v-for="r in ['0', '200', '300', '400', '500', '600', 'pill', 'circle']" :key="r" padding="200" surface="moderate" border-color="subtle" border-width="100" :border-radius="r" class="d-d-flex d-ai-center d-jc-center" style="min-width: 64px; min-height: 64px;">
+      <dt-text kind="label" size="sm">{{ r }}</dt-text>
+    </dt-box>
+  </dt-stack>
+
+  <dt-text kind="headline" size="md">V2: No border props = invisible border</dt-text>
+  <dt-stack direction="row" gap="200">
+    <dt-box padding="200" surface="secondary">
+      <dt-text kind="body" size="sm">No border props (@property defaults = invisible)</dt-text>
+    </dt-box>
+    <dt-box padding="200" surface="secondary" border-color="default" border-width="100">
+      <dt-text kind="body" size="sm">With border props = visible</dt-text>
+    </dt-box>
+  </dt-stack>
 
   <dt-text kind="headline" size="md">Surface opaque variants</dt-text>
   <dt-stack direction="row" gap="200">
-    <dt-box padding="200" surface="brand-subtle-opaque" class="d-ba d-bc-subtle">
+    <dt-box padding="200" surface="brand-subtle-opaque" border-color="subtle" border-width="100">
       <dt-text kind="body" size="sm">brand-subtle-opaque</dt-text>
     </dt-box>
-    <dt-box padding="200" surface="success-opaque" class="d-ba d-bc-subtle">
+    <dt-box padding="200" surface="success-opaque" border-color="subtle" border-width="100">
       <dt-text kind="body" size="sm">success-opaque</dt-text>
     </dt-box>
-    <dt-box padding="200" surface="critical-opaque" class="d-ba d-bc-subtle">
+    <dt-box padding="200" surface="critical-opaque" border-color="subtle" border-width="100">
       <dt-text kind="body" size="sm">critical-opaque</dt-text>
     </dt-box>
   </dt-stack>
+
+  <dt-text kind="headline" size="md">V3: Layout token sizing</dt-text>
+  <dt-stack direction="row" gap="200">
+    <dt-box padding="200" surface="secondary" border-color="subtle" border-width="100" inline-size="300">
+      <dt-text kind="body" size="sm">inlineSize="300" (192px via layout token)</dt-text>
+    </dt-box>
+    <dt-box padding="200" surface="secondary" border-color="subtle" border-width="100" inline-size="500">
+      <dt-text kind="body" size="sm">inlineSize="500" (320px)</dt-text>
+    </dt-box>
+  </dt-stack>
+
+  <dt-text kind="headline" size="md">V3: Raw CSS sizing fallback</dt-text>
+  <dt-stack gap="200">
+    <dt-box padding="200" surface="secondary" border-color="subtle" border-width="100" max-inline-size="480px">
+      <dt-text kind="body" size="sm">maxInlineSize="480px" (raw CSS — not a layout token)</dt-text>
+    </dt-box>
+    <dt-box padding="200" surface="secondary" border-color="subtle" border-width="100" min-block-size="calc(100px + 2rem)">
+      <dt-text kind="body" size="sm">minBlockSize="calc(100px + 2rem)" (raw CSS expression)</dt-text>
+    </dt-box>
+  </dt-stack>
+
+  <dt-text kind="headline" size="md">V3: Overflow + borderRadius clipping</dt-text>
+  <dt-box padding="0" surface="secondary" border-color="subtle" border-width="100" border-radius="400" overflow="hidden" max-block-size="100" inline-size="500">
+    <div class="d-p-200 d-bgc-brand-subtle" style="height: 200px;">
+      <dt-text kind="body" size="sm">This content is taller than the box — overflow="hidden" clips it. borderRadius="400" rounds the clip.</dt-text>
+    </div>
+  </dt-box>
 </dt-stack>
 
 <div class="d-h-1200"></div>

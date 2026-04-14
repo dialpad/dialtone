@@ -22,6 +22,11 @@
 @property --box-pbs { syntax: "*"; inherits: false; }
 @property --box-pbe { syntax: "*"; inherits: false; }
 @property --box-surface { syntax: "<color>"; inherits: false; initial-value: transparent; }
+@property --box-bc { syntax: "<color>"; inherits: false; initial-value: transparent; }
+@property --box-bw { syntax: "<length>"; inherits: false; initial-value: 0px; }
+@property --box-br { syntax: "<length-percentage>"; inherits: false; initial-value: 0px; }
+@property --box-shadow { syntax: "*"; inherits: false; }
+@property --box-of { syntax: "*"; inherits: false; }
 
 //  ============================================================================
 //  $   PARAMETRIC MIXINS
@@ -29,6 +34,15 @@
 ._box-token(@prefix; @prop; @token; @names) {
   each(@names, {
     .d-box--@{prefix}-@{value} { @{prop}: ~"var(--@{token}-@{value})"; }
+  });
+}
+
+._box-layout(@prop) {
+  &-25 { @{prop}: var(--dt-layout-25); }
+  &-50 { @{prop}: var(--dt-layout-50); }
+  &-75 { @{prop}: var(--dt-layout-75); }
+  each(range(0, 1600, 100), {
+    &-@{value} { @{prop}: ~"var(--dt-layout-@{value})"; }
   });
 }
 
@@ -51,6 +65,11 @@
 //  ----------------------------------------------------------------------------
 @box-surface-values: primary, secondary, moderate, bold, strong, contrast, backdrop, brand, info, success, warning, critical, brand-subtle, brand-strong, info-subtle, info-strong, success-subtle, success-strong, warning-subtle, warning-strong, critical-subtle, critical-strong, primary-opaque, secondary-opaque, moderate-opaque, bold-opaque, strong-opaque, contrast-opaque, brand-opaque, brand-subtle-opaque, info-opaque, info-subtle-opaque, success-opaque, success-subtle-opaque, warning-opaque, warning-subtle-opaque, critical-opaque, critical-subtle-opaque;
 
+@box-border-color-values: subtle, default, moderate, bold, accent, focus, brand, info, success, warning, critical, brand-subtle, brand-strong, success-subtle, success-strong, warning-subtle, warning-strong, critical-subtle, critical-strong;
+
+@box-shadow-values: small, medium, large, extra-large, card;
+@box-overflow-values: hidden, scroll, auto, clip, visible;
+
 @layer dialtone.components {
 
 //  @@  BASE STYLE
@@ -66,6 +85,19 @@
 
   // Surface — @property provides transparent default
   background-color: var(--box-surface);
+
+  // Border — always solid, safe because @property defaults --box-bw to 0px
+  // and --box-bc to transparent. No visible border until modifier class is added.
+  border-style: solid;
+  border-color: var(--box-bc);
+  border-width: var(--box-bw);
+  border-radius: var(--box-br);
+
+  // Shadow
+  box-shadow: var(--box-shadow, none);
+
+  // Overflow
+  overflow: var(--box-of, visible);
 }
 
 //  ============================================================================
@@ -85,5 +117,50 @@
 //  $$  SURFACE
 //  ----------------------------------------------------------------------------
 ._box-token(surface; --box-surface; dt-color-surface; @box-surface-values);
+
+//  ----------------------------------------------------------------------------
+//  $$  BORDER
+//  ----------------------------------------------------------------------------
+//  ── Border ──────────────────────────────────────────────────────────────────
+._box-token(bc; --box-bc; dt-color-border; @box-border-color-values);
+
+@box-border-width-values: 0, 50, 100, 150, 200, 300, 400;
+@box-border-radius-values: 0, 100, 200, 300, 350, 400, 450, 500, 600;
+
+//  Border width
+each(@box-border-width-values, {
+  .d-box--bw-@{value} { --box-bw: ~"var(--dt-size-border-@{value})"; }
+});
+
+//  Border radius
+each(@box-border-radius-values, {
+  .d-box--br-@{value} { --box-br: ~"var(--dt-size-radius-@{value})"; }
+});
+.d-box--br-pill   { --box-br: var(--dt-size-radius-pill); }
+.d-box--br-circle { --box-br: var(--dt-size-radius-circle); }
+
+//  ----------------------------------------------------------------------------
+//  $$  SHADOW
+//  ----------------------------------------------------------------------------
+//  ── Shadow ──────────────────────────────────────────────────────────────────
+._box-token(shadow; --box-shadow; dt-shadow; @box-shadow-values);
+
+//  ----------------------------------------------------------------------------
+//  $$  SIZING
+//  ----------------------------------------------------------------------------
+//  Layout token values → modifier classes. Raw CSS fallback → inline :style.
+.d-box--is      { ._box-layout(inline-size); }
+.d-box--bls     { ._box-layout(block-size); }
+.d-box--min-is  { ._box-layout(min-inline-size); }
+.d-box--max-is  { ._box-layout(max-inline-size); }
+.d-box--min-bls { ._box-layout(min-block-size); }
+.d-box--max-bls { ._box-layout(max-block-size); }
+
+//  ----------------------------------------------------------------------------
+//  $$  OVERFLOW
+//  ----------------------------------------------------------------------------
+each(@box-overflow-values, {
+  .d-box--of-@{value} { --box-of: @value; }
+});
 
 }

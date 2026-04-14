@@ -26,3 +26,44 @@ export const DT_BOX_SURFACE_VALUES = [
   'success-opaque', 'success-subtle-opaque', 'warning-opaque', 'warning-subtle-opaque',
   'critical-opaque', 'critical-subtle-opaque',
 ];
+
+/**
+ * Border color values (neutral + semantic + variants).
+ * @type {string[]}
+ */
+export const DT_BOX_BORDER_COLOR_VALUES = [
+  'subtle', 'default', 'moderate', 'bold', 'accent', 'focus',
+  'brand', 'info', 'success', 'warning', 'critical',
+  'brand-subtle', 'brand-strong', 'success-subtle', 'success-strong',
+  'warning-subtle', 'warning-strong', 'critical-subtle', 'critical-strong',
+];
+
+/**
+ * Border width values (maps to --dt-size-border-* tokens).
+ * @type {string[]}
+ */
+export const DT_BOX_BORDER_WIDTH_VALUES = ['0', '50', '100', '150', '200', '300', '400'];
+
+/**
+ * Border radius values (maps to --dt-size-radius-* tokens).
+ * @type {string[]}
+ */
+export const DT_BOX_BORDER_RADIUS_VALUES = ['0', '100', '200', '300', '350', '400', '450', '500', '600', 'pill', 'circle'];
+
+/**
+ * Shadow values (maps to --dt-shadow-* tokens).
+ * @type {string[]}
+ */
+export const DT_BOX_SHADOW_VALUES = ['small', 'medium', 'large', 'extra-large', 'card'];
+
+/**
+ * Layout token scale (for sizing props: inlineSize, blockSize, min/max variants).
+ * @type {string[]}
+ */
+export const DT_BOX_LAYOUT_VALUES = ['0', '25', '50', '75', '100', '200', '300', '400', '500', '600', '700', '800', '900', '1000', '1100', '1200', '1300', '1400', '1500', '1600'];
+
+/**
+ * Overflow values.
+ * @type {string[]}
+ */
+export const DT_BOX_OVERFLOW_VALUES = ['hidden', 'scroll', 'auto', 'clip', 'visible'];
