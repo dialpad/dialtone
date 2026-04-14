@@ -1,6 +1,12 @@
-/* eslint-disable max-len */
+ 
 
 export default {
+  defaults: {
+    props: {
+      size: { tokenCategory: 'component-size:avatar' },
+    },
+  },
+
   exclusions: [
     {
       when: { iconOnly: true },
