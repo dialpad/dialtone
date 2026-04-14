@@ -26,6 +26,7 @@
         <span aria-hidden="true">&thinsp;<!-- hold the space --></span>
         <dt-text
           v-if="selectedOption?.resolved"
+          v-dt-tooltip="selectedOption.resolved.includes('/') ? 'Font Size / Line Height' : undefined"
           kind="body"
           :size="100"
           tone="muted"
