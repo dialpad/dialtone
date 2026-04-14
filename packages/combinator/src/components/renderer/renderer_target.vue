@@ -132,7 +132,7 @@ function renderTarget () {
  */
 function renderError (exception, container) {
   render(h(DtNotice, {
-    kind: 'error',
+    kind: 'critical',
     showClose: false,
     title: ERROR_MESSAGE,
   }, {

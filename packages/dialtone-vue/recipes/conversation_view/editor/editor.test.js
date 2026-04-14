@@ -1,4 +1,4 @@
-import { mount } from '@vue/test-utils';
+import { mount, flushPromises } from '@vue/test-utils';
 import DtRecipeEditor from './editor.vue';
 import {
   findVariable,
@@ -101,9 +101,10 @@ describe('DtRecipeEditor tests', () => {
   });
 
   // Test Teardown
-  afterEach(function () {
+  afterEach(async function () {
     propsData = baseProps;
     wrapper.unmount();
+    await flushPromises();
   });
 
   describe('Presentation Tests', function () {

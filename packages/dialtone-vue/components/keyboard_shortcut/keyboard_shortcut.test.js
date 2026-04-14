@@ -51,7 +51,7 @@ describe('DtKeyboardShortcut Tests', () => {
       expect(dtText.props('tone')).toBe('tertiary');
     });
 
-    it('should render inverted text items as DtText with tone="secondary-inverted"', () => {
+    it('should render inverted text items as DtText with tone="tertiary"', () => {
       mockProps = { shortcut: 'X', inverted: true };
 
       updateWrapper();
@@ -59,7 +59,7 @@ describe('DtKeyboardShortcut Tests', () => {
       const dtText = wrapper.findComponent(DtText);
 
       expect(dtText.exists()).toBe(true);
-      expect(dtText.props('tone')).toBe('secondary-inverted');
+      expect(dtText.props('tone')).toBe('tertiary');
     });
   });
 

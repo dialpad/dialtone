@@ -79,6 +79,10 @@
     --tab-color-text-selected: var(--dt-action-color-foreground-base-default);
     --tab-selected-indicator: var(--dt-action-color-foreground-base-default);
 
+    //  --  CSS VARS: traveling indicator animation
+    --tab-indicator-duration: var(--td300);
+    --tab-indicator-easing: var(--ttf-ease);
+
     position: relative;
     display: flex;
     flex-wrap: wrap;
@@ -103,6 +107,7 @@
 
     &__item {
         text-align: start;
+        transition: none;
 
         &--vertical {
             inline-size: 100%;
@@ -110,6 +115,16 @@
             > :where(.d-btn__label) {
                 justify-content: flex-start;
             }
+        }
+
+        //  Animatable overlay for traveling indicator in outlined/muted modes.
+        //  The ::before exists invisibly so Element.animate({ pseudoElement }) can target it.
+        &:is(.d-btn--outlined, .d-btn--active)::before {
+            position: absolute;
+            border-radius: inherit;
+            content: '';
+            pointer-events: none;
+            inset: calc(var(--dt-size-border-100) * -1);
         }
     }
 
@@ -206,9 +221,6 @@
     border: var(--dt-size-border-100) solid var(--dt-action-color-border-base-default);
     border-radius: var(--tab-border-radius) var(--tab-border-radius) var(--tab-border-radius-end) var(--tab-border-radius-end);
     cursor: pointer;
-    transition-timing-function: var(--ttf-out-quint);
-    transition-duration: var(--td100);
-    transition-property: background-color, border, color, box-shadow;
     fill: currentColor;
 
     &:where(:first-of-type) {

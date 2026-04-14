@@ -17,9 +17,10 @@
 </template>
 
 <script setup>
-import { ref, computed, reactive, watchEffect, watch, provide, onMounted } from 'vue';
+import { ref, computed, reactive, watchEffect, watch, provide, onMounted, nextTick } from 'vue';
 import { getUniqueString } from '@/common/utils';
 import { DtStack } from '@/components/stack';
+import { useIndicatorAnimation } from '@/common/composables/useIndicatorAnimation';
 import {
   SEGMENTED_CONTROL_SIZES,
   SEGMENTED_CONTROL_SIZE_DEFAULT,
@@ -140,6 +141,15 @@ const props = defineProps({
     type: [String, Array, Object],
     default: '',
   },
+
+  /**
+   * If true, the selection indicator animates between items on click.
+   * @values true, false
+   */
+  showIndicatorTransition: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 const emit = defineEmits([
@@ -214,7 +224,12 @@ function ensureTabbable () {
   if (firstEnabled) firstEnabled.setAttribute('tabindex', '0');
 }
 
+const indicator = useIndicatorAnimation(
+  container, '--segmented-indicator-duration', '--segmented-indicator-easing',
+);
+
 onMounted(ensureTabbable);
+
 watch(() => [props.modelValue, props.disabled], ensureTabbable, { flush: 'post' });
 
 function getItems () {
@@ -226,14 +241,35 @@ function setFocus (value) {
   focusedValue.value = value;
 }
 
-function selectValue (value) {
+async function selectValue (value, { animate: shouldAnimate = true } = {}) {
   if (props.disabled) return;
   if (value === props.modelValue) return;
   const beforeChangeEvent = new Event('before-change', { cancelable: true });
   emit('before-change', beforeChangeEvent);
   if (beforeChangeEvent.defaultPrevented) return;
+
+  indicator.cancel();
+  const shouldTransition = shouldAnimate && props.showIndicatorTransition;
+  const old = shouldTransition ? indicator.snapshot('[aria-checked="true"]') : null;
+
   emit('update:modelValue', value);
   emit('change', value);
+
+  if (!old) return;
+
+  await nextTick();
+  const newEl = (container.value?.$el || container.value)
+    ?.querySelector(`[${SEGMENTED_CONTROL_DATA_VALUE_ATTR}="${CSS.escape(value)}"]`);
+  if (!newEl) return;
+
+  indicator.animate({
+    oldRect: old.rect,
+    newEl,
+    orientation: props.orientation,
+    hideProps: { backgroundColor: 'transparent' },
+    indicatorExtra: { backgroundColor: old.style.backgroundColor },
+    pseudoElement: '::after',
+  });
 }
 
 function getFocusedIndex (items, event) {
@@ -306,7 +342,11 @@ function handleKeyDown (event) {
   items[newIndex].focus();
 
   if (props.activationMode === 'auto') {
-    activateItem(items[newIndex]);
+    indicator.cancel();
+    const value = items[newIndex].getAttribute(SEGMENTED_CONTROL_DATA_VALUE_ATTR);
+    if (!isItemDisabled(items[newIndex])) {
+      selectValue(value, { animate: false });
+    }
   }
 }
 </script>
