@@ -13,7 +13,7 @@
       class="d-notice__title"
       data-qa="notice-content-title"
     >
-      <!-- @slot Slot for the title. Can also be used as a slot. -->
+      <!-- @slot Slot for the title -->
       <slot name="title">
         {{ title }}
       </slot>
@@ -46,6 +46,7 @@ export default {
   props: {
     /**
      * Title header of the notice. This can be left blank to remove the title from the notice entirely.
+     * Can also be used as a slot.
      */
     title: {
       type: String,

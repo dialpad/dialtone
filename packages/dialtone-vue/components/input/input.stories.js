@@ -69,15 +69,6 @@ export const argTypesData = {
       disable: true,
     },
   },
-  labelSlot: {
-    table: {
-      type: { summary: 'VNode' },
-    },
-    control: {
-      type: 'text',
-    },
-  },
-
   // Props
   modelValue: {
     control: 'text',

@@ -28,7 +28,7 @@
         v-bind="toastListeners"
       >
         <template #title>
-          <!-- @slot Slot for the title. Can also be used as a slot. -->
+          <!-- @slot Slot for the title -->
           <slot name="title" />
         </template>
         <!-- @slot the main textual content of the toast -->

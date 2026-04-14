@@ -56,10 +56,10 @@
           <dt-icon :name="$attrs.icon" />
         </template>
         <template
-          v-if="$attrs.titleSlot"
+          v-if="$attrs.title"
           #title
         >
-          <span v-html="$attrs.titleSlot" />
+          <span v-html="$attrs.title" />
         </template>
       </dt-toast>
     </aside>

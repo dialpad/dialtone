@@ -30,10 +30,10 @@
         item3
       </dt-list-item>
       <template
-        v-if="$attrs.headingSlot"
+        v-if="$attrs.heading"
         #heading
       >
-        <span v-html="$attrs.headingSlot" />
+        <span v-html="$attrs.heading" />
       </template>
     </dt-list-item-group>
   </div>
