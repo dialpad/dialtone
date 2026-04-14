@@ -16,14 +16,14 @@ export const DT_BOX_SPACING_VALUES = ['0', '1', '25', '50', '75', '100', '125', 
  */
 export const DT_BOX_SURFACE_VALUES = [
   'primary', 'secondary', 'moderate', 'bold', 'strong', 'contrast', 'backdrop',
-  'brand', 'info', 'success', 'warning', 'critical',
+  'brand', 'info', 'positive', 'warning', 'critical',
   'brand-subtle', 'brand-strong', 'info-subtle', 'info-strong',
-  'success-subtle', 'success-strong', 'warning-subtle', 'warning-strong',
+  'positive-subtle', 'positive-strong', 'warning-subtle', 'warning-strong',
   'critical-subtle', 'critical-strong',
   'primary-opaque', 'secondary-opaque', 'moderate-opaque', 'bold-opaque',
   'strong-opaque', 'contrast-opaque',
   'brand-opaque', 'brand-subtle-opaque', 'info-opaque', 'info-subtle-opaque',
-  'success-opaque', 'success-subtle-opaque', 'warning-opaque', 'warning-subtle-opaque',
+  'positive-opaque', 'positive-subtle-opaque', 'warning-opaque', 'warning-subtle-opaque',
   'critical-opaque', 'critical-subtle-opaque',
 ];
 
@@ -33,8 +33,8 @@ export const DT_BOX_SURFACE_VALUES = [
  */
 export const DT_BOX_BORDER_COLOR_VALUES = [
   'transparent', 'subtle', 'default', 'moderate', 'bold', 'accent', 'focus',
-  'brand', 'success', 'warning', 'critical',
-  'brand-subtle', 'brand-strong', 'success-subtle', 'success-strong',
+  'brand', 'positive', 'warning', 'critical',
+  'brand-subtle', 'brand-strong', 'positive-subtle', 'positive-strong',
   'warning-subtle', 'warning-strong', 'critical-subtle', 'critical-strong',
 ];
 

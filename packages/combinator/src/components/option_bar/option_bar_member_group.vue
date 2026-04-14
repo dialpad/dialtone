@@ -48,6 +48,14 @@ const PROP_PRIORITY = [
   'title', 'as', 'label', 'size', 'kind',
   'importance', 'placement', 'tone', 'align', 'density', 'strength',
   'type', 'underline', 'selected', 'active', 'disabled', 'color', 'description',
+  'scrollbar', 'surface',
+  'borderColor', 'borderRadius',
+  'borderWidth', 'borderWidthBlock', 'borderWidthBlockEnd', 'borderWidthBlockStart',
+  'borderWidthInline', 'borderWidthInlineEnd', 'borderWidthInlineStart',
+  'padding', 'paddingBlock', 'paddingBlockEnd', 'paddingBlockStart',
+  'paddingInline', 'paddingInlineEnd', 'paddingInlineStart',
+  'blockSize', 'inlineSize', 'maxBlockSize', 'minBlockSize', 'maxInlineSize', 'minInlineSize',
+  'shadow', 'overflow',
 ];
 
 const SLOT_PRIORITY = ['start', 'end', 'inlineStart', 'inlineEnd', 'blockStart', 'blockEnd', 'leading', 'trailing'];

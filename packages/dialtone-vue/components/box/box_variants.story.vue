@@ -245,8 +245,8 @@ export default {
   data () {
     return {
       neutralSurfaces: ['primary', 'secondary', 'moderate', 'bold', 'strong', 'contrast'],
-      semanticSurfaces: ['brand', 'info', 'success', 'warning', 'critical'],
-      variantSurfaces: ['brand-subtle', 'brand-strong', 'info-subtle', 'info-strong', 'success-subtle', 'success-strong', 'warning-subtle', 'warning-strong', 'critical-subtle', 'critical-strong'],
+      semanticSurfaces: ['brand', 'info', 'positive', 'warning', 'critical'],
+      variantSurfaces: ['brand-subtle', 'brand-strong', 'info-subtle', 'info-strong', 'positive-subtle', 'positive-strong', 'warning-subtle', 'warning-strong', 'critical-subtle', 'critical-strong'],
       opaqueSurfaces: ['primary-opaque', 'secondary-opaque', 'moderate-opaque', 'bold-opaque', 'strong-opaque', 'contrast-opaque'],
       borderColors: DT_BOX_BORDER_COLOR_VALUES,
       borderWidths: DT_BOX_BORDER_WIDTH_VALUES,

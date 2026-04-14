@@ -150,12 +150,24 @@
 //  ----------------------------------------------------------------------------
 ._box-token(surface; --box-surface; dt-color-surface; @box-surface-values);
 
+//  Prop aliases: positive → success token
+.d-box--surface-positive          { --box-surface: var(--dt-color-surface-success); }
+.d-box--surface-positive-subtle   { --box-surface: var(--dt-color-surface-success-subtle); }
+.d-box--surface-positive-strong   { --box-surface: var(--dt-color-surface-success-strong); }
+.d-box--surface-positive-opaque   { --box-surface: var(--dt-color-surface-success-opaque); }
+.d-box--surface-positive-subtle-opaque { --box-surface: var(--dt-color-surface-success-subtle-opaque); }
+
 //  ----------------------------------------------------------------------------
 //  $$  BORDER
 //  ----------------------------------------------------------------------------
 //  ── Border ──────────────────────────────────────────────────────────────────
 .d-box--bc-transparent { --box-bc: transparent; }
 ._box-token(bc; --box-bc; dt-color-border; @box-border-color-values);
+
+//  Prop aliases: positive → success token
+.d-box--bc-positive        { --box-bc: var(--dt-color-border-success); }
+.d-box--bc-positive-subtle { --box-bc: var(--dt-color-border-success-subtle); }
+.d-box--bc-positive-strong { --box-bc: var(--dt-color-border-success-strong); }
 
 @box-border-radius-values: 0, 100, 200, 300, 350, 400, 450, 500, 600;
 

@@ -159,7 +159,7 @@ export const NestedInheritanceIsolation = {
         <dt-box padding="500" surface="moderate" border-width="100">
           <dt-stack gap="200">
             <dt-text kind="body" :size="200">Outer: padding 500</dt-text>
-            <dt-box padding="100" surface="success-subtle" border-width="100">
+            <dt-box padding="100" surface="positive-subtle" border-width="100">
               <dt-text kind="body" :size="200">Inner: padding 100 (no inheritance leak)</dt-text>
             </dt-box>
           </dt-stack>
