@@ -18,6 +18,9 @@ export default {
       kind: {
         initialValue: 'body',
       },
+      size: {
+        initialValue: '300',
+      },
     },
   },
   'Extra large headline': {

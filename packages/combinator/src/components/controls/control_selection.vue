@@ -136,7 +136,7 @@ const options = computed(() => {
 });
 
 const selectedOption = computed(() => {
-  return options.value.find(o => o.value === props.value);
+  return options.value.find(o => String(o.value) === String(props.value));
 });
 
 const selectedLabel = computed(() => selectedOption.value?.label ?? '');
