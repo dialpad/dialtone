@@ -68,6 +68,10 @@
   each(range(0, 1600, 100), {
     &-@{value} { @{prop}: ~"var(--dt-layout-@{value})"; }
   });
+  // Percentage tokens
+  each(@box-layout-percent-values, {
+    &-@{value}-percent { @{prop}: ~"var(--dt-layout-@{value}-percent)"; }
+  });
 }
 
 ._box-border-width(@prop) {
@@ -98,6 +102,7 @@
 @box-border-color-values: subtle, default, moderate, bold, accent, focus, brand, success, warning, critical, brand-subtle, brand-strong, success-subtle, success-strong, warning-subtle, warning-strong, critical-subtle, critical-strong;
 
 @box-border-width-values: 0, 50, 100, 150, 200, 300, 400;
+@box-layout-percent-values: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 95, 100;
 @box-shadow-values: small, medium, large, extra-large, card;
 @box-overflow-values: hidden, scroll, auto, clip, visible;
 

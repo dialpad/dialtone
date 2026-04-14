@@ -147,22 +147,34 @@ const props = defineProps({
    */
   paddingInlineStart: { type: String, default: undefined, validator: spacingValidator },
 
-  /** @values 0, 25, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600 */
+  /**
+   * @values 0, 25, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10-percent, 20-percent, 25-percent, 30-percent, 33-percent, 40-percent, 50-percent, 60-percent, 66-percent, 70-percent, 75-percent, 80-percent, 90-percent, 95-percent, 100-percent
+   */
   blockSize: { type: String, default: undefined, validator: layoutValidator },
 
-  /** @values 0, 25, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600 */
+  /**
+   * @values 0, 25, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10-percent, 20-percent, 25-percent, 30-percent, 33-percent, 40-percent, 50-percent, 60-percent, 66-percent, 70-percent, 75-percent, 80-percent, 90-percent, 95-percent, 100-percent
+   */
   inlineSize: { type: String, default: undefined, validator: layoutValidator },
 
-  /** @values 0, 25, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600 */
+  /**
+   * @values 0, 25, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10-percent, 20-percent, 25-percent, 30-percent, 33-percent, 40-percent, 50-percent, 60-percent, 66-percent, 70-percent, 75-percent, 80-percent, 90-percent, 95-percent, 100-percent
+   */
   maxBlockSize: { type: String, default: undefined, validator: layoutValidator },
 
-  /** @values 0, 25, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600 */
+  /**
+   * @values 0, 25, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10-percent, 20-percent, 25-percent, 30-percent, 33-percent, 40-percent, 50-percent, 60-percent, 66-percent, 70-percent, 75-percent, 80-percent, 90-percent, 95-percent, 100-percent
+   */
   minBlockSize: { type: String, default: undefined, validator: layoutValidator },
 
-  /** @values 0, 25, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600 */
+  /**
+   * @values 0, 25, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10-percent, 20-percent, 25-percent, 30-percent, 33-percent, 40-percent, 50-percent, 60-percent, 66-percent, 70-percent, 75-percent, 80-percent, 90-percent, 95-percent, 100-percent
+   */
   maxInlineSize: { type: String, default: undefined, validator: layoutValidator },
 
-  /** @values 0, 25, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600 */
+  /**
+   * @values 0, 25, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10-percent, 20-percent, 25-percent, 30-percent, 33-percent, 40-percent, 50-percent, 60-percent, 66-percent, 70-percent, 75-percent, 80-percent, 90-percent, 95-percent, 100-percent
+   */
   minInlineSize: { type: String, default: undefined, validator: layoutValidator },
 
   /** @values small, medium, large, extra-large, card */
