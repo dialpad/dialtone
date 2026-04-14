@@ -1,7 +1,13 @@
-/* eslint-disable max-len */
+ 
  
 
 export default {
+  defaults: {
+    props: {
+      labelSize: { tokenCategory: 'typography-size:label' },
+    },
+  },
+
   exclusions: [
     {
       when: { labelVisible: false },
