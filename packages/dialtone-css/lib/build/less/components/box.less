@@ -32,7 +32,19 @@
 
 @property --box-bc { syntax: "<color>"; inherits: false; initial-value: transparent; }
 
-@property --box-bw { syntax: "<length>"; inherits: false; initial-value: 0; }
+@property --box-bw { syntax: "*"; inherits: false; }
+
+@property --box-bwi { syntax: "*"; inherits: false; }
+
+@property --box-bwis { syntax: "*"; inherits: false; }
+
+@property --box-bwie { syntax: "*"; inherits: false; }
+
+@property --box-bwbl { syntax: "*"; inherits: false; }
+
+@property --box-bwbs { syntax: "*"; inherits: false; }
+
+@property --box-bwbe { syntax: "*"; inherits: false; }
 
 @property --box-br { syntax: "<length-percentage>"; inherits: false; initial-value: 0; }
 
@@ -58,6 +70,12 @@
   });
 }
 
+._box-border-width(@prop) {
+  each(@box-border-width-values, {
+    &-@{value} { @{prop}: ~"var(--dt-size-border-@{value})"; }
+  });
+}
+
 ._box-spacing(@prop) {
   // Stops outside both range() sequences: 1 (not a multiple of 25), 525 (not a multiple of 50)
   &-1 { @{prop}: var(--dt-spacing-1); }
@@ -79,6 +97,7 @@
 
 @box-border-color-values: subtle, default, moderate, bold, accent, focus, brand, success, warning, critical, brand-subtle, brand-strong, success-subtle, success-strong, warning-subtle, warning-strong, critical-subtle, critical-strong;
 
+@box-border-width-values: 0, 50, 100, 150, 200, 300, 400;
 @box-shadow-values: small, medium, large, extra-large, card;
 @box-overflow-values: hidden, scroll, auto, clip, visible;
 
@@ -97,8 +116,12 @@
   border-color: var(--box-bc);
 
   // Border — always solid, no visible border until borderWidth prop is set.
+  // Width cascade: specific → axis → shorthand → 0
   border-style: solid;
-  border-width: var(--box-bw, 0);
+  border-block-start-width:  var(--box-bwbs, var(--box-bwbl, var(--box-bw, 0)));
+  border-block-end-width:    var(--box-bwbe, var(--box-bwbl, var(--box-bw, 0)));
+  border-inline-start-width: var(--box-bwis, var(--box-bwi,  var(--box-bw, 0)));
+  border-inline-end-width:   var(--box-bwie, var(--box-bwi,  var(--box-bw, 0)));
   border-radius: var(--box-br);
 
   // Shadow
@@ -134,13 +157,16 @@
 .d-box--bc-transparent { --box-bc: transparent; }
 ._box-token(bc; --box-bc; dt-color-border; @box-border-color-values);
 
-@box-border-width-values: 0, 50, 100, 150, 200, 300, 400;
 @box-border-radius-values: 0, 100, 200, 300, 350, 400, 450, 500, 600;
 
-//  Border width
-each(@box-border-width-values, {
-  .d-box--bw-@{value} { --box-bw: ~"var(--dt-size-border-@{value})"; }
-});
+//  Border width — 7 axes × border-width scale
+.d-box--bw    { ._box-border-width(--box-bw); }
+.d-box--bwi   { ._box-border-width(--box-bwi); }
+.d-box--bwis  { ._box-border-width(--box-bwis); }
+.d-box--bwie  { ._box-border-width(--box-bwie); }
+.d-box--bwbl  { ._box-border-width(--box-bwbl); }
+.d-box--bwbs  { ._box-border-width(--box-bwbs); }
+.d-box--bwbe  { ._box-border-width(--box-bwbe); }
 
 //  Border radius
 each(@box-border-radius-values, {

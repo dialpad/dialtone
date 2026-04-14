@@ -152,6 +152,66 @@ const props = defineProps({
   },
 
   /**
+   * Border width on the inline axis. Overrides `borderWidth` for inline sides.
+   * @values 0, 50, 100, 150, 200, 300, 400
+   */
+  borderWidthInline: {
+    type: String,
+    default: undefined,
+    validator: borderWidthValidator,
+  },
+
+  /**
+   * Border width on the inline-start side. Overrides `borderWidthInline`.
+   * @values 0, 50, 100, 150, 200, 300, 400
+   */
+  borderWidthInlineStart: {
+    type: String,
+    default: undefined,
+    validator: borderWidthValidator,
+  },
+
+  /**
+   * Border width on the inline-end side. Overrides `borderWidthInline`.
+   * @values 0, 50, 100, 150, 200, 300, 400
+   */
+  borderWidthInlineEnd: {
+    type: String,
+    default: undefined,
+    validator: borderWidthValidator,
+  },
+
+  /**
+   * Border width on the block axis. Overrides `borderWidth` for block sides.
+   * @values 0, 50, 100, 150, 200, 300, 400
+   */
+  borderWidthBlock: {
+    type: String,
+    default: undefined,
+    validator: borderWidthValidator,
+  },
+
+  /**
+   * Border width on the block-start side. Overrides `borderWidthBlock`.
+   * @values 0, 50, 100, 150, 200, 300, 400
+   */
+  borderWidthBlockStart: {
+    type: String,
+    default: undefined,
+    validator: borderWidthValidator,
+  },
+
+  /**
+   * Border width on the block-end side. Overrides `borderWidthBlock`.
+   * @values 0, 50, 100, 150, 200, 300, 400
+   */
+  borderWidthBlockEnd: {
+    type: String,
+    default: undefined,
+    validator: borderWidthValidator,
+  },
+
+  /**
    * Border color. Maps to --dt-color-border-* tokens.
    * Defaults to 'default'. Only applies when the `borderWidth` prop is set.
    * @values transparent, subtle, default, moderate, bold, accent, focus, brand, success, warning, critical, brand-subtle, brand-strong, ...
@@ -290,6 +350,12 @@ function visualClasses (p) {
     modifierClass('d-box--surface', p.surface),
     modifierClass('d-box--bc', p.borderColor),
     modifierClass('d-box--bw', p.borderWidth),
+    modifierClass('d-box--bwi', p.borderWidthInline),
+    modifierClass('d-box--bwis', p.borderWidthInlineStart),
+    modifierClass('d-box--bwie', p.borderWidthInlineEnd),
+    modifierClass('d-box--bwbl', p.borderWidthBlock),
+    modifierClass('d-box--bwbs', p.borderWidthBlockStart),
+    modifierClass('d-box--bwbe', p.borderWidthBlockEnd),
     modifierClass('d-box--br', p.borderRadius),
     modifierClass('d-box--shadow', p.shadow),
     modifierClass('d-box--of', p.overflow),

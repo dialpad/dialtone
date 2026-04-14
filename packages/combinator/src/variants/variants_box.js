@@ -5,63 +5,37 @@ export default {
     },
   },
 
-  'card composition': {
-    props: {
-      padding: { initialValue: '300' },
-      surface: { initialValue: 'primary' },
 
+  'custom card': {
+    props: {
+      as: { initialValue: 'aside' },
+      padding: { initialValue: '200' },
+      surface: { initialValue: 'primary' },
       borderWidth: { initialValue: '100' },
-      borderRadius: { initialValue: '300' },
+      borderColor: { initialValue: 'subtle' },
+      borderRadius: { initialValue: '400' },
       shadow: { initialValue: 'card' },
     },
     slots: {
       default: { initialValue: `<dt-stack gap="200">
-  <dt-text kind="headline" size="md">Card title</dt-text>
-  <dt-text kind="body" size="sm">Card body content with some descriptive text.</dt-text>
+  <dt-text as="h2" kind="headline" size="md">Card title</dt-text>
+  <dt-text as="p" kind="body" size="sm">Card body content with some descriptive text.</dt-text>
 </dt-stack>` },
-    },
-  },
-
-  'brand surface': {
-    props: {
-      padding: { initialValue: '300' },
-      surface: { initialValue: 'brand-subtle' },
-      borderColor: { initialValue: 'brand' },
-      borderWidth: { initialValue: '100' },
-      borderRadius: { initialValue: '200' },
-    },
-    slots: {
-      default: { initialValue: `<dt-text kind="body" size="sm">
-  Brand informational content
-</dt-text>` },
     },
   },
 
   'critical surface': {
     props: {
       padding: { initialValue: '300' },
-      surface: { initialValue: 'critical-subtle' },
+      surface: { initialValue: 'critical' },
       borderColor: { initialValue: 'critical' },
       borderWidth: { initialValue: '100' },
-      borderRadius: { initialValue: '200' },
+      borderRadius: { initialValue: '500' },
     },
     slots: {
       default: { initialValue: `<dt-text kind="body" size="sm">
-  Critical error message
+  Critical container
 </dt-text>` },
-    },
-  },
-
-  'padding cascade': {
-    props: {
-      padding: { initialValue: '400' },
-      paddingInline: { initialValue: '100' },
-      surface: { initialValue: 'moderate' },
-
-      borderWidth: { initialValue: '100' },
-    },
-    slots: {
-      default: { initialValue: 'Block padding 400, inline padding 100' },
     },
   },
 
@@ -83,16 +57,16 @@ export default {
     },
   },
 
-  'sized with layout token': {
+  'sized': {
     props: {
       padding: { initialValue: '200' },
-      surface: { initialValue: 'secondary' },
-
+      surface: { initialValue: 'moderate' },
       borderWidth: { initialValue: '100' },
       inlineSize: { initialValue: '500' },
+      blockSize: { initialValue: '600' },
     },
     slots: {
-      default: { initialValue: 'Fixed inline-size 500 (320px via layout token)' },
+      default: { initialValue: 'Fixed size' },
     },
   },
 
@@ -112,7 +86,7 @@ export default {
     props: {
       padding: { initialValue: '100' },
       paddingInline: { initialValue: '200' },
-      surface: { initialValue: 'brand-subtle' },
+      surface: { initialValue: 'moderate' },
       borderRadius: { initialValue: 'pill' },
     },
     slots: {
