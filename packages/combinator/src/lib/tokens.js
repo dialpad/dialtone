@@ -81,6 +81,9 @@ export function resolveTokenValue (category, value, propValues) {
     case 'line-height':
       result = resolveLineHeight(value);
       break;
+    case 'component-size':
+      result = resolveComponentSize(baseCategory, kindOverride, value);
+      break;
   }
 
   cache.set(cacheKey, result);
@@ -95,6 +98,23 @@ function resolveSpacing (value) {
 function resolveIconSize (value) {
   const px = resolveCssVar(`--dt-icon-size-${value}`);
   return px ? formatPx(px) : null;
+}
+
+function resolveComponentSize (category, componentClass, value) {
+  const el = getMeasureElement();
+  try {
+    // Apply the size modifier class to set the CSS custom property,
+    // then read it via width. The actual dimension lives on a child element
+    // (e.g. .d-avatar__canvas), but the custom property is set on the root.
+    el.className = `d-${componentClass} d-${componentClass}--size-${value}`;
+    el.style.width = `var(--${componentClass}-size-shape)`;
+    const size = getComputedStyle(el).width;
+    if (!size || size === 'auto' || size === '0px') return null;
+    return formatPx(size);
+  } finally {
+    el.className = '';
+    el.style.width = '';
+  }
 }
 
 function resolveLineHeight (value) {
