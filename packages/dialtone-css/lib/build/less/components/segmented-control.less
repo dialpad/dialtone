@@ -16,6 +16,10 @@
   --radius-segmented-control-item: var(--dt-button-size-radius-md);
   --radius-segmented-control: calc(var(--radius-segmented-control-item) + var(--padding-segmented-control));
 
+  //  --  CSS VARS: traveling indicator animation
+  --segmented-indicator-duration: var(--td300);
+  --segmented-indicator-easing: var(--ttf-ease);
+
   gap: var(--padding-segmented-control);
   padding: var(--padding-segmented-control);
   border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
@@ -64,6 +68,17 @@
   &__item {
     flex: 1 1 auto;
     border-radius: var(--radius-segmented-control-item);
+    transition: none;
+
+    //  Animatable overlay for traveling indicator.
+    //  The ::after exists invisibly so Element.animate({ pseudoElement }) can target it.
+    &.d-btn--active::after {
+      position: absolute;
+      border-radius: var(--radius-segmented-control-item);
+      content: '';
+      pointer-events: none;
+      inset: var(--dt-spacing-1-negative);
+    }
   }
 
   //  --  DIVIDERS
