@@ -361,20 +361,29 @@ function updateVariant (e) {
   nextTick(() => { _presetChanging = false; });
 }
 
+/**
+ * Merges variant override data into an info object.
+ *
+ * @param {object} info - The info object to merge into.
+ * @param {object} variantData - The variant data to merge.
+ */
+function mergeVariantData (info, variantData) {
+  if (!variantData) return;
+  Object.entries(variantData).forEach(([memberGroup, members]) => {
+    if (memberGroup === 'exclusions') return;
+    Object.entries(members).forEach(([memberName, member]) => {
+      const infoMember = info[memberGroup]?.find(m => m.name === memberName);
+      if (infoMember) Object.assign(infoMember, member);
+    });
+  });
+}
+
 const defaultInfo = computed(() => {
   const info = cloneInfoMembers(
     getComponentInfo(props.component, props.documentation),
   );
-  const defaultVariant = props.variants?.default;
-  if (defaultVariant) {
-    Object.entries(defaultVariant).forEach(([memberGroup, members]) => {
-      if (memberGroup === 'exclusions') return;
-      Object.entries(members).forEach(([memberName, member]) => {
-        const infoMember = info[memberGroup]?.find(m => m.name === memberName);
-        if (infoMember) Object.assign(infoMember, member);
-      });
-    });
-  }
+  mergeVariantData(info, props.variants?.defaults);
+  mergeVariantData(info, props.variants?.default);
   return info;
 });
 
@@ -406,19 +415,8 @@ function initializeInfo () {
     getComponentInfo(props.component, props.documentation),
   );
 
-  const variantInfo = props.variants?.[activeVariant.value];
-
-  if (variantInfo) {
-    Object.entries(variantInfo).forEach(([memberGroup, members]) => {
-      if (memberGroup === 'exclusions') return;
-      Object.entries(members).forEach(([memberName, member]) => {
-        const infoMember = info[memberGroup]?.find(m => m.name === memberName);
-        if (infoMember) {
-          Object.assign(infoMember, member);
-        }
-      });
-    });
-  }
+  mergeVariantData(info, props.variants?.defaults);
+  mergeVariantData(info, props.variants?.[activeVariant.value]);
 
   info.exclusions = props.variants?.exclusions ?? [];
 

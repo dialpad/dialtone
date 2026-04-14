@@ -22,7 +22,16 @@
         class="d-w100p"
         label-class="d-jc-space-between d-fw-normal"
       >
-        {{ selectedLabel }}<span aria-hidden="true">&thinsp;<!-- hold the space --></span>
+        {{ selectedLabel }}
+        <span aria-hidden="true">&thinsp;<!-- hold the space --></span>
+        <dt-text
+          v-if="selectedOption?.resolved"
+          kind="body"
+          :size="100"
+          tone="muted"
+        >
+          {{ selectedOption.resolved }}
+        </dt-text>
         <template #endIcon="{ iconSize }">
           <dt-icon-chevrons-up-down
             class="d-fc-muted"
@@ -39,7 +48,23 @@
         navigation-type="arrow-keys"
         @click="onInput(option.value); close()"
       >
-        {{ option.label }}
+        <dt-stack
+          direction="row"
+          gap="200"
+          align="baseline"
+          class="d-w100p"
+        >
+          <span>{{ option.label }}</span>
+          <dt-text
+            v-if="option.resolved"
+            kind="body"
+            :size="100"
+            tone="muted"
+            class="d-mis-auto"
+          >
+            {{ option.resolved }}
+          </dt-text>
+        </dt-stack>
         <template #end>
           <dt-icon-check
             size="200"
@@ -52,10 +77,11 @@
 </template>
 
 <script setup>
-import { DtButton, DtText } from '@dialpad/dialtone-vue';
+import { DtButton, DtStack, DtText } from '@dialpad/dialtone-vue';
 import { DtIconChevronsUpDown, DtIconCheck } from '@dialpad/dialtone-icons/vue';
 
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
+import { resolveTokenValue } from '@/src/lib/tokens';
 import { computed } from 'vue';
 
 const props = defineProps({
@@ -79,6 +105,14 @@ const props = defineProps({
     type: Function,
     default: (value) => value.toString(),
   },
+  tokenCategory: {
+    type: String,
+    default: undefined,
+  },
+  propValues: {
+    type: Object,
+    default: undefined,
+  },
 });
 
 const emit = defineEmits([VALUE_UPDATE_EVENT]);
@@ -89,7 +123,10 @@ function onInput (e) {
 
 const options = computed(() => {
   const valueOptions = props.validValues?.map(selection => {
-    return { value: selection, label: props.generateLabel(selection) };
+    const resolved = props.tokenCategory
+      ? resolveTokenValue(props.tokenCategory, selection, props.propValues)
+      : null;
+    return { value: selection, label: props.generateLabel(selection), resolved };
   }) ?? [];
 
   if (props.defaultValue === null || props.defaultValue === undefined) {
@@ -98,10 +135,11 @@ const options = computed(() => {
   return valueOptions;
 });
 
-const selectedLabel = computed(() => {
-  const option = options.value.find(o => o.value === props.value);
-  return option?.label ?? '';
+const selectedOption = computed(() => {
+  return options.value.find(o => o.value === props.value);
 });
+
+const selectedLabel = computed(() => selectedOption.value?.label ?? '');
 </script>
 
 <script>

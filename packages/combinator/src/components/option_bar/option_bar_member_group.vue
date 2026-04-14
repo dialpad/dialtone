@@ -23,6 +23,8 @@
           validTypes: member.types,
           tags: member.tags,
           bindings: member.bindings,
+          tokenCategory: member.tokenCategory,
+          propValues,
         }"
         @update:value="e => updateMember(e, key)"
         @update:control="e => updateControl(e, key)"

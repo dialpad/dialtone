@@ -1,6 +1,12 @@
-/* eslint-disable max-len */
+ 
 
 export default {
+  defaults: {
+    props: {
+      iconSize: { tokenCategory: 'icon-size' },
+    },
+  },
+
   exclusions: [
     {
       when: { kind: 'count' },
@@ -49,8 +55,8 @@ export default {
   },
 
   locked: {
-    iconSize: {
-      initialValue: '100',
+    props: {
+      iconSize: { initialValue: '100' },
     },
     slots: {
       startIcon: { initialValue: '<dt-icon-lock :size="iconSize" />' },
