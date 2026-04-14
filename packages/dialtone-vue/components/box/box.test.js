@@ -6,9 +6,10 @@ import {
 
 describe('DtBox', () => {
   const slotContent = 'Box content';
+  let wrapper;
 
   const mountComponent = (props = {}, attrs = {}, slots = {}) => {
-    return mount(DtBox, {
+    wrapper = mount(DtBox, {
       props,
       attrs,
       slots: {
@@ -16,7 +17,12 @@ describe('DtBox', () => {
         ...slots,
       },
     });
+    return wrapper;
   };
+
+  afterEach(() => {
+    wrapper?.unmount();
+  });
 
   // ── Presentation ──────────────────────────────────────────
 

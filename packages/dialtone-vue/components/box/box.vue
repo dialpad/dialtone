@@ -253,7 +253,7 @@ const props = defineProps({
 
 const scrollbarMode = computed(() => {
   if (props.scrollbar === true) return 'leave';
-  return props.scrollbar || undefined;
+  return props.scrollbar ?? undefined;
 });
 
 function modifierClass (prefix, value) {

@@ -186,9 +186,7 @@ each(@box-overflow-values, {
 }
 
 .d-box:has(> .d-box__scrollbar-content) {
-  // Scrollbar-aware overrides — OverlayScrollbars manages overflow internally.
-  // Reserve this selector for future scrollbar-specific styling needs
-  // (e.g., shifting padding to the inner wrapper).
+  overflow: hidden;
 }
 
 }
