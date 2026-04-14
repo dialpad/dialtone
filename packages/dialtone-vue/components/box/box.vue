@@ -6,7 +6,10 @@
     data-qa="dt-box"
     :class="boxClasses"
   >
-    <div class="d-box__scrollbar-content">
+    <div
+      data-qa="dt-box-scrollbar-content"
+      class="d-box__scrollbar-content"
+    >
       <!-- @slot Slot for main content -->
       <slot />
     </div>

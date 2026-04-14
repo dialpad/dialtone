@@ -2,6 +2,12 @@ import { mount } from '@vue/test-utils';
 import DtBox from './box.vue';
 import {
   DT_BOX_AS_VALUES,
+  DT_BOX_SURFACE_VALUES,
+  DT_BOX_BORDER_COLOR_VALUES,
+  DT_BOX_BORDER_WIDTH_VALUES,
+  DT_BOX_BORDER_RADIUS_VALUES,
+  DT_BOX_SHADOW_VALUES,
+  DT_BOX_OVERFLOW_VALUES,
 } from './box_constants.js';
 
 describe('DtBox', () => {
@@ -129,12 +135,9 @@ describe('DtBox', () => {
     expect(wrapper.classes()).toContain('d-box--surface-primary');
   });
 
-  it.each([
-    'secondary', 'moderate', 'bold', 'strong', 'contrast',
-    'brand', 'info', 'success', 'warning', 'critical',
-    'brand-subtle', 'brand-strong',
-    'primary-opaque', 'brand-subtle-opaque',
-  ])('applies surface modifier class for %s', (surface) => {
+  it.each(
+    DT_BOX_SURFACE_VALUES.filter(v => v !== 'primary'),
+  )('applies surface modifier class for %s', (surface) => {
     const wrapper = mountComponent({ surface });
 
     expect(wrapper.classes()).toContain(`d-box--surface-${surface}`);
@@ -155,11 +158,9 @@ describe('DtBox', () => {
     expect(wrapper.classes()).toContain('d-box--bc-default');
   });
 
-  it.each([
-    'subtle', 'moderate', 'bold', 'accent', 'focus',
-    'brand', 'info', 'success', 'warning', 'critical',
-    'brand-subtle', 'brand-strong',
-  ])('applies borderColor modifier class for %s', (borderColor) => {
+  it.each(
+    DT_BOX_BORDER_COLOR_VALUES.filter(v => v !== 'default'),
+  )('applies borderColor modifier class for %s', (borderColor) => {
     const wrapper = mountComponent({ borderColor });
 
     expect(wrapper.classes()).toContain(`d-box--bc-${borderColor}`);
@@ -180,7 +181,9 @@ describe('DtBox', () => {
     expect(wrapper.classes()).toContain('d-box--bw-100');
   });
 
-  it.each(['0', '50', '150', '200', '300', '400'])('applies borderWidth modifier class for %s', (borderWidth) => {
+  it.each(
+    DT_BOX_BORDER_WIDTH_VALUES.filter(v => v !== '100'),
+  )('applies borderWidth modifier class for %s', (borderWidth) => {
     const wrapper = mountComponent({ borderWidth });
 
     expect(wrapper.classes()).toContain(`d-box--bw-${borderWidth}`);
@@ -201,7 +204,9 @@ describe('DtBox', () => {
     expect(wrapper.classes()).toContain('d-box--br-200');
   });
 
-  it.each(['0', '300', '500', 'pill', 'circle'])('applies borderRadius modifier class for %s', (borderRadius) => {
+  it.each(
+    DT_BOX_BORDER_RADIUS_VALUES.filter(v => v !== '200'),
+  )('applies borderRadius modifier class for %s', (borderRadius) => {
     const wrapper = mountComponent({ borderRadius });
 
     expect(wrapper.classes()).toContain(`d-box--br-${borderRadius}`);
@@ -222,7 +227,9 @@ describe('DtBox', () => {
     expect(wrapper.classes()).toContain('d-box--shadow-small');
   });
 
-  it.each(['medium', 'large', 'extra-large', 'card'])('applies shadow modifier class for %s', (shadow) => {
+  it.each(
+    DT_BOX_SHADOW_VALUES.filter(v => v !== 'small'),
+  )('applies shadow modifier class for %s', (shadow) => {
     const wrapper = mountComponent({ shadow });
 
     expect(wrapper.classes()).toContain(`d-box--shadow-${shadow}`);
@@ -295,6 +302,18 @@ describe('DtBox', () => {
     expect(wrapper.classes()).toContain('d-box--min-bls-100');
   });
 
+  it('applies minInlineSize modifier class for layout token', () => {
+    const wrapper = mountComponent({ minInlineSize: '200' });
+
+    expect(wrapper.classes()).toContain('d-box--min-is-200');
+  });
+
+  it('applies maxBlockSize modifier class for layout token', () => {
+    const wrapper = mountComponent({ maxBlockSize: '600' });
+
+    expect(wrapper.classes()).toContain('d-box--max-bls-600');
+  });
+
   // ── Overflow ──────────────────────────────────────────────
 
   it('applies overflow modifier class', () => {
@@ -303,7 +322,9 @@ describe('DtBox', () => {
     expect(wrapper.classes()).toContain('d-box--of-hidden');
   });
 
-  it.each(['scroll', 'auto', 'clip', 'visible'])('applies overflow modifier class for %s', (overflow) => {
+  it.each(
+    DT_BOX_OVERFLOW_VALUES.filter(v => v !== 'hidden'),
+  )('applies overflow modifier class for %s', (overflow) => {
     const wrapper = mountComponent({ overflow });
 
     expect(wrapper.classes()).toContain(`d-box--of-${overflow}`);
@@ -321,25 +342,25 @@ describe('DtBox', () => {
   it('renders scrollbar viewport wrapper when scrollbar prop is set', () => {
     const wrapper = mountComponent({ scrollbar: 'never' });
 
-    expect(wrapper.find('.d-box__scrollbar-content').exists()).toBe(true);
+    expect(wrapper.find('[data-qa="dt-box-scrollbar-content"]').exists()).toBe(true);
   });
 
   it('does not render scrollbar wrapper when scrollbar prop is undefined', () => {
     const wrapper = mountComponent();
 
-    expect(wrapper.find('.d-box__scrollbar-content').exists()).toBe(false);
+    expect(wrapper.find('[data-qa="dt-box-scrollbar-content"]').exists()).toBe(false);
   });
 
   it('renders scrollbar wrapper when scrollbar is true', () => {
     const wrapper = mountComponent({ scrollbar: true });
 
-    expect(wrapper.find('.d-box__scrollbar-content').exists()).toBe(true);
+    expect(wrapper.find('[data-qa="dt-box-scrollbar-content"]').exists()).toBe(true);
   });
 
   it('renders slot content inside scrollbar wrapper', () => {
     const wrapper = mountComponent({ scrollbar: 'leave' });
 
-    expect(wrapper.find('.d-box__scrollbar-content').text()).toBe(slotContent);
+    expect(wrapper.find('[data-qa="dt-box-scrollbar-content"]').text()).toBe(slotContent);
   });
 
   // ── Attrs passthrough ─────────────────────────────────────
