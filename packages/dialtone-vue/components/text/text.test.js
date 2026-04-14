@@ -5,6 +5,7 @@ import {
   TEXT_LINE_CLAMP_CLASS,
   TEXT_NUMERIC_CLASS,
   TEXT_TRUNCATE_CLASS,
+  TEXT_TONE_MODIFIERS,
   TEXT_WRAP_MODIFIERS,
   TEXT_BOX_TRIM_MODIFIERS,
   TEXT_STRENGTH_MODIFIERS,
@@ -110,13 +111,13 @@ describe('DtText', () => {
   it('applies tone modifier class', () => {
     const wrapper = mountComponent({ tone: 'primary' });
 
-    expect(wrapper.classes()).toContain('d-fc-primary');
+    expect(wrapper.classes()).toContain(TEXT_TONE_MODIFIERS.primary);
   });
 
   it('applies positive tone modifier class', () => {
     const wrapper = mountComponent({ tone: 'positive' });
 
-    expect(wrapper.classes()).toContain('d-fc-positive');
+    expect(wrapper.classes()).toContain(TEXT_TONE_MODIFIERS.positive);
   });
 
 
@@ -127,7 +128,7 @@ describe('DtText', () => {
     const wrapper = mountComponent({ tone: 'not-real' });
 
     expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('Unsupported tone'));
-    expect(wrapper.classes()).not.toContain('d-fc-not-real');
+    expect(wrapper.classes()).not.toContain('d-text--tone-not-real');
   });
 
   it('applies align modifier class when align prop is valid', () => {
@@ -165,7 +166,7 @@ describe('DtText', () => {
       'd-text-headline--lg',
       TEXT_STRENGTH_MODIFIERS.semibold,
       TEXT_DENSITY_MODIFIERS[300],
-      'd-fc-primary',
+      TEXT_TONE_MODIFIERS.primary,
       'd-text--align-center',
       TEXT_WRAP_MODIFIERS.balance,
       TEXT_BOX_TRIM_MODIFIERS.both,
