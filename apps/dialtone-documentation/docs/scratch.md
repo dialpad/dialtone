@@ -1343,7 +1343,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
 <!-- DtBox V1 Demos                                                -->
 <!-- ============================================================ -->
 
-<dt-stack gap="400" outline>
+<dt-stack gap="400">
   <dt-text as="h1" kind="headline" :size="600">
     DtBox V1
   </dt-text>
