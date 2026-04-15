@@ -162,7 +162,7 @@ const options = computed(() => {
   }) ?? [];
 
   if (props.defaultValue === null || props.defaultValue === undefined) {
-    return [{ value: null, label: 'null' }, ...valueOptions];
+    return [{ value: null, label: '\u2013' }, ...valueOptions];
   }
   return valueOptions;
 });

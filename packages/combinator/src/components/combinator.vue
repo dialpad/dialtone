@@ -609,7 +609,7 @@ export default {
   }
 
   &__controls {
-    inline-size: var(--dt-size-875);
+    inline-size: var(--dt-size-900);
     max-inline-size: var(--dt-size-1000);
     flex-shrink: 0;
     max-block-size: var(--dt-size-950);
@@ -617,6 +617,7 @@ export default {
 
     :where(.dialtone-playground--fullscreen) & {
       @media screen and (min-width: 640px) {
+        inline-size: var(--dt-size-950);
         max-block-size: 100%;
       }
     }
