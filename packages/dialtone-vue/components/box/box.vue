@@ -46,7 +46,10 @@ defineOptions({
 });
 
 const props = defineProps({
-  /** @values div, span, section, article, aside, main, header, footer, nav, ul, ol, li, fieldset, form, figure */
+  /**
+   * HTML element to render as.
+   * @values div, span, section, article, aside, main, header, footer, nav, ul, ol, li, fieldset, form, figure
+   */
   as: { type: String, default: 'div', validator: asValidator },
 
   /**
@@ -56,132 +59,167 @@ const props = defineProps({
    */
   scrollbar: { type: [String, Boolean], default: undefined, validator: scrollbarValidator },
 
-  /** @values primary, secondary, moderate, bold, strong, contrast, backdrop, brand, info, positive, warning, critical, brand-subtle, brand-strong, ... */
+  /**
+   * Background surface color. Maps to --dt-color-surface-* tokens.
+   * @values primary, secondary, moderate, bold, strong, contrast, backdrop, brand, info, positive, warning, critical, brand-subtle, brand-strong, ...
+   */
   surface: { type: String, default: undefined, validator: surfaceValidator },
 
   /**
+   * Border color. Maps to --dt-color-border-* tokens.
    * Defaults to 'default'. Visible when any border-width prop is set.
    * @values transparent, subtle, default, moderate, bold, accent, focus, brand, positive, warning, critical, brand-subtle, brand-strong, ...
    */
   borderColor: { type: String, default: 'default', validator: borderColorValidator },
 
-  /** @values 0, 100, 200, 300, 350, 400, 450, 500, 600, pill, circle */
+  /**
+   * Border radius. Maps to --dt-size-radius-* tokens.
+   * @values 0, 100, 200, 300, 350, 400, 450, 500, 600, pill, circle
+   */
   borderRadius: { type: String, default: undefined, validator: borderRadiusValidator },
 
-  /** @values 0, 50, 100, 150, 200, 300, 400 */
+  /**
+   * Border width on all sides. Maps to --dt-size-border-* tokens.
+   * @values 0, 50, 100, 150, 200, 300, 400
+   */
   borderWidth: { type: String, default: undefined, validator: borderWidthValidator },
 
   /**
+   * Border width on the block axis (top/bottom in horizontal writing mode).
    * Overrides `borderWidth` for block sides.
    * @values 0, 50, 100, 150, 200, 300, 400
    */
   borderWidthBlock: { type: String, default: undefined, validator: borderWidthValidator },
 
   /**
-   * Overrides `borderWidthBlock`.
+   * Border width on the block-end side.
+   * Overrides `borderWidthBlock` and `borderWidth` for block-end.
    * @values 0, 50, 100, 150, 200, 300, 400
    */
   borderWidthBlockEnd: { type: String, default: undefined, validator: borderWidthValidator },
 
   /**
-   * Overrides `borderWidthBlock`.
+   * Border width on the block-start side.
+   * Overrides `borderWidthBlock` and `borderWidth` for block-start.
    * @values 0, 50, 100, 150, 200, 300, 400
    */
   borderWidthBlockStart: { type: String, default: undefined, validator: borderWidthValidator },
 
   /**
+   * Border width on the inline axis (left/right in LTR).
    * Overrides `borderWidth` for inline sides.
    * @values 0, 50, 100, 150, 200, 300, 400
    */
   borderWidthInline: { type: String, default: undefined, validator: borderWidthValidator },
 
   /**
-   * Overrides `borderWidthInline`.
+   * Border width on the inline-end side.
+   * Overrides `borderWidthInline` and `borderWidth` for inline-end.
    * @values 0, 50, 100, 150, 200, 300, 400
    */
   borderWidthInlineEnd: { type: String, default: undefined, validator: borderWidthValidator },
 
   /**
-   * Overrides `borderWidthInline`.
+   * Border width on the inline-start side.
+   * Overrides `borderWidthInline` and `borderWidth` for inline-start.
    * @values 0, 50, 100, 150, 200, 300, 400
    */
   borderWidthInlineStart: { type: String, default: undefined, validator: borderWidthValidator },
 
   /**
+   * Padding on all sides. Accepts spacing token scale values.
    * @values 0, 1, 25, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 525, 550, 600, 650, 700, 750, 800
    */
   padding: { type: String, default: undefined, validator: spacingValidator },
 
   /**
-   * Overrides `padding` for block axis.
+   * Padding on the block axis (top/bottom in horizontal writing mode).
+   * Overrides `padding` for the block axis.
    * @values 0, 1, 25, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 525, 550, 600, 650, 700, 750, 800
    */
   paddingBlock: { type: String, default: undefined, validator: spacingValidator },
 
   /**
-   * Overrides `paddingBlock`.
+   * Padding on the block-end side.
+   * Overrides `paddingBlock` and `padding` for block-end.
    * @values 0, 1, 25, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 525, 550, 600, 650, 700, 750, 800
    */
   paddingBlockEnd: { type: String, default: undefined, validator: spacingValidator },
 
   /**
-   * Overrides `paddingBlock`.
+   * Padding on the block-start side.
+   * Overrides `paddingBlock` and `padding` for block-start.
    * @values 0, 1, 25, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 525, 550, 600, 650, 700, 750, 800
    */
   paddingBlockStart: { type: String, default: undefined, validator: spacingValidator },
 
   /**
-   * Overrides `padding` for inline axis.
+   * Padding on the inline axis (left/right in LTR).
+   * Overrides `padding` for the inline axis.
    * @values 0, 1, 25, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 525, 550, 600, 650, 700, 750, 800
    */
   paddingInline: { type: String, default: undefined, validator: spacingValidator },
 
   /**
-   * Overrides `paddingInline`.
+   * Padding on the inline-end side.
+   * Overrides `paddingInline` and `padding` for inline-end.
    * @values 0, 1, 25, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 525, 550, 600, 650, 700, 750, 800
    */
   paddingInlineEnd: { type: String, default: undefined, validator: spacingValidator },
 
   /**
-   * Overrides `paddingInline`.
+   * Padding on the inline-start side.
+   * Overrides `paddingInline` and `padding` for inline-start.
    * @values 0, 1, 25, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 525, 550, 600, 650, 700, 750, 800
    */
   paddingInlineStart: { type: String, default: undefined, validator: spacingValidator },
 
   /**
+   * Block size (height in horizontal writing mode). Maps to --dt-layout-* tokens.
    * @values 0, 25, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10-percent, 20-percent, 25-percent, 30-percent, 33-percent, 40-percent, 50-percent, 60-percent, 66-percent, 70-percent, 75-percent, 80-percent, 90-percent, 95-percent, 100-percent
    */
   blockSize: { type: String, default: undefined, validator: layoutValidator },
 
   /**
+   * Inline size (width in horizontal writing mode). Maps to --dt-layout-* tokens.
    * @values 0, 25, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10-percent, 20-percent, 25-percent, 30-percent, 33-percent, 40-percent, 50-percent, 60-percent, 66-percent, 70-percent, 75-percent, 80-percent, 90-percent, 95-percent, 100-percent
    */
   inlineSize: { type: String, default: undefined, validator: layoutValidator },
 
   /**
+   * Maximum block size. Maps to --dt-layout-* tokens.
    * @values 0, 25, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10-percent, 20-percent, 25-percent, 30-percent, 33-percent, 40-percent, 50-percent, 60-percent, 66-percent, 70-percent, 75-percent, 80-percent, 90-percent, 95-percent, 100-percent
    */
   maxBlockSize: { type: String, default: undefined, validator: layoutValidator },
 
   /**
+   * Minimum block size. Maps to --dt-layout-* tokens.
    * @values 0, 25, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10-percent, 20-percent, 25-percent, 30-percent, 33-percent, 40-percent, 50-percent, 60-percent, 66-percent, 70-percent, 75-percent, 80-percent, 90-percent, 95-percent, 100-percent
    */
   minBlockSize: { type: String, default: undefined, validator: layoutValidator },
 
   /**
+   * Maximum inline size. Maps to --dt-layout-* tokens.
    * @values 0, 25, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10-percent, 20-percent, 25-percent, 30-percent, 33-percent, 40-percent, 50-percent, 60-percent, 66-percent, 70-percent, 75-percent, 80-percent, 90-percent, 95-percent, 100-percent
    */
   maxInlineSize: { type: String, default: undefined, validator: layoutValidator },
 
   /**
+   * Minimum inline size. Maps to --dt-layout-* tokens.
    * @values 0, 25, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10-percent, 20-percent, 25-percent, 30-percent, 33-percent, 40-percent, 50-percent, 60-percent, 66-percent, 70-percent, 75-percent, 80-percent, 90-percent, 95-percent, 100-percent
    */
   minInlineSize: { type: String, default: undefined, validator: layoutValidator },
 
-  /** @values small, medium, large, extra-large, card */
+  /**
+   * Box shadow. Maps to --dt-shadow-* tokens.
+   * @values small, medium, large, extra-large, card
+   */
   shadow: { type: String, default: undefined, validator: shadowValidator },
 
-  /** @values hidden, scroll, auto, clip, visible */
+  /**
+   * Overflow behavior.
+   * @values hidden, scroll, auto, clip, visible
+   */
   overflow: { type: String, default: undefined, validator: overflowValidator },
 });
 
