@@ -43,21 +43,22 @@ keywords: ["layout", "vertical", "horizontal", "d-stack", "DtStack", "dt-stack",
 `direction="row"` will flow child items horizontally, i.e. left to right.
 
 ```vue demo
-<dt-stack
-  gap="200"
-  direction="row"
-  class="d-bgc-moderate-opaque d-bar8"
->
-  <dt-box surface="moderate-opaque" padding="200" border-radius="300">
-    Stack item 1
-  </dt-box>
-  <dt-box surface="moderate-opaque" padding="200" border-radius="300">
-    Stack item 2
-  </dt-box>
-  <dt-box surface="moderate-opaque" padding="200" border-radius="300">
-    Stack item 3
-  </dt-box>
-</dt-stack>
+<dt-box surface="moderate-opaque" border-radius="300">
+  <dt-stack
+    gap="200"
+    direction="row"
+  >
+    <dt-box surface="moderate-opaque" padding="200" border-radius="300">
+      Stack item 1
+    </dt-box>
+    <dt-box surface="moderate-opaque" padding="200" border-radius="300">
+      Stack item 2
+    </dt-box>
+    <dt-box surface="moderate-opaque" padding="200" border-radius="300">
+      Stack item 3
+    </dt-box>
+  </dt-stack>
+</dt-box>
 <!-- @code -->
 <dt-stack
   gap="200"
@@ -72,21 +73,22 @@ keywords: ["layout", "vertical", "horizontal", "d-stack", "DtStack", "dt-stack",
 ### Row Reverse
 
 ```vue demo
-<dt-stack
-  gap="200"
-  direction="row-reverse"
-  class="d-bgc-moderate-opaque d-bar8"
->
-  <dt-box surface="moderate-opaque" padding="200" border-radius="300">
-    Stack item 1
-  </dt-box>
-  <dt-box surface="moderate-opaque" padding="200" border-radius="300">
-    Stack item 2
-  </dt-box>
-  <dt-box surface="moderate-opaque" padding="200" border-radius="300">
-    Stack item 3
-  </dt-box>
-</dt-stack>
+<dt-box surface="moderate-opaque" border-radius="300">
+  <dt-stack
+    gap="200"
+    direction="row-reverse"
+  >
+    <dt-box surface="moderate-opaque" padding="200" border-radius="300">
+      Stack item 1
+    </dt-box>
+    <dt-box surface="moderate-opaque" padding="200" border-radius="300">
+      Stack item 2
+    </dt-box>
+    <dt-box surface="moderate-opaque" padding="200" border-radius="300">
+      Stack item 3
+    </dt-box>
+  </dt-stack>
+</dt-box>
 <!-- @code -->
 <dt-stack
   gap="200"
@@ -101,21 +103,22 @@ keywords: ["layout", "vertical", "horizontal", "d-stack", "DtStack", "dt-stack",
 ### Column Reverse
 
 ```vue demo
-<dt-stack
-  gap="200"
-  direction="column-reverse"
-  class="d-bgc-moderate-opaque d-bar8"
->
-  <dt-box surface="moderate-opaque" padding="200" border-radius="300">
-    Stack item 1
-  </dt-box>
-  <dt-box surface="moderate-opaque" padding="200" border-radius="300">
-    Stack item 2
-  </dt-box>
-  <dt-box surface="moderate-opaque" padding="200" border-radius="300">
-    Stack item 3
-  </dt-box>
-</dt-stack>
+<dt-box surface="moderate-opaque" border-radius="300">
+  <dt-stack
+    gap="200"
+    direction="column-reverse"
+  >
+    <dt-box surface="moderate-opaque" padding="200" border-radius="300">
+      Stack item 1
+    </dt-box>
+    <dt-box surface="moderate-opaque" padding="200" border-radius="300">
+      Stack item 2
+    </dt-box>
+    <dt-box surface="moderate-opaque" padding="200" border-radius="300">
+      Stack item 3
+    </dt-box>
+  </dt-stack>
+</dt-box>
 <!-- @code -->
 <dt-stack
   gap="200"
@@ -140,23 +143,24 @@ Declaring as an appropriate HTML element improves accessibility by helping scree
 Use `as="section"` to create a thematic grouping of content.
 
 ```vue demo
-<dt-stack
-  as="section"
-  gap="100"
-  class="d-bgc-moderate-opaque d-bar8"
->
-  <dt-box surface="moderate-opaque" padding="200" border-radius="300">Stack item 1</dt-box>
-  <dt-box surface="moderate-opaque" padding="200" border-radius="300">Stack item 2</dt-box>
-  <dt-box surface="moderate-opaque" padding="200" border-radius="300">Stack item 3</dt-box>
-</dt-stack>
+<dt-box surface="moderate-opaque" border-radius="300">
+  <dt-stack
+    as="section"
+    gap="100"
+  >
+    <dt-box surface="moderate-opaque" padding="200" border-radius="300">Stack item 1</dt-box>
+    <dt-box surface="moderate-opaque" padding="200" border-radius="300">Stack item 2</dt-box>
+    <dt-box surface="moderate-opaque" padding="200" border-radius="300">Stack item 3</dt-box>
+  </dt-stack>
+</dt-box>
 <!-- @code -->
 <dt-stack
   as="section"
   gap="100"
 >
-  <div>Stack item 1</div>
-  <div>Stack item 2</div>
-  <div>Stack item 3</div>
+  <dt-box>Stack item 1</dt-box>
+  <dt-box>Stack item 2</dt-box>
+  <dt-box>Stack item 3</dt-box>
 </dt-stack>
 ```
 
@@ -165,25 +169,26 @@ Use `as="section"` to create a thematic grouping of content.
 Use `as="span"` when you need an inline container.
 
 ```vue demo
-<dt-stack
-  as="span"
-  direction="row"
-  gap="100"
-  class="d-bgc-moderate-opaque d-bar8"
->
-  <dt-box as="span" surface="moderate-opaque" padding="200" border-radius="300">Inline item 1</dt-box>
-  <dt-box as="span" surface="moderate-opaque" padding="200" border-radius="300">Inline item 2<br>with a second line</dt-box>
-  <dt-box as="span" surface="moderate-opaque" padding="200" border-radius="300">Inline item 3</dt-box>
-</dt-stack>
+<dt-box surface="moderate-opaque" border-radius="300">
+  <dt-stack
+    as="span"
+    direction="row"
+    gap="100"
+  >
+    <dt-box as="span" surface="moderate-opaque" padding="200" border-radius="300">Inline item 1</dt-box>
+    <dt-box as="span" surface="moderate-opaque" padding="200" border-radius="300">Inline item 2<br>with a second line</dt-box>
+    <dt-box as="span" surface="moderate-opaque" padding="200" border-radius="300">Inline item 3</dt-box>
+  </dt-stack>
+</dt-box>
 <!-- @code -->
 <dt-stack
   as="span"
   direction="row"
   gap="100"
 >
-  <span>Inline item 1</span>
-  <span>Inline item 2</span>
-  <span>Inline item 3</span>
+  <dt-box>Inline item 1</dt-box>
+  <dt-box>Inline item 2</dt-box>
+  <dt-box>Inline item 3</dt-box>
 </dt-stack>
 ```
 
@@ -251,7 +256,7 @@ Use `as="span"` when you need an inline container.
 ### Available gaps
 
 <clamped-table-wrapper>
-  <div>
+  <dt-box>
     <table class="d-table dialtone-doc-table">
       <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-ibs-0">
         <tr>
@@ -278,7 +283,7 @@ Use `as="span"` when you need an inline container.
         </tr>
       </tbody>
     </table>
-  </div>
+  </dt-box>
 </clamped-table-wrapper>
 
 ## Align
@@ -330,20 +335,20 @@ The `align` prop is optional. Unless specified, it will default vertical stacks 
 </dt-stack>
 <!-- @code -->
 <dt-stack gap="100">
-  <div>Short</div>
-  <div>
+  <dt-box>Short</dt-box>
+  <dt-box>
     Taller item<br>
     with more content
-  </div>
-  <div>Short</div>
+  </dt-box>
+  <dt-box>Short</dt-box>
 </dt-stack>
 <dt-stack direction="row">
-  <div>Short</div>
-  <div>
+  <dt-box>Short</dt-box>
+  <dt-box>
     Taller item<br>
     with more content
-  </div>
-  <div>Short</div>
+  </dt-box>
+  <dt-box>Short</dt-box>
 </dt-stack>
 ```
 
@@ -395,24 +400,24 @@ Align items to the start of the cross-axis.
   gap="100"
   align="start"
 >
-  <div>Short</div>
-  <div>
+  <dt-box>Short</dt-box>
+  <dt-box>
     Taller item<br>
     with more content
-  </div>
-  <div>Short</div>
+  </dt-box>
+  <dt-box>Short</dt-box>
 </dt-stack>
 <dt-stack
   direction="row"
   gap="100"
   align="start"
 >
-  <div>Short</div>
-  <div>
+  <dt-box>Short</dt-box>
+  <dt-box>
     Taller item<br>
     with more content
-  </div>
-  <div>Short</div>
+  </dt-box>
+  <dt-box>Short</dt-box>
 </dt-stack>
 ```
 
@@ -465,12 +470,12 @@ Center items along the cross-axis.
   gap="100"
   align="center"
 >
-  <div>Short</div>
-  <div>
+  <dt-box>Short</dt-box>
+  <dt-box>
     Taller item<br>
     with more content
-  </div>
-  <div>Short</div>
+  </dt-box>
+  <dt-box>Short</dt-box>
 </dt-stack>
 ```
 
@@ -522,24 +527,24 @@ Align items to the end of the cross-axis.
   gap="100"
   align="end"
 >
-  <div>Short</div>
-  <div>
+  <dt-box>Short</dt-box>
+  <dt-box>
     Taller item<br>
     with more content
-  </div>
-  <div>Short</div>
+  </dt-box>
+  <dt-box>Short</dt-box>
 </dt-stack>
 <dt-stack
   direction="row"
   gap="100"
   align="end"
 >
-  <div>Short</div>
-  <div>
+  <dt-box>Short</dt-box>
+  <dt-box>
     Taller item<br>
     with more content
-  </div>
-  <div>Short</div>
+  </dt-box>
+  <dt-box>Short</dt-box>
 </dt-stack>
 ```
 
@@ -592,12 +597,12 @@ Stretch items to fill the container height.
   gap="100"
   align="stretch"
 >
-  <div>Short</div>
-  <div>
+  <dt-box>Short</dt-box>
+  <dt-box>
     Taller item<br>
     with more content
-  </div>
-  <div>Short</div>
+  </dt-box>
+  <dt-box>Short</dt-box>
 </dt-stack>
 ```
 
@@ -673,9 +678,9 @@ Align items to the start of the main axis (default).
 </dt-stack>
 <!-- @code -->
 <dt-stack justify="start">
-  <div>Item 1</div>
-  <div>Item 2</div>
-  <div>Item 3</div>
+  <dt-box>Item 1</dt-box>
+  <dt-box>Item 2</dt-box>
+  <dt-box>Item 3</dt-box>
 </dt-stack>
 ```
 
@@ -711,9 +716,9 @@ Center items along the main axis.
 </dt-stack>
 <!-- @code -->
 <dt-stack justify="center">
-  <div>Item 1</div>
-  <div>Item 2</div>
-  <div>Item 3</div>
+  <dt-box>Item 1</dt-box>
+  <dt-box>Item 2</dt-box>
+  <dt-box>Item 3</dt-box>
 </dt-stack>
 ```
 
@@ -749,9 +754,9 @@ Align items to the end of the main axis.
 </dt-stack>
 <!-- @code -->
 <dt-stack justify="end">
-  <div>Item 1</div>
-  <div>Item 2</div>
-  <div>Item 3</div>
+  <dt-box>Item 1</dt-box>
+  <dt-box>Item 2</dt-box>
+  <dt-box>Item 3</dt-box>
 </dt-stack>
 ```
 
@@ -787,9 +792,9 @@ Distribute items with equal space around each item.
 </dt-stack>
 <!-- @code -->
 <dt-stack justify="space-around">
-  <div>Item 1</div>
-  <div>Item 2</div>
-  <div>Item 3</div>
+  <dt-box>Item 1</dt-box>
+  <dt-box>Item 2</dt-box>
+  <dt-box>Item 3</dt-box>
 </dt-stack>
 ```
 
@@ -830,9 +835,9 @@ Distribute items with space between them, edges flush to container.
   justify="space-between"
   class="d-w100p"
 >
-  <div>Item 1</div>
-  <div>Item 2</div>
-  <div>Item 3</div>
+  <dt-box>Item 1</dt-box>
+  <dt-box>Item 2</dt-box>
+  <dt-box>Item 3</dt-box>
 </dt-stack>
 ```
 
@@ -868,9 +873,9 @@ Distribute items with equal space between all items, including edges.
 </dt-stack>
 <!-- @code -->
 <dt-stack justify="space-evenly">
-  <div>Item 1</div>
-  <div>Item 2</div>
-  <div>Item 3</div>
+  <dt-box>Item 1</dt-box>
+  <dt-box>Item 2</dt-box>
+  <dt-box>Item 3</dt-box>
 </dt-stack>
 ```
 
@@ -901,15 +906,15 @@ Stacks column at small screen size and column reverse at large screen
   :direction="{ default: `row`, sm: `column`, lg: `column-reverse` }"
   gap="100"
 >
-  <div>
+  <dt-box>
     Stack item 1
-  </div>
-  <div>
+  </dt-box>
+  <dt-box>
     Stack item 2
-  </div>
-  <div>
+  </dt-box>
+  <dt-box>
     Stack item 3
-  </div>
+  </dt-box>
 </dt-stack>
 ```
 
@@ -943,26 +948,20 @@ Set `200` as the default gap, `300` for small and larger, `400` for medium, `500
 Stacks row with gap 500 and stacks in row reverse the nested stack with gap 500.
 
 ```vue demo
-<dt-stack
-  direction="row"
-  as="section"
-  gap="200"
-  class="d-bgc-moderate-opaque d-bar8"
->
-  <dt-stack class="d-bgc-moderate-opaque d-bar8 d-p-200">
-    Stack item 1
-  </dt-stack>
-  <dt-stack gap="200" class="d-bgc-moderate-opaque">
-    <dt-box surface="moderate-opaque" padding="200" border-radius="300">Stack item 2</dt-box>
-    <dt-stack
-      direction="row-reverse"
-      gap="200"
-    >
-      <dt-box surface="moderate-opaque" padding="200" border-radius="300">Stack item 3<br>with multiple lines</dt-box>
-      <dt-box surface="moderate-opaque" padding="200" border-radius="300">Stack item 4</dt-box>
+<dt-box surface="moderate-opaque" border-radius="300">
+  <dt-stack direction="row" as="section" gap="200">
+    <dt-box surface="moderate-opaque" padding="200" border-radius="300">
+      Stack item 1
+    </dt-box>
+    <dt-stack gap="200">
+      <dt-box surface="moderate-opaque" padding="200" border-radius="300">Stack item 2</dt-box>
+      <dt-stack direction="row-reverse" gap="200">
+        <dt-box surface="moderate-opaque" padding="200" border-radius="300">Stack item 3<br>with multiple lines</dt-box>
+        <dt-box surface="moderate-opaque" padding="200" border-radius="300">Stack item 4</dt-box>
+      </dt-stack>
     </dt-stack>
   </dt-stack>
-</dt-stack>
+</dt-box>
 <!-- @code -->
 <dt-stack
   direction="row"
@@ -973,13 +972,13 @@ Stacks row with gap 500 and stacks in row reverse the nested stack with gap 500.
     Stack item 1
   </dt-stack>
   <dt-stack gap="200">
-    <div>Stack item 2</div>
+    <dt-box>Stack item 2</dt-box>
     <dt-stack
       direction="row-reverse"
       gap="200"
     >
-      <div>Stack item 3<br>with multiple lines</div>
-      <div>Stack item 4</div>
+      <dt-box>Stack item 3<br>with multiple lines</dt-box>
+      <dt-box>Stack item 4</dt-box>
     </dt-stack>
   </dt-stack>
 </dt-stack>
@@ -990,12 +989,12 @@ Stacks row with gap 500 and stacks in row reverse the nested stack with gap 500.
 Like `direction` and `gap`, the `align` and `justify` props support responsive object syntax to change alignment at different breakpoints.
 
 ```vue demo
-<dt-stack
+<dt-box surface="moderate-opaque" border-radius="300">
+  <dt-stack
   direction="row"
   gap="100"
   :align="{ default: 'start', md: 'center', lg: 'end' }"
-  class="d-bgc-moderate-opaque d-bar8"
->
+  >
   <dt-box surface="moderate-opaque" padding="200" border-radius="300">
     Short
   </dt-box>
@@ -1007,18 +1006,19 @@ Like `direction` and `gap`, the `align` and `justify` props support responsive o
     Short
   </dt-box>
 </dt-stack>
+</dt-box>
 <!-- @code -->
 <dt-stack
   direction="row"
   gap="100"
   :align="{ default: `start`, md: `center`, lg: `end` }"
 >
-  <div>Short</div>
-  <div>
+  <dt-box>Short</dt-box>
+  <dt-box>
     Taller<br>
     item
-  </div>
-  <div>Short</div>
+  </dt-box>
+  <dt-box>Short</dt-box>
 </dt-stack>
 ```
 
@@ -1041,9 +1041,9 @@ Resize your browser to see the alignment change at different breakpoints.
   :justify="{ default: `start`, md: `center`, lg: `space-between` }"
   class="d-w100p"
 >
-  <div>Item 1</div>
-  <div>Item 2</div>
-  <div>Item 3</div>
+  <dt-box>Item 1</dt-box>
+  <dt-box>Item 2</dt-box>
+  <dt-box>Item 3</dt-box>
 </dt-stack>
 ```
 
