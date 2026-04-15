@@ -5,6 +5,7 @@ export default {
     props: {
       size: { tokenCategory: 'typography-size' },
       density: { tokenCategory: 'line-height' },
+      tone: { tokenCategory: 'color:d-fc:color' },
     },
   },
 

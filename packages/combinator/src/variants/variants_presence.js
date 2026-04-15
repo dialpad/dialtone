@@ -1,6 +1,12 @@
-/* eslint-disable max-len */
+ 
  
 export default {
+  defaults: {
+    props: {
+      presence: { tokenCategory: 'color:d-presence--:--presence-color-background-' },
+    },
+  },
+
   default: {
     props: {
       presence: {

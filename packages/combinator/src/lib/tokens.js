@@ -65,8 +65,8 @@ export function resolveTokenValue (category, value, propValues) {
 
   let result = null;
 
-  // Support 'typography-size:label' syntax for explicit kind override
-  const [baseCategory, kindOverride] = category.split(':');
+  // Support colon syntax: 'typography-size:label', 'color:d-fc:color'
+  const [baseCategory, ...categoryArgs] = category.split(':');
 
   switch (baseCategory) {
     case 'spacing':
@@ -76,18 +76,81 @@ export function resolveTokenValue (category, value, propValues) {
       result = resolveIconSize(value);
       break;
     case 'typography-size':
-      result = resolveTypographySize(value, propValues, kindOverride);
+      result = resolveTypographySize(value, propValues, categoryArgs[0]);
       break;
     case 'line-height':
       result = resolveLineHeight(value);
       break;
     case 'component-size':
-      if (kindOverride) result = resolveComponentSize(kindOverride, value);
+      if (categoryArgs[0]) result = resolveComponentSize(categoryArgs[0], value);
+      break;
+    case 'color':
+      if (categoryArgs[0]) result = resolveColor(categoryArgs[0], categoryArgs[1] || 'color', value);
       break;
   }
 
   cache.set(cacheKey, result);
   return result;
+}
+
+/**
+ * Resolves a computed color from CSS classes applied to the measure element.
+ *
+ * classPrefix patterns:
+ *   'class[attr]'  — sets attr=value, reads from child element (avatar family)
+ *   'class--'      — applies 'class class--{value}' (BEM modifier)
+ *   'class'        — applies 'class-{value}' (utility class)
+ *
+ * cssProperty patterns:
+ *   'color', 'backgroundColor'  — standard computed style property
+ *   '--custom-prop'             — read via getPropertyValue
+ *   '--custom-prop-'            — value appended: '--x-' + 'foo' → '--x-foo'
+ */
+function resolveColor (classPrefix, cssProperty, value) {
+  const el = getMeasureElement();
+  const bracketMatch = classPrefix.match(/^(.+)\[(.+)\]$/);
+  try {
+    if (bracketMatch) {
+      el.className = bracketMatch[1];
+      el.setAttribute(bracketMatch[2], value);
+      // Avatar family needs a child element for OKLCH color computation
+      // (background-color is on .d-avatar__canvas-inner, inheriting vars from parent)
+      if (bracketMatch[2] === 'data-avatar-family') {
+        el.setAttribute('data-avatar-variant', '3');
+        let child = el.firstElementChild;
+        if (!child) {
+          child = document.createElement('div');
+          el.appendChild(child);
+        }
+        child.className = `${bracketMatch[1]}__canvas-inner`;
+      }
+    // Component modifier pattern: prefix ends with '--' (e.g., 'd-badge--')
+    // → class = 'd-badge d-badge--{value}'
+    } else if (classPrefix.endsWith('--')) {
+      const base = classPrefix.slice(0, -2);
+      el.className = `${base} ${classPrefix}${value}`;
+    // Utility pattern: no '--' suffix (e.g., 'd-fc')
+    // → class = 'd-fc-{value}'
+    } else {
+      el.className = `${classPrefix}-${value}`;
+    }
+    const target = (bracketMatch && el.firstElementChild) || el;
+    const styles = getComputedStyle(target);
+    // Custom property that ends with '-' gets value appended (e.g., '--presence-color-background-' + 'active')
+    const propName = cssProperty.endsWith('-') ? `${cssProperty}${value}` : cssProperty;
+    const resolved = propName.startsWith('--')
+      ? styles.getPropertyValue(propName).trim()
+      : styles[propName];
+    if (!resolved || resolved === 'rgba(0, 0, 0, 0)' || resolved === 'transparent') return null;
+    return resolved;
+  } finally {
+    el.className = '';
+    if (bracketMatch) {
+      el.removeAttribute(bracketMatch[2]);
+      el.removeAttribute('data-avatar-variant');
+      if (el.firstElementChild) el.removeChild(el.firstElementChild);
+    }
+  }
 }
 
 function resolveSpacing (value) {

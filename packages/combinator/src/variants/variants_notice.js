@@ -1,6 +1,12 @@
-/* eslint-disable max-len */
+ 
  
 export default {
+  defaults: {
+    props: {
+      kind: { tokenCategory: 'color:d-notice--:backgroundColor' },
+    },
+  },
+
   default: {
     slots: {
       default: {

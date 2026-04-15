@@ -1,5 +1,11 @@
-/* eslint-disable max-len */
+ 
 export default {
+  defaults: {
+    props: {
+      kind: { tokenCategory: 'color:d-btn--:color' },
+    },
+  },
+
   exclusions: [
     {
       when: { link: true },
