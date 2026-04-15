@@ -232,7 +232,7 @@ const _forceReset = ref(0);
 
 const variantOptions = computed(() => {
   return Object.keys(props.variants ?? {})
-    .filter(key => key !== 'exclusions')
+    .filter(key => key !== 'exclusions' && key !== 'defaults')
     .map(key => ({ value: key, label: key }));
 });
 
