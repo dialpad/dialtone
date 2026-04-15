@@ -11,7 +11,7 @@
       data-qa="dt-input-label-wrapper"
     >
       <!-- @slot Slot for label, defaults to label prop -->
-      <slot name="labelSlot">
+      <slot name="label">
         <dt-text
           v-if="showLabel && label"
           ref="label"
@@ -213,7 +213,8 @@ export default {
     },
 
     /**
-     * Label for the input
+     * Label for the input.
+     * Can also be overridden with a slot of the same name.
      */
     label: {
       type: String,

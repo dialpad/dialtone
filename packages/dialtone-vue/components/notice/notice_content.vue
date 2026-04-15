@@ -4,7 +4,7 @@
     data-qa="notice-content"
   >
     <dt-text
-      v-if="title || hasSlotContent($slots.titleOverride)"
+      v-if="title || hasSlotContent($slots.title)"
       :id="titleId"
       kind="headline"
       :size="300"
@@ -13,8 +13,8 @@
       class="d-notice__title"
       data-qa="notice-content-title"
     >
-      <!-- @slot Slot for the title  -->
-      <slot name="titleOverride">
+      <!-- @slot Slot for the title -->
+      <slot name="title">
         {{ title }}
       </slot>
     </dt-text>
@@ -46,6 +46,7 @@ export default {
   props: {
     /**
      * Title header of the notice. This can be left blank to remove the title from the notice entirely.
+     * Can also be overridden with a slot of the same name.
      */
     title: {
       type: String,

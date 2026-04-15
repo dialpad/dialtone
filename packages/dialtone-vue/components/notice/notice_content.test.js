@@ -54,14 +54,14 @@ describe('DtNoticeContent tests', () => {
       });
     });
 
-    describe('When title override is true', () => {
+    describe('When title slot is provided', () => {
       beforeEach(() => {
-        slotsData.titleOverride = 'this is an override title';
+        slotsData.title = 'this is a slot title';
         _setWrappers();
       });
 
       it('displays the correct text', () => {
-        expect(title.text()).toBe(slotsData.titleOverride);
+        expect(title.text()).toBe(slotsData.title);
       });
     });
   });

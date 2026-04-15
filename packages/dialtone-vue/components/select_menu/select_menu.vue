@@ -120,7 +120,8 @@ export default {
 
   props: {
     /**
-     * Label for the select
+     * Label for the select.
+     * Can also be overridden with a slot of the same name.
      */
     label: {
       type: String,
@@ -137,7 +138,8 @@ export default {
     },
 
     /**
-     * Description for the select
+     * Description for the select.
+     * Can also be overridden with a slot of the same name.
      */
     description: {
       type: String,

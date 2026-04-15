@@ -26,8 +26,8 @@
           :role="role"
           v-bind="toastListeners"
         >
-          <template #titleOverride>
-            <slot name="titleOverride" />
+          <template #title>
+            <slot name="title" />
           </template>
         </dt-notice-content>
 

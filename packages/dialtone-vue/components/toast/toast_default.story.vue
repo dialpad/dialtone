@@ -55,12 +55,6 @@
         >
           <dt-icon :name="$attrs.icon" />
         </template>
-        <template
-          v-if="$attrs.titleOverride"
-          #titleOverride
-        >
-          <span v-html="$attrs.titleOverride" />
-        </template>
       </dt-toast>
     </aside>
   </div>
