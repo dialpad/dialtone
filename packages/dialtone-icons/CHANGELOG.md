@@ -1,3 +1,10 @@
+## [4.51.1-next.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.51.0...dialtone-icons/v4.51.1-next.1) (2026-04-15)
+
+
+### Documentation
+
+* DLT-1510 DLT-1511 DLT-1512 site redesign and ia ([#968](https://github.com/dialpad/dialtone/issues/968)) ([6ea7eb9](https://github.com/dialpad/dialtone/commit/6ea7eb959f01bfb01c91c3b6a92465ed0c2e0f4b))
+
 # [4.51.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.50.0...dialtone-icons/v4.51.0) (2026-04-02)
 
 
