@@ -125,13 +125,6 @@ export default {
 
   emits: [
     /**
-     * Native input event
-     *
-     * @event input
-     * @type {Boolean}
-     */
-    'input',
-    /**
      * Event fired to sync the modelValue prop with the parent component
      *
      * @event update:modelValue
@@ -228,7 +221,6 @@ export default {
       this.setGroupValue(value, checked);
 
       // emit the state of the checkbox
-      this.$emit('input', checked);
       this.$emit('update:modelValue', checked);
     },
 

@@ -266,17 +266,9 @@ export default {
 
   emits: [
     /**
-     * Native input event
-     *
-     * @event input
-     * @type {String | Number}
-     */
-    'input',
-
-    /**
      * Event fired to sync the modelValue prop with the parent component
      *
-     * @event input
+     * @event update:modelValue
      * @type {String | Number}
      */
     'update:modelValue',
@@ -366,7 +358,6 @@ export default {
     removeClassStyleAttrs,
     emitValue (value, event) {
       this.$emit('update:modelValue', value, event);
-      this.$emit('input', value, event);
       this.$emit('change', value, event);
     },
 

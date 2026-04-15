@@ -219,7 +219,7 @@ export default {
      * @values null, true, false
      */
     open: {
-      type: Boolean,
+      type: [Boolean, null],
       default: null,
     },
 

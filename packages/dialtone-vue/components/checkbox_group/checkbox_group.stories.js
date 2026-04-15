@@ -16,9 +16,9 @@ const CHECKBOX_GROUP_OPTIONS = [
 export const argsData = {
   name: 'fruits-checkbox-group',
   legend: 'Fruits',
-  selectedValues: [],
+  modelValue: [],
   options: CHECKBOX_GROUP_OPTIONS,
-  onInput: action('input'),
+  'onUpdate:modelValue': action('update:modelValue'),
 };
 
 // Controls
@@ -57,7 +57,7 @@ export const argTypesData = {
       type: 'text',
     },
   },
-  selectedValues: {
+  modelValue: {
     description: 'A provided list of selected values(s) for the checkbox group',
     control: 'array',
     table: {
@@ -88,17 +88,6 @@ export const argTypesData = {
     table: {
       category: 'directives',
     },
-  },
-
-  // Action Event Handlers
-  onInput: {
-    table: {
-      disable: true,
-    },
-  },
-
-  input: {
-    control: false,
   },
 
   // Story Variables

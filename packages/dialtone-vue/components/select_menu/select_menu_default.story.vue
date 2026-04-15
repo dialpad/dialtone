@@ -19,7 +19,7 @@
     :option-child-props="$attrs.optionChildProps"
     :messages-child-props="$attrs.messagesChildProps"
     :class="$attrs.class"
-    @input="$attrs.onInput"
+    @update:model-value="$attrs['onUpdate:modelValue']"
     @change="$attrs.onChange"
   >
     <html-fragment

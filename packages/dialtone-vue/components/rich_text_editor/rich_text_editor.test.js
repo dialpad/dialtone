@@ -67,7 +67,7 @@ describe('DtRichTextEditor tests', () => {
     props = baseProps;
     inputStub = vi.fn();
     attrs = {
-      onInput: inputStub,
+      'onUpdate:modelValue': inputStub,
     };
     _mountWrapper();
     await wrapper.vm.$nextTick();
@@ -99,8 +99,7 @@ describe('DtRichTextEditor tests', () => {
           it('should emit the output value', async () => {
             await _setValue(value);
 
-            // In Vue 3, check for update:modelValue event (v-model standard)
-            const emittedEvents = wrapper.emitted()['update:modelValue'] || wrapper.emitted().input;
+            const emittedEvents = wrapper.emitted()['update:modelValue'];
             const emittedOutput = emittedEvents?.[0]?.[0];
 
             if (onlyCheckOutputContained) {

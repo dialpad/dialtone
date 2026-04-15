@@ -65,13 +65,6 @@ export default {
 
   emits: [
     /**
-     * Native input event
-     *
-     * @event input
-     * @type {String}
-     */
-    'input',
-    /**
      * Event fired to sync the modelValue prop with the parent component
      *
      * @event update:modelValue
@@ -118,7 +111,6 @@ export default {
         // update provided value if injected
         this.setGroupValue(value);
 
-        this.$emit('input', value);
         this.$emit('update:modelValue', value);
       }
     },

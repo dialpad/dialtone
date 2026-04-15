@@ -21,7 +21,7 @@ export const argsData = {
   disabled: false,
   modelValue: SELECT_OPTIONS[0].value,
   options: SELECT_OPTIONS,
-  onInput: action('input'),
+  'onUpdate:modelValue': action('update:modelValue'),
   onChange: action('change'),
 };
 
@@ -185,7 +185,7 @@ export const argTypesData = {
   },
 
   // Action Event Handlers
-  onInput: {
+  'onUpdate:modelValue': {
     table: {
       disable: true,
     },

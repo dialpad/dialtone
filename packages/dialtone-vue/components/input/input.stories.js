@@ -15,7 +15,7 @@ export const argsData = {
   placeholder: 'placeholder',
   label: 'Label',
   onBlur: action('blur'),
-  onInput: action('input'),
+  'onUpdate:modelValue': action('update:modelValue'),
   onClear: action('clear'),
   onFocus: action('focus'),
   onFocusIn: action('focusin'),
@@ -162,7 +162,7 @@ export const argTypesData = {
       disable: true,
     },
   },
-  onInput: {
+  'onUpdate:modelValue': {
     table: {
       disable: true,
     },
@@ -204,8 +204,8 @@ export const argTypesData = {
       type: { summary: 'event' },
     },
   },
-  input: {
-    description: 'Native input event',
+  'update:modelValue': {
+    description: 'Event fired to sync the modelValue prop with the parent component',
     table: {
       type: { summary: 'event' },
     },
@@ -244,11 +244,6 @@ export const argTypesData = {
     description: 'Result of the input validation',
     table: {
       type: { summary: 'event' },
-    },
-  },
-  'update:modelValue': {
-    table: {
-      disable: true,
     },
   },
 };

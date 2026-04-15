@@ -106,14 +106,13 @@ export default {
     },
 
     /**
-     * Controls whether the image modal is shown. Leaving this null will have the image modal
-     * trigger on click by default.
-     * If you set this value, the default trigger behavior will be disabled and you can control it as you need.
-     * Supports .sync modifier
+     * Controls whether the image modal is shown. When null (default), the image modal
+     * triggers on click. When set to true or false, the default trigger is
+     * disabled and the parent controls visibility via v-model:open.
      * @values null, true, false
      */
     open: {
-      type: Boolean,
+      type: [Boolean, null],
       default: null,
     },
 

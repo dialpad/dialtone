@@ -18,7 +18,7 @@ export const argsData = {
   legend: 'Fruits',
   value: '',
   options: RADIO_GROUP_OPTIONS,
-  onInput: action('input'),
+  'onUpdate:modelValue': action('update:modelValue'),
 };
 
 // Controls
@@ -88,7 +88,7 @@ export const argTypesData = {
   },
 
   // Action Event Handlers
-  onInput: {
+  'onUpdate:modelValue': {
     table: {
       disable: true,
     },

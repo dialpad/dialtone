@@ -3,7 +3,7 @@
     :id="$attrs.id"
     :name="$attrs.name"
     :legend="$attrs.legend"
-    :selected-values="$attrs.selectedValues"
+    :model-value="$attrs.modelValue"
     :disabled="$attrs.disabled"
     :messages="$attrs.messages"
     :show-messages="$attrs.showMessages"
@@ -11,7 +11,7 @@
     :messages-class="$attrs.messagesClass"
     :legend-child-props="$attrs.legendChildProps"
     :messages-child-props="$attrs.messagesChildProps"
-    @input="$attrs.onInput"
+    @update:model-value="$attrs['onUpdate:modelValue']"
   >
     <slot>
       <dt-checkbox

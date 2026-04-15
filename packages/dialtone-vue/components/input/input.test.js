@@ -669,7 +669,7 @@ describe('DtInput tests', () => {
         });
 
         it('should handle input value', () => {
-          expect(wrapper.emitted().input[0][0]).toEqual(MOCK_USER_TEXT_INPUT_VAL);
+          expect(wrapper.emitted()['update:modelValue'][0][0]).toEqual(MOCK_USER_TEXT_INPUT_VAL);
           expect(MOCK_INPUT_STUB).toHaveBeenCalled();
         });
 
@@ -709,7 +709,7 @@ describe('DtInput tests', () => {
         });
 
         it('should handle input value', () => {
-          expect(wrapper.emitted().input[0][0]).toEqual(MOCK_USER_TEXT_INPUT_VAL);
+          expect(wrapper.emitted()['update:modelValue'][0][0]).toEqual(MOCK_USER_TEXT_INPUT_VAL);
           expect(MOCK_INPUT_STUB).toHaveBeenCalled();
         });
 
@@ -747,7 +747,7 @@ describe('DtInput tests', () => {
         await nativeInput.trigger('compositionstart');
         await nativeInput.trigger('input');
 
-        expect(wrapper.emitted().input).toBeUndefined();
+        expect(wrapper.emitted()['update:modelValue']).toBeUndefined();
         expect(wrapper.emitted()['update:modelValue']).toBeUndefined();
       });
 
@@ -757,7 +757,7 @@ describe('DtInput tests', () => {
         await nativeInput.trigger('input'); // Chrome: input fires before compositionend (blocked)
         await nativeInput.trigger('compositionend'); // compositionend emits the committed value
 
-        expect(wrapper.emitted().input[0][0]).toBe('か');
+        expect(wrapper.emitted()['update:modelValue'][0][0]).toBe('か');
         expect(wrapper.emitted()['update:modelValue'][0][0]).toBe('か');
       });
 
@@ -770,9 +770,9 @@ describe('DtInput tests', () => {
         nativeInput.element.dispatchEvent(new Event('input', { bubbles: true }));
         await wrapper.vm.$nextTick();
 
-        expect(wrapper.emitted().input).toHaveLength(1);
         expect(wrapper.emitted()['update:modelValue']).toHaveLength(1);
-        expect(wrapper.emitted().input[0][0]).toBe('か');
+        expect(wrapper.emitted()['update:modelValue']).toHaveLength(1);
+        expect(wrapper.emitted()['update:modelValue'][0][0]).toBe('か');
       });
 
       it('should resume normal emission after composition ends', async () => {
@@ -782,7 +782,7 @@ describe('DtInput tests', () => {
         nativeInput.element.value = 'hello';
         await nativeInput.trigger('input');
 
-        const inputEmissions = wrapper.emitted().input;
+        const inputEmissions = wrapper.emitted()['update:modelValue'];
         expect(inputEmissions[inputEmissions.length - 1][0]).toBe('hello');
       });
     });
@@ -797,7 +797,7 @@ describe('DtInput tests', () => {
         await nativeTextarea.trigger('compositionstart');
         await nativeTextarea.trigger('input');
 
-        expect(wrapper.emitted().input).toBeUndefined();
+        expect(wrapper.emitted()['update:modelValue']).toBeUndefined();
         expect(wrapper.emitted()['update:modelValue']).toBeUndefined();
       });
 
@@ -807,7 +807,7 @@ describe('DtInput tests', () => {
         await nativeTextarea.trigger('input'); // Chrome: input fires before compositionend (blocked)
         await nativeTextarea.trigger('compositionend'); // compositionend emits the committed value
 
-        expect(wrapper.emitted().input[0][0]).toBe('か');
+        expect(wrapper.emitted()['update:modelValue'][0][0]).toBe('か');
         expect(wrapper.emitted()['update:modelValue'][0][0]).toBe('か');
       });
 
@@ -818,9 +818,9 @@ describe('DtInput tests', () => {
         nativeTextarea.element.dispatchEvent(new Event('input', { bubbles: true }));
         await wrapper.vm.$nextTick();
 
-        expect(wrapper.emitted().input).toHaveLength(1);
         expect(wrapper.emitted()['update:modelValue']).toHaveLength(1);
-        expect(wrapper.emitted().input[0][0]).toBe('か');
+        expect(wrapper.emitted()['update:modelValue']).toHaveLength(1);
+        expect(wrapper.emitted()['update:modelValue'][0][0]).toBe('か');
       });
 
       it('should not override textarea value via modelValue watcher while composing', async () => {

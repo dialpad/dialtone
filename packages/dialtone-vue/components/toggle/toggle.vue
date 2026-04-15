@@ -67,7 +67,6 @@ export default {
 
     /**
      * Value of the toggle
-     * @model modelValue
      * @values true, false, 'mixed'
      */
     modelValue: {
@@ -137,16 +136,14 @@ export default {
      *
      * @event change
      * @type {Boolean}
-     * @model change
      */
     'change',
 
     /**
-     * v-model event event
+     * Event fired to sync the modelValue prop with the parent component
      *
-     * @event change
-     * @type {Boolean}
-     * @model change
+     * @event update:modelValue
+     * @type {Boolean | String}
      */
     'update:modelValue',
   ],
