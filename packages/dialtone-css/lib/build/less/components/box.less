@@ -116,9 +116,9 @@
   // Overflow
   overflow: var(--box-of, visible);
 
-  // Surface — @property provides transparent default
-  background-color: var(--box-surface);
-  border-color: var(--box-bc);
+  // Surface — OKLCH relative syntax supports d-bgo* opacity utilities
+  background-color: oklch(from var(--box-surface) l c h / var(--bgo, alpha));
+  border-color: oklch(from var(--box-bc) l c h / var(--bco, alpha));
 
   // Border — always solid, no visible border until borderWidth prop is set.
   // Width cascade: specific → axis → shorthand → 0
