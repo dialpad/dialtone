@@ -8,7 +8,7 @@
     :size="100"
     @input="updateValue"
   >
-    <template #labelSlot>
+    <template #label>
       <dt-text
         kind="label"
         :size="100"
