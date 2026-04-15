@@ -1,3 +1,24 @@
+# [3.219.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.218.5...dialtone-vue/v3.219.0) (2026-04-07)
+
+
+### Features
+
+* **Resizable:** DLT-2097 add DtResizable panel layout component ([#1162](https://github.com/dialpad/dialtone/issues/1162)) ([c6bd3bc](https://github.com/dialpad/dialtone/commit/c6bd3bcbae65634015f3fa29bbe9043ae40baa90))
+
+## [3.218.5](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.218.4...dialtone-vue/v3.218.5) (2026-04-06)
+
+
+### Bug Fixes
+
+* NO-JIRA include static-renderer ([e698bf4](https://github.com/dialpad/dialtone/commit/e698bf44619e20a5b14c4dc9ceacc7a8352332db))
+
+## [3.218.4](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.218.3...dialtone-vue/v3.218.4) (2026-04-02)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DP-179946 fix suggestion list positioning ([#1155](https://github.com/dialpad/dialtone/issues/1155)) ([fdbe45b](https://github.com/dialpad/dialtone/commit/fdbe45bb61ef2264f7535e6e1d2325ba641d445d))
+
 ## [3.218.3](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.218.2...dialtone-vue/v3.218.3) (2026-03-31)
 
 

@@ -1,3 +1,10 @@
+# [4.51.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.50.0...dialtone-icons/v4.51.0) (2026-04-02)
+
+
+### Features
+
+* **Icons:** DP-182525 add filter-filled icon ([#1161](https://github.com/dialpad/dialtone/issues/1161)) ([ee25905](https://github.com/dialpad/dialtone/commit/ee25905b4d1a7a1c6cfbfc9643d952e772b37daa))
+
 # [4.51.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.50.0...dialtone-icons/v4.51.0-next.1) (2026-04-03)
 
 

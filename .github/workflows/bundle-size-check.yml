@@ -13,6 +13,8 @@ jobs:
     name: Check Base Bundle Size
     runs-on: ubuntu-latest
     if: "!contains(github.event.pull_request.labels.*.name, 'skip-bundle-size-check')"
+    permissions:
+      packages: read
 
     outputs:
       SIZE: ${{ steps.current-size.outputs.size }}
@@ -42,6 +44,8 @@ jobs:
     name: Check PR Bundle Size
     runs-on: ubuntu-latest
     if: "!contains(github.event.pull_request.labels.*.name, 'skip-bundle-size-check')"
+    permissions:
+      packages: read
 
     outputs:
       SIZE: ${{ steps.current-size.outputs.size }}
