@@ -21,11 +21,21 @@
         :disabled="disabled"
         class="d-w100p"
         label-class="d-jc-space-between d-fw-normal"
+        leading-class="d-pis-75"
       >
+        <template
+          v-if="selectedOption?.resolved && isColor(selectedOption.resolved)"
+          #leading
+        >
+          <span
+            class="d-ba d-bc-subtle d-bar-circle"
+            :style="swatchStyle(selectedOption.resolved)"
+          />
+        </template>
         {{ selectedLabel }}
         <span aria-hidden="true">&thinsp;<!-- hold the space --></span>
         <dt-text
-          v-if="selectedOption?.resolved"
+          v-if="selectedOption?.resolved && !isColor(selectedOption.resolved)"
           v-dt-tooltip="selectedOption.resolved.includes('/') ? 'Font Size / Line Height' : undefined"
           kind="body"
           :size="100"
@@ -53,13 +63,18 @@
       >
         <dt-stack
           direction="row"
-          gap="200"
+          gap="100"
           align="baseline"
           class="d-w100p"
         >
+          <span
+            v-if="option.resolved && isColor(option.resolved)"
+            class="d-ba d-bc-subtle d-bar-circle d-as-center"
+            :style="swatchStyle(option.resolved)"
+          />
           <span>{{ option.label }}</span>
           <dt-text
-            v-if="option.resolved"
+            v-if="option.resolved && !isColor(option.resolved)"
             kind="body"
             :size="100"
             tone="muted"
@@ -123,6 +138,14 @@ const props = defineProps({
 });
 
 const emit = defineEmits([VALUE_UPDATE_EVENT]);
+
+const isColor = (v) => /^(rgb|oklch|#)/.test(v);
+
+const swatchStyle = (color) => ({
+  backgroundColor: color,
+  inlineSize: 'var(--dt-icon-size-100)',
+  blockSize: 'var(--dt-icon-size-100)',
+});
 
 function onInput (e) {
   emit(VALUE_UPDATE_EVENT, e === 'null' ? null : e);
