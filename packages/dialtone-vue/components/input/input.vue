@@ -214,7 +214,7 @@ export default {
 
     /**
      * Label for the input.
-     * Can also be used as a slot.
+     * Can also be overridden with a slot of the same name.
      */
     label: {
       type: String,

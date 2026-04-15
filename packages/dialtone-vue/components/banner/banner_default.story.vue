@@ -56,12 +56,6 @@
       >
         <dt-icon :name="$attrs.icon" />
       </template>
-      <template
-        v-if="$attrs.title"
-        #title
-      >
-        <span v-html="$attrs.title" />
-      </template>
     </dt-banner>
   </div>
 </template>

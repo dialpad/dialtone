@@ -46,7 +46,7 @@ export default {
   props: {
     /**
      * Title header of the notice. This can be left blank to remove the title from the notice entirely.
-     * Can also be used as a slot.
+     * Can also be overridden with a slot of the same name.
      */
     title: {
       type: String,

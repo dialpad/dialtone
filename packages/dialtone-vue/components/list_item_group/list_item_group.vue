@@ -42,7 +42,7 @@ export default {
 
     /**
      * List's heading.
-     * Can also be used as a slot.
+     * Can also be overridden with a slot of the same name.
      */
     heading: {
       type: String,

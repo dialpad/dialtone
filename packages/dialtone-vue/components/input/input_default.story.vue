@@ -31,12 +31,6 @@
     @update:invalid="$attrs.onUpdateIsInvalid"
   >
     <template
-      v-if="$attrs.label"
-      #label
-    >
-      <span v-html="$attrs.label" />
-    </template>
-    <template
       v-if="$attrs.description"
       #description
     >

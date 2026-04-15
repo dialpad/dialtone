@@ -22,18 +22,6 @@
     @input="$attrs.onInput"
     @change="$attrs.onChange"
   >
-    <template
-      v-if="$attrs.labelSlot"
-      #label
-    >
-      <span v-html="$attrs.labelSlot" />
-    </template>
-    <template
-      v-if="$attrs.descriptionSlot"
-      #description
-    >
-      <span v-html="$attrs.descriptionSlot" />
-    </template>
     <html-fragment
       v-if="defaultSlot"
       :html="defaultSlot"
