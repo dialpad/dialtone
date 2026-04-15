@@ -2,7 +2,7 @@
   <dt-combobox-multi-select
     ref="comboboxMultiSelect"
     :label="$attrs.label"
-    :label-visible="$attrs.labelVisible"
+    :show-label="$attrs.showLabel"
     :description="$attrs.description"
     :size="$attrs.size"
     :placeholder="$attrs.placeholder"

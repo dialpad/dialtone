@@ -11,7 +11,7 @@ export const argsData = {
   totalPages: 5,
   activePage: 1,
   maxVisible: 5,
-  hideEdges: false,
+  showEdges: true,
   onChange: action('change'),
 };
 
@@ -32,7 +32,7 @@ export const argTypesData = {
       type: 'number',
     },
   },
-  hideEdges: {
+  showEdges: {
     control: {
       type: 'boolean',
     },

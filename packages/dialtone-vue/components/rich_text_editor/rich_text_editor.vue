@@ -5,7 +5,7 @@
   <div>
     <!-- why the hell is this visibility: hidden by default??? -->
     <bubble-menu
-      v-if="editor && link && !hideLinkBubbleMenu"
+      v-if="editor && link && showLinkBubbleMenu"
       :editor="editor"
       :should-show="bubbleMenuShouldShow"
       :options="floatingOptions"
@@ -130,11 +130,11 @@ export default {
     },
 
     /**
-     * Prevents the user from typing any further. Deleting text will still work.
+     * Allows the user to type in the editor. Set to false to prevent typing while still allowing deletion.
      */
-    preventTyping: {
+    allowTyping: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     /**
@@ -431,13 +431,13 @@ export default {
     },
 
     /**
-     * Manually hide the link bubble menu. The link bubble menu is shown when a link is selected via the cursor.
-     * There are some cases when you may want the link to remain selected but hide the bubble menu such as when You
-     * are showing a custom link editor popup.
+     * Shows the link bubble menu when a link is selected via the cursor.
+     * Set to false when you want the link to remain selected but hide the bubble menu,
+     * such as when showing a custom link editor popup.
      */
-    hideLinkBubbleMenu: {
+    showLinkBubbleMenu: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     /**
@@ -880,7 +880,7 @@ export default {
           },
 
           handleKeyDown: (view, event) => {
-            if (!this.preventTyping) return false;
+            if (this.allowTyping) return false;
 
             const allowedKeys = ['Backspace'];
             if (!this.allowLineBreaks && !event.shiftKey) {

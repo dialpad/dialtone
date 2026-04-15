@@ -8,7 +8,7 @@ import { COMBOBOX_LABEL_SIZES } from './combobox_constants';
 // Default Prop Values
 export const argsData = {
   label: 'Label Text',
-  labelVisible: true,
+  showLabel: true,
   showList: true,
   size: COMBOBOX_LABEL_SIZES.DEFAULT,
   emptyList: false,

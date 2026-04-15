@@ -176,7 +176,7 @@ Use GFM-style blockquote alerts to render `<dt-notice>` components. A markdown-i
 
 **KIND** must be one of: `BASE`, `INFO`, `SUCCESS`, `WARNING`, `ERROR` (case-insensitive, but uppercase is the convention — maps to DtNotice's `kind` prop).
 
-The plugin always adds `hide-close` and `class="d-wmx100p d-my-200 dialtone-doc-notice"`. Links in the body automatically get `d-link` styling.
+The plugin always adds `:show-close="false"` and `class="d-wmx100p d-my-200 dialtone-doc-notice"`. Links in the body automatically get `d-link` styling.
 
 ### Choosing a kind
 

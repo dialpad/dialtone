@@ -4,7 +4,7 @@
     :total-pages="$attrs.totalPages"
     :active-page="$attrs.activePage"
     :max-visible="$attrs.maxVisible"
-    :hide-edges="$attrs.hideEdges"
+    :show-edges="$attrs.showEdges"
     @change="$attrs.onChange"
   />
 </template>

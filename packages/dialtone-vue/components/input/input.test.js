@@ -123,7 +123,7 @@ describe('DtInput tests', () => {
 
     describe('When a label visible prop is false', () => {
       it('should not render a label', () => {
-        mockProps = { labelVisible: false };
+        mockProps = { showLabel: false };
 
         updateWrapper();
 
@@ -131,7 +131,7 @@ describe('DtInput tests', () => {
       });
 
       it('should set aria-label on the input', () => {
-        mockProps = { labelVisible: false };
+        mockProps = { showLabel: false };
 
         updateWrapper();
 
@@ -139,7 +139,7 @@ describe('DtInput tests', () => {
       });
 
       it('should set aria-label on the textarea', () => {
-        mockProps = { labelVisible: false, type: 'textarea' };
+        mockProps = { showLabel: false, type: 'textarea' };
 
         updateWrapper();
 
@@ -149,7 +149,7 @@ describe('DtInput tests', () => {
       });
     });
 
-    describe('When labelVisible is true', () => {
+    describe('When showLabel is true', () => {
       it('should not set aria-label on the input', () => {
         expect(nativeInput.attributes('aria-label')).toBeUndefined();
       });

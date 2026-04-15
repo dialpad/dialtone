@@ -4,7 +4,7 @@
     class="d-recipe-grouped-chip"
   >
     <dt-chip
-      :hide-close="true"
+      :show-close="false"
       :interactive="false"
       :size="100"
       :grouped-chip="true"
@@ -51,7 +51,7 @@
 
     <!-- End side split chip -->
     <dt-chip
-      :hide-close="true"
+      :show-close="false"
       :interactive="false"
       :size="100"
       :grouped-chip="true"

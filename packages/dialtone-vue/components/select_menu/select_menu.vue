@@ -5,7 +5,7 @@
   >
     <label>
       <dt-text
-        v-if="labelVisible && (hasSlotContent($slots.label) || label)"
+        v-if="showLabel && (hasSlotContent($slots.label) || label)"
         kind="label"
         :size="resolvedLabelSize"
         :strength="labelStrength"
@@ -52,7 +52,7 @@
             'd-select__input',
             SELECT_STATE_MODIFIERS[state],
           ]"
-          :aria-label="!labelVisible && label ? label : undefined"
+          :aria-label="!showLabel && label ? label : undefined"
           v-bind="removeClassStyleAttrs($attrs)"
           data-qa="dt-select"
           :disabled="disabled"
@@ -131,7 +131,7 @@ export default {
      * Determines visibility of select label.
      * @values true, false
      */
-    labelVisible: {
+    showLabel: {
       type: Boolean,
       default: true,
     },
@@ -382,7 +382,7 @@ export default {
       const hasLabel = !!(this.$slots.label || this.label);
       if (!hasLabel && !this.$attrs['aria-label']) {
         console.info(
-          '[Dialtone] A label is required for accessibility. Provide a label prop and use label-visible="false" to hide it visually.',
+          '[Dialtone] A label is required for accessibility. Provide a label prop and use show-label="false" to hide it visually.',
         );
       }
     },

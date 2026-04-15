@@ -95,7 +95,7 @@ export default {
      * Determines visibility of input label.
      * @values true, false
      */
-    labelVisible: {
+    showLabel: {
       type: Boolean,
       default: true,
     },
@@ -257,7 +257,7 @@ export default {
     inputProps () {
       return {
         label: this.label,
-        labelVisible: this.labelVisible,
+        showLabel: this.showLabel,
         size: this.size,
         description: this.description,
         role: 'combobox',

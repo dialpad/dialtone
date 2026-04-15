@@ -116,7 +116,7 @@ export const Mixed = inline({ DtButton, DtLink, DtSelectMenu }, `\
       { value: '3', label: 'Option 3' },
     ]"
     label="Default"
-    :label-visible="false"
+    :show-label="false"
   />
 </dt-stack>`);
 

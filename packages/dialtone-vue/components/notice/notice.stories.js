@@ -79,17 +79,17 @@ export const argTypesData = {
       disable: true,
     },
   },
-  hideClose: {
+  showClose: {
     control: {
       type: 'boolean',
     },
   },
-  hideIcon: {
+  showIcon: {
     control: {
       type: 'boolean',
     },
   },
-  hideAction: {
+  showAction: {
     control: {
       type: 'boolean',
     },

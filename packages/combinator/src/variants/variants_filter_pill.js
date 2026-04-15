@@ -104,7 +104,7 @@ export default {
         ],
       },
       label: { initialValue: 'Duration' },
-      hideClear: { initialValue: true },
+      showClear: { initialValue: false },
     },
   },
 

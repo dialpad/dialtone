@@ -57,7 +57,7 @@
           :input-wrapper-class="inputWrapperClass"
           :disabled="disabled"
           :aria-label="label"
-          :label="labelVisible ? label : ''"
+          :label="showLabel ? label : ''"
           :description="description"
           :placeholder="inputPlaceHolder"
           :show-messages="showInputMessages"
@@ -159,7 +159,7 @@ export default {
      * Determines visibility of input label.
      * @values true, false
      */
-    labelVisible: {
+    showLabel: {
       type: Boolean,
       default: true,
     },
