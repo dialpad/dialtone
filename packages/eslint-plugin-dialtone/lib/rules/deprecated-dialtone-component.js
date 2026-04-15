@@ -62,7 +62,8 @@ module.exports = {
       ImportDeclaration(node) {
         const importPath = node.source.value;
 
-        if (!importPath.includes('@dialpad/dialtone-vue') && !importPath.includes('@dialpad/dialtone')) {
+        const isDialtoneSource = /^@dialpad\/dialtone(?:-vue)?(?:$|\/)/.test(importPath);
+        if (!isDialtoneSource) {
           return;
         }
 
