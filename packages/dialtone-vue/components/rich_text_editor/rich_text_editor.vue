@@ -974,12 +974,13 @@ export default {
         .run();
 
       const selection = this.editor?.view?.state?.selection;
+      const displayText = linkText || linkInput;
 
       this.editor
         .chain()
         .focus()
-        .insertContent(linkText)
-        .setTextSelection({ from: selection.from, to: selection.from + linkText.length })
+        .insertContent(displayText)
+        .setTextSelection({ from: selection.from, to: selection.from + displayText.length })
         .setLink({ href: linkInput, class: linkOptions.class })
         .run();
     },
