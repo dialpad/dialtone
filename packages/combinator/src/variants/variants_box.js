@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 export default {
   default: {
     slots: {
@@ -93,6 +94,42 @@ export default {
       default: { initialValue: `<dt-text kind="label" size="sm">
   Pill shape
 </dt-text>` },
+    },
+  },
+
+  'composed layout': {
+    props: {
+      padding: { initialValue: '200' },
+      surface: { initialValue: 'primary' },
+      borderWidth: { initialValue: '100' },
+      borderRadius: { initialValue: '400' },
+    },
+    slots: {
+      default: { initialValue: `<dt-stack gap="200">
+  <dt-stack gap="400" direction="row" justify="space-between" align="baseline">
+    <dt-text as="h2" kind="headline" size="400">Title</dt-text>
+    <dt-button size="200">
+      <template #endIcon="{ iconSize }">
+        <dt-icon name="chevron-down" :size="iconSize" />
+      </template>
+      Add thing
+    </dt-button>
+  </dt-stack>
+  <dt-stack direction="row" align="start" gap="200">
+    <dt-box class="d-fl1" padding="200" surface="secondary" border-width="100" border-color="subtle" border-radius="300">
+      <dt-text as="p" align="center" tone="muted">Box 1</dt-text>
+    </dt-box>
+    <dt-box class="d-fl1" padding="200" surface="secondary" border-width="100" border-color="subtle" border-radius="300">
+      <dt-text as="p" align="center" tone="muted">Box 2</dt-text>
+    </dt-box>
+    <dt-box class="d-fl1" padding="200" surface="secondary" border-width="100" border-color="subtle" border-radius="300">
+      <dt-text as="p" align="center" tone="muted">Box 3</dt-text>
+    </dt-box>
+    <dt-box class="d-fl1" padding="200" surface="secondary" border-width="100" border-color="subtle" border-radius="300">
+      <dt-text as="p" align="center" tone="muted">Box 4</dt-text>
+    </dt-box>
+  </dt-stack>
+</dt-stack>` },
     },
   },
 };
