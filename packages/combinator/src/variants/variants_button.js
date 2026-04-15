@@ -3,6 +3,7 @@ export default {
   defaults: {
     props: {
       kind: { tokenCategory: 'color:d-btn--:color' },
+      linkKind: { tokenCategory: 'color:d-link--:color' },
     },
   },
 

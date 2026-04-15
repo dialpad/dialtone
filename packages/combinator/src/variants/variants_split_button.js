@@ -2,6 +2,12 @@
 
 
 export default {
+  defaults: {
+    props: {
+      kind: { tokenCategory: 'color:d-btn--:color' },
+    },
+  },
+
   exclusions: [
     {
       when: { importance: v => v !== 'clear' },

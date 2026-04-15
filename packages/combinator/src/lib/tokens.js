@@ -97,9 +97,10 @@ export function resolveTokenValue (category, value, propValues) {
  * Resolves a computed color from CSS classes applied to the measure element.
  *
  * classPrefix patterns:
- *   'class[attr]'  — sets attr=value, reads from child element (avatar family)
- *   'class--'      — applies 'class class--{value}' (BEM modifier)
- *   'class'        — applies 'class-{value}' (utility class)
+ *   'class[attr]'       — sets attr=value, reads from child element (avatar family)
+ *   'class--'           — applies 'class class--{value}' (BEM modifier)
+ *   'class--modifier-'  — applies 'class class--modifier-{value}' (BEM sub-modifier)
+ *   'class'             — applies 'class-{value}' (utility class)
  *
  * cssProperty patterns:
  *   'color', 'backgroundColor'  — standard computed style property
@@ -124,12 +125,12 @@ function resolveColor (classPrefix, cssProperty, value) {
         }
         child.className = `${bracketMatch[1]}__canvas-inner`;
       }
-    // Component modifier pattern: prefix ends with '--' (e.g., 'd-badge--')
-    // → class = 'd-badge d-badge--{value}'
-    } else if (classPrefix.endsWith('--')) {
-      const base = classPrefix.slice(0, -2);
+    // BEM modifier pattern: prefix contains '--' (e.g., 'd-badge--', 'd-badge--decorate-')
+    // → class = 'd-badge d-badge--{value}' or 'd-badge d-badge--decorate-{value}'
+    } else if (classPrefix.includes('--')) {
+      const base = classPrefix.slice(0, classPrefix.indexOf('--'));
       el.className = `${base} ${classPrefix}${value}`;
-    // Utility pattern: no '--' suffix (e.g., 'd-fc')
+    // Utility pattern: no '--' (e.g., 'd-fc')
     // → class = 'd-fc-{value}'
     } else {
       el.className = `${classPrefix}-${value}`;

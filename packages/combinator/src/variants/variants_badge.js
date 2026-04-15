@@ -5,6 +5,7 @@ export default {
     props: {
       iconSize: { tokenCategory: 'icon-size' },
       type: { tokenCategory: 'color:d-badge--:backgroundColor' },
+      decoration: { tokenCategory: 'color:d-badge--decorate-:--badge-decorative-color' },
     },
   },
 
