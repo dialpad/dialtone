@@ -1,3 +1,15 @@
+# [1.2.0-next.5](https://github.com/dialpad/dialtone/compare/combinator/v1.2.0-next.4...combinator/v1.2.0-next.5) (2026-04-15)
+
+
+### Code Refactoring
+
+* **Components:** dlt-3283 refactor prop/slots to be consistent ([#1196](https://github.com/dialpad/dialtone/issues/1196)) ([2d22c76](https://github.com/dialpad/dialtone/commit/2d22c76d36e98cef49bcb8cba4f0754724d82dac))
+
+
+### Features
+
+* **Components:** DLT-3159 enforce positive boolean props ([#1198](https://github.com/dialpad/dialtone/issues/1198)) ([ac73bdc](https://github.com/dialpad/dialtone/commit/ac73bdcd502f5312de68af3e10184567180f1e12))
+
 # [1.2.0-next.4](https://github.com/dialpad/dialtone/compare/combinator/v1.2.0-next.3...combinator/v1.2.0-next.4) (2026-04-15)
 
 
