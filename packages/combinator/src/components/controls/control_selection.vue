@@ -10,7 +10,8 @@
   <dt-dropdown
     navigation-type="arrow-keys"
     placement="bottom-start"
-    content-class="d-w-250 d-hmx-350"
+    content-width="anchor"
+    content-class="d-hmx-400"
   >
     <template #anchor="{ attrs }">
       <dt-button
@@ -57,7 +58,7 @@
         :key="option.value"
         role="menuitem"
         navigation-type="arrow-keys"
-        :class="{ 'd-o50 d-pe-none': option.disabled }"
+        :class="{ 'd-o50 d-pe-none': option.disabled, 'd-bgc-moderate-opaque': option.value === value }"
         :aria-disabled="option.disabled || undefined"
         @click="!option.disabled && (onInput(option.value), close())"
       >
@@ -85,7 +86,7 @@
         </dt-stack>
         <template #end>
           <dt-icon-check
-            size="200"
+            size="100"
             :class="option.value === value ? 'd-o100' : 'd-o0'"
           />
         </template>
