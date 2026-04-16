@@ -216,12 +216,12 @@ describe('Checkbox Group Tests', () => {
 
     describe('When the checkbox group is disabled', () => {
       describe('When a checkbox is selected', () => {
-        it('does not emit update:modelValue event', () => {
+        it('does not emit update:modelValue event', async () => {
           mockProps = { disabled: true };
 
           updateWrapper();
 
-          MOCK_SELECTED_CHECKBOX_FUNCTION(MOCK_SELECTED_VALUE);
+          await MOCK_SELECTED_CHECKBOX_FUNCTION(MOCK_SELECTED_VALUE);
 
           expect(wrapper.emitted('update:modelValue')).toBeFalsy();
         });

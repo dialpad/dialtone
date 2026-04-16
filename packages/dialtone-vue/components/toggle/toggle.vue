@@ -135,7 +135,7 @@ export default {
      * Event fired to sync the modelValue prop with the parent component
      *
      * @event update:modelValue
-     * @type {Boolean | String}
+     * @type {Boolean}
      */
     'update:modelValue',
   ],

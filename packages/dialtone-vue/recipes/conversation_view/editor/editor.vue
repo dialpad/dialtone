@@ -149,7 +149,7 @@
                 input-wrapper-class="d-w0 d-h0 d-ba-none"
                 :size="200"
                 type="color"
-                @input="onColorPickerInput"
+                @update:model-value="onColorPickerInput"
                 @click.stop
               />
               <!-- eslint-enable vue/no-restricted-class -->
