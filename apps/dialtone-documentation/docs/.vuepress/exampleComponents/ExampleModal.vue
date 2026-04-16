@@ -96,6 +96,8 @@ export default {
     };
   },
 
+  // Docs-only behavior: render the modal open once when `initiallyOpen` is true
+  // so we can capture the open state markup for examples, then immediately close it.
   mounted () {
     if (this.initiallyOpen) {
       this.isOpen = false;
