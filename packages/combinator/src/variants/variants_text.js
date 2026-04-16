@@ -181,6 +181,9 @@ export default {
       align: {
         initialValue: 'center',
       },
+      wrap: {
+        initialValue: 'balance',
+      },
     },
   },
   'with numeric (tabular-nums)': {

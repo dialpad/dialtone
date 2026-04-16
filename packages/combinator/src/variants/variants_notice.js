@@ -1,9 +1,12 @@
- 
- 
+
+
 export default {
   defaults: {
     props: {
       kind: { tokenCategory: 'color:d-notice--:backgroundColor' },
+    },
+    slots: {
+      action: { initialValue: '<dt-button :size="200" importance="outlined" kind="muted">Action</dt-button>' },
     },
   },
 

@@ -73,9 +73,9 @@ export default {
     },
     slots: {
       default: {
-        initialValue: `<div class="d-bgc-moderate-opaque d-p-200 d-bar8"> <dt-text kind="body" :size="100">Small body</dt-text> </div>
-<div class="d-bgc-moderate-opaque d-p-200 d-bar8"> <dt-text kind="headline" :size="600">2xl headline</dt-text> </div>
-<div class="d-bgc-moderate-opaque d-p-200 d-bar8"> <dt-text kind="headline" size="lg">Large headline</dt-text> </div>`,
+        initialValue: `<div class="d-bgc-moderate-opaque d-p-100 d-bar8"> <dt-text kind="body" :size="100">Small body</dt-text> </div>
+<div class="d-bgc-moderate-opaque d-p-200 d-bar-8"> <dt-text kind="headline" :size="600">2xl headline</dt-text> </div>
+<div class="d-bgc-moderate-opaque d-p-200 d-bar-8"> <dt-text kind="headline" size="lg">Large headline</dt-text> </div>`,
       },
     },
   },
