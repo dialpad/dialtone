@@ -1,7 +1,14 @@
 <template>
+  <dt-button
+    @click="isOpen = !isOpen"
+  >
+    Click to open
+  </dt-button>
   <dt-modal
     title="Example title"
     :show="isOpen"
+    :append-to="appendTo"
+    :kind="kind"
     :banner-title="bannerTitle"
     :banner-kind="bannerKind"
     :fixed-header-footer="fixedHeaderFooter"
@@ -31,11 +38,6 @@
       </dt-button>
     </template>
   </dt-modal>
-  <dt-button
-    @click="isOpen = !isOpen"
-  >
-    Click to open
-  </dt-button>
 </template>
 
 <script>
@@ -43,6 +45,16 @@ export default {
   name: 'ExampleModal',
 
   props: {
+    initiallyOpen: {
+      type: Boolean,
+      default: false,
+    },
+
+    appendTo: {
+      type: String,
+      default: undefined,
+    },
+
     kind: {
       type: String,
       default: 'default',
@@ -60,7 +72,7 @@ export default {
 
     fixedHeaderFooter: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     size: {
@@ -80,8 +92,14 @@ export default {
 
   data () {
     return {
-      isOpen: false,
+      isOpen: this.initiallyOpen,
     };
+  },
+
+  mounted () {
+    if (this.initiallyOpen) {
+      this.isOpen = false;
+    }
   },
 };
 </script>
