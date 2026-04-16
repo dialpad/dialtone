@@ -578,13 +578,15 @@ export default {
     padding-inline-start: var(--dt-spacing-400);
     display: grid;
     flex: 1;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+    place-items: center;
 
     @media screen and (min-width: 640px) {
       min-block-size: var(--dt-size-925);
     }
+  }
+
+  &__component-content {
+    display: contents;
   }
 
   &__resizer {
