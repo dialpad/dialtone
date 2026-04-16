@@ -195,6 +195,21 @@ describe('DtBox', () => {
     expect(bwClasses).toHaveLength(0);
   });
 
+  // ── Directional border width ──────────────────────────────
+
+  it.each([
+    ['borderWidthInline', '100', 'd-box--bwi-100'],
+    ['borderWidthInlineStart', '150', 'd-box--bwis-150'],
+    ['borderWidthInlineEnd', '200', 'd-box--bwie-200'],
+    ['borderWidthBlock', '100', 'd-box--bwbl-100'],
+    ['borderWidthBlockStart', '150', 'd-box--bwbs-150'],
+    ['borderWidthBlockEnd', '200', 'd-box--bwbe-200'],
+  ])('applies %s modifier class', (prop, value, expectedClass) => {
+    const wrapper = mountComponent({ [prop]: value });
+
+    expect(wrapper.classes()).toContain(expectedClass);
+  });
+
   // ── Border radius ─────────────────────────────────────────
 
   it('applies borderRadius modifier class', () => {
