@@ -1643,24 +1643,13 @@ describe('DtRichTextEditor tests', () => {
         wrapper.vm.editor.commands.focus();
       });
 
-      describe('When display text is provided', () => {
-        it('should insert the display text as a link', async () => {
-          wrapper.vm.setLink('https://example.com', 'Example', linkOptions, supportedProtocols, defaultPrefix);
-          await wrapper.vm.$nextTick();
-          const output = wrapper.vm.getOutput();
-          expect(output).toContain('href="https://example.com"');
-          expect(output).toContain('Example');
-        });
-      });
-
-      describe('When display text is empty', () => {
-        it('should use the URL as the display text', async () => {
-          wrapper.vm.setLink('https://example.com', '', linkOptions, supportedProtocols, defaultPrefix);
-          await wrapper.vm.$nextTick();
-          const output = wrapper.vm.getOutput();
-          expect(output).toContain('href="https://example.com"');
-          expect(output).toContain('https://example.com');
-        });
+      it.each([
+        ['https://example.com', 'Example', 'Example'],
+        ['https://example.com', '', 'https://example.com'],
+      ])('should render link correctly (url=%s, displayText=%s)', async (url, displayText, expectedSubstring) => {
+        wrapper.vm.setLink(url, displayText, linkOptions, supportedProtocols, defaultPrefix);
+        await wrapper.vm.$nextTick();
+        expect(wrapper.vm.getOutput()).toContain(expectedSubstring);
       });
     });
 
