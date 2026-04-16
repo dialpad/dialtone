@@ -1,11 +1,12 @@
 /* eslint-disable max-len */
 
+
 export default {
   defaults: {
     props: {
       size: { tokenCategory: 'typography-size' },
       density: { tokenCategory: 'line-height' },
-      tone: { tokenCategory: 'color:d-fc:color' },
+      tone: { tokenCategory: 'color:d-text--tone-:--text-tone' },
     },
   },
 
