@@ -8,7 +8,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-modal--defau
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=4454-10944
 ---
 <code-well-header>
-  <example-modal append-to="body" />
+  <example-modal />
 </code-well-header>
 
 ## Usage
@@ -65,7 +65,7 @@ Although highly versatile, this doesn't mean modal dialogs are fit for all purpo
 ### Base Style
 
 <code-well-header>
-  <example-modal append-to="body" />
+  <example-modal />
   <div ref="baseExample" inert aria-hidden="true" class="d-h0 d-of-hidden d-vi-hidden d-pe-none d-mt0">
     <example-modal initially-open />
   </div>
@@ -112,7 +112,7 @@ vueCode='
 This is the default behavior that adds the scroll automatically in the modal content and leaves the header and footer fixed.
 
 <code-well-header>
-  <example-modal append-to="body" :copy="fixedHeaderFooterCopy" />
+  <example-modal :copy="fixedHeaderFooterCopy" />
   <div ref="fixedExample" inert aria-hidden="true" class="d-h0 d-of-hidden d-vi-hidden d-pe-none d-mt0">
     <example-modal initially-open :copy="fixedHeaderFooterCopy" />
   </div>
@@ -160,7 +160,7 @@ vueCode='
 A modal style for destructive or irreversible actions.
 
 <code-well-header>
-  <example-modal append-to="body" kind="danger" />
+  <example-modal kind="danger" />
   <div ref="dangerExample" inert aria-hidden="true" class="d-h0 d-of-hidden d-vi-hidden d-pe-none d-mt0">
     <example-modal initially-open kind="danger" />
   </div>
@@ -209,7 +209,7 @@ vueCode='
 To make this modal take up as much of the screen as possible.
 
 <code-well-header>
-  <example-modal append-to="body" size="full" />
+  <example-modal size="full" />
   <div ref="fullExample" inert aria-hidden="true" class="d-h0 d-of-hidden d-vi-hidden d-pe-none d-mt0">
     <example-modal initially-open size="full" />
   </div>
@@ -264,7 +264,7 @@ When there is a need of more context information regarding the content of the Mo
       :options="bannerKinds"
       v-model="selectedBannerKind"
     />
-    <example-modal append-to="body" :banner-kind="selectedBannerKind" banner-title="This banner can have different kinds." />
+    <example-modal :banner-kind="selectedBannerKind" banner-title="This banner can have different kinds." />
   </dt-stack>
   <div ref="bannerExample" inert aria-hidden="true" class="d-h0 d-of-hidden d-vi-hidden d-pe-none d-mt0">
     <example-modal initially-open banner-title="This banner can have different kinds." :banner-kind="selectedBannerKind" />
@@ -325,7 +325,7 @@ In addition to the footer, custom elements can be inserted into the header and b
   </dt-button>
   <dt-modal
     :show="isOpen"
-    append-to="body"
+    modal-class="d-mt0"
     @update:show="updateShow"
   >
     <template #header>

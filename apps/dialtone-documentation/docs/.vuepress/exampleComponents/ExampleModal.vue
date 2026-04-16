@@ -7,13 +7,13 @@
   <dt-modal
     title="Example title"
     :show="isOpen"
-    :append-to="appendTo"
     :kind="kind"
     :banner-title="bannerTitle"
     :banner-kind="bannerKind"
     :fixed-header-footer="fixedHeaderFooter"
     :size="size"
     :copy="copy"
+    modal-class="d-mt0"
     @update:show="isOpen = $event"
   >
     <template
@@ -48,11 +48,6 @@ export default {
     initiallyOpen: {
       type: Boolean,
       default: false,
-    },
-
-    appendTo: {
-      type: String,
-      default: undefined,
     },
 
     kind: {
