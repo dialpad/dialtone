@@ -48,9 +48,9 @@ import { DtStack } from '@dialpad/dialtone-vue';
 const ICON_SLOT_ORDER = ['startIcon', 'endIcon', 'blockStartIcon', 'blockEndIcon', 'icon'];
 
 const PROP_PRIORITY = [
-  'title', 'as', 'label', 'kind', 'size',
-  'importance', 'placement', 'tone', 'align', 'density', 'strength',
-  'type', 'underline', 'selected', 'active', 'disabled', 'color', 'description',
+  'title', 'as', 'label', 'importance', 'kind', 'size',
+  'placement', 'tone', 'align', 'density', 'strength',
+  'type', 'underline', 'selected', 'active', 'disabled', 'showDivider', 'color', 'description',
 ];
 
 const SLOT_PRIORITY = ['start', 'end', 'inlineStart', 'inlineEnd', 'blockStart', 'blockEnd', 'leading', 'trailing'];
