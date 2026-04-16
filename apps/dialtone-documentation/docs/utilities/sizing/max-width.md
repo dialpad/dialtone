@@ -8,6 +8,9 @@ keywords: ["maximum width", "mxw", "max inline size", "max inline-size"]
 
 Use `d-wmx-{stop}` to set a fixed maximum width for an element using layout token stops. The hyphen before the number indicates a layout token reference, e.g. `d-wmx-100` outputs `max-inline-size: var(--dt-layout-100)` (64px). This can be combined with `d-w{n}p` and `d-wmn-{stop}` to have an element fill a certain width range.
 
+> [!INFO] Scale-indexed vs pixel-indexed stops
+> Bare integer stops (`25`, `50`, `100`, …) are scale-indexed on the 64px base — `value_in_px = stop × 64 / 100`, so `25` = 16px and `100` = 64px. Stops with a `px` suffix (`1px`, `2px`, `8px`, `20px`, `24px`) are off-scale exceptions that encode the literal pixel value, for hairlines and tight gutters that don't fit the 16px-step scale.
+
 ```vue demo
 <dt-stack direction="row" justify="center" gap="200" class="d-w100p">
   <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100p d-h-100 d-wmx-100 d-bgc-moderate d-bar4 d-ta-center">1</dt-stack>
