@@ -81,19 +81,24 @@
 //  ============================================================================
 //  $   OVERFLOW
 //  ============================================================================
+//  Shorthand `overflow: *` resets both axes, so all `.d-of-*` classes must come
+//  before `.d-of-x-*` / `.d-of-y-*` single-axis classes. Otherwise pairs like
+//  `d-of-x-auto d-of-hidden` would silently clobber the single-axis intent.
 .d-of-auto { overflow: auto !important; }
-.d-of-x-auto { overflow-inline: auto !important; }
-.d-of-y-auto { overflow-block: auto !important; }
 .d-of-hidden { overflow: hidden !important; }
-.d-of-x-hidden { overflow-inline: hidden !important; }
-.d-of-y-hidden { overflow-block: hidden !important; }
 .d-of-scroll { overflow: scroll !important; }
-.d-of-x-scroll { overflow-inline: scroll !important; }
-.d-of-y-scroll { overflow-block: scroll !important; }
 .d-of-visible { overflow: visible !important; }
-.d-of-x-visible { overflow-inline: visible !important; }
-.d-of-y-visible { overflow-block: visible !important; }
 .d-of-unset { overflow: unset !important; }
+
+.d-of-x-auto { overflow-inline: auto !important; }
+.d-of-x-hidden { overflow-inline: hidden !important; }
+.d-of-x-scroll { overflow-inline: scroll !important; }
+.d-of-x-visible { overflow-inline: visible !important; }
+
+.d-of-y-auto { overflow-block: auto !important; }
+.d-of-y-hidden { overflow-block: hidden !important; }
+.d-of-y-scroll { overflow-block: scroll !important; }
+.d-of-y-visible { overflow-block: visible !important; }
 
 
 //  ============================================================================
