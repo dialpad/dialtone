@@ -155,9 +155,11 @@ function onInput (e) {
 const options = computed(() => {
   const valueOptions = props.validValues?.map(selection => {
     const optionDisabled = props.disabledValues?.has(String(selection)) ?? false;
-    const resolved = !optionDisabled && props.tokenCategory
+    const rawResolved = props.tokenCategory
       ? resolveTokenValue(props.tokenCategory, selection, props.propValues)
       : null;
+    // Show color swatches even for disabled options; hide non-color values (misleading for disabled sizes)
+    const resolved = optionDisabled && rawResolved && !isColor(rawResolved) ? null : rawResolved;
     return { value: selection, label: props.generateLabel(selection), resolved, disabled: optionDisabled };
   }) ?? [];
 

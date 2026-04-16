@@ -1,4 +1,4 @@
- 
+
 export default {
   defaults: {
     props: {
@@ -13,6 +13,14 @@ export default {
       hide: {
         props: ['importance', 'kind', 'circle', 'loading', 'active', 'type', 'size'],
       },
+    },
+    {
+      when: { kind: 'muted' },
+      disableValues: { props: { importance: ['primary'] } },
+    },
+    {
+      when: { importance: 'primary' },
+      disableValues: { props: { kind: ['muted'] } },
     },
     {
       when: { kind: 'unstyled' },
