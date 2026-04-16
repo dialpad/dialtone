@@ -1,3 +1,39 @@
+# [9.179.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.178.0...dialtone/v9.179.0) (2026-04-14)
+
+
+### Bug Fixes
+
+* **Ci:** NO-JIRA use daily cleanup PR instead of direct push to staging ([#1185](https://github.com/dialpad/dialtone/issues/1185)) ([bb00654](https://github.com/dialpad/dialtone/commit/bb0065415b98ddbc02923463e25ebf237068765d))
+* **Workflow:** NO-JIRA prevent permission denials in claude-review ([#1189](https://github.com/dialpad/dialtone/issues/1189)) ([0d18635](https://github.com/dialpad/dialtone/commit/0d186356542966ba09e6c2470a64b019a6fe5786))
+* **Workflow:** NO-JIRA restore id-token permission and fix concurrency race in claude-review ([#1143](https://github.com/dialpad/dialtone/issues/1143)) ([34cb68d](https://github.com/dialpad/dialtone/commit/34cb68d4e7a7a1857d81ead7317704759b220ddc))
+
+
+### Features
+
+* **Button:** DLT-3269 improve disabled styles ([#1180](https://github.com/dialpad/dialtone/issues/1180)) ([00a75f2](https://github.com/dialpad/dialtone/commit/00a75f2c8d958a2ea43d571df272bf6dce08b2de))
+
+# [9.178.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.177.2...dialtone/v9.178.0) (2026-04-07)
+
+
+### Features
+
+* **Resizable:** DLT-2097 add DtResizable panel layout component ([#1162](https://github.com/dialpad/dialtone/issues/1162)) ([c6bd3bc](https://github.com/dialpad/dialtone/commit/c6bd3bcbae65634015f3fa29bbe9043ae40baa90))
+
+## [9.177.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.177.1...dialtone/v9.177.2) (2026-04-06)
+
+
+### Bug Fixes
+
+* NO-JIRA include static-renderer ([e698bf4](https://github.com/dialpad/dialtone/commit/e698bf44619e20a5b14c4dc9ceacc7a8352332db))
+
+## [9.177.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.177.0...dialtone/v9.177.1) (2026-04-06)
+
+
+### Bug Fixes
+
+* NO-JIRA fix pnpm lock and add missing permissions ([#1175](https://github.com/dialpad/dialtone/issues/1175)) ([b355291](https://github.com/dialpad/dialtone/commit/b3552919edc6f48580421154453353ceaaeac88f))
+* NO-JIRA make dialtone-cli private ([cf555f2](https://github.com/dialpad/dialtone/commit/cf555f2a0c8562a949ec3c5b28e10185612b441a))
+
 # [9.177.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.176.0...dialtone/v9.177.0) (2026-04-02)
 
 

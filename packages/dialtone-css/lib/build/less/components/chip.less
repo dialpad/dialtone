@@ -99,13 +99,13 @@
     content: '';
   }
 
-  &:hover:not([disabled]) {
+  &:hover:not(:disabled, .d-btn--disabled) {
     --button-color-background: var(--dt-action-color-background-muted-hover);
   }
 
-  &:active:not([disabled]),
-  &.d-btn--active:not([disabled]),
-  &.d-btn--active:active:not([disabled]) {
+  &:active:not(:disabled, .d-btn--disabled),
+  &.d-btn--active:not(:disabled, .d-btn--disabled),
+  &.d-btn--active:active:not(:disabled, .d-btn--disabled) {
     --button-color-background: var(--dt-action-color-background-muted-active);
   }
 }

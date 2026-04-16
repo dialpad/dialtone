@@ -46,7 +46,7 @@ export default defineConfig({
     rolldownOptions: {
       external: [
         /^@dialpad/,
-        /^@tiptap\/(?!vue-3)/,
+        /^@tiptap\/(?!vue-3|static-renderer)/,
         /^date-fns/,
         /^emoji-toolkit/,
         /^overlayscrollbars/,

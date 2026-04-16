@@ -1,0 +1,33 @@
+name: Docs Tests
+
+on:
+  pull_request:
+    paths:
+      - 'packages/dialtone-docs/**'
+  push:
+    branches:
+      - staging
+    paths:
+      - 'packages/dialtone-docs/**'
+
+env:
+  HUSKY: 0
+
+concurrency:
+  group: "${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: read
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+
+      - name: Setup Environment
+        uses: ./.github/actions/setup-environment
+
+      - name: Run dialtone-docs tests
+        run: pnpm nx run dialtone-docs:test
