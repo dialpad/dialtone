@@ -46,6 +46,11 @@ export const argTypesData = {
   },
 
   // Props
+  headerText: {
+    control: {
+      type: 'text',
+    },
+  },
   kind: {
     options: NOTICE_KINDS,
     control: {

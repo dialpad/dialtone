@@ -57,6 +57,16 @@ export const argTypesData = {
   },
 
   // Props
+  headerText: {
+    control: {
+      type: 'text',
+    },
+  },
+  bannerHeaderText: {
+    control: {
+      type: 'text',
+    },
+  },
   contentMode: CONTENT_MODE_ARG_TYPE,
   size: {
     options: Object.keys(MODAL_SIZE_MODIFIERS),
