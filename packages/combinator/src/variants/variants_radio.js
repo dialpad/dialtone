@@ -18,7 +18,7 @@ export default {
   'hidden label': {
     props: {
       label: { initialValue: 'Radio label' },
-      labelVisible: { initialValue: false },
+      showLabel: { initialValue: false },
     },
   },
 

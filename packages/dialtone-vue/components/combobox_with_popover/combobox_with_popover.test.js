@@ -6,7 +6,7 @@ import DtPopover from '@/components/popover/popover.vue';
 // Constants
 const baseProps = {
   label: 'Label Text',
-  labelVisible: true,
+  showLabel: true,
   size: 'md',
   description: '',
   listId: 'list',

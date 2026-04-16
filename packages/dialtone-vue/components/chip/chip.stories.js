@@ -54,7 +54,7 @@ export const argTypesData = {
       type: 'boolean',
     },
   },
-  hideClose: {
+  showClose: {
     control: 'boolean',
   },
   interactive: {

@@ -43,5 +43,6 @@
     "url": "https://github.com/dialpad/dialtone.git",
     "directory": "packages/dialtone-cli"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "private": true
 }

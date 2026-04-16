@@ -3,7 +3,7 @@
     ref="combobox"
     :loading="loading"
     :label="label"
-    :label-visible="labelVisible"
+    :show-label="showLabel"
     :size="size"
     :description="description"
     :empty-list="emptyList"
@@ -38,7 +38,7 @@
       <dt-popover
         ref="popover"
         v-model:open="isListShown"
-        :hide-on-click="false"
+        :close-on-click="false"
         :max-height="maxHeight"
         :max-width="maxWidth"
         :offset="popoverOffset"
@@ -153,7 +153,7 @@ export default {
      * Determines visibility of input label.
      * @values true, false
      */
-    labelVisible: {
+    showLabel: {
       type: Boolean,
       default: true,
     },

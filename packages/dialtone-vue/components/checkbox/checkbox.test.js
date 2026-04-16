@@ -144,9 +144,9 @@ describe('DtCheckbox Tests', () => {
       });
     });
 
-    describe('When labelVisible is false', () => {
+    describe('When showLabel is false', () => {
       beforeEach(() => {
-        mockProps = { labelVisible: false };
+        mockProps = { showLabel: false };
 
         updateWrapper();
       });
@@ -162,7 +162,7 @@ describe('DtCheckbox Tests', () => {
       });
     });
 
-    describe('When labelVisible is true', () => {
+    describe('When showLabel is true', () => {
       it('should not set aria-label on the input', () => {
         expect(input.attributes('aria-label')).toBeUndefined();
       });

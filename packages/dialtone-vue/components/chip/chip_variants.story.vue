@@ -33,7 +33,7 @@
       <h4>Non interactive</h4>
       <dt-chip
         :interactive="false"
-        hide-close
+        :show-close="false"
       >
         <template #default>
           Chip

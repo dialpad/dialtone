@@ -27,7 +27,7 @@ export default {
     props: {
       title: { initialValue: 'Info title' },
       kind: { initialValue: 'info' },
-      hideClose: { initialValue: true },
+      showClose: { initialValue: false },
       show: { initialValue: true },
     },
     slots: {

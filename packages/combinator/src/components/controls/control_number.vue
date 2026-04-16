@@ -6,7 +6,7 @@
     :size="100"
     @input="e => emit(VALUE_UPDATE_EVENT, e === '' ? undefined : parseInt(e))"
   >
-    <template #labelSlot>
+    <template #label>
       <dt-text
         kind="label"
         :size="100"

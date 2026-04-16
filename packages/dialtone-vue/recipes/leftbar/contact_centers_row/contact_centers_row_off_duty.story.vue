@@ -4,7 +4,7 @@
     :unread-count="$attrs.unreadCount"
     :aria-label="$attrs.ariaLabel"
     :selected="$attrs.selected"
-    :hide-actions="$attrs.hideActions"
+    :show-actions="$attrs.showActions"
     @click="$attrs.click"
     @click-menu="$attrs.clickMenu"
   >

@@ -10,7 +10,7 @@ export default {
 
   exclusions: [
     {
-      when: { labelVisible: false },
+      when: { showLabel: false },
       hide: { props: ['labelClass', 'labelSize', 'labelStrength', 'labelChildProps'] },
     },
   ],

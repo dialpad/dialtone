@@ -292,12 +292,12 @@ export default {
     },
 
     /**
-     * Toggles the clear button visibility
+     * Shows the clear button when a filter is active
      * @values true, false
      */
-    hideClear: {
+    showClear: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     /**
@@ -560,7 +560,7 @@ export default {
     },
 
     hasClear () {
-      return !this.readOnly && !this.hideClear && this.activeFilterList.length > 0;
+      return !this.readOnly && this.showClear && this.activeFilterList.length > 0;
     },
 
     displayFilters () {

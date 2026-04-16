@@ -38,13 +38,13 @@ Use the `disabled` prop to disable both the Chip and its close button. This sets
 ### Without Close Button
 
 ```vue demo
-<dt-chip :hide-close="true">Chip</dt-chip>
+<dt-chip :show-close="false">Chip</dt-chip>
 ```
 
 ### With Icon
 
 ```vue demo
-<dt-chip :hide-close="true">
+<dt-chip :show-close="false">
   <template #icon>
     <dt-icon
       name="phone"

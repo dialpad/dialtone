@@ -12,7 +12,7 @@
           :value="value"
           :disabled="internalDisabled"
           :class="['d-checkbox', inputValidationClass, inputClass]"
-          :aria-label="!labelVisible && label ? label : undefined"
+          :aria-label="!showLabel && label ? label : undefined"
           v-bind="removeClassStyleAttrs($attrs)"
           :indeterminate.prop="internalIndeterminate"
           v-on="inputListeners"
@@ -97,7 +97,7 @@ export default {
      * Determines visibility of checkbox label.
      * @values true, false
      */
-    labelVisible: {
+    showLabel: {
       type: Boolean,
       default: true,
     },
@@ -174,7 +174,7 @@ export default {
     },
 
     hasLabel () {
-      return this.labelVisible && this.hasLabelContent;
+      return this.showLabel && this.hasLabelContent;
     },
 
     hasMessages () {
@@ -235,7 +235,7 @@ export default {
     runValidations () {
       if (!this.hasLabelContent && !this.$attrs['aria-label']) {
         console.warn(
-          '[Dialtone] A label is required for accessibility. Provide a label prop and use label-visible="false" to hide it visually.',
+          '[Dialtone] A label is required for accessibility. Provide a label prop and use show-label="false" to hide it visually.',
         );
       }
     },

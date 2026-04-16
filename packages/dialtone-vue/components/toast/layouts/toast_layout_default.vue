@@ -12,9 +12,9 @@
   >
     <div class="d-toast__dialog">
       <dt-notice-icon
-        v-if="!hideIcon"
+        v-if="showIcon"
         :kind="kind"
-        :class="{ 'd-notice__icon--has-title': title || $slots.titleOverride }"
+        :class="{ 'd-notice__icon--has-title': title || $slots.title }"
         v-bind="toastListeners"
       >
         <!-- @slot Slot for custom icon -->
@@ -27,10 +27,9 @@
         :role="role"
         v-bind="toastListeners"
       >
-        <template #titleOverride>
-          <!-- @slot Allows you to override the title, only use this if you need to override
-          with something other than text. Otherwise use the "title" prop. -->
-          <slot name="titleOverride" />
+        <template #title>
+          <!-- @slot Slot for the title -->
+          <slot name="title" />
         </template>
         <!-- @slot the main textual content of the toast -->
         <slot>
@@ -38,8 +37,8 @@
         </slot>
       </dt-notice-content>
       <dt-notice-action
-        :hide-action="hideAction"
-        :hide-close="hideClose"
+        :show-action="showAction"
+        :show-close="showClose"
         v-bind="toastListeners"
         @close="$emit('close')"
       >
@@ -142,30 +141,30 @@ export default {
     },
 
     /**
-     * Hides the close button from the toast
+     * Shows the close button in the toast
      * @values true, false
      */
-    hideClose: {
+    showClose: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     /**
-     * Hides the icon from the notice
+     * Shows the icon in the toast
      * @values true, false
      */
-    hideIcon: {
+    showIcon: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     /**
-     * Hides the action from the notice
+     * Shows the action in the toast
      * @values true, false
      */
-    hideAction: {
+    showAction: {
       type: Boolean,
-      default: false,
+      default: true,
     },
   },
 

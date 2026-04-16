@@ -7,7 +7,7 @@
     :content-class="$attrs.contentClass"
     :fallback-placements="$attrs.fallbackPlacements"
     :padding="$attrs.padding"
-    :hide-on-click="$attrs.hideOnClick"
+    :close-on-click="$attrs.closeOnClick"
     :role="$attrs.role"
     :element-type="$attrs.elementType"
     :transition="$attrs.transition"

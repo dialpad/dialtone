@@ -3,7 +3,7 @@
   <dt-chip
     :id="$attrs.id"
     :disabled="$attrs.disabled"
-    :hide-close="$attrs.hideClose"
+    :show-close="$attrs.showClose"
     :interactive="$attrs.interactive"
     :size="$attrs.size"
     :aria-label="$attrs.ariaLabel"

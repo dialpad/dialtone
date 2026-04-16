@@ -1,4 +1,4 @@
-/* eslint-disable max-len */
+ 
 
 export default {
   default: {
@@ -108,7 +108,7 @@ export default {
     props: {
       modelValue: { initialValue: 'all' },
       ariaLabel: { initialValue: 'View filter' },
-      hideDivider: { initialValue: true },
+      showDivider: { initialValue: false },
     },
   },
 

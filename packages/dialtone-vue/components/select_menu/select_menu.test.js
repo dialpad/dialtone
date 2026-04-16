@@ -107,9 +107,9 @@ describe('DtSelectMenu Tests', () => {
       });
     });
 
-    describe('When labelVisible is false', () => {
+    describe('When showLabel is false', () => {
       beforeEach(() => {
-        mockProps = { labelVisible: false };
+        mockProps = { showLabel: false };
 
         updateWrapper();
       });
@@ -127,7 +127,7 @@ describe('DtSelectMenu Tests', () => {
       });
     });
 
-    describe('When labelVisible is true', () => {
+    describe('When showLabel is true', () => {
       it('should not set aria-label on the select', () => {
         expect(select.attributes('aria-label')).toBeUndefined();
       });

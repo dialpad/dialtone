@@ -101,7 +101,7 @@
       <span class="d-label--sm">Radio selection (always active)</span>
       <dt-filter-pill
         v-model="internalExternal"
-        hide-clear
+        :show-clear="false"
       >
         <template #default>
           {{ selectedIEFilter || 'Internal and external' }}

@@ -17,7 +17,7 @@
     :popover-footer-class="$attrs.popoverFooterClass"
     :popover-dialog-class="$attrs.popoverDialogClass"
     :dropdown-list-class="$attrs.dropdownListClass"
-    :hide-clear="$attrs.hideClear"
+    :show-clear="$attrs.showClear"
     :defer-selection="$attrs.deferSelection"
     :read-only="$attrs.readOnly"
     :size="$attrs.size"

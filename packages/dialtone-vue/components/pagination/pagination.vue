@@ -121,14 +121,14 @@ export default {
     },
 
     /**
-     * Sometimes you may need to hide start and end page number buttons when moving in between.
-     * This prop will be used to hide the first and last page buttons when not near the edges.
-     * This is useful when your backend does not support offset and you can only use cursor based pagination.
+     * Shows the first and last page buttons when not near the edges.
+     * Set to false when your backend does not support offset and you can only use cursor based pagination.
      */
-    hideEdges: {
+    showEdges: {
       type: Boolean,
-      default: false,
+      default: true,
     },
+
   },
 
   emits: [
@@ -169,16 +169,16 @@ export default {
       let start = this.maxVisible - 1;
       let end = this.totalPages - start + 1;
 
-      // if hideEdges is true, modify the start and
-      // end to account for the hidden pages
-      if (this.hideEdges) {
+      // if showEdges is false, modify the start and
+      // end to account for the hidden edge pages
+      if (!this.showEdges) {
         start = start + 1;
         end = end - 1;
       }
 
       if (this.currentPage < start) {
         const pages = [...this.range(1, start), '...'];
-        if (!this.hideEdges) {
+        if (this.showEdges) {
           // add last page to the end
           pages.push(this.totalPages);
         }
@@ -187,7 +187,7 @@ export default {
 
       if (this.currentPage > end) {
         const pages = ['...', ...this.range(end, this.totalPages)];
-        if (!this.hideEdges) {
+        if (this.showEdges) {
           // add first page to the beginning
           pages.unshift(1);
         }
@@ -200,14 +200,14 @@ export default {
       let left = this.currentPage - centerIndex;
       let right = this.currentPage + centerIndex;
 
-      // if hideEdge is true, modify the left and right to account for the hidden pages
-      if (this.hideEdges) {
+      // if showEdges is false, modify the left and right to account for the hidden edge pages
+      if (!this.showEdges) {
         left = left - 1;
         right = right + 1;
       }
 
       const pages = ['...', ...this.range(left, right), '...'];
-      if (!this.hideEdges) {
+      if (this.showEdges) {
         return [1, ...pages, this.totalPages];
       }
       return pages;

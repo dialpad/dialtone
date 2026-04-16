@@ -13,8 +13,8 @@
       data-qa="dt-dropdown-list-heading"
       :class="['dt-dropdown-list--header', headingClass]"
     >
-      <!-- @slot Slot for heading, will override heading prop. -->
-      <slot name="headingSlot">
+      <!-- @slot Slot for heading, will override heading prop -->
+      <slot name="heading">
         {{ heading }}
       </slot>
     </li>
@@ -42,6 +42,7 @@ export default {
 
     /**
      * List's heading.
+     * Can also be overridden with a slot of the same name.
      */
     heading: {
       type: String,
