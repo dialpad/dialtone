@@ -86,7 +86,7 @@ htmlCode='
     </div>
     <footer class="d-modal__footer">
       <button class="d-btn d-btn--primary" type="button">
-        Save changes
+        Confirm
       </button>
       <button class="d-btn" type="button">
         Cancel
@@ -113,24 +113,24 @@ vueCode='
   title="Example title"
   :show="isOpen"
   @update:show="updateShow"
-  copy="Lorem ipsum ..."
+  copy="Sed at orci quis nunc finibus gravida eget vitae est..."
 >
   <template
     #footer
   >
-    <dt-button
-      id="cancel-button"
-      :kind="secondaryButtonKind"
-      importance="clear"
-    >
-      Cancel
-    </dt-button>
     <dt-button
       id="confirm-button"
       importance="primary"
       class="d-ml6"
     >
       Confirm
+    </dt-button>
+    <dt-button
+      id="cancel-button"
+      kind="muted"
+      importance="clear"
+    >
+      Cancel
     </dt-button>
   </template>
 </dt-modal>
@@ -168,7 +168,7 @@ htmlCode='
     </div>
     <footer class="d-modal__footer">
       <button class="d-btn d-btn--primary" type="button">
-        Save changes
+        Confirm
       </button>
       <button class="d-btn" type="button">
         Cancel
@@ -203,18 +203,18 @@ vueCode='
     #footer
   >
     <dt-button
-      id="cancel-button"
-      :kind="secondaryButtonKind"
-      importance="clear"
-    >
-      Cancel
-    </dt-button>
-    <dt-button
       id="confirm-button"
       importance="primary"
       class="d-ml6"
     >
       Confirm
+    </dt-button>
+    <dt-button
+      id="cancel-button"
+      kind="muted"
+      importance="clear"
+    >
+      Cancel
     </dt-button>
   </template>
 </dt-modal>
@@ -252,7 +252,7 @@ htmlCode='
     </div>
     <footer class="d-modal__footer">
       <button class="d-btn d-btn--primary d-btn--danger" type="button">
-        Save changes
+        Confirm
       </button>
       <button class="d-btn d-btn--muted" type="button">
         Cancel
@@ -286,19 +286,19 @@ vueCode='
     #footer
   >
     <dt-button
-      id="cancel-button"
-      :kind="secondaryButtonKind"
-      importance="clear"
-    >
-      Cancel
-    </dt-button>
-    <dt-button
       id="confirm-button"
       kind="danger"
       importance="primary"
       class="d-ml6"
     >
       Confirm
+    </dt-button>
+    <dt-button
+      id="cancel-button"
+      kind="muted"
+      importance="clear"
+    >
+      Cancel
     </dt-button>
   </template>
 </dt-modal>
@@ -336,7 +336,7 @@ htmlCode='
     </div>
     <footer class="d-modal__footer">
       <button class="d-btn d-btn--primary" type="button">
-        Save changes
+        Confirm
       </button>
       <button class="d-btn" type="button">
         Cancel
@@ -370,18 +370,18 @@ vueCode='
     #footer
   >
     <dt-button
-      id="cancel-button"
-      :kind="secondaryButtonKind"
-      importance="clear"
-    >
-      Cancel
-    </dt-button>
-    <dt-button
       id="confirm-button"
       importance="primary"
       class="d-ml6"
     >
       Confirm
+    </dt-button>
+    <dt-button
+      id="cancel-button"
+      kind="muted"
+      importance="clear"
+    >
+      Cancel
     </dt-button>
   </template>
 </dt-modal>
@@ -427,7 +427,7 @@ htmlCode='
     </div>
     <footer class="d-modal__footer">
       <button class="d-btn d-btn--primary" type="button">
-        Save changes
+        Confirm
       </button>
       <button class="d-btn" type="button">
         Cancel
@@ -454,7 +454,7 @@ vueCode='
   title="Example title"
   :show="isOpen"
   banner-title="This banner can have different kinds."
-  :bannerKind="selectedBannerKind"
+  :banner-kind="selectedBannerKind"
   copy="Sed at orci quis nunc finibus gravida eget vitae est..."
   @update:show="updateShow"
 >
@@ -462,18 +462,18 @@ vueCode='
     #footer
   >
     <dt-button
-      id="cancel-button"
-      :kind="secondaryButtonKind"
-      importance="clear"
-    >
-      Cancel
-    </dt-button>
-    <dt-button
       id="confirm-button"
       importance="primary"
       class="d-ml6"
     >
       Confirm
+    </dt-button>
+    <dt-button
+      id="cancel-button"
+      kind="muted"
+      importance="clear"
+    >
+      Cancel
     </dt-button>
   </template>
 </dt-modal>
