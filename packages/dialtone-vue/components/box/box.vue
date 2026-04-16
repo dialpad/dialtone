@@ -27,7 +27,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import {
   asValidator,
   spacingValidator,
@@ -223,9 +223,20 @@ const props = defineProps({
   overflow: { type: String, default: undefined, validator: overflowValidator },
 });
 
+const SCROLLBAR_INCOMPATIBLE_ELEMENTS = ['ul', 'ol', 'span', 'fieldset'];
+
 const scrollbarMode = computed(() => {
   if (props.scrollbar === true) return 'leave';
   return props.scrollbar ?? undefined;
+});
+
+onMounted(() => {
+  if (props.scrollbar && SCROLLBAR_INCOMPATIBLE_ELEMENTS.includes(props.as)) {
+    console.warn(
+      `[DtBox] scrollbar prop inserts a <div> wrapper which breaks semantic child structure ` +
+      `for <${props.as}>. Consider applying scrollbar on a parent DtBox container instead.`,
+    );
+  }
 });
 
 function modifierClass (prefix, value) {
