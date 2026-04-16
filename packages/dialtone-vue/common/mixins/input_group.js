@@ -123,7 +123,7 @@ export const InputGroupMixin = {
      * Event fired to sync the modelValue prop with the parent component
      *
      * @event update:modelValue
-     * @type {KeyboardEvent}
+     * @type {String | Number | Boolean | Object}
      */
     'update:modelValue',
   ],

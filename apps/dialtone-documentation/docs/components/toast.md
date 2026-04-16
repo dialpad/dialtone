@@ -162,8 +162,8 @@ const updateOpen = (value) => {
   if (!value) showDurationToast.value = false;
 };
 
-function toggleImportant () {
-  important.value = !important.value;
+function toggleImportant (checked) {
+  important.value = checked;
 }
 function togglePinned () {
   pinned.value = !pinned.value;

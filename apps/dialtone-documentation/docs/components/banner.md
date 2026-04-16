@@ -139,8 +139,8 @@ function toggleBanner (id) {
   }
 }
 
-function toggleImportant () {
-  important.value = !important.value;
+function toggleImportant (checked) {
+  important.value = checked;
 }
 
 function closeBanner () {
