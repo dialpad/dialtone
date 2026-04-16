@@ -20,7 +20,6 @@
     :messages-child-props="$attrs.messagesChildProps"
     :class="$attrs.class"
     @update:model-value="$attrs['onUpdate:modelValue']"
-    @change="$attrs.onChange"
   >
     <html-fragment
       v-if="defaultSlot"

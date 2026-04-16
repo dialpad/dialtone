@@ -196,7 +196,7 @@ export default {
     },
 
     /**
-     * The output format that the editor uses when emitting the "@input" event.
+     * The output format that the editor uses when emitting the "update:modelValue" event.
      * One of `text`, `json`, `html`, `markdown`. See https://tiptap.dev/guide/output for
      * examples.
      * @values text, json, html, markdown

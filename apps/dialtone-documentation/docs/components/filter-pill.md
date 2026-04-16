@@ -364,7 +364,7 @@ The label updates to show the selected option, and a clear button resets to the 
           :key="filter.name"
           :label="filter.name"
           :value="filter.name"
-          @input="$event => selectedConversationType = $event"
+          @update:model-value="$event => selectedConversationType = $event"
         />
       </dt-radio-group>
     </template>

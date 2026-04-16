@@ -132,14 +132,6 @@ export default {
 
   emits: [
     /**
-     * Toggle change event
-     *
-     * @event change
-     * @type {Boolean}
-     */
-    'change',
-
-    /**
      * Event fired to sync the modelValue prop with the parent component
      *
      * @event update:modelValue
@@ -197,7 +189,6 @@ export default {
   methods: {
     toggleCheckedValue () {
       this.$emit('update:modelValue', !this.internalChecked);
-      this.$emit('change', !this.internalChecked);
 
       if (this.toggleOnClick) {
         this.internalChecked = !this.internalChecked;

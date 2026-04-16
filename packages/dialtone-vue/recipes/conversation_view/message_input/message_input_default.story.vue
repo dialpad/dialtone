@@ -39,7 +39,7 @@
       @submit="$attrs.onSubmit"
       @focus="$attrs.onFocus"
       @blur="$attrs.onBlur"
-      @input="$attrs.onInput"
+      @update:model-value="$attrs['onUpdate:modelValue']"
       @json-input="$attrs.onJsonInput"
       @html-input="$attrs.onHtmlInput"
       @text-input="$attrs.onTextInput"

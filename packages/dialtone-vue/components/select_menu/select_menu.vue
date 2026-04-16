@@ -273,13 +273,6 @@ export default {
      */
     'update:modelValue',
 
-    /**
-     * Native change event
-     *
-     * @event change
-     * @type {String | Number}
-     */
-    'change',
   ],
 
   data () {
@@ -358,7 +351,6 @@ export default {
     removeClassStyleAttrs,
     emitValue (value, event) {
       this.$emit('update:modelValue', value, event);
-      this.$emit('change', value, event);
     },
 
     getOptionKey (value) {

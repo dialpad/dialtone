@@ -120,12 +120,12 @@ export const InputGroupMixin = {
 
   emits: [
     /**
-     * Native input event
+     * Event fired to sync the modelValue prop with the parent component
      *
-     * @event input
+     * @event update:modelValue
      * @type {KeyboardEvent}
      */
-    'input',
+    'update:modelValue',
   ],
 
   data () {
@@ -168,7 +168,7 @@ export const InputGroupMixin = {
      */
     setGroupValue (newValue) {
       this.internalValue = newValue;
-      this.$emit('input', newValue);
+      this.$emit('update:modelValue', newValue);
     },
   },
 

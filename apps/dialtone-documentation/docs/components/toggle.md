@@ -99,7 +99,7 @@ disabled states. However, if a label default slot is not used with `DtToggle`
 
 The button element should capture keyboard focus as long as it is not disabled (`disabled` prop is `true`).
 `ENTER` key will
-emit a **change** event with the current value of the toggle and will change its internal `checked` state.
+emit an **update:modelValue** event with the current value of the toggle and will change its internal `checked` state.
 
 <script setup>
 import { ref } from 'vue'

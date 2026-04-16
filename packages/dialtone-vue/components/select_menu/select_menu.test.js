@@ -337,9 +337,6 @@ describe('DtSelectMenu Tests', () => {
       it('should emit update:modelValue event', () => {
         expect(wrapper.emitted('update:modelValue')[0][0]).toBe(MOCK_SELECTED_VALUE.toString());
       });
-      it('should emit change event', () => {
-        expect(wrapper.emitted('change')[0][0]).toBe(MOCK_SELECTED_VALUE.toString());
-      });
     });
 
     describe('When modelValue prop is set', () => {

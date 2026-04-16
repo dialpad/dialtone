@@ -242,7 +242,7 @@ describe('DtRadio Tests', () => {
         it('no events are emitted', async () => {
           await wrapper.trigger('click');
 
-          expect(wrapper.emitted('input')).toBeFalsy();
+          expect(wrapper.emitted('update:modelValue')).toBeFalsy();
         });
       });
     });
