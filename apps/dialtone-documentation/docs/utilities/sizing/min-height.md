@@ -9,7 +9,7 @@ keywords: ["minimum height", "mnh", "min block size", "min block-size"]
 Use `d-hmn-{stop}` to set a fixed minimum height for an element using layout token stops. The hyphen before the number indicates a layout token reference, e.g. `d-hmn-100` outputs `min-block-size: var(--dt-layout-100)` (64px). This can be combined with `d-h{n}p` and `d-hmx-{stop}` to have an element fill a certain height range.
 
 > [!INFO] Scale-indexed vs pixel-indexed stops
-> Bare integer stops (`25`, `50`, `100`, …) are scale-indexed on the 64px base — `value_in_px = stop × 64 / 100`, so `25` = 16px and `100` = 64px. Stops with a `px` suffix (`1px`, `2px`, `8px`, `20px`, `24px`) are off-scale exceptions that encode the literal pixel value, for hairlines and tight gutters that don't fit the 16px-step scale.
+> Bare integer stops (`25`, `50`, `100`, …) are scale-indexed on the 64px base — `value_in_px = stop × 64 / 100`, so `25` = 16px and `100` = 64px. Stops with a `px` suffix (`1px`, `2px`, `8px`, `20px`, `24px`) are off-scale exceptions that encode the literal pixel value.
 
 ```vue demo
 <dt-stack direction="row" gap="200" align="start" justify="center" class="d-w100p">

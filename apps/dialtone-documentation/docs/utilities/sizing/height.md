@@ -9,7 +9,7 @@ keywords: ["size", "tall", "vh", "viewport height", "block size", "block-size"]
 Use `d-h-{stop}` to set a fixed height for an element using layout token stops. The hyphen before the number indicates a layout token reference, e.g. `d-h-100` outputs `block-size: var(--dt-layout-100)` (64px).
 
 > [!INFO] Scale-indexed vs pixel-indexed stops
-> Bare integer stops (`25`, `50`, `100`, …) are scale-indexed on the 64px base — `value_in_px = stop × 64 / 100`, so `25` = 16px and `100` = 64px. Stops with a `px` suffix (`1px`, `2px`, `8px`, `20px`, `24px`) are off-scale exceptions that encode the literal pixel value, for hairlines and tight gutters that don't fit the 16px-step scale.
+> Bare integer stops (`25`, `50`, `100`, …) are scale-indexed on the 64px base — `value_in_px = stop × 64 / 100`, so `25` = 16px and `100` = 64px. Stops with a `px` suffix (`1px`, `2px`, `8px`, `20px`, `24px`) are off-scale exceptions that encode the literal pixel value.
 
 ```vue demo
 <!-- @class d-d-block d-bgc-secondary d-w100p d-hmn-400 -->
