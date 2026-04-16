@@ -6,7 +6,7 @@ import DtNoticeContent from '../notice/notice_content.vue';
 import DtNoticeIcon from '../notice/notice_icon.vue';
 
 const baseProps = {
-  title: '',
+  headerText: '',
 };
 
 const baseSlots = {

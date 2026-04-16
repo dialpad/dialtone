@@ -2,9 +2,9 @@
   <component
     :is="selectedLayout"
     :is-shown="isShown"
-    :title-id="titleId"
+    :header-id="headerId"
     :content-id="contentId"
-    :title="title"
+    :header-text="headerText"
     :message="message"
     :role="role"
     :kind="kind"
@@ -19,9 +19,9 @@
     <template #icon>
       <slot name="icon" />
     </template>
-    <template #title>
-      <!-- @slot Slot for the title -->
-      <slot name="title" />
+    <template #header>
+      <!-- @slot Slot for the header -->
+      <slot name="header" />
     </template>
     <!-- @slot the main textual content of the toast -->
     <slot>
@@ -57,10 +57,10 @@ export default {
 
   props: {
     /**
-     * Sets an ID on the title element of the component. Useful for aria-describedby
-     * or aria-labelledby or any other reason you may need an id to refer to the title.
+     * Sets an ID on the header element of the component. Useful for aria-describedby
+     * or aria-labelledby or any other reason you may need an id to refer to the header.
      */
-    titleId: {
+    headerId: {
       type: String,
       default: undefined,
     },
@@ -75,9 +75,9 @@ export default {
     },
 
     /**
-     * Title header of the toast. This can be left blank to remove the title from the toast entirely.
+     * Header text of the toast. This can be left blank to remove the header from the toast entirely.
      */
-    title: {
+    headerText: {
       type: String,
       default: undefined,
     },

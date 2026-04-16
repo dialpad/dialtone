@@ -57,7 +57,7 @@ export const argTypesData = {
       disable: true,
     },
   },
-  titleId: {
+  headerId: {
     table: {
       defaultValue: {
         summary: 'generated unique ID',
@@ -130,7 +130,7 @@ export const Default = {
   render: Template,
 
   args: {
-    title: 'Optional title',
+    headerText: 'Optional title',
     action: 'Action',
     kind: 'base',
   },
@@ -181,7 +181,7 @@ export const CustomBackground = {
     ...Default.args,
     backgroundImage,
     backgroundSize: 'contain',
-    title: '',
+    headerText: '',
     action: '',
     showIcon: false,
     dialogClass: 'd-fc-neutral-white',

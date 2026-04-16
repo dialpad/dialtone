@@ -20,14 +20,14 @@
           <slot name="icon" />
         </dt-toast-layout-alternate-icon>
         <dt-notice-content
-          :title-id="titleId"
+          :header-id="headerId"
           :content-id="contentId"
-          :title="title"
+          :header-text="headerText"
           :role="role"
           v-bind="toastListeners"
         >
-          <template #title>
-            <slot name="title" />
+          <template #header>
+            <slot name="header" />
           </template>
         </dt-notice-content>
 
@@ -75,10 +75,10 @@ export default {
     },
 
     /**
-     * Sets an ID on the title element of the component. Useful for aria-describedby
-     * or aria-labelledby or any other reason you may need an id to refer to the title.
+     * Sets an ID on the header element of the component. Useful for aria-describedby
+     * or aria-labelledby or any other reason you may need an id to refer to the header.
      */
-    titleId: {
+    headerId: {
       type: String,
       default () { return utils.getUniqueString(); },
     },
@@ -93,9 +93,9 @@ export default {
     },
 
     /**
-     * Title header of the toast. This can be left blank to remove the title from the toast entirely.
+     * Header text of the toast. This can be left blank to remove the header from the toast entirely.
      */
-    title: {
+    headerText: {
       type: String,
       default: '',
     },

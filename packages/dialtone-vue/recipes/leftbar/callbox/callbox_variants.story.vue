@@ -4,7 +4,7 @@
     <dt-recipe-callbox
       avatar-full-name="Jaqueline Nackos"
       avatar-seed="Jaqueline Nackos"
-      title="Jaqueline Nackos"
+      header-text="Jaqueline Nackos"
       border-color="ai"
     >
       <template #subtitle>
@@ -34,7 +34,7 @@
       </template>
     </dt-recipe-callbox>
     <dt-recipe-callbox
-      title="1 Participant"
+      header-text="1 Participant"
       avatar-seed="1 Participant"
     >
       <template #subtitle>
@@ -74,7 +74,7 @@
       </template>
     </dt-recipe-callbox>
     <dt-recipe-callbox
-      title="1 Participant"
+      header-text="1 Participant"
       avatar-seed="1 Participant"
     >
       <template #video>
@@ -123,7 +123,7 @@
     <dt-recipe-callbox
       avatar-full-name="Jaqueline Nackos"
       avatar-seed="Jaqueline Nackos"
-      title="Jaqueline Nackos"
+      header-text="Jaqueline Nackos"
       badge-text="Test_Call_Center"
       badge-color="warning"
       border-color="ai"
@@ -157,7 +157,7 @@
     <dt-recipe-callbox
       avatar-full-name="Jaqueline Nackos"
       avatar-seed="Jaqueline Nackos"
-      title="Jaqueline Nackos"
+      header-text="Jaqueline Nackos"
       border-color="ai"
     >
       <template #subtitle>
@@ -205,7 +205,7 @@
     </dt-recipe-callbox>
     <dt-recipe-callbox
       avatar-full-name="Jaqueline Nackos"
-      title="Jaqueline Nackos"
+      header-text="Jaqueline Nackos"
       avatar-seed="Jaqueline Nackos"
       border-color="ai"
     >
@@ -236,7 +236,7 @@
     <dt-recipe-callbox
       avatar-full-name="design-product-lt-so"
       avatar-seed="design-product-lt-so"
-      title="design-product-lt-so"
+      header-text="design-product-lt-so"
       border-color="critical"
       clickable
     >
@@ -301,7 +301,7 @@
     <dt-recipe-callbox
       avatar-full-name="Jaqueline Nackos"
       avatar-seed="Jaqueline Nackos"
-      title="Jaqueline Nackos"
+      header-text="Jaqueline Nackos"
       border-color="ai"
     >
       <template #subtitle>
@@ -375,7 +375,7 @@
     <dt-recipe-callbox
       avatar-full-name="Jaqueline Nackos"
       avatar-seed="Jaqueline Nackos"
-      title="Jaqueline Nackos"
+      header-text="Jaqueline Nackos"
       is-on-hold
     >
       <template #subtitle>

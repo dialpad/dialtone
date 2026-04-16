@@ -5,7 +5,7 @@
     :avatar-src="$attrs.avatarSrc"
     :avatar-full-name="$attrs.avatarFullName"
     :avatar-seed="$attrs.avatarSeed"
-    :title="$attrs.title"
+    :header-text="$attrs.headerText"
     :border-color="$attrs.borderColor"
     :clickable="$attrs.clickable"
     :is-on-hold="$attrs.isOnHold"

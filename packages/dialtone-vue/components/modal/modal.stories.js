@@ -17,7 +17,7 @@ viverra iaculis. Interdum et malesuada fames ac ante ipsum primis in faucibus. V
 maximus ipsum ex. Curabitur elementum luctus augue, quis eleifend tortor feugiat vel. \
 Maecenas maximus, ipsum et laoreet congue, diam massa aliquam libero, at pellentesque \
 orci ipsum et velit.`,
-  title: 'Example Title',
+  headerText: 'Example Title',
   onClose: action('update:open'),
 };
 
@@ -183,7 +183,7 @@ export const WithBanner = {
   render: DefaultTemplate,
 
   args: {
-    bannerTitle: 'Example banner',
+    bannerHeaderText: 'Example banner',
   },
 
   parameters: { ...Default.parameters },

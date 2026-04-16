@@ -4,16 +4,16 @@ import { mount } from '@vue/test-utils';
 const SYNC_EVENT_NAME = 'update:open';
 
 const MOCK_MODAL_COPY = 'test modal copy';
-const MOCK_MODAL_TITLE = 'test modal title';
+const MOCK_MODAL_HEADER_TEXT = 'test modal header text';
 const MOCK_MODAL_BANNER = 'test modal banner';
 const MOCK_MODAL_DEFAULT_SLOT = 'test content';
 const MOCK_MODAL_HEADER_SLOT = 'test header';
 const MOCK_MODAL_BANNER_SLOT = 'title';
 
 const baseProps = {
-  title: MOCK_MODAL_TITLE,
+  headerText: MOCK_MODAL_HEADER_TEXT,
   copy: MOCK_MODAL_COPY,
-  bannerTitle: MOCK_MODAL_BANNER,
+  bannerHeaderText: MOCK_MODAL_BANNER,
   open: true,
 };
 
@@ -81,9 +81,9 @@ describe('DtModal Tests', () => {
       expect(overlay.element.tagName).toBe('DIALOG');
     });
 
-    it('should render the title content', () => {
+    it('should render the header text content', () => {
       expect(title.exists()).toBe(true);
-      expect(title.text()).toEqual(MOCK_MODAL_TITLE);
+      expect(title.text()).toEqual(MOCK_MODAL_HEADER_TEXT);
     });
 
     it('should render the banner content', () => {
@@ -129,7 +129,7 @@ describe('DtModal Tests', () => {
     });
 
     describe('When slots are provided', () => {
-      it('Should display slotted header instead of title', () => {
+      it('Should display slotted header instead of headerText', () => {
         mockSlots = {
           header: MOCK_MODAL_HEADER_SLOT,
         };
@@ -139,7 +139,7 @@ describe('DtModal Tests', () => {
         expect(title.text()).toEqual(MOCK_MODAL_HEADER_SLOT);
       });
 
-      it('Should display slotted banner instead of bannerTitle', () => {
+      it('Should display slotted banner instead of bannerHeaderText', () => {
         mockSlots = {
           banner: MOCK_MODAL_BANNER_SLOT,
         };
@@ -219,11 +219,11 @@ describe('DtModal Tests', () => {
 
     it('Should apply banner class', async () => {
       const bannerClass = 'banner-class';
-      const bannerTitle = 'title';
+      const bannerHeaderText = 'title';
 
       await wrapper.setProps({
         open: true,
-        bannerTitle,
+        bannerHeaderText,
         bannerClass,
       });
 
@@ -236,7 +236,7 @@ describe('DtModal Tests', () => {
       await wrapper.setProps({
         open: true,
         bannerKind: 'info',
-        bannerTitle: 'title',
+        bannerHeaderText: 'title',
       });
 
       banner = wrapper.find('[data-qa="dt-modal-banner"]');
@@ -248,7 +248,7 @@ describe('DtModal Tests', () => {
       await wrapper.setProps({
         show: true,
         bannerKind: 'critical',
-        bannerTitle: 'title',
+        bannerHeaderText: 'title',
       });
 
       banner = wrapper.find('[data-qa="dt-modal-banner"]');

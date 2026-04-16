@@ -45,7 +45,7 @@ export const argTypesData = {
   },
 
   // Props
-  titleId: {
+  headerId: {
     table: {
       defaultValue: {
         summary: 'generated unique ID',
@@ -141,7 +141,7 @@ export const Default = {
   render: DefaultTemplate,
 
   args: {
-    title: 'Base title (optional)',
+    headerText: 'Base title (optional)',
     kind: 'base',
   },
 
@@ -159,7 +159,7 @@ export const Critical = {
 
   args: {
     ...Default.args,
-    title: 'Critical title (optional)',
+    headerText: 'Critical title (optional)',
     kind: 'critical',
   },
 
@@ -173,7 +173,7 @@ export const Info = {
 
   args: {
     ...Default.args,
-    title: 'Info title (optional)',
+    headerText: 'Info title (optional)',
     kind: 'info',
   },
 
@@ -187,7 +187,7 @@ export const Positive = {
 
   args: {
     ...Default.args,
-    title: 'Positive title (optional)',
+    headerText: 'Positive title (optional)',
     kind: 'positive',
   },
 
@@ -201,7 +201,7 @@ export const Warning = {
 
   args: {
     ...Default.args,
-    title: 'Warning title (optional)',
+    headerText: 'Warning title (optional)',
     kind: 'warning',
   },
 
