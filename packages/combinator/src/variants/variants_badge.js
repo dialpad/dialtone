@@ -26,6 +26,14 @@ export default {
       when: { decoration: v => !!v },
       hide: { slots: ['startIcon', 'endIcon'] },
     },
+    {
+      when: { kind: 'count' },
+      disableValues: { props: { type: ['ai'] } },
+    },
+    {
+      when: { type: 'ai' },
+      disableValues: { props: { kind: ['count'] } },
+    },
   ],
 
   default: {

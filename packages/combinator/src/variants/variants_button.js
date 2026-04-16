@@ -27,6 +27,26 @@ export default {
       hide: { props: ['importance'] },
     },
     {
+      when: { circle: true, kind: 'default' },
+      disableValues: { props: { importance: ['primary'] } },
+    },
+    {
+      when: { circle: true, kind: 'critical' },
+      disableValues: { props: { importance: ['outlined'] } },
+    },
+    {
+      when: { circle: true, kind: 'muted' },
+      disableValues: { props: { importance: ['primary'] } },
+    },
+    {
+      when: { circle: true, importance: 'primary' },
+      disableValues: { props: { kind: ['default', 'muted'] } },
+    },
+    {
+      when: { circle: true, importance: 'outlined' },
+      disableValues: { props: { kind: ['critical'] } },
+    },
+    {
       when: { href: v => !!v },
       hide: { props: ['type'] },
     },

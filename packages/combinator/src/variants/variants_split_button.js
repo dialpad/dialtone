@@ -13,6 +13,14 @@ export default {
       when: { importance: v => v !== 'clear' },
       hide: { props: ['showDivider'] },
     },
+    {
+      when: { kind: 'muted' },
+      disableValues: { props: { importance: ['primary'] } },
+    },
+    {
+      when: { importance: 'primary' },
+      disableValues: { props: { kind: ['muted'] } },
+    },
   ],
 
   default: {
