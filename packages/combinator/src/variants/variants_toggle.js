@@ -12,7 +12,7 @@ export default {
 
   'hide label': {
     props: {
-      labelVisible: { initialValue: false },
+      showLabel: { initialValue: false },
     },
     slots: {
       default: { initialValue: 'Label' },

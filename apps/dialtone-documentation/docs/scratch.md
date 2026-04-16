@@ -305,7 +305,7 @@ Add `data-dt-focusgroup-skip` to exclude an element from arrow-key navigation
         ]"
     label="Default"
     :model-value="modelValue"
-    :label-visible="false"
+    :show-label="false"
     @input="onInput"
     @change="onChange"
   />
@@ -753,7 +753,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
     <dt-stack gap="200" direction="row" class="d-bgc-moderate-opaque d-p-150 d-bar8">
       <dt-select-menu
         label="Label Size"
-        :label-visible="false"
+        :show-label="false"
         :options="[
           { value: 'default', label: 'Default' },
           { value: 'xs', label: 'xs' },
@@ -766,7 +766,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
       />
       <dt-select-menu
         label="Label Strength"
-        :label-visible="false"
+        :show-label="false"
         :options="[
           { value: 'default', label: 'Default' },
           { value: 'bold', label: 'bold' },
@@ -1189,38 +1189,38 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
           <dt-notice kind="positive" title="Success" hide-action>
             Action completed successfully.
           </dt-notice>
-          <dt-notice kind="warning" title="Warning" hide-action>
+          <dt-notice kind="warning" title="Warning" :show-action="false">
             Please review before proceeding.
           </dt-notice>
-          <dt-notice kind="critical" title="Critical" hide-action>
+          <dt-notice kind="critical" title="Critical" :show-action="false">
             Something went wrong. Please try again.
           </dt-notice>
-          <dt-notice kind="base" title="Base" hide-action>
+          <dt-notice kind="base" title="Base" :show-action="false">
             A neutral notice for general information.
           </dt-notice>
         </dt-stack>
         <dt-stack gap="100">
           <dt-text as="h3" kind="headline" :size="300">Important</dt-text>
-          <dt-notice kind="info" title="Important info" :important="true" hide-action>
+          <dt-notice kind="info" title="Important info" :important="true" :show-action="false">
             Visually prominent variant with filled background.
           </dt-notice>
           <dt-notice kind="positive" title="Important success" :important="true" hide-action>
             Visually prominent variant with filled background.
           </dt-notice>
-          <dt-notice kind="warning" title="Important warning" :important="true" hide-action>
+          <dt-notice kind="warning" title="Important warning" :important="true" :show-action="false">
             Visually prominent variant with filled background.
           </dt-notice>
-          <dt-notice kind="critical" title="Important critical" :important="true" hide-action>
+          <dt-notice kind="critical" title="Important critical" :important="true" :show-action="false">
             Visually prominent variant with filled background.
           </dt-notice>
         </dt-stack>
         <dt-stack gap="100">
           <dt-text as="h3" kind="headline" :size="300">Alignment per internal parts</dt-text>
-          <dt-notice kind="info" title="Title only" hide-action />
-          <dt-notice kind="info" hide-action>
+          <dt-notice kind="info" title="Title only" :show-action="false" />
+          <dt-notice kind="info" :show-action="false">
             Message only — icon aligns to center when there is a single line of content.
           </dt-notice>
-          <dt-notice kind="info" title="Title and message" hide-action>
+          <dt-notice kind="info" title="Title and message" :show-action="false">
             When both title and message are present, the icon aligns to the top of the content stack.
           </dt-notice>
         </dt-stack>
@@ -1297,7 +1297,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
     <dt-stack gap="200" direction="row" class="d-bgc-moderate-opaque d-p-150 d-bar8">
       <dt-select-menu
         label="Label Size"
-        :label-visible="false"
+        :show-label="false"
         :options="[
           { value: 'default', label: 'Default' },
           { value: 'xs', label: 'xs' },
@@ -1310,7 +1310,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
       />
       <dt-select-menu
         label="Label Strength"
-        :label-visible="false"
+        :show-label="false"
         :options="[
           { value: 'default', label: 'Default' },
           { value: 'bold', label: 'bold' },

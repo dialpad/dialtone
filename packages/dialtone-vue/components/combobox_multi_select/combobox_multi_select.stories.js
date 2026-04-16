@@ -9,7 +9,7 @@ import { ITEMS_LIST_DATA } from './combobox_multi_select_story_constants';
 // Default Prop Values
 export const argsData = {
   label: 'Label Text',
-  labelVisible: true,
+  showLabel: true,
   listMaxHeight: '300px',
   loading: false,
   loadingMessage: 'loading...',

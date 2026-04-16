@@ -98,7 +98,7 @@ export const argTypesData = {
       type: 'boolean',
     },
   },
-  hideClose: {
+  showClose: {
     control: {
       type: 'boolean',
     },

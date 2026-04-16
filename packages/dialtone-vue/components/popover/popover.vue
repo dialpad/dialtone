@@ -324,11 +324,10 @@ export default {
     },
 
     /**
-     * Determines if the popover hides upon clicking the
-     * anchor or outside the content box.
+     * Closes the popover when clicking the anchor or outside the content box.
      * @values true, false
      */
-    hideOnClick: {
+    closeOnClick: {
       type: Boolean,
       default: true,
     },
@@ -982,7 +981,7 @@ export default {
     },
 
     onClickOutside () {
-      if (!this.hideOnClick) return;
+      if (!this.closeOnClick) return;
       // If a popover is opened inside of this one, do not hide on click out
       const innerModals = this.popoverContentEl?.querySelector('.d-popover__anchor--opened');
       if (!innerModals) {

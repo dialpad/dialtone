@@ -51,7 +51,7 @@
         v-if="showHtmlWarning"
         class="d-ps-static"
         kind="warning"
-        hide-close
+        :show-close="false"
       >
         Raw HTML renders visuals only. You may need to add JS to replicate its functionality.
       </dt-banner>

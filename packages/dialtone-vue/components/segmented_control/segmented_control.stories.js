@@ -18,7 +18,7 @@ export const argsData = {
   size: SEGMENTED_CONTROL_SIZE_DEFAULT,
   activationMode: SEGMENTED_CONTROL_ACTIVATION_MODE_DEFAULT,
   disabled: false,
-  hideDivider: false,
+  showDivider: true,
   borderless: false,
   spread: SEGMENTED_CONTROL_SPREAD_DEFAULT,
   labelClass: '',
@@ -53,7 +53,7 @@ export const argTypesData = {
   disabled: {
     control: 'boolean',
   },
-  hideDivider: {
+  showDivider: {
     control: 'boolean',
   },
   borderless: {

@@ -100,7 +100,7 @@
             <slot name="footer" />
           </footer>
           <sr-only-close-button
-            v-if="hideClose"
+            v-if="!showClose"
             @close="close"
           />
           <dt-button
@@ -289,12 +289,12 @@ export default {
     },
 
     /**
-     * Hides the close button on the modal
+     * Shows the close button on the modal
      * @values true, false
      */
-    hideClose: {
+    showClose: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     /**

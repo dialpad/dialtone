@@ -11,9 +11,9 @@
       data-qa="dt-input-label-wrapper"
     >
       <!-- @slot Slot for label, defaults to label prop -->
-      <slot name="labelSlot">
+      <slot name="label">
         <dt-text
-          v-if="labelVisible && label"
+          v-if="showLabel && label"
           ref="label"
           data-qa="dt-input-label"
           kind="label"
@@ -85,7 +85,7 @@
           :autocomplete="$attrs.autocomplete ?? 'off'"
           :class="inputClasses()"
           :maxlength="shouldLimitMaxLength ? validationProps.length.max : null"
-          :aria-label="!labelVisible && label ? label : undefined"
+          :aria-label="!showLabel && label ? label : undefined"
           data-qa="dt-input-input"
           v-bind="removeClassStyleAttrs($attrs)"
           v-on="inputListeners"
@@ -100,7 +100,7 @@
           :autocomplete="$attrs.autocomplete ?? 'off'"
           :class="inputClasses()"
           :maxlength="shouldLimitMaxLength ? validationProps.length.max : null"
-          :aria-label="!labelVisible && label ? label : undefined"
+          :aria-label="!showLabel && label ? label : undefined"
           data-qa="dt-input-input"
           v-bind="removeClassStyleAttrs($attrs)"
           v-on="inputListeners"
@@ -213,7 +213,8 @@ export default {
     },
 
     /**
-     * Label for the input
+     * Label for the input.
+     * Can also be overridden with a slot of the same name.
      */
     label: {
       type: String,
@@ -224,7 +225,7 @@ export default {
      * Determines visibility of input label.
      * @values true, false
      */
-    labelVisible: {
+    showLabel: {
       type: Boolean,
       default: true,
     },
@@ -722,7 +723,7 @@ export default {
     runValidations () {
       if (!this.label && !this.$attrs['aria-label']) {
         console.info(
-          '[Dialtone] A label is required for accessibility. Provide a label prop and use label-visible="false" to hide it visually.',
+          '[Dialtone] A label is required for accessibility. Provide a label prop and use show-label="false" to hide it visually.',
         );
       }
     },

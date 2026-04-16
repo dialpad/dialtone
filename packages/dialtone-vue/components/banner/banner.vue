@@ -13,9 +13,9 @@
       :aria-describedby="contentId"
     >
       <dt-notice-icon
-        v-if="!hideIcon"
+        v-if="showIcon"
         :kind="kind"
-        :class="{ 'd-notice__icon--has-title': title || $slots.titleOverride }"
+        :class="{ 'd-notice__icon--has-title': title || $slots.title }"
       >
         <!-- @slot Slot for custom icon -->
         <slot name="icon" />
@@ -25,17 +25,16 @@
         :content-id="contentId"
         :title="title"
       >
-        <template #titleOverride>
-          <!-- eslint-disable-next-line max-len -->
-          <!-- @slot Allows you to override the title, only use this if you need to override with something other than text. Otherwise use the "title" prop. -->
-          <slot name="titleOverride" />
+        <template #title>
+          <!-- @slot Slot for the title -->
+          <slot name="title" />
         </template>
         <!-- @slot the main textual content of the banner -->
         <slot />
       </dt-notice-content>
       <dt-notice-action
-        :hide-action="hideAction"
-        :hide-close="hideClose"
+        :show-action="showAction"
+        :show-close="showClose"
         @close="$emit('close')"
       >
         <!-- @slot Enter a possible action for the user to take, such as a link to another page -->
@@ -127,30 +126,30 @@ export default {
     },
 
     /**
-     * Hides the close button from the notice
+     * Shows the close button in the banner
      * @values true, false
      */
-    hideClose: {
+    showClose: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     /**
-     * Hides the icon from the notice
+     * Shows the icon in the banner
      * @values true, false
      */
-    hideIcon: {
+    showIcon: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     /**
-     * Hides the action from the notice
+     * Shows the action in the banner
      * @values true, false
      */
-    hideAction: {
+    showAction: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     /**

@@ -16,7 +16,7 @@ keywords: ["notification", "snackbar", "alert", "message", "d-toast", "DtToast",
 ```vue demo
 <dt-stack direction="row" gap="200" class="d-w100p">
   <div class="d-fl-grow1">
-    <dt-select-menu :label-visible="false" label="Style" :options="toastOptions" v-model="selectedKind" />
+    <dt-select-menu :show-label="false" label="Style" :options="toastOptions" v-model="selectedKind" />
   </div>
   <dt-checkbox value="important" @input="toggleImportant">Important</dt-checkbox>
   <dt-button @click="toggleToast">Toggle Example</dt-button>

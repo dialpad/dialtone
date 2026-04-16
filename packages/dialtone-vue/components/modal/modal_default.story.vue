@@ -12,7 +12,7 @@
       :banner-kind="$attrs.bannerKind"
       :dialog-class="$attrs.dialogClass"
       :content-class="$attrs.contentClass"
-      :hide-close="$attrs.hideClose"
+      :show-close="$attrs.showClose"
       :labelled-by-id="$attrs.labelledById"
       :fixed-header-footer="$attrs.fixedHeaderFooter"
       :close-on-click="$attrs.closeOnClick"

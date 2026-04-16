@@ -11,7 +11,7 @@ import { CONTENT_MODE_ARG_TYPE } from '@/common/mode_constants';
 // Default Prop Values
 export const argsData = {
   label: 'Label Text',
-  labelVisible: true,
+  showLabel: true,
   size: COMBOBOX_LABEL_SIZES.DEFAULT,
   contentWidth: 'anchor',
   appendTo: 'body',

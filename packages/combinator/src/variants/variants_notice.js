@@ -1,4 +1,4 @@
-/* eslint-disable max-len */
+ 
  
 export default {
   default: {
@@ -18,7 +18,7 @@ export default {
     props: {
       title: { initialValue: 'Info title' },
       kind: { initialValue: 'info' },
-      hideClose: { initialValue: true },
+      showClose: { initialValue: false },
     },
     slots: {
       default: { initialValue: 'Message body with <dt-link to="/path/to/">a link</dt-link>.' },

@@ -41,7 +41,7 @@
         </div>
       </a>
       <div
-        v-if="!hideActions"
+        v-if="showActions"
         class="d-recipe-leftbar-row__omega"
       >
         <!-- @slot Slot for end content -->
@@ -135,11 +135,11 @@ export default {
     },
 
     /**
-     * Making this true will hide the unread count badge, the chevron button, and the right slot
+     * Shows the unread count badge, the chevron button, and the right slot.
      */
-    hideActions: {
+    showActions: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     /**

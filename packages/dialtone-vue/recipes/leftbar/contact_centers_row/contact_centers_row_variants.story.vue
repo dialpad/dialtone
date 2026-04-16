@@ -142,7 +142,7 @@
       <dt-recipe-contact-centers-row
         description="Ai Contact Centers"
         menu-button-aria-label="Menu button"
-        :hide-actions="true"
+        :show-actions="false"
       >
         <template #end>
           <dt-button

@@ -1698,9 +1698,9 @@ describe('DtRichTextEditor tests', () => {
         };
       });
 
-      describe('When preventTyping is false', () => {
+      describe('When allowTyping is true', () => {
         beforeEach(async () => {
-          await wrapper.setProps({ preventTyping: false });
+          await wrapper.setProps({ allowTyping: true });
         });
 
         it('should allow letter keys by returning false', () => {
@@ -1732,9 +1732,9 @@ describe('DtRichTextEditor tests', () => {
         });
       });
 
-      describe('When preventTyping is true', () => {
+      describe('When allowTyping is false', () => {
         beforeEach(async () => {
-          await wrapper.setProps({ preventTyping: true });
+          await wrapper.setProps({ allowTyping: false });
         });
 
         describe('Backspace key', () => {
@@ -1749,7 +1749,7 @@ describe('DtRichTextEditor tests', () => {
         describe('Enter key with allowLineBreaks false', () => {
           beforeEach(async () => {
             await wrapper.setProps({
-              preventTyping: true,
+              allowTyping: false,
               allowLineBreaks: false,
             });
           });
@@ -1774,7 +1774,7 @@ describe('DtRichTextEditor tests', () => {
         describe('Enter key with allowLineBreaks true', () => {
           beforeEach(async () => {
             await wrapper.setProps({
-              preventTyping: true,
+              allowTyping: false,
               allowLineBreaks: true,
             });
           });

@@ -1,3 +1,10 @@
+# [1.48.0-next.14](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.13...dialtone-tokens/v1.48.0-next.14) (2026-04-15)
+
+
+### Features
+
+* **Components:** DLT-3157 align critical/positive prop values and CSS class names ([#1177](https://github.com/dialpad/dialtone/issues/1177)) ([edd98b2](https://github.com/dialpad/dialtone/commit/edd98b241cec4e613fd58692d0544ae597f9b828))
+
 # [1.48.0-next.13](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.12...dialtone-tokens/v1.48.0-next.13) (2026-03-31)
 
 

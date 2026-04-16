@@ -15,10 +15,10 @@
       :content-id="$attrs.contentId"
       :important="$attrs.important"
       :pinned="$attrs.pinned"
-      :hide-close="$attrs.hideClose"
-      :hide-action="$attrs.hideAction"
+      :show-close="$attrs.showClose"
+      :show-action="$attrs.showAction"
       :class="{ 'd-ps-sticky': $attrs.show }"
-      :hide-icon="$attrs.hideIcon"
+      :show-icon="$attrs.showIcon"
       :background-image="$attrs.backgroundImage"
       :background-size="$attrs.backgroundSize"
       :dialog-class="$attrs.dialogClass"
@@ -55,12 +55,6 @@
         #icon
       >
         <dt-icon :name="$attrs.icon" />
-      </template>
-      <template
-        v-if="$attrs.titleOverride"
-        #titleOverride
-      >
-        <span v-html="$attrs.titleOverride" />
       </template>
     </dt-banner>
   </div>

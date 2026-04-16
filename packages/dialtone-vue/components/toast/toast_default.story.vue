@@ -14,9 +14,9 @@
         :title-id="$attrs.titleId"
         :content-id="$attrs.contentId"
         :important="$attrs.important"
-        :hide-close="$attrs.hideClose"
-        :hide-action="$attrs.hideAction"
-        :hide-icon="$attrs.hideIcon"
+        :show-close="$attrs.showClose"
+        :show-action="$attrs.showAction"
+        :show-icon="$attrs.showIcon"
         :duration="$attrs.duration"
         :layout="$attrs.layout"
         @close="$attrs.onClose"
@@ -54,12 +54,6 @@
           #icon
         >
           <dt-icon :name="$attrs.icon" />
-        </template>
-        <template
-          v-if="$attrs.titleOverride"
-          #titleOverride
-        >
-          <span v-html="$attrs.titleOverride" />
         </template>
       </dt-toast>
     </aside>

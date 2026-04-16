@@ -9,9 +9,9 @@
     :role="role"
     :kind="kind"
     :important="important"
-    :hide-close="hideClose"
-    :hide-icon="hideIcon"
-    :hide-action="hideAction"
+    :show-close="showClose"
+    :show-icon="showIcon"
+    :show-action="showAction"
     v-bind="$attrs"
     @close="handleClose"
   >
@@ -19,10 +19,9 @@
     <template #icon>
       <slot name="icon" />
     </template>
-    <template #titleOverride>
-      <!-- @slot Allows you to override the title, only use this if you need to override
-          with something other than text. Otherwise use the "title" prop. -->
-      <slot name="titleOverride" />
+    <template #title>
+      <!-- @slot Slot for the title -->
+      <slot name="title" />
     </template>
     <!-- @slot the main textual content of the toast -->
     <slot>
@@ -132,30 +131,30 @@ export default {
     },
 
     /**
-     * Hides the close button from the toast
+     * Shows the close button in the toast.
      * @values true, false
      */
-    hideClose: {
+    showClose: {
       type: Boolean,
-      default: undefined,
+      default: true,
     },
 
     /**
-     * Hides the icon from the notice
+     * Shows the icon in the toast.
      * @values true, false
      */
-    hideIcon: {
+    showIcon: {
       type: Boolean,
-      default: undefined,
+      default: true,
     },
 
     /**
-     * Hides the action from the notice
+     * Shows the action in the toast.
      * @values true, false
      */
-    hideAction: {
+    showAction: {
       type: Boolean,
-      default: undefined,
+      default: true,
     },
 
     /**

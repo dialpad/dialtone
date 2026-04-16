@@ -107,8 +107,8 @@ export default {
       const activeElement = this.$refs.suggestionList.querySelector('.d-list-item--highlighted');
       if (activeElement) {
         activeElement.scrollIntoView({
-          behaviour: 'smooth',
-          block: 'center',
+          behavior: 'smooth',
+          block: 'nearest',
         });
       }
     },

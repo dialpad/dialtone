@@ -12,7 +12,7 @@
     <div class="d-toast-alternate__dialog">
       <div class="d-toast-alternate__header">
         <dt-toast-layout-alternate-icon
-          v-if="!hideIcon"
+          v-if="showIcon"
           :kind="kind"
           size="200"
           v-bind="toastListeners"
@@ -26,15 +26,15 @@
           :role="role"
           v-bind="toastListeners"
         >
-          <template #titleOverride>
-            <slot name="titleOverride" />
+          <template #title>
+            <slot name="title" />
           </template>
         </dt-notice-content>
 
         <!-- Close Button -->
         <dt-notice-action
-          :hide-action="true"
-          :hide-close="hideClose"
+          :show-action="false"
+          :show-close="showClose"
           :button-size="100"
           v-bind="toastListeners"
           @close="$emit('close')"
@@ -134,21 +134,21 @@ export default {
     },
 
     /**
-     * Hides the close button from the toast
+     * Shows the close button in the toast
      * @values true, false
      */
-    hideClose: {
+    showClose: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     /**
-     * Hides the icon from the notice
+     * Shows the icon in the toast
      * @values true, false
      */
-    hideIcon: {
+    showIcon: {
       type: Boolean,
-      default: false,
+      default: true,
     },
   },
 

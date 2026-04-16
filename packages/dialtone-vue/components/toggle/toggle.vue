@@ -4,7 +4,7 @@
     :style="$attrs.style"
   >
     <label
-      v-if="labelVisible && hasSlotContent($slots.default)"
+      v-if="showLabel && hasSlotContent($slots.default)"
       :class="labelClass"
       :for="id"
       v-bind="labelChildProps"
@@ -100,7 +100,7 @@ export default {
      * Determines visibility of toggle label.
      * @values true, false
      */
-    labelVisible: {
+    showLabel: {
       type: Boolean,
       default: true,
     },
@@ -212,10 +212,10 @@ export default {
     },
 
     runValidations () {
-      const hasVisibleLabel = this.labelVisible && this.hasSlotLabel();
+      const hasVisibleLabel = this.showLabel && this.hasSlotLabel();
       if (!hasVisibleLabel && !this.$attrs['aria-label']) {
         console.info(
-          '[Dialtone] A label is required for accessibility. Provide a label and use label-visible="false" to hide it visually.',
+          '[Dialtone] A label is required for accessibility. Provide a label and use show-label="false" to hide it visually.',
         );
       }
     },

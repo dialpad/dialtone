@@ -16,14 +16,6 @@ export const argsData = {
 
 export const argTypesData = {
   // Slots
-  titleOverride: {
-    table: {
-      type: { summary: 'VNode' },
-    },
-    control: {
-      type: 'text',
-    },
-  },
   icon: {
     options: iconsList,
     table: {
@@ -79,17 +71,17 @@ export const argTypesData = {
       },
     },
   },
-  hideClose: {
+  showClose: {
     control: {
       type: 'boolean',
     },
   },
-  hideIcon: {
+  showIcon: {
     control: {
       type: 'boolean',
     },
   },
-  hideAction: {
+  showAction: {
     control: {
       type: 'boolean',
     },
@@ -191,7 +183,7 @@ export const CustomBackground = {
     backgroundSize: 'contain',
     title: '',
     action: '',
-    hideIcon: true,
+    showIcon: false,
     dialogClass: 'd-fc-neutral-white',
     default: 'The power of Dialpad. On your desktop',
   },

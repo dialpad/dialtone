@@ -4,7 +4,7 @@ import { DtNoticeAction } from '@/components/notice';
 
 // Constants
 const baseProps = {
-  hideClose: false,
+  showClose: true,
 };
 
 const baseSlotsData = {
@@ -53,16 +53,16 @@ describe('DtNoticeAction tests', () => {
       });
     });
 
-    describe('When hideClose is false', () => {
+    describe('When showClose is true', () => {
       it('Close button is displayed', () => {
         expect(closeButton.exists()).toBe(true);
       });
     });
 
-    describe('When hideClose is true', () => {
+    describe('When showClose is false', () => {
       beforeEach(async () => {
         _setWrappers();
-        await wrapper.setProps({ hideClose: true });
+        await wrapper.setProps({ showClose: false });
         _setChildWrappers();
       });
 
@@ -77,7 +77,7 @@ describe('DtNoticeAction tests', () => {
   });
 
   describe('Interactivity Tests', () => {
-    describe('When hideClose is false', () => {
+    describe('When showClose is true', () => {
       describe('When close button is clicked', () => {
         beforeEach(async () => {
           await closeButton.trigger('click');
@@ -88,9 +88,9 @@ describe('DtNoticeAction tests', () => {
       });
     });
 
-    describe('When hideClose is true', () => {
+    describe('When showClose is false', () => {
       beforeEach(async () => {
-        await wrapper.setProps({ hideClose: true });
+        await wrapper.setProps({ showClose: false });
         _setChildWrappers();
         await srOnlyCloseButton.trigger('click');
       });

@@ -27,28 +27,6 @@ export const argsData = {
 
 export const argTypesData = {
   // Slots
-  labelSlot: {
-    name: 'label',
-    description: 'Slot for label, defaults to label prop',
-    control: 'text',
-    table: {
-      category: 'slots',
-      type: {
-        summary: 'VNode',
-      },
-    },
-  },
-  descriptionSlot: {
-    name: 'description',
-    description: 'Slot for description, defaults to description prop',
-    control: 'text',
-    table: {
-      category: 'slots',
-      type: {
-        summary: 'VNode',
-      },
-    },
-  },
   default: {
     control: 'text',
     table: {

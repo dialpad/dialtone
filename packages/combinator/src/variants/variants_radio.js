@@ -1,4 +1,4 @@
-/* eslint-disable max-len */
+ 
 
 export default {
   default: {
@@ -12,7 +12,7 @@ export default {
   'hidden label': {
     props: {
       label: { initialValue: 'Radio label' },
-      labelVisible: { initialValue: false },
+      showLabel: { initialValue: false },
     },
   },
 

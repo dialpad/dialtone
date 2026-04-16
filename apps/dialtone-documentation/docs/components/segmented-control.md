@@ -101,7 +101,7 @@ Remove the border and padding from the container.
 ```vue demo
 <!-- @wrapper -->
 <div class="d-w100p">
-  <dt-segmented-control v-model="selected" hide-divider aria-label="View filter">
+  <dt-segmented-control v-model="selected" :show-divider="false" aria-label="View filter">
     <dt-segmented-control-item value="all">All</dt-segmented-control-item>
     <dt-segmented-control-item value="favorites">Favorites</dt-segmented-control-item>
     <dt-segmented-control-item value="recent">Recent</dt-segmented-control-item>
@@ -109,7 +109,7 @@ Remove the border and padding from the container.
   </dt-segmented-control>
 </div>
 <!-- @code -->
-<dt-segmented-control v-model="selected" hide-divider>
+<dt-segmented-control v-model="selected" :show-divider="false">
   ...
 </dt-segmented-control>
 ```
@@ -141,7 +141,7 @@ Add `disabled` to the group to disable all items.
 ```vue demo
 <!-- @wrapper -->
 <div class="d-w100p">
-  <dt-segmented-control v-model="selected" disabled aria-label="Disabled example" hide-divider>
+  <dt-segmented-control v-model="selected" disabled aria-label="Disabled example" :show-divider="false">
     <dt-segmented-control-item value="all">All</dt-segmented-control-item>
     <dt-segmented-control-item value="favorites">Favorites</dt-segmented-control-item>
     <dt-segmented-control-item value="recent">Recent</dt-segmented-control-item>

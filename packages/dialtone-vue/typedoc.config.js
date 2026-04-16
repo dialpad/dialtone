@@ -9,6 +9,7 @@ export default {
     'common/storybook_utils.js',
     'common/v_html.js',
     'common/mixins',
+    'common/composables',
   ],
   out: 'functions/generated',
   githubPages: false,

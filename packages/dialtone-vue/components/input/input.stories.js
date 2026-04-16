@@ -69,15 +69,6 @@ export const argTypesData = {
       disable: true,
     },
   },
-  labelSlot: {
-    table: {
-      type: { summary: 'VNode' },
-    },
-    control: {
-      type: 'text',
-    },
-  },
-
   // Props
   modelValue: {
     control: 'text',
@@ -134,7 +125,7 @@ export const argTypesData = {
   hidden: {
     control: { type: 'boolean' },
   },
-  labelVisible: {
+  showLabel: {
     control: { type: 'boolean' },
   },
   retainWarning: {
