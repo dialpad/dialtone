@@ -1186,7 +1186,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
       <div class="d-d-grid d-g-400 d-g-cols2">
         <dt-stack gap="100">
           <dt-text as="h3" kind="headline" :size="300">Default</dt-text>
-          <dt-notice kind="success" title="Success" hide-action>
+          <dt-notice kind="positive" title="Success" hide-action>
             Action completed successfully.
           </dt-notice>
           <dt-notice kind="warning" title="Warning" hide-action>
@@ -1204,7 +1204,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
           <dt-notice kind="info" title="Important info" :important="true" hide-action>
             Visually prominent variant with filled background.
           </dt-notice>
-          <dt-notice kind="success" title="Important success" :important="true" hide-action>
+          <dt-notice kind="positive" title="Important success" :important="true" hide-action>
             Visually prominent variant with filled background.
           </dt-notice>
           <dt-notice kind="warning" title="Important warning" :important="true" hide-action>
@@ -1234,7 +1234,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
         <dt-banner kind="info" title="Info banner" class="d-ps-relative d-zi-base">
           Banners are more prominent than notices.
         </dt-banner>
-        <dt-banner kind="success" title="Success banner" class="d-ps-relative d-zi-base">
+        <dt-banner kind="positive" title="Success banner" class="d-ps-relative d-zi-base">
           Action completed successfully.
         </dt-banner>
         <dt-banner kind="warning" title="Warning banner" class="d-ps-relative d-zi-base">
@@ -1249,7 +1249,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
         <dt-banner kind="info" title="Info banner" :important="true" class="d-ps-relative d-zi-base">
           Banners are more prominent than notices.
         </dt-banner>
-        <dt-banner kind="success" title="Success banner" :important="true" class="d-ps-relative d-zi-base">
+        <dt-banner kind="positive" title="Success banner" :important="true" class="d-ps-relative d-zi-base">
           Action completed successfully.
         </dt-banner>
         <dt-banner kind="warning" title="Warning banner" :important="true" class="d-ps-relative d-zi-base">
@@ -1268,7 +1268,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
         <dt-stack gap="100">
           <dt-text as="h3" kind="headline" :size="300">Default</dt-text>
           <dt-toast :open="true" kind="info" title="Info toast" message="Informational message." :duration="null" />
-          <dt-toast :open="true" kind="success" title="Success toast" message="Action completed." :duration="null" />
+          <dt-toast :open="true" kind="positive" title="Success toast" message="Action completed." :duration="null" />
           <dt-toast :open="true" kind="warning" title="Warning toast" message="Review before proceeding." :duration="null" />
           <dt-toast :open="true" kind="critical" title="Critical toast" message="Something went wrong." :duration="null" />
           <dt-toast :open="true" kind="base" title="Base toast" message="Neutral notification." :duration="null" />
@@ -1276,7 +1276,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
         <dt-stack gap="100">
           <dt-text as="h3" kind="headline" :size="300">Important</dt-text>
           <dt-toast :open="true" kind="info" title="Info toast" message="Informational message." :important="true" :duration="null" />
-          <dt-toast :open="true" kind="success" title="Success toast" message="Action completed." :important="true" :duration="null" />
+          <dt-toast :open="true" kind="positive" title="Success toast" message="Action completed." :important="true" :duration="null" />
           <dt-toast :open="true" kind="warning" title="Warning toast" message="Review before proceeding." :important="true" :duration="null" />
           <dt-toast :open="true" kind="critical" title="Critical toast" message="Something went wrong." :important="true" :duration="null" />
           <dt-toast :open="true" kind="base" title="Base toast" message="Neutral notification." :important="true" :duration="null" />
