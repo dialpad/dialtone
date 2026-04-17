@@ -1,3 +1,10 @@
+# [8.80.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.80.0-next.1...dialtone-css/v8.80.0-next.2) (2026-04-17)
+
+
+### Features
+
+* **Box:** DLT-3315 new DtBox primitive component ([#1203](https://github.com/dialpad/dialtone/issues/1203)) ([e0c942e](https://github.com/dialpad/dialtone/commit/e0c942ec4c3d53f4360107c094ad62e85adacdfd))
+
 # [8.80.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.79.0...dialtone-css/v8.80.0-next.1) (2026-04-15)
 
 
