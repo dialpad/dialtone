@@ -1,19 +1,23 @@
 <template>
-  <div class="d-w100p" style="height: 300px;">
+  <dt-box block-size="400" inline-size="100p">
     <dt-resizable direction="column">
       <dt-resizable-panel id="exv-top" initial-size="40p">
-        <dt-stack align="center" justify="center" class="d-w100p d-h100p d-bgc-purple-100">
-          <span class="d-fs-200 d-fw-bold d-fc-purple-600">Top Panel</span>
-        </dt-stack>
+        <dt-box block-size="100p" inline-size="100p" surface="positive" class="d-plc-center">
+          <dt-text as="p" align="center" kind="label" size="200" strength="bold" tone="muted">
+            Top Panel
+          </dt-text>
+        </dt-box>
       </dt-resizable-panel>
       <dt-resizable-handle />
       <dt-resizable-panel id="exv-bottom">
-        <dt-stack align="center" justify="center" class="d-w100p d-h100p d-bgc-gold-100">
-          <span class="d-fs-200 d-fw-bold d-fc-gold-500">Bottom Panel</span>
-        </dt-stack>
+        <dt-box block-size="100p" inline-size="100p" surface="warning-subtle" class="d-plc-center">
+          <dt-text as="p" align="center" kind="label" size="200" strength="bold" tone="muted">
+            Bottom Panel
+          </dt-text>
+        </dt-box>
       </dt-resizable-panel>
     </dt-resizable>
-  </div>
+  </dt-box>
 </template>
 
 <script>
