@@ -23,10 +23,21 @@
 //  $$ DIRECTION
 //  ----------------------------------------------------------------------------
 @layer dialtone.utilities {
+// Order within this section: all-sides shorthand -> H/V -> single-side -> resets.
+// Single-side classes must follow H/V so .d-bt wins when combined with .d-by, etc.
+// Reset classes (.d-ba-none / .d-ba-unset) stay last as intentional escape hatches.
 .d-ba {
   border-color: var(--dt-color-border-default) !important;
   border-style: solid !important;
   border-width: var(--dt-size-border-100) !important;
+}
+
+.d-bx {
+  border-inline: var(--dt-size-border-100) solid var(--dt-color-border-default) !important;
+}
+
+.d-by {
+  border-block: var(--dt-size-border-100) solid var(--dt-color-border-default) !important;
 }
 
 .d-bt {
@@ -45,11 +56,53 @@
   border-inline-start: var(--dt-size-border-100) solid var(--dt-color-border-default) !important;
 }
 
-.d-bx { .d-br(); .d-bl(); }
-
-.d-by { .d-bt(); .d-bb(); }
 .d-ba-none { border: none !important; }
 .d-ba-unset { border: unset !important; }
+
+//  $  BORDER WIDTH
+//  ----------------------------------------------------------------------------
+//  Order: all-sides -> H/V -> single-side, so single-side classes win on cascade ties.
+.d-baw0 { border-width: var(--dt-size-border-0) !important; }
+.d-baw1 { border-width: var(--dt-size-border-100) !important; }
+.d-baw2 { border-width: var(--dt-size-border-200) !important; }
+.d-baw4 { border-width: var(--dt-size-border-300) !important; }
+
+//  --  X Border width
+.d-bxw0 { border-inline-width: var(--dt-size-border-0) !important; }
+.d-bxw1 { border-inline-width: var(--dt-size-border-100) !important; }
+.d-bxw2 { border-inline-width: var(--dt-size-border-200) !important; }
+.d-bxw4 { border-inline-width: var(--dt-size-border-300) !important; }
+
+//  --  Y Border width
+.d-byw0 { border-block-width: var(--dt-size-border-0) !important; }
+.d-byw1 { border-block-width: var(--dt-size-border-100) !important; }
+.d-byw2 { border-block-width: var(--dt-size-border-200) !important; }
+.d-byw4 { border-block-width: var(--dt-size-border-300) !important; }
+
+//  --  Top Border width
+.d-btw0 { border-block-start-width: var(--dt-size-border-0) !important; }
+.d-btw1 { border-block-start-width: var(--dt-size-border-100) !important; }
+.d-btw2 { border-block-start-width: var(--dt-size-border-200) !important; }
+.d-btw4 { border-block-start-width: var(--dt-size-border-300) !important; }
+
+//  --  Right Border width
+.d-brw0 { border-inline-end-width: var(--dt-size-border-0) !important; }
+.d-brw1 { border-inline-end-width: var(--dt-size-border-100) !important; }
+.d-brw2 { border-inline-end-width: var(--dt-size-border-200) !important; }
+.d-brw4 { border-inline-end-width: var(--dt-size-border-300) !important; }
+
+//  --  Bottom Border width
+.d-bbw0 { border-block-end-width: var(--dt-size-border-0) !important; }
+.d-bbw1 { border-block-end-width: var(--dt-size-border-100) !important; }
+.d-bbw2 { border-block-end-width: var(--dt-size-border-200) !important; }
+.d-bbw4 { border-block-end-width: var(--dt-size-border-300) !important; }
+
+//  --  Left Border width
+.d-blw0 { border-inline-start-width: var(--dt-size-border-0) !important; }
+.d-blw1 { border-inline-start-width: var(--dt-size-border-100) !important; }
+.d-blw2 { border-inline-start-width: var(--dt-size-border-200) !important; }
+.d-blw4 { border-inline-start-width: var(--dt-size-border-300) !important; }
+
 
 //  ============================================================================
 //  $  BORDER RADIUS
@@ -124,50 +177,6 @@
 .d-bls-dotted { border-inline-start-style: dotted !important; }
 
 .d-bas-unset { border-style: unset !important; }
-
-
-//  $$ WIDTH
-//  ----------------------------------------------------------------------------
-.d-baw0 { border-width: var(--dt-size-border-0) !important; }
-.d-baw1 { border-width: var(--dt-size-border-100) !important; }
-.d-baw2 { border-width: var(--dt-size-border-200) !important; }
-.d-baw4 { border-width: var(--dt-size-border-300) !important; }
-
-//  --  Top Border width
-.d-btw0 { border-block-start-width: var(--dt-size-border-0) !important; }
-.d-btw1 { border-block-start-width: var(--dt-size-border-100) !important; }
-.d-btw2 { border-block-start-width: var(--dt-size-border-200) !important; }
-.d-btw4 { border-block-start-width: var(--dt-size-border-300) !important; }
-
-//  --  Right Border width
-.d-brw0 { border-inline-end-width: var(--dt-size-border-0) !important; }
-.d-brw1 { border-inline-end-width: var(--dt-size-border-100) !important; }
-.d-brw2 { border-inline-end-width: var(--dt-size-border-200) !important; }
-.d-brw4 { border-inline-end-width: var(--dt-size-border-300) !important; }
-
-//  --  Bottom Border width
-.d-bbw0 { border-block-end-width: var(--dt-size-border-0) !important; }
-.d-bbw1 { border-block-end-width: var(--dt-size-border-100) !important; }
-.d-bbw2 { border-block-end-width: var(--dt-size-border-200) !important; }
-.d-bbw4 { border-block-end-width: var(--dt-size-border-300) !important; }
-
-//  --  Left Border width
-.d-blw0 { border-inline-start-width: var(--dt-size-border-0) !important; }
-.d-blw1 { border-inline-start-width: var(--dt-size-border-100) !important; }
-.d-blw2 { border-inline-start-width: var(--dt-size-border-200) !important; }
-.d-blw4 { border-inline-start-width: var(--dt-size-border-300) !important; }
-
-//  --  X Border width
-.d-bxw0 { .d-brw0(); .d-blw0(); }
-.d-bxw1 { .d-brw1(); .d-blw1(); }
-.d-bxw2 { .d-brw2(); .d-blw2(); }
-.d-bxw4 { .d-brw4(); .d-blw4(); }
-
-//  --  Y Border width
-.d-byw0 { .d-btw0(); .d-bbw0(); }
-.d-byw1 { .d-btw1(); .d-bbw1(); }
-.d-byw2 { .d-btw2(); .d-bbw2(); }
-.d-byw4 { .d-btw4(); .d-bbw4(); }
 
 
 //  ============================================================================

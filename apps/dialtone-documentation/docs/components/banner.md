@@ -41,7 +41,7 @@ Banners are a type of notice and so you can use the following [Notice](notice.md
 ```vue demo-only
 <dt-stack direction="row" gap="200">
   <dt-select-menu :show-label="false" label="Style" :options="bannerOptions" v-model="selectedKind" />
-  <dt-checkbox value="important" @input="toggleImportant">Important</dt-checkbox>
+  <dt-checkbox value="important" @update:model-value="toggleImportant">Important</dt-checkbox>
   <dt-button @click="toggleBanner('example-kind')">Toggle Example</dt-button>
 </dt-stack>
 ```
@@ -139,8 +139,8 @@ function toggleBanner (id) {
   }
 }
 
-function toggleImportant () {
-  important.value = !important.value;
+function toggleImportant (checked) {
+  important.value = checked;
 }
 
 function closeBanner () {

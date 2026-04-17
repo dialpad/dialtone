@@ -1,3 +1,11 @@
+# [9.180.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.180.0-next.1...dialtone/v9.180.0-next.2) (2026-04-17)
+
+
+### Features
+
+* **Box:** DLT-3315 new DtBox primitive component ([#1203](https://github.com/dialpad/dialtone/issues/1203)) ([e0c942e](https://github.com/dialpad/dialtone/commit/e0c942ec4c3d53f4360107c094ad62e85adacdfd))
+* **Combinator:** DLT-3312 preview resolved value in sized props ([#1199](https://github.com/dialpad/dialtone/issues/1199)) ([61bb610](https://github.com/dialpad/dialtone/commit/61bb61045861e8e0677816212c0dc5775bf83b16))
+
 # [9.180.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.179.0...dialtone/v9.180.0-next.1) (2026-04-15)
 
 

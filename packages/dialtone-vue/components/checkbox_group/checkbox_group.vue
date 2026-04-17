@@ -1,5 +1,4 @@
 <script>
-import { warn } from 'vue';
 import { DtInputGroup } from '../input_group';
 
 /**
@@ -16,30 +15,9 @@ export default {
 
   props: {
     /**
-     * Not supported by this component, please use selectedValues
+     * A provided list of selected values(s) for the checkbox group
      */
     modelValue: {
-      type: [],
-      default: null,
-      validator: value => {
-        if (!value) {
-          return true;
-        }
-
-        warn(
-          'Component uses selectedValues to initialize the model, modelValue is not supported by this component',
-          this,
-        );
-
-        return false;
-      },
-    },
-
-    /**
-     * A provided list of selected values(s) for the checkbox group
-     * @model selectedValues
-     */
-    selectedValues: {
       type: Array,
       default () {
         return [];
@@ -73,30 +51,23 @@ export default {
 
   emits: [
     /**
-     * Native input event
-     *
-     * @event input
-     * @type {Array}
-     */
-    'input',
-    /**
      * Selected values for the checkbox group
      *
-     * @event input
+     * @event update:modelValue
      * @type {Array}
      */
-    'update:selectedValues',
+    'update:modelValue',
   ],
 
   data () {
     return {
-      internalValue: this.selectedValues,
+      internalValue: this.modelValue,
     };
   },
 
   watch: {
-    selectedValues (newSelectedValues) {
-      this.internalValue = newSelectedValues;
+    modelValue (newModelValue) {
+      this.internalValue = newModelValue;
     },
 
     /*
@@ -124,8 +95,7 @@ export default {
         this.internalValue.push(value);
       }
 
-      this.$emit('input', this.internalValue);
-      this.$emit('update:selectedValues', this.internalValue);
+      this.$emit('update:modelValue', this.internalValue);
     },
 
     getMessageKey (type, index) {

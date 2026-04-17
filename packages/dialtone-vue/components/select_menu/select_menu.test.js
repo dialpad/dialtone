@@ -334,11 +334,8 @@ describe('DtSelectMenu Tests', () => {
         select.trigger('change');
       });
 
-      it('should emit input event', () => {
-        expect(wrapper.emitted('input')[0][0]).toBe(MOCK_SELECTED_VALUE.toString());
-      });
-      it('should emit change event', () => {
-        expect(wrapper.emitted('change')[0][0]).toBe(MOCK_SELECTED_VALUE.toString());
+      it('should emit update:modelValue event', () => {
+        expect(wrapper.emitted('update:modelValue')[0][0]).toBe(MOCK_SELECTED_VALUE.toString());
       });
     });
 

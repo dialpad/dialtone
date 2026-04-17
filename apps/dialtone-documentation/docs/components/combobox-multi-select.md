@@ -14,7 +14,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox-mul
 <dt-combobox-multi-select
   label="Label Text"
   :selected-items="selectedItems"
-  @input="onComboboxInput"
+  @update:model-value="onComboboxInput"
   @select="onComboboxSelect"
   @remove="onComboboxRemove"
 >
@@ -40,7 +40,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox-mul
   ref="comboboxMultiSelect"
   label="Label Text"
   :selected-items="selectedItems"
-  @input="onInput"
+  @update:model-value="onInput"
   @select="onSelect"
   @remove="onRemove"
 >
@@ -94,7 +94,7 @@ Adds validation for max selection. Make sure to provide the following props:
   :selected-items="maxSelectedItems"
   :max-selected="2"
   :max-selected-message="[{ message: 'More than 2 selected', type: 'critical' }]"
-  @input="onMaxSelectInput"
+  @update:model-value="onMaxSelectInput"
   @select="onMaxSelectSelect"
   @remove="onMaxSelectRemove"
   @max-selected="onMaxSelected"
@@ -124,7 +124,7 @@ Adds validation for max selection. Make sure to provide the following props:
   :selected-items="selectedItems"
   :max-selected="2"
   :max-selected-message="[{ message: 'More than 2 selected', type: 'critical' }]"
-  @input="onInput"
+  @update:model-value="onInput"
   @select="onSelect"
   @remove="onRemove"
   @max-selected="onMaxSelected"

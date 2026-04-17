@@ -164,7 +164,7 @@ describe('DtRadioGroup Tests', () => {
     });
 
     describe('When a radio is selected', () => {
-      it('emits an input event', async () => {
+      it('emits update:modelValue event', async () => {
         const mountWrapper = mount(DtRadioGroup, {
           propsData: { ...baseProps, ...mockProps },
           attrs: { ...baseAttrs, ...mockAttrs },
@@ -175,13 +175,13 @@ describe('DtRadioGroup Tests', () => {
 
         await mountedRadioGroup.find(`[value="${MOCK_SELECTED_VALUE}"]`).trigger('change');
 
-        expect(mountWrapper.emitted('input')[0][0]).toBe(MOCK_SELECTED_VALUE);
+        expect(mountWrapper.emitted('update:modelValue')[0][0]).toBe(MOCK_SELECTED_VALUE);
       });
     });
 
     describe('When the radio group is disabled', () => {
       describe('When a radio is selected', () => {
-        it('does not emit an input event', async () => {
+        it('does not emit update:modelValue event', async () => {
           mockProps = { disabled: true };
 
           const mountWrapper = mount(DtRadioGroup, {
@@ -194,7 +194,7 @@ describe('DtRadioGroup Tests', () => {
 
           await mountedRadioGroup.find(`[value="${MOCK_SELECTED_VALUE}"]`).trigger('change');
 
-          expect(wrapper.emitted('input')).toBeFalsy();
+          expect(mountWrapper.emitted('update:modelValue')).toBeFalsy();
         });
       });
     });

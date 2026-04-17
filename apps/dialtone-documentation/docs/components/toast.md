@@ -18,7 +18,7 @@ keywords: ["notification", "snackbar", "alert", "message", "d-toast", "DtToast",
   <div class="d-fl-grow1">
     <dt-select-menu :show-label="false" label="Style" :options="toastOptions" v-model="selectedKind" />
   </div>
-  <dt-checkbox value="important" @input="toggleImportant">Important</dt-checkbox>
+  <dt-checkbox value="important" @update:model-value="toggleImportant">Important</dt-checkbox>
   <dt-button @click="toggleToast">Toggle Example</dt-button>
 </dt-stack>
 <!-- @code -->
@@ -162,8 +162,8 @@ const updateOpen = (value) => {
   if (!value) showDurationToast.value = false;
 };
 
-function toggleImportant () {
-  important.value = !important.value;
+function toggleImportant (checked) {
+  important.value = checked;
 }
 function togglePinned () {
   pinned.value = !pinned.value;

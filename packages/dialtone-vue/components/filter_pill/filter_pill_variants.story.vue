@@ -70,7 +70,6 @@
               :key="filter.name"
               :label="filter.name"
               :value="filter.name"
-              @input="$event => selectedConversationType = $event"
             />
           </dt-radio-group>
         </template>
@@ -116,7 +115,6 @@
               :key="filter.name"
               :label="filter.name"
               :value="filter.name"
-              @input="$event => selectedIEFilter = $event"
             />
           </dt-radio-group>
         </template>

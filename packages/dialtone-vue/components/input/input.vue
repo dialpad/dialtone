@@ -346,14 +346,6 @@ export default {
 
   emits: [
     /**
-     * Native input event
-     *
-     * @event input
-     * @type {String}
-     */
-    'input',
-
-    /**
      * Native input blur event
      *
      * @event blur
@@ -395,6 +387,7 @@ export default {
     /**
      * Event fired to sync the modelValue prop with the parent component
      * @event update:modelValue
+     * @type {String | Number}
      */
     'update:modelValue',
 
@@ -466,7 +459,6 @@ export default {
           this.isComposing = false;
           this.justEndedComposition = true;
           const val = this.$refs.input.value;
-          this.$emit('input', val);
           this.$emit('update:modelValue', val);
           // Clear the flag after the current synchronous event processing so
           // Firefox's post-compositionend input event is skipped, but the
@@ -482,7 +474,6 @@ export default {
             const files = Array.from(event.target.files);
             val = files.map(file => file.name);
           }
-          this.$emit('input', val);
           this.$emit('update:modelValue', val);
         },
 
@@ -689,7 +680,6 @@ export default {
     },
 
     emitClearEvents () {
-      this.$emit('input', '');
       this.$emit('clear');
       this.$emit('update:modelValue', '');
     },

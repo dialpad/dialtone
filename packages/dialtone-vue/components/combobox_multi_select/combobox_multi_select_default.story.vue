@@ -25,7 +25,7 @@
     :append-to="$attrs.appendTo"
     :transition="$attrs.transition"
     :reserved-right-space="$attrs.reservedRightSpace"
-    @input="onComboboxInput"
+    @update:model-value="onComboboxInput"
     @select="onComboboxSelect"
     @remove="onComboboxRemove"
     @max-selected="$attrs.onMaxSelected"

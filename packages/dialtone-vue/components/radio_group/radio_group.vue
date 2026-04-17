@@ -14,7 +14,6 @@ export default {
   props: {
     /**
      * A provided value for the radio group
-     * @model value
      */
     modelValue: {
       type: [String, Number],
@@ -48,16 +47,9 @@ export default {
 
   emits: [
     /**
-     * Native input event
+     * Event fired to sync the modelValue prop with the parent component
      *
-     * @event input
-     * @type {String | Number}
-     */
-    'input',
-    /**
-     * Native input event
-     *
-     * @event input
+     * @event update:modelValue
      * @type {String | Number}
      */
     'update:modelValue',
@@ -93,7 +85,6 @@ export default {
      * slotted radios will change this value and need to emit new value up.
      */
     setGroupValue (newValue) {
-      this.$emit('input', newValue);
       this.$emit('update:modelValue', newValue);
     },
 

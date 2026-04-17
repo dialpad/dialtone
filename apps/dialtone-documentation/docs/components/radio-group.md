@@ -85,7 +85,7 @@ The event handler is only needed if you need to do additional processing. The v-
   v-model="selectedFruits"
   name="fruits-radio-group"
   legend="Fruits"
-  @input="onInput"
+  @update:model-value="onInput"
 >
   <dt-radio value="pear">Pear</dt-radio>
   <dt-radio value="kiwi">Kiwi</dt-radio>

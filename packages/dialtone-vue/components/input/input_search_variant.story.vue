@@ -19,7 +19,7 @@
     :current-length="$attrs.currentLength"
     :validate="validationConfig"
     @blur="$attrs.onBlur"
-    @input="$attrs.onInput"
+    @update:model-value="$attrs['onUpdate:modelValue']"
     @clear="$attrs.onClear"
     @focus="$attrs.onFocus"
     @focusin="$attrs.onFocusIn"

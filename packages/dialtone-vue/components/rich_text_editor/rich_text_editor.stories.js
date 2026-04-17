@@ -20,7 +20,7 @@ export const argsData = {
   placeholder: 'Type here...',
   link: true,
   onBlur: action('blur'),
-  onInput: action('input'),
+  'onUpdate:modelValue': action('update:modelValue'),
   onFocus: action('focus'),
   onEnter: action('enter'),
   onJsonInput: action('json-input'),
@@ -82,7 +82,7 @@ export const argTypesData = {
       disable: true,
     },
   },
-  onInput: {
+  'onUpdate:modelValue': {
     table: {
       disable: true,
     },

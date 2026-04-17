@@ -176,37 +176,37 @@ const props = defineProps({
 
   /**
    * Block size (height in horizontal writing mode). Maps to --dt-layout-* tokens.
-   * @values 0, 1px, 2px, 8px, 25, 20px, 24px, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10-percent, 20-percent, 25-percent, 30-percent, 33-percent, 40-percent, 50-percent, 60-percent, 66-percent, 70-percent, 75-percent, 80-percent, 90-percent, 95-percent, 100-percent
+   * @values 0, 1px, 2px, 8px, 25, 20px, 24px, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10p, 20p, 25p, 30p, 33p, 40p, 50p, 60p, 66p, 70p, 75p, 80p, 90p, 95p, 100p
    */
   blockSize: { type: String, default: undefined, validator: layoutValidator },
 
   /**
    * Inline size (width in horizontal writing mode). Maps to --dt-layout-* tokens.
-   * @values 0, 1px, 2px, 8px, 25, 20px, 24px, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10-percent, 20-percent, 25-percent, 30-percent, 33-percent, 40-percent, 50-percent, 60-percent, 66-percent, 70-percent, 75-percent, 80-percent, 90-percent, 95-percent, 100-percent
+   * @values 0, 1px, 2px, 8px, 25, 20px, 24px, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10p, 20p, 25p, 30p, 33p, 40p, 50p, 60p, 66p, 70p, 75p, 80p, 90p, 95p, 100p
    */
   inlineSize: { type: String, default: undefined, validator: layoutValidator },
 
   /**
    * Maximum block size. Maps to --dt-layout-* tokens.
-   * @values 0, 1px, 2px, 8px, 25, 20px, 24px, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10-percent, 20-percent, 25-percent, 30-percent, 33-percent, 40-percent, 50-percent, 60-percent, 66-percent, 70-percent, 75-percent, 80-percent, 90-percent, 95-percent, 100-percent
+   * @values 0, 1px, 2px, 8px, 25, 20px, 24px, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10p, 20p, 25p, 30p, 33p, 40p, 50p, 60p, 66p, 70p, 75p, 80p, 90p, 95p, 100p
    */
   maxBlockSize: { type: String, default: undefined, validator: layoutValidator },
 
   /**
    * Minimum block size. Maps to --dt-layout-* tokens.
-   * @values 0, 1px, 2px, 8px, 25, 20px, 24px, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10-percent, 20-percent, 25-percent, 30-percent, 33-percent, 40-percent, 50-percent, 60-percent, 66-percent, 70-percent, 75-percent, 80-percent, 90-percent, 95-percent, 100-percent
+   * @values 0, 1px, 2px, 8px, 25, 20px, 24px, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10p, 20p, 25p, 30p, 33p, 40p, 50p, 60p, 66p, 70p, 75p, 80p, 90p, 95p, 100p
    */
   minBlockSize: { type: String, default: undefined, validator: layoutValidator },
 
   /**
    * Maximum inline size. Maps to --dt-layout-* tokens.
-   * @values 0, 1px, 2px, 8px, 25, 20px, 24px, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10-percent, 20-percent, 25-percent, 30-percent, 33-percent, 40-percent, 50-percent, 60-percent, 66-percent, 70-percent, 75-percent, 80-percent, 90-percent, 95-percent, 100-percent
+   * @values 0, 1px, 2px, 8px, 25, 20px, 24px, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10p, 20p, 25p, 30p, 33p, 40p, 50p, 60p, 66p, 70p, 75p, 80p, 90p, 95p, 100p
    */
   maxInlineSize: { type: String, default: undefined, validator: layoutValidator },
 
   /**
    * Minimum inline size. Maps to --dt-layout-* tokens.
-   * @values 0, 1px, 2px, 8px, 25, 20px, 24px, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10-percent, 20-percent, 25-percent, 30-percent, 33-percent, 40-percent, 50-percent, 60-percent, 66-percent, 70-percent, 75-percent, 80-percent, 90-percent, 95-percent, 100-percent
+   * @values 0, 1px, 2px, 8px, 25, 20px, 24px, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10p, 20p, 25p, 30p, 33p, 40p, 50p, 60p, 66p, 70p, 75p, 80p, 90p, 95p, 100p
    */
   minInlineSize: { type: String, default: undefined, validator: layoutValidator },
 

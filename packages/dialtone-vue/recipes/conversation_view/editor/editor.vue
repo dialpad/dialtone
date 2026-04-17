@@ -149,7 +149,7 @@
                 input-wrapper-class="d-w0 d-h0 d-ba-none"
                 :size="200"
                 type="color"
-                @input="onColorPickerInput"
+                @update:model-value="onColorPickerInput"
                 @click.stop
               />
               <!-- eslint-enable vue/no-restricted-class -->
@@ -381,7 +381,7 @@
         @text-input="onTextInput"
         @blur="onBlur"
         @focus="onFocus"
-        @input="onInput($event)"
+        @update:model-value="onUpdateModelValue"
         @selected="onSelected"
       />
     </div>
@@ -822,15 +822,8 @@ export default {
     'blur',
 
     /**
-     * Native input event
-     * @event input
-     * @type {String|JSON}
-     */
-    'input',
-
-    /**
      * Event fired to sync the modelValue prop with the parent component
-     * @event input
+     * @event update:modelValue
      * @type {String|JSON}
      */
     'update:modelValue',
@@ -1342,8 +1335,7 @@ export default {
       this.$emit('blur', event);
     },
 
-    onInput (event) {
-      this.$emit('input', event);
+    onUpdateModelValue (event) {
       this.$emit('update:modelValue', event);
     },
 

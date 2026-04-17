@@ -163,13 +163,13 @@ export default {
 
   props: {
     /**
-     * Controls whether the popover is shown. Leaving this null will have the popover trigger on click by default.
-     * If you set this value, the default trigger behavior will be disabled, and you can control it as you need.
-     * Supports v-model
+     * Controls whether the popover is shown. When null (default), the popover
+     * toggles on click. When set to true or false, the default trigger is
+     * disabled and the parent controls visibility via v-model:open.
      * @values null, true, false
      */
     open: {
-      type: Boolean,
+      type: [Boolean, null],
       default: null,
     },
 
