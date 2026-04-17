@@ -97,9 +97,15 @@
 //  ============================================================================
 //  $   VALUE LISTS
 //  ----------------------------------------------------------------------------
-@box-surface-values: primary, secondary, moderate, bold, strong, contrast, backdrop, brand, info, success, warning, critical, brand-subtle, brand-strong, info-subtle, info-strong, success-subtle, success-strong, warning-subtle, warning-strong, critical-subtle, critical-strong, primary-opaque, secondary-opaque, moderate-opaque, bold-opaque, strong-opaque, contrast-opaque, brand-opaque, brand-subtle-opaque, info-opaque, info-subtle-opaque, success-opaque, success-subtle-opaque, warning-opaque, warning-subtle-opaque, critical-opaque, critical-subtle-opaque;
+//  `positive*` is intentionally absent from these lists. Surface and border
+//  tokens still use legacy `success*` naming (no `--dt-color-surface-positive-*`
+//  exists yet), so `positive*` modifier classes are generated from explicit
+//  alias blocks below that map to `--dt-color-surface-success-*` /
+//  `--dt-color-border-success-*`. Once DLT-3331 lands the token rename,
+//  `positive*` moves into these lists and the alias blocks can be dropped.
+@box-surface-values: primary, secondary, moderate, bold, strong, contrast, backdrop, brand, info, warning, critical, brand-subtle, brand-strong, info-subtle, info-strong, warning-subtle, warning-strong, critical-subtle, critical-strong, primary-opaque, secondary-opaque, moderate-opaque, bold-opaque, strong-opaque, contrast-opaque, brand-opaque, brand-subtle-opaque, info-opaque, info-subtle-opaque, warning-opaque, warning-subtle-opaque, critical-opaque, critical-subtle-opaque;
 
-@box-border-color-values: subtle, default, moderate, bold, accent, focus, brand, success, warning, critical, brand-subtle, brand-strong, success-subtle, success-strong, warning-subtle, warning-strong, critical-subtle, critical-strong;
+@box-border-color-values: subtle, default, moderate, bold, accent, focus, brand, warning, critical, brand-subtle, brand-strong, warning-subtle, warning-strong, critical-subtle, critical-strong;
 
 @box-border-width-values: 0, 50, 100, 150, 200, 300, 400;
 @box-layout-percent-values: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 95, 100;
@@ -155,11 +161,11 @@
 //  ----------------------------------------------------------------------------
 ._box-token(surface; --box-surface; dt-color-surface; @box-surface-values);
 
-//  Prop aliases: positive → success token
-.d-box--surface-positive          { --box-surface: var(--dt-color-surface-success); }
-.d-box--surface-positive-subtle   { --box-surface: var(--dt-color-surface-success-subtle); }
-.d-box--surface-positive-strong   { --box-surface: var(--dt-color-surface-success-strong); }
-.d-box--surface-positive-opaque   { --box-surface: var(--dt-color-surface-success-opaque); }
+//  `positive` prop → maps to `--dt-color-surface-success-*` tokens (surface tokens use legacy `success` naming; see DLT-3331)
+.d-box--surface-positive               { --box-surface: var(--dt-color-surface-success); }
+.d-box--surface-positive-subtle        { --box-surface: var(--dt-color-surface-success-subtle); }
+.d-box--surface-positive-strong        { --box-surface: var(--dt-color-surface-success-strong); }
+.d-box--surface-positive-opaque        { --box-surface: var(--dt-color-surface-success-opaque); }
 .d-box--surface-positive-subtle-opaque { --box-surface: var(--dt-color-surface-success-subtle-opaque); }
 
 //  ----------------------------------------------------------------------------
@@ -169,7 +175,7 @@
 .d-box--bc-transparent { --box-bc: transparent; }
 ._box-token(bc; --box-bc; dt-color-border; @box-border-color-values);
 
-//  Prop aliases: positive → success token
+//  `positive` prop → maps to `--dt-color-border-success-*` tokens (border tokens use legacy `success` naming; see DLT-3331)
 .d-box--bc-positive        { --box-bc: var(--dt-color-border-success); }
 .d-box--bc-positive-subtle { --box-bc: var(--dt-color-border-success-subtle); }
 .d-box--bc-positive-strong { --box-bc: var(--dt-color-border-success-strong); }

@@ -1363,7 +1363,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
 <dt-stack gap="200">
   <dt-box padding="200" surface="secondary">Box demo</dt-box>
   <dt-box padding="400" surface="moderate">Box demo</dt-box>
-  <dt-box padding="100" surface="success-subtle">Box demo</dt-box>
+  <dt-box padding="100" surface="positive-subtle">Box demo</dt-box>
   <dt-box padding="100" surface="critical-subtle">Box demo</dt-box>
   <dt-box padding="200" surface="brand">Box demo</dt-box>
 </dt-stack>
@@ -1531,7 +1531,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
 <dt-stack gap="100">
   <dt-box as="section" padding="200" surface="info-subtle" border-width="100">Box demo</dt-box>
   <dt-box as="nav" padding="200" surface="warning-subtle" border-width="100">Box demo</dt-box>
-  <dt-box as="header" padding="200" surface="success-subtle" border-width="100">Box demo</dt-box>
+  <dt-box as="header" padding="200" surface="positive-subtle" border-width="100">Box demo</dt-box>
 </dt-stack>
 ```
 
