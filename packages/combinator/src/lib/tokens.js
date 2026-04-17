@@ -95,6 +95,15 @@ export function resolveTokenValue (category, value, propValues) {
     case 'color':
       if (categoryArgs[0]) result = resolveColor(categoryArgs[0], categoryArgs[1] || 'color', value);
       break;
+    case 'border-width':
+      result = resolveBorderWidth(value);
+      break;
+    case 'border-radius':
+      result = resolveBorderRadius(value);
+      break;
+    case 'layout':
+      result = resolveLayout(value);
+      break;
   }
 
   cache.set(cacheKey, result);
@@ -169,6 +178,31 @@ function resolveSpacing (value) {
 
 function resolveIconSize (value) {
   const px = resolveCssVar(`--dt-icon-size-${value}`);
+  return px ? formatPx(px) : null;
+}
+
+function resolveBorderWidth (value) {
+  const px = resolveCssVar(`--dt-size-border-${value}`);
+  return px ? formatPx(px) : null;
+}
+
+function resolveBorderRadius (value) {
+  const px = resolveCssVar(`--dt-size-radius-${value}`);
+  if (!px) return null;
+  // 'pill' and 'circle' resolve to very large / percentage
+  // values — show the token name instead of a meaningless px.
+  if (value === 'pill' || value === 'circle') return value;
+  return formatPx(px);
+}
+
+function resolveLayout (value) {
+  // Percent values ('50-percent') resolve to raw strings like
+  // '50%' — read directly,don't run through width measurement.
+  if (String(value).endsWith('-percent')) {
+    const raw = getComputedStyle(document.documentElement).getPropertyValue(`--dt-layout-${value}`).trim();
+    return raw || null;
+  }
+  const px = resolveCssVar(`--dt-layout-${value}`);
   return px ? formatPx(px) : null;
 }
 
