@@ -62,8 +62,8 @@ export const DT_BOX_SHADOW_VALUES = ['small', 'medium', 'large', 'extra-large', 
  */
 export const DT_BOX_LAYOUT_VALUES = [
   '0', '25', '50', '75', '100', '200', '300', '400', '500', '600', '700', '800', '900', '1000', '1100', '1200', '1300', '1400', '1500', '1600',
-  '10-percent', '20-percent', '25-percent', '30-percent', '33-percent', '40-percent', '50-percent',
-  '60-percent', '66-percent', '70-percent', '75-percent', '80-percent', '90-percent', '95-percent', '100-percent',
+  '10p', '20p', '25p', '30p', '33p', '40p', '50p',
+  '60p', '66p', '70p', '75p', '80p', '90p', '95p', '100p',
 ];
 
 /**

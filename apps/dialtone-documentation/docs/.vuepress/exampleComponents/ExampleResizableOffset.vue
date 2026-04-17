@@ -1,23 +1,36 @@
 <template>
-  <div class="d-w100p" style="height: 300px;">
+  <dt-box block-size="400" inline-size="100p">
     <dt-resizable offset-element="#doc-demo-toolbar">
-      <div
+      <dt-box
         id="doc-demo-toolbar"
-        class="d-ps-absolute d-t0 d-l0 d-r0 d-zi-base1 d-d-flex d-ai-center
-          d-px16 d-bgc-secondary d-bb d-bc-default d-bgo50"
-        style="height: 48px;"
+        padding-inline="200"
+        surface="secondary-opaque"
+        border-width-block-end="100"
+        block-size="75"
+        class="d-ps-absolute d-t0 d-l0 d-r0 d-zi-base1 d-d-flex d-ai-center d-jc-center
+        "
       >
-        <span class="d-fs-100">Fixed Toolbar (48px)</span>
-      </div>
-      <dt-resizable-panel id="exo-left" initial-size="50p" class="d-bgc-purple-100">
-        <span class="d-fs-200 d-fw-bold d-fc-purple-600">Left Panel</span>
+        <dt-text as="p" kind="body" size="200" align="center">
+          Fixed Toolbar (48px)
+        </dt-text>
+      </dt-box>
+      <dt-resizable-panel id="exo-left" initial-size="50p" class="d-bgc-success">
+        <dt-box block-size="100p" inline-size="100p" class="d-plc-center">
+          <dt-text as="p" align="center" kind="label" size="200" strength="bold" tone="positive" class="d-fco80">
+            Left Panel
+          </dt-text>
+        </dt-box>
       </dt-resizable-panel>
       <dt-resizable-handle />
-      <dt-resizable-panel id="exo-right" initial-size="50p" class="d-bgc-gold-100">
-        <span class="d-fs-200 d-fw-bold d-fc-gold-500">Right Panel</span>
+      <dt-resizable-panel id="exo-right" initial-size="50p" class="d-bgc-warning-subtle">
+        <dt-box block-size="100p" inline-size="100p" class="d-plc-center">
+          <dt-text as="p" align="center" kind="label" size="200" strength="bold" tone="warning" class="d-fco80">
+            Right Panel
+          </dt-text>
+        </dt-box>
       </dt-resizable-panel>
     </dt-resizable>
-  </div>
+  </dt-box>
 </template>
 
 <script>

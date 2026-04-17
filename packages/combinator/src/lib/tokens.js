@@ -8,13 +8,15 @@ const TEXT_SIZE_TO_CSS_SUFFIX = {
   700: '3xl',
 };
 
+const LAYOUT_PERCENT_VALUE = /^(\d+)p$/;
+
 const cache = new Map();
 
 let measureEl = null;
 
 /**
  * Clears the token resolution cache. Call on theme change so resolved
- * values (which depend on live CSS custom properties) are re-read.
+ * values (most of which depend on live CSS custom properties) are re-read.
  */
 export function clearTokenCache () {
   cache.clear();
@@ -196,12 +198,11 @@ function resolveBorderRadius (value) {
 }
 
 function resolveLayout (value) {
-  // Percent values ('50-percent') resolve to raw strings like
-  // '50%' — read directly,don't run through width measurement.
-  if (String(value).endsWith('-percent')) {
-    const raw = getComputedStyle(document.documentElement).getPropertyValue(`--dt-layout-${value}`).trim();
-    return raw || null;
-  }
+  // Percent props ('33p', '66p') display as the integer percentage, matching
+  // the prop name — avoids float drift from tokens like --dt-layout-33-percent
+  // which resolves to 33.333%.
+  const percentMatch = String(value).match(LAYOUT_PERCENT_VALUE);
+  if (percentMatch) return `${percentMatch[1]}%`;
   const px = resolveCssVar(`--dt-layout-${value}`);
   return px ? formatPx(px) : null;
 }
