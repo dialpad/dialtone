@@ -15,7 +15,7 @@
               'leftbar-call-centers-duty-status__button',
               'd-bar-pill',
               'd-py-50',
-              'd-fc-success',
+              'd-fc-positive',
             ]"
             class="d-to-ellipsis"
             :size="200"
@@ -48,7 +48,7 @@
               'leftbar-call-centers-duty-status__button',
               'd-bar-pill',
               'd-py-50',
-              'd-fc-success',
+              'd-fc-positive',
             ]"
             class="d-to-ellipsis"
             :size="200"
@@ -83,7 +83,7 @@
               'leftbar-call-centers-duty-status__button',
               'd-bar-pill',
               'd-py-50',
-              'd-fc-success',
+              'd-fc-positive',
             ]"
             class="d-to-ellipsis"
             :size="200"
@@ -118,7 +118,7 @@
               'leftbar-call-centers-duty-status__button',
               'd-bar-pill',
               'd-py-50',
-              'd-fc-success',
+              'd-fc-positive',
             ]"
             class="d-to-ellipsis"
             :size="200"
@@ -152,7 +152,7 @@
               'leftbar-call-centers-duty-status__button',
               'd-bar-pill',
               'd-py-50',
-              'd-fc-success',
+              'd-fc-positive',
             ]"
             class="d-to-ellipsis"
             :size="200"

@@ -53,7 +53,7 @@ The table is rendered by `ComponentHealthStatusTable.vue` using color-coded icon
 
 | Icon | Color | Meaning |
 |------|-------|---------|
-| Check circle | Green (`d-fc-success`) | Ready |
+| Check circle | Green (`d-fc-positive`) | Ready |
 | Tools | Orange (`d-fc-warning`) | In progress / beta |
 | Box select | Red (`d-fc-critical`) | Planned |
 | Box | Gray (`d-fc-muted`) | N/A |

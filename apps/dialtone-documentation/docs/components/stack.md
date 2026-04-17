@@ -1067,7 +1067,7 @@ View the [Migrating from Flex CSS Utilities to DtStack](/about/whats-new/posts/2
         Katie Rodriguez
       </dt-text>
       <dt-stack direction="row" gap="350">
-        <dt-text tone="success">
+        <dt-text tone="positive">
           Available
         </dt-text>
         <dt-text>&bull;</dt-text>
