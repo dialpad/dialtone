@@ -24,6 +24,7 @@ const DESCRIPTION_RE = /only\s+appl\w+\s+when\s+(?:the\s+|using\s+the\s+)?[`"']?
  * @type {RegExp}
  */
 const EXCLUDED_SUFFIX_RE = /(?:Class|ChildProps|Id)$/;
+const EXCLUDED_NAMES = new Set(['showDivider']);
 
 /**
  * Builds a map from child prop name → parent prop name.
@@ -39,7 +40,7 @@ export function buildDependencyMap (members) {
 
   // Strategy 1: description parsing
   for (const member of members) {
-    if (!member.description) continue;
+    if (!member.description || EXCLUDED_NAMES.has(member.name)) continue;
     const match = member.description.match(DESCRIPTION_RE);
     if (match) {
       const parentName = match[1];

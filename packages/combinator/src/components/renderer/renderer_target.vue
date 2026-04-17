@@ -89,7 +89,9 @@ function freshContainer () {
     render(null, wrapper.value.firstChild);
   }
   wrapper.value.replaceChildren();
-  return wrapper.value.appendChild(document.createElement('div'));
+  const container = document.createElement('div');
+  container.className = 'dialtone-playground__component-content';
+  return wrapper.value.appendChild(container);
 }
 
 /**
