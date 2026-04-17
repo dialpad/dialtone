@@ -1,6 +1,13 @@
-/* eslint-disable max-len */
+ 
 
 export default {
+  defaults: {
+    props: {
+      size: { tokenCategory: 'component-size:avatar' },
+      family: { tokenCategory: 'color:d-avatar[data-avatar-family]:backgroundColor' },
+    },
+  },
+
   exclusions: [
     {
       when: { iconOnly: true },

@@ -1,6 +1,26 @@
 /* eslint-disable max-len */
 
+
 export default {
+  defaults: {
+    props: {
+      size: { tokenCategory: 'typography-size' },
+      density: { tokenCategory: 'line-height' },
+      tone: { tokenCategory: 'color:d-text--tone-:--text-tone' },
+    },
+  },
+
+  exclusions: [
+    {
+      when: { kind: v => v !== 'headline' },
+      disableValues: { props: { size: ['500', '600', '700'] } },
+    },
+    {
+      when: { size: v => ['500', '600', '700'].includes(String(v)) },
+      disableValues: { props: { kind: ['body', 'label', 'code'] } },
+    },
+  ],
+
   default: {
     slots: {
       default: {
@@ -10,6 +30,9 @@ export default {
     props: {
       kind: {
         initialValue: 'body',
+      },
+      size: {
+        initialValue: '300',
       },
     },
   },
@@ -157,6 +180,9 @@ export default {
       },
       align: {
         initialValue: 'center',
+      },
+      wrap: {
+        initialValue: 'balance',
       },
     },
   },

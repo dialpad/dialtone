@@ -23,6 +23,9 @@
           validTypes: member.types,
           tags: member.tags,
           bindings: member.bindings,
+          tokenCategory: member.tokenCategory,
+          propValues,
+          disabledValues: getDisabledValues(key, props.exclusionRules, props.propValues),
         }"
         @update:value="e => updateMember(e, key)"
         @update:control="e => updateControl(e, key)"
@@ -38,16 +41,16 @@ import { computed, reactive } from 'vue';
 import { convert } from '@/src/lib/convert';
 import { controlMap } from '@/src/lib/control';
 import { buildDependencyMap, shouldHideProp } from '@/src/lib/prop_dependencies';
-import { shouldExclude } from '@/src/lib/exclusion_rules';
+import { shouldExclude, getDisabledValues } from '@/src/lib/exclusion_rules';
 import { isIconSlot } from '@/src/lib/icons';
 import { DtStack } from '@dialpad/dialtone-vue';
 
 const ICON_SLOT_ORDER = ['startIcon', 'endIcon', 'blockStartIcon', 'blockEndIcon', 'icon'];
 
 const PROP_PRIORITY = [
-  'title', 'as', 'label', 'size', 'kind',
-  'importance', 'placement', 'tone', 'align', 'density', 'strength',
-  'type', 'underline', 'selected', 'active', 'disabled', 'color', 'description',
+  'title', 'as', 'label', 'importance', 'kind', 'size',
+  'placement', 'tone', 'align', 'density', 'strength',
+  'type', 'underline', 'selected', 'active', 'disabled', 'showDivider', 'color', 'description',
   'scrollbar', 'surface',
   'borderColor', 'borderRadius',
   'borderWidth', 'borderWidthBlock', 'borderWidthBlockEnd', 'borderWidthBlockStart',

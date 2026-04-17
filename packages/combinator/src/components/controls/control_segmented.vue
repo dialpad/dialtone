@@ -16,6 +16,7 @@
     <dt-segmented-control-item
       v-for="option in options"
       :key="option.value"
+      v-dt-tooltip="option.resolved ?? undefined"
       :value="String(option.value)"
     >
       {{ option.label }}
@@ -27,6 +28,7 @@
 import { DtSegmentedControl, DtSegmentedControlItem, DtText } from '@dialpad/dialtone-vue';
 
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
+import { resolveTokenValue } from '@/src/lib/tokens';
 import { computed } from 'vue';
 
 const props = defineProps({
@@ -46,6 +48,14 @@ const props = defineProps({
     type: Function,
     default: (value) => value.toString(),
   },
+  tokenCategory: {
+    type: String,
+    default: undefined,
+  },
+  propValues: {
+    type: Object,
+    default: undefined,
+  },
 });
 
 const emit = defineEmits([VALUE_UPDATE_EVENT]);
@@ -54,6 +64,9 @@ const options = computed(() => {
   return props.validValues?.map(v => ({
     value: v,
     label: props.generateLabel(v),
+    resolved: props.tokenCategory
+      ? resolveTokenValue(props.tokenCategory, v, props.propValues)
+      : null,
   })) ?? [];
 });
 
