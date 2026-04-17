@@ -138,14 +138,16 @@ All size props accept two formats: percentage tokens (e.g., `"25p"` for 25% of t
 
 ```vue code-only
 <dt-box block-size="400" inline-size="100p">
-  <dt-resizable-panel
-    id="sidebar"
-    initial-size="30p"
-    user-min-size="20p"
-    user-max-size="50p"
-  >
-    Sidebar (min 20%, max 50%)
-  </dt-resizable-panel>
+  <dt-resizable>
+    <dt-resizable-panel
+      id="sidebar"
+      initial-size="30p"
+      user-min-size="20p"
+      user-max-size="50p"
+    >
+      Sidebar (min 20%, max 50%)
+    </dt-resizable-panel>
+  </dt-resizable>
 </dt-box>
 ```
 
@@ -226,21 +228,23 @@ For layouts where a panel starts hidden (e.g., a detail pane that opens when an 
 
 ```vue code-only
 <dt-box block-size="400" inline-size="100p">
-  <dt-resizable-panel
-    id="list"
-    :initial-size="isDetailOpen ? '30p' : '100p'"
-  >
-    List
-  </dt-resizable-panel>
-  <dt-resizable-handle />
-  <dt-resizable-panel
-    id="detail"
-    :initial-size="isDetailOpen ? '70p' : '0p'"
-    collapsible
-    :collapsed="!isDetailOpen"
-  >
-    Detail
-  </dt-resizable-panel>
+  <dt-resizable>
+    <dt-resizable-panel
+      id="list"
+      :initial-size="isDetailOpen ? '30p' : '100p'"
+    >
+      List
+    </dt-resizable-panel>
+    <dt-resizable-handle />
+    <dt-resizable-panel
+      id="detail"
+      :initial-size="isDetailOpen ? '70p' : '0p'"
+      collapsible
+      :collapsed="!isDetailOpen"
+    >
+      Detail
+    </dt-resizable-panel>
+  </dt-resizable>
 </dt-box>
 ```
 
