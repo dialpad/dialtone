@@ -122,11 +122,11 @@
 
 /* off-scale pixel-indexed exceptions (DLT-3330) — only route in layout context */
 .test-width-off-scale {
-  inline-size: var(--dt-size-100);          /* → layout-1px  (1px)  */
-  block-size: var(--dt-size-200);         /* → layout-2px  (2px)  */
+  inline-size: var(--dt-size-100);     /* → layout-1px  (1px)  */
+  block-size: var(--dt-size-200);      /* → layout-2px  (2px)  */
   min-inline-size: var(--dt-size-400); /* → layout-8px  (8px)  */
-  max-inline-size: var(--dt-size-525);      /* → layout-20px (20px) */
-  block-size: var(--dt-size-550);     /* → layout-24px (24px) */
+  max-inline-size: var(--dt-size-525); /* → layout-20px (20px) */
+  max-block-size: var(--dt-size-550);  /* → layout-24px (24px) */
 }
 
 /* height */
