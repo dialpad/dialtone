@@ -1633,6 +1633,26 @@ describe('DtRichTextEditor tests', () => {
       });
     });
 
+    describe('setLink method', () => {
+      const linkOptions = { class: 'd-link' };
+      const supportedProtocols = [/^https?:\/\//, /^ftp?:\/\//, /mailto:/];
+      const defaultPrefix = 'https://';
+
+      beforeEach(async () => {
+        await wrapper.setProps({ link: true, outputFormat: 'html' });
+        wrapper.vm.editor.commands.focus();
+      });
+
+      it.each([
+        ['https://example.com', 'Example', 'Example'],
+        ['https://example.com', '', 'https://example.com'],
+      ])('should render link correctly (url=%s, displayText=%s)', async (url, displayText, expectedSubstring) => {
+        wrapper.vm.setLink(url, displayText, linkOptions, supportedProtocols, defaultPrefix);
+        await wrapper.vm.$nextTick();
+        expect(wrapper.vm.getOutput()).toContain(expectedSubstring);
+      });
+    });
+
     describe('Link keyboard shortcut functionality', () => {
       describe('When Mod+K is pressed and link is enabled', () => {
         it('should emit edit-link event', async () => {
