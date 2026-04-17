@@ -194,7 +194,7 @@ describe('DtRadioGroup Tests', () => {
 
           await mountedRadioGroup.find(`[value="${MOCK_SELECTED_VALUE}"]`).trigger('change');
 
-          expect(wrapper.emitted('update:modelValue')).toBeFalsy();
+          expect(mountWrapper.emitted('update:modelValue')).toBeFalsy();
         });
       });
     });

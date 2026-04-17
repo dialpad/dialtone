@@ -748,7 +748,6 @@ describe('DtInput tests', () => {
         await nativeInput.trigger('input');
 
         expect(wrapper.emitted()['update:modelValue']).toBeUndefined();
-        expect(wrapper.emitted()['update:modelValue']).toBeUndefined();
       });
 
       it('should emit input and update:modelValue after composition ends', async () => {
@@ -757,7 +756,6 @@ describe('DtInput tests', () => {
         await nativeInput.trigger('input'); // Chrome: input fires before compositionend (blocked)
         await nativeInput.trigger('compositionend'); // compositionend emits the committed value
 
-        expect(wrapper.emitted()['update:modelValue'][0][0]).toBe('か');
         expect(wrapper.emitted()['update:modelValue'][0][0]).toBe('か');
       });
 
@@ -770,7 +768,6 @@ describe('DtInput tests', () => {
         nativeInput.element.dispatchEvent(new Event('input', { bubbles: true }));
         await wrapper.vm.$nextTick();
 
-        expect(wrapper.emitted()['update:modelValue']).toHaveLength(1);
         expect(wrapper.emitted()['update:modelValue']).toHaveLength(1);
         expect(wrapper.emitted()['update:modelValue'][0][0]).toBe('か');
       });
@@ -798,7 +795,6 @@ describe('DtInput tests', () => {
         await nativeTextarea.trigger('input');
 
         expect(wrapper.emitted()['update:modelValue']).toBeUndefined();
-        expect(wrapper.emitted()['update:modelValue']).toBeUndefined();
       });
 
       it('should emit input and update:modelValue after composition ends', async () => {
@@ -807,7 +803,6 @@ describe('DtInput tests', () => {
         await nativeTextarea.trigger('input'); // Chrome: input fires before compositionend (blocked)
         await nativeTextarea.trigger('compositionend'); // compositionend emits the committed value
 
-        expect(wrapper.emitted()['update:modelValue'][0][0]).toBe('か');
         expect(wrapper.emitted()['update:modelValue'][0][0]).toBe('か');
       });
 
@@ -818,7 +813,6 @@ describe('DtInput tests', () => {
         nativeTextarea.element.dispatchEvent(new Event('input', { bubbles: true }));
         await wrapper.vm.$nextTick();
 
-        expect(wrapper.emitted()['update:modelValue']).toHaveLength(1);
         expect(wrapper.emitted()['update:modelValue']).toHaveLength(1);
         expect(wrapper.emitted()['update:modelValue'][0][0]).toBe('か');
       });
