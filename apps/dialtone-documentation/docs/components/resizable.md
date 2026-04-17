@@ -310,27 +310,27 @@ When a fixed or absolutely positioned element (like a toolbar or header) overlap
 
 ```vue code-only
 <dt-box block-size="400" inline-size="100p">
-    <dt-resizable offset-element="#doc-demo-toolbar">
-      <dt-box
-        id="doc-demo-toolbar"
-        padding-inline="200"
-        surface="secondary-opaque"
-        border-width-block-end="100"
-        block-size="75"
-        class="d-ps-absolute d-t0 d-l0 d-r0 d-zi-base1 d-d-flex d-ai-center d-jc-center
-        "
-      >
-        Fixed Toolbar (48px)
-      </dt-box>
-      <dt-resizable-panel id="exo-left" initial-size="50p" class="d-bgc-success">
-        Left Panel
-      </dt-resizable-panel>
-      <dt-resizable-handle />
-      <dt-resizable-panel id="exo-right" initial-size="50p" class="d-bgc-warning-subtle">
-        Right Panel
-      </dt-resizable-panel>
-    </dt-resizable>
-  </dt-box>
+  <dt-resizable offset-element="#doc-demo-toolbar">
+    <dt-box
+      id="doc-demo-toolbar"
+      padding-inline="200"
+      surface="secondary-opaque"
+      border-width-block-end="100"
+      block-size="75"
+      class="d-ps-absolute d-t0 d-l0 d-r0 d-zi-base1 d-d-flex d-ai-center d-jc-center
+      "
+    >
+      Fixed Toolbar (48px)
+    </dt-box>
+    <dt-resizable-panel id="exo-left" initial-size="50p" class="d-bgc-success">
+      Left Panel
+    </dt-resizable-panel>
+    <dt-resizable-handle />
+    <dt-resizable-panel id="exo-right" initial-size="50p" class="d-bgc-warning-subtle">
+      Right Panel
+    </dt-resizable-panel>
+  </dt-resizable>
+</dt-box>
 ```
 
 Alternatively, use `offset-amount` for an explicit pixel value without measuring an element. If both are provided, `offset-amount` takes precedence.
