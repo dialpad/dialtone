@@ -12,6 +12,14 @@ const cache = new Map();
 
 let measureEl = null;
 
+/**
+ * Clears the token resolution cache. Call on theme change so resolved
+ * values (which depend on live CSS custom properties) are re-read.
+ */
+export function clearTokenCache () {
+  cache.clear();
+}
+
 function getMeasureElement () {
   if (!measureEl) {
     measureEl = document.createElement('div');

@@ -158,8 +158,9 @@ import DtcRenderer from './renderer/renderer.vue';
 import { enumerateGroups } from '@/src/lib/utils';
 import { shouldExclude } from '@/src/lib/exclusion_rules';
 import { buildDependencyMap, shouldHideProp } from '@/src/lib/prop_dependencies';
-import { computed, nextTick, onErrorCaptured, reactive, ref } from 'vue';
+import { computed, nextTick, onErrorCaptured, reactive, ref, watch } from 'vue';
 import { cachedRef, computedModel } from '@/src/lib/utils_vue';
+import { clearTokenCache } from '@/src/lib/tokens';
 import { getComponentInfo } from '@/src/lib/info';
 import {
   SETTINGS_BACKGROUND_KEY,
@@ -350,6 +351,8 @@ const settings = computedModel(
     }
   },
 );
+
+watch(() => settings.value.root.theme, clearTokenCache);
 
 function updateVariant (e) {
   _presetChanging = true;
