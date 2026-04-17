@@ -61,7 +61,7 @@ keywords: ["definition list", "key value", "dl", "d-description-list", "DtDescri
     :items="items"
     direction="row"
     :termClass="[`d-fc-critical`, `d-fw-bold`]"
-    :descriptionClass="[`d-fc-success`]"
+    :descriptionClass="[`d-fc-positive`]"
   />
 </div>
 ```

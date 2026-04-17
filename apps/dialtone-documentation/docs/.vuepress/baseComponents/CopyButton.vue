@@ -10,7 +10,7 @@
       <dt-icon
         :name="copied ? 'check' : 'copy'"
         :size="iconSize"
-        :class="{ 'd-fc-success': copied }"
+        :class="{ 'd-fc-positive': copied }"
       />
     </template>
     <template v-if="copied">

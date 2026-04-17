@@ -237,7 +237,7 @@ vueCode='
         Katie Rodriguez
       </dt-text>
       <dt-stack direction="row" gap="75">
-        <dt-text tone="success">
+        <dt-text tone="positive">
           Available
         </dt-text>
         <dt-text>&bull;</dt-text>

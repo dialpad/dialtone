@@ -42,7 +42,7 @@ Text opacity CSS Utilities won't be inherited by its children. A font-color util
 
   </div>
   <div>
-<dt-stack direction="row" gap="100" class="d-fc-success d-mbe-100">
+<dt-stack direction="row" gap="100" class="d-fc-positive d-mbe-100">
   <dt-icon name="check-circle" size="400" />
   <strong>Apply each utility class to the same element</strong>
 </dt-stack>

@@ -451,7 +451,6 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
 
 ### Contact List, with custom selector
 
-
 ```vue demo
 <dt-stack role="list" v-dt-focusgroup="{ axis: 'vertical', loop: false, selector: '[data-custom-attribute-name]' }" aria-label="Contacts" class="d-w-400">
   <dt-hovercard placement="right">
@@ -1187,7 +1186,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
       <div class="d-d-grid d-g-400 d-g-cols2">
         <dt-stack gap="100">
           <dt-text as="h3" kind="headline" :size="300">Default</dt-text>
-          <dt-notice kind="success" title="Success" :show-action="false">
+          <dt-notice kind="positive" title="Success" hide-action>
             Action completed successfully.
           </dt-notice>
           <dt-notice kind="warning" title="Warning" :show-action="false">
@@ -1205,7 +1204,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
           <dt-notice kind="info" title="Important info" :important="true" :show-action="false">
             Visually prominent variant with filled background.
           </dt-notice>
-          <dt-notice kind="success" title="Important success" :important="true" :show-action="false">
+          <dt-notice kind="positive" title="Important success" :important="true" hide-action>
             Visually prominent variant with filled background.
           </dt-notice>
           <dt-notice kind="warning" title="Important warning" :important="true" :show-action="false">
@@ -1235,7 +1234,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
         <dt-banner kind="info" title="Info banner" class="d-ps-relative d-zi-base">
           Banners are more prominent than notices.
         </dt-banner>
-        <dt-banner kind="success" title="Success banner" class="d-ps-relative d-zi-base">
+        <dt-banner kind="positive" title="Success banner" class="d-ps-relative d-zi-base">
           Action completed successfully.
         </dt-banner>
         <dt-banner kind="warning" title="Warning banner" class="d-ps-relative d-zi-base">
@@ -1250,7 +1249,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
         <dt-banner kind="info" title="Info banner" :important="true" class="d-ps-relative d-zi-base">
           Banners are more prominent than notices.
         </dt-banner>
-        <dt-banner kind="success" title="Success banner" :important="true" class="d-ps-relative d-zi-base">
+        <dt-banner kind="positive" title="Success banner" :important="true" class="d-ps-relative d-zi-base">
           Action completed successfully.
         </dt-banner>
         <dt-banner kind="warning" title="Warning banner" :important="true" class="d-ps-relative d-zi-base">
@@ -1269,7 +1268,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
         <dt-stack gap="100">
           <dt-text as="h3" kind="headline" :size="300">Default</dt-text>
           <dt-toast :open="true" kind="info" title="Info toast" message="Informational message." :duration="null" />
-          <dt-toast :open="true" kind="success" title="Success toast" message="Action completed." :duration="null" />
+          <dt-toast :open="true" kind="positive" title="Success toast" message="Action completed." :duration="null" />
           <dt-toast :open="true" kind="warning" title="Warning toast" message="Review before proceeding." :duration="null" />
           <dt-toast :open="true" kind="critical" title="Critical toast" message="Something went wrong." :duration="null" />
           <dt-toast :open="true" kind="base" title="Base toast" message="Neutral notification." :duration="null" />
@@ -1277,7 +1276,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
         <dt-stack gap="100">
           <dt-text as="h3" kind="headline" :size="300">Important</dt-text>
           <dt-toast :open="true" kind="info" title="Info toast" message="Informational message." :important="true" :duration="null" />
-          <dt-toast :open="true" kind="success" title="Success toast" message="Action completed." :important="true" :duration="null" />
+          <dt-toast :open="true" kind="positive" title="Success toast" message="Action completed." :important="true" :duration="null" />
           <dt-toast :open="true" kind="warning" title="Warning toast" message="Review before proceeding." :important="true" :duration="null" />
           <dt-toast :open="true" kind="critical" title="Critical toast" message="Something went wrong." :important="true" :duration="null" />
           <dt-toast :open="true" kind="base" title="Base toast" message="Neutral notification." :important="true" :duration="null" />
@@ -1344,237 +1343,318 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
       </dt-stack>
     </dt-stack>
   </dt-stack>
+
+<!-- ============================================================ -->
+<!-- DtBox V1 Demos                                                -->
+<!-- ============================================================ -->
+
+<dt-stack gap="400">
+  <dt-text as="h1" kind="headline" :size="600">
+    DtBox V1
+  </dt-text>
+
+  <!-- Basic padding + surface combos -->
   <dt-stack gap="200">
-    <dt-text as="h1" kind="headline" :size="600">Traveling Indicator Stress Test</dt-text>
-    <!-- 1. ALL FOUR VARIANTS SIDE BY SIDE -->
-    <dt-text as="h2" kind="headline" :size="400">1. All four variants</dt-text>
-    <dt-stack gap="400">
-      <dt-stack gap="100">
-        <dt-text as="p" kind="label" :size="200">Default (::after underline)</dt-text>
-        <example-tabs />
-      </dt-stack>
-      <dt-stack gap="100">
-        <dt-text as="p" kind="label" :size="200">Outlined</dt-text>
-        <example-tabs outlined />
-      </dt-stack>
-      <dt-stack gap="100">
-        <dt-text as="p" kind="label" :size="200">Muted + Outlined</dt-text>
-        <example-tabs kind="muted" outlined />
-      </dt-stack>
-      <dt-stack gap="100">
-        <dt-text as="p" kind="label" :size="200">Muted Active (background)</dt-text>
-        <example-tabs kind="muted" />
-      </dt-stack>
-    </dt-stack>
-    <!-- 2. ALL SIZES -->
-    <dt-text as="h2" kind="headline" :size="400">2. All sizes (width variance stress)</dt-text>
-    <dt-stack gap="400">
-      <dt-stack gap="100">
-        <dt-text as="p" kind="label" :size="200">Size 100 (xs)</dt-text>
-        <example-tabs size="100" />
-      </dt-stack>
-      <dt-stack gap="100">
-        <dt-text as="p" kind="label" :size="200">Size 200 (sm)</dt-text>
-        <example-tabs size="200" />
-      </dt-stack>
-      <dt-stack gap="100">
-        <dt-text as="p" kind="label" :size="200">Size 300 (md) — default</dt-text>
-        <example-tabs size="300" />
-      </dt-stack>
-      <dt-stack gap="100">
-        <dt-text as="p" kind="label" :size="200">Size 400 (lg)</dt-text>
-        <example-tabs size="400" />
-      </dt-stack>
-      <dt-stack gap="100">
-        <dt-text as="p" kind="label" :size="200">Size 500 (xl)</dt-text>
-        <example-tabs size="500" />
-      </dt-stack>
-    </dt-stack>
-    <!-- 3. SPREAD MODES -->
-    <dt-text as="h2" kind="headline" :size="400">3. Spread modes (indicator width morphing)</dt-text>
-    <dt-stack gap="400">
-      <dt-stack gap="100">
-        <dt-text as="p" kind="label" :size="200">spread="none" (default)</dt-text>
-        <example-tabs />
-      </dt-stack>
-      <dt-stack gap="100">
-        <dt-text as="p" kind="label" :size="200">spread="grow"</dt-text>
-        <example-tabs spread="grow" />
-      </dt-stack>
-      <dt-stack gap="100">
-        <dt-text as="p" kind="label" :size="200">spread="equal"</dt-text>
-        <example-tabs spread="equal" />
-      </dt-stack>
-    </dt-stack>
-    <!-- 4. VERTICAL ORIENTATION -->
-    <dt-text as="h2" kind="headline" :size="400">4. Vertical orientation</dt-text>
-    <dt-stack gap="400" direction="row">
-      <dt-stack gap="100" class="d-fl1">
-        <dt-text as="p" kind="label" :size="200">Default vertical</dt-text>
-        <example-tabs orientation="vertical" />
-      </dt-stack>
-      <dt-stack gap="100" class="d-fl1">
-        <dt-text as="p" kind="label" :size="200">Outlined vertical</dt-text>
-        <example-tabs orientation="vertical" outlined />
-      </dt-stack>
-      <dt-stack gap="100" class="d-fl1">
-        <dt-text as="p" kind="label" :size="200">Muted vertical</dt-text>
-        <example-tabs orientation="vertical" kind="muted" />
-      </dt-stack>
-    </dt-stack>
-    <!-- 5. BORDERLESS -->
-    <dt-text as="h2" kind="headline" :size="400">5. Borderless</dt-text>
-    <dt-stack gap="400">
-      <dt-stack gap="100">
-        <dt-text as="p" kind="label" :size="200">Borderless default</dt-text>
-        <example-tabs borderless />
-      </dt-stack>
-      <dt-stack gap="100">
-        <dt-text as="p" kind="label" :size="200">Borderless outlined</dt-text>
-        <example-tabs borderless outlined />
-      </dt-stack>
-    </dt-stack>
-    <!-- 6. AUTO ACTIVATION (keyboard rapid-fire) -->
-    <dt-text as="h2" kind="headline" :size="400">6. Auto activation mode (arrow keys should NOT animate)</dt-text>
-    <dt-stack gap="400">
-      <dt-stack gap="100">
-        <dt-text as="p" kind="label" :size="200">Auto mode — click should animate, arrows should snap</dt-text>
-        <example-tabs activation-mode="auto" />
-      </dt-stack>
-      <dt-stack gap="100">
-        <dt-text as="p" kind="label" :size="200">Auto mode + outlined</dt-text>
-        <example-tabs activation-mode="auto" outlined />
-      </dt-stack>
-    </dt-stack>
-    <!-- 7. DISABLED -->
-    <dt-text as="h2" kind="headline" :size="400">7. Disabled (should do nothing)</dt-text>
-    <dt-stack gap="100">
-      <dt-text as="p" kind="label" :size="200">Whole group disabled</dt-text>
-      <example-tabs disabled />
-    </dt-stack>
-    <!-- 8. showIndicatorTransition=false -->
-    <dt-text as="h2" kind="headline" :size="400">8. showIndicatorTransition=false (animation suppressed)</dt-text>
-    <dt-stack gap="100">
-      <dt-text as="p" kind="label" :size="200">Should switch instantly, no slide</dt-text>
-      <dt-tab-group :show-indicator-transition="false">
-        <template #tabs>
-          <dt-tab id="s1" panel-id="s2" selected>First</dt-tab>
-          <dt-tab id="s3" panel-id="s4">Second</dt-tab>
-          <dt-tab id="s5" panel-id="s6">Third</dt-tab>
-        </template>
-        <dt-tab-panel id="s2" tab-id="s1"><dt-text>Panel 1</dt-text></dt-tab-panel>
-        <dt-tab-panel id="s4" tab-id="s3"><dt-text>Panel 2</dt-text></dt-tab-panel>
-        <dt-tab-panel id="s6" tab-id="s5"><dt-text>Panel 3</dt-text></dt-tab-panel>
-      </dt-tab-group>
-    </dt-stack>
-    <!-- 9. MULTIPLE INSTANCES (conflict test) -->
-    <dt-text as="h2" kind="headline" :size="400">9. Multiple instances on same page (no conflicts)</dt-text>
-    <dt-text as="p" kind="body" :size="200" tone="muted">Click tabs in one group while another is mid-animation. They should not interfere.</dt-text>
-    <dt-stack gap="400" direction="row">
-      <dt-stack gap="100" class="d-fl1">
-        <dt-text as="p" kind="label" :size="200">Group A</dt-text>
-        <example-tabs />
-      </dt-stack>
-      <dt-stack gap="100" class="d-fl1">
-        <dt-text as="p" kind="label" :size="200">Group B</dt-text>
-        <example-tabs outlined />
-      </dt-stack>
-      <dt-stack gap="100" class="d-fl1">
-        <dt-text as="p" kind="label" :size="200">Group C</dt-text>
-        <example-tabs kind="muted" />
-      </dt-stack>
-    </dt-stack>
-    <!-- 10. EXTREME WIDTH VARIANCE -->
-    <dt-text as="h2" kind="headline" :size="400">10. Extreme tab width differences (scale morphing stress)</dt-text>
-    <dt-stack gap="100">
-      <dt-text as="p" kind="label" :size="200">Short vs very long labels — watch the scale animation</dt-text>
-      <dt-tab-group>
-        <template #tabs>
-          <dt-tab id="w1" panel-id="w2" selected>Medium label</dt-tab>
-          <dt-tab id="w3" panel-id="w4">Extremely long tab label for stressy stressful testing</dt-tab>
-          <dt-tab id="w7" panel-id="w8">Shrt</dt-tab>
-        </template>
-        <dt-tab-panel id="w2" tab-id="w1"><dt-text>Panel A</dt-text></dt-tab-panel>
-        <dt-tab-panel id="w4" tab-id="w3"><dt-text>Panel Long</dt-text></dt-tab-panel>
-        <dt-tab-panel id="w8" tab-id="w7"><dt-text>Panel B</dt-text></dt-tab-panel>
-      </dt-tab-group>
-      <dt-tab-group kind="muted">
-        <template #tabs>
-          <dt-tab id="w1" panel-id="w2" selected>Medium label</dt-tab>
-          <dt-tab id="w3" panel-id="w4">Extremely long tab label for stressy stressful testing</dt-tab>
-          <dt-tab id="w7" panel-id="w8">Shrt</dt-tab>
-        </template>
-        <dt-tab-panel id="w2" tab-id="w1"><dt-text>Panel A</dt-text></dt-tab-panel>
-        <dt-tab-panel id="w4" tab-id="w3"><dt-text>Panel Long</dt-text></dt-tab-panel>
-        <dt-tab-panel id="w8" tab-id="w7"><dt-text>Panel B</dt-text></dt-tab-panel>
-      </dt-tab-group>
-    </dt-stack>
-    <!-- 11. MANY TABS (overflow / wrapping) -->
-    <dt-text as="h2" kind="headline" :size="400">11. Many tabs (potential wrapping)</dt-text>
-    <dt-stack gap="100">
-      <dt-text as="p" kind="label" :size="200">Does the animation break when tabs wrap to a second row?</dt-text>
-      <dt-tab-group>
-        <template #tabs>
-          <dt-tab id="m1" panel-id="m2" selected>Alpha</dt-tab>
-          <dt-tab id="m3" panel-id="m4">Bravo</dt-tab>
-          <dt-tab id="m5" panel-id="m6">Charlie</dt-tab>
-          <dt-tab id="m7" panel-id="m8">Delta</dt-tab>
-          <dt-tab id="m9" panel-id="m10">Echo</dt-tab>
-          <dt-tab id="m11" panel-id="m12">Foxtrot</dt-tab>
-          <dt-tab id="m13" panel-id="m14">Golf</dt-tab>
-          <dt-tab id="m15" panel-id="m16">Hotel</dt-tab>
-          <dt-tab id="m17" panel-id="m18">India</dt-tab>
-          <dt-tab id="m19" panel-id="m20">Juliet</dt-tab>
-        </template>
-        <dt-tab-panel id="m2" tab-id="m1"><dt-text>Panel Alpha</dt-text></dt-tab-panel>
-        <dt-tab-panel id="m4" tab-id="m3"><dt-text>Panel Bravo</dt-text></dt-tab-panel>
-        <dt-tab-panel id="m6" tab-id="m5"><dt-text>Panel Charlie</dt-text></dt-tab-panel>
-        <dt-tab-panel id="m8" tab-id="m7"><dt-text>Panel Delta</dt-text></dt-tab-panel>
-        <dt-tab-panel id="m10" tab-id="m9"><dt-text>Panel Echo</dt-text></dt-tab-panel>
-        <dt-tab-panel id="m12" tab-id="m11"><dt-text>Panel Foxtrot</dt-text></dt-tab-panel>
-        <dt-tab-panel id="m14" tab-id="m13"><dt-text>Panel Golf</dt-text></dt-tab-panel>
-        <dt-tab-panel id="m16" tab-id="m15"><dt-text>Panel Hotel</dt-text></dt-tab-panel>
-        <dt-tab-panel id="m18" tab-id="m17"><dt-text>Panel India</dt-text></dt-tab-panel>
-        <dt-tab-panel id="m20" tab-id="m19"><dt-text>Panel Juliet</dt-text></dt-tab-panel>
-      </dt-tab-group>
-    </dt-stack>
-    <!-- 12. RTL (logical direction) -->
-    <dt-text as="h2" kind="headline" :size="400">12. RTL direction</dt-text>
-    <dt-stack gap="100">
-      <dt-text as="p" kind="label" :size="200">Does the indicator slide the correct direction in RTL?</dt-text>
-      <div dir="rtl">
-        <example-tabs />
-      </div>
-    </dt-stack>
-    <!-- 13. INVERTED (dark on light) -->
-    <dt-text as="h2" kind="headline" :size="400">13. Inverted</dt-text>
-    <dt-stack gap="100">
-      <example-tabs v-dt-mode:invert class="d-p16 d-bar8 d-bgc-primary" />
-    </dt-stack>
-    <!-- 14. RAPID CLICK STRESS -->
-    <dt-text as="h2" kind="headline" :size="400">14. Rapid click test</dt-text>
-    <dt-stack gap="100">
-      <dt-text as="p" kind="label" :size="200">Click tabs as fast as possible — animation should cancel cleanly, no stuck states</dt-text>
-      <example-tabs />
-    </dt-stack>
-    <!-- 15. COMBINED EXTREMES -->
-    <dt-text as="h2" kind="headline" :size="400">15. Combined extremes</dt-text>
-    <dt-stack gap="400">
-      <dt-stack gap="100">
-        <dt-text as="p" kind="label" :size="200">Outlined + spread=equal + size 500</dt-text>
-        <example-tabs outlined spread="equal" size="500" />
-      </dt-stack>
-      <dt-stack gap="100">
-        <dt-text as="p" kind="label" :size="200">Muted + vertical + borderless</dt-text>
-        <example-tabs kind="muted" orientation="vertical" borderless />
-      </dt-stack>
-      <dt-stack gap="100">
-        <dt-text as="p" kind="label" :size="200">Muted + outlined + spread=grow + size 100</dt-text>
-        <example-tabs kind="muted" outlined spread="grow" size="100" />
-      </dt-stack>
+    <dt-text as="h2" kind="headline" :size="500">
+      Padding + Surface Combos
+    </dt-text>
+
+```vue demo
+<dt-stack gap="200">
+  <dt-box padding="200" surface="secondary">Box demo</dt-box>
+  <dt-box padding="400" surface="moderate">Box demo</dt-box>
+  <dt-box padding="100" surface="positive-subtle">Box demo</dt-box>
+  <dt-box padding="100" surface="critical-subtle">Box demo</dt-box>
+  <dt-box padding="200" surface="brand">Box demo</dt-box>
+</dt-stack>
+```
+
+  </dt-stack>
+
+  <!-- as prop variants -->
+  <dt-stack gap="200">
+    <dt-text as="h2" kind="headline" :size="500">
+      <code>as</code> Prop Variants
+    </dt-text>
+    <dt-text as="p" kind="body" :size="200" tone="secondary">
+      DtBox renders as different HTML elements via the <code>as</code> prop.
+      Inspect elements to verify the rendered tag.
+    </dt-text>
+
+```vue demo
+<dt-stack gap="200">
+  <dt-box as="div" padding="100" surface="secondary">Box demo</dt-box>
+  <dt-box as="section" padding="100" surface="secondary">Box demo</dt-box>
+  <dt-box as="header" padding="100" surface="secondary">Box demo</dt-box>
+  <dt-box as="nav" padding="100" surface="secondary">Box demo</dt-box>
+  <dt-box as="article" padding="100" surface="secondary">Box demo</dt-box>
+</dt-stack>
+```
+
+  </dt-stack>
+
+  <!-- Padding cascade demo -->
+  <dt-stack gap="200">
+    <dt-text as="h2" kind="headline" :size="500">
+      Padding Cascade
+    </dt-text>
+    <dt-text as="p" kind="body" :size="200" tone="secondary">
+      Specific axes override shorthand: <code>paddingInline</code> overrides <code>padding</code> for left/right,
+      <code>paddingBlockStart</code> overrides <code>paddingBlock</code> for top.
+    </dt-text>
+
+```vue demo
+<dt-stack gap="200">
+  <dt-box padding="100" surface="moderate">Box demo</dt-box>
+  <dt-box padding="100" padding-inline="400" surface="moderate">Box demo</dt-box>
+  <dt-box padding="100" padding-block="400" surface="moderate">Box demo</dt-box>
+  <dt-box padding="100" padding-inline="200" padding-inline-start="500" surface="moderate">Box demo</dt-box>
+  <dt-box padding="100" padding-block="200" padding-block-start="500" surface="moderate">Box demo</dt-box>
+</dt-stack>
+```
+
+  </dt-stack>
+
+  <!-- Nested DtBox inheritance isolation -->
+  <dt-stack gap="200">
+    <dt-text as="h2" kind="headline" :size="500">
+      Nested Inheritance Isolation
+    </dt-text>
+    <dt-text as="p" kind="body" :size="200" tone="secondary">
+      <code>@property</code> registrations prevent custom property inheritance.
+      Inner boxes should NOT inherit outer padding or surface.
+    </dt-text>
+
+```vue demo
+<dt-box padding="400" surface="brand">
+  <dt-stack gap="100">
+    <div>Outer box</div>
+    <dt-box padding="100" surface="secondary">Inner box (should not inherit outer)</dt-box>
+    <dt-box>Inner box, no props (should have 0 padding, transparent surface)</dt-box>
+  </dt-stack>
+</dt-box>
+```
+
+  </dt-stack>
+
+  <!-- Surface opaque variants -->
+  <dt-stack gap="200">
+    <dt-text as="h2" kind="headline" :size="500">
+      Surface Opaque Variants
+    </dt-text>
+    <dt-text as="p" kind="body" :size="200" tone="secondary">
+      Opaque surfaces use solid colors instead of alpha transparency,
+      preventing bleed-through on layered backgrounds.
+    </dt-text>
+
+```vue demo
+<dt-box padding="200" surface="brand">
+  <dt-stack gap="100">
+    <div>Parent surface="brand"</div>
+    <dt-stack direction="row" gap="100">
+      <dt-box padding="100" surface="primary">Box demo</dt-box>
+      <dt-box padding="100" surface="primary-opaque">Box demo</dt-box>
+      <dt-box padding="100" surface="secondary">Box demo</dt-box>
+      <dt-box padding="100" surface="secondary-opaque">Box demo</dt-box>
     </dt-stack>
   </dt-stack>
+</dt-box>
+```
+
+  </dt-stack>
+
+  <!-- Utility class escape hatch -->
+  <dt-stack gap="200">
+    <dt-text as="h2" kind="headline" :size="500">
+      Utility Class Escape Hatch
+    </dt-text>
+    <dt-text as="p" kind="body" :size="200" tone="secondary">
+      DtBox accepts standard class attributes for one-off styling that falls
+      outside its prop API. Utility classes compose naturally with the component.
+    </dt-text>
+
+```vue demo
+<dt-box padding="200" surface="moderate" class="d-bar8 d-bs-sm">
+  Box demo
+</dt-box>
+```
+
+```vue demo
+<div style="position: relative; height: 120px; overflow: auto; border: 1px solid var(--dt-color-border-default);">
+  <dt-box
+    padding="100"
+    surface="secondary"
+    class="d-ps-sticky d-t0"
+  >
+    <dt-text kind="body" :size="200">Box demo</dt-text>
+  </dt-box>
+  <dt-box padding="200">
+    <dt-text kind="body" :size="200">Scroll content below the sticky box...</dt-text>
+    <div class="d-h-400"></div>
+    <dt-text kind="body" :size="200">...end of scroll content.</dt-text>
+  </dt-box>
+</div>
+```
+
+  </dt-stack>
 </dt-stack>
-<!-- ================================================================== -->
-<!-- TRAVELING INDICATOR STRESS TEST — remove before merging            -->
-<!-- ================================================================== -->
+<!-- ============================================================ -->
+<!-- DtBox demos (V1–V4)                                          -->
+<!-- ============================================================ -->
+
+<dt-stack gap="400">
+  <dt-text as="h2" kind="headline" size="lg">DtBox</dt-text>
+
+  <dt-text kind="headline" size="md">Basic padding + surface</dt-text>
+
+```vue demo
+<dt-stack direction="row" gap="200">
+  <dt-box padding="200" surface="primary" border-width="100">Box demo</dt-box>
+  <dt-box padding="300" surface="moderate" border-width="100">Box demo</dt-box>
+  <dt-box padding="400" surface="brand-subtle" border-width="100">Box demo</dt-box>
+</dt-stack>
+```
+
+  <dt-text kind="headline" size="md">Padding cascade</dt-text>
+
+```vue demo
+<dt-stack direction="row" gap="200">
+  <dt-box padding="400" surface="secondary" border-width="100">Box demo</dt-box>
+  <dt-box padding="400" padding-inline="100" surface="secondary" border-width="100">Box demo</dt-box>
+  <dt-box padding="400" padding-inline="100" padding-inline-start="0" surface="secondary" border-width="100">Box demo</dt-box>
+</dt-stack>
+```
+
+  <dt-text kind="headline" size="md">Polymorphic as</dt-text>
+
+```vue demo
+<dt-stack gap="100">
+  <dt-box as="section" padding="200" surface="info-subtle" border-width="100">Box demo</dt-box>
+  <dt-box as="nav" padding="200" surface="warning-subtle" border-width="100">Box demo</dt-box>
+  <dt-box as="header" padding="200" surface="positive-subtle" border-width="100">Box demo</dt-box>
+</dt-stack>
+```
+
+  <dt-text kind="headline" size="md">Nested inheritance isolation</dt-text>
+
+```vue demo
+<dt-box padding="500" surface="brand-subtle" border-width="100">
+  <dt-stack gap="200">
+    <div>Outer box</div>
+    <dt-box padding="200" surface="primary" border-width="100">Inner box (independent)</dt-box>
+    <dt-box surface="critical-subtle" border-width="100">Inner box, no padding (should be 0)</dt-box>
+  </dt-stack>
+</dt-box>
+```
+
+  <dt-text kind="headline" size="md">Utility class escape hatch</dt-text>
+
+```vue demo
+<dt-box padding="200" surface="primary" border-width="100" border-radius="200" class="d-ps-sticky d-t0">
+  Box demo
+</dt-box>
+```
+
+  <dt-text kind="headline" size="md">Card compositions</dt-text>
+
+```vue demo
+<dt-stack direction="row" gap="200">
+  <dt-box padding="300" surface="primary" border-width="100" border-radius="300" shadow="card">Box demo</dt-box>
+  <dt-box padding="300" surface="primary" border-width="100" border-radius="400" shadow="medium">Box demo</dt-box>
+  <dt-box padding="300" surface="brand-subtle" border-color="brand" border-width="100" border-radius="200">Box demo</dt-box>
+</dt-stack>
+```
+
+  <dt-text kind="headline" size="md">Shadow scale</dt-text>
+
+```vue demo
+<dt-stack direction="row" gap="300">
+  <dt-box padding="200" surface="primary" border-radius="200" shadow="small">Box demo</dt-box>
+  <dt-box padding="200" surface="primary" border-radius="200" shadow="medium">Box demo</dt-box>
+  <dt-box padding="200" surface="primary" border-radius="200" shadow="large">Box demo</dt-box>
+  <dt-box padding="200" surface="primary" border-radius="200" shadow="extra-large">Box demo</dt-box>
+  <dt-box padding="200" surface="primary" border-radius="200" shadow="card">Box demo</dt-box>
+</dt-stack>
+```
+
+  <dt-text kind="headline" size="md">Border radius variants</dt-text>
+
+```vue demo
+<dt-stack direction="row" gap="200" align="center">
+  <dt-box padding="100" surface="moderate" border-width="100" border-radius="0">0 long label lorem <br> second line</dt-box>
+  <dt-box padding="100" surface="moderate" border-width="100" border-radius="200">200 long label lorem <br> second line</dt-box>
+  <dt-box padding="100" surface="moderate" border-width="100" border-radius="400">400 long label lorem <br> second line</dt-box>
+  <dt-box padding="100" surface="moderate" border-width="100" border-radius="600">600 long label lorem <br> second line</dt-box>
+  <dt-box padding="100" surface="moderate" border-width="100" border-radius="pill">pill long label lorem</dt-box>
+  <dt-box padding="100" surface="moderate" border-width="100" border-radius="circle">circle</dt-box>
+</dt-stack>
+```
+
+  <dt-text kind="headline" size="md">No border props = invisible border</dt-text>
+
+```vue demo
+<dt-stack direction="row" gap="200">
+  <dt-box padding="200" surface="secondary">Box demo (no border props)</dt-box>
+  <dt-box padding="200" surface="secondary" border-width="100">Box demo (with border props)</dt-box>
+</dt-stack>
+```
+
+  <dt-text kind="headline" size="md">Layout token sizing</dt-text>
+
+```vue demo
+<dt-stack direction="row" gap="200">
+  <dt-box padding="200" surface="secondary" border-width="100" inline-size="300">Box demo</dt-box>
+  <dt-box padding="200" surface="secondary" border-width="100" inline-size="500">Box demo</dt-box>
+</dt-stack>
+```
+
+  <dt-text kind="headline" size="md">Class escape hatch for arbitrary sizing</dt-text>
+
+```vue demo
+<dt-stack gap="200">
+  <dt-box padding="200" surface="secondary" border-width="100" class="d-wmx-464">Box demo</dt-box>
+  <dt-box padding="200" surface="secondary" border-width="100" class="d-hmn-164">Box demo</dt-box>
+</dt-stack>
+```
+
+  <dt-text kind="headline" size="md">Overflow + borderRadius clipping</dt-text>
+
+```vue demo
+<dt-box surface="secondary" border-width="100" border-radius="400" overflow="hidden" inline-size="500" max-block-size="200">
+  <div class="d-p-200 d-bgc-brand-subtle d-h-400">
+    Tall content clipped by overflow="hidden" and borderRadius="400"
+  </div>
+</dt-box>
+```
+
+  <dt-text kind="headline" size="md">Scrollbar integration</dt-text>
+
+```vue demo
+<dt-box padding="200" surface="secondary" border-width="100" border-radius="200" scrollbar="never" max-block-size="300">
+  <dt-stack gap="100">
+    <div v-for="i in 20" :key="i">Scrollable item {{ i }}</div>
+  </dt-stack>
+</dt-box>
+```
+
+```vue demo
+<dt-box padding="200" surface="secondary" border-width="100" border-radius="200" scrollbar="leave" max-block-size="300">
+  <dt-stack gap="100">
+    <div v-for="i in 20" :key="i">Scrollable item {{ i }}</div>
+  </dt-stack>
+</dt-box>
+```
+
+```vue demo
+<dt-box padding="200" surface="secondary" border-width="100" border-radius="200" overflow="auto" max-block-size="300">
+  <dt-stack gap="100">
+    <div v-for="i in 20" :key="i">Scrollable item {{ i }} (native scrollbar)</div>
+  </dt-stack>
+</dt-box>
+```
+
+</dt-stack>
+
+</dt-stack>
+
+<div class="d-h-1200"></div>

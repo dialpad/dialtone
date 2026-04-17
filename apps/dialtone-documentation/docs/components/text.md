@@ -4,6 +4,7 @@ description: Consistent typography styling through semantic text kinds and sizes
 status: ready
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-text--default
 image: assets/images/components/text.png
+keywords: ["dt-box", "DtBox", "typography", "size", "tone", "font", "font size", "font weight", "line height", "density", "strength", "primitive"]
 ---
 
 <component-combinator component-name="DtText" />
@@ -104,7 +105,7 @@ The `numeric` prop applies styles that ensure that each number is set with consi
     <dt-text>(886) 555-8888</dt-text>
   </dt-stack>
   <dt-stack>
-    <dt-text kind="label" :size="200" tone="success">With numeric</dt-text>
+    <dt-text kind="label" :size="200" tone="positive">With numeric</dt-text>
     <dt-text numeric>(913) 555-3170</dt-text>
     <dt-text numeric>(908) 555-1111</dt-text>
     <dt-text numeric>(805) 555-8413</dt-text>
@@ -161,8 +162,8 @@ Use `tone` to declare the text's tone, which will map to a foreground color. By 
   <dt-text tone="muted">muted</dt-text>
   <dt-text tone="disabled">disabled</dt-text>
   <dt-text tone="placeholder">placeholder</dt-text>
-  <dt-text tone="success">success</dt-text>
-  <dt-text tone="success-strong">success-strong</dt-text>
+  <dt-text tone="positive">positive</dt-text>
+  <dt-text tone="positive-strong">positive-strong</dt-text>
   <dt-text tone="warning">warning</dt-text>
   <dt-text tone="critical">critical</dt-text>
   <dt-text tone="critical-strong">critical-strong</dt-text>
@@ -380,7 +381,7 @@ Text box trim will only affect elements with block or inline-block styled contex
         Katie Rodriguez
       </dt-text>
       <dt-stack direction="row" gap="350">
-        <dt-text tone="success">
+        <dt-text tone="positive">
           Available
         </dt-text>
         <dt-text>&bull;</dt-text>
