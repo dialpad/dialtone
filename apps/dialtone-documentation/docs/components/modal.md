@@ -55,7 +55,7 @@ Although highly versatile, this doesn't mean modal dialogs are fit for all purpo
 - To ensure maximum compatibility, all `a` tags must have an `href` attribute. Also, any elements which you don't want to be focusable (but might be focusable by default) must have their `tabindex` set to `-1`.
 - Focus should always begin on the first actionable element within the dialog. This could be an OK button, or the first field in the form. An X button in the top right corner should be last in the tab order even though it may be visually above the other elements.
 - Check out the "Focus management" section of the following [MDN Dialog document](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/dialog_role#focus_management) if you'd like to know more.
-- Use `aria-labelledby` on its root element to associate a title to the modal to announce it to assistive technology. The value of aria-labelledby is to the `id` value of its heading element (e.g. `h2`).
+- Use `aria-labelledby` on its root element to associate a title to the modal to announce it to assistive technology. The value of `aria-labelledby` should match the `id` of its heading element (e.g. `h2`).
 - Dismissing the modal returns focus to the originating element that spawned the modal’s display.
 
 <component-accessible-table component-name="modal"></component-accessible-table>
@@ -74,11 +74,6 @@ Although highly versatile, this doesn't mean modal dialogs are fit for all purpo
 <code-example-tabs
 :htmlCode='() => ({ $el: { outerHTML: $refs.baseExample.innerHTML } })'
 vueCode='
-<dt-button
-  @click="isOpen = !isOpen"
->
-  Click to open
-</dt-button>
 <dt-modal
   title="Example title"
   :show="isOpen"
@@ -104,6 +99,11 @@ vueCode='
     </dt-button>
   </template>
 </dt-modal>
+<dt-button
+  @click="isOpen = !isOpen"
+>
+  Click to open
+</dt-button>
 '
 />
 
@@ -121,11 +121,6 @@ This is the default behavior that adds the scroll automatically in the modal con
 <code-example-tabs
 :htmlCode='() => ({ $el: { outerHTML: $refs.fixedExample.innerHTML } })'
 vueCode='
-<dt-button
-  @click="isOpen = !isOpen"
->
-  Click to open
-</dt-button>
 <dt-modal
   title="Example title"
   :show="isOpen"
@@ -152,6 +147,11 @@ vueCode='
     </dt-button>
   </template>
 </dt-modal>
+<dt-button
+  @click="isOpen = !isOpen"
+>
+  Click to open
+</dt-button>
 '
 />
 
@@ -169,11 +169,6 @@ A modal style for destructive or irreversible actions.
 <code-example-tabs
 :htmlCode='() => ({ $el: { outerHTML: $refs.dangerExample.innerHTML } })'
 vueCode='
-<dt-button
-  @click="isOpen = !isOpen"
->
-  Click to open
-</dt-button>
 <dt-modal
   title="Example title"
   :show="isOpen"
@@ -201,6 +196,11 @@ vueCode='
     </dt-button>
   </template>
 </dt-modal>
+<dt-button
+  @click="isOpen = !isOpen"
+>
+  Click to open
+</dt-button>
 '
 />
 
@@ -218,11 +218,6 @@ To make this modal take up as much of the screen as possible.
 <code-example-tabs
 :htmlCode='() => ({ $el: { outerHTML: $refs.fullExample.innerHTML } })'
 vueCode='
-<dt-button
-  @click="isOpen = !isOpen"
->
-  Click to open
-</dt-button>
 <dt-modal
   title="Example title"
   :show="isOpen"
@@ -249,6 +244,11 @@ vueCode='
     </dt-button>
   </template>
 </dt-modal>
+<dt-button
+  @click="isOpen = !isOpen"
+>
+  Click to open
+</dt-button>
 '
 />
 
@@ -274,11 +274,6 @@ When there is a need of more context information regarding the content of the Mo
 <code-example-tabs
 :htmlCode='() => ({ $el: { outerHTML: $refs.bannerExample.innerHTML } })'
 vueCode='
-<dt-button
-  @click="isOpen = !isOpen"
->
-  Click to open
-</dt-button>
 <dt-modal
   title="Example title"
   :show="isOpen"
@@ -306,6 +301,11 @@ vueCode='
     </dt-button>
   </template>
 </dt-modal>
+<dt-button
+  @click="isOpen = !isOpen"
+>
+  Click to open
+</dt-button>
 '
 />
 
@@ -318,14 +318,8 @@ In addition to the footer, custom elements can be inserted into the header and b
 **Please note:** supplied header or body slots will take the place of any provided "title" or "copy" text, respectively.
 
 <code-well-header>
-  <dt-button
-    @click="openModal"
-  >
-    Click to open
-  </dt-button>
   <dt-modal
     :show="isOpen"
-    modal-class="d-mt0"
     @update:show="updateShow"
   >
     <template #header>
@@ -337,6 +331,12 @@ In addition to the footer, custom elements can be inserted into the header and b
       <h2>Custom content</h2>
     </dt-stack>
   </dt-modal>
+  <dt-button
+    @click="openModal"
+    class="d-mt0"
+  >
+    Click to open
+  </dt-button>
 </code-well-header>
 
 <code-example-tabs
@@ -354,6 +354,11 @@ vueCode='
     <h2>Custom content</h2>
   </dt-stack>
 </dt-modal>
+<dt-button
+  @click="isOpen = !isOpen"
+>
+  Click to open
+</dt-button>
 '
 />
 

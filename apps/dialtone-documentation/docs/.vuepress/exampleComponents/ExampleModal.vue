@@ -1,9 +1,4 @@
 <template>
-  <dt-button
-    @click="isOpen = !isOpen"
-  >
-    Click to open
-  </dt-button>
   <dt-modal
     title="Example title"
     :show="isOpen"
@@ -13,7 +8,6 @@
     :fixed-header-footer="fixedHeaderFooter"
     :size="size"
     :copy="copy"
-    modal-class="d-mt0"
     @update:show="isOpen = $event"
   >
     <template
@@ -38,6 +32,12 @@
       </dt-button>
     </template>
   </dt-modal>
+  <dt-button
+    class="d-mt0"
+    @click="isOpen = !isOpen"
+  >
+    Click to open
+  </dt-button>
 </template>
 
 <script>
