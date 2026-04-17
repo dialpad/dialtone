@@ -15,6 +15,13 @@
 //  • VISIBILITY
 //  • Z-INDEX
 //
+//  @@  @PROPERTY REGISTRATIONS
+//  ----------------------------------------------------------------------------
+//  Register `--fixed-value` as non-inheriting so an ancestor setting it does
+//  not bleed into descendants using `.d-*100p-calc` position utilities.
+//  Universal syntax with no initial-value preserves the `8px` fallback.
+@property --fixed-value { syntax: "*"; inherits: false; }
+
 //  ============================================================================
 //  $   BOX-SIZING
 //  ============================================================================

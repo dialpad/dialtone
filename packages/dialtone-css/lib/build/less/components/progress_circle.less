@@ -4,6 +4,14 @@
 //
 //  https://dialtone.dialpad.com/components/progress-circle
 
+//  @@  @PROPERTY REGISTRATIONS
+//  ----------------------------------------------------------------------------
+//  Register size/color modifier vars as non-inheriting so an ancestor
+//  progress-circle (or unrelated setter) doesn't bleed into nested instances.
+@property --progress-size { syntax: "*"; inherits: false; }
+
+@property --progress-color { syntax: "*"; inherits: false; }
+
 @layer dialtone.components {
 .d-progress-circle {
   --progress-size: var(--dt-icon-size-500);

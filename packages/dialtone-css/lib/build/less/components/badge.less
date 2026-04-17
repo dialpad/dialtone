@@ -13,6 +13,13 @@
 //  • TYPE
 //  • SLOTS
 //
+//  @@  @PROPERTY REGISTRATIONS
+//  ----------------------------------------------------------------------------
+//  `--badge-decorative-color` is set by `.d-badge--decorate-*` modifiers;
+//  register as non-inheriting so a decorated ancestor doesn't bleed into
+//  nested badges.
+@property --badge-decorative-color { syntax: "*"; inherits: false; }
+
 //  ============================================================================
 //  $   BASE STYLE
 //  ----------------------------------------------------------------------------
