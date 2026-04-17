@@ -1,3 +1,20 @@
+# [9.180.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.179.0...dialtone/v9.180.0) (2026-04-17)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DP-179947 use URL as display text when inserting link without text ([#1202](https://github.com/dialpad/dialtone/issues/1202)) ([30f2504](https://github.com/dialpad/dialtone/commit/30f25049c22132f3b0a35a91ded852d1f2d07781))
+
+
+### Documentation
+
+* **Modal:** NO-JIRA fix code examples ([#1207](https://github.com/dialpad/dialtone/issues/1207)) ([aedd4a1](https://github.com/dialpad/dialtone/commit/aedd4a107ba8cc06fd9aeb51c72f847bb97fceef))
+
+
+### Features
+
+* **Eslint Plugin Dialtone:** DLT-3314 add deprecated-dialtone-component rule ([#1200](https://github.com/dialpad/dialtone/issues/1200)) ([c73b7ee](https://github.com/dialpad/dialtone/commit/c73b7ee32e15296adbe99181ea8e1910795eb62a))
+
 # [9.179.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.178.0...dialtone/v9.179.0) (2026-04-14)
 
 
