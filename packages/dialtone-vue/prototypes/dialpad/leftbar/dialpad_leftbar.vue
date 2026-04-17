@@ -47,7 +47,7 @@
         </template>
         <template #action>
           <dt-button
-            class="d-fc-success d-bar-pill d-h24"
+            class="d-fc-positive d-bar-pill d-h24"
             kind="muted"
             importance="clear"
             :size="100"

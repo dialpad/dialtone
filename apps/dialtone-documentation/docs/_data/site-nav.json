@@ -254,6 +254,10 @@
                 "link": "/components/banner.html"
               },
               {
+                "text": "Box",
+                "link": "/components/box.html"
+              },
+              {
                 "text": "Breadcrumbs",
                 "link": "/components/breadcrumbs.html"
               },

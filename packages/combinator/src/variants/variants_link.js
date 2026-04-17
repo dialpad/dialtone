@@ -1,6 +1,12 @@
-/* eslint-disable max-len */
+ 
  
 export default {
+  defaults: {
+    props: {
+      tone: { tokenCategory: 'color:d-link--:color' },
+    },
+  },
+
   default: {
     slots: {
       default: {

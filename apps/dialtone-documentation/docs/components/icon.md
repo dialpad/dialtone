@@ -80,7 +80,7 @@ The icon's color inherits from the parent's foreground color.
 ```
 
 ```html
-<dt-stack class="d-fc-success" direction="row" gap="300">
+<dt-stack class="d-fc-positive" direction="row" gap="300">
   <dt-icon-settings size="300" />
   <dt-text>Settings</dt-text>
 </dt-stack>
@@ -101,8 +101,8 @@ When setting the color of an icon take these into consideration:
       <dt-text kind="body" truncate class="d-w100p d-wmx102">Ai Contact Center</dt-text>
     </dt-stack>
     <dt-stack direction="row" as="section" gap="300">
-      <dt-icon class="d-fc-success" name="bell" size="200" ariaLabel="Bell Icon" />
-      <dt-text kind="body" :size="200" tone="success">Available</dt-text>
+      <dt-icon class="d-fc-positive" name="bell" size="200" ariaLabel="Bell Icon" />
+      <dt-text kind="body" :size="200" tone="positive">Available</dt-text>
     </dt-stack>
   </dt-stack>
   </dt-stack>
@@ -121,7 +121,7 @@ When setting the color of an icon take these into consideration:
   </dt-stack>
   <dt-stack direction="row" as="section" gap="300">
     <dt-icon class="d-fc-critical" name="bell" size="200" ariaLabel="Bell Icon" />
-    <dt-text kind="body" :size="200" tone="success">Available</dt-text>
+    <dt-text kind="body" :size="200" tone="positive">Available</dt-text>
   </dt-stack>
   </dt-stack>
   </dt-stack>
@@ -214,7 +214,7 @@ Dialtone provides eight sizes for icons. Each of the sizes represents the width 
   ];
 
   const iconColors = [
-    { value: 'd-fc-success', label: 'd-fc-success' },
+    { value: 'd-fc-positive', label: 'd-fc-positive' },
     { value: 'd-fc-critical', label: 'd-fc-critical' },
     { value: 'd-fc-primary', label: 'd-fc-primary' },
   ];
@@ -226,7 +226,7 @@ Dialtone provides eight sizes for icons. Each of the sizes represents the width 
 
   const selectedIcon = ref('settings');
   const selectedSize = ref('500');
-  const selectedColor = ref('d-fc-success');
+  const selectedColor = ref('d-fc-positive');
   const selectedDirection = ref('row');
 
 </script>

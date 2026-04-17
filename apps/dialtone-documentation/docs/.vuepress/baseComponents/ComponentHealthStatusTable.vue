@@ -2,7 +2,7 @@
   <dt-stack gap="200" direction="row" class="d-bgc-secondary d-p-200 d-py-100 d-bar8 d-ba d-bc-subtle d-my-200">
     <dt-stack direction="row" gap="100">
       <dt-icon
-        class="d-fc-success"
+        class="d-fc-positive"
         name="check-circle"
         size="300"
       />
@@ -114,7 +114,7 @@ const statusIcon = {
   'N/A': 'box',
 };
 const statusColor = {
-  Ready: 'd-fc-success',
+  Ready: 'd-fc-positive',
   'In progress': 'd-fc-warning',
   Planned: 'd-fc-critical',
   'N/A': 'd-fc-muted',

@@ -66,7 +66,7 @@ export default {
     },
 
     /**
-     * Value of the toggle
+     * Value of the toggle, aka checked state.
      * @model modelValue
      * @values true, false, 'mixed'
      */

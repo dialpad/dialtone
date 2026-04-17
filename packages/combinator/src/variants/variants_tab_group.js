@@ -6,9 +6,6 @@ export default {
   default: {
     props: {
       selected: { initialValue: 'panel-1' },
-      tabListClass: {
-        initialValue: 'd-w-600',
-      },
     },
     slots: {
       tabs: {
@@ -23,9 +20,6 @@ export default {
   'spread tabs: equal': {
     props: {
       selected: { initialValue: 'panel-1' },
-      tabListClass: {
-        initialValue: 'd-w-600',
-      },
       spread: {
         initialValue: 'equal',
       },
@@ -43,9 +37,6 @@ export default {
   'spread tabs: grow': {
     props: {
       selected: { initialValue: 'panel-1' },
-      tabListClass: {
-        initialValue: 'd-w-600',
-      },
       spread: {
         initialValue: 'grow',
       },
@@ -65,9 +56,6 @@ export default {
       kind: { initialValue: 'muted' },
       selected: { initialValue: 'panel-1' },
       size: { initialValue: '200' },
-      tabListClass: {
-        initialValue: 'd-w-600',
-      },
     },
     slots: {
       tabs: {
@@ -85,9 +73,6 @@ export default {
       selected: { initialValue: 'panel-1' },
       size: { initialValue: '100' },
       borderless: { initialValue: true },
-      tabListClass: {
-        initialValue: 'd-w-600',
-      },
     },
     slots: {
       tabs: {
@@ -120,9 +105,6 @@ export default {
   'with icons': {
     props: {
       selected: { initialValue: 'panel-1' },
-      tabListClass: {
-        initialValue: 'd-w-600',
-      },
     },
     slots: {
       tabs: {
@@ -169,9 +151,6 @@ export default {
   'with trailing slot': {
     props: {
       selected: { initialValue: 'panel-1' },
-      tabListClass: {
-        initialValue: 'd-w-600',
-      },
     },
     slots: {
       tabs: {

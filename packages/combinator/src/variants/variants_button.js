@@ -1,5 +1,12 @@
-/* eslint-disable max-len */
+
 export default {
+  defaults: {
+    props: {
+      kind: { tokenCategory: 'color:d-btn--:color' },
+      linkKind: { tokenCategory: 'color:d-link--:color' },
+    },
+  },
+
   exclusions: [
     {
       when: { link: true },
@@ -8,8 +15,36 @@ export default {
       },
     },
     {
+      when: { kind: 'muted' },
+      disableValues: { props: { importance: ['primary'] } },
+    },
+    {
+      when: { importance: 'primary' },
+      disableValues: { props: { kind: ['muted'] } },
+    },
+    {
       when: { kind: 'unstyled' },
       hide: { props: ['importance'] },
+    },
+    {
+      when: { circle: true, kind: 'default' },
+      disableValues: { props: { importance: ['primary'] } },
+    },
+    {
+      when: { circle: true, kind: 'critical' },
+      disableValues: { props: { importance: ['outlined'] } },
+    },
+    {
+      when: { circle: true, kind: 'muted' },
+      disableValues: { props: { importance: ['primary'] } },
+    },
+    {
+      when: { circle: true, importance: 'primary' },
+      disableValues: { props: { kind: ['default', 'muted'] } },
+    },
+    {
+      when: { circle: true, importance: 'outlined' },
+      disableValues: { props: { kind: ['critical'] } },
     },
     {
       when: { href: v => !!v },

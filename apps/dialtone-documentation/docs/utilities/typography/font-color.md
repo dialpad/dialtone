@@ -20,8 +20,8 @@ Use [DtText's](/components/text.html#tone) `tone` prop to declare the text's ton
   <dt-text tone="muted">muted</dt-text>
   <dt-text tone="disabled">disabled</dt-text>
   <dt-text tone="placeholder">placeholder</dt-text>
-  <dt-text tone="success">success</dt-text>
-  <dt-text tone="success-strong">success-strong</dt-text>
+  <dt-text tone="positive">positive</dt-text>
+  <dt-text tone="positive-strong">positive-strong</dt-text>
   <dt-text tone="warning">warning</dt-text>
   <dt-text tone="critical">critical</dt-text>
   <dt-text tone="critical-strong">critical-strong</dt-text>
@@ -46,7 +46,7 @@ Use `d-fc-{color}` to change an element's text color.
 Use `h:d-fc-{color}` to change an element's text color `:hover` state.
 
 ```vue demo
-<dt-button kind="unstyled" class="d-fc-critical h:d-fc-success">Hover over me</dt-button>
+<dt-button kind="unstyled" class="d-fc-critical h:d-fc-positive">Hover over me</dt-button>
 ```
 
 ## Focus
@@ -54,7 +54,7 @@ Use `h:d-fc-{color}` to change an element's text color `:hover` state.
 Use `f:d-fc-{color}` to change an element's text color `:focus` and `:focus-within` state.
 
 ```vue demo
-<dt-button kind="unstyled" class="d-fc-critical f:d-fc-success">Focus me</dt-button>
+<dt-button kind="unstyled" class="d-fc-critical f:d-fc-positive">Focus me</dt-button>
 ```
 
 ## Focus Visible
@@ -62,7 +62,7 @@ Use `f:d-fc-{color}` to change an element's text color `:focus` and `:focus-with
 Use `fv:d-fc-{color}` to change an element's text color on `:focus-visible` state [only when focused by keyboard].
 
 ```vue demo
-<dt-button kind="unstyled" class="d-fc-critical fv:d-fc-success">Keyboard focus me</dt-button>
+<dt-button kind="unstyled" class="d-fc-critical fv:d-fc-positive">Keyboard focus me</dt-button>
 ```
 
 ## Inverted
@@ -79,8 +79,8 @@ Use `fv:d-fc-{color}` to change an element's text color on `:focus-visible` stat
     <dt-text tone="muted">muted</dt-text>
     <dt-text tone="disabled">disabled</dt-text>
     <dt-text tone="placeholder">placeholder</dt-text>
-    <dt-text tone="success">success</dt-text>
-    <dt-text tone="success-strong">success-strong</dt-text>
+    <dt-text tone="positive">positive</dt-text>
+    <dt-text tone="positive-strong">positive-strong</dt-text>
     <dt-text tone="warning">warning</dt-text>
     <dt-text tone="critical">critical</dt-text>
     <dt-text tone="critical-strong">critical-strong</dt-text>
@@ -92,8 +92,8 @@ Use `fv:d-fc-{color}` to change an element's text color on `:focus-visible` stat
     <dt-text v-dt-mode:invert tone="muted">muted</dt-text>
     <dt-text v-dt-mode:invert tone="disabled">disabled</dt-text>
     <dt-text v-dt-mode:invert tone="placeholder">placeholder</dt-text>
-    <dt-text v-dt-mode:invert tone="success">success</dt-text>
-    <dt-text v-dt-mode:invert tone="success-strong">success-strong</dt-text>
+    <dt-text v-dt-mode:invert tone="positive">positive</dt-text>
+    <dt-text v-dt-mode:invert tone="positive-strong">positive-strong</dt-text>
     <dt-text v-dt-mode:invert tone="warning">warning</dt-text>
     <dt-text v-dt-mode:invert tone="critical">critical</dt-text>
     <dt-text v-dt-mode:invert tone="critical-strong">critical-strong</dt-text>
@@ -110,8 +110,8 @@ vueCode='
   <dt-text v-dt-mode:invert tone="muted">muted</dt-text>
   <dt-text v-dt-mode:invert tone="disabled">disabled</dt-text>
   <dt-text v-dt-mode:invert tone="placeholder">placeholder</dt-text>
-  <dt-text v-dt-mode:invert tone="success">success</dt-text>
-  <dt-text v-dt-mode:invert tone="success-strong">success-strong</dt-text>
+  <dt-text v-dt-mode:invert tone="positive">positive</dt-text>
+  <dt-text v-dt-mode:invert tone="positive-strong">positive-strong</dt-text>
   <dt-text v-dt-mode:invert tone="warning">warning</dt-text>
   <dt-text v-dt-mode:invert tone="critical">critical</dt-text>
   <dt-text v-dt-mode:invert tone="critical-strong">critical-strong</dt-text>

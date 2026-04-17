@@ -1,6 +1,12 @@
  
 
 export default {
+  defaults: {
+    props: {
+      kind: { tokenCategory: 'color:d-notice--:backgroundColor' },
+    },
+  },
+
   default: {
     slots: {
       default: {
