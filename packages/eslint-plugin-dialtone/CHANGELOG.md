@@ -1,3 +1,10 @@
+# [1.12.0](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.11.2...eslint-plugin-dialtone/v1.12.0) (2026-04-17)
+
+
+### Features
+
+* **Eslint Plugin Dialtone:** DLT-3314 add deprecated-dialtone-component rule ([#1200](https://github.com/dialpad/dialtone/issues/1200)) ([c73b7ee](https://github.com/dialpad/dialtone/commit/c73b7ee32e15296adbe99181ea8e1910795eb62a))
+
 ## [1.11.2](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.11.1...eslint-plugin-dialtone/v1.11.2) (2026-03-19)
 
 
