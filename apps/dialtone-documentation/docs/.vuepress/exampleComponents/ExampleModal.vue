@@ -5,7 +5,6 @@
     :kind="kind"
     :banner-title="bannerTitle"
     :banner-kind="bannerKind"
-    :fixed-header-footer="fixedHeaderFooter"
     :size="size"
     :copy="copy"
     @update:show="isOpen = $event"
@@ -63,11 +62,6 @@ export default {
     bannerTitle: {
       type: String,
       default: '',
-    },
-
-    fixedHeaderFooter: {
-      type: Boolean,
-      default: true,
     },
 
     size: {
