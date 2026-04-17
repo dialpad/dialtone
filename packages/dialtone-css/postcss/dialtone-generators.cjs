@@ -98,29 +98,32 @@ const generatedRules = {
   paddingBottom: [],
   paddingLeft: [],
   // Token-stop-based classes (d-h-{stop}, d-w-{stop}, d-size-{stop})
+  // Multi-axis shorthand (tokenSize) must precede single-axis so d-h-*/d-w-* win over d-size-*.
+  tokenSize: [],
   tokenFixedHeight: [],
   tokenMaxHeight: [],
   tokenMinHeight: [],
   tokenFixedWidth: [],
   tokenMinWidth: [],
   tokenMaxWidth: [],
-  tokenSize: [],
   // Token-stop-based margin classes (d-m-{stop}, d-mt-{stop}/d-mbs-{stop}, etc.)
+  // Multi-direction shorthands (All, Horizontal, Vertical) must precede single-side so
+  // d-mt-*/d-mbs-* win over d-my-*, etc.
   tokenMarginAll: [],
+  tokenMarginHorizontal: [],
+  tokenMarginVertical: [],
   tokenMarginTop: [],
   tokenMarginRight: [],
   tokenMarginBottom: [],
   tokenMarginLeft: [],
-  tokenMarginHorizontal: [],
-  tokenMarginVertical: [],
   // Token-stop-based padding classes (d-p-{stop}, d-pt-{stop}/d-pbs-{stop}, etc.)
   tokenPaddingAll: [],
+  tokenPaddingHorizontal: [],
+  tokenPaddingVertical: [],
   tokenPaddingTop: [],
   tokenPaddingRight: [],
   tokenPaddingBottom: [],
   tokenPaddingLeft: [],
-  tokenPaddingHorizontal: [],
-  tokenPaddingVertical: [],
   // Token-stop-based gap classes (d-g-{stop}, d-rg-{stop}, d-cg-{stop})
   tokenGap: [],
   tokenRowGap: [],
