@@ -27,6 +27,13 @@
   <div :style="{ height: 'var(--dt-size-800)' }">size-800 on height → layout-200</div>
   <div :style="{ maxWidth: 'var(--dt-size-1000)' }">size-1000 on max-width → layout-800</div>
 
+  <!-- Off-scale pixel-indexed exceptions (DLT-3330) — layout context only -->
+  <div :style="{ width: 'var(--dt-size-100)' }">size-100 on width → layout-1px</div>
+  <div :style="{ height: 'var(--dt-size-200)' }">size-200 on height → layout-2px</div>
+  <div :style="{ minInlineSize: 'var(--dt-size-400)' }">size-400 on min-inline-size → layout-8px</div>
+  <div :style="{ maxWidth: 'var(--dt-size-525)' }">size-525 on max-width → layout-20px</div>
+  <div :style="{ blockSize: 'var(--dt-size-550)' }">size-550 on block-size → layout-24px</div>
+
   <!-- Skip: already-migrated tokens -->
   <div :style="{ width: 'var(--dt-layout-100)' }">already layout-100</div>
   <p :style="{ padding: 'var(--dt-spacing-100)' }">already spacing-100</p>
@@ -111,6 +118,15 @@
   inline-size: var(--dt-size-1000);   /* → layout-800  (512px) */
   inline-size: var(--dt-size-1050);   /* → layout-1200 (768px) */
   inline-size: var(--dt-size-1100);   /* → layout-1600 (1024px) */
+}
+
+/* off-scale pixel-indexed exceptions (DLT-3330) — only route in layout context */
+.test-width-off-scale {
+  inline-size: var(--dt-size-100);          /* → layout-1px  (1px)  */
+  block-size: var(--dt-size-200);         /* → layout-2px  (2px)  */
+  min-inline-size: var(--dt-size-400); /* → layout-8px  (8px)  */
+  max-inline-size: var(--dt-size-525);      /* → layout-20px (20px) */
+  block-size: var(--dt-size-550);     /* → layout-24px (24px) */
 }
 
 /* height */

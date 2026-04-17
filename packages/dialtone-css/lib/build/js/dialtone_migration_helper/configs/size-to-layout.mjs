@@ -22,6 +22,14 @@ const SPACING_MAP = {
 // For tokens used in layout context (width, height, etc.)
 // Exact matches are labeled; nearest-neighbor approximations note the delta.
 const LAYOUT_MAP = {
+  // Off-scale pixel-indexed exceptions (DLT-3330) — exact matches via Npx stops.
+  // Old --dt-size-N stop at these pixel values has no scale-indexed layout equivalent;
+  // route to the off-scale Npx token in layout-property context.
+  100: '1px',   // 1px
+  200: '2px',   // 2px
+  400: '8px',   // 8px
+  525: '20px',  // 20px
+  550: '24px',  // 24px
   // Exact scale matches
   500: '25',    // 16px
   600: '50',    // 32px
@@ -144,6 +152,8 @@ export default {
       'eg. padding: var(--dt-size-400) → padding: var(--dt-spacing-100)\n' +
     '- Layout properties (width, height, min/max, flex-basis) → var(--dt-layout-*)\n\t' +
       'eg. width: var(--dt-size-700) → width: var(--dt-layout-100)\n' +
+    '- Off-scale layout exceptions: width: var(--dt-size-400) → width: var(--dt-layout-8px)\n\t' +
+      '(covers 100/200/400/525/550 stops → 1px/2px/8px/20px/24px in layout context only)\n' +
     '- Percentage tokens → var(--dt-layout-*-percent)\n\t' +
       'eg. var(--dt-size-100-percent) → var(--dt-layout-100-percent)\n' +
     '- Tokens exceeding the layout scale (>1024px) are converted to raw rem with a TODO comment.\n' +

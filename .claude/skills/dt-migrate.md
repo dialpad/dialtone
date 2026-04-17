@@ -11,6 +11,8 @@ description: "Run Dialtone migration tools for token and utility renames. Use '/
 | `color-stops` | Renames irregular color stops (250, 350, 425, etc.) to standard 12-stop scale | `npx dialtone-migration-helper` → "color stops" |
 | `base-to-semantic` | Replaces base color utilities and CSS tokens with semantic equivalents | `npx dialtone-migration-helper` → "base to semantic" |
 | `space-to-size` | Renames `var(--dt-space-*)` to `var(--dt-size-*)` | `npx dialtone-migration-helper` → "space to size" |
+| `size-to-layout` | Routes `var(--dt-size-*)` to `--dt-spacing-*` / `--dt-layout-*` / `--dt-size-border-*` / `--dt-size-radius-*` based on CSS property context. Covers off-scale pixel-indexed exceptions (1/2/8/20/24 px → `--dt-layout-Npx`) in layout context | `npx dialtone-migration-helper` → "size to layout" |
+| `utility-class-to-token-stops` | Rewrites legacy pixel-indexed utility class names (`d-h16`, `d-p8`) to token-stop-based names (`d-h-25`, `d-p-100`). Covers off-scale pixel-indexed exceptions (`d-w1` → `d-w-1px`, `d-h24` → `d-h-24px`, etc.) | `npx dialtone-migration-helper` → "utility class to token stops" |
 | `hsl-to-oklch` | Migrates consumer HSL channel variable patterns to OKLCH relative color syntax or plain `var()` | `npx dialtone-migration-helper` → "hsl to oklch" |
 
 ## Usage
