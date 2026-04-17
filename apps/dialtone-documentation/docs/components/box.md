@@ -183,7 +183,7 @@ Maps to Dialtone's **layout token scale** (`--dt-layout-*`). Supports both fixed
 <dt-stack direction="row" gap="200">
   <dt-box padding="200" surface="moderate" border-radius="300" inline-size="300">300 (192px)</dt-box>
   <dt-box padding="200" surface="moderate" border-radius="300" inline-size="500">500 (320px)</dt-box>
-  <dt-box padding="200" surface="moderate" border-radius="300" inline-size="50-percent">50-percent</dt-box>
+  <dt-box padding="200" surface="moderate" border-radius="300" inline-size="50p">50p</dt-box>
 </dt-stack>
 ```
 

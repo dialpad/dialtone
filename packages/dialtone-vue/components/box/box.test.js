@@ -304,6 +304,18 @@ describe('DtBox', () => {
     expect(wrapper.classes()).toContain('d-box--bls-500');
   });
 
+  it('applies inlineSize modifier class for percent layout token', () => {
+    const wrapper = mountComponent({ inlineSize: '100p' });
+
+    expect(wrapper.classes()).toContain('d-box--is-100p');
+  });
+
+  it('applies blockSize modifier class for percent layout token', () => {
+    const wrapper = mountComponent({ blockSize: '50p' });
+
+    expect(wrapper.classes()).toContain('d-box--bls-50p');
+  });
+
   it('applies maxInlineSize modifier class for layout token', () => {
     const wrapper = mountComponent({ maxInlineSize: '800' });
 
