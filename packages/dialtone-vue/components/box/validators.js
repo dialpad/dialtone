@@ -11,13 +11,30 @@ import {
   DT_BOX_SCROLLBAR_VALUES,
 } from './box_constants.js';
 
-export const asValidator = (value) => DT_BOX_AS_VALUES.includes(value);
-export const spacingValidator = (value) => DT_BOX_SPACING_VALUES.includes(String(value));
-export const surfaceValidator = (value) => DT_BOX_SURFACE_VALUES.includes(value);
-export const borderColorValidator = (value) => DT_BOX_BORDER_COLOR_VALUES.includes(value);
-export const borderWidthValidator = (value) => DT_BOX_BORDER_WIDTH_VALUES.includes(String(value));
-export const borderRadiusValidator = (value) => DT_BOX_BORDER_RADIUS_VALUES.includes(String(value));
-export const shadowValidator = (value) => DT_BOX_SHADOW_VALUES.includes(value);
-export const layoutValidator = (value) => DT_BOX_LAYOUT_VALUES.includes(String(value));
-export const overflowValidator = (value) => DT_BOX_OVERFLOW_VALUES.includes(value);
-export const scrollbarValidator = (value) => value === true || DT_BOX_SCROLLBAR_VALUES.includes(value);
+// Vue's default validator warning omits the invalid value and allowed list.
+// This factory adds a dev-only console.warn to fill that gap.
+function listValidator (list, extras = []) {
+  return (value) => {
+    if (extras.includes(value)) return true;
+    if (list.includes(String(value))) return true;
+    if (process.env.NODE_ENV !== 'production') {
+      const allValid = [...extras.map(String), ...list].join(', ');
+       
+      console.warn(
+        `[DtBox] Invalid prop value: "${value}". Valid values: ${allValid}`,
+      );
+    }
+    return false;
+  };
+}
+
+export const asValidator = listValidator(DT_BOX_AS_VALUES);
+export const spacingValidator = listValidator(DT_BOX_SPACING_VALUES);
+export const surfaceValidator = listValidator(DT_BOX_SURFACE_VALUES);
+export const borderColorValidator = listValidator(DT_BOX_BORDER_COLOR_VALUES);
+export const borderWidthValidator = listValidator(DT_BOX_BORDER_WIDTH_VALUES);
+export const borderRadiusValidator = listValidator(DT_BOX_BORDER_RADIUS_VALUES);
+export const shadowValidator = listValidator(DT_BOX_SHADOW_VALUES);
+export const layoutValidator = listValidator(DT_BOX_LAYOUT_VALUES);
+export const overflowValidator = listValidator(DT_BOX_OVERFLOW_VALUES);
+export const scrollbarValidator = listValidator(DT_BOX_SCROLLBAR_VALUES, [true]);

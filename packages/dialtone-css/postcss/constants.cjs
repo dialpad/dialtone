@@ -256,11 +256,12 @@ module.exports = {
   // These drive the new d-h-{stop}, d-w-{stop}, d-size-{stop}, d-m-{stop}, d-p-{stop} classes
   // where the class name = the token stop number
 
-  // All layout token stops (25–1600, base-64 scale)
+  // Bare integers (25, 50, …) are scale-indexed on the 64px base: value_in_px = stop × 64 / 100.
+  // '*px' strings are pixel-indexed off-scale exceptions (dt-layout-1px … dt-layout-24px).
   LAYOUT_STOPS: [
-    25, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500,
-    550, 600, 650, 700, 750, 800, 850, 900, 950, 1000, 1050, 1100, 1150,
-    1200, 1250, 1300, 1350, 1400, 1450, 1500, 1550, 1600,
+    '1px', '2px', '8px', 25, '20px', '24px', 50, 75, 100, 125, 150, 175, 200,
+    250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950,
+    1000, 1050, 1100, 1150, 1200, 1250, 1300, 1350, 1400, 1450, 1500, 1550, 1600,
   ],
 
   // All spacing token stops (0–800, base-8 scale)

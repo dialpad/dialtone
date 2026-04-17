@@ -2,10 +2,10 @@
  * @fileoverview Tests for deprecated-pixel-utility-classes rule.
  * @author Joshua Hynes
  */
-"use strict";
+'use strict';
 
-const rule = require("../../../lib/rules/deprecated-pixel-utility-classes"),
-  RuleTester = require("eslint").RuleTester;
+const rule = require('../../../lib/rules/deprecated-pixel-utility-classes'),
+  RuleTester = require('eslint').RuleTester;
 
 const ruleTester = new RuleTester({
   languageOptions: {
@@ -15,7 +15,7 @@ const ruleTester = new RuleTester({
   },
 });
 
-ruleTester.run("deprecated-pixel-utility-classes", rule, {
+ruleTester.run('deprecated-pixel-utility-classes', rule, {
   valid: [
     // New token-stop-based classes (with hyphen)
     { code: '<template><div class="d-h-25 d-w-100" /></template>' },
@@ -25,6 +25,9 @@ ruleTester.run("deprecated-pixel-utility-classes", rule, {
     { code: '<template><div class="d-t-100 d-l-200" /></template>' },
     { code: '<template><div class="d-mt-n100" /></template>' },
     { code: '<template><div class="d-size-100" /></template>' },
+    // Off-scale pixel-indexed classes from DLT-3330 (not deprecated — these are the target)
+    { code: '<template><div class="d-w-1px d-h-2px d-size-8px" /></template>' },
+    { code: '<template><div class="d-wmn-20px d-hmx-24px" /></template>' },
     // Percentage classes (not deprecated)
     { code: '<template><div class="d-h100p d-w50p" /></template>' },
     // Viewport classes (not deprecated)
@@ -91,6 +94,27 @@ ruleTester.run("deprecated-pixel-utility-classes", rule, {
     // Mixed old and new (still reports because old class is present)
     {
       code: '<template><div class="d-h-25 d-p8" /></template>',
+      errors: [{ messageId: 'deprecatedPixelClass' }],
+    },
+    // Off-scale small-value sizing classes (DLT-3330 targets these for migration to d-*-Npx)
+    {
+      code: '<template><div class="d-w1" /></template>',
+      errors: [{ messageId: 'deprecatedPixelClass' }],
+    },
+    {
+      code: '<template><div class="d-h2" /></template>',
+      errors: [{ messageId: 'deprecatedPixelClass' }],
+    },
+    {
+      code: '<template><div class="d-hmn8" /></template>',
+      errors: [{ messageId: 'deprecatedPixelClass' }],
+    },
+    {
+      code: '<template><div class="d-wmx20" /></template>',
+      errors: [{ messageId: 'deprecatedPixelClass' }],
+    },
+    {
+      code: '<template><div class="d-h24 d-w24" /></template>',
       errors: [{ messageId: 'deprecatedPixelClass' }],
     },
   ],

@@ -8,6 +8,9 @@ keywords: ["size", "wide", "vw", "viewport width", "inline size", "inline-size"]
 
 Use `d-w-{stop}` to set a fixed width for an element using layout token stops. The hyphen before the number indicates a layout token reference, e.g. `d-w-100` outputs `inline-size: var(--dt-layout-100)` (64px).
 
+> [!INFO] Scale-indexed vs pixel-indexed stops
+> Bare integer stops (`25`, `50`, `100`, …) are scale-indexed on the 64px base — `value_in_px = stop × 64 / 100`, so `25` = 16px and `100` = 64px. Stops with a `px` suffix (`1px`, `2px`, `8px`, `20px`, `24px`) are off-scale exceptions that encode the literal pixel value.
+
 ```vue demo
 <div v-dt-scrollbar:never class="d-bar8 d-d-flex d-bgc-secondary d-w100p d-hmx-500 d-ta-center">
   <dt-stack gap="100" align="start">

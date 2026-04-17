@@ -1622,10 +1622,35 @@
     }
   },
   "layout": {
+    "1px": {
+      "value": "1px",
+      "type": "dimension",
+      "description": "1px"
+    },
+    "2px": {
+      "value": "2px",
+      "type": "dimension",
+      "description": "2px"
+    },
+    "8px": {
+      "value": "8px",
+      "type": "dimension",
+      "description": "8px"
+    },
     "25": {
       "value": "{layout.base} * 0.25",
       "type": "dimension",
       "description": "16px"
+    },
+    "20px": {
+      "value": "20px",
+      "type": "dimension",
+      "description": "20px"
+    },
+    "24px": {
+      "value": "24px",
+      "type": "dimension",
+      "description": "24px"
     },
     "50": {
       "value": "{layout.base} * 0.5",

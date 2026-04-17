@@ -3,17 +3,19 @@
  * which should be replaced with token-stop-based equivalents (d-h-25, d-p-100, d-m-100).
  * @author Joshua Hynes
  */
-"use strict";
+'use strict';
 
 //------------------------------------------------------------------------------
 // Rule Definition
 //------------------------------------------------------------------------------
 
 // Pixel values that have token-stop equivalents
-// MUST STAY IN SYNC with WIDTH_HEIGHTS_LAYOUT, MARGIN_SIZES_SPACING, MARGIN_SIZES_LAYOUT,
+// MUST STAY IN SYNC with LAYOUT_STOPS, MARGIN_SIZES_SPACING, MARGIN_SIZES_LAYOUT,
 // and NEGATIVE_SPACING_MAP in dialtone-css/postcss/constants.cjs
-// Sizing: layout stops (16px+)
-const SIZING_PIXELS = '16|32|48|64|80|96|112|128|160|192|224|256|288|320|352|384|416|448|480|512|544|576|608|640|672|704|736|768|800|832|864|896|928|960|992|1024';
+// Sizing: scale-indexed layout stops (16+) AND off-scale pixel-indexed exceptions
+// from DLT-3330 (1, 2, 8, 20, 24). Ordered by descending string-length then descending
+// value so regex alternation matches longest first (d-w1024 resolves `1024`, not `1`).
+const SIZING_PIXELS = '1024|992|960|928|896|864|832|800|768|736|704|672|640|608|576|544|512|480|448|416|384|352|320|288|256|224|192|160|128|112|96|80|64|48|32|24|20|16|8|2|1';
 // Spacing: spacing stops (0-64px) + layout stops for margin/padding (96, 128)
 const SPACING_PIXELS = '0|1|2|4|6|8|10|12|14|16|20|24|32|48|64|96|128';
 // Negative spacing
@@ -36,21 +38,21 @@ const POSITION_PATTERN = `d-(?:t|r|b|l|x|y|all)(?:${SPACING_PIXELS})\\b`;
 const NEGATIVE_POSITION_PATTERN = `d-(?:t|r|b|l|x|y|all)n(?:${NEGATIVE_PIXELS})\\b`;
 
 const COMBINED_PATTERN = new RegExp(
-  `(?:${SIZING_PATTERN}|${NEGATIVE_MARGIN_PATTERN}|${MARGIN_PATTERN}|${PADDING_PATTERN}|${GAP_PATTERN}|${NEGATIVE_POSITION_PATTERN}|${POSITION_PATTERN})`
+  `(?:${SIZING_PATTERN}|${NEGATIVE_MARGIN_PATTERN}|${MARGIN_PATTERN}|${PADDING_PATTERN}|${GAP_PATTERN}|${NEGATIVE_POSITION_PATTERN}|${POSITION_PATTERN})`,
 );
 
 module.exports = {
   meta: {
     type: 'suggestion',
     docs: {
-      description: "Pixel-based utility classes (d-h16, d-p8, d-m8) are deprecated. Use token-stop-based equivalents (d-h-25, d-p-100, d-m-100).",
+      description: 'Pixel-based utility classes (d-h16, d-p8, d-m8) are deprecated. Use token-stop-based equivalents (d-h-25, d-p-100, d-m-100).',
       recommended: false,
       url: 'https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-pixel-utility-classes.md',
     },
     fixable: null,
     schema: [],
     messages: {
-      deprecatedPixelClass: `Pixel-based utility classes are deprecated. Use token-stop-based equivalents instead (e.g. d-h16 → d-h-25, d-p8 → d-p-100). Run the "utility-class-to-token-stops" migration helper to update automatically.`,
+      deprecatedPixelClass: `Pixel-based utility classes are deprecated. Use token-stop-based equivalents instead (e.g. d-h16 → d-h-25, d-p8 → d-p-100, d-w1 → d-w-1px). Run the "utility-class-to-token-stops" migration helper to update automatically.`,
     },
   },
 

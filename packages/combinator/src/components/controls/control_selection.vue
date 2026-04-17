@@ -84,12 +84,6 @@
             {{ option.resolved }}
           </dt-text>
         </dt-stack>
-        <template #end>
-          <dt-icon-check
-            size="100"
-            :class="option.value === value ? 'd-o100' : 'd-o0'"
-          />
-        </template>
       </dt-list-item>
     </template>
   </dt-dropdown>
@@ -97,7 +91,7 @@
 
 <script setup>
 import { DtButton, DtStack, DtText } from '@dialpad/dialtone-vue';
-import { DtIconChevronsUpDown, DtIconCheck } from '@dialpad/dialtone-icons/vue';
+import { DtIconChevronsUpDown } from '@dialpad/dialtone-icons/vue';
 
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { resolveTokenValue } from '@/src/lib/tokens';
