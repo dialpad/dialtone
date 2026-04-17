@@ -205,7 +205,7 @@ export default {
      */
     headerText: {
       type: String,
-      default: '',
+      default: undefined,
     },
 
     /**
@@ -213,7 +213,7 @@ export default {
      */
     bannerHeaderText: {
       type: String,
-      default: '',
+      default: undefined,
     },
 
     /**

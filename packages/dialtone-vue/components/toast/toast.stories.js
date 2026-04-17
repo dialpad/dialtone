@@ -45,6 +45,11 @@ export const argTypesData = {
   },
 
   // Props
+  headerText: {
+    control: {
+      type: 'text',
+    },
+  },
   headerId: {
     table: {
       defaultValue: {
