@@ -61,14 +61,14 @@ const props = defineProps({
 
   /**
    * Background surface color. Maps to --dt-color-surface-* tokens.
-   * @values primary, secondary, moderate, bold, strong, contrast, backdrop, brand, info, positive, warning, critical, brand-subtle, brand-strong, ...
+   * @values primary, primary-opaque, secondary, secondary-opaque, moderate, moderate-opaque, bold, bold-opaque, strong, strong-opaque, contrast, contrast-opaque, brand, brand-opaque, brand-subtle, brand-subtle-opaque, brand-strong, info, info-opaque, info-subtle, info-subtle-opaque, info-strong, positive, positive-opaque, positive-subtle, positive-subtle-opaque, positive-strong, warning, warning-opaque, warning-subtle, warning-subtle-opaque, warning-strong, critical, critical-opaque, critical-subtle, critical-subtle-opaque, critical-strong, backdrop
    */
   surface: { type: String, default: undefined, validator: surfaceValidator },
 
   /**
    * Border color. Maps to --dt-color-border-* tokens.
    * Defaults to 'default'. Visible when any border-width prop is set.
-   * @values transparent, subtle, default, moderate, bold, accent, focus, brand, positive, warning, critical, brand-subtle, brand-strong, ...
+   * @values transparent, subtle, default, moderate, bold, positive, positive-subtle, positive-strong, warning, warning-subtle, warning-strong, critical, critical-subtle, critical-strong, focus, brand, brand-subtle, brand-strong
    */
   borderColor: { type: String, default: 'default', validator: borderColorValidator },
 
