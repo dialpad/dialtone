@@ -233,11 +233,11 @@ describe('DtInput tests', () => {
 
     describe('When an inputClass prop is provided', () => {
       it('Should apply the class to the input element.', () => {
-        mockProps = { inputClass: 'd-fc-success' };
+        mockProps = { inputClass: 'd-fc-positive' };
 
         updateWrapper();
 
-        expect(nativeInput.classes('d-fc-success')).toBe(true);
+        expect(nativeInput.classes('d-fc-positive')).toBe(true);
       });
     });
 
@@ -550,13 +550,13 @@ describe('DtInput tests', () => {
 
     describe('When labelClass is provided', () => {
       it('should apply custom class to the label', () => {
-        mockProps = { label: 'Label', labelClass: 'd-fc-success' };
+        mockProps = { label: 'Label', labelClass: 'd-fc-positive' };
 
         updateWrapper();
 
         const labelEl = wrapper.find('[data-qa="dt-input-label"]');
 
-        expect(labelEl.classes('d-fc-success')).toBe(true);
+        expect(labelEl.classes('d-fc-positive')).toBe(true);
       });
     });
 

@@ -1,6 +1,12 @@
  
 
 export default {
+  defaults: {
+    props: {
+      labelSize: { tokenCategory: 'typography-size:label' },
+    },
+  },
+
   default: {
     props: {
       label: {

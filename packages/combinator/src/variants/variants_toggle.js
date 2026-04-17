@@ -6,22 +6,13 @@ export default {
       },
     },
     props: {
-      class: { initialValue: 'd-g-200' },
+      labelClass: { initialValue: 'd-pie-100' },
     },
   },
 
   'hide label': {
     props: {
       showLabel: { initialValue: false },
-    },
-    slots: {
-      default: { initialValue: 'Label' },
-    },
-  },
-
-  'with space between': {
-    props: {
-      class: { initialValue: 'd-g-200 d-w-200 d-jc-space-between' },
     },
     slots: {
       default: { initialValue: 'Label' },

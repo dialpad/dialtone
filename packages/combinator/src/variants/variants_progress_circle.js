@@ -1,6 +1,13 @@
-/* eslint-disable max-len */
+ 
 
 export default {
+  defaults: {
+    props: {
+      size: { tokenCategory: 'icon-size' },
+      kind: { tokenCategory: 'color:d-progress-circle--:--progress-color' },
+    },
+  },
+
   default: {
     props: {
       progress: {

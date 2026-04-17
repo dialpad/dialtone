@@ -113,7 +113,7 @@ keywords: ["theme island","mode override","v-dt-mode","directive","light","dark"
       <dt-text as="h3" kind="headline" :size="300">Inverted <dt-text strength="normal">(auto)</dt-text></dt-text>
       <dt-stack v-dt-mode:invert gap="100" class="d-bgc-secondary d-p-200 d-bar8 d-ba d-bc-default">
         <dt-stack gap="100" direction="row">
-          <dt-icon name="circle-half-filled" size="300" class="d-fc-success" />
+          <dt-icon name="circle-half-filled" size="300" class="d-fc-positive" />
           <dt-text as="p" kind="body" :size="200">Primary</dt-text>
           <dt-text as="p" kind="body" :size="200" tone="muted">Muted</dt-text>
           <dt-text as="p" kind="body" :size="200" tone="critical">Critical</dt-text>
@@ -129,7 +129,7 @@ keywords: ["theme island","mode override","v-dt-mode","directive","light","dark"
       <dt-text as="h3" kind="headline" :size="300">Explicit light</dt-text>
       <dt-stack v-dt-mode:light gap="100" class="d-bgc-secondary d-p-200 d-bar8 d-ba d-bc-default">
         <dt-stack gap="100" direction="row">
-          <dt-icon name="sun" size="300" class="d-fc-success" />
+          <dt-icon name="sun" size="300" class="d-fc-positive" />
           <dt-text as="p" kind="body" :size="200">Primary</dt-text>
           <dt-text as="p" kind="body" :size="200" tone="muted">Muted</dt-text>
           <dt-text as="p" kind="body" :size="200" tone="critical">Critical</dt-text>
@@ -145,7 +145,7 @@ keywords: ["theme island","mode override","v-dt-mode","directive","light","dark"
       <dt-text as="h3" kind="headline" :size="300">Explicit dark</dt-text>
       <dt-stack v-dt-mode:dark gap="100" class="d-bgc-secondary d-p-200 d-bar8 d-ba d-bc-default">
         <dt-stack gap="100" direction="row">
-          <dt-icon name="moon" size="300" class="d-fc-success" />
+          <dt-icon name="moon" size="300" class="d-fc-positive" />
           <dt-text as="p" kind="body" :size="200">Primary</dt-text>
           <dt-text as="p" kind="body" :size="200" tone="muted">Muted</dt-text>
           <dt-text as="p" kind="body" :size="200" tone="critical">Critical</dt-text>
@@ -170,9 +170,9 @@ Use the `v-dt-mode` directive to control the color mode of a region, component, 
 ```vue demo
 <!-- @wrapper -->
 <dt-stack gap="100">
-  <dt-text v-dt-mode:dark tone="success"> Dark content </dt-text>
-  <dt-text v-dt-mode:light tone="success"> Light content </dt-text>
-  <dt-text v-dt-mode:invert tone="success"> Inverted — opposite of parent or root </dt-text>
+  <dt-text v-dt-mode:dark tone="positive"> Dark content </dt-text>
+  <dt-text v-dt-mode:light tone="positive"> Light content </dt-text>
+  <dt-text v-dt-mode:invert tone="positive"> Inverted — opposite of parent or root </dt-text>
 </dt-stack>
 ```
 
@@ -216,10 +216,10 @@ Bind a reactive variable as the directive arg to switch modes at runtime.
       Dark
     </dt-segmented-control-item>
   </dt-segmented-control>
-  <dt-text v-dt-mode:[dynamicMode] align="center" tone="success"> {{ dynamicMode }} mode </dt-text>
+  <dt-text v-dt-mode:[dynamicMode] align="center" tone="positive"> {{ dynamicMode }} mode </dt-text>
 </dt-stack>
 <!-- @code -->
-<dt-text v-dt-mode:{mode} align="center" tone="success"> ... mode </dt-text>
+<dt-text v-dt-mode:{mode} align="center" tone="positive"> ... mode </dt-text>
 ```
 
 ### Conditional
@@ -268,7 +268,7 @@ The default mode — inverts relative to the nearest parent mode boundary or the
 
 ```vue demo
 <section v-dt-mode class="d-p-200 d-bar8">
-  <dt-text as="p" tone="success">Inverted mode (opposite of parent)</dt-text>
+  <dt-text as="p" tone="positive">Inverted mode (opposite of parent)</dt-text>
 </section>
 ```
 
@@ -278,7 +278,7 @@ Explicitly set to light mode regardless of parent or root mode.
 
 ```vue demo
 <section v-dt-mode:light class="d-p-200 d-bar8">
-  <dt-text as="p" tone="success">Always light mode</dt-text>
+  <dt-text as="p" tone="positive">Always light mode</dt-text>
 </section>
 ```
 
@@ -288,7 +288,7 @@ Explicitly set to dark mode regardless of parent or root mode.
 
 ```vue demo
 <section v-dt-mode:dark class="d-p-200 d-bar8">
-  <dt-text as="p" tone="success">Always dark mode</dt-text>
+  <dt-text as="p" tone="positive">Always dark mode</dt-text>
 </section>
 ```
 
@@ -298,11 +298,11 @@ Mode boundaries can be nested. Each `v-dt-mode:invert` reads the nearest parent 
 
 ```vue demo
 <dt-stack gap="200" v-dt-mode:light class="d-p-200 d-bar8 d-bgc-secondary d-ba">
-  <dt-text as="p" tone="success" text-box-trim="both">Explicit Light</dt-text>
+  <dt-text as="p" tone="positive" text-box-trim="both">Explicit Light</dt-text>
   <dt-stack v-dt-mode gap="200" class="d-p-200 d-bar8 d-bgc-secondary">
-    <dt-text as="p" tone="success" text-box-trim="both">Inverted (Dark)</dt-text>
+    <dt-text as="p" tone="positive" text-box-trim="both">Inverted (Dark)</dt-text>
     <dt-stack v-dt-mode gap="200" class="d-p-200 d-bar4 d-bgc-secondary">
-      <dt-text as="p" tone="success" text-box-trim="both">Inverted again (Light)</dt-text>
+      <dt-text as="p" tone="positive" text-box-trim="both">Inverted again (Light)</dt-text>
     </dt-stack>
   </dt-stack>
 </dt-stack>

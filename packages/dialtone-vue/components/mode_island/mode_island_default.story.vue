@@ -15,8 +15,8 @@
         <span class="d-fc-tertiary">
           Tertiary Foreground
         </span>
-        <span class="d-fc-success">
-          Success Foreground
+        <span class="d-fc-positive">
+          Positive Foreground
         </span>
         <span class="d-fc-critical">
           Critical Foreground

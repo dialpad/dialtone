@@ -1,3 +1,10 @@
+# [1.12.0-next.3](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.12.0-next.2...eslint-plugin-dialtone/v1.12.0-next.3) (2026-04-15)
+
+
+### Features
+
+* **Focusgroup:** DLT-3285 add v-dt-focusgroup directive for declarative roving tabindex ([#1187](https://github.com/dialpad/dialtone/issues/1187)) ([e1ea074](https://github.com/dialpad/dialtone/commit/e1ea0742d8192cfb28b9f82daab10bbca542407d))
+
 # [1.12.0-next.2](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.12.0-next.1...eslint-plugin-dialtone/v1.12.0-next.2) (2026-04-03)
 
 

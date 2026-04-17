@@ -6,23 +6,8 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-rich-text-ed
 keywords: ["rte", "wysiwyg", "markdown", "d-rte", "DtRichTextEditor", "dt-rich-text-editor", "content editor", "rich editor"]
 ---
 
-<dt-notice
-  title="Note"
-  kind="info"
-  class="d-wmx100p d-mbs-300"
->
-  <span>Not a standalone component, please use Message Input instead</span>
-  <template #action>
-    <dt-button
-      :size="200"
-      importance="outlined"
-      kind="muted"
-      @click="onClick"
-    >
-      Action
-    </dt-button>
-  </template>
-</dt-notice>
+> [!INFO]
+> Not a standalone component, please use Message Input recipe instead
 
 <component-combinator component-name="DtRichTextEditor" />
 
