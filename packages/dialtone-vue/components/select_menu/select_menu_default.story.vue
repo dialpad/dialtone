@@ -19,8 +19,7 @@
     :option-child-props="$attrs.optionChildProps"
     :messages-child-props="$attrs.messagesChildProps"
     :class="$attrs.class"
-    @input="$attrs.onInput"
-    @change="$attrs.onChange"
+    @update:model-value="$attrs['onUpdate:modelValue']"
   >
     <html-fragment
       v-if="defaultSlot"

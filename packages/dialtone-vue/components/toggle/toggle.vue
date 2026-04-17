@@ -66,8 +66,7 @@ export default {
     },
 
     /**
-     * Value of the toggle, aka checked state.
-     * @model modelValue
+     * Value of the toggle
      * @values true, false, 'mixed'
      */
     modelValue: {
@@ -133,20 +132,10 @@ export default {
 
   emits: [
     /**
-     * Toggle change event
+     * Event fired to sync the modelValue prop with the parent component
      *
-     * @event change
+     * @event update:modelValue
      * @type {Boolean}
-     * @model change
-     */
-    'change',
-
-    /**
-     * v-model event event
-     *
-     * @event change
-     * @type {Boolean}
-     * @model change
      */
     'update:modelValue',
   ],
@@ -200,7 +189,6 @@ export default {
   methods: {
     toggleCheckedValue () {
       this.$emit('update:modelValue', !this.internalChecked);
-      this.$emit('change', !this.internalChecked);
 
       if (this.toggleOnClick) {
         this.internalChecked = !this.internalChecked;

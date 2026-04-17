@@ -38,7 +38,7 @@
     :variable-items="$attrs.variableItems"
     :allow-image-resize="$attrs.allowImageResize"
     @blur="$attrs.onBlur"
-    @input="$attrs.onInput"
+    @update:model-value="$attrs['onUpdate:modelValue']"
     @edit-link="$attrs.onEditLink"
     @json-input="$attrs.onJsonInput"
     @html-input="$attrs.onHtmlInput"

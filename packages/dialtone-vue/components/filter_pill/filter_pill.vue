@@ -96,7 +96,7 @@
         >
           <dt-checkbox-group
             v-if="modelValue?.length"
-            :selected-values="deferSelection ? pendingActiveFilters : activeFilters"
+            :model-value="deferSelection ? pendingActiveFilters : activeFilters"
             :aria-label="label"
             :name="label || 'filter-pill'"
           >
@@ -105,7 +105,7 @@
               :key="filter.name"
               :label="filter.name"
               :value="filter.name"
-              @input="($event) => filter.active = $event"
+              @update:model-value="($event) => filter.active = $event"
             />
           </dt-checkbox-group>
         </slot>

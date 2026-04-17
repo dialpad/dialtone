@@ -196,7 +196,7 @@ export default {
     },
 
     /**
-     * The output format that the editor uses when emitting the "@input" event.
+     * The output format that the editor uses when emitting the "update:modelValue" event.
      * One of `text`, `json`, `html`, `markdown`. See https://tiptap.dev/guide/output for
      * examples.
      * @values text, json, html, markdown
@@ -479,15 +479,15 @@ export default {
 
   emits: [
     /**
-     * Editor input event
-     * @event input
-     * @type {String|JSON}
+     * Event fired to sync the modelValue prop with the parent component
+     * @event update:modelValue
+     * @type {Object | String}
      */
-    'input',
+    'update:modelValue',
 
     /**
      * Input event always in JSON format.
-     * @event input
+     * @event json-input
      * @type {JSON}
      */
     'json-input',
@@ -512,13 +512,6 @@ export default {
      * @type {String}
      */
     'markdown-input',
-
-    /**
-     * Event to sync the value with the parent
-     * @event update:value
-     * @type {String|JSON}
-     */
-    'update:modelValue',
 
     /**
      * Editor blur event
@@ -1122,7 +1115,6 @@ export default {
 
     triggerInputChangeEvents () {
       const value = this.getOutput();
-      this.$emit('input', value);
       this.$emit('update:modelValue', value);
 
       // Always output JSON in a separate event

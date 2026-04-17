@@ -187,8 +187,8 @@ describe('Input Group Tests', () => {
           expect(wrapper.vm.provideObj?.value).toBe(MOCK_SELECTED_VALUE);
         });
 
-        it('should emit input event', () => {
-          expect(wrapper.emitted('input')[0][0]).toBe(MOCK_SELECTED_VALUE);
+        it('should emit update:modelValue event', () => {
+          expect(wrapper.emitted('update:modelValue')[0][0]).toBe(MOCK_SELECTED_VALUE);
         });
       });
     });
@@ -202,8 +202,8 @@ describe('Input Group Tests', () => {
         expect(wrapper.vm.provideObj?.value).toBe(MOCK_SELECTED_VALUE);
       });
 
-      it('should emit input event', () => {
-        expect(wrapper.emitted('input')[0][0]).toBe(MOCK_SELECTED_VALUE);
+      it('should emit update:modelValue event', () => {
+        expect(wrapper.emitted('update:modelValue')[0][0]).toBe(MOCK_SELECTED_VALUE);
       });
     });
 
@@ -219,10 +219,10 @@ describe('Input Group Tests', () => {
       });
 
       describe('When an input is selected', () => {
-        it('does not emit an input event', async () => {
+        it('does not emit update:modelValue event', async () => {
           await _selectInput(MOCK_SELECTED_VALUE);
 
-          expect(wrapper.emitted('input')).toBeFalsy();
+          expect(wrapper.emitted('update:modelValue')).toBeFalsy();
         });
       });
     });

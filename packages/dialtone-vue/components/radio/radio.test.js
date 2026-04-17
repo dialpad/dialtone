@@ -242,7 +242,7 @@ describe('DtRadio Tests', () => {
         it('no events are emitted', async () => {
           await wrapper.trigger('click');
 
-          expect(wrapper.emitted('input')).toBeFalsy();
+          expect(wrapper.emitted('update:modelValue')).toBeFalsy();
         });
       });
     });
@@ -404,21 +404,21 @@ describe('DtRadio Tests', () => {
   describe('Reactivity Tests', () => {
     describe('Custom Event Tests', () => {
       describe('When the radio is selected', () => {
-        it('should emit the input event with Value', async () => {
+        it('should emit update:modelValue event with Value', async () => {
           await input.trigger('change');
 
-          expect(wrapper.emitted('input')[0][0]).toBe(MOCK_VALUE);
+          expect(wrapper.emitted('update:modelValue')[0][0]).toBe(MOCK_VALUE);
         });
       });
     });
 
     describe('Listener Tests', () => {
-      describe('When there is a provided input listener', () => {
+      describe('When there is a provided modelValue listener', () => {
         describe('When the radio is clicked', () => {
-          it('Should call input handler once', async () => {
+          it('Should call update:modelValue handler once', async () => {
             const MOCK_INPUT_LISTENER_SPY = vi.fn();
 
-            mockAttrs = { onInput: MOCK_INPUT_LISTENER_SPY };
+            mockAttrs = { 'onUpdate:modelValue': MOCK_INPUT_LISTENER_SPY };
 
             updateWrapper();
 
@@ -460,7 +460,7 @@ describe('DtRadio Tests', () => {
 
       describe('When the radio group is disabled', () => {
         describe('When the radio is clicked', () => {
-          it('no events are emitted', async () => {
+          it('no update:modelValue events are emitted', async () => {
             mockProvide = {
               groupContext: {
                 name: MOCK_GROUP_NAME,
@@ -478,7 +478,7 @@ describe('DtRadio Tests', () => {
 
             await wrapper.trigger('click');
 
-            expect(wrapper.emitted('input')).toBeFalsy();
+            expect(wrapper.emitted('update:modelValue')).toBeFalsy();
           });
         });
       });

@@ -316,37 +316,37 @@ describe('DtCheckbox Tests', () => {
   describe('Accessibility Tests', () => {
     describe('Custom Event Tests', () => {
       describe('When the checkbox is clicked', () => {
-        it('Should emit an input event', async () => {
+        it('Should emit update:modelValue event', async () => {
           await input.trigger('change');
 
-          expect(wrapper.emitted('input')).toBeTruthy();
+          expect(wrapper.emitted('update:modelValue')).toBeTruthy();
         });
       });
 
       describe('When checked', () => {
         describe('When the checkbox is clicked', () => {
-          it('Should emit an input event', async () => {
+          it('Should emit update:modelValue event', async () => {
             mockProps = { modelValue: true };
 
             updateWrapper();
 
             await input.trigger('change');
 
-            expect(wrapper.emitted('input')).toBeTruthy();
+            expect(wrapper.emitted('update:modelValue')).toBeTruthy();
           });
         });
       });
 
       describe('When disabled', () => {
         describe('When the checkbox is clicked', () => {
-          it('Should not emit an input event', async () => {
+          it('Should not emit update:modelValue event', async () => {
             mockProps = { disabled: true };
 
             updateWrapper();
 
             await input.trigger('click');
 
-            expect(wrapper.emitted('input')).toBeFalsy();
+            expect(wrapper.emitted('update:modelValue')).toBeFalsy();
           });
         });
       });
@@ -356,37 +356,37 @@ describe('DtCheckbox Tests', () => {
   describe('Interactivity Tests', () => {
     describe('Custom Event Tests', () => {
       describe('When the checkbox is clicked', () => {
-        it('Should emit an input event', async () => {
+        it('Should emit update:modelValue event', async () => {
           await input.trigger('change');
 
-          expect(wrapper.emitted('input')).toBeTruthy();
+          expect(wrapper.emitted('update:modelValue')).toBeTruthy();
         });
       });
 
       describe('When checked', () => {
         describe('When the checkbox is clicked', () => {
-          it('Should emit an input event', async () => {
+          it('Should emit update:modelValue event', async () => {
             mockProps = { modelValue: true };
 
             updateWrapper();
 
             await input.trigger('change');
 
-            expect(wrapper.emitted('input')).toBeTruthy();
+            expect(wrapper.emitted('update:modelValue')).toBeTruthy();
           });
         });
       });
 
       describe('When disabled', () => {
         describe('When the checkbox is clicked', () => {
-          it('Should not emit an input event', async () => {
+          it('Should not emit update:modelValue event', async () => {
             mockProps = { disabled: true };
 
             updateWrapper();
 
             await input.trigger('click');
 
-            expect(wrapper.emitted('input')).toBeFalsy();
+            expect(wrapper.emitted('update:modelValue')).toBeFalsy();
           });
         });
       });
@@ -418,7 +418,7 @@ describe('DtCheckbox Tests', () => {
       describe('When there is a provided input listener', () => {
         describe('When the checkbox is clicked', () => {
           it('Should call input handler once', async () => {
-            mockAttrs = { onInput: MOCK_INPUT_LISTENER_SPY };
+            mockAttrs = { 'onUpdate:modelValue': MOCK_INPUT_LISTENER_SPY };
 
             updateWrapper();
 

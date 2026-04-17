@@ -78,7 +78,7 @@
         :additional-extensions="additionalExtensions"
         :show-link-bubble-menu="showLinkBubbleMenu"
         v-bind="removeClassStyleAttrs($attrs)"
-        @input="onInput"
+        @update:model-value="onUpdateModelValue"
         @text-input="onTextInput"
         @markdown-input="onMarkdownInput"
         @enter="onSend"
@@ -409,7 +409,7 @@ export default {
     },
 
     /**
-     * The output format that the editor uses when emitting the "@input" event.
+     * The output format that the editor uses when emitting the "update:modelValue" event.
      * One of `text`, `json`, `html`, `markdown`. See https://tiptap.dev/guide/output for
      * examples.
      * @values text, json, html, markdown
@@ -1028,7 +1028,7 @@ export default {
       this.$emit('cancel');
     },
 
-    onInput (event) {
+    onUpdateModelValue (event) {
       this.$emit('update:modelValue', event);
     },
 
