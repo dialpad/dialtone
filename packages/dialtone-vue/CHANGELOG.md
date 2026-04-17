@@ -1,3 +1,10 @@
+## [3.219.1](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.219.0...dialtone-vue/v3.219.1) (2026-04-17)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DP-179947 use URL as display text when inserting link without text ([#1202](https://github.com/dialpad/dialtone/issues/1202)) ([30f2504](https://github.com/dialpad/dialtone/commit/30f25049c22132f3b0a35a91ded852d1f2d07781))
+
 # [3.219.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.218.5...dialtone-vue/v3.219.0) (2026-04-07)
 
 
