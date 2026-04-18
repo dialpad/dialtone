@@ -1,53 +1,82 @@
 ---
 title: Border Radius
 description: Utilities for controlling an element's border radius.
-keywords: ["rounded", "corner", "pill", "circle", "radius start", "radius end"]
+keywords: ["rounded", "corner", "pill", "circle", "radius start", "radius end", "block-start", "block-end", "inline-start", "inline-end", "single corner"]
 ---
+
+<script setup>
+  import { radius } from '@data/borders.json';
+</script>
 
 ## All Corners
 
-Use `d-bar{n}` to change the border radius on all corners of your element.
+Use `d-bar-{stop}` to change the border radius on all four corners. The stop references the matching `--dt-size-radius-{stop}` token.
 
 ```vue demo
 <!-- @wrapper -->
-<dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
-  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-0"><dt-text kind="code" size="xs">d-bar0</dt-text></div>
-  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-100"><dt-text kind="code" size="xs">d-bar1</dt-text></div>
-  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-200"><dt-text kind="code" size="xs">d-bar2</dt-text></div>
-  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-300"><dt-text kind="code" size="xs">d-bar4</dt-text></div>
-  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-350"><dt-text kind="code" size="xs">d-bar6</dt-text></div>
-  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-400"><dt-text kind="code" size="xs">d-bar8</dt-text></div>
-  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-450"><dt-text kind="code" size="xs">d-bar12</dt-text></div>
-  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-500"><dt-text kind="code" size="xs">d-bar16</dt-text></div>
-  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-550"><dt-text kind="code" size="xs">d-bar24</dt-text></div>
-  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-600"><dt-text kind="code" size="xs">d-bar32</dt-text></div>
+<dt-stack gap="100" :direction="{ default: 'column', md: 'row' }">
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-0">  <dt-text kind="code" size="xs">d-bar-0</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-100"><dt-text kind="code" size="xs">d-bar-100</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-200"><dt-text kind="code" size="xs">d-bar-200</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-300"><dt-text kind="code" size="xs">d-bar-300</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-350"><dt-text kind="code" size="xs">d-bar-350</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-400"><dt-text kind="code" size="xs">d-bar-400</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-450"><dt-text kind="code" size="xs">d-bar-450</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-500"><dt-text kind="code" size="xs">d-bar-500</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-550"><dt-text kind="code" size="xs">d-bar-550</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-600"><dt-text kind="code" size="xs">d-bar-600</dt-text></div>
 </dt-stack>
 ```
 
 ## Rounded Sides
 
-Use `d-b{t|r|b|l}r{n}` to change the border radius on a side of your element.
+Use a side-pair class to round the two corners on a single side. Class roots are the first-letter compression of the matching CSS logical property.
+
+| Class root | CSS properties set                                      | Visible in LTR |
+| ---------- | ------------------------------------------------------- | -------------- |
+| `d-bbsr-*` | `border-start-start-radius` + `border-start-end-radius` | top            |
+| `d-bier-*` | `border-start-end-radius` + `border-end-end-radius`     | right          |
+| `d-bber-*` | `border-end-start-radius` + `border-end-end-radius`     | bottom         |
+| `d-bisr-*` | `border-start-start-radius` + `border-end-start-radius` | left           |
 
 ```vue demo
 <!-- @wrapper -->
-<dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
-  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bbsr-300"><dt-text kind="code" size="xs">d-btr4</dt-text></div>
-  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bbsr-400"><dt-text kind="code" size="xs">d-btr8</dt-text></div>
-  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bbsr-450"><dt-text kind="code" size="xs">d-btr12</dt-text></div>
-  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bbsr-500"><dt-text kind="code" size="xs">d-btr16</dt-text></div>
+<dt-stack gap="400" :direction="{ default: 'column', md: 'row' }">
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bbsr-450"><dt-text kind="code" size="xs">d-bbsr-450</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bier-450"><dt-text kind="code" size="xs">d-bier-450</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bber-450"><dt-text kind="code" size="xs">d-bber-450</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bisr-450"><dt-text kind="code" size="xs">d-bisr-450</dt-text></div>
+</dt-stack>
+```
+
+## Individual Corners
+
+Use a single-corner class to round exactly one corner. Class roots match the CSS logical corner properties.
+
+| Class root | CSS property set            | Visible in LTR |
+| ---------- | --------------------------- | -------------- |
+| `d-bssr-*` | `border-start-start-radius` | top-left       |
+| `d-bser-*` | `border-start-end-radius`   | top-right      |
+| `d-beer-*` | `border-end-end-radius`     | bottom-right   |
+| `d-besr-*` | `border-end-start-radius`   | bottom-left    |
+
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="400" :direction="{ default: 'column', md: 'row' }">
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bssr-500"><dt-text kind="code" size="xs">d-bssr-500</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bser-500"><dt-text kind="code" size="xs">d-bser-500</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-beer-500"><dt-text kind="code" size="xs">d-beer-500</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-besr-500"><dt-text kind="code" size="xs">d-besr-500</dt-text></div>
 </dt-stack>
 ```
 
 ## Pills
 
-Use `d-b{a|t|r|b|l}r-pill` to change the border radius of your element to a pill shape.
+Use `d-bar-pill` for a pill-shaped radius on all four corners. The same `-pill` suffix is available on every scope (`d-bbsr-pill`, `d-bssr-pill`, etc.).
 
 ```vue demo
 <!-- @wrapper -->
-<dt-stack
-  gap="400"
-  :direction="{ 'default': 'column', 'md': 'row' }"
->
+<dt-stack gap="400" :direction="{ default: 'column', md: 'row' }">
   <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-pill">
     <dt-text kind="code" size="xs">d-bar-pill</dt-text>
   </div>
@@ -56,61 +85,66 @@ Use `d-b{a|t|r|b|l}r-pill` to change the border radius of your element to a pill
 
 ## Circles
 
-Use `d-b{a|t|r|b|l}r-circle` to change the border radius of your element to a circle shape.
+Use `d-bar-circle` for a fully circular radius. Best paired with a square element.
 
 ```vue demo
 <!-- @wrapper -->
-<dt-stack
-  gap="400"
-  :direction="{ 'default': 'column', 'md': 'row' }"
- >
+<dt-stack gap="400" :direction="{ default: 'column', md: 'row' }">
   <dt-stack direction="row" align="center" justify="center" class="d-p-100 d-size-200 d-ba d-baw2 d-bc-default d-bgc-primary d-ws-nowrap d-bar-circle">
     <dt-text kind="code" size="xs">d-bar-circle</dt-text>
   </dt-stack>
 </dt-stack>
 ```
 
+## Reset
+
+Use `d-bar-unset` to reset the border-radius on all four corners to `unset`.
+
 ## Classes
 
-<utility-class-table>
+<utility-class-table show-rendered>
   <template #content>
+    <tbody v-for="scope in radius.scopes" :key="scope.logicalPrefix">
+      <tr v-for="val in radius.values" :key="`${scope.logicalPrefix}-${val.stop}`">
+        <th scope="row">
+          <dt-text as="span" kind="code" :size="100" class="d-docsite-code">.d-{{ scope.logicalPrefix }}-{{ val.stop }}</dt-text>
+        </th>
+        <td class="d-code--sm">
+          <span v-for="prop in scope.cssProperties" :key="prop">
+            {{ prop }}: var(--dt-size-radius-{{ val.stop }}) !important;<br/>
+          </span>
+        </td>
+        <td class="d-code--sm d-fc-tertiary d-ta-right">{{ val.rem }}</td>
+        <td class="d-code--sm d-fc-tertiary d-ta-right">{{ val.px }}</td>
+      </tr>
+      <template v-if="scope.legacyPrefix">
+        <tr v-for="val in radius.values" :key="`legacy-${scope.legacyPrefix}-${val.legacyPx}`">
+          <th scope="row">
+            <dt-stack gap="50">
+              <dt-text as="span" kind="code" :size="100" class="d-docsite-code">
+                .d-{{ scope.legacyPrefix }}<template v-if="val.legacyPx === 'pill' || val.legacyPx === 'circle'">-</template>{{ val.legacyPx }}
+              </dt-text>
+              <dt-badge type="critical" kind="label" text="Deprecated" />
+            </dt-stack>
+          </th>
+          <td class="d-code--sm">
+            <span v-for="prop in scope.cssProperties" :key="prop">
+              {{ prop }}: var(--dt-size-radius-{{ val.stop }}) !important;<br/>
+            </span>
+          </td>
+          <td class="d-code--sm d-fc-tertiary d-ta-right">{{ val.rem }}</td>
+          <td class="d-code--sm d-fc-tertiary d-ta-right">{{ val.px }}</td>
+        </tr>
+      </template>
+    </tbody>
     <tbody>
       <tr>
-        <th scope="row" class="d-code--sm d-docsite-code">.d-bar-unset</th>
+        <th scope="row">
+          <dt-text as="span" kind="code" :size="100" class="d-docsite-code">.d-bar-unset</dt-text>
+        </th>
         <td class="d-code--sm">border-radius: unset !important;</td>
-      </tr>
-    </tbody>
-    <tbody v-for="i in ['a', 't', 'r', 'b', 'l']">
-      <tr v-for="(val, token) in {'--dt-size-radius-0': '0', '--dt-size-radius-100': '1', '--dt-size-radius-200': '2', '--dt-size-radius-300': '4', '--dt-size-radius-350': '6', '--dt-size-radius-400': '8', '--dt-size-radius-450': '12', '--dt-size-radius-500': '16', '--dt-size-550': '24', '--dt-size-radius-600': '32', '--dt-size-radius-circle': '-circle', '--dt-size-radius-pill': '-pill'}">
-        <th scope="row" class="d-code--sm d-docsite-code">.d-b{{ i }}r{{ val }}</th>
-        <td>
-          <dt-stack direction="row" justify="between" align="center">
-            <div class="d-fl-grow1 d-code--sm">
-              <span v-if="i === 'a'">border-radius: var({{ token }}) !important;</span>
-              <span v-else-if="i === 't'">
-                border-start-start-radius: var({{ token }}) !important;<br/>
-                border-start-end-radius: var({{ token }}) !important;
-              </span>
-              <span v-else-if="i === 'r'">
-                border-start-end-radius: var({{ token }}) !important;<br/>
-                border-end-end-radius: var({{ token }}) !important;
-              </span>
-              <span v-else-if="i === 'b'">
-                border-end-start-radius: var({{ token }}) !important;<br/>
-                border-end-end-radius: var({{ token }}) !important;
-              </span>
-              <span v-else-if="i === 'l'">
-                border-end-start-radius: var({{ token }}) !important;
-                border-start-start-radius: var({{ token }}) !important;<br/>
-              </span>
-            </div>
-            <div
-              class="d-fl-shrink0 d-m-50 d-mis-200 d-h-50 d-bgc-black-300"
-              :class="[val === '-circle' ? 'd-w-50' : 'd-w-100', `d-b${i}r${val}`]"
-            >
-            </div>
-          </dt-stack>
-        </td>
+        <td class="d-fc-muted d-fs-100 d-ta-center">N/A</td>
+        <td class="d-fc-muted d-fs-100 d-ta-center">N/A</td>
       </tr>
     </tbody>
   </template>

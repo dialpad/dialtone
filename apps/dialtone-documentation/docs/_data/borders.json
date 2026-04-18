@@ -1,3 +1,71 @@
 {
-  "directions": ["all", "top", "right", "bottom", "left", "x", "y"]
+  "directions": ["all", "top", "right", "bottom", "left", "x", "y"],
+  "radius": {
+    "scopes": [
+      {
+        "name": "All corners",
+        "logicalPrefix": "bar",
+        "legacyPrefix": "bar",
+        "cssProperties": ["border-radius"]
+      },
+      {
+        "name": "Block-start pair",
+        "logicalPrefix": "bbsr",
+        "legacyPrefix": "btr",
+        "cssProperties": ["border-start-start-radius", "border-start-end-radius"]
+      },
+      {
+        "name": "Inline-end pair",
+        "logicalPrefix": "bier",
+        "legacyPrefix": "brr",
+        "cssProperties": ["border-start-end-radius", "border-end-end-radius"]
+      },
+      {
+        "name": "Block-end pair",
+        "logicalPrefix": "bber",
+        "legacyPrefix": "bbr",
+        "cssProperties": ["border-end-start-radius", "border-end-end-radius"]
+      },
+      {
+        "name": "Inline-start pair",
+        "logicalPrefix": "bisr",
+        "legacyPrefix": "blr",
+        "cssProperties": ["border-start-start-radius", "border-end-start-radius"]
+      },
+      {
+        "name": "Start-start corner",
+        "logicalPrefix": "bssr",
+        "cssProperties": ["border-start-start-radius"]
+      },
+      {
+        "name": "Start-end corner",
+        "logicalPrefix": "bser",
+        "cssProperties": ["border-start-end-radius"]
+      },
+      {
+        "name": "End-end corner",
+        "logicalPrefix": "beer",
+        "cssProperties": ["border-end-end-radius"]
+      },
+      {
+        "name": "End-start corner",
+        "logicalPrefix": "besr",
+        "cssProperties": ["border-end-start-radius"]
+      }
+    ],
+    "values": [
+      { "stop": "0",      "legacyPx": "0",       "rem": "0rem",    "px": "0px"   },
+      { "stop": "100",    "legacyPx": "1",       "rem": "0.1rem",  "px": "1px"   },
+      { "stop": "200",    "legacyPx": "2",       "rem": "0.2rem",  "px": "2px"   },
+      { "stop": "300",    "legacyPx": "4",       "rem": "0.4rem",  "px": "4px"   },
+      { "stop": "350",    "legacyPx": "6",       "rem": "0.6rem",  "px": "6px"   },
+      { "stop": "400",    "legacyPx": "8",       "rem": "0.8rem",  "px": "8px"   },
+      { "stop": "450",    "legacyPx": "12",      "rem": "1.2rem",  "px": "12px"  },
+      { "stop": "500",    "legacyPx": "16",      "rem": "1.6rem",  "px": "16px"  },
+      { "stop": "550",    "legacyPx": "24",      "rem": "2.4rem",  "px": "24px"  },
+      { "stop": "600",    "legacyPx": "32",      "rem": "3.2rem",  "px": "32px"  },
+      { "stop": "pill",   "legacyPx": "pill",    "rem": "10.2rem", "px": "102px" },
+      { "stop": "circle", "legacyPx": "circle",  "rem": "50%",     "px": "50%"   }
+    ]
+  }
 }
