@@ -88,4 +88,83 @@ describe('utility-class-to-token-stops config', () => {
       assert.equal(apply(input), expected);
     });
   });
+
+  // ─── Border-radius migration (DLT-3329) ───────────────────────────────
+
+  describe('border-radius all-corners — legacy pixel-suffix to token stop', () => {
+    const cases = [
+      ['d-bar0', 'd-bar-0'],
+      ['d-bar1', 'd-bar-100'],
+      ['d-bar2', 'd-bar-200'],
+      ['d-bar4', 'd-bar-300'],
+      ['d-bar6', 'd-bar-350'],
+      ['d-bar8', 'd-bar-400'],
+      ['d-bar12', 'd-bar-450'],
+      ['d-bar16', 'd-bar-500'],
+      ['d-bar24', 'd-bar-550'],
+      ['d-bar32', 'd-bar-600'],
+    ];
+    for (const [from, to] of cases) {
+      it(`${from} → ${to}`, () => {
+        assert.equal(apply(`<div class="${from}" />`), `<div class="${to}" />`);
+      });
+    }
+  });
+
+  describe('border-radius side-pair numeric — physical prefix to logical prefix', () => {
+    const cases = [
+      ['d-btr6', 'd-bbsr-350'],     // top    → block-start pair
+      ['d-bbr8', 'd-bber-400'],     // bottom → block-end pair
+      ['d-blr12', 'd-bisr-450'],    // left   → inline-start pair
+      ['d-brr16', 'd-bier-500'],    // right  → inline-end pair
+      ['d-btr24', 'd-bbsr-550'],    // new 550 stop
+      ['d-bbr32', 'd-bber-600'],
+      ['d-blr0', 'd-bisr-0'],
+      ['d-brr1', 'd-bier-100'],
+    ];
+    for (const [from, to] of cases) {
+      it(`${from} → ${to}`, () => {
+        assert.equal(apply(`<div class="${from}" />`), `<div class="${to}" />`);
+      });
+    }
+  });
+
+  describe('border-radius side-pair keyword — pill/circle', () => {
+    const cases = [
+      ['d-btr-pill', 'd-bbsr-pill'],
+      ['d-btr-circle', 'd-bbsr-circle'],
+      ['d-bbr-pill', 'd-bber-pill'],
+      ['d-bbr-circle', 'd-bber-circle'],
+      ['d-blr-pill', 'd-bisr-pill'],
+      ['d-blr-circle', 'd-bisr-circle'],
+      ['d-brr-pill', 'd-bier-pill'],
+      ['d-brr-circle', 'd-bier-circle'],
+    ];
+    for (const [from, to] of cases) {
+      it(`${from} → ${to}`, () => {
+        assert.equal(apply(`<div class="${from}" />`), `<div class="${to}" />`);
+      });
+    }
+  });
+
+  describe('border-radius canonical keyword names — unchanged', () => {
+    const cases = [
+      'd-bar-pill',
+      'd-bar-circle',
+      'd-bar-unset',
+    ];
+    for (const unchanged of cases) {
+      it(`${unchanged} stays as ${unchanged}`, () => {
+        assert.equal(apply(`<div class="${unchanged}" />`), `<div class="${unchanged}" />`);
+      });
+    }
+  });
+
+  describe('border-radius multi-class migration', () => {
+    it('rewrites mixed legacy classes in one string', () => {
+      const input = `<div class="d-bar6 d-btr8 d-blr-pill d-p-200" />`;
+      const expected = `<div class="d-bar-350 d-bbsr-400 d-bisr-pill d-p-200" />`;
+      assert.equal(apply(input), expected);
+    });
+  });
 });
