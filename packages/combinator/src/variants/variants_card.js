@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+ 
 
 export default {
   default: {
@@ -29,7 +30,7 @@ export default {
   },
   'Targeted styling': {
     props: {
-      class: { initialValue: 'd-bar0 d-baw0' },
+      class: { initialValue: 'd-bar-0 d-baw0' },
       contentClass: { initialValue: 'd-p-100 d-by d-bgc-critical' },
       headerClass: { initialValue: 'd-p-100 d-bgc-info' },
       footerClass: { initialValue: 'd-p-100 d-bgc-warning' },
