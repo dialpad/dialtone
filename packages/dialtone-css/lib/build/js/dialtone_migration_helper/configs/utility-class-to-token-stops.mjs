@@ -85,9 +85,36 @@ export default {
     '- Border-radius pair (physical → logical): d-btr6 → d-bbsr-350, d-bbr8 → d-bber-400, d-blr12 → d-bisr-450, d-brr16 → d-bier-500\n' +
     '- Border-radius pair keyword: d-btr-pill → d-bbsr-pill, d-brr-circle → d-bier-circle\n' +
     '- Old deprecated sizes (d-h72, d-w332, etc.) are left unchanged for manual review.\n',
-  patterns: ['**/*.{vue,html,js,ts,jsx,tsx,md,less,css}'],
+  patterns: ['**/*.{vue,html,js,ts,jsx,tsx,md,mdx,less,css}'],
   globbyConfig: {
-    ignore: ['**/dialtone_migration_helper/tests/**', '**/node_modules/**'],
+    // Include dotfiles/dotdirs so tooling directories like `.vuepress/baseComponents/`,
+    // `.storybook/`, and per-repo docs folders are scanned. Dotted build-output caches are
+    // explicitly excluded below.
+    dot: true,
+    ignore: [
+      '**/node_modules/**',
+      // Built outputs: regenerated on next build; rewriting selectors in co-selected rules
+      // (`.d-bar-350, .d-bar6 { ... }`) would corrupt them since the leading whitespace
+      // before the legacy selector looks like a class boundary to the regex.
+      '**/dist/**',
+      '**/build/**',
+      '**/lib/dist/**',
+      // Framework caches
+      '**/.cache/**',
+      '**/.vite/**',
+      '**/.vuepress/.cache/**',
+      '**/.vuepress/.temp/**',
+      '**/.vuepress/dist/**',
+      '**/.next/**',
+      '**/.nuxt/**',
+      '**/.turbo/**',
+      '**/.nx/**',
+      // Migration-helper test fixtures intentionally contain legacy class names.
+      '**/dialtone_migration_helper/tests/**',
+      // ESLint-plugin rules and tests inherently contain legacy class names as regex patterns
+      // and test inputs — they're the tool that detects the legacy classes, don't rewrite them.
+      '**/eslint-plugin-dialtone/**',
+    ],
   },
   expressions: [
     // ── Sizing: d-h{px} → d-h-{layout-stop} ──────────────────────────────
