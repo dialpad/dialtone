@@ -167,6 +167,8 @@ Use `tone` to declare the text's tone, which will map to a foreground color. By 
   <dt-text tone="warning">warning</dt-text>
   <dt-text tone="critical">critical</dt-text>
   <dt-text tone="critical-strong">critical-strong</dt-text>
+  <dt-text tone="info">info</dt-text>
+  <dt-text tone="info-strong">info-strong</dt-text>
 </dt-stack>
 ```
 

@@ -520,6 +520,8 @@ export default {
         { key: 'positive', props: { kind: 'body', tone: 'positive' }, copy: 'Positive tone' },
         { key: 'warning', props: { kind: 'body', tone: 'warning' }, copy: 'Warning tone' },
         { key: 'critical', props: { kind: 'body', tone: 'critical' }, copy: 'Critical tone' },
+        { key: 'info', props: { kind: 'body', tone: 'info' }, copy: 'Info tone' },
+        { key: 'info-strong', props: { kind: 'body', tone: 'info-strong' }, copy: 'Info strong tone' },
       ];
     },
 

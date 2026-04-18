@@ -80,7 +80,7 @@ export default {
 
     /**
      * Semantic foreground color.
-     * @values primary, secondary, tertiary, muted, disabled, placeholder, critical, critical-strong, positive, positive-strong, warning, neutral-black, neutral-white
+     * @values primary, secondary, tertiary, muted, disabled, placeholder, critical, critical-strong, positive, positive-strong, warning, info, info-strong, neutral-black, neutral-white
      */
     tone: {
       type: String,
