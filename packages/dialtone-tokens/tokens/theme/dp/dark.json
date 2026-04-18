@@ -30,6 +30,14 @@
         "value": "{color.gold.700}",
         "type": "color"
       },
+      "info": {
+        "value": "{color.blue.700}",
+        "type": "color"
+      },
+      "info-strong": {
+        "value": "{color.blue.800}",
+        "type": "color"
+      },
       "positive": {
         "value": "{color.green.600}",
         "type": "color"
@@ -589,6 +597,10 @@
         "value": "{color.gold.800}",
         "type": "color"
       },
+      "info": {
+        "value": "{color.blue.800}",
+        "type": "color"
+      },
       "success": {
         "value": "{color.green.600}",
         "type": "color"
@@ -603,6 +615,10 @@
       },
       "warning-subtle": {
         "value": "{color.gold.600}",
+        "type": "color"
+      },
+      "info-subtle": {
+        "value": "{color.blue.300}",
         "type": "color"
       },
       "success-subtle": {
@@ -623,6 +639,10 @@
       },
       "warning-strong": {
         "value": "{color.gold.900}",
+        "type": "color"
+      },
+      "info-strong": {
+        "value": "{color.blue.400}",
         "type": "color"
       },
       "brand-strong": {
