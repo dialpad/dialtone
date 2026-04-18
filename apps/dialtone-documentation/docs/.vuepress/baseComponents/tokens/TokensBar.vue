@@ -1,6 +1,6 @@
 <!-- eslint-disable vuejs-accessibility/no-autofocus -->
 <template>
-  <dt-stack gap="200" class="d-p-200 d-bgc-secondary d-bar8">
+  <dt-stack gap="200" class="d-p-200 d-bgc-secondary d-bar-400">
     <dt-input
       id="search-input"
       v-model="searchCriteria"

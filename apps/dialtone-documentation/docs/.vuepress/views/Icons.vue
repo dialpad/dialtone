@@ -1,7 +1,7 @@
 <template>
   <dt-stack
     gap="200"
-    class="d-p-200 d-bar8"
+    class="d-p-200 d-bar-400"
   >
     <h3
       :id="kind"

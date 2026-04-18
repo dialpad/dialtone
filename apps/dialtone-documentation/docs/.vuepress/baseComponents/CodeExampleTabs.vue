@@ -61,7 +61,7 @@
     </dt-tab-panel>
     <div
       v-if="shouldShowButton"
-      class="code-example-tab-group__more d-ps-absolute d-bn8 d-l50p"
+      class="code-example-tab-group__more d-ps-absolute d-ibe-n100 d-l50p"
       aria-hidden="true"
     >
       <dt-button

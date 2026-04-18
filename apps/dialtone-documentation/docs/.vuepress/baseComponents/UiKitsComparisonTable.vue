@@ -1,8 +1,8 @@
 <template>
-  <div v-dt-scrollbar:never class="d-hmx-700 d-bar8 d-ba d-bc-subtle d-mbs-300">
+  <div v-dt-scrollbar:never class="d-hmx-700 d-bar-400 d-ba d-bc-subtle d-mbs-300">
     <div>
       <table class="d-table dialtone-doc-table">
-        <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+        <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-ibs-0">
           <tr>
             <th scope="col" class="d-p-0 d-bbw0 d-tt-none">
               <div class="d-p-200 d-bb d-bbw1">

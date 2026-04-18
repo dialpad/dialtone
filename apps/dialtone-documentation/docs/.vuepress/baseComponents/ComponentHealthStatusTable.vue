@@ -1,5 +1,5 @@
 <template>
-  <dt-stack gap="200" direction="row" class="d-bgc-secondary d-p-200 d-py-100 d-bar8 d-ba d-bc-subtle d-my-200">
+  <dt-stack gap="200" direction="row" class="d-bgc-secondary d-p-200 d-py-100 d-bar-400 d-ba d-bc-subtle d-my-200">
     <dt-stack direction="row" gap="100">
       <dt-icon
         class="d-fc-positive"

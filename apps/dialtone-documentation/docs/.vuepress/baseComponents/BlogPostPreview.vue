@@ -1,10 +1,10 @@
 <template>
   <dt-link
     :to="`/dialtone/whats-new/posts/${format(posted, 'y-M-d')}`"
-    class="d-fc-unset d-d-block d-bar8 d-td-none"
+    class="d-fc-unset d-d-block d-bar-400 d-td-none"
   >
     <dt-card
-      class="d-mbs-200 d-bgc-primary d-bs-none h:d-bs-sm d-bar8 d-bbw1 h:d-bc-default"
+      class="d-mbs-200 d-bgc-primary d-bs-none h:d-bs-sm d-bar-400 d-bbw1 h:d-bc-default"
     >
       <template #content>
         <blog-post
