@@ -48,7 +48,7 @@ export const DT_BOX_BORDER_WIDTH_VALUES = ['0', '50', '100', '150', '200', '300'
  * Border radius values (maps to --dt-size-radius-* tokens).
  * @type {string[]}
  */
-export const DT_BOX_BORDER_RADIUS_VALUES = ['0', '100', '200', '300', '350', '400', '450', '500', '600', 'pill', 'circle'];
+export const DT_BOX_BORDER_RADIUS_VALUES = ['0', '100', '200', '300', '350', '400', '450', '500', '550', '600', 'pill', 'circle'];
 
 /**
  * Shadow values (maps to --dt-shadow-* tokens).
