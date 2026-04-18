@@ -2,7 +2,7 @@
   <dt-mode-island
     :as="$attrs.as"
     :mode="$attrs.mode"
-    class="d-p-200 d-ba d-bc-subtle d-bar8"
+    class="d-p-200 d-ba d-bc-subtle d-bar-400"
   >
     <dt-stack gap="200">
       <dt-stack

@@ -16,7 +16,7 @@
     >
       <section
         v-dt-mode:light
-        class="d-bgc-secondary d-p-200 d-ba d-bc-subtle d-bar8 d-fl1"
+        class="d-bgc-secondary d-p-200 d-ba d-bc-subtle d-bar-400 d-fl1"
       >
         <dt-stack gap="400">
           <dt-text
@@ -38,7 +38,7 @@
       </section>
       <section
         v-dt-mode:dark
-        class="d-bgc-secondary d-p-200 d-ba d-bc-subtle d-bar8 d-fl1"
+        class="d-bgc-secondary d-p-200 d-ba d-bc-subtle d-bar-400 d-fl1"
       >
         <dt-stack gap="400">
           <dt-text
@@ -69,7 +69,7 @@
     </dt-text>
     <section
       v-dt-mode
-      class="d-bgc-secondary d-p-200 d-ba d-bc-subtle d-bar8 d-w264"
+      class="d-bgc-secondary d-p-200 d-ba d-bc-subtle d-bar-400 d-w264"
     >
       <dt-text
         kind="body"
@@ -88,7 +88,7 @@
     </dt-text>
     <div
       v-dt-mode:dark
-      class="d-bgc-secondary d-p-200 d-ba d-bc-subtle d-bar8"
+      class="d-bgc-secondary d-p-200 d-ba d-bc-subtle d-bar-400"
     >
       <dt-stack gap="400">
         <dt-text
@@ -99,7 +99,7 @@
         </dt-text>
         <div
           v-dt-mode:invert
-          class="d-bgc-secondary d-p-200 d-ba d-bc-subtle d-bar8"
+          class="d-bgc-secondary d-p-200 d-ba d-bc-subtle d-bar-400"
         >
           <dt-stack gap="400">
             <dt-text
@@ -110,7 +110,7 @@
             </dt-text>
             <div
               v-dt-mode:invert
-              class="d-bgc-secondary d-p-200 d-ba d-bc-subtle d-bar8"
+              class="d-bgc-secondary d-p-200 d-ba d-bc-subtle d-bar-400"
             >
               <dt-text
                 kind="body"
@@ -138,7 +138,7 @@
     >
       <section
         v-dt-mode:invert="false"
-        class="d-bgc-secondary d-p-200 d-ba d-bc-subtle d-bar8 d-fl1"
+        class="d-bgc-secondary d-p-200 d-ba d-bc-subtle d-bar-400 d-fl1"
       >
         <dt-text
           kind="body"
@@ -149,7 +149,7 @@
       </section>
       <section
         v-dt-mode:dark="enabled"
-        class="d-bgc-secondary d-p-200 d-ba d-bc-subtle d-bar8 d-fl1"
+        class="d-bgc-secondary d-p-200 d-ba d-bc-subtle d-bar-400 d-fl1"
       >
         <dt-stack gap="400">
           <dt-text
@@ -184,7 +184,7 @@
       </span>
       <section
         v-dt-mode:[dynamicMode]
-        class="d-bgc-secondary d-p-200 d-ba d-bc-subtle d-bar8 d-w264"
+        class="d-bgc-secondary d-p-200 d-ba d-bc-subtle d-bar-400 d-w264"
       >
         <dt-text
           kind="body"

@@ -23,7 +23,7 @@
             >
               Headline
             </dt-text>
-            <div class="d-ba d-bc-default d-p-200 d-bar8">
+            <div class="d-ba d-bc-default d-p-200 d-bar-400">
               <dt-stack
                 gap="100"
                 direction="row"
@@ -49,7 +49,7 @@
             >
               Body
             </dt-text>
-            <div class="d-ba d-bc-default d-p-200 d-bar8">
+            <div class="d-ba d-bc-default d-p-200 d-bar-400">
               <dt-stack
                 gap="100"
                 direction="row"
@@ -75,7 +75,7 @@
             >
               Label
             </dt-text>
-            <div class="d-ba d-bc-default d-p-200 d-bar8">
+            <div class="d-ba d-bc-default d-p-200 d-bar-400">
               <dt-stack
                 gap="100"
                 direction="row"
@@ -101,7 +101,7 @@
             >
               Code
             </dt-text>
-            <div class="d-ba d-bc-default d-p-200 d-bar8">
+            <div class="d-ba d-bc-default d-p-200 d-bar-400">
               <dt-stack
                 gap="100"
                 direction="row"
@@ -139,7 +139,7 @@
             >
               Font Weight Modifiers
             </dt-text>
-            <div class="d-ba d-bc-default d-p-200 d-bar8">
+            <div class="d-ba d-bc-default d-p-200 d-bar-400">
               <dt-stack
                 direction="row"
                 gap="200"
@@ -178,7 +178,7 @@
             >
               Line Height Modifiers
             </dt-text>
-            <div class="d-ba d-bc-default d-p-200 d-bar8">
+            <div class="d-ba d-bc-default d-p-200 d-bar-400">
               <dt-stack
                 gap="100"
                 direction="row"
@@ -212,7 +212,7 @@
         </dt-text>
         <dt-stack gap="200">
           <div>
-            <div class="d-ba d-bc-default d-p-200 d-bar8">
+            <div class="d-ba d-bc-default d-p-200 d-bar-400">
               <dt-stack
                 direction="row"
                 gap="100"
@@ -252,7 +252,7 @@
             >
               {{ item.align.charAt(0).toUpperCase() + item.align.slice(1) }}
             </dt-text>
-            <div class="d-ba d-bc-default d-p-200 d-bar8">
+            <div class="d-ba d-bc-default d-p-200 d-bar-400">
               <dt-text
                 as="div"
                 :align="item.align"
@@ -282,7 +282,7 @@
             >
               Single Line (truncate)
             </dt-text>
-            <div class="d-ba d-bc-default d-p-200 d-bar8">
+            <div class="d-ba d-bc-default d-p-200 d-bar-400">
               <dt-text
                 as="p"
                 truncate
@@ -308,7 +308,7 @@
               Multi Line (maxLines)
             </dt-text>
             <dt-stack
-              class="d-ba d-bc-default d-p-200 d-bar8"
+              class="d-ba d-bc-default d-p-200 d-bar-400"
               gap="200"
             >
               <dt-text
@@ -382,7 +382,7 @@
             >
               {{ item.wrap.charAt(0).toUpperCase() + item.wrap.slice(1) }}
             </dt-text>
-            <div class="d-ba d-bc-default d-of-hidden d-p-200 d-bar8">
+            <div class="d-ba d-bc-default d-of-hidden d-p-200 d-bar-400">
               <dt-text
                 kind="headline"
                 :size="300"
@@ -414,7 +414,7 @@
         <dt-stack
           gap="200"
           direction="row"
-          class="d-ba d-bc-default d-p-200 d-bar8"
+          class="d-ba d-bc-default d-p-200 d-bar-400"
         >
           <template
             v-for="item in textBoxTrimExamples"
@@ -450,7 +450,7 @@
             >
               Tabular Figures
             </dt-text>
-            <div class="d-ba d-bc-default d-p-200 d-bar8">
+            <div class="d-ba d-bc-default d-p-200 d-bar-400">
               <dt-stack gap="50">
                 <dt-text numeric>
                   00123456789 (numeric)

@@ -188,7 +188,7 @@ function createErrorBoundary (name) {
       return () => {
         if (error.value) {
           return h('div', {
-            class: 'd-fc-critical d-fs-200 d-p-100 d-px-150 d-bgc-critical d-bar4',
+            class: 'd-fc-critical d-fs-200 d-p-100 d-px-150 d-bgc-critical d-bar-300',
           }, `Failed to render ${name}: ${error.value}`);
         }
         return slots.default?.();

@@ -10,7 +10,7 @@ const args = {
   startIcon: 'video',
   title: 'This meeting has ended',
   class: 'd-w628',
-  buttonClass: 'd-bar24',
+  buttonClass: 'd-bar-550',
 };
 
 const argTypes = {

@@ -145,7 +145,7 @@
               <dt-input
                 :value="currentFontColor"
                 class="d-w0 d-h0 d-of-hidden"
-                input-class="colorPickerInput d-w0 d-h0 d-p-0 d-bar0"
+                input-class="colorPickerInput d-w0 d-h0 d-p-0 d-bar-0"
                 input-wrapper-class="d-w0 d-h0 d-ba-none"
                 :size="200"
                 type="color"
