@@ -26,7 +26,7 @@ export default {
   props: {
     /**
      * Applies the link variant styles
-     * @values null, critical, warning, positive, muted, mention
+     * @values null, critical, warning, positive, info, muted, mention
      */
     tone: {
       type: String,
