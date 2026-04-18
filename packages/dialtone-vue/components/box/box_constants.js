@@ -33,9 +33,10 @@ export const DT_BOX_SURFACE_VALUES = [
  */
 export const DT_BOX_BORDER_COLOR_VALUES = [
   'transparent', 'subtle', 'default', 'moderate', 'bold', 'accent', 'focus',
-  'brand', 'positive', 'warning', 'critical',
+  'brand', 'positive', 'warning', 'critical', 'info',
   'brand-subtle', 'brand-strong', 'positive-subtle', 'positive-strong',
   'warning-subtle', 'warning-strong', 'critical-subtle', 'critical-strong',
+  'info-subtle', 'info-strong',
 ];
 
 /**
