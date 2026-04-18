@@ -10,22 +10,22 @@ keywords: ["logo usage","logo guidelines","brand guidelines"]
 <dt-stack gap="600" class="d-mbs-600">
   <div class="d-d-grid d-g-600 d-g-cols1 md:d-g-cols2 d-ai-center">
     <div>
-      <svg-loader name="logo--primary-color-light" class="d-bar16" />
+      <svg-loader name="logo--primary-color-light" class="d-bar-500" />
       <p class="d-docsite--header-3 d-m-0 d-mbs-200">Primary Color Light</p>
     </div>
     <div>
-      <svg-loader name="logo--primary-color-dark" class="d-bar16" />
+      <svg-loader name="logo--primary-color-dark" class="d-bar-500" />
       <p class="d-docsite--header-3 d-m-0 d-mbs-200">Primary Color Dark</p>
     </div>
   </div>
 
   <div class="d-d-grid d-g-600 d-g-cols1 md:d-g-cols2 d-ai-center">
     <div>
-      <svg-loader name="logo--secondary-color-light" class="d-bar16" />
+      <svg-loader name="logo--secondary-color-light" class="d-bar-500" />
       <p class="d-docsite--header-3 d-m-0 d-mbs-200">Secondary Color Light</p>
     </div>
     <div>
-      <svg-loader name="logo--secondary-color-dark" class="d-bar16" />
+      <svg-loader name="logo--secondary-color-dark" class="d-bar-500" />
       <p class="d-docsite--header-3 d-m-0 d-mbs-200">Secondary Color Dark</p>
     </div>
   </div>
@@ -37,7 +37,7 @@ keywords: ["logo usage","logo guidelines","brand guidelines"]
       <p class="d-docsite--paragraph d-fc-critical">Never use the spark icon on it’s own, it should always be used with the Dialpad wordmark</p>
     </div>
     <div class="d-gc2">
-      <svg-loader name="logo--how-to-use" class="d-bar16" />
+      <svg-loader name="logo--how-to-use" class="d-bar-500" />
     </div>
   </div>
 
@@ -52,7 +52,7 @@ keywords: ["logo usage","logo guidelines","brand guidelines"]
       </p>
     </div>
     <div class="d-gc2">
-      <svg-loader name="logo--clear-space" class="d-bar16" />
+      <svg-loader name="logo--clear-space" class="d-bar-500" />
     </div>
   </div>
 
@@ -62,7 +62,7 @@ keywords: ["logo usage","logo guidelines","brand guidelines"]
       <p class="d-docsite--paragraph">Maintain at least 2x the width of the "d" as clear space around the logo and ensure centering of the "dialpad" wordmark minus the Spark's width.</p>
     </div>
     <div class="d-gc2">
-      <svg-loader name="logo--positioning" class="d-bar16" />
+      <svg-loader name="logo--positioning" class="d-bar-500" />
     </div>
   </div>
 
@@ -71,7 +71,7 @@ keywords: ["logo usage","logo guidelines","brand guidelines"]
       <h2 class="d-docsite--header-3">Alignment</h2>
     </div>
     <div class="d-gc2">
-      <svg-loader name="logo--alignment" class="d-bar16" />
+      <svg-loader name="logo--alignment" class="d-bar-500" />
     </div>
   </div>
 </dt-stack>
@@ -90,7 +90,7 @@ Choose the proper logo variant based on its context and theme.
 
 Logos are available in a fixed set of color options to suit different backgrounds, contexts, and theme needs.
 
-<div class="d-ba d-bar8 d-bc-subtle">
+<div class="d-ba d-bar-400 d-bc-subtle">
   <table class="d-table dialtone-doc-table">
     <thead>
       <tr>
@@ -104,7 +104,7 @@ Logos are available in a fixed set of color options to suit different background
       <tr>
         <td class="d-ws-nowrap">Color</td>
         <td>
-          <dt-stack class="d-bgc-transparent d-p-200 d-pie-300 d-bar8">
+          <dt-stack class="d-bgc-transparent d-p-200 d-pie-300 d-bar-400">
             <dt-illustration name='dialpad-logo' />
           </dt-stack>
         </td>
@@ -118,7 +118,7 @@ Logos are available in a fixed set of color options to suit different background
       <tr>
         <td class="d-ws-nowrap">Monochrome</td>
         <td>
-          <dt-stack class="d-bgc-transparent d-p-200 d-pie-300 d-bar8">
+          <dt-stack class="d-bgc-transparent d-p-200 d-pie-300 d-bar-400">
             <dt-illustration name='dialpad-mono' />
           </dt-stack>
         </td>
@@ -132,7 +132,7 @@ Logos are available in a fixed set of color options to suit different background
       <tr>
         <td class="d-ws-nowrap">Color</td>
         <td>
-          <dt-stack  class="d-bgc-primary-inverted d-p-200 d-pie-300 d-bar8">
+          <dt-stack  class="d-bgc-primary-inverted d-p-200 d-pie-300 d-bar-400">
             <dt-illustration name='dialpad-logo-inverted' />
           </dt-stack>
         </td>
@@ -146,7 +146,7 @@ Logos are available in a fixed set of color options to suit different background
       <tr>
         <td class="d-ws-nowrap">Monochrome</td>
         <td>
-          <dt-stack class="d-bgc-primary-inverted d-p-200 d-pie-300 d-bar8">
+          <dt-stack class="d-bgc-primary-inverted d-p-200 d-pie-300 d-bar-400">
             <dt-illustration name='dialpad-mono-inverted' />
           </dt-stack>
         </td>
@@ -160,7 +160,7 @@ Logos are available in a fixed set of color options to suit different background
       <tr>
         <td class="d-ws-nowrap">Color</td>
         <td>
-          <dt-stack  class="d-bgc-neutral-white d-p-200 d-pie-300 d-bar8">
+          <dt-stack  class="d-bgc-neutral-white d-p-200 d-pie-300 d-bar-400">
             <dt-illustration name='dialpad-logo-black' />
           </dt-stack>
         </td>
@@ -174,7 +174,7 @@ Logos are available in a fixed set of color options to suit different background
       <tr>
         <td class="d-ws-nowrap">Monochrome</td>
         <td>
-          <dt-stack class="d-bgc-neutral-white d-p-200 d-pie-300 d-bar8">
+          <dt-stack class="d-bgc-neutral-white d-p-200 d-pie-300 d-bar-400">
             <dt-illustration name='dialpad-mono-black' />
           </dt-stack>
         </td>
@@ -188,7 +188,7 @@ Logos are available in a fixed set of color options to suit different background
       <tr>
         <td class="d-ws-nowrap">Color</td>
         <td>
-          <dt-stack  class="d-bgc-neutral-black d-p-200 d-pie-300 d-bar8">
+          <dt-stack  class="d-bgc-neutral-black d-p-200 d-pie-300 d-bar-400">
             <dt-illustration name='dialpad-logo-white' />
           </dt-stack>
         </td>
@@ -202,7 +202,7 @@ Logos are available in a fixed set of color options to suit different background
       <tr>
         <td class="d-ws-nowrap">Monochrome</td>
         <td>
-          <dt-stack class="d-bgc-neutral-black d-p-200 d-pie-300 d-bar8">
+          <dt-stack class="d-bgc-neutral-black d-p-200 d-pie-300 d-bar-400">
             <dt-illustration name='dialpad-mono-white' />
           </dt-stack>
         </td>

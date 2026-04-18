@@ -12,7 +12,7 @@ Use `d-p-{stop}` to set padding using spacing token stops. The number references
 ## Add Padding to All Sides
 
 ```vue demo
-<div class="d-size-200 d-p-200 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-fl1 d-h100p d-bgc-moderate d-bar4 d-code--md">d-p-200</dt-stack></div>
+<div class="d-size-200 d-p-200 d-bar-400 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-fl1 d-h100p d-bgc-moderate d-bar-300 d-code--md">d-p-200</dt-stack></div>
 ```
 
 ## Add Padding to a Single Side
@@ -20,23 +20,23 @@ Use `d-p-{stop}` to set padding using spacing token stops. The number references
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" justify="center" gap="300" class="d-fw-wrap d-w100p">
-  <div class="d-as-center d-pbs-150 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bbr4 d-code--md">d-pbs-150</dt-stack></div>
-  <div class="d-as-center d-pie-200 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-brl4 d-code--md">d-pie-200</dt-stack></div>
-  <div class="d-as-center d-pbe-300 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-btr4 d-code--md">d-pbe-300</dt-stack></div>
-  <div class="d-as-center d-pis-400 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-brr4 d-code--md">d-pis-400</dt-stack></div>
+  <div class="d-as-center d-pbs-150 d-bar-400 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bber-300 d-code--md">d-pbs-150</dt-stack></div>
+  <div class="d-as-center d-pie-200 d-bar-400 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-brl4 d-code--md">d-pie-200</dt-stack></div>
+  <div class="d-as-center d-pbe-300 d-bar-400 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bbsr-300 d-code--md">d-pbe-300</dt-stack></div>
+  <div class="d-as-center d-pis-400 d-bar-400 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bier-300 d-code--md">d-pis-400</dt-stack></div>
 </dt-stack>
 ```
 
 ## Add Horizontal Padding
 
 ```vue demo
-<div class="d-as-center d-px-200 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-code--md">d-px-200</dt-stack></div>
+<div class="d-as-center d-px-200 d-bar-400 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-code--md">d-px-200</dt-stack></div>
 ```
 
 ## Add Vertical Padding
 
 ```vue demo
-<div class="d-as-center d-py-300 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-code--md">d-py-300</dt-stack></div>
+<div class="d-as-center d-py-300 d-bar-400 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-code--md">d-py-300</dt-stack></div>
 ```
 
 <script setup>

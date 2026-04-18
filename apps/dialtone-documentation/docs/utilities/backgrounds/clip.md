@@ -11,9 +11,9 @@ Use `d-bgc-{name}` to control which box an element's background is clipped by.
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="400">
-  <div class="d-bgc-border-box d-p-200 d-bgc-moderate d-ba d-baw4 d-bas-dashed d-bar8">border-box</div>
-  <div class="d-bgc-padding-box d-p-200 d-bgc-moderate d-ba d-baw4 d-bas-dashed d-bar8">padding-box</div>
-  <div class="d-bgc-content-box d-p-200 d-bgc-moderate d-ba d-baw4 d-bas-dashed d-bar8">content-box</div>
+  <div class="d-bgc-border-box d-p-200 d-bgc-moderate d-ba d-baw4 d-bas-dashed d-bar-400">border-box</div>
+  <div class="d-bgc-padding-box d-p-200 d-bgc-moderate d-ba d-baw4 d-bas-dashed d-bar-400">padding-box</div>
+  <div class="d-bgc-content-box d-p-200 d-bgc-moderate d-ba d-baw4 d-bas-dashed d-bar-400">content-box</div>
 </dt-stack>
 ```
 

@@ -53,7 +53,7 @@ Dialtone's CSS library offers a framework of [CSS Utilities](/utilities/) classe
     justify="between"
     class="
       d-w100p
-      d-bar8
+      d-bar-400
       d-fc-tertiary
       d-p-200
       d-bgc-moderate
@@ -80,7 +80,7 @@ Dialtone's CSS library offers a framework of [CSS Utilities](/utilities/) classe
   justify="between"
   class="
     d-w100p
-    d-bar8
+    d-bar-400
     d-fc-tertiary
     d-p-200
     d-bgc-moderate

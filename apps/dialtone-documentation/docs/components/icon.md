@@ -94,8 +94,8 @@ The icon's color inherits from the parent's foreground color.
 When setting the color of an icon take these into consideration:
 
 <div class="d-gc1">
-  <dt-stack direction="row" align="center" class="d-p-200 d-hmn-250 d-bar8" style="background: var(--dt-color-purple-100)">
-  <dt-stack direction="row" as="section" gap="100" class="d-bgc-primary d-bc-default d-bar32 d-py-100 d-px-200 d-w100p">
+  <dt-stack direction="row" align="center" class="d-p-200 d-hmn-250 d-bar-400" style="background: var(--dt-color-purple-100)">
+  <dt-stack direction="row" as="section" gap="100" class="d-bgc-primary d-bc-default d-bar-600 d-py-100 d-px-200 d-w100p">
     <dt-stack direction="row" as="section" gap="300" class="d-fl1">
       <dt-icon name="headphones" size="300" ariaLabel="Headphones icon" />
       <dt-text kind="body" truncate class="d-w100p d-wmx102">Ai Contact Center</dt-text>
@@ -113,8 +113,8 @@ When setting the color of an icon take these into consideration:
 </div>
 
 <div class="d-gc1">
-  <dt-stack direction="row" align="center" class="d-bgc-critical-subtle-opaque d-p-200 d-hmn-250 d-bar8">
-  <dt-stack direction="row" as="section" gap="100" class="d-bgc-primary d-bc-default d-bar32 d-py-100 d-px-200 d-w100p">
+  <dt-stack direction="row" align="center" class="d-bgc-critical-subtle-opaque d-p-200 d-hmn-250 d-bar-400">
+  <dt-stack direction="row" as="section" gap="100" class="d-bgc-primary d-bc-default d-bar-600 d-py-100 d-px-200 d-w100p">
   <dt-stack direction="row" as="section" gap="300" class="d-fl1">
     <dt-icon name="headphones" size="300" ariaLabel="Headphones icon" />
     <dt-text kind="body" truncate class="d-w100p d-wmx102">Ai Contact Center</dt-text>
@@ -173,7 +173,7 @@ We encourage utilizing the [Stack component](/components/stack.md) for aligning 
 
 Dialtone provides eight sizes for icons. Each of the sizes represents the width and a height the icon is going to have:
 
-<div class="d-bar8 d-ba d-bc-subtle">
+<div class="d-bar-400 d-ba d-bc-subtle">
   <table class="d-table dialtone-doc-table">
     <thead>
       <tr>

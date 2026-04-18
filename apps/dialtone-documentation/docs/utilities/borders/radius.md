@@ -11,16 +11,16 @@ Use `d-bar{n}` to change the border radius on all corners of your element.
 ```vue demo
 <!-- @wrapper -->
 <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
-  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar0"><dt-text kind="code" size="xs">d-bar0</dt-text></div>
-  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar1"><dt-text kind="code" size="xs">d-bar1</dt-text></div>
-  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar2"><dt-text kind="code" size="xs">d-bar2</dt-text></div>
-  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar4"><dt-text kind="code" size="xs">d-bar4</dt-text></div>
-  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar6"><dt-text kind="code" size="xs">d-bar6</dt-text></div>
-  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar8"><dt-text kind="code" size="xs">d-bar8</dt-text></div>
-  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar12"><dt-text kind="code" size="xs">d-bar12</dt-text></div>
-  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar16"><dt-text kind="code" size="xs">d-bar16</dt-text></div>
-  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar24"><dt-text kind="code" size="xs">d-bar24</dt-text></div>
-  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar32"><dt-text kind="code" size="xs">d-bar32</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-0"><dt-text kind="code" size="xs">d-bar0</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-100"><dt-text kind="code" size="xs">d-bar1</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-200"><dt-text kind="code" size="xs">d-bar2</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-300"><dt-text kind="code" size="xs">d-bar4</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-350"><dt-text kind="code" size="xs">d-bar6</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-400"><dt-text kind="code" size="xs">d-bar8</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-450"><dt-text kind="code" size="xs">d-bar12</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-500"><dt-text kind="code" size="xs">d-bar16</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-550"><dt-text kind="code" size="xs">d-bar24</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-600"><dt-text kind="code" size="xs">d-bar32</dt-text></div>
 </dt-stack>
 ```
 
@@ -31,10 +31,10 @@ Use `d-b{t|r|b|l}r{n}` to change the border radius on a side of your element.
 ```vue demo
 <!-- @wrapper -->
 <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
-  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-btr4"><dt-text kind="code" size="xs">d-btr4</dt-text></div>
-  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-btr8"><dt-text kind="code" size="xs">d-btr8</dt-text></div>
-  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-btr12"><dt-text kind="code" size="xs">d-btr12</dt-text></div>
-  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-btr16"><dt-text kind="code" size="xs">d-btr16</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bbsr-300"><dt-text kind="code" size="xs">d-btr4</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bbsr-400"><dt-text kind="code" size="xs">d-btr8</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bbsr-450"><dt-text kind="code" size="xs">d-btr12</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bbsr-500"><dt-text kind="code" size="xs">d-btr16</dt-text></div>
 </dt-stack>
 ```
 

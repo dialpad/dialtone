@@ -132,7 +132,7 @@ Use `<!-- @custom -->` when the default demo wrapper styles (padding, width, bac
 ```vue demo
 <!-- @custom -->
 <!-- @class d-d-block -->
-<div v-dt-scrollbar:never class="d-bar8 d-bgc-secondary d-hmx-500">
+<div v-dt-scrollbar:never class="d-bar-400 d-bgc-secondary d-hmx-500">
   ...
 </div>
 ```

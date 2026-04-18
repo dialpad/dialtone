@@ -12,7 +12,7 @@ keywords: ["colour", "colors", "palette", "theme", "purple", "red", "blue", "gre
       <p class="d-docsite--paragraph">Product</p>
     </div>
     <div class="d-gc2">
-      <svg-loader name="color--expanded" class="d-bar16" />
+      <svg-loader name="color--expanded" class="d-bar-500" />
     </div>
   </div>
 
@@ -22,19 +22,19 @@ keywords: ["colour", "colors", "palette", "theme", "purple", "red", "blue", "gre
       <p class="d-docsite--paragraph">Brand</p>
     </div>
     <div class="d-gc2">
-      <svg-loader name="color--focused" class="d-bar16" />
+      <svg-loader name="color--focused" class="d-bar-500" />
     </div>
   </div>
 
-  <figure class="d-bar16 d-of-hidden">
+  <figure class="d-bar-500 d-of-hidden">
     <img src="/assets/images/color--sample-01.jpg" alt="">
   </figure>
 
-  <figure class="d-bar16 d-of-hidden">
+  <figure class="d-bar-500 d-of-hidden">
     <img src="/assets/images/color--sample-02.jpg" alt="">
   </figure>
 
-  <figure class="d-bar16 d-of-hidden">
+  <figure class="d-bar-500 d-of-hidden">
     <img src="/assets/images/color--sample-03.jpg" alt="">
   </figure>
 </dt-stack>

@@ -19,9 +19,9 @@ Use `.d-gl-sidebar` to create a simple 2-column layout with a sidebar and main c
 
 ```vue demo
 <dt-stack as="header" align="center" justify="center" class="d-p-200 d-w100p d-hmn216">
-  <div class="d-d-grid d-gl-sidebar d-g-200 d-w100p d-hmn216 d-bar8 d-of-auto d-bgc-moderate" style="--sidebar-width: minmax(10rem, 20rem);">
-    <dt-stack direction="row" align="center" justify="center" class="d-ga-sidebar d-p-200 d-bgc-moderate-opaque d-bar4">Sidebar</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-ga-content d-p-200 d-bgc-moderate-opaque d-bar4">Content</dt-stack>
+  <div class="d-d-grid d-gl-sidebar d-g-200 d-w100p d-hmn216 d-bar-400 d-of-auto d-bgc-moderate" style="--sidebar-width: minmax(10rem, 20rem);">
+    <dt-stack direction="row" align="center" justify="center" class="d-ga-sidebar d-p-200 d-bgc-moderate-opaque d-bar-300">Sidebar</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-ga-content d-p-200 d-bgc-moderate-opaque d-bar-300">Content</dt-stack>
   </div>
 </dt-stack>
 ```
@@ -42,11 +42,11 @@ Use `.d-gl-header` to create a simple 2-row layout with a header area and main c
 
 ```vue demo
 <dt-stack as="header" align="center" justify="center" class="d-p-200 d-w100p d-hmn216 d-of-auto">
-  <div class="d-d-grid d-gl-sidebar d-g-200 d-w100p d-hmn216 d-bar8 d-bgc-moderate" style="--sidebar-width: minmax(10rem, 20rem);">
-    <dt-stack direction="row" align="center" justify="center" class="d-ga-sidebar d-p-200 d-bgc-moderate-opaque d-bar4">Sidebar</dt-stack>
-    <div class="d-ga-content d-d-grid d-gl-header d-g-200 d-p-200 d-bgc-moderate-opaque d-bar4" style="--content-height: minmax(24rem, max-content);">
-      <dt-stack direction="row" align="center" justify="center" class="d-ga-header d-p-200 d-bgc-moderate-opaque d-bar4">Header</dt-stack>
-      <dt-stack direction="row" align="center" justify="center" class="d-ga-content d-p-200 d-bgc-moderate-opaque d-bar4">Content</dt-stack>
+  <div class="d-d-grid d-gl-sidebar d-g-200 d-w100p d-hmn216 d-bar-400 d-bgc-moderate" style="--sidebar-width: minmax(10rem, 20rem);">
+    <dt-stack direction="row" align="center" justify="center" class="d-ga-sidebar d-p-200 d-bgc-moderate-opaque d-bar-300">Sidebar</dt-stack>
+    <div class="d-ga-content d-d-grid d-gl-header d-g-200 d-p-200 d-bgc-moderate-opaque d-bar-300" style="--content-height: minmax(24rem, max-content);">
+      <dt-stack direction="row" align="center" justify="center" class="d-ga-header d-p-200 d-bgc-moderate-opaque d-bar-300">Header</dt-stack>
+      <dt-stack direction="row" align="center" justify="center" class="d-ga-content d-p-200 d-bgc-moderate-opaque d-bar-300">Content</dt-stack>
     </div>
   </div>
 </dt-stack>
@@ -73,15 +73,15 @@ Use `.d-g-cols{n}` to create a multi-column layout.
 
 ```vue demo
 <dt-stack as="header" align="center" justify="center" class="d-w100p d-hmn216">
-  <div class="d-d-grid d-g-cols4 d-g-200 d-w100p d-hmn216 d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar4">3</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar4">4</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar4">5</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar4">6</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar4">7</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar4">8</dt-stack>
+  <div class="d-d-grid d-g-cols4 d-g-200 d-w100p d-hmn216 d-bar-400 d-bgc-moderate">
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar-300">1</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar-300">2</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar-300">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar-300">4</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar-300">5</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar-300">6</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar-300">7</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar-300">8</dt-stack>
   </div>
 </dt-stack>
 <!-- @code -->
@@ -102,11 +102,11 @@ Use `.d-g-cols{n}` to create a multi-column layout.
 Unlike some CSS, CSS grid does not cascade beyond the parent and its direct children (`parent-element > *`). We can use this to our advantage by being able to nest grids within each other without cascade errors.
 
 ```vue demo
-<div class="d-d-grid d-g-cols2 d-g-200 d-w100p d-hmn216 d-bar8 d-bgc-moderate">
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-  <div class="d-d-grid d-g-cols2 d-g-200 d-p-200 d-bgc-moderate-opaque d-bar4">
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar4">3</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar4">4</dt-stack>
+<div class="d-d-grid d-g-cols2 d-g-200 d-w100p d-hmn216 d-bar-400 d-bgc-moderate">
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar-300">1</dt-stack>
+  <div class="d-d-grid d-g-cols2 d-g-200 d-p-200 d-bgc-moderate-opaque d-bar-300">
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar-300">3</dt-stack>
+    <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar-300">4</dt-stack>
   </div>
 </div>
 ```

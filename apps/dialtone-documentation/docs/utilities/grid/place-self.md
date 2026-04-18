@@ -9,11 +9,11 @@ keywords: ["css grid", "align", "justify"]
 Use `d-pls-stretch{-n}` to stretch grid items along their block and inline axis.
 
 ```vue demo
-<div class="d-d-grid d-g-cols2 d-g-200 d-w100p d-hmn-350 d-bar8 d-bgc-moderate">
-  <dt-stack direction="row" align="center" justify="center" class="d-pls-stretch d-p-200 d-bgc-bold-opaque d-bar4">1</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-size-100 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-size-100 d-bgc-moderate-opaque d-bar4">3</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-size-100 d-bgc-moderate-opaque d-bar4">4</dt-stack>
+<div class="d-d-grid d-g-cols2 d-g-200 d-w100p d-hmn-350 d-bar-400 d-bgc-moderate">
+  <dt-stack direction="row" align="center" justify="center" class="d-pls-stretch d-p-200 d-bgc-bold-opaque d-bar-300">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-size-100 d-bgc-moderate-opaque d-bar-300">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-size-100 d-bgc-moderate-opaque d-bar-300">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-size-100 d-bgc-moderate-opaque d-bar-300">4</dt-stack>
 </div>
 ```
 
@@ -22,11 +22,11 @@ Use `d-pls-stretch{-n}` to stretch grid items along their block and inline axis.
 Use `d-pls-start{-n}` to align a grid item along the start of their block and/or inline axis.
 
 ```vue demo
-<div class="d-d-grid d-g-cols2 d-g-200 d-w100p d-h-350 d-bar8 d-bgc-moderate">
-  <dt-stack direction="row" align="center" justify="center" class="d-pls-start d-p-200 d-size-100 d-bgc-bold-opaque d-bar4">1</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar4">3</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar4">4</dt-stack>
+<div class="d-d-grid d-g-cols2 d-g-200 d-w100p d-h-350 d-bar-400 d-bgc-moderate">
+  <dt-stack direction="row" align="center" justify="center" class="d-pls-start d-p-200 d-size-100 d-bgc-bold-opaque d-bar-300">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar-300">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar-300">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar-300">4</dt-stack>
 </div>
 ```
 
@@ -35,11 +35,11 @@ Use `d-pls-start{-n}` to align a grid item along the start of their block and/or
 Use `d-pls-end{-n}` to align a grid item along the end of their block and/or inline axis.
 
 ```vue demo
-<div class="d-d-grid d-g-cols2 d-g-200 d-w100p d-h-350 d-bar8 d-bgc-moderate">
-  <dt-stack direction="row" align="center" justify="center" class="d-pls-end d-p-200 d-size-100 d-bgc-bold-opaque d-bar4">1</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar4">3</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar4">4</dt-stack>
+<div class="d-d-grid d-g-cols2 d-g-200 d-w100p d-h-350 d-bar-400 d-bgc-moderate">
+  <dt-stack direction="row" align="center" justify="center" class="d-pls-end d-p-200 d-size-100 d-bgc-bold-opaque d-bar-300">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar-300">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar-300">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar-300">4</dt-stack>
 </div>
 ```
 
@@ -48,11 +48,11 @@ Use `d-pls-end{-n}` to align a grid item along the end of their block and/or inl
 Use `d-pls-center{-n}` to align a grid item along the center of their block and/or inline axis.
 
 ```vue demo
-<div class="d-d-grid d-g-cols2 d-g-200 d-w100p d-h-350 d-bar8 d-bgc-moderate">
-  <dt-stack direction="row" align="center" justify="center" class="d-pls-center d-p-200 d-size-100 d-bgc-bold-opaque d-bar4">1</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar4">3</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar4">4</dt-stack>
+<div class="d-d-grid d-g-cols2 d-g-200 d-w100p d-h-350 d-bar-400 d-bgc-moderate">
+  <dt-stack direction="row" align="center" justify="center" class="d-pls-center d-p-200 d-size-100 d-bgc-bold-opaque d-bar-300">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar-300">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar-300">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate-opaque d-bar-300">4</dt-stack>
 </div>
 ```
 

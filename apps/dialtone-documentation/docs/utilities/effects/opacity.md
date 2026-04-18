@@ -11,11 +11,11 @@ Use `d-o{n}` to change the opacity of your element.
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="200">
-  <div class="d-p-200 d-bar8 d-bgc-moderate d-o100">.d-o100</div>
-  <div class="d-p-200 d-bar8 d-bgc-moderate d-o75">.d-o75</div>
-  <div class="d-p-200 d-bar8 d-bgc-moderate d-o50">.d-o50</div>
-  <div class="d-p-200 d-bar8 d-bgc-moderate d-o25">.d-o25</div>
-  <div class="d-p-200 d-bar8 d-bgc-moderate d-o0">.d-o0</div>
+  <div class="d-p-200 d-bar-400 d-bgc-moderate d-o100">.d-o100</div>
+  <div class="d-p-200 d-bar-400 d-bgc-moderate d-o75">.d-o75</div>
+  <div class="d-p-200 d-bar-400 d-bgc-moderate d-o50">.d-o50</div>
+  <div class="d-p-200 d-bar-400 d-bgc-moderate d-o25">.d-o25</div>
+  <div class="d-p-200 d-bar-400 d-bgc-moderate d-o0">.d-o0</div>
 </dt-stack>
 ```
 
@@ -24,7 +24,7 @@ Use `d-o{n}` to change the opacity of your element.
 Use `h:d-o{n}` to change an element's :hover state opacity.
 
 ```vue demo
-<dt-button kind="unstyled" class="d-p-200 d-bar8 d-bgc-moderate h:d-o50">Hover me</dt-button>
+<dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-o50">Hover me</dt-button>
 ```
 
 ## Focus
@@ -32,7 +32,7 @@ Use `h:d-o{n}` to change an element's :hover state opacity.
 Use `f:d-o{n}` to change an element's :focus and :focus-within state opacity.
 
 ```vue demo
-<dt-button kind="unstyled" class="d-p-200 d-bar8 d-bgc-moderate f:d-o50">Focus me</dt-button>
+<dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate f:d-o50">Focus me</dt-button>
 ```
 
 ## Focus Visible
@@ -40,7 +40,7 @@ Use `f:d-o{n}` to change an element's :focus and :focus-within state opacity.
 Use `fv:d-o{n}` to change an element's :focus-visible state opacity [only when focused by keyboard].
 
 ```vue demo
-<dt-button kind="unstyled" class="d-p-200 d-bar8 d-bgc-moderate fv:d-o50">Keyboard focus me</dt-button>
+<dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate fv:d-o50">Keyboard focus me</dt-button>
 ```
 
 <script setup>

@@ -11,11 +11,11 @@ Use `d-g-{stop}` to set gap using spacing token stops. The number references the
 Use `d-g-{stop}` to universally change the row and column gap space in grid layouts.
 
 ```vue demo
-<div class="d-d-grid d-g-200 d-g-cols2 d-w100p d-bar8 d-bgc-bold">
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">1</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">2</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">3</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">4</dt-stack>
+<div class="d-d-grid d-g-200 d-g-cols2 d-w100p d-bar-400 d-bgc-bold">
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar-300">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar-300">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar-300">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar-300">4</dt-stack>
 </div>
 ```
 
@@ -24,16 +24,16 @@ Use `d-g-{stop}` to universally change the row and column gap space in grid layo
 Use `d-cg-{stop}` or `d-rg-{stop}` to independently change the row and column gap space in grid layouts.
 
 ```vue demo
-<div class="d-d-grid d-cg-300 d-rg-100 d-g-cols3 d-w100p d-bar8 d-bgc-bold">
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">1</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">2</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">3</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">4</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">5</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">6</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">7</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">8</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">9</dt-stack>
+<div class="d-d-grid d-cg-300 d-rg-100 d-g-cols3 d-w100p d-bar-400 d-bgc-bold">
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar-300">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar-300">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar-300">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar-300">4</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar-300">5</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar-300">6</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar-300">7</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar-300">8</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar-300">9</dt-stack>
 </div>
 ```
 

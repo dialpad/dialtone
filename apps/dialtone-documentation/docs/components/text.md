@@ -66,7 +66,7 @@ Declare the role of the content. Default will inherit styles from the parent.
 
 All kinds support `size` prop, but not all sizes are available for each kind. When `kind` is set, size defaults to `300` if not specified.
 
-<dt-stack class="d-w100p d-ba d-bar4 d-of-auto">
+<dt-stack class="d-w100p d-ba d-bar-300 d-of-auto">
   <table class="d-w100p d-table">
     <tr class="d-va-baseline">
       <th></th>
@@ -155,7 +155,7 @@ Use `tone` to declare the text's tone, which will map to a foreground color. By 
 
 ```vue demo
 <!-- @wrapper -->
-<dt-stack class="d-py-100 d-px-200 d-bar4">
+<dt-stack class="d-py-100 d-px-200 d-bar-300">
   <dt-text>primary</dt-text>
   <dt-text tone="secondary">secondary</dt-text>
   <dt-text tone="tertiary">tertiary</dt-text>
@@ -175,7 +175,7 @@ Use `tone` to declare the text's tone, which will map to a foreground color. By 
 Rather than use the `-inverted` tone variants, use the [v-dt-mode](/components/mode-island.html) directive.
 
 ```vue demo
-<dt-stack gap="100" class="d-py-100 d-px-200 d-bar4">
+<dt-stack gap="100" class="d-py-100 d-px-200 d-bar-300">
   <div class="d-p-100 d-px-150 d-bgc-transparent d-baw2 d-bas-dashed d-bc-subtle">
     <dt-text as="p" align="center" tone="critical">critical tone on default surface</dt-text>
   </div>
@@ -263,7 +263,7 @@ Since `DtText`'s default element is a `<span>`, the `truncate` will only work if
       <dt-stack direction="row" gap="25" align="center">
         <dt-stack direction="row">
           <dt-button
-            class="d-as-stretch d-brr0 d-brw0"
+            class="d-as-stretch d-bier-0 d-brw0"
             :size="200"
             importance="outlined"
             kind="muted"
@@ -273,7 +273,7 @@ Since `DtText`'s default element is a `<span>`, the `truncate` will only work if
           </dt-button>
           <dt-button
             v-dt-tooltip="`Decrement`"
-            class="d-as-stretch d-g-0 d-blr0 d-brr0 d-brw0"
+            class="d-as-stretch d-g-0 d-bisr-0 d-bier-0 d-brw0"
             :size="200"
             importance="outlined"
             kind="muted"
@@ -286,7 +286,7 @@ Since `DtText`'s default element is a `<span>`, the `truncate` will only work if
           </dt-button>
           <dt-button
             v-dt-tooltip="`Increment`"
-            class="d-as-stretch d-g-0 d-blr0"
+            class="d-as-stretch d-g-0 d-bisr-0"
             :size="200"
             importance="outlined"
             kind="muted"
