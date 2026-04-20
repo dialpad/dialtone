@@ -101,7 +101,7 @@ describe('Build output schema (ai-docs.json)', () => {
   test('all entries have required fields', () => {
     for (const doc of docs) {
       for (const field of JSON_REQUIRED_FIELDS) {
-        expect(doc, `"${doc.id}" missing "${field}"`).toHaveProperty(field);
+        expect.soft(doc, `"${doc.id}" missing "${field}"`).toHaveProperty(field);
       }
     }
   });

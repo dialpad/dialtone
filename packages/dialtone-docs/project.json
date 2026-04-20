@@ -7,7 +7,6 @@
     },
     "test": {
       "executor": "nx:run-script",
-      "dependsOn": ["build"],
       "options": { "script": "test" }
     }
   }
