@@ -12,6 +12,9 @@
     :show-close="showClose"
     :show-icon="showIcon"
     :show-action="showAction"
+    :icon-class="iconClass"
+    :title-class="titleClass"
+    :action-class="actionClass"
     v-bind="$attrs"
     @close="handleClose"
   >
@@ -180,6 +183,30 @@ export default {
       validator: (layout) => {
         return TOAST_LAYOUTS.includes(layout);
       },
+    },
+
+    /**
+     * Additional class name for the icon wrapper element.
+     */
+    iconClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the title wrapper element.
+     */
+    titleClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the action wrapper element.
+     */
+    actionClass: {
+      type: [String, Array, Object],
+      default: '',
     },
   },
 

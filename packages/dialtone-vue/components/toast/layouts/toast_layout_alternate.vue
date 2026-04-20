@@ -14,6 +14,7 @@
         <dt-toast-layout-alternate-icon
           v-if="showIcon"
           :kind="kind"
+          :icon-class="iconClass"
           size="200"
           v-bind="toastListeners"
         >
@@ -23,6 +24,7 @@
           :title-id="titleId"
           :content-id="contentId"
           :title="title"
+          :title-class="titleClass"
           :role="role"
           v-bind="toastListeners"
         >
@@ -149,6 +151,22 @@ export default {
     showIcon: {
       type: Boolean,
       default: true,
+    },
+
+    /**
+     * Additional class name for the icon wrapper element.
+     */
+    iconClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the title wrapper element.
+     */
+    titleClass: {
+      type: [String, Array, Object],
+      default: '',
     },
   },
 

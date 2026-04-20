@@ -16,7 +16,7 @@
     />
     <span
       v-if="hasLeftIcon"
-      class="d-badge__icon-left"
+      :class="['d-badge__icon-left', startIconClass]"
     >
       <!-- @slot Slot for start icon, icon-size slot prop defaults to '200' -->
       <slot
@@ -39,7 +39,7 @@
     </span>
     <span
       v-if="hasRightIcon"
-      class="d-badge__icon-right"
+      :class="['d-badge__icon-right', endIconClass]"
     >
       <!-- @slot Slot for end icon, icon-size slot prop defaults to '200' -->
       <slot
@@ -127,6 +127,22 @@ export default {
      * Used to customize the label container
      */
     labelClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Used to customize the start icon container
+     */
+    startIconClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Used to customize the end icon container
+     */
+    endIconClass: {
       type: [String, Array, Object],
       default: '',
     },

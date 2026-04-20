@@ -14,6 +14,7 @@
       <dt-notice-icon
         v-if="showIcon"
         :kind="kind"
+        :icon-class="iconClass"
         :class="{ 'd-notice__icon--has-title': title || $slots.title }"
         v-bind="toastListeners"
       >
@@ -24,6 +25,7 @@
         :title-id="titleId"
         :content-id="contentId"
         :title="title"
+        :title-class="titleClass"
         :role="role"
         v-bind="toastListeners"
       >
@@ -39,6 +41,7 @@
       <dt-notice-action
         :show-action="showAction"
         :show-close="showClose"
+        :action-class="actionClass"
         v-bind="toastListeners"
         @close="$emit('close')"
       >
@@ -165,6 +168,30 @@ export default {
     showAction: {
       type: Boolean,
       default: true,
+    },
+
+    /**
+     * Additional class name for the icon wrapper element.
+     */
+    iconClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the title wrapper element.
+     */
+    titleClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the action wrapper element.
+     */
+    actionClass: {
+      type: [String, Array, Object],
+      default: '',
     },
   },
 

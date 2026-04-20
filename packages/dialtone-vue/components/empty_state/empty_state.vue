@@ -4,7 +4,7 @@
   >
     <span
       v-if="showIllustration"
-      class="d-empty-state__illustration"
+      :class="['d-empty-state__illustration', illustrationClass]"
     >
       <!-- @slot Slot for the illustration. Displays when size is 'lg' or 'md'. Overrides icon. -->
       <slot name="illustration" />
@@ -12,7 +12,7 @@
 
     <span
       v-if="showIcon"
-      class="d-empty-state__icon"
+      :class="['d-empty-state__icon', iconClass]"
     >
       <!-- @slot Slot for the icon. Displayed if illustration is not provided. -->
       <slot
@@ -50,7 +50,12 @@
       </dt-text>
     </dt-stack>
 
-    <slot name="body" />
+    <div
+      v-if="hasSlotContent(slots.body)"
+      :class="bodyClass"
+    >
+      <slot name="body" />
+    </div>
   </dt-stack>
 </template>
 
@@ -101,6 +106,30 @@ const props = defineProps({
   bodyText: {
     type: String,
     default: null,
+  },
+
+  /**
+    * Additional class name for the illustration wrapper element.
+    */
+  illustrationClass: {
+    type: [String, Array, Object],
+    default: '',
+  },
+
+  /**
+    * Additional class name for the icon wrapper element.
+    */
+  iconClass: {
+    type: [String, Array, Object],
+    default: '',
+  },
+
+  /**
+    * Additional class name for the body slot wrapper element.
+    */
+  bodyClass: {
+    type: [String, Array, Object],
+    default: '',
   },
 });
 

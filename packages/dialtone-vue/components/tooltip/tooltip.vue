@@ -6,6 +6,7 @@
     <span
       v-if="!externalAnchor && !externalAnchorElement"
       ref="anchor"
+      :class="anchorClass"
       data-qa="dt-tooltip-anchor"
       @focusin="onEnterAnchor"
       @focusout="onLeaveAnchor"
@@ -190,6 +191,16 @@ export default {
      * same api as Vue's built-in handling of the class attribute.
      */
     contentClass: {
+      type: [String, Object, Array],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the anchor wrapper element.
+     * Can accept all of: String, Object, and Array, i.e. has the
+     * same api as Vue's built-in handling of the class attribute.
+     */
+    anchorClass: {
       type: [String, Object, Array],
       default: '',
     },

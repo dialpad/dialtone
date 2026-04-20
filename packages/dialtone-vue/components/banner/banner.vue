@@ -15,6 +15,7 @@
       <dt-notice-icon
         v-if="showIcon"
         :kind="kind"
+        :icon-class="iconClass"
         :class="{ 'd-notice__icon--has-title': title || $slots.title }"
       >
         <!-- @slot Slot for custom icon -->
@@ -24,6 +25,7 @@
         :title-id="titleId"
         :content-id="contentId"
         :title="title"
+        :title-class="titleClass"
       >
         <template #title>
           <!-- @slot Slot for the title -->
@@ -35,6 +37,7 @@
       <dt-notice-action
         :show-action="showAction"
         :show-close="showClose"
+        :action-class="actionClass"
         @close="$emit('close')"
       >
         <!-- @slot Enter a possible action for the user to take, such as a link to another page -->
@@ -177,6 +180,30 @@ export default {
     backgroundSize: {
       type: String,
       default: 'cover',
+    },
+
+    /**
+     * Additional class name for the icon wrapper element.
+     */
+    iconClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the title wrapper element.
+     */
+    titleClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the action wrapper element.
+     */
+    actionClass: {
+      type: [String, Array, Object],
+      default: '',
     },
   },
 

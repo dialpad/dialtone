@@ -2,7 +2,7 @@
   <div
     v-if="defaultIcon || hasSlotContent($slots.default)"
     aria-hidden="true"
-    class="d-notice__icon"
+    :class="['d-notice__icon', iconClass]"
   >
     <!-- @slot Slot for the main content -->
     <slot>
@@ -56,6 +56,14 @@ export default {
       validator (kind) {
         return NOTICE_KINDS.includes(kind);
       },
+    },
+
+    /**
+     * Additional class name for the icon wrapper element.
+     */
+    iconClass: {
+      type: [String, Array, Object],
+      default: '',
     },
   },
 
