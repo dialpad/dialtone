@@ -7,7 +7,7 @@
       { [BREADCRUMBS_INVERTED_MODIFIER]: inverted },
     ]"
   >
-    <ol :class="['d-breadcrumbs__list']">
+    <ol :class="['d-breadcrumbs__list', listClass]">
       <!-- @slot default slot for breadcrumbs content -->
       <slot>
         <dt-breadcrumb-item
@@ -63,6 +63,14 @@ export default {
     inverted: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * Additional CSS class(es) applied to the list wrapper element.
+     */
+    listClass: {
+      type: [String, Array, Object],
+      default: '',
     },
 
     /**
