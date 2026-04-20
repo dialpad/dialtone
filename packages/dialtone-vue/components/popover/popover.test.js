@@ -305,6 +305,17 @@ describe('DtPopover Tests', () => {
     });
   });
 
+  describe('Pass-through class props', () => {
+    it('Should apply anchorClass to the anchor wrapper', () => {
+      mockProps = { anchorClass: 'my-anchor-class' };
+      updateWrapper();
+
+      anchor = wrapper.find('[data-qa="dt-popover-anchor"]');
+
+      expect(anchor.classes()).toContain('my-anchor-class');
+    });
+  });
+
   describe('contentMode Tests', () => {
     it('should set data-dt-mode on dialog when contentMode is set', () => {
       mockProps = { contentMode: 'dark' };

@@ -37,6 +37,7 @@
         <dt-notice-action
           :show-action="false"
           :show-close="showClose"
+          :action-class="actionClass"
           :button-size="100"
           v-bind="toastListeners"
           @close="$emit('close')"
@@ -165,6 +166,14 @@ export default {
      * Additional class name for the header wrapper element.
      */
     headerClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the action wrapper element.
+     */
+    actionClass: {
       type: [String, Array, Object],
       default: '',
     },
