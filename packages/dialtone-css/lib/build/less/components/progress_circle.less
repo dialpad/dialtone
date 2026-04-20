@@ -4,6 +4,14 @@
 //
 //  https://dialtone.dialpad.com/components/progress-circle
 
+//  @@  @PROPERTY REGISTRATIONS
+//  ----------------------------------------------------------------------------
+//  `--progress-size` is only read on `.d-progress-circle` itself, so registering
+//  as non-inheriting is safe. `--progress-color` is NOT registered — it is set
+//  on `.d-progress-circle` and consumed by descendant `.d-progress-circle__shape`
+//  elements via inheritance.
+@property --progress-size { syntax: "*"; inherits: false; }
+
 @layer dialtone.components {
 .d-progress-circle {
   --progress-size: var(--dt-icon-size-500);

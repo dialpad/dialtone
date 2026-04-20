@@ -17,6 +17,16 @@
 //    - VERTICAL DIVIDERS
 //    - HORIZONTAL DIVIDERS
 //
+//  @@  @PROPERTY REGISTRATIONS
+//  ----------------------------------------------------------------------------
+//  Register opacity custom properties as non-inheriting so `--bco` / `--dco`
+//  set on an ancestor do not bleed into descendants using `.d-bc-*` / `.d-divide-*`.
+//  With universal syntax and no initial-value, `var(--bco, alpha)` still falls
+//  back to the source color's alpha channel when no opacity utility is applied.
+@property --bco { syntax: "*"; inherits: false; }
+
+@property --dco { syntax: "*"; inherits: false; }
+
 //  ============================================================================
 //  $  BORDERS
 //  ============================================================================

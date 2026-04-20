@@ -15,6 +15,18 @@
 //  • GRADIENTS
 //  • PATTERNS
 //
+//  @@  @PROPERTY REGISTRATIONS
+//  ----------------------------------------------------------------------------
+//  Register opacity custom properties as non-inheriting so `--bgo` set on an
+//  ancestor does not bleed into descendants using `.d-bgc-*`. With universal
+//  syntax and no initial-value, `var(--bgo, alpha)` still falls back to the
+//  source color's alpha channel when no opacity utility is applied.
+@property --bgo { syntax: "*"; inherits: false; }
+
+//  `--bgg-size` is consumed by `.d-bgs-var` with fallback `100% 100%`; register
+//  as non-inheriting so a parent setting it doesn't override descendants.
+@property --bgg-size { syntax: "*"; inherits: false; }
+
 //  ============================================================================
 //  $  BACKGROUND ATTACHMENT
 //  ----------------------------------------------------------------------------
