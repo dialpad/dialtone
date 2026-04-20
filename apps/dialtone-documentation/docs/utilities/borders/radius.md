@@ -14,7 +14,7 @@ Use `d-bar-{stop}` to change the border radius on all four corners. The stop ref
 
 ```vue demo
 <!-- @wrapper -->
-<dt-stack gap="100" :direction="{ default: 'column', md: 'row' }">
+<dt-stack gap="100" direction="row" justify="center" class="d-fw-wrap">
   <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-0">  <dt-text kind="code" size="xs">d-bar-0</dt-text></div>
   <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-100"><dt-text kind="code" size="xs">d-bar-100</dt-text></div>
   <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-200"><dt-text kind="code" size="xs">d-bar-200</dt-text></div>
@@ -41,7 +41,7 @@ Use a side-pair class to round the two corners on a single side. Class roots are
 
 ```vue demo
 <!-- @wrapper -->
-<dt-stack gap="400" :direction="{ default: 'column', md: 'row' }">
+<dt-stack gap="100" direction="row" justify="center" class="d-fw-wrap">
   <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bbsr-450"><dt-text kind="code" size="xs">d-bbsr-450</dt-text></div>
   <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bier-450"><dt-text kind="code" size="xs">d-bier-450</dt-text></div>
   <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bber-450"><dt-text kind="code" size="xs">d-bber-450</dt-text></div>
@@ -62,7 +62,7 @@ Use a single-corner class to round exactly one corner. Class roots match the CSS
 
 ```vue demo
 <!-- @wrapper -->
-<dt-stack gap="400" :direction="{ default: 'column', md: 'row' }">
+<dt-stack gap="100" direction="row" justify="center" class="d-fw-wrap">
   <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bssr-500"><dt-text kind="code" size="xs">d-bssr-500</dt-text></div>
   <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bser-500"><dt-text kind="code" size="xs">d-bser-500</dt-text></div>
   <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-beer-500"><dt-text kind="code" size="xs">d-beer-500</dt-text></div>
@@ -76,7 +76,7 @@ Use `d-bar-pill` for a pill-shaped radius on all four corners. The same `-pill` 
 
 ```vue demo
 <!-- @wrapper -->
-<dt-stack gap="400" :direction="{ default: 'column', md: 'row' }">
+<dt-stack gap="100" direction="row" justify="center" class="d-fw-wrap">
   <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-pill">
     <dt-text kind="code" size="xs">d-bar-pill</dt-text>
   </div>
@@ -89,7 +89,7 @@ Use `d-bar-circle` for a fully circular radius. Best paired with a square elemen
 
 ```vue demo
 <!-- @wrapper -->
-<dt-stack gap="400" :direction="{ default: 'column', md: 'row' }">
+<dt-stack gap="100" direction="row" justify="center" class="d-fw-wrap">
   <dt-stack direction="row" align="center" justify="center" class="d-p-100 d-size-200 d-ba d-baw2 d-bc-default d-bgc-primary d-ws-nowrap d-bar-circle">
     <dt-text kind="code" size="xs">d-bar-circle</dt-text>
   </dt-stack>
