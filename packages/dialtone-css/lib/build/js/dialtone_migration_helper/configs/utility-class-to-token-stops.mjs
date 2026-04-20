@@ -93,6 +93,8 @@ export default {
     dot: true,
     ignore: [
       '**/node_modules/**',
+      // `dot: true` makes dot-dirs globbable; explicitly exclude the git directory.
+      '**/.git/**',
       // Built outputs: regenerated on next build; rewriting selectors in co-selected rules
       // (`.d-bar-350, .d-bar6 { ... }`) would corrupt them since the leading whitespace
       // before the legacy selector looks like a class boundary to the regex.
