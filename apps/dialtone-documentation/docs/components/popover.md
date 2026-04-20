@@ -89,9 +89,7 @@ htmlCode='
 </div>
 '
 vueCode='
-<dt-popover
-  :open="onOpen"
->
+<dt-popover>
   <template #anchor>
     <dt-button>
        View Popover
@@ -145,7 +143,6 @@ htmlCode='
 '
 vueCode='
 <dt-popover
-  :open="onOpen"
   :modal="false"
 >
   <template #anchor>
@@ -220,9 +217,7 @@ htmlCode='
 </div>
 '
 vueCode='
-<dt-popover
-  :open="onOpen"
->
+<dt-popover>
   <template #anchor>
     <dt-button>
       View Popover
@@ -300,9 +295,7 @@ htmlCode='
 </div>
 '
 vueCode='
-<dt-popover
-  :open="onOpen"
->
+<dt-popover>
   <template #anchor>
     <dt-button>
       View Popover
@@ -345,7 +338,6 @@ manually specify which position it will move to in what order you can do so via 
 <code-example-tabs
 vueCode='
 <dt-popover
-  :open="onOpen"
   :fallback-placements="[`top`]"
 >
   <template #anchor>
@@ -382,7 +374,6 @@ Padding options for the popover content are provided via size classes "small", "
 <code-example-tabs
 vueCode='
 <dt-popover
-  :open="onOpen"
   padding="small"
 >
   <template #anchor>
