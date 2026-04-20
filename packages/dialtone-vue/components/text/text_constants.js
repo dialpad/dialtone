@@ -38,6 +38,8 @@ export const TEXT_TONE_MODIFIERS = {
   'positive': 'd-text--tone-positive',
   'positive-strong': 'd-text--tone-positive-strong',
   'warning': 'd-text--tone-warning',
+  'info': 'd-text--tone-info',
+  'info-strong': 'd-text--tone-info-strong',
   'neutral-black': 'd-text--tone-neutral-black',
   'neutral-white': 'd-text--tone-neutral-white',
 };

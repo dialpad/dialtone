@@ -76,6 +76,16 @@
         "type": "color",
         "description": "Indicates information that requires user\u2019s attention and further action may be necessary."
       },
+      "info": {
+        "value": "{color.blue.800}",
+        "type": "color",
+        "description": "Indicates a generally informational state."
+      },
+      "info-strong": {
+        "value": "{color.blue.900}",
+        "type": "color",
+        "description": "Indicates a generally informational state on surfaces that require a stronger contrast."
+      },
       "primary-inverted": {
         "value": "{color.black.100}",
         "type": "color",
@@ -151,6 +161,16 @@
         "value": "{color.gold.500}",
         "type": "color",
         "description": "Warning text that sits on high-contrast surfaces or backgrounds"
+      },
+      "info-inverted": {
+        "value": "{color.blue.300}",
+        "type": "color",
+        "description": "Info text that sits on high-contrast surfaces or backgrounds."
+      },
+      "info-strong-inverted": {
+        "value": "{color.blue.200}",
+        "type": "color",
+        "description": "Info strong text that sits on high-contrast surfaces or backgrounds."
       }
     },
     "link": {
@@ -185,6 +205,14 @@
       },
       "warning-hover": {
         "value": "{color.gold.900}",
+        "type": "color"
+      },
+      "info": {
+        "value": "{color.foreground.info}",
+        "type": "color"
+      },
+      "info-hover": {
+        "value": "{color.foreground.info-strong}",
         "type": "color"
       },
       "muted": {
@@ -233,6 +261,14 @@
       },
       "warning-inverted-hover": {
         "value": "{color.gold.300}",
+        "type": "color"
+      },
+      "info-inverted": {
+        "value": "{color.foreground.info-inverted}",
+        "type": "color"
+      },
+      "info-inverted-hover": {
+        "value": "{color.foreground.info-strong-inverted}",
         "type": "color"
       },
       "muted-inverted": {
@@ -995,6 +1031,10 @@
         "value": "{color.gold.500}",
         "type": "color"
       },
+      "info": {
+        "value": "{color.blue.600}",
+        "type": "color"
+      },
       "brand": {
         "value": "{color.brand.purple}",
         "type": "color"
@@ -1011,6 +1051,10 @@
         "value": "{color.gold.300}",
         "type": "color"
       },
+      "info-subtle": {
+        "value": "{color.blue.300}",
+        "type": "color"
+      },
       "brand-subtle": {
         "value": "{color.purple.300}",
         "type": "color"
@@ -1025,6 +1069,10 @@
       },
       "warning-strong": {
         "value": "{color.gold.700}",
+        "type": "color"
+      },
+      "info-strong": {
+        "value": "{color.blue.800}",
         "type": "color"
       },
       "brand-strong": {
@@ -1095,6 +1143,10 @@
         "value": "{color.gold.500}",
         "type": "color"
       },
+      "info-inverted": {
+        "value": "{color.blue.300}",
+        "type": "color"
+      },
       "brand-inverted": {
         "value": "{color.purple.400}",
         "type": "color"
@@ -1111,6 +1163,10 @@
         "value": "{color.gold.800}",
         "type": "color"
       },
+      "info-subtle-inverted": {
+        "value": "{color.blue.900}",
+        "type": "color"
+      },
       "brand-subtle-inverted": {
         "value": "{color.purple.600}",
         "type": "color"
@@ -1125,6 +1181,10 @@
       },
       "warning-strong-inverted": {
         "value": "{color.gold.300}",
+        "type": "color"
+      },
+      "info-strong-inverted": {
+        "value": "{color.blue.200}",
         "type": "color"
       },
       "brand-strong-inverted": {

@@ -2,12 +2,11 @@ import { mount } from '@vue/test-utils';
 import DtLink from './link.vue';
 import {
   LINK_KIND_MODIFIERS,
-  CRITICAL,
-  POSITIVE,
-  WARNING,
-  MUTED,
+  LINK_VARIANTS,
   getLinkKindModifier,
 } from './link_constants';
+
+const TONE_VALUES = LINK_VARIANTS.filter(v => v !== '');
 
 const baseProps = {
   href: '#',
@@ -62,48 +61,8 @@ describe('DtLink tests', () => {
       });
     });
 
-    describe('When tone is critical', () => {
-      it('should have correct class', () => {
-        mockProps = { tone: CRITICAL };
-
-        updateWrapper();
-
-        expect(nativeLink.classes(LINK_KIND_MODIFIERS[CRITICAL])).toBe(true);
-      });
-    });
-
-    describe('When tone is positive', () => {
-      it('should have correct class', () => {
-        mockProps = { tone: POSITIVE };
-
-        updateWrapper();
-
-        expect(nativeLink.classes(LINK_KIND_MODIFIERS[POSITIVE])).toBe(true);
-      });
-    });
-
-    describe('When tone is warning', () => {
-      it('should have correct class', async () => {
-        mockProps = { tone: WARNING };
-
-        updateWrapper();
-
-        expect(nativeLink.classes(LINK_KIND_MODIFIERS[WARNING])).toBe(true);
-      });
-    });
-
-    describe('When tone is muted', () => {
-      it('should have correct class', async () => {
-        mockProps = { tone: MUTED };
-
-        updateWrapper();
-
-        expect(nativeLink.classes(LINK_KIND_MODIFIERS[MUTED])).toBe(true);
-      });
-    });
-
     describe('When inverted is true', () => {
-      it('should have correct class', async () => {
+      it('should have correct class', () => {
         mockProps = { inverted: true };
 
         updateWrapper();
@@ -112,44 +71,20 @@ describe('DtLink tests', () => {
       });
     });
 
-    describe('When tone is critical and inverted is true', () => {
-      it('should have correct class', async () => {
-        mockProps = { tone: CRITICAL, inverted: true };
+    it.each(TONE_VALUES)('applies tone modifier class for %s', (tone) => {
+      mockProps = { tone };
 
-        updateWrapper();
+      updateWrapper();
 
-        expect(nativeLink.classes(getLinkKindModifier(CRITICAL, true))).toBe(true);
-      });
+      expect(nativeLink.classes(LINK_KIND_MODIFIERS[tone])).toBe(true);
     });
 
-    describe('When tone is positive and inverted is true', () => {
-      it('should have correct class', async () => {
-        mockProps = { tone: POSITIVE, inverted: true };
+    it.each(TONE_VALUES)('applies inverted tone modifier class for %s', (tone) => {
+      mockProps = { tone, inverted: true };
 
-        updateWrapper();
+      updateWrapper();
 
-        expect(nativeLink.classes(getLinkKindModifier(POSITIVE, true))).toBe(true);
-      });
-    });
-
-    describe('When tone is warning and inverted is true', () => {
-      it('should have correct class', async () => {
-        mockProps = { tone: WARNING, inverted: true };
-
-        updateWrapper();
-
-        expect(nativeLink.classes(getLinkKindModifier(WARNING, true))).toBe(true);
-      });
-    });
-
-    describe('When tone is muted and inverted is true', () => {
-      it('should have correct class', async () => {
-        mockProps = { tone: MUTED, inverted: true };
-
-        updateWrapper();
-
-        expect(nativeLink.classes(getLinkKindModifier(MUTED, true))).toBe(true);
-      });
+      expect(nativeLink.classes(getLinkKindModifier(tone, true))).toBe(true);
     });
 
     describe('When underline is false', () => {
@@ -279,7 +214,7 @@ describe('DtLink tests', () => {
       };
 
       it('should apply link classes to the router-link', () => {
-        mockProps = { to: '/components/', tone: MUTED };
+        mockProps = { to: '/components/', tone: 'muted' };
         mockGlobal = {
           stubs: { RouterLink: RouterLinkStub },
         };
@@ -289,7 +224,7 @@ describe('DtLink tests', () => {
         const routerLink = wrapper.findComponent(RouterLinkStub);
         expect(routerLink.exists()).toBe(true);
         expect(wrapper.find('[data-qa="dt-link"]').classes()).toContain('d-link');
-        expect(wrapper.find('[data-qa="dt-link"]').classes()).toContain(LINK_KIND_MODIFIERS[MUTED]);
+        expect(wrapper.find('[data-qa="dt-link"]').classes()).toContain(LINK_KIND_MODIFIERS.muted);
       });
     });
   });
