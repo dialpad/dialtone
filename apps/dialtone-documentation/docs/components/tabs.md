@@ -36,7 +36,7 @@ vueCode='
     <dt-tab id="3" panel-id="4">
       Second
     </dt-tab>
-    <dt-tab id="5`" panel-id="6">
+    <dt-tab id="5" panel-id="6">
       Third
     </dt-tab>
   </template>
@@ -80,7 +80,7 @@ vueCode='
     <dt-tab id="3" panel-id="4">
       Second
     </dt-tab>
-    <dt-tab id="5`" panel-id="6">
+    <dt-tab id="5" panel-id="6">
       Third
     </dt-tab>
   </template>
@@ -125,7 +125,7 @@ vueCode='
     <dt-tab id="3" panel-id="4">
       Second
     </dt-tab>
-    <dt-tab id="5`" panel-id="6">
+    <dt-tab id="5" panel-id="6">
       Third
     </dt-tab>
   </template>
@@ -168,7 +168,7 @@ vueCode='
     <dt-tab id="3" panel-id="4" disabled>
       Second
     </dt-tab>
-    <dt-tab id="5`" panel-id="6">
+    <dt-tab id="5" panel-id="6">
       Third
     </dt-tab>
   </template>
@@ -213,7 +213,7 @@ vueCode='
     <dt-tab id="3" panel-id="4">
       Second
     </dt-tab>
-    <dt-tab id="5`" panel-id="6">
+    <dt-tab id="5" panel-id="6">
       Third
     </dt-tab>
   </template>
@@ -254,7 +254,7 @@ vueCode='
     <dt-tab id="3" panel-id="4">
       Second
     </dt-tab>
-    <dt-tab id="5`" panel-id="6">
+    <dt-tab id="5" panel-id="6">
       Third
     </dt-tab>
   </template>
@@ -303,7 +303,7 @@ vueCode='
     <dt-tab id="3" panel-id="4">
       Second
     </dt-tab>
-    <dt-tab id="5`" panel-id="6">
+    <dt-tab id="5" panel-id="6">
       Third
     </dt-tab>
   </template>
