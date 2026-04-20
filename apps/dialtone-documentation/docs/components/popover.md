@@ -90,8 +90,8 @@ htmlCode='
 '
 vueCode='
 <dt-popover>
-  <template #anchor>
-    <dt-button>
+  <template #anchor="{ attrs }">
+    <dt-button v-bind="attrs">
        View Popover
     </dt-button>
   </template>
@@ -145,8 +145,8 @@ vueCode='
 <dt-popover
   :modal="false"
 >
-  <template #anchor>
-    <dt-button>
+  <template #anchor="{ attrs }">
+    <dt-button v-bind="attrs">
       View Popover
     </dt-button>
   </template>
@@ -218,8 +218,8 @@ htmlCode='
 '
 vueCode='
 <dt-popover>
-  <template #anchor>
-    <dt-button>
+  <template #anchor="{ attrs }">
+    <dt-button v-bind="attrs">
       View Popover
     </dt-button>
   </template>
@@ -296,8 +296,8 @@ htmlCode='
 '
 vueCode='
 <dt-popover>
-  <template #anchor>
-    <dt-button>
+  <template #anchor="{ attrs }">
+    <dt-button v-bind="attrs">
       View Popover
     </dt-button>
   </template>
@@ -340,8 +340,8 @@ vueCode='
 <dt-popover
   :fallback-placements="[`top`]"
 >
-  <template #anchor>
-    <dt-button>
+  <template #anchor="{ attrs }">
+    <dt-button v-bind="attrs">
        fallback placement: top
     </dt-button>
   </template>
@@ -376,8 +376,8 @@ vueCode='
 <dt-popover
   padding="small"
 >
-  <template #anchor>
-    <dt-button>
+  <template #anchor="{ attrs }">
+    <dt-button v-bind="attrs">
        View Popover
     </dt-button>
   </template>
