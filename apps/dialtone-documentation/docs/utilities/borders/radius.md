@@ -6,6 +6,16 @@ keywords: ["rounded", "corner", "pill", "circle", "radius start", "radius end", 
 
 <script setup>
   import { radius } from '@data/borders.json';
+
+  // Skip legacy rows when the constructed class equals the logical one (e.g. .d-bar-pill,
+  // .d-bar-circle where legacyPrefix == logicalPrefix and legacyPx is the keyword).
+  function hasDistinctLegacy (scope, val) {
+    if (val.legacyPx == null) return false;
+    const infix = (val.legacyPx === 'pill' || val.legacyPx === 'circle') ? '-' : '';
+    const legacyClass = `d-${scope.legacyPrefix}${infix}${val.legacyPx}`;
+    const logicalClass = `d-${scope.logicalPrefix}-${val.stop}`;
+    return legacyClass !== logicalClass;
+  }
 </script>
 
 ## All Corners
@@ -118,7 +128,7 @@ Use `d-bar-unset` to reset the border-radius on all four corners to `unset`.
         <td class="d-code--sm d-fc-tertiary d-ta-right">{{ val.px }}</td>
       </tr>
       <template v-if="scope.legacyPrefix">
-        <tr v-for="val in radius.values.filter(v => v.legacyPx != null)" :key="`legacy-${scope.legacyPrefix}-${val.legacyPx}`">
+        <tr v-for="val in radius.values.filter(v => hasDistinctLegacy(scope, v))" :key="`legacy-${scope.legacyPrefix}-${val.legacyPx}`">
           <th scope="row">
             <dt-stack gap="50">
               <dt-text as="span" kind="code" :size="100" class="d-docsite-code">
