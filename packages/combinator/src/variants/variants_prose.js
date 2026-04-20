@@ -1,9 +1,11 @@
+const PROSE_DEFAULT_PROPS = {
+  size: { initialValue: 300 },
+  density: { initialValue: 200 },
+};
+
 export default {
   default: {
-    props: {
-      size: { initialValue: 300 },
-      density: { initialValue: 200 },
-    },
+    props: PROSE_DEFAULT_PROPS,
     slots: {
       default: { initialValue: `<h1>Headings and paragraphs</h1>
 <p>This is a standard paragraph of body text. It contains enough words to wrap across multiple lines.</p>
@@ -20,10 +22,7 @@ export default {
     },
   },
   'inline elements': {
-    props: {
-      size: { initialValue: 300 },
-      density: { initialValue: 200 },
-    },
+    props: PROSE_DEFAULT_PROPS,
     slots: {
 default: { initialValue: `<p>
   How about <strong>bold text</strong>,
@@ -61,10 +60,7 @@ default: { initialValue: `<p>
     },
   },
   'unordered list': {
-    props: {
-      size: { initialValue: 300 },
-      density: { initialValue: 200 },
-    },
+    props: PROSE_DEFAULT_PROPS,
     slots: {
       default: { initialValue: `<ul>
   <li><p>First item in an unordered list</p></li>
@@ -86,10 +82,7 @@ default: { initialValue: `<p>
     },
   },
   'ordered list': {
-    props: {
-      size: { initialValue: 300 },
-      density: { initialValue: 200 },
-    },
+    props: PROSE_DEFAULT_PROPS,
     slots: {
       default: { initialValue: `<ol>
   <li>First step in a process</li>
@@ -107,10 +100,7 @@ default: { initialValue: `<p>
     },
   },
   'mixed list': {
-    props: {
-      size: { initialValue: 300 },
-      density: { initialValue: 200 },
-    },
+    props: PROSE_DEFAULT_PROPS,
     slots: {
       default: { initialValue: `<ul>
   <li>
@@ -126,10 +116,7 @@ default: { initialValue: `<p>
     },
   },
   blockquote: {
-    props: {
-      size: { initialValue: 300 },
-      density: { initialValue: 200 },
-    },
+    props: PROSE_DEFAULT_PROPS,
     slots: {
       default: { initialValue: `<blockquote>
   <p>This is a single-paragraph blockquote. It should be visually distinct from surrounding body text.</p>
@@ -152,10 +139,7 @@ default: { initialValue: `<p>
     },
   },
   'code blocks': {
-    props: {
-      size: { initialValue: 300 },
-      density: { initialValue: 200 },
-    },
+    props: PROSE_DEFAULT_PROPS,
     slots: {
       default: { initialValue: `<pre><code>// A plain code block
 return \`Hello, \${name}!\`;
@@ -171,10 +155,7 @@ console.log(message);</code></pre>
     },
   },
   table: {
-    props: {
-      size: { initialValue: 300 },
-      density: { initialValue: 200 },
-    },
+    props: PROSE_DEFAULT_PROPS,
     slots: {
       default: { initialValue: `<!-- Table with thead -->
 <table>
@@ -241,10 +222,7 @@ console.log(message);</code></pre>
     },
   },
   'definition list': {
-    props: {
-      size: { initialValue: 300 },
-      density: { initialValue: 200 },
-    },
+    props: PROSE_DEFAULT_PROPS,
     slots: {
       default: { initialValue: `<dl>
   <dt>Design token</dt>
@@ -258,10 +236,7 @@ console.log(message);</code></pre>
     },
   },
   'details/summary': {
-    props: {
-      size: { initialValue: 300 },
-      density: { initialValue: 200 },
-    },
+    props: PROSE_DEFAULT_PROPS,
     slots: {
       default: { initialValue: `<details>
   <summary>Click to expand for more information</summary>
@@ -276,10 +251,7 @@ interacts with the summary element.</p>
     },
   },
   'task list': {
-    props: {
-      size: { initialValue: 300 },
-      density: { initialValue: 200 },
-    },
+    props: PROSE_DEFAULT_PROPS,
     slots: {
       default: { initialValue: `<ul>
   <li><input type="checkbox" checked disabled> Design review complete</li>
@@ -290,10 +262,7 @@ interacts with the summary element.</p>
     },
   },
   'example composition': {
-    props: {
-      size: { initialValue: 300 },
-      density: { initialValue: 200 },
-    },
+    props: PROSE_DEFAULT_PROPS,
     slots: {
       default: { initialValue: `<h1>Getting started</h1>
 <p>Install the package:</p>

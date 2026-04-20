@@ -1,4 +1,3 @@
-<!-- eslint-disable vuejs-accessibility/form-control-has-label -->
 <!-- eslint-disable max-len -->
 <template>
   <dt-prose
@@ -221,13 +220,27 @@ console.log(message);</code></pre>
     <h2>Task List</h2>
     <ul>
       <li>
+        <!-- eslint-disable-next-line vuejs-accessibility/form-control-has-label -->
         <input
           type="checkbox"
           checked
+          disabled
         > Completed task
       </li>
-      <li><input type="checkbox"> Incomplete task</li>
-      <li><input type="checkbox"> Another task to do</li>
+      <li>
+        <!-- eslint-disable-next-line vuejs-accessibility/form-control-has-label -->
+        <input
+          type="checkbox"
+          disabled
+        > Incomplete task
+      </li>
+      <li>
+        <!-- eslint-disable-next-line vuejs-accessibility/form-control-has-label -->
+        <input
+          type="checkbox"
+          disabled
+        > Another task to do
+      </li>
     </ul>
 
     <!-- Long-form content flow -->
