@@ -14,6 +14,7 @@
     :show-action="showAction"
     :icon-class="iconClass"
     :header-class="headerClass"
+    :content-class="contentClass"
     :action-class="actionClass"
     v-bind="$attrs"
     @close="handleClose"
@@ -197,6 +198,14 @@ export default {
      * Additional class name for the header wrapper element.
      */
     headerClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the content wrapper element.
+     */
+    contentClass: {
       type: [String, Array, Object],
       default: '',
     },

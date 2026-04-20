@@ -17,6 +17,7 @@
       :content-id="contentId"
       :header-text="headerText"
       :header-class="headerClass"
+      :content-class="contentClass"
       :role="role"
     >
       <template #header>
@@ -170,6 +171,14 @@ export default {
      * Additional class name for the header wrapper element.
      */
     headerClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the content wrapper element.
+     */
+    contentClass: {
       type: [String, Array, Object],
       default: '',
     },
