@@ -642,7 +642,7 @@
         "type": "color"
       },
       "info-strong": {
-        "value": "{color.blue.400}",
+        "value": "{color.blue.900}",
         "type": "color"
       },
       "brand-strong": {
