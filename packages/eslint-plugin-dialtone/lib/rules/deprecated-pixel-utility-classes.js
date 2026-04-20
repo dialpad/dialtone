@@ -6,6 +6,8 @@
  */
 'use strict';
 
+const { START, END, buildDetectRegex, createClassAttributeRule } = require('../util/class-attribute-rule');
+
 // MUST STAY IN SYNC with:
 // - LAYOUT_STOPS, MARGIN_SIZES_SPACING, MARGIN_SIZES_LAYOUT in dialtone-css/postcss/constants.cjs
 // - SIZING_MAP, SPACING_MAP, NEGATIVE_SPACING_MAP, SPACING_LAYOUT_MAP in
@@ -45,11 +47,6 @@ const SPACING_LAYOUT_MAP = { 96: '150', 128: '200' };
 
 // Per-category regexes with capture groups. Negative variants precede positive so `d-mtn8`
 // matches the negative pattern (rule order is load-order in `rewriteClassString`).
-//
-// Token boundaries: `(?<=^|\s)` / `(?=$|\s)` anchor to start/whitespace rather than `\b`.
-// `\b` treats `-` as a non-word char, so `\bd-h16\b` wrongly matches inside `foo-d-h16`.
-const START = '(?<=^|\\s)';
-const END = '(?=$|\\s)';
 const SIZING_RE          = new RegExp(`${START}d-(h|w|hmn|hmx|wmn|wmx)(${SIZING_PIXELS})${END}`, 'g');
 const NEGATIVE_MARGIN_RE = new RegExp(`${START}d-m(t|r|b|l|x|y)?n(${NEGATIVE_PIXELS})${END}`, 'g');
 const MARGIN_RE          = new RegExp(`${START}d-m(t|r|b|l|x|y)?(${SPACING_PIXELS})${END}`, 'g');
@@ -58,8 +55,7 @@ const GAP_RE             = new RegExp(`${START}d-(g|rg|cg)(${SPACING_PIXELS})${E
 const NEGATIVE_POS_RE    = new RegExp(`${START}d-(t|r|b|l|x|y|all)n(${NEGATIVE_PIXELS})${END}`, 'g');
 const POSITION_RE        = new RegExp(`${START}d-(t|r|b|l|x|y|all)(${SPACING_PIXELS})${END}`, 'g');
 
-// Detection-only combined pattern (non-global) for fast early-exit in the visitor.
-const DETECT = new RegExp([SIZING_RE, NEGATIVE_MARGIN_RE, MARGIN_RE, PADDING_RE, GAP_RE, NEGATIVE_POS_RE, POSITION_RE].map(r => r.source).join('|'));
+const DETECT = buildDetectRegex([SIZING_RE, NEGATIVE_MARGIN_RE, MARGIN_RE, PADDING_RE, GAP_RE, NEGATIVE_POS_RE, POSITION_RE]);
 
 /**
  * Rewrite a class attribute string from legacy pixel-suffix to token-stop naming.
@@ -91,27 +87,9 @@ module.exports = {
     },
   },
 
-  create (context) {
-    const sourceCode = context.sourceCode ?? context.getSourceCode();
-    return sourceCode.parserServices.defineTemplateBodyVisitor({
-      VAttribute (node) {
-        if (node.key.name !== 'class') return;
-        const classes = node.value?.value;
-        if (!classes || !DETECT.test(classes)) return;
-
-        context.report({
-          node,
-          messageId: 'deprecatedPixelClass',
-          fix (fixer) {
-            const rewritten = rewriteClassString(classes);
-            if (rewritten === classes) return null;
-            // Preserve the attribute's quoting style (single, double, or unquoted).
-            const firstChar = sourceCode.getText(node.value)[0];
-            const quote = firstChar === '"' || firstChar === '\'' ? firstChar : '';
-            return fixer.replaceText(node.value, `${quote}${rewritten}${quote}`);
-          },
-        });
-      },
-    });
-  },
+  create: createClassAttributeRule({
+    detect: DETECT,
+    rewrite: rewriteClassString,
+    messageId: 'deprecatedPixelClass',
+  }),
 };

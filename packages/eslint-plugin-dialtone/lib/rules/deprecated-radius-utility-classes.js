@@ -5,6 +5,8 @@
  */
 'use strict';
 
+const { START, END, buildDetectRegex, createClassAttributeRule } = require('../util/class-attribute-rule');
+
 // MUST STAY IN SYNC with:
 // - RADIUS_STOPS in dialtone-css/postcss/constants.cjs
 // - RADIUS_MAP / RADIUS_PAIR_PREFIX_MAP in dialtone-css/.../migration_helper/configs/utility-class-to-token-stops.mjs
@@ -26,16 +28,11 @@ const PAIR_PREFIX_MAP = {
 const NUMERIC_SUFFIXES = Object.keys(RADIUS_STOP_MAP).sort((a, b) => b.length - a.length || Number(b) - Number(a)).join('|');
 const PAIR_PREFIXES = Object.keys(PAIR_PREFIX_MAP).join('|');
 
-// Token boundaries: `(?<=^|\s)` / `(?=$|\s)` anchor to start/whitespace rather than `\b`.
-// `\b` treats `-` as a non-word char, so `\bd-btr6\b` wrongly matches inside `foo-d-btr6`.
-const START = '(?<=^|\\s)';
-const END = '(?=$|\\s)';
 const ALL_CORNERS_NUMERIC = new RegExp(`${START}d-bar(${NUMERIC_SUFFIXES})${END}`, 'g');
 const PAIR_NUMERIC        = new RegExp(`${START}d-(${PAIR_PREFIXES})(${NUMERIC_SUFFIXES})${END}`, 'g');
 const PAIR_KEYWORD        = new RegExp(`${START}d-(${PAIR_PREFIXES})-(pill|circle)${END}`, 'g');
 
-// Non-global detection pattern for fast early-exit.
-const DETECT = new RegExp([ALL_CORNERS_NUMERIC, PAIR_NUMERIC, PAIR_KEYWORD].map(r => r.source).join('|'));
+const DETECT = buildDetectRegex([ALL_CORNERS_NUMERIC, PAIR_NUMERIC, PAIR_KEYWORD]);
 
 function rewriteClassString (input) {
   return input
@@ -59,27 +56,9 @@ module.exports = {
     },
   },
 
-  create (context) {
-    const sourceCode = context.sourceCode ?? context.getSourceCode();
-    return sourceCode.parserServices.defineTemplateBodyVisitor({
-      VAttribute (node) {
-        if (node.key.name !== 'class') return;
-        const classes = node.value?.value;
-        if (!classes || !DETECT.test(classes)) return;
-
-        context.report({
-          node,
-          messageId: 'deprecatedRadiusClass',
-          fix (fixer) {
-            const rewritten = rewriteClassString(classes);
-            if (rewritten === classes) return null;
-            // Preserve the attribute's quoting style (single, double, or unquoted).
-            const firstChar = sourceCode.getText(node.value)[0];
-            const quote = firstChar === '"' || firstChar === '\'' ? firstChar : '';
-            return fixer.replaceText(node.value, `${quote}${rewritten}${quote}`);
-          },
-        });
-      },
-    });
-  },
+  create: createClassAttributeRule({
+    detect: DETECT,
+    rewrite: rewriteClassString,
+    messageId: 'deprecatedRadiusClass',
+  }),
 };

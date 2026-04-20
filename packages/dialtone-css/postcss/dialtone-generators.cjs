@@ -49,9 +49,9 @@ const generatedRules = {
   flexColumnEveryChild: [],
   flexColumnNthChild: [],
   flexDirectionColumn: [],
-  // Border radius: cascade order per PR #1205 (DLT-3321) — all → pairs → single-corners,
-  // so singles win over pairs and pairs win over all. Within pairs: clockwise from top
-  // (block-start, inline-end, block-end, inline-start). Within singles: clockwise from top-left.
+  // Border radius cascade order: all → pairs → single-corners, so singles win over pairs
+  // and pairs win over all. Within pairs: clockwise from top (block-start, inline-end,
+  // block-end, inline-start). Within singles: clockwise from top-left.
   radiusAll: [],
   radiusBbsr: [],
   radiusBier: [],
@@ -363,10 +363,8 @@ function flexColumnsUtilities (clonedSource, declaration) {
   }
 }
 
-// Radius scope definitions, ordered by cascade priority (matches generatedRules bucket order).
+// Radius scope definitions, ordered by cascade priority.
 // `legacyPrefix: null` means the scope is net-new with no legacy equivalent class.
-// Cascade: all → pairs (clockwise from top) → single corners (clockwise from top-left).
-// See PR #1205 / DLT-3321 for the source-order invariant.
 const RADIUS_SCOPES = [
   { bucket: 'radiusAll',  logicalPrefix: 'bar',  legacyPrefix: 'bar',  properties: ['border-radius'] },
   { bucket: 'radiusBbsr', logicalPrefix: 'bbsr', legacyPrefix: 'btr',  properties: ['border-start-start-radius', 'border-start-end-radius'] },
