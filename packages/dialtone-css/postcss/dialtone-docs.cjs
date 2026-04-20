@@ -49,6 +49,10 @@ function generateExclusionRegex () {
 const documentation = {};
 const CSSVarRegex = /var\(([^),]+)\)/g;
 
+// Plain class selector (`.d-foo-bar`). Intentionally excludes pseudo-classes, escape sequences,
+// and :where/:is wrappers so pseudo/state variants (`.h\:d-fc-primary:hover`) are skipped.
+const PLAIN_CLASS_SELECTOR = /^\.[\w-]+$/;
+
 /**
  * Metadata rules for utility classes
  * Maps patterns to metadata that should be added to the documentation
@@ -103,6 +107,30 @@ const metadataRules = [
       docs: 'https://dialtone.dialpad.com/utilities/grid/gap.html',
     },
   },
+  // Legacy border-radius all-corners numeric (deprecated per deprecated-radius-utility-classes.js eslint rule)
+  {
+    pattern: /^d-bar(0|1|2|4|6|8|12|16|24|32)$/,
+    metadata: {
+      deprecated: true,
+      discouraged: true,
+      category: 'borders',
+      reason: 'Legacy pixel-suffix border-radius utilities are deprecated. Use token-stop-indexed names instead',
+      alternatives: ['d-bar-{stop}'],
+      docs: 'https://dialtone.dialpad.com/utilities/borders/radius.html',
+    },
+  },
+  // Legacy border-radius physical side-pair numeric and keyword (deprecated)
+  {
+    pattern: /^d-(btr|bbr|brr|blr)(0|1|2|4|6|8|12|16|24|32|-pill|-circle)$/,
+    metadata: {
+      deprecated: true,
+      discouraged: true,
+      category: 'borders',
+      reason: 'Legacy physical-direction border-radius utilities are deprecated. Use logical-named token-stop-indexed equivalents',
+      alternatives: ['d-bbsr-{stop} (was d-btr*)', 'd-bber-{stop} (was d-bbr*)', 'd-bisr-{stop} (was d-blr*)', 'd-bier-{stop} (was d-brr*)'],
+      docs: 'https://dialtone.dialpad.com/utilities/borders/radius.html',
+    },
+  },
 ];
 
 /**
@@ -125,7 +153,16 @@ function getMetadataForClass (className) {
  * @param {import('postcss').Rule} rule
  */
 function generateUtilityClassDocumentation (docs, rule) {
-  const className = rule.selector.split(/(,|\s)/)[0].replace(/^\.(.+)/, '$1');
+  // A rule may have multiple comma-separated class selectors (e.g. logical + legacy co-selection
+  // like `.d-bar-350, .d-bar6`). Catalog each plain class separately so deprecated metadata
+  // attaches to the legacy name while the canonical logical name stays clean.
+  const classNames = rule.selector
+    .split(',')
+    .map(sel => sel.trim().split(/\s+/)[0])
+    .filter(sel => PLAIN_CLASS_SELECTOR.test(sel))
+    .map(sel => sel.slice(1));
+
+  if (classNames.length === 0) return;
 
   const values = rule.nodes.map(node => {
     const _value = node.value;
@@ -145,12 +182,13 @@ function generateUtilityClassDocumentation (docs, rule) {
     return result;
   });
 
-  const metadata = getMetadataForClass(className);
-
-  documentation[className] = {
-    values,
-    ...(metadata && { metadata }),
-  };
+  classNames.forEach(className => {
+    const metadata = getMetadataForClass(className);
+    documentation[className] = {
+      values,
+      ...(metadata && { metadata }),
+    };
+  });
 }
 
 /**

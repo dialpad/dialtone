@@ -2360,6 +2360,10 @@
         "value": "16px",
         "type": "dimension"
       },
+      "550": {
+        "value": "24px",
+        "type": "dimension"
+      },
       "600": {
         "value": "32px",
         "type": "dimension"

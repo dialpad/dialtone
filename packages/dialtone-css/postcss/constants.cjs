@@ -22,18 +22,24 @@ module.exports = {
     0,
   ],
   FLEX_COLUMNS: 12,
-  BORDER_RADIUS_SIZES: {
-    0: 'radius-0',
-    1: 'radius-100',
-    2: 'radius-200',
-    4: 'radius-300',
-    6: 'radius-350',
-    8: 'radius-400',
-    12: 'radius-450',
-    16: 'radius-500',
-    24: '550', // TODO: Remove as it doesn't have a valid token?
-    32: 'radius-600',
-  },
+  // RADIUS_STOPS: drives border-radius utility generation.
+  // Each entry pairs a logical token stop with its legacy t-shirt pixel suffix
+  // so the generator can emit co-selected rules like `.d-bar-350, .d-bar6 { ... }`.
+  // Stops `pill` and `circle` use themselves as the legacy suffix (self-aliased).
+  RADIUS_STOPS: [
+    { stop: '0',      legacyPx: '0' },
+    { stop: '100',    legacyPx: '1' },
+    { stop: '200',    legacyPx: '2' },
+    { stop: '300',    legacyPx: '4' },
+    { stop: '350',    legacyPx: '6' },
+    { stop: '400',    legacyPx: '8' },
+    { stop: '450',    legacyPx: '12' },
+    { stop: '500',    legacyPx: '16' },
+    { stop: '550',    legacyPx: '24' },
+    { stop: '600',    legacyPx: '32' },
+    { stop: 'pill',   legacyPx: 'pill' },
+    { stop: 'circle', legacyPx: 'circle' },
+  ],
   GAP_SPACES: {
     0: '0',
     1: '100',

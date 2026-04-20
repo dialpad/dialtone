@@ -41,80 +41,119 @@ ruleTester.run('deprecated-pixel-utility-classes', rule, {
     { code: '<template><div class="d-d-flex d-fc-primary" /></template>' },
     // Logical property aliases
     { code: '<template><div class="d-mis-100 d-pbs-200" /></template>' },
+    // Custom (non-Dialtone) classes that end with a legacy-looking suffix must not match.
+    // `\b` treats `-` as a non-word char, so the previous regex wrongly matched inside these.
+    { code: '<template><div class="foo-d-h16" /></template>' },
+    { code: '<template><div class="my-d-p8 app-d-mt16" /></template>' },
+    { code: '<template><div class="d-h-25 foo-d-h16" /></template>' },
   ],
 
   invalid: [
     // Sizing
     {
       code: '<template><div class="d-h16" /></template>',
+      output: '<template><div class="d-h-25" /></template>',
       errors: [{ messageId: 'deprecatedPixelClass' }],
     },
     {
       code: '<template><div class="d-w64" /></template>',
+      output: '<template><div class="d-w-100" /></template>',
       errors: [{ messageId: 'deprecatedPixelClass' }],
     },
     {
       code: '<template><div class="d-hmn96 d-wmx512" /></template>',
+      output: '<template><div class="d-hmn-150 d-wmx-800" /></template>',
       errors: [{ messageId: 'deprecatedPixelClass' }],
     },
     // Margin
     {
       code: '<template><div class="d-m8" /></template>',
+      output: '<template><div class="d-m-100" /></template>',
       errors: [{ messageId: 'deprecatedPixelClass' }],
     },
     {
       code: '<template><div class="d-mt16 d-ml8" /></template>',
+      output: '<template><div class="d-mt-200 d-ml-100" /></template>',
       errors: [{ messageId: 'deprecatedPixelClass' }],
     },
     // Negative margin
     {
       code: '<template><div class="d-mtn8" /></template>',
+      output: '<template><div class="d-mt-n100" /></template>',
+      errors: [{ messageId: 'deprecatedPixelClass' }],
+    },
+    // Negative 20 (regression: NEGATIVE_PIXELS must include 20 since NEGATIVE_SPACING_MAP does)
+    {
+      code: '<template><div class="d-mn20 d-tn20" /></template>',
+      output: '<template><div class="d-m-n250 d-t-n250" /></template>',
       errors: [{ messageId: 'deprecatedPixelClass' }],
     },
     // Padding
     {
       code: '<template><div class="d-p8 d-pt16" /></template>',
+      output: '<template><div class="d-p-100 d-pt-200" /></template>',
       errors: [{ messageId: 'deprecatedPixelClass' }],
     },
     // Gap
     {
       code: '<template><div class="d-g8 d-rg16" /></template>',
+      output: '<template><div class="d-g-100 d-rg-200" /></template>',
       errors: [{ messageId: 'deprecatedPixelClass' }],
     },
     // Position
     {
       code: '<template><div class="d-t8 d-l16" /></template>',
+      output: '<template><div class="d-t-100 d-l-200" /></template>',
       errors: [{ messageId: 'deprecatedPixelClass' }],
     },
     // Negative position
     {
       code: '<template><div class="d-tn8" /></template>',
+      output: '<template><div class="d-t-n100" /></template>',
       errors: [{ messageId: 'deprecatedPixelClass' }],
     },
-    // Mixed old and new (still reports because old class is present)
+    // Mixed old and new (only old is rewritten)
     {
       code: '<template><div class="d-h-25 d-p8" /></template>',
+      output: '<template><div class="d-h-25 d-p-100" /></template>',
       errors: [{ messageId: 'deprecatedPixelClass' }],
     },
-    // Off-scale small-value sizing classes (DLT-3330 targets these for migration to d-*-Npx)
+    // Off-scale small-value sizing classes (DLT-3330 targets these — autofix uses Npx suffix)
     {
       code: '<template><div class="d-w1" /></template>',
+      output: '<template><div class="d-w-1px" /></template>',
       errors: [{ messageId: 'deprecatedPixelClass' }],
     },
     {
       code: '<template><div class="d-h2" /></template>',
+      output: '<template><div class="d-h-2px" /></template>',
       errors: [{ messageId: 'deprecatedPixelClass' }],
     },
     {
       code: '<template><div class="d-hmn8" /></template>',
+      output: '<template><div class="d-hmn-8px" /></template>',
       errors: [{ messageId: 'deprecatedPixelClass' }],
     },
     {
       code: '<template><div class="d-wmx20" /></template>',
+      output: '<template><div class="d-wmx-20px" /></template>',
       errors: [{ messageId: 'deprecatedPixelClass' }],
     },
     {
       code: '<template><div class="d-h24 d-w24" /></template>',
+      output: '<template><div class="d-h-24px d-w-24px" /></template>',
+      errors: [{ messageId: 'deprecatedPixelClass' }],
+    },
+    // Unquoted attribute (HTML5 valid, vue-eslint-parser accepts). Autofix must not add quotes.
+    {
+      code: '<template><div class=d-h16 /></template>',
+      output: '<template><div class=d-h-25 /></template>',
+      errors: [{ messageId: 'deprecatedPixelClass' }],
+    },
+    // Single-quoted attribute — preserves single quotes.
+    {
+      code: '<template><div class=\'d-p8\' /></template>',
+      output: '<template><div class=\'d-p-100\' /></template>',
       errors: [{ messageId: 'deprecatedPixelClass' }],
     },
   ],

@@ -74,7 +74,7 @@ const props = defineProps({
 
   /**
    * Border radius. Maps to --dt-size-radius-* tokens.
-   * @values 0, 100, 200, 300, 350, 400, 450, 500, 600, pill, circle
+   * @values 0, 100, 200, 300, 350, 400, 450, 500, 550, 600, pill, circle
    */
   borderRadius: { type: String, default: undefined, validator: borderRadiusValidator },
 
