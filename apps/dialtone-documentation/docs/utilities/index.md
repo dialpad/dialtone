@@ -271,7 +271,7 @@ Refine the spacing by adjusting the [Stack](/components/stack.md) `gap` prop and
 
 ### 13. Round it out!
 
-Add `d-bar4` to each item for subtle rounded corners.
+Add `d-bar-300` to each item for subtle rounded corners.
 
 ```vue demo
 <!-- @wrapper -->

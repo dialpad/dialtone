@@ -21,7 +21,7 @@ Use `d-m-{stop}` to set margin using spacing token stops. The number references 
 <!-- @wrapper -->
 <dt-stack direction="row" justify="center" gap="300" class="d-w100p">
   <div class="d-as-center d-bar-400 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mbs-150 d-p-200 d-bgc-moderate d-bber-300 d-code--md">d-mbs-150</dt-stack></div>
-  <div class="d-as-center d-bar-400 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mie-200 d-p-200 d-bgc-moderate d-brl4 d-code--md">d-mie-200</dt-stack></div>
+  <div class="d-as-center d-bar-400 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mie-200 d-p-200 d-bgc-moderate d-bisr-300 d-code--md">d-mie-200</dt-stack></div>
   <div class="d-as-center d-bar-400 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mbe-300 d-p-200 d-bgc-moderate d-bbsr-300 d-code--md">d-mbe-300</dt-stack></div>
   <div class="d-as-center d-bar-400 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mis-400 d-p-200 d-bgc-moderate d-bier-300 d-code--md">d-mis-400</dt-stack></div>
 </dt-stack>

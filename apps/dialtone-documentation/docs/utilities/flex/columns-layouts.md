@@ -161,7 +161,7 @@ Use `d-cg{n}` to create uniform gaps between flex columns within an element.
 ```vue demo
 <dt-stack gap="200" class="d-w100p">
   <dt-stack gap="100" class="d-p-100 d-bar-400 d-bgc-moderate d-w100p">
-    <dt-text as="p" kind="code" size="100">.d-cg0</dt-text>
+    <dt-text as="p" kind="code" size="100">.d-cg-0</dt-text>
     <div class="d-fl-col3 d-of-auto d-cg-0">
       <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar-300 d-bgc-moderate-opaque">1</dt-stack>
       <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar-300 d-bgc-moderate-opaque">2</dt-stack>
@@ -169,7 +169,7 @@ Use `d-cg{n}` to create uniform gaps between flex columns within an element.
     </div>
   </dt-stack>
   <dt-stack gap="100" class="d-p-100 d-bar-400 d-bgc-moderate d-w100p">
-    <dt-text as="p" kind="code" size="100">.d-cg1</dt-text>
+    <dt-text as="p" kind="code" size="100">.d-cg-1</dt-text>
     <div class="d-fl-col3 d-of-auto d-cg-1">
       <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar-300 d-bgc-moderate-opaque">1</dt-stack>
       <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar-300 d-bgc-moderate-opaque">2</dt-stack>
@@ -177,7 +177,7 @@ Use `d-cg{n}` to create uniform gaps between flex columns within an element.
     </div>
   </dt-stack>
   <dt-stack gap="100" class="d-p-100 d-bar-400 d-bgc-moderate d-w100p">
-    <dt-text as="p" kind="code" size="100">.d-cg2</dt-text>
+    <dt-text as="p" kind="code" size="100">.d-cg-25</dt-text>
     <div class="d-fl-col3 d-of-auto d-cg-25">
       <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar-300 d-bgc-moderate-opaque">1</dt-stack>
       <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar-300 d-bgc-moderate-opaque">2</dt-stack>
@@ -185,7 +185,7 @@ Use `d-cg{n}` to create uniform gaps between flex columns within an element.
     </div>
   </dt-stack>
   <dt-stack gap="100" class="d-p-100 d-bar-400 d-bgc-moderate d-w100p">
-    <dt-text as="p" kind="code" size="100">.d-cg4</dt-text>
+    <dt-text as="p" kind="code" size="100">.d-cg-50</dt-text>
     <div class="d-fl-col3 d-of-auto d-cg-50">
       <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar-300 d-bgc-moderate-opaque">1</dt-stack>
       <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar-300 d-bgc-moderate-opaque">2</dt-stack>
@@ -193,7 +193,7 @@ Use `d-cg{n}` to create uniform gaps between flex columns within an element.
     </div>
   </dt-stack>
   <dt-stack gap="100" class="d-p-100 d-bar-400 d-bgc-moderate d-w100p">
-    <dt-text as="p" kind="code" size="100">.d-cg6</dt-text>
+    <dt-text as="p" kind="code" size="100">.d-cg-75</dt-text>
     <div class="d-fl-col3 d-of-auto d-cg-75">
       <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar-300 d-bgc-moderate-opaque">1</dt-stack>
       <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar-300 d-bgc-moderate-opaque">2</dt-stack>
@@ -201,7 +201,7 @@ Use `d-cg{n}` to create uniform gaps between flex columns within an element.
     </div>
   </dt-stack>
   <dt-stack gap="100" class="d-p-100 d-bar-400 d-bgc-moderate d-w100p">
-    <dt-text as="p" kind="code" size="100">.d-cg8</dt-text>
+    <dt-text as="p" kind="code" size="100">.d-cg-100</dt-text>
     <div class="d-fl-col3 d-of-auto d-cg-100">
       <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar-300 d-bgc-moderate-opaque">1</dt-stack>
       <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar-300 d-bgc-moderate-opaque">2</dt-stack>
@@ -209,7 +209,7 @@ Use `d-cg{n}` to create uniform gaps between flex columns within an element.
     </div>
   </dt-stack>
   <dt-stack gap="100" class="d-p-100 d-bar-400 d-bgc-moderate d-w100p">
-    <dt-text as="p" kind="code" size="100">.d-cg12</dt-text>
+    <dt-text as="p" kind="code" size="100">.d-cg-150</dt-text>
     <div class="d-fl-col3 d-of-auto d-cg-150">
       <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar-300 d-bgc-moderate-opaque">1</dt-stack>
       <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar-300 d-bgc-moderate-opaque">2</dt-stack>
@@ -217,7 +217,7 @@ Use `d-cg{n}` to create uniform gaps between flex columns within an element.
     </div>
   </dt-stack>
   <dt-stack gap="100" class="d-p-100 d-bar-400 d-bgc-moderate d-w100p">
-    <dt-text as="p" kind="code" size="100">.d-cg16</dt-text>
+    <dt-text as="p" kind="code" size="100">.d-cg-200</dt-text>
     <div class="d-fl-col3 d-of-auto d-cg-200">
       <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar-300 d-bgc-moderate-opaque">1</dt-stack>
       <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar-300 d-bgc-moderate-opaque">2</dt-stack>
@@ -225,7 +225,7 @@ Use `d-cg{n}` to create uniform gaps between flex columns within an element.
     </div>
   </dt-stack>
   <dt-stack gap="100" class="d-p-100 d-bar-400 d-bgc-moderate d-w100p">
-    <dt-text as="p" kind="code" size="100">.d-cg24</dt-text>
+    <dt-text as="p" kind="code" size="100">.d-cg-300</dt-text>
     <div class="d-fl-col3 d-of-auto d-cg-300">
       <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar-300 d-bgc-moderate-opaque">1</dt-stack>
       <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar-300 d-bgc-moderate-opaque">2</dt-stack>
@@ -233,7 +233,7 @@ Use `d-cg{n}` to create uniform gaps between flex columns within an element.
     </div>
   </dt-stack>
   <dt-stack gap="100" class="d-p-100 d-bar-400 d-bgc-moderate d-w100p">
-    <dt-text as="p" kind="code" size="100">.d-cg32</dt-text>
+    <dt-text as="p" kind="code" size="100">.d-cg-400</dt-text>
     <div class="d-fl-col3 d-of-auto d-cg-400">
       <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar-300 d-bgc-moderate-opaque">1</dt-stack>
       <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar-300 d-bgc-moderate-opaque">2</dt-stack>
@@ -241,7 +241,7 @@ Use `d-cg{n}` to create uniform gaps between flex columns within an element.
     </div>
   </dt-stack>
   <dt-stack gap="100" class="d-p-100 d-bar-400 d-bgc-moderate d-w100p">
-    <dt-text as="p" kind="code" size="100">.d-cg48</dt-text>
+    <dt-text as="p" kind="code" size="100">.d-cg-600</dt-text>
     <div class="d-fl-col3 d-of-auto d-cg-600">
       <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar-300 d-bgc-moderate-opaque">1</dt-stack>
       <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar-300 d-bgc-moderate-opaque">2</dt-stack>
@@ -249,7 +249,7 @@ Use `d-cg{n}` to create uniform gaps between flex columns within an element.
     </div>
   </dt-stack>
   <dt-stack gap="100" class="d-p-100 d-bar-400 d-bgc-moderate d-w100p">
-    <dt-text as="p" kind="code" size="100">.d-cg64</dt-text>
+    <dt-text as="p" kind="code" size="100">.d-cg-800</dt-text>
     <div class="d-fl-col3 d-of-auto d-cg-800">
       <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar-300 d-bgc-moderate-opaque">1</dt-stack>
       <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bar-300 d-bgc-moderate-opaque">2</dt-stack>

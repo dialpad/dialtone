@@ -118,7 +118,7 @@ Use `d-bar-unset` to reset the border-radius on all four corners to `unset`.
         <td class="d-code--sm d-fc-tertiary d-ta-right">{{ val.px }}</td>
       </tr>
       <template v-if="scope.legacyPrefix">
-        <tr v-for="val in radius.values" :key="`legacy-${scope.legacyPrefix}-${val.legacyPx}`">
+        <tr v-for="val in radius.values.filter(v => v.legacyPx != null)" :key="`legacy-${scope.legacyPrefix}-${val.legacyPx}`">
           <th scope="row">
             <dt-stack gap="50">
               <dt-text as="span" kind="code" :size="100" class="d-docsite-code">

@@ -45,7 +45,7 @@ packages/dialtone-css/
 All utility classes follow the pattern: `d-{category-abbreviation}{value}`
 
 ```
-d-mt-100        margin-top with space-400 token (8 units)
+d-mt-100        margin-top with spacing-100 token (8px)
 d-fc-primary font-color foreground-primary
 d-bgc-surface background-color surface
 d-p-0         padding 0

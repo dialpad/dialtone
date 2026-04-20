@@ -98,7 +98,7 @@ After updating, restart your Claude Code conversation to pick up the new version
 Find CSS utility classes for styling HTML elements.
 
 **Example queries:**
-- `padding 8px` → d-p8, d-pt8, d-pr8, d-pb8, d-pl8, d-px8, d-py-100
+- `padding 8px` → d-p-100, d-pt-100, d-pr-100, d-pb-100, d-pl-100, d-px-100, d-py-100
 - `display flex` → d-d-flex, d-d-inline-flex
 - `width 100%` → d-w100p
 - `margin top auto` → d-mt-auto
