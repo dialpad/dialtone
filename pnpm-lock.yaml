@@ -1372,7 +1372,6 @@ packages:
     resolution: {integrity: sha512-DQJ6kPkz2JfQMljPxxCCWoJneKHlUrxrxwwEZ3bkC1gc1ze+MDWo4d8pylkqypBYSDxw2l3Pa61Loy1cEdsqMg==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n-goblin-core/1.2.0/e78ef24567fc081840905a6594f241d5c8523688}
     peerDependencies:
       '@vue/composition-api': '*'
-      '@vue/composition-api': '*'
       vue: ^3.0.0
     peerDependenciesMeta:
       '@vue/composition-api':
