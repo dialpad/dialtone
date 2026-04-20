@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "9.177.0-next.1",
+  "version": "9.180.0-next.2",
   "packageManager": "pnpm@9.9.0",
   "description": "Dialpad's Dialtone design system monorepo",
   "scripts": {
@@ -86,10 +86,9 @@
   "dependencies": {
     "@dialpad/dialtone-emojis": "workspace:*",
     "@dialpad/dialtone-icons": "workspace:*",
-    "@dialpad/dialtone-cli": "workspace:*",
     "@dialpad/dialtone-mcp-server": "workspace:*",
     "@dialpad/dialtone-tokens": "workspace:*",
-    "@dialpad/i18n": "1.25.0",
+    "@dialpad/i18n": "1.25.3",
     "@floating-ui/dom": "^1.6.0",
     "@tiptap/core": "3.19.0",
     "@tiptap/extension-blockquote": "3.19.0",
@@ -129,6 +128,7 @@
     "vue-tsc": "3.2.6"
   },
   "devDependencies": {
+    "@dialpad/dialtone-cli": "workspace:*",
     "@commitlint/cli": "^18.4.3",
     "@commitlint/config-conventional": "^17.6.6",
     "@dialpad/conventional-changelog-angular": "^1.1.1",

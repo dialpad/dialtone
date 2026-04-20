@@ -2,9 +2,15 @@
 
 
 export default {
+  defaults: {
+    props: {
+      labelSize: { tokenCategory: 'typography-size:label' },
+    },
+  },
+
   exclusions: [
     {
-      when: { labelVisible: false },
+      when: { showLabel: false },
       hide: { props: ['labelClass', 'labelSize', 'labelStrength'] },
     },
   ],
@@ -140,7 +146,7 @@ export default {
       label: {
         initialValue: 'Search',
       },
-      labelVisible: {
+      showLabel: {
         initialValue: false,
       },
     },
@@ -170,7 +176,7 @@ export default {
     props: {
       label: { initialValue: 'Label' },
       type: { initialValue: 'email' },
-      messages: { initialValue: [{ message: 'Please enter a valid email address.', type: 'error' }] },
+      messages: { initialValue: [{ message: 'Please enter a valid email address.', type: 'critical' }] },
     },
   },
 };

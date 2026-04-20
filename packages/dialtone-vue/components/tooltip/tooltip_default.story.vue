@@ -20,7 +20,7 @@
         :sticky="$attrs.sticky"
         :content-class="$attrs.contentClass"
         :transition="$attrs.transition"
-        :show="showTooltip"
+        :open="showTooltip"
         :enabled="$attrs.enabled"
         :delay="$attrs.delay"
         :external-anchor="$attrs.externalAnchor"
@@ -62,7 +62,7 @@ export default {
     },
 
     showTooltip () {
-      return this.$attrs.globalShow ?? this.$attrs.show;
+      return this.$attrs.globalShow ?? this.$attrs.open;
     },
   },
 };

@@ -12,7 +12,7 @@ export const argsData = {
   name: 'Name',
   label: 'Checkbox',
   validationState: '',
-  onInput: action('input'),
+  'onUpdate:modelValue': action('update:modelValue'),
   onFocusIn: action('focusin'),
   onFocusOut: action('focusout'),
 };
@@ -89,7 +89,7 @@ export const argTypesData = {
   },
 
   // Action Event Handlers
-  onInput: {
+  'onUpdate:modelValue': {
     table: {
       disable: true,
     },
@@ -105,8 +105,8 @@ export const argTypesData = {
     },
   },
 
-  input: {
-    description: 'Native input event',
+  'update:modelValue': {
+    description: 'Event fired to sync the modelValue prop with the parent component',
     table: {
       type: { summary: 'event' },
     },

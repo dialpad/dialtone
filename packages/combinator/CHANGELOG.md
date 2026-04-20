@@ -1,3 +1,43 @@
+# [1.2.0-next.6](https://github.com/dialpad/dialtone/compare/combinator/v1.2.0-next.5...combinator/v1.2.0-next.6) (2026-04-17)
+
+
+### Features
+
+* **Box:** DLT-3315 new DtBox primitive component ([#1203](https://github.com/dialpad/dialtone/issues/1203)) ([e0c942e](https://github.com/dialpad/dialtone/commit/e0c942ec4c3d53f4360107c094ad62e85adacdfd))
+* **Combinator:** DLT-3312 preview resolved value in sized props ([#1199](https://github.com/dialpad/dialtone/issues/1199)) ([61bb610](https://github.com/dialpad/dialtone/commit/61bb61045861e8e0677816212c0dc5775bf83b16))
+
+# [1.2.0-next.5](https://github.com/dialpad/dialtone/compare/combinator/v1.2.0-next.4...combinator/v1.2.0-next.5) (2026-04-15)
+
+
+### Code Refactoring
+
+* **Components:** dlt-3283 refactor prop/slots to be consistent ([#1196](https://github.com/dialpad/dialtone/issues/1196)) ([2d22c76](https://github.com/dialpad/dialtone/commit/2d22c76d36e98cef49bcb8cba4f0754724d82dac))
+
+
+### Features
+
+* **Components:** DLT-3159 enforce positive boolean props ([#1198](https://github.com/dialpad/dialtone/issues/1198)) ([ac73bdc](https://github.com/dialpad/dialtone/commit/ac73bdcd502f5312de68af3e10184567180f1e12))
+
+# [1.2.0-next.4](https://github.com/dialpad/dialtone/compare/combinator/v1.2.0-next.3...combinator/v1.2.0-next.4) (2026-04-15)
+
+
+### Code Refactoring
+
+* **Components:** DLT-3100 remove rootClass references ([#1184](https://github.com/dialpad/dialtone/issues/1184)) ([6531783](https://github.com/dialpad/dialtone/commit/65317831a4bfaf12877b35fd15861816b4a0ee73))
+* **Text:** DLT-3302 tone prop uses css variables instead of css utilities ([#1197](https://github.com/dialpad/dialtone/issues/1197)) ([75df16f](https://github.com/dialpad/dialtone/commit/75df16f55f72b33afd035b099ccb55ebb315dc87))
+
+
+### Documentation
+
+* DLT-3250 display component status badges in sidebar and page headers ([#1170](https://github.com/dialpad/dialtone/issues/1170)) ([7d5f5d5](https://github.com/dialpad/dialtone/commit/7d5f5d5d21d3fbb875521ba21a6e28e421c98696))
+* **Playground:** DLT-3242 segmented control for compact enum props ([#1165](https://github.com/dialpad/dialtone/issues/1165)) ([fa440d8](https://github.com/dialpad/dialtone/commit/fa440d881e50ae289a8982c61a857ba2d153c9b3))
+
+
+### Features
+
+* **Components:** DLT-3157 align critical/positive prop values and CSS class names ([#1177](https://github.com/dialpad/dialtone/issues/1177)) ([edd98b2](https://github.com/dialpad/dialtone/commit/edd98b241cec4e613fd58692d0544ae597f9b828))
+* **Split Button:** DLT-3257 add show-divider prop ([#1173](https://github.com/dialpad/dialtone/issues/1173)) ([5bef411](https://github.com/dialpad/dialtone/commit/5bef411d3b3eb48caa0f2f97a13fe49fef8f15b2))
+
 # [1.2.0-next.3](https://github.com/dialpad/dialtone/compare/combinator/v1.2.0-next.2...combinator/v1.2.0-next.3) (2026-03-31)
 
 

@@ -5,7 +5,7 @@
   <div>
     <!-- why the hell is this visibility: hidden by default??? -->
     <bubble-menu
-      v-if="editor && link && !hideLinkBubbleMenu"
+      v-if="editor && link && showLinkBubbleMenu"
       :editor="editor"
       :should-show="bubbleMenuShouldShow"
       :options="floatingOptions"
@@ -33,7 +33,7 @@
             {{ i18n.$t('DIALTONE_RICH_TEXT_EDITOR_OPEN_LINK_BUTTON_LABEL') }}
           </dt-button>
           <dt-button
-            kind="danger"
+            kind="critical"
             importance="clear"
             @click="removeLink"
           >
@@ -130,11 +130,11 @@ export default {
     },
 
     /**
-     * Prevents the user from typing any further. Deleting text will still work.
+     * Allows the user to type in the editor. Set to false to prevent typing while still allowing deletion.
      */
-    preventTyping: {
+    allowTyping: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     /**
@@ -196,7 +196,7 @@ export default {
     },
 
     /**
-     * The output format that the editor uses when emitting the "@input" event.
+     * The output format that the editor uses when emitting the "update:modelValue" event.
      * One of `text`, `json`, `html`, `markdown`. See https://tiptap.dev/guide/output for
      * examples.
      * @values text, json, html, markdown
@@ -431,13 +431,13 @@ export default {
     },
 
     /**
-     * Manually hide the link bubble menu. The link bubble menu is shown when a link is selected via the cursor.
-     * There are some cases when you may want the link to remain selected but hide the bubble menu such as when You
-     * are showing a custom link editor popup.
+     * Shows the link bubble menu when a link is selected via the cursor.
+     * Set to false when you want the link to remain selected but hide the bubble menu,
+     * such as when showing a custom link editor popup.
      */
-    hideLinkBubbleMenu: {
+    showLinkBubbleMenu: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     /**
@@ -479,15 +479,15 @@ export default {
 
   emits: [
     /**
-     * Editor input event
-     * @event input
-     * @type {String|JSON}
+     * Event fired to sync the modelValue prop with the parent component
+     * @event update:modelValue
+     * @type {Object | String}
      */
-    'input',
+    'update:modelValue',
 
     /**
      * Input event always in JSON format.
-     * @event input
+     * @event json-input
      * @type {JSON}
      */
     'json-input',
@@ -512,13 +512,6 @@ export default {
      * @type {String}
      */
     'markdown-input',
-
-    /**
-     * Event to sync the value with the parent
-     * @event update:value
-     * @type {String|JSON}
-     */
-    'update:modelValue',
 
     /**
      * Editor blur event
@@ -880,7 +873,7 @@ export default {
           },
 
           handleKeyDown: (view, event) => {
-            if (!this.preventTyping) return false;
+            if (this.allowTyping) return false;
 
             const allowedKeys = ['Backspace'];
             if (!this.allowLineBreaks && !event.shiftKey) {
@@ -1122,7 +1115,6 @@ export default {
 
     triggerInputChangeEvents () {
       const value = this.getOutput();
-      this.$emit('input', value);
       this.$emit('update:modelValue', value);
 
       // Always output JSON in a separate event

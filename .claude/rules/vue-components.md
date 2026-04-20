@@ -15,13 +15,12 @@ paths:
 - Use `validator` — NEVER `validate`. Vue silently ignores `validate`.
 - Import allowed values from `*_constants.js`. Never hardcode valid value arrays inline.
 - Add JSDoc with `@values` annotation.
-- Boolean visibility toggles: prefer `hideX` negative polarity (`hideClose`, `hideHeader`, `hideArrow`).
+- Boolean visibility toggles: use positive polarity (`showClose`, `showHeader`, `showArrow`). Never use negative names (`hideX`, `preventX`, `skipX`).
 
 ## Events
 
 - `update:modelValue` for v-model.
-- `update:open` for Popover, Collapsible, ImageViewer, FilterPill.
-- `update:show` for Modal, Tooltip, Toast (legacy — don't change existing, use `update:open` for new).
+- `update:open` for Modal, Tooltip, Toast, Popover, Collapsible, ImageViewer, FilterPill.
 
 ## Slots
 

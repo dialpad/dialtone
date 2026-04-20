@@ -14,7 +14,7 @@ export const argsData = {
 };
 
 const argsDataLongText = {
-  title: `Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+  headerText: `Lorem ipsum dolor sit amet, consectetur adipiscing elit,
       sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
       Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.`,
   default: `Duis aute irure dolor in reprehenderit in voluptate velit
@@ -24,14 +24,6 @@ const argsDataLongText = {
 
 export const argTypesData = {
   // Slots
-  titleOverride: {
-    table: {
-      type: { summary: 'VNode' },
-    },
-    control: {
-      type: 'text',
-    },
-  },
   icon: {
     options: iconsList,
     table: {
@@ -79,17 +71,17 @@ export const argTypesData = {
       disable: true,
     },
   },
-  hideClose: {
+  showClose: {
     control: {
       type: 'boolean',
     },
   },
-  hideIcon: {
+  showIcon: {
     control: {
       type: 'boolean',
     },
   },
-  hideAction: {
+  showAction: {
     control: {
       type: 'boolean',
     },
@@ -140,18 +132,18 @@ export const Default = {
   render: Template,
 
   args: {
-    title: 'Base title (optional)',
+    headerText: 'Base title (optional)',
     kind: 'base',
   },
 };
 
-export const Error = {
+export const Critical = {
   render: Template,
 
   args: {
     ...Default.args,
-    title: 'Error title (optional)',
-    kind: 'error',
+    headerText: 'Critical title (optional)',
+    kind: 'critical',
   },
 };
 
@@ -160,18 +152,18 @@ export const Info = {
 
   args: {
     ...Default.args,
-    title: 'Info title (optional)',
+    headerText: 'Info title (optional)',
     kind: 'info',
   },
 };
 
-export const Success = {
+export const Positive = {
   render: Template,
 
   args: {
     ...Default.args,
-    title: 'Success title (optional)',
-    kind: 'success',
+    headerText: 'Positive title (optional)',
+    kind: 'positive',
   },
 };
 
@@ -180,7 +172,7 @@ export const Warning = {
 
   args: {
     ...Default.args,
-    title: 'Warning title (optional)',
+    headerText: 'Warning title (optional)',
     kind: 'warning',
   },
 };
@@ -200,7 +192,7 @@ export const TruncateContent = {
   args: {
     ...Default.args,
     truncateText: true,
-    title: argsDataLongText.title,
+    headerText: argsDataLongText.headerText,
     default: argsDataLongText.default,
   },
 };

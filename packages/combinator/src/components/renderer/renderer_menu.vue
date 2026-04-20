@@ -6,7 +6,7 @@
     transition="fade"
     placement="left-start"
     initial-focus-element="dialog"
-    :hide-on-click="false"
+    :close-on-click="false"
     :modal="false"
     sticky
   >

@@ -94,13 +94,13 @@ Conflict resolution summary:
 - path/to/other.vue: <what was combined from each side>
 ```
 
-2. Show the diff for only the files that had conflicts:
+1. Show the diff for only the files that had conflicts:
 
 ```bash
 cat /tmp/merge-conflicted-files.txt | xargs git diff --cached --
 ```
 
-3. **Wait for user confirmation** before proceeding to commit. Do not continue until the user approves.
+1. **Wait for user confirmation** before proceeding to commit. Do not continue until the user approves.
 
 ### 6. Commit the merge
 

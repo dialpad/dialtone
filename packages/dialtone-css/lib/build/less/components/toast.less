@@ -58,13 +58,11 @@
 //  $   CONTENT CONTAINER
 //  ----------------------------------------------------------------------------
 .d-toast__dialog {
+    --notice-actions-button-offset: var(--dt-spacing-400);
+
     position: relative;
     display: flex;
     align-items: start;
-
-    .d-notice__actions :where(button:first-child) {
-        margin-inline-start: var(--dt-spacing-400); // 32
-    }
 }
 
 //  ============================================================================
@@ -206,14 +204,11 @@
 }
 
 .d-toast-alternate__dialog {
+  --notice-actions-button-offset: var(--dt-spacing-400);
+
   position: relative;
   align-items: center;
   inline-size: var(--dt-layout-100-percent);
-
-
-  .d-notice__actions :where(button:first-child) {
-    margin-inline-start: var(--dt-spacing-400); // 32
-  }
 }
 
 .d-toast-alternate__header {
@@ -223,8 +218,9 @@
   color: var(--toast-alternate-font-color);
 }
 
-//  $$  ERROR
+//  $$  CRITICAL / ERROR
 //  ----------------------------------------------------------------------------
+.d-toast-alternate--critical,
 .d-toast-alternate--error {
   --toast-alternate-border-color: var(--dt-color-border-critical-subtle);
 }
@@ -236,8 +232,9 @@
   --toast-alternate-border-color: var(--dt-color-border-subtle);
 }
 
-//  $$  SUCCESS
+//  $$  POSITIVE / SUCCESS
 //  ----------------------------------------------------------------------------
+.d-toast-alternate--positive,
 .d-toast-alternate--success {
   --toast-alternate-border-color: var(--dt-color-border-success-subtle);
 }

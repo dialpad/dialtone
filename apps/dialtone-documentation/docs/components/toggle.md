@@ -43,13 +43,13 @@ The Toggle component acts as a way to allow the User to switch between two mutua
 
 ```vue demo
 <dt-stack as="fieldset" gap="100">
-  <dt-toggle wrapper-class="d-g-200">Unchecked Toggle</dt-toggle>
-  <dt-toggle :model-value="true" wrapper-class="d-g-200">Checked Toggle</dt-toggle>
-  <dt-toggle disabled wrapper-class="d-g-200">Unchecked Disabled</dt-toggle>
-  <dt-toggle :model-value="true" disabled wrapper-class="d-g-200">Checked Disabled</dt-toggle>
-  <dt-toggle :model-value="mixed" wrapper-class="d-g-200">Indeterminate Toggle</dt-toggle>
-  <dt-toggle :model-value="mixed" wrapper-class="d-g-200" disabled>Indeterminate Disabled</dt-toggle>
-  <dt-toggle wrapper-class="d-g-200" :show-icon="false">Without icon</dt-toggle>
+  <dt-toggle class="d-g-200">Unchecked Toggle</dt-toggle>
+  <dt-toggle :model-value="true" class="d-g-200">Checked Toggle</dt-toggle>
+  <dt-toggle disabled class="d-g-200">Unchecked Disabled</dt-toggle>
+  <dt-toggle :model-value="true" disabled class="d-g-200">Checked Disabled</dt-toggle>
+  <dt-toggle :model-value="mixed" class="d-g-200">Indeterminate Toggle</dt-toggle>
+  <dt-toggle :model-value="mixed" class="d-g-200" disabled>Indeterminate Disabled</dt-toggle>
+  <dt-toggle class="d-g-200" :show-icon="false">Without icon</dt-toggle>
 </dt-stack>
 ```
 
@@ -57,15 +57,15 @@ The Toggle component acts as a way to allow the User to switch between two mutua
 
 ```vue demo
 <dt-stack as="fieldset" gap="100">
-  <dt-toggle :size="200" wrapper-class="d-g-200">Small size</dt-toggle>
-  <dt-toggle wrapper-class="d-g-200">Default size</dt-toggle>
+  <dt-toggle :size="200" class="d-g-200">Small size</dt-toggle>
+  <dt-toggle class="d-g-200">Default size</dt-toggle>
 </dt-stack>
 ```
 
 ### With v-model
 
 ```vue demo
-<dt-toggle v-model="checked" wrapper-class="d-g-200">Toggle</dt-toggle>
+<dt-toggle v-model="checked" class="d-g-200">Toggle</dt-toggle>
 ```
 
 ## Vue API
@@ -99,7 +99,7 @@ disabled states. However, if a label default slot is not used with `DtToggle`
 
 The button element should capture keyboard focus as long as it is not disabled (`disabled` prop is `true`).
 `ENTER` key will
-emit a **change** event with the current value of the toggle and will change its internal `checked` state.
+emit an **update:modelValue** event with the current value of the toggle and will change its internal `checked` state.
 
 <script setup>
 import { ref } from 'vue'

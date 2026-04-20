@@ -123,7 +123,7 @@ describe('DtInput tests', () => {
 
     describe('When a label visible prop is false', () => {
       it('should not render a label', () => {
-        mockProps = { labelVisible: false };
+        mockProps = { showLabel: false };
 
         updateWrapper();
 
@@ -131,7 +131,7 @@ describe('DtInput tests', () => {
       });
 
       it('should set aria-label on the input', () => {
-        mockProps = { labelVisible: false };
+        mockProps = { showLabel: false };
 
         updateWrapper();
 
@@ -139,7 +139,7 @@ describe('DtInput tests', () => {
       });
 
       it('should set aria-label on the textarea', () => {
-        mockProps = { labelVisible: false, type: 'textarea' };
+        mockProps = { showLabel: false, type: 'textarea' };
 
         updateWrapper();
 
@@ -149,7 +149,7 @@ describe('DtInput tests', () => {
       });
     });
 
-    describe('When labelVisible is true', () => {
+    describe('When showLabel is true', () => {
       it('should not set aria-label on the input', () => {
         expect(nativeInput.attributes('aria-label')).toBeUndefined();
       });
@@ -233,11 +233,11 @@ describe('DtInput tests', () => {
 
     describe('When an inputClass prop is provided', () => {
       it('Should apply the class to the input element.', () => {
-        mockProps = { inputClass: 'd-fc-success' };
+        mockProps = { inputClass: 'd-fc-positive' };
 
         updateWrapper();
 
-        expect(nativeInput.classes('d-fc-success')).toBe(true);
+        expect(nativeInput.classes('d-fc-positive')).toBe(true);
       });
     });
 
@@ -356,58 +356,58 @@ describe('DtInput tests', () => {
     });
 
     describe('When validation message(s) are provided', () => {
-      it('should display error messages', async () => {
-        const errorMessage1 = 'error message 1';
-        const errorMessage2 = 'error message 2';
+      it('should display critical messages', async () => {
+        const criticalMessage1 = 'critical message 1';
+        const criticalMessage2 = 'critical message 2';
 
         await wrapper.setProps({
           showMessages: false,
           messages: [
-            errorMessage1,
-            { message: errorMessage2, type: 'error' },
+            criticalMessage1,
+            { message: criticalMessage2, type: 'critical' },
           ],
         });
 
         expect(wrapper.findAll('.d-validation-message').length).toBe(0);
-        expect(wrapper.vm.inputState).toBe('error');
+        expect(wrapper.vm.inputState).toBe('critical');
 
         await wrapper.setProps({ showMessages: true });
 
-        const inputErrorMessages = wrapper.findAll('.d-validation-message--error');
+        const inputCriticalMessages = wrapper.findAll('.d-validation-message--critical');
 
-        expect(inputErrorMessages.length).toBe(2);
-        expect(inputErrorMessages.at(0).text()).toEqual(errorMessage1);
-        expect(inputErrorMessages.at(1).text()).toEqual(errorMessage2);
+        expect(inputCriticalMessages.length).toBe(2);
+        expect(inputCriticalMessages.at(0).text()).toEqual(criticalMessage1);
+        expect(inputCriticalMessages.at(1).text()).toEqual(criticalMessage2);
       });
 
-      it('should ignore all other message types if at least 1 error message is present', async () => {
-        const strErrorMessage = 'string error message';
+      it('should ignore all other message types if at least 1 critical message is present', async () => {
+        const strCriticalMessage = 'string critical message';
 
         await wrapper.setProps({
           messages: [
-            strErrorMessage,
+            strCriticalMessage,
             { message: 'formatted warning message', type: 'warning' },
-            { message: 'formatted success message', type: 'success' },
+            { message: 'formatted positive message', type: 'positive' },
           ],
         });
 
-        expect(wrapper.vm.inputState).toBe('error');
+        expect(wrapper.vm.inputState).toBe('critical');
 
         const inputMessages = wrapper.findAll('.d-validation-message');
-        const inputErrorMessages = wrapper.findAll('.d-validation-message--error');
+        const inputCriticalMessages = wrapper.findAll('.d-validation-message--critical');
 
         expect(inputMessages.length).toBe(1);
-        expect(inputErrorMessages.length).toBe(1);
-        expect(inputErrorMessages.at(0).text()).toEqual(strErrorMessage);
+        expect(inputCriticalMessages.length).toBe(1);
+        expect(inputCriticalMessages.at(0).text()).toEqual(strCriticalMessage);
       });
 
-      it('should display warning messages only if no error messages are present', async () => {
+      it('should display warning messages only if no critical messages are present', async () => {
         const warningMessage = 'formatted warning message';
 
         await wrapper.setProps({
           messages: [
             { message: warningMessage, type: 'warning' },
-            { message: 'formatted success message', type: 'success' },
+            { message: 'formatted positive message', type: 'positive' },
           ],
         });
 
@@ -421,26 +421,26 @@ describe('DtInput tests', () => {
         expect(inputWarningMessages.at(0).text()).toEqual(warningMessage);
       });
 
-      it('should display success messages only if no other types are present', async () => {
-        const successMessage1 = 'formatted success message 1';
-        const successMessage2 = 'formatted success message 2';
+      it('should display positive messages only if no other types are present', async () => {
+        const positiveMessage1 = 'formatted positive message 1';
+        const positiveMessage2 = 'formatted positive message 2';
 
         await wrapper.setProps({
           messages: [
-            { message: successMessage1, type: 'success' },
-            { message: successMessage2, type: 'success' },
+            { message: positiveMessage1, type: 'positive' },
+            { message: positiveMessage2, type: 'positive' },
           ],
         });
 
-        expect(wrapper.vm.inputState).toBe('success');
+        expect(wrapper.vm.inputState).toBe('positive');
 
         const inputMessages = wrapper.findAll('.d-validation-message');
-        const inputSuccessMessages = wrapper.findAll('.d-validation-message--success');
+        const inputPositiveMessages = wrapper.findAll('.d-validation-message--positive');
 
         expect(inputMessages.length).toBe(2);
-        expect(inputSuccessMessages.length).toBe(2);
-        expect(inputSuccessMessages.at(0).text()).toEqual(successMessage1);
-        expect(inputSuccessMessages.at(1).text()).toEqual(successMessage2);
+        expect(inputPositiveMessages.length).toBe(2);
+        expect(inputPositiveMessages.at(0).text()).toEqual(positiveMessage1);
+        expect(inputPositiveMessages.at(1).text()).toEqual(positiveMessage2);
       });
     });
 
@@ -550,13 +550,13 @@ describe('DtInput tests', () => {
 
     describe('When labelClass is provided', () => {
       it('should apply custom class to the label', () => {
-        mockProps = { label: 'Label', labelClass: 'd-fc-success' };
+        mockProps = { label: 'Label', labelClass: 'd-fc-positive' };
 
         updateWrapper();
 
         const labelEl = wrapper.find('[data-qa="dt-input-label"]');
 
-        expect(labelEl.classes('d-fc-success')).toBe(true);
+        expect(labelEl.classes('d-fc-positive')).toBe(true);
       });
     });
 
@@ -613,12 +613,12 @@ describe('DtInput tests', () => {
           updateWrapper();
         });
 
-        it('should not show an error validation message', () => {
+        it('should not show a critical validation message', () => {
           expect(wrapper.find('[data-qa="dt-input-length-validation-message"]').exists()).toBe(false);
 
-          const inputWarningMessages = wrapper.findAll('.d-validation-message--error');
+          const inputCriticalMessages = wrapper.findAll('.d-validation-message--critical');
 
-          expect(inputWarningMessages.length).toBe(0);
+          expect(inputCriticalMessages.length).toBe(0);
         });
       });
 
@@ -632,14 +632,14 @@ describe('DtInput tests', () => {
           updateWrapper();
         });
 
-        it('should show an error validation message', async () => {
+        it('should show a critical validation message', async () => {
           await wrapper.setProps({ modelValue: 'new value with 28 characters' });
 
           const inputMessages = wrapper.findAll('.d-validation-message');
-          const inputErrorMessages = wrapper.findAll('.d-validation-message--error');
+          const inputCriticalMessages = wrapper.findAll('.d-validation-message--critical');
 
           expect(inputMessages.length).toBe(1);
-          expect(inputErrorMessages.length).toBe(1);
+          expect(inputCriticalMessages.length).toBe(1);
         });
       });
     });
@@ -669,7 +669,7 @@ describe('DtInput tests', () => {
         });
 
         it('should handle input value', () => {
-          expect(wrapper.emitted().input[0][0]).toEqual(MOCK_USER_TEXT_INPUT_VAL);
+          expect(wrapper.emitted()['update:modelValue'][0][0]).toEqual(MOCK_USER_TEXT_INPUT_VAL);
           expect(MOCK_INPUT_STUB).toHaveBeenCalled();
         });
 
@@ -709,7 +709,7 @@ describe('DtInput tests', () => {
         });
 
         it('should handle input value', () => {
-          expect(wrapper.emitted().input[0][0]).toEqual(MOCK_USER_TEXT_INPUT_VAL);
+          expect(wrapper.emitted()['update:modelValue'][0][0]).toEqual(MOCK_USER_TEXT_INPUT_VAL);
           expect(MOCK_INPUT_STUB).toHaveBeenCalled();
         });
 
@@ -747,7 +747,6 @@ describe('DtInput tests', () => {
         await nativeInput.trigger('compositionstart');
         await nativeInput.trigger('input');
 
-        expect(wrapper.emitted().input).toBeUndefined();
         expect(wrapper.emitted()['update:modelValue']).toBeUndefined();
       });
 
@@ -757,7 +756,6 @@ describe('DtInput tests', () => {
         await nativeInput.trigger('input'); // Chrome: input fires before compositionend (blocked)
         await nativeInput.trigger('compositionend'); // compositionend emits the committed value
 
-        expect(wrapper.emitted().input[0][0]).toBe('か');
         expect(wrapper.emitted()['update:modelValue'][0][0]).toBe('か');
       });
 
@@ -770,9 +768,8 @@ describe('DtInput tests', () => {
         nativeInput.element.dispatchEvent(new Event('input', { bubbles: true }));
         await wrapper.vm.$nextTick();
 
-        expect(wrapper.emitted().input).toHaveLength(1);
         expect(wrapper.emitted()['update:modelValue']).toHaveLength(1);
-        expect(wrapper.emitted().input[0][0]).toBe('か');
+        expect(wrapper.emitted()['update:modelValue'][0][0]).toBe('か');
       });
 
       it('should resume normal emission after composition ends', async () => {
@@ -782,7 +779,7 @@ describe('DtInput tests', () => {
         nativeInput.element.value = 'hello';
         await nativeInput.trigger('input');
 
-        const inputEmissions = wrapper.emitted().input;
+        const inputEmissions = wrapper.emitted()['update:modelValue'];
         expect(inputEmissions[inputEmissions.length - 1][0]).toBe('hello');
       });
     });
@@ -797,7 +794,6 @@ describe('DtInput tests', () => {
         await nativeTextarea.trigger('compositionstart');
         await nativeTextarea.trigger('input');
 
-        expect(wrapper.emitted().input).toBeUndefined();
         expect(wrapper.emitted()['update:modelValue']).toBeUndefined();
       });
 
@@ -807,7 +803,6 @@ describe('DtInput tests', () => {
         await nativeTextarea.trigger('input'); // Chrome: input fires before compositionend (blocked)
         await nativeTextarea.trigger('compositionend'); // compositionend emits the committed value
 
-        expect(wrapper.emitted().input[0][0]).toBe('か');
         expect(wrapper.emitted()['update:modelValue'][0][0]).toBe('か');
       });
 
@@ -818,9 +813,8 @@ describe('DtInput tests', () => {
         nativeTextarea.element.dispatchEvent(new Event('input', { bubbles: true }));
         await wrapper.vm.$nextTick();
 
-        expect(wrapper.emitted().input).toHaveLength(1);
         expect(wrapper.emitted()['update:modelValue']).toHaveLength(1);
-        expect(wrapper.emitted().input[0][0]).toBe('か');
+        expect(wrapper.emitted()['update:modelValue'][0][0]).toBe('か');
       });
 
       it('should not override textarea value via modelValue watcher while composing', async () => {
@@ -844,9 +838,9 @@ describe('DtInput tests', () => {
       expect(nativeInput.element.disabled).toBe(true);
     });
 
-    describe('When a rootClass is provided', () => {
-      it('should include the root class', () => {
-        mockProps = { rootClass: MOCK_ROOT_CLASS }
+    describe('When a class is provided', () => {
+      it('should include the class', () => {
+        mockAttrs = { class: MOCK_ROOT_CLASS }
 
         updateWrapper();
 

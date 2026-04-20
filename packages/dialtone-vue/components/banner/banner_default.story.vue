@@ -10,15 +10,15 @@
     <dt-banner
       v-show="displayBanner"
       :kind="$attrs.kind"
-      :title="$attrs.title"
-      :title-id="$attrs.titleId"
+      :header-text="$attrs.headerText"
+      :header-id="$attrs.headerId"
       :content-id="$attrs.contentId"
       :important="$attrs.important"
       :pinned="$attrs.pinned"
-      :hide-close="$attrs.hideClose"
-      :hide-action="$attrs.hideAction"
+      :show-close="$attrs.showClose"
+      :show-action="$attrs.showAction"
       :class="{ 'd-ps-sticky': $attrs.show }"
-      :hide-icon="$attrs.hideIcon"
+      :show-icon="$attrs.showIcon"
       :background-image="$attrs.backgroundImage"
       :background-size="$attrs.backgroundSize"
       :dialog-class="$attrs.dialogClass"
@@ -56,12 +56,6 @@
       >
         <dt-icon :name="$attrs.icon" />
       </template>
-      <template
-        v-if="$attrs.titleOverride"
-        #titleOverride
-      >
-        <span v-html="$attrs.titleOverride" />
-      </template>
     </dt-banner>
   </div>
 </template>
@@ -84,7 +78,7 @@ export default {
 
   computed: {
     shouldInvertButton () {
-      return this.$attrs.kind === 'base' || this.$attrs.kind === 'error' || this.$attrs.kind === 'info';
+      return this.$attrs.kind === 'base' || this.$attrs.kind === 'critical' || this.$attrs.kind === 'info';
     },
 
     isInverted () {

@@ -8,7 +8,7 @@ const { Rule, AtRule } = require('postcss');
 
 // TODO: Move these constants to the _data directory
 const {
-  BORDER_RADIUS_SIZES,
+  RADIUS_STOPS,
   FLEX_COLUMNS,
   OPACITIES,
   REGEX_OPTIONS,
@@ -49,11 +49,18 @@ const generatedRules = {
   flexColumnEveryChild: [],
   flexColumnNthChild: [],
   flexDirectionColumn: [],
-  borderAllRadius: [],
-  borderTopRadius: [],
-  borderRightRadius: [],
-  borderBottomRadius: [],
-  borderLeftRadius: [],
+  // Border radius cascade order: all → pairs → single-corners, so singles win over pairs
+  // and pairs win over all. Within pairs: clockwise from top (block-start, inline-end,
+  // block-end, inline-start). Within singles: clockwise from top-left.
+  radiusAll: [],
+  radiusBbsr: [],
+  radiusBier: [],
+  radiusBber: [],
+  radiusBisr: [],
+  radiusBssr: [],
+  radiusBser: [],
+  radiusBeer: [],
+  radiusBesr: [],
   gap: [],
   rowGap: [],
   columnGap: [],
@@ -98,29 +105,32 @@ const generatedRules = {
   paddingBottom: [],
   paddingLeft: [],
   // Token-stop-based classes (d-h-{stop}, d-w-{stop}, d-size-{stop})
+  // Multi-axis shorthand (tokenSize) must precede single-axis so d-h-*/d-w-* win over d-size-*.
+  tokenSize: [],
   tokenFixedHeight: [],
   tokenMaxHeight: [],
   tokenMinHeight: [],
   tokenFixedWidth: [],
   tokenMinWidth: [],
   tokenMaxWidth: [],
-  tokenSize: [],
   // Token-stop-based margin classes (d-m-{stop}, d-mt-{stop}/d-mbs-{stop}, etc.)
+  // Multi-direction shorthands (All, Horizontal, Vertical) must precede single-side so
+  // d-mt-*/d-mbs-* win over d-my-*, etc.
   tokenMarginAll: [],
+  tokenMarginHorizontal: [],
+  tokenMarginVertical: [],
   tokenMarginTop: [],
   tokenMarginRight: [],
   tokenMarginBottom: [],
   tokenMarginLeft: [],
-  tokenMarginHorizontal: [],
-  tokenMarginVertical: [],
   // Token-stop-based padding classes (d-p-{stop}, d-pt-{stop}/d-pbs-{stop}, etc.)
   tokenPaddingAll: [],
+  tokenPaddingHorizontal: [],
+  tokenPaddingVertical: [],
   tokenPaddingTop: [],
   tokenPaddingRight: [],
   tokenPaddingBottom: [],
   tokenPaddingLeft: [],
-  tokenPaddingHorizontal: [],
-  tokenPaddingVertical: [],
   // Token-stop-based gap classes (d-g-{stop}, d-rg-{stop}, d-cg-{stop})
   tokenGap: [],
   tokenRowGap: [],
@@ -353,54 +363,68 @@ function flexColumnsUtilities (clonedSource, declaration) {
   }
 }
 
+// Radius scope definitions, ordered by cascade priority.
+// `legacyPrefix: null` means the scope is net-new with no legacy equivalent class.
+const RADIUS_SCOPES = [
+  { bucket: 'radiusAll',  logicalPrefix: 'bar',  legacyPrefix: 'bar',  properties: ['border-radius'] },
+  { bucket: 'radiusBbsr', logicalPrefix: 'bbsr', legacyPrefix: 'btr',  properties: ['border-start-start-radius', 'border-start-end-radius'] },
+  { bucket: 'radiusBier', logicalPrefix: 'bier', legacyPrefix: 'brr',  properties: ['border-start-end-radius', 'border-end-end-radius'] },
+  { bucket: 'radiusBber', logicalPrefix: 'bber', legacyPrefix: 'bbr',  properties: ['border-end-start-radius', 'border-end-end-radius'] },
+  { bucket: 'radiusBisr', logicalPrefix: 'bisr', legacyPrefix: 'blr',  properties: ['border-start-start-radius', 'border-end-start-radius'] },
+  { bucket: 'radiusBssr', logicalPrefix: 'bssr', legacyPrefix: null,   properties: ['border-start-start-radius'] },
+  { bucket: 'radiusBser', logicalPrefix: 'bser', legacyPrefix: null,   properties: ['border-start-end-radius'] },
+  { bucket: 'radiusBeer', logicalPrefix: 'beer', legacyPrefix: null,   properties: ['border-end-end-radius'] },
+  { bucket: 'radiusBesr', logicalPrefix: 'besr', legacyPrefix: null,   properties: ['border-end-start-radius'] },
+];
+
 /**
- * Generate border utility classes.
+ * Generate border-radius utility classes. 9 scopes × 12 stops = 108 token-indexed logical
+ * rules, plus `.d-bar-unset`. Legacy t-shirt-named classes (`.d-bar6`, `.d-btr6`, `.d-btr-pill`)
+ * are co-selected on the same rule as their logical replacement.
+ *
+ * Class roots are first-letter compression of the CSS property:
+ *   bar  = border-all-radius           (all four corners)
+ *   bbsr = border-block-start-radius   } synthetic side-pairs (2 longhands each)
+ *   bber = border-block-end-radius     }
+ *   bisr = border-inline-start-radius  }
+ *   bier = border-inline-end-radius    }
+ *   bssr = border-start-start-radius   } single logical corners (no legacy equivalent)
+ *   bser = border-start-end-radius     }
+ *   besr = border-end-start-radius     }
+ *   beer = border-end-end-radius       }
+ *
  * @param { Source } clonedSource
  * @param { Declaration } declaration
  */
 function borderUtilities (clonedSource, declaration) {
-  Object.keys(BORDER_RADIUS_SIZES)
-    .forEach(size => {
-      generatedRules.borderAllRadius.push(new Rule({
-        source: clonedSource,
-        selector: `.d-bar${size}`,
-        nodes: [
-          declaration.clone({ prop: 'border-radius', value: `var(--dt-size-${BORDER_RADIUS_SIZES[size]}) !important` }),
-        ],
-      }));
-      generatedRules.borderTopRadius.push(new Rule({
-        source: clonedSource,
-        selector: `.d-btr${size}`,
-        nodes: [
-          declaration.clone({ prop: 'border-start-start-radius', value: `var(--dt-size-${BORDER_RADIUS_SIZES[size]}) !important` }),
-          declaration.clone({ prop: 'border-start-end-radius', value: `var(--dt-size-${BORDER_RADIUS_SIZES[size]}) !important` }),
-        ],
-      }));
-      generatedRules.borderRightRadius.push(new Rule({
-        source: clonedSource,
-        selector: `.d-brr${size}`,
-        nodes: [
-          declaration.clone({ prop: 'border-start-end-radius', value: `var(--dt-size-${BORDER_RADIUS_SIZES[size]}) !important` }),
-          declaration.clone({ prop: 'border-end-end-radius', value: `var(--dt-size-${BORDER_RADIUS_SIZES[size]}) !important` }),
-        ],
-      }));
-      generatedRules.borderBottomRadius.push(new Rule({
-        source: clonedSource,
-        selector: `.d-bbr${size}`,
-        nodes: [
-          declaration.clone({ prop: 'border-end-start-radius', value: `var(--dt-size-${BORDER_RADIUS_SIZES[size]}) !important` }),
-          declaration.clone({ prop: 'border-end-end-radius', value: `var(--dt-size-${BORDER_RADIUS_SIZES[size]}) !important` }),
-        ],
-      }));
-      generatedRules.borderLeftRadius.push(new Rule({
-        source: clonedSource,
-        selector: `.d-blr${size}`,
-        nodes: [
-          declaration.clone({ prop: 'border-start-start-radius', value: `var(--dt-size-${BORDER_RADIUS_SIZES[size]}) !important` }),
-          declaration.clone({ prop: 'border-end-start-radius', value: `var(--dt-size-${BORDER_RADIUS_SIZES[size]}) !important` }),
-        ],
-      }));
+  RADIUS_STOPS.forEach(({ stop, legacyPx }) => {
+    const value = `var(--dt-size-radius-${stop}) !important`;
+    // Legacy numeric uses concat form (.d-bar6); keyword uses hyphenated form (.d-bar-pill).
+    const legacyInfix = legacyPx === 'pill' || legacyPx === 'circle' ? '-' : '';
+
+    RADIUS_SCOPES.forEach(({ bucket, logicalPrefix, legacyPrefix, properties }) => {
+      const logicalSelector = `.d-${logicalPrefix}-${stop}`;
+      let selector = logicalSelector;
+
+      if (legacyPrefix) {
+        const legacySelector = `.d-${legacyPrefix}${legacyInfix}${legacyPx}`;
+        // Skip redundant co-selection when logical === legacy (all-corners pill/circle).
+        if (legacySelector !== logicalSelector) {
+          selector = `${logicalSelector}, ${legacySelector}`;
+        }
+      }
+
+      const nodes = properties.map(prop => declaration.clone({ prop, value }));
+      generatedRules[bucket].push(new Rule({ source: clonedSource, selector, nodes }));
     });
+  });
+
+  // `.d-bar-unset` reset — emitted last in the all-corners bucket.
+  generatedRules.radiusAll.push(new Rule({
+    source: clonedSource,
+    selector: '.d-bar-unset',
+    nodes: [declaration.clone({ prop: 'border-radius', value: 'unset !important' })],
+  }));
 }
 
 /**

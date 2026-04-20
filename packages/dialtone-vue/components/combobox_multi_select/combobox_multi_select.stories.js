@@ -9,7 +9,7 @@ import { ITEMS_LIST_DATA } from './combobox_multi_select_story_constants';
 // Default Prop Values
 export const argsData = {
   label: 'Label Text',
-  labelVisible: true,
+  showLabel: true,
   listMaxHeight: '300px',
   loading: false,
   loadingMessage: 'loading...',
@@ -165,7 +165,7 @@ export const WithMaxSelectValidation = {
     description: 'Select up to 2 options.',
     maxSelected: 2,
     selectedItems: ['item12', 'item13', 'item14'],
-    maxSelectedMessage: [{ message: 'More than 2 selected', type: 'error' }],
+    maxSelectedMessage: [{ message: 'More than 2 selected', type: 'critical' }],
   },
 
   parameters: {

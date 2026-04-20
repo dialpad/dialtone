@@ -5,10 +5,10 @@
     :size="$attrs.size"
     :show-icon="$attrs.showIcon"
     :label-class="$attrs.labelClass"
-    :wrapper-class="$attrs.wrapperClass"
+    :class="$attrs.class"
     :label-child-props="$attrs.labelChildProps"
     :toggle-on-click="$attrs.toggleOnClick"
-    @change="$attrs.onChange"
+    @update:model-value="$attrs['onUpdate:modelValue']"
   >
     <span
       v-if="defaultSlot"

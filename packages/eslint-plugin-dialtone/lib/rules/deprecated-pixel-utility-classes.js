@@ -1,73 +1,95 @@
 /**
  * @fileoverview Detects usage of pixel-based utility classes (d-h16, d-p8, d-m8, etc.)
  * which should be replaced with token-stop-based equivalents (d-h-25, d-p-100, d-m-100).
+ * Autofixes via `lint-staged` — mirrors the `utility-class-to-token-stops` migration helper.
  * @author Joshua Hynes
  */
-"use strict";
+'use strict';
 
-//------------------------------------------------------------------------------
-// Rule Definition
-//------------------------------------------------------------------------------
+const { START, END, buildDetectRegex, createClassAttributeRule } = require('../util/class-attribute-rule');
 
-// Pixel values that have token-stop equivalents
-// MUST STAY IN SYNC with WIDTH_HEIGHTS_LAYOUT, MARGIN_SIZES_SPACING, MARGIN_SIZES_LAYOUT,
-// and NEGATIVE_SPACING_MAP in dialtone-css/postcss/constants.cjs
-// Sizing: layout stops (16px+)
-const SIZING_PIXELS = '16|32|48|64|80|96|112|128|160|192|224|256|288|320|352|384|416|448|480|512|544|576|608|640|672|704|736|768|800|832|864|896|928|960|992|1024';
-// Spacing: spacing stops (0-64px) + layout stops for margin/padding (96, 128)
+// MUST STAY IN SYNC with:
+// - LAYOUT_STOPS, MARGIN_SIZES_SPACING, MARGIN_SIZES_LAYOUT in dialtone-css/postcss/constants.cjs
+// - SIZING_MAP, SPACING_MAP, NEGATIVE_SPACING_MAP, SPACING_LAYOUT_MAP in
+//   dialtone-css/.../migration_helper/configs/utility-class-to-token-stops.mjs
+
+// Ordered by descending string-length then descending value so regex alternation matches
+// longest first (d-w1024 resolves `1024`, not `1`).
+const SIZING_PIXELS = '1024|992|960|928|896|864|832|800|768|736|704|672|640|608|576|544|512|480|448|416|384|352|320|288|256|224|192|160|128|112|96|80|64|48|32|24|20|16|8|2|1';
 const SPACING_PIXELS = '0|1|2|4|6|8|10|12|14|16|20|24|32|48|64|96|128';
-// Negative spacing
-const NEGATIVE_PIXELS = '1|2|4|6|8|10|12|14|16|24|32|48|64';
+const NEGATIVE_PIXELS = '1|2|4|6|8|10|12|14|16|20|24|32|48|64';
 
-// Build patterns for each category
-// Sizing: d-h16, d-w64, d-hmn96, d-hmx128, d-wmn32, d-wmx512
-const SIZING_PATTERN = `d-(?:h|w|hmn|hmx|wmn|wmx)(?:${SIZING_PIXELS})\\b`;
-// Margin: d-m8, d-mt16, d-mr8, d-mb8, d-ml8, d-mx8, d-my8
-const MARGIN_PATTERN = `d-m(?:t|r|b|l|x|y)?(?:${SPACING_PIXELS})\\b`;
-// Negative margin: d-mtn8, d-mrn8, d-mbn8, d-mln8, d-mxn8, d-myn8, d-mn8
-const NEGATIVE_MARGIN_PATTERN = `d-m(?:t|r|b|l|x|y)?n(?:${NEGATIVE_PIXELS})\\b`;
-// Padding: d-p8, d-pt16, d-pr8, d-pb8, d-pl8, d-px8, d-py8
-const PADDING_PATTERN = `d-p(?:t|r|b|l|x|y)?(?:${SPACING_PIXELS})\\b`;
-// Gap: d-g8, d-rg8, d-cg8
-const GAP_PATTERN = `d-(?:g|rg|cg)(?:${SPACING_PIXELS})\\b`;
-// Position: d-t8, d-r8, d-b8, d-l8, d-x8, d-y8, d-all8
-const POSITION_PATTERN = `d-(?:t|r|b|l|x|y|all)(?:${SPACING_PIXELS})\\b`;
-// Negative position: d-tn8, d-rn8, d-bn8, d-ln8, d-xn8, d-yn8, d-alln8
-const NEGATIVE_POSITION_PATTERN = `d-(?:t|r|b|l|x|y|all)n(?:${NEGATIVE_PIXELS})\\b`;
+// Sizing autofix: scale-indexed layout stops + off-scale pixel-indexed exceptions (DLT-3330).
+const SIZING_MAP = {
+  1: '1px', 2: '2px', 8: '8px', 20: '20px', 24: '24px',
+  16: '25', 32: '50', 48: '75', 64: '100', 80: '125', 96: '150',
+  112: '175', 128: '200', 160: '250', 192: '300', 224: '350', 256: '400',
+  288: '450', 320: '500', 352: '550', 384: '600', 416: '650', 448: '700',
+  480: '750', 512: '800', 544: '850', 576: '900', 608: '950', 640: '1000',
+  672: '1050', 704: '1100', 736: '1150', 768: '1200', 800: '1250',
+  832: '1300', 864: '1350', 896: '1400', 928: '1450', 960: '1500',
+  992: '1550', 1024: '1600',
+};
 
-const COMBINED_PATTERN = new RegExp(
-  `(?:${SIZING_PATTERN}|${NEGATIVE_MARGIN_PATTERN}|${MARGIN_PATTERN}|${PADDING_PATTERN}|${GAP_PATTERN}|${NEGATIVE_POSITION_PATTERN}|${POSITION_PATTERN})`
-);
+const SPACING_MAP = {
+  0: '0', 1: '1', 2: '25', 4: '50', 6: '75', 8: '100',
+  10: '125', 12: '150', 14: '175', 16: '200', 20: '250', 24: '300',
+  32: '400', 48: '600', 64: '800',
+};
+
+const NEGATIVE_SPACING_MAP = {
+  1: '1', 2: '25', 4: '50', 6: '75', 8: '100',
+  10: '125', 12: '150', 14: '175', 16: '200', 20: '250', 24: '300',
+  32: '400', 48: '600', 64: '800',
+};
+
+const SPACING_LAYOUT_MAP = { 96: '150', 128: '200' };
+
+// Per-category regexes with capture groups. Negative variants precede positive so `d-mtn8`
+// matches the negative pattern (rule order is load-order in `rewriteClassString`).
+const SIZING_RE          = new RegExp(`${START}d-(h|w|hmn|hmx|wmn|wmx)(${SIZING_PIXELS})${END}`, 'g');
+const NEGATIVE_MARGIN_RE = new RegExp(`${START}d-m(t|r|b|l|x|y)?n(${NEGATIVE_PIXELS})${END}`, 'g');
+const MARGIN_RE          = new RegExp(`${START}d-m(t|r|b|l|x|y)?(${SPACING_PIXELS})${END}`, 'g');
+const PADDING_RE         = new RegExp(`${START}d-p(t|r|b|l|x|y)?(${SPACING_PIXELS})${END}`, 'g');
+const GAP_RE             = new RegExp(`${START}d-(g|rg|cg)(${SPACING_PIXELS})${END}`, 'g');
+const NEGATIVE_POS_RE    = new RegExp(`${START}d-(t|r|b|l|x|y|all)n(${NEGATIVE_PIXELS})${END}`, 'g');
+const POSITION_RE        = new RegExp(`${START}d-(t|r|b|l|x|y|all)(${SPACING_PIXELS})${END}`, 'g');
+
+const DETECT = buildDetectRegex([SIZING_RE, NEGATIVE_MARGIN_RE, MARGIN_RE, PADDING_RE, GAP_RE, NEGATIVE_POS_RE, POSITION_RE]);
+
+/**
+ * Rewrite a class attribute string from legacy pixel-suffix to token-stop naming.
+ * Returns the input unchanged when no rewrites apply.
+ */
+function rewriteClassString (input) {
+  return input
+    .replace(NEGATIVE_MARGIN_RE, (m, dir, px) => NEGATIVE_SPACING_MAP[px] ? `d-m${dir ?? ''}-n${NEGATIVE_SPACING_MAP[px]}` : m)
+    .replace(NEGATIVE_POS_RE,    (m, dir, px) => NEGATIVE_SPACING_MAP[px] ? `d-${dir}-n${NEGATIVE_SPACING_MAP[px]}` : m)
+    .replace(SIZING_RE,          (m, dir, px) => SIZING_MAP[px] ? `d-${dir}-${SIZING_MAP[px]}` : m)
+    .replace(MARGIN_RE,          (m, dir, px) => { const stop = SPACING_MAP[px] ?? SPACING_LAYOUT_MAP[px]; return stop ? `d-m${dir ?? ''}-${stop}` : m; })
+    .replace(PADDING_RE,         (m, dir, px) => { const stop = SPACING_MAP[px] ?? SPACING_LAYOUT_MAP[px]; return stop ? `d-p${dir ?? ''}-${stop}` : m; })
+    .replace(GAP_RE,             (m, dir, px) => SPACING_MAP[px] ? `d-${dir}-${SPACING_MAP[px]}` : m)
+    .replace(POSITION_RE,        (m, dir, px) => { const stop = SPACING_MAP[px] ?? SPACING_LAYOUT_MAP[px]; return stop ? `d-${dir}-${stop}` : m; });
+}
 
 module.exports = {
   meta: {
     type: 'suggestion',
     docs: {
-      description: "Pixel-based utility classes (d-h16, d-p8, d-m8) are deprecated. Use token-stop-based equivalents (d-h-25, d-p-100, d-m-100).",
+      description: 'Pixel-based utility classes (d-h16, d-p8, d-m8) are deprecated. Use token-stop-based equivalents (d-h-25, d-p-100, d-m-100).',
       recommended: false,
       url: 'https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-pixel-utility-classes.md',
     },
-    fixable: null,
+    fixable: 'code',
     schema: [],
     messages: {
-      deprecatedPixelClass: `Pixel-based utility classes are deprecated. Use token-stop-based equivalents instead (e.g. d-h16 → d-h-25, d-p8 → d-p-100). Run the "utility-class-to-token-stops" migration helper to update automatically.`,
+      deprecatedPixelClass: 'Pixel-based utility classes are deprecated. Use token-stop-based equivalents instead (e.g. d-h16 → d-h-25, d-p8 → d-p-100, d-w1 → d-w-1px).',
     },
   },
 
-  create (context) {
-    const sourceCode = context.sourceCode ?? context.getSourceCode();
-    return sourceCode.parserServices.defineTemplateBodyVisitor({
-      VAttribute (node) {
-        if (node.key.name === 'class') {
-          const classes = node.value.value;
-          if (COMBINED_PATTERN.test(classes)) {
-            context.report({
-              node,
-              messageId: 'deprecatedPixelClass',
-            });
-          }
-        }
-      },
-    });
-  },
+  create: createClassAttributeRule({
+    detect: DETECT,
+    rewrite: rewriteClassString,
+    messageId: 'deprecatedPixelClass',
+  }),
 };

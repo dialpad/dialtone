@@ -58,8 +58,7 @@ A select is normally paired with a label, but there are times when it can be use
       ]"
   label="Default"
   :model-value="modelValue"
-  @input="onInput"
-  @change="onChange"
+  @update:model-value="onInput"
 />
 <dt-select-menu
   :options="[
@@ -71,8 +70,7 @@ A select is normally paired with a label, but there are times when it can be use
   label="Disabled"
   disabled
   :model-value="modelValue"
-  @input="onInput"
-  @change="onChange"
+  @update:model-value="onInput"
 />
 ```
 
@@ -91,8 +89,7 @@ A select is normally paired with a label, but there are times when it can be use
   label="Label"
   description="Optional description text"
   :model-value="modelValue"
-  @input="onInput"
-  @change="onChange"
+  @update:model-value="onInput"
 />
 ```
 
@@ -104,11 +101,11 @@ Provides feedback to the user based on their interaction, or lack thereof, with 
 <div class="d-d-grid d-g-200 d-g-cols3">
   <example-select-menu
     label="Label"
-    :messages='[{"message":"Error validation message","type":"error"}]'
+    :messages='[{"message":"Critical validation message","type":"critical"}]'
   />
   <example-select-menu
     label="Label"
-    :messages='[{"message":"Success validation message","type":"success"}]'
+    :messages='[{"message":"Positive validation message","type":"positive"}]'
   />
   <example-select-menu
     label="Label"
@@ -123,11 +120,10 @@ Provides feedback to the user based on their interaction, or lack thereof, with 
     { value: `2`, label: `Option 2` },
     { value: `3`, label: `Option 3` },
   ]"
-  :messages="[{ message: `Error validation message`, type: `error` }]"
+  :messages="[{ message: `Critical validation message`, type: `critical` }]"
   label="Label"
   :model-value="modelValue"
-  @input="onInput"
-  @change="onChange"
+  @update:model-value="onInput"
 />
 <dt-select-menu
   :options="[
@@ -136,11 +132,10 @@ Provides feedback to the user based on their interaction, or lack thereof, with 
     { value: `2`, label: `Option 2` },
     { value: `3`, label: `Option 3` },
   ]"
-  :messages="[{ message: `Success validation message`, type: `success` }]"
+  :messages="[{ message: `Positive validation message`, type: `positive` }]"
   label="Label"
   :model-value="modelValue"
-  @input="onInput"
-  @change="onChange"
+  @update:model-value="onInput"
 />
 <dt-select-menu
   :options="[
@@ -152,8 +147,7 @@ Provides feedback to the user based on their interaction, or lack thereof, with 
   :messages="[{ message: `Warning validation message`, type: `warning` }]"
   label="Label"
   :model-value="modelValue"
-  @input="onInput"
-  @change="onChange"
+  @update:model-value="onInput"
 />
 ```
 
@@ -163,12 +157,12 @@ Provides feedback to the user based on their interaction, or lack thereof, with 
 <div class="d-d-grid d-g-200 d-g-cols3">
   <example-select-menu
     label="Label"
-    :messages='[{"message":"Error validation message","type":"error"}]'
+    :messages='[{"message":"Critical validation message","type":"critical"}]'
     :show-messages="false"
   />
   <example-select-menu
     label="Label"
-    :messages='[{"message":"Success validation message","type":"success"}]'
+    :messages='[{"message":"Positive validation message","type":"positive"}]'
     :show-messages="false"
   />
   <example-select-menu
@@ -185,11 +179,10 @@ Provides feedback to the user based on their interaction, or lack thereof, with 
     { value: `2`, label: `Option 2` },
     { value: `3`, label: `Option 3` },
   ]"
-  :messages="[{ message: `Error validation message`, type: `error` }]"
+  :messages="[{ message: `Critical validation message`, type: `critical` }]"
   label="Label"
   :model-value="modelValue"
-  @input="onInput"
-  @change="onChange"
+  @update:model-value="onInput"
   :show-messages="false"
 />
 <dt-select-menu
@@ -199,11 +192,10 @@ Provides feedback to the user based on their interaction, or lack thereof, with 
     { value: `2`, label: `Option 2` },
     { value: `3`, label: `Option 3` },
   ]"
-  :messages="[{ message: `Success validation message`, type: `success` }]"
+  :messages="[{ message: `Positive validation message`, type: `positive` }]"
   label="Label"
   :model-value="modelValue"
-  @input="onInput"
-  @change="onChange"
+  @update:model-value="onInput"
   :show-messages="false"
 />
 <dt-select-menu
@@ -216,8 +208,7 @@ Provides feedback to the user based on their interaction, or lack thereof, with 
   :messages="[{ message: `Warning validation message`, type: `warning` }]"
   label="Label"
   :model-value="modelValue"
-  @input="onInput"
-  @change="onChange"
+  @update:model-value="onInput"
   :show-messages="false"
 />
 ```
@@ -239,8 +230,7 @@ Provides feedback to the user based on their interaction, or lack thereof, with 
     { value: `3`, label: `Option 3` },
   ]"
   :model-value="modelValue"
-  @input="onInput"
-  @change="onChange"
+  @update:model-value="onInput"
 >
   <template #label>
     <div>Slotted label</div>
@@ -265,8 +255,7 @@ Provides feedback to the user based on their interaction, or lack thereof, with 
     { value: `3`, label: `Option 3` },
   ]"
   :model-value="modelValue"
-  @input="onInput"
-  @change="onChange"
+  @update:model-value="onInput"
 >
   <template #description>
     <div>Slotted description</div>
@@ -288,8 +277,7 @@ Provides feedback to the user based on their interaction, or lack thereof, with 
 <!-- @code -->
 <dt-select-menu
   :model-value="modelValue"
-  @input="onInput"
-  @change="onChange"
+  @update:model-value="onInput"
 >
   <template #default>
     <option
@@ -326,8 +314,7 @@ We offer different sizes for instances in which the interface requires a smaller
   label="Label"
   :size="100|200|300|400|500"
   :model-value="modelValue"
-  @input="onInput"
-  @change="onChange"
+  @update:model-value="onInput"
 />
 ```
 

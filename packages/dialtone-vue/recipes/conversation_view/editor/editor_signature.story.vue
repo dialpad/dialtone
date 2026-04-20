@@ -38,7 +38,7 @@
       :allow-image-resize="allowImageResize"
       @focus="$attrs.onFocus"
       @blur="$attrs.onBlur"
-      @input="$attrs.onInput"
+      @update:model-value="$attrs['onUpdate:modelValue']"
       @quick-replies-click="$attrs.onQuickRepliesClick"
       @inline-image-click="$attrs.onInlineImageClick"
       @text-input="$attrs.onTextInput"

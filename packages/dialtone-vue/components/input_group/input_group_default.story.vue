@@ -11,7 +11,7 @@
     :messages-class="$attrs.messagesClass"
     :legend-child-props="$attrs.legendChildProps"
     :messages-child-props="$attrs.messagesChildProps"
-    @input="$attrs.onInput"
+    @update:model-value="$attrs['onUpdate:modelValue']"
   >
     <slot>
       <input-decorator

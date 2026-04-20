@@ -1,6 +1,12 @@
  
 
 export default {
+  defaults: {
+    props: {
+      labelSize: { tokenCategory: 'typography-size:label' },
+    },
+  },
+
   default: {
     props: {
       label: {
@@ -12,7 +18,7 @@ export default {
   'hidden label': {
     props: {
       label: { initialValue: 'Radio label' },
-      labelVisible: { initialValue: false },
+      showLabel: { initialValue: false },
     },
   },
 

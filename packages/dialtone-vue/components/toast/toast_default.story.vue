@@ -7,16 +7,16 @@
     <aside class="d-toast-wrapper">
       <dt-toast
         ref="toast"
-        v-model:show="isShown"
+        v-model:open="isShown"
         :kind="$attrs.kind"
-        :title="$attrs.title"
+        :header-text="$attrs.headerText"
         :message="$attrs.message"
-        :title-id="$attrs.titleId"
+        :header-id="$attrs.headerId"
         :content-id="$attrs.contentId"
         :important="$attrs.important"
-        :hide-close="$attrs.hideClose"
-        :hide-action="$attrs.hideAction"
-        :hide-icon="$attrs.hideIcon"
+        :show-close="$attrs.showClose"
+        :show-action="$attrs.showAction"
+        :show-icon="$attrs.showIcon"
         :duration="$attrs.duration"
         :layout="$attrs.layout"
         @close="$attrs.onClose"
@@ -55,12 +55,6 @@
         >
           <dt-icon :name="$attrs.icon" />
         </template>
-        <template
-          v-if="$attrs.titleOverride"
-          #titleOverride
-        >
-          <span v-html="$attrs.titleOverride" />
-        </template>
       </dt-toast>
     </aside>
   </div>
@@ -78,13 +72,13 @@ export default {
 
   data () {
     return {
-      isShown: this.$attrs.show,
+      isShown: this.$attrs.open,
     };
   },
 
   computed: {
     shouldInvertButton () {
-      return this.$attrs.kind === 'base' || this.$attrs.kind === 'error' || this.$attrs.kind === 'info';
+      return this.$attrs.kind === 'base' || this.$attrs.kind === 'critical' || this.$attrs.kind === 'info';
     },
 
     isInverted () {
@@ -101,8 +95,8 @@ export default {
   },
 
   watch: {
-    show: function (show) {
-      this.isShown = show;
+    open: function (open) {
+      this.isShown = open;
     },
   },
 

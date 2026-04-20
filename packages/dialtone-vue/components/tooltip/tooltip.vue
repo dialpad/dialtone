@@ -204,7 +204,7 @@ export default {
 
     /**
      * Controls whether hover/focus causes the tooltip to appear.
-     * Cannot be combined with the show prop. show value will be ignored.
+     * Cannot be combined with the open prop. open value will be ignored.
      * by default this is true, if you override with false, the tooltip will never show up.
      */
     enabled: {
@@ -215,11 +215,10 @@ export default {
     /**
      * Controls whether the tooltip is shown. Leaving this null will have the tooltip trigger on mouseover by default.
      * If you set this value, the default mouseover behavior will be disabled and you can control it as you need.
-     * Supports .sync modifier
      * @values null, true, false
      */
-    show: {
-      type: Boolean,
+    open: {
+      type: [Boolean, null],
       default: null,
     },
 
@@ -278,11 +277,11 @@ export default {
     'shown',
 
     /**
-     * Sync show value
+     * Sync open value
      *
-     * @event update:show
+     * @event update:open
      */
-    'update:show',
+    'update:open',
   ],
 
   data () {
@@ -341,10 +340,10 @@ export default {
       deep: true,
     },
 
-    show: {
-      handler: function (show) {
-        if (show !== null && this.enabled) {
-          this.internalShow = show;
+    open: {
+      handler: function (open) {
+        if (open !== null && this.enabled) {
+          this.internalShow = open;
         }
       },
 
@@ -370,9 +369,9 @@ export default {
   },
 
   async mounted () {
-    if (!this.enabled && this.show != null) {
-      console.warn('Tooltip: You cannot use both the enabled and show props at the same time.');
-      console.warn('The show prop will be ignored.');
+    if (!this.enabled && this.open != null) {
+      console.warn('Tooltip: You cannot use both the enabled and open props at the same time.');
+      console.warn('The open prop will be ignored.');
     }
 
     this.tip = createTippy(this.anchor, this.initOptions());
@@ -399,11 +398,7 @@ export default {
     calculateAnchorZindex () {
       // if a modal is currently active render at modal-element z-index, otherwise at tooltip z-index
       if (returnFirstEl(this.$el).getRootNode()
-        .querySelector(
-          `.d-modal[aria-hidden="false"],
-          .d-modal--transparent[aria-hidden="false"],
-          .d-modal:not([aria-hidden]),
-          .d-modal--transparent:not([aria-hidden])`) ||
+        .querySelector('.d-modal[aria-hidden="false"], .d-modal--transparent[aria-hidden="false"], .d-modal[open], .d-modal--transparent[open]') ||
         // Special case because we don't have any dialtone drawer component yet. Render at 651 when
         // anchor of popover is within a drawer.
         returnFirstEl(this.$el).closest('.d-zi-drawer')) {
@@ -437,11 +432,11 @@ export default {
         // Example: anchor of a popover is a button with tooltip.
         // closing it with the mouse would trigger the tooltip to display as
         // the anchor is focused on close. Not what we want.
-        if (this.show === null && this.hasVisibleFocus()) {
+        if (this.open === null && this.hasVisibleFocus()) {
           this.internalShow = true;
         }
       } else {
-        if (this.show === null) this.internalShow = true;
+        if (this.open === null) this.internalShow = true;
       }
     },
 
@@ -454,7 +449,7 @@ export default {
     },
 
     triggerHide () {
-      if (this.show === null) this.internalShow = false;
+      if (this.open === null) this.internalShow = false;
     },
 
     onChangePlacement (placement) {
@@ -464,8 +459,8 @@ export default {
     onHide () {
       this.tip?.unmount();
       this.$emit('shown', false);
-      if (this.show !== null) {
-        this.$emit('update:show', false);
+      if (this.open !== null) {
+        this.$emit('update:open', false);
       }
     },
 
@@ -477,8 +472,8 @@ export default {
         return;
       }
       this.$emit('shown', true);
-      if (this.show !== null) {
-        this.$emit('update:show', true);
+      if (this.open !== null) {
+        this.$emit('update:open', true);
       }
     },
 

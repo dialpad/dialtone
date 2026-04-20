@@ -517,9 +517,11 @@ export default {
       return [
         { key: 'default', props: { kind: 'body' }, copy: 'Default tone' },
         { key: 'muted', props: { kind: 'body', tone: 'muted' }, copy: 'Muted tone' },
-        { key: 'success', props: { kind: 'body', tone: 'success' }, copy: 'Success tone' },
+        { key: 'positive', props: { kind: 'body', tone: 'positive' }, copy: 'Positive tone' },
         { key: 'warning', props: { kind: 'body', tone: 'warning' }, copy: 'Warning tone' },
         { key: 'critical', props: { kind: 'body', tone: 'critical' }, copy: 'Critical tone' },
+        { key: 'info', props: { kind: 'body', tone: 'info' }, copy: 'Info tone' },
+        { key: 'info-strong', props: { kind: 'body', tone: 'info-strong' }, copy: 'Info strong tone' },
       ];
     },
 

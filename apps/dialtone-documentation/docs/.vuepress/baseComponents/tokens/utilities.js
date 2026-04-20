@@ -1,5 +1,5 @@
 import tokensJson from '@dialpad/dialtone-tokens/dist/doc.json';
-import { CATEGORY_MAP, SUBCATEGORY_MAP, FORMAT_MAP, MODES, THEMES, DEPRECATED_PATTERNS, getTokensStructure } from './constants';
+import { CATEGORY_MAP, SUBCATEGORY_MAP, FORMAT_MAP, MODES, THEMES, getTokensStructure } from './constants';
 
 /**
   Process the file tokensJson and fill processedTokens with the data we want to show.
@@ -76,9 +76,8 @@ const addTokensToCategories = (token, format, structure) => {
   const [key, value] = token;
   if (!value[FORMAT_MAP[format]] || !value[FORMAT_MAP.CSS] || isBaseToken(key)) return;
 
-  const { name, value: tokenValue, description, keywords, isCompositionToken } = value[FORMAT_MAP[format]];
+  const { name, value: tokenValue, description, keywords, isCompositionToken, deprecated } = value[FORMAT_MAP[format]];
   const { value: exampleValue, name: exampleName } = value[FORMAT_MAP.CSS];
-  const deprecated = isDeprecatedToken(exampleName);
   const displayToken = { exampleValue, exampleName, name, tokenValue, description, keywords, deprecated };
 
   if (isCompositionToken) {
@@ -215,7 +214,3 @@ const addTokenToSubcategory = (token, category, subcategory, structure) => {
 };
 
 const isBaseToken = (name) => name.endsWith('base') || name.endsWith('root');
-
-const isDeprecatedToken = (name) => {
-  return DEPRECATED_PATTERNS.some(pattern => name.includes(pattern));
-};

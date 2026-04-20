@@ -6,7 +6,7 @@ import DtValidationMessages from './validation_messages.vue';
 const VALIDATION_MESSAGES = [
   {
     message: 'Validation Message',
-    type: VALIDATION_MESSAGE_TYPES.SUCCESS,
+    type: VALIDATION_MESSAGE_TYPES.POSITIVE,
   },
 ];
 
@@ -49,7 +49,7 @@ const VariantsTemplate = () => {
     template: `
       <div id="components-validation-messages--variants-container">
         <dt-validation-messages
-          :validationMessages="[{ message: 'With Success Validation Message', type: 'success' }]"
+          :validationMessages="[{ message: 'With Positive Validation Message', type: 'positive' }]"
         />
         <br />
         <dt-validation-messages
@@ -57,7 +57,7 @@ const VariantsTemplate = () => {
         />
         <br />
         <dt-validation-messages
-          :validationMessages="[{ message: 'With Error Validation Message', type: 'error' }]"
+          :validationMessages="[{ message: 'With Critical Validation Message', type: 'critical' }]"
         />
         <br />
       </div>

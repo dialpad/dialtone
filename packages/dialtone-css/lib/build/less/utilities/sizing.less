@@ -19,11 +19,158 @@
 //      - FIXED
 //
 //  ============================================================================
+//  $   SIZE (both dimensions)
+//  ============================================================================
+//  `.d-size-*` sets BOTH `inline-size` and `block-size`, so it must precede the
+//  single-axis `.d-h*` / `.d-w*` classes below. Otherwise `d-w50p d-size-full`
+//  would silently clobber the width override with `inline-size: 100%`.
+//  ----------------------------------------------------------------------------
+@layer dialtone.utilities {
+//  $$  KEYWORDS & VIEWPORT
+//  ----------------------------------------------------------------------------
+.d-size-auto {
+  inline-size: auto !important;
+  block-size: auto !important;
+}
+
+.d-size-full {
+  inline-size: 100% !important;
+  block-size: 100% !important;
+}
+
+.d-size-fit {
+  inline-size: fit-content !important;
+  block-size: fit-content !important;
+}
+
+.d-size-min {
+  inline-size: min-content !important;
+  block-size: min-content !important;
+}
+
+.d-size-max {
+  inline-size: max-content !important;
+  block-size: max-content !important;
+}
+
+.d-size-dvh {
+  inline-size: 100dvh !important;
+  block-size: 100dvh !important;
+}
+
+.d-size-dvw {
+  inline-size: 100dvw !important;
+  block-size: 100dvw !important;
+}
+
+.d-size-svh {
+  inline-size: 100svh !important;
+  block-size: 100svh !important;
+}
+
+.d-size-svw {
+  inline-size: 100svw !important;
+  block-size: 100svw !important;
+}
+
+.d-size-lvh {
+  inline-size: 100lvh !important;
+  block-size: 100lvh !important;
+}
+
+.d-size-lvw {
+  inline-size: 100lvw !important;
+  block-size: 100lvw !important;
+}
+
+//  $$  PERCENTAGES
+//  ----------------------------------------------------------------------------
+.d-size-10p {
+  inline-size: 10% !important;
+  block-size: 10% !important;
+}
+
+.d-size-15p {
+  inline-size: 15% !important;
+  block-size: 15% !important;
+}
+
+.d-size-20p {
+  inline-size: 20% !important;
+  block-size: 20% !important;
+}
+
+.d-size-25p {
+  inline-size: 25% !important;
+  block-size: 25% !important;
+}
+
+.d-size-30p {
+  inline-size: 30% !important;
+  block-size: 30% !important;
+}
+
+.d-size-33p {
+  inline-size: 33.333% !important;
+  block-size: 33.333% !important;
+}
+
+.d-size-40p {
+  inline-size: 40% !important;
+  block-size: 40% !important;
+}
+
+.d-size-50p {
+  inline-size: 50% !important;
+  block-size: 50% !important;
+}
+
+.d-size-60p {
+  inline-size: 60% !important;
+  block-size: 60% !important;
+}
+
+.d-size-66p {
+  inline-size: 66.667% !important;
+  block-size: 66.667% !important;
+}
+
+.d-size-70p {
+  inline-size: 70% !important;
+  block-size: 70% !important;
+}
+
+.d-size-75p {
+  inline-size: 75% !important;
+  block-size: 75% !important;
+}
+
+.d-size-80p {
+  inline-size: 80% !important;
+  block-size: 80% !important;
+}
+
+.d-size-85p {
+  inline-size: 85% !important;
+  block-size: 85% !important;
+}
+
+.d-size-90p {
+  inline-size: 90% !important;
+  block-size: 90% !important;
+}
+
+.d-size-100p {
+  inline-size: 100% !important;
+  block-size: 100% !important;
+}
+
+
+//  ============================================================================
 //  $   HEIGHT
 //  ============================================================================
 //  $$  PERCENTAGES
 //  ----------------------------------------------------------------------------
-@layer dialtone.utilities {
 .d-h10p { block-size: 10% !important; }
 .d-h15p { block-size: 15% !important; }
 .d-h20p { block-size: 20% !important; }
@@ -199,146 +346,4 @@
 .d-wmx-fit-content { max-inline-size: fit-content !important; }
 .d-wmx-max-content { max-inline-size: max-content !important; }
 .d-wmx-min-content { max-inline-size: min-content !important; }
-
-//  ============================================================================
-//  $   SIZE (both dimensions)
-//  ============================================================================
-//  $$  KEYWORDS & VIEWPORT
-//  ----------------------------------------------------------------------------
-.d-size-auto {
-  inline-size: auto !important;
-  block-size: auto !important;
-}
-
-.d-size-full {
-  inline-size: 100% !important;
-  block-size: 100% !important;
-}
-
-.d-size-fit {
-  inline-size: fit-content !important;
-  block-size: fit-content !important;
-}
-
-.d-size-min {
-  inline-size: min-content !important;
-  block-size: min-content !important;
-}
-
-.d-size-max {
-  inline-size: max-content !important;
-  block-size: max-content !important;
-}
-
-.d-size-dvh {
-  inline-size: 100dvh !important;
-  block-size: 100dvh !important;
-}
-
-.d-size-dvw {
-  inline-size: 100dvw !important;
-  block-size: 100dvw !important;
-}
-
-.d-size-svh {
-  inline-size: 100svh !important;
-  block-size: 100svh !important;
-}
-
-.d-size-svw {
-  inline-size: 100svw !important;
-  block-size: 100svw !important;
-}
-
-.d-size-lvh {
-  inline-size: 100lvh !important;
-  block-size: 100lvh !important;
-}
-
-.d-size-lvw {
-  inline-size: 100lvw !important;
-  block-size: 100lvw !important;
-}
-
-//  $$  PERCENTAGES
-//  ----------------------------------------------------------------------------
-.d-size-10p {
-  inline-size: 10% !important;
-  block-size: 10% !important;
-}
-
-.d-size-15p {
-  inline-size: 15% !important;
-  block-size: 15% !important;
-}
-
-.d-size-20p {
-  inline-size: 20% !important;
-  block-size: 20% !important;
-}
-
-.d-size-25p {
-  inline-size: 25% !important;
-  block-size: 25% !important;
-}
-
-.d-size-30p {
-  inline-size: 30% !important;
-  block-size: 30% !important;
-}
-
-.d-size-33p {
-  inline-size: 33.333% !important;
-  block-size: 33.333% !important;
-}
-
-.d-size-40p {
-  inline-size: 40% !important;
-  block-size: 40% !important;
-}
-
-.d-size-50p {
-  inline-size: 50% !important;
-  block-size: 50% !important;
-}
-
-.d-size-60p {
-  inline-size: 60% !important;
-  block-size: 60% !important;
-}
-
-.d-size-66p {
-  inline-size: 66.667% !important;
-  block-size: 66.667% !important;
-}
-
-.d-size-70p {
-  inline-size: 70% !important;
-  block-size: 70% !important;
-}
-
-.d-size-75p {
-  inline-size: 75% !important;
-  block-size: 75% !important;
-}
-
-.d-size-80p {
-  inline-size: 80% !important;
-  block-size: 80% !important;
-}
-
-.d-size-85p {
-  inline-size: 85% !important;
-  block-size: 85% !important;
-}
-
-.d-size-90p {
-  inline-size: 90% !important;
-  block-size: 90% !important;
-}
-
-.d-size-100p {
-  inline-size: 100% !important;
-  block-size: 100% !important;
-}
 }

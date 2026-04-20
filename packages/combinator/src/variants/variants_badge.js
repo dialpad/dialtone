@@ -1,6 +1,14 @@
  
 
 export default {
+  defaults: {
+    props: {
+      iconSize: { tokenCategory: 'icon-size' },
+      type: { tokenCategory: 'color:d-badge--:backgroundColor' },
+      decoration: { tokenCategory: 'color:d-badge--decorate-:--badge-decorative-color' },
+    },
+  },
+
   exclusions: [
     {
       when: { kind: 'count' },
@@ -17,6 +25,14 @@ export default {
     {
       when: { decoration: v => !!v },
       hide: { slots: ['startIcon', 'endIcon'] },
+    },
+    {
+      when: { kind: 'count' },
+      disableValues: { props: { type: ['ai'] } },
+    },
+    {
+      when: { type: 'ai' },
+      disableValues: { props: { kind: ['count'] } },
     },
   ],
 
@@ -49,8 +65,8 @@ export default {
   },
 
   locked: {
-    iconSize: {
-      initialValue: '100',
+    props: {
+      iconSize: { initialValue: '100' },
     },
     slots: {
       startIcon: { initialValue: '<dt-icon-lock :size="iconSize" />' },

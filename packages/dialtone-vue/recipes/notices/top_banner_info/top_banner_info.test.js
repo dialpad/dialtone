@@ -70,7 +70,7 @@ describe('DtRecipeTopBannerInfo Tests', function () {
         expect(middleContent.text()).toBe(slots.default);
       });
       it('Should display with default background color', () => {
-        expect(rootElement.classes()).toContain('d-recipe-top-banner-info--success');
+        expect(rootElement.classes()).toContain('d-recipe-top-banner-info--positive');
       });
     });
 

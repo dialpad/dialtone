@@ -3,10 +3,9 @@
     :disabled="!appendTo"
     :to="appendTo"
   >
-    <dt-lazy-show
-      ref="modalRoot"
-      transition="d-zoom"
-      :show="show"
+    <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -->
+    <dialog
+      ref="dialogEl"
       :class="[
         'd-modal',
         MODAL_KIND_MODIFIERS[kind],
@@ -14,12 +13,15 @@
         modalClass,
       ]"
       data-qa="dt-modal"
-      :aria-hidden="open"
+      :aria-describedby="describedById || undefined"
+      :aria-labelledby="labelledById"
       v-bind="modeAttrs"
-      v-on="modalListeners"
+      @cancel.prevent="close"
+      @click="onBackdropClick"
+      @keydown="onKeydown"
     >
       <div
-        v-if="show && (hasSlotContent($slots.banner) || bannerTitle)"
+        v-if="open && (hasSlotContent($slots.banner) || bannerHeaderText)"
         data-qa="dt-modal-banner"
         :class="[
           'd-modal__banner',
@@ -27,26 +29,24 @@
           bannerKindClass,
         ]"
       >
-        <!-- @slot Slot for the banner, defaults to bannerTitle prop -->
+        <!-- @slot Slot for the banner, defaults to bannerHeaderText prop -->
         <slot name="banner">
-          {{ bannerTitle }}
+          {{ bannerHeaderText }}
         </slot>
       </div>
       <transition
-        appear
+        :appear="open"
         name="d-modal__dialog"
+        @after-enter="onAfterEnter"
+        @after-leave="onAfterLeave"
       >
         <div
-          v-show="show"
+          v-show="open"
           :class="[
             'd-modal__dialog',
             { 'd-modal__dialog--scrollable': fixedHeaderFooter },
             dialogClass,
           ]"
-          role="dialog"
-          aria-modal="true"
-          :aria-describedby="describedById"
-          :aria-labelledby="labelledById"
         >
           <div
             v-if="hasSlotContent($slots.header)"
@@ -54,7 +54,7 @@
             class="d-modal__header"
             data-qa="dt-modal-title"
           >
-            <!-- @slot Slot for dialog header section, taking the place of any "title" text prop -->
+            <!-- @slot Slot for dialog header section, taking the place of any "headerText" text prop -->
             <slot name="header" />
           </div>
           <dt-text
@@ -69,7 +69,7 @@
             class="d-modal__header"
             data-qa="dt-modal-title"
           >
-            {{ title }}
+            {{ headerText }}
           </dt-text>
           <div
             v-if="hasSlotContent($slots.default)"
@@ -100,7 +100,7 @@
             <slot name="footer" />
           </footer>
           <sr-only-close-button
-            v-if="hideClose"
+            v-if="!showClose"
             @close="close"
           />
           <dt-button
@@ -122,7 +122,7 @@
           </dt-button>
         </div>
       </transition>
-    </dt-lazy-show>
+    </dialog>
   </teleport>
 </template>
 
@@ -131,22 +131,22 @@
 import { DtButton } from '@/components/button';
 import { DtText } from '@/components/text';
 import { DtIconClose } from '@dialpad/dialtone-icons/vue';
-import Modal from '@/common/mixins/modal';
 import ModeMixin from '@/common/mixins/mode';
 import {
   MODAL_BANNER_KINDS,
   MODAL_KIND_MODIFIERS,
   MODAL_SIZE_MODIFIERS,
 } from './modal_constants';
-import { returnFirstEl, getUniqueString, hasSlotContent, disableRootScrolling, enableRootScrolling } from '@/common/utils';
-import { DtLazyShow } from '@/components/lazy_show';
-import { EVENT_KEYNAMES } from '@/common/constants';
+import { getUniqueString, hasSlotContent, returnFirstEl, disableRootScrolling, enableRootScrolling } from '@/common/utils';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
 import { NOTICE_KINDS } from '@/components/notice';
 import { DialtoneLocalization } from '@/localization';
 
+const focusableSelector = 'button:not(:disabled),[href],input:not(:disabled),select:not(:disabled),' +
+  'textarea:not(:disabled),details,[tabindex]:not([tabindex="-1"]):not(:disabled):not([aria-disabled="true"])';
+
 /**
- * Modals focus the user’s attention exclusively on one task or piece of information
+ * Modals focus the user's attention exclusively on one task or piece of information
  * via a window that sits on top of the page content.
  * @see https://dialtone.dialpad.com/components/modal.html
  */
@@ -155,14 +155,13 @@ export default {
   name: 'DtModal',
 
   components: {
-    DtLazyShow,
     DtButton,
     DtText,
     DtIconClose,
     SrOnlyCloseButton,
   },
 
-  mixins: [Modal, ModeMixin],
+  mixins: [ModeMixin],
 
   props: {
     /**
@@ -196,30 +195,30 @@ export default {
      * Parent component can sync on this value to control the modal's visibility.
      * @values true, false
      */
-    show: {
+    open: {
       type: Boolean,
       default: false,
     },
 
     /**
-     * Title text to display in the modal header.
+     * Header text to display in the modal header.
      */
-    title: {
+    headerText: {
       type: String,
-      default: '',
+      default: undefined,
     },
 
     /**
-     * Title text to display in the modal banner.
+     * Header text to display in the modal banner.
      */
-    bannerTitle: {
+    bannerHeaderText: {
       type: String,
-      default: '',
+      default: undefined,
     },
 
     /**
-     * The theme of the modal. kind - default or danger,
-     * @values default, danger
+     * The theme of the modal.
+     * @values default, critical
      */
     kind: {
       type: String,
@@ -269,7 +268,7 @@ export default {
 
     /**
      * Sets the color of the banner.
-     * @values base, error, info, success, warning
+     * @values base, critical, info, positive, warning
      */
     bannerKind: {
       type: String,
@@ -290,12 +289,12 @@ export default {
     },
 
     /**
-     * Hides the close button on the modal
+     * Shows the close button on the modal
      * @values true, false
      */
-    hideClose: {
+    showClose: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     /**
@@ -363,10 +362,10 @@ export default {
      * The modal will emit a "false" boolean value for this event when the user performs a modal-closing action.
      * Parent components can sync on this value to create a 2-way binding to control modal visibility.
      *
-     * @event update:show
+     * @event update:open
      * @type {Boolean}
      */
-    'update:show',
+    'update:open',
   ],
 
   data () {
@@ -374,60 +373,12 @@ export default {
       MODAL_KIND_MODIFIERS,
       MODAL_SIZE_MODIFIERS,
       MODAL_BANNER_KINDS,
-      EVENT_KEYNAMES,
       hasSlotContent,
       i18n: new DialtoneLocalization(),
     };
   },
 
   computed: {
-    modalListeners () {
-      return {
-        click: event => {
-          // Handle backdrop clicks for closing modal
-          if (this.closeOnClick && event.target === event.currentTarget) {
-            this.close();
-          } else if (this.show && event.target !== event.currentTarget) {
-            // Ensure focus stays within modal when clicking inside it
-            this.handleModalClick(event);
-          }
-
-          this.$emit('click', event);
-        },
-
-        keydown: event => {
-          switch (event.code) {
-            case EVENT_KEYNAMES.esc:
-            case EVENT_KEYNAMES.escape:
-              this.close();
-              break;
-            case EVENT_KEYNAMES.tab:
-              this.trapFocus(event);
-              break;
-          }
-          this.$emit('keydown', event);
-        },
-
-        'after-enter': async () => {
-          this.$emit('update:show', true);
-          await this.setFocusAfterTransition();
-        },
-
-        focusin: event => {
-          // Ensure focus stays within modal
-          const modalEl = this.$refs.modalRoot?.$el || this.$el;
-          if (this.show && modalEl && !modalEl.contains(event.target)) {
-            event.preventDefault();
-            this.focusFirstElement(modalEl);
-          }
-        },
-      };
-    },
-
-    open () {
-      return `${!this.show}`;
-    },
-
     hasFooterSlot () {
       return !!this.$slots.footer;
     },
@@ -442,59 +393,108 @@ export default {
   },
 
   watch: {
-    show: {
-      handler (isShowing) {
-        if (isShowing) {
-          // Set a reference to the previously-active element, to which we'll return focus on modal close.
-          this.previousActiveElement = document.activeElement;
-          const modalEl = this.$refs.modalRoot?.$el || this.$el;
-          disableRootScrolling(returnFirstEl(modalEl).getRootNode().host);
-        } else {
-          const modalEl = this.$refs.modalRoot?.$el || this.$el;
-          enableRootScrolling(returnFirstEl(modalEl).getRootNode().host);
-          // Modal is being hidden, so return focus to the previously active element before clearing the reference.
-          this.previousActiveElement?.focus();
-          this.previousActiveElement = null;
-        }
-      },
+    open (isShowing) {
+      this.syncDialogState(isShowing);
     },
   },
 
+  mounted () {
+    if (this.open) {
+      this.syncDialogState(true);
+    }
+  },
+
+  beforeUnmount () {
+    const dialogEl = this.$refs.dialogEl;
+    if (dialogEl?.open) {
+      dialogEl.close();
+      enableRootScrolling(this.getScrollRoot());
+    }
+    this.previousActiveElement = null;
+  },
+
   methods: {
+    getScrollRoot () {
+      return returnFirstEl(this.$refs.dialogEl)?.getRootNode()?.host;
+    },
+
+    syncDialogState (isShowing) {
+      const dialogEl = this.$refs.dialogEl;
+      if (!dialogEl) return;
+
+      if (isShowing) {
+        this.previousActiveElement = document.activeElement;
+        if (!dialogEl.open) {
+          dialogEl.showModal();
+        }
+        disableRootScrolling(this.getScrollRoot());
+      } else if (dialogEl.open) {
+        // Leave transition plays via v-show on inner content.
+        // close() is called in onAfterLeave when transition completes.
+        enableRootScrolling(this.getScrollRoot());
+      }
+    },
+
     close () {
-      this.$emit('update:show', false);
+      this.$emit('update:open', false);
+    },
+
+    onBackdropClick (event) {
+      if (this.closeOnClick && event.target === event.currentTarget) {
+        this.close();
+      }
+      this.$emit('click', event);
+    },
+
+    onKeydown (event) {
+      this.$emit('keydown', event);
+    },
+
+    async onAfterEnter () {
+      this.$emit('update:open', true);
+      await this.setFocusAfterTransition();
+    },
+
+    onAfterLeave () {
+      const dialogEl = this.$refs.dialogEl;
+      if (dialogEl?.open) {
+        dialogEl.close();
+      }
+      this.previousActiveElement?.focus();
+      this.previousActiveElement = null;
+    },
+
+    focusFirstTabbable (container) {
+      const focusable = [...container.querySelectorAll(focusableSelector)];
+      if (!focusable.length) return;
+      let target = focusable[0];
+      // If first focusable is an unchecked radio, prefer the checked radio in the same group.
+      if (target.matches('[type="radio"]:not(:checked)')) {
+        target = focusable.find(el => el.checked && el.name === target.name) || target;
+      }
+      target.focus({ preventScroll: true });
     },
 
     async setFocusAfterTransition () {
-      const modalEl = this.$refs.modalRoot?.$el || this.$el;
+      const dialogEl = this.$refs.dialogEl;
+      if (!dialogEl) return;
+
+      await this.$nextTick();
+
       if (this.initialFocusElement === 'first') {
-        await this.focusFirstElement(modalEl);
-      } else if (this.initialFocusElement.startsWith('#')) {
-        await this.focusElementById(this.initialFocusElement);
+        this.focusFirstTabbable(dialogEl);
+      } else if (typeof this.initialFocusElement === 'string' && this.initialFocusElement.startsWith('#')) {
+        const el = dialogEl.querySelector(this.initialFocusElement);
+        if (el) {
+          el.focus();
+        } else {
+          // eslint-disable-next-line no-console
+          console.warn('Could not find the element specified in dt-modal prop "initialFocusElement". ' +
+            'Defaulting to focusing the first element.');
+          this.focusFirstTabbable(dialogEl);
+        }
       } else if (this.initialFocusElement instanceof HTMLElement) {
         this.initialFocusElement.focus();
-      }
-    },
-
-    trapFocus (e) {
-      if (this.show) {
-        const modalEl = this.$refs.modalRoot?.$el || this.$el;
-        this.focusTrappedTabPress(e, modalEl);
-      }
-    },
-
-    handleModalClick (event) {
-      // Ensure focus stays within modal when clicking inside it
-      const clickedElement = event.target;
-      const modalEl = this.$refs.modalRoot?.$el || this.$el;
-      const focusableElements = this._getFocusableElements(modalEl);
-
-      // If the clicked element is not focusable, ensure focus stays in modal
-      if (focusableElements.length && !focusableElements.includes(clickedElement)) {
-        // Check if current active element is still within the modal
-        if (!focusableElements.includes(document.activeElement)) {
-          this.focusFirstElement(modalEl);
-        }
       }
     },
   },

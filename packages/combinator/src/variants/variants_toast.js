@@ -1,6 +1,12 @@
- 
+
 
 export default {
+  defaults: {
+    props: {
+      kind: { tokenCategory: 'color:d-notice--:backgroundColor' },
+    },
+  },
+
   default: {
     slots: {
       default: {
@@ -8,7 +14,7 @@ export default {
       },
     },
     props: {
-      title: {
+      headerText: {
         initialValue: 'Base title (optional)',
       },
       show: {
@@ -19,9 +25,9 @@ export default {
 
   'info with action and hide close': {
     props: {
-      title: { initialValue: 'Info title' },
+      headerText: { initialValue: 'Info title' },
       kind: { initialValue: 'info' },
-      hideClose: { initialValue: true },
+      showClose: { initialValue: false },
       show: { initialValue: true },
     },
     slots: {
@@ -32,7 +38,7 @@ export default {
 
   'important warning with no message': {
     props: {
-      title: { initialValue: 'Warning title' },
+      headerText: { initialValue: 'Warning title' },
       kind: { initialValue: 'warning' },
       important: { initialValue: true },
       show: { initialValue: true },

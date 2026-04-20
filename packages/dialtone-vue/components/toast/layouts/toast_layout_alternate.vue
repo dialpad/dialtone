@@ -12,7 +12,7 @@
     <div class="d-toast-alternate__dialog">
       <div class="d-toast-alternate__header">
         <dt-toast-layout-alternate-icon
-          v-if="!hideIcon"
+          v-if="showIcon"
           :kind="kind"
           size="200"
           v-bind="toastListeners"
@@ -20,21 +20,21 @@
           <slot name="icon" />
         </dt-toast-layout-alternate-icon>
         <dt-notice-content
-          :title-id="titleId"
+          :header-id="headerId"
           :content-id="contentId"
-          :title="title"
+          :header-text="headerText"
           :role="role"
           v-bind="toastListeners"
         >
-          <template #titleOverride>
-            <slot name="titleOverride" />
+          <template #header>
+            <slot name="header" />
           </template>
         </dt-notice-content>
 
         <!-- Close Button -->
         <dt-notice-action
-          :hide-action="true"
-          :hide-close="hideClose"
+          :show-action="false"
+          :show-close="showClose"
           :button-size="100"
           v-bind="toastListeners"
           @close="$emit('close')"
@@ -75,10 +75,10 @@ export default {
     },
 
     /**
-     * Sets an ID on the title element of the component. Useful for aria-describedby
-     * or aria-labelledby or any other reason you may need an id to refer to the title.
+     * Sets an ID on the header element of the component. Useful for aria-describedby
+     * or aria-labelledby or any other reason you may need an id to refer to the header.
      */
-    titleId: {
+    headerId: {
       type: String,
       default () { return utils.getUniqueString(); },
     },
@@ -93,11 +93,11 @@ export default {
     },
 
     /**
-     * Title header of the toast. This can be left blank to remove the title from the toast entirely.
+     * Header text of the toast. This can be left blank to remove the header from the toast entirely.
      */
-    title: {
+    headerText: {
       type: String,
-      default: '',
+      default: undefined,
     },
 
     /**
@@ -123,7 +123,7 @@ export default {
 
     /**
      * Severity level of the toast, sets the icon and background
-     * @values base, error, info, success, warning, gradient
+     * @values base, critical, info, positive, warning, gradient
      */
     kind: {
       type: String,
@@ -134,30 +134,30 @@ export default {
     },
 
     /**
-     * Hides the close button from the toast
+     * Shows the close button in the toast
      * @values true, false
      */
-    hideClose: {
+    showClose: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     /**
-     * Hides the icon from the notice
+     * Shows the icon in the toast
      * @values true, false
      */
-    hideIcon: {
+    showIcon: {
       type: Boolean,
-      default: false,
+      default: true,
     },
   },
 
   computed: {
     kindClass () {
       const kindClasses = {
-        error: 'd-toast-alternate--error',
+        critical: 'd-toast-alternate--critical',
         info: 'd-toast-alternate--info',
-        success: 'd-toast-alternate--success',
+        positive: 'd-toast-alternate--positive',
         warning: 'd-toast-alternate--warning',
         gradient: 'd-toast-alternate--gradient',
       };

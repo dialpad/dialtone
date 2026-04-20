@@ -18,6 +18,8 @@
     --banner-line-height: var(--dt-font-line-height-200);
     --banner-dialog-padding-y: var(--dt-spacing-100);
     --banner-dialog-padding-x: var(--dt-spacing-200);
+    --notice-icon-gap: var(--dt-spacing-100);
+    --notice-actions-align: inherit;
 
     position: fixed;
     inset-block-start: 0;
@@ -26,7 +28,7 @@
     max-inline-size: 100%;
     padding: 0;
     line-height: var(--banner-line-height);
-    border-block-end: 1px solid var(--banner-color-border);
+    border-block-end: var(--dt-size-border-100) solid var(--banner-color-border);
     border-radius: 0;
     box-shadow: none;
 
@@ -50,6 +52,11 @@
 //  $   CONTENT CONTAINER
 //  ----------------------------------------------------------------------------
 .d-banner__dialog {
+    --notice-icon-block-offset: var(--dt-spacing-0);
+    --notice-content-direction: row;
+    --notice-content-gap: var(--dt-spacing-75);
+    --notice-content-align: baseline;
+
     position: relative;
     display: flex;
     align-items: center;
@@ -57,20 +64,6 @@
     min-block-size: calc(var(--dt-layout-75) + var(--dt-spacing-25));
     margin: 0 auto;
     padding: var(--banner-dialog-padding-y) var(--banner-dialog-padding-x);
-
-    .d-notice__icon {
-        margin-block-start: var(--dt-spacing-0);
-    }
-
-    .d-notice__content {
-        flex-direction: row;
-        gap: var(--dt-spacing-75);
-        align-items: baseline;
-    }
-
-    .d-notice__message {
-        font: var(--dt-text-body-sm);
-    }
 }
 
 //  ============================================================================

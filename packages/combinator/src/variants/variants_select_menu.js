@@ -2,9 +2,15 @@
  
 
 export default {
+  defaults: {
+    props: {
+      labelSize: { tokenCategory: 'typography-size:label' },
+    },
+  },
+
   exclusions: [
     {
-      when: { labelVisible: false },
+      when: { showLabel: false },
       hide: { props: ['labelClass', 'labelSize', 'labelStrength', 'labelChildProps'] },
     },
   ],

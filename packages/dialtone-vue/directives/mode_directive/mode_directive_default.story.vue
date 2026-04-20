@@ -1,6 +1,6 @@
 <template>
   <dt-stack
-    gap="500"
+    gap="200"
     class="d-p-100"
   >
     <dt-text
@@ -31,7 +31,7 @@
           >
             <span class="d-fc-primary">Primary</span>
             <span class="d-fc-tertiary">Tertiary</span>
-            <span class="d-fc-success">Success</span>
+            <span class="d-fc-positive">Positive</span>
             <span class="d-fc-critical">Critical</span>
           </dt-stack>
         </dt-stack>
@@ -53,7 +53,7 @@
           >
             <span class="d-fc-primary">Primary</span>
             <span class="d-fc-tertiary">Tertiary</span>
-            <span class="d-fc-success">Success</span>
+            <span class="d-fc-positive">Positive</span>
             <span class="d-fc-critical">Critical</span>
           </dt-stack>
         </dt-stack>
@@ -134,6 +134,7 @@
     <dt-stack
       gap="400"
       direction="row"
+      align="start"
     >
       <section
         v-dt-mode:invert="false"

@@ -1,6 +1,12 @@
  
 
 export default {
+  defaults: {
+    props: {
+      size: { tokenCategory: 'icon-size' },
+    },
+  },
+
   default: {
     slots: {
       default: {

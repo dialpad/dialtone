@@ -254,6 +254,10 @@
                 "link": "/components/banner.html"
               },
               {
+                "text": "Box",
+                "link": "/components/box.html"
+              },
+              {
                 "text": "Breadcrumbs",
                 "link": "/components/breadcrumbs.html"
               },
@@ -420,6 +424,10 @@
               {
                 "text": "Radio Group",
                 "link": "/components/radio-group.html"
+              },
+              {
+                "text": "Resizable",
+                "link": "/components/resizable.html"
               },
               {
                 "text": "Rich Text Editor",
@@ -927,7 +935,7 @@
         ],
         "/functions-and-utilities/": [
           {
-            "text": "Functions",
+            "text": "Vue Utilities",
             "link": "/functions-and-utilities/",
             "icon": "code"
           }

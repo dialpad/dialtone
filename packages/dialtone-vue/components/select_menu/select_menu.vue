@@ -1,11 +1,11 @@
 <template>
   <div
-    :class="rootClass"
-    v-bind="addClassStyleAttrs($attrs)"
+    :class="$attrs.class"
+    :style="$attrs.style"
   >
     <label>
       <dt-text
-        v-if="labelVisible && (hasSlotContent($slots.label) || label)"
+        v-if="showLabel && (hasSlotContent($slots.label) || label)"
         kind="label"
         :size="resolvedLabelSize"
         :strength="labelStrength"
@@ -52,7 +52,7 @@
             'd-select__input',
             SELECT_STATE_MODIFIERS[state],
           ]"
-          :aria-label="!labelVisible && label ? label : undefined"
+          :aria-label="!showLabel && label ? label : undefined"
           v-bind="removeClassStyleAttrs($attrs)"
           data-qa="dt-select"
           :disabled="disabled"
@@ -96,7 +96,6 @@ import {
   getValidationState,
   hasSlotContent,
   removeClassStyleAttrs,
-  addClassStyleAttrs,
 } from '@/common/utils';
 import { MessagesMixin } from '@/common/mixins/input';
 import { optionsValidator } from './select_menu_validators.js';
@@ -121,7 +120,8 @@ export default {
 
   props: {
     /**
-     * Label for the select
+     * Label for the select.
+     * Can also be overridden with a slot of the same name.
      */
     label: {
       type: String,
@@ -132,13 +132,14 @@ export default {
      * Determines visibility of select label.
      * @values true, false
      */
-    labelVisible: {
+    showLabel: {
       type: Boolean,
       default: true,
     },
 
     /**
-     * Description for the select
+     * Description for the select.
+     * Can also be overridden with a slot of the same name.
      */
     description: {
       type: String,
@@ -234,16 +235,6 @@ export default {
     },
 
     /**
-     * Additional class name for the root element.
-     * Can accept all of: String, Object, and Array, i.e. has the
-     * same api as Vue's built-in handling of the class attribute.
-     */
-    rootClass: {
-      type: [String, Object, Array],
-      default: '',
-    },
-
-    /**
      * The value of the select menu
      */
     modelValue: {
@@ -275,28 +266,13 @@ export default {
 
   emits: [
     /**
-     * Native input event
-     *
-     * @event input
-     * @type {String | Number}
-     */
-    'input',
-
-    /**
      * Event fired to sync the modelValue prop with the parent component
      *
-     * @event input
+     * @event update:modelValue
      * @type {String | Number}
      */
     'update:modelValue',
 
-    /**
-     * Native change event
-     *
-     * @event change
-     * @type {String | Number}
-     */
-    'change',
   ],
 
   data () {
@@ -373,11 +349,8 @@ export default {
 
   methods: {
     removeClassStyleAttrs,
-    addClassStyleAttrs,
     emitValue (value, event) {
       this.$emit('update:modelValue', value, event);
-      this.$emit('input', value, event);
-      this.$emit('change', value, event);
     },
 
     getOptionKey (value) {
@@ -394,7 +367,7 @@ export default {
       const hasLabel = !!(this.$slots.label || this.label);
       if (!hasLabel && !this.$attrs['aria-label']) {
         console.info(
-          '[Dialtone] A label is required for accessibility. Provide a label prop and use label-visible="false" to hide it visually.',
+          '[Dialtone] A label is required for accessibility. Provide a label prop and use show-label="false" to hide it visually.',
         );
       }
     },

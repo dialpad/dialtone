@@ -1,13 +1,13 @@
 <template>
   <component
-    :is="clickable ? 'button' : 'div'"
+    :is="resolvedInteractive ? 'button' : 'div'"
     :id="id"
     :class="avatarClasses"
     :style="avatarStyles"
     :data-avatar-family="!iconOnly ? computedFamily : undefined"
     :data-avatar-variant="!iconOnly ? computedVariant : undefined"
     data-qa="dt-avatar"
-    :type="clickable ? 'button' : undefined"
+    :type="resolvedInteractive ? 'button' : undefined"
     @click="handleClick"
   >
     <div
@@ -30,7 +30,7 @@
         <div
           v-else-if="isIconType"
           :class="[iconClass, AVATAR_KIND_MODIFIERS.icon]"
-          :aria-label="clickable ? iconAriaLabel : ''"
+          :aria-label="resolvedInteractive ? iconAriaLabel : ''"
           :data-qa="iconDataQa"
         >
           <!-- @slot Slot for avatar icon. It will display if no imageSrc is provided -->
@@ -108,8 +108,6 @@ export default {
   compatConfig: { MODE: 3 },
   name: 'DtAvatar',
   components: { DtPresence },
-
-  inheritAttrs: false,
 
   props: {
     /**
@@ -279,12 +277,20 @@ export default {
     },
 
     /**
-     * Makes the avatar focusable and clickable,
+     * Makes the avatar focusable and interactive,
      * emits a click event when clicked.
+     */
+    interactive: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * @deprecated Use interactive instead.
      */
     clickable: {
       type: Boolean,
-      default: false,
+      default: null,
     },
 
     /**
@@ -340,6 +346,10 @@ export default {
   },
 
   computed: {
+    resolvedInteractive () {
+      return this.clickable ?? this.interactive;
+    },
+
     hasOverlayIcon () {
       return hasSlotContent(this.$slots.overlayIcon);
     },
@@ -397,14 +407,13 @@ export default {
     avatarClasses () {
       return [
         'd-avatar',
-        this.$attrs.class,
         AVATAR_SIZE_MODIFIERS[this.validatedSize],
         this.avatarClass,
         {
           'd-avatar--group': this.showGroup,
           'd-avatar--group-digits-2': this.showGroup && String(this.formattedGroup).length === 2,
           'd-avatar--group-digits-3': this.showGroup && String(this.formattedGroup).length >= 3,
-          'd-avatar--clickable': this.clickable,
+          'd-avatar--clickable': this.resolvedInteractive,
           'd-avatar--presence': this.presence && !this.showGroup,
           'd-avatar--icon-only': this.iconOnly,
           'd-avatar--deactivated': this.deactivated,
@@ -416,9 +425,7 @@ export default {
      * Compute inline styles for fallback color in browsers that don't support oklch()
      */
     avatarStyles () {
-      // $attrs.style can be object, string, or array — normalize to an array for merging
-      const attrStyle = this.$attrs.style;
-      const baseStyles = attrStyle != null ? [].concat(attrStyle) : [];
+      const baseStyles = [];
 
       // Only compute hex fallback for browsers that don't support oklch()
       if (!supportsOklch && !this.isIconType && this.computedFamily && this.computedVariant !== undefined) {
@@ -557,7 +564,7 @@ export default {
     },
 
     handleClick (e) {
-      if (!this.clickable) return;
+      if (!this.resolvedInteractive) return;
       this.$emit('click', e);
     },
   },

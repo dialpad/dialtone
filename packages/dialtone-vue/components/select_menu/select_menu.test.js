@@ -107,9 +107,9 @@ describe('DtSelectMenu Tests', () => {
       });
     });
 
-    describe('When labelVisible is false', () => {
+    describe('When showLabel is false', () => {
       beforeEach(() => {
-        mockProps = { labelVisible: false };
+        mockProps = { showLabel: false };
 
         updateWrapper();
       });
@@ -127,7 +127,7 @@ describe('DtSelectMenu Tests', () => {
       });
     });
 
-    describe('When labelVisible is true', () => {
+    describe('When showLabel is true', () => {
       it('should not set aria-label on the select', () => {
         expect(select.attributes('aria-label')).toBeUndefined();
       });
@@ -268,8 +268,8 @@ describe('DtSelectMenu Tests', () => {
       });
 
       describe('When validation messages are shown', () => {
-        it('should have error state class on select menu', () => {
-          expect(select.classes(SELECT_STATE_MODIFIERS.error)).toBe(true);
+        it('should have critical state class on select menu', () => {
+          expect(select.classes(SELECT_STATE_MODIFIERS.critical)).toBe(true);
         });
 
         it('should render validation message', () => {
@@ -284,8 +284,8 @@ describe('DtSelectMenu Tests', () => {
           updateWrapper();
         });
 
-        it('should have error state class on select menu', () => {
-          expect(select.classes(SELECT_STATE_MODIFIERS.error)).toBe(true);
+        it('should have critical state class on select menu', () => {
+          expect(select.classes(SELECT_STATE_MODIFIERS.critical)).toBe(true);
         });
 
         it('should not render any validation messages', () => {
@@ -334,11 +334,8 @@ describe('DtSelectMenu Tests', () => {
         select.trigger('change');
       });
 
-      it('should emit input event', () => {
-        expect(wrapper.emitted('input')[0][0]).toBe(MOCK_SELECTED_VALUE.toString());
-      });
-      it('should emit change event', () => {
-        expect(wrapper.emitted('change')[0][0]).toBe(MOCK_SELECTED_VALUE.toString());
+      it('should emit update:modelValue event', () => {
+        expect(wrapper.emitted('update:modelValue')[0][0]).toBe(MOCK_SELECTED_VALUE.toString());
       });
     });
 
@@ -549,9 +546,9 @@ describe('DtSelectMenu Tests', () => {
       });
     });
 
-    describe('When a rootClass is provided', () => {
-      it('should include the root class', () => {
-        mockProps = { rootClass: MOCK_ROOT_CLASS }
+    describe('When a class is provided', () => {
+      it('should include the class', () => {
+        mockAttrs = { class: MOCK_ROOT_CLASS }
 
         updateWrapper();
 

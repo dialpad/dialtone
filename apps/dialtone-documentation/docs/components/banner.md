@@ -40,8 +40,8 @@ Banners are a type of notice and so you can use the following [Notice](notice.md
 
 ```vue demo-only
 <dt-stack direction="row" gap="200">
-  <dt-select-menu :label-visible="false" label="Style" :options="bannerOptions" v-model="selectedKind" />
-  <dt-checkbox value="important" @input="toggleImportant">Important</dt-checkbox>
+  <dt-select-menu :show-label="false" label="Style" :options="bannerOptions" v-model="selectedKind" />
+  <dt-checkbox value="important" @update:model-value="toggleImportant">Important</dt-checkbox>
   <dt-button @click="toggleBanner('example-kind')">Toggle Example</dt-button>
 </dt-stack>
 ```
@@ -59,9 +59,9 @@ Banners are a type of notice and so you can use the following [Notice](notice.md
 
 ```vue code-only
 <dt-banner kind="base" title="Optional banner title"> Message body </dt-banner>
-<dt-banner kind="error" title="Optional banner title"> Message body </dt-banner>
+<dt-banner kind="critical" title="Optional banner title"> Message body </dt-banner>
 <dt-banner kind="info" title="Optional banner title"> Message body </dt-banner>
-<dt-banner kind="success" title="Optional banner title"> Message body </dt-banner>
+<dt-banner kind="positive" title="Optional banner title"> Message body </dt-banner>
 <dt-banner kind="warning" title="Optional banner title"> Message body </dt-banner>
 <dt-banner background-image="{$background-image}" background-size="contain"> Message body </dt-banner>
 <dt-banner pinned="true" kind="warning" title="Optional banner title"> Message body </dt-banner>
@@ -120,9 +120,9 @@ import { accessible } from '@data/banner.json';
 
 const bannerOptions = [
   { value: 'base', label: 'Base' },
-  { value: 'error', label: 'Error' },
+  { value: 'critical', label: 'Critical' },
   { value: 'info', label: 'Info' },
-  { value: 'success', label: 'Success' },
+  { value: 'positive', label: 'Positive' },
   { value: 'warning', label: 'Warning' },
 ];
 
@@ -139,8 +139,8 @@ function toggleBanner (id) {
   }
 }
 
-function toggleImportant () {
-  important.value = !important.value;
+function toggleImportant (checked) {
+  important.value = checked;
 }
 
 function closeBanner () {

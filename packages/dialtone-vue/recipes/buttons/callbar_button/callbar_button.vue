@@ -2,9 +2,10 @@
   <dt-tooltip
     :id="id"
     :inverted="invertedTooltip"
-    v-bind="addClassStyleAttrs($attrs)"
+    :class="$attrs.class"
+    :style="$attrs.style"
     :delay="tooltipDelay"
-    :show="showTooltip"
+    :open="showTooltip"
     :offset="[0, 24]"
   >
     <template #anchor>
@@ -48,7 +49,7 @@
 import { CALLBAR_BUTTON_VALID_WIDTH_SIZE } from './callbar_button_constants';
 import { DtButton } from '@/components/button';
 import { DtTooltip } from '@/components/tooltip';
-import utils, { extractVueListeners, removeClassStyleAttrs, addClassStyleAttrs } from '@/common/utils';
+import utils, { extractVueListeners, removeClassStyleAttrs } from '@/common/utils';
 
 export default {
   compatConfig: { MODE: 3 },
@@ -251,7 +252,6 @@ export default {
 
   methods: {
     removeClassStyleAttrs,
-    addClassStyleAttrs,
   },
 };
 </script>

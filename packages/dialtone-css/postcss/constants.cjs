@@ -22,18 +22,24 @@ module.exports = {
     0,
   ],
   FLEX_COLUMNS: 12,
-  BORDER_RADIUS_SIZES: {
-    0: 'radius-0',
-    1: 'radius-100',
-    2: 'radius-200',
-    4: 'radius-300',
-    6: 'radius-350',
-    8: 'radius-400',
-    12: 'radius-450',
-    16: 'radius-500',
-    24: '550', // TODO: Remove as it doesn't have a valid token?
-    32: 'radius-600',
-  },
+  // RADIUS_STOPS: drives border-radius utility generation.
+  // Each entry pairs a logical token stop with its legacy t-shirt pixel suffix
+  // so the generator can emit co-selected rules like `.d-bar-350, .d-bar6 { ... }`.
+  // Stops `pill` and `circle` use themselves as the legacy suffix (self-aliased).
+  RADIUS_STOPS: [
+    { stop: '0',      legacyPx: '0' },
+    { stop: '100',    legacyPx: '1' },
+    { stop: '200',    legacyPx: '2' },
+    { stop: '300',    legacyPx: '4' },
+    { stop: '350',    legacyPx: '6' },
+    { stop: '400',    legacyPx: '8' },
+    { stop: '450',    legacyPx: '12' },
+    { stop: '500',    legacyPx: '16' },
+    { stop: '550',    legacyPx: '24' },
+    { stop: '600',    legacyPx: '32' },
+    { stop: 'pill',   legacyPx: 'pill' },
+    { stop: 'circle', legacyPx: 'circle' },
+  ],
   GAP_SPACES: {
     0: '0',
     1: '100',
@@ -256,11 +262,12 @@ module.exports = {
   // These drive the new d-h-{stop}, d-w-{stop}, d-size-{stop}, d-m-{stop}, d-p-{stop} classes
   // where the class name = the token stop number
 
-  // All layout token stops (25–1600, base-64 scale)
+  // Bare integers (25, 50, …) are scale-indexed on the 64px base: value_in_px = stop × 64 / 100.
+  // '*px' strings are pixel-indexed off-scale exceptions (dt-layout-1px … dt-layout-24px).
   LAYOUT_STOPS: [
-    25, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500,
-    550, 600, 650, 700, 750, 800, 850, 900, 950, 1000, 1050, 1100, 1150,
-    1200, 1250, 1300, 1350, 1400, 1450, 1500, 1550, 1600,
+    '1px', '2px', '8px', 25, '20px', '24px', 50, 75, 100, 125, 150, 175, 200,
+    250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950,
+    1000, 1050, 1100, 1150, 1200, 1250, 1300, 1350, 1400, 1450, 1500, 1550, 1600,
   ],
 
   // All spacing token stops (0–800, base-8 scale)

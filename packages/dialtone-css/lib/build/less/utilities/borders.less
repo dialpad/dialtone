@@ -17,16 +17,37 @@
 //    - VERTICAL DIVIDERS
 //    - HORIZONTAL DIVIDERS
 //
+//  @@  @PROPERTY REGISTRATIONS
+//  ----------------------------------------------------------------------------
+//  Register opacity custom properties as non-inheriting so `--bco` / `--dco`
+//  set on an ancestor do not bleed into descendants using `.d-bc-*` / `.d-divide-*`.
+//  With universal syntax and no initial-value, `var(--bco, alpha)` still falls
+//  back to the source color's alpha channel when no opacity utility is applied.
+@property --bco { syntax: "*"; inherits: false; }
+
+@property --dco { syntax: "*"; inherits: false; }
+
 //  ============================================================================
 //  $  BORDERS
 //  ============================================================================
 //  $$ DIRECTION
 //  ----------------------------------------------------------------------------
 @layer dialtone.utilities {
+// Order within this section: all-sides shorthand -> H/V -> single-side -> resets.
+// Single-side classes must follow H/V so .d-bt wins when combined with .d-by, etc.
+// Reset classes (.d-ba-none / .d-ba-unset) stay last as intentional escape hatches.
 .d-ba {
   border-color: var(--dt-color-border-default) !important;
   border-style: solid !important;
   border-width: var(--dt-size-border-100) !important;
+}
+
+.d-bx {
+  border-inline: var(--dt-size-border-100) solid var(--dt-color-border-default) !important;
+}
+
+.d-by {
+  border-block: var(--dt-size-border-100) solid var(--dt-color-border-default) !important;
 }
 
 .d-bt {
@@ -45,93 +66,28 @@
   border-inline-start: var(--dt-size-border-100) solid var(--dt-color-border-default) !important;
 }
 
-.d-bx { .d-br(); .d-bl(); }
-
-.d-by { .d-bt(); .d-bb(); }
 .d-ba-none { border: none !important; }
 .d-ba-unset { border: unset !important; }
 
-//  ============================================================================
-//  $  BORDER RADIUS
-//  ============================================================================
-//  $$ ALL
+//  $  BORDER WIDTH
 //  ----------------------------------------------------------------------------
-.d-bar-circle { border-radius: var(--dt-size-radius-circle) !important; }
-.d-bar-pill { border-radius: var(--dt-size-radius-pill) !important; }
-.d-bar-unset { border-radius: unset !important; }
-
-//  $$ TOP
-//  ----------------------------------------------------------------------------
-.d-btr-circle {
-    border-start-start-radius: var(--dt-size-radius-circle) !important;
-    border-start-end-radius: var(--dt-size-radius-circle) !important;
-}
-
-.d-btr-pill {
-    border-start-start-radius: var(--dt-size-radius-pill) !important;
-    border-start-end-radius: var(--dt-size-radius-pill) !important;
-}
-
-//  $$ RIGHT
-//  ----------------------------------------------------------------------------
-.d-brr-circle {
-    border-start-end-radius: var(--dt-size-radius-circle) !important;
-    border-end-end-radius: var(--dt-size-radius-circle) !important;
-}
-
-.d-brr-pill {
-    border-start-end-radius: var(--dt-size-radius-pill) !important;
-    border-end-end-radius: var(--dt-size-radius-pill) !important;
-}
-
-//  $$ BOTTOM
-//  ----------------------------------------------------------------------------
-.d-bbr-circle {
-    border-end-end-radius: var(--dt-size-radius-circle) !important;
-     border-end-start-radius: var(--dt-size-radius-circle) !important;
-    }
-
-.d-bbr-pill {
-    border-end-end-radius: var(--dt-size-radius-pill) !important;
-    border-end-start-radius: var(--dt-size-radius-pill) !important;
- }
-
-//  $$ RIGHT
-//  ----------------------------------------------------------------------------
-.d-blr-circle {
-    border-start-start-radius: var(--dt-size-radius-circle) !important;
-    border-end-start-radius: var(--dt-size-radius-circle) !important;
-}
-
-.d-blr-pill {
-    border-start-start-radius: var(--dt-size-radius-pill) !important;
-    border-end-start-radius: var(--dt-size-radius-pill) !important;
-}
-
-
-//  $$ STYLE
-//  ----------------------------------------------------------------------------
-.d-bas-dashed { border-style: dashed !important; }
-.d-bts-dashed { border-block-start-style: dashed !important; }
-.d-brs-dashed { border-inline-end-style: dashed !important; }
-.d-bbs-dashed { border-block-end-style: dashed !important; }
-.d-bls-dashed { border-inline-start-style: dashed !important; }
-
-.d-bas-dotted { border-style: dotted !important; }
-.d-bts-dotted { border-block-start-style: dotted !important; }
-.d-brs-dotted { border-inline-end-style: dotted !important; }
-.d-bbs-dotted { border-block-end-style: dotted !important; }
-.d-bls-dotted { border-inline-start-style: dotted !important; }
-
-.d-bas-unset { border-style: unset !important; }
-
-
-//  $$ WIDTH
-//  ----------------------------------------------------------------------------
+//  Order: all-sides -> H/V -> single-side, so single-side classes win on cascade ties.
 .d-baw0 { border-width: var(--dt-size-border-0) !important; }
 .d-baw1 { border-width: var(--dt-size-border-100) !important; }
 .d-baw2 { border-width: var(--dt-size-border-200) !important; }
 .d-baw4 { border-width: var(--dt-size-border-300) !important; }
+
+//  --  X Border width
+.d-bxw0 { border-inline-width: var(--dt-size-border-0) !important; }
+.d-bxw1 { border-inline-width: var(--dt-size-border-100) !important; }
+.d-bxw2 { border-inline-width: var(--dt-size-border-200) !important; }
+.d-bxw4 { border-inline-width: var(--dt-size-border-300) !important; }
+
+//  --  Y Border width
+.d-byw0 { border-block-width: var(--dt-size-border-0) !important; }
+.d-byw1 { border-block-width: var(--dt-size-border-100) !important; }
+.d-byw2 { border-block-width: var(--dt-size-border-200) !important; }
+.d-byw4 { border-block-width: var(--dt-size-border-300) !important; }
 
 //  --  Top Border width
 .d-btw0 { border-block-start-width: var(--dt-size-border-0) !important; }
@@ -157,17 +113,28 @@
 .d-blw2 { border-inline-start-width: var(--dt-size-border-200) !important; }
 .d-blw4 { border-inline-start-width: var(--dt-size-border-300) !important; }
 
-//  --  X Border width
-.d-bxw0 { .d-brw0(); .d-blw0(); }
-.d-bxw1 { .d-brw1(); .d-blw1(); }
-.d-bxw2 { .d-brw2(); .d-blw2(); }
-.d-bxw4 { .d-brw4(); .d-blw4(); }
 
-//  --  Y Border width
-.d-byw0 { .d-btw0(); .d-bbw0(); }
-.d-byw1 { .d-btw1(); .d-bbw1(); }
-.d-byw2 { .d-btw2(); .d-bbw2(); }
-.d-byw4 { .d-btw4(); .d-bbw4(); }
+//  ============================================================================
+//  $  BORDER RADIUS
+//  ============================================================================
+//  Radius utilities are emitted by borderUtilities() in postcss/dialtone-generators.cjs.
+
+
+//  $$ STYLE
+//  ----------------------------------------------------------------------------
+.d-bas-dashed { border-style: dashed !important; }
+.d-bts-dashed { border-block-start-style: dashed !important; }
+.d-brs-dashed { border-inline-end-style: dashed !important; }
+.d-bbs-dashed { border-block-end-style: dashed !important; }
+.d-bls-dashed { border-inline-start-style: dashed !important; }
+
+.d-bas-dotted { border-style: dotted !important; }
+.d-bts-dotted { border-block-start-style: dotted !important; }
+.d-brs-dotted { border-inline-end-style: dotted !important; }
+.d-bbs-dotted { border-block-end-style: dotted !important; }
+.d-bls-dotted { border-inline-start-style: dotted !important; }
+
+.d-bas-unset { border-style: unset !important; }
 
 
 //  ============================================================================

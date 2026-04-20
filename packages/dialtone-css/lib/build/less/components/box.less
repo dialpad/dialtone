@@ -1,0 +1,246 @@
+//
+//  DIALTONE
+//  COMPONENTS: BOX
+//
+//  These are the styles for box component.
+//
+//
+//  TABLE OF CONTENTS
+//  • @PROPERTY REGISTRATIONS
+//  • PARAMETRIC MIXINS
+//  • VALUE LISTS
+//  • BASE STYLE
+//  • MODIFIERS
+
+//  @@  @PROPERTY REGISTRATIONS
+//  ----------------------------------------------------------------------------
+@property --box-p { syntax: "*"; inherits: false; }
+
+@property --box-pi { syntax: "*"; inherits: false; }
+
+@property --box-pis { syntax: "*"; inherits: false; }
+
+@property --box-pie { syntax: "*"; inherits: false; }
+
+@property --box-pbl { syntax: "*"; inherits: false; }
+
+@property --box-pbs { syntax: "*"; inherits: false; }
+
+@property --box-pbe { syntax: "*"; inherits: false; }
+
+@property --box-surface { syntax: "<color>"; inherits: false; initial-value: transparent; }
+
+@property --box-bc { syntax: "<color>"; inherits: false; initial-value: transparent; }
+
+@property --box-bw { syntax: "*"; inherits: false; }
+
+@property --box-bwi { syntax: "*"; inherits: false; }
+
+@property --box-bwis { syntax: "*"; inherits: false; }
+
+@property --box-bwie { syntax: "*"; inherits: false; }
+
+@property --box-bwbl { syntax: "*"; inherits: false; }
+
+@property --box-bwbs { syntax: "*"; inherits: false; }
+
+@property --box-bwbe { syntax: "*"; inherits: false; }
+
+@property --box-br { syntax: "<length-percentage>"; inherits: false; initial-value: 0; }
+
+@property --box-shadow { syntax: "*"; inherits: false; }
+
+@property --box-of { syntax: "*"; inherits: false; }
+
+//  ============================================================================
+//  $   PARAMETRIC MIXINS
+//  ----------------------------------------------------------------------------
+._box-token(@prefix; @prop; @token; @names) {
+  each(@names, {
+    .d-box--@{prefix}-@{value} { @{prop}: ~"var(--@{token}-@{value})"; }
+  });
+}
+
+._box-layout(@prop) {
+  &-1px { @{prop}: var(--dt-layout-1px); }
+  &-2px { @{prop}: var(--dt-layout-2px); }
+  &-8px { @{prop}: var(--dt-layout-8px); }
+  &-25 { @{prop}: var(--dt-layout-25); }
+  &-20px { @{prop}: var(--dt-layout-20px); }
+  &-24px { @{prop}: var(--dt-layout-24px); }
+  &-50 { @{prop}: var(--dt-layout-50); }
+  &-75 { @{prop}: var(--dt-layout-75); }
+  each(range(0, 1600, 100), {
+    &-@{value} { @{prop}: ~"var(--dt-layout-@{value})"; }
+  });
+  // Percentage tokens
+  each(@box-layout-percent-values, {
+    &-@{value}p { @{prop}: ~"var(--dt-layout-@{value}-percent)"; }
+  });
+}
+
+._box-border-width(@prop) {
+  each(@box-border-width-values, {
+    &-@{value} { @{prop}: ~"var(--dt-size-border-@{value})"; }
+  });
+}
+
+._box-spacing(@prop) {
+  // Stops outside both range() sequences: 1 (not a multiple of 25), 525 (not a multiple of 50)
+  &-1 { @{prop}: var(--dt-spacing-1); }
+  &-525 { @{prop}: var(--dt-spacing-525); }
+
+  each(range(0, 200, 25), {
+    &-@{value} { @{prop}: ~"var(--dt-spacing-@{value})"; }
+  });
+
+  each(range(250, 800, 50), {
+    &-@{value} { @{prop}: ~"var(--dt-spacing-@{value})"; }
+  });
+}
+
+//  ============================================================================
+//  $   VALUE LISTS
+//  ----------------------------------------------------------------------------
+//  `positive*` is intentionally absent from these lists. Surface and border
+//  tokens still use legacy `success*` naming (no `--dt-color-surface-positive-*`
+//  exists yet), so `positive*` modifier classes are generated from explicit
+//  alias blocks below that map to `--dt-color-surface-success-*` /
+//  `--dt-color-border-success-*`. Once DLT-3331 lands the token rename,
+//  `positive*` moves into these lists and the alias blocks can be dropped.
+@box-surface-values: primary, secondary, moderate, bold, strong, contrast, backdrop, brand, info, warning, critical, brand-subtle, brand-strong, info-subtle, info-strong, warning-subtle, warning-strong, critical-subtle, critical-strong, primary-opaque, secondary-opaque, moderate-opaque, bold-opaque, strong-opaque, contrast-opaque, brand-opaque, brand-subtle-opaque, info-opaque, info-subtle-opaque, warning-opaque, warning-subtle-opaque, critical-opaque, critical-subtle-opaque;
+
+@box-border-color-values: subtle, default, moderate, bold, accent, focus, brand, warning, critical, info, brand-subtle, brand-strong, warning-subtle, warning-strong, critical-subtle, critical-strong, info-subtle, info-strong;
+
+@box-border-width-values: 0, 50, 100, 150, 200, 300, 400;
+@box-layout-percent-values: 10, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 90, 95, 100;
+@box-shadow-values: small, medium, large, extra-large, card;
+@box-overflow-values: hidden, scroll, auto, clip, visible;
+
+@layer dialtone.components {
+
+//  @@  BASE STYLE
+//  ----------------------------------------------------------------------------
+.d-box {
+  box-sizing: border-box;
+
+  // Overflow
+  overflow: var(--box-of, visible);
+
+  // Surface — OKLCH relative syntax supports d-bgo* opacity utilities
+  background-color: oklch(from var(--box-surface) l c h / var(--bgo, alpha));
+  border-color: oklch(from var(--box-bc) l c h / var(--bco, alpha));
+
+  // Border — always solid, no visible border until borderWidth prop is set.
+  // Width cascade: specific → axis → shorthand → 0
+  border-style: solid;
+  border-block-start-width:  var(--box-bwbs, var(--box-bwbl, var(--box-bw, 0)));
+  border-block-end-width:    var(--box-bwbe, var(--box-bwbl, var(--box-bw, 0)));
+  border-inline-start-width: var(--box-bwis, var(--box-bwi,  var(--box-bw, 0)));
+  border-inline-end-width:   var(--box-bwie, var(--box-bwi,  var(--box-bw, 0)));
+  border-radius: var(--box-br);
+
+  // Shadow
+  box-shadow: var(--box-shadow, none);
+
+  // Padding cascade: specific → axis → shorthand → 0
+  padding-block:  var(--box-pbs, var(--box-pbl, var(--box-p, 0))) var(--box-pbe, var(--box-pbl, var(--box-p, 0)));
+  padding-inline: var(--box-pis, var(--box-pi,  var(--box-p, 0))) var(--box-pie, var(--box-pi,  var(--box-p, 0)));
+}
+
+//  ============================================================================
+//  $   MODIFIERS
+//  ----------------------------------------------------------------------------
+//  $$  PADDING
+//  ----------------------------------------------------------------------------
+.d-box--p   { ._box-spacing(--box-p); }
+.d-box--pi  { ._box-spacing(--box-pi); }
+.d-box--pis { ._box-spacing(--box-pis); }
+.d-box--pie { ._box-spacing(--box-pie); }
+.d-box--pbl { ._box-spacing(--box-pbl); }
+.d-box--pbs { ._box-spacing(--box-pbs); }
+.d-box--pbe { ._box-spacing(--box-pbe); }
+
+//  ----------------------------------------------------------------------------
+//  $$  SURFACE
+//  ----------------------------------------------------------------------------
+._box-token(surface; --box-surface; dt-color-surface; @box-surface-values);
+
+//  `positive` prop → maps to `--dt-color-surface-success-*` tokens (surface tokens use legacy `success` naming; see DLT-3331)
+.d-box--surface-positive               { --box-surface: var(--dt-color-surface-success); }
+.d-box--surface-positive-subtle        { --box-surface: var(--dt-color-surface-success-subtle); }
+.d-box--surface-positive-strong        { --box-surface: var(--dt-color-surface-success-strong); }
+.d-box--surface-positive-opaque        { --box-surface: var(--dt-color-surface-success-opaque); }
+.d-box--surface-positive-subtle-opaque { --box-surface: var(--dt-color-surface-success-subtle-opaque); }
+
+//  ----------------------------------------------------------------------------
+//  $$  BORDER
+//  ----------------------------------------------------------------------------
+//  ── Border ──────────────────────────────────────────────────────────────────
+.d-box--bc-transparent { --box-bc: transparent; }
+._box-token(bc; --box-bc; dt-color-border; @box-border-color-values);
+
+//  `positive` prop → maps to `--dt-color-border-success-*` tokens (border tokens use legacy `success` naming; see DLT-3331)
+.d-box--bc-positive        { --box-bc: var(--dt-color-border-success); }
+.d-box--bc-positive-subtle { --box-bc: var(--dt-color-border-success-subtle); }
+.d-box--bc-positive-strong { --box-bc: var(--dt-color-border-success-strong); }
+
+@box-border-radius-values: 0, 100, 200, 300, 350, 400, 450, 500, 550, 600;
+
+//  Border width — 7 axes × border-width scale
+.d-box--bw    { ._box-border-width(--box-bw); }
+.d-box--bwi   { ._box-border-width(--box-bwi); }
+.d-box--bwis  { ._box-border-width(--box-bwis); }
+.d-box--bwie  { ._box-border-width(--box-bwie); }
+.d-box--bwbl  { ._box-border-width(--box-bwbl); }
+.d-box--bwbs  { ._box-border-width(--box-bwbs); }
+.d-box--bwbe  { ._box-border-width(--box-bwbe); }
+
+//  Border radius
+each(@box-border-radius-values, {
+  .d-box--br-@{value} { --box-br: ~"var(--dt-size-radius-@{value})"; }
+});
+.d-box--br-pill   { --box-br: var(--dt-size-radius-pill); }
+.d-box--br-circle { --box-br: var(--dt-size-radius-circle); }
+
+//  ----------------------------------------------------------------------------
+//  $$  SHADOW
+//  ----------------------------------------------------------------------------
+//  ── Shadow ──────────────────────────────────────────────────────────────────
+._box-token(shadow; --box-shadow; dt-shadow; @box-shadow-values);
+
+//  ----------------------------------------------------------------------------
+//  $$  SIZING
+//  ----------------------------------------------------------------------------
+//  Layout token values → modifier classes. Raw CSS fallback → inline :style.
+.d-box--is      { ._box-layout(inline-size); }
+.d-box--bls     { ._box-layout(block-size); }
+.d-box--min-is  { ._box-layout(min-inline-size); }
+.d-box--max-is  { ._box-layout(max-inline-size); }
+.d-box--min-bls { ._box-layout(min-block-size); }
+.d-box--max-bls { ._box-layout(max-block-size); }
+
+//  ----------------------------------------------------------------------------
+//  $$  OVERFLOW
+//  ----------------------------------------------------------------------------
+each(@box-overflow-values, {
+  .d-box--of-@{value} { --box-of: @value; }
+});
+
+//  ----------------------------------------------------------------------------
+//  $$  SCROLLBAR
+//  ----------------------------------------------------------------------------
+//  Inner viewport wrapper — only rendered when scrollbar prop is active.
+//  OverlayScrollbars uses this as the viewport element (el.children[0]).
+//  :has() detects the wrapper — CSS reacts to its presence without JS class toggling.
+.d-box__scrollbar-content {
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: auto; // Native scroll fallback when OverlayScrollbars is unavailable
+}
+
+.d-box:has(> .d-box__scrollbar-content) {
+  overflow: hidden;
+}
+
+}

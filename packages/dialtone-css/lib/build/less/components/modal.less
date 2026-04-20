@@ -119,13 +119,37 @@
     will-change: visibility, z-index, opacity;
 }
 
+//  $$  DIALOG ELEMENT RESET
+//  ----------------------------------------------------------------------------
+//  When used as a native <dialog>, reset UA styles and hide the native backdrop
+//  since .d-modal itself serves as the visual backdrop overlay.
+//  The :not([open]) rule restores UA hidden behavior that .d-modal's display: flex
+//  would otherwise override.
+:where(dialog).d-modal {
+  margin: 0;
+  color: inherit;
+  border: none;
+  inline-size: auto;
+  block-size: auto;
+  max-inline-size: none;
+  max-block-size: none;
+
+  &:not([open]) {
+    display: none;
+  }
+
+  &::backdrop {
+    background: transparent;
+  }
+}
+
 .d-modal--transparent {
   --modal-backdrop-color-background: var(--d-bgc-transparent);
 
   // If we don't set this the native app header region will override all click events on the modal overlay
   -webkit-app-region: no-drag;
 
-  &[aria-hidden='false'] {
+  &:is([aria-hidden='false'], [open]) {
     position: fixed;
     inset-block-start: 0;
     inset-inline-start: 0;
@@ -169,10 +193,10 @@
 
 //  $$   MAKE THEM APPEAR
 //  ----------------------------------------------------------------------------
-.d-modal[aria-hidden='false'],
-.d-modal[aria-hidden='false'] .d-modal__dialog,
-.d-modal--transparent[aria-hidden='false'],
-.d-modal--transparent[aria-hidden='false'] .d-modal__dialog {
+//  [aria-hidden='false'] — raw HTML usage (div-based)
+//  [open] — native <dialog> element usage
+:is(.d-modal, .d-modal--transparent):is([aria-hidden='false'], [open]),
+:is(.d-modal, .d-modal--transparent):is([aria-hidden='false'], [open]) .d-modal__dialog {
   z-index: var(--zi-modal);
   transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
   visibility: visible;
@@ -261,6 +285,7 @@
     --modal-banner-color-background: var(--dt-color-surface-critical);
   }
 
+  &--positive,
   &--success {
     --modal-banner-color-background: var(--dt-color-surface-success);
   }
@@ -341,8 +366,9 @@
   }
 }
 
-//  $$  DANGER
+//  $$  CRITICAL / DANGER
 //  ----------------------------------------------------------------------------
+.d-modal--critical,
 .d-modal--danger {
   --modal-header-color-text: var(--dt-color-foreground-primary);
 }

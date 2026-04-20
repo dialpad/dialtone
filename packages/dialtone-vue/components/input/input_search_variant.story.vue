@@ -19,7 +19,7 @@
     :current-length="$attrs.currentLength"
     :validate="validationConfig"
     @blur="$attrs.onBlur"
-    @input="$attrs.onInput"
+    @update:model-value="$attrs['onUpdate:modelValue']"
     @clear="$attrs.onClear"
     @focus="$attrs.onFocus"
     @focusin="$attrs.onFocusIn"
@@ -27,12 +27,6 @@
     @update:length="updateLength"
     @update:invalid="$attrs.onUpdateIsInvalid"
   >
-    <template
-      v-if="$attrs.labelSlot"
-      #labelSlot
-    >
-      <span v-html="$attrs.labelSlot" />
-    </template>
     <template
       v-if="$attrs.description"
       #description

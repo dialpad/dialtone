@@ -497,11 +497,13 @@
     "unset"
   ],
   "align": [
-    { "class": "left", "value": "start" },
-    { "class": "right", "value": "end" },
+    { "class": "start", "value": "start" },
+    { "class": "end", "value": "end" },
     { "class": "center", "value": "center" },
     { "class": "justify", "value": "justify" },
-    { "class": "unset", "value": "unset" }
+    { "class": "unset", "value": "unset" },
+    { "class": "left", "value": "start", "deprecated": true },
+    { "class": "right", "value": "end", "deprecated": true }
   ],
   "lineClamp": [
     "1",

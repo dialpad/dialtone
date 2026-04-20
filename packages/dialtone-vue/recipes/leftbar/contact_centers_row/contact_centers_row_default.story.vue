@@ -4,7 +4,7 @@
     :unread-count="$attrs.unreadCount"
     :aria-label="$attrs.ariaLabel"
     :selected="$attrs.selected"
-    :hide-actions="$attrs.hideActions"
+    :show-actions="$attrs.showActions"
     @click="$attrs.click"
     @click-menu="$attrs.clickMenu"
   >
@@ -22,7 +22,7 @@
         :size="200"
         kind="muted"
         importance="clear"
-        class="d-bar-pill d-py-50 d-fc-success d-to-ellipsis"
+        class="d-bar-pill d-py-50 d-fc-positive d-to-ellipsis"
       >
         <template #icon>
           <dt-icon-bell-ring size="100" />

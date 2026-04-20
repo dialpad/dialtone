@@ -304,7 +304,7 @@ describe('DtAvatar Tests', () => {
   });
 
   describe('Interactivity Tests', () => {
-    describe('When clickable is false (default)', () => {
+    describe('When interactive is false (default)', () => {
       describe('When avatar is clicked', () => {
         beforeEach(async () => {
           mockAttrs = { onClick: MOCK_AVATAR_STUB };
@@ -323,9 +323,30 @@ describe('DtAvatar Tests', () => {
         });
       });
     });
-    describe('When clickable is true', () => {
+    describe('When interactive is true', () => {
       describe('When avatar is clicked', () => {
         beforeEach(async () => {
+          mockProps = { interactive: true };
+          mockAttrs = { onClick: MOCK_AVATAR_STUB };
+
+          updateWrapper();
+
+          await wrapper.trigger('click');
+        });
+
+        it('Should call listener', async () => {
+          expect(MOCK_AVATAR_STUB).toBeCalledTimes(1);
+        });
+
+        it('Should emit click event', () => {
+          expect(wrapper.emitted()).toHaveProperty('click');
+        });
+      });
+    });
+    describe('When deprecated clickable prop is true', () => {
+      describe('When avatar is clicked', () => {
+        beforeEach(async () => {
+          MOCK_AVATAR_STUB.mockClear();
           mockProps = { clickable: true };
           mockAttrs = { onClick: MOCK_AVATAR_STUB };
 

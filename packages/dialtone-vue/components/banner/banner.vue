@@ -9,33 +9,32 @@
       class="d-banner__dialog"
       :class="dialogClass"
       :role="role"
-      :aria-labelledby="titleId"
+      :aria-labelledby="headerId"
       :aria-describedby="contentId"
     >
       <dt-notice-icon
-        v-if="!hideIcon"
+        v-if="showIcon"
         :kind="kind"
-        :class="{ 'd-notice__icon--has-title': title || $slots.titleOverride }"
+        :class="{ 'd-notice__icon--has-title': headerText || $slots.header }"
       >
         <!-- @slot Slot for custom icon -->
         <slot name="icon" />
       </dt-notice-icon>
       <dt-notice-content
-        :title-id="titleId"
+        :header-id="headerId"
         :content-id="contentId"
-        :title="title"
+        :header-text="headerText"
       >
-        <template #titleOverride>
-          <!-- eslint-disable-next-line max-len -->
-          <!-- @slot Allows you to override the title, only use this if you need to override with something other than text. Otherwise use the "title" prop. -->
-          <slot name="titleOverride" />
+        <template #header>
+          <!-- @slot Slot for the header -->
+          <slot name="header" />
         </template>
         <!-- @slot the main textual content of the banner -->
         <slot />
       </dt-notice-content>
       <dt-notice-action
-        :hide-action="hideAction"
-        :hide-close="hideClose"
+        :show-action="showAction"
+        :show-close="showClose"
         @close="$emit('close')"
       >
         <!-- @slot Enter a possible action for the user to take, such as a link to another page -->
@@ -69,10 +68,10 @@ export default {
 
   props: {
     /**
-     * Sets an ID on the title element of the component. Useful for aria-describedby
-     * or aria-labelledby or any other reason you may need an id to refer to the title.
+     * Sets an ID on the header element of the component. Useful for aria-describedby
+     * or aria-labelledby or any other reason you may need an id to refer to the header.
      */
-    titleId: {
+    headerId: {
       type: String,
       default () { return utils.getUniqueString(); },
     },
@@ -87,11 +86,11 @@ export default {
     },
 
     /**
-     * Title header of the notice. This can be left blank to remove the title from the notice entirely.
+     * Header text of the banner. This can be left blank to remove the header from the banner entirely.
      */
-    title: {
+    headerText: {
       type: String,
-      default: '',
+      default: undefined,
     },
 
     /**
@@ -116,41 +115,41 @@ export default {
 
     /**
      * Severity level of the notice, sets the icon and background
-     * @values base, error, info, success, warning
+     * @values base, critical, info, positive, warning
      */
     kind: {
       type: String,
       default: 'base',
-      validate (kind) {
+      validator (kind) {
         return NOTICE_KINDS.includes(kind);
       },
     },
 
     /**
-     * Hides the close button from the notice
+     * Shows the close button in the banner
      * @values true, false
      */
-    hideClose: {
+    showClose: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     /**
-     * Hides the icon from the notice
+     * Shows the icon in the banner
      * @values true, false
      */
-    hideIcon: {
+    showIcon: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     /**
-     * Hides the action from the notice
+     * Shows the action in the banner
      * @values true, false
      */
-    hideAction: {
+    showAction: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     /**
@@ -197,9 +196,9 @@ export default {
 
     bannerClass () {
       const kindClasses = {
-        error: 'd-banner--error',
+        critical: 'd-banner--critical',
         info: 'd-banner--info',
-        success: 'd-banner--success',
+        positive: 'd-banner--positive',
         warning: 'd-banner--warning',
         base: 'd-banner--base',
       };

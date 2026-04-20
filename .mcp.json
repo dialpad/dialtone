@@ -1,7 +1,8 @@
 {
   "mcpServers": {
     "dialtone": {
-      "command": "dialtone-mcp-server"
+      "command": "node",
+      "args": ["./packages/dialtone-mcp-server/build/index.js"]
     }
   }
 }

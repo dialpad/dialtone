@@ -64,8 +64,8 @@ export default {
       const bgColors = {
         // these are too specific, so for now I'm at least updating the resultant semantic value
         // TODO: breaking change: update to be more abstract
-        green100: 'd-recipe-top-banner-info--success',
-        green300: 'd-recipe-top-banner-info--success',
+        green100: 'd-recipe-top-banner-info--positive',
+        green300: 'd-recipe-top-banner-info--positive',
         red100: 'd-recipe-top-banner-info--critical',
         red200: 'd-recipe-top-banner-info--critical',
         gold100: 'd-recipe-top-banner-info--warning',

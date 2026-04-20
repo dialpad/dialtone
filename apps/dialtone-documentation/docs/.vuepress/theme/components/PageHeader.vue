@@ -75,7 +75,7 @@
                 <dt-icon
                   :name="showCopiedIcon ? 'check' : 'copy'"
                   :size="size"
-                  :class="{ 'd-fc-success': showCopiedIcon }"
+                  :class="{ 'd-fc-positive': showCopiedIcon }"
                 />
               </template>
               Copy MD

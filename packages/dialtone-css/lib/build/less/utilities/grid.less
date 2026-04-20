@@ -7,31 +7,59 @@
 //  visit https://dialtone.dialpad.com/utilities/grid
 //
 //  TABLE OF CONTENTS
-//  • GRID VARIABLES
-//  • COLUMNS
+//  • GRID AREAS        (grid-area shorthand — precedes column/row shorthand)
+//  • COLUMNS           (grid-column shorthand, then grid-column-start / -end)
+//  • ROWS              (grid-row shorthand, then grid-row-start / -end)
 //  • GAP
 //  • JUSTIFY ITEMS
 //  • JUSTIFY SELF
 //  • LAYOUTS
-//      - AREAS
-//  • PLACE CONTENT
-//  • PLACE ITEMS
-//  • PLACE SELF
-//  • ROWS
 //
+//  Ordering rule: shorthand / multi-axis classes precede their single-axis
+//  counterparts so single-axis classes win on cascade ties. `place-items`,
+//  `place-content`, and `place-self` shorthands live in `flex.less` because
+//  their longhand partners (`align-*`) also live there.
+//
+//  ============================================================================
+//  $   GRID AREAS
+//  ============================================================================
+//  `grid-area` is shorthand for grid-row-start / grid-column-start /
+//  grid-row-end / grid-column-end. Placed first so .d-gc-*/.d-gr-* singles win.
+//  ----------------------------------------------------------------------------
+@layer dialtone.utilities {
+.d-ga-sidebar { grid-area: sidebar !important; }
+.d-ga-content { grid-area: content !important; }
+.d-ga-header { grid-area: header !important; }
+
+
 //  ============================================================================
 //  $   COLUMNS
 //  ----------------------------------------------------------------------------
-@layer dialtone.utilities {
+//  `.d-gc-*` (grid-column shorthand) first; `.d-gcs-*` / `.d-gce-*` after.
 .d-gc-full { grid-column: 1 ~' / ' -1 !important; }
+.d-gc-auto { grid-column: auto !important; }
+.d-gc-unset { grid-column: unset !important; }
 
 .d-gcs-auto { grid-column-start: auto !important; }
 .d-gce-auto { grid-column-end: auto !important; }
-.d-gc-auto { grid-column: auto !important; }
 
 .d-gcs-unset { grid-column-start: unset !important; }
 .d-gce-unset { grid-column-end: unset !important; }
-.d-gc-unset { grid-column: unset !important; }
+
+
+//  ============================================================================
+//  $   ROWS
+//  ----------------------------------------------------------------------------
+//  `.d-gr-*` (grid-row shorthand) first; `.d-grs-*` / `.d-gre-*` after.
+.d-gr-full { grid-row: 1 ~' / ' -1 !important; }
+.d-gr-auto { grid-row: auto !important; }
+.d-gr-unset { grid-row: unset !important; }
+
+.d-grs-auto { grid-row-start: auto !important; }
+.d-gre-auto { grid-row-end: auto !important; }
+
+.d-grs-unset { grid-row-start: unset !important; }
+.d-gre-unset { grid-row-end: unset !important; }
 
 
 //  ============================================================================
@@ -41,9 +69,10 @@
 //      each defined spacing unit.
 //      TODO: Deprecated classes, remove on our next migration. https://dialpad.atlassian.net/browse/DLT-1763
 //  ----------------------------------------------------------------------------
+//  `.d-gg-unset` (gap shorthand) first; `.d-gcg-unset` / `.d-grg-unset` after.
+.d-gg-unset { gap: unset !important; }
 .d-gcg-unset { column-gap: unset !important; }
 .d-grg-unset { row-gap: unset !important; }
-.d-gg-unset { gap: unset !important; }
 
 
 //  ============================================================================
@@ -103,145 +132,4 @@
                          'content';
     grid-template-rows: [header-start] var(--header-height) [header-end content-start] var(--content-height) [content-end];
 }
-
-//  $   GRID AREAS
-//  ----------------------------------------------------------------------------
-.d-ga-sidebar { grid-area: sidebar !important; }
-.d-ga-content { grid-area: content !important; }
-.d-ga-header { grid-area: header !important; }
-
-
-//  ============================================================================
-//  $   PLACE CONTENT
-//      Aligns grid items along the block and inline directions at once
-//  ----------------------------------------------------------------------------
-.d-plc-center { place-content: center !important; }
-.d-plc-center-end { place-content: center end !important; }
-.d-plc-center-start { place-content: center start !important; }
-.d-plc-center-stretch { place-content: center stretch !important; }
-.d-plc-center-space-around { place-content: center space-around !important; }
-.d-plc-center-space-evenly { place-content: center space-evenly !important; }
-.d-plc-center-space-between { place-content: center space-between !important; }
-
-.d-plc-end { place-content: end !important; }
-.d-plc-end-start { place-content: end start !important; }
-.d-plc-end-stretch { place-content: end stretch !important; }
-.d-plc-end-center { place-content: end center !important; }
-.d-plc-end-space-around { place-content: end space-around !important; }
-.d-plc-end-space-evenly { place-content: end space-evenly !important; }
-.d-plc-end-space-between { place-content: end space-between !important; }
-
-.d-plc-start { place-content: start !important; }
-.d-plc-start-end { place-content: start end !important; }
-.d-plc-start-center { place-content: start center !important; }
-.d-plc-start-stretch { place-content: start stretch !important; }
-.d-plc-start-space-around { place-content: start space-around !important; }
-.d-plc-start-space-evenly { place-content: start space-evenly !important; }
-.d-plc-start-space-between { place-content: start space-between !important; }
-
-.d-plc-stretch { place-content: stretch !important; }
-.d-plc-stretch-end { place-content: stretch end !important; }
-.d-plc-stretch-start { place-content: stretch start !important; }
-.d-plc-stretch-center { place-content: stretch center !important; }
-.d-plc-stretch-space-evenly { place-content: stretch space-evenly !important; }
-.d-plc-stretch-space-around { place-content: stretch space-around !important; }
-.d-plc-stretch-space-between { place-content: stretch space-between !important; }
-
-.d-plc-space-around { place-content: space-around !important; }
-.d-plc-space-around-end { place-content: space-around end !important; }
-.d-plc-space-around-start { place-content: space-around start !important; }
-.d-plc-space-around-center { place-content: space-around center !important; }
-.d-plc-space-around-space-evenly { place-content: space-around space-evenly !important; }
-.d-plc-space-around-space-between { place-content: space-around space-between !important; }
-
-.d-plc-space-evenly { place-content: space-evenly !important; }
-.d-plc-space-evenly-end { place-content: space-evenly end !important; }
-.d-plc-space-evenly-start { place-content: space-evenly start !important; }
-.d-plc-space-evenly-center { place-content: space-evenly center !important; }
-.d-plc-space-evenly-space-around { place-content: space-evenly space-around !important; }
-.d-plc-space-evenly-space-between { place-content: space-evenly space-between !important; }
-
-.d-plc-space-between { place-content: space-between !important; }
-.d-plc-space-between-end { place-content: space-between end !important; }
-.d-plc-space-between-start { place-content: space-between start !important; }
-.d-plc-space-between-center { place-content: space-between center !important; }
-.d-plc-space-between-space-around { place-content: space-between space-around !important; }
-.d-plc-space-between-space-evenly { place-content: space-between space-evenly !important; }
-
-.d-plc-normal { place-content: normal !important; }
-.d-plc-legacy { place-content: legacy !important; }
-.d-plc-auto { place-content: auto !important; }
-.d-plc-unset { place-content: unset !important; }
-
-
-//  ============================================================================
-//  $   PLACE ITEMS
-//  ----------------------------------------------------------------------------
-.d-pli-center { place-items: center !important; }
-.d-pli-center-end { place-items: center end !important; }
-.d-pli-center-start { place-items: center start !important; }
-.d-pli-center-stretch { place-items: center stretch !important; }
-
-.d-pli-end { place-items: end !important; }
-.d-pli-end-start { place-items: end start !important; }
-.d-pli-end-stretch { place-items: end stretch !important; }
-.d-pli-end-center { place-items: end center !important; }
-
-.d-pli-start { place-items: start !important; }
-.d-pli-start-end { place-items: start end !important; }
-.d-pli-start-center { place-items: start center !important; }
-.d-pli-start-stretch { place-items: start stretch !important; }
-
-.d-pli-stretch { place-items: stretch !important; }
-.d-pli-stretch-end { place-items: stretch end !important; }
-.d-pli-stretch-start { place-items: stretch start !important; }
-.d-pli-stretch-center { place-items: stretch center !important; }
-
-.d-pli-normal { place-items: normal !important; }
-.d-pli-legacy { place-items: legacy !important; }
-.d-pli-auto { place-items: auto !important; }
-.d-pli-unset { place-items: unset !important; }
-
-
-//  ============================================================================
-//  $   PLACE SELF
-//  ----------------------------------------------------------------------------
-.d-pls-center { place-self: center !important; }
-.d-pls-center-end { place-self: center end !important; }
-.d-pls-center-start { place-self: center start !important; }
-.d-pls-center-stretch { place-self: center stretch !important; }
-
-.d-pls-end { place-self: end !important; }
-.d-pls-end-start { place-self: end start !important; }
-.d-pls-end-stretch { place-self: end stretch !important; }
-.d-pls-end-center { place-self: end center !important; }
-
-.d-pls-start { place-self: start !important; }
-.d-pls-start-end { place-self: start end !important; }
-.d-pls-start-center { place-self: start center !important; }
-.d-pls-start-stretch { place-self: start stretch !important; }
-
-.d-pls-stretch { place-self: stretch !important; }
-.d-pls-stretch-end { place-self: stretch end !important; }
-.d-pls-stretch-start { place-self: stretch start !important; }
-.d-pls-stretch-center { place-self: stretch center !important; }
-
-.d-pls-normal { place-self: normal !important; }
-.d-pls-legacy { place-self: legacy !important; }
-.d-pls-auto { place-self: auto !important; }
-.d-pls-unset { place-self: unset !important; }
-
-
-//  ============================================================================
-//  $   ROWS
-//  ----------------------------------------------------------------------------
-.d-gr-full { grid-row: 1 ~' / ' -1 !important; }
-
-.d-grs-auto { grid-row-start: auto !important; }
-.d-gre-auto { grid-row-end: auto !important; }
-.d-gr-auto { grid-row: auto !important; }
-
-.d-grs-unset { grid-row-start: unset !important; }
-.d-gre-unset { grid-row-end: unset !important; }
-.d-gr-unset { grid-row: unset !important; }
 }

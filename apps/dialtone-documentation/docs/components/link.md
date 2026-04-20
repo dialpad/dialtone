@@ -48,11 +48,12 @@ keywords: ["anchor", "hyperlink", "url", "d-link", "DtLink", "dt-link", "text li
 <!-- @wrapper -->
 <DtStack gap="100">
   <dt-link href="#link">Base link</dt-link>
-  <dt-link href="#link" kind="danger">Danger link</dt-link>
-  <dt-link href="#link" kind="muted">Muted link</dt-link>
-  <dt-link href="#link" kind="success">Success link</dt-link>
-  <dt-link href="#link" kind="warning">Warning link</dt-link>
-  <dt-link href="#link" kind="mention">Mention link</dt-link>
+  <dt-link href="#link" tone="critical">Critical link</dt-link>
+  <dt-link href="#link" tone="muted">Muted link</dt-link>
+  <dt-link href="#link" tone="positive">Positive link</dt-link>
+  <dt-link href="#link" tone="warning">Warning link</dt-link>
+  <dt-link href="#link" tone="info">Info link</dt-link>
+  <dt-link href="#link" tone="mention">Mention link</dt-link>
 </DtStack>
 ```
 
@@ -74,11 +75,12 @@ In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#
 ```vue demo
 <DtStack gap="100" class="d-bgc-contrast d-p-100">
   <dt-link v-dt-mode:invert href="#link">Base link</dt-link>
-  <dt-link v-dt-mode:invert href="#link" kind="danger">Danger link</dt-link>
-  <dt-link v-dt-mode:invert href="#link" kind="success">Success link</dt-link>
-  <dt-link v-dt-mode:invert href="#link" kind="warning">Warning link</dt-link>
-  <dt-link v-dt-mode:invert href="#link" kind="muted">Muted link</dt-link>
-  <dt-link v-dt-mode:invert href="#link" kind="mention">Mention link</dt-link>
+  <dt-link v-dt-mode:invert href="#link" tone="critical">Critical link</dt-link>
+  <dt-link v-dt-mode:invert href="#link" tone="positive">Positive link</dt-link>
+  <dt-link v-dt-mode:invert href="#link" tone="warning">Warning link</dt-link>
+  <dt-link v-dt-mode:invert href="#link" tone="info">Info link</dt-link>
+  <dt-link v-dt-mode:invert href="#link" tone="muted">Muted link</dt-link>
+  <dt-link v-dt-mode:invert href="#link" tone="mention">Mention link</dt-link>
 </DtStack>
 <!-- @code -->
 <dt-link v-dt-mode:invert {props}>Link</dt-link>

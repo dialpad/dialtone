@@ -4,7 +4,7 @@
     <dt-recipe-callbox
       avatar-full-name="Jaqueline Nackos"
       avatar-seed="Jaqueline Nackos"
-      title="Jaqueline Nackos"
+      header-text="Jaqueline Nackos"
       border-color="ai"
     >
       <template #subtitle>
@@ -25,7 +25,7 @@
           v-dt-tooltip="`Hang up`"
           aria-label="hang call"
           importance="clear"
-          kind="danger"
+          kind="critical"
         >
           <template #icon="{ iconSize }">
             <dt-icon-phone-hang-up :size="iconSize" />
@@ -34,7 +34,7 @@
       </template>
     </dt-recipe-callbox>
     <dt-recipe-callbox
-      title="1 Participant"
+      header-text="1 Participant"
       avatar-seed="1 Participant"
     >
       <template #subtitle>
@@ -65,7 +65,7 @@
           v-dt-tooltip="`Hang up`"
           aria-label="hang call"
           importance="clear"
-          kind="danger"
+          kind="critical"
         >
           <template #icon="{ iconSize }">
             <dt-icon-phone-hang-up :size="iconSize" />
@@ -74,7 +74,7 @@
       </template>
     </dt-recipe-callbox>
     <dt-recipe-callbox
-      title="1 Participant"
+      header-text="1 Participant"
       avatar-seed="1 Participant"
     >
       <template #video>
@@ -112,7 +112,7 @@
           v-dt-tooltip="`Hang up`"
           aria-label="hang call"
           importance="clear"
-          kind="danger"
+          kind="critical"
         >
           <template #icon="{ iconSize }">
             <dt-icon-phone-hang-up :size="iconSize" />
@@ -123,7 +123,7 @@
     <dt-recipe-callbox
       avatar-full-name="Jaqueline Nackos"
       avatar-seed="Jaqueline Nackos"
-      title="Jaqueline Nackos"
+      header-text="Jaqueline Nackos"
       badge-text="Test_Call_Center"
       badge-color="warning"
       border-color="ai"
@@ -146,7 +146,7 @@
           v-dt-tooltip="`Hang up`"
           aria-label="hang call"
           importance="clear"
-          kind="danger"
+          kind="critical"
         >
           <template #icon="{ iconSize }">
             <dt-icon-phone-hang-up :size="iconSize" />
@@ -157,7 +157,7 @@
     <dt-recipe-callbox
       avatar-full-name="Jaqueline Nackos"
       avatar-seed="Jaqueline Nackos"
-      title="Jaqueline Nackos"
+      header-text="Jaqueline Nackos"
       border-color="ai"
     >
       <template #subtitle>
@@ -195,7 +195,7 @@
           v-dt-tooltip="`Hang up`"
           aria-label="hang call"
           importance="clear"
-          kind="danger"
+          kind="critical"
         >
           <template #icon="{ iconSize }">
             <dt-icon-phone-hang-up :size="iconSize" />
@@ -205,7 +205,7 @@
     </dt-recipe-callbox>
     <dt-recipe-callbox
       avatar-full-name="Jaqueline Nackos"
-      title="Jaqueline Nackos"
+      header-text="Jaqueline Nackos"
       avatar-seed="Jaqueline Nackos"
       border-color="ai"
     >
@@ -224,7 +224,7 @@
           v-dt-tooltip="`Stop`"
           aria-label="stop call"
           importance="clear"
-          kind="danger"
+          kind="critical"
         >
           <template #icon="{ iconSize }">
             <dt-icon-stop-filled :size="iconSize" />
@@ -236,7 +236,7 @@
     <dt-recipe-callbox
       avatar-full-name="design-product-lt-so"
       avatar-seed="design-product-lt-so"
-      title="design-product-lt-so"
+      header-text="design-product-lt-so"
       border-color="critical"
       clickable
     >
@@ -290,7 +290,7 @@
           v-dt-tooltip="`Hang up`"
           aria-label="hang call"
           importance="clear"
-          kind="danger"
+          kind="critical"
         >
           <template #icon="{ iconSize }">
             <dt-icon-phone-hang-up :size="iconSize" />
@@ -301,7 +301,7 @@
     <dt-recipe-callbox
       avatar-full-name="Jaqueline Nackos"
       avatar-seed="Jaqueline Nackos"
-      title="Jaqueline Nackos"
+      header-text="Jaqueline Nackos"
       border-color="ai"
     >
       <template #subtitle>
@@ -329,7 +329,7 @@
           v-dt-tooltip="`Hang up`"
           aria-label="hang call"
           importance="clear"
-          kind="danger"
+          kind="critical"
         >
           <template #icon="{ iconSize }">
             <dt-icon-phone-hang-up :size="iconSize" />
@@ -361,7 +361,7 @@
               v-dt-tooltip="`Stop`"
               aria-label="stop call"
               importance="clear"
-              kind="danger"
+              kind="critical"
             >
               <template #icon>
                 <dt-icon-stop-filled size="300" />
@@ -375,7 +375,7 @@
     <dt-recipe-callbox
       avatar-full-name="Jaqueline Nackos"
       avatar-seed="Jaqueline Nackos"
-      title="Jaqueline Nackos"
+      header-text="Jaqueline Nackos"
       is-on-hold
     >
       <template #subtitle>
@@ -393,7 +393,7 @@
           v-dt-tooltip="`Hang up`"
           aria-label="hang call"
           importance="clear"
-          kind="danger"
+          kind="critical"
         >
           <template #icon="{ iconSize }">
             <dt-icon-phone-hang-up :size="iconSize" />

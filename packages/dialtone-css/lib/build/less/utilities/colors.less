@@ -14,6 +14,14 @@
 // TODO: Remove `*-transparent` classes in favor of `*-neutral-transparent` classes.
 //  Both are existing and that's not ok, a migration will be needed on product.
 //
+//  @@  @PROPERTY REGISTRATIONS
+//  ----------------------------------------------------------------------------
+//  Register opacity custom properties as non-inheriting so `--fco` set on an
+//  ancestor does not bleed into descendants using `.d-fc-*`. With universal
+//  syntax and no initial-value, `var(--fco, alpha)` still falls back to the
+//  source color's alpha channel when no opacity utility is applied.
+@property --fco { syntax: "*"; inherits: false; }
+
 //  $$  TEXT COLORS
 //  ----------------------------------------------------------------------------
 @layer dialtone.utilities {

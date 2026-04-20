@@ -2,16 +2,16 @@
   <component
     :is="selectedLayout"
     :is-shown="isShown"
-    :title-id="titleId"
+    :header-id="headerId"
     :content-id="contentId"
-    :title="title"
+    :header-text="headerText"
     :message="message"
     :role="role"
     :kind="kind"
     :important="important"
-    :hide-close="hideClose"
-    :hide-icon="hideIcon"
-    :hide-action="hideAction"
+    :show-close="showClose"
+    :show-icon="showIcon"
+    :show-action="showAction"
     v-bind="$attrs"
     @close="handleClose"
   >
@@ -19,10 +19,9 @@
     <template #icon>
       <slot name="icon" />
     </template>
-    <template #titleOverride>
-      <!-- @slot Allows you to override the title, only use this if you need to override
-          with something other than text. Otherwise use the "title" prop. -->
-      <slot name="titleOverride" />
+    <template #header>
+      <!-- @slot Slot for the header -->
+      <slot name="header" />
     </template>
     <!-- @slot the main textual content of the toast -->
     <slot>
@@ -58,10 +57,10 @@ export default {
 
   props: {
     /**
-     * Sets an ID on the title element of the component. Useful for aria-describedby
-     * or aria-labelledby or any other reason you may need an id to refer to the title.
+     * Sets an ID on the header element of the component. Useful for aria-describedby
+     * or aria-labelledby or any other reason you may need an id to refer to the header.
      */
-    titleId: {
+    headerId: {
       type: String,
       default: undefined,
     },
@@ -76,9 +75,9 @@ export default {
     },
 
     /**
-     * Title header of the toast. This can be left blank to remove the title from the toast entirely.
+     * Header text of the toast. This can be left blank to remove the header from the toast entirely.
      */
-    title: {
+    headerText: {
       type: String,
       default: undefined,
     },
@@ -103,7 +102,7 @@ export default {
 
     /**
      * Severity level of the toast, could be different depending on which toast layout is used.
-     * @values base, error, info, success, warning, gradient
+     * @values base, critical, info, positive, warning, gradient
      */
     kind: {
       type: String,
@@ -126,36 +125,36 @@ export default {
      * Supports v-model
      * @values true, false
      */
-    show: {
+    open: {
       type: Boolean,
       default: false,
     },
 
     /**
-     * Hides the close button from the toast
+     * Shows the close button in the toast.
      * @values true, false
      */
-    hideClose: {
+    showClose: {
       type: Boolean,
-      default: undefined,
+      default: true,
     },
 
     /**
-     * Hides the icon from the notice
+     * Shows the icon in the toast.
      * @values true, false
      */
-    hideIcon: {
+    showIcon: {
       type: Boolean,
-      default: undefined,
+      default: true,
     },
 
     /**
-     * Hides the action from the notice
+     * Shows the action in the toast.
      * @values true, false
      */
-    hideAction: {
+    showAction: {
       type: Boolean,
-      default: undefined,
+      default: true,
     },
 
     /**
@@ -193,11 +192,11 @@ export default {
     'close',
 
     /**
-     * Sync show value
+     * Sync open value
      *
-     * @event update:show
+     * @event update:open
      */
-    'update:show',
+    'update:open',
   ],
 
   data () {
@@ -218,10 +217,10 @@ export default {
   },
 
   watch: {
-    show: {
-      handler: function (show) {
-        this.isShown = show;
-        if (show) {
+    open: {
+      handler: function (open) {
+        this.isShown = open;
+        if (open) {
           this.setTimeout();
         } else {
           clearTimeout(this.displayTimer);
@@ -241,7 +240,7 @@ export default {
       if (this.shouldSetTimeout) {
         this.displayTimer = setTimeout(() => {
           this.isShown = false;
-          this.$emit('update:show', false);
+          this.$emit('update:open', false);
         }, this.duration);
       }
     },
@@ -249,7 +248,7 @@ export default {
     handleClose () {
       this.isShown = false;
       this.$emit('close');
-      this.$emit('update:show', false);
+      this.$emit('update:open', false);
     },
   },
 };

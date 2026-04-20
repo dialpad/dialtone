@@ -49,20 +49,42 @@
         "type": "color",
         "description": "Expresses an error, danger, or otherwise critical state on surfaces that require a stronger contrast."
       },
+      "positive": {
+        "value": "{color.green.800}",
+        "type": "color",
+        "description": "Indicates a positive state."
+      },
+      "positive-strong": {
+        "value": "{color.green.900}",
+        "type": "color",
+        "description": "Indicates a strong positive state on surfaces that require a stronger contrast."
+      },
       "success": {
         "value": "{color.green.800}",
         "type": "color",
+        "$deprecated": "Use positive instead.",
         "description": "Indicates a positive state."
       },
       "success-strong": {
         "value": "{color.green.900}",
         "type": "color",
+        "$deprecated": "Use positive-strong instead.",
         "description": "Indicates a strong positive state on surfaces that require a stronger contrast."
       },
       "warning": {
         "value": "{color.gold.800}",
         "type": "color",
-        "description": "Indicates information that requires user’s attention and further action may be necessary."
+        "description": "Indicates information that requires user\u2019s attention and further action may be necessary."
+      },
+      "info": {
+        "value": "{color.blue.800}",
+        "type": "color",
+        "description": "Indicates a generally informational state."
+      },
+      "info-strong": {
+        "value": "{color.blue.900}",
+        "type": "color",
+        "description": "Indicates a generally informational state on surfaces that require a stronger contrast."
       },
       "primary-inverted": {
         "value": "{color.black.100}",
@@ -113,20 +135,42 @@
         "type": "color",
         "description": "Critical strong text that sits on high-contrast surfaces or backgrounds"
       },
+      "positive-inverted": {
+        "value": "{color.green.300}",
+        "type": "color",
+        "description": "Positive text that sits on high-contrast surfaces or backgrounds."
+      },
+      "positive-strong-inverted": {
+        "value": "{color.green.200}",
+        "type": "color",
+        "description": "Positive strong text that sits on high-contrast surfaces or backgrounds."
+      },
       "success-inverted": {
         "value": "{color.green.300}",
         "type": "color",
-        "description": "Success text that sits on high-contrast surfaces or backgrounds"
+        "$deprecated": "Use positive-inverted instead.",
+        "description": "Success text that sits on high-contrast surfaces or backgrounds."
       },
       "success-strong-inverted": {
         "value": "{color.green.200}",
         "type": "color",
-        "description": "Success strong text that sits on high-contrast surfaces or backgrounds"
+        "$deprecated": "Use positive-strong-inverted instead.",
+        "description": "Success strong text that sits on high-contrast surfaces or backgrounds."
       },
       "warning-inverted": {
         "value": "{color.gold.500}",
         "type": "color",
         "description": "Warning text that sits on high-contrast surfaces or backgrounds"
+      },
+      "info-inverted": {
+        "value": "{color.blue.300}",
+        "type": "color",
+        "description": "Info text that sits on high-contrast surfaces or backgrounds."
+      },
+      "info-strong-inverted": {
+        "value": "{color.blue.200}",
+        "type": "color",
+        "description": "Info strong text that sits on high-contrast surfaces or backgrounds."
       }
     },
     "link": {
@@ -147,12 +191,12 @@
         "type": "color"
       },
       "success": {
-        "value": "{color.foreground.success}",
+        "value": "{color.foreground.positive}",
         "type": "color",
         "description": "positive"
       },
       "success-hover": {
-        "value": "{color.foreground.success-strong}",
+        "value": "{color.foreground.positive-strong}",
         "type": "color"
       },
       "warning": {
@@ -161,6 +205,14 @@
       },
       "warning-hover": {
         "value": "{color.gold.900}",
+        "type": "color"
+      },
+      "info": {
+        "value": "{color.foreground.info}",
+        "type": "color"
+      },
+      "info-hover": {
+        "value": "{color.foreground.info-strong}",
         "type": "color"
       },
       "muted": {
@@ -196,11 +248,11 @@
         "type": "color"
       },
       "success-inverted": {
-        "value": "{color.foreground.success-inverted}",
+        "value": "{color.foreground.positive-inverted}",
         "type": "color"
       },
       "success-inverted-hover": {
-        "value": "{color.foreground.success-strong-inverted}",
+        "value": "{color.foreground.positive-strong-inverted}",
         "type": "color"
       },
       "warning-inverted": {
@@ -209,6 +261,14 @@
       },
       "warning-inverted-hover": {
         "value": "{color.gold.300}",
+        "type": "color"
+      },
+      "info-inverted": {
+        "value": "{color.foreground.info-inverted}",
+        "type": "color"
+      },
+      "info-inverted-hover": {
+        "value": "{color.foreground.info-strong-inverted}",
         "type": "color"
       },
       "muted-inverted": {
@@ -971,6 +1031,10 @@
         "value": "{color.gold.500}",
         "type": "color"
       },
+      "info": {
+        "value": "{color.blue.600}",
+        "type": "color"
+      },
       "brand": {
         "value": "{color.brand.purple}",
         "type": "color"
@@ -987,6 +1051,10 @@
         "value": "{color.gold.300}",
         "type": "color"
       },
+      "info-subtle": {
+        "value": "{color.blue.300}",
+        "type": "color"
+      },
       "brand-subtle": {
         "value": "{color.purple.300}",
         "type": "color"
@@ -1001,6 +1069,10 @@
       },
       "warning-strong": {
         "value": "{color.gold.700}",
+        "type": "color"
+      },
+      "info-strong": {
+        "value": "{color.blue.800}",
         "type": "color"
       },
       "brand-strong": {
@@ -1071,6 +1143,10 @@
         "value": "{color.gold.500}",
         "type": "color"
       },
+      "info-inverted": {
+        "value": "{color.blue.300}",
+        "type": "color"
+      },
       "brand-inverted": {
         "value": "{color.purple.400}",
         "type": "color"
@@ -1087,6 +1163,10 @@
         "value": "{color.gold.800}",
         "type": "color"
       },
+      "info-subtle-inverted": {
+        "value": "{color.blue.900}",
+        "type": "color"
+      },
       "brand-subtle-inverted": {
         "value": "{color.purple.600}",
         "type": "color"
@@ -1101,6 +1181,10 @@
       },
       "warning-strong-inverted": {
         "value": "{color.gold.300}",
+        "type": "color"
+      },
+      "info-strong-inverted": {
+        "value": "{color.blue.200}",
         "type": "color"
       },
       "brand-strong-inverted": {
@@ -2680,7 +2764,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) Base default medium text style for main content."
+        "description": "Base default medium text style for main content.",
+        "$deprecated": "Use text tokens instead."
       },
       "md-compact": {
         "value": {
@@ -2691,7 +2776,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) A tighter-spaced version of medium body style."
+        "description": "A tighter-spaced version of medium body style.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm": {
         "value": {
@@ -2702,7 +2788,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) Reduced small text style for less prominent or adjacent content."
+        "description": "Reduced small text style for less prominent or adjacent content.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm-compact": {
         "value": {
@@ -2713,7 +2800,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) A tighter-spaced version of small body style."
+        "description": "A tighter-spaced version of small body style.",
+        "$deprecated": "Use text tokens instead."
       }
     },
     "headline": {
@@ -2726,7 +2814,8 @@
           "textCase": "{font.text-case.uppercase}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) Visually concise and uppercase title text used above a paired headline. Also known as a kicker or overline."
+        "description": "Visually concise and uppercase title text used above a paired headline. Also known as a kicker or overline.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm": {
         "value": {
@@ -2737,7 +2826,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) Smaller text size for secondary information or subheadings."
+        "description": "Smaller text size for secondary information or subheadings.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm-compact": {
         "value": {
@@ -2748,7 +2838,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) A tighter-spaced version of small headline style."
+        "description": "A tighter-spaced version of small headline style.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm-soft": {
         "value": {
@@ -2759,7 +2850,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) A softer font weight version of small headline style."
+        "description": "A softer font weight version of small headline style.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm-soft-compact": {
         "value": {
@@ -2770,7 +2862,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) A softer font weight, tighter-spaced version of small headline style."
+        "description": "A softer font weight, tighter-spaced version of small headline style.",
+        "$deprecated": "Use text tokens instead."
       },
       "md": {
         "value": {
@@ -2781,7 +2874,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) Medium-sized base text style for headlines."
+        "description": "Medium-sized base text style for headlines.",
+        "$deprecated": "Use text tokens instead."
       },
       "md-compact": {
         "value": {
@@ -2792,7 +2886,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) A tighter-spaced version of medium headline style."
+        "description": "A tighter-spaced version of medium headline style.",
+        "$deprecated": "Use text tokens instead."
       },
       "lg": {
         "value": {
@@ -2803,7 +2898,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) Large text style for headlines to attract attention."
+        "description": "Large text style for headlines to attract attention.",
+        "$deprecated": "Use text tokens instead."
       },
       "lg-soft": {
         "value": {
@@ -2814,7 +2910,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) A softer font weight version of large headline style."
+        "description": "A softer font weight version of large headline style.",
+        "$deprecated": "Use text tokens instead."
       },
       "lg-compact": {
         "value": {
@@ -2825,7 +2922,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) A tighter-spaced version of large body style."
+        "description": "A tighter-spaced version of large body style.",
+        "$deprecated": "Use text tokens instead."
       },
       "lg-soft-compact": {
         "value": {
@@ -2836,7 +2934,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) A softer font weight, tighter spaced version of large headline style."
+        "description": "A softer font weight, tighter spaced version of large headline style.",
+        "$deprecated": "Use text tokens instead."
       },
       "xl": {
         "value": {
@@ -2847,7 +2946,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) Extra large text style for high importance headlines."
+        "description": "Extra large text style for high importance headlines.",
+        "$deprecated": "Use text tokens instead."
       },
       "xl-compact": {
         "value": {
@@ -2858,7 +2958,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) A tighter-spaced version of extra large headline style."
+        "description": "A tighter-spaced version of extra large headline style.",
+        "$deprecated": "Use text tokens instead."
       },
       "xxl": {
         "value": {
@@ -2869,7 +2970,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) Largest text style for extra extra large content."
+        "description": "Largest text style for extra extra large content.",
+        "$deprecated": "Use text tokens instead."
       },
       "xxl-compact": {
         "value": {
@@ -2880,7 +2982,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "(DEPRECATED) A tighter-spaced version of extra extra large headline style."
+        "description": "A tighter-spaced version of extra extra large headline style.",
+        "$deprecated": "Use text tokens instead."
       }
     },
     "label": {
@@ -2893,7 +2996,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Base default medium-sized text style for labels, providing clear identification and categorization."
+        "description": "Base default medium-sized text style for labels, providing clear identification and categorization.",
+        "$deprecated": "Use text tokens instead."
       },
       "md-compact": {
         "value": {
@@ -2904,7 +3008,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A tighter-spaced version of medium label style."
+        "description": "A tighter-spaced version of medium label style.",
+        "$deprecated": "Use text tokens instead."
       },
       "md-plain": {
         "value": {
@@ -2915,7 +3020,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A non-bold version of medium label style."
+        "description": "A non-bold version of medium label style.",
+        "$deprecated": "Use text tokens instead."
       },
       "md-plain-compact": {
         "value": {
@@ -2926,7 +3032,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A non-bolded, tighter-spaced version of medium label style."
+        "description": "A non-bolded, tighter-spaced version of medium label style.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm": {
         "value": {
@@ -2937,7 +3044,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Smaller text style for labels when space is limited or for secondary information or to convey a slightly lower hierachy."
+        "description": "Smaller text style for labels when space is limited or for secondary information or to convey a slightly lower hierachy.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm-compact": {
         "value": {
@@ -2948,7 +3056,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A tighter-spaced version of small label style."
+        "description": "A tighter-spaced version of small label style.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm-plain": {
         "value": {
@@ -2959,7 +3068,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A non-bold version of small label style."
+        "description": "A non-bold version of small label style.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm-plain-compact": {
         "value": {
@@ -2970,7 +3080,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A non-bolded, tighter-spaced version of small label style."
+        "description": "A non-bolded, tighter-spaced version of small label style.",
+        "$deprecated": "Use text tokens instead."
       }
     },
     "helper": {
@@ -2983,7 +3094,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Base default medium-sized text style for supplementary contextual information."
+        "description": "Base default medium-sized text style for supplementary contextual information.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm": {
         "value": {
@@ -2994,7 +3106,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Smaller text size for subtle guidance or additional context, minimizing visual disruption."
+        "description": "Smaller text size for subtle guidance or additional context, minimizing visual disruption.",
+        "$deprecated": "Use text tokens instead."
       }
     },
     "code": {
@@ -3007,7 +3120,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Base default medium-sized text style for monospace code snippets of technical content."
+        "description": "Base default medium-sized text style for monospace code snippets of technical content.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm": {
         "value": {
@@ -3018,7 +3132,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Smaller text size for monospace code, suitable for inline references or less prominent code examples."
+        "description": "Smaller text size for monospace code, suitable for inline references or less prominent code examples.",
+        "$deprecated": "Use text tokens instead."
       }
     },
     "inputs": {
@@ -4244,7 +4359,7 @@
           "type": "color"
         },
         "status-positive": {
-          "value": "{color.foreground.success}",
+          "value": "{color.foreground.positive}",
           "type": "color"
         },
         "status-critical": {

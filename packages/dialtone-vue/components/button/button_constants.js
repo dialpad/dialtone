@@ -18,7 +18,7 @@ export const BUTTON_SIZE_MODIFIERS = {
 export const BUTTON_KIND_MODIFIERS = {
   default: '',
   muted: 'd-btn--muted',
-  danger: 'd-btn--danger',
+  critical: 'd-btn--critical',
   positive: 'd-btn--positive',
   inverted: 'd-btn--inverted',
   unstyled: 'd-btn--unstyled',
@@ -52,9 +52,9 @@ export const INVALID_COMBINATION = [
   },
   {
     circle: true,
-    kind: 'danger',
+    kind: 'critical',
     importance: 'outlined',
-    message: _invalidCombinationMessage(true, 'danger', 'outlined'),
+    message: _invalidCombinationMessage(true, 'critical', 'outlined'),
   },
   {
     circle: true,

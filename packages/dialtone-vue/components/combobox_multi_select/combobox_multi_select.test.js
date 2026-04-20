@@ -117,9 +117,9 @@ describe('DtComboboxMultiSelect Tests', () => {
       });
     });
 
-    describe('When labelVisible prop is false', () => {
+    describe('When showLabel prop is false', () => {
       beforeEach(async () => {
-        await wrapper.setProps({ labelVisible: false });
+        await wrapper.setProps({ showLabel: false });
         _setChildWrappers();
       });
       it('should not render label', async () => {

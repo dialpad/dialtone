@@ -168,7 +168,7 @@ describe('Checkbox Group Tests', () => {
 
     describe('When initial selected values are provided', () => {
       beforeEach(() => {
-        mockProps = { selectedValues: [MOCK_SELECTED_VALUE] };
+        mockProps = { modelValue: [MOCK_SELECTED_VALUE] };
 
         updateWrapper();
       });
@@ -192,8 +192,8 @@ describe('Checkbox Group Tests', () => {
           });
         });
 
-        it('Should emit an input event', () => {
-          expect(wrapper.emitted('input')[0][0]).toEqual([MOCK_SELECTED_VALUE, MOCK_SELECTED_VALUE2]);
+        it('should emit update:modelValue event', () => {
+          expect(wrapper.emitted('update:modelValue')[0][0]).toEqual([MOCK_SELECTED_VALUE, MOCK_SELECTED_VALUE2]);
         });
       });
     });
@@ -209,38 +209,22 @@ describe('Checkbox Group Tests', () => {
         });
       });
 
-      it('should emit an input event', () => {
-        expect(wrapper.emitted('input')[0][0]).toEqual([MOCK_SELECTED_VALUE]);
+      it('should emit update:modelValue event', () => {
+        expect(wrapper.emitted('update:modelValue')[0][0]).toEqual([MOCK_SELECTED_VALUE]);
       });
     });
 
     describe('When the checkbox group is disabled', () => {
       describe('When a checkbox is selected', () => {
-        it('does not emit an input event', () => {
+        it('does not emit update:modelValue event', async () => {
           mockProps = { disabled: true };
 
           updateWrapper();
 
-          MOCK_SELECTED_CHECKBOX_FUNCTION(MOCK_SELECTED_VALUE);
+          await MOCK_SELECTED_CHECKBOX_FUNCTION(MOCK_SELECTED_VALUE);
 
-          expect(wrapper.emitted('input')).toBeFalsy();
+          expect(wrapper.emitted('update:modelValue')).toBeFalsy();
         });
-      });
-    });
-  });
-
-  describe('Validation Tests', () => {
-    const MOCK_PROP = DtCheckboxGroup.props.modelValue;
-
-    describe('When a value is not provided', () => {
-      it('passes custom prop validation', () => {
-        expect(MOCK_PROP.validator(undefined)).toBe(true);
-      });
-    });
-
-    describe('When a value is provided', () => {
-      it('fails custom prop validation', () => {
-        expect(MOCK_PROP.validator('some value')).toBe(false);
       });
     });
   });

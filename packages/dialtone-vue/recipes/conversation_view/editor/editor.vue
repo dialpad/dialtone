@@ -1,8 +1,8 @@
 <template>
   <div
     ref="editorRoot"
-    class="d-recipe-editor"
-    v-bind="addClassStyleAttrs($attrs)"
+    :class="['d-recipe-editor', $attrs.class]"
+    :style="$attrs.style"
     data-qa="dt-recipe-editor"
     role="presentation"
     @click="$refs.richTextEditor.focusEditor()"
@@ -37,16 +37,17 @@
             <template #content="{ close }">
               <dt-combobox
                 label=""
-                :label-visible="false"
+                :show-label="false"
                 :show-list="true"
                 :click-on-select="true"
                 @escape="close()"
               >
                 <template #input="{ inputProps }">
+                  <!-- eslint-disable vue/no-restricted-class -->
                   <dt-input
                     v-bind="inputProps"
                     v-model="fontStyleSearch"
-                    root-class="d-p-100 d-pbe-50 d-w216"
+                    class="d-p-100 d-pbe-50 d-w216"
                     type="search"
                     :placeholder="i18n.$t('DIALTONE_EDITOR_FONT_STYLE_SEARCH_PLACEHOLDER')"
                     :size="200"
@@ -56,6 +57,7 @@
                       <dt-icon-search :size="iconSize" />
                     </template>
                   </dt-input>
+                  <!-- eslint-enable vue/no-restricted-class -->
                 </template>
                 <template #list="{ listProps }">
                   <ul
@@ -120,7 +122,7 @@
             v-dt-tooltip="{
               message: button.tooltipMessage,
               placement: 'top',
-              externalAnchorElement: $refs[getButtonRef(buttonGroup.key, button.selector)]?.$el, 
+              externalAnchorElement: $refs[getButtonRef(buttonGroup.key, button.selector)]?.$el,
             }"
             kind="muted"
             importance="clear"
@@ -139,16 +141,18 @@
                 size="200"
                 :style="!isDefaultFontColor ? { color: currentFontColor } : {}"
               />
+              <!-- eslint-disable vue/no-restricted-class -->
               <dt-input
                 :value="currentFontColor"
-                root-class="d-w0 d-h0 d-of-hidden"
+                class="d-w0 d-h0 d-of-hidden"
                 input-class="colorPickerInput d-w0 d-h0 d-p-0 d-bar0"
                 input-wrapper-class="d-w0 d-h0 d-ba-none"
                 :size="200"
                 type="color"
-                @input="onColorPickerInput"
+                @update:model-value="onColorPickerInput"
                 @click.stop
               />
+              <!-- eslint-enable vue/no-restricted-class -->
             </template>
           </dt-button>
 
@@ -169,16 +173,17 @@
             <template #content="{ close }">
               <dt-combobox
                 label=""
-                :label-visible="false"
+                :show-label="false"
                 :show-list="true"
                 :click-on-select="true"
                 @escape="close()"
               >
                 <template #input="{ inputProps }">
+                  <!-- eslint-disable vue/no-restricted-class -->
                   <dt-input
                     v-bind="inputProps"
                     v-model="variableSearchValue"
-                    root-class="d-p-100 d-pbe-50 d-w264"
+                    class="d-p-100 d-pbe-50 d-w264"
                     type="search"
                     :placeholder="i18n.$t('DIALTONE_EDITOR_VARIABLE_POPOVER_SEARCH_PLACEHOLDER')"
                     :size="300"
@@ -188,6 +193,7 @@
                       <dt-icon-search :size="iconSize" />
                     </template>
                   </dt-input>
+                  <!-- eslint-enable vue/no-restricted-class -->
                 </template>
                 <template #list="{ listProps }">
                   <div v-bind="listProps">
@@ -358,7 +364,7 @@
         :allow-background-color="allowBackgroundColor"
         :allow-line-height="allowLineHeight"
         :variable-items="flattenedVariableItems"
-        :hide-link-bubble-menu="true"
+        :show-link-bubble-menu="false"
         :auto-focus="autoFocus"
         :editable="editable"
         :input-aria-label="inputAriaLabel"
@@ -375,7 +381,7 @@
         @text-input="onTextInput"
         @blur="onBlur"
         @focus="onFocus"
-        @input="onInput($event)"
+        @update:model-value="onUpdateModelValue"
         @selected="onSelected"
       />
     </div>
@@ -393,7 +399,7 @@ import {
   EDITOR_DEFAULT_LINK_PREFIX,
   EDITOR_DEFAULT_FONT_COLOR,
 } from './editor_constants.js';
-import { removeClassStyleAttrs, addClassStyleAttrs } from '@/common/utils';
+import { removeClassStyleAttrs } from '@/common/utils';
 import { DtButton } from '@/components/button';
 import { DtPopover } from '@/components/popover';
 import { DtStack } from '@/components/stack';
@@ -816,15 +822,8 @@ export default {
     'blur',
 
     /**
-     * Native input event
-     * @event input
-     * @type {String|JSON}
-     */
-    'input',
-
-    /**
      * Event fired to sync the modelValue prop with the parent component
-     * @event input
+     * @event update:modelValue
      * @type {String|JSON}
      */
     'update:modelValue',
@@ -1174,7 +1173,6 @@ export default {
 
   methods: {
     removeClassStyleAttrs,
-    addClassStyleAttrs,
 
     focusEditor () {
       this.$refs.richTextEditor?.editor?.commands.focus();
@@ -1337,8 +1335,7 @@ export default {
       this.$emit('blur', event);
     },
 
-    onInput (event) {
-      this.$emit('input', event);
+    onUpdateModelValue (event) {
       this.$emit('update:modelValue', event);
     },
 

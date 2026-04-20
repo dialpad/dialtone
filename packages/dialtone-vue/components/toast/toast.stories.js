@@ -15,14 +15,6 @@ export const argsData = {
 
 export const argTypesData = {
   // Slots
-  titleOverride: {
-    table: {
-      type: { summary: 'VNode' },
-    },
-    control: {
-      type: 'text',
-    },
-  },
   icon: {
     options: iconsList,
     table: {
@@ -53,7 +45,12 @@ export const argTypesData = {
   },
 
   // Props
-  titleId: {
+  headerText: {
+    control: {
+      type: 'text',
+    },
+  },
+  headerId: {
     table: {
       defaultValue: {
         summary: 'generated unique ID',
@@ -79,7 +76,7 @@ export const argTypesData = {
       type: 'select',
     },
   },
-  show: {
+  open: {
     table: {
       defaultValue: {
         summary: 'false',
@@ -93,17 +90,17 @@ export const argTypesData = {
       },
     },
   },
-  hideClose: {
+  showClose: {
     control: {
       type: 'boolean',
     },
   },
-  hideIcon: {
+  showIcon: {
     control: {
       type: 'boolean',
     },
   },
-  hideAction: {
+  showAction: {
     control: {
       type: 'boolean',
     },
@@ -149,26 +146,26 @@ export const Default = {
   render: DefaultTemplate,
 
   args: {
-    title: 'Base title (optional)',
+    headerText: 'Base title (optional)',
     kind: 'base',
   },
 
   parameters: {
     percy: {
       args: {
-        show: true,
+        open: true,
       },
     },
   },
 };
 
-export const Error = {
+export const Critical = {
   render: DefaultTemplate,
 
   args: {
     ...Default.args,
-    title: 'Error title (optional)',
-    kind: 'error',
+    headerText: 'Critical title (optional)',
+    kind: 'critical',
   },
 
   parameters: {
@@ -181,7 +178,7 @@ export const Info = {
 
   args: {
     ...Default.args,
-    title: 'Info title (optional)',
+    headerText: 'Info title (optional)',
     kind: 'info',
   },
 
@@ -190,13 +187,13 @@ export const Info = {
   },
 };
 
-export const Success = {
+export const Positive = {
   render: DefaultTemplate,
 
   args: {
     ...Default.args,
-    title: 'Success title (optional)',
-    kind: 'success',
+    headerText: 'Positive title (optional)',
+    kind: 'positive',
   },
 
   parameters: {
@@ -209,7 +206,7 @@ export const Warning = {
 
   args: {
     ...Default.args,
-    title: 'Warning title (optional)',
+    headerText: 'Warning title (optional)',
     kind: 'warning',
   },
 

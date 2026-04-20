@@ -16,15 +16,15 @@ keywords: ["notification", "snackbar", "alert", "message", "d-toast", "DtToast",
 ```vue demo
 <dt-stack direction="row" gap="200" class="d-w100p">
   <div class="d-fl-grow1">
-    <dt-select-menu :label-visible="false" label="Style" :options="toastOptions" v-model="selectedKind" />
+    <dt-select-menu :show-label="false" label="Style" :options="toastOptions" v-model="selectedKind" />
   </div>
-  <dt-checkbox value="important" @input="toggleImportant">Important</dt-checkbox>
+  <dt-checkbox value="important" @update:model-value="toggleImportant">Important</dt-checkbox>
   <dt-button @click="toggleToast">Toggle Example</dt-button>
 </dt-stack>
 <!-- @code -->
 <dt-toast
   title="Title"
-  :show="showToast"
+  :open="showToast"
   :important="important"
   :kind="selectedKind"
   @close="closeEvent"
@@ -47,7 +47,7 @@ keywords: ["notification", "snackbar", "alert", "message", "d-toast", "DtToast",
 
 <example-toast
   class="d-zi-notification"
-  :show="showToast"
+  :open="showToast"
   title="Title"
   :important="important"
   :kind="selectedKind"
@@ -63,16 +63,16 @@ If the duration is not provided the toast won't disappear automatically.
 <dt-button @click="toggleDurationToast(true)">Show Example</dt-button>
 <example-toast
   class="d-zi-notification"
-  :show="showDurationToast"
+  :open="showDurationToast"
   title="Title"
   @close="toggleDurationToast(false)"
-  @update:show="updateShow"
+  @update:open="updateOpen"
   :duration="6000"
 />
 <!-- @code -->
 <dt-toast
   title="Title"
-  :show="showDurationToast"
+  :open="showDurationToast"
   @close="closeEvent"
   :duration="7500"
 >
@@ -101,7 +101,7 @@ If you need to self-position the toast at the top center, use the `d-toast-wrapp
   <dt-toast
     :title="title"
     :message="message"
-    :show="isShown"
+    :open="isShown"
   ></dt-toast>
 </aside>
 ```
@@ -141,9 +141,9 @@ import { ref } from 'vue';
 
 const toastOptions = [
   { value: 'base', label: 'Base' },
-  { value: 'error', label: 'Error' },
+  { value: 'critical', label: 'Critical' },
   { value: 'info', label: 'Info' },
-  { value: 'success', label: 'Success' },
+  { value: 'positive', label: 'Positive' },
   { value: 'warning', label: 'Warning' },
 ];
 const showToast = ref(false);
@@ -158,12 +158,12 @@ function toggleToast () {
 function toggleDurationToast (value) {
   showDurationToast.value = value;
 }
-const updateShow = (value) => {
+const updateOpen = (value) => {
   if (!value) showDurationToast.value = false;
 };
 
-function toggleImportant () {
-  important.value = !important.value;
+function toggleImportant (checked) {
+  important.value = checked;
 }
 function togglePinned () {
   pinned.value = !pinned.value;

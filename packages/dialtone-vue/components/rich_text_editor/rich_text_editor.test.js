@@ -67,7 +67,7 @@ describe('DtRichTextEditor tests', () => {
     props = baseProps;
     inputStub = vi.fn();
     attrs = {
-      onInput: inputStub,
+      'onUpdate:modelValue': inputStub,
     };
     _mountWrapper();
     await wrapper.vm.$nextTick();
@@ -99,8 +99,7 @@ describe('DtRichTextEditor tests', () => {
           it('should emit the output value', async () => {
             await _setValue(value);
 
-            // In Vue 3, check for update:modelValue event (v-model standard)
-            const emittedEvents = wrapper.emitted()['update:modelValue'] || wrapper.emitted().input;
+            const emittedEvents = wrapper.emitted()['update:modelValue'];
             const emittedOutput = emittedEvents?.[0]?.[0];
 
             if (onlyCheckOutputContained) {
@@ -1698,9 +1697,9 @@ describe('DtRichTextEditor tests', () => {
         };
       });
 
-      describe('When preventTyping is false', () => {
+      describe('When allowTyping is true', () => {
         beforeEach(async () => {
-          await wrapper.setProps({ preventTyping: false });
+          await wrapper.setProps({ allowTyping: true });
         });
 
         it('should allow letter keys by returning false', () => {
@@ -1732,9 +1731,9 @@ describe('DtRichTextEditor tests', () => {
         });
       });
 
-      describe('When preventTyping is true', () => {
+      describe('When allowTyping is false', () => {
         beforeEach(async () => {
-          await wrapper.setProps({ preventTyping: true });
+          await wrapper.setProps({ allowTyping: false });
         });
 
         describe('Backspace key', () => {
@@ -1749,7 +1748,7 @@ describe('DtRichTextEditor tests', () => {
         describe('Enter key with allowLineBreaks false', () => {
           beforeEach(async () => {
             await wrapper.setProps({
-              preventTyping: true,
+              allowTyping: false,
               allowLineBreaks: false,
             });
           });
@@ -1774,7 +1773,7 @@ describe('DtRichTextEditor tests', () => {
         describe('Enter key with allowLineBreaks true', () => {
           beforeEach(async () => {
             await wrapper.setProps({
-              preventTyping: true,
+              allowTyping: false,
               allowLineBreaks: true,
             });
           });

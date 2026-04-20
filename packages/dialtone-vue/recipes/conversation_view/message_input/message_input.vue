@@ -3,8 +3,8 @@
   <div
     data-qa="dt-recipe-message-input"
     role="presentation"
-    class="d-recipe-message-input"
-    v-bind="addClassStyleAttrs($attrs)"
+    :class="['d-recipe-message-input', $attrs.class]"
+    :style="$attrs.style"
     @dragover.prevent
     @drop.prevent="onDrop"
     @paste="onPaste"
@@ -71,14 +71,14 @@
         :auto-focus="autoFocus"
         :link="richText"
         :placeholder="placeholder"
-        :prevent-typing="preventTyping"
+        :allow-typing="allowTyping"
         :mention-suggestion="mentionSuggestion"
         :channel-suggestion="channelSuggestion"
         :slash-command-suggestion="slashCommandSuggestion"
         :additional-extensions="additionalExtensions"
-        :hide-link-bubble-menu="hideLinkBubbleMenu"
+        :show-link-bubble-menu="showLinkBubbleMenu"
         v-bind="removeClassStyleAttrs($attrs)"
-        @input="onInput"
+        @update:model-value="onUpdateModelValue"
         @text-input="onTextInput"
         @markdown-input="onMarkdownInput"
         @enter="onSend"
@@ -286,7 +286,7 @@ import {
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
 } from '@/components/rich_text_editor';
 import lastActiveNodes from './last_active_nodes';
-import { removeClassStyleAttrs, returnFirstEl, addClassStyleAttrs } from '@/common/utils';
+import { removeClassStyleAttrs, returnFirstEl } from '@/common/utils';
 import MeetingPill from './extensions/meeting_pill/meeting_pill';
 import { DtButton } from '@/components/button';
 import { DtEmojiPicker } from '@/components/emoji_picker';
@@ -369,11 +369,11 @@ export default {
     },
 
     /**
-     * Prevents the user from typing any further. Deleting text will still work.
+     * Allows the user to type. Set to false to prevent typing (deleting text will still work).
      */
-    preventTyping: {
+    allowTyping: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     /**
@@ -409,7 +409,7 @@ export default {
     },
 
     /**
-     * The output format that the editor uses when emitting the "@input" event.
+     * The output format that the editor uses when emitting the "update:modelValue" event.
      * One of `text`, `json`, `html`, `markdown`. See https://tiptap.dev/guide/output for
      * examples.
      * @values text, json, html, markdown
@@ -801,7 +801,7 @@ export default {
       linkDialogOpen: false,
       selectedText: '',
       text: '',
-      hideLinkBubbleMenu: false,
+      showLinkBubbleMenu: true,
       i18n: new DialtoneLocalization(),
     };
   },
@@ -899,14 +899,13 @@ export default {
 
   methods: {
     removeClassStyleAttrs,
-    addClassStyleAttrs,
 
     linkDialogOpened (value) {
       this.linkDialogOpen = value;
       if (value === true) {
         this.initLinkDialog();
       } else {
-        this.hideLinkBubbleMenu = false;
+        this.showLinkBubbleMenu = true;
         this.$refs.richTextEditor?.focusEditor();
       }
     },
@@ -932,7 +931,7 @@ export default {
 
     initLinkDialog () {
       this.$refs.link.setInitialValues(this.selectedText, this.$refs.richTextEditor?.editor?.getAttributes('link')?.href);
-      this.hideLinkBubbleMenu = true;
+      this.showLinkBubbleMenu = false;
       this.linkDialogOpen = true;
     },
 
@@ -1029,7 +1028,7 @@ export default {
       this.$emit('cancel');
     },
 
-    onInput (event) {
+    onUpdateModelValue (event) {
       this.$emit('update:modelValue', event);
     },
 

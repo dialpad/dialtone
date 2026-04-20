@@ -1,7 +1,7 @@
 // Modal style modifiers
 export const MODAL_KIND_MODIFIERS = {
   default: '',
-  danger: 'd-modal--danger',
+  critical: 'd-modal--critical',
 };
 
 // Modal size modifiers
@@ -11,9 +11,9 @@ export const MODAL_SIZE_MODIFIERS = {
 };
 
 export const MODAL_BANNER_KINDS = {
-  error: 'd-modal__banner--critical',
+  critical: 'd-modal__banner--critical',
   info: 'd-modal__banner--info',
-  success: 'd-modal__banner--success',
+  positive: 'd-modal__banner--positive',
   warning: 'd-modal__banner--warning',
   base: 'd-modal__banner--general',
 };

@@ -5,7 +5,7 @@ import DtNoticeAction from '../notice/notice_action.vue';
 import DtNoticeContent from '../notice/notice_content.vue';
 import DtNoticeIcon from '../notice/notice_icon.vue';
 
-const baseProps = { title: '', show: true };
+const baseProps = { headerText: '', open: true };
 const baseSlots = {};
 
 let mockProps = {};
@@ -77,34 +77,34 @@ describe('DtToast Tests', () => {
     describe('When the toast renders with props', () => {
       beforeEach(() => {
         mockProps = {
-          titleId: 'titleId prop content',
+          headerId: 'headerId prop content',
           contentId: 'contentId prop content',
-          title: '',
+          headerText: '',
           message: 'message prop content',
-          hideClose: true,
+          showClose: false,
         };
 
         updateWrapper();
       });
 
-      it('titleId prop is passed down correctly', () => {
-        expect(contentChild.props('titleId')).toBe(mockProps.titleId);
+      it('headerId prop is passed down correctly', () => {
+        expect(contentChild.props('headerId')).toBe(mockProps.headerId);
       });
 
       it('contentId prop is passed down correctly', () => {
         expect(contentChild.props('contentId')).toBe(mockProps.contentId);
       });
 
-      it('title prop is passed down correctly', () => {
-        expect(contentChild.props('title')).toBe(mockProps.title);
+      it('headerText prop is passed down correctly', () => {
+        expect(contentChild.props('headerText')).toBe(mockProps.headerText);
       });
 
       it('message prop is passed down correctly', () => {
         expect(contentChild.find('[data-qa="notice-content-message"]').text()).toBe(mockProps.message);
       });
 
-      it('hideClose prop is passed down correctly', () => {
-        expect(actionChild.props('hideClose')).toBe(mockProps.hideClose);
+      it('showClose prop is passed down correctly', () => {
+        expect(actionChild.props('showClose')).toBe(mockProps.showClose);
       });
     });
 
@@ -114,13 +114,13 @@ describe('DtToast Tests', () => {
       });
     });
 
-    describe('When kind is set to error', () => {
+    describe('When kind is set to critical', () => {
       it('has correct class', () => {
-        mockProps = { kind: 'error' };
+        mockProps = { kind: 'critical' };
 
         updateWrapper();
 
-        expect(toast.classes('d-toast--error')).toBe(true);
+        expect(toast.classes('d-toast--critical')).toBe(true);
       });
     });
 
@@ -152,7 +152,7 @@ describe('DtToast Tests', () => {
 
         expect(toast.exists()).toBe(true);
 
-        mockProps = { show: true, duration: 6500 };
+        mockProps = { open: true, duration: 6500 };
 
         updateWrapper();
 
@@ -170,7 +170,7 @@ describe('DtToast Tests', () => {
       it('should close the toast with close method', async () => {
         expect(toast.exists()).toBe(true);
 
-        await wrapper.setProps({ show: false });
+        await wrapper.setProps({ open: false });
 
         toast = wrapper.find('[data-qa="dt-toast"]');
 

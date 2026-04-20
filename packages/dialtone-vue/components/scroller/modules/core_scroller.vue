@@ -29,13 +29,13 @@
         :class="[
           itemClass,
           {
-            hover: !skipHover && hoverKey === view.nr.key,
+            hover: props.enableHover && hoverKey === view.nr.key,
           },
         ]"
-        v-on="skipHover ? {} : {
+        v-on="props.enableHover ? {
           mouseenter: () => { hoverKey = view.nr.key },
           mouseleave: () => { hoverKey = null },
-        }"
+        } : {}"
       >
         <slot
           :item="view.item"
@@ -115,12 +115,12 @@ const props = defineProps({
   },
 
   /**
-     * If true, the hover state will be skipped.
-     * This can be useful if you want to use the hover state for other purposes.
+     * Enables hover state CSS class and mouse events on items.
+     * Set to false if you want to manage hover state yourself.
      */
-  skipHover: {
+  enableHover: {
     type: Boolean,
-    default: false,
+    default: true,
   },
 
   /**

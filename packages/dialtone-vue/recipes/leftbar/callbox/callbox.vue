@@ -40,13 +40,13 @@
         <div class="d-recipe-callbox__content">
           <component
             :is="clickable ? 'button' : 'span'"
-            v-dt-tooltip="title"
+            v-dt-tooltip="headerText"
             data-qa="dt-recipe-callbox__title"
             class="d-recipe-callbox__content-title"
             tabindex="0"
             @click="handleClick"
           >
-            {{ title }}
+            {{ headerText }}
           </component>
           <div
             v-if="$slots.badge || badgeText"
@@ -167,11 +167,11 @@ export default {
     },
 
     /**
-     * Callbox title
+     * Callbox header text
      */
-    title: {
+    headerText: {
       type: String,
-      default: '',
+      default: undefined,
     },
 
     /**

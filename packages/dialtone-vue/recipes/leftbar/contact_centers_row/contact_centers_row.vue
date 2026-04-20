@@ -3,8 +3,9 @@
     :class="[
       'd-recipe-leftbar-row__container',
       { 'd-recipe-leftbar-row__container--off-duty': $slots.timer },
+      $attrs.class,
     ]"
-    v-bind="addClassStyleAttrs($attrs)"
+    :style="$attrs.style"
   >
     <div
       :class="leftbarContactCentersRowClasses"
@@ -40,7 +41,7 @@
         </div>
       </a>
       <div
-        v-if="!hideActions"
+        v-if="showActions"
         class="d-recipe-leftbar-row__omega"
       >
         <!-- @slot Slot for end content -->
@@ -87,7 +88,7 @@
 </template>
 
 <script>
-import { extractVueListeners, safeConcatStrings, removeClassStyleAttrs, returnFirstEl, addClassStyleAttrs } from '@/common/utils';
+import { extractVueListeners, safeConcatStrings, removeClassStyleAttrs, returnFirstEl } from '@/common/utils';
 import { DtBadge } from '@/components/badge';
 import { DtButton } from '@/components/button';
 import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
@@ -134,11 +135,11 @@ export default {
     },
 
     /**
-     * Making this true will hide the unread count badge, the chevron button, and the right slot
+     * Shows the unread count badge, the chevron button, and the right slot.
      */
-    hideActions: {
+    showActions: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     /**
@@ -236,7 +237,6 @@ export default {
 
   methods: {
     removeClassStyleAttrs,
-    addClassStyleAttrs,
 
     adjustLabelWidth () {
       const labelWidth = returnFirstEl(this.$el)?.querySelector('.d-recipe-leftbar-row__primary')?.clientWidth || 0;

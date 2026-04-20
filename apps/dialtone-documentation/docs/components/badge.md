@@ -83,12 +83,12 @@ keywords: ["label","tag","indicator","count","d-badge","DtBadge","dt-badge"]
       <td>Used to convey general information that isn't critical or requires action on the user's part.</td>
     </tr>
     <tr>
-      <th class="d-ta-left">Success</th>
+      <th class="d-ta-left">Positive</th>
       <td>
-        <dt-badge type="success" text="Label"></dt-badge>
+        <dt-badge type="positive" text="Label"></dt-badge>
       </td>
       <td>
-        <dt-badge kind="count" type="success" text="3"></dt-badge>
+        <dt-badge kind="count" type="positive" text="3"></dt-badge>
       </td>
       <td>Accompanying a successful or otherwise positive action or message</td>
     </tr>
@@ -136,14 +136,14 @@ keywords: ["label","tag","indicator","count","d-badge","DtBadge","dt-badge"]
 ```vue code-only
 <dt-badge kind="label" text="Label" />
 <dt-badge type="info" kind="label" text="Label" />
-<dt-badge type="success" kind="label" text="Label" />
+<dt-badge type="positive" kind="label" text="Label" />
 <dt-badge type="warning" kind="label" text="Label" />
 <dt-badge type="critical" kind="label" text="Label" />
 <dt-badge type="bulletin" kind="label" text="Label" />
 <dt-badge type="ai" text="Label" kind="label" />
 <dt-badge type="default" text="1" kind="count" />
 <dt-badge type="info" text="2" kind="count" />
-<dt-badge type="success" text="3" kind="count" />
+<dt-badge type="positive" text="3" kind="count" />
 <dt-badge type="warning" text="4" kind="count" />
 <dt-badge type="critical" text="5" kind="count" />
 <dt-badge type="bulletin" text="6" kind="count" />
@@ -156,12 +156,12 @@ keywords: ["label","tag","indicator","count","d-badge","DtBadge","dt-badge"]
 <dt-stack direction="row" gap="100">
   <dt-badge text="Label" outlined />
   <dt-badge text="Label" type="info" outlined />
-  <dt-badge text="Label" type="success" outlined />
+  <dt-badge text="Label" type="positive" outlined />
   <dt-badge text="Label" type="warning" outlined />
   <dt-badge text="Label" type="critical" outlined />
   <dt-badge text="1" kind="count" outlined />
   <dt-badge text="1" type="info" kind="count" outlined />
-  <dt-badge text="1" type="success" kind="count" outlined />
+  <dt-badge text="1" type="positive" kind="count" outlined />
   <dt-badge text="1" type="warning" kind="count" outlined />
   <dt-badge text="1" type="critical" kind="count" outlined />
 </dt-stack>
@@ -318,7 +318,7 @@ Decorative badges label and classify items for quick recognition.
     <dt-badge text="Overdue" type="warning" />
   </dt-stack>
   <dt-stack direction="row" gap="100">
-    <dt-badge text="Resolved" type="success" />
+    <dt-badge text="Resolved" type="positive" />
   </dt-stack>
   <dt-stack direction="row" gap="100">
     <dt-badge text="Recording" type="critical">
@@ -345,7 +345,7 @@ Decorative badges label and classify items for quick recognition.
 ```vue demo-only
 <dt-stack gap="200">
   <dt-stack direction="row" gap="100">
-    <dt-badge kind="count" type="success" text="5%">
+    <dt-badge kind="count" type="positive" text="5%">
       <template #startIcon="{ iconSize }">
         <dt-icon-arrow-up :size="iconSize" />
       </template>

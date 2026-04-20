@@ -89,7 +89,7 @@ chore: NO-JIRA update dependencies
 - **New components**: Composition API with `<script setup lang="ts">`
 - **Existing components**: Options API with `compatConfig: { MODE: 3 }` — do NOT convert unless explicitly asked
 - **Props**: Use `validator` (NOT `validate` — Vue silently ignores `validate`)
-- **Events**: `update:modelValue` for v-model; `update:open` for new overlays; `update:show` for legacy Modal/Tooltip/Toast
+- **Events**: `update:modelValue` for v-model; `update:open` for all overlay visibility (Modal, Tooltip, Toast, Popover, Dropdown, etc.)
 
 Detailed conventions are in path-scoped rules (`.claude/rules/vue-components.md`) that activate automatically when editing component files.
 

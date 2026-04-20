@@ -95,14 +95,14 @@ describe('DtSplitButton Tests', function () {
       });
     });
 
-    describe('When kind is set to danger', () => {
-      it('Should have danger class', async () => {
-        mockProps = { kind: 'danger' };
+    describe('When kind is set to critical', () => {
+      it('Should have critical class', async () => {
+        mockProps = { kind: 'critical' };
 
         updateWrapper();
 
-        expect(startButton.classes().includes('d-btn--danger')).toBe(true);
-        expect(endButton.classes().includes('d-btn--danger')).toBe(true);
+        expect(startButton.classes().includes('d-btn--critical')).toBe(true);
+        expect(endButton.classes().includes('d-btn--critical')).toBe(true);
       });
     });
 
@@ -657,9 +657,9 @@ describe('DtSplitButton Tests', function () {
   });
 
   describe('Extendability Tests', () => {
-    describe('When a rootClass is provided', () => {
-      it('should include the root class', () => {
-        mockProps = { rootClass: MOCK_ROOT_CLASS }
+    describe('When a class is provided', () => {
+      it('should include the class', () => {
+        mockAttrs = { class: MOCK_ROOT_CLASS }
 
         updateWrapper();
 

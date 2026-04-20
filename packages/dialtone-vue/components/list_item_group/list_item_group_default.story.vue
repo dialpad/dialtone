@@ -29,12 +29,6 @@
       >
         item3
       </dt-list-item>
-      <template
-        v-if="$attrs.headingSlot"
-        #headingSlot
-      >
-        <span v-html="$attrs.headingSlot" />
-      </template>
     </dt-list-item-group>
   </div>
 </template>

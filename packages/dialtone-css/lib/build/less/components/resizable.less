@@ -1,0 +1,111 @@
+//
+//  DIALTONE
+//  COMPONENTS: RESIZABLE
+//
+//  Resizable panel layout component styles.
+//  For further documentation of these and other classes,
+//  visit https://dialtone.dialpad.com/components/resizable
+//
+//  TABLE OF CONTENTS
+//  • RESIZABLE GROUP
+//  • RESIZABLE PANEL
+//  • RESIZABLE HANDLE
+//
+//  ============================================================================
+//  $   RESIZABLE GROUP
+//  ----------------------------------------------------------------------------
+.d-resizable {
+  position: relative;
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: clip;
+
+  &--column {
+    writing-mode: vertical-lr;
+  }
+}
+
+//  ============================================================================
+//  $   RESIZABLE PANEL
+//  ----------------------------------------------------------------------------
+.d-resizable-panel {
+  position: absolute;
+  inset-block: 0;
+  overflow: hidden;
+
+  &--collapsed {
+    pointer-events: none;
+  }
+
+}
+
+.d-resizable-panel__content {
+  display: flex;
+  flex: 1;
+  align-items: start;
+  inline-size: 100%;
+  block-size: 100%;
+  pointer-events: auto;
+  writing-mode: horizontal-tb;
+}
+
+//  ============================================================================
+//  $   RESIZABLE HANDLE
+//  ----------------------------------------------------------------------------
+.d-resizable-handle {
+  --d-resizable-handle-color-surface: var(--dt-color-border-focus);
+
+  position: absolute;
+  z-index: calc(var(--zi-navigation-fixed) + var(--zi-base1));
+  background-color: transparent;
+  border-radius: var(--dt-size-radius-pill);
+  touch-action: none;
+
+  // Logical properties handle both row/column via parent writing-mode
+  inset-block: var(--dt-size-200);
+  inline-size: var(--dt-size-300);
+
+  // Invisible hit area for easier grabbing
+  &::before {
+    position: absolute;
+    content: '';
+    inset: var(--dt-size-400-negative);
+  }
+
+  // Cursor is the only direction-specific property
+  &--row { cursor: ew-resize; }
+  &--column { cursor: ns-resize; }
+
+  // ─── State Modifiers ───
+  &--disabled {
+    background-color: transparent !important;
+    cursor: default;
+    opacity: var(--dt-opacity-500);
+    pointer-events: none;
+  }
+
+  // ─── Indicator (visible drag line) ───
+  &__indicator {
+    position: absolute;
+    background-color: transparent;
+    border-radius: var(--dt-size-radius-pill);
+    transition: background-color var(--td150) ease;
+    inset: 0;
+  }
+
+  // ─── Hover ───
+  &:hover:not(&--disabled) &__indicator,
+  &--active &__indicator {
+    background-color: var(--d-resizable-handle-color-surface);
+  }
+
+  // Remove browser default focus outline — custom indicators handle it
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    background-color: var(--d-resizable-handle-color-surface);
+    box-shadow: none;
+  }
+}

@@ -110,14 +110,13 @@ export default {
     },
 
     /**
-     * Controls whether the collapsible is shown. Leaving this null will have the collapsible start
-     * expanded and trigger on click by default. If you set this value, the default trigger
-     * behavior will be disabled, and you can control it as you need.
-     * Supports .sync modifier
+     * Controls whether the collapsible is shown. When null (default), the collapsible
+     * starts expanded and toggles on click. When set to true or false, the default
+     * trigger is disabled and the parent controls visibility via v-model:open.
      * @values null, true, false
      */
     open: {
-      type: Boolean,
+      type: [Boolean, null],
       default: null,
     },
 

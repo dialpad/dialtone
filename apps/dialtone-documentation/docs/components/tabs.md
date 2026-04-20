@@ -35,7 +35,7 @@ Remove the bottom border of any tablist.
 ```vue demo
 <div class="d-w100p">
   <example-tabs borderless />
-</div>
+  </div>
 <!-- @code -->
 <dt-tab-group borderless>
   ...

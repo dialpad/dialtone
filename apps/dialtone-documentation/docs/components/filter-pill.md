@@ -183,7 +183,7 @@ A clear button appears when any filter is active. It emits the `reset` event whe
 
 ### Non clearable
 
-Setting the `hide-clear` prop hides the reset/clear button.
+Setting the `:show-clear="false"` prop hides the reset/clear button.
 
 ```vue demo
 <!-- @wrapper -->
@@ -191,7 +191,7 @@ Setting the `hide-clear` prop hides the reset/clear button.
   <dt-filter-pill
     :model-value="[{name: '0–5 min', active: true}, {name: '5–15 min'}, {name: '15–30 min'}, {name: '30+ min'}]"
     label="Duration"
-    hide-clear
+    :show-clear="false"
   >
   </dt-filter-pill>
 </dt-stack>
@@ -364,7 +364,7 @@ The label updates to show the selected option, and a clear button resets to the 
           :key="filter.name"
           :label="filter.name"
           :value="filter.name"
-          @input="$event => selectedConversationType = $event"
+          @update:model-value="$event => selectedConversationType = $event"
         />
       </dt-radio-group>
     </template>

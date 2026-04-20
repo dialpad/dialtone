@@ -20,7 +20,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox-wit
       v-model="inputValue"
       placeholder="Select one or start typing"
       v-bind="inputProps"
-      @input="onInput"
+      @update:model-value="onInput"
     />
   </template>
   <template #list="{ listProps }">
@@ -85,7 +85,7 @@ You can add header and footer content to the popover using the `header` and `foo
       v-model="inputValueHeaderFooter"
       placeholder="Select one or start typing"
       v-bind="inputProps"
-      @input="onInput"
+      @update:model-value="onInput"
     />
   </template>
   <template #list="{ listProps }">

@@ -42,10 +42,10 @@ Exceptions exist — DtModal uses `default` and `full` instead.
 
 Color or semantic variant. Values vary per component:
 
-- DtButton: `default`, `muted`, `danger`, `positive`, `inverted`, `unstyled`
-- DtModal: `default`, `danger`
-- DtNotice: `base`, `error`, `info`, `success`, `warning`
-- DtBadge: uses `type` instead (`default`, `info`, `success`, `warning`, `critical`, `bulletin`, `ai`)
+- DtButton: `default`, `muted`, `critical`, `positive`, `inverted`, `unstyled`
+- DtModal: `default`, `critical`
+- DtNotice: `base`, `critical`, `info`, `positive`, `warning`
+- DtBadge: uses `type` instead (`default`, `info`, `positive`, `warning`, `critical`, `bulletin`, `ai`)
 
 ### Importance
 
@@ -75,12 +75,15 @@ All form components implement Vue 3 v-model via `modelValue` prop + `update:mode
 | DtSelectMenu | `String \| Number` | |
 | DtToggle | `Boolean \| String` | Supports `'mixed'` for indeterminate state |
 
-Visibility-toggle components use `update:show` instead:
+Visibility-toggle components use `update:open`:
 
 | Component | Emit |
 |-----------|------|
-| DtModal | `update:show` |
-| DtTooltip | `update:show` |
+| DtModal | `update:open` |
+| DtTooltip | `update:open` |
+| DtToast | `update:open` |
+| DtPopover | `update:open` |
+| DtDropdown | `update:open` |
 
 ## Event Naming
 
@@ -90,7 +93,7 @@ Custom events use the `update:{prop}` convention to stay compatible with `v-mode
 
 ```
 update:modelValue   — value changed
-update:show         — visibility changed
+update:open         — visibility changed
 update:length       — input length changed (DtInput)
 update:invalid      — validation state changed (DtInput)
 ```
@@ -143,11 +146,13 @@ Icon scale values correspond to pixel sizes defined in `packages/dialtone-icons/
 Group-child relationships use Vue's provide/inject. The parent provides a reactive context object plus action methods:
 
 **Tab group** (`tab_group.vue`):
+
 ```
 provides: { groupContext: { selected, disabled }, setFocus }
 ```
 
 **Input groups** (CheckboxGroup, RadioGroup via `input_group.js` mixin):
+
 ```
 provides: { groupContext: { name, disabled, validationState, value, selectedValues }, setGroupValue }
 ```

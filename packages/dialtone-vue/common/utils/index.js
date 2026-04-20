@@ -4,9 +4,6 @@ import {
   VALIDATION_MESSAGE_TYPES,
 } from '../constants/index.js';
 import {
-  configVue2StyleClassAttrs,
-} from '../config';
-import {
   h,
   Comment,
   Text,
@@ -107,23 +104,23 @@ export function filterFormattedMessages (formattedMessages) {
 }
 
 /*
- * The priority order of message types is as flows: 'error' > 'warning' > 'success'.
- * If any message of type 'error' is present in messages, the input state is considered
- * to be 'error', then 'warning' and lastly 'success'.
+ * The priority order of message types is as flows: 'critical' > 'warning' > 'positive'.
+ * If any message of type 'critical' is present in messages, the input state is considered
+ * to be 'critical', then 'warning' and lastly 'positive'.
  */
 export function getValidationState (formattedMessages) {
   if (!formattedMessages) {
     return null;
   }
 
-  if (hasFormattedMessageOfType(formattedMessages, VALIDATION_MESSAGE_TYPES.ERROR)) {
-    return VALIDATION_MESSAGE_TYPES.ERROR;
+  if (hasFormattedMessageOfType(formattedMessages, VALIDATION_MESSAGE_TYPES.CRITICAL)) {
+    return VALIDATION_MESSAGE_TYPES.CRITICAL;
   }
   if (hasFormattedMessageOfType(formattedMessages, VALIDATION_MESSAGE_TYPES.WARNING)) {
     return VALIDATION_MESSAGE_TYPES.WARNING;
   }
-  if (hasFormattedMessageOfType(formattedMessages, VALIDATION_MESSAGE_TYPES.SUCCESS)) {
-    return VALIDATION_MESSAGE_TYPES.SUCCESS;
+  if (hasFormattedMessageOfType(formattedMessages, VALIDATION_MESSAGE_TYPES.POSITIVE)) {
+    return VALIDATION_MESSAGE_TYPES.POSITIVE;
   }
 
   return null;
@@ -239,37 +236,17 @@ export const returnFirstEl = (el) => {
 };
 
 /**
-  Only will apply changes if the config option configVue2StyleClassAttrs is set to true. It is false by default.
-
-  Removes the class and style attributes from the $attrs. This is useful for vue 2 to vue 3 migration
-  purposes so we don't cause breaking changes due to INSTANCE_ATTRS_CLASS_STYLE
-  https://v3-migration.vuejs.org/breaking-changes/attrs-includes-class-style
-
-  Remove the class and style attributes from the v-bind like so so v-bind="removeClassStyleAttrs($attrs)",
-  and then apply them to the root element manually via:
-
-  :class="$attrs.class"
-  :style="$attrs.style"
+  In Vue 3, $attrs includes class and style attributes, but when using inheritAttrs: false
+  and manually binding :class="$attrs.class" and :style="$attrs.style" to the root element,
+  we need to prevent class/style from being passed to inner elements via v-bind="removeClassStyleAttrs($attrs)".
+  This function removes class and style attributes from the attrs object.
 */
 export function removeClassStyleAttrs (attrs) {
-  if (!configVue2StyleClassAttrs) return attrs;
   const listeners = Object.entries(attrs)
     .filter(([key]) => !['class', 'style'].includes(key));
   return Object.fromEntries(listeners);
 }
 
-/**
-  This should be applied to the root element on components using inheritAttrs: false.
-  This will add the class and style attributes back to the root element if configVue2StyleClassAttrs
-  is enabled.
-*/
-export function addClassStyleAttrs (attrs) {
-  if (!configVue2StyleClassAttrs) return {};
-  return {
-    class: attrs.class,
-    style: attrs.style,
-  };
-}
 
 /*
 * Set's a global timer to debounce the execution of a function.
@@ -386,7 +363,7 @@ export function getPhoneNumberRegex (minLength = 7, maxLength = 15) {
       ')(?=\\b)(?=\\W(?=\\W|$)|\\s|$)',
     );
   } catch {
-    // eslint-disable-next-line no-console
+     
     console.warn('This browser doesn\'t support regex lookahead/lookbehind');
   }
 
@@ -540,7 +517,6 @@ export default {
   extractVueListeners,
   extractNonListeners,
   removeClassStyleAttrs,
-  addClassStyleAttrs,
   returnFirstEl,
   debounce,
   isOutOfViewPort,
@@ -554,3 +530,4 @@ export default {
   disableRootScrolling,
   enableRootScrolling,
 };
+

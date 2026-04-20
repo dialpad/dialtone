@@ -59,7 +59,7 @@
           <component
             :is="copiedJson ? DtIconCheck : DtIconBraces"
             :size="iconSize"
-            :class="{ 'd-fc-success': copiedJson }"
+            :class="{ 'd-fc-positive': copiedJson }"
           />
         </template>
       </dt-button>
@@ -77,7 +77,7 @@
           <component
             :is="copied ? DtIconCheck : DtIconCopy"
             :size="iconSize"
-            :class="{ 'd-fc-success': copied }"
+            :class="{ 'd-fc-positive': copied }"
           />
         </template>
       </dt-button>

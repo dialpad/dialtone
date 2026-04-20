@@ -18,22 +18,9 @@
     :description-child-props="$attrs.descriptionChildProps"
     :option-child-props="$attrs.optionChildProps"
     :messages-child-props="$attrs.messagesChildProps"
-    :root-class="$attrs.rootClass"
-    @input="$attrs.onInput"
-    @change="$attrs.onChange"
+    :class="$attrs.class"
+    @update:model-value="$attrs['onUpdate:modelValue']"
   >
-    <template
-      v-if="$attrs.labelSlot"
-      #label
-    >
-      <span v-html="$attrs.labelSlot" />
-    </template>
-    <template
-      v-if="$attrs.descriptionSlot"
-      #description
-    >
-      <span v-html="$attrs.descriptionSlot" />
-    </template>
     <html-fragment
       v-if="defaultSlot"
       :html="defaultSlot"

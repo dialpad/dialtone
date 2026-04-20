@@ -1,7 +1,7 @@
 export const CHECKBOX_INPUT_VALIDATION_CLASSES = {
-  error: 'd-checkbox--error',
+  critical: 'd-checkbox--critical',
   warning: 'd-checkbox--warning',
-  success: 'd-checkbox--success',
+  positive: 'd-checkbox--positive',
 };
 
 export default {

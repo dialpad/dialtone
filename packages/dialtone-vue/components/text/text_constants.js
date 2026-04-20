@@ -26,8 +26,23 @@ export const TEXT_SIZE_MAP = {
   700: '3xl',
 };
 
-import TEXT_TONE_TOKENS from './text_tone_tokens.js';
-export { TEXT_TONE_TOKENS };
+export const TEXT_TONE_MODIFIERS = {
+  'primary': 'd-text--tone-primary',
+  'secondary': 'd-text--tone-secondary',
+  'tertiary': 'd-text--tone-tertiary',
+  'muted': 'd-text--tone-muted',
+  'disabled': 'd-text--tone-disabled',
+  'placeholder': 'd-text--tone-placeholder',
+  'critical': 'd-text--tone-critical',
+  'critical-strong': 'd-text--tone-critical-strong',
+  'positive': 'd-text--tone-positive',
+  'positive-strong': 'd-text--tone-positive-strong',
+  'warning': 'd-text--tone-warning',
+  'info': 'd-text--tone-info',
+  'info-strong': 'd-text--tone-info-strong',
+  'neutral-black': 'd-text--tone-neutral-black',
+  'neutral-white': 'd-text--tone-neutral-white',
+};
 
 export const TEXT_ALIGN_MODIFIERS = {
   start: 'd-text--align-start',
@@ -35,8 +50,6 @@ export const TEXT_ALIGN_MODIFIERS = {
   end: 'd-text--align-end',
   justify: 'd-text--align-justify',
 };
-
-export const TEXT_TONE_PREFIX = 'd-fc-';
 
 export const TEXT_NUMERIC_CLASS = 'd-text--numeric';
 export const TEXT_TRUNCATE_CLASS = 'd-truncate';
@@ -75,9 +88,8 @@ export default {
   TEXT_KIND_MODIFIERS,
   TEXT_SIZE_MODIFIERS,
   TEXT_HEADLINE_ONLY_SIZES,
-  TEXT_TONE_TOKENS,
+  TEXT_TONE_MODIFIERS,
   TEXT_ALIGN_MODIFIERS,
-  TEXT_TONE_PREFIX,
   TEXT_NUMERIC_CLASS,
   TEXT_TRUNCATE_CLASS,
   TEXT_LINE_CLAMP_CLASS,

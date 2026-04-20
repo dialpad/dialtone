@@ -1,17 +1,17 @@
- 
+
 
 export default {
   default: {
     props: {
       validationMessages: {
-        initialValue: [{ message: 'Positive validation message', type: 'success' }],
+        initialValue: [{ message: 'Positive validation message', type: 'positive' }],
       },
     },
   },
   'with error': {
     props: {
       validationMessages: {
-        initialValue: [{ message: 'Error validation message', type: 'error' }],
+        initialValue: [{ message: 'Critical validation message', type: 'critical' }],
       },
     },
   },
@@ -26,8 +26,8 @@ export default {
     props: {
       validationMessages: {
         initialValue: [
-          { message: 'First error message', type: 'error' },
-          { message: 'Second error message', type: 'error' },
+          { message: 'First error message', type: 'critical' },
+          { message: 'Second error message', type: 'critical' },
         ],
       },
     },

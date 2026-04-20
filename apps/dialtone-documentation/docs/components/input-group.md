@@ -87,7 +87,7 @@ export default {
         // update provided value if injected
         this.setGroupValue(value);
 
-        this.$emit('input', value);
+        this.$emit('update:modelValue', value);
       }
     },
   },
@@ -165,9 +165,9 @@ export default {
 ```vue demo
 <dt-stack gap="500">
   <dt-input-group
-    name="input-group-with-success-message"
-    legend="With Success Message"
-    :messages="[{ message: 'Success validation message', type: 'success' }]"
+    name="input-group-with-positive-message"
+    legend="With Positive Message"
+    :messages="[{ message: 'Positive validation message', type: 'positive' }]"
   >
     <dt-radio value="apple"><span>Apple</span></dt-radio>
     <dt-radio value="banana"><span>Banana</span></dt-radio>
@@ -184,8 +184,8 @@ export default {
   </dt-input-group>
   <dt-input-group
     name="input-group-with-error-message"
-    legend="With Error Message"
-    :messages="[{ message: 'Error', type: 'error' }]"
+    legend="With Critical Message"
+    :messages="[{ message: 'Critical', type: 'critical' }]"
   >
     <dt-radio value="apple"><span>Apple</span></dt-radio>
     <dt-radio value="banana"><span>Banana</span></dt-radio>
@@ -194,9 +194,9 @@ export default {
 </dt-stack>
 <!-- @code -->
 <dt-input-group
-  name="input-group-with-success-message"
-  legend="With Success Message"
-  :messages="[{ message: `Success validation message`, type: VALIDATION_MESSAGE_TYPES.SUCCESS }]"
+  name="input-group-with-positive-message"
+  legend="With Positive Message"
+  :messages="[{ message: `Positive validation message`, type: VALIDATION_MESSAGE_TYPES.POSITIVE }]"
 >
   <!-- Input Elements -->
 </dt-input-group>
@@ -208,9 +208,9 @@ export default {
   <!-- Input Elements -->
 </dt-input-group>
 <dt-input-group
-  name="input-group-with-error-message"
-  legend="With Error Message"
-  :messages="[{ message: `Error`, type: VALIDATION_MESSAGE_TYPES.ERROR }]"
+  name="input-group-with-critical-message"
+  legend="With Critical Message"
+  :messages="[{ message: `Critical`, type: VALIDATION_MESSAGE_TYPES.CRITICAL }]"
 >
   <!-- Input Elements -->
 </dt-input-group>
@@ -220,9 +220,9 @@ export default {
 
 ```vue demo
 <dt-input-group
-  name="input-group-with-error-messages-hidden"
-  legend="With Error Messages Hidden"
-  :messages="[{ message: 'Error', type: 'error' }]"
+  name="input-group-with-critical-messages-hidden"
+  legend="With Critical Messages Hidden"
+  :messages="[{ message: 'Critical', type: 'critical' }]"
   :show-messages="false"
 >
   <dt-radio value="apple"><span>Apple</span></dt-radio>
@@ -231,9 +231,9 @@ export default {
 </dt-input-group>
 <!-- @code -->
 <dt-input-group
-  name="input-group-with-error-messages-hidden"
-  legend="With Error Messages Hidden"
-  :messages="[{ message: `Error`, type: VALIDATION_MESSAGE_TYPES.ERROR }]"
+  name="input-group-with-critical-messages-hidden"
+  legend="With Critical Messages Hidden"
+  :messages="[{ message: `Critical`, type: VALIDATION_MESSAGE_TYPES.CRITICAL }]"
   :show-messages="false"
 >
   <!-- Input Elements -->

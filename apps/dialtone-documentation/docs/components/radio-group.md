@@ -85,7 +85,7 @@ The event handler is only needed if you need to do additional processing. The v-
   v-model="selectedFruits"
   name="fruits-radio-group"
   legend="Fruits"
-  @input="onInput"
+  @update:model-value="onInput"
 >
   <dt-radio value="pear">Pear</dt-radio>
   <dt-radio value="kiwi">Kiwi</dt-radio>
@@ -99,9 +99,9 @@ The event handler is only needed if you need to do additional processing. The v-
 <dt-stack gap="200">
   <div>
     <dt-radio-group
-      name="radio-group-with-success-message"
-      legend="With Success Message"
-      :messages='[{"message":"Success validation message","type":"success"}]'
+      name="radio-group-with-positive-message"
+      legend="With Positive Message"
+      :messages='[{"message":"Positive validation message","type":"positive"}]'
     >
       <dt-radio value="apple"><span >Apple</span></dt-radio>
       <dt-radio value="banana"><span >Banana</span></dt-radio>
@@ -121,9 +121,9 @@ The event handler is only needed if you need to do additional processing. The v-
   </div>
   <div>
     <dt-radio-group
-      name="radio-group-with-error-message"
-      legend="With Error Message"
-      :messages='[{"message":"Error validation message","type":"error"}]'
+      name="radio-group-with-critical-message"
+      legend="With Critical Message"
+      :messages='[{"message":"Critical validation message","type":"critical"}]'
     >
       <dt-radio value="apple"><span >Apple</span></dt-radio>
       <dt-radio value="banana"><span >Banana</span></dt-radio>

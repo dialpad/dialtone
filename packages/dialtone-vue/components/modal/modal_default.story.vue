@@ -1,9 +1,9 @@
 <template>
   <div>
     <dt-modal
-      :title="$attrs.title"
-      :banner-title="$attrs.bannerTitle"
-      :show="isOpen"
+      :header-text="$attrs.headerText"
+      :banner-header-text="$attrs.bannerHeaderText"
+      :open="isOpen"
       :kind="$attrs.kind"
       :size="$attrs.size"
       :copy="$attrs.copy"
@@ -12,13 +12,13 @@
       :banner-kind="$attrs.bannerKind"
       :dialog-class="$attrs.dialogClass"
       :content-class="$attrs.contentClass"
-      :hide-close="$attrs.hideClose"
+      :show-close="$attrs.showClose"
       :labelled-by-id="$attrs.labelledById"
       :fixed-header-footer="$attrs.fixedHeaderFooter"
       :close-on-click="$attrs.closeOnClick"
       :append-to="$attrs.appendTo"
       :content-mode="$attrs.contentMode"
-      @update:show="close"
+      @update:open="close"
     >
       <template
         v-if="$attrs.banner"
@@ -92,20 +92,20 @@ export default {
 
   data () {
     return {
-      isOpen: this.$attrs.show,
+      isOpen: this.$attrs.open,
     };
   },
 
   computed: {
     secondaryButtonKind () {
-      return this.$attrs.kind === 'danger' ? 'muted' : 'default';
+      return this.$attrs.kind === 'critical' ? 'muted' : 'default';
     },
   },
 
   watch: {
-    show: {
+    open: {
       handler () {
-        this.isOpen = this.$attrs.show;
+        this.isOpen = this.$attrs.open;
       },
     },
   },

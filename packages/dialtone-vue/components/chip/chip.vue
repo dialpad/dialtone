@@ -38,7 +38,7 @@
       </span>
     </component>
     <dt-button
-      v-if="!hideClose"
+      v-if="showClose"
       :class="chipCloseButtonClasses()"
       data-qa="dt-chip-close"
       :aria-label="closeButtonTitle"
@@ -93,12 +93,12 @@ export default {
     },
 
     /**
-     * Hides the close button on the chip
+     * Shows the close button on the chip
      * @values true, false
      */
-    hideClose: {
+    showClose: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     /**
@@ -245,7 +245,7 @@ export default {
     },
 
     onClose () {
-      if (!this.hideClose) {
+      if (this.showClose) {
         this.$emit('close');
       }
     },

@@ -158,8 +158,9 @@ import DtcRenderer from './renderer/renderer.vue';
 import { enumerateGroups } from '@/src/lib/utils';
 import { shouldExclude } from '@/src/lib/exclusion_rules';
 import { buildDependencyMap, shouldHideProp } from '@/src/lib/prop_dependencies';
-import { computed, nextTick, onErrorCaptured, reactive, ref } from 'vue';
+import { computed, nextTick, onErrorCaptured, reactive, ref, watch } from 'vue';
 import { cachedRef, computedModel } from '@/src/lib/utils_vue';
+import { clearTokenCache } from '@/src/lib/tokens';
 import { getComponentInfo } from '@/src/lib/info';
 import {
   SETTINGS_BACKGROUND_KEY,
@@ -217,14 +218,6 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  rootClass: {
-    type: String,
-    default: '',
-  },
-  headerClass: {
-    type: String,
-    default: '',
-  },
   devMode: {
     type: Boolean,
     default: false,
@@ -240,7 +233,7 @@ const _forceReset = ref(0);
 
 const variantOptions = computed(() => {
   return Object.keys(props.variants ?? {})
-    .filter(key => key !== 'exclusions')
+    .filter(key => key !== 'exclusions' && key !== 'defaults')
     .map(key => ({ value: key, label: key }));
 });
 
@@ -359,6 +352,8 @@ const settings = computedModel(
   },
 );
 
+watch(() => settings.value.root.theme, clearTokenCache);
+
 function updateVariant (e) {
   _presetChanging = true;
   selectedVariant.value = e;
@@ -369,20 +364,29 @@ function updateVariant (e) {
   nextTick(() => { _presetChanging = false; });
 }
 
+/**
+ * Merges variant override data into an info object.
+ *
+ * @param {object} info - The info object to merge into.
+ * @param {object} variantData - The variant data to merge.
+ */
+function mergeVariantData (info, variantData) {
+  if (!variantData) return;
+  Object.entries(variantData).forEach(([memberGroup, members]) => {
+    if (memberGroup === 'exclusions') return;
+    Object.entries(members).forEach(([memberName, member]) => {
+      const infoMember = info[memberGroup]?.find(m => m.name === memberName);
+      if (infoMember) Object.assign(infoMember, member);
+    });
+  });
+}
+
 const defaultInfo = computed(() => {
   const info = cloneInfoMembers(
     getComponentInfo(props.component, props.documentation),
   );
-  const defaultVariant = props.variants?.default;
-  if (defaultVariant) {
-    Object.entries(defaultVariant).forEach(([memberGroup, members]) => {
-      if (memberGroup === 'exclusions') return;
-      Object.entries(members).forEach(([memberName, member]) => {
-        const infoMember = info[memberGroup]?.find(m => m.name === memberName);
-        if (infoMember) Object.assign(infoMember, member);
-      });
-    });
-  }
+  mergeVariantData(info, props.variants?.defaults);
+  mergeVariantData(info, props.variants?.default);
   return info;
 });
 
@@ -414,19 +418,8 @@ function initializeInfo () {
     getComponentInfo(props.component, props.documentation),
   );
 
-  const variantInfo = props.variants?.[activeVariant.value];
-
-  if (variantInfo) {
-    Object.entries(variantInfo).forEach(([memberGroup, members]) => {
-      if (memberGroup === 'exclusions') return;
-      Object.entries(members).forEach(([memberName, member]) => {
-        const infoMember = info[memberGroup]?.find(m => m.name === memberName);
-        if (infoMember) {
-          Object.assign(infoMember, member);
-        }
-      });
-    });
-  }
+  mergeVariantData(info, props.variants?.defaults);
+  mergeVariantData(info, props.variants?.[activeVariant.value]);
 
   info.exclusions = props.variants?.exclusions ?? [];
 
@@ -588,13 +581,15 @@ export default {
     padding-inline-start: var(--dt-spacing-400);
     display: grid;
     flex: 1;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+    place-items: center;
 
     @media screen and (min-width: 640px) {
       min-block-size: var(--dt-size-925);
     }
+  }
+
+  &__component-content {
+    display: contents;
   }
 
   &__resizer {
@@ -619,7 +614,7 @@ export default {
   }
 
   &__controls {
-    inline-size: var(--dt-size-875);
+    inline-size: var(--dt-size-900);
     max-inline-size: var(--dt-size-1000);
     flex-shrink: 0;
     max-block-size: var(--dt-size-950);
@@ -627,6 +622,7 @@ export default {
 
     :where(.dialtone-playground--fullscreen) & {
       @media screen and (min-width: 640px) {
+        inline-size: var(--dt-size-950);
         max-block-size: 100%;
       }
     }

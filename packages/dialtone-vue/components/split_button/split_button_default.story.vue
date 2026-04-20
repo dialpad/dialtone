@@ -15,7 +15,7 @@
     :end-aria-label="$attrs.endAriaLabel"
     :end-id="$attrs.endId"
     :end-tooltip-text="$attrs.endTooltipText"
-    :root-class="$attrs.rootClass"
+    :class="$attrs.class"
     :size="$attrs.size"
     :start-to="$attrs.startTo"
     :start-replace="$attrs.startReplace"

@@ -4,6 +4,14 @@
 //
 //  https://dialtone.dialpad.com/components/progress-circle
 
+//  @@  @PROPERTY REGISTRATIONS
+//  ----------------------------------------------------------------------------
+//  `--progress-size` is only read on `.d-progress-circle` itself, so registering
+//  as non-inheriting is safe. `--progress-color` is NOT registered — it is set
+//  on `.d-progress-circle` and consumed by descendant `.d-progress-circle__shape`
+//  elements via inheritance.
+@property --progress-size { syntax: "*"; inherits: false; }
+
 @layer dialtone.components {
 .d-progress-circle {
   --progress-size: var(--dt-icon-size-500);
@@ -29,7 +37,7 @@
   // AI fill gradient is an SVG <linearGradient> applied in the Vue component;
   // the track intentionally keeps the default border color.
   &--ai { --progress-color: var(--dt-color-border-bold); }
-  &--info { --progress-color: var(--dt-color-blue-600); } // TODO: I still have to create "info" design tokens
+  &--info { --progress-color: var(--dt-color-border-info); }
 }
 
 .d-progress-circle__bar {

@@ -4,6 +4,7 @@
   "description": "Documentation generation and validation for Dialtone",
   "type": "module",
   "scripts": {
+    "build": "node src/generators/build-ai-docs.mjs",
     "test": "vitest run",
     "test:watch": "vitest"
   },

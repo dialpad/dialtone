@@ -101,8 +101,8 @@ import { alignContent } from '@data/flex.json';
 <utility-class-table>
  <template #content>
     <tbody>
-      <tr v-for="{ class: className, output } in alignContent">
-        <th scope="row" class="d-code--sm d-docsite-code">.d-{{ className }}</th>
+      <tr v-for="{ class: className, output, deprecated } in alignContent" >
+        <th scope="row" class="d-code--sm d-docsite-code">.d-{{ className }} <dt-badge v-if="deprecated" type="critical" class="d-ff-sans">Deprecated</dt-badge></th>
         <td class="d-code--sm">{{ output }}</td>
       </tr>
     </tbody>

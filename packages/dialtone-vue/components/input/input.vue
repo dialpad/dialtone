@@ -1,8 +1,8 @@
 <template>
   <div
     ref="container"
-    :class="[rootClass, 'd-input__root', { 'd-input--hidden': hidden }]"
-    v-bind="addClassStyleAttrs($attrs)"
+    :class="['d-input__root', { 'd-input--hidden': hidden }, $attrs.class]"
+    :style="$attrs.style"
     data-qa="dt-input"
   >
     <label
@@ -11,9 +11,9 @@
       data-qa="dt-input-label-wrapper"
     >
       <!-- @slot Slot for label, defaults to label prop -->
-      <slot name="labelSlot">
+      <slot name="label">
         <dt-text
-          v-if="labelVisible && label"
+          v-if="showLabel && label"
           ref="label"
           data-qa="dt-input-label"
           kind="label"
@@ -85,7 +85,7 @@
           :autocomplete="$attrs.autocomplete ?? 'off'"
           :class="inputClasses()"
           :maxlength="shouldLimitMaxLength ? validationProps.length.max : null"
-          :aria-label="!labelVisible && label ? label : undefined"
+          :aria-label="!showLabel && label ? label : undefined"
           data-qa="dt-input-input"
           v-bind="removeClassStyleAttrs($attrs)"
           v-on="inputListeners"
@@ -100,7 +100,7 @@
           :autocomplete="$attrs.autocomplete ?? 'off'"
           :class="inputClasses()"
           :maxlength="shouldLimitMaxLength ? validationProps.length.max : null"
-          :aria-label="!labelVisible && label ? label : undefined"
+          :aria-label="!showLabel && label ? label : undefined"
           data-qa="dt-input-input"
           v-bind="removeClassStyleAttrs($attrs)"
           v-on="inputListeners"
@@ -152,7 +152,6 @@ import {
   getValidationState,
   hasSlotContent,
   removeClassStyleAttrs,
-  addClassStyleAttrs,
 } from '@/common/utils';
 import { DtValidationMessages } from '@/components/validation_messages';
 import { DtText, TEXT_SIZE_MODIFIERS, TEXT_STRENGTH_MODIFIERS } from '@/components/text';
@@ -214,7 +213,8 @@ export default {
     },
 
     /**
-     * Label for the input
+     * Label for the input.
+     * Can also be overridden with a slot of the same name.
      */
     label: {
       type: String,
@@ -225,7 +225,7 @@ export default {
      * Determines visibility of input label.
      * @values true, false
      */
-    labelVisible: {
+    showLabel: {
       type: Boolean,
       default: true,
     },
@@ -272,16 +272,6 @@ export default {
      * same api as Vue's built-in handling of the class attribute.
      */
     inputWrapperClass: {
-      type: [String, Object, Array],
-      default: '',
-    },
-
-    /**
-     * Additional class name for the root element.
-     * Can accept all of: String, Object, and Array, i.e. has the
-     * same api as Vue's built-in handling of the class attribute.
-     */
-    rootClass: {
       type: [String, Object, Array],
       default: '',
     },
@@ -356,14 +346,6 @@ export default {
 
   emits: [
     /**
-     * Native input event
-     *
-     * @event input
-     * @type {String}
-     */
-    'input',
-
-    /**
      * Native input blur event
      *
      * @event blur
@@ -405,6 +387,7 @@ export default {
     /**
      * Event fired to sync the modelValue prop with the parent component
      * @event update:modelValue
+     * @type {String | Number}
      */
     'update:modelValue',
 
@@ -476,7 +459,6 @@ export default {
           this.isComposing = false;
           this.justEndedComposition = true;
           const val = this.$refs.input.value;
-          this.$emit('input', val);
           this.$emit('update:modelValue', val);
           // Clear the flag after the current synchronous event processing so
           // Firefox's post-compositionend input event is skipped, but the
@@ -492,7 +474,6 @@ export default {
             const files = Array.from(event.target.files);
             val = files.map(file => file.name);
           }
-          this.$emit('input', val);
           this.$emit('update:modelValue', val);
         },
 
@@ -558,7 +539,7 @@ export default {
       } else if (this.inputLength <= this.validationProps.length.max) {
         return this.validationProps.length.warn ? VALIDATION_MESSAGE_TYPES.WARNING : null;
       } else {
-        return VALIDATION_MESSAGE_TYPES.ERROR;
+        return VALIDATION_MESSAGE_TYPES.CRITICAL;
       }
     },
 
@@ -651,7 +632,6 @@ export default {
 
   methods: {
     removeClassStyleAttrs,
-    addClassStyleAttrs,
     inputClasses () {
       return [
         'd-input__input',
@@ -700,7 +680,6 @@ export default {
     },
 
     emitClearEvents () {
-      this.$emit('input', '');
       this.$emit('clear');
       this.$emit('update:modelValue', '');
     },
@@ -734,7 +713,7 @@ export default {
     runValidations () {
       if (!this.label && !this.$attrs['aria-label']) {
         console.info(
-          '[Dialtone] A label is required for accessibility. Provide a label prop and use label-visible="false" to hide it visually.',
+          '[Dialtone] A label is required for accessibility. Provide a label prop and use show-label="false" to hide it visually.',
         );
       }
     },

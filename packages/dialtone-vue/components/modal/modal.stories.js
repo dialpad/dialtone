@@ -17,8 +17,8 @@ viverra iaculis. Interdum et malesuada fames ac ante ipsum primis in faucibus. V
 maximus ipsum ex. Curabitur elementum luctus augue, quis eleifend tortor feugiat vel. \
 Maecenas maximus, ipsum et laoreet congue, diam massa aliquam libero, at pellentesque \
 orci ipsum et velit.`,
-  title: 'Example Title',
-  onClose: action('update:show'),
+  headerText: 'Example Title',
+  onClose: action('update:open'),
 };
 
 export const argTypesData = {
@@ -57,6 +57,16 @@ export const argTypesData = {
   },
 
   // Props
+  headerText: {
+    control: {
+      type: 'text',
+    },
+  },
+  bannerHeaderText: {
+    control: {
+      type: 'text',
+    },
+  },
   contentMode: CONTENT_MODE_ARG_TYPE,
   size: {
     options: Object.keys(MODAL_SIZE_MODIFIERS),
@@ -98,12 +108,12 @@ export const argTypesData = {
       type: 'boolean',
     },
   },
-  hideClose: {
+  showClose: {
     control: {
       type: 'boolean',
     },
   },
-  show: {
+  open: {
     control: {
       type: 'boolean',
     },
@@ -116,7 +126,7 @@ export const argTypesData = {
   },
 
   // Events
-  'update:show': {
+  'update:open': {
     description: `The modal will emit a "false" boolean value for this event when the \
 user performs a modal-closing action.  Parent components can sync on this value to create \
 a 2-way binding to control modal visibility.`,
@@ -151,7 +161,7 @@ export const Default = {
   parameters: {
     percy: {
       args: {
-        show: true,
+        open: true,
       },
     },
   },
@@ -183,17 +193,17 @@ export const WithBanner = {
   render: DefaultTemplate,
 
   args: {
-    bannerTitle: 'Example banner',
+    bannerHeaderText: 'Example banner',
   },
 
   parameters: { ...Default.parameters },
 };
 
-export const WithDangerStyle = {
+export const WithCriticalStyle = {
   render: DefaultTemplate,
 
   args: {
-    kind: 'danger',
+    kind: 'critical',
     showFooter: true,
   },
 

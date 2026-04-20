@@ -26,14 +26,22 @@ export default {
   props: {
     /**
      * Applies the link variant styles
-     * @values null, danger, warning, success, muted, mention
+     * @values null, critical, warning, positive, info, muted, mention
+     */
+    tone: {
+      type: String,
+      default: '',
+      validator (tone) {
+        return LINK_VARIANTS.includes(tone);
+      },
+    },
+
+    /**
+     * @deprecated Use tone
      */
     kind: {
       type: String,
-      default: '',
-      validator (kind) {
-        return LINK_VARIANTS.includes(kind);
-      },
+      default: undefined,
     },
 
     /**
@@ -92,6 +100,10 @@ export default {
   },
 
   computed: {
+    resolvedTone () {
+      return this.kind ?? this.tone;
+    },
+
     computedTag () {
       if (this.to) {
         return resolveComponent('RouterLink');
@@ -116,7 +128,7 @@ export default {
     getLinkClasses () {
       return [
         'd-link',
-        getLinkKindModifier(this.kind, this.inverted),
+        getLinkKindModifier(this.resolvedTone, this.inverted),
         { 'd-link--no-underline': !this.underline },
       ];
     },

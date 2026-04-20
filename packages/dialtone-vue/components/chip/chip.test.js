@@ -109,9 +109,9 @@ describe('DtChip Tests', () => {
       });
     });
 
-    describe('When hide close button', () => {
+    describe('When showClose is false', () => {
       it('should not render remove button', () => {
-        mockProps = { hideClose: true };
+        mockProps = { showClose: false };
 
         updateWrapper();
 

@@ -29,7 +29,7 @@
         :size="200"
         numeric
         :density="400"
-        :tone="inverted ? 'secondary-inverted' : 'tertiary'"
+        tone="tertiary"
         aria-hidden="true"
         :class="[
           'd-keyboard-shortcut__item',

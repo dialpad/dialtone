@@ -1,3 +1,7 @@
+//  Register gap modifier var as non-inheriting so nested description lists
+//  don't pick up an ancestor's gap override.
+@property --description-list-gap { syntax: "*"; inherits: false; }
+
 @layer dialtone.components {
 .d-description-list {
   display: flex;

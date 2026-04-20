@@ -14,8 +14,8 @@
     :description-child-props="$attrs.descriptionChildProps"
     :indeterminate="$attrs.indeterminate"
     :messages="$attrs.messages"
-    :root-class="$attrs.rootClass"
-    @input="$attrs.onInput"
+    :class="$attrs.class"
+    @update:model-value="$attrs['onUpdate:modelValue']"
     @focusin="$attrs.onFocusIn"
     @focusout="$attrs.onFocusOut"
   >

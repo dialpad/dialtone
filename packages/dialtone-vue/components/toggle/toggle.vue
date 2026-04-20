@@ -1,10 +1,10 @@
 <template>
   <div
-    :class="['d-toggle-wrapper', wrapperClass]"
-    v-bind="addClassStyleAttrs($attrs)"
+    :class="['d-toggle-wrapper', $attrs.class]"
+    :style="$attrs.style"
   >
     <label
-      v-if="labelVisible && hasSlotContent($slots.default)"
+      v-if="showLabel && hasSlotContent($slots.default)"
       :class="labelClass"
       :for="id"
       v-bind="labelChildProps"
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { getUniqueString, hasSlotContent, removeClassStyleAttrs, addClassStyleAttrs } from '@/common/utils';
+import { getUniqueString, hasSlotContent, removeClassStyleAttrs } from '@/common/utils';
 import { TOGGLE_CHECKED_VALUES, TOGGLE_SIZE_MODIFIERS } from '@/components/toggle/toggle_constants';
 
 /**
@@ -67,7 +67,6 @@ export default {
 
     /**
      * Value of the toggle
-     * @model modelValue
      * @values true, false, 'mixed'
      */
     modelValue: {
@@ -100,7 +99,7 @@ export default {
      * Determines visibility of toggle label.
      * @values true, false
      */
-    labelVisible: {
+    showLabel: {
       type: Boolean,
       default: true,
     },
@@ -123,14 +122,6 @@ export default {
     },
 
     /**
-     * Additional styling for the wrapper element
-     */
-    wrapperClass: {
-      type: [String, Array, Object],
-      default: undefined,
-    },
-
-    /**
      * A set of props that are passed into the label container
      */
     labelChildProps: {
@@ -141,20 +132,10 @@ export default {
 
   emits: [
     /**
-     * Toggle change event
+     * Event fired to sync the modelValue prop with the parent component
      *
-     * @event change
+     * @event update:modelValue
      * @type {Boolean}
-     * @model change
-     */
-    'change',
-
-    /**
-     * v-model event event
-     *
-     * @event change
-     * @type {Boolean}
-     * @model change
      */
     'update:modelValue',
   ],
@@ -206,10 +187,8 @@ export default {
   },
 
   methods: {
-    addClassStyleAttrs,
     toggleCheckedValue () {
       this.$emit('update:modelValue', !this.internalChecked);
-      this.$emit('change', !this.internalChecked);
 
       if (this.toggleOnClick) {
         this.internalChecked = !this.internalChecked;
@@ -221,10 +200,10 @@ export default {
     },
 
     runValidations () {
-      const hasVisibleLabel = this.labelVisible && this.hasSlotLabel();
+      const hasVisibleLabel = this.showLabel && this.hasSlotLabel();
       if (!hasVisibleLabel && !this.$attrs['aria-label']) {
         console.info(
-          '[Dialtone] A label is required for accessibility. Provide a label and use label-visible="false" to hide it visually.',
+          '[Dialtone] A label is required for accessibility. Provide a label and use show-label="false" to hide it visually.',
         );
       }
     },

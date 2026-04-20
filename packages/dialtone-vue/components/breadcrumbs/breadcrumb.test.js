@@ -122,13 +122,13 @@ describe('DtBreadcrumb Tests', () => {
   });
 
   describe('Extendability Tests', () => {
-    describe('When a rootClass is provided to a breadcrumb item', () => {
-      it('should include the root class', () => {
+    describe('When a class is provided to a breadcrumb item', () => {
+      it('should include the class', () => {
         mockProps = {
           breadcrumbs: [{
             url: '#',
             label: 'Root',
-            rootClass: MOCK_ROOT_CLASS,
+            class: MOCK_ROOT_CLASS,
           }],
         }
 

@@ -21,34 +21,12 @@ export const argsData = {
   disabled: false,
   modelValue: SELECT_OPTIONS[0].value,
   options: SELECT_OPTIONS,
-  onInput: action('input'),
+  'onUpdate:modelValue': action('update:modelValue'),
   onChange: action('change'),
 };
 
 export const argTypesData = {
   // Slots
-  labelSlot: {
-    name: 'label',
-    description: 'Slot for label, defaults to label prop',
-    control: 'text',
-    table: {
-      category: 'slots',
-      type: {
-        summary: 'VNode',
-      },
-    },
-  },
-  descriptionSlot: {
-    name: 'description',
-    description: 'Slot for description, defaults to description prop',
-    control: 'text',
-    table: {
-      category: 'slots',
-      type: {
-        summary: 'VNode',
-      },
-    },
-  },
   default: {
     control: 'text',
     table: {
@@ -207,7 +185,7 @@ export const argTypesData = {
   },
 
   // Action Event Handlers
-  onInput: {
+  'onUpdate:modelValue': {
     table: {
       disable: true,
     },

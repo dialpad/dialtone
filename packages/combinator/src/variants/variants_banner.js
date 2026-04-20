@@ -1,5 +1,5 @@
- 
- 
+
+
 export default {
   default: {
     slots: {
@@ -8,7 +8,7 @@ export default {
       },
     },
     props: {
-      title: {
+      headerText: {
         initialValue: 'Example banner',
       },
       kind: {

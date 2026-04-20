@@ -57,7 +57,7 @@
           :input-wrapper-class="inputWrapperClass"
           :disabled="disabled"
           :aria-label="label"
-          :label="labelVisible ? label : ''"
+          :label="showLabel ? label : ''"
           :description="description"
           :placeholder="inputPlaceHolder"
           :show-messages="showInputMessages"
@@ -159,7 +159,7 @@ export default {
      * Determines visibility of input label.
      * @values true, false
      */
-    labelVisible: {
+    showLabel: {
       type: Boolean,
       default: true,
     },
@@ -378,12 +378,12 @@ export default {
 
   emits: [
     /**
-     * Native input event
+     * Event fired to sync the modelValue prop with the parent component
      *
-     * @event input
-     * @type {String }
+     * @event update:modelValue
+     * @type {String}
      */
-    'input',
+    'update:modelValue',
 
     /**
      * Event fired when item selected
@@ -466,7 +466,7 @@ export default {
       return {
         ...extractVueListeners(this.$attrs),
         onInput: event => {
-          this.$emit('input', event);
+          this.$emit('update:modelValue', event);
           if (this.hasSuggestionList) {
             this.showComboboxList();
           }

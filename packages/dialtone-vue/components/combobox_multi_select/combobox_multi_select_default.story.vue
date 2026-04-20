@@ -2,7 +2,7 @@
   <dt-combobox-multi-select
     ref="comboboxMultiSelect"
     :label="$attrs.label"
-    :label-visible="$attrs.labelVisible"
+    :show-label="$attrs.showLabel"
     :description="$attrs.description"
     :size="$attrs.size"
     :placeholder="$attrs.placeholder"
@@ -25,7 +25,7 @@
     :append-to="$attrs.appendTo"
     :transition="$attrs.transition"
     :reserved-right-space="$attrs.reservedRightSpace"
-    @input="onComboboxInput"
+    @update:model-value="onComboboxInput"
     @select="onComboboxSelect"
     @remove="onComboboxRemove"
     @max-selected="$attrs.onMaxSelected"

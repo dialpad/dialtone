@@ -70,7 +70,6 @@
               :key="filter.name"
               :label="filter.name"
               :value="filter.name"
-              @input="$event => selectedConversationType = $event"
             />
           </dt-radio-group>
         </template>
@@ -101,7 +100,7 @@
       <span class="d-label--sm">Radio selection (always active)</span>
       <dt-filter-pill
         v-model="internalExternal"
-        hide-clear
+        :show-clear="false"
       >
         <template #default>
           {{ selectedIEFilter || 'Internal and external' }}
@@ -116,7 +115,6 @@
               :key="filter.name"
               :label="filter.name"
               :value="filter.name"
-              @input="$event => selectedIEFilter = $event"
             />
           </dt-radio-group>
         </template>

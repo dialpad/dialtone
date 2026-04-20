@@ -89,7 +89,9 @@ function freshContainer () {
     render(null, wrapper.value.firstChild);
   }
   wrapper.value.replaceChildren();
-  return wrapper.value.appendChild(document.createElement('div'));
+  const container = document.createElement('div');
+  container.className = 'dialtone-playground__component-content';
+  return wrapper.value.appendChild(container);
 }
 
 /**
@@ -132,9 +134,9 @@ function renderTarget () {
  */
 function renderError (exception, container) {
   render(h(DtNotice, {
-    kind: 'error',
-    hideClose: true,
-    title: ERROR_MESSAGE,
+    kind: 'critical',
+    showClose: false,
+    headerText: ERROR_MESSAGE,
   }, {
     default: () => exception.toString(),
   }), container);

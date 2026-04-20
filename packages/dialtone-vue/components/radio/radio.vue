@@ -1,7 +1,7 @@
 <template>
   <div
-    :class="rootClass"
-    v-bind="addClassStyleAttrs($attrs)"
+    :class="$attrs.class"
+    :style="$attrs.style"
   >
     <label :class="['d-radio-group', { 'd-radio-group--disabled': internalDisabled }]">
       <div class="d-radio__input">
@@ -12,7 +12,7 @@
           :disabled="internalDisabled"
           type="radio"
           :class="['d-radio', inputValidationClass, inputClass]"
-          :aria-label="!labelVisible && label ? label : undefined"
+          :aria-label="!showLabel && label ? label : undefined"
           v-bind="removeClassStyleAttrs($attrs)"
           v-on="inputListeners"
         >
@@ -73,7 +73,7 @@ import {
 import { RADIO_INPUT_VALIDATION_CLASSES } from './radio_constants';
 import { DtValidationMessages } from '../validation_messages';
 import { DtText, TEXT_SIZE_MODIFIERS, TEXT_STRENGTH_MODIFIERS } from '@/components/text';
-import { hasSlotContent, removeClassStyleAttrs, addClassStyleAttrs } from '@/common/utils';
+import { hasSlotContent, removeClassStyleAttrs } from '@/common/utils';
 
 /**
  * Radios are control elements that allow the user to make a single selection.
@@ -103,7 +103,7 @@ export default {
      * Determines visibility of radio label.
      * @values true, false
      */
-    labelVisible: {
+    showLabel: {
       type: Boolean,
       default: true,
     },
@@ -131,16 +131,9 @@ export default {
 
   emits: [
     /**
-     * Native input event
-     *
-     * @event input
-     * @type {String | Number}
-     */
-    'input',
-    /**
      * Event fired to sync the modelValue prop with the parent component
      *
-     * @event input
+     * @event update:modelValue
      * @type {String | Number}
      */
     'update:modelValue',
@@ -182,7 +175,7 @@ export default {
     },
 
     hasLabel () {
-      return this.labelVisible && this.hasLabelContent;
+      return this.showLabel && this.hasLabelContent;
     },
 
     resolvedLabelSize () {
@@ -234,12 +227,11 @@ export default {
 
   methods: {
     removeClassStyleAttrs,
-    addClassStyleAttrs,
 
     runValidations () {
       if (!this.hasLabelContent && !this.$attrs['aria-label']) {
         console.info(
-          '[Dialtone] A label is required for accessibility. Provide a label prop and use label-visible="false" to hide it visually.',
+          '[Dialtone] A label is required for accessibility. Provide a label prop and use show-label="false" to hide it visually.',
         );
       }
     },
@@ -248,7 +240,6 @@ export default {
       if (value !== this.radioGroupValue) {
         // update provided value if injected
         this.setGroupValue(value);
-        this.$emit('input', value);
         this.$emit('update:modelValue', value);
       }
     },

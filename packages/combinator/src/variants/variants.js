@@ -3,6 +3,7 @@ import DtBadge from './variants_badge.js';
 import DtBanner from './variants_banner.js';
 import DtButton from './variants_button.js';
 import DtButtonGroup from './variants_button_group.js';
+import DtBox from './variants_box.js';
 import DtBreadcrumbs from './variants_breadcrumbs.js';
 import DtCard from './variants_card.js';
 import DtCheckbox from './variants_checkbox.js';
@@ -64,6 +65,7 @@ export default function variants () {
     DtBanner,
     DtButton,
     DtButtonGroup,
+    DtBox,
     DtBreadcrumbs,
     DtCard,
     DtCheckbox,

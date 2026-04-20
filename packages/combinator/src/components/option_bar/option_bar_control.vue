@@ -69,7 +69,7 @@
         type="textarea"
         :size="100"
         spellcheck="false"
-        root-class="d-mbs-75"
+        class="d-mbs-75"
       />
     </component>
   </div>

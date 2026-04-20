@@ -31,7 +31,7 @@ import {
 
 /**
  * Validation messages are used to convey information to the user about the current state of the input element.
- * These messages can have an error, warning or success type.
+ * These messages can have a critical, warning or positive type.
  * @see https://dialtone.dialpad.com/components/validation_messages.html
  */
 export default {
@@ -51,7 +51,7 @@ export default {
 
     /**
      * Array of validation messages. Each message has the following structure:
-     * `{ message: "Some informative message", type: "error|warning|success"}`
+     * `{ message: "Some informative message", type: "critical|warning|positive"}`
      */
     validationMessages: {
       type: Array,
@@ -90,9 +90,9 @@ export default {
 
     messageTypeClass (type) {
       const messageTypesClasses = {
-        error: 'base-input__message--error d-validation-message--error',
+        critical: 'base-input__message--critical d-validation-message--critical',
         warning: 'base-input__message--warning d-validation-message--warning',
-        success: 'base-input__message--success d-validation-message--success',
+        positive: 'base-input__message--positive d-validation-message--positive',
       };
 
       return messageTypesClasses[type];

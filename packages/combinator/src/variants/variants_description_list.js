@@ -1,6 +1,12 @@
- 
+
 
 export default {
+  defaults: {
+    props: {
+      gap: { tokenCategory: 'spacing' },
+    },
+  },
+
   default: {
     props: {
       items: {
@@ -14,7 +20,7 @@ export default {
         initialValue: 'row',
       },
       gap: {
-        initialValue: '400',
+        initialValue: '100',
       },
     },
   },

@@ -30,17 +30,35 @@
         "value": "{color.gold.700}",
         "type": "color"
       },
-      "success": {
+      "info": {
+        "value": "{color.blue.700}",
+        "type": "color"
+      },
+      "info-strong": {
+        "value": "{color.blue.800}",
+        "type": "color"
+      },
+      "positive": {
         "value": "{color.green.600}",
         "type": "color"
+      },
+      "success": {
+        "value": "{color.green.600}",
+        "type": "color",
+        "$deprecated": "Use positive instead."
       },
       "critical-strong": {
         "value": "{color.red.900}",
         "type": "color"
       },
-      "success-strong": {
+      "positive-strong": {
         "value": "{color.green.800}",
         "type": "color"
+      },
+      "success-strong": {
+        "value": "{color.green.800}",
+        "type": "color",
+        "$deprecated": "Use positive-strong instead."
       },
       "primary-inverted": {
         "value": "{color.neutral.black}",
@@ -62,13 +80,23 @@
         "value": "{color.gold.300}",
         "type": "color"
       },
-      "success-inverted": {
+      "positive-inverted": {
         "value": "{color.green.300}",
         "type": "color"
       },
-      "success-strong-inverted": {
+      "positive-strong-inverted": {
         "value": "{color.green.200}",
         "type": "color"
+      },
+      "success-inverted": {
+        "value": "{color.green.300}",
+        "type": "color",
+        "$deprecated": "Use positive-inverted instead."
+      },
+      "success-strong-inverted": {
+        "value": "{color.green.200}",
+        "type": "color",
+        "$deprecated": "Use positive-strong-inverted instead."
       }
     },
     "link": {
@@ -569,6 +597,10 @@
         "value": "{color.gold.800}",
         "type": "color"
       },
+      "info": {
+        "value": "{color.blue.800}",
+        "type": "color"
+      },
       "success": {
         "value": "{color.green.600}",
         "type": "color"
@@ -583,6 +615,10 @@
       },
       "warning-subtle": {
         "value": "{color.gold.600}",
+        "type": "color"
+      },
+      "info-subtle": {
+        "value": "{color.blue.300}",
         "type": "color"
       },
       "success-subtle": {
@@ -603,6 +639,10 @@
       },
       "warning-strong": {
         "value": "{color.gold.900}",
+        "type": "color"
+      },
+      "info-strong": {
+        "value": "{color.blue.900}",
         "type": "color"
       },
       "brand-strong": {

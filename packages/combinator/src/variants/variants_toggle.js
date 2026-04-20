@@ -1,5 +1,3 @@
- 
-
 export default {
   default: {
     slots: {
@@ -8,22 +6,13 @@ export default {
       },
     },
     props: {
-      wrapperClass: { initialValue: 'd-g-200' },
+      labelClass: { initialValue: 'd-pie-100' },
     },
   },
 
   'hide label': {
     props: {
-      labelVisible: { initialValue: false },
-    },
-    slots: {
-      default: { initialValue: 'Label' },
-    },
-  },
-
-  'with space between': {
-    props: {
-      wrapperClass: { initialValue: 'd-g-200 d-w-200 d-jc-space-between' },
+      showLabel: { initialValue: false },
     },
     slots: {
       default: { initialValue: 'Label' },

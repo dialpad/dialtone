@@ -134,7 +134,7 @@
         </dt-button>
         <dt-button
           importance="clear"
-          kind="danger"
+          kind="critical"
           class="d-fc-critical-strong"
         >
           <template #icon>

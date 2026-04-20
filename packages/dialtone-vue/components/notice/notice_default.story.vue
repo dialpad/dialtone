@@ -1,14 +1,14 @@
 <template>
   <dt-notice
     :kind="$attrs.kind"
-    :title="$attrs.title"
-    :title-id="$attrs.titleId"
+    :header-text="$attrs.headerText"
+    :header-id="$attrs.headerId"
     :content-id="$attrs.contentId"
     :important="$attrs.important"
-    :hide-close="$attrs.hideClose"
-    :hide-action="$attrs.hideAction"
+    :show-close="$attrs.showClose"
+    :show-action="$attrs.showAction"
     :truncate-text="$attrs.truncateText"
-    :hide-icon="$attrs.hideIcon"
+    :show-icon="$attrs.showIcon"
     @close="$attrs.onClose($event);"
   >
     <span
@@ -44,12 +44,6 @@
     >
       <dt-icon :name="$attrs.icon" />
     </template>
-    <template
-      v-if="$attrs.titleOverride"
-      #titleOverride
-    >
-      <span v-html="$attrs.titleOverride" />
-    </template>
   </dt-notice>
 </template>
 
@@ -65,7 +59,7 @@ export default {
 
   computed: {
     shouldInvertButton () {
-      return this.$attrs.kind === 'base' || this.$attrs.kind === 'error' || this.$attrs.kind === 'info';
+      return this.$attrs.kind === 'base' || this.$attrs.kind === 'critical' || this.$attrs.kind === 'info';
     },
 
     isInverted () {

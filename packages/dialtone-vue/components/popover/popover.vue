@@ -163,13 +163,13 @@ export default {
 
   props: {
     /**
-     * Controls whether the popover is shown. Leaving this null will have the popover trigger on click by default.
-     * If you set this value, the default trigger behavior will be disabled, and you can control it as you need.
-     * Supports v-model
+     * Controls whether the popover is shown. When null (default), the popover
+     * toggles on click. When set to true or false, the default trigger is
+     * disabled and the parent controls visibility via v-model:open.
      * @values null, true, false
      */
     open: {
-      type: Boolean,
+      type: [Boolean, null],
       default: null,
     },
 
@@ -324,11 +324,10 @@ export default {
     },
 
     /**
-     * Determines if the popover hides upon clicking the
-     * anchor or outside the content box.
+     * Closes the popover when clicking the anchor or outside the content box.
      * @values true, false
      */
-    hideOnClick: {
+    closeOnClick: {
       type: Boolean,
       default: true,
     },
@@ -796,7 +795,7 @@ export default {
     calculateAnchorZindex () {
       // if a modal is currently active render at modal-element z-index, otherwise at popover z-index
       if (returnFirstEl(this.$el).getRootNode()
-        .querySelector('.d-modal[aria-hidden="false"], .d-modal--transparent[aria-hidden="false"]') ||
+        .querySelector('.d-modal[aria-hidden="false"], .d-modal--transparent[aria-hidden="false"], .d-modal[open], .d-modal--transparent[open]') ||
         // Special case because we don't have any dialtone drawer component yet. Render at 650 when
         // anchor of popover is within a drawer.
         this.anchorEl?.closest('.d-zi-drawer')) {
@@ -982,7 +981,7 @@ export default {
     },
 
     onClickOutside () {
-      if (!this.hideOnClick) return;
+      if (!this.closeOnClick) return;
       // If a popover is opened inside of this one, do not hide on click out
       const innerModals = this.popoverContentEl?.querySelector('.d-popover__anchor--opened');
       if (!innerModals) {

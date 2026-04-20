@@ -10,6 +10,7 @@ export * from './common/emoji';
 export * from './components/avatar';
 export * from './components/badge';
 export * from './components/banner';
+export * from './components/box';
 export * from './components/breadcrumbs';
 export * from './components/button';
 export * from './components/button_group';
@@ -51,6 +52,7 @@ export * from './components/presence';
 export * from './components/prose';
 export * from './components/radio';
 export * from './components/radio_group';
+export * from './components/resizable';
 export * from './components/rich_text_editor';
 export * from './components/root_layout';
 export * from './components/scroller';
@@ -72,6 +74,8 @@ export * from './components/combobox_with_popover';
 export * from './directives/tooltip_directive';
 export * from './directives/scrollbar_directive';
 export * from './directives/mode_directive';
+export * from './directives/focusgroup_directive';
+export * from './directives/focustrap_directive';
 
 /// Recipes
 export * from './recipes/buttons/callbar_button';

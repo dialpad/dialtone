@@ -1,7 +1,7 @@
 <template>
   <dt-stack
-    gap="600"
-    class="d-m-800"
+    gap="200"
+    class="d-p-100"
   >
     <div>
       <p class="d-label--md-compact d-mbe-100">

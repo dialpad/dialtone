@@ -1,26 +1,41 @@
 import { DtModal, MODAL_BANNER_KINDS } from '@/components/modal';
 import { mount } from '@vue/test-utils';
 
-const SYNC_EVENT_NAME = 'update:show';
+const SYNC_EVENT_NAME = 'update:open';
 
 const MOCK_MODAL_COPY = 'test modal copy';
-const MOCK_MODAL_TITLE = 'test modal title';
+const MOCK_MODAL_HEADER_TEXT = 'test modal header text';
 const MOCK_MODAL_BANNER = 'test modal banner';
 const MOCK_MODAL_DEFAULT_SLOT = 'test content';
 const MOCK_MODAL_HEADER_SLOT = 'test header';
 const MOCK_MODAL_BANNER_SLOT = 'title';
 
 const baseProps = {
-  title: MOCK_MODAL_TITLE,
+  headerText: MOCK_MODAL_HEADER_TEXT,
   copy: MOCK_MODAL_COPY,
-  bannerTitle: MOCK_MODAL_BANNER,
-  show: true,
+  bannerHeaderText: MOCK_MODAL_BANNER,
+  open: true,
 };
 
 const baseSlots = {};
 
 let mockProps = {};
 let mockSlots = {};
+
+// Mock native <dialog> methods not supported in JSDOM
+beforeAll(() => {
+  HTMLDialogElement.prototype.showModal = vi.fn(function () {
+    this.setAttribute('open', '');
+  });
+  HTMLDialogElement.prototype.close = vi.fn(function () {
+    this.removeAttribute('open');
+  });
+});
+
+afterAll(() => {
+  delete HTMLDialogElement.prototype.showModal;
+  delete HTMLDialogElement.prototype.close;
+});
 
 describe('DtModal Tests', () => {
   let wrapper;
@@ -47,6 +62,7 @@ describe('DtModal Tests', () => {
   };
 
   beforeEach(() => {
+    vi.clearAllMocks();
     updateWrapper();
   });
 
@@ -56,20 +72,18 @@ describe('DtModal Tests', () => {
     wrapper.unmount();
   });
 
-  afterAll(() => {
-    // Restore RequestAnimationFrame and cancelAnimationFrame
-    global.requestAnimationFrame = undefined;
-    global.cancelAnimationFrame = undefined;
-  });
-
   describe('Presentation Tests', () => {
     it('should render the component', () => {
       expect(wrapper.exists()).toBe(true);
     });
 
-    it('should render the title content', () => {
+    it('should render using a native dialog element', () => {
+      expect(overlay.element.tagName).toBe('DIALOG');
+    });
+
+    it('should render the header text content', () => {
       expect(title.exists()).toBe(true);
-      expect(title.text()).toEqual(MOCK_MODAL_TITLE);
+      expect(title.text()).toEqual(MOCK_MODAL_HEADER_TEXT);
     });
 
     it('should render the banner content', () => {
@@ -94,9 +108,13 @@ describe('DtModal Tests', () => {
       expect(banner.classes(MODAL_BANNER_KINDS[DtModal.props.bannerKind.default])).toBe(true);
     });
 
-    describe('When hideClose prop is true', () => {
+    it('Should call showModal when show is true', () => {
+      expect(overlay.element.showModal).toHaveBeenCalled();
+    });
+
+    describe('When showClose prop is false', () => {
       beforeEach(async () => {
-        mockProps = { ...mockProps, hideClose: true };
+        mockProps = { ...mockProps, showClose: false };
 
         updateWrapper();
       });
@@ -111,7 +129,7 @@ describe('DtModal Tests', () => {
     });
 
     describe('When slots are provided', () => {
-      it('Should display slotted header instead of title', () => {
+      it('Should display slotted header instead of headerText', () => {
         mockSlots = {
           header: MOCK_MODAL_HEADER_SLOT,
         };
@@ -121,7 +139,7 @@ describe('DtModal Tests', () => {
         expect(title.text()).toEqual(MOCK_MODAL_HEADER_SLOT);
       });
 
-      it('Should display slotted banner instead of bannerTitle', () => {
+      it('Should display slotted banner instead of bannerHeaderText', () => {
         mockSlots = {
           banner: MOCK_MODAL_BANNER_SLOT,
         };
@@ -162,13 +180,19 @@ describe('DtModal Tests', () => {
       expect(wrapper.emitted()[SYNC_EVENT_NAME][0][0]).toBe(false);
     });
 
-    it('Should emit a sync-able update event when escape key is pressed', async () => {
+    it('Should emit a sync-able update event when cancel event fires (escape key)', async () => {
       expect(wrapper.emitted(SYNC_EVENT_NAME)).toBeFalsy();
 
-      await overlay.trigger('keydown', { code: 'Escape' });
+      await overlay.trigger('cancel');
 
       expect(wrapper.emitted()[SYNC_EVENT_NAME].length).toBe(1);
       expect(wrapper.emitted()[SYNC_EVENT_NAME][0][0]).toBe(false);
+    });
+
+    it('Should emit keydown event to parent', async () => {
+      await overlay.trigger('keydown', { code: 'Escape' });
+
+      expect(wrapper.emitted().keydown).toBeTruthy();
     });
   });
 
@@ -195,11 +219,11 @@ describe('DtModal Tests', () => {
 
     it('Should apply banner class', async () => {
       const bannerClass = 'banner-class';
-      const bannerTitle = 'title';
+      const bannerHeaderText = 'title';
 
       await wrapper.setProps({
-        show: true,
-        bannerTitle,
+        open: true,
+        bannerHeaderText,
         bannerClass,
       });
 
@@ -210,14 +234,26 @@ describe('DtModal Tests', () => {
 
     it('Should apply banner kind', async () => {
       await wrapper.setProps({
-        show: true,
+        open: true,
         bannerKind: 'info',
-        bannerTitle: 'title',
+        bannerHeaderText: 'title',
       });
 
       banner = wrapper.find('[data-qa="dt-modal-banner"]');
 
       expect(banner.classes(MODAL_BANNER_KINDS.info)).toBe(true);
+    });
+
+    it('Should apply critical banner kind', async () => {
+      await wrapper.setProps({
+        show: true,
+        bannerKind: 'critical',
+        bannerHeaderText: 'title',
+      });
+
+      banner = wrapper.find('[data-qa="dt-modal-banner"]');
+
+      expect(banner.classes(MODAL_BANNER_KINDS.critical)).toBe(true);
     });
 
     it('should set data-dt-mode on dialog when contentMode is set', () => {

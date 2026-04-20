@@ -15,7 +15,7 @@ export const argsData = {
   placeholder: 'placeholder',
   label: 'Label',
   onBlur: action('blur'),
-  onInput: action('input'),
+  'onUpdate:modelValue': action('update:modelValue'),
   onClear: action('clear'),
   onFocus: action('focus'),
   onFocusIn: action('focusin'),
@@ -69,15 +69,6 @@ export const argTypesData = {
       disable: true,
     },
   },
-  labelSlot: {
-    table: {
-      type: { summary: 'VNode' },
-    },
-    control: {
-      type: 'text',
-    },
-  },
-
   // Props
   modelValue: {
     control: 'text',
@@ -134,7 +125,7 @@ export const argTypesData = {
   hidden: {
     control: { type: 'boolean' },
   },
-  labelVisible: {
+  showLabel: {
     control: { type: 'boolean' },
   },
   retainWarning: {
@@ -144,9 +135,6 @@ export const argTypesData = {
     control: { type: 'text' },
   },
   inputWrapperClass: {
-    control: 'text',
-  },
-  rootClass: {
     control: 'text',
   },
 
@@ -174,7 +162,7 @@ export const argTypesData = {
       disable: true,
     },
   },
-  onInput: {
+  'onUpdate:modelValue': {
     table: {
       disable: true,
     },
@@ -216,8 +204,8 @@ export const argTypesData = {
       type: { summary: 'event' },
     },
   },
-  input: {
-    description: 'Native input event',
+  'update:modelValue': {
+    description: 'Event fired to sync the modelValue prop with the parent component',
     table: {
       type: { summary: 'event' },
     },
@@ -256,11 +244,6 @@ export const argTypesData = {
     description: 'Result of the input validation',
     table: {
       type: { summary: 'event' },
-    },
-  },
-  'update:modelValue': {
-    table: {
-      disable: true,
     },
   },
 };
@@ -333,17 +316,17 @@ export const WithWarning = {
   },
 };
 
-export const WithError = {
+export const WithCritical = {
   ...Default,
   args: {
-    messages: [{ message: 'This is an error message', type: 'error' }],
+    messages: [{ message: 'This is a critical message', type: 'critical' }],
   },
 };
 
-export const WithSuccess = {
+export const WithPositive = {
   ...Default,
   args: {
-    messages: [{ message: 'This is a success message', type: 'success' }],
+    messages: [{ message: 'This is a positive message', type: 'positive' }],
   },
 };
 
@@ -351,9 +334,9 @@ export const WithMultipleMessages = {
   ...Default,
   args: {
     messages: [
-      { message: 'This is the first message', type: 'error' },
-      { message: 'This is the second message', type: 'error' },
-      { message: 'This is the third message', type: 'error' },
+      { message: 'This is the first message', type: 'critical' },
+      { message: 'This is the second message', type: 'critical' },
+      { message: 'This is the third message', type: 'critical' },
     ],
   },
 };

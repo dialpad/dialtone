@@ -1,7 +1,7 @@
 <template>
   <div
-    :class="rootClass"
-    v-bind="addClassStyleAttrs($attrs)"
+    :class="$attrs.class"
+    :style="$attrs.style"
   >
     <label :class="['d-checkbox-group', { 'd-checkbox-group--disabled': internalDisabled }]">
       <div class="d-checkbox__input">
@@ -12,7 +12,7 @@
           :value="value"
           :disabled="internalDisabled"
           :class="['d-checkbox', inputValidationClass, inputClass]"
-          :aria-label="!labelVisible && label ? label : undefined"
+          :aria-label="!showLabel && label ? label : undefined"
           v-bind="removeClassStyleAttrs($attrs)"
           :indeterminate.prop="internalIndeterminate"
           v-on="inputListeners"
@@ -72,7 +72,7 @@ import {
   GroupableMixin,
   MessagesMixin,
 } from '@/common/mixins/input';
-import { removeClassStyleAttrs, addClassStyleAttrs } from '@/common/utils';
+import { removeClassStyleAttrs } from '@/common/utils';
 import { CHECKBOX_INPUT_VALIDATION_CLASSES } from './checkbox_constants';
 import { DtValidationMessages } from '../validation_messages';
 import { DtText, TEXT_SIZE_MODIFIERS, TEXT_STRENGTH_MODIFIERS } from '@/components/text';
@@ -97,7 +97,7 @@ export default {
      * Determines visibility of checkbox label.
      * @values true, false
      */
-    labelVisible: {
+    showLabel: {
       type: Boolean,
       default: true,
     },
@@ -124,13 +124,6 @@ export default {
   },
 
   emits: [
-    /**
-     * Native input event
-     *
-     * @event input
-     * @type {Boolean}
-     */
-    'input',
     /**
      * Event fired to sync the modelValue prop with the parent component
      *
@@ -174,7 +167,7 @@ export default {
     },
 
     hasLabel () {
-      return this.labelVisible && this.hasLabelContent;
+      return this.showLabel && this.hasLabelContent;
     },
 
     hasMessages () {
@@ -214,7 +207,6 @@ export default {
 
   methods: {
     removeClassStyleAttrs,
-    addClassStyleAttrs,
 
     emitValue (target) {
       let { value, checked } = target;
@@ -229,14 +221,13 @@ export default {
       this.setGroupValue(value, checked);
 
       // emit the state of the checkbox
-      this.$emit('input', checked);
       this.$emit('update:modelValue', checked);
     },
 
     runValidations () {
       if (!this.hasLabelContent && !this.$attrs['aria-label']) {
         console.warn(
-          '[Dialtone] A label is required for accessibility. Provide a label prop and use label-visible="false" to hide it visually.',
+          '[Dialtone] A label is required for accessibility. Provide a label prop and use show-label="false" to hide it visually.',
         );
       }
     },

@@ -96,7 +96,7 @@
         >
           <dt-checkbox-group
             v-if="modelValue?.length"
-            :selected-values="deferSelection ? pendingActiveFilters : activeFilters"
+            :model-value="deferSelection ? pendingActiveFilters : activeFilters"
             :aria-label="label"
             :name="label || 'filter-pill'"
           >
@@ -105,7 +105,7 @@
               :key="filter.name"
               :label="filter.name"
               :value="filter.name"
-              @input="($event) => filter.active = $event"
+              @update:model-value="($event) => filter.active = $event"
             />
           </dt-checkbox-group>
         </slot>
@@ -231,8 +231,6 @@ export default {
     DtStack,
   },
 
-  inheritAttrs: false,
-
   props: {
     /**
      * When true, uses DtDropdown instead of DtPopover as the overlay.
@@ -294,12 +292,12 @@ export default {
     },
 
     /**
-     * Toggles the clear button visibility
+     * Shows the clear button when a filter is active
      * @values true, false
      */
-    hideClear: {
+    showClear: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     /**
@@ -562,7 +560,7 @@ export default {
     },
 
     hasClear () {
-      return !this.readOnly && !this.hideClear && this.activeFilterList.length > 0;
+      return !this.readOnly && this.showClear && this.activeFilterList.length > 0;
     },
 
     displayFilters () {

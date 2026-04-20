@@ -16,14 +16,6 @@ export const argsData = {
 
 export const argTypesData = {
   // Slots
-  titleOverride: {
-    table: {
-      type: { summary: 'VNode' },
-    },
-    control: {
-      type: 'text',
-    },
-  },
   icon: {
     options: iconsList,
     table: {
@@ -54,6 +46,11 @@ export const argTypesData = {
   },
 
   // Props
+  headerText: {
+    control: {
+      type: 'text',
+    },
+  },
   kind: {
     options: NOTICE_KINDS,
     control: {
@@ -65,7 +62,7 @@ export const argTypesData = {
       disable: true,
     },
   },
-  titleId: {
+  headerId: {
     table: {
       defaultValue: {
         summary: 'generated unique ID',
@@ -79,17 +76,17 @@ export const argTypesData = {
       },
     },
   },
-  hideClose: {
+  showClose: {
     control: {
       type: 'boolean',
     },
   },
-  hideIcon: {
+  showIcon: {
     control: {
       type: 'boolean',
     },
   },
-  hideAction: {
+  showAction: {
     control: {
       type: 'boolean',
     },
@@ -138,7 +135,7 @@ export const Default = {
   render: Template,
 
   args: {
-    title: 'Optional title',
+    headerText: 'Optional title',
     action: 'Action',
     kind: 'base',
   },
@@ -152,9 +149,9 @@ export const Default = {
   },
 };
 
-export const Error = {
+export const Critical = {
   render: Template,
-  args: { ...Default.args, kind: 'error' },
+  args: { ...Default.args, kind: 'critical' },
   parameters: Default.parameters,
 };
 
@@ -164,9 +161,9 @@ export const Info = {
   parameters: Default.parameters,
 };
 
-export const Success = {
+export const Positive = {
   render: Template,
-  args: { ...Default.args, kind: 'success' },
+  args: { ...Default.args, kind: 'positive' },
   parameters: Default.parameters,
 };
 
@@ -189,9 +186,9 @@ export const CustomBackground = {
     ...Default.args,
     backgroundImage,
     backgroundSize: 'contain',
-    title: '',
+    headerText: '',
     action: '',
-    hideIcon: true,
+    showIcon: false,
     dialogClass: 'd-fc-neutral-white',
     default: 'The power of Dialpad. On your desktop',
   },

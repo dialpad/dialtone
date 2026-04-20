@@ -1,6 +1,15 @@
- 
- 
+
+
 export default {
+  defaults: {
+    props: {
+      kind: { tokenCategory: 'color:d-notice--:backgroundColor' },
+    },
+    slots: {
+      action: { initialValue: '<dt-button :size="200" importance="outlined" kind="muted">Action</dt-button>' },
+    },
+  },
+
   default: {
     slots: {
       default: {
@@ -8,7 +17,7 @@ export default {
       },
     },
     props: {
-      title: {
+      headerText: {
         initialValue: 'Base title',
       },
     },
@@ -16,9 +25,9 @@ export default {
 
   'info with action and hide close': {
     props: {
-      title: { initialValue: 'Info title' },
+      headerText: { initialValue: 'Info title' },
       kind: { initialValue: 'info' },
-      hideClose: { initialValue: true },
+      showClose: { initialValue: false },
     },
     slots: {
       default: { initialValue: 'Message body with <dt-link to="/path/to/">a link</dt-link>.' },
@@ -28,7 +37,7 @@ export default {
 
   'important warning with no message': {
     props: {
-      title: { initialValue: 'Warning title' },
+      headerText: { initialValue: 'Warning title' },
       kind: { initialValue: 'warning' },
       important: { initialValue: true },
     },

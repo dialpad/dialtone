@@ -144,9 +144,9 @@ describe('DtCheckbox Tests', () => {
       });
     });
 
-    describe('When labelVisible is false', () => {
+    describe('When showLabel is false', () => {
       beforeEach(() => {
-        mockProps = { labelVisible: false };
+        mockProps = { showLabel: false };
 
         updateWrapper();
       });
@@ -162,7 +162,7 @@ describe('DtCheckbox Tests', () => {
       });
     });
 
-    describe('When labelVisible is true', () => {
+    describe('When showLabel is true', () => {
       it('should not set aria-label on the input', () => {
         expect(input.attributes('aria-label')).toBeUndefined();
       });
@@ -213,12 +213,12 @@ describe('DtCheckbox Tests', () => {
     });
 
     describe('When a validation state is provided', () => {
-      it('applies validation classes for success state', () => {
-        mockProps = { description: 'Description', validationState: VALIDATION_MESSAGE_TYPES.SUCCESS };
+      it('applies validation classes for positive state', () => {
+        mockProps = { description: 'Description', validationState: VALIDATION_MESSAGE_TYPES.POSITIVE };
 
         updateWrapper();
 
-        expect(wrapper.find(`.${CHECKBOX_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.SUCCESS]}`).exists())
+        expect(wrapper.find(`.${CHECKBOX_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.POSITIVE]}`).exists())
           .toBe(true);
       });
 
@@ -231,12 +231,12 @@ describe('DtCheckbox Tests', () => {
           .toBe(true);
       });
 
-      it('applies validation classes for error state', () => {
-        mockProps = { description: 'Description', validationState: VALIDATION_MESSAGE_TYPES.ERROR };
+      it('applies validation classes for critical state', () => {
+        mockProps = { description: 'Description', validationState: VALIDATION_MESSAGE_TYPES.CRITICAL };
 
         updateWrapper();
 
-        expect(wrapper.find(`.${CHECKBOX_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.ERROR]}`).exists())
+        expect(wrapper.find(`.${CHECKBOX_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.CRITICAL]}`).exists())
           .toBe(true);
       });
     });
@@ -316,37 +316,37 @@ describe('DtCheckbox Tests', () => {
   describe('Accessibility Tests', () => {
     describe('Custom Event Tests', () => {
       describe('When the checkbox is clicked', () => {
-        it('Should emit an input event', async () => {
+        it('Should emit update:modelValue event', async () => {
           await input.trigger('change');
 
-          expect(wrapper.emitted('input')).toBeTruthy();
+          expect(wrapper.emitted('update:modelValue')).toBeTruthy();
         });
       });
 
       describe('When checked', () => {
         describe('When the checkbox is clicked', () => {
-          it('Should emit an input event', async () => {
+          it('Should emit update:modelValue event', async () => {
             mockProps = { modelValue: true };
 
             updateWrapper();
 
             await input.trigger('change');
 
-            expect(wrapper.emitted('input')).toBeTruthy();
+            expect(wrapper.emitted('update:modelValue')).toBeTruthy();
           });
         });
       });
 
       describe('When disabled', () => {
         describe('When the checkbox is clicked', () => {
-          it('Should not emit an input event', async () => {
+          it('Should not emit update:modelValue event', async () => {
             mockProps = { disabled: true };
 
             updateWrapper();
 
             await input.trigger('click');
 
-            expect(wrapper.emitted('input')).toBeFalsy();
+            expect(wrapper.emitted('update:modelValue')).toBeFalsy();
           });
         });
       });
@@ -356,37 +356,37 @@ describe('DtCheckbox Tests', () => {
   describe('Interactivity Tests', () => {
     describe('Custom Event Tests', () => {
       describe('When the checkbox is clicked', () => {
-        it('Should emit an input event', async () => {
+        it('Should emit update:modelValue event', async () => {
           await input.trigger('change');
 
-          expect(wrapper.emitted('input')).toBeTruthy();
+          expect(wrapper.emitted('update:modelValue')).toBeTruthy();
         });
       });
 
       describe('When checked', () => {
         describe('When the checkbox is clicked', () => {
-          it('Should emit an input event', async () => {
+          it('Should emit update:modelValue event', async () => {
             mockProps = { modelValue: true };
 
             updateWrapper();
 
             await input.trigger('change');
 
-            expect(wrapper.emitted('input')).toBeTruthy();
+            expect(wrapper.emitted('update:modelValue')).toBeTruthy();
           });
         });
       });
 
       describe('When disabled', () => {
         describe('When the checkbox is clicked', () => {
-          it('Should not emit an input event', async () => {
+          it('Should not emit update:modelValue event', async () => {
             mockProps = { disabled: true };
 
             updateWrapper();
 
             await input.trigger('click');
 
-            expect(wrapper.emitted('input')).toBeFalsy();
+            expect(wrapper.emitted('update:modelValue')).toBeFalsy();
           });
         });
       });
@@ -418,7 +418,7 @@ describe('DtCheckbox Tests', () => {
       describe('When there is a provided input listener', () => {
         describe('When the checkbox is clicked', () => {
           it('Should call input handler once', async () => {
-            mockAttrs = { onInput: MOCK_INPUT_LISTENER_SPY };
+            mockAttrs = { 'onUpdate:modelValue': MOCK_INPUT_LISTENER_SPY };
 
             updateWrapper();
 
@@ -479,11 +479,11 @@ describe('DtCheckbox Tests', () => {
 
       describe('When the checkbox group has a validation state', () => {
         beforeEach(() => {
-          _setGroupContext([], false, VALIDATION_MESSAGE_TYPES.SUCCESS);
+          _setGroupContext([], false, VALIDATION_MESSAGE_TYPES.POSITIVE);
         });
 
         it('has validation classes', () => {
-          expect(wrapper.find(`.${CHECKBOX_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.SUCCESS]}`).exists())
+          expect(wrapper.find(`.${CHECKBOX_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.POSITIVE]}`).exists())
             .toBe(true);
         });
 
@@ -493,7 +493,7 @@ describe('DtCheckbox Tests', () => {
 
             updateWrapper();
 
-            expect(wrapper.find(`.${CHECKBOX_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.SUCCESS]}`).exists())
+            expect(wrapper.find(`.${CHECKBOX_INPUT_VALIDATION_CLASSES[VALIDATION_MESSAGE_TYPES.POSITIVE]}`).exists())
               .toBe(true);
           });
         });
@@ -580,9 +580,9 @@ describe('DtCheckbox Tests', () => {
       });
     });
 
-    describe('When a rootClass is provided', () => {
-      it('should include the root class', () => {
-        mockProps = { rootClass: MOCK_ROOT_CLASS }
+    describe('When a class is provided', () => {
+      it('should include the class', () => {
+        mockAttrs = { class: MOCK_ROOT_CLASS }
 
         updateWrapper();
 
