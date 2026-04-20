@@ -1,8 +1,8 @@
 <template>
   <div>
     <dt-modal
-      :title="$attrs.title"
-      :banner-title="$attrs.bannerTitle"
+      :header-text="$attrs.headerText"
+      :banner-header-text="$attrs.bannerHeaderText"
       :open="isOpen"
       :kind="$attrs.kind"
       :size="$attrs.size"

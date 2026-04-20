@@ -20,7 +20,7 @@ const baseProps = {
   badgeColor: MOCK_BADGE_COLOR,
   badgeText: MOCK_BADGE_TEXT,
   borderColor: MOCK_BORDER_COLOR,
-  title: MOCK_TITLE,
+  headerText: MOCK_TITLE,
 };
 const baseAttrs = {};
 const baseSlots = {};
@@ -116,8 +116,8 @@ describe('DtRecipeCallbox Tests', () => {
         });
       });
 
-      describe('When title is provided', () => {
-        it('Should display title text', () => {
+      describe('When headerText is provided', () => {
+        it('Should display header text', () => {
           expect(title.text()).toBe(MOCK_TITLE);
         });
       });

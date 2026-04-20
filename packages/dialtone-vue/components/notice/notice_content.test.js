@@ -3,8 +3,8 @@ import { mount } from '@vue/test-utils';
 
 // Constants
 const baseProps = {
-  title: 'this is the title',
-  titleId: 'titleId555',
+  headerText: 'this is the title',
+  headerId: 'headerId555',
   contentId: 'contentId888',
 };
 
@@ -17,7 +17,7 @@ describe('DtNoticeContent tests', () => {
   let props;
   let slotsData;
 
-  let title;
+  let header;
   let content;
 
   const _setWrappers = () => {
@@ -31,7 +31,7 @@ describe('DtNoticeContent tests', () => {
   };
 
   const _setChildWrappers = () => {
-    title = wrapper.find('#titleId555');
+    header = wrapper.find('#headerId555');
     content = wrapper.find('#contentId888');
   };
 
@@ -45,8 +45,8 @@ describe('DtNoticeContent tests', () => {
         expect(wrapper.exists()).toBe(true);
       });
 
-      it('Should display title correctly', () => {
-        expect(title.text()).toBe(props.title);
+      it('Should display header text correctly', () => {
+        expect(header.text()).toBe(props.headerText);
       });
 
       it('Should display the content correctly', () => {
@@ -54,14 +54,14 @@ describe('DtNoticeContent tests', () => {
       });
     });
 
-    describe('When title slot is provided', () => {
+    describe('When header slot is provided', () => {
       beforeEach(() => {
-        slotsData.title = 'this is a slot title';
+        slotsData.header = 'this is a slot header';
         _setWrappers();
       });
 
       it('displays the correct text', () => {
-        expect(title.text()).toBe(slotsData.title);
+        expect(header.text()).toBe(slotsData.header);
       });
     });
   });

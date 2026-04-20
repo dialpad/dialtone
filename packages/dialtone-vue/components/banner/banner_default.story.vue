@@ -10,8 +10,8 @@
     <dt-banner
       v-show="displayBanner"
       :kind="$attrs.kind"
-      :title="$attrs.title"
-      :title-id="$attrs.titleId"
+      :header-text="$attrs.headerText"
+      :header-id="$attrs.headerId"
       :content-id="$attrs.contentId"
       :important="$attrs.important"
       :pinned="$attrs.pinned"

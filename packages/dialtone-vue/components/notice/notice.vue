@@ -6,20 +6,20 @@
     <dt-notice-icon
       v-if="showIcon"
       :kind="kind"
-      :class="{ 'd-notice__icon--has-title': title || $slots.title }"
+      :class="{ 'd-notice__icon--has-title': headerText || $slots.header }"
     >
       <!-- @slot Slot for custom icon -->
       <slot name="icon" />
     </dt-notice-icon>
     <dt-notice-content
-      :title-id="titleId"
+      :header-id="headerId"
       :content-id="contentId"
-      :title="title"
+      :header-text="headerText"
       :role="role"
     >
-      <template #title>
-        <!-- @slot Slot for the title -->
-        <slot name="title" />
+      <template #header>
+        <!-- @slot Slot for the header -->
+        <slot name="header" />
       </template>
       <!-- @slot the main textual content of the notice -->
       <slot />
@@ -57,10 +57,10 @@ export default {
 
   props: {
     /**
-     * Sets an ID on the title element of the component. Useful for aria-describedby
-     * or aria-labelledby or any other reason you may need an id to refer to the title.
+     * Sets an ID on the header element of the component. Useful for aria-describedby
+     * or aria-labelledby or any other reason you may need an id to refer to the header.
      */
-    titleId: {
+    headerId: {
       type: String,
       default: undefined,
     },
@@ -75,11 +75,11 @@ export default {
     },
 
     /**
-     * Title header of the notice. This can be left blank to remove the title from the notice entirely.
+     * Header text of the notice. This can be left blank to remove the header from the notice entirely.
      */
-    title: {
+    headerText: {
       type: String,
-      default: '',
+      default: undefined,
     },
 
     /**
