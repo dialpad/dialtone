@@ -45,12 +45,12 @@ packages/dialtone-css/
 All utility classes follow the pattern: `d-{category-abbreviation}{value}`
 
 ```
-d-mt-100        margin-top with spacing-100 token (8px)
-d-fc-primary font-color foreground-primary
-d-bgc-surface background-color surface
-d-p-0         padding 0
-d-h100       height 100%
-d-t50p       top 50% (position)
+d-mt-100       margin-top with spacing-100 token (8px)
+d-fc-primary   font-color foreground-primary
+d-bgc-surface  background-color surface
+d-p-0          padding 0
+d-h100         height 100%
+d-t50p         top 50% (position)
 ```
 
 Category abbreviations used:
