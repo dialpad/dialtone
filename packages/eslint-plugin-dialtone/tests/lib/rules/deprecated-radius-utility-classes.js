@@ -92,5 +92,17 @@ ruleTester.run('deprecated-radius-utility-classes', rule, {
       output: '<template><div class="d-bar-350 d-bbsr-400 d-bisr-pill" /></template>',
       errors: [{ messageId: 'deprecatedRadiusClass' }],
     },
+    // Unquoted attribute — autofix must not add quotes.
+    {
+      code: '<template><div class=d-bar6 /></template>',
+      output: '<template><div class=d-bar-350 /></template>',
+      errors: [{ messageId: 'deprecatedRadiusClass' }],
+    },
+    // Single-quoted attribute — preserves single quotes.
+    {
+      code: '<template><div class=\'d-btr8\' /></template>',
+      output: '<template><div class=\'d-bbsr-400\' /></template>',
+      errors: [{ messageId: 'deprecatedRadiusClass' }],
+    },
   ],
 });

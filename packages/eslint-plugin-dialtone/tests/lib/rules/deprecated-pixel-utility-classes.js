@@ -133,5 +133,17 @@ ruleTester.run('deprecated-pixel-utility-classes', rule, {
       output: '<template><div class="d-h-24px d-w-24px" /></template>',
       errors: [{ messageId: 'deprecatedPixelClass' }],
     },
+    // Unquoted attribute (HTML5 valid, vue-eslint-parser accepts). Autofix must not add quotes.
+    {
+      code: '<template><div class=d-h16 /></template>',
+      output: '<template><div class=d-h-25 /></template>',
+      errors: [{ messageId: 'deprecatedPixelClass' }],
+    },
+    // Single-quoted attribute — preserves single quotes.
+    {
+      code: '<template><div class=\'d-p8\' /></template>',
+      output: '<template><div class=\'d-p-100\' /></template>',
+      errors: [{ messageId: 'deprecatedPixelClass' }],
+    },
   ],
 });

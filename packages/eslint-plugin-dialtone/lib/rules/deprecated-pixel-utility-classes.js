@@ -100,7 +100,9 @@ module.exports = {
           fix (fixer) {
             const rewritten = rewriteClassString(classes);
             if (rewritten === classes) return null;
-            const quote = context.sourceCode.getText(node.value)[0] ?? '"';
+            // Preserve the attribute's quoting style (single, double, or unquoted).
+            const firstChar = sourceCode.getText(node.value)[0];
+            const quote = firstChar === '"' || firstChar === '\'' ? firstChar : '';
             return fixer.replaceText(node.value, `${quote}${rewritten}${quote}`);
           },
         });
