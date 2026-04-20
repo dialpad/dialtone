@@ -78,7 +78,7 @@ Use the Dropdown component when you have a list of links or actions that can be 
         v-for="(item) in items"
         :key="item.id"
         role="menuitem"
-        :navigation-type="arrow-keys"
+        navigation-type="arrow-keys"
         @click="close"
       >
         {{ item.name }}
@@ -127,7 +127,7 @@ vueCode='
       v-for="(item) in items"
       :key="item.id"
       role="menuitem"
-      :navigation-type="arrow-keys"
+      navigation-type="arrow-keys"
       @click="close"
     >
       {{ item.name }}
@@ -304,7 +304,7 @@ Set `openOnContext=true` to open the menu on right-click (context menu) and disa
         v-for="(item) in items"
         :key="item.id"
         role="menuitem"
-        :navigation-type="arrow-keys"
+        navigation-type="arrow-keys"
         @click="close"
       >
         {{ item.name }}
@@ -329,7 +329,7 @@ vueCode='
       v-for="(item) in items"
       :key="item.id"
       role="menuitem"
-      :navigation-type="arrow-keys"
+      navigation-type="arrow-keys"
       @click="close"
     >
       {{ item.name }}
