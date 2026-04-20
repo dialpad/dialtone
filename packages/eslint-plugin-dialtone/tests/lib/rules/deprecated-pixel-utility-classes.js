@@ -82,6 +82,12 @@ ruleTester.run('deprecated-pixel-utility-classes', rule, {
       output: '<template><div class="d-mt-n100" /></template>',
       errors: [{ messageId: 'deprecatedPixelClass' }],
     },
+    // Negative 20 (regression: NEGATIVE_PIXELS must include 20 since NEGATIVE_SPACING_MAP does)
+    {
+      code: '<template><div class="d-mn20 d-tn20" /></template>',
+      output: '<template><div class="d-m-n250 d-t-n250" /></template>',
+      errors: [{ messageId: 'deprecatedPixelClass' }],
+    },
     // Padding
     {
       code: '<template><div class="d-p8 d-pt16" /></template>',

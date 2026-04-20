@@ -21,7 +21,10 @@ function buildDetectRegex (regexes) {
 function createClassAttributeRule ({ detect, rewrite, messageId }) {
   return (context) => {
     const sourceCode = context.sourceCode ?? context.getSourceCode();
-    return sourceCode.parserServices.defineTemplateBodyVisitor({
+    const defineTemplateBodyVisitor = sourceCode.parserServices?.defineTemplateBodyVisitor;
+    if (!defineTemplateBodyVisitor) return {};
+
+    return defineTemplateBodyVisitor({
       VAttribute (node) {
         if (node.key.name !== 'class') return;
         const classes = node.value?.value;

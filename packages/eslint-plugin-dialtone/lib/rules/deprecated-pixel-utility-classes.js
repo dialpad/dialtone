@@ -17,7 +17,7 @@ const { START, END, buildDetectRegex, createClassAttributeRule } = require('../u
 // longest first (d-w1024 resolves `1024`, not `1`).
 const SIZING_PIXELS = '1024|992|960|928|896|864|832|800|768|736|704|672|640|608|576|544|512|480|448|416|384|352|320|288|256|224|192|160|128|112|96|80|64|48|32|24|20|16|8|2|1';
 const SPACING_PIXELS = '0|1|2|4|6|8|10|12|14|16|20|24|32|48|64|96|128';
-const NEGATIVE_PIXELS = '1|2|4|6|8|10|12|14|16|24|32|48|64';
+const NEGATIVE_PIXELS = '1|2|4|6|8|10|12|14|16|20|24|32|48|64';
 
 // Sizing autofix: scale-indexed layout stops + off-scale pixel-indexed exceptions (DLT-3330).
 const SIZING_MAP = {
