@@ -26,9 +26,13 @@ const PAIR_PREFIX_MAP = {
 const NUMERIC_SUFFIXES = Object.keys(RADIUS_STOP_MAP).sort((a, b) => b.length - a.length || Number(b) - Number(a)).join('|');
 const PAIR_PREFIXES = Object.keys(PAIR_PREFIX_MAP).join('|');
 
-const ALL_CORNERS_NUMERIC = new RegExp(`\\bd-bar(${NUMERIC_SUFFIXES})\\b`, 'g');
-const PAIR_NUMERIC        = new RegExp(`\\bd-(${PAIR_PREFIXES})(${NUMERIC_SUFFIXES})\\b`, 'g');
-const PAIR_KEYWORD        = new RegExp(`\\bd-(${PAIR_PREFIXES})-(pill|circle)\\b`, 'g');
+// Token boundaries: `(?<=^|\s)` / `(?=$|\s)` anchor to start/whitespace rather than `\b`.
+// `\b` treats `-` as a non-word char, so `\bd-btr6\b` wrongly matches inside `foo-d-btr6`.
+const START = '(?<=^|\\s)';
+const END = '(?=$|\\s)';
+const ALL_CORNERS_NUMERIC = new RegExp(`${START}d-bar(${NUMERIC_SUFFIXES})${END}`, 'g');
+const PAIR_NUMERIC        = new RegExp(`${START}d-(${PAIR_PREFIXES})(${NUMERIC_SUFFIXES})${END}`, 'g');
+const PAIR_KEYWORD        = new RegExp(`${START}d-(${PAIR_PREFIXES})-(pill|circle)${END}`, 'g');
 
 // Non-global detection pattern for fast early-exit.
 const DETECT = new RegExp([ALL_CORNERS_NUMERIC, PAIR_NUMERIC, PAIR_KEYWORD].map(r => r.source).join('|'));

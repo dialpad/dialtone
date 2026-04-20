@@ -29,6 +29,11 @@ ruleTester.run('deprecated-radius-utility-classes', rule, {
     { code: '<template><div class="d-p-200 d-m-100 d-fc-primary" /></template>' },
     // Non-radius utility classes that could look similar but aren't matched
     { code: '<template><div class="d-ba d-baw2 d-bas-dashed" /></template>' },
+    // Custom (non-Dialtone) classes that contain a legacy-looking substring must not match.
+    // `\b` treats `-` as a non-word char, so the previous regex wrongly matched inside these.
+    { code: '<template><div class="foo-d-bar6" /></template>' },
+    { code: '<template><div class="my-d-btr8 app-d-brr-pill" /></template>' },
+    { code: '<template><div class="d-bar-350 foo-d-btr6" /></template>' },
   ],
 
   invalid: [

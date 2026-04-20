@@ -45,13 +45,18 @@ const SPACING_LAYOUT_MAP = { 96: '150', 128: '200' };
 
 // Per-category regexes with capture groups. Negative variants precede positive so `d-mtn8`
 // matches the negative pattern (rule order is load-order in `rewriteClassString`).
-const SIZING_RE          = new RegExp(`\\bd-(h|w|hmn|hmx|wmn|wmx)(${SIZING_PIXELS})\\b`, 'g');
-const NEGATIVE_MARGIN_RE = new RegExp(`\\bd-m(t|r|b|l|x|y)?n(${NEGATIVE_PIXELS})\\b`, 'g');
-const MARGIN_RE          = new RegExp(`\\bd-m(t|r|b|l|x|y)?(${SPACING_PIXELS})\\b`, 'g');
-const PADDING_RE         = new RegExp(`\\bd-p(t|r|b|l|x|y)?(${SPACING_PIXELS})\\b`, 'g');
-const GAP_RE             = new RegExp(`\\bd-(g|rg|cg)(${SPACING_PIXELS})\\b`, 'g');
-const NEGATIVE_POS_RE    = new RegExp(`\\bd-(t|r|b|l|x|y|all)n(${NEGATIVE_PIXELS})\\b`, 'g');
-const POSITION_RE        = new RegExp(`\\bd-(t|r|b|l|x|y|all)(${SPACING_PIXELS})\\b`, 'g');
+//
+// Token boundaries: `(?<=^|\s)` / `(?=$|\s)` anchor to start/whitespace rather than `\b`.
+// `\b` treats `-` as a non-word char, so `\bd-h16\b` wrongly matches inside `foo-d-h16`.
+const START = '(?<=^|\\s)';
+const END = '(?=$|\\s)';
+const SIZING_RE          = new RegExp(`${START}d-(h|w|hmn|hmx|wmn|wmx)(${SIZING_PIXELS})${END}`, 'g');
+const NEGATIVE_MARGIN_RE = new RegExp(`${START}d-m(t|r|b|l|x|y)?n(${NEGATIVE_PIXELS})${END}`, 'g');
+const MARGIN_RE          = new RegExp(`${START}d-m(t|r|b|l|x|y)?(${SPACING_PIXELS})${END}`, 'g');
+const PADDING_RE         = new RegExp(`${START}d-p(t|r|b|l|x|y)?(${SPACING_PIXELS})${END}`, 'g');
+const GAP_RE             = new RegExp(`${START}d-(g|rg|cg)(${SPACING_PIXELS})${END}`, 'g');
+const NEGATIVE_POS_RE    = new RegExp(`${START}d-(t|r|b|l|x|y|all)n(${NEGATIVE_PIXELS})${END}`, 'g');
+const POSITION_RE        = new RegExp(`${START}d-(t|r|b|l|x|y|all)(${SPACING_PIXELS})${END}`, 'g');
 
 // Detection-only combined pattern (non-global) for fast early-exit in the visitor.
 const DETECT = new RegExp([SIZING_RE, NEGATIVE_MARGIN_RE, MARGIN_RE, PADDING_RE, GAP_RE, NEGATIVE_POS_RE, POSITION_RE].map(r => r.source).join('|'));

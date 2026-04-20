@@ -41,6 +41,11 @@ ruleTester.run('deprecated-pixel-utility-classes', rule, {
     { code: '<template><div class="d-d-flex d-fc-primary" /></template>' },
     // Logical property aliases
     { code: '<template><div class="d-mis-100 d-pbs-200" /></template>' },
+    // Custom (non-Dialtone) classes that end with a legacy-looking suffix must not match.
+    // `\b` treats `-` as a non-word char, so the previous regex wrongly matched inside these.
+    { code: '<template><div class="foo-d-h16" /></template>' },
+    { code: '<template><div class="my-d-p8 app-d-mt16" /></template>' },
+    { code: '<template><div class="d-h-25 foo-d-h16" /></template>' },
   ],
 
   invalid: [
