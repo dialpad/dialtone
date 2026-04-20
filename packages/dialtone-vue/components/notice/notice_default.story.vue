@@ -1,8 +1,8 @@
 <template>
   <dt-notice
     :kind="$attrs.kind"
-    :title="$attrs.title"
-    :title-id="$attrs.titleId"
+    :header-text="$attrs.headerText"
+    :header-id="$attrs.headerId"
     :content-id="$attrs.contentId"
     :important="$attrs.important"
     :show-close="$attrs.showClose"

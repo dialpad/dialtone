@@ -32,7 +32,7 @@ const decorator = () => ({
 
 export const argsData = {
   onClick: action('click'),
-  title: 'Title',
+  headerText: 'Title',
   avatarFullName: 'Title',
   borderColor: 'ai',
   clickable: true,

@@ -5,7 +5,7 @@ import DtNoticeAction from '../notice/notice_action.vue';
 import DtNoticeContent from '../notice/notice_content.vue';
 import DtNoticeIcon from '../notice/notice_icon.vue';
 
-const baseProps = { title: '', open: true };
+const baseProps = { headerText: '', open: true };
 const baseSlots = {};
 
 let mockProps = {};
@@ -77,9 +77,9 @@ describe('DtToast Tests', () => {
     describe('When the toast renders with props', () => {
       beforeEach(() => {
         mockProps = {
-          titleId: 'titleId prop content',
+          headerId: 'headerId prop content',
           contentId: 'contentId prop content',
-          title: '',
+          headerText: '',
           message: 'message prop content',
           showClose: false,
         };
@@ -87,16 +87,16 @@ describe('DtToast Tests', () => {
         updateWrapper();
       });
 
-      it('titleId prop is passed down correctly', () => {
-        expect(contentChild.props('titleId')).toBe(mockProps.titleId);
+      it('headerId prop is passed down correctly', () => {
+        expect(contentChild.props('headerId')).toBe(mockProps.headerId);
       });
 
       it('contentId prop is passed down correctly', () => {
         expect(contentChild.props('contentId')).toBe(mockProps.contentId);
       });
 
-      it('title prop is passed down correctly', () => {
-        expect(contentChild.props('title')).toBe(mockProps.title);
+      it('headerText prop is passed down correctly', () => {
+        expect(contentChild.props('headerText')).toBe(mockProps.headerText);
       });
 
       it('message prop is passed down correctly', () => {

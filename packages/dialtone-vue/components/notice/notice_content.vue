@@ -4,18 +4,18 @@
     data-qa="notice-content"
   >
     <dt-text
-      v-if="title || hasSlotContent($slots.title)"
-      :id="titleId"
+      v-if="headerText || hasSlotContent($slots.header)"
+      :id="headerId"
       kind="headline"
       :size="300"
       density="200"
       as="p"
-      :class="['d-notice__title', titleClass]"
+      :class="['d-notice__title', headerClass]"
       data-qa="notice-content-title"
     >
-      <!-- @slot Slot for the title -->
-      <slot name="title">
-        {{ title }}
+      <!-- @slot Slot for the header -->
+      <slot name="header">
+        {{ headerText }}
       </slot>
     </dt-text>
     <dt-text
@@ -45,19 +45,19 @@ export default {
 
   props: {
     /**
-     * Title header of the notice. This can be left blank to remove the title from the notice entirely.
-     * Can also be overridden with a slot of the same name.
+     * Header text of the notice. This can be left blank to remove the header from the notice entirely.
+     * Can also be overridden with the header slot.
      */
-    title: {
+    headerText: {
       type: String,
-      default: '',
+      default: undefined,
     },
 
     /**
-     * ID for the title element of the component. Useful for aria-describedby
-     * or aria-labelledby or any other reason you may need an id to refer to the title.
+     * ID for the header element of the component. Useful for aria-describedby
+     * or aria-labelledby or any other reason you may need an id to refer to the header.
      */
-    titleId: {
+    headerId: {
       type: String,
       default: undefined,
     },
@@ -72,9 +72,9 @@ export default {
     },
 
     /**
-     * Additional class name for the title wrapper element.
+     * Additional class name for the header wrapper element.
      */
-    titleClass: {
+    headerClass: {
       type: [String, Array, Object],
       default: '',
     },

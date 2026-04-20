@@ -17,7 +17,7 @@ export default {
       },
     },
     props: {
-      title: {
+      headerText: {
         initialValue: 'Base title',
       },
     },
@@ -25,7 +25,7 @@ export default {
 
   'info with action and hide close': {
     props: {
-      title: { initialValue: 'Info title' },
+      headerText: { initialValue: 'Info title' },
       kind: { initialValue: 'info' },
       showClose: { initialValue: false },
     },
@@ -37,7 +37,7 @@ export default {
 
   'important warning with no message': {
     props: {
-      title: { initialValue: 'Warning title' },
+      headerText: { initialValue: 'Warning title' },
       kind: { initialValue: 'warning' },
       important: { initialValue: true },
     },

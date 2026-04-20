@@ -21,7 +21,7 @@
       @keydown="onKeydown"
     >
       <div
-        v-if="open && (hasSlotContent($slots.banner) || bannerTitle)"
+        v-if="open && (hasSlotContent($slots.banner) || bannerHeaderText)"
         data-qa="dt-modal-banner"
         :class="[
           'd-modal__banner',
@@ -29,9 +29,9 @@
           bannerKindClass,
         ]"
       >
-        <!-- @slot Slot for the banner, defaults to bannerTitle prop -->
+        <!-- @slot Slot for the banner, defaults to bannerHeaderText prop -->
         <slot name="banner">
-          {{ bannerTitle }}
+          {{ bannerHeaderText }}
         </slot>
       </div>
       <transition
@@ -54,7 +54,7 @@
             :class="['d-modal__header', headerClass]"
             data-qa="dt-modal-title"
           >
-            <!-- @slot Slot for dialog header section, taking the place of any "title" text prop -->
+            <!-- @slot Slot for dialog header section, taking the place of any "headerText" text prop -->
             <slot name="header" />
           </div>
           <dt-text
@@ -69,7 +69,7 @@
             class="d-modal__header"
             data-qa="dt-modal-title"
           >
-            {{ title }}
+            {{ headerText }}
           </dt-text>
           <div
             v-if="hasSlotContent($slots.default)"
@@ -201,19 +201,19 @@ export default {
     },
 
     /**
-     * Title text to display in the modal header.
+     * Header text to display in the modal header.
      */
-    title: {
+    headerText: {
       type: String,
-      default: '',
+      default: undefined,
     },
 
     /**
-     * Title text to display in the modal banner.
+     * Header text to display in the modal banner.
      */
-    bannerTitle: {
+    bannerHeaderText: {
       type: String,
-      default: '',
+      default: undefined,
     },
 
     /**

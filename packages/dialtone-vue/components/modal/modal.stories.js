@@ -17,7 +17,7 @@ viverra iaculis. Interdum et malesuada fames ac ante ipsum primis in faucibus. V
 maximus ipsum ex. Curabitur elementum luctus augue, quis eleifend tortor feugiat vel. \
 Maecenas maximus, ipsum et laoreet congue, diam massa aliquam libero, at pellentesque \
 orci ipsum et velit.`,
-  title: 'Example Title',
+  headerText: 'Example Title',
   onClose: action('update:open'),
 };
 
@@ -57,6 +57,16 @@ export const argTypesData = {
   },
 
   // Props
+  headerText: {
+    control: {
+      type: 'text',
+    },
+  },
+  bannerHeaderText: {
+    control: {
+      type: 'text',
+    },
+  },
   contentMode: CONTENT_MODE_ARG_TYPE,
   size: {
     options: Object.keys(MODAL_SIZE_MODIFIERS),
@@ -183,7 +193,7 @@ export const WithBanner = {
   render: DefaultTemplate,
 
   args: {
-    bannerTitle: 'Example banner',
+    bannerHeaderText: 'Example banner',
   },
 
   parameters: { ...Default.parameters },

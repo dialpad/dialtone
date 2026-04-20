@@ -1,9 +1,9 @@
 /* eslint-disable max-len */
- 
+
 export default {
   default: {
     props: {
-      title: {
+      headerText: {
         initialValue: 'Example title',
       },
       copy: {
@@ -18,7 +18,7 @@ export default {
   },
   danger: {
     props: {
-      title: {
+      headerText: {
         initialValue: 'Example title',
       },
       copy: {
