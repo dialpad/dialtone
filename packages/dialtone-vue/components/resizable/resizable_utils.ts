@@ -34,7 +34,7 @@ function getRootFontSize(): number {
  * Falls back to FALLBACK_LAYOUT_TOKENS when CSS isn't available.
  */
 function resolveTokenPixels(token: string): number | undefined {
-  if (!Object.hasOwn(FALLBACK_LAYOUT_TOKENS, token)) return undefined;
+  if (!Object.prototype.hasOwnProperty.call(FALLBACK_LAYOUT_TOKENS, token)) return undefined;
   if (tokenCache.has(token)) return tokenCache.get(token);
 
   // Try runtime CSS resolution first so theme overrides propagate without rebuild
