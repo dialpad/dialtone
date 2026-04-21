@@ -1,12 +1,14 @@
 import type { ResizableSizeValue } from './resizable_constants';
 
-// ─── Size Token Resolution ─────────────────────────────────────────────────
-// Resolves Dialtone size tokens (e.g., '925') to pixel values.
-// Reads --dt-size-{token} CSS custom properties at runtime to stay in sync
+// ─── Layout Token Resolution ───────────────────────────────────────────────
+// Resolves Dialtone layout tokens (e.g., '500', '200', '8px') to pixel values.
+// Reads --dt-layout-{token} CSS custom properties at runtime to stay in sync
 // with the token pipeline. Falls back to a static map in environments where
 // CSS custom properties aren't available (tests, SSR).
 //
-// Will map to --dt-layout-* tokens when they land on the `next` branch.
+// The allowlist (keys of FALLBACK_LAYOUT_TOKENS) mirrors DtBox's layout value
+// set so the same numeric label resolves to the same pixel size in both
+// components and in the `d-w-*` / `d-h-*` utility classes.
 
 /** Cache for resolved token pixel values (populated on first use). */
 const tokenCache = new Map<string, number>();
@@ -25,16 +27,20 @@ function getRootFontSize(): number {
 }
 
 /**
- * Resolve a Dialtone size token to pixels via CSS custom properties.
- * Falls back to FALLBACK_SIZE_TOKENS when CSS isn't available.
+ * Resolve a Dialtone layout token to pixels via CSS custom properties.
+ * Early-rejects tokens not in the FALLBACK_LAYOUT_TOKENS allowlist so the
+ * accepted value set matches DtBox regardless of whether extra layout stops
+ * exist in the token pipeline.
+ * Falls back to FALLBACK_LAYOUT_TOKENS when CSS isn't available.
  */
 function resolveTokenPixels(token: string): number | undefined {
+  if (!Object.prototype.hasOwnProperty.call(FALLBACK_LAYOUT_TOKENS, token)) return undefined;
   if (tokenCache.has(token)) return tokenCache.get(token);
 
-  // Try runtime CSS resolution
+  // Try runtime CSS resolution first so theme overrides propagate without rebuild
   if (typeof document !== 'undefined') {
     const cssValue = getComputedStyle(document.documentElement)
-      .getPropertyValue(`--dt-size-${token}`)
+      .getPropertyValue(`--dt-layout-${token}`)
       .trim();
 
     if (cssValue) {
@@ -53,30 +59,26 @@ function resolveTokenPixels(token: string): number | undefined {
     }
   }
 
-  // Fallback: static map mirrors --dt-size-* tokens from dialtone-tokens
-  // Kept for jsdom tests and SSR where CSS custom properties aren't loaded.
-  if (token in FALLBACK_SIZE_TOKENS) {
-    const px = FALLBACK_SIZE_TOKENS[token];
-    tokenCache.set(token, px);
-    return px;
-  }
-
-  return undefined;
+  // Static fallback — kept for jsdom tests and SSR where CSS custom properties aren't loaded.
+  const px = FALLBACK_LAYOUT_TOKENS[token];
+  tokenCache.set(token, px);
+  return px;
 }
 
 /**
- * Static fallback map — mirrors Dialtone size tokens (base/default.json).
- * Only used when CSS custom properties are unavailable (tests, SSR).
+ * Static fallback map — mirrors the DtBox layout value set from
+ * `packages/dialtone-vue/components/box/box_constants.js` (DT_BOX_LAYOUT_VALUES)
+ * and the underlying `layout.*` tokens in `dialtone-tokens`.
+ * Acts as the allowlist for `isValidSizing` and as the pixel source when CSS
+ * custom properties aren't available (tests, SSR).
  */
-const FALLBACK_SIZE_TOKENS: Record<string, number> = {
-  '0': 0, '50': 0.5, '100': 1, '200': 2, '300': 4, '350': 6,
-  '400': 8, '450': 12, '500': 16, '525': 20, '550': 24, '600': 32,
-  '625': 42, '650': 48, '700': 64, '720': 72, '730': 84, '750': 96,
-  '760': 102, '775': 114, '800': 128, '825': 164, '850': 192, '875': 216,
-  '900': 256, '905': 264, '925': 332, '950': 384, '975': 464, '1000': 512,
-  '1020': 628, '1040': 764, '1050': 768, '1060': 828, '1080': 912,
-  '1100': 1024, '1115': 1140, '1120': 1268, '1125': 1280, '1130': 1340,
-  '1150': 1536, '1200': 2048,
+const FALLBACK_LAYOUT_TOKENS: Record<string, number> = {
+  // off-scale (DLT-3330)
+  '0': 0, '1px': 1, '2px': 2, '8px': 8, '25': 16, '20px': 20, '24px': 24, '50': 32, '75': 48,
+  // 100-multiples (layout.base × N)
+  '100': 64, '200': 128, '300': 192, '400': 256, '500': 320,
+  '600': 384, '700': 448, '800': 512, '900': 576, '1000': 640,
+  '1100': 704, '1200': 768, '1300': 832, '1400': 896, '1500': 960, '1600': 1024,
 };
 
 // ─── Percentage Resolution ─────────────────────────────────────────────────
@@ -126,20 +128,20 @@ export interface ParseSizeOptions {
 
 /**
  * Parses a ResizableSizeValue and returns the pixel value.
- * Handles size tokens (e.g., '925') and percentage tokens (e.g., '50p').
+ * Handles layout tokens (e.g., '500') and percentage tokens (e.g., '50p').
  *
- * Size tokens resolve from --dt-size-{token} CSS custom properties at runtime,
- * falling back to a static map in test/SSR environments.
+ * Layout tokens resolve from --dt-layout-{token} CSS custom properties at
+ * runtime, falling back to a static map in test/SSR environments.
  *
- * @param value - Size token or percentage token
+ * @param value - Layout token or percentage token
  * @param containerSize - Container size in pixels
  * @param options - Optional configuration
  * @returns Pixel value, clamped to container by default
  *
  * @example
- * parseSizeToPixels('925', 1000)  // Returns 332 (from --dt-size-925)
+ * parseSizeToPixels('500', 1000)  // Returns 320 (from --dt-layout-500)
  * parseSizeToPixels('50p', 1000)  // Returns 500 (50% of 1000)
- * parseSizeToPixels('1100', 1000) // Returns 1000 (clamped from 1024px)
+ * parseSizeToPixels('1600', 1000) // Returns 1000 (clamped from 1024px)
  */
 export function parseSizeToPixels(
   value: ResizableSizeValue,

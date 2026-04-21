@@ -150,25 +150,25 @@ describe('computeLayout — basic layout', () => {
 describe('computeLayout — resizable: false panels', () => {
   it('fixed panel keeps its exact initialSize in pixels', () => {
     const result = computeLayout({
-      panels: [panel('fixed', { initialSize: '925', resizable: false }), panel('flex', { initialSize: '50p' })],
+      panels: [panel('fixed', { initialSize: '500', resizable: false }), panel('flex', { initialSize: '50p' })],
       containerSize: 1000,
     });
     const fixed = getPanel(result, 'fixed');
-    expect(fixed.width).toBe(332);
+    expect(fixed.width).toBe(320);
   });
 
   it('flexible panel fills remaining space after fixed panel', () => {
     const result = computeLayout({
-      panels: [panel('fixed', { initialSize: '925', resizable: false }), panel('flex', { initialSize: '50p' })],
+      panels: [panel('fixed', { initialSize: '500', resizable: false }), panel('flex', { initialSize: '50p' })],
       containerSize: 1000,
     });
     const flex = getPanel(result, 'flex');
-    expect(flex.width).toBe(668);
+    expect(flex.width).toBe(680);
   });
 
   it('no handle generated between fixed and flexible panel', () => {
     const result = computeLayout({
-      panels: [panel('fixed', { initialSize: '925', resizable: false }), panel('flex', { initialSize: '50p' })],
+      panels: [panel('fixed', { initialSize: '500', resizable: false }), panel('flex', { initialSize: '50p' })],
       containerSize: 1000,
     });
     expect(result.handles).toHaveLength(0);
@@ -231,20 +231,20 @@ describe('computeLayout — collapsed panels', () => {
 describe('computeLayout — constraint enforcement', () => {
   it('panel with userMinSize is clamped UP when initial percentage is too small', () => {
     const result = computeLayout({
-      panels: [panel('small', { initialSize: '10p', userMinSize: '925' }), panel('large', { initialSize: '90p' })],
+      panels: [panel('small', { initialSize: '10p', userMinSize: '500' }), panel('large', { initialSize: '90p' })],
       containerSize: 1000,
     });
     const small = getPanel(result, 'small');
-    expect(small.width).toBeGreaterThanOrEqual(332);
+    expect(small.width).toBeGreaterThanOrEqual(320);
   });
 
   it('panel with userMaxSize is clamped DOWN when initial percentage exceeds it', () => {
     const result = computeLayout({
-      panels: [panel('big', { initialSize: '90p', userMaxSize: '925' }), panel('small', { initialSize: '10p' })],
+      panels: [panel('big', { initialSize: '90p', userMaxSize: '500' }), panel('small', { initialSize: '10p' })],
       containerSize: 1000,
     });
     const big = getPanel(result, 'big');
-    expect(big.width).toBeLessThanOrEqual(332);
+    expect(big.width).toBeLessThanOrEqual(320);
   });
 
   it('systemMinSize is applied during layout', () => {
@@ -273,7 +273,7 @@ describe('computeLayout — constraint enforcement', () => {
 
   it('constraints stored in PanelPosition.constraints match resolved values', () => {
     const result = computeLayout({
-      panels: [panel('a', { initialSize: '50p', userMinSize: '800' })],
+      panels: [panel('a', { initialSize: '50p', userMinSize: '200' })],
       containerSize: 1000,
     });
     const a = getPanel(result, 'a');
@@ -321,15 +321,15 @@ describe('computeLayout — proportional scaling', () => {
 
   it('fixed panel (resizable: false) does NOT scale with container', () => {
     const r1 = computeLayout({
-      panels: [panel('fixed', { initialSize: '925', resizable: false }), panel('flex', { initialSize: '50p' })],
+      panels: [panel('fixed', { initialSize: '500', resizable: false }), panel('flex', { initialSize: '50p' })],
       containerSize: 1000,
     });
     const r2 = computeLayout({
-      panels: [panel('fixed', { initialSize: '925', resizable: false }), panel('flex', { initialSize: '50p' })],
+      panels: [panel('fixed', { initialSize: '500', resizable: false }), panel('flex', { initialSize: '50p' })],
       containerSize: 2000,
     });
-    expect(getPanel(r1, 'fixed').width).toBe(332);
-    expect(getPanel(r2, 'fixed').width).toBe(332);
+    expect(getPanel(r1, 'fixed').width).toBe(320);
+    expect(getPanel(r2, 'fixed').width).toBe(320);
   });
 });
 
