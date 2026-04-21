@@ -17,6 +17,7 @@ import { computed, ref, onMounted, onUpdated } from 'vue';
 import {
   PROSE_DISALLOWED_ELEMENTS,
   PROSE_ALLOWED_ATTRIBUTES,
+  PROSE_ALLOWED_ATTRIBUTE_PREFIXES,
   PROSE_SIZE_MODIFIERS,
   PROSE_DENSITY_MODIFIERS,
 } from './prose_constants.js';
@@ -73,9 +74,9 @@ function stripDisallowedAttributes (node, tagName) {
 
   const attrsToRemove = [];
   for (const attr of node.attributes) {
-    if (!allowed.includes(attr.name)) {
-      attrsToRemove.push(attr.name);
-    }
+    if (allowed.includes(attr.name)) continue;
+    if (PROSE_ALLOWED_ATTRIBUTE_PREFIXES.some(prefix => attr.name.startsWith(prefix))) continue;
+    attrsToRemove.push(attr.name);
   }
   for (const attrName of attrsToRemove) {
     node.removeAttribute(attrName);

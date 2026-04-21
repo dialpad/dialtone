@@ -16,8 +16,10 @@ export const PROSE_DISALLOWED_ELEMENTS = [
   'optgroup', 'option',
 ];
 
+export const PROSE_ALLOWED_ATTRIBUTE_PREFIXES = ['aria-'];
+
 export const PROSE_ALLOWED_ATTRIBUTES = {
-  _global: ['id', 'lang', 'dir', 'translate', 'title'],
+  _global: ['id', 'lang', 'dir', 'translate', 'title', 'role'],
   a: ['href', 'target', 'rel', 'hreflang'],
   img: ['src', 'alt', 'width', 'height', 'loading', 'decoding'],
   th: ['scope', 'colspan', 'rowspan', 'headers'],

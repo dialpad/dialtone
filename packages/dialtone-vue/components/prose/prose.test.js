@@ -201,6 +201,27 @@ describe('DtProse Tests', () => {
       expect(p.element.hasAttribute('data-testid')).toBe(false);
       expect(p.element.hasAttribute('data-custom')).toBe(false);
     });
+
+    it('Should preserve aria-* attributes', () => {
+      _setWrapper({}, {}, {
+        default: '<a href="#" aria-label="home" aria-describedby="hint">link</a>',
+      });
+
+      const a = wrapper.find('a');
+
+      expect(a.element.getAttribute('aria-label')).toBe('home');
+      expect(a.element.getAttribute('aria-describedby')).toBe('hint');
+    });
+
+    it('Should preserve role attribute', () => {
+      _setWrapper({}, {}, {
+        default: '<div role="note">text</div>',
+      });
+
+      const div = wrapper.find('div[role="note"]');
+
+      expect(div.element.getAttribute('role')).toBe('note');
+    });
   });
 
   describe('Accessibility Tests', () => {
