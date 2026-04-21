@@ -222,6 +222,43 @@ describe('DtProse Tests', () => {
 
       expect(div.element.getAttribute('role')).toBe('note');
     });
+
+    it.each([
+      ['javascript:alert(1)'],
+      ['  javascript:alert(1)'],
+      ['JavaScript:alert(1)'],
+      ['vbscript:msg'],
+      ['data:text/html,<script>x</script>'],
+    ])('Should strip unsafe url scheme %s from href', (badHref) => {
+      _setWrapper({}, {}, {
+        default: `<a href="${badHref}">link</a>`,
+      });
+
+      const a = wrapper.find('a');
+
+      expect(a.element.hasAttribute('href')).toBe(false);
+    });
+
+    it('Should preserve safe https href', () => {
+      _setWrapper({}, {}, {
+        default: '<a href="https://example.com/path">link</a>',
+      });
+
+      const a = wrapper.find('a');
+
+      expect(a.element.getAttribute('href')).toBe('https://example.com/path');
+    });
+
+    it('Should sanitize attrs on custom elements', () => {
+      _setWrapper({}, {}, {
+        default: '<my-widget onclick="evil()" aria-label="ok">x</my-widget>',
+      });
+
+      const el = wrapper.find('my-widget');
+
+      expect(el.element.hasAttribute('onclick')).toBe(false);
+      expect(el.element.getAttribute('aria-label')).toBe('ok');
+    });
   });
 
   describe('Accessibility Tests', () => {

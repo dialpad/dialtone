@@ -18,8 +18,10 @@ import {
   PROSE_DISALLOWED_ELEMENTS,
   PROSE_ALLOWED_ATTRIBUTES,
   PROSE_ALLOWED_ATTRIBUTE_PREFIXES,
+  PROSE_URL_ATTRIBUTES,
   PROSE_SIZE_MODIFIERS,
   PROSE_DENSITY_MODIFIERS,
+  isSafeProseUrl,
 } from './prose_constants.js';
 
 const props = defineProps({
@@ -74,6 +76,10 @@ function stripDisallowedAttributes (node, tagName) {
 
   const attrsToRemove = [];
   for (const attr of node.attributes) {
+    if (PROSE_URL_ATTRIBUTES.includes(attr.name) && !isSafeProseUrl(attr.value)) {
+      attrsToRemove.push(attr.name);
+      continue;
+    }
     if (allowed.includes(attr.name)) continue;
     if (PROSE_ALLOWED_ATTRIBUTE_PREFIXES.some(prefix => attr.name.startsWith(prefix))) continue;
     attrsToRemove.push(attr.name);
@@ -94,10 +100,7 @@ function sanitizeContent () {
   let node = walker.nextNode();
   while (node) {
     const tagName = node.tagName.toLowerCase();
-
-    if (!isCustomElement(tagName)) {
-      stripDisallowedAttributes(node, tagName);
-    }
+    stripDisallowedAttributes(node, tagName);
 
     node = walker.nextNode();
   }

@@ -18,6 +18,14 @@ export const PROSE_DISALLOWED_ELEMENTS = [
 
 export const PROSE_ALLOWED_ATTRIBUTE_PREFIXES = ['aria-'];
 
+export const PROSE_URL_ATTRIBUTES = ['href', 'src', 'cite'];
+
+const UNSAFE_URL_SCHEME = /^\s*(javascript|vbscript|data|blob|file):/i;
+
+export function isSafeProseUrl (value) {
+  return !UNSAFE_URL_SCHEME.test(value ?? '');
+}
+
 export const PROSE_ALLOWED_ATTRIBUTES = {
   _global: ['id', 'lang', 'dir', 'translate', 'title', 'role'],
   a: ['href', 'target', 'rel', 'hreflang'],
