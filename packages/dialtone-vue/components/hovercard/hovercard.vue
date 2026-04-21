@@ -17,6 +17,7 @@
     :header-class="headerClass"
     :footer-class="footerClass"
     :append-to="appendTo"
+    :anchor-class="anchorClass"
     :external-anchor-element="externalAnchorElement"
     data-qa="dt-hovercard"
     :enter-delay="enterDelay"
@@ -151,6 +152,14 @@ const props = defineProps({
   id: {
     type: String,
     default () { return getUniqueString(); },
+  },
+
+  /**
+     * Additional class name for the anchor wrapper element.
+     */
+  anchorClass: {
+    type: [String, Array, Object],
+    default: '',
   },
 
   /**

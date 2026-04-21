@@ -43,6 +43,15 @@ export const argTypesData = {
   },
 
   // Props
+  illustrationClass: {
+    description: 'Pass through classes. Used to customize the illustration container',
+  },
+  iconClass: {
+    description: 'Pass through classes. Used to customize the icon container',
+  },
+  bodyClass: {
+    description: 'Pass through classes. Used to customize the body slot container',
+  },
   size: {
     options: Object.keys(EMPTY_STATE_SIZE_MODIFIERS),
     control: {

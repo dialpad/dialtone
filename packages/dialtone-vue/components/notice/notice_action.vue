@@ -1,6 +1,6 @@
 <template>
   <div
-    class="d-notice__actions"
+    :class="['d-notice__actions', actionClass]"
     data-qa="notice-content-actions"
   >
     <!-- @slot Slot for main content -->
@@ -62,6 +62,14 @@ export default {
     showAction: {
       type: Boolean,
       default: true,
+    },
+
+    /**
+     * Additional class name for the action wrapper element.
+     */
+    actionClass: {
+      type: [String, Array, Object],
+      default: '',
     },
   },
 

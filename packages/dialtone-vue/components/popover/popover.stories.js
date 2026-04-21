@@ -65,6 +65,9 @@ export const argTypesData = {
   },
 
   // Props
+  anchorClass: {
+    description: 'Pass through classes. Used to customize the anchor wrapper element',
+  },
   id: {
     table: {
       defaultValue: {

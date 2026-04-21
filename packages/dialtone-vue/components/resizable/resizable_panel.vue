@@ -14,7 +14,7 @@
     data-qa="d-resizable-panel"
   >
     <div
-      class="d-resizable-panel__content"
+      :class="['d-resizable-panel__content', contentClass]"
       :style="offsetContentStyles"
     >
       <!-- @slot Panel content. Provides panel state and collapsed/resizing flags. -->
@@ -55,6 +55,8 @@ const props = defineProps({
   collapsed: { type: Boolean, default: false },
   /** Additional CSS classes applied to the panel element. */
   class: { type: [String, Object, Array], default: '' },
+  /** Additional CSS classes applied to the inner content wrapper element. */
+  contentClass: { type: [String, Object, Array], default: '' },
 });
 
 const SIZE_PROPS = ['initialSize', 'userMinSize', 'userMaxSize', 'systemMinSize', 'systemMaxSize', 'collapseSize'];

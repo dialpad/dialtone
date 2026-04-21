@@ -14,6 +14,7 @@
         <dt-toast-layout-alternate-icon
           v-if="showIcon"
           :kind="kind"
+          :icon-class="iconClass"
           size="200"
           v-bind="toastListeners"
         >
@@ -23,6 +24,8 @@
           :header-id="headerId"
           :content-id="contentId"
           :header-text="headerText"
+          :header-class="headerClass"
+          :content-class="contentClass"
           :role="role"
           v-bind="toastListeners"
         >
@@ -35,6 +38,7 @@
         <dt-notice-action
           :show-action="false"
           :show-close="showClose"
+          :action-class="actionClass"
           :button-size="100"
           v-bind="toastListeners"
           @close="$emit('close')"
@@ -149,6 +153,38 @@ export default {
     showIcon: {
       type: Boolean,
       default: true,
+    },
+
+    /**
+     * Additional class name for the icon wrapper element.
+     */
+    iconClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the header wrapper element.
+     */
+    headerClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the content wrapper element.
+     */
+    contentClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the action wrapper element.
+     */
+    actionClass: {
+      type: [String, Array, Object],
+      default: '',
     },
   },
 

@@ -60,7 +60,7 @@
         :read-only="disabled === true ? true : undefined"
       >
         <span
-          class="d-input-icon d-input-icon--left"
+          :class="['d-input-icon', 'd-input-icon--left', startIconClass]"
           data-qa="dt-input-left-icon-wrapper"
           @focusout="onBlur"
         >
@@ -106,7 +106,7 @@
           v-on="inputListeners"
         >
         <span
-          class="d-input-icon d-input-icon--right"
+          :class="['d-input-icon', 'd-input-icon--right', endIconClass]"
           data-qa="dt-input-right-icon-wrapper"
           @focusout="onBlur"
         >
@@ -339,6 +339,22 @@ export default {
      * Used to customize the label container
      */
     labelClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Used to customize the start icon container
+     */
+    startIconClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Used to customize the end icon container
+     */
+    endIconClass: {
       type: [String, Array, Object],
       default: '',
     },

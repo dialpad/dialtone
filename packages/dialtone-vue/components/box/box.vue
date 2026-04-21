@@ -9,7 +9,7 @@
   >
     <div
       data-qa="dt-box-scrollbar-content"
-      class="d-box__scrollbar-content"
+      :class="['d-box__scrollbar-content', scrollbarContentClass]"
     >
       <!-- @slot Slot for main content -->
       <slot />
@@ -221,6 +221,12 @@ const props = defineProps({
    * @values hidden, scroll, auto, clip, visible
    */
   overflow: { type: String, default: undefined, validator: overflowValidator },
+
+  /**
+   * Additional CSS classes applied to the scrollbar content wrapper element.
+   * Only applies when scrollbar prop is set.
+   */
+  scrollbarContentClass: { type: [String, Object, Array], default: '' },
 });
 
 const SCROLLBAR_INCOMPATIBLE_ELEMENTS = ['ul', 'ol', 'span', 'fieldset'];

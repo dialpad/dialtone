@@ -35,6 +35,7 @@
           'd-btn__icon': kind !== 'unstyled',
           'd-btn__icon--top': kind !== 'unstyled',
         },
+        blockStartIconClass,
       ]"
     >
       <!-- @slot Icon displayed above the button label (block-start) -->
@@ -53,6 +54,7 @@
           'd-btn__icon': kind !== 'unstyled',
           'd-btn__icon--left': kind !== 'unstyled',
         },
+        startIconClass,
       ]"
     >
       <!-- @slot Icon displayed at the start (left in LTR) of the button -->
@@ -71,6 +73,7 @@
           'd-btn__icon': kind !== 'unstyled',
           [ICON_POSITION_MODIFIERS[iconPosition]]: kind !== 'unstyled',
         },
+        iconClass,
       ]"
     >
       <!-- @slot Button icon -->
@@ -101,6 +104,7 @@
           'd-btn__icon': kind !== 'unstyled',
           'd-btn__icon--right': kind !== 'unstyled',
         },
+        endIconClass,
       ]"
     >
       <!-- @slot Icon displayed at the end (right in LTR) of the button -->
@@ -119,6 +123,7 @@
           'd-btn__icon': kind !== 'unstyled',
           'd-btn__icon--bottom': kind !== 'unstyled',
         },
+        blockEndIconClass,
       ]"
     >
       <!-- @slot Icon displayed below the button label (block-end) -->
@@ -309,6 +314,47 @@ export default {
      * Used to customize the trailing container
      */
     trailingClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Used to customize the start icon container
+     */
+    startIconClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Used to customize the end icon container
+     */
+    endIconClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Used to customize the block-start icon container
+     */
+    blockStartIconClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Used to customize the block-end icon container
+     */
+    blockEndIconClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Used to customize the legacy icon container
+     * @deprecated Use startIconClass or endIconClass
+     */
+    iconClass: {
       type: [String, Array, Object],
       default: '',
     },
