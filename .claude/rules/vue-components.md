@@ -7,7 +7,7 @@ paths:
 
 ## API Style
 
-- **New components**: Composition API with `<script setup lang="ts">`. Use `defineProps`, `defineEmits`, `defineSlots`.
+- **New components**: Composition API with `<script setup lang="ts">`. Use `defineProps`, `defineEmits`, `defineSlots`. Always include `defineOptions({ name: 'DtComponentName' })` — without it, vue-docgen infers the name from the filename (lowercase, no prefix), breaking the combinator, component-documentation.json, and Vue devtools.
 - **Existing components**: Options API with `compatConfig: { MODE: 3 }`. Do NOT convert unless explicitly asked.
 
 ## Props

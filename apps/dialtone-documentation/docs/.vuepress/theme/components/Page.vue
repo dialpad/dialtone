@@ -15,7 +15,7 @@
           </h2>
         </div>
         <!-- eslint-disable-next-line vue/no-undef-components -->
-        <content />
+        <content class="d-docsite-article" />
       </article>
       <dt-stack
         direction="row"

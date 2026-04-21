@@ -1,7 +1,7 @@
 <template>
   <dt-tab-group
     class="d-d-flex d-fd-column d-of-y-auto d-h100p"
-    tab-list-class="dtc-theme__tabs d-zi-base1 d-ps-sticky d-t-0"
+    tab-list-class="dtc-theme__tabs d-zi-base1 d-ps-sticky d-ibs-0"
     :selected="getId(selected)"
     borderless
   >

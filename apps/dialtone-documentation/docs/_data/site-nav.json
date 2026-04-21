@@ -414,6 +414,10 @@
                 "link": "/components/presence.html"
               },
               {
+                "text": "Prose",
+                "link": "/components/prose.html"
+              },
+              {
                 "text": "Radio",
                 "link": "/components/radio.html"
               },

@@ -49,6 +49,7 @@ export * from './components/pagination';
 export * from './components/popover';
 export * from './components/progress_circle';
 export * from './components/presence';
+export * from './components/prose';
 export * from './components/radio';
 export * from './components/radio_group';
 export * from './components/resizable';

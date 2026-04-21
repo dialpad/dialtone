@@ -41,6 +41,7 @@ module.exports = [
   'popover.vue',
   'progress_circle.vue',
   'presence.vue',
+  'prose.vue',
   'radio.vue',
   'radio_group.vue',
   'resizable.vue',
