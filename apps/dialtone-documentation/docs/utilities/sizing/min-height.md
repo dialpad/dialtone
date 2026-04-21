@@ -13,9 +13,9 @@ Use `d-hmn-{stop}` to set a fixed minimum height for an element using layout tok
 
 ```vue demo
 <dt-stack direction="row" gap="200" align="start" justify="center" class="d-w100p">
-  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w-100 d-h-75 d-hmn-100 d-bgc-moderate d-bar4 d-ta-center">1</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w-100 d-h-75 d-hmn-150 d-bgc-moderate d-bar4 d-ta-center">2</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w-100 d-hmn-500 d-bgc-moderate d-bar4 d-ta-center">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w-100 d-h-75 d-hmn-100 d-bgc-moderate d-bar-300 d-ta-center">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w-100 d-h-75 d-hmn-150 d-bgc-moderate d-bar-300 d-ta-center">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w-100 d-hmn-500 d-bgc-moderate d-bar-300 d-ta-center">3</dt-stack>
 </dt-stack>
 <!-- @code -->
 <div class="d-hmn-100">...</div>  <!-- min-block-size: var(--dt-layout-100) = 64px / 6.4rem -->
@@ -30,9 +30,9 @@ Use `d-hmn{n}p` to set a minimum height percentage for an element. No hyphen bef
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="200" align="start" justify="center" class="d-w100p d-h-400">
-  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w-100 d-hmn33p d-bgc-moderate d-bar4 d-ta-center">1</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w-100 d-hmn66p d-bgc-moderate d-bar4 d-ta-center">2</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w-100 d-hmn100p d-bgc-moderate d-bar4 d-ta-center">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w-100 d-hmn33p d-bgc-moderate d-bar-300 d-ta-center">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w-100 d-hmn66p d-bgc-moderate d-bar-300 d-ta-center">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w-100 d-hmn100p d-bgc-moderate d-bar-300 d-ta-center">3</dt-stack>
 </dt-stack>
 <!-- @code -->
 <div class="d-hmn33p">...</div>  <!-- min-block-size: 33.333% -->

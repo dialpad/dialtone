@@ -1,6 +1,6 @@
 <template>
   <div
-    class="d-notice__content"
+    :class="['d-notice__content', contentClass]"
     data-qa="notice-content"
   >
     <dt-text
@@ -10,7 +10,7 @@
       :size="300"
       density="200"
       as="p"
-      class="d-notice__title"
+      :class="['d-notice__title', headerClass]"
       data-qa="notice-content-title"
     >
       <!-- @slot Slot for the header -->
@@ -69,6 +69,22 @@ export default {
     contentId: {
       type: String,
       default: undefined,
+    },
+
+    /**
+     * Additional class name for the header wrapper element.
+     */
+    headerClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the content wrapper element.
+     */
+    contentClass: {
+      type: [String, Array, Object],
+      default: '',
     },
   },
 

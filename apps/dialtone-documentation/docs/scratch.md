@@ -632,7 +632,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
 
 ```vue demo
 <dt-stack role="list" v-dt-focusgroup="'vertical'" aria-label="Contacts">
-  <dt-stack role="listitem" tabindex="0" gap="100" class="d-p-100 d-w-800 h:d-bgc-moderate-opaque fv:d-bgc-moderate-opaque d-bar8">
+  <dt-stack role="listitem" tabindex="0" gap="100" class="d-p-100 d-w-800 h:d-bgc-moderate-opaque fv:d-bgc-moderate-opaque d-bar-400">
     <dt-stack direction="row" gap="100" class="d-w100p">
       <dt-avatar full-name="Ashanti Trevor" />
       <dt-stack class="d-fl1">
@@ -650,7 +650,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
       <dt-badge kind="count" type="bulletin" text="6" />
     </dt-stack>
   </dt-stack>
-  <dt-stack role="listitem" tabindex="0" gap="100" class="d-p-100 d-w-800 h:d-bgc-moderate-opaque fv:d-bgc-moderate-opaque d-bar8">
+  <dt-stack role="listitem" tabindex="0" gap="100" class="d-p-100 d-w-800 h:d-bgc-moderate-opaque fv:d-bgc-moderate-opaque d-bar-400">
     <dt-stack direction="row" gap="100" class="d-w100p">
       <dt-avatar full-name="Marcus Chen" />
       <dt-stack class="d-fl1">
@@ -667,7 +667,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
       <dt-text kind="body" :size="200" tone="tertiary" numeric>1:47 pm</dt-text>
     </dt-stack>
   </dt-stack>
-  <dt-stack role="listitem" tabindex="0" gap="100" class="d-p-100 d-w-800 h:d-bgc-moderate-opaque fv:d-bgc-moderate-opaque d-bar8">
+  <dt-stack role="listitem" tabindex="0" gap="100" class="d-p-100 d-w-800 h:d-bgc-moderate-opaque fv:d-bgc-moderate-opaque d-bar-400">
     <dt-stack direction="row" gap="100" class="d-w100p">
       <dt-avatar full-name="Priya Sharma" />
       <dt-stack class="d-fl1">
@@ -735,7 +735,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
     <dt-text as="p" kind="body" :size="400">
       Not just a matter of applying opacity to whole button, but w/ combination of `color-mix()` and tweaking existing DtButton css variables via `oklch()` of specific properties – separate opacity and saturation for border, bgc, fc, etc.
     </dt-text>
-    <dt-stack class="d-bgc-moderate-opaque d-p-150 d-bar8">
+    <dt-stack class="d-bgc-moderate-opaque d-p-150 d-bar-400">
       <span>
         <dt-checkbox v-model="isDisabled">Disabled</dt-checkbox>
       </span>
@@ -769,7 +769,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
     <dt-text as="p" kind="body" :size="400">
       Freeform elements that are rendered before/after the button content.
     </dt-text>
-    <dt-stack gap="200" direction="row" align="baseline" class="d-bgc-moderate-opaque d-p-150 d-bar8">
+    <dt-stack gap="200" direction="row" align="baseline" class="d-bgc-moderate-opaque d-p-150 d-bar-400">
       <dt-checkbox v-model="showBtnLeading">
         Leading
       </dt-checkbox>
@@ -989,7 +989,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
     <dt-text as="h1" kind="headline" :size="500">
       Input / Select
     </dt-text>
-    <dt-stack gap="200" direction="row" class="d-bgc-moderate-opaque d-p-150 d-bar8">
+    <dt-stack gap="200" direction="row" class="d-bgc-moderate-opaque d-p-150 d-bar-400">
       <dt-select-menu
         label="Label Size"
         :show-label="false"
@@ -1142,7 +1142,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
     <dt-text as="p" kind="body" :size="400">
       Just straight up refactor to use DtButton instead of custom markup/style. Use mix of DtButton variants depending on `active`. Uses all DtButton sizes (currently at least).
     </dt-text>
-    <dt-stack gap="200" direction="row" align="baseline" class="d-bgc-moderate-opaque d-p-150 d-bar8">
+    <dt-stack gap="200" direction="row" align="baseline" class="d-bgc-moderate-opaque d-p-150 d-bar-400">
       <dt-checkbox v-model="borderless">
         Borderless
       </dt-checkbox>
@@ -1533,7 +1533,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
     <dt-text as="h1" kind="headline" :size="500">
       Radio / Checkbox
     </dt-text>
-    <dt-stack gap="200" direction="row" class="d-bgc-moderate-opaque d-p-150 d-bar8">
+    <dt-stack gap="200" direction="row" class="d-bgc-moderate-opaque d-p-150 d-bar-400">
       <dt-select-menu
         label="Label Size"
         :show-label="false"
@@ -1713,7 +1713,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
     </dt-text>
 
 ```vue demo
-<dt-box padding="200" surface="moderate" class="d-bar8 d-bs-sm">
+<dt-box padding="200" surface="moderate" class="d-bar-400 d-bs-sm">
   Box demo
 </dt-box>
 ```
@@ -1723,7 +1723,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
   <dt-box
     padding="100"
     surface="secondary"
-    class="d-ps-sticky d-t0"
+    class="d-ps-sticky d-t-0"
   >
     <dt-text kind="body" :size="200">Box demo</dt-text>
   </dt-box>
@@ -1789,7 +1789,7 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
   <dt-text kind="headline" size="md">Utility class escape hatch</dt-text>
 
 ```vue demo
-<dt-box padding="200" surface="primary" border-width="100" border-radius="200" class="d-ps-sticky d-t0">
+<dt-box padding="200" surface="primary" border-width="100" border-radius="200" class="d-ps-sticky d-t-0">
   Box demo
 </dt-box>
 ```

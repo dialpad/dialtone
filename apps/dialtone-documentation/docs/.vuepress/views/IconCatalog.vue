@@ -1,6 +1,6 @@
 <!-- eslint-disable vuejs-accessibility/no-autofocus -->
 <template>
-  <div class="d-d-grid d-g-200 d-g-cols6 d-mbs-400 d-mbe-200 d-p-200 d-bgc-secondary d-bar8">
+  <div class="d-d-grid d-g-200 d-g-cols6 d-mbs-400 d-mbe-200 d-p-200 d-bgc-secondary d-bar-400">
     <div class="d-gc4">
       <dt-input
         id="search-input"
@@ -93,7 +93,7 @@
     v-if="!hasSearchResults"
     :size="200"
     :header-text="`No results found for &OpenCurlyDoubleQuote;${search}&CloseCurlyDoubleQuote;`"
-    class="d-w100p d-ba d-bc-subtle d-bar8 d-mbs-200 d-pbs-400"
+    class="d-w100p d-ba d-bc-subtle d-bar-400 d-mbs-200 d-pbs-400"
   >
     <template #icon="{ iconSize }">
       <dt-icon name="box" :size="iconSize" />

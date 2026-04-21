@@ -213,6 +213,42 @@ describe('DtIllustration Tests', () => {
     });
   });
 
+  describe('Pass-through class props', () => {
+    it('Should apply illustrationClass to the illustration wrapper', async () => {
+      mockSlots = { illustration: MOCK_ILLUSTRATION_SLOT };
+      mockProps = { illustrationClass: 'my-illustration-class' };
+
+      await updateWrapper();
+
+      const illustrationWrapper = wrapper.find('.d-empty-state__illustration');
+
+      expect(illustrationWrapper.classes()).toContain('my-illustration-class');
+    });
+
+    it('Should apply iconClass to the icon wrapper', async () => {
+      mockSlots = { icon: MOCK_ICON_SLOT };
+      mockProps = { size: 'sm', iconClass: 'my-icon-class' };
+
+      await updateWrapper();
+
+      const iconWrapper = wrapper.find('.d-empty-state__icon');
+
+      expect(iconWrapper.classes()).toContain('my-icon-class');
+    });
+
+    it('Should apply bodyClass to the body slot wrapper', async () => {
+      mockProps = { bodyClass: 'my-body-class' };
+      mockSlots = { body: MOCK_BODY_SLOT };
+
+      await updateWrapper();
+
+      const bodyWrapper = wrapper.find('.my-body-class');
+
+      expect(bodyWrapper.exists()).toBe(true);
+      expect(bodyWrapper.find('h2').exists()).toBe(true);
+    });
+  });
+
   describe('Validation Tests', () => {
     describe('With no bodyText or body slot provided', () => {
       it('Should console.error', () => {

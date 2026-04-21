@@ -121,7 +121,7 @@ export default {
      * Set the class for the start section.
      */
     startClass: {
-      type: String,
+      type: [String, Array, Object],
       default: '',
     },
 
@@ -130,7 +130,7 @@ export default {
      * @deprecated Use startClass
      */
     leftClass: {
-      type: String,
+      type: [String, Array, Object],
       default: undefined,
     },
 
@@ -138,7 +138,7 @@ export default {
      * Set the class for the content section.
      */
     contentClass: {
-      type: String,
+      type: [String, Array, Object],
       default: '',
     },
 
@@ -146,7 +146,7 @@ export default {
      * Set the class for the title section.
      */
     titleClass: {
-      type: String,
+      type: [String, Array, Object],
       default: '',
     },
 
@@ -154,7 +154,7 @@ export default {
      * Set the class for the subtitle section.
      */
     subtitleClass: {
-      type: String,
+      type: [String, Array, Object],
       default: '',
     },
 
@@ -162,7 +162,7 @@ export default {
      * Set the class for the block-end section.
      */
     blockEndClass: {
-      type: String,
+      type: [String, Array, Object],
       default: '',
     },
 
@@ -171,7 +171,7 @@ export default {
      * @deprecated Use blockEndClass
      */
     bottomClass: {
-      type: String,
+      type: [String, Array, Object],
       default: undefined,
     },
 
@@ -179,7 +179,7 @@ export default {
      * Set the class for the end section.
      */
     endClass: {
-      type: String,
+      type: [String, Array, Object],
       default: '',
     },
 
@@ -188,7 +188,7 @@ export default {
      * @deprecated Use endClass
      */
     rightClass: {
-      type: String,
+      type: [String, Array, Object],
       default: undefined,
     },
 
@@ -196,7 +196,7 @@ export default {
      * Set the class for the selected section.
      */
     selectedClass: {
-      type: String,
+      type: [String, Array, Object],
       default: '',
     },
   },

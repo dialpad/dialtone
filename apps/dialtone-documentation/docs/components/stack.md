@@ -224,7 +224,7 @@ Use `as="span"` when you need an inline container.
       <dt-text as="h3" kind="headline" :size="300">Column</dt-text>
       <dt-stack
         :gap="selectedGap"
-        class="d-bgc-moderate-opaque d-t d-td300 d-bar8 d-ttf-quint"
+        class="d-bgc-moderate-opaque d-t d-td300 d-bar-400 d-ttf-quint"
       >
         <dt-box surface="moderate-opaque" padding="200" border-radius="300">Stack item 1</dt-box>
         <dt-box surface="moderate-opaque" padding="200" border-radius="300">Stack item 2</dt-box>
@@ -236,7 +236,7 @@ Use `as="span"` when you need an inline container.
       <dt-stack
         direction="row"
         :gap="selectedGap"
-        class="d-bgc-moderate-opaque d-t d-td300 d-bar8 d-ttf-quint"
+        class="d-bgc-moderate-opaque d-t d-td300 d-bar-400 d-ttf-quint"
       >
         <dt-box surface="moderate-opaque" padding="200" border-radius="300" class="d-fl1">Stack item 1</dt-box>
         <dt-box surface="moderate-opaque" padding="200" border-radius="300" class="d-fl1">Stack item 2</dt-box>
@@ -303,7 +303,7 @@ The `align` prop is optional. Unless specified, it will default vertical stacks 
 >
   <dt-stack
     gap="100"
-    class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-stretch"
+    class="d-bgc-moderate-opaque d-bar-400 axis-outline axis-outline--inline-stretch"
   >
     <dt-box surface="moderate-opaque" padding="200" border-radius="300">
       Short
@@ -319,7 +319,7 @@ The `align` prop is optional. Unless specified, it will default vertical stacks 
   <dt-stack
     gap="100"
     direction="row"
-    class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
+    class="d-bgc-moderate-opaque d-bar-400 axis-outline axis-outline--block-center"
   >
     <dt-box surface="moderate-opaque" padding="200" border-radius="300">
       Short
@@ -364,7 +364,7 @@ Align items to the start of the cross-axis.
   <dt-stack
     gap="100"
     align="start"
-    class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-start"
+    class="d-bgc-moderate-opaque d-bar-400 axis-outline axis-outline--inline-start"
   >
     <dt-box surface="moderate-opaque" padding="200" border-radius="300">
       Short
@@ -381,7 +381,7 @@ Align items to the start of the cross-axis.
     direction="row"
     gap="100"
     align="start"
-    class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-start"
+    class="d-bgc-moderate-opaque d-bar-400 axis-outline axis-outline--block-start"
   >
     <dt-box surface="moderate-opaque" padding="200" border-radius="300">
       Short
@@ -433,7 +433,7 @@ Center items along the cross-axis.
   <dt-stack
     gap="100"
     align="center"
-    class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-center"
+    class="d-bgc-moderate-opaque d-bar-400 axis-outline axis-outline--inline-center"
   >
     <dt-box surface="moderate-opaque" padding="200" border-radius="300">
       Short
@@ -450,7 +450,7 @@ Center items along the cross-axis.
     direction="row"
     gap="100"
     align="center"
-    class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
+    class="d-bgc-moderate-opaque d-bar-400 axis-outline axis-outline--block-center"
   >
     <dt-box surface="moderate-opaque" padding="200" border-radius="300">
       Short
@@ -491,7 +491,7 @@ Align items to the end of the cross-axis.
   <dt-stack
     gap="100"
     align="end"
-    class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-end"
+    class="d-bgc-moderate-opaque d-bar-400 axis-outline axis-outline--inline-end"
   >
     <dt-box surface="moderate-opaque" padding="200" border-radius="300">
       Short
@@ -508,7 +508,7 @@ Align items to the end of the cross-axis.
     direction="row"
     gap="100"
     align="end"
-    class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-end"
+    class="d-bgc-moderate-opaque d-bar-400 axis-outline axis-outline--block-end"
   >
     <dt-box surface="moderate-opaque" padding="200" border-radius="300">
       Short
@@ -560,7 +560,7 @@ Stretch items to fill the container height.
   <dt-stack
     gap="100"
     align="stretch"
-    class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-stretch"
+    class="d-bgc-moderate-opaque d-bar-400 axis-outline axis-outline--inline-stretch"
   >
     <dt-box surface="moderate-opaque" padding="200" border-radius="300">
       Short
@@ -577,7 +577,7 @@ Stretch items to fill the container height.
     direction="row"
     gap="100"
     align="stretch"
-    class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-stretch"
+    class="d-bgc-moderate-opaque d-bar-400 axis-outline axis-outline--block-stretch"
   >
     <dt-box surface="moderate-opaque" padding="200" border-radius="300">
       Short
@@ -615,7 +615,7 @@ Align items along their text baselines.
   direction="row"
   gap="100"
   align="baseline"
-  class="d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--baseline"
+  class="d-bgc-moderate-opaque d-bar-400 axis-outline axis-outline--baseline"
 >
   <dt-box surface="moderate-opaque" padding="200" border-radius="300">
     <dt-text kind="body" :size="100">Small body</dt-text>
@@ -659,7 +659,7 @@ Align items to the start of the main axis (default).
   <dt-stack
     gap="100"
     justify="start"
-    class="d-w100p d-h-400 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-start"
+    class="d-w100p d-h-400 d-bgc-moderate-opaque d-bar-400 axis-outline axis-outline--block-start"
   >
     <dt-box surface="moderate-opaque" padding="200" border-radius="300">Item 1</dt-box>
     <dt-box surface="moderate-opaque" padding="200" border-radius="300">Item 2</dt-box>
@@ -669,7 +669,7 @@ Align items to the start of the main axis (default).
     direction="row"
     gap="100"
     justify="start"
-    class="d-w100p d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-start"
+    class="d-w100p d-bgc-moderate-opaque d-bar-400 axis-outline axis-outline--inline-start"
   >
     <dt-box surface="moderate-opaque" padding="200" border-radius="300">Item 1</dt-box>
     <dt-box surface="moderate-opaque" padding="200" border-radius="300">Item 2</dt-box>
@@ -697,7 +697,7 @@ Center items along the main axis.
   <dt-stack
     gap="100"
     justify="center"
-    class="d-w100p d-h-400 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
+    class="d-w100p d-h-400 d-bgc-moderate-opaque d-bar-400 axis-outline axis-outline--block-center"
   >
     <dt-box surface="moderate-opaque" padding="200" border-radius="300">Item 1</dt-box>
     <dt-box surface="moderate-opaque" padding="200" border-radius="300">Item 2</dt-box>
@@ -707,7 +707,7 @@ Center items along the main axis.
     direction="row"
     gap="100"
     justify="center"
-    class="d-w100p d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-center"
+    class="d-w100p d-bgc-moderate-opaque d-bar-400 axis-outline axis-outline--inline-center"
   >
     <dt-box surface="moderate-opaque" padding="200" border-radius="300">Item 1</dt-box>
     <dt-box surface="moderate-opaque" padding="200" border-radius="300">Item 2</dt-box>
@@ -735,7 +735,7 @@ Align items to the end of the main axis.
   <dt-stack
     gap="100"
     justify="end"
-    class="d-w100p d-h-400 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-end"
+    class="d-w100p d-h-400 d-bgc-moderate-opaque d-bar-400 axis-outline axis-outline--block-end"
   >
     <dt-box surface="moderate-opaque" padding="200" border-radius="300">Item 1</dt-box>
     <dt-box surface="moderate-opaque" padding="200" border-radius="300">Item 2</dt-box>
@@ -745,7 +745,7 @@ Align items to the end of the main axis.
     direction="row"
     gap="100"
     justify="end"
-    class="d-w100p d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-end"
+    class="d-w100p d-bgc-moderate-opaque d-bar-400 axis-outline axis-outline--inline-end"
   >
     <dt-box surface="moderate-opaque" padding="200" border-radius="300">Item 1</dt-box>
     <dt-box surface="moderate-opaque" padding="200" border-radius="300">Item 2</dt-box>
@@ -773,7 +773,7 @@ Distribute items with equal space around each item.
   <dt-stack
     gap="100"
     justify="space-around"
-    class="d-w100p d-h-400 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
+    class="d-w100p d-h-400 d-bgc-moderate-opaque d-bar-400 axis-outline axis-outline--block-center"
   >
     <dt-box surface="moderate-opaque" padding="200" border-radius="300">Item 1</dt-box>
     <dt-box surface="moderate-opaque" padding="200" border-radius="300">Item 2</dt-box>
@@ -783,7 +783,7 @@ Distribute items with equal space around each item.
     direction="row"
     gap="100"
     justify="space-around"
-    class="d-w100p d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-center"
+    class="d-w100p d-bgc-moderate-opaque d-bar-400 axis-outline axis-outline--inline-center"
   >
     <dt-box surface="moderate-opaque" padding="200" border-radius="300">Item 1</dt-box>
     <dt-box surface="moderate-opaque" padding="200" border-radius="300">Item 2</dt-box>
@@ -811,7 +811,7 @@ Distribute items with space between them, edges flush to container.
   <dt-stack
     gap="100"
     justify="space-between"
-    class="d-w100p d-h-400 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
+    class="d-w100p d-h-400 d-bgc-moderate-opaque d-bar-400 axis-outline axis-outline--block-center"
   >
     <dt-box surface="moderate-opaque" padding="200" border-radius="300">Item 1</dt-box>
     <dt-box surface="moderate-opaque" padding="200" border-radius="300">Item 2</dt-box>
@@ -821,7 +821,7 @@ Distribute items with space between them, edges flush to container.
     direction="row"
     gap="100"
     justify="space-between"
-    class="d-w100p d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-center"
+    class="d-w100p d-bgc-moderate-opaque d-bar-400 axis-outline axis-outline--inline-center"
   >
     <dt-box surface="moderate-opaque" padding="200" border-radius="300">Item 1</dt-box>
     <dt-box surface="moderate-opaque" padding="200" border-radius="300">Item 2</dt-box>
@@ -854,7 +854,7 @@ Distribute items with equal space between all items, including edges.
   <dt-stack
     gap="100"
     justify="space-evenly"
-    class="d-w100p d-h-400 d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--block-center"
+    class="d-w100p d-h-400 d-bgc-moderate-opaque d-bar-400 axis-outline axis-outline--block-center"
   >
     <dt-box surface="moderate-opaque" padding="200" border-radius="300">Item 1</dt-box>
     <dt-box surface="moderate-opaque" padding="200" border-radius="300">Item 2</dt-box>
@@ -864,7 +864,7 @@ Distribute items with equal space between all items, including edges.
     direction="row"
     gap="100"
     justify="space-evenly"
-    class="d-w100p d-bgc-moderate-opaque d-bar8 axis-outline axis-outline--inline-center"
+    class="d-w100p d-bgc-moderate-opaque d-bar-400 axis-outline axis-outline--inline-center"
   >
     <dt-box surface="moderate-opaque" padding="200" border-radius="300">Item 1</dt-box>
     <dt-box surface="moderate-opaque" padding="200" border-radius="300">Item 2</dt-box>
@@ -1029,7 +1029,7 @@ Resize your browser to see the alignment change at different breakpoints.
   direction="row"
   gap="0"
   :justify="{ default: 'start', md: 'center', lg: 'space-between' }"
-  class="d-w100p d-bgc-moderate-opaque d-bar8"
+  class="d-w100p d-bgc-moderate-opaque d-bar-400"
 >
   <dt-box surface="moderate-opaque" padding="200" border-radius="300">Item 1</dt-box>
   <dt-box surface="moderate-opaque" padding="200" border-radius="300">Item 2</dt-box>

@@ -25,16 +25,16 @@ pageClass: dialpad-design-home
   <dt-stack gap="700" class="d-py-800 d-px-800 d-pbs-150 d-ai-center d-bgc-secondary-opaque">
     <dt-stack style="max-width: 1400px;" direction="row" gap="600" class="d-w100p d-jc-center">
       <router-link to="./foundations/brand/" class="d-d-block">
-        <svg-loader class="d-bar16 d-w100p" name="home-foundations-01" />
+        <svg-loader class="d-bar-500 d-w100p" name="home-foundations-01" />
       </router-link>
       <router-link to="./foundations/colors/" class="d-d-block">
-        <svg-loader class="d-bar16 d-w100p d-ba d-bc-subtle" name="home-foundations-02" />
+        <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-foundations-02" />
       </router-link>
       <router-link to="./foundations/typography/" class="d-d-block">
-        <svg-loader class="d-bar16 d-w100p d-ba d-bc-subtle" name="home-foundations-03" />
+        <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-foundations-03" />
       </router-link>
       <router-link to="./foundations/motion/" class="d-d-block">
-        <svg-loader class="d-bar16 d-w100p d-ba d-bc-subtle" name="home-foundations-04" />
+        <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-foundations-04" />
       </router-link>
     </dt-stack>
     <dt-stack style="max-width: 1400px;" gap="550" class="d-ai-center d-jc-center">
@@ -53,16 +53,16 @@ pageClass: dialpad-design-home
   <dt-stack gap="700" class="d-py-800 d-px-800 d-pbe-150 d-ai-center d-bgc-secondary-opaque">
     <dt-stack style="max-width: 1400px" direction="row" gap="600" class="d-w100p d-jc-center">
       <router-link to="./components/" class="d-d-block">
-        <svg-loader class="d-bar16 d-w100p d-ba d-bc-subtle" name="home-system--01" />
+        <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-system--01" />
       </router-link>
       <router-link to="./utilities/" class="d-d-block">
-        <svg-loader class="d-bar16 d-w100p d-ba d-bc-subtle" name="home-system--02" />
+        <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-system--02" />
       </router-link>
       <router-link to="./tokens/" class="d-d-block">
-        <svg-loader class="d-bar16 d-w100p d-ba d-bc-subtle" name="home-system--03" />
+        <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-system--03" />
       </router-link>
       <router-link to="./guides/content/" class="d-d-block">
-        <svg-loader class="d-bar16 d-w100p d-ba d-bc-subtle" name="home-system--04" />
+        <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-system--04" />
       </router-link>
     </dt-stack>
     <dt-stack style="max-width: 1400px" gap="550" class="d-ai-center d-jc-center">

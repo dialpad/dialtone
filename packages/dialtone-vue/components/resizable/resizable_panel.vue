@@ -14,7 +14,7 @@
     data-qa="d-resizable-panel"
   >
     <div
-      class="d-resizable-panel__content"
+      :class="['d-resizable-panel__content', contentClass]"
       :style="offsetContentStyles"
     >
       <!-- @slot Panel content. Provides panel state and collapsed/resizing flags. -->
@@ -35,17 +35,42 @@ import { isValidSizing } from './resizable_utils';
 const props = defineProps({
   /** Unique panel identifier. Must be unique within its DtResizable parent. */
   id: { type: String, required: true },
-  /** Initial size as a percentage token (e.g., '25p' for 25%) or Dialtone size token. */
+  /**
+   * Initial size as a Dialtone layout token (maps to `--dt-layout-*`, matching
+   * DtBox and the `d-w-*` / `d-h-*` utility classes) or a percentage with 'p'
+   * suffix (e.g. '25p' for 25% of the container).
+   * @values 1px, 2px, 8px, 25, 20px, 24px, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10p, 20p, 25p, 30p, 33p, 40p, 50p, 60p, 66p, 70p, 75p, 80p, 90p, 95p, 100p
+   */
   initialSize: { type: String, default: undefined },
-  /** Minimum size for user drag interactions (hard floor). */
+  /**
+   * Minimum size for user drag interactions (hard floor). Accepts a layout
+   * token or percentage; see `initialSize` for the value set.
+   * @values 0, 1px, 2px, 8px, 25, 20px, 24px, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10p, 20p, 25p, 30p, 33p, 40p, 50p, 60p, 66p, 70p, 75p, 80p, 90p, 95p, 100p
+   */
   userMinSize: { type: String, default: undefined },
-  /** Maximum size for user drag interactions (hard ceiling). */
+  /**
+   * Maximum size for user drag interactions (hard ceiling). Accepts a layout
+   * token or percentage; see `initialSize` for the value set.
+   * @values 1px, 2px, 8px, 25, 20px, 24px, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10p, 20p, 25p, 30p, 33p, 40p, 50p, 60p, 66p, 70p, 75p, 80p, 90p, 95p, 100p
+   */
   userMaxSize: { type: String, default: undefined },
-  /** Minimum size for system viewport scaling. Falls back to userMinSize. */
+  /**
+   * Minimum size for system viewport scaling. Falls back to userMinSize.
+   * Accepts a layout token or percentage; see `initialSize` for the value set.
+   * @values 0, 1px, 2px, 8px, 25, 20px, 24px, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10p, 20p, 25p, 30p, 33p, 40p, 50p, 60p, 66p, 70p, 75p, 80p, 90p, 95p, 100p
+   */
   systemMinSize: { type: String, default: undefined },
-  /** Maximum size for system viewport scaling. Falls back to userMaxSize. */
+  /**
+   * Maximum size for system viewport scaling. Falls back to userMaxSize.
+   * Accepts a layout token or percentage; see `initialSize` for the value set.
+   * @values 1px, 2px, 8px, 25, 20px, 24px, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10p, 20p, 25p, 30p, 33p, 40p, 50p, 60p, 66p, 70p, 75p, 80p, 90p, 95p, 100p
+   */
   systemMaxSize: { type: String, default: undefined },
-  /** Container width threshold that triggers auto-collapse. */
+  /**
+   * Container width threshold that triggers auto-collapse. Accepts a layout
+   * token or percentage; see `initialSize` for the value set.
+   * @values 1px, 2px, 8px, 25, 20px, 24px, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10p, 20p, 25p, 30p, 33p, 40p, 50p, 60p, 66p, 70p, 75p, 80p, 90p, 95p, 100p
+   */
   collapseSize: { type: String, default: undefined },
   /** Whether this panel can be resized by dragging. */
   resizable: { type: Boolean, default: true },
@@ -55,6 +80,8 @@ const props = defineProps({
   collapsed: { type: Boolean, default: false },
   /** Additional CSS classes applied to the panel element. */
   class: { type: [String, Object, Array], default: '' },
+  /** Additional CSS classes applied to the inner content wrapper element. */
+  contentClass: { type: [String, Object, Array], default: '' },
 });
 
 const SIZE_PROPS = ['initialSize', 'userMinSize', 'userMaxSize', 'systemMinSize', 'systemMaxSize', 'collapseSize'];

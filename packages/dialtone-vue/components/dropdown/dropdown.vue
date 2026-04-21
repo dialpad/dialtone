@@ -19,6 +19,7 @@
     v-bind="$attrs"
     :tether="tether"
     :transition="transition"
+    :footer-class="footerClass"
     v-on="dropdownListeners"
   >
     <template #anchor="{ attrs }">
@@ -234,6 +235,14 @@ export default {
      * Additional class for the wrapper list element.
      */
     listClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional class for the footer wrapper element.
+     */
+    footerClass: {
       type: [String, Array, Object],
       default: '',
     },

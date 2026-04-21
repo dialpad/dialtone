@@ -12,23 +12,23 @@ Use `d-bgs-{n}` to control the size of element's background image.
 <!-- @custom -->
 <!-- @class d-d-grid d-g-200 d-g-cols4 d-p-200 d-bgc-secondary -->
 <dt-stack align="center" class="d-g-50">
-  <div class="d-size-200 d-bgc-moderate d-bar8 d-of-hidden d-bgr-none d-bgs-contain" style="background-image: url('/assets/images/puffin.jpg');"></div>
+  <div class="d-size-200 d-bgc-moderate d-bar-400 d-of-hidden d-bgr-none d-bgs-contain" style="background-image: url('/assets/images/puffin.jpg');"></div>
   <dt-text as="code" kind="code" size="100">d-bgs-contain</dt-text>
 </dt-stack>
 <dt-stack align="center" class="d-g-50">
-  <div class="d-size-200 d-bgc-moderate d-bar8 d-of-hidden d-bgr-none d-bgs-cover" style="background-image: url('/assets/images/puffin.jpg');"></div>
+  <div class="d-size-200 d-bgc-moderate d-bar-400 d-of-hidden d-bgr-none d-bgs-cover" style="background-image: url('/assets/images/puffin.jpg');"></div>
   <dt-text as="code" kind="code" size="100">d-bgs-cover</dt-text>
 </dt-stack>
 <dt-stack align="center" class="d-g-50">
-  <div class="d-size-200 d-bgc-moderate d-bar8 d-of-hidden d-bgr-none d-bgs-var" style="background-image: url('/assets/images/puffin.jpg'); --bgg-size: 65% 65%;"></div>
+  <div class="d-size-200 d-bgc-moderate d-bar-400 d-of-hidden d-bgr-none d-bgs-var" style="background-image: url('/assets/images/puffin.jpg'); --bgg-size: 65% 65%;"></div>
   <dt-text as="code" kind="code" size="100">d-bgs-var</dt-text>
 </dt-stack>
 <dt-stack align="center" class="d-g-50">
-  <div class="d-size-200 d-bgc-moderate d-bar8 d-of-hidden d-bgr-none d-bgs-auto d-bgp-center" style="background-image: url('/assets/images/puffin.jpg');"></div>
+  <div class="d-size-200 d-bgc-moderate d-bar-400 d-of-hidden d-bgr-none d-bgs-auto d-bgp-center" style="background-image: url('/assets/images/puffin.jpg');"></div>
   <dt-text as="code" kind="code" size="100">d-bgs-auto</dt-text>
 </dt-stack>
 <dt-stack align="center" class="d-g-50">
-  <div class="d-size-200 d-bgc-moderate d-bar8 d-of-hidden d-bgr-none d-bgs-unset" style="background-image: url('/assets/images/puffin.jpg');"></div>
+  <div class="d-size-200 d-bgc-moderate d-bar-400 d-of-hidden d-bgr-none d-bgs-unset" style="background-image: url('/assets/images/puffin.jpg');"></div>
   <dt-text as="code" kind="code" size="100">d-bgs-unset</dt-text>
 </dt-stack>
 ```

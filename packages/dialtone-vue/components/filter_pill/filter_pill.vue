@@ -42,7 +42,7 @@
               :icon-size="iconSize"
             />
           </template>
-          <span class="d-filter-pill__label">
+          <span :class="['d-filter-pill__label', labelClass]">
             <!-- @slot Allows you to customize the label slot -->
             <slot
               :label="label"
@@ -387,6 +387,14 @@ export default {
     popoverPlacement: {
       type: String,
       default: 'bottom-start',
+    },
+
+    /**
+     * Additional CSS class(es) applied to the label wrapper element.
+     */
+    labelClass: {
+      type: [String, Array, Object],
+      default: '',
     },
 
     /**

@@ -2,7 +2,7 @@
   <dt-button
     v-dt-tooltip="'Mark all as read'"
     :aria-label="'Mark all as read'"
-    class="d-fc-tertiary d-h24 d-w24"
+    class="d-fc-tertiary d-h-24px d-w-24px"
     importance="clear"
     kind="muted"
     :size="200"

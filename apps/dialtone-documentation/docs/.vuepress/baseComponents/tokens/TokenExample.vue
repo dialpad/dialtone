@@ -4,7 +4,7 @@
     direction="row"
     justify="center"
     align="center"
-    class="d-bar4 d-hmn-50 colorRectangle"
+    class="d-bar-300 d-hmn-50 colorRectangle"
     :style="getColorStyle"
   >
     <dt-text
@@ -30,7 +30,7 @@
   </dt-stack>
   <div
     v-if="category === 'shadow'"
-    class="d-bar4 d-hmn-50"
+    class="d-bar-300 d-hmn-50"
     :style="getShadowStyle"
   />
   <div

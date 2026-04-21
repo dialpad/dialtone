@@ -778,7 +778,7 @@ Use the `#leading` and `#trailing` slots to render freeform content at the start
 <dt-button kind="muted" importance="outlined" leading-class="d-pis-150">
   Caution
   <template #leading>
-    <span class="d-bgc-critical-strong d-bar4 d-w12 d-h12"></span>
+    <span class="d-bgc-critical-strong d-bar-300 d-w12 d-h12"></span>
   </template>
 </dt-button>
 ```

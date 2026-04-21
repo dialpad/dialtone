@@ -15,7 +15,7 @@
           [TAB_LIST_KIND_MODIFIERS.inverted]: inverted,
           [TAB_LIST_IMPORTANCE_MODIFIERS.borderless]: borderless,
         },
-        tabListClass,
+        resolvedTabsClass,
       ]"
       v-bind="tabListChildProps"
       role="tablist"
@@ -154,9 +154,18 @@ export default {
     /**
      * Pass through classes, used to customize the tab list
      */
-    tabListClass: {
+    tabsClass: {
       type: [String, Array, Object],
       default: '',
+    },
+
+    /**
+     * Pass through classes, used to customize the tab list
+     * @deprecated Use tabsClass
+     */
+    tabListClass: {
+      type: [String, Array, Object],
+      default: undefined,
     },
 
     /**
@@ -257,6 +266,12 @@ export default {
       TAB_ORIENTATION_MODIFIERS,
       TAB_SPREAD_MODIFIERS,
     };
+  },
+
+  computed: {
+    resolvedTabsClass () {
+      return this.tabListClass ?? this.tabsClass;
+    },
   },
 
   watch: {

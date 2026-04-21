@@ -39,7 +39,7 @@
       v-if="showEmptyState"
       :size="200"
       :header-text="`No results found`"
-      class="d-w100p d-ba d-bc-subtle d-bar8 d-pbs-400"
+      class="d-w100p d-ba d-bc-subtle d-bar-400 d-pbs-400"
     >
       <template #icon="{ iconSize }">
         <!-- maybe alt icon? -->
@@ -56,7 +56,7 @@
     </div>
     <div
       v-if="shouldShowButton"
-      class="dialtone-doc-table-clamped__more d-ps-absolute d-bn8 d-l50p"
+      class="dialtone-doc-table-clamped__more d-ps-absolute d-ibe-n100 d-l50p"
       aria-hidden="true"
     >
       <dt-button
@@ -133,7 +133,7 @@ const observers = {
 // Memoized base classes for performance
 const BASE_SCROLL_CLASSES = [
   'dialtone-doc-table-clamped__scroll',
-  'd-bar8',
+  'd-bar-400',
   'd-ba',
   'd-bc-subtle',
 ];
@@ -220,7 +220,7 @@ const highlightMatches = (element, searchTerm) => {
         // Check if this part is a match (case-insensitive)
         if (matches.some(match => match.toLowerCase() === part.toLowerCase())) {
           const mark = document.createElement('mark');
-          mark.className = 'd-bgc-warning d-bar2 d-fc-primary';
+          mark.className = 'd-bgc-warning d-bar-200 d-fc-primary';
           mark.textContent = part;
           fragment.appendChild(mark);
         } else {

@@ -9,7 +9,7 @@
       <table
         class="d-table dialtone-doc-table d-wmn-800"
       >
-        <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+        <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-ibs-0">
           <tr>
             <th
               scope="col"

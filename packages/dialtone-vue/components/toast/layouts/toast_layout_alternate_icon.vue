@@ -1,7 +1,7 @@
 <template>
   <div
     aria-hidden="true"
-    class="d-toast-layout-alternate__icon"
+    :class="['d-toast-layout-alternate__icon', iconClass]"
   >
     <slot>
       <component
@@ -60,6 +60,14 @@ export default {
       type: String,
       default: '400',
       validator: (s) => Object.keys(ICON_SIZE_MODIFIERS).includes(s),
+    },
+
+    /**
+     * Additional class name for the icon wrapper element.
+     */
+    iconClass: {
+      type: [String, Array, Object],
+      default: '',
     },
   },
 

@@ -1,4 +1,3 @@
-
 export default {
   defaults: {
     props: {
@@ -216,7 +215,7 @@ export default {
     },
     slots: {
       default: { initialValue: 'Caution' },
-      leading: { initialValue: '<span class="d-bgc-critical-strong d-bar4 d-w12 d-h12"></span>' },
+      leading: { initialValue: '<span class="d-bgc-critical-strong d-bar-300 d-w12 d-h12"></span>' },
     },
   },
 

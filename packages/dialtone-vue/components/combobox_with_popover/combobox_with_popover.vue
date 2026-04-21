@@ -64,6 +64,7 @@
         >
           <div
             ref="header"
+            :class="headerClass"
           >
             <slot name="header" />
           </div>
@@ -104,6 +105,7 @@
         >
           <div
             ref="footer"
+            :class="footerClass"
           >
             <slot name="footer" />
           </div>
@@ -202,6 +204,22 @@ export default {
      * Additional class for the wrapper list element.
      */
     listClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional class for the header wrapper element.
+     */
+    headerClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional class for the footer wrapper element.
+     */
+    footerClass: {
       type: [String, Array, Object],
       default: '',
     },

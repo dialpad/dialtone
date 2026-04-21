@@ -6,6 +6,7 @@
     <dt-notice-icon
       v-if="showIcon"
       :kind="kind"
+      :icon-class="iconClass"
       :class="{ 'd-notice__icon--has-title': headerText || $slots.header }"
     >
       <!-- @slot Slot for custom icon -->
@@ -15,6 +16,8 @@
       :header-id="headerId"
       :content-id="contentId"
       :header-text="headerText"
+      :header-class="headerClass"
+      :content-class="contentClass"
       :role="role"
     >
       <template #header>
@@ -27,6 +30,7 @@
     <dt-notice-action
       :show-action="showAction"
       :show-close="showClose"
+      :action-class="actionClass"
       @close="$emit('close')"
     >
       <!-- @slot Enter a possible action for the user to take, such as a link to another page -->
@@ -153,6 +157,38 @@ export default {
     truncateText: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * Additional class name for the icon wrapper element.
+     */
+    iconClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the header wrapper element.
+     */
+    headerClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the content wrapper element.
+     */
+    contentClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the action wrapper element.
+     */
+    actionClass: {
+      type: [String, Array, Object],
+      default: '',
     },
   },
 

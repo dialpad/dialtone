@@ -79,7 +79,10 @@
       v-if="hasSlotContent($slots.header)"
       #header
     >
-      <div ref="header">
+      <div
+        ref="header"
+        :class="headerClass"
+      >
         <slot name="header" />
       </div>
     </template>
@@ -88,7 +91,7 @@
     <template #list>
       <div
         ref="list"
-        class="d-recipe-combobox-multi-select__list"
+        :class="['d-recipe-combobox-multi-select__list', listClass]"
         @mousedown.prevent
       >
         <slot
@@ -109,7 +112,10 @@
       v-if="hasSlotContent($slots.footer)"
       #footer
     >
-      <div ref="footer">
+      <div
+        ref="footer"
+        :class="footerClass"
+      >
         <slot name="footer" />
       </div>
     </template>
@@ -373,6 +379,30 @@ export default {
     disabled: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * Additional class name for the header wrapper element.
+     */
+    headerClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the footer wrapper element.
+     */
+    footerClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the list wrapper element.
+     */
+    listClass: {
+      type: [String, Array, Object],
+      default: '',
     },
   },
 

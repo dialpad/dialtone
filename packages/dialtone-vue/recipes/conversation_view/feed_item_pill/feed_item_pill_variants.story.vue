@@ -181,7 +181,7 @@
       </h3>
       <dt-recipe-feed-item-pill
         title="Ben started a meeting"
-        button-class="d-bar24"
+        button-class="d-bar-550"
         class="d-w-950"
         border-color="ai"
         :default-toggled="true"
@@ -245,7 +245,7 @@
       <dt-recipe-feed-item-pill
         title="Ben started a meeting"
         border-color="ai"
-        button-class="d-bar24"
+        button-class="d-bar-550"
         class="d-w-950"
         :toggleable="false"
       >

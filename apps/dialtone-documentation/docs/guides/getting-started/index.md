@@ -53,7 +53,7 @@ Dialtone's CSS library offers a framework of [CSS Utilities](/utilities/) classe
     justify="between"
     class="
       d-w100p
-      d-bar8
+      d-bar-400
       d-fc-tertiary
       d-p-200
       d-bgc-moderate
@@ -80,7 +80,7 @@ Dialtone's CSS library offers a framework of [CSS Utilities](/utilities/) classe
   justify="between"
   class="
     d-w100p
-    d-bar8
+    d-bar-400
     d-fc-tertiary
     d-p-200
     d-bgc-moderate
@@ -105,11 +105,11 @@ In the above example, we used:
 - **[Stack component](/components/stack.md)** `<dt-stack>` to layout items in a row with consistent gap.
 - **[Text component](/components/text.md)** `<dt-text>` for typography with relevant props.
 - **[Width utility](/utilities/sizing/width.md)** `.d-w100p` for full width.
-- **[Padding utility](/utilities/spacing/padding.md)** `.d-p16` to add 16px of padding on all sides.
+- **[Padding utility](/utilities/spacing/padding.md)** `.d-p-200` to add 16px of padding on all sides.
 - **[Background color utility](/utilities/backgrounds/color.md)** `.d-bgc-moderate` for a moderate background.
 - **[Border utility](/utilities/borders/style.md)** `.d-ba` for a border on all sides.
 - **[Border color utility](/utilities/borders/color.md)** `.d-bc-subtle` for a subtle border color.
-- **[Border radius utility](/utilities/borders/radius.md)** `.d-bar8` for rounded corners.
+- **[Border radius utility](/utilities/borders/radius.md)** `.d-bar-400` for rounded corners.
 
 Though an atomic CSS approach comes with many advantages, we know it also offers a notable disadvantage: reducing the CSS cascade. This is especially true for repeated UI elements, which can end up creating redundant mark-up. For these instances, Dialtone offers components.
 

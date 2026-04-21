@@ -59,7 +59,7 @@
       </dt-button>
     </dt-stack>
     <div
-      class="d-p-300 d-ba d-bc-subtle d-bar8"
+      class="d-p-300 d-ba d-bc-subtle d-bar-400"
       role="tabpanel"
     >
       <dt-text kind="body">

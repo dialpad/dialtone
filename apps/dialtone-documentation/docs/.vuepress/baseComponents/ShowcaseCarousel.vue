@@ -2,15 +2,15 @@
 <template>
   <div ref="carouselContainerRef" class="showcase-carousel">
     <dt-stack ref="carouselTrackRef" direction="row" gap="800" class="showcase-carousel__track">
-      <img style="align-self: flex-start; width: 468px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--01.jpg" alt="">
-      <img style="align-self: flex-end; width: 546px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--02.jpg" alt="">
-      <img style="align-self: flex-start; width: 352px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--03.jpg" alt="">
-      <img style="align-self: center; width: 400px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--04.jpg" alt="">
-      <img style="align-self: flex-end; width: 480px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--05.jpg" alt="">
-      <img style="align-self: flex-start; width: 628px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--06.jpg" alt="">
-      <img style="align-self: center; width: 438px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--07.jpg" alt="">
-      <img style="align-self: flex-end; width: 404px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--08.jpg" alt="">
-      <img style="align-self: flex-start; width: 438px;" class="d-bar16 d-d-block" src="/assets/images/home-showcase--09.jpg" alt="">
+      <img style="align-self: flex-start; width: 468px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--01.jpg" alt="">
+      <img style="align-self: flex-end; width: 546px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--02.jpg" alt="">
+      <img style="align-self: flex-start; width: 352px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--03.jpg" alt="">
+      <img style="align-self: center; width: 400px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--04.jpg" alt="">
+      <img style="align-self: flex-end; width: 480px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--05.jpg" alt="">
+      <img style="align-self: flex-start; width: 628px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--06.jpg" alt="">
+      <img style="align-self: center; width: 438px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--07.jpg" alt="">
+      <img style="align-self: flex-end; width: 404px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--08.jpg" alt="">
+      <img style="align-self: flex-start; width: 438px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--09.jpg" alt="">
     </dt-stack>
   </div>
 </template>

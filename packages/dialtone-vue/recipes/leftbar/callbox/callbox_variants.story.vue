@@ -349,7 +349,7 @@
               class="d-pis-25"
             >
               <dt-stack
-                class="d-ai-center d-w24"
+                class="d-ai-center d-w-24px"
               >
                 <dt-icon-share-screen size="300" />
               </dt-stack>

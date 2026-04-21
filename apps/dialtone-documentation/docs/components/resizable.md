@@ -45,7 +45,7 @@ The resizable component splits a container into adjustable panels separated by d
 <!-- @code -->
 <dt-box block-size="400" inline-size="100p">
   <dt-resizable>
-    <dt-resizable-panel id="ex3-sidebar" initial-size="20p" user-min-size="825">
+    <dt-resizable-panel id="ex3-sidebar" initial-size="20p" user-min-size="300">
       Sidebar
     </dt-resizable-panel>
     <dt-resizable-handle />
@@ -53,7 +53,7 @@ The resizable component splits a container into adjustable panels separated by d
       Content
     </dt-resizable-panel>
     <dt-resizable-handle />
-    <dt-resizable-panel id="ex3-details" initial-size="25p" user-min-size="825">
+    <dt-resizable-panel id="ex3-details" initial-size="25p" user-min-size="300">
       Details
     </dt-resizable-panel>
   </dt-resizable>
@@ -87,7 +87,7 @@ Resizable groups can be nested. For example, a horizontal sidebar + content layo
 <!-- @code -->
 <dt-box block-size="400" inline-size="100p">
   <dt-resizable>
-    <dt-resizable-panel id="ex-sidebar" initial-size="25p" user-min-size="825" user-max-size="50p">
+    <dt-resizable-panel id="ex-sidebar" initial-size="25p" user-min-size="300" user-max-size="50p">
       Sidebar
     </dt-resizable-panel>
     <dt-resizable-handle />
@@ -112,14 +112,14 @@ Resizable groups can be nested. For example, a horizontal sidebar + content layo
 <template #do>
 
 - Set `initial-size` on panels with a known width (sidebars, detail panes). Omit it on the main content panel so it fills the remaining space.
-- Set `user-min-size` on every panel. Without it, panels can shrink to nearly zero. A minimum of `"825"` (164px) keeps most content usable.
+- Set `user-min-size` on every panel. Without it, panels can shrink to nearly zero. A minimum of `"300"` (192px) keeps most content usable.
 - Use `storage-key` to persist layouts. Users expect their panel arrangement to survive a page refresh.
 - Always provide a way to restore collapsed panels — for example, a menu icon button in a sibling panel's header.
 </template>
 
 <template #dont>
 
-- Don't pass raw pixel values for sizes. Only percentage tokens (`"25p"`) and Dialtone size tokens (`"925"`) are accepted.
+- Don't pass raw pixel values for sizes. Only percentage tokens (`"25p"`) and Dialtone layout tokens (`"500"`) are accepted.
 - Don't set `initial-size` on every panel. Leave one panel without it so it absorbs remaining space and the layout always fills the container.
 - Don't hide a panel without giving the user a way to bring it back. Provide an expand control in a visible sibling panel (e.g., a menu button in the content header).
 </template>
@@ -128,7 +128,7 @@ Resizable groups can be nested. For example, a horizontal sidebar + content layo
 
 ## Constraints
 
-All size props accept two formats: percentage tokens (e.g., `"25p"` for 25% of the container) and Dialtone size tokens (e.g., `"925"` which resolves to 332px). Raw pixel values are not accepted — the component resolves token values from Dialtone's CSS custom properties at runtime.
+All size props accept two formats: percentage tokens (e.g., `"25p"` for 25% of the container) and Dialtone layout tokens (e.g., `"500"` which resolves to 320px). Raw pixel values are not accepted — the component resolves token values from Dialtone's `--dt-layout-*` CSS custom properties at runtime, matching DtBox and the `d-w-*` / `d-h-*` utility classes.
 
 `initial-size` defines where a panel starts. For panels whose size should flex with the available space (like a main content area), omit `initial-size` and the panel will fill whatever space remains.
 
@@ -162,7 +162,7 @@ Set `:resizable="false"` to fix a panel at its `initial-size`. Fixed panels cann
 ```vue code-only
 <dt-box block-size="400" inline-size="100p">
   <dt-resizable>
-    <dt-resizable-panel id="nav" initial-size="700" :resizable="false">
+    <dt-resizable-panel id="nav" initial-size="100" :resizable="false">
       Navigation (64px, fixed)
     </dt-resizable-panel>
     <dt-resizable-panel id="content">
@@ -186,7 +186,7 @@ Mark a panel as `collapsible` to let it collapse to zero width. Use the `collaps
     <dt-resizable-panel
       id="sidebar"
       initial-size="25p"
-      user-min-size="825"
+      user-min-size="300"
       collapsible
       :collapsed="isSidebarCollapsed"
     >
@@ -321,7 +321,7 @@ When a fixed or absolutely positioned element (like a toolbar or header) overlap
       surface="secondary-opaque"
       border-width-block-end="100"
       block-size="75"
-      class="d-ps-absolute d-t0 d-l0 d-r0 d-zi-base1 d-d-flex d-ai-center d-jc-center
+      class="d-ps-absolute d-t-0 d-l-0 d-r-0 d-zi-base1 d-d-flex d-ai-center d-jc-center
       "
     >
       Fixed Toolbar (48px)

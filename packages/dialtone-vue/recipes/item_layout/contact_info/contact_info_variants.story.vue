@@ -137,7 +137,7 @@
               align="center"
               class="d-mbs-n75"
             >
-              <div class="d-w8 d-h8 d-mie-50 d-bgc-magenta-200">
+              <div class="d-w-8px d-h-8px d-mie-50 d-bgc-magenta-200">
                 &nbsp;
               </div>
               <div class="d-fs-100 d-mie-50">
@@ -199,7 +199,7 @@
             align="center"
             class="d-mbs-n75"
           >
-            <div class="d-w8 d-h8 d-mie-50 d-bgc-magenta-200">
+            <div class="d-w-8px d-h-8px d-mie-50 d-bgc-magenta-200">
               &nbsp;
             </div>
             <div class="d-fs-100 d-mie-50">
@@ -258,7 +258,7 @@
             align="center"
             class="d-mbs-n50"
           >
-            <div class="d-w8 d-h8 d-mie-50 d-bgc-magenta-200">
+            <div class="d-w-8px d-h-8px d-mie-50 d-bgc-magenta-200">
               &nbsp;
             </div>
             <div class="d-fs-100 d-mie-50">

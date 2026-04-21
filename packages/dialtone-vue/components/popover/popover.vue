@@ -21,6 +21,7 @@
       <div
         :id="!ariaLabelledby && labelledBy"
         ref="anchor"
+        :class="anchorClass"
         :data-qa="$attrs['data-qa'] ? `${$attrs['data-qa']}-anchor` : 'dt-popover-anchor'"
         :tabindex="openOnContext ? 0 : undefined"
         @click.capture="defaultToggleOpen"
@@ -445,6 +446,14 @@ export default {
     showCloseButton: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * Additional class name for the anchor wrapper element.
+     */
+    anchorClass: {
+      type: [String, Array, Object],
+      default: '',
     },
 
     /**

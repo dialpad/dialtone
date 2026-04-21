@@ -51,7 +51,7 @@
           <div
             v-if="hasSlotContent($slots.header)"
             :id="labelledById"
-            class="d-modal__header"
+            :class="['d-modal__header', headerClass]"
             data-qa="dt-modal-title"
           >
             <!-- @slot Slot for dialog header section, taking the place of any "headerText" text prop -->
@@ -94,7 +94,7 @@
           </p>
           <footer
             v-if="hasFooterSlot"
-            class="d-modal__footer"
+            :class="['d-modal__footer', footerClass]"
           >
             <!-- @slot Slot for dialog footer content, often containing cancel and confirm buttons. -->
             <slot name="footer" />
@@ -284,6 +284,26 @@ export default {
      * same API as Vue's built-in handling of the class attribute.
      */
     bannerClass: {
+      type: [String, Object, Array],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the header element within the modal.
+     * Can accept String, Object, and Array, i.e. has the
+     * same API as Vue's built-in handling of the class attribute.
+     */
+    headerClass: {
+      type: [String, Object, Array],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the footer element within the modal.
+     * Can accept String, Object, and Array, i.e. has the
+     * same API as Vue's built-in handling of the class attribute.
+     */
+    footerClass: {
       type: [String, Object, Array],
       default: '',
     },

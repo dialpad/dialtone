@@ -9,7 +9,7 @@
       </p>
       <div
         v-dt-scrollbar
-        class="d-h-250 d-w-400 d-bar8 d-bc-default d-ba"
+        class="d-h-250 d-w-400 d-bar-400 d-bc-default d-ba"
       >
         <div class="d-p-200">
           <p
@@ -28,7 +28,7 @@
       </p>
       <div
         v-dt-scrollbar:never
-        class="d-h-250 d-w-400 d-bar8 d-bc-default d-ba"
+        class="d-h-250 d-w-400 d-bar-400 d-bc-default d-ba"
       >
         <div class="d-p-200">
           <p
@@ -47,7 +47,7 @@
       </p>
       <div
         v-dt-scrollbar:scroll
-        class="d-h-250 d-w-400 d-bar8 d-bc-default d-ba"
+        class="d-h-250 d-w-400 d-bar-400 d-bc-default d-ba"
       >
         <div class="d-p-200">
           <p

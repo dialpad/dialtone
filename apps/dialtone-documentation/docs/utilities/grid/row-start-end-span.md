@@ -9,11 +9,11 @@ keywords: ["css grid", "grid row", "row span", "row end"]
 Use `d-gr{#}` to span an element across multiple rows. This can be combined with `d-gc{#}` classes to span a set of columns.
 
 ```vue demo
-<div class="d-d-grid d-g-200 d-g-cols3 d-g-rows3 d-p-200 d-w100p d-hmn216 d-bar8 d-bgc-moderate">
-  <dt-stack direction="row" align="center" justify="center" class="d-gc2 d-gr2 d-p-200 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-bold-opaque d-bar4">2</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-gr2 d-p-200 d-bgc-moderate-opaque d-bar4">3</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-gc2 d-p-200 d-bgc-bold-opaque d-bar4">4</dt-stack>
+<div class="d-d-grid d-g-200 d-g-cols3 d-g-rows3 d-p-200 d-w100p d-hmn216 d-bar-400 d-bgc-moderate">
+  <dt-stack direction="row" align="center" justify="center" class="d-gc2 d-gr2 d-p-200 d-bgc-moderate-opaque d-bar-300">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-bold-opaque d-bar-300">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-gr2 d-p-200 d-bgc-moderate-opaque d-bar-300">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-gc2 d-p-200 d-bgc-bold-opaque d-bar-300">4</dt-stack>
 </div>
 ```
 
@@ -24,11 +24,11 @@ Use `d-grs{#}` to set the starting point for an element. This can be combined wi
 Use `d-gre{#}` to set an element's ending point. A reminder that CSS grid rows start at 1 and end at the number of rows + 1. For example in a 4-row grid, the starting line would be 1 and the ending line would be 5.
 
 ```vue demo
-<div class="d-d-grid d-g-200 d-g-cols3 d-g-rows4 d-p-200 d-w100p d-hmn216 d-bar8 d-bgc-moderate">
-  <dt-stack direction="row" align="center" justify="center" class="d-gc2 d-grs1 d-gre3 d-p-200 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-bold-opaque d-bar4">2</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-grs2 d-gre5 d-p-200 d-bgc-moderate-opaque d-bar4">3</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-gc2 d-gr2 d-p-200 d-bgc-bold-opaque d-bar4">4</dt-stack>
+<div class="d-d-grid d-g-200 d-g-cols3 d-g-rows4 d-p-200 d-w100p d-hmn216 d-bar-400 d-bgc-moderate">
+  <dt-stack direction="row" align="center" justify="center" class="d-gc2 d-grs1 d-gre3 d-p-200 d-bgc-moderate-opaque d-bar-300">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-bold-opaque d-bar-300">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-grs2 d-gre5 d-p-200 d-bgc-moderate-opaque d-bar-300">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-gc2 d-gr2 d-p-200 d-bgc-bold-opaque d-bar-300">4</dt-stack>
 </div>
 ```
 

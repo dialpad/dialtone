@@ -13,8 +13,8 @@ keywords: ["no results", "blank slate", "zero state", "d-empty-state", "DtEmptyS
 
 ## Anatomy
 
-<div class="d-d-grid d-g-cols3 d-ba d-bc-subtle d-mbe-200 d-bar8 d-bgc-secondary">
-  <div class="d-gc2 d-bar8 d-bgc-primary"><img class="d-bar8 d-d-block d-w100p" alt="empty state bullets" src="/assets/images/components/empty-state01.png"></div>
+<div class="d-d-grid d-g-cols3 d-ba d-bc-subtle d-mbe-200 d-bar-400 d-bgc-secondary">
+  <div class="d-gc2 d-bar-400 d-bgc-primary"><img class="d-bar-400 d-d-block d-w100p" alt="empty state bullets" src="/assets/images/components/empty-state01.png"></div>
   <div class="d-gc1 d-bl d-bc-subtle d-p-400">
     <ol class="d-pis-200">
       <li class="d-lst-decimal">Illustration or Icon <span class="d-fc-tertiary">(optional)</span></li>
@@ -68,7 +68,7 @@ keywords: ["no results", "blank slate", "zero state", "d-empty-state", "DtEmptyS
 
 The four most likely scenarios for an empty state are **Zero State**, **No Results**, **New Feature**, and **Not Enabled**. This is not an exhaustive list, but a good starting point for most use cases.
 
-<div class="d-d-grid d-g-cols1 lg:d-g-cols3 d-bar8 d-bgc-secondary d-mbe-400">
+<div class="d-d-grid d-g-cols1 lg:d-g-cols3 d-bar-400 d-bgc-secondary d-mbe-400">
 
   <div class="d-p-200 d-plc-center">
 
@@ -78,11 +78,11 @@ The Empty State should guide the user on how to achieve a non-empty state. You m
 
   </div>
   <div class="d-gc2 d-p-200">
-    <img class="d-ba d-bc-subtle d-bar4 d-w100p d-bs-sm" alt="Example: Zero state" src="/assets/images/components/empty-state02.png">
+    <img class="d-ba d-bc-subtle d-bar-300 d-w100p d-bs-sm" alt="Example: Zero state" src="/assets/images/components/empty-state02.png">
   </div>
 </div>
 
-<div class="d-d-grid d-g-cols1 lg:d-g-cols3 d-bar8 d-bgc-secondary d-mbe-400">
+<div class="d-d-grid d-g-cols1 lg:d-g-cols3 d-bar-400 d-bgc-secondary d-mbe-400">
 
   <div class="d-p-200 d-plc-center">
 
@@ -92,11 +92,11 @@ When an action results in no data or information to display, recommend alternate
 
   </div>
   <div class="d-gc2 d-p-200">
-    <img class="d-ba d-bc-subtle d-bar8 d-w100p d-bs-sm" alt="Example: No results" src="/assets/images/components/empty-state03.png">
+    <img class="d-ba d-bc-subtle d-bar-400 d-w100p d-bs-sm" alt="Example: No results" src="/assets/images/components/empty-state03.png">
   </div>
 </div>
 
-<div class="d-d-grid d-g-cols1 lg:d-g-cols3 d-bar8 d-bgc-secondary d-mbe-400">
+<div class="d-d-grid d-g-cols1 lg:d-g-cols3 d-bar-400 d-bgc-secondary d-mbe-400">
 
   <div class="d-p-200 d-plc-center">
 
@@ -106,11 +106,11 @@ An opportunity to introduce something new or not yet take advantage of. If it in
 
   </div>
   <div class="d-gc2 d-p-200">
-    <img class="d-ba d-bc-subtle d-bar8 d-w100p d-bs-sm" alt="Example: New feature" src="/assets/images/components/empty-state04.png">
+    <img class="d-ba d-bc-subtle d-bar-400 d-w100p d-bs-sm" alt="Example: New feature" src="/assets/images/components/empty-state04.png">
   </div>
 </div>
 
-<div class="d-d-grid d-g-cols1 lg:d-g-cols3 d-bar8 d-bgc-secondary d-mbe-400">
+<div class="d-d-grid d-g-cols1 lg:d-g-cols3 d-bar-400 d-bgc-secondary d-mbe-400">
 
   <div class="d-p-200 d-plc-center">
 
@@ -120,7 +120,7 @@ Appropriate for indicating that something is currently unavailable to them. Prov
 
   </div>
   <div class="d-gc2 d-p-200">
-    <img class="d-ba d-bc-subtle d-bar8 d-w100p d-bs-sm" alt="Example: Not enabled" src="/assets/images/components/empty-state05.png">
+    <img class="d-ba d-bc-subtle d-bar-400 d-w100p d-bs-sm" alt="Example: Not enabled" src="/assets/images/components/empty-state05.png">
   </div>
 </div>
 

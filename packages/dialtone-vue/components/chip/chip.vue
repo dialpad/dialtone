@@ -14,7 +14,7 @@
     >
       <span
         v-if="hasSlotContent($slots.icon)"
-        class="d-chip__icon"
+        :class="['d-chip__icon', iconClass]"
         data-qa="dt-chip-icon"
       >
         <!-- @slot slot for Chip icon -->
@@ -22,6 +22,7 @@
       </span>
       <span
         v-else-if="hasSlotContent($slots.avatar)"
+        :class="avatarClass"
         data-qa="dt-chip-avatar"
       >
         <!-- @slot slot for Chip avatar -->
@@ -150,6 +151,22 @@ export default {
      * Additional class name for the span element.
      */
     labelClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the icon wrapper element.
+     */
+    iconClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional class name for the avatar wrapper element.
+     */
+    avatarClass: {
       type: [String, Array, Object],
       default: '',
     },
