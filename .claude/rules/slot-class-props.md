@@ -46,7 +46,7 @@ defaultClass: { type: [String, Array, Object], default: '' }
 
 ### 2. Overlay header/footer slots — shortened names are acceptable
 
-Overlay components (Popover, Hovercard, Modal) use `headerContent` / `footerContent` slot names. The corresponding class props may use the shortened form:
+Overlay components (Popover, Hovercard) use `headerContent` / `footerContent` slot names. The corresponding class props may use the shortened form:
 
 | Slot name       | Class prop    |
 |-----------------|---------------|
@@ -67,4 +67,4 @@ When adding or reviewing a slot:
 2. Prop uses the canonical shape (`[String, Array, Object]`, default `''`).
 3. Prop is bound on the slot's immediate wrapper element via `:class` array merge.
 4. Default slot uses a semantic name, not `defaultClass`.
-5. Overlay header/footer slots use `headerClass` / `footerClass`.
+5. Overlay header/footer slots may use `headerContentClass` / `footerContentClass` or `headerClass` / `footerClass` (prefer the shortened form).
