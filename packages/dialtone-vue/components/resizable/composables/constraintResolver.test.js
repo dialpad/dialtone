@@ -24,7 +24,7 @@ describe('resolveUserConstraints', () => {
   });
 
   it('resolves userMinSize token to pixels', () => {
-    const result = resolveUserConstraints({ id: 'a', userMinSize: '800' }, 1000);
+    const result = resolveUserConstraints({ id: 'a', userMinSize: '200' }, 1000);
     expect(result.userMinSizePixels).toBe(128);
   });
 
@@ -34,9 +34,9 @@ describe('resolveUserConstraints', () => {
   });
 
   it('resolves both userMinSize and userMaxSize together', () => {
-    const result = resolveUserConstraints({ id: 'a', userMinSize: '800', userMaxSize: '925' }, 1000);
+    const result = resolveUserConstraints({ id: 'a', userMinSize: '200', userMaxSize: '500' }, 1000);
     expect(result.userMinSizePixels).toBe(128);
-    expect(result.userMaxSizePixels).toBe(332);
+    expect(result.userMaxSizePixels).toBe(320);
   });
 });
 
@@ -97,8 +97,8 @@ describe('resolveSystemConstraints', () => {
   });
 
   it('clamps systemMin to userMin when systemMin would be less', () => {
-    const result = resolveSystemConstraints({ id: 'a', systemMinSize: '300' }, 1000, 100, undefined);
-    // '300' = 4px, userMin = 100px → clamped to 100
+    const result = resolveSystemConstraints({ id: 'a', systemMinSize: '8px' }, 1000, 100, undefined);
+    // '8px' = 8px, userMin = 100px → clamped to 100
     expect(result.systemMinSizePixels).toBe(100);
   });
 
@@ -125,16 +125,16 @@ describe('calculateConstraintHierarchy', () => {
     const result = calculateConstraintHierarchy(
       {
         id: 'a',
-        userMinSize: '800',
-        userMaxSize: '925',
+        userMinSize: '200',
+        userMaxSize: '500',
         systemMinSize: '20p',
         systemMaxSize: '30p',
-        collapseSize: '1050',
+        collapseSize: '1200',
       },
       1000,
     );
     expect(result.userMinSizePixels).toBe(128);
-    expect(result.userMaxSizePixels).toBe(332);
+    expect(result.userMaxSizePixels).toBe(320);
     expect(result.systemMinSizePixels).toBe(200);
     expect(result.systemMaxSizePixels).toBe(300);
     expect(result.collapseSizePixels).toBe(768);
@@ -142,16 +142,16 @@ describe('calculateConstraintHierarchy', () => {
 
   it('collapseSize is not clamped to container', () => {
     const result = calculateConstraintHierarchy(
-      { id: 'a', collapseSize: '1100' },
+      { id: 'a', collapseSize: '1600' },
       500,
     );
-    // '1100' = 1024px, container is 500px — should NOT clamp
+    // '1600' = 1024px, container is 500px — should NOT clamp
     expect(result.collapseSizePixels).toBe(1024);
   });
 
   it('does not include legacy minSizePixels/maxSizePixels fields', () => {
     const result = calculateConstraintHierarchy(
-      { id: 'a', userMinSize: '800', userMaxSize: '925' },
+      { id: 'a', userMinSize: '200', userMaxSize: '500' },
       1000,
     );
     expect(result).not.toHaveProperty('minSizePixels');

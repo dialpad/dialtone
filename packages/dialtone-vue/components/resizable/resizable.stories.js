@@ -210,13 +210,13 @@ export const Constraints = {
   parameters: {
     docs: {
       description: {
-        story: 'Initial sizes with min/max constraints. Sidebar uses a Dialtone size token (825 = 164px) for minimum and a percentage for maximum.',
+        story: 'Initial sizes with min/max constraints. Sidebar uses a Dialtone layout token (300 = 192px) for minimum and a percentage for maximum.',
       },
       source: {
         code: `
 <dt-resizable>
-  <dt-resizable-panel id="sidebar" initial-size="25p" user-min-size="825" user-max-size="50p">
-    Sidebar (min 164px, max 50%)
+  <dt-resizable-panel id="sidebar" initial-size="25p" user-min-size="300" user-max-size="50p">
+    Sidebar (min 192px, max 50%)
   </dt-resizable-panel>
   <dt-resizable-handle />
   <dt-resizable-panel id="content" user-min-size="30p">

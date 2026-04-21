@@ -5,12 +5,12 @@
       <dt-resizable-panel
         id="sidebar"
         initial-size="25p"
-        user-min-size="825"
+        user-min-size="300"
         user-max-size="50p"
       >
         <div class="d-d-flex d-ai-center d-jc-center d-w100p d-h100p d-bgc-purple-100">
           <span class="d-fs-200 d-fw-bold d-fc-purple-600">
-            Sidebar (min 164px, max 50%)
+            Sidebar (min 192px, max 50%)
           </span>
         </div>
       </dt-resizable-panel>

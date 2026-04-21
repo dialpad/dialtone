@@ -4,7 +4,7 @@
       <dt-resizable-panel
         id="exc-sidebar"
         initial-size="25p"
-        user-min-size="825"
+        user-min-size="300"
         collapsible
         :collapsed="isCollapsed"
       >
