@@ -26,6 +26,7 @@ paths:
 
 - Overlay components (Popover, Hovercard): `headerContent` / `footerContent`.
 - Structural components (Card, Modal): `header` / `footer`.
+- Every slot must have a corresponding `{slotName}Class` prop. See `.claude/rules/slot-class-props.md` for the full convention, prop shape, and exceptions.
 
 ## Sizes
 
