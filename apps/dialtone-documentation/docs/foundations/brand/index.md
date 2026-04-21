@@ -9,7 +9,7 @@ keywords: ["brand", "branding", "identity", "mark", "dialpad logo"]
 
 
 <dt-stack gap="600" class="d-mbs-600">
-  <svg-loader name="logo--negative-space" class="d-bar16" />
+  <svg-loader name="logo--negative-space" class="d-bar-500" />
   <div>
 <h2 class="d-docsite--header-3">the Spark</h2>
 
@@ -18,15 +18,15 @@ The Dialpad icon draws on the core of the Dialpad product, the phone Dialpad and
 The visual symbols of the dialpad and Ai are combined to represent the relationship between businesses and customers with Dialpad as the connective tissue.
   </div>
 
-  <figure class="d-bar16 d-of-hidden">
+  <figure class="d-bar-500 d-of-hidden">
     <img src="/assets/images/logo--sample-01.jpg" alt="">
   </figure>
 
-  <figure class="d-bar16 d-of-hidden">
+  <figure class="d-bar-500 d-of-hidden">
     <img src="/assets/images/logo--sample-02.jpg" alt="">
   </figure>
 
-  <figure class="d-bar16 d-of-hidden">
+  <figure class="d-bar-500 d-of-hidden">
     <img src="/assets/images/logo--sample-03.png" alt="">
   </figure>
 </dt-stack>

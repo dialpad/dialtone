@@ -321,7 +321,7 @@ When a fixed or absolutely positioned element (like a toolbar or header) overlap
       surface="secondary-opaque"
       border-width-block-end="100"
       block-size="75"
-      class="d-ps-absolute d-t0 d-l0 d-r0 d-zi-base1 d-d-flex d-ai-center d-jc-center
+      class="d-ps-absolute d-t-0 d-l-0 d-r-0 d-zi-base1 d-d-flex d-ai-center d-jc-center
       "
     >
       Fixed Toolbar (48px)

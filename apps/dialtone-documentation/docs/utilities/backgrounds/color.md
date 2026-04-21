@@ -14,8 +14,8 @@ Use `d-bgc-{color}` to set an element's background color.
 ```vue demo
 <!-- @wrapper -->
 <dt-stack gap="200" :direction="{ 'default': 'column', 'md': 'row' }">
-  <div class="d-p-200 d-bar4 d-bgc-primary">Primary</div>
-  <div class="d-p-200 d-bar4 d-bgc-critical">Critical</div>
+  <div class="d-p-200 d-bar-300 d-bgc-primary">Primary</div>
+  <div class="d-p-200 d-bar-300 d-bgc-critical">Critical</div>
 </dt-stack>
 ```
 
@@ -56,15 +56,15 @@ Use `d-bgo{stop}` to change an element's background color opacity. You can also 
 ```vue demo
 <!-- @wrapper -->
 <dt-stack gap="200" :direction="{ 'default': 'column', 'md': 'row' }">
-  <div class="d-p-100 d-bgc-critical d-bar4 d-bgo100">100%</div>
-  <div class="d-p-100 d-bgc-critical d-bar4 d-bgo99">99%</div>
-  <div class="d-p-100 d-bgc-critical d-bar4 d-bgo95">95%</div>
-  <div class="d-p-100 d-bgc-critical d-bar4 d-bgo90">90%</div>
-  <div class="d-p-100 d-bgc-critical d-bar4 d-bgo75">75%</div>
-  <div class="d-p-100 d-bgc-critical d-bar4 d-bgo50">50%</div>
-  <div class="d-p-100 d-bgc-critical d-bar4 d-bgo25">25%</div>
-  <div class="d-p-100 d-bgc-critical d-bar4 d-bgo10">10%</div>
-  <div class="d-p-100 d-bgc-critical d-bar4 d-bgo0">0%</div>
+  <div class="d-p-100 d-bgc-critical d-bar-300 d-bgo100">100%</div>
+  <div class="d-p-100 d-bgc-critical d-bar-300 d-bgo99">99%</div>
+  <div class="d-p-100 d-bgc-critical d-bar-300 d-bgo95">95%</div>
+  <div class="d-p-100 d-bgc-critical d-bar-300 d-bgo90">90%</div>
+  <div class="d-p-100 d-bgc-critical d-bar-300 d-bgo75">75%</div>
+  <div class="d-p-100 d-bgc-critical d-bar-300 d-bgo50">50%</div>
+  <div class="d-p-100 d-bgc-critical d-bar-300 d-bgo25">25%</div>
+  <div class="d-p-100 d-bgc-critical d-bar-300 d-bgo10">10%</div>
+  <div class="d-p-100 d-bgc-critical d-bar-300 d-bgo0">0%</div>
 </dt-stack>
 ```
 
@@ -76,8 +76,8 @@ Use `d-bgo{stop}` to change an element's background color opacity. You can also 
 ```vue demo
 <!-- @wrapper -->
 <dt-stack gap="200" :direction="{ 'default': 'column', 'md': 'row' }">
-  <div v-dt-mode:invert class="d-p-200 d-bar4 d-bgc-primary">Primary</div>
-  <div v-dt-mode:invert class="d-p-200 d-bar4 d-bgc-critical">Critical</div>
+  <div v-dt-mode:invert class="d-p-200 d-bar-300 d-bgc-primary">Primary</div>
+  <div v-dt-mode:invert class="d-p-200 d-bar-300 d-bgc-critical">Critical</div>
 </dt-stack>
 ```
 

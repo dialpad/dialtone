@@ -111,7 +111,7 @@ keywords: ["theme island","mode override","v-dt-mode","directive","light","dark"
   <dt-stack :direction="{ 'default': 'column', 'lg': 'row' }" gap="200" class="d-w100p">
     <dt-stack gap="100" class="d-fl1">
       <dt-text as="h3" kind="headline" :size="300">Inverted <dt-text strength="normal">(auto)</dt-text></dt-text>
-      <dt-stack v-dt-mode:invert gap="100" class="d-bgc-secondary d-p-200 d-bar8 d-ba d-bc-default">
+      <dt-stack v-dt-mode:invert gap="100" class="d-bgc-secondary d-p-200 d-bar-400 d-ba d-bc-default">
         <dt-stack gap="100" direction="row">
           <dt-icon name="circle-half-filled" size="300" class="d-fc-positive" />
           <dt-text as="p" kind="body" :size="200">Primary</dt-text>
@@ -127,7 +127,7 @@ keywords: ["theme island","mode override","v-dt-mode","directive","light","dark"
     </dt-stack>
     <dt-stack gap="100" class="d-fl1">
       <dt-text as="h3" kind="headline" :size="300">Explicit light</dt-text>
-      <dt-stack v-dt-mode:light gap="100" class="d-bgc-secondary d-p-200 d-bar8 d-ba d-bc-default">
+      <dt-stack v-dt-mode:light gap="100" class="d-bgc-secondary d-p-200 d-bar-400 d-ba d-bc-default">
         <dt-stack gap="100" direction="row">
           <dt-icon name="sun" size="300" class="d-fc-positive" />
           <dt-text as="p" kind="body" :size="200">Primary</dt-text>
@@ -143,7 +143,7 @@ keywords: ["theme island","mode override","v-dt-mode","directive","light","dark"
     </dt-stack>
     <dt-stack gap="100" class="d-fl1">
       <dt-text as="h3" kind="headline" :size="300">Explicit dark</dt-text>
-      <dt-stack v-dt-mode:dark gap="100" class="d-bgc-secondary d-p-200 d-bar8 d-ba d-bc-default">
+      <dt-stack v-dt-mode:dark gap="100" class="d-bgc-secondary d-p-200 d-bar-400 d-ba d-bc-default">
         <dt-stack gap="100" direction="row">
           <dt-icon name="moon" size="300" class="d-fc-positive" />
           <dt-text as="p" kind="body" :size="200">Primary</dt-text>
@@ -267,7 +267,7 @@ Pass a boolean value to conditionally apply or remove the directive. When `false
 The default mode — inverts relative to the nearest parent mode boundary or the root. When no arg is provided, `v-dt-mode` defaults to invert.
 
 ```vue demo
-<section v-dt-mode class="d-p-200 d-bar8">
+<section v-dt-mode class="d-p-200 d-bar-400">
   <dt-text as="p" tone="positive">Inverted mode (opposite of parent)</dt-text>
 </section>
 ```
@@ -277,7 +277,7 @@ The default mode — inverts relative to the nearest parent mode boundary or the
 Explicitly set to light mode regardless of parent or root mode.
 
 ```vue demo
-<section v-dt-mode:light class="d-p-200 d-bar8">
+<section v-dt-mode:light class="d-p-200 d-bar-400">
   <dt-text as="p" tone="positive">Always light mode</dt-text>
 </section>
 ```
@@ -287,7 +287,7 @@ Explicitly set to light mode regardless of parent or root mode.
 Explicitly set to dark mode regardless of parent or root mode.
 
 ```vue demo
-<section v-dt-mode:dark class="d-p-200 d-bar8">
+<section v-dt-mode:dark class="d-p-200 d-bar-400">
   <dt-text as="p" tone="positive">Always dark mode</dt-text>
 </section>
 ```
@@ -297,11 +297,11 @@ Explicitly set to dark mode regardless of parent or root mode.
 Mode boundaries can be nested. Each `v-dt-mode:invert` reads the nearest parent boundary and flips. In this example the first level is explicitly set to light mode, the second level inverts against that, and the third level inverts again.
 
 ```vue demo
-<dt-stack gap="200" v-dt-mode:light class="d-p-200 d-bar8 d-bgc-secondary d-ba">
+<dt-stack gap="200" v-dt-mode:light class="d-p-200 d-bar-400 d-bgc-secondary d-ba">
   <dt-text as="p" tone="positive" text-box-trim="both">Explicit Light</dt-text>
-  <dt-stack v-dt-mode gap="200" class="d-p-200 d-bar8 d-bgc-secondary">
+  <dt-stack v-dt-mode gap="200" class="d-p-200 d-bar-400 d-bgc-secondary">
     <dt-text as="p" tone="positive" text-box-trim="both">Inverted (Dark)</dt-text>
-    <dt-stack v-dt-mode gap="200" class="d-p-200 d-bar4 d-bgc-secondary">
+    <dt-stack v-dt-mode gap="200" class="d-p-200 d-bar-300 d-bgc-secondary">
       <dt-text as="p" tone="positive" text-box-trim="both">Inverted again (Light)</dt-text>
     </dt-stack>
   </dt-stack>
@@ -315,7 +315,7 @@ The background surface of a Mode Island defaults to the root surface color. To o
 ```vue demo
 <!-- @wrapper -->
 <dt-stack gap="200">
-  <dt-mode-island class="d-p-200 d-bar8 d-w100p d-bgc-transparent">
+  <dt-mode-island class="d-p-200 d-bar-400 d-w100p d-bgc-transparent">
       <dt-stack gap="200">
         <dt-text as="p" kind="code" :size="100" tone="tertiary">Transparent background, inverted mode island</dt-text>
         <div>
@@ -323,7 +323,7 @@ The background surface of a Mode Island defaults to the root surface color. To o
         </div>
       </dt-stack>
     </dt-mode-island>
-    <dt-mode-island class="d-p-200 d-bar8 d-w100p">
+    <dt-mode-island class="d-p-200 d-bar-400 d-w100p">
       <dt-stack gap="200">
         <dt-text as="p" kind="code" :size="100" tone="tertiary">Default background, inverted mode island</dt-text>
         <div>
@@ -331,7 +331,7 @@ The background surface of a Mode Island defaults to the root surface color. To o
         </div>
       </dt-stack>
     </dt-mode-island>
-    <dt-mode-island mode="dark" class="d-p-200 d-bar8 d-w100p d-bgc-critical">
+    <dt-mode-island mode="dark" class="d-p-200 d-bar-400 d-w100p d-bgc-critical">
       <dt-stack gap="200">
         <dt-text as="p" kind="code" :size="100" tone="tertiary">critical background, dark mode island</dt-text>
         <div>
@@ -339,7 +339,7 @@ The background surface of a Mode Island defaults to the root surface color. To o
         </div>
       </dt-stack>
     </dt-mode-island>
-    <dt-mode-island mode="light" class="d-p-200 d-bar8 d-w100p d-bgc-critical">
+    <dt-mode-island mode="light" class="d-p-200 d-bar-400 d-w100p d-bgc-critical">
       <dt-stack gap="200">
         <dt-text as="p" kind="code" :size="100" tone="tertiary">critical background, light mode island</dt-text>
         <div>
@@ -357,7 +357,7 @@ The background surface of a Mode Island defaults to the root surface color. To o
 A real-world pattern: the callbar container already exists as a semantic element. The directive applies mode theming directly — no wrapper needed.
 
 ```vue demo
-<dt-stack v-dt-mode class="d-ba d-bc-subtle d-bgc-secondary d-p-75 d-py-50 d-bar12 d-bs-md d-w100p" direction="row" gap="400">
+<dt-stack v-dt-mode class="d-ba d-bc-subtle d-bgc-secondary d-p-75 d-py-50 d-bar-450 d-bs-md d-w100p" direction="row" gap="400">
   <dt-stack gap="100" direction="row">
     <dt-avatar
       full-name="TA"

@@ -28,7 +28,7 @@
         </span>
         <dt-stack
           direction="row"
-          class="custom-list-item--actions d-ps-absolute d-p-75 d-t-n100 d-r-150 d-bgc-white d-bar4 d-bs-md"
+          class="custom-list-item--actions d-ps-absolute d-p-75 d-t-n100 d-r-150 d-bgc-white d-bar-300 d-bs-md"
         >
           <dt-button
             class="d-p-50 d-py-100"

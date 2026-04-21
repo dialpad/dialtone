@@ -174,7 +174,7 @@ export const Default = {
     header: `<div class="d-fs-200 d-fw-bold" id="contact-name"> Joseph Lumaban </div>`,
     subtitle: `<div class="d-fs-100 d-mbs-25"> +1 (415) 123-4567 </div>`,
     blockEnd: `<div data-qa="dt-stack" class="d-mbs-n75 d-stack d-stack--row d-stack--gap-0 d-stack--align-center d-stack--justify-start">
-    <div class="d-w8 d-h8 d-mie-50 d-bgc-magenta-200">
+    <div class="d-w-8px d-h-8px d-mie-50 d-bgc-magenta-200">
       &nbsp;
     </div>
     <div class="d-fs-100 d-mie-50">
@@ -202,7 +202,7 @@ export const Default = {
     </template>
     <template #blockEnd>
       <dt-stack direction="row" align="center" class="d-mbs-n75">
-        <div class="d-w8 d-h8 d-mie-50 d-bgc-magenta-200">&nbsp;</div>
+        <div class="d-w-8px d-h-8px d-mie-50 d-bgc-magenta-200">&nbsp;</div>
         <div class="d-fs-100 d-mie-50">Aerolabs Support</div>
       </dt-stack>
     </template>
@@ -287,7 +287,7 @@ export const Variants = {
           </template>
           <template #blockEnd>
             <dt-stack direction="row" align="center" class="d-mbs-n75">
-              <div class="d-w8 d-h8 d-mie-50 d-bgc-magenta-200">&nbsp;</div>
+              <div class="d-w-8px d-h-8px d-mie-50 d-bgc-magenta-200">&nbsp;</div>
               <div class="d-fs-100 d-mie-50">Aerolabs Support</div>
             </dt-stack>
           </template>
@@ -306,7 +306,7 @@ export const Variants = {
         </template>
         <template #blockEnd>
           <dt-stack direction="row" align="center" class="d-mbs-n75">
-            <div class="d-w8 d-h8 d-mie-50 d-bgc-magenta-200">&nbsp;</div>
+            <div class="d-w-8px d-h-8px d-mie-50 d-bgc-magenta-200">&nbsp;</div>
             <div class="d-fs-100 d-mie-50">Aerolabs Support</div>
             <div class="d-fw-bold d-fs-100">• Transfer from Billing Support</div>
           </dt-stack>
@@ -330,7 +330,7 @@ export const Variants = {
         </template>
         <template #blockEnd>
           <dt-stack direction="row" align="center" class="d-mbs-n75">
-            <div class="d-w8 d-h8 d-mie-50 d-bgc-magenta-200">&nbsp;</div>
+            <div class="d-w-8px d-h-8px d-mie-50 d-bgc-magenta-200">&nbsp;</div>
             <div class="d-fs-100 d-mie-50">Aerolabs Support</div>
           </dt-stack>
         </template>

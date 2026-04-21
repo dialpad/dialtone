@@ -8,9 +8,9 @@ keywords: ["visible", "hidden", "show", "hide", "screen reader"]
 
 ```vue demo
 <div class="d-w100p">
-  <div class="d-d-inline-block d-p-200 d-bgc-moderate d-bar4 d-code--md d-ta-center d-vi-visible">.d-vi-visible</div>
-  <div class="d-d-inline-block d-p-200 d-bgc-moderate d-bar4 d-code--md d-ta-center d-vi-visible-sr">.d-vi-visible-sr</div>
-  <div class="d-d-inline-block d-p-200 d-bgc-moderate d-bar4 d-code--md d-ta-center d-vi-hidden">.d-vi-hidden</div>
+  <div class="d-d-inline-block d-p-200 d-bgc-moderate d-bar-300 d-code--md d-ta-center d-vi-visible">.d-vi-visible</div>
+  <div class="d-d-inline-block d-p-200 d-bgc-moderate d-bar-300 d-code--md d-ta-center d-vi-visible-sr">.d-vi-visible-sr</div>
+  <div class="d-d-inline-block d-p-200 d-bgc-moderate d-bar-300 d-code--md d-ta-center d-vi-hidden">.d-vi-hidden</div>
 </div>
 ```
 

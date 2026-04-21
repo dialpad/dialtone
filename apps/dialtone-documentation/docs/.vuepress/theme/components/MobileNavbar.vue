@@ -42,7 +42,7 @@
       class="
         mobile-header-drop-down-menu
         d-ps-fixed
-        d-l0
+        d-l-0
         d-w100p
         d-bgc-secondary
         d-of-auto
@@ -50,7 +50,7 @@
         d-py-300
         d-px-200
         d-h100p
-        d-t64
+        d-t-800
         d-zi-navigation-fixed
         "
       :class="{ 'd-o0 d-d-none': !isMenuOpen }"

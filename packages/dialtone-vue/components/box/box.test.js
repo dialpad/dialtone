@@ -392,10 +392,10 @@ describe('DtBox', () => {
   // ── Attrs passthrough ─────────────────────────────────────
 
   it('passes class attr through to root element', () => {
-    const wrapper = mountComponent({}, { class: 'd-ps-sticky d-t0' });
+    const wrapper = mountComponent({}, { class: 'd-ps-sticky d-t-0' });
 
     expect(wrapper.classes()).toContain('d-ps-sticky');
-    expect(wrapper.classes()).toContain('d-t0');
+    expect(wrapper.classes()).toContain('d-t-0');
   });
 
   it('passes id attr through to root element', () => {

@@ -134,7 +134,7 @@ In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#
 
 ```vue demo
 <div class="d-p-100 d-bgc-contrast d-w100p">
-  <div v-dt-mode:invert class="d-p-200 d-bar8">
+  <div v-dt-mode:invert class="d-p-200 d-bar-400">
     <example-tabs />
   </div>
 </div>

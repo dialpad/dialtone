@@ -59,7 +59,7 @@ Some icons are linked to specific actions, like the Settings gear <dt-icon name=
 
 The icon size is defined based on the context and text size next to it. These are the only available size options and no overrides should be needed to properly size the icons.
 
-<dt-stack direction="row" justify="between" gap="100" class="d-gc2 d-bgc-secondary d-p-300 d-bar16">
+<dt-stack direction="row" justify="between" gap="100" class="d-gc2 d-bgc-secondary d-p-300 d-bar-500">
   <dt-stack gap="100" align="center">
     <dt-icon name="food" size="100" />
     <dt-text as="code" kind="code" :size="200">100</dt-text>
@@ -97,7 +97,7 @@ The icon size is defined based on the context and text size next to it. These ar
 
 #### Sample Pairings
 
-<dt-stack align="center" class="d-gc2 d-bgc-secondary d-p-300 d-bar16">
+<dt-stack align="center" class="d-gc2 d-bgc-secondary d-p-300 d-bar-500">
   <dt-stack gap="100">
     <dt-stack direction="row" gap="50" align="center">
       <dt-icon name="food" size="100" />

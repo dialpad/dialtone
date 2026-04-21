@@ -13,9 +13,9 @@ Use `d-wmn-{stop}` to set a fixed minimum width for an element using layout toke
 
 ```vue demo
 <dt-stack direction="row" justify="center" gap="200" class="d-w100p">
-  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-size-100 d-wmn-100 d-bgc-moderate d-bar4">1</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-size-100 d-wmn-150 d-bgc-moderate d-bar4">2</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-size-100 d-wmn-500 d-bgc-moderate d-bar4">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-size-100 d-wmn-100 d-bgc-moderate d-bar-300">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-size-100 d-wmn-150 d-bgc-moderate d-bar-300">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-size-100 d-wmn-500 d-bgc-moderate d-bar-300">3</dt-stack>
 </dt-stack>
 <!-- @code -->
 <div class="d-wmn-100">1</div>

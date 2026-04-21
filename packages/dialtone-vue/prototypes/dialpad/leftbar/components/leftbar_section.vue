@@ -14,7 +14,7 @@
           @click="defaultToggleOpen"
         >
           <template #icon="{ iconSize }">
-            <div class="d-w24 d-d-inline-flex d-ai-center">
+            <div class="d-w-24px d-d-inline-flex d-ai-center">
               <dt-icon-chevron-down
                 v-if="isOpen"
                 :size="iconSize"

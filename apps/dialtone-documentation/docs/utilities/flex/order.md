@@ -12,10 +12,10 @@ keywords: ["flexbox","flex order","reorder","sort"]
 By default, items are ordered by their position in the DOM. To re-order an element, use `d-order{#}`.
 
 ```vue demo
-<dt-stack direction="row" gap="200" align="center" justify="between" class="d-w100p d-bar8 d-bgc-moderate">
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-size-100 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-size-100 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-size-100 d-bgc-bold-opaque d-bar4 d-order-first">3</dt-stack>
+<dt-stack direction="row" gap="200" align="center" justify="between" class="d-w100p d-bar-400 d-bgc-moderate">
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-size-100 d-bgc-moderate-opaque d-bar-300">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-size-100 d-bgc-moderate-opaque d-bar-300">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-size-100 d-bgc-bold-opaque d-bar-300 d-order-first">3</dt-stack>
 </dt-stack>
 ```
 

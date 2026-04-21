@@ -60,12 +60,12 @@
         @emoji-scroll-bottom-reached="$attrs.onEmojiScrollBottomReached"
       />
     </div>
-    <div class="d-mt16">
-      <p class="d-label--base d-mb4">
+    <div class="d-mt-200">
+      <p class="d-label--base d-mb-50">
         Markdown output
       </p>
       <!-- eslint-disable-next-line max-len -->
-      <pre class="d-p8 d-bgc-secondary d-fc-primary d-bar4 d-of-auto d-ff-mono d-fs-100 d-ws-pre-wrap">{{ markdownOutput }}</pre>
+      <pre class="d-p-100 d-bgc-secondary d-fc-primary d-bar-300 d-of-auto d-ff-mono d-fs-100 d-ws-pre-wrap">{{ markdownOutput }}</pre>
     </div>
   </div>
 </template>

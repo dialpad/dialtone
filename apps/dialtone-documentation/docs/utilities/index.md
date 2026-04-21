@@ -271,20 +271,20 @@ Refine the spacing by adjusting the [Stack](/components/stack.md) `gap` prop and
 
 ### 13. Round it out!
 
-Add `d-bar4` to each item for subtle rounded corners.
+Add `d-bar-300` to each item for subtle rounded corners.
 
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="100" class="d-fc-primary-inverted">
-  <dt-stack direction="row" gap="50" class="d-bar4 d-bgc-critical-strong d-py-50 d-px-100">
+  <dt-stack direction="row" gap="50" class="d-bar-300 d-bgc-critical-strong d-py-50 d-px-100">
     <dt-icon name="alert-triangle" size="200" />
     <dt-text kind="label" :size="200">Critical</dt-text>
   </dt-stack>
-  <dt-stack direction="row" gap="50" class="d-bar4 d-bgc-info-strong d-py-50 d-px-100">
+  <dt-stack direction="row" gap="50" class="d-bar-300 d-bgc-info-strong d-py-50 d-px-100">
     <dt-icon name="alert-circle" size="200" />
     <dt-text kind="label" :size="200">Info</dt-text>
   </dt-stack>
-  <dt-stack direction="row" gap="50" class="d-bar4 d-bgc-success-strong d-py-50 d-px-100">
+  <dt-stack direction="row" gap="50" class="d-bar-300 d-bgc-success-strong d-py-50 d-px-100">
     <dt-icon name="check-circle" size="200" />
     <dt-text kind="label" :size="200">Success</dt-text>
   </dt-stack>

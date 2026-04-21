@@ -32,7 +32,7 @@
       <dt-stack
         direction="row"
         align="center"
-        class="d-p-300 d-bar8 d-ba d-bc-subtle d-bgc-secondary d-hmn-200"
+        class="d-p-300 d-bar-400 d-ba d-bc-subtle d-bgc-secondary d-hmn-200"
       >
         <dt-motion-text
           :ref="el => { if (el) modeRefs[mode.value] = el }"

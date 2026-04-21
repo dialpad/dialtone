@@ -16,7 +16,7 @@ keywords: ["brand colors","marketing colors","purple"]
         <p class="d-docsite--paragraph">For specialty brand communications use one of the Dialpad brand purples for backgrounds.</p>
       </div>
       <div class="d-gc2">
-        <svg-loader class="d-bar16" name="color-marketing--01" />
+        <svg-loader class="d-bar-500" name="color-marketing--01" />
       </div>
     </div>
   </div>
@@ -26,7 +26,7 @@ keywords: ["brand colors","marketing colors","purple"]
       <p class="d-docsite--paragraph">When creating attract and engage level communications, especially when using an increased amount of text, use the light background.</p>
     </div>
     <div class="d-gc2">
-      <svg-loader class="d-bar16" name="color-marketing--02" />
+      <svg-loader class="d-bar-500" name="color-marketing--02" />
     </div>
   </div>
 
@@ -37,20 +37,20 @@ keywords: ["brand colors","marketing colors","purple"]
       <p class="d-docsite--paragraph"><dt-link href="#">View Dialtone Icon</dt-link></p>
     </div>
     <div class="d-gc2">
-      <svg-loader class="d-bar16" name="color-marketing--03" />
+      <svg-loader class="d-bar-500" name="color-marketing--03" />
     </div>
   </div>
 
   <figure>
-    <svg-loader class="d-bar16" name="color-marketing--04" />
+    <svg-loader class="d-bar-500" name="color-marketing--04" />
   </figure>
 
   <div class="d-d-grid d-g-600 d-g-cols1 md:d-g-cols2 d-ai-center">
     <figure>
-      <svg-loader class="d-bar16" name="color-marketing--05" />
+      <svg-loader class="d-bar-500" name="color-marketing--05" />
     </figure>
     <figure>
-      <svg-loader class="d-bar16" name="color-marketing--06" />
+      <svg-loader class="d-bar-500" name="color-marketing--06" />
     </figure>
   </div>
 

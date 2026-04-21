@@ -55,7 +55,7 @@ Use when all items share a known, uniform height. Set `:item-size` to that heigh
     list-tag="div"
     item-tag="div"
     direction="vertical"
-    class="d-ba d-bar8 d-p-50"
+    class="d-ba d-bar-400 d-p-50"
     >
     <template #default="{ item }">
       <dt-text class="d-px-50">{{ item.name }}</dt-text>
@@ -122,7 +122,7 @@ Use when item heights depend on their content. Set `dynamic="true"` and `:min-it
     item-tag="div"
     direction="vertical"
     :dynamic="true"
-    class="d-ba d-bar8 d-p-50"
+    class="d-ba d-bar-400 d-p-50"
   >
     <template #default="{ item }">
       <dt-stack gap="100" direction="row" align="start" class="d-p-50">
@@ -169,10 +169,10 @@ Defaults to `vertical`. Set to `horizontal` for a horizontal scroller.
     list-tag="div"
     item-tag="div"
     direction="horizontal"
-    class="d-ba d-bar8 d-p-50"
+    class="d-ba d-bar-400 d-p-50"
     >
     <template #default="{ item }">
-      <dt-stack class="d-p-150 d-ba h:d-bgc-secondary d-bc-subtle d-bar4 d-c-default" align="center" justify="center"><dt-text kind="code">{{ item.name }}</dt-text></dt-stack>
+      <dt-stack class="d-p-150 d-ba h:d-bgc-secondary d-bc-subtle d-bar-300 d-c-default" align="center" justify="center"><dt-text kind="code">{{ item.name }}</dt-text></dt-stack>
     </template>
   </dt-scroller>
 </div>

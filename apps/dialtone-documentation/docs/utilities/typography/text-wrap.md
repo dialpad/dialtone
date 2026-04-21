@@ -8,7 +8,7 @@ description: Utilities for controlling how text wraps within an element.
 Use `d-tw-nowrap` to prevent text from wrapping.
 
 ```vue demo
-<div class="d-bgc-moderate d-py-100 d-px-200 d-bar8 d-w-500 d-of-hidden">
+<div class="d-bgc-moderate d-py-100 d-px-200 d-bar-400 d-w-500 d-of-hidden">
   <p class="d-tw-nowrap">Lorem ipsum dolor sit amet consectetur gemini.</p>
 </div>
 ```
@@ -18,7 +18,7 @@ Use `d-tw-nowrap` to prevent text from wrapping.
 Use `d-tw-wrap` to allow text to wrap normally at soft wrap opportunities.
 
 ```vue demo
-<div class="d-bgc-moderate d-py-100 d-px-200 d-bar8 d-w-500">
+<div class="d-bgc-moderate d-py-100 d-px-200 d-bar-400 d-w-500">
   <p class="d-tw-wrap">Lorem ipsum dolor sit amet consectetur gemini.</p>
 </div>
 ```
@@ -28,7 +28,7 @@ Use `d-tw-wrap` to allow text to wrap normally at soft wrap opportunities.
 Use `d-tw-balance` to balance the length of each line of text, distributing content more evenly across lines.
 
 ```vue demo
-<div class="d-bgc-moderate d-py-100 d-px-200 d-bar8 d-w-500">
+<div class="d-bgc-moderate d-py-100 d-px-200 d-bar-400 d-w-500">
   <p class="d-tw-balance">Lorem ipsum dolor sit amet consectetur gemini.</p>
 </div>
 ```
@@ -38,7 +38,7 @@ Use `d-tw-balance` to balance the length of each line of text, distributing cont
 Use `d-tw-pretty` to optimize text wrapping for better typography, avoiding orphaned words on the last line.
 
 ```vue demo
-<div class="d-bgc-moderate d-py-100 d-px-200 d-bar8 d-w-500">
+<div class="d-bgc-moderate d-py-100 d-px-200 d-bar-400 d-w-500">
   <p class="d-tw-pretty">Lorem ipsum dolor sit amet consectetur gemini.</p>
 </div>
 ```
@@ -48,7 +48,7 @@ Use `d-tw-pretty` to optimize text wrapping for better typography, avoiding orph
 Use `d-tw-unset` to reset the text wrap property to its default value.
 
 ```vue demo
-<div class="d-bgc-moderate d-py-100 d-px-200 d-bar8 d-w-500">
+<div class="d-bgc-moderate d-py-100 d-px-200 d-bar-400 d-w-500">
   <p class="d-tw-unset">Lorem ipsum dolor sit amet consectetur gemini.</p>
 </div>
 ```

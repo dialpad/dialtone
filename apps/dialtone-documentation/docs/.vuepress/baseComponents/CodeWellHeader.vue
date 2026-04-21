@@ -5,7 +5,7 @@
       gap="100"
       align="center"
       justify="center"
-      class="d-bar8"
+      class="d-bar-400"
       :class="classes"
     >
       <slot />
@@ -41,7 +41,7 @@ export default {
       return [
         'd-p-400 d-w100p d-of-auto',
         this.bgclass,
-        { 'd-ba d-bc-subtle d-btr8 d-baw1': this.isSurfacePrimary },
+        { 'd-ba d-bc-subtle d-bbsr-400 d-baw1': this.isSurfacePrimary },
         this.$attrs.class,
       ];
     },

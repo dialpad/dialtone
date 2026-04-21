@@ -2,7 +2,7 @@
   <clamped-table-wrapper>
     <div>
       <table class="d-table dialtone-doc-table">
-        <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+        <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-ibs-0">
           <tr>
             <th class="d-p-0 d-bbw0" scope="col">
               <div class="d-p-200 d-bb d-bbw1">
@@ -85,7 +85,10 @@
               </dt-text>
               <div
                 v-else-if="color.property === 'border-color'"
-                :class="['d-d-inline-flex d-p-50 d-bar-pill', { 'd-bgc-contrast': color.variable.includes('inverted') }]"
+                :class="[
+                  'd-d-inline-flex d-p-50 d-bar-pill',
+                  { 'd-bgc-contrast': color.variable.includes('inverted') },
+                ]"
               >
                 <div
                   :style="{ borderColor: `var(--${color.variable})` }"

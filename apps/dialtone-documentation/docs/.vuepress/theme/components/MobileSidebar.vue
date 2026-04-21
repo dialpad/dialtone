@@ -10,10 +10,10 @@
         d-w100p
         d-bgc-secondary
         d-h-100
-        d-x0
+        d-x-0
         d-bb
         d-bc-default
-        d-t64
+        d-t-800
         lg:d-d-none
       "
     >
@@ -35,7 +35,7 @@
       class="
         mobile-header-drop-down-navigation
         d-ps-fixed
-        d-l0
+        d-l-0
         d-w100p
         d-bgc-primary
         d-of-auto

@@ -39,7 +39,7 @@
       role="tree"
       tabindex="0"
       aria-label="Sidebar navigation"
-      class="d-ba d-bc-subtle d-bar8 d-w-500 d-p-50"
+      class="d-ba d-bc-subtle d-bar-400 d-w-500 d-p-50"
       @keydown.right.prevent="expandOrEnter"
       @keydown.left.prevent="collapseOrParent"
     >
@@ -459,7 +459,7 @@
         role="listitem"
         tabindex="0"
         gap="100"
-        class="d-p-100 d-w-800 h:d-bgc-moderate-opaque fv:d-bgc-moderate-opaque d-bar8"
+        class="d-p-100 d-w-800 h:d-bgc-moderate-opaque fv:d-bgc-moderate-opaque d-bar-400"
       >
         <dt-stack
           direction="row"
@@ -531,7 +531,7 @@
         role="listitem"
         tabindex="-1"
         gap="100"
-        class="d-p-100 d-w-800 h:d-bgc-moderate-opaque fv:d-bgc-moderate-opaque d-bar8"
+        class="d-p-100 d-w-800 h:d-bgc-moderate-opaque fv:d-bgc-moderate-opaque d-bar-400"
       >
         <dt-stack
           direction="row"
@@ -598,7 +598,7 @@
         role="listitem"
         tabindex="-1"
         gap="100"
-        class="d-p-100 d-w-800 h:d-bgc-moderate-opaque fv:d-bgc-moderate-opaque d-bar8"
+        class="d-p-100 d-w-800 h:d-bgc-moderate-opaque fv:d-bgc-moderate-opaque d-bar-400"
       >
         <dt-stack
           direction="row"

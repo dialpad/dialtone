@@ -13,7 +13,7 @@ Dialtone's theming system is a flexible foundation for creating consistent visua
 
 Theming is limited to the application's navigation regions, consisting of the top and left.
 
-<div class="d-bgc-secondary d-bar8"><svg-loader class="d-fl1" name="theme-image" /></div>
+<div class="d-bgc-secondary d-bar-400"><svg-loader class="d-fl1" name="theme-image" /></div>
 
 ### Mode
 
@@ -300,7 +300,7 @@ The shell tokens are a specialized set of tokens for theming the topbar and side
 
 These are the core reference colors for the shell. They are directly linked to the base tokens and determine the overall color palette of the topbar and sidebar. These base tokens are the only ones that should be modified when creating a custom theme.
 
-<div class="d-bgc-secondary d-bar8"><svg-loader class="d-fl1" name="base-tokens" /></div>
+<div class="d-bgc-secondary d-bar-400"><svg-loader class="d-fl1" name="base-tokens" /></div>
 
 <div class="d-m-400"></div>
 
@@ -308,12 +308,12 @@ These are the core reference colors for the shell. They are directly linked to t
 
 These tokens, such as `shell-action...`, `shell-status...` `shell-mention...`, inherit their values from the shell base tokens. For example, they use modifiers to create variations or color states (e.g., `hover`, `active`, `disabled`).
 
-<div class="d-bgc-secondary d-bar8"><svg-loader class="d-fl1" name="base-shell-token" /></div>
+<div class="d-bgc-secondary d-bar-400"><svg-loader class="d-fl1" name="base-shell-token" /></div>
 
 <div class="d-m-400"></div>
 
 This structure allows for a cascading effect: changing a shell base token automatically updates all related shell modifier tokens, making it simple to create and manage custom themes for the application's shell.
-<div class="d-bgc-secondary d-bar8"><svg-loader class="d-fl1" name="token-structure" /></div>
+<div class="d-bgc-secondary d-bar-400"><svg-loader class="d-fl1" name="token-structure" /></div>
 
 <div class="d-m-400"></div>
 
@@ -323,12 +323,12 @@ When creating a custom theme, it is important to ensure that the colors used are
 
 <dialtone-usage class="d-d-grid d-g-300 d-g-cols2">
   <template #do>
-    <div class="d-bgc-secondary d-bar8">
+    <div class="d-bgc-secondary d-bar-400">
       <svg-loader class="d-fl1" name="theme-contrast-do" />
     </div>
   </template>
   <template #dont>
-    <div class="d-bgc-secondary d-bar8">
+    <div class="d-bgc-secondary d-bar-400">
       <svg-loader class="d-fl1" name="theme-contrast-dont" />
     </div>
   </template>

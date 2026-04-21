@@ -1,6 +1,6 @@
 <template>
   <dt-button-group
-    class="d-d-flex d-bgc-black-025 d-bar4"
+    class="d-d-flex d-bgc-black-025 d-bar-300"
   >
     <template
       v-for="(_, slot) in slots"

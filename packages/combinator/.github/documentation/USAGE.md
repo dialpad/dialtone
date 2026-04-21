@@ -215,7 +215,7 @@ of the combinator.
 ```vue
 <dtc-combinator
   ...
-  header-class="d-py32"
-  class="d-px32"
+  header-class="d-py-400"
+  class="d-px-400"
 />
 ```

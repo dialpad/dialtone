@@ -31,8 +31,8 @@
         :class="[
           'd-px-150 d-py-100 d-text-code--xs',
           {
-            'd-btr4': index === 0,
-            'd-bbr4': index === (stops.length - 1),
+            'd-bbsr-300': index === 0,
+            'd-bber-300': index === (stops.length - 1),
           },
         ]"
         :style="`background-color: ${stop.value}`"

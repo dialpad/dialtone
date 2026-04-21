@@ -13,9 +13,9 @@ Use `d-hmx-{stop}` to set a fixed maximum height for an element using layout tok
 
 ```vue demo
 <dt-stack direction="row" gap="200" align="start" justify="center" class="d-w100p">
-  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100p d-h-100 d-hmx100p d-bgc-moderate d-bar4 d-ta-center">1</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100p d-h-200 d-hmx200p d-bgc-moderate d-bar4 d-ta-center">2</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100p d-h-400 d-hmx400p d-bgc-moderate d-bar4 d-ta-center">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100p d-h-100 d-hmx-100 d-bgc-moderate d-bar-300 d-ta-center">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100p d-h-200 d-hmx-200 d-bgc-moderate d-bar-300 d-ta-center">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100p d-h-400 d-hmx-400 d-bgc-moderate d-bar-300 d-ta-center">3</dt-stack>
 </dt-stack>
 <!-- @code -->
 <div class="d-hmx-100">...</div>  <!-- max-block-size: var(--dt-layout-100) = 64px / 6.4rem -->

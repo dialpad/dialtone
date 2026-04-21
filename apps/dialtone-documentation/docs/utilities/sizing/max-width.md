@@ -13,9 +13,9 @@ Use `d-wmx-{stop}` to set a fixed maximum width for an element using layout toke
 
 ```vue demo
 <dt-stack direction="row" justify="center" gap="200" class="d-w100p">
-  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100p d-h-100 d-wmx-100 d-bgc-moderate d-bar4 d-ta-center">1</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100p d-h-100 d-wmx-150 d-bgc-moderate d-bar4 d-ta-center">2</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100p d-h-100 d-wmx-500 d-bgc-moderate d-bar4 d-ta-center">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100p d-h-100 d-wmx-100 d-bgc-moderate d-bar-300 d-ta-center">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100p d-h-100 d-wmx-150 d-bgc-moderate d-bar-300 d-ta-center">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100p d-h-100 d-wmx-500 d-bgc-moderate d-bar-300 d-ta-center">3</dt-stack>
 </dt-stack>
 <!-- @code -->
 <div class="d-wmx-100">1</div>
@@ -28,9 +28,9 @@ Use `d-wmx-{stop}` to set a fixed maximum width for an element using layout toke
 Use `d-wmx{n}p` to set a maximum width percentage for an element. No hyphen before the number, `p` suffix indicates a literal percentage value. Note: `d-wmx33p` = 33.333% and `d-wmx66p` = 66.667%.
 
 ```vue demo
-<dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100p d-h-100 d-wmx50p d-bgc-moderate d-bar4 d-ta-center">1</dt-stack>
-<dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100p d-h-100 d-wmx75p d-bgc-moderate d-bar4 d-ta-center">2</dt-stack>
-<dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100p d-h-100 d-wmx100p d-bgc-moderate d-bar4 d-ta-center">3</dt-stack>
+<dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100p d-h-100 d-wmx50p d-bgc-moderate d-bar-300 d-ta-center">1</dt-stack>
+<dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100p d-h-100 d-wmx75p d-bgc-moderate d-bar-300 d-ta-center">2</dt-stack>
+<dt-stack direction="row" align="center" justify="center" class="d-py-200 d-px-100 d-w100p d-h-100 d-wmx100p d-bgc-moderate d-bar-300 d-ta-center">3</dt-stack>
 <!-- @code -->
 <div class="d-wmx-50p">1</div>
 <div class="d-wmx-75p">2</div>

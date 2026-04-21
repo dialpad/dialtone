@@ -12,7 +12,7 @@ Use `d-m-{stop}` to set margin using spacing token stops. The number references 
 ## Add Margin to All Sides
 
 ```vue demo
-<div class="d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-m-300 d-bgc-moderate d-bar4 d-code--md">d-m-300</dt-stack></div>
+<div class="d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-m-300 d-bgc-moderate d-bar-300 d-code--md">d-m-300</dt-stack></div>
 ```
 
 ## Add Margin to a Single Side
@@ -20,23 +20,23 @@ Use `d-m-{stop}` to set margin using spacing token stops. The number references 
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" justify="center" gap="300" class="d-w100p">
-  <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mbs-150 d-p-200 d-bgc-moderate d-bbr4 d-code--md">d-mbs-150</dt-stack></div>
-  <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mie-200 d-p-200 d-bgc-moderate d-brl4 d-code--md">d-mie-200</dt-stack></div>
-  <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mbe-300 d-p-200 d-bgc-moderate d-btr4 d-code--md">d-mbe-300</dt-stack></div>
-  <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mis-400 d-p-200 d-bgc-moderate d-brr4 d-code--md">d-mis-400</dt-stack></div>
+  <div class="d-as-center d-bar-400 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mbs-150 d-p-200 d-bgc-moderate d-bber-300 d-code--md">d-mbs-150</dt-stack></div>
+  <div class="d-as-center d-bar-400 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mie-200 d-p-200 d-bgc-moderate d-bisr-300 d-code--md">d-mie-200</dt-stack></div>
+  <div class="d-as-center d-bar-400 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mbe-300 d-p-200 d-bgc-moderate d-bbsr-300 d-code--md">d-mbe-300</dt-stack></div>
+  <div class="d-as-center d-bar-400 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mis-400 d-p-200 d-bgc-moderate d-bier-300 d-code--md">d-mis-400</dt-stack></div>
 </dt-stack>
 ```
 
 ## Add Horizontal Margins
 
 ```vue demo
-<div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mx-200 d-p-200 d-bgc-moderate d-code--md">d-mx-200</dt-stack></div>
+<div class="d-as-center d-bar-400 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mx-200 d-p-200 d-bgc-moderate d-code--md">d-mx-200</dt-stack></div>
 ```
 
 ## Add Vertical Margins
 
 ```vue demo
-<div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-my-200 d-p-200 d-bgc-moderate d-code--sm">d-my-200</dt-stack></div>
+<div class="d-as-center d-bar-400 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-my-200 d-p-200 d-bgc-moderate d-code--sm">d-my-200</dt-stack></div>
 ```
 
 ## Negative Margins
@@ -46,8 +46,8 @@ Use `d-mbs-n{stop}` for negative margins. These use the `--dt-spacing-{stop}-neg
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" justify="center" gap="300" class="d-w100p">
-  <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mbs-n100 d-p-200 d-bgc-moderate d-code--md">d-mbs-n100</dt-stack></div>
-  <div class="d-as-center d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mis-n200 d-p-200 d-bgc-moderate d-code--md">d-mis-n200</dt-stack></div>
+  <div class="d-as-center d-bar-400 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mbs-n100 d-p-200 d-bgc-moderate d-code--md">d-mbs-n100</dt-stack></div>
+  <div class="d-as-center d-bar-400 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mis-n200 d-p-200 d-bgc-moderate d-code--md">d-mis-n200</dt-stack></div>
 </dt-stack>
 ```
 
@@ -58,9 +58,9 @@ Auto margins allow an element to fill a remaining space within an object. This i
 ```vue demo
 <!-- @wrapper -->
 <dt-stack gap="200" class="d-w100p">
-  <dt-stack direction="row" class="d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mx-auto d-p-200 d-bgc-moderate d-code--md">d-mx-auto</dt-stack></dt-stack>
-  <dt-stack direction="row" class="d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mis-auto d-p-200 d-bgc-moderate d-code--md">d-mis-auto</dt-stack></dt-stack>
-  <dt-stack direction="row" class="d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mie-auto d-p-200 d-bgc-moderate d-code--md">d-mie-auto</dt-stack></dt-stack>
+  <dt-stack direction="row" class="d-bar-400 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mx-auto d-p-200 d-bgc-moderate d-code--md">d-mx-auto</dt-stack></dt-stack>
+  <dt-stack direction="row" class="d-bar-400 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mis-auto d-p-200 d-bgc-moderate d-code--md">d-mis-auto</dt-stack></dt-stack>
+  <dt-stack direction="row" class="d-bar-400 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-mie-auto d-p-200 d-bgc-moderate d-code--md">d-mie-auto</dt-stack></dt-stack>
 </dt-stack>
 ```
 

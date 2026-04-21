@@ -14,11 +14,11 @@ Use `d-g-{stop}` to set gap using spacing token stops. The number references the
 Use `d-g-{stop}` to universally change the row and column gap space.
 
 ```vue demo
-<dt-stack direction="row" class="d-fl-col2 d-fw-wrap d-g-200 d-bar8 d-w100p d-bgc-bold">
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">1</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">2</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">3</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">4</dt-stack>
+<dt-stack direction="row" class="d-fl-col2 d-fw-wrap d-g-200 d-bar-400 d-w100p d-bgc-bold">
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar-300">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar-300">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar-300">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar-300">4</dt-stack>
 </dt-stack>
 ```
 
@@ -27,11 +27,11 @@ Use `d-g-{stop}` to universally change the row and column gap space.
 Use `d-rg-{stop}` to change the row gap space.
 
 ```vue demo
-<dt-stack class="d-rg-200 d-bar8 d-w100p d-bgc-bold">
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">1</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">2</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">3</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">4</dt-stack>
+<dt-stack class="d-rg-200 d-bar-400 d-w100p d-bgc-bold">
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar-300">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar-300">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar-300">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar-300">4</dt-stack>
 </dt-stack>
 ```
 
@@ -40,22 +40,22 @@ Use `d-rg-{stop}` to change the row gap space.
 Use `d-cg-{stop}` to change the column gap space.
 
 ```vue demo
-<dt-stack direction="row" class="d-fl-col4 d-cg-200 d-bar8 d-w100p d-bgc-bold">
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">1</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">2</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">3</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">4</dt-stack>
+<dt-stack direction="row" class="d-fl-col4 d-cg-200 d-bar-400 d-w100p d-bgc-bold">
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar-300">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar-300">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar-300">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar-300">4</dt-stack>
 </dt-stack>
 ```
 
 ## Independently Changing Row and Column Gaps
 
 ```vue demo
-<dt-stack direction="row" class="d-fl-col2 d-fw-wrap d-rg-400 d-cg-100 d-bar8 d-w100p d-bgc-bold">
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">1</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">2</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">3</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar4">4</dt-stack>
+<dt-stack direction="row" class="d-fl-col2 d-fw-wrap d-rg-400 d-cg-100 d-bar-400 d-w100p d-bgc-bold">
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar-300">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar-300">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar-300">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bar-300">4</dt-stack>
 </dt-stack>
 ```
 

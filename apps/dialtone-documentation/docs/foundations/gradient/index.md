@@ -5,7 +5,7 @@ thumb: true
 keywords: ["gradients","color transition","linear gradient","radial gradient"]
 ---
 
-<div class="d-ba d-bar16 d-pbs-400 d-ta-center d-fc-muted d-headline--xxl">
+<div class="d-ba d-bar-500 d-pbs-400 d-ta-center d-fc-muted d-headline--xxl">
   <dt-empty-state
     :size="300"
     header-text="TBD"

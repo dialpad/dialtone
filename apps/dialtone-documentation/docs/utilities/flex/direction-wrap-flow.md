@@ -12,15 +12,15 @@ keywords: ["flexbox","flex direction","flex wrap","flex flow","row","column"]
 The `flex-direction` property declares a flex container’s main axis direction. The default value is row.
 
 ```vue demo
-<dt-stack class="d-fd-row-reverse d-w100p d-bar8 d-bgc-moderate">
-  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-size-100 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-size-100 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-size-100 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+<dt-stack class="d-fd-row-reverse d-w100p d-bar-400 d-bgc-moderate">
+  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-size-100 d-bgc-moderate-opaque d-bar-300">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-size-100 d-bgc-moderate-opaque d-bar-300">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-size-100 d-bgc-moderate-opaque d-bar-300">3</dt-stack>
 </dt-stack>
-<dt-stack class="d-fd-row d-w100p d-mbs-200 d-bar8 d-bgc-moderate">
-  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-size-100 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-size-100 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-size-100 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+<dt-stack class="d-fd-row d-w100p d-mbs-200 d-bar-400 d-bgc-moderate">
+  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-size-100 d-bgc-moderate-opaque d-bar-300">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-size-100 d-bgc-moderate-opaque d-bar-300">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-size-100 d-bgc-moderate-opaque d-bar-300">3</dt-stack>
 </dt-stack>
 ```
 
@@ -52,10 +52,10 @@ The `flex-direction` property declares a flex container’s main axis direction.
 The `flex-wrap` property declares a flex container’s wrapping status. The default value is nowrap.
 
 ```vue demo
-<dt-stack direction="row" class="d-fw-wrap d-w100p d-bar8 d-bgc-moderate">
-  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-w25p d-h-100 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-w50p d-h-100 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-w75p d-h-100 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+<dt-stack direction="row" class="d-fw-wrap d-w100p d-bar-400 d-bgc-moderate">
+  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-w25p d-h-100 d-bgc-moderate-opaque d-bar-300">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-w50p d-h-100 d-bgc-moderate-opaque d-bar-300">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-w75p d-h-100 d-bgc-moderate-opaque d-bar-300">3</dt-stack>
 </dt-stack>
 ```
 
@@ -87,10 +87,10 @@ The `flex-wrap` property declares a flex container’s wrapping status. The defa
 The `flex-flow` property is a shorthand property that sets allows you to quickly set the above `flex-direction` and `flex-wrap` properties. By default all flex containers are set to `row` and `nowrap`.
 
 ```vue demo
-<dt-stack class="d-ff-row-reverse-wrap d-w100p d-bar8 d-bgc-moderate">
-  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-w25p d-h-100 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-w50p d-h-100 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-w75p d-h-100 d-bgc-moderate-opaque d-bar4">3</dt-stack>
+<dt-stack class="d-ff-row-reverse-wrap d-w100p d-bar-400 d-bgc-moderate">
+  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-w25p d-h-100 d-bgc-moderate-opaque d-bar-300">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-w50p d-h-100 d-bgc-moderate-opaque d-bar-300">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-w75p d-h-100 d-bgc-moderate-opaque d-bar-300">3</dt-stack>
 </dt-stack>
 ```
 

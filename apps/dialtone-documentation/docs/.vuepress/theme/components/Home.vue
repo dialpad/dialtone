@@ -51,7 +51,7 @@
   <section class="links d-bt d-bb d-bc-subtle d-bgc-secondary">
     <div class="d-d-grid d-g-200 d-g-cols12 d-wmx1340 d-mx-auto">
       <dt-stack gap="100" class="link d-body--md d-gc3 d-px-400 d-ta-center">
-        <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pbs-50" to="/design/">
+        <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar-400 d-pbs-50" to="/design/">
           <dt-stack gap="100">
             <svg-loader class="d-h-150" name="home-design-language" />
             <dt-text as="h2" kind="headline" :size="500" class="d-ff-marketing">
@@ -69,7 +69,7 @@
         </dt-stack>
       </dt-stack>
       <dt-stack gap="100" class="link d-body--md d-gc3 d-px-400 d-ta-center">
-        <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pbs-50" to="/components/">
+        <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar-400 d-pbs-50" to="/components/">
           <dt-stack gap="100">
             <svg-loader class="d-h-150" name="home-components" />
             <dt-text as="h2" kind="headline" :size="500" class="d-ff-marketing">
@@ -90,7 +90,7 @@
         </dt-stack>
       </dt-stack>
       <dt-stack gap="100" class="link d-body--md d-gc3 d-px-400 d-ta-center">
-        <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pbs-50" to="/utilities/">
+        <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar-400 d-pbs-50" to="/utilities/">
           <dt-stack gap="100">
             <svg-loader class="d-h-150" name="home-utilities" />
             <dt-text as="h2" kind="headline" :size="500" class="d-ff-marketing">
@@ -108,7 +108,7 @@
         </dt-stack>
       </dt-stack>
       <dt-stack gap="100" class="link d-body--md d-gc3 d-px-400 d-ta-center">
-        <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar8 d-pbs-50" to="/guides/">
+        <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar-400 d-pbs-50" to="/guides/">
           <dt-stack gap="100">
             <svg-loader class="d-h-150" name="home-guides" />
             <dt-text as="h2" kind="headline" :size="500" class="d-ff-marketing">

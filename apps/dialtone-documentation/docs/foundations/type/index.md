@@ -6,7 +6,7 @@ thumb: true
 keywords: ["font", "typography", "typeface", "text", "season"]
 ---
 
-<svg-loader name="type-billboard" class="d-bar16 d-mbs-600" />
+<svg-loader name="type-billboard" class="d-bar-500 d-mbs-600" />
 
 <dt-stack gap="600" class="d-mbs-600">
   <div class="d-d-grid d-g-600 d-g-cols1 md:d-g-cols3 d-ai-center">
@@ -14,7 +14,7 @@ keywords: ["font", "typography", "typeface", "text", "season"]
       <p class="d-docsite--paragraph">The Seasons type family is built to have a shared character and proportions between the Sans and Mix versions.</p>
     </div>
     <div class="d-gc2">
-      <svg-loader name="type--sample-01" class="d-bar16" />
+      <svg-loader name="type--sample-01" class="d-bar-500" />
     </div>
   </div>
   <div class="d-d-grid d-g-600 d-g-cols1 md:d-g-cols3 d-ai-center">
@@ -22,7 +22,7 @@ keywords: ["font", "typography", "typeface", "text", "season"]
       <p class="d-docsite--paragraph">Product uses system fonts, with Season Mix for specialty instances.</p>
     </div>
     <div class="d-gc2">
-      <svg-loader name="type--sample-02" class="d-bar16" />
+      <svg-loader name="type--sample-02" class="d-bar-500" />
     </div>
   </div>
 </dt-stack>

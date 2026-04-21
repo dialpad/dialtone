@@ -52,7 +52,7 @@ In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#
 <div class="d-bgc-contrast">
   <dt-breadcrumbs
     v-dt-mode:invert
-    class="d-p-200 d-bar8"
+    class="d-p-200 d-bar-400"
     :breadcrumbs="[
       { href: '#', label: 'Root' },
       { href: '#', label: 'Section' },

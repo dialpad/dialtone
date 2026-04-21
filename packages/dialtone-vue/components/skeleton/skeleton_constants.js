@@ -8,7 +8,7 @@ export const SKELETON_RIPPLE_DURATION = 3000000;
 
 export const SKELETON_SHAPES = {
   circle: 'd-bar-circle',
-  square: 'd-bar2',
+  square: 'd-bar-200',
 };
 
 export const SKELETON_TEXT_TYPES = [
@@ -32,11 +32,11 @@ export const SKELETON_SHAPE_SIZES = {
 export const SKELETON_HEADING_HEIGHTS = {
   // Numeric (preferred)
   200: 'd-h-25',
-  300: 'd-h24',
+  300: 'd-h-24px',
   400: 'd-h-50',
   // T-shirt aliases (deprecated)
   sm: 'd-h-25',
-  md: 'd-h24',
+  md: 'd-h-24px',
   lg: 'd-h-50',
 };
 

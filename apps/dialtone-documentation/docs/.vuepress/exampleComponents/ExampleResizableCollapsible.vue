@@ -9,7 +9,7 @@
         :collapsed="isCollapsed"
       >
         <dt-box block-size="100p" inline-size="100p" surface="positive" class="d-d-flex d-fd-column">
-          <dt-stack direction="row" align="center" justify="end" class="d-px16 d-py8 d-bb d-bc-subtle">
+          <dt-stack direction="row" align="center" justify="end" class="d-px-200 d-py-100 d-bb d-bc-subtle">
             <dt-button kind="muted" importance="clear" size="100" @click="isCollapsed = true">
               Close sidebar
             </dt-button>
@@ -28,7 +28,7 @@
             v-if="isCollapsed"
             direction="row"
             align="center"
-            class="d-px16 d-py8 d-bb d-bc-default"
+            class="d-px-200 d-py-100 d-bb d-bc-default"
           >
             <dt-button kind="muted" importance="clear" size="100" @click="isCollapsed = false">
               Open sidebar
