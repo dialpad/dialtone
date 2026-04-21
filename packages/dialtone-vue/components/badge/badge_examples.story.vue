@@ -1,5 +1,5 @@
 <template>
-  <div class="d-fd-column d-p-300 d-w100p d-of-auto d-stack8">
+  <dt-stack gap="100">
     <h2>Kind: Label</h2>
     <dt-stack
       direction="row"
@@ -187,7 +187,7 @@
         type="bulletin"
       />
     </dt-stack>
-  </div>
+  </dt-stack>
 </template>
 
 <script>

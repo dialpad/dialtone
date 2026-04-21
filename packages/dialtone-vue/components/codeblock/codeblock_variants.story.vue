@@ -1,5 +1,5 @@
 <template>
-  <div class="d-d-flex d-fd-column d-stack8">
+  <dt-stack gap="100">
     <div>
       <h4>Default (sm)</h4>
       <dt-codeblock :text="text" />
@@ -32,15 +32,16 @@
         bordered
       />
     </div>
-  </div>
+  </dt-stack>
 </template>
 
 <script>
 import DtCodeblock from './codeblock.vue';
+import { DtStack } from '@/components/stack';
 
 export default {
   name: 'DtCodeblockVariants',
-  components: { DtCodeblock },
+  components: { DtCodeblock, DtStack },
 
   data () {
     return {

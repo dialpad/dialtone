@@ -1,5 +1,5 @@
 <template>
-  <div class="d-stack16">
+  <dt-stack gap="200">
     <dt-recipe-unread-pill
       direction="up"
       kind="mentions"
@@ -16,14 +16,15 @@
       direction="down"
       kind="messages"
     />
-  </div>
+  </dt-stack>
 </template>
 
 <script>
 import DtRecipeUnreadPill from './unread_pill.vue';
+import { DtStack } from '@/components/stack';
 
 export default {
   name: 'DtRecipeUnreadPillVariants',
-  components: { DtRecipeUnreadPill },
+  components: { DtRecipeUnreadPill, DtStack },
 };
 </script>

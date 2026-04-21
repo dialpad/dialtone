@@ -1,35 +1,33 @@
 <template>
-  <div class="d-fd-column d-of-auto d-stack8">
-    <dt-stack
-      id="components-badge--variants-container"
-      direction="row"
-      gap="100"
-      align="center"
-      class="d-ff-row-wrap"
-    >
-      <dt-badge
-        v-for="type in types"
-        :key="type.value"
-        :text="type.display"
-        :type="type.value"
-      />
-      <dt-badge
-        v-for="type in types.slice(0, types.length - 1)"
-        :key="`${type.value}-count`"
-        text="1"
-        :type="type.value"
-        kind="count"
-      />
-      <dt-badge
-        v-for="decoration in Object.keys(BADGE_DECORATION_MODIFIERS)"
-        :key="decoration"
-        :decoration="decoration"
-        :text="getDecorationText(decoration)"
-        type="default"
-        kind="label"
-      />
-    </dt-stack>
-  </div>
+  <dt-stack
+    id="components-badge--variants-container"
+    direction="row"
+    gap="100"
+    align="center"
+    class="d-ff-row-wrap"
+  >
+    <dt-badge
+      v-for="type in types"
+      :key="type.value"
+      :text="type.display"
+      :type="type.value"
+    />
+    <dt-badge
+      v-for="type in types.slice(0, types.length - 1)"
+      :key="`${type.value}-count`"
+      text="1"
+      :type="type.value"
+      kind="count"
+    />
+    <dt-badge
+      v-for="decoration in Object.keys(BADGE_DECORATION_MODIFIERS)"
+      :key="decoration"
+      :decoration="decoration"
+      :text="getDecorationText(decoration)"
+      type="default"
+      kind="label"
+    />
+  </dt-stack>
 </template>
 
 <script>
