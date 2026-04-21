@@ -16,13 +16,13 @@ export const PROSE_DISALLOWED_ELEMENTS = [
   'optgroup', 'option',
 ];
 
-export const PROSE_ALLOWED_ATTRIBUTE_PREFIXES = ['aria-'];
+export const _PROSE_ALLOWED_ATTRIBUTE_PREFIXES = ['aria-'];
 
-export const PROSE_URL_ATTRIBUTES = ['href', 'src', 'cite'];
+export const _PROSE_URL_ATTRIBUTES = ['href', 'src', 'cite'];
 
 const UNSAFE_URL_SCHEME = /^\s*(javascript|vbscript|data|blob|file):/i;
 
-export function isSafeProseUrl (value) {
+export function _isSafeProseUrl (value) {
   return !UNSAFE_URL_SCHEME.test(value ?? '');
 }
 
