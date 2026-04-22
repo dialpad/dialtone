@@ -183,7 +183,7 @@
         </div>
       </template>
       <template #content>
-        <div class="d-stack8">
+        <dt-stack gap="100">
           <p>
             {{ sampleText }}
           </p>
@@ -193,7 +193,7 @@
           <p>
             {{ sampleText }}
           </p>
-        </div>
+        </dt-stack>
       </template>
     </dt-popover>
 
@@ -216,7 +216,7 @@
         </dt-button>
       </template>
       <template #content>
-        <div class="d-stack8">
+        <dt-stack gap="100">
           <p>
             {{ sampleText }}
           </p>
@@ -226,7 +226,7 @@
           <p>
             {{ sampleText }}
           </p>
-        </div>
+        </dt-stack>
       </template>
     </dt-popover>
 
@@ -251,7 +251,7 @@
         <div>This is a footer</div>
       </template>
       <template #content>
-        <div class="d-stack8">
+        <dt-stack gap="100">
           <p>
             {{ sampleText }}
           </p>
@@ -261,7 +261,7 @@
           <p>
             {{ sampleText }}
           </p>
-        </div>
+        </dt-stack>
       </template>
     </dt-popover>
 
@@ -284,7 +284,7 @@
         </dt-button>
       </template>
       <template #content>
-        <div class="d-stack8">
+        <dt-stack gap="100">
           <p>
             {{ sampleText }}
           </p>
@@ -350,7 +350,7 @@
               </dt-list-item>
             </template>
           </dt-dropdown>
-        </div>
+        </dt-stack>
       </template>
     </dt-popover>
 
@@ -373,7 +373,7 @@
         </dt-button>
       </template>
       <template #content>
-        <div class="d-stack8">
+        <dt-stack gap="100">
           <p>
             {{ sampleText }}
           </p>
@@ -385,7 +385,7 @@
             </template>
             This is the tooltip content
           </dt-tooltip>
-        </div>
+        </dt-stack>
       </template>
     </dt-popover>
 
@@ -458,6 +458,7 @@ import { DtDropdown } from '@/components/dropdown';
 import { DtListItem } from '@/components/list_item';
 import { DtTooltip } from '@/components/tooltip';
 import { DtIcon } from '@/components/icon';
+import { DtStack } from '@/components/stack';
 
 export default {
   name: 'PopoverVariantsStory',
@@ -469,6 +470,7 @@ export default {
     DtTooltip,
     DtIcon,
     DtListItem,
+    DtStack,
   },
 
   data () {

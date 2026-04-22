@@ -1,6 +1,6 @@
 <!-- eslint-disable max-lines -->
 <template>
-  <div class="d-stack16">
+  <dt-stack gap="200">
     <dt-recipe-callbox
       avatar-full-name="Jaqueline Nackos"
       avatar-seed="Jaqueline Nackos"
@@ -401,7 +401,7 @@
         </dt-button>
       </template>
     </dt-recipe-callbox>
-  </div>
+  </dt-stack>
 </template>
 
 <script>

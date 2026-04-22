@@ -1,9 +1,13 @@
 <!-- eslint-disable vue/no-unregistered-components -->
 <template>
-  <div class="d-stack16">
+  <dt-stack gap="200">
     <h3>Normal</h3>
-    <div class="d-d-flex d-flow16 d-fw-wrap d-stack16">
-      <dt-recipe-callbar-button class="d-mbs-200">
+    <dt-stack
+      direction="row"
+      gap="100"
+      class="d-fw-wrap"
+    >
+      <dt-recipe-callbar-button>
         Screenshare
         <template #icon>
           <dt-icon name="share-screen" />
@@ -92,14 +96,17 @@
           More options
         </template>
       </dt-recipe-callbar-button>
-    </div>
+    </dt-stack>
 
     <h3>Active</h3>
-    <div class="d-d-flex d-flow16 d-fw-wrap d-stack16">
+    <dt-stack
+      direction="row"
+      gap="100"
+      class="d-fw-wrap"
+    >
       <dt-recipe-callbar-button
         active
         danger
-        class="d-mbs-200"
       >
         Stop
         <template #icon>
@@ -201,19 +208,21 @@
           More options
         </template>
       </dt-recipe-callbar-button>
-    </div>
-  </div>
+    </dt-stack>
+  </dt-stack>
 </template>
 
 <script>
 import DtRecipeCallbarButton from './callbar_button.vue';
 import { DtIcon } from '@/components/icon';
+import { DtStack } from '@/components/stack';
 
 export default {
   name: 'DtRecipeCallbarButtonCallbar',
   components: {
     DtRecipeCallbarButton,
     DtIcon,
+    DtStack,
   },
 };
 </script>

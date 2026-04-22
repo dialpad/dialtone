@@ -1,5 +1,5 @@
 <template>
-  <div class="d-stack32">
+  <dt-stack gap="100">
     <div
       v-for="(variant, i) in variantsTabs"
       :key="i"
@@ -56,17 +56,18 @@
         </div>
       </dt-tab-group>
     </div>
-  </div>
+  </dt-stack>
 </template>
 
 <script>
 import DtTabGroup from './tab_group.vue';
 import DtTab from './tab.vue';
 import DtTabPanel from './tab_panel.vue';
+import { DtStack } from '@/components/stack';
 
 export default {
   name: 'DtTabsVariants',
-  components: { DtTabGroup, DtTab, DtTabPanel },
+  components: { DtTabGroup, DtTab, DtTabPanel, DtStack },
   data () {
     return {
       variantsTabs: [

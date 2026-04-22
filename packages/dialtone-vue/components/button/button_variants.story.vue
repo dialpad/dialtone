@@ -164,12 +164,15 @@
         Icon Bottom
       </dt-button>
     </dt-stack>
-    <div class="d-flow8">
+    <dt-stack
+      direction="row"
+      gap="100"
+    >
       <!-- Loading -->
       <dt-button loading>
         Button
       </dt-button>
-    </div>
+    </dt-stack>
 
     <!-- Link -->
     <h2>Link</h2>

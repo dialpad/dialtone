@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/no-v-text-v-html-on-component -->
 <template>
-  <div class="d-d-flex d-fd-column d-stack8">
+  <dt-stack gap="100">
     <div>
       <h4>With Icon</h4>
       <dt-chip>
@@ -40,16 +40,17 @@
         </template>
       </dt-chip>
     </div>
-  </div>
+  </dt-stack>
 </template>
 
 <script>
 import DtChip from './chip.vue';
 import { DtIcon } from '@/components/icon';
 import { DtAvatar } from '@/components/avatar';
+import { DtStack } from '@/components/stack';
 
 export default {
   name: 'DtChipVariants',
-  components: { DtAvatar, DtChip, DtIcon },
+  components: { DtAvatar, DtChip, DtIcon, DtStack },
 };
 </script>

@@ -1,9 +1,13 @@
 <template>
-  <div class="d-stack16">
+  <dt-stack gap="200">
     <h3>
       Call Bar Buttons
     </h3>
-    <div class="d-d-flex d-flow16 d-fw-wrap">
+    <dt-stack
+      direction="row"
+      gap="200"
+      class="d-fw-wrap"
+    >
       <dt-recipe-callbar-button-with-popover
         disabled
         arrow-button-label="Open popover"
@@ -58,12 +62,16 @@
           Header Content
         </template>
       </dt-recipe-callbar-button-with-popover>
-    </div>
+    </dt-stack>
 
     <h3>
       Active Call Bar Buttons
     </h3>
-    <div class="d-d-flex d-flow16 d-fw-wrap">
+    <dt-stack
+      direction="row"
+      gap="200"
+      class="d-fw-wrap"
+    >
       <dt-recipe-callbar-button-with-popover
         active
         disabled
@@ -122,19 +130,21 @@
           Header Content
         </template>
       </dt-recipe-callbar-button-with-popover>
-    </div>
-  </div>
+    </dt-stack>
+  </dt-stack>
 </template>
 
 <script>
 import DtRecipeCallbarButtonWithPopover from './callbar_button_with_popover.vue';
 import { DtIcon } from '@/components/icon';
+import { DtStack } from '@/components/stack';
 
 export default {
   name: 'DtRecipeCallbarButtonWithPopoverVariants',
   components: {
     DtRecipeCallbarButtonWithPopover,
     DtIcon,
+    DtStack,
   },
 };
 </script>

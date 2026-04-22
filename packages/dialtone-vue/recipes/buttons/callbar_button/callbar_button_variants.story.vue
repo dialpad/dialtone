@@ -1,9 +1,12 @@
 <template>
-  <div class="d-stack16">
+  <dt-stack gap="200">
     <h3>
       Call Bar Buttons
     </h3>
-    <div class="d-d-flex d-flow16 d-fw-wrap">
+    <dt-stack
+      direction="row"
+      gap="200"
+    >
       <dt-recipe-callbar-button>
         Button
         <template #icon>
@@ -20,14 +23,12 @@
           <dt-icon name="accessibility" />
         </template>
       </dt-recipe-callbar-button>
-
       <dt-recipe-callbar-button>
         Label only
         <template #tooltip>
           Tooltip
         </template>
       </dt-recipe-callbar-button>
-
       <dt-recipe-callbar-button aria-label="mic on">
         <template #icon>
           <dt-icon name="mic" />
@@ -46,12 +47,16 @@
           Tooltip
         </template>
       </dt-recipe-callbar-button>
-    </div>
+    </dt-stack>
 
     <h3>
       Active Call Bar Buttons
     </h3>
-    <div class="d-d-flex d-flow16 d-fw-wrap">
+    <dt-stack
+      direction="row"
+      gap="200"
+      class="d-fw-wrap"
+    >
       <dt-recipe-callbar-button active>
         Button
         <template #icon>
@@ -100,7 +105,7 @@
           Tooltip
         </template>
       </dt-recipe-callbar-button>
-    </div>
+    </dt-stack>
 
     <h3>
       Danger Call Bar Buttons
@@ -108,7 +113,11 @@
     <div class="d-fs12">
       Danger Call Bar Buttons look the same as regular buttons; they only differ on their active state.
     </div>
-    <div class="d-d-flex d-flow16 d-fw-wrap">
+    <dt-stack
+      direction="row"
+      gap="200"
+      class="d-fw-wrap"
+    >
       <dt-recipe-callbar-button danger>
         Button
         <template #icon>
@@ -157,12 +166,16 @@
           Tooltip
         </template>
       </dt-recipe-callbar-button>
-    </div>
+    </dt-stack>
 
     <h3>
       Danger Active Call Bar Buttons
     </h3>
-    <div class="d-d-flex d-flow16 d-fw-wrap">
+    <dt-stack
+      direction="row"
+      gap="200"
+      class="d-fw-wrap"
+    >
       <dt-recipe-callbar-button
         active
         danger
@@ -222,12 +235,16 @@
           Tooltip
         </template>
       </dt-recipe-callbar-button>
-    </div>
+    </dt-stack>
 
     <h3>
       Rounded
     </h3>
-    <div class="d-d-flex d-flow16 d-fw-wrap">
+    <dt-stack
+      direction="row"
+      gap="200"
+      class="d-fw-wrap"
+    >
       <dt-recipe-callbar-button
         circle
         aria-label="recording"
@@ -292,19 +309,21 @@
           Rounded button
         </template>
       </dt-recipe-callbar-button>
-    </div>
-  </div>
+    </dt-stack>
+  </dt-stack>
 </template>
 
 <script>
 import DtRecipeCallbarButton from './callbar_button.vue';
 import { DtIcon } from '@/components/icon';
+import { DtStack } from '@/components/stack';
 
 export default {
   name: 'DtRecipeCallbarButtonVariants',
   components: {
     DtRecipeCallbarButton,
     DtIcon,
+    DtStack,
   },
 };
 </script>

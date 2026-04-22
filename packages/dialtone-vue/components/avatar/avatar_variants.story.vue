@@ -1,8 +1,12 @@
 <template>
-  <div class="d-stack16">
+  <dt-stack gap="200">
     <div>
       <h2>Image</h2>
-      <div class="d-flow16 d-d-flex d-ai-center">
+      <dt-stack
+        direction="row"
+        gap="200"
+        align="center"
+      >
         <dt-avatar
           v-for="size in avatarSizes"
           :key="`image-${size}`"
@@ -12,11 +16,15 @@
           :image-src="$attrs.imageSrc"
           :image-alt="$attrs.imageAlt"
         />
-      </div>
+      </dt-stack>
     </div>
     <div>
       <h2>Initials</h2>
-      <div class="d-flow16 d-d-flex d-ai-center">
+      <dt-stack
+        direction="row"
+        gap="200"
+        align="center"
+      >
         <dt-avatar
           v-for="size in avatarSizes"
           :key="`initials-${size}`"
@@ -24,11 +32,15 @@
           :size="size"
           full-name="Avatar Icon"
         />
-      </div>
+      </dt-stack>
     </div>
     <div>
       <h2>Icon</h2>
-      <div class="d-flow16 d-d-flex d-ai-center">
+      <dt-stack
+        direction="row"
+        gap="200"
+        align="center"
+      >
         <dt-avatar
           v-for="size in avatarSizes"
           :key="`icon-${size}`"
@@ -40,11 +52,15 @@
             <dt-icon-user />
           </template>
         </dt-avatar>
-      </div>
+      </dt-stack>
     </div>
     <div>
       <h2>Icon Only (Transparent Background)</h2>
-      <div class="d-flow16 d-d-flex d-ai-center">
+      <dt-stack
+        direction="row"
+        gap="200"
+        align="center"
+      >
         <dt-avatar
           icon-only
           size="300"
@@ -93,11 +109,15 @@
             <dt-icon-contacts />
           </template>
         </dt-avatar>
-      </div>
+      </dt-stack>
     </div>
     <div>
       <h2>Deactivated</h2>
-      <div class="d-flow16 d-d-flex d-ai-center">
+      <dt-stack
+        direction="row"
+        gap="200"
+        align="center"
+      >
         <dt-avatar
           :seed="$attrs.seed"
           size="300"
@@ -121,11 +141,15 @@
             <dt-icon-user />
           </template>
         </dt-avatar>
-      </div>
+      </dt-stack>
     </div>
     <div>
       <h2>Presence</h2>
-      <div class="d-flow16 d-d-flex d-ai-center">
+      <dt-stack
+        direction="row"
+        gap="200"
+        align="center"
+      >
         <dt-avatar
           v-for="state in AVATAR_PRESENCE_STATES"
           :key="`presence-${state}`"
@@ -136,11 +160,14 @@
           :image-alt="$attrs.imageAlt"
           :presence="state"
         />
-      </div>
+      </dt-stack>
     </div>
     <div>
       <h2>Overlay</h2>
-      <div class="d-flow16 d-d-flex">
+      <dt-stack
+        direction="row"
+        gap="200"
+      >
         <dt-avatar
           :seed="$attrs.seed"
           :size="500"
@@ -161,11 +188,14 @@
           :image-alt="$attrs.imageAlt"
           overlay-text="+3"
         />
-      </div>
+      </dt-stack>
     </div>
     <div>
       <h2>Clickable</h2>
-      <div class="d-flow16 d-d-flex">
+      <dt-stack
+        direction="row"
+        gap="200"
+      >
         <dt-avatar
           :seed="$attrs.seed"
           full-name="Person avatar"
@@ -187,11 +217,15 @@
           :image-alt="$attrs.imageAlt"
           clickable
         />
-      </div>
+      </dt-stack>
     </div>
     <div>
       <h2>Group (Single Digit)</h2>
-      <div class="d-flow16 d-d-flex d-ai-center">
+      <dt-stack
+        direction="row"
+        gap="200"
+        align="center"
+      >
         <dt-avatar
           v-for="size in groupSizes"
           :key="`group-${size}`"
@@ -202,8 +236,13 @@
           :image-alt="$attrs.imageAlt"
           :group="3"
         />
-      </div>
-      <div class="d-flow16 d-d-flex d-ai-center d-mbs-100">
+      </dt-stack>
+      <dt-stack
+        direction="row"
+        gap="200"
+        align="center"
+        class="d-mbs-100"
+      >
         <dt-avatar
           v-for="size in groupSizes"
           :key="`group-initials-${size}`"
@@ -212,11 +251,15 @@
           full-name="Person avatar"
           :group="5"
         />
-      </div>
+      </dt-stack>
     </div>
     <div>
       <h2>Group (Double Digit)</h2>
-      <div class="d-flow16 d-d-flex d-ai-center">
+      <dt-stack
+        direction="row"
+        gap="200"
+        align="center"
+      >
         <dt-avatar
           v-for="size in groupSizes"
           :key="`group-double-${size}`"
@@ -227,8 +270,13 @@
           :image-alt="$attrs.imageAlt"
           :group="12"
         />
-      </div>
-      <div class="d-flow16 d-d-flex d-ai-center d-mbs-100">
+      </dt-stack>
+      <dt-stack
+        direction="row"
+        gap="200"
+        align="center"
+        class="d-mbs-100"
+      >
         <dt-avatar
           v-for="size in groupSizes"
           :key="`group-double-initials-${size}`"
@@ -237,11 +285,15 @@
           full-name="Person avatar"
           :group="12"
         />
-      </div>
+      </dt-stack>
     </div>
     <div>
       <h2>Group (Triple Digit)</h2>
-      <div class="d-flow16 d-d-flex d-ai-center">
+      <dt-stack
+        direction="row"
+        gap="200"
+        align="center"
+      >
         <dt-avatar
           v-for="size in groupSizes"
           :key="`group-triple-${size}`"
@@ -252,8 +304,13 @@
           :image-alt="$attrs.imageAlt"
           :group="120"
         />
-      </div>
-      <div class="d-flow16 d-d-flex d-ai-center d-mbs-100">
+      </dt-stack>
+      <dt-stack
+        direction="row"
+        gap="200"
+        align="center"
+        class="d-mbs-100"
+      >
         <dt-avatar
           v-for="size in groupSizes"
           :key="`group-triple-initials-${size}`"
@@ -262,9 +319,9 @@
           full-name="Person avatar"
           :group="120"
         />
-      </div>
+      </dt-stack>
     </div>
-  </div>
+  </dt-stack>
 </template>
 
 <script>
@@ -279,12 +336,14 @@ import {
   DtIconContacts,
 } from '@dialpad/dialtone-icons/vue';
 import DtAvatar from './avatar.vue';
+import { DtStack } from '@/components/stack';
 import { AVATAR_PRESENCE_STATES, AVATAR_SIZE_MODIFIERS } from './avatar_constants.js';
 
 export default {
   name: 'DtAvatarVariants',
   components: {
     DtAvatar,
+    DtStack,
     DtIconUser,
     DtIconHear,
     DtIconHash,
