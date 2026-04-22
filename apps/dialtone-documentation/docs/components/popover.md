@@ -89,11 +89,9 @@ htmlCode='
 </div>
 '
 vueCode='
-<dt-popover
-  :open="onOpen"
->
-  <template #anchor>
-    <dt-button>
+<dt-popover>
+  <template #anchor="{ attrs }">
+    <dt-button v-bind="attrs">
        View Popover
     </dt-button>
   </template>
@@ -145,11 +143,10 @@ htmlCode='
 '
 vueCode='
 <dt-popover
-  :open="onOpen"
   :modal="false"
 >
-  <template #anchor>
-    <dt-button>
+  <template #anchor="{ attrs }">
+    <dt-button v-bind="attrs">
       View Popover
     </dt-button>
   </template>
@@ -220,11 +217,9 @@ htmlCode='
 </div>
 '
 vueCode='
-<dt-popover
-  :open="onOpen"
->
-  <template #anchor>
-    <dt-button>
+<dt-popover>
+  <template #anchor="{ attrs }">
+    <dt-button v-bind="attrs">
       View Popover
     </dt-button>
   </template>
@@ -300,11 +295,9 @@ htmlCode='
 </div>
 '
 vueCode='
-<dt-popover
-  :open="onOpen"
->
-  <template #anchor>
-    <dt-button>
+<dt-popover>
+  <template #anchor="{ attrs }">
+    <dt-button v-bind="attrs">
       View Popover
     </dt-button>
   </template>
@@ -345,11 +338,10 @@ manually specify which position it will move to in what order you can do so via 
 <code-example-tabs
 vueCode='
 <dt-popover
-  :open="onOpen"
   :fallback-placements="[`top`]"
 >
-  <template #anchor>
-    <dt-button>
+  <template #anchor="{ attrs }">
+    <dt-button v-bind="attrs">
        fallback placement: top
     </dt-button>
   </template>
@@ -382,11 +374,10 @@ Padding options for the popover content are provided via size classes "small", "
 <code-example-tabs
 vueCode='
 <dt-popover
-  :open="onOpen"
   padding="small"
 >
-  <template #anchor>
-    <dt-button>
+  <template #anchor="{ attrs }">
+    <dt-button v-bind="attrs">
        View Popover
     </dt-button>
   </template>

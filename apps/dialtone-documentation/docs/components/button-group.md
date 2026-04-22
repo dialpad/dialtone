@@ -78,18 +78,18 @@ When aligned to `end`, the `primary` button is on the **right** side of the grou
 <code-example-tabs
 htmlCode='
 <div role="group" class="d-btn-group d-btn-group--end">
-  <button type="button" class="base-button__button d-btn d-btn--primary">
-    <span class="d-btn__label base-button__label"> Confirm </span>
-  </button>
   <button data-qa="dt-button" type="button" class="base-button__button d-btn d-btn--outlined">
     <span class="d-btn__label base-button__label"> Cancel </span>
+  </button>
+  <button type="button" class="base-button__button d-btn d-btn--primary">
+    <span class="d-btn__label base-button__label"> Confirm </span>
   </button>
 </div>
 '
 vueCode='
 <dt-button-group alignment="end">
-  <dt-button importance="primary">Confirm</dt-button>
   <dt-button importance="outlined">Cancel</dt-button>
+  <dt-button importance="primary">Confirm</dt-button>
 </dt-button-group>
 '
 showHtmlWarning />
