@@ -7,7 +7,7 @@
 :root {
   --code-c-text: var(--dt-color-foreground-secondary);
   --code-c-bg: blue;
-  --code-c-highlight-bg:var(--dt-color-blue-800);
+  --code-c-highlight-bg:var(--dt-color-foreground-info);
   --code-c-line-number: gray;
 }
 
@@ -42,9 +42,9 @@ div[class*="language-"] {
 
 code:not(.d-code--md, .d-code--sm, .d-prose *) {
 	padding: var(--dt-size-200) var(--dt-size-300);
-	color: var(--dt-color-blue-800);
+	color: var(--dt-color-foreground-info);
 	background-color: var(--dt-color-surface-info);
-	border-radius: var(--dt-size-100);
+	border-radius: var(--dt-size-radius-200);
 	user-select: all;
 }
 
@@ -52,7 +52,7 @@ code[class*="language-"],
 pre[class*="language-"] {
 	margin: 0;
 	color: var(--dt-color-foreground-secondary);
-	font: var(--dt-text-code-sm);
+	font: var(--dt-text-code-xs);
 	line-height: var(--dt-font-line-height-400);
 	white-space: pre;
 	text-align: start;
@@ -67,7 +67,7 @@ pre[class*="language-"] {
 }
 
 div[class*=language-] pre {
-	font: var(--dt-text-code-sm);
+	font: var(--dt-text-code-xs);
 	line-height: var(--dt-font-line-height-400);
 }
 
@@ -99,7 +99,7 @@ pre[class*="language-"] {
 }
 
 .token.punctuation {
-	color: var(--dt-color-blue-800);
+	color: var(--dt-color-foreground-info);
 }
 
 .token.namespace {
@@ -113,7 +113,7 @@ pre[class*="language-"] {
 .token.constant,
 .token.symbol,
 .token.deleted {
-	color: var(--dt-color-blue-800);
+	color: var(--dt-color-foreground-info);
 }
 
 .token.selector,

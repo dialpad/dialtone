@@ -1,309 +1,228 @@
 ---
-title: Size and Space
+title: Layout and Spacing
 description: A unified system for dimensions, spacing, and scale.
-figma_url: https://www.figma.com/design/VjrRh4vvfONSmBQxnZrL3u/DT9-Design-Tokens--Rebrand-2025-?node-id=3746-13427&t=D8g6K4TrMGXNsvLT-11
 thumb: true
-keywords: ["padding","gap","spacing","dimensions","scale"]
+keywords: ["padding","gap","spacing","dimensions","scale","layout"]
 ---
-
-<svg-loader name="size-img" />
 
 ## Overview
 
-Dialtone uses a unified set of **size tokens** (`--dt-size-*`) for all dimensional values. These tokens define both the intrinsic dimensions of UI components (width, height) and the spatial relationships between elements (padding, margin, gap).
+Dialtone uses a unified set of `layout` and `spacing` design tokens for all dimensional values. These tokens define both the intrinsic dimensions of UI surfaces (e.g. `width`, `height`) and the spatial relationships between them (e.g. `padding`, `gap`, positioning).
 
-### CSS Properties
+### Layout and Spacing Tokens
 
-Size tokens can be used with any CSS property that accepts a dimensional value:
+Layout and spacing tokens are CSS custom properties (a.k.a. CSS variables) generated from two base units:
 
-- **Dimensions**: `width`, `height`, `min-width`, `max-height`
-- **Spacing**: `padding`, `margin`, `gap`
-- **Positioning**: `top`, `left`, `right`, `bottom`
-- **Borders**: `border-width`, `border-radius`
+- **Spacing**: base `8px`
+- **Layout**: base `64px`
+
+#### Samples:
+
+| Token | Math | Value |
+| --- | --- | --- |
+| `--dt-spacing-100` | 1 × 8px | 8px |
+| `--dt-spacing-400` | 4 × 8px | 32px |
+| `--dt-layout-100` | 1 × 64px | 64px |
+| `--dt-layout-400` | 4 × 64px | 256px |
+
+Because the formula is deterministic, tools and code-generation assistants (including LLMs) can resolve any stop without needing the full reference table in context.
+
+For the complete set, view [Spacing Tokens](/tokens/#spacing) and [Layout Tokens](/tokens/#layout). For the story behind why layout and spacing live in separate families, see [New Layout and Spacing Token Systems](/dialtone/whats-new/posts/2026-3-9.md).
+
+### The Primitive Triad
+
+You rarely need these tokens directly. The **primitive triad** exposes them through three components:
+
+- **[DtBox](/components/box.md)**: what a container *is* (e.g. surface, border, padding, sizing)
+- **[DtStack](/components/stack.md)**: how children are *arranged* (e.g. direction, gap, alignment)
+- **[DtText](/components/text.md)**: what the content *looks* like (e.g. font, size, tone)
+
+Compose the triad; reach for raw [design tokens](/tokens/) or [CSS utilities](#related-css-utilities) as an escape hatch.
 
 ## Usage
 
-### Setting a Specific Size
+The primitive triad handles layout and spacing declaratively. For example:
 
-<div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols3">
-<div>
+- DtBox's `padding`: space *inside* a container, uses `--dt-spacing-*` design tokens
+- DtBox's `min-inline-size`: container *width*, uses `--dt-layout-*` design tokens
+- DtStack's `gap`: space *between* boxes, uses `--dt-spacing-*` design tokens
 
-When assigning a size or spacing to an element, use [Size Tokens](#tokens).
-
-```css
-width: var(--dt-size-400);
-padding: var(--dt-spacing-200);
-gap: var(--dt-spacing-100);
-```
-
-</div>
-<div class="d-gc2">
-<code-well-header>
-  <div class="d-d-grid d-g-300 d-g-cols2 md:d-g-cols1 d-w100p">
-    <dt-stack direction="row" align="center" justify="center" class="d-ba d-bc-default d-js-center" :style="{ width: 'fit-content', minWidth: selectedSize }">
-      Box
-    </dt-stack>
-    <dt-select-menu label="min-width" :options="sizeValues" v-model="selectedSize" />
-  </div>
-</code-well-header>
-
-```html
-<style>
-.box {
-  min-width: var(--dt-size-720);
-}
-</style>
-<div class="box">Box</div>
-```
-
-</div>
-</div>
-
-### Setting Gaps Between Elements
-
-<div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols3">
-
-<div>
-
-When setting the gap between elements, use size tokens for the gap value.
-
-```css
-gap: var(--dt-spacing-100);
-```
-
-</div>
-<div class="d-gc2">
-<code-well-header>
-  <div class="d-d-grid d-g-300 d-g-cols2 md:d-g-cols1 d-w100p">
-    <dt-stack direction="row" :style="{ gap: selectedGap }">
-      <dt-stack direction="row" align="center" justify="center" class="d-ba d-bc-default d-w100p">
-        Element A
-      </dt-stack>
-      <dt-stack direction="row" align="center" justify="center" class="d-ba d-bc-default d-w100p">
-        Element B
-      </dt-stack>
-    </dt-stack>
-    <dt-select-menu label="Gap" :options="gapValues" v-model="selectedGap" />
-  </div>
-</code-well-header>
-
-```html
-<style>
-.wrapper {
-  gap: var(--dt-spacing-100);
-}
-</style>
-<div class="wrapper">
-  <div>
-    Element A
-  </div>
-  <div>
-    Element B
-  </div>
-</div>
-```
-
-</div>
-</div>
-
-### Stacking
-
-<div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols3">
-<div>
-
-When adding space between elements, both vertically and horizontally, use either `space-between` or `gap` to define the space that separates each element.
-
-- For gaps inside a box/container, such as between headings, text, and buttons, use values like `var(--dt-size-0)` to `var(--dt-size-550)`
-- For spaces between different boxes/containers on a page, choose values from `var(--dt-layout-50)` to `var(--dt-layout-100)`
-
-</div>
- <dt-stack direction="column" gap="200">
-  <iframe class="d-bgc-contrast" style="border: 0px; border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FQe6cz41vPBozP4PhgGqFin/Docs-Protos?page-id=0%3A1&type=design&node-id=5-15958&viewport=702%2C117%2C0.97&t=LxszUdOGsEU9l3I5-8&scaling=min-zoom&starting-point-node-id=5%3A15958&hotspot-hints=0&hide-ui=1"></iframe>
-<div>
-<strong>Vertical stacking</strong>
-<dt-text as="p" kind="body" tone="tertiary">Set the space-between/gap groups vertically.</dt-text>
-</div>
+```vue demo
+<dt-stack gap="400" align="center">
+  <dt-stack direction="row" :gap="selectedGap">
+    <dt-box :min-inline-size="selectedSize" :padding="selectedPadding" surface="moderate" border-width="100" border-radius="300"><dt-text as="p" kind="body" size="200" tone="tertiary" align="center">Box 1</dt-text></dt-box>
+    <dt-box :min-inline-size="selectedSize" :padding="selectedPadding" surface="moderate" border-width="100" border-radius="300"><dt-text as="p" kind="body" size="200" tone="tertiary" align="center">Box 2</dt-text></dt-box>
+    <dt-box :min-inline-size="selectedSize" :padding="selectedPadding" surface="moderate" border-width="100" border-radius="300"><dt-text as="p" kind="body" size="200" tone="tertiary" align="center">Box 3</dt-text></dt-box>
   </dt-stack>
-  <dt-stack direction="column" gap="200">
-  <iframe class="d-bgc-contrast" style="border: 0px; border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FQe6cz41vPBozP4PhgGqFin/Docs-Protos?page-id=0%3A1&type=design&node-id=5-15997&viewport=702%2C117%2C0.97&t=LxszUdOGsEU9l3I5-8&scaling=min-zoom&starting-point-node-id=5%3A15997&hotspot-hints=0&hide-ui=1"></iframe>
-  <div>
-  <strong>Horizontal stacking</strong>
-  <dt-text as="p" kind="body" tone="tertiary">Set the space-between/gap groups horizontally.</dt-text>
-  </div>
+  <dt-stack direction="row" gap="200">
+    <dt-select-menu size="200" label="Box's Padding" :options="paddingOptions" v-model="selectedPadding" />
+    <dt-select-menu size="200" label="Box's Width" :options="sizeOptions" v-model="selectedSize" />
+    <dt-select-menu size="200" label="Stack's Gap" :options="gapOptions" v-model="selectedGap" />
   </dt-stack>
-</div>
+</dt-stack>
+<!-- @code -->
+<dt-stack direction="row" gap="200">
+  <dt-box min-inline-size="300" padding="200" surface="moderate" border-width="100" border-radius="300">
+    <dt-text as="p" kind="body" size="200" tone="tertiary" align="center">Box 1</dt-text>
+  </dt-box>
+  <dt-box min-inline-size="300" padding="200" surface="moderate" border-width="100" border-radius="300">
+    <dt-text as="p" kind="body" size="200" tone="tertiary" align="center">Box 2</dt-text>
+  </dt-box>
+  <dt-box min-inline-size="300" padding="200" surface="moderate" border-width="100" border-radius="300">
+    <dt-text as="p" kind="body" size="200" tone="tertiary" align="center">Box 3</dt-text>
+  </dt-box>
+</dt-stack>
+```
+
+### Layout
+
+<dialtone-usage>
+<template #do>
+
+- Prefer percentages, `min-inline-size`, or `min-block-size` so containers adapt to their context.
+- Use [DtBox](/components/box.md)'s sizing props (`inline-size`, `min-inline-size`, `max-inline-size`, plus their block-axis equivalents) over raw `width` and `height`.
+- Use fixed dimensions on elements that require them: avatars, icons, toggles.
+
+</template>
+<template #dont>
+
+- Avoid setting explicit dimensions (e.g. `width` or `height`) when a layout can flex.
+
+</template>
+</dialtone-usage>
 
 ### Padding
 
-<div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols3">
-<div>
+<dialtone-usage>
+<template #do>
 
-When adding space around an element, use `padding` to create breathing room.
+- Use [DtBox](/components/box.md)'s `padding` prop (or its directional variants `padding-inline` and `padding-block`) for space *inside* a container.
+- Use [DtStack](/components/stack.md)'s `gap` for space *between* sibling elements.
 
-Avoid using `margin`, which adds space outside the element and can affect the layout. In that case, follow the [stacking](#stacking) approach.
+</template>
+<template #dont>
 
-</div>
-<dt-stack class="d-gc2" direction="column" gap="200">
+- Avoid using `margin` for layout. It lives outside the element, collapses in surprising ways, and may not scale well since it assumes a sibling element's presence. You might likely can achieve the same result with DtStack's `gap` or careful use of `padding`.
 
- <iframe class="d-bgc-contrast" style="border: 0px; border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FQe6cz41vPBozP4PhgGqFin/Docs-Protos?page-id=0%3A1&type=design&node-id=5-16168&viewport=702%2C117%2C0.97&t=LxszUdOGsEU9l3I5-8&scaling=min-zoom&starting-point-node-id=5%3A16168&hotspot-hints=0&hide-ui=1"></iframe>
-<div>
-<dt-text as="p" kind="body" tone="tertiary">Padding can be measured vertically and horizontally.</dt-text>
-</div>
-</dt-stack>
-</div>
+</template>
+</dialtone-usage>
 
-### Widths and Heights
+### Arrangement
 
-<div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols3">
-<dt-stack direction="column" gap="1">
-<p>
+<dialtone-usage>
+<template #do>
 
-For optimal layout flexibility and responsiveness, generally avoid using fixed `widths` or `heights` when defining element sizes. Instead, use percentages values or set `min-width` or `min-height`. This allows the elements to adjust naturally to different screen sizes.
+- Use [DtStack](/components/stack.md)'s `gap` to space siblings apart, vertically or horizontally.
+- Pick smaller `--dt-spacing-*` values for gaps inside a container (between headings, text, buttons) and larger values for gaps between regions of a page.
 
-</p>
-<dt-text as="p" kind="body" tone="tertiary">
-Exceptions exist for select elements like Avatars, Icons, and Toggles. These elements require fixed dimensions to maintain consistent scale across devices within flexible layouts.
-</dt-text>
-</dt-stack>
+</template>
+<template #dont>
 
-<dt-stack class="d-gc2" direction="column" gap="200">
-<iframe class="d-bgc-contrast" style="border: 0px solid rgba(0, 0, 0, 0.1); border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FQe6cz41vPBozP4PhgGqFin/Docs-Protos?page-id=0%3A1&type=design&node-id=5-25635&viewport=-1055%2C122%2C0.69&t=iCwsUiY6dBufHiTQ-8&scaling=min-zoom&starting-point-node-id=5%3A25635&hotspot-hints=0&hide-ui=1"></iframe>
-<div>
-<dt-text as="p" kind="body" tone="tertiary">Text elements typically occupy 100% of their allocated space, allowing text to flow freely within the designated area or until truncated.</dt-text>
-</div>
-</dt-stack>
-</div>
+- Avoid hand-rolling flex containers (`d-d-flex` + `d-ai-*` + `d-jc-*` + `d-g-*`) for layouts DtStack already expresses as props.
 
-### Variable Sizing
-
-<div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols3">
-<div>
-
-The size of some components is determined by their content. Most expand vertically, while a select few expand horizontally.
-
-</div>
-<dt-stack direction="column" gap="200">
-<iframe class="d-bgc-contrast" style="border: 0px solid rgba(0, 0, 0, 0.1); border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FQe6cz41vPBozP4PhgGqFin/Docs-Protos?page-id=0%3A1&type=design&node-id=5-25749&viewport=-1055%2C122%2C0.69&t=iCwsUiY6dBufHiTQ-8&scaling=min-zoom&starting-point-node-id=5%3A25739&hotspot-hints=0&hide-ui=1"></iframe>
-<dt-text as="p" kind="body" tone="tertiary">This tooltip has a `min-width`, and its height depends on its content.</dt-text>
-</dt-stack>
-<dt-stack direction="column" gap="200">
-<iframe class="d-bgc-contrast" style="border: 0px solid rgba(0, 0, 0, 0.1); border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FQe6cz41vPBozP4PhgGqFin/Docs-Protos?page-id=0%3A1&type=design&node-id=5-25744&viewport=-1055%2C122%2C0.69&t=iCwsUiY6dBufHiTQ-8&scaling=min-zoom&starting-point-node-id=5%3A25744&hotspot-hints=0&hide-ui=1"></iframe>
-<dt-text as="p" kind="body" tone="tertiary">This button has a fixed `height`, a `min-width` and grows horizontally depending on its content.</dt-text>
-</dt-stack>
-</div>
-
-### Responsiveness
-
-<div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols3">
-<div>
-
-Adapting to different devices, sizes should be fluid across breakpoints. While most Dialtone components are responsive, their fluidity depends on the layout they live within.
-
-</div>
-<dt-stack class="d-gc2" direction="column" gap="200">
-<div>
-<iframe class="d-bgc-contrast" style="border: 0px solid rgba(0, 0, 0, 0.1); border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FQe6cz41vPBozP4PhgGqFin/Docs-Protos?page-id=0%3A1&type=design&node-id=5-25679&viewport=-722%2C-310%2C0.54&t=rVgNK5NwIXaPxkHq-8&scaling=min-zoom&starting-point-node-id=5%3A25663&hotspot-hints=0&hide-ui=1"></iframe>
-</div>
-</dt-stack>
-</div>
-
-### Accessibility
-
-<div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols1">
-
-To ensure clickable and interactive areas are easily accessible, we recommend a minimum area of `var(--dt-size-radius-300)`, except for links within text. In Dialtone we've applied these to components such as buttons, toggles, checkboxes, radio buttons, dropdowns, and inputs.
-
-</div>
-
-## Visual Guides
+</template>
+</dialtone-usage>
 
 ### Grouping
 
-<div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols3" >
-  <div>
-<dt-stack direction="column" gap="100">
-<p>Group and adjust the distance between elements to guide users understanding of their relationships. Closer elements appear more connected, while larger gaps indicate less association.</p>
-<dt-text as="p" kind="body">Consistent and intentional spacing decisions across pages create a predictable layout, reducing cognitive load and allowing users to focus on the content rather than the layout.</dt-text>
-    </dt-stack>
-  </div>
-  <dt-stack class="d-gc2" direction="column" gap="200">
-    <iframe class="d-bgc-contrast" style="border: 0px; border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FQe6cz41vPBozP4PhgGqFin/Docs-Protos?page-id=0%3A1&type=design&node-id=5-16175&viewport=702%2C117%2C0.97&t=LxszUdOGsEU9l3I5-8&scaling=min-zoom&starting-point-node-id=5%3A16175&hotspot-hints=0&hide-ui=1"></iframe>
-    <dt-text as="p" kind="body" tone="tertiary">
-    <dt-text strength="strong">Proximity groups</dt-text> are formed by placing elements close together. <dt-text strength="strong">Delimited groups,</dt-text> on the other hand, are defined by clear visual boundaries, such as borders.
-    </dt-text>
-    </dt-stack>
-</div>
+<dialtone-usage>
+<template #do>
+
+- Group related elements tightly; separate unrelated ones widely. Proximity communicates relationship.
+- Keep spacing decisions consistent across pages. Predictability reduces cognitive load.
+
+</template>
+<template #dont>
+
+- Don't vary gap sizes within a single UI pattern. Readers interpret inconsistent spacing as noise.
+
+</template>
+</dialtone-usage>
 
 ### Guiding the Eye
 
-<div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols3" >
-  <div>
-    <dt-stack direction="column" gap="100">
-      <div>
-        <p>Control the amount of space around an element to affect its visual importance. Use larger spaces for more prominent elements and smaller for those of lower importance. Keep in mind the position of the elements will benefit the order of reading.
-      </p>
-      </div>
-      <div>
-        <dt-text as="p" kind="body">The empty areas around elements provide visual breathing room, enhancing readability and contrast.</dt-text>
-      </div>
-    </dt-stack>
-  </div>
-  <div class="d-gc2">
-    <iframe class="d-bgc-contrast" style="border: 0px; border-radius: 8px" width="100%" height="320" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FQe6cz41vPBozP4PhgGqFin/Docs-Protos?page-id=0%3A1&type=design&node-id=5-16225&viewport=702%2C117%2C0.97&t=LxszUdOGsEU9l3I5-8&scaling=min-zoom&starting-point-node-id=5%3A16225&hotspot-hints=0&hide-ui=1"></iframe>
-    </div>
-</div>
+<dialtone-usage>
+<template #do>
 
-## Tokens
+- Give prominent elements more space around them; give supporting content less.
+- Use empty space on purpose. Breathing room improves readability and contrast.
+- Keep reading order in mind when deciding what to emphasize.
 
-Here are some frequently used tokens. For a complete list, visit the [Size Tokens](/tokens/index.md#size) section.
+</template>
+<template #dont>
 
-<token-table category="size" :tokenList="true" :tokens="tokens" :mode="resolvedMode" />
+- Don't pack elements edge-to-edge. Crowded layouts bury hierarchy and fight reading order.
+
+</template>
+</dialtone-usage>
+
+### Text Rhythm
+
+Typography is the third leg of the triad.
+
+<dialtone-usage>
+<template #do>
+
+- Use [DtText](/components/text.md) for all text. Its `density` prop controls line-height, so it governs rhythm *within* text.
+- Pair DtText's `density` (within-text rhythm) with [DtStack](/components/stack.md)'s `gap` (between-element rhythm).
+
+</template>
+<template #dont>
+
+- Avoid combining typography utility classes (`d-fs-*`, `d-lh-*`, `d-fw-*`) when [DtText](/components/text.md) already exposes the right props.
+
+</template>
+</dialtone-usage>
+
+## Related CSS Utilities
+
+The triad covers most size and space needs. These utility classes remain available for cases the components don't cover.
+
+| Purpose | Utility | Prefer |
+| --- | --- | --- |
+| [Padding](/utilities/spacing/padding.html) | `d-p-*` | [DtBox](/components/box.md) `padding` / `padding-inline` / `padding-block` |
+| [Margin](/utilities/spacing/margin.html) | `d-m-*` | [DtStack](/components/stack.md) `gap` for between-element spacing |
+| [Flex / grid gap](/utilities/flex/gap.html) | `d-g-*` | [DtStack](/components/stack.md) `gap` |
+| [Width / height](/utilities/sizing/width.html) | `d-w*` / `d-h*` | [DtBox](/components/box.md) `inline-size` / `block-size` |
+| [Min / max width](/utilities/sizing/min-width.html) | `d-wmn-*` / `d-wmx-*` | [DtBox](/components/box.md) `min-inline-size` / `max-inline-size` |
+| [Enable flex container](/utilities/flex/direction-wrap-flow.html) | `d-d-flex` | [DtStack](/components/stack.md) |
+| [Cross-axis alignment](/utilities/flex/align-items.html) | `d-ai-*` | [DtStack](/components/stack.md) `align` |
+| [Main-axis distribution](/utilities/flex/justify.html) | `d-jc-*` | [DtStack](/components/stack.md) `justify` |
+
+For the full set, view [Spacing Tokens](/tokens/#spacing), [Layout Tokens](/tokens/#layout), and [CSS Utilities](/utilities/).
 
 ## Key Takeaways
 
-- Use predefined tokens for all dimensional values to maintain consistency and make it easier to update designs.
-- Consider the overall composition and whitespace to create well-proportioned layouts.
-- Ensure consistent sizing and spacing across various screen sizes and breakpoints.
-- Keep sizes and spacing consistent: This ensures a polished look across all devices.
-
-**Design Tip:** Optimize your workflow in Figma by setting the nudge amount to 4px or 8px. It's a small change that can make a big difference in ease of use!
+- Let the triad do the work: [DtBox](/components/box.md) for the container, [DtStack](/components/stack.md) for arrangement, [DtText](/components/text.md) for content.
+- Reach for tokens, not magic numbers. `--dt-layout-*` and `--dt-spacing-*` keep sizing and spacing consistent without manual pixel math.
+- Use `padding` inside containers and `gap` between them. Avoid `margin` for layout wherever possible.
+- Avoid fixed dimensions when a layout can flex; `min-*` constraints respond better across screen sizes.
+- CSS utilities remain available for cases the triad doesn't cover, but start with the triad.
 
 <script setup>
 import { ref } from 'vue';
-import tokensJson from '@dialpad/dialtone-tokens/dist/doc.json';
-import { useThemeManager } from '@composables/useThemeManager';
 
-const { resolvedMode } = useThemeManager();
-
-const sizes = ["size/300", "size/400", "size/450", "size/500", "size/550", "size/600", "size/650", "size/700"];
-const theme = "base-light";
-const tokens = Object.keys(tokensJson[theme] ?? {}).reduce((acc, curr) => {
-  if (sizes.includes(curr)) {
-    const { name, value, description } = tokensJson[theme][curr]["css/variables"];
-    acc.push({
-      name,
-      tokenValue: value,
-      description,
-      exampleValue: value,
-      exampleName: name,
-    });
-  }
-  return acc;
-}, []);
-
-const sizeValues = [
-  { value: 'var(--dt-size-720)', label: 'var(--dt-size-720)' },
-  { value: 'var(--dt-layout-200)', label: 'var(--dt-layout-200)' },
-  { value: 'var(--dt-layout-250)', label: 'var(--dt-layout-250)' },
+const paddingOptions = [
+  { value: '100', label: 'padding="100"' },
+  { value: '200', label: 'padding="200"' },
+  { value: '300', label: 'padding="300"' },
+  { value: '500', label: 'padding="500"' },
 ];
 
-const gapValues = [
-  { value: 'var(--dt-size-300)', label: 'var(--dt-size-300)' },
-  { value: 'var(--dt-size-400)', label: 'var(--dt-size-400)' },
-  { value: 'var(--dt-layout-25)', label: 'var(--dt-layout-25)' },
-  { value: 'var(--dt-layout-50)', label: 'var(--dt-layout-50)' },
+const sizeOptions = [
+  { value: '100', label: 'min-inline-size="100"' },
+  { value: '200', label: 'min-inline-size="200"' },
+  { value: '300', label: 'min-inline-size="300"' },
 ];
 
-const selectedSize = ref('var(--dt-size-720)');
-const selectedGap = ref('var(--dt-size-400)');
+const gapOptions = [
+  { value: '100', label: 'gap="100"' },
+  { value: '200', label: 'gap="200"' },
+  { value: '300', label: 'gap="300"' },
+  { value: '500', label: 'gap="500"' },
+];
+
+const selectedPadding = ref('200');
+const selectedSize = ref('200');
+const selectedGap = ref('200');
 </script>

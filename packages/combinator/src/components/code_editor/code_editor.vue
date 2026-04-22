@@ -342,7 +342,7 @@ export default {
 
 <style>
 .dtc-code-editor {
-  font: var(--dt-text-code-sm);
+  font: var(--dt-text-code-xs);
   line-height: var(--dt-font-line-height-400);
 }
 

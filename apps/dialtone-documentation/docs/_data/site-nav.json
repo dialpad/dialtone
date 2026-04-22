@@ -73,6 +73,11 @@
             ]
           },
           {
+            "text": "Layout and Spacing",
+            "link": "/foundations/size-and-space/",
+            "icon": "list-spacing-expanded"
+          },
+          {
             "text": "Gradient",
             "link": "/foundations/gradient/",
             "icon": "haze"
@@ -101,11 +106,6 @@
             "text": "Illustrations",
             "link": "/foundations/illustrations/",
             "icon": "image"
-          },
-          {
-            "text": "Size and Space",
-            "link": "/foundations/size-and-space/",
-            "icon": "list-spacing-expanded"
           }
         ]
       }

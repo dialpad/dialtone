@@ -12,6 +12,9 @@ keywords: ["font", "typography", "typeface", "text", "season"]
   <div class="d-d-grid d-g-600 d-g-cols1 md:d-g-cols3 d-ai-center">
     <div>
       <p class="d-docsite--paragraph">The Seasons type family is built to have a shared character and proportions between the Sans and Mix versions.</p>
+      <p class="d-docsite--paragraph">
+        <dt-link to="/foundations/typography/marketing.html">Type in Marketing</dt-link>
+      </p>
     </div>
     <div class="d-gc2">
       <svg-loader name="type--sample-01" class="d-bar-500" />
@@ -20,6 +23,9 @@ keywords: ["font", "typography", "typeface", "text", "season"]
   <div class="d-d-grid d-g-600 d-g-cols1 md:d-g-cols3 d-ai-center">
     <div>
       <p class="d-docsite--paragraph">Product uses system fonts, with Season Mix for specialty instances.</p>
+      <p class="d-docsite--paragraph">
+        <dt-link to="/foundations/typography/">Type in Product</dt-link>
+      </p>
     </div>
     <div class="d-gc2">
       <svg-loader name="type--sample-02" class="d-bar-500" />

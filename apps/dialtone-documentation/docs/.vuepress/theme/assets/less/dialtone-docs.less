@@ -396,7 +396,6 @@ html body {
     :where(th) {
       font: var(--dt-text-label-xs);
       color: var(--dt-color-foreground-secondary);
-      text-transform: uppercase;
       line-height: var(--dt-font-line-height-100);
     }
 
@@ -419,8 +418,9 @@ html body {
 
     :where(code, kbd) {
       background-color: var(--dt-color-background-default);
-      color: var(--dt-color-blue-800);
+      color: var(--dt-color-foreground-info);
       font: var(--dt-text-code-xs);
+      font-size: 85%;
     }
   }
 }
@@ -515,33 +515,46 @@ code {
   .d-docsite--ordered-list &,
   .d-docsite--list-element &,
   .d-docsite--preview-header & {
-    font-size: 95%;
+    font-size: 85%;
   }
+
 }
 
 .d-docsite-article {
-    > table:not([class]) {
-    border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
+  > table:not([class]) {
+    color: var(--dt-color-foreground-tertiary);
     border-collapse: collapse;
-    margin: var(--dt-size-200) 0;
+    margin: var(--dt-spacing-200) 0;
     inline-size: 100%;
+    font: var(--dt-text-body-sm);
 
-    th {
-      font: var(--dt-text-label-sm);
+    :where(th) {
+      font: var(--dt-text-label-xs);
       color: var(--dt-color-foreground-secondary);
+      line-height: var(--dt-font-line-height-100);
     }
 
-    th, td {
+
+    :where(th, td) {
       text-align: start;
-      border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
-      border-inline: 0;
-      padding: var(--dt-size-450);
+      border-block-end: var(--dt-size-border-100) solid var(--dt-color-border-default);
+      padding: var(--dt-spacing-200);
+      vertical-align: baseline;
     }
 
-    code {
+    :where(thead th) {
+      border-block-end-width: var(--dt-size-border-200);
+    }
+
+    :where(tbody tr:last-of-type) :where(td, th) {
+      border-block-end: none;
+    }
+
+    :where(code, kbd) {
       background-color: var(--dt-color-background-default);
-      padding: var(--dt-size-200);
+      color: var(--dt-color-foreground-info);
       font: var(--dt-text-code-xs);
+      font-size: 85%;
     }
   }
 
@@ -573,7 +586,7 @@ code {
 :where(:is(.d-docsite--paragraph, .d-docsite--unordered-list, .d-docsite--ordered-list, .d-docsite--list-element, .d-docsite--preview-header) > code) {
   font: var(--dt-text-code-sm);
   padding: var(--dt-spacing-25) var(--dt-spacing-50);
-  color: var(--dt-color-blue-800);
+  color: var(--dt-color-foreground-info);
   border-radius: var(--dt-size-radius-200);
   border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
   user-select: all;
@@ -584,7 +597,7 @@ code {
 }
 
 .d-docsite-code {
-  color: var(--dt-color-blue-800) !important;
+  color: var(--dt-color-foreground-info) !important;
   font-weight: var(--dt-font-weight-normal) !important;
   user-select: all;
 }

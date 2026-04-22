@@ -98,7 +98,6 @@ const blogLink = computed(() => {
     :where(th) {
       font: var(--dt-text-label-xs);
       color: var(--dt-color-foreground-secondary);
-      text-transform: uppercase;
       line-height: var(--dt-font-line-height-100);
     }
 
@@ -120,8 +119,9 @@ const blogLink = computed(() => {
 
     :where(code, kbd) {
       background-color: var(--dt-color-background-default);
-      color: var(--dt-color-blue-800);
+      color: var(--dt-color-foreground-info);
       font: var(--dt-text-code-xs);
+      font-size: 85%;
     }
   }
 }

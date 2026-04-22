@@ -98,7 +98,7 @@ Titles and headings to establish hierarchy and set the tone of contextual groupi
             <div :class="[varName]">{{ example }}</div>
           </td>
           <td class="d-p-50 d-ws-nowrap">
-            <dt-stack direction="row" as="code" gap="50" class="d-text-code--sm d-bgc-transparent d-ta-center d-c-default">
+            <dt-stack direction="row" as="code" gap="50" class="d-text-code--xs d-bgc-transparent d-ta-center d-c-default">
               <span v-dt-tooltip="`Font Size`">{{ getStyles('headlines', index).fontSize }}</span>
               /
               <span v-dt-tooltip="`Line Height`">{{ getStyles('headlines', index).lineHeight }}</span>
@@ -108,7 +108,7 @@ Titles and headings to establish hierarchy and set the tone of contextual groupi
           </td>
           <td class="d-p-50 d-ws-nowrap">
             <dt-stack direction="row" justify="between" class="dialtone-copy-utility">
-              <code class="dialtone-copy-utility__utility d-bgc-transparent d-text-code--sm">{{ varName }}</code>
+              <code class="dialtone-copy-utility__utility d-bgc-transparent d-text-code--xs">{{ varName }}</code>
               <div class="dialtone-copy-utility__btn">
                 <copy-button :text="varName" aria-label="Copy" />
               </div>
@@ -132,7 +132,7 @@ Default text style for longer-form prose content, designed for comfort and clari
           <div :class="[varName]">{{ example }}</div>
         </td>
         <td class="d-p-50 d-ws-nowrap">
-          <dt-stack direction="row" as="code" gap="50" class="d-text-code--sm d-bgc-transparent d-ta-center d-c-default">
+          <dt-stack direction="row" as="code" gap="50" class="d-text-code--xs d-bgc-transparent d-ta-center d-c-default">
             <span v-dt-tooltip="`Font Size`">{{ getStyles('body', index).fontSize }}</span>
             /
             <span v-dt-tooltip="`Line Height`">{{ getStyles('body', index).lineHeight }}</span>
@@ -142,7 +142,7 @@ Default text style for longer-form prose content, designed for comfort and clari
         </td>
         <td class="d-p-50 d-ws-nowrap">
           <dt-stack direction="row" justify="between" class="dialtone-copy-utility">
-            <code class="dialtone-copy-utility__utility d-bgc-transparent d-text-code--sm">{{ varName }}</code>
+            <code class="dialtone-copy-utility__utility d-bgc-transparent d-text-code--xs">{{ varName }}</code>
             <div class="dialtone-copy-utility__btn">
               <copy-button :text="varName" aria-label="Copy" />
             </div>
@@ -166,7 +166,7 @@ interaction.
           <div :class="[varName]">{{ example }}</div>
         </td>
         <td class="d-p-50 d-ws-nowrap">
-          <dt-stack direction="row" as="code" gap="50" class="d-text-code--sm d-bgc-transparent d-ta-center d-c-default">
+          <dt-stack direction="row" as="code" gap="50" class="d-text-code--xs d-bgc-transparent d-ta-center d-c-default">
             <span v-dt-tooltip="`Font Size`">{{ getStyles('label', index).fontSize }}</span>
             /
             <span v-dt-tooltip="`Line Height`">{{ getStyles('label', index).lineHeight }}</span>
@@ -176,7 +176,7 @@ interaction.
         </td>
         <td class="d-p-50 d-ws-nowrap">
           <dt-stack direction="row" justify="between" class="dialtone-copy-utility">
-            <code class="dialtone-copy-utility__utility d-bgc-transparent d-text-code--sm">{{ varName }}</code>
+            <code class="dialtone-copy-utility__utility d-bgc-transparent d-text-code--xs">{{ varName }}</code>
             <div class="dialtone-copy-utility__btn">
               <copy-button :text="varName" aria-label="Copy" />
             </div>
@@ -199,7 +199,7 @@ Code snippets, technical commands, or data values rendered as a monospaced font.
           <div :class="[varName]">{{ example }}</div>
         </td>
         <td class="d-p-50 d-ws-nowrap">
-          <dt-stack direction="row" as="code" gap="50" class="d-text-code--sm d-bgc-transparent d-ta-center d-c-default">
+          <dt-stack direction="row" as="code" gap="50" class="d-text-code--xs d-bgc-transparent d-ta-center d-c-default">
             <span v-dt-tooltip="`Font Size`">{{ getStyles('code', index).fontSize }}</span>
             /
             <span v-dt-tooltip="`Line Height`">{{ getStyles('code', index).lineHeight }}</span>
@@ -209,7 +209,7 @@ Code snippets, technical commands, or data values rendered as a monospaced font.
         </td>
         <td class="d-p-50 d-ws-nowrap">
           <dt-stack direction="row" justify="between" class="dialtone-copy-utility">
-            <code class="dialtone-copy-utility__utility d-bgc-transparent d-text-code--sm">{{ varName }}</code>
+            <code class="dialtone-copy-utility__utility d-bgc-transparent d-text-code--xs">{{ varName }}</code>
             <div class="dialtone-copy-utility__btn">
               <copy-button :text="varName" aria-label="Copy" />
             </div>
