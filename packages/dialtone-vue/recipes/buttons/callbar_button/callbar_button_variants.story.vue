@@ -28,9 +28,6 @@
         <template #tooltip>
           Tooltip
         </template>
-        <template #icon>
-          <dt-icon name="box-select" />
-        </template>
       </dt-recipe-callbar-button>
       <dt-recipe-callbar-button aria-label="mic on">
         <template #icon>
@@ -81,9 +78,6 @@
         Label only
         <template #tooltip>
           Tooltip
-        </template>
-        <template #icon>
-          <dt-icon name="box-select" />
         </template>
       </dt-recipe-callbar-button>
 
@@ -145,9 +139,6 @@
         Label only
         <template #tooltip>
           Tooltip
-        </template>
-        <template #icon>
-          <dt-icon name="box-select" />
         </template>
       </dt-recipe-callbar-button>
 
@@ -215,9 +206,6 @@
         Label only
         <template #tooltip>
           Tooltip
-        </template>
-        <template #icon>
-          <dt-icon name="box-select" />
         </template>
       </dt-recipe-callbar-button>
 
