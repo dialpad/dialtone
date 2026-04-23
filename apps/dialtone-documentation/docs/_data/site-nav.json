@@ -80,7 +80,17 @@
           {
             "text": "Gradient",
             "link": "/foundations/gradient/",
-            "icon": "haze"
+            "icon": "haze",
+            "children": [
+              {
+                "text": "Gradient in Marketing",
+                "link": "/foundations/gradient/marketing.html"
+              },
+              {
+                "text": "Gradient in Product",
+                "link": "/foundations/gradient/product.html"
+              }
+            ]
           },
           {
             "text": "Motion",
