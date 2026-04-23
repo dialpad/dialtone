@@ -14,7 +14,7 @@ keywords: ["gradient", "product", "background", "utility", "linear gradient"]
     </div>
     <div class="d-gc2">
       <figure>
-        <img class="d-d-block d-w100p d-bar-500" src="/assets/images/gradient--product-01.png" alt="">
+        <img src="/assets/images/gradient--product-01.png" alt="" class="d-d-block d-w100p d-bar-500">
       </figure>
     </div>
   </div>
@@ -26,7 +26,7 @@ keywords: ["gradient", "product", "background", "utility", "linear gradient"]
     </div>
     <div class="d-gc2">
       <figure>
-        <img class="d-d-block d-w100p d-bar-500" src="/assets/images/gradient--product-02.png" alt="">
+        <img src="/assets/images/gradient--product-02.png" alt="" class="d-d-block d-w100p d-bar-500">
       </figure>
     </div>
   </div>

@@ -19,14 +19,14 @@ The visual symbols of the dialpad and Ai are combined to represent the relations
   </div>
 
   <figure class="d-bar-500 d-of-hidden">
-    <img src="/assets/images/logo--sample-01.jpg" alt="">
+    <img class="d-d-block d-w100p" src="/assets/images/logo--sample-01.jpg" alt="">
   </figure>
 
   <figure class="d-bar-500 d-of-hidden">
-    <img src="/assets/images/logo--sample-02.jpg" alt="">
+    <img class="d-d-block d-w100p" src="/assets/images/logo--sample-02.jpg" alt="">
   </figure>
 
   <figure class="d-bar-500 d-of-hidden">
-    <img src="/assets/images/logo--sample-03.png" alt="">
+    <img class="d-d-block d-w100p" src="/assets/images/logo--sample-03.png" alt="">
   </figure>
 </dt-stack>

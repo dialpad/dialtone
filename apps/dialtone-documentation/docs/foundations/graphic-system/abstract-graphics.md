@@ -13,23 +13,23 @@ download_url: "https://drive.google.com/open?id=1dWhUFvyoJdKXLsHMHPe05cej62hHPNp
     </div>
     <div class="d-gc2">
       <figure>
-        <img class="d-d-block d-w100p d-bar-500" src="/assets/images/graphics-abstract--billboard.png" alt="">
+        <img src="/assets/images/graphics-abstract--billboard.png" alt="" class="d-d-block d-w100p d-bar-500">
       </figure>
     </div>
   </div>
 
   <div class="d-d-grid d-g-400 d-g-cols4 d-ai-start">
     <figure>
-      <img class="d-d-block d-w100p d-bar-500" src="/assets/images/graphics-abstract--01.png" alt="">
+      <img src="/assets/images/graphics-abstract--01.png" alt="" class="d-d-block d-w100p d-bar-500">
     </figure>
     <figure>
-      <img class="d-d-block d-w100p d-bar-500" src="/assets/images/graphics-abstract--02.png" alt="">
+      <img src="/assets/images/graphics-abstract--02.png" alt="" class="d-d-block d-w100p d-bar-500">
     </figure>
     <figure>
-      <img class="d-d-block d-w100p d-bar-500" src="/assets/images/graphics-abstract--03.png" alt="">
+      <img src="/assets/images/graphics-abstract--03.png" alt="" class="d-d-block d-w100p d-bar-500">
     </figure>
     <figure>
-      <img class="d-d-block d-w100p d-bar-500" src="/assets/images/graphics-abstract--04.png" alt="">
+      <img src="/assets/images/graphics-abstract--04.png" alt="" class="d-d-block d-w100p d-bar-500">
     </figure>
   </div>
 </dt-stack>

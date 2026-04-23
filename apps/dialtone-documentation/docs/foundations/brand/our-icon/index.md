@@ -17,7 +17,7 @@ keywords: ["app icon","favicon","brand mark"]
       <p class="d-docsite--paragraph"><strong>Sample Use Cases</strong>: App icons, social avatars, favicons.</p>
     </div>
     <div class="d-gc2">
-      <svg-loader name="icon--usage" class="d-bar-500" />
+      <img src="/assets/images/icon--usage.png" alt="" class="d-bar-500 d-d-block d-w100p" />
     </div>
   </div>
 
@@ -29,7 +29,7 @@ keywords: ["app icon","favicon","brand mark"]
       <p class="d-docsite--paragraph"><dt-link href="#">Download icons</dt-link></p>
     </div>
     <div class="d-gc2">
-      <svg-loader name="icon--versions" class="d-bar-500" />
+      <img src="/assets/images/icon--versions.png" alt="" class="d-bar-500 d-d-block d-w100p" />
     </div>
   </div>
 
@@ -40,19 +40,19 @@ keywords: ["app icon","favicon","brand mark"]
       <p class="d-docsite--paragraph"><dt-link href="#">View Dialtone Icon</dt-link></p>
     </div>
     <div class="d-gc2">
-      <svg-loader name="icon--in-product" class="d-bar-500" />
+      <img src="/assets/images/icon--in-product.png" alt="" class="d-bar-500 d-d-block d-w100p" />
     </div>
   </div>
 
   <figure class="d-bar-500 d-of-hidden">
-    <img src="/assets/images/color--sample-01.jpg" alt="">
+    <img src="/assets/images/color--sample-01.jpg" alt="" class="d-d-block d-w100p" />
   </figure>
 
   <figure class="d-bar-500 d-of-hidden">
-    <img src="/assets/images/color--sample-02.jpg" alt="">
+    <img src="/assets/images/color--sample-02.jpg" alt="" class="d-d-block d-w100p" />
   </figure>
 
   <figure class="d-bar-500 d-of-hidden">
-    <img src="/assets/images/color--sample-03.jpg" alt="">
+    <img src="/assets/images/color--sample-03.jpg" alt="" class="d-d-block d-w100p" />
   </figure>
 </dt-stack>

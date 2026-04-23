@@ -16,7 +16,7 @@ keywords: ["gradients","color transition","linear gradient","radial gradient"]
       </p>
     </div>
     <div class="d-gc2">
-      <svg-loader name="gradient--01" class="d-bar-500" />
+      <img src="/assets/images/gradient--01.png" alt="" class="d-bar-500 d-d-block d-w100p" />
     </div>
   </div>
   <div class="d-d-grid d-g-600 d-g-cols1 md:d-g-cols3 d-ai-center">
@@ -27,7 +27,7 @@ keywords: ["gradients","color transition","linear gradient","radial gradient"]
       </p>
     </div>
     <div class="d-gc2">
-      <svg-loader name="gradient--02" class="d-bar-500" />
+      <img src="/assets/images/gradient--02.png" alt="" class="d-bar-500 d-d-block d-w100p" />
     </div>
   </div>
 </dt-stack>

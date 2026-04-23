@@ -14,7 +14,7 @@ keywords: ["artwork", "graphics", "images"]
     </div>
     <div class="d-gc2">
       <figure>
-        <img class="d-d-block d-w100p d-bar-500" src="/assets/images/illustrations--billboard.png" alt="">
+        <img src="/assets/images/illustrations--billboard.png" alt="" class="d-d-block d-w100p d-bar-500">
       </figure>
     </div>
   </div>

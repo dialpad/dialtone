@@ -27,14 +27,14 @@ keywords: ["colour", "colors", "palette", "theme", "purple", "red", "blue", "gre
   </div>
 
   <figure class="d-bar-500 d-of-hidden">
-    <img src="/assets/images/color--sample-01.jpg" alt="">
+    <img src="/assets/images/color--sample-01.jpg" alt="" class="d-d-block d-w100p" />
   </figure>
 
   <figure class="d-bar-500 d-of-hidden">
-    <img src="/assets/images/color--sample-02.jpg" alt="">
+    <img src="/assets/images/color--sample-02.jpg" alt="" class="d-d-block d-w100p" />
   </figure>
 
   <figure class="d-bar-500 d-of-hidden">
-    <img src="/assets/images/color--sample-03.jpg" alt="">
+    <img src="/assets/images/color--sample-03.jpg" alt="" class="d-d-block d-w100p" />
   </figure>
 </dt-stack>

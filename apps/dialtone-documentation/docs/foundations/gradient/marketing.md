@@ -13,7 +13,7 @@ download_url: "https://drive.google.com/drive/folders/1TPCpFLnFtSgjtU_BVyEuLXhjH
     </div>
     <div class="d-gc2">
       <figure>
-        <img class="d-d-block d-w100p" src="/assets/images/gradient--light.png" alt="">
+        <img src="/assets/images/gradient--light.png" alt="" class="d-d-block d-w100p">
       </figure>
     </div>
   </div>
@@ -25,7 +25,7 @@ download_url: "https://drive.google.com/drive/folders/1TPCpFLnFtSgjtU_BVyEuLXhjH
     </div>
     <div class="d-gc2">
       <figure>
-        <img class="d-d-block d-w100p" src="/assets/images/gradient--dark.png" alt="">
+        <img src="/assets/images/gradient--dark.png" alt="" class="d-d-block d-w100p">
       </figure>
     </div>
   </div>
@@ -37,7 +37,7 @@ download_url: "https://drive.google.com/drive/folders/1TPCpFLnFtSgjtU_BVyEuLXhjH
     </div>
     <div class="d-gc2">
       <figure>
-        <img class="d-d-block d-w100p" src="/assets/images/gradient--usage.png" alt="">
+        <img src="/assets/images/gradient--usage.png" alt="" class="d-d-block d-w100p">
       </figure>
     </div>
   </div>

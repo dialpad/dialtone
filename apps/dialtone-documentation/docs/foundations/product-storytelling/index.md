@@ -10,21 +10,21 @@ keywords: ["narrative", "feature", "value proposition"]
 <dt-stack gap="600" class="d-mbs-600">
   <div class="d-d-grid d-g-400 d-g-cols1 md:d-g-cols3 d-ai-start">
     <dt-stack gap="200">
-      <img class="d-d-block d-w100p d-bar-500" src="/assets/images/product-storytelling--01.png" alt="">
+      <img src="/assets/images/product-storytelling--01.png" alt="" class="d-d-block d-w100p d-bar-500">
       <dt-stack>
         <h3 class="d-docsite--header-4 d-mbs-0 d-mbs-0 d-fc-primary">Simplified UI</h3>
         <p class="d-docsite--paragraph d-fc-tertiary">For use when speaking to high-level product and platform benefits.</p>
       </dt-stack>
     </dt-stack>
     <dt-stack gap="200">
-      <img class="d-d-block d-w100p d-bar-500" src="/assets/images/product-storytelling--02.png" alt="">
+      <img src="/assets/images/product-storytelling--02.png" alt="" class="d-d-block d-w100p d-bar-500">
       <dt-stack>
         <h3 class="d-docsite--header-4 d-mbs-0 d-mbs-0 d-fc-primary">Focused UI</h3>
         <p class="d-docsite--paragraph d-fc-tertiary">For use when communicating specific product benefits.</p>
       </dt-stack>
     </dt-stack>
     <dt-stack gap="200">
-      <img class="d-d-block d-w100p d-bar-500" src="/assets/images/product-storytelling--03.png" alt="">
+      <img src="/assets/images/product-storytelling--03.png" alt="" class="d-d-block d-w100p d-bar-500">
       <dt-stack>
         <h3 class="d-docsite--header-4 d-mbs-0 d-mbs-0 d-fc-primary">Literal UI</h3>
         <p class="d-docsite--paragraph d-fc-tertiary">For use when showing the product as a complete interface in context.</p>
