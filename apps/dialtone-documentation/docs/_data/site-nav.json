@@ -113,9 +113,28 @@
             ]
           },
           {
-            "text": "Illustrations",
-            "link": "/foundations/illustrations/",
-            "icon": "image"
+            "text": "Graphic System",
+            "link": "/foundations/graphic-system/",
+            "icon": "image",
+            "children": [
+              {
+                "text": "Abstract Graphics",
+                "link": "/foundations/graphic-system/abstract-graphics.html"
+              },
+              {
+                "text": "Illustrations",
+                "link": "/foundations/illustrations/"
+              },
+              {
+                "text": "Data Visualizations",
+                "link": "/foundations/graphic-system/data-visualizations.html"
+              }
+            ]
+          },
+          {
+            "text": "Product Storytelling",
+            "link": "/foundations/product-storytelling/",
+            "icon": "book-open"
           }
         ]
       }

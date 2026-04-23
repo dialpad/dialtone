@@ -19,14 +19,28 @@
             text="Beta"
           />
         </dt-stack>
-        <dt-stack direction="row" gap="25">
+        <dt-stack direction="row" gap="100">
+          <dt-button
+            v-if="$frontmatter.download_url"
+            :href="$frontmatter.download_url"
+            target="_blank"
+            rel="noopener noreferrer"
+            :size="200"
+            kind="muted"
+            importance="outlined"
+          >
+            <template #startIcon="{ iconSize }">
+              <dt-icon name="google-drive" :size="iconSize" />
+            </template>
+            Download
+          </dt-button>
           <dt-button
             v-if="$frontmatter.figma_url"
             :href="$frontmatter.figma_url"
             target="_blank"
             rel="noopener noreferrer"
             kind="muted"
-            importance="clear"
+            importance="outlined"
             :size="200"
           >
             <template #startIcon="{ iconSize }">
@@ -40,7 +54,7 @@
             target="_blank"
             rel="noopener noreferrer"
             kind="muted"
-            importance="clear"
+            importance="outlined"
             :size="200"
           >
             <template #startIcon="{ iconSize }">
@@ -54,7 +68,7 @@
             target="_blank"
             rel="noopener noreferrer"
             kind="muted"
-            importance="clear"
+            importance="outlined"
             :size="200"
           >
             <template #startIcon="{ iconSize }">
@@ -62,70 +76,68 @@
             </template>
             GitHub
           </dt-button>
-          <span class="d-pis-100">
-            <dt-split-button
-              :size="200"
-              importance="outlined"
-              kind="muted"
-              end-tooltip-text="More options"
-              start-aria-label="Copy Markdown"
-              @start-clicked="onCopyAsMarkdown()"
-            >
-              <template #startIcon="{ size }">
-                <dt-icon
-                  :name="showCopiedIcon ? 'check' : 'copy'"
-                  :size="size"
-                  :class="{ 'd-fc-positive': showCopiedIcon }"
-                />
-              </template>
-              Copy MD
-              <template #dropdownList="{ close }">
-                <dt-list-item-group>
-                  <dt-list-item
-                    role="menuitem"
-                    navigation-type="arrow-keys"
-                    @click="onCopyMarkdownLink(close)"
-                  >
-                    Copy Markdown link
-                  </dt-list-item>
-                  <dt-list-item
-                    role="menuitem"
-                    navigation-type="arrow-keys"
-                    @click="onDownloadAll(close)"
-                  >
-                    Download full docs
-                  </dt-list-item>
-                </dt-list-item-group>
-                <dt-dropdown-separator />
-                <dt-list-item-group>
-                  <dt-list-item
-                    v-if="rawMarkdownUrl"
-                    role="menuitem"
-                    navigation-type="arrow-keys"
-                    @click="onViewAsMarkdown(close)"
-                  >
-                    Open as Markdown
-                  </dt-list-item>
-                  <dt-list-item
-                    v-if="rawMarkdownUrl"
-                    role="menuitem"
-                    navigation-type="arrow-keys"
-                    @click="openInAiChat(close, 'claude')"
-                  >
-                    Open in Claude.ai
-                  </dt-list-item>
-                  <dt-list-item
-                    v-if="rawMarkdownUrl"
-                    role="menuitem"
-                    navigation-type="arrow-keys"
-                    @click="openInAiChat(close, 'chatgpt')"
-                  >
-                    Open in ChatGPT
-                  </dt-list-item>
-                </dt-list-item-group>
-              </template>
-            </dt-split-button>
-          </span>
+          <dt-split-button
+            :size="200"
+            importance="outlined"
+            kind="muted"
+            end-tooltip-text="More options"
+            start-aria-label="Copy Markdown"
+            @start-clicked="onCopyAsMarkdown()"
+          >
+            <template #startIcon="{ size }">
+              <dt-icon
+                :name="showCopiedIcon ? 'check' : 'copy'"
+                :size="size"
+                :class="{ 'd-fc-positive': showCopiedIcon }"
+              />
+            </template>
+            Copy MD
+            <template #dropdownList="{ close }">
+              <dt-list-item-group>
+                <dt-list-item
+                  role="menuitem"
+                  navigation-type="arrow-keys"
+                  @click="onCopyMarkdownLink(close)"
+                >
+                  Copy Markdown link
+                </dt-list-item>
+                <dt-list-item
+                  role="menuitem"
+                  navigation-type="arrow-keys"
+                  @click="onDownloadAll(close)"
+                >
+                  Download full docs
+                </dt-list-item>
+              </dt-list-item-group>
+              <dt-dropdown-separator />
+              <dt-list-item-group>
+                <dt-list-item
+                  v-if="rawMarkdownUrl"
+                  role="menuitem"
+                  navigation-type="arrow-keys"
+                  @click="onViewAsMarkdown(close)"
+                >
+                  Open as Markdown
+                </dt-list-item>
+                <dt-list-item
+                  v-if="rawMarkdownUrl"
+                  role="menuitem"
+                  navigation-type="arrow-keys"
+                  @click="openInAiChat(close, 'claude')"
+                >
+                  Open in Claude.ai
+                </dt-list-item>
+                <dt-list-item
+                  v-if="rawMarkdownUrl"
+                  role="menuitem"
+                  navigation-type="arrow-keys"
+                  @click="openInAiChat(close, 'chatgpt')"
+                >
+                  Open in ChatGPT
+                </dt-list-item>
+              </dt-list-item-group>
+            </template>
+          </dt-split-button>
         </dt-stack>
       </dt-stack>
       <dt-text
@@ -134,7 +146,7 @@
         kind="body"
         tone="tertiary"
         wrap="pretty"
-        class="d-mbe-200 d-fs-300"
+        class="d-my-200 d-fs-300"
       >
         {{ $frontmatter.description }}
       </dt-text>

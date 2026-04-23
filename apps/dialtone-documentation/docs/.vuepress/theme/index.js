@@ -28,6 +28,26 @@ const _sortAlphabetically = (str1, str2) => {
   return 0;
 };
 
+// Pages at /foundations/* that should NOT appear as standalone cards on the
+// Foundations wall-of-cards (usually because they're children of another parent).
+const FOUNDATIONS_OVERVIEW_EXCLUDES = [
+  '/foundations/typography/',
+  '/foundations/typography.html',
+  '/foundations/colors/usage/',
+  '/foundations/colors/palette/',
+  '/foundations/colors/themes/',
+  '/foundations/colors/chart-colors/',
+  '/foundations/icons/usage/',
+  '/foundations/icons/crafting-an-icon/',
+  '/foundations/brand/using-our-logo/',
+  '/foundations/brand/our-icon/',
+  '/foundations/brand/sub-brands-and-co-branding/',
+  '/foundations/brand/samples/',
+  '/foundations/size/',
+  '/foundations/space/',
+  '/foundations/illustrations/',
+];
+
 function _blogPostsFrontmatter (app) {
   const blogPosts = app.pages
     .filter(page => page.path.includes('/dialtone/whats-new/posts'))
@@ -315,7 +335,7 @@ export const dialtoneVuepressTheme = (options) => ({
         ]);
       _extractFrontmatter(app, '/guides/content/', options);
       _extractFrontmatter(app, '/components/', options, ['/components/status/']);
-      _extractFrontmatter(app, '/foundations/', options, ['/foundations/typography/', '/foundations/typography.html', '/foundations/colors/usage/', '/foundations/colors/palette/', '/foundations/colors/themes/', '/foundations/colors/chart-colors/', '/foundations/icons/usage/', '/foundations/icons/crafting-an-icon/', '/foundations/brand/using-our-logo/', '/foundations/brand/our-icon/', '/foundations/brand/sub-brands-and-co-branding/', '/foundations/brand/samples/', '/foundations/size/', '/foundations/space/']);
+      _extractFrontmatter(app, '/foundations/', options, FOUNDATIONS_OVERVIEW_EXCLUDES);
       _extractFrontmatter(app, '/foundations/colors/', options);
       _extractComponentStatus(app);
       _injectFrontmatterIntoSidebar(app, options);
