@@ -1,3 +1,20 @@
+# [9.181.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.180.0...dialtone/v9.181.0) (2026-04-24)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DP-185735 fix arrow key navigation broken near links ([#1217](https://github.com/dialpad/dialtone/issues/1217)) ([8e272e9](https://github.com/dialpad/dialtone/commit/8e272e921efa07bbc1ab9edad7a739a892db55ca))
+
+
+### Documentation
+
+* **Tabs, Popover, Dropdown, Button Group:** DLT-3342 fix code example inaccuracies ([#1213](https://github.com/dialpad/dialtone/issues/1213)) ([2621363](https://github.com/dialpad/dialtone/commit/26213635d4428864cd730113078274323e377cf1))
+
+
+### Features
+
+* **Dialtone Docs:** DLT-3109 add markdown-to-JSON generator for AI docs ([#1178](https://github.com/dialpad/dialtone/issues/1178)) ([2317b8e](https://github.com/dialpad/dialtone/commit/2317b8e3ca830381eb9419bca93de92520816d81))
+
 # [9.180.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.179.0...dialtone/v9.180.0) (2026-04-17)
 
 
