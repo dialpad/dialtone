@@ -125,7 +125,9 @@
     box-shadow: 0 0 0 var(--dt-size-200) var(--avatar-count-color-shadow);
 
     .d-recipe-leftbar-row--selected &,
-    .d-recipe-leftbar-row__primary:hover & {
+    .d-recipe-leftbar-row__primary:hover &,
+    .dp-general-row--selected &,
+    .dp-general-row__primary:hover & {
       --avatar-count-color-shadow: var(--dt-shell-action-color-background-primary-hover);
     }
 
@@ -295,7 +297,11 @@
   .d-recipe-leftbar-row--selected &,
   .d-recipe-leftbar-row:hover &,
   .d-recipe-leftbar-row:focus-within &,
-  .d-recipe-leftbar-row__primary:hover & {
+  .d-recipe-leftbar-row__primary:hover &,
+  .dp-general-row--selected &,
+  .dp-general-row:hover &,
+  .dp-general-row:focus-within &,
+  .dp-general-row__primary:hover & {
     &--presence {
       .d-presence {
         --presence-color-border-base: var(--dt-color-neutral-transparent);

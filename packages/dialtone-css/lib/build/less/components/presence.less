@@ -23,11 +23,13 @@
   border-width: var(--presence-border-size);
   border-radius: var(--dt-size-radius-circle);
 
-  .d-recipe-leftbar-row--selected & {
+  .d-recipe-leftbar-row--selected &,
+  .dp-general-row--selected & {
     --presence-color-border-base: var(--dt-color-surface-secondary);
   }
 
-  .d-recipe-leftbar-row__primary:hover & {
+  .d-recipe-leftbar-row__primary:hover &,
+  .dp-general-row__primary:hover & {
     --presence-color-border-base: var(--dt-shell-action-color-background-primary-hover);
   }
 
