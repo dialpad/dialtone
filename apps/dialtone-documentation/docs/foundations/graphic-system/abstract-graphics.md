@@ -18,7 +18,7 @@ download_url: "https://drive.google.com/open?id=1dWhUFvyoJdKXLsHMHPe05cej62hHPNp
     </div>
   </div>
 
-  <div class="d-d-grid d-g-400 d-g-cols4 d-ai-start">
+  <div class="d-d-grid d-g-400 d-g-cols1 md:d-g-cols2 lg:d-g-cols4 d-ai-start">
     <figure>
       <img src="/assets/images/graphics-abstract--01.png" alt="" class="d-d-block d-w100p d-bar-500">
     </figure>
