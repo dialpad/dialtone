@@ -12,6 +12,7 @@
  *   DLT-3283  slot renames: titleOverride→header, labelSlot→label, headingSlot→heading
  *   DLT-3284  title/titleId → headerText/headerId props (banner, notice, toast, modal)
  *   DLT-3159  label-visible → show-label (checkbox, combobox, input, select-menu, toggle, etc.)
+ *   DLT-3160  checkbox-group: selectedValues → modelValue; @input/@change → @update:model-value on form inputs
  *   DLT-3100  rootClass removed — warns with file locations, cannot auto-migrate
  *
  * Usage:
@@ -87,6 +88,9 @@ const COMPONENT_PROP_RENAMES = {
   'dt-select-menu': { 'label-visible': 'show-label' },
   'dt-toggle': { 'label-visible': 'show-label' },
   'dt-radio-group': { 'label-visible': 'show-label' },
+  'dt-checkbox-group': { 'selected-values': 'model-value' },
+  'dt-link': { kind: 'tone' },
+  'dt-popover': { 'hide-on-click': 'close-on-click' },
 };
 
 // Removed class props per component: old-prop → class attribute directly
@@ -110,15 +114,24 @@ const INVERTED_BOOL_PROPS = {
   'dt-notice': { 'hide-close': 'show-close', 'hide-icon': 'show-icon', 'hide-action': 'show-action' },
   'dt-toast': { 'hide-close': 'show-close', 'hide-icon': 'show-icon', 'hide-action': 'show-action' },
   'dt-filter-pill': { 'hide-clear': 'show-clear' },
+  'dt-notice-action': { 'hide-close': 'show-close', 'hide-action': 'show-action' },
+  'dt-pagination': { 'hide-edges': 'show-edges' },
+  'dt-segmented-control': { 'hide-divider': 'show-divider' },
+  'dt-rich-text-editor': { 'prevent-typing': 'allow-typing', 'hide-link-bubble-menu': 'show-link-bubble-menu' },
+  'dt-recipe-message-input': { 'prevent-typing': 'allow-typing' },
+  'dt-recipe-contact-centers-row': { 'hide-actions': 'show-actions' },
 };
 
-// Prop value renames applied to any dt-* component (kind and validation-state)
+// Prop value renames applied to any dt-* component
 const PROP_VALUE_RENAMES = [
   { prop: 'kind', oldValue: 'danger', newValue: 'critical' },
   { prop: 'kind', oldValue: 'error', newValue: 'critical' },
   { prop: 'kind', oldValue: 'success', newValue: 'positive' },
   { prop: 'validation-state', oldValue: 'error', newValue: 'critical' },
   { prop: 'validation-state', oldValue: 'success', newValue: 'positive' },
+  { prop: 'type', oldValue: 'success', newValue: 'positive' },
+  { prop: 'banner-kind', oldValue: 'error', newValue: 'critical' },
+  { prop: 'banner-kind', oldValue: 'success', newValue: 'positive' },
 ];
 
 // Slot renames — applied globally (names are unique enough across the system)
@@ -127,6 +140,28 @@ const SLOT_RENAMES = [
   { old: 'labelSlot', new: 'label' },
   { old: 'headingSlot', new: 'heading' },
 ];
+
+// v-model arg renames per component (null = drop arg, becomes default v-model)
+const VMODEL_ARG_RENAMES = {
+  'dt-checkbox-group': { 'selected-values': null, selectedValues: null },
+};
+
+// @update:* event renames per component
+const UPDATE_EVENT_RENAMES = {
+  'dt-checkbox-group': { 'selected-values': 'model-value', selectedValues: 'modelValue' },
+};
+
+// Component events removed from emits and replaced by @update:model-value
+const EMIT_EVENT_RENAMES = {
+  'dt-input': { input: 'update:model-value' },
+  'dt-radio': { input: 'update:model-value' },
+  'dt-radio-group': { input: 'update:model-value' },
+  'dt-select-menu': { input: 'update:model-value', change: 'update:model-value' },
+  'dt-toggle': { change: 'update:model-value' },
+  'dt-combobox-multi-select': { input: 'update:model-value' },
+  'dt-rich-text-editor': { input: 'update:model-value' },
+  'dt-input-group': { input: 'update:model-value' },
+};
 
 // Regex matching any Dialtone component opening tag (multi-line safe)
 const DT_TAG_RE = /<(dt-[\w-]+|Dt\w+)\b([\s\S]*?)(?:\/?>)/g;
@@ -344,6 +379,53 @@ function applyRootClassRename (tag, canonical) {
 }
 
 /**
+ * `v-model:oldArg` → `v-model` and `@update:oldEvent` → `@update:newEvent` per component.
+ */
+function applyVModelAndEventRenames (tag, canonical) {
+  const vmodelMap = VMODEL_ARG_RENAMES[canonical];
+  const eventMap = UPDATE_EVENT_RENAMES[canonical];
+  if (!vmodelMap && !eventMap) return { tag, count: 0 };
+
+  let result = tag;
+  let count = 0;
+
+  if (vmodelMap) {
+    for (const [oldArg, newArg] of Object.entries(vmodelMap)) {
+      const before = result;
+      const replacement = newArg ? `v-model:${newArg}` : 'v-model';
+      result = result.replace(new RegExp(`v-model:${escapeRe(oldArg)}\\b`, 'g'), replacement);
+      if (result !== before) count++;
+    }
+  }
+
+  if (eventMap) {
+    for (const [oldEvt, newEvt] of Object.entries(eventMap)) {
+      const before = result;
+      result = result.replace(new RegExp(`@update:${escapeRe(oldEvt)}\\b`, 'g'), `@update:${newEvt}`);
+      if (result !== before) count++;
+    }
+  }
+
+  return { tag: result, count };
+}
+
+/**
+ * Legacy `@input` / `@change` component events → `@update:model-value`.
+ */
+function applyEmitEventRenames (tag, canonical) {
+  const eventMap = EMIT_EVENT_RENAMES[canonical];
+  if (!eventMap) return { tag, count: 0 };
+  let result = tag;
+  let count = 0;
+  for (const [oldEvt, newEvt] of Object.entries(eventMap)) {
+    const before = result;
+    result = result.replace(new RegExp(`@${escapeRe(oldEvt)}\\b`, 'g'), `@${newEvt}`);
+    if (result !== before) count++;
+  }
+  return { tag: result, count };
+}
+
+/**
  * Warn about removed rootClass / root-class prop on components not in ROOT_CLASS_RENAMES.
  */
 function detectRootClass (tag, tagName, canonical) {
@@ -376,22 +458,28 @@ function transformTag (fullTag, tagName) {
   let count = 0;
   const warnings = [];
 
-  const r1 = applyShowToOpen(tag, canonical);
+  const r1 = applyVModelAndEventRenames(tag, canonical);
   tag = r1.tag; count += r1.count;
 
-  const r2 = applyPropRenames(tag, canonical);
+  const r2 = applyShowToOpen(tag, canonical);
   tag = r2.tag; count += r2.count;
 
-  const r3 = applyInvertedBoolProps(tag, canonical);
+  const r3 = applyPropValueRenames(tag);
   tag = r3.tag; count += r3.count;
-  warnings.push(...r3.warnings);
 
-  const r4 = applyPropValueRenames(tag);
+  const r4 = applyPropRenames(tag, canonical);
   tag = r4.tag; count += r4.count;
 
-  const r5 = applyRootClassRename(tag, canonical);
+  const r5 = applyInvertedBoolProps(tag, canonical);
   tag = r5.tag; count += r5.count;
   warnings.push(...r5.warnings);
+
+  const r6 = applyRootClassRename(tag, canonical);
+  tag = r6.tag; count += r6.count;
+  warnings.push(...r6.warnings);
+
+  const r7 = applyEmitEventRenames(tag, canonical);
+  tag = r7.tag; count += r7.count;
 
   warnings.push(...detectRootClass(tag, tagName, canonical));
 
@@ -486,10 +574,15 @@ function printHelp () {
 Usage: npx dialtone-migrate-props [options]
 
 Migrates Dialtone component prop/slot/event breaking changes introduced in
-DLT-3100, DLT-3157, DLT-3159, DLT-3161, DLT-3282, DLT-3283, DLT-3284.
+DLT-3100, DLT-3157, DLT-3159, DLT-3160, DLT-3161, DLT-3282, DLT-3283, DLT-3284.
 
 Migrations applied:
   clickable              → interactive           (dt-avatar)
+  selected-values        → model-value           (dt-checkbox-group)
+  v-model:selected-values → v-model             (dt-checkbox-group)
+  @update:selected-values → @update:model-value (dt-checkbox-group)
+  @input                 → @update:model-value  (dt-input, dt-radio, dt-radio-group, dt-combobox-multi-select, dt-rich-text-editor, dt-input-group)
+  @change                → @update:model-value  (dt-toggle, dt-select-menu)
   show                   → open                  (dt-modal, dt-toast, dt-tooltip)
   @update:show           → @update:open          (dt-modal, dt-toast, dt-tooltip)
   v-model:show           → v-model:open          (dt-modal, dt-toast, dt-tooltip)
@@ -497,16 +590,26 @@ Migrations applied:
   title-id               → header-id             (dt-banner, dt-notice, dt-toast)
   banner-title           → banner-header-text    (dt-modal)
   label-visible          → show-label            (dt-checkbox, dt-combobox, dt-input, etc.)
-  hide-close             → :show-close="false"   (dt-banner, dt-chip, dt-modal, dt-notice, dt-toast)
+  hide-close             → :show-close="false"   (dt-banner, dt-chip, dt-modal, dt-notice, dt-notice-action, dt-toast)
   hide-icon              → :show-icon="false"    (dt-banner, dt-notice, dt-toast)
-  hide-action            → :show-action="false"  (dt-banner, dt-notice, dt-toast)
+  hide-action            → :show-action="false"  (dt-banner, dt-notice, dt-notice-action, dt-toast)
   hide-clear             → :show-clear="false"   (dt-filter-pill)
+  hide-edges             → :show-edges="false"   (dt-pagination)
+  hide-divider           → :show-divider="false" (dt-segmented-control)
+  prevent-typing         → :allow-typing="false" (dt-rich-text-editor, dt-recipe-message-input)
+  hide-link-bubble-menu  → :show-link-bubble-menu="false" (dt-rich-text-editor)
+  hide-actions           → :show-actions="false" (dt-recipe-contact-centers-row)
+  hide-on-click          → close-on-click        (dt-popover, same semantics — not inverted)
   root-class             → class                 (dt-input, dt-checkbox, dt-radio, dt-select-menu, dt-breadcrumb-item, dt-split-button)
   wrapper-class          → class                 (dt-toggle, dt-feed-item-pill)
   container-class        → class                 (dt-card)
   kind="danger"          → kind="critical"       (any dt-* component)
   kind="error"           → kind="critical"       (any dt-* component)
   kind="success"         → kind="positive"       (any dt-* component)
+  type="success"         → type="positive"       (dt-badge)
+  kind                   → tone                  (dt-link, with value renames applied in same pass)
+  banner-kind="error"    → banner-kind="critical" (dt-modal)
+  banner-kind="success"  → banner-kind="positive" (dt-modal)
   validation-state="error"   → validation-state="critical"
   validation-state="success" → validation-state="positive"
   #titleOverride         → #header               (slots)

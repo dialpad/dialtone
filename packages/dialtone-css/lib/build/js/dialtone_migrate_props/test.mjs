@@ -246,6 +246,89 @@ describe('hide-action → :show-action="false"', () => {
   });
 });
 
+describe('dt-notice-action hide-close / hide-action (DLT-3159 gap)', () => {
+  it('converts bare hide-close on dt-notice-action', () => {
+    const { transformed } = transformContent('<dt-notice-action hide-close />');
+    assert.equal(transformed, '<dt-notice-action :show-close="false" />');
+  });
+
+  it('converts bare hide-action on dt-notice-action', () => {
+    const { transformed } = transformContent('<dt-notice-action hide-action />');
+    assert.equal(transformed, '<dt-notice-action :show-action="false" />');
+  });
+});
+
+describe('DLT-3159 additional inverted bool props', () => {
+  it('dt-pagination: converts bare hide-edges', () => {
+    const { transformed } = transformContent('<dt-pagination hide-edges />');
+    assert.equal(transformed, '<dt-pagination :show-edges="false" />');
+  });
+
+  it('dt-pagination: removes :hide-edges="false"', () => {
+    const { transformed } = transformContent('<dt-pagination :hide-edges="false" />');
+    assert.equal(transformed, '<dt-pagination  />');
+  });
+
+  it('dt-segmented-control: converts bare hide-divider', () => {
+    const { transformed } = transformContent('<dt-segmented-control hide-divider />');
+    assert.equal(transformed, '<dt-segmented-control :show-divider="false" />');
+  });
+
+  it('dt-rich-text-editor: converts bare prevent-typing', () => {
+    const { transformed } = transformContent('<dt-rich-text-editor prevent-typing />');
+    assert.equal(transformed, '<dt-rich-text-editor :allow-typing="false" />');
+  });
+
+  it('dt-rich-text-editor: converts :prevent-typing="true"', () => {
+    const { transformed } = transformContent('<dt-rich-text-editor :prevent-typing="true" />');
+    assert.equal(transformed, '<dt-rich-text-editor :allow-typing="false" />');
+  });
+
+  it('dt-rich-text-editor: removes :prevent-typing="false"', () => {
+    const { transformed } = transformContent('<dt-rich-text-editor :prevent-typing="false" />');
+    assert.equal(transformed, '<dt-rich-text-editor  />');
+  });
+
+  it('dt-rich-text-editor: converts bare hide-link-bubble-menu', () => {
+    const { transformed } = transformContent('<dt-rich-text-editor hide-link-bubble-menu />');
+    assert.equal(transformed, '<dt-rich-text-editor :show-link-bubble-menu="false" />');
+  });
+
+  it('dt-recipe-message-input: converts bare prevent-typing', () => {
+    const { transformed } = transformContent('<dt-recipe-message-input prevent-typing />');
+    assert.equal(transformed, '<dt-recipe-message-input :allow-typing="false" />');
+  });
+
+  it('dt-recipe-message-input: does not migrate hide-link-bubble-menu (internal data, not a prop)', () => {
+    const input = '<dt-recipe-message-input hide-link-bubble-menu />';
+    const { transformed, count } = transformContent(input);
+    assert.equal(transformed, input);
+    assert.equal(count, 0);
+  });
+
+  it('dt-recipe-contact-centers-row: converts bare hide-actions', () => {
+    const { transformed } = transformContent('<dt-recipe-contact-centers-row hide-actions />');
+    assert.equal(transformed, '<dt-recipe-contact-centers-row :show-actions="false" />');
+  });
+});
+
+describe('dt-popover hideOnClick → closeOnClick (same semantics, DLT-3159)', () => {
+  it('renames hide-on-click prop', () => {
+    const { transformed } = transformContent('<dt-popover hide-on-click />');
+    assert.equal(transformed, '<dt-popover close-on-click />');
+  });
+
+  it('renames :hideOnClick binding', () => {
+    const { transformed } = transformContent('<dt-popover :hideOnClick="shouldClose" />');
+    assert.equal(transformed, '<dt-popover :closeOnClick="shouldClose" />');
+  });
+
+  it('renames :hide-on-click binding', () => {
+    const { transformed } = transformContent('<dt-popover :hide-on-click="val" />');
+    assert.equal(transformed, '<dt-popover :close-on-click="val" />');
+  });
+});
+
 describe('hide-clear → :show-clear="false" (dt-filter-pill)', () => {
   it('converts bare hide-clear', () => {
     const { transformed } = transformContent('<dt-filter-pill hide-clear />');
@@ -278,9 +361,9 @@ describe('kind value renames', () => {
     assert.equal(transformed, '<dt-badge kind="positive" />');
   });
 
-  it('renames bound :kind="\'danger\'"', () => {
-    const { transformed } = transformContent('<dt-link :kind="\'danger\'" />');
-    assert.equal(transformed, '<dt-link :kind="\'critical\'" />');
+  it('renames bound :kind="\'danger\'" on a non-link component', () => {
+    const { transformed } = transformContent('<dt-button :kind="\'danger\'" />');
+    assert.equal(transformed, '<dt-button :kind="\'critical\'" />');
   });
 
   it('does not alter kind="muted"', () => {
@@ -292,6 +375,79 @@ describe('kind value renames', () => {
 
   it('does not alter kind="default"', () => {
     const input = '<dt-badge kind="default" />';
+    const { transformed, count } = transformContent(input);
+    assert.equal(transformed, input);
+    assert.equal(count, 0);
+  });
+});
+
+describe('DtBadge type value renames (DLT-3157)', () => {
+  it('renames type="success" → type="positive" on dt-badge', () => {
+    const { transformed } = transformContent('<dt-badge type="success" />');
+    assert.equal(transformed, '<dt-badge type="positive" />');
+  });
+
+  it('renames :type="\'success\'" bound value on dt-badge', () => {
+    const { transformed } = transformContent('<dt-badge :type="\'success\'" />');
+    assert.equal(transformed, '<dt-badge :type="\'positive\'" />');
+  });
+
+  it('does not alter type="warning"', () => {
+    const input = '<dt-badge type="warning" />';
+    const { transformed, count } = transformContent(input);
+    assert.equal(transformed, input);
+    assert.equal(count, 0);
+  });
+});
+
+describe('DtLink kind → tone prop rename (DLT-3157)', () => {
+  it('renames kind prop to tone on dt-link', () => {
+    const { transformed } = transformContent('<dt-link kind="muted" />');
+    assert.equal(transformed, '<dt-link tone="muted" />');
+  });
+
+  it('renames kind="danger" and prop to tone="critical"', () => {
+    const { transformed, count } = transformContent('<dt-link kind="danger" />');
+    assert.equal(transformed, '<dt-link tone="critical" />');
+    assert.equal(count, 2);
+  });
+
+  it('renames kind="success" and prop to tone="positive"', () => {
+    const { transformed } = transformContent('<dt-link kind="success" />');
+    assert.equal(transformed, '<dt-link tone="positive" />');
+  });
+
+  it('renames :kind bound binding to :tone', () => {
+    const { transformed } = transformContent('<dt-link :kind="linkTone" />');
+    assert.equal(transformed, '<dt-link :tone="linkTone" />');
+  });
+
+  it('does not rename kind on non-link components', () => {
+    const input = '<dt-button kind="critical" />';
+    const { transformed, count } = transformContent(input);
+    assert.equal(transformed, input);
+    assert.equal(count, 0);
+  });
+});
+
+describe('DtModal banner-kind value renames (DLT-3157)', () => {
+  it('renames banner-kind="error" → banner-kind="critical"', () => {
+    const { transformed } = transformContent('<dt-modal banner-kind="error" />');
+    assert.equal(transformed, '<dt-modal banner-kind="critical" />');
+  });
+
+  it('renames banner-kind="success" → banner-kind="positive"', () => {
+    const { transformed } = transformContent('<dt-modal banner-kind="success" />');
+    assert.equal(transformed, '<dt-modal banner-kind="positive" />');
+  });
+
+  it('renames camelCase bannerKind="error"', () => {
+    const { transformed } = transformContent('<dt-modal bannerKind="error" />');
+    assert.equal(transformed, '<dt-modal bannerKind="critical" />');
+  });
+
+  it('does not alter banner-kind="info"', () => {
+    const input = '<dt-modal banner-kind="info" />';
     const { transformed, count } = transformContent(input);
     assert.equal(transformed, input);
     assert.equal(count, 0);
@@ -449,6 +605,118 @@ describe('root-class auto-migration', () => {
   it('handles PascalCase DtInput', () => {
     const { transformed } = transformContent('<DtInput root-class="d-w100p" />');
     assert.equal(transformed, '<DtInput class="d-w100p" />');
+  });
+});
+
+// ---------------------------------------------------------------------------
+// DLT-3160 — dt-checkbox-group: selectedValues → modelValue
+// ---------------------------------------------------------------------------
+
+describe('selectedValues → modelValue (dt-checkbox-group)', () => {
+  it('renames :selected-values binding', () => {
+    const { transformed } = transformContent('<dt-checkbox-group :selected-values="myArr" />');
+    assert.equal(transformed, '<dt-checkbox-group :model-value="myArr" />');
+  });
+
+  it('renames :selectedValues camelCase binding', () => {
+    const { transformed } = transformContent('<dt-checkbox-group :selectedValues="myArr" />');
+    assert.equal(transformed, '<dt-checkbox-group :modelValue="myArr" />');
+  });
+
+  it('converts v-model:selected-values to plain v-model', () => {
+    const { transformed } = transformContent('<dt-checkbox-group v-model:selected-values="myArr" />');
+    assert.equal(transformed, '<dt-checkbox-group v-model="myArr" />');
+  });
+
+  it('converts v-model:selectedValues to plain v-model', () => {
+    const { transformed } = transformContent('<dt-checkbox-group v-model:selectedValues="myArr" />');
+    assert.equal(transformed, '<dt-checkbox-group v-model="myArr" />');
+  });
+
+  it('renames @update:selected-values event', () => {
+    const { transformed } = transformContent('<dt-checkbox-group @update:selected-values="onUpdate" />');
+    assert.equal(transformed, '<dt-checkbox-group @update:model-value="onUpdate" />');
+  });
+
+  it('renames @update:selectedValues event', () => {
+    const { transformed } = transformContent('<dt-checkbox-group @update:selectedValues="onUpdate" />');
+    assert.equal(transformed, '<dt-checkbox-group @update:modelValue="onUpdate" />');
+  });
+
+  it('does not rename selected-values on other components', () => {
+    const input = '<dt-input :selected-values="myArr" />';
+    const { transformed, count } = transformContent(input);
+    assert.equal(transformed, input);
+    assert.equal(count, 0);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// DLT-3160 — @input / @change event renames
+// ---------------------------------------------------------------------------
+
+describe('@input → @update:model-value on form inputs', () => {
+  it('renames @input on dt-input', () => {
+    const { transformed } = transformContent('<dt-input @input="handleInput" />');
+    assert.equal(transformed, '<dt-input @update:model-value="handleInput" />');
+  });
+
+  it('renames @input on dt-radio', () => {
+    const { transformed } = transformContent('<dt-radio @input="onSelect" />');
+    assert.equal(transformed, '<dt-radio @update:model-value="onSelect" />');
+  });
+
+  it('renames @input on dt-radio-group', () => {
+    const { transformed } = transformContent('<dt-radio-group @input="onChange" />');
+    assert.equal(transformed, '<dt-radio-group @update:model-value="onChange" />');
+  });
+
+  it('renames @input on dt-combobox-multi-select', () => {
+    const { transformed } = transformContent('<dt-combobox-multi-select @input="onSearch" />');
+    assert.equal(transformed, '<dt-combobox-multi-select @update:model-value="onSearch" />');
+  });
+
+  it('renames @input on dt-rich-text-editor', () => {
+    const { transformed } = transformContent('<dt-rich-text-editor @input="onEdit" />');
+    assert.equal(transformed, '<dt-rich-text-editor @update:model-value="onEdit" />');
+  });
+
+  it('renames @input on dt-input-group', () => {
+    const { transformed } = transformContent('<dt-input-group @input="onGroup" />');
+    assert.equal(transformed, '<dt-input-group @update:model-value="onGroup" />');
+  });
+
+  it('does not rename @input on components not in the map', () => {
+    const input = '<dt-avatar @input="handler" />';
+    const { transformed, count } = transformContent(input);
+    assert.equal(transformed, input);
+    assert.equal(count, 0);
+  });
+});
+
+describe('@change → @update:model-value on toggle and select-menu', () => {
+  it('renames @change on dt-toggle', () => {
+    const { transformed } = transformContent('<dt-toggle @change="onToggle" />');
+    assert.equal(transformed, '<dt-toggle @update:model-value="onToggle" />');
+  });
+
+  it('renames @change on dt-select-menu', () => {
+    const { transformed } = transformContent('<dt-select-menu @change="onSelect" />');
+    assert.equal(transformed, '<dt-select-menu @update:model-value="onSelect" />');
+  });
+
+  it('renames both @input and @change on dt-select-menu', () => {
+    const input = '<dt-select-menu @input="onInput" @change="onChange" />';
+    const { transformed, count } = transformContent(input);
+    assert.equal(transformed, '<dt-select-menu @update:model-value="onInput" @update:model-value="onChange" />');
+    assert.equal(count, 2);
+  });
+
+  it('does not rename @change on components not in the map', () => {
+    const input = '<dt-banner @change="handler" />';
+    const { transformed, count } = transformContent(input);
+    assert.equal(transformed, input);
+    assert.equal(count, 0);
   });
 });
 
