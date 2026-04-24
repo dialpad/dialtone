@@ -16,26 +16,11 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 ### Default
 
 <code-well-header>
-  <example-tabs />
+  <example-tabs ref="defaultExample" />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-tablist" role="tablist" aria-label="Label Example Group">
-  <button id="dt-tab-1" class="d-tab d-tab--selected" role="tab" aria-selected="true" aria-controls="dt-panel-2" tabindex="0">First tab</button>
-  <button id="dt-tab-3" class="d-tab" role="tab" aria-selected="false" aria-controls="dt-panel-4" tabindex="-1">Second tab</button>
-  <button id="dt-tab-5" class="d-tab" role="tab" aria-selected="false" aria-controls="dt-panel-6" tabindex="-1">Third tab</button>
-</div>
-<div id="dt-panel-2" role="tabpanel" tabindex="0" aria-labelledby="dt-tab-1" aria-hidden="false">
-  <p>First tab content panel</p>
-</div>
-<div id="dt-panel-4" role="tabpanel" tabindex="0" aria-labelledby="dt-tab-3" aria-hidden="true" style="display: none;">
-  <p>Second tab content panel</p>
-</div>
-<div id="dt-panel-6" role="tabpanel" tabindex="0" aria-labelledby="dt-tab-5" aria-hidden="true" style="display: none;">
-  <p>Third tab content panel</p>
-</div>
-'
+:htmlCode="() => $refs.defaultExample"
 vueCode='
 <dt-tab-group label="Label Example Group">
   <template #tabs>
@@ -69,26 +54,11 @@ showHtmlWarning />
 Add a `d-tablist--no-border` to remove the bottom border of any tablist. Handy for small tablists and tablists serving as subtabs to a larger menu.
 
 <code-well-header>
-  <example-tabs borderless />
+  <example-tabs borderless ref="borderlessExample" />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-tablist d-tablist--no-border" role="tablist" aria-label="Label Example Group">
-  <button id="dt-tab-1" class="d-tab d-tab--selected" role="tab" aria-selected="true" aria-controls="dt-panel-2" tabindex="0">First tab</button>
-  <button id="dt-tab-3" class="d-tab" role="tab" aria-selected="false" aria-controls="dt-panel-4" tabindex="-1">Second tab</button>
-  <button id="dt-tab-5" class="d-tab" role="tab" aria-selected="false" aria-controls="dt-panel-6" tabindex="-1">Third tab</button>
-</div>
-<div id="dt-panel-2" role="tabpanel" tabindex="0" aria-labelledby="dt-tab-1" aria-hidden="false">
-  <p>First tab content panel</p>
-</div>
-<div id="dt-panel-4" role="tabpanel" tabindex="0" aria-labelledby="dt-tab-3" aria-hidden="true" style="display: none;">
-  <p>Second tab content panel</p>
-</div>
-<div id="dt-panel-6" role="tabpanel" tabindex="0" aria-labelledby="dt-tab-5" aria-hidden="true" style="display: none;">
-  <p>Third tab content panel</p>
-</div>
-'
+:htmlCode="() => $refs.borderlessExample"
 vueCode='
 <dt-tab-group label="Label Example Group" :borderless="true">
   <template #tabs>
@@ -123,26 +93,11 @@ showHtmlWarning />
 Add `d-tablist--inverted` when you want to display tabs on inverted background.
 
 <code-well-header bgclass="d-bgc-contrast">
-  <example-tabs inverted />
+  <example-tabs inverted ref="invertedExample" />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-tablist d-tablist--inverted" role="tablist" aria-label="Label Example Group">
-  <button id="dt-tab-1" class="d-tab d-tab--selected" role="tab" aria-selected="true" aria-controls="dt-panel-2" tabindex="0">First tab</button>
-  <button id="dt-tab-3" class="d-tab" role="tab" aria-selected="false" aria-controls="dt-panel-4" tabindex="-1">Second tab</button>
-  <button id="dt-tab-5" class="d-tab" role="tab" aria-selected="false" aria-controls="dt-panel-6" tabindex="-1">Third tab</button>
-</div>
-<div id="dt-panel-2" role="tabpanel" tabindex="0" aria-labelledby="dt-tab-1" aria-hidden="false">
-  <p>First tab content panel</p>
-</div>
-<div id="dt-panel-4" role="tabpanel" tabindex="0" aria-labelledby="dt-tab-3" aria-hidden="true" style="display: none;">
-  <p>Second tab content panel</p>
-</div>
-<div id="dt-panel-6" role="tabpanel" tabindex="0" aria-labelledby="dt-tab-5" aria-hidden="true" style="display: none;">
-  <p>Third tab content panel</p>
-</div>
-'
+:htmlCode="() => $refs.invertedExample"
 vueCode='
 <dt-tab-group label="Label Example Group" :inverted="true">
   <template #tabs>
@@ -175,26 +130,11 @@ showHtmlWarning />
 ### Disabled
 
 <code-well-header>
-  <example-tabs disabled />
+  <example-tabs disabled ref="disabledExample" />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-tablist" role="tablist" aria-label="Label Example Group">
-  <button id="dt-tab-1" class="d-tab d-tab--selected" role="tab" disabled aria-selected="true" aria-controls="dt-panel-2" tabindex="0">First tab</button>
-  <button id="dt-tab-3" class="d-tab" role="tab" disabled aria-selected="false" aria-controls="dt-panel-4" tabindex="-1">Second tab</button>
-  <button id="dt-tab-5" class="d-tab" role="tab" disabled aria-selected="false" aria-controls="dt-panel-6" tabindex="-1">Third tab</button>
-</div>
-<div id="dt-panel-2" role="tabpanel" tabindex="0" aria-labelledby="dt-tab-1" aria-hidden="false">
-  <p>First tab content panel</p>
-</div>
-<div id="dt-panel-4" role="tabpanel" tabindex="0" aria-labelledby="dt-tab-3" aria-hidden="true" style="display: none;">
-  <p>Second tab content panel</p>
-</div>
-<div id="dt-panel-6" role="tabpanel" tabindex="0" aria-labelledby="dt-tab-5" aria-hidden="true" style="display: none;">
-  <p>Third tab content panel</p>
-</div>
-'
+:htmlCode="() => $refs.disabledExample"
 vueCode='
 <dt-tab-group label="Label Example Group" :disabled="true">
   <template #tabs>
@@ -229,26 +169,11 @@ vueCode='
 ### Default
 
 <code-well-header>
-  <example-tabs />
+  <example-tabs ref="defaultSizeExample" />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-tablist" role="tablist" aria-label="Label Example Group">
-  <button id="dt-tab-1" class="d-tab d-tab--selected" role="tab" aria-selected="true" aria-controls="dt-panel-2" tabindex="0">First tab</button>
-  <button id="dt-tab-3" class="d-tab" role="tab" aria-selected="false" aria-controls="dt-panel-4" tabindex="-1">Second tab</button>
-  <button id="dt-tab-5" class="d-tab" role="tab" aria-selected="false" aria-controls="dt-panel-6" tabindex="-1">Third tab</button>
-</div>
-<div id="dt-panel-2" role="tabpanel" tabindex="0" aria-labelledby="dt-tab-1" aria-hidden="false">
-  <p>First tab content panel</p>
-</div>
-<div id="dt-panel-4" role="tabpanel" tabindex="0" aria-labelledby="dt-tab-3" aria-hidden="true" style="display: none;">
-  <p>Second tab content panel</p>
-</div>
-<div id="dt-panel-6" role="tabpanel" tabindex="0" aria-labelledby="dt-tab-5" aria-hidden="true" style="display: none;">
-  <p>Third tab content panel</p>
-</div>
-'
+:htmlCode="() => $refs.defaultSizeExample"
 vueCode='
 <dt-tab-group label="Label Example Group">
   <template #tabs>
@@ -280,26 +205,11 @@ showHtmlWarning />
 ### Small
 
 <code-well-header>
-  <example-tabs size="sm" />
+  <example-tabs size="sm" ref="smallExample" />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-tablist d-tablist--sm" role="tablist" aria-label="Label Example Group">
-  <button id="dt-tab-1" class="d-tab d-tab--selected" role="tab" aria-selected="true" aria-controls="dt-panel-2" tabindex="0">First tab</button>
-  <button id="dt-tab-3" class="d-tab" role="tab" aria-selected="false" aria-controls="dt-panel-4" tabindex="-1">Second tab</button>
-  <button id="dt-tab-5" class="d-tab" role="tab" aria-selected="false" aria-controls="dt-panel-6" tabindex="-1">Third tab</button>
-</div>
-<div id="dt-panel-2" role="tabpanel" tabindex="0" aria-labelledby="dt-tab-1" aria-hidden="false">
-  <p>First tab content panel</p>
-</div>
-<div id="dt-panel-4" role="tabpanel" tabindex="0" aria-labelledby="dt-tab-3" aria-hidden="true" style="display: none;">
-  <p>Second tab content panel</p>
-</div>
-<div id="dt-panel-6" role="tabpanel" tabindex="0" aria-labelledby="dt-tab-5" aria-hidden="true" style="display: none;">
-  <p>Third tab content panel</p>
-</div>
-'
+:htmlCode="() => $refs.smallExample"
 vueCode='
 <dt-tab-group label="Label Example Group" size="sm">
   <template #tabs>
@@ -336,26 +246,11 @@ showHtmlWarning />
 If you need to do some validation before changing tabs, you can use the `before-change` event. If the event handler is prevented, the tab change will be cancelled.
 
 <code-well-header>
-  <example-tabs validate />
+  <example-tabs validate ref="validationExample" />
 </code-well-header>
 
 <code-example-tabs
-htmlCode='
-<div class="d-tablist" role="tablist" aria-label="Label Example Group">
-  <button id="dt-tab-1" class="d-tab d-tab--selected" role="tab" aria-selected="true" aria-controls="dt-panel-2" tabindex="0">First tab</button>
-  <button id="dt-tab-3" class="d-tab" role="tab" aria-selected="false" aria-controls="dt-panel-4" tabindex="-1">Second tab</button>
-  <button id="dt-tab-5" class="d-tab" role="tab" aria-selected="false" aria-controls="dt-panel-6" tabindex="-1">Third tab</button>
-</div>
-<div id="dt-panel-2" role="tabpanel" tabindex="0" aria-labelledby="dt-tab-1" aria-hidden="false">
-  <p>First tab content panel</p>
-</div>
-<div id="dt-panel-4" role="tabpanel" tabindex="0" aria-labelledby="dt-tab-3" aria-hidden="true" style="display: none;">
-  <p>Second tab content panel</p>
-</div>
-<div id="dt-panel-6" role="tabpanel" tabindex="0" aria-labelledby="dt-tab-5" aria-hidden="true" style="display: none;">
-  <p>Third tab content panel</p>
-</div>
-'
+:htmlCode="() => $refs.validationExample"
 vueCode='
 <dt-tab-group
   label="Label Example Group"
