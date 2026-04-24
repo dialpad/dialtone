@@ -7,6 +7,7 @@ description: "DtAvatar has been updated as part of the Dialtone visual refresh. 
 
 > [!WARNING]
 >
+> - `clickable` prop **renamed** to `interactive`
 > - `iconSize` prop **removed** — icon size is now computed automatically from `size`
 > - Group avatars no longer forced to `xs` — they now respect the `size` prop
 > - Group count badge capping is size-aware: sizes 100–250 cap at `9+`, sizes 300+ cap at `99+`
@@ -81,6 +82,22 @@ If your group avatars were relying on the forced-`xs` behavior, you'll need to e
 **2. Count badge capping is now size-aware.**
 
 Small avatars (sizes 100–250) cap the displayed count at `9+`. Larger avatars (sizes 300+) cap at `99+`. Previously the cap was always `99+` regardless of size.
+
+## `clickable` → `interactive`
+
+The `clickable` prop has been renamed to `interactive` to more accurately describe its effect: the avatar renders as a `<button>`, becomes keyboard-focusable, and participates in the page's tab order.
+
+```html
+<!-- Before -->
+<dt-avatar full-name="Jane Doe" clickable @click="openProfile" />
+
+<!-- After -->
+<dt-avatar full-name="Jane Doe" interactive @click="openProfile" />
+```
+
+The [migration script](/guides/migration/component-props/#migration-script) (`dialtone-migrate-props`) handles this rename automatically.
+
+---
 
 ## `iconSize` Removed
 

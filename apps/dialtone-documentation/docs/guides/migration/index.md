@@ -31,12 +31,13 @@ Work through each applicable guide in order. Guides earlier in the list are prer
 | 8 | [Avatar Updates](./avatar-updates/) | **Yes** | Manual (grep) | `DtAvatar` size prop moves to numeric, `iconSize` removed, group avatar behavior changed. |
 | 9 | [Logical Naming](./logical-naming/) | Deprecation | `dialtone-migration-helper` | Slots, props, events: `left`/`right` → `start`/`end`. |
 | 10 | [Recipes to UI Kits](./recipes-to-ui-kits/) | **Yes** | Migration script | `DtRecipe*` components move to standalone `@dialpad/` UI Kit packages. |
+| 11 | [Component Props & Events](./component-props/) | **Yes** | `dialtone-migrate-props` | Value renames, `show`→`open`, `hide-*` inversion, `title`→`header-text`, event/slot renames, `rootClass` removal. |
 
 ### Framework
 
 | # | Guide | Breaking? | Tool | Summary |
 | --- | --- | --- | --- | --- |
-| 11 | [Vue 2 Removal](./vue2-removal/) | **Yes** | — | Vue 2 support dropped. Last Vue 2 version: `9.154.0`. |
+| 12 | [Vue 2 Removal](./vue2-removal/) | **Yes** | — | Vue 2 support dropped. Last Vue 2 version: `9.154.0`. |
 
 ## Quick Start
 
@@ -73,7 +74,10 @@ npx dialtone-migrate-tshirt-to-numeric --cwd ./src --yes
 npx dialtone-migration-helper --cwd ./src --force
 # Select "physical-to-logical"
 
-# 9. ESLint auto-fix pass
+# 9. Component props, events, and slots
+npx dialtone-migrate-props --cwd ./src --yes
+
+# 10. ESLint auto-fix pass
 npx eslint --fix "src/**/*.vue"
 ```
 
