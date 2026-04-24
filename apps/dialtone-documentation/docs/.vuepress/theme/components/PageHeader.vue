@@ -152,7 +152,7 @@
 
 <script setup>
 import { DtIconStorybookColor, DtIconFigma, DtIconGithub } from '@dialpad/dialtone-icons/vue';
-import { computed, ref } from 'vue';
+import { computed, onUnmounted, ref } from 'vue';
 import { usePageData, withBase } from 'vuepress/client';
 import { isExternalUrl } from '../utils/isExternalUrl';
 
@@ -176,6 +176,8 @@ function showCopiedFeedback () {
   clearTimeout(copiedTimeout);
   copiedTimeout = setTimeout(() => { showCopiedIcon.value = false; }, 2000);
 }
+
+onUnmounted(() => { clearTimeout(copiedTimeout); });
 
 async function onCopyMarkdownLink (close) {
   close?.();

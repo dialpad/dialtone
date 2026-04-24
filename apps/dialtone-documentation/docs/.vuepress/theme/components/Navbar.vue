@@ -6,14 +6,12 @@
   >
     <template v-for="link in navItems" :key="link.text">
       <dt-hovercard
-        v-if="hovercardMap[link.text].length"
-        :open="forceClosed === link.text ? false : null"
+        v-if="hovercardMap[link.text].length && dismissedKey !== link.text"
         placement="bottom-start"
         dialog-class="d-w-1000 d-p-0"
         padding="medium"
         transition="true"
         :offset="[-8, 8]"
-        @opened="onHovercardOpened(link.text, $event)"
       >
         <template #anchor>
           <dt-button v-bind="navButtonProps(link)">
@@ -281,7 +279,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, onUnmounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
 import { useThemeManager } from '../composables/useThemeManager';
@@ -292,16 +290,25 @@ const route = useRoute();
 const themeData = useThemeLocaleData();
 const showThemeSwitcher = __VUEPRESS_DEV__ || __DIALTONE_DEPLOY_PREVIEW__;
 
-// DtHovercard's hide() early-returns when content is focused (which clicking
-// a link inside does). Forcing `open=false` closes it, but with transition="true"
-// the fade-out keeps the content live for ~250ms — if we release control too
-// soon, mouseenter re-fires and the card pops back. Hold `forceClosed` until
-// @opened=false confirms the close completed.
-const forceClosed = ref(null);
-const dismissHovercard = (key) => { forceClosed.value = key; };
-const onHovercardOpened = (key, opened) => {
-  if (!opened && forceClosed.value === key) forceClosed.value = null;
+// Unmount the hovercard via v-if to guarantee instant dismissal on click —
+// bypasses DtHovercard's focus/transition/hover state entirely.
+// Reset on route change (so it can remount on the next page) or via a timer
+// fallback for same-page clicks that don't trigger navigation.
+const dismissedKey = ref(null);
+let resetTimer;
+const dismissHovercard = (key) => {
+  dismissedKey.value = key;
+  clearTimeout(resetTimer);
+  resetTimer = setTimeout(() => {
+    if (dismissedKey.value === key) dismissedKey.value = null;
+  }, 400);
 };
+watch(() => route.path, () => {
+  if (dismissedKey.value === null) return;
+  clearTimeout(resetTimer);
+  dismissedKey.value = null;
+});
+onUnmounted(() => clearTimeout(resetTimer));
 
 const navItems = [
   { text: 'Foundations', link: '/foundations/', group: 'foundations' },
