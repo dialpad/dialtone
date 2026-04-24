@@ -18,49 +18,10 @@
     </dt-button>
   </dt-stack>
   <dt-stack direction="row" gap="50">
-    <dt-button
-      v-dt-tooltip="'Storybook'"
-      hidden
-      class="d-btn d-btn--muted d-btn--icon-only dialtone-shell-btn"
-      href="https://dialtone.dialpad.com/vue"
-      target="_blank"
-      rel="noreferrer noopener"
-      kind="muted"
-      importance="clear"
-      aria-label="Open Storybook"
-    >
-      <template #startIcon>
-        <dt-icon-storybook size="400" />
-      </template>
-    </dt-button>
-    <dt-button
-      v-dt-tooltip="'Github Repository'"
-      hidden
-      class="d-btn d-btn--muted d-btn--icon-only dialtone-shell-btn"
-      href="https://github.com/dialpad/dialtone"
-      target="_blank"
-      rel="noreferrer noopener"
-      kind="muted"
-      importance="clear"
-      aria-label="Open GitHub repository"
-    >
-      <template #startIcon>
-        <dt-icon-github size="400" />
-      </template>
-    </dt-button>
-    <dt-button
-      v-dt-tooltip="'Codepen Template'"
-      hidden
-      class="d-btn d-btn--muted d-btn--icon-only dialtone-shell-btn"
-      href="https://codepen.io/pen?template=oNmoRqO"
-      target="_blank"
-      rel="noopener noreferrer"
-      kind="muted"
-      importance="clear"
-      aria-label="Open Codepen template"
-    >
-      <template #startIcon>
-        <dt-icon-codepen size="400" />
+    <dt-button to="/dialtone/whats-new/" class="d-mie-100" size="200">
+      What's New
+      <template #startIcon="{ iconSize }">
+        <dt-icon name="megaphone" :size="iconSize" />
       </template>
     </dt-button>
     <dt-dropdown
@@ -80,7 +41,7 @@
         >
           <template #startIcon>
             <dt-icon
-              size="400"
+              size="300"
               name="satisfied-filled"
             />
           </template>
@@ -192,7 +153,7 @@
         >
           <template #startIcon>
             <dt-icon
-              size="400"
+              size="300"
               :name="currentModeIconName"
             />
           </template>
@@ -271,7 +232,7 @@
       <template #startIcon>
         <dt-icon
           name="search"
-          size="400"
+          size="300"
         />
       </template>
     </dt-button>
@@ -280,7 +241,6 @@
 
 <script setup>
 import { useRoute } from 'vue-router';
-import { DtIconStorybook, DtIconGithub, DtIconCodepen } from '@dialpad/dialtone-icons/vue';
 import { useThemeManager } from '../composables/useThemeManager';
 
 defineEmits(['search']);
