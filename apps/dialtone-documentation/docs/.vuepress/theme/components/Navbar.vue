@@ -18,7 +18,11 @@
     </dt-button>
   </dt-stack>
   <dt-stack direction="row" gap="50">
-    <dt-button to="/dialtone/whats-new/" class="d-mie-100" size="200">
+    <dt-button
+      to="/dialtone/whats-new/"
+      class="d-mie-100"
+      size="200"
+    >
       What's New
       <template #startIcon="{ iconSize }">
         <dt-icon name="megaphone" :size="iconSize" />
