@@ -50,9 +50,10 @@ reviews:
           type: "user"
       instructions: "Assign when the PR modifies CI workflows under .github/workflows/."
 
-  # Suppress comments on generated and build artifacts.
-  # Excluded files are still readable by CodeRabbit for context.
-  # Docs: https://docs.coderabbit.ai/guides/review-instructions
+  # Controls which files CodeRabbit includes or excludes from review using glob patterns.
+  # Patterns prefixed with ! exclude files from being commented on; unprefixed patterns include them.
+  # Excluded files are still readable by CodeRabbit for context — they just won't receive review comments.
+  # Docs: https://docs.coderabbit.ai/reference/configuration
   path_filters:
     - "**"
     - "!dist/**"
@@ -66,7 +67,6 @@ reviews:
     - "!packages/dialtone-tokens/token_transformer/**"
     - "!packages/dialtone-vue*/storybook-static/**"   # Storybook build output
     - "!packages/dialtone-vue*/functions/generated/**"
-    - "!.claude/**"
 
   path_instructions:
     # Vue components
