@@ -267,19 +267,17 @@ vueCode='
       Third tab
     </dt-tab>
   </template>
-  <template #default>
-    <div>
-      <dt-tab-panel id="2" tab-id="1">
-        <p>First tab content panel</p>
-      </dt-tab-panel>
-      <dt-tab-panel id="4" tab-id="3">
-        <p>Second tab content panel</p>
-      </dt-tab-panel>
-      <dt-tab-panel id="6" tab-id="5">
-        <p>Third tab content panel</p>
-      </dt-tab-panel>
-    </div>
-  </template>
+  <div>
+    <dt-tab-panel id="2" tab-id="1">
+      <p>First tab content panel</p>
+    </dt-tab-panel>
+    <dt-tab-panel id="4" tab-id="3">
+      <p>Second tab content panel</p>
+    </dt-tab-panel>
+    <dt-tab-panel id="6" tab-id="5">
+      <p>Third tab content panel</p>
+    </dt-tab-panel>
+  </div>
 </dt-tab-group>
 <script setup>
   function confirmBeforeLeave (event) {
