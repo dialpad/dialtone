@@ -16,10 +16,10 @@ pageClass: dialpad-design-home
   <gradient-hero />
 </dt-box>
 <dt-box as="section" class="d-m-auto">
-  <dt-box as="article" border-width-block-start="100" border-color="subtle" padding-block="800">
+  <dt-box as="article" padding-block="800">
     <showcase-carousel />
   </dt-box>
-  <dt-box as="article" border-width-block-start="100" border-color="subtle" padding-block="800" padding-inline="800" surface="secondary-opaque">
+  <dt-box as="article" padding-block="800" padding-inline="800" surface="secondary-opaque">
     <dt-stack gap="550" align="center">
       <dt-box inline-size="200" style="filter: drop-shadow(rgba(0, 0, 0, 0.25) 0px 25px 30px);">
         <svg-loader name="home--dialtone-badge" />
@@ -32,7 +32,7 @@ pageClass: dialpad-design-home
       </dt-box>
     </dt-stack>
   </dt-box>
-  <dt-box as="article" border-width-block-start="100" border-color="subtle" padding-block="800" padding-inline="800">
+  <dt-box as="article" padding-block="800" padding-inline="800">
     <dt-stack gap="700" align="center">
       <dt-stack class="home-section-inline" :direction="{ 'default': 'column', 'md': 'row' }" gap="600" justify="center">
         <router-link to="./foundations/brand/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
@@ -74,7 +74,7 @@ pageClass: dialpad-design-home
       </dt-stack>
     </dt-stack>
   </dt-box>
-  <dt-box as="article" border-width-block-start="100" border-color="subtle" padding-block="800" padding-inline="800" surface="secondary-opaque">
+  <dt-box as="article" padding-block="800" padding-inline="800" surface="secondary-opaque">
     <dt-stack gap="700" align="center">
       <dt-stack class="home-section-inline" :direction="{ 'default': 'column', 'md': 'row' }" gap="600" justify="center">
         <router-link to="./components/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
@@ -116,7 +116,7 @@ pageClass: dialpad-design-home
       </dt-stack>
     </dt-stack>
   </dt-box>
-  <dt-box as="article" border-width-block-start="100" border-color="subtle" padding-block="800" padding-inline="800">
+  <dt-box as="article" padding-block="800" padding-inline="800">
     <dt-stack gap="700" align="center">
       <dt-stack class="home-section-inline" gap="550" align="center">
         <dt-text as="h2" kind="headline" size="xxl" wrap="balance" strength="normal" class="home-section-title">What's New</dt-text>
