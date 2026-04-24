@@ -35,17 +35,29 @@ pageClass: dialpad-design-home
   <dt-box as="article" border-width-block-start="100" border-color="subtle" padding-block="800" padding-inline="800">
     <dt-stack gap="700" align="center">
       <dt-stack class="home-section-inline" :direction="{ 'default': 'column', 'md': 'row' }" gap="600" justify="center">
-        <router-link to="./foundations/brand/" class="d-d-block">
+        <router-link to="./foundations/brand/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
           <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-foundations-01" />
+          <dt-box padding-inline="150">
+            <dt-text as="p" kind="body" size="300">Brand</dt-text>
+          </dt-box>
         </router-link>
-        <router-link to="./foundations/colors/" class="d-d-block">
+        <router-link to="./foundations/colors/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
           <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-foundations-02" />
+          <dt-box padding-inline="150">
+            <dt-text as="p" kind="body" size="300">Colors</dt-text>
+          </dt-box>
         </router-link>
-        <router-link to="./foundations/typography/" class="d-d-block">
+        <router-link to="./foundations/typography/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
           <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-foundations-03" />
+          <dt-box padding-inline="150">
+            <dt-text as="p" kind="body" size="300">Typography</dt-text>
+          </dt-box>
         </router-link>
-        <router-link to="./foundations/motion/" class="d-d-block">
+        <router-link to="./foundations/motion/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
           <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-foundations-04" />
+          <dt-box padding-inline="150">
+            <dt-text as="p" kind="body" size="300">Motion</dt-text>
+          </dt-box>
         </router-link>
       </dt-stack>
       <dt-stack class="home-section-inline" gap="550" align="center" justify="center">
@@ -65,17 +77,29 @@ pageClass: dialpad-design-home
   <dt-box as="article" border-width-block-start="100" border-color="subtle" padding-block="800" padding-inline="800" surface="secondary-opaque">
     <dt-stack gap="700" align="center">
       <dt-stack class="home-section-inline" :direction="{ 'default': 'column', 'md': 'row' }" gap="600" justify="center">
-        <router-link to="./components/" class="d-d-block">
+        <router-link to="./components/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
           <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-system--01" />
+          <dt-box padding-inline="150">
+            <dt-text as="p" kind="body" size="300">Components</dt-text>
+          </dt-box>
         </router-link>
-        <router-link to="./utilities/" class="d-d-block">
+        <router-link to="./utilities/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
           <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-system--02" />
+          <dt-box padding-inline="150">
+            <dt-text as="p" kind="body" size="300">CSS Utilities</dt-text>
+          </dt-box>
         </router-link>
-        <router-link to="./tokens/" class="d-d-block">
+        <router-link to="./tokens/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
           <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-system--03" />
+          <dt-box padding-inline="150">
+            <dt-text as="p" kind="body" size="300">Design Tokens</dt-text>
+          </dt-box>
         </router-link>
-        <router-link to="./guides/content/" class="d-d-block">
+        <router-link to="./ui-kits/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
           <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-system--04" />
+          <dt-box padding-inline="150">
+            <dt-text as="p" kind="body" size="300">UI Kits</dt-text>
+          </dt-box>
         </router-link>
       </dt-stack>
       <dt-stack class="home-section-inline" gap="550" align="center" justify="center">
