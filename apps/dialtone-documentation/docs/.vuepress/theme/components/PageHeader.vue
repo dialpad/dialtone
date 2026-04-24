@@ -141,7 +141,7 @@
         kind="body"
         tone="tertiary"
         wrap="pretty"
-        class="d-my-200 d-fs-300"
+        class="d-my-300 d-fs-300"
       >
         {{ $frontmatter.description }}
       </dt-text>
