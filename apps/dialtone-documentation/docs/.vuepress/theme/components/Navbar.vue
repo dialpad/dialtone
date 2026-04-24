@@ -4,18 +4,63 @@
     direction="row"
     gap="50"
   >
-    <dt-button
-      v-for="link in navItems"
-      :key="link.text"
-      :to="link.link"
-      kind="muted"
-      importance="clear"
-      :size="400"
-      class="d-fw-normal"
-      :active="isActiveLink(link.link)"
-    >
-      {{ link.text }}
-    </dt-button>
+    <template v-for="link in navItems" :key="link.text">
+      <dt-hovercard
+        v-if="hovercardItems(link).length"
+        :open="forceClosed === link.text ? false : null"
+        placement="bottom-start"
+        dialog-class="d-w-1000 d-p-0"
+        padding="medium"
+        transition="true"
+        :offset="[-8, 8]"
+      >
+        <template #anchor>
+          <dt-button
+            :to="link.link"
+            kind="muted"
+            importance="clear"
+            :size="400"
+            class="d-fw-normal"
+            :active="isActiveLink(link.link)"
+          >
+            {{ link.text }}
+          </dt-button>
+        </template>
+        <template #content>
+          <dt-box class="d-d-grid d-g-100 d-g-cols2 d-ai-start">
+            <dt-button
+              v-for="item in hovercardItems(link)"
+              :key="item.link"
+              size="200"
+              kind="muted"
+              importance="clear"
+              :to="item.link"
+              @click="dismissHovercard(link.text)"
+            >
+              <dt-stack gap="50">
+                <dt-text kind="headline" size="300" ton>
+                  {{ item.text }}
+                </dt-text>
+                <dt-text kind="body" size="200" tone="muted">
+                  {{ item.description }}
+                </dt-text>
+              </dt-stack>
+            </dt-button>
+          </dt-box>
+        </template>
+      </dt-hovercard>
+      <dt-button
+        v-else
+        :to="link.link"
+        kind="muted"
+        importance="clear"
+        :size="400"
+        class="d-fw-normal"
+        :active="isActiveLink(link.link)"
+      >
+        {{ link.text }}
+      </dt-button>
+    </template>
   </dt-stack>
   <dt-stack direction="row" gap="50">
     <dt-button
@@ -244,21 +289,48 @@
 </template>
 
 <script setup>
+import { nextTick, ref } from 'vue';
 import { useRoute } from 'vue-router';
+import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
 import { useThemeManager } from '../composables/useThemeManager';
 
 defineEmits(['search']);
 
 const route = useRoute();
+const themeData = useThemeLocaleData();
 const showThemeSwitcher = __VUEPRESS_DEV__ || __DIALTONE_DEPLOY_PREVIEW__;
 
-// Top-level navigation items
+// Clicking an inner link focuses it, which causes DtHovercard's hide() to
+// early-return. Flipping `open` to false forces a close; resetting to null
+// restores hover-controlled behavior.
+const forceClosed = ref(null);
+const dismissHovercard = (key) => {
+  forceClosed.value = key;
+  nextTick(() => { forceClosed.value = null; });
+};
+
+// Top-level navigation items. `group` maps to topLevelGroups key in site-nav.json
+// and supplies the hovercard's immediate children. Omit `group` (e.g. Downloads)
+// to render a plain button with no hovercard.
 const navItems = [
-  { text: 'Foundations', link: '/foundations/' },
-  { text: 'Design System', link: '/dialtone/' },
-  { text: 'UI Kits', link: '/ui-kits/' },
+  { text: 'Foundations', link: '/foundations/', group: 'foundations' },
+  { text: 'Design System', link: '/dialtone/', group: 'dialtone' },
+  { text: 'UI Kits', link: '/ui-kits/', group: 'ui-kits' },
   { text: 'Downloads', link: '/downloads/' },
 ];
+
+const hovercardItems = (link) => {
+  if (!link.group) return [];
+  const sections = themeData.value.sidebar?.topLevelGroups?.[link.group]?.sections;
+  if (!sections) return [];
+  const keys = Object.keys(sections);
+  // Groups with a single section (Foundations, UI Kits) surface that section's items directly.
+  // Groups split across multiple sections (Design System) surface each section's top-level entry.
+  const items = keys.length === 1
+    ? sections[keys[0]]
+    : keys.map(k => Array.isArray(sections[k]) ? sections[k][0] : null);
+  return (items || []).filter(item => item?.link && item?.description);
+};
 
 // Use theme manager composable with theme switching enabled
 const {
