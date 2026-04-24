@@ -477,7 +477,7 @@ function buildDownloadsSectionLines (section) {
     topLinks.push(`[${section.downloadAllLabel}](${section.downloadAllUrl})`);
   }
   if (topLinks.length > 0) {
-    lines.push(topLinks.join(' · '), '');
+    lines.push(topLinks.join(' | '), '');
   }
 
   const linkedItems = (section.items || []).filter(i => i.label && i.downloadUrl);

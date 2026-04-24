@@ -2,6 +2,7 @@
 title: Our Icon
 description: Guidelines for using the Dialpad logomark without the wordmark.
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=17330-1170
+download_url: /downloads/#icon
 keywords: ["app icon","favicon","brand mark"]
 ---
 
@@ -26,7 +27,7 @@ keywords: ["app icon","favicon","brand mark"]
       <h2 class="d-docsite--header-3 d-mbs-0">Versions</h2>
       <p class="d-docsite--paragraph">In most instances, the primary full brand gradient version should be used.</p>
       <p class="d-docsite--paragraph">The Meetings app icon should only be used when referencing the meetings app.</p>
-      <p class="d-docsite--paragraph"><dt-link href="#">Download icons</dt-link></p>
+      <p class="d-docsite--paragraph"><dt-link to="/downloads/">Download icons</dt-link></p>
     </div>
     <div class="d-gc2">
       <img src="/assets/images/icon--versions.png" alt="" class="d-bar-500 d-d-block d-w100p" />

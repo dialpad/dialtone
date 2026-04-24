@@ -22,9 +22,7 @@
         <dt-stack direction="row" gap="100">
           <dt-button
             v-if="$frontmatter.download_url"
-            :href="$frontmatter.download_url"
-            target="_blank"
-            rel="noopener noreferrer"
+            v-bind="downloadButtonAttrs"
             :size="200"
             kind="muted"
             importance="outlined"
@@ -158,6 +156,16 @@ import { computed, ref } from 'vue';
 import { usePageData, withBase } from 'vuepress/client';
 
 const page = usePageData();
+
+// External download URLs open in a new tab; internal paths route via <router-link>
+// so in-app hash/anchor links (e.g. "/downloads/#graphic") stay in the SPA.
+const downloadButtonAttrs = computed(() => {
+  const url = page.value.frontmatter?.download_url;
+  if (!url) return {};
+  return /^https?:\/\//.test(url)
+    ? { href: url, target: '_blank', rel: 'noopener noreferrer' }
+    : { to: url };
+});
 
 const showCopiedIcon = ref(false);
 let copiedTimeout;

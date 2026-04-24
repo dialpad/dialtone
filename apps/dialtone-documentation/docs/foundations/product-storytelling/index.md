@@ -3,7 +3,7 @@ title: Product Storytelling
 description: Patterns and guidance for communicating product value, feature moments, and user journeys.
 thumb: true
 figma_url: https://www.figma.com/design/PLQoed9VsIUxWgUB5Fkmnh/%F0%9F%8E%9B%EF%B8%8F-Brand-UI-Library?node-id=6003-2435&t=gtQZTaTOQoTPIX6b-1
-download_url: https://drive.google.com/open?id=1e88uwJUeNGVd153-_60A3S3UFVmB0b7C&usp=drive_fs
+download_url: /downloads/#product-storytelling
 keywords: ["narrative", "feature", "value proposition"]
 ---
 

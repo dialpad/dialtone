@@ -2,6 +2,7 @@
 title: Gradient
 description: The Dialpad gradient is one of the key elements of the brand. It signifies optimism, innovation and the power of the Dialpad platform. Always use the approved gradient assets to assure consistency.
 thumb: true
+download_url: /downloads/#gradient
 keywords: ["gradients","color transition","linear gradient","radial gradient"]
 ---
 

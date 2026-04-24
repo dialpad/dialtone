@@ -1,6 +1,7 @@
 ---
 title: Gradient in Product
 description: Applying gradients in product surfaces and components via Dialtone's gradient utility classes.
+download_url: /downloads/#gradient
 keywords: ["gradient", "product", "background", "utility", "linear gradient"]
 ---
 

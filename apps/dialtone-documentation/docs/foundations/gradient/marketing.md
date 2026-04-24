@@ -1,8 +1,8 @@
 ---
 title: Gradient in Marketing
 description: Using the Dialpad gradient in marketing communications. The gradient signifies optimism, innovation, and the power of the Dialpad platform.
+download_url: /downloads/#gradient
 keywords: ["gradient", "marketing", "brand", "color transition", "linear gradient"]
-download_url: "https://drive.google.com/drive/folders/1TPCpFLnFtSgjtU_BVyEuLXhjH0cJr-KH?usp=drive_link"
 ---
 
 <dt-stack gap="650" class="d-my-600">
