@@ -6,7 +6,7 @@
   >
     <template v-for="link in navItems" :key="link.text">
       <dt-hovercard
-        v-if="hovercardItems(link).length"
+        v-if="hovercardMap[link.text].length"
         :open="forceClosed === link.text ? false : null"
         placement="bottom-start"
         dialog-class="d-w-1000 d-p-0"
@@ -16,21 +16,14 @@
         @opened="onHovercardOpened(link.text, $event)"
       >
         <template #anchor>
-          <dt-button
-            :to="link.link"
-            kind="muted"
-            importance="clear"
-            :size="400"
-            class="d-fw-normal"
-            :active="isActiveLink(link.link)"
-          >
+          <dt-button v-bind="navButtonProps(link)">
             {{ link.text }}
           </dt-button>
         </template>
         <template #content>
           <dt-box class="d-d-grid d-g-100 d-g-cols2 d-ai-start">
             <dt-button
-              v-for="item in hovercardItems(link)"
+              v-for="item in hovercardMap[link.text]"
               :key="item.link"
               size="300"
               kind="muted"
@@ -44,7 +37,7 @@
               </template>
               <dt-box padding-inline-start="50">
                 <dt-stack gap="50">
-                  <dt-text kind="headline" size="300" ton>
+                  <dt-text kind="headline" size="300">
                     {{ item.text }}
                   </dt-text>
                   <dt-text kind="body" size="200" tone="muted">
@@ -56,15 +49,7 @@
           </dt-box>
         </template>
       </dt-hovercard>
-      <dt-button
-        v-else
-        :to="link.link"
-        kind="muted"
-        importance="clear"
-        :size="400"
-        class="d-fw-normal"
-        :active="isActiveLink(link.link)"
-      >
+      <dt-button v-else v-bind="navButtonProps(link)">
         {{ link.text }}
       </dt-button>
     </template>
@@ -296,7 +281,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
 import { useThemeManager } from '../composables/useThemeManager';
@@ -307,20 +292,17 @@ const route = useRoute();
 const themeData = useThemeLocaleData();
 const showThemeSwitcher = __VUEPRESS_DEV__ || __DIALTONE_DEPLOY_PREVIEW__;
 
-// Clicking an inner link focuses it, which causes DtHovercard's hide() to
-// early-return. Flipping `open` to false forces the popover closed.
-// With transition="true" the fade-out takes ~250ms, during which the content
-// is still live and will re-fire mouseenter. So we hold forceClosed until the
-// popover's own @opened=false event confirms the close has completed.
+// DtHovercard's hide() early-returns when content is focused (which clicking
+// a link inside does). Forcing `open=false` closes it, but with transition="true"
+// the fade-out keeps the content live for ~250ms — if we release control too
+// soon, mouseenter re-fires and the card pops back. Hold `forceClosed` until
+// @opened=false confirms the close completed.
 const forceClosed = ref(null);
 const dismissHovercard = (key) => { forceClosed.value = key; };
 const onHovercardOpened = (key, opened) => {
   if (!opened && forceClosed.value === key) forceClosed.value = null;
 };
 
-// Top-level navigation items. `group` maps to topLevelGroups key in site-nav.json
-// and supplies the hovercard's immediate children. Omit `group` (e.g. Downloads)
-// to render a plain button with no hovercard.
 const navItems = [
   { text: 'Foundations', link: '/foundations/', group: 'foundations' },
   { text: 'Design System', link: '/dialtone/', group: 'dialtone' },
@@ -328,18 +310,31 @@ const navItems = [
   { text: 'Downloads', link: '/downloads/' },
 ];
 
-const hovercardItems = (link) => {
+const buildHovercardItems = (link) => {
   if (!link.group) return [];
   const sections = themeData.value.sidebar?.topLevelGroups?.[link.group]?.sections;
   if (!sections) return [];
   const keys = Object.keys(sections);
-  // Groups with a single section (Foundations, UI Kits) surface that section's items directly.
-  // Groups split across multiple sections (Design System) surface each section's top-level entry.
+  // Single-section groups (Foundations, UI Kits) surface the section's items;
+  // multi-section groups (Design System) surface each section's top-level entry.
   const items = keys.length === 1
     ? sections[keys[0]]
     : keys.map(k => Array.isArray(sections[k]) ? sections[k][0] : null);
   return (items || []).filter(item => item?.link && item?.description);
 };
+
+const hovercardMap = computed(() =>
+  Object.fromEntries(navItems.map(link => [link.text, buildHovercardItems(link)])),
+);
+
+const navButtonProps = (link) => ({
+  to: link.link,
+  kind: 'muted',
+  importance: 'clear',
+  size: 400,
+  class: 'd-fw-normal',
+  active: isActiveLink(link.link),
+});
 
 // Use theme manager composable with theme switching enabled
 const {

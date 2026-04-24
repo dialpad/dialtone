@@ -88,7 +88,7 @@
               </dt-stack>
             </div>
             <dt-button
-              v-else-if="isExternalLink(subItem.link)"
+              v-else-if="isExternalUrl(subItem.link)"
               :href="subItem.link"
               target="_blank"
               rel="noopener noreferrer"
@@ -188,6 +188,7 @@
 <script setup>
 import { computed, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
+import { isExternalUrl } from '../utils/isExternalUrl';
 
 const props = defineProps({
   isSinglePage: {
@@ -213,8 +214,6 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['toggle']);
-
-const isExternalLink = (link) => /^https?:\/\//.test(link);
 
 const subItems = computed(() => {
   return props.item?.children || [];

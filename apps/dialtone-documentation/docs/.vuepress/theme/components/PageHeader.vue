@@ -154,6 +154,7 @@
 import { DtIconStorybookColor, DtIconFigma, DtIconGithub } from '@dialpad/dialtone-icons/vue';
 import { computed, ref } from 'vue';
 import { usePageData, withBase } from 'vuepress/client';
+import { isExternalUrl } from '../utils/isExternalUrl';
 
 const page = usePageData();
 
@@ -162,7 +163,7 @@ const page = usePageData();
 const downloadButtonAttrs = computed(() => {
   const url = page.value.frontmatter?.download_url;
   if (!url) return {};
-  return /^https?:\/\//.test(url)
+  return isExternalUrl(url)
     ? { href: url, target: '_blank', rel: 'noopener noreferrer' }
     : { to: url };
 });
