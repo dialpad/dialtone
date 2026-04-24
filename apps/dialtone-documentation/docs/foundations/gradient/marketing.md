@@ -21,7 +21,7 @@ download_url: "https://drive.google.com/drive/folders/1TPCpFLnFtSgjtU_BVyEuLXhjH
   <div class="d-d-grid d-g-600 d-g-cols1 md:d-g-cols3 d-ai-center">
     <div>
       <h2 class="d-docsite--header-3">Dark Gradient</h2>
-      <p class="d-docsite--paragraph">For more technical communications, such as explaining AI platforms our systems, use the dark version of the gradient.</p>
+      <p class="d-docsite--paragraph">For more technical communications, such as explaining AI platforms or systems, use the dark version of the gradient.</p>
     </div>
     <div class="d-gc2">
       <figure>

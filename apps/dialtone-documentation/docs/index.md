@@ -9,116 +9,133 @@ pageClass: dialpad-design-home
   options=""
 />
 
-<header-overlay @search="openSearch" />
-<gradient-hero />
-<dt-stack class="d-m-auto">
-  <dt-stack gap="550" class="d-py-800 d-pbs-150 d-ai-center d-of-hidden d-w100p">
+<dt-box>
+  <header-overlay @search="openSearch" />
+</dt-box>
+<dt-box>
+  <gradient-hero />
+</dt-box>
+<dt-stack as="section" class="d-m-auto">
+  <dt-box as="article" border-width-block-start="100" border-color="subtle" padding-block="800">
     <showcase-carousel />
-  </dt-stack>
-  <dt-stack gap="550" class="d-py-800 d-px-800 d-pbe-150 d-ai-center">
-    <dt-stack style="filter: drop-shadow(rgba(0, 0, 0, 0.25) 0px 25px 30px);" class="d-w114">
-      <svg-loader name="home--dialtone-badge" />
+  </dt-box>
+  <dt-box as="article" border-width-block-start="100" border-color="subtle" padding-block="800" padding-inline="800" surface="secondary-opaque">
+    <dt-stack gap="550" align="center">
+      <dt-box inline-size="200" style="filter: drop-shadow(rgba(0, 0, 0, 0.25) 0px 25px 30px);">
+        <svg-loader name="home--dialtone-badge" />
+      </dt-box>
+      <dt-box max-inline-size="1200">
+        <dt-text as="h2" kind="headline" size="xxl" wrap="balance" strength="normal" class="home-section-title">Setting the tone</dt-text>
+      </dt-box>
+      <dt-box max-inline-size="1200">
+        <dt-text as="p" align="center" class="home-section-description">Dialtone is Dialpad’s shared design language—shaping everything from our product interfaces to our marketing. It defines how our brand looks, feels, and behaves across every touchpoint. Built on principles of clarity, consistency, and accessibility, Dialtone keeps our visual identity cohesive and unmistakably Dialpad.</dt-text>
+      </dt-box>
     </dt-stack>
-    <h2 class="d-headline--xxl d-ff-expressive d-wmx764" style="font-size: 48px;font-family:var(--dt-font-family-expressive); text-wrap: balance; max-width: 1400px; font-weight: var(--dt-font-weight-regular);">Setting the tone.</h2>
-    <p class="d-ta-center d-docsite--paragraph d-m-0 d-wmx764" style="text-wrap: balance; font-size: 24px; font-weight: 400;">Dialtone is Dialpad’s shared design language—shaping everything from our product interfaces to our marketing. It defines how our brand looks, feels, and behaves across every touchpoint. Built on principles of clarity, consistency, and accessibility, Dialtone keeps our visual identity cohesive and unmistakably Dialpad.</p>
-  </dt-stack>
-  <dt-stack gap="700" class="d-py-800 d-px-800 d-pbs-150 d-ai-center d-bgc-secondary-opaque">
-    <dt-stack style="max-width: 1400px;" direction="row" gap="600" class="d-w100p d-jc-center">
-      <router-link to="./foundations/brand/" class="d-d-block">
-        <svg-loader class="d-bar-500 d-w100p" name="home-foundations-01" />
-      </router-link>
-      <router-link to="./foundations/colors/" class="d-d-block">
-        <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-foundations-02" />
-      </router-link>
-      <router-link to="./foundations/typography/" class="d-d-block">
-        <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-foundations-03" />
-      </router-link>
-      <router-link to="./foundations/motion/" class="d-d-block">
-        <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-foundations-04" />
-      </router-link>
-    </dt-stack>
-    <dt-stack style="max-width: 1400px;" gap="550" class="d-ai-center d-jc-center">
-      <h2 class="d-headline--xxl d-ff-expressive" style="font-size: 48px;font-family:var(--dt-font-family-expressive); text-wrap: balance; max-width: 1400px; font-weight: var(--dt-font-weight-regular);">Foundations</h2>
-      <p class="d-ta-center d-docsite--paragraph d-m-0 d-wmx764" style="text-wrap: balance; font-size: 24px; font-family:var(--dt-font-family-expressive);">The building blocks of Dialtone... Color, Type, Icons, and more.</p>
-      <p class="d-ta-center d-docsite--paragraph d-m-0 d-wmx764">
+  </dt-box>
+  <dt-box as="article" border-width-block-start="100" border-color="subtle" padding-block="800" padding-inline="800">
+    <dt-stack gap="700" align="center">
+      <dt-stack class="home-section-inline" :direction="{ 'default': 'column', 'md': 'row' }" gap="600" justify="center">
+        <router-link to="./foundations/brand/" class="d-d-block">
+          <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-foundations-01" />
+        </router-link>
+        <router-link to="./foundations/colors/" class="d-d-block">
+          <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-foundations-02" />
+        </router-link>
+        <router-link to="./foundations/typography/" class="d-d-block">
+          <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-foundations-03" />
+        </router-link>
+        <router-link to="./foundations/motion/" class="d-d-block">
+          <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-foundations-04" />
+        </router-link>
+      </dt-stack>
+      <dt-stack class="home-section-inline" gap="550" align="center" justify="center">
+        <dt-text as="h2" kind="headline" size="xxl" wrap="balance" strength="normal" class="home-section-title">Foundations</dt-text>
+        <dt-box max-inline-size="1200">
+          <dt-text as="p" align="center" class="home-section-description">The building blocks of Dialtone... Color, Type, Icons, and more.</dt-text>
+        </dt-box>
         <dt-button size="lg" to="./foundations/">
           View Foundations
           <template #endIcon>
             <dt-icon name="arrow-right" size="300" />
           </template>
         </dt-button>
-      </p>
+      </dt-stack>
     </dt-stack>
-  </dt-stack>
-  <dt-stack gap="700" class="d-py-800 d-px-800 d-pbe-150 d-ai-center d-bgc-secondary-opaque">
-    <dt-stack style="max-width: 1400px" direction="row" gap="600" class="d-w100p d-jc-center">
-      <router-link to="./components/" class="d-d-block">
-        <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-system--01" />
-      </router-link>
-      <router-link to="./utilities/" class="d-d-block">
-        <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-system--02" />
-      </router-link>
-      <router-link to="./tokens/" class="d-d-block">
-        <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-system--03" />
-      </router-link>
-      <router-link to="./guides/content/" class="d-d-block">
-        <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-system--04" />
-      </router-link>
-    </dt-stack>
-    <dt-stack style="max-width: 1400px" gap="550" class="d-ai-center d-jc-center">
-      <h2 class="d-headline--xxl d-ff-expressive" style="font-size: 48px;font-family:var(--dt-font-family-expressive); text-wrap: balance; max-width: 1400px; font-weight: var(--dt-font-weight-regular);">Design System</h2>
-      <p class="d-ta-center d-docsite--paragraph d-m-0 d-wmx764" style="text-wrap: balance;  font-size: 24px; font-family:var(--dt-font-family-expressive)">Build with Dialtone Components, Design Tokens, CSS Utilities, and more.</p>
-      <p class="d-ta-center d-docsite--paragraph d-m-0 d-wmx764">
+  </dt-box>
+  <dt-box as="article" border-width-block-start="100" border-color="subtle" padding-block="800" padding-inline="800" surface="secondary-opaque">
+    <dt-stack gap="700" align="center">
+      <dt-stack class="home-section-inline" :direction="{ 'default': 'column', 'md': 'row' }" gap="600" justify="center">
+        <router-link to="./components/" class="d-d-block">
+          <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-system--01" />
+        </router-link>
+        <router-link to="./utilities/" class="d-d-block">
+          <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-system--02" />
+        </router-link>
+        <router-link to="./tokens/" class="d-d-block">
+          <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-system--03" />
+        </router-link>
+        <router-link to="./guides/content/" class="d-d-block">
+          <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-system--04" />
+        </router-link>
+      </dt-stack>
+      <dt-stack class="home-section-inline" gap="550" align="center" justify="center">
+        <dt-text as="h2" kind="headline" size="xxl" wrap="balance" strength="normal" class="home-section-title">Design System</dt-text>
+        <dt-box max-inline-size="1200">
+          <dt-text as="p" align="center" class="home-section-description">Build with Dialtone Components, Design Tokens, CSS Utilities, and more.</dt-text>
+        </dt-box>
         <dt-button :size="400" to="./dialtone/">
           View all Documentation
           <template #endIcon>
             <dt-icon name="arrow-right" size="300" />
           </template>
         </dt-button>
-      </p>
+      </dt-stack>
     </dt-stack>
-  </dt-stack>
-  <dt-stack gap="700" class="d-py-800 d-px-800 d-pbs-150 d-ai-center">
-    <dt-stack style="max-width: 1400px" gap="550" class="d-ai-center">
-      <h2 class="d-headline--xxl d-ff-expressive" style="font-size: 48px;font-family:var(--dt-font-family-expressive); text-wrap: balance; max-width: 1400px; font-weight: var(--dt-font-weight-regular);">What's New</h2>
-      <p class="d-ta-center d-docsite--paragraph d-m-0 d-wmx764" style="text-wrap: balance; font-size: 24px; font-family:var(--dt-font-family-expressive)">The latest from Dialpad Design.</p>
-      <p class="d-ta-center d-docsite--paragraph d-m-0 d-wmx764">
+  </dt-box>
+  <dt-box as="article" border-width-block-start="100" border-color="subtle" padding-block="800" padding-inline="800">
+    <dt-stack gap="700" align="center">
+      <dt-stack class="home-section-inline" gap="550" align="center">
+        <dt-text as="h2" kind="headline" size="xxl" wrap="balance" strength="normal" class="home-section-title">What's New</dt-text>
+        <dt-box max-inline-size="1200">
+          <dt-text as="p" align="center" class="home-section-description">The latest from Dialpad Design.</dt-text>
+        </dt-box>
         <dt-button :size="400" to="./dialtone/whats-new/">
           View all
           <template #endIcon>
             <dt-icon name="arrow-right" size="300" />
           </template>
         </dt-button>
-      </p>
-    </dt-stack>
-    <dt-stack
-      style="max-width: 1400px"
-      gap="600"
-      class="d-w100p"
-      align="start"
-      justify="center"
-      :direction="{ 'default': 'column', 'md': 'row' }"
-    >
+      </dt-stack>
       <dt-stack
-        v-for="post in $page.blogPosts.sort(sortHandler).slice(0, 3)"
-        :key="post.posted"
+        style="max-width: 1400px"
+        gap="600"
         class="d-w100p"
+        align="start"
+        justify="center"
+        :direction="{ 'default': 'column', 'md': 'row' }"
       >
-        <router-link :to="`/dialtone/whats-new/posts/${post.posted}`" class="d-d-block d-td-none">
-          <dt-stack gap="300">
-            <dt-link class="d-d-inline">
-              <dt-text as="h3" kind="headline" :size="300">{{ post.heading }}</dt-text>
-            </dt-link>
-            <dt-text as="time" kind="body" :size="100" tone="tertiary">{{ post.author }} &middot; {{ formatDate(post.posted) }}</dt-text>
-            <dt-text as="p" kind="body" :size="300" tone="primary" wrap="pretty">{{ post.excerpt }}</dt-text>
-          </dt-stack>
-        </router-link>
+        <dt-stack
+          v-for="post in $page.blogPosts.sort(sortHandler).slice(0, 3)"
+          :key="post.posted"
+          class="d-w100p"
+          align="start"
+        >
+          <router-link :to="`/dialtone/whats-new/posts/${post.posted}`" class="d-d-block d-td-none">
+            <dt-stack gap="100">
+              <dt-link class="d-d-inline">
+                <dt-text as="h3" kind="headline" :size="400">{{ post.heading }}</dt-text>
+              </dt-link>
+              <dt-text as="time" kind="body" :size="200" tone="tertiary">{{ post.author }} &middot; {{ formatDate(post.posted) }}</dt-text>
+              <dt-text as="p" kind="body" :size="300" tone="primary" wrap="pretty" max-lines="3" :title="post.excerpt">{{ post.excerpt }}</dt-text>
+            </dt-stack>
+          </router-link>
+        </dt-stack>
       </dt-stack>
     </dt-stack>
-  </dt-stack>
+  </dt-box>
 </dt-stack>
-<dt-stack class="gradient-overlay gradient-overlay--footer d-h628 d-ai-center d-jc-center">
-  <dt-stack class="d-w764 d-wmx100p d-pie-200">
+<dt-stack align="center" justify="center" class="gradient-overlay gradient-overlay--footer d-h-1000">
+  <dt-stack class="d-w-1200 d-wmx100p d-pie-200">
     <div class="footer-dialpad-design">
       <div class="footer-dialpad-design__light">
         <svg-loader name="footer-dialpad-design--light" />
@@ -133,6 +150,21 @@ pageClass: dialpad-design-home
 <style lang="less">
 [data-dt-mode="dark"] .dialpad-design-home {
   --dt-shell-color-surface-default: var(--dt-color-purple-50);
+}
+
+.home-section-title {
+  font-size: 48px;
+  font-family: var(--dt-font-family-expressive);
+}
+
+.home-section-description {
+  text-wrap: balance;
+  font-size: 24px;
+  font-weight: 300;
+}
+
+.home-section-inline {
+  inline-size: 100%;
 }
 
 .gradient-overlay {
