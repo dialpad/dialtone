@@ -15,7 +15,7 @@ pageClass: dialpad-design-home
 <dt-box>
   <gradient-hero />
 </dt-box>
-<dt-stack as="section" class="d-m-auto">
+<dt-box as="section" class="d-m-auto">
   <dt-box as="article" border-width-block-start="100" border-color="subtle" padding-block="800">
     <showcase-carousel />
   </dt-box>
@@ -133,7 +133,7 @@ pageClass: dialpad-design-home
       </dt-stack>
     </dt-stack>
   </dt-box>
-</dt-stack>
+</dt-box>
 <dt-stack align="center" justify="center" class="gradient-overlay gradient-overlay--footer d-h-1000">
   <dt-stack class="d-w-1200 d-wmx100p d-pie-200">
     <div class="footer-dialpad-design">
@@ -209,7 +209,6 @@ pageClass: dialpad-design-home
 [data-dt-mode="light"] .footer-dialpad-design__dark {
   display: none;
 }
-
 </style>
 
 <script setup>
@@ -234,7 +233,7 @@ const openSearch = () => {
   docSearchBtn.value?.children[0]?.click();
 };
 
-// Add page-specific class to body
+// Mirror the pageClass frontmatter onto <body> for global styles.
 onMounted(() => {
   document.body.classList.add('dialpad-design-home');
 });
@@ -243,24 +242,21 @@ onUnmounted(() => {
   document.body.classList.remove('dialpad-design-home');
 });
 
-// Mouse-driven gradient position with smoothing
+// Mouse-driven gradient position with eased interpolation.
 onMounted(() => {
   let currentPositionX = 50; // Start at center
   let targetPositionX = 50;
   let currentPositionY = 100; // Start at bottom
   let targetPositionY = 100;
-  let animationId = null;
+  let animationId;
 
   const gradientOverlay = document.querySelector('.gradient-overlay');
 
   const animate = () => {
-    // Smooth interpolation for X
+    // Ease current toward target at 10% per frame (on both axes).
     currentPositionX += (targetPositionX - currentPositionX) * 0.1;
-
-    // Smooth interpolation for Y
     currentPositionY += (targetPositionY - currentPositionY) * 0.1;
 
-    // Update CSS variables
     if (gradientOverlay) {
       gradientOverlay.style.setProperty('--grad-position-x', `${currentPositionX}%`);
       gradientOverlay.style.setProperty('--grad-position-y', `${currentPositionY}%`);
@@ -270,137 +266,118 @@ onMounted(() => {
   };
 
   const handleMouseMove = (e) => {
-    // Get mouse X position as percentage of viewport width
     const mouseX = (e.clientX / window.innerWidth) * 100;
 
-    // Parallax effect: gradient moves at 30% of mouse movement from center
-    // This creates a subtle "lagging" effect
-    const parallaxFactor = 0.1; // Adjust this to control how much the gradient follows (0.1 = very subtle, 0.5 = more responsive)
-    const offsetFromCenter = mouseX - 50; // How far mouse is from center
-    targetPositionX = 50 + (offsetFromCenter * parallaxFactor); // Gradient position relative to center
+    // Subtle parallax — gradient tracks at 10% of mouse offset from center.
+    // (0.1 = very subtle, 0.5 = more responsive.)
+    const parallaxFactor = 0.1;
+    const offsetFromCenter = mouseX - 50;
+    targetPositionX = 50 + (offsetFromCenter * parallaxFactor);
 
-    // Calculate distance from center (0 to 1) based on actual mouse position
-    const distanceFromCenter = Math.abs(mouseX - 50) / 50;
-
-    // Map distance to Y position: 100% at center, up to 120% at edges
+    // Y lifts from 100% at center up to 120% at the viewport edges.
+    const distanceFromCenter = Math.abs(mouseX - 50) / 50; // 0 at center, 1 at edge
     targetPositionY = 100 + (distanceFromCenter * 20);
   };
 
-  // Start animation loop
   animate();
-
-  // Add mouse move listener
   window.addEventListener('mousemove', handleMouseMove);
 
-  // Cleanup on unmount
   onUnmounted(() => {
     window.removeEventListener('mousemove', handleMouseMove);
-    if (animationId) {
-      cancelAnimationFrame(animationId);
-    }
+    cancelAnimationFrame(animationId);
   });
 });
 
-// Scroll-driven effects
+// Scroll-driven effects — rAF-throttled so the two window scroll handlers don't thrash layout.
 onMounted(() => {
   const gradientOverlay = document.querySelector('.gradient-overlay');
   const header = document.querySelector('.dialtone-header--home');
   let lastScrollY = window.scrollY;
+  let ticking = false;
 
   if (!gradientOverlay) return;
 
-  const handleScroll = () => {
-    // Get the height of the gradient overlay (100vh)
+  const update = () => {
     const overlayHeight = gradientOverlay.offsetHeight;
-
-    // Get current scroll position
     const scrollY = window.scrollY;
 
-    // Calculate opacity based on scroll position
-    // When scrollY is 0, opacity is 0
-    // When scrollY equals overlayHeight, opacity is 1
+    // Overlay fades in across its scroll range: 0 at top → 1 when fully scrolled past.
     const overlayOpacity = Math.min(Math.max(scrollY / overlayHeight, 0), 1);
 
-    // Calculate text opacity - starts at 0.6 and fades to 0 as you scroll
-    // Text fades out faster than overlay appears (completes at 50% scroll)
+    // Text starts at 0.6 and fades out twice as fast — done by 50% scroll.
     const textOpacity = Math.max(0.6 - (scrollY / (overlayHeight * 0.5)) * 0.6, 0);
 
-    // Calculate text translation - moves down 0 to 50px as you scroll
-    // Reaches maximum translation when element scrolls out of view
+    // Text slides down 0–325px over the overlay's scroll range.
     const scrollProgress = Math.min(scrollY / overlayHeight, 1);
     const textTranslateY = scrollProgress * 325;
 
-    // Update the CSS variables
     gradientOverlay.style.setProperty('--overlay-opacity', overlayOpacity);
     gradientOverlay.style.setProperty('--text-opacity', textOpacity);
     gradientOverlay.style.setProperty('--text-translate-y', `${textTranslateY}px`);
 
-    // Header visibility logic
     if (header) {
       const isScrollingUp = scrollY < lastScrollY;
-
-      // Always show header when scrolling up
       if (isScrollingUp) {
         header.classList.remove('dialtone-header--off-canvas');
       } else {
-        // Only hide header when scrolling down AND gradient is out of view
+        // Only hide the header when scrolling DOWN and the gradient is out of view.
         const gradientRect = gradientOverlay.getBoundingClientRect();
         const isGradientInView = gradientRect.bottom > 0;
-
         if (!isGradientInView) {
           header.classList.add('dialtone-header--off-canvas');
         }
       }
     }
 
-    // Update last scroll position
     lastScrollY = scrollY;
+    ticking = false;
   };
 
-  // Add scroll event listener
+  const handleScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  };
+
   window.addEventListener('scroll', handleScroll, { passive: true });
+  update(); // Set initial state (e.g. when loaded at a non-zero scroll position).
 
-  // Call once on mount to set initial state
-  handleScroll();
-
-  // Cleanup on unmount
   onUnmounted(() => {
     window.removeEventListener('scroll', handleScroll);
   });
 });
 
-// Footer gradient parallax effect
+// Footer gradient parallax — rAF-throttled alongside the main scroll handler.
 onMounted(() => {
   const footerGradient = document.querySelector('.gradient-overlay--footer');
 
   if (!footerGradient) return;
 
-  const handleFooterScroll = () => {
+  let ticking = false;
+
+  const update = () => {
     const rect = footerGradient.getBoundingClientRect();
-    const windowHeight = window.innerHeight;
 
-    // Calculate how much of the footer is in view
-    // When footer top is at bottom of viewport: progress = 0
-    // When footer is fully in view: progress = 1
-    const elementHeight = rect.height;
-    const visibleTop = Math.max(0, windowHeight - rect.top);
-    const scrollProgress = Math.min(Math.max(visibleTop / elementHeight, 0), 1);
+    // scrollProgress: 0 when footer's top touches bottom of viewport, 1 when fully in view.
+    const visibleTop = Math.max(0, window.innerHeight - rect.top);
+    const scrollProgress = Math.min(Math.max(visibleTop / rect.height, 0), 1);
 
-    // Interpolate from 150% to 100%
-    // scrollProgress 0 -> 150%, scrollProgress 1 -> 100%
+    // Interpolate Y from 150% down to 100% as the footer scrolls in.
     const footerGradY = 150 - (scrollProgress * 50);
-
-    // Update CSS variable
     footerGradient.style.setProperty('--footer-grad-y', `${footerGradY}%`);
+
+    ticking = false;
   };
 
-  // Add scroll event listener
+  const handleFooterScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  };
+
   window.addEventListener('scroll', handleFooterScroll, { passive: true });
+  update(); // Set initial state.
 
-  // Call once on mount to set initial state
-  handleFooterScroll();
-
-  // Cleanup on unmount
   onUnmounted(() => {
     window.removeEventListener('scroll', handleFooterScroll);
   });
