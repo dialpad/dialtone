@@ -64,9 +64,8 @@ reviews:
     - "!packages/dialtone-icons/src/illustrations/**" # generated
     - "!packages/dialtone-icons/android/src/**"       # generated Android resources
     - "!packages/dialtone-tokens/dist*/**"            # token build output
-    - "!packages/dialtone-tokens/token_transformer/**"
-    - "!packages/dialtone-vue*/storybook-static/**"   # Storybook build output
-    - "!packages/dialtone-vue*/functions/generated/**"
+    - "!packages/dialtone-vue/storybook-static/**"    # Storybook build output
+    - "!packages/dialtone-vue/functions/generated/**"
 
   path_instructions:
     # Vue components
@@ -164,12 +163,47 @@ reviews:
     - path: 'packages/dialtone-mcp-server/**'
       instructions: >
         - The MCP server exposes Dialtone component, utility, and token data to
-          Claude Code. Its data.ts is generated — do not hand-edit it.
+          Claude Code. Build is rollup -c only — no generated files.
 
         - Flag changes that alter the public tool interface (tool names, parameter
           schemas) without a corresponding update to the server version.
 
         Follow the conventions in .claude/rules/mcp-server.md.
+
+    # AI docs package (documentation generation and validation)
+    - path: 'packages/dialtone-docs/**'
+      instructions: >
+        - src/content/ holds AI-readable markdown docs — changes here affect
+          what Claude Code and other AI tools know about Dialtone.
+
+        - src/generators/ produces content from source packages — prefer
+          regenerating over hand-editing generated output.
+
+        - Flag content edits that describe APIs, props, or behavior that has
+          since changed in the source packages (stale docs).
+
+        Follow the writing conventions in .claude/rules/documentation-writing.md.
+
+    # Query core (shared data layer for MCP server and language server)
+    - path: 'packages/dialtone-query-core/**'
+      instructions: >
+        - data.ts is generated — do not hand-edit it.
+
+        - Changes here affect both the MCP server and the language server
+          which depend on this package.
+
+        Follow the conventions in .claude/rules/mcp-server.md.
+
+    # CLI
+    - path: 'packages/dialtone-cli/**'
+      instructions: >
+        - The CLI is a thin interface over dialtone-query-core. Search behavior
+          changes belong in dialtone-query-core, not here.
+
+        - Changes here should only touch argument parsing, output formatting,
+          or the prompt command's LLM context generation.
+
+        Follow the conventions in .claude/rules/dialtone-cli.md.
 
     # ESLint plugin
     - path: 'packages/eslint-plugin-dialtone/**'

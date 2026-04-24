@@ -148,7 +148,8 @@ All tracking data lives in `.claude/tsc-cache/<session>/` (gitignored):
 Keep it in sync when:
 - A new package is added → add a `path_instructions` entry and any `path_filters` exclusion for build output
 - A `.claude/rules/*.md` file is added/renamed → update the `Follow the conventions in …` reference in the matching `path_instructions` entry
-- Team membership changes → update `suggested_reviewers_instructions` handles
+- Team member joins → add handle to `reviews.suggested_reviewers_instructions` and `.github/CODEOWNERS`
+- Team member leaves → remove handle from both `reviews.suggested_reviewers_instructions` and `.github/CODEOWNERS`
 
 ## Key Files Reference
 
