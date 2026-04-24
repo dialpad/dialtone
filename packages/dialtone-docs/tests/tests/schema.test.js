@@ -2,7 +2,6 @@ import { describe, test, expect, beforeAll } from 'vitest';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { execSync } from 'node:child_process';
 import { findFiles, readFile } from '@helpers/fileReader.js';
 import { parseFrontmatter, validateRequiredFields } from '@helpers/frontmatterParser.js';
 
@@ -86,7 +85,11 @@ describe('Build output schema (ai-docs.json)', () => {
   let docs;
 
   beforeAll(() => {
-    execSync('node src/generators/build-ai-docs.mjs', { cwd: packageRoot, stdio: 'inherit' });
+    if (!existsSync(outputPath)) {
+      throw new Error(
+        `dist/ai-docs.json not found. Run "pnpm nx run dialtone-docs:build" before running tests.`,
+      );
+    }
     const raw = readFileSync(outputPath, 'utf8');
     docs = JSON.parse(raw);
   });
@@ -98,7 +101,7 @@ describe('Build output schema (ai-docs.json)', () => {
   test('all entries have required fields', () => {
     for (const doc of docs) {
       for (const field of JSON_REQUIRED_FIELDS) {
-        expect(doc, `"${doc.id}" missing "${field}"`).toHaveProperty(field);
+        expect.soft(doc, `"${doc.id}" missing "${field}"`).toHaveProperty(field);
       }
     }
   });

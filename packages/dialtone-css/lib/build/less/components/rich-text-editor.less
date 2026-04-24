@@ -18,6 +18,13 @@
   > .ProseMirror {
     box-shadow: none;
 
+    // inline-flex/inline-block create atomic boxes that break arrow-key cursor navigation
+    // in contenteditable — ArrowDown jumps to link start, ArrowUp freezes inside links.
+    // Resetting to inline restores correct caret positioning without affecting visual output.
+    :where(a) {
+      display: inline;
+    }
+
     p.is-editor-empty:first-child::before {
       float: inline-start;
       block-size: 0;
