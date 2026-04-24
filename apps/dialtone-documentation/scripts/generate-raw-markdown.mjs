@@ -470,11 +470,11 @@ function buildDownloadsSectionLines (section) {
   const lines = [`## ${section.title}`, ''];
 
   const topLinks = [];
-  if (section.guidelinesLink) {
-    topLinks.push(`[Usage Guidelines](${section.guidelinesLink})`);
+  if (section.relatedLink) {
+    topLinks.push(`[${section.relatedLabel}](${section.relatedLink})`);
   }
   if (section.downloadAllUrl) {
-    topLinks.push(`[${section.downloadAllLabel || 'Download'}](${section.downloadAllUrl})`);
+    topLinks.push(`[${section.downloadAllLabel}](${section.downloadAllUrl})`);
   }
   if (topLinks.length > 0) {
     lines.push(topLinks.join(' · '), '');
@@ -503,7 +503,7 @@ function buildDownloadsSectionLines (section) {
  */
 function postProcessDownloads (sourcePath, outputPath, data) {
   const source = readFileSync(sourcePath, 'utf-8');
-  const { title = 'Downloads', description = '' } = parseFrontmatter(source, ['title', 'description']);
+  const { title, description } = parseFrontmatter(source, ['title', 'description']);
 
   const lines = [`# ${title}`, ''];
   if (description) lines.push(description, '');
