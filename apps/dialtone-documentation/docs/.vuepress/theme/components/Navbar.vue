@@ -13,6 +13,7 @@
         padding="medium"
         transition="true"
         :offset="[-8, 8]"
+        @opened="onHovercardOpened(link.text, $event)"
       >
         <template #anchor>
           <dt-button
@@ -31,20 +32,26 @@
             <dt-button
               v-for="item in hovercardItems(link)"
               :key="item.link"
-              size="200"
+              size="300"
               kind="muted"
               importance="clear"
               :to="item.link"
+              start-icon-class="d-as-start d-pbs-50"
               @click="dismissHovercard(link.text)"
             >
-              <dt-stack gap="50">
-                <dt-text kind="headline" size="300" ton>
-                  {{ item.text }}
-                </dt-text>
-                <dt-text kind="body" size="200" tone="muted">
-                  {{ item.description }}
-                </dt-text>
-              </dt-stack>
+              <template v-if="item.icon" #startIcon="{ iconSize }">
+                <dt-icon class="d-fc-muted" :name="item.icon" :size="iconSize" />
+              </template>
+              <dt-box padding-inline-start="50">
+                <dt-stack gap="50">
+                  <dt-text kind="headline" size="300" ton>
+                    {{ item.text }}
+                  </dt-text>
+                  <dt-text kind="body" size="200" tone="muted">
+                    {{ item.description }}
+                  </dt-text>
+                </dt-stack>
+              </dt-box>
             </dt-button>
           </dt-box>
         </template>
@@ -289,7 +296,7 @@
 </template>
 
 <script setup>
-import { nextTick, ref } from 'vue';
+import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
 import { useThemeManager } from '../composables/useThemeManager';
@@ -301,12 +308,14 @@ const themeData = useThemeLocaleData();
 const showThemeSwitcher = __VUEPRESS_DEV__ || __DIALTONE_DEPLOY_PREVIEW__;
 
 // Clicking an inner link focuses it, which causes DtHovercard's hide() to
-// early-return. Flipping `open` to false forces a close; resetting to null
-// restores hover-controlled behavior.
+// early-return. Flipping `open` to false forces the popover closed.
+// With transition="true" the fade-out takes ~250ms, during which the content
+// is still live and will re-fire mouseenter. So we hold forceClosed until the
+// popover's own @opened=false event confirms the close has completed.
 const forceClosed = ref(null);
-const dismissHovercard = (key) => {
-  forceClosed.value = key;
-  nextTick(() => { forceClosed.value = null; });
+const dismissHovercard = (key) => { forceClosed.value = key; };
+const onHovercardOpened = (key, opened) => {
+  if (!opened && forceClosed.value === key) forceClosed.value = null;
 };
 
 // Top-level navigation items. `group` maps to topLevelGroups key in site-nav.json
