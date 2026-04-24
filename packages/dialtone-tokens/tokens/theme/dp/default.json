@@ -50,23 +50,23 @@
         "description": "Expresses an error, danger, or otherwise critical state on surfaces that require a stronger contrast."
       },
       "positive": {
-        "value": "{color.green.800}",
+        "value": "{color.green.700}",
         "type": "color",
         "description": "Indicates a positive state."
       },
       "positive-strong": {
-        "value": "{color.green.900}",
+        "value": "{color.green.950}",
         "type": "color",
         "description": "Indicates a strong positive state on surfaces that require a stronger contrast."
       },
       "success": {
-        "value": "{color.green.800}",
+        "value": "{color.green.700}",
         "type": "color",
         "$deprecated": "Use positive instead.",
         "description": "Indicates a positive state."
       },
       "success-strong": {
-        "value": "{color.green.900}",
+        "value": "{color.green.950}",
         "type": "color",
         "$deprecated": "Use positive-strong instead.",
         "description": "Indicates a strong positive state on surfaces that require a stronger contrast."
@@ -136,23 +136,23 @@
         "description": "Critical strong text that sits on high-contrast surfaces or backgrounds"
       },
       "positive-inverted": {
-        "value": "{color.green.300}",
+        "value": "{color.green.200}",
         "type": "color",
         "description": "Positive text that sits on high-contrast surfaces or backgrounds."
       },
       "positive-strong-inverted": {
-        "value": "{color.green.200}",
+        "value": "{color.green.50}",
         "type": "color",
         "description": "Positive strong text that sits on high-contrast surfaces or backgrounds."
       },
       "success-inverted": {
-        "value": "{color.green.300}",
+        "value": "{color.green.200}",
         "type": "color",
         "$deprecated": "Use positive-inverted instead.",
         "description": "Success text that sits on high-contrast surfaces or backgrounds."
       },
       "success-strong-inverted": {
-        "value": "{color.green.200}",
+        "value": "{color.green.50}",
         "type": "color",
         "$deprecated": "Use positive-strong-inverted instead.",
         "description": "Success strong text that sits on high-contrast surfaces or backgrounds."
@@ -380,7 +380,7 @@
         "description": "A contrasting warning surface, most likely paired with inverted foreground colors."
       },
       "success-strong": {
-        "value": "{color.green.800}",
+        "value": "{color.green.600}",
         "type": "color",
         "description": "A contrasting positive state surface, most likely paired with inverted foreground colors."
       },
@@ -507,7 +507,7 @@
         "description": "Warning surface as opaque background color"
       },
       "success-opaque": {
-        "value": "{color.green.200}",
+        "value": "{color.green.400}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
@@ -659,7 +659,7 @@
         "description": "Background surface color highlighting messaging or elements that may require user's attention."
       },
       "success-inverted": {
-        "value": "{color.green.950}",
+        "value": "{color.green.900}",
         "type": "color",
         "description": "Background surface color containing messaging or elements expressing a positive or successful state."
       },
@@ -709,7 +709,7 @@
         "description": "A contrasting warning surface, most likely paired with inverted foreground colors."
       },
       "success-strong-inverted": {
-        "value": "{color.green.300}",
+        "value": "{color.green.950}",
         "type": "color",
         "description": "A contrasting positive state surface, most likely paired with inverted foreground colors."
       },
@@ -1024,7 +1024,7 @@
         "type": "color"
       },
       "success": {
-        "value": "{color.green.700}",
+        "value": "{color.green.600}",
         "type": "color"
       },
       "warning": {
@@ -1044,7 +1044,7 @@
         "type": "color"
       },
       "success-subtle": {
-        "value": "{color.green.300}",
+        "value": "{color.green.400}",
         "type": "color"
       },
       "warning-subtle": {
@@ -1136,7 +1136,7 @@
         "type": "color"
       },
       "success-inverted": {
-        "value": "{color.green.500}",
+        "value": "{color.green.300}",
         "type": "color"
       },
       "warning-inverted": {
@@ -1156,7 +1156,7 @@
         "type": "color"
       },
       "success-subtle-inverted": {
-        "value": "{color.green.900}",
+        "value": "{color.green.800}",
         "type": "color"
       },
       "warning-subtle-inverted": {

@@ -11,7 +11,7 @@
           "type": "color"
         },
         "success": {
-          "value": "{color.green.200}",
+          "value": "{color.green.400}",
           "type": "color"
         },
         "warning": {
@@ -38,6 +38,10 @@
       "foreground": {
         "default": {
           "value": "{color.black.1000}",
+          "type": "color"
+        },
+        "success": {
+          "value": "{color.green.1000}",
           "type": "color"
         },
         "bulletin": {

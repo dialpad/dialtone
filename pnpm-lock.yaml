@@ -1385,7 +1385,11 @@ packages:
     resolution: {integrity: sha512-NzGie5sIbfW/AyJwtIRZOumhAiXP6329VNBOrVerXgGrXqbTacTAuXPPVSgprFol5kWdbV34QtAlKN5OY11WEw==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n-services/1.11.0/20198484967555617ab62da6ad3c276265ee232d}
     hasBin: true
     peerDependencies:
+      '@vue/composition-api': '*'
       vue: ^2.0.0 || >=3.0.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
 
   '@dialpad/i18n@1.22.3':
     resolution: {integrity: sha512-vIviaCpnXRyd/CegJw4jlcdB9Zbgmml0gmHr9cNXUtJuC+DEOtwadVtq7qpUedggKMltg7VlMkC38U85C6W/yw==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n/1.22.3/fcdcd6ab6ab141035696d71caf35b3554b64c726}
@@ -15463,8 +15467,8 @@ packages:
   vue-component-type-helpers@2.2.12:
     resolution: {integrity: sha512-YbGqHZ5/eW4SnkPNR44mKVc6ZKQoRs/Rux1sxC6rdwXb4qpbOSYfDr9DsTHolOTGmIKgM9j141mZbBeg05R1pw==}
 
-  vue-component-type-helpers@3.2.6:
-    resolution: {integrity: sha512-O02tnvIfOQVmnvoWwuSydwRoHjZVt8UEBR+2p4rT35p8GAy5VTlWP8o5qXfJR/GWCN0nVZoYWsVUvx2jwgdBmQ==}
+  vue-component-type-helpers@3.2.7:
+    resolution: {integrity: sha512-+gPp5YGmhfsj1IN+xUo7y0fb4clfnOiiUA39y07yW1VzCRjzVgwLbtmdWlghh7mXrPsEaYc7rrIir/HT6C8vYQ==}
 
   vue-demi@0.14.10:
     resolution: {integrity: sha512-nMZBOwuzabUO0nLgIcc6rycZEebF6eeUfaiQx9+WSk8e29IbLvPU9feI6tqW4kTo3hvoYAJkMh8n8D0fuISphg==}
@@ -16521,8 +16525,6 @@ snapshots:
       fluent-vue: 3.7.2(@fluent/bundle@0.17.1)(vue@3.5.32(typescript@5.9.3))
       vue: 3.5.32(typescript@5.9.3)
       vue-demi: 0.14.10(vue@3.5.32(typescript@5.9.3))
-    transitivePeerDependencies:
-      - '@vue/composition-api'
 
   '@dialpad/i18n@1.22.3(vue@3.5.32(typescript@5.9.3))':
     dependencies:
@@ -19738,7 +19740,7 @@ snapshots:
       storybook: 10.3.0(@testing-library/dom@10.4.1)(prettier@3.3.2)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       type-fest: 2.19.0
       vue: 3.5.32(typescript@5.9.3)
-      vue-component-type-helpers: 3.2.6
+      vue-component-type-helpers: 3.2.7
 
   '@swc/core-darwin-arm64@1.15.21':
     optional: true
@@ -33321,7 +33323,7 @@ snapshots:
 
   vue-component-type-helpers@2.2.12: {}
 
-  vue-component-type-helpers@3.2.6: {}
+  vue-component-type-helpers@3.2.7: {}
 
   vue-demi@0.14.10(vue@3.5.32(typescript@5.9.3)):
     dependencies:
