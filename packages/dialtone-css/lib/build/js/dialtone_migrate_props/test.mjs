@@ -214,6 +214,11 @@ describe('hide-close → :show-close="false"', () => {
     assert.ok(warnings.some(w => w.includes('Cannot auto-invert')));
   });
 
+  it('emits a warning for dynamic camelCase :hideClose expressions', () => {
+    const { warnings } = transformContent('<dt-banner :hideClose="someVar" />');
+    assert.ok(warnings.some(w => w.includes('Cannot auto-invert') && w.includes('hideClose')));
+  });
+
   it('converts bare hide-close on a non-self-closing tag', () => {
     const { transformed } = transformContent('<dt-banner hide-close>Content</dt-banner>');
     assert.equal(transformed, '<dt-banner :show-close="false">Content</dt-banner>');
@@ -847,5 +852,16 @@ describe('edge cases', () => {
     const { transformed, count } = transformContent(input);
     assert.equal(transformed, input);
     assert.equal(count, 0);
+  });
+
+  it('handles > inside a quoted attribute value (arrow function)', () => {
+    const { transformed } = transformContent('<dt-modal :show="v => set(v)" />');
+    assert.equal(transformed, '<dt-modal :open="v => set(v)" />');
+  });
+
+  it('renames static camelCase prop (titleId → headerId on dt-banner)', () => {
+    const { transformed, count } = transformContent('<dt-banner titleId="hdr" />');
+    assert.equal(transformed, '<dt-banner headerId="hdr" />');
+    assert.equal(count, 1);
   });
 });

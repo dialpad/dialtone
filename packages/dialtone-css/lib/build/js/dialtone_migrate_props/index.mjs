@@ -10,7 +10,7 @@
  *   DLT-3159  positive boolean props: hide-close→show-close, hide-icon→show-icon, etc.
  *   DLT-3282  show prop → open (modal, toast, tooltip) + update:show → update:open
  *   DLT-3283  slot renames: titleOverride→header, labelSlot→label, headingSlot→heading
- *   DLT-3284  title/titleId → headerText/headerId props (banner, notice, toast, modal)
+ *   DLT-3284  title → headerText on banner, notice, toast, modal; title-id → header-id on banner, notice, toast only
  *   DLT-3159  label-visible → show-label (checkbox, combobox, input, select-menu, toggle, etc.)
  *   DLT-3160  checkbox-group: selectedValues → modelValue; @input/@change → @update:model-value on form inputs
  *   DLT-3100  rootClass removed — warns with file locations, cannot auto-migrate
@@ -53,11 +53,7 @@ function escapeRe (str) {
 // ---------------------------------------------------------------------------
 
 // Components where `show` → `open` and `update:show` → `update:open`
-const SHOW_TO_OPEN_COMPONENTS = new Set([
-  'dt-modal', 'DtModal',
-  'dt-toast', 'DtToast',
-  'dt-tooltip', 'DtTooltip',
-]);
+const SHOW_TO_OPEN_COMPONENTS = new Set(['dt-modal', 'dt-toast', 'dt-tooltip']);
 
 // Direct prop renames per component (kebab-case keys; camelCase handled automatically)
 const COMPONENT_PROP_RENAMES = {
@@ -163,8 +159,9 @@ const EMIT_EVENT_RENAMES = {
   'dt-input-group': { input: 'update:model-value' },
 };
 
-// Regex matching any Dialtone component opening tag (multi-line safe)
-const DT_TAG_RE = /<(dt-[\w-]+|Dt\w+)\b([\s\S]*?)(?:\/?>)/g;
+// Regex matching any Dialtone component opening tag, handling > inside quoted attribute values.
+// Alternation `(?:"[^"]*"|'[^']*')` consumes quoted strings before the bare [^>]* can stop at >.
+const DT_TAG_RE = /<(dt-[\w-]+|Dt\w+)\b((?:[^>"']*(?:"[^"]*"|'[^']*'))*[^>]*)(?:\/?>)/g;
 
 // ---------------------------------------------------------------------------
 // Per-tag Sub-Transformers
@@ -220,11 +217,14 @@ function applyPropRenames (tag, canonical) {
     result = result.replace(new RegExp(`(?<=:)${escapeRe(oldProp)}(?==)`, 'g'), newProp);
     if (result !== before2) { count++; continue; }
 
-    // Bound camelCase: `:oldProp="…"`
+    // Bound camelCase: `:oldProp="…"` / Static camelCase: `oldProp="…"` or bare boolean
     if (oldCamel !== oldProp) {
       const before3 = result;
       result = result.replace(new RegExp(`(?<=:)${escapeRe(oldCamel)}(?==)`, 'g'), newCamel);
-      if (result !== before3) count++;
+      if (result !== before3) { count++; continue; }
+      const before4 = result;
+      result = result.replace(new RegExp(`(?<!:)\\b${escapeRe(oldCamel)}(?=[=\\s/>])`, 'g'), newCamel);
+      if (result !== before4) count++;
     }
   }
 
@@ -261,15 +261,17 @@ function applyOneInvertedProp (tag, oldProp, newProp) {
   tag = tag.replace(new RegExp(`(?<!:)\\b${escapeRe(oldProp)}(?=[\\s/>])`, 'g'), `:${newProp}="false"`);
   if (tag !== bareBefore) return { tag, count: 1 };
 
-  // Bound expression: cannot auto-invert — emit warning
-  const exprMatch = new RegExp(`:${escapeRe(oldProp)}="([^"]*)"`, 'g').exec(tag);
-  if (exprMatch) {
-    return {
-      tag,
-      count: 0,
-      warning: `Cannot auto-invert :${oldProp}="${exprMatch[1]}" → :${newProp}. ` +
-        `Replace manually with :${newProp}="!(${exprMatch[1]})"`,
-    };
+  // Bound expression: cannot auto-invert — emit warning (check both kebab and camelCase forms)
+  for (const [attrProp, attrNew] of [[oldProp, newProp], [oldCamel, newCamel]]) {
+    const exprMatch = new RegExp(`:${escapeRe(attrProp)}="([^"]*)"`, 'g').exec(tag);
+    if (exprMatch) {
+      return {
+        tag,
+        count: 0,
+        warning: `Cannot auto-invert :${attrProp}="${exprMatch[1]}" → :${attrNew}. ` +
+          `Replace manually with :${attrNew}="!(${exprMatch[1]})"`,
+      };
+    }
   }
 
   return { tag, count: 0 };
@@ -378,35 +380,40 @@ function applyRootClassRename (tag, canonical) {
   return { tag: result, count, warnings };
 }
 
+function applyVModelArgRenames (tag, canonical) {
+  const vmodelMap = VMODEL_ARG_RENAMES[canonical];
+  if (!vmodelMap) return { tag, count: 0 };
+  let result = tag;
+  let count = 0;
+  for (const [oldArg, newArg] of Object.entries(vmodelMap)) {
+    const before = result;
+    const replacement = newArg ? `v-model:${newArg}` : 'v-model';
+    result = result.replace(new RegExp(`v-model:${escapeRe(oldArg)}\\b`, 'g'), replacement);
+    if (result !== before) count++;
+  }
+  return { tag: result, count };
+}
+
+function applyUpdateEventRenames (tag, canonical) {
+  const eventMap = UPDATE_EVENT_RENAMES[canonical];
+  if (!eventMap) return { tag, count: 0 };
+  let result = tag;
+  let count = 0;
+  for (const [oldEvt, newEvt] of Object.entries(eventMap)) {
+    const before = result;
+    result = result.replace(new RegExp(`@update:${escapeRe(oldEvt)}\\b`, 'g'), `@update:${newEvt}`);
+    if (result !== before) count++;
+  }
+  return { tag: result, count };
+}
+
 /**
  * `v-model:oldArg` → `v-model` and `@update:oldEvent` → `@update:newEvent` per component.
  */
 function applyVModelAndEventRenames (tag, canonical) {
-  const vmodelMap = VMODEL_ARG_RENAMES[canonical];
-  const eventMap = UPDATE_EVENT_RENAMES[canonical];
-  if (!vmodelMap && !eventMap) return { tag, count: 0 };
-
-  let result = tag;
-  let count = 0;
-
-  if (vmodelMap) {
-    for (const [oldArg, newArg] of Object.entries(vmodelMap)) {
-      const before = result;
-      const replacement = newArg ? `v-model:${newArg}` : 'v-model';
-      result = result.replace(new RegExp(`v-model:${escapeRe(oldArg)}\\b`, 'g'), replacement);
-      if (result !== before) count++;
-    }
-  }
-
-  if (eventMap) {
-    for (const [oldEvt, newEvt] of Object.entries(eventMap)) {
-      const before = result;
-      result = result.replace(new RegExp(`@update:${escapeRe(oldEvt)}\\b`, 'g'), `@update:${newEvt}`);
-      if (result !== before) count++;
-    }
-  }
-
-  return { tag: result, count };
+  const r1 = applyVModelArgRenames(tag, canonical);
+  const r2 = applyUpdateEventRenames(r1.tag, canonical);
+  return { tag: r2.tag, count: r1.count + r2.count };
 }
 
 /**
@@ -704,15 +711,21 @@ async function main () {
   const { changes, allWarnings } = await scanFiles(opts.cwd);
   printWarnings(allWarnings);
 
-  if (changes.length === 0) {
+  if (changes.length === 0 && allWarnings.length === 0) {
     console.log('No matching usage found. Nothing to migrate.');
+    process.exit(0);
+  }
+
+  if (changes.length === 0) {
+    console.log('No automated code changes needed. See manual action items above.');
     process.exit(0);
   }
 
   const total = printChangeSummary(changes, opts.cwd);
 
   if (opts.dryRun) {
-    console.log('\n--dry-run: No files were modified.\n');
+    const warnNote = allWarnings.length ? ` ${allWarnings.length} warning(s) require manual action.` : '';
+    console.log(`\n--dry-run: No files were modified.${warnNote}\n`);
     process.exit(0);
   }
 
