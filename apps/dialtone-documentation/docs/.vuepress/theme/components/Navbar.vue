@@ -257,6 +257,7 @@ const navItems = [
   { text: 'Foundations', link: '/foundations/' },
   { text: 'Design System', link: '/dialtone/' },
   { text: 'UI Kits', link: '/ui-kits/' },
+  { text: 'Downloads', link: '/downloads/' },
 ];
 
 // Use theme manager composable with theme switching enabled
