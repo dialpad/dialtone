@@ -11,7 +11,7 @@ keywords: ["visual", "brand", "image"]
       <dt-stack gap="200">
         <img src="/assets/images/graphic--abstract.png" alt="" class="d-d-block d-w100p d-bar-500">
         <dt-stack>
-          <h3 class="d-docsite--header-4 d-mbs-0 d-mbs-0 d-fc-primary">Abstract Graphics</h3>
+          <h3 class="d-docsite--header-4 d-mbs-0 d-fc-primary">Abstract Graphics</h3>
           <p class="d-docsite--paragraph d-fc-tertiary">When generating interest or connecting and communicating broad information, use simplified data visuals.</p>
         </dt-stack>
       </dt-stack>
@@ -20,8 +20,8 @@ keywords: ["visual", "brand", "image"]
       <dt-stack gap="200">
         <img src="/assets/images/graphic--illustrations.png" alt="" class="d-d-block d-w100p d-bar-500">
         <dt-stack>
-          <h3 class="d-docsite--header-4 d-mbs-0 d-mbs-0 d-fc-primary">Illustrations</h3>
-          <p class="d-docsite--paragraph d-fc-tertiary">When the times right, we’re dynamic. This inspires excitement and movement about Dialpad.</p>
+          <h3 class="d-docsite--header-4 d-mbs-0 d-fc-primary">Illustrations</h3>
+          <p class="d-docsite--paragraph d-fc-tertiary">When the time’s right, we’re dynamic. This inspires excitement and movement about Dialpad.</p>
         </dt-stack>
       </dt-stack>
     </dt-link>
@@ -29,7 +29,7 @@ keywords: ["visual", "brand", "image"]
       <dt-stack gap="200">
         <img src="/assets/images/graphic--data-vis.png" alt="" class="d-d-block d-w100p d-bar-500">
         <dt-stack>
-          <h3 class="d-docsite--header-4 d-mbs-0 d-mbs-0 d-fc-primary">Data Visualizations</h3>
+          <h3 class="d-docsite--header-4 d-mbs-0 d-fc-primary">Data Visualizations</h3>
           <p class="d-docsite--paragraph d-fc-tertiary">When generating interest or connecting and communicating broad information, use simplified data visuals.</p>
         </dt-stack>
       </dt-stack>

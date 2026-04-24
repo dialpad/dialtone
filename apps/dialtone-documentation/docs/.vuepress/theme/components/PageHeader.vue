@@ -110,9 +110,8 @@
                 </dt-list-item>
               </dt-list-item-group>
               <dt-dropdown-separator />
-              <dt-list-item-group>
+              <dt-list-item-group v-if="rawMarkdownUrl">
                 <dt-list-item
-                  v-if="rawMarkdownUrl"
                   role="menuitem"
                   navigation-type="arrow-keys"
                   @click="onViewAsMarkdown(close)"
@@ -120,7 +119,6 @@
                   Open as Markdown
                 </dt-list-item>
                 <dt-list-item
-                  v-if="rawMarkdownUrl"
                   role="menuitem"
                   navigation-type="arrow-keys"
                   @click="openInAiChat(close, 'claude')"
@@ -128,7 +126,6 @@
                   Open in Claude.ai
                 </dt-list-item>
                 <dt-list-item
-                  v-if="rawMarkdownUrl"
                   role="menuitem"
                   navigation-type="arrow-keys"
                   @click="openInAiChat(close, 'chatgpt')"
@@ -217,7 +214,7 @@ const SLUG_OVERRIDES = { tabs: 'tab' };
 const EXCLUDED_SLUGS = new Set(['scrollbar', 'table']);
 const GITHUB_BASE = 'https://github.com/dialpad/dialtone/tree/staging/packages/dialtone-vue/components';
 
-const RAW_SECTIONS = ['/components/', '/foundations/', '/dialtone/', '/ui-kits/', '/utilities/', '/guides/', '/tokens/'];
+const RAW_SECTIONS = ['/components/', '/foundations/', '/dialtone/', '/ui-kits/', '/utilities/', '/guides/', '/tokens/', '/downloads/'];
 
 const rawMarkdownUrl = computed(() => {
   const path = page.value.path;
