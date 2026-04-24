@@ -12,8 +12,13 @@
           {{ section.title }}
         </dt-text>
         <dt-stack direction="row" gap="150">
-          <dt-button kind="muted" importance="clear" :to="section.guidelinesLink">
-            Usage Guidelines
+          <dt-button
+            v-if="section.relatedLink"
+            kind="muted"
+            importance="clear"
+            :to="section.relatedLink"
+          >
+            {{ section.relatedLabel }}
           </dt-button>
           <dt-button
             :href="section.downloadAllUrl"

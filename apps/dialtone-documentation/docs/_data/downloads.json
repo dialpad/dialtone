@@ -9,7 +9,8 @@
   "sections": {
     "logo": {
       "title": "Logo",
-      "guidelinesLink": "/foundations/brand/using-our-logo/",
+      "relatedLink": "/foundations/brand/using-our-logo/",
+      "relatedLabel": "Usage Guidelines",
       "downloadAllUrl": "https://drive.google.com/drive/folders/1g1Vi4eCdGC73lbRKW-bCdBdPu0L7Mywq",
       "downloadAllLabel": "Download all Logos",
       "items": [
@@ -37,7 +38,8 @@
     },
     "icon": {
       "title": "Icon",
-      "guidelinesLink": "/foundations/brand/our-icon/",
+      "relatedLink": "/foundations/brand/our-icon/",
+      "relatedLabel": "Usage Guidelines",
       "downloadAllUrl": "https://drive.google.com/open?id=1Vn9KOo07eamK8m0XLujfkIhRbyJLZnuk&usp=drive_fs",
       "downloadAllLabel": "Download all Icons",
       "items": [
@@ -65,29 +67,41 @@
     },
     "gradient": {
       "title": "Gradient",
-      "guidelinesLink": "/foundations/gradient/",
+      "relatedLink": "/foundations/gradient/",
+      "relatedLabel": "Usage Guidelines",
       "downloadAllUrl": "https://drive.google.com/open?id=1uNUvKNS3fpwdoZCF6py3Yq-20znzhtlg&usp=drive_fs",
       "downloadAllLabel": "Download all Gradients",
       "items": [
-        { "svg": "download-gradient" }
+        {
+          "svg": "download-gradient",
+          "label": "Label"
+        }
       ]
     },
     "product-storytelling": {
       "title": "Product Storytelling",
-      "guidelinesLink": "/foundations/product-storytelling/",
+      "relatedLink": "/foundations/product-storytelling/",
+      "relatedLabel": "Usage Guidelines",
       "downloadAllUrl": null,
       "downloadAllLabel": "Download",
       "items": [
-        { "svg": "download-product-storytelling" }
+        {
+          "svg": "download-product-storytelling",
+          "label": "Product Storytelling"
+        }
       ]
     },
     "graphic": {
       "title": "Graphic",
-      "guidelinesLink": "/foundations/graphic-system/",
+      "relatedLink": "/foundations/graphic-system/",
+      "relatedLabel": "Usage Guidelines",
       "downloadAllUrl": null,
       "downloadAllLabel": "Download",
       "items": [
-        { "svg": "download-graphic" }
+        {
+          "svg": "download-graphic",
+          "label": "Label"
+        }
       ]
     }
   }

@@ -1,8 +1,7 @@
 ---
 title: Downloads
-description: Brand assets, illustrations, gradient files, and other downloadable resources.
 noSidebar: true
-keywords: ["download", "assets", "files", "resources", "brand"]
+keywords: ["download", "assets", "files", "resources", "brand", "logo", "icon", "illustration", "gradient", "dam", "digital"]
 ---
 
-<downloads-catalog />
+<downloads-catalog class="d-mbs-600" />

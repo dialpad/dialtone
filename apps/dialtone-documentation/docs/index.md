@@ -28,7 +28,7 @@ pageClass: dialpad-design-home
         <dt-text as="h2" kind="headline" size="xxl" wrap="balance" strength="normal" class="home-section-title">Setting the tone</dt-text>
       </dt-box>
       <dt-box max-inline-size="1200">
-        <dt-text as="p" align="center" class="home-section-description">Dialtone is Dialpad’s shared design language—shaping everything from our product interfaces to our marketing. It defines how our brand looks, feels, and behaves across every touchpoint. Built on principles of clarity, consistency, and accessibility, Dialtone keeps our visual identity cohesive and unmistakably Dialpad.</dt-text>
+        <dt-text as="p" align="center" wrap="balance" kind="headline" size="500" strength="normal">Dialtone is Dialpad’s shared design language, shaping everything from our product interfaces to our marketing. It defines how our brand looks, feels, and behaves across every touchpoint. Built on principles of clarity, consistency, and accessibility, Dialtone keeps our visual identity cohesive and unmistakably Dialpad.</dt-text>
       </dt-box>
     </dt-stack>
   </dt-box>
@@ -36,25 +36,25 @@ pageClass: dialpad-design-home
     <dt-stack gap="700" align="center">
       <dt-stack class="home-section-inline" :direction="{ 'default': 'column', 'md': 'row' }" gap="600" justify="center">
         <router-link to="./foundations/brand/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
-          <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-foundations-01" />
+          <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle h:d-bc-default h:d-bs-card" name="home-foundations-01" />
           <dt-box padding-inline="150">
             <dt-text as="p" kind="body" size="300">Brand</dt-text>
           </dt-box>
         </router-link>
         <router-link to="./foundations/colors/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
-          <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-foundations-02" />
+          <img src="/assets/images/home-foundations-02.png" alt="" class="d-bar-500 d-w100p d-ba d-bc-subtle h:d-bc-default h:d-bs-card" />
           <dt-box padding-inline="150">
             <dt-text as="p" kind="body" size="300">Colors</dt-text>
           </dt-box>
         </router-link>
         <router-link to="./foundations/typography/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
-          <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-foundations-03" />
+          <img src="/assets/images/home-foundations-03.png" alt="" class="d-bar-500 d-w100p d-ba d-bc-subtle h:d-bc-default h:d-bs-card" />
           <dt-box padding-inline="150">
             <dt-text as="p" kind="body" size="300">Typography</dt-text>
           </dt-box>
         </router-link>
         <router-link to="./foundations/motion/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
-          <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-foundations-04" />
+          <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle h:d-bc-default h:d-bs-card" name="home-foundations-04" />
           <dt-box padding-inline="150">
             <dt-text as="p" kind="body" size="300">Motion</dt-text>
           </dt-box>
@@ -63,7 +63,7 @@ pageClass: dialpad-design-home
       <dt-stack class="home-section-inline" gap="550" align="center" justify="center">
         <dt-text as="h2" kind="headline" size="xxl" wrap="balance" strength="normal" class="home-section-title">Foundations</dt-text>
         <dt-box max-inline-size="1200">
-          <dt-text as="p" align="center" class="home-section-description">The building blocks of Dialtone... Color, Type, Icons, and more.</dt-text>
+          <dt-text as="p" align="center" wrap="balance" kind="body" size="300" class="d-fs-350">The building blocks of Dialtone... Color, Type, Icons, and more.</dt-text>
         </dt-box>
         <dt-button size="lg" to="./foundations/">
           View Foundations
@@ -78,25 +78,25 @@ pageClass: dialpad-design-home
     <dt-stack gap="700" align="center">
       <dt-stack class="home-section-inline" :direction="{ 'default': 'column', 'md': 'row' }" gap="600" justify="center">
         <router-link to="./components/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
-          <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-system--01" />
+          <img src="/assets/images/home-system--01.png" alt="" class="d-bar-500 d-w100p d-ba d-bc-subtle h:d-bc-default h:d-bs-card" />
           <dt-box padding-inline="150">
             <dt-text as="p" kind="body" size="300">Components</dt-text>
           </dt-box>
         </router-link>
         <router-link to="./utilities/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
-          <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-system--02" />
+          <img src="/assets/images/home-system--02.png" alt="" class="d-bar-500 d-w100p d-ba d-bc-subtle h:d-bc-default h:d-bs-card" />
           <dt-box padding-inline="150">
             <dt-text as="p" kind="body" size="300">CSS Utilities</dt-text>
           </dt-box>
         </router-link>
         <router-link to="./tokens/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
-          <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-system--03" />
+          <img src="/assets/images/home-system--03.png" alt="" class="d-bar-500 d-w100p d-ba d-bc-subtle h:d-bc-default h:d-bs-card" />
           <dt-box padding-inline="150">
             <dt-text as="p" kind="body" size="300">Design Tokens</dt-text>
           </dt-box>
         </router-link>
         <router-link to="./ui-kits/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
-          <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle" name="home-system--04" />
+          <img src="/assets/images/home-system--04.png" alt="" class="d-bar-500 d-w100p d-ba d-bc-subtle h:d-bc-default h:d-bs-card" />
           <dt-box padding-inline="150">
             <dt-text as="p" kind="body" size="300">UI Kits</dt-text>
           </dt-box>
@@ -105,7 +105,7 @@ pageClass: dialpad-design-home
       <dt-stack class="home-section-inline" gap="550" align="center" justify="center">
         <dt-text as="h2" kind="headline" size="xxl" wrap="balance" strength="normal" class="home-section-title">Design System</dt-text>
         <dt-box max-inline-size="1200">
-          <dt-text as="p" align="center" class="home-section-description">Build with Dialtone Components, Design Tokens, CSS Utilities, and more.</dt-text>
+          <dt-text as="p" align="center" wrap="balance" kind="body" size="300" class="d-fs-350">Build with Dialtone Components, Design Tokens, CSS Utilities, and more.</dt-text>
         </dt-box>
         <dt-button :size="400" to="./dialtone/">
           View all Documentation
@@ -121,7 +121,7 @@ pageClass: dialpad-design-home
       <dt-stack class="home-section-inline" gap="550" align="center">
         <dt-text as="h2" kind="headline" size="xxl" wrap="balance" strength="normal" class="home-section-title">What's New</dt-text>
         <dt-box max-inline-size="1200">
-          <dt-text as="p" align="center" class="home-section-description">The latest from Dialpad Design.</dt-text>
+          <dt-text as="p" align="center" wrap="balance" kind="body" size="300" class="d-fs-350">The latest from Dialpad Design.</dt-text>
         </dt-box>
         <dt-button :size="400" to="./dialtone/whats-new/">
           View all
@@ -182,9 +182,6 @@ pageClass: dialpad-design-home
 }
 
 .home-section-description {
-  text-wrap: balance;
-  font-size: 24px;
-  font-weight: 300;
 }
 
 .home-section-inline {
