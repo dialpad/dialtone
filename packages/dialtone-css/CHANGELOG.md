@@ -1,3 +1,10 @@
+## [8.79.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.79.0...dialtone-css/v8.79.1) (2026-04-24)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DP-185735 fix arrow key navigation broken near links ([#1217](https://github.com/dialpad/dialtone/issues/1217)) ([8e272e9](https://github.com/dialpad/dialtone/commit/8e272e921efa07bbc1ab9edad7a739a892db55ca))
+
 # [8.79.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.78.0...dialtone-css/v8.79.0) (2026-04-14)
 
 
