@@ -23,8 +23,7 @@ vueCode='
   v-model="value"
   :editable="true"
   input-aria-label="this is a descriptive label"
-  :input-class="$attrs.inputClass"
-  :output-format="$attrs.outputFormat"
+  output-format="html"
   :auto-focus="false"
   placeholder="Type here..."
   :link="true"
@@ -117,12 +116,11 @@ vueCode='
   v-model="value"
   :editable="true"
   input-aria-label="this is a descriptive label"
-  :input-class="$attrs.inputClass"
-  :output-format="$attrs.outputFormat"
+  output-format="html"
   :auto-focus="false"
   placeholder="Type here..."
   :link="true"
-  :mentionSuggestion="{ items }"
+  :mention-suggestion="{ items }"
 />
 '
 />
