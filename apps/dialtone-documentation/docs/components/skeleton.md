@@ -60,14 +60,14 @@ figma: planned
 
 <code-well-header>
   <div class="d-w50p">
-    <dt-skeleton :animate="false" arial-label="Loading" ref="defaultExample" />
+    <dt-skeleton :animate="false" aria-label="Loading" ref="defaultExample" />
   </div>
 </code-well-header>
 
 <code-example-tabs
 :htmlCode="() => $refs.defaultExample"
 vueCode='
-<dt-skeleton :animate="false" arial-label="Loading" />
+<dt-skeleton :animate="false" aria-label="Loading" />
 '
 showHtmlWarning />
 
@@ -75,14 +75,14 @@ showHtmlWarning />
 
 <code-well-header>
   <div class="d-w50p">
-    <dt-skeleton arial-label="Loading" ref="animationExample" />
+    <dt-skeleton aria-label="Loading" ref="animationExample" />
   </div>
 </code-well-header>
 
 <code-example-tabs
 :htmlCode="() => $refs.animationExample"
 vueCode='
-<dt-skeleton arial-label="Loading" />
+<dt-skeleton aria-label="Loading" />
 '
 />
 
@@ -98,7 +98,7 @@ To customize a non-animating Skeleton background color modify the `--placeholder
         style: '--placeholder-from-color: var(--dt-color-blue-400)',
       }"
       ref="customExample"
-      arial-label="Loading"
+      aria-label="Loading"
     />
   </div>
 </code-well-header>
@@ -111,7 +111,7 @@ vueCode='
   :text-option="{
     style: `--placeholder-from-color: var(--dt-color-blue-400)`,
   }"
-  arial-label="Loading"
+  aria-label="Loading"
 />
 '
 showHtmlWarning />
@@ -125,7 +125,7 @@ Customize an animating Skeleton by modifying the `--placeholder-from-color` and 
         style: '--placeholder-from-color: var(--dt-color-blue-400); --placeholder-to-color: var(--dt-color-blue-200);',
       }"
       ref="customAnimateExample"
-      arial-label="Loading"
+      aria-label="Loading"
     />
   </div>
 </code-well-header>
@@ -137,7 +137,7 @@ vueCode='
   :text-option="{
     style: `--placeholder-from-color: var(--dt-color-blue-400); --placeholder-to-color: var(--dt-color-blue-200);`,
   }"
-  arial-label="Loading"
+  aria-label="Loading"
 />
 '
 showHtmlWarning />
