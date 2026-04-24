@@ -417,7 +417,28 @@ function applyVModelAndEventRenames (tag, canonical) {
 }
 
 /**
+ * Remove duplicate `@eventName` bindings within a single tag string, keeping
+ * the first occurrence. This handles the case where multiple source events
+ * (e.g. `@input` and `@change`) both map to the same target event.
+ */
+function deduplicateEventBindings (tag) {
+  const seen = new Set();
+  let removedCount = 0;
+  const cleaned = tag.replace(/ @([\w:.-]+)(?:=(?:"[^"]*"|'[^']*'))?/g, (match, eventName) => {
+    if (seen.has(eventName)) {
+      removedCount++;
+      return '';
+    }
+    seen.add(eventName);
+    return match;
+  });
+  return { tag: cleaned, removedCount };
+}
+
+/**
  * Legacy `@input` / `@change` component events → `@update:model-value`.
+ * When multiple source events map to the same target, the first is kept and
+ * subsequent duplicates are removed.
  */
 function applyEmitEventRenames (tag, canonical) {
   const eventMap = EMIT_EVENT_RENAMES[canonical];
@@ -429,7 +450,8 @@ function applyEmitEventRenames (tag, canonical) {
     result = result.replace(new RegExp(`@${escapeRe(oldEvt)}\\b`, 'g'), `@${newEvt}`);
     if (result !== before) count++;
   }
-  return { tag: result, count };
+  const { tag: deduped, removedCount } = deduplicateEventBindings(result);
+  return { tag: deduped, count: count - removedCount };
 }
 
 /**

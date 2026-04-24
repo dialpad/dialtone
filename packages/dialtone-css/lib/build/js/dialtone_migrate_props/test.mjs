@@ -713,8 +713,8 @@ describe('@change → @update:model-value on toggle and select-menu', () => {
   it('renames both @input and @change on dt-select-menu', () => {
     const input = '<dt-select-menu @input="onInput" @change="onChange" />';
     const { transformed, count } = transformContent(input);
-    assert.equal(transformed, '<dt-select-menu @update:model-value="onInput" @update:model-value="onChange" />');
-    assert.equal(count, 2);
+    assert.equal(transformed, '<dt-select-menu @update:model-value="onInput" />');
+    assert.equal(count, 1);
   });
 
   it('does not rename @change on components not in the map', () => {
