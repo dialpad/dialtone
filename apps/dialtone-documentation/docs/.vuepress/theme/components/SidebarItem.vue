@@ -18,7 +18,7 @@
           :active="isActiveLink(item.link, true)"
           importance="clear"
           kind="muted"
-          label-class="d-jc-flex-start d-ta-left d-fw-normal"
+          label-class="d-jc-flex-start d-ta-left d-fw-normal d-tw-pretty"
           :size="depth === 0 ? 'lg' : undefined"
           :tabindex="actionableTabIndex"
           :class="[
@@ -94,7 +94,7 @@
               rel="noopener noreferrer"
               importance="clear"
               kind="muted"
-              label-class="d-jc-flex-start d-ta-left d-fw-normal"
+              label-class="d-jc-flex-start d-ta-left d-fw-normal d-tw-pretty"
               :class="[
                 'dialtone-shell-btn d-w100p d-tw-pretty',
                 { 'd-pis-600': depth === 0 },
@@ -118,7 +118,7 @@
               :active="isActiveLink(subItem.link)"
               importance="clear"
               kind="muted"
-              label-class="d-jc-flex-start"
+              label-class="d-jc-flex-start d-tw-pretty"
               :data-sidebar-link="subItem.link"
               :class="[
                 'd-w100p d-fw-normal',
@@ -164,7 +164,7 @@
       :active="isActiveLink(item.link)"
       importance="clear"
       kind="muted"
-      label-class="d-jc-flex-start d-ta-left d-fw-normal"
+      label-class="d-jc-flex-start d-ta-left d-fw-normal d-tw-pretty"
       :size="depth === 0 ? 'lg' : undefined"
       :class="[
         'd-w100p dialtone-shell-btn',
