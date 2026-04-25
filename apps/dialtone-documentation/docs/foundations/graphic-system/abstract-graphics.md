@@ -9,6 +9,7 @@ download_url: "https://drive.google.com/open?id=1dWhUFvyoJdKXLsHMHPe05cej62hHPNp
 <dt-stack gap="650" class="d-my-600">
   <div class="d-d-grid d-g-600 d-g-cols1 md:d-g-cols3 d-ai-center">
     <div>
+      <h3 class="d-docsite--header-4 d-mbs-0 d-fc-primary">When to use</h3>
       <p class="d-docsite--paragraph">When speaking to broad concepts that may be difficult to visualize, use a relevant abstract graphic to the concept.</p>
     </div>
     <div class="d-gc2">

@@ -1,5 +1,6 @@
 ---
-title: Motion
+title: Motion Principles
+shortTitle: Motion
 description: Guidelines for marketing animation and motion design
 thumb: true
 keywords: ["animation","transition","movement","easing", "ease", "video"]
