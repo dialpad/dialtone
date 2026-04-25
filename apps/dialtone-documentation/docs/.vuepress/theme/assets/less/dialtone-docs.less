@@ -454,7 +454,7 @@ a.header-anchor {
 .d-docsite--header-2 {
   font: var(--dt-text-headline-2xl);
   font-weight: var(--dt-font-weight-medium);
-  margin-block: var(--dt-spacing-400) var(--dt-spacing-100);
+  margin-block: var(--dt-spacing-400) var(--dt-spacing-200);
 }
 
 .d-docsite--header-3 {
@@ -583,13 +583,22 @@ code {
   }
 }
 
-:where(:is(.d-docsite--paragraph, .d-docsite--unordered-list, .d-docsite--ordered-list, .d-docsite--list-element, .d-docsite--preview-header) > code) {
+:where(:is(.d-docsite--paragraph, .d-docsite--unordered-list, .d-docsite--ordered-list, .d-docsite--list-element, .d-docsite--preview-header) code) {
   font: var(--dt-text-code-sm);
   padding: var(--dt-spacing-25) var(--dt-spacing-50);
   color: var(--dt-color-foreground-info);
   border-radius: var(--dt-size-radius-200);
   border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
   user-select: all;
+}
+
+:where(:is(.d-docsite--header-2, .d-docsite--header-3) code) {
+  color: var(--dt-color-foreground-info-strong);
+  padding: var(--dt-spacing-25) var(--dt-spacing-50);
+  border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
+  border-radius: var(--dt-size-radius-300);
+  font-weight: inherit;
+  font-size: 94%;
 }
 
 .d-docsite--preview-header {
