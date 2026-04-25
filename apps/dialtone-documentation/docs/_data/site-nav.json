@@ -78,6 +78,21 @@
             "icon": "list-spacing-expanded"
           },
           {
+            "text": "Icons",
+            "link": "/foundations/icons/",
+            "icon": "sparkle",
+            "children": [
+              {
+                "text": "Usage",
+                "link": "/foundations/icons/usage/"
+              },
+              {
+                "text": "Crafting an Icon",
+                "link": "/foundations/icons/crafting-an-icon/"
+              }
+            ]
+          },
+          {
             "text": "Gradient",
             "link": "/foundations/gradient/",
             "icon": "haze",
@@ -96,21 +111,6 @@
             "text": "Motion",
             "link": "/foundations/motion/",
             "icon": "play"
-          },
-          {
-            "text": "Icons",
-            "link": "/foundations/icons/",
-            "icon": "sparkle",
-            "children": [
-              {
-                "text": "Usage",
-                "link": "/foundations/icons/usage/"
-              },
-              {
-                "text": "Crafting an Icon",
-                "link": "/foundations/icons/crafting-an-icon/"
-              }
-            ]
           },
           {
             "text": "Graphic System",
