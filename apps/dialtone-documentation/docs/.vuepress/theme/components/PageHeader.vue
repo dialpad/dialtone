@@ -5,8 +5,19 @@
       <dt-stack
         :direction="{ default: 'column', md: 'row' }"
         :gap="{ default: '25', lg: '200' }"
+        align="baseline"
         justify="between"
       >
+        <dt-text v-if="backLink" as="nav" kind="body" size="200">
+          <dt-link
+            tone="muted"
+            :to="backLink.to"
+            :underline="false"
+          >
+            <dt-icon name="arrow-left" size="100" />
+            {{ backLink.text }}
+          </dt-link>
+        </dt-text>
         <dt-stack direction="row" gap="100">
           <h1
             v-if="$frontmatter.title"
@@ -157,6 +168,16 @@ import { usePageData, withBase } from 'vuepress/client';
 import { isExternalUrl } from '../utils/isExternalUrl';
 
 const page = usePageData();
+
+// Detail pages get a "back to <parent>" affordance above the title row.
+// Add new entries as detail-page sections appear.
+const BACK_LINKS = [
+  { match: /^\/dialtone\/whats-new\/posts\//, to: '/dialtone/whats-new/', text: 'Back to What\'s New' },
+];
+
+const backLink = computed(() => {
+  return BACK_LINKS.find(l => l.match.test(page.value.path)) ?? null;
+});
 
 // External download URLs open in a new tab; internal paths route via <router-link>
 // so in-app hash/anchor links (e.g. "/downloads/#graphic") stay in the SPA.
