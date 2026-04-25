@@ -28,15 +28,15 @@
         This is the footer
       </div>
     </template>
-    <template #content>
+    <template #content="{ close }">
       <slot name="content">
         <div class="d-mbe-100">
           This is content rendered within the popover.
         </div>
       </slot>
-      <button class="d-btn d-btn--primary">
+      <dt-button @click="close">
         Button
-      </button>
+      </dt-button>
     </template>
   </dt-popover>
 </template>
