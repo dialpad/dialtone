@@ -1,19 +1,18 @@
 ---
 title: Motion
-description: Guidelines for animation and motion design
+description: Guidelines for marketing animation and motion design
 thumb: true
-keywords: ["animation","transition","movement","easing"]
+keywords: ["animation","transition","movement","easing", "video"]
 ---
-
 
 <dt-stack gap="600" class="d-mbs-600">
   <dt-box class="d-d-grid d-g-400 d-g-cols1 md:d-g-cols3 d-ai-start">
     <dt-stack gap="200">
-      <dt-box class="d-d-grid d-pli-center">
-        <video class="d-gcs1 d-grs1 d-d-block d-w100p d-bar-500 d-c-pointer" src="/assets/videos/motion--empowered-elevated.mp4" muted loop @mouseenter="$event.target.play()" @mouseleave="$event.target.pause()"></video>
-        <dt-stack align="center" justify="center" class="d-gcs1 d-grs1 d-bar-circle d-size-50 d-bgc-bold d-pis-50" v-dt-mode:dark>
-          <dt-icon name="play-filled" size="300"></dt-icon>
-        </dt-stack>
+      <dt-box class="d-d-grid d-pli-center" @mouseenter="onCardEnter" @mouseleave="onCardLeave">
+        <video class="d-gcs1 d-grs1 d-d-block d-w100p d-bar-500" src="/assets/videos/motion--empowered-elevated.mp4" poster="/assets/images/motion--empowered-elevated--poster.jpg" muted loop></video>
+        <dt-box surface="bold" block-size="50" padding-inline-start="50" inline-size="50" border-radius="circle" class="d-d-grid d-pli-center d-gcs1 d-grs1" v-dt-mode:dark data-play-overlay>
+          <dt-icon class="d-fc-primary" name="play-filled" size="300"></dt-icon>
+        </dt-box>
       </dt-box>
       <dt-stack>
         <h3 class="d-docsite--header-4 d-mbs-0 d-fc-primary">Empowered → Elevated</h3>
@@ -21,11 +20,11 @@ keywords: ["animation","transition","movement","easing"]
       </dt-stack>
     </dt-stack>
     <dt-stack gap="200">
-      <dt-box class="d-d-grid d-pli-center">
-        <video class="d-gcs1 d-grs1 d-d-block d-w100p d-bar-500 d-c-pointer" src="/assets/videos/motion--confident-focused.mp4" muted loop @mouseenter="$event.target.play()" @mouseleave="$event.target.pause()"></video>
-        <dt-stack align="center" justify="center" class="d-gcs1 d-grs1 d-bar-circle d-size-50 d-bgc-bold d-pis-50" v-dt-mode:dark>
-          <dt-icon name="play-filled" size="300"></dt-icon>
-        </dt-stack>
+      <dt-box class="d-d-grid d-pli-center" @mouseenter="onCardEnter" @mouseleave="onCardLeave">
+        <video class="d-gcs1 d-grs1 d-d-block d-w100p d-bar-500" src="/assets/videos/motion--confident-focused.mp4" poster="/assets/images/motion--confident-focused--poster.jpg" muted loop></video>
+        <dt-box surface="bold" block-size="50" padding-inline-start="50" inline-size="50" border-radius="circle" class="d-d-grid d-pli-center d-gcs1 d-grs1" v-dt-mode:dark data-play-overlay>
+          <dt-icon class="d-fc-primary" name="play-filled" size="300"></dt-icon>
+        </dt-box>
       </dt-box>
       <dt-stack>
         <h3 class="d-docsite--header-4 d-mbs-0 d-fc-primary">Confident → Focused</h3>
@@ -33,11 +32,11 @@ keywords: ["animation","transition","movement","easing"]
       </dt-stack>
     </dt-stack>
     <dt-stack gap="200">
-      <dt-box class="d-d-grid d-pli-center">
-        <video class="d-gcs1 d-grs1 d-d-block d-w100p d-bar-500 d-c-pointer" src="/assets/videos/motion--inspired-dynamic.mp4" muted loop @mouseenter="$event.target.play()" @mouseleave="$event.target.pause()"></video>
-        <dt-stack align="center" justify="center" class="d-gcs1 d-grs1 d-bar-circle d-size-50 d-bgc-bold d-pis-50" v-dt-mode:dark>
-          <dt-icon name="play-filled" size="300"></dt-icon>
-        </dt-stack>
+      <dt-box class="d-d-grid d-pli-center" @mouseenter="onCardEnter" @mouseleave="onCardLeave">
+        <video class="d-gcs1 d-grs1 d-d-block d-w100p d-bar-500" src="/assets/videos/motion--inspired-dynamic.mp4" poster="/assets/images/motion--inspired-dynamic--poster.jpg" muted loop></video>
+        <dt-box surface="bold" block-size="50" padding-inline-start="50" inline-size="50" border-radius="circle" class="d-d-grid d-pli-center d-gcs1 d-grs1" v-dt-mode:dark data-play-overlay>
+          <dt-icon class="d-fc-primary" name="play-filled" size="300"></dt-icon>
+        </dt-box>
       </dt-box>
       <dt-stack>
         <h3 class="d-docsite--header-4 d-mbs-0 d-fc-primary">Inspired → Dynamic</h3>
@@ -63,11 +62,11 @@ keywords: ["animation","transition","movement","easing"]
           </dt-stack>
           <dt-stack>
             <svg-loader name="motion--curve-animate-in" class="d-bbsr-500 d-d-block d-w100p" />
-            <dt-box class="d-d-grid d-pli-center">
-              <video class="d-gcs1 d-grs1 d-d-block d-w100p d-bber-500 d-c-pointer" src="/assets/videos/motion--ease-out.mp4" muted loop @mouseenter="$event.target.play()" @mouseleave="$event.target.pause()"></video>
-              <dt-stack align="center" justify="center" class="d-gcs1 d-grs1 d-bar-circle d-size-50 d-bgc-bold d-pis-50" v-dt-mode:dark>
-                <dt-icon name="play-filled" size="300"></dt-icon>
-              </dt-stack>
+            <dt-box class="d-d-grid d-pli-center" @mouseenter="onCardEnter" @mouseleave="onCardLeave">
+              <video class="d-gcs1 d-grs1 d-d-block d-w100p d-bber-500" src="/assets/videos/motion--ease-out.mp4" poster="/assets/images/motion--ease-out--poster.jpg" muted loop></video>
+              <dt-box surface="bold" block-size="50" padding-inline-start="50" inline-size="50" border-radius="circle" class="d-d-grid d-pli-center d-gcs1 d-grs1" v-dt-mode:dark data-play-overlay>
+                <dt-icon class="d-fc-primary" name="play-filled" size="300"></dt-icon>
+              </dt-box>
             </dt-box>
           </dt-stack>
         </dt-stack>
@@ -79,11 +78,11 @@ keywords: ["animation","transition","movement","easing"]
           </dt-stack>
           <dt-stack>
             <svg-loader name="motion--curve-animate-out" class="d-bbsr-500 d-d-block d-w100p" />
-            <dt-box class="d-d-grid d-pli-center">
-              <video class="d-gcs1 d-grs1 d-d-block d-w100p d-bber-500 d-c-pointer" src="/assets/videos/motion--ease-in.mp4" muted loop @mouseenter="$event.target.play()" @mouseleave="$event.target.pause()"></video>
-              <dt-stack align="center" justify="center" class="d-gcs1 d-grs1 d-bar-circle d-size-50 d-bgc-bold d-pis-50" v-dt-mode:dark>
-                <dt-icon name="play-filled" size="300"></dt-icon>
-              </dt-stack>
+            <dt-box class="d-d-grid d-pli-center" @mouseenter="onCardEnter" @mouseleave="onCardLeave">
+              <video class="d-gcs1 d-grs1 d-d-block d-w100p d-bber-500" src="/assets/videos/motion--ease-in.mp4" poster="/assets/images/motion--ease-in--poster.jpg" muted loop></video>
+              <dt-box surface="bold" block-size="50" padding-inline-start="50" inline-size="50" border-radius="circle" class="d-d-grid d-pli-center d-gcs1 d-grs1" v-dt-mode:dark data-play-overlay>
+                <dt-icon class="d-fc-primary" name="play-filled" size="300"></dt-icon>
+              </dt-box>
             </dt-box>
           </dt-stack>
         </dt-stack>
@@ -93,11 +92,11 @@ keywords: ["animation","transition","movement","easing"]
 
   <dt-box class="d-d-grid d-g-400 d-g-cols1 md:d-g-cols4 d-ai-start">
     <dt-stack gap="200">
-      <dt-box class="d-d-grid d-pli-center">
-        <video class="d-gcs1 d-grs1 d-d-block d-w100p d-bar-500 d-c-pointer" src="/assets/videos/motion--elevate.mp4" muted loop @mouseenter="$event.target.play()" @mouseleave="$event.target.pause()"></video>
-        <dt-stack align="center" justify="center" class="d-gcs1 d-grs1 d-bar-circle d-size-50 d-bgc-bold d-pis-50" v-dt-mode:dark>
-          <dt-icon name="play-filled" size="300"></dt-icon>
-        </dt-stack>
+      <dt-box class="d-d-grid d-pli-center" @mouseenter="onCardEnter" @mouseleave="onCardLeave">
+        <video class="d-gcs1 d-grs1 d-d-block d-w100p d-bar-500" src="/assets/videos/motion--elevate.mp4" poster="/assets/images/motion--elevate--poster.jpg" muted loop></video>
+        <dt-box surface="bold" block-size="50" padding-inline-start="50" inline-size="50" border-radius="circle" class="d-d-grid d-pli-center d-gcs1 d-grs1" v-dt-mode:dark data-play-overlay>
+          <dt-icon class="d-fc-primary" name="play-filled" size="300"></dt-icon>
+        </dt-box>
       </dt-box>
       <dt-stack>
         <h3 class="d-docsite--header-4 d-mbs-0 d-fc-primary">Elevate</h3>
@@ -105,11 +104,11 @@ keywords: ["animation","transition","movement","easing"]
       </dt-stack>
     </dt-stack>
     <dt-stack gap="200">
-      <dt-box class="d-d-grid d-pli-center">
-        <video class="d-gcs1 d-grs1 d-d-block d-w100p d-bar-500 d-c-pointer" src="/assets/videos/motion--scale-up.mp4" muted loop @mouseenter="$event.target.play()" @mouseleave="$event.target.pause()"></video>
-        <dt-stack align="center" justify="center" class="d-gcs1 d-grs1 d-bar-circle d-size-50 d-bgc-bold d-pis-50" v-dt-mode:dark>
-          <dt-icon name="play-filled" size="300"></dt-icon>
-        </dt-stack>
+      <dt-box class="d-d-grid d-pli-center" @mouseenter="onCardEnter" @mouseleave="onCardLeave">
+        <video class="d-gcs1 d-grs1 d-d-block d-w100p d-bar-500" src="/assets/videos/motion--scale-up.mp4" poster="/assets/images/motion--scale-up--poster.jpg" muted loop></video>
+        <dt-box surface="bold" block-size="50" padding-inline-start="50" inline-size="50" border-radius="circle" class="d-d-grid d-pli-center d-gcs1 d-grs1" v-dt-mode:dark data-play-overlay>
+          <dt-icon class="d-fc-primary" name="play-filled" size="300"></dt-icon>
+        </dt-box>
       </dt-box>
       <dt-stack>
         <h3 class="d-docsite--header-4 d-mbs-0 d-fc-primary">Scale up</h3>
@@ -117,11 +116,11 @@ keywords: ["animation","transition","movement","easing"]
       </dt-stack>
     </dt-stack>
     <dt-stack gap="200">
-      <dt-box class="d-d-grid d-pli-center">
-        <video class="d-gcs1 d-grs1 d-d-block d-w100p d-bar-500 d-c-pointer" src="/assets/videos/motion--scale-out.mp4" muted loop @mouseenter="$event.target.play()" @mouseleave="$event.target.pause()"></video>
-        <dt-stack align="center" justify="center" class="d-gcs1 d-grs1 d-bar-circle d-size-50 d-bgc-bold d-pis-50" v-dt-mode:dark>
-          <dt-icon name="play-filled" size="300"></dt-icon>
-        </dt-stack>
+      <dt-box class="d-d-grid d-pli-center" @mouseenter="onCardEnter" @mouseleave="onCardLeave">
+        <video class="d-gcs1 d-grs1 d-d-block d-w100p d-bar-500" src="/assets/videos/motion--scale-out.mp4" poster="/assets/images/motion--scale-out--poster.jpg" muted loop></video>
+        <dt-box surface="bold" block-size="50" padding-inline-start="50" inline-size="50" border-radius="circle" class="d-d-grid d-pli-center d-gcs1 d-grs1" v-dt-mode:dark data-play-overlay>
+          <dt-icon class="d-fc-primary" name="play-filled" size="300"></dt-icon>
+        </dt-box>
       </dt-box>
       <dt-stack>
         <h3 class="d-docsite--header-4 d-mbs-0 d-fc-primary">Scale out</h3>
@@ -129,11 +128,11 @@ keywords: ["animation","transition","movement","easing"]
       </dt-stack>
     </dt-stack>
     <dt-stack gap="200">
-      <dt-box class="d-d-grid d-pli-center">
-        <video class="d-gcs1 d-grs1 d-d-block d-w100p d-bar-500 d-c-pointer" src="/assets/videos/motion--transform.mp4" muted loop @mouseenter="$event.target.play()" @mouseleave="$event.target.pause()"></video>
-        <dt-stack align="center" justify="center" class="d-gcs1 d-grs1 d-bar-circle d-size-50 d-bgc-bold d-pis-50" v-dt-mode:dark>
-          <dt-icon name="play-filled" size="300"></dt-icon>
-        </dt-stack>
+      <dt-box class="d-d-grid d-pli-center" @mouseenter="onCardEnter" @mouseleave="onCardLeave">
+        <video class="d-gcs1 d-grs1 d-d-block d-w100p d-bar-500" src="/assets/videos/motion--transform.mp4" poster="/assets/images/motion--transform--poster.jpg" muted loop></video>
+        <dt-box surface="bold" block-size="50" padding-inline-start="50" inline-size="50" border-radius="circle" class="d-d-grid d-pli-center d-gcs1 d-grs1" v-dt-mode:dark data-play-overlay>
+          <dt-icon class="d-fc-primary" name="play-filled" size="300"></dt-icon>
+        </dt-box>
       </dt-box>
       <dt-stack>
         <h3 class="d-docsite--header-4 d-mbs-0 d-fc-primary">Transform</h3>
@@ -142,3 +141,14 @@ keywords: ["animation","transition","movement","easing"]
     </dt-stack>
   </dt-box>
 </dt-stack>
+
+<script setup>
+function onCardEnter (e) {
+  e.currentTarget.querySelector('video').play();
+  e.currentTarget.querySelector('[data-play-overlay]').classList.add('d-o0');
+}
+function onCardLeave (e) {
+  e.currentTarget.querySelector('video').pause();
+  e.currentTarget.querySelector('[data-play-overlay]').classList.remove('d-o0');
+}
+</script>
