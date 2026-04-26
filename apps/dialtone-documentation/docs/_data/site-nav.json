@@ -44,7 +44,7 @@
                 "link": "/foundations/colors/usage/"
               },
               {
-                "text": "Color Palette",
+                "text": "Product Color Palette",
                 "link": "/foundations/colors/palette/"
               },
               {
@@ -52,7 +52,7 @@
                 "link": "/foundations/colors/chart-colors/"
               },
               {
-                "text": "Themes",
+                "text": "Product Themes",
                 "link": "/foundations/colors/themes/"
               }
             ]
@@ -78,16 +78,6 @@
             "icon": "list-spacing-expanded"
           },
           {
-            "text": "Gradient",
-            "link": "/foundations/gradient/",
-            "icon": "haze"
-          },
-          {
-            "text": "Motion",
-            "link": "/foundations/motion/",
-            "icon": "play"
-          },
-          {
             "text": "Icons",
             "link": "/foundations/icons/",
             "icon": "sparkle",
@@ -103,9 +93,48 @@
             ]
           },
           {
-            "text": "Illustrations",
-            "link": "/foundations/illustrations/",
-            "icon": "image"
+            "text": "Gradient",
+            "link": "/foundations/gradient/",
+            "icon": "haze",
+            "children": [
+              {
+                "text": "Gradient in Marketing",
+                "link": "/foundations/gradient/marketing.html"
+              },
+              {
+                "text": "Gradient in Product",
+                "link": "/foundations/gradient/product.html"
+              }
+            ]
+          },
+          {
+            "text": "Motion",
+            "link": "/foundations/motion/",
+            "icon": "play"
+          },
+          {
+            "text": "Graphic System",
+            "link": "/foundations/graphic-system/",
+            "icon": "image",
+            "children": [
+              {
+                "text": "Abstract Graphics",
+                "link": "/foundations/graphic-system/abstract-graphics.html"
+              },
+              {
+                "text": "Illustrations",
+                "link": "/foundations/illustrations/"
+              },
+              {
+                "text": "Data Visualizations",
+                "link": "/foundations/graphic-system/data-visualizations.html"
+              }
+            ]
+          },
+          {
+            "text": "Product Storytelling",
+            "link": "/foundations/product-storytelling/",
+            "icon": "book-open"
           }
         ]
       }

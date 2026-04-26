@@ -9,7 +9,6 @@
         autofocus
         aria-label="Search icon"
         label="Find an icon"
-        class="d-input d-input-icon--left d-input-icon--right"
         type="text"
         autocomplete="off"
         @keyup="searchIcon"

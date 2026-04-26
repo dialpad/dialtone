@@ -2,6 +2,7 @@
 title: Our Icon
 description: Guidelines for using the Dialpad logomark without the wordmark.
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=17330-1170
+download_url: /downloads/#icon
 keywords: ["app icon","favicon","brand mark"]
 ---
 
@@ -17,7 +18,7 @@ keywords: ["app icon","favicon","brand mark"]
       <p class="d-docsite--paragraph"><strong>Sample Use Cases</strong>: App icons, social avatars, favicons.</p>
     </div>
     <div class="d-gc2">
-      <svg-loader name="icon--usage" class="d-bar-500" />
+      <img src="/assets/images/icon--usage.png" alt="" class="d-bar-500 d-d-block d-w100p" />
     </div>
   </div>
 
@@ -26,10 +27,10 @@ keywords: ["app icon","favicon","brand mark"]
       <h2 class="d-docsite--header-3 d-mbs-0">Versions</h2>
       <p class="d-docsite--paragraph">In most instances, the primary full brand gradient version should be used.</p>
       <p class="d-docsite--paragraph">The Meetings app icon should only be used when referencing the meetings app.</p>
-      <p class="d-docsite--paragraph"><dt-link href="#">Download icons</dt-link></p>
+      <p class="d-docsite--paragraph"><dt-link to="/downloads/">Download icons</dt-link></p>
     </div>
     <div class="d-gc2">
-      <svg-loader name="icon--versions" class="d-bar-500" />
+      <img src="/assets/images/icon--versions.png" alt="" class="d-bar-500 d-d-block d-w100p" />
     </div>
   </div>
 
@@ -40,19 +41,19 @@ keywords: ["app icon","favicon","brand mark"]
       <p class="d-docsite--paragraph"><dt-link href="#">View Dialtone Icon</dt-link></p>
     </div>
     <div class="d-gc2">
-      <svg-loader name="icon--in-product" class="d-bar-500" />
+      <img src="/assets/images/icon--in-product.png" alt="" class="d-bar-500 d-d-block d-w100p" />
     </div>
   </div>
 
   <figure class="d-bar-500 d-of-hidden">
-    <img src="/assets/images/color--sample-01.jpg" alt="">
+    <img src="/assets/images/color--sample-01.jpg" alt="" class="d-d-block d-w100p" />
   </figure>
 
   <figure class="d-bar-500 d-of-hidden">
-    <img src="/assets/images/color--sample-02.jpg" alt="">
+    <img src="/assets/images/color--sample-02.jpg" alt="" class="d-d-block d-w100p" />
   </figure>
 
   <figure class="d-bar-500 d-of-hidden">
-    <img src="/assets/images/color--sample-03.jpg" alt="">
+    <img src="/assets/images/color--sample-03.jpg" alt="" class="d-d-block d-w100p" />
   </figure>
 </dt-stack>
