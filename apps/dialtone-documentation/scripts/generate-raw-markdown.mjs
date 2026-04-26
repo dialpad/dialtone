@@ -670,7 +670,8 @@ function main () {
           downloadsData,
         );
       } catch (err) {
-        console.warn(`[generate-raw-markdown] downloads post-process: ${err.message}`);
+        console.error(`[generate-raw-markdown] downloads post-process: ${err.message}`);
+        errorCount++;
       }
     }
 
