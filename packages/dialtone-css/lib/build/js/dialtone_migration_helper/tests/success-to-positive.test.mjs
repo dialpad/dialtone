@@ -190,7 +190,7 @@ describe('success-to-positive config', () => {
       );
     });
 
-    it('matches d-bgc-success even when followed by a hyphen-letter that is not a known suffix', () => {
+    it('does not rewrite d-bgc-success when followed by an unknown hyphen-letter suffix', () => {
       // d-bgc-success-x is invalid; the regex should bail out and leave it alone
       assert.equal(apply('d-bgc-success-x'), 'd-bgc-success-x');
     });
