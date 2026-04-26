@@ -16,27 +16,27 @@
       "description": "Optional banner docked above d-modal__dialog."
     },
     {
-      "class": "d-modal_banner--warning",
+      "class": "d-modal__banner--warning",
       "applies": "d-modal__banner",
       "description": "Styles d-modal__banner for Warning messaging."
     },
     {
-      "class": "d-modal_banner--info",
+      "class": "d-modal__banner--info",
       "applies": "d-modal__banner",
       "description": "Styles d-modal__banner for Info messaging."
     },
     {
-      "class": "d-modal_banner--critical",
+      "class": "d-modal__banner--critical",
       "applies": "d-modal__banner",
       "description": "Styles d-modal__banner for Critical messaging."
     },
     {
-      "class": "d-modal_banner--success",
+      "class": "d-modal__banner--positive",
       "applies": "d-modal__banner",
       "description": "Styles d-modal__banner for Success messaging."
     },
     {
-      "class": "d-modal_banner--general",
+      "class": "d-modal__banner--general",
       "applies": "d-modal__banner",
       "description": "Styles d-modal__banner for General messaging."
     },
@@ -71,7 +71,7 @@
       "description": "Makes .d-modal__dialog take up as much of the screen as possible."
     },
     {
-      "class": "d-modal--danger",
+      "class": "d-modal--critical",
       "applies": ".d-modal",
       "description": "Adds styling for destructive actions."
     },

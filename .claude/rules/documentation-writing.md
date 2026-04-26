@@ -34,17 +34,17 @@ Use fenced ` ```vue demo ` blocks for all new doc examples. A markdown-it plugin
 ````md
 <!-- Default: demo + code tabs -->
 ```vue demo
-<dt-notice kind="base" title="Base title" />
+<dt-notice kind="base" header-text="Base title" />
 ```
 
 <!-- Demo only (no code tab) -->
 ```vue demo-only
-<dt-notice kind="base" title="Base title" />
+<dt-notice kind="base" header-text="Base title" />
 ```
 
 <!-- Code only (no live preview) -->
 ```vue code-only
-<dt-notice kind="base" title="Base title" />
+<dt-notice kind="base" header-text="Base title" />
 ```
 ````
 
@@ -174,7 +174,7 @@ Use GFM-style blockquote alerts to render `<dt-notice>` components. A markdown-i
 > Body text with **markdown** and [links](/path).
 ```
 
-**KIND** must be one of: `BASE`, `INFO`, `SUCCESS`, `WARNING`, `ERROR` (case-insensitive, but uppercase is the convention — maps to DtNotice's `kind` prop).
+**KIND** must be one of: `BASE`, `INFO`, `POSITIVE`, `WARNING`, `CRITICAL` (case-insensitive, but uppercase is the convention — maps to DtNotice's `kind` prop). Legacy `SUCCESS` and `ERROR` are accepted as aliases (translated to `positive` / `critical` before being passed to DtNotice) — prefer the canonical names in new content.
 
 The plugin always adds `:show-close="false"` and `class="d-wmx100p d-my-200 dialtone-doc-notice"`. Links in the body automatically get `d-link` styling.
 
@@ -184,8 +184,8 @@ The plugin always adds `:show-close="false"` and `class="d-wmx100p d-my-200 dial
 | --- | --- | --- |
 | `INFO` | Supplementary context, tips, notes, browser support | "DtStack also accepts responsive props" |
 | `WARNING` | Deprecations, migration nudges, "prefer X over Y" | "Use DtText over CSS utilities" |
-| `ERROR` | Breaking changes, removed APIs, things that will fail | "The `leftIcon` prop is removed in v10" |
-| `SUCCESS` | Confirmation of completion, positive outcomes | Rare in docs — use sparingly |
+| `CRITICAL` | Breaking changes, removed APIs, things that will fail | "The `leftIcon` prop is removed in v10" |
+| `POSITIVE` | Confirmation of completion, positive outcomes | Rare in docs — use sparingly |
 | `BASE` | Neutral notices that don't fit other kinds | Rare — prefer `INFO` in most cases |
 
 ### Examples
@@ -197,11 +197,11 @@ The plugin always adds `:show-close="false"` and `class="d-wmx100p d-my-200 dial
 > [!INFO] Accessibility
 > Always provide an `aria-label` when using icon-only buttons.
 
-> [!ERROR] Breaking change
+> [!CRITICAL] Breaking change
 > The `leftIcon` prop is removed in v10. Use `startIcon` instead.
 > See [migration guide](/guides/migration) for details.
 
-> [!SUCCESS]
+> [!POSITIVE]
 > A notice with no custom title — DtNotice uses its default for the kind.
 ```
 

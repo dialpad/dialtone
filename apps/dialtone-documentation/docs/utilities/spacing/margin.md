@@ -4,7 +4,8 @@ description: Utilities to adjust an element's exterior spacing between other obj
 keywords: ["outer spacing", "gap", "offset", "margin inline start", "margin inline end", "margin block start", "margin block end"]
 ---
 
-> [!WARNING]
+> [!INFO] Consider DtStack first
+>
 > Avoid applying margins directly. Lean toward using layout components like [Stack](/components/stack/) for consistent and maintainable spacing **between** elements.
 
 Use `d-m-{stop}` to set margin using spacing token stops. The number references the spacing token (`d-m-100` = `--dt-spacing-100` = 8px). Logical property aliases are also available: `d-mbs-{stop}` (margin-block-start), `d-mbe-{stop}` (margin-block-end), `d-mis-{stop}` (margin-inline-start), `d-mie-{stop}` (margin-inline-end).

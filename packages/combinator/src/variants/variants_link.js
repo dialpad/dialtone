@@ -18,13 +18,13 @@ export default {
     },
   },
 
-  danger: {
+  critical: {
     props: {
       href: { initialValue: '#link' },
-      kind: { initialValue: 'danger' },
+      tone: { initialValue: 'critical' },
     },
     slots: {
-      default: { initialValue: 'Danger link' },
+      default: { initialValue: 'Critical link' },
     },
   },
 

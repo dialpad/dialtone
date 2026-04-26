@@ -112,7 +112,7 @@ export function searchTokens(query: string, data: TokensData, options?: { includ
  */
 export function formatTokenResults(results: SearchResult[], query: string): string {
   if (results.length === 0) {
-    return `No token results found for "${query}".\n\nTry searching with:\n- Token category (e.g., "color", "spacing", "border")\n- Specific value (e.g., "#1C1C1C", "0.8rem")\n- Semantic name (e.g., "primary", "success", "danger")`;
+    return `No token results found for "${query}".\n\nTry searching with:\n- Token category (e.g., "color", "spacing", "border")\n- Specific value (e.g., "#1C1C1C", "0.8rem")\n- Semantic name (e.g., "primary", "positive", "critical")`;
   }
 
   let output = `Found ${results.length} design token${results.length > 1 ? 's' : ''} for "${query}":\n\n`;

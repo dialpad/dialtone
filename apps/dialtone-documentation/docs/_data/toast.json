@@ -11,7 +11,7 @@
       "description": "Contains the toast content."
     },
     {
-      "class": "d-toast--error",
+      "class": "d-toast--critical",
       "applies": ".d-toast",
       "description": "Applies error visual style."
     },
@@ -21,7 +21,7 @@
       "description": "Applies info visual style."
     },
     {
-      "class": "d-toast--success",
+      "class": "d-toast--positive",
       "applies": ".d-toast",
       "description": "Applies success visual style."
     },

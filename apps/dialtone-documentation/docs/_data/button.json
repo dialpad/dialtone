@@ -21,7 +21,7 @@
       "description": "Outline button style."
     },
     {
-      "class": "d-btn--danger",
+      "class": "d-btn--critical",
       "applies": ".d-btn",
       "description": "Base danger button style."
     },

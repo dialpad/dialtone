@@ -4,8 +4,10 @@ description: Utilities for setting an element's interior spacing between child e
 keywords: ["inner spacing", "inset", "padding inline start", "padding inline end", "padding block start", "padding block end"]
 ---
 
-> [!INFO]
-> Padding CSS Utilities are most appropriate for padding on the **sides** of an element. Avoiding using it to create spacing **between** elements. Instead, favor the [Stack](/components/stack/) component and its `gap` property for spacing between. It can still be combined with flex utilities to create more complex layouts.
+> [!INFO] Consider DtBox and DtStack first
+>
+> - Favor using the [DtBox](/components/box.md) component and its padding properties.
+> - Avoid using padding or margin utilities for spacing **between** elements. Instead, favor the [DtStack](/components/stack.md) component and its `gap` property for spacing between.
 
 Use `d-p-{stop}` to set padding using spacing token stops. The number references the spacing token (`d-p-100` = `--dt-spacing-100` = 8px).
 
@@ -47,7 +49,7 @@ Use `d-p-{stop}` to set padding using spacing token stops. The number references
 
 Padding can be added to an element by using `d-p-{stop}` or a directional class like `d-p{t|r|b|l|y|x}-{stop}`. Logical property aliases are also available: `d-pbs-{stop}` (padding-block-start), `d-pbe-{stop}` (padding-block-end), `d-pis-{stop}` (padding-inline-start), `d-pie-{stop}` (padding-inline-end).
 
-It is highly recommended to use the [DtStack component](/components/stack.md) prior to applying padding individually.
+It is highly recommended to use the [DtBox component](/components/box.md) prior to applying padding individually.
 
 <utility-class-table show-rendered>
   <template #content>
