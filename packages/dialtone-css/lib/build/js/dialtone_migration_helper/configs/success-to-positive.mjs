@@ -19,10 +19,14 @@ const SUFFIX_ALTERNATION =
 
 const SUCCESS_WITH_SUFFIX = `success((?:${SUFFIX_ALTERNATION})?)`;
 
+// Left-edge boundary: previous character must not be a class-name character.
+// Prevents `my-d-fc-success` from being rewritten to `my-d-fc-positive`.
+const CLASS_BOUNDARY_START = `(?<![A-Za-z0-9_-])`;
+
 // Right-edge boundary for utility-class matches: end-of-string, whitespace,
 // quote, `>`, `<`, `:`, `=`, `,`, `;`, `}`, `)`, `]`, `(`, `[`, `!`, `\``,
 // `.`, `/`. Prevents `d-fc-successfoo` and partial extensions.
-const CLASS_BOUNDARY = `(?=$|[\\s"'><:=,;{}()\\[\\]!\`./])`;
+const CLASS_BOUNDARY_END = `(?=$|[\\s"'><:=,;{}()\\[\\]!\`./])`;
 
 export default {
   description:
@@ -62,7 +66,7 @@ export default {
     // Utility class: d-{fc|bgc|bc}-success{suffix?}. d-fc-* covers stragglers
     // from the base-to-semantic foreground rename.
     {
-      from: new RegExp(`d-(fc|bgc|bc)-${SUCCESS_WITH_SUFFIX}${CLASS_BOUNDARY}`, 'g'),
+      from: new RegExp(`${CLASS_BOUNDARY_START}d-(fc|bgc|bc)-${SUCCESS_WITH_SUFFIX}${CLASS_BOUNDARY_END}`, 'g'),
       to: (_match, prefix, suffix) => `d-${prefix}-positive${suffix}`,
     },
   ],

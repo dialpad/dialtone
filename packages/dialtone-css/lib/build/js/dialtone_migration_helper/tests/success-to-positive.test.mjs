@@ -159,6 +159,8 @@ describe('success-to-positive config', () => {
       ['var(--my-success-color)', 'unrelated custom property name'],
       ['.d-fc-success-foo', 'utility-like class with non-allowed suffix'],
       ['d-status-success', 'class with success in middle, not d-fc/bgc/bc'],
+      ['my-d-bgc-success', 'class-name suffix that contains a utility token'],
+      ['custom-d-fc-success-strong', 'longer custom class containing utility token'],
       // Already migrated
       ['var(--dt-color-foreground-positive)', 'already migrated foreground'],
       ['d-bgc-positive-subtle', 'already migrated utility'],
