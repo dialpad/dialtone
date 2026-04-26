@@ -459,6 +459,101 @@ describe('DtModal banner-kind value renames (DLT-3157)', () => {
   });
 });
 
+describe('DtText / DtLink tone="success" → tone="positive" (DLT-3157)', () => {
+  it('renames tone="success" on dt-text', () => {
+    const { transformed } = transformContent('<dt-text tone="success">x</dt-text>');
+    assert.equal(transformed, '<dt-text tone="positive">x</dt-text>');
+  });
+
+  it('renames tone="success" on dt-link', () => {
+    const { transformed } = transformContent('<dt-link tone="success" />');
+    assert.equal(transformed, '<dt-link tone="positive" />');
+  });
+
+  it('renames :tone="\'success\'" bound value', () => {
+    const { transformed } = transformContent('<dt-text :tone="\'success\'">x</dt-text>');
+    assert.equal(transformed, '<dt-text :tone="\'positive\'">x</dt-text>');
+  });
+
+  it('renames camelCase tone="success" on PascalCase DtText', () => {
+    const { transformed } = transformContent('<DtText tone="success">x</DtText>');
+    assert.equal(transformed, '<DtText tone="positive">x</DtText>');
+  });
+
+  it('does not alter tone="primary"', () => {
+    const input = '<dt-text tone="primary">x</dt-text>';
+    const { transformed, count } = transformContent(input);
+    assert.equal(transformed, input);
+    assert.equal(count, 0);
+  });
+
+  it('does not alter tone-strong (only exact "success" string is mapped)', () => {
+    // success-strong is not a value the migration handles directly — leave alone
+    const input = '<dt-text tone="success-strong">x</dt-text>';
+    const { transformed, count } = transformContent(input);
+    assert.equal(transformed, input);
+    assert.equal(count, 0);
+  });
+});
+
+describe('DtBox surface / bc value renames (DLT-3331)', () => {
+  it('renames surface="success" → surface="positive"', () => {
+    const { transformed } = transformContent('<dt-box surface="success" />');
+    assert.equal(transformed, '<dt-box surface="positive" />');
+  });
+
+  it('renames variant suffix surface="success-subtle" → surface="positive-subtle"', () => {
+    const { transformed } = transformContent('<dt-box surface="success-subtle" />');
+    assert.equal(transformed, '<dt-box surface="positive-subtle" />');
+  });
+
+  it('renames bc="success" → bc="positive"', () => {
+    const { transformed } = transformContent('<dt-box bc="success" />');
+    assert.equal(transformed, '<dt-box bc="positive" />');
+  });
+
+  it('renames :surface="\'success\'" bound value on PascalCase DtBox', () => {
+    const { transformed } = transformContent('<DtBox :surface="\'success\'" />');
+    assert.equal(transformed, '<DtBox :surface="\'positive\'" />');
+  });
+
+  it('does not alter surface="primary"', () => {
+    const input = '<dt-box surface="primary" />';
+    const { transformed, count } = transformContent(input);
+    assert.equal(transformed, input);
+    assert.equal(count, 0);
+  });
+});
+
+describe('DtButton link-kind value renames (DLT-3157)', () => {
+  it('renames link-kind="success" → link-kind="positive"', () => {
+    const { transformed } = transformContent('<dt-button link link-kind="success" />');
+    assert.equal(transformed, '<dt-button link link-kind="positive" />');
+  });
+
+  it('renames link-kind="danger" → link-kind="critical"', () => {
+    const { transformed } = transformContent('<dt-button link link-kind="danger" />');
+    assert.equal(transformed, '<dt-button link link-kind="critical" />');
+  });
+
+  it('renames camelCase linkKind="success" → linkKind="positive"', () => {
+    const { transformed } = transformContent('<dt-button link linkKind="success" />');
+    assert.equal(transformed, '<dt-button link linkKind="positive" />');
+  });
+
+  it('renames :link-kind="\'success\'" bound value', () => {
+    const { transformed } = transformContent('<dt-button link :link-kind="\'success\'" />');
+    assert.equal(transformed, '<dt-button link :link-kind="\'positive\'" />');
+  });
+
+  it('does not alter link-kind="muted"', () => {
+    const input = '<dt-button link link-kind="muted" />';
+    const { transformed, count } = transformContent(input);
+    assert.equal(transformed, input);
+    assert.equal(count, 0);
+  });
+});
+
 describe('validation-state value renames', () => {
   it('renames validation-state="error" → "critical"', () => {
     const { transformed } = transformContent('<dt-input validation-state="error" />');
