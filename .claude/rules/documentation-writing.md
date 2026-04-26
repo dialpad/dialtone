@@ -217,7 +217,7 @@ The plugin always adds `:show-close="false"` and `class="d-wmx100p d-my-200 dial
 - **Don't use notices for ordinary prose.** If the information flows naturally in the surrounding text, it doesn't need a callout. Notices are for content that interrupts the flow — warnings, deprecations, prerequisites, breaking changes.
 - **Don't stack multiple notices.** Two or more consecutive notices create visual clutter. Combine related information into a single notice, or restructure so only the most critical point gets a callout.
 - **Don't use notices inside code example sections.** Place them before or after the example block, not between related examples.
-- **Don't use `[!INFO]` as a default.** Choose the kind that matches the intent — most doc callouts are `WARNING` (deprecations, migration) or `ERROR` (breaking changes), not `INFO`.
+- **Don't use `[!INFO]` as a default.** Choose the kind that matches the intent — most doc callouts are `WARNING` (deprecations, migration) or `CRITICAL` (breaking changes), not `INFO`.
 
 ## Component Doc Pages (VuePress)
 

@@ -13,7 +13,7 @@
     {
       "class": "d-toast--critical",
       "applies": ".d-toast",
-      "description": "Applies error visual style."
+      "description": "Applies critical visual style."
     },
     {
       "class": "d-toast--info",
@@ -23,7 +23,7 @@
     {
       "class": "d-toast--positive",
       "applies": ".d-toast",
-      "description": "Applies success visual style."
+      "description": "Applies positive visual style."
     },
     {
       "class": "d-toast--warning",

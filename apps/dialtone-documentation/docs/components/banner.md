@@ -50,7 +50,7 @@ Banners are a type of notice and so you can use the following [Notice](notice.md
   :pinned="pinned"
   :important="important"
   :kind="selectedKind"
-  title="Optional banner title"
+  header-text="Optional banner title"
   v-show="shownBanner === 'example-kind'"
   @close="closeBanner"
 >
@@ -80,7 +80,7 @@ Pins the banner to the top of the window.
 
 <dt-banner
   :pinned="true"
-  title="Optional banner title"
+  header-text="Optional banner title"
   v-show="shownBanner === 'example-pinned'"
   @close="closeBanner"
 >
@@ -93,7 +93,7 @@ Pins the banner to the top of the window.
 ```vue code-only
 <dt-banner
   :pinned="true"
-  title="Optional banner title"
+  header-text="Optional banner title"
 >
   Detailed description goes here.
   <template #action>
