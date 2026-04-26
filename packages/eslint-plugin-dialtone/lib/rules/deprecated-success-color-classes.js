@@ -26,11 +26,13 @@ const SUCCESS_SUFFIXES = [
   '-strong-inverted',
   '-subtle-inverted',
   '-opaque-inverted',
+  '-inverted-hover',
   '-subtle-opaque',
   '-inverted',
   '-subtle',
   '-strong',
   '-opaque',
+  '-hover',
 ].join('|');
 
 // Per-role detect regexes. Each matches `d-{role}-success` optionally followed

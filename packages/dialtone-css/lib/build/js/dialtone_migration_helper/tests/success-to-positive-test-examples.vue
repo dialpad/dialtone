@@ -136,6 +136,10 @@
   color: var(--dt-color-link-success-hover);
 }
 
+.test-link-success-inverted {
+  color: var(--dt-color-link-success-inverted);
+}
+
 .test-link-success-inverted-hover {
   color: var(--dt-color-link-success-inverted-hover);
 }
