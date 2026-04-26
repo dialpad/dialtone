@@ -49,7 +49,7 @@ Use `d-p-{stop}` to set padding using spacing token stops. The number references
 
 Padding can be added to an element by using `d-p-{stop}` or a directional class like `d-p{t|r|b|l|y|x}-{stop}`. Logical property aliases are also available: `d-pbs-{stop}` (padding-block-start), `d-pbe-{stop}` (padding-block-end), `d-pis-{stop}` (padding-inline-start), `d-pie-{stop}` (padding-inline-end).
 
-It is highly recommended to use the [DtBox component](/components/box.md) prior to applying padding individually.
+It is highly recommended to use the [DtBox component](/components/box.md) before applying padding individually.
 
 <utility-class-table show-rendered>
   <template #content>

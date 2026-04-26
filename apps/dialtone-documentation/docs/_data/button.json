@@ -23,7 +23,7 @@
     {
       "class": "d-btn--critical",
       "applies": ".d-btn",
-      "description": "Base danger button style."
+      "description": "Base critical button style."
     },
     {
       "class": "d-btn--inverted",

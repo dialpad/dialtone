@@ -8,7 +8,7 @@
     {
       "class": "d-link--critical",
       "applies": ".d-link",
-      "description": "Danger link style. Used for potentially destructive actions."
+      "description": "Critical link style. Used for potentially destructive actions."
     },
     {
       "class": "d-link--inverted",
@@ -23,7 +23,7 @@
     {
       "class": "d-link--positive",
       "applies": ".d-link",
-      "description": "Success link style. Used to alert users to successful actions."
+      "description": "Positive link style. Used to alert users to successful actions."
     },
     {
       "class": "d-link--warning",
