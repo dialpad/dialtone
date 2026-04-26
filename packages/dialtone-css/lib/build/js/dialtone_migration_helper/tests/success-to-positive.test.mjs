@@ -251,16 +251,16 @@ describe('success-to-positive config', () => {
   // ─── Integration: example .vue file ────────────────────────────────────────
 
   describe('example .vue file integration', () => {
-    let input;
+    let output;
 
     before(async () => {
-      input = await readFile(
+      const input = await readFile(
         join(__dirname, 'success-to-positive-test-examples.vue'), 'utf8',
       );
+      output = apply(input);
     });
 
     it('replaces every success utility class', () => {
-      const output = apply(input);
       assert.ok(output.includes('d-fc-positive'));
       assert.ok(output.includes('d-bgc-positive-subtle'));
       assert.ok(output.includes('d-bc-positive-strong'));
@@ -268,7 +268,6 @@ describe('success-to-positive config', () => {
     });
 
     it('replaces every CSS variable family', () => {
-      const output = apply(input);
       assert.ok(output.includes('var(--dt-color-foreground-positive)'));
       assert.ok(output.includes('var(--dt-color-foreground-positive-strong-inverted)'));
       assert.ok(output.includes('var(--dt-color-surface-positive-opaque)'));
@@ -277,7 +276,6 @@ describe('success-to-positive config', () => {
     });
 
     it('preserves English words and unrelated classes', () => {
-      const output = apply(input);
       // English usage of "successfully" / "successful" left intact
       assert.ok(output.includes('successfully'));
       assert.ok(output.includes('successful operation'));
