@@ -13,7 +13,7 @@ keywords: ["visual", "brand", "image"]
         <img src="/assets/images/graphic--abstract.png" alt="" class="d-d-block d-w100p d-bar-500">
         <dt-stack>
           <h3 class="d-docsite--header-4 d-mbs-0 d-fc-primary">Abstract Graphics</h3>
-          <p class="d-docsite--paragraph d-fc-tertiary">When generating interest or connecting and communicating broad information, use simplified data visuals.</p>
+          <p class="d-docsite--paragraph d-fc-tertiary">When generating interest or evoking concepts at a brand level, use abstract visual elements.</p>
         </dt-stack>
       </dt-stack>
     </dt-link>

@@ -38,7 +38,7 @@ keywords: ["app icon","favicon","brand mark"]
     <div>
       <h2 class="d-docsite--header-3 d-mbs-0">In Product</h2>
       <p class="d-docsite--paragraph">Use the icon as a logomark to identify the application in headers, as an app icon, or favicon.</p>
-      <p class="d-docsite--paragraph"><dt-link href="#">View Dialtone Icon</dt-link></p>
+      <p class="d-docsite--paragraph"><dt-link to="/downloads/#icon">View Dialtone Icon</dt-link></p>
     </div>
     <div class="d-gc2">
       <img src="/assets/images/icon--in-product.png" alt="" class="d-bar-500 d-d-block d-w100p" />

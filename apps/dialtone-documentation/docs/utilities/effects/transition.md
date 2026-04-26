@@ -67,7 +67,7 @@ Use `d-tp-{n}` change an what items within an element are transitioned.
       <tr>
         <th scope="row" class="d-code--sm d-docsite-code">.d-t</th>
         <td class="d-code--sm">
-          transition-duration: var(--td25);<br/>
+          transition-duration: var(--td50);<br/>
           transition-property: all;<br/>
           transition-timing-function: var(--ttf-in-out);<br/>
           transition-delay: 0s;</td>

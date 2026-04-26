@@ -17,7 +17,7 @@ keywords: ["animation","transition","movement","easing", "ease", "video"]
       </dt-box>
       <dt-stack>
         <h3 class="d-docsite--header-4 d-mbs-0 d-fc-primary">Empowered → Elevated</h3>
-        <p class="d-docsite--paragraph d-fc-tertiary">By using motion the is literally uplifting, we connect to our brand character of empowering or customers.</p>
+        <p class="d-docsite--paragraph d-fc-tertiary">By using motion that is literally uplifting, we connect to our brand character of empowering our customers.</p>
       </dt-stack>
     </dt-stack>
     <dt-stack gap="200">
@@ -41,7 +41,7 @@ keywords: ["animation","transition","movement","easing", "ease", "video"]
       </dt-box>
       <dt-stack>
         <h3 class="d-docsite--header-4 d-mbs-0 d-fc-primary">Inspired → Dynamic</h3>
-        <p class="d-docsite--paragraph d-fc-tertiary">When the times right, we’re dynamic. This inspires excitement and movement about Dialpad.</p>
+        <p class="d-docsite--paragraph d-fc-tertiary">When the time’s right, we’re dynamic. This inspires excitement and movement about Dialpad.</p>
       </dt-stack>
     </dt-stack>
   </dt-box>

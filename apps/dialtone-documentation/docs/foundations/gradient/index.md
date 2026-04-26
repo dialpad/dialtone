@@ -24,7 +24,7 @@ keywords: ["gradients","color transition","linear gradient","radial gradient"]
   <div class="d-d-grid d-g-600 d-g-cols1 md:d-g-cols3 d-ai-center">
     <div>
       <h3 class="d-docsite--header-4 d-mbs-0 d-fc-primary">Technical → Dark Gradient</h3>
-      <p class="d-docsite--paragraph">For more technical communications, such as explaining AI platforms our systems, use the dark version of the gradient.</p>
+      <p class="d-docsite--paragraph">For more technical communications, such as explaining AI platforms and our systems, use the dark version of the gradient.</p>
       <p class="d-docsite--paragraph">
         <dt-link to="/foundations/gradient/product.html">Gradient in Product</dt-link>
       </p>

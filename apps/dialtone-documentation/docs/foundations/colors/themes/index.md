@@ -324,12 +324,12 @@ When creating a custom theme, it is important to ensure that the colors used are
 <dialtone-usage class="d-d-grid d-g-300 d-g-cols2">
   <template #do>
     <div class="d-bgc-secondary d-bar-400">
-      <img src="/assets/images/theme-contrast-do.png" alt="" class="d-d-block d-wmx100p d-bar4" />
+      <img src="/assets/images/theme-contrast-do.png" alt="" class="d-d-block d-wmx100p d-bar-400" />
     </div>
   </template>
   <template #dont>
     <div class="d-bgc-secondary d-bar-400">
-      <img src="/assets/images/theme-contrast-dont.png" alt="" class="d-d-block d-wmx100p d-bar4" />
+      <img src="/assets/images/theme-contrast-dont.png" alt="" class="d-d-block d-wmx100p d-bar-400" />
     </div>
   </template>
 </dialtone-usage>
