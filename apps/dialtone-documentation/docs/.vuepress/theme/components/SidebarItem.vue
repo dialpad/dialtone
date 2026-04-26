@@ -188,7 +188,7 @@
 <script setup>
 import { computed, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
-import { isExternalUrl } from '../utils/isExternalUrl';
+const isExternalUrl = (link) => /^https?:\/\//.test(link);
 
 const props = defineProps({
   isSinglePage: {
