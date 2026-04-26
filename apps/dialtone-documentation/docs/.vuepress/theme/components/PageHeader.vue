@@ -89,6 +89,7 @@
             :size="200"
             importance="outlined"
             kind="muted"
+            :disabled="!rawMarkdownUrl"
             end-tooltip-text="More options"
             start-aria-label="Copy Markdown"
             @start-clicked="onCopyAsMarkdown()"

@@ -505,7 +505,7 @@ function postProcessDownloads (sourcePath, outputPath, data) {
   const source = readFileSync(sourcePath, 'utf-8');
   const { title, description } = parseFrontmatter(source, ['title', 'description']);
 
-  const lines = [`# ${title}`, ''];
+  const lines = [`# ${title || 'Downloads'}`, ''];
   if (description) lines.push(description, '');
 
   for (const slug of data.order) {

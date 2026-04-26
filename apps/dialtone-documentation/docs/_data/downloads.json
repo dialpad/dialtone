@@ -74,7 +74,7 @@
       "items": [
         {
           "svg": "download-gradient",
-          "label": "Label"
+          "label": "Gradient"
         }
       ]
     },
@@ -100,7 +100,7 @@
       "items": [
         {
           "svg": "download-graphic",
-          "label": "Label"
+          "label": "Graphic"
         }
       ]
     }

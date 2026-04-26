@@ -43,12 +43,12 @@
         >
           <svg-loader class="d-d-block d-w100p d-bar-500" :name="item.svg" />
           <dt-stack
-            v-if="item.label"
+            v-if="item.label || item.downloadUrl"
             direction="row"
             justify="space-between"
             gap="200"
           >
-            <dt-text kind="body" size="300" tone="secondary">
+            <dt-text v-if="item.label" kind="body" size="300" tone="secondary">
               {{ item.label }}
             </dt-text>
             <dt-button
