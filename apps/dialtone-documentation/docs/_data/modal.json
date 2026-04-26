@@ -33,7 +33,7 @@
     {
       "class": "d-modal__banner--positive",
       "applies": "d-modal__banner",
-      "description": "Styles d-modal__banner for Success messaging."
+      "description": "Styles d-modal__banner for Positive messaging."
     },
     {
       "class": "d-modal__banner--general",

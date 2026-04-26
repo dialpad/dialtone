@@ -13,7 +13,7 @@
     {
       "class": "d-banner--critical",
       "applies": ".d-banner",
-      "description": "Applies error visual style."
+      "description": "Applies critical visual style."
     },
     {
       "class": "d-banner--info",
@@ -23,7 +23,7 @@
     {
       "class": "d-banner--positive",
       "applies": ".d-banner",
-      "description": "Applies success visual style."
+      "description": "Applies positive visual style."
     },
     {
       "class": "d-banner--warning",

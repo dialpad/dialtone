@@ -31,7 +31,7 @@ export default {
   mention: {
     props: {
       href: { initialValue: '#link' },
-      kind: { initialValue: 'mention' },
+      tone: { initialValue: 'mention' },
     },
     slots: {
       default: { initialValue: 'Mention link' },
