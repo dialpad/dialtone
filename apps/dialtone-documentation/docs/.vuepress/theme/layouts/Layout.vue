@@ -35,7 +35,7 @@
       />
     </template>
     <template
-      v-if="!$frontmatter.home"
+      v-if="!$frontmatter.home && !$frontmatter.noSidebar"
       #sidebar
     >
       <sidebar />

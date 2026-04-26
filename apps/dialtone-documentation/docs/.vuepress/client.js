@@ -5,6 +5,7 @@ import { provide, shallowRef } from 'vue';
 import Icons from './views/Icons.vue';
 import Overview from './views/Overview.vue';
 import UiKitsOverview from './views/UiKitsOverview.vue';
+import DownloadsCatalog from './views/DownloadsCatalog.vue';
 
 // Base components
 import CodeWellHeader from './baseComponents/CodeWellHeader.vue';
@@ -27,6 +28,7 @@ export default defineClientConfig({
     app.component('Icons', Icons);
     app.component('Overview', Overview);
     app.component('UiKitsOverview', UiKitsOverview);
+    app.component('DownloadsCatalog', DownloadsCatalog);
 
     // Base components
     app.component('CodeWellHeader', CodeWellHeader);
