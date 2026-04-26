@@ -9,17 +9,18 @@
         v-if="hovercardMap[link.text].length && dismissedKey !== link.text"
         placement="bottom-start"
         dialog-class="d-w-1000 d-p-0"
-        padding="medium"
+        padding="large"
         transition="true"
+        enter-delay="500"
         :offset="[-8, 8]"
       >
         <template #anchor>
-          <dt-button v-bind="navButtonProps(link)">
+          <dt-button v-bind="navButtonProps(link)" @click="dismissHovercard(link.text, 'anchor')">
             {{ link.text }}
           </dt-button>
         </template>
         <template #content>
-          <dt-box class="d-d-grid d-g-100 d-g-cols2 d-ai-start">
+          <dt-box class="d-d-grid d-g-50 d-g-cols2 d-ai-stretch ">
             <dt-button
               v-for="item in hovercardMap[link.text]"
               :key="item.link"
@@ -27,27 +28,32 @@
               kind="muted"
               importance="clear"
               :to="item.link"
-              start-icon-class="d-as-start d-pbs-50"
+              start-icon-class="d-as-start d-pbs-100 d-pis-50"
+              label-class="d-p-50 d-pis-100"
+              class="d-ai-start"
               @click="dismissHovercard(link.text)"
             >
               <template v-if="item.icon" #startIcon="{ iconSize }">
                 <dt-icon class="d-fc-muted" :name="item.icon" :size="iconSize" />
               </template>
-              <dt-box padding-inline-start="50">
-                <dt-stack gap="50">
-                  <dt-text kind="headline" size="300">
-                    {{ item.text }}
-                  </dt-text>
-                  <dt-text kind="body" size="200" tone="muted">
-                    {{ item.description }}
-                  </dt-text>
-                </dt-stack>
-              </dt-box>
+              <dt-stack gap="50">
+                <dt-text kind="headline" size="300">
+                  {{ item.text }}
+                </dt-text>
+                <dt-text kind="body" size="200" tone="muted">
+                  {{ item.description }}
+                </dt-text>
+              </dt-stack>
             </dt-button>
           </dt-box>
         </template>
       </dt-hovercard>
-      <dt-button v-else v-bind="navButtonProps(link)">
+      <dt-button
+        v-else
+        v-bind="navButtonProps(link)"
+        @mouseleave="releaseDismissal(link.text)"
+        @blur="releaseDismissal(link.text)"
+      >
         {{ link.text }}
       </dt-button>
     </template>
@@ -292,21 +298,38 @@ const showThemeSwitcher = __VUEPRESS_DEV__ || __DIALTONE_DEPLOY_PREVIEW__;
 
 // Unmount the hovercard via v-if to guarantee instant dismissal on click —
 // bypasses DtHovercard's focus/transition/hover state entirely.
-// Reset on route change (so it can remount on the next page) or via a timer
-// fallback for same-page clicks that don't trigger navigation.
+// Reset path differs by where the click originated:
+//   'inner' click (item inside the popover): cursor is in the popover content,
+//     not the anchor — mouseleave on the anchor button never fires. Reset via
+//     route change (navigation) or a timer fallback (same-page click).
+//   'anchor' click (the nav button itself): cursor stays on the anchor after
+//     click. Resetting too early causes the hovercard to remount under the
+//     cursor, fire mouseenter, and re-open after enterDelay. So for anchor
+//     clicks the only reset path is mouseleave on the plain button.
 const dismissedKey = ref(null);
+let dismissalKind = null;
 let resetTimer;
-const dismissHovercard = (key) => {
+const dismissHovercard = (key, kind = 'inner') => {
   dismissedKey.value = key;
+  dismissalKind = kind;
   clearTimeout(resetTimer);
-  resetTimer = setTimeout(() => {
-    if (dismissedKey.value === key) dismissedKey.value = null;
-  }, 400);
+  if (kind === 'inner') {
+    resetTimer = setTimeout(() => {
+      if (dismissedKey.value === key) clearDismissal();
+    }, 400);
+  }
 };
-watch(() => route.path, () => {
-  if (dismissedKey.value === null) return;
+const releaseDismissal = (key) => {
+  if (dismissedKey.value === key) clearDismissal();
+};
+function clearDismissal () {
   clearTimeout(resetTimer);
   dismissedKey.value = null;
+  dismissalKind = null;
+}
+watch(() => route.path, () => {
+  if (dismissalKind !== 'inner' || dismissedKey.value === null) return;
+  clearDismissal();
 });
 onUnmounted(() => clearTimeout(resetTimer));
 
