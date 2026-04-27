@@ -1,0 +1,69 @@
+name: Standards Freshness Check
+
+on:
+  pull_request:
+    paths:
+      - 'packages/dialtone-docs/src/content/standards/**'
+
+env:
+  HUSKY: 0
+
+concurrency:
+  group: "standards-freshness-${{ github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+
+      - name: Setup Environment
+        uses: ./.github/actions/setup-environment
+
+      - name: Run freshness check
+        id: freshness
+        run: |
+          node packages/dialtone-docs/src/generators/check-freshness.mjs > /tmp/freshness.json
+          STALE_COUNT=$(jq '.stale | length' /tmp/freshness.json)
+          echo "stale_count=$STALE_COUNT" >> $GITHUB_OUTPUT
+
+      - name: Post PR comment if stale docs found
+        if: steps.freshness.outputs.stale_count != '0'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const report = JSON.parse(fs.readFileSync('/tmp/freshness.json', 'utf8'));
+
+            const rows = report.stale.map(({ file, last_verified, days_since_verified }) => {
+              const age = days_since_verified !== null ? `${days_since_verified} days` : 'never verified';
+              return `| \`${file}\` | ${last_verified ?? '—'} | ${age} |`;
+            }).join('\n');
+
+            const body = [
+              '## ⏰ Standards Freshness Check',
+              '',
+              `The following ${report.stale.length === 1 ? 'standard has' : 'standards have'} \`last_verified\` older than ${report.threshold_days} days:`,
+              '',
+              '| File | last_verified | Age |',
+              '|------|--------------|-----|',
+              rows,
+              '',
+              '**To resolve:** re-read each flagged standard, confirm it is still accurate, then bump its `last_verified` date in the YAML frontmatter.',
+              '',
+              '> The 90-day cadence aligns with the AI citation decay window — see `standard-geo-optimization.md` for context.',
+            ].join('\n');
+
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body,
+            });
