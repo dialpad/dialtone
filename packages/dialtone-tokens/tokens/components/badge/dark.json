@@ -2,10 +2,6 @@
   "badge": {
     "color": {
       "background": {
-        "success": {
-          "value": "{color.green.500}",
-          "type": "color"
-        },
         "bulletin-subtle": {
           "value": "{color.purple.200}",
           "type": "color"
