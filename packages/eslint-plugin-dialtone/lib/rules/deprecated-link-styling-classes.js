@@ -25,12 +25,14 @@ function tokenize (classValue) {
 
 const D_TD_TOKEN_RE = /^(?:[\w-]+:)?d-td-[\w-]+$/;
 
+const RELEVANT_TAGS = new Set(['a', 'router-link', 'dt-link']);
+
 const TAG_TOKEN_CHECKS = [
-  { tag: 'a', token: 'd-btn', messageId: 'anchorWithDBtn' },
-  { tag: 'a', token: 'd-link', messageId: 'anchorWithDLink' },
-  { tag: 'router-link', token: 'd-btn', messageId: 'routerLinkWithDBtn' },
-  { tag: 'router-link', token: 'd-link', messageId: 'routerLinkWithDLink' },
-  { tag: 'dt-link', token: D_TD_TOKEN_RE, messageId: 'dtLinkWithDTd' },
+  { tag: 'a', test: tokens => tokens.includes('d-btn'), messageId: 'anchorWithDBtn' },
+  { tag: 'a', test: tokens => tokens.includes('d-link'), messageId: 'anchorWithDLink' },
+  { tag: 'router-link', test: tokens => tokens.includes('d-btn'), messageId: 'routerLinkWithDBtn' },
+  { tag: 'router-link', test: tokens => tokens.includes('d-link'), messageId: 'routerLinkWithDLink' },
+  { tag: 'dt-link', test: tokens => tokens.some(t => D_TD_TOKEN_RE.test(t)), messageId: 'dtLinkWithDTd' },
 ];
 
 //------------------------------------------------------------------------------
@@ -73,7 +75,7 @@ module.exports = {
       VElement (node) {
         const rawName = node.rawName || node.name;
         const tagName = rawName.toLowerCase();
-        if (tagName !== 'a' && tagName !== 'router-link' && tagName !== 'dt-link') return;
+        if (!RELEVANT_TAGS.has(tagName)) return;
 
         const result = getStaticClassValue(node);
         if (!result) return;
@@ -81,10 +83,7 @@ module.exports = {
 
         for (const check of TAG_TOKEN_CHECKS) {
           if (check.tag !== tagName) continue;
-          const hit = check.token instanceof RegExp
-            ? tokens.some(t => check.token.test(t))
-            : tokens.includes(check.token);
-          if (hit) context.report({ node: result.attr, messageId: check.messageId });
+          if (check.test(tokens)) context.report({ node: result.attr, messageId: check.messageId });
         }
       },
     });

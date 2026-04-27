@@ -27,7 +27,7 @@ List all available migrations with descriptions.
 Run the specified migration:
 
 1. Confirm the target directory with the user (default: `./src`)
-2. Run `npx dialtone-migration-helper --cwd <dir>` and select the named config
+2. Look up `<name>` in the table above. If the Command column shows `npx dialtone-migration-helper`, run that command and select the named config interactively. If the Command column shows a different `npx <name>` invocation (a standalone CLI — e.g., `link-rendering` runs `npx dialtone-migrate-link-rendering`), run the command shown directly with `--cwd <dir>` instead.
 3. Report the number of files changed and matches replaced
 4. Suggest running linters after migration to catch remaining manual fixes
 

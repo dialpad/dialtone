@@ -507,8 +507,7 @@ function buildRewrittenTag ({ config, classValue, attrs, isRouterLink, selfClosi
   return `<${config.targetTag}${finalAttrs}${selfClosing ? ' />' : '>'}`;
 }
 
-// eslint-disable-next-line no-unused-vars
-function extractDtButtonModifiers (tokens, newAttrs, ctx) {
+function extractDtButtonModifiers (tokens, newAttrs) {
   const size = extractSizeModifier(tokens);
   if (size != null) newAttrs.push(`:size="${size}"`);
 
