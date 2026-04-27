@@ -207,6 +207,25 @@ describe('button-nav: quote-aware tag matching survives `>` inside Vue bindings'
   });
 });
 
+describe('button-nav: whitespace inside quoted attribute values is preserved', () => {
+  it('<a class="d-btn" title="Hello   world"> keeps multi-space title verbatim', () => {
+    assert.equal(
+      runTransform('<a class="d-btn" title="Hello   world" href="/x">Go</a>'),
+      '<dt-button title="Hello   world" href="/x">Go</dt-button>',
+    );
+  });
+});
+
+describe('button-nav: <router-link custom> wrapper warn is scoped to the wrapper body', () => {
+  it('<router-link custom> with a sibling <dt-button> later in the file does not warn', () => {
+    const input =
+      '<router-link custom v-slot="{ navigate }" to="/x"><span @click="navigate">Go</span></router-link>\n' +
+      '<dt-button href="/elsewhere">Unrelated</dt-button>';
+    const { warnings } = runTransformVerbose(input, { filePath: 'fixture.vue' });
+    assert.equal(warnings.filter(w => /router-link custom/.test(w)).length, 0);
+  });
+});
+
 describe('button-nav: requires base d-btn token, not just a modifier', () => {
   it('<a class="d-btn--lg"> without base d-btn is not transformed', () => {
     const input = '<a class="d-btn--lg" href="/x">Go</a>';

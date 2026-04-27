@@ -314,7 +314,10 @@ function extractAttr (attrs, attrName) {
  * a single leading space when non-empty (so `<dt-button href="...">` parses).
  */
 function normalizeAttrs (attrs) {
-  const trimmed = attrs.replace(/\s+/g, ' ').trim();
+  // Trim only the outer separators. Don't collapse internal `\s+` because that
+  // also rewrites whitespace INSIDE quoted attribute values (e.g. `title="Hello   world"`
+  // would lose its spaces).
+  const trimmed = attrs.trim();
   return trimmed ? ` ${trimmed}` : '';
 }
 
@@ -445,7 +448,7 @@ function rewriteAnchorOrRouterLink (content, sourceTag, config, ctx, isRouterLin
     const openStart = m.index;
     const openEnd = openStart + fullOpen.length;
 
-    const restAttrs = `${attrsBefore || ''} ${attrsAfter || ''}`.replace(/\s+/g, ' ').trim();
+    const restAttrs = `${attrsBefore || ''} ${attrsAfter || ''}`.trim();
 
     if (selfClose === '/') {
       const rewritten = buildRewrittenTag({
@@ -582,13 +585,17 @@ function extractDtLinkModifiers (tokens, newAttrs, ctx) {
 function warnRouterLinkCustomWrappers (content, targetTag, ctx) {
   // Two-step: quote-aware capture of <router-link …> attrs, then test for bare
   // `custom` attribute. Avoids false-matching `attr="something custom"`.
+  // The body search is scoped to the matching </router-link> so a target tag
+  // that appears later in the file (outside this wrapper) doesn't false-fire.
   const openRe = new RegExp(`<${tagNamePattern('router-link')}\\b(${QUOTE_AWARE_ATTRS}?)>`, 'g');
   const targetRe = new RegExp(`<${tagNamePattern(targetTag)}\\b`);
   let m;
   while ((m = openRe.exec(content)) !== null) {
     if (!/(?:^|\s)custom(?=\s|=|\/|>|$)/.test(m[1])) continue;
-    const after = content.slice(m.index + m[0].length);
-    if (!targetRe.test(after)) continue;
+    const close = findClosingTag(content, m.index + m[0].length, 'router-link');
+    if (!close) continue;
+    const body = content.slice(m.index + m[0].length, close.closeStart);
+    if (!targetRe.test(body)) continue;
     ctx.warnings.push(
       `${ctx.filePath}: <router-link custom> wrapping <${targetTag}> — manual review required (lift the to= onto <${targetTag}> directly).`,
     );
@@ -708,7 +715,7 @@ function transformUnderline (content, ctx) {
 
     // Build new class attribute
     const newClassValue = remaining.join(' ');
-    let newAttrs = attrs.replace(classMatch[0], '').replace(/\s+/g, ' ').trim();
+    let newAttrs = attrs.replace(classMatch[0], '').trim();
     if (newClassValue) newAttrs += ` class=${quoteAttr(newClassValue)}`;
     if (propValue === 'false') newAttrs += ' :underline="false"';
 
