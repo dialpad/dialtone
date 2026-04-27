@@ -49,7 +49,9 @@ function buildEntry(absolutePath) {
     keywords: Array.isArray(frontmatter.keywords) ? frontmatter.keywords : [],
     summary: frontmatter.ai_summary ?? null,
     content,
-    lastUpdated: frontmatter.last_updated ? String(frontmatter.last_updated) : null,
+    lastUpdated: frontmatter.last_updated instanceof Date
+      ? frontmatter.last_updated.toISOString().split('T')[0]
+      : (frontmatter.last_updated ?? null),
     relatedPackages: Array.isArray(frontmatter.related_packages) ? frontmatter.related_packages : [],
     filePath,
   };
