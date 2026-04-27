@@ -44,7 +44,20 @@ import { fileURLToPath } from 'node:url';
 // Configuration
 // ---------------------------------------------------------------------------
 
-const ALL_TRANSFORMS = ['button-nav', 'link-nav', 'underline'];
+const TRANSFORM = Object.freeze({
+  BUTTON_NAV: 'button-nav',
+  LINK_NAV: 'link-nav',
+  UNDERLINE: 'underline',
+});
+
+const ALL_TRANSFORMS = Object.values(TRANSFORM);
+
+// Cheap precheck pattern. Skip the masking + transform sweeps only when the file
+// contains none of the tokens any of the three transforms or the warn-only paths
+// could possibly hit. `<router-link` is included because the custom-slot wrapper
+// warning can fire even when the inner `<dt-button>` / `<dt-link>` carries no
+// legacy class.
+const FAST_PATH_RE = /d-btn|d-link|d-td-|<router-link/;
 
 // Tone modifier values (canonical and renamed-from forms)
 const TONE_MODIFIER_MAP = {
@@ -233,13 +246,27 @@ function detectDynamicClass (attrs) {
   return /(^|[\s])(:|v-bind:)class\s*=/.test(attrs);
 }
 
+// Memoized regex pairs per attribute name so per-tag calls don't recompile.
+const EXTRACT_ATTR_RE_CACHE = new Map();
+
+function extractAttrRegexes (attrName) {
+  let cached = EXTRACT_ATTR_RE_CACHE.get(attrName);
+  if (cached) return cached;
+  cached = {
+    dyn: new RegExp(`(?<=^|\\s)(:|v-bind:)${escapeRe(attrName)}=("([^"]*)"|'([^']*)')`),
+    stat: new RegExp(`(?<=^|\\s)${escapeRe(attrName)}=("([^"]*)"|'([^']*)')`),
+  };
+  EXTRACT_ATTR_RE_CACHE.set(attrName, cached);
+  return cached;
+}
+
 /**
  * Extract a static or dynamic attribute from an attrs string.
  * Returns { name, value, dynamic, before, after } or null.
  */
 function extractAttr (attrs, attrName) {
-  const dynRe = new RegExp(`(?<=^|\\s)(:|v-bind:)${escapeRe(attrName)}=("([^"]*)"|'([^']*)')`);
-  const dynMatch = attrs.match(dynRe);
+  const { dyn, stat } = extractAttrRegexes(attrName);
+  const dynMatch = attrs.match(dyn);
   if (dynMatch) {
     const value = dynMatch[3] !== undefined ? dynMatch[3] : dynMatch[4];
     return {
@@ -250,8 +277,7 @@ function extractAttr (attrs, attrName) {
       after: attrs.slice(dynMatch.index + dynMatch[0].length),
     };
   }
-  const staticRe = new RegExp(`(?<=^|\\s)${escapeRe(attrName)}=("([^"]*)"|'([^']*)')`);
-  const staticMatch = attrs.match(staticRe);
+  const staticMatch = attrs.match(stat);
   if (staticMatch) {
     const value = staticMatch[2] !== undefined ? staticMatch[2] : staticMatch[3];
     return {
@@ -283,9 +309,22 @@ function normalizeAttrs (attrs) {
  * find the index of the matching closing `</tagName>` (depth-aware). Returns
  * { closeStart, closeEnd } or null if unbalanced.
  */
+// Memoized open/close regex pairs per tag name. Each call needs fresh
+// `lastIndex` state, so we clone with new RegExp() on lookup but reuse the
+// compiled pattern source string.
+const CLOSING_TAG_RE_CACHE = new Map();
+
 function findClosingTag (content, openEndIndex, tagName) {
-  const openRe = new RegExp(`<${escapeRe(tagName)}\\b[^>]*>`, 'g');
-  const closeRe = new RegExp(`</${escapeRe(tagName)}\\s*>`, 'g');
+  let cached = CLOSING_TAG_RE_CACHE.get(tagName);
+  if (!cached) {
+    cached = {
+      open: `<${escapeRe(tagName)}\\b[^>]*>`,
+      close: `</${escapeRe(tagName)}\\s*>`,
+    };
+    CLOSING_TAG_RE_CACHE.set(tagName, cached);
+  }
+  const openRe = new RegExp(cached.open, 'g');
+  const closeRe = new RegExp(cached.close, 'g');
   openRe.lastIndex = openEndIndex;
   closeRe.lastIndex = openEndIndex;
 
@@ -314,43 +353,61 @@ function findClosingTag (content, openEndIndex, tagName) {
 }
 
 // ---------------------------------------------------------------------------
-// DLT-3033: <a class="d-btn">  /  <router-link class="d-btn">  ->  <dt-button>
+// Navigation transforms (anchor / router-link → DtButton / DtLink)
 // ---------------------------------------------------------------------------
 
+// One ComponentConfig per target component. Holds the strings that vary
+// between the DtButton and DtLink rewrite paths so `buildRewrittenTag`
+// stays free of `targetTag === 'dt-button'` ternaries.
+const COMPONENT_CONFIGS = Object.freeze({
+  'dt-button': {
+    targetTag: 'dt-button',
+    baseClass: 'd-btn',
+    warningSourceLabel: 'a/router-link.d-btn',
+    extractModifiers: extractDtButtonModifiers,
+  },
+  'dt-link': {
+    targetTag: 'dt-link',
+    baseClass: 'd-link',
+    warningSourceLabel: 'a/router-link.d-link',
+    extractModifiers: extractDtLinkModifiers,
+  },
+});
+
+// Memoized `<sourceTag …class="…requiredClass…"…>` regexes. Keyed on
+// `${sourceTag}|${requiredClass}` so the four (sourceTag × requiredClass)
+// combinations the codemod uses are each compiled once.
+const OPEN_WITH_CLASS_RE_CACHE = new Map();
+
+function openWithClassRegex (sourceTag, requiredClass) {
+  const key = `${sourceTag}|${requiredClass}`;
+  let cached = OPEN_WITH_CLASS_RE_CACHE.get(key);
+  if (cached) return cached;
+  cached = new RegExp(
+    `<${escapeRe(sourceTag)}\\b([^>]*?)\\sclass=("([^"]*\\b${escapeRe(requiredClass)}\\b[^"]*)"|'([^']*\\b${escapeRe(requiredClass)}\\b[^']*)')([^>]*?)(/?)>`,
+    'g',
+  );
+  OPEN_WITH_CLASS_RE_CACHE.set(key, cached);
+  return cached;
+}
 
 function transformButtonNav (content, ctx) {
-  let out = content;
-
-  // Phase 1: <a class="d-btn"> ... </a>
-  out = rewriteAnchorOrRouterLink(out, /<a\b/, '</a>', 'a', 'd-btn', 'dt-button', ctx, /* isRouterLink */ false);
-
-  // Phase 2: <router-link class="d-btn"> ... </router-link>
-  out = rewriteAnchorOrRouterLink(out, /<router-link\b/, '</router-link>', 'router-link', 'd-btn', 'dt-button', ctx, /* isRouterLink */ true);
-
-  // Phase 3: <router-link custom> wrapping <dt-button> — warn-only
-  warnRouterLinkCustomWrappers(out, 'dt-button', ctx);
-
+  const config = COMPONENT_CONFIGS['dt-button'];
+  let out = rewriteAnchorOrRouterLink(content, 'a', config, ctx, /* isRouterLink */ false);
+  out = rewriteAnchorOrRouterLink(out, 'router-link', config, ctx, /* isRouterLink */ true);
+  warnRouterLinkCustomWrappers(out, config.targetTag, ctx);
   return out;
 }
 
 /**
  * Walk the content looking for `<sourceTag …>` opening tags whose static class attr
- * contains `requiredClass`. For each match, find the matching closing tag and rewrite
- * the pair to `<targetTag …>…</targetTag>` with attrs derived from the source.
- *
- * Used for both DtButton (d-btn) and DtLink (d-link). The targetTag determines which
- * modifier extractors apply.
+ * contains `config.baseClass`. For each match, find the matching closing tag and rewrite
+ * the pair to `<config.targetTag …>…</config.targetTag>` with attrs derived from the source.
  */
-function rewriteAnchorOrRouterLink (
-  content, openTagRe, closeTagText, sourceTag,
-  requiredClass, targetTag, ctx, isRouterLink,
-) {
-  // Build a single regex that matches the opening tag with the required class
-  // (in either single-quoted or double-quoted form) — use case-insensitive `\b` boundaries.
-  const openWithClassRe = new RegExp(
-    `<${escapeRe(sourceTag)}\\b([^>]*?)\\sclass=("([^"]*\\b${escapeRe(requiredClass)}\\b[^"]*)"|'([^']*\\b${escapeRe(requiredClass)}\\b[^']*)')([^>]*?)(/?)>`,
-    'g',
-  );
+function rewriteAnchorOrRouterLink (content, sourceTag, config, ctx, isRouterLink) {
+  const openWithClassRe = openWithClassRegex(sourceTag, config.baseClass);
+  // Re-init lastIndex since we cache the regex object across calls.
+  openWithClassRe.lastIndex = 0;
 
   const replacements = [];
   let m;
@@ -360,25 +417,17 @@ function rewriteAnchorOrRouterLink (
     const openStart = m.index;
     const openEnd = openStart + fullOpen.length;
 
-    // Reconstitute the attrs string excluding the class= we matched, preserving spacing.
     const restAttrs = `${attrsBefore || ''} ${attrsAfter || ''}`.replace(/\s+/g, ' ').trim();
 
-    let rewritten;
     if (selfClose === '/') {
-      rewritten = buildRewrittenTag({
-        targetTag,
-        classValue,
-        attrs: restAttrs,
-        isRouterLink,
-        selfClosing: true,
-        ctx,
+      const rewritten = buildRewrittenTag({
+        config, classValue, attrs: restAttrs, isRouterLink, selfClosing: true, ctx,
       });
       if (rewritten == null) continue;
       replacements.push({ start: openStart, end: openEnd, text: rewritten });
       continue;
     }
 
-    // Find the matching closing tag
     const close = findClosingTag(content, openEnd, sourceTag);
     if (!close) {
       ctx.warnings.push(
@@ -387,22 +436,15 @@ function rewriteAnchorOrRouterLink (
       continue;
     }
 
-    rewritten = buildRewrittenTag({
-      targetTag,
-      classValue,
-      attrs: restAttrs,
-      isRouterLink,
-      selfClosing: false,
-      ctx,
-      sourceFullOpen: fullOpen,
+    const rewritten = buildRewrittenTag({
+      config, classValue, attrs: restAttrs, isRouterLink, selfClosing: false, ctx,
     });
     if (rewritten == null) continue;
 
     replacements.push({ start: openStart, end: openEnd, text: rewritten });
-    replacements.push({ start: close.closeStart, end: close.closeEnd, text: `</${targetTag}>` });
+    replacements.push({ start: close.closeStart, end: close.closeEnd, text: `</${config.targetTag}>` });
   }
 
-  // Apply replacements in reverse so indices stay valid
   replacements.sort((a, b) => b.start - a.start);
   let out = content;
   for (const r of replacements) {
@@ -414,25 +456,21 @@ function rewriteAnchorOrRouterLink (
 /**
  * Build the rewritten opening tag. Returns null to abort the rewrite (with a warning).
  */
-function buildRewrittenTag ({ targetTag, classValue, attrs, isRouterLink, selfClosing, ctx }) {
-  // Detect dynamic class — we can't safely rewrite if there's a :class= alongside the static class
+function buildRewrittenTag ({ config, classValue, attrs, isRouterLink, selfClosing, ctx }) {
   if (detectDynamicClass(attrs)) {
     ctx.warnings.push(
-      `${ctx.filePath}: <${targetTag === 'dt-button' ? 'a/router-link.d-btn' : 'a/router-link.d-link'}> with dynamic :class — manual review required.`,
+      `${ctx.filePath}: <${config.warningSourceLabel}> with dynamic :class — manual review required.`,
     );
     return null;
   }
 
   let workingAttrs = attrs;
   const tokens = splitClasses(classValue);
-  const newAttrs = []; // collected new prop attributes (already in `name="value"` or `:name="value"` form)
+  const newAttrs = [];
 
-  // 1. Strip the base class (d-btn or d-link)
-  const baseClass = targetTag === 'dt-button' ? 'd-btn' : 'd-link';
-  const baseIdx = tokens.indexOf(baseClass);
+  const baseIdx = tokens.indexOf(config.baseClass);
   if (baseIdx !== -1) tokens.splice(baseIdx, 1);
 
-  // 2. Source-tag-specific link routing: lift `to=` from <router-link>
   if (isRouterLink) {
     const toAttr = extractAttr(workingAttrs, 'to');
     if (toAttr) {
@@ -440,14 +478,12 @@ function buildRewrittenTag ({ targetTag, classValue, attrs, isRouterLink, selfCl
       const propName = toAttr.dynamic ? ':to' : 'to';
       newAttrs.push(`${propName}=${quoteAttr(toAttr.value)}`);
     } else {
-      // <router-link class="d-btn"> with no `to=` is unusual but legal — emit warning
       ctx.warnings.push(
         `${ctx.filePath}: <router-link class="${classValue}"> without a \`to\` attribute — skipped (likely already migrated or hand-authored).`,
       );
       return null;
     }
   } else {
-    // <a class="d-btn"> — lift href= (warn if dynamic)
     const hrefAttr = extractAttr(workingAttrs, 'href');
     if (hrefAttr && hrefAttr.dynamic) {
       ctx.warnings.push(
@@ -462,25 +498,17 @@ function buildRewrittenTag ({ targetTag, classValue, attrs, isRouterLink, selfCl
     // Anchors without href are technically invalid but we still rewrite so consumer sees the change
   }
 
-  // 3. Extract modifier classes per target component
-  if (targetTag === 'dt-button') {
-    extractDtButtonModifiers(tokens, newAttrs);
-  } else {
-    extractDtLinkModifiers(tokens, newAttrs, ctx);
-  }
+  config.extractModifiers(tokens, newAttrs, ctx);
 
-  // 4. Reconstruct class attr from leftover tokens (preserves vendor / BEM / utility classes)
   const remainingClass = joinClasses(tokens);
-  if (remainingClass) {
-    newAttrs.push(`class=${quoteAttr(remainingClass)}`);
-  }
+  if (remainingClass) newAttrs.push(`class=${quoteAttr(remainingClass)}`);
 
-  // 5. Compose final attrs: original attrs (minus extracted) + new attrs
   const finalAttrs = normalizeAttrs(`${workingAttrs} ${newAttrs.join(' ')}`);
-  return `<${targetTag}${finalAttrs}${selfClosing ? ' />' : '>'}`;
+  return `<${config.targetTag}${finalAttrs}${selfClosing ? ' />' : '>'}`;
 }
 
-function extractDtButtonModifiers (tokens, newAttrs) {
+// eslint-disable-next-line no-unused-vars
+function extractDtButtonModifiers (tokens, newAttrs, ctx) {
   const size = extractSizeModifier(tokens);
   if (size != null) newAttrs.push(`:size="${size}"`);
 
@@ -532,15 +560,15 @@ function warnRouterLinkCustomWrappers (content, targetTag, ctx) {
 // ---------------------------------------------------------------------------
 
 function transformLinkNav (content, ctx) {
-  let out = content;
-  out = rewriteAnchorOrRouterLink(out, /<a\b/, '</a>', 'a', 'd-link', 'dt-link', ctx, false);
-  out = rewriteAnchorOrRouterLink(out, /<router-link\b/, '</router-link>', 'router-link', 'd-link', 'dt-link', ctx, true);
-  warnRouterLinkCustomWrappers(out, 'dt-link', ctx);
+  const config = COMPONENT_CONFIGS['dt-link'];
+  let out = rewriteAnchorOrRouterLink(content, 'a', config, ctx, false);
+  out = rewriteAnchorOrRouterLink(out, 'router-link', config, ctx, true);
+  warnRouterLinkCustomWrappers(out, config.targetTag, ctx);
   return out;
 }
 
 // ---------------------------------------------------------------------------
-// DLT-3035: <dt-link class="d-td-...">  ->  closest :underline value
+// Underline transform (d-td-* utility classes on <dt-link> → underline prop)
 // ---------------------------------------------------------------------------
 
 const D_TD_RECOGNIZED_TOKEN_RE = /^(?:h:)?d-td-(none|underline)$/;
@@ -674,18 +702,24 @@ function unmaskInertContent (masked, segments) {
  * Transform a file's contents. Returns { transformed, warnings, notes }.
  */
 export function transformContent (content, opts = {}) {
-  const enabled = opts.only && opts.only.length > 0 ? new Set(opts.only) : new Set(ALL_TRANSFORMS);
   const ctx = {
     filePath: opts.filePath || '<input>',
     warnings: [],
     notes: [],
   };
 
+  // Fast path: most consumer files contain none of the relevant tokens. Skip
+  // masking and three regex sweeps when the cheap precheck rules them out.
+  if (!FAST_PATH_RE.test(content)) {
+    return { transformed: content, warnings: ctx.warnings, notes: ctx.notes };
+  }
+
+  const enabled = opts.only && opts.only.length > 0 ? new Set(opts.only) : new Set(ALL_TRANSFORMS);
   const { masked, segments } = maskInertContent(content, ctx.filePath);
   let out = masked;
-  if (enabled.has('button-nav')) out = transformButtonNav(out, ctx);
-  if (enabled.has('link-nav')) out = transformLinkNav(out, ctx);
-  if (enabled.has('underline')) out = transformUnderline(out, ctx);
+  if (enabled.has(TRANSFORM.BUTTON_NAV)) out = transformButtonNav(out, ctx);
+  if (enabled.has(TRANSFORM.LINK_NAV)) out = transformLinkNav(out, ctx);
+  if (enabled.has(TRANSFORM.UNDERLINE)) out = transformUnderline(out, ctx);
 
   return { transformed: unmaskInertContent(out, segments), warnings: ctx.warnings, notes: ctx.notes };
 }

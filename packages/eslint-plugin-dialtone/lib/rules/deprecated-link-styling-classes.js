@@ -25,6 +25,14 @@ function tokenize (classValue) {
 
 const D_TD_TOKEN_RE = /^(?:[\w-]+:)?d-td-[\w-]+$/;
 
+const TAG_TOKEN_CHECKS = [
+  { tag: 'a', token: 'd-btn', messageId: 'anchorWithDBtn' },
+  { tag: 'a', token: 'd-link', messageId: 'anchorWithDLink' },
+  { tag: 'router-link', token: 'd-btn', messageId: 'routerLinkWithDBtn' },
+  { tag: 'router-link', token: 'd-link', messageId: 'routerLinkWithDLink' },
+  { tag: 'dt-link', token: D_TD_TOKEN_RE, messageId: 'dtLinkWithDTd' },
+];
+
 //------------------------------------------------------------------------------
 // Rule Definition
 //------------------------------------------------------------------------------
@@ -60,39 +68,23 @@ module.exports = {
 
   create (context) {
     const sourceCode = context.sourceCode ?? context.getSourceCode();
-    if (!sourceCode.parserServices || !sourceCode.parserServices.defineTemplateBodyVisitor) {
-      // Not a Vue file context; do nothing.
-      return {};
-    }
     return sourceCode.parserServices.defineTemplateBodyVisitor({
        
       VElement (node) {
         const rawName = node.rawName || node.name;
-        // vue-eslint-parser lowercases the tag name in `name`; rawName preserves casing.
         const tagName = rawName.toLowerCase();
+        if (tagName !== 'a' && tagName !== 'router-link' && tagName !== 'dt-link') return;
 
         const result = getStaticClassValue(node);
         if (!result) return;
         const tokens = tokenize(result.value);
 
-        const hasDBtn = tokens.includes('d-btn');
-        const hasDLink = tokens.includes('d-link');
-        const hasDtd = tokens.some(t => D_TD_TOKEN_RE.test(t));
-
-        if (tagName === 'a' && hasDBtn) {
-          context.report({ node: result.attr, messageId: 'anchorWithDBtn' });
-        }
-        if (tagName === 'a' && hasDLink) {
-          context.report({ node: result.attr, messageId: 'anchorWithDLink' });
-        }
-        if (tagName === 'router-link' && hasDBtn) {
-          context.report({ node: result.attr, messageId: 'routerLinkWithDBtn' });
-        }
-        if (tagName === 'router-link' && hasDLink) {
-          context.report({ node: result.attr, messageId: 'routerLinkWithDLink' });
-        }
-        if (tagName === 'dt-link' && hasDtd) {
-          context.report({ node: result.attr, messageId: 'dtLinkWithDTd' });
+        for (const check of TAG_TOKEN_CHECKS) {
+          if (check.tag !== tagName) continue;
+          const hit = check.token instanceof RegExp
+            ? tokens.some(t => check.token.test(t))
+            : tokens.includes(check.token);
+          if (hit) context.report({ node: result.attr, messageId: check.messageId });
         }
       },
     });
