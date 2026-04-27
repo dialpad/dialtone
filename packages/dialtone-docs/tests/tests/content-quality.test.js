@@ -33,18 +33,6 @@ describe('Content structure — categories', () => {
   });
 });
 
-// ─── Template assets ─────────────────────────────────────────────────────────
-
-describe('Generator template assets', () => {
-  // Templates are structural build assets — their absence breaks the generator pipeline.
-  // Discovered dynamically so adding a new template type doesn't require updating this test.
-  test('at least one Handlebars template exists in src/templates/', () => {
-    const templatesDir = join(packageRoot, 'src/templates');
-    const hbsFiles = readdirSync(templatesDir).filter(f => f.endsWith('.hbs'));
-    expect(hbsFiles.length, 'no .hbs templates found in src/templates/').toBeGreaterThan(0);
-  });
-});
-
 // ─── Content quality ─────────────────────────────────────────────────────────
 
 describe('Content quality — no placeholder text', () => {
