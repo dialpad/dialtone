@@ -12,11 +12,12 @@
 // Rule Definition
 // ------------------------------------------------------------------------------
 
-// Anchor at token boundaries (start-of-string / whitespace / end). `\b` would
-// happily slice through `d-bgc-success-strong-inverted-foo`, so we use explicit
-// non-class-name lookarounds. A class-name char is `[A-Za-z0-9_-]`.
+// Anchor at token boundaries. `\b` would slice through
+// `d-bgc-success-strong-inverted-foo`, so we use explicit lookarounds.
+// TOKEN_END mirrors the `success-to-positive` migration helper's CLASS_BOUNDARY
+// so every lint finding is auto-fixable by the CLI the rule's message points to.
 const TOKEN_START = '(?<![A-Za-z0-9_-])';
-const TOKEN_END = '(?![A-Za-z0-9_-])';
+const TOKEN_END = '(?=$|[\\s"\'><:=,;{}()\\[\\]!`./])';
 
 // Suffixes that follow `success` in the deprecated namespace. Order longest
 // first so alternation matches greedily where needed (regex matching is
