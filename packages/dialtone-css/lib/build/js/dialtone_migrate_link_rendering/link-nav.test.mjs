@@ -124,14 +124,11 @@ describe('link-nav: CSS-only modifiers preserved on class', () => {
 });
 
 describe('link-nav: warning paths', () => {
-  it('dynamic :href on <a class="d-link"> warns and skips', () => {
-    const { transformed, warnings } = runTransformVerbose(
-      '<a class="d-link" :href="url">Go</a>',
-      { filePath: 'fixture.vue' },
+  it('dynamic :href on <a class="d-link"> is lifted to :href on the output', () => {
+    assert.equal(
+      runTransform('<a class="d-link" :href="url">Go</a>'),
+      '<dt-link :href="url">Go</dt-link>',
     );
-    assert.equal(transformed, '<a class="d-link" :href="url">Go</a>');
-    assert.equal(warnings.length, 1);
-    assert.match(warnings[0], /dynamic :href/);
   });
 
   it('dynamic :class alongside static class warns', () => {

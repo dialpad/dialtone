@@ -516,16 +516,14 @@ function buildRewrittenTag ({ config, classValue, attrs, isRouterLink, selfClosi
       return null;
     }
   } else {
+    // <a class="d-btn|d-link"> — lift href= and :href= the same way we lift to= /
+    // :to= on <router-link>. Dynamic bindings are 1:1 lifts; the consumer's
+    // expression evaluates identically on the resulting <dt-button> / <dt-link>.
     const hrefAttr = extractAttr(workingAttrs, 'href');
-    if (hrefAttr && hrefAttr.dynamic) {
-      ctx.warnings.push(
-        `${ctx.filePath}: <a class="${classValue}"> with dynamic :href — manual review required.`,
-      );
-      return null;
-    }
     if (hrefAttr) {
       workingAttrs = (hrefAttr.before + ' ' + hrefAttr.after).trim();
-      newAttrs.push(`href=${quoteAttr(hrefAttr.value)}`);
+      const propName = hrefAttr.dynamic ? ':href' : 'href';
+      newAttrs.push(`${propName}=${quoteAttr(hrefAttr.value)}`);
     }
     // Anchors without href are technically invalid but we still rewrite so consumer sees the change
   }
@@ -578,11 +576,15 @@ function extractDtLinkModifiers (tokens, newAttrs, ctx) {
  * Doesn't transform — purely informational, per Q2 resolution.
  */
 function warnRouterLinkCustomWrappers (content, targetTag, ctx) {
-  const re = new RegExp(
-    `<${tagNamePattern('router-link')}\\s${QUOTE_AWARE_ATTRS}\\bcustom\\b[^>]*>[\\s\\S]*?<${tagNamePattern(targetTag)}\\b`,
-    'g',
-  );
-  while (re.exec(content) !== null) {
+  // Two-step: quote-aware capture of <router-link …> attrs, then test for bare
+  // `custom` attribute. Avoids false-matching `attr="something custom"`.
+  const openRe = new RegExp(`<${tagNamePattern('router-link')}\\b(${QUOTE_AWARE_ATTRS}?)>`, 'g');
+  const targetRe = new RegExp(`<${tagNamePattern(targetTag)}\\b`);
+  let m;
+  while ((m = openRe.exec(content)) !== null) {
+    if (!/(?:^|\s)custom(?=\s|=|\/|>|$)/.test(m[1])) continue;
+    const after = content.slice(m.index + m[0].length);
+    if (!targetRe.test(after)) continue;
     ctx.warnings.push(
       `${ctx.filePath}: <router-link custom> wrapping <${targetTag}> — manual review required (lift the to= onto <${targetTag}> directly).`,
     );

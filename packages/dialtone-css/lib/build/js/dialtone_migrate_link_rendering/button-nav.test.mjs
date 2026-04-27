@@ -141,14 +141,11 @@ describe('button-nav: <router-link class="d-btn"> → <dt-button :to>', () => {
 });
 
 describe('button-nav: warning paths', () => {
-  it('dynamic :href on <a class="d-btn"> warns and skips transform', () => {
-    const { transformed, warnings } = runTransformVerbose(
-      '<a class="d-btn" :href="url">Go</a>',
-      { filePath: 'fixture.vue' },
+  it('dynamic :href on <a class="d-btn"> is lifted to :href on the output', () => {
+    assert.equal(
+      runTransform('<a class="d-btn" :href="url">Go</a>'),
+      '<dt-button :href="url">Go</dt-button>',
     );
-    assert.equal(transformed, '<a class="d-btn" :href="url">Go</a>');
-    assert.equal(warnings.length, 1);
-    assert.match(warnings[0], /dynamic :href/);
   });
 
   it('dynamic :class alongside static class warns and skips transform', () => {
