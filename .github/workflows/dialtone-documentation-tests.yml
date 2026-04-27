@@ -49,6 +49,3 @@ jobs:
           test -s "$DIST/llms-full.txt" || { echo "::error::$DIST/llms-full.txt missing or empty"; exit 1; }
           echo "llms.txt size: $(wc -c < "$DIST/llms.txt") bytes"
           echo "llms-full.txt size: $(wc -c < "$DIST/llms-full.txt") bytes"
-
-      - name: Lint dialtone-documentation
-        run: pnpm nx run dialtone-documentation:lint

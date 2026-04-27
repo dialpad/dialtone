@@ -29,15 +29,17 @@ jobs:
 
       - name: Run freshness check
         id: freshness
-        # Tolerate script errors so the workflow stays non-blocking — fall back to an empty report
-        # rather than failing the job. The freshness signal is the PR comment, not a red check.
+        # Tolerate script errors so the workflow stays non-blocking — fall back to a SENTINEL
+        # report (with `error` field) rather than failing the job. The comment step distinguishes
+        # this from a true "all fresh" result so a scan failure isn't displayed as ✅.
         run: |
           if node packages/dialtone-docs/src/generators/check-freshness.mjs > /tmp/freshness.json 2> /tmp/freshness.err; then
             echo "Freshness check ran successfully."
           else
-            echo "::warning::check-freshness.mjs failed; emitting empty report. stderr was:"
+            echo "::warning::check-freshness.mjs failed; emitting error sentinel. stderr was:"
             cat /tmp/freshness.err
-            echo '{"generated_at":"","threshold_days":90,"checked_files":[],"stale":[]}' > /tmp/freshness.json
+            ERR_MSG=$(head -c 500 /tmp/freshness.err | jq -Rs .)
+            echo "{\"generated_at\":\"\",\"threshold_days\":90,\"checked_files\":[],\"stale\":[],\"error\":${ERR_MSG}}" > /tmp/freshness.json
           fi
           STALE_COUNT=$(jq '.stale | length' /tmp/freshness.json)
           echo "stale_count=$STALE_COUNT" >> $GITHUB_OUTPUT
@@ -58,7 +60,23 @@ jobs:
             const HEADER = '## ⏰ Standards Freshness Check';
 
             let body;
-            if (report.stale.length > 0) {
+            if (report.error) {
+              // Distinguish a script failure from a clean scan — never display ✅ on error.
+              body = [
+                MARKER,
+                HEADER,
+                '',
+                '⚠️ The freshness check could not run on this PR. Standards may or may not be stale; the scan itself failed.',
+                '',
+                '<details><summary>Error</summary>',
+                '',
+                '```',
+                report.error.toString().slice(0, 1000),
+                '```',
+                '',
+                '</details>',
+              ].join('\n');
+            } else if (report.stale.length > 0) {
               const rows = report.stale.map(({ file, last_verified, days_since_verified }) => {
                 const age = days_since_verified !== null ? `${days_since_verified} days` : 'never verified';
                 return `| \`${file}\` | ${last_verified ?? '—'} | ${age} |`;
@@ -104,8 +122,9 @@ jobs:
                 repo: context.repo.repo,
                 body,
               });
-            } else if (report.stale.length > 0) {
+            } else if (report.stale.length > 0 || report.error) {
               // Only create a new comment when there's actually something to surface
+              // (real findings OR a scan failure that the user should know about).
               await github.rest.issues.createComment({
                 issue_number: context.issue.number,
                 owner: context.repo.owner,
@@ -113,4 +132,4 @@ jobs:
                 body,
               });
             }
-            // else: no findings AND no prior comment → stay silent.
+            // else: no findings, no error, and no prior comment → stay silent.

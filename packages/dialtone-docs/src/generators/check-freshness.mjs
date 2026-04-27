@@ -82,7 +82,9 @@ async function check() {
 // Only run check() when invoked directly as a script — not when imported as a module.
 // This keeps `parseLastVerified` and `isStale` safely importable from tests and other consumers
 // without triggering a filesystem scan or process.exit().
-const isMainModule = import.meta.url === `file://${process.argv[1]}`;
+// Compare via fileURLToPath (already computed as __filename above) so this works on Windows
+// and with paths containing spaces — `file://${process.argv[1]}` would not.
+const isMainModule = process.argv[1] === __filename;
 if (isMainModule) {
   check().catch(err => {
     process.stderr.write(`check-freshness error: ${err.message}\n`);
