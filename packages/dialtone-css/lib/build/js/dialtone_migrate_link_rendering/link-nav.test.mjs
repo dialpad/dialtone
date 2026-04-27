@@ -158,6 +158,22 @@ describe('link-nav: warning paths', () => {
   });
 });
 
+describe('link-nav: PascalCase tags accepted, kebab-case emitted', () => {
+  it('<RouterLink class="d-link" :to="..."> → <dt-link :to="...">', () => {
+    assert.equal(
+      runTransform('<RouterLink class="d-link" :to="route">Home</RouterLink>'),
+      '<dt-link :to="route">Home</dt-link>',
+    );
+  });
+
+  it('<a class="d-link d-link--muted" v-show="x > 0"> — `>` inside binding preserved with tone extraction', () => {
+    assert.equal(
+      runTransform('<a class="d-link d-link--muted" v-show="x > 0" href="/x">Help</a>'),
+      '<dt-link v-show="x > 0" href="/x" tone="muted">Help</dt-link>',
+    );
+  });
+});
+
 describe('link-nav: idempotency', () => {
   it('already-migrated <dt-link href> is a no-op', () => {
     const input = '<dt-link href="/x" tone="muted">Go</dt-link>';

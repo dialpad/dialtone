@@ -102,6 +102,15 @@ describe('underline: warning paths', () => {
   });
 });
 
+describe('underline: PascalCase tag (DtLink) accepted; case preserved on output', () => {
+  it('<DtLink class="d-td-none h:d-td-underline"> → <DtLink :underline="false">', () => {
+    assert.equal(
+      runTransform('<DtLink href="/x" class="d-td-none h:d-td-underline">Go</DtLink>'),
+      '<DtLink href="/x" :underline="false">Go</DtLink>',
+    );
+  });
+});
+
 describe('underline: idempotency and other classes preserved', () => {
   it('already-migrated <dt-link :underline="false"> is a no-op', () => {
     const input = '<dt-link href="/x" :underline="false">Go</dt-link>';

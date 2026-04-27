@@ -70,11 +70,16 @@ module.exports = {
 
   create (context) {
     const sourceCode = context.sourceCode ?? context.getSourceCode();
-    return sourceCode.parserServices.defineTemplateBodyVisitor({
-       
+    const defineTemplateBodyVisitor = sourceCode.parserServices?.defineTemplateBodyVisitor;
+    if (!defineTemplateBodyVisitor) return {};
+
+    return defineTemplateBodyVisitor({
       VElement (node) {
         const rawName = node.rawName || node.name;
-        const tagName = rawName.toLowerCase();
+        // Normalize PascalCase Vue tags (RouterLink, DtLink) to kebab-case.
+        const tagName = rawName.includes('-')
+          ? rawName.toLowerCase()
+          : rawName.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
         if (!RELEVANT_TAGS.has(tagName)) return;
 
         const result = getStaticClassValue(node);

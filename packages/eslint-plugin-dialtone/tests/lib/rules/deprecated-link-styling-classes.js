@@ -83,5 +83,15 @@ ruleTester.run('deprecated-link-styling-classes', rule, {
       code: '<template><dt-link href="/x" class="sm:d-td-none">Responsive</dt-link></template>',
       errors: [{ messageId: 'dtLinkWithDTd' }],
     },
+    // I9: PascalCase <RouterLink class="d-btn"> normalized to router-link and flagged
+    {
+      code: '<template><RouterLink class="d-btn" to="/x">Go</RouterLink></template>',
+      errors: [{ messageId: 'routerLinkWithDBtn' }],
+    },
+    // I10: PascalCase <DtLink class="d-td-none"> normalized to dt-link and flagged
+    {
+      code: '<template><DtLink href="/x" class="d-td-none">Quiet</DtLink></template>',
+      errors: [{ messageId: 'dtLinkWithDTd' }],
+    },
   ],
 });

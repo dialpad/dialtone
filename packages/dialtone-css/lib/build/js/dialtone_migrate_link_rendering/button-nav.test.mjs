@@ -185,6 +185,31 @@ describe('button-nav: warning paths', () => {
   });
 });
 
+describe('button-nav: PascalCase tags accepted, kebab-case emitted', () => {
+  it('<RouterLink class="d-btn" :to="..."> → <dt-button :to="...">', () => {
+    assert.equal(
+      runTransform('<RouterLink class="d-btn" :to="route">Go</RouterLink>'),
+      '<dt-button :to="route">Go</dt-button>',
+    );
+  });
+});
+
+describe('button-nav: quote-aware tag matching survives `>` inside Vue bindings', () => {
+  it('<router-link v-if="count > 0" class="d-btn" :to="route">', () => {
+    assert.equal(
+      runTransform('<router-link v-if="count > 0" class="d-btn" :to="route">Go</router-link>'),
+      '<dt-button v-if="count > 0" :to="route">Go</dt-button>',
+    );
+  });
+
+  it('<a class="d-btn" :data-x="`a > b`" href="/x"> — `>` inside binding preserved', () => {
+    assert.equal(
+      runTransform('<a class="d-btn" :data-x="`a > b`" href="/x">Go</a>'),
+      '<dt-button :data-x="`a > b`" href="/x">Go</dt-button>',
+    );
+  });
+});
+
 describe('button-nav: idempotency', () => {
   it('already-migrated <dt-button href> is a no-op', () => {
     const input = '<dt-button href="/x" :size="400">Go</dt-button>';

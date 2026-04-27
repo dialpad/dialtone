@@ -4,7 +4,7 @@ Detects raw anchor / `router-link` elements that carry `d-btn` or `d-link` class
 
 ## Rule Details
 
-This rule flags Vue template patterns that should migrate to the new DtButton / DtLink component APIs. The codemod `npx dialtone-migrate-link-rendering` does the migration automatically — this rule prevents new code from re-introducing the legacy patterns.
+This rule flags Vue template patterns that should migrate to the new DtButton / DtLink component APIs. The codemod `npx dialtone-migrate-link-rendering` migrates most static patterns automatically and reports unsupported cases (dynamic `:href` / `:to` / `:class` bindings, `<router-link custom>` wrappers, responsive `d-td-*` variants on DtLink) for manual review — this rule prevents new code from re-introducing the legacy patterns.
 
 ### What it flags
 

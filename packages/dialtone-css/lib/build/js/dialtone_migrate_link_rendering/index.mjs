@@ -54,10 +54,28 @@ const ALL_TRANSFORMS = Object.values(TRANSFORM);
 
 // Cheap precheck pattern. Skip the masking + transform sweeps only when the file
 // contains none of the tokens any of the three transforms or the warn-only paths
-// could possibly hit. `<router-link` is included because the custom-slot wrapper
-// warning can fire even when the inner `<dt-button>` / `<dt-link>` carries no
-// legacy class.
-const FAST_PATH_RE = /d-btn|d-link|d-td-|<router-link/;
+// could possibly hit. `<router-link` / `<RouterLink` is included because the
+// custom-slot wrapper warning can fire even when the inner `<dt-button>` /
+// `<dt-link>` carries no legacy class.
+const FAST_PATH_RE = /d-btn|d-link|d-td-|<router-link|<RouterLink/;
+
+// Tag-name alternation that accepts both kebab-case and PascalCase Vue spellings.
+// The codemod always emits kebab-case output regardless of the source casing.
+const TAG_NAME_ALTERNATIONS = Object.freeze({
+  'a': 'a',
+  'router-link': '(?:router-link|RouterLink)',
+  'dt-link': '(?:dt-link|DtLink)',
+  'dt-button': '(?:dt-button|DtButton)',
+});
+
+function tagNamePattern (sourceTag) {
+  return TAG_NAME_ALTERNATIONS[sourceTag] || escapeRe(sourceTag);
+}
+
+// Quote-aware attribute body. Matches any sequence of characters that aren't
+// `>`/`"`/`'`, optionally followed by a fully-quoted attribute value. Handles
+// patterns like `:to="a > b ? x : y"` correctly by skipping `>` inside quotes.
+const QUOTE_AWARE_ATTRS = '(?:[^>"\']*(?:"[^"]*"|\'[^\']*\'))*[^>]*';
 
 // Tone modifier values (canonical and renamed-from forms)
 const TONE_MODIFIER_MAP = {
@@ -318,8 +336,10 @@ function findClosingTag (content, openEndIndex, tagName) {
   let cached = CLOSING_TAG_RE_CACHE.get(tagName);
   if (!cached) {
     cached = {
-      open: `<${escapeRe(tagName)}\\b[^>]*>`,
-      close: `</${escapeRe(tagName)}\\s*>`,
+      // Quote-aware open pattern so `>` inside attribute values doesn't terminate the tag.
+      open: `<${tagNamePattern(tagName)}\\b${QUOTE_AWARE_ATTRS}>`,
+      // Closing tags can't have attributes; tag-name alternation handles PascalCase.
+      close: `</${tagNamePattern(tagName)}\\s*>`,
     };
     CLOSING_TAG_RE_CACHE.set(tagName, cached);
   }
@@ -383,8 +403,12 @@ function openWithClassRegex (sourceTag, requiredClass) {
   const key = `${sourceTag}|${requiredClass}`;
   let cached = OPEN_WITH_CLASS_RE_CACHE.get(key);
   if (cached) return cached;
+  // The quote-aware skip on either side of `class=` prevents `>` inside other
+  // attribute values (`:to="a > b"`, `v-if="count > 0"`) from prematurely
+  // terminating the opening-tag span. The tag-name pattern accepts kebab-case
+  // and PascalCase spellings.
   cached = new RegExp(
-    `<${escapeRe(sourceTag)}\\b([^>]*?)\\sclass=("([^"]*\\b${escapeRe(requiredClass)}\\b[^"]*)"|'([^']*\\b${escapeRe(requiredClass)}\\b[^']*)')([^>]*?)(/?)>`,
+    `<${tagNamePattern(sourceTag)}\\b(${QUOTE_AWARE_ATTRS}?)\\sclass=("([^"]*\\b${escapeRe(requiredClass)}\\b[^"]*)"|'([^']*\\b${escapeRe(requiredClass)}\\b[^']*)')(${QUOTE_AWARE_ATTRS}?)(/?)>`,
     'g',
   );
   OPEN_WITH_CLASS_RE_CACHE.set(key, cached);
@@ -554,7 +578,10 @@ function extractDtLinkModifiers (tokens, newAttrs, ctx) {
  * Doesn't transform — purely informational, per Q2 resolution.
  */
 function warnRouterLinkCustomWrappers (content, targetTag, ctx) {
-  const re = new RegExp(`<router-link\\s[^>]*?\\bcustom\\b[^>]*>[\\s\\S]*?<${escapeRe(targetTag)}\\b`, 'g');
+  const re = new RegExp(
+    `<${tagNamePattern('router-link')}\\s${QUOTE_AWARE_ATTRS}\\bcustom\\b[^>]*>[\\s\\S]*?<${tagNamePattern(targetTag)}\\b`,
+    'g',
+  );
   while (re.exec(content) !== null) {
     ctx.warnings.push(
       `${ctx.filePath}: <router-link custom> wrapping <${targetTag}> — manual review required (lift the to= onto <${targetTag}> directly).`,
@@ -600,9 +627,12 @@ function mapDtdToUnderline (rest, hover) {
 }
 
 function transformUnderline (content, ctx) {
-  // Match <dt-link …> opening tags (not self-closing — those have nothing to underline-style)
-  const re = /<dt-link\b([^>]*?)>/g;
-  return content.replace(re, (fullTag, rawAttrs) => {
+  // Match <dt-link …> / <DtLink …> opening tags (not self-closing — those have
+  // nothing to underline-style). Quote-aware so `>` in attribute values doesn't
+  // terminate the span early. Capture group 1 is the actual tag name so we
+  // preserve casing in output (matters because we don't rewrite the closing tag).
+  const re = new RegExp(`<(${tagNamePattern('dt-link')})\\b(${QUOTE_AWARE_ATTRS}?)>`, 'g');
+  return content.replace(re, (fullTag, matchedTagName, rawAttrs) => {
     const attrs = rawAttrs || '';
 
     // Skip if :underline is already set (idempotency)
@@ -674,7 +704,7 @@ function transformUnderline (content, ctx) {
       });
     }
 
-    return `<dt-link${newAttrs ? ' ' + newAttrs : ''}>`;
+    return `<${matchedTagName}${newAttrs ? ' ' + newAttrs : ''}>`;
   });
 }
 
