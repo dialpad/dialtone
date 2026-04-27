@@ -133,3 +133,11 @@
     }
   }
 }
+
+@layer dialtone.utilities {
+  [data-dt-mode="light"] { --dt-color-surface-brand-opaque: oklch(0.84 0.08 300 / 0.39) !important; }
+  [data-dt-mode="dark"]  { --dt-color-surface-brand-opaque: oklch(0.23 0.13 285 / 0.91) !important; }
+
+  [data-dt-brand="prota-deuter"]                      { --dt-color-surface-success: var(--dt-color-teal-200) !important; }
+  [data-dt-brand="prota-deuter"][data-dt-mode="dark"] { --dt-color-surface-success: var(--dt-color-teal-200) !important; }
+}
