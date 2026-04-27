@@ -44,7 +44,7 @@ export function isStale(lastVerified, today, thresholdDays) {
 
 async function check() {
   const today = new Date();
-  const files = await glob('src/content/standards/*.md', { cwd: packageRoot, absolute: true });
+  const files = await glob('src/content/standards/**/*.md', { cwd: packageRoot, absolute: true });
 
   if (files.length === 0) {
     throw new Error('No standards files found under src/content/standards/');
@@ -79,7 +79,13 @@ async function check() {
   }, null, 2) + '\n');
 }
 
-check().catch(err => {
-  process.stderr.write(`check-freshness error: ${err.message}\n`);
-  process.exit(1);
-});
+// Only run check() when invoked directly as a script — not when imported as a module.
+// This keeps `parseLastVerified` and `isStale` safely importable from tests and other consumers
+// without triggering a filesystem scan or process.exit().
+const isMainModule = import.meta.url === `file://${process.argv[1]}`;
+if (isMainModule) {
+  check().catch(err => {
+    process.stderr.write(`check-freshness error: ${err.message}\n`);
+    process.exit(1);
+  });
+}

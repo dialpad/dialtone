@@ -1,0 +1,54 @@
+name: Dialtone Documentation Tests
+
+# Build-verifies the VuePress docs site as a separate test step from deploy.yml.
+# deploy.yml builds + uploads to GCS together; if a future PR only changes
+# package.json or pnpm-lock.yaml (paths deploy.yml's filter does not match) or comes
+# from a fork (deploy.yml is gated on Dialpad org membership), no build verification
+# happens. This workflow closes that gap by building on every PR that touches the docs
+# site or its dependencies.
+on:
+  pull_request:
+    paths:
+      - 'apps/dialtone-documentation/**'
+      - 'pnpm-lock.yaml'
+  push:
+    branches:
+      - staging
+    paths:
+      - 'apps/dialtone-documentation/**'
+      - 'pnpm-lock.yaml'
+
+env:
+  HUSKY: 0
+
+concurrency:
+  group: "${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+
+      - name: Setup Environment
+        uses: ./.github/actions/setup-environment
+
+      - name: Build dialtone-documentation
+        run: pnpm nx run dialtone-documentation:build
+
+      - name: Verify llms.txt was generated
+        run: |
+          DIST=apps/dialtone-documentation/docs/.vuepress/dist
+          test -s "$DIST/llms.txt" || { echo "::error::$DIST/llms.txt missing or empty"; exit 1; }
+          test -s "$DIST/llms-full.txt" || { echo "::error::$DIST/llms-full.txt missing or empty"; exit 1; }
+          echo "llms.txt size: $(wc -c < "$DIST/llms.txt") bytes"
+          echo "llms-full.txt size: $(wc -c < "$DIST/llms-full.txt") bytes"
+
+      - name: Lint dialtone-documentation
+        run: pnpm nx run dialtone-documentation:lint
