@@ -16,7 +16,7 @@ description: Prop renames, value standardization, event consolidation, slot rena
 > - `hide-*` / `prevent-*` props → `:show-*="false"` / `:allow-*="false"` (semantics inverted).
 > - `dt-popover`: `hide-on-click` → `close-on-click` (same semantics, just renamed).
 > - `label-visible` → `show-label` on form inputs and controls.
-> - `title` / `title-id` → `header-text` / `header-id` on `dt-banner`, `dt-notice`, `dt-toast`, `dt-modal`.
+> - `title` / `title-id` → `header-text` / `header-id` on `dt-banner`, `dt-notice`, `dt-toast`. (`dt-modal` only has `title` → `header-text`; it never had `title-id`.)
 > - `banner-title` → `banner-header-text` on `dt-modal`.
 > - `clickable` → `interactive` on `dt-avatar`. See [Avatar Updates](/guides/migration/avatar-updates/#clickable-→-interactive).
 > - `selected-values` → `model-value` on `dt-checkbox-group`. Use `v-model` directly.
@@ -244,7 +244,7 @@ The `label-visible` prop has been renamed to `show-label` to match the new `show
 
 ## `title` / `title-id` → `header-text` / `header-id`
 
-The `title` prop has been renamed to `header-text` and `title-id` to `header-id` on notice-family components. The old names conflicted with the native HTML `title` attribute, which browsers reserve for tooltips.
+The `title` prop has been renamed to `header-text` on all four components. The `title-id` prop has been renamed to `header-id` on `dt-banner`, `dt-notice`, and `dt-toast` only — `dt-modal` never had a `title-id` prop. The old names conflicted with the native HTML `title` attribute, which browsers reserve for tooltips.
 
 <div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols2">
 <div>
@@ -407,6 +407,8 @@ The migration script handles the following components automatically:
 
 > [!WARNING]
 > If you have both `:root-class="expr"` and `:class="…"` on the same component, the script cannot safely merge the two dynamic bindings. It will warn and leave the tag unchanged — merge manually.
+
+**Affected components:** [DtAvatar](/components/avatar.html), [DtBreadcrumbItem](/components/breadcrumbs.html), [DtCard](/components/card.html), [DtCheckbox](/components/checkbox.html), [DtFeedItemPill](/components/feed-item-pill.html), [DtFilterPill](/components/filter-pill.html), [DtInput](/components/input.html), [DtModeIsland](/components/mode-island.html), [DtMotionText](/components/motion-text.html), [DtRadio](/components/radio.html), [DtSelectMenu](/components/select-menu.html), [DtSplitButton](/components/split-button.html), [DtToggle](/components/toggle.html)
 
 ---
 
