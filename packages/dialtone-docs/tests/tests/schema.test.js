@@ -172,3 +172,30 @@ describe('Build output schema (ai-docs.json)', () => {
     expect(new Set(ids).size).toBe(ids.length);
   });
 });
+
+// ─── Standards-specific schema ─────────────────────────────────────────────
+
+describe('Standards-specific schema', () => {
+  let standardFiles;
+
+  beforeAll(async () => {
+    standardFiles = await findFiles('src/content/standards/*.md');
+  });
+
+  test('finds standards files', () => {
+    expect(standardFiles.length).toBeGreaterThan(0);
+  });
+
+  test('all standards have last_verified in YYYY-MM-DD format', () => {
+    const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+    for (const file of standardFiles) {
+      const content = readFile(file);
+      const { data } = parseFrontmatter(content);
+      const val = data.last_verified;
+      const isValid =
+        (val instanceof Date && !isNaN(val)) ||
+        (typeof val === 'string' && datePattern.test(val));
+      expect(isValid, `${file} missing or invalid last_verified: "${val}"`).toBe(true);
+    }
+  });
+});
