@@ -168,6 +168,13 @@ describe('button-nav: warning paths', () => {
     assert.ok(customWarn, 'expected warning about <router-link custom> wrapper');
   });
 
+  it('<router-link custom class="d-btn"> on the source tag itself warns and skips', () => {
+    const input = '<router-link custom v-slot="{ navigate }" to="/x" class="d-btn">Go</router-link>';
+    const { transformed, warnings } = runTransformVerbose(input, { filePath: 'fixture.vue' });
+    assert.equal(transformed, input);
+    assert.ok(warnings.some(w => /router-link custom.*don't transfer/.test(w)));
+  });
+
   it('<router-link class="d-btn"> without `to` warns and skips', () => {
     const { transformed, warnings } = runTransformVerbose(
       '<router-link class="d-btn">Go</router-link>',

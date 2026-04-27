@@ -149,6 +149,13 @@ describe('link-nav: warning paths', () => {
     const { warnings } = runTransformVerbose(input, { filePath: 'fixture.vue' });
     assert.ok(warnings.some(w => /router-link custom.*dt-link/.test(w)));
   });
+
+  it('<router-link custom class="d-link"> on the source tag itself warns and skips', () => {
+    const input = '<router-link custom v-slot="{ navigate }" to="/x" class="d-link">Go</router-link>';
+    const { transformed, warnings } = runTransformVerbose(input, { filePath: 'fixture.vue' });
+    assert.equal(transformed, input);
+    assert.ok(warnings.some(w => /router-link custom.*don't transfer/.test(w)));
+  });
 });
 
 describe('link-nav: idempotency', () => {

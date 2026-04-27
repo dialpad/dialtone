@@ -472,6 +472,14 @@ function buildRewrittenTag ({ config, classValue, attrs, isRouterLink, selfClosi
   if (baseIdx !== -1) tokens.splice(baseIdx, 1);
 
   if (isRouterLink) {
+    // <router-link custom> exposes vue-router internals via v-slot; rewriting it to
+    // <dt-button>/<dt-link> drops those slot semantics. Skip with a manual-review warning.
+    if (/(?:^|\s)custom(?=\s|=|\/|>|$)/.test(workingAttrs)) {
+      ctx.warnings.push(
+        `${ctx.filePath}: <router-link custom class="${classValue}"> — manual review required (custom + v-slot semantics don't transfer to <${config.targetTag}>).`,
+      );
+      return null;
+    }
     const toAttr = extractAttr(workingAttrs, 'to');
     if (toAttr) {
       workingAttrs = (toAttr.before + ' ' + toAttr.after).trim();
@@ -727,6 +735,25 @@ export function transformContent (content, opts = {}) {
 // File walker
 // ---------------------------------------------------------------------------
 
+/**
+ * Match an ignore token against a path. Single-segment tokens (e.g. `node_modules`,
+ * `dist`) match by exact directory segment so `src/distance/` is not excluded by `dist`.
+ * Multi-segment tokens (e.g. `.vuepress/public`) match as a contiguous segment run.
+ */
+function isIgnoredPath (fullPath, ignore) {
+  const segments = fullPath.split(path.sep);
+  return ignore.some(ig => {
+    if (ig.includes('/')) {
+      const parts = ig.split('/');
+      for (let i = 0; i + parts.length <= segments.length; i++) {
+        if (parts.every((p, j) => segments[i + j] === p)) return true;
+      }
+      return false;
+    }
+    return segments.includes(ig);
+  });
+}
+
 async function findFiles (dir, extensions, ignore = []) {
   const results = [];
   async function walk (currentDir) {
@@ -738,7 +765,7 @@ async function findFiles (dir, extensions, ignore = []) {
     }
     for (const entry of entries) {
       const fullPath = path.join(currentDir, entry.name);
-      if (ignore.some(ig => fullPath.includes(ig))) continue;
+      if (isIgnoredPath(fullPath, ignore)) continue;
       if (entry.isDirectory()) {
         await walk(fullPath);
       } else if (entry.isFile() && extensions.some(ext => entry.name.endsWith(ext))) {
