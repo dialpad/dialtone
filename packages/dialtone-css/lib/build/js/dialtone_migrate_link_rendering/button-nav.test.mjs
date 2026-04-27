@@ -207,6 +207,13 @@ describe('button-nav: quote-aware tag matching survives `>` inside Vue bindings'
   });
 });
 
+describe('button-nav: requires base d-btn token, not just a modifier', () => {
+  it('<a class="d-btn--lg"> without base d-btn is not transformed', () => {
+    const input = '<a class="d-btn--lg" href="/x">Go</a>';
+    assert.equal(runTransform(input), input);
+  });
+});
+
 describe('button-nav: idempotency', () => {
   it('already-migrated <dt-button href> is a no-op', () => {
     const input = '<dt-button href="/x" :size="400">Go</dt-button>';

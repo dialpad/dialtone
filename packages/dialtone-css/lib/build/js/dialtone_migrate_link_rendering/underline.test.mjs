@@ -102,6 +102,24 @@ describe('underline: warning paths', () => {
   });
 });
 
+describe('underline: self-closing tags preserve the /', () => {
+  it('<dt-link class="d-td-none" /> → <dt-link :underline="false" />', () => {
+    assert.equal(
+      runTransform('<dt-link href="/x" class="d-td-none" />'),
+      '<dt-link href="/x" :underline="false" />',
+    );
+  });
+});
+
+describe('underline: dynamic :class with d-td-* warns even when a static class is also present', () => {
+  it('emits dynamic-binding warning and leaves the tag unchanged', () => {
+    const input = '<dt-link href="/x" class="foo" :class="{ \'d-td-none\': off }">Go</dt-link>';
+    const { transformed, warnings } = runTransformVerbose(input, { filePath: 'fixture.vue' });
+    assert.equal(transformed, input);
+    assert.ok(warnings.some(w => /dynamic binding/.test(w)));
+  });
+});
+
 describe('underline: PascalCase tag (DtLink) accepted; case preserved on output', () => {
   it('<DtLink class="d-td-none h:d-td-underline"> → <DtLink :underline="false">', () => {
     assert.equal(

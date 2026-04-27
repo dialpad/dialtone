@@ -438,6 +438,10 @@ function rewriteAnchorOrRouterLink (content, sourceTag, config, ctx, isRouterLin
   while ((m = openWithClassRe.exec(content)) !== null) {
     const [fullOpen, attrsBefore, , quotedDouble, quotedSingle, attrsAfter, selfClose] = m;
     const classValue = quotedDouble !== undefined ? quotedDouble : quotedSingle;
+    // The class regex uses `\b` which lets `d-btn` match inside `d-btn--lg`. Verify
+    // the base class is present as its own token before transforming, so files that
+    // only carry modifier-only classes (`d-btn--lg` without `d-btn`) are skipped.
+    if (!splitClasses(classValue).includes(config.baseClass)) continue;
     const openStart = m.index;
     const openEnd = openStart + fullOpen.length;
 
@@ -629,32 +633,41 @@ function mapDtdToUnderline (rest, hover) {
 }
 
 function transformUnderline (content, ctx) {
-  // Match <dt-link …> / <DtLink …> opening tags (not self-closing — those have
-  // nothing to underline-style). Quote-aware so `>` in attribute values doesn't
-  // terminate the span early. Capture group 1 is the actual tag name so we
-  // preserve casing in output (matters because we don't rewrite the closing tag).
+  // Match <dt-link …> / <DtLink …> opening tags including self-closing variants.
+  // Quote-aware so `>` in attribute values doesn't terminate the span early.
+  // Capture group 1 is the actual tag name so we preserve casing in output
+  // (matters because we don't rewrite the closing tag for non-self-closing forms).
   const re = new RegExp(`<(${tagNamePattern('dt-link')})\\b(${QUOTE_AWARE_ATTRS}?)>`, 'g');
   return content.replace(re, (fullTag, matchedTagName, rawAttrs) => {
-    const attrs = rawAttrs || '';
+    let attrs = rawAttrs || '';
+
+    // Detect and strip a trailing `/` so we can re-emit the self-closing form
+    // (otherwise `<dt-link class="d-td-none" />` would lose its `/` and become
+    // a non-self-closing tag in the output).
+    const isSelfClosing = /\s*\/\s*$/.test(attrs);
+    if (isSelfClosing) attrs = attrs.replace(/\s*\/\s*$/, '');
+    const closer = isSelfClosing ? ' />' : '>';
 
     // Skip if :underline is already set (idempotency)
     if (/(^|\s)(:|v-bind:)?underline\s*=/.test(attrs)) return fullTag;
 
+    // Check dynamic :class first — even when a static class is also present,
+    // a `:class` containing d-td-* is a manual-review case (we can't merge
+    // expressions safely or invert hover behavior across runtime conditions).
+    const dynClassMatch = attrs.match(/(?:^|\s)(?::|v-bind:)class=("([^"]*)"|'([^']*)')/);
+    if (dynClassMatch) {
+      const expr = dynClassMatch[2] !== undefined ? dynClassMatch[2] : dynClassMatch[3];
+      if (/d-td-/.test(expr)) {
+        ctx.warnings.push(
+          `${ctx.filePath}: <dt-link :class="${expr}"> contains d-td-* in a dynamic binding — manual review required.`,
+        );
+        return fullTag;
+      }
+    }
+
     // Need a static class= with d-td-* tokens to do anything
     const classMatch = attrs.match(/(?<![:\w-])class=("([^"]*)"|'([^']*)')/);
-    if (!classMatch) {
-      // No static class. Check if there's a dynamic :class with d-td-* in it — warn.
-      const dynClassMatch = attrs.match(/(?:^|\s)(?::|v-bind:)class=("([^"]*)"|'([^']*)')/);
-      if (dynClassMatch) {
-        const expr = dynClassMatch[2] !== undefined ? dynClassMatch[2] : dynClassMatch[3];
-        if (/d-td-/.test(expr)) {
-          ctx.warnings.push(
-            `${ctx.filePath}: <dt-link :class="${expr}"> contains d-td-* in a dynamic binding — manual review required.`,
-          );
-        }
-      }
-      return fullTag;
-    }
+    if (!classMatch) return fullTag;
 
     const classValue = classMatch[2] !== undefined ? classMatch[2] : classMatch[3];
     if (!D_TD_ANY_TOKEN_RE.test(' ' + classValue)) return fullTag;
@@ -706,7 +719,7 @@ function transformUnderline (content, ctx) {
       });
     }
 
-    return `<${matchedTagName}${newAttrs ? ' ' + newAttrs : ''}>`;
+    return `<${matchedTagName}${newAttrs ? ' ' + newAttrs : ''}${closer}`;
   });
 }
 
