@@ -296,13 +296,13 @@
         }
       },
       "critical-opaque": {
-        "value": "{color.red.300}",
+        "value": "{color.red.200}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".2",
+              "value": ".55",
               "space": "oklch"
             }
           }
@@ -328,7 +328,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".28",
+              "value": ".62",
               "space": "oklch"
             }
           }
@@ -341,7 +341,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": "0.4",
+              "value": "0.73",
               "space": "oklch"
             }
           }
@@ -354,7 +354,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": "0.7",
+              "value": "0.91",
               "space": "oklch"
             }
           }
@@ -393,7 +393,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".6",
+              "value": ".85",
               "space": "oklch"
             }
           }

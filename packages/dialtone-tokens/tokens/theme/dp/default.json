@@ -507,13 +507,13 @@
         "description": "Warning surface as opaque background color"
       },
       "success-opaque": {
-        "value": "{color.green.400}",
+        "value": "{color.green.300}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".25",
+              "value": ".24",
               "space": "oklch"
             }
           }
@@ -541,7 +541,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".27",
+              "value": ".39",
               "space": "oklch"
             }
           }

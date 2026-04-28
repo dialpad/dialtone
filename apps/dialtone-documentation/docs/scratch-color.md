@@ -219,7 +219,7 @@ layout: Blank
     </dt-dropdown>
   </dt-stack>
 </dt-box>
-<dt-box surface="primary" padding="400">
+<dt-box class="foo" surface="primary" padding="400">
   <dt-stack gap="400">
     <dt-stack gap="200">
       <dt-stack direction="row" align="start">
@@ -294,6 +294,11 @@ layout: Blank
       </dt-stack>
     </dt-stack>
     <dt-stack direction="row" gap="100">
+      <dt-presence presence="active" />
+      <dt-presence presence="busy" />
+      <dt-presence presence="away" />
+    </dt-stack>
+    <dt-stack direction="row" gap="100">
       <template v-for="kind in [undefined, 'count']" :key="kind || 'text'">
         <dt-badge v-for="t in [undefined, 'info', 'positive', 'warning', 'critical']" :key="`${kind || 'text'}-${t || 'default'}`" :text="kind === 'count' ? '1' : 'Label'" :kind="kind" :type="t" />
       </template>
@@ -328,6 +333,12 @@ layout: Blank
 </dialtone-usage>
   </dt-stack>
 </dt-box>
+
+<style>
+.foo {
+  /* background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0H20V20H0V0Z' fill='var(--dt-color-surface-primary)'/%3E%3Cpath d='M0 0L20 20M20 0L0 20' stroke='%23666' stroke-width='1'/%3E%3C/svg%3E"); */
+}
+</style>
 
 <script setup>
 import { useThemeManager } from '@composables/useThemeManager';
