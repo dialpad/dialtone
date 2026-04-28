@@ -69,7 +69,7 @@ description: Component size props move from t-shirt labels (xs, sm, md) to a num
 
 ## What's Affected
 
-[DtButton](/components/button.html), [DtInput](/components/input.html), [DtSelectMenu](/components/select-menu.html), [DtSegmentedControl](/components/segmented-control.html), [DtText](/components/text.html), [DtToggle](/components/toggle.html), [DtChip](/components/chip.html), [DtCodeblock](/components/codeblock.html), [DtEmptyState](/components/empty-state.html), [DtSkeleton](/components/skeleton.html), [DtSplitButton](/components/split-button.html), [DtFilterPill](/components/filter-pill.html), [DtCombobox](/components/combobox.html), [DtComboboxMultiSelect](/components/combobox-multi-select.html), [DtComboboxWithPopover](/components/combobox-with-popover.html), [DtTabGroup](/components/tab-group.html)
+[DtButton](/components/button.html), [DtInput](/components/input.html), [DtSelectMenu](/components/select-menu.html), [DtSegmentedControl](/components/segmented-control.html), [DtText](/components/text.html), [DtToggle](/components/toggle.html), [DtChip](/components/chip.html), DtCodeblock, [DtEmptyState](/components/empty-state.html), [DtSkeleton](/components/skeleton.html), [DtSplitButton](/components/split-button.html), [DtFilterPill](/components/filter-pill.html), [DtCombobox](/components/combobox.html), [DtComboboxMultiSelect](/components/combobox-multi-select.html), [DtComboboxWithPopover](/components/combobox-with-popover.html), [DtTabGroup](/components/tab-group.html)
 
 ## What's NOT Affected
 
