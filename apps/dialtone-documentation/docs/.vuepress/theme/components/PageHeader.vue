@@ -5,8 +5,19 @@
       <dt-stack
         :direction="{ default: 'column', md: 'row' }"
         :gap="{ default: '25', lg: '200' }"
+        align="baseline"
         justify="between"
       >
+        <dt-text v-if="backLink" as="nav" kind="body" size="200">
+          <dt-link
+            tone="muted"
+            :to="backLink.to"
+            :underline="false"
+          >
+            <dt-icon name="arrow-left" size="100" />
+            {{ backLink.text }}
+          </dt-link>
+        </dt-text>
         <dt-stack direction="row" gap="100">
           <h1
             v-if="$frontmatter.title"
@@ -19,14 +30,26 @@
             text="Beta"
           />
         </dt-stack>
-        <dt-stack direction="row" gap="25">
+        <dt-stack direction="row" gap="100">
+          <dt-button
+            v-if="$frontmatter.download_url"
+            v-bind="downloadButtonAttrs"
+            :size="200"
+            kind="muted"
+            importance="outlined"
+          >
+            <template #startIcon="{ iconSize }">
+              <dt-icon name="google-drive" :size="iconSize" />
+            </template>
+            Download
+          </dt-button>
           <dt-button
             v-if="$frontmatter.figma_url"
             :href="$frontmatter.figma_url"
             target="_blank"
             rel="noopener noreferrer"
             kind="muted"
-            importance="clear"
+            importance="outlined"
             :size="200"
           >
             <template #startIcon="{ iconSize }">
@@ -40,7 +63,7 @@
             target="_blank"
             rel="noopener noreferrer"
             kind="muted"
-            importance="clear"
+            importance="outlined"
             :size="200"
           >
             <template #startIcon="{ iconSize }">
@@ -54,7 +77,7 @@
             target="_blank"
             rel="noopener noreferrer"
             kind="muted"
-            importance="clear"
+            importance="outlined"
             :size="200"
           >
             <template #startIcon="{ iconSize }">
@@ -62,70 +85,66 @@
             </template>
             GitHub
           </dt-button>
-          <span class="d-pis-100">
-            <dt-split-button
-              :size="200"
-              importance="outlined"
-              kind="muted"
-              end-tooltip-text="More options"
-              start-aria-label="Copy Markdown"
-              @start-clicked="onCopyAsMarkdown()"
-            >
-              <template #startIcon="{ size }">
-                <dt-icon
-                  :name="showCopiedIcon ? 'check' : 'copy'"
-                  :size="size"
-                  :class="{ 'd-fc-positive': showCopiedIcon }"
-                />
-              </template>
-              Copy MD
-              <template #dropdownList="{ close }">
-                <dt-list-item-group>
-                  <dt-list-item
-                    role="menuitem"
-                    navigation-type="arrow-keys"
-                    @click="onCopyMarkdownLink(close)"
-                  >
-                    Copy Markdown link
-                  </dt-list-item>
-                  <dt-list-item
-                    role="menuitem"
-                    navigation-type="arrow-keys"
-                    @click="onDownloadAll(close)"
-                  >
-                    Download full docs
-                  </dt-list-item>
-                </dt-list-item-group>
-                <dt-dropdown-separator />
-                <dt-list-item-group>
-                  <dt-list-item
-                    v-if="rawMarkdownUrl"
-                    role="menuitem"
-                    navigation-type="arrow-keys"
-                    @click="onViewAsMarkdown(close)"
-                  >
-                    Open as Markdown
-                  </dt-list-item>
-                  <dt-list-item
-                    v-if="rawMarkdownUrl"
-                    role="menuitem"
-                    navigation-type="arrow-keys"
-                    @click="openInAiChat(close, 'claude')"
-                  >
-                    Open in Claude.ai
-                  </dt-list-item>
-                  <dt-list-item
-                    v-if="rawMarkdownUrl"
-                    role="menuitem"
-                    navigation-type="arrow-keys"
-                    @click="openInAiChat(close, 'chatgpt')"
-                  >
-                    Open in ChatGPT
-                  </dt-list-item>
-                </dt-list-item-group>
-              </template>
-            </dt-split-button>
-          </span>
+          <dt-split-button
+            :size="200"
+            importance="outlined"
+            kind="muted"
+            :disabled="!rawMarkdownUrl"
+            end-tooltip-text="More options"
+            start-aria-label="Copy Markdown"
+            @start-clicked="onCopyAsMarkdown()"
+          >
+            <template #startIcon="{ size }">
+              <dt-icon
+                :name="showCopiedIcon ? 'check' : 'copy'"
+                :size="size"
+                :class="{ 'd-fc-positive': showCopiedIcon }"
+              />
+            </template>
+            Copy MD
+            <template #dropdownList="{ close }">
+              <dt-list-item-group>
+                <dt-list-item
+                  role="menuitem"
+                  navigation-type="arrow-keys"
+                  @click="onCopyMarkdownLink(close)"
+                >
+                  Copy Markdown link
+                </dt-list-item>
+                <dt-list-item
+                  role="menuitem"
+                  navigation-type="arrow-keys"
+                  @click="onDownloadAll(close)"
+                >
+                  Download full docs
+                </dt-list-item>
+              </dt-list-item-group>
+              <dt-dropdown-separator />
+              <dt-list-item-group v-if="rawMarkdownUrl">
+                <dt-list-item
+                  role="menuitem"
+                  navigation-type="arrow-keys"
+                  @click="onViewAsMarkdown(close)"
+                >
+                  Open as Markdown
+                </dt-list-item>
+                <dt-list-item
+                  role="menuitem"
+                  navigation-type="arrow-keys"
+                  @click="openInAiChat(close, 'claude')"
+                >
+                  Open in Claude.ai
+                </dt-list-item>
+                <dt-list-item
+                  role="menuitem"
+                  navigation-type="arrow-keys"
+                  @click="openInAiChat(close, 'chatgpt')"
+                >
+                  Open in ChatGPT
+                </dt-list-item>
+              </dt-list-item-group>
+            </template>
+          </dt-split-button>
         </dt-stack>
       </dt-stack>
       <dt-text
@@ -134,7 +153,7 @@
         kind="body"
         tone="tertiary"
         wrap="pretty"
-        class="d-mbe-200 d-fs-300"
+        class="d-my-300 d-fs-300"
       >
         {{ $frontmatter.description }}
       </dt-text>
@@ -145,10 +164,31 @@
 
 <script setup>
 import { DtIconStorybookColor, DtIconFigma, DtIconGithub } from '@dialpad/dialtone-icons/vue';
-import { computed, ref } from 'vue';
+import { computed, onUnmounted, ref } from 'vue';
 import { usePageData, withBase } from 'vuepress/client';
+import { isExternalUrl } from '../utils/isExternalUrl';
 
 const page = usePageData();
+
+// Detail pages get a "back to <parent>" affordance above the title row.
+// Add new entries as detail-page sections appear.
+const BACK_LINKS = [
+  { match: /^\/dialtone\/whats-new\/posts\//, to: '/dialtone/whats-new/', text: 'Back to What\'s New' },
+];
+
+const backLink = computed(() => {
+  return BACK_LINKS.find(l => l.match.test(page.value.path)) ?? null;
+});
+
+// External download URLs open in a new tab; internal paths route via <router-link>
+// so in-app hash/anchor links (e.g. "/downloads/#graphic") stay in the SPA.
+const downloadButtonAttrs = computed(() => {
+  const url = page.value.frontmatter?.download_url;
+  if (!url) return {};
+  return isExternalUrl(url)
+    ? { href: url, target: '_blank', rel: 'noopener noreferrer' }
+    : { to: url };
+});
 
 const showCopiedIcon = ref(false);
 let copiedTimeout;
@@ -158,6 +198,8 @@ function showCopiedFeedback () {
   clearTimeout(copiedTimeout);
   copiedTimeout = setTimeout(() => { showCopiedIcon.value = false; }, 2000);
 }
+
+onUnmounted(() => { clearTimeout(copiedTimeout); });
 
 async function onCopyMarkdownLink (close) {
   close?.();
@@ -205,7 +247,7 @@ const SLUG_OVERRIDES = { tabs: 'tab' };
 const EXCLUDED_SLUGS = new Set(['scrollbar', 'table']);
 const GITHUB_BASE = 'https://github.com/dialpad/dialtone/tree/staging/packages/dialtone-vue/components';
 
-const RAW_SECTIONS = ['/components/', '/foundations/', '/dialtone/', '/ui-kits/', '/utilities/', '/guides/', '/tokens/'];
+const RAW_SECTIONS = ['/components/', '/foundations/', '/dialtone/', '/ui-kits/', '/utilities/', '/guides/', '/tokens/', '/downloads/'];
 
 const rawMarkdownUrl = computed(() => {
   const path = page.value.path;

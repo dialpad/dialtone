@@ -1019,7 +1019,8 @@ code {
 
 .dialtone-usage {
   --usage-item-color-border: var(--dt-color-border-default);
-  --usage-item-background-hd: var(--dt-color-surface-contrast-opaque);
+  --usage-item-background-hd: var(--dt-color-surface-strong);
+  --usage-item-color-foreground: var(--dt-color-foreground-primary-inverted);
 
   display: flex;
   flex-direction: column;
@@ -1036,12 +1037,13 @@ code {
     align-items: center;
     align-self: baseline;
     padding: var(--dt-spacing-1) var(--dt-spacing-75);
-    color: var(--dt-color-foreground-primary-inverted);
+    color: var(--usage-item-color-foreground);
     font: var(--dt-text-label-xs);
     background-color: var(--usage-item-background-hd);
     border-radius: var(--dt-size-radius-pill);
 
     &--do {
+      --usage-item-color-foreground: var(--dt-color-foreground-success-strong-inverted);
       --usage-item-background-hd: var(--dt-color-surface-success-strong);
     }
 
