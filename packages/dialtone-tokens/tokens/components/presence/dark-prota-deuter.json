@@ -1,16 +1,8 @@
 {
   "presence": {
     "color": {
-      "unavailable": {
-        "value": "{color.magenta.600}",
-        "type": "color"
-      },
-      "busy": {
-        "value": "{color.gold.700}",
-        "type": "color"
-      },
-      "available": {
-        "value": "oklch(0.7559 0.135 244.32)",
+      "foo-placeholder": {
+        "value": "red",
         "type": "color"
       }
     }
