@@ -235,24 +235,24 @@ layout: Blank
           :key="name"
         >
           <dt-box padding="300" :surface="name">
-            <dt-text v-if="dark" v-dt-mode:invert as="p" kind="code" class="d-fs-50" tone="primary">{{ name }}</dt-text>
-            <dt-text v-else as="p" kind="code" class="d-fs-50" tone="primary">{{ name }}</dt-text>
+            <dt-text v-if="dark" v-dt-mode:invert as="p" kind="code" size="100" strength="bold" tone="primary">{{ name }}</dt-text>
+            <dt-text v-else as="p" kind="code" size="100" strength="bold" tone="primary">{{ name }}</dt-text>
           </dt-box>
           <dt-box padding="300" :surface="`${name}-opaque`">
-            <dt-text v-if="dark" v-dt-mode:invert as="p" kind="code" class="d-fs-50" tone="primary">{{ name }}-opaque</dt-text>
-            <dt-text v-else as="p" kind="code" class="d-fs-50" tone="primary">{{ name }}-opaque</dt-text>
+            <dt-text v-if="dark" v-dt-mode:invert as="p" kind="code" size="100" strength="bold" tone="primary">{{ name }}-opaque</dt-text>
+            <dt-text v-else as="p" kind="code" size="100" strength="bold" tone="primary">{{ name }}-opaque</dt-text>
           </dt-box>
         </dt-stack>
       </dt-stack>
       <dt-stack direction="row" align="start">
         <dt-stack v-for="name in ['info', 'info-subtle', 'brand', 'brand-subtle', 'positive', 'positive-subtle', 'warning', 'warning-subtle', 'critical', 'critical-subtle']" :key="name">
-          <dt-box padding="300" :surface="name"><dt-text as="p" kind="code" class="d-fs-50" tone="primary">{{ name }}</dt-text></dt-box>
-          <dt-box padding="300" :surface="`${name}-opaque`"><dt-text as="p" kind="code" class="d-fs-50" tone="primary">{{ name }}-opaque</dt-text></dt-box>
+          <dt-box padding="300" :surface="name"><dt-text as="p" kind="code" size="100" strength="bold" tone="primary">{{ name }}</dt-text></dt-box>
+          <dt-box padding="300" :surface="`${name}-opaque`"><dt-text as="p" kind="code" size="100" strength="bold" tone="primary">{{ name }}-opaque</dt-text></dt-box>
         </dt-stack>
       </dt-stack>
       <dt-stack direction="row" align="start">
         <dt-box v-for="name in ['info-strong', 'brand-strong', 'positive-strong', 'warning-strong', 'critical-strong']" :key="name" padding="300" :surface="name">
-          <dt-text as="p" kind="code" class="d-fs-50" tone="primary" v-dt-mode:invert>{{ name }}</dt-text>
+          <dt-text as="p" kind="code" size="100" strength="bold" tone="primary" v-dt-mode:invert>{{ name }}</dt-text>
         </dt-box>
       </dt-stack>
     </dt-stack>
@@ -268,7 +268,7 @@ layout: Blank
         gap="200"
       >
         <dt-box v-for="name in row" :key="name" padding="200" border-width="200" border-radius="500" :border-color="name">
-          <dt-text as="p" kind="code" class="d-fs-50" tone="primary">{{ name }}</dt-text>
+          <dt-text as="p" kind="code" size="100" strength="bold" tone="primary">{{ name }}</dt-text>
         </dt-box>
       </dt-stack>
     </dt-stack>
