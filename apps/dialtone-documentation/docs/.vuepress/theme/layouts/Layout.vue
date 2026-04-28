@@ -26,7 +26,6 @@
           v-if="isMobile && route.path !== '/'"
         />
       </div>
-      <migration-banner />
       <!-- eslint-disable-next-line vue/no-undef-components -->
       <div
         id="docsearch"
@@ -42,6 +41,7 @@
       <sidebar />
     </template>
     <template #default>
+      <migration-banner />
       <home v-if="$frontmatter.home" />
       <page
         v-else
