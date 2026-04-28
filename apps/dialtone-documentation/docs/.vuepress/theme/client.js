@@ -1,4 +1,4 @@
- 
+
 import { defineClientConfig } from 'vuepress/client';
 import Layout from './layouts/Layout.vue';
 import NotFound from './layouts/NotFound.vue';
@@ -99,7 +99,8 @@ export default defineClientConfig({
         // Resolve any pending transition before starting a new one
         resolveViewTransition?.();
 
-        if (document.startViewTransition) {
+        // Skip view transitions for same-page hash navigation (e.g. TOC clicks)
+        if (document.startViewTransition && to.path !== from.path) {
           const domUpdatePromise = new Promise(resolve => {
             resolveViewTransition = resolve;
           });
@@ -371,4 +372,3 @@ async function importDialtoneThemes (app) {
     console.error(`Couldn't import dialtone themes: ${error}`);
   }
 }
-

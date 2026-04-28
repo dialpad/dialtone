@@ -228,6 +228,56 @@
                 "link": "/dialtone/whats-new/"
               },
               {
+                "text": "Migration Guide",
+                "link": "/guides/migration/",
+                "children": [
+                  {
+                    "text": "CSS Cascade Layers",
+                    "link": "/guides/migration/css-cascade-layers/"
+                  },
+                  {
+                    "text": "Color Stops",
+                    "link": "/guides/migration/color-stops/"
+                  },
+                  {
+                    "text": "HSL to OKLCH",
+                    "link": "/guides/migration/hsl-to-oklch/"
+                  },
+                  {
+                    "text": "Layout & Spacing Tokens",
+                    "link": "/guides/migration/layout-and-spacing-tokens/"
+                  },
+                  {
+                    "text": "Flex to DtStack",
+                    "link": "/guides/migration/flex-to-stack/"
+                  },
+                  {
+                    "text": "Component Sizes",
+                    "link": "/guides/migration/component-sizes/"
+                  },
+                  {
+                    "text": "Avatar Updates",
+                    "link": "/guides/migration/avatar-updates/"
+                  },
+                  {
+                    "text": "Logical Naming",
+                    "link": "/guides/migration/logical-naming/"
+                  },
+                  {
+                    "text": "Recipes to UI Kits",
+                    "link": "/guides/migration/recipes-to-ui-kits/"
+                  },
+                  {
+                    "text": "Vue 2 Removal",
+                    "link": "/guides/migration/vue2-removal/"
+                  },
+                  {
+                    "text": "Component Props & Events",
+                    "link": "/guides/migration/component-props/"
+                  }
+                ]
+              },
+              {
                 "text": "MCP Server",
                 "link": "/guides/mcp-server/"
               },

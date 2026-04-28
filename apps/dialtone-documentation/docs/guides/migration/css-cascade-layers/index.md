@@ -1,0 +1,204 @@
+---
+title: CSS Cascade Layers
+description: Dialtone now uses CSS Cascade Layers to organize all styles into a predictable hierarchy, improving specificity control and making overrides more predictable.
+---
+
+## TLDR
+
+Dialtone now uses CSS Cascade Layers (`@layer`) to organize all styles into a predictable hierarchy. This improves specificity control, makes overrides more predictable, and eliminates the need for complex selector specificity hacks.
+
+**For Consumers**: No breaking changes. Styles work exactly as before, just more reliably.
+
+**For Contributors**: All new styles must be wrapped in the appropriate `@layer` block. See the [CSS Cascade Layers Guide](/guides/css-layers/) for details.
+
+## What Changed
+
+All Dialtone CSS is now organized into four cascade layers:
+
+```css
+@layer dialtone.reset, dialtone.base, dialtone.components, dialtone.utilities;
+```
+
+### Layer Hierarchy
+
+1. **`dialtone.reset`** - CSS resets (normalize.css, typography resets)
+2. **`dialtone.base`** - Design tokens, fonts, themes, global styles
+3. **`dialtone.components`** - Component styles (buttons, inputs, modals, etc.)
+4. **`dialtone.utilities`** - Utility classes (spacing, colors, layout)
+
+## Why This Matters
+
+### Before: Specificity Wars
+
+Previously, ensuring utilities could override components required:
+
+- Adding `!important` to every utility
+- Carefully managing selector specificity
+- Loading CSS files in the correct order
+- Hoping third-party CSS didn't break things
+
+### After: Predictable Cascade
+
+With cascade layers:
+
+- **Utilities always override components.** Layer order guarantees it.
+- **No specificity hacks needed.** Layer priority beats specificity.
+- **Clear organization.** Every style has a clear home.
+- **Third-party CSS control.** Can layer external CSS between Dialtone layers.
+
+## How Layers Work
+
+### Normal Cascade (Highest to Lowest Priority)
+
+1. **Unlayered styles** (highest)
+2. `dialtone.utilities`
+3. `dialtone.components`
+4. `dialtone.base`
+5. `dialtone.reset` (lowest)
+
+### With `!important` (Order Reverses!)
+
+1. **`dialtone.reset !important`** (highest)
+2. `dialtone.base !important`
+3. `dialtone.components !important`
+4. `dialtone.utilities !important`
+5. **Unlayered `!important`** (lowest)
+
+> **Why utilities use `!important`**: Dialtone utilities are in the last layer with `!important`, giving them the highest effective priority for overriding component styles while staying organized.
+
+## For Consumers
+
+### No Breaking Changes
+
+Your existing code continues to work. Utility classes override components just as before, but now with guaranteed layer ordering.
+
+### Writing Overrides
+
+If you need to override Dialtone styles, create your own layer after utilities:
+
+```css
+@layer dialtone.reset, dialtone.base, dialtone.components, dialtone.utilities, app;
+
+@layer app {
+  .my-custom-styles {
+    /* Your overrides here */
+  }
+}
+```
+
+See [Using CSS Layers with Dialtone](/guides/css-layers/) for detailed guidance.
+
+### Third-Party CSS
+
+If you're using third-party CSS that conflicts with Dialtone, wrap it in a layer:
+
+```css
+@layer dialtone.reset, dialtone.base, dialtone.components, third-party, dialtone.utilities;
+
+@layer third-party {
+  @import 'some-library/styles.css';
+}
+```
+
+This ensures Dialtone utilities can still override third-party styles.
+
+## For Contributors
+
+### All Styles Must Be Layered
+
+When adding new styles, wrap them in the appropriate layer:
+
+**Components:**
+
+```less
+@layer dialtone.components {
+  .d-my-component {
+    /* styles */
+  }
+}
+```
+
+**Utilities:**
+
+```less
+@layer dialtone.utilities {
+  .d-my-util { property: value !important; }
+}
+```
+
+### Cross-Layer Mixins
+
+To share styles between layers, extract parametric mixins **outside** `@layer` blocks:
+
+```less
+// Outside @layer for cross-file access
+._my-mixin() {
+  display: flex;
+  align-items: center;
+}
+
+@layer dialtone.components {
+  .d-component { ._my-mixin(); }
+}
+```
+
+### Validation
+
+The build pipeline now validates that all Dialtone classes are properly layered. Unlayered classes will fail CI.
+
+See the [CSS Layers Contributor Guide](/guides/css-layers/) for complete documentation.
+
+## Examples
+
+### Utility Classes Override Components
+
+```html
+<!-- Component default: blue background -->
+<button class="d-btn d-bgc-critical">
+  <!-- Utility wins: red background -->
+</button>
+```
+
+### Responsive Utilities
+
+Responsive utilities are now in the same layer as base utilities, ensuring consistent behavior:
+
+```html
+<div class="d-d-none lg:d-d-block">
+  <!-- Hidden by default, visible on large screens -->
+</div>
+```
+
+### App Overrides
+
+```css
+@layer app.overrides {
+  .d-btn--custom {
+    border-radius: 999px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+}
+```
+
+## Browser Support
+
+CSS Cascade Layers are supported in all modern browsers:
+
+- Chrome 99+
+- Firefox 97+
+- Safari 15.4+
+- Edge 99+
+
+For older browsers, styles still apply (unlayered), maintaining visual consistency with potentially different cascade behavior.
+
+## Learn More
+
+- [CSS Cascade Layers in Dialtone](/guides/css-layers/)
+- [MDN: CSS Cascade Layers](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@layer)
+- [CSS Cascade Layers Explainer](https://css.oddbird.net/layers/explainer/)
+
+## Migration Path
+
+No migration required for consumers. Existing Dialtone usage continues to work identically.
+
+If you have custom CSS that conflicts with Dialtone, consider wrapping it in a layer as described in [Using CSS Layers with Dialtone](/guides/css-layers/).

@@ -170,6 +170,7 @@ function _injectFrontmatterIntoSidebar (app, options) {
   // Create maps of page paths to frontmatter data for faster lookup
   const pageKeywords = new Map();
   const pageStatus = new Map();
+  const pageDescription = new Map();
   app.pages.forEach(page => {
     const normalizedPath = page.path.replace(/\/$/, '').replace(/\.html$/, '');
 
@@ -181,6 +182,11 @@ function _injectFrontmatterIntoSidebar (app, options) {
     if (page.frontmatter?.status) {
       pageStatus.set(normalizedPath, page.frontmatter.status);
       pageStatus.set(page.path, page.frontmatter.status);
+    }
+
+    if (page.frontmatter?.description) {
+      pageDescription.set(normalizedPath, page.frontmatter.description);
+      pageDescription.set(page.path, page.frontmatter.description);
     }
   });
 
@@ -202,6 +208,13 @@ function _injectFrontmatterIntoSidebar (app, options) {
           const status = pageStatus.get(normalizedLink) || pageStatus.get(item.link);
           if (status) {
             item.status = status;
+          }
+        }
+
+        if (!item.description) {
+          const description = pageDescription.get(normalizedLink) || pageDescription.get(item.link);
+          if (description) {
+            item.description = description;
           }
         }
       }
