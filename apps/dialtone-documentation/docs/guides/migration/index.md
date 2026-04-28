@@ -41,41 +41,41 @@ Work through each applicable guide in order. Guides earlier in the list are prer
 
 ## Quick Start
 
-For most projects, run the automated tools in sequence:
+For most projects, run the automated tools in sequence. Each tool runs interactively by default — it will show you the files to be modified and ask for confirmation before applying changes. Add `--force` (migration-helper) or `--yes` (other scripts) to skip prompts.
 
 ```bash
 # 1. Color stops (renames old stop numbers)
-npx dialtone-migration-helper --cwd ./src --force
+npx dialtone-migration-helper --cwd ./src
 # Select "color stops"
 
 # 2. HSL to OKLCH (removes channel breakout vars)
-npx dialtone-migration-helper --cwd ./src --force
+npx dialtone-migration-helper --cwd ./src
 # Select "hsl-to-oklch"
 
 # 3. Base to semantic colors
-npx dialtone-migration-helper --cwd ./src --force
+npx dialtone-migration-helper --cwd ./src
 # Select "base to semantic"
 
 # 4. Space to spacing tokens
-npx dialtone-migration-helper --cwd ./src --force
+npx dialtone-migration-helper --cwd ./src
 # Select "space-to-spacing"
 
 # 5. Size to layout tokens
-npx dialtone-migration-helper --cwd ./src --force
+npx dialtone-migration-helper --cwd ./src
 # Select "size-to-layout"
 
 # 6. Flex to Stack
-npx dialtone-migrate-flex-to-stack --cwd ./src --yes
+npx dialtone-migrate-flex-to-stack --cwd ./src
 
 # 7. T-shirt sizes to numeric
-npx dialtone-migrate-tshirt-to-numeric --cwd ./src --yes
+npx dialtone-migrate-tshirt-to-numeric --cwd ./src
 
 # 8. Physical to logical naming
-npx dialtone-migration-helper --cwd ./src --force
+npx dialtone-migration-helper --cwd ./src
 # Select "physical-to-logical"
 
 # 9. Component props, events, and slots
-npx dialtone-migrate-props --cwd ./src --yes
+npx dialtone-migrate-props --cwd ./src
 
 # 10. ESLint auto-fix pass
 npx eslint --fix "src/**/*.vue"
