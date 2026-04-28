@@ -21,6 +21,7 @@ import CodeExample from './baseComponents/CodeExample.vue';
 import SvgLoader from './baseComponents/SvgLoader.vue';
 import DialtoneUsage from './baseComponents/DialtoneUsage.vue';
 import UiKitsComparisonTable from './baseComponents/UiKitsComparisonTable.vue';
+import MigrationBanner from './baseComponents/MigrationBanner.vue';
 
 export default defineClientConfig({
   enhance ({ app }) {
@@ -44,6 +45,7 @@ export default defineClientConfig({
     app.component('SvgLoader', SvgLoader);
     app.component('DialtoneUsage', DialtoneUsage);
     app.component('UiKitsComparisonTable', UiKitsComparisonTable);
+    app.component('MigrationBanner', MigrationBanner);
   },
   setup () {
     const headers = shallowRef([]);
