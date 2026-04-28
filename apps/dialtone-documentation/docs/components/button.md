@@ -89,7 +89,7 @@ The critical button style is used to communicate critical or destructive actions
 
 ### Positive
 
-The positive button style is used to communicate positive actions.
+The positive button style is used to communicate positive, confirmatory, or success-related actions.
 
 ```vue demo
 <!-- @wrapper -->

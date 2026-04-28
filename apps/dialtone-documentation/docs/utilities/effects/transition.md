@@ -1,15 +1,15 @@
 ---
 title: Transition
 description: Utilities for controlling how an element transitions in and out of states.
-keywords: ["animation", "animate", "ease", "duration"]
+keywords: ["animation", "animate", "ease", "duration", "motion"]
 ---
 
 ## Adding a Transition
 
-Use `d-t` to add a transition to an element.
+Use `d-t` to add a transition to an element. It defaults to a duration of `.d-td50`, easing of `.d-ttf-in-out`, for all style properties. Override any of these with `d-td*` (e.g. `d-td200`) for a different duration, `d-ttf-*` (e.g. `d-ttf-in`) for a different easing, or `d-tp-*` (e.g. `d-tp-bgc`) for a different property.
 
 ```vue demo
-<dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-md h:d-fc-critical d-t ">Hover me</dt-button>
+<dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-md h:d-fc-critical d-t">Hover me</dt-button>
 ```
 
 ## Changing Transition Duration
@@ -67,7 +67,7 @@ Use `d-tp-{n}` change an what items within an element are transitioned.
       <tr>
         <th scope="row" class="d-code--sm d-docsite-code">.d-t</th>
         <td class="d-code--sm">
-          transition-duration: var(--td25);<br/>
+          transition-duration: var(--td50);<br/>
           transition-property: all;<br/>
           transition-timing-function: var(--ttf-in-out);<br/>
           transition-delay: 0s;</td>
