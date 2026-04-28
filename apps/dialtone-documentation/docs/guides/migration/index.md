@@ -81,7 +81,7 @@ npx dialtone-migrate-props --cwd ./src --yes
 npx eslint --fix "src/**/*.vue"
 ```
 
-After running all tools, search for `TODO` comments left by the migration helpers and handle any manual cases.
+After running all tools, review terminal output for warnings about skipped cases that need manual attention. The size-to-layout migration also leaves inline `/* TODO: no --dt-layout-* … */` comments for tokens that exceed the layout scale.
 
 ## Need Help?
 
