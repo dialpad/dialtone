@@ -22,7 +22,7 @@ What we prioritize is semantic clarity, ensuring each color serves a distinct pu
 
 Dialtone uses **semantic tokens** for color, representing a color's *purpose* in the UI. See our [See our design token list](https://dialtone.dialpad.com/tokens/) for descriptions guiding their application.
 
-<div class="d-bgc-secondary d-bar-400"><svg-loader class="d-fl1" name="color-tokens" /></div>
+<div class="d-bgc-secondary d-bar-400"><img src="/assets/images/color-tokens.png" alt="" class="d-d-block d-wmx100p" /></div>
 
 <div class="d-m-400"></div>
 
@@ -44,12 +44,12 @@ Foreground colors are the visual language of our content, applied across all con
 
 <div class="d-d-grid d-g-300 d-g-cols2">
   <div>
-    <div class="d-bgc-secondary d-bar-400"><svg-loader class="d-fl1" name="color-text-f" /></div>
+    <div class="d-bgc-secondary d-bar-400"><img src="/assets/images/color-text-f.png" alt="" class="d-d-block d-wmx100p" /></div>
     <h4>Foreground Text</h4>
     Neutral text colors form the backbone of our content, used for headers, body text, forms, and more.
   </div>
   <div>
-     <div class="d-bgc-secondary d-bar-400"><svg-loader class="d-fl1" name="color-text-s" /></div>
+     <div class="d-bgc-secondary d-bar-400"><img src="/assets/images/color-text-s.png" alt="" class="d-d-block d-wmx100p" /></div>
     <h4>Status Text</h4>
     Status text colors are critical for highlighting key information:
     <ul>
@@ -84,7 +84,7 @@ Borders delineate content areas and components, using neutrals for subtle defini
 
 <div class="d-d-grid d-g-300 d-g-cols2">
   <div>
-    <div class="d-bgc-secondary d-bar-400"><svg-loader class="d-fl1" name="color-border-ai" /></div>
+    <div class="d-bgc-secondary d-bar-400"><img src="/assets/images/color-border-ai.png" alt="" class="d-d-block d-wmx100p" /></div>
   </div>
   <div>
      <div class="d-bgc-secondary d-bar-400"><svg-loader class="d-fl1" name="color-border-status" /></div>
@@ -172,12 +172,12 @@ Maintain color consistency across similar components to build intuitive user pat
 <dialtone-usage class="d-d-grid d-g-300 d-g-cols2">
   <template #do>
     <div class="d-bgc-secondary d-bar-400">
-      <svg-loader class="d-fl1" name="color-uniform-do" />
+      <img src="/assets/images/color-uniform-do.png" alt="" class="d-d-block d-wmx100p" />
     </div>
   </template>
   <template #dont>
     <div class="d-bgc-secondary d-bar-400">
-      <svg-loader class="d-fl1" name="color-uniform-dont" />
+      <img src="/assets/images/color-uniform-dont.png" alt="" class="d-d-block d-wmx100p" />
     </div>
   </template>
 </dialtone-usage>
@@ -187,7 +187,7 @@ Maintain color consistency across similar components to build intuitive user pat
 Dialtone is designed to seamlessly support both light and dark themes. We supply colors through semantic tokens that automatically adapt their underlying values depending on the active mode, ensuring consistent meaning and optimal contrast in any environment.
 
 <div class="d-bgc-secondary d-bgo10 ">
- <svg-loader class="d-fl1" name="color-mode" />
+ <img src="/assets/images/color-mode.png" alt="" class="d-d-block d-wmx100p" />
 </div>
 
 ## Related
