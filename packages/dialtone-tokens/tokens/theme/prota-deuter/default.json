@@ -41,6 +41,12 @@
       "900":  { "value": "{color.coral.900}",  "type": "color" },
       "950":  { "value": "{color.coral.950}",  "type": "color" },
       "1000": { "value": "{color.coral.1000}", "type": "color" }
+    },
+    "surface": {
+      "info":            { "value": "{color.blue.200}",  "type": "color" },
+      "success":         { "value": "{color.green.200}", "type": "color" },
+      "success-strong":  { "value": "{color.green.700}", "type": "color" },
+      "success-subtle":  { "value": "{color.green.100}", "type": "color" }
     }
   }
 }

@@ -1,0 +1,12 @@
+{
+  "badge": {
+    "color": {
+      "background": {
+        "success": {
+          "value": "{color.green.300}",
+          "type": "color"
+        }
+      }
+    }
+  }
+}

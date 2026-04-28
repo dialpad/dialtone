@@ -37,6 +37,7 @@
     "components/avatar/default",
     "components/badge/default",
     "components/badge/dark",
+    "components/badge/default-prota-deuter",
     "components/button/default",
     "components/checkbox/default",
     "components/icon/default",
