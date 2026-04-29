@@ -1,20 +1,20 @@
 <template>
-  <div
+  <dt-box
     v-dt-mode:[mode]
-    class="d-p-200 d-bgc-secondary"
+    padding="200"
+    surface="secondary"
+    border-radius="300"
   >
-    <dt-stack as="section" gap="200">
-      <div class="d-d-grid d-g-200 d-rg-400 d-g-cols1 md:d-g-cols2">
-        <base-color
-          v-for="({ stops }, colorName) in colors"
-          :key="colorName"
-          :color-name="colorName"
-          :stops="stops || []"
-          :mode="mode"
-        />
-      </div>
-    </dt-stack>
-  </div>
+    <div class="d-d-grid d-g-200 d-rg-400 d-g-cols1 md:d-g-cols2">
+      <base-color
+        v-for="({ stops }, colorName) in colors"
+        :key="colorName"
+        :color-name="colorName"
+        :stops="stops || []"
+        :mode="mode"
+      />
+    </div>
+  </dt-box>
 </template>
 
 <script setup>

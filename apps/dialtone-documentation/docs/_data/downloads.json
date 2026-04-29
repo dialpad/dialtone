@@ -1,0 +1,108 @@
+{
+  "order": [
+    "logo",
+    "icon",
+    "gradient",
+    "product-storytelling",
+    "graphic"
+  ],
+  "sections": {
+    "logo": {
+      "title": "Logo",
+      "relatedLink": "/foundations/brand/using-our-logo/",
+      "relatedLabel": "Usage Guidelines",
+      "downloadAllUrl": "https://drive.google.com/drive/folders/157wnQo_xwsWSpxqIHEBnuLcFWYMENjJn?usp=drive_link",
+      "downloadAllLabel": "Download all Logos",
+      "items": [
+        {
+          "svg": "download-logo--primary-2-light",
+          "label": "Primary 2 Color Light",
+          "downloadUrl": "https://drive.google.com/drive/folders/1g1Vi4eCdGC73lbRKW-bCdBdPu0L7Mywq"
+        },
+        {
+          "svg": "download-logo--primary-2-dark",
+          "label": "Primary 2 Color Dark",
+          "downloadUrl": "https://drive.google.com/open?id=1SaE8FJ2k9VpdJRIn2Yx6qChD6YpzzV2X&usp=drive_fs"
+        },
+        {
+          "svg": "download-logo--secondary-1-color-light",
+          "label": "Secondary 1 Color Light",
+          "downloadUrl": "https://drive.google.com/open?id=1WjQBzXG958XXOhBhN66BRgEOrF1pieGB&usp=drive_fs"
+        },
+        {
+          "svg": "download-logo--secondary-1-color-dark",
+          "label": "Secondary 1 Color Dark",
+          "downloadUrl": "https://drive.google.com/open?id=1k3hqwlURs3-Qx5Oguyy8lUAnUDcAFYMF&usp=drive_fs"
+        }
+      ]
+    },
+    "icon": {
+      "title": "Icon",
+      "relatedLink": "/foundations/brand/our-icon/",
+      "relatedLabel": "Usage Guidelines",
+      "downloadAllUrl": "https://drive.google.com/open?id=1Vn9KOo07eamK8m0XLujfkIhRbyJLZnuk&usp=drive_fs",
+      "downloadAllLabel": "Download all Icons",
+      "items": [
+        {
+          "svg": "download-logo--gradient-icon",
+          "label": "Gradient Icon",
+          "downloadUrl": "https://drive.google.com/open?id=1lLNbsWsvkiPflAL-vIMT8bvXR2O6ADtL&usp=drive_fs"
+        },
+        {
+          "svg": "download-logo--dark-icon",
+          "label": "Dark Icon",
+          "downloadUrl": "https://drive.google.com/open?id=1dMH1h7_k31dclIykEKhUqIvkI-pzbKqy&usp=drive_fs"
+        },
+        {
+          "svg": "download-logo--meetings-light",
+          "label": "Meetings Light",
+          "downloadUrl": "https://drive.google.com/open?id=1lLNbsWsvkiPflAL-vIMT8bvXR2O6ADtL&usp=drive_fs"
+        },
+        {
+          "svg": "download-logo--meetings-dark",
+          "label": "Meetings Dark",
+          "downloadUrl": "https://drive.google.com/open?id=1dMH1h7_k31dclIykEKhUqIvkI-pzbKqy&usp=drive_fs"
+        }
+      ]
+    },
+    "gradient": {
+      "title": "Gradient",
+      "relatedLink": "/foundations/gradient/",
+      "relatedLabel": "Usage Guidelines",
+      "downloadAllUrl": "https://drive.google.com/open?id=1uNUvKNS3fpwdoZCF6py3Yq-20znzhtlg&usp=drive_fs",
+      "downloadAllLabel": "Download all Gradients",
+      "items": [
+        {
+          "svg": "download-gradient",
+          "label": "Gradient"
+        }
+      ]
+    },
+    "product-storytelling": {
+      "title": "Product Storytelling",
+      "relatedLink": "/foundations/product-storytelling/",
+      "relatedLabel": "Usage Guidelines",
+      "downloadAllUrl": "https://drive.google.com/drive/folders/1e88uwJUeNGVd153-_60A3S3UFVmB0b7C?usp=drive_link",
+      "downloadAllLabel": "Download",
+      "items": [
+        {
+          "svg": "download-product-storytelling",
+          "label": "Product Storytelling"
+        }
+      ]
+    },
+    "graphic": {
+      "title": "Graphic",
+      "relatedLink": "/foundations/graphic-system/",
+      "relatedLabel": "Usage Guidelines",
+      "downloadAllUrl": null,
+      "downloadAllLabel": "Download",
+      "items": [
+        {
+          "svg": "download-graphic",
+          "label": "Graphic"
+        }
+      ]
+    }
+  }
+}

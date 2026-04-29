@@ -67,7 +67,7 @@ This inverts the underline behavior. With `underline="false"`, the link will not
 
 ### Inverted
 
-> [!ERROR] Deprecated
+> [!CRITICAL] Deprecated
 > The `inverted` prop has been deprecated. Use the [v-dt-mode directive](mode-island.html#inverting) instead.
 
 In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#inverting) on the component element.

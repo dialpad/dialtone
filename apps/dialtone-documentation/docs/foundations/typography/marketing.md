@@ -12,7 +12,7 @@ keywords: ["season sans", "season mix", "brand font", "marketing typeface"]
       <p class="d-docsite--paragraph">Type sizing is based off of a relative scale, with 16px type as the baseline for body copy and for scaling type.</p>
     </div>
     <div class="d-gc2">
-      <svg-loader name="type--in-marketing" class="d-bar-500" />
+      <img src="/assets/images/type--in-marketing.png" alt="" class="d-bar-500 d-d-block d-w100p" />
     </div>
   </div>
   <div>
@@ -21,15 +21,15 @@ keywords: ["season sans", "season mix", "brand font", "marketing typeface"]
   </div>
   <dt-stack direction="row" gap="400" class="d-ai-flex-start">
     <dt-stack gap="50" class="d-w100p">
-      <svg-loader name="type--marketing-sample-01" class="d-mbe-200 d-bar-500" />
+      <img src="/assets/images/type--marketing-sample-01.png" alt="" class="d-mbe-200 d-bar-500 d-d-block d-w100p" />
       <h3 class="d-docsite--header-4 d-m-0" style="font-size:20px !important">Aspirational, Top-Level</h3>
       <p class="d-docsite--paragraph" style="font-size: 16px;"><strong>Season Mix</strong> for top of the funnel, more aspirational, lofty or abstract headlines, use Season Mix.</p>
     </dt-stack>
     <dt-stack gap="50" class="d-w100p">
-      <svg-loader name="type--marketing-sample-02" class="d-mbe-200 d-bar-500" />
+      <img src="/assets/images/type--marketing-sample-02.png" alt="" class="d-mbe-200 d-bar-500 d-d-block d-w100p" />
       <h3 class="d-docsite--header-4 d-m-0" style="font-size:20px !important">Concrete, Mid-Level</h3>
       <p class="d-docsite--paragraph" style="font-size: 16px;"><strong>Season Sans</strong> for mid of the funnel, more concrete, mid-level headlines, use Season Sans.</p>
     </dt-stack>
   </dt-stack>
-  <svg-loader name="type--marketing-sample-03" class="d-bar-500" />
+  <img src="/assets/images/type--marketing-sample-03.png" alt="" class="d-bar-500 d-d-block d-w100p" />
 </dt-stack>

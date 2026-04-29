@@ -6,7 +6,7 @@
  *   > [!WARNING] Optional title
  *   > Body text with **markdown** and [links](/path).
  *
- * Supported kinds: BASE, INFO, SUCCESS, WARNING, ERROR
+ * Supported kinds: BASE, CRITICAL, INFO, POSITIVE, WARNING
  * (uppercase by convention, case-insensitive — maps to DtNotice's `kind` prop)
  *
  * Always outputs: :show-close="false", class="d-wmx100p d-my-200"
@@ -21,7 +21,7 @@
 
 import { encodeForAttr } from './fenced-demo-shared.js';
 
-const ALERT_RE = /^\[!(base|error|info|success|warning)\][ \t]*(.*)/i;
+const ALERT_RE = /^\[!(base|critical|info|positive|warning)\][ \t]*(.*)/i;
 
 export default function noticePlugin (md) {
   // Pass 1: Before inline parsing — detect [!KIND] marker and strip it.
@@ -104,7 +104,7 @@ export default function noticePlugin (md) {
       // Build <dt-notice> tag
       const attrs = [`kind="${kind}"`];
       if (title) {
-        attrs.push(`title="${encodeForAttr(title)}"`);
+        attrs.push(`header-text="${encodeForAttr(title)}"`);
       }
       attrs.push(':show-close="false"', 'class="d-wmx100p d-my-200 dialtone-doc-notice"');
 

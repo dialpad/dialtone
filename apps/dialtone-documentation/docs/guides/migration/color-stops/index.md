@@ -1,0 +1,368 @@
+---
+title: Migrating Base Color Stops
+description: Base color stops have been standardized to a 12-stop scale. Includes migration tools for stop renames and upgrading to semantic color tokens.
+---
+
+> [!WARNING] Breaking Change
+> This requires migration. Use the [Color Stops Migration Tool](#migration-tool-color-stops).
+
+## TLDR
+
+- Base color stops (black, white, gray, red, green, blue, yellow, orange, purple, magenta, gold) are >renamed to a standard 12-stop scale.
+- Use the [Color Stops Migration Tool](#migration-tool-color-stops) to rename old stops.
+- Use the [Base to Semantic Migration Tool](#migration-tool-base-to-semantic) to upgrade base color utilities and CSS tokens to semantic equivalents.
+- Deprecated stops have been removed and will no longer resolve, e.g. `var(--dt-color-purple-350)`.
+
+## Overview
+
+Six of the base color ramps (`purple`, `blue`, `magenta`, `gold`, `green`, `red`) previously used irregular stop numbers (`250`, `350`, `425`, etc.). This was previously necessary as part of mid-2025's Dialpad Rebrand. Some colors like `black` already used a 12-stop scale and remain unchanged.
+
+All colors now follow a consistent 12-stop scale:
+
+```text
+50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950 | 1000
+```
+
+**Only names changed.** They've just moved to new positions in the scale. For example, the color for `purple-350` is now `purple-500`.
+
+## Examples: Color Stop Renames
+
+<div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols2">
+<div>
+
+### Before
+
+```css
+.foo {
+  color: var(--dt-color-purple-350);
+  background: var(--dt-color-red-450);
+}
+```
+
+</div>
+<div>
+
+### After
+
+```css
+.foo {
+  color: var(--dt-color-purple-500);
+  background: var(--dt-color-red-600);
+}
+```
+
+</div>
+</div>
+
+<div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols2">
+<div>
+
+### Before (utility classes)
+
+```html
+<div class="d-bgc-purple-350 d-fc-blue-425">
+  ...
+</div>
+```
+
+</div>
+<div>
+
+### After
+
+```html
+<div class="d-bgc-purple-500 d-fc-blue-500">
+  ...
+</div>
+```
+
+</div>
+</div>
+
+## Color Stop Rename Reference
+
+Stops not listed (e.g. `50`, `100`, `200`, `1000`) are unchanged for all colors. Blue, gold, green, and red also keep `300` unchanged. Colors not listed here already use a 12-stop scale and remain unchanged.
+
+### Purple
+
+| Old Stop | New Stop |
+| --- | --- |
+| `250` | `300` |
+| `300` | `400` |
+| `350` | `500` |
+| `400` | `600` |
+| `450` | `700` |
+| `500` | `800` |
+| `550` | `900` |
+| `600` | `950` |
+
+### Blue
+
+| Old Stop | New Stop |
+| --- | --- |
+| `425` | `500` |
+| `450` | `600` |
+| `475` | `700` |
+| `500` | `800` |
+| `600` | `900` |
+| `900` | `950` |
+
+### Magenta
+
+| Old Stop | New Stop |
+| --- | --- |
+| `250` | `300` |
+| `300` | `400` |
+| `400` | `500` |
+| `425` | `600` |
+| `475` | `700` |
+| `500` | `800` |
+| `600` | `900` |
+| `900` | `950` |
+
+### Gold
+
+| Old Stop | New Stop |
+| --- | --- |
+| `350` | `400` |
+| `400` | `500` |
+| `450` | `600` |
+| `500` | `700` |
+| `600` | `800` |
+| `700` | `900` |
+| `900` | `950` |
+
+### Green
+
+| Old Stop | New Stop |
+| --- | --- |
+| `350` | `400` |
+| `400` | `500` |
+| `425` | `600` |
+| `475` | `700` |
+| `500` | `800` |
+| `600` | `900` |
+| `900` | `950` |
+
+### Red
+
+| Old Stop | New Stop |
+| --- | --- |
+| `350` | `400` |
+| `400` | `500` |
+| `450` | `600` |
+| `500` | `700` |
+| `600` | `800` |
+| `700` | `900` |
+| `900` | `950` |
+
+## Migration Tool: Color Stops
+
+`dialtone-migration-helper` scans your files for old color stop references and renames them to the new standard scale. It's included with `@dialpad/dialtone-css`.
+
+**The tool migrates:**
+
+- `var(--dt-color-{color}-{oldStop})` → `var(--dt-color-{color}-{newStop})`
+- Utility classes: `d-bgc-{color}-{oldStop}`, `d-fc-*`, `d-bc-*`, `d-bgg-from-*`, `d-bgg-to-*`
+- HSL variants: `-h`, `-s`, `-l`, `-hsl`
+
+### Usage
+
+```bash
+npx dialtone-migration-helper --cwd ./src
+# Select "color stops" from the config list
+```
+
+#### Apply All Changes
+
+```bash
+npx dialtone-migration-helper --cwd ./src --force
+# Select "color stops" from the config list
+```
+
+### File Types Processed
+
+- **Stylesheets**: CSS, LESS, SCSS, SASS, Stylus
+- **Templates**: HTML, Vue, Markdown
+- **Scripts**: JavaScript, TypeScript, JSX, TSX
+
+## Adopting Semantic Color Tokens
+
+After renaming stops, many base color usages have a direct semantic equivalent. For example, `d-fc-red-600` is the same color as `d-fc-critical`. The semantic version is theme-aware, adapting automatically to dark mode, high contrast, and brand variants.
+
+The base-to-semantic migration tool auto-replaces only where the mapping is unambiguous. It uses context to determine the correct semantic category:
+
+- **Utility class prefix** tells the category: `d-fc-*` → foreground, `d-bgc-*` → surface, `d-bc-*` → border
+- **CSS property** tells the category: `color:` → foreground, `background[-color]:` → surface, `border[-*][-color]:` → border
+
+## Examples: Base to Semantic
+
+<div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols2">
+<div>
+
+### Before (utility classes)
+
+```html
+<p class="d-fc-red-600">Error message</p>
+<div class="d-bgc-black-100">Card</div>
+<div class="d-bc-green-700">Success</div>
+```
+
+</div>
+<div>
+
+### After
+
+```html
+<p class="d-fc-critical">Error message</p>
+<div class="d-bgc-secondary">Card</div>
+<div class="d-bc-success">Success</div>
+```
+
+</div>
+</div>
+
+<div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols2">
+<div>
+
+### Before (CSS properties)
+
+```css
+.alert {
+  color: var(--dt-color-red-600);
+  background-color: var(--dt-color-red-100);
+  border-color: var(--dt-color-red-600);
+}
+```
+
+</div>
+<div>
+
+### After
+
+```css
+.alert {
+  color: var(--dt-color-foreground-critical);
+  background-color: var(--dt-color-surface-critical);
+  border-color: var(--dt-color-border-critical);
+}
+```
+
+</div>
+</div>
+
+<div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols2">
+<div>
+
+### Before (border shorthand)
+
+```css
+.foo {
+  border: var(--dt-size-border-100) solid
+    var(--dt-color-red-600);
+}
+```
+
+</div>
+<div>
+
+### After
+
+```css
+.foo {
+  border: var(--dt-size-border-100) solid
+    var(--dt-color-border-critical);
+}
+```
+
+</div>
+</div>
+
+Notice that the same base color `red-600` maps to **different semantics** depending on which CSS property it's used in: `foreground-critical` for text, `surface-critical-strong` for backgrounds, and `border-critical` for borders.
+
+## Migration Tool: Base to Semantic
+
+```bash
+npx dialtone-migration-helper --cwd ./src
+# Select "base to semantic" from the config list
+```
+
+### What the tool auto-replaces
+
+- Utility classes: `d-fc-*`, `d-bgc-*`, `d-bc-*`, `d-divide-*` with mapped base colors
+- CSS declarations: `color:`, `background[-color]:`, `border[-side][-color]:` with mapped base color vars
+- Supports shorthand properties (`background:`, `border:`)
+- Supports physical and logical border properties (`border-top-color`, `border-block-start`, `border-inline-end-color`, etc.)
+
+### What requires manual review
+
+The tool leaves unmapped base colors unchanged. Dialtone's ESLint rule (`deprecated-base-color-classes`) and Stylelint rule (`no-base-color-tokens`) will flag these for manual review:
+
+- Unmapped colors (magenta, mid-range stops without a semantic equivalent)
+- Custom property definitions (`--my-var: var(--dt-color-*)`)
+- SVG properties (`fill`, `stroke`)
+- HSL decomposed values (`var(--dt-color-red-600-h)`)
+
+## Semantic Color Reference
+
+### Foreground
+
+| Base Color | Semantic Class | Semantic Token |
+| --- | --- | --- |
+| `black-600` | `d-fc-tertiary` | `var(--dt-color-foreground-tertiary)` |
+| `black-700` | `d-fc-secondary` | `var(--dt-color-foreground-secondary)` |
+| `black-900` | `d-fc-primary` | `var(--dt-color-foreground-primary)` |
+| `red-600` | `d-fc-critical` | `var(--dt-color-foreground-critical)` |
+| `red-700` | `d-fc-critical-strong` | `var(--dt-color-foreground-critical-strong)` |
+| `green-800` | `d-fc-positive` | `var(--dt-color-foreground-positive)` |
+| `green-900` | `d-fc-positive-strong` | `var(--dt-color-foreground-positive-strong)` |
+| `gold-800` | `d-fc-warning` | `var(--dt-color-foreground-warning)` |
+
+### Surface
+
+| Base Color | Semantic Class | Semantic Token |
+| --- | --- | --- |
+| `black-50` | `d-bgc-primary` | `var(--dt-color-surface-primary)` |
+| `black-100` | `d-bgc-secondary` | `var(--dt-color-surface-secondary)` |
+| `black-200` | `d-bgc-moderate` | `var(--dt-color-surface-moderate)` |
+| `black-300` | `d-bgc-bold` | `var(--dt-color-surface-bold)` |
+| `black-600` | `d-bgc-strong` | `var(--dt-color-surface-strong)` |
+| `black-800` | `d-bgc-contrast` | `var(--dt-color-surface-contrast)` |
+| `red-50` | `d-bgc-critical-subtle` | `var(--dt-color-surface-critical-subtle)` |
+| `red-100` | `d-bgc-critical` | `var(--dt-color-surface-critical)` |
+| `red-600` | `d-bgc-critical-strong` | `var(--dt-color-surface-critical-strong)` |
+| `gold-50` | `d-bgc-warning-subtle` | `var(--dt-color-surface-warning-subtle)` |
+| `gold-100` | `d-bgc-warning` | `var(--dt-color-surface-warning)` |
+| `gold-400` | `d-bgc-warning-strong` | `var(--dt-color-surface-warning-strong)` |
+| `green-50` | `d-bgc-success-subtle` | `var(--dt-color-surface-success-subtle)` |
+| `green-100` | `d-bgc-success` | `var(--dt-color-surface-success)` |
+| `green-800` | `d-bgc-success-strong` | `var(--dt-color-surface-success-strong)` |
+| `blue-50` | `d-bgc-info-subtle` | `var(--dt-color-surface-info-subtle)` |
+| `blue-100` | `d-bgc-info` | `var(--dt-color-surface-info)` |
+| `blue-800` | `d-bgc-info-strong` | `var(--dt-color-surface-info-strong)` |
+| `purple-50` | `d-bgc-brand-subtle` | `var(--dt-color-surface-brand-subtle)` |
+| `purple-100` | `d-bgc-brand` | `var(--dt-color-surface-brand)` |
+| `purple-600` | `d-bgc-brand-strong` | `var(--dt-color-surface-brand-strong)` |
+
+### Border
+
+| Base Color | Semantic Class | Semantic Token |
+| --- | --- | --- |
+| `red-300` | `d-bc-critical-subtle` | `var(--dt-color-border-critical-subtle)` |
+| `red-600` | `d-bc-critical` | `var(--dt-color-border-critical)` |
+| `red-800` | `d-bc-critical-strong` | `var(--dt-color-border-critical-strong)` |
+| `green-300` | `d-bc-success-subtle` | `var(--dt-color-border-success-subtle)` |
+| `green-700` | `d-bc-success` | `var(--dt-color-border-success)` |
+| `green-900` | `d-bc-success-strong` | `var(--dt-color-border-success-strong)` |
+| `gold-300` | `d-bc-warning-subtle` | `var(--dt-color-border-warning-subtle)` |
+| `gold-500` | `d-bc-warning` | `var(--dt-color-border-warning)` |
+| `gold-700` | `d-bc-warning-strong` | `var(--dt-color-border-warning-strong)` |
+| `purple-300` | `d-bc-brand-subtle` | `var(--dt-color-border-brand-subtle)` |
+| `purple-600` | `d-bc-brand` | `var(--dt-color-border-brand)` |
+| `purple-800` | `d-bc-brand-strong` | `var(--dt-color-border-brand-strong)` |
+| `blue-500` | `d-bc-focus` | `var(--dt-color-border-focus)` |
+
+## Breaking Changes
+
+> [!WARNING]
+> Old color stops have been **removed**. Consumers must run the color stops migration tool before upgrading. Base color usage is deprecated. Adopt semantic tokens for theme compatibility.

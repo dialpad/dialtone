@@ -10,9 +10,9 @@ const importanceDescriptions = {
   primary: 'Highest level of importance, presenting a solid background color.',
 };
 const kindDescriptions = {
-  default: 'Our default button colors.',
-  danger: 'Potentially destructive or otherwise critical actions.',
-  positive: 'Used to communicate positive actions.',
+  default: 'Default button colors.',
+  critical: 'Potentially destructive or otherwise critical actions.',
+  positive: 'Used to communicate positive, confirmatory, or success-related actions.',
   inverted: 'Use for placement on non-white, dark backgrounds.',
   muted: 'For non-primary actions and contexts where base style may not work.',
   unstyled: 'Raw button devoid of any style.',
@@ -31,10 +31,10 @@ const kindDescriptions = {
       <tr>
         <th class="d-ta-left d-va-top" aria-hidden="true" />
         <th v-for="importance in importanceModifiers" :key="importance" class="d-ta-left d-va-top">
-          <div class="d-mbe-50">
+          <div class="d-mbe-75 d-tt-uppercase">
             {{ importance }}
           </div>
-          <dt-text kind="body" :size="200" density="200" class="d-tt-none">
+          <dt-text kind="body" :size="200" density="200" tone="tertiary" class="d-tt-none">
             {{ importanceDescriptions[importance] }}
           </dt-text>
         </th>
