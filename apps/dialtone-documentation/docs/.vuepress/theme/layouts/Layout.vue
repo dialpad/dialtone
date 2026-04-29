@@ -1,4 +1,5 @@
 <template>
+  <migration-banner />
   <dt-root-layout
     :fixed="false"
     :header-sticky="true"
@@ -41,7 +42,6 @@
       <sidebar />
     </template>
     <template #default>
-      <migration-banner />
       <home v-if="$frontmatter.home" />
       <page
         v-else

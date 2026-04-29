@@ -5,7 +5,7 @@ description: "DtAvatar has been updated as part of the Dialtone visual refresh. 
 
 ## TLDR
 
-> [!WARNING]
+> [!WARNING] Breaking Changes
 >
 > - `clickable` prop **renamed** to `interactive`
 > - `iconSize` prop **removed** — icon size is now computed automatically from `size`
@@ -96,8 +96,6 @@ The `clickable` prop has been renamed to `interactive` to more accurately descri
 ```
 
 The [migration script](/guides/migration/component-props/#migration-script) (`dialtone-migrate-props`) handles this rename automatically.
-
----
 
 ## `iconSize` Removed
 

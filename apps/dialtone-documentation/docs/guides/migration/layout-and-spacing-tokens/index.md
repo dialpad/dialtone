@@ -3,16 +3,16 @@ title: Migrating Layout and Spacing Tokens
 description: The --dt-size-* and --dt-space-* token families are being replaced by two purpose-built systems — --dt-layout-* for structural sizing and --dt-spacing-* for whitespace.
 ---
 
+> [!WARNING] Breaking change
+> Two token families are being deprecated in favor of purpose-built replacements.
+
 ## TLDR
 
-> [!WARNING]
-> **Breaking change:** Two token families are being deprecated in favor of purpose-built replacements.
->
-> - `--dt-size-*` → `--dt-layout-*` for layout use (widths, heights — 64px base unit)
-> - `--dt-space-*` → `--dt-spacing-*` for spacing use (padding, margin, gap — 8px base unit)
-> - Old tokens still compile (deprecated aliases) but will be removed in a future major version
-> - Migration tool available: `npx dialtone-migration-helper`
-> - The previous `space-to-size` config has been **removed** — use the new configs instead
+- `--dt-size-*` → `--dt-layout-*` for layout use (widths, heights — 64px base unit)
+- `--dt-space-*` → `--dt-spacing-*` for spacing use (padding, margin, gap — 8px base unit)
+- Old tokens still compile (deprecated aliases) but will be removed in a future major version
+- Migration tool available: `npx dialtone-migration-helper`
+- The previous `space-to-size` config has been **removed** — use the new configs instead
 
 ## Why Two Systems?
 

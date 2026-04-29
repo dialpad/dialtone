@@ -3,15 +3,15 @@ title: Migrating Base Color Stops
 description: Base color stops have been standardized to a 12-stop scale. Includes migration tools for stop renames and upgrading to semantic color tokens.
 ---
 
+> [!WARNING] Breaking Change
+> This requires migration. Use the [Color Stops Migration Tool](#migration-tool-color-stops).
+
 ## TLDR
 
-> [!WARNING]
-> **Migration Required:**
->
-> - Base color stops (black, white, gray, red, green, blue, yellow, orange, purple, magenta, gold) are >renamed to a standard 12-stop scale.
-> - Use the [Color Stops Migration Tool](#migration-tool-color-stops) to rename old stops.
-> - Use the [Base to Semantic Migration Tool](#migration-tool-base-to-semantic) to upgrade base color utilities and CSS tokens to semantic equivalents.
-> - Deprecated stops have been removed and will no longer resolve, e.g. `var(--dt-color-purple-350)`.
+- Base color stops (black, white, gray, red, green, blue, yellow, orange, purple, magenta, gold) are >renamed to a standard 12-stop scale.
+- Use the [Color Stops Migration Tool](#migration-tool-color-stops) to rename old stops.
+- Use the [Base to Semantic Migration Tool](#migration-tool-base-to-semantic) to upgrade base color utilities and CSS tokens to semantic equivalents.
+- Deprecated stops have been removed and will no longer resolve, e.g. `var(--dt-color-purple-350)`.
 
 ## Overview
 
