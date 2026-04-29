@@ -28,7 +28,7 @@ keywords: ["font", "typography", "typeface", "text", "season"]
       </p>
     </div>
     <div class="d-gc2">
-      <svg-loader name="type--sample-02" class="d-bar-500" />
+      <img src="/assets/images/type--sample-02.png" alt="" class="d-bar-500 d-d-block d-wmx100p" />
     </div>
   </div>
 </dt-stack>

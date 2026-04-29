@@ -28,6 +28,26 @@ const _sortAlphabetically = (str1, str2) => {
   return 0;
 };
 
+// Pages at /foundations/* that should NOT appear as standalone cards on the
+// Foundations wall-of-cards (usually because they're children of another parent).
+const FOUNDATIONS_OVERVIEW_EXCLUDES = [
+  '/foundations/typography/',
+  '/foundations/typography.html',
+  '/foundations/colors/usage/',
+  '/foundations/colors/palette/',
+  '/foundations/colors/themes/',
+  '/foundations/colors/chart-colors/',
+  '/foundations/icons/usage/',
+  '/foundations/icons/crafting-an-icon/',
+  '/foundations/brand/using-our-logo/',
+  '/foundations/brand/our-icon/',
+  '/foundations/brand/sub-brands-and-co-branding/',
+  '/foundations/brand/samples/',
+  '/foundations/size/',
+  '/foundations/space/',
+  '/foundations/illustrations/',
+];
+
 function _blogPostsFrontmatter (app) {
   const blogPosts = app.pages
     .filter(page => page.path.includes('/dialtone/whats-new/posts'))
@@ -150,6 +170,7 @@ function _injectFrontmatterIntoSidebar (app, options) {
   // Create maps of page paths to frontmatter data for faster lookup
   const pageKeywords = new Map();
   const pageStatus = new Map();
+  const pageDescription = new Map();
   app.pages.forEach(page => {
     const normalizedPath = page.path.replace(/\/$/, '').replace(/\.html$/, '');
 
@@ -161,6 +182,11 @@ function _injectFrontmatterIntoSidebar (app, options) {
     if (page.frontmatter?.status) {
       pageStatus.set(normalizedPath, page.frontmatter.status);
       pageStatus.set(page.path, page.frontmatter.status);
+    }
+
+    if (page.frontmatter?.description) {
+      pageDescription.set(normalizedPath, page.frontmatter.description);
+      pageDescription.set(page.path, page.frontmatter.description);
     }
   });
 
@@ -182,6 +208,13 @@ function _injectFrontmatterIntoSidebar (app, options) {
           const status = pageStatus.get(normalizedLink) || pageStatus.get(item.link);
           if (status) {
             item.status = status;
+          }
+        }
+
+        if (!item.description) {
+          const description = pageDescription.get(normalizedLink) || pageDescription.get(item.link);
+          if (description) {
+            item.description = description;
           }
         }
       }
@@ -315,7 +348,7 @@ export const dialtoneVuepressTheme = (options) => ({
         ]);
       _extractFrontmatter(app, '/guides/content/', options);
       _extractFrontmatter(app, '/components/', options, ['/components/status/']);
-      _extractFrontmatter(app, '/foundations/', options, ['/foundations/typography/', '/foundations/typography.html', '/foundations/colors/usage/', '/foundations/colors/palette/', '/foundations/colors/themes/', '/foundations/colors/chart-colors/', '/foundations/icons/usage/', '/foundations/icons/crafting-an-icon/', '/foundations/brand/using-our-logo/', '/foundations/brand/our-icon/', '/foundations/brand/sub-brands-and-co-branding/', '/foundations/brand/samples/', '/foundations/size/', '/foundations/space/']);
+      _extractFrontmatter(app, '/foundations/', options, FOUNDATIONS_OVERVIEW_EXCLUDES);
       _extractFrontmatter(app, '/foundations/colors/', options);
       _extractComponentStatus(app);
       _injectFrontmatterIntoSidebar(app, options);

@@ -1,9 +1,9 @@
 ---
-title: Color Palette
+title: Product Color Palette
 shortTitle: palette
-description: A functional, personal, and accessible color palette.
+description: Representative Design Tokens and CSS Utilities for foreground, surfaces, and border colors.
 figma_url: https://www.figma.com/design/VjrRh4vvfONSmBQxnZrL3u/DT9-Design-Tokens--Rebrand-2025-?node-id=7712-1472&t=D8g6K4TrMGXNsvLT-11
-keywords: ["swatches","color tokens","color system"]
+keywords: ["swatches","token","color system", "foreground", "surface", "border"]
 ---
 
 ## Foreground
@@ -95,13 +95,19 @@ Each of the colors listed above references these. For example, in Light mode
 `var(--dt-color-foreground-critical)` is an alias to
 `var(--dt-color-red-300)`, and will have a different value in Dark mode.
 
-<dt-tab-group outlined activation-mode="auto">
+<dt-tab-group outlined activation-mode="auto" size="200">
   <template #tabs>
     <dt-tab id="1" panel-id="2" selected>
       Light Mode
+      <template #icon>
+        <dt-icon name="sun" size="200"></dt-icon>
+      </template>
     </dt-tab>
     <dt-tab id="3" panel-id="4">
       Dark Mode
+      <template #icon>
+        <dt-icon name="moon" size="200"></dt-icon>
+      </template>
     </dt-tab>
   </template>
   <div>
