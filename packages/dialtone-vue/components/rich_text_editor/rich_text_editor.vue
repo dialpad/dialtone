@@ -767,8 +767,18 @@ export default {
 
       if (this.allowCodeblock) {
         extensions.push(CodeBlock.extend({
-          renderText ({ node }) {
-            return `\`\`\`\n${node.textContent}\n\`\`\``;
+          renderText ({ node, pos, range }) {
+            // Tiptap 3.x passes range = { from, to } (the overall selection range).
+            // Full node in range: wrap in fences (getText(), full doc selection).
+            // Partial selection: return only the overlapping text.
+            const from = range?.from ?? 0;
+            const to = range?.to ?? (pos + node.nodeSize);
+            if (from <= pos && to >= pos + node.nodeSize) {
+              return `\`\`\`\n${node.textContent}\n\`\`\``;
+            }
+            const textStart = Math.max(0, from - pos - 1);
+            const textEnd = Math.min(node.textContent.length, to - pos - 1);
+            return node.textContent.slice(textStart, textEnd);
           },
           addCommands () {
             return {
