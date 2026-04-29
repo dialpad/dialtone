@@ -24,6 +24,15 @@ description: Prop renames, value standardization, event consolidation, slot rena
 | `dt-link` | Prop value | `tone="success"` | `tone="positive"` |
 | `dt-modal` | Prop value | `bannerKind="error"` | `bannerKind="critical"` |
 | `dt-modal` | Prop value | `bannerKind="success"` | `bannerKind="positive"` |
+| `dt-text` | Prop value | `tone="success"` | `tone="positive"` |
+| `dt-text` | Prop value | `tone="success-strong"` | `tone="positive-strong"` |
+| `dt-button` | Prop value | `link-kind="danger"` | `link-kind="critical"` |
+| `dt-button` | Prop value | `link-kind="success"` | `link-kind="positive"` |
+| `dt-box` | Prop value | `surface="success*"` (subtle, strong, opaque, subtle-opaque) | `surface="positive*"` |
+| `dt-box` | Prop value | `bc="success*"` (subtle, strong) | `bc="positive*"` |
+
+> [!INFO] CSS variables and utility classes also rename
+> The success-to-positive rename also covers `var(--dt-color-*-success-*)` design tokens, `d-fc-success*` / `d-bgc-success*` / `d-bc-success*` utility classes, and ships an ESLint rule and Stylelint rule. See the [Success to Positive](../success-to-positive/) migration guide for the CSS / token side and run `dialtone-migration-helper`.
 
 ### Visibility and open state
 
@@ -115,6 +124,61 @@ Prop values across the system map to a shared set of names. `danger` and `error`
 <dt-modal banner-kind="positive" />
 <dt-input validation-state="critical" />
 <dt-checkbox validation-state="positive" />
+```
+
+</div>
+</div>
+
+## DtBox `surface` / `bc`, DtText `tone-strong`, and DtButton `link-kind` Value Renames
+
+DtBox, DtText, and DtButton each have severity-value props that the original DLT-3157 release missed. The migration script handles all of them.
+
+**Affected components:** [DtBox](/components/box.html), [DtText](/components/text.html), [DtButton](/components/button.html)
+
+<div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols2">
+<div>
+
+### Before
+
+```vue
+<dt-box surface="success" />
+<dt-box surface="success-subtle" />
+<dt-box surface="success-strong" />
+<dt-box surface="success-opaque" />
+<dt-box surface="success-subtle-opaque" />
+
+<dt-box bc="success" />
+<dt-box bc="success-subtle" />
+<dt-box bc="success-strong" />
+
+<dt-text tone="success">Saved.</dt-text>
+<dt-text tone="success-strong">Saved.</dt-text>
+
+<dt-button link-kind="danger">Delete</dt-button>
+<dt-button link-kind="success">Confirm</dt-button>
+```
+
+</div>
+<div>
+
+### After
+
+```vue
+<dt-box surface="positive" />
+<dt-box surface="positive-subtle" />
+<dt-box surface="positive-strong" />
+<dt-box surface="positive-opaque" />
+<dt-box surface="positive-subtle-opaque" />
+
+<dt-box bc="positive" />
+<dt-box bc="positive-subtle" />
+<dt-box bc="positive-strong" />
+
+<dt-text tone="positive">Saved.</dt-text>
+<dt-text tone="positive-strong">Saved.</dt-text>
+
+<dt-button link-kind="critical">Delete</dt-button>
+<dt-button link-kind="positive">Confirm</dt-button>
 ```
 
 </div>
@@ -549,6 +613,9 @@ npx dialtone-migrate-props --cwd ./src --yes
 - `type="success"` → `type="positive"` on `dt-badge`
 - `kind` → `tone` prop rename on `dt-link`, with value renames applied in the same pass
 - `banner-kind` / `bannerKind` value renames on `dt-modal` (`error` → `critical`, `success` → `positive`)
+- `tone="success-strong"` → `tone="positive-strong"` on `dt-text` (the bare `tone="success"` is covered by the global `tone` rule above)
+- `link-kind="danger"` → `link-kind="critical"` and `link-kind="success"` → `link-kind="positive"` on `dt-button`
+- `surface="success*"` → `surface="positive*"` and `bc="success*"` → `bc="positive*"` on `dt-box` (covers `subtle`, `strong`, `opaque`, and `subtle-opaque` variants)
 
 **Visibility and open state**
 
