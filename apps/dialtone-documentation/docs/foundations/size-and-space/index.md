@@ -27,7 +27,7 @@ Layout and spacing tokens are CSS custom properties (a.k.a. CSS variables) gener
 
 Because the formula is deterministic, tools and code-generation assistants (including LLMs) can resolve any stop without needing the full reference table in context.
 
-For the complete set, view [Spacing Tokens](/tokens/#spacing) and [Layout Tokens](/tokens/#layout). For the story behind why layout and spacing live in separate families, see [New Layout and Spacing Token Systems](/dialtone/whats-new/posts/2026-3-9.md).
+For the complete set, view [Spacing Tokens](/tokens/#spacing) and [Layout Tokens](/tokens/#layout). For the story behind why layout and spacing live in separate families, see [New Layout and Spacing Token Systems](/guides/migration/layout-and-spacing-tokens/).
 
 ### The Primitive Triad
 

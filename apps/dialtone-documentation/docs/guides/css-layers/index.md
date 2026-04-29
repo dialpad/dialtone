@@ -339,6 +339,6 @@ After adding or modifying layered styles:
 
 ## Resources
 
-- [What's New: CSS Updated to Use @layer](../../dialtone/whats-new/posts/2026-2-23.html)
+- [Migration Guide: CSS Cascade Layers](../migration/css-cascade-layers/)
 - [MDN: CSS Cascade Layers](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@layer)
 - [CSS Cascade Layers Explainer](https://css.oddbird.net/layers/explainer/)
