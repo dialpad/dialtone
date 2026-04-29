@@ -42,6 +42,8 @@ reviews:
           type: "user"
         - handle: "ninarepetto"
           type: "user"
+        - handle: "belumontoya"
+          type: "user"
       instructions: "Assign when the PR modifies developer tooling: MCP server, language server, ESLint plugin, Stylelint plugin, or PostCSS plugin."
     - reviewers:
         - handle: "iropolo"
@@ -56,14 +58,13 @@ reviews:
   # Docs: https://docs.coderabbit.ai/reference/configuration
   path_filters:
     - "**"
-    - "!dist/**"
+    - "!**/dist/**"
     - "!coverage/**"
     - "!.nx/**"
     - "!node_modules/**"
     - "!packages/dialtone-icons/src/icons/**"         # generated Vue components from SVG source
     - "!packages/dialtone-icons/src/illustrations/**" # generated
     - "!packages/dialtone-icons/android/src/**"       # generated Android resources
-    - "!packages/dialtone-tokens/dist*/**"            # token build output
     - "!packages/dialtone-vue/storybook-static/**"    # Storybook build output
     - "!packages/dialtone-vue/functions/generated/**"
 
