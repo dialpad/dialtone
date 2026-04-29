@@ -14,7 +14,7 @@
           Fixed Toolbar (48px)
         </dt-text>
       </dt-box>
-      <dt-resizable-panel id="exo-left" initial-size="50p" class="d-bgc-success">
+      <dt-resizable-panel id="exo-left" initial-size="50p" class="d-bgc-positive">
         <dt-box block-size="100p" inline-size="100p" class="d-plc-center">
           <dt-text as="p" align="center" kind="label" size="200" strength="bold" tone="positive" class="d-fco80">
             Left Panel

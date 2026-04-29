@@ -30,7 +30,7 @@ Component class names use the [Block Element Modifier (BEM)](http://getbem.com/n
 ```less
 .d-banner {} // Block
 .d-banner__dialog {} // Element
-.d-banner--success {} // Modifier
+.d-banner--positive {} // Modifier
 ```
 
 ### Selector specificity
@@ -52,12 +52,12 @@ When a modifier needs to change a property, prefer overriding a CSS custom prope
   background-color: var(--banner-color-background);
 }
 
-.d-banner--success {
-  --banner-color-background: var(--dt-color-surface-success);
+.d-banner--positive {
+  --banner-color-background: var(--dt-color-surface-positive);
 }
 
 // Avoid — inflates to (0,2,0)
-.d-banner--success .d-banner__icon {
+.d-banner--positive .d-banner__icon {
   color: green;
 }
 ```
@@ -104,7 +104,7 @@ Do **not** wrap the component class itself, BEM modifiers, or state pseudo-class
 |----------|-------------|---------|
 | `.d-banner` | (0,1,0) | Ideal |
 | `.d-banner__dialog` | (0,1,0) | Ideal |
-| `.d-banner--success` | (0,1,0) | Ideal |
+| `.d-banner--positive` | (0,1,0) | Ideal |
 | `.d-table :where(th)` | (0,1,0) | Correct — element wrapped |
 | `.d-table th` | (0,1,1) | Avoid — bare element inflates specificity |
 | `.d-tablist--inverted .d-tab` | (0,2,0) | Acceptable — parent modifier affecting child |

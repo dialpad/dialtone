@@ -19,7 +19,7 @@ Use `d-bc-{color}` to set an element's border color.
   <div class="d-p-200 d-ba d-baw2 d-bc-moderate">Moderate</div>
   <div class="d-p-200 d-ba d-baw2 d-bc-bold">Bold</div>
   <div class="d-p-200 d-ba d-baw2 d-bc-critical">Critical</div>
-  <div class="d-p-200 d-ba d-baw2 d-bc-success">Success</div>
+  <div class="d-p-200 d-ba d-baw2 d-bc-positive">Positive</div>
   <div class="d-p-200 d-ba d-baw2 d-bc-warning">Warning</div>
 </dt-stack>
 ```
