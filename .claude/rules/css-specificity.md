@@ -12,7 +12,7 @@ Every component selector should aim for a specificity of (0,1,0) — one class. 
 ```less
 .d-banner {}           // (0,1,0) — block
 .d-banner__dialog {}   // (0,1,0) — element
-.d-banner--success {}  // (0,1,0) — modifier
+.d-banner--positive {} // (0,1,0) — modifier
 ```
 
 Modifier overrides should use CSS custom properties, not higher specificity:
@@ -20,10 +20,11 @@ Modifier overrides should use CSS custom properties, not higher specificity:
 ```less
 // CORRECT — modifier overrides a variable, same specificity
 .d-banner { --banner-color: var(--dt-color-surface-primary); }
-.d-banner--success { --banner-color: var(--dt-color-surface-success); }
+.d-banner--positive { --banner-color: var(--dt-color-surface-positive); }
 
 // AVOID — parent modifier targets child, inflates to (0,2,0)
-.d-banner--success .d-banner__icon { color: green; }
+.d-banner--positive .d-banner__icon { color: green; }
+.d-banner--warning .d-banner__icon { color: #ffa500; }
 ```
 
 ## Element-Type Descendants: Always Wrap in `:where()`

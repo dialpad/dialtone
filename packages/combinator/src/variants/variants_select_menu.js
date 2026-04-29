@@ -46,7 +46,7 @@ export default {
     },
   },
 
-  'success validation': {
+  'positive validation': {
     props: {
       label: { initialValue: 'Label' },
       options: {
@@ -56,7 +56,7 @@ export default {
           { value: 3, label: 'Option 3' },
         ],
       },
-      messages: { initialValue: [{ message: 'Success validation message', type: 'success' }] },
+      messages: { initialValue: [{ message: 'Positive validation message', type: 'positive' }] },
     },
   },
 

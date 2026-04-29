@@ -35,8 +35,8 @@
         <div class="d-bgc-critical d-p-200 d-py-100 d-ba d-bc-subtle">
           Critical Surface
         </div>
-        <div class="d-bgc-success d-p-200 d-py-100 d-ba d-bc-subtle">
-          Success Surface
+        <div class="d-bgc-positive d-p-200 d-py-100 d-ba d-bc-subtle">
+          Positive Surface
         </div>
       </dt-stack>
     </dt-stack>
