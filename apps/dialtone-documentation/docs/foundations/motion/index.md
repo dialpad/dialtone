@@ -100,7 +100,7 @@ keywords: ["animation","transition","movement","easing", "ease", "video"]
   <dt-box class="d-d-grid d-g-400 d-g-cols1 md:d-g-cols4 d-ai-start">
     <dt-stack gap="200">
       <dt-box class="d-d-grid d-pli-center" @mouseenter="onCardEnter" @mouseleave="onCardLeave">
-        <video class="d-gcs1 d-grs1 d-d-block d-w100p d-bar-500" src="/assets/videos/motion--empowered-elevated.mp4" poster="/assets/images/motion--empowered-elevated--poster.jpg" muted loop preload="auto"></video>
+        <video class="d-gcs1 d-grs1 d-d-block d-w100p d-bar-500" src="/assets/videos/motion--elevate.mp4" poster="/assets/images/motion--elevate--poster.jpg" muted loop preload="auto"></video>
         <dt-box surface="bold" block-size="50" padding-inline-start="50" inline-size="50" border-radius="circle" class="d-d-grid d-pli-center d-gcs1 d-grs1" v-dt-mode:dark data-play-overlay>
           <dt-icon class="d-fc-primary" name="play-filled" size="300"></dt-icon>
         </dt-box>
