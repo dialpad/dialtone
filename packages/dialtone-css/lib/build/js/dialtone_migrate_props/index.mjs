@@ -133,6 +133,7 @@ const PROP_VALUE_RENAMES = [
   // dt-text uses `tone` for foreground tokens; dt-link migrates kind → tone in the
   // same pass, so any tag that ends up with tone="success" should land on positive.
   { prop: 'tone', oldValue: 'success', newValue: 'positive' },
+  { prop: 'tone', oldValue: 'success-strong', newValue: 'positive-strong' },
   // dt-button has a separate `link-kind` prop for link-styled buttons; its
   // pre-DLT-3157 value `success` aliases to `positive`.
   { prop: 'link-kind', oldValue: 'danger', newValue: 'critical' },

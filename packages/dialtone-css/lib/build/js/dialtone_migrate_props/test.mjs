@@ -487,12 +487,9 @@ describe('DtText / DtLink tone="success" → tone="positive" (DLT-3157)', () => 
     assert.equal(count, 0);
   });
 
-  it('does not alter tone-strong (only exact "success" string is mapped)', () => {
-    // success-strong is not a value the migration handles directly — leave alone
-    const input = '<dt-text tone="success-strong">x</dt-text>';
-    const { transformed, count } = transformContent(input);
-    assert.equal(transformed, input);
-    assert.equal(count, 0);
+  it('renames tone="success-strong" on dt-text', () => {
+    const { transformed } = transformContent('<dt-text tone="success-strong">x</dt-text>');
+    assert.equal(transformed, '<dt-text tone="positive-strong">x</dt-text>');
   });
 });
 
