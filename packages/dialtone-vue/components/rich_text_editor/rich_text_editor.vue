@@ -770,6 +770,46 @@ export default {
           renderText ({ node }) {
             return `\`\`\`\n${node.textContent}\n\`\`\``;
           },
+          addCommands () {
+            return {
+              ...this.parent?.(),
+              toggleCodeBlock: (attributes = {}) => ({ state, chain, commands }) => {
+                const codeBlockType = state.schema.nodes[this.name];
+                const { $from } = state.selection;
+
+                if ($from.parent.type === codeBlockType) {
+                  return commands.setNode('paragraph');
+                }
+
+                const { from, to } = state.selection;
+                const blocks = [];
+                state.doc.nodesBetween(from, to, (node, pos) => {
+                  if (node.isTextblock && node.type !== codeBlockType) {
+                    blocks.push({ node, pos });
+                    return false;
+                  }
+                });
+
+                if (blocks.length <= 1) {
+                  return commands.setNode(this.name, attributes);
+                }
+
+                // Multiple paragraphs selected: merge into a single code block
+                const combinedText = blocks.map(({ node }) => node.textContent).join('\n');
+                const firstPos = blocks[0].pos;
+                const lastBlock = blocks[blocks.length - 1];
+                const lastPos = lastBlock.pos + lastBlock.node.nodeSize;
+
+                return chain()
+                  .command(({ tr }) => {
+                    const content = combinedText.length ? [state.schema.text(combinedText)] : [];
+                    tr.replaceWith(firstPos, lastPos, codeBlockType.create(attributes, content));
+                    return true;
+                  })
+                  .run();
+              },
+            };
+          },
         }).configure({
           HTMLAttributes: {
             class: 'd-rich-text-editor__code-block',
