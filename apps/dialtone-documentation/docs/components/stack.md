@@ -1051,7 +1051,7 @@ Resize your browser to see the justification change at different breakpoints.
 
 ## Migrating from Flex CSS Utilities
 
-View the [Migrating from Flex CSS Utilities to DtStack](/about/whats-new/posts/2025-12-2) for more details.
+View the [Migrating from Flex CSS Utilities to DtStack](/guides/migration/flex-to-stack/) for more details.
 
 ## Examples
 

@@ -248,6 +248,10 @@
                     "link": "/guides/migration/layout-and-spacing-tokens/"
                   },
                   {
+                    "text": "Success to Positive",
+                    "link": "/guides/migration/success-to-positive/"
+                  },
+                  {
                     "text": "Flex to DtStack",
                     "link": "/guides/migration/flex-to-stack/"
                   },
