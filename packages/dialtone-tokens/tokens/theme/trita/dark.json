@@ -14,20 +14,6 @@
       "950":  { "value": "oklch(0.948 0.025 279)", "type": "color" },
       "1000": { "value": "oklch(0.975 0.012 280)", "type": "color" }
     },
-    "red": {
-      "50":   { "value": "{color.magenta.50}",   "type": "color" },
-      "100":  { "value": "{color.magenta.100}",  "type": "color" },
-      "200":  { "value": "{color.magenta.200}",  "type": "color" },
-      "300":  { "value": "{color.magenta.300}",  "type": "color" },
-      "400":  { "value": "{color.magenta.400}",  "type": "color" },
-      "500":  { "value": "{color.magenta.500}",  "type": "color" },
-      "600":  { "value": "{color.magenta.600}",  "type": "color" },
-      "700":  { "value": "{color.magenta.700}",  "type": "color" },
-      "800":  { "value": "{color.magenta.800}",  "type": "color" },
-      "900":  { "value": "{color.magenta.900}",  "type": "color" },
-      "950":  { "value": "{color.magenta.950}",  "type": "color" },
-      "1000": { "value": "{color.magenta.1000}", "type": "color" }
-    },
     "gold": {
       "50":   { "value": "oklch(0.1994 0.0480 53)", "type": "color" },
       "100":  { "value": "oklch(0.2386 0.0700 51)", "type": "color" },
