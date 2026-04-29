@@ -30,20 +30,20 @@
     },
     "surface": {
       "info":            { "value": "{color.blue.200}",  "type": "color" },
-      "success":         { "value": "{color.green.200}", "type": "color" },
-      "success-strong":  { "value": "{color.green.700}", "type": "color" },
-      "success-subtle":  { "value": "{color.green.100}", "type": "color" },
+      "positive":        { "value": "{color.green.200}", "type": "color" },
+      "positive-strong": { "value": "{color.green.700}", "type": "color" },
+      "positive-subtle": { "value": "{color.green.100}", "type": "color" },
       "info-opaque": {
         "value": "{color.blue.300}",
         "type": "color",
         "$extensions": { "studio.tokens": { "modify": { "type": "alpha", "value": "0.5", "space": "oklch" } } }
       },
-      "success-opaque": {
+      "positive-opaque": {
         "value": "{color.green.300}",
         "type": "color",
         "$extensions": { "studio.tokens": { "modify": { "type": "alpha", "value": "0.53", "space": "oklch" } } }
       },
-      "success-subtle-opaque": {
+      "positive-subtle-opaque": {
         "value": "{color.green.200}",
         "type": "color",
         "$extensions": { "studio.tokens": { "modify": { "type": "alpha", "value": "0.5", "space": "oklch" } } }

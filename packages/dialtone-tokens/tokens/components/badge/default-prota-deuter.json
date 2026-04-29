@@ -2,7 +2,7 @@
   "badge": {
     "color": {
       "background": {
-        "success": {
+        "positive": {
           "value": "{color.green.300}",
           "type": "color"
         }
