@@ -5,18 +5,20 @@
       <component
         :is="isPreview ? 'h2' : 'h1'"
         class="d-d-flex d-g-100"
-        :class="isPreview ? 'd-docsite--header-3 d-mbs-0' : 'dialtone-page-title'"
+        :class="isPreview ? 'd-docsite--header-3 d-mbs-0' : 'dialtone-page-title d-mbs-100'"
       >
         <div>
           {{ heading }}
         </div>
-        <copy-button
-          v-if="!isPreview"
-          :text="blogLink"
-          aria-label="Copy post link"
-        />
+        <div>
+          <copy-button
+            v-if="!isPreview"
+            :text="blogLink"
+            aria-label="Copy link"
+          />
+        </div>
       </component>
-      <dt-stack as="section" direction="row" gap="100">
+      <dt-stack as="section" direction="row" gap="150">
         <dt-avatar
           :size="300"
           :seed="author"

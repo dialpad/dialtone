@@ -76,6 +76,7 @@ const svgs = [
   }),
 ];
 
+
 // Ref callbacks to add data-svg-source attribute to rendered SVG elements
 const setIllustrationRef = (el) => {
   if (el?.$el) {

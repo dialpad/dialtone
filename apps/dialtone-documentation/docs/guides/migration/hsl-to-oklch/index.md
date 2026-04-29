@@ -3,10 +3,10 @@ title: Migrating Colors from HSL to OKLCH
 description: Dialtone color tokens and CSS have moved from HSL to OKLCH. Per-channel breakout variables are removed, cutting CSS bundle over 30%, and removing over 3,200 CSS Variables. Migration scripts included.
 ---
 
-## TLDR
-
-> [!ERROR] Breaking Change for Consumers
+> [!WARNING] Breaking change
 > HSL channel breakout variables (`-h`, `-s`, `-l`, `-a`, `-hsl`, `-hsla`) have been **removed**. Use the [HSL-to-OKLCH migration tool](#migration-tool-hsl-to-oklch).
+
+## TLDR
 
 - All Dialtone color tokens are now stored and output as **OKLCH** instead of hex/HSL.
 - Per-channel breakout CSS variables (`--dt-color-*-h`, `-s`, `-l`, `-a`, `-hsl`, `-hsla`) are **removed**.

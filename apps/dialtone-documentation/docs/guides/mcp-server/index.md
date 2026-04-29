@@ -45,11 +45,8 @@ Create or update `.mcp.json` in your project root:
 
 Commit `.mcp.json` to version control. Restart Claude Code to connect.
 
-<DtNotice kind="info" title="Priority" :show-close="false">
-
-Project-scoped configuration overrides user-scoped. The `dialtone-mcp-server` command resolves from `node_modules/.bin/` first.
-
-</DtNotice>
+> [!INFO] Priority
+> Project-scoped configuration overrides user-scoped. The `dialtone-mcp-server` command resolves from `node_modules/.bin/` first.
 
 ### User-Scoped (Personal Use)
 
@@ -90,11 +87,8 @@ Remote server deployment for enterprise use.
 claude mcp add dialtone-http --transport http --scope user https://mcp.dialtone.dialpad.com
 ```
 
-<DtNotice kind="info" title="Version Checking" :show-close="false">
-
-When the server starts, you'll see the current version. If outdated, follow the instructions shown to update.
-
-</DtNotice>
+> [!INFO] Version Checking
+> When the server starts, you'll see the current version. If outdated, follow the instructions shown to update.
 
 ## Search Tools
 
@@ -107,7 +101,7 @@ Find CSS utility classes to style HTML elements. Use when your query mentions CS
 **Example queries:**
 
 ```text
-"padding 8px"       → d-p8, d-pt8, d-pr8, d-pb8, d-pl8, d-px8, d-py-100
+"padding 8px"       → d-p-100, d-pbs-100, d-pbe-100, d-pis-100, d-pie-100 d-px-100, d-py-100
 "display flex"      → d-d-flex, d-d-inline-flex
 "width 100%"        → d-w100p
 "margin top auto"   → d-mbs-auto
@@ -379,11 +373,8 @@ Restart Claude Desktop and look for the 🔌 icon to confirm connection.
    cat ~/.claude/mcp.json
    ```
 
-<DtNotice kind="warning" title="Important" :show-close="false">
-
-Project-scoped configuration overrides user-scoped. If you have both, the project-level `.mcp.json` takes precedence.
-
-</DtNotice>
+> [!WARNING] Important
+> Project-scoped configuration overrides user-scoped. If you have both, the project-level `.mcp.json` takes precedence.
 
 ### Version Shows Old After Updating
 
@@ -423,10 +414,5 @@ Now that you have the MCP server installed, explore these resources:
 - [Components](/components/) - Discover Vue components
 - [Icons](/design/icons/) - View the icon library
 
----
-
-<DtNotice kind="info" title="Developer Tip" :show-close="false">
-
-The MCP server is perfect for discovering Dialtone patterns while coding. Instead of searching documentation manually, simply ask your AI assistant about components, tokens, or utilities, and it will search for you in real-time.
-
-</DtNotice>
+> [!INFO] Developer Tip
+> The MCP server is perfect for discovering Dialtone patterns while coding. Instead of searching documentation manually, simply ask your AI assistant about components, tokens, or utilities, and it will search for you in real-time.

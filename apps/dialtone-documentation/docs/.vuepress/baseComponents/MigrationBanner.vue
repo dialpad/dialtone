@@ -2,31 +2,29 @@
   <dt-banner
     v-if="shouldShow"
     kind="info"
-    :important="false"
-    title="Dialtone Next: Migration Guide Available"
+    class="d-ps-relative d-zi-base"
     @close="sessionDismiss"
   >
     <template #icon>
       <dt-icon name="rocket" />
     </template>
-    <dt-stack direction="row" gap="200" align="center">
-      <dt-text :size="200">
-        The next major version of Dialtone includes breaking changes.
-        Review the migration guide for step-by-step instructions and automated tooling.
-      </dt-text>
-      <router-link
-        to="/guides/migration/"
-        class="d-link d-link--primary d-fw-semibold d-ws-nowrap"
-      >
-        View Migration Guide
-      </router-link>
-      <button
-        class="d-link d-link--muted d-fw-semibold d-ws-nowrap"
+    Dialtone's next major version includes breaking changes.
+    The
+    <dt-link to="/guides/migration/">
+      Migration Guide
+    </dt-link>
+    includes step by step instructions and automated tooling.
+    <template #action>
+      <dt-button
+        kind="muted"
+        importance="clear"
+        size="200"
+        label-class="d-tw-nowrap"
         @click="permanentDismiss"
       >
         Don't show again
-      </button>
-    </dt-stack>
+      </dt-button>
+    </template>
   </dt-banner>
 </template>
 

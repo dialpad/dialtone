@@ -452,7 +452,7 @@ If you own the component, refactor its root element to use DtStack.
 ### Responsive Patterns
 
 > [!WARNING]
-> Responsive utilities like `md:d-ai-center` need manual migration. Use DtStack's responsive prop syntax:
+> Responsive utilities like `md:d-ai-center` need manual migration. Use [DtStack's](/components/stack.md#responsive) responsive prop syntax:
 
 **Before:**
 

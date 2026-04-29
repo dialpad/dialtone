@@ -3,33 +3,85 @@ title: Migrating Component Props, Events, and Slots
 description: Prop renames, value standardization, event consolidation, slot renames, and removal of rootClass/wrapperClass/containerClass. Automated migration script included.
 ---
 
-## TLDR
-
-> [!WARNING]
-> **Breaking changes** across many components. Run the [migration script](#migration-script) to automate most of these.
+> [!WARNING] Breaking Changes
+> Affects many components. Run the [migration script](#migration-script) to automate most of these.
 >
-> - `kind="danger"` / `kind="error"` → `kind="critical"`. `kind="success"` → `kind="positive"`. Same for `validation-state`.
-> - `dt-badge`: `type="success"` → `type="positive"`.
-> - `dt-link`: `kind` prop renamed to `tone`; values `danger` → `critical`, `success` → `positive`.
-> - `dt-modal`: `banner-kind` values `error` → `critical`, `success` → `positive`.
-> - `show` → `open` on `dt-modal`, `dt-toast`, `dt-tooltip`. `@update:show` → `@update:open`.
-> - `hide-*` / `prevent-*` props → `:show-*="false"` / `:allow-*="false"` (semantics inverted).
-> - `dt-popover`: `hide-on-click` → `close-on-click` (same semantics, just renamed).
-> - `label-visible` → `show-label` on form inputs and controls.
-> - `title` / `title-id` → `header-text` / `header-id` on `dt-banner`, `dt-notice`, `dt-toast`. (`dt-modal` only has `title` → `header-text`; it never had `title-id`.)
-> - `banner-title` → `banner-header-text` on `dt-modal`.
-> - `clickable` → `interactive` on `dt-avatar`. See [Avatar Updates](/guides/migration/avatar-updates/#clickable-→-interactive).
-> - `selected-values` → `model-value` on `dt-checkbox-group`. Use `v-model` directly.
-> - `@input` removed → use `@update:model-value`.
-> - `@change` removed → use `@update:model-value`.
-> - `rootClass` / `wrapperClass` / `containerClass` removed — apply classes directly on the component.
-> - Slot renames: `#titleOverride` → `#header`, `#labelSlot` → `#label`, `#headingSlot` → `#heading`.
+## Overview of changes
 
----
+### Severity vocabulary
+
+`danger` and `error` both collapse to `critical`. `success` becomes `positive`.
+
+| Component(s) | Type | Before | After |
+| --- | --- | --- | --- |
+| Any with `kind` | Prop value | `kind="danger"` / `kind="error"` | `kind="critical"` |
+| Any with `kind` | Prop value | `kind="success"` | `kind="positive"` |
+| Any with `validation-state` | Prop value | `validation-state="danger"` / `…="error"` | `validation-state="critical"` |
+| Any with `validation-state` | Prop value | `validation-state="success"` | `validation-state="positive"` |
+| `dt-badge` | Prop value | `type="success"` | `type="positive"` |
+| `dt-link` | Prop name | `kind` | `tone` |
+| `dt-link` | Prop value | `tone="danger"` | `tone="critical"` |
+| `dt-link` | Prop value | `tone="success"` | `tone="positive"` |
+| `dt-modal` | Prop value | `bannerKind="error"` | `bannerKind="critical"` |
+| `dt-modal` | Prop value | `bannerKind="success"` | `bannerKind="positive"` |
+
+### Visibility and open state
+
+Positive-polarity naming throughout — no more `hide-*` props.
+
+| Component(s) | Type | Before | After | Notes |
+| --- | --- | --- | --- | --- |
+| `dt-modal`, `dt-toast`, `dt-tooltip` | Prop name | `show` | `open` | |
+| `dt-modal`, `dt-toast`, `dt-tooltip` | Event | `@update:show` | `@update:open` | |
+| Many | Prop names | `hide-close`, `hide-icon`, `hide-action`, `hide-clear`, `hide-edges`, `hide-divider`, `hide-actions`, `hide-link-bubble-menu` | `:show-*="false"` | semantics inverted |
+| `dt-rich-text-editor`, `dt-recipe-message-input` | Prop name | `prevent-typing` | `:allow-typing="false"` | inverted |
+| `dt-popover` | Prop name | `hide-on-click` | `close-on-click` | same semantics |
+| Form inputs | Prop name | `label-visible` | `show-label` | |
+
+### Header and title naming
+
+`title` consolidates to `header-text` across components that have a header region.
+
+| Component(s) | Type | Before | After |
+| --- | --- | --- | --- |
+| `dt-banner`, `dt-notice`, `dt-toast` | Prop name | `title` | `header-text` |
+| `dt-banner`, `dt-notice`, `dt-toast` | Prop name | `title-id` | `header-id` |
+| `dt-modal` | Prop name | `title` | `header-text` |
+| `dt-modal` | Prop name | `banner-title` | `banner-header-text` |
+| Any with this slot | Slot | `#titleOverride` | `#header` |
+| Any with this slot | Slot | `#labelSlot` | `#label` |
+| Any with this slot | Slot | `#headingSlot` | `#heading` |
+
+### `v-model` standardization
+
+Form-state events and props consolidate around the standard Vue `v-model` contract.
+
+| Component(s) | Type | Before | After |
+| --- | --- | --- | --- |
+| `dt-input`, `dt-radio`, `dt-radio-group`, `dt-combobox-multi-select`, `dt-rich-text-editor`, `dt-input-group` | Event | `@input` | `@update:model-value` |
+| `dt-toggle`, `dt-select-menu` | Event | `@change` | `@update:model-value` |
+| `dt-checkbox-group` | Prop name | `selectedValues` / `selected-values` | `modelValue` |
+
+### Other renames
+
+| Component(s) | Type | Before | After |
+| --- | --- | --- | --- |
+| `dt-avatar` | Prop name | `clickable` | `interactive` |
+
+### Removals
+
+| Component(s) | Type | Removed | Replacement |
+| --- | --- | --- | --- |
+| Any with these props | Prop name | `rootClass`, `root-class`, `wrapperClass`, `containerClass` | Apply classes directly on the component element. Script auto-migrates known components; a small number still require manual attention. |
 
 ## `kind`, `type`, `tone`, and `validation-state` Value Renames
 
-Prop values across the system have been aligned to a single set of semantic names. `danger` and `error` both map to `critical`. `success` maps to `positive`.
+Prop values across the system map to a shared set of names. `danger` and `error` both become `critical`. `success` becomes `positive`.
+
+> [!INFO] DtLink: `kind` prop renamed to `tone`
+> On `dt-link`, the prop name itself changes from `kind` to `tone`, on top of the value changes. The migration script handles both in one pass: `kind="danger"` becomes `tone="critical"`. The old `kind` prop still works as a deprecated alias if you'd rather migrate gradually.
+
+**Affected components:** [DtBadge](/components/badge.html), [DtBanner](/components/banner.html), [DtButton](/components/button.html), [DtInput](/components/input.html), [DtLink](/components/link.html), [DtModal](/components/modal.html), [DtNotice](/components/notice.html), [DtText](/components/text.html), [DtToast](/components/toast.html), and any component accepting a `kind`, `type`, `tone`, or `validation-state` prop.
 
 <div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols2">
 <div>
@@ -68,16 +120,11 @@ Prop values across the system have been aligned to a single set of semantic name
 </div>
 </div>
 
-> [!INFO] DtLink: `kind` prop renamed to `tone`
-> On `dt-link`, the prop itself is renamed from `kind` to `tone` in addition to the value changes. The migration script handles both in one pass — `kind="danger"` becomes `tone="critical"`. The old `kind` prop is still accepted as a deprecated alias if you prefer to migrate gradually.
-
-**Affected components:** [DtBadge](/components/badge.html), [DtBanner](/components/banner.html), [DtButton](/components/button.html), [DtInput](/components/input.html), [DtLink](/components/link.html), [DtModal](/components/modal.html), [DtNotice](/components/notice.html), [DtText](/components/text.html), [DtToast](/components/toast.html), and any component accepting a `kind`, `type`, `tone`, or `validation-state` prop.
-
----
-
 ## `show` → `open` on Overlay Components
 
-The `show` prop and `update:show` event have been renamed to `open` and `update:open` on overlay components. The new name aligns with the existing `v-model:open` convention used by `dt-popover`, `dt-dropdown`, and `dt-combobox-with-popover`.
+On overlay components, `show` is now `open` and `update:show` is now `update:open`. This matches the `v-model:open` convention already used by `dt-popover`, `dt-dropdown`, and `dt-combobox-with-popover`.
+
+**Affected components:** [DtModal](/components/modal.html), [DtToast](/components/toast.html), [DtTooltip](/components/tooltip.html)
 
 <div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols2">
 <div>
@@ -114,13 +161,14 @@ The `show` prop and `update:show` event have been renamed to `open` and `update:
 </div>
 </div>
 
-**Affected components:** [DtModal](/components/modal.html), [DtToast](/components/toast.html), [DtTooltip](/components/tooltip.html)
-
----
-
 ## `hide-*` and `prevent-*` Props Renamed (Semantics Inverted)
 
-Boolean props prefixed with `hide-` or `prevent-` have been replaced with `show-` or `allow-` equivalents with the default value flipped to `true`. A bare `hide-close` (meaning "close button is hidden") becomes `:show-close="false"` (meaning "close button is not shown"). Similarly, bare `prevent-typing` becomes `:allow-typing="false"`.
+Boolean props prefixed with `hide-` or `prevent-` are replaced with `show-` or `allow-` equivalents, with the default flipped to `true`. A bare `hide-close` (close button is hidden) becomes `:show-close="false"` (close button is not shown). Bare `prevent-typing` becomes `:allow-typing="false"`.
+
+> [!INFO]
+> If you bind a dynamic expression like `:hide-close="someCondition"`, the migration script cannot safely invert it and will warn you. Replace manually with `:show-close="!someCondition"`.
+
+**Affected components:** [DtBanner](/components/banner.html), [DtChip](/components/chip.html), [DtFilterPill](/components/filter-pill.html), [DtModal](/components/modal.html), [DtNotice](/components/notice.html), [DtNoticeAction](/components/notice.html), [DtPagination](/components/pagination.html), [DtRichTextEditor](/components/rich-text-editor.html), [DtRecipeMessageInput](/components/message-input.html), [DtRecipeContactCentersRow](/components/contact-centers-row.html), [DtSegmentedControl](/components/segmented-control.html), [DtToast](/components/toast.html)
 
 <div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols2">
 <div>
@@ -137,10 +185,7 @@ Boolean props prefixed with `hide-` or `prevent-` have been replaced with `show-
 <dt-filter-pill hide-clear />
 <dt-pagination hide-edges />
 <dt-segmented-control hide-divider />
-<dt-rich-text-editor
-  prevent-typing
-  hide-link-bubble-menu
-/>
+<dt-rich-text-editor prevent-typing hide-link-bubble-menu />
 <dt-recipe-message-input prevent-typing />
 <dt-recipe-contact-centers-row hide-actions />
 ```
@@ -160,10 +205,7 @@ Boolean props prefixed with `hide-` or `prevent-` have been replaced with `show-
 <dt-filter-pill :show-clear="false" />
 <dt-pagination :show-edges="false" />
 <dt-segmented-control :show-divider="false" />
-<dt-rich-text-editor
-  :allow-typing="false"
-  :show-link-bubble-menu="false"
-/>
+<dt-rich-text-editor :allow-typing="false" :show-link-bubble-menu="false" />
 <dt-recipe-message-input :allow-typing="false" />
 <dt-recipe-contact-centers-row :show-actions="false" />
 ```
@@ -171,16 +213,11 @@ Boolean props prefixed with `hide-` or `prevent-` have been replaced with `show-
 </div>
 </div>
 
-> [!INFO]
-> If you were binding a dynamic expression — e.g., `:hide-close="someCondition"` — the migration script cannot safely invert it and will warn you. Replace manually with `:show-close="!someCondition"`.
-
-**Affected components:** [DtBanner](/components/banner.html), [DtChip](/components/chip.html), [DtFilterPill](/components/filter-pill.html), [DtModal](/components/modal.html), [DtNotice](/components/notice.html), [DtNoticeAction](/components/notice.html), [DtPagination](/components/pagination.html), [DtRichTextEditor](/components/rich-text-editor.html), [DtRecipeMessageInput](/components/message-input.html), [DtRecipeContactCentersRow](/components/contact-centers-row.html), [DtSegmentedControl](/components/segmented-control.html), [DtToast](/components/toast.html)
-
----
-
 ## `hideOnClick` → `closeOnClick` on DtPopover
 
-The `hideOnClick` prop on `dt-popover` has been renamed to `closeOnClick`. The behavior is identical — only the name changed.
+`hideOnClick` on `dt-popover` is now `closeOnClick`. Behavior is unchanged; the new name describes what the prop actually does.
+
+**Affected components:** [DtPopover](/components/popover.html)
 
 <div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols2">
 <div>
@@ -205,13 +242,11 @@ The `hideOnClick` prop on `dt-popover` has been renamed to `closeOnClick`. The b
 </div>
 </div>
 
-**Affected components:** [DtPopover](/components/popover.html)
-
----
-
 ## `label-visible` → `show-label`
 
-The `label-visible` prop has been renamed to `show-label` to match the new `show-*` naming convention. Behavior is identical — setting it to `false` visually hides the label while keeping it accessible to screen readers.
+`label-visible` is now `show-label`, matching the `show-*` convention. Behavior is unchanged. Setting it to `false` visually hides the label while keeping it accessible to screen readers.
+
+**Affected components:** [DtCheckbox](/components/checkbox.html), [DtCombobox](/components/combobox.html), [DtComboboxMultiSelect](/components/combobox-multi-select.html), [DtComboboxWithPopover](/components/combobox-with-popover.html), [DtInput](/components/input.html), [DtRadioGroup](/components/radio-group.html), [DtSelectMenu](/components/select-menu.html), [DtToggle](/components/toggle.html)
 
 <div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols2">
 <div>
@@ -238,13 +273,11 @@ The `label-visible` prop has been renamed to `show-label` to match the new `show
 </div>
 </div>
 
-**Affected components:** [DtCheckbox](/components/checkbox.html), [DtCombobox](/components/combobox.html), [DtComboboxMultiSelect](/components/combobox-multi-select.html), [DtComboboxWithPopover](/components/combobox-with-popover.html), [DtInput](/components/input.html), [DtRadioGroup](/components/radio-group.html), [DtSelectMenu](/components/select-menu.html), [DtToggle](/components/toggle.html)
-
----
-
 ## `title` / `title-id` → `header-text` / `header-id`
 
-The `title` prop has been renamed to `header-text` on all four components. The `title-id` prop has been renamed to `header-id` on `dt-banner`, `dt-notice`, and `dt-toast` only — `dt-modal` never had a `title-id` prop. The old names conflicted with the native HTML `title` attribute, which browsers reserve for tooltips.
+`title` is now `header-text` on `dt-banner`, `dt-notice`, `dt-toast`, and `dt-modal`. `title-id` is now `header-id` on `dt-banner`, `dt-notice`, and `dt-toast`; `dt-modal` never had a `title-id` prop. The old names conflicted with the native HTML `title` attribute, which browsers reserve for tooltips.
+
+**Affected components:** [DtBanner](/components/banner.html), [DtModal](/components/modal.html), [DtNotice](/components/notice.html), [DtToast](/components/toast.html)
 
 <div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols2">
 <div>
@@ -275,13 +308,36 @@ The `title` prop has been renamed to `header-text` on all four components. The `
 </div>
 </div>
 
-**Affected components:** [DtBanner](/components/banner.html), [DtModal](/components/modal.html), [DtNotice](/components/notice.html), [DtToast](/components/toast.html)
+## `clickable` → `interactive` on DtAvatar
 
----
+`clickable` on `dt-avatar` is now `interactive`. The new name describes the actual effect: the avatar renders as a `<button>`, becomes keyboard-focusable, and participates in the tab order.
+
+<div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols2">
+<div>
+
+**Before**
+
+```vue
+<dt-avatar full-name="Jane Doe" clickable @click="openProfile" />
+```
+
+</div>
+<div>
+
+**After**
+
+```vue
+<dt-avatar full-name="Jane Doe" interactive @click="openProfile" />
+```
+
+</div>
+</div>
 
 ## `selectedValues` → `v-model` on DtCheckboxGroup
 
-The `selectedValues` prop and `update:selectedValues` event on `dt-checkbox-group` have been standardized to the Vue 3 default v-model convention. Use a plain `v-model` binding.
+`selectedValues` and `update:selectedValues` on `dt-checkbox-group` now follow the Vue 3 default v-model convention. The prop is named `modelValue` internally, so you can drop the `v-model:selectedValues` argument and use plain `v-model`.
+
+**Affected components:** [DtCheckboxGroup](/components/checkbox-group.html)
 
 <div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols2">
 <div>
@@ -315,13 +371,14 @@ The `selectedValues` prop and `update:selectedValues` event on `dt-checkbox-grou
 </div>
 </div>
 
-**Affected components:** [DtCheckboxGroup](/components/checkbox-group.html)
-
----
-
 ## `@input` and `@change` Events Replaced by `@update:model-value`
 
-Several form components previously emitted legacy `input` or `change` events alongside the standard `update:modelValue` event. These legacy events have been removed. Use `@update:model-value` (or `v-model`) instead.
+Several form components emitted legacy `input` or `change` events alongside (or instead of) `update:modelValue`. The legacy events are gone. Use `@update:model-value` (or `v-model`) instead.
+
+> [!INFO]
+> If you were using `v-model` on any of these components, no change is needed — `v-model` already binds to `update:modelValue` internally.
+
+**Affected components:** [DtComboboxMultiSelect](/components/combobox-multi-select.html), [DtInput](/components/input.html), [DtInputGroup](/components/input-group.html), [DtRadio](/components/radio.html), [DtRadioGroup](/components/radio-group.html), [DtRichTextEditor](/components/rich-text-editor.html), [DtSelectMenu](/components/select-menu.html), [DtToggle](/components/toggle.html)
 
 <div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols2">
 <div>
@@ -358,16 +415,11 @@ Several form components previously emitted legacy `input` or `change` events alo
 </div>
 </div>
 
-> [!INFO]
-> If you were using `v-model` on any of these components, no change is needed — `v-model` already binds to `update:modelValue` internally.
-
-**Affected components:** [DtComboboxMultiSelect](/components/combobox-multi-select.html), [DtInput](/components/input.html), [DtInputGroup](/components/input-group.html), [DtRadio](/components/radio.html), [DtRadioGroup](/components/radio-group.html), [DtRichTextEditor](/components/rich-text-editor.html), [DtSelectMenu](/components/select-menu.html), [DtToggle](/components/toggle.html)
-
----
-
 ## `rootClass` / `wrapperClass` / `containerClass` Removed
 
-These props have been removed from all components that previously exposed them. They were workarounds for applying classes to a component's root element before Vue 3's `inheritAttrs` approach was adopted. Apply classes directly on the component instead — attributes and classes are now forwarded automatically.
+These props are removed from every component that exposed them. They were workarounds for applying classes to a component's root element before Vue 3's `inheritAttrs` approach landed. Apply classes directly on the component; attributes and classes forward automatically.
+
+**Affected components:** [DtAvatar](/components/avatar.html), [DtBreadcrumbItem](/components/breadcrumbs.html), [DtCard](/components/card.html), [DtCheckbox](/components/checkbox.html), [DtFeedItemPill](/components/feed-item-pill.html), [DtFilterPill](/components/filter-pill.html), [DtInput](/components/input.html), [DtModeIsland](/components/mode-island.html), [DtMotionText](/components/motion-text.html), [DtRadio](/components/radio.html), [DtSelectMenu](/components/select-menu.html), [DtSplitButton](/components/split-button.html), [DtToggle](/components/toggle.html)
 
 <div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols2">
 <div>
@@ -403,18 +455,14 @@ The migration script handles the following components automatically:
 | [DtCard](/components/card.html) | `containerClass` / `container-class` |
 
 > [!WARNING]
-> A small number of components — [DtAvatar](/components/avatar.html), [DtFilterPill](/components/filter-pill.html), [DtModeIsland](/components/mode-island.html), [DtMotionText](/components/motion-text.html) — are not in the auto-migration table. The script will warn for these; move the class to the component tag manually.
+> Four components are not in the auto-migration table: [DtAvatar](/components/avatar.html), [DtFilterPill](/components/filter-pill.html), [DtModeIsland](/components/mode-island.html), and [DtMotionText](/components/motion-text.html). The script warns for these. Move the class to the component tag manually.
 
 > [!WARNING]
-> If you have both `:root-class="expr"` and `:class="…"` on the same component, the script cannot safely merge the two dynamic bindings. It will warn and leave the tag unchanged — merge manually.
-
-**Affected components:** [DtAvatar](/components/avatar.html), [DtBreadcrumbItem](/components/breadcrumbs.html), [DtCard](/components/card.html), [DtCheckbox](/components/checkbox.html), [DtFeedItemPill](/components/feed-item-pill.html), [DtFilterPill](/components/filter-pill.html), [DtInput](/components/input.html), [DtModeIsland](/components/mode-island.html), [DtMotionText](/components/motion-text.html), [DtRadio](/components/radio.html), [DtSelectMenu](/components/select-menu.html), [DtSplitButton](/components/split-button.html), [DtToggle](/components/toggle.html)
-
----
+> If you have both `:root-class="expr"` and `:class="…"` on the same component, the script cannot safely merge the two dynamic bindings. It warns and leaves the tag unchanged. Merge manually.
 
 ## Slot Renames
 
-Three slots have been renamed to remove the wordy `Override` and `Slot` suffixes that were artefacts of an older naming convention.
+Three slots are renamed to drop the `Override` and `Slot` suffixes from an older naming convention.
 
 | Old name | New name | Component |
 | --- | --- | --- |
@@ -471,11 +519,9 @@ Three slots have been renamed to remove the wordy `Override` and `Slot` suffixes
 </div>
 </div>
 
----
-
 ## Migration Script
 
-`dialtone-migrate-props` automates the majority of these changes across `.vue`, `.js`, `.ts`, `.html`, `.md`, `.jsx`, and `.tsx` files.
+`dialtone-migrate-props` automates most of these changes across `.vue`, `.js`, `.ts`, `.html`, `.md`, `.jsx`, and `.tsx` files.
 
 ### Dry run (preview changes)
 
@@ -497,32 +543,55 @@ npx dialtone-migrate-props --cwd ./src --yes
 
 ### What the script handles automatically
 
+**Severity vocabulary**
+
 - `kind` and `validation-state` value renames (`danger`/`error`/`success`) on any `dt-*` component
 - `type="success"` → `type="positive"` on `dt-badge`
 - `kind` → `tone` prop rename on `dt-link`, with value renames applied in the same pass
 - `banner-kind` / `bannerKind` value renames on `dt-modal` (`error` → `critical`, `success` → `positive`)
+
+**Visibility and open state**
+
 - `show` → `open`, `@update:show` → `@update:open`, `v-model:show` → `v-model:open`
 - `hide-close`, `hide-icon`, `hide-action`, `hide-clear`, `hide-edges`, `hide-divider`, `hide-actions`, `hide-link-bubble-menu` → `:show-*="false"` on all affected components
 - `prevent-typing` → `:allow-typing="false"` on `dt-rich-text-editor` and `dt-recipe-message-input`
 - `:hide-*="true"` → `:show-*="false"` and `:hide-*="false"` → removed
 - `hide-on-click` → `close-on-click` on `dt-popover` (same semantics)
 - `label-visible` → `show-label`
+
+**Header and title naming**
+
 - `title` / `title-id` → `header-text` / `header-id`
 - `banner-title` → `banner-header-text`
-- `clickable` → `interactive` on `dt-avatar`
+- Slot renames: `#titleOverride` → `#header`, `#labelSlot` → `#label`, `#headingSlot` → `#heading`
+
+**v-model standardization**
+
 - `selected-values` / `selectedValues` → `model-value` and `v-model:selectedValues` → `v-model` on `dt-checkbox-group`
 - `@update:selected-values` / `@update:selectedValues` → `@update:model-value` on `dt-checkbox-group`
 - `@input` → `@update:model-value` on `dt-input`, `dt-radio`, `dt-radio-group`, `dt-combobox-multi-select`, `dt-rich-text-editor`, `dt-input-group`
 - `@change` → `@update:model-value` on `dt-toggle`, `dt-select-menu`
+
+**Other renames**
+
+- `clickable` → `interactive` on `dt-avatar`
+
+**`*Class` removals**
+
 - `root-class` / `rootClass` → `class` on `dt-input`, `dt-checkbox`, `dt-radio`, `dt-select-menu`, `dt-breadcrumb-item`, `dt-split-button`
 - `wrapper-class` / `wrapperClass` → `class` on `dt-toggle`, `dt-feed-item-pill`
 - `container-class` / `containerClass` → `class` on `dt-card`
 - Merges into an existing `class="…"` attribute when one is already present
-- Slot renames: `#titleOverride` → `#header`, `#labelSlot` → `#label`, `#headingSlot` → `#heading`
+
+**Also handled**
+
 - Both kebab-case and camelCase prop variants
 
 ### What requires manual review
 
-- **`:hide-*="someExpression"`** — cannot safely invert a dynamic expression. The script warns with the file and prop. Replace with `:show-*="!(someExpression)"`.
-- **`rootClass` on unknown components** — `dt-avatar`, `dt-filter-pill`, `dt-mode-island`, `dt-motion-text` are not in the auto-migration table. The script warns; move the class to the component tag manually.
-- **`:root-class="expr"` + `:class="…"` on the same tag** — the script cannot merge two dynamic bindings. It warns and leaves the tag unchanged; merge manually.
+> [!WARNING]
+> The script flags these but won't change them. Automatic conversion would silently break runtime behavior. Review each warning and apply the fix by hand.
+
+- **`:hide-*="someExpression"`**: cannot safely invert a dynamic expression. The script warns with the file and prop. Replace with `:show-*="!(someExpression)"`.
+- **`rootClass` on unknown components**: `dt-avatar`, `dt-filter-pill`, `dt-mode-island`, `dt-motion-text` are not in the auto-migration table. The script warns; move the class to the component tag manually.
+- **`:root-class="expr"` + `:class="…"` on the same tag**: the script cannot merge two dynamic bindings. It warns and leaves the tag unchanged; merge manually.
