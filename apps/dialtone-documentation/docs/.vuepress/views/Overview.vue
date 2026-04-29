@@ -8,7 +8,13 @@
           class="dialtone-wall__item"
         >
           <div v-if="page.thumb" class="dialtone-wall__image">
-            <svg-loader class="dialtone-wall__thumb" :name="page.fileName" />
+            <img
+              v-if="thumbPngUrl(page.fileName)"
+              :src="thumbPngUrl(page.fileName)"
+              :alt="page.title"
+              class="dialtone-wall__thumb"
+            >
+            <svg-loader v-else class="dialtone-wall__thumb" :name="page.fileName" />
           </div>
           <div class="dialtone-wall__details">
             <div class="dialtone-wall__title">
@@ -40,6 +46,21 @@ defineProps({
     default: () => {},
   },
 });
+
+// Pre-resolved URL maps so thumb rendering can fall back from SVG to PNG.
+const svgModules = import.meta.glob(
+  '../public/assets/images/*.svg',
+  { eager: true, query: '?url', import: 'default' },
+);
+const pngModules = import.meta.glob(
+  '../public/assets/images/*.png',
+  { eager: true, query: '?url', import: 'default' },
+);
+
+const thumbPngUrl = (fileName) => {
+  if (svgModules[`../public/assets/images/${fileName}.svg`]) return null;
+  return pngModules[`../public/assets/images/${fileName}.png`] ?? null;
+};
 
 const badgeKindClass = (status) => {
   switch (status) {

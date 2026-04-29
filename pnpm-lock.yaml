@@ -906,6 +906,9 @@ importers:
       '@storybook/vue3-vite':
         specifier: 10.3.0
         version: 10.3.0(esbuild@0.27.7)(rollup@4.60.1)(storybook@10.3.0(@testing-library/dom@10.4.1)(prettier@3.3.2)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(vite@8.0.3(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(@types/node@24.3.1)(esbuild@0.27.7)(jiti@1.21.7)(less@4.6.4)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(vue@3.5.32(typescript@5.9.3))(webpack@5.105.4(@swc/core@1.15.21)(esbuild@0.27.7))
+      '@vitejs/plugin-react':
+        specifier: 6.0.1
+        version: 6.0.1(vite@8.0.3(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(@types/node@24.3.1)(esbuild@0.27.7)(jiti@1.21.7)(less@4.6.4)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))
       '@vue/test-utils':
         specifier: ^2.4.0
         version: 2.4.6
@@ -915,6 +918,9 @@ importers:
       react:
         specifier: 19.2.4
         version: 19.2.4
+      react-dom:
+        specifier: 19.2.4
+        version: 19.2.4(react@19.2.4)
       storybook:
         specifier: 10.3.0
         version: 10.3.0(@testing-library/dom@10.4.1)(prettier@3.3.2)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -3619,6 +3625,9 @@ packages:
   '@rolldown/pluginutils@1.0.0-rc.2':
     resolution: {integrity: sha512-izyXV/v+cHiRfozX62W9htOAvwMo4/bXKDrQ+vom1L1qRuexPock/7VZDAhnpHCLNejd3NJ6hiab+tO0D44Rgw==}
 
+  '@rolldown/pluginutils@1.0.0-rc.7':
+    resolution: {integrity: sha512-qujRfC8sFVInYSPPMLQByRh7zhwkGFS4+tyMQ83srV1qrxL4g8E2tyxVVyxd0+8QeBM1mIk9KbWxkegRr76XzA==}
+
   '@rollup/plugin-commonjs@28.0.9':
     resolution: {integrity: sha512-PIR4/OHZ79romx0BVVll/PkwWpJ7e5lsqFa3gFfcrFPWwLXLV39JVUzQV9RKjWerE7B845Hqjj9VYlQeieZ2dA==}
     engines: {node: '>=16.0.0 || 14 >= 14.17'}
@@ -4847,6 +4856,19 @@ packages:
     resolution: {integrity: sha512-lrW200hZdbfRtztbygyaq/6jP6AKE8qQN2KvPcJ+x7wiD038YtnYtZ82IMNJ69GJibV7bwL3y9FgK+5w/pYt6g==}
     cpu: [x64]
     os: [win32]
+
+  '@vitejs/plugin-react@6.0.1':
+    resolution: {integrity: sha512-l9X/E3cDb+xY3SWzlG1MOGt2usfEHGMNIaegaUGFsLkb3RCn/k8/TOXBcab+OndDI4TBtktT8/9BwwW8Vi9KUQ==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    peerDependencies:
+      '@rolldown/plugin-babel': ^0.1.7 || ^0.2.0
+      babel-plugin-react-compiler: ^1.0.0
+      vite: ^8.0.0
+    peerDependenciesMeta:
+      '@rolldown/plugin-babel':
+        optional: true
+      babel-plugin-react-compiler:
+        optional: true
 
   '@vitejs/plugin-vue@6.0.5':
     resolution: {integrity: sha512-bL3AxKuQySfk1iGcBsQnoRVexTPJq0Z/ixFVM8OhVJAP6ZXXXLtM7NFKWhLl30Kg7uTBqIaPXbh+nuQCuBDedg==}
@@ -19118,6 +19140,8 @@ snapshots:
 
   '@rolldown/pluginutils@1.0.0-rc.2': {}
 
+  '@rolldown/pluginutils@1.0.0-rc.7': {}
+
   '@rollup/plugin-commonjs@28.0.9(rollup@4.60.1)':
     dependencies:
       '@rollup/pluginutils': 5.3.0(rollup@4.60.1)
@@ -20463,6 +20487,11 @@ snapshots:
 
   '@unrs/resolver-binding-win32-x64-msvc@1.11.1':
     optional: true
+
+  '@vitejs/plugin-react@6.0.1(vite@8.0.3(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(@types/node@24.3.1)(esbuild@0.27.7)(jiti@1.21.7)(less@4.6.4)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))':
+    dependencies:
+      '@rolldown/pluginutils': 1.0.0-rc.7
+      vite: 8.0.3(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(@types/node@24.3.1)(esbuild@0.27.7)(jiti@1.21.7)(less@4.6.4)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3)
 
   '@vitejs/plugin-vue@6.0.5(vite@7.0.8(@types/node@24.3.1)(jiti@1.21.7)(less@4.6.4)(lightningcss@1.32.0)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))(vue@3.5.32(typescript@5.9.3))':
     dependencies:

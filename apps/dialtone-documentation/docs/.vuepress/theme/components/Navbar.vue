@@ -4,63 +4,69 @@
     direction="row"
     gap="50"
   >
-    <dt-button
-      v-for="link in navItems"
-      :key="link.text"
-      :to="link.link"
-      kind="muted"
-      importance="clear"
-      :size="400"
-      class="d-fw-normal"
-      :active="isActiveLink(link.link)"
-    >
-      {{ link.text }}
-    </dt-button>
+    <template v-for="link in navItems" :key="link.text">
+      <dt-hovercard
+        v-if="hovercardMap[link.text].length && dismissedKey !== link.text"
+        placement="bottom-start"
+        dialog-class="d-w-1000 d-p-0"
+        padding="large"
+        transition="true"
+        enter-delay="500"
+        :offset="[-8, 8]"
+      >
+        <template #anchor>
+          <dt-button v-bind="navButtonProps(link)" @click="dismissHovercard(link.text, 'anchor')">
+            {{ link.text }}
+          </dt-button>
+        </template>
+        <template #content>
+          <dt-box class="d-d-grid d-g-50 d-g-cols2 d-ai-stretch ">
+            <dt-button
+              v-for="item in hovercardMap[link.text]"
+              :key="item.link"
+              size="300"
+              kind="muted"
+              importance="clear"
+              :to="item.link"
+              start-icon-class="d-as-start d-pbs-100 d-pis-50"
+              label-class="d-p-50 d-pis-100"
+              class="d-ai-start"
+              @click="dismissHovercard(link.text)"
+            >
+              <template v-if="item.icon" #startIcon="{ iconSize }">
+                <dt-icon class="d-fc-muted" :name="item.icon" :size="iconSize" />
+              </template>
+              <dt-stack gap="50">
+                <dt-text kind="headline" size="300">
+                  {{ item.text }}
+                </dt-text>
+                <dt-text kind="body" size="200" tone="muted">
+                  {{ item.description }}
+                </dt-text>
+              </dt-stack>
+            </dt-button>
+          </dt-box>
+        </template>
+      </dt-hovercard>
+      <dt-button
+        v-else
+        v-bind="navButtonProps(link)"
+        @mouseleave="releaseDismissal(link.text)"
+        @blur="releaseDismissal(link.text)"
+      >
+        {{ link.text }}
+      </dt-button>
+    </template>
   </dt-stack>
   <dt-stack direction="row" gap="50">
     <dt-button
-      v-dt-tooltip="'Storybook'"
-      hidden
-      class="d-btn d-btn--muted d-btn--icon-only dialtone-shell-btn"
-      href="https://dialtone.dialpad.com/vue"
-      target="_blank"
-      rel="noreferrer noopener"
-      kind="muted"
-      importance="clear"
-      aria-label="Open Storybook"
+      to="/dialtone/whats-new/"
+      class="d-mie-100"
+      size="200"
     >
-      <template #startIcon>
-        <dt-icon-storybook size="400" />
-      </template>
-    </dt-button>
-    <dt-button
-      v-dt-tooltip="'Github Repository'"
-      hidden
-      class="d-btn d-btn--muted d-btn--icon-only dialtone-shell-btn"
-      href="https://github.com/dialpad/dialtone"
-      target="_blank"
-      rel="noreferrer noopener"
-      kind="muted"
-      importance="clear"
-      aria-label="Open GitHub repository"
-    >
-      <template #startIcon>
-        <dt-icon-github size="400" />
-      </template>
-    </dt-button>
-    <dt-button
-      v-dt-tooltip="'Codepen Template'"
-      hidden
-      class="d-btn d-btn--muted d-btn--icon-only dialtone-shell-btn"
-      href="https://codepen.io/pen?template=oNmoRqO"
-      target="_blank"
-      rel="noopener noreferrer"
-      kind="muted"
-      importance="clear"
-      aria-label="Open Codepen template"
-    >
-      <template #startIcon>
-        <dt-icon-codepen size="400" />
+      What's New
+      <template #startIcon="{ iconSize }">
+        <dt-icon name="megaphone" :size="iconSize" />
       </template>
     </dt-button>
     <dt-dropdown
@@ -80,7 +86,7 @@
         >
           <template #startIcon>
             <dt-icon
-              size="400"
+              size="300"
               name="satisfied-filled"
             />
           </template>
@@ -192,7 +198,7 @@
         >
           <template #startIcon>
             <dt-icon
-              size="400"
+              size="300"
               :name="currentModeIconName"
             />
           </template>
@@ -271,7 +277,7 @@
       <template #startIcon>
         <dt-icon
           name="search"
-          size="400"
+          size="300"
         />
       </template>
     </dt-button>
@@ -279,21 +285,86 @@
 </template>
 
 <script setup>
+import { computed, onUnmounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
-import { DtIconStorybook, DtIconGithub, DtIconCodepen } from '@dialpad/dialtone-icons/vue';
+import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
 import { useThemeManager } from '../composables/useThemeManager';
 
 defineEmits(['search']);
 
 const route = useRoute();
+const themeData = useThemeLocaleData();
 const showThemeSwitcher = __VUEPRESS_DEV__ || __DIALTONE_DEPLOY_PREVIEW__;
 
-// Top-level navigation items
+// Unmount the hovercard via v-if to guarantee instant dismissal on click —
+// bypasses DtHovercard's focus/transition/hover state entirely.
+// Reset path differs by where the click originated:
+//   'inner' click (item inside the popover): cursor is in the popover content,
+//     not the anchor — mouseleave on the anchor button never fires. Reset via
+//     route change (navigation) or a timer fallback (same-page click).
+//   'anchor' click (the nav button itself): cursor stays on the anchor after
+//     click. Resetting too early causes the hovercard to remount under the
+//     cursor, fire mouseenter, and re-open after enterDelay. So for anchor
+//     clicks the only reset path is mouseleave on the plain button.
+const dismissedKey = ref(null);
+let dismissalKind = null;
+let resetTimer;
+const dismissHovercard = (key, kind = 'inner') => {
+  dismissedKey.value = key;
+  dismissalKind = kind;
+  clearTimeout(resetTimer);
+  if (kind === 'inner') {
+    resetTimer = setTimeout(() => {
+      if (dismissedKey.value === key) clearDismissal();
+    }, 400);
+  }
+};
+const releaseDismissal = (key) => {
+  if (dismissedKey.value === key) clearDismissal();
+};
+function clearDismissal () {
+  clearTimeout(resetTimer);
+  dismissedKey.value = null;
+  dismissalKind = null;
+}
+watch(() => route.path, () => {
+  if (dismissalKind !== 'inner' || dismissedKey.value === null) return;
+  clearDismissal();
+});
+onUnmounted(() => clearTimeout(resetTimer));
+
 const navItems = [
-  { text: 'Foundations', link: '/foundations/' },
-  { text: 'Design System', link: '/dialtone/' },
-  { text: 'UI Kits', link: '/ui-kits/' },
+  { text: 'Foundations', link: '/foundations/', group: 'foundations' },
+  { text: 'Design System', link: '/dialtone/', group: 'dialtone' },
+  { text: 'UI Kits', link: '/ui-kits/', group: 'ui-kits' },
+  { text: 'Downloads', link: '/downloads/' },
 ];
+
+const buildHovercardItems = (link) => {
+  if (!link.group) return [];
+  const sections = themeData.value.sidebar?.topLevelGroups?.[link.group]?.sections;
+  if (!sections) return [];
+  const keys = Object.keys(sections);
+  // Single-section groups (Foundations, UI Kits) surface the section's items;
+  // multi-section groups (Design System) surface each section's top-level entry.
+  const items = keys.length === 1
+    ? sections[keys[0]]
+    : keys.map(k => Array.isArray(sections[k]) ? sections[k][0] : null);
+  return (items || []).filter(item => item?.link && item?.description);
+};
+
+const hovercardMap = computed(() =>
+  Object.fromEntries(navItems.map(link => [link.text, buildHovercardItems(link)])),
+);
+
+const navButtonProps = (link) => ({
+  to: link.link,
+  kind: 'muted',
+  importance: 'clear',
+  size: 400,
+  class: 'd-fw-normal',
+  active: isActiveLink(link.link),
+});
 
 // Use theme manager composable with theme switching enabled
 const {
