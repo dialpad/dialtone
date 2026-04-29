@@ -469,6 +469,14 @@ export default {
     },
 
     /**
+     * Allow text alignment controls (left, center, right, justify) in the editor.
+     */
+    allowTextAlign: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
      * Whether the input allows image resize to be introduced in the text.
      */
     allowImageResize: {
@@ -747,9 +755,11 @@ export default {
       // hence this should be done last otherwise the enter wont add a emoji.
       extensions.push(Emoji);
 
-      extensions.push(TextAlign.configure({
-        types: ['paragraph'],
-      }));
+      if (this.allowTextAlign) {
+        extensions.push(TextAlign.configure({
+          types: ['paragraph'],
+        }));
+      }
 
       if (this.allowCode) {
         extensions.push(Code);
