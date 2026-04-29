@@ -15,17 +15,15 @@
     </dt-link>
     includes step by step instructions and automated tooling.
     <template #action>
-      <dt-box class="d-pie-100">
-        <dt-button
-          link
-          link-kind="muted"
-          @click="permanentDismiss"
-        >
-          <dt-text kind="body" size="100">
-            Don't&nbsp;show&nbsp;again
-          </dt-text>
-        </dt-button>
-      </dt-box>
+      <dt-button
+        kind="muted"
+        importance="clear"
+        size="200"
+        label-class="d-tw-nowrap"
+        @click="permanentDismiss"
+      >
+        Don't show again
+      </dt-button>
     </template>
   </dt-banner>
 </template>
