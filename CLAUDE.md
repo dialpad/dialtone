@@ -141,6 +141,17 @@ All tracking data lives in `.claude/tsc-cache/<session>/` (gitignored):
 - `missing-docs.txt` — written by the guard when docs are missing
 - `push-done` / `pr-create-done` — marker files to avoid re-checking
 
+## CodeRabbit Config
+
+`.coderabbit.yaml` controls path filters, reviewer routing, and per-path review guidance.
+
+Keep it in sync when:
+- A new package is added → add a `path_instructions` entry and any `path_filters` exclusion for build output
+- A `.claude/rules/*.md` file is added/renamed → update the `Follow the conventions in …` reference in the matching `path_instructions` entry
+- Team member joins → add handle to `reviews.suggested_reviewers_instructions` and `.github/CODEOWNERS`
+- Team member leaves → remove handle from both `reviews.suggested_reviewers_instructions` and `.github/CODEOWNERS`
+- A new cross-repo relationship is established → add to `knowledge_base.linked_repositories`
+
 ## Key Files Reference
 
 | File | Purpose |
