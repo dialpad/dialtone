@@ -207,8 +207,7 @@
       },
       "success-hover": {
         "value": "{color.foreground.positive-strong}",
-        "type": "color",
-        "$deprecated": "Use positive-hover instead."
+        "type": "color"
       },
       "warning": {
         "value": "{color.foreground.warning}",
@@ -413,7 +412,7 @@
         "description": "A contrasting warning surface, most likely paired with inverted foreground colors."
       },
       "positive-strong": {
-        "value": "{color.green.600}",
+        "value": "{color.green.800}",
         "type": "color",
         "description": "A contrasting positive state surface, most likely paired with inverted foreground colors."
       },
@@ -557,7 +556,7 @@
             }
           }
         },
-        "description": "Success surface as opaque background color."
+        "description": "Positive surface as opaque background color."
       },
       "success-opaque": {
         "value": "{color.green.400}",
@@ -1166,8 +1165,13 @@
         "type": "color"
       },
       "positive-subtle": {
-        "value": "{color.green.400}",
-        "type": "color"
+        "value": "{color.green.300}",
+        "type": "color",
+      },
+      "success-subtle": {
+        "value": "{color.green.300}",
+        "type": "color",
+        "$deprecated": "Use positive-subtle instead."
       },
       "success-subtle": {
         "value": "{color.green.300}",
@@ -1293,8 +1297,9 @@
         "type": "color"
       },
       "positive-subtle-inverted": {
-        "value": "{color.green.800}",
-        "type": "color"
+        "value": "{color.green.900}",
+        "type": "color",
+        "$deprecated": "Use positive-subtle-inverted instead."
       },
       "success-subtle-inverted": {
         "value": "{color.green.900}",

@@ -14,8 +14,8 @@
   <p class="d-fc-black-900">primary text</p>
   <p class="d-fc-red-600">critical text</p>
   <p class="d-fc-red-700">critical-strong text</p>
-  <p class="d-fc-green-800">success text</p>
-  <p class="d-fc-green-900">success-strong text</p>
+  <p class="d-fc-green-800">positive text</p>
+  <p class="d-fc-green-900">positive-strong text</p>
   <p class="d-fc-gold-800">warning text</p>
 
   <!-- Unmapped foreground classes (should NOT be replaced) -->
@@ -41,9 +41,9 @@
   <div class="d-bgc-gold-50">warning-subtle</div>
   <div class="d-bgc-gold-100">warning</div>
   <div class="d-bgc-gold-400">warning-strong</div>
-  <div class="d-bgc-green-50">success-subtle</div>
-  <div class="d-bgc-green-100">success</div>
-  <div class="d-bgc-green-800">success-strong</div>
+  <div class="d-bgc-green-50">positive-subtle</div>
+  <div class="d-bgc-green-100">positive</div>
+  <div class="d-bgc-green-800">positive-strong</div>
   <div class="d-bgc-blue-50">info-subtle</div>
   <div class="d-bgc-blue-100">info</div>
   <div class="d-bgc-blue-800">info-strong</div>
@@ -62,9 +62,9 @@
   <div class="d-bc-red-300">critical-subtle</div>
   <div class="d-bc-red-600">critical</div>
   <div class="d-bc-red-800">critical-strong</div>
-  <div class="d-bc-green-300">success-subtle</div>
-  <div class="d-bc-green-700">success</div>
-  <div class="d-bc-green-900">success-strong</div>
+  <div class="d-bc-green-300">positive-subtle</div>
+  <div class="d-bc-green-700">positive</div>
+  <div class="d-bc-green-900">positive-strong</div>
   <div class="d-bc-gold-300">warning-subtle</div>
   <div class="d-bc-gold-500">warning</div>
   <div class="d-bc-gold-700">warning-strong</div>
@@ -78,14 +78,14 @@
   <!-- ============================================ -->
 
   <div class="d-divide-red-600">critical divide</div>
-  <div class="d-divide-green-700">success divide</div>
+  <div class="d-divide-green-700">positive divide</div>
 
   <!-- ============================================ -->
   <!-- PSEUDO & RESPONSIVE PREFIXED -->
   <!-- ============================================ -->
 
   <p class="h:d-fc-red-600">hover critical text</p>
-  <p class="f:d-fc-green-800">focus success text</p>
+  <p class="f:d-fc-green-800">focus positive text</p>
   <div class="sm:d-bgc-black-100">responsive secondary surface</div>
   <div class="md:d-bc-red-600">responsive critical border</div>
 
