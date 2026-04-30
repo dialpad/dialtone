@@ -148,6 +148,16 @@ All tracking data lives in `.claude/tsc-cache/<session>/` (gitignored):
 The 90-day cadence aligns with the ~13-week AI citation decay window documented in `packages/dialtone-docs/src/content/standards/standard-geo-optimization.md`. To pass the check, re-read the standard and bump its `last_verified` date in frontmatter. See `standard-ai-documentation.md` for the field spec.
 
 Run locally: `pnpm nx run dialtone-docs:check-freshness`
+## CodeRabbit Config
+
+`.coderabbit.yaml` controls path filters, reviewer routing, and per-path review guidance.
+
+Keep it in sync when:
+- A new package is added → add a `path_instructions` entry and any `path_filters` exclusion for build output
+- A `.claude/rules/*.md` file is added/renamed → update the `Follow the conventions in …` reference in the matching `path_instructions` entry
+- Team member joins → add handle to `reviews.suggested_reviewers_instructions` and `.github/CODEOWNERS`
+- Team member leaves → remove handle from both `reviews.suggested_reviewers_instructions` and `.github/CODEOWNERS`
+- A new cross-repo relationship is established → add to `knowledge_base.linked_repositories`
 
 ## Key Files Reference
 
