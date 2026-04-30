@@ -79,7 +79,7 @@ const metadataRules = [
       discouraged: true,
       category: 'color',
       reason: 'Base color utilities are deprecated and will be removed in the future',
-      alternatives: ['d-fc-primary', 'd-fc-secondary', 'd-fc-tertiary', 'd-bgc-critical', 'd-bgc-success', 'd-bc-default'],
+      alternatives: ['d-fc-primary', 'd-fc-secondary', 'd-fc-tertiary', 'd-bgc-critical', 'd-bgc-positive', 'd-bc-default'],
       docs: 'https://dialtone.dialpad.com/utilities/backgrounds/color.html',
     },
   },

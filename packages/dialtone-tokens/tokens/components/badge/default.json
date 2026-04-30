@@ -10,9 +10,14 @@
           "value": "{color.blue.200}",
           "type": "color"
         },
-        "success": {
+        "positive": {
           "value": "{color.green.200}",
           "type": "color"
+        },
+        "success": {
+          "value": "{badge.color.background.positive}",
+          "type": "color",
+          "$deprecated": "Use positive instead."
         },
         "warning": {
           "value": "{color.gold.200}",
@@ -38,6 +43,10 @@
       "foreground": {
         "default": {
           "value": "{color.black.1000}",
+          "type": "color"
+        },
+        "success": {
+          "value": "{color.green.1000}",
           "type": "color"
         },
         "bulletin": {

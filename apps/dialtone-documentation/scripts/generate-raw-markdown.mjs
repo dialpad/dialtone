@@ -37,6 +37,7 @@ const ICON_KEYWORDS_JSON = resolve(ROOT, '../../packages/dialtone-icons/dist/key
 const ILLUSTRATION_JSON = resolve(ROOT, 'docs/_data/svg-spot.json');
 const TOKENS_DOCS_JSON = resolve(ROOT, '../../packages/dialtone-css/lib/dist/tokens-docs.json');
 const TYPE_JSON = resolve(DATA_DIR, 'type.json');
+const DOWNLOADS_JSON = resolve(DATA_DIR, 'downloads.json');
 
 /** Cached site-nav.json data — loaded once in loadAllDataSources(). */
 let _navData = null;
@@ -65,6 +66,7 @@ const SECTIONS = [
   { name: 'guides', sourceDir: 'docs/guides', outputDir: 'md/guides' },
   { name: 'tokens', sourceDir: 'docs/tokens', outputDir: 'md/tokens' },
   { name: 'utilities', sourceDir: 'docs/utilities', outputDir: 'md/utilities', navSection: '/utilities/' },
+  { name: 'downloads', sourceDir: 'docs/downloads', outputDir: 'md/downloads' },
 ];
 
 /**
@@ -99,6 +101,22 @@ function mapOutputPath (relPath) {
     return dir + '.md';
   }
   return relPath;
+}
+
+/**
+ * Extract a flat set of frontmatter field values from a markdown source string.
+ * Returns an object keyed by requested field names; missing fields are omitted.
+ */
+function parseFrontmatter (content, fields) {
+  const match = content.match(/^---\n([\s\S]*?)\n---/);
+  if (!match) return {};
+  const fm = match[1];
+  const result = {};
+  for (const field of fields) {
+    const fieldMatch = fm.match(new RegExp(`^${field}:\\s*(.+)$`, 'm'));
+    if (fieldMatch) result[field] = fieldMatch[1].trim();
+  }
+  return result;
 }
 
 /**
@@ -375,16 +393,11 @@ function generateComponentStatusPage (sourceDir, outputBase) {
 
   const rows = files.map(f => {
     const content = readFileSync(resolve(sourceDir, f), 'utf-8');
-    const fmMatch = content.match(/^---\n([\s\S]*?)\n---/);
-    const fm = fmMatch ? fmMatch[1] : '';
-    const titleMatch = fm.match(/^title:\s*(.+)$/m);
-    const title = titleMatch ? titleMatch[1] : basename(f, '.md');
-    const statusMatch = fm.match(/^status:\s*(.+)$/m);
-    const storybookMatch = fm.match(/^storybook:\s*(.+)$/m);
-    const figmaMatch = fm.match(/^figma_url:\s*(.+)$/m) || fm.match(/^figma:\s*(.+)$/m);
-    const css = componentStatus(statusMatch?.[1]);
-    const vue = componentStatus(storybookMatch?.[1]);
-    const figma = componentStatus(figmaMatch?.[1]);
+    const fm = parseFrontmatter(content, ['title', 'status', 'storybook', 'figma_url', 'figma']);
+    const title = fm.title || basename(f, '.md');
+    const css = componentStatus(fm.status);
+    const vue = componentStatus(fm.storybook);
+    const figma = componentStatus(fm.figma_url || fm.figma);
     return `| [${title}](${f}) | ${css} | ${vue} | ${figma} |`;
   });
 
@@ -448,6 +461,60 @@ function postProcessTypography (filePath, typographyStyles) {
   }
 
   writeFileSync(filePath, content, 'utf-8');
+}
+
+/**
+ * Build the markdown chunk for a single downloads section.
+ */
+function buildDownloadsSectionLines (section) {
+  const lines = [`## ${section.title}`, ''];
+
+  const topLinks = [];
+  if (section.relatedLink) {
+    topLinks.push(`[${section.relatedLabel}](${section.relatedLink})`);
+  }
+  if (section.downloadAllUrl) {
+    topLinks.push(`[${section.downloadAllLabel}](${section.downloadAllUrl})`);
+  }
+  if (topLinks.length > 0) {
+    lines.push(topLinks.join(' | '), '');
+  }
+
+  const linkedItems = (section.items || []).filter(i => i.label && i.downloadUrl);
+  if (linkedItems.length > 0) {
+    for (const item of linkedItems) {
+      lines.push(`- [${item.label}](${item.downloadUrl})`);
+    }
+    lines.push('');
+  }
+
+  return lines;
+}
+
+/**
+ * Replace the Downloads raw-markdown file with a flat, LLM-friendly expansion
+ * built from docs/_data/downloads.json. The source `downloads/index.md` contains
+ * only `<downloads-catalog />`; without this post-process the raw output would
+ * be empty of actual download links, making "Open in Claude.ai" / "Copy MD" useless.
+ *
+ * Title and description are read from the source page's frontmatter
+ * (`parseSourceMarkdown` strips it from the output file, so we read the source
+ * directly) — single source of truth, no drift risk.
+ */
+function postProcessDownloads (sourcePath, outputPath, data) {
+  const source = readFileSync(sourcePath, 'utf-8');
+  const { title, description } = parseFrontmatter(source, ['title', 'description']);
+
+  const lines = [`# ${title || 'Downloads'}`, ''];
+  if (description) lines.push(description, '');
+
+  for (const slug of data.order) {
+    const section = data.sections[slug];
+    if (!section) continue;
+    lines.push(...buildDownloadsSectionLines(section));
+  }
+
+  writeFileSync(outputPath, lines.join('\n').trimEnd() + '\n', 'utf-8');
 }
 
 /**
@@ -591,6 +658,20 @@ function main () {
         postProcessTypography(resolve(outputBase, 'typography.md'), typeData.typographyStyles);
       } catch (err) {
         console.warn(`[generate-raw-markdown] typography post-process: ${err.message}`);
+      }
+    }
+
+    if (section.name === 'downloads') {
+      try {
+        const downloadsData = JSON.parse(readFileSync(DOWNLOADS_JSON, 'utf-8'));
+        postProcessDownloads(
+          resolve(sourceDir, 'index.md'),
+          resolve(outputBase, 'index.md'),
+          downloadsData,
+        );
+      } catch (err) {
+        console.error(`[generate-raw-markdown] downloads post-process: ${err.message}`);
+        errorCount++;
       }
     }
 

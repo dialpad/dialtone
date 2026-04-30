@@ -218,9 +218,9 @@ Apply a [semantic surface color](/utilities/backgrounds/color.md) to convey some
     <dt-icon name="alert-circle" size="200" />
     <dt-text>Info</dt-text>
   </dt-stack>
-  <dt-stack direction="row" gap="100" class="d-bgc-success-strong d-p-100">
+  <dt-stack direction="row" gap="100" class="d-bgc-positive-strong d-p-100">
     <dt-icon name="check-circle" size="200" />
-    <dt-text>Success</dt-text>
+    <dt-text>Positive</dt-text>
   </dt-stack>
 </dt-stack>
 ```
@@ -240,9 +240,9 @@ Use the [DtText](/components/text.html) component for text styling. It provides 
     <dt-icon name="alert-circle" size="200" />
     <dt-text kind="label" :size="200">Info</dt-text>
   </dt-stack>
-  <dt-stack direction="row" gap="100" class="d-bgc-success-strong d-p-100">
+  <dt-stack direction="row" gap="100" class="d-bgc-positive-strong d-p-100">
     <dt-icon name="check-circle" size="200" />
-    <dt-text kind="label" :size="200">Success</dt-text>
+    <dt-text kind="label" :size="200">Positive</dt-text>
   </dt-stack>
 </dt-stack>
 ```
@@ -262,9 +262,9 @@ Refine the spacing by adjusting the [Stack](/components/stack.md) `gap` prop and
     <dt-icon name="alert-circle" size="200" />
     <dt-text kind="label" :size="200">Info</dt-text>
   </dt-stack>
-  <dt-stack direction="row" gap="50" class="d-bgc-success-strong d-py-50 d-px-100">
+  <dt-stack direction="row" gap="50" class="d-bgc-positive-strong d-py-50 d-px-100">
     <dt-icon name="check-circle" size="200" />
-    <dt-text kind="label" :size="200">Success</dt-text>
+    <dt-text kind="label" :size="200">Positive</dt-text>
   </dt-stack>
 </dt-stack>
 ```
@@ -284,9 +284,9 @@ Add `d-bar-300` to each item for subtle rounded corners.
     <dt-icon name="alert-circle" size="200" />
     <dt-text kind="label" :size="200">Info</dt-text>
   </dt-stack>
-  <dt-stack direction="row" gap="50" class="d-bar-300 d-bgc-success-strong d-py-50 d-px-100">
+  <dt-stack direction="row" gap="50" class="d-bar-300 d-bgc-positive-strong d-py-50 d-px-100">
     <dt-icon name="check-circle" size="200" />
-    <dt-text kind="label" :size="200">Success</dt-text>
+    <dt-text kind="label" :size="200">Positive</dt-text>
   </dt-stack>
 </dt-stack>
 ```

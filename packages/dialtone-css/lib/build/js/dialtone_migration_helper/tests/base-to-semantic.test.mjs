@@ -16,20 +16,20 @@ describe('base-to-semantic config', () => {
     ['FOREGROUND_MAP', 'fc', [
       ['black-600', 'tertiary'], ['black-700', 'secondary'], ['black-900', 'primary'],
       ['red-600', 'critical'], ['red-700', 'critical-strong'],
-      ['green-800', 'success'], ['green-900', 'success-strong'], ['gold-800', 'warning'],
+      ['green-800', 'positive'], ['green-900', 'positive-strong'], ['gold-800', 'warning'],
     ]],
     ['SURFACE_MAP', 'bgc', [
       ['black-50', 'primary'], ['black-100', 'secondary'], ['black-200', 'moderate'],
       ['black-300', 'bold'], ['black-600', 'strong'], ['black-800', 'contrast'],
       ['red-50', 'critical-subtle'], ['red-100', 'critical'], ['red-600', 'critical-strong'],
       ['gold-50', 'warning-subtle'], ['gold-100', 'warning'], ['gold-400', 'warning-strong'],
-      ['green-50', 'success-subtle'], ['green-100', 'success'], ['green-800', 'success-strong'],
+      ['green-50', 'positive-subtle'], ['green-100', 'positive'], ['green-800', 'positive-strong'],
       ['blue-50', 'info-subtle'], ['blue-100', 'info'], ['blue-800', 'info-strong'],
       ['purple-50', 'brand-subtle'], ['purple-100', 'brand'], ['purple-600', 'brand-strong'],
     ]],
     ['BORDER_MAP', 'bc', [
       ['red-300', 'critical-subtle'], ['red-600', 'critical'], ['red-800', 'critical-strong'],
-      ['green-300', 'success-subtle'], ['green-700', 'success'], ['green-900', 'success-strong'],
+      ['green-300', 'positive-subtle'], ['green-700', 'positive'], ['green-900', 'positive-strong'],
       ['gold-300', 'warning-subtle'], ['gold-500', 'warning'], ['gold-700', 'warning-strong'],
       ['purple-300', 'brand-subtle'], ['purple-600', 'brand'], ['purple-800', 'brand-strong'],
       ['blue-500', 'focus'],
@@ -50,8 +50,8 @@ describe('base-to-semantic config', () => {
     it('d-divide-red-600 → d-divide-critical', () => {
       assert.equal(apply('d-divide-red-600'), 'd-divide-critical');
     });
-    it('d-divide-green-700 → d-divide-success', () => {
-      assert.equal(apply('d-divide-green-700'), 'd-divide-success');
+    it('d-divide-green-700 → d-divide-positive', () => {
+      assert.equal(apply('d-divide-green-700'), 'd-divide-positive');
     });
   });
 
@@ -99,14 +99,14 @@ describe('base-to-semantic config', () => {
       ['.a { background: var(--dt-color-black-100) url(\'b.png\') no-repeat center; }',
         'surface-secondary', 'bg: color before image'],
       ['.a { background: url(\'i.svg\') no-repeat var(--dt-color-green-100); }',
-        'surface-success', 'bg: color after image'],
+        'surface-positive', 'bg: color after image'],
       ['.a { background: var(--dt-color-blue-100) no-repeat center / cover; }',
         'surface-info', 'bg: color + size shorthand'],
       ['.a { background: var(--dt-color-red-50) url(\'t.png\') repeat-x top left; }',
         'surface-critical-subtle', 'bg: color + image + repeat + position'],
       // border-color → border
       ['.a { border-color: var(--dt-color-red-600); }', 'border-critical', 'border-color:'],
-      ['.a { border-top-color: var(--dt-color-green-700); }', 'border-success', 'border-top-color:'],
+      ['.a { border-top-color: var(--dt-color-green-700); }', 'border-positive', 'border-top-color:'],
       // border shorthand
       ['.a { border: var(--dt-size-border-300) solid var(--dt-color-red-600); }',
         'border-critical', 'border shorthand'],
@@ -114,7 +114,7 @@ describe('base-to-semantic config', () => {
       ['.a { border-block-start: var(--dt-size-border-100) solid var(--dt-color-red-600); }',
         'border-critical', 'border-block-start'],
       ['.a { border-inline-end-color: var(--dt-color-green-700); }',
-        'border-success', 'border-inline-end-color'],
+        'border-positive', 'border-inline-end-color'],
       ['.a { border-block-end-color: var(--dt-color-gold-500); }',
         'border-warning', 'border-block-end-color'],
     ];

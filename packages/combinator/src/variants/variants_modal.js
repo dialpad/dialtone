@@ -16,7 +16,7 @@ export default {
       },
     },
   },
-  danger: {
+  critical: {
     props: {
       headerText: {
         initialValue: 'Example title',
@@ -25,12 +25,12 @@ export default {
         initialValue: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
       },
       kind: {
-        initialValue: 'danger',
+        initialValue: 'critical',
       },
     },
     slots: {
       footer: {
-        initialValue: '<dt-button importance="clear">Cancel</dt-button><dt-button kind="danger" importance="primary" class="d-mis-75">Confirm</dt-button>',
+        initialValue: '<dt-button importance="clear">Cancel</dt-button><dt-button kind="critical" importance="primary" class="d-mis-75">Confirm</dt-button>',
       },
     },
   },

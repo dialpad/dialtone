@@ -11,7 +11,7 @@ keywords: ["alert","notification","message","d-banner","DtBanner","dt-banner"]
 
 ```vue demo-only
 <dt-stack gap="200" class="d-w100p" align="center">
-  <dt-banner title="Example banner" kind="info" class="d-ps-relative d-zi-base">
+  <dt-banner header-text="Example banner" kind="info" class="d-ps-relative d-zi-base">
     Message body with a <dt-link kind="muted">Link</dt-link>
     <template #action>
       <dt-button :size="200" kind="muted" importance="outlined">Action</dt-button>
@@ -50,7 +50,7 @@ Banners are a type of notice and so you can use the following [Notice](notice.md
   :pinned="pinned"
   :important="important"
   :kind="selectedKind"
-  title="Optional banner title"
+  header-text="Optional banner title"
   v-show="shownBanner === 'example-kind'"
   @close="closeBanner"
 >
@@ -58,14 +58,14 @@ Banners are a type of notice and so you can use the following [Notice](notice.md
 </dt-banner>
 
 ```vue code-only
-<dt-banner kind="base" title="Optional banner title"> Message body </dt-banner>
-<dt-banner kind="critical" title="Optional banner title"> Message body </dt-banner>
-<dt-banner kind="info" title="Optional banner title"> Message body </dt-banner>
-<dt-banner kind="positive" title="Optional banner title"> Message body </dt-banner>
-<dt-banner kind="warning" title="Optional banner title"> Message body </dt-banner>
+<dt-banner kind="base" header-text="Optional banner title"> Message body </dt-banner>
+<dt-banner kind="critical" header-text="Optional banner title"> Message body </dt-banner>
+<dt-banner kind="info" header-text="Optional banner title"> Message body </dt-banner>
+<dt-banner kind="positive" header-text="Optional banner title"> Message body </dt-banner>
+<dt-banner kind="warning" header-text="Optional banner title"> Message body </dt-banner>
 <dt-banner background-image="{$background-image}" background-size="contain"> Message body </dt-banner>
-<dt-banner pinned="true" kind="warning" title="Optional banner title"> Message body </dt-banner>
-<dt-banner important="true" kind="warning" title="Optional banner title"> Message body </dt-banner>
+<dt-banner pinned="true" kind="warning" header-text="Optional banner title"> Message body </dt-banner>
+<dt-banner important="true" kind="warning" header-text="Optional banner title"> Message body </dt-banner>
 ```
 
 ### Pinned
@@ -80,7 +80,7 @@ Pins the banner to the top of the window.
 
 <dt-banner
   :pinned="true"
-  title="Optional banner title"
+  header-text="Optional banner title"
   v-show="shownBanner === 'example-pinned'"
   @close="closeBanner"
 >
@@ -93,7 +93,7 @@ Pins the banner to the top of the window.
 ```vue code-only
 <dt-banner
   :pinned="true"
-  title="Optional banner title"
+  header-text="Optional banner title"
 >
   Detailed description goes here.
   <template #action>

@@ -165,7 +165,7 @@ async function main() {
         },
         {
           name: "search_tokens",
-          description: "Search for design tokens (CSS variables) from Dialtone's design system. Use when query mentions token categories (color, spacing, layout, font, size, shadow) or semantic names (primary, success, critical, foreground, background). Returns tokens like --dt-color-foreground-primary, --dt-spacing-100.",
+          description: "Search for design tokens (CSS variables) from Dialtone's design system. Use when query mentions token categories (color, spacing, layout, font, size, shadow) or semantic names (primary, positive, critical, warning, info, foreground, background). Returns tokens like --dt-color-foreground-primary, --dt-spacing-100.",
           inputSchema: {
             type: "object",
             properties: {

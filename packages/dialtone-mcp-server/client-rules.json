@@ -1,33 +1,35 @@
 {
   "priority": {
     "description": "Priority order when recommending Dialtone solutions",
-    "order": ["component", "utility-class", "token"],
+    "order": ["component", "primitive", "utility-class", "token"],
     "details": {
-      "component": "Always prefer Vue components when available (e.g., DtButton over custom button styling)",
-      "utility-class": "Use utility classes for spacing, layout, and simple styling (e.g., d-pr2 for padding-right)",
-      "token": "Use design tokens for custom implementations or when components/utilities don't exist"
+      "component": "Always prefer specific Vue components when one fits the use case (e.g., DtButton over composing a button manually)",
+      "primitive": "When no specific component fits, reach for the primitive triad — DtBox (surface, padding, border, shadow, sizing), DtStack (layout: direction, gap, alignment), DtText (typography) — before composing with utility classes",
+      "utility-class": "Use utility classes for styling concerns the primitives intentionally don't cover (positioning, display, flex-child) or for surgical adjustments (e.g., d-pr2 for padding-right)",
+      "token": "Use design tokens for custom CSS implementations when components, primitives, and utilities don't fit"
     }
   },
   "colors": {
     "description": "Color selection guidelines",
-    "preference": "semantic-over-base",
+    "order": ["semantic", "base"],
     "details": {
-      "semantic": "Prefer semantic color tokens (e.g., --dt-color-foreground-primary) over base colors",
+      "semantic": "Prefer semantic color tokens (e.g., --dt-color-foreground-primary, --dt-color-surface-positive) over base colors. Components and primitives like DtBox already use semantic tokens internally — these guidelines apply when you're writing raw CSS.",
       "base": "Use base color tokens (e.g., --dt-color-purple-600) only when semantic colors don't fit the use case",
       "examples": {
-        "good": ["--dt-color-foreground-primary", "--dt-color-background-success", "--dt-color-border-critical"],
+        "good": ["--dt-color-foreground-primary", "--dt-color-surface-positive", "--dt-color-border-critical"],
         "avoid": ["--dt-color-purple-600", "--dt-color-red-700", "--dt-color-blue-300"]
       }
     }
   },
   "typography": {
     "description": "Typography selection guidelines",
-    "preference": "typography-over-text-styles",
+    "order": ["dt-text", "typography-class", "text-style-token"],
     "details": {
-      "typography": "Prefer typography utility classes (e.g., d-body--md-compact) or typography tokens (e.g., --dt-typography-body-md) for complete text styling",
-      "text-styles": "Use individual text style tokens (e.g., --dt-font-size-200) only for fine-tuned control",
+      "dt-text": "In Vue templates, prefer the DtText component for any text — it handles family, kind (headline/body/label), size, weight, and tone via validated props (e.g., <dt-text kind=\"body\" :size=\"200\">). Part of the primitive triad alongside DtBox and DtStack.",
+      "typography-class": "Use typography utility classes (e.g., d-body--md-compact) or complete typography tokens (e.g., --dt-typography-body-md) for non-Vue HTML or as a class escape hatch when DtText doesn't fit",
+      "text-style-token": "Use individual text style tokens (e.g., --dt-font-size-200, --dt-line-height-100) only for fine-tuned control in custom CSS",
       "examples": {
-        "good": ["d-body--md-compact", "--dt-typography-heading-lg", "--dt-typography-body-sm", "--dt-typography-label-md"],
+        "good": ["<dt-text as=\"p\" kind=\"body\" :size=\"200\" tone=\"tertiary\">Body text paragraph</dt-text>", "d-body--md-compact", "--dt-typography-heading-lg", "--dt-typography-body-sm", "--dt-typography-label-md"],
         "avoid": ["d-fs-200 d-lh-100", "--dt-font-size-300 + --dt-line-height-400 + --dt-font-weight-medium"]
       }
     }
@@ -35,9 +37,10 @@
   "search": {
     "description": "How to search Dialtone documentation effectively",
     "tips": [
-      "Search by CSS property names (e.g., 'padding-right', 'margin-bottom')",
-      "Search by class name patterns (e.g., 'pr2', 'mb4', 'd-flex')",
+      "Search by CSS property names: Dialtone utilities apply logical properties internally, so prefer logical names ('padding-block-start', 'margin-inline-end') over physical ('padding-top', 'margin-right'); physical queries surface noisy results",
+      "Search by class name patterns (e.g., 'pbs-200', 'mie-100', 'd-flex'). Logical abbrevs: pbs/pbe (block-start/end), pis/pie (inline-start/end). Legacy 'pt'/'pr' aliases still emit but apply logical properties under the hood",
       "Search by component names (e.g., 'DtButton', 'DtModal')",
+      "Search by component API — the search indexes prop names, slot names, and event names (e.g., 'startIcon' for a prop, 'header' for a slot, 'update:open' for an event)",
       "Search by design token names (e.g., 'space-200', 'color-primary')",
       "Use specific technical terms rather than natural language"
     ]

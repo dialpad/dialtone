@@ -16,7 +16,7 @@ keywords: ["brand colors","marketing colors","purple"]
         <p class="d-docsite--paragraph">For specialty brand communications use one of the Dialpad brand purples for backgrounds.</p>
       </div>
       <div class="d-gc2">
-        <svg-loader class="d-bar-500" name="color-marketing--01" />
+        <img src="/assets/images/color-marketing--01.png" alt="" class="d-bar-500 d-d-block d-w100p" />
       </div>
     </div>
   </div>
@@ -26,7 +26,7 @@ keywords: ["brand colors","marketing colors","purple"]
       <p class="d-docsite--paragraph">When creating attract and engage level communications, especially when using an increased amount of text, use the light background.</p>
     </div>
     <div class="d-gc2">
-      <svg-loader class="d-bar-500" name="color-marketing--02" />
+      <img src="/assets/images/color-marketing--02.png" alt="" class="d-bar-500 d-d-block d-w100p" />
     </div>
   </div>
 
@@ -37,20 +37,20 @@ keywords: ["brand colors","marketing colors","purple"]
       <p class="d-docsite--paragraph"><dt-link href="#">View Dialtone Icon</dt-link></p>
     </div>
     <div class="d-gc2">
-      <svg-loader class="d-bar-500" name="color-marketing--03" />
+      <img src="/assets/images/color-marketing--03.png" alt="" class="d-bar-500 d-d-block d-w100p" />
     </div>
   </div>
 
   <figure>
-    <svg-loader class="d-bar-500" name="color-marketing--04" />
+    <img src="/assets/images/color-marketing--04.png" alt="" class="d-bar-500 d-d-block d-w100p" />
   </figure>
 
   <div class="d-d-grid d-g-600 d-g-cols1 md:d-g-cols2 d-ai-center">
     <figure>
-      <svg-loader class="d-bar-500" name="color-marketing--05" />
+      <img src="/assets/images/color-marketing--05.png" alt="" class="d-bar-500 d-d-block d-w100p" />
     </figure>
     <figure>
-      <svg-loader class="d-bar-500" name="color-marketing--06" />
+      <img src="/assets/images/color-marketing--06.png" alt="" class="d-bar-500 d-d-block d-w100p" />
     </figure>
   </div>
 
