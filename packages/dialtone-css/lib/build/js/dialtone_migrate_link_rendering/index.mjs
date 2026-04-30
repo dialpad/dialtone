@@ -1,0 +1,1041 @@
+#!/usr/bin/env node
+/* eslint-disable max-lines */
+/* eslint-disable complexity */
+
+/**
+ * @fileoverview Migration script for DtLink and DtButton anchor / router-link rendering
+ * patterns plus DtLink underline prop.
+ *
+ * Covers:
+ *   DLT-3033  <a class="d-btn">                    -> <dt-button href="…">
+ *             <router-link class="d-btn" :to>      -> <dt-button :to="…">
+ *             d-btn--{size,kind,importance,…}      -> corresponding props
+ *
+ *   DLT-3034  <a class="d-link">                   -> <dt-link href="…">
+ *             <router-link class="d-link" :to>     -> <dt-link :to="…">
+ *             d-link--{tone}                       -> tone="…" (with rename)
+ *             d-link--no-underline                 -> :underline="false"
+ *
+ *   DLT-3035  <dt-link class="d-td-…">             -> closest :underline value
+ *             responsive d-td-* variants           -> warn (skip)
+ *
+ * Vue files only by default. `--include-markdown` opts into `.md` files.
+ *
+ * Usage:
+ *   npx dialtone-migrate-link-rendering [options]
+ *
+ * Options:
+ *   --cwd <path>          Working directory (default: cwd)
+ *   --dry-run             Show changes without applying them
+ *   --yes                 Apply all changes without prompting
+ *   --help                Show help
+ *   --only=<list>         Run only the named transforms; CSV of:
+ *                         button-nav, link-nav, underline (default: all)
+ *   --include-markdown    Also walk .md files (off by default)
+ */
+
+import fs from 'fs/promises';
+import { realpathSync } from 'node:fs';
+import path from 'path';
+import readline from 'readline';
+import { fileURLToPath } from 'node:url';
+
+// ---------------------------------------------------------------------------
+// Configuration
+// ---------------------------------------------------------------------------
+
+const TRANSFORM = Object.freeze({
+  BUTTON_NAV: 'button-nav',
+  LINK_NAV: 'link-nav',
+  UNDERLINE: 'underline',
+});
+
+const ALL_TRANSFORMS = Object.values(TRANSFORM);
+
+// Cheap precheck pattern. Skip the masking + transform sweeps only when the file
+// contains none of the tokens any of the three transforms or the warn-only paths
+// could possibly hit. `<router-link` / `<RouterLink` is included because the
+// custom-slot wrapper warning can fire even when the inner `<dt-button>` /
+// `<dt-link>` carries no legacy class.
+const FAST_PATH_RE = /d-btn|d-link|d-td-|<router-link|<RouterLink/;
+
+// Tag-name alternation that accepts both kebab-case and PascalCase Vue spellings.
+// The codemod always emits kebab-case output regardless of the source casing.
+const TAG_NAME_ALTERNATIONS = Object.freeze({
+  'a': 'a',
+  'router-link': '(?:router-link|RouterLink)',
+  'dt-link': '(?:dt-link|DtLink)',
+  'dt-button': '(?:dt-button|DtButton)',
+});
+
+function tagNamePattern (sourceTag) {
+  return TAG_NAME_ALTERNATIONS[sourceTag] || escapeRe(sourceTag);
+}
+
+// Quote-aware attribute body. Matches any sequence of characters that aren't
+// `>`/`"`/`'`, optionally followed by a fully-quoted attribute value. Handles
+// patterns like `:to="a > b ? x : y"` correctly by skipping `>` inside quotes.
+const QUOTE_AWARE_ATTRS = '(?:[^>"\']*(?:"[^"]*"|\'[^\']*\'))*[^>]*';
+
+// Tone modifier values (canonical and renamed-from forms)
+const TONE_MODIFIER_MAP = {
+  critical: 'critical',
+  danger: 'critical',     // rename
+  warning: 'warning',
+  positive: 'positive',
+  success: 'positive',    // rename
+  info: 'info',
+  muted: 'muted',
+  mention: 'mention',
+};
+
+// DtButton: kind modifiers (with d-btn--danger -> kind="critical" rename)
+const BUTTON_KIND_MODIFIER_MAP = {
+  muted: 'muted',
+  critical: 'critical',
+  danger: 'critical',     // rename
+  positive: 'positive',
+  success: 'positive',    // rename (defensive — unused in CSS but consumers may still write it)
+  inverted: 'inverted',
+  unstyled: 'unstyled',
+};
+
+// DtButton: importance modifiers
+const BUTTON_IMPORTANCE_MODIFIER_MAP = {
+  outlined: 'outlined',
+  // d-btn--primary is the default; stripped without emitting a prop
+};
+
+// DtButton: size modifiers (t-shirt classname -> numeric prop value)
+const BUTTON_SIZE_MODIFIER_MAP = {
+  xs: 100,
+  sm: 200,
+  // d-btn--md is the default; stripped without emitting a prop
+  lg: 400,
+  xl: 500,
+};
+
+// ---------------------------------------------------------------------------
+// Small utilities
+// ---------------------------------------------------------------------------
+
+function escapeRe (str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+/**
+ * Split a class attribute value into tokens, preserving order.
+ * Empty tokens are dropped.
+ */
+function splitClasses (classStr) {
+  return classStr.split(/\s+/).filter(Boolean);
+}
+
+function joinClasses (tokens) {
+  return tokens.join(' ');
+}
+
+/**
+ * Quote an attribute value, picking the quote style that doesn't conflict.
+ * Defaults to double quotes; falls back to single if value contains them.
+ */
+function quoteAttr (value) {
+  return value.includes('"') && !value.includes('\'')
+    ? `'${value}'`
+    : `"${value.replace(/"/g, '&quot;')}"`;
+}
+
+// ---------------------------------------------------------------------------
+// Class-string extractors
+//
+// Each extractor takes a tokens[] array, mutates it (removing matched tokens),
+// and returns the extracted value (or null if no match).
+// ---------------------------------------------------------------------------
+
+function extractSizeModifier (tokens) {
+  for (let i = 0; i < tokens.length; i++) {
+    const m = tokens[i].match(/^d-btn--(xs|sm|md|lg|xl)$/);
+    if (!m) continue;
+    tokens.splice(i, 1);
+    const tShirt = m[1];
+    if (tShirt === 'md') return null; // default — strip silently
+    return BUTTON_SIZE_MODIFIER_MAP[tShirt];
+  }
+  return null;
+}
+
+function extractImportanceModifier (tokens) {
+  for (let i = 0; i < tokens.length; i++) {
+    const m = tokens[i].match(/^d-btn--(outlined|primary)$/);
+    if (!m) continue;
+    tokens.splice(i, 1);
+    if (m[1] === 'primary') return null; // default — strip silently
+    return BUTTON_IMPORTANCE_MODIFIER_MAP[m[1]];
+  }
+  return null;
+}
+
+function extractKindModifier (tokens) {
+  for (let i = 0; i < tokens.length; i++) {
+    const m = tokens[i].match(/^d-btn--(muted|critical|danger|positive|success|inverted|unstyled)$/);
+    if (!m) continue;
+    tokens.splice(i, 1);
+    return BUTTON_KIND_MODIFIER_MAP[m[1]];
+  }
+  return null;
+}
+
+function extractCircleModifier (tokens) {
+  const i = tokens.indexOf('d-btn--circle');
+  if (i === -1) return false;
+  tokens.splice(i, 1);
+  return true;
+}
+
+function extractActiveLoadingModifiers (tokens) {
+  let active = false;
+  let loading = false;
+  for (let i = tokens.length - 1; i >= 0; i--) {
+    if (tokens[i] === 'd-btn--active') {
+      active = true;
+      tokens.splice(i, 1);
+    } else if (tokens[i] === 'd-btn--loading') {
+      loading = true;
+      tokens.splice(i, 1);
+    }
+  }
+  return { active, loading };
+}
+
+/**
+ * For DtLink: extract the tone modifier (d-link--{tone}) with renames applied.
+ * Skips inverted variants (handled by extractInvertedLinkModifier).
+ */
+function extractLinkToneModifier (tokens) {
+  for (let i = 0; i < tokens.length; i++) {
+    const t = tokens[i];
+    if (t.startsWith('d-link--inverted')) continue;
+    const m = t.match(/^d-link--(critical|danger|warning|positive|success|info|muted|mention)$/);
+    if (!m) continue;
+    tokens.splice(i, 1);
+    return TONE_MODIFIER_MAP[m[1]];
+  }
+  return null;
+}
+
+function extractNoUnderlineModifier (tokens) {
+  const i = tokens.indexOf('d-link--no-underline');
+  if (i === -1) return false;
+  tokens.splice(i, 1);
+  return true;
+}
+
+/**
+ * Detect inverted-* link modifiers. If a tone is bundled (`d-link--inverted-critical`),
+ * strip the class and return that tone. Otherwise (plain `d-link--inverted`), strip the
+ * class and return null. The caller emits a per-file note about v-dt-mode either way.
+ *
+ * Disabled-link modifiers (`d-link--disabled`, `d-link--inverted-disabled`) are LEFT
+ * in place — no prop equivalent, preserved on class.
+ */
+function extractInvertedLinkModifier (tokens) {
+  for (let i = 0; i < tokens.length; i++) {
+    const t = tokens[i];
+    if (t === 'd-link--inverted-disabled') return { found: false, tone: null };
+    if (t === 'd-link--inverted') {
+      tokens.splice(i, 1);
+      return { found: true, tone: null };
+    }
+    const m = t.match(/^d-link--inverted-(critical|danger|warning|positive|success|info|muted|mention)$/);
+    if (m) {
+      tokens.splice(i, 1);
+      return { found: true, tone: TONE_MODIFIER_MAP[m[1]] };
+    }
+  }
+  return { found: false, tone: null };
+}
+
+// ---------------------------------------------------------------------------
+// Attribute helpers (operate on the opening-tag string, between `<tag` and `>`)
+// ---------------------------------------------------------------------------
+
+
+function detectDynamicClass (attrs) {
+  return /(^|[\s])(:|v-bind:)class\s*=/.test(attrs);
+}
+
+// Memoized regex pairs per attribute name so per-tag calls don't recompile.
+const EXTRACT_ATTR_RE_CACHE = new Map();
+
+function extractAttrRegexes (attrName) {
+  let cached = EXTRACT_ATTR_RE_CACHE.get(attrName);
+  if (cached) return cached;
+  cached = {
+    dyn: new RegExp(`(?<=^|\\s)(:|v-bind:)${escapeRe(attrName)}=("([^"]*)"|'([^']*)')`),
+    stat: new RegExp(`(?<=^|\\s)${escapeRe(attrName)}=("([^"]*)"|'([^']*)')`),
+  };
+  EXTRACT_ATTR_RE_CACHE.set(attrName, cached);
+  return cached;
+}
+
+/**
+ * Extract a static or dynamic attribute from an attrs string.
+ * Returns { name, value, dynamic, before, after } or null.
+ */
+function extractAttr (attrs, attrName) {
+  const { dyn, stat } = extractAttrRegexes(attrName);
+  const dynMatch = attrs.match(dyn);
+  if (dynMatch) {
+    const value = dynMatch[3] !== undefined ? dynMatch[3] : dynMatch[4];
+    return {
+      name: attrName,
+      value,
+      dynamic: true,
+      before: attrs.slice(0, dynMatch.index),
+      after: attrs.slice(dynMatch.index + dynMatch[0].length),
+    };
+  }
+  const staticMatch = attrs.match(stat);
+  if (staticMatch) {
+    const value = staticMatch[2] !== undefined ? staticMatch[2] : staticMatch[3];
+    return {
+      name: attrName,
+      value,
+      dynamic: false,
+      before: attrs.slice(0, staticMatch.index),
+      after: attrs.slice(staticMatch.index + staticMatch[0].length),
+    };
+  }
+  return null;
+}
+
+/**
+ * Strip leading/trailing whitespace inside an attrs string while keeping
+ * a single leading space when non-empty (so `<dt-button href="...">` parses).
+ */
+function normalizeAttrs (attrs) {
+  // Trim only the outer separators. Don't collapse internal `\s+` because that
+  // also rewrites whitespace INSIDE quoted attribute values (e.g. `title="Hello   world"`
+  // would lose its spaces).
+  const trimmed = attrs.trim();
+  return trimmed ? ` ${trimmed}` : '';
+}
+
+// ---------------------------------------------------------------------------
+// Closing-tag matcher (depth-aware)
+// ---------------------------------------------------------------------------
+
+/**
+ * Given the source content and the start index of an opening tag with `tagName`,
+ * find the index of the matching closing `</tagName>` (depth-aware). Returns
+ * { closeStart, closeEnd } or null if unbalanced.
+ */
+// Memoized open/close regex pairs per tag name. Each call needs fresh
+// `lastIndex` state, so we clone with new RegExp() on lookup but reuse the
+// compiled pattern source string.
+const CLOSING_TAG_RE_CACHE = new Map();
+
+function findClosingTag (content, openEndIndex, tagName) {
+  let cached = CLOSING_TAG_RE_CACHE.get(tagName);
+  if (!cached) {
+    cached = {
+      // Quote-aware open pattern so `>` inside attribute values doesn't terminate the tag.
+      open: `<${tagNamePattern(tagName)}\\b${QUOTE_AWARE_ATTRS}>`,
+      // Closing tags can't have attributes; tag-name alternation handles PascalCase.
+      close: `</${tagNamePattern(tagName)}\\s*>`,
+    };
+    CLOSING_TAG_RE_CACHE.set(tagName, cached);
+  }
+  const openRe = new RegExp(cached.open, 'g');
+  const closeRe = new RegExp(cached.close, 'g');
+  openRe.lastIndex = openEndIndex;
+  closeRe.lastIndex = openEndIndex;
+
+  let depth = 1;
+  while (depth > 0) {
+    const nextOpen = openRe.exec(content);
+    const nextClose = closeRe.exec(content);
+    if (!nextClose) return null;
+    if (nextOpen && nextOpen.index < nextClose.index) {
+      depth += 1;
+      // self-closing elements don't actually open
+      if (nextOpen[0].endsWith('/>')) depth -= 1;
+      closeRe.lastIndex = nextOpen.index + nextOpen[0].length;
+      continue;
+    }
+    depth -= 1;
+    if (depth === 0) {
+      return {
+        closeStart: nextClose.index,
+        closeEnd: nextClose.index + nextClose[0].length,
+      };
+    }
+    openRe.lastIndex = nextClose.index + nextClose[0].length;
+  }
+  return null;
+}
+
+// ---------------------------------------------------------------------------
+// Navigation transforms (anchor / router-link → DtButton / DtLink)
+// ---------------------------------------------------------------------------
+
+// One ComponentConfig per target component. Holds the strings that vary
+// between the DtButton and DtLink rewrite paths so `buildRewrittenTag`
+// stays free of `targetTag === 'dt-button'` ternaries.
+const COMPONENT_CONFIGS = Object.freeze({
+  'dt-button': {
+    targetTag: 'dt-button',
+    baseClass: 'd-btn',
+    warningSourceLabel: 'a/router-link.d-btn',
+    extractModifiers: extractDtButtonModifiers,
+  },
+  'dt-link': {
+    targetTag: 'dt-link',
+    baseClass: 'd-link',
+    warningSourceLabel: 'a/router-link.d-link',
+    extractModifiers: extractDtLinkModifiers,
+  },
+});
+
+// Memoized `<sourceTag …class="…requiredClass…"…>` regexes. Keyed on
+// `${sourceTag}|${requiredClass}` so the four (sourceTag × requiredClass)
+// combinations the codemod uses are each compiled once.
+const OPEN_WITH_CLASS_RE_CACHE = new Map();
+
+function openWithClassRegex (sourceTag, requiredClass) {
+  const key = `${sourceTag}|${requiredClass}`;
+  let cached = OPEN_WITH_CLASS_RE_CACHE.get(key);
+  if (cached) return cached;
+  // The quote-aware skip on either side of `class=` prevents `>` inside other
+  // attribute values (`:to="a > b"`, `v-if="count > 0"`) from prematurely
+  // terminating the opening-tag span. The tag-name pattern accepts kebab-case
+  // and PascalCase spellings.
+  cached = new RegExp(
+    `<${tagNamePattern(sourceTag)}\\b(${QUOTE_AWARE_ATTRS}?)\\sclass=("([^"]*\\b${escapeRe(requiredClass)}\\b[^"]*)"|'([^']*\\b${escapeRe(requiredClass)}\\b[^']*)')(${QUOTE_AWARE_ATTRS}?)(/?)>`,
+    'g',
+  );
+  OPEN_WITH_CLASS_RE_CACHE.set(key, cached);
+  return cached;
+}
+
+function transformButtonNav (content, ctx) {
+  const config = COMPONENT_CONFIGS['dt-button'];
+  let out = rewriteAnchorOrRouterLink(content, 'a', config, ctx, /* isRouterLink */ false);
+  out = rewriteAnchorOrRouterLink(out, 'router-link', config, ctx, /* isRouterLink */ true);
+  warnRouterLinkCustomWrappers(out, config.targetTag, ctx);
+  return out;
+}
+
+/**
+ * Walk the content looking for `<sourceTag …>` opening tags whose static class attr
+ * contains `config.baseClass`. For each match, find the matching closing tag and rewrite
+ * the pair to `<config.targetTag …>…</config.targetTag>` with attrs derived from the source.
+ */
+function rewriteAnchorOrRouterLink (content, sourceTag, config, ctx, isRouterLink) {
+  const openWithClassRe = openWithClassRegex(sourceTag, config.baseClass);
+  // Re-init lastIndex since we cache the regex object across calls.
+  openWithClassRe.lastIndex = 0;
+
+  const replacements = [];
+  let m;
+  while ((m = openWithClassRe.exec(content)) !== null) {
+    const [fullOpen, attrsBefore, , quotedDouble, quotedSingle, attrsAfter, selfClose] = m;
+    const classValue = quotedDouble !== undefined ? quotedDouble : quotedSingle;
+    // The class regex uses `\b` which lets `d-btn` match inside `d-btn--lg`. Verify
+    // the base class is present as its own token before transforming, so files that
+    // only carry modifier-only classes (`d-btn--lg` without `d-btn`) are skipped.
+    if (!splitClasses(classValue).includes(config.baseClass)) continue;
+    const openStart = m.index;
+    const openEnd = openStart + fullOpen.length;
+
+    const restAttrs = `${attrsBefore || ''} ${attrsAfter || ''}`.trim();
+
+    if (selfClose === '/') {
+      const rewritten = buildRewrittenTag({
+        config, classValue, attrs: restAttrs, isRouterLink, selfClosing: true, ctx,
+      });
+      if (rewritten == null) continue;
+      replacements.push({ start: openStart, end: openEnd, text: rewritten });
+      continue;
+    }
+
+    const close = findClosingTag(content, openEnd, sourceTag);
+    if (!close) {
+      ctx.warnings.push(
+        `${ctx.filePath}: <${sourceTag} class="${classValue}"> has no matching </${sourceTag}> — skipped.`,
+      );
+      continue;
+    }
+
+    const rewritten = buildRewrittenTag({
+      config, classValue, attrs: restAttrs, isRouterLink, selfClosing: false, ctx,
+    });
+    if (rewritten == null) continue;
+
+    replacements.push({ start: openStart, end: openEnd, text: rewritten });
+    replacements.push({ start: close.closeStart, end: close.closeEnd, text: `</${config.targetTag}>` });
+  }
+
+  replacements.sort((a, b) => b.start - a.start);
+  let out = content;
+  for (const r of replacements) {
+    out = out.slice(0, r.start) + r.text + out.slice(r.end);
+  }
+  return out;
+}
+
+/**
+ * Build the rewritten opening tag. Returns null to abort the rewrite (with a warning).
+ */
+function buildRewrittenTag ({ config, classValue, attrs, isRouterLink, selfClosing, ctx }) {
+  if (detectDynamicClass(attrs)) {
+    ctx.warnings.push(
+      `${ctx.filePath}: <${config.warningSourceLabel}> with dynamic :class — manual review required.`,
+    );
+    return null;
+  }
+
+  let workingAttrs = attrs;
+  const tokens = splitClasses(classValue);
+  const newAttrs = [];
+
+  const baseIdx = tokens.indexOf(config.baseClass);
+  if (baseIdx !== -1) tokens.splice(baseIdx, 1);
+
+  if (isRouterLink) {
+    // <router-link custom> exposes vue-router internals via v-slot; rewriting it to
+    // <dt-button>/<dt-link> drops those slot semantics. Skip with a manual-review warning.
+    if (/(?:^|\s)custom(?=\s|=|\/|>|$)/.test(workingAttrs)) {
+      ctx.warnings.push(
+        `${ctx.filePath}: <router-link custom class="${classValue}"> — manual review required (custom + v-slot semantics don't transfer to <${config.targetTag}>).`,
+      );
+      return null;
+    }
+    const toAttr = extractAttr(workingAttrs, 'to');
+    if (toAttr) {
+      workingAttrs = (toAttr.before + ' ' + toAttr.after).trim();
+      const propName = toAttr.dynamic ? ':to' : 'to';
+      newAttrs.push(`${propName}=${quoteAttr(toAttr.value)}`);
+    } else {
+      ctx.warnings.push(
+        `${ctx.filePath}: <router-link class="${classValue}"> without a \`to\` attribute — skipped (likely already migrated or hand-authored).`,
+      );
+      return null;
+    }
+  } else {
+    // <a class="d-btn|d-link"> — lift href= and :href= the same way we lift to= /
+    // :to= on <router-link>. Dynamic bindings are 1:1 lifts; the consumer's
+    // expression evaluates identically on the resulting <dt-button> / <dt-link>.
+    const hrefAttr = extractAttr(workingAttrs, 'href');
+    if (hrefAttr) {
+      workingAttrs = (hrefAttr.before + ' ' + hrefAttr.after).trim();
+      const propName = hrefAttr.dynamic ? ':href' : 'href';
+      newAttrs.push(`${propName}=${quoteAttr(hrefAttr.value)}`);
+    }
+    // Anchors without href are technically invalid but we still rewrite so consumer sees the change
+  }
+
+  config.extractModifiers(tokens, newAttrs, ctx);
+
+  const remainingClass = joinClasses(tokens);
+  if (remainingClass) newAttrs.push(`class=${quoteAttr(remainingClass)}`);
+
+  const finalAttrs = normalizeAttrs(`${workingAttrs} ${newAttrs.join(' ')}`);
+  return `<${config.targetTag}${finalAttrs}${selfClosing ? ' />' : '>'}`;
+}
+
+function extractDtButtonModifiers (tokens, newAttrs) {
+  const size = extractSizeModifier(tokens);
+  if (size != null) newAttrs.push(`:size="${size}"`);
+
+  const importance = extractImportanceModifier(tokens);
+  if (importance != null) newAttrs.push(`importance="${importance}"`);
+
+  const kind = extractKindModifier(tokens);
+  if (kind != null) newAttrs.push(`kind="${kind}"`);
+
+  if (extractCircleModifier(tokens)) newAttrs.push('circle');
+
+  const { active, loading } = extractActiveLoadingModifiers(tokens);
+  if (active) newAttrs.push('active');
+  if (loading) newAttrs.push('loading');
+}
+
+function extractDtLinkModifiers (tokens, newAttrs, ctx) {
+  const inverted = extractInvertedLinkModifier(tokens);
+  let invertedTone = null;
+  if (inverted.found) {
+    invertedTone = inverted.tone;
+    ctx.notes.push({
+      kind: 'inverted-link',
+      message: `<dt-link> migrated from d-link--inverted; consider applying the v-dt-mode directive on a parent instead of the deprecated inverted styling.`,
+    });
+  }
+
+  const tone = invertedTone ?? extractLinkToneModifier(tokens);
+  if (tone != null) newAttrs.push(`tone="${tone}"`);
+
+  if (extractNoUnderlineModifier(tokens)) newAttrs.push(':underline="false"');
+}
+
+/**
+ * Walk the content and warn on `<router-link custom>` wrappers around `<targetTag>`.
+ * Doesn't transform — purely informational, per Q2 resolution.
+ */
+function warnRouterLinkCustomWrappers (content, targetTag, ctx) {
+  // Two-step: quote-aware capture of <router-link …> attrs, then test for bare
+  // `custom` attribute. Avoids false-matching `attr="something custom"`.
+  // The body search is scoped to the matching </router-link> so a target tag
+  // that appears later in the file (outside this wrapper) doesn't false-fire.
+  const openRe = new RegExp(`<${tagNamePattern('router-link')}\\b(${QUOTE_AWARE_ATTRS}?)>`, 'g');
+  const targetRe = new RegExp(`<${tagNamePattern(targetTag)}\\b`);
+  let m;
+  while ((m = openRe.exec(content)) !== null) {
+    if (!/(?:^|\s)custom(?=\s|=|\/|>|$)/.test(m[1])) continue;
+    const close = findClosingTag(content, m.index + m[0].length, 'router-link');
+    if (!close) continue;
+    const body = content.slice(m.index + m[0].length, close.closeStart);
+    if (!targetRe.test(body)) continue;
+    ctx.warnings.push(
+      `${ctx.filePath}: <router-link custom> wrapping <${targetTag}> — manual review required (lift the to= onto <${targetTag}> directly).`,
+    );
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Stubs for V2 / V3 transforms — filled in subsequent slices
+// ---------------------------------------------------------------------------
+
+function transformLinkNav (content, ctx) {
+  const config = COMPONENT_CONFIGS['dt-link'];
+  let out = rewriteAnchorOrRouterLink(content, 'a', config, ctx, false);
+  out = rewriteAnchorOrRouterLink(out, 'router-link', config, ctx, true);
+  warnRouterLinkCustomWrappers(out, config.targetTag, ctx);
+  return out;
+}
+
+// ---------------------------------------------------------------------------
+// Underline transform (d-td-* utility classes on <dt-link> → underline prop)
+// ---------------------------------------------------------------------------
+
+const D_TD_RECOGNIZED_TOKEN_RE = /^(?:h:)?d-td-(none|underline)$/;
+const D_TD_ANY_TOKEN_RE = /(?:^|\s)([\w:]+:)?d-td-[\w-]+/;
+
+/**
+ * Map rest+hover state to a prop emission decision.
+ * Returns { propValue, hoverDelta } where:
+ *   - propValue is 'true' (default — strip classes), 'false' (set :underline="false"),
+ *     or null (no change to the prop)
+ *   - hoverDelta indicates whether the closest mapping changes hover behavior vs the original
+ */
+function mapDtdToUnderline (rest, hover) {
+  // Default DtLink behavior: rest=underline, hover=none
+  // d-link--no-underline (underline=false): rest=none, hover=underline
+  if (rest === 'underline' && hover === 'none') return { propValue: null, hoverDelta: false };
+  if (rest === 'none' && hover === 'underline') return { propValue: 'false', hoverDelta: false };
+  // "alone" / "both-same" cases — closest mapping with hover delta
+  if (rest === 'none' && hover === 'none') return { propValue: 'false', hoverDelta: true };
+  if (rest === 'underline' && hover === 'underline') return { propValue: null, hoverDelta: true };
+  return { propValue: null, hoverDelta: false };
+}
+
+function transformUnderline (content, ctx) {
+  // Match <dt-link …> / <DtLink …> opening tags including self-closing variants.
+  // Quote-aware so `>` in attribute values doesn't terminate the span early.
+  // Capture group 1 is the actual tag name so we preserve casing in output
+  // (matters because we don't rewrite the closing tag for non-self-closing forms).
+  const re = new RegExp(`<(${tagNamePattern('dt-link')})\\b(${QUOTE_AWARE_ATTRS}?)>`, 'g');
+  return content.replace(re, (fullTag, matchedTagName, rawAttrs) => {
+    let attrs = rawAttrs || '';
+
+    // Detect and strip a trailing `/` so we can re-emit the self-closing form
+    // (otherwise `<dt-link class="d-td-none" />` would lose its `/` and become
+    // a non-self-closing tag in the output).
+    const isSelfClosing = /\s*\/\s*$/.test(attrs);
+    if (isSelfClosing) attrs = attrs.replace(/\s*\/\s*$/, '');
+    const closer = isSelfClosing ? ' />' : '>';
+
+    // Skip if :underline is already set (idempotency)
+    if (/(^|\s)(:|v-bind:)?underline\s*=/.test(attrs)) return fullTag;
+
+    // Check dynamic :class first — even when a static class is also present,
+    // a `:class` containing d-td-* is a manual-review case (we can't merge
+    // expressions safely or invert hover behavior across runtime conditions).
+    const dynClassMatch = attrs.match(/(?:^|\s)(?::|v-bind:)class=("([^"]*)"|'([^']*)')/);
+    if (dynClassMatch) {
+      const expr = dynClassMatch[2] !== undefined ? dynClassMatch[2] : dynClassMatch[3];
+      if (/d-td-/.test(expr)) {
+        ctx.warnings.push(
+          `${ctx.filePath}: <dt-link :class="${expr}"> contains d-td-* in a dynamic binding — manual review required.`,
+        );
+        return fullTag;
+      }
+    }
+
+    // Need a static class= with d-td-* tokens to do anything
+    const classMatch = attrs.match(/(?<![:\w-])class=("([^"]*)"|'([^']*)')/);
+    if (!classMatch) return fullTag;
+
+    const classValue = classMatch[2] !== undefined ? classMatch[2] : classMatch[3];
+    if (!D_TD_ANY_TOKEN_RE.test(' ' + classValue)) return fullTag;
+
+    const tokens = classValue.split(/\s+/).filter(Boolean);
+
+    // Detect unsupported variants (responsive prefix like sm:d-td-*, focus f:d-td-*, etc.)
+    const unsupported = tokens.filter(t => /^(?:[\w-]+:)?d-td-/.test(t) && !D_TD_RECOGNIZED_TOKEN_RE.test(t));
+    if (unsupported.length > 0) {
+      ctx.warnings.push(
+        `${ctx.filePath}: <dt-link class="${classValue}"> has responsive or unsupported d-td-* variant(s) (${unsupported.join(', ')}) — skipped.`,
+      );
+      return fullTag;
+    }
+
+    // Compute effective rest/hover state.
+    // Bare `d-td-*` is `text-decoration: <value> !important` and applies in BOTH rest and hover
+    // because there's no :hover qualifier on the rule. An explicit `h:d-td-*` overrides hover only.
+    let restOverride = null;
+    let hoverOverride = null;
+    const remaining = [];
+    for (const token of tokens) {
+      const m = token.match(D_TD_RECOGNIZED_TOKEN_RE);
+      if (!m) {
+        remaining.push(token);
+        continue;
+      }
+      const isHover = token.startsWith('h:');
+      const value = m[1]; // 'none' or 'underline'
+      if (isHover) hoverOverride = value;
+      else restOverride = value;
+    }
+    const rest = restOverride ?? 'underline'; // DtLink default rest
+    // Hover precedence: explicit h:d-td-* > bare d-td-* (!important applies on hover too) > default
+    const hover = hoverOverride ?? restOverride ?? 'none';
+
+    const { propValue, hoverDelta } = mapDtdToUnderline(rest, hover);
+
+    // Build new class attribute
+    const newClassValue = remaining.join(' ');
+    let newAttrs = attrs.replace(classMatch[0], '').trim();
+    if (newClassValue) newAttrs += ` class=${quoteAttr(newClassValue)}`;
+    if (propValue === 'false') newAttrs += ' :underline="false"';
+
+    if (hoverDelta) {
+      ctx.notes.push({
+        kind: 'underline-hover-delta',
+        message: '<dt-link>: hover behavior may differ from the original d-td-* classes; review if hover styling matters.',
+      });
+    }
+
+    return `<${matchedTagName}${newAttrs ? ' ' + newAttrs : ''}${closer}`;
+  });
+}
+
+// ---------------------------------------------------------------------------
+// Top-level transform entry point
+// ---------------------------------------------------------------------------
+
+/**
+ * Mask HTML comments so the transformers don't match tags written as documentation
+ * inside `<!-- … -->` blocks (e.g. fixture/example files).
+ */
+function maskInertContent (content, filePath = '') {
+  const isMarkdown = filePath.endsWith('.md');
+  const innerRe = isMarkdown
+    ? /<!--[\s\S]*?-->|```[\s\S]*?```|`[^`\n]*`/g
+    : /<!--[\s\S]*?-->|<script\b[^>]*>[\s\S]*?<\/script>|<style\b[^>]*>[\s\S]*?<\/style>/g;
+  const segments = [];
+  const masked = content.replace(innerRe, (match) => {
+    const placeholder = ` DT_MIGRATE_INERT_${segments.length} `;
+    segments.push(match);
+    return placeholder;
+  });
+  return { masked, segments };
+}
+
+function unmaskInertContent (masked, segments) {
+  return masked.replace(/ DT_MIGRATE_INERT_(\d+) /g, (_, idx) => segments[Number(idx)]);
+}
+
+
+/**
+ * Transform a file's contents. Returns { transformed, warnings, notes }.
+ */
+export function transformContent (content, opts = {}) {
+  const ctx = {
+    filePath: opts.filePath || '<input>',
+    warnings: [],
+    notes: [],
+  };
+
+  // Fast path: most consumer files contain none of the relevant tokens. Skip
+  // masking and three regex sweeps when the cheap precheck rules them out.
+  if (!FAST_PATH_RE.test(content)) {
+    return { transformed: content, warnings: ctx.warnings, notes: ctx.notes };
+  }
+
+  const enabled = opts.only && opts.only.length > 0 ? new Set(opts.only) : new Set(ALL_TRANSFORMS);
+  const { masked, segments } = maskInertContent(content, ctx.filePath);
+  let out = masked;
+  if (enabled.has(TRANSFORM.BUTTON_NAV)) out = transformButtonNav(out, ctx);
+  if (enabled.has(TRANSFORM.LINK_NAV)) out = transformLinkNav(out, ctx);
+  if (enabled.has(TRANSFORM.UNDERLINE)) out = transformUnderline(out, ctx);
+
+  return { transformed: unmaskInertContent(out, segments), warnings: ctx.warnings, notes: ctx.notes };
+}
+
+// ---------------------------------------------------------------------------
+// File walker
+// ---------------------------------------------------------------------------
+
+/**
+ * Match an ignore token against a path. Single-segment tokens (e.g. `node_modules`,
+ * `dist`) match by exact directory segment so `src/distance/` is not excluded by `dist`.
+ * Multi-segment tokens (e.g. `.vuepress/public`) match as a contiguous segment run.
+ */
+function isIgnoredPath (fullPath, ignore) {
+  const segments = fullPath.split(path.sep);
+  return ignore.some(ig => {
+    if (ig.includes('/')) {
+      const parts = ig.split('/');
+      for (let i = 0; i + parts.length <= segments.length; i++) {
+        if (parts.every((p, j) => segments[i + j] === p)) return true;
+      }
+      return false;
+    }
+    return segments.includes(ig);
+  });
+}
+
+async function findFiles (dir, extensions, ignore = []) {
+  const results = [];
+  async function walk (currentDir) {
+    let entries;
+    try {
+      entries = await fs.readdir(currentDir, { withFileTypes: true });
+    } catch {
+      return;
+    }
+    for (const entry of entries) {
+      const fullPath = path.join(currentDir, entry.name);
+      if (isIgnoredPath(fullPath, ignore)) continue;
+      if (entry.isDirectory()) {
+        await walk(fullPath);
+      } else if (entry.isFile() && extensions.some(ext => entry.name.endsWith(ext))) {
+        results.push(fullPath);
+      }
+    }
+  }
+  await walk(dir);
+  return results;
+}
+
+// ---------------------------------------------------------------------------
+// CLI plumbing
+// ---------------------------------------------------------------------------
+
+function printHelp () {
+  console.log(`
+Usage: npx dialtone-migrate-link-rendering [options]
+
+Migrates legacy anchor / router-link patterns to <dt-button> and <dt-link>, plus
+DtLink \`d-td-*\` utility classes to the \`underline\` prop.
+
+Covers:
+  DLT-3033  <a class="d-btn">                    -> <dt-button href="…">
+            <router-link class="d-btn" :to>      -> <dt-button :to="…">
+            d-btn--{xs,sm,lg,xl}                 -> :size="{100,200,400,500}"
+            d-btn--outlined                      -> importance="outlined"
+            d-btn--{muted,critical,positive,…}   -> kind="…" (with renames)
+            d-btn--{circle,active,loading}       -> bare boolean attrs
+
+  DLT-3034  <a class="d-link">                   -> <dt-link href="…">
+            <router-link class="d-link" :to>     -> <dt-link :to="…">
+            d-link--{tone}                       -> tone="…" (with renames
+                                                    danger->critical, success->positive)
+            d-link--no-underline                 -> :underline="false"
+            d-link--inverted*                    -> per-file note nudging toward v-dt-mode
+
+  DLT-3035  <dt-link class="d-td-…">             -> closest :underline value
+                                                    (per-file note when hover delta exists)
+
+Vendor classes (d-btn--brand, etc.) and BEM internals (d-btn__icon, etc.) are
+preserved on the resulting tag's class attribute, not warned.
+
+Vue files only by default. Use --include-markdown to also walk .md files.
+
+Options:
+  --cwd <path>          Working directory (default: cwd)
+  --dry-run             Show changes without applying them
+  --yes                 Apply all changes without prompting
+  --help                Show help
+  --only=<list>         Run only the named transforms; CSV of:
+                        button-nav, link-nav, underline
+  --include-markdown    Also walk .md files
+
+Examples:
+  npx dialtone-migrate-link-rendering
+  npx dialtone-migrate-link-rendering --dry-run
+  npx dialtone-migrate-link-rendering --cwd ./src
+  npx dialtone-migrate-link-rendering --only=button-nav,link-nav
+`);
+}
+
+function parseArgs (args) {
+  const cwdIndex = args.indexOf('--cwd');
+  const onlyArg = args.find(a => a.startsWith('--only='));
+  return {
+    help: args.includes('--help'),
+    dryRun: args.includes('--dry-run'),
+    autoYes: args.includes('--yes'),
+    includeMarkdown: args.includes('--include-markdown'),
+    cwd: cwdIndex !== -1 && args[cwdIndex + 1]
+      ? path.resolve(args[cwdIndex + 1])
+      : process.cwd(),
+    only: onlyArg ? onlyArg.slice('--only='.length).split(',').map(s => s.trim()).filter(Boolean) : [],
+  };
+}
+
+async function prompt (question) {
+  const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+  return new Promise(resolve => {
+    rl.question(question, answer => {
+      rl.close();
+      resolve(answer.trim().toLowerCase());
+    });
+  });
+}
+
+async function scanFiles (cwd, includeMarkdown, only) {
+  const extensions = ['.vue'];
+  if (includeMarkdown) extensions.push('.md');
+  const ignore = ['node_modules', 'dist', '.git', '.vuepress/public', '.vuepress/.temp', '.vuepress/.cache'];
+  const files = await findFiles(cwd, extensions, ignore);
+
+  const changes = [];
+  const allWarnings = [];
+  const allNotes = []; // grouped per file
+
+  for (const file of files) {
+    const content = await fs.readFile(file, 'utf8');
+    const { transformed, warnings, notes } = transformContent(content, {
+      only,
+      filePath: path.relative(cwd, file),
+    });
+    if (transformed !== content) {
+      changes.push({ file, content, transformed });
+    }
+    if (warnings.length) allWarnings.push(...warnings);
+    if (notes.length) {
+      allNotes.push({
+        file: path.relative(cwd, file),
+        notes,
+      });
+    }
+  }
+
+  return { changes, allWarnings, allNotes };
+}
+
+async function applyChanges (changes, autoYes) {
+  if (!autoYes) {
+    const answer = await prompt('\nApply changes? (y/N) ');
+    if (answer !== 'y' && answer !== 'yes') {
+      console.log('Cancelled.');
+      return false;
+    }
+  }
+  for (const { file, transformed } of changes) {
+    await fs.writeFile(file, transformed, 'utf8');
+  }
+  return true;
+}
+
+function printWarnings (warnings) {
+  if (!warnings.length) return;
+  console.log('\nWarnings — manual action required:\n');
+  for (const w of warnings) console.log(`  ${w}`);
+  console.log();
+}
+
+function printNotes (notesByFile) {
+  if (!notesByFile.length) return;
+  console.log('\nNotes — informational:\n');
+  for (const { file, notes } of notesByFile) {
+    // Group same-message notes per file into a single line with a count
+    const counts = new Map();
+    for (const n of notes) {
+      counts.set(n.message, (counts.get(n.message) || 0) + 1);
+    }
+    for (const [message, count] of counts) {
+      const prefix = count > 1 ? `${count}× ` : '';
+      console.log(`  ${file}: ${prefix}${message}`);
+    }
+  }
+  console.log();
+}
+
+function printChangeSummary (changes, cwd) {
+  console.log(`\nFound changes in ${changes.length} file(s):\n`);
+  for (const { file } of changes) {
+    console.log(`  ${path.relative(cwd, file)}`);
+  }
+}
+
+async function main () {
+  const opts = parseArgs(process.argv.slice(2));
+  if (opts.help) {
+    printHelp();
+    process.exit(0);
+  }
+
+  // Validate --only list
+  if (opts.only.length) {
+    const invalid = opts.only.filter(t => !ALL_TRANSFORMS.includes(t));
+    if (invalid.length) {
+      console.error(`Unknown transform(s) in --only: ${invalid.join(', ')}`);
+      console.error(`Valid transforms: ${ALL_TRANSFORMS.join(', ')}`);
+      process.exit(2);
+    }
+  }
+
+  console.log(`\nScanning ${opts.cwd} for legacy link/button patterns...`);
+  if (opts.includeMarkdown) console.log('(including .md files)');
+  if (opts.only.length) console.log(`(only: ${opts.only.join(', ')})`);
+
+  const { changes, allWarnings, allNotes } = await scanFiles(opts.cwd, opts.includeMarkdown, opts.only);
+
+  printWarnings(allWarnings);
+  printNotes(allNotes);
+
+  if (changes.length === 0) {
+    console.log(allWarnings.length || allNotes.length
+      ? 'No automated code changes needed. See manual action items / notes above.'
+      : 'No matching usage found. Nothing to migrate.');
+    process.exit(0);
+  }
+
+  printChangeSummary(changes, opts.cwd);
+
+  if (opts.dryRun) {
+    console.log(`\n--dry-run: No files were modified.`);
+    process.exit(0);
+  }
+
+  const applied = await applyChanges(changes, opts.autoYes);
+  if (applied) console.log(`\nMigrated ${changes.length} file(s).\n`);
+}
+
+const isDirectRun = (() => {
+  try {
+    return realpathSync(process.argv[1]) === fileURLToPath(import.meta.url);
+  } catch {
+    return false;
+  }
+})();
+
+if (isDirectRun) {
+  main().catch(err => {
+    console.error(err);
+    process.exit(1);
+  });
+}

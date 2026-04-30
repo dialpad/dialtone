@@ -256,6 +256,10 @@
                     "link": "/guides/migration/flex-to-stack/"
                   },
                   {
+                    "text": "Link and Button Navigation",
+                    "link": "/guides/migration/link-and-button-navigation/"
+                  },
+                  {
                     "text": "Component Sizes",
                     "link": "/guides/migration/component-sizes/"
                   },
