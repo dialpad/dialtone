@@ -788,7 +788,19 @@ export default {
                 const { $from } = state.selection;
 
                 if ($from.parent.type === codeBlockType) {
-                  return commands.setNode('paragraph');
+                  const paragraphType = state.schema.nodes.paragraph;
+                  const lines = $from.parent.textContent.split('\n');
+                  const codeBlockPos = $from.before();
+                  const codeBlockNode = $from.parent;
+                  return chain()
+                    .command(({ tr }) => {
+                      const paragraphs = lines.map(line =>
+                        paragraphType.create({}, line ? [state.schema.text(line)] : []),
+                      );
+                      tr.replaceWith(codeBlockPos, codeBlockPos + codeBlockNode.nodeSize, paragraphs);
+                      return true;
+                    })
+                    .run();
                 }
 
                 const { from, to } = state.selection;
