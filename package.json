@@ -57,22 +57,22 @@
       "require": "./dist/tokens/postcss/*.cjs"
     },
     "./vue": {
-      "types": "./dist/vue3/types/index.d.ts",
+      "types": "./dist/vue3/index.d.ts",
       "import": "./dist/vue3/dialtone-vue.js",
       "require": "./dist/vue3/dialtone-vue.cjs"
     },
     "./vue/lib/*": {
-      "types": "./dist/vue3/types/index.d.ts",
+      "types": "./dist/vue3/index.d.ts",
       "import": "./dist/vue3/lib/*/index.js",
       "require": "./dist/vue3/lib/*/index.cjs"
     },
     "./vue3": {
-      "types": "./dist/vue3/types/index.d.ts",
+      "types": "./dist/vue3/index.d.ts",
       "import": "./dist/vue3/dialtone-vue.js",
       "require": "./dist/vue3/dialtone-vue.cjs"
     },
     "./vue3/lib/*": {
-      "types": "./dist/vue3/types/index.d.ts",
+      "types": "./dist/vue3/index.d.ts",
       "import": "./dist/vue3/lib/*/index.js",
       "require": "./dist/vue3/lib/*/index.cjs"
     },
