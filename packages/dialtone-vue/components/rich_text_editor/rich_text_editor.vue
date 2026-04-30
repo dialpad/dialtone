@@ -806,7 +806,7 @@ export default {
                 const { from, to } = state.selection;
                 const blocks = [];
                 state.doc.nodesBetween(from, to, (node, pos) => {
-                  if (node.isTextblock && node.type !== codeBlockType) {
+                  if (node.isTextblock) {
                     blocks.push({ node, pos });
                     return false;
                   }

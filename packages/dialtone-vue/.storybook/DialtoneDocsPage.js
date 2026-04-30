@@ -19,6 +19,7 @@ function DialtoneDocumentationLink() {
     React.createElement('a', {
       href: `https://dialtone.dialpad.com/components/${slug}.html`,
       target: '_blank',
+      rel: 'noopener noreferrer',
     }, 'Dialtone documentation ↗'),
   );
 }
