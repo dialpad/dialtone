@@ -712,6 +712,12 @@ export default {
   },
 
   beforeUnmount () {
+    this._isUnmounting = true;
+    // Cancel any in-progress CSS transitions so transitionend cannot fire
+    // after this component is torn down and call into dead lifecycle methods.
+    if (this.popoverContentEl) {
+      this.popoverContentEl.style.transition = 'none';
+    }
     this.tip?.destroy();
     this.intersectionObserver?.disconnect();
     this.mutationObserver?.disconnect();
@@ -904,6 +910,7 @@ export default {
     },
 
     async onLeaveTransitionComplete () {
+      if (this._isUnmounting) return;
       if (this.modal) {
         await this.focusFirstElement(this.$refs.anchor);
         // await next tick in case the user wants to change focus themselves.
@@ -918,6 +925,7 @@ export default {
     },
 
     async onEnterTransitionComplete () {
+      if (this._isUnmounting) return;
       this.focusInitialElement();
       // await next tick in case the user wants to change focus themselves.
       await this.$nextTick();
