@@ -305,6 +305,26 @@ describe('DtPopover Tests', () => {
     });
   });
 
+  describe('When component is unmounting', () => {
+    it('sets transition: none on content element to cancel in-flight transitions', () => {
+      const contentEl = wrapper.vm.popoverContentEl;
+      wrapper.unmount();
+      expect(contentEl.style.transition).toBe('none');
+    });
+
+    it('does not emit "opened" when leave transition completes', async () => {
+      wrapper.vm._isUnmounting = true;
+      await wrapper.vm.onLeaveTransitionComplete();
+      expect(wrapper.emitted('opened')).toBeUndefined();
+    });
+
+    it('does not emit "opened" when enter transition completes', async () => {
+      wrapper.vm._isUnmounting = true;
+      await wrapper.vm.onEnterTransitionComplete();
+      expect(wrapper.emitted('opened')).toBeUndefined();
+    });
+  });
+
   describe('When anchor slot content changes', () => {
     it('should attach the tippy instance to the new DOM node', async () => {
       const component = {
