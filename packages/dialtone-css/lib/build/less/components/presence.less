@@ -17,6 +17,8 @@
   --presence-border-radius: calc(var(--presence-size) * 0.208);
   --presence-border-inner-width: calc(calc(var(--presence-size) - calc(var(--presence-size) * 0.556)) / 2);
   --presence-size: var(--dt-spacing-150);
+  --presence-icon-size: var(--dt-layout-100-percent);
+  --presence-icon-color: var(--dt-color-foreground-primary-inverted);
 
   display: inline-block;
 
@@ -52,6 +54,14 @@
       border-style: solid;
       border-width: var(--presence-border-inner-width);
     }
+  }
+
+  &__icon {
+    display: block;
+    color: var(--presence-icon-color);
+    // filter: grayscale(1) invert(1);
+    block-size: var(--presence-icon-size);
+    inline-size: var(--presence-icon-size);
   }
 }
 }
