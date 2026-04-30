@@ -972,8 +972,11 @@ export default {
 
           // Moves the <br /> tags inside the previous closing tag to avoid
           // Prosemirror wrapping them within another </p> tag.
+          // Converts <hr> to an empty paragraph so it pastes as a line separator.
           transformPastedHTML (html) {
-            return html.replace(/(<\/\w+>)((<br \/>)+)/g, '$2$3$1');
+            return html
+              .replace(/<hr[^>]*\/?>/gi, '<p><br></p>')
+              .replace(/(<\/\w+>)((<br \/>)+)/g, '$2$3$1');
           },
         },
       });
