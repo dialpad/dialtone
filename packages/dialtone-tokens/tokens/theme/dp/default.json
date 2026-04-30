@@ -560,18 +560,17 @@
         "description": "Success surface as opaque background color."
       },
       "success-opaque": {
-        "value": "{color.green.300}",
+        "value": "{color.green.400}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".24",
+              "value": ".25",
               "space": "oklch"
             }
           }
         },
-        "$deprecated": "Use positive-opaque instead.",
         "description": "Success surface as opaque background color."
       },
       "info-opaque": {
