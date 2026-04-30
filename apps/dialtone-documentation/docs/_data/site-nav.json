@@ -248,8 +248,16 @@
                     "link": "/guides/migration/layout-and-spacing-tokens/"
                   },
                   {
+                    "text": "Success to Positive",
+                    "link": "/guides/migration/success-to-positive/"
+                  },
+                  {
                     "text": "Flex to DtStack",
                     "link": "/guides/migration/flex-to-stack/"
+                  },
+                  {
+                    "text": "Link and Button Navigation",
+                    "link": "/guides/migration/link-and-button-navigation/"
                   },
                   {
                     "text": "Component Sizes",
@@ -461,7 +469,7 @@
                 "link": "/components/loader.html"
               },
               {
-                "text": "Mode Island",
+                "text": "Mode",
                 "link": "/components/mode-island.html"
               },
               {

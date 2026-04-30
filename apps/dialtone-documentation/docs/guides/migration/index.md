@@ -12,7 +12,7 @@ This guide walks you through every breaking and deprecation change in the upcomi
 
 Work through each applicable guide in order. Guides earlier in the list are prerequisites for later ones (e.g. color stop renames before base-to-semantic).
 
-### CSS & Tokens
+### CSS and Design Tokens
 
 | # | Guide | Breaking? | Tool | Summary |
 | --- | --- | --- | --- | --- |
@@ -20,24 +20,26 @@ Work through each applicable guide in order. Guides earlier in the list are prer
 | 2 | [Color Stops](./color-stops/) | **Yes** | `dialtone-migration-helper` | Base color ramps standardized to a 12-stop scale. Old stops removed. |
 | 3 | [HSL to OKLCH](./hsl-to-oklch/) | **Yes** | `dialtone-migration-helper` | Color tokens moved from HSL to OKLCH. Per-channel breakout variables removed (~3,200 CSS vars). |
 | 4 | [Base to Semantic Colors](./color-stops/#adopting-semantic-color-tokens) | Deprecation | `dialtone-migration-helper` | Upgrade base color utilities/tokens to theme-aware semantic equivalents. |
-| 5 | [Layout & Spacing Tokens](./layout-and-spacing-tokens/) | **Yes** | `dialtone-migration-helper` | `--dt-size-*` → `--dt-layout-*`, `--dt-space-*` → `--dt-spacing-*`. |
+| 5 | [Layout & Spacing Tokens](./layout-and-spacing-tokens/) | **Yes** | `dialtone-migration-helper` | `--dt-size-*` becomes `--dt-layout-*`, `--dt-space-*` becomes `--dt-spacing-*`. |
+| 6 | [Success to Positive](./success-to-positive/) | Deprecation | `dialtone-migration-helper` | `success*` design tokens and `d-fc-success*` / `d-bgc-success*` / `d-bc-success*` utility classes deprecated in favor of `positive*`. Includes ESLint and Stylelint rules. |
 
 ### Components
 
 | # | Guide | Breaking? | Tool | Summary |
 | --- | --- | --- | --- | --- |
-| 6 | [Flex to DtStack](./flex-to-stack/) | Deprecation | `dialtone-migrate-flex-to-stack` | Replace `d-d-flex` utilities with the `<dt-stack>` component. |
-| 7 | [Component Sizes to Numeric](./component-sizes/) | Deprecation | ESLint + `dialtone-migrate-tshirt-to-numeric` | `size="sm"` → `:size="200"` across all components. |
-| 8 | [Avatar Updates](./avatar-updates/) | **Yes** | Manual (grep) | `DtAvatar` size prop moves to numeric, `iconSize` removed, group avatar behavior changed. |
-| 9 | [Logical Naming](./logical-naming/) | Deprecation | `dialtone-migration-helper` | Slots, props, events: `left`/`right` → `start`/`end`. |
-| 10 | [Recipes to UI Kits](./recipes-to-ui-kits/) | **Yes** | Migration script | `DtRecipe*` components move to standalone `@dialpad/` UI Kit packages. |
-| 11 | [Component Props & Events](./component-props/) | **Yes** | `dialtone-migrate-props` | Value renames, `show`→`open`, `hide-*` inversion, `title`→`header-text`, event/slot renames, `rootClass` removal. |
+| 7 | [Flex to DtStack](./flex-to-stack/) | Deprecation | `dialtone-migrate-flex-to-stack` | Replace `d-d-flex` utilities with the `<dt-stack>` component. |
+| 8 | [Link and Button Navigation](./link-and-button-navigation/) | Deprecation | `dialtone-migrate-link-rendering` | DtButton and DtLink gain `to`/`href` props; `<a class="d-btn">` and `<router-link class="d-link">` workarounds replaced with components. DtLink `d-td-*` classes replaced by the `:underline` prop. |
+| 9 | [Component Sizes to Numeric](./component-sizes/) | Deprecation | ESLint + `dialtone-migrate-tshirt-to-numeric` | `size="sm"` becomes `:size="200"` across all components. |
+| 10 | [Avatar Updates](./avatar-updates/) | **Yes** | Manual (grep) | `DtAvatar` size prop moves to numeric, `iconSize` removed, group avatar behavior changed. |
+| 11 | [Logical Naming](./logical-naming/) | Deprecation | `dialtone-migration-helper` | Slots, props, events: `left`/`right` becomes `start`/`end`. |
+| 12 | [Recipes to UI Kits](./recipes-to-ui-kits/) | **Yes** | Migration script | `DtRecipe*` components move to standalone `@dialpad/` UI Kit packages. |
+| 13 | [Component Props & Events](./component-props/) | **Yes** | `dialtone-migrate-props` | Value renames (including DtBox `surface`/`bc`, DtText `tone-strong`, DtButton `link-kind`), `show` becomes `open`, `hide-*` inversion, `title` becomes `header-text`, event/slot renames, `rootClass` removal. |
 
 ### Framework
 
 | # | Guide | Breaking? | Tool | Summary |
 | --- | --- | --- | --- | --- |
-| 12 | [Vue 2 Removal](./vue2-removal/) | **Yes** | — | Vue 2 support dropped. Last Vue 2 version: `9.154.0`. |
+| 14 | [Vue 2 Removal](./vue2-removal/) | **Yes** | — | Vue 2 support dropped. Last Vue 2 version: `9.154.0`. |
 
 ## Quick Start
 
@@ -64,20 +66,27 @@ npx dialtone-migration-helper --cwd ./src
 npx dialtone-migration-helper --cwd ./src
 # Select "size-to-layout"
 
-# 6. Flex to Stack
+# 6. Success to positive (tokens + utility classes)
+npx dialtone-migration-helper --cwd ./src
+# Select "success-to-positive"
+
+# 7. Flex to Stack
 npx dialtone-migrate-flex-to-stack --cwd ./src
 
-# 7. T-shirt sizes to numeric
+# 8. Link and Button navigation (anchor/router-link to DtButton/DtLink)
+npx dialtone-migrate-link-rendering --cwd ./src
+
+# 9. T-shirt sizes to numeric
 npx dialtone-migrate-tshirt-to-numeric --cwd ./src
 
-# 8. Physical to logical naming
+# 10. Physical to logical naming
 npx dialtone-migration-helper --cwd ./src
 # Select "physical-to-logical"
 
-# 9. Component props, events, and slots
+# 11. Component props, events, and slots
 npx dialtone-migrate-props --cwd ./src
 
-# 10. ESLint auto-fix pass
+# 12. ESLint auto-fix pass
 npx eslint --fix "src/**/*.vue"
 ```
 

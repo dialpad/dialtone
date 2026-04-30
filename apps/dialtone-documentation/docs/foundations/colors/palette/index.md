@@ -67,7 +67,7 @@ Background colors for application UI surfaces. Surface colors are container bloc
 
 Define the edge of key content area, components, or surfaces.
 
-<DesignColorTable class-prefix="d-bc-">
+<DesignColorTable :excluded-colors="borderColorsExclusionList" class-prefix="d-bc-">
   <template #example="{color}">
     <div
       :class="[
@@ -129,8 +129,11 @@ import ColorsCatalog from '@views/ColorsCatalog.vue';
 * Remove unwanted background-clip classes
 *@TODO: Remove this once background-clip classes are refactored to d-bgclip https://dialpad.atlassian.net/browse/DLT-2439
 */
-const surfaceColorsExclusionList = ['box', 'text'];
-const textColorsExclusionList = ['critical',  'success',  'warning',  'info'];
+// `-inverted` variants are deprecated in favor of the v-dt-mode directive,
+// so they're excluded from every table.
+const surfaceColorsExclusionList = ['box', 'text', 'success', 'inverted'];
+const borderColorsExclusionList = ['success', 'inverted'];
+const textColorsExclusionList = ['critical', 'positive', 'success', 'warning', 'info', 'inverted'];
 const statusTextColorsExclusionList = [
   'current',
   'transparent',
@@ -142,5 +145,7 @@ const statusTextColorsExclusionList = [
   'placeholder',
   'disabled',
   'muted',
+  'success',
+  'inverted',
 ];
 </script>
