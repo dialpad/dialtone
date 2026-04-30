@@ -27,9 +27,14 @@
         "value": "{color.magenta.700}",
         "type": "color"
       },
-      "success": {
+      "positive": {
         "value": "{shell.base.color.accent}",
         "type": "color"
+      },
+      "success": {
+        "value": "{color.foreground.positive}",
+        "type": "color",
+        "$deprecated": "Use positive instead."
       },
       "warning": {
         "value": "oklch(0.6213 0.1705 47.51)",

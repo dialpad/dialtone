@@ -60,13 +60,13 @@
         "description": "Indicates a strong positive state on surfaces that require a stronger contrast."
       },
       "success": {
-        "value": "{color.green.700}",
+        "value": "{color.foreground.positive}",
         "type": "color",
         "$deprecated": "Use positive instead.",
         "description": "Indicates a positive state."
       },
       "success-strong": {
-        "value": "{color.green.950}",
+        "value": "{color.foreground.positive-strong}",
         "type": "color",
         "$deprecated": "Use positive-strong instead.",
         "description": "Indicates a strong positive state on surfaces that require a stronger contrast."
@@ -146,13 +146,13 @@
         "description": "Positive strong text that sits on high-contrast surfaces or backgrounds."
       },
       "success-inverted": {
-        "value": "{color.green.200}",
+        "value": "{color.foreground.positive-inverted}",
         "type": "color",
         "$deprecated": "Use positive-inverted instead.",
         "description": "Success text that sits on high-contrast surfaces or backgrounds."
       },
       "success-strong-inverted": {
-        "value": "{color.green.50}",
+        "value": "{color.foreground.positive-strong-inverted}",
         "type": "color",
         "$deprecated": "Use positive-strong-inverted instead.",
         "description": "Success strong text that sits on high-contrast surfaces or backgrounds."
@@ -200,14 +200,25 @@
         "value": "{color.foreground.critical-strong}",
         "type": "color"
       },
-      "success": {
+      "positive": {
         "value": "{color.foreground.positive}",
         "type": "color",
         "description": "positive"
       },
-      "success-hover": {
+      "success": {
+        "value": "{color.link.positive}",
+        "type": "color",
+        "description": "positive",
+        "$deprecated": "Use positive instead."
+      },
+      "positive-hover": {
         "value": "{color.foreground.positive-strong}",
         "type": "color"
+      },
+      "success-hover": {
+        "value": "{color.link.positive-hover}",
+        "type": "color",
+        "$deprecated": "Use positive-hover instead."
       },
       "warning": {
         "value": "{color.foreground.warning}",
@@ -257,13 +268,23 @@
         "value": "{color.foreground.critical-strong-inverted}",
         "type": "color"
       },
-      "success-inverted": {
+      "positive-inverted": {
         "value": "{color.foreground.positive-inverted}",
         "type": "color"
       },
-      "success-inverted-hover": {
+      "success-inverted": {
+        "value": "{color.link.positive-inverted}",
+        "type": "color",
+        "$deprecated": "Use positive-inverted instead."
+      },
+      "positive-inverted-hover": {
         "value": "{color.foreground.positive-strong-inverted}",
         "type": "color"
+      },
+      "success-inverted-hover": {
+        "value": "{color.link.positive-inverted-hover}",
+        "type": "color",
+        "$deprecated": "Use positive-inverted-hover instead."
       },
       "warning-inverted": {
         "value": "{color.foreground.warning-inverted}",
@@ -339,9 +360,15 @@
         "type": "color",
         "description": "Background surface color highlighting messaging or elements that may require user's attention."
       },
-      "success": {
+      "positive": {
         "value": "{color.green.100}",
         "type": "color",
+        "description": "Background surface color containing messaging or elements expressing a positive or successful state."
+      },
+      "success": {
+        "value": "{color.surface.positive}",
+        "type": "color",
+        "$deprecated": "Use positive instead.",
         "description": "Background surface color containing messaging or elements expressing a positive or successful state."
       },
       "info": {
@@ -364,9 +391,15 @@
         "type": "color",
         "description": "A softer version of the default warning surface."
       },
-      "success-subtle": {
+      "positive-subtle": {
         "value": "{color.green.50}",
         "type": "color",
+        "description": "A softer version of the default positive surface."
+      },
+      "success-subtle": {
+        "value": "{color.surface.positive-subtle}",
+        "type": "color",
+        "$deprecated": "Use positive-subtle instead.",
         "description": "A softer version of the default success surface."
       },
       "info-subtle": {
@@ -389,9 +422,15 @@
         "type": "color",
         "description": "A contrasting warning surface, most likely paired with inverted foreground colors."
       },
-      "success-strong": {
+      "positive-strong": {
         "value": "{color.green.600}",
         "type": "color",
+        "description": "A contrasting positive state surface, most likely paired with inverted foreground colors."
+      },
+      "success-strong": {
+        "value": "{color.surface.positive-strong}",
+        "type": "color",
+        "$deprecated": "Use positive-strong instead.",
         "description": "A contrasting positive state surface, most likely paired with inverted foreground colors."
       },
       "info-strong": {
@@ -516,18 +555,24 @@
         },
         "description": "Warning surface as opaque background color"
       },
-      "success-opaque": {
-        "value": "{color.green.400}",
+      "positive-opaque": {
+        "value": "{color.green.500}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".25",
+              "value": ".22",
               "space": "oklch"
             }
           }
         },
+        "description": "Success surface as opaque background color."
+      },
+      "success-opaque": {
+        "value": "{color.surface.positive-opaque}",
+        "type": "color",
+        "$deprecated": "Use positive-opaque instead.",
         "description": "Success surface as opaque background color."
       },
       "info-opaque": {
@@ -586,18 +631,24 @@
         },
         "description": "Warning subtle surface as opaque background color"
       },
-      "success-subtle-opaque": {
-        "value": "{color.green.100}",
+      "positive-subtle-opaque": {
+        "value": "{color.green.500}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".50",
+              "value": ".10",
               "space": "oklch"
             }
           }
         },
+        "description": "Success subtle surface as opaque background color."
+      },
+      "success-subtle-opaque": {
+        "value": "{color.surface.positive-subtle-opaque}",
+        "type": "color",
+        "$deprecated": "Use positive-subtle-opaque instead.",
         "description": "Success subtle surface as opaque background color."
       },
       "info-subtle-opaque": {
@@ -668,9 +719,15 @@
         "type": "color",
         "description": "Background surface color highlighting messaging or elements that may require user's attention."
       },
-      "success-inverted": {
+      "positive-inverted": {
         "value": "{color.green.900}",
         "type": "color",
+        "description": "Background surface color containing messaging or elements expressing a positive or successful state."
+      },
+      "success-inverted": {
+        "value": "{color.surface.positive-inverted}",
+        "type": "color",
+        "$deprecated": "Use positive-inverted instead.",
         "description": "Background surface color containing messaging or elements expressing a positive or successful state."
       },
       "info-inverted": {
@@ -693,10 +750,16 @@
         "type": "color",
         "description": "A softer version of the default warning surface."
       },
-      "success-subtle-inverted": {
+      "positive-subtle-inverted": {
         "value": "{color.green.1000}",
         "type": "color",
         "description": "A softer version of the default success surface."
+      },
+      "success-subtle-inverted": {
+        "value": "{color.surface.positive-subtle-inverted}",
+        "type": "color",
+        "description": "A softer version of the default success surface.",
+        "$deprecated": "Use positive-subtle-inverted instead."
       },
       "info-subtle-inverted": {
         "value": "{color.blue.1000}",
@@ -718,10 +781,16 @@
         "type": "color",
         "description": "A contrasting warning surface, most likely paired with inverted foreground colors."
       },
-      "success-strong-inverted": {
+      "positive-strong-inverted": {
         "value": "{color.green.950}",
         "type": "color",
         "description": "A contrasting positive state surface, most likely paired with inverted foreground colors."
+      },
+      "success-strong-inverted": {
+        "value": "{color.surface.positive-strong-inverted}",
+        "type": "color",
+        "description": "A contrasting positive state surface, most likely paired with inverted foreground colors.",
+        "$deprecated": "Use positive-strong-inverted instead."
       },
       "info-strong-inverted": {
         "value": "{color.blue.400}",
@@ -845,7 +914,7 @@
         },
         "description": "Warning surface as opaque background color"
       },
-      "success-opaque-inverted": {
+      "positive-opaque-inverted": {
         "value": "{color.green.900}",
         "type": "color",
         "$extensions": {
@@ -858,6 +927,21 @@
           }
         },
         "description": "Success surface as opaque background color."
+      },
+      "success-opaque-inverted": {
+        "value": "{color.surface.positive-opaque-inverted}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".30",
+              "space": "oklch"
+            }
+          }
+        },
+        "description": "Success surface as opaque background color.",
+        "$deprecated": "Use positive-opaque-inverted instead."
       },
       "info-opaque-inverted": {
         "value": "{color.blue.950}",
@@ -915,7 +999,7 @@
         },
         "description": "Warning subtle surface as opaque background color"
       },
-      "success-subtle-opaque-inverted": {
+      "positive-subtle-opaque-inverted": {
         "value": "{color.green.1000}",
         "type": "color",
         "$extensions": {
@@ -928,6 +1012,21 @@
           }
         },
         "description": "Success subtle surface as opaque background color."
+      },
+      "success-subtle-opaque-inverted": {
+        "value": "{color.surface.positive-subtle-opaque-inverted}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".66",
+              "space": "oklch"
+            }
+          }
+        },
+        "description": "Success subtle surface as opaque background color.",
+        "$deprecated": "Use positive-subtle-opaque-inverted instead."
       },
       "info-subtle-opaque-inverted": {
         "value": "{color.blue.1000}",
@@ -1033,9 +1132,14 @@
         "value": "{color.red.600}",
         "type": "color"
       },
-      "success": {
+      "positive": {
         "value": "{color.green.600}",
         "type": "color"
+      },
+      "success": {
+        "value": "{color.border.positive}",
+        "type": "color",
+        "$deprecated": "Use positive instead."
       },
       "warning": {
         "value": "{color.gold.500}",
@@ -1053,9 +1157,14 @@
         "value": "{color.red.300}",
         "type": "color"
       },
-      "success-subtle": {
+      "positive-subtle": {
         "value": "{color.green.400}",
         "type": "color"
+      },
+      "success-subtle": {
+        "value": "{color.border.positive-subtle}",
+        "type": "color",
+        "$deprecated": "Use positive-subtle instead."
       },
       "warning-subtle": {
         "value": "{color.gold.300}",
@@ -1073,9 +1182,14 @@
         "value": "{color.red.800}",
         "type": "color"
       },
-      "success-strong": {
+      "positive-strong": {
         "value": "{color.green.900}",
         "type": "color"
+      },
+      "success-strong": {
+        "value": "{color.border.positive-strong}",
+        "type": "color",
+        "$deprecated": "Use positive-strong instead."
       },
       "warning-strong": {
         "value": "{color.gold.700}",
@@ -1145,9 +1259,14 @@
         "value": "{color.red.300}",
         "type": "color"
       },
-      "success-inverted": {
+      "positive-inverted": {
         "value": "{color.green.300}",
         "type": "color"
+      },
+      "success-inverted": {
+        "value": "{color.border.positive-inverted}",
+        "type": "color",
+        "$deprecated": "Use positive-inverted instead."
       },
       "warning-inverted": {
         "value": "{color.gold.500}",
@@ -1165,9 +1284,14 @@
         "value": "{color.red.900}",
         "type": "color"
       },
-      "success-subtle-inverted": {
+      "positive-subtle-inverted": {
         "value": "{color.green.800}",
         "type": "color"
+      },
+      "success-subtle-inverted": {
+        "value": "{color.border.positive-subtle-inverted}",
+        "type": "color",
+        "$deprecated": "Use positive-subtle-inverted instead."
       },
       "warning-subtle-inverted": {
         "value": "{color.gold.800}",
@@ -1185,9 +1309,14 @@
         "value": "{color.red.200}",
         "type": "color"
       },
-      "success-strong-inverted": {
+      "positive-strong-inverted": {
         "value": "{color.green.500}",
         "type": "color"
+      },
+      "success-strong-inverted": {
+        "value": "{color.border.positive-strong-inverted}",
+        "type": "color",
+        "$deprecated": "Use positive-strong-inverted instead."
       },
       "warning-strong-inverted": {
         "value": "{color.gold.300}",
@@ -3557,9 +3686,14 @@
           "value": "{color.border.critical}",
           "type": "color"
         },
-        "success": {
-          "value": "{color.border.success}",
+        "positive": {
+          "value": "{color.border.positive}",
           "type": "color"
+        },
+        "success": {
+          "value": "{inputs.color.border.positive}",
+          "type": "color",
+          "$deprecated": "Use positive instead."
         },
         "warning": {
           "value": "{color.border.warning}",
