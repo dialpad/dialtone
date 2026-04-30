@@ -6,8 +6,11 @@
  *   > [!WARNING] Optional title
  *   > Body text with **markdown** and [links](/path).
  *
- * Supported kinds: BASE, CRITICAL, INFO, POSITIVE, WARNING
- * (uppercase by convention, case-insensitive — maps to DtNotice's `kind` prop)
+ * Supported kinds: BASE, INFO, POSITIVE, WARNING, CRITICAL
+ * (uppercase by convention, case-insensitive — maps to DtNotice's `kind` prop).
+ * Legacy `SUCCESS` and `ERROR` aliases are accepted and translated to
+ * `positive` / `critical` before being passed to DtNotice — DtNotice's
+ * validator only accepts the canonical names since DLT-3157.
  *
  * Always outputs: :show-close="false", class="d-wmx100p d-my-200"
  *
@@ -21,7 +24,8 @@
 
 import { encodeForAttr } from './fenced-demo-shared.js';
 
-const ALERT_RE = /^\[!(base|critical|info|positive|warning)\][ \t]*(.*)/i;
+const ALERT_RE = /^\[!(base|critical|error|info|positive|success|warning)\][ \t]*(.*)/i;
+const KIND_ALIASES = { error: 'critical', success: 'positive' };
 
 export default function noticePlugin (md) {
   // Pass 1: Before inline parsing — detect [!KIND] marker and strip it.
@@ -50,7 +54,8 @@ export default function noticePlugin (md) {
       const match = ALERT_RE.exec(lines[0]);
       if (!match) continue;
 
-      const kind = match[1].toLowerCase();
+      const rawKind = match[1].toLowerCase();
+      const kind = KIND_ALIASES[rawKind] || rawKind;
       const title = match[2].trim();
 
       // Mark the blockquote for pass 2
@@ -101,7 +106,9 @@ export default function noticePlugin (md) {
         .replace(/<p[^>]*>/g, '')
         .replace(/<\/p>/g, '');
 
-      // Build <dt-notice> tag
+      // Build <dt-notice> tag. DtNotice's title prop was renamed to
+      // header-text in DLT-3284; using the deprecated `title` attribute
+      // would be silently ignored.
       const attrs = [`kind="${kind}"`];
       if (title) {
         attrs.push(`header-text="${encodeForAttr(title)}"`);

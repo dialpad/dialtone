@@ -42,6 +42,13 @@ function processColorsDocs (excludedColors, classPrefix) {
 
   filteredClasses = sortUtilityClassesByCategory(filteredClasses);
 
+  // Pin `neutral-*` classes to the bottom — they're literal black/white/transparent
+  // and shouldn't outrank semantic colors in the table reading order.
+  filteredClasses = [
+    ...filteredClasses.filter(c => !c.includes('-neutral-')),
+    ...filteredClasses.filter(c => c.includes('-neutral-')),
+  ];
+
   return Array.from(filteredClasses
     .reduce((result, color) => {
       const tokenName = extractCSSVariableName(utilityClassDocs[color]);

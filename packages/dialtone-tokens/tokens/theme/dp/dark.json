@@ -185,6 +185,20 @@
         }
       },
       "success-subtle": {
+        "value": "{color.green.200}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "darken",
+              "value": ".5",
+              "space": "oklch"
+            }
+          }
+        },
+        "$deprecated": "Use positive-subtle instead. "
+      },
+      "success-subtle": {
         "value": "{color.green.100}",
         "type": "color",
         "$extensions": {
@@ -786,7 +800,7 @@
         "type": "color"
       },
       "success-inverted": {
-        "value": "{color.green.200}",
+        "value": "{color.green.300}",
         "type": "color",
         "$deprecated": "Use positive-inverted instead."
       },

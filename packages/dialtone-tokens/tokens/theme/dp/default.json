@@ -570,7 +570,7 @@
             }
           }
         },
-        "$deprecated": "Use positive-opaque instead.",
+        "$deprecated": "Use positive-opaque instead. ",
         "description": "Success surface as opaque background color."
       },
       "info-opaque": {
@@ -789,11 +789,6 @@
         "description": "A contrasting warning surface, most likely paired with inverted foreground colors."
       },
       "positive-strong-inverted": {
-        "value": "{color.green.950}",
-        "type": "color",
-        "description": "A contrasting positive state surface, most likely paired with inverted foreground colors."
-      },
-      "success-strong-inverted": {
         "value": "{color.green.950}",
         "type": "color",
         "$deprecated": "Use positive-strong-inverted instead.",
