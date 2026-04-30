@@ -43,7 +43,12 @@ export function isStale(lastVerified, today, thresholdDays) {
 }
 
 async function check() {
-  const today = new Date();
+  // Anchor `today` to UTC midnight so both operands of the date diff are UTC dates.
+  // `last_verified` strings (YYYY-MM-DD) parse as UTC midnight, so a bare `new Date()`
+  // (a wall-clock instant) would compare against UTC midnight and could floor-off-by-one
+  // on runners with negative UTC offsets — making an exactly-90-day-old standard look 91.
+  const now = new Date();
+  const today = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
   const files = await glob('src/content/standards/**/*.md', { cwd: packageRoot, absolute: true });
 
   if (files.length === 0) {
@@ -82,9 +87,9 @@ async function check() {
 // Only run check() when invoked directly as a script — not when imported as a module.
 // This keeps `parseLastVerified` and `isStale` safely importable from tests and other consumers
 // without triggering a filesystem scan or process.exit().
-// Compare via fileURLToPath (already computed as __filename above) so this works on Windows
-// and with paths containing spaces — `file://${process.argv[1]}` would not.
-const isMainModule = process.argv[1] === __filename;
+// `resolve()` normalizes argv[1] in case the caller passes a relative path; without it the
+// comparison against the absolute __filename can spuriously fail.
+const isMainModule = process.argv[1] ? resolve(process.argv[1]) === __filename : false;
 if (isMainModule) {
   check().catch(err => {
     process.stderr.write(`check-freshness error: ${err.message}\n`);

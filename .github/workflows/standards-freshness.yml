@@ -105,8 +105,10 @@ jobs:
               ].join('\n');
             }
 
-            // Find any existing bot comment with our marker
-            const { data: existingComments } = await github.rest.issues.listComments({
+            // Find any existing bot comment with our marker. Paginate so PRs with >100 comments
+            // still match — otherwise the marker can fall off the first page and we'd post a
+            // duplicate comment instead of upserting.
+            const existingComments = await github.paginate(github.rest.issues.listComments, {
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
