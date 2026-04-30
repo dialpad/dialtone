@@ -1,25 +1,21 @@
 ---
-heading: 'Migrating Anchor and Router Patterns to DtButton and DtLink'
-author: Francis Rupert
-posted: '2026-4-30'
-excerpt: 'DtButton and DtLink now render as router-link or anchor when you pass to or href. DtLink underline behavior is now a prop. A migration script handles the most common patterns.'
+title: Migrating Anchor and Router Patterns to DtButton and DtLink
+description: DtButton and DtLink now render as router-link or anchor when you pass to or href. DtLink underline behavior is now a prop. A migration script handles the most common patterns.
 ---
-
-<BlogPost :author="$frontmatter.author" :posted="parse($frontmatter.posted, 'y-M-d', new Date())" :heading="$frontmatter.heading" :excerpt="$frontmatter.excerpt">
 
 ## TLDR
 
-- `<a class="d-btn">` and `<router-link class="d-btn">` workarounds: replace with `<dt-button href="…">` and `<dt-button :to="…">`.
-- `<a class="d-link">` and `<router-link class="d-link">` workarounds: replace with `<dt-link href="…">` and `<dt-link :to="…">`.
-- DtLink: `d-td-*` text-decoration utility classes → `:underline="false"` prop.
+- Workarounds like `<a class="d-btn">` and `<router-link class="d-btn">` are replaced by `<dt-button href="…">` and `<dt-button :to="…">`.
+- Workarounds like `<a class="d-link">` and `<router-link class="d-link">` are replaced by `<dt-link href="…">` and `<dt-link :to="…">`.
+- DtLink: `d-td-*` text-decoration utility classes are replaced by the `:underline="false"` prop.
 - Modifier classes (`d-btn--lg`, `d-link--muted`, etc.) get extracted into the matching props automatically.
 - One command does the migration: `npx dialtone-migrate-link-rendering`.
 
 ## Why
 
-DtButton and DtLink hardcoded their root element. Consuming products worked around that with `<a class="d-btn">` and `<router-link class="d-link">` patterns that duplicated component internals and drifted out of sync as the components evolved.
+DtButton and DtLink hardcoded their root element. Consuming products worked around that with `<a class="d-btn">` and `<router-link class="d-link">` patterns that duplicated component internals and drifted out of sync as the components changed.
 
-[DLT-3009](https://dialpad.atlassian.net/browse/DLT-3009) and [DLT-3010](https://dialpad.atlassian.net/browse/DLT-3010) gave both components `to` and `href` props. [DLT-3012](https://dialpad.atlassian.net/browse/DLT-3012) added the `underline` boolean prop on DtLink. This post shows how to migrate.
+[DtButton](/components/button.md) and [DtLink](/components/link.md) now accept `to` and `href` props. DtLink also has a new `underline` boolean prop. This page shows how to migrate.
 
 ## DtButton: Anchor and Router-Link Rendering
 
@@ -90,7 +86,7 @@ DtButton now supports `to`, `href`, `target`, `rel`, and `replace` props.
 </div>
 
 > [!INFO] Modifier classes are extracted to props
-> The migration script reads `d-btn--*` modifiers and writes the equivalent prop. `d-btn--xs/sm/lg/xl` → `:size="100/200/400/500"`. `d-btn--outlined` → `importance="outlined"`. `d-btn--{muted,critical,positive,inverted,unstyled}` → `kind="…"`. `d-btn--circle` / `d-btn--active` / `d-btn--loading` → bare boolean attrs. The renames `d-btn--danger` → `kind="critical"` and `d-btn--success` → `kind="positive"` are applied in the same pass.
+> The migration script reads `d-btn--*` modifiers and writes the equivalent prop. Sizes `d-btn--xs/sm/lg/xl` map to `:size="100/200/400/500"`. `d-btn--outlined` maps to `importance="outlined"`. `d-btn--{muted,critical,positive,inverted,unstyled}` map to `kind="…"`. `d-btn--circle` / `d-btn--active` / `d-btn--loading` become bare boolean attrs. The renames `d-btn--danger` to `kind="critical"` and `d-btn--success` to `kind="positive"` are applied in the same pass.
 
 ## DtLink: Anchor and Router-Link Rendering
 
@@ -224,7 +220,7 @@ What the script flags for manual review:
 | `<router-link custom v-slot="…">` wrapping `<dt-button>` / `<dt-link>`, or `<router-link custom class="d-btn">` directly | Custom slot semantics don't transfer to DtButton/DtLink |
 | Responsive `d-td-*` variants (e.g. `sm:d-td-none`) on DtLink | The boolean prop has no responsive form |
 
-Static and dynamic `to` / `href` bindings are migrated 1:1 — `:to="route"` becomes `<dt-button :to="route">`, `:href="url"` becomes `<dt-link :href="url">`.
+Static and dynamic `to` / `href` bindings are migrated 1:1: `:to="route"` becomes `<dt-button :to="route">`, `:href="url"` becomes `<dt-link :href="url">`.
 
 ## Hover Behavior Note
 
@@ -247,14 +243,3 @@ export default [
   },
 ];
 ```
-
-## Affected Components
-
-[DtButton](/components/button.html) &middot; [DtLink](/components/link.html)
-
-</BlogPost>
-
-<script setup>
-import BlogPost from '@baseComponents/BlogPost.vue';
-import { parse } from 'date-fns';
-</script>
