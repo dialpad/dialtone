@@ -205,22 +205,22 @@
     // is reversed compared to a regular link, and it has a light background.
     &--mention {
         --link-text-decoration: none;
-        --link-padding: 0 var(--dt-spacing-25);
-        --link-background-color: oklch(from var(--dt-color-surface-brand-strong) l c h /0.1);
+        --link-padding: 0 var(--dt-spacing-50);
+        --link-background-color: var(--dt-color-surface-brand-opaque);
 
         line-height: var(--dt-font-line-height-200);
-        border-radius: var(--dt-size-radius-200);
+        border-radius: var(--dt-size-radius-300);
 
         &:hover {
             --link-text-decoration: underline;
-            --link-background-color: oklch(from var(--dt-color-surface-brand-strong) l c h /0.25);
+            --link-background-color: var(--dt-color-surface-brand-subtle-opaque);
 
             text-underline-offset: var(--dt-spacing-25);
             text-decoration-thickness: var(--dt-size-border-100);
         }
 
         &:active {
-            --link-background-color: oklch(from var(--dt-color-surface-brand-strong) l c h /0.1);
+            --link-background-color: var(--dt-color-surface-brand-opaque);
         }
     }
 }
