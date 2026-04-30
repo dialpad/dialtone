@@ -1,9 +1,10 @@
 ---
 type: standard
 category: standards
-keywords: [geo, generative-engine-optimization, seo, citations, schema-markup, e-e-a-t, external-documentation, dialtone-documentation]
+keywords: [geo, generative-engine-optimization, seo, citations, schema-markup, e-e-a-t, external-documentation, dialtone-documentation, llms-txt, content-freshness]
 ai_summary: GEO principles for optimizing Dialtone's public documentation to be cited by external AI search engines like ChatGPT and Perplexity.
-last_updated: 2026-03-09
+last_updated: 2026-04-27
+last_verified: 2026-04-27
 ---
 
 # External GEO (Generative Engine Optimization)
@@ -15,6 +16,8 @@ last_updated: 2026-03-09
 **Key difference from internal AI standards:**
 - **Internal AI Standards** (`standard-ai-documentation.md`): For AI assistants working in this repository
 - **External GEO** (this file): For public-facing documentation meant to be discovered by external AI search
+
+> **Platforms differ.** ChatGPT and Perplexity share only ~11% of cited domains — they pick sources via different signals. ChatGPT leans on training-baked brand entity strength and Wikipedia (~48% of its top cites). Perplexity favors community sources (90%+ of answers) and easily-extractable pages. The principles in this standard are general; platform-specific tactics change too fast to embed here. See the [Averi B2B SaaS Citation Benchmarks Report 2026](https://www.averi.ai/how-to/chatgpt-vs.-perplexity-vs.-google-ai-mode-the-b2b-saas-citation-benchmarks-report-(2026)) for current per-platform data.
 
 ---
 
@@ -92,9 +95,9 @@ and [Material Design Accessibility](https://m3.material.io/foundations/accessibi
 **Why:** Fact-dense content is perceived as more authoritative and informative
 
 **How to apply:**
-- Include component counts (87 Vue components)
-- Reference utility class counts (3,315 classes)
-- Cite design token counts (5,691 tokens)
+- Include component counts (58 Vue components)
+- Reference utility class counts (3,336 classes)
+- Cite design token counts (6,019 tokens)
 - Show adoption metrics when available
 - Include version numbers and release cadence
 - Reference test coverage percentages
@@ -150,6 +153,8 @@ and [Material Design Accessibility](https://m3.material.io/foundations/accessibi
 </script>
 ```
 
+Bump `dateModified` only on substantive content updates — not on formatting, typo fixes, or `last_verified` bumps that don't change reader-facing content. AI engines detect date manipulation ([Search Engine Land, byline dates guide](https://searchengineland.com/guide/byline-dates)).
+
 ---
 
 ### 6. Semantic Coverage
@@ -171,9 +176,61 @@ When documenting a component, include:
 
 ---
 
+## 7. llms.txt and llms-full.txt
+
+**What:** Publish a machine-readable site index at `/llms.txt` (curated table of contents) and `/llms-full.txt` (full content dump) at the site root.
+
+**Why:** AI tools increasingly use `llms.txt` as a discovery endpoint before crawling. Navigation tools (Claude, ChatGPT) fetch the lite version to understand site structure; coding tools (Cursor, GitHub Copilot) fetch the full version for context-window-friendly ingestion. `dialtone.dialpad.com` publishes both via `@vuepress/plugin-llms`.
+
+**llms.txt vs llms-full.txt:**
+
+| File | Size | Who uses it | Content |
+|------|------|-------------|---------|
+| `/llms.txt` | Small | Navigation tools, general AI assistants | Curated table of contents — project title, description, and one-line per page with URL |
+| `/llms-full.txt` | Large | Coding tools needing full context | Full prose content of curated pages, token-friendly |
+
+**How to apply:**
+- Curate `/llms.txt` to include: foundations, section indexes, key guides. Exclude changelogs and deep auto-generated API tables (those are discoverable from the indexes).
+- Update the curation list when major new sections are added to the site.
+- `llms.txt` complements `sitemap.xml` — sitemap tells crawlers everything exists; `llms.txt` tells AI tools what's worth reading first.
+- Reference: [llmstxt.org](https://llmstxt.org/)
+
+---
+
+## 8. Content Freshness
+
+**What:** Keep documentation verifiably current — not just edited, but re-read and confirmed.
+
+**Why:** AI citations decay in approximately 13 weeks ([Markterior GEO 2026](https://www.markterior.com/generative-engine-optimization-geo-2026/)). 76.4% of ChatGPT's top-cited pages were updated within the last 30 days ([Quattr, content freshness research](https://www.quattr.com/blog/content-freshness)). Stale docs lose citation share regardless of their original quality.
+
+**The `last_verified` field:** Each standards document carries a `last_verified` date in its frontmatter (distinct from `last_updated`):
+
+- `last_updated` = "the file was edited" (can be a typo fix)
+- `last_verified` = "a human re-read this and confirmed it is still accurate"
+
+Bump `last_verified` only after substantive review. Never bump it as housekeeping. Per [John Mueller / Search Engine Land](https://searchengineland.com/guide/byline-dates): "Changing dates without doing anything else is just noise and useless for rankings or citations."
+
+**Cadence:** Re-verify standards every 90 days. This aligns with the 13-week citation decay window — quarterly review keeps content within the active citation range.
+
+**Automation:** A GitHub Actions workflow (`standards-freshness.yml`) posts a PR comment listing any standard with `last_verified` older than 90 days when a PR touches the `packages/dialtone-docs/src/content/standards/` directory. Non-blocking — it surfaces drift without gatekeeping merges.
+
+---
+
 ## GEO Resources
+
+### 2025 foundations
 
 - [Frase.io: What is Generative Engine Optimization? Complete 2025 Guide](https://www.frase.io/blog/what-is-generative-engine-optimization-geo)
 - [Walker Sands: Generative Engine Optimization - What to Know in 2025](https://www.walkersands.com/about/blog/generative-engine-optimization-geo-what-to-know-in-2025/)
 - [Profound: 10-Step Framework for Generative Engine Optimization](https://www.tryprofound.com/guides/generative-engine-optimization-geo-guide-2025)
 - [Strapi: Generative Engine Optimization Complete Guide 2025](https://strapi.io/blog/generative-engine-optimization-geo-guide)
+
+### 2026 updates
+
+- [State of llms.txt 2026 — aeo.press](https://www.aeo.press/ai/the-state-of-llms-txt-in-2026)
+- [Do You Need Both llms.txt and llms-full.txt?](https://llms-txt.io/blog/llms-txt-and-llms-full-txt)
+- [GEO 2026 best practices — GenOptima](https://www.gen-optima.com/geo/generative-engine-optimization-best-practices-2026/)
+- [GEO: Definitive Guide 2026 — Geoptie](https://geoptie.com/blog/generative-engine-optimization)
+- [Content freshness and AI citations — Quattr](https://www.quattr.com/blog/content-freshness)
+- [AI platform citation patterns — Profound](https://www.tryprofound.com/blog/ai-platform-citation-patterns)
+- [ChatGPT vs Perplexity vs Google AI Mode: B2B SaaS citation benchmarks 2026 — Averi](https://www.averi.ai/how-to/chatgpt-vs.-perplexity-vs.-google-ai-mode-the-b2b-saas-citation-benchmarks-report-(2026))

@@ -55,7 +55,7 @@ Project-scoped configuration overrides user-scoped. The `dialtone-mcp-server` co
 
 Available across all your projects. Choose one method:
 
-**Option A: Install in dedicated directory**
+#### Option A: Install in dedicated directory
 
 ```bash
 # Install in a dedicated directory
@@ -67,14 +67,14 @@ npm install @dialpad/dialtone-mcp-server
 claude mcp add dialtone --scope user dialtone-mcp-server
 ```
 
-**Option B: Install globally**
+#### Option B: Install globally
 
 ```bash
 npm install -g @dialpad/dialtone-mcp-server
 claude mcp add dialtone --scope user dialtone-mcp-server
 ```
 
-**Option C: Use npx (no installation)**
+#### Option C: Use npx (no installation)
 
 ```bash
 claude mcp add dialtone --scope user -- npx -y @dialpad/dialtone-mcp-server
@@ -106,7 +106,7 @@ Find CSS utility classes to style HTML elements. Use when your query mentions CS
 
 **Example queries:**
 
-```
+```text
 "padding 8px"       → d-p8, d-pt8, d-pr8, d-pb8, d-pl8, d-px8, d-py8
 "display flex"      → d-d-flex, d-d-inline-flex
 "width 100%"        → d-w100p
@@ -115,6 +115,7 @@ Find CSS utility classes to style HTML elements. Use when your query mentions CS
 ```
 
 **Parameters:**
+
 - `query` (required): CSS property and/or value
 - `limit` (optional): Maximum results (1-50, default 15)
 
@@ -126,7 +127,7 @@ Find design tokens (CSS variables) from Dialtone's design system. Use when your 
 
 **Example queries:**
 
-```
+```text
 "color foreground primary" → --dt-color-foreground-primary
 "space 400"                → --dt-space-400, --dt-space-400-negative
 "font family"              → --dt-font-family-body, --dt-font-family-expressive
@@ -134,6 +135,7 @@ Find design tokens (CSS variables) from Dialtone's design system. Use when your 
 ```
 
 **Parameters:**
+
 - `query` (required): Token category, name, or value
 - `limit` (optional): Maximum results (1-50, default 15)
 
@@ -145,13 +147,14 @@ Find Vue components from Dialtone's component library with props, events, and sl
 
 **Example queries:**
 
-```
+```text
 "button"   → DtButton, DtButtonGroup, DtBanner (29 results)
 "modal"    → DtModal, DtBanner, DtDropdown (6 results)
 "checkbox" → DtCheckbox, DtCheckboxGroup, DtRadio
 ```
 
 **Returns:**
+
 - Component name
 - Description
 - Props (name, type, default, description)
@@ -160,6 +163,7 @@ Find Vue components from Dialtone's component library with props, events, and sl
 - Import path
 
 **Parameters:**
+
 - `query` (required): Component name or UI element
 - `limit` (optional): Maximum results (1-30, default 10)
 
@@ -171,7 +175,7 @@ Find icons from Dialtone's icon library and learn how to use icon components. Ic
 
 **Example queries:**
 
-```
+```text
 "notification" → bell, bell-ring, bell-off, bell-plus
 "arrow up"     → arrow-up, arrow-up-down, arrow-up-left
 "profile"      → user
@@ -179,6 +183,7 @@ Find icons from Dialtone's icon library and learn how to use icon components. Ic
 ```
 
 **Returns:**
+
 - Icon name
 - Categories
 - Keywords
@@ -186,6 +191,7 @@ Find icons from Dialtone's icon library and learn how to use icon components. Ic
 - Usage example
 
 **Parameters:**
+
 - `query` (required): Icon name, category, or keyword
 - `limit` (optional): Maximum results (1-50, default 20)
 
@@ -195,7 +201,7 @@ Find icons from Dialtone's icon library and learn how to use icon components. Ic
 
 When working on a component and need specific styling:
 
-```
+```text
 User: "What class adds padding 8px to all sides?"
 Claude: [Uses search_utility_classes tool]
 Result: d-p8 (padding: var(--dt-space-400) which equals 8px)
@@ -205,7 +211,7 @@ Result: d-p8 (padding: var(--dt-space-400) which equals 8px)
 
 When building UI and unsure what components exist:
 
-```
+```text
 User: "What button components are available in Dialtone?"
 Claude: [Uses search_components tool]
 Result: DtButton, DtButtonGroup, DtIconButton with complete
@@ -216,7 +222,7 @@ Result: DtButton, DtButtonGroup, DtIconButton with complete
 
 When implementing designs and need exact token values:
 
-```
+```text
 User: "What's the primary foreground color token?"
 Claude: [Uses search_tokens tool]
 Result: --dt-color-foreground-primary
@@ -228,7 +234,7 @@ Result: --dt-color-foreground-primary
 
 When adding icons to your interface:
 
-```
+```text
 User: "Show me all notification-related icons"
 Claude: [Uses search_icons tool]
 Result: bell, bell-ring, bell-off, bell-plus, bell-minus
@@ -241,7 +247,7 @@ Result: bell, bell-ring, bell-off, bell-plus, bell-minus
 
 The server checks for updates automatically on startup. If a new version is available, you'll see:
 
-```
+```text
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ⚠️  Dialtone MCP Server Update Available
    Current: v1.2.0
@@ -256,17 +262,20 @@ The server checks for updates automatically on startup. If a new version is avai
 **To update:**
 
 **Project-scoped:**
+
 ```bash
 npm install -D @dialpad/dialtone-mcp-server@latest
 ```
 
 **User-scoped (local directory):**
+
 ```bash
 cd ~/.mcp-servers
 npm update @dialpad/dialtone-mcp-server
 ```
 
 **User-scoped (global):**
+
 ```bash
 npm update -g @dialpad/dialtone-mcp-server
 ```
@@ -279,16 +288,19 @@ After updating, restart your Claude Code conversation to load the new version.
 ### Managing Connections
 
 **List configured servers:**
+
 ```bash
 claude mcp list
 ```
 
 **View specific server:**
+
 ```bash
 claude mcp get dialtone
 ```
 
 **Remove server:**
+
 ```bash
 claude mcp remove dialtone
 ```
@@ -333,27 +345,36 @@ Restart Claude Desktop and look for the 🔌 icon to confirm connection.
 
 1. Verify `.mcp.json` exists in your project root with correct format
 2. Check package is installed:
+
    ```bash
    npm list @dialpad/dialtone-mcp-server
    ```
+
 3. Verify bin command exists:
+
    ```bash
    ls node_modules/.bin/dialtone-mcp-server
    ```
+
 4. Restart Claude Code completely
 
 **For user-scoped installation:**
 
 1. List configured servers:
+
    ```bash
    claude mcp list
    ```
+
 2. Check if dialtone is listed and enabled
 3. Test the server:
+
    ```bash
    claude mcp get dialtone
    ```
+
 4. Check configuration:
+
    ```bash
    cat ~/.claude/mcp.json
    ```

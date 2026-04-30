@@ -141,6 +141,14 @@ All tracking data lives in `.claude/tsc-cache/<session>/` (gitignored):
 - `missing-docs.txt` — written by the guard when docs are missing
 - `push-done` / `pr-create-done` — marker files to avoid re-checking
 
+### Standards freshness
+
+**`.github/workflows/standards-freshness.yml`** runs on every PR that touches `packages/dialtone-docs/src/content/standards/**`. It checks whether any standard has `last_verified` older than 90 days and posts a PR comment listing stale docs if found. Non-blocking — posts a comment, does not fail the check.
+
+The 90-day cadence aligns with the ~13-week AI citation decay window documented in `packages/dialtone-docs/src/content/standards/standard-geo-optimization.md`. To pass the check, re-read the standard and bump its `last_verified` date in frontmatter. See `standard-ai-documentation.md` for the field spec.
+
+Run locally: `pnpm nx run dialtone-docs:check-freshness`
+
 ## CodeRabbit Config
 
 `.coderabbit.yaml` controls path filters, reviewer routing, and per-path review guidance.
