@@ -976,7 +976,7 @@ export default {
           transformPastedHTML (html) {
             return html
               .replace(/<hr[^>]*\/?>/gi, '<p><br></p>')
-              .replace(/(<\/\w+>)((<br \/>)+)/g, '$2$3$1');
+              .replace(/(<\/\w+>)((<br \/>)+)/g, '$2$1');
           },
         },
       });
