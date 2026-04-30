@@ -312,16 +312,26 @@ describe('DtPopover Tests', () => {
       expect(contentEl.style.transition).toBe('none');
     });
 
-    it('does not emit "opened" when leave transition completes', async () => {
+    it('does not emit "opened" when leave transition completes, but does emit when not unmounting', async () => {
       wrapper.vm._isUnmounting = true;
       await wrapper.vm.onLeaveTransitionComplete();
       expect(wrapper.emitted('opened')).toBeUndefined();
+
+      wrapper.vm._isUnmounting = false;
+      await wrapper.vm.onLeaveTransitionComplete();
+      expect(wrapper.emitted('opened')).toBeDefined();
+      expect(wrapper.emitted('opened')[0]).toEqual([false]);
     });
 
-    it('does not emit "opened" when enter transition completes', async () => {
+    it('does not emit "opened" when enter transition completes, but does emit when not unmounting', async () => {
       wrapper.vm._isUnmounting = true;
       await wrapper.vm.onEnterTransitionComplete();
       expect(wrapper.emitted('opened')).toBeUndefined();
+
+      wrapper.vm._isUnmounting = false;
+      await wrapper.vm.onEnterTransitionComplete();
+      expect(wrapper.emitted('opened')).toBeDefined();
+      expect(wrapper.emitted('opened')[0][0]).toBe(true);
     });
   });
 

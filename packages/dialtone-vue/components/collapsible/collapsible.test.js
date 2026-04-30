@@ -159,6 +159,24 @@ describe('DtCollapsible Tests', () => {
       await wrapper.vm.onEnterTransitionComplete();
       expect(wrapper.emitted('opened')).toBeUndefined();
     });
+
+    describe('in controlled mode (open !== null)', () => {
+      beforeEach(async () => {
+        await wrapper.setProps({ open: false });
+      });
+
+      it('does not emit "opened" or "update:open" when leave transition completes', async () => {
+        await wrapper.vm.onLeaveTransitionComplete();
+        expect(wrapper.emitted('opened')).toBeUndefined();
+        expect(wrapper.emitted('update:open')).toBeUndefined();
+      });
+
+      it('does not emit "opened" or "update:open" when enter transition completes', async () => {
+        await wrapper.vm.onEnterTransitionComplete();
+        expect(wrapper.emitted('opened')).toBeUndefined();
+        expect(wrapper.emitted('update:open')).toBeUndefined();
+      });
+    });
   });
 
   describe('Accessibility Tests', () => {

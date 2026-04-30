@@ -913,10 +913,13 @@ export default {
       if (this._isUnmounting) return;
       if (this.modal) {
         await this.focusFirstElement(this.$refs.anchor);
+        if (this._isUnmounting) return;
         // await next tick in case the user wants to change focus themselves.
         await this.$nextTick();
+        if (this._isUnmounting) return;
         this.enableScrolling();
       }
+      if (this._isUnmounting) return;
       this.tip?.unmount();
       this.$emit('opened', false);
       if (this.open !== null) {
@@ -929,6 +932,7 @@ export default {
       this.focusInitialElement();
       // await next tick in case the user wants to change focus themselves.
       await this.$nextTick();
+      if (this._isUnmounting) return;
       this.preventScrolling();
       this.$emit('opened', true, this.$refs.popover__content);
       if (this.open !== null) {
