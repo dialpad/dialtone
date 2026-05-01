@@ -467,12 +467,12 @@
         "description": "A contrasting critical surface, most likely paired with inverted foreground colors."
       },
       "warning-strong": {
-        "value": "{color.gold.400}",
+        "value": "{color.gold.500}",
         "type": "color",
         "description": "A contrasting warning surface, most likely paired with inverted foreground colors."
       },
       "positive-strong": {
-        "value": "{color.green.800}",
+        "value": "{color.green.600}",
         "type": "color",
         "description": "A contrasting positive state surface, most likely paired with inverted foreground colors."
       },
@@ -483,7 +483,7 @@
         "description": "A contrasting positive state surface, most likely paired with inverted foreground colors."
       },
       "info-strong": {
-        "value": "{color.blue.800}",
+        "value": "{color.blue.600}",
         "type": "color",
         "description": "A contrasting informational surface, most likely paired with inverted foreground colors."
       },

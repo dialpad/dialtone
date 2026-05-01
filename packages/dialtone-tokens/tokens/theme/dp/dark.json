@@ -246,7 +246,7 @@
         "$deprecated": "Use positive-strong instead."
       },
       "info-strong": {
-        "value": "{color.blue.600}",
+        "value": "{color.blue.700}",
         "type": "color"
       },
       "brand-strong": {
