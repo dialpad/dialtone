@@ -738,6 +738,12 @@ export default {
   },
 
   beforeUnmount () {
+    this._isUnmounting = true;
+    // Cancel any in-progress CSS transitions so transitionend cannot fire
+    // after this component is torn down and call into dead lifecycle methods.
+    if (this.popoverContentEl) {
+      this.popoverContentEl.style.transition = 'none';
+    }
     this.tip?.destroy();
     this.intersectionObserver?.disconnect();
     this.mutationObserver?.disconnect();
@@ -934,12 +940,16 @@ export default {
     },
 
     async onLeaveTransitionComplete () {
+      if (this._isUnmounting) return;
       if (this.modal) {
         await this.focusFirstElement(this.$refs.anchor);
+        if (this._isUnmounting) return;
         // await next tick in case the user wants to change focus themselves.
         await this.$nextTick();
+        if (this._isUnmounting) return;
         this.enableScrolling();
       }
+      if (this._isUnmounting) return;
       this.tip?.unmount();
       this.$emit('opened', false);
       if (this.open !== null) {
@@ -948,9 +958,11 @@ export default {
     },
 
     async onEnterTransitionComplete () {
+      if (this._isUnmounting) return;
       this.focusInitialElement();
       // await next tick in case the user wants to change focus themselves.
       await this.$nextTick();
+      if (this._isUnmounting) return;
       this.preventScrolling();
       this.$emit('opened', true, this.$refs.popover__content);
       if (this.open !== null) {

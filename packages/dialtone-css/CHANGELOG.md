@@ -1,3 +1,74 @@
+## [8.79.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.79.1...dialtone-css/v8.79.2) (2026-05-01)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** NO-JIRA fix multiple rich text issues ([#1240](https://github.com/dialpad/dialtone/issues/1240)) ([f285a3e](https://github.com/dialpad/dialtone/commit/f285a3ed7c8cd409e0e59bd269282723b85003e6))
+
+## [8.79.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.79.0...dialtone-css/v8.79.1) (2026-04-24)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DP-185735 fix arrow key navigation broken near links ([#1217](https://github.com/dialpad/dialtone/issues/1217)) ([8e272e9](https://github.com/dialpad/dialtone/commit/8e272e921efa07bbc1ab9edad7a739a892db55ca))
+
+# [8.79.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.78.0...dialtone-css/v8.79.0) (2026-04-14)
+
+
+### Features
+
+* **Button:** DLT-3269 improve disabled styles ([#1180](https://github.com/dialpad/dialtone/issues/1180)) ([00a75f2](https://github.com/dialpad/dialtone/commit/00a75f2c8d958a2ea43d571df272bf6dce08b2de))
+
+# [8.78.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.77.0...dialtone-css/v8.78.0) (2026-04-07)
+
+
+### Features
+
+* **Resizable:** DLT-2097 add DtResizable panel layout component ([#1162](https://github.com/dialpad/dialtone/issues/1162)) ([c6bd3bc](https://github.com/dialpad/dialtone/commit/c6bd3bcbae65634015f3fa29bbe9043ae40baa90))
+
+# [8.77.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.76.0...dialtone-css/v8.77.0) (2026-03-19)
+
+
+### Features
+
+* DLT-3144 support truncation within message input bottom btns ([#1134](https://github.com/dialpad/dialtone/issues/1134)) ([22175f5](https://github.com/dialpad/dialtone/commit/22175f59d8b6e270f30992a31cd8604aaeed4984))
+
+# [8.76.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.75.1...dialtone-css/v8.76.0) (2026-03-17)
+
+
+### Features
+
+* **Editor:** DP-175912 extend table extension for table styling ([#1130](https://github.com/dialpad/dialtone/issues/1130)) ([b3793e7](https://github.com/dialpad/dialtone/commit/b3793e7976baba98ca84ada303c87e8e0935c1de))
+* **Loader:** DLT-2963 add track to loader ([#1133](https://github.com/dialpad/dialtone/issues/1133)) ([48a7a52](https://github.com/dialpad/dialtone/commit/48a7a527432f5e450d6dd9b12b4d64f8ef86bd2c))
+
+## [8.75.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.75.0...dialtone-css/v8.75.1) (2026-03-12)
+
+
+### Bug Fixes
+
+* **Popover:** DP-175009 revert visibility CSS that caused tippy-box click stealing ([#1119](https://github.com/dialpad/dialtone/issues/1119)) ([82ffcb6](https://github.com/dialpad/dialtone/commit/82ffcb64c3dbd4d80a170385cdcc4aa4b5218a83))
+
+# [8.75.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.74.0...dialtone-css/v8.75.0) (2026-03-09)
+
+
+### Features
+
+* **Button:** DLT-3086 update loading state to use dt-loader component ([#1111](https://github.com/dialpad/dialtone/issues/1111)) ([621c49a](https://github.com/dialpad/dialtone/commit/621c49a451dd653ad24bb4641f5cff36501670e3))
+
+# [8.74.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.73.0...dialtone-css/v8.74.0) (2026-03-06)
+
+
+### Features
+
+* **Loader,progress Circle:** NO-JIRA polish DtProgressCircle visual and align DtLoader visual with DtProgressCircle ([#1102](https://github.com/dialpad/dialtone/issues/1102)) ([7b9e9b6](https://github.com/dialpad/dialtone/commit/7b9e9b6d699515805bec979c7ffdf5b5f737b316))
+* **Progress Circle:** DLT-2983 add progress-circle component ([#1098](https://github.com/dialpad/dialtone/issues/1098)) ([c0f0e40](https://github.com/dialpad/dialtone/commit/c0f0e403acfd76d8db7dbe002862330d71571d5f))
+
+
+### Reverts
+
+* NO-JIRA revert progress circle polish commits for re-PR ([#1101](https://github.com/dialpad/dialtone/issues/1101)) ([a212c41](https://github.com/dialpad/dialtone/commit/a212c41e5c857ebabfacc9670e7a7054dcd9c6de))
+
+
 # [8.80.0-next.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.80.0-next.2...dialtone-css/v8.80.0-next.3) (2026-04-30)
 
 

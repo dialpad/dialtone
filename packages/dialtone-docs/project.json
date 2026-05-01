@@ -8,6 +8,10 @@
     "test": {
       "executor": "nx:run-script",
       "options": { "script": "test" }
+    },
+    "check-freshness": {
+      "executor": "nx:run-script",
+      "options": { "script": "check-freshness" }
     }
   }
 }

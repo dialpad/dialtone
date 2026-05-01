@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-icons",
-  "version": "4.51.1-next.1",
+  "version": "4.51.1",
   "description": "Dialtone icon library",
   "files": [
     "dist",
@@ -59,6 +59,11 @@
       "name": "Nina Repetto",
       "email": "nina.repetto@dialpad.com",
       "url": "https://github.com/ninamarina"
+    },
+    {
+      "name": "Belu Montoya",
+      "email": "belu.montoya@dialpad.com",
+      "url": "https://github.com/belumontoya"
     }
   ],
   "keywords": [

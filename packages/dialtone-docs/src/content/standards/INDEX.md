@@ -4,6 +4,7 @@ category: standards
 keywords: [index, navigation, standards, ai-documentation, geo, quality]
 ai_summary: Navigation index for standards documentation — AI documentation rules and GEO optimization principles.
 last_updated: 2026-03-09
+last_verified: 2026-04-27
 ---
 
 # Standards Documentation

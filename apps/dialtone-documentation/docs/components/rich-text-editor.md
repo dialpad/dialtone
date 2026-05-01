@@ -22,8 +22,7 @@ The editor itself is without any styling and the intention is to wrap it with an
   v-model="value"
   :editable="true"
   input-aria-label="this is a descriptive label"
-  :input-class="$attrs.inputClass"
-  :output-format="$attrs.outputFormat"
+  output-format="html"
   :auto-focus="false"
   placeholder="Type here..."
   :link="true"
@@ -112,12 +111,11 @@ To see it in action type char '@' into rich editor With channel mentions.
   v-model="value"
   :editable="true"
   input-aria-label="this is a descriptive label"
-  :input-class="$attrs.inputClass"
-  :output-format="$attrs.outputFormat"
+  output-format="html"
   :auto-focus="false"
   placeholder="Type here..."
   :link="true"
-  :mentionSuggestion="{ items }"
+  :mention-suggestion="{ items }"
 />
 ```
 
