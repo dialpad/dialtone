@@ -20,7 +20,7 @@
             <div class="dialtone-wall__title">
               <span class="dialtone-wall__title-text">{{ pageTitle(page) }}</span>
               <span
-                v-if="page.status"
+                v-if="badgeKindClass(page.status)"
                 class="d-badge d-tt-capitalize"
                 :class="badgeKindClass(page.status)"
               >
@@ -62,18 +62,11 @@ const thumbPngUrl = (fileName) => {
   return pngModules[`../public/assets/images/${fileName}.png`] ?? null;
 };
 
-const badgeKindClass = (status) => {
-  switch (status) {
-    case 'new':
-      return 'd-badge--bulletin';
-    case 'ready':
-      return 'd-badge--success';
-    case 'beta':
-      return 'd-badge--info';
-    default:
-      return '';
-  }
+const BADGE_KIND_CLASSES = {
+  new: 'd-badge--bulletin',
+  beta: 'd-badge--info',
 };
+const badgeKindClass = (status) => BADGE_KIND_CLASSES[status] ?? '';
 const pageTitle = (page) => {
   const shortTitle = page.shortTitle
     ? page.shortTitle[0].toUpperCase() + page.shortTitle.slice(1)

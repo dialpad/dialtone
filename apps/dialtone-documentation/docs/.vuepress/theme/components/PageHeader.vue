@@ -24,11 +24,7 @@
             class="dialtone-page-title"
             v-text="$frontmatter.title"
           />
-          <dt-badge
-            v-if="$frontmatter.status === 'beta'"
-            type="info"
-            text="Beta"
-          />
+          <dt-badge v-if="statusBadge" v-bind="statusBadge" />
         </dt-stack>
         <dt-stack direction="row" gap="100">
           <dt-button
@@ -169,6 +165,12 @@ import { usePageData, withBase } from 'vuepress/client';
 import { isExternalUrl } from '../utils/isExternalUrl';
 
 const page = usePageData();
+
+const STATUS_BADGES = {
+  beta: { type: 'info', text: 'Beta' },
+  new: { type: 'bulletin', text: 'New' },
+};
+const statusBadge = computed(() => STATUS_BADGES[page.value.frontmatter?.status]);
 
 // Detail pages get a "back to <parent>" affordance above the title row.
 // Add new entries as detail-page sections appear.

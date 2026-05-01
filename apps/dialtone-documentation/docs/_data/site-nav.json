@@ -230,6 +230,7 @@
               {
                 "text": "Migration Guide",
                 "link": "/guides/migration/",
+                "status": "new",
                 "children": [
                   {
                     "text": "CSS Cascade Layers",
@@ -1024,7 +1025,8 @@
           {
             "text": "Vue Utilities",
             "link": "/functions-and-utilities/",
-            "icon": "code"
+            "icon": "code",
+            "status": "new"
           }
         ]
       }
