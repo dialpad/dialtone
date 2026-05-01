@@ -5,7 +5,7 @@ keywords: ["margin","padding","gap","whitespace"]
 ---
 
 > [!CRITICAL] Deprecated
-> `d-stack` and `d-flow` utilities are deprecated. Please use the [Stack](/components/stack) component instead.
+> `d-stack` and `d-flow` utilities are deprecated. Please use the [Stack](/components/stack) component with the equivalent `gap` prop instead. New usages are flagged by the [`deprecated-stack-flow-classes`](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-stack-flow-classes.md) ESLint rule, which includes a px to `gap` prop mapping.
 
 ## Adding Space Vertically
 
