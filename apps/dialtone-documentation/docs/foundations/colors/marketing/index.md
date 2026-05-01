@@ -6,10 +6,10 @@ keywords: ["brand colors","marketing colors","purple"]
 
 <dt-stack gap="600" class="d-mbs-600">
   <div>
-    <h2 class="d-docsite--header-3 d-mbs-0 d-mbs-0">Core Color</h2>
-    <p class="d-docsite--paragraph">Dialpad’s color theory is organized into three schemes depending on usage.</p>
     <div class="d-d-grid d-g-600 d-g-cols1 md:d-g-cols3 d-ai-center">
       <div>
+        <h2 class="d-docsite--header-3 d-mbs-0 d-mbs-0">Core Color</h2>
+        <p class="d-docsite--paragraph">Dialpad’s color theory is organized into three schemes depending on usage.</p>
         <h3 class="d-docsite--header-4 d-mbs-0 d-mbs-0">Primary</h3>
         <p class="d-docsite--paragraph">For most general brand communications use light and dark neutrals for backgrounds with purple and a warm gradient tone used for accents.</p>
         <h3 class="d-docsite--header-4 d-mbs-0 d-mbs-0">Secondary</h3>
@@ -19,6 +19,10 @@ keywords: ["brand colors","marketing colors","purple"]
         <img src="/assets/images/color-marketing--01.png" alt="" class="d-bar-500 d-d-block d-w100p" />
       </div>
     </div>
+  </div>
+
+  <div class="d-d-grid d-g-600 d-g-cols1 md:d-g-cols3 d-ai-center">
+
   </div>
 
   <div class="d-d-grid d-g-600 d-g-cols1 md:d-g-cols3 d-ai-center">

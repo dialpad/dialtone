@@ -41,7 +41,7 @@
             <template #startIcon="{ iconSize }">
               <dt-icon name="google-drive" :size="iconSize" />
             </template>
-            Download
+            {{ $frontmatter.download_url_label || 'Download' }}
           </dt-button>
           <dt-button
             v-if="$frontmatter.figma_url"

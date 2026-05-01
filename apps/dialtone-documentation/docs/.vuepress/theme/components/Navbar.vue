@@ -10,7 +10,6 @@
         placement="bottom-start"
         dialog-class="d-w-1000 d-p-0"
         padding="large"
-        transition="true"
         enter-delay="500"
         :offset="[-8, 8]"
       >
