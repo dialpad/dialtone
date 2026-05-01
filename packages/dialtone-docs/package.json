@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "node src/generators/build-ai-docs.mjs",
+    "check-freshness": "node src/generators/check-freshness.mjs",
     "test": "vitest run",
     "test:watch": "vitest"
   },

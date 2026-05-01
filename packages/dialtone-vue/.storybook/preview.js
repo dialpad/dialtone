@@ -45,7 +45,7 @@ import fixDefaultSlot from '../components/plugins/fixDefaultSlot';
 import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge, setCustomEmojiUrl, setCustomEmojiJson } from '@/common/emoji';
 import customEmojiJson from '@/common/custom-emoji.json';
 import { dialtoneDarkTheme, dialtoneLightTheme } from './dialtone-themes.js';
-import { DialtoneDocsPage } from './DialtoneDocsPage.jsx';
+import { DialtoneDocsPage } from './DialtoneDocsPage.js';
 import { DtTooltipDirective } from '@/directives/tooltip_directive';
 import { DtScrollbarDirective } from '@/directives/scrollbar_directive';
 import { DtModeDirective } from '@/directives/mode_directive';
@@ -263,13 +263,10 @@ export default {
           };
         }, [channel, setDark]);
 
-        return (
-          <DocsContainer
-            theme={isDark ? dialtoneDarkTheme : dialtoneLightTheme}
-            context={props.context}
-          >
-            {children}
-          </DocsContainer>
+        return React.createElement(
+          DocsContainer,
+          { theme: isDark ? dialtoneDarkTheme : dialtoneLightTheme, context: props.context },
+          children,
         );
       },
     },
@@ -285,5 +282,5 @@ export default {
     },
   ],
 
-  tags: ['autodocs']
+  tags: ['autodocs'],
 };

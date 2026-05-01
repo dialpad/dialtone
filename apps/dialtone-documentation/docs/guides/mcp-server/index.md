@@ -8,7 +8,7 @@ description: Search Dialtone's design system with AI assistants using the Model 
 The Dialtone MCP Server provides AI assistants with real-time search access to:
 
 - **3,315 CSS utility classes** - Find classes like `d-p8`, `d-d-flex`, `d-w100p`
-- **5,691 design tokens** - Find tokens like `--dt-color-foreground-primary`, `--dt-spacing-100`
+- **5,691 design tokens** - Find tokens like `--dt-color-foreground-primary`, `--dt-space-400`
 - **87 Vue components** - Discover `DtButton`, `DtModal` with full API documentation
 - **594 icons** - Find icons like `bell-ring`, `arrow-up`, `calendar-plus`
 
@@ -45,7 +45,7 @@ Create or update `.mcp.json` in your project root:
 
 Commit `.mcp.json` to version control. Restart Claude Code to connect.
 
-<DtNotice kind="info" title="Priority" :show-close="false">
+<DtNotice kind="info" title="Priority" :hideClose="true">
 
 Project-scoped configuration overrides user-scoped. The `dialtone-mcp-server` command resolves from `node_modules/.bin/` first.
 
@@ -55,7 +55,7 @@ Project-scoped configuration overrides user-scoped. The `dialtone-mcp-server` co
 
 Available across all your projects. Choose one method:
 
-**Option A: Install in dedicated directory**
+#### Option A: Install in dedicated directory
 
 ```bash
 # Install in a dedicated directory
@@ -67,14 +67,14 @@ npm install @dialpad/dialtone-mcp-server
 claude mcp add dialtone --scope user dialtone-mcp-server
 ```
 
-**Option B: Install globally**
+#### Option B: Install globally
 
 ```bash
 npm install -g @dialpad/dialtone-mcp-server
 claude mcp add dialtone --scope user dialtone-mcp-server
 ```
 
-**Option C: Use npx (no installation)**
+#### Option C: Use npx (no installation)
 
 ```bash
 claude mcp add dialtone --scope user -- npx -y @dialpad/dialtone-mcp-server
@@ -90,7 +90,7 @@ Remote server deployment for enterprise use.
 claude mcp add dialtone-http --transport http --scope user https://mcp.dialtone.dialpad.com
 ```
 
-<DtNotice kind="info" title="Version Checking" :show-close="false">
+<DtNotice kind="info" title="Version Checking" :hideClose="true">
 
 When the server starts, you'll see the current version. If outdated, follow the instructions shown to update.
 
@@ -107,10 +107,10 @@ Find CSS utility classes to style HTML elements. Use when your query mentions CS
 **Example queries:**
 
 ```text
-"padding 8px"       → d-p8, d-pt8, d-pr8, d-pb8, d-pl8, d-px8, d-py-100
+"padding 8px"       → d-p8, d-pt8, d-pr8, d-pb8, d-pl8, d-px8, d-py8
 "display flex"      → d-d-flex, d-d-inline-flex
 "width 100%"        → d-w100p
-"margin top auto"   → d-mbs-auto
+"margin top auto"   → d-mt-auto
 "text align center" → d-ta-center
 ```
 
@@ -129,7 +129,7 @@ Find design tokens (CSS variables) from Dialtone's design system. Use when your 
 
 ```text
 "color foreground primary" → --dt-color-foreground-primary
-"spacing 100"              → --dt-spacing-100, --dt-spacing-100-negative
+"space 400"                → --dt-space-400, --dt-space-400-negative
 "font family"              → --dt-font-family-body, --dt-font-family-expressive
 "font weight bold"         → --dt-font-weight-bold
 ```
@@ -171,7 +171,7 @@ Find Vue components from Dialtone's component library with props, events, and sl
 
 **Tool:** `search_icons`
 
-Find icons from Dialtone's icon library and learn how to use icon components. Icons are imported from `@dialpad/dialtone-icons/vue`, not `@dialpad/dialtone-vue`.
+Find icons from Dialtone's icon library and learn how to use icon components. Icons are imported from `@dialpad/dialtone-icons/vue3`, not `@dialpad/dialtone-vue`.
 
 **Example queries:**
 
@@ -204,7 +204,7 @@ When working on a component and need specific styling:
 ```text
 User: "What class adds padding 8px to all sides?"
 Claude: [Uses search_utility_classes tool]
-Result: d-p-100 (padding: var(--dt-spacing-100) which equals 8px)
+Result: d-p8 (padding: var(--dt-space-400) which equals 8px)
 ```
 
 ### Discovering Components
@@ -238,7 +238,7 @@ When adding icons to your interface:
 User: "Show me all notification-related icons"
 Claude: [Uses search_icons tool]
 Result: bell, bell-ring, bell-off, bell-plus, bell-minus
-        Import: import { IconBell } from '@dialpad/dialtone-icons/vue'
+        Import: import { IconBell } from '@dialpad/dialtone-icons/vue3'
 ```
 
 ## Configuration
@@ -379,7 +379,7 @@ Restart Claude Desktop and look for the 🔌 icon to confirm connection.
    cat ~/.claude/mcp.json
    ```
 
-<DtNotice kind="warning" title="Important" :show-close="false">
+<DtNotice kind="warning" title="Important" :hideClose="true">
 
 Project-scoped configuration overrides user-scoped. If you have both, the project-level `.mcp.json` takes precedence.
 
@@ -425,7 +425,7 @@ Now that you have the MCP server installed, explore these resources:
 
 ---
 
-<DtNotice kind="info" title="Developer Tip" :show-close="false">
+<DtNotice kind="info" title="Developer Tip" :hideClose="true">
 
 The MCP server is perfect for discovering Dialtone patterns while coding. Instead of searching documentation manually, simply ask your AI assistant about components, tokens, or utilities, and it will search for you in real-time.
 

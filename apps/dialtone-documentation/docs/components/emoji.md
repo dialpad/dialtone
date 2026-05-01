@@ -6,40 +6,95 @@ thumb: true
 image: assets/images/components/emoji.png
 figma: planned
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-emoji--default
-keywords: ["emoticon","smiley","d-emoji","DtEmoji","dt-emoji"]
 ---
 
-<component-combinator component-name="DtEmoji" />
+<code-well-header>
+  <dt-emoji code=":smile:" />
+</code-well-header>
 
 ## Variants and Examples
 
 ### With Shortcode
 
-```vue demo
-<dt-emoji code=":smile:" size="500" />
-```
+<code-well-header>
+  <dt-emoji code=":smile:" />
+</code-well-header>
+
+<code-example-tabs
+htmlCode='
+<div>
+  <span class="d-emoji d-icon d-icon--size-500">
+    <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-500" style="display: none;">
+      <div
+        class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
+        style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;">
+      </div>
+    </div>
+    <img
+      aria-label="grinning face with smiling eyes"
+      alt="😄"
+      title="grinning face with smiling eyes"
+      src="https://static.dialpadcdn.com/joypixels/svg/unicode/1f604.svg"
+      class="d-icon d-icon--size-500"
+    />
+  </span>
+</div>
+'
+vueCode='
+<dt-emoji
+  code=":smile:"
+  size="500"
+/>
+'
+showHtmlWarning />
 
 ### With Unicode
 
-```vue demo
+<code-well-header>
+  <dt-emoji code="😉" ref="exampleUnicode" />
+</code-well-header>
+
+<code-example-tabs
+:htmlCode="() => $refs['exampleUnicode']"
+vueCode='
 <dt-emoji code="😉" />
-```
+'
+/>
 
 ### With Skin Tone
 
-```vue demo
+<code-well-header>
+  <dt-emoji code=":raised_hand_tone4:" ref="exampleSkinTone" />
+</code-well-header>
+
+<code-example-tabs
+:htmlCode="() => $refs.exampleSkinTone"
+vueCode='
 <dt-emoji code=":raised_hand_tone4:" />
-```
+'
+/>
 
 ### Sizes
 
-```vue demo
-<dt-stack direction="row" gap="100" align="center">
-  <dt-emoji v-for="size in sizes" :size="size" code=":smile:" />
-</dt-stack>
-<!-- @code -->
-<dt-emoji size="100|200|300|400|500|600|700|800" code=":smile:" />
-```
+<code-well-header>
+  <div class="d-d-inline-flex d-ai-center d-flow8" ref="exampleSizes">
+    <dt-emoji v-for="size in sizes" :size="size" code=":smile:" />
+  </div>
+</code-well-header>
+
+<code-example-tabs
+:htmlCode="() => $refs.exampleSizes"
+vueCode='
+<dt-emoji size="100" code=":smile:" />
+<dt-emoji size="200" code=":smile:" />
+<dt-emoji size="300" code=":smile:" />
+<dt-emoji size="400" code=":smile:" />
+<dt-emoji size="500" code=":smile:" />
+<dt-emoji size="600" code=":smile:" />
+<dt-emoji size="700" code=":smile:" />
+<dt-emoji size="800" code=":smile:" />
+'
+/>
 
 ## Vue API
 
@@ -74,9 +129,16 @@ setCustomEmojiUrl('https://my.example.website.com/images/icons/emoji/');
 setCustomEmojiJson(customEmojiJson);
 ```
 
-```vue demo
+<code-well-header>
+  <dt-emoji code=":shipit:" ref="customExample" />
+</code-well-header>
+
+<code-example-tabs
+:htmlCode="() => $refs.customExample"
+vueCode='
 <dt-emoji code=":shipit:" />
-```
+'
+/>
 
 In this example, the emoji with the :shipit: shortcode from the custom emoji provided will be rendered. Take into account that a custom emoji can only be referenced by the shortcode as no Unicode character is associated with it.
 

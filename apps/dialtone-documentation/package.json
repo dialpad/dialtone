@@ -25,6 +25,11 @@
       "name": "Nina Repetto",
       "email": "nina.repetto@dialpad.com",
       "url": "https://github.com/ninamarina"
+    },
+    {
+      "name": "Belu Montoya",
+      "email": "belu.montoya@dialpad.com",
+      "url": "https://github.com/belumontoya"
     }
   ],
   "keywords": [
@@ -35,10 +40,9 @@
     "Vuepress"
   ],
   "scripts": {
-    "lint": "run-s lint:docs lint:code lint:examples",
+    "lint": "run-s lint:docs lint:code",
     "lint:code": "eslint '**/*.{js,vue}'",
-    "lint:docs": "markdownlint '**/*.md'",
-    "lint:examples": "node ../../scripts/lint-doc-examples.mjs"
+    "lint:docs": "markdownlint '**/*.md'"
   },
   "type": "module",
   "devDependencies": {
@@ -46,10 +50,8 @@
     "@dialpad/dialtone-css": "workspace:*",
     "@dialpad/dialtone-icons": "workspace:*",
     "@dialpad/dialtone-tokens": "workspace:*",
-    "@dialpad/dialtone-vue": "workspace:vue3-next",
-    "@dialpad/i18n": "1.22.3",
+    "@dialpad/dialtone-vue": "workspace:^3",
     "@dialpad/postcss-responsive-variations": "workspace:*",
-    "@dialpad/stylelint-plugin-dialtone": "workspace:*",
     "@docsearch/css": "^4.0.1",
     "@docsearch/js": "^4.0.1",
     "@originjs/vite-plugin-commonjs": "^1.0.3",
@@ -58,6 +60,7 @@
     "@vuepress/plugin-active-header-links": "2.0.0-rc.112",
     "@vuepress/plugin-back-to-top": "2.0.0-rc.112",
     "@vuepress/plugin-git": "2.0.0-rc.112",
+    "@vuepress/plugin-llms": "2.0.0-rc.112",
     "@vuepress/plugin-prismjs": "2.0.0-rc.112",
     "@vuepress/plugin-theme-data": "2.0.0-rc.112",
     "date-fns": "^4.1.0",
@@ -65,7 +68,7 @@
     "markdown-it-anchor": "^8.6.7",
     "prettier": "3.3.2",
     "prismjs": "^1.30.0",
-    "colorjs.io": "^0.4.5",
+    "tinycolor2": "^1.6.0",
     "vite-svg-loader": "^5.1.0",
     "vue": "^3.5.21",
     "vue-router": "^4.5.1",
