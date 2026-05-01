@@ -1,3 +1,10 @@
+## [4.51.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.51.0...dialtone-icons/v4.51.1) (2026-05-01)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** NO-JIRA fix multiple rich text issues ([#1240](https://github.com/dialpad/dialtone/issues/1240)) ([f285a3e](https://github.com/dialpad/dialtone/commit/f285a3ed7c8cd409e0e59bd269282723b85003e6))
+
 # [4.51.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.50.0...dialtone-icons/v4.51.0) (2026-04-02)
 
 
