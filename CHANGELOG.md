@@ -1,3 +1,10 @@
+## [9.182.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.182.0...dialtone/v9.182.1) (2026-05-01)
+
+
+### Bug Fixes
+
+* NO-JIRA correct types paths in package.json exports ([#1239](https://github.com/dialpad/dialtone/issues/1239)) ([a133411](https://github.com/dialpad/dialtone/commit/a133411d52e5be53cf49970e75b6bcf8cafeaa27))
+
 # [9.182.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.181.0...dialtone/v9.182.0) (2026-05-01)
 
 
