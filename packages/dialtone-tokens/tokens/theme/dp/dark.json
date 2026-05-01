@@ -661,7 +661,7 @@
         "type": "color"
       },
       "success": {
-        "value": "{color.surface.positive}",
+        "value": "{color.border.positive}",
         "type": "color",
         "$deprecated": "Use positive instead."
       },
@@ -686,7 +686,7 @@
         "type": "color"
       },
       "success-subtle": {
-        "value": "{color.surface.positive-subtle}",
+        "value": "{color.border.positive-subtle}",
         "type": "color",
         "$deprecated": "Use positive-subtle instead."
       },
@@ -703,7 +703,7 @@
         "type": "color"
       },
       "success-strong": {
-        "value": "{color.surface.positive-strong}",
+        "value": "{color.border.positive-strong}",
         "type": "color",
         "$deprecated": "Use positive-strong instead."
       },
@@ -784,7 +784,7 @@
         "type": "color"
       },
       "success-inverted": {
-        "value": "{color.surface.positive-inverted}",
+        "value": "{color.border.positive-inverted}",
         "type": "color",
         "$deprecated": "Use positive-inverted instead."
       },
@@ -805,7 +805,7 @@
         "type": "color"
       },
       "success-subtle-inverted": {
-        "value": "{color.surface.positive-subtle-inverted}",
+        "value": "{color.border.positive-subtle-inverted}",
         "type": "color",
         "$deprecated": "Use positive-subtle-inverted instead."
       },
@@ -826,7 +826,7 @@
         "type": "color"
       },
       "success-strong-inverted": {
-        "value": "{color.surface.positive-strong-inverted}",
+        "value": "{color.border.positive-strong-inverted}",
         "type": "color",
         "$deprecated": "Use positive-strong-inverted instead."
       },
