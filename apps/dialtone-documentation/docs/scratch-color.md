@@ -16,11 +16,11 @@ layout: Blank
           <dt-stack gap="100" direction="row">
             <span>
               <dt-text strength="bold">Mode:</dt-text>
-              <dt-text tone="tertiary">{{ currentMode.charAt(0).toUpperCase() + currentMode.slice(1) }}</dt-text>
+              <dt-text tone="tertiary">{{ capitalize(currentMode) }}</dt-text>
             </span>
             <span>
               <dt-text strength="bold">Contrast:</dt-text>
-              <dt-text tone="tertiary">{{ currentContrast.charAt(0).toUpperCase() + currentContrast.slice(1) }}</dt-text>
+              <dt-text tone="tertiary">{{ capitalize(currentContrast) }}</dt-text>
             </span>
           </dt-stack>
           <template #startIcon="{ iconSize }">
@@ -219,7 +219,7 @@ layout: Blank
     </dt-dropdown>
   </dt-stack>
 </dt-box>
-<dt-box class="foo" surface="primary" padding="400">
+<dt-box surface="primary" padding="400">
   <dt-stack gap="400">
     <dt-stack gap="200">
       <dt-text as="h3" kind="label" size="200" strength="bold" tone="primary">Surfaces</dt-text>
@@ -342,12 +342,7 @@ layout: Blank
     </dt-box>
     <dt-stack gap="200">
       <dt-stack
-        v-for="row in [
-          { kind: undefined, importances: [undefined, 'outlined', 'clear'] },
-          { kind: 'critical', importances: [undefined, 'outlined', 'clear'] },
-          { kind: 'positive', importances: [undefined, 'outlined', 'clear'] },
-          { kind: 'muted', importances: ['clear', 'outlined'] },
-        ]"
+        v-for="row in buttonVariants"
         :key="row.kind || 'default'"
         gap="100"
         direction="row"
@@ -361,17 +356,17 @@ layout: Blank
       <dt-presence presence="away" />
     </dt-stack>
     <dt-stack direction="row" gap="100">
-      <template v-for="kind in [undefined, 'count']" :key="kind || 'text'">
-        <dt-badge v-for="t in [undefined, 'info', 'positive', 'warning', 'critical']" :key="`${kind || 'text'}-${t || 'default'}`" :text="kind === 'count' ? '1' : 'Label'" :kind="kind" :type="t" />
+      <template v-for="kind in badgeKinds" :key="kind || 'text'">
+        <dt-badge v-for="t in badgeTypes" :key="`${kind || 'text'}-${t || 'default'}`" :text="kind === 'count' ? '1' : 'Label'" :kind="kind" :type="t" />
       </template>
     </dt-stack>
     <dt-stack direction="row" gap="200">
       <dt-stack v-for="important in [false, true]" :key="important" gap="100">
-        <example-notice v-for="k in ['base', 'critical', 'info', 'positive', 'warning']" :key="k" :important="important" :kind="k" :title="`${capitalize(k)} title (optional)`" />
+        <example-notice v-for="k in noticeKinds" :key="k" :important="important" :kind="k" :title="`${capitalize(k)} title (optional)`" />
       </dt-stack>
     </dt-stack>
     <dt-stack direction="row" gap="200">
-      <dt-stack v-for="k in ['default', 'brand', 'critical', 'positive', 'warning', 'info', 'ai']" :key="k" gap="100">
+      <dt-stack v-for="k in progressKinds" :key="k" gap="100">
         <dt-progress-circle :kind="k" :progress="66" :aria-label="`kind ${k}`" />
       </dt-stack>
     </dt-stack>
@@ -395,12 +390,6 @@ layout: Blank
 </dialtone-usage>
   </dt-stack>
 </dt-box>
-
-<style>
-.foo {
-  /* background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0H20V20H0V0Z' fill='var(--dt-color-surface-primary)'/%3E%3Cpath d='M0 0L20 20M20 0L0 20' stroke='%23666' stroke-width='1'/%3E%3C/svg%3E"); */
-}
-</style>
 
 <script setup>
 import { useThemeManager } from '@composables/useThemeManager';
@@ -446,6 +435,16 @@ const foregroundTones = [
   'positive', 'warning', 'critical', 'info',
 ];
 const linkTones = ['base', 'critical', 'muted', 'positive', 'warning', 'info', 'mention'];
+const buttonVariants = [
+  { kind: undefined, importances: [undefined, 'outlined', 'clear'] },
+  { kind: 'critical', importances: [undefined, 'outlined', 'clear'] },
+  { kind: 'positive', importances: [undefined, 'outlined', 'clear'] },
+  { kind: 'muted', importances: ['clear', 'outlined'] },
+];
+const badgeKinds = [undefined, 'count'];
+const badgeTypes = [undefined, 'info', 'positive', 'warning', 'critical'];
+const noticeKinds = ['base', 'critical', 'info', 'positive', 'warning'];
+const progressKinds = ['default', 'brand', 'critical', 'positive', 'warning', 'info', 'ai'];
 
 const {
   currentMode,
