@@ -24,10 +24,10 @@
     </div>
     <div>
       <p class="d-label--md-compact d-mbe-100">
-        Never auto-hide
+        Always visible
       </p>
       <div
-        v-dt-scrollbar:never
+        v-dt-scrollbar:always
         class="d-h-250 d-w-400 d-bar-400 d-bc-default d-ba"
       >
         <div class="d-p-200">

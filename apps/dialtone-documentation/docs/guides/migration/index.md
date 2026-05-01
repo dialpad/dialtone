@@ -35,6 +35,7 @@ Work through each applicable guide in order. Guides earlier in the list are prer
 | 12 | [Recipes to UI Kits](./recipes-to-ui-kits/) | **Yes** | Migration script | `DtRecipe*` components move to standalone `@dialpad/` UI Kit packages. |
 | 13 | [Component Props & Events](./component-props/) | **Yes** | `dialtone-migrate-props` | Value renames (including DtBox `surface`/`bc`, DtText `tone-strong`, DtButton `link-kind`), `show` becomes `open`, `hide-*` inversion, `title` becomes `header-text`, event/slot renames, `rootClass` removal. |
 | 14 | [DtChip interactive default](./chip-interactive/) | **Yes** | `dialtone-migrate-chip-interactive` | `interactive` prop default changed from `true` to `false`. Chips that need click/keyboard behavior must opt in with `:interactive="true"`. |
+| 15 | [Scrollbar :never → :always](./scrollbar-always/) | **Yes** | `dialtone-migrate-scrollbar-always` | `v-dt-scrollbar:never` renamed to `v-dt-scrollbar:always`; `DtBox` `scrollbar="never"` renamed to `scrollbar="always"`. |
 
 ### Framework
 
@@ -90,7 +91,10 @@ npx dialtone-migrate-props --cwd ./src
 # 12. DtChip interactive default (adds :interactive="true" to clickable chips)
 npx dialtone-migrate-chip-interactive --cwd ./src
 
-# 13. ESLint auto-fix pass
+# 13. Scrollbar :never → :always
+npx dialtone-migrate-scrollbar-always --cwd ./src
+
+# 14. ESLint auto-fix pass
 npx eslint --fix "src/**/*.vue"
 ```
 

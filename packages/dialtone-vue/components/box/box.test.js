@@ -366,7 +366,7 @@ describe('DtBox', () => {
   // ── Scrollbar ──────────────────────────────────────────────
 
   it('renders scrollbar viewport wrapper when scrollbar prop is set', () => {
-    const wrapper = mountComponent({ scrollbar: 'never' });
+    const wrapper = mountComponent({ scrollbar: 'always' });
 
     expect(wrapper.find('[data-qa="dt-box-scrollbar-content"]').exists()).toBe(true);
   });

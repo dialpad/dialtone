@@ -31,6 +31,19 @@
       }
     }
   }
+
+  // Scrollbar track offsets via CSS custom properties set by v-dt-scrollbar directive.
+  // Vertical scrollbar: offset from block-start (top) and inline-end (right).
+  // Horizontal scrollbar: offset from block-end (bottom) and inline-start (left).
+  .os-scrollbar-vertical {
+    inset-block-start: var(--dt-scrollbar-offset-block-start, 0);
+    inset-inline-end: var(--dt-scrollbar-offset-inline-end, 0);
+  }
+
+  .os-scrollbar-horizontal {
+    inset-block-end: var(--dt-scrollbar-offset-block-end, 0);
+    inset-inline-start: var(--dt-scrollbar-offset-inline-start, 0);
+  }
 }
 
 // put this class on html element to disable the scrollbar on body (useful for modals)
