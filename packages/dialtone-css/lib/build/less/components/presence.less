@@ -36,8 +36,11 @@
     block-size: var(--presence-size);
     border: none;
     border-radius: var(--presence-border-radius);
+    display: grid;
+    place-items: center;
 
     &--active {
+      --presence-icon-color: var(--dt-color-neutral-transparent);
       background-color: var(--presence-color-background-active);
     }
 
@@ -46,6 +49,7 @@
     }
 
     &--away {
+      --presence-icon-color: var(--dt-color-neutral-black);
       background-color: var(--presence-color-background-away);
     }
 

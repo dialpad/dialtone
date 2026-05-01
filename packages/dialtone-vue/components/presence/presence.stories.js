@@ -19,6 +19,10 @@ export const argTypesData = {
     description: 'Screen reader text read out whenver the presence changes',
     control: 'text',
   },
+  showIcon: {
+    description: 'Renders a state-specific glyph inside the colored circle.',
+    control: 'boolean',
+  },
 };
 
 // Story Collection

@@ -2,6 +2,7 @@
   <dt-presence
     :presence="$attrs.presence"
     :sr-text="$attrs.srText"
+    :show-icon="$attrs.showIcon"
   />
 </template>
 

@@ -110,5 +110,36 @@ describe('DtPresence Tests', () => {
         });
       });
     });
+
+    describe('Presence icon', () => {
+      const ICON_QAS = {
+        active: 'dt-presence-active-icon',
+        away: 'dt-presence-away-icon',
+        busy: 'dt-presence-busy-icon',
+      };
+
+      it.each(Object.entries(ICON_QAS))(
+        'should render the matching icon when presence is %s',
+        (state, qa) => {
+          mockProps = { presence: state };
+          updateWrapper();
+          expect(wrapper.find(`[data-qa="${qa}"]`).exists()).toBe(true);
+        },
+      );
+
+      it('should not render an icon when presence is offline', () => {
+        mockProps = { presence: 'offline' };
+        updateWrapper();
+        Object.values(ICON_QAS).forEach((qa) => {
+          expect(wrapper.find(`[data-qa="${qa}"]`).exists()).toBe(false);
+        });
+      });
+
+      it('should not render an icon when showIcon is false', () => {
+        mockProps = { showIcon: false };
+        updateWrapper();
+        expect(wrapper.find(`[data-qa="${ICON_QAS.active}"]`).exists()).toBe(false);
+      });
+    });
   });
 });

@@ -15,6 +15,8 @@ keywords: ["status", "online", "availability", "d-presence", "DtPresence", "dt-p
 
 Located at the bottom right of an avatar, the `presence` indicator displays a user's current availablity. At a glance, check if a user is available, in a meeting, on a call, away, offline, or set to 'Do Not Disturb'. It's important to note that this indicator is automatically set and cannot be changed manually by the user.
 
+By default, the dot contains a state-specific glyph (checkmark for active, dash for away, × for busy) so state isn't conveyed by color alone. Consumers who want a dot-only treatment can opt out with `:show-icon="false"`.
+
 ## Variants and Examples
 
 ### Active
@@ -51,6 +53,24 @@ When a user has not logged in for their first time.
 <example-presence presence="offline" />
 <!-- @code -->
 <dt-presence presence="offline" />
+```
+
+### Without icon
+
+Pass `:show-icon="false"` for a dot-only treatment across all four states. The `offline` state never renders a glyph regardless of `showIcon`.
+```vue demo
+<!-- @wrapper -->
+<dt-stack direction="row" gap="400">
+  <example-presence presence="active" :show-icon="false" />
+  <example-presence presence="away" :show-icon="false" />
+  <example-presence presence="busy" :show-icon="false" />
+  <example-presence presence="offline" :show-icon="false" />
+</dt-stack>
+<!-- @code -->
+<dt-presence presence="active" :show-icon="false" />
+<dt-presence presence="away" :show-icon="false" />
+<dt-presence presence="busy" :show-icon="false" />
+<dt-presence presence="offline" :show-icon="false" />
 ```
 
 ## Vue API
