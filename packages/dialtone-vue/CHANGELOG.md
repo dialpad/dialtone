@@ -1,3 +1,11 @@
+# [3.220.0-next.4](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.220.0-next.3...dialtone-vue/v3.220.0-next.4) (2026-05-01)
+
+
+### Bug Fixes
+
+* **Popover, Collapsible:** DP-185811 cancel transitions on unmount ([#1241](https://github.com/dialpad/dialtone/issues/1241)) ([6883a0e](https://github.com/dialpad/dialtone/commit/6883a0e528c553e0f5baebb6e787ee080d086298))
+* **Rich Text Editor:** NO-JIRA fix multiple rich text issues ([#1240](https://github.com/dialpad/dialtone/issues/1240)) ([f285a3e](https://github.com/dialpad/dialtone/commit/f285a3ed7c8cd409e0e59bd269282723b85003e6))
+
 ## [3.219.2](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.219.1...dialtone-vue/v3.219.2) (2026-05-01)
 
 
