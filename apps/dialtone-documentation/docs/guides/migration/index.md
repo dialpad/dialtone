@@ -34,12 +34,13 @@ Work through each applicable guide in order. Guides earlier in the list are prer
 | 11 | [Logical Naming](./logical-naming/) | Deprecation | `dialtone-migration-helper` | Slots, props, events: `left`/`right` becomes `start`/`end`. |
 | 12 | [Recipes to UI Kits](./recipes-to-ui-kits/) | **Yes** | Migration script | `DtRecipe*` components move to standalone `@dialpad/` UI Kit packages. |
 | 13 | [Component Props & Events](./component-props/) | **Yes** | `dialtone-migrate-props` | Value renames (including DtBox `surface`/`bc`, DtText `tone-strong`, DtButton `link-kind`), `show` becomes `open`, `hide-*` inversion, `title` becomes `header-text`, event/slot renames, `rootClass` removal. |
+| 14 | [DtChip interactive default](./chip-interactive/) | **Yes** | `dialtone-migrate-chip-interactive` | `interactive` prop default changed from `true` to `false`. Chips that need click/keyboard behavior must opt in with `:interactive="true"`. |
 
 ### Framework
 
 | # | Guide | Breaking? | Tool | Summary |
 | --- | --- | --- | --- | --- |
-| 14 | [Vue 2 Removal](./vue2-removal/) | **Yes** | — | Vue 2 support dropped. Last Vue 2 version: `9.154.0`. |
+| 15 | [Vue 2 Removal](./vue2-removal/) | **Yes** | — | Vue 2 support dropped. Last Vue 2 version: `9.154.0`. |
 
 ## Quick Start
 
@@ -86,7 +87,10 @@ npx dialtone-migration-helper --cwd ./src
 # 11. Component props, events, and slots
 npx dialtone-migrate-props --cwd ./src
 
-# 12. ESLint auto-fix pass
+# 12. DtChip interactive default (adds :interactive="true" to clickable chips)
+npx dialtone-migrate-chip-interactive --cwd ./src
+
+# 13. ESLint auto-fix pass
 npx eslint --fix "src/**/*.vue"
 ```
 
