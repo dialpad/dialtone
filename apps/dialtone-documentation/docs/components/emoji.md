@@ -23,7 +23,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-emoji--defau
 <code-example-tabs
 htmlCode='
 <div>
-  <span class="d-emoji d-icon d-icon--size-500" code=":smile:" size="500">
+  <span class="d-emoji d-icon d-icon--size-500">
     <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-500" style="display: none;">
       <div
         class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
@@ -42,7 +42,7 @@ htmlCode='
 '
 vueCode='
 <dt-emoji
-  code="smile"
+  code=":smile:"
   size="500"
 />
 '

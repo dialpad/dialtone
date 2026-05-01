@@ -206,22 +206,22 @@ vueCode='
     <dt-icon-user :size="iconSize" />
   </template>
 </dt-avatar>
-<dt-avatar size="sm" icon-name="user">
+<dt-avatar size="sm">
   <template #icon="{ iconSize }">
     <dt-icon-user :size="iconSize" />
   </template>
 </dt-avatar>
-<dt-avatar size="md" icon-name="user">
+<dt-avatar size="md">
   <template #icon="{ iconSize }">
     <dt-icon-user :size="iconSize" />
   </template>
 </dt-avatar>
-<dt-avatar size="lg" icon-name="user">
+<dt-avatar size="lg">
   <template #icon="{ iconSize }">
     <dt-icon-user :size="iconSize" />
   </template>
 </dt-avatar>
-<dt-avatar size="xl" icon-name="user">
+<dt-avatar size="xl">
   <template #icon="{ iconSize }">
     <dt-icon-user :size="iconSize" />
   </template>
