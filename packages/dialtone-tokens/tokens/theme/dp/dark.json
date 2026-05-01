@@ -43,7 +43,7 @@
         "type": "color"
       },
       "success": {
-        "value": "{color.green.500}",
+        "value": "{color.foreground.positive}",
         "type": "color",
         "$deprecated": "Use positive instead."
       },
@@ -56,7 +56,7 @@
         "type": "color"
       },
       "success-strong": {
-        "value": "{color.green.700}",
+        "value": "{color.foreground.positive-strong}",
         "type": "color",
         "$deprecated": "Use positive-strong instead."
       },
@@ -89,12 +89,12 @@
         "type": "color"
       },
       "success-inverted": {
-        "value": "{color.green.200}",
+        "value": "{color.foreground.positive-inverted}",
         "type": "color",
         "$deprecated": "Use positive-inverted instead."
       },
       "success-strong-inverted": {
-        "value": "{color.green.50}",
+        "value": "{color.foreground.positive-strong-inverted}",
         "type": "color",
         "$deprecated": "Use positive-strong-inverted instead."
       }
@@ -211,46 +211,9 @@
         }
       },
       "success-subtle": {
-        "value": "{color.green.200}",
+        "value": "{color.border.positive-subtle}",
         "type": "color",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "darken",
-              "value": ".5",
-              "space": "oklch"
-            }
-          }
-        },
         "$deprecated": "Use positive-subtle instead. "
-      },
-      "success-subtle": {
-        "value": "{color.green.100}",
-        "type": "color",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "darken",
-              "value": ".5",
-              "space": "oklch"
-            }
-          }
-        },
-       "$deprecated": "Use positive-subtle instead."
-      },
-      "success-subtle": {
-        "value": "{color.green.100}",
-        "type": "color",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "darken",
-              "value": ".5",
-              "space": "oklch"
-            }
-          }
-        },
-        "$deprecated": "Use positive-subtle instead."
       },
       "info-subtle": {
         "value": "{color.blue.100}",
@@ -278,7 +241,7 @@
         "type": "color"
       },
       "success-strong": {
-        "value": "{color.green.500}",
+        "value": "{color.border.positive-strong}",
         "type": "color",
         "$deprecated": "Use positive-strong instead."
       },
@@ -408,17 +371,8 @@
         }
       },
       "success-opaque": {
-        "value": "{color.green.200}",
+        "value": "{color.surface.positive-opaque}",
         "type": "color",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "alpha",
-              "value": ".28",
-              "space": "oklch"
-            }
-          }
-        },
         "$deprecated": "Use positive-opaque instead."
       },
       "info-opaque": {
@@ -702,8 +656,12 @@
         "value": "{color.blue.800}",
         "type": "color"
       },
-      "success": {
+      "positive": {
         "value": "{color.green.500}",
+        "type": "color"
+      },
+      "success": {
+        "value": "{color.border.positive}",
         "type": "color",
         "$deprecated": "Use positive instead."
       },
@@ -728,7 +686,7 @@
         "type": "color"
       },
       "success-subtle": {
-        "value": "{color.green.300}",
+        "value": "{color.border.positive-subtle}",
         "type": "color",
         "$deprecated": "Use positive-subtle instead."
       },
@@ -745,7 +703,7 @@
         "type": "color"
       },
       "success-strong": {
-        "value": "{color.green.800}",
+        "value": "{color.border.positive-strong}",
         "type": "color",
         "$deprecated": "Use positive-strong instead."
       },
@@ -826,7 +784,7 @@
         "type": "color"
       },
       "success-inverted": {
-        "value": "{color.green.300}",
+        "value": "{color.border.positive-inverted}",
         "type": "color",
         "$deprecated": "Use positive-inverted instead."
       },
@@ -842,13 +800,12 @@
         "value": "{color.gold.800}",
         "type": "color"
       },
-      "success-subtle-inverted": {
+      "positive-subtle-inverted": {
         "value": "{color.green.800}",
-        "$deprecated": "Use positive-subtle-inverted instead.",
         "type": "color"
       },
       "success-subtle-inverted": {
-        "value": "{color.green.600}",
+        "value": "{color.border.positive-subtle-inverted}",
         "type": "color",
         "$deprecated": "Use positive-subtle-inverted instead."
       },
@@ -864,17 +821,12 @@
         "value": "{color.gold.300}",
         "type": "color"
       },
-      "success-strong-inverted": {
-        "value": "{color.green.200}",
-        "type": "color",
-        "$deprecated": "Use positive-strong-inverted instead."
-      },
       "positive-strong-inverted": {
         "value": "{color.green.200}",
         "type": "color"
       },
       "success-strong-inverted": {
-        "value": "{color.green.200}",
+        "value": "{color.border.positive-strong-inverted}",
         "type": "color",
         "$deprecated": "Use positive-strong-inverted instead."
       },
