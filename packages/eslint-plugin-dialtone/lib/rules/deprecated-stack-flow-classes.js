@@ -8,7 +8,8 @@
 const DEPRECATED_AUTO_SPACING_RE = /\bd-(?:stack|flow)\d+\b/;
 
 // Same pattern as a quoted string literal inside a `:class` array/object binding.
-const DEPRECATED_IN_BINDING_RE = /['"]d-(?:stack|flow)\d+['"]/;
+// Allows responsive prefixes (`md:d-stack16`) before the deprecated token.
+const DEPRECATED_IN_BINDING_RE = /['"](?:[\w-]+:)*d-(?:stack|flow)\d+['"]/;
 
 /** @type {import('eslint').Rule.RuleModule} */
 module.exports = {

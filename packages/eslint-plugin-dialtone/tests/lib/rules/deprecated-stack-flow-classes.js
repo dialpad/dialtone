@@ -69,6 +69,11 @@ ruleTester.run('deprecated-stack-flow-classes', rule, {
       code: '<template><div v-bind:class="[\'d-stack8\']">...</div></template>',
       errors: [{ messageId: 'preferStackInBinding' }],
     },
+    // Responsive-prefixed deprecated class inside a binding string literal
+    {
+      code: '<template><div :class="[\'md:d-stack16\']">...</div></template>',
+      errors: [{ messageId: 'preferStackInBinding' }],
+    },
     // Static and dynamic on the same element each report independently
     {
       code: '<template><div class="d-stack16" :class="[\'d-flow24\']">...</div></template>',
