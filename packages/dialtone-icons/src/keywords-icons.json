@@ -1601,6 +1601,18 @@
         "dda",
         "wheelchair"
       ],
+      "add-reaction": [
+        "add reaction",
+        "emoji reaction",
+        "add emoji",
+        "add",
+        "reaction",
+        "emoji",
+        "smile",
+        "express",
+        "plus",
+        "respond"
+      ],
       "add-task": [
         "check",
         "plus"
