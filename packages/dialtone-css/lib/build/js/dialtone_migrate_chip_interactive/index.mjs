@@ -36,9 +36,17 @@ import { fileURLToPath } from 'node:url';
 // Constants
 // ---------------------------------------------------------------------------
 
+// Quote-aware attribute body. Matches sequences of non-quote/non-gt chars
+// optionally followed by a fully-quoted attribute value, so `>` inside a
+// quoted value like `:class="a > b"` does not prematurely terminate the tag.
+const QUOTE_AWARE_ATTRS = '(?:[^>"\']|"[^"]*"|\'[^\']*\')*';
+
 // Matches `<dt-chip` or `<DtChip` opening tags (including self-closing).
-// Capture group 1: everything between the tag name and the closing `>` or `/>`.
-const CHIP_TAG_RE = /(<(?:dt-chip|DtChip)\b)([\s\S]*?)(\s*\/?>)/g;
+// Group 1: tag name; group 2: attributes (quote-aware); group 3: closer (`>` or `/>`).
+const CHIP_TAG_RE = new RegExp(
+  `(<(?:dt-chip|DtChip)\\b)(${QUOTE_AWARE_ATTRS})(\\s*\\/?>)`,
+  'g',
+);
 
 // Detects that the `interactive` prop is already present in any form:
 //   interactive, :interactive, v-bind:interactive

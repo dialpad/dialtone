@@ -21,6 +21,25 @@ function warnings (input) {
 // Auto-add :interactive="true" for chips with click handlers
 // ---------------------------------------------------------------------------
 
+describe('quote-aware attribute parsing — > inside quoted value', () => {
+  it('handles > inside a quoted attribute value before @click', () => {
+    const input = '<dt-chip :class="a > b" @click="onClick">Label</dt-chip>';
+    const expected = '<dt-chip :interactive="true" :class="a > b" @click="onClick">Label</dt-chip>';
+    assert.equal(run(input), expected);
+  });
+
+  it('does not warn when @click is present but attrs contain quoted >', () => {
+    const input = '<dt-chip :class="a > b" @click="onClick">Label</dt-chip>';
+    assert.equal(warnings(input).length, 0);
+  });
+
+  it('handles > inside a single-quoted attribute value', () => {
+    const input = '<dt-chip :title="x > y" @click="onClick">Label</dt-chip>';
+    const expected = '<dt-chip :interactive="true" :title="x > y" @click="onClick">Label</dt-chip>';
+    assert.equal(run(input), expected);
+  });
+});
+
 describe('chips with @click — auto-add :interactive="true"', () => {
   const cases = [
     [
