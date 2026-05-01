@@ -218,11 +218,11 @@
         "type": "color"
       },
       "info": {
-        "value": "{color.foreground.info}",
+        "value": "{color.blue.600}",
         "type": "color"
       },
       "info-hover": {
-        "value": "{color.foreground.info-strong}",
+        "value": "{color.blue.700}",
         "type": "color"
       },
       "muted": {
@@ -306,6 +306,66 @@
       "disabled-inverted-hover": {
         "value": "{color.foreground.disabled-inverted}",
         "type": "color"
+      },
+      "mention": {
+        "value": "{color.link.primary}",
+        "type": "color"
+      },
+      "mention-hover": {
+        "value": "{color.link.primary-hover}",
+        "type": "color"
+      },
+      "mention-background": {
+        "value": "{color.surface.brand-opaque}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".1",
+              "space": "oklch"
+            }
+          }
+        }
+      },
+      "mention-background-hover": {
+        "value": "{color.surface.brand-opaque}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".15",
+              "space": "oklch"
+            }
+          }
+        }
+      },
+      "mention-inverted-background": {
+        "value": "{color.surface.brand-opaque}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".3",
+              "space": "oklch"
+            }
+          }
+        }
+      },
+      "mention-inverted-background-hover": {
+        "value": "{color.surface.brand-opaque}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".2",
+              "space": "oklch"
+            }
+          }
+        }
       }
     },
     "surface": {
@@ -931,17 +991,8 @@
         "description": "Positive surface as opaque background color."
       },
       "success-opaque-inverted": {
-        "value": "{color.green.900}",
+        "value": "{color.surface.positive-opaque-inverted}",
         "type": "color",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "alpha",
-              "value": ".30",
-              "space": "oklch"
-            }
-          }
-        },
         "$deprecated": "Use positive-opaque-inverted instead.",
         "description": "Success surface as opaque background color."
       },
@@ -1016,17 +1067,8 @@
         "description": "Positive subtle surface as opaque background color."
       },
       "success-subtle-opaque-inverted": {
-        "value": "{color.green.1000}",
+        "value": "{color.surface.positive-subtle-opaque-inverted}",
         "type": "color",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "alpha",
-              "value": ".66",
-              "space": "oklch"
-            }
-          }
-        },
         "$deprecated": "Use positive-subtle-opaque-inverted instead.",
         "description": "Success subtle surface as opaque background color."
       },

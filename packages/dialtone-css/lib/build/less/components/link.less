@@ -17,7 +17,7 @@
 .d-link {
     --link-color-default: var(--dt-color-link-primary);
     --link-color-default-hover: var(--dt-color-link-primary-hover);
-    --link-text-decoration: underline;
+    --link-text-decoration: none;
     --link-padding: 0;
     --link-background-color: transparent;
 
@@ -45,14 +45,13 @@
     fill: currentColor;
 
     &:hover {
-        --link-text-decoration: none;
+        --link-text-decoration: underline;
 
         color: var(--link-color-default-hover);
         cursor: pointer;
     }
 
     &:active {
-        // --link-text-decoration: underline;
         color: var(--link-color-default);
     }
 
@@ -191,36 +190,32 @@
     &--inverted-mention {
         --link-color-default: var(--dt-color-link-primary-inverted);
         --link-color-default-hover: var(--dt-color-link-primary-inverted-hover);
-        --link-text-decoration: none;
         --link-padding: 0 var(--dt-spacing-25);
-        --link-background-color: oklch(from var(--dt-color-surface-brand-strong) l c h /0.3);
-
-        line-height: var(--dt-font-line-height-200);
-        border-radius: var(--dt-size-radius-200);
-    }
-
-    //  $$  MENTION
-    //  ----------------------------------------------------------------------------
-    // Styling specific to mentions such as @brad.paugh. The underline highlighting
-    // is reversed compared to a regular link, and it has a light background.
-    &--mention {
-        --link-text-decoration: none;
-        --link-padding: 0 var(--dt-spacing-25);
-        --link-background-color: oklch(from var(--dt-color-surface-brand-strong) l c h /0.1);
+        --link-background-color: var(--dt-color-link-mention-inverted-background);
 
         line-height: var(--dt-font-line-height-200);
         border-radius: var(--dt-size-radius-200);
 
         &:hover {
-            --link-text-decoration: underline;
-            --link-background-color: oklch(from var(--dt-color-surface-brand-strong) l c h /0.25);
-
-            text-underline-offset: var(--dt-spacing-25);
-            text-decoration-thickness: var(--dt-size-border-100);
+            --link-background-color: var(--dt-color-link-mention-inverted-background-hover);
         }
+    }
 
-        &:active {
-            --link-background-color: oklch(from var(--dt-color-surface-brand-strong) l c h /0.1);
+    //  $$  MENTION
+    //  ----------------------------------------------------------------------------
+    // Styling for @mention links (e.g. @brad.paugh). Displays as a pill-shaped
+    // background using brand surface tokens. Background changes on hover.
+    &--mention {
+        --link-color-default: var(--dt-color-link-mention);
+        --link-color-default-hover: var(--dt-color-link-mention-hover);
+        --link-padding: var(--dt-spacing-1) var(--dt-spacing-25);
+        --link-background-color: var(--dt-color-link-mention-background);
+
+        line-height: var(--dt-font-line-height-200);
+        border-radius: var(--dt-size-radius-300);
+
+        &:hover {
+            --link-background-color: var(--dt-color-link-mention-background-hover);
         }
     }
 }

@@ -40,6 +40,15 @@ div[class*="language-"] {
   }
 }
 
+code:not(.d-code--md, .d-code--sm, .d-prose *) {
+	padding: var(--dt-size-200) var(--dt-size-300);
+	color: var(--dt-color-foreground-info);
+	background-color: var(--dt-color-surface-info-subtle);
+	border-radius: var(--dt-size-radius-200);
+	user-select: all;
+}
+
+
 code[class*="language-"],
 pre[class*="language-"] {
 	margin: 0;
