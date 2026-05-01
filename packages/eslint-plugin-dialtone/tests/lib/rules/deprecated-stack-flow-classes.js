@@ -74,6 +74,11 @@ ruleTester.run('deprecated-stack-flow-classes', rule, {
       code: '<template><div :class="[\'md:d-stack16\']">...</div></template>',
       errors: [{ messageId: 'preferStackInBinding' }],
     },
+    // Multi-class quoted string literal: deprecated token alongside other classes
+    {
+      code: '<template><div :class="\'d-ps-relative d-stack2 d-px-0\'">...</div></template>',
+      errors: [{ messageId: 'preferStackInBinding' }],
+    },
     // Static and dynamic on the same element each report independently
     {
       code: '<template><div class="d-stack16" :class="[\'d-flow24\']">...</div></template>',

@@ -7,9 +7,10 @@
 // Word boundaries handle responsive prefixes (`md:d-stack16`) and adjacent classes.
 const DEPRECATED_AUTO_SPACING_RE = /\bd-(?:stack|flow)\d+\b/;
 
-// Same pattern as a quoted string literal inside a `:class` array/object binding.
-// Allows responsive prefixes (`md:d-stack16`) before the deprecated token.
-const DEPRECATED_IN_BINDING_RE = /['"](?:[\w-]+:)*d-(?:stack|flow)\d+['"]/;
+// Same pattern as a quoted string literal anywhere inside a `:class` binding.
+// Scans the whole quoted span so multi-class strings (`'d-ps-relative d-stack2 d-px-0'`)
+// and responsive prefixes (`'md:d-stack16'`) both match.
+const DEPRECATED_IN_BINDING_RE = /['"][^'"]*\bd-(?:stack|flow)\d+\b[^'"]*['"]/;
 
 /** @type {import('eslint').Rule.RuleModule} */
 module.exports = {
