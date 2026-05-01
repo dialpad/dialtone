@@ -305,6 +305,56 @@ describe('DtPopover Tests', () => {
     });
   });
 
+  describe('When component is unmounting', () => {
+    beforeEach(() => {
+      wrapper.vm._isUnmounting = true;
+    });
+
+    it('sets transition: none on content element to cancel in-flight transitions', () => {
+      const contentEl = wrapper.vm.popoverContentEl;
+      wrapper.unmount();
+      expect(contentEl.style.transition).toBe('none');
+    });
+
+    it('does not emit "opened" when leave transition completes', async () => {
+      await wrapper.vm.onLeaveTransitionComplete();
+      expect(wrapper.emitted('opened')).toBeUndefined();
+    });
+
+    it('emits "opened" and respects open prop when leave transition completes and not unmounting', async () => {
+      wrapper.vm._isUnmounting = false;
+      await wrapper.vm.onLeaveTransitionComplete();
+      expect(wrapper.emitted('opened')).toBeDefined();
+      expect(wrapper.emitted('opened')[0]).toEqual([false]);
+      // uncontrolled (open === null): update:open is not emitted
+      expect(wrapper.emitted('update:open')).toBeUndefined();
+      // controlled (open !== null): update:open is emitted
+      await wrapper.setProps({ open: false });
+      await wrapper.vm.onLeaveTransitionComplete();
+      expect(wrapper.emitted('update:open')).toBeDefined();
+      expect(wrapper.emitted('update:open')[0]).toEqual([false]);
+    });
+
+    it('does not emit "opened" when enter transition completes', async () => {
+      await wrapper.vm.onEnterTransitionComplete();
+      expect(wrapper.emitted('opened')).toBeUndefined();
+    });
+
+    it('emits "opened" and respects open prop when enter transition completes and not unmounting', async () => {
+      wrapper.vm._isUnmounting = false;
+      await wrapper.vm.onEnterTransitionComplete();
+      expect(wrapper.emitted('opened')).toBeDefined();
+      expect(wrapper.emitted('opened')[0][0]).toBe(true);
+      // uncontrolled (open === null): update:open is not emitted
+      expect(wrapper.emitted('update:open')).toBeUndefined();
+      // controlled (open !== null): update:open is emitted
+      await wrapper.setProps({ open: false });
+      await wrapper.vm.onEnterTransitionComplete();
+      expect(wrapper.emitted('update:open')).toBeDefined();
+      expect(wrapper.emitted('update:open')[0]).toEqual([true]);
+    });
+  });
+
   describe('When anchor slot content changes', () => {
     it('should attach the tippy instance to the new DOM node', async () => {
       const component = {
