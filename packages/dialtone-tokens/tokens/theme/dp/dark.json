@@ -661,7 +661,7 @@
         "type": "color"
       },
       "success": {
-        "value": "{color.border.positive}",
+        "value": "{color.surface.positive}",
         "type": "color",
         "$deprecated": "Use positive instead."
       },
@@ -784,7 +784,7 @@
         "type": "color"
       },
       "success-inverted": {
-        "value": "{color.border.positive-inverted}",
+        "value": "{color.surface.positive-inverted}",
         "type": "color",
         "$deprecated": "Use positive-inverted instead."
       },
