@@ -230,7 +230,6 @@
               {
                 "text": "Migration Guide",
                 "link": "/guides/migration/",
-                "status": "new",
                 "children": [
                   {
                     "text": "CSS Cascade Layers",
@@ -288,7 +287,8 @@
               },
               {
                 "text": "MCP Server",
-                "link": "/guides/mcp-server/"
+                "link": "/guides/mcp-server/",
+                "status": "new"
               },
               {
                 "text": "Getting Started",
