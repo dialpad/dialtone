@@ -18,7 +18,7 @@ Use `d-size-{stop}` to set both width and height using layout token stops. The h
   <dt-stack gap="100" align="start">
     <div v-for="(i, index) in layout" v-dt-tooltip="{ message: `${i.px}px`, delay: false }">
       <dt-text kind="code" size="100" class="d-w-100 d-us-all">d-size-{{i.stop}}</dt-text>
-      <div class="d-h-100 d-bgc-moderate d-bar-300" :class="`d-size-${i.stop}`"></div>
+      <div class="d-bgc-moderate d-bar-300" :class="`d-size-${i.stop}`"></div>
     </div>
   </dt-stack>
 </div>
