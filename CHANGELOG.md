@@ -1,3 +1,16 @@
+# [9.182.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.181.0...dialtone/v9.182.0) (2026-05-01)
+
+
+### Bug Fixes
+
+* **Popover, Collapsible:** DP-185811 cancel transitions on unmount ([#1241](https://github.com/dialpad/dialtone/issues/1241)) ([6883a0e](https://github.com/dialpad/dialtone/commit/6883a0e528c553e0f5baebb6e787ee080d086298))
+* **Rich Text Editor:** NO-JIRA fix multiple rich text issues ([#1240](https://github.com/dialpad/dialtone/issues/1240)) ([f285a3e](https://github.com/dialpad/dialtone/commit/f285a3ed7c8cd409e0e59bd269282723b85003e6))
+
+
+### Features
+
+* DLT-3352 refresh GEO standard, publish llms.txt, add freshness check ([#1235](https://github.com/dialpad/dialtone/issues/1235)) ([e43643d](https://github.com/dialpad/dialtone/commit/e43643dff727c61af48424013f3c3646b84b5380))
+
 # [9.181.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.180.0...dialtone/v9.181.0) (2026-04-24)
 
 
