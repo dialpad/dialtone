@@ -249,6 +249,8 @@ export default {
 
   beforeUnmount () {
     this._isUnmounting = true;
+    // Prevent transition callbacks from calling into dead lifecycle methods
+    // after this component is torn down (DP-185811).
   },
 
   methods: {
