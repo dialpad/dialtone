@@ -17,7 +17,7 @@
 .d-link {
     --link-color-default: var(--dt-color-link-primary);
     --link-color-default-hover: var(--dt-color-link-primary-hover);
-    --link-text-decoration: underline;
+    --link-text-decoration: none;
     --link-padding: 0;
     --link-background-color: transparent;
 
@@ -45,7 +45,7 @@
     fill: currentColor;
 
     &:hover {
-        --link-text-decoration: none;
+        --link-text-decoration: underline;
 
         color: var(--link-color-default-hover);
         cursor: pointer;
@@ -191,12 +191,15 @@
     &--inverted-mention {
         --link-color-default: var(--dt-color-link-primary-inverted);
         --link-color-default-hover: var(--dt-color-link-primary-inverted-hover);
-        --link-text-decoration: none;
         --link-padding: 0 var(--dt-spacing-25);
-        --link-background-color: oklch(from var(--dt-color-surface-brand-strong) l c h /0.3);
+        --link-background-color: var(--dt-color-link-mention-inverted-background);
 
         line-height: var(--dt-font-line-height-200);
         border-radius: var(--dt-size-radius-200);
+
+        &:hover {
+            --link-background-color: var(--dt-color-link-mention-inverted-background-hover);
+        }
     }
 
     //  $$  MENTION
@@ -204,23 +207,16 @@
     // Styling specific to mentions such as @brad.paugh. The underline highlighting
     // is reversed compared to a regular link, and it has a light background.
     &--mention {
-        --link-text-decoration: none;
-        --link-padding: 0 var(--dt-spacing-50);
-        --link-background-color: var(--dt-color-surface-brand-opaque);
+        --link-padding: var(--dt-spacing-1) var(--dt-spacing-25);
+        --link-color: var(--dt-color-link-mention);
+        --link-background-color: var(--dt-color-link-mention-background);
 
         line-height: var(--dt-font-line-height-200);
         border-radius: var(--dt-size-radius-300);
 
         &:hover {
-            --link-text-decoration: underline;
-            --link-background-color: var(--dt-color-surface-brand-subtle-opaque);
-
-            text-underline-offset: var(--dt-spacing-25);
-            text-decoration-thickness: var(--dt-size-border-100);
-        }
-
-        &:active {
-            --link-background-color: var(--dt-color-surface-brand-opaque);
+            --link-color: var(--dt-color-link-mention-hover);
+            --link-background-color: var(--dt-color-link-mention-background-hover);
         }
     }
 }
