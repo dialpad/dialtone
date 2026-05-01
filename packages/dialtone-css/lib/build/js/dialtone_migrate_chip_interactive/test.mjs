@@ -21,6 +21,26 @@ function warnings (input) {
 // Auto-add :interactive="true" for chips with click handlers
 // ---------------------------------------------------------------------------
 
+describe('quoted value false-positive prevention', () => {
+  it('does not false-positive on @click inside a quoted attribute value', () => {
+    const input = '<dt-chip :title=" @click is cool">Label</dt-chip>';
+    assert.equal(run(input), input);
+    assert.equal(warnings(input).length, 1);
+  });
+
+  it('does not false-positive on interactive inside a quoted attribute value', () => {
+    // HAS_INTERACTIVE_RE must not fire on this — chip still needs fixing
+    const input = '<dt-chip :aria-label="set interactive prop" @click="go">Label</dt-chip>';
+    const expected = '<dt-chip :interactive="true" :aria-label="set interactive prop" @click="go">Label</dt-chip>';
+    assert.equal(run(input), expected);
+  });
+
+  it('real :interactive prop still prevents insertion', () => {
+    const input = '<dt-chip :interactive="false" @click="go">Label</dt-chip>';
+    assert.equal(run(input), input);
+  });
+});
+
 describe('quote-aware attribute parsing — > inside quoted value', () => {
   it('handles > inside a quoted attribute value before @click', () => {
     const input = '<dt-chip :class="a > b" @click="onClick">Label</dt-chip>';

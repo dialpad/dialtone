@@ -65,6 +65,17 @@ const HAS_VON_OBJECT_RE = /(?:^|\s)v-on\s*=\s*(?:"[^"]*"|'[^']*')/;
 // ---------------------------------------------------------------------------
 
 /**
+ * Strip quoted attribute values from an attrs string before regex testing.
+ * Replaces "…" and '…' with empty equivalents so keywords that happen to
+ * appear inside a quoted value (e.g. :title=" @click is cool") don't
+ * false-positive against HAS_CLICK_RE / HAS_INTERACTIVE_RE / HAS_VON_OBJECT_RE.
+ * Real attribute tokens like @click="handler" survive as @click="" and still match.
+ */
+function stripQuotedValues (attrs) {
+  return attrs.replace(/"[^"]*"|'[^']*'/g, match => (match[0] === '"' ? '""' : '\'\''));
+}
+
+/**
  * Find the position to insert `:interactive="true"` — immediately after the
  * tag name so it appears first in the attribute list (consistent with existing
  * Dialtone convention where `:interactive` is an early structural prop).
@@ -94,7 +105,7 @@ export function transformContent (content, opts = {}) {
 
   // Mask inert content (HTML comments, <script>, <style>) so we don't
   // accidentally match tag-like text inside them.
-  const { masked, segments } = maskInertContent(content);
+  const { masked, segments, token } = maskInertContent(content);
 
   let out = masked;
   const replacements = [];
@@ -108,11 +119,15 @@ export function transformContent (content, opts = {}) {
     const matchStart = m.index;
     const matchEnd = matchStart + fullMatch.length;
 
-    // Already has the interactive prop — nothing to do.
-    if (HAS_INTERACTIVE_RE.test(attrs)) continue;
+    // Strip quoted values before regex testing so keywords inside quoted
+    // attribute values don't produce false positives.
+    const attrsForTest = stripQuotedValues(attrs);
 
-    const hasClick = HAS_CLICK_RE.test(attrs);
-    const hasVOnObject = HAS_VON_OBJECT_RE.test(attrs);
+    // Already has the interactive prop — nothing to do.
+    if (HAS_INTERACTIVE_RE.test(attrsForTest)) continue;
+
+    const hasClick = HAS_CLICK_RE.test(attrsForTest);
+    const hasVOnObject = HAS_VON_OBJECT_RE.test(attrsForTest);
 
     if (hasClick || hasVOnObject) {
       // Auto-add :interactive="true"
@@ -140,7 +155,7 @@ export function transformContent (content, opts = {}) {
     out = out.slice(0, r.start) + r.text + out.slice(r.end);
   }
 
-  return { transformed: unmaskInertContent(out, segments), warnings };
+  return { transformed: unmaskInertContent(out, segments, token), warnings };
 }
 
 // ---------------------------------------------------------------------------
@@ -148,18 +163,19 @@ export function transformContent (content, opts = {}) {
 // ---------------------------------------------------------------------------
 
 function maskInertContent (content) {
+  const token = Math.random().toString(36).slice(2, 10);
   const innerRe = /<!--[\s\S]*?-->|<script\b[^>]*>[\s\S]*?<\/script>|<style\b[^>]*>[\s\S]*?<\/style>/g;
   const segments = [];
   const masked = content.replace(innerRe, (match) => {
-    const placeholder = ` DT_MIGRATE_INERT_${segments.length} `;
+    const placeholder = ` DT_MIGRATE_INERT_${token}_${segments.length} `;
     segments.push(match);
     return placeholder;
   });
-  return { masked, segments };
+  return { masked, segments, token };
 }
 
-function unmaskInertContent (masked, segments) {
-  return masked.replace(/ DT_MIGRATE_INERT_(\d+) /g, (_, idx) => segments[Number(idx)]);
+function unmaskInertContent (masked, segments, token) {
+  return masked.replace(new RegExp(` DT_MIGRATE_INERT_${token}_(\\d+) `, 'g'), (_, idx) => segments[Number(idx)]);
 }
 
 // ---------------------------------------------------------------------------
