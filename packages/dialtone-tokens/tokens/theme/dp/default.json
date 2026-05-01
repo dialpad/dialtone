@@ -991,17 +991,8 @@
         "description": "Positive surface as opaque background color."
       },
       "success-opaque-inverted": {
-        "value": "{color.green.900}",
+        "value": "{color.surface.positive-opaque-inverted}",
         "type": "color",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "alpha",
-              "value": ".30",
-              "space": "oklch"
-            }
-          }
-        },
         "$deprecated": "Use positive-opaque-inverted instead.",
         "description": "Success surface as opaque background color."
       },
@@ -1076,17 +1067,8 @@
         "description": "Positive subtle surface as opaque background color."
       },
       "success-subtle-opaque-inverted": {
-        "value": "{color.green.1000}",
+        "value": "{color.surface.positive-subtle-opaque-inverted}",
         "type": "color",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "alpha",
-              "value": ".66",
-              "space": "oklch"
-            }
-          }
-        },
         "$deprecated": "Use positive-subtle-opaque-inverted instead.",
         "description": "Success subtle surface as opaque background color."
       },

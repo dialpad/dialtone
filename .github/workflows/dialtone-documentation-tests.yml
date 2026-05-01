@@ -10,12 +10,20 @@ on:
   pull_request:
     paths:
       - 'apps/dialtone-documentation/**'
+      - 'packages/dialtone-css/**'
+      - 'packages/dialtone-icons/**'
+      - 'packages/dialtone-tokens/**'
+      - 'packages/dialtone-vue/**'
       - 'pnpm-lock.yaml'
   push:
     branches:
       - staging
     paths:
       - 'apps/dialtone-documentation/**'
+      - 'packages/dialtone-css/**'
+      - 'packages/dialtone-icons/**'
+      - 'packages/dialtone-tokens/**'
+      - 'packages/dialtone-vue/**'
       - 'pnpm-lock.yaml'
 
 env:

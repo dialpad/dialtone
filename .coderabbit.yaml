@@ -67,6 +67,7 @@ reviews:
     - "!packages/dialtone-icons/android/src/**"       # generated Android resources
     - "!packages/dialtone-vue/storybook-static/**"    # Storybook build output
     - "!packages/dialtone-vue/functions/generated/**"
+    - "!apps/dialtone-documentation/docs/scratch-color.md" # dev scratchpad, not doc content
 
   path_instructions:
     # Vue components
@@ -137,9 +138,13 @@ reviews:
         - Token naming: camelCase with category prefix (dtColor*, dtSpace*,
           dtFontSize*, dtFontWeight*, dtShadow*, dtRadius*, dtSize*).
 
-        - New tokens must have dark mode overrides in dark.json.
+        - New tokens may inherit from default.json when the same value is correct
+          in dark mode. Add a dark.json override only when the dark theme value
+          must differ from the default.
 
-        - Component tokens must reference semantic tokens, not base palette.
+        - Prefer semantic tokens when a suitable mapping exists, but direct
+          base-palette references are valid when they are the correct source of
+          truth (e.g., a token that is literally tied to a specific palette stop).
 
         - Flag any circular references or references to non-existent tokens.
 
