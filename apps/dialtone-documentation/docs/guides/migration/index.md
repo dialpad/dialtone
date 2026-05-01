@@ -87,7 +87,10 @@ npx dialtone-migration-helper --cwd ./src
 # 11. Component props, events, and slots
 npx dialtone-migrate-props --cwd ./src
 
-# 12. ESLint auto-fix pass
+# 12. DtChip interactive default (adds :interactive="true" to clickable chips)
+npx dialtone-migrate-chip-interactive --cwd ./src
+
+# 13. ESLint auto-fix pass
 npx eslint --fix "src/**/*.vue"
 ```
 
