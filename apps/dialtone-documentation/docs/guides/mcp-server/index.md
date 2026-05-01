@@ -117,7 +117,7 @@ Find CSS utility classes to style HTML elements. Use when your query mentions CS
 
 **Tool:** `search_tokens`
 
-Find design tokens (CSS variables) from Dialtone's design system. Use when your query mentions token categories (color, space, font, size) or semantic names (primary, success, foreground, background).
+Find design tokens (CSS variables) from Dialtone's design system. Use when your query mentions token categories (color, space, font, size) or semantic names (primary, positive, foreground, background).
 
 **Example queries:**
 
