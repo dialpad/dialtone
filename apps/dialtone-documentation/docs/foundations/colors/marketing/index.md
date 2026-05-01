@@ -42,7 +42,7 @@ keywords: ["brand colors","marketing colors","purple"]
           </dt-text>
           <dt-button
             v-dt-tooltip="isCopied(color.hex) ? 'Copied!' : 'Copy'"
-            :aria-label="`Copy ${color.hex}`"
+            :aria-label="isCopied(color.hex) ? `Copied ${color.hex}` : `Copy ${color.hex}`"
             kind="muted"
             importance="outlined"
             size="200"
@@ -77,7 +77,7 @@ keywords: ["brand colors","marketing colors","purple"]
 
   <div class="d-d-grid d-g-600 d-g-cols1 md:d-g-cols3 d-ai-center">
     <div>
-      <p class="d-docsite--paragraph">When creating attract and engage level communications, especially when using limited amount of text or featuring the Ai sub-brand, use the dark background.</p>
+      <p class="d-docsite--paragraph">When creating attract and engage level communications, especially when using a limited amount of text or featuring the AI sub-brand, use the dark background.</p>
     </div>
     <div class="d-gc2">
       <img src="/assets/images/color-marketing--03.png" alt="" class="d-bar-500 d-d-block d-w100p" />
@@ -100,20 +100,28 @@ keywords: ["brand colors","marketing colors","purple"]
 </dt-stack>
 
 <script setup>
-import { ref } from 'vue';
+import { onUnmounted, ref } from 'vue';
 
 const copiedHex = ref(null);
 const isCopied = (hex) => copiedHex.value === hex;
+let copiedHexTimeoutId = null;
 const copyHex = async (hex) => {
   try {
     await navigator.clipboard.writeText(hex);
     copiedHex.value = hex;
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    if (copiedHex.value === hex) copiedHex.value = null;
+    if (copiedHexTimeoutId) clearTimeout(copiedHexTimeoutId);
+    copiedHexTimeoutId = setTimeout(() => {
+      if (copiedHex.value === hex) copiedHex.value = null;
+      copiedHexTimeoutId = null;
+    }, 2000);
   } catch {
     console.error('Error copying to clipboard', hex);
   }
 };
+
+onUnmounted(() => {
+  if (copiedHexTimeoutId) clearTimeout(copiedHexTimeoutId);
+});
 
 const marketingColors = [
   { hex: '#F8F7F6', name: 'Primary Light', description: 'Use for most light backgrounds and light text on dark backgrounds.' },
