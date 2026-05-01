@@ -52,7 +52,6 @@
     }
 
     &:active {
-        // --link-text-decoration: underline;
         color: var(--link-color-default);
     }
 
@@ -204,18 +203,18 @@
 
     //  $$  MENTION
     //  ----------------------------------------------------------------------------
-    // Styling specific to mentions such as @brad.paugh. The underline highlighting
-    // is reversed compared to a regular link, and it has a light background.
+    // Styling for @mention links (e.g. @brad.paugh). Displays as a pill-shaped
+    // background using brand surface tokens. Background changes on hover.
     &--mention {
+        --link-color-default: var(--dt-color-link-mention);
+        --link-color-default-hover: var(--dt-color-link-mention-hover);
         --link-padding: var(--dt-spacing-1) var(--dt-spacing-25);
-        --link-color: var(--dt-color-link-mention);
         --link-background-color: var(--dt-color-link-mention-background);
 
         line-height: var(--dt-font-line-height-200);
         border-radius: var(--dt-size-radius-300);
 
         &:hover {
-            --link-color: var(--dt-color-link-mention-hover);
             --link-background-color: var(--dt-color-link-mention-background-hover);
         }
     }

@@ -401,9 +401,8 @@ const messages = {
   positive: { "message": "Positive validation message", "type": "positive" },
 };
 
-// Data tables for the comprehensive token visualization. Each row exists
-// twice — once on a light wrapper (regular tokens) and once on a contrast
-// wrapper with v-dt-mode:invert (which auto-resolves to *-inverted tokens).
+// Each section renders twice: once normally and once inside a v-dt-mode:invert
+// wrapper, which swaps all tokens to their *-inverted counterparts automatically.
 
 const primarySurfaces = [
   { name: 'primary' },
