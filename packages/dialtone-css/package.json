@@ -52,7 +52,8 @@
     "dialtone-health-check": "./lib/dist/js/dialtone_health_check/index.cjs",
     "dialtone-migration-helper": "./lib/dist/js/dialtone_migration_helper/index.mjs",
     "dialtone-migrate-flex-to-stack": "./lib/dist/js/dialtone_migrate_flex_to_stack/index.mjs",
-    "dialtone-migrate-link-rendering": "./lib/dist/js/dialtone_migrate_link_rendering/index.mjs"
+    "dialtone-migrate-link-rendering": "./lib/dist/js/dialtone_migrate_link_rendering/index.mjs",
+    "dialtone-migrate-chip-interactive": "./lib/dist/js/dialtone_migrate_chip_interactive/index.mjs"
   },
   "type": "module",
   "scripts": {
