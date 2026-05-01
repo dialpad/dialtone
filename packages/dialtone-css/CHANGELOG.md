@@ -1,3 +1,10 @@
+# [8.80.0-next.4](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.80.0-next.3...dialtone-css/v8.80.0-next.4) (2026-05-01)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** NO-JIRA fix multiple rich text issues ([#1240](https://github.com/dialpad/dialtone/issues/1240)) ([f285a3e](https://github.com/dialpad/dialtone/commit/f285a3ed7c8cd409e0e59bd269282723b85003e6))
+
 ## [8.79.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.79.1...dialtone-css/v8.79.2) (2026-05-01)
 
 
