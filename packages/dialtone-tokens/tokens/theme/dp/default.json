@@ -2,17 +2,17 @@
   "color": {
     "foreground": {
       "primary": {
-        "value": "{color.black.1000}",
+        "value": "{color.black.900}",
         "type": "color",
         "description": "Default text color throughout the UI."
       },
       "secondary": {
-        "value": "{color.black.900}",
+        "value": "{color.black.700}",
         "type": "color",
         "description": "Example uses include introduction paragraphs, labels, and descriptions paired with form elements."
       },
       "tertiary": {
-        "value": "{color.black.800}",
+        "value": "{color.black.600}",
         "type": "color",
         "description": "Used to imply visual hierarchy relative to primary and secondary text colors, e.g. headlines and labels."
       },
@@ -45,7 +45,7 @@
         "description": "Expresses an error, danger, or otherwise critical state."
       },
       "critical-strong": {
-        "value": "{color.red.800}",
+        "value": "{color.red.700}",
         "type": "color",
         "description": "Expresses an error, danger, or otherwise critical state on surfaces that require a stronger contrast."
       },
@@ -60,13 +60,13 @@
         "description": "Indicates a strong positive state on surfaces that require a stronger contrast."
       },
       "success": {
-        "value": "{color.foreground.positive}",
+        "value": "{color.green.700}",
         "type": "color",
         "$deprecated": "Use positive instead.",
         "description": "Indicates a positive state."
       },
       "success-strong": {
-        "value": "{color.foreground.positive-strong}",
+        "value": "{color.green.950}",
         "type": "color",
         "$deprecated": "Use positive-strong instead.",
         "description": "Indicates a strong positive state on surfaces that require a stronger contrast."
@@ -74,7 +74,7 @@
       "warning": {
         "value": "{color.gold.800}",
         "type": "color",
-        "description": "Indicates a warning that requires user\u2019s attention and further action may be necessary."
+        "description": "Indicates information that requires user’s attention and further action may be necessary."
       },
       "info": {
         "value": "{color.blue.800}",
@@ -82,7 +82,7 @@
         "description": "Indicates a generally informational state."
       },
       "info-strong": {
-        "value": "{color.blue.950}",
+        "value": "{color.blue.900}",
         "type": "color",
         "description": "Indicates a generally informational state on surfaces that require a stronger contrast."
       },
@@ -146,41 +146,31 @@
         "description": "Positive strong text that sits on high-contrast surfaces or backgrounds."
       },
       "success-inverted": {
-        "value": "{color.foreground.positive-inverted}",
+        "value": "{color.green.200}",
         "type": "color",
         "$deprecated": "Use positive-inverted instead.",
         "description": "Success text that sits on high-contrast surfaces or backgrounds."
       },
       "success-strong-inverted": {
-        "value": "{color.foreground.positive-strong-inverted}",
+        "value": "{color.green.50}",
         "type": "color",
         "$deprecated": "Use positive-strong-inverted instead.",
         "description": "Success strong text that sits on high-contrast surfaces or backgrounds."
       },
       "warning-inverted": {
-        "value": "{color.gold.200}",
+        "value": "{color.gold.500}",
         "type": "color",
         "description": "Warning text that sits on high-contrast surfaces or backgrounds"
       },
       "info-inverted": {
-        "value": "{color.blue.200}",
+        "value": "{color.blue.300}",
         "type": "color",
         "description": "Info text that sits on high-contrast surfaces or backgrounds."
       },
       "info-strong-inverted": {
-        "value": "{color.blue.100}",
+        "value": "{color.blue.200}",
         "type": "color",
         "description": "Info strong text that sits on high-contrast surfaces or backgrounds."
-      },
-      "warning-strong": {
-        "value": "{color.gold.950}",
-        "type": "color",
-        "description": "Indicates a strong warning that requires user\u2019s attention and further action may be necessary."
-      },
-      "warning-strong-inverted": {
-        "value": "{color.gold.500}",
-        "type": "color",
-        "description": "Warning inverted strong text that sits on high-contrast surfaces or backgrounds."
       }
     },
     "link": {
@@ -189,7 +179,7 @@
         "type": "color"
       },
       "primary-hover": {
-        "value": "{color.purple.700}",
+        "value": "{color.purple.800}",
         "type": "color"
       },
       "critical": {
@@ -205,20 +195,19 @@
         "type": "color",
         "description": "positive"
       },
-      "success": {
-        "value": "{color.link.positive}",
-        "type": "color",
-        "description": "positive",
-        "$deprecated": "Use positive instead."
-      },
       "positive-hover": {
         "value": "{color.foreground.positive-strong}",
         "type": "color"
       },
-      "success-hover": {
-        "value": "{color.link.positive-hover}",
+      "success": {
+        "value": "{color.foreground.positive}",
         "type": "color",
-        "$deprecated": "Use positive-hover instead."
+        "$deprecated": "Use positive instead.",
+        "description": "positive"
+      },
+      "success-hover": {
+        "value": "{color.foreground.positive-strong}",
+        "type": "color"
       },
       "warning": {
         "value": "{color.foreground.warning}",
@@ -234,6 +223,88 @@
       },
       "info-hover": {
         "value": "{color.blue.700}",
+        "type": "color"
+      },
+      "muted": {
+        "value": "{color.foreground.secondary}",
+        "type": "color"
+      },
+      "muted-hover": {
+        "value": "{color.foreground.primary}",
+        "type": "color"
+      },
+      "disabled": {
+        "value": "{color.foreground.disabled}",
+        "type": "color"
+      },
+      "disabled-hover": {
+        "value": "{color.link.disabled}",
+        "type": "color"
+      },
+      "primary-inverted": {
+        "value": "{color.purple.200}",
+        "type": "color"
+      },
+      "primary-inverted-hover": {
+        "value": "{color.purple.200}",
+        "type": "color"
+      },
+      "critical-inverted": {
+        "value": "{color.foreground.critical-inverted}",
+        "type": "color"
+      },
+      "critical-inverted-hover": {
+        "value": "{color.foreground.critical-strong-inverted}",
+        "type": "color"
+      },
+      "positive-inverted": {
+        "value": "{color.foreground.positive-inverted}",
+        "type": "color"
+      },
+      "positive-inverted-hover": {
+        "value": "{color.foreground.positive-strong-inverted}",
+        "type": "color"
+      },
+      "success-inverted": {
+        "value": "{color.foreground.positive-inverted}",
+        "type": "color",
+        "$deprecated": "Use positive-inverted instead."
+      },
+      "success-inverted-hover": {
+        "value": "{color.foreground.positive-strong-inverted}",
+        "type": "color",
+        "$deprecated": "Use positive-inverted-hover instead."
+      },
+      "warning-inverted": {
+        "value": "{color.foreground.warning-inverted}",
+        "type": "color"
+      },
+      "warning-inverted-hover": {
+        "value": "{color.gold.300}",
+        "type": "color"
+      },
+      "info-inverted": {
+        "value": "{color.foreground.info-inverted}",
+        "type": "color"
+      },
+      "info-inverted-hover": {
+        "value": "{color.foreground.info-strong-inverted}",
+        "type": "color"
+      },
+      "muted-inverted": {
+        "value": "{color.foreground.secondary-inverted}",
+        "type": "color"
+      },
+      "muted-inverted-hover": {
+        "value": "{color.black.100}",
+        "type": "color"
+      },
+      "disabled-inverted": {
+        "value": "{color.foreground.disabled-inverted}",
+        "type": "color"
+      },
+      "disabled-inverted-hover": {
+        "value": "{color.foreground.disabled-inverted}",
         "type": "color"
       },
       "mention": {
@@ -270,72 +341,6 @@
           }
         }
       },
-      "muted": {
-        "value": "{color.foreground.secondary}",
-        "type": "color"
-      },
-      "muted-hover": {
-        "value": "{color.foreground.primary}",
-        "type": "color"
-      },
-      "disabled": {
-        "value": "{color.foreground.disabled}",
-        "type": "color"
-      },
-      "disabled-hover": {
-        "value": "{color.link.disabled}",
-        "type": "color"
-      },
-      "primary-inverted": {
-        "value": "{color.purple.200}",
-        "type": "color"
-      },
-      "primary-inverted-hover": {
-        "value": "{color.purple.100}",
-        "type": "color"
-      },
-      "critical-inverted": {
-        "value": "{color.foreground.critical-inverted}",
-        "type": "color"
-      },
-      "critical-inverted-hover": {
-        "value": "{color.foreground.critical-strong-inverted}",
-        "type": "color"
-      },
-      "positive-inverted": {
-        "value": "{color.foreground.positive-inverted}",
-        "type": "color"
-      },
-      "success-inverted": {
-        "value": "{color.link.positive-inverted}",
-        "type": "color",
-        "$deprecated": "Use positive-inverted instead."
-      },
-      "positive-inverted-hover": {
-        "value": "{color.foreground.positive-strong-inverted}",
-        "type": "color"
-      },
-      "success-inverted-hover": {
-        "value": "{color.link.positive-inverted-hover}",
-        "type": "color",
-        "$deprecated": "Use positive-inverted-hover instead."
-      },
-      "warning-inverted": {
-        "value": "{color.foreground.warning-inverted}",
-        "type": "color"
-      },
-      "warning-inverted-hover": {
-        "value": "{color.gold.100}",
-        "type": "color"
-      },
-      "info-inverted": {
-        "value": "{color.foreground.info-inverted}",
-        "type": "color"
-      },
-      "info-inverted-hover": {
-        "value": "{color.foreground.info-strong-inverted}",
-        "type": "color"
-      },
       "mention-inverted-background": {
         "value": "{color.surface.brand-opaque}",
         "type": "color",
@@ -361,22 +366,6 @@
             }
           }
         }
-      },
-      "muted-inverted": {
-        "value": "{color.foreground.secondary-inverted}",
-        "type": "color"
-      },
-      "muted-inverted-hover": {
-        "value": "{color.foreground.primary-inverted}",
-        "type": "color"
-      },
-      "disabled-inverted": {
-        "value": "{color.foreground.disabled-inverted}",
-        "type": "color"
-      },
-      "disabled-inverted-hover": {
-        "value": "{color.foreground.disabled-inverted}",
-        "type": "color"
       }
     },
     "surface": {
@@ -406,7 +395,7 @@
         "description": "Use sparingly to draw the eye to a relatively important region."
       },
       "contrast": {
-        "value": "{color.black.900}",
+        "value": "{color.black.800}",
         "type": "color",
         "description": "An inverted surface for lightened content and elements, most likely paired with inverted foreground colors."
       },
@@ -426,7 +415,7 @@
         "description": "Background surface color containing messaging or elements expressing a positive or successful state."
       },
       "success": {
-        "value": "{color.surface.positive}",
+        "value": "{color.green.100}",
         "type": "color",
         "$deprecated": "Use positive instead.",
         "description": "Background surface color containing messaging or elements expressing a positive or successful state."
@@ -457,7 +446,7 @@
         "description": "A softer version of the default positive surface."
       },
       "success-subtle": {
-        "value": "{color.surface.positive-subtle}",
+        "value": "{color.green.50}",
         "type": "color",
         "$deprecated": "Use positive-subtle instead.",
         "description": "A softer version of the default success surface."
@@ -478,28 +467,28 @@
         "description": "A contrasting critical surface, most likely paired with inverted foreground colors."
       },
       "warning-strong": {
-        "value": "{color.gold.500}",
+        "value": "{color.gold.400}",
         "type": "color",
         "description": "A contrasting warning surface, most likely paired with inverted foreground colors."
       },
       "positive-strong": {
-        "value": "{color.green.600}",
+        "value": "{color.green.800}",
         "type": "color",
         "description": "A contrasting positive state surface, most likely paired with inverted foreground colors."
       },
       "success-strong": {
-        "value": "{color.surface.positive-strong}",
+        "value": "{color.green.600}",
         "type": "color",
         "$deprecated": "Use positive-strong instead.",
         "description": "A contrasting positive state surface, most likely paired with inverted foreground colors."
       },
       "info-strong": {
-        "value": "{color.blue.600}",
+        "value": "{color.blue.800}",
         "type": "color",
         "description": "A contrasting informational surface, most likely paired with inverted foreground colors."
       },
       "brand-strong": {
-        "value": "{color.purple.500}",
+        "value": "{color.purple.600}",
         "type": "color",
         "description": "A contrasting informational surface, most likely paired with inverted foreground colors."
       },
@@ -510,7 +499,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".95",
+              "value": ".96",
               "space": "oklch"
             }
           }
@@ -518,13 +507,13 @@
         "description": "Primary surface as opaque background color."
       },
       "secondary-opaque": {
-        "value": "{color.surface.secondary}",
+        "value": "{color.black.900}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".90",
+              "value": ".02",
               "space": "oklch"
             }
           }
@@ -532,167 +521,7 @@
         "description": "Secondary surface as opaque background color."
       },
       "moderate-opaque": {
-        "value": "{color.surface.moderate}",
-        "type": "color",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "alpha",
-              "value": ".90",
-              "space": "oklch"
-            }
-          }
-        },
-        "description": "Moderate surface as opaque background color."
-      },
-      "bold-opaque": {
-        "value": "{color.surface.bold}",
-        "type": "color",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "alpha",
-              "value": ".90",
-              "space": "oklch"
-            }
-          }
-        },
-        "description": "Bold surface as opaque background color."
-      },
-      "strong-opaque": {
-        "value": "{color.surface.strong}",
-        "type": "color",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "alpha",
-              "value": ".95",
-              "space": "oklch"
-            }
-          }
-        },
-        "description": "Strong surface as opaque background color."
-      },
-      "contrast-opaque": {
-        "value": "{color.surface.contrast}",
-        "type": "color",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "alpha",
-              "value": ".95",
-              "space": "oklch"
-            }
-          }
-        },
-        "description": "Contrast surface as opaque background color."
-      },
-      "critical-opaque": {
-        "value": "{color.red.600}",
-        "type": "color",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "alpha",
-              "value": ".25",
-              "space": "oklch"
-            }
-          }
-        },
-        "description": "Critical surface as opaque background color."
-      },
-      "warning-opaque": {
-        "value": "{color.gold.500}",
-        "type": "color",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "alpha",
-              "value": ".22",
-              "space": "oklch"
-            }
-          }
-        },
-        "description": "Warning surface as opaque background color"
-      },
-      "positive-opaque": {
-        "value": "{color.green.500}",
-        "type": "color",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "alpha",
-              "value": ".22",
-              "space": "oklch"
-            }
-          }
-        },
-        "description": "Success surface as opaque background color."
-      },
-      "success-opaque": {
-        "value": "{color.surface.positive-opaque}",
-        "type": "color",
-        "$deprecated": "Use positive-opaque instead.",
-        "description": "Success surface as opaque background color."
-      },
-      "info-opaque": {
-        "value": "{color.blue.600}",
-        "type": "color",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "alpha",
-              "value": ".25",
-              "space": "oklch"
-            }
-          }
-        },
-        "description": "Info surface as opaque background color."
-      },
-      "brand-opaque": {
-        "value": "{color.purple.500}",
-        "type": "color",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "alpha",
-              "value": ".22",
-              "space": "oklch"
-            }
-          }
-        },
-        "description": "Info surface as opaque background color."
-      },
-      "critical-subtle-opaque": {
-        "value": "{color.red.500}",
-        "type": "color",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "alpha",
-              "value": ".125",
-              "space": "oklch"
-            }
-          }
-        },
-        "description": "Critical subtle surface as opaque background color."
-      },
-      "warning-subtle-opaque": {
-        "value": "{color.gold.500}",
-        "type": "color",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "alpha",
-              "value": ".1",
-              "space": "oklch"
-            }
-          }
-        },
-        "description": "Warning subtle surface as opaque background color"
-      },
-      "positive-subtle-opaque": {
-        "value": "{color.green.500}",
+        "value": "{color.black.900}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
@@ -703,22 +532,200 @@
             }
           }
         },
-        "description": "Success subtle surface as opaque background color."
+        "description": "Moderate surface as opaque background color."
       },
-      "success-subtle-opaque": {
-        "value": "{color.surface.positive-subtle-opaque}",
-        "type": "color",
-        "$deprecated": "Use positive-subtle-opaque instead.",
-        "description": "Success subtle surface as opaque background color."
-      },
-      "info-subtle-opaque": {
-        "value": "{color.blue.500}",
+      "bold-opaque": {
+        "value": "{color.black.900}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".125",
+              "value": ".19",
+              "space": "oklch"
+            }
+          }
+        },
+        "description": "Bold surface as opaque background color."
+      },
+      "strong-opaque": {
+        "value": "{color.black.900}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".76",
+              "space": "oklch"
+            }
+          }
+        },
+        "description": "Strong surface as opaque background color."
+      },
+      "contrast-opaque": {
+        "value": "{color.black.900}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".94",
+              "space": "oklch"
+            }
+          }
+        },
+        "description": "Contrast surface as opaque background color."
+      },
+      "critical-opaque": {
+        "value": "{color.red.200}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".31",
+              "space": "oklch"
+            }
+          }
+        },
+        "description": "Critical surface as opaque background color."
+      },
+      "warning-opaque": {
+        "value": "{color.gold.200}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".50",
+              "space": "oklch"
+            }
+          }
+        },
+        "description": "Warning surface as opaque background color"
+      },
+      "positive-opaque": {
+        "value": "{color.green.400}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".25",
+              "space": "oklch"
+            }
+          }
+        },
+        "description": "Positive surface as opaque background color."
+      },
+      "success-opaque": {
+        "value": "{color.green.400}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".25",
+              "space": "oklch"
+            }
+          }
+        },
+        "$deprecated": "Use positive-opaque instead. ",
+        "description": "Success surface as opaque background color."
+      },
+      "info-opaque": {
+        "value": "{color.blue.200}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".35",
+              "space": "oklch"
+            }
+          }
+        },
+        "description": "Info surface as opaque background color."
+      },
+      "brand-opaque": {
+        "value": "{color.purple.200}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".27",
+              "space": "oklch"
+            }
+          }
+        },
+        "description": "Info surface as opaque background color."
+      },
+      "critical-subtle-opaque": {
+        "value": "{color.red.100}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".5",
+              "space": "oklch"
+            }
+          }
+        },
+        "description": "Critical subtle surface as opaque background color."
+      },
+      "warning-subtle-opaque": {
+        "value": "{color.gold.100}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".50",
+              "space": "oklch"
+            }
+          }
+        },
+        "description": "Warning subtle surface as opaque background color"
+      },
+      "positive-subtle-opaque": {
+        "value": "{color.green.100}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".50",
+              "space": "oklch"
+            }
+          }
+        },
+        "description": "Positive subtle surface as opaque background color."
+      },
+      "success-subtle-opaque": {
+        "value": "{color.green.100}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".50",
+              "space": "oklch"
+            }
+          }
+        },
+        "$deprecated": "Use positive-subtle-opaque instead.",
+        "description": "Success subtle surface as opaque background color."
+      },
+      "info-subtle-opaque": {
+        "value": "{color.blue.100}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".50",
               "space": "oklch"
             }
           }
@@ -726,13 +733,13 @@
         "description": "Info surface as opaque background color."
       },
       "brand-subtle-opaque": {
-        "value": "{color.purple.500}",
+        "value": "{color.purple.200}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".125",
+              "value": ".20",
               "space": "oklch"
             }
           }
@@ -785,7 +792,7 @@
         "description": "Background surface color containing messaging or elements expressing a positive or successful state."
       },
       "success-inverted": {
-        "value": "{color.surface.positive-inverted}",
+        "value": "{color.green.900}",
         "type": "color",
         "$deprecated": "Use positive-inverted instead.",
         "description": "Background surface color containing messaging or elements expressing a positive or successful state."
@@ -813,13 +820,13 @@
       "positive-subtle-inverted": {
         "value": "{color.green.1000}",
         "type": "color",
-        "description": "A softer version of the default success surface."
+        "description": "A softer version of the default positive surface."
       },
       "success-subtle-inverted": {
-        "value": "{color.surface.positive-subtle-inverted}",
+        "value": "{color.green.1000}",
         "type": "color",
-        "description": "A softer version of the default success surface.",
-        "$deprecated": "Use positive-subtle-inverted instead."
+        "$deprecated": "Use positive-subtle-inverted instead.",
+        "description": "A softer version of the default success surface."
       },
       "info-subtle-inverted": {
         "value": "{color.blue.1000}",
@@ -844,13 +851,8 @@
       "positive-strong-inverted": {
         "value": "{color.green.950}",
         "type": "color",
+        "$deprecated": "Use positive-strong-inverted instead.",
         "description": "A contrasting positive state surface, most likely paired with inverted foreground colors."
-      },
-      "success-strong-inverted": {
-        "value": "{color.surface.positive-strong-inverted}",
-        "type": "color",
-        "description": "A contrasting positive state surface, most likely paired with inverted foreground colors.",
-        "$deprecated": "Use positive-strong-inverted instead."
       },
       "info-strong-inverted": {
         "value": "{color.blue.400}",
@@ -986,10 +988,10 @@
             }
           }
         },
-        "description": "Success surface as opaque background color."
+        "description": "Positive surface as opaque background color."
       },
       "success-opaque-inverted": {
-        "value": "{color.surface.positive-opaque-inverted}",
+        "value": "{color.green.900}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
@@ -1000,8 +1002,8 @@
             }
           }
         },
-        "description": "Success surface as opaque background color.",
-        "$deprecated": "Use positive-opaque-inverted instead."
+        "$deprecated": "Use positive-opaque-inverted instead.",
+        "description": "Success surface as opaque background color."
       },
       "info-opaque-inverted": {
         "value": "{color.blue.950}",
@@ -1071,10 +1073,10 @@
             }
           }
         },
-        "description": "Success subtle surface as opaque background color."
+        "description": "Positive subtle surface as opaque background color."
       },
       "success-subtle-opaque-inverted": {
-        "value": "{color.surface.positive-subtle-opaque-inverted}",
+        "value": "{color.green.1000}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
@@ -1085,8 +1087,8 @@
             }
           }
         },
-        "description": "Success subtle surface as opaque background color.",
-        "$deprecated": "Use positive-subtle-opaque-inverted instead."
+        "$deprecated": "Use positive-subtle-opaque-inverted instead.",
+        "description": "Success subtle surface as opaque background color."
       },
       "info-subtle-opaque-inverted": {
         "value": "{color.blue.1000}",
@@ -1193,11 +1195,11 @@
         "type": "color"
       },
       "positive": {
-        "value": "{color.green.600}",
+        "value": "{color.green.700}",
         "type": "color"
       },
       "success": {
-        "value": "{color.border.positive}",
+        "value": "{color.green.700}",
         "type": "color",
         "$deprecated": "Use positive instead."
       },
@@ -1218,11 +1220,16 @@
         "type": "color"
       },
       "positive-subtle": {
-        "value": "{color.green.400}",
-        "type": "color"
+        "value": "{color.green.300}",
+        "type": "color",
       },
       "success-subtle": {
-        "value": "{color.border.positive-subtle}",
+        "value": "{color.green.300}",
+        "type": "color",
+        "$deprecated": "Use positive-subtle instead."
+      },
+      "success-subtle": {
+        "value": "{color.green.300}",
         "type": "color",
         "$deprecated": "Use positive-subtle instead."
       },
@@ -1247,7 +1254,7 @@
         "type": "color"
       },
       "success-strong": {
-        "value": "{color.border.positive-strong}",
+        "value": "{color.green.900}",
         "type": "color",
         "$deprecated": "Use positive-strong instead."
       },
@@ -1320,11 +1327,11 @@
         "type": "color"
       },
       "positive-inverted": {
-        "value": "{color.green.300}",
+        "value": "{color.green.500}",
         "type": "color"
       },
       "success-inverted": {
-        "value": "{color.border.positive-inverted}",
+        "value": "{color.green.500}",
         "type": "color",
         "$deprecated": "Use positive-inverted instead."
       },
@@ -1345,11 +1352,12 @@
         "type": "color"
       },
       "positive-subtle-inverted": {
-        "value": "{color.green.800}",
-        "type": "color"
+        "value": "{color.green.900}",
+        "type": "color",
+        "$deprecated": "Use positive-subtle-inverted instead."
       },
       "success-subtle-inverted": {
-        "value": "{color.border.positive-subtle-inverted}",
+        "value": "{color.green.900}",
         "type": "color",
         "$deprecated": "Use positive-subtle-inverted instead."
       },
@@ -1374,7 +1382,7 @@
         "type": "color"
       },
       "success-strong-inverted": {
-        "value": "{color.border.positive-strong-inverted}",
+        "value": "{color.green.500}",
         "type": "color",
         "$deprecated": "Use positive-strong-inverted instead."
       },
@@ -3873,11 +3881,11 @@
         },
         "positive": {
           "default": {
-            "value": "{color.link.success}",
+            "value": "{color.link.positive}",
             "type": "color"
           },
           "hover": {
-            "value": "{color.link.success-hover}",
+            "value": "{color.link.positive-hover}",
             "type": "color"
           },
           "active": {
@@ -3917,15 +3925,15 @@
           },
           "primary": {
             "default": {
-              "value": "{color.purple.500}",
-              "type": "color"
-            },
-            "hover": {
               "value": "{color.purple.600}",
               "type": "color"
             },
-            "active": {
+            "hover": {
               "value": "{color.purple.700}",
+              "type": "color"
+            },
+            "active": {
+              "value": "{color.purple.800}",
               "type": "color"
             }
           }
@@ -4030,7 +4038,7 @@
             "type": "color"
           },
           "hover": {
-            "value": "{color.surface.success-opaque}",
+            "value": "{color.surface.positive-opaque}",
             "type": "color"
           },
           "active": {
@@ -4128,7 +4136,7 @@
           },
           "outlined": {
             "default": {
-              "value": "{color.border.success}",
+              "value": "{color.border.positive}",
               "type": "color"
             }
           }

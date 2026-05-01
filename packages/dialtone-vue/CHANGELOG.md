@@ -1,10 +1,34 @@
-## [3.219.2](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.219.1...dialtone-vue/v3.219.2) (2026-05-01)
+# [3.220.0-next.3](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.220.0-next.2...dialtone-vue/v3.220.0-next.3) (2026-04-30)
 
 
 ### Bug Fixes
 
-* **Popover, Collapsible:** DP-185811 cancel transitions on unmount ([#1241](https://github.com/dialpad/dialtone/issues/1241)) ([6883a0e](https://github.com/dialpad/dialtone/commit/6883a0e528c553e0f5baebb6e787ee080d086298))
-* **Rich Text Editor:** NO-JIRA fix multiple rich text issues ([#1240](https://github.com/dialpad/dialtone/issues/1240)) ([f285a3e](https://github.com/dialpad/dialtone/commit/f285a3ed7c8cd409e0e59bd269282723b85003e6))
+* **Rich Text Editor:** DP-179947 use URL as display text when inserting link without text ([#1202](https://github.com/dialpad/dialtone/issues/1202)) ([30f2504](https://github.com/dialpad/dialtone/commit/30f25049c22132f3b0a35a91ded852d1f2d07781))
+
+
+### Code Refactoring
+
+* **Box:** DLT-3333 rename percent prop values to p-suffix ([#1208](https://github.com/dialpad/dialtone/issues/1208)) ([e5fa5da](https://github.com/dialpad/dialtone/commit/e5fa5da83cd27bce1b3e5533a5503d2592ca0642))
+* **Components:** DLT-3160 standardize v-model event handling ([#1201](https://github.com/dialpad/dialtone/issues/1201)) ([f1624d4](https://github.com/dialpad/dialtone/commit/f1624d46ebf778f8ca92350a14c9d0ee3b195a4a))
+* **Components:** DLT-3284 refactor props to not have native html attributes names ([#1204](https://github.com/dialpad/dialtone/issues/1204)) ([48a0f57](https://github.com/dialpad/dialtone/commit/48a0f57e86b8154bc6e33edc1be9bfb02d22b208))
+* **Resizable:** DLT-3335 align size props on --dt-layout-* instead of --dt-size-* ([#1215](https://github.com/dialpad/dialtone/issues/1215)) ([c156dbc](https://github.com/dialpad/dialtone/commit/c156dbca5774f73a64be7b6de74e2f83af77b9eb))
+
+
+### Documentation
+
+* **Css Utilities:** DLT-3337 migrate internal utility-class consumers to token-indexed names and rewrite radius docs ([#1212](https://github.com/dialpad/dialtone/issues/1212)) ([d675238](https://github.com/dialpad/dialtone/commit/d675238409adf887a60b783b5aa045cde8e15944))
+* DLT-3345 migrate d-stack*/d-flow* wrappers to DtStack ([#1218](https://github.com/dialpad/dialtone/issues/1218)) ([fa090ef](https://github.com/dialpad/dialtone/commit/fa090ef365d6776601e1f94b2d15b9890ddd1ee3))
+
+
+### Features
+
+* **Colors:** DLT-3354 split green palette into distinct light and dark mode values ([#1225](https://github.com/dialpad/dialtone/issues/1225)) ([cf63034](https://github.com/dialpad/dialtone/commit/cf63034e6e856a5190f6aeae6092fe7f92d04568))
+* **Components:** dlt-3096 add slot classes ([#1214](https://github.com/dialpad/dialtone/issues/1214)) ([5f6528e](https://github.com/dialpad/dialtone/commit/5f6528e1884721f2710827094e5d471398ded2c9))
+* **Css Utilities, Design Tokens:** DLT-3330 DLT-3332 add off-scale pixel-indexed layout tokens and sizing utilities ([#1206](https://github.com/dialpad/dialtone/issues/1206)) ([1054875](https://github.com/dialpad/dialtone/commit/10548759c34e9db53396109ded36b5932b3525d8))
+* **Css Utilities, Eslint Plugin Dialtone:** DLT-3329 update border-radius css utilities and associated tooling ([#1211](https://github.com/dialpad/dialtone/issues/1211)) ([6bc3599](https://github.com/dialpad/dialtone/commit/6bc35991cff422b694f83b3b93184556e2c3475c))
+* **Design Tokens, Text, Link, Box, Css:** DLT-3338 add info semantic tokens and consumers ([#1210](https://github.com/dialpad/dialtone/issues/1210)) ([2f04b45](https://github.com/dialpad/dialtone/commit/2f04b45b8e44a223c81da839c4c1469e3d6e0285))
+* **Prose:** DLT-3245 new component ([#1169](https://github.com/dialpad/dialtone/issues/1169)) ([adee928](https://github.com/dialpad/dialtone/commit/adee92878ce6bdbcd4553d2e2d4a77dde1b2f00d))
+* **Tokens, Css:** DLT-3331 rename success tokens and utility classes to positive ([#1230](https://github.com/dialpad/dialtone/issues/1230)) ([34bdff5](https://github.com/dialpad/dialtone/commit/34bdff5fced88803f45de606df3a204bc191265b))
 
 ## [3.219.1](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.219.0...dialtone-vue/v3.219.1) (2026-04-17)
 

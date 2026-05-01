@@ -326,7 +326,7 @@ When a fixed or absolutely positioned element (like a toolbar or header) overlap
     >
       Fixed Toolbar (48px)
     </dt-box>
-    <dt-resizable-panel id="exo-left" initial-size="50p" class="d-bgc-success">
+    <dt-resizable-panel id="exo-left" initial-size="50p" class="d-bgc-positive">
       Left Panel
     </dt-resizable-panel>
     <dt-resizable-handle />

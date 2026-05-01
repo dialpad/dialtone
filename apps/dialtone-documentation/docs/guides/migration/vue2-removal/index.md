@@ -1,0 +1,41 @@
+---
+title: Vue 2 Removal
+description: Dialtone drops Vue 2 support — all consumers are already on Vue 3. Last Vue 2 version is 9.154.0.
+---
+
+## TLDR
+
+- Dialtone Vue 2 has been deprecated and is no longer supported
+- The last version supporting Vue 2 is **9.154.0**
+- All versions after 9.154.0 require Vue 3
+- We are not considering this a breaking change as all known Dialtone consumers are already using Vue 3
+
+## Overview
+
+Now that the migration to Vue 3 on ubervoice is complete, we are removing Vue 2 support from Dialtone. This will allow us to work more efficiently and consistently as we no longer have to support two frameworks at the same time.
+
+Vue 2 reached end-of-life on December 31, 2023, and the ecosystem has largely moved to Vue 3. Since all Dialtone consumers have already migrated to Vue 3, we're able to remove Vue 2 support without impacting any active projects.
+
+## What This Means for You
+
+Since all projects using Dialtone are already on Vue 3, this likely means no action is needed for you. If for some legacy reason you need to use Dialtone Vue 2, the latest version of Dialtone containing it is **9.154.0**, which will remain available on npm. However, this version will not receive any further updates, bug fixes, or new features.
+
+### Key Changes to Be Aware Of
+
+1. **Installation**: If you are installing dialtone-vue directly, install `@dialpad/dialtone-vue` rather than `@dialpad/dialtone-vue@vue3` like before
+2. **Import paths**: Import paths now use `/vue` instead of `/vue3`. The `/vue3` paths still work for backwards compatibility.
+
+   ```js
+   import { DtButton } from "@dialpad/dialtone/vue"
+   ```
+
+### Vue 2 to Vue 3 Migration
+
+If you are interested in the changes between Vue 2 and Vue 3 see the below links:
+
+- [Vue 3 Migration Guide](https://v3-migration.vuejs.org/)
+- [Vue 3 Breaking Changes](https://v3-migration.vuejs.org/breaking-changes/)
+
+### Need Help?
+
+If you have any troubles, please let us know in the #dialtone Dialpad channel.

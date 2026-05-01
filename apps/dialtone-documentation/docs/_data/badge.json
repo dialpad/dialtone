@@ -16,7 +16,7 @@
       "description": "Applies light blue background color."
     },
     {
-      "class": "d-badge--success",
+      "class": "d-badge--positive",
       "applies": ".d-badge",
       "description": "Applies light green background color."
     },

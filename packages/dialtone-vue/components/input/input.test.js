@@ -562,13 +562,13 @@ describe('DtInput tests', () => {
 
     describe('When descriptionClass is provided', () => {
       it('should apply custom class to the description', () => {
-        mockProps = { description: 'Description', descriptionClass: 'd-bgc-success' };
+        mockProps = { description: 'Description', descriptionClass: 'd-bgc-positive' };
 
         updateWrapper();
 
         const descriptionEl = wrapper.find('[data-qa="dt-input-description"]');
 
-        expect(descriptionEl.classes('d-bgc-success')).toBe(true);
+        expect(descriptionEl.classes('d-bgc-positive')).toBe(true);
       });
     });
 

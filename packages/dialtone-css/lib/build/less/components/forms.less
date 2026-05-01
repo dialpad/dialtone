@@ -157,7 +157,8 @@ fieldset {
   }
 }
 
-.d-validation-message--critical {
+.d-validation-message--critical,
+.d-validation-message--error {
   --validation-color-text: var(--dt-color-foreground-critical);
 
   &::before {
@@ -165,7 +166,8 @@ fieldset {
   }
 }
 
-.d-validation-message--positive {
+.d-validation-message--positive,
+.d-validation-message--success {
   --validation-color-text: var(--dt-color-foreground-positive);
 
   &::before {

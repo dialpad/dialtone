@@ -3,6 +3,7 @@
 const noBaseColorTokens = require('./rules/no-base-color-tokens');
 const noDeprecatedSizeTokens = require('./rules/no-deprecated-size-tokens');
 const noDeprecatedSpaceTokens = require('./rules/no-deprecated-space-tokens');
+const noDeprecatedSuccessTokens = require('./rules/no-deprecated-success-tokens');
 const noMixins = require('./rules/no-mixins');
 const recommendFontStyleTokens = require('./rules/recommend-font-style-tokens');
 const useDialtoneTokens = require('./rules/use-dialtone-tokens');
@@ -12,6 +13,7 @@ module.exports = [
   noBaseColorTokens,
   noDeprecatedSizeTokens,
   noDeprecatedSpaceTokens,
+  noDeprecatedSuccessTokens,
   noMixins,
   recommendFontStyleTokens,
   useDialtoneTokens,

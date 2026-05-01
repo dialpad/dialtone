@@ -5,6 +5,7 @@ import { provide, shallowRef } from 'vue';
 import Icons from './views/Icons.vue';
 import Overview from './views/Overview.vue';
 import UiKitsOverview from './views/UiKitsOverview.vue';
+import DownloadsCatalog from './views/DownloadsCatalog.vue';
 
 // Base components
 import CodeWellHeader from './baseComponents/CodeWellHeader.vue';
@@ -20,6 +21,7 @@ import CodeExample from './baseComponents/CodeExample.vue';
 import SvgLoader from './baseComponents/SvgLoader.vue';
 import DialtoneUsage from './baseComponents/DialtoneUsage.vue';
 import UiKitsComparisonTable from './baseComponents/UiKitsComparisonTable.vue';
+import MigrationBanner from './baseComponents/MigrationBanner.vue';
 
 export default defineClientConfig({
   enhance ({ app }) {
@@ -27,6 +29,7 @@ export default defineClientConfig({
     app.component('Icons', Icons);
     app.component('Overview', Overview);
     app.component('UiKitsOverview', UiKitsOverview);
+    app.component('DownloadsCatalog', DownloadsCatalog);
 
     // Base components
     app.component('CodeWellHeader', CodeWellHeader);
@@ -42,6 +45,7 @@ export default defineClientConfig({
     app.component('SvgLoader', SvgLoader);
     app.component('DialtoneUsage', DialtoneUsage);
     app.component('UiKitsComparisonTable', UiKitsComparisonTable);
+    app.component('MigrationBanner', MigrationBanner);
   },
   setup () {
     const headers = shallowRef([]);

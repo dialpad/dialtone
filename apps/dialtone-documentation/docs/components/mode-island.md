@@ -1,8 +1,8 @@
 ---
-title: Mode Island
-description: Apply light, dark, or inverted color mode to any element or region.
+title: Mode
+description: Directive to apply light, dark, or inverted color mode to any element or region.
 status: beta
-keywords: ["theme island","mode override","v-dt-mode","directive","light","dark","invert","v-dt"]
+keywords: ["theme island","mode island","mode override","v-dt-mode","directive","light","dark","invert","v-dt"]
 ---
 
 ```vue demo-only

@@ -296,14 +296,14 @@ const inputMessages = computed(() => showInputMessages.value ? [{ message: 'Crit
 const showInputMessagesClass = ref(false);
 const resolvedInputMessagesClass = computed(() => showInputMessagesClass.value ? 'd-bgc-critical' : undefined);
 const showInputDescriptionClass = ref(false);
-const resolvedInputDescriptionClass = computed(() => showInputDescriptionClass.value ? 'd-bgc-success' : undefined);
+const resolvedInputDescriptionClass = computed(() => showInputDescriptionClass.value ? 'd-bgc-positive' : undefined);
 const showDescription = ref(false);
 const showCheckRadioMessages = ref(false);
 const checkRadioMessages = computed(() => showCheckRadioMessages.value ? [{ message: 'Critical validation message', type: 'critical' }] : []);
 const showCheckRadioMessagesClass = ref(false);
 const resolvedCheckRadioMessagesClass = computed(() => showCheckRadioMessagesClass.value ? 'd-bgc-critical' : undefined);
 const showCheckRadioDescriptionClass = ref(false);
-const resolvedCheckRadioDescriptionClass = computed(() => showCheckRadioDescriptionClass.value ? 'd-bgc-success' : undefined);
+const resolvedCheckRadioDescriptionClass = computed(() => showCheckRadioDescriptionClass.value ? 'd-bgc-positive' : undefined);
 const checkRadioDisabled = ref(false);
 </script>
 
@@ -1425,41 +1425,41 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
       <div class="d-d-grid d-g-400 d-g-cols2">
         <dt-stack gap="100">
           <dt-text as="h3" kind="headline" :size="300">Default</dt-text>
-          <dt-notice kind="positive" title="Success" hide-action>
+          <dt-notice kind="positive" header-text="Success" hide-action>
             Action completed successfully.
           </dt-notice>
-          <dt-notice kind="warning" title="Warning" :show-action="false">
+          <dt-notice kind="warning" header-text="Warning" :show-action="false">
             Please review before proceeding.
           </dt-notice>
-          <dt-notice kind="critical" title="Critical" :show-action="false">
+          <dt-notice kind="critical" header-text="Critical" :show-action="false">
             Something went wrong. Please try again.
           </dt-notice>
-          <dt-notice kind="base" title="Base" :show-action="false">
+          <dt-notice kind="base" header-text="Base" :show-action="false">
             A neutral notice for general information.
           </dt-notice>
         </dt-stack>
         <dt-stack gap="100">
           <dt-text as="h3" kind="headline" :size="300">Important</dt-text>
-          <dt-notice kind="info" title="Important info" :important="true" :show-action="false">
+          <dt-notice kind="info" header-text="Important info" :important="true" :show-action="false">
             Visually prominent variant with filled background.
           </dt-notice>
-          <dt-notice kind="positive" title="Important success" :important="true" hide-action>
+          <dt-notice kind="positive" header-text="Important success" :important="true" hide-action>
             Visually prominent variant with filled background.
           </dt-notice>
-          <dt-notice kind="warning" title="Important warning" :important="true" :show-action="false">
+          <dt-notice kind="warning" header-text="Important warning" :important="true" :show-action="false">
             Visually prominent variant with filled background.
           </dt-notice>
-          <dt-notice kind="critical" title="Important critical" :important="true" :show-action="false">
+          <dt-notice kind="critical" header-text="Important critical" :important="true" :show-action="false">
             Visually prominent variant with filled background.
           </dt-notice>
         </dt-stack>
         <dt-stack gap="100">
           <dt-text as="h3" kind="headline" :size="300">Alignment per internal parts</dt-text>
-          <dt-notice kind="info" title="Title only" :show-action="false" />
+          <dt-notice kind="info" header-text="Title only" :show-action="false" />
           <dt-notice kind="info" :show-action="false">
             Message only — icon aligns to center when there is a single line of content.
           </dt-notice>
-          <dt-notice kind="info" title="Title and message" :show-action="false">
+          <dt-notice kind="info" header-text="Title and message" :show-action="false">
             When both title and message are present, the icon aligns to the top of the content stack.
           </dt-notice>
         </dt-stack>
@@ -1470,31 +1470,31 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
         Banner
       </dt-text>
       <dt-stack gap="100">
-        <dt-banner kind="info" title="Info banner" class="d-ps-relative d-zi-base">
+        <dt-banner kind="info" header-text="Info banner" class="d-ps-relative d-zi-base">
           Banners are more prominent than notices.
         </dt-banner>
-        <dt-banner kind="positive" title="Success banner" class="d-ps-relative d-zi-base">
+        <dt-banner kind="positive" header-text="Success banner" class="d-ps-relative d-zi-base">
           Action completed successfully.
         </dt-banner>
-        <dt-banner kind="warning" title="Warning banner" class="d-ps-relative d-zi-base">
+        <dt-banner kind="warning" header-text="Warning banner" class="d-ps-relative d-zi-base">
           Please review before proceeding.
         </dt-banner>
-        <dt-banner kind="critical" title="Critical banner" class="d-ps-relative d-zi-base">
+        <dt-banner kind="critical" header-text="Critical banner" class="d-ps-relative d-zi-base">
           Something went wrong.
         </dt-banner>
       </dt-stack>
       <dt-stack gap="100">
         <dt-text as="h3" kind="headline" :size="300">Important</dt-text>
-        <dt-banner kind="info" title="Info banner" :important="true" class="d-ps-relative d-zi-base">
+        <dt-banner kind="info" header-text="Info banner" :important="true" class="d-ps-relative d-zi-base">
           Banners are more prominent than notices.
         </dt-banner>
-        <dt-banner kind="positive" title="Success banner" :important="true" class="d-ps-relative d-zi-base">
+        <dt-banner kind="positive" header-text="Success banner" :important="true" class="d-ps-relative d-zi-base">
           Action completed successfully.
         </dt-banner>
-        <dt-banner kind="warning" title="Warning banner" :important="true" class="d-ps-relative d-zi-base">
+        <dt-banner kind="warning" header-text="Warning banner" :important="true" class="d-ps-relative d-zi-base">
           Please review before proceeding.
         </dt-banner>
-        <dt-banner kind="critical" title="Critical banner" :important="true" class="d-ps-relative d-zi-base">
+        <dt-banner kind="critical" header-text="Critical banner" :important="true" class="d-ps-relative d-zi-base">
           Something went wrong.
         </dt-banner>
       </dt-stack>
@@ -1506,25 +1506,25 @@ Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone compone
       <div class="d-d-grid d-g-400 d-g-cols2">
         <dt-stack gap="100">
           <dt-text as="h3" kind="headline" :size="300">Default</dt-text>
-          <dt-toast :open="true" kind="info" title="Info toast" message="Informational message." :duration="null" />
-          <dt-toast :open="true" kind="positive" title="Success toast" message="Action completed." :duration="null" />
-          <dt-toast :open="true" kind="warning" title="Warning toast" message="Review before proceeding." :duration="null" />
-          <dt-toast :open="true" kind="critical" title="Critical toast" message="Something went wrong." :duration="null" />
-          <dt-toast :open="true" kind="base" title="Base toast" message="Neutral notification." :duration="null" />
+          <dt-toast :open="true" kind="info" header-text="Info toast" message="Informational message." :duration="null" />
+          <dt-toast :open="true" kind="positive" header-text="Success toast" message="Action completed." :duration="null" />
+          <dt-toast :open="true" kind="warning" header-text="Warning toast" message="Review before proceeding." :duration="null" />
+          <dt-toast :open="true" kind="critical" header-text="Critical toast" message="Something went wrong." :duration="null" />
+          <dt-toast :open="true" kind="base" header-text="Base toast" message="Neutral notification." :duration="null" />
         </dt-stack>
         <dt-stack gap="100">
           <dt-text as="h3" kind="headline" :size="300">Important</dt-text>
-          <dt-toast :open="true" kind="info" title="Info toast" message="Informational message." :important="true" :duration="null" />
-          <dt-toast :open="true" kind="positive" title="Success toast" message="Action completed." :important="true" :duration="null" />
-          <dt-toast :open="true" kind="warning" title="Warning toast" message="Review before proceeding." :important="true" :duration="null" />
-          <dt-toast :open="true" kind="critical" title="Critical toast" message="Something went wrong." :important="true" :duration="null" />
-          <dt-toast :open="true" kind="base" title="Base toast" message="Neutral notification." :important="true" :duration="null" />
+          <dt-toast :open="true" kind="info" header-text="Info toast" message="Informational message." :important="true" :duration="null" />
+          <dt-toast :open="true" kind="positive" header-text="Success toast" message="Action completed." :important="true" :duration="null" />
+          <dt-toast :open="true" kind="warning" header-text="Warning toast" message="Review before proceeding." :important="true" :duration="null" />
+          <dt-toast :open="true" kind="critical" header-text="Critical toast" message="Something went wrong." :important="true" :duration="null" />
+          <dt-toast :open="true" kind="base" header-text="Base toast" message="Neutral notification." :important="true" :duration="null" />
         </dt-stack>
         <dt-stack gap="100">
           <dt-text as="h3" kind="headline" :size="300">Alignment per internal parts</dt-text>
-          <dt-toast :open="true" kind="info" title="Title only" :duration="null" />
+          <dt-toast :open="true" kind="info" header-text="Title only" :duration="null" />
           <dt-toast :open="true" kind="info" message="Action completed." :duration="null" />
-          <dt-toast :open="true" kind="info" title="Title and message" message="Review before proceeding." :duration="null" />
+          <dt-toast :open="true" kind="info" header-text="Title and message" message="Review before proceeding." :duration="null" />
         </dt-stack>
       </div>
     </dt-stack>

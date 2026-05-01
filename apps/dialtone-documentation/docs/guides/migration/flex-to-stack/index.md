@@ -1,0 +1,534 @@
+---
+title: Migrating from Flex CSS Utilities to DtStack
+description: Guide and migration tool for replacing d-d-flex utilities with the DtStack component. Covers automatic migration, edge cases, and flex-to-prop mapping.
+---
+
+## TLDR
+
+- Use [DtStack](/components/stack.html) in place of Flex CSS Utilities.
+- Use the [Migration Tool](#migration-tool-flex-to-stack) to replace `class="d-d-flex"` to `<dt-stack>`.
+
+## Overview
+
+[DtStack](/components/stack.html) is a primitive layout component using flexbox for simple vertical or horizontal layouts. It should be the first tool you reach for. It handles direction, alignment, justification, and gap through props instead of utility classes. This reduces class clutter, improves intent, and improves readability.
+
+A [Migration Tool](#migration-tool-flex-to-stack) is available to migrate `class="d-d-flex"` to `<dt-stack>`, or you may do so [manually](#manual-migration).
+
+## Why Use the Migration Tool?
+
+The migration tool automates the conversion process with several key benefits:
+
+- **Speed**: Migrate entire projects in minutes instead of hours
+- **Consistency**: Ensures uniform conversion patterns across all files
+- **Safety**: Automatically detects edge cases that would break if migrated
+- **Accuracy**: No manual transcription errors or forgotten conversions
+- **Visibility**: Color-coded diffs and warnings help you review changes
+
+The tool is ideal for projects with many flex containers. For small, one-off changes, manual migration may be faster.
+
+## Examples
+
+<div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols2">
+<div>
+
+**Before**
+
+```html
+<div
+  class="
+    d-d-flex
+    d-ai-center
+    d-jc-space-between
+    d-g-200
+  "
+>
+  <div>Left</div>
+  <div>Right</div>
+</div>
+```
+
+</div>
+<div>
+
+**After**
+
+```html
+<dt-stack
+  direction="row"
+  align="center"
+  justify="space-between"
+  gap="200"
+>
+  <div>Left</div>
+  <div>Right</div>
+</dt-stack>
+```
+
+</div>
+</div>
+
+<div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols2">
+<div>
+
+**Before**
+
+```html
+<div class="d-d-flex d-fd-column d-g-300">
+  <div>First</div>
+  <div>Second</div>
+  <div>Third</div>
+</div>
+```
+
+</div>
+<div>
+
+**After**
+
+```html
+<dt-stack gap="300">
+  <div>First</div>
+  <div>Second</div>
+  <div>Third</div>
+</dt-stack>
+```
+
+</div>
+</div>
+
+## Migration Tool: Flex to Stack
+
+`dialtone-migrate-flex-to-stack` scans Vue files for `d-d-flex` patterns and converts them to DtStack. It's included with `@dialpad/dialtone-css`.
+
+**The tool migrates:**
+
+- Native HTML elements (`div`, `span`, `section`, etc.) with Flex CSS utilities, e.g. `d-d-flex`
+
+**Requires [manual migration](#manual-migration):**
+
+- Custom Vue components (e.g., `<my-component class="d-d-flex">`)
+- Responsive utilities (e.g., `md:d-ai-center`)
+- Dynamic `:class` bindings (e.g., `:class="{ 'd-d-flex': condition }"`)
+
+The migration tool will log warnings for dynamic class bindings that contain flex utilities.
+
+### How the Tool Works
+
+#### Direction Handling
+
+The migration tool automatically adds `direction="row"` to match flexbox's default behavior. CSS flexbox defaults to horizontal layout (`flex-direction: row`), while DtStack defaults to vertical layout (`direction="column"`).
+
+**No direction utility (adds row):**
+
+<div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols2">
+<div>
+
+**Before**
+
+```html
+<div class="d-d-flex d-ai-center">
+  <span>Item 1</span>
+  <span>Item 2</span>
+</div>
+```
+
+</div>
+<div>
+
+**After**
+
+```html
+<dt-stack direction="row" align="center">
+  <span>Item 1</span>
+  <span>Item 2</span>
+</dt-stack>
+```
+
+</div>
+</div>
+
+**Explicit column (omits redundant prop):**
+
+<div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols2">
+<div>
+
+**Before**
+
+```html
+<div class="d-d-flex d-fd-column d-g-200">
+  <span>Item 1</span>
+  <span>Item 2</span>
+</div>
+```
+
+</div>
+<div>
+
+**After**
+
+```html
+<!-- direction="column" is omitted - it's DtStack's default -->
+<dt-stack gap="200">
+  <span>Item 1</span>
+  <span>Item 2</span>
+</dt-stack>
+```
+
+</div>
+</div>
+
+#### Semantic HTML Preservation
+
+For non-div elements, the tool automatically adds an `as` prop to preserve semantic meaning:
+
+```html
+<!-- Before -->
+<section class="d-d-flex d-g-200">
+  <h2>Section Title</h2>
+  <p>Content</p>
+</section>
+
+<!-- After -->
+<dt-stack as="section" gap="200">
+  <h2>Section Title</h2>
+  <p>Content</p>
+</dt-stack>
+```
+
+The tool handles all semantic HTML elements (`section`, `article`, `aside`, `nav`, `header`, `footer`, etc.) automatically.
+
+#### Edge Cases & Special Handling
+
+The migration tool intelligently handles various edge cases:
+
+**Classes Removed:**
+
+- `d-d-flex` - Replaced by the `<dt-stack>` component itself
+- `d-fl-center` - Converted to props (`align="center"` + `justify="center"`)
+
+**Automatically Converted:**
+
+- `d-fl-center` - Sets `display: flex`, `align-items: center`, and `justify-content: center`. Converts to DtStack with appropriate props.
+
+**Skipped (with warnings):**
+
+- `d-fl-col*` - Deprecated flex column system
+- `d-stack*`, `d-flow*` - Auto-spacing utilities (margin-based, incompatible with gap)
+- `d-d-inline-flex` - Inline flex containers (DtStack is block-level only)
+- Elements with `ref` attributes used for DOM manipulation (see [Ref Attributes](#ref-attributes) below)
+- Dynamic `:class` bindings containing flex utilities (see [Dynamic Class Bindings](#dynamic-class-bindings))
+
+**Retained as Classes:**
+
+Some utilities remain as classes because they don't have DtStack prop equivalents:
+
+**Flex Properties:**
+
+- `d-fw-*` (flex-wrap: wrap, nowrap)
+- `d-fl-grow*`, `d-fl-shrink*` (flex-grow, flex-shrink)
+- `d-as-*` (align-self)
+- `d-ac-*` (align-content)
+- `d-order*` (order)
+
+**Grid/Flex Hybrids:**
+
+- `d-ji-*` (justify-items)
+- `d-js-*` (justify-self)
+- `d-plc-*` (place-content)
+- `d-pli-*` (place-items)
+- `d-pls-*` (place-self)
+
+**Deprecated (with warnings):**
+
+- `d-flg*` (deprecated flex gap) - Tool suggests using `d-g*` instead
+
+**Other:**
+
+- Large gaps (`d-g80`, `d-g96`, etc.) - No DtStack gap prop equivalent above `d-g64`
+
+#### Ref Attributes
+
+Elements with `ref` attributes that are used for DOM manipulation are automatically skipped. When a native element is converted to a Vue component, the ref returns a component instance instead of a DOM element. This breaks code that expects DOM APIs.
+
+**Example of what gets skipped:**
+
+```html
+<!-- This element will be SKIPPED because containerRef is used with addEventListener -->
+<div ref="containerRef" class="d-d-flex d-ai-center">
+  ...
+</div>
+
+<script setup>
+const containerRef = ref(null);
+onMounted(() => {
+  containerRef.value.addEventListener('click', handler); // DOM API usage detected
+});
+</script>
+```
+
+**DOM APIs that trigger skip detection:**
+
+- Event listeners: `addEventListener`, `removeEventListener`
+- DOM queries: `querySelector`, `querySelectorAll`, `closest`, `contains`
+- Measurements: `getBoundingClientRect`, `offsetWidth`, `clientHeight`, etc.
+- Focus management: `focus`, `blur`, `click`
+- Scrolling: `scrollIntoView`, `scrollTo`
+- Style/attribute manipulation: `classList`, `setAttribute`, `style`
+- DOM traversal: `parentNode`, `children`, `nextSibling`, etc.
+
+**Manual fix:** If you need to convert an element with a ref, update your code to use `.$el`:
+
+```javascript
+// Before (native element ref)
+containerRef.value.focus();
+
+// After (component ref)
+containerRef.value.$el.focus();
+```
+
+### Usage
+
+#### Preview Changes
+
+```bash
+npx dialtone-migrate-flex-to-stack --dry-run
+```
+
+#### Target a Directory
+
+```bash
+npx dialtone-migrate-flex-to-stack --cwd ./src/components
+```
+
+#### Apply All Changes
+
+```bash
+npx dialtone-migrate-flex-to-stack --yes
+```
+
+#### Interactive Mode
+
+```bash
+npx dialtone-migrate-flex-to-stack
+```
+
+Interactive mode displays each change with:
+
+- Color-coded diff (red = before, green = after)
+- List of retained classes with explanations
+- Warnings for edge cases
+
+For each match, respond with:
+
+- `y` or `yes`: Apply this change
+- `n` or `no`: Skip this change
+- `a` or `all`: Apply all remaining changes without further prompts
+- `q` or `quit`: Stop and save
+
+At the end, you'll see a summary showing files scanned, modified, and total changes applied.
+
+Options:
+
+- `--dry-run`: Show changes without applying
+- `--validate`: Validate transformations and check for potential issues (implies `--dry-run`)
+- `--cwd <path>`: Set working directory
+- `--ext <ext>`: File extension to process (default: `.vue`). Can be specified multiple times
+- `--file <path>`: Specific file to process. Can be specified multiple times. Relative or absolute paths supported
+- `--yes` or `-y`: Auto-apply all changes
+- `--show-outline`: Add attribute for visual debugging
+- `--remove-outline`: Remove attributes after review
+- `--help` or `-h`: Show help
+
+**Process specific file extensions:**
+
+```bash
+# Process only markdown files (useful for documentation sites)
+npx dialtone-migrate-flex-to-stack --ext .md --cwd ./docs --dry-run
+
+# Process both .vue and .md files
+npx dialtone-migrate-flex-to-stack --ext .vue --ext .md --yes
+```
+
+**Target specific files:**
+
+```bash
+# Single file
+npx dialtone-migrate-flex-to-stack --file src/components/Header.vue --dry-run
+
+# Multiple files
+npx dialtone-migrate-flex-to-stack --file Header.vue --file Footer.vue --yes
+
+# Absolute path
+npx dialtone-migrate-flex-to-stack --file /absolute/path/to/Component.vue
+```
+
+When using `--file`, the `--cwd` option is ignored. The `--ext` option still validates file extensions.
+
+**Validate transformations before applying:**
+
+```bash
+# Run validation to check for potential issues
+npx dialtone-migrate-flex-to-stack --validate
+
+# Validate specific directory
+npx dialtone-migrate-flex-to-stack --validate --cwd ./src/components
+```
+
+Validation mode checks for:
+
+- Missing closing tags for transformed elements
+- Invalid transformation positions
+- Overlapping transformations
+- Large gaps between opening and closing tags (potential mismatch)
+
+If validation passes, you can confidently run without `--validate` to apply changes.
+
+### Post-Migration
+
+After running the migration tool, use ESLint to fix Vue attribute ordering. The migration tool preserves the original attribute order, but Vue style guide recommends directives like `v-if` come before other attributes.
+
+```bash
+# Run migration
+npx dialtone-migrate-flex-to-stack --yes
+
+# Fix attribute ordering with ESLint
+npx eslint --fix "./src/**/*.vue"
+```
+
+Dialtone now enables the `vue/attributes-order` rule to ensure Vue style guide compliance. Directives like `v-if`, `v-for`, and `v-show` will be moved before props and classes.
+
+## Flex Utilities Support
+
+Flex CSS Utilities are still supported on DtStack, e.g. some flex utilities have no DtStack prop equivalent or there's an intentional use of a utility class.
+
+**Examples**
+
+- `d-fw-wrap`, `d-fw-nowrap` (flex-wrap)
+- `d-fl-grow1`, `d-fl-shrink0` (flex grow/shrink)
+- `d-as-*` (align-self)
+- `d-ac-*` (align-content)
+- `d-g*` values larger than `d-g64` (`700`)
+
+For example, `d-fw-wrap` isn't a DtStack prop, but can still be applied.
+
+```html
+<dt-stack direction="row" align="center" gap="100" class="d-fw-wrap">
+  ...
+</dt-stack>
+```
+
+## Manual Migration
+
+### Native HTML Elements
+
+1. Find elements with `d-d-flex` class
+2. Change the tag to `<dt-stack>`
+3. Change closing tag to `</dt-stack>`
+4. Convert classes to props using the [Flex to Stack Reference](#flex-to-stack-reference) below
+5. Keep non-convertible classes on the component
+6. Remove `d-d-flex` (DtStack is already flex)
+
+### Custom Components
+
+> [!WARNING]
+> Custom Vue components require manual migration.
+
+**Option 1: Wrap the component**
+
+```html
+<!-- Before -->
+<my-component class="d-d-flex d-ai-center d-g-200" />
+
+<!-- After -->
+<dt-stack align="center" gap="200">
+  <my-component />
+</dt-stack>
+```
+
+**Option 2: Update the component internally**
+
+If you own the component, refactor its root element to use DtStack.
+
+### Responsive Patterns
+
+> [!WARNING]
+> Responsive utilities like `md:d-ai-center` need manual migration. Use [DtStack's](/components/stack.md#responsive) responsive prop syntax:
+
+**Before:**
+
+```html
+<div class="d-d-flex d-ai-flex-start md:d-ai-center lg:d-jc-between">
+```
+
+**After:**
+
+```html
+<dt-stack
+  :align="{ default: 'start', md: 'center' }"
+  :justify="{ lg: 'space-between' }"
+>
+```
+
+### Dynamic Class Bindings
+
+> [!WARNING]
+> Dynamic bindings like `:class="{ 'd-d-flex': active }"` cannot be auto-migrated. The migration tool will log warnings when it encounters dynamic class bindings with flex utilities. ESLint will also flag these for manual review.
+
+**Before:**
+
+```html
+<div ... :class="{ 'd-ai-center': condition }">
+```
+
+**After:** remap to `align` prop
+
+```html
+<dt-stack ... :align="condition ? 'center' : 'start'">
+```
+
+**Before:**
+
+```html
+<div :class="{ 'd-d-flex d-ai-center': isActive }">
+```
+
+**After:**
+
+```html
+<dt-stack :align="isActive ? 'center' : ''">
+```
+
+## Flex to Stack Reference
+
+| Old Utility | New Utility | DtStack Prop | Value |
+| --- | --- | --- | --- |
+| `d-d-flex` | — | (not needed) | DtStack is already flex |
+| `d-ai-center` | — | `align` | `"center"` |
+| `d-ai-flex-start` | — | `align` | `"start"` |
+| `d-ai-flex-end` | — | `align` | `"end"` |
+| `d-ai-stretch` | — | `align` | `"stretch"` |
+| `d-ai-baseline` | — | `align` | `"baseline"` |
+| `d-jc-center` | — | `justify` | `"center"` |
+| `d-jc-flex-start` | — | `justify` | `"start"` |
+| `d-jc-flex-end` | — | `justify` | `"end"` |
+| `d-jc-space-between` | — | `justify` | `"space-between"` |
+| `d-jc-space-around` | — | `justify` | `"space-around"` |
+| `d-jc-space-evenly` | — | `justify` | `"space-evenly"` |
+| `d-fd-row` | — | `direction` | `"row"` |
+| `d-fd-column` | — | `direction` | `"column"` |
+| `d-fd-row-reverse` | — | `direction` | `"row-reverse"` |
+| `d-fd-column-reverse` | — | `direction` | `"column-reverse"` |
+| `d-g0` | `d-g-0` | `gap` | `"0"` |
+| `d-g8` | `d-g-100` | `gap` | `"100"` |
+| `d-g16` | `d-g-200` | `gap` | `"200"` |
+| `d-g24` | `d-g-300` | `gap` | `"300"` |
+| `d-g32` | `d-g-400` | `gap` | `"400"` |
+| `d-g48` | `d-g-600` | `gap` | `"600"` |
+| `d-g64` | `d-g-800` | `gap` | `"800"` |
+| `d-gg0` | `d-g-0` | `gap` | `"0"` |
+| `d-gg8` | `d-g-100` | `gap` | `"100"` |
+| `d-gg16` | `d-g-200` | `gap` | `"200"` |
+| `d-gg24` | `d-g-300` | `gap` | `"300"` |
+| `d-gg32` | `d-g-400` | `gap` | `"400"` |
+| `d-gg48` | `d-g-600` | `gap` | `"600"` |
+| `d-gg64` | `d-g-800` | `gap` | `"800"` |

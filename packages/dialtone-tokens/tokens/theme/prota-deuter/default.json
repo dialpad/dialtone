@@ -29,6 +29,11 @@
       },
       "positive": {
         "value": "{shell.base.color.accent}",
+        "type": "color",
+        "$deprecated": "Use positive instead."
+      },
+      "positive": {
+        "value": "{shell.base.color.accent}",
         "type": "color"
       },
       "success": {

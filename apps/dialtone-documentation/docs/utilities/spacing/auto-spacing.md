@@ -4,7 +4,7 @@ description: Utilities for controlling the space between child elements.
 keywords: ["margin","padding","gap","whitespace"]
 ---
 
-> [!ERROR]
+> [!CRITICAL] Deprecated
 > `d-stack` and `d-flow` utilities are deprecated. Please use the [Stack](/components/stack) component instead.
 
 ## Adding Space Vertically

@@ -14,6 +14,7 @@ description: "Run Dialtone migration tools for token and utility renames. Use '/
 | `size-to-layout` | Routes `var(--dt-size-*)` to `--dt-spacing-*` / `--dt-layout-*` / `--dt-size-border-*` / `--dt-size-radius-*` based on CSS property context. Covers off-scale pixel-indexed exceptions (1/2/8/20/24 px → `--dt-layout-Npx`) in layout context | `npx dialtone-migration-helper` → "size to layout" |
 | `utility-class-to-token-stops` | Rewrites legacy pixel-indexed utility class names (`d-h16`, `d-p8`) to token-stop-based names (`d-h-25`, `d-p-100`). Covers off-scale pixel-indexed exceptions (`d-w1` → `d-w-1px`, `d-h24` → `d-h-24px`, etc.) | `npx dialtone-migration-helper` → "utility class to token stops" |
 | `hsl-to-oklch` | Migrates consumer HSL channel variable patterns to OKLCH relative color syntax or plain `var()` | `npx dialtone-migration-helper` → "hsl to oklch" |
+| `link-rendering` | Migrates `<a class="d-btn">`, `<router-link class="d-link">`, etc. to `<dt-button>` / `<dt-link>` with `to`/`href` props. Also extracts `d-btn--*` / `d-link--*` modifiers into corresponding props (size, kind, importance, tone) and converts `d-td-*` classes on DtLink to the `underline` prop. Standalone CLI, not a config of `dialtone-migration-helper`. | `npx dialtone-migrate-link-rendering` |
 
 ## Usage
 
@@ -26,7 +27,7 @@ List all available migrations with descriptions.
 Run the specified migration:
 
 1. Confirm the target directory with the user (default: `./src`)
-2. Run `npx dialtone-migration-helper --cwd <dir>` and select the named config
+2. Look up `<name>` in the table above. If the Command column shows `npx dialtone-migration-helper`, run that command and select the named config interactively. If the Command column shows a different `npx <name>` invocation (a standalone CLI — e.g., `link-rendering` runs `npx dialtone-migrate-link-rendering`), run the command shown directly with `--cwd <dir>` instead.
 3. Report the number of files changed and matches replaced
 4. Suggest running linters after migration to catch remaining manual fixes
 

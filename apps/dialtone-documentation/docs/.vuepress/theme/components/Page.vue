@@ -181,9 +181,12 @@ const includeToc = computed(() => {
   return headers.value && headers.value.length > 0;
 });
 
+// Pages whose headers are populated by their own Vue component via inject('headers')
+// rather than extracted from markdown — skip the default clobber for these routes.
+const selfManagedHeaderPaths = ['/tokens/', '/downloads/'];
+
 watch(route, () => {
-  // Tokens page headers are handled in AllTokens.vue
-  if (route.path.includes('/tokens/')) return;
+  if (selfManagedHeaderPaths.some(p => route.path.includes(p))) return;
 
   try {
     headers.value = route.meta._pageChunk.data.headers;

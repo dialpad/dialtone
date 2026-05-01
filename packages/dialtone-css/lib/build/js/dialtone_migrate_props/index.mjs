@@ -7,6 +7,8 @@
  * Covers these changes:
  *   DLT-3161  avatar: clickable → interactive
  *   DLT-3157  kind/validation-state values: danger→critical, error→critical, success→positive
+ *             also: tone="success" → tone="positive" (dt-text, dt-link)
+ *             also: link-kind="success" → link-kind="positive" (dt-button)
  *   DLT-3159  positive boolean props: hide-close→show-close, hide-icon→show-icon, etc.
  *   DLT-3282  show prop → open (modal, toast, tooltip) + update:show → update:open
  *   DLT-3283  slot renames: titleOverride→header, labelSlot→label, headingSlot→heading
@@ -128,6 +130,24 @@ const PROP_VALUE_RENAMES = [
   { prop: 'type', oldValue: 'success', newValue: 'positive' },
   { prop: 'banner-kind', oldValue: 'error', newValue: 'critical' },
   { prop: 'banner-kind', oldValue: 'success', newValue: 'positive' },
+  // dt-text uses `tone` for foreground tokens; dt-link migrates kind → tone in the
+  // same pass, so any tag that ends up with tone="success" should land on positive.
+  { prop: 'tone', oldValue: 'success', newValue: 'positive' },
+  { prop: 'tone', oldValue: 'success-strong', newValue: 'positive-strong' },
+  // dt-button has a separate `link-kind` prop for link-styled buttons; its
+  // pre-DLT-3157 value `success` aliases to `positive`.
+  { prop: 'link-kind', oldValue: 'danger', newValue: 'critical' },
+  { prop: 'link-kind', oldValue: 'success', newValue: 'positive' },
+  // dt-box uses `surface` and `bc` for its surface and border-color modifiers.
+  // The validator only declares positive*; legacy success* values trigger a warning.
+  { prop: 'surface', oldValue: 'success', newValue: 'positive' },
+  { prop: 'surface', oldValue: 'success-subtle', newValue: 'positive-subtle' },
+  { prop: 'surface', oldValue: 'success-strong', newValue: 'positive-strong' },
+  { prop: 'surface', oldValue: 'success-opaque', newValue: 'positive-opaque' },
+  { prop: 'surface', oldValue: 'success-subtle-opaque', newValue: 'positive-subtle-opaque' },
+  { prop: 'bc', oldValue: 'success', newValue: 'positive' },
+  { prop: 'bc', oldValue: 'success-subtle', newValue: 'positive-subtle' },
+  { prop: 'bc', oldValue: 'success-strong', newValue: 'positive-strong' },
 ];
 
 // Slot renames — applied globally (names are unique enough across the system)
@@ -636,6 +656,9 @@ Migrations applied:
   kind="error"           → kind="critical"       (any dt-* component)
   kind="success"         → kind="positive"       (any dt-* component)
   type="success"         → type="positive"       (dt-badge)
+  tone="success"         → tone="positive"       (dt-text, dt-link)
+  link-kind="danger"     → link-kind="critical"  (dt-button)
+  link-kind="success"    → link-kind="positive"  (dt-button)
   kind                   → tone                  (dt-link, with value renames applied in same pass)
   banner-kind="error"    → banner-kind="critical" (dt-modal)
   banner-kind="success"  → banner-kind="positive" (dt-modal)

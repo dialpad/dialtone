@@ -36,14 +36,14 @@
       "description": "Styles select in a warning state."
     },
     {
-      "class": "d-select__input--error",
+      "class": "d-select__input--critical",
       "applies": ".d-select__input",
-      "description": "Styles select in a error state."
+      "description": "Styles select in a critical state."
     },
     {
-      "class": "d-select__input--success",
+      "class": "d-select__input--positive",
       "applies": ".d-select__input",
-      "description": "Styles select in a success state."
+      "description": "Styles select in a positive state."
     }
   ]
 }

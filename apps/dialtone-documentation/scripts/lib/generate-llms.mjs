@@ -21,6 +21,7 @@ export const SECTION_META = {
   guides: 'Guides',
   dialtone: 'Dialtone',
   'ui-kits': 'UI Kits',
+  downloads: 'Downloads',
 };
 
 /**

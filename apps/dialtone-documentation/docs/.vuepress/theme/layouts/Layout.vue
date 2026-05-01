@@ -1,4 +1,5 @@
 <template>
+  <migration-banner />
   <dt-root-layout
     :fixed="false"
     :header-sticky="true"
@@ -35,7 +36,7 @@
       />
     </template>
     <template
-      v-if="!$frontmatter.home"
+      v-if="!$frontmatter.home && !$frontmatter.noSidebar"
       #sidebar
     >
       <sidebar />
@@ -58,6 +59,7 @@ import Sidebar from '../components/Sidebar.vue';
 import Home from '../components/Home.vue';
 import Page from '../components/Page.vue';
 import MobileSidebar from '../components/MobileSidebar.vue';
+import MigrationBanner from '../../baseComponents/MigrationBanner.vue';
 import { computed, ref, watch, onMounted, onUnmounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';

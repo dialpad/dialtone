@@ -2,6 +2,7 @@
 title: Logo
 description: The Dialpad logo puts our brand name at the forefront, complemented by our visual symbol "the Spark."
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=17330-1170
+download_url: /downloads/#icon
 no_preview: true
 thumb: true
 keywords: ["brand", "branding", "identity", "mark", "dialpad logo"]
@@ -19,14 +20,14 @@ The visual symbols of the dialpad and Ai are combined to represent the relations
   </div>
 
   <figure class="d-bar-500 d-of-hidden">
-    <img src="/assets/images/logo--sample-01.jpg" alt="">
+    <img class="d-d-block d-w100p" src="/assets/images/logo--sample-01.jpg" alt="">
   </figure>
 
   <figure class="d-bar-500 d-of-hidden">
-    <img src="/assets/images/logo--sample-02.jpg" alt="">
+    <img class="d-d-block d-w100p" src="/assets/images/logo--sample-02.jpg" alt="">
   </figure>
 
   <figure class="d-bar-500 d-of-hidden">
-    <img src="/assets/images/logo--sample-03.png" alt="">
+    <img class="d-d-block d-w100p" src="/assets/images/logo--sample-03.png" alt="">
   </figure>
 </dt-stack>
