@@ -2,24 +2,15 @@
   "color": {
     "foreground": {
       "primary": {
-        "value": "{color.black.950}",
-        "type": "color",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "lighten",
-              "value": ".2",
-              "space": "lch"
-            }
-          }
-        }
+        "value": "{color.black.900}",
+        "type": "color"
       },
       "secondary": {
-        "value": "{color.black.800}",
+        "value": "{color.black.750}",
         "type": "color"
       },
       "tertiary": {
-        "value": "{color.black.700}",
+        "value": "{color.black.650}",
         "type": "color"
       },
       "muted": {
@@ -29,7 +20,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".65",
+              "value": ".6",
               "space": "oklch"
             }
           }
@@ -44,7 +35,7 @@
         "type": "color"
       },
       "critical": {
-        "value": "{color.red.800}",
+        "value": "{color.red.700}",
         "type": "color"
       },
       "warning": {
@@ -52,11 +43,11 @@
         "type": "color"
       },
       "info": {
-        "value": "{color.blue.800}",
+        "value": "{color.blue.700}",
         "type": "color"
       },
       "info-strong": {
-        "value": "{color.blue.900}",
+        "value": "{color.blue.800}",
         "type": "color"
       },
       "positive": {
@@ -69,7 +60,7 @@
         "$deprecated": "Use positive instead."
       },
       "critical-strong": {
-        "value": "{color.red.900}",
+        "value": "{color.red.800}",
         "type": "color"
       },
       "positive-strong": {
