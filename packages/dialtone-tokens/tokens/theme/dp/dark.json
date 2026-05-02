@@ -185,17 +185,8 @@
         "type": "color"
       },
       "info-subtle": {
-        "value": "{color.blue.100}",
-        "type": "color",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "darken",
-              "value": ".4",
-              "space": "oklch"
-            }
-          }
-        }
+        "value": "{color.blue.50}",
+        "type": "color"
       },
       "critical-strong": {
         "value": "{color.red.800}",
@@ -345,26 +336,26 @@
         "$deprecated": "Use positive-opaque instead."
       },
       "info-opaque": {
-        "value": "{color.blue.100}",
+        "value": "{color.blue.200}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": "0.4",
+              "value": "0.5",
               "space": "oklch"
             }
           }
         }
       },
       "brand-opaque": {
-        "value": "{color.purple.100}",
+        "value": "{color.purple.200}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": "0.7",
+              "value": ".5",
               "space": "oklch"
             }
           }
