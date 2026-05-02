@@ -184,24 +184,6 @@
         "value": "{color.gold.100}",
         "type": "color"
       },
-      "positive-subtle": {
-        "value": "{color.green.200}",
-        "type": "color",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "darken",
-              "value": ".5",
-              "space": "oklch"
-            }
-          }
-        }
-      },
-      "success-subtle": {
-        "value": "{color.surface.positive-subtle}",
-        "type": "color",
-        "$deprecated": "Use positive-subtle instead. "
-      },
       "info-subtle": {
         "value": "{color.blue.100}",
         "type": "color",
