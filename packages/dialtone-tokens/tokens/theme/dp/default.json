@@ -231,11 +231,11 @@
         "type": "color"
       },
       "muted": {
-        "value": "{color.foreground.secondary}",
+        "value": "{color.foreground.tertiary}",
         "type": "color"
       },
       "muted-hover": {
-        "value": "{color.foreground.primary}",
+        "value": "{color.foreground.secondary}",
         "type": "color"
       },
       "disabled": {
