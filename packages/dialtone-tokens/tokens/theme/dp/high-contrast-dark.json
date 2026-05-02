@@ -35,6 +35,28 @@
         "value": "{color.blue.1000}",
         "type": "color"
       }
+    },
+    "surface": {
+      "primary": {
+        "value": "{color.black.50}",
+        "type": "color"
+      },
+      "secondary": {
+        "value": "{color.black.100}",
+        "type": "color"
+      },
+      "moderate": {
+        "value": "{color.black.200}",
+        "type": "color"
+      },
+      "bold": {
+        "value": "{color.black.300}",
+        "type": "color"
+      },
+      "strong": {
+        "value": "{color.black.500}",
+        "type": "color"
+      }
     }
   }
 }
