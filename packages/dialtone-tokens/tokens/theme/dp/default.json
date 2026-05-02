@@ -55,7 +55,7 @@
         "description": "Indicates a positive state."
       },
       "positive-strong": {
-        "value": "{color.green.950}",
+        "value": "{color.green.800}",
         "type": "color",
         "description": "Indicates a strong positive state on surfaces that require a stronger contrast."
       },
@@ -72,17 +72,22 @@
         "description": "Indicates a strong positive state on surfaces that require a stronger contrast."
       },
       "warning": {
+        "value": "{color.gold.700}",
+        "type": "color",
+        "description": "Indicates a warning state."
+      },
+      "warning-strong": {
         "value": "{color.gold.800}",
         "type": "color",
-        "description": "Indicates information that requires user’s attention and further action may be necessary."
+        "description": "Indicates a strong warning state on surfaces that require a stronger contrast."
       },
       "info": {
-        "value": "{color.blue.800}",
+        "value": "{color.blue.700}",
         "type": "color",
         "description": "Indicates a generally informational state."
       },
       "info-strong": {
-        "value": "{color.blue.900}",
+        "value": "{color.blue.800}",
         "type": "color",
         "description": "Indicates a generally informational state on surfaces that require a stronger contrast."
       },
@@ -218,11 +223,11 @@
         "type": "color"
       },
       "info": {
-        "value": "{color.blue.600}",
+        "value": "{color.foreground.info}",
         "type": "color"
       },
       "info-hover": {
-        "value": "{color.blue.700}",
+        "value": "{color.foreground.info-strong}",
         "type": "color"
       },
       "muted": {
