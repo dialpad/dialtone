@@ -704,59 +704,59 @@
   },
   "opacity": {
     "0": {
-      "value": 0,
+      "value": "0",
       "type": "number"
     },
     "100": {
-      "value": 0.05,
+      "value": "0.05",
       "type": "number"
     },
     "200": {
-      "value": 0.1,
+      "value": "0.1",
       "type": "number"
     },
     "300": {
-      "value": 0.2,
+      "value": "0.2",
       "type": "number"
     },
     "400": {
-      "value": 0.25,
+      "value": "0.25",
       "type": "number"
     },
     "500": {
-      "value": 0.3,
+      "value": "0.3",
       "type": "number"
     },
     "600": {
-      "value": 0.4,
+      "value": "0.4",
       "type": "number"
     },
     "700": {
-      "value": 0.5,
+      "value": "0.5",
       "type": "number"
     },
     "800": {
-      "value": 0.6,
+      "value": "0.6",
       "type": "number"
     },
     "900": {
-      "value": 0.7,
+      "value": "0.7",
       "type": "number"
     },
     "1000": {
-      "value": 0.75,
+      "value": "0.75",
       "type": "number"
     },
     "1100": {
-      "value": 0.8,
+      "value": "0.8",
       "type": "number"
     },
     "1200": {
-      "value": 0.9,
+      "value": "0.9",
       "type": "number"
     },
     "1300": {
-      "value": 1,
+      "value": "1",
       "type": "number"
     }
   },

@@ -320,15 +320,15 @@
         "value": "{color.link.primary-hover}",
         "type": "color"
       },
-      "mention-background": {
+      "mention-backgroundd": {
         "value": "{color.surface.brand-opaque}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
-              "type": "alpha",
+              "type": "lighten",
               "value": ".1",
-              "space": "oklch"
+              "space": "lch"
             }
           }
         }
