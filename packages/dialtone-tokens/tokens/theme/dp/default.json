@@ -493,7 +493,7 @@
         "description": "A contrasting informational surface, most likely paired with inverted foreground colors."
       },
       "brand-strong": {
-        "value": "{color.purple.600}",
+        "value": "{color.purple.500}",
         "type": "color",
         "description": "A contrasting informational surface, most likely paired with inverted foreground colors."
       },
