@@ -512,13 +512,13 @@
         "description": "Primary surface as opaque background color."
       },
       "secondary-opaque": {
-        "value": "{color.black.900}",
+        "value": "{color.surface.moderate}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".03",
+              "value": ".3",
               "space": "oklch"
             }
           }

@@ -267,52 +267,52 @@
         }
       },
       "secondary-opaque": {
-        "value": "{color.black.900}",
+        "value": "{color.surface.moderate}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".03",
+              "value": ".33",
               "space": "oklch"
             }
           }
         }
       },
       "moderate-opaque": {
-        "value": "{color.black.900}",
+        "value": "{color.surface.bold}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".18",
+              "value": ".5",
               "space": "oklch"
             }
           }
         }
       },
       "bold-opaque": {
-        "value": "{color.black.900}",
+        "value": "{color.surface.strong}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".30",
+              "value": ".58",
               "space": "oklch"
             }
           }
         }
       },
       "strong-opaque": {
-        "value": "{color.black.900}",
+        "value": "{color.surface.contrast}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".74",
+              "value": ".45",
               "space": "oklch"
             }
           }
