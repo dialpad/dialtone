@@ -11,6 +11,10 @@
       }
     },
     "foreground": {
+      "primary": {
+        "value": "{color.black.1000}",
+        "type": "color"
+      },
       "critical": {
         "value": "{color.red.900}",
         "type": "color"
