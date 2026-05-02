@@ -5,6 +5,10 @@
         "bulletin-subtle": {
           "value": "{color.purple.200}",
           "type": "color"
+        },
+        "warning": {
+          "value": "{color.gold.300}",
+          "type": "color"
         }
       },
       "foreground": {

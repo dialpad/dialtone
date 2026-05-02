@@ -31,11 +31,11 @@
         "type": "color"
       },
       "info": {
-        "value": "{color.blue.700}",
+        "value": "{color.blue.800}",
         "type": "color"
       },
       "info-strong": {
-        "value": "{color.blue.800}",
+        "value": "{color.blue.900}",
         "type": "color"
       },
       "positive": {
