@@ -493,13 +493,13 @@
         "description": "A contrasting informational surface, most likely paired with inverted foreground colors."
       },
       "primary-opaque": {
-        "value": "{color.surface.primary}",
+        "value": "{color.surface.secondary}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".96",
+              "value": ".07",
               "space": "oklch"
             }
           }
@@ -521,13 +521,13 @@
         "description": "Secondary surface as opaque background color."
       },
       "moderate-opaque": {
-        "value": "{color.black.900}",
+        "value": "{color.surface.bold}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".10",
+              "value": ".5",
               "space": "oklch"
             }
           }
@@ -535,13 +535,13 @@
         "description": "Moderate surface as opaque background color."
       },
       "bold-opaque": {
-        "value": "{color.black.900}",
+        "value": "{color.surface.strong}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".19",
+              "value": ".3",
               "space": "oklch"
             }
           }
@@ -549,7 +549,7 @@
         "description": "Bold surface as opaque background color."
       },
       "strong-opaque": {
-        "value": "{color.black.900}",
+        "value": "{color.surface.contrast}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
