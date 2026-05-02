@@ -554,10 +554,11 @@
       "components/presence/default": "source",
       "components/badge/default": "source",
       "theme/dp/dark": "source",
-      "base/dark": "source"
+      "base/dark": "source",
+      "theme/dp/high-contrast-dark": "enabled"
     },
-    "group": "contrast",
-    "$figmaVariableReferences": {}
+    "$figmaVariableReferences": {},
+    "group": "contrast"
   },
   {
     "id": "025593f9f8f0cc2511035095197b6266f41e0855",
