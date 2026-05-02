@@ -990,7 +990,7 @@
           "y": "{size.0}",
           "blur": "{size.0}",
           "spread": "{size.200} + {size.100}",
-          "color": "{color.border.focus}",
+          "color": "{color.blue.500}",
           "type": "dropShadow"
         }
       ],
@@ -1003,7 +1003,7 @@
           "y": "{size.0}",
           "blur": "{size.0}",
           "spread": "{size.200}",
-          "color": "color.border.focus",
+          "color": "{color.blue.500}",
           "type": "dropShadow"
         }
       ],
