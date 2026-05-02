@@ -180,19 +180,6 @@
         "value": "{color.black.1000}",
         "type": "color"
       },
-      "critical-subtle": {
-        "value": "{color.red.100}",
-        "type": "color",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "darken",
-              "value": ".5",
-              "space": "oklch"
-            }
-          }
-        }
-      },
       "warning-subtle": {
         "value": "{color.gold.100}",
         "type": "color"
@@ -332,13 +319,13 @@
         }
       },
       "critical-opaque": {
-        "value": "{color.red.300}",
+        "value": "{color.red.400}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".2",
+              "value": ".25",
               "space": "oklch"
             }
           }
@@ -351,7 +338,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".55",
+              "value": ".53",
               "space": "oklch"
             }
           }
@@ -364,7 +351,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".28",
+              "value": ".62",
               "space": "oklch"
             }
           }
@@ -421,7 +408,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".7",
+              "value": ".8",
               "space": "oklch"
             }
           }
