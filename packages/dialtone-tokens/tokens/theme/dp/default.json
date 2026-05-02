@@ -513,7 +513,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".02",
+              "value": ".035",
               "space": "oklch"
             }
           }
@@ -569,7 +569,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".94",
+              "value": ".92",
               "space": "oklch"
             }
           }
@@ -583,7 +583,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".31",
+              "value": ".67",
               "space": "oklch"
             }
           }
@@ -597,7 +597,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".50",
+              "value": ".52",
               "space": "oklch"
             }
           }
@@ -605,13 +605,13 @@
         "description": "Warning surface as opaque background color"
       },
       "positive-opaque": {
-        "value": "{color.green.400}",
+        "value": "{color.green.200}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".25",
+              "value": ".45",
               "space": "oklch"
             }
           }
@@ -631,7 +631,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".35",
+              "value": ".6",
               "space": "oklch"
             }
           }
@@ -645,7 +645,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".27",
+              "value": ".66",
               "space": "oklch"
             }
           }
@@ -673,7 +673,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".50",
+              "value": ".30",
               "space": "oklch"
             }
           }
@@ -681,7 +681,7 @@
         "description": "Warning subtle surface as opaque background color"
       },
       "positive-subtle-opaque": {
-        "value": "{color.green.100}",
+        "value": "{color.surface.positive}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
@@ -701,7 +701,7 @@
         "description": "Success subtle surface as opaque background color."
       },
       "info-subtle-opaque": {
-        "value": "{color.blue.100}",
+        "value": "{color.surface.info}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
@@ -715,13 +715,13 @@
         "description": "Info surface as opaque background color."
       },
       "brand-subtle-opaque": {
-        "value": "{color.purple.200}",
+        "value": "{color.surface.brand}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".20",
+              "value": ".5",
               "space": "oklch"
             }
           }
