@@ -1162,6 +1162,10 @@
               "type": "color"
             }
           },
+          "hover": {
+            "value": "{color.surface.critical-opaque}",
+            "type": "color"
+          },
           "active": {
             "value": "{action.color.background.critical.hover}",
             "type": "color",
