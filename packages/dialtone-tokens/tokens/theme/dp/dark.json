@@ -35,7 +35,7 @@
         "type": "color"
       },
       "critical": {
-        "value": "{color.red.700}",
+        "value": "{color.red.800}",
         "type": "color"
       },
       "warning": {
@@ -60,7 +60,7 @@
         "$deprecated": "Use positive instead."
       },
       "critical-strong": {
-        "value": "{color.red.800}",
+        "value": "{color.red.900}",
         "type": "color"
       },
       "positive-strong": {

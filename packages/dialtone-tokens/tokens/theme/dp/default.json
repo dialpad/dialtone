@@ -3907,7 +3907,7 @@
             "type": "color"
           },
           "hover": {
-            "value": "{color.surface.critical-opaque}",
+            "value": "{color.surface.critical-subtle-opaque}",
             "type": "color"
           },
           "active": {
