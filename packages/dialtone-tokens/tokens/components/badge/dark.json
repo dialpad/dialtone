@@ -9,6 +9,10 @@
         "warning": {
           "value": "{color.gold.300}",
           "type": "color"
+        },
+        "default": {
+          "value": "{color.surface.bold-opaque}",
+          "type": "color"
         }
       },
       "foreground": {
