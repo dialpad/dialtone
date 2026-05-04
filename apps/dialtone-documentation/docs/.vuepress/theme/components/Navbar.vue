@@ -266,6 +266,24 @@
             </template>
           </dt-list-item>
         </dt-list-item-group>
+        <dt-dropdown-separator />
+        <dt-list-item-group
+          heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
+          heading="Material"
+        >
+          <dt-list-item
+            v-for="material in materials"
+            :key="material"
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setMaterial(material)"
+          >
+            {{ formatMaterial(material) }}
+            <template #end>
+              <dt-icon :class="{ 'd-o0': currentMaterial !== material }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+        </dt-list-item-group>
       </template>
     </dt-dropdown>
     <dt-button
@@ -371,16 +389,20 @@ const {
   currentMode,
   currentTheme,
   currentContrast,
+  currentMaterial,
   currentModeIconName,
   setMode,
   setContrast,
+  setMaterial,
   setTheme,
   namedThemes,
   numberedThemes,
   formatThemeName,
+  materials,
 } = useThemeManager({ includeThemes: true });
 
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+const formatMaterial = (m) => m === 'bronze' ? 'Bronze (default)' : capitalize(m);
 
 const isActiveLink = (link) => {
   // For Design System, check all related paths (same as useSidebarItems.js)

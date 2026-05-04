@@ -5,7 +5,10 @@ import {
   setMode as setModeConfig,
   setBrand,
   setContrast as setContrastConfig,
+  setMaterial as setMaterialConfig,
 } from '@dialpad/dialtone-tokens/themes/config';
+
+const MATERIALS = ['bronze', 'steel', 'graphite', 'mono'];
 
 /**
  * Composable for managing theme, mode, and contrast settings across the documentation site.
@@ -28,6 +31,7 @@ export function useThemeManager(options = {}) {
   const currentMode = inject('currentMode');
   const currentTheme = inject('currentTheme');
   const currentContrast = inject('currentContrast');
+  const currentMaterial = inject('currentMaterial');
   const themes = inject('themes');
 
   // Constants
@@ -91,6 +95,23 @@ export function useThemeManager(options = {}) {
   };
 
   /**
+   * Sets the active material (bronze, steel, graphite, mono).
+   * Bronze is the default — passing 'bronze' (or anything unrecognized) removes any override.
+   * @param {string} material - The material name
+   */
+  const setMaterial = (material) => {
+    if (!MATERIALS.includes(material)) {
+      console.warn(`[useThemeManager] Unknown material '${material}'. Falling back to 'bronze'.`);
+      material = 'bronze';
+    }
+    currentMaterial.value = material;
+    setCss();
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('preferredMaterial', material);
+    }
+  };
+
+  /**
    * Sets the brand theme (dp, tmo, numbered themes, etc.)
    * Only functional when includeThemes is true
    * @param {string} theme - The theme to set
@@ -132,6 +153,25 @@ export function useThemeManager(options = {}) {
       setBrand(theme, document.documentElement);
     }
     // Note: The shared setBrand function handles style tag creation, updates, and cleanup
+  };
+
+  /**
+   * Applies the selected material via the shared setMaterial config function.
+   * Bronze removes any override; other materials inject the per-material CSS.
+   * @param {string} material - The material name
+   */
+  const applyMaterialTheme = (material) => {
+    if (material === 'bronze') {
+      setMaterialConfig(null, document.documentElement);
+      return;
+    }
+    const themeKey = `material-${material}`;
+    const materialTheme = themes && themes[themeKey];
+    if (!materialTheme?.material?.css) {
+      console.warn(`[useThemeManager] Material theme '${themeKey}' not found in loaded themes`);
+      return;
+    }
+    setMaterialConfig(materialTheme, document.documentElement);
   };
 
   /**
@@ -184,6 +224,7 @@ export function useThemeManager(options = {}) {
 
     const brandName = currentTheme.value || 'dp';
     const contrast = currentContrast.value || 'default';
+    const material = currentMaterial.value || 'bronze';
 
     // Use shared setMode function from config.js (handles attribute setting)
     setModeConfig(mode, document.documentElement);
@@ -191,7 +232,9 @@ export function useThemeManager(options = {}) {
     // Set brand attribute manually (setBrand will handle the style injection)
     document.documentElement.setAttribute('data-dt-brand', brandName);
 
-    // Apply brand and contrast themes using shared functions
+    // Apply material BEFORE brand so brand overrides win at the same specificity.
+    // Apply contrast last (it's the topmost layer in the cascade order).
+    applyMaterialTheme(material);
     applyBrandTheme(brandName);
     applyContrastTheme(contrast);
   };
@@ -226,6 +269,7 @@ export function useThemeManager(options = {}) {
     currentMode,
     currentTheme,
     currentContrast,
+    currentMaterial,
     themes,
 
     // Computed
@@ -235,6 +279,7 @@ export function useThemeManager(options = {}) {
     // Methods
     setMode,
     setContrast,
+    setMaterial,
     setTheme,
 
     // Theme utilities (only when includeThemes is enabled)
@@ -245,5 +290,6 @@ export function useThemeManager(options = {}) {
 
     // Constants
     modes,
+    materials: MATERIALS,
   };
 }

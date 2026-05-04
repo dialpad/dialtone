@@ -150,14 +150,17 @@ export default defineClientConfig({
       const preferredMode = localStorage.getItem('preferredMode') || 'system';
       const preferredTheme = localStorage.getItem('preferredTheme');
       const preferredContrast = localStorage.getItem('preferredContrast') || 'default';
+      const preferredMaterial = localStorage.getItem('preferredMaterial') || 'bronze';
 
       const currentMode = ref(preferredMode);
       const currentTheme = ref(preferredTheme);
       const currentContrast = ref(preferredContrast);
+      const currentMaterial = ref(preferredMaterial);
 
       provide('currentMode', currentMode);
       provide('currentTheme', currentTheme);
       provide('currentContrast', currentContrast);
+      provide('currentMaterial', currentMaterial);
     });
     onMounted(async () => {
       // Reveal the app now that Vue has hydrated and components are registered
@@ -308,6 +311,10 @@ async function importDialtoneThemes (app) {
       import('@dialpad/dialtone-tokens/themes/137'),
       // High contrast
       import('@dialpad/dialtone-tokens/themes/high-contrast'),
+      // Material overrides (bronze is the default and lives in base; non-defaults injected on demand)
+      import('@dialpad/dialtone-tokens/themes/material-steel'),
+      import('@dialpad/dialtone-tokens/themes/material-graphite'),
+      import('@dialpad/dialtone-tokens/themes/material-mono'),
     ]);
 
     // Build themes object with same order as in Navbar
@@ -363,6 +370,9 @@ async function importDialtoneThemes (app) {
       '136': themeModules[48].default,
       '137': themeModules[49].default,
       'high-contrast': themeModules[50].default,
+      'material-steel': themeModules[51].default,
+      'material-graphite': themeModules[52].default,
+      'material-mono': themeModules[53].default,
     };
 
     console.info(`Successfully loaded ${Object.keys(themes).length - 1} themes + high contrast`);
