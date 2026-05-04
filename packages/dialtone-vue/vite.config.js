@@ -75,7 +75,7 @@ export default defineConfig({
         'shared/SrOnlyCloseButton': './common/SrOnlyCloseButton.vue',
 
         // Dependencies
-        'node_modules/@tiptap/vue-3': './node_modules/@tiptap/vue-3/dist/index.js',
+        'node_modules/@tiptap/vue-3': './NodeModules/@tiptap/vue-3/dist/index.js',
 
         // Localization
         'localization/index': './localization/index.js',
