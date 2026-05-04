@@ -1220,8 +1220,8 @@
             "$extensions": {
               "studio.tokens": {
                 "modify": {
-                  "type": "lighten",
-                  "value": ".25",
+                  "type": "alpha",
+                  "value": ".63",
                   "space": "oklch"
                 }
               }
